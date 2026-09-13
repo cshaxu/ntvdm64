@@ -20,68 +20,75 @@ and [architecture rules](../rules/ARCHITECTURE.md). Broker deployment, CLI
 changes, CPU instruction changes and complete WRITE recovery are non-goals.
 The selected runtime remains Win32/x86 CCPU40 with `ntvdm32.exe <binary>`.
 
-## Proposed sequential stages
+## Proposed sequential S plan
 
-These are candidate stages, not active S briefs. Materialize the working plan
-and the sole active brief at admission under the execution rules.
+These are candidate S scopes, not active briefs or numeric allocations.  They
+are intentionally grouped by original owner and failure/ownership contract,
+rather than by every individual function.  At admission, establish only S1 in
+Status; each later S opens only after the predecessor's committed evidence
+proves its exit condition.
 
-### S1 - Integer arithmetic and memory fill (D13-D15)
+| Candidate S | Scope and source owner | Required exit before the next S |
+| --- | --- | --- |
+| S1 — recovery map and frozen baseline | Reconcile D11–D16/D26 with the selected graph, original OpenNT paths, current mirror/overlay/adapter providers, selected callers and x86 build manifests.  For every target, record the original body, all outbound dependencies, duplicate local implementation, proposed final owner and the smallest possible binding. | Indexed source/caller/disposition matrix; measured per-cohort diff footprint; no product behavior change; explicit go/no-go grouping for S2–S5. |
+| S2 — arithmetic and fill cohort | D13–D15: recover `base/ntos/rtl/x86/largeint.asm`, `movemem.asm`, corresponding declarations and any duplicate `copy_fnc.c` loops. | Original or same-contract provider compiles and links in x86; division/multiply/fill positive and failure/edge fixtures pass; selected timer/memory consumers regress; measured deleted/retained diff. |
+| S3 — private environment algorithm and U07-E lifetime | D11 plus the environment part of U07: recover `base/ntos/rtl/environ.c` as one create/query/mutate/destroy ownership unit.  Keep the original algorithm in its OpenNT mirror and bind only its finite allocation/query/free boundary. | Create/clone/set/replace/delete/destroy, malformed names, empty blocks, allocation failure and release ordering are proven; snapshot/install/restore succeeds and fails deterministically on launch/teardown; COMMAND environment regression passes. |
+| S4 — status conversion cohort | D12: recover `base/ntos/rtl/error.c`, required tables and reached LastStatusValue behavior; do not bury reduced mappings inside the environment adapter. | Known/unknown/special status encodings, LastStatusValue and no-silent-success failure rows pass; x86 link and S3 environment regression remain green. |
+| S5 — USER/Redirector encoding cohort | D16/D26: recover `windows/core/ntuser/rtl/chartran.c:MBToWCSEx`, `netapi/netlib/copystr.c:NetpCopyWStrToStr` and the reached RTL Unicode/OEM provider chain.  Guest-copy is a bounded consumer binding, never the conversion algorithm. | ACP/non-ACP, DBCS/unrepresentable input, partial result, zero/short/exact capacity, terminator, allocation/caller-buffer and guest-copy-failure tests pass; selected WOW/Redirector callers regress. |
+| S6 — package integration and closure | Rebuild the selected full x86 worker composition from S2–S5; run source/diff review, selected DOS/COMMAND/EDIT regression and the bounded WRITE frontier observation. | Every D11–D16/D26 and U07-E row has a final disposition, runtime evidence and remaining-binding ledger; governance, link checks, commit/push and clean worktree complete. |
 
-Recover the selected routines from `base/ntos/rtl/x86/largeint.asm` and
-`movemem.asm`, or prove a same-contract binding before retaining an alternate
-provider. Remove obsolete x64 import-library justifications for the current
-x86 product. Include mirror declarations and `copy_fnc.c` caller loops where
-they duplicate the same original operation.
+### S1 — recovery map and frozen baseline
 
-Verify unsigned 64/32 division, quotient/remainder, high-bit inputs and
+S1 is deliberately research/design only.  It must not bulk-import RTL/USER
+directories or retain a local replacement because its name happens to match an
+original symbol.  It records the exact OpenNT revision/path, selected current
+caller and ABI/layout/failure contract for each proposed provider.  If a
+non-MVDM source body is directly composable, it remains under `opennt-host` at
+its original-relative path; otherwise S1 names the finite adapter ABI and why
+the original translation unit cannot compose.
+
+### S2 — arithmetic and fill cohort (D13–D15)
+
+Recover unsigned 64/32 division, quotient/remainder, high-bit inputs and
 original divide-by-zero behavior; multiplication low-64-bit overflow results;
-and byte-count ULONG fill with original untouched trailing bytes. Compile/link
-the actual providers and regress selected timer and memory consumers. Signed
-C overflow is a contract risk, not an already proved current-machine failure.
+and byte-count ULONG fill with original untouched trailing bytes.  Signed C
+overflow is a contract risk, not an already proved current-machine failure.
+Remove obsolete x64 import-library justifications only where x86 source/build
+evidence proves they no longer carry another ABI repair.
 
-### S2 - Environment ownership and status conversion (D11-D12)
-
-Recover `base/ntos/rtl/environ.c` creation, mutation and destruction as one
-ownership unit, including reached query/current-environment dependencies.
-Restore name validation, absent-variable deletion status, empty-block storage
-and scanning, capacity/growth and failure ordering. Bind explicit private
-environment blocks separately from the process-environment/PEB route; do not
-silently overwrite the real host PEB or replace its lock with unrelated TLS.
+### S3 — private environment algorithm and U07-E (D11)
 
 The original uses `ZwAllocateVirtualMemory`, `ZwQueryVirtualMemory` and
-`ZwFreeVirtualMemory`. Investigate a package-private same-shaped binding over
-public `VirtualAlloc`, `VirtualQuery` and `VirtualFree`, retaining the original
-environment algorithm. Prove page-rounded committed capacity, zero-fill,
-in/out base and size semantics, allocation failure, release and returned
-NTSTATUS. This is not a textual API substitution. For `MEM_RELEASE`, public
-VirtualFree requires the allocation base and a zero size; account for every
-reached original call. Never mix HeapFree, VirtualFree or environment-string
-release ownership. A host environment snapshot is not automatically owned by
-the imported virtual-memory allocator; clone/adopt only through a proved
-boundary. No generic memory manager or kernel import is required by this plan.
+`ZwFreeVirtualMemory`.  The only permitted modern binding is package-private
+and same-shaped over `VirtualAlloc`, `VirtualQuery` and `VirtualFree`, while
+the original environment algorithm remains intact.  Prove page-rounded
+committed capacity, zero-fill, in/out base and size semantics, allocation
+failure, release and returned NTSTATUS.  For `MEM_RELEASE`, public
+`VirtualFree` requires allocation base plus zero size; account for every
+reached call.  Never mix HeapFree, VirtualFree or environment-string release
+ownership, overwrite the host PEB, or replace its lock with unrelated TLS.
 
-Recover `base/ntos/rtl/error.c` and required tables, or a verified permissible
-same-contract binding, instead of the current reduced status mapping. Cover
-known/unknown statuses, special encodings and reached LastStatusValue behavior.
-Test create/clone/set/replace/delete/destroy, empty environment, malformed
-names, omitted environment arguments and allocation failures. No missing
-operation may silently succeed. Regress COMMAND environment/child behavior.
+### S4 — status conversion (D12)
 
-### S3 - USER and Redirector encoding (D16 and D26)
+Recover the original status mapping separately from environment ownership.
+No missing operation may silently succeed, and no convenience Win32 error
+mapping may become a hidden substitute for original tables.
 
-Recover `windows/core/ntuser/rtl/chartran.c:MBToWCSEx` and the already mirrored
-`netapi/netlib/copystr.c:NetpCopyWStrToStr` through audited allocation and
-guest-copy bindings. Verify original paths/provenance at admission. Include
-the reached RTL Unicode/OEM conversion provider: restoring only the outer
-NetLib call does not establish original encoding semantics below it.
+### S5 — USER and Redirector encoding (D16/D26)
 
 Preserve ACP versus non-ACP branching, partial-conversion results, allocation
-and caller-pointer failure behavior. For OEM conversion prove byte capacity,
+and caller-pointer failure behavior.  For OEM conversion prove byte capacity,
 terminators, DBCS/unrepresentable input and original error handling rather
-than assuming Unicode character count equals encoded byte length. Keep safe
+than assuming Unicode character count equals encoded byte length.  Keep safe
 guest writes distinct from the conversion algorithm; no durable guest pointer.
-Test zero/short/exact buffers and allocated/caller-owned output, matching
-release ownership, guest-copy failures and selected WOW/Redirector consumers.
+
+### S6 — integration and closure
+
+S6 cannot use a passing fixture as a substitute for the selected worker
+composition.  It publishes a compact final ledger that separates original
+code restored, mirror diff removed, independent implementation deleted and
+irreducible modern bindings retained.  WRITE remains a bounded frontier here;
+its full lifecycle belongs to the queued WOW16 package.
 
 ## Acceptance and accounting
 
