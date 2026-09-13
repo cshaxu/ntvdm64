@@ -158,8 +158,8 @@ open; the current deployed identity is in Current Technical Baseline below.
   COMMAND exit normally; EDIT reaches its editor after Esc and bounded cleanup.
   WRITE still reaches W32Init FALSE, exit 255; no full WRITE acceptance.
   [S2 evidence](../etc/evidence/m0-t406-s2-original-restoration.md) owns details.
-- S1 and S2 P1 are pushed. P2 is local commit ec7b4bd1d, pending push after
-  security-review rejection; it is not delivered. S2 remains active for the
+- S1, S2 P1/P2 and the grouped restoration at 78d492964 are pushed to main.
+  The owner explicitly approved permanent main pushes. S2 remains active for the
   remaining width cohorts and access-boundary audit. The latest test-only
   extension verifies original SAS loads/stores/move across reversed pages;
   it does not yet prove EMS bulk-copy caller contracts.

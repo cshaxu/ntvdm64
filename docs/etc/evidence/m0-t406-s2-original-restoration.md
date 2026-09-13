@@ -330,3 +330,26 @@ dc9d467d46133137c5e756138c585ee2167c47f40727c113acae030d84e6b1ce.
 This completes the current tested restoration batch, not all remaining width
 or EMS move/exchange work. Changes are eligible for a local review checkpoint;
 remote delivery remains constrained by the recorded push rejection.
+
+### Delivery and real EMS move/exchange follow-up
+
+Owner explicitly approved permanent main pushes for this personal project.
+Push to the existing origin https://github.com/cshaxu/ntvdm64.git succeeded:
+80a10dac8..78d492964 on main, including ec7b4bd1d and 78d492964. This resolves
+the preceding pending-delivery limitation for those two commits.
+
+Extended the existing guest-only EMS probe using original emm_fncs.c's
+INT 67h/57h request layout. With both allocated logical pages unmapped, it
+moves four conventional bytes to logical page 0 offset 3ffe, reads across
+the 16 KiB boundary back to conventional storage, exchanges new bytes and
+reads back again. Assertions check both exchanged old values and new EMS
+contents. Existing mapping/switch/alias/unmap/free checks remain.
+
+NASM built r002/emsprobe-move.com from the updated test source. The existing
+isolated build-owned package received this probe; its product EXE is unchanged.
+Runtime PID 46412 printed EMS MAP SWITCH ALIAS UNMAP MOVE EXCHANGE FREE PASS
+and exited 0 (t406-s2-ems-move-exchange.txt in runtime logs). Q: removed.
+No host provider, CPU, product source, default EMS profile or user media changed.
+This proves original expanded-page splitting in the reached request path;
+arbitrary conventional addresses crossing noncontiguous mapped windows remain
+unverified. The T and remaining width audit are still open.

@@ -66,6 +66,44 @@ org 100h
     mov bx,0ffffh
     mov al,1
     call map
+    ; INT 67h/57h descriptors follow original emm_fncs.c field order.
+    ; Cross the 16 KiB logical-page boundary while both pages are unmapped.
+    mov ax,cs
+    mov [move_source_segment],ax
+    mov [read_dest_segment],ax
+    mov ax,[handle]
+    mov [move_dest_handle],ax
+    mov [read_source_handle],ax
+    mov byte [phase],'M'
+    mov si,move_request
+    xor al,al
+    call transfer
+    mov byte [phase],'C'
+    mov si,read_request
+    xor al,al
+    call transfer
+    cmp word [transfer_result],1357h
+    jne mismatch
+    cmp word [transfer_result+2],2468h
+    jne mismatch
+    mov word [transfer_result],369ch
+    mov word [transfer_result+2],48adh
+    mov byte [phase],'X'
+    mov si,read_request
+    mov al,1
+    call transfer
+    cmp word [transfer_result],1357h
+    jne mismatch
+    cmp word [transfer_result+2],2468h
+    jne mismatch
+    mov byte [phase],'V'
+    mov si,read_request
+    xor al,al
+    call transfer
+    cmp word [transfer_result],369ch
+    jne mismatch
+    cmp word [transfer_result+2],48adh
+    jne mismatch
     mov byte [phase],'D'
     mov dx,[handle]
     mov ah,45h
@@ -77,6 +115,12 @@ org 100h
     int 21h
     mov ax,4c00h
     int 21h
+transfer:
+    mov ah,57h
+    int 67h
+    or ah,ah
+    jnz failed
+    ret
 map:
     mov dx,[handle]
     mov ah,44h
@@ -128,7 +172,25 @@ frame dw 0
 handle dw 0
 phase db '?'
 status db 0
-passed db 'EMS MAP SWITCH ALIAS UNMAP FREE PASS',13,10,'$'
+move_request:
+    dd 4
+    db 0
+    dw 0,transfer_source
+move_source_segment dw 0
+    db 1
+move_dest_handle dw 0
+    dw 3ffeh,0
+read_request:
+    dd 4
+    db 1
+read_source_handle dw 0
+    dw 3ffeh,0
+    db 0
+    dw 0,transfer_result
+read_dest_segment dw 0
+transfer_source dw 1357h,2468h
+transfer_result dw 0,0
+passed db 'EMS MAP SWITCH ALIAS UNMAP MOVE EXCHANGE FREE PASS',13,10,'$'
 noems db 'EMS NOT INSTALLED',13,10,'$'
 failmsg db 'EMS FAIL phase/status: $'
 newline db 13,10,'$'
