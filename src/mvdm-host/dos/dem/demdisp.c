@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <softpc.h>
 
+static VOID demFastIoUnavailable(VOID);
 
 #if DBG
 
@@ -162,15 +163,8 @@ PFNSVC  apfnSVC [] = {
      demLockOper,               //SVC_DEMLOCKOPER
      demNotYetImplemented,      //SVC_DEMNOTYETIMPLEMENTED
      demGetComputerName,        //SVC_DEMGETCOMPUTERNAME
-     /* DIVERGENCE(MVDM-HOST-DIV-188): NT4 x86 intercepts this normal-file
-        service in kernel `NTFastDOSIO`.  The user-mode overlay reproduces
-        only its safe regular-file fast path; every declined or failed path
-        returns CF=1 so unchanged DOS `$READ` falls back to SVC_DEMREAD. */
-     demFastRead,               //SVC_DEMFASTREAD
-     /* DIVERGENCE(MVDM-HOST-DIV-204): the original NT4 kernel fast-I/O
-        interceptor is unavailable in this user-mode product.  Decline so
-        unchanged NTDOS `$WRITE` takes its original SVC_DEMWRITE fallback. */
-     demFastWrite,              //SVC_DEMFASTWRITE
+     demFastIoUnavailable,      //SVC_DEMFASTREAD
+     demFastIoUnavailable,      //SVC_DEMFASTWRITE
      demCheckPath,		//SVC_DEMCHECKPATH
      demSystemSymbolOp,		//SVC_DEMSYSTEMSYMBOLOP
      demGetDPBList,		//SVC_DEMBUILDDPBLIST
@@ -243,6 +237,16 @@ VOID demNotYetImplemented (VOID)
 
     setCF(0);
     return;
+}
+
+/* DIVERGENCE(MVDM-HOST-DIV-188): the original `NTFastDOSIO` owner is a
+ * kernel trap-frame handler and cannot compose in the standalone CCPU40
+ * worker.  The unchanged NTDOS `$READ`/`$WRITE` callers treat CF as the
+ * source-defined request to retry SVC_DEMREAD/SVC_DEMWRITE; do exactly that
+ * rather than substitute an autonomous user-mode fast-I/O algorithm. */
+static VOID demFastIoUnavailable (VOID)
+{
+    setCF(1);
 }
 
 VOID demSetV86KernelAddr (VOID)

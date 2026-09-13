@@ -210,7 +210,7 @@ $dpmiNames = @((Get-OriginalSources $dpmiManifest) + 'dpmimemr.c' + 'dpmimscr.c'
 $suballocNames = @(Get-OriginalSources $suballocManifest)
 $oemuniNames = @(Get-OriginalSources $oemuniManifest)
 $xmsOverlayNames = @()
-$demOverlayNames = @('demfastio.c')
+$demOverlayNames = @()
 $sessionNames = @('guest_memory_lease.c', 'session.c')
 $brokerNames = @('broker.c', 'wire.c', 'base_vdm_record.c')
 # `trace_file` belongs to the selected SoftPC base debug implementation.  The

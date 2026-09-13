@@ -2,52 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T409 S3.**
-
-## Active Packet
-
-### M0 T409 S3 — source-shaped fast-read recovery
-
-| Field | Record |
-| --- | --- |
-| Identifier Mode | M0 T409 S3, Ordinary Mode. |
-| Admission And Approval | Owner approved: “准入第一个队列任务并开始执行”。 |
-| Candidate Proposal | [DOS file-service restoration](../proposals/proposal-dos-file-service-restoration-001.md). |
-| Objective | Recover the original `NTFastDOSIO`/DEM fast-read contract or select the original CF-to-`DEMREAD` fallback after proving the exact unavailable dependency. |
-| Non-goals | No broker/CLI/CPU change, fast-write implementation, generic guest-pointer manager, or a new autonomous file-I/O policy. |
-| Reference Baseline | T409 S2 restored the original D31--D33 owner and deleted its shadow; see `m0-t409-s2-original-vdd-handle-restoration.md`. The remaining selected fast-read overlay is `mvdm-host-overlay/dos/dem/demfastio.c`. |
-| Files And ABI Surface | `mvdm-host-overlay/dos/dem/demfastio.c`, original DEM read call sites, any selected `opennt-host` `rdwr.c` slice, checked guest-memory publication binding, tests and formal graph. |
-| Applicable Rules | Source policy, architecture/coding rules and Execution historical-recovery gate. |
-| Verification | Original/current source ledger; focused zero/short/EOF/seek/no-seek and failed guest-publication checks; x86 formal graph; selected ordinary file workload and governance gate. |
-| Expected Markers | Original handle eligibility and file-position semantics, exactly-once instruction completion, CF fallback, no unsafe second host read after failed guest publication, and a minimized overlay footprint. |
-| Asset Needs | Existing OpenNT external source, selected x86 build graph, existing guest-memory fixture surface and `O:\ntvdm64` runtime package. |
-| Reporting Requirements | Record original owner/source identity, four-rung disposition, retained binding lines, removed/reduced overlay footprint, focused tests, runtime reachability and unavailable dependencies. |
-| Stop Conditions | Original fast-read source requires unavailable kernel trap/VDM-TIB mechanics that a finite same-shaped binding cannot preserve, or a proposed path changes guest CF/position/completion behavior. |
-| Exit Criteria | Original source or explicitly proved original fallback owns D08; no autonomous fast-read policy remains; focused tests, x86 composition and bounded runtime evidence are recorded. |
-| Original Owner Request | “准入第一个队列任务并开始执行”。 |
-| Similar-Issue Sweep | `NTFastDOSIO`, `DEMFASTREAD`, ordinary `demRead` publication, `rdwr.c`, host I/O position/EOF behavior, VDD/Redirector read consumers and COMMAND/EDIT file workloads. |
-
-S2 closed and delivered: [original DEM/VDD handle restoration](../etc/evidence/m0-t409-s2-original-vdd-handle-restoration.md) restores D31--D33 directly through CCPU40's selected synchronous Sim32 pointer contract. It removes the 425-line shadow provider and its dependent caller/build/test surface; the automated MEM watchdog baseline remains a recorded Console limitation, not a VDD pass claim.
-
-S6 closed: original D26 `copystr.c` was already selected; the only retained
-OEM conversion is the necessary Unicode-to-guest lease seam.  See
-[S6 evidence](../etc/evidence/m0-t408-s6-redirector-oem-copy-disposition.md).
-
-S5 closed: original D16 `chartran.c` now owns the reached USER conversion
-pair; the finite ACP/allocator binding, focused source-semantic fixture and
-formal WOW32 provider build are covered by
-[S5 evidence](../etc/evidence/m0-t408-s5-user-chartran-restoration.md).
-
-S4 closed: original D12 `error.c/error.h` now own the reached mapping table
-and algorithm. The finite private-TLS `LastStatusValue` carrier, focused
-mapping rows, full x86 link and short-root MEM/COMMAND regressions are covered
-by [S4 evidence](../etc/evidence/m0-t408-s4-status-restoration.md). The
-deployed candidate SHA-256 is
-`37d57df9c1048ffa27c29e95c6fb1e3a10aa69e1fd26a4abdfbf0f6027a83077`.
-
-T406 is closed by its final delivery; [S2 closure evidence](../etc/evidence/m0-t406-s2-original-restoration.md#s2-final-x86-width-and-access-boundary-disposition)
-records its restored cohorts, remaining registered seams, trace hit/no-hit results,
-and named receivers.
+**No active M/T/S packet.**
 
 ## T406 Closure Record
 
@@ -238,6 +193,7 @@ remain explicitly unverified rather than inferred correct from compilation.
 
 | Task | Compact result |
 | --- | --- |
+| T409 | Original DEM/VDD handle lifecycle restored and standalone fast I/O now takes the original guest CF slow-path fallback; formal build and source proofs pass, while the inherited-console MEM watchdog limitation remains explicitly unaccepted. |
 | T407 | Original DPMI/XMS and immediate DOSX transition recovery closed; `FSTI` reaches BOP `FDh`, MEM/COMMAND pass, while WRITE remains assigned to WOW lifecycle recovery. |
 | T405 | Static diff/overlay audit complete; 37 overlap rows and eight unresolved families transferred to candidate owners. No restoration/runtime acceptance claim. |
 | T406 | Original mapping contracts, bounded EMS lease binding and admitted x86-width cohorts restored; final remaining candidates are either registered seams or named future-owner revalidation. |
