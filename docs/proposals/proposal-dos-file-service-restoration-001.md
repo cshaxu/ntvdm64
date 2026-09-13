@@ -87,6 +87,20 @@ frontier without asserting that D08 is its root cause or that WRITE runs.
 
 ## Delivery and exit evidence
 
+### U07-F file, disk and asynchronous I/O lifetime
+
+The owner-approved U07 split adds the bounded disk/file and Redirector I/O
+buffer-lifetime slice to this candidate. Inventory selected reads/writes and
+asynchronous pipe completion/cancellation consumers; preserve original owners
+and error ordering, not a wholesale Redirector feature recovery. Do not free
+buffers or session bindings before actual completion, or assume cancellation
+has completed I/O. Test partial host I/O, failed guest publication, close and
+teardown races, file-position side effects and buffer release exactly once.
+Use the shared U07-M lease contract owned by the DPMI/XMS proposal, not a second
+shadow/transaction engine. Worker-local thread termination and native wait
+mechanics belong to the CCPU40 event proposal; promote a proved prerequisite
+explicitly rather than silently borrowing its implementation scope.
+
 For each stage retain source identity and exact owner, outgoing dependency
 dispositions, selected build/provider evidence, focused positive and negative
 tests, and reviewed before/after diff plus overlay footprint. Revalidate the

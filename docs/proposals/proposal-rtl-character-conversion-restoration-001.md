@@ -85,6 +85,17 @@ release ownership, guest-copy failures and selected WOW/Redirector consumers.
 
 ## Acceptance and accounting
 
+### U07-E environment lifetime
+
+This package also owns the environment slice of U07: snapshot/install/restore
+and cleanup around original BaseClient environment projection, not only RTL
+block allocation. Verify restoration on success, launch failure and teardown,
+including restoration failure before backup release. Preserve error visibility
+and ownership; a failed restore must not be silently reported as success.
+Broker owns command payload transport, not this process-local environment
+algorithm. Shared guest-memory lease mechanics remain with the DPMI/XMS
+proposal; encoding consumers verify their own publication failures.
+
 At admission revalidate the source baseline and selected callers. Retain each
 original owner, rejected recovery rung, exact outgoing interface, replacement
 disposition and x86 build evidence. Test source-proven differences without

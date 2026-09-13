@@ -83,6 +83,21 @@ Proposed stages, not admitted S packets:
 
 ## Admission and exit evidence
 
+### U05 and U08-C explicit closure
+
+U05 is owned here in full for the selected native Console input contract:
+inventory normalization consumers, then retain the scan/VK/character/modifier
+and surrogate tests above with actual down/up ordering, repeats and layout
+changes. Synthetic records do not establish RDP acceptance.
+
+U08-C owns selected Console capability gaps, including read/peek/nonblocking
+behavior, layout, pointer visibility and buffer/palette operations. For each,
+name the original caller, available host binding or exact unavailable server
+mechanic, and test the caller's failure behavior without fake success. Record
+conhost and Terminal differences explicitly. Shared worker-native wait/alert
+mechanics belong to the CCPU40 event proposal; Console queue semantics remain
+here. Missing mandatory capability needs owner disposition, not omission.
+
 Record source/toolchain/runtime identities and the sole x86 CCPU40 profile.
 Verify the independent-window route is neither selected nor publicly reachable,
 and removed exclusive code has no remaining consumers. Test event ordering

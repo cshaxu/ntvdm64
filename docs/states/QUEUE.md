@@ -85,5 +85,30 @@ later package merely because an earlier linked component has no runtime proof.
 | 9 | Single-process WOW16 application lifecycle recovery — after broker and WOW/debugger restoration, prove the selected WRITE workload's original start/run/return within one x86 worker, or record the exact source-proven unavailable boundary. No substitute guest/UI failure policy, private USER/CSRSS shell or transport-based workaround. | [Proposal](../proposals/proposal-wow16-single-process-lifecycle-recovery-001.md) |
 | 10 | Multi-process matrix and product release — prove the brokered multi-process x86-worker profile, the cross-owner DOS/Win16 compatibility matrix, portable media layout and release packaging. Host x64 Windows is an x86-worker acceptance platform, not a native-x64 worker requirement. | [Proposal](../proposals/proposal-multiprocess-release-matrix-001.md) |
 
+## Unresolved audit-family ownership
+
+Owner-approved planning on 2026-09-12 assigns U03-U08 below without changing
+candidate order, adding numeric tasks or admitting repairs. The linked candidate
+proposals own detailed scope and acceptance. These are unresolved questions,
+not confirmed bugs. Shared subitems have one implementation owner; consumers
+verify integration rather than introduce parallel providers.
+
+| Audit family | Candidate owner and bounded handoff |
+| --- | --- |
+| U03 effective-address cache selection | DPMI/XMS owns equal-selector/different-hidden-cache selection and all selected consumers of the shared binding. |
+| U04 platform initialization | DPMI/XMS owns the complete disposition of TSS, IDT, GDT/LDT and TEB/stack subitems, restoring reached dependencies and naming any explicitly approved residual receiver before closure. |
+| U05 keyboard normalization | Console/resources owns scan/VK/character/modifier pairing and conhost/Terminal/RDP evidence. |
+| U06 WOW private callbacks | WOW/debugger owns reachability and cursor/icon contracts; WOW16 subsequently verifies the integrated workload. |
+| U07 lifetime and memory publication | DPMI/XMS owns the shared guest-memory lease contract and XMS/DPMI memory; RTL owns environment restoration; DOS file services owns disk/file/Redirector I/O buffer completion; CCPU40 event recovery owns thread binding and worker-local termination; broker owns command-payload/process coordination; WOW/debugger owns callback/resource cleanup. |
+| U08 waits and missing Console capabilities | Console/resources owns Console capabilities; CCPU40 event recovery owns shared worker-local native wait/alert bindings; broker owns Base client/server waits; WOW/debugger owns cooperative scheduling waits. Each classifies selected callers and explicit unavailable operations. |
+
+No family closes because one related D row passes. Each owner records its
+subitems, original owner, selected callers, positive/negative evidence and
+remaining limitations in its admitted evidence. A source-proven earlier
+dependency is explicitly promoted under the dependency-first rule, not left
+until broker or WRITE. Residual mandatory work requires an explicit receiver
+and owner-approved disposition; final WOW16/release verification cannot absorb
+unassigned restoration work by default.
+
 Historical queue/proposal material is indexed in
 [the pre-package-roadmap archive](../../artifacts/documentation-archive/20260910/etc/archive/2026-08-27-pre-package-roadmap/README.md).

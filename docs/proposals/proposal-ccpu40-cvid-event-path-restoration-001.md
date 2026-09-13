@@ -115,6 +115,25 @@ policy recovery ladder and CPU compatibility profile gate at admission.
 
 ## Acceptance
 
+### U07-T and U08-W worker-local ownership
+
+This candidate owns U07-T: participating thread bind/unbind, event-thread
+resource lifetime and worker-local session termination, including the recorded
+cross-thread nonlocal-return risk. Verify termination on the owning thread,
+unarmed/wrong-thread requests, pending callbacks and shutdown races; retain
+original event policy with finite mechanics, not a new session framework.
+File/pipe buffers remain U07-F in the DOS file proposal; command transport
+remains broker-owned. Shared memory leases remain U07-M in DPMI/XMS.
+
+U08-W covers shared worker-local native wait/alert bindings and all their
+selected callers. Compare alertable/nonalertable results, timeout, duplicated
+handle identity, wake-before-wait, wait/close races and failure propagation
+against original contracts. Separate source-owned policy from unavailable
+kernel mechanics; no successful empty stub. Base protocol waits and WOW
+cooperative scheduling remain with their own proposals. If another candidate
+needs this shared contract earlier, explicitly promote the finite prerequisite
+under Queue's dependency-first rule rather than implement a parallel wrapper.
+
 For each changed group retain original provenance, current/original difference,
 reason, exact restoration and superseded-code disposition. Prove repeatable
 generation, unique slot decisions, compatible signatures/layouts, one owner

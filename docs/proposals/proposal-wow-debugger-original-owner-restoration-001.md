@@ -54,6 +54,27 @@ sequential stages, not active S allocations:
 
 ## Acceptance and limits
 
+### U06, U07-C and U08-S explicit ownership
+
+U06 belongs here: trace actual registration and calls for D19/D20/D27, not
+only compile/link selection. Verify cursor/icon format, masks, dimensions,
+hotspots, sharing and malformed/error behavior through reached consumers.
+Proved unused exclusive helpers may be removed; an unexercised required
+callback remains unverified. The later WOW16 package validates integration,
+not missing helper restoration.
+
+U07-C covers callback/task/resource lifetime: task exit during callbacks,
+allocation failure, shared-resource release and teardown without stale guest
+access or double release. Use the shared U07-M memory contract and U07-T
+thread-termination contract rather than duplicate them.
+
+U08-S covers original WOW cooperative scheduling waits, yield/wake ordering,
+event counts, task exit and failure behavior. Bind shared native waits through
+U08-W from CCPU40 event recovery. An unavailable private USER operation must
+have original-owner evidence and explicit disposition, not an empty successful
+return or a new scheduler. Each of these subitems needs independent evidence
+before closing the candidate; WRITE execution alone does not prove all cases.
+
 Use source identity, selected x86 CCPU40 build/link evidence, positive and
 negative boundary tests, and actual reached runtime consumers. Verify resource
 cleanup, callback reachability, task return and error/cancel behavior; no empty

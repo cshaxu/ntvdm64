@@ -313,6 +313,22 @@ transport for original single-worker WOW16 behavior or its later workload accept
 
 ## Admission and exit evidence
 
+### U07-B and U08-B coordination-only ownership
+
+U07-B covers copied command tails/environments/stream identity, launch rollback,
+disconnect and command-record release, including the asynchronous cmdExec32
+handoff. Prove capture before guest lease expiry, exactly-once completion and
+cleanup after failed creation or disconnect. Process-local environment restore
+is U07-E in RTL; guest lease mechanics are U07-M in DPMI/XMS; worker-local
+termination is U07-T in CCPU40 event recovery. IPC cannot repair those contracts.
+
+U08-B covers original BaseClient/BaseSrv wait/retry/notify policy: test wake
+ordering, insufficient-buffer retry, child exit and disconnect while waiting,
+and distinct timeout/failure outcomes. Shared native wait mechanics remain
+U08-W; Console and WOW scheduling policies remain with their respective
+owners. Reuse verified bindings and explicitly promote missing prerequisites;
+do not close these families wholesale on broker transport success.
+
 An admitted package must provide:
 
 1. an original-owner and four-rung recovery ledger for the selected Base VDM

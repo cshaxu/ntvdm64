@@ -88,6 +88,25 @@ passed.
 
 ## Latest Governance Closure
 
+M0 Td S10 P1, Ordinary Mode, is authorized by the owner's request:
+“批准，请你Td治理队列任务和proposal们，提交并推送”.
+Objective: assign U03-U08 to existing candidate owners, with bounded subitems
+and acceptance; preserve candidate order and one proposal per candidate.
+Baseline: de5c4f969 and the T405 discussion findings. Files: Queue and affected
+existing proposals plus this compact record; no ABI, source, build or runtime
+change. Apply documentation/execution skills and repository rules. Verify
+ownership coverage, relative links, documentation governance and diff checks,
+then review, commit and push. Stop for conflicting ownership or expanded
+architecture; preserve the pre-existing physical-mapping proposal edit outside
+this delivery. All six families now have candidate owners and bounded acceptance
+in Queue and eight existing proposals; no new proposal or numeric packet was
+created. Documentation governance (including relative paths/anchors) and
+git diff --check passed. Review confirms candidate order and product behavior
+unchanged. Commit/push verification follows this record; an unavailable push
+is pending delivery, not a clean-workspace claim. T405 S3 remains unchanged.
+
+## Previous Governance Closure
+
 M0 Td S9 P1 consolidates the
 [U02 physical-memory mapping candidate](../proposals/proposal-physical-memory-mapping-restoration-001.md)
 at the Queue head and the existing

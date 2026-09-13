@@ -93,6 +93,34 @@ does not prove full WOW/WRITE execution or complete U04 correctness.
 
 ## Delivery and exit evidence
 
+### U03, U04 and shared U07 ownership
+
+The owner approved these explicit candidate responsibilities on 2026-09-12.
+U03 is mandatory: audit the effective-address binding when equal visible
+selectors have distinct hidden bases, limits or access rights. Identify the
+original access intent and all selected callers; selector equality alone is
+not authority to choose a cache. Verify active-cache versus descriptor-memory
+selection, segment reload/mode-change ordering, invalid state and range/failure
+behavior. Retain original descriptor decoding and CPU instruction semantics.
+
+For U04, enumerate TSS slots, IDT construction/restoration, GDT/LDT backing,
+TEB projection and protected stacks separately. This package owns disposition
+of the complete set, not merely reached frame offsets: name original owners,
+dependencies, selection and restoration/retention evidence for each. Restore
+reached dependencies; any residual requires a named receiver and explicit owner
+disposition before package closure. Do not treat a passing D35 fixture or later
+WRITE workload as complete platform proof. Unrelated platform reconstruction
+still requires scope review under the existing S2 boundary.
+
+U07-M is the shared synchronous guest-memory lease and XMS/DPMI memory slice.
+Audit all selected consumers of that shared mechanism and establish one access,
+span, epoch, release and publication contract; do not invent a generic manager.
+Test stale/foreign leases, read/write intent, untouched bytes, partial writes,
+failed commit, release-after-failure and teardown. Cancellation is not rollback.
+DOS file services and WOW consumers reuse this evidence and test their own
+side-effect ordering. Promote a proved prerequisite explicitly if reached by
+an earlier candidate; do not implement competing lease providers.
+
 Freeze actual source, media and executable identity at admission. Retain the
 original owner/four-rung recovery evidence, all selected bindings, provider
 graph, positive/negative tests and per-stage regression results. Report

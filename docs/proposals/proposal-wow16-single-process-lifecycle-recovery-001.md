@@ -20,5 +20,12 @@ guest/UI failure behavior.
 
 ## Exit evidence
 
+Reconcile the preceding proposals' U03-U08 dispositions before workload
+acceptance. This package verifies integrated behavior; it does not silently
+inherit unassigned platform, callback, lease or wait repairs. A source-proven
+remaining prerequisite requires an explicit owner/receiver under Queue's
+dependency-first rule. Successful WRITE execution is not blanket proof of all
+negative boundary cases or closure of every unresolved audit family.
+
 Prove one bounded Win16 start/return workload through its original-owner path,
 or record the exact source-proven unavailable boundary and its receiver.
