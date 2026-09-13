@@ -1,5 +1,9 @@
 # OpenNT MVDM and non-MVDM source-diff audit and restoration
 
+Archived original T405 proposal. Its requirements below are retained;
+the [owner-directed closure](m0-t405-source-diff-audit.md) supersedes its active
+status and transfers unimplemented restoration to approved candidates.
+
 ## Objective
 
 Audit all current OpenNT-derived host behavior and autonomous replacements,

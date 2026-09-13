@@ -27,6 +27,49 @@ identity manager. No generic mapping/token manager, kernel shell, ring-0
 mapping, CPU30 build, instruction-core change or broker implementation is
 authorized by this proposal. The execution profile remains x86 CCPU40.
 
+## Source-backed direction approved on 2026-09-12
+
+The owner approved refining this proposal after a read-only follow-up. The
+restoration has two concrete consumer paths, not a generic mapping redesign:
+
+- EMS page windows: original `softpc.new/base/dos/emm_mngr.c` calls
+  `host/src/nt_emm.c:host_map_page/host_unmap_page`, which call
+  `VdmMapDosMemory/VdmUnmapDosMemory`. Preserve that original upper policy.
+- External DIB storage: original `wow32/wdib.c` conditionally calls
+  `host/src/nt_mem.c:VdmAddVirtualMemory` for host-allocated pixel storage.
+  Guest and GDI access must share the same content; a detached copy is not
+  equivalent. Determine actual per-file `i386` selection and runtime
+  reachability before attributing a product failure to this route.
+
+Current `VdmAddVirtualMemory` requires a prior
+`mvdm_softpc_physical_mapping_publish` record. The follow-up search of src,
+tests and tools found the explicit publication call in
+`tests/mvdm-host/ccpu_bounded_execution_fixture.c`, but no production caller;
+the original-shaped WOW calls still pass `pvBits` directly. This is a
+source-visible integration gap to verify first, conditional on actual branch
+selection, not a demonstrated WRITE root cause. The existing fixture supplies
+the extra registration itself and therefore cannot prove original-caller
+compatibility. If the route is selected, preserve the original complete entry
+contract rather than teaching original callers a new registration protocol.
+
+The original upper allocation/removal and EMS caller bodies are available.
+The bounded source searches did not locate definitions of VdmMapDosMemory,
+VdmUnmapDosMemory or VdmSetPhysRecStructs in the searched OpenNT source, nor
+matching definitions in the searched OpenNT-4.5 MVDM sources. Original
+nt_mem.c describes updating PhysicalPageREC.translation. These observations
+do not prove source loss or a kernel owner: inspect original build/generated
+inputs and available artifacts before claiming a missing implementation.
+The expected direction is original upper policy plus a minimal proved CCPU
+page binding, not a promise to delete the entire adapter or import a kernel
+implementation that has not been identified.
+
+Current `ccpu386/ccpusas4.c:c_GetPhyAdd` checks alias translation and external
+backing before ordinary RAM address calculation. A successful direct byte
+access proves only that path. Audit CPU, SAS and bulk/cross-boundary consumers
+for consistent backing selection. After removal, an unresolved external
+lookup can fall through to ordinary RAM; establish required address and
+alias retirement behavior rather than assuming that fallback is correct.
+
 ## Proposed stages
 
 ### S1 - Original owner and complete mapping contract
@@ -37,6 +80,13 @@ EMS, XMS/DPMI, SAS or other selected consumers require each behavior; do not
 infer requirements from a function name. Compare original source, existing
 bindings and focused observations before selecting a restoration design.
 
+Prioritize the DIB entry/publication gap and EMS page-window contract, then
+the common access and backing-lifetime boundary. Record a deterministic
+original-shaped caller test which does not manually pre-publish backing.
+Freeze the selected DIB compile branch, original owner evidence and expected
+failure behavior before implementation. Inactive paths are classified
+explicitly, not counted as currently exercised failures.
+
 Explicitly settle: exact replacement versus partial overlap and precedence;
 one-hop versus chained alias resolution and cycles if applicable; source and
 destination bounds and page padding; backing availability at publication;
@@ -44,6 +94,10 @@ exact versus partial unmap; backing retirement; publication failure and
 rollback; and teardown with live aliases or checked synchronous accesses.
 The current prepend/first-match, single-hop and exact-span policies are
 observations, not predetermined defects to reverse.
+
+Alias chains, arbitrary overlaps and partial unmap are research cases, not
+new feature requirements. Implement only source-proven consumer contracts;
+do not generalize the mapping service to satisfy an invented test matrix.
 
 Record each original function/path/hash, retained layout/order/failure rule,
 finite outgoing dependency and current-provider disposition. Unknown matches
@@ -58,6 +112,24 @@ hooks. Preserve names and source shape wherever composable. If a current
 behavior is proved necessary and equivalent, retain it with exact evidence
 instead of changing it solely to reduce line count. A blocked dependency must
 receive owner disposition, not a success-returning placeholder.
+
+Implementation and acceptance order within this S is:
+
+1. Restore the selected original external-memory entry contract, including
+   non-DWORD-aligned input, allocation failure and paired removal, without
+   requiring a project-specific publication step from the original caller.
+   Prove bidirectional visibility between guest access and host DIB storage
+   when that route is selected; a blocked WOW workload needs explicit scope
+   disposition, not an inferred passing DIB result from COMMAND/EDIT.
+2. Prove EMS map/switch/unmap/remap and two windows sharing one backing,
+   including preserved data when switching away and back. Do not rewrite
+   the original EMS manager merely to accommodate a new adapter policy.
+3. Verify consistent CPU/SAS/bulk/cross-page reads and writes, bounds and
+   page padding, backing retirement, failure rollback and teardown. A pointer
+   fixture alone is not complete access-path evidence. Define who owns and
+   frees the original backing and reject stale use according to that contract.
+4. Resolve only additionally reached overlap/unmap/alias cases; keep
+   unsupported or inapplicable cases source-backed and explicit.
 
 Cover map/read/write alias visibility, repeat mapping, overlapping spans,
 exact/partial unmap, chains, missing or retired backing, bounds/padding,

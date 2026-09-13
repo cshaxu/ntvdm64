@@ -2,6 +2,11 @@
 
 ## Authority and sequence
 
+Historical plan after the owner's 2026-09-12
+[T405 closure](../../history/m0-t405-source-diff-audit.md): S1-S3 completed the
+static audit; S4-S6 were not implemented and their outcomes transfer to the
+candidate owners. The sequence below is historical, not an active plan.
+
 The owner admitted the complete audit-and-repair task on 2026-09-12.
 CURRENT alone activates a packet. S1 has reached its bounded inventory
 conclusion and S2 its MVDM disposition conclusion; CURRENT now activates only S3. The remaining rows are

@@ -2,6 +2,11 @@
 
 ## T405 combined static-audit conclusion
 
+Closure update on 2026-09-12: the owner ended T405 after discussion and
+approved candidate handoff. [Closure and receivers](../../history/m0-t405-source-diff-audit.md)
+supersede active/pending statements below, not their technical findings.
+No source restoration or new runtime acceptance is claimed.
+
 The S1-S3 inventory and disposition audit is ready for owner discussion.
 This conclusion supersedes the incremental statements below that the combined
 report or file-disposition join is still pending; it does not erase their

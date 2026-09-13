@@ -4,7 +4,7 @@ This directory contains only the following owner-approved supporting records.
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
-| [T405 S-stage plan](operations/m0-t405-audit-restoration-plan.md) | M0 T405 | Sequential audit and original-owner repair plan; CURRENT alone activates an S. | Retain while the task or its closure links it. |
+| [T405 S-stage plan](operations/m0-t405-audit-restoration-plan.md) | M0 T405 | Historical sequence; closure transfers repair outcomes to candidates. | Retain as linked closure evidence. |
 | [T405 S1 initial baseline](evidence/m0-t405-s1-audit-baseline-001.md) | M0 T405 S1 | Starting revision, initial membership counts and explicit audit gaps. | Retain as provenance for the completed baseline audit. |
 | [Original-owner replacement audit](evidence/opennt-replacement-audit-20260912.md) | Owner-requested read-only audit | Rechecked COMMAND/EDIT replacement findings and remaining coverage. | Retain until superseded by a complete source-owner audit. |
 | [source policy](operations/policy/source-policy.md) | Project owner | Source, firmware, guest-media, and Microsoft-component admission boundary. | Superseded only by a current policy authority. |

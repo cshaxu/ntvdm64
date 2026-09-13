@@ -1,12 +1,11 @@
 # Queue
 
 This is the authoritative ordered queue of **unnumbered candidate T packages**.
-The admitted source-diff audit-and-restoration package is recorded only in
-Status and is absent from this candidate queue. Later candidates wait for
-its applicable restoration and verification results.
+The source-diff audit has closed by owner direction with restoration assigned
+to the candidates below. They own pending repairs and verification;
+audit closure is not evidence that those repairs already exist.
 A candidate receives its next global `T` number only when the owner admits it
-to [STATUS.md](CURRENT.md). The active SoftPC package is deliberately
-absent: its live scope and progress belong only to Status.
+to [STATUS.md](CURRENT.md). Active packet admission belongs only to Status.
 
 Recovery is package-first and mirror-first: a trace, BOP hit, compiler error
 or convenient API may verify a completed package but cannot choose the next
@@ -65,7 +64,8 @@ architecture-neutral source constraints, but x64 compile/link is not a gate for
 this current SoftPC recovery sequence. Bochs is retired and is neither a
 production route nor an acceptance row.
 
-**Dependency-first activation rule:** after source-diff audit and restoration, execute the earliest runtime candidate's frozen
+**Dependency-first activation rule:** after audit handoff, admit the earliest
+restoration candidate and verify its frozen
 runtime workload. If evidence proves that a named original owner component is
 not in the formal graph and is the immediate blocker, insert that component's
 complete source/binding/formal-link/runtime closure immediately before all
