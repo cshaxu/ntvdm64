@@ -732,8 +732,8 @@ SECURITY_ATTRIBUTES sa;
     // Setup the exit registers
     setBX(wTime);
     setCX(wDate);
-    setBP((USHORT)(ULONG)(uintptr_t)hFile);
-    setAX((USHORT)((ULONG)(uintptr_t)hFile >> 16));
+    setBP((USHORT)hFile);
+    setAX((USHORT)((ULONG)hFile >> 16));
     setSI((USHORT)dwSize);
     setDX((USHORT)(dwSize >> 16));
     setCF(0);

@@ -351,8 +351,8 @@ errorReturn:
         setDX(0);
     }
 
-    setBP((USHORT)(ULONG)(uintptr_t)hFile);
-    setAX((USHORT)((ULONG)(uintptr_t)hFile >> 16));
+    setBP((USHORT)hFile);
+    setAX((USHORT)((ULONG)hFile >> 16));
     setCF(0);
     if (dupFileName) {
         free(dupFileName);
@@ -765,8 +765,8 @@ DWORD   dwLastError;
     }
     setCX ((USHORT)dwFileSize);
     setBX ((USHORT)(dwFileSize >> 16 ));
-    setBP((USHORT)(ULONG)(uintptr_t)hFile);
-    setAX((USHORT)((ULONG)(uintptr_t)hFile >> 16));
+    setBP((USHORT)hFile);
+    setAX((USHORT)((ULONG)hFile >> 16));
     setCF(0);
     mvdm_softpc_record_dem_create(getDS(), getSI(), 1u, 0u, getAX(), getCF());
     return;

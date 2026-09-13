@@ -153,10 +153,7 @@ extern CHAR demDebugBuffer [];
 /** DEM Macros **/
 
 #define GETULONG(hi,lo)     (DWORD)((((int) hi) << 16) + ((int) lo))
-/* DIVERGENCE MVDM-HOST-DIV-103: OpenNT split a native x86 HANDLE across
- * guest register words. Preserve that register shape, but resolve the
- * original 32-bit Win32/x86 process-local handle carrier. */
-#define GETHANDLE(hi,lo)    (HANDLE)(uintptr_t)GETULONG((hi),(lo))
+#define GETHANDLE(hi,lo)    (HANDLE)(GETULONG(hi,lo))
 #define IS_ASCII_PATH_SEPARATOR(ch)     (((ch) == '/') || ((ch) == '\\'))
 
 

@@ -708,3 +708,27 @@ guest identity policy and lifetime changes remain separately owned. Other
 screened families still include generated callback declarations, diagnostics,
 packed guest layouts, CCPU/event bindings and selected-platform macros.
 All require explicit dispositions before declaring the width sweep complete.
+
+## DEM carrier-expression restoration
+
+Restored thirteen original expressions across dem.h, demfcb.c, demfile.c
+and demsrch.c: GETHANDLE reconstruction, three pairs of handle-register
+outputs, and six search-record pointer serialization/comparison expressions.
+Only redundant width casts are removed; the original field values, lookup,
+comparison and release order remain. Retired DIV-103; demhndl.c's remaining
+diffs concern leases, observation and SetFilePointer's LONG argument, not
+this retired conversion. Four source files +13/-16, net 3 lines removed.
+
+Formal dependency-tracked r002 rebuild and both links pass
+(dem-carrier-build.log). Focused original memory/DIB regression exits 0.
+Integration logs O:\ntvdm64\logs\t406-s2-dem-carrier-{command,mem,dir,edit,write}.txt:
+COMMAND/MEM/DIR exit 0, EDIT reaches editor then bounded cleanup, WRITE exits
+255. FCB-specific operations were not independently exercised; compile and
+source-expression review must not be presented as full FCB acceptance.
+Existing EMS cross-window failure remains unresolved, not retested or fixed
+by this width-only cohort. No new identity provider or CPU behavior is added.
+
+Staged x86 EXE is 3,235,328 bytes, SHA-256
+a9f26bfd4512bbc0d329555196f6c2a93790dc1a7479e0c0f037706e51490171.
+Reviewer inspected the complete four-file expression diff against pinned
+OpenNT; governance and whitespace checks are required before delivery.

@@ -335,7 +335,7 @@ DWORD demFileFindFirst (
             if (SearchAttr != ATTR_VOLUME_ID) {
                 pFFindEntry = SearchFile(wcFile, SearchAttr, NULL, NULL);
                 if (pFFindEntry) {
-                    STOREDWORD(pDta->pFFindEntry,(ULONG)(uintptr_t)pFFindEntry);
+                    STOREDWORD(pDta->pFFindEntry,pFFindEntry);
                     STOREDWORD(pDta->FFindId,pFFindEntry->FFindId);
                     }
                 }
@@ -373,7 +373,7 @@ DWORD demFileFindFirst (
     FillSrchDta(&FFindDD, pDta);
 
     if (pFFindEntry) {
-        STOREDWORD(pDta->pFFindEntry,(ULONG)(uintptr_t)pFFindEntry);
+        STOREDWORD(pDta->pFFindEntry,pFFindEntry);
         STOREDWORD(pDta->FFindId,pFFindEntry->FFindId);
         }
 
@@ -465,7 +465,7 @@ DWORD demFileFindNext (
 
     pFFindEntry = GetFFindEntryByFindId(FETCHDWORD(pDta->FFindId));
     if (!pFFindEntry ||
-        FETCHDWORD(pDta->pFFindEntry) != (DWORD)(uintptr_t)pFFindEntry )
+        FETCHDWORD(pDta->pFFindEntry) != (DWORD)pFFindEntry )
       {
         STOREDWORD(pDta->FFindId,0);
         STOREDWORD(pDta->pFFindEntry,0);
@@ -584,7 +584,7 @@ VOID demFindFirstFCB (VOID)
     FillFCBSrchBuf(&FFindDD, pFCBSrchBuf);
 
     if (pFFindEntry) {
-        STOREDWORD(pDirEnt->pFFindEntry,(ULONG)(uintptr_t)pFFindEntry);
+        STOREDWORD(pDirEnt->pFFindEntry,pFFindEntry);
         STOREDWORD(pDirEnt->FFindId,pFFindEntry->FFindId);
         }
 
@@ -630,11 +630,11 @@ VOID demFindNextFCB (VOID)
 
     pFFindEntry = GetFFindEntryByFindId(FETCHDWORD(pDirEnt->FFindId));
     if (!pFFindEntry ||
-        FETCHDWORD(pDirEnt->pFFindEntry) != (DWORD)(uintptr_t)pFFindEntry ||
+        FETCHDWORD(pDirEnt->pFFindEntry) != (DWORD)pFFindEntry ||
         getDL() == ATTR_VOLUME_ID )
       {
         if (pFFindEntry && FETCHDWORD(pDirEnt->pFFindEntry) !=
-            (DWORD)(uintptr_t)pFFindEntry)
+            (DWORD)pFFindEntry)
           {
             FreeFFindEntry(pFFindEntry);
             }
