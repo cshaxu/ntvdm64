@@ -2,10 +2,10 @@
 
 ## Scope
 
-This record implements D28 and the returned-record/NOWAIT/NOREMOVE and
-Alt+Enter-pair portions of D29. It does not claim keyboard normalization,
-layout ownership, graphics presentation, or interactive COMMAND/EDIT
-acceptance.
+This record implements D28, the returned-record/NOWAIT/NOREMOVE and
+Alt+Enter-pair portions of D29, and the source-composable character branch of
+D24. It does not claim Console layout ownership, graphics presentation, or
+interactive COMMAND/EDIT acceptance.
 
 ## Original contract and selected boundary
 
@@ -45,6 +45,28 @@ performed the historical fullscreen action on key-down and returned `FALSE`,
 so neither half of that system-key pair entered VDM input. The modern adapter
 performs no fullscreen substitute because T410 S1 retired the only project
 window receiver.
+
+## Character packet recovery and layout limit
+
+The original `ntcon/server/clipbrd.c::DoStringPaste` is not imported as a
+whole: clipboard ownership, Console locking, chunking, CR/LF filtering and
+input-buffer insertion remain Console-Server concerns. Its finite
+character-to-key mechanics are nevertheless directly applicable when a modern
+Console/RDP record has no scan code or usable virtual key. `nt_event` now
+uses the original-shaped AltGr record (`ENHANCED_KEY`, left Ctrl and right
+Alt), Shift record, character make/break records, and the OEM Alt+numpad
+fallback for a character that `VkKeyScanExW` cannot map. Existing scan-bearing
+and virtual-key-bearing records still pass through without character
+synthesis. Isolated UTF-16 surrogates remain rejected: neither source path
+defines a single-key PC representation for one surrogate.
+
+The remaining D30 limitation is explicit: OpenNT's
+`SrvGetConsoleKeyboardLayoutName` activates the Console's `hklActive` before
+querying the name. Modern public Console has no corresponding active-layout
+handle. The selected adapter and packet normalizer therefore use the worker
+thread's public layout; it is a bounded fallback, not an ownership-equivalent
+replacement. A separate real Console layout-switch observation is required
+before this limitation can be closed or replaced.
 
 The fixture and adapter compiled and linked as x86 from
 `build/M0-T388/S7/console-contract-x86`. The noninteractive automation

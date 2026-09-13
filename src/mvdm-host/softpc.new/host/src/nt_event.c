@@ -150,7 +150,8 @@ static WORD nt_rdp_resolve_scan(WORD virtual_key)
 }
 
 static DWORD nt_rdp_emit_transition(PINPUT_RECORD records, DWORD capacity,
-    DWORD count, WORD scan, WORD virtual_key, BOOL down)
+    DWORD count, WCHAR character, WORD scan, WORD virtual_key,
+    DWORD control_state, BOOL down)
 {
     KEY_EVENT_RECORD *key;
     if (count >= capacity || scan == 0u || virtual_key == 0u) return 0u;
@@ -161,19 +162,24 @@ static DWORD nt_rdp_emit_transition(PINPUT_RECORD records, DWORD capacity,
     key->wRepeatCount = 1u;
     key->wVirtualKeyCode = virtual_key;
     key->wVirtualScanCode = (WORD)(scan & 0xffu);
-    if ((scan & 0x0100u) != 0u) key->dwControlKeyState = ENHANCED_KEY;
+    key->uChar.UnicodeChar = character;
+    key->dwControlKeyState = control_state;
+    if ((scan & 0x0100u) != 0u) key->dwControlKeyState |= ENHANCED_KEY;
     return count + 1u;
 }
 
 static DWORD nt_rdp_normalize_key(const KEY_EVENT_RECORD *input,
     PINPUT_RECORD output, DWORD capacity)
 {
-    static WORD pending_high_surrogate;
     KEY_EVENT_RECORD key;
     WORD scan;
     WORD virtual_key;
     SHORT mapped;
-    BYTE modifiers;
+    BYTE key_flags;
+    CHAR oem_character;
+    CHAR digit_text[4];
+    CHAR *digit;
+    DWORD control_state;
     DWORD count = 0u;
 
     if (input == NULL || output == NULL || capacity == 0u) return 0u;
@@ -193,43 +199,61 @@ static DWORD nt_rdp_normalize_key(const KEY_EVENT_RECORD *input,
         return 1u;
     }
     if (!key.bKeyDown || key.uChar.UnicodeChar == 0u) return 0u;
-    if (key.uChar.UnicodeChar >= 0xd800u && key.uChar.UnicodeChar <= 0xdbffu) {
-        pending_high_surrogate = key.uChar.UnicodeChar;
+    /* DoStringPaste is UTF-16 too.  A surrogate is not an independently
+     * representable PC key, so retain the original worker's one-WCHAR input
+     * boundary rather than inventing a Unicode code-point keyboard. */
+    if (key.uChar.UnicodeChar >= 0xd800u && key.uChar.UnicodeChar <= 0xdfffu)
         return 0u;
-    }
-    if (key.uChar.UnicodeChar >= 0xdc00u && key.uChar.UnicodeChar <= 0xdfffu) {
-        pending_high_surrogate = 0u;
-        return 0u;
-    }
-    pending_high_surrogate = 0u;
     mapped = VkKeyScanExW(key.uChar.UnicodeChar, GetKeyboardLayout(0u));
-    if (mapped == -1) return 0u;
+    if (mapped == -1) {
+        /* Source owner: ntcon/server/clipbrd.c::DoStringPaste.  Its OEM
+         * numeric-keypad fallback is the only representable route for a
+         * character outside the active keyboard layout. */
+        if (WideCharToMultiByte(GetConsoleOutputCP(), 0,
+                &key.uChar.UnicodeChar, 1, &oem_character, 1, NULL, NULL) != 1)
+            return 0u;
+        _itoa((unsigned char)oem_character, digit_text, 10);
+        if ((count = nt_rdp_emit_transition(output, capacity, count, 0,
+                0x38u, VK_MENU, LEFT_ALT_PRESSED, TRUE)) == 0u) return 0u;
+        for (digit = digit_text; *digit != '\0'; ++digit) {
+            virtual_key = (WORD)(*digit - '0' + VK_NUMPAD0);
+            scan = nt_rdp_resolve_scan(virtual_key);
+            if ((count = nt_rdp_emit_transition(output, capacity, count, 0,
+                    scan, virtual_key, LEFT_ALT_PRESSED, TRUE)) == 0u ||
+                (count = nt_rdp_emit_transition(output, capacity, count, 0,
+                    scan, virtual_key, LEFT_ALT_PRESSED, FALSE)) == 0u)
+                return 0u;
+        }
+        return nt_rdp_emit_transition(output, capacity, count,
+            key.uChar.UnicodeChar, 0x38u, VK_MENU, 0u, FALSE);
+    }
     virtual_key = (WORD)(mapped & 0xffu);
     scan = nt_rdp_resolve_scan(virtual_key);
     if (scan == 0u) return 0u;
-    modifiers = (BYTE)((mapped >> 8u) & 0xffu);
-    if ((modifiers & 2u) != 0u &&
+    key_flags = (BYTE)((mapped >> 8u) & 0xffu);
+    if ((key_flags & 6u) == 6u) {
+        if ((count = nt_rdp_emit_transition(output, capacity, count,
+            0, 0x38u, VK_MENU,
+            ENHANCED_KEY | LEFT_CTRL_PRESSED | RIGHT_ALT_PRESSED, TRUE)) == 0u)
+            return 0u;
+    } else if ((key_flags & 1u) != 0u &&
         (count = nt_rdp_emit_transition(output, capacity, count,
-            0x1du, VK_CONTROL, TRUE)) == 0u) return 0u;
-    if ((modifiers & 4u) != 0u &&
+            0, 0x2au, VK_SHIFT, SHIFT_PRESSED, TRUE)) == 0u) return 0u;
+    control_state = 0u;
+    if ((key_flags & 1u) != 0u) control_state |= SHIFT_PRESSED;
+    if ((key_flags & 2u) != 0u) control_state |= LEFT_CTRL_PRESSED;
+    if ((key_flags & 4u) != 0u) control_state |= RIGHT_ALT_PRESSED;
+    if ((count = nt_rdp_emit_transition(output, capacity, count,
+            key.uChar.UnicodeChar, scan, virtual_key, control_state, TRUE)) == 0u ||
         (count = nt_rdp_emit_transition(output, capacity, count,
-            0x38u, VK_MENU, TRUE)) == 0u) return 0u;
-    if ((modifiers & 1u) != 0u &&
+            key.uChar.UnicodeChar, scan, virtual_key, control_state, FALSE)) == 0u)
+        return 0u;
+    if ((key_flags & 6u) == 6u)
+        return nt_rdp_emit_transition(output, capacity, count,
+            0, 0x38u, VK_MENU, ENHANCED_KEY, FALSE);
+    if ((key_flags & 1u) != 0u &&
         (count = nt_rdp_emit_transition(output, capacity, count,
-            0x2au, VK_SHIFT, TRUE)) == 0u) return 0u;
-    if ((count = nt_rdp_emit_transition(output, capacity, count, scan,
-            virtual_key, TRUE)) == 0u ||
-        (count = nt_rdp_emit_transition(output, capacity, count, scan,
-            virtual_key, FALSE)) == 0u) return 0u;
-    if ((modifiers & 1u) != 0u &&
-        (count = nt_rdp_emit_transition(output, capacity, count,
-            0x2au, VK_SHIFT, FALSE)) == 0u) return 0u;
-    if ((modifiers & 4u) != 0u &&
-        (count = nt_rdp_emit_transition(output, capacity, count,
-            0x38u, VK_MENU, FALSE)) == 0u) return 0u;
-    if ((modifiers & 2u) != 0u &&
-        (count = nt_rdp_emit_transition(output, capacity, count,
-            0x1du, VK_CONTROL, FALSE)) == 0u) return 0u;
+            0, 0x2au, VK_SHIFT, 0u, FALSE)) == 0u) return 0u;
     return count;
 }
 
