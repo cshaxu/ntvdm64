@@ -7,7 +7,7 @@ D11-D16 and D26 from the
 [original-owner audit](../etc/evidence/opennt-replacement-audit-20260912.md).
 It is now admitted as M0 T408.  [Status](../states/CURRENT.md) remains the
 sole authority for the one active S packet; this proposal is the dependency
-ordered execution design.  S1--S3 are delivered, S4 is active, and S5--S7
+ordered execution design.  S1--S4 are delivered, S5 is active, and S6--S7
 remain planned work within the admitted T.  They are not separate T candidates
 and may not run concurrently with the active packet.
 

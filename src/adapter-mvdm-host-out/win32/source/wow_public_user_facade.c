@@ -6,52 +6,8 @@
  */
 
 #include <windows.h>
-#include <string.h>
-
 #include "adapter-mvdm-host-out/win32/include/wow32_provider_private.h"
 #include "opennt-abi/source/public/internal/windows/inc/wingdip.h"
-
-/* DIVERGENCE(ADAPTER-WIN32-050): OpenNT ntuser's MBToWCSEx allocates with
- * UserRtlAllocMem and WOW32 releases the reached allocations with LocalFree.
- * The selected calls use the same caller-owned pointer/result contract, so
- * use LocalAlloc rather than inventing a private heap or conversion cache. */
-int MBToWCSEx(WORD code_page, LPCSTR ansi, int ansi_count, LPWSTR *wide_out,
-    int wide_count, BOOL allocate)
-{
-    UINT effective_code_page;
-    LPWSTR destination;
-    int converted;
-
-    if (ansi == NULL || wide_out == NULL || ansi_count == 0 || wide_count == 0)
-        return 0;
-    if (ansi_count == -1) {
-        ansi_count = (int)strlen(ansi) + 1;
-    } else if (ansi_count < -1) {
-        return 0;
-    }
-    if (wide_count == -1) {
-        if (!allocate) return 0;
-        wide_count = ansi_count;
-    } else if (wide_count < -1) {
-        return 0;
-    }
-
-    destination = *wide_out;
-    if (allocate) {
-        destination = (LPWSTR)LocalAlloc(LMEM_FIXED,
-            (SIZE_T)wide_count * sizeof(WCHAR));
-        if (destination == NULL) return 0;
-        *wide_out = destination;
-    } else if (destination == NULL) {
-        return 0;
-    }
-
-    effective_code_page = code_page == 0 ? CP_ACP : (UINT)code_page;
-    converted = MultiByteToWideChar(effective_code_page, 0, ansi, ansi_count,
-        destination, wide_count);
-    if (converted == 0 && allocate) (void)LocalFree(destination);
-    return converted;
-}
 
 /* DIVERGENCE(ADAPTER-WIN32-051): the selected WOW32 call supplies a converted
  * 16-bit dialog template and `SCDLG_ANSI`; the original ntuser helper then

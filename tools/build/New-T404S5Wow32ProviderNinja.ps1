@@ -66,6 +66,8 @@ $providerSupportSources = @(
     (Join-Path $adapterWow 'wow_sim32_pointer_compat.c'),
     (Join-Path $adapterWow 'wow_user_callback_callconv.c'),
     (Join-Path $adapterWow 'wow_private_user_compat.c'),
+    (Join-Path $root 'src/opennt-host/windows/core/ntuser/rtl/chartran.c'),
+    (Join-Path $root 'src/adapter-mvdm-host-out/win32/source/ntuser_rtl_compat.c'),
     (Join-Path $root 'src/adapter-mvdm-host-out/win32/source/wow_public_user_facade.c'),
     # This is the already-admitted narrow historical CRT spelling bridge.  It
     # has no parent-machine state, so the late-loaded DLL may own its copy.
