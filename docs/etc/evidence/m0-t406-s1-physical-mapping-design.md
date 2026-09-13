@@ -465,3 +465,68 @@ proof of a mapping fault or a successful memory semantic test. Its original
 DOS allocation/query and memory-provider cause is unassigned research debt;
 do not fix it as part of logging. WRITE's exit 255 is likewise an execution
 limit here, not a newly established cause. Full WRITE remains existing debt.
+
+## P5: upstream gates and a real guest EMS workload
+
+Owner approved upstream observation and isolated EMS configuration on
+2026-09-12. No mapping, guest CPU, return-value or product launch policy was
+changed. DIV-266 adds bounded scalar observations at original config, EMS and
+WOW startup sites; adapter/app observations identify DPMI ingress and exit.
+The logger preserves LastError/errno and logs each upstream slot once (96
+slots maximum), in addition to the prior bounded mapping sites. These are
+first-hit markers, not counts; early EMS initialization errors and invalid
+EMS function numbers are not covered by the normal-return marker.
+
+Build root: build/M0-T406/S1/r003-upstream-observation. Node 22.22.1 and the
+formal x86 Ninja generator/runner completed a fresh 437-step build, then a
+15-step dependency-based incremental build adding the WOW failure sites.
+Compiler logs are build.log and build-loader.log in that root. The deployed
+final EXE is 3,236,864 bytes, SHA-256
+3a63c66334739eda455aa464df64a7305391b129c94992121501cf018d7371e5.
+Focused mapping tests passed normal and denied-log cases; the observer
+compiled with x86 /MT /W4 /WX. NASM built the 432-byte EMS guest probe.
+
+| Run / PID | Observation | Interpretation |
+| --- | --- | --- |
+| MEM / 54408 | EMS config size 0, init pages 0, exit 0. | Default profile does not expose EMS mapping coverage. |
+| COMMAND / 52164 | Same zero EMS gates; prompt and injected exit, result 0. | Successful shell is not an EMS mapping test. |
+| EDIT / 28000 | Same zero EMS gates; welcome/editor, bounded Job timeout. | No new full interaction acceptance. |
+| WRITE / 55208 | DPMI 53:0f, WOW ingress, exit 255. | Supersedes any inference that blank Console means no WOW ingress. |
+| WRITE / 28416, final build | wow.W32Init.false followed by exit 255. | WOW32 loaded and required entry lookups succeeded; initialization returned FALSE. Exact internal failing branch remains unproved. No DIB coverage. |
+| EMS probe / 41440, final build | Config 2048 KiB, init 128 pages; map/unmap/alias-hit; guest PASS, exit 0. | Actual guest EMS path reaches and uses implemented mapping providers. |
+
+Runtime reports are t406-r003-mem.txt, t406-r003-command.txt,
+t406-r003-edit.txt, t406-r003-write.txt, t406-r003-write-loader.txt and
+t406-r003-ems-enabled-v2.txt under O:\ntvdm64\logs\. Mapping logs use the
+same PIDs; the positive EMS log is
+physical-mapping-41440-01dd432508ff0e33.log in that directory.
+The first four runs preceded the final WOW loader observation hooks.
+
+The isolated package generator copies existing installed media, changes only
+the copied PIF EMS capacity to 2048 KiB and startup-file paths to temporary
+Q:, and retains root default config/autoexec as well. Its manifest records
+source and copied hashes. No installed PIF/config or default EMS setting was
+modified. Q: mapped only the build-owned ems-package-v2 directory during the
+test and was removed in finally; subst afterward reported no mappings.
+The first package omitted root startup defaults and stopped at the original
+bad-system-file dialog (PID 28092), despite EMS config 2048/initialized 1.
+Adding the missing copied defaults let the test proceed; the precise PIF
+override-ignore branch was not separately instrumented. This was a test
+package completeness correction, not a product fix.
+
+The COM probe uses the original INT 67h services 40h/41h/43h/44h/45h. It
+allocates two pages, writes distinct data while switching logical pages,
+restores page 0 and checks preserved data, maps it into a second physical
+frame, writes through one alias and verifies the other, then unmaps both
+frames and frees the handle. PASS proves this bounded guest scenario, not
+all EMS services, backing restoration after unmap, cross-page accesses,
+allocation failure cleanup, or external DIB memory correctness.
+
+Conclusion: VdmMapDosMemory and VdmUnmapDosMemory are live implemented
+providers, not removable success stubs. VdmSetPhysRecStructs and external
+DIB publication/prepare remain without positive integration coverage here.
+The missing production publish caller remains a static protocol concern;
+this run does not establish it as the cause of W32Init failure. Preserve the
+EMS semantics during source restoration; keep the previously quantified
+width/protocol rollback candidates conditional. No functional repair or S1
+closure is claimed. P4/P5 delivery remains pending approved push destination.

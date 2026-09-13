@@ -6,6 +6,8 @@
 #include "insignia.h"
 #include "host_def.h"
 #include <nt_thred.h>
+/* DIVERGENCE(MVDM-HOST-DIV-266): preserve original WOW loader outcomes. */
+#include "mvdm_softpc_physical_mapping.h"
 
 #ifndef MONITOR
 #include <gdpvar.h>
@@ -189,6 +191,8 @@ void MS_bop_1(void) {
     //Load the WOW DLL
     if ((hWOWDll = SafeLoadLibrary("WOW32")) == NULL)
     {
+        /* DIVERGENCE(MVDM-HOST-DIV-266): before any cleanup changes LastError. */
+        mvdm_softpc_mapping_observe(MVDM_MAPPING_WOW_FAILURE, "wow.load.failed", GetLastError(), 0, 0);
 #ifndef PROD
         HostDebugBreak();
 #endif
@@ -199,6 +203,8 @@ void MS_bop_1(void) {
     // Get the init entry point and dispatch entry point
     if ((WOWInitEntry = (MYFARPROC)GetProcAddress(hWOWDll, "W32Init")) == NULL)
     {
+        /* DIVERGENCE(MVDM-HOST-DIV-266): observation only. */
+        mvdm_softpc_mapping_observe(MVDM_MAPPING_WOW_FAILURE, "wow.W32Init.missing", GetLastError(), 0, 0);
 #ifndef PROD
         HostDebugBreak();
 #endif
@@ -212,6 +218,8 @@ void MS_bop_1(void) {
        export address and call path; no WOW provider is enabled by this cast. */
     if ((WOWDispatchEntry = (MYFARPROC)GetProcAddress(hWOWDll, "W32Dispatch")) == NULL)
     {
+        /* DIVERGENCE(MVDM-HOST-DIV-266): observation only. */
+        mvdm_softpc_mapping_observe(MVDM_MAPPING_WOW_FAILURE, "wow.W32Dispatch.missing", GetLastError(), 0, 0);
 #ifndef PROD
         HostDebugBreak();
 #endif
@@ -223,6 +231,8 @@ void MS_bop_1(void) {
     //Get Comms functions
     if ((GetCommHandle = (GCHfn) GetProcAddress(hWOWDll, "GetCommHandle")) == NULL)
     {
+        /* DIVERGENCE(MVDM-HOST-DIV-266): observation only. */
+        mvdm_softpc_mapping_observe(MVDM_MAPPING_WOW_FAILURE, "wow.GetCommHandle.missing", GetLastError(), 0, 0);
 #ifndef PROD
         HostDebugBreak();
 #endif
@@ -233,6 +243,8 @@ void MS_bop_1(void) {
 
     if ((GetCommShadowMSR = (GCSfn) GetProcAddress(hWOWDll, "GetCommShadowMSR")) == NULL)
     {
+        /* DIVERGENCE(MVDM-HOST-DIV-266): observation only. */
+        mvdm_softpc_mapping_observe(MVDM_MAPPING_WOW_FAILURE, "wow.GetCommShadowMSR.missing", GetLastError(), 0, 0);
 #ifndef PROD
         HostDebugBreak();
 #endif
@@ -246,6 +258,8 @@ void MS_bop_1(void) {
                                                     "W32HungAppNotifyThread");
     if (!pW32HungAppNotifyThread)
     {
+        /* DIVERGENCE(MVDM-HOST-DIV-266): observation only. */
+        mvdm_softpc_mapping_observe(MVDM_MAPPING_WOW_FAILURE, "wow.HungAppNotify.missing", GetLastError(), 0, 0);
 #ifndef PROD
         HostDebugBreak();
 #endif
@@ -258,6 +272,8 @@ void MS_bop_1(void) {
     // Call the init routine
     if ((*WOWInitEntry)() == FALSE)
     {
+        /* DIVERGENCE(MVDM-HOST-DIV-266): FALSE is the original result. */
+        mvdm_softpc_mapping_observe(MVDM_MAPPING_WOW_FAILURE, "wow.W32Init.false", 0, 0, 0);
 #ifndef PROD
         HostDebugBreak();
 #endif
@@ -266,6 +282,8 @@ void MS_bop_1(void) {
     }
 
     WowModeInitialized = TRUE;
+    /* DIVERGENCE(MVDM-HOST-DIV-266): completed original initialization. */
+    mvdm_softpc_mapping_observe(MVDM_MAPPING_WOW_READY, "wow.ready", 0, 0, 0);
     }
 
 #if !defined(CPU_40_STYLE) || defined(CCPU)

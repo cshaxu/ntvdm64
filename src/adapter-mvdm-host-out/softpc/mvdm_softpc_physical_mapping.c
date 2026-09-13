@@ -81,6 +81,15 @@ static int add_overflow(uint32_t left, uint32_t right, uint32_t *sum)
     return 0;
 }
 
+void mvdm_softpc_mapping_observe(unsigned slot, const char *event,
+    uint32_t a, uint32_t b, uint32_t c)
+{
+    static volatile LONG observed[96];
+    if (slot < 96 && !observed[slot] &&
+        InterlockedCompareExchange(&observed[slot], 1, 0) == 0)
+        mapping_observe(event, a, b, c);
+}
+
 static physical_mapping_record *find_identifier(session *owner,
     uint32_t identifier)
 {

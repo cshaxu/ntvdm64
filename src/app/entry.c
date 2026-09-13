@@ -4,6 +4,7 @@
 #include "app/presentation_window.h"
 #include "adapter-mvdm-host-out/basesrv/include/mvdm_command_native_child.h"
 #include "adapter-mvdm-host-out/softpc/include/mvdm_softpc_termination.h"
+#include "adapter-mvdm-host-out/softpc/include/mvdm_softpc_physical_mapping.h"
 #include "adapter-mvdm-host-out/win32/include/mvdm_base_vdm_environment.h"
 
 #include <stdio.h>
@@ -209,6 +210,9 @@ int main(int argc, char **argv)
     }
 
 finish:
+    /* T406 diagnostic only; original startup result and cleanup remain intact. */
+    mvdm_softpc_mapping_observe(MVDM_MAPPING_APP_RETURN, "app.return",
+        (uint32_t)result, 0, 0);
     app_launch_declaration_release_softpc_arguments(softpc_argv);
     mvdm_base_vdm_environment_restore(&vdm_environment);
     if (!app_presentation_window_close(&presentation) && result == 0)

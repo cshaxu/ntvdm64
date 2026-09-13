@@ -86,12 +86,19 @@ int main(int argc, char **argv)
     DWORD result, exit_code = STILL_ACTIVE;
     int timed_out;
     const char *binary;
+    const char *package_root = "O:\\ntvdm64";
+    char executable[256];
 
-    if (argc != 3) return 64;
+    if (argc != 3 && argc != 4) return 64;
+    if (argc == 4) {
+        if (strcmp(argv[3], "Q:\\")) return 64;
+        package_root = argv[3];
+    }
     if (!strcmp(argv[1], "mem")) binary = "mem.exe";
     else if (!strcmp(argv[1], "command")) binary = "command.com";
     else if (!strcmp(argv[1], "edit")) binary = "edit.com";
     else if (!strcmp(argv[1], "write")) binary = "system32\\write.exe";
+    else if (!strcmp(argv[1], "ems")) binary = "EMSPROBE.COM";
     else return 64;
     if (strncmp(argv[2], "O:\\ntvdm64\\logs\\", 16)) return 64;
     if (fopen_s(&report, argv[2], "wx") || !report) return 65;
@@ -136,10 +143,11 @@ int main(int argc, char **argv)
             &association, sizeof(association)) ||
         !SetInformationJobObject(job, JobObjectExtendedLimitInformation,
             &limits, sizeof(limits))) return 67;
-    snprintf(command, sizeof(command), "O:\\ntvdm64\\ntvdm32.exe %s", binary);
+    snprintf(executable, sizeof(executable), "%s\\ntvdm32.exe", package_root);
+    snprintf(command, sizeof(command), "%s %s", executable, binary);
     fprintf(report, "command=%s\n", command);
-    if (!CreateProcessA("O:\\ntvdm64\\ntvdm32.exe", command, NULL, NULL, TRUE,
-            CREATE_SUSPENDED, NULL, "O:\\ntvdm64", &startup, &child)) {
+    if (!CreateProcessA(executable, command, NULL, NULL, TRUE,
+            CREATE_SUSPENDED, NULL, package_root, &startup, &child)) {
         fprintf(report, "create-error=%lu\n", GetLastError());
         fclose(report);
         return 68;

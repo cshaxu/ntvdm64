@@ -50,6 +50,15 @@ cleanup; WRITE exits 255 before visible UI. All four logs contain observer-activ
 only, no mapping call/hit. See S1 evidence P4; this does not prove mapping
 unnecessary or WRITE/DIB correctness. MEM's anomalous size output is debt.
 
+Owner approved upstream observation: “批准执行” for EMS configuration,
+initialization and service ingress; WRITE's earliest exit and WOW reachability;
+then a real guest EMS allocation/map/switch/free workload using an isolated PIF
+if default EMS is disabled. S1 may add minimal registered observational hooks
+and test media, with build root build/M0-T406/S1/r003-upstream-observation.
+Keep normal CLI, defaults and mapping behavior unchanged. Report the first
+blocked edge and restoration design before functional repair; no CPU change.
+The prior P4 push remains pending destination approval after safety rejection.
+
 ## Active Packet
 
 ### M0 T406 S1 - Original physical mapping research and restoration design
@@ -81,11 +90,17 @@ unnecessary or WRITE/DIB correctness. MEM's anomalous size output is debt.
   unaccepted 1daff0ace WIP. T405 changed no product behavior and proves no new
   WRITE execution. [T404 closure](../history/m0-t404-owner-directed-closure.md)
   preserves prior runtime limitations.
-- Latest deployed executable: O:\ntvdm64\ntvdm32.exe, T406 S1 P3 mapping
-  observation, 3,235,328 bytes; SHA-256
-  e952e78f1202ed1f95427bd7d6178b722d8b64bf839edf14c5717d489e612e6d.
+- Latest deployed executable: O:\ntvdm64\ntvdm32.exe, T406 S1 P5 upstream
+  observation, 3,236,864 bytes; SHA-256
+  3a63c66334739eda455aa464df64a7305391b129c94992121501cf018d7371e5.
   Source behavior remains the prior mapping baseline plus bounded observation;
   no new WRITE acceptance. Previous EXE retained in the S1 run root.
+- P5 research: default EMS size/pages are zero; an isolated 2 MiB EMS guest
+  probe passed allocation, switching, shared alias writes, unmapping and free,
+  with actual map/unmap/alias-hit logs. WRITE reaches WOW ingress but W32Init
+  returns FALSE; DIB remains unexercised. See the S1 report for exact runs.
+  This is bounded coverage, not full mapping or WRITE acceptance. S1 remains
+  open; P4/P5 push is pending the recorded destination approval.
 - [Queue](QUEUE.md) owns candidate order and pending repairs; [debt](TODO.md)
   retains full WRITE limitations. Ignored builds and runtime logs are preserved,
   not deleted to obtain Git cleanliness. Commit/push and status verification

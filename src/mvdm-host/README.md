@@ -1,5 +1,12 @@
 # mvdm-host
 
+Temporary observation register: MVDM-HOST-DIV-266 adds scalar-only hooks in
+softpc.new/host/src/{config.c,nt_bop.c} and softpc.new/base/bios/emm_fncs.c for EMS size,
+initialization result, request/result registers and original WOW loader failures. The existing physical
+mapping adapter owns bounded first-hit output; original branches, register
+results and dispatch are unchanged. This owner-authorized T406 S1 instrument
+is not recovered behavior and is removed after upstream coverage is resolved.
+
 Original-relative MVDM host mirror. M0 T311 re-rooted original support
 carriers (`dirs`, `makefil0`, `inc`, `oemuni`, `suballoc`) here, beside their
 original MVDM host consumers. Standalone tools and selected firmware inputs

@@ -1,4 +1,5 @@
 #include "mvdm_softpc_termination.h"
+#include "mvdm_softpc_physical_mapping.h"
 
 #include "session/session.h"
 
@@ -315,6 +316,8 @@ int mvdm_softpc_terminate_current_session(uint32_t vdm_for_wow,
     int formatted;
 
     (void)vdm_for_wow;
+    mvdm_softpc_mapping_observe(MVDM_MAPPING_TERMINATION,
+        mvdm_softpc_termination_origin, completion_code, vdm_for_wow, 0);
     formatted = snprintf(message, sizeof(message),
         "MVDM-SESSION-TERMINATION origin=%s code=0x%08lX\r\n",
         mvdm_softpc_termination_origin, (unsigned long)completion_code);
@@ -349,6 +352,8 @@ void mvdm_softpc_record_unhandled_exception(
     if (exception_info == NULL || exception_info->ExceptionRecord == NULL)
         return;
     record = exception_info->ExceptionRecord;
+    mvdm_softpc_mapping_observe(MVDM_MAPPING_EXCEPTION, "host.exception",
+        record->ExceptionCode, (uint32_t)(uintptr_t)record->ExceptionAddress, 0);
     context = exception_info->ContextRecord;
     instruction_pointer = 0;
     stack_pointer = 0;
@@ -447,6 +452,8 @@ void mvdm_softpc_record_main_return(int result)
     DWORD written;
     int formatted;
 
+    mvdm_softpc_mapping_observe(MVDM_MAPPING_MAIN_RETURN, "main.return",
+        (uint32_t)result, 0, 0);
     report_path_bytes = GetEnvironmentVariableA(
         "MVDM_MAIN_RETURN_REPORT_PATH", report_path, (DWORD)sizeof(report_path));
     if (report_path_bytes == 0 || report_path_bytes >= sizeof(report_path))
@@ -481,6 +488,9 @@ void mvdm_softpc_record_bop_dispatch(unsigned int selector,
      * Console: original COMMAND owns that surface.  The bounded report path
      * is captured and removed before original environment processing, and an
      * absent path makes the observation a no-op. */
+    if (selector == 0x53u)
+        mvdm_softpc_mapping_observe(MVDM_MAPPING_DPMI, "dpmi.entry",
+            service, guest_cs, guest_ip);
     message[18] = hex[(selector >> 4) & 0x0fu];
     message[19] = hex[selector & 0x0fu];
     message[21] = hex[(service >> 4) & 0x0fu];
@@ -604,6 +614,8 @@ void mvdm_softpc_record_wow_bop_entry(unsigned int guest_cs,
     char message[80];
     int formatted;
 
+    mvdm_softpc_mapping_observe(MVDM_MAPPING_WOW, "wow.entry",
+        guest_cs, guest_ip, 0);
     if (mvdm_softpc_wow_bop_report_path[0] == '\0') return;
     formatted = snprintf(message, sizeof(message),
         "MVDM-WOW-BOP-ENTRY cs=%04X ip=%04X\r\n",

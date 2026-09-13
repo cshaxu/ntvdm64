@@ -28,4 +28,17 @@ int mvdm_softpc_physical_mapping_resolve(uint32_t intel_address,
     uint8_t **host_byte_out);
 void mvdm_softpc_physical_mapping_cancel(uint32_t identifier);
 
+/* Temporary scalar-only observation. EMS request/result slots correspond
+ * to service numbers 40h..5fh. Not a mapping or dispatch interface. */
+enum mvdm_mapping_observation_slot {
+    MVDM_MAPPING_CONFIG, MVDM_MAPPING_EMS_INIT,
+    MVDM_MAPPING_DPMI, MVDM_MAPPING_WOW,
+    MVDM_MAPPING_MAIN_RETURN, MVDM_MAPPING_TERMINATION,
+    MVDM_MAPPING_EXCEPTION, MVDM_MAPPING_APP_RETURN,
+    MVDM_MAPPING_WOW_FAILURE, MVDM_MAPPING_WOW_READY,
+    MVDM_MAPPING_EMS_REQUEST = 32, MVDM_MAPPING_EMS_RESULT = 64
+};
+void mvdm_softpc_mapping_observe(unsigned slot, const char *event,
+    uint32_t a, uint32_t b, uint32_t c);
+
 #endif

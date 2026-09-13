@@ -43,6 +43,8 @@
 #include "nt_event.h"
 #include "nt_reset.h"
 #include "nt_fdisk.h"
+/* DIVERGENCE(MVDM-HOST-DIV-266): bounded scalar-only mapping observation. */
+#include "mvdm_softpc_physical_mapping.h"
 
 #ifdef LIM
 #include "emm.h"
@@ -496,6 +498,10 @@ GLOBAL VOID config( VOID )
         if(!VDMForWOW && config_inquire(C_LIM_SIZE, NULL) &&
            init_lim_configuration_data(&lim_config_data))
             lim_config_data.initialized = TRUE;
+
+        /* DIVERGENCE(MVDM-HOST-DIV-266): observe, never override configuration. */
+        mvdm_softpc_mapping_observe(MVDM_MAPPING_CONFIG, "ems.config",
+            emsMemorySize, VDMForWOW, lim_config_data.initialized);
 
 #endif
 

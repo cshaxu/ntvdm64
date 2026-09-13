@@ -98,6 +98,8 @@ AMMENDMENTS	:
 #include "timer.h"
 #include <error.h>
 #include "gisp_sas.h"
+/* DIVERGENCE(MVDM-HOST-DIV-266): observe existing EMS ingress and outcomes. */
+#include "mvdm_softpc_physical_mapping.h"
 
 /*	Global Variables		*/
 #ifdef SCCSID
@@ -287,6 +289,10 @@ GLOBAL void emm_io IFN0()
 
 		func_num = getAH() - MIN_FUNC_NO;
 
+        /* DIVERGENCE(MVDM-HOST-DIV-266): one witness per original service. */
+        mvdm_softpc_mapping_observe(MVDM_MAPPING_EMS_REQUEST + func_num,
+            "ems.request", getAX(), getBX(), getDX());
+
 		sure_note_trace5(LIM_VERBOSE, "func %s - AX %#x BX %#x CX %#x DX %#x ",
 		func_names[func_num],getAX(),getBX(),getCX(),getDX());
 
@@ -296,6 +302,10 @@ GLOBAL void emm_io IFN0()
 		      );
 #endif
 		(*emm_func[func_num])();	
+
+        /* DIVERGENCE(MVDM-HOST-DIV-266): original result, no dispatch change. */
+        mvdm_softpc_mapping_observe(MVDM_MAPPING_EMS_RESULT + func_num,
+            "ems.result", (func_num + MIN_FUNC_NO), getAX(), getBX());
 
 #ifdef EMM_DEBUG
 		printf("emm_io exit: AX=%x, BX=%x, CX=%x, DX=%x\n",
@@ -456,6 +466,9 @@ GLOBAL void emm_init IFN0()
 
 	total_pages = get_total_pages();
 	setBX(total_pages);
+    /* DIVERGENCE(MVDM-HOST-DIV-266): BOP 66 result consumed by guest init. */
+    mvdm_softpc_mapping_observe(MVDM_MAPPING_EMS_INIT, "ems.init.return",
+        (unsigned short)total_pages, 0, 0);
 
 	/* Let the rest of SoftPC know that Expanded Memory is present
 	 * and active
