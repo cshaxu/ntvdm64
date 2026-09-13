@@ -480,6 +480,7 @@ static INIT_ONCE mvdm_console_prepend_once = INIT_ONCE_STATIC_INIT;
 static CRITICAL_SECTION mvdm_console_prepend_lock;
 static HANDLE mvdm_console_prepend_event;
 static mvdm_console_prepend_node *mvdm_console_prepend_head;
+static volatile LONG mvdm_console_alt_enter_pending;
 
 static BOOL CALLBACK initialize_console_prepend_queue(PINIT_ONCE once,
     PVOID parameter, PVOID *context)
@@ -536,28 +537,73 @@ static DWORD read_console_prepend(HANDLE input, PINPUT_RECORD records,
     return 1u;
 }
 
+/* DIVERGENCE(ADAPTER-WIN32-047): the NT4 Console Server handled WM_SYSKEY
+ * Alt+Enter before it reached the VDM input buffer.  Modern public Console
+ * returns records after that retired server stage.  Consume only the paired
+ * reserved host shortcut here; it neither toggles a display nor manufactures
+ * a guest input record. */
+static BOOL consume_console_alt_enter(PINPUT_RECORD record)
+{
+    KEY_EVENT_RECORD *key;
+
+    if (record->EventType != KEY_EVENT) return FALSE;
+    key = &record->Event.KeyEvent;
+    if (key->wVirtualKeyCode != VK_RETURN) return FALSE;
+    if (key->bKeyDown &&
+        (key->dwControlKeyState & (LEFT_ALT_PRESSED | RIGHT_ALT_PRESSED)) != 0u &&
+        (key->dwControlKeyState & (LEFT_CTRL_PRESSED | RIGHT_CTRL_PRESSED)) == 0u) {
+        InterlockedExchange(&mvdm_console_alt_enter_pending, 1);
+        return TRUE;
+    }
+    if (!key->bKeyDown &&
+        InterlockedExchangeAdd(&mvdm_console_alt_enter_pending, 0) != 0) {
+        InterlockedExchange(&mvdm_console_alt_enter_pending, 0);
+        return TRUE;
+    }
+    return FALSE;
+}
+
 BOOL WINAPI ReadConsoleInputExW(HANDLE input, PINPUT_RECORD records, DWORD count,
                                 LPDWORD read, USHORT flags)
 {
     DWORD available;
     DWORD local_result;
+    INPUT_RECORD raw_record;
     if ((flags & ~CONSOLE_READ_VALID) != 0u) { SetLastError(ERROR_INVALID_PARAMETER); return FALSE; }
     local_result = read_console_prepend(input, records, count, read,
         (flags & CONSOLE_READ_NOREMOVE) == 0u);
     if (local_result == (DWORD)-1) return FALSE;
     if (local_result != 0u) return TRUE;
-    if ((flags & CONSOLE_READ_NOWAIT) != 0u) {
-        /* Peek is the public operation that tests and observes the same
-         * queue atomically. GetNumberOfConsoleInputEvents then Read races
-         * an arriving/removed record and is not the NT4 contract. */
-        if (!PeekConsoleInputW(input, records, count, &available)) return FALSE;
-        if (available == 0u) { if (read != NULL) *read = 0u; return TRUE; }
-        if ((flags & CONSOLE_READ_NOREMOVE) != 0u) return TRUE;
-        return ReadConsoleInputW(input, records, count, read);
+    if (count == 0u)
+        return (flags & CONSOLE_READ_NOREMOVE) != 0u ?
+            PeekConsoleInputW(input, records, count, read) :
+            ReadConsoleInputW(input, records, count, read);
+    for (;;) {
+        /* Peek tests the same public queue as Read.  Do not use the old
+         * GetNumberOfConsoleInputEvents/Read pair: it races a queue change. */
+        if ((flags & (CONSOLE_READ_NOWAIT | CONSOLE_READ_NOREMOVE)) != 0u) {
+            if (!PeekConsoleInputW(input, &raw_record, 1u, &available)) return FALSE;
+            if (available == 0u) { if (read != NULL) *read = 0u; return TRUE; }
+            if (!consume_console_alt_enter(&raw_record)) {
+                if ((flags & CONSOLE_READ_NOREMOVE) != 0u) {
+                    records[0] = raw_record;
+                    if (read != NULL) *read = 1u;
+                    return TRUE;
+                }
+                if (!ReadConsoleInputW(input, records, 1u, read)) return FALSE;
+                return TRUE;
+            }
+            /* The reserved host shortcut must be removed even for NOREMOVE:
+             * the original server had already consumed it before this API. */
+            if (!ReadConsoleInputW(input, &raw_record, 1u, &available)) return FALSE;
+            continue;
+        }
+        if (!ReadConsoleInputW(input, &raw_record, 1u, &available)) return FALSE;
+        if (available == 0u || consume_console_alt_enter(&raw_record)) continue;
+        records[0] = raw_record;
+        if (read != NULL) *read = 1u;
+        return TRUE;
     }
-    if ((flags & CONSOLE_READ_NOREMOVE) != 0u)
-        return PeekConsoleInputW(input, records, count, read);
-    return ReadConsoleInputW(input, records, count, read);
 }
 
 BOOL WINAPI WriteConsoleInputVDMW(HANDLE input, PINPUT_RECORD records, DWORD count,

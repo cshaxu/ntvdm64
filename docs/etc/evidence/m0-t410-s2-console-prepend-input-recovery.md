@@ -2,9 +2,10 @@
 
 ## Scope
 
-This record implements only D28 and the NOWAIT/NOREMOVE portion of D29. It
-does not claim keyboard normalization, layout ownership, Alt+Enter pairing,
-graphics presentation, or interactive COMMAND/EDIT acceptance.
+This record implements D28 and the returned-record/NOWAIT/NOREMOVE and
+Alt+Enter-pair portions of D29. It does not claim keyboard normalization,
+layout ownership, graphics presentation, or interactive COMMAND/EDIT
+acceptance.
 
 ## Original contract and selected boundary
 
@@ -35,6 +36,15 @@ places a public `T` record in `CONIN$`, returns a VDM `F` record, proves the
 private event is signalled, verifies `NOWAIT|NOREMOVE` observes `F` without
 consuming it, consumes `F`, observes that the private event resets, then
 consumes public `T`. This is the direct positive/negative ordering contract.
+
+The same fixture then queues Alt+Enter down, Alt+Enter up, and `K`. The
+adapter consumes the reserved pair, including when the caller asks for
+`NOREMOVE`, and exposes only `K`; the later ordinary read still obtains `K`.
+This matches the original `HandleSysKeyEvent` direction: the Console Server
+performed the historical fullscreen action on key-down and returned `FALSE`,
+so neither half of that system-key pair entered VDM input. The modern adapter
+performs no fullscreen substitute because T410 S1 retired the only project
+window receiver.
 
 The fixture and adapter compiled and linked as x86 from
 `build/M0-T388/S7/console-contract-x86`. The noninteractive automation

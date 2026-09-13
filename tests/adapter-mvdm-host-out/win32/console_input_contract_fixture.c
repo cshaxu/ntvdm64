@@ -50,6 +50,9 @@ int main(void)
     INPUT_RECORD queued[2];
     INPUT_RECORD tail = { 0 };
     INPUT_RECORD front = { 0 };
+    INPUT_RECORD alt_down = { 0 };
+    INPUT_RECORD alt_up = { 0 };
+    INPUT_RECORD key = { 0 };
 
     if (ReadConsoleInputExW(INVALID_HANDLE_VALUE, NULL, 0u, &count, 0x8000u) ||
         GetLastError() != ERROR_INVALID_PARAMETER) return 1;
@@ -83,6 +86,25 @@ int main(void)
         !ReadConsoleInputExW(input, queued, 1u, &count,
             CONSOLE_READ_NOWAIT) || count != 1u ||
         queued[0].Event.KeyEvent.uChar.UnicodeChar != L'T') return 19;
+    alt_down.EventType = KEY_EVENT;
+    alt_down.Event.KeyEvent.bKeyDown = TRUE;
+    alt_down.Event.KeyEvent.wVirtualKeyCode = VK_RETURN;
+    alt_down.Event.KeyEvent.dwControlKeyState = LEFT_ALT_PRESSED;
+    alt_up = alt_down;
+    alt_up.Event.KeyEvent.bKeyDown = FALSE;
+    alt_up.Event.KeyEvent.dwControlKeyState = 0u;
+    key.EventType = KEY_EVENT;
+    key.Event.KeyEvent.bKeyDown = TRUE;
+    key.Event.KeyEvent.uChar.UnicodeChar = L'K';
+    if (!WriteConsoleInputW(input, &alt_down, 1u, &count) || count != 1u ||
+        !WriteConsoleInputW(input, &alt_up, 1u, &count) || count != 1u ||
+        !WriteConsoleInputW(input, &key, 1u, &count) || count != 1u ||
+        !ReadConsoleInputExW(input, queued, 1u, &count,
+            CONSOLE_READ_NOWAIT | CONSOLE_READ_NOREMOVE) || count != 1u ||
+        queued[0].Event.KeyEvent.uChar.UnicodeChar != L'K' ||
+        !ReadConsoleInputExW(input, queued, 1u, &count,
+            CONSOLE_READ_NOWAIT) || count != 1u ||
+        queued[0].Event.KeyEvent.uChar.UnicodeChar != L'K') return 20;
 
     SetLastError(ERROR_SUCCESS);
     if (InvalidateConsoleDIBits(INVALID_HANDLE_VALUE, &rect) ||
