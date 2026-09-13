@@ -515,6 +515,31 @@ does not implicate CCPU instruction semantics. Preserve this failing test
 while completing original-source/binding analysis. No mapping closure or
 production repair is claimed by this evidence delivery.
 
+### Contiguous-alias feasibility boundary
+
+The current nt_mem.c reserves private memory with VirtualAlloc and commits
+the low-memory area separately. VdmMapDosMemory currently records numeric
+aliases only; c_GetPhyAdd translates the first address, not a following
+native-pointer span. Thus the ordinary host address reservation being
+contiguous does not establish contiguous access through EMS aliases.
+
+Microsoft's [MapViewOfFile3 contract](https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-mapviewoffile3)
+permits page-aligned section views replacing exact placeholders, without the
+usual 64 KiB offset/base restriction. This is a candidate mechanism for real
+EMS aliases, not proof of a drop-in repair: the current private allocation
+would need a section-backed allocation/lifetime binding, preserving commit,
+free, resize and failure behavior. The API requires Windows 10 version 1803
+on clients. No product platform requirement is changed by this investigation.
+
+External DIB pointers are a separate boundary: original wdib.c passes
+CreateDIBSection's returned bits to VdmAddVirtualMemory. MapViewOfFile3 takes
+a section handle and offset, not an arbitrary existing private pointer.
+Consequently an EMS section design cannot by itself remove the external-DIB
+translation mechanism. Full replacement would need separately proved DIB
+storage ownership; do not count it as automatically solved or replace live
+sharing with a one-time copy. Next step is a bounded mechanism experiment
+and source-contract comparison before any allocation redesign.
+
 Source follow-up: fault RVA 00056c87 falls inside the formal EXE map's
 memcpy/memmove range (preferred 00456780 through the next symbol at
 00456d00). This attributes the failing instruction to CRT memory copying,
