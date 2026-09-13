@@ -96,6 +96,7 @@ int main(int argc, char **argv)
     }
     if (!strcmp(argv[1], "mem")) binary = "mem.exe";
     else if (!strcmp(argv[1], "command")) binary = "command.com";
+    else if (!strcmp(argv[1], "dir")) binary = "command.com /c dir";
     else if (!strcmp(argv[1], "edit")) binary = "edit.com";
     else if (!strcmp(argv[1], "write")) binary = "system32\\write.exe";
     else if (!strcmp(argv[1], "ems")) binary = "EMSPROBE.COM";

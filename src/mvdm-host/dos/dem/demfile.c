@@ -740,11 +740,7 @@ DWORD   dwLastError;
                         if (!_strcmpi(lpDot,".TTF")) {
 
                             RtlZeroMemory(cFOTName,sizeof(cFOTName));
-                            /* DIVERGENCE MVDM-HOST-DIV-104: this is a bounded pathname-buffer
-                             * offset, not a guest or host identity; retain pointer subtraction
-                             * until the final API length conversion. */
-                            RtlCopyMemory(cFOTName, lpFileName,
-                                (ULONG)(lpDot - lpFileName));
+                            RtlCopyMemory(cFOTName,lpFileName,(ULONG)lpDot-(ULONG)lpFileName);
                             strcat(cFOTName,".FOT");
                             if ( RemoveFontResourceOem(cFOTName) ) {
                                 PostMessage(HWND_BROADCAST, WM_FONTCHANGE, 0, 0);

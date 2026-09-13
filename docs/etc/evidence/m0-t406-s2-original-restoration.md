@@ -353,3 +353,32 @@ No host provider, CPU, product source, default EMS profile or user media changed
 This proves original expanded-page splitting in the reached request path;
 arbitrary conventional addresses crossing noncontiguous mapped windows remain
 unverified. The T and remaining width audit are still open.
+
+### DOS host-pointer arithmetic cohort
+
+Restored source-proven host-only arithmetic in demsrch.c (sentinel,
+pathname/device offsets, directory-buffer traversal/alignment), cmdmisc.c
+(MULTI_SZ per-drive scan), and demfile.c (FOT prefix length). Removed
+DIV-003/091/104. Source delta +19/-38, net 19 fewer lines. DTA/PDB leases,
+SFT shadows, guest handle casts, asynchronous command state and observation
+hooks are unchanged; these are not implicitly accepted or restored here.
+
+Formal product and memory target rebuild passed (r002/dos-pointer-build.log),
+memory test exit 0. Added a dir case to the existing observer, using ordinary
+ntvdm32.exe command.com /c dir. The first observer compiler command wrongly
+passed user32.lib as C input; it failed and produced no executable. Subsequent
+shell attempts therefore did not run guests and their stale LASTEXITCODE
+prints are not results. Corrected with /link user32.lib, compiled /MT /W4 /WX,
+then reran with terminating shell errors and explicit observer exit checks.
+
+Actual logs t406-s2-dos-pointer-{dir,mem,command,edit,write,ems}.txt are under
+runtime logs. DIR enumerates actual package filenames; MEM/COMMAND complete;
+EDIT reaches its editor under bounded cleanup; WRITE remains unaccepted;
+EMS prints MAP SWITCH ALIAS UNMAP MOVE EXCHANGE FREE PASS. No FOT font-removal
+scenario or every search-buffer failure branch was exercised. Runtime scope
+is bounded and does not imply all DOS service correctness. Q: was removed.
+
+Deployed x86 EXE: 3,235,328 bytes, SHA-256
+94f29e71f6a47cc21638bf1df1138dc94741cb3ec4ca49b4cf197e47d0a3d010.
+Review retained the original algorithms and failure branches, not a new
+pointer manager. Wider width and mapping-edge audit remains active.
