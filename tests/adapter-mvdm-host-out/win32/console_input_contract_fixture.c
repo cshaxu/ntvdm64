@@ -37,6 +37,7 @@ int main(void)
     uint32_t palette_copy[2];
     HANDLE saved_output;
     HANDLE text_output;
+    HANDLE input;
     CONSOLE_CURSOR_INFO cursor_before;
     CONSOLE_CURSOR_INFO cursor_after;
     DWORD text_state_length = 0u;
@@ -46,6 +47,9 @@ int main(void)
     SMALL_RECT text_rect = { 0, 0, 1, 0 };
     char text_result[2] = { 0, 0 };
     DWORD text_read = 0u;
+    INPUT_RECORD queued[2];
+    INPUT_RECORD tail = { 0 };
+    INPUT_RECORD front = { 0 };
 
     if (ReadConsoleInputExW(INVALID_HANDLE_VALUE, NULL, 0u, &count, 0x8000u) ||
         GetLastError() != ERROR_INVALID_PARAMETER) return 1;
@@ -53,6 +57,32 @@ int main(void)
         GetLastError() != ERROR_CALL_NOT_IMPLEMENTED) return 2;
     if (ShowConsoleCursor(INVALID_HANDLE_VALUE, TRUE) != -1) return 3;
     if (GetConsoleInputWaitHandle() == NULL) return 4;
+    input = GetStdHandle(STD_INPUT_HANDLE);
+    if (input == NULL || input == INVALID_HANDLE_VALUE ||
+        !FlushConsoleInputBuffer(input)) return 18;
+    tail.EventType = KEY_EVENT;
+    tail.Event.KeyEvent.bKeyDown = TRUE;
+    tail.Event.KeyEvent.uChar.UnicodeChar = L'T';
+    front.EventType = KEY_EVENT;
+    front.Event.KeyEvent.bKeyDown = TRUE;
+    front.Event.KeyEvent.uChar.UnicodeChar = L'F';
+    if (!WriteConsoleInputW(input, &tail, 1u, &count) || count != 1u ||
+        !WriteConsoleInputVDMW(input, &front, 1u, &count) || count != 1u ||
+        WaitForSingleObject(MvdmConsoleInputPrependWaitHandle(), 0u) !=
+            WAIT_OBJECT_0 ||
+        !ReadConsoleInputExW(input, queued, 1u, &count,
+            CONSOLE_READ_NOWAIT | CONSOLE_READ_NOREMOVE) || count != 1u ||
+        queued[0].Event.KeyEvent.uChar.UnicodeChar != L'F' ||
+        WaitForSingleObject(MvdmConsoleInputPrependWaitHandle(), 0u) !=
+            WAIT_OBJECT_0 ||
+        !ReadConsoleInputExW(input, queued, 1u, &count,
+            CONSOLE_READ_NOWAIT) || count != 1u ||
+        queued[0].Event.KeyEvent.uChar.UnicodeChar != L'F' ||
+        WaitForSingleObject(MvdmConsoleInputPrependWaitHandle(), 0u) !=
+            WAIT_TIMEOUT ||
+        !ReadConsoleInputExW(input, queued, 1u, &count,
+            CONSOLE_READ_NOWAIT) || count != 1u ||
+        queued[0].Event.KeyEvent.uChar.UnicodeChar != L'T') return 19;
 
     SetLastError(ERROR_SUCCESS);
     if (InvalidateConsoleDIBits(INVALID_HANDLE_VALUE, &rect) ||

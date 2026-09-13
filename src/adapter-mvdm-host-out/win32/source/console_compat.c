@@ -6,6 +6,7 @@
  * parameters and ordering; unsupported operations fail explicitly.
  */
 #include <windows.h>
+#include <stddef.h>
 #include <stdlib.h>
 #include "conapi.h"
 #include "presentation_surface.h"
@@ -461,50 +462,145 @@ HANDLE GetConsoleInputWaitHandle(VOID)
     return GetStdHandle(STD_INPUT_HANDLE);
 }
 
+/* DIVERGENCE(ADAPTER-WIN32-051): OpenNT's Console Server serializes
+ * `PrependInputBuffer` and `ReadInputBuffer` under its Console lock. Public
+ * Win32 exposes only append-style WriteConsoleInputW. Preserve the reached
+ * VDM-only prepend operation in a process-local FIFO ahead of public CONIN$;
+ * original nt_event remains the only consumer and waits on this event beside
+ * the existing public input and suspend handles. */
+typedef struct mvdm_console_prepend_node {
+    struct mvdm_console_prepend_node *next;
+    HANDLE input;
+    DWORD first;
+    DWORD count;
+    INPUT_RECORD records[1];
+} mvdm_console_prepend_node;
+
+static INIT_ONCE mvdm_console_prepend_once = INIT_ONCE_STATIC_INIT;
+static CRITICAL_SECTION mvdm_console_prepend_lock;
+static HANDLE mvdm_console_prepend_event;
+static mvdm_console_prepend_node *mvdm_console_prepend_head;
+
+static BOOL CALLBACK initialize_console_prepend_queue(PINIT_ONCE once,
+    PVOID parameter, PVOID *context)
+{
+    (void)once;
+    (void)parameter;
+    (void)context;
+    InitializeCriticalSection(&mvdm_console_prepend_lock);
+    mvdm_console_prepend_event = CreateEventW(NULL, TRUE, FALSE, NULL);
+    return mvdm_console_prepend_event != NULL;
+}
+
+static BOOL ensure_console_prepend_queue(VOID)
+{
+    return InitOnceExecuteOnce(&mvdm_console_prepend_once,
+        initialize_console_prepend_queue, NULL, NULL);
+}
+
+HANDLE WINAPI MvdmConsoleInputPrependWaitHandle(VOID)
+{
+    if (!ensure_console_prepend_queue()) return NULL;
+    return mvdm_console_prepend_event;
+}
+
+static DWORD read_console_prepend(HANDLE input, PINPUT_RECORD records,
+    DWORD count, LPDWORD read, BOOL remove)
+{
+    mvdm_console_prepend_node *node;
+    DWORD available;
+
+    if (!ensure_console_prepend_queue()) return (DWORD)-1;
+    EnterCriticalSection(&mvdm_console_prepend_lock);
+    node = mvdm_console_prepend_head;
+    if (node == NULL || node->input != input) {
+        LeaveCriticalSection(&mvdm_console_prepend_lock);
+        return 0u;
+    }
+    available = node->count < count ? node->count : count;
+    if (available != 0u && records != NULL)
+        CopyMemory(records, &node->records[node->first],
+            (SIZE_T)available * sizeof(*records));
+    if (remove && available != 0u) {
+        node->first += available;
+        node->count -= available;
+        if (node->count == 0u) {
+            mvdm_console_prepend_head = node->next;
+            free(node);
+        }
+        if (mvdm_console_prepend_head == NULL)
+            ResetEvent(mvdm_console_prepend_event);
+    }
+    LeaveCriticalSection(&mvdm_console_prepend_lock);
+    if (read != NULL) *read = available;
+    return 1u;
+}
+
 BOOL WINAPI ReadConsoleInputExW(HANDLE input, PINPUT_RECORD records, DWORD count,
                                 LPDWORD read, USHORT flags)
 {
     DWORD available;
-    DWORD index;
-    DWORD delivered;
+    DWORD local_result;
     if ((flags & ~CONSOLE_READ_VALID) != 0u) { SetLastError(ERROR_INVALID_PARAMETER); return FALSE; }
+    local_result = read_console_prepend(input, records, count, read,
+        (flags & CONSOLE_READ_NOREMOVE) == 0u);
+    if (local_result == (DWORD)-1) return FALSE;
+    if (local_result != 0u) return TRUE;
     if ((flags & CONSOLE_READ_NOWAIT) != 0u) {
-        if (!GetNumberOfConsoleInputEvents(input, &available)) return FALSE;
+        /* Peek is the public operation that tests and observes the same
+         * queue atomically. GetNumberOfConsoleInputEvents then Read races
+         * an arriving/removed record and is not the NT4 contract. */
+        if (!PeekConsoleInputW(input, records, count, &available)) return FALSE;
         if (available == 0u) { if (read != NULL) *read = 0u; return TRUE; }
+        if ((flags & CONSOLE_READ_NOREMOVE) != 0u) return TRUE;
+        return ReadConsoleInputW(input, records, count, read);
     }
     if ((flags & CONSOLE_READ_NOREMOVE) != 0u)
         return PeekConsoleInputW(input, records, count, read);
-    if (!ReadConsoleInputW(input, records, count, read)) return FALSE;
-
-    /* DIVERGENCE(ADAPTER-WIN32-047): NT4 Console Server consumed Alt+Enter
-     * for its fullscreen controller before the VDM keyboard worker observed
-     * it.  Modern Console has no hardware fullscreen controller.  Preserve
-     * that non-guest direction by removing only an Alt+Enter key-down from
-     * the source-shaped input batch and reporting a typed host display
-     * request.  No DOS text, BOP record or guest-memory write is created. */
-    delivered = 0u;
-    for (index = 0u; read != NULL && index < *read; ++index) {
-        PINPUT_RECORD record = &records[index];
-        if (record->EventType == KEY_EVENT &&
-            record->Event.KeyEvent.bKeyDown &&
-            record->Event.KeyEvent.wVirtualKeyCode == VK_RETURN &&
-            (record->Event.KeyEvent.dwControlKeyState &
-                (LEFT_ALT_PRESSED | RIGHT_ALT_PRESSED)) != 0u) {
-            (void)console_video_event(SESSION_VIDEO_EVENT_DISPLAY_TOGGLE,
-                NULL, NULL, NULL, 0u);
-            continue;
-        }
-        if (delivered != index) records[delivered] = records[index];
-        ++delivered;
-    }
-    if (read != NULL) *read = delivered;
-    return TRUE;
+    return ReadConsoleInputW(input, records, count, read);
 }
 
 BOOL WINAPI WriteConsoleInputVDMW(HANDLE input, PINPUT_RECORD records, DWORD count,
                                   LPDWORD written)
 {
-    return WriteConsoleInputW(input, records, count, written);
+    mvdm_console_prepend_node *node;
+    DWORD mode;
+    size_t bytes;
+
+    if (written != NULL) *written = 0u;
+    if (!GetConsoleMode(input, &mode) || (count != 0u && records == NULL))
+        return FALSE;
+    if (count == 0u) return TRUE;
+    if ((size_t)count > (SIZE_MAX - offsetof(mvdm_console_prepend_node,
+                                              records)) / sizeof(*records)) {
+        SetLastError(ERROR_NOT_ENOUGH_MEMORY);
+        return FALSE;
+    }
+    bytes = offsetof(mvdm_console_prepend_node, records) +
+        (size_t)count * sizeof(*records);
+    node = (mvdm_console_prepend_node *)malloc(bytes);
+    if (node == NULL) {
+        SetLastError(ERROR_NOT_ENOUGH_MEMORY);
+        return FALSE;
+    }
+    if (!ensure_console_prepend_queue()) {
+        free(node);
+        return FALSE;
+    }
+    node->next = NULL;
+    node->input = input;
+    node->first = 0u;
+    node->count = count;
+    CopyMemory(node->records, records, (SIZE_T)count * sizeof(*records));
+    EnterCriticalSection(&mvdm_console_prepend_lock);
+    /* Every VDM write is a prepend. A newer return must be consumed before
+     * an older returned batch, matching repeated PrependInputBuffer calls. */
+    node->next = mvdm_console_prepend_head;
+    mvdm_console_prepend_head = node;
+    SetEvent(mvdm_console_prepend_event);
+    LeaveCriticalSection(&mvdm_console_prepend_lock);
+    if (written != NULL) *written = count;
+    return TRUE;
 }
 
 /* DIVERGENCE(ADAPTER-WIN32-050): OpenNT Console Server maintained this

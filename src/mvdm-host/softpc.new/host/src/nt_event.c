@@ -443,7 +443,7 @@ DWORD nt_event_loop(void)
     DWORD RecordsRead;
     DWORD loop;
     NTSTATUS status;
-    HANDLE Events[2];
+    HANDLE Events[3];
 
     /*
      * The con server is optimized to avoid extra CaptureBuffer allocations
@@ -463,6 +463,8 @@ DWORD nt_event_loop(void)
     */
     Events[0] = GetConsoleInputWaitHandle(); ////sc.InputHandle
     Events[1] = hConsoleSuspend;
+    Events[2] = MvdmConsoleInputPrependWaitHandle();
+    if (Events[2] == NULL) return 0;
     /*:::::::::::::::::::::::::::::::::::::::::::::: Get and process events */
 
     while (TRUE) {
@@ -470,7 +472,7 @@ DWORD nt_event_loop(void)
         //
         // Wait for the InputHandle to be signalled, or a suspend event.
         //
-        status = NtWaitForMultipleObjects(2,
+        status = NtWaitForMultipleObjects(3,
                                           Events,
                                           WaitAny,
                                           TRUE,
@@ -482,7 +484,7 @@ DWORD nt_event_loop(void)
             // waiting (otherwise we may get blocked and be unable to
             // handle the suspend event).
             //
-        if (!status) {
+        if (!status || status == 2) {
             if (ReadConsoleInputExW(sc.InputHandle,
                                     &InputRecord[0],
                                     1u,

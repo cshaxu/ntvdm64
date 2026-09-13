@@ -116,6 +116,11 @@ BOOL WINAPI WriteConsoleInputVDMW(
     DWORD nLength,
     LPDWORD lpNumberOfEventsWritten);
 
+/* This is an adapter-private wait extension, not an OpenNT Console export.
+ * It becomes signalled only when `WriteConsoleInputVDMW` has source-owned
+ * records to return before later public-CONIN$ arrivals. */
+HANDLE WINAPI MvdmConsoleInputPrependWaitHandle(VOID);
+
 BOOL WINAPI SetConsoleKeyShortcuts(
     BOOL bSet,
     BYTE bReserveKeys,
