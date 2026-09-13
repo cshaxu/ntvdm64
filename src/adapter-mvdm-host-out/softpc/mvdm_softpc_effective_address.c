@@ -16,37 +16,10 @@
 #include <c_reg.h>
 #include <c_page.h>
 
-/* cpu4gen.h publishes these declarations to CCPU clients, but including the
- * generated vector header here would also import its unrelated generated ABI.
- * Keep this adapter's private declarations exactly in the original IU forms. */
 IMPORT IU16 c_getMSW IPT0();
-IMPORT IU16 c_getCS_SELECTOR IPT0();
-IMPORT IU16 c_getSS_SELECTOR IPT0();
-IMPORT IU16 c_getDS_SELECTOR IPT0();
-IMPORT IU16 c_getES_SELECTOR IPT0();
-IMPORT IU16 c_getFS_SELECTOR IPT0();
-IMPORT IU16 c_getGS_SELECTOR IPT0();
-IMPORT IU32 c_getCS_BASE IPT0();
-IMPORT IU32 c_getSS_BASE IPT0();
-IMPORT IU32 c_getDS_BASE IPT0();
-IMPORT IU32 c_getES_BASE IPT0();
-IMPORT IU32 c_getFS_BASE IPT0();
-IMPORT IU32 c_getGS_BASE IPT0();
 
 #define CCPU_MSW_PE      ((IU16)0x0001)
 #define CCPU_EFLAGS_VM   ((IU32)0x00020000)
-
-static int current_segment_base(IU16 selector, IU32 *base_out)
-{
-    if (base_out == 0) return 0;
-    if (selector == c_getCS_SELECTOR()) { *base_out = c_getCS_BASE(); return 1; }
-    if (selector == c_getSS_SELECTOR()) { *base_out = c_getSS_BASE(); return 1; }
-    if (selector == c_getDS_SELECTOR()) { *base_out = c_getDS_BASE(); return 1; }
-    if (selector == c_getES_SELECTOR()) { *base_out = c_getES_BASE(); return 1; }
-    if (selector == c_getFS_SELECTOR()) { *base_out = c_getFS_BASE(); return 1; }
-    if (selector == c_getGS_SELECTOR()) { *base_out = c_getGS_BASE(); return 1; }
-    return 0;
-}
 
 /* CPU40 keeps descriptor state inside the original CCPU core.  Its original
  * `selector_outside_GDT_LDT` and `read_descriptor_linear` routines are the
@@ -74,11 +47,10 @@ int mvdm_softpc_effective_address(IU16 selector, IU32 offset, IU32 *address_out)
         *address_out = ((IU32)selector << 4) + offset;
         return 1;
     }
-    /* Prefer the current segment cache, then use the original CCPU40 GDT/LDT
-     * descriptor walker. Both results remain numeric guest-linear values;
-     * neither path exposes a SoftPC backing pointer. */
-    if (!current_segment_base(selector, &base) &&
-        !descriptor_segment_base(selector, &base)) return 0;
+    /* SIM32's original protected-mode rule reads the selected descriptor.
+     * A visible selector does not identify one of the six mutable hidden
+     * segment caches, so never choose a cache by register order here. */
+    if (!descriptor_segment_base(selector, &base)) return 0;
     *address_out = base + offset;
     return 1;
 }

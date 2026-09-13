@@ -16,7 +16,6 @@ Segment Register Support.
 #include <xt.h>
 
 #include <c_main.h>
-#include <sas.h>
 #include <c_addr.h>
 #include <c_bsic.h>
 #include <c_prot.h>
@@ -26,11 +25,6 @@ Segment Register Support.
 #include <c_reg.h>
 #include <c_page.h>
 #include <fault.h>
-#ifdef NTVDM
-#include <mvdm_softpc_termination.h>
-#include <intrin.h>
-#pragma intrinsic(_ReturnAddress)
-#endif
 
 
 /*
@@ -54,25 +48,6 @@ IFN3(
 
 
    {
-#ifdef NTVDM
-   if (selector == 0u) {
-      IU32 source_linear = effective_addr(GET_CS_SELECTOR(), GET_EIP());
-      IU32 stack_linear = effective_addr(GET_SS_SELECTOR(), GET_ESP());
-      mvdm_softpc_record_cpu_low_cs_load((unsigned int)GET_CS_SELECTOR(),
-         (unsigned int)GET_EIP(), (unsigned int)selector,
-         (unsigned int)sas_hw_at(source_linear),
-         (unsigned int)sas_hw_at(source_linear + 1u),
-         (unsigned int)sas_hw_at(source_linear + 2u),
-         (unsigned int)sas_hw_at(source_linear + 3u),
-         (unsigned int)sas_hw_at(source_linear + 4u),
-         (uintptr_t)_ReturnAddress(),
-         (unsigned int)GET_SS_SELECTOR(), (uint32_t)GET_ESP(),
-         (unsigned int)sas_hw_at(stack_linear) |
-            ((unsigned int)sas_hw_at(stack_linear + 1u) << 8),
-         (unsigned int)sas_hw_at(stack_linear + 2u) |
-            ((unsigned int)sas_hw_at(stack_linear + 3u) << 8));
-   }
-#endif
    if ( GET_PE() == 0 || GET_VM() == 1 )
       {
       /* Real Mode or V86 Mode */
@@ -268,29 +243,6 @@ IFN2(
    else
       {
       /* Protected Mode */
-#if defined(CPU_40_STYLE)
-      /* DOSX's 486 bootstrap defines SEL_BIOSDATA as GDT selector 0040h.
-       * `486/dxboot.asm` builds it with NSetSegmentDscr(0040h, 0400h,
-       * 0ffffh, STD_DATA), and then protected-mode code loads it directly.
-       * Native NTVDM has that fixed descriptor in its inherited GDT.  The
-       * CPU40 standalone carrier has no inherited GDT entry at this point,
-       * so retain the exact source descriptor in the loaded cache.  This is
-       * deliberately limited to SEL_BIOSDATA: it does not manufacture the
-       * rejected DXCODE, flat-user-data, or TEB selectors. */
-      if (selector == 0x0040u)
-	 {
-	 SET_SR_SELECTOR(indx, selector);
-	 SET_SR_BASE(indx, 0x00000400u);
-	 SET_SR_LIMIT(indx, 0x0000ffffu);
-	 SET_SR_AR_DPL(indx, 3);
-	 SET_SR_AR_W(indx, 1);
-	 SET_SR_AR_R(indx, 1);
-	 SET_SR_AR_E(indx, 0);
-	 SET_SR_AR_C(indx, 0);
-	 SET_SR_AR_X(indx, 0);
-	 }
-      else
-#endif
       if ( selector_is_null(selector) )
 	 {
 	 /* load is allowed - but later access will fail

@@ -328,22 +328,24 @@ Return Value:
         DpmiCpu40SetNativeIdtSourceAddress(((ULONG)getAX() << 4) -
             (256u * sizeof(LDT_ENTRY)));
 
-    /* DIVERGENCE(MVDM-HOST-DIV-231): x86's 53:00 publication installed
-     * descriptors into an NT process LDT distinct from DOSX's writable
-     * guest source table.  CCPU must retain the same separation: DOSX may
-     * legally reuse its table slots after the BOP returns, while CPU selector
-     * loads continue to consume the published descriptor image. */
-    if (!Cpu40LdtShadowAddress) {
+    /* The source-published DOSX GDT and the process LDT are distinct
+     * descriptor domains.  Keep immutable published images for CCPU rather
+     * than using the mutable DOSX source table as either live table. */
+    if (!Cpu40GdtShadowAddress || !Cpu40LdtShadowAddress) {
         ULONG Address = 0;
-        ULONG Size = LDT_SIZE * sizeof(LDT_ENTRY);
+        ULONG Size = 2u * LDT_SIZE * sizeof(LDT_ENTRY);
         NTSTATUS Status = DpmiAllocateVirtualMemory((PVOID)&Address, &Size);
 
         if (!NT_SUCCESS(Status)) {
             setLDT_SELECTOR(0);
             return;
         }
-        Cpu40LdtShadowAddress = Address;
-        RtlCopyMemory((PVOID)(IntelBase + Cpu40LdtShadowAddress), Ldt, Size);
+        Cpu40GdtShadowAddress = Address;
+        Cpu40LdtShadowAddress = Address + LDT_SIZE * sizeof(LDT_ENTRY);
+        RtlCopyMemory((PVOID)(IntelBase + Cpu40GdtShadowAddress), Ldt,
+            LDT_SIZE * sizeof(LDT_ENTRY));
+        RtlCopyMemory((PVOID)(IntelBase + Cpu40LdtShadowAddress), Ldt,
+            LDT_SIZE * sizeof(LDT_ENTRY));
     }
     /* DIVERGENCE(MVDM-HOST-DIV-248): FastWOW loads the inherited NT TEB
      * selector (003Bh) while still executing in CCPU guest-linear space.

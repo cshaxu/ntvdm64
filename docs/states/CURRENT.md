@@ -2,32 +2,32 @@
 
 ## Current Work
 
-**Active: M0 T407 S4.**
+**Active: M0 T407 S5.**
 
 ## Active Packet
 
-### M0 T407 S4 — U03/U04 platform and cache-owner audit
+### M0 T407 S5 — descriptor-domain separation
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T407 S4, Ordinary Mode, one agent executing then reviewing. |
-| Admission And Approval | Owner first admitted this T for the current-state audit, then approved: “准入修复，直到 S4审计完成。S4审计好了，告诉我接下来怎么走，我们设计再实现。” S2/S3 delivered at `d36c9e611`/`d16e3a72e`; this opens the expressly audit/design-only S4. |
+| Identifier Mode | M0 T407 S5, Ordinary Mode, one agent implements then independently re-reviews the completed diff. |
+| Admission And Approval | Owner approved: “准入，按照最小diff的原则执行。本T任务剩下的S任务都自动准入，按照该原则的设计执行，直到T任务收口为止。” This admits S5 and the remaining bounded S packets under the approved S4 design. |
 | Candidate Proposal | [Original DPMI and XMS contract restoration](../proposals/proposal-dpmi-xms-contract-restoration-001.md). |
-| Objective | Exhaustively classify U03 effective-address cache choice and U04 TSS/IDT/GDT/LDT/TEB/protected-stack projections by original owner, selected consumer, lifecycle, remove/retain/migrate disposition and implementation design. |
-| Non-goals | No product-source implementation, runtime behavior change, CPU-execution change, broker work, kernel/product-shell import, D35/D36/D37 change, deployment or product-acceptance claim. |
-| Reference Baseline | S1 audit, [S2 restoration](../etc/evidence/m0-t407-s2-xms-dpmi-memory-contract-restoration.md), [S3 restoration](../etc/evidence/m0-t407-s3-dpmi-mode-frame-restoration.md), original MVDM/kernel owner trees and admitted proposal. |
-| Files And ABI Surface | `mvdm-host/dpmi32/{modesw.c,dpmi32.c,dpmiselr.c,data.c}`, `softpc.new/base/ccpu386/c_seg.c`, effective-address adapter, original paired source, build-selection records, Status and indexed evidence. No ABI change. |
+| Objective | Restore separate original-shaped descriptor domains for DOSX GDT/IDT and process-LDT publication, eliminate the U03 selector-cache guess and `0040h` CPU bypass, and retain only finite CCPU table-register bindings. |
+| Non-goals | No TSS/TEB/VDM_DPMIINFO lifecycle redesign (next S), no CPU instruction behavior change, broker work, D35/D36/D37 change, or premature WOW/WRITE acceptance. |
+| Reference Baseline | [S4 audit/design](../etc/evidence/m0-t407-s4-u03-u04-audit-and-design.md) at `9234a98de`, original `dpmi386.c`, `dxboot.asm`, CCPU table-register interfaces, and all prior T407 evidence. |
+| Files And ABI Surface | `mvdm-host/dpmi32/{dpmi32.c,dpmiselr.c,modesw.c,data.c,dpmi32p.h,dpmidata.h}`, `softpc.new/base/ccpu386/c_seg.c`, effective-address adapter, bounded fixtures/build records, Status and indexed evidence. |
 | Applicable Rules | Goal, architecture, coding, execution, document and source-policy authorities; four-rung source-recovery audit and mirror/overlay ownership rules. |
-| Verification | Exhaustive in-scope original/current/caller/selected-build/overlay searches; per-row four-rung ledger; lifecycle/reset/teardown and negative-rule analysis; line/hunk accounting; governance, links, diff review, commit and push. |
-| Expected Markers | Each U03/U04 mechanism has a source owner or exact unavailable dependency, consumers and lifecycle; removability is quantified without pretending unproven kernel behavior is directly composable. |
+| Verification | Descriptor-domain fixture, original-source review, fresh formal x86 link, deployed MEM regression, governance, diff review, commit and push. Full platform reset/teardown and WOW acceptance transfer to S6. |
+| Expected Markers | GDT, IDT and LDT have distinct backing/registration; original descriptor publication order is foreground; no `0040h` CCPU special case or register-order cache choice remains. |
 | Asset Needs | Existing pinned OpenNT/OpenNT-4.5 source trees, selected local mirrors, adapter/overlay registers and retained formal-build manifests; all comparison inputs are read-only. No new source or media. |
-| Reporting Requirements | Report grouped implementation options, code/diff reduction estimate, exact necessary seams, blockers and recommended next task. Stop after the audit/design report for owner decision. |
-| Stop Conditions | Any request to alter product source, a missing/ambiguous original owner, a required kernel dependency, or a conclusion needing new behavior pauses implementation; record it rather than inventing a replacement. |
-| Exit Criteria | Indexed audit/design evidence is complete, authorities pass governance, no product source is modified, the documentation P is reviewed/committed/pushed, and the owner receives the next-step design choices. |
+| Reporting Requirements | Record removals, retained table-register seams, original owner/path, test results and residual TSS/TEB/stack receiver. |
+| Stop Conditions | A required TSS/TEB/stack behavior, unavailable descriptor source, failed domain fixture or any necessary CPU-core change pauses this S and opens the next bounded design rather than inventing policy. |
+| Exit Criteria | Source-shaped table domains and U03 resolution are proven; all stated checks pass; evidence/authorities are reviewed, committed and pushed. |
 | Original Owner Request | “准入下一个包。先进行当前状态审计，本T任务范畴内的diff都有哪些，给出应该如何清理的方案。” |
-| Similar-Issue Sweep | All selected callers of effective-address resolution, selector-cache reloads, 53:00/53:01/53:02 publication, TSS slots, IDT/GDT/LDT backing, TEB and PM-stack projections, overlays and historical kernel owner candidates. |
+| Similar-Issue Sweep | 53:00/53:01/53:02 ordering, NSetSegmentDscr updates, all CCPU table register consumers, cache reloads, c_seg diagnostics, descriptor source reuse, reset and selected overlay paths. |
 
-S1 is delivered at `13fc0fd4b`; S2/S3 are delivered at `d36c9e611`/`d16e3a72e`. S4 is documentation-only by owner direction: it must report a design and stop before source implementation.
+S1–S4 are delivered at `13fc0fd4b`, `d36c9e611`, `d16e3a72e` and `9234a98de`. The owner has now authorized S5 and remaining minimal-diff repairs through T407 closure.
 
 T406 is closed by its final delivery; [S2 closure evidence](../etc/evidence/m0-t406-s2-original-restoration.md#s2-final-x86-width-and-access-boundary-disposition)
 records its restored cohorts, remaining registered seams, trace hit/no-hit results,

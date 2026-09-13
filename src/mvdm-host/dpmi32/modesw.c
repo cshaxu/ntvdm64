@@ -120,7 +120,7 @@ static int cpu40_install_native_task_carrier(void)
     PUCHAR state;
     PLDT_ENTRY gdt;
 
-    if (Cpu40LdtShadowAddress == 0u) return 0;
+    if (Cpu40GdtShadowAddress == 0u) return 0;
     if (Cpu40NativeTaskStateAddress == 0u) {
         address = 0u;
         size = CPU40_TSS386_TOTAL_BYTES * 2u;
@@ -135,7 +135,7 @@ static int cpu40_install_native_task_carrier(void)
     *(PUSHORT)(state + CPU40_TSS386_IOMAP_BASE) = CPU40_TSS386_BYTES;
     cpu40_write_native_v86_task(state + CPU40_TSS386_TOTAL_BYTES);
 
-    gdt = (PLDT_ENTRY)(IntelBase + Cpu40LdtShadowAddress);
+    gdt = (PLDT_ENTRY)(IntelBase + Cpu40GdtShadowAddress);
     cpu40_write_tss_descriptor(&gdt[CPU40_NATIVE_PM_TSS_SELECTOR >> 3],
         Cpu40NativeTaskStateAddress);
     cpu40_write_tss_descriptor(&gdt[CPU40_NATIVE_V86_TSS_SELECTOR >> 3],
@@ -225,8 +225,8 @@ Routine Description:
      * from the source-built descriptor table; install that image at the
      * actual 53:01 transition boundary, immediately before PE makes the
      * source-supplied selectors architecturally live. */
-    if (Cpu40LdtShadowAddress != 0)
-        c_setGDT_BASE_LIMIT(Cpu40LdtShadowAddress,
+    if (Cpu40GdtShadowAddress != 0)
+        c_setGDT_BASE_LIMIT(Cpu40GdtShadowAddress,
             (USHORT)(LDT_SIZE * sizeof(LDT_ENTRY) - 1));
 
     /* WOW_x86 omits LIDT because the native VDM already retains DOSX's live

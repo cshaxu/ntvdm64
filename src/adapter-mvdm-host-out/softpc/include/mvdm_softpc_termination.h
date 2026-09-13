@@ -175,14 +175,6 @@ void mvdm_softpc_record_cpu_low_fault_ivt_target(unsigned int vector,
 void mvdm_softpc_record_cpu_low_fault_transfer(const char *kind,
     unsigned int source_cs, unsigned int source_ip,
     unsigned int target_cs, unsigned int target_ip);
-/* Default-off witness at the original code-segment cache loader. It latches
- * only a CS-zero selection and neither loads nor changes any CPU field. */
-void mvdm_softpc_record_cpu_low_cs_load(unsigned int source_cs,
-    unsigned int source_ip, unsigned int selector, unsigned int opcode0,
-    unsigned int opcode1, unsigned int opcode2, unsigned int opcode3,
-    unsigned int opcode4, uintptr_t caller_return_address,
-    unsigned int stack_ss, uint32_t stack_sp, unsigned int stack_ip,
-    unsigned int stack_cs);
 /* Default-off observation at the original BIOS keyboard `AH == 2` waitio
  * edge.  It does not queue, read, or alter a key. */
 void mvdm_softpc_record_keyboard_waitio(void);

@@ -159,14 +159,22 @@ Return Value:
             SelectorLimit[(registerAX >> 3) + i] = Limit;
 #endif
 #if defined(CPU_40_STYLE)
-            /* DIVERGENCE(MVDM-HOST-DIV-225): i386 installs this source
-             * descriptor into its separate process LDT.  Keep CCPU's
-             * guest-linear shadow separate from DOSX's mutable source table;
-             * binding the CPU directly to `Ldt` lets later source-table reuse
-             * rewrite already-published selectors. */
+            ULONG Selector = registerAX + i * sizeof(LDT_ENTRY);
+            ULONG GdtAddress = DpmiCpu40DescriptorShadowAddress(
+                (USHORT)(Selector & ~4u));
+
+            /* The original i386 provider publishes every 53:00 record to
+             * the process LDT via NtSetLdtEntries/ProcessLdtInformation.
+             * A TI=0 record is also the DOSX GDT image that protected-mode
+             * selector loads consume.  CCPU needs distinct storage for
+             * those two architectural domains, but the original publication
+             * reaches both; TI=1 records update only their LDT domain. */
             if (Cpu40LdtShadowAddress != 0)
                 ((PLDT_ENTRY)(IntelBase + Cpu40LdtShadowAddress))[
-                    (registerAX >> 3) + i] = Descriptors[i];
+                    Selector >> 3] = Descriptors[i];
+            if (!(Selector & 4u) && GdtAddress != 0)
+                ((PLDT_ENTRY)(IntelBase + GdtAddress))[Selector >> 3] =
+                    Descriptors[i];
 #endif
         }
     }

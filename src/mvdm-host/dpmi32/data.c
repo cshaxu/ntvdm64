@@ -141,9 +141,10 @@ ULONG DosxIntHandlerIretd;
 // host pointer.
 //
 ULONG Cpu40PmStackInfoAddress;
-/* Guest-linear shadow of the process LDT consumed by CCPU.  The original
- * x86 host installed 53:00 publications into a distinct process LDT rather
- * than binding CPU execution to DOSX's mutable descriptor source table. */
+/* Guest-linear descriptor images consumed separately by CCPU.  The DOSX
+ * 53:00 table is a GDT source; original process-LDT publication is a
+ * distinct owner. */
+ULONG Cpu40GdtShadowAddress;
 ULONG Cpu40LdtShadowAddress;
 /* Guest-linear TEB/TD prefix consumed only by the original FastWOW machine
  * bridge.  It is deliberately a guest projection, not a host TEB pointer. */
@@ -152,6 +153,14 @@ ULONG Cpu40WowFastTebAddress;
  * storage because modern Windows no longer supplies the NT kernel VDM task
  * register assumed by WOW DOSX. */
 ULONG Cpu40NativeTaskStateAddress;
+
+ULONG
+DpmiCpu40DescriptorShadowAddress(
+    USHORT Selector
+    )
+{
+    return (Selector & 4u) ? Cpu40LdtShadowAddress : Cpu40GdtShadowAddress;
+}
 #endif
 #endif
 

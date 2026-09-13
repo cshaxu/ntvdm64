@@ -92,6 +92,7 @@ $brokerRoot = Join-Path $root 'src/broker'
 $brokerRecordTestSource = Join-Path $root 'tests/broker/base_vdm_record_test.c'
 $baseVdmBrokerTestSource = Join-Path $root 'tests/adapter-basesrv/base_vdm_broker_test.c'
 $launchDeclarationWowEntryTestSource = Join-Path $root 'tests/app/launch_declaration_wow_entry_test.c'
+$cpu40DescriptorDomainFixtureSource = Join-Path $root 'tests/mvdm-host/dpmi/cpu40_descriptor_domain_fixture.c'
 $baseDebugRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/debug'
 $hostRoot = Join-Path $root 'src/mvdm-host/softpc.new/host/src'
 $hostEntryRoot = Join-Path $root 'src/mvdm-host/softpc.new/obj.vdm'
@@ -863,6 +864,9 @@ $baseVdmBrokerTestObject = 'obj/tests/base_vdm_broker_test.obj'
 $graph.Add('build ' + $baseVdmBrokerTestObject + ': cc ' + (NinjaPath $baseVdmBrokerTestSource))
 $launchDeclarationWowEntryTestObject = 'obj/tests/launch_declaration_wow_entry_test.obj'
 $graph.Add('build ' + $launchDeclarationWowEntryTestObject + ': cc ' + (NinjaPath $launchDeclarationWowEntryTestSource))
+$cpu40DescriptorDomainFixtureObject = 'obj/tests/cpu40_descriptor_domain_fixture.obj'
+$graph.Add('build ' + $cpu40DescriptorDomainFixtureObject + ': cc_dpmi ' + (NinjaPath $cpu40DescriptorDomainFixtureSource))
+$graph.Add('  dpmi_cflags = ' + $dpmiFlags + ' /DLINKED_INTO_MONITOR')
 $baseDebugObjects = foreach ($name in $baseDebugNames) {
     $object = 'obj/base-debug/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $baseDebugRoot $name)))
@@ -1007,6 +1011,7 @@ $graph.Add('build broker.lib: lib ' + ($brokerObjects -join ' '))
 $graph.Add('build broker-base-vdm-record-test.exe: broker_test_link ' + $brokerRecordTestObject + ' broker.lib')
 $graph.Add('build basesrv-base-vdm-broker-test.exe: broker_test_link ' + $baseVdmBrokerTestObject + ' basesrv-bindings.lib broker.lib session.lib')
 $graph.Add('build app-launch-declaration-wow-entry-test.exe: broker_test_link ' + $launchDeclarationWowEntryTestObject + ' obj/app/launch_declaration.obj softpc-bindings.lib basesrv-bindings.lib broker.lib session.lib')
+$graph.Add('build cpu40-descriptor-domain-fixture.exe: broker_test_link ' + $cpu40DescriptorDomainFixtureObject + ' original-mvdm-dpmi32.lib')
 $graph.Add('build mvdm-softpc-effective-address.lib: lib ' + $effectiveAddressObject)
 $graph.Add('build softpc-win32-bindings.lib: lib ' + ($adapterWin32Objects -join ' '))
 $graph.Add('build basesrv-bindings.lib: lib ' + ($adapterBaseSrvObjects -join ' '))

@@ -1232,36 +1232,6 @@ void mvdm_softpc_record_cpu_low_fault_transfer(const char *kind,
             message, (DWORD)formatted);
 }
 
-void mvdm_softpc_record_cpu_low_cs_load(unsigned int source_cs,
-    unsigned int source_ip, unsigned int selector, unsigned int opcode0,
-    unsigned int opcode1, unsigned int opcode2, unsigned int opcode3,
-    unsigned int opcode4, uintptr_t caller_return_address,
-    unsigned int stack_ss, uint32_t stack_sp, unsigned int stack_ip,
-    unsigned int stack_cs)
-{
-    static LONG reported;
-    char message[224];
-    int formatted;
-    uintptr_t image_base;
-
-    if (mvdm_softpc_cpu_low_fault_transfer_report_path[0] == '\0' ||
-        (selector & 0xffffu) != 0u || InterlockedIncrement(&reported) != 1)
-        return;
-    image_base = (uintptr_t)GetModuleHandleA(NULL);
-    formatted = snprintf(message, sizeof(message),
-        "MVDM-CPU-CS-LOAD source=%04X:%04X selector=%04X op=%02X%02X%02X%02X%02X caller-rva=%08lX stack=%04X:%04lX words=%04X,%04X\\r\\n",
-        source_cs & 0xffffu, source_ip & 0xffffu, selector & 0xffffu,
-        opcode0 & 0xffu, opcode1 & 0xffu, opcode2 & 0xffu,
-        opcode3 & 0xffu, opcode4 & 0xffu,
-        (unsigned long)(caller_return_address - image_base),
-        stack_ss & 0xffffu, (unsigned long)stack_sp,
-        stack_ip & 0xffffu, stack_cs & 0xffffu);
-    if (formatted > 0 && (size_t)formatted < sizeof(message))
-        mvdm_softpc_write_captured_report(
-            mvdm_softpc_cpu_low_fault_transfer_report_path,
-            message, (DWORD)formatted);
-}
-
 void mvdm_softpc_record_ica_eoi(unsigned int adapter, int line,
     unsigned int cpu_interrupt_pending)
 {
