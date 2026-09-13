@@ -88,11 +88,9 @@ int ErrorDialogBox(char *message, char *Edit, DWORD dwOptions);
  * Its parameter, result and dialog lifecycle are otherwise unchanged. */
 DWORD WINAPI ErrorDialogBoxThread(VOID *pv);
 int WowErrorDialogEvents(ERRORDIALOGINFO *pedgi);
-/* DIVERGENCE(MVDM-HOST-DIV-066): DialogBoxParam and EnumWindows carry
- * pointer-sized callback data on both modern host targets. Preserve the
- * original worker/dialog sequence while spelling the public Win32 callback
- * contracts exactly, rather than storing HWND or ERRORDIALOGINFO pointers in
- * NT4 DWORD/LONG intermediates. */
+/* DIVERGENCE(MVDM-HOST-DIV-066): preserve the worker/dialog sequence and
+ * original x86 local carriers, but spell public Win32 callback signatures
+ * exactly. The SoftPC BOOL macro does not match WNDENUMPROC. */
 INT_PTR CALLBACK ErrorDialogEvents(HWND hDlg, UINT wMsg, WPARAM wParam,
                                    LPARAM lParam);
 void SwpButtons(HWND hDlg, DWORD dwOptions);
@@ -504,12 +502,11 @@ DWORD OemMessageToAnsiMessage(CHAR *pBuff, CHAR *pMsg)
  * retains the public Win32 signed BOOL return representation. */
 int __stdcall GetThreadTopLevelWindow(HWND hWnd, LPARAM lParam)
 {
-   HWND *phWnd = (HWND *)lParam;
-   DWORD threadId = (DWORD)(ULONG_PTR)*phWnd;
+   PDWORD pdw = (PDWORD)lParam;
 
-   if (GetWindowThreadProcessId(hWnd, NULL) == threadId)
+   if (GetWindowThreadProcessId(hWnd, NULL) == *pdw)
       {
-       *phWnd = hWnd;
+       *pdw = (DWORD)hWnd;
        return FALSE;
        }
    return TRUE;
@@ -553,9 +550,9 @@ int ErrorDialogBox(char *message, char *pEdit, DWORD dwOptions)
 
         // get window handle for the offending app
     if (VDMForWOW) {
-        hWndApp = (HWND)(ULONG_PTR)GetCurrentThreadId();
+        hWndApp = (HWND)GetCurrentThreadId();
         EnumWindows(GetThreadTopLevelWindow, (LPARAM)&hWndApp);
-        if (hWndApp == (HWND)(ULONG_PTR)GetCurrentThreadId()) {
+        if (hWndApp == (HWND)GetCurrentThreadId()) {
             hWndApp = HWND_DESKTOP;
             }
         }
@@ -660,7 +657,7 @@ int ErrorDialogBox(char *message, char *pEdit, DWORD dwOptions)
 /* DIVERGENCE(MVDM-SOFTPC-PATCH-003): see the source-shaped declaration above. */
 DWORD WINAPI ErrorDialogBoxThread(VOID *pv)
 {
-    INT_PTR i;
+    int    i;
     ERRORDIALOGINFO *pedgi = pv;
     char *pch;
     char *pLast;

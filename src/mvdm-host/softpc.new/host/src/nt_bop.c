@@ -891,10 +891,7 @@ void ISV_RegisterModule (BOOL fMode)
 
     // Get the init entry point and dispatch entry point
     if (pchInit){
-    /* DIVERGENCE(MVDM-HOST-DIV-008): this is a private GetProcAddress
-       ordinal test, so preserve its original threshold through the public
-       native-width UINT_PTR carrier rather than truncating a host pointer. */
-    if ((UINT_PTR)pchInit < 64u * 1024u){
+    if ((ULONG)pchInit < 64*1024){
         if (strlen (pchInit) >= MAX_PROC_NAME) {
         FreeLibrary(hDll);
         setCF (1);
@@ -915,8 +912,7 @@ void ISV_RegisterModule (BOOL fMode)
     }
     }
 
-    /* DIVERGENCE(MVDM-HOST-DIV-008): see the matching Init ordinal test. */
-    if ((UINT_PTR)pchDispatch < 64u * 1024u){
+    if ((ULONG)pchDispatch < 64*1024){
     if (strlen (pchDispatch) >= MAX_PROC_NAME) {
         FreeLibrary(hDll);
         setCF (1);

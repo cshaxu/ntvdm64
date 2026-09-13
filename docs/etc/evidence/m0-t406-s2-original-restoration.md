@@ -637,3 +637,27 @@ exits 255. Extended EMS window workload still exits c0000005, as on the
 preceding baseline: failed, not reclassified as acceptance. Q: removed.
 Reviewer checked type restoration separately from retained functional
 divergences. No full runtime recovery or T closure is claimed.
+
+## Host ordinal and dialog-local carrier cohort
+
+Restored original ULONG ordinal comparisons in nt_bop.c without changing
+their threshold/branch. In nt_error.c restored original PDWORD callback
+body, thread-ID casts and local int result. Retained signed EnumWindows
+callback return, full dialog callback signatures, LPARAM transport and
+WINAPI worker correction. Updated DIV-008/066. Two C files +11/-18, net 7
+removed; source-paired ABI reasoning, not blanket removal of pointer types.
+
+Formal x86 r002 build compiled both units and linked product/focused test.
+host-carrier-build.log retains existing warnings. Focused runtime log
+t406-s2-host-carrier-memory.txt passes. Integration logs with that prefix:
+COMMAND/MEM/DIR exit 0; EDIT reaches editor then bounded cleanup; WRITE
+exits 255. These do not accept VDD ordinal registration or every dialog action.
+
+Product .text differs from the previous cohort, so that comparison was not
+treated as equivalence proof. After comment-only wording cleanup, rebuilt
+(host-carrier-final-build.log); .text matches the just-tested build hash:
+4606cf91696f9d5112b52ad77bb8506e513da787843441a86979419834ffcbf1.
+Final staged EXE: 3,235,328 bytes, SHA-256
+14dd3417c8387350d6a01d1585f21fec15be66b30b730e8eb50f8ea125d504eb.
+Final COMMAND repeat exits 0 (t406-s2-host-carrier-final-command.txt).
+Known EMS failure and pending access-binding approval remain unchanged.
