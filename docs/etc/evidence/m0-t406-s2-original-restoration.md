@@ -661,3 +661,30 @@ Final staged EXE: 3,235,328 bytes, SHA-256
 14dd3417c8387350d6a01d1585f21fec15be66b30b730e8eb50f8ea125d504eb.
 Final COMMAND repeat exits 0 (t406-s2-host-carrier-final-command.txt).
 Known EMS failure and pending access-binding approval remain unchanged.
+
+## Retained declaration audit
+
+- timeval.h / DIV-032: original nt_unix.c defines long host_time(long *).
+  NTVDM cmos.c::rtc_init uses long; the alternative time_t caller is in the
+  non-NTVDM branch. Installed SDK 10.0.22621.0 ucrt/corecrt.h:642-645 selects
+  __time64_t unless _USE_32BIT_TIME_T is set; current build.ninja has no such
+  definition. Restoring the header's time_t declaration alone would mismatch
+  the selected original body even on x86. Retain long; correct the registry's
+  obsolete x64-only rationale. This does not establish all CMOS behavior.
+- evidfunc.h / DIV-121: original sevid001.c:526-736 defines thirteen
+  S_2126..S_2138 rules as IUH-returning four-IUH-argument functions. The
+  original header instead uses implicit return types and zero/one/two
+  arguments, with four duplicate declarations. Current declarations match
+  those original generated bodies. Retain this arity/type repair; it is not
+  a width-only rollback candidate or an autonomous algorithm.
+- sas.h / DIV-092: direct sas_overwrite_memory declaration is distinct from
+  the selected SAS vector; retain pending whole-carrier composition review.
+  DIV-055: original ccpusas4.c:135 defines Length_of_M_area as PHY_ADDR;
+  base_def.h defines PHY_ADDR as IU32, whereas restored insignia.h defines
+  IHPE as unsigned int. The current header matches the original provider's
+  named type. Retain the matching declaration instead of restoring IHPE on
+  only the header side; equal byte widths do not ensure equal C types.
+
+This is source/declaration classification only, no product-source change,
+new runtime test or complete remaining-width count. Existing function and
+overlay bodies keep their separate unresolved owners and evidence.
