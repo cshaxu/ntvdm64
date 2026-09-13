@@ -26,6 +26,11 @@ int mvdm_softpc_guest_memory_copy_from(uint32_t address, uint8_t *bytes,
     uint32_t byte_count);
 int mvdm_softpc_guest_memory_copy_to(uint32_t address, uint8_t const *bytes,
     uint32_t byte_count);
+/* Source-shaped RtlCopyMemory transport for callers whose original contract
+ * guarantees only forward (destination-before-source) overlap.  It owns no
+ * guest state and never publishes a native alias. */
+int mvdm_softpc_guest_memory_copy_forward(uint32_t destination,
+    uint32_t source, uint32_t byte_count);
 int mvdm_softpc_guest_memory_move(uint32_t destination, uint32_t source,
     uint32_t byte_count);
 

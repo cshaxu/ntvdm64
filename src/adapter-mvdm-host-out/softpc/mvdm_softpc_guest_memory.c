@@ -121,6 +121,26 @@ int mvdm_softpc_guest_memory_copy_to(uint32_t address, uint8_t const *bytes,
     return 1;
 }
 
+int mvdm_softpc_guest_memory_copy_forward(uint32_t destination,
+    uint32_t source, uint32_t byte_count)
+{
+    uint8_t bytes[MVDM_SOFTPC_GUEST_MEMORY_COPY_CHUNK];
+    uint32_t offset = 0u;
+
+    if (byte_count > UINT32_MAX - source ||
+        byte_count > UINT32_MAX - destination) return 0;
+    while (offset < byte_count) {
+        uint32_t chunk = byte_count - offset;
+
+        if (chunk > (uint32_t)sizeof(bytes)) chunk = (uint32_t)sizeof(bytes);
+        if (!mvdm_softpc_guest_memory_copy_from(source + offset, bytes, chunk) ||
+            !mvdm_softpc_guest_memory_copy_to(destination + offset, bytes, chunk))
+            return 0;
+        offset += chunk;
+    }
+    return 1;
+}
+
 int mvdm_softpc_guest_memory_move(uint32_t destination, uint32_t source,
     uint32_t byte_count)
 {

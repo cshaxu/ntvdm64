@@ -7,13 +7,9 @@
 extern "C" {
 #endif
 
-/*
- * Resolve the original XMS move descriptor at SS:BP and perform its
- * source-ordered guest-memory transfer through the current session.
- * The arguments and values remain Intel numeric addresses; no host pointer
- * is published to XMS source.
- */
-int mvdm_xms_move_block(uint16_t stack_segment, uint16_t stack_offset);
+/* Preserve the existing controlled-stop direction if the one unavailable
+ * guest alias operation cannot acquire its bounded synchronous lease. */
+void mvdm_xms_cancel_current_operation(void);
 
 #ifdef __cplusplus
 }

@@ -2,32 +2,32 @@
 
 ## Current Work
 
-**Active: M0 T407 S1.**
+**Active: M0 T407 S2.**
 
 ## Active Packet
 
-### M0 T407 S1 — DPMI/XMS current-state audit and restoration design
+### M0 T407 S2 — XMS/DPMI memory-contract restoration
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T407 S1, Ordinary Mode, one agent executing then reviewing. |
-| Admission And Approval | Owner: “准入下一个包。先进行当前状态审计，本T任务范畴内的diff都有哪些，给出应该如何清理的方案。” This admits the first Queue candidate as T407 and authorizes this audit/design S only. |
+| Identifier Mode | M0 T407 S2, Ordinary Mode, one agent executing then reviewing. |
+| Admission And Approval | Owner first admitted this T for the current-state audit, then approved: “准入修复，直到 S4审计完成。S4审计好了，告诉我接下来怎么走，我们设计再实现。” This admits S2 and the following S3 repair, then S4 audit/design only. |
 | Candidate Proposal | [Original DPMI and XMS contract restoration](../proposals/proposal-dpmi-xms-contract-restoration-001.md). |
-| Objective | Establish the selected D35–D37/U03/U04/U07 source and build reality: enumerate every current mirror, adapter and overlay divergence in scope, identify its original owner, and publish a grouped removal/restoration plan without changing runtime semantics. |
-| Non-goals | No product-source repair, build, deployment, guest-media change, CPU-execution change, broker work, kernel/product-shell import, or claim that DOSX/WOW/WRITE is accepted. |
-| Reference Baseline | T406 closed at 14d937ca3; its source-diff audit and final mapping/x86-width disposition are the starting evidence. Queue candidate 1 and its proposal define this package boundary. |
-| Files And ABI Surface | `mvdm-host/dpmi32/{modesw.c,dpmi32.c,dpmimemr.c,i386/dpmi386.c}`, `mvdm-host/xms.486/{xmsblock.c,xmsmemr.c,i386/xmsmem86.c}`, matching `adapter-mvdm-host-out/softpc` bindings, overlays/build selection records, Status, Queue and indexed evidence. No ABI change in S1. |
+| Objective | Restore D36’s original XMS block-service contract, establish the source-proven D37 provider disposition, remove proved duplicate XMS policy, and prove the one retained bounded guest-memory binding. |
+| Non-goals | No D35 frame repair, U03/U04 platform-projection change, CPU-execution change, broker work, kernel/product-shell import, or claim that DOSX/WOW/WRITE is accepted. |
+| Reference Baseline | S1 audit at [current-state evidence](../etc/evidence/m0-t407-s1-dpmi-xms-current-state-audit.md), T406 closure at 14d937ca3, and the admitted proposal. |
+| Files And ABI Surface | `mvdm-host/xms.486/{xmsblock.c,xms.c,xms.h,xmsmemr.c,i386/xmsmem86.c}`, `mvdm-host/dpmi32/dpmimemr.c`, matching SoftPC XMS/guest-memory adapters, focused tests/build records, Status and indexed evidence. |
 | Applicable Rules | Goal, architecture, coding, execution, document and source-policy authorities; four-rung source-recovery audit and mirror/overlay ownership rules. |
-| Verification | Exact original/current comparisons; selected-build and caller searches; mirror README/overlay register review; per-file line/hunk ledger; governance gate, relative-link check, `git diff --check`, diff review, commit and push. |
-| Expected Markers | Each in-scope hunk is classified as direct original recovery, minimal binding, registered intrusion, or last-resort autonomous behavior; the report gives gross candidate line counts, blockers, tests and S2 grouping. |
+| Verification | Paired original/current checks; x86 formal build; focused allocation/free/reallocate/query, forward-copy versus overlap-safe move, overflow, partial failure, lease teardown and regression checks; governance, links, diff review, commit and push. |
+| Expected Markers | Original `xmsMoveBlock` owns descriptor parsing and AX success; no XMS-specific duplicate parser/chunk policy remains; D37 allocator results have one proved owner; retained adapter binding has a four-rung ledger and focused positive/negative proof. |
 | Asset Needs | Existing pinned OpenNT/OpenNT-4.5 source trees, selected local mirrors, adapter/overlay registers and retained formal-build manifests; all comparison inputs are read-only. No new source or media. |
-| Reporting Requirements | Report all in-scope current diff/overlay locations, original owner/path, build reachability, caller evidence, proposed disposition and limits. Distinguish deletable duplication from necessary finite bindings and unresolved owner gaps. |
-| Stop Conditions | A missing/ambiguous original owner, a required kernel-shell dependency, build-selection ambiguity, or a finding that expands beyond D35–D37/U03/U04/U07 pauses repair design for owner direction; do not invent a replacement. |
-| Exit Criteria | Indexed audit evidence, a reviewable four-rung ledger and grouped cleanup plan are complete; authorities pass governance; the documentation-only P is reviewed, committed and pushed. S2 repair remains separately admitted after the report. |
+| Reporting Requirements | Record removals, retained finite bindings, original owner/path, build selection, exact tests and limitations. Report any D35/U03/U04 finding separately without modifying it in S2. |
+| Stop Conditions | Missing/ambiguous XMS allocator semantics, a required kernel-shell dependency, failed contract test, or any change needed outside D36/D37/U07 pauses the group; do not invent a replacement. |
+| Exit Criteria | The focused original contract is restored or a source-proven finite blocker is documented; all stated checks pass; evidence and authorities are reviewed, committed and pushed. S3 then opens under the already approved sequence. |
 | Original Owner Request | “准入下一个包。先进行当前状态审计，本T任务范畴内的diff都有哪些，给出应该如何清理的方案。” |
-| Similar-Issue Sweep | DPMI transition frames, TSS/IDT/GDT/LDT/TEB projections, allocator selection, XMS move/copy callbacks, all matching adapter/overlay hooks, active build selection, and bounded guest-memory lease consumers. |
+| Similar-Issue Sweep | XMS dispatch, callbacks, SA allocation/free/reallocate/query, every selected XMS/EMS/DEM lease consumer, source/overlap/overflow/partial-failure behavior, and inactive x86/RISC backend exclusions. |
 
-S1 audit is complete in the [current-state evidence](../etc/evidence/m0-t407-s1-dpmi-xms-current-state-audit.md): D36 has a confirmed removable duplicate parser/copy-policy layer; D37 has changed original provider selection; D35 is source-derived but requires an active-CCPU cache seam; and U03/U04 remain explicit owner-resolution blockers rather than authorized deletion. No product behavior has changed. S2 repair requires review of that grouped plan.
+S1 is delivered at `13fc0fd4b`: [current-state evidence](../etc/evidence/m0-t407-s1-dpmi-xms-current-state-audit.md) confirms D36’s removable duplicate parser/copy-policy layer, D37’s changed provider selection, and the separate D35/U03/U04 owner boundaries. S2 begins from that frozen finding; no S3/S4 source change is active.
 
 T406 is closed by its final delivery; [S2 closure evidence](../etc/evidence/m0-t406-s2-original-restoration.md#s2-final-x86-width-and-access-boundary-disposition)
 records its restored cohorts, remaining registered seams, trace hit/no-hit results,

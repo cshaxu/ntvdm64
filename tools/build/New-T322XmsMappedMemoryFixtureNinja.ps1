@@ -34,8 +34,7 @@ $environmentNinja = $environment.Replace('\', '/')
 $sources = @(
     'tests/adapter-mvdm-host-out/softpc/xms_mapped_memory_fixture.c',
     'src/adapter-mvdm-host-out/softpc/mvdm_xms_memory.c',
-    ,
-    ,
+    'src/adapter-mvdm-host-out/softpc/mvdm_softpc_guest_memory.c',
     'src/session/guest_memory_lease.c',
     'src/session/session.c'
 )

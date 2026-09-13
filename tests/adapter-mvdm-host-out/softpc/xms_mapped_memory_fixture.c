@@ -1,4 +1,5 @@
 #include "session/session.h"
+#include "mvdm_softpc_guest_memory.h"
 #include "mvdm_xms_memory.h"
 #include "xms.h"
 
@@ -10,6 +11,23 @@
 typedef struct fixture_memory {
     uint8_t bytes[FIXTURE_MEMORY_BYTES];
 } fixture_memory;
+
+/* The focused lease fixture binds its own memory callbacks rather than the
+ * production CPU40 SAS provider.  Keep these three exports only as dormant
+ * link witnesses for the shared SoftPC adapter translation unit. */
+uint32_t c_sas_memory_size(void) { return FIXTURE_MEMORY_BYTES; }
+void c_sas_loads(uint32_t address, uint8_t *bytes, uint32_t byte_count)
+{
+    (void)address;
+    (void)bytes;
+    (void)byte_count;
+}
+void c_sas_stores(uint32_t address, uint8_t *bytes, uint32_t byte_count)
+{
+    (void)address;
+    (void)bytes;
+    (void)byte_count;
+}
 
 static int fixture_read(void *context, uint32_t address, uint8_t *bytes,
     uint32_t byte_count)
@@ -31,21 +49,12 @@ static int fixture_write(void *context, uint32_t address, const uint8_t *bytes,
     return 1;
 }
 
-static void fixture_write_u32(uint8_t *bytes, uint32_t value)
-{
-    bytes[0] = (uint8_t)value;
-    bytes[1] = (uint8_t)(value >> 8);
-    bytes[2] = (uint8_t)(value >> 16);
-    bytes[3] = (uint8_t)(value >> 24);
-}
-
 int main(void)
 {
     session instance;
     fixture_memory memory;
     uint8_t expected[FIXTURE_MEMORY_BYTES];
     uint32_t index;
-    uint32_t descriptor_address = ((uint32_t)0x0010u << 4) + 0x0010u - 12u;
 
     memset(&memory, 0xff, sizeof(memory));
     session_initialize(&instance, 322u);
@@ -66,11 +75,8 @@ int main(void)
         instance.state != SESSION_STATE_ACTIVE)
         return 3;
 
-    fixture_write_u32(memory.bytes + descriptor_address, 700u);
-    fixture_write_u32(memory.bytes + descriptor_address + 4u, 600u);
-    fixture_write_u32(memory.bytes + descriptor_address + 8u, 2u);
     memcpy(memory.bytes + 600u, "XMS!", 4u);
-    if (!mvdm_xms_move_block(0x0010u, 0x0010u) ||
+    if (!mvdm_softpc_guest_memory_copy_forward(700u, 600u, 4u) ||
         memcmp(memory.bytes + 700u, "XMS!", 4u) != 0)
         return 4;
 
@@ -78,8 +84,8 @@ int main(void)
         memcmp(memory.bytes + 700u, "\0\0\0\0", 4u) != 0)
         return 5;
 
-    if (mvdm_xms_move_block(0u, 0u) != 0 ||
-        instance.state != SESSION_STATE_CANCELLED)
+    if (mvdm_softpc_guest_memory_copy_forward(UINT32_MAX, 0u, 2u) != 0 ||
+        instance.state != SESSION_STATE_ACTIVE)
         return 6;
     session_guest_memory_end(&instance);
     if (!session_thread_unbind(&instance) || !session_dispose(&instance)) return 7;

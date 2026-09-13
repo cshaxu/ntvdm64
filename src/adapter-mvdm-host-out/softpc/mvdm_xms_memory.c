@@ -6,21 +6,7 @@
 #include "session/session.h"
 #include "xms.h"
 
-#define MVDM_XMS_MOVE_DESCRIPTOR_BYTES 12u
-#define MVDM_XMS_MOVE_CHUNK_BYTES 4096u
-
-static uint32_t mvdm_xms_read_u32(uint8_t const *bytes)
-{
-    return (uint32_t)bytes[0] | ((uint32_t)bytes[1] << 8) |
-        ((uint32_t)bytes[2] << 16) | ((uint32_t)bytes[3] << 24);
-}
-
-static int mvdm_xms_copy(session *owner, uint32_t destination,
-    uint32_t source, uint32_t byte_count)
-{
-    return owner == session_thread_current() &&
-        mvdm_softpc_guest_memory_move(destination, source, byte_count);
-}
+#define MVDM_XMS_ZERO_CHUNK_BYTES 4096u
 
 static int mvdm_xms_zero_range(session *owner, uint32_t address,
     uint32_t byte_count)
@@ -32,7 +18,7 @@ static int mvdm_xms_zero_range(session *owner, uint32_t address,
         uint8_t *bytes;
         uint32_t chunk = byte_count - offset;
 
-        if (chunk > MVDM_XMS_MOVE_CHUNK_BYTES) chunk = MVDM_XMS_MOVE_CHUNK_BYTES;
+        if (chunk > MVDM_XMS_ZERO_CHUNK_BYTES) chunk = MVDM_XMS_ZERO_CHUNK_BYTES;
         if (!session_guest_memory_acquire(owner, address + offset, chunk,
             GUEST_MEMORY_ACCESS_WRITE, &lease, &bytes)) return 0;
         memset(bytes, 0, chunk);
@@ -67,48 +53,16 @@ VOID xmsMoveMemory(ULONG destination, ULONG source, ULONG byte_count)
 
     if (owner == NULL || byte_count > UINT32_MAX - source ||
         byte_count > UINT32_MAX - destination ||
-        !mvdm_xms_copy(owner, destination, source, byte_count)) {
+        !mvdm_softpc_guest_memory_move(destination, source, byte_count)) {
         if (owner != NULL) (void)session_request_cancellation(owner,
             SESSION_CANCELLATION_REQUESTED);
     }
 }
 
-int mvdm_xms_move_block(uint16_t stack_segment, uint16_t stack_offset)
+void mvdm_xms_cancel_current_operation(void)
 {
-    guest_memory_lease *descriptor_lease;
     session *owner = session_thread_current();
-    uint8_t *descriptor;
-    uint32_t descriptor_end;
-    uint32_t source;
-    uint32_t destination;
-    uint32_t word_count;
-    uint32_t byte_count;
 
-    descriptor_end = ((uint32_t)stack_segment << 4) + stack_offset;
-    if (owner == NULL || descriptor_end < MVDM_XMS_MOVE_DESCRIPTOR_BYTES ||
-        !session_guest_memory_acquire(owner,
-            descriptor_end - MVDM_XMS_MOVE_DESCRIPTOR_BYTES,
-            MVDM_XMS_MOVE_DESCRIPTOR_BYTES, GUEST_MEMORY_ACCESS_READ,
-            &descriptor_lease, &descriptor)) {
-        if (owner != NULL) (void)session_request_cancellation(owner,
-            SESSION_CANCELLATION_REQUESTED);
-        return 0;
-    }
-
-    destination = mvdm_xms_read_u32(descriptor);
-    source = mvdm_xms_read_u32(descriptor + 4u);
-    word_count = mvdm_xms_read_u32(descriptor + 8u);
-    if (!session_guest_memory_release(owner, descriptor_lease, 0) ||
-        word_count > UINT32_MAX / 2u) {
-        (void)session_request_cancellation(owner, SESSION_CANCELLATION_REQUESTED);
-        return 0;
-    }
-    byte_count = word_count * 2u;
-    if (byte_count > UINT32_MAX - source ||
-        byte_count > UINT32_MAX - destination ||
-        !mvdm_xms_copy(owner, destination, source, byte_count)) {
-        (void)session_request_cancellation(owner, SESSION_CANCELLATION_REQUESTED);
-        return 0;
-    }
-    return 1;
+    if (owner != NULL) (void)session_request_cancellation(owner,
+        SESSION_CANCELLATION_REQUESTED);
 }

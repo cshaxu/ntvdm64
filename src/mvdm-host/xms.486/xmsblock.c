@@ -13,6 +13,7 @@
 
 #include "xms.h"
 #include "mvdm_xms_memory.h"
+#include "mvdm_softpc_guest_memory.h"
 #include <memory.h>
 #include <string.h>
 #include <xmssvc.h>
@@ -177,14 +178,43 @@ ULONG NewSize;
 
 VOID xmsMoveBlock (VOID)
 {
-    /* DIVERGENCE MVDM-HOST-DIV-077: the original 32-bit host process mapped
-       every VDM byte into its own address space.  Preserve the descriptor
-       layout, forward-copy order and AX success contract through the current
-       session's bounded guest-memory mapping/lease instead of truncating a
-       host pointer on x64.  An unrepresentable lease is a controlled session
-       stop, not a fabricated XMS guest error code. */
-    if (!mvdm_xms_move_block(getSS(), getBP()))
+PBYTE pExtMoveInfo,pSrc,pDst;
+ULONG cbTransfer,SoftpcBase, DstSegOff;
+UCHAR MoveInfo[12];
+ULONG MoveInfoAddress;
+
+    /* DIVERGENCE(MVDM-HOST-DIV-077): preserve the original descriptor
+     * interpretation and forward-copy contract.  The one unavailable raw
+     * GetVDMAddr alias is materialized as a bounded local twelve-byte lease;
+     * no descriptor parsing or XMS policy remains in the adapter. */
+    MoveInfoAddress = ((ULONG)getSS() << 4) + getBP();
+    if (MoveInfoAddress < sizeof(MoveInfo) ||
+        !mvdm_softpc_guest_memory_copy_from(
+            MoveInfoAddress - sizeof(MoveInfo), MoveInfo, sizeof(MoveInfo))) {
+        mvdm_xms_cancel_current_operation();
         return;
+    }
+
+    pExtMoveInfo = MoveInfo + sizeof(MoveInfo);
+    (ULONG)pExtMoveInfo = (ULONG)pExtMoveInfo -4;
+    cbTransfer = (FETCHDWORD(*(PULONG)pExtMoveInfo));
+    if (cbTransfer > ((ULONG)-1) / 2u) {
+        mvdm_xms_cancel_current_operation();
+        return;
+    }
+    cbTransfer *= 2;                    // Get in bytes
+    (ULONG)pExtMoveInfo = (ULONG)pExtMoveInfo -4;
+    (DWORD)pSrc = FETCHDWORD(*(PULONG)pExtMoveInfo);
+    (ULONG)pExtMoveInfo = (ULONG)pExtMoveInfo -4;
+    (DWORD)pDst = FETCHDWORD(*(PULONG)pExtMoveInfo);
+
+    // Yes, we could use memmov for handling the overlapping regions
+    // but XMS spec wants memcpy behaviour.
+    if (!mvdm_softpc_guest_memory_copy_forward((ULONG)pDst,
+            (ULONG)pSrc, cbTransfer)) {
+        mvdm_xms_cancel_current_operation();
+        return;
+    }
     setAX(1);
     return;
 }

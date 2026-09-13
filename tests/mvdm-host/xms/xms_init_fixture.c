@@ -26,6 +26,27 @@ static ULONG allocation_calls;
 static ULONG commit_calls;
 static ULONG decommit_calls;
 
+/* The fixture binds an explicit lease transport below.  These CCPU exports
+ * remain link witnesses for the generic fallback only and are not reached. */
+ULONG c_sas_memory_size(void)
+{
+    return 0u;
+}
+
+void c_sas_loads(ULONG address, UCHAR *bytes, ULONG byte_count)
+{
+    (void)address;
+    (void)bytes;
+    (void)byte_count;
+}
+
+void c_sas_stores(ULONG address, UCHAR const *bytes, ULONG byte_count)
+{
+    (void)address;
+    (void)bytes;
+    (void)byte_count;
+}
+
 static int fixture_read(void *context, uint32_t address, uint8_t *bytes,
     uint32_t byte_count)
 {
