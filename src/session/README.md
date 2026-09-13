@@ -76,9 +76,9 @@ M0 T388 S5 disposition register:
 - `session.c` and `session.h`: `small neutral extension`. The existing
   session video event carries one graphics-ready and one host-display-toggle
   kind alongside invalidate/palette/activity. Session still neither creates
-  a window nor interprets SoftPC/PIF/guest state; the adapter identifies the
-  original graphics/input boundary and app owns the public presentation
-  response.
+  a window nor interprets SoftPC/PIF/guest state. T410 S1 removed the former
+  app-window consumer; D34 must now classify any retained source-facing
+  graphics event before selecting a future presentation owner.
 
 M0 T317 S3 disposition register:
 

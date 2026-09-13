@@ -26,6 +26,7 @@ proves the original `FSTI` continuation reaches BOP `FDh`.
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T410 native Console window-route retirement](evidence/m0-t410-s1-native-console-window-retirement.md) | M0 T410 S1 | Removes the project-owned independent presentation window while retaining the native Console text route; records the explicit runtime-baseline limitation. | Retain through T410 closure. |
 | [T407 FSTI fixed-selector recovery](evidence/m0-t407-s14-fsti-fixed-selector-recovery.md) | M0 T407 S14 | Restores the minimal early CPU40 selector carrier and records the source-order/runtime proof. | Retain with T407 closure. |
 | [T408 RTL recovery map](evidence/m0-t408-s1-rtl-recovery-map.md) | M0 T408 S1 | Maps D11--D16/D26 to selected providers, original owners, and finite binding boundaries; establishes D13--D15 as the first recovery cohort. | Active T408 evidence; supersedes no implementation evidence. |
 | [T408 x86 RTL restoration](evidence/m0-t408-s2-rtl-x86-restoration.md) | M0 T408 S2 | Replaces the D13--D15 C provider with selected original x86 RTL bodies and records edge-contract plus MEM regression evidence. | Retain through T408 closure. |

@@ -116,26 +116,7 @@ neither creates a DOS-device alias nor changes guest/firmware bytes.
 | `APP-DIV-015` | Original COMMAND environment initialization enumerates its inherited host environment. | A host-only continuation-observer path must not enter the original guest environment/allocation input. | App captures the explicitly optional path before original startup, deletes that one inherited variable, and the adapter uses only its private bounded copy. | `entry.c`; `../adapter-mvdm-host-out/softpc/{include/mvdm_softpc_termination.h,mvdm_softpc_termination.c}` |
 | `APP-DIV-017` | NT4's ordinary bare VDM can wait for a CSRSS/BaseSrv command producer after startup and ordinarily selects configuration through the original BaseVDM PIF carrier. | The unpack-and-run one-session CLI has no CSRSS producer and must not silently fall back to the DOSX/WOW default when its declared product scope is pure DOS. | App keeps the first `COMMAND.COM` as PermCom. It supplies a declared target through the original `AppName`/`CmdLine` split, enables the existing exhaustion disposition only after that record is consumed, and supplies the same packaged `pure-dos.pif` path through `PifFile`. Before copying a declared image it asks the adapter to resolve `.COM`/`.EXE`/`.BAT` beside the product then through current-directory/PATH; an unresolved token remains a public `COMSPEC /c` request. A bare launch uses only a bounded child `/C` tail; explicit targets, including `COMMAND.COM`, are never wrapped in `/C`. | `launch_declaration.c`; `../adapter-mvdm-host-out/basesrv/{source/base_vdm_local.c,source/mvdm_image_classification.c}` |
 
-## M0 T346 S3 presentation window
-
-`presentation_window.{c,h}` is an app-owned public Win32 presentation
-component. It renders copied text or graphics snapshots and forwards ordinary
-keyboard records through the original `CONIN$` input endpoint when its owning
-display-arbitration path has prepared it. It is deliberately **not** opened by
-normal product startup: original SoftPC acquires the process Console for the
-default character route. T388 S5 opens it only after the original
-`graphicsResize` boundary or a Console-consumed Alt+Enter request. Alt+Enter
-from this window returns to Console; it does not select `X86GFX`, fabricate a
-Console Server fullscreen mapping, or change original SoftPC fullscreen state.
-
-The app never receives a source DIB pointer, `HPALETTE`, or source mutex.
-The source-facing adapter uses the original DIB mutex value directly, waits and copies the
-graphics/palette snapshot before app paints.  User close requests a typed
-session cancellation; normal app teardown posts a distinct shutdown message
-and waits for the UI thread before session disposal.
-
 ## M0 T388 S5 display arbitration divergence
 
 | Exception | Original purpose | Reason | Implementation | Files |
 | --- | --- | --- | --- | --- |
-| `APP-DIV-016` | NT4 Console Server selected graphics/fullscreen surfaces and consumed Alt+Enter before the original SoftPC keyboard worker. | Modern public Console has no private VDM graphics controller or hardware-fullscreen transfer. | App binds a passive sink before activation, opens only on the adapter's original-graphics or consumed-Alt+Enter event, and returns focus to Console when the presentation window handles Alt+Enter. It never parses DOS, emits BOP, or writes guest memory. | `entry.c`, `presentation_window.[ch]`; adapter peer `../adapter-mvdm-host-out/win32/source/console_compat.c` |

@@ -1,7 +1,6 @@
 #include "app/machine_shell.h"
 #include "app/launch_declaration.h"
 #include "app/package_layout.h"
-#include "app/presentation_window.h"
 #include "adapter-mvdm-host-out/basesrv/include/mvdm_command_native_child.h"
 #include "adapter-mvdm-host-out/softpc/include/mvdm_softpc_termination.h"
 #include "adapter-mvdm-host-out/softpc/include/mvdm_softpc_physical_mapping.h"
@@ -94,7 +93,6 @@ int main(int argc, char **argv)
 {
     app_machine_shell shell;
     app_launch_declaration declaration;
-    app_presentation_window presentation;
     mvdm_base_vdm_environment vdm_environment;
     session owner;
     char **softpc_argv = NULL;
@@ -107,7 +105,6 @@ int main(int argc, char **argv)
     session_initialize(&owner, 1u);
     app_machine_shell_initialize(&shell);
     app_launch_declaration_initialize(&declaration);
-    app_presentation_window_initialize(&presentation);
     mvdm_base_vdm_environment_initialize(&vdm_environment);
     /* Capture default-off host diagnostics before original cmdenv.c obtains
      * inherited process variables for the guest DOS environment. */
@@ -173,13 +170,6 @@ int main(int argc, char **argv)
         result = APP_STARTUP_MACHINE_REJECTED;
         goto finish;
     }
-    /* The original SoftPC character route owns Console acquisition.  Binding
-     * this passive sink does not create a second surface: it can open only
-     * after original graphicsResize or the Console-owned Alt+Enter gesture. */
-    if (!app_presentation_window_prepare(&presentation, &owner)) {
-        result = APP_STARTUP_SESSION_REJECTED;
-        goto finish;
-    }
     if (!session_activate(&owner)) {
         result = APP_STARTUP_SESSION_REJECTED;
         goto finish;
@@ -215,8 +205,6 @@ finish:
         (uint32_t)result, 0, 0);
     app_launch_declaration_release_softpc_arguments(softpc_argv);
     mvdm_base_vdm_environment_restore(&vdm_environment);
-    if (!app_presentation_window_close(&presentation) && result == 0)
-        result = APP_STARTUP_DISPOSE_FAILURE;
     if (!session_dispose_with_reason(&owner, &dispose_reason)) {
         app_record_dispose_failure(&owner, dispose_reason);
         return APP_STARTUP_DISPOSE_FAILURE;

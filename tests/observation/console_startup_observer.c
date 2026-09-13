@@ -447,26 +447,6 @@ static BOOL wait_for_mouse_roundtrip_after(const char *path,
     }
 }
 
-/* This observer-only host gesture exercises the same public Console adapter
- * branch as physical Alt+Enter. The adapter consumes it before the guest
- * keyboard worker, so it cannot manufacture a DOS key or alter guest state. */
-static BOOL write_console_alt_enter(HANDLE input)
-{
-    INPUT_RECORD record;
-    DWORD written = 0u;
-
-    if (input == NULL || input == INVALID_HANDLE_VALUE) return FALSE;
-    memset(&record, 0, sizeof(record));
-    record.EventType = KEY_EVENT;
-    record.Event.KeyEvent.bKeyDown = TRUE;
-    record.Event.KeyEvent.wRepeatCount = 1u;
-    record.Event.KeyEvent.wVirtualKeyCode = VK_RETURN;
-    record.Event.KeyEvent.wVirtualScanCode = 0x1cu;
-    record.Event.KeyEvent.uChar.AsciiChar = '\r';
-    record.Event.KeyEvent.dwControlKeyState = LEFT_ALT_PRESSED | NUMLOCK_ON;
-    return WriteConsoleInputA(input, &record, 1u, &written) && written == 1u;
-}
-
 /* Feed an ordinary public Console mouse sequence through the same CONIN$
  * queue and original event worker as physical conhost input. The observer
  * accepts a record only after the original queue and callback-return stages
@@ -594,9 +574,6 @@ int main(int argc, char **argv)
     char timed_fault_text[256] = { 0 };
     BOOL have_timed_fault_text = FALSE;
     BOOL scripted_console_input = FALSE;
-    BOOL scripted_presentation_toggle = FALSE;
-    BOOL scripted_presentation_toggle_delivered = FALSE;
-    BOOL scripted_presentation_toggle_ready = FALSE;
     BOOL observe_console_mouse_mode = FALSE;
     BOOL observed_console_mouse_mode = FALSE;
     DWORD observed_console_input_mode = 0u;
@@ -728,11 +705,6 @@ int main(int argc, char **argv)
                     scripted_console_input = TRUE;
                     scripted_console_input_text = "ver\r";
                     scripted_console_input_sequence = "ver";
-                    continue;
-                }
-                if (strcmp(argv[argument_index],
-                           "--observe-presentation-toggle") == 0) {
-                    scripted_presentation_toggle = TRUE;
                     continue;
                 }
                 if (strcmp(argv[argument_index],
@@ -985,18 +957,6 @@ int main(int argc, char **argv)
                 scripted_console_input_text, console_input_ready_report_path);
         }
     }
-    if (scripted_presentation_toggle) {
-        DWORD presentation_report_length = GetEnvironmentVariableA(
-            "MVDM_CONSOLE_PRESENTATION_REPORT_PATH", presentation_report_path,
-            (DWORD)sizeof(presentation_report_path));
-        if (presentation_report_length != 0u &&
-            presentation_report_length < sizeof(presentation_report_path))
-            scripted_presentation_toggle_ready = wait_for_report_marker(
-                presentation_report_path, "MVDM-MOUSE stage=3",
-                OBSERVATION_INPUT_READY_TIMEOUT_MS);
-        if (scripted_presentation_toggle_ready)
-            scripted_presentation_toggle_delivered = write_console_alt_enter(input);
-    }
     if (observe_console_mouse_mode) {
         observed_console_mouse_mode = wait_for_console_mouse_mode(input,
             &observed_console_input_mode, OBSERVATION_INPUT_READY_TIMEOUT_MS);
@@ -1067,13 +1027,6 @@ int main(int argc, char **argv)
                 scripted_console_input ?
                     (scripted_console_input_delivered ? "delivered" : "failed") :
                     "none");
-        fprintf(report, "scripted-presentation-toggle=%s\n",
-                scripted_presentation_toggle ?
-                    (scripted_presentation_toggle_delivered ? "delivered" : "failed") :
-                    "none");
-        if (scripted_presentation_toggle)
-            fprintf(report, "scripted-presentation-toggle-ready=%s\n",
-                    scripted_presentation_toggle_ready ? "yes" : "no");
         fprintf(report, "console-mouse-mode-observed=%s\n",
                 observed_console_mouse_mode ? "yes" : "no");
         if (observe_console_mouse_mode && observed_console_mouse_mode)
