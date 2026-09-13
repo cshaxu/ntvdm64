@@ -514,3 +514,21 @@ coverage, consistent with a host copy running past a translated page; it
 does not implicate CCPU instruction semantics. Preserve this failing test
 while completing original-source/binding analysis. No mapping closure or
 production repair is claimed by this evidence delivery.
+
+Source follow-up: fault RVA 00056c87 falls inside the formal EXE map's
+memcpy/memmove range (preferred 00456780 through the next symbol at
+00456d00). This attributes the failing instruction to CRT memory copying,
+not a CCPU opcode. Both pinned OpenNT editions retain the same one-address
+EM_loads/EM_stores/EM_moves macros in nt_emm.c. The original
+emm_mngr.c::copy_exchange_data dispatches conventional-to-conventional
+requests directly to host_copy_con_to_con; mapped expanded operands can also
+be converted to that conventional route.
+
+Original ccpusas4.c offers bytewise c_sas_loads/stores and
+c_sas_move_bytes_forward. However, the forward loop does not reproduce
+overlap-safe MoveMemory, and c_sas_move_bytes_backward calls c_sas_not_used.
+Consequently, replacing EM_moves with that forward loop would be an
+unproved contract change, not a complete original-source repair. The next
+design comparison must cover restoration of contiguous host aliases versus
+a smallest source-shaped access binding, including overlap and all copy /
+exchange callers. No change to those original algorithms is made here.
