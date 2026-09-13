@@ -126,6 +126,12 @@ ULONG
 DpmiCpu40DescriptorShadowAddress(
     USHORT Selector
     );
+
+BOOL
+DpmiCpu40GetDosxIdtDescriptor(
+    PULONG Base,
+    PUSHORT Limit
+    );
 #endif
 #endif
 extern ULONG DosxIret;

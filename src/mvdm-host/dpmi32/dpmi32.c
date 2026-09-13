@@ -318,16 +318,6 @@ Return Value:
     IntelBase = (ULONG) Sim32GetVDMPointer((ULONG)0, 1, FALSE);
 
 #if defined(CPU_40_STYLE)
-    /* The 486 DOSX allocator publishes the GDT segment through 53:00, but
-     * allocates the 256-entry IDT immediately before it (see dxboot.asm:
-     * CBIDTOFF/CBGDTOFF).  WOW_x86 deliberately relies on native NT VDM to
-     * have installed that same live table when it enters protected mode.
-     * Preserve the source address here; the table is filled after this BOP
-     * and must not be copied into a stale private image. */
-    if (getAX() >= (256u * sizeof(LDT_ENTRY)) / 16u)
-        DpmiCpu40SetNativeIdtSourceAddress(((ULONG)getAX() << 4) -
-            (256u * sizeof(LDT_ENTRY)));
-
     /* The source-published DOSX GDT and the process LDT are distinct
      * descriptor domains.  Keep immutable published images for CCPU rather
      * than using the mutable DOSX source table as either live table. */

@@ -34,50 +34,6 @@ extern void c_setIDT_BASE_LIMIT(ULONG base, USHORT limit);
 #define CPU40_SS_REG 2
 #define CPU40_DS_REG 3
 
-/* This is session-local transition-provider state, not a DOSX descriptor.
- * It stays private so CCPU context marshaling cannot serialize it as a CPU
- * register field. */
-static ULONG cpu40_native_idt_source_address;
-
-VOID
-DpmiCpu40SetNativeIdtSourceAddress(
-    ULONG Address
-    )
-{
-    /* 53:00 is also used later for ordinary descriptor publication.  Only
-     * DOSX's first table publication establishes the adjacent IDT layout;
-     * later callers may legitimately carry unrelated small real-mode
-     * segments (for example 00D7h), which must not replace that carrier. */
-    if (cpu40_native_idt_source_address == 0u)
-        cpu40_native_idt_source_address = Address;
-}
-
-VOID
-DpmiCpu40RestoreNativeIdt(
-    VOID
-    )
-/*++
-
-Routine Description:
-
-    Restores the protected-mode IDTR carrier which WOW_x86 inherits from
-    native NT VDM.  Some CPU40 accelerated-context resumes restore the
-    real-mode IVT-shaped IDTR even though the guest has already returned to
-    PE.  The native VDM never exposed that transient state to a protected
-    software interrupt, so retain the source-published DOSX table at the
-    common pre-dispatch boundary.
-
---*/
-{
-    if (cpu40_native_idt_source_address != 0u)
-    {
-        ULONG source_address = cpu40_native_idt_source_address;
-
-        c_setIDT_BASE_LIMIT(source_address,
-            (USHORT)(256u * sizeof(LDT_ENTRY) - 1u));
-    }
-}
-
 VOID
 DpmiCpu40SwitchToProtectedMode(
     VOID
@@ -100,6 +56,8 @@ Routine Description:
     USHORT DsSelector;
     ULONG Eip;
     ULONG Esp;
+    ULONG IdtBase;
+    USHORT IdtLimit;
 
     StackPointer = Sim32GetVDMPointer(((getSS() << 16) | getSP()),
         0, (UCHAR)(getMSW() & MSW_PE));
@@ -122,11 +80,13 @@ Routine Description:
         c_setGDT_BASE_LIMIT(Cpu40GdtShadowAddress,
             (USHORT)(LDT_SIZE * sizeof(LDT_ENTRY) - 1));
 
-    /* WOW_x86 omits LIDT because the native VDM already retains DOSX's live
-     * 256-entry table.  53:00 recorded the source address and DOSX filled
-     * the gates in place before this 53:01 entry.  Project that exact table
-     * into CCPU's IDTR; do not synthesize gates or replace the DPMI hooks. */
-    DpmiCpu40RestoreNativeIdt();
+    /* WOW_x86 omits LIDT because native VDM installs the final SEL_IDT
+     * descriptor. `dxboot.asm` publishes that descriptor after moving the
+     * temporary tables to XMS. Mirror that final descriptor at 53:01;
+     * never retain the freed 53:00 construction buffer. */
+    if (!DpmiCpu40GetDosxIdtDescriptor(&IdtBase, &IdtLimit))
+        return;
+    c_setIDT_BASE_LIMIT(IdtBase, IdtLimit);
 
     setMSW(getMSW() | MSW_PE);
     setCPL(3);

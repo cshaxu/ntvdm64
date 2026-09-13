@@ -154,6 +154,49 @@ DpmiCpu40DescriptorShadowAddress(
 {
     return (Selector & 4u) ? Cpu40LdtShadowAddress : Cpu40GdtShadowAddress;
 }
+
+BOOL
+DpmiCpu40GetDosxIdtDescriptor(
+    PULONG Base,
+    PUSHORT Limit
+    )
+/*++
+
+Routine Description:
+
+    Return the final protected-mode IDT descriptor published by WOW_x86
+    DOSX. `dxboot.asm` publishes SEL_IDT through NSetSegmentDscr only after
+    MoveDscrTables has copied the temporary low-memory tables to their final
+    XMS location. The CPU40 DPMI binding must use this descriptor, rather
+    than retaining the earlier 53:00 construction-buffer address.
+
+--*/
+{
+    const USHORT DosxIdtSelector = 0x88u; /* pmdefs.inc, IFDEF WOW */
+    PLDT_ENTRY Descriptor;
+    ULONG DescriptorLimit;
+
+    if (Base == NULL || Limit == NULL || Cpu40GdtShadowAddress == 0u)
+        return FALSE;
+
+    Descriptor = (PLDT_ENTRY)(IntelBase + Cpu40GdtShadowAddress) +
+        (DosxIdtSelector >> 3);
+    if (!Descriptor->HighWord.Bits.Pres)
+        return FALSE;
+
+    *Base = (ULONG)Descriptor->BaseLow |
+        ((ULONG)Descriptor->HighWord.Bytes.BaseMid << 16) |
+        ((ULONG)Descriptor->HighWord.Bytes.BaseHi << 24);
+    DescriptorLimit = (ULONG)Descriptor->LimitLow |
+        ((ULONG)Descriptor->HighWord.Bits.LimitHi << 16);
+    if (Descriptor->HighWord.Bits.Granularity)
+        DescriptorLimit = (DescriptorLimit << 12) | 0xfffu;
+    if (DescriptorLimit < (256u * sizeof(LDT_ENTRY) - 1u))
+        return FALSE;
+
+    *Limit = (USHORT)(256u * sizeof(LDT_ENTRY) - 1u);
+    return TRUE;
+}
 #endif
 #endif
 

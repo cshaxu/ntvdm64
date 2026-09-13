@@ -5,6 +5,10 @@ This directory contains only the following owner-approved supporting records.
 T407's current fast-carrier retirement evidence is
 [indexed here](evidence/m0-t407-s9-fast-carrier-retirement.md).
 
+The follow-on [S10 IDT lifecycle recovery](evidence/m0-t407-s10-idt-lifecycle-recovery.md)
+replaces the stale `53:00` IDTR latch with the original final `SEL_IDT`
+descriptor publication contract.
+
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
 | [T407 original-carrier audit](evidence/m0-t407-s7-original-carrier-implementation-audit.md) | M0 T407 S7 | Corrective original-owner audit for DPMI tables/TIB, TSS/TR and FastWOW TEB/TD; separates recoverable user-mode source from kernel-only mechanics. | Retain through T407 closure and carrier acceptance. |

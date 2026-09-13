@@ -258,16 +258,6 @@ DpmiCpu40SwitchToProtectedMode(
     );
 
 VOID
-DpmiCpu40RestoreNativeIdt(
-    VOID
-    );
-
-VOID
-DpmiCpu40SetNativeIdtSourceAddress(
-    ULONG Address
-    );
-
-VOID
 DpmiSwitchToRealMode(
     VOID
     );
