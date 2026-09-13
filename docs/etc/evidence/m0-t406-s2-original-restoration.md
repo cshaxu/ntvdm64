@@ -557,3 +557,34 @@ unproved contract change, not a complete original-source repair. The next
 design comparison must cover restoration of contiguous host aliases versus
 a smallest source-shaped access binding, including overlap and all copy /
 exchange callers. No change to those original algorithms is made here.
+
+### Native placeholder experiment
+
+Added tests/observation/placeholder_alias_probe.c, a standalone Win32
+mechanism test, not a new production provider. It uses the documented
+[VirtualAlloc2](https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-virtualalloc2),
+MapViewOfFile3 and
+[UnmapViewOfFile2](https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-unmapviewoffile2)
+contracts; it imports no additional historical source and selects no CPU.
+
+Build: existing msvc-x86.cmd wrapper, cl /TC /MT /W4 /WX, onecore.lib,
+all OBJ/EXE output under build/M0-T406/S2/r002-dib-restoration.
+Build log placeholder-alias-build.log has no warning or error.
+EXE SHA-256 f2cc9e43b2d41acea6f34de904caf23f4c7239758985f83cec6d8a3d7f6dbf1a.
+Runtime log O:\ntvdm64\logs\t406-s2-placeholder-alias.txt, exit 0:
+`PASS x86 reverse-span duplicate-alias refusal restore cleanup`.
+
+Two 4 KiB adjacent placeholders map section offsets in reverse order;
+memmove reads the expected four boundary bytes. Replacing an occupied view
+is refused without changing existing bytes. Unmapping preserves a reserved
+placeholder; remapping both views to the same offset proves bidirectional
+shared writes against a third canonical view. Restoring the original offset
+recovers its preserved bytes. All views, reservations and section handles
+are released with checked results.
+
+Reviewer disposition: this proves availability of native page-alias mechanics
+on this host under x86, not original VdmMapDosMemory implementation recovery
+or guest acceptance. No production source, formal EXE or deployed EXE changes.
+The committed guest window regression still fails on the product baseline.
+Before integrating, audit original nt_mem commit/decommit/resize/free and
+external backing lifetime; do not substitute this experiment for that closure.
