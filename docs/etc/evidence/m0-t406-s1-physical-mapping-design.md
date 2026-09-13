@@ -293,3 +293,101 @@ Delivery review: documentation governance with relative links/anchors and
 git diff --check passed. Arithmetic recheck gives width +82/-46, conditional
 protocol +25/-6, total +107/-52. No src/tools/tests change is present. The
 reported amounts remain prospective gross footprint, not implemented savings.
+
+## P3 owner-authorized behavior-preserving observation
+
+Request: distinguish NTVDMx64 empty stubs from locally implemented missing
+functions, establish call evidence, and add logging or dialogs while retaining
+current behavior so the owner can verify actual use. This is an S1 research
+instrument, not S2 mapping restoration. Earlier no-source-change statements
+describe P1/P2 only. Implementation and review were sequential, one agent.
+
+All three selected definitions are in
+src/adapter-mvdm-host-out/softpc/mvdm_softpc_physical_mapping.c:
+
+| Function | Selected body and static caller | Evidence limit |
+| --- | --- | --- |
+| VdmMapDosMemory | Local numeric EMS alias insertion/replacement; nt_emm.c host_map_page. | Not an original recovered defining body or an empty stub. |
+| VdmUnmapDosMemory | Local exact-span alias removal; nt_emm.c host_unmap_page. | Same provenance limitation; removal is implemented. |
+| VdmSetPhysRecStructs | Forwards to local set/retire mapping code; nt_mem.c VdmAddVirtualMemory/VdmRemoveVirtualMemory. | Original raw-pointer callers may fail prepare before reaching it. |
+
+The imported fmstubs.c empty VdmSetPhysRecStructs remains in an unselected
+preprocessor branch. The fresh final EXE map resolves all three names to
+softpc-bindings:mvdm_softpc_physical_mapping.obj. The separately linked empty
+ActivityCheckAfterTimeSlice is real but outside these three mapping functions;
+this record must not be read as a claim that the whole product has no stubs.
+
+Observation is contained in the existing adapter, with no mirror, overlay,
+header, ABI, mapping-state algorithm or build-selection change. Existing
+optional report helpers were reviewed, but they require external environment
+configuration and do not preserve both error channels. This bounded local
+observer meets the owner's unchanged CLI requirement without a new diagnostic
+component or copied functional algorithm. It is temporary autonomous diagnostic
+footprint (+68/-1 physical lines), counted separately from restoration savings.
+Retire it after the consumer-coverage decision; this is not recovered OpenNT.
+
+The observer writes O:\ntvdm64\logs\physical-mapping-PID-CREATIONTIME.log,
+without arguments or environment changes. Seventeen independent first-site
+flags bound a process to at most 17 records of less than 256 bytes. Each write
+opens/closes its handle; subsequent hits do not perform file I/O. Process
+creation time distinguishes reused PIDs. No guest payload is read or logged.
+LastError and errno are preserved, including file failures. Logging is not
+timing-neutral: the few first hits perform host I/O, but no popup, worker,
+guest-state mutation or returned mapping result is introduced.
+
+| Event | Interpretation and a/b/c fields |
+| --- | --- |
+| translate.observer-active | Observation path ran; a is the first physical address, not proof of an alias. |
+| VdmMapDosMemory.call | Called, a/b are destination/source page numbers and c is page count; not success. |
+| map.created / map.replaced | Alias installed/replaced; a/b/c are destination/source/length in bytes. |
+| VdmUnmapDosMemory.call | Called, a/b are destination page/count. |
+| unmap.removed / unmap.not-found | Exact-span removal outcome; a/b are destination/length in bytes. |
+| publish.call / prepare.call | Local protocol entered; a/b are host identifier/length. |
+| prepare.rejected / prepare.ready | Rejected by initial validation or prepared; ready b/c are rounded length/alignment. Overflow failure has no separate marker. |
+| VdmSetPhysRecStructs.call | Called, a/b/c are host identifier/guest address/length. |
+| set.activated / set.removed / set.no-match | Existing mapping branch taken. Invalid owner returns before these outcome markers. |
+| translate.alias-hit | Address resolution used an EMS alias; a/b are input/output addresses. |
+| resolve.external-hit | Resolution returned external bytes; a/b are input/registered guest base. |
+
+First records are not counters or a complete ordered transaction trace. A call
+marker does not prove success; a hit does not prove every mapping semantic.
+Absent records are inconclusive if logging failed. Only interpret the process
+and workload actually observed; do not generalize an early exit to EDIT/WOW.
+
+Verification inputs and commands:
+
+- Fresh run root build/M0-T406/S1/r001-mapping-observation, no previous
+  objects reused. Generate with tools/build/New-T310OriginalSoftpcNinja.ps1
+  -Architecture x86 -BuildRoot (that root) -NodeExecutable
+  O:/.nvm/versions/node/v22.22.1/bin/node.exe; run generated
+  run-ninja-parallel.cmd original-softpc-process.exe. All 437 steps and final
+  link passed. build.log and final map retained there. Sandbox Ninja stalled;
+  only its verified PID 13268 was stopped, and the same graph ran successfully
+  outside the restricted environment. No mapping/source fix was made for this.
+- Compile tests/adapter-mvdm-host-out/physical_mapping_observation_test.c with
+  MSVC x86 /TC /MT /W4 /WX, actual mapping.c, session.c and
+  guest_memory_lease.c, includes src and softpc/include, kernel32.lib.
+  Outputs remain in the run root. Repeat using mapping.c from dbb9c7ed0 as
+  baseline-mapping.c. Both tests pass unchanged assertions: invalid owner,
+  prepare rejection, alias create/replace/translate/unmap/repeat-unmap,
+  external pointer identity/write/removal, LastError/errno preservation.
+  This is an adapter-only test, not machine/guest execution acceptance.
+- Observation test --deny-log holds its own expected log exclusively; all
+  assertions pass and its locked log stays zero bytes. Normal test performs
+  10,000 repeated resolves; first run PID 25820 produces 17 lines/2294 bytes.
+- StageProductExecutable.mjs --architecture x86 --input (run EXE) publishes
+  build/output/ntvdm32.exe and O:\ntvdm64\ntvdm32.exe, 3,235,328 bytes,
+  SHA-256 e952e78f1202ed1f95427bd7d6178b722d8b64bf839edf14c5717d489e612e6d.
+  Previous EXE retained as previous-ntvdm32.exe inside the run root.
+- Deployed product command.com /c exit, working directory O:\ntvdm64\,
+  hidden console with 15-second watchdog: PID 47164 exits 0 without timeout.
+  Its mapping log contains only translate.observer-active at 000c0000.
+  No three-function call or mapped-hit marker was observed in that bounded
+  workload. It is not EDIT, EMS or WOW/DIB consumer acceptance. stdout/stderr
+  remain in O:\ntvdm64\logs\t406-mapping-command-stdout.log and the matching
+  stderr.log. Owner can continue ordinary ntvdm32.exe binary invocations.
+
+Review: only observation and its adapter test change product/test source;
+original conditions, return values and mapping mutations are retained. No
+autonomous mapping implementation was removed or declared source-equivalent.
+Broader width-pattern audit and mapping consumer coverage remain open in S1.

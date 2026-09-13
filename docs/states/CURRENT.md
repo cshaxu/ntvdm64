@@ -29,6 +29,16 @@ runtime coverage. This extends S1 research now, not permission to implement
 an unreviewed lower mapping substitute. Width-only cleanup stays in this T;
 unrelated functional repairs retain their existing candidate owners.
 
+Owner observation amendment (2026-09-12): “在保留它们当前行为的基础上，
+加一些logging或者弹窗，这样我跑的时候可以确认它们有在用”. S1 now
+includes bounded mapping call/hit logging, focused unchanged-behavior tests,
+a fresh x86 formal build at build/M0-T406/S1/r001-mapping-observation and
+deployment to the existing runtime EXE. No mapping repair is admitted.
+Observation is implemented and verified: fresh x86 link, baseline/observed
+adapter tests and denied-log test pass; command.com /c exit returns 0 and
+records observer-active only. See the linked S1 evidence P3 section for log
+events, limitations and build identity. Actual EDIT/EMS/DIB coverage remains open.
+
 ## Active Packet
 
 ### M0 T406 S1 - Original physical mapping research and restoration design
@@ -39,9 +49,9 @@ unrelated functional repairs retain their existing candidate owners.
 | Admission And Approval | Owner: “准入队列第一个T任务，完成彻底调研和设计，并报告可以减少多少不需要的diff；哪些diff和overlay或者自主实现是依然必要的、原始opennt代码无法提供准确内容的；理想情况是完全0自主实现，全面复通原始代码。” |
 | Candidate Proposal | [Physical mapping](../proposals/proposal-physical-memory-mapping-restoration-001.md). |
 | Objective | Establish U02 original owners, complete selected EMS/DIB/access boundaries and a quantified source-first restoration design, preferring zero autonomous algorithms. |
-| Non-goals | No product repair, source import, executable deployment, guest/CPU semantic change, broker or unrelated U03 redesign in S1. |
+| Non-goals | No mapping repair, source import, guest/CPU semantic change, broker or unrelated U03 redesign. Diagnostic build/deployment only under the observation amendment. |
 | Reference Baseline | f2646d80b; T405 audit and current proposal; source/runtime acceptance remain distinct. |
-| Files And ABI Surface | Read-only source/build/artifact comparison; Status, Queue, existing proposal and indexed S1 evidence only. No ABI change. |
+| Files And ABI Surface | Physical mapping adapter observation and focused tests; Status and indexed S1 evidence. No public ABI, mapping-state or return-contract change. |
 | Applicable Rules | Repository source, architecture, coding, execution and documentation rules; corresponding governance skills. |
 | Verification | Bounded original/current source searches and hashes; per-file numstat and hunk disposition; selected compile macros/callers; governance, links, diff review, commit/push. |
 | Expected Markers | Original owner and four-rung disposition per interface; proved versus conditional removal counts; necessary bindings and unresolved original-source gaps; positive/negative S2 test design. |
@@ -60,10 +70,11 @@ unrelated functional repairs retain their existing candidate owners.
   unaccepted 1daff0ace WIP. T405 changed no product behavior and proves no new
   WRITE execution. [T404 closure](../history/m0-t404-owner-directed-closure.md)
   preserves prior runtime limitations.
-- Latest existing deployed executable: O:\ntvdm64\ntvdm32.exe,
-  2026-09-12 09:15, 3,232,768 bytes; SHA-256
-  27F8D7B5BB074838E9484877954A38DCBCFA0BE64282A4A2D05C776867655107.
-  This closure builds, runs and deploys no executable.
+- Latest deployed executable: O:\ntvdm64\ntvdm32.exe, T406 S1 P3 mapping
+  observation, 3,235,328 bytes; SHA-256
+  e952e78f1202ed1f95427bd7d6178b722d8b64bf839edf14c5717d489e612e6d.
+  Source behavior remains the prior mapping baseline plus bounded observation;
+  no new WRITE acceptance. Previous EXE retained in the S1 run root.
 - [Queue](QUEUE.md) owns candidate order and pending repairs; [debt](TODO.md)
   retains full WRITE limitations. Ignored builds and runtime logs are preserved,
   not deleted to obtain Git cleanliness. Commit/push and status verification

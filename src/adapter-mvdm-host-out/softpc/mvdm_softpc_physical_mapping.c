@@ -1,6 +1,9 @@
 #include "mvdm_softpc_physical_mapping.h"
 
 #include <stdlib.h>
+#include <errno.h>
+#include <stdio.h>
+#include <windows.h>
 
 #include "session/session.h"
 
@@ -25,6 +28,51 @@ typedef struct physical_alias_record {
 
 static physical_mapping_record *records;
 static physical_alias_record *aliases;
+
+/* Temporary T406 observation: one record per call-site per process, not a
+ * call counter or a correctness assertion. No guest bytes are read. Preserve
+ * both error channels, close each handle, and never make logging a condition
+ * of the mapping operation. Remove after consumer coverage is established. */
+static void mapping_observe(const char *event, uint32_t a, uint32_t b,
+    uint32_t c)
+{
+    DWORD saved_error = GetLastError();
+    int saved_errno = errno;
+    FILETIME created = {0}, exited, kernel, user;
+    char path[MAX_PATH];
+    char line[256];
+    HANDLE file;
+    DWORD written;
+    int length;
+
+    (void)GetProcessTimes(GetCurrentProcess(), &created, &exited, &kernel, &user);
+    (void)snprintf(path, sizeof(path),
+        "O:\\ntvdm64\\logs\\physical-mapping-%lu-%08lx%08lx.log",
+        GetCurrentProcessId(), created.dwHighDateTime, created.dwLowDateTime);
+    (void)CreateDirectoryA("O:\\ntvdm64\\logs", NULL);
+    file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ | FILE_SHARE_WRITE,
+        NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+    if (file != INVALID_HANDLE_VALUE) {
+        length = snprintf(line, sizeof(line),
+            "mapping-observation-v1 pid=%lu tid=%lu tick=%lu event=%s "
+            "a=%08lx b=%08lx c=%08lx first-site-hit-only\r\n",
+            GetCurrentProcessId(), GetCurrentThreadId(), GetTickCount(), event,
+            (unsigned long)a, (unsigned long)b, (unsigned long)c);
+        if (length > 0 && length < sizeof(line))
+            (void)WriteFile(file, line, (DWORD)length, &written, NULL);
+        CloseHandle(file);
+    }
+    errno = saved_errno;
+    SetLastError(saved_error);
+}
+
+/* The volatile fast path avoids atomic operations and I/O on repeated SAS
+ * accesses. Each expansion has a separate, bounded diagnostic-only flag. */
+#define MAPPING_OBSERVE(event, a, b, c) do { \
+    static volatile LONG observed; \
+    if (!observed && InterlockedCompareExchange(&observed, 1, 0) == 0) \
+        mapping_observe(event, (a), (b), (c)); \
+} while (0)
 
 static int add_overflow(uint32_t left, uint32_t right, uint32_t *sum)
 {
@@ -104,6 +152,7 @@ int mvdm_softpc_physical_mapping_publish(void *host_bytes,
     uint32_t identifier;
     int teardown_registered = 0;
 
+    MAPPING_OBSERVE("publish.call", (uint32_t)(uintptr_t)host_bytes, byte_count, 0);
     if (identifier_out != NULL) *identifier_out = 0u;
     if (owner == NULL || !session_valid(owner) || host_bytes == NULL ||
         byte_count == 0u) return 0;
@@ -157,14 +206,19 @@ int mvdm_softpc_physical_mapping_prepare(uint32_t identifier,
     uint32_t alignment;
     uint32_t total;
 
+    MAPPING_OBSERVE("prepare.call", identifier, byte_count, 0);
     if (alignment_out != NULL) *alignment_out = 0u;
     if (owner == NULL || !session_valid(owner) || byte_count == 0u ||
         (record = find_identifier(owner, identifier)) == NULL ||
-        record->active != 0u || record->source_size != byte_count) return 0;
+        record->active != 0u || record->source_size != byte_count) {
+        MAPPING_OBSERVE("prepare.rejected", identifier, byte_count, 0);
+        return 0;
+    }
     alignment = (uint32_t)(record->host_address & 3u);
     if (add_overflow(byte_count, alignment, &total)) return 0;
     if (add_overflow(total, UINT32_C(4095), &total)) return 0;
     record->prepared_size = total & ~UINT32_C(4095);
+    MAPPING_OBSERVE("prepare.ready", identifier, record->prepared_size, alignment);
     if (alignment_out != NULL) *alignment_out = alignment;
     return 1;
 }
@@ -181,15 +235,18 @@ void mvdm_softpc_physical_mapping_set(uint32_t identifier,
         record->prepared_size == byte_count) {
         record->guest_base = intel_address;
         record->active = 1u;
+        MAPPING_OBSERVE("set.activated", identifier, intel_address, byte_count);
         return;
     }
     for (record = records; record != NULL; record = record->next) {
         if (record->owner == owner && record->active != 0u &&
             record->guest_base == intel_address && record->prepared_size == byte_count) {
             remove_record(record);
+            MAPPING_OBSERVE("set.removed", identifier, intel_address, byte_count);
             return;
         }
     }
+    MAPPING_OBSERVE("set.no-match", identifier, intel_address, byte_count);
 }
 
 int32_t VdmMapDosMemory(uint32_t dos_intel_page, uint32_t vdm_intel_page,
@@ -203,6 +260,7 @@ int32_t VdmMapDosMemory(uint32_t dos_intel_page, uint32_t vdm_intel_page,
     uint32_t byte_count;
     int teardown_registered = 0;
 
+    MAPPING_OBSERVE("VdmMapDosMemory.call", dos_intel_page, vdm_intel_page, page_count);
     if (owner == NULL || !session_valid(owner) ||
         !page_span(dos_intel_page, page_count, &destination_base, &byte_count) ||
         !page_span(vdm_intel_page, page_count, &source_base, NULL))
@@ -211,6 +269,7 @@ int32_t VdmMapDosMemory(uint32_t dos_intel_page, uint32_t vdm_intel_page,
         if (record->owner == owner && record->destination_base == destination_base &&
             record->byte_count == byte_count) {
             record->source_base = source_base;
+            MAPPING_OBSERVE("map.replaced", destination_base, source_base, byte_count);
             return 0;
         }
     }
@@ -241,6 +300,7 @@ int32_t VdmMapDosMemory(uint32_t dos_intel_page, uint32_t vdm_intel_page,
         remove_alias(record);
         return (int32_t)0xc0000001u; /* STATUS_UNSUCCESSFUL */
     }
+    MAPPING_OBSERVE("map.created", destination_base, source_base, byte_count);
     return 0;
 }
 
@@ -250,6 +310,7 @@ int32_t VdmUnmapDosMemory(uint32_t dos_intel_page, uint32_t page_count)
     physical_alias_record *record;
     uint32_t destination_base;
     uint32_t byte_count;
+    MAPPING_OBSERVE("VdmUnmapDosMemory.call", dos_intel_page, page_count, 0);
     if (owner == NULL || !session_valid(owner) ||
         !page_span(dos_intel_page, page_count, &destination_base, &byte_count))
         return (int32_t)0xc000000du; /* STATUS_INVALID_PARAMETER */
@@ -257,9 +318,11 @@ int32_t VdmUnmapDosMemory(uint32_t dos_intel_page, uint32_t page_count)
         if (record->owner == owner && record->destination_base == destination_base &&
             record->byte_count == byte_count) {
             remove_alias(record);
+            MAPPING_OBSERVE("unmap.removed", destination_base, byte_count, 0);
             return 0;
         }
     }
+    MAPPING_OBSERVE("unmap.not-found", destination_base, byte_count, 0);
     return (int32_t)0xc0000225u; /* STATUS_NOT_FOUND */
 }
 
@@ -268,6 +331,7 @@ int mvdm_softpc_physical_mapping_translate(uint32_t intel_address,
 {
     session *owner = session_thread_current();
     physical_alias_record *record;
+    MAPPING_OBSERVE("translate.observer-active", intel_address, 0, 0);
     if (translated_address_out != NULL) *translated_address_out = intel_address;
     if (owner == NULL || !session_valid(owner) || translated_address_out == NULL)
         return 0;
@@ -278,6 +342,7 @@ int mvdm_softpc_physical_mapping_translate(uint32_t intel_address,
         offset = intel_address - record->destination_base;
         if (offset >= record->byte_count) continue;
         *translated_address_out = record->source_base + offset;
+        MAPPING_OBSERVE("translate.alias-hit", intel_address, *translated_address_out, 0);
         return 1;
     }
     return 0;
@@ -302,6 +367,7 @@ int mvdm_softpc_physical_mapping_resolve(uint32_t intel_address,
             continue;
         *host_byte_out = (uint8_t *)(record->host_address -
             (record->host_address & (uintptr_t)3u) + offset);
+        MAPPING_OBSERVE("resolve.external-hit", intel_address, record->guest_base, 0);
         return 1;
     }
     return 0;
@@ -322,5 +388,6 @@ void mvdm_softpc_physical_mapping_cancel(uint32_t identifier)
 void VdmSetPhysRecStructs(uint32_t host_address, uint32_t intel_address,
     uint32_t byte_count)
 {
+    MAPPING_OBSERVE("VdmSetPhysRecStructs.call", host_address, intel_address, byte_count);
     mvdm_softpc_physical_mapping_set(host_address, intel_address, byte_count);
 }
