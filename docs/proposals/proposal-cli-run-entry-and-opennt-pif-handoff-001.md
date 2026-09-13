@@ -125,6 +125,19 @@ ordering and source-shaped failures; no host handle enters guest state; pipe
 and non-pipe paths have whole-lifecycle regression; child completion cannot
 leave session-owned streams or re-entry state behind.
 
+**Required end-to-end redirection proof:** start an interactive guest
+`COMMAND.COM` under the normal product profile, submit `ver > REDIR.TXT`, and
+verify all of the following in one bounded run: COMMAND parses the operator;
+the child route reaches `BOP 54:08` and the original standard-handle service;
+the worker completes and returns by the original `54:0B` path; the parent
+returns to its prompt without a leaked stream or re-entry record; and the
+guest-visible `REDIR.TXT` contains the expected `ver` output. The test must
+use real Console standard handles and may use bounded observation markers, but
+it must not substitute `ntvdm32.exe "command/c ver > REDIR.TXT"`: direct app
+entry currently admits that as launch text rather than a COMMAND redirection
+operator. This package neither adds CLI shell parsing nor treats a direct-CLI
+file write as proof of the original BOP route.
+
 ### P7 — PIF Resolved-Target Classification
 
 Use the original `cmdCheckForPIF` and `cmdCheckBinary` ownership to classify a
