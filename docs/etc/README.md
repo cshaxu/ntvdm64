@@ -10,11 +10,25 @@ replaces the stale `53:00` IDTR latch with the original final `SEL_IDT`
 descriptor publication contract.
 
 [S11's non-fast DOSX publication trace](evidence/m0-t407-s11-dosx-publication-trace.md)
-proves that `53:01` and the `53:11` guest projection complete; the current
-frontier is the immediate original DOSX continuation after that BOP return.
+proves that `53:01` and the `53:11` guest projection complete.  Its former
+post-`53:11` inference is corrected by the source-aligned
+[S12 continuation evidence](evidence/m0-t407-s12-post-53-11-continuation.md):
+the reached call returns through original `AllocateExceptionStack`, not the
+separate `SEL_VDMTIB` publication site.
+
+[S13 caller attribution](evidence/m0-t407-s13-dosx-caller-attribution.md)
+then proves the reached `53:00` helper and `53:11` return are original, while
+the distinct `SEL_VDMTIB` source block remains unreached.
+
+[S14 fixed-selector recovery](evidence/m0-t407-s14-fsti-fixed-selector-recovery.md)
+corrects the later S5 removal of the early standalone `0040h` carrier and
+proves the original `FSTI` continuation reaches BOP `FDh`.
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T407 FSTI fixed-selector recovery](evidence/m0-t407-s14-fsti-fixed-selector-recovery.md) | M0 T407 S14 | Restores the minimal early CPU40 selector carrier and records the source-order/runtime proof. | Retain with T407 closure. |
+| [T407 DOSX caller attribution](evidence/m0-t407-s13-dosx-caller-attribution.md) | M0 T407 S13 | Proves the reached descriptor-helper and exception-stack continuations are original; prohibits synthetic early `SEL_VDMTIB` publication. | Retain through T407 closure and subsequent startup attribution. |
+| [T407 post-53:11 continuation](evidence/m0-t407-s12-post-53-11-continuation.md) | M0 T407 S12 | Source-aligned correction of the selected `53:11` return; proves `POP ES; CLC; RET` is original `AllocateExceptionStack` continuation and removes the one-run observer. | Retain through T407 closure and descriptor-publication attribution. |
 | [T407 original-carrier audit](evidence/m0-t407-s7-original-carrier-implementation-audit.md) | M0 T407 S7 | Corrective original-owner audit for DPMI tables/TIB, TSS/TR and FastWOW TEB/TD; separates recoverable user-mode source from kernel-only mechanics. | Retain through T407 closure and carrier acceptance. |
 | [T407 platform-carrier disposition](evidence/m0-t407-s6-platform-carrier-disposition.md) | M0 T407 S6 | Source-first disposition of PM stack, IDT, TSS/TR and FastWOW TEB/TD carriers. | Retain through T407 closure and named receiver acceptance. |
 | [T407 descriptor-domain restoration](evidence/m0-t407-s5-descriptor-domain-restoration.md) | M0 T407 S5 | Source-first GDT/LDT split, removal of cache/`0040h` policy, fixture and MEM regression. | Retain through T407 closure. |

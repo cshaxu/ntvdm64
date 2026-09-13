@@ -243,6 +243,26 @@ IFN2(
    else
       {
       /* Protected Mode */
+#if defined(CPU_40_STYLE)
+      /* DIVERGENCE(MVDM-HOST-DIV-227): FSTI executes before DOSX has
+       * published its ordinary SEL_BIOSDATA descriptor.  Native NTVDM
+       * inherits selector 0040h from the kernel VDM; CPU40 has no such
+       * inherited table entry.  Retain that exact early carrier only until
+       * DOSX reaches its original descriptor publication. */
+      if (selector == 0x0040u)
+	 {
+	 SET_SR_SELECTOR(indx, selector);
+	 SET_SR_BASE(indx, 0x00000400u);
+	 SET_SR_LIMIT(indx, 0x0000ffffu);
+	 SET_SR_AR_DPL(indx, 3);
+	 SET_SR_AR_W(indx, 1);
+	 SET_SR_AR_R(indx, 1);
+	 SET_SR_AR_E(indx, 0);
+	 SET_SR_AR_C(indx, 0);
+	 SET_SR_AR_X(indx, 0);
+	 }
+      else
+#endif
       if ( selector_is_null(selector) )
 	 {
 	 /* load is allowed - but later access will fail

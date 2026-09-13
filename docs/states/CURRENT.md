@@ -2,32 +2,9 @@
 
 ## Current Work
 
-**Active: M0 T407 S12.**
-
-## Active Packet
-
-### M0 T407 S12 — Post-53:11 DOSX BOP continuation
-
-| Field | Record |
-| --- | --- |
-| Identifier Mode | M0 T407 S12, Ordinary Mode, one agent implements bounded instrumentation then independently re-reviews the evidence. |
-| Admission And Approval | The existing automatic approval for remaining T407 S packages admits the next recovery experiment after S11. |
-| Candidate Proposal | [Original DPMI and XMS contract restoration](../proposals/proposal-dpmi-xms-contract-restoration-001.md). |
-| Objective | Observe the source-owned CPU40 return from the completed DOSX `53:11` BOP through the immediate DOSX continuation, and establish whether the required next `NSetSegmentDscr(SEL_VDMTIB, ...)` reaches `53:00` or identify the first original CPU terminal. |
-| Non-goals | No Fast carrier restoration, provider-result change, CPU instruction semantics change, broker work, WOW/provider policy change or WRITE acceptance claim. |
-| Reference Baseline | [S11 DOSX publication trace](../etc/evidence/m0-t407-s11-dosx-publication-trace.md), original `dxboot.asm` post-`InitializePmStackInfo` order, selected CPU40 BOP return path. |
-| Files And ABI Surface | Bounded default-off CPU continuation witness, test/observation harness only if needed, Status and indexed evidence. |
-| Applicable Rules | Goal, architecture, coding, execution, document and source-policy authorities; mandatory source-recovery audit. |
-| Verification | Original/current post-`53:11` continuation matrix; exact scalar trace with no host pointers; formal x86 build; MEM/COMMAND regression and bounded WRITE observation; governance, diff review, commit/push. |
-| Expected Markers | A PID-correlated record says whether the source-required `SEL_VDMTIB` publication is reached, or identifies the first source-owned CPU terminal before it. |
-| Asset Needs | Existing pinned OpenNT/OpenNT-4.5 trees and local mirrors only; no new source/media. |
-| Reporting Requirements | Explain the original next instruction/descriptor publication, trace hit/no-hit, source owner of every terminal, and the exact code/diff consequence. |
-| Stop Conditions | An unlocated source, non-composable kernel primitive or unproven selected return path is evidence—not authority to claim a repair; record the next recovery experiment. |
-| Exit Criteria | Bounded trace evidence, formal build and regression result, and a named source-first repair or source-proven no-op. |
-| Original Owner Request | “我在等着你证明呢！”以及随后授权自动准入余下 S。 |
-| Similar-Issue Sweep | `53:11` provider return, `SEL_VDMTIB` descriptor publication, BOP service-byte/IP advance, far return and CPU terminal attribution. |
-
-S1–S5 are delivered at `13fc0fd4b`, `d36c9e611`, `d16e3a72e`, `9234a98de` and `e8e41ab7f`. S6's previous closure was an incomplete disposition. S7/S8 delivered the indexed original-carrier audit and corrected FastWOW selection; [S9 retirement](../etc/evidence/m0-t407-s9-fast-carrier-retirement.md), [S10 IDT recovery](../etc/evidence/m0-t407-s10-idt-lifecycle-recovery.md), and [S11 publication trace](../etc/evidence/m0-t407-s11-dosx-publication-trace.md) are delivered. S12 is active for the post-`53:11` continuation boundary.
+**No active M/T/S packet.** M0 T407 closed with the
+[DPMI/XMS closure record](../history/m0-t407-dpmi-xms-contract-restoration.md)
+and [S14 source/runtime evidence](../etc/evidence/m0-t407-s14-fsti-fixed-selector-recovery.md).
 
 T406 is closed by its final delivery; [S2 closure evidence](../etc/evidence/m0-t406-s2-original-restoration.md#s2-final-x86-width-and-access-boundary-disposition)
 records its restored cohorts, remaining registered seams, trace hit/no-hit results,
@@ -222,6 +199,7 @@ remain explicitly unverified rather than inferred correct from compilation.
 
 | Task | Compact result |
 | --- | --- |
+| T407 | Original DPMI/XMS and immediate DOSX transition recovery closed; `FSTI` reaches BOP `FDh`, MEM/COMMAND pass, while WRITE remains assigned to WOW lifecycle recovery. |
 | T405 | Static diff/overlay audit complete; 37 overlap rows and eight unresolved families transferred to candidate owners. No restoration/runtime acceptance claim. |
 | T406 | Original mapping contracts, bounded EMS lease binding and admitted x86-width cohorts restored; final remaining candidates are either registered seams or named future-owner revalidation. |
 | T404 | Owner-directed closure with unaccepted WIP preserved; mouse acceptance retained, WRITE incomplete. |
