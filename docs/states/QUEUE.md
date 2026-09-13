@@ -40,10 +40,9 @@ package alone owns the cross-owner compatibility matrix.
 
 Each candidate has its own proposal below. The
 [runtime recovery program](../proposals/proposal-ntvdm-runtime-recovery-program-20260901.md)
-provides shared background for the runtime candidates. On 2026-09-12 the owner
-requested a separate file-service restoration package at the queue head,
-carrying D31-D33 and D08 from the current source audit for future implementation. This
-does not activate another packet or require broker architecture first.
+provides shared background for the runtime candidates. The former queue-head
+DOS file-service candidate is now the active Status packet; its D31--D33 and
+D08 work is therefore not duplicated here.
 
 On 2026-09-12 the owner approved the revised candidate sequence: physical-memory
 mapping, DPMI/XMS, RTL,
@@ -75,13 +74,12 @@ later package merely because an earlier linked component has no runtime proof.
 
 | Next order | Candidate implementation package | Proposal |
 | --- | --- | --- |
-| 1 | Original DOS file-service restoration — restore original DEM/VDD handle ownership and fast-read semantics, replacing duplicated shadow and overlay policy through bounded guest-memory and user-mode bindings. Independent of broker implementation; preserves the current CLI and worker profile. | [Proposal](../proposals/proposal-dos-file-service-restoration-001.md) |
-| 2 | Console input, display and resource restoration — remove the independent-window route; restore D09, D23-D25, D28-D30 and D34 through source-shaped Console boundaries while preserving native mouse/keyboard UX, embedded ROMs and package-relative configuration. Audit RDP normalization separately from paste. | [Proposal](../proposals/proposal-console-input-display-resource-restoration-001.md) |
-| 3 | CCPU40 C-VID and event-path research and restoration — resolve U01 using original direct-interface and event-policy evidence, prove the complete profile closure, then replace unsupported local binding/calibration approximations without changing CPU instruction semantics. | [Proposal](../proposals/proposal-ccpu40-cvid-event-path-restoration-001.md) |
-| 4 | Cross-process broker closure — restore D01-D07/D10 as one original BaseSrv/BaseClient lifecycle with three-program composition and finite IPC. Prove selected coordination rows without acquiring guest, COMMAND, SoftPC or WOW provider behavior. | [Proposal](../proposals/proposal-cross-process-broker-closure-001.md) |
-| 5 | WOW and debugger original-owner restoration — resolve D17-D22 and D27 through original font, glyph, scheduling, cursor/icon, error-response, debugger and callback owners; remove proved inactive duplicates and preserve finite modern bindings. | [Proposal](../proposals/proposal-wow-debugger-original-owner-restoration-001.md) |
-| 6 | Single-process WOW16 application lifecycle recovery — after broker and WOW/debugger restoration, prove the selected WRITE workload's original start/run/return within one x86 worker, or record the exact source-proven unavailable boundary. No substitute guest/UI failure policy, private USER/CSRSS shell or transport-based workaround. | [Proposal](../proposals/proposal-wow16-single-process-lifecycle-recovery-001.md) |
-| 7 | Multi-process matrix and product release — prove the brokered multi-process x86-worker profile, the cross-owner DOS/Win16 compatibility matrix, portable media layout and release packaging. Host x64 Windows is an x86-worker acceptance platform, not a native-x64 worker requirement. | [Proposal](../proposals/proposal-multiprocess-release-matrix-001.md) |
+| 1 | Console input, display and resource restoration — remove the independent-window route; restore D09, D23-D25, D28-D30 and D34 through source-shaped Console boundaries while preserving native mouse/keyboard UX, embedded ROMs and package-relative configuration. Audit RDP normalization separately from paste. | [Proposal](../proposals/proposal-console-input-display-resource-restoration-001.md) |
+| 2 | CCPU40 C-VID and event-path research and restoration — resolve U01 using original direct-interface and event-policy evidence, prove the complete profile closure, then replace unsupported local binding/calibration approximations without changing CPU instruction semantics. | [Proposal](../proposals/proposal-ccpu40-cvid-event-path-restoration-001.md) |
+| 3 | Cross-process broker closure — restore D01-D07/D10 as one original BaseSrv/BaseClient lifecycle with three-program composition and finite IPC. Prove selected coordination rows without acquiring guest, COMMAND, SoftPC or WOW provider behavior. | [Proposal](../proposals/proposal-cross-process-broker-closure-001.md) |
+| 4 | WOW and debugger original-owner restoration — resolve D17-D22 and D27 through original font, glyph, scheduling, cursor/icon, error-response, debugger and callback owners; remove proved inactive duplicates and preserve finite modern bindings. | [Proposal](../proposals/proposal-wow-debugger-original-owner-restoration-001.md) |
+| 5 | Single-process WOW16 application lifecycle recovery — after broker and WOW/debugger restoration, prove the selected WRITE workload's original start/run/return within one x86 worker, or record the exact source-proven unavailable boundary. No substitute guest/UI failure policy, private USER/CSRSS shell or transport-based workaround. | [Proposal](../proposals/proposal-wow16-single-process-lifecycle-recovery-001.md) |
+| 6 | Multi-process matrix and product release — prove the brokered multi-process x86-worker profile, the cross-owner DOS/Win16 compatibility matrix, portable media layout and release packaging. Host x64 Windows is an x86-worker acceptance platform, not a native-x64 worker requirement. | [Proposal](../proposals/proposal-multiprocess-release-matrix-001.md) |
 
 ## Unresolved audit-family ownership
 

@@ -20,7 +20,6 @@
 #include <vrnmpipe.h>
 #include <nt_vdd.h>
 
-#include <mvdm_vdd_sft_shadow.h>
 #include <mvdm_softpc_termination.h>
 
 BOOL (*VrInitialized)(VOID);  // POINTER TO FUNCTION
@@ -37,6 +36,21 @@ static BOOL demCurrentPdbAddress(PULONG pPDB)
         &currentPdb)) return FALSE;
     *pPDB = (ULONG)currentPdb << 16;
     return TRUE;
+}
+
+/* The selected CCPU40 Sim32 provider still supplies the original synchronous
+ * linear-pointer contract.  `demgset.c` records the DOS SFT head as a stable
+ * 16:16 value so it cannot retain a host pointer across worker setup; resolve
+ * that value only at the original VDD call boundary. */
+static PDOSSF demSftHeadPointer(VOID)
+{
+    ULONG sftHead;
+
+    if (sft_head_location.valid != 1u)
+        return NULL;
+    sftHead = ((ULONG)sft_head_location.segment << 16) |
+        (ULONG)sft_head_location.offset;
+    return (PDOSSF)Sim32GetVDMPointer(sftHead, 0, 0);
 }
 
 BOOL
@@ -884,11 +898,6 @@ CHAR    szFileName[MAX_PATH];
 }
 
 
-/* DIVERGENCE MVDM-HOST-DIV-007: the original VDD body assumes all returned
- * SFT/JFT pointers permanently alias NTVDM process memory.  Preserve the
- * original source below as inactive provenance; the same exported functions
- * immediately following it use the adapter-mvdm-host-out/softpc bounded shadow lifecycle. */
-#if 0
 PDOSSFT GetFreeSftEntry(PDOSSF pSfHead, PWORD usSFN)
 {
     WORD    i;
@@ -960,6 +969,7 @@ PBYTE*      ppJFT;
 PDOSPDB pPDBFlat;
 PBYTE   pJFT;
 PDOSSFT pSFT;
+PDOSSF  pSFTHead;
 USHORT  usSFN;
 WORD    JFTLength;
 SHORT   hDosHandle;
@@ -996,7 +1006,8 @@ SHORT   hDosHandle;
     // Check the SF for a free SFT.
     //
 
-    if (!(pSFT = GetFreeSftEntry(pSFTHead, &usSFN))) {
+    if (!(pSFTHead = demSftHeadPointer()) ||
+        !(pSFT = GetFreeSftEntry(pSFTHead, &usSFN))) {
         return (- ERROR_TOO_MANY_OPEN_FILES);
     }
 
@@ -1178,7 +1189,9 @@ ULONG   ulSFLink;
     }
 
     // Get flat pointer to SF
-    pSfFlat =  pSFTHead;
+    if (!(pSfFlat = demSftHeadPointer())) {
+        return 0;
+    }
 
     // Find the right SFT group
     while (usSFN >= (usSFTCount = pSfFlat->SFCount)){
@@ -1207,66 +1220,4 @@ ULONG   ulSFLink;
     }
 
     return (HANDLE) pSftFlat[usSFN].SFT_NTHandle;
-}
-#endif
-
-/* DIVERGENCE MVDM-HOST-DIV-007: retain the original exported VDD names,
- * K&R parameter form, search order and source failure directions.  The
- * adapter supplies bounded host shadows instead of a persistent guest alias. */
-SHORT VDDAllocateDosHandle (pPDB,ppSFT,ppJFT)
-ULONG       pPDB;
-PDOSSFT*    ppSFT;
-PBYTE*      ppJFT;
-{
-    if (!pPDB && !demCurrentPdbAddress(&pPDB))
-        return (- ERROR_INVALID_ADDRESS);
-    if (ppSFT == NULL)
-        return (- ERROR_INVALID_ADDRESS);
-    {
-        SHORT handle = mvdm_vdd_sft_shadow_allocate(pPDB, &sft_head_location,
-            ppSFT, ppJFT);
-        return handle < 0 ? (- ERROR_TOO_MANY_OPEN_FILES) : handle;
-    }
-}
-
-VOID VDDAssociateNtHandle (pSFT,hFile,wAccess)
-PDOSSFT     pSFT;
-HANDLE      hFile;
-WORD        wAccess;
-{
-    (void)mvdm_vdd_sft_shadow_associate(pSFT, hFile, wAccess);
-}
-
-BOOL VDDReleaseDosHandle (pPDB,hFile)
-ULONG       pPDB;
-SHORT       hFile;
-{
-PBYTE   pJFT;
-PDOSSFT pSFT;
-HANDLE  ntHandle;
-
-    if (!pPDB && !demCurrentPdbAddress(&pPDB))
-        return FALSE;
-    ntHandle = mvdm_vdd_sft_shadow_retrieve(pPDB, &sft_head_location, hFile,
-        &pSFT, &pJFT);
-    if (!ntHandle) return FALSE;
-    pJFT[hFile] = 0xFF;
-    pSFT->SFT_Ref_Count--;
-    if (!mvdm_vdd_sft_shadow_commit(pSFT)) {
-        mvdm_vdd_sft_shadow_discard(pSFT);
-        return FALSE;
-    }
-    return TRUE;
-}
-
-HANDLE VDDRetrieveNtHandle (pPDB,hFile,ppSFT,ppJFT)
-ULONG       pPDB;
-SHORT       hFile;
-PDOSSFT*    ppSFT;
-PBYTE*      ppJFT;
-{
-    if (!pPDB && !demCurrentPdbAddress(&pPDB))
-        return 0;
-    return mvdm_vdd_sft_shadow_retrieve(pPDB, &sft_head_location, hFile,
-        ppSFT, ppJFT);
 }

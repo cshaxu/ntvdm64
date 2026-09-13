@@ -242,7 +242,7 @@ $adapterWin32Names = @('ntioapi_facade.c', 'thread_start_compat.c',
 $adapterBaseSrvNames = @('base_vdm_client.c', 'base_vdm_local.c', 'base_vdm_broker.c',
                           'mvdm_image_classification.c', 'mvdm_command_guest_state.c',
                           'mvdm_command_native_child.c')
-$adapterVddNames = @('mvdm_vdd_sft_shadow.c', 'mvdm_softpc_vdd_unavailable.c',
+$adapterVddNames = @('mvdm_softpc_vdd_unavailable.c',
                      'mvdm_softpc_vdd_configuration.c')
 $adapterMonitorNames = @('vdm_control.c', '../mvdm_vdm_tib.c')
 $adapterDebuggerNames = @('dbg_init.c', 'dbg_state.c', 'dbg_dispatch.c', 'dbg_unavailable.c')
@@ -438,8 +438,7 @@ foreach ($entry in @(
     'GetVolumeInformationOem=_GetVolumeInformationOem@32',
     'mvdm_softpc_guest_memory_acquire',
     'mvdm_softpc_guest_memory_release',
-    'mvdm_softpc_effective_address',
-    'mvdm_vdd_sft_shadow_commit', 'mvdm_vdd_sft_shadow_discard'
+    'mvdm_softpc_effective_address'
 )) {
     $wow32ProviderExportLines.Add('    ' + $entry)
 }

@@ -2,30 +2,32 @@
 
 ## Current Work
 
-**Active: M0 T409 S2.**
+**Active: M0 T409 S3.**
 
 ## Active Packet
 
-### M0 T409 S2 — original DEM/VDD handle lifecycle recovery
+### M0 T409 S3 — source-shaped fast-read recovery
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T409 S2, Ordinary Mode. |
+| Identifier Mode | M0 T409 S3, Ordinary Mode. |
 | Admission And Approval | Owner approved: “准入第一个队列任务并开始执行”。 |
 | Candidate Proposal | [DOS file-service restoration](../proposals/proposal-dos-file-service-restoration-001.md). |
-| Objective | Restore the original D31--D33 algorithm in `demfile.c` through scoped guest-memory views and reduce the shadow provider to finite lease mechanics. |
-| Non-goals | No fast-read implementation, broker/CLI/CPU change, generic guest-pointer manager, or unreviewed persistent guest alias. |
-| Reference Baseline | T409 S1 audit: `m0-t409-s1-vdd-handle-lifecycle-audit.md`; original bodies are frozen at `demfile.c:891--1211`. |
-| Files And ABI Surface | `mvdm-host/dos/dem/demfile.c`, VDD/WOW callers, `mvdm_vdd_sft_shadow` and checked guest-memory lease carriers. |
+| Objective | Recover the original `NTFastDOSIO`/DEM fast-read contract or select the original CF-to-`DEMREAD` fallback after proving the exact unavailable dependency. |
+| Non-goals | No broker/CLI/CPU change, fast-write implementation, generic guest-pointer manager, or a new autonomous file-I/O policy. |
+| Reference Baseline | T409 S2 restored the original D31--D33 owner and deleted its shadow; see `m0-t409-s2-original-vdd-handle-restoration.md`. The remaining selected fast-read overlay is `mvdm-host-overlay/dos/dem/demfastio.c`. |
+| Files And ABI Surface | `mvdm-host-overlay/dos/dem/demfastio.c`, original DEM read call sites, any selected `opennt-host` `rdwr.c` slice, checked guest-memory publication binding, tests and formal graph. |
 | Applicable Rules | Source policy, architecture/coding rules and Execution historical-recovery gate. |
-| Verification | Focused handle lifecycle fixture, x86 formal graph, original/source diff review, selected file caller regression and governance gate. |
-| Expected Markers | Original allocation/association/retrieve/release ordering, scoped lease lifetime, exact rollback publication, and reduced shadow footprint. |
-| Asset Needs | Existing OpenNT external source, selected x86 build graph and existing guest-memory fixture surface. |
-| Reporting Requirements | Record retained binding lines, removed duplicate algorithm, fixture/build evidence and any unavailable original dependency. |
-| Stop Conditions | A lifecycle operation requiring a durable guest alias or a caller whose write ordering cannot be represented by scoped commit pauses recovery. |
-| Exit Criteria | Original algorithm owns D31--D33; duplicate shadow traversal/mutation is removed; focused tests and selected x86 composition pass. |
+| Verification | Original/current source ledger; focused zero/short/EOF/seek/no-seek and failed guest-publication checks; x86 formal graph; selected ordinary file workload and governance gate. |
+| Expected Markers | Original handle eligibility and file-position semantics, exactly-once instruction completion, CF fallback, no unsafe second host read after failed guest publication, and a minimized overlay footprint. |
+| Asset Needs | Existing OpenNT external source, selected x86 build graph, existing guest-memory fixture surface and `O:\ntvdm64` runtime package. |
+| Reporting Requirements | Record original owner/source identity, four-rung disposition, retained binding lines, removed/reduced overlay footprint, focused tests, runtime reachability and unavailable dependencies. |
+| Stop Conditions | Original fast-read source requires unavailable kernel trap/VDM-TIB mechanics that a finite same-shaped binding cannot preserve, or a proposed path changes guest CF/position/completion behavior. |
+| Exit Criteria | Original source or explicitly proved original fallback owns D08; no autonomous fast-read policy remains; focused tests, x86 composition and bounded runtime evidence are recorded. |
 | Original Owner Request | “准入第一个队列任务并开始执行”。 |
-| Similar-Issue Sweep | DEM handles, VDD SFT/JFT helpers, WOW32 file callers, `demRead` publication and existing fast-read overlay. |
+| Similar-Issue Sweep | `NTFastDOSIO`, `DEMFASTREAD`, ordinary `demRead` publication, `rdwr.c`, host I/O position/EOF behavior, VDD/Redirector read consumers and COMMAND/EDIT file workloads. |
+
+S2 closed and delivered: [original DEM/VDD handle restoration](../etc/evidence/m0-t409-s2-original-vdd-handle-restoration.md) restores D31--D33 directly through CCPU40's selected synchronous Sim32 pointer contract. It removes the 425-line shadow provider and its dependent caller/build/test surface; the automated MEM watchdog baseline remains a recorded Console limitation, not a VDD pass claim.
 
 S6 closed: original D26 `copystr.c` was already selected; the only retained
 OEM conversion is the necessary Unicode-to-guest lease seam.  See

@@ -18,7 +18,6 @@
 #include "dossvc.h"
 #include "demexp.h"
 #include "nt_vdd.h"
-#include <mvdm_vdd_sft_shadow.h>
 
 
 MODNAME(wkfileio.c);
@@ -1516,9 +1515,6 @@ ULONG FASTCALL WK32FileOpen(PVDMFRAME pFrame)
         }
         pJFT[iDosHandle] = 0xFF;                // undo VDDAllocateDosHandle
         pSft->SFT_Ref_Count--;
-        /* DIVERGENCE MVDM-HOST-DIV-007: VDD returns a bounded host shadow;
-         * commit the original error-path mutations before this callback ends. */
-        (void)mvdm_vdd_sft_shadow_commit(pSft);
         goto Done;
     } else if (ItsANamedPipe) {
 
@@ -1560,13 +1556,6 @@ ULONG FASTCALL WK32FileOpen(PVDMFRAME pFrame)
         LocalFree(lpFileName);
         pSft->SFT_Flags |= SFT_NAMED_PIPE;
     }
-    /* DIVERGENCE MVDM-HOST-DIV-007: this is the final direct SFT write in
-     * the original open path. */
-    if (!mvdm_vdd_sft_shadow_commit(pSft)) {
-        ul = ERROR_INVALID_ADDRESS | 0xFFFF0000;
-        goto Done;
-    }
-
     ul = iDosHandle;
 
 Done:
@@ -1669,8 +1658,6 @@ ULONG FASTCALL WK32FileCreate(PVDMFRAME pFrame)
         }
         pJFT[iDosHandle] = 0xFF;                // undo VDDAllocateDosHandle
         pSft->SFT_Ref_Count--;
-        /* DIVERGENCE MVDM-HOST-DIV-007: commit the original undo writes. */
-        (void)mvdm_vdd_sft_shadow_commit(pSft);
         ul = GetLastError() | 0xFFFF0000;
         goto Done;
     } else {
@@ -1742,12 +1729,6 @@ ULONG FASTCALL WK32FileCreate(PVDMFRAME pFrame)
         LocalFree(lpFileName);
         pSft->SFT_Flags |= SFT_NAMED_PIPE;
     }
-    /* DIVERGENCE MVDM-HOST-DIV-007: final direct SFT write in create path. */
-    if (!mvdm_vdd_sft_shadow_commit(pSft)) {
-        ul = ERROR_INVALID_ADDRESS | 0xFFFF0000;
-        goto Done;
-    }
-
     ul = iDosHandle;
 
 Done:
@@ -1804,15 +1785,6 @@ ULONG FASTCALL WK32FileClose(PVDMFRAME pFrame)
     pSFT->SFT_Ref_Count--;
     fLastReference = !pSFT->SFT_Ref_Count;
 
-    /* DIVERGENCE MVDM-HOST-DIV-007: pSFT/pJFT are bounded host shadows;
-     * write the original close mutations back before dereferencing ends. */
-    if (!mvdm_vdd_sft_shadow_commit(pSFT)) {
-        ul = ERROR_INVALID_ADDRESS | 0xFFFF0000;
-        pSFT = NULL;
-        goto Cleanup;
-    }
-    pSFT = NULL;
-
     // Close the handle if the reference count was set to zero.
 
     if (fLastReference) {
@@ -1838,8 +1810,6 @@ ULONG FASTCALL WK32FileClose(PVDMFRAME pFrame)
     ul = 0;
 
 Cleanup:
-    if (pSFT != NULL)
-        mvdm_vdd_sft_shadow_discard(pSFT);
     FREEARGPTR(parg16);
     return ul;
 }
