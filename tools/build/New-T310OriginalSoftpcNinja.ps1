@@ -255,7 +255,7 @@ $adapterRedirNames = @('mvdm_redirector_handle.c', 'mvdm_redirector_guest_copy.c
 $openntNetlibNames = @('ntstatus.c', 'copystr.c', 'allocstr.c', 'initoem.c')
 $openntNetapiNames = @('apibuff.c')
 $openntBaseVdmNames = @('vdm.c')
-$openntRtlNames = @('environ.c')
+$openntRtlNames = @('environ.c', 'error.c')
 $openntRtlX86Names = @('largeint-selected.asm', 'movemem-selected.asm')
 $adapterSoftpcNames = @('mvdm_softpc_firmware.c', 'mvdm_xms_memory.c', 'mvdm_a20.c', 'mvdm_softpc_guest_memory.c', 'mvdm_softpc_physical_mapping.c',
                         'mvdm_guest_location.c', 'mvdm_softpc_execution.c', 'mvdm_softpc_termination.c',
@@ -974,6 +974,12 @@ $openntRtlX86Objects = foreach ($name in $openntRtlX86Names) {
 $openntRtlObjects = foreach ($name in $openntRtlNames) {
     $object = 'obj/opennt-rtl/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc_rtl ' + (NinjaPath (Join-Path $openntRtlRoot $name)))
+    # error.c's non-kernel branch only emits historical DbgPrint diagnostics.
+    # The selected standalone closure has no kernel debug provider, while the
+    # original mapping and LastStatusValue logic is identical in this branch.
+    if ($name -eq 'error.c') {
+        $graph.Add('  rtl_cflags = ' + $baseFlags + ' /Gz /DNTOS_KERNEL_RUNTIME')
+    }
     $object
 }
 $kernelVdmPrinterObject = 'obj/kernel-vdm/monitor_printer.obj'

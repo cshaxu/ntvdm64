@@ -20,6 +20,13 @@ POPENNT_SUPPORT_PEB NTAPI NtCurrentPeb(void)
     return &peb;
 }
 
+/* error.c has the same finite private-TEB requirement as the worker. */
+POPENNT_SUPPORT_TEB NTAPI opennt_support_current_teb(void)
+{
+    static OPENNT_SUPPORT_TEB teb;
+    return &teb;
+}
+
 static POPENNT_SUPPORT_PROCESS_PARAMETERS fixture_parameters(void)
 {
     return NtCurrentPeb()->ProcessParameters;
@@ -143,9 +150,36 @@ int main(void)
     if (result != 0) return result;
     fixture_parameters()->Environment = NULL;
 
+    /* D12: all mappings must come from imported error.c/error.h, while the
+     * TEB-writing and NoTeb forms retain their distinct original contract. */
+    result = expect(RtlNtStatusToDosError(STATUS_NO_MEMORY) ==
+                    ERROR_NOT_ENOUGH_MEMORY, 24);
+    if (result != 0) return result;
+    result = expect(opennt_support_current_teb()->LastStatusValue ==
+                    STATUS_NO_MEMORY, 25);
+    if (result != 0) return result;
+    result = expect(RtlNtStatusToDosError((NTSTATUS)0x80070005u) ==
+                    ERROR_ACCESS_DENIED, 26);
+    if (result != 0) return result;
+    result = expect(RtlNtStatusToDosError((NTSTATUS)0xE1234567u) ==
+                    0xE1234567u, 27);
+    if (result != 0) return result;
+    result = expect(RtlNtStatusToDosError((NTSTATUS)0xC00100A5u) == 0xA5u,
+                    28);
+    if (result != 0) return result;
+    result = expect(RtlNtStatusToDosError((NTSTATUS)0xC0FFEE00u) ==
+                    ERROR_MR_MID_NOT_FOUND, 29);
+    if (result != 0) return result;
+    opennt_support_current_teb()->LastStatusValue = STATUS_BUFFER_OVERFLOW;
+    result = expect(RtlNtStatusToDosErrorNoTeb(STATUS_NO_MEMORY) ==
+                    ERROR_NOT_ENOUGH_MEMORY &&
+                    opennt_support_current_teb()->LastStatusValue ==
+                    STATUS_BUFFER_OVERFLOW, 30);
+    if (result != 0) return result;
+
     __try {
         (void)RtlExtendedLargeIntegerDivide(dividend, 0u, NULL);
-        return 24;
+        return 31;
     } __except (GetExceptionCode() == STATUS_INTEGER_DIVIDE_BY_ZERO ?
                     EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH) {
         return 0;

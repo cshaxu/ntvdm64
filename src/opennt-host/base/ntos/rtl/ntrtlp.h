@@ -12,5 +12,7 @@
  * reaches only these adapter-private historical fields, so bind its source
  * spelling to the established surrogate rather than casting the host PEB. */
 #define PPEB POPENNT_SUPPORT_PEB
+/* error.c needs the original per-thread LastStatusValue carrier. */
+#define PTEB POPENNT_SUPPORT_TEB
 
 #endif

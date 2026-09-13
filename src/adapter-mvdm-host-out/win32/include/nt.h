@@ -222,6 +222,11 @@ typedef struct _OPENNT_SUPPORT_TEB {
     NT_TIB NtTib;
     UNICODE_STRING StaticUnicodeString;
     CLIENT_ID ClientId;
+    /* DIVERGENCE(ADAPTER-WIN32-057): selected original RTL error.c records
+     * the converted NTSTATUS in the historical per-thread LastStatusValue.
+     * This private TLS field is the finite observable carrier; it does not
+     * expose or reinterpret the modern host TEB. */
+    NTSTATUS LastStatusValue;
     /* Reached historical TEB field: imported x86 DPMI sources locate their
      * per-thread VDM TIB through this spelling. The value is assigned only
      * by the monitor's bound-thread carrier and is never a guest value. */
@@ -237,9 +242,9 @@ typedef struct _OPENNT_SUPPORT_TEB {
 POPENNT_SUPPORT_TEB NTAPI opennt_support_current_teb(VOID);
 POPENNT_SUPPORT_PEB NTAPI NtCurrentPeb(VOID);
 
-/* winnt.h declares the real process TEB accessor.  OpenNT's reached source
- * needs only its historical StaticUnicodeString member, so route that source
- * spelling to adapter-private TLS rather than casting a modern TEB. */
+/* winnt.h declares the real process TEB accessor.  Reached original sources
+ * need only selected historical fields, so route their spelling to
+ * adapter-private TLS rather than casting a modern TEB. */
 #define NtCurrentTeb() opennt_support_current_teb()
 
 #ifndef ARGUMENT_PRESENT

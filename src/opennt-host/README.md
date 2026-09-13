@@ -40,6 +40,26 @@ PEB/VM and private-symbol boundary; they provide no environment algorithm.
 The imported file SHA-256 is
 `4c0e0e870d97f351cd8b046c2901ba841b439c83b75fdb8a6e936b0c89cf2b4b`.
 
+`base/ntos/rtl/error.c` and its generated `error.h` table are the selected
+D12 RTL slice.  They are directly reached by Base VDM, COMMAND, DEM,
+Redirector, NetLib and SoftPC error consumers.  They were imported from
+`O:\repos.external\OpenNT\base\ntos\rtl\error.{c,h}` (source SHA-256
+`88bf09ab98778e0ca58d9d232d3b7aba6115223f43eddf981f6e06b786e77e48` and
+`179794837a8610488218e5e48768d4d79f3d160bb952c92b172d12f6807984d2`).
+The imported contents differ only by the repository terminal-newline form.
+The original table and mapping algorithm remain intact; the sole finite
+standalone binding supplies the original per-thread `LastStatusValue` field.
+
+`base/ntos/rtl/error.c` and its generated `error.h` table are the selected
+D12 RTL slice.  They are directly reached by Base VDM, COMMAND, DEM,
+Redirector, NetLib and SoftPC error consumers.  They were imported from
+`O:\repos.external\OpenNT\base\ntos\rtl\error.{c,h}` (source SHA-256
+`88bf09ab98778e0ca58d9d232d3b7aba6115223f43eddf981f6e06b786e77e48` and
+`179794837a8610488218e5e48768d4d79f3d160bb952c92b172d12f6807984d2`).
+The imported contents differ only by the repository terminal-newline form.
+The original table and mapping algorithm remain intact; the sole finite
+standalone binding supplies the original per-thread `LastStatusValue` field.
+
 The package is a source mirror only at this point. It is not an enabled build
 or runtime input until every reached CSR/private-host interface has a named,
 same-shaped disposition. A later package-named subfamily under
@@ -97,3 +117,4 @@ admitted merely to make the larger historical API product shell link.
 | OPENNT-HOST-013 | `netapi/api/apibuff.c` provides historical public and internal NetAPI buffer entry points. | The selected Redirector NetLib closure reaches only its `NetapipBufferAllocate` compatibility forwarder; importing the other functions falsely pulls an RPC/MIDL product shell. | Preserve the original function unchanged as a source-identified true subset and call the public modern `NetApiBufferAllocate` contract. | `netapi/api/apibuff.c`; `netapi/netlib/allocstr.c` |
 | OPENNT-HOST-014 | `base/win32/client/vdm.c` supplies `BaseCreateVDMEnvironment`, `BaseDestroyVDMEnvironment`, and `BaseGetEnvNameType_U` before original Base creates an NTVDM child. | The full source file pulls the excluded Base/CSR process-creation product shell, while the selected CLI needs this exact environment projection before its direct SoftPC entry. | Preserve the three original bodies as a source-identified true subset. Its clone uses the admitted original D11 RTL body; the separate adapter owns only current-process installation/restoration around direct entry. | `base/win32/client/vdm.c`; `base/ntos/rtl/environ.c`; `../adapter-mvdm-host-out/win32/source/mvdm_base_vdm_environment.c` |
 | OPENNT-HOST-015 | `base/ntos/rtl/environ.c` provides original create/clone/query/mutate/destroy ownership for ordered UTF-16 MULTI_SZ environments. | Original MVDM/VDM callers require the complete D11 algorithm, but standalone cannot expose NT4's real PEB or private kernel VM service shell. | Preserve the selected body under its original-relative path. Its only outgoing closure is a private PEB projection, PEB lock, public user-mode NTDLL `Zw*VirtualMemory` declarations and private symbol names, supplied by the bounded adapter seams. | `base/ntos/rtl/{environ.c,ntrtlp.h,environapi.h,zwapi.h}`; direct consumers `base/win32/client/vdm.c`, `../mvdm-host/dos/command/cmdenv.c` |
+| OPENNT-HOST-016 | `base/ntos/rtl/error.c` and generated `error.h` map NTSTATUS values to DOS/Win32 errors and record the reached status in the TEB. | Modern NTDLL exports the historical names, so it cannot be mixed with the selected original table under the public symbol names; the standalone process also cannot expose the NT4 TEB layout. | Preserve the selected original source/table under the original-relative path and route selected callers to a private symbol domain. The adapter contributes only the source-shaped TLS `LastStatusValue` carrier; it supplies no mapping entries or fallback policy. | `base/ntos/rtl/{error.c,error.h,ntrtlp.h}`; `public/sdk/inc/ntrtl.h`; `../adapter-mvdm-host-out/win32/{include/nt.h,source/opennt_support_rtl.c}` |

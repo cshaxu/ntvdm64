@@ -43,7 +43,14 @@ ULONG NTAPI RtlOemStringToUnicodeSize(PCOEM_STRING String);
 ULONG NTAPI RtlGetFullPathName_U(PCWSTR FileName, ULONG Size, PWSTR Buffer, PWSTR *ShortName);
 ULONG NTAPI RtlGetCurrentDirectory_U(ULONG MaximumLength, PWSTR Buffer);
 NTSTATUS NTAPI RtlSetCurrentDirectory_U(PCUNICODE_STRING PathName);
+/* DIVERGENCE(OPENNT-HOST-027): modern NTDLL exports these historical names.
+ * The selected original error.c implementation therefore lives in an
+ * explicit private symbol domain.  All selected callers use that original
+ * table; this header supplies no project-defined mapping policy. */
+#define RtlNtStatusToDosError OpenNtRtlNtStatusToDosError
+#define RtlNtStatusToDosErrorNoTeb OpenNtRtlNtStatusToDosErrorNoTeb
 ULONG NTAPI RtlNtStatusToDosError(NTSTATUS Status);
+ULONG NTAPI RtlNtStatusToDosErrorNoTeb(NTSTATUS Status);
 VOID NTAPI RtlAcquirePebLock(VOID);
 VOID NTAPI RtlReleasePebLock(VOID);
 /* DIVERGENCE(OPENNT-HOST-010): original COMMAND environment code reaches

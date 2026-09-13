@@ -2,34 +2,32 @@
 
 ## Current Work
 
-**Active: M0 T408 S4.**
+**Active: M0 T408 S5.**
 
 ## Active Packet
 
-### M0 T408 S4 — original RTL status conversion recovery
+### M0 T408 S5 — original USER multibyte/Unicode conversion recovery
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T408 S4, Ordinary Mode, one agent implements the bounded recovery, then independently reviews source, build and runtime evidence. |
+| Identifier Mode | M0 T408 S5, Ordinary Mode, one agent implements the bounded recovery, then independently reviews source, build and runtime evidence. |
 | Admission And Approval | Owner admitted the queued RTL package with: “单人双角色模式执行当前T任务：`Plan RTL restoration subtask sequence` 恢复原始opennt源代码接入 减少overlay和diff并跑通测试。” |
 | Candidate Proposal | [Original RTL and character-conversion restoration](../proposals/proposal-rtl-character-conversion-restoration-001.md). |
-| Objective | Restore D12's original status-to-DOS conversion ownership into `opennt-host`, retire the reduced adapter mapping, and preserve reached LastStatusValue/error behavior through the smallest finite binding. |
-| Non-goals | No USER/redirector conversion, broker/CLI/CPU work, kernel-shell recreation, or replacement status table. |
-| Files And ABI Surface | Original RTL error source/table slice under `opennt-host`, private status carrier binding, focused fixtures, Status and indexed S4 evidence; no guest ABI change. |
-| Verification | Known, unknown and special NTSTATUS mappings; LastStatusValue and no-silent-success rows; selected x86 build and S3 MEM/COMMAND regression; formal build, diff review, commit/push. |
-| Exit Criteria | Original status algorithm/table owns reached mappings; each retained carrier is finite and source-shaped; focused and short-root runtime regressions pass. |
-| Stop Conditions | An unavailable original table/dependency, LastStatusValue semantic that cannot be finitely bound, or a failed owner fixture is recorded and stops replacement rather than adding a substitute mapping. |
+| Objective | Restore D16's original USER `MBToWCSEx` conversion ownership into `opennt-host`, retire any duplicate conversion policy, and retain only finite consumer-side publication bindings. |
+| Non-goals | No Redirector OEM conversion, broker/CLI/CPU work, private USER/CSRSS shell, or replacement character-conversion algorithm. |
+| Files And ABI Surface | Selected USER source slice under `opennt-host`, finite modern conversion/publication bindings only where original dependencies cannot compose, focused fixtures, Status and indexed S5 evidence; no guest ABI change. |
+| Verification | ACP/non-ACP, DBCS/unrepresentable input, partial result, zero/short/exact capacity and terminator/failure rows; selected x86 build and MEM/COMMAND regression; formal build, diff review, commit/push. |
+| Exit Criteria | Original USER algorithm owns reached conversion policy; every retained binding is finite and source-shaped; focused and short-root runtime regressions pass. |
+| Stop Conditions | An unavailable direct USER dependency, a required private server behavior without finite public closure, or a failed owner fixture is recorded and stops replacement rather than adding a substitute converter. |
 | Original Owner Request | “恢复原始opennt源代码接入 减少overlay和diff并跑通测试。” |
 | Similar-Issue Sweep | All reduced `RtlNtStatusToDosError` callers, LastStatusValue accessors, Base/COMMAND failures, USER/NetAPI conversion surfaces, x86-width residue, overlays and current project-defined duplicate providers. |
 
-S3 closed into the reviewed delivery now being committed: original D11 body,
-private PEB/VM binding, all direct consumers and default-off trace are covered
-by [S3 evidence](../etc/evidence/m0-t408-s3-environment-restoration.md).
-The selected x86 worker SHA-256 is
-`3072ad3b5f40f64101d88edd8bc2ee41ccffc8f24c1134a67d7f8a2ab9e540e9`;
-its short-root MEM and COMMAND regressions passed and the previously deployed
-EXE was restored. The unforced VM-OOM coverage limit is retained in evidence,
-not hidden as a passing artificial failure test.
+S4 closed: original D12 `error.c/error.h` now own the reached mapping table
+and algorithm. The finite private-TLS `LastStatusValue` carrier, focused
+mapping rows, full x86 link and short-root MEM/COMMAND regressions are covered
+by [S4 evidence](../etc/evidence/m0-t408-s4-status-restoration.md). The
+deployed candidate SHA-256 is
+`37d57df9c1048ffa27c29e95c6fb1e3a10aa69e1fd26a4abdfbf0f6027a83077`.
 
 T406 is closed by its final delivery; [S2 closure evidence](../etc/evidence/m0-t406-s2-original-restoration.md#s2-final-x86-width-and-access-boundary-disposition)
 records its restored cohorts, remaining registered seams, trace hit/no-hit results,
