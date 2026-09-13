@@ -88,6 +88,16 @@ passed.
 
 ## Latest Governance Closure
 
+M0 Td S9 P1 consolidates the
+[U02 physical-memory mapping candidate](../proposals/proposal-physical-memory-mapping-restoration-001.md)
+at the Queue head and the existing
+[U01 CCPU40 C-VID/event candidate](../proposals/proposal-ccpu40-cvid-event-path-restoration-001.md)
+before broker work. Both require original-owner research before restoration;
+neither assumes that current behavior is a proved runtime defect. This is
+documentation only: T405 S3 remains active and no source implementation is
+admitted. Governance/link and diff checks apply; remote delivery is verified
+separately from this record.
+
 M0 Td S8 P1 records the owner-requested
 [DPMI/XMS restoration candidate](../proposals/proposal-dpmi-xms-contract-restoration-001.md)
 at the Queue head: D36-D37 shared memory ownership first, then D35 transition
