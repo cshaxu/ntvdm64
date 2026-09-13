@@ -4,6 +4,7 @@ This directory contains only the following owner-approved supporting records.
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T407 DPMI/XMS current-state audit](evidence/m0-t407-s1-dpmi-xms-current-state-audit.md) | M0 T407 S1 | Exact in-scope D35–D37/U03/U04/U07 diff ledger and source-first restoration grouping. | Retain through T407 closure. |
 | [T406 grouped restoration](evidence/m0-t406-s2-original-restoration.md) | M0 T406 S2 | Approved grouped original-source recovery, per-group build and runtime evidence. | Retain through T406 closure. |
 | [T406 mapping research/design](evidence/m0-t406-s1-physical-mapping-design.md) | M0 T406 S1 | Original owner, current mapping contract, measured diff and conditional restoration design. | Retain through implementation and closure. |
 | [T405 S-stage plan](operations/m0-t405-audit-restoration-plan.md) | M0 T405 | Historical sequence; closure transfers repair outcomes to candidates. | Retain as linked closure evidence. |
