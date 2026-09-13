@@ -290,6 +290,29 @@ int mvdm_softpc_physical_mapping_resolve(uint32_t intel_address,
     return 1;
 }
 
+int mvdm_softpc_physical_mapping_span_is_aliased(uint32_t intel_address,
+    uint32_t byte_count)
+{
+    session *owner = session_thread_current();
+    physical_alias_record *record;
+    uint32_t end;
+
+    if (owner == NULL || !session_valid(owner) || byte_count == 0u ||
+        byte_count > UINT32_MAX - intel_address) return 0;
+    end = intel_address + byte_count;
+    for (record = aliases; record != NULL; record = record->next) {
+        uint32_t alias_end;
+
+        if (record->owner != owner ||
+            record->byte_count > UINT32_MAX - record->destination_base)
+            continue;
+        alias_end = record->destination_base + record->byte_count;
+        if (intel_address < alias_end && record->destination_base < end)
+            return 1;
+    }
+    return 0;
+}
+
 /* Original nt_mem passes a DWORD-aligned host start and a page-rounded span.
  * Removal supplies the ordinary backing address, not a magic zero identity.
  * All slots already exist: this operation cannot fail from heap exhaustion. */

@@ -861,3 +861,46 @@ Staged x86 EXE: 3,235,328 bytes, SHA-256
 `b592287dd5812a04d1f7ff08529eeeff4a86fd896f4d7d81c3fd09add5b78d46`.
 This declaration-only cohort has no independent DOS/WOW acceptance claim;
 the prior COMMAND/EDIT/WRITE frontier remains unchanged.
+
+## Approved EMS cross-window lease binding
+
+The owner approved the previously recorded narrow candidate on 2026-09-12.
+The final repair retains original `emm_mngr.c` dispatch and `nt_emm.c` public
+function boundaries. `nt_emm.c` keeps its original native-pointer
+`EM_loads`/`EM_stores`/`EM_moves` fast paths for unaliased RAM. It asks the
+existing session-owned alias table only whether a requested conventional span
+overlaps an EMS alias; only then does it use the existing bounded
+`mvdm_softpc_guest_memory` lease transport. The adapter copies in 4 KiB
+bounded chunks and preserves `MoveMemory` overlap order. A lease failure is
+returned through the original host `FAILURE` result instead of attempting the
+unsafe CRT pointer copy. No CCPU instruction, `emm_mngr` policy, mapping
+manager, host-pointer ABI, or kernel/CSR service was added.
+
+The same lease move is now the one implementation reused by XMS and the EMS
+binding; this removes the prior duplicate chunk/overlap algorithm rather than
+creating a second guest-copy facility. The selected OpenNT source is unchanged
+except for the registered `nt_emm.c` call-boundary seam required because the
+original kernel VDM contiguous-alias provider is unavailable standalone.
+
+Dependency-derived x86 commands rebuilt the changed original host, adapter,
+XMS and test objects, their libraries, product and formal external-memory
+test. The focused test exits 0 and directly invokes original
+`host_copy_con_to_con` across a reversed two-page EMS alias, proving the
+formerly faulting `nt_emm` route for both load and store. It also retains the
+disk alignment, word-fill, SAS, allocation and DIB cases
+(`O:\ntvdm64\logs\t406-s2-ems-lease-memory-final.txt`). The normal Ninja
+front end still stalls before compiler launch on this host, so only its exact
+generated commands were executed.
+
+The isolated real guest integration is also PASS: `EMSPROBE.COM` reports
+`EMS MAP SWITCH ALIAS UNMAP MOVE EXCHANGE WINDOW FREE PASS` and exits 0 via
+the controlled Console observer
+(`O:\ntvdm64\logs\t406-s2-ems-lease-guest-final.txt`). It exercises the
+previously crashing reverse two-window conventional copy through INT 67h/57h,
+not merely direct CCPU access. A temporary `Q:` mapped only the ignored build
+package and was removed after the observer job ended.
+
+Final staged x86 EXE: 3,236,352 bytes, SHA-256
+`517e12ae276bce5b443b339aa6c47b71ca69e52f20eac79be036b445d206fe39`.
+This accepts the EMS cross-window repair only. COMMAND/EDIT retain their
+earlier frontier and WRITE remains unaccepted at W32Init FALSE/exit 255.

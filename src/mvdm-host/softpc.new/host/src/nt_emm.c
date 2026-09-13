@@ -61,6 +61,11 @@ The Following Routines are defined:
  * alias services.  Keep those exact public calls and page-number ABI, but
  * bind their user-mode replacement through the selected SoftPC adapter. */
 #include "mvdm_softpc_physical_mapping.h"
+/* DIVERGENCE(MVDM-HOST-DIV-267): kernel VDM supplied contiguous host aliases
+ * for EMS windows. CCPU40 resolves every guest byte but intentionally does
+ * not publish a span pointer. Keep the original fast macros for ordinary RAM;
+ * the smallest bounded lease binding covers only an alias-backed span. */
+#include "mvdm_softpc_guest_memory.h"
 
 
 /*	Global Variables		*/
@@ -129,6 +134,66 @@ Defines are:
 #endif
 
 #define EM_PAGE_ADDRESS(page_no)    (EM_base_address + page_no * EMM_PAGE_SIZE)
+
+static int em_loads(sys_addr from, unsigned char *to, int length)
+{
+    uint32_t count;
+    sys_addr guest_from;
+
+    if (length < 0) return FAILURE;
+    count = (uint32_t)length;
+    guest_from = from;
+#ifdef BACK_M
+    guest_from -= count - (count != 0u);
+#endif
+    if (!mvdm_softpc_physical_mapping_span_is_aliased(guest_from, count)) {
+        EM_loads(from, to, length);
+        return SUCCESS;
+    }
+    return mvdm_softpc_guest_memory_copy_from(guest_from, to, count) ? SUCCESS : FAILURE;
+}
+
+static int em_stores(sys_addr to, unsigned char *from, int length)
+{
+    uint32_t count;
+    sys_addr guest_to;
+
+    if (length < 0) return FAILURE;
+    count = (uint32_t)length;
+    guest_to = to;
+#ifdef BACK_M
+    guest_to -= count - (count != 0u);
+#endif
+    if (!mvdm_softpc_physical_mapping_span_is_aliased(guest_to, count)) {
+        EM_stores(to, from, length);
+        return SUCCESS;
+    }
+    sas_overwrite_memory(guest_to, count);
+    return mvdm_softpc_guest_memory_copy_to(guest_to, from, count) ? SUCCESS : FAILURE;
+}
+
+static int em_moves(sys_addr from, sys_addr to, int length)
+{
+    uint32_t count;
+    sys_addr guest_from;
+    sys_addr guest_to;
+
+    if (length < 0) return FAILURE;
+    count = (uint32_t)length;
+    guest_from = from;
+    guest_to = to;
+#ifdef BACK_M
+    guest_from -= count - (count != 0u);
+    guest_to -= count - (count != 0u);
+#endif
+    if (!mvdm_softpc_physical_mapping_span_is_aliased(guest_from, count) &&
+        !mvdm_softpc_physical_mapping_span_is_aliased(guest_to, count)) {
+        EM_moves(from, to, length);
+        return SUCCESS;
+    }
+    sas_overwrite_memory(guest_to, count);
+    return mvdm_softpc_guest_memory_move(guest_to, guest_from, count) ? SUCCESS : FAILURE;
+}
 
 
 /*
@@ -589,7 +654,8 @@ unsigned short	src_seg 	source segment address
 	from = effective_addr(src_seg, src_off);
 	to = effective_addr(dst_seg, dst_off);
 
-	EM_moves(from, to, length);
+	if (em_moves(from, to, length) != SUCCESS)
+		return(FAILURE);
 
 	return(SUCCESS);
 }
@@ -613,7 +679,8 @@ unsigned short	src_seg 	source segment address
 	from = effective_addr(src_seg, src_off);
 	to = EM_host_address(dst_page * EMM_PAGE_SIZE + dst_off);
 
-	EM_loads(from, to, length);
+	if (em_loads(from, to, length) != SUCCESS)
+		return(FAILURE);
 
 	return(SUCCESS);
 }
@@ -637,7 +704,8 @@ unsigned short	src_page 	source page number
 	from = EM_host_address(src_page * EMM_PAGE_SIZE + src_off);
 	to = effective_addr(dst_seg, dst_off);
 
-	EM_stores(to, from, length);
+	if (em_stores(to, from, length) != SUCCESS)
+		return(FAILURE);
 
 	return(SUCCESS);
 }
@@ -709,9 +777,12 @@ unsigned short	src_seg		 source segment address
 	from = effective_addr(src_seg, src_off);
 	to = effective_addr(dst_seg, dst_off);
 
-	EM_loads(from, pointer, length);    /* source -> temp */
-	EM_moves(to, from, length);	    /* dst -> source */
-	EM_stores(to, pointer, length);     /* temp -> dst */
+	if (em_loads(from, pointer, length) != SUCCESS ||    /* source -> temp */
+		em_moves(to, from, length) != SUCCESS ||	    /* dst -> source */
+		em_stores(to, pointer, length) != SUCCESS) {     /* temp -> dst */
+		free(temp);
+		return(FAILURE);
+	}
 
 	free(temp);
 
@@ -742,8 +813,11 @@ unsigned short	src_seg 	source segment address
 	from = effective_addr(src_seg, src_off);
 	to = EM_host_address(dst_page * EMM_PAGE_SIZE + dst_off);
 
-	EM_loads(from, pointer, length);
-	EM_stores(from, to, length);
+	if (em_loads(from, pointer, length) != SUCCESS ||
+		em_stores(from, to, length) != SUCCESS) {
+		free(temp);
+		return(FAILURE);
+	}
 	EM_memcpy(to, pointer, length);
 
 	free(temp);

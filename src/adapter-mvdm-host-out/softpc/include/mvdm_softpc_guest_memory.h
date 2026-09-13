@@ -20,6 +20,15 @@ int mvdm_softpc_guest_memory_acquire(uint32_t address, uint32_t byte_count,
     uint32_t access, guest_memory_lease **lease_out, uint8_t **bytes_out);
 int mvdm_softpc_guest_memory_release(guest_memory_lease *lease, int commit);
 
+/* EMS uses these only after its original native-pointer fast path finds an
+ * alias-backed span.  The copies own no EMS state and retain no guest alias. */
+int mvdm_softpc_guest_memory_copy_from(uint32_t address, uint8_t *bytes,
+    uint32_t byte_count);
+int mvdm_softpc_guest_memory_copy_to(uint32_t address, uint8_t const *bytes,
+    uint32_t byte_count);
+int mvdm_softpc_guest_memory_move(uint32_t destination, uint32_t source,
+    uint32_t byte_count);
+
 #ifdef __cplusplus
 }
 #endif

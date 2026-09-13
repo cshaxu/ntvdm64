@@ -22,6 +22,10 @@ int mvdm_softpc_physical_mapping_translate(uint32_t intel_address,
     uint32_t *translated_address_out);
 int mvdm_softpc_physical_mapping_resolve(uint32_t intel_address,
     uint8_t **host_byte_out);
+/* The original nt_emm fast path can use a single native pointer only when
+ * no byte in its span enters a session-owned EMS alias. */
+int mvdm_softpc_physical_mapping_span_is_aliased(uint32_t intel_address,
+    uint32_t byte_count);
 
 /* Temporary scalar-only observation. EMS request/result slots correspond
  * to service numbers 40h..5fh. Not a mapping or dispatch interface. */

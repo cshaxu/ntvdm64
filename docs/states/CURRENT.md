@@ -77,8 +77,9 @@ Only S2 is active. The one agent implements, then switches to reviewer role.
 
 Groups: (1) paired original x86-width declarations/definitions/callers, retaining
 necessary Win32 ABI repairs; (2) original external mapping add/alignment/remove
-contract and retirement of extra publication protocol; (3) source-proven remaining
-SAS/bulk/cross-page consistency. Each group builds and tests before the next.
+contract and retirement of extra publication protocol; (3) approved minimal
+guest-memory lease access binding for EMS cross-window spans, then source-proven
+remaining SAS/bulk/cross-page consistency. Each group builds and tests before the next.
 No lower function is labelled original unless its original body is identified.
 Build root: build/M0-T406/S2/r001-original-restoration. Real runtime logs remain
 under O:\ntvdm64\logs\. Frozen reference is a03a6b4e3 and its S1 EMS/WRITE traces.
@@ -153,23 +154,26 @@ open; the current deployed identity is in Current Technical Baseline below.
   preserves prior runtime limitations.
 - Latest deployed executable: O:\ntvdm64\ntvdm32.exe, T406 S2 external
   memory restoration plus working EMS/allocator/host-word and C-VID x86
-  carrier cohorts plus original current-process pseudo-handle spelling,
-  3,235,328 bytes; SHA-256
-  b592287dd5812a04d1f7ff08529eeeff4a86fd896f4d7d81c3fd09add5b78d46.
+  carrier cohorts, original current-process pseudo-handle spelling and the
+  approved EMS cross-window lease binding, 3,236,352 bytes; SHA-256
+  517e12ae276bce5b443b339aa6c47b71ca69e52f20eac79be036b445d206fe39.
   Formal build, native DIB sharing and isolated EMS guest tests pass. MEM and
   COMMAND exit normally; EDIT reaches its editor after Esc and bounded cleanup.
   WRITE still reaches W32Init FALSE, exit 255; no full WRITE acceptance.
   [S2 evidence](../etc/evidence/m0-t406-s2-original-restoration.md) owns details.
-- Extended EMS conventional-window regression fails with c0000005 in host
-  copying; previous logical-page EMS passes do not cover it. Native alias
-  experiments pass but expose incompatible decommit semantics. The proposed
-  alternative access binding awaits owner approval; no new mapping repair
-  is implemented. Approved width-only restoration continues independently.
+- Extended EMS conventional-window regression formerly failed with c0000005
+  in host copying. The owner-approved minimal lease binding now passes both
+  direct original `nt_emm` and real INT 67h guest coverage for a reversed
+  two-window span. It preserves original EMS dispatch/public functions and
+  uses the existing session lease only for alias-overlapping spans; no CPU
+  change or generic mapping manager is admitted. Native alias experiments
+  remain only evidence because their decommit semantics are incompatible.
 - S1, S2 P1/P2 and the grouped restoration at 78d492964 are pushed to main.
   The owner explicitly approved permanent main pushes. S2 remains active for the
-  remaining width cohorts and access-boundary audit. The latest test-only
-  extension verifies original SAS loads/stores/move across reversed pages;
-  it does not yet prove EMS bulk-copy caller contracts.
+  remaining width cohorts and access-boundary audit. The latest EMS repair
+  verifies original `nt_emm` bulk-copy callers and real guest INT 67h coverage
+  across reversed pages; remaining full WRITE and unrelated access contracts
+  are not thereby accepted.
 - [Queue](QUEUE.md) owns candidate order and pending repairs; [debt](TODO.md)
   retains full WRITE limitations. Ignored builds and runtime logs are preserved,
   not deleted to obtain Git cleanliness. Commit/push and status verification

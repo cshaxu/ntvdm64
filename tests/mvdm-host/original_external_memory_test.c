@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <windows.h>
 #include "session/session.h"
+#include "adapter-mvdm-host-out/softpc/include/mvdm_softpc_guest_memory.h"
 #include "adapter-mvdm-host-out/softpc/include/mvdm_softpc_physical_mapping.h"
 
 /* Link the formal CCPU40/nt_mem libraries, never replacement memory bodies. */
@@ -18,6 +19,8 @@ extern LONG VdmRemoveVirtualMemory(ULONG);
 extern LONG VdmAllocateVirtualMemory(PULONG, ULONG, BOOL);
 extern LONG VdmFreeVirtualMemory(ULONG);
 extern LONG VdmReallocateVirtualMemory(ULONG, PULONG, ULONG);
+extern int host_copy_con_to_con(int, unsigned short, unsigned short,
+    unsigned short, unsigned short);
 extern void fwd_word_fill(unsigned short, unsigned char *, int);
 extern PBYTE get_aligned_disk_buffer(void);
 extern DWORD disk_buffer_pool, max_align_factor, cur_align_factor;
@@ -100,6 +103,7 @@ int main(void)
     report("before sas_init\n");
     sas_init(0x200000);
     report("after sas_init\n");
+    CHECK(mvdm_softpc_guest_memory_begin(&owner));
     setup_vga_globals();
     {
         ULONG unavailable = 0;
@@ -142,6 +146,22 @@ int main(void)
         c_sas_loads(0x70000, bytes, 4);
         CHECK(bytes[0] == 0x31 && bytes[1] == 0x32 &&
             bytes[2] == 0x33 && bytes[3] == 0x34);
+        /* Original EMS dispatch reaches nt_emm's lease binding only because
+         * this conventional span crosses independently mapped alias pages. */
+        external[8190] = 0x41;
+        external[8191] = 0x42;
+        external[0] = 0x43;
+        external[1] = 0x44;
+        CHECK(host_copy_con_to_con(4, 0x8000, 0x0ffe, 0x7000, 0) == 0);
+        c_sas_loads(0x70000, bytes, 4);
+        CHECK(bytes[0] == 0x41 && bytes[1] == 0x42 &&
+            bytes[2] == 0x43 && bytes[3] == 0x44);
+        bytes[0] = 0x51; bytes[1] = 0x52; bytes[2] = 0x53; bytes[3] = 0x54;
+        c_sas_stores(0x70000, bytes, 4);
+        CHECK(host_copy_con_to_con(4, 0x7000, 0, 0x8000, 0x0ffe) == 0);
+        CHECK(external[8190] == 0x51 && external[8191] == 0x52 &&
+            external[0] == 0x53 && external[1] == 0x54);
+        report("EMS cross-window original nt_emm lease copy PASS\n");
         CHECK(VdmUnmapDosMemory(0x80, 1) == 0);
         CHECK(VdmUnmapDosMemory(0x81, 1) == 0);
         external[1] = 0x5a;
@@ -194,6 +214,7 @@ int main(void)
         CHECK(DeleteObject(bitmap) && DeleteDC(dc));
         report("real DIB GDI/guest bidirectional sharing PASS\n");
     }
+    mvdm_softpc_guest_memory_end(&owner);
     sas_term();
     free(gdp);
     CHECK(session_thread_unbind(&owner) && session_dispose(&owner));

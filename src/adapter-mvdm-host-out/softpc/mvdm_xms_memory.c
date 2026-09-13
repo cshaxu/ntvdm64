@@ -2,6 +2,7 @@
 
 #include <string.h>
 
+#include "mvdm_softpc_guest_memory.h"
 #include "session/session.h"
 #include "xms.h"
 
@@ -17,38 +18,8 @@ static uint32_t mvdm_xms_read_u32(uint8_t const *bytes)
 static int mvdm_xms_copy(session *owner, uint32_t destination,
     uint32_t source, uint32_t byte_count)
 {
-    uint8_t bytes[MVDM_XMS_MOVE_CHUNK_BYTES];
-    uint32_t remaining = byte_count;
-
-    /* The original x86 backends call RtlMoveMemory(destination, source,
-       count).  A session lease is bounded, so preserve that overlap contract
-       explicitly when a transfer spans more than one lease-sized chunk. */
-    while (remaining != 0u) {
-        guest_memory_lease *source_lease;
-        guest_memory_lease *destination_lease;
-        uint8_t *source_bytes;
-        uint8_t *destination_bytes;
-        uint32_t chunk = remaining;
-        uint32_t offset;
-
-        if (chunk > (uint32_t)sizeof(bytes)) chunk = (uint32_t)sizeof(bytes);
-        if (destination > source && destination - source < byte_count) {
-            offset = remaining - chunk;
-        } else {
-            offset = byte_count - remaining;
-        }
-        if (!session_guest_memory_acquire(owner, source + offset, chunk,
-            GUEST_MEMORY_ACCESS_READ, &source_lease, &source_bytes)) return 0;
-        memcpy(bytes, source_bytes, chunk);
-        if (!session_guest_memory_release(owner, source_lease, 0)) return 0;
-        if (!session_guest_memory_acquire(owner, destination + offset, chunk,
-            GUEST_MEMORY_ACCESS_WRITE, &destination_lease,
-            &destination_bytes)) return 0;
-        memcpy(destination_bytes, bytes, chunk);
-        if (!session_guest_memory_release(owner, destination_lease, 1)) return 0;
-        remaining -= chunk;
-    }
-    return 1;
+    return owner == session_thread_current() &&
+        mvdm_softpc_guest_memory_move(destination, source, byte_count);
 }
 
 static int mvdm_xms_zero_range(session *owner, uint32_t address,
