@@ -111,3 +111,42 @@ synthetic TSS and FastWOW projection are not demonstrated semantic matches.
 Medium confidence: a source-shaped guest TEB/TD facade is sufficient; that
 depends on the actual selected WOW32 provider and the complete field/caller
 matrix.  No statement here accepts current `WRITE.EXE` behavior.
+
+## S8 correction: actual FastWOW selection
+
+The prior wording that the WOW provider selection itself was unproved is too
+broad.  The historical provider build did produce and stage an x86
+`WOW32.DLL`; its public `WRITE.EXE` run simply did not reach the load BOP.
+However, the current provider generator's `Get-SelectedWow32Sources` accepts
+only `*.c` manifest entries.  OpenNT's own `wow32/i386/sources` and
+`obj/_objects.mac` include `i386/fastwow.asm`, so that assembly is omitted
+from the selected DLL.  The C sources consequently take their original
+`FASTBOPPING=0` slow branch (`host_simulate`) rather than an unresolved
+FastWOW branch.
+
+This gives a concrete, source-proven disposition:
+
+- The current guest-linear `Cpu40WowFastTebAddress` page is dead state: its
+  only writes are its allocation/initialization in `dpmi32.c`; no selected
+  code reads it.
+- It should be removed in the first recovery group, with an x86 link and
+  ordinary DOS regressions.  This removes autonomous state rather than
+  disabling any selected original functionality.
+- FastWOW is not rejected forever.  It is a separate optional recovery:
+  first compile the original assembly only after replacing its direct
+  `FS:[PcTeb]` use with the existing source-shaped adapter TLS TEB binding.
+  It cannot be included unchanged because C source `NtCurrentTeb()` has been
+  redirected to `opennt_support_current_teb()`, while the assembly bypasses
+  that macro and reads the modern processor TEB directly.
+- Until that facade is proven, retain the original slow `host_simulate` path;
+  it is the original non-fast fallback, not a project-invented substitute.
+
+The TSS/TR carrier must be tested independently of FastWOW.  Original
+`dxboot.asm` under `WOW_x86` intentionally does not create a DOSX TSS because
+native NT VDM already owns it; the present two-TSS construction therefore
+cannot be justified merely by FastWOW.  The next experiment removes it only
+behind a build-local switch and compares the same DOSX transition trace,
+including the first protected-mode operation, against the retained version.
+It is accepted only if both variants show the same source-required behavior;
+otherwise the trace identifies the exact CCPU task-state operation that needs
+the narrow facade.
