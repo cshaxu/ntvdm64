@@ -207,6 +207,7 @@ typedef OPENNT_SUPPORT_CURDIR CURDIR, *PCURDIR;
 
 typedef struct _OPENNT_SUPPORT_PROCESS_PARAMETERS {
     OPENNT_SUPPORT_CURDIR CurrentDirectory;
+    PVOID Environment;
     HANDLE ConsoleHandle;
 } OPENNT_SUPPORT_PROCESS_PARAMETERS, *POPENNT_SUPPORT_PROCESS_PARAMETERS;
 
@@ -214,6 +215,7 @@ typedef struct _OPENNT_SUPPORT_PEB {
     POPENNT_SUPPORT_PROCESS_PARAMETERS ProcessParameters;
     PVOID ProcessHeap;
     PRTL_CRITICAL_SECTION FastPebLock;
+    ULONG EnvironmentUpdateCount;
 } OPENNT_SUPPORT_PEB, *POPENNT_SUPPORT_PEB;
 
 typedef struct _OPENNT_SUPPORT_TEB {
@@ -254,6 +256,12 @@ POPENNT_SUPPORT_PEB NTAPI NtCurrentPeb(VOID);
 #endif
 #ifndef except
 #define except __except
+#endif
+#ifndef leave
+#define leave __leave
+#endif
+#ifndef STATUS_VARIABLE_NOT_FOUND
+#define STATUS_VARIABLE_NOT_FOUND ((NTSTATUS)0xC0000100L)
 #endif
 #ifndef RtlMoveMemory
 #define RtlMoveMemory(Destination, Source, Length) \

@@ -82,6 +82,7 @@ $redirRoot = Join-Path $root 'src/mvdm-host/vdmredir'
 $openntNetlibRoot = Join-Path $root 'src/opennt-host/netapi/netlib'
 $openntNetapiRoot = Join-Path $root 'src/opennt-host/netapi/api'
 $openntBaseVdmRoot = Join-Path $root 'src/opennt-host/base/win32/client'
+$openntRtlRoot = Join-Path $root 'src/opennt-host/base/ntos/rtl'
 $openntRtlX86Root = Join-Path $root 'src/opennt-host/base/ntos/rtl/x86'
 $xmsRoot = Join-Path $root 'src/mvdm-host/xms.486'
 $dpmiRoot = Join-Path $root 'src/mvdm-host/dpmi32'
@@ -95,6 +96,7 @@ $baseVdmBrokerTestSource = Join-Path $root 'tests/adapter-basesrv/base_vdm_broke
 $launchDeclarationWowEntryTestSource = Join-Path $root 'tests/app/launch_declaration_wow_entry_test.c'
 $cpu40DescriptorDomainFixtureSource = Join-Path $root 'tests/mvdm-host/dpmi/cpu40_descriptor_domain_fixture.c'
 $rtlX86FixtureSource = Join-Path $root 'tests/opennt-host/rtl_x86_fixture.c'
+$environmentProjectionFixtureSource = Join-Path $root 'tests/opennt-host/environment_projection_fixture.c'
 $baseDebugRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/debug'
 $hostRoot = Join-Path $root 'src/mvdm-host/softpc.new/host/src'
 $hostEntryRoot = Join-Path $root 'src/mvdm-host/softpc.new/obj.vdm'
@@ -253,6 +255,7 @@ $adapterRedirNames = @('mvdm_redirector_handle.c', 'mvdm_redirector_guest_copy.c
 $openntNetlibNames = @('ntstatus.c', 'copystr.c', 'allocstr.c', 'initoem.c')
 $openntNetapiNames = @('apibuff.c')
 $openntBaseVdmNames = @('vdm.c')
+$openntRtlNames = @('environ.c')
 $openntRtlX86Names = @('largeint-selected.asm', 'movemem-selected.asm')
 $adapterSoftpcNames = @('mvdm_softpc_firmware.c', 'mvdm_xms_memory.c', 'mvdm_a20.c', 'mvdm_softpc_guest_memory.c', 'mvdm_softpc_physical_mapping.c',
                         'mvdm_guest_location.c', 'mvdm_softpc_execution.c', 'mvdm_softpc_termination.c',
@@ -353,8 +356,14 @@ foreach ($name in $adapterRedirNames) {
 if (!(Test-Path -LiteralPath $rtlX86FixtureSource -PathType Leaf)) {
     throw "Required original x86 RTL fixture missing: $rtlX86FixtureSource"
 }
+if (!(Test-Path -LiteralPath $environmentProjectionFixtureSource -PathType Leaf)) {
+    throw "Required environment projection fixture missing: $environmentProjectionFixtureSource"
+}
 foreach ($name in $openntRtlX86Names) {
     if (!(Test-Path -LiteralPath (Join-Path $openntRtlX86Root $name))) { throw "Selected original x86 RTL source missing: $name" }
+}
+foreach ($name in $openntRtlNames) {
+    if (!(Test-Path -LiteralPath (Join-Path $openntRtlRoot $name))) { throw "Selected original RTL source missing: $name" }
 }
 foreach ($name in $adapterVddNames) {
     if (!(Test-Path -LiteralPath (Join-Path $adapterVddRoot $name))) { throw "Required VDD adapter source missing: $name" }
@@ -620,6 +629,7 @@ $graph.Add('ninja_required_version = 1.10')
 $graph.Add('build_root = ' + (NinjaPath $build))
 $graph.Add('cflags = ' + $baseFlags)
 $graph.Add('host_cflags = ' + $hostFlags)
+$graph.Add('rtl_cflags = ' + $baseFlags + ' /Gz')
 $graph.Add('dpmi_cflags = ' + $dpmiFlags)
 $graph.Add('cvidc_first_cflags = ' + $cvidcFirstFlags)
 $graph.Add('cvidc_rule_cflags = ' + $cvidcRuleFlags)
@@ -636,6 +646,11 @@ $graph.Add('  msvc_deps_prefix = Note: including file: ')
 $graph.Add('rule cc_host')
 $graph.Add('  command = cl.exe $host_cflags /Fo$out $in')
 $graph.Add('  description = CC-HOST $in')
+$graph.Add('  deps = msvc')
+$graph.Add('  msvc_deps_prefix = Note: including file: ')
+$graph.Add('rule cc_rtl')
+$graph.Add('  command = cl.exe $rtl_cflags /Fo$out $in')
+$graph.Add('  description = CC-RTL $in')
 $graph.Add('  deps = msvc')
 $graph.Add('  msvc_deps_prefix = Note: including file: ')
 $graph.Add('rule asm_x86')
@@ -696,7 +711,7 @@ $graph.Add('  command = link.exe /nologo /dll /def:' + (NinjaPath $redirExportDe
 $graph.Add('rule broker_test_link')
 $graph.Add('  command = link.exe /nologo /out:$out $in libcmt.lib libvcruntime.lib libucrt.lib kernel32.lib')
 $graph.Add('rule rtl_fixture_link')
-$graph.Add('  command = link.exe /nologo /out:$out $in kernel32.lib ntdll.lib libcmt.lib libvcruntime.lib libucrt.lib')
+$graph.Add('  command = link.exe /nologo /out:$out $in kernel32.lib user32.lib ntdll.lib libcmt.lib libvcruntime.lib libucrt.lib')
 
 $ccpuObjects = foreach ($name in $ccpuNames) {
     $object = 'obj/ccpu/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
@@ -883,6 +898,8 @@ $graph.Add('build ' + $cpu40DescriptorDomainFixtureObject + ': cc_dpmi ' + (Ninj
 $graph.Add('  dpmi_cflags = ' + $dpmiFlags + ' /DLINKED_INTO_MONITOR')
 $rtlX86FixtureObject = 'obj/tests/rtl_x86_fixture.obj'
 $graph.Add('build ' + $rtlX86FixtureObject + ': cc ' + (NinjaPath $rtlX86FixtureSource))
+$environmentProjectionFixtureObject = 'obj/tests/environment_projection_fixture.obj'
+$graph.Add('build ' + $environmentProjectionFixtureObject + ': cc ' + (NinjaPath $environmentProjectionFixtureSource))
 $baseDebugObjects = foreach ($name in $baseDebugNames) {
     $object = 'obj/base-debug/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $baseDebugRoot $name)))
@@ -952,6 +969,11 @@ $adapterRedirObjects = foreach ($name in $adapterRedirNames) {
 $openntRtlX86Objects = foreach ($name in $openntRtlX86Names) {
     $object = 'obj/opennt-rtl-x86/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': asm_x86 ' + (NinjaPath (Join-Path $openntRtlX86Root $name)))
+    $object
+}
+$openntRtlObjects = foreach ($name in $openntRtlNames) {
+    $object = 'obj/opennt-rtl/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
+    $graph.Add('build ' + $object + ': cc_rtl ' + (NinjaPath (Join-Path $openntRtlRoot $name)))
     $object
 }
 $kernelVdmPrinterObject = 'obj/kernel-vdm/monitor_printer.obj'
@@ -1026,7 +1048,7 @@ $graph.Add('build vdd-bindings.lib: lib ' + ($adapterVddObjects -join ' '))
 $graph.Add('build original-opennt-netlib.lib: lib ' + ($openntNetlibObjects -join ' '))
 $graph.Add('build original-opennt-netapi-api.lib: lib ' + ($openntNetapiObjects -join ' '))
 $graph.Add('build original-opennt-base-vdm.lib: lib ' + ($openntBaseVdmObjects -join ' '))
-$graph.Add('build original-opennt-rtl-x86.lib: lib ' + ($openntRtlX86Objects -join ' '))
+$graph.Add('build original-opennt-rtl-x86.lib: lib ' + ((@($openntRtlObjects) + @($openntRtlX86Objects)) -join ' '))
 $graph.Add('build app-machine-shell.lib: lib ' + ($appObjects -join ' '))
 $graph.Add('build session.lib: lib ' + ($sessionObjects -join ' '))
 $graph.Add('build broker.lib: lib ' + ($brokerObjects -join ' '))
@@ -1035,6 +1057,7 @@ $graph.Add('build basesrv-base-vdm-broker-test.exe: broker_test_link ' + $baseVd
 $graph.Add('build app-launch-declaration-wow-entry-test.exe: broker_test_link ' + $launchDeclarationWowEntryTestObject + ' obj/app/launch_declaration.obj softpc-bindings.lib basesrv-bindings.lib broker.lib session.lib')
 $graph.Add('build cpu40-descriptor-domain-fixture.exe: broker_test_link ' + $cpu40DescriptorDomainFixtureObject + ' original-mvdm-dpmi32.lib')
 $graph.Add('build rtl-x86-fixture.exe: rtl_fixture_link ' + $rtlX86FixtureObject + ' original-opennt-rtl-x86.lib')
+$graph.Add('build environment-projection-fixture.exe: rtl_fixture_link ' + $environmentProjectionFixtureObject + ' original-opennt-base-vdm.lib original-opennt-rtl-x86.lib softpc-win32-bindings.lib')
 $graph.Add('build mvdm-softpc-effective-address.lib: lib ' + $effectiveAddressObject)
 $graph.Add('build softpc-win32-bindings.lib: lib ' + ($adapterWin32Objects -join ' '))
 $graph.Add('build basesrv-bindings.lib: lib ' + ($adapterBaseSrvObjects -join ' '))
@@ -1103,6 +1126,7 @@ $graph.Add('default original-softpc-candidate')
     sessionSources = @($sessionNames)
     adapterWin32Sources = @($adapterWin32Names)
     openntRtlX86Sources = @($openntRtlX86Names)
+    openntRtlSources = @($openntRtlNames)
     openntBaseVdmSources = @($openntBaseVdmNames)
     patchInputs = @($patchNames | ForEach-Object {
         [ordered]@{
