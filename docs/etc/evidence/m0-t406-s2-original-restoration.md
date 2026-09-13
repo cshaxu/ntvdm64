@@ -839,3 +839,25 @@ e72cfb90298a7e4f4973574256ec8a8711c916422c062e025518bfddde7d8ba5.
 This establishes the restored C-VID group only; DIV-088, DIV-121 and
 DIV-075 remain necessary declaration/CPU40 composition differences with
 separate evidence, not x64-width residue.
+
+## Original current-process pseudo-handle spelling
+
+Restored the original public `NtCurrentProcess()` spelling `(HANDLE)-1` in
+the selected `ntrtl.h` declaration subset. The prior `LONG_PTR` intermediate
+was an x64-oriented carrier with no required x86 behavior. Pinned OpenNT
+`public/sdk/inc/ntpsapi.h:879` supplies the exact original public spelling.
+This change is declaration-only: all consumers still receive the same x86
+pseudo-handle value and no process/lifecycle provider changes.
+
+The dependency-derived x86 commands rebuilt `nt_umb.obj`, its host-root
+library, the product and the focused external-memory test. That test exits 0:
+disk-buffer alignment, 132 word-fill cases, reversed-page SAS access,
+allocation grow/shrink, real DIB sharing, and unaligned add/remove/backing
+restoration all pass (`O:\ntvdm64\logs\t406-s2-ntcurrentprocess-memory.txt`).
+The normal Ninja front end remains unsuitable on this host because it stalls
+before compiler launch; only its exact generated commands were executed.
+
+Staged x86 EXE: 3,235,328 bytes, SHA-256
+`b592287dd5812a04d1f7ff08529eeeff4a86fd896f4d7d81c3fd09add5b78d46`.
+This declaration-only cohort has no independent DOS/WOW acceptance claim;
+the prior COMMAND/EDIT/WRITE frontier remains unchanged.

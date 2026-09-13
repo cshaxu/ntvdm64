@@ -110,7 +110,7 @@ NTSTATUS NTAPI RtlLeaveCriticalSection(PRTL_CRITICAL_SECTION CriticalSection);
 NTSTATUS NTAPI RtlInitializeCriticalSection(PRTL_CRITICAL_SECTION CriticalSection);
 NTSTATUS NTAPI NtTerminateProcess(HANDLE ProcessHandle, NTSTATUS ExitStatus);
 #ifndef NtCurrentProcess
-#define NtCurrentProcess() ((HANDLE)(LONG_PTR)-1)
+#define NtCurrentProcess() ( (HANDLE) -1 )
 #endif
 
 #ifndef InitializeListHead

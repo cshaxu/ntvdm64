@@ -153,8 +153,9 @@ open; the current deployed identity is in Current Technical Baseline below.
   preserves prior runtime limitations.
 - Latest deployed executable: O:\ntvdm64\ntvdm32.exe, T406 S2 external
   memory restoration plus working EMS/allocator/host-word and C-VID x86
-  carrier cohorts, 3,235,328 bytes; SHA-256
-  e72cfb90298a7e4f4973574256ec8a8711c916422c062e025518bfddde7d8ba5.
+  carrier cohorts plus original current-process pseudo-handle spelling,
+  3,235,328 bytes; SHA-256
+  b592287dd5812a04d1f7ff08529eeeff4a86fd896f4d7d81c3fd09add5b78d46.
   Formal build, native DIB sharing and isolated EMS guest tests pass. MEM and
   COMMAND exit normally; EDIT reaches its editor after Esc and bounded cleanup.
   WRITE still reaches W32Init FALSE, exit 255; no full WRITE acceptance.
