@@ -19,6 +19,8 @@ extern LONG VdmAllocateVirtualMemory(PULONG, ULONG, BOOL);
 extern LONG VdmFreeVirtualMemory(ULONG);
 extern LONG VdmReallocateVirtualMemory(ULONG, PULONG, ULONG);
 extern void fwd_word_fill(unsigned short, unsigned char *, int);
+extern PBYTE get_aligned_disk_buffer(void);
+extern DWORD disk_buffer_pool, max_align_factor, cur_align_factor;
 
 static void report(const char *message)
 {
@@ -49,6 +51,27 @@ int main(void)
     ULONG guest = 0, normal;
     void *gdp;
     SetUnhandledExceptionFilter(report_exception);
+    {
+        static const DWORD masks[] = {0, 1, 3, 15, 511, 4095};
+        unsigned i;
+        CHECK(disk_buffer_pool == 0);
+        max_align_factor = 4095;
+        for (i = 0; i < sizeof(masks) / sizeof(masks[0]); ++i) {
+            PBYTE aligned;
+            cur_align_factor = masks[i];
+            aligned = get_aligned_disk_buffer();
+            CHECK(aligned != NULL);
+            CHECK(((uintptr_t)aligned & masks[i]) == 0);
+            CHECK((uintptr_t)aligned >= disk_buffer_pool &&
+                (uintptr_t)aligned - disk_buffer_pool <= masks[i]);
+            aligned[0] = 0x12;
+            aligned[511] = 0x34;
+            CHECK(aligned[0] == 0x12 && aligned[511] == 0x34);
+        }
+        free((void *)(uintptr_t)disk_buffer_pool);
+        disk_buffer_pool = max_align_factor = cur_align_factor = 0;
+        report("original disk-buffer alignment PASS (no disk I/O)\n");
+    }
     {
         uint8_t buffer[96];
         uint32_t digest = 2166136261u;

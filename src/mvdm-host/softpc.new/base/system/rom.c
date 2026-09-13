@@ -638,9 +638,7 @@ GLOBAL void display_string IFN1(char *, string_ptr)
 
 	IU8	*hostPtr;
 	IU16	count;
-	/* DIVERGENCE MVDM-HOST-DIV-076: host string length is native-width. */
-	size_t	endLinAddr;
-	size_t	stringLength;
+	IU32	endLinAddr;
 
 	/* In a paging environment, we must be careful as a
 	** the ROM area could have been copied and/or mapped
@@ -669,8 +667,7 @@ GLOBAL void display_string IFN1(char *, string_ptr)
 	/* the area to be patched must lie entirely in one intel page for
 	** this method to be sure to work. So check it.
 	*/
-	stringLength = strlen(string_ptr);
-	endLinAddr = (size_t)cur_loc + stringLength + 2;
+	endLinAddr = (cur_loc + strlen(string_ptr) + 2);
 	if (((endLinAddr ^ DOS_SCRATCH_PAD) > 0xfff) || (endLinAddr > DOS_SCRATCH_PAD_END))
 	{
 #ifndef PROD
@@ -693,8 +690,7 @@ GLOBAL void display_string IFN1(char *, string_ptr)
 			string_ptr[cur_loc - DOS_SCRATCH_PAD - 2] = '\0';
 		}
 	}
-	stringLength = strlen(string_ptr);
-	for (count = 0; count < stringLength; count++)
+	for (count = 0; count < strlen(string_ptr); count++)
 	{
 		*IncCpuPtrLS8(hostPtr) = string_ptr[count];
 	}
@@ -713,7 +709,7 @@ GLOBAL void display_string IFN1(char *, string_ptr)
 	cur_loc -= strlen(string_ptr);
 #endif /* CPU_40_STYLE */
 #endif	/* !NTVDM | !MONITOR */
-	cur_loc += (sys_addr)stringLength;
+	cur_loc+=strlen(string_ptr);
 }
 
 GLOBAL void clear_string IFN0()

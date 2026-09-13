@@ -215,11 +215,7 @@ void  host_applInit(int argc,char *argv[])
             // Check for windowed graphics resize
             //
             if (*psz == 'E') {
-               /* DIVERGENCE(MVDM-HOST-DIV-145): `strlen` produces the
-                * native `size_t` count.  Keep it in that carrier until the
-                * unchanged bounded comparison below; no guest value or
-                * SoftPC configuration field receives this host-local size. */
-               size_t i;
+               int i;
 
                i = strlen(achES);
                if (!strncmp(psz, achES, i) && strlen(psz) == (size_t)i+2) {

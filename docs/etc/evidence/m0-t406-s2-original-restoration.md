@@ -428,3 +428,28 @@ are under runtime logs: DIR 37136, MEM 41192, COMMAND 23636 exit 0; EDIT
 passes mapping and cross-page move/exchange, exit 0. Refreshed the isolated
 package product from this link and removed Q:. No all-graphics or full WRITE
 claim. This closes this restoration group; the remaining audit stays open.
+
+### Host support width cohort
+
+Restored original ROM string-count expressions, nt_reset fixed option length,
+nt_fdisk private buffer address/alignment, nt_sec null-handle diagnostic and
+fprt CRT buffer/length casts. fprt.c and nt_sec.c now match original text.
+The five files total +13/-32 (net 19 fewer lines). Retired DIV-069/070/124/145.
+Kept ROM residency selection, PDB/SCS leases, session teardown, CCPU accessor
+prototypes and observers. The inspected nt_cprgs/nt_aorc callback changes
+are a generated-provider contract family, not pure pointer width; not reverted.
+
+Formal host-support-build.log and host-support-test-build.log pass. Added
+six pure-memory get_aligned_disk_buffer cases (masks 0,1,3,15,511,4095),
+checking address range/alignment and writable first/last sector bytes, then
+freeing the test-owned allocation. No disk handle was opened or disk I/O
+performed. Existing 132 fill, SAS cross-page, allocator and DIB tests pass,
+log t406-s2-host-support-memory.txt, exit 0.
+
+Integration prefix t406-s2-host-support- under runtime logs: DIR 31812,
+MEM 22572, COMMAND 34720 exit 0; EDIT 45088 reaches editor then bounded
+timeout; WRITE 52160 exits 255; EMS 20012 passes map/move/exchange and exits 0.
+Isolated package refreshed and Q: removed. No raw-disk or fullscreen regen
+acceptance is claimed. Deployed EXE 3,235,328 bytes, SHA-256
+f3b84cd6fe5326a8f0b5ee0abe8e3c4ac90a41bbbb00438ab6c9ab685d8c3afa.
+This group is verified; the wider audit remains active.
