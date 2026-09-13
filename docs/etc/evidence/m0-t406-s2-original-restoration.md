@@ -784,3 +784,37 @@ Final deployed x86 EXE: 3,235,328 bytes, SHA-256
 196bb5823edcacdf5886347712b8ceedc60fa0338c099f9e36a6ec9e76c2f52f.
 Reviewer checked original branches and unchanged selected condition rather
 than treating restoration of an inactive branch as runtime acceptance.
+
+## C-VID x86 carrier restoration
+
+Restored the original generic `IHP` callback carriers in `evidgen.h` and
+the original `ULONG` private-video-buffer alignment expressions in
+`egwrtm12.c`.  The removed typed callback aliases and `IHPE` casts existed
+to make the generated C-VID vector safer for the retired x64 product.  In
+the sole x86 product, both original carrier widths are four bytes and the
+original table shape is selected.  This removes 13 net source lines
+(10 additions, 23 removals across two files); it adds no new provider,
+algorithm, or CCPU behavior.
+
+The originally configured MinGW Ninja executable stalled before launching
+any compiler process.  Its `-n -d explain` graph nevertheless identified
+the 28 affected nodes.  The same generated Ninja compilation database was
+then used to execute exactly those 22 object builds, three libraries and
+three final link commands under the existing MSVC x86 environment.  All
+completed; the C-VID files retain original warnings such as C4152/C4113
+for generic function/data-pointer carriers, but no compile or link error
+occurred.  The build log is `cvidc-width-build.log` in the r002 build root.
+
+Focused original memory/DIB regression exits 0
+(`t406-s2-cvidc-width-memory.txt`): disk-buffer alignment, 132 word-fill
+cases, reversed-page SAS access, allocation grow/shrink, real DIB sharing,
+and unaligned add/remove/backing restoration all pass.  Integration logs
+under `O:\ntvdm64\logs\t406-s2-cvidc-width-*` show COMMAND/MEM/DIR exit 0,
+EDIT reaching its editor before bounded cleanup, and the pre-existing WRITE
+exit 255 frontier.  The EMS conventional-window failure remains untouched.
+
+Staged x86 EXE: 3,235,328 bytes, SHA-256
+e72cfb90298a7e4f4973574256ec8a8711c916422c062e025518bfddde7d8ba5.
+This establishes the restored C-VID group only; DIV-088, DIV-121 and
+DIV-075 remain necessary declaration/CPU40 composition differences with
+separate evidence, not x64-width residue.

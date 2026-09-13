@@ -305,19 +305,16 @@ GLOBAL VOID
 fill_both_bytes IFN3(USHORT, data, USHORT *, dest, ULONG, len )
 {
 	USHORT swapped;
-	/* DIVERGENCE MVDM-HOST-DIV-080: `dest` is a private native video-buffer
-	 * pointer, not a guest address.  Preserve the original alignment branch
-	 * while using SoftPC's pointer-width IHPE carrier on both host widths. */
 
 #ifdef BIGEND
 	swapped = ((data & 0xff00) >> 8) | ((data & 0xff) << 8);
 #endif
 
-	if( (IHPE) dest & 1 )
+	if( (ULONG) dest & 1 )
 	{
 		*((UTINY *) dest) = first_half(data);
 
-		dest = (USHORT *) ((IHPE) dest + 1);
+		dest = (USHORT *) ((ULONG) dest + 1);
 		len--;
 
 		while( len-- )

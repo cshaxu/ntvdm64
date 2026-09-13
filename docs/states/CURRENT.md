@@ -151,9 +151,10 @@ open; the current deployed identity is in Current Technical Baseline below.
   unaccepted 1daff0ace WIP. T405 changed no product behavior and proves no new
   WRITE execution. [T404 closure](../history/m0-t404-owner-directed-closure.md)
   preserves prior runtime limitations.
-- Latest deployed executable: O:\ntvdm64\ntvdm32.exe, T406 S2 P2 external
-  memory restoration plus working EMS/allocator/host-word cohorts, 3,235,328 bytes;
-  SHA-256 196bb5823edcacdf5886347712b8ceedc60fa0338c099f9e36a6ec9e76c2f52f.
+- Latest deployed executable: O:\ntvdm64\ntvdm32.exe, T406 S2 external
+  memory restoration plus working EMS/allocator/host-word and C-VID x86
+  carrier cohorts, 3,235,328 bytes; SHA-256
+  e72cfb90298a7e4f4973574256ec8a8711c916422c062e025518bfddde7d8ba5.
   Formal build, native DIB sharing and isolated EMS guest tests pass. MEM and
   COMMAND exit normally; EDIT reaches its editor after Esc and bounded cleanup.
   WRITE still reaches W32Init FALSE, exit 255; no full WRITE acceptance.
