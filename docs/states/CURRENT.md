@@ -117,13 +117,10 @@ call contract. Restore original VdmAddVirtualMemory/VdmRemoveVirtualMemory
 bodies and remove publish/prepare/cancel. This lower table is explicitly an
 unavailable-implementation adapter, not an imported original function body.
 
-S2 progress: the first 14-file width cohort is restored and formal x86 build
-plus baseline integration completed. [Group evidence](../etc/evidence/m0-t406-s2-original-restoration.md)
-records exact results and limits. Mapping protocol and further width/access
-work remain open. Latest EXE is now 3,236,864 bytes, SHA-256
-6cddfd9e917e892a04df877d8b6d69c3e561cf31d933d8a4980325deb6a77947,
-published to build/output/ntvdm32.exe and O:\ntvdm64\ntvdm32.exe.
-The S1 artifact identity below is historical baseline, not latest deployment.
+S2 progress: the first 14-file width cohort and original external-memory
+add/remove contract are restored. [Group evidence](../etc/evidence/m0-t406-s2-original-restoration.md)
+records formal builds, tests and limits. Further width/access work remains
+open; the current deployed identity is in Current Technical Baseline below.
 
 ### M0 T406 S2 - Original mapping and x86-width restoration
 
@@ -154,17 +151,18 @@ The S1 artifact identity below is historical baseline, not latest deployment.
   unaccepted 1daff0ace WIP. T405 changed no product behavior and proves no new
   WRITE execution. [T404 closure](../history/m0-t404-owner-directed-closure.md)
   preserves prior runtime limitations.
-- Latest deployed executable: O:\ntvdm64\ntvdm32.exe, T406 S1 P5 upstream
-  observation, 3,236,864 bytes; SHA-256
-  3a63c66334739eda455aa464df64a7305391b129c94992121501cf018d7371e5.
-  Source behavior remains the prior mapping baseline plus bounded observation;
-  no new WRITE acceptance. Previous EXE retained in the S1 run root.
-- P5 research: default EMS size/pages are zero; an isolated 2 MiB EMS guest
-  probe passed allocation, switching, shared alias writes, unmapping and free,
-  with actual map/unmap/alias-hit logs. WRITE reaches WOW ingress but W32Init
-  returns FALSE; DIB remains unexercised. See the S1 report for exact runs.
-  This is bounded coverage, not full mapping or WRITE acceptance. S1 remains
-  open; P4/P5 push is pending the recorded destination approval.
+- Latest deployed executable: O:\ntvdm64\ntvdm32.exe, T406 S2 P2 external
+  memory restoration plus working EMS/allocator/host-word cohorts, 3,235,328 bytes;
+  SHA-256 dc9d467d46133137c5e756138c585ee2167c47f40727c113acae030d84e6b1ce.
+  Formal build, native DIB sharing and isolated EMS guest tests pass. MEM and
+  COMMAND exit normally; EDIT reaches its editor after Esc and bounded cleanup.
+  WRITE still reaches W32Init FALSE, exit 255; no full WRITE acceptance.
+  [S2 evidence](../etc/evidence/m0-t406-s2-original-restoration.md) owns details.
+- S1 and S2 P1 are pushed. P2 is local commit ec7b4bd1d, pending push after
+  security-review rejection; it is not delivered. S2 remains active for the
+  remaining width cohorts and access-boundary audit. The latest test-only
+  extension verifies original SAS loads/stores/move across reversed pages;
+  it does not yet prove EMS bulk-copy caller contracts.
 - [Queue](QUEUE.md) owns candidate order and pending repairs; [debt](TODO.md)
   retains full WRITE limitations. Ignored builds and runtime logs are preserved,
   not deleted to obtain Git cleanliness. Commit/push and status verification

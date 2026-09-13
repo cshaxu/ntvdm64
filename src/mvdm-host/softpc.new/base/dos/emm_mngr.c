@@ -112,15 +112,11 @@ typedef enum
 
 #ifdef NTVDM
 /*	Local Variables			*/
-/* DIVERGENCE(MVDM-HOST-DIV-061): these original host-dependent IDs are
- * private EMM storage pointers.  Keep the manager's allocation/map sequence
- * intact but use IHP so neither x86 nor x64 truncates the host backing. */
-static IHP
-	handle[MAX_NO_HANDLES]		/* Array containing unique ID's	*/
+static long
+	handle[MAX_NO_HANDLES],		/* Array containing unique ID's	*/
 					/* for each handle, these are	*/
 					/* usually pointers, but this 	*/
-					/* is host dependant		*/;
-static ULONG
+					/* is host dependant		*/
 	backfill;			/* backfill memory size 	*/
 static unsigned short
 	total_pages = 0,		/* no. of EM pages available	*/
@@ -308,7 +304,7 @@ GLOBAL int init_expanded_memory IFN2(int, size, 	/* size of area in megabytes */
 	total_handles = MAX_NO_HANDLES;
 	total_open_handles = 0;
 	for(i = 0; i < total_handles; i++)
-		handle[i] = (IHP)NULL;
+		handle[i] = (long) NULL;
 
 #ifdef NTVDM
 	map_size = no_phys_pages * NSIZE;
@@ -469,7 +465,7 @@ GLOBAL short get_new_handle IFN1(short, no_pages)	/* No.of pages to store in han
 	short	i;			/* loop count */
 	short	handle_no;
 	int	data_size;		/* no. of bytes of data storage */
-	IHP	storage_ID;		/* host dependant storage	*/
+	long	storage_ID;		/* host dependant storage	*/
 					/* identifier, usually a ptr.	*/
 
 	sure_note_trace2(LIM_VERBOSE,"new handle request, current total handles= %d, pages requested = %d",total_handles, no_pages);
@@ -477,7 +473,7 @@ GLOBAL short get_new_handle IFN1(short, no_pages)	/* No.of pages to store in han
 	handle_no = 0;
 
 	do
-		if (handle[handle_no] == (IHP)NULL)
+		if (handle[handle_no] == (long) NULL)
 			break;
 	while(++handle_no < total_handles);
 
@@ -486,7 +482,7 @@ GLOBAL short get_new_handle IFN1(short, no_pages)	/* No.of pages to store in han
 
 	data_size = page_offset + (no_pages * NSIZE);
 
-	if ((storage_ID = host_allocate_storage(data_size)) == (IHP)NULL)
+	if ((storage_ID = host_allocate_storage(data_size)) == (long) NULL)
 		return(FAILURE);
 
 	handle[handle_no] = storage_ID;
@@ -520,7 +516,7 @@ DESCRIPTION	:
 GLOBAL int free_handle IFN1(short, handle_no)	/* No.of handle to be freed */
 
 {
-	IHP	storage_ID;		/* host dependant storage	*/
+	long	storage_ID;		/* host dependant storage	*/
 					/* identifier, usually a ptr.	*/
 
 	sure_note_trace2(LIM_VERBOSE, "free handle %d request, total handles = %d",handle_no, total_handles);
@@ -530,7 +526,7 @@ GLOBAL int free_handle IFN1(short, handle_no)	/* No.of handle to be freed */
 	if(host_free_storage(storage_ID) != SUCCESS)
 		return(FAILURE);	
 
-	handle[handle_no] = (IHP)NULL;
+	handle[handle_no] = (long) NULL;
 
 	total_open_handles--;
 
@@ -556,7 +552,7 @@ GLOBAL int reallocate_handle IFN3(short, handle_no, 	/* handle to be reallocated
 				  short, new_page_count)/* required pages for handle*/
 
 {
-	IHP	storage_ID;		/* host dependant storage	*/
+	long	storage_ID;		/* host dependant storage	*/
 					/* identifier, usually a ptr.	*/
 
 	short	size,			/* size of handle data area	*/
@@ -570,7 +566,7 @@ GLOBAL int reallocate_handle IFN3(short, handle_no, 	/* handle to be reallocated
 	sure_note_trace3(LIM_VERBOSE,"reallocate pages for handle %d, old size=%#x, new size= %#x",handle_no, size, new_size);
 
 	if((storage_ID = host_reallocate_storage(storage_ID, size, new_size)) ==
-		(IHP)NULL)
+		(long) NULL)
 		return(FAILURE);	
 
 	handle[handle_no] = storage_ID;
@@ -610,7 +606,7 @@ GLOBAL boolean handle_ok IFN1(short, handle_no)
 		return(FALSE);
 	}
 
-	if(handle[handle_no] == (IHP)NULL){
+	if(handle[handle_no] == (long) NULL){
 		sure_note_trace1(LIM_VERBOSE,"invalid handle %d",handle_no);
 		return(FALSE);
 	}
@@ -634,7 +630,7 @@ DESCRIPTION	:
 GLOBAL void set_no_pages IFN2(short, handle_no, short, no_pages)
 
 {
-	IHP	storage_ID;		/* host dependant storage	*/
+	long	storage_ID;		/* host dependant storage	*/
 					/* identifier, usually a ptr.	*/
 	byte	*ptr;			/* pointer to storage area	*/
 
@@ -667,7 +663,7 @@ GLOBAL void set_EMpage_no IFN3(short, handle_no,
 			       short, EM_page_no)
 
 {
-	IHP	storage_ID;		/* host dependant storage	*/
+	long	storage_ID;		/* host dependant storage	*/
 					/* identifier, usually a ptr.	*/
 	byte	*ptr;			/* pointer to storage area	*/
 
@@ -705,7 +701,7 @@ GLOBAL void set_map_no IFN3(short, handle_no,
 			    short, EM_page_no)
 
 {
-	IHP		storage_ID;	/* host dependant storage	*/
+	long		storage_ID;	/* host dependant storage	*/
 					/* identifier, usually a ptr.	*/
 	unsigned char	*ptr;		/* pointer to storage area	*/
 
@@ -742,7 +738,7 @@ GLOBAL void set_name IFN2(short, handle_no,
 		          char *, new_name)
 
 {
-	IHP	storage_ID;		/* host dependant storage	*/
+	long	storage_ID;		/* host dependant storage	*/
 					/* identifier, usually a ptr.	*/
 	unsigned char	*ptr;		/* pointer to storage area	*/
 
@@ -778,7 +774,7 @@ DESCRIPTION	:
 GLOBAL short get_no_pages IFN1(short, handle_no)
 
 {
-	IHP	storage_ID;		/* host dependant storage	*/
+	long	storage_ID;		/* host dependant storage	*/
 					/* identifier, usually a ptr.	*/
 	byte	*ptr;			/* pointer to storage area	*/
 	short 	no_pages;		/* no. of pages in handle	*/
@@ -812,7 +808,7 @@ GLOBAL short get_EMpage_no IFN2(short, handle_no,
 				short, logical_page_no)
 
 {
-	IHP	storage_ID;		/* host dependant storage	*/
+	long	storage_ID;		/* host dependant storage	*/
 					/* identifier, usually a ptr.	*/
 	byte	*ptr;			/* pointer to storage area	*/
 	short	EM_page_no;		/* Expanded Memory page number	*/
@@ -850,7 +846,7 @@ GLOBAL short get_map_no IFN2(short, handle_no,
 			     unsigned char, physical_page_no)
 
 {
-	IHP		storage_ID;	/* host dependant storage	*/
+	long		storage_ID;	/* host dependant storage	*/
 					/* identifier, usually a ptr.	*/
 	unsigned char	*ptr;		/* pointer to storage area	*/
 	short		EM_page_no;	/* Expanded Memory page number	*/
@@ -886,7 +882,7 @@ DESCRIPTION	:
 GLOBAL char *get_name IFN1(short, handle_no)
 
 {
-	IHP		storage_ID;	/* host dependant storage	*/
+	long		storage_ID;	/* host dependant storage	*/
 					/* identifier, usually a ptr.	*/
 	unsigned char	*ptr;		/* pointer to storage area	*/
 
@@ -1282,7 +1278,7 @@ DESCRIPTION	: checks the first entry in the map for the value 'FREE'
 GLOBAL boolean map_saved IFN1(short, handle_no)
 
 {
-	IHP		storage_ID;	/* host dependant storage	*/
+	long		storage_ID;	/* host dependant storage	*/
 					/* identifier, usually a ptr.	*/
 	unsigned char	*ptr;		/* pointer to storage area	*/
 	short		status;		/* value read from map		*/
@@ -2098,7 +2094,7 @@ DESCRIPTION	:
 GLOBAL void print_handle_data IFN1(short, handle_no)
 
 {
-	IHP	storage_ID;
+	long	storage_ID;
 	byte	*ptr;
 	short	no_pages, i;
 	char	*name_ptr;

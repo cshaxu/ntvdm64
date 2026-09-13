@@ -166,3 +166,167 @@ S2/T406 remain open. Resolve source-proven remaining access-boundary cases and
 width cohorts. P2's native DIB test does not prove Win16 thunk integration;
 missing original lower bodies remain an explicit limitation. Full WRITE
 behavior is not claimed.
+
+## Group 3 access-boundary investigation
+
+Selected CPU_40_STYLE/CCPU headers route get_byte_addr through c_get_byte_addr
+to c_GetPhyAdd, not the excluded older Start_of_M_area arithmetic macro.
+The original SAS loads/stores/move loops use per-byte access. The formal-library
+test now maps guest pages 0x80/0x81 to reversed external backing pages and
+checks four-byte loads, stores and moves across 0x80ffe. All checks pass,
+along with prior add/remove, backing restoration and real GDI DIB checks.
+No product implementation changed.
+
+The r002 Ninja runner rebuilt original-external-memory-test.exe, intentionally
+reusing unchanged dependency-tracked formal x86 libraries. Build log:
+r002/cross-page-build.log. Runtime log under the approved runtime logs root:
+t406-s2-r002-cross-page-verified.txt, exit 0. The first cross-page.txt run
+passed byte checks but failed unmapping two independent map records together;
+the final test pairs each unmap with its map. Arbitrary unmap splitting or
+coalescing is not proven. Retain the original SAS loops.
+
+nt_emm bulk copies resolve only the initial pointer. Their legal caller spans
+and move/exchange paths still require original-caller review and tests;
+this SAS test does not cover those APIs. Remaining width cohorts stay open.
+
+### EMS storage width restoration
+
+Restored the original long storage contract as one five-file cohort:
+emm_mngr.c, emm.h, host_emm.h, nt_emm.c and x86_emm.c. Paired declarations,
+definitions, table, backfill and casts now follow the pinned OpenNT source.
+emm.h, host_emm.h and x86_emm.c have no remaining textual diff after newline
+normalization. x86_emm.c is not the selected CCPU runtime provider; its source
+restoration is not a claim that the MONITOR target was built.
+Retained manager stdlib declaration, existing LIM writeback selection and
+nt_emm mapping API include. DIV-061 now records only the allocator declaration.
+Five source files total +38/-54 lines (net 16 fewer), excluding README/tests.
+
+The r002 dependency-tracked formal rebuild passed 17 steps for product and
+memory-test targets; log ems-width-build.log. Test exit 0 includes reversed
+SAS pages and real DIB sharing (t406-s2-r002-ems-width-memory.txt). The deployed
+product and isolated build-owned EMS package were updated from that link.
+EXE: 3,235,328 bytes, SHA-256
+3f796f59f0519f227ac950b32d0c48b396d676177f694bbb9a8366cb38962fef.
+
+Integration logs t406-s2-ems-width-{mem,command,edit,write,ems}.txt reside in
+the approved runtime logs root. MEM PID 19236 and COMMAND PID 32960 exit 0;
+EDIT PID 35768 reaches welcome/editor and is bounded-cleaned after timeout;
+WRITE PID 36232 exits 255, not accepted; EMS PID 46212 prints MAP SWITCH
+ALIAS UNMAP FREE PASS and exits 0. Q: was removed. Initial observer invocation
+with forward-slash log paths was refused with 64 before starting guests;
+the recorded runs use its required Windows path syntax.
+
+Review: no allocation or guest policy was rewritten. Wider width cohorts and
+EMS move/exchange verification remain open. emm_fncs.c splits expanded spans
+at EMM_PAGE_SIZE but leaves conventional spans at full length; therefore its
+loop alone does not prove arbitrary conventional mapped-page copies safe.
+
+### Allocation-address width restoration
+
+Restored nt_mem.c's original allocation/free/reallocation address expressions
+and exclusiveAllocPages IU32 page arithmetic together. Removed the invented
+INTEL_ADDRESS_FROM_HOST/HOST_ADDRESS_FROM_INTEL macros and x64-only range
+intermediate/assertion. Source delta +12/-33, net 21 fewer lines. DIV-028/034
+registry rows are removed. Remaining nt_mem differences are declarations,
+the recorded mapping initialize/release hook, and the correctly typed %p
+failure diagnostic; that varargs correction remains valid on x86 too.
+
+Formal product and memory-test targets rebuilt successfully using the same
+recorded r002 dependency graph (allocator-width-build.log and
+allocator-test-build.log). The test now additionally calls the original
+VdmReallocateVirtualMemory(old, new-pointer, size) to grow and shrink normal
+memory and confirms retained bytes; all prior cross-page/DIB checks pass.
+Runtime log t406-s2-allocator-width-memory.txt, exit 0.
+
+Deployed EXE remains 3,235,328 bytes; new SHA-256
+f78f42f6a0cd52908391a3ad2fdb36151e82dcd432d444761c7abe3c6781dc8d.
+Real integration logs t406-s2-allocator-width-{mem,command,edit,write,ems}.txt:
+MEM 47156 and COMMAND 40356 exit 0; EDIT 45600 reaches the editor and times
+out under bounded cleanup; WRITE 29444 exits 255 (not acceptance); EMS 36140
+prints MAP SWITCH ALIAS UNMAP FREE PASS and exits 0. The isolated package
+was refreshed with this exact link; temporary Q: was removed. Wider cohort
+review and EMS move/exchange coverage remain unfinished; no T closure.
+
+### Shared host-word restoration
+
+insignia.h IHPE and IUH now use the original unsigned int definitions;
+the file matches pinned OpenNT apart from removing one original trailing
+space required by diff-check. The formal
+generator no longer adds CVIDC_RULE_WORD. The width-only DIV-025/041 rows
+are removed. Header delta +1/-10 (net nine fewer lines); generator retains
+its existing rule-flags variable without the obsolete macro. No CPU body
+changed. SAS capacity declarations remain paired with their current PHY_ADDR
+definition; equal storage width does not justify mismatched C declarations.
+
+Regenerated the recorded r002 graph and rebuilt all affected dependencies,
+313 steps including product and focused test links (host-word-build.log).
+Original memory regression passed including grow/shrink, reversed pages,
+and real DIB sharing, log t406-s2-host-word-memory.txt. The five real-program
+logs use prefix t406-s2-host-word- in the runtime logs root: MEM/COMMAND
+exit 0, EDIT bounded timeout, WRITE exit 255, EMS prints its PASS and exits 0.
+These preserve prior bounded acceptance, not full WRITE or GUI acceptance.
+Q: was removed after refreshing the isolated EMS package with the new link.
+
+Deployed x86 EXE: 3,235,328 bytes, SHA-256
+da235d321b7104ae1224e1fb3fbb80218b7154612cf5f70ab18f781c01813482.
+Source review confirms original header semantics and no CVIDC_RULE_WORD use
+remains in src/tools/tests. Remaining width/access review is still open.
+
+### Remaining candidate re-screen and C-video review
+
+Re-read the existing paired-diff.csv source mapping, recomputed current
+zero-context diffs for its historical text-different rows, and screened added
+lines for x64/64-bit, pointer-width typedefs, IHP/IHPE, size_t/ptrdiff_t and
+%p. This is a candidate refresh, not full new-file coverage or an updated
+all-project removal count. For example, insignia.h still matches the regex
+solely because its restored original line names IHP in a comment and differs
+by trailing whitespace. A hit is not a remaining width adaptation.
+
+C-video review distinguishes these cases:
+
+- j_c_lang.h adds the existing CrulesRuntimeError void(char *) declaration;
+  do not classify a missing original prototype as x64-only behavior.
+- evidfunc.h adds four-IUH generated-function prototypes; inspect generated
+  definitions and callers before any restoration of original implicit-int or
+  differently arity declarations. No rollback is justified by width alone.
+- evidgen.h provides callback types rather than IHP transport. This is a
+  function/data-pointer contract difference, not just integer width.
+- evid_c.h DIV-051 has an incorrect historical rationale: IU32* is a pointer,
+  not a 32-bit integer address. Original vglob.c setters/getters use IUH*,
+  while original fields use IU32*. In selected insignia.h IUH is unsigned int
+  and IU32 unsigned long. The actual question is C pointed-to type agreement,
+  not pointer truncation. A grouped original-declaration compile comparison
+  remains required before deciding rollback or a necessary minimal fix.
+
+No product source was changed by this read-only review. The DIV-051 rationale
+must not be used as proof of unavoidable x64 compatibility. Generated binder
+replacement and callback semantics likewise remain separately accountable;
+the completed IUH width rollback is not evidence that they are all restored.
+
+### Original CCPU video fields verified
+
+The follow-up restored evid_c.h completely to the pinned original. Formal
+rebuild passes 312 steps (original-video-fields-build.log). It emits twelve
+unsuppressed C4057 warnings in original vglob.c: the six original IU32* fields
+are assigned/returned through IUH* accessors. These are now explicitly known
+original type inconsistencies, not truncation or evidence of a missing body.
+The selected x86 pointer layout is unchanged; no accessor or CPU algorithm
+was rewritten. Removed DIV-051 rather than retaining its false rationale.
+
+evidfunc.h prototypes remain: original sevid001.c defines
+S_2127_CGAMarkByte as IUH(IUH,IUH,IUH,IUH), not the historical header's
+implicit-int single-argument declaration. This source-defined ABI correction
+must not be reverted as if it were mere host-word widening.
+
+Memory test passed with original C-video setup, reversed-page loads/stores,
+grow/shrink and real DIB sharing. Five integration logs use prefix
+t406-s2-original-video-fields- under runtime logs: MEM 31652 and COMMAND
+27592 exit 0; EDIT 24028 reaches editor then bounded timeout; WRITE 43940
+exits 255; EMS 16072 prints PASS and exits 0. Q: removed. These bounded
+tests do not establish all graphics modes or full WRITE acceptance.
+
+Deployed x86 EXE: 3,235,328 bytes, SHA-256
+dc9d467d46133137c5e756138c585ee2167c47f40727c113acae030d84e6b1ce.
+This completes the current tested restoration batch, not all remaining width
+or EMS move/exchange work. Changes are eligible for a local review checkpoint;
+remote delivery remains constrained by the recorded push rejection.

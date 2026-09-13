@@ -111,16 +111,6 @@ typedef enum
 #define ADDRESS_TO_HEADER(address)   \
     (headerTable + (((address) - intelMem) >> PAGE_SHIFT))
 
-/* DIVERGENCE MVDM-HOST-DIV-034: keep the original Intel-linear ULONG ABI,
- * but perform the private allocation-header/base arithmetic in the existing
- * pointer-sized IHPE carrier. The original x86 code narrowed intelMem before
- * subtraction, which corrupts only its own host allocation on x64. Neither
- * macro publishes a native pointer outside this SoftPC translation unit. */
-#define INTEL_ADDRESS_FROM_HOST(address) \
-    ((ULONG)((IHPE)(address) - (IHPE)intelMem))
-#define HOST_ADDRESS_FROM_INTEL(address) \
-    ((IHPE)intelMem + (IHPE)(address))
-
 /* Local variables. */
 LOCAL IBOOL              memInit = FALSE;
                                         /* Is memory system initialised? */
@@ -464,12 +454,12 @@ GLOBAL NTSTATUS VdmAllocateVirtualMemory IFN3(PULONG, INTELAddress,
      * the new chunk to the caller.
      */
     totalFree -= Size;
-    *INTELAddress = INTEL_ADDRESS_FROM_HOST(headerPtr->address);
+    *INTELAddress = ((ULONG) (IHPE) headerPtr->address) - (ULONG) intelMem;
 
 #ifdef DEBUG_MEM
     printf(" => alloc %lxh, commit %lxh\n",
-        INTEL_ADDRESS_FROM_HOST(headerPtr->address),
-        INTEL_ADDRESS_FROM_HOST(commitAddr));
+        ((ULONG) (IHPE)headerPtr->address) - (ULONG)intelMem,
+        ((ULONG) (IHPE)commitAddr) - (ULONG)intelMem);
 
 #ifdef DEBUG_MEM_DUMP
     DumpAllocationHeaders("after allocate");
@@ -571,7 +561,7 @@ GLOBAL NTSTATUS VdmFreeVirtualMemory IFN1(ULONG, INTELAddress)
     IU32    size,
             decommitSize;
     IHP     decommitAddr;
-    IHPE    Address;
+    ULONG   Address;
 
 
     /* Make sure memory system is initialised. */
@@ -582,7 +572,7 @@ GLOBAL NTSTATUS VdmFreeVirtualMemory IFN1(ULONG, INTELAddress)
 #endif
 
     /* Calculate chunk address */
-    Address = HOST_ADDRESS_FROM_INTEL(INTELAddress);
+    Address = INTELAddress + (ULONG)intelMem;
 
     /* Get header table entry for address. */
     headerPtr = ADDRESS_TO_HEADER((IU8 *) Address);
@@ -758,7 +748,7 @@ GLOBAL NTSTATUS VdmReallocateVirtualMemory IFN3(ULONG, INTELOriginalAddress,
             maxSize;
     ULONG   newAddr;
     NTSTATUS	status;
-    IHPE    OriginalAddress;
+    ULONG   OriginalAddress;
 
 
 #ifdef DEBUG_MEM
@@ -771,7 +761,7 @@ GLOBAL NTSTATUS VdmReallocateVirtualMemory IFN3(ULONG, INTELOriginalAddress,
 	NewSize = (NewSize + PAGE_MASK) & (~PAGE_MASK);
 
     /* Calculate chunk address */
-    OriginalAddress = HOST_ADDRESS_FROM_INTEL(INTELOriginalAddress);
+    OriginalAddress = INTELOriginalAddress + (ULONG)intelMem;
 
     /* Make sure memory system is initialised. */
     assert0(memInit, "Called VdmReallocateVirtualMemory before initialisation");
@@ -846,8 +836,7 @@ GLOBAL NTSTATUS VdmReallocateVirtualMemory IFN3(ULONG, INTELOriginalAddress,
             return(status);
 
         /* Copy old chunk. */
-        memcpy((void *) HOST_ADDRESS_FROM_INTEL(newAddr),
-                (void *) OriginalAddress,
+        memcpy((void *) (newAddr + intelMem), (void *) OriginalAddress,
                 (size_t) oldSize);
 
         /* Free old chunk. */
@@ -903,7 +892,7 @@ GLOBAL NTSTATUS VdmReallocateVirtualMemory IFN3(ULONG, INTELOriginalAddress,
         }
 
         /* Inform caller address has not changed. */
-	*INTELNewAddress = INTEL_ADDRESS_FROM_HOST(OriginalAddress);
+	*INTELNewAddress = OriginalAddress - (ULONG)intelMem;
 
         /* Update total free space store. */
         totalFree += NewSize - oldSize;
@@ -1369,17 +1358,12 @@ LOCAL void exclusiveAllocPages IFN6(IHPE, address,
                                     IHP *, allocAddr,
                                     IU32 *, allocSize)
 {
-    /* DIVERGENCE(MVDM-HOST-DIV-034): these are page numbers derived from native header-table
-     * addresses, not emulated addresses.  The original x86 IU32 temporaries
-     * happened to retain every pointer bit; use the existing pointer-sized
-     * IHPE carrier so the same shift/reconstruct algorithm works on x64. */
-    IHPE    prevAllocLastPage,      /* Last page previous chunk touches. */
+    IU32    prevAllocLastPage,      /* Last page previous chunk touches. */
             currentAllocFirstPage,  /* First page current chunk touches. */
             currentAllocLastPage,   /* Last page current chunk touches. */
             nextAllocFirstPage,     /* First page next chunk touches. */
             firstPage,              /* First page that needs committing. */
-            lastPage,               /* Last page that needs committing. */
-            allocationBytes;        /* Native intermediate before IU32 ABI. */
+            lastPage;               /* Last page that needs committing. */
 
 #ifndef PROD
 
@@ -1436,12 +1420,7 @@ LOCAL void exclusiveAllocPages IFN6(IHPE, address,
     if (firstPage <= lastPage)
     {
 	*allocAddr = (void *) (firstPage << commitShift);
-	allocationBytes = (lastPage - firstPage + 1) << commitShift;
-	/* The range is inside the original IU32 MaxIntelMemorySize allocation;
-	 * make the retained fixed-width output contract explicit on x64. */
-	assert0(allocationBytes <= (IHPE)~(IU32)0,
-	        "exclusive allocation range exceeds Intel memory ABI");
-	*allocSize = (IU32)allocationBytes;
+	*allocSize = (lastPage - firstPage + 1) << commitShift;
     }
     else
         *allocSize = 0;

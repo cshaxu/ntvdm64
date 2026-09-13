@@ -10,10 +10,14 @@ extern void sas_term(void);
 extern void *setup_global_data_ptr(void);
 extern void setup_vga_globals(void);
 extern uint8_t *c_GetPhyAdd(uint32_t);
+extern void c_sas_loads(uint32_t, uint8_t *, uint32_t);
+extern void c_sas_stores(uint32_t, uint8_t *, uint32_t);
+extern void c_sas_move_bytes_forward(uint32_t, uint32_t, uint32_t);
 extern LONG VdmAddVirtualMemory(ULONG, ULONG, PULONG);
 extern LONG VdmRemoveVirtualMemory(ULONG);
 extern LONG VdmAllocateVirtualMemory(PULONG, ULONG, BOOL);
 extern LONG VdmFreeVirtualMemory(ULONG);
+extern LONG VdmReallocateVirtualMemory(ULONG, PULONG, ULONG);
 
 static void report(const char *message)
 {
@@ -73,6 +77,31 @@ int main(void)
     *c_GetPhyAdd(0x101000) = 0x7e;
     CHECK(external[4096] == 0x7e);
     CHECK(VdmUnmapDosMemory(0x100, 2) == 0);
+    {
+        uint8_t bytes[4] = {0};
+        uint8_t replacement[4] = {0x31, 0x32, 0x33, 0x34};
+        /* Adjacent guest pages deliberately point to reversed host pages. */
+        CHECK(VdmMapDosMemory(0x80, (guest >> 12) + 1, 1) == 0);
+        CHECK(VdmMapDosMemory(0x81, guest >> 12, 1) == 0);
+        external[8190] = 0x11;
+        external[8191] = 0x12;
+        external[0] = 0x13;
+        external[1] = 0x14;
+        c_sas_loads(0x80ffe, bytes, 4);
+        CHECK(bytes[0] == 0x11 && bytes[1] == 0x12 &&
+            bytes[2] == 0x13 && bytes[3] == 0x14);
+        c_sas_stores(0x80ffe, replacement, 4);
+        CHECK(external[8190] == 0x31 && external[8191] == 0x32 &&
+            external[0] == 0x33 && external[1] == 0x34);
+        c_sas_move_bytes_forward(0x80ffe, 0x70000, 4);
+        c_sas_loads(0x70000, bytes, 4);
+        CHECK(bytes[0] == 0x31 && bytes[1] == 0x32 &&
+            bytes[2] == 0x33 && bytes[3] == 0x34);
+        CHECK(VdmUnmapDosMemory(0x80, 1) == 0);
+        CHECK(VdmUnmapDosMemory(0x81, 1) == 0);
+        external[1] = 0x5a;
+        report("original SAS reversed-page loads/stores/move PASS\n");
+    }
     normal = guest & ~4095u;
     CHECK(VdmRemoveVirtualMemory(guest) == 0);
     CHECK(!mvdm_softpc_physical_mapping_resolve(guest, &resolved));
@@ -81,6 +110,16 @@ int main(void)
     CHECK(c_GetPhyAdd(normal + 1) != external + 1);
     *c_GetPhyAdd(normal + 1) = 0x19;
     CHECK(external[1] == 0x5a);
+    {
+        ULONG resized = 0;
+        CHECK(VdmReallocateVirtualMemory(normal, &resized, 16384) == 0);
+        CHECK(*c_GetPhyAdd(resized + 1) == 0x19);
+        normal = resized;
+        CHECK(VdmReallocateVirtualMemory(normal, &resized, 4096) == 0);
+        CHECK(*c_GetPhyAdd(resized + 1) == 0x19);
+        normal = resized;
+        report("original allocation grow/shrink content PASS\n");
+    }
     CHECK(VdmFreeVirtualMemory(normal) == 0);
     {
         BITMAPINFO info = {0};

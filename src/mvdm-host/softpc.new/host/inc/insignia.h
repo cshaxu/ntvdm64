@@ -75,18 +75,9 @@ typedef unsigned long        IU32;		/* 32 bit unsigned int */
 typedef long                 ISM32;		/* 32 bit signed int */
 typedef unsigned long        IUM32;		/* 32 bit unsigned int */
 typedef void *               IHP;		/* a generic pointer type */
-typedef UINT_PTR             IHPE;	    /* DIVERGENCE: original intent is an integer
-                                           the same size as IHP; UINT_PTR preserves that
-                                           internal SoftPC address arithmetic on x86/x64. */
+typedef unsigned int         IHPE;	    /* an integer the same size as a IHP */
 typedef int                  ISH;	    /* Host register sized signed quantity */
-#ifdef CVIDC_RULE_WORD
-typedef UINT_PTR             IUH;	    /* DIVERGENCE: generated C-video rules carry
-                                           native private pointers in their historical host
-                                           word slots; this target-local carrier is pointer
-                                           sized on both x86 and x64. */
-#else
 typedef unsigned int         IUH;	    /* Host register sized unsigned quantity */
-#endif
 #define LONG_SHIFT	2
 
 /*

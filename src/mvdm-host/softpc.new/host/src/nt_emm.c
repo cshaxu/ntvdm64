@@ -250,14 +250,12 @@ DESCRIPTION	: calloc is similar to malloc but returns memory
 
 =========================================================================
 */
-/* DIVERGENCE(MVDM-HOST-DIV-061): use native-width IHP for the original
- * private host storage ID; all manager-side access remains USEBLOCK based. */
-IHP host_allocate_storage(int no_bytes)
+long host_allocate_storage(int no_bytes)
 
 /*   IN   int	no_bytes	no. of bytes required	*/
 
 {
-	return (IHP)calloc(1, no_bytes);
+	return ((long)calloc(1, no_bytes));
 }
 
 
@@ -278,13 +276,13 @@ DESCRIPTION	: In this implementation storage_ID is simply a pointer
 
 =========================================================================
 */
-int host_free_storage(IHP storage_ID)
+int host_free_storage(long storage_ID)
 
 /*   IN   long	storage_ID		ptr to area of memory	*/
 
 {
 
-	if(storage_ID != (IHP)0)
+	if(storage_ID != (long) 0)
 		free((char *)storage_ID);
 
 	return(SUCCESS);
@@ -310,15 +308,15 @@ DESCRIPTION	: In this implementation storage_ID is simply a pointer
 
 =========================================================================
 */
-IHP host_reallocate_storage(IHP storage_ID, int size, int new_size)
+long host_reallocate_storage(long storage_ID, int size, int new_size)
 
 /*   IN 
-long	storage_ID	ptr to area of memory	
+long	storage_ID	ptr to area of memory
 int	size		original size - not used in this version
 	new_size	new size required
 */
 {
-	return(IHP)realloc((char *)storage_ID, new_size);
+	return((long)realloc((char *)storage_ID, new_size));
 }
 
 

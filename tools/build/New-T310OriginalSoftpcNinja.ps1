@@ -595,7 +595,7 @@ $hostFlags = $baseFlags + ' /FI "' + (NinjaPath $hostCrtRedirect) + '"'
 $dpmiArchitectureFlags = if ($Architecture -eq 'x86') { ' /D_X86_ ' } else { ' ' }
 $dpmiFlags = $baseCommonFlags + $dpmiArchitectureFlags + ($includeRoots -join ' ')
 $cvidcFirstFlags = $baseCommonFlags + ($cvidcFirstIncludeRoots -join ' ') + ' ' + $cvidcGeneratedInclude
-$cvidcRuleFlags = $cvidcFirstFlags + ' /DCVIDC_RULE_WORD'
+$cvidcRuleFlags = $cvidcFirstFlags
 # `accessfn.c` is selected by the original C-VID manifest as the non-CCPU
 # vector facade for host/DPMI callers.  It must keep its original non-PROD
 # body, but must not inherit CCPU: under CCPU its macro spellings become a
