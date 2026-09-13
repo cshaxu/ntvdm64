@@ -732,3 +732,33 @@ Staged x86 EXE is 3,235,328 bytes, SHA-256
 a9f26bfd4512bbc0d329555196f6c2a93790dc1a7479e0c0f037706e51490171.
 Reviewer inspected the complete four-file expression diff against pinned
 OpenNT; governance and whitespace checks are required before delivery.
+
+## Original guest packet declarations
+
+Restored x86 pointer-typed fields in dosdef.h, apistruc.h, dossvc.h and the
+two guest request structs in vrnmpipe.h. Original decoding remains unchanged;
+the pointer typedef does not authorize native dereference of a far address.
+The first three headers now match pinned OpenNT after newline normalization.
+vrnmpipe.h retains only DIV-167's async completion/lifetime changes (two
+numeric locations and PrivateAsyncState), not reverted as width residue.
+Retired HOST-DIV-001 and SUPPORT-DIV-002/003/004. HOST-DIV-004's separate
+guest error lease remains registered. Header delta +13/-29, net 16 removed.
+
+Added original_guest_layout_probe.c: 14 x86 compile-time assertions cover
+pointer width, DTA/FCB sizes and offsets, nine-byte DEMEXTERR, eight-byte
+mailslot request and both 24-byte pipe requests. /TC /std:c11 /MT /W4 /WX
+with original header roots compiles and exits 0. First attempt omitted
+/std:c11 and failed at _Static_assert; preserved guest-layout-probe-build.log
+is not passing evidence. Corrected log: guest-layout-probe-final-build.log.
+
+r002 formal EXE, focused test and actual VDMREDIR.dll build/link pass
+(guest-layout-build.log). DLL is build-tested only, not separately deployed
+or accepted for live pipe/mailslot operations. Original memory/DIB tests pass.
+Runtime logs O:\ntvdm64\logs\t406-s2-guest-layout-*: COMMAND/MEM/DIR exit 0;
+EDIT reaches editor then bounded cleanup; WRITE exits 255. EMS failure is
+unchanged and not retested by this header cohort. No full FCB/pipe acceptance.
+
+Staged EXE: 3,235,328 bytes, SHA-256
+12d66e1afd94c970316d38c4f08290f5ce4157c8f3cbd148110d65aab7b51096.
+Reviewer verified original-paired header diffs, retained async boundary,
+layout assertions and actual DLL build selection. T406 remains open.

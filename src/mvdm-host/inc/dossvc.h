@@ -32,10 +32,7 @@ typedef struct _DEMEXTERR {
     USHORT  ExtendedError;
     UCHAR   ExtendedErrorAction;
     UCHAR   ExtendedErrorClass;
-    /* DIVERGENCE MVDM-HOST-DIV-004: this is a 32-bit DOS guest address,
-     * not a native host pointer.  Keeping ULONG preserves the original
-     * packed nine-byte wire layout on x86 and x64. */
-    ULONG   ExtendedErrorPointer;
+    PUCHAR  ExtendedErrorPointer;
 } DEMEXTERR;
 
 typedef DEMEXTERR* PDEMEXTERR;

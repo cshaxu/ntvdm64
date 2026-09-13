@@ -287,15 +287,12 @@ typedef struct _DOS_ASYNC_NAMED_PIPE_INFO {
 #pragma pack(1)
 typedef struct {
     DWORD   Timeout;            // Time to wait for pipe to become available
-    /* DIVERGENCE(MVDM-SUPPORT-DIV-002): these members are physical 16:16
-     * guest values, not native host pointers.  Keeping their original
-     * four-byte representation preserves the DOS ABI on x64. */
-    DWORD   lpBytesRead;        // pointer to returned bytes read
+    LPWORD  lpBytesRead;        // pointer to returned bytes read
     WORD    nOutBufferLen;      // size of send data
-    DWORD   lpOutBuffer;        // pointer to send data
+    LPBYTE  lpOutBuffer;        // pointer to send data
     WORD    nInBufferLen;       // size of receive buffer
-    DWORD   lpInBuffer;         // pointer to receive buffer
-    DWORD   lpPipeName;         // pointer to pipe name
+    LPBYTE  lpInBuffer;         // pointer to receive buffer
+    LPSTR   lpPipeName;         // pointer to pipe name
 } DOS_CALL_NAMED_PIPE_STRUCT, *PDOS_CALL_NAMED_PIPE_STRUCT;
 //#include <packoff.h>
 #pragma pack()
@@ -309,17 +306,13 @@ typedef struct {
 //#include <packon.h>
 #pragma pack(1)
 typedef struct {
-    /* DIVERGENCE(MVDM-SUPPORT-DIV-004): each value below is a packed 16:16
-     * guest location.  Native pointer typedefs would widen this request ABI
-     * on x64; original consumers continue to decode them with far-pointer
-     * helpers only while a bounded Redirector scope is active. */
-    DWORD   lpBytesRead;        // pointer to returned bytes read/written
+    LPWORD  lpBytesRead;        // pointer to returned bytes read/written
     WORD    BufferLength;       // size of caller's buffer
-    DWORD   lpBuffer;           // pointer to caller's buffer
-    DWORD   lpErrorCode;        // pointer to returned error code
-    DWORD   lpANR;              // pointer to Asynchronous Notification Routine
+    LPBYTE  lpBuffer;           // pointer to caller's buffer
+    LPWORD  lpErrorCode;        // pointer to returned error code
+    LPVOID  lpANR;              // pointer to Asynchronous Notification Routine
     WORD    PipeHandle;         // named pipe handle
-    DWORD   lpSemaphore;        // pointer to caller's 'semaphore'
+    LPBYTE  lpSemaphore;        // pointer to caller's 'semaphore'
 } DOS_ASYNC_NAMED_PIPE_STRUCT, *PDOS_ASYNC_NAMED_PIPE_STRUCT;
 //#include <packoff.h>
 #pragma pack()
