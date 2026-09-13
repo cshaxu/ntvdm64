@@ -56,10 +56,7 @@ mvdm_guest_location environment_location;
 mvdm_guest_location execpath_location;
 mvdm_guest_location_lease command_lease;
 mvdm_guest_location_lease execpath_lease;
-/* DIVERGENCE(MVDM-HOST-DIV-115): retain local title and command-line
- * lengths at their native width.  The existing guest byte write remains at
- * the source's already asserted 127-byte boundary. */
-size_t  cb;
+ULONG   cb;
 PREDIRCOMPLETE_INFO pRdrInfo;
 VDMINFO MyVDMInfo;
 
@@ -176,7 +173,7 @@ char    AppName[MAX_PATH + 13];
 		    cb = strlen(achTitle);
 		    // GetConsoleTitleA and SetConsoleTitleA
 		    // are working on OEM character set.
-		    GetConsoleTitleA(achTitle + cb, (DWORD)(MAX_PATH - cb - 1));
+		    GetConsoleTitleA(achTitle + cb, MAX_PATH - cb - 1);
 		    cb = strlen(achTitle);
 		    achTitle[cb] = ']';
 		    achTitle[cb + 1] = '\0';

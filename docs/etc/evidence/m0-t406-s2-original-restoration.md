@@ -612,3 +612,28 @@ bounded backing-granularity and reclamation design, or a different proven
 same-shaped binding. Production code is unchanged. This finding rules out
 the simple single-section replacement; it does not prove that every native
 alias design is impossible.
+
+## Remaining COMMAND length cohort
+
+While the proposed EMS access binding awaits owner confirmation, continued
+the approved width-only sweep. Paired with pinned OpenNT dos/command:
+restored cmdexec AppNameLen/CommandTailLen ULONG declaration, cmdmisc ULONG
+cb and original Console title argument, and cmdkeyb INT iSize/iSaveSize.
+Retained LPBYTE/LPDWORD corrections, byte overflow rejection, guest leases
+and lifecycle code. Retired DIV-115; narrowed DIV-112/114. Three C files:
++6/-14, net 8 lines removed; README accounting is separate.
+
+Intentionally reused the dependency-tracked r002 graph/toolchain.
+command-length-build.log shows three changed units compiled and both formal
+EXE and original-external-memory-test relinked. Build exits 0; cmdexec C4703
+and LNK4070 remain warnings. Focused t406-s2-command-length-memory.txt exits
+0 with allocation, reversed SAS pages and native DIB sharing passing.
+Staged x86 EXE: 3,235,328 bytes, SHA-256
+2fba77c21709104319017fb239b5b020597ea654daf6927f670faa754f013ce6.
+
+Runtime logs under O:\ntvdm64\logs\ use t406-s2-command-length- prefix:
+COMMAND/MEM/DIR exit 0; EDIT reaches editor then bounded cleanup; WRITE
+exits 255. Extended EMS window workload still exits c0000005, as on the
+preceding baseline: failed, not reclassified as acceptance. Q: removed.
+Reviewer checked type restoration separately from retained functional
+divergences. No full runtime recovery or T closure is claimed.

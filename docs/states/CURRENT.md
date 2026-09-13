@@ -153,11 +153,16 @@ open; the current deployed identity is in Current Technical Baseline below.
   preserves prior runtime limitations.
 - Latest deployed executable: O:\ntvdm64\ntvdm32.exe, T406 S2 P2 external
   memory restoration plus working EMS/allocator/host-word cohorts, 3,235,328 bytes;
-  SHA-256 8f6e90a7425575007b967ea0fc28d28c924c671b4381dcbd6cbd0371b88457ec.
+  SHA-256 2fba77c21709104319017fb239b5b020597ea654daf6927f670faa754f013ce6.
   Formal build, native DIB sharing and isolated EMS guest tests pass. MEM and
   COMMAND exit normally; EDIT reaches its editor after Esc and bounded cleanup.
   WRITE still reaches W32Init FALSE, exit 255; no full WRITE acceptance.
   [S2 evidence](../etc/evidence/m0-t406-s2-original-restoration.md) owns details.
+- Extended EMS conventional-window regression fails with c0000005 in host
+  copying; previous logical-page EMS passes do not cover it. Native alias
+  experiments pass but expose incompatible decommit semantics. The proposed
+  alternative access binding awaits owner approval; no new mapping repair
+  is implemented. Approved width-only restoration continues independently.
 - S1, S2 P1/P2 and the grouped restoration at 78d492964 are pushed to main.
   The owner explicitly approved permanent main pushes. S2 remains active for the
   remaining width cohorts and access-boundary audit. The latest test-only

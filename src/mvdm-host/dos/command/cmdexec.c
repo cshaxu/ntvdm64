@@ -202,8 +202,7 @@ VOID cmdCheckBinary (VOID)
     DWORD  BinaryType;
     PPARAMBLOCK lpParamBlock;
     PCHAR  lpCommandTail,lpTemp;
-    size_t AppNameLen;
-    ULONG  CommandTailLen = 0;
+    ULONG  AppNameLen,CommandTailLen = 0;
     USHORT CommandTailOff,CommandTailSeg,usTemp;
     mvdm_guest_location_lease scs_lease;
     PSCSINFO pSCSInfo;
@@ -283,9 +282,6 @@ VOID cmdCheckBinary (VOID)
     // Its a 32bit exe, replace the command with "command.com /z" and add the
     // original binary name to command tail.
 
-    /* DIVERGENCE(MVDM-HOST-DIV-112): this is private host-side string
-     * arithmetic, so retain the native size_t returned by strlen until the
-     * original 128-byte guest command-tail admission check has succeeded. */
     AppNameLen = strlen (lpAppName);
 
     lpParamBlock = (PPARAMBLOCK) GetVDMAddr (getES(),getBX());

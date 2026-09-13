@@ -16,8 +16,7 @@
 #include "cmdkeyb.h"
 /* DIVERGENCE(MVDM-HOST-DIV-114): preserve the source keyboard-layout
  * sequence, but state the two Win32 binary-buffer parameters exactly and
- * retain native fixed-buffer lengths until the original one-byte guest tail
- * is admitted. */
+ * reject a command tail that cannot fit the original one-byte guest field. */
 
 CHAR szPrev[5] = "US";
 INT  iPrevCP = 437;
@@ -59,7 +58,7 @@ extern BOOL bPifFastPaste;
 
 VOID cmdGetKbdLayout( VOID )
 {
-  size_t iSize,iSaveSize;
+  INT  iSize,iSaveSize;
   CHAR szKeybCode[12];
   CHAR szDir[MAX_PATH+15];
   CHAR szBuf[28];
@@ -234,7 +233,7 @@ VOID cmdGetKbdLayout( VOID )
 	sprintf(&szAutoLine[iSize], " /ID:%s", szNewKbdID);
 	iSize = strlen(szAutoLine);
     }
-    if (iSize > 0xffu) {
+    if (iSize > 0xff) {
         goto NoInstallkb16;
     }
     szAutoLine[iSize] = 0xd;
