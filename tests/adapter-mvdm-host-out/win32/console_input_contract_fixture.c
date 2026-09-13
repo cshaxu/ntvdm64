@@ -37,6 +37,8 @@ int main(void)
     uint32_t palette_copy[2];
     HANDLE saved_output;
     HANDLE text_output;
+    CONSOLE_CURSOR_INFO cursor_before;
+    CONSOLE_CURSOR_INFO cursor_after;
     DWORD text_state_length = 0u;
     PVOID text_state = NULL;
     PVOID text_buffer = NULL;
@@ -72,6 +74,11 @@ int main(void)
         NULL);
     if (text_output == INVALID_HANDLE_VALUE ||
         !SetStdHandle(STD_OUTPUT_HANDLE, text_output) ||
+        !GetConsoleCursorInfo(text_output, &cursor_before) ||
+        ShowConsoleCursor(text_output, FALSE) != -1 ||
+        ShowConsoleCursor(text_output, TRUE) != 0 ||
+        !GetConsoleCursorInfo(text_output, &cursor_after) ||
+        cursor_before.bVisible != cursor_after.bVisible ||
         !RegisterConsoleVDM(CONSOLE_REGISTER_VDM, NULL, NULL, NULL, 0u,
             &text_state_length, &text_state, NULL, 0u, text_size,
             &text_buffer) || text_state_length != 0u || text_state != NULL ||
