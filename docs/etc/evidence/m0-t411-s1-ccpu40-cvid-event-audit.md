@@ -33,6 +33,8 @@ system manifest selects original `qevnt.c`, not `quick_ev.c`.
 | C04 | `mvdm_cvidc_vector_binding.[ch]`, **86 lines** overlay; `GenerateCvidcCpuBinding.mjs`, **39 lines** | Original `c2cpusad.h` slot metadata, `cpu4gen.h` vectors, C-VID `setup_vga_globals`. | The vector assembly is a real missing generated-product carrier. It has no established composable original generated unit. It must be retained provisionally, but its per-slot table is audit material, not proof of correctness. |
 | C05 | C04's `mvdm_cvidc_*jump_*` state and three generator mappings | Original `qevnt.c` calibration/restart consumers and C-VID `accessfn.c` accessors. | **Autonomous timing replacement.** It collapses separate calibration/restart queries into one mutable value initially 100. `qevnt.c` has original policy but needs provider values; no selected original CCPU backing body was found. This is the highest-priority semantic recovery row. Do not delete it until a source-shaped provider and qevnt lifecycle test exist. |
 | C06 | `base/support/main.c` DIV-162/DIV-182 calls; `nt_cprgs.c`/`host_cpu.h` CCPU vector declarations | Original startup/CPU-vector ordering. | Calls establish C-VID video before config and CPU access after `cpu_init`; they are composition ordering, not substitute CPU behavior. Retain until the generated-carrier selection proves an original unit can supply the same order. |
+| P01 | `mvdm-softpc-patch/x86/prod/{PigReg_c.h,sas4gen.h,gdpvar.h}` | NTVDMx64 PATCH-001; selected original CCPU/C-VID declarations consume them through the formal include roots. | **External-patch declaration carrier**, not project-authored C-VID behavior. The selected OpenNT union lacks the x86 generated carrier. Retain with its hash register until byte-identical OpenNT input is recovered. |
+| P02 | `mvdm-softpc-patch/patches/common/fmstubs.c`, vector-default and activity-check selections | NTVDMx64 PATCH-004/005/006; formal product links only the restricted vector-default and activity-check objects. | **External-patch fallback**, not C-VID binder logic. `c_VirtualiseInstruction`/`c_sas_touch` retain debug-break failure, while `ActivityCheckAfterTimeSlice` is an exact empty callback. The whole patch body and PATCH-002 timing helpers are evidence-only, not linked into the product. Retain separately; neither is counted as an autonomous C05 replacement. |
 | E01 | `ccpu386/c_main.c`, current +161/-38 | Original CCPU event bitmap consumers; timer/reset/host-I/O/PIC producers. | **Autonomous synchronization policy.** CAS/Interlocked helpers changed observation-versus-consumption order; the prior U01 audit proves a lost RESET path. The file-level numstat also includes declarations and diagnostic hooks, so it is not a valid event-policy removal count. This row is removable only as a complete event profile after producer/thread analysis. |
 | E02 | `adapter-mvdm-host-out/softpc/mvdm_softpc_event_thread.c`, **30 lines**; event-thread calls in `nt_event.c` | Original event-manager shutdown and NT thread alert. | Small bounded modern wait/alert binding. It is not C-VID code and does not duplicate an original event queue; retain for a lifecycle-specific proof under U07-T/U08-W. |
 | E03 | `nt_event.c`, `nt_timer.c`, `nt_thred.c`, `nt_event.h` | Original Console/event/timer/thread owners. | Their current deltas also contain Console recovery, diagnostics and termination seams. They are not all CCPU C-VID diffs. Only their selected event producer/consumer and shutdown edges enter T411; Console ownership remains closed T410. |
@@ -41,9 +43,9 @@ system manifest selects original `qevnt.c`, not `quick_ev.c`.
 ## Findings and removal accounting
 
 There are **eight direct C-VID mirror-diff files**, **two C-VID binder overlay
-files**, **one generator**, one CCPU event-policy body, and one bounded
-event-thread adapter in the selected cohort. They are not 13 independent
-algorithms.
+files**, **one generator**, two registered NTVDMx64 patch-carrier rows, one
+CCPU event-policy body, and one bounded event-thread adapter in the selected
+cohort. They are not independent replacement algorithms.
 
 - Confirmed immediately removable behavior: **0 lines**. The 3 nonsemantic
   lines are not worthwhile and two would violate whitespace governance if
@@ -60,11 +62,12 @@ algorithms.
   found. It is therefore not counted as removable.
 
 The only current numeric removal target is therefore **about 20 conditional
-source/generator lines** from C05, not the entire 125-line binder and not the
-gross C-VID diff count. The ideal of zero autonomous policy remains valid,
-but only C05 and E01 are currently proved policy replacements. All other rows
-are source-shaped ABI or composition carriers pending a complete slot/profile
-proof.
+source/generator lines** from C05, not the entire 125-line binder, the
+registered NTVDMx64 patch carriers, or the gross C-VID diff count. The ideal
+of zero autonomous policy remains valid, but only C05 and E01 are currently
+proved policy replacements. All other rows are source-shaped ABI,
+composition, or registered external-patch carriers pending a complete
+slot/profile proof.
 
 ## S2 restoration proposal
 
