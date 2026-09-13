@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**No active M/T/S packet.**
+**Active: M0 T406 S1**
 
 M0 T405 S3 and T405 closed by owner direction on 2026-09-12:
 static audit completed; restoration and verification transferred to approved
@@ -10,7 +10,38 @@ candidates, not declared implemented. See the
 [closure and receiver table](../history/m0-t405-source-diff-audit.md).
 The [original proposal](../history/m0-t405-source-diff-audit-proposal.md) and
 [combined audit](../etc/evidence/opennt-replacement-audit-20260912.md) remain
-preserved. No candidate is active; next admission is controlled here.
+preserved. The owner admitted the physical-memory mapping package on
+2026-09-12; only research/design S1 is active. Report before S2 repair.
+
+S1 findings are ready in the [research/design report](../etc/evidence/m0-t406-s1-physical-mapping-design.md):
+224 changed mirror lines in the selected cohort; 159 gross rollback candidates
+(128 x86-width cohort, 31 conditional remap protocol), plus 85 gross
+adapter/header protocol-retirement lines. These are not tested net savings.
+Lower original mapping bodies remain unlocated in searched inputs; no repair
+or new runtime acceptance is claimed. Await owner decision before S2.
+
+## Active Packet
+
+### M0 T406 S1 - Original physical mapping research and restoration design
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T406 S1, Ordinary Mode, one agent executing then reviewing. |
+| Admission And Approval | Owner: “准入队列第一个T任务，完成彻底调研和设计，并报告可以减少多少不需要的diff；哪些diff和overlay或者自主实现是依然必要的、原始opennt代码无法提供准确内容的；理想情况是完全0自主实现，全面复通原始代码。” |
+| Candidate Proposal | [Physical mapping](../proposals/proposal-physical-memory-mapping-restoration-001.md). |
+| Objective | Establish U02 original owners, complete selected EMS/DIB/access boundaries and a quantified source-first restoration design, preferring zero autonomous algorithms. |
+| Non-goals | No product repair, source import, executable deployment, guest/CPU semantic change, broker or unrelated U03 redesign in S1. |
+| Reference Baseline | f2646d80b; T405 audit and current proposal; source/runtime acceptance remain distinct. |
+| Files And ABI Surface | Read-only source/build/artifact comparison; Status, Queue, existing proposal and indexed S1 evidence only. No ABI change. |
+| Applicable Rules | Repository source, architecture, coding, execution and documentation rules; corresponding governance skills. |
+| Verification | Bounded original/current source searches and hashes; per-file numstat and hunk disposition; selected compile macros/callers; governance, links, diff review, commit/push. |
+| Expected Markers | Original owner and four-rung disposition per interface; proved versus conditional removal counts; necessary bindings and unresolved original-source gaps; positive/negative S2 test design. |
+| Asset Needs | Existing local OpenNT/OpenNT-4.5 originals, selected mirrors and retained build inputs; comparisons read-only. No new source/media. |
+| Reporting Requirements | Separate mirror diff, overlay, autonomous code, declarations and test footprint. Report bounded search limits; zero autonomous code is a target, not assumed feasibility. |
+| Stop Conditions | Missing provenance or unavailable original implementation is explicit uncertainty; no invented fix. New source/runtime authority or expanded boundary requires review. |
+| Exit Criteria | Complete bounded research/design with quantified findings and original-source limitations reported to owner; S2 does not auto-start. |
+| Original Owner Request | Full request retained in Admission And Approval above. |
+| Similar-Issue Sweep | EMS, external DIB, CPU/SAS byte and bulk/cross-page accesses, backing lifetime and fixture-only publication bypasses. |
 
 ## Current Technical Baseline
 

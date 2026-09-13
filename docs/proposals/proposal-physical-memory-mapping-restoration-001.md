@@ -2,6 +2,12 @@
 
 ## Owner request and disposition
 
+Admitted as M0 T406 on 2026-09-12; removed from candidate Queue. Only S1
+research/design is active in Status. The owner requires its findings and
+reduction design before approving repairs. See the
+[S1 research/design](../etc/evidence/m0-t406-s1-physical-mapping-design.md).
+Earlier candidate language below is retained as proposal history.
+
 On 2026-09-12 the owner approved arranging an independent candidate T for
 U02 at the head of [Queue](../states/QUEUE.md), before DPMI/XMS restoration.
 This registers the package, not a second active task or numeric T allocation.
