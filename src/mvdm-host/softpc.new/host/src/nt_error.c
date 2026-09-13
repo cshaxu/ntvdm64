@@ -83,9 +83,6 @@ char achPERIOD[]=". ";
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
 int ErrorDialogBox(char *message, char *Edit, DWORD dwOptions);
-/* DIVERGENCE(MVDM-SOFTPC-PATCH-003): the selected NTVDMx64 callconv patch
- * corrects the historical cdecl worker declaration to the Win32 thread ABI.
- * Its parameter, result and dialog lifecycle are otherwise unchanged. */
 DWORD WINAPI ErrorDialogBoxThread(VOID *pv);
 int WowErrorDialogEvents(ERRORDIALOGINFO *pedgi);
 /* DIVERGENCE(MVDM-HOST-DIV-066): preserve the worker/dialog sequence and

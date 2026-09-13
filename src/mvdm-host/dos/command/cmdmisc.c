@@ -26,9 +26,6 @@
 #include "oemuni.h"
 #include "nt_pif.h"
 #include "nt_uis.h"	  // For resource id
-/* DIVERGENCE(MVDM-HOST-DIV-009): GetVDMAddr has no bounded x64 lifetime.
- * Retain cmdGetCurrentDir ordering and register contract through the
- * source-shaped adapter-mvdm-host-out/softpc numeric location/lease boundary. */
 #include "mvdm_guest_location.h"
 /* DIVERGENCE(MVDM-HOST-DIV-108): the original SCS command record stores a
  * host redirection-record pointer in a fixed DWORD.  Publish the same

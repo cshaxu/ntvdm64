@@ -16,11 +16,6 @@
 #include <stddef.h>
 #include <oemuni.h>
 #include <wowcmpat.h>
-/* DIVERGENCE(MVDM-HOST-DIV-108): standard-handle DWORDs and redirection
- * records crossed the original x86 guest ABI as process addresses.  Resolve
- * the same session-owned identities through the adapter, never by widening
- * their guest values into native HANDLEs or pointers. */
-#include "adapter-mvdm-host-out/redir/include/mvdm_command_redirection.h"
 /* DIVERGENCE(MVDM-HOST-DIV-111): retain the original SCSINFO layout and
  * field order, but lease its saved 16:16 guest position for this synchronous
  * operation instead of subtracting a native GetVDMAddr process pointer. */
@@ -52,21 +47,6 @@
  * order but bind it to a child-only STARTUPINFO carrier, not this app's
  * process-wide standard streams. */
 #include "adapter-mvdm-host-out/win32/include/command_process_compat.h"
-
-static BOOL cmdResolveStdHandle(ULONG identity, HANDLE *handle_out)
-{
-    uintptr_t native_handle;
-
-    if (handle_out == NULL) return FALSE;
-    if (identity == (ULONG)-1) {
-        *handle_out = (HANDLE)-1;
-        return TRUE;
-    }
-    if (!mvdm_command_redirection_resolve_handle(identity, &native_handle))
-        return FALSE;
-    *handle_out = (HANDLE)native_handle;
-    return TRUE;
-}
 
 //*****************************************************************************
 // IsWowAppRunnable
@@ -195,10 +175,6 @@ VOID cmdCheckBinary (VOID)
 {
 
     LPSTR  lpAppName;
-    /* DIVERGENCE(MVDM-HOST-DIV-112): GetBinaryType publishes a DWORD, not
-     * an LPLONG.  Both are 32-bit on the original target, but preserving
-     * the Win32 declaration removes an unproved pointer contract on x86
-     * and x64 without changing the source-visible binary classification. */
     DWORD  BinaryType;
     PPARAMBLOCK lpParamBlock;
     PCHAR  lpCommandTail,lpTemp;
@@ -434,21 +410,18 @@ VOID cmdCreateProcess ( VOID )
 	CurDir = NULL;
 
     pStdHandles = (PSTD_HANDLES)SnapshotStdHandles;
-    if (!mvdm_command_native_child_std_handles(SnapshotStdHandles) ||
-        !cmdResolveStdHandle(FETCHDWORD(pStdHandles->hStdIn), &hStd16In))
+    if (!mvdm_command_native_child_std_handles(SnapshotStdHandles))
         StdHandlesValid = FALSE;
-    else if (hStd16In != (HANDLE)-1)
-        SetStdHandle (STD_INPUT_HANDLE, hStd16In);
+    else {
+        if ((hStd16In = (HANDLE)FETCHDWORD(pStdHandles->hStdIn)) != (HANDLE)-1)
+            SetStdHandle (STD_INPUT_HANDLE, hStd16In);
 
-    if (!cmdResolveStdHandle(FETCHDWORD(pStdHandles->hStdOut), &hStd16Out))
-        StdHandlesValid = FALSE;
-    else if (hStd16Out != (HANDLE)-1)
-        SetStdHandle (STD_OUTPUT_HANDLE, hStd16Out);
+        if ((hStd16Out = (HANDLE)FETCHDWORD(pStdHandles->hStdOut)) != (HANDLE)-1)
+            SetStdHandle (STD_OUTPUT_HANDLE, hStd16Out);
 
-    if (!cmdResolveStdHandle(FETCHDWORD(pStdHandles->hStdErr), &hStd16Err))
-        StdHandlesValid = FALSE;
-    else if (hStd16Err != (HANDLE)-1)
-        SetStdHandle (STD_ERROR_HANDLE, hStd16Err);
+        if ((hStd16Err = (HANDLE)FETCHDWORD(pStdHandles->hStdErr)) != (HANDLE)-1)
+            SetStdHandle (STD_ERROR_HANDLE, hStd16Err);
+    }
 
     /*
      *  Warning, pEnv32 currently points to an ansi environment.

@@ -17,11 +17,12 @@ $environment = Join-Path $build ("msvc-{0}.cmd" -f $Architecture)
 @('@echo off', 'set "MVDM_T290_CALLER_CWD=%CD%"', 'if defined VSCMD_VER goto ready', ('call "' + $vs + '" -arch=' + $Architecture + ' -host_arch=x64 >nul'), 'if errorlevel 1 exit /b %errorlevel%', ':ready', 'cd /d "%MVDM_T290_CALLER_CWD%"', '%*') |
     Set-Content -LiteralPath $environment -Encoding ascii
 $includes = @('src', 'src/adapter-mvdm-host-out/win32/include',
+    'src/adapter-mvdm-host-out/redir/include',
     'src/adapter-mvdm-host-out/softpc/include',
     'src/opennt-host/public/sdk/inc',
     'src/opennt-abi/source/public/sdk/inc',
     'src/opennt-abi/source/public/internal/base/inc',
-    'src/mvdm-support/inc', 'src/mvdm-host/inc', 'src/mvdm-host/dos/command',
+    'src/mvdm-support/inc', 'src/mvdm-host/inc', 'src/mvdm-host/dos/command', 'src/session',
     'src/mvdm-host/softpc.new/host/inc', 'src/mvdm-host/softpc.new/base/inc') |
     ForEach-Object { '/I "' + (Join-Path $root $_).Replace('\', '/') + '"' }
 $cflags = '/nologo /TC /c /std:c11 /MT /W4 /showIncludes /DWIN_32 ' + ($includes -join ' ')
@@ -42,10 +43,9 @@ rule link
 build obj/cmdredir.obj: cc `$root/src/mvdm-host/dos/command/cmdredir.c
 build obj/guest_memory_lease.obj: cc `$root/src/session/guest_memory_lease.c
 build obj/session.obj: cc `$root/src/session/session.c
-build obj/mvdm_command_redirection.obj: cc `$root/src/adapter-mvdm-host-out/softpc/mvdm_command_redirection.c
-build obj/thread_start_compat.obj: cc `$root/src/adapter-mvdm-host-out/win32/source/thread_start_compat.c
+build obj/mvdm_command_redirection.obj: cc `$root/src/adapter-mvdm-host-out/redir/mvdm_command_redirection.c
 build obj/fixture.obj: cc `$root/tests/mvdm-host/dos/command/t290_s3_cmdredir_fixture.c
-build bin/t290-s3-cmdredir-fixture.exe: link obj/cmdredir.obj obj/guest_memory_lease.obj obj/session.obj obj/mvdm_command_redirection.obj obj/thread_start_compat.obj obj/fixture.obj
+build bin/t290-s3-cmdredir-fixture.exe: link obj/cmdredir.obj obj/guest_memory_lease.obj obj/session.obj obj/mvdm_command_redirection.obj obj/fixture.obj
 default bin/t290-s3-cmdredir-fixture.exe
 "@
 [System.IO.File]::WriteAllText((Join-Path $build 'build.ninja'), $content + [Environment]::NewLine, (New-Object System.Text.UTF8Encoding($false)))

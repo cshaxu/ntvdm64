@@ -252,10 +252,6 @@ GLOBAL word getCPL()
 	return c_getCPL();
 }
 
-/* DIVERGENCE: MVDM-HOST-DIV-102 retains every CCPU register operation and
- * dispatch order, but states the selected generated IU8/IU16/IU32/IBOOL and
- * ISM32 contracts explicitly. NT4 accepted K and R/default-int declarations;
- * explicit prototypes keep the x86 and x64 function-call ABI identical. */
 #undef setAL
 GLOBAL VOID setAL(IU8 val)
 {

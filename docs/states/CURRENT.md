@@ -97,8 +97,8 @@ OpenNT; extra publication protocol removed. Real native DIB/CCPU shared
 storage, alignment, allocation failure and ordinary-backing restoration
 tests pass, as does the EMS guest regression. See
 [P2 evidence](../etc/evidence/m0-t406-s2-original-restoration.md).
-Latest published EXE: 3,235,328 bytes; SHA-256
-2f4d823e1ef823c7f1253c3fd2b3de09b240359dcd364ad11b79126737389587.
+Latest published EXE: 3,236,864 bytes; SHA-256
+653ec3875887ed10a4d24ef7e264560d986c30c458d6b77648f0a9ce765a9aac.
 Earlier artifact identities below are historical. Group 3 and remaining
 width disposition are still open; full WRITE is not accepted.
 
@@ -161,10 +161,10 @@ remain explicitly unverified rather than inferred correct from compilation.
   preserves prior runtime limitations.
 - Latest deployed executable: O:\ntvdm64\ntvdm32.exe, T406 S2 external
   memory restoration plus working EMS/allocator/host-word and C-VID x86
-  carrier cohorts, original current-process pseudo-handle spelling and the
-  approved EMS cross-window lease binding and its bounded trace, 3,237,376
-  bytes; SHA-256
-  2cbc0624235ea4006c5e7ccfd0b818af657fddcfda8c27a475859c9a19015de1.
+  carrier cohorts, original current-process pseudo-handle spelling, restored
+  original COMMAND standard-handle carrier, and the approved EMS cross-window
+  lease binding and its bounded trace, 3,236,864 bytes; SHA-256
+  653ec3875887ed10a4d24ef7e264560d986c30c458d6b77648f0a9ce765a9aac.
   Formal build, native DIB sharing and isolated EMS guest tests pass. MEM and
   COMMAND exit normally; EDIT reaches its editor after Esc and bounded cleanup.
   WRITE still reaches W32Init FALSE, exit 255; no full WRITE acceptance.

@@ -86,10 +86,6 @@ IMPORT IU32 CCPU_IP;
 
 LOCAL BOOL DoNpxPrologue IPT0();
 
-/* DIVERGENCE(MVDM-HOST-DIV-082): the selected original FPU body exports
- * FLDENV but no selected CCPU header publishes its declaration.  Preserve the
- * original call shape so modern x86/x64 builds validate its pointer argument
- * rather than assuming an `int` result. */
 GLOBAL VOID FLDENV IPT1(VOID *, memPtr);
 
 LOCAL IU32 NpxInstr;
@@ -4814,9 +4810,6 @@ npx_funimp,
 npx_funimp
 };
 
-/* DIVERGENCE(MVDM-HOST-DIV-131): preserve the original IU32 instruction
- * input and body, while replacing its K&R declarator with the same explicit
- * callable ABI for modern x86/x64 C compilation. */
 VOID ZFRSRVD(IU32 npx_instr)
 {
 	if (!NPX_PROT_MODE) {

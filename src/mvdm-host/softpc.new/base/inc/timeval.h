@@ -54,9 +54,6 @@ struct host_tm {
  * External Declarations
  */
 
-/* DIVERGENCE(MVDM-HOST-DIV-032): the original NT4 build equated time_t with
- * long.  Modern x64 time_t is wider, while the unchanged host implementation
- * and every reached SoftPC caller use the original 32-bit seconds ABI. */
 extern long host_time IPT1(long *, tloc);
 extern struct host_tm *host_localtime IPT1(time_t *, clock);
 

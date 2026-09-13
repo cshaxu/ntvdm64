@@ -1,6 +1,8 @@
 #include "cmd.h"
 
-#include "session/session.h"
+#include <cmdsvc.h>
+#include "session.h"
+#include "thread_start_compat.h"
 
 PREDIRCOMPLETE_INFO cmdCheckStandardHandles(PVDMINFO info,
     USHORT UNALIGNED *standard_handles);
@@ -30,6 +32,31 @@ VOID TerminateVDM(VOID)
 {
 }
 
+HANDLE opennt_create_void_cdecl_parameter_thread_named(
+    LPSECURITY_ATTRIBUTES attributes,
+    SIZE_T stack_bytes,
+    OPENNT_VOID_CDECL_PARAMETER_THREAD_START_ROUTINE start_routine,
+    LPVOID parameter,
+    DWORD flags,
+    LPDWORD thread_id,
+    const char *source_name)
+{
+    (void)attributes;
+    (void)stack_bytes;
+    (void)start_routine;
+    (void)parameter;
+    (void)flags;
+    (void)thread_id;
+    (void)source_name;
+    SetLastError(ERROR_CALL_NOT_IMPLEMENTED);
+    return NULL;
+}
+
+VOID WINAPI opennt_exit_thread(DWORD exit_code)
+{
+    ExitThread(exit_code);
+}
+
 static USHORT fixture_ax;
 static USHORT fixture_bx;
 static USHORT fixture_cx;
@@ -44,13 +71,28 @@ VOID setCX(USHORT value) { fixture_cx = value; }
 VOID setDX(USHORT value) { fixture_dx = value; }
 VOID setCF(ULONG value) { fixture_carry = value; }
 
+static int expect_standard_handle(PREDIRCOMPLETE_INFO redirection,
+    USHORT standard_handle, HANDLE expected)
+{
+    uint32_t observed;
+
+    fixture_ax = (USHORT)((ULONG)(uintptr_t)redirection >> 16);
+    fixture_bx = (USHORT)(ULONG)(uintptr_t)redirection;
+    fixture_cx = standard_handle;
+    fixture_dx = 0xffffu;
+    fixture_carry = 1u;
+    cmdGetStdHandle();
+    observed = ((uint32_t)fixture_bx << 16) | fixture_cx;
+    return fixture_carry == 0u && fixture_ax == 0u && fixture_dx == 0u &&
+        observed == (uint32_t)(uintptr_t)expected;
+}
+
 int main(void)
 {
     VDMINFO information;
     USHORT standard_handles;
     PREDIRCOMPLETE_INFO redirection;
     session instance;
-    uint32_t handle_identity;
 
     RtlZeroMemory(&information, sizeof(information));
     standard_handles = 0xffffu;
@@ -74,16 +116,12 @@ int main(void)
         redirection->ri_hStdOut != information.StdOut ||
         redirection->ri_hStdErr != information.StdErr)
         return 3;
-    fixture_ax = (USHORT)((ULONG)(uintptr_t)redirection >> 16);
-    fixture_bx = (USHORT)(ULONG)(uintptr_t)redirection;
-    fixture_cx = 0u; /* HANDLE_STDIN from the original cmdsvc.h */
-    fixture_dx = 0xffffu;
-    fixture_carry = 1u;
-    cmdGetStdHandle();
-    handle_identity = ((uint32_t)fixture_bx << 16) | fixture_cx;
-    if (fixture_carry != 0u || fixture_ax != 0u || fixture_dx != 0u ||
-        handle_identity != (uint32_t)(uintptr_t)information.StdIn)
+    if (!expect_standard_handle(redirection, HANDLE_STDIN, information.StdIn))
         return 5;
+    if (!expect_standard_handle(redirection, HANDLE_STDOUT, information.StdOut))
+        return 6;
+    if (!expect_standard_handle(redirection, HANDLE_STDERR, information.StdErr))
+        return 7;
     if (!cmdCheckCopyForRedirection(redirection))
         return 8;
     if (!session_thread_unbind(&instance) || !session_dispose(&instance))

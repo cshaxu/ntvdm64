@@ -58,10 +58,6 @@ GLOBAL   VOID		(*setNT_func ) ();
 GLOBAL   sys_addr	(*getIDTR_base_func) ();
 #endif
 
-/* DIVERGENCE: MVDM-HOST-DIV-102 retains the original common access-vector
- * storage and CCPU initializer order.  The selected generated CCPU providers
- * have exact fixed-width return contracts; NT4's empty parameter lists did
- * not prove those contracts on either x86 or x64. */
 #ifdef CCPU
 GLOBAL IU16		(*getAX_func) (void);
 GLOBAL IU8		(*getAH_func) (void);

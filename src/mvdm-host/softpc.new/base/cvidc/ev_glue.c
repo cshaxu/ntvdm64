@@ -800,7 +800,7 @@ OUTPUT: None.
 GLOBAL IHP
 setup_global_data_ptr IFN0()
 {
-	Gdp = (IHP)malloc(64 * 1024);
+	Gdp = (IHP)host_malloc(64 * 1024);
 	/* Gdp holds the correct value so in jcode an lea wants the value not
          * the adrress of the data 
 	 */

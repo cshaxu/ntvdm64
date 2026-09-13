@@ -406,9 +406,6 @@ extern sys_addr (*getDSD_func) ();
 
 /*  common WRITE functions  */
 #ifdef CCPU
-/* DIVERGENCE: MVDM-HOST-DIV-102 keeps original common vector names and
- * selection macros, but exposes the selected generated CCPU contracts.
- * Empty NT4 parameter lists do not prove the x86/x64 call ABI. */
 extern VOID (*setAX_func)(IU16); extern VOID (*setAH_func)(IU8); extern VOID (*setAL_func)(IU8);
 extern VOID (*setBX_func)(IU16); extern VOID (*setBH_func)(IU8); extern VOID (*setBL_func)(IU8);
 extern VOID (*setCX_func)(IU16); extern VOID (*setCH_func)(IU8); extern VOID (*setCL_func)(IU8);

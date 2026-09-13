@@ -953,12 +953,13 @@ spelling (`uintptr_t`, `ULONG_PTR`, `SIZE_T`, `size_t`, `IHP`/`IHPE`, and `%p`).
 It finds 43 added-line matches in 28 paired paths. This is a bounded mirror
 screen, not a claim about unpaired adapters or an estimate of removable code.
 
-Twenty-four matches are explanatory comments. Of the remaining 19 code lines,
+Twenty-four matches are explanatory comments. They were removed without
+changing code. Of the remaining 19 code lines,
 the retained categories are: required bounded tracing at the CCPU segment and
 RAM-access seams (two lines), generated C-VID function-pointer declarations
 (two), an original restored `IHPE` typedef (one), and public OpenNT RTL
-`SIZE_T` declarations (two). The `host_malloc` spelling in `ev_glue.c` is one
-redundant source-footprint line because the selected original `host_def.h`
+`SIZE_T` declarations (two). The `host_malloc` spelling in `ev_glue.c` was
+restored because the selected original `host_def.h`
 already defines it as `malloc`; the three `%p` diagnostics and their argument
 casts are x86-textual candidates only after an x86 warning/build check. They
 are not semantic repairs and have no runtime-hit requirement.
@@ -972,9 +973,26 @@ nonzero 32-bit value: it has no identity table, lease, epoch, validation or
 lifetime ownership. A source-shaped x86 recovery may therefore remove the two
 adapter APIs, their declarations, the eight `cmdredir.c` call sites and
 `cmdexec.c`'s resolver helper, while retaining the separate record-address
-lease/identity seam. This is deliberately **not implemented**: it changes
-error behavior for zero handles and requires the original COMMAND redirection
-fixture plus a real child-output-redirection regression before approval.
+lease/identity seam. It is implemented in this group: the two adapter APIs,
+their declarations, all eight `cmdredir.c` call sites, and the `cmdexec.c`
+resolver helper are removed. `cmdredir.c` and `cmdexec.c` now carry native
+standard HANDLE values with the original direct casts and BX:CX ordering.
+
+The dedicated x86 COMMAND fixture uses a real `AX:BX` redirection-record
+carrier and verifies direct stdin, stdout and stderr HANDLE recovery through
+the original `cmdGetStdHandle` exit registers. It passed after an x86 `/W4`
+build. The fresh formal product build also passed the external-memory,
+reversed-EMS, SAS and DIB tests. The deployed product is 3,236,864 bytes with
+SHA-256 `653ec3875887ed10a4d24ef7e264560d986c30c458d6b77648f0a9ce765a9aac`.
+Its clean-Console regression passed `ver`, `mem`, `command/c ver`, bare
+`command/c`, nested `command/c command /c ver`, and `cmd/c ver`.
+
+An attempted direct app invocation containing `>` did not create a file: the
+current product entry treats that text as app-start input, not an interactive
+COMMAND/BOP 54:08 child-redirection request. That is an app-entry limitation,
+not evidence against the restored register carrier; no new CLI shell syntax
+is claimed here. The carrier's dedicated x86 fixture is the coverage for this
+removed adapter behavior.
 
 No other current matched line is classified as a direct x86 rollback solely
 because it mentions a pointer-width type. C-VID provider signatures,

@@ -17,9 +17,6 @@ typedef enum
 typedef struct
 {
 #if defined(CPU_40_STYLE) && defined(C_VID)
-	/* DIVERGENCE MVDM-HOST-DIV-088: the selected C-video EVID providers
-	 * have these existing concrete signatures.  The historical generic table
-	 * hid them and made its byte/word move slot incompatible on modern x86/x64. */
 	VOID	(*b_write)IPT2(IU32, eaOff, IU8, eaVal);
 	VOID	(*w_write)IPT2(IU32, eaOff, IU16, eaVal);
 	VOID	(*b_fill)IPT3(IU32, eaOff, IU8, eaVal, IU32, count);

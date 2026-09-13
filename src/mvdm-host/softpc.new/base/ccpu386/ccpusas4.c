@@ -66,10 +66,6 @@
 #include <host.h>
 #include "mvdm_softpc_physical_mapping.h"
 
-/* DIVERGENCE: the original x86 build relied on an implicit-int declaration
- * for host_sas_init.  Its actual SoftPC implementation returns UTINY *;
- * declare that existing same-shaped interface so an x64 build cannot truncate
- * the allocated SAS backing address before CCPU stores it. */
 extern UTINY *host_sas_init IPT1(sys_addr, size);
 extern UTINY *host_sas_term IPT0();
 

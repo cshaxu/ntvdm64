@@ -638,12 +638,6 @@ extern void S_3068_Chain4DwordMove_00000003_0000000f_00000001 IPT4(IU32, eaOff, 
 
 /*========= Mark Functions ============ */
 
-/* DIVERGENCE(MVDM-HOST-DIV-121): the original generated rules below are
- * four-native-host-word functions returning IUH.  NT4's default-int
- * declarations happened to coexist with the separately typed EVID table;
- * the selected build derives the typed table carrier from that table, but
- * every declaration must still match the actual generated rule ABI on x86
- * and x64. */
 extern IUH S_2126_SimpleMark IPT4(IUH, v1, IUH, v2, IUH, v3, IUH, v4);
 extern IUH S_2127_CGAMarkByte IPT4(IUH, v1, IUH, v2, IUH, v3, IUH, v4);
 extern IUH S_2128_CGAMarkWord IPT4(IUH, v1, IUH, v2, IUH, v3, IUH, v4);

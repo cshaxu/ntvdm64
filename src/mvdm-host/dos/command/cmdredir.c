@@ -13,13 +13,13 @@
 #include <mvdm.h>
 #include <ctype.h>
 
-#include "adapter-mvdm-host-out/redir/include/mvdm_command_redirection.h"
+#include "mvdm_command_redirection.h"
 /* DIVERGENCE(MVDM-HOST-DIV-120): the two original pipe workers are cdecl
  * void(LPVOID) forms.  Bind their original calls to the same session-aware
  * WINAPI boundary used by the selected COMMAND child worker.  The bridge also
  * records only the original worker spelling for a default-off disposal
  * diagnostic. */
-#include "adapter-mvdm-host-out/win32/include/thread_start_compat.h"
+#include "thread_start_compat.h"
 #undef CreateThread
 #define CreateThread(attributes, stack_bytes, start_routine, parameter, flags, thread_id) \
     opennt_create_void_cdecl_parameter_thread_named((attributes), (stack_bytes), \
@@ -254,8 +254,6 @@ VOID cmdGetStdHandle (VOID)
 USHORT iStdHandle;
 PREDIRCOMPLETE_INFO pRdrInfo;
 VOID *pRdrInfoValue;
-USHORT HandleHigh;
-USHORT HandleLow;
 
     iStdHandle = getCX();
     /* DIVERGENCE(MVDM-HOST-DIV-020): AX:BX was an x86 process pointer.
@@ -278,14 +276,12 @@ USHORT HandleLow;
 		    setCF(1);
 		    return;
 		}
-		if (!mvdm_command_redirection_publish_handle((uintptr_t)pRdrInfo->ri_hStdInFile, &HandleHigh, &HandleLow)) { setAX(ERROR_NOT_ENOUGH_MEMORY); setCF(1); return; }
-		setCX (HandleLow);
-		setBX (HandleHigh);
+		setCX ((USHORT)pRdrInfo->ri_hStdInFile);
+		setBX ((USHORT)((ULONG)pRdrInfo->ri_hStdInFile >> 16));
 	    }
 	    else {
-		if (!mvdm_command_redirection_publish_handle((uintptr_t)pRdrInfo->ri_hStdIn, &HandleHigh, &HandleLow)) { setAX(ERROR_NOT_ENOUGH_MEMORY); setCF(1); return; }
-		setCX (HandleLow);
-		setBX (HandleHigh);
+		setCX ((USHORT)pRdrInfo->ri_hStdIn);
+		setBX ((USHORT)((ULONG)pRdrInfo->ri_hStdIn >> 16));
 	    }
 	    break;
 
@@ -297,9 +293,8 @@ USHORT HandleLow;
 		    setCF(1);
 		    return;
 		}
-		if (!mvdm_command_redirection_publish_handle((uintptr_t)pRdrInfo->ri_hStdOutFile, &HandleHigh, &HandleLow)) { setAX(ERROR_NOT_ENOUGH_MEMORY); setCF(1); return; }
-		setCX (HandleLow);
-		setBX (HandleHigh);
+		setCX ((USHORT)pRdrInfo->ri_hStdOutFile);
+		setBX ((USHORT)((ULONG)pRdrInfo->ri_hStdOutFile >> 16));
 
 	    }
 	    else {
@@ -308,9 +303,8 @@ USHORT HandleLow;
 		// inherit the 32 bit handle of lpt1, so the ouput will
 		// directly go to the LPT1 and a DOS TSR/APP hooking int17
 		// wont see this printing. Is this a big deal???
-		if (!mvdm_command_redirection_publish_handle((uintptr_t)pRdrInfo->ri_hStdOut, &HandleHigh, &HandleLow)) { setAX(ERROR_NOT_ENOUGH_MEMORY); setCF(1); return; }
-		setCX (HandleLow);
-		setBX (HandleHigh);
+		setCX ((USHORT)pRdrInfo->ri_hStdOut);
+		setBX ((USHORT)((ULONG)pRdrInfo->ri_hStdOut >> 16));
 	    }
 	    break;
 
@@ -318,9 +312,8 @@ USHORT HandleLow;
 
             if (pRdrInfo->ri_hStdErr == pRdrInfo->ri_hStdOut
                               && pRdrInfo->ri_hStdOutFile != 0) {
-                if (!mvdm_command_redirection_publish_handle((uintptr_t)pRdrInfo->ri_hStdOutFile, &HandleHigh, &HandleLow)) { setAX(ERROR_NOT_ENOUGH_MEMORY); setCF(1); return; }
-                setCX (HandleLow);
-                setBX (HandleHigh);
+                setCX ((USHORT)pRdrInfo->ri_hStdOutFile);
+                setBX ((USHORT)((ULONG)pRdrInfo->ri_hStdOutFile >> 16));
                 pRdrInfo->ri_hStdErrFile = pRdrInfo->ri_hStdOutFile;
 		break;
 	    }
@@ -332,14 +325,12 @@ USHORT HandleLow;
 		    setCF(1);
 		    return;
 		}
-                if (!mvdm_command_redirection_publish_handle((uintptr_t)pRdrInfo->ri_hStdErrFile, &HandleHigh, &HandleLow)) { setAX(ERROR_NOT_ENOUGH_MEMORY); setCF(1); return; }
-                setCX (HandleLow);
-                setBX (HandleHigh);
+                setCX ((USHORT)pRdrInfo->ri_hStdErrFile);
+                setBX ((USHORT)((ULONG)pRdrInfo->ri_hStdErrFile >> 16));
 	    }
 	    else {
-                if (!mvdm_command_redirection_publish_handle((uintptr_t)pRdrInfo->ri_hStdErr, &HandleHigh, &HandleLow)) { setAX(ERROR_NOT_ENOUGH_MEMORY); setCF(1); return; }
-                setCX (HandleLow);
-                setBX (HandleHigh);
+                setCX ((USHORT)pRdrInfo->ri_hStdErr);
+                setBX ((USHORT)((ULONG)pRdrInfo->ri_hStdErr >> 16));
 	    }
 	    break;
     }

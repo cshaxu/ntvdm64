@@ -57,18 +57,8 @@ Actual worker routines are spun off elsewhere.
 #include <ica.h>
 #include <timer.h>
 
-/*
- * DIVERGENCE(MVDM-HOST-DIV-072): these are existing CCPU package bodies
- * selected by this source profile. The historical source relied on
- * implicit-int declarations; publish their exact void/no-argument contracts
- * so x64 cannot infer a host int result.
- */
 extern void force_yoda(void);
 extern void TakeNpxExceptionInt(void);
-/* DIVERGENCE(MVDM-HOST-DIV-127): the selected original CCPU executor reaches
- * this source-missing extended BOP fallback. Preserve its exact void/ULONG
- * call contract; the registered NTVDMx64 patch keeps the original debug-break
- * disposition until an owner-approved runtime implementation exists. */
 extern void EDL_fast_bop(ULONG immed);
 
 #include  <aaa.h>	/* The workers */
@@ -631,10 +621,6 @@ GLOBAL	PHY_ADDR	SasWrapMask = 0xfffff;
  * pigger scripts that result in very large EIP values pig correctly.
  */
 #define CCPU_INSTRUCTION_DELTA(x) ((IU32)DIFF_INST_BYTE((x), p_start))
-/* DIVERGENCE(MVDM-HOST-DIV-125): `p_start` and the decode cursor are
- * same-page private host pointers.  Their difference is an instruction byte
- * count, not a guest or host identity; retain that bounded count as IU32
- * before it joins the original 32-bit EIP arithmetic on x86 and x64. */
 #define UPDATE_INTEL_IP(x)						\
    {  IU32 len = CCPU_INSTRUCTION_DELTA(x);				\
       IU32 mask = 0xFFFFFFFF;						\
