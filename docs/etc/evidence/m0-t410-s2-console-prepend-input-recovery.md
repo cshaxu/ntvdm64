@@ -68,6 +68,26 @@ thread's public layout; it is a bounded fallback, not an ownership-equivalent
 replacement. A separate real Console layout-switch observation is required
 before this limitation can be closed or replaced.
 
+## Resource-owner recovery
+
+T410 also moves the three immutable embedded-ROM identities and public Win32
+resource loading out of original `nt_rez.c` into the existing SoftPC firmware
+adapter. The original mirror retains its file read/write ordering; only its
+`ROMS_REZ_ID` boundary delegates to the adapter. The adapter accepts exactly
+`bios1.rom`, `bios4.rom`, and `v7vga.rom`, copies into the original
+caller-owned buffer only when it fits, and returns failure for every other
+name or absent resource. In particular a missing embedded ROM does not fall
+through to CWD, PATH, or arbitrary firmware files. Writable profile/CMOS
+resources retain the original file route. The selected-path retry in
+`host_write_resource` remains separately retained because restoring the bare
+name would redirect an already-resolved package resource to process CWD.
+
+The repaired `New-T310FirmwareResourceNinja.ps1` no longer emits two empty
+source entries (which previously became a nonexistent `mapping_manager.c`)
+and now links its generated source indices correctly. Its fresh x86
+`verify` fixture passes both the package firmware lookup checks and the new
+unknown-embedded-ROM negative check.
+
 The fixture and adapter compiled and linked as x86 from
 `build/M0-T388/S7/console-contract-x86`. The noninteractive automation
 environment supplies a pipe rather than `CONIN$`; the executable exits `18`

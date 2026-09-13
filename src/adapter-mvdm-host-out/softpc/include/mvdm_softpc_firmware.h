@@ -13,6 +13,12 @@ extern "C" {
 int mvdm_softpc_firmware_find_file(const char *name, char *path_out,
     uint32_t path_out_bytes);
 
+/* Copy one selected immutable firmware image from the product executable into
+ * an original caller-owned buffer.  It is deliberately not a file-search
+ * fallback: only the three fixed firmware identities are accepted. */
+long mvdm_softpc_firmware_read_embedded_rom(const char *name, void *bytes_out,
+    uint32_t bytes_out_capacity);
+
 /* Same-shaped media-location binding for original MVDM system files.
  * It returns a caller-owned path only when the selected image exists. */
 int mvdm_softpc_system_find_file(const char *name, char *path_out,

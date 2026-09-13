@@ -7,6 +7,7 @@ int main(int argc, char **argv)
 {
     session instance;
     char path[SESSION_FIRMWARE_ROOT_BYTES + 32u];
+    unsigned char bytes[4];
 
     if (argc != 2) return 10;
     session_initialize(&instance, 1u);
@@ -21,8 +22,10 @@ int main(int argc, char **argv)
             (uint32_t)sizeof(path)) || path[0] != '\0') return 3;
     if (mvdm_softpc_firmware_find_file("bios1.rom", path, 4u) ||
         path[0] != '\0') return 4;
+    if (mvdm_softpc_firmware_read_embedded_rom("not-a-product-rom", bytes,
+            (uint32_t)sizeof(bytes)) != 0) return 5;
 
     if (!session_thread_unbind(&instance) || !session_dispose(&instance))
-        return 5;
+        return 6;
     return 0;
 }
