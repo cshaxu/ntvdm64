@@ -558,6 +558,27 @@ design comparison must cover restoration of contiguous host aliases versus
 a smallest source-shaped access binding, including overlap and all copy /
 exchange callers. No change to those original algorithms is made here.
 
+### Existing bounded-access candidate, not yet approved
+
+The repository already has a finite session lease mechanism; it is not a new
+mapping manager. `mvdm_softpc_guest_memory.c` implements a lease read/write
+through CCPU's `c_sas_loads` / `c_sas_stores`, whose scalar traversal resolves
+each physical address and therefore crosses independently mapped EMS windows.
+`mvdm_xms_memory.c::mvdm_xms_copy` already uses that mechanism in 4 KiB
+chunks and selects reverse chunk order for overlapping destination-after-source
+copies, preserving `MoveMemory` rather than `CopyMemory` behavior.
+
+This makes a deliberately narrow candidate possible: retain OpenNT's
+`emm_mngr.c` dispatch and every `nt_emm.c` public function, but route only
+the three `EM_loads`, `EM_stores`, and overlap-safe `EM_moves` spans through
+the existing lease transport when a span cannot be represented by one native
+`get_byte_addr` pointer. The candidate must preserve upper EMS ordering,
+exchange's temporary-buffer sequence, source/destination failure handling,
+and original ordinary-RAM fast paths. It needs focused tests for forward and
+backward overlap, load/store, copy/exchange, and the existing four-byte
+reverse-window workload. It is not implemented: the owner approved the
+physical-page translation table, not this new cross-window access binding.
+
 ### Native placeholder experiment
 
 Added tests/observation/placeholder_alias_probe.c, a standalone Win32
