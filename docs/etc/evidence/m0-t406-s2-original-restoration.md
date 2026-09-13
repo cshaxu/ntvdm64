@@ -999,3 +999,43 @@ because it mentions a pointer-width type. C-VID provider signatures,
 diagnostic formatting, guest-pointer lifetime and public SDK declarations need
 their own paired ABI/consumer proof. This leaves the T's zero-autonomous-code
 goal open rather than treating the 43 lexical matches as solved.
+
+## S2 final x86-width and access-boundary disposition
+
+The final re-screen repeats the same 181 paired `text-different` rows after
+the COMMAND carrier, comment-only, `host_malloc`, and three original
+diagnostic restorations. It finds eight matching added lines in six files;
+none is an unclassified x64-width rollback candidate:
+
+| Remaining match | Final disposition |
+| --- | --- |
+| `c_seg.c` `_ReturnAddress()` and `ccpusas4.c` `Start_of_M_area` | Required default-off scalar trace arguments for registered DIV-184/DIV-190 observability. They do not alter CPU control flow or access results. |
+| `gmi.h` two `IHPE` move callbacks | Necessary selected CPU40/C-VID function-table ABI; the original generic no-prototype table does not describe the selected generated providers. |
+| `insignia.h` `IHPE` | Only the original line's trailing whitespace differs; source code and type are original. Restoring that whitespace would violate the repository whitespace check. |
+| `xmsblock.c` x64 wording | Explanation attached to retained DIV-077 lease boundary, not an independent code implementation. |
+| `opennt-host/public/sdk/inc/ntrtl.h` two `SIZE_T` declarations | Original public SDK declaration carrier, not local behavior. |
+
+The three remaining diagnostic candidates were restored to their pinned
+OpenNT `%lx` forms in `config.c`, `nt_mem.c`, and `stubs.c`. The formal x86
+build linked the product and focused test, which passed disk alignment, 132
+word-fill cases, reversed EMS/SAS access, allocation grow/shrink, native DIB
+sharing, and backing restoration. The deployed 3,236,864-byte product has
+SHA-256 `14e94e2091a9d837f6485cd20a68f6a7c591579bc77891dd91629110d5802a16`;
+its real-Console regression passed `ver`, `mem`, and all existing COMMAND
+forms. This is a net four-line source reduction for the diagnostic group.
+
+The access-boundary closure is deliberately limited and explicit. DIV-035 is
+hit during real MEM/COMMAND/EDIT/WRITE runs; targeted real EMS `INT 67h`
+coverage hits map, alias translation and lease move/exchange. The same
+PID-correlated ordinary-workload runs record no hit for external-DIB resolve
+or lease load/store, while focused native-DIB and formal load/store tests pass.
+Those no-hit rows are not inferred correct from compilation. They transfer as
+runtime revalidation requirements to the queued DPMI/XMS and WOW16 workload
+owners; they are not unclassified T406 mapping contracts. Full WRITE and the
+interactive COMMAND redirection lifecycle remain outside this T and have
+their separate queued/proposal owners.
+
+With every T406 candidate either restored, retained under a registered
+original-source gap, or transferred to a named future owner, the S2 packet
+meets its stated exit criteria. The wider repository goal of zero autonomous
+code remains a roadmap target, not a false claim made by this closure.

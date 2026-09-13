@@ -2,7 +2,14 @@
 
 ## Current Work
 
-**Active: M0 T406 S2**
+**No active M/T/S packet.**
+
+M0 T406 S2 is closed by its final T406 delivery;
+[S2 closure evidence](../etc/evidence/m0-t406-s2-original-restoration.md#s2-final-x86-width-and-access-boundary-disposition)
+records the restored cohorts, remaining registered seams, trace hit/no-hit
+results, and named receivers. The next numeric task requires owner admission.
+
+## T406 Closure Record
 
 M0 T405 S3 and T405 closed by owner direction on 2026-09-12:
 static audit completed; restoration and verification transferred to approved
@@ -90,7 +97,7 @@ restoration, and retain positive EMS guest coverage. Width group tests include
 paired source checks, x86 compile/link and ordinary DOS/WOW-frontier regression.
 This admission does not declare S1's unverified candidates already correct.
 
-## Active Packet
+## Historical T406 Packet
 
 Group 2 implemented and verified: original add/remove function bodies match
 OpenNT; extra publication protocol removed. Real native DIB/CCPU shared
@@ -118,10 +125,10 @@ call contract. Restore original VdmAddVirtualMemory/VdmRemoveVirtualMemory
 bodies and remove publish/prepare/cancel. This lower table is explicitly an
 unavailable-implementation adapter, not an imported original function body.
 
-S2 progress: the first 14-file width cohort and original external-memory
-add/remove contract are restored. [Group evidence](../etc/evidence/m0-t406-s2-original-restoration.md)
-records formal builds, tests and limits. Further width/access work remains
-open; the current deployed identity is in Current Technical Baseline below.
+T406 closure: paired original x86-width cohorts and the external-memory
+add/remove contract are restored; final candidate disposition and retained
+access limitations are in the [closure evidence](../etc/evidence/m0-t406-s2-original-restoration.md#s2-final-x86-width-and-access-boundary-disposition).
+No further T406 implementation is active.
 
 ### M0 T406 S2 - Original mapping and x86-width restoration
 
@@ -164,7 +171,7 @@ remain explicitly unverified rather than inferred correct from compilation.
   carrier cohorts, original current-process pseudo-handle spelling, restored
   original COMMAND standard-handle carrier, and the approved EMS cross-window
   lease binding and its bounded trace, 3,236,864 bytes; SHA-256
-  653ec3875887ed10a4d24ef7e264560d986c30c458d6b77648f0a9ce765a9aac.
+  14e94e2091a9d837f6485cd20a68f6a7c591579bc77891dd91629110d5802a16.
   Formal build, native DIB sharing and isolated EMS guest tests pass. MEM and
   COMMAND exit normally; EDIT reaches its editor after Esc and bounded cleanup.
   WRITE still reaches W32Init FALSE, exit 255; no full WRITE acceptance.
@@ -177,11 +184,11 @@ remain explicitly unverified rather than inferred correct from compilation.
   change or generic mapping manager is admitted. Native alias experiments
   remain only evidence because their decommit semantics are incompatible.
 - S1, S2 P1/P2 and the grouped restoration at 78d492964 are pushed to main.
-  The owner explicitly approved permanent main pushes. S2 remains active for the
-  remaining width cohorts and access-boundary audit. The latest EMS repair
+  The owner explicitly approved permanent main pushes. T406's final grouped
+  width/access disposition is included in the final T406 delivery; the latest EMS repair
   verifies original `nt_emm` bulk-copy callers and real guest INT 67h coverage
-  across reversed pages; remaining full WRITE and unrelated access contracts
-  are not thereby accepted.
+  across reversed pages. Full WRITE and unrelated access contracts remain
+  assigned to their named future owners, not accepted by this closure.
 - [Queue](QUEUE.md) owns candidate order and pending repairs; [debt](TODO.md)
   retains full WRITE limitations. Ignored builds and runtime logs are preserved,
   not deleted to obtain Git cleanliness. Commit/push and status verification
@@ -192,6 +199,7 @@ remain explicitly unverified rather than inferred correct from compilation.
 | Task | Compact result |
 | --- | --- |
 | T405 | Static diff/overlay audit complete; 37 overlap rows and eight unresolved families transferred to candidate owners. No restoration/runtime acceptance claim. |
+| T406 | Original mapping contracts, bounded EMS lease binding and admitted x86-width cohorts restored; final remaining candidates are either registered seams or named future-owner revalidation. |
 | T404 | Owner-directed closure with unaccepted WIP preserved; mouse acceptance retained, WRITE incomplete. |
 | T403 | x64 mapping/overlay residue retired; formal x86 build and owner test passed. |
 

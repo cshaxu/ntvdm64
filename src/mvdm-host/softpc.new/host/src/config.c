@@ -341,12 +341,9 @@ GLOBAL VOID config( VOID )
         if (!VDMForWOW)  {
             if (!DosSessionId && !GetConsoleTitle(Title, MAX_PATH))
                 Title[0] = '\0';
-            /* DIVERGENCE(MVDM-HOST-DIV-094): the historical title records a
-             * native ConsoleHandle alongside two 32-bit process identifiers.
-             * It is private host state, not a guest value. */
-            sprintf(UniqueTitle, "ntvdm-%lx.%lx.%p",
+            sprintf(UniqueTitle, "ntvdm-%lx.%lx.%lx",
                    GetCurrentProcessId(), GetCurrentThreadId(),
-                   (void *)NtCurrentPeb()->ProcessParameters->ConsoleHandle);
+                   NtCurrentPeb()->ProcessParameters->ConsoleHandle);
             SetConsoleTitle(UniqueTitle);
             }
         else {
