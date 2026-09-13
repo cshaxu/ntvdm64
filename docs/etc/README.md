@@ -26,6 +26,7 @@ proves the original `FSTI` continuation reaches BOP `FDh`.
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T411 CCPU40 C-VID/event audit](evidence/m0-t411-s1-ccpu40-cvid-event-audit.md) | M0 T411 S1 | Enumerates selected C-VID/event diffs, overlays and local policy replacements; proposes source-first restoration groups. | Retain through T411 closure. |
 | [T410 Console input/display/resource evidence](evidence/m0-t410-s2-console-prepend-input-recovery.md) | M0 T410 S1--S3 | Source, focused x86 and real-conhost evidence for native Console recovery; closure is [recorded here](../history/m0-t410-console-input-display-resource-closure.md). | Retain with T410 closure. |
 | [T410 native Console window-route retirement](evidence/m0-t410-s1-native-console-window-retirement.md) | M0 T410 S1 | Removes the project-owned independent presentation window while retaining the native Console text route; records the explicit runtime-baseline limitation. | Retain through T410 closure. |
 | [T407 FSTI fixed-selector recovery](evidence/m0-t407-s14-fsti-fixed-selector-recovery.md) | M0 T407 S14 | Restores the minimal early CPU40 selector carrier and records the source-order/runtime proof. | Retain with T407 closure. |
