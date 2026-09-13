@@ -2,25 +2,29 @@
 
 ## Current Work
 
-**Active: M0 T408 S6.**
+**Active: M0 T408 S7.**
 
 ## Active Packet
 
-### M0 T408 S6 — original Redirector OEM-copy conversion recovery
+### M0 T408 S7 — RTL restoration integration and closure
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T408 S6, Ordinary Mode, one agent implements the bounded recovery, then independently reviews source, build and runtime evidence. |
+| Identifier Mode | M0 T408 S7, Ordinary Mode, one agent implements the bounded recovery, then independently reviews source, build and runtime evidence. |
 | Admission And Approval | Owner admitted the queued RTL package with: “单人双角色模式执行当前T任务：`Plan RTL restoration subtask sequence` 恢复原始opennt源代码接入 减少overlay和diff并跑通测试。” |
 | Candidate Proposal | [Original RTL and character-conversion restoration](../proposals/proposal-rtl-character-conversion-restoration-001.md). |
-| Objective | Restore D26's original Redirector `NetpCopyWStrToStr` conversion ownership into `opennt-host`, retire duplicate conversion policy, and retain only finite consumer-side publication bindings. |
-| Non-goals | No USER conversion, broker/CLI/CPU work, NetAPI/RAP transport, or replacement character-conversion algorithm. |
+| Objective | Rebuild and audit the selected x86 composition for D11--D16/D26, publish the final remaining-binding ledger, and close M0 T408. |
+| Non-goals | No broker/CLI/CPU architecture change, new NetAPI transport, or WRITE lifecycle repair. |
 | Files And ABI Surface | Selected USER source slice under `opennt-host`, finite modern conversion/publication bindings only where original dependencies cannot compose, focused fixtures, Status and indexed S5 evidence; no guest ABI change. |
-| Verification | OEM byte capacity, DBCS/unrepresentable input, terminator, allocation/caller-buffer and guest-copy-failure rows; selected x86 build and MEM/COMMAND regression; formal build, diff review, commit/push. |
+| Verification | Full selected x86 rebuild, focused fixtures, MEM/COMMAND/EDIT regression, bounded WRITE frontier observation, source/diff review, commit/push. |
 | Exit Criteria | Original USER algorithm owns reached conversion policy; every retained binding is finite and source-shaped; focused and short-root runtime regressions pass. |
 | Stop Conditions | An unavailable direct USER dependency, a required private server behavior without finite public closure, or a failed owner fixture is recorded and stops replacement rather than adding a substitute converter. |
 | Original Owner Request | “恢复原始opennt源代码接入 减少overlay和diff并跑通测试。” |
 | Similar-Issue Sweep | All reduced `RtlNtStatusToDosError` callers, LastStatusValue accessors, Base/COMMAND failures, USER/NetAPI conversion surfaces, x86-width residue, overlays and current project-defined duplicate providers. |
+
+S6 closed: original D26 `copystr.c` was already selected; the only retained
+OEM conversion is the necessary Unicode-to-guest lease seam.  See
+[S6 evidence](../etc/evidence/m0-t408-s6-redirector-oem-copy-disposition.md).
 
 S5 closed: original D16 `chartran.c` now owns the reached USER conversion
 pair; the finite ACP/allocator binding, focused source-semantic fixture and
