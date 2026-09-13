@@ -453,3 +453,32 @@ Isolated package refreshed and Q: removed. No raw-disk or fullscreen regen
 acceptance is claimed. Deployed EXE 3,235,328 bytes, SHA-256
 f3b84cd6fe5326a8f0b5ee0abe8e3c4ac90a41bbbb00438ab6c9ab685d8c3afa.
 This group is verified; the wider audit remains active.
+
+### COM residuals and redirector string widths
+
+Restored four remaining com.c ioctl pointer casts and nt_com.c's forward
+declaration/thread argument casts to original long/DWORD forms. This corrects
+the earlier P1 cohort's incomplete caller sweep. Kept the UTINY read buffer
+contract and correctly typed baud diagnostic. Restored original DWORD name
+lengths and pointer arithmetic in vrmslot.c/vrnmpipe.c, including retirement
+of a size_t/MAXDWORD guard (not representable as a successful larger x86
+allocation). Async request, guest leases and worker termination are untouched.
+Four source files +14/-20, net six fewer lines; DIV-168 removed.
+
+Formal product/memory builds pass, and VDMREDIR.dll was explicitly built
+successfully (com-redir-dll-build.log), because its sources are not proved by
+the EXE link. DLL remains a build artifact; no DLL deployment or live remote
+pipe/serial/mailslot acceptance is claimed. Product EXE was deployed, SHA-256
+8f6e90a7425575007b967ea0fc28d28c924c671b4381dcbd6cbd0371b88457ec,
+3,235,328 bytes. Six integration logs use t406-s2-com-redir-: DIR/MEM/COMMAND
+exit 0, EDIT bounded timeout, WRITE 255, EMS map/move/exchange PASS; Q: removed.
+
+An added direct VrConvertLocalNtPipeName fixture was invalid: that symbol in
+the EXE is a common-data function-pointer cell, not the DLL function body.
+The map locates it at preferred 007d8368, exactly the relocated fault address.
+Binding session did not fix that invalid call. Removed the invalid test, kept
+failure logs memory-verified/memory-bound, and added /map to the test link for
+future attribution. Final t406-s2-com-redir-memory-final.txt exits 0 with all
+prior memory/fill/DIB tests. No replacement function or test stub was added.
+Direct DLL path-normalization execution remains unverified, explicitly not
+covered by these regressions. The wider T remains open.

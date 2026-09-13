@@ -1420,7 +1420,7 @@ com_hook_again IFN1(IUM32, adapter)
 	int input_ready;	/* the host wants a pointer to an 'int'! */
 	struct ADAPTER_STATE *asp = &adapter_state[adapter];
 
-	host_com_ioctl(adapter, HOST_COM_INPUT_READY, (intptr_t)&input_ready);
+	host_com_ioctl(adapter, HOST_COM_INPUT_READY, (long)&input_ready);
 
 #ifndef PROD
 	if ((input_ready) && (asp->current_count >= asp->batch_size)) {
@@ -1486,7 +1486,7 @@ next_batch IFN1 (long, dummy)
 			 */
 	
 			asp->qev_running = FALSE;
-		host_com_ioctl((int)adapter,HOST_COM_INPUT_READY, (intptr_t)&input_ready);
+			host_com_ioctl((int)adapter,HOST_COM_INPUT_READY, (long)&input_ready);
 			if(input_ready) {
 				recv_char((int)adapter);
 			}
@@ -1695,7 +1695,7 @@ void com_lsr_change(int adapter)
     struct ADAPTER_STATE *asp = &adapter_state[adapter];
 
     new_lsr = -1;
-	host_com_ioctl(adapter, HOST_COM_LSR, (intptr_t)&new_lsr);
+    host_com_ioctl(adapter, HOST_COM_LSR, (long)&new_lsr);
     if (new_lsr !=  -1)
     lsr_change(asp, new_lsr);
 }
@@ -1723,7 +1723,7 @@ static void modem_change IFN1(int, adapter)
 	if (asp->loopback_state == OFF)
 	{
 		/* get current modem input state */
-	host_com_ioctl(adapter, HOST_COM_MODEM, (intptr_t)&modem_status);
+		host_com_ioctl(adapter, HOST_COM_MODEM, (long)&modem_status);
 		cts_state  = (modem_status & HOST_COM_MODEM_CTS)  ? ON : OFF;
 		dsr_state  = (modem_status & HOST_COM_MODEM_DSR)  ? ON : OFF;
 		rlsd_state = (modem_status & HOST_COM_MODEM_RLSD) ? ON : OFF;

@@ -2948,10 +2948,8 @@ Return Value:
 --*/
 
 {
-    /* DIVERGENCE(MVDM-HOST-DIV-168): these measure one private host string,
-     * not a DOS field.  Preserve native pointer-difference width. */
-    size_t prefixLength; // length of \\computername
-    size_t pipeLength;   // length of pipe name without computername/device prefix
+    DWORD prefixLength; // length of \\computername
+    DWORD pipeLength;   // length of pipe name without computername/device prefix
     LPSTR pipeName;     // \PIPE\name...
     static char ThisComputerName[MAX_COMPUTERNAME_LENGTH+1] = {0};
     static DWORD ThisComputerNameLength = 0xffffffff;
@@ -2983,7 +2981,7 @@ Return Value:
         }
         ASSERT(pipeName);
         pipeLength = strlen(pipeName);
-        prefixLength = (size_t)(pipeName - Name);
+        prefixLength = (DWORD)pipeName - (DWORD)Name;
         if (ThisComputerNameLength && (prefixLength - 2 == ThisComputerNameLength)) {
             if (!_strnicmp(ThisComputerName, &Name[2], ThisComputerNameLength)) {
                 strcpy(Buffer, LOCAL_DEVICE_PREFIX);
@@ -3066,17 +3064,13 @@ Return Value:
 
 {
     POPEN_NAMED_PIPE_INFO PipeInfo;
-    size_t NameLength;
+    DWORD NameLength;
 
     //
     // grab a OPEN_NAMED_PIPE_INFO structure
     //
 
     NameLength = strlen(PipeName) + 1;
-    if (NameLength > MAXDWORD) {
-        SetLastError(ERROR_FILENAME_EXCED_RANGE);
-        return FALSE;
-    }
     PipeInfo = (POPEN_NAMED_PIPE_INFO)
                 LocalAlloc(LMEM_FIXED,
                     ROUND_UP_COUNT((sizeof(OPEN_NAMED_PIPE_INFO) + NameLength),
@@ -3107,7 +3101,7 @@ Return Value:
 
     PipeInfo->Next = NULL;
     PipeInfo->Handle = Handle;
-    PipeInfo->NameLength = (DWORD)NameLength;
+    PipeInfo->NameLength = NameLength;
     strcpy(PipeInfo->Name, PipeName);   // from DOS, so its old-fashioned ASCII
 
     //

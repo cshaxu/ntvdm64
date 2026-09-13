@@ -46,7 +46,7 @@ GLOBAL void host_com_init(int);
 GLOBAL CPU void host_com_close IPT1(int, adapter);
 GLOBAL RXCPU VOID host_com_read IPT3(int, adapter, UTINY *, data, int *, error);
 GLOBAL RXCPU void host_com_write IPT2(int, adapter, char, data);
-GLOBAL void host_com_ioctl(int, int, intptr_t);
+GLOBAL void host_com_ioctl(int, int, long);
 GLOBAL void host_com_reset(int);
 
 GLOBAL void host_com_lock(int adapter);
@@ -600,7 +600,7 @@ GLOBAL CPU int host_com_open(int adapter)
     if(!(current->RXThreadHandle = CreateThread(NULL,
 						8192,
 						PollCommsThread,
-						(LPVOID)(ULONG_PTR)adapter,
+						(LPVOID)adapter,
 						0,
 						&current->RXThreadID)))
     {
@@ -1413,7 +1413,7 @@ DWORD RX GetCharsFromDriver(int adapter)
 
 DWORD PollCommsThread(PVOID pv)
 {
-   DWORD adapter = (DWORD)(ULONG_PTR)pv;
+   DWORD adapter = (DWORD)pv;
    DWORD dwRet = (WORD)-1;
 
    try {

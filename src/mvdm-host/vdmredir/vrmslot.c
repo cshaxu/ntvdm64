@@ -535,7 +535,7 @@ Return Value:
         // strcmp
         //
 
-        ptr->NameLength = (DWORD)NameLength;
+        ptr->NameLength = NameLength;
         strcpy(ptr->Name, lpName + MAILSLOT_PREFIX_LENGTH);
         VrpLinkMailslotStructure(ptr);
         setAX(Handle16);
@@ -1217,7 +1217,7 @@ Return Value:
 
 {
     PVR_MAILSLOT_INFO   ptr;
-    size_t  NameLength;
+    DWORD   NameLength;
 
     NameLength = strlen(Name) - MAILSLOT_PREFIX_LENGTH;
     for (ptr = MailslotInfoList; ptr; ptr = ptr->Next) {
