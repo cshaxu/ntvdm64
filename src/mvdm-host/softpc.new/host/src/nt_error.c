@@ -228,7 +228,7 @@ VOID host_direct_access_error(ULONG type)
     CHAR message[EHS_MSG_LEN];
     CHAR acctype[EHS_MSG_LEN];
     CHAR dames[EHS_MSG_LEN];
-    ULONG_PTR dwDirectError;
+    DWORD dwDirectError;
 
 
        /*
@@ -238,18 +238,13 @@ VOID host_direct_access_error(ULONG type)
         *     - actual value is 0, (no bits set)
         *  In both cases we will go ahead with the popup
         */
-    /* DIVERGENCE(MVDM-HOST-DIV-065): this is a per-thread private bitset
-     * transported through the Win32 TLS value slot.  Preserve the original
-     * category-bit behavior while keeping the host pointer representation
-     * native-width on x64. */
-    dwDirectError = (ULONG_PTR)TlsGetValue(TlsDirectError);
+    dwDirectError = (DWORD)TlsGetValue(TlsDirectError);
 
        // don't annoy user with repeated popups
-    if ((dwDirectError & ((ULONG_PTR)1 << type)) != 0)
+    if ((dwDirectError & (1<<type)) != 0)
         return;
 
-    TlsSetValue(TlsDirectError,
-                (LPVOID)(dwDirectError | ((ULONG_PTR)1 << type)));
+    TlsSetValue(TlsDirectError, (LPVOID)(dwDirectError | (1 << type)));
 
     if (LoadString(GetModuleHandle(NULL), D_A_MESS,
                    dames, sizeof(dames)/sizeof(CHAR)) &&

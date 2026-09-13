@@ -53,9 +53,7 @@ Return Value:
     // if the buffer is already in low memory, don't do anything
     //
 
-    /* DIVERGENCE(MVDM-HOST-DIV-140): compare the original host-private
-     * flat address without narrowing it before subtracting IntelBase. */
-    if ((ULONG_PTR)(Buffer + BufferLength) - IntelBase < MAX_V86_ADDRESS) {
+    if ((ULONG)(Buffer + BufferLength) - IntelBase < MAX_V86_ADDRESS) {
         return Buffer;
     }
 

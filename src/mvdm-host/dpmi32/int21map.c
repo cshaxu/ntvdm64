@@ -713,7 +713,7 @@ Return Value:
 
 --*/
 {
-    ULONG_PTR Segment;
+    ULONG Segment;
     USHORT ClientDX;
     VSAVEDSTATE State;
 
@@ -935,9 +935,7 @@ Return Value:
     // If the new dta is not accessible in v86 mode, use the one
     // supplied by Dosx
     //
-    /* DIVERGENCE(MVDM-HOST-DIV-140): NewDta and IntelBase are private host
-     * addresses; preserve the original range decision without x64 truncation. */
-    if ((ULONG_PTR)(NewDta + 128) - IntelBase > MAX_V86_ADDRESS) {
+    if ((ULONG)(NewDta + 128) - IntelBase > MAX_V86_ADDRESS) {
         NewDta = DosxDtaBuffer;
     }
 
@@ -1493,7 +1491,7 @@ Return Value:
 --*/
 {
 #ifdef NT_ALLOC_DOS_MEM
-    ULONG_PTR Segment;
+    ULONG Segment;
 
     DebugBreak(); // debugbug
 
@@ -1538,7 +1536,7 @@ Return Value:
 --*/
 {
 #ifdef NT_ALLOC_DOS_MEM
-    ULONG_PTR Segment;
+    ULONG Segment;
 
     DebugBreak(); // debugbug
 
@@ -1904,7 +1902,7 @@ Return Value:
 
 --*/
 {
-    ULONG_PTR Segment;
+    ULONG Segment;
     USHORT ClientBX;
     VSAVEDSTATE State;
 

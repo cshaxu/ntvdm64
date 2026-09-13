@@ -512,7 +512,7 @@ static void com_flush_input IFN1(int, adapter)
 	while(!finished) 
 	{
 		host_com_ioctl(adapter, HOST_COM_INPUT_READY,
-			(intptr_t)&input_ready);
+			(long)&input_ready);
 		if (input_ready) 
 		{
 			host_com_read(adapter, (UTINY *)&asp->rx_buffer,
@@ -1420,8 +1420,6 @@ com_hook_again IFN1(IUM32, adapter)
 	int input_ready;	/* the host wants a pointer to an 'int'! */
 	struct ADAPTER_STATE *asp = &adapter_state[adapter];
 
-	/* DIVERGENCE(MVDM-HOST-DIV-068): retain the original host ioctl request
-	 * and pointer result role through its native-width internal transport. */
 	host_com_ioctl(adapter, HOST_COM_INPUT_READY, (intptr_t)&input_ready);
 
 #ifndef PROD

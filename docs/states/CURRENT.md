@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T406 S1**
+**Active: M0 T406 S2**
 
 M0 T405 S3 and T405 closed by owner direction on 2026-09-12:
 static audit completed; restoration and verification transferred to approved
@@ -59,17 +59,55 @@ Keep normal CLI, defaults and mapping behavior unchanged. Report the first
 blocked edge and restoration design before functional repair; no CPU change.
 The prior P4 push remains pending destination approval after safety rejection.
 
+## S1 Closure Record
+
+[S1 research and observation](../etc/evidence/m0-t406-s1-physical-mapping-design.md)
+is delivered through pushed a03a6b4e3. Owner now approves restoration. This
+closes bounded research/observation, not the T or its unresolved contracts;
+remaining width classification and mapping proofs transfer explicitly to S2.
+
+## S2 Approval And Group Gates
+
+Owner: “批准修复为opennt原始实现  并测试通过”, followed by
+“你把可以恢复的原始代码分组，每次恢复一组便跑一次编译测试 不要划分太细 要有效率”.
+The preceding S1 paragraphs are historical scope; this approval supersedes their
+research-only restrictions. S1's bounded findings and P4/P5 are delivered at
+pushed a03a6b4e3; wider per-hunk review continues as S2 implementation work.
+Only S2 is active. The one agent implements, then switches to reviewer role.
+
+Groups: (1) paired original x86-width declarations/definitions/callers, retaining
+necessary Win32 ABI repairs; (2) original external mapping add/alignment/remove
+contract and retirement of extra publication protocol; (3) source-proven remaining
+SAS/bulk/cross-page consistency. Each group builds and tests before the next.
+No lower function is labelled original unless its original body is identified.
+Build root: build/M0-T406/S2/r001-original-restoration. Real runtime logs remain
+under O:\ntvdm64\logs\. Frozen reference is a03a6b4e3 and its S1 EMS/WRITE traces.
+Original source stays in its mirror; only unavailable lower mechanics stay in
+an explicitly reviewed adapter. Mapping group tests must use original-shaped
+callers without fixture-only preregistration, verify shared bytes and backing
+restoration, and retain positive EMS guest coverage. Width group tests include
+paired source checks, x86 compile/link and ordinary DOS/WOW-frontier regression.
+This admission does not declare S1's unverified candidates already correct.
+
 ## Active Packet
 
-### M0 T406 S1 - Original physical mapping research and restoration design
+S2 progress: the first 14-file width cohort is restored and formal x86 build
+plus baseline integration completed. [Group evidence](../etc/evidence/m0-t406-s2-original-restoration.md)
+records exact results and limits. Mapping protocol and further width/access
+work remain open. Latest EXE is now 3,236,864 bytes, SHA-256
+6cddfd9e917e892a04df877d8b6d69c3e561cf31d933d8a4980325deb6a77947,
+published to build/output/ntvdm32.exe and O:\ntvdm64\ntvdm32.exe.
+The S1 artifact identity below is historical baseline, not latest deployment.
+
+### M0 T406 S2 - Original mapping and x86-width restoration
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T406 S1, Ordinary Mode, one agent executing then reviewing. |
+| Identifier Mode | M0 T406 S2, Ordinary Mode, one agent executing then reviewing. |
 | Admission And Approval | Owner: “准入队列第一个T任务，完成彻底调研和设计，并报告可以减少多少不需要的diff；哪些diff和overlay或者自主实现是依然必要的、原始opennt代码无法提供准确内容的；理想情况是完全0自主实现，全面复通原始代码。” |
 | Candidate Proposal | [Physical mapping](../proposals/proposal-physical-memory-mapping-restoration-001.md). |
-| Objective | Establish U02 original owners, complete selected EMS/DIB/access boundaries and a quantified source-first restoration design, preferring zero autonomous algorithms. |
-| Non-goals | No mapping repair, source import, guest/CPU semantic change, broker or unrelated U03 redesign. Diagnostic build/deployment only under the observation amendment. |
+| Objective | Implement approved original mapping contracts and grouped x86-width restoration; verify EMS/DIB/access boundaries and report retained lower mechanics honestly. |
+| Non-goals | No CPU instruction changes, kernel/CSR shell, broker or unrelated U03 redesign. No claim of full WRITE acceptance. |
 | Reference Baseline | f2646d80b; T405 audit and current proposal; source/runtime acceptance remain distinct. |
 | Files And ABI Surface | Physical mapping adapter observation and focused tests; Status and indexed S1 evidence. No public ABI, mapping-state or return-contract change. |
 | Applicable Rules | Repository source, architecture, coding, execution and documentation rules; corresponding governance skills. |
@@ -78,7 +116,7 @@ The prior P4 push remains pending destination approval after safety rejection.
 | Asset Needs | Existing local OpenNT/OpenNT-4.5 originals, selected mirrors and retained build inputs; comparisons read-only. No new source/media. |
 | Reporting Requirements | Separate mirror diff, overlay, autonomous code, declarations and test footprint. Report bounded search limits; zero autonomous code is a target, not assumed feasibility. |
 | Stop Conditions | Missing provenance or unavailable original implementation is explicit uncertainty; no invented fix. New source/runtime authority or expanded boundary requires review. |
-| Exit Criteria | Complete bounded research/design with quantified findings and original-source limitations reported to owner; S2 does not auto-start. |
+| Exit Criteria | Restore the approved source contracts and x86-width cohorts; pass group-level formal build, focused tests and integration; review, commit and push. Unknown original lower bodies remain explicit. |
 | Original Owner Request | Full request retained in Admission And Approval above. |
 | Similar-Issue Sweep | EMS, external DIB, CPU/SAS byte and bulk/cross-page accesses, backing lifetime and fixture-only publication bypasses. |
 

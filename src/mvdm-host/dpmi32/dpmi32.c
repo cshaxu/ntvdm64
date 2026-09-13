@@ -39,9 +39,7 @@ USHORT CurrentPSPSelector;
 //
 // Table of selector bases and limits
 //
-/* DIVERGENCE(MVDM-HOST-DIV-140): paired with IntelBase; these are internal
- * host addresses, never DPMI guest ABI fields. */
-ULONG_PTR FlatAddress[LDT_SIZE];
+ULONG FlatAddress[LDT_SIZE];
 
 //
 // Index # for DPMI bop.  Used for error reporting on risc
@@ -317,7 +315,7 @@ Return Value:
         (UCHAR) (getMSW() & MSW_PE)
         );
 
-    IntelBase = (ULONG_PTR) Sim32GetVDMPointer((ULONG)0, 1, FALSE);
+    IntelBase = (ULONG) Sim32GetVDMPointer((ULONG)0, 1, FALSE);
 
 #if defined(CPU_40_STYLE)
     /* The 486 DOSX allocator publishes the GDT segment through 53:00, but

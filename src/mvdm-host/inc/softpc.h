@@ -236,10 +236,7 @@ ThreadSetDebugContext(
 
 // external data
 
-/* DIVERGENCE(MVDM-HOST-DIV-140): IntelBase is the host-private SoftPC
- * memory base.  It never enters guest state, so retain pointer width rather
- * than truncating it as the original x86-only declaration did. */
-extern ULONG_PTR  IntelBase;        // used by memory access macros
+extern ULONG  IntelBase;        // used by memory access macros
 extern X86CONTEXT IntelRegisters;   // used by register access macros
 extern ULONG      VdmDebugLevel;    // used to control debugging
 extern ULONG      IntelMSW;         // used by getMSW/setMSW macs.

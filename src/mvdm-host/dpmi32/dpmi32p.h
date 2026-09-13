@@ -95,10 +95,7 @@ extern USHORT CurrentPSPSelector;
 //
 // Table of selector bases and limits
 //
-/* DIVERGENCE(MVDM-HOST-DIV-140): original x86 used ULONG for host flat
- * addresses.  Retain native-width private addresses so they cannot truncate
- * before the original conversion logic subtracts IntelBase. */
-extern ULONG_PTR FlatAddress[LDT_SIZE];
+extern ULONG FlatAddress[LDT_SIZE];
 
 //
 // Index to the last bop function dispatched.  Used to report

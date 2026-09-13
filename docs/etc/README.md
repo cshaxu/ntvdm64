@@ -4,6 +4,7 @@ This directory contains only the following owner-approved supporting records.
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T406 grouped restoration](evidence/m0-t406-s2-original-restoration.md) | M0 T406 S2 | Approved grouped original-source recovery, per-group build and runtime evidence. | Retain through T406 closure. |
 | [T406 mapping research/design](evidence/m0-t406-s1-physical-mapping-design.md) | M0 T406 S1 | Original owner, current mapping contract, measured diff and conditional restoration design. | Retain through implementation and closure. |
 | [T405 S-stage plan](operations/m0-t405-audit-restoration-plan.md) | M0 T405 | Historical sequence; closure transfers repair outcomes to candidates. | Retain as linked closure evidence. |
 | [T405 S1 initial baseline](evidence/m0-t405-s1-audit-baseline-001.md) | M0 T405 S1 | Starting revision, initial membership counts and explicit audit gaps. | Retain as provenance for the completed baseline audit. |

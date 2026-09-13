@@ -1025,11 +1025,7 @@ CPU int SendXOFFIoctlToDriver(int adapter)
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
 
-/* DIVERGENCE(MVDM-HOST-DIV-068): the original internal COM ioctl carried
- * either a scalar or host-side output pointer through 32-bit long. Keep the
- * command values and all source ordering, but use intptr_t as the one native
- * transport; it is not a guest address or a durable host identity. */
-GLOBAL RXCPU void host_com_ioctl IFN3(int, adapter, int, request, intptr_t, arg)
+GLOBAL RXCPU void host_com_ioctl IFN3(int, adapter, int, request, long, arg)
 {
     UCHAR host_modem, error;
     MODEM_STATUS_REG MSR;

@@ -210,10 +210,7 @@ extern USHORT CurrentPspSelector;
 extern ULONG SelectorLimit[LDT_SIZE];
 #endif
 
-/* DIVERGENCE(MVDM-HOST-DIV-140): see data.c.  This value is never published
- * to guest state; it remains the host-private base used by original DPMI
- * flat/segmented conversions. */
-extern ULONG_PTR IntelBase;
+extern ULONG IntelBase;
 //
 // Register manipulation functions (for register that might be 16 or 32 bits)
 //
