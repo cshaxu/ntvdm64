@@ -2,30 +2,30 @@
 
 ## Current Work
 
-**Active: M0 T410 S2.**
+**Active: M0 T410 S3.**
 
 ## Active Packet
 
-### M0 T410 S2 — native Console input-contract recovery
+### M0 T410 S3 — native Console palette and buffer capability recovery
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T410 S2, Ordinary Mode. |
-| Admission And Approval | Owner approved admission: “准入”. The admitted candidate is Queue order 1. |
+| Identifier Mode | M0 T410 S3, Ordinary Mode. |
+| Admission And Approval | Owner approved continuation: “准入”. This is the remaining D34 slice of the already admitted T410 candidate. |
 | Candidate Proposal | [Console input, display and resource restoration](../proposals/proposal-console-input-display-resource-restoration-001.md). |
-| Objective | Recover one source-shaped native Console input contract across D24, D28--D30 and D09: establish a reachable baseline, then restore queue ordering, NOWAIT/NOREMOVE, reserved-key pairing, character/VK/modifier normalization, layout ownership and pointer/text-cursor separation without altering the accepted absolute-coordinate mouse model. |
-| Non-goals | No replacement GUI backend, Console Server/CSRSS reconstruction, broker/CLI/DPMI/WOW repair, host mutation, fake-success capability stub, guest input synthesis from app code, or general CPU change. |
-| Reference Baseline | T410 S1 retired the isolated app window at the formal source/build level; its runtime container exited `0x40` before guest input, as recorded in the S1 evidence. S2 P1 separated pointer count from the text cursor; P2 restores returned-input prepend and NOWAIT/NOREMOVE; P3 restores reserved Alt+Enter pair consumption; P4 recovers the source-composable character-to-key branch (AltGr and OEM fallback); P5 moves embedded-ROM mechanics out of the original SoftPC mirror while retaining strict package identity. The noninteractive Console and layout-ownership limitations are recorded in the indexed S2 evidence. This S owns the input boundary only; D34 remains a later slice. |
-| Files And ABI Surface | Selected original event/input callers and their adapters, Console mode/queue and cursor bindings, focused tests and indexed evidence; public CLI and guest mouse/keyboard ABI remain unchanged. |
+| Objective | Recover D34's useful original per-buffer palette/state policy through supported native Console capability, or establish the exact unavailable Console-Server boundary and source-shaped caller failure behavior. Retire any independent presentation fallback and avoid changing guest video semantics. |
+| Non-goals | No replacement GUI backend, Console Server/CSRSS reconstruction, broker/CLI/DPMI/WOW repair, host mutation, fake-success capability stub, guest video emulation rewrite, or general CPU change. |
+| Reference Baseline | S1 retired the isolated app window. S2 completed D09/D24/D25/D28--D30 source/build recovery through P1--P5: pointer/text-cursor separation, returned-input prepend/NOWAIT/NOREMOVE, Alt+Enter pairing, character normalization, and embedded-ROM ownership. S3 P6 restores D34's original graphics-buffer call and removes the unpresented DIB/palette substitute. The noninteractive Console and layout-ownership limitations are recorded in the indexed evidence. |
+| Files And ABI Surface | Original SoftPC graphics callers, the private Console palette adapter and presentation capability boundary, focused tests and indexed evidence; public CLI, accepted mouse model and guest video ABI remain unchanged. |
 | Applicable Rules | Source policy; goal, architecture, coding, execution and documentation authorities; the source-first historical-recovery gate. |
-| Verification | Original/current input-contract ledger; queue and event-pair fixtures; focused build/link; conhost and Terminal observations separately once baseline is reached; governance, links and diff review. |
-| Expected Markers | A demonstrated guest-input baseline; original prepend/peek/reserved-key semantics or an exact unavailable boundary; no text-cursor/mouse conflation, event loss, phantom modifier, app injection or private GUI fallback. |
+| Verification | Original/current palette-call and buffer-state ledger; focused capability/failure fixtures; formal x86 build/link; conhost and Terminal observations separately if a reachable graphics workload exists; governance, links and diff review. |
+| Expected Markers | Original palette callers retain their order and guest semantics; supported host behavior is bounded and observable, or unsupported behavior fails rather than pretending success; no independent-window fallback. |
 | Asset Needs | Existing selected OpenNT mirrors and build graph; local formal x86 toolchain; existing `O:\ntvdm64` package and `O:\ntvdm64\logs\` observation location. No new source or host component. |
-| Reporting Requirements | Name original owner, selected callers, host binding and input-packet semantics; distinguish conhost, Terminal and unavailable RDP evidence; report runtime limits without treating fixtures as user-visible proof. |
-| Stop Conditions | Required baseline is blocked by a non-Console owner, a proposed repair changes guest semantics without source support, or a different provider is required. Pause and name the receiver rather than invent one. |
-| Exit Criteria | D09/D24/D28--D30 each have source/build disposition and focused positive/negative evidence; any remaining runtime blocker has an exact owner and receiver; no independent window route is restored. |
+| Reporting Requirements | Name original caller, Console Server owner and modern binding; distinguish conhost, Terminal and unavailable graphical capability evidence; report any exact unavailable boundary without treating a fixture as graphics acceptance. |
+| Stop Conditions | Required behavior requires Console Server/private GUI mechanics, a proposed repair changes guest palette semantics without source support, or a different provider is required. Pause and name the receiver rather than invent one. |
+| Exit Criteria | D34 has original/current disposition, focused positive/negative evidence and an explicit supported or unavailable host capability; no independent window route is restored. T410 then reconciles all eight rows and either closes or records a source-proven receiver. |
 | Original Owner Request | “准入”. |
-| Similar-Issue Sweep | Console `Read/Peek/WriteConsoleInput`, NOWAIT/NOREMOVE, Alt+Enter/Ctrl pairing, scan/VK/Unicode/layout conversion, pointer visibility versus text cursor, app-side event producers and test-only queue manipulation. |
+| Similar-Issue Sweep | `SetConsolePalette`, palette allocation/realization, active/output buffer identity, presentation snapshots/events, buffer close/reset and any private-window fallback. |
 
 ## M0 T410 S1 Closure Record
 

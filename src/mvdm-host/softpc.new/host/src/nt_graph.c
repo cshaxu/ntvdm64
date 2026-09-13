@@ -548,12 +548,6 @@ GLOBAL VOID closeGraphicsBuffer IFN0()
                 CloseHandle(sc.ScreenBufHandle);
                 sc.ScreenBufHandle = (HANDLE)0;
                 sc.ColPalette = (HPALETTE)0;
-                /* DIVERGENCE(MVDM-HOST-DIV-176): modern public Console APIs
-                 * cannot create the NT4 graphics buffer/mapping.  Retain the
-                 * source close order, but release the adapter-owned
-                 * session presentation bytes after the original handle close. */
-                MvdmPresentationGraphicsClear();
-
                 /*
                  * Point to the current output handle.
                  */
@@ -2103,15 +2097,12 @@ void graphicsResize(void)
         sc.ConsoleBufInfo.dwUsage = DIB_PAL_COLORS;
 
         /* Create a screen buffer using the above `BITMAPINFO' structure. */
-        /* DIVERGENCE(MVDM-HOST-DIV-176): NT4 Console Server returned a
-         * shared DIB mapping through this private graphics-buffer request.
-         * Bind the exact original DIB descriptor to session-owned bytes so
-         * all original CGA/EGA/VGA writers retain their existing destination
-         * and update order; app receives snapshots, never this pointer. */
-        if (!MvdmPresentationGraphicsBuffer(sc.OutputHandle,
-                                            &sc.ConsoleBufInfo,
-                                            &sc.ScreenBufHandle))
-            sc.ScreenBufHandle = (HANDLE)-1;
+        sc.ScreenBufHandle =
+            CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE,
+                                      FILE_SHARE_READ | FILE_SHARE_WRITE,
+                                      NULL,
+                                      CONSOLE_GRAPHICS_BUFFER,
+                                      &sc.ConsoleBufInfo);
 
         if (sc.ScreenBufHandle == (HANDLE)-1)
         {

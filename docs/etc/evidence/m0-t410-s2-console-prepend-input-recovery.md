@@ -88,6 +88,31 @@ and now links its generated source indices correctly. Its fresh x86
 `verify` fixture passes both the package firmware lookup checks and the new
 unknown-embedded-ROM negative check.
 
+## D34 palette and graphics-buffer disposition
+
+OpenNT `nt_graph.c::graphicsResize` calls the private
+`CreateConsoleScreenBuffer(..., CONSOLE_GRAPHICS_BUFFER, ...)`; its later
+`SetConsolePalette` operation is implemented by the NT4 Console Server over
+that graphics buffer. Public conhost and Windows Terminal expose neither
+mechanism. The former local `MvdmPresentationGraphicsBuffer` returned success
+by storing an unpresented DIB/palette snapshot for the retired independent
+presenter, so it was not native Console behavior.
+
+S3 restores the original graphics-buffer call in the mirror, removes that
+orphan presentation plane and returns `ERROR_CALL_NOT_IMPLEMENTED` from the
+retained source-facing palette name. Text Console remains on its separate
+native text-buffer path. Focused fixtures now assert the unavailable palette
+result; full x86 link and native Console observations remain before closure.
+
+The formal x86 worker relinked successfully from
+`build/M0-T410/S1/r001-native-console-retirement`. A fresh focused x86 build
+at `build/M0-T410/S3/r001-console-graphics-boundary` compiled the revised
+adapter, session and fixture, and linked both the Console-contract and session
+lifecycle fixtures. The lifecycle fixture exits successfully. The Console
+fixture exits `18` here because `CONIN$` is a pipe; its palette-negative
+assertion precedes that guard, so this result also proves no palette success
+was fabricated. It is not graphical conhost or Terminal acceptance.
+
 The fixture and adapter compiled and linked as x86 from
 `build/M0-T388/S7/console-contract-x86`. The noninteractive automation
 environment supplies a pipe rather than `CONIN$`; the executable exits `18`

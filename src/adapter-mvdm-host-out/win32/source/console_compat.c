@@ -9,7 +9,6 @@
 #include <stddef.h>
 #include <stdlib.h>
 #include "conapi.h"
-#include "presentation_surface.h"
 #include "session/session.h"
 
 /* DIVERGENCE(ADAPTER-WIN32-048): a default-off observation retains the
@@ -204,34 +203,14 @@ BOOL WINAPI InvalidateConsoleDIBits(HANDLE output, PSMALL_RECT rect)
 
 BOOL WINAPI SetConsolePalette(HANDLE output, HPALETTE palette, DWORD flags)
 {
-    session *owner = session_thread_current();
-    PALETTEENTRY entries[SESSION_PRESENTATION_PALETTE_ENTRIES];
-    uint32_t rgb[SESSION_PRESENTATION_PALETTE_ENTRIES];
-    UINT count;
-    uint32_t index;
-
-    /* DIVERGENCE(ADAPTER-WIN32-043): the historical Console Server consumed
-     * this HPALETTE itself.  The app must not receive that host handle, so
-     * preserve the source call and copy only its public RGB values into the
-     * bounded session presentation plane. */
-    if (owner == NULL || palette == NULL) {
-        SetLastError(ERROR_INVALID_HANDLE);
-        return FALSE;
-    }
-    count = GetPaletteEntries(palette, 0u,
-        SESSION_PRESENTATION_PALETTE_ENTRIES, entries);
-    if (count == 0u) return FALSE;
-    for (index = 0u; index < count; ++index) {
-        rgb[index] = ((uint32_t)entries[index].peRed << 16u) |
-            ((uint32_t)entries[index].peGreen << 8u) |
-            (uint32_t)entries[index].peBlue;
-    }
-    if (!session_presentation_graphics_set_palette(owner, rgb, count)) {
-        SetLastError(ERROR_INVALID_STATE);
-        return FALSE;
-    }
-    return console_video_event(SESSION_VIDEO_EVENT_PALETTE, output, palette,
-        NULL, flags);
+    /* DIVERGENCE(ADAPTER-WIN32-043): this is an NT4 Console Server operation
+     * over a graphics screen buffer, not a public Console palette API.  Do
+     * not report success for an unpresented copied palette. */
+    (void)output;
+    (void)palette;
+    (void)flags;
+    SetLastError(ERROR_CALL_NOT_IMPLEMENTED);
+    return FALSE;
 }
 
 VOID WINAPI SetLastConsoleEventActive(VOID)
@@ -301,130 +280,6 @@ BOOL WINAPI RegisterConsoleVDM(DWORD flags, HANDLE start_event,
     trace_text_presentation("registered", GetStdHandle(STD_OUTPUT_HANDLE),
         NULL, 0u, ERROR_SUCCESS);
     return TRUE;
-}
-
-BOOL WINAPI MvdmPresentationGraphicsBuffer(HANDLE output,
-                                           PCONSOLE_GRAPHICS_BUFFER_INFO info,
-                                           HANDLE *screen_buffer)
-{
-    session *owner = session_thread_current();
-    BITMAPINFOHEADER *header;
-    uint64_t bits_per_line;
-    uint64_t stride;
-    uint64_t height;
-    uint8_t *pixels;
-    HANDLE duplicate;
-    HANDLE mutex;
-
-    if (screen_buffer != NULL) *screen_buffer = NULL;
-    if (owner == NULL || !session_valid(owner) ||
-        owner->state != SESSION_STATE_ACTIVE || info == NULL ||
-        info->lpBitMapInfo == NULL || screen_buffer == NULL) {
-        SetLastError(ERROR_INVALID_PARAMETER);
-        return FALSE;
-    }
-    header = &info->lpBitMapInfo->bmiHeader;
-    if (header->biWidth <= 0 || header->biHeight == 0 ||
-        header->biBitCount == 0u || header->biCompression != BI_RGB) {
-        SetLastError(ERROR_NOT_SUPPORTED);
-        return FALSE;
-    }
-    height = header->biHeight < 0 ? -(int64_t)header->biHeight :
-        (uint64_t)header->biHeight;
-    bits_per_line = (uint64_t)(uint32_t)header->biWidth *
-        (uint64_t)header->biBitCount;
-    stride = ((bits_per_line + 31u) / 32u) * sizeof(DWORD);
-    if (height == 0u || height > UINT32_MAX || stride == 0u ||
-        stride > UINT32_MAX ||
-        !session_presentation_graphics_acquire_writable(owner,
-            (uint32_t)header->biWidth, (uint32_t)height,
-            (uint32_t)header->biBitCount, (uint32_t)stride, &pixels)) {
-        SetLastError(ERROR_NOT_ENOUGH_MEMORY);
-        return FALSE;
-    }
-    if (!DuplicateHandle(GetCurrentProcess(), output, GetCurrentProcess(),
-            &duplicate, 0u, FALSE, DUPLICATE_SAME_ACCESS)) {
-        session_presentation_graphics_clear(owner);
-        return FALSE;
-    }
-    mutex = CreateMutexW(NULL, FALSE, NULL);
-    if (mutex == NULL) {
-        CloseHandle(duplicate);
-        session_presentation_graphics_clear(owner);
-        return FALSE;
-    }
-    if (!session_presentation_graphics_set_mutex(owner, (uintptr_t)mutex)) {
-        CloseHandle(mutex);
-        CloseHandle(duplicate);
-        session_presentation_graphics_clear(owner);
-        SetLastError(ERROR_NOT_ENOUGH_MEMORY);
-        return FALSE;
-    }
-    info->hMutex = mutex;
-    info->lpBitMap = pixels;
-    *screen_buffer = duplicate;
-    /* DIVERGENCE(ADAPTER-WIN32-047): the private Console Server would have
-     * selected a graphics presentation surface as part of its graphics-buffer
-     * protocol.  Public Console has no equivalent controller.  Report only
-     * the already-completed original graphicsResize boundary to the bound
-     * app surface; a missing presentation consumer does not invalidate the
-     * original graphics buffer. */
-    (void)console_video_event(SESSION_VIDEO_EVENT_GRAPHICS_READY, output,
-        NULL, NULL, 0u);
-    return TRUE;
-}
-
-VOID WINAPI MvdmPresentationGraphicsClear(VOID)
-{
-    session *owner = session_thread_current();
-    uintptr_t mutex;
-    if (owner == NULL) return;
-    mutex = session_presentation_graphics_mutex(owner);
-    if (mutex != (uintptr_t)0u) CloseHandle((HANDLE)mutex);
-    session_presentation_graphics_clear(owner);
-}
-
-static HANDLE presentation_mutex(session *owner)
-{
-    uintptr_t mutex;
-    if (owner == NULL || !session_valid(owner) ||
-        (mutex = session_presentation_graphics_mutex(owner)) == (uintptr_t)0u)
-        return NULL;
-    return (HANDLE)mutex;
-}
-
-int mvdm_presentation_graphics_describe(session *owner, uint32_t *width_out,
-    uint32_t *height_out, uint32_t *bits_per_pixel_out, uint32_t *stride_out,
-    uint32_t *bytes_out)
-{
-    HANDLE mutex = presentation_mutex(owner);
-    int result;
-    if (mutex == NULL || WaitForSingleObject(mutex, INFINITE) != WAIT_OBJECT_0)
-        return 0;
-    result = session_presentation_graphics_describe(owner, width_out, height_out,
-        bits_per_pixel_out, stride_out, bytes_out);
-    ReleaseMutex(mutex);
-    return result;
-}
-
-int mvdm_presentation_graphics_snapshot(session *owner, uint8_t *bytes,
-    uint32_t capacity, uint32_t *width_out, uint32_t *height_out,
-    uint32_t *bits_per_pixel_out, uint32_t *stride_out, uint32_t *bytes_out,
-    uint32_t *palette, uint32_t palette_capacity,
-    uint32_t *palette_entries_out)
-{
-    HANDLE mutex = presentation_mutex(owner);
-    int result;
-    if (mutex == NULL || WaitForSingleObject(mutex, INFINITE) != WAIT_OBJECT_0)
-        return 0;
-    result = session_presentation_graphics_snapshot(owner, bytes, capacity,
-        width_out, height_out, bits_per_pixel_out, stride_out, bytes_out);
-    if (palette_entries_out != NULL) *palette_entries_out = 0u;
-    if (result && palette != NULL && palette_capacity != 0u)
-        (void)session_presentation_graphics_palette_snapshot(owner, palette,
-            palette_capacity, palette_entries_out);
-    ReleaseMutex(mutex);
-    return result;
 }
 
 /* DIVERGENCE(ADAPTER-WIN32-033): these NT4 Console Server calls carried

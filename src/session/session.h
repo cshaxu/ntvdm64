@@ -64,12 +64,7 @@ typedef struct session_binding_diagnostic {
 
 enum session_video_event_kind {
     SESSION_VIDEO_EVENT_INVALIDATE = 1u,
-    SESSION_VIDEO_EVENT_PALETTE = 2u,
     SESSION_VIDEO_EVENT_ACTIVE = 3u,
-    /* The original SoftPC graphicsResize path has obtained a writable
-     * graphics plane.  This is a host presentation boundary, not guest
-     * state or a Console Server selector. */
-    SESSION_VIDEO_EVENT_GRAPHICS_READY = 4u,
     /* Modern Console no longer owns NT4's Alt+Enter hardware fullscreen
      * transition.  The console adapter reports the consumed host gesture so
      * app can transfer its one presentation surface without injecting a DOS
@@ -151,21 +146,6 @@ typedef struct session {
     uint32_t presentation_text_columns;
     uint32_t presentation_text_rows;
     uint32_t presentation_text_bytes;
-    /* The original SoftPC CGA/EGA/VGA update routines render directly into
-     * this host-local DIB byte plane.  As with text, app receives snapshots
-     * rather than the writable pointer. */
-    uint8_t *presentation_graphics_storage;
-    uint32_t presentation_graphics_width;
-    uint32_t presentation_graphics_height;
-    uint32_t presentation_graphics_bits_per_pixel;
-    uint32_t presentation_graphics_stride;
-    uint32_t presentation_graphics_bytes;
-    /* RGB values copied from the source palette.  These are values, never a
-     * host HPALETTE, so app presentation has no host-handle dependency. */
-    uint32_t presentation_graphics_palette_entries;
-    uintptr_t presentation_graphics_mutex;
-    uint32_t presentation_graphics_palette_rgb[
-        SESSION_PRESENTATION_PALETTE_ENTRIES];
 } session;
 
 #ifdef __cplusplus
@@ -203,23 +183,6 @@ int session_presentation_text_snapshot(const session *instance,
     uint8_t *destination, uint32_t destination_bytes, uint32_t *columns_out,
     uint32_t *rows_out, uint32_t *bytes_out);
 void session_presentation_text_clear(session *instance);
-int session_presentation_graphics_acquire_writable(session *instance,
-    uint32_t width, uint32_t height, uint32_t bits_per_pixel,
-    uint32_t stride, uint8_t **bytes_out);
-int session_presentation_graphics_describe(const session *instance,
-    uint32_t *width_out, uint32_t *height_out, uint32_t *bits_per_pixel_out,
-    uint32_t *stride_out, uint32_t *bytes_out);
-int session_presentation_graphics_snapshot(const session *instance,
-    uint8_t *destination, uint32_t destination_bytes, uint32_t *width_out,
-    uint32_t *height_out, uint32_t *bits_per_pixel_out, uint32_t *stride_out,
-    uint32_t *bytes_out);
-void session_presentation_graphics_clear(session *instance);
-int session_presentation_graphics_set_palette(session *instance,
-    const uint32_t *rgb, uint32_t entries);
-int session_presentation_graphics_palette_snapshot(const session *instance,
-    uint32_t *rgb, uint32_t capacity, uint32_t *entries_out);
-int session_presentation_graphics_set_mutex(session *instance, uintptr_t mutex);
-uintptr_t session_presentation_graphics_mutex(const session *instance);
 int session_dispose(session *instance);
 /* Same dispose operation with an optional fixed-width failure explanation.
  * `reason_out` is written before any teardown and is `NONE` on success. */
