@@ -762,3 +762,25 @@ Staged EXE: 3,235,328 bytes, SHA-256
 12d66e1afd94c970316d38c4f08290f5ce4157c8f3cbd148110d65aab7b51096.
 Reviewer verified original-paired header diffs, retained async boundary,
 layout assertions and actual DLL build selection. T406 remains open.
+
+## Original platform branch restoration
+
+Restored both original branches in inc/mvdm.h and inc/suballoc.h, replacing
+unconditional x86 selection with the original guard extended by _M_IX86.
+The sole MSVC x86 build still selects the same direct field macros and
+4096-byte commitment. No i386 macro is added globally and no RISC or CPU30
+build is selected. Both original branch bodies are retained verbatim; only
+the guard and its divergence comment differ. Header delta +13/-9 (net +4)
+because previously cropped original source is recovered, not new behavior.
+
+Dependency-tracked r002 EXE, focused test and VDMREDIR.dll build/link pass
+(platform-guards-build.log); existing warnings remain. Focused original
+memory/DIB tests pass. Runtime logs t406-s2-platform-guards-* under the
+designated logs root: COMMAND exits 0, EDIT reaches editor then bounded
+cleanup, WRITE exits 255. MEM/DIR and live pipe operations were not rerun
+for this branch-equivalent group. EMS cross-window failure remains open.
+
+Final deployed x86 EXE: 3,235,328 bytes, SHA-256
+196bb5823edcacdf5886347712b8ceedc60fa0338c099f9e36a6ec9e76c2f52f.
+Reviewer checked original branches and unchanged selected condition rather
+than treating restoration of an inactive branch as runtime acceptance.
