@@ -102,10 +102,6 @@ void mvdm_softpc_record_dosx_init(unsigned int shared_ds,
 void mvdm_softpc_record_dosx_real_mode_switch(unsigned int source_cs,
     unsigned int source_ip, unsigned int target_cs,
     unsigned int machine_status);
-void mvdm_softpc_record_dosx_real_mode_frame(unsigned int source_cs,
-    unsigned int source_ip, unsigned int frame_ds, unsigned int frame_sp,
-    unsigned int frame_ss, unsigned int frame_ip, unsigned int frame_cs,
-    unsigned int machine_status);
 
 
 /* Default-off CPU40 far-return witness.  It records the original scalar

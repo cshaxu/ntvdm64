@@ -23,7 +23,6 @@ Revision History:
 #include "precomp.h"
 #pragma hdrstop
 #include "softpc.h"
-#include "mvdm_softpc_termination.h"
 
 /* CCPU's internal segment-register indices and pseudo-descriptor routine
  * are deliberately kept private to its generated headers.  CPU40's DPMI
@@ -289,11 +288,6 @@ Routine Description:
     SsSelector = *(PUSHORT)(StackPointer + 4);
     Ip = *(PUSHORT)(StackPointer + 6);
     CsSelector = *(PUSHORT)(StackPointer + 8);
-
-    mvdm_softpc_record_dosx_real_mode_frame((unsigned int)getCS(),
-        (unsigned int)getIP(), (unsigned int)DsSelector, (unsigned int)Sp,
-        (unsigned int)SsSelector, (unsigned int)Ip,
-        (unsigned int)CsSelector, (unsigned int)getMSW());
 
     setMSW(getMSW() & ~MSW_PE);
     setDS(DsSelector);

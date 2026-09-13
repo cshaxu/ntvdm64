@@ -799,23 +799,6 @@ void mvdm_softpc_record_dosx_real_mode_switch(unsigned int source_cs,
         message, (DWORD)formatted);
 }
 
-void mvdm_softpc_record_dosx_real_mode_frame(unsigned int source_cs,
-    unsigned int source_ip, unsigned int frame_ds, unsigned int frame_sp,
-    unsigned int frame_ss, unsigned int frame_ip, unsigned int frame_cs,
-    unsigned int machine_status)
-{
-    char message[192];
-    int formatted;
-
-    formatted = snprintf(message, sizeof(message),
-        "MVDM-DOSX-FD-FRAME source=%04X:%04X ds=%04X sp=%04X ss=%04X ip=%04X cs=%04X msw=%04X\r\n",
-        source_cs, source_ip, frame_ds, frame_sp, frame_ss, frame_ip,
-        frame_cs, machine_status);
-    if (formatted <= 0 || (size_t)formatted >= sizeof(message)) return;
-    mvdm_softpc_write_captured_report(mvdm_softpc_cpu_illegal_report_path,
-        message, (DWORD)formatted);
-}
-
 void mvdm_softpc_record_cpu_far_return(unsigned int source_cs,
     unsigned int source_ip, unsigned int target_cs, unsigned int target_ip)
 {

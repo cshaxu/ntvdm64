@@ -2,32 +2,32 @@
 
 ## Current Work
 
-**Active: M0 T407 S2.**
+**Active: M0 T407 S3.**
 
 ## Active Packet
 
-### M0 T407 S2 — XMS/DPMI memory-contract restoration
+### M0 T407 S3 — original DPMI mode-transition frames
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T407 S2, Ordinary Mode, one agent executing then reviewing. |
-| Admission And Approval | Owner first admitted this T for the current-state audit, then approved: “准入修复，直到 S4审计完成。S4审计好了，告诉我接下来怎么走，我们设计再实现。” This admits S2 and the following S3 repair, then S4 audit/design only. |
+| Identifier Mode | M0 T407 S3, Ordinary Mode, one agent executing then reviewing. |
+| Admission And Approval | Owner first admitted this T for the current-state audit, then approved: “准入修复，直到 S4审计完成。S4审计好了，告诉我接下来怎么走，我们设计再实现。” S2 delivered at `d36c9e611`; this opens the already approved S3 repair. S4 remains audit/design only. |
 | Candidate Proposal | [Original DPMI and XMS contract restoration](../proposals/proposal-dpmi-xms-contract-restoration-001.md). |
-| Objective | Restore D36’s original XMS block-service contract, establish the source-proven D37 provider disposition, remove proved duplicate XMS policy, and prove the one retained bounded guest-memory binding. |
-| Non-goals | No D35 frame repair, U03/U04 platform-projection change, CPU-execution change, broker work, kernel/product-shell import, or claim that DOSX/WOW/WRITE is accepted. |
-| Reference Baseline | S1 audit at [current-state evidence](../etc/evidence/m0-t407-s1-dpmi-xms-current-state-audit.md), T406 closure at 14d937ca3, and the admitted proposal. |
-| Files And ABI Surface | `mvdm-host/xms.486/{xmsblock.c,xms.c,xms.h,xmsmemr.c,i386/xmsmem86.c}`, `mvdm-host/dpmi32/dpmimemr.c`, matching SoftPC XMS/guest-memory adapters, focused tests/build records, Status and indexed evidence. |
+| Objective | Restore the original DOSX protected- and real-mode frame interpretation, field order and continuation ownership in the D35 CPU40 provider, retaining only the minimal active-CCPU cache/setter seam. |
+| Non-goals | No U03/U04 platform-projection change; no TSS/IDT/GDT/LDT/TEB redesign; no CPU-execution, broker, kernel/product-shell, D36/D37 or product-acceptance claim. |
+| Reference Baseline | S1 audit, [S2 restoration evidence](../etc/evidence/m0-t407-s2-xms-dpmi-memory-contract-restoration.md) at `d36c9e611`, original `base/mvdm/dpmi32/i386/dpmi386.c`, and the admitted proposal. |
+| Files And ABI Surface | `mvdm-host/dpmi32/{modesw.c,dpmidata.h,dpmi32p.h}`, original paired source, bounded CCPU/DOSX fixtures/build records, Status and indexed evidence. |
 | Applicable Rules | Goal, architecture, coding, execution, document and source-policy authorities; four-rung source-recovery audit and mirror/overlay ownership rules. |
-| Verification | Paired original/current checks; x86 formal build; focused allocation/free/reallocate/query, forward-copy versus overlap-safe move, overflow, partial failure, lease teardown and regression checks; governance, links, diff review, commit and push. |
-| Expected Markers | Original `xmsMoveBlock` owns descriptor parsing and AX success; no XMS-specific duplicate parser/chunk policy remains; D37 allocator results have one proved owner; retained adapter binding has a four-rung ledger and focused positive/negative proof. |
+| Verification | Paired source/frame-layout review; focused protected/real mode frame positive/negative tests, register/cache ordering and BOP continuation checks; formal x86 link; COMMAND/EDIT regression where safely available; governance, diff review, commit and push. |
+| Expected Markers | The original five-word real-mode and 16-byte protected-mode frames retain their offsets and values; the mode bit changes at the documented CCPU boundary; active setters establish only the required caches; kernel fixed-state writes are explicitly excluded. |
 | Asset Needs | Existing pinned OpenNT/OpenNT-4.5 source trees, selected local mirrors, adapter/overlay registers and retained formal-build manifests; all comparison inputs are read-only. No new source or media. |
-| Reporting Requirements | Record removals, retained finite bindings, original owner/path, build selection, exact tests and limitations. Report any D35/U03/U04 finding separately without modifying it in S2. |
-| Stop Conditions | Missing/ambiguous XMS allocator semantics, a required kernel-shell dependency, failed contract test, or any change needed outside D36/D37/U07 pauses the group; do not invent a replacement. |
-| Exit Criteria | The focused original contract is restored or a source-proven finite blocker is documented; all stated checks pass; evidence and authorities are reviewed, committed and pushed. S3 then opens under the already approved sequence. |
+| Reporting Requirements | Record original frame owner/path, every retained CCPU seam, exact tests/build result and any runtime frontier. Report U03/U04 findings without modifying them. |
+| Stop Conditions | A required U04 platform change, uncertain CCPU cache ordering, missing frame source, failed transition test, or a required CPU-execution change pauses the group; do not invent a replacement. |
+| Exit Criteria | Both frame contracts are restored or a source-proven finite blocker is documented; checks pass; evidence and authorities are reviewed, committed and pushed. S4 then opens solely for U03/U04 audit/design. |
 | Original Owner Request | “准入下一个包。先进行当前状态审计，本T任务范畴内的diff都有哪些，给出应该如何清理的方案。” |
-| Similar-Issue Sweep | XMS dispatch, callbacks, SA allocation/free/reallocate/query, every selected XMS/EMS/DEM lease consumer, source/overlap/overflow/partial-failure behavior, and inactive x86/RISC backend exclusions. |
+| Similar-Issue Sweep | BOP FD table routing, `switch_to_real_mode`, protected DPMI service 53:01, visible registers, hidden caches, PE/CPL ordering, frame malformed/unavailable behavior, and the separate U04 projections. |
 
-S1 is delivered at `13fc0fd4b`: [current-state evidence](../etc/evidence/m0-t407-s1-dpmi-xms-current-state-audit.md) confirms D36’s removable duplicate parser/copy-policy layer, D37’s changed provider selection, and the separate D35/U03/U04 owner boundaries. S2 begins from that frozen finding; no S3/S4 source change is active.
+S1 is delivered at `13fc0fd4b`; S2 is delivered at `d36c9e611`: [S2 restoration evidence](../etc/evidence/m0-t407-s2-xms-dpmi-memory-contract-restoration.md) records the D36 recovery and D37 ownership disposition. S3 begins from those frozen results. No S4 source change is active.
 
 T406 is closed by its final delivery; [S2 closure evidence](../etc/evidence/m0-t406-s2-original-restoration.md#s2-final-x86-width-and-access-boundary-disposition)
 records its restored cohorts, remaining registered seams, trace hit/no-hit results,
