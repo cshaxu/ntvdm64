@@ -2,32 +2,32 @@
 
 ## Current Work
 
-**Active: M0 T407 S8.**
+**Active: M0 T407 S10.**
 
 ## Active Packet
 
-### M0 T407 S8 — source-shaped carrier recovery design
+### M0 T407 S10 — IDT lifecycle source proof
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T407 S8, Ordinary Mode, one agent designs source-shaped recovery then independently re-reviews the evidence. |
-| Admission And Approval | The owner rejects T407 closure until the TSS/TR, table-register and FastWOW carrier claims are explained and source-proven. The existing automatic approval for all remaining T407 S packages admits this follow-on design after delivered S7. |
+| Identifier Mode | M0 T407 S10, Ordinary Mode, one agent performs source and fixture proof then independently re-reviews the evidence. |
+| Admission And Approval | S9 was admitted by the owner request “准入一个s任务清理干净 减少代码” and is delivered. The existing automatic approval for remaining T407 S packages admits this previously requested IDT proof. |
 | Candidate Proposal | [Original DPMI and XMS contract restoration](../proposals/proposal-dpmi-xms-contract-restoration-001.md). |
-| Objective | Turn S7's owner matrix into a bounded implementation design: exact original field/caller inventory, selected WOW provider proof and a smallest-facade plan for only kernel-uncomposable mechanics. |
-| Non-goals | No claim that kernel source is absent merely because it is kernel code; no new carrier, CPU semantic change, broker work or premature transfer to a later package. |
-| Reference Baseline | [S7 original-carrier audit](../etc/evidence/m0-t407-s7-original-carrier-implementation-audit.md), S4–S6 evidence, original `dpmi386.c`, `dpmiint.c`, `dxboot.asm`, `fastwow.asm`, kernel VDM sources and current selected build/link graph. |
-| Files And ABI Surface | Read-only original/current source and build records; Status and indexed evidence. Product change only after a four-rung design verdict. |
+| Objective | Prove or replace the IDT source/lifecycle handling using original DOSX allocation/publication order and a focused CCPU fixture; establish fresh-worker and failed-entry behavior without Fast carriers. |
+| Non-goals | No Fast carrier restoration, CPU instruction change, broker work, WOW/provider policy change or WRITE acceptance claim. |
+| Reference Baseline | [S9 retirement evidence](../etc/evidence/m0-t407-s9-fast-carrier-retirement.md), original `dxboot.asm` IDT/GDT allocation and fill sequence, current `DpmiCpu40SetNativeIdtSourceAddress` / `DpmiCpu40RestoreNativeIdt` path. |
+| Files And ABI Surface | IDT lifecycle fixture and, only if source proof requires it, narrow DPMI provider state; Status and indexed evidence. |
 | Applicable Rules | Goal, architecture, coding, execution, document and source-policy authorities; mandatory source-recovery audit. |
-| Verification | Exact source/caller/build searches; field/layout and lifecycle matrices; selected WOW link/load proof; proposed runtime hit points; governance, diff review, commit and push. |
-| Expected Markers | Every carrier has an exact source-shaped recovery design and concrete test; no compatibility carrier is called original without proof. |
+| Verification | Original/current field and ordering matrix; fixture for first publication, second non-bootstrap publication, failed transition and fresh lifecycle; formal x86 build and regressions; governance, diff review, commit/push. |
+| Expected Markers | IDTR tracks the source DOSX IDT for its bootstrap lifecycle, with no stale table after reset/failure; source proof names every retained state field. |
 | Asset Needs | Existing pinned OpenNT/OpenNT-4.5 trees and local mirrors only; no new source/media. |
 | Reporting Requirements | Explain original location, why code is split, current equivalence status, user-mode recovery feasibility, test plan and code/diff consequence for every carrier. |
 | Stop Conditions | An unlocated source, non-composable kernel primitive or unproven selected WOW provider is evidence—not authority to close or transfer without naming a recovery experiment. |
-| Exit Criteria | A reviewable recovery design and admitted implementation grouping exist for all three carrier families; no unsupported closure assertion remains. |
-| Original Owner Request | “这是哪个任务啊？我们如何验证？为何原始opennt代码没有实现这些？这么重要的功能怎么就不能有原始代码呢？”以及“当前的实现，符合原始语义吗？是不是其实还是可以使用原始opennt代码复刻用户态下能跑的语义？” |
-| Similar-Issue Sweep | VDM_TIB publication, TEB/TD construction, process LDT/GDT/IDT setup, TSS/TR initialization, WOW provider build/load and worker reuse/teardown. |
+| Exit Criteria | Source-proven lifecycle disposition, passing fixture and named remaining limitation; no Fast carrier reintroduced. |
+| Original Owner Request | “IDT 的‘首个来源锁存’、重发布和 worker 重置仍未证明”以及随后授权自动准入余下 S。 |
+| Similar-Issue Sweep | IDT source base/limit, GDT/LDT separation, BOP `53:00/01/02`, CCPU interrupt restore, worker reset and allocation failure. |
 
-S1–S5 are delivered at `13fc0fd4b`, `d36c9e611`, `d16e3a72e`, `9234a98de` and `e8e41ab7f`. S6's previous closure was an incomplete disposition. S7 is delivered in the indexed original-carrier audit; S8 remains active for the recovery design.
+S1–S5 are delivered at `13fc0fd4b`, `d36c9e611`, `d16e3a72e`, `9234a98de` and `e8e41ab7f`. S6's previous closure was an incomplete disposition. S7/S8 delivered the indexed original-carrier audit and corrected FastWOW selection; [S9 retirement](../etc/evidence/m0-t407-s9-fast-carrier-retirement.md) is delivered. S10 is active for the IDT lifecycle proof.
 
 T406 is closed by its final delivery; [S2 closure evidence](../etc/evidence/m0-t406-s2-original-restoration.md#s2-final-x86-width-and-access-boundary-disposition)
 records its restored cohorts, remaining registered seams, trace hit/no-hit results,

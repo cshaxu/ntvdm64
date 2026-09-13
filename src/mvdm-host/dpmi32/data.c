@@ -146,13 +146,6 @@ ULONG Cpu40PmStackInfoAddress;
  * distinct owner. */
 ULONG Cpu40GdtShadowAddress;
 ULONG Cpu40LdtShadowAddress;
-/* Guest-linear TEB/TD prefix consumed only by the original FastWOW machine
- * bridge.  It is deliberately a guest projection, not a host TEB pointer. */
-ULONG Cpu40WowFastTebAddress;
-/* Guest-linear pair of synthetic hardware TSS records.  CPU40 owns their
- * storage because modern Windows no longer supplies the NT kernel VDM task
- * register assumed by WOW DOSX. */
-ULONG Cpu40NativeTaskStateAddress;
 
 ULONG
 DpmiCpu40DescriptorShadowAddress(

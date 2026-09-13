@@ -30,121 +30,14 @@ Revision History:
 extern void load_pseudo_descr(int index);
 extern void c_setGDT_BASE_LIMIT(ULONG base, USHORT limit);
 extern void c_setIDT_BASE_LIMIT(ULONG base, USHORT limit);
-extern void c_setTR_SELECTOR(USHORT selector);
-extern void c_setTR_BASE_LIMIT_AR(ULONG base, ULONG limit, USHORT ar);
 #define CPU40_CS_REG 1
 #define CPU40_SS_REG 2
 #define CPU40_DS_REG 3
-
-/* WOW_x86 deliberately omits LTR: native NT's VDM already has a busy task
- * whose backlink reaches a V86 task. CPU40 retains that hardware contract in
- * two private GDT slots instead of special-casing the original IRET. */
-#define CPU40_NATIVE_PM_TSS_SELECTOR 0x1f0u
-#define CPU40_NATIVE_V86_TSS_SELECTOR 0x1f8u
-#define CPU40_TSS386_BYTES 0x68u
-#define CPU40_TSS386_IOMAP_BASE 0x66u
-/* A 386 task's I/O bitmap has one bit per port.  The native VDM task that
- * WOW_x86 assumes permits the virtual machine's port traffic; retain that
- * property explicitly rather than letting CCPU reject the first IN/OUT
- * because its reconstructed TSS ends at the bitmap-base field. */
-#define CPU40_TSS386_IOMAP_BYTES 0x2000u
-#define CPU40_TSS386_TOTAL_BYTES \
-    (CPU40_TSS386_BYTES + CPU40_TSS386_IOMAP_BYTES)
-#define CPU40_TSS386_EIP 0x20u
-#define CPU40_TSS386_EFLAGS 0x24u
-#define CPU40_TSS386_EAX 0x28u
-#define CPU40_TSS386_ECX 0x2cu
-#define CPU40_TSS386_EDX 0x30u
-#define CPU40_TSS386_EBX 0x34u
-#define CPU40_TSS386_ESP 0x38u
-#define CPU40_TSS386_EBP 0x3cu
-#define CPU40_TSS386_ESI 0x40u
-#define CPU40_TSS386_EDI 0x44u
-#define CPU40_TSS386_ES 0x48u
-#define CPU40_TSS386_CS 0x4cu
-#define CPU40_TSS386_SS 0x50u
-#define CPU40_TSS386_DS 0x54u
-#define CPU40_TSS386_FS 0x58u
-#define CPU40_TSS386_GS 0x5cu
-#define CPU40_TSS386_LDT 0x60u
-#define CPU40_TSS386_VM 0x00020000u
-#define CPU40_TSS386_NT 0x00004000u
-#define CPU40_XTND_BUSY_TSS 0x0bu
 
 /* This is session-local transition-provider state, not a DOSX descriptor.
  * It stays private so CCPU context marshaling cannot serialize it as a CPU
  * register field. */
 static ULONG cpu40_native_idt_source_address;
-
-static void cpu40_write_tss_descriptor(PLDT_ENTRY entry, ULONG base)
-{
-    RtlZeroMemory(entry, sizeof(*entry));
-    entry->LimitLow = CPU40_TSS386_TOTAL_BYTES - 1u;
-    entry->BaseLow = (USHORT)base;
-    entry->HighWord.Bytes.BaseMid = (UCHAR)(base >> 16);
-    entry->HighWord.Bytes.BaseHi = (UCHAR)(base >> 24);
-    entry->HighWord.Bits.Type = CPU40_XTND_BUSY_TSS;
-    entry->HighWord.Bits.Dpl = 3u;
-    entry->HighWord.Bits.Pres = 1u;
-    entry->HighWord.Bits.Sys = 0u;
-}
-
-static void cpu40_write_native_v86_task(PUCHAR task)
-{
-    RtlZeroMemory(task, CPU40_TSS386_TOTAL_BYTES);
-    *(PUSHORT)(task + CPU40_TSS386_IOMAP_BASE) = CPU40_TSS386_BYTES;
-    *(PULONG)(task + CPU40_TSS386_EIP) = getEIP();
-    *(PULONG)(task + CPU40_TSS386_EFLAGS) =
-        (getEFLAGS() | CPU40_TSS386_VM) & ~CPU40_TSS386_NT;
-    *(PULONG)(task + CPU40_TSS386_EAX) = getEAX();
-    *(PULONG)(task + CPU40_TSS386_ECX) = getECX();
-    *(PULONG)(task + CPU40_TSS386_EDX) = getEDX();
-    *(PULONG)(task + CPU40_TSS386_EBX) = getEBX();
-    *(PULONG)(task + CPU40_TSS386_ESP) = getESP();
-    *(PULONG)(task + CPU40_TSS386_EBP) = getEBP();
-    *(PULONG)(task + CPU40_TSS386_ESI) = getESI();
-    *(PULONG)(task + CPU40_TSS386_EDI) = getEDI();
-    *(PUSHORT)(task + CPU40_TSS386_ES) = getES();
-    *(PUSHORT)(task + CPU40_TSS386_CS) = getCS();
-    *(PUSHORT)(task + CPU40_TSS386_SS) = getSS();
-    *(PUSHORT)(task + CPU40_TSS386_DS) = getDS();
-    *(PUSHORT)(task + CPU40_TSS386_FS) = getFS();
-    *(PUSHORT)(task + CPU40_TSS386_GS) = getGS();
-    *(PUSHORT)(task + CPU40_TSS386_LDT) = 0u;
-}
-
-static int cpu40_install_native_task_carrier(void)
-{
-    ULONG address;
-    ULONG size;
-    PUCHAR state;
-    PLDT_ENTRY gdt;
-
-    if (Cpu40GdtShadowAddress == 0u) return 0;
-    if (Cpu40NativeTaskStateAddress == 0u) {
-        address = 0u;
-        size = CPU40_TSS386_TOTAL_BYTES * 2u;
-        if (!NT_SUCCESS(DpmiAllocateVirtualMemory((PVOID)&address, &size)))
-            return 0;
-        Cpu40NativeTaskStateAddress = address;
-    }
-
-    state = (PUCHAR)(IntelBase + Cpu40NativeTaskStateAddress);
-    RtlZeroMemory(state, CPU40_TSS386_TOTAL_BYTES);
-    *(PUSHORT)state = CPU40_NATIVE_V86_TSS_SELECTOR;
-    *(PUSHORT)(state + CPU40_TSS386_IOMAP_BASE) = CPU40_TSS386_BYTES;
-    cpu40_write_native_v86_task(state + CPU40_TSS386_TOTAL_BYTES);
-
-    gdt = (PLDT_ENTRY)(IntelBase + Cpu40GdtShadowAddress);
-    cpu40_write_tss_descriptor(&gdt[CPU40_NATIVE_PM_TSS_SELECTOR >> 3],
-        Cpu40NativeTaskStateAddress);
-    cpu40_write_tss_descriptor(&gdt[CPU40_NATIVE_V86_TSS_SELECTOR >> 3],
-        Cpu40NativeTaskStateAddress + CPU40_TSS386_TOTAL_BYTES);
-    c_setTR_SELECTOR(CPU40_NATIVE_PM_TSS_SELECTOR);
-    c_setTR_BASE_LIMIT_AR(Cpu40NativeTaskStateAddress,
-        CPU40_TSS386_TOTAL_BYTES - 1u, CPU40_XTND_BUSY_TSS);
-    return 1;
-}
 
 VOID
 DpmiCpu40SetNativeIdtSourceAddress(
@@ -234,8 +127,6 @@ Routine Description:
      * the gates in place before this 53:01 entry.  Project that exact table
      * into CCPU's IDTR; do not synthesize gates or replace the DPMI hooks. */
     DpmiCpu40RestoreNativeIdt();
-
-    if (!cpu40_install_native_task_carrier()) return;
 
     setMSW(getMSW() | MSW_PE);
     setCPL(3);

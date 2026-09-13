@@ -121,8 +121,6 @@ extern ULONG DosxIntHandlerIretd;
 extern ULONG Cpu40PmStackInfoAddress;
 extern ULONG Cpu40GdtShadowAddress;
 extern ULONG Cpu40LdtShadowAddress;
-extern ULONG Cpu40WowFastTebAddress;
-extern ULONG Cpu40NativeTaskStateAddress;
 
 ULONG
 DpmiCpu40DescriptorShadowAddress(

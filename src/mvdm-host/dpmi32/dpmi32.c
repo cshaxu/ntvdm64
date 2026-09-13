@@ -347,25 +347,6 @@ Return Value:
         RtlCopyMemory((PVOID)(IntelBase + Cpu40LdtShadowAddress), Ldt,
             LDT_SIZE * sizeof(LDT_ENTRY));
     }
-    /* DIVERGENCE(MVDM-HOST-DIV-248): FastWOW loads the inherited NT TEB
-     * selector (003Bh) while still executing in CCPU guest-linear space.
-     * Modern Windows cannot publish NT4's TEB/WOW32Reserved carrier there.
-     * Give that one bridge a bounded guest projection: NtTib.Self at 18h,
-     * then a three-DWORD TD prefix at 100h (vpStack, vpCBStack, FastWowEsp).
-     * FastWOW itself owns every write to that prefix; no host TEB address or
-     * native TD pointer crosses into guest memory. */
-    if (!Cpu40WowFastTebAddress) {
-        ULONG Address = 0;
-        ULONG TebSize = 0x1000;
-        NTSTATUS Status = DpmiAllocateVirtualMemory((PVOID)&Address, &TebSize);
-
-        if (NT_SUCCESS(Status)) {
-            Cpu40WowFastTebAddress = Address;
-            RtlZeroMemory((PVOID)(IntelBase + Address), TebSize);
-            *(PULONG)(IntelBase + Address + 0x18u) = Address;
-            *(PULONG)(IntelBase + Address + 0xc0u) = Address + 0x100u;
-        }
-    }
     /* The LDTR selector is an internal-validity token; DOSX neither sees nor
      * consumes it. */
     setLDT_SELECTOR(4);
