@@ -1121,6 +1121,7 @@ $appObjects = foreach ($name in $appNames) {
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $appRoot $name)))
     $object
 }
+$graph.Add('build obj/app/worker_entry.obj: cc ' + (NinjaPath (Join-Path $root 'src/app/worker_entry.c')))
 $graph.Add('build ' + $effectiveAddressObject + ': cc ' + (NinjaPath $effectiveAddressSource))
 $patchBodyObjects = @(foreach ($name in $patchBodyNames) {
     $object = 'obj/patch/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'

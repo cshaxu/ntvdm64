@@ -1173,3 +1173,19 @@ not as ntvdm's public image classifier; S4 still owns its run16 migration.
 Independent worker entry, original BaseClient transport selection and the
 actual ntvdm.exe link are still pending. These archives are not three-program
 execution evidence or evidence of removed mirror diff/overlay lines.
+## Compile-only pure-worker entry
+
+The new app/worker_entry.c extracts only process/session/media/shell assembly
+from the existing app entry. It does not construct a launch declaration,
+classify a target image, run native programs, rewrite the process environment,
+construct private argv or publish a local command. It passes the actual CRT
+argc/argv to the existing shell's original-entry execution wrapper and uses
+the same session disposal mechanism. The explicit worker_entry.obj x86 build
+passes. COFF symbols show only session initialize/activate/dispose, shell
+initialize/select/open/run, the two media-root operations and CRT cookies.
+
+No ntvdm.exe link or runtime acceptance is claimed. The independent link must
+select the project BaseClient transport, not an accidental system CSR import
+or the legacy local provider. Broker registration and authenticated command
+retrieval remain to be composed. Deployment and the existing app entry are
+unchanged; this source is not selected by the old product target.

@@ -185,6 +185,28 @@ ntvdm executable or runtime acceptance. COMMAND's retained image helper is not
 a new public worker launcher; S4 still must route child launches through run16.
 Both archives build and their actual librarian member lists were checked.
 
+`worker_entry.c` is the compile-only pure-worker main. Its session/media/shell
+assembly is extracted from the existing entry, using the same original-entry
+execution wrapper and session disposal. It passes argc/argv unchanged and
+inherits the launcher's environment. It contains no launch declaration, image
+classification, native child launch or local command publication. The x86
+object compiles; its COFF external list contains only the nine session/media/
+shell functions plus CRT security-cookie symbols. This is not a runtime test
+or an independent exe: the final link must first select authenticated project
+BaseClient transport and prove no system CSR/legacy local fallback is selected.
+No broker registration or transport is claimed implemented by this file.
+
+`worker_entry.c` is the compile-only pure-worker main. Its session/media/shell
+assembly is extracted from the existing entry, using the same original-entry
+execution wrapper and session disposal. It passes argc/argv unchanged and
+inherits the launcher's environment. It contains no launch declaration, image
+classification, native child launch or local command publication. The x86
+object compiles; its COFF external list contains only the nine session/media/
+shell functions plus CRT security-cookie symbols. This is not a runtime test
+or an independent exe: the final link must first select authenticated project
+BaseClient transport and prove no system CSR/legacy local fallback is selected.
+No broker registration or transport is claimed implemented by this file.
+
 ## T412 standalone service composition
 
 `basesrv_entry.c` is the formal build-only broker entry. It selects original
