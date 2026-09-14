@@ -39,18 +39,12 @@ nonzero reentry wake, empty-WOW polling and cleanup. Link-map ownership is
 checked. This is same-process focused evidence, not product selection or
 cross-process acceptance; S2 remains active and the deployed baseline is unchanged.
 
-S2 also restores the complete original GetNextVDMCommand body under its
-source-file command cohort. Original client/server focused tests now pass
-first-query, short-buffer/error mapping, retry/copy and capture cleanup; the
-default environment cohort still compiles. The command cohort is not yet a
-deployed product provider. Remaining client lifecycle and finite bindings
-must be completed before the local policy can be removed.
-
-The same source cohort now includes original exit, current directories, BAT
-notification and WOWEXEC registration (710 original lines restored in total).
-Focused tests pass real client wait/wake/retry with cleared exit code and
-original cleanup. This remains test-graph selection, not product publication;
-classification, launch/update client routines and product bindings remain S2 work.
+The original command cohort restores GetNextVDMCommand, exit, current
+directories, BAT notification, WOWEXEC registration and launch update.
+Focused tests pass client capacity/error mapping, wait/wake/retry, capture
+cleanup and registration; the default environment cohort still compiles.
+Detailed source identities and assertions are retained in the linked S2
+evidence. Product selection and retirement of local policy remain unfinished.
 
 BaseUpdateVDMEntry is now restored and passes original client/server process-to-
 wait conversion (767 original client lines restored total). Classification
@@ -58,6 +52,11 @@ review proves modern native path conversion writes beyond the old 12-byte
 relative-name structure; the guarded ABI probe is recorded in S2 evidence.
 Its correctly sized binding and classifier restoration are next. No current
 runtime regression or three-product acceptance is claimed from this finding.
+
+The native classifier dependency now passes exact original-status assertions
+for real MEM, COMMAND, EDIT and WRITE files, with unchanged input hashes.
+This supports retaining original classification branches in run16; it is
+not a guest execution test or selected classifier. See the same S2 evidence.
 
 ## T412 S1 historical checkpoints
 

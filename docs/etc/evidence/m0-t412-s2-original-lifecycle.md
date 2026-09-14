@@ -158,3 +158,36 @@ NT4 logic. The next restoration must supply a correctly sized finite native
 declaration binding and verify image statuses, malformed names, DLL rejection
 and cleanup before selecting the original classifier. Do not patch the
 classification algorithm or invoke modern NTDLL with the undersized old type.
+
+## Native classifier dependency verification
+
+The next source review located the original path-conversion body in pinned
+OpenNT `base/ntdll/curdir.c:1755`, not the kernel RTL directory. Its optional
+relative-name result borrows the current-directory handle and points inside
+the allocated full-path buffer. This explains why original GetBinaryTypeW
+frees the full-path allocation but does not close that directory handle.
+It does not establish ownership of the modern extra DWORD; a declaration-only
+binding still requires that check. No NTDLL implementation is imported.
+
+The x86 /MT path ABI probe now also exercises the original classifier's native
+image dependency against the four real package files. It opens execute-only
+file handles with read/delete sharing, calls NtCreateSection with SEC_IMAGE
+and PAGE_EXECUTE, closes resources and executes no guest code. Its driver
+records sizes and SHA-256 identities and checks the inputs are unchanged.
+Command: `node tools/audit/Verify-BrokerPathNameAbi.mjs`; results remain under
+`build/M0-T412/S2/path-abi/result.json`.
+
+| Input | Actual native status | Original GetBinaryTypeW disposition |
+| --- | --- | --- |
+| MEM.EXE | C0000130, STATUS_INVALID_IMAGE_PROTECT | DOS binary |
+| COMMAND.COM | C000012F, STATUS_INVALID_IMAGE_NOT_MZ | BaseIsDosApplication suffix path |
+| EDIT.COM | C000012F, STATUS_INVALID_IMAGE_NOT_MZ | BaseIsDosApplication suffix path |
+| system32/WRITE.EXE | C0000131, STATUS_INVALID_IMAGE_WIN_16 | WOW binary |
+
+All four exact status assertions pass; no section is returned. Status names
+are checked against pinned OpenNT `public/sdk/inc/ntstatus.h`. This is native
+dependency evidence, not execution of the restored classifier, guest runtime
+acceptance, PE/DLL/malformed-image coverage or S2 closure. The finding supports
+keeping the original classification branches rather than introducing another
+binary parser. In the final composition only run16 invokes file classification;
+basesrv receives BinaryType for original DOS/WOW policy and ntvdm is the worker.
