@@ -153,6 +153,20 @@ message layout becomes the wire protocol. Original BaseClient lifecycle calls in
 fixture now pass through this mapping. Authentication and full message-body
 validation remain prerequisites of product endpoint use.
 
+`base_service.h`/`base_service.c` compose a process-local original BaseSrv
+instance and opaque registered connections for the formal basesrv entry. The
+unavailable CSR connection shell is replaced with existing process-registry
+and request-thread bindings; original first-VDM policy stays in srvvdm.c.
+Registration retains the authenticated process, rejects duplicate PIDs, assigns
+the registry generation and releases it on disconnect. A service lock serializes
+dispatch. This current entry admits no commands/resources, so rundown only
+removes registration; original task cleanup must be wired before command admission.
+RPC guarantees connection lifetime across calls and invokes rundown after loss.
+Rundown invariant failure is fail-fast, not silently leaked or reported success;
+that exceptional path remains untested. Only one service instance per process
+is supported, consistent with original globals. Product connection tests use
+this binding, not the earlier resource fixture bridge.
+
 `base_command.h`/`base_command.c` compose CheckVDM's copied request from the
 versioned envelope, values, startup and eight buffers. The decoder validates
 the entire message into local temporary storage before publishing borrowed

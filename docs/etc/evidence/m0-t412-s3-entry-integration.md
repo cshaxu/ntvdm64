@@ -746,4 +746,33 @@ file/event attachment tests remain separate from source-site resource delivery.
 Original BaseSrvCheckDOS allocates/copies on the absent-record path. The parent
 event and standard-stream delivery belong to later update/reuse paths, not
 this first admission. Actual run16 worker creation/registration, resource
-callbacks, full command return and three executable deployment remain open.
+callbacks, full command return and three executable deployment are not complete.
+
+## Formal basesrv executable connection composition
+
+The formal graph now builds basesrv.exe from app/basesrv_entry.c, native MIDL
+service stubs, original BaseSrv and finite service/registry/request bindings.
+Its manifest records entry/IDL hashes and selected libraries. The product map
+selects original BaseSrvIsFirstVDM and service.obj; no fixture implementation
+is linked. This is an explicit build-only target, not a publication migration.
+
+Verify-BasesrvProduct passes against that actual x86 executable: authenticated
+connection, duplicate PID registration refusal, wrong-generation query and
+disconnect refusal, first-VDM 1 then 0, explicit disconnect and reconnect with
+a newer generation while preserving the service-global flag. A second owned
+basesrv returns RPC_S_DUPLICATE_ENDPOINT (1740), leaving the first responsive.
+All outputs are under build/M0-T412/S3/basesrv-product. Readiness is established
+by successful RPC, not the diagnostic listening line.
+
+The native connection holds an original registry record and restores bounded
+request/registry thread bindings around source dispatch. RPC context rundown
+owns dropped registrations; abnormal-loss/concurrent-rundown tests remain open.
+No commands/resources are yet admitted by this product interface, so registration
+teardown is not presented as task cleanup. First-VDM uses original policy and
+the service lock required by S1, not a replacement flag. The existing original
+BaseClient/BaseSrv lifecycle suite also passes with the updated formal archive.
+
+The verifier terminates only its owned server after explicit client disconnect.
+Idle/empty shutdown, all source command/resource paths, launcher integration,
+worker composition and three-program DOS execution remain unfinished. The
+deployed ntvdm32.exe is unchanged; basesrv.exe is not ready for user deployment.

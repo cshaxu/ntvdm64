@@ -2,8 +2,15 @@
 
 Versioned, fixed-width cross-process coordination contract. The legacy wire/
 registry modules below remain in-process contract fixtures. S3's rpc_security
-module supplies the reusable native authentication boundary; it is currently
-exercised by real RPC fixtures, not yet by the three product executables.
+module supplies the reusable native authentication boundary, selected by the
+build-only basesrv entry and real RPC fixtures. Three-program delivery is pending.
+
+`service.idl` defines the formal service connection interface with RPC-owned
+opaque context handles and typed process attachments. Context handles are
+transport capabilities, not serialized native command fields. App authenticates
+every connect/query/disconnect and the original binding validates PID/generation;
+rundown drops registration after outstanding calls. Command/resource endpoints
+are not admitted by this initial interface yet. Generated stubs stay under build.
 
 `rpc_security.c/.h` is new finite modern transport glue, not original BaseSrv
 policy. NT4 CSR port/process authentication cannot be reused without the

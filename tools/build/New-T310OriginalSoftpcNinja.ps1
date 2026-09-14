@@ -1045,6 +1045,7 @@ if ($Architecture -eq 'x86') {
             @('srvvdm', 'src/opennt-host/base/win32/server/srvvdm.c', $baseServerFlags),
             @('exports', 'src/opennt-host/windows/core/ntuser/server/exports.c', $baseServerFlags))
         'opennt-base-bindings' = @(
+            @('service', 'src/adapter-opennt-host/basesrv/source/base_service.c', $baseServerFlags),
             @('command', 'src/adapter-opennt-host/basesrv/source/base_command.c', $baseServerFlags),
             @('values', 'src/adapter-opennt-host/basesrv/source/base_values.c', $baseServerFlags),
             @('payload', 'src/adapter-opennt-host/basesrv/source/base_payload.c', $baseServerFlags),
@@ -1068,7 +1069,7 @@ if ($Architecture -eq 'x86') {
                 path = $member[1]
                 sha256 = Get-NodeSha256 (Join-Path $root $member[1])
                 object = $object
-                buildDisposition = 'explicit-x86-owner-archive; not-yet-selected-by-product-exe'
+                buildDisposition = 'explicit-x86-owner-archive; product selection determined by composition and link map'
             }
             $object
         }
@@ -1097,6 +1098,17 @@ if ($Architecture -eq 'x86') {
     $graph.Add('rule run16_link')
     $graph.Add('  command = link.exe /nologo /subsystem:console /entry:wWinMainCRTStartup /opt:ref /out:$out /map:$out.map $in ntdll.lib kernel32.lib shell32.lib legacy_stdio_definitions.lib')
     $graph.Add('build run16.exe: run16_link obj/run16/entry.obj obj/run16/support.obj opennt-base-client.lib opennt-base-bindings.lib original-opennt-rtl-x86.lib')
+    $graph.Add('rule basesrv_idl')
+    $graph.Add('  command = midl.exe /nologo /env win32 /target NT100 /prefix client Client_ /prefix server Server_ /out obj/basesrv /h service.h /cstub service_c.c /sstub service_s.c $in')
+    $graph.Add('build obj/basesrv/service_s.c | obj/basesrv/service_c.c obj/basesrv/service.h: basesrv_idl ' + (NinjaPath (Join-Path $root 'src/broker/service.idl')))
+    $nativeServiceFlags = '/nologo /c /MT /W4 /we4013 /showIncludes /I obj/basesrv /I "' + (NinjaPath (Join-Path $root 'src')) + '"'
+    $graph.Add('build obj/basesrv/entry.obj: cc ' + (NinjaPath (Join-Path $root 'src/app/basesrv_entry.c')) + ' | obj/basesrv/service.h')
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build obj/basesrv/stub.obj: cc obj/basesrv/service_s.c | obj/basesrv/service.h')
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('rule basesrv_link')
+    $graph.Add('  command = link.exe /nologo /subsystem:console /opt:ref /out:$out /map:$out.map $in rpcrt4.lib ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib')
+    $graph.Add('build basesrv.exe: basesrv_link obj/basesrv/entry.obj obj/basesrv/stub.obj obj/run16/support.obj opennt-base-server.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib')
 }
 $appObjects = foreach ($name in $appNames) {
     $object = 'obj/app/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
@@ -1229,6 +1241,15 @@ $graph.Add('default original-softpc-candidate')
     openntBaseVdmSources = @($openntBaseVdmNames)
     openntBrokerOwnerArchives = @($baseOwnerManifest)
     brokerTransportArchive = @($brokerTransportManifest)
+    brokerComposition = [ordered]@{
+        target = 'basesrv.exe'
+        selected = ($Architecture -eq 'x86')
+        disposition = 'explicit build-only S3 WIP; authenticated registration/first-VDM; commands and publication pending'
+        sources = @('src/app/basesrv_entry.c', 'src/broker/service.idl' | ForEach-Object {
+            [ordered]@{ path = $_; sha256 = Get-NodeSha256 (Join-Path $root $_) }
+        })
+        libraries = @('opennt-base-server.lib', 'opennt-base-bindings.lib', 'broker-transport.lib', 'original-opennt-rtl-x86.lib')
+    }
     launcherComposition = [ordered]@{
         target = 'run16.exe'
         selected = ($Architecture -eq 'x86')

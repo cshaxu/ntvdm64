@@ -47,9 +47,9 @@ wrong-peer rejection. This is not service dispatch or product acceptance;
 genuine cross-user/session and remaining security/receipt gates stay open.
 The [entry and lifecycle tests](../etc/evidence/m0-t412-s3-entry-integration.md)
 select real PEB/TEB/heap, request-thread and registered-process bindings. Run16's native branch
-passes command-tail, directory/environment/stream and exit tests. Actual broker
-dispatch and DOS/WOW delivery remain pending; this build-only checkpoint is
-neither published nor three-program acceptance. Original resource-call binding
+passes command-tail, directory/environment/stream and exit tests. Formal basesrv
+now links original service registration/first-VDM dispatch; full command delivery
+and three-program acceptance remain open. Original resource-call binding
 and synchronous wait-event failure rollback also pass; remote callbacks remain open.
 Formal archives now supply dispatch, copied CheckVDM payload/startup and typed
 receipt bindings. Original lifecycle, journal and nine-case RPC suites pass

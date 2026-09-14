@@ -133,6 +133,20 @@ exit status. DOS/WOW dispatch deliberately fails while S3 IPC integration is
 unfinished. This intermediate target is not publishable and does not replace
 the deployed ntvdm32.exe. See the [entry evidence](../../docs/etc/evidence/m0-t412-s3-entry-integration.md).
 
+## T412 standalone service composition
+
+`basesrv_entry.c` is the formal build-only broker entry. It selects original
+BaseSrv through adapter-opennt-host's connection binding and native local RPC
+generated from broker/service.idl. Endpoint scope is the captured logon LUID
+and session; WINNT packet privacy and attached live caller PID are checked
+before registration/query/disconnect. Duplicate endpoint ownership fails;
+successful authenticated RPC, not a printed line, establishes readiness.
+No fixture source enters this link. Current operations are connection
+registration, original first-VDM query and disconnect only. DOS commands,
+worker registration, resource callbacks and empty/idle shutdown are unfinished;
+this executable must not be published or substituted for the three-program
+delivery. Tests terminate only their own server while shutdown is unfinished.
+
 ## M0 T388 S5 display arbitration divergence
 
 | Exception | Original purpose | Reason | Implementation | Files |
