@@ -52,6 +52,14 @@ each observation.  The stage trace is default-off and only activates when
 `MVDM_BASESRV_TRACE_PATH` is supplied; it records worker phase/status without
 command text or handles.
 
+Concurrent staging evidence also started two `run16.exe MEM.EXE` launchers at
+once.  Both independently completed `Check -> Reserve -> Prepare`, each
+authenticated a distinct worker and reached repeated original GetNext calls.
+Only one `basesrv.exe` endpoint was present; both launcher PIDs exited.  The
+two workers are deliberately not selected for cross-launch reuse in S3: that
+requires the source-proven readiness/Console eligibility work assigned to S5.
+The broker and remaining worker were test-owned and stopped after observation.
+
 ## Product BaseClient first-VDM transport checkpoint
 
 The independent x86 `ntvdm.exe` now links the original BaseClient archive with
