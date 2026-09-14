@@ -26,7 +26,10 @@ static IUH mvdm_cvidc_jump_restart = 100;
 
 IUH mvdm_cvidc_get_jump_calibration(void)
 {
-    return mvdm_cvidc_jump_restart;
+    /* The recovered CCPU fallback has no instruction-jump calibration
+     * counter.  qevnt.c treats zero as the original no-recalibration path;
+     * do not conflate that with its independently configurable restart. */
+    return 0;
 }
 
 IUH mvdm_cvidc_get_jump_restart(void)

@@ -2,18 +2,18 @@
 
 ## Current Work
 
-**Active: M0 T411 S3.**
+**Active: M0 T411 S4.**
 
 ## Active Packet
 
-### M0 T411 S3 — Original quick-event provider closure
+### M0 T411 S4 — CCPU event-profile closure
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T411 S3, Ordinary Mode. |
+| Identifier Mode | M0 T411 S4, Ordinary Mode. |
 | Admission And Approval | Owner approved the admitted T411 to begin execution: “准入本t任务开始执行”. S2 is closed below; this is the second restoration group in its approved proposal. |
 | Candidate Proposal | [CCPU40 C-VID and event-path research and restoration](../proposals/proposal-ccpu40-cvid-event-path-restoration-001.md). |
-| Objective | Recover or precisely bound the original CCPU-compatible provider for C-VID `Get/SetJump*` slots, including qevnt initialization/reset/calibration semantics, and remove the local shared-100 replacement only if the source-backed provider is executable through a finite standalone boundary. |
+| Objective | Audit every CCPU event producer and consumer, restore original acknowledgement ordering where source-proven, retaining only minimum thread-safe transport. |
 | Non-goals | No event-bitmap policy change, CPU instruction change, CPU30/MONITOR selection, broker work, arbitrary timing algorithm, or deletion of the C-VID binder. |
 | Reference Baseline | [S1 audit](../etc/evidence/m0-t411-s1-ccpu40-cvid-event-audit.md) classifies C05 as the only quantified autonomous C-VID timing replacement; [S2 closure](../etc/evidence/m0-t411-s2-cvidc-vector-closure.md) proves the binder is retained. |
 | Files And ABI Surface | `qevnt.c`, `quick_ev.c`, C-VID `accessfn.c`, CCPU timing provider, binder/generator, original selected system manifest and focused x86 timing fixture. No public ABI change. |
@@ -23,7 +23,7 @@
 | Asset Needs | Existing selected OpenNT/OpenNT-4.5 source, local x86 toolchain and a disposable build root under `build/M0-T411/S3/`. |
 | Reporting Requirements | Separate original source, adapter, external-patch and autonomous material; name every unavailable dependency and report positive/negative evidence. |
 | Stop Conditions | No original provider can cross a finite standalone ABI, a proposed replacement would invent timing policy, source/build evidence conflicts, or the path enters event-bitmap consumption. Preserve current behavior and hand off E01 to S4. |
-| Exit Criteria | Source-first disposition of all C05 providers, any minimal restoration committed/pushed with focused x86 proof, and exact retained/removal count. |
+| Exit Criteria | Source-first event-profile disposition with focused x86 proof, committed/pushed; remaining integration follows S5. |
 | Original Owner Request | “准入本t任务开始执行”. |
 | Similar-Issue Sweep | qevnt/quick_ev source manifests, calibration versus restart calls, C-VID access wrappers, CCPU heartbeat conversion, reset and overflow paths, threaded callback and lock boundaries. |
 
@@ -35,6 +35,12 @@ source-proven removable lines**: early video publication and later full
 publication serve separate original-order requirements.  The focused x86
 fixture passes both positive routing and retained-null negative cases.  C05
 and E01 remain unmodified and transfer respectively to S3 and S4.
+
+## S3 Closure Record
+
+S3 corrected C05: calibration is now the registered unavailable value zero,
+while restart remains independently writable. The focused x86 fixture passes;
+the source and verification record is indexed in `docs/etc/evidence`.
 
 ## S1 Closure Record
 

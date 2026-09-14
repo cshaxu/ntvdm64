@@ -55,6 +55,15 @@ int main(void)
             stderr);
         return 2;
     }
+    if (Cpu.GetJumpCalibrateVal() != 0 || Cpu.GetJumpInitialVal() != 100) {
+        fputs("C-VID quick-event calibration/restart providers conflated\n", stderr);
+        return 4;
+    }
+    Cpu.SetJumpInitialVal(73);
+    if (Cpu.GetJumpCalibrateVal() != 0 || Cpu.GetJumpInitialVal() != 73) {
+        fputs("C-VID quick-event restart state did not remain independent\n", stderr);
+        return 5;
+    }
 
     /* A second publication is the normal setup_vga_globals path after the
      * early video-only bind in main.c.  It must be idempotent. */
