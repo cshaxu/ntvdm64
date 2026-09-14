@@ -50,6 +50,23 @@ DWORD broker_vdm_receipt_resolve(broker_vdm_receipts *state, uint32_t generation
     }
     return ERROR_NOT_FOUND;
 }
+DWORD broker_vdm_receipt_take(broker_vdm_receipts *state,uint32_t generation,uint32_t id,uint32_t role,HANDLE *resource)
+{
+    broker_vdm_receipt_entry **link,*entry;
+    HANDLE borrowed;
+    DWORD error;
+    if (!resource) return ERROR_INVALID_PARAMETER;
+    *resource=NULL;
+    error=broker_vdm_receipt_resolve(state,generation,id,role,&borrowed);
+    if (error) return error;
+    for (link=&state->entries;*link;link=&(*link)->next) if ((*link)->id==id) {
+        entry=*link; *link=entry->next;
+        *resource=borrowed;
+        HeapFree(GetProcessHeap(),0,entry);
+        return ERROR_SUCCESS;
+    }
+    return ERROR_NOT_FOUND;
+}
 DWORD broker_vdm_receipt_revoke(broker_vdm_receipts *state, uint32_t generation, uint32_t id)
 {
     broker_vdm_receipt_entry **link, *entry;

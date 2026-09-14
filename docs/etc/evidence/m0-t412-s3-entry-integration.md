@@ -862,3 +862,28 @@ every truncated Update length, request-ID publication and unchanged native
 resource fields. Existing command/capacity/startup/wait/cleanup cases remain
 passing. Source resource callbacks and complete product command admission are
 still unfinished; this is not three-program acceptance.
+
+## Receiver ownership publication
+
+Original client GetNext waits on WaitObjectForVDM without closing it between
+retries; original ExitVDM finally closes the returned wait handle. Standard
+streams likewise become original consumer-owned handles after command delivery.
+Receipt resolve alone cannot implement that handoff: a later drain would close
+a handle already owned/closed by the original consumer. Duplicating on every
+lookup would also break stable wait identity and leak references.
+
+broker_vdm_receipt_take now removes the validated generation/role receipt
+without closing or duplicating its native reference. Resolve remains borrowed;
+take explicitly transfers ownership. Aliases must be grouped before taking one
+ID once, and the caller must finish validation/publication and serialize access.
+This does not change original service policy or authorize indeterminate replay.
+
+The formal transport archive and Verify-VdmDeliveryJournal pass. Real event
+tests reject wrong role/generation, preserve the same handle on take, reject
+repeat take and retain validity after revoke/drain. Real pipe tests preserve
+stdout/stderr alias identity and inheritance; after sender and receipt references
+are gone the taken writer still works, and only its final close produces
+ERROR_BROKEN_PIPE on the reader. Existing partial/unknown/retry/commit tests pass.
+This is native ownership evidence, not a guest run or completed source callback.
+Integration into authenticated recipient endpoints and original close paths
+remains required before enabling product command delivery.

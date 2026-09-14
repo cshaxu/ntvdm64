@@ -41,6 +41,16 @@ role, rejecting stream/event confusion and parent/worker-wait substitution.
 The three stream roles share one family to preserve source stream aliases;
 this neither widens retained access rights nor validates the kernel object
 type (the authenticated typed attachment endpoint must do that first).
+The receipt take operation removes an entry without duplicating or closing its
+native reference, transferring ownership to the validated consumer. Wait retries
+continue to borrow the same handle; final original ExitVDM close must receive
+ownership once. Stream aliases must be grouped by receipt before take so they
+keep one handle identity. Take is not an acknowledgement/replay mechanism and
+must not precede validation or leave pending acquisition rollback behind.
+After transfer, revoke/drain cannot close the new owner's handle. Real event and
+pipe tests verify identity, inheritability, alias grouping and final EOF; actual
+source-site handoff integration is still required.
+
 The owner must serialize receipt operations and resource use/revocation; a
 resolved HANDLE is borrowed until revocation, never serialized. Initialization
 requires fresh/drained storage and a fresh trusted generation. This is not a

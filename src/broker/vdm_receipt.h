@@ -25,6 +25,12 @@ DWORD broker_vdm_receipt_accept(broker_vdm_receipts *, uint32_t role, HANDLE, ui
 /* Expected role is supplied by the decoded operation, not by the sender's
  * receipt claim. Stream aliases share a family; wait roles remain distinct. */
 DWORD broker_vdm_receipt_resolve(broker_vdm_receipts *, uint32_t generation, uint32_t id, uint32_t expected_role, HANDLE *);
+/* Transfer the retained reference, removing it WITHOUT closing/duplicating it.
+ * Use only after all response validation and successful ownership publication.
+ * Wait retries borrow via resolve; final original close takes ownership once.
+ * Group aliases by receipt before taking: one ID yields one owned HANDLE.
+ * Failure leaves the receipt intact and sets output NULL. Caller owns success. */
+DWORD broker_vdm_receipt_take(broker_vdm_receipts *,uint32_t generation,uint32_t id,uint32_t expected_role,HANDLE *);
 DWORD broker_vdm_receipt_revoke(broker_vdm_receipts *, uint32_t generation, uint32_t id);
 void broker_vdm_receipts_drain(broker_vdm_receipts *);
 #endif

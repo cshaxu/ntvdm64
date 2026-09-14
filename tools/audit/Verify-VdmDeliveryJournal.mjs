@@ -14,7 +14,7 @@ const compiled=spawnSync('cmd.exe',['/d','/c',`call "${command}"`],{cwd:build,wi
 fs.writeFileSync(path.join(build,'build.log'),compiled.stdout+compiled.stderr);
 assert.equal(compiled.status,0,'Build failed; see build.log');
 const map=fs.readFileSync(path.join(build,'journal.map'),'utf8');
-for (const [symbol,unit] of [['_broker_vdm_delivery_rollback','vdm_delivery'],['_broker_vdm_receipt_accept','vdm_receipt']])
+for (const [symbol,unit] of [['_broker_vdm_delivery_rollback','vdm_delivery'],['_broker_vdm_receipt_accept','vdm_receipt'],['_broker_vdm_receipt_take','vdm_receipt']])
     assert(map.split(/\r?\n/).some(line=>line.includes(symbol)&&line.includes(`broker-transport:${unit}.obj`)),`Missing formal provider: ${symbol}`);
 const exe=path.join(build,'journal.exe'), bytes=fs.readFileSync(exe);
 assert.equal(bytes.readUInt16LE(bytes.readUInt32LE(0x3c)+4),0x14c);
