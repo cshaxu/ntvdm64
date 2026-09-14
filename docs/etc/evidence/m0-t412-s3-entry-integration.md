@@ -519,3 +519,29 @@ The journal fixture also checks parent/worker role mismatch and invalid role.
 All outputs remain under the existing S3 build roots. Actual command RPC
 decoding, resource callback integration and three-program execution are still
 open; no deployment or guest acceptance is claimed.
+
+## CheckVDM native payload binding
+
+base_payload now maps all eight BASE_CHECKVDM_MSG variable fields to the
+existing pointer-free payload fragment and back. Original basemsg.h supplies
+the field identities and USHORT/ULONG widths; original BaseCheckVDM and
+BaseSrv command copying retain ownership and policy. The excluded CSR shared
+address translation is replaced only by borrowed pointers into checked copied
+bytes. No mirror change, new queue, capture allocator or service policy is
+introduced. The decoder checks all spans and native widths before mutation;
+CheckVDM input requires copied bytes, not GetNext's capacity-only form.
+Operation-specific string validation and authentication still precede service
+dispatch in the eventual endpoint. This helper is not a full hostile-input
+RPC decoder.
+
+Formal S3/product owner build passes. Verify-BrokerOriginalLifecycle.mjs now
+copies real BaseCheckVDM captures through the native payload and startup
+bindings before dispatching original BaseSrv, then restores original capture
+pointers before cleanup. The formal payload object is verified in the map.
+All original lifecycle/capture/failure tests pass, plus explicit rejection of
+a 65,536-byte command length and a capacity-only CheckVDM input with unchanged
+destination fields. Test-owned payload storage is released after synchronous
+dispatch; only original server-owned command copies survive. Outputs remain
+under S3/original-lifecycle. Full command envelope, receive/reply translation,
+resource identities and actual RPC service integration remain unfinished.
+No three-program acceptance or deployment is claimed.

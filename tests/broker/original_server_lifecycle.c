@@ -6,6 +6,7 @@
 #include <base_process.h>
 #include <base_dispatch.h>
 #include <base_startup.h>
+#include <base_payload.h>
 #include "broker/vdm_receipt.h"
 #include "broker/vdm_delivery.h"
 #include <stdio.h>
@@ -144,6 +145,9 @@ NTSTATUS NTAPI CsrClientCallServer(PCSR_API_MSG message, PCSR_CAPTURE_HEADER cap
     STARTUPINFOA decoded;
     LPSTARTUPINFOA savedStartup=NULL;
     broker_vdm_startup startupWire;
+    BASE_CHECKVDM_MSG savedCheck;
+    void *payload=NULL;
+    uint32_t payloadBytes;
     (void)capture;
     if (number == CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepCheckVDM)) ++launchCalls;
     if (enqueueGate && number == CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepGetNextVDMCommand)) {
@@ -153,14 +157,31 @@ NTSTATUS NTAPI CsrClientCallServer(PCSR_API_MSG message, PCSR_CAPTURE_HEADER cap
     }
     if (number == CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepCheckVDM)) {
         PBASE_CHECKVDM_MSG request=&((PBASE_API_MSG)message)->u.CheckVDM;
+        savedCheck=*request;
+        if (!OpenNtBaseEncodeCheckPayload(request,NULL,0,&payloadBytes)) return STATUS_INVALID_PARAMETER;
+        payload=HeapAlloc(GetProcessHeap(),0,payloadBytes);
+        if (!payload) return STATUS_NO_MEMORY;
+        if (!OpenNtBaseEncodeCheckPayload(request,payload,payloadBytes,&payloadBytes) ||
+            !OpenNtBaseDecodeCheckPayload(payload,payloadBytes,request)) {
+            HeapFree(GetProcessHeap(),0,payload); return STATUS_INVALID_PARAMETER;
+        }
         savedStartup=request->StartupInfo;
         OpenNtBaseEncodeStartup(savedStartup,&startupWire);
-        if (!OpenNtBaseDecodeStartup(&startupWire,&decoded)) return STATUS_INVALID_PARAMETER;
+        if (!OpenNtBaseDecodeStartup(&startupWire,&decoded)) {
+            *request=savedCheck; HeapFree(GetProcessHeap(),0,payload); return STATUS_INVALID_PARAMETER;
+        }
         request->StartupInfo=startupWire.present?&decoded:NULL;
     }
     result = OpenNtBaseDispatch(message,number,length);
-    if (number == CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepCheckVDM))
-        ((PBASE_API_MSG)message)->u.CheckVDM.StartupInfo=savedStartup;
+    if (number == CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepCheckVDM)) {
+        PBASE_CHECKVDM_MSG request=&((PBASE_API_MSG)message)->u.CheckVDM;
+        request->StartupInfo=savedStartup;
+        request->CmdLine=savedCheck.CmdLine; request->AppName=savedCheck.AppName;
+        request->PifFile=savedCheck.PifFile; request->CurDirectory=savedCheck.CurDirectory;
+        request->Env=savedCheck.Env; request->Desktop=savedCheck.Desktop;
+        request->Title=savedCheck.Title; request->Reserved=savedCheck.Reserved;
+        HeapFree(GetProcessHeap(),0,payload);
+    }
     if (enqueueGate && number == CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepGetNextVDMCommand) &&
         ((PBASE_API_MSG)message)->u.GetNextVDMCommand.WaitObjectForVDM) SetEvent(enqueueGate);
     return result;
@@ -299,6 +320,27 @@ int main(int argc, char **argv)
         CHECK(OpenNtBaseServerRequestThread()==&thread);
     }
     BaseSrvVDMInit();
+    {
+        broker_vdm_payload_input fields[BROKER_VDM_PAYLOAD_FIELDS]={0};
+        BASE_CHECKVDM_MSG decoded,saved;
+        uint32_t bytes;
+        void *large=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,65536);
+        void *wire;
+        CHECK(large!=NULL);
+        fields[0].present=1; fields[0].length=65536; fields[0].data_bytes=65536; fields[0].data=large;
+        CHECK(broker_vdm_payload_encode(fields,NULL,0,&bytes));
+        wire=HeapAlloc(GetProcessHeap(),0,bytes); CHECK(wire!=NULL);
+        CHECK(broker_vdm_payload_encode(fields,wire,bytes,&bytes));
+        memset(&decoded,0xa5,sizeof(decoded)); saved=decoded;
+        CHECK(!OpenNtBaseDecodeCheckPayload(wire,bytes,&decoded));
+        CHECK(!memcmp(&decoded,&saved,sizeof(saved)));
+        fields[0].length=10; fields[0].data_bytes=0;
+        CHECK(broker_vdm_payload_encode(fields,wire,bytes,&bytes));
+        CHECK(!OpenNtBaseDecodeCheckPayload(wire,bytes,&decoded));
+        CHECK(!memcmp(&decoded,&saved,sizeof(saved)));
+        CHECK(HeapFree(GetProcessHeap(),0,wire) && HeapFree(GetProcessHeap(),0,large));
+        puts("PASS: native CheckVDM payload rejects USHORT overflow and capacity-only input without mutation");
+    }
     {
         STARTUPINFOA original,decoded,saved;
         broker_vdm_startup wire;

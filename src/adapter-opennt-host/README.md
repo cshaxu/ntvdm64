@@ -159,6 +159,18 @@ nonempty absent form fails without modifying output. The original lifecycle
 fixture passes with this binding around real BaseCheckVDM requests. Full RPC
 integration remains open; this is not a general STARTUPINFO replacement.
 
+`base_payload.h`/`base_payload.c` bind the eight original BASE_CHECKVDM_MSG
+variable fields to the broker copied-buffer fragment. Decoding validates the
+complete spans, requires actual input bytes rather than advertised output
+capacity, and checks the four USHORT lengths before changing native fields.
+Only those fields change; returned pointers borrow the mutable payload until
+the original synchronous service copies it. No allocator, command selection,
+resource or capture ownership policy is added. Full-operation validation,
+including semantic string validation and authentication, is still required
+before dispatch. The original lifecycle fixture now sends its real BaseCheckVDM
+captures through this binding and restores original capture pointers before
+cleanup. This is a native marshalling component, not the full RPC decoder.
+
 The header supplies no CSR runtime, command policy or success stubs. Keeping
 original CSR declaration records does not admit their historical transport.
 
