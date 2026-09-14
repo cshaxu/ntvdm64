@@ -2,31 +2,37 @@
 
 ## Current Work
 
-**Active: M0 T412 S1.**
+**Active: M0 T412 S2.**
 
 ## Active Packet
 
-### M0 T412 S1 — Broker baseline audit and source-first design
+### M0 T412 S2 — Original BaseSrv/BaseClient lifecycle recovery
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T412 S1; Ordinary Mode, one implementer and one active sequential S packet. |
+| Identifier Mode | M0 T412 S2; Ordinary Mode, one implementer and one active sequential S packet. |
 | Admission And Approval | Owner now explicitly approves completion of T412 according to its proposal, including the authenticated OS-managed resource-transfer exception. Execute S1--S6 sequentially without repeated scope approvals; one S remains active and each verification gate still applies. Commit/push to main remains approved. No kernel/CSR shell or broader CPU/video redesign is admitted. |
-| Objective | Audit D01--D07/D10 and design one original BaseSrv/BaseClient lifecycle across run16.exe, basesrv.exe and ntvdm.exe, minimizing mirror diff, overlay and duplicate autonomous policy. |
-| Non-goals | No broker production implementation during S1; no CSRSS/kernel shell, CPU30/x64 executor, generic shell parser, or claim of full WRITE recovery. Owner approval following the audit checkpoint admits the bounded event-consumer prerequisite repair, not instruction-decoder changes. |
-| Reference Baseline | Entry commit bb9fe640d; selected original OpenNT package provenance and current formal x86 CCPU40 graph. Prior closure records are evidence indexes, not substitutes for selected-provider/runtime proof. |
-| Files And ABI Surface | Governance and indexed audit/design records; BaseSrv/BaseClient and finite broker boundary review. Approved prerequisites: c_main.c event-consumer profile and Console adapter text-cell contract, registers and focused verification tools/tests; no public ABI changes. |
+| Objective | Restore and select the coherent original D01--D07/D10 server/client lifecycle, replacing local policy through source-shaped finite bindings and actual original-body tests. |
+| Non-goals | No CSR/kernel subsystem, CPU/video redesign, guest-media changes or claim of complete WRITE recovery. Three-process transport/publication is S3; test-only binding is not that acceptance. |
+| Reference Baseline | T entry bb9fe640d; S1 delivered through 3fe329737 and the linked consolidated design; selected pinned OpenNT source and formal x86 CCPU40 product graph. |
+| Files And ABI Surface | Original opennt-host BaseSrv/BaseClient bodies and declaration carriers; package-private adapter-opennt-host BaseSrv bindings; formal selection, source/interface registers and focused tests/tools. Existing local providers retire only after replacement selection/proof. |
 | Applicable Rules | Source policy; execution, architecture, coding and document rules; package-first recovery and original-owner placement. |
-| Verification | Per-row provider/design review; approved prerequisite uses source-extracted x86 consumer checks plus actual original CCPU/SAS HALT RESET A/B, formal product build and Console runtime smoke. Distinguish each evidence level; governance and diff checks remain required. |
-| Expected Markers | D01--D07/D10 owner/disposition ledger; measured removal candidates; finite IPC contract; positive/negative integration matrix; explicit prerequisite gaps. No fabricated runtime PASS markers. |
-| Asset Needs | Existing selected source and immutable guest media; build outputs under build/M0-T412/S1/event-profile, observations under O:\ntvdm64\logs. No media import. Approved prerequisite candidates may be temporarily staged for comparison; restore the previous publication on regression. |
-| Reporting Requirements | Report original code recoverable, retained seams with reasons, estimated removable lines by mirror/overlay/autonomous category, unresolved decisions and S2 implementation boundary. |
+| Verification | Compile/link actual original owners on x86, inspect provider maps, run lifecycle/capture/capacity/error/rollback/first-VDM/classifier tests. Test doubles supply mechanics only. Formal build and relevant real workloads after selected-path changes; governance and diff checks. |
+| Expected Markers | Source-owned lifecycle assertions, correct failure/cleanup ordering, no shadow policy and explicit transitional transport removal gate. No cross-process or guest acceptance inferred from a fixture. |
+| Asset Needs | Existing accepted OpenNT sources and immutable guest media. S2 outputs under build/M0-T412/S2; real observations under O:\ntvdm64\logs. Published ntvdm32.exe remains unchanged until verified replacement. |
+| Reporting Requirements | Name recovered original functions, retained finite bindings, actual selected providers, tests and remaining S3 integration work. Report net changes separately from original-source restoration. |
 | Stop Conditions | Missing provenance, unbounded platform dependency, contradictory selected-provider evidence, or changed product scope: record the exact issue; do not manufacture success or a parallel provider. |
-| Exit Criteria | Complete scoped audit and coherent design covering all mandatory broker rows; reconcile executable naming/deployment rules; identify and disposition direct prerequisite gaps before implementation. Report the design before advancing. |
-| Original Owner Request | Admit the next queued T package and first split it into S tasks. Preserve original OpenNT behavior with the smallest finite modern binding. |
+| Exit Criteria | Original coherent server/client lifecycle selected with finite bindings, focused positive/negative tests pass and superseded policy removed; no old autonomous provider used to claim original-body coverage. Sequential delivery precedes S3. |
+| Original Owner Request | 批准按照proposal完成当前T任务。 Reduce diff, reuse original OpenNT code/architecture and build three programs. |
 | Similar-Issue Sweep | Include mirrored diffs, private overlays and adapters; command ownership/capacity/retry, launch rollback, async payload lifetime, worker cleanup and every duplicated local policy in scope. |
 | Candidate Proposal | [Broker design](../proposals/proposal-cross-process-broker-closure-001.md). |
 | Working Plan | [T412 sequential S plan](../etc/operations/m0-t412-broker-restoration-plan.md). |
+
+S1 audit/design is closed by the [consolidated design](../etc/evidence/m0-t412-s1-design-closure.md).
+S2 is the only active packet under the existing whole-T approval. The following
+S1 checkpoints are chronological evidence, not current admission or hold state.
+
+## T412 S1 historical checkpoints
 
 S1 execution checkpoint: [source audit](../etc/evidence/m0-t412-s1-broker-owner-audit.md)
 is supplemented by [original server compilation](../etc/evidence/m0-t412-s1-original-server-compilation.md):

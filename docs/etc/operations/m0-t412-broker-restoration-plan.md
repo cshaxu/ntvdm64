@@ -4,8 +4,9 @@
 
 Owner admission on 2026-09-13 covers the queue-head broker package and asks
 for S decomposition first. [Status](../../states/CURRENT.md) alone owns the
-active packet. S1 is active; S2--S6 are planned, not completed or simultaneous
-active packets. The [single broker proposal](../../proposals/proposal-cross-process-broker-closure-001.md)
+active packet. S1 design is closed by the
+[consolidated review](../evidence/m0-t412-s1-design-closure.md); S2 is active,
+and S3--S6 remain sequential planned work. The [single broker proposal](../../proposals/proposal-cross-process-broker-closure-001.md)
 retains the detailed requirements; this plan supersedes its provisional stage
 grouping without creating another proposal.
 

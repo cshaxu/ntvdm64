@@ -26,6 +26,7 @@ proves the original `FSTI` continuation reaches BOP `FDh`.
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T412 S1 design closure](evidence/m0-t412-s1-design-closure.md) | M0 T412 S1 | Consolidated original-owner, finite binding, entry/deployment and S2--S6 verification decisions. | Retain through T412 closure. |
 | [T412 S1 Console membership](evidence/m0-t412-s1-console-membership.md) | M0 T412 S1 | Isolated same/different Console proof, startup readiness finding and bounded identity-binding design. | Retain through three-program integration and T412 closure. |
 | [T412 S1 original server compilation](evidence/m0-t412-s1-original-server-compilation.md) | M0 T412 S1 | Complete unchanged srvvdm.c x86 compile proof and unresolved binding inventory; no runtime claim. | Retain through original-owner integration and T412 closure. |
 | [T412 S1 RPC resource feasibility](evidence/m0-t412-s1-rpc-resource-feasibility.md) | M0 T412 S1 | Authenticated OS-managed file/event transfer, shared position and read-only negative proof. | Retain through T412 resource-binding and closure verification. |
