@@ -93,6 +93,7 @@ $sessionRoot = Join-Path $root 'src/session'
 $brokerRoot = Join-Path $root 'src/broker'
 $brokerRecordTestSource = Join-Path $root 'tests/broker/base_vdm_record_test.c'
 $baseVdmBrokerTestSource = Join-Path $root 'tests/adapter-basesrv/base_vdm_broker_test.c'
+$baseReservationTestSource = Join-Path $root 'tests/adapter-basesrv/base_reservation_test.c'
 $launchDeclarationWowEntryTestSource = Join-Path $root 'tests/app/launch_declaration_wow_entry_test.c'
 $cpu40DescriptorDomainFixtureSource = Join-Path $root 'tests/mvdm-host/dpmi/cpu40_descriptor_domain_fixture.c'
 $rtlX86FixtureSource = Join-Path $root 'tests/opennt-host/rtl_x86_fixture.c'
@@ -1055,6 +1056,7 @@ if ($Architecture -eq 'x86') {
             @('streams', 'src/adapter-opennt-host/basesrv/source/base_stream.c', $baseServerFlags),
             @('waits', 'src/adapter-opennt-host/basesrv/source/base_wait.c', ($baseServerFlags + ' /DOPENNT_BASE_NATIVE_RESOURCES')),
             @('registry', 'src/adapter-opennt-host/basesrv/source/base_process.c', $baseServerFlags),
+            @('reservation', 'src/adapter-opennt-host/basesrv/source/base_reservation.c', $baseOwnerFlags),
             @('request', 'src/adapter-opennt-host/basesrv/source/base_request.c', $baseServerFlags),
             @('config', 'src/adapter-opennt-host/basesrv/source/base_config.c', $baseOwnerFlags),
             @('process', 'src/adapter-opennt-host/basesrv/source/base_client_process.c', $baseOwnerFlags),
@@ -1093,6 +1095,10 @@ if ($Architecture -eq 'x86') {
     }
     $graph.Add('build broker-transport.lib: lib ' + ($transportObjects -join ' '))
     $graph.Add('build opennt-broker-owners: phony opennt-base-client.lib opennt-base-server.lib opennt-base-bindings.lib broker-transport.lib')
+    $baseReservationTestObject = 'obj/tests/base_reservation_test.obj'
+    $graph.Add('build ' + $baseReservationTestObject + ': cc ' + (NinjaPath $baseReservationTestSource))
+    $graph.Add('  cflags = ' + $baseOwnerFlags)
+    $graph.Add('build basesrv-reservation-test.exe: broker_test_link ' + $baseReservationTestObject + ' opennt-base-bindings.lib')
     $graph.Add('build obj/run16/entry.obj: cc ' + (NinjaPath (Join-Path $root 'src/app/run16_entry.c')))
     $graph.Add('  cflags = ' + $baseOwnerFlags)
     $graph.Add('build obj/run16/support.obj: cc ' + (NinjaPath (Join-Path $root 'src/adapter-mvdm-host-out/win32/source/opennt_support_rtl.c')))

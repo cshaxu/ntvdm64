@@ -30,10 +30,34 @@ node tools/audit/Verify-Run16Entry.mjs
 ```
 
 The three EXEs are build artifacts only.  This checkpoint does **not** deliver
-DOS command submission, launch reservations, Console membership, worker
-creation/registration, `BasepGetNextVDMCommand`, completion, or publication.
+DOS command submission, integrated launch reservation/Console membership,
+worker creation/registration, `BasepGetNextVDMCommand`, completion, or publication.
 Those are still mandatory S3 work; the explicit rejection is a guard against
 misrepresenting this link/transport result as guest execution.
+
+## Launcher-owned worker reservation binding
+
+`base_reservation.c` provides the finite native state needed between an
+original `CheckVDM` no-worker result and a future worker registration.  It
+does not select a task, queue a command, or expose a command wire record.
+The broker creates a monotonically unique reservation only for an authenticated
+launcher PID/generation, original task ID and service-local Console surrogate.
+That numeric ID is correlation only, never worker authority.
+
+Before resuming a newly created worker, the authenticated launcher must submit
+its live OS process reference.  The binding duplicates that reference locally,
+rejects an exited process, and records its PID.  A connecting worker cannot
+nominate an ID: its authenticated PID must match a pre-registered live process;
+the binding then records the worker connection generation exactly once.  Wrong
+launcher identity, duplicate prepare/claim, changed worker generation and
+wrong-owner release are rejected.  Release closes the retained worker reference.
+
+`basesrv-reservation-test.exe` is built from the product
+`opennt-base-bindings.lib` and passed on 2026-09-14.  It covers ordered IDs,
+wrong-launcher refusal, one worker prepare, authenticated claim, replay refusal,
+wrong-owner release and clean destruction.  This is deliberately a binding test,
+not an assertion that `run16` has yet created/resumed/registerd a worker or that
+the original rollback branch has been called.
 
 ## Launcher process-support dependency
 
