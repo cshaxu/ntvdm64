@@ -574,3 +574,32 @@ These are reusable formal graph targets, not a new default product policy.
 The current EXE still selects basesrv-bindings.lib and the old local provider.
 Three-process entry/transport selection and its retirement gate remain open;
 neither S2 closure nor a new deployed executable is claimed by this delivery.
+
+## Original generation registration and process cleanup
+
+Source review traces original srvtask.c BaseSrvCreateProcess after successful
+CSR registration: it marks the registered process fVDM and calls
+BaseSrvUpdateVDMSequenceNumber. srvinit.c's process-disconnect callback calls
+BaseSrvCleanupVDMResources. The complete original implementations already
+exist in the formal server archive; no new cleanup policy or source import is
+needed. The standalone process watcher must eventually provide authenticated
+registered process generations at these edges, not accept a wire PID/sequence.
+
+The focused lifecycle fixture now admits both DOS and shared-WOW tasks through
+original BaseCheckVDM, creates real parent events through BaseUpdateVDMEntry,
+and invokes original registration/cleanup using controlled process carriers.
+For each branch it proves:
+
+- the first sequence assignment persists; a second assignment does not replace it;
+- cleanup for another sequence leaves the parent event pending;
+- a matching sequence without fVDM does not remove the VDM task;
+- matching VDM cleanup signals the parent event and removes the DOS/WOW record;
+- shared-WOW cleanup clears its notification window and sequence identity;
+- repeated cleanup is harmless, and the caller closes its surviving event copy.
+
+Tests pass against the formal owner libraries, along with earlier lifecycle
+checks. Provider-map assertions name both original functions. No actual worker
+was terminated in this fixture: OS death detection, authenticated registration,
+concurrent cleanup and process-generation allocation remain real-process
+integration requirements. Source-owned cleanup coverage does not prove those
+mechanics or authorize a new shadow record table.

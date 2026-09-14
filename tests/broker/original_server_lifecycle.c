@@ -439,6 +439,49 @@ int main(void)
         CHECK(WowAuthId.LowPart==0xffffffff && WowAuthId.HighPart==-1);
         puts("PASS: original shared-WOW admission rejects absent/wrong scope, accepts matching logon and undoes launch");
     }
+    {
+        OPENNT_BASE_INTERACTIVE_SCOPE scope;
+        STARTUPINFOW launch={sizeof(launch)};
+        CHAR envBytes[]="PATH=O:\\ntvdm64\0";
+        ANSI_STRING env={sizeof(envBytes),sizeof(envBytes),envBytes};
+        ULONG types[2]={BINARY_TYPE_DOS,BINARY_TYPE_WIN16},i;
+        CHECK(OpenNtBaseInitializeInteractiveScope(&scope));
+        CHECK(OpenNtBaseBindInteractiveScope(&scope)==NULL);
+        for(i=0;i<2;++i) {
+            CSR_PROCESS worker={0};
+            ULONG task=0, sequence=0x100+i;
+            HANDLE console=i?(HANDLE)-1:(HANDLE)1;
+            HANDLE wait=GetCurrentProcess();
+            LPCWSTR app=i?L"O:\\ntvdm64\\system32\\WRITE.EXE":L"O:\\ntvdm64\\MEM.EXE";
+            ZeroMemory(&m,sizeof(m));
+            CHECK(BaseCheckVDM(types[i],app,app,L"O:\\ntvdm64",&env,&m,&task,0,&launch));
+            CHECK(BaseUpdateVDMEntry(UPDATE_VDM_PROCESS_HANDLE,&wait,task,types[i]));
+            CHECK(WaitForSingleObject(wait,0)==WAIT_TIMEOUT);
+            BaseSrvUpdateVDMSequenceNumber(console,sequence,task);
+            BaseSrvUpdateVDMSequenceNumber(console,sequence+10,task);
+            if(i) CHECK(WOWHead && WOWHead->SequenceNumber==sequence);
+            else {
+                CHECK(BaseSrvGetConsoleRecord(console,&record)==0);
+                CHECK(record->SequenceNumber==sequence);
+            }
+            worker.fVDM=TRUE; worker.SequenceNumber=sequence+10;
+            BaseSrvCleanupVDMResources(&worker);
+            CHECK(WaitForSingleObject(wait,0)==WAIT_TIMEOUT);
+            worker.fVDM=FALSE; worker.SequenceNumber=sequence;
+            BaseSrvCleanupVDMResources(&worker);
+            CHECK(WaitForSingleObject(wait,0)==WAIT_TIMEOUT);
+            worker.fVDM=TRUE;
+            BaseSrvCleanupVDMResources(&worker);
+            CHECK(WaitForSingleObject(wait,0)==WAIT_OBJECT_0);
+            if(i) CHECK(WOWHead==NULL && hwndWowExec==NULL && ulWowExecProcessSequenceNumber==0);
+            else CHECK(BaseSrvGetConsoleRecord(console,&record)==(ULONG)STATUS_INVALID_PARAMETER);
+            BaseSrvCleanupVDMResources(&worker);
+            CHECK(WaitForSingleObject(wait,0)==WAIT_OBJECT_0);
+            CHECK(CloseHandle(wait) && captures==0);
+        }
+        CHECK(OpenNtBaseBindInteractiveScope(NULL)==&scope);
+        puts("PASS: original DOS/WOW generation registration and termination cleanup, wrong generation/role rejection and repeat cleanup");
+    }
     CHECK(captures==0 && HeapDestroy(CsrPortHeap));
     puts("PASS: original first-VDM, record/command/directory capacity, dispatch/completion, parent/worker events, reentry, empty-WOW, cleanup");
     return 0;

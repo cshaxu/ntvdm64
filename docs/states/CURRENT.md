@@ -55,7 +55,8 @@ alignment, real heap exhaustion and cleanup pass. See the linked S2 evidence.
 Product selection, RPC binding, SYSTEM impersonation and guest acceptance remain
 unfinished; classification belongs to run16, not broker or worker. Original
 BaseCheckForVDM passes task-exit tests. Original worker argument construction
-now binds package paths at one system32-specific seam; integration remains open.
+now binds package paths at one system32-specific seam. Original generation-based
+DOS/WOW cleanup passes; real-process integration remains open.
 
 ## T412 S1 historical checkpoints
 

@@ -97,7 +97,7 @@ assert(map.split(/\r?\n/).some(line=>line.includes('_BaseUpdateVDMEntry')&&line.
 assert(map.split(/\r?\n/).some(line=>line.includes('_BaseCheckVDM')&&line.includes('client.obj')),'Original launch provider missing');
 for (const symbol of ['ExitVDM','SetVDMCurrentDirectories','GetVDMCurrentDirectories','CmdBatNotification','RegisterWowExec'])
     assert(map.split(/\r?\n/).some(line=>line.includes(`_${symbol}@`)&&line.includes('client.obj')),`Original client provider missing: ${symbol}`);
-for(const symbol of ['BaseSrvCheckVDM','BaseSrvGetNextVDMCommand','BaseSrvSetReenterCount','BaseSrvExitDOSTask'])
+for(const symbol of ['BaseSrvCheckVDM','BaseSrvGetNextVDMCommand','BaseSrvSetReenterCount','BaseSrvExitDOSTask','BaseSrvUpdateVDMSequenceNumber','BaseSrvCleanupVDMResources'])
     assert(map.split(/\r?\n/).some(line=>line.includes(`_${symbol}`)&&line.includes('srvvdm.obj')),`Original provider missing for ${symbol}`);
 assert(map.split(/\r?\n/).some(line=>line.includes('_BaseGetVdmConfigInfo')&&line.includes('client.obj')),'Original worker configuration provider missing');
 assert(map.split(/\r?\n/).some(line=>line.includes('_BaseCheckForVDM')&&line.includes('client.obj')),'Original task-exit provider missing');
