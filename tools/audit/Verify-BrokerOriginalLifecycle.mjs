@@ -47,6 +47,7 @@ const env=path.join(build,'msvc.cmd');
 fs.writeFileSync(env,'@echo off\r\nset "lifecycle_cwd=%CD%"\r\ncall "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat" -arch=x86 -host_arch=x64 >nul\r\nif errorlevel 1 exit /b %errorlevel%\r\ncd /d "%lifecycle_cwd%"\r\n%*\r\n');
 const includes=`/D_CSRSRV_ /DOPENNT_BASE_VDM_SERVER /we4013 /FI "${root}/src/adapter-opennt-host/basesrv/include/base_server.h" /I "${root}/src/adapter-opennt-host/basesrv/include" /I "${root}/src/opennt-host/base/win32/inc" /I "${root}/src/opennt-host/base/win32/server"`;
 let commands=[
+    `cl.exe ${flags} ${includes} /Fo"${build}/dispatch.obj" "${root}/src/adapter-opennt-host/basesrv/source/base_dispatch.c"`,
     `cl.exe ${flags} ${includes} /DOPENNT_BASE_NATIVE_RESOURCES /Fo"${build}/resources.obj" "${root}/src/adapter-opennt-host/basesrv/source/base_resource.c"`,
     `cl.exe ${flags} ${includes} /Fo"${build}/registry.obj" "${root}/src/adapter-opennt-host/basesrv/source/base_process.c"`,
     `cl.exe ${flags} ${includes} /Fo"${build}/request.obj" "${root}/src/adapter-opennt-host/basesrv/source/base_request.c"`,
@@ -76,7 +77,7 @@ if(ownerBuild) {
 commands.unshift(`cl.exe ${flags} /Gy /Fo"${build}/support.obj" "${root}/src/adapter-mvdm-host-out/win32/source/opennt_support_rtl.c"`);
 const transportBuild=ownerBuild || path.resolve('build/M0-T412/S3/product');
 assert(fs.existsSync(path.join(transportBuild,'broker-transport.lib')),'Build the formal transport archive first');
-commands=commands.map(command=>command.startsWith('link.exe ')?command.replace(' fixture.obj ', ` fixture.obj support.obj "${transportBuild}/broker-transport.lib" ${ownerBuild?'':'registry.obj resources.obj '}`):command);
+commands=commands.map(command=>command.startsWith('link.exe ')?command.replace(' fixture.obj ', ` fixture.obj support.obj "${transportBuild}/broker-transport.lib" ${ownerBuild?'':'registry.obj resources.obj dispatch.obj '}`):command);
 const log=fs.openSync(path.join(build,'build.log'),'w');
 for(const command of commands) {
     const result=spawnSync('cmd.exe',['/d','/c',`call "${env}" ${command}`],{cwd:build,windowsHide:true,windowsVerbatimArguments:true,stdio:['ignore',log,log],timeout:60000});
@@ -94,6 +95,7 @@ assert.deepEqual(fs.readFileSync(ownerPath),ownerBefore,'Original owner changed 
 const image=fs.readFileSync(path.join(build,'original-lifecycle.exe'));
 assert.equal(image.readUInt16LE(image.readUInt32LE(0x3c)+4),0x14c);
 const map=fs.readFileSync(path.join(build,'original-lifecycle.map'),'utf8');
+assert(map.split(/\r?\n/).some(line=>line.includes('_OpenNtBaseDispatch')&&line.includes(ownerBuild?'opennt-base-bindings:dispatch.obj':'dispatch.obj')),'Production dispatch provider missing');
 for (const [symbol,unit] of [['_broker_vdm_delivery_rollback','vdm_delivery'],['_broker_vdm_receipt_accept','vdm_receipt']])
     assert(map.split(/\r?\n/).some(line=>line.includes(symbol)&&line.includes(`broker-transport:${unit}.obj`)),`Missing formal transport provider: ${symbol}`);
 assert(map.includes('opennt-base-server:srvvdm.obj')&&map.includes('opennt-base-client:client.obj'),'Original owner libraries not selected');

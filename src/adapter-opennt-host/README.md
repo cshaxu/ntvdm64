@@ -132,6 +132,21 @@ The original failure branch is tested with a rejected wait-event delivery;
 actual authenticated receipt callbacks remain to be connected before product
 dispatch. This is not permission to forward arbitrary native handle numbers.
 
+`base_dispatch.h`/`base_dispatch.c` supply the finite local dispatch entry for
+the eleven recovered Base VDM APIs. Original srvinit.c's
+BaseServerApiDispatchTable supplies the API-to-handler mapping; composing its
+full initializer would require the excluded CSR server and unrelated Base
+services. This adapter binds only that unavailable routing boundary, with exact
+native payload sizes from basemsg.h. Original srvvdm.c retains every service
+body. A missing local caller, wrong size or other API fails before dispatch;
+ClientId is taken from the bound trusted thread, never the message. The caller
+must already authenticate, validate copied variable buffers/resources and bind
+the live registered context. This API neither decodes untrusted wire bytes nor
+validates arbitrary native pointers. Broker composition must serialize source
+service access and maintain context lifetime. Formal lifecycle tests now use
+this entry instead of a fixture-owned handler switch; real RPC decoding remains
+pending. This finite source-shaped adapter replaces routing only, not CSR.
+
 The header supplies no CSR runtime, command policy or success stubs. Keeping
 original CSR declaration records does not admit their historical transport.
 

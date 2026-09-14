@@ -4,6 +4,7 @@
 #include <base_capture.h>
 #include <base_config.h>
 #include <base_process.h>
+#include <base_dispatch.h>
 #include "broker/vdm_receipt.h"
 #include "broker/vdm_delivery.h"
 #include <stdio.h>
@@ -138,46 +139,17 @@ static ULONG capture_blocks(void)
 NTSTATUS NTAPI CsrClientCallServer(PCSR_API_MSG message, PCSR_CAPTURE_HEADER capture,
     CSR_API_NUMBER number, ULONG length)
 {
-    CSR_REPLY_STATUS reply = 0;
-    ULONG result;
-    (void)capture; (void)length;
-    /* Test transport supplies its authenticated local caller, never wire PID. */
-    message->h.ClientId=thread.ClientId;
-    switch (number) {
-    case CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepCheckVDM):
-        ++launchCalls;
-        result = BaseSrvCheckVDM(message,&reply); break;
-    case CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepIsFirstVDM):
-        result = BaseSrvIsFirstVDM(message,&reply); break;
-    case CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepGetNextVDMCommand):
-        if (enqueueGate) {
-            PBASE_GET_NEXT_VDM_COMMAND_MSG request = &((PBASE_API_MSG)message)->u.GetNextVDMCommand;
-            ++retryCalls;
-            if (retryCalls == 2) retryExit = request->ExitCode;
-        }
-        result = BaseSrvGetNextVDMCommand(message,&reply);
-        if (enqueueGate && ((PBASE_API_MSG)message)->u.GetNextVDMCommand.WaitObjectForVDM)
-            SetEvent(enqueueGate);
-        break;
-    case CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepSetReenterCount):
-        result = BaseSrvSetReenterCount(message,&reply); break;
-    case CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepExitVDM):
-        result = BaseSrvExitVDM(message,&reply); break;
-    case CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepSetVDMCurDirs):
-        result = BaseSrvSetVDMCurDirs(message,&reply); break;
-    case CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepGetVDMCurDirs):
-        result = BaseSrvGetVDMCurDirs(message,&reply); break;
-    case CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepBatNotification):
-        result = BaseSrvBatNotification(message,&reply); break;
-    case CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepRegisterWowExec):
-        result = BaseSrvRegisterWowExec(message,&reply); break;
-    case CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepGetVDMExitCode):
-        result = BaseSrvGetVDMExitCode(message,&reply); break;
-    case CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepUpdateVDMEntry):
-        result = BaseSrvUpdateVDMEntry(message,&reply); break;
-    default: return (NTSTATUS)STATUS_INVALID_PARAMETER;
+    NTSTATUS result;
+    (void)capture;
+    if (number == CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepCheckVDM)) ++launchCalls;
+    if (enqueueGate && number == CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepGetNextVDMCommand)) {
+        PBASE_GET_NEXT_VDM_COMMAND_MSG request = &((PBASE_API_MSG)message)->u.GetNextVDMCommand;
+        ++retryCalls;
+        if (retryCalls == 2) retryExit = request->ExitCode;
     }
-    message->ReturnValue = result;
+    result = OpenNtBaseDispatch(message,number,length);
+    if (enqueueGate && number == CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepGetNextVDMCommand) &&
+        ((PBASE_API_MSG)message)->u.GetNextVDMCommand.WaitObjectForVDM) SetEvent(enqueueGate);
     return result;
 }
 
@@ -398,7 +370,20 @@ int main(int argc, char **argv)
       CHECK(positive.LowPart==0x7fffffff && positive.HighPart==0); }
 
     ZeroMemory(&m,sizeof(m));
-    CHECK(BaseSrvIsFirstVDM((PCSR_API_MSG)&m,&reply) == 0 && m.u.IsFirstVDM.FirstVDM);
+    {
+        CSR_API_NUMBER api=CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepIsFirstVDM);
+        CHECK(OpenNtBaseBindServerRequestThread(NULL)==&thread);
+        CHECK(OpenNtBaseDispatch((PCSR_API_MSG)&m,api,sizeof(m.u.IsFirstVDM))==STATUS_ACCESS_DENIED);
+        CHECK(OpenNtBaseBindServerRequestThread(&thread)==NULL);
+        CHECK(OpenNtBaseDispatch((PCSR_API_MSG)&m,api,sizeof(m.u.IsFirstVDM)-1)==STATUS_INVALID_PARAMETER);
+        CHECK(OpenNtBaseDispatch((PCSR_API_MSG)&m,api,sizeof(m.u.IsFirstVDM)+1)==STATUS_INVALID_PARAMETER);
+        CHECK(OpenNtBaseDispatch((PCSR_API_MSG)&m,CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepCreateProcess),0)==STATUS_INVALID_PARAMETER);
+        m.h.ClientId.UniqueProcess=(HANDLE)0x1234;
+        CHECK(OpenNtBaseDispatch((PCSR_API_MSG)&m,api,sizeof(m.u.IsFirstVDM))==0 && m.u.IsFirstVDM.FirstVDM);
+        CHECK(m.h.ClientId.UniqueProcess==thread.ClientId.UniqueProcess);
+        CHECK(m.h.ClientId.UniqueThread==thread.ClientId.UniqueThread);
+        puts("PASS: production dispatch rejects unbound/short/long/unknown requests without consuming first-VDM state; trusted identity replaces input");
+    }
     CHECK(BaseSrvIsFirstVDM((PCSR_API_MSG)&m,&reply) == 0 && !m.u.IsFirstVDM.FirstVDM);
     CHECK(GetNextVDMCommand(NULL) == FALSE);
 

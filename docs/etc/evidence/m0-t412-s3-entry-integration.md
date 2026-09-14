@@ -409,3 +409,33 @@ negatives and integrity upgraded by the runtime to packet privacy. Outputs
 remain in the corresponding S3 build test roots. No guest run or deployment
 was performed. Product command dispatch and the three executable links remain
 incomplete; this archive is not evidence of their acceptance.
+
+## Original-service dispatch binding
+
+Inspection of the existing base_vdm_record confirmed that its fixed sixteen
+slots and DOS-only subset omit StartupInfo/Desktop/Title/Reserved fields of
+the restored Base messages. It is not selected as the new command transport.
+The eleven recovered APIs now have one finite local OpenNtBaseDispatch entry
+in adapter-opennt-host; the lifecycle fixture's duplicate handler switch is
+removed. No original service body or queue/capacity policy changed.
+
+Recovery ladder: the mapping owner is pinned OpenNT
+base/win32/server/srvinit.c, BaseServerApiDispatchTable (file SHA-256
+`f53d4ca6f7d3eee8945d94fc237f73b892fb0f509da8a47256043180b48bfc70`).
+Its full initializer and CSR dispatcher require the excluded CSR runtime and
+unrelated Base services. The selected smaller binding preserves those eleven
+API/handler pairs and the original basemsg.h native structure sizes. There is
+no mirror intrusion or invented replacement service algorithm. New boundary
+checks reject unbound callers, unknown operations and incorrect native lengths;
+the trusted local thread supplies ClientId. Wire decoding, payload/resource
+validation, serialization and authenticated context lifetime remain mandatory
+caller responsibilities, not functions of this native-pointer API.
+
+Regenerated S3/product and built opennt-broker-owners: x86 dispatch object and
+formal binding archive link pass. Verify-BrokerOriginalLifecycle.mjs with the
+formal owner build passes all existing original lifecycle checks and verifies
+the dispatch map provider. New negatives prove unbound, short, long and
+unadmitted requests do not consume original first-VDM state; the next valid
+request succeeds and replaces a forged message ClientId with the bound local
+identity. This is local dispatch acceptance, not authenticated RPC command
+delivery, a complete basesrv executable or guest execution. S3 remains open.

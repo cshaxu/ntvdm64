@@ -53,7 +53,8 @@ neither published nor three-program acceptance. Original resource-call binding
 and synchronous wait-event failure rollback also pass; remote callbacks remain open.
 The formal x86 transport archive now supplies all three boundary suites, with
 map-provider checks and passing lifecycle/journal/nine-case RPC regressions.
-It is not yet connected to product command dispatch or deployed.
+The formal local dispatch binding replaces the fixture handler switch and
+passes length/identity negatives. RPC command decoding and deployment remain open.
 
 ## T412 S1 historical checkpoints
 
