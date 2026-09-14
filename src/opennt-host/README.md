@@ -100,6 +100,14 @@ admitted merely to make the larger historical API product shell link.
 
 ## Divergence register
 
+OPENNT-HOST-014 also restores unchanged BaseCheckForVDM (39 lines) from the
+same pinned base/win32/client/vdm.c for the launcher's task-exit query, not
+image classification. Normalized function SHA-256:
+`c6cf2dfdab281ee73c257c5f0a051eebe3439355f273d4a2a5eae5fa7e9d7b85`.
+Native NtQueryEvent uses the original event ABI through declaration-only
+base_event.h; original BaseSrvGetVDMExitCode retains completion consumption.
+No replacement exit policy or full Kernel32 process shell is imported.
+
 OPENNT-HOST-031 admits the three local capture-memory functions from pinned
 OpenNT `base/ntdll/csrutil.c`, not its CSR/LPC transport. Original source file
 SHA-256 is `7a176482498e1aca00e9651c326a9b62a8ba2ada0aa7f90f8b585acd1a376e6a`;

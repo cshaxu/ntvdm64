@@ -1824,6 +1824,49 @@ BaseUpdateVDMEntry(
 }
 #endif
 
+/* DIVERGENCE(OPENNT-HOST-014): original launcher task-exit query. */
+#if defined(OPENNT_BASE_CLIENT_VDM_COMMANDS)
+BOOL
+BaseCheckForVDM(
+    IN HANDLE hProcess,
+    OUT LPDWORD lpExitCode
+    )
+{
+    NTSTATUS Status;
+    EVENT_BASIC_INFORMATION ebi;
+    BASE_API_MSG m;
+    PBASE_GET_VDM_EXIT_CODE_MSG a = (PBASE_GET_VDM_EXIT_CODE_MSG)&m.u.GetVDMExitCode;
+
+    Status = NtQueryEvent (
+		hProcess,
+		EventBasicInformation,
+		&ebi,
+		sizeof(ebi),
+		NULL);
+
+    if(!NT_SUCCESS(Status))
+	return FALSE;
+
+    a->ConsoleHandle = NtCurrentPeb()->ProcessParameters->ConsoleHandle;
+    a->hParent = hProcess;
+    Status = CsrClientCallServer(
+                      (PCSR_API_MSG)&m,
+                      NULL,
+                      CSR_MAKE_API_NUMBER( BASESRV_SERVERDLL_INDEX,
+                      BasepGetVDMExitCode),
+                      sizeof( *a )
+                      );
+
+    if (!NT_SUCCESS(Status)) {
+        return FALSE;
+        }
+
+    *lpExitCode = (DWORD)a->ExitCode;
+
+    return TRUE;
+}
+#endif
+
 /* DIVERGENCE(OPENNT-HOST-014): independent launcher classifier cohort;
  * finite native declarations and private symbol binding, original bodies. */
 #if defined(OPENNT_BASE_CLIENT_CLASSIFIER)

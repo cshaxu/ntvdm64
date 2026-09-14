@@ -16,7 +16,7 @@ PCSR_THREAD OpenNtBaseServerRequestThread(void);
 #ifndef STATUS_ACCESS_DENIED
 #define STATUS_ACCESS_DENIED ((NTSTATUS)0xC0000022L)
 #endif
-typedef enum _EVENT_TYPE { NotificationEvent, SynchronizationEvent } EVENT_TYPE;
+#include <base_event.h>
 NTSTATUS NTAPI NtCreateEvent(PHANDLE, ACCESS_MASK, POBJECT_ATTRIBUTES, EVENT_TYPE, BOOLEAN);
 NTSTATUS NTAPI NtSetEvent(HANDLE, PLONG);
 NTSTATUS NTAPI NtResetEvent(HANDLE, PLONG);

@@ -11,6 +11,11 @@ const rtlFlags=graph.match(/^build obj\/opennt-rtl\/error\.obj:.*\r?\n  rtl_cfla
 const ownerPath=path.resolve('src/opennt-host/base/win32/server/srvvdm.c');
 const ownerBefore=fs.readFileSync(ownerPath);
 const clientSource=fs.readFileSync('src/opennt-host/base/win32/client/vdm.c','utf8');
+const exitPattern=/BOOL\r?\nBaseCheckForVDM\([\s\S]*?\r?\n}/;
+assert.equal(createHash('sha256').update(clientSource.match(exitPattern)[0].replace(/\r\n/g,'\n')).digest('hex'),
+    'c6cf2dfdab281ee73c257c5f0a051eebe3439355f273d4a2a5eae5fa7e9d7b85');
+assert.equal(clientSource.match(exitPattern)[0].replace(/\r\n/g,'\n'),
+    fs.readFileSync('O:/repos.external/OpenNT/base/win32/client/vdm.c','utf8').match(exitPattern)[0].replace(/\r\n/g,'\n'));
 const capturePattern=/PCSR_CAPTURE_HEADER\r?\nCsrAllocateCaptureBuffer\([\s\S]*?ULONG\r?\nCsrAllocateMessagePointer\([\s\S]*?\r?\n}/;
 const captureBody=fs.readFileSync('src/opennt-host/base/ntdll/csrutil.c','utf8').match(capturePattern)[0].replace(/\r\n/g,'\n');
 assert.equal(captureBody,fs.readFileSync('O:/repos.external/OpenNT/base/ntdll/csrutil.c','utf8').match(capturePattern)[0].replace(/\r\n/g,'\n'));
@@ -78,6 +83,7 @@ for (const symbol of ['ExitVDM','SetVDMCurrentDirectories','GetVDMCurrentDirecto
     assert(map.split(/\r?\n/).some(line=>line.includes(`_${symbol}@`)&&line.includes('client.obj')),`Original client provider missing: ${symbol}`);
 for(const symbol of ['BaseSrvCheckVDM','BaseSrvGetNextVDMCommand','BaseSrvSetReenterCount','BaseSrvExitDOSTask'])
     assert(map.split(/\r?\n/).some(line=>line.includes(`_${symbol}`)&&line.includes('srvvdm.obj')),`Original provider missing for ${symbol}`);
+assert(map.split(/\r?\n/).some(line=>line.includes('_BaseCheckForVDM')&&line.includes('client.obj')),'Original task-exit provider missing');
 const result=spawnSync(path.join(build,'original-lifecycle.exe'),[],{cwd:build,windowsHide:true,encoding:'utf8',timeout:15000});
 fs.writeFileSync(path.join(build,'result.json'),JSON.stringify({status:result.status,stdout:result.stdout,stderr:result.stderr,error:result.error?.message},null,2));
 console.log(result.stdout,result.stderr);

@@ -10,6 +10,8 @@
 #include "opennt-host/base/win32/inc/basemsg.h"
 #include "opennt-host/base/win32/inc/basevdm.h"
 #include <vdmapi.h>
+#include <base_event.h>
+BOOL BaseCheckForVDM(HANDLE, LPDWORD);
 NTSTATUS NTAPI CsrClientCallServer(PCSR_API_MSG, PCSR_CAPTURE_HEADER, CSR_API_NUMBER, ULONG);
 PCSR_CAPTURE_HEADER NTAPI CsrAllocateCaptureBuffer(ULONG, ULONG, ULONG);
 VOID NTAPI CsrFreeCaptureBuffer(PCSR_CAPTURE_HEADER);

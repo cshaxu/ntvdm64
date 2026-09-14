@@ -460,3 +460,37 @@ lifecycle tests; build and result records remain under
 build/M0-T412/S2/original-lifecycle. This does not execute guest programs.
 Production heap initialization/drain/destruction and RPC integration remain
 unfinished. The deployed ntvdm32.exe is unchanged; S2 and T412 remain open.
+
+## Launcher task exit query recovery
+
+Original base/win32/client/process.c GetExitCodeProcess calls BaseCheckForVDM
+before querying a native process. This is task-exit retrieval, not executable
+type classification. run16 needs this source-owned path for the parent event
+returned by BaseUpdateVDMEntry: worker lifetime is not guest task lifetime.
+
+The unchanged 39-line BaseCheckForVDM is restored in the command cohort of
+opennt-host/base/win32/client/vdm.c. Pinned original file SHA-256 is
+`3f03d0dbb08e0163f2d9cf415daad0981e42e1b1855f6f48a3b59022b7374173`;
+function SHA-256 (LF, no final newline) is
+`c6cf2dfdab281ee73c257c5f0a051eebe3439355f273d4a2a5eae5fa7e9d7b85`.
+Original notice remains. Total recovered command/classifier client groups now
+contain 1,953 original lines; this is not a net deletion count.
+
+Recovery ladder: original body composes unchanged; NtQueryEvent exists on the
+host with the original event ABI. base_event.h retains the ntexapi.h type shapes
+and declaration and is shared privately by client/server headers. There is no
+new runtime adapter, source-body edit, process API replacement or recursive
+Kernel32 import. CsrClientCallServer remains the known finite transport seam.
+
+The lifecycle test now dispatches BasepGetVDMExitCode to unchanged
+BaseSrvGetVDMExitCode. It verifies invalid and process handles reject without
+changing output; the real parent event returns STILL_ACTIVE before completion;
+completion returns 7, moves the sole record to VDM_READY and clears its parent
+association. A second query returns the original no-matching-record value zero,
+not a fabricated retained exit-code cache. Remaining wait/retry and cleanup
+tests pass after this source-owned consumption transition.
+
+The verifier checks exact original body/hash and client-library map ownership.
+This is focused x86 lifecycle evidence, not deployed run16 or guest execution.
+Final process-local event attachment and CLI return-code propagation remain S3/
+S4 integration work. Product binaries and current T/S status are unchanged.

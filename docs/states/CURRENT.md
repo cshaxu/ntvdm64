@@ -40,7 +40,7 @@ are focused tests, not product selection; the deployed baseline is unchanged.
 
 Original GetBinaryTypeW/BaseIsDosApplication now pass focused x86 guest-type,
 PE, DLL, suffix and missing-file tests. Complete original BaseCheckVDM now
-passes request/deep-copy, hotkey and pre-dispatch failure tests (1,914 lines
+passes request/deep-copy, hotkey and pre-dispatch failure tests (1,953 lines
 restored across client groups). Finite startup/Console/CRT bindings retain
 the original launch body. The classifier's full-path binding avoids modern
 relative-output size and NULL-directory differences. Final
@@ -53,7 +53,8 @@ passes scoped-logon and rollback tests using the original token helper. Three
 original capture routines now replace test-authored allocators; pointer tables,
 alignment, real heap exhaustion and cleanup pass. See the linked S2 evidence.
 Product selection, RPC binding, SYSTEM impersonation and guest acceptance remain
-unfinished; classification belongs to run16, not broker or worker.
+unfinished; classification belongs to run16, not broker or worker. Original
+BaseCheckForVDM task-exit query now passes pending/completed/invalid-handle tests.
 
 ## T412 S1 historical checkpoints
 

@@ -16,6 +16,7 @@ extern NTSTATUS (*UserTestTokenForInteractive)(HANDLE, PLUID);
 extern PWOWHEAD WOWHead;
 extern LUID WowAuthId;
 BOOL BaseUpdateVDMEntry(ULONG, HANDLE *, ULONG, ULONG);
+BOOL BaseCheckForVDM(HANDLE, LPDWORD);
 BOOL BaseCheckVDM(ULONG, PCWCH, PCWCH, PCWCH, ANSI_STRING *, PBASE_API_MSG, PULONG, DWORD, LPSTARTUPINFOW);
 POPENNT_SUPPORT_PEB NTAPI NtCurrentPeb(VOID) { return &peb; }
 POPENNT_SUPPORT_TEB NTAPI opennt_support_current_teb(VOID) { return &teb; }
@@ -82,6 +83,8 @@ NTSTATUS NTAPI CsrClientCallServer(PCSR_API_MSG message, PCSR_CAPTURE_HEADER cap
         result = BaseSrvBatNotification(message,&reply); break;
     case CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepRegisterWowExec):
         result = BaseSrvRegisterWowExec(message,&reply); break;
+    case CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepGetVDMExitCode):
+        result = BaseSrvGetVDMExitCode(message,&reply); break;
     case CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepUpdateVDMEntry):
         result = BaseSrvUpdateVDMEntry(message,&reply); break;
     default: return (NTSTATUS)STATUS_INVALID_PARAMETER;
@@ -214,6 +217,13 @@ int main(void)
     parentWait = GetCurrentProcess();
     CHECK(BaseUpdateVDMEntry(UPDATE_VDM_PROCESS_HANDLE,&parentWait,0,BINARY_TYPE_DOS));
     CHECK(parentWait && WaitForSingleObject(parentWait,0) == WAIT_TIMEOUT);
+    {
+        DWORD taskExit=0xfeed;
+        CHECK(!BaseCheckForVDM(GetCurrentProcess(),&taskExit) && taskExit==0xfeed);
+        CHECK(!BaseCheckForVDM(NULL,&taskExit) && taskExit==0xfeed);
+        CHECK(BaseCheckForVDM(parentWait,&taskExit) && taskExit==STILL_ACTIVE);
+        CHECK(record->DOSRecord->VDMState==VDM_TO_TAKE_A_COMMAND);
+    }
 
     ZeroMemory(&m,sizeof(m));
     m.u.GetNextVDMCommand.ConsoleHandle = (HANDLE)1;
@@ -246,6 +256,12 @@ int main(void)
     CHECK(WaitForSingleObject(parentWait,0) == WAIT_OBJECT_0);
     CHECK(record->DOSRecord->ErrorCode == 7);
     CHECK(record->DOSRecord->VDMState == VDM_HAS_RETURNED_ERROR_CODE);
+    {
+        DWORD taskExit=0xfeed;
+        CHECK(BaseCheckForVDM(parentWait,&taskExit) && taskExit==7);
+        CHECK(record->DOSRecord->VDMState==VDM_READY && !record->DOSRecord->hWaitForParent);
+        CHECK(BaseCheckForVDM(parentWait,&taskExit) && taskExit==0);
+    }
     CloseHandle(parentWait);
 
     ZeroMemory(&m,sizeof(m));
