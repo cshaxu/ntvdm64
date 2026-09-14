@@ -45,13 +45,11 @@ The [S3 RPC security boundary](../etc/evidence/m0-t412-s3-rpc-security.md) now
 passes nine real-process cases, including rejecting another process's valid
 attachment as caller identity. This is not service dispatch or product acceptance;
 genuine cross-user/session and remaining security/receipt gates stay open.
-The [launcher dependency test](../etc/evidence/m0-t412-s3-entry-integration.md)
-also selects real process support, removing its fixture-owned PEB/TEB/heap.
-The explicit run16 build now verifies native launch and unchanged command-tail,
-directory/environment/stream inheritance. DOS/WOW dispatch remains unfinished;
-this build-only checkpoint is not published or three-program acceptance.
-Original lifecycle tests also pass with the real thread-local request binding
-instead of a constant fixture accessor; actual broker dispatch remains pending.
+The [entry and lifecycle tests](../etc/evidence/m0-t412-s3-entry-integration.md)
+select real PEB/TEB/heap and request-thread bindings. Run16's native branch
+passes command-tail, directory/environment/stream and exit tests. Actual broker
+dispatch and DOS/WOW delivery remain pending; this build-only checkpoint is
+neither published nor three-program acceptance.
 
 ## T412 S1 historical checkpoints
 

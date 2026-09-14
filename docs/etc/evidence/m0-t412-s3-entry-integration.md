@@ -99,3 +99,30 @@ The formal `opennt-broker-owners` target in S3/product builds successfully;
 rerunning the verifier with OPENNT_BROKER_OWNER_BUILD set to that directory
 also passes and selects opennt-base-bindings:request.obj. Existing original
 source compiler warnings remain; this is not a warning-free build claim.
+
+## Remaining fixture-to-product dependencies
+
+The actual lifecycle link map still used fixture-provided NtCurrentPeb,
+current TEB and RtlProcessHeap. Those three definitions and their private
+records are now removed. The test links existing opennt_support_rtl.c with
+/Gy, checks real module/PID/heap values and asserts the three map owners.
+With OPENNT_BROKER_OWNER_BUILD=S3/product, all original lifecycle tests pass,
+including asynchronous retry and generation cleanup. No original service
+algorithm or production support function was changed to obtain this result.
+
+Console association remains explicitly fixture-local (value 1). Existing
+process support initially uses stdout as ConsoleHandle; stdout can be a pipe
+and is not cross-process Console identity. The test overrides that local field,
+not a real Console registration. Product membership must use the admitted
+Console query/association design. The result records this limitation and the
+selected process-support source hash.
+
+Remaining fixture providers are CsrClientCallServer and
+CsrLockProcessByClientId/CsrUnlockProcess. Product counterparts require real
+authenticated transport and registered-process lookup with pinned lifetime.
+Original base/subsys/csr/server/process.c lines 943 onward acquires the process
+lock and references the match; unlock dereferences and releases the lock.
+A PID lookup returning an unpinned pointer cannot preserve that contract.
+The full CSR runtime remains excluded. The nullable UserNotifyProcessCreate
+symbol retains the already approved absent-hook disposition, not emulated
+success. These tests do not yet establish a production broker or S3 closure.

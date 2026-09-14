@@ -8,9 +8,6 @@
 
 static CSR_PROCESS caller;
 static CSR_THREAD thread;
-static OPENNT_SUPPORT_PROCESS_PARAMETERS parameters;
-static OPENNT_SUPPORT_PEB peb;
-static OPENNT_SUPPORT_TEB teb;
 extern HANDLE hwndWowExec;
 extern ULONG ulWowExecProcessSequenceNumber;
 extern NTSTATUS (*UserTestTokenForInteractive)(HANDLE, PLUID);
@@ -19,10 +16,7 @@ extern LUID WowAuthId;
 BOOL BaseUpdateVDMEntry(ULONG, HANDLE *, ULONG, ULONG);
 BOOL BaseCheckForVDM(HANDLE, LPDWORD);
 BOOL BaseCheckVDM(ULONG, PCWCH, PCWCH, PCWCH, ANSI_STRING *, PBASE_API_MSG, PULONG, DWORD, LPSTARTUPINFOW);
-POPENNT_SUPPORT_PEB NTAPI NtCurrentPeb(VOID) { return &peb; }
-POPENNT_SUPPORT_TEB NTAPI opennt_support_current_teb(VOID) { return &teb; }
 PFNNOTIFYPROCESSCREATE UserNotifyProcessCreate = NULL;
-PVOID NTAPI RtlProcessHeap(VOID) { return GetProcessHeap(); }
 NTSTATUS NTAPI CsrLockProcessByClientId(HANDLE id, PCSR_PROCESS *out)
 {
     if (id != (HANDLE)GetCurrentProcessId()) return (NTSTATUS)0xc000000b;
@@ -187,8 +181,12 @@ int main(void)
         CsrFreeCaptureBuffer(capture);
         CHECK(captures==0 && CsrAllocateCaptureBuffer(1,0,MAXLONG)==NULL && captures==0);
     }
-    parameters.ConsoleHandle = (HANDLE)1;
-    peb.ProcessParameters = &parameters;
+    CHECK(NtCurrentPeb()->ImageBaseAddress==GetModuleHandleW(NULL));
+    CHECK(RtlProcessHeap()==GetProcessHeap());
+    CHECK(opennt_support_current_teb()->ClientId.UniqueProcess==(HANDLE)GetCurrentProcessId());
+    /* Local fixture Console association only. A stdout HANDLE is not the
+     * authenticated cross-process Console ID required by product dispatch. */
+    NtCurrentPeb()->ProcessParameters->ConsoleHandle = (HANDLE)1;
     caller.ProcessHandle = GetCurrentProcess();
     caller.SequenceNumber = 1;
     thread.Process = &caller;

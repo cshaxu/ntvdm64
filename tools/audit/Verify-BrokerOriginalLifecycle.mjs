@@ -71,6 +71,8 @@ if(ownerBuild) {
         `link.exe /nologo /opt:ref /out:original-lifecycle.exe /map:original-lifecycle.map fixture.obj "${ownerBuild}/opennt-base-server.lib" "${ownerBuild}/opennt-base-client.lib" "${ownerBuild}/opennt-base-bindings.lib" error.obj ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib`
     ];
 }
+commands.unshift(`cl.exe ${flags} /Gy /Fo"${build}/support.obj" "${root}/src/adapter-mvdm-host-out/win32/source/opennt_support_rtl.c"`);
+commands=commands.map(command=>command.startsWith('link.exe ')?command.replace(' fixture.obj ', ' fixture.obj support.obj '):command);
 const log=fs.openSync(path.join(build,'build.log'),'w');
 for(const command of commands) {
     const result=spawnSync('cmd.exe',['/d','/c',`call "${env}" ${command}`],{cwd:build,windowsHide:true,windowsVerbatimArguments:true,stdio:['ignore',log,log],timeout:60000});
@@ -90,6 +92,8 @@ assert.equal(image.readUInt16LE(image.readUInt32LE(0x3c)+4),0x14c);
 const map=fs.readFileSync(path.join(build,'original-lifecycle.map'),'utf8');
 assert(map.includes('opennt-base-server:srvvdm.obj')&&map.includes('opennt-base-client:client.obj'),'Original owner libraries not selected');
 assert(!map.includes('luid.obj'),'Generated inline replacement still linked');
+for (const symbol of ['_NtCurrentPeb@0','_opennt_support_current_teb@0','_RtlProcessHeap@0'])
+    assert(map.split(/\r?\n/).some(line=>line.includes(symbol)&&line.includes('support.obj')),`Real process support missing: ${symbol}`);
 for (const symbol of ['_OpenNtBaseServerRequestThread','_OpenNtBaseBindServerRequestThread'])
     assert(map.split(/\r?\n/).some(line=>line.includes(symbol)&&line.includes('request.obj')),`Real request binding missing: ${symbol}`);
 for(const symbol of ['_CsrAllocateCaptureBuffer@12','_CsrAllocateMessagePointer@12','_CsrFreeCaptureBuffer@4'])
@@ -105,7 +109,11 @@ for(const symbol of ['BaseSrvCheckVDM','BaseSrvGetNextVDMCommand','BaseSrvSetRee
 assert(map.split(/\r?\n/).some(line=>line.includes('_BaseGetVdmConfigInfo')&&line.includes('client.obj')),'Original worker configuration provider missing');
 assert(map.split(/\r?\n/).some(line=>line.includes('_BaseCheckForVDM')&&line.includes('client.obj')),'Original task-exit provider missing');
 const result=spawnSync(path.join(build,'original-lifecycle.exe'),[],{cwd:build,windowsHide:true,encoding:'utf8',timeout:15000});
-fs.writeFileSync(path.join(build,'result.json'),JSON.stringify({ownerBuild,status:result.status,stdout:result.stdout,stderr:result.stderr,error:result.error?.message},null,2));
+const processSupport='src/adapter-mvdm-host-out/win32/source/opennt_support_rtl.c';
+fs.writeFileSync(path.join(build,'result.json'),JSON.stringify({ownerBuild,
+    processSupport:{path:processSupport,sha256:createHash('sha256').update(fs.readFileSync(processSupport)).digest('hex')},
+    consoleAssociation:'fixture-local only; not authenticated product Console identity',
+    status:result.status,stdout:result.stdout,stderr:result.stderr,error:result.error?.message},null,2));
 console.log(result.stdout,result.stderr);
 assert.equal(result.status,0,'Original lifecycle fixture failed');
 console.log('PASS: original BaseClient capture/copy, directories, exit, BAT/WOW registration, real wait/wake/retry with cleared exit code; captures drained');
