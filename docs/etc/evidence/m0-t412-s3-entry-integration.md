@@ -1000,3 +1000,17 @@ live, and reject subsequent lookup of the removed generation. A retained
 kernel handle is therefore deliberately not evidence of active registration.
 The service must still revalidate the generation at result consumption; this
 test does not complete authenticated RPC/helper composition or the DOS gate.
+
+The formal BaseSrv connection binding now exposes RetainPeer and selects it
+for existing First/Disconnect peer checks. It matches the authenticated
+connection PID/generation under the service lock and delegates to the existing
+registered-process retention binding; ordinary peer checks close the temporary
+handle immediately. No registry, authentication mechanism or service policy
+is duplicated. The retained handle does not keep the RPC context alive.
+
+The rebuilt basesrv.exe map proves service.obj and registry.obj provide these
+calls. Verify-BasesrvProduct passes real registration, duplicate/generation
+rejection, original first-VDM, reconnect and process-exit rundown against the
+same owned service. The test still terminates its own server because idle
+shutdown is unfinished. Console helper result consumption, worker selection,
+command delivery and the three-program DOS gate remain open.

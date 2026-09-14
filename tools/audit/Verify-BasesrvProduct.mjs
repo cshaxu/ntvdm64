@@ -19,7 +19,7 @@ try {
     }
 } finally {fs.closeSync(log);}
 const map=fs.readFileSync(path.join(product,'basesrv.exe.map'),'utf8');
-for(const [symbol,owner] of [['_BaseSrvIsFirstVDM','opennt-base-server:srvvdm.obj'],['_OpenNtBaseServiceFirst','opennt-base-bindings:service.obj']])
+for(const [symbol,owner] of [['_BaseSrvIsFirstVDM','opennt-base-server:srvvdm.obj'],['_OpenNtBaseServiceFirst','opennt-base-bindings:service.obj'],['_OpenNtBaseServiceRetainPeer','opennt-base-bindings:service.obj'],['_OpenNtBaseRetainRegisteredProcess','opennt-base-bindings:registry.obj']])
     if(!map.split(/\r?\n/).some(line=>line.includes(symbol)&&line.includes(owner))) throw Error(`Wrong product provider ${symbol}`);
 if(/fixture|registration\.obj|resource_attachment/i.test(map)) throw Error('Fixture entered product link');
 const image=fs.readFileSync(path.join(product,'basesrv.exe'));

@@ -66,8 +66,25 @@ DWORD OpenNtBaseServiceDisconnect(OPENNT_BASE_CONNECTION *connection)
 }
 BOOL OpenNtBaseServicePeer(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD generation)
 {
-    return connection && (DWORD)connection->process.ClientId.UniqueProcess==pid &&
-        connection->process.SequenceNumber==generation;
+    HANDLE process=NULL;
+    DWORD error=OpenNtBaseServiceRetainPeer(connection,pid,generation,&process);
+    if (process) CloseHandle(process);
+    return error==0;
+}
+DWORD OpenNtBaseServiceRetainPeer(OPENNT_BASE_CONNECTION *connection,DWORD pid,
+    DWORD generation,HANDLE *output)
+{
+    DWORD error=0;
+    if (!output) return ERROR_INVALID_PARAMETER;
+    *output=NULL;
+    if (!connection || !pid || !generation) return ERROR_ACCESS_DENIED;
+    EnterCriticalSection(&connection->service->lock);
+    if ((DWORD)connection->process.ClientId.UniqueProcess!=pid ||
+        connection->process.SequenceNumber!=generation) error=ERROR_ACCESS_DENIED;
+    else if (!OpenNtBaseRetainRegisteredProcess(&connection->service->registry,pid,generation,output))
+        error=GetLastError();
+    LeaveCriticalSection(&connection->service->lock);
+    return error;
 }
 DWORD OpenNtBaseServiceFirst(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD generation,DWORD *first)
 {

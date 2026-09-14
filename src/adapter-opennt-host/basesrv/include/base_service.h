@@ -12,5 +12,8 @@ BOOL OpenNtBaseServiceStop(OPENNT_BASE_SERVICE *);
 DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *,HANDLE,OPENNT_BASE_CONNECTION **,DWORD *);
 DWORD OpenNtBaseServiceDisconnect(OPENNT_BASE_CONNECTION *);
 BOOL OpenNtBaseServicePeer(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation);
+/* For authenticated in-flight calls only. Caller closes the returned handle;
+ * retaining it does not extend the RPC context or registration lifetime. */
+DWORD OpenNtBaseServiceRetainPeer(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,HANDLE *);
 DWORD OpenNtBaseServiceFirst(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,DWORD *);
 #endif

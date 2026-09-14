@@ -109,7 +109,14 @@ registry or an authorization endpoint. A retained handle survives unregister;
 the caller must repeat registration-generation validation before accepting
 results. The original lifecycle suite verifies wrong/old generation rejection,
 zero retained registry pins and missing registration after removal despite a
-still-live retained handle. Authenticated service composition remains pending.
+still-live retained handle. OpenNtBaseServiceRetainPeer now selects this binding
+under the service lock after matching the authenticated connection PID and
+generation. The formal First/Disconnect peer checks use it and immediately
+close their temporary same-access handle. Its returned handle never extends
+the RPC context lifetime. Verify-BasesrvProduct checks the selected service
+and registry providers in the product map and passes live RPC generation,
+duplicate, reconnect and process-exit rundown cases. Console-query result
+revalidation/consumption and worker-candidate selection remain pending.
 
 `OpenNtBaseRetainRegisteredProcess` reuses the same CsrLockProcessByClientId /
 CsrUnlockProcess binding to check the trusted PID/generation and retain a
@@ -119,7 +126,14 @@ registry or an authorization endpoint. A retained handle survives unregister;
 the caller must repeat registration-generation validation before accepting
 results. The original lifecycle suite verifies wrong/old generation rejection,
 zero retained registry pins and missing registration after removal despite a
-still-live retained handle. Authenticated service composition remains pending.
+still-live retained handle. OpenNtBaseServiceRetainPeer now selects this binding
+under the service lock after matching the authenticated connection PID and
+generation. The formal First/Disconnect peer checks use it and immediately
+close their temporary same-access handle. Its returned handle never extends
+the RPC context lifetime. Verify-BasesrvProduct checks the selected service
+and registry providers in the product map and passes live RPC generation,
+duplicate, reconnect and process-exit rundown cases. Console-query result
+revalidation/consumption and worker-candidate selection remain pending.
 
 `base_process.h`/`base_process.c` supply scoped registered-process lookup with
 the original CsrLockProcessByClientId/CsrUnlockProcess shape. Original CSR
