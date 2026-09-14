@@ -706,3 +706,20 @@ Only inherited private-header anonymous-union warnings remain for the new unit.
 These are still fragments, not a complete authenticated command exchange.
 Envelope/body combination, native attachment resolution, product entry points
 and real DOS execution remain S3 obligations. No deployed executable changed.
+## Composed CheckVDM copied request
+
+base_command now combines the versioned envelope, CheckVDM scalar fragment,
+startup fragment and eight copied buffers. The 96-byte fixed prefix is followed
+by the canonical buffer payload. It contains no process, Console, stream or
+wait HANDLE. The decoder validates the entire request before publishing native
+scalar/pointer fields, startup storage and request ID; locally bound resource
+fields remain unchanged. Borrowed storage lasts through synchronous dispatch.
+
+The formal owner build and original lifecycle suite pass using this composition
+for actual original BaseCheckVDM requests, replacing fixture-only assembly of
+the separate fragments. Every truncated request, a wrong registered generation
+and invalid startup presence fail without changing any native output. Existing
+source-owned DOS/WOW admission, command ownership, resource rollback and waits
+remain passing. Maps select the formal command.obj provider. This is copied
+request integration, not authenticated resource delivery or DOS execution.
+Full RPC transaction and three-product entry/deployment gates remain open.

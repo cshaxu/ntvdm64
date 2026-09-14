@@ -8,6 +8,7 @@
 #include <base_startup.h>
 #include <base_payload.h>
 #include <base_values.h>
+#include <base_command.h>
 #include "broker/vdm_receipt.h"
 #include "broker/vdm_delivery.h"
 #include <stdio.h>
@@ -191,16 +192,35 @@ static BOOL scalar_negatives(void)
     return !OpenNtBaseDecodeValues(values,28,0,&target) && !memcmp(&target,&original,sizeof(target));
 }
 
+static BOOL command_negatives(void *payload,uint32_t bytes,const BASE_API_MSG *original)
+{
+    BASE_API_MSG copy;
+    STARTUPINFOA startup, saved;
+    uint32_t cut,id,invalid=2,old;
+    unsigned char *presence=(unsigned char *)payload+sizeof(broker_vdm_message_header)+sizeof(broker_vdm_check_values);
+    memset(&saved,0xa5,sizeof(saved));
+    for (cut=0;cut<=bytes;++cut) {
+        copy=*original; startup=saved; id=0xabcdu;
+        if (OpenNtBaseDecodeCheckCommand(payload,cut,cut==bytes?2:1,&copy,&startup,&id) ||
+            memcmp(&copy,original,sizeof(copy)) || memcmp(&startup,&saved,sizeof(saved)) || id!=0xabcdu) return FALSE;
+    }
+    memcpy(&old,presence,sizeof(old)); memcpy(presence,&invalid,sizeof(invalid));
+    copy=*original; startup=saved; id=0xabcdu;
+    invalid=OpenNtBaseDecodeCheckCommand(payload,bytes,1,&copy,&startup,&id);
+    memcpy(presence,&old,sizeof(old));
+    return !invalid && !memcmp(&copy,original,sizeof(copy)) &&
+        !memcmp(&startup,&saved,sizeof(saved)) && id==0xabcdu;
+}
+
 NTSTATUS NTAPI CsrClientCallServer(PCSR_API_MSG message, PCSR_CAPTURE_HEADER capture,
     CSR_API_NUMBER number, ULONG length)
 {
     NTSTATUS result;
     STARTUPINFOA decoded;
     LPSTARTUPINFOA savedStartup=NULL;
-    broker_vdm_startup startupWire;
     BASE_CHECKVDM_MSG savedCheck;
     void *payload=NULL;
-    uint32_t payloadBytes;
+    uint32_t payloadBytes,requestId;
     BASE_GET_NEXT_VDM_COMMAND_MSG savedGet;
     OPENNT_BASE_GET_PAYLOAD getPayload={0};
     unsigned char getRequest[16*BROKER_VDM_PAYLOAD_FIELDS];
@@ -215,19 +235,19 @@ NTSTATUS NTAPI CsrClientCallServer(PCSR_API_MSG message, PCSR_CAPTURE_HEADER cap
     if (number == CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepCheckVDM)) {
         PBASE_CHECKVDM_MSG request=&((PBASE_API_MSG)message)->u.CheckVDM;
         savedCheck=*request;
-        if (!OpenNtBaseEncodeCheckPayload(request,NULL,0,&payloadBytes)) return STATUS_INVALID_PARAMETER;
+        if (!OpenNtBaseEncodeCheckCommand((PBASE_API_MSG)message,1,1,NULL,0,&payloadBytes)) return STATUS_INVALID_PARAMETER;
         payload=HeapAlloc(GetProcessHeap(),0,payloadBytes);
         if (!payload) return STATUS_NO_MEMORY;
-        if (!OpenNtBaseEncodeCheckPayload(request,payload,payloadBytes,&payloadBytes) ||
-            !OpenNtBaseDecodeCheckPayload(payload,payloadBytes,request)) {
+        if (!OpenNtBaseEncodeCheckCommand((PBASE_API_MSG)message,1,1,payload,payloadBytes,&payloadBytes)) {
+            HeapFree(GetProcessHeap(),0,payload); return STATUS_INVALID_PARAMETER;
+        }
+        if (!command_negatives(payload,payloadBytes,(PBASE_API_MSG)message)) {
             HeapFree(GetProcessHeap(),0,payload); return STATUS_INVALID_PARAMETER;
         }
         savedStartup=request->StartupInfo;
-        OpenNtBaseEncodeStartup(savedStartup,&startupWire);
-        if (!OpenNtBaseDecodeStartup(&startupWire,&decoded)) {
+        if (!OpenNtBaseDecodeCheckCommand(payload,payloadBytes,1,(PBASE_API_MSG)message,&decoded,&requestId) || requestId!=1) {
             *request=savedCheck; HeapFree(GetProcessHeap(),0,payload); return STATUS_INVALID_PARAMETER;
         }
-        request->StartupInfo=startupWire.present?&decoded:NULL;
     }
     if (number == CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepGetNextVDMCommand)) {
         PBASE_GET_NEXT_VDM_COMMAND_MSG request=&((PBASE_API_MSG)message)->u.GetNextVDMCommand;

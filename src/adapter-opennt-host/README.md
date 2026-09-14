@@ -153,6 +153,14 @@ message layout becomes the wire protocol. Original BaseClient lifecycle calls in
 fixture now pass through this mapping. Authentication and full message-body
 validation remain prerequisites of product endpoint use.
 
+`base_command.h`/`base_command.c` compose CheckVDM's copied request from the
+versioned envelope, values, startup and eight buffers. The decoder validates
+the entire message into local temporary storage before publishing borrowed
+payload/startup pointers or the request ID. Resource fields remain locally
+bound and untouched; authentication and attachment resolution are required
+outside this codec. Original client lifecycle tests use this same production
+composition. It is not yet a complete RPC request/resource transaction.
+
 `base_values.h`/`base_values.c` bind original basemsg.h's CheckVDM,
 UpdateVDMEntry and GetNextVDMCommand numeric fields. Exact-size copied fragments
 replace unavailable CSR address-space transport, not original service policy.
