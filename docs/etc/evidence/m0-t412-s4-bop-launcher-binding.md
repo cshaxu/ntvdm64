@@ -110,11 +110,14 @@ keyboard delivery or the already-proved BOP child path.  Logs are retained at
 `O:\ntvdm64\logs\m0-t412-s4-observer-command-p-r1` and
 `O:\ntvdm64\logs\m0-t412-s4-command-c-trace-r2`.
 
-No workaround is accepted here.  The next design must establish how a new
-interactive worker is authenticated, reserved and registered without
-manufacturing an initial `BaseCheckVDM` command record; only then can the
-original default shell wait for Console input and be used for the remaining
-keyboard/interactive COMMAND acceptance.
+The original `BaseSrvCheckDOS` itself creates the first Console's DOS record,
+copies the `BaseCheckVDM` payload into it and marks it
+`VDM_TO_TAKE_A_COMMAND`.  Therefore a new no-initial-record registration mode
+would be an invented policy and is not accepted as a workaround.  The next
+repair investigation must compare the actual first `VDMINFO` fields
+(`AppName`, `CmdLine`, PIF, directory, environment and stream state) with the
+retained original self-`COMMAND.COM` execution route, then repair the first
+divergent field while preserving that original BaseSrv lifecycle.
 
 ## Limit
 
