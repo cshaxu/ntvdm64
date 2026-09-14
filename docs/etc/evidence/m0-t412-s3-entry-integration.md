@@ -1231,3 +1231,23 @@ x86 archives and the complete original lifecycle suite pass. The strict worker
 link consequently reports only the three old local COMMAND hooks, explicit
 project transport and CsrPortHeap initialization; it does not create a worker
 EXE or claim command delivery.
+
+## Worker-private capture heap and diagnostic removal
+
+The independent worker entry now owns the one process-local `CsrPortHeap`
+required by original BaseClient capture routines: it creates the heap before
+any session/media/shell action, and destroys it after session disposal. It is
+not placed in a command record, broker connection or session table. Rebuilding
+worker_entry.obj succeeds, and the strict worker link no longer reports that
+symbol.
+
+`cmddisp.c` also contained MVDM-HOST-DIV-191, a default-off diagnostic wrapper
+around original `SVC_CMDGETNEXTCMD`. Its sole extra dependency was a locked
+read of the old local BaseVDM record. The original dispatch/table call itself
+did not need it. The wrapper, declaration/body and unselected fixture were
+removed; the mirror README register row was removed at the same time. Rebuilt
+original COMMAND and SoftPC binding archives pass. The strict link now has
+three intentional blockers only: the two legacy `cmdExec32` local launch-pending
+hooks, and `OpenNtBaseClientCallServer`. The former must migrate with the real
+broker reentry protocol; the latter must become authenticated IPC. No old local
+service object was reintroduced merely to obtain a link.

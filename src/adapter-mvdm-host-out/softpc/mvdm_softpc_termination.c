@@ -1478,37 +1478,6 @@ void mvdm_softpc_record_dpmi_interrupt_registration(unsigned int vector,
 }
 
 
-void mvdm_softpc_record_command_continuation(unsigned int stage,
-    unsigned int guest_cs, unsigned int guest_ip, unsigned int guest_ax,
-    unsigned int guest_bx, unsigned int guest_cf, unsigned int first_call,
-    unsigned int repeat_call, uint32_t dos_record_state)
-{
-    char message[192];
-    int formatted;
-
-    /* This is deliberately a separate default-off channel.  Its path was
-     * captured and removed before original cmdenv.c saw the environment, so
-     * an enabled observer cannot alter original guest input or allocation. */
-    if (mvdm_softpc_command_continuation_report_path[0] == '\0')
-        return;
-    formatted = snprintf(message, sizeof(message),
-        "MVDM-CMD-CONT svc=01 stage=%u cs=%04X ip=%04X ax=%04X bx=%04X cf=%u first=%u repeat=%u dos-state=%08lX\\r\\n",
-        stage, guest_cs & 0xffffu, guest_ip & 0xffffu,
-        guest_ax & 0xffffu, guest_bx & 0xffffu, guest_cf ? 1u : 0u,
-        first_call ? 1u : 0u, repeat_call ? 1u : 0u,
-        (unsigned long)dos_record_state);
-    if (formatted <= 0 || (size_t)formatted >= sizeof(message)) return;
-    {
-        HANDLE report = CreateFileA(mvdm_softpc_command_continuation_report_path,
-            FILE_APPEND_DATA, FILE_SHARE_READ, NULL, OPEN_ALWAYS,
-            FILE_ATTRIBUTE_NORMAL, NULL);
-        DWORD written;
-        if (report == INVALID_HANDLE_VALUE) return;
-        (void)WriteFile(report, message, (DWORD)formatted, &written, NULL);
-        CloseHandle(report);
-    }
-}
-
 void mvdm_softpc_record_command_vdm_result(unsigned int stage,
     unsigned int error_code, unsigned int vdm_state, unsigned int succeeded,
     unsigned int first_call, unsigned int repeat_call)

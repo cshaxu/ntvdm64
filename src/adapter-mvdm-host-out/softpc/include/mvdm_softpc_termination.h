@@ -240,15 +240,6 @@ void mvdm_softpc_record_command_call(unsigned int service,
 void mvdm_softpc_record_dpmi_interrupt_registration(unsigned int vector,
     unsigned int flags, unsigned int selector, uint32_t eip);
 
-/* Default-off, fixed-container continuation observation for the original
- * COMMAND GetNextCmd table entry.  All arguments are copied scalars at the
- * existing table boundary; no command bytes, record pointer or guest/native
- * address crosses into the observer. */
-void mvdm_softpc_record_command_continuation(unsigned int stage,
-    unsigned int guest_cs, unsigned int guest_ip, unsigned int guest_ax,
-    unsigned int guest_bx, unsigned int guest_cf, unsigned int first_call,
-    unsigned int repeat_call, uint32_t dos_record_state);
-
 /* Default-off, scalar-only observation of the original cmdGetNextCmd
  * BaseClient request/result.  It distinguishes a command-record completion
  * from a command-returned DOS error without reading command bytes, retaining
