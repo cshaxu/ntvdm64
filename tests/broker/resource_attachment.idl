@@ -11,5 +11,12 @@ interface resource_attachment
         [in, system_handle(sh_process)] HANDLE process,
         [in, system_handle(sh_file)] HANDLE input,
         [in, system_handle(sh_event)] HANDLE event,
-        [out, system_handle(sh_file)] HANDLE *output);
+        [out, system_handle(sh_file)] HANDLE *output,
+        [out] unsigned long *file_receipt,
+        [out] unsigned long *event_receipt);
+    error_status_t Revoke(
+        [in] handle_t binding,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [in] unsigned long receipt);
 }

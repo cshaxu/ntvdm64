@@ -10,6 +10,21 @@
 
 void *__RPC_USER midl_user_allocate(size_t size) { return malloc(size); }
 void __RPC_USER midl_user_free(void *value) { free(value); }
+static DWORD revoke_remote(handle_t binding,HANDLE process,ULONG fileId,ULONG eventId)
+{
+    DWORD result=ERROR_SUCCESS;
+    if (!fileId && !eventId) return result;
+    if (!fileId || !eventId) return ERROR_INVALID_DATA;
+    RpcTryExcept {
+        if (Client_Revoke(binding,process,2,fileId)!=ERROR_ACCESS_DENIED ||
+            Client_Revoke(binding,process,1,fileId)!=ERROR_SUCCESS ||
+            Client_Revoke(binding,process,1,fileId)!=ERROR_SUCCESS ||
+            Client_Revoke(binding,process,1,eventId)!=ERROR_SUCCESS) result=ERROR_INVALID_DATA;
+    }
+    RpcExcept(1) { result=RpcExceptionCode(); }
+    RpcEndExcept
+    return result;
+}
 
 #ifdef RESOURCE_SERVER
 DWORD test_registration_start(void);
@@ -18,6 +33,7 @@ DWORD test_registration_finish(void);
 static RPC_BINDING_HANDLE downstream;
 static broker_rpc_scope serverScope;
 static broker_vdm_receipts receipts;
+static DWORD registeredPeer;
 static RPC_STATUS RPC_ENTRY authorize(RPC_IF_HANDLE interface_id, void *context)
 {
     ULONG level=0, service=0;
@@ -27,17 +43,20 @@ static RPC_STATUS RPC_ENTRY authorize(RPC_IF_HANDLE interface_id, void *context)
     return broker_rpc_authorize(&serverScope,context);
 }
 
-error_status_t Server_Transfer(handle_t binding, HANDLE process, HANDLE input, HANDLE event, HANDLE *output)
+error_status_t Server_Transfer(handle_t binding, HANDLE process, HANDLE input, HANDLE event, HANDLE *output,
+    ULONG *fileReceipt, ULONG *eventReceipt)
 {
     DWORD written, peerPid;
     LARGE_INTEGER zero = {0}, position;
     error_status_t result = ERROR_INVALID_DATA;
     *output = NULL;
+    *fileReceipt=*eventReceipt=0;
     result=broker_rpc_peer_process(&serverScope,binding,process,&peerPid);
     printf("PEER status=%lu matched=%d\n",result,peerPid!=0); fflush(stdout);
     if (result!=RPC_S_OK) return result;
     result=test_registration_retain(process,peerPid);
     if (result!=ERROR_SUCCESS) return result;
+    registeredPeer=peerPid;
     {
         uint32_t fileId=0,eventId=0;
         HANDLE rejected=(HANDLE)1;
@@ -48,17 +67,21 @@ error_status_t Server_Transfer(handle_t binding, HANDLE process, HANDLE input, H
             return ERROR_INVALID_DATA;
         if (broker_vdm_receipt_resolve(&receipts,1,fileId,&input) ||
             broker_vdm_receipt_resolve(&receipts,1,eventId,&event)) return ERROR_INVALID_DATA;
+        *fileReceipt=fileId; *eventReceipt=eventId;
         puts("RECEIPT retained=1 wrong-generation=denied"); fflush(stdout);
     }
     if (downstream) {
+        ULONG remoteFile=0,remoteEvent=0;
+        DWORD revoked;
         HANDLE self=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION | SYNCHRONIZE,FALSE,GetCurrentProcessId());
         if (!self) return GetLastError();
         /* Synchronous third-process delivery; no file reopen or byte pump. */
-        RpcTryExcept { result = Client_Transfer(downstream, self, input, event, output); }
+        RpcTryExcept { result = Client_Transfer(downstream, self, input, event, output,&remoteFile,&remoteEvent); }
         RpcExcept(1) { result = RpcExceptionCode(); }
         RpcEndExcept
+        revoked=revoke_remote(downstream,self,remoteFile,remoteEvent);
         CloseHandle(self);
-        (void)RpcMgmtStopServerListening(NULL);
+        if (revoked) return revoked;
         return result;
     }
     if (SetFilePointerEx(input, zero, &position, FILE_CURRENT) && position.QuadPart == 1) {
@@ -68,7 +91,17 @@ error_status_t Server_Transfer(handle_t binding, HANDLE process, HANDLE input, H
                 0, FALSE, DUPLICATE_SAME_ACCESS) && SetEvent(event)) result = ERROR_SUCCESS;
     }
     if (result != ERROR_SUCCESS && *output) { CloseHandle(*output); *output = NULL; }
-    (void)RpcMgmtStopServerListening(NULL);
+    return result;
+}
+
+error_status_t Server_Revoke(handle_t binding,HANDLE process,ULONG generation,ULONG receipt)
+{
+    DWORD pid=0;
+    DWORD result=broker_rpc_peer_process(&serverScope,binding,process,&pid);
+    if (result || pid!=registeredPeer) return ERROR_ACCESS_DENIED;
+    result=broker_vdm_receipt_revoke(&receipts,generation,receipt);
+    printf("REVOKE generation=%lu id=%lu status=%lu\n",generation,receipt,result); fflush(stdout);
+    if (!result && !receipts.entries) (void)RpcMgmtStopServerListening(NULL);
     return result;
 }
 
@@ -139,6 +172,8 @@ int main(int argc, char **argv)
     DWORD count;
     char data[2];
     error_status_t status = RPC_S_CALL_FAILED;
+    ULONG fileReceipt=0,eventReceipt=0;
+    DWORD revoked;
     int readonly, unavailable, denied;
     if (argc != 3 && argc != 4 && argc != 5) return 1;
     readonly = argc == 4 && strcmp(argv[3], "readonly") == 0;
@@ -163,10 +198,12 @@ int main(int argc, char **argv)
         RpcBindingFromStringBindingA(text, &binding) ||
         RpcBindingSetAuthInfoA(binding, NULL, argc==4 && !strcmp(argv[3],"low-auth") ? RPC_C_AUTHN_LEVEL_PKT_INTEGRITY : RPC_C_AUTHN_LEVEL_PKT_PRIVACY,
             RPC_C_AUTHN_WINNT, NULL, RPC_C_AUTHZ_NONE)) return 3;
-    RpcTryExcept { status = Client_Transfer(binding, process, input, event, &output); }
+    RpcTryExcept { status = Client_Transfer(binding, process, input, event, &output,&fileReceipt,&eventReceipt); }
     RpcExcept(1) { status = RpcExceptionCode(); }
     RpcEndExcept
+    revoked=revoke_remote(binding,process,fileReceipt,eventReceipt);
     CloseHandle(process);
+    if (revoked) { fprintf(stderr,"remote revoke=%lu\n",revoked); return 13; }
     if (denied) {
         if (status!=RPC_S_ACCESS_DENIED || output!=NULL ||
             WaitForSingleObject(event,0)!=WAIT_TIMEOUT || GetFileSize(input,NULL)!=1) {

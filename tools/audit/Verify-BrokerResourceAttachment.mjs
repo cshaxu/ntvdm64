@@ -106,6 +106,13 @@ try {
     }
     if (target) record.targetStatus = await finished(target);
     if (!mode.startsWith('wrong-')) {
+        for (const instance of [relay,...(target?[target]:[])]) {
+            const transcript=instance.transcript();
+            if (!transcript.includes('REVOKE generation=2 id=1 status=5') ||
+                (transcript.match(/REVOKE generation=1 id=1 status=0/g)||[]).length!==2 ||
+                !transcript.includes('REVOKE generation=1 id=2 status=0'))
+                throw Error('Authenticated remote receipt revocation was not fully observed');
+        }
         for (const instance of [relay,...(target?[target]:[])])
             if (!instance.transcript().includes('REGISTER status=0') ||
                 !instance.transcript().includes('REGISTER retained-after-call=1 drained=1') ||

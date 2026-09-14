@@ -236,3 +236,28 @@ No guest/CCPU execution is involved. Receipt retention is not final wire
 acknowledgement: product receipt IDs, aliases, lost-response rollback, concurrent
 receiver serialization and original NtDuplicateObject/NtClose binding are still
 required before command dispatch and three-program acceptance.
+
+## Real receipt acknowledgement and remote revocation
+
+The resource fixture now returns two fixed-width receipt IDs alongside its
+existing OS attachment. A separate Revoke RPC checks packet privacy, actual
+peer-process identity, the accepted peer and generation before invoking the
+production receipt store. No sender-local HANDLE number is used as authority.
+The receiver stays listening after Transfer and stops only after successful
+revocation empties its receipts. The relay follows the same protocol downstream.
+
+All nine existing cases pass: direct/relay success and read-only failure,
+unavailable downstream, and identity negatives. For accepted callers the
+transcript records wrong-generation rejection, two successful revocations of
+the same file receipt and revocation of the event receipt. Existing file data,
+position, rights and returned-object lifetime checks remain enabled. Thus the
+test no longer relies only on process-exit drain to release delivered resources.
+The original BaseSrvCloseStandardHandles may close stdout/stderr aliases twice;
+this supports the required idempotent remote-revoke contract without editing
+that original function.
+
+This IDL is still a fixture protocol, not the final three-program command ABI.
+Response loss before receipt IDs arrive, abrupt peer death, product concurrency
+and source-shaped duplicate/close call-site integration are not proved here.
+No VDM task was dispatched and no deployed executable changed. The complete
+S3 product gate remains open despite successful resource-protocol evidence.
