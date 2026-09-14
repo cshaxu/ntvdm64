@@ -1066,6 +1066,13 @@ if ($Architecture -eq 'x86') {
         $graph.Add('build ' + $group + '.lib: lib ' + ($members -join ' '))
     }
     $graph.Add('build opennt-broker-owners: phony opennt-base-client.lib opennt-base-server.lib opennt-base-bindings.lib')
+    $graph.Add('build obj/run16/entry.obj: cc ' + (NinjaPath (Join-Path $root 'src/app/run16_entry.c')))
+    $graph.Add('  cflags = ' + $baseOwnerFlags)
+    $graph.Add('build obj/run16/support.obj: cc ' + (NinjaPath (Join-Path $root 'src/adapter-mvdm-host-out/win32/source/opennt_support_rtl.c')))
+    $graph.Add('  cflags = ' + $baseOwnerFlags + ' /Gy')
+    $graph.Add('rule run16_link')
+    $graph.Add('  command = link.exe /nologo /subsystem:console /entry:wWinMainCRTStartup /opt:ref /out:$out /map:$out.map $in ntdll.lib kernel32.lib shell32.lib legacy_stdio_definitions.lib')
+    $graph.Add('build run16.exe: run16_link obj/run16/entry.obj obj/run16/support.obj opennt-base-client.lib opennt-base-bindings.lib original-opennt-rtl-x86.lib')
 }
 $appObjects = foreach ($name in $appNames) {
     $object = 'obj/app/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
@@ -1197,6 +1204,15 @@ $graph.Add('default original-softpc-candidate')
     openntRtlSources = @($openntRtlNames)
     openntBaseVdmSources = @($openntBaseVdmNames)
     openntBrokerOwnerArchives = @($baseOwnerManifest)
+    launcherComposition = [ordered]@{
+        target = 'run16.exe'
+        selected = ($Architecture -eq 'x86')
+        disposition = 'explicit build-only S3 work in progress; native branch only; no publication'
+        sources = @('src/app/run16_entry.c', 'src/adapter-mvdm-host-out/win32/source/opennt_support_rtl.c' | ForEach-Object {
+            [ordered]@{ path = $_; sha256 = Get-NodeSha256 (Join-Path $root $_) }
+        })
+        libraries = @('opennt-base-client.lib', 'opennt-base-bindings.lib', 'original-opennt-rtl-x86.lib')
+    }
     patchInputs = @($patchNames | ForEach-Object {
         [ordered]@{
             path = 'src/mvdm-softpc-patch/x86/prod/' + $_

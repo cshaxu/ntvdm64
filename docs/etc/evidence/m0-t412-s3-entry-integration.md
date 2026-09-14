@@ -30,3 +30,44 @@ initialization shell. Other pending product dependencies include command-tail
 handling, actual broker discovery, original launch calls and error propagation.
 Removing test-owned process providers is not three-program acceptance and does
 not permit deleting the old product entry before its replacement is verified.
+
+## Actual launcher entry checkpoint
+
+The subsequent `src/app/run16_entry.c` composition now supplies those three
+suffix values and calls the same original classifier archive. It does not
+implement a second image parser. Classification belongs to run16; BaseSrv
+receives the classified request, and ntvdm remains the original-shaped worker.
+Original BaseClient launch-update calls belong on the launcher side, with
+original BaseSrv state updates on the service side, not a worker CLI policy.
+
+The formal generator's explicit x86 `run16.exe` target links the original
+classifier and finite path binding, actual process support and original RTL.
+Its Console-subsystem CRT wWinMain entry supplies the unmodified command tail.
+CommandLineToArgvW decodes the target only; CreateProcess receives a mutable
+copy of the original tail. The full historical CreateProcess/CSR product shell
+is an excluded dependency; this app-owned native launch uses the public API
+under the approved CLI exception, not a copied replacement kernel algorithm.
+
+Commands, from the repository root:
+
+```text
+powershell -NoProfile -ExecutionPolicy Bypass -File tools/build/New-T310OriginalSoftpcNinja.ps1 -Architecture x86 -BuildRoot O:/repos.hobby/ntvdm64/build/M0-T412/S3/product -NodeExecutable O:/.nvm/versions/node/v22.22.1/bin/node.exe -ParallelJobs 4
+cmd /d /c build\M0-T412\S3\product\run-ninja-parallel.cmd run16.exe
+node tools/audit/Verify-Run16Entry.mjs
+```
+
+Build artifact: build/M0-T412/S3/product/run16.exe, 157,184 bytes,
+SHA-256 `7becc9c20ebeb1d6122393e5bee4c6ce579ff3af5741c3b5a5dc71c1232f1d52`.
+The fixture builds its own native child beneath S3/entry-tests. Absolute and
+relative quoted paths both preserve the exact UTF-16 command tail, including
+spaces, empty arguments and backslashes; the child checks inherited directory
+and environment, relays stdin to stderr and returns 23. Empty invocation returns
+87, and a missing file returns 2. The map selects the original classifier and
+excludes the old local VDM provider/machine shell. No CPU is executed in these
+native-entry tests; this is not a CCPU or guest regression result.
+
+MEM returns 50 with an explicit unfinished-dispatch diagnostic. This is a
+temporary S3 implementation gap, not accepted DOS behavior or the final product
+contract. Broker discovery/dispatch, worker creation/registration, DOS/WOW
+delivery and original completion/rollback remain required. No staged or runtime
+EXE was replaced, and neither S3 nor T412 is closed by this checkpoint.

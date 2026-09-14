@@ -116,6 +116,23 @@ neither creates a DOS-device alias nor changes guest/firmware bytes.
 | `APP-DIV-015` | Original COMMAND environment initialization enumerates its inherited host environment. | A host-only continuation-observer path must not enter the original guest environment/allocation input. | App captures the explicitly optional path before original startup, deletes that one inherited variable, and the adapter uses only its private bounded copy. | `entry.c`; `../adapter-mvdm-host-out/softpc/{include/mvdm_softpc_termination.h,mvdm_softpc_termination.c}` |
 | `APP-DIV-017` | NT4's ordinary bare VDM can wait for a CSRSS/BaseSrv command producer after startup and ordinarily selects configuration through the original BaseVDM PIF carrier. | The unpack-and-run one-session CLI has no CSRSS producer and must not silently fall back to the DOSX/WOW default when its declared product scope is pure DOS. | App keeps the first `COMMAND.COM` as PermCom. It supplies a declared target through the original `AppName`/`CmdLine` split, enables the existing exhaustion disposition only after that record is consumed, and supplies the same packaged `pure-dos.pif` path through `PifFile`. Before copying a declared image it asks the adapter to resolve `.COM`/`.EXE`/`.BAT` beside the product then through current-directory/PATH; an unresolved token remains a public `COMSPEC /c` request. A bare launch uses only a bounded child `/C` tail; explicit targets, including `COMMAND.COM`, are never wrapped in `/C`. | `launch_declaration.c`; `../adapter-mvdm-host-out/basesrv/{source/base_vdm_local.c,source/mvdm_image_classification.c}` |
 
+## T412 launcher composition
+
+`run16_entry.c` is the in-progress public launcher, not the worker entry.
+It calls the original `OpenNtBaseGetBinaryTypeW` from `opennt-host`; BaseSrv
+consumes that classification and must not parse the executable again. Worker
+startup will retain the historical ntvdm argument and command-consumer contract.
+The three suffix declarations/initializers retain `basedll.h` and `baseinit.c`
+values without importing the Base DLL initialization shell. Standard CRT tail
+delivery and public CreateProcess provide the approved CLI composition boundary;
+no replacement image parser or shell/redirection grammar is introduced.
+
+The explicit x86 `run16.exe` build target currently proves only native child
+launch, untouched command tail, inherited directory/environment/streams and
+exit status. DOS/WOW dispatch deliberately fails while S3 IPC integration is
+unfinished. This intermediate target is not publishable and does not replace
+the deployed ntvdm32.exe. See the [entry evidence](../../docs/etc/evidence/m0-t412-s3-entry-integration.md).
+
 ## M0 T388 S5 display arbitration divergence
 
 | Exception | Original purpose | Reason | Implementation | Files |

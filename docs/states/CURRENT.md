@@ -47,6 +47,9 @@ attachment as caller identity. This is not service dispatch or product acceptanc
 genuine cross-user/session and remaining security/receipt gates stay open.
 The [launcher dependency test](../etc/evidence/m0-t412-s3-entry-integration.md)
 also selects real process support, removing its fixture-owned PEB/TEB/heap.
+The explicit run16 build now verifies native launch and unchanged command-tail,
+directory/environment/stream inheritance. DOS/WOW dispatch remains unfinished;
+this build-only checkpoint is not published or three-program acceptance.
 
 ## T412 S1 historical checkpoints
 
