@@ -32,6 +32,13 @@ S1 audit/design is closed by the [consolidated design](../etc/evidence/m0-t412-s
 S2 is the only active packet under the existing whole-T approval. The following
 S1 checkpoints are chronological evidence, not current admission or hold state.
 
+S2 [original server lifecycle tests](../etc/evidence/m0-t412-s2-original-lifecycle.md)
+now compile/link and execute the unchanged server owner: first-query state,
+DOS command/curdir capacity, dispatch/completion, real parent/worker events,
+nonzero reentry wake, empty-WOW polling and cleanup. Link-map ownership is
+checked. This is same-process focused evidence, not product selection or
+cross-process acceptance; S2 remains active and the deployed baseline is unchanged.
+
 ## T412 S1 historical checkpoints
 
 S1 execution checkpoint: [source audit](../etc/evidence/m0-t412-s1-broker-owner-audit.md)
