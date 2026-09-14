@@ -43,6 +43,22 @@ try {
     fs.writeFileSync(path.join(build,'client.log'),(result.stdout||'')+(result.stderr||''));
     if(result.status!==0) throw Error(`Product RPC client failed ${result.status}`);
     console.log(result.stdout.trim());
+    const abandoned=spawnSync(path.join(build,'client.exe'),['--abandon'],{cwd:build,windowsHide:true,encoding:'utf8',timeout:15000});
+    fs.writeFileSync(path.join(build,'abandoned.log'),(abandoned.stdout||'')+(abandoned.stderr||''));
+    if(abandoned.status!==0) throw Error(`Abandon client failed ${abandoned.status}`);
+    await new Promise((resolve,reject)=>{
+        const observed=()=>{
+            if(output.includes('basesrv: connection rundown completed')) {
+                clearTimeout(timer); server.stderr.off('data',observed); resolve();
+            }
+        };
+        timer=setTimeout(()=>{server.stderr.off('data',observed);reject(Error('RPC context rundown not observed'));},10000);
+        server.stderr.on('data',observed); observed();
+    });
+    const reconnected=spawnSync(path.join(build,'client.exe'),['--existing'],{cwd:build,windowsHide:true,encoding:'utf8',timeout:15000});
+    fs.writeFileSync(path.join(build,'after-rundown.log'),(reconnected.stdout||'')+(reconnected.stderr||''));
+    if(reconnected.status!==0) throw Error(`Service failed after rundown ${reconnected.status}`);
+    console.log('PASS: process-exit RPC rundown removes the registered connection; original service remains responsive.');
 } finally {
     clearTimeout(timer);
     if(server.exitCode===null) server.kill();

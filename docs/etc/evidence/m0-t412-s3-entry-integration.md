@@ -887,3 +887,21 @@ ERROR_BROKEN_PIPE on the reader. Existing partial/unknown/retry/commit tests pas
 This is native ownership evidence, not a guest run or completed source callback.
 Integration into authenticated recipient endpoints and original close paths
 remains required before enabling product command delivery.
+
+## Formal connection loss rundown
+
+Verify-BasesrvProduct now runs an owned client that registers and exits without
+Disconnect. The formal basesrv RPC context rundown successfully removes its
+original registered-process binding, emits a completion observation, and a
+subsequent client repeats registration/query/disconnect against the same live
+service with the original first-VDM flag still clear. The rebuilt x86 product
+and this extended suite pass, including duplicate endpoint and generation
+negatives. Logs remain under build/M0-T412/S3/basesrv-product; no user process
+is terminated and no package executable is overwritten.
+
+This proves process-exit cleanup for a registration-only connection. The
+current endpoint admits no tasks/resources, so it does not prove pending
+launch/resource rollback, concurrent disconnect during command consumption,
+worker death or idle shutdown. The test still terminates its owned service
+after verification; automatic broker retirement remains unfinished. The new
+rundown observation changes no cleanup or original service policy.

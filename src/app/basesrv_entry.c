@@ -16,6 +16,7 @@ void __RPC_USER VDM_CONNECTION_rundown(VDM_CONNECTION connection)
 {
     /* No commands/resources can be admitted by this endpoint yet. */
     if (OpenNtBaseServiceDisconnect(connection)) RaiseFailFastException(NULL,NULL,0);
+    fputs("basesrv: connection rundown completed\n",stderr); fflush(stderr);
 }
 static RPC_STATUS RPC_ENTRY authorize(RPC_IF_HANDLE interfaceId,void *binding)
 {

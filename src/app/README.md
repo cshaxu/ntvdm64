@@ -145,7 +145,10 @@ No fixture source enters this link. Current operations are connection
 registration, original first-VDM query and disconnect only. DOS commands,
 worker registration, resource callbacks and empty/idle shutdown are unfinished;
 this executable must not be published or substituted for the three-program
-delivery. Tests terminate only their own server while shutdown is unfinished.
+delivery. Tests also observe RPC rundown after a registered client exits
+without Disconnect and verify subsequent service responsiveness. This covers
+registration loss only, not task/resource rollback. Tests terminate only their
+own server while shutdown is unfinished.
 
 ## M0 T388 S5 display arbitration divergence
 
