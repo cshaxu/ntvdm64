@@ -197,3 +197,98 @@ After owner disposition of the stop: finish the finite boundary audit, especiall
 D10 status classification, Console identity, WOW private callbacks and resource
 transfer; complete exact per-hunk/overlay removal counts and the source-backed
 test/design matrix. Then report S1 completion honestly before source restoration.
+
+## Continued audit after worker prerequisites
+
+The RESET and text-layout prerequisites now have linked implementation and
+runtime evidence. Source review resumed at `fa22c4cf2`; this section does not
+supersede the earlier checkpoint's observation date or claim S1 closure.
+
+### D10: modern image-section status evidence
+
+A disposable x86 `/MT` probe opens existing media without executing it, calls
+the real `NtCreateSection(SEC_IMAGE)` and compares public `GetBinaryTypeW`.
+Inputs/source/output are under `build/M0-T412/S1/text-cell-repair/` as
+`classify-probe.c`, `classify-probe.exe` and `classify-result.txt`. This is a
+lower-boundary probe, not an execution of the recovered BaseClient body; its
+CreateFile open requests read/execute and does not prove every original
+NtOpenFile access/error contract. An initial WRITE root-path open failed with
+error 2; the final run uses the actual `system32/WRITE.EXE` location.
+
+| Existing input | SEC_IMAGE status | Public classifier |
+| --- | --- | --- |
+| MEM.EXE | C0000130, INVALID_IMAGE_PROTECT | DOS |
+| COMMAND.COM | C000012F, INVALID_IMAGE_NOT_MZ | DOS |
+| EDIT.COM | C000012F, INVALID_IMAGE_NOT_MZ | DOS |
+| system32/WRITE.EXE | C0000131, INVALID_IMAGE_WIN_16 | WOW |
+| ntvdm32.exe | 00000000 | Win32 |
+| Windows/SysWOW64/kernel32.dll | 00000000 | Rejected, error 193 |
+
+These results match the branch inputs consumed by original
+`base/win32/client/vdm.c:GetBinaryTypeW:93-300`. The finite design should
+therefore retain the original classifier body and bind its existing NT image
+operations first. There is no current evidence requiring import of the memory
+manager's `MiVerifyImageHeader` or another autonomous header parser. S2 must
+still test malformed/truncated input, OS/2 NE, DOS-bound NE, machine/subsystem,
+DLL and path/access failures before deleting the current classifier. A valid
+WRITE type result is not WRITE execution acceptance.
+
+### Mirror and overlay scope refinement
+
+Normalized current-versus-OpenNT physical line diffs are: cmdexec.c +205/-54,
+cmddisp.c +47/-0, cmdmisc.c +259/-36, using the same
+`git diff --no-index --ignore-space-at-eol --numstat` method. Their combined
++511/-90 is an inventory, not a removable total. It includes guest leases,
+thread ABI, diagnostics and other still-needed behavior outside duplicate
+BaseSrv policy. DIV-197 local begin/cancel and DIV-191 local-state observations
+become removal/rebinding candidates only when original service state is selected.
+DIV-230's copied kernel-path fallback is removable once the real worker OS
+command line carries `-a`; retain safe malformed-entry handling. DIV-196's
+pre-thread guest copy is still needed until the same payload lifetime is proved.
+
+The current private-overlay inventory contains only SoftPC CPU/C-VID/PIC
+carriers, not a BaseSrv/COMMAND policy implementation. No opennt-host-overlay
+exists. Consequently the S1 direct BaseSrv overlay removal estimate remains
+zero; do not mislabel the 1,349-line adapter/broker replacement envelope as
+overlay deletion or add it to these mirror differences as a net saving.
+
+### Resource transfer: authority decision required
+
+Original `srvvdm.c:BaseSrvDupStandardHandles:1868` duplicates stdin/stdout/stderr
+from the authenticated caller into the VDM. It explicitly retains stdout/stderr
+aliasing. `BaseSrvCreatePairWaitHandles:2353` creates an event and duplicates a
+reference into the caller; update/rollback and `BaseSrvCloseStandardHandles`
+close the corresponding process-local resources. These are existing original
+algorithms to retain, not a reason to substitute pipe-pumping or file reopen.
+
+Current architecture/rules prohibit native HANDLEs in all broker messages.
+Stable request/resource IDs alone do not transfer access to an arbitrary
+already-open file or anonymous pipe. The public DuplicateHandle contract
+requires communicating the target-local duplicate to its owner; duplicate
+files retain shared file position, while reopening a pathname does not. Console
+handles are a separate case: documented duplication is same-process only.
+See [Microsoft DuplicateHandle](https://learn.microsoft.com/en-us/windows/win32/api/handleapi/nf-handleapi-duplicatehandle).
+
+Recommended proposed clarification: prohibit pointers and sender-local HANDLE
+values in ordinary command records and as cross-process identity; permit a
+separate authenticated OS resource-transfer binding limited to admitted object
+types. One supported candidate is local RPC system_handle attachments: the OS
+duplicates the resource, the receiver keeps only its own local handle and
+associates it with a stable broker ID. Input attachments last only for the call
+unless locally duplicated; output attachments transfer ownership. This requires
+Windows 10 version 1607 or later and MIDL NT100; see
+[Microsoft system_handle](https://learn.microsoft.com/en-us/windows/win32/midl/system-handle).
+This is researched design, not a composed/tested RPC implementation.
+
+The exception must retain aliasing, same file position, pipe EOF, access rights,
+per-call authentication, lifetime and exact rollback. No sender handle number is
+trusted as capability, no resource identity is a pointer, no token/process-wide
+duplication service is exposed. Console uses authenticated Console membership
+and worker-local inherited/opened Console streams, not the file-handle route.
+Detailed endpoint/Console identity and WOW notification binding still need S1
+design work. The stricter current rule is not silently reinterpreted or bypassed.
+
+Owner decision is needed before selecting this resource-transfer exception and
+freezing S1's transport contract. Rejecting it requires explicit loss of some
+arbitrary standard-stream/reuse semantics, or another proven OS capability
+channel; a name-only reopen or autonomous I/O proxy is not presumed equivalent.

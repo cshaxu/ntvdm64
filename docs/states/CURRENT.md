@@ -11,7 +11,7 @@
 | Field | Record |
 | --- | --- |
 | Identifier Mode | M0 T412 S1; Ordinary Mode, one implementer and one active sequential S packet. |
-| Admission And Approval | Owner admitted the broker package on 2026-09-13, then S1 execution and the explicitly proposed event-consumer prerequisite repair. Existing authorization covers commit and push to main. This does not admit broader CPU/video implementation or claim S1 completion. |
+| Admission And Approval | Owner admitted the broker package on 2026-09-13, then S1 execution, the event-consumer prerequisite and continued execution of the diagnosed Console text-layout repair. Existing authorization covers commit and push to main. This does not admit broader CPU/video implementation or claim S1 completion. |
 | Objective | Audit D01--D07/D10 and design one original BaseSrv/BaseClient lifecycle across run16.exe, basesrv.exe and ntvdm.exe, minimizing mirror diff, overlay and duplicate autonomous policy. |
 | Non-goals | No broker production implementation during S1; no CSRSS/kernel shell, CPU30/x64 executor, generic shell parser, or claim of full WRITE recovery. Owner approval following the audit checkpoint admits the bounded event-consumer prerequisite repair, not instruction-decoder changes. |
 | Reference Baseline | Entry commit bb9fe640d; selected original OpenNT package provenance and current formal x86 CCPU40 graph. Prior closure records are evidence indexes, not substitutes for selected-provider/runtime proof. |
@@ -72,6 +72,15 @@ MEM's existing implausible largest-program-size field is not accepted as correct
 Both publication paths now carry SHA-256 33C55137...AE43AA, 3,228,672 bytes.
 The [repair evidence](../etc/evidence/m0-t412-s1-console-cell-regression.md)
 records exact hashes and limits. S1 broker audit/design resumes; S2 stays inactive.
+
+Continued S1 audit verifies modern SEC_IMAGE statuses for actual MEM/COMMAND/
+EDIT/WRITE and supports original BaseClient classification without a new header
+parser. It also identifies an authority decision: original standard-stream/event
+duplication needs an authenticated resource-transfer binding, while current rules
+ban HANDLEs in every message. The proposed narrow OS-attachment exception is
+[recorded, not implemented](../etc/evidence/m0-t412-s1-broker-owner-audit.md#resource-transfer-authority-decision-required).
+S1 remains open pending that decision and remaining finite-boundary design;
+there is no S2 admission or source implementation beyond the approved prerequisites.
 
 ## T411 Closed Packet
 

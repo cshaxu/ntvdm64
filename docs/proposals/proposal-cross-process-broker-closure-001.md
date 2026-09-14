@@ -139,6 +139,18 @@ WOW32, DPMI, DOSX or WRITE internal behavior into the broker.
   an eligible worker should exit. Remove direct product-session termination
   from the service command-acquisition policy when its replacement is proved.
 
+### Pending resource-transfer clarification
+
+Resource-transfer clarification is pending owner decision in the
+[continued S1 audit](../etc/evidence/m0-t412-s1-broker-owner-audit.md#resource-transfer-authority-decision-required).
+The recommended exception permits only authenticated OS-managed resource
+attachments, separate from copied command records/stable IDs, to preserve
+original duplicated file/pipe/event semantics. Native and guest pointers remain
+forbidden; ordinary payloads must not use local handle numbers as identity or
+authority. Local RPC system_handle is a researched candidate, not an admitted
+or tested transport. Current stricter rules remain binding until the owner
+approves a precise amendment; Console handles need a distinct local binding.
+
 ### D03: first-VDM state and prohibited host-file mutation
 
 The owner explicitly required this boundary on 2026-09-12: restoring the
