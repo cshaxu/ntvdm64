@@ -100,6 +100,18 @@ admitted merely to make the larger historical API product shell link.
 
 ## Divergence register
 
+T412 S2 extends OPENNT-HOST-014 with the complete original GetNextVDMCommand
+body (390 lines including its signature/comment), selected by
+`OPENNT_BASE_CLIENT_VDM_COMMANDS` for the focused original-client/server graph.
+The default product still selects the environment cohort; the command provider
+is not yet selected in the deployed product. Source: pinned OpenNT revision
+`5c5b979ec08c17d3ca2eb70e8aad62d26515d01c`,
+`base/win32/client/vdm.c`; LF-normalized restored function SHA-256
+`47cf285cbc505d9d43a50af16e283ea51d1d9ef8d2ff093795086d0ca327addd`.
+Only cohort guards and the finite declaration include are added around it;
+the function body is unchanged. See the
+[S2 execution evidence](../../docs/etc/evidence/m0-t412-s2-original-lifecycle.md).
+
 | Identifier | Original purpose | Reason for divergence | Selected implementation | Files |
 | --- | --- | --- | --- | --- |
 | OPENNT-HOST-001 | `public/sdk/inc/ntexapi.h` declares the historical NT Ex system-service surface. | The selected non-MONITOR `softpc.new/host/src/nt_eoi.c` preserves its original include, and `nt_timer.c` reaches only its performance-counter/tick declarations. Importing the complete header would falsely enlarge the user-mode host closure. | Retain the source-identified true subset as the same-named OpenNT declaration carrier. The selected MVDM sources remain unchanged; no Ex service, controller, or kernel-VDM substitute is supplied. | `public/sdk/inc/ntexapi.h` |

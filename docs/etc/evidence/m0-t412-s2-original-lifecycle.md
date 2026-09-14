@@ -59,3 +59,37 @@ bindings and original client routines, extend negative/coherent lifecycle
 coverage, and select the recovered provider before retiring the local policy.
 No net production-code reduction, S2 closure or three-product build is claimed
 by this evidence checkpoint.
+
+## Original BaseClient restoration continuation
+
+The complete original GetNextVDMCommand function is now restored in
+`opennt-host/base/win32/client/vdm.c`, under OPENNT-HOST-014's explicit
+command-cohort selection. It contains 390 original lines; its LF-normalized
+SHA-256 is `47cf285cbc505d9d43a50af16e283ea51d1d9ef8d2ff093795086d0ca327addd`.
+Comparison with `O:/repos.external/OpenNT/base/win32/client/vdm.c` at revision
+`5c5b979ec08c17d3ca2eb70e8aad62d26515d01c` proves an unchanged function body.
+Its original copyright notice remains in the mirror file. The four finite CSR
+declarations retain signatures from the same tree's `public/sdk/inc/ntcsrdll.h`.
+No CSR implementation or full Base DLL was imported.
+
+The current default environment cohort still compiles independently. The
+focused graph selects OPENNT_BASE_CLIENT_VDM_COMMANDS and checks that
+GetNextVDMCommand links from client.obj while BaseSrv functions link from
+srvvdm.obj. It uses the existing original RTL error.c/table with that source's
+actual formal per-edge compiler flags, not a replacement error mapper.
+
+Additional passing assertions use the original client to query first-VDM,
+receive a short-buffer failure and ERROR_INVALID_PARAMETER, retry with the
+returned required size, copy the real command, and retrieve empty shared-WOW
+results. Capture allocations are drained after both failure and success. The
+test transport supplies capture storage and dispatch only; the restored client
+supplies capacity propagation, error mapping, result copy and cleanup policy.
+
+The finite PEB/TEB used here is test-owned and supplies the same local Console
+key and status carrier. It is not a modern PEB reinterpretation, registered
+cross-process Console proof or a production authentication implementation.
+The restored wait loop is source-identical but a wake-and-retry through the
+client still needs its own asynchronous test. Other BaseClient lifecycle
+routines and product bindings remain S2 work; the old selected product policy
+has not yet been retired. Adding original source reduces the missing-source
+scope, but is not a claimed net line deletion or product rollout.

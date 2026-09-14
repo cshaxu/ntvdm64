@@ -5,6 +5,11 @@
 
 static CSR_PROCESS caller;
 static CSR_THREAD thread;
+static OPENNT_SUPPORT_PROCESS_PARAMETERS parameters;
+static OPENNT_SUPPORT_PEB peb;
+static OPENNT_SUPPORT_TEB teb;
+POPENNT_SUPPORT_PEB NTAPI NtCurrentPeb(VOID) { return &peb; }
+POPENNT_SUPPORT_TEB NTAPI opennt_support_current_teb(VOID) { return &teb; }
 PFNNOTIFYPROCESSCREATE UserNotifyProcessCreate = NULL;
 PVOID NTAPI RtlProcessHeap(VOID) { return GetProcessHeap(); }
 PCSR_THREAD ProbeAuthenticatedRequestThread(void) { return &thread; }
@@ -15,6 +20,54 @@ NTSTATUS NTAPI CsrLockProcessByClientId(HANDLE id, PCSR_PROCESS *out)
     return 0;
 }
 NTSTATUS NTAPI CsrUnlockProcess(PCSR_PROCESS process) { (void)process; return 0; }
+
+/* Test-local capture/dispatch transport; original client owns retry/copy policy. */
+static ULONG captures;
+PCSR_CAPTURE_HEADER NTAPI CsrAllocateCaptureBuffer(ULONG messages, ULONG pointers, ULONG size)
+{
+    PCSR_CAPTURE_HEADER capture;
+    (void)messages; (void)pointers;
+    if (size > 1024 * 1024) return NULL;
+    capture = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, sizeof(*capture) + size);
+    if (!capture) return NULL;
+    capture->Length = sizeof(*capture) + size;
+    capture->FreeSpace = (PCHAR)(capture + 1);
+    ++captures;
+    return capture;
+}
+VOID NTAPI CsrFreeCaptureBuffer(PCSR_CAPTURE_HEADER capture)
+{
+    if (capture) { --captures; HeapFree(GetProcessHeap(),0,capture); }
+}
+ULONG NTAPI CsrAllocateMessagePointer(PCSR_CAPTURE_HEADER capture, ULONG size, PVOID *pointer)
+{
+    ULONG aligned = ROUND_UP(size,4);
+    if (aligned < size || aligned > capture->Length ||
+        capture->FreeSpace > (PCHAR)capture + capture->Length - aligned) {
+        *pointer = NULL; return 0;
+    }
+    *pointer = capture->FreeSpace;
+    capture->FreeSpace += aligned;
+    return aligned;
+}
+NTSTATUS NTAPI CsrClientCallServer(PCSR_API_MSG message, PCSR_CAPTURE_HEADER capture,
+    CSR_API_NUMBER number, ULONG length)
+{
+    CSR_REPLY_STATUS reply = 0;
+    ULONG result;
+    (void)capture; (void)length;
+    switch (number) {
+    case CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepIsFirstVDM):
+        result = BaseSrvIsFirstVDM(message,&reply); break;
+    case CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepGetNextVDMCommand):
+        result = BaseSrvGetNextVDMCommand(message,&reply); break;
+    case CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepSetReenterCount):
+        result = BaseSrvSetReenterCount(message,&reply); break;
+    default: return (NTSTATUS)STATUS_INVALID_PARAMETER;
+    }
+    message->ReturnValue = result;
+    return result;
+}
 
 #define CHECK(x) do { if (!(x)) { fprintf(stderr,"FAIL line %d: %s\n",__LINE__,#x); return 1; } } while(0)
 
@@ -27,7 +80,10 @@ int main(void)
     STARTUPINFOA startup = {sizeof(startup)};
     ULONG status;
     HANDLE parentWait, workerWait;
+    VDMINFO clientInfo;
     BaseSrvHeap = GetProcessHeap();
+    parameters.ConsoleHandle = (HANDLE)1;
+    peb.ProcessParameters = &parameters;
     caller.ProcessHandle = GetCurrentProcess();
     caller.SequenceNumber = 1;
     thread.Process = &caller;
@@ -39,6 +95,7 @@ int main(void)
     ZeroMemory(&m,sizeof(m));
     CHECK(BaseSrvIsFirstVDM((PCSR_API_MSG)&m,&reply) == 0 && m.u.IsFirstVDM.FirstVDM);
     CHECK(BaseSrvIsFirstVDM((PCSR_API_MSG)&m,&reply) == 0 && !m.u.IsFirstVDM.FirstVDM);
+    CHECK(GetNextVDMCommand(NULL) == FALSE);
 
     ZeroMemory(&m,sizeof(m));
     m.u.CheckVDM.ConsoleHandle = (HANDLE)1; /* Local fixture record key, not IPC/native handle. */
@@ -86,7 +143,15 @@ int main(void)
     CHECK(BaseSrvGetNextVDMCommand((PCSR_API_MSG)&m,&reply) == (ULONG)STATUS_INVALID_PARAMETER);
     CHECK(m.u.GetNextVDMCommand.CmdLen == sizeof(command));
     CHECK(record->DOSRecord->VDMState == VDM_TO_TAKE_A_COMMAND);
-    CHECK(BaseSrvGetNextVDMCommand((PCSR_API_MSG)&m,&reply) == 0);
+    ZeroMemory(&clientInfo,sizeof(clientInfo));
+    clientInfo.VDMState = ASKING_FOR_FIRST_COMMAND;
+    clientInfo.CmdLine = output;
+    clientInfo.CmdSize = 1;
+    CHECK(!GetNextVDMCommand(&clientInfo));
+    CHECK(GetLastError() == ERROR_INVALID_PARAMETER);
+    CHECK(clientInfo.CmdSize == sizeof(command) && captures == 0);
+    CHECK(record->DOSRecord->VDMState == VDM_TO_TAKE_A_COMMAND);
+    CHECK(GetNextVDMCommand(&clientInfo) && captures == 0);
     CHECK(!memcmp(output,command,sizeof(command)));
     CHECK(record->DOSRecord->VDMState == VDM_BUSY);
     CHECK(WaitForSingleObject(parentWait,0) == WAIT_TIMEOUT);
@@ -126,6 +191,12 @@ int main(void)
     m.u.GetNextVDMCommand.WaitObjectForVDM = (HANDLE)1;
     CHECK(BaseSrvGetNextVDMCommand((PCSR_API_MSG)&m,&reply) == 0);
     CHECK(!m.u.GetNextVDMCommand.WaitObjectForVDM && !m.u.GetNextVDMCommand.CmdLen);
+    ZeroMemory(&clientInfo,sizeof(clientInfo));
+    clientInfo.VDMState = ASKING_FOR_WOW_BINARY;
+    clientInfo.CmdLine = output;
+    clientInfo.CmdSize = sizeof(output);
+    CHECK(GetNextVDMCommand(&clientInfo));
+    CHECK(!clientInfo.CmdSize && captures == 0);
     puts("PASS: original first-VDM, record/command/directory capacity, dispatch/completion, parent/worker events, reentry, empty-WOW, cleanup");
     return 0;
 }

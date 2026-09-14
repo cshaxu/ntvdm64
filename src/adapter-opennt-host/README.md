@@ -20,6 +20,18 @@ semantics. `mvdm-host` does not include or call this component directly.
 Every exported binding must retain an OpenNT source spelling/ABI/failure row
 in the shared host tracker and identify its `opennt-host` caller.
 
-No implementation body is admitted yet. Each accepted package's interface
-audit determines its smallest source-shaped subfamily before a single function
-is written.
+T412 S2 admits the finite BaseSrv/BaseClient subfamily described in the
+[consolidated design](../../docs/etc/evidence/m0-t412-s1-design-closure.md).
+`basesrv/include/base_client.h` now retains the four reached declarations from
+OpenNT `public/sdk/inc/ntcsrdll.h`, without importing its CSR runtime:
+
+| Binding | Original caller and contract | Current implementation status |
+| --- | --- | --- |
+| CsrAllocateCaptureBuffer | Original GetNextVDMCommand; allocate bounded capture or return NULL. | Test transport only; product binding pending. |
+| CsrAllocateMessagePointer | Original GetNextVDMCommand; source-shaped capture allocation with aligned length and returned pointer. | Test transport only; product binding pending. |
+| CsrFreeCaptureBuffer | Original GetNextVDMCommand; release captured storage at original cleanup sites. | Test transport only; product binding pending. |
+| CsrClientCallServer | Original GetNextVDMCommand; dispatch captured request and preserve transport/service result distinction. | Focused test routes to actual original server; authenticated product transport pending. |
+
+The test implementations in `tests/broker/original_server_lifecycle.c` are
+not product providers. No command-selection, waiting/retry or completion policy
+may move here from the original client/server bodies.

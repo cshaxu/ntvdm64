@@ -39,6 +39,13 @@ nonzero reentry wake, empty-WOW polling and cleanup. Link-map ownership is
 checked. This is same-process focused evidence, not product selection or
 cross-process acceptance; S2 remains active and the deployed baseline is unchanged.
 
+S2 also restores the complete original GetNextVDMCommand body under its
+source-file command cohort. Original client/server focused tests now pass
+first-query, short-buffer/error mapping, retry/copy and capture cleanup; the
+default environment cohort still compiles. The command cohort is not yet a
+deployed product provider. Remaining client lifecycle and finite bindings
+must be completed before the local policy can be removed.
+
 ## T412 S1 historical checkpoints
 
 S1 execution checkpoint: [source audit](../etc/evidence/m0-t412-s1-broker-owner-audit.md)
