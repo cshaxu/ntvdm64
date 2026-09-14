@@ -10,6 +10,19 @@
 static CSR_PROCESS caller;
 static CSR_THREAD thread;
 static OPENNT_BASE_PROCESS_REGISTRY processRegistry;
+typedef struct registry_remove_test {
+    HANDLE started;
+    HANDLE finished;
+    BOOL removed;
+} registry_remove_test;
+static DWORD WINAPI remove_registered_peer(LPVOID context)
+{
+    registry_remove_test *test=(registry_remove_test *)context;
+    SetEvent(test->started);
+    test->removed=OpenNtBaseRemoveProcess(&processRegistry,&caller);
+    SetEvent(test->finished);
+    return test->removed?0:1;
+}
 extern HANDLE hwndWowExec;
 extern ULONG ulWowExecProcessSequenceNumber;
 extern NTSTATUS (*UserTestTokenForInteractive)(HANDLE, PLUID);
@@ -112,7 +125,7 @@ static DWORD WINAPI enqueue_after_wait(LPVOID unused)
 
 #define CHECK(x) do { if (!(x)) { fprintf(stderr,"FAIL line %d: %s\n",__LINE__,#x); return 1; } } while(0)
 
-int main(void)
+int main(int argc, char **argv)
 {
     BASE_API_MSG m;
     CSR_REPLY_STATUS reply = 0;
@@ -125,6 +138,7 @@ int main(void)
     HWND registrationWindow;
     HANDLE sender;
     DWORD senderExit;
+    if (argc==2 && !strcmp(argv[1],"--registry-child")) return 0;
     BaseSrvHeap = GetProcessHeap();
     {
         OPENNT_BASE_VDM_CONFIG config;
@@ -532,6 +546,54 @@ int main(void)
         CHECK(GetLastError()==ERROR_ACCESS_DENIED && unexpected==NULL);
         CHECK(CsrUnlockProcess(found)==0);
         CHECK(OpenNtBaseRemoveProcess(&processRegistry,&caller));
+    }
+    {
+        registry_remove_test test={0};
+        HANDLE remover;
+        PCSR_PROCESS pinned=NULL;
+        DWORD exitCode;
+        CHECK(OpenNtBaseRegisterProcess(&processRegistry,&caller,GetCurrentProcess()));
+        CHECK(CsrLockProcessByClientId((HANDLE)GetCurrentProcessId(),&pinned)==0);
+        test.started=CreateEventW(NULL,TRUE,FALSE,NULL);
+        test.finished=CreateEventW(NULL,TRUE,FALSE,NULL);
+        CHECK(test.started && test.finished);
+        remover=CreateThread(NULL,0,remove_registered_peer,&test,0,NULL);
+        CHECK(remover!=NULL);
+        CHECK(WaitForSingleObject(test.started,5000)==WAIT_OBJECT_0);
+        CHECK(WaitForSingleObject(test.finished,50)==WAIT_TIMEOUT);
+        CHECK(GetProcessId(pinned->ProcessHandle)==GetCurrentProcessId());
+        CHECK(CsrUnlockProcess(pinned)==0);
+        CHECK(WaitForSingleObject(test.finished,5000)==WAIT_OBJECT_0);
+        CHECK(WaitForSingleObject(remover,5000)==WAIT_OBJECT_0);
+        CHECK(GetExitCodeThread(remover,&exitCode) && exitCode==0);
+        CHECK(test.removed && caller.ProcessHandle==NULL);
+        CHECK(CloseHandle(remover) && CloseHandle(test.started) && CloseHandle(test.finished));
+        puts("PASS: concurrent removal waits for original service lookup unlock");
+    }
+    {
+        WCHAR image[MAX_PATH], command[MAX_PATH+32];
+        STARTUPINFOW startupInfo={sizeof(startupInfo)};
+        PROCESS_INFORMATION child={0};
+        CSR_PROCESS childRecord={0};
+        PCSR_PROCESS found=NULL;
+        DWORD size=GetModuleFileNameW(NULL,image,MAX_PATH), code;
+        CHECK(size>0 && size<MAX_PATH);
+        CHECK(_snwprintf(command,MAX_PATH+32,L"\"%ls\" --registry-child",image)>0);
+        CHECK(CreateProcessW(image,command,NULL,NULL,FALSE,CREATE_SUSPENDED|CREATE_NO_WINDOW,
+            NULL,NULL,&startupInfo,&child));
+        CHECK(OpenNtBaseRegisterProcess(&processRegistry,&childRecord,child.hProcess));
+        CHECK(ResumeThread(child.hThread)!=MAXULONG);
+        CHECK(CloseHandle(child.hThread));
+        CHECK(WaitForSingleObject(child.hProcess,5000)==WAIT_OBJECT_0);
+        CHECK(GetExitCodeProcess(child.hProcess,&code) && code==0);
+        CHECK(CloseHandle(child.hProcess));
+        CHECK(CsrLockProcessByClientId((HANDLE)child.dwProcessId,&found)==0 && found==&childRecord);
+        CHECK(WaitForSingleObject(found->ProcessHandle,0)==WAIT_OBJECT_0);
+        CHECK(GetProcessId(found->ProcessHandle)==child.dwProcessId);
+        CHECK(CsrUnlockProcess(found)==0);
+        CHECK(OpenNtBaseRemoveProcess(&processRegistry,&childRecord));
+        CHECK(CsrLockProcessByClientId((HANDLE)child.dwProcessId,&found)<0 && found==NULL);
+        puts("PASS: real exited process remains referenced until explicit registered cleanup");
     }
     processRegistry.NextSequence=MAXULONG;
     CHECK(!OpenNtBaseRegisterProcess(&processRegistry,&caller,GetCurrentProcess()));

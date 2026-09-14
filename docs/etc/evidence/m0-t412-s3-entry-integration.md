@@ -185,3 +185,28 @@ scope/session negatives remain controlled expectations rather than genuine
 other-user runs. This test does not authorize launcher registration of another
 worker, implement launch reservations or deliver VDM commands. Those product
 integration and death-race gates remain open; no deployment changed.
+
+## Registry concurrent removal and real process exit
+
+With the formal S3/product libraries, the lifecycle fixture now starts a
+removal thread while the main thread holds CsrLockProcessByClientId. An event
+establishes the remover has started; its completion must remain unsignaled
+during the held-lock interval, while the pinned process reference remains
+queryable. After CsrUnlockProcess, removal completes and clears the owned handle.
+This tests the cross-thread lock lifetime, not just same-thread pin rejection.
+
+The fixture also launches its own build-local executable in a hidden suspended
+child mode, registers the actual process, resumes it, and verifies normal exit
+zero. After closing the creator's handles, the registry still identifies and
+waits on the exited process object. Explicit removal then makes lookup fail.
+Only that owned child is involved; no deployed product or guest runs. Both new
+checks and the existing full original lifecycle test pass. They prove local
+registry lifetime across thread contention and real process exit, not an
+implemented broker death watcher or automatic BaseSrv cleanup dispatch.
+
+Original srvvdm.c resource review reconfirms the next integration constraint:
+BaseSrvCreatePairWaitHandles and BaseSrvDupStandardHandles must receive their
+resource-delivery result synchronously at the original NtDuplicateObject call.
+Deferring acquisition to GetNextVDMCommand would move failure after original
+record publication. The admitted recipient receipt/revocation binding remains
+required; this registry verification does not replace that remaining work.
