@@ -1,8 +1,18 @@
 # broker
 
-Versioned, fixed-width cross-process coordination contract.  The current
-implementation is an in-process contract fixture only: it contains no named
-pipe, RPC, Win32 security token, MVDM provider or machine pointer.
+Versioned, fixed-width cross-process coordination contract. The legacy wire/
+registry modules below remain in-process contract fixtures. S3's rpc_security
+module supplies the reusable native authentication boundary; it is currently
+exercised by real RPC fixtures, not yet by the three product executables.
+
+`rpc_security.c/.h` is new finite modern transport glue, not original BaseSrv
+policy. NT4 CSR port/process authentication cannot be reused without the
+excluded CSR runtime. The admitted local RPC route instead requires WINNT
+packet privacy and matching OS token logon LUID/session. Scope is captured from
+the owning process, never copied from a command. Native state in this private
+header is not wire data. Every impersonated path reverts; failed RPC reversion
+denies access and falls back to public RevertToSelf, with fail-fast if neither
+can restore the thread. That exceptional failure branch remains unexercised.
 
 M0 T272 S5 disposition register:
 
@@ -23,5 +33,6 @@ M0 T272 S5 disposition register:
   is the only permitted original-call binding, and a later public pipe/event
   transport may use this exact record contract.
 
-Project-owned per-user cross-process coordination component. It exchanges only
-versioned fixed-width copied records and never carries local resources.
+Project-owned per-user cross-process coordination component. Command records
+contain only versioned copied values. Required native resources use only the
+separate authenticated OS-managed attachment exception, never command fields.

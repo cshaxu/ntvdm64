@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {spawn, spawnSync} from 'node:child_process';
 const root = process.cwd();
-const build = path.resolve('build/M0-T412/S1/rpc-resource');
+const build = path.resolve('build/M0-T412/S3/rpc-resource');
 fs.mkdirSync(build, {recursive: true});
 const environment = path.join(build, 'msvc-mt.cmd');
 fs.writeFileSync(environment, [
@@ -13,13 +13,15 @@ fs.writeFileSync(environment, [
 const source = path.join(root, 'tests/broker/resource_attachment.c');
 const idl = path.join(root, 'tests/broker/resource_attachment.idl');
 const log = fs.openSync(path.join(build, 'build.log'), 'w');
+const securityInclude = `/I "${root}/src/broker"`;
 const commands = [
+    `cl.exe /nologo /MT /W4 /c "${root}/src/broker/rpc_security.c" /Fosecurity.obj`,
     `midl.exe /nologo /env win32 /target NT100 /prefix client Client_ /prefix server Server_ /out . "${idl}"`,
-    `cl.exe /nologo /MT /W4 /DRESOURCE_SERVER /I . /c "${source}" /Foserver.obj`,
+    `cl.exe /nologo /MT /W4 /DRESOURCE_SERVER /I . ${securityInclude} /c "${source}" /Foserver.obj`,
     'cl.exe /nologo /MT /W4 /I . /c resource_attachment_s.c /Foserver-stub.obj',
-    `cl.exe /nologo /MT /W4 /I . /c "${source}" /Foclient.obj`,
+    `cl.exe /nologo /MT /W4 /I . ${securityInclude} /c "${source}" /Foclient.obj`,
     'cl.exe /nologo /MT /W4 /I . /c resource_attachment_c.c /Foclient-stub.obj',
-    'link.exe /nologo /out:resource-server.exe server.obj server-stub.obj client-stub.obj rpcrt4.lib advapi32.lib kernel32.lib',
+    'link.exe /nologo /out:resource-server.exe server.obj security.obj server-stub.obj client-stub.obj rpcrt4.lib advapi32.lib kernel32.lib',
     'link.exe /nologo /out:resource-client.exe client.obj client-stub.obj rpcrt4.lib advapi32.lib kernel32.lib',
 ];
 for (const command of commands) {
@@ -36,7 +38,7 @@ for (const name of ['resource-server.exe', 'resource-client.exe']) {
 function launchServer(endpoint, downstream) {
 const server = spawn(path.join(build, 'resource-server.exe'), [endpoint, ...(downstream ? [downstream] : [])],
     {cwd: build, windowsHide: true, stdio: ['ignore', 'pipe', 'pipe']});
-const serverDone = new Promise(resolve => server.once('exit', code => resolve(code)));
+const serverDone = new Promise(resolve => server.once('close', code => resolve(code)));
 let stdout = '', stderr = '';
 server.stdout.on('data', data => stdout += data);
 server.stderr.on('data', data => stderr += data);
@@ -46,8 +48,9 @@ const ready = new Promise((resolve, reject) => {
         server.once('exit', code => {clearTimeout(timeout); reject(Error(`Server exited ${code}: ${stderr}`));});
         server.stdout.on('data', () => {if (stdout.includes('READY')) {clearTimeout(timeout); resolve();}});
     });
-return {server, serverDone, ready, cleanup(name) {
+return {server, serverDone, ready, transcript() { return stdout + stderr; }, async cleanup(name) {
     if (server.exitCode === null) server.kill();
+    await serverDone;
     fs.writeFileSync(path.join(build, `${name}-server.log`), stdout + stderr);
 }};
 }
@@ -69,24 +72,32 @@ try {
         await target.ready;
     }
     relay = launchServer(endpoint, target ? `${endpoint}-target` :
-        mode === 'unavailable' ? `${endpoint}-absent` : undefined);
+        mode === 'unavailable' ? `${endpoint}-absent` : mode === 'wrong-scope' ? 'deny-scope' : mode === 'wrong-session' ? 'deny-session' : undefined);
     await relay.ready;
     const result = spawnSync(path.join(build, 'resource-client.exe'),
         [endpoint, path.join(build, `${endpoint}.tmp`), ...(mode.endsWith('readonly') ? ['readonly'] :
-            mode === 'unavailable' ? ['unavailable'] : [])],
+            mode === 'unavailable' ? ['unavailable'] : mode.startsWith('wrong-') ? ['denied'] : mode === 'low-auth' ? ['low-auth'] : [])],
         {cwd: build, windowsHide: true, encoding: 'utf8', timeout: 15000});
     const record = {clientStatus: result.status, clientOutput: result.stdout,
         clientError: result.stderr, spawnError: result.error?.message};
     fs.writeFileSync(path.join(build, `${mode}-result.json`), JSON.stringify(record, null, 2));
     if (result.status !== 0) throw Error('Resource attachment fixture failed');
-    record.serverStatus = await finished(relay);
+    if (!mode.startsWith('wrong-')) record.serverStatus = await finished(relay);
+    else {
+        if (relay.server.exitCode !== null) throw Error('Denied call unexpectedly stopped server');
+        record.serverStatus = 'still listening; owned fixture terminated in cleanup';
+    }
+    if (mode === 'low-auth') {
+        if (!relay.transcript().includes('AUTH level=6 service=10')) throw Error('Requested integrity was not observed as WINNT packet privacy');
+        record.observedAuthentication = 'requested integrity; server observed WINNT packet privacy';
+    }
     if (target) record.targetStatus = await finished(target);
     console.log(JSON.stringify(record));
     fs.writeFileSync(path.join(build, `${mode}-result.json`), JSON.stringify(record, null, 2));
 } finally {
     // Only this fixture's owned child, never process-name enumeration.
-    relay?.cleanup(mode);
-    target?.cleanup(`${mode}-target`);
+    await relay?.cleanup(mode);
+    await target?.cleanup(`${mode}-target`);
 }
 }
-for (const mode of ['shared', 'readonly', 'relay', 'relay-readonly', 'unavailable']) await runCase(mode);
+for (const mode of ['shared', 'readonly', 'relay', 'relay-readonly', 'unavailable', 'wrong-scope', 'wrong-session', 'low-auth']) await runCase(mode);

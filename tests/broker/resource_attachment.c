@@ -5,31 +5,21 @@
 #include <stdlib.h>
 #include <string.h>
 #include "resource_attachment.h"
+#include "rpc_security.h"
 
 void *__RPC_USER midl_user_allocate(size_t size) { return malloc(size); }
 void __RPC_USER midl_user_free(void *value) { free(value); }
 
 #ifdef RESOURCE_SERVER
 static RPC_BINDING_HANDLE downstream;
+static broker_rpc_scope serverScope;
 static RPC_STATUS RPC_ENTRY authorize(RPC_IF_HANDLE interface_id, void *context)
 {
-    HANDLE caller = NULL, own = NULL;
-    TOKEN_STATISTICS a, b;
-    DWORD bytes;
-    RPC_STATUS result = RPC_S_ACCESS_DENIED;
+    ULONG level=0, service=0;
     (void)interface_id;
-    if (RpcImpersonateClient(context) != RPC_S_OK) return result;
-    if (OpenThreadToken(GetCurrentThread(), TOKEN_QUERY, TRUE, &caller) &&
-        OpenProcessToken(GetCurrentProcess(), TOKEN_QUERY, &own) &&
-        GetTokenInformation(caller, TokenStatistics, &a, sizeof(a), &bytes) &&
-        GetTokenInformation(own, TokenStatistics, &b, sizeof(b), &bytes) &&
-        a.AuthenticationId.LowPart == b.AuthenticationId.LowPart &&
-        a.AuthenticationId.HighPart == b.AuthenticationId.HighPart)
-        result = RPC_S_OK;
-    if (caller) CloseHandle(caller);
-    if (own) CloseHandle(own);
-    if (RpcRevertToSelf() != RPC_S_OK) return RPC_S_ACCESS_DENIED;
-    return result;
+    (void)RpcBindingInqAuthClientW(context,NULL,NULL,&level,&service,NULL);
+    printf("AUTH level=%lu service=%lu\n",level,service); fflush(stdout);
+    return broker_rpc_authorize(&serverScope,context);
 }
 
 error_status_t Server_Transfer(handle_t binding, HANDLE input, HANDLE event, HANDLE *output)
@@ -63,7 +53,10 @@ int main(int argc, char **argv)
     RPC_STATUS status;
     RPC_CSTR text = NULL;
     if (argc != 2 && argc != 3) return 1;
-    if (argc == 3) {
+    if (!broker_rpc_capture_scope(&serverScope)) return 5;
+    if (argc==3 && !strcmp(argv[2],"deny-scope")) serverScope.logon.LowPart^=1;
+    else if (argc==3 && !strcmp(argv[2],"deny-session")) serverScope.session^=1;
+    else if (argc == 3) {
         if (RpcStringBindingComposeA(NULL, (RPC_CSTR)"ncalrpc", NULL,
                 (RPC_CSTR)argv[2], NULL, &text) ||
             RpcBindingFromStringBindingA(text, &downstream) ||
@@ -92,10 +85,11 @@ int main(int argc, char **argv)
     DWORD count;
     char data[2];
     error_status_t status = RPC_S_CALL_FAILED;
-    int readonly, unavailable;
+    int readonly, unavailable, denied;
     if (argc != 3 && argc != 4) return 1;
     readonly = argc == 4 && strcmp(argv[3], "readonly") == 0;
     unavailable = argc == 4 && strcmp(argv[3], "unavailable") == 0;
+    denied = argc == 4 && strcmp(argv[3], "denied") == 0;
     input = CreateFileA(argv[2], GENERIC_READ | GENERIC_WRITE,
         FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, CREATE_NEW, FILE_ATTRIBUTE_NORMAL, NULL);
     event = CreateEventW(NULL, TRUE, FALSE, NULL);
@@ -110,11 +104,21 @@ int main(int argc, char **argv)
     }
     if (RpcStringBindingComposeA(NULL, (RPC_CSTR)"ncalrpc", NULL, (RPC_CSTR)argv[1], NULL, &text) ||
         RpcBindingFromStringBindingA(text, &binding) ||
-        RpcBindingSetAuthInfoA(binding, NULL, RPC_C_AUTHN_LEVEL_PKT_PRIVACY,
+        RpcBindingSetAuthInfoA(binding, NULL, argc==4 && !strcmp(argv[3],"low-auth") ? RPC_C_AUTHN_LEVEL_PKT_INTEGRITY : RPC_C_AUTHN_LEVEL_PKT_PRIVACY,
             RPC_C_AUTHN_WINNT, NULL, RPC_C_AUTHZ_NONE)) return 3;
     RpcTryExcept { status = Client_Transfer(binding, input, event, &output); }
     RpcExcept(1) { status = RpcExceptionCode(); }
     RpcEndExcept
+    if (denied) {
+        if (status!=RPC_S_ACCESS_DENIED || output!=NULL ||
+            WaitForSingleObject(event,0)!=WAIT_TIMEOUT || GetFileSize(input,NULL)!=1) {
+            fprintf(stderr,"denial result=%lu output=%d\n",status,output!=NULL); return 9;
+        }
+        CloseHandle(input); CloseHandle(event);
+        RpcBindingFree(&binding); RpcStringFreeA(&text);
+        puts("PASS: rejected scope or authentication level before resource mutation");
+        return 0;
+    }
     if (unavailable) {
         if (status != RPC_S_SERVER_UNAVAILABLE || output != NULL ||
             WaitForSingleObject(event, 0) != WAIT_TIMEOUT ||
