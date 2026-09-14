@@ -1061,3 +1061,32 @@ The owned test server is terminated after verification; idle shutdown is not
 proved. Ambiguous-reply recovery, direct resource use by Check/Update/Get,
 worker delivery and three-program DOS execution remain open. Files and logs
 for this test stay under build/M0-T412/S3/basesrv-product; deployment unchanged.
+
+## Source stream-owner binding checkpoint
+
+Before wiring the new incoming receipts into Check, the selected unchanged
+srvvdm.c was rechecked at the reached owners. Command construction (around
+1432) copies StdIn/StdOut/StdErr only for DOS; the WOW case does not use that
+DOS standard-stream carrier. BaseSrvDupStandardHandles (1868) takes the source
+process from the current CSR request thread, replaces fields in order and
+uses StdOutTemp equality to preserve a stdout/stderr alias. Consequently a
+broker-local HANDLE cannot be placed into those fields while leaving the
+source process equal to the registered client. The resource callback must
+interpret the authenticated process/generation and receipt identity together;
+it must never pass the receipt number directly to native NtDuplicateObject.
+
+The existing OpenNtBaseBindResources boundary is the selected seam: retain
+the original duplication/cleanup algorithms, translate their finite resource
+operations, and preserve shared receipt identity for stdout/stderr. A partial
+copy leaves mixed source/destination fields; do not substitute an all-at-once
+replacement algorithm. BaseSrvCloseStandardHandles (2465) performs three
+CLOSE_SOURCE calls and then zeros the fields, so alias revocation must remain
+repeat-safe. Receiver receipt publication and rollback belong to the already
+present delivery journal, not a new shadow resource table.
+
+Update's branch around 1612 creates wait handles and duplicates DOS standard
+streams only when DosSesId is zero. A nonzero DosSesId skips both operations.
+Forcing a new-console/DosSesId route to bypass this unfinished binding would
+therefore change source behavior and is not a valid three-program shortcut.
+This checkpoint is source evidence for the next binding change, not a claim
+that command dispatch or worker receipt delivery has been implemented.
