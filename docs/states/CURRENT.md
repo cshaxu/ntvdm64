@@ -82,6 +82,14 @@ ban HANDLEs in every message. The proposed narrow OS-attachment exception is
 S1 remains open pending that decision and remaining finite-boundary design;
 there is no S2 admission or source implementation beyond the approved prerequisites.
 
+Further read-only S1 review distinguishes nonblocking shared-WOW polling,
+validated WOWEXEC window notification, logon-LUID identity, and the separate
+private USER startup/input-idle hook. Their exact original owners and required
+Console/generation tests are recorded in the
+[continued boundary audit](../etc/evidence/m0-t412-s1-broker-owner-audit.md#console-and-wow-immediate-boundary-refinement).
+The resource-transfer exception remains unapproved; no production changes or
+new import follow from this continuation.
+
 ## T411 Closed Packet
 
 T412 S1 found an inherited event-evidence contradiction; see the current

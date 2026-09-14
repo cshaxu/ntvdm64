@@ -292,3 +292,48 @@ Owner decision is needed before selecting this resource-transfer exception and
 freezing S1's transport contract. Rejecting it requires explicit loss of some
 arbitrary standard-stream/reuse semantics, or another proven OS capability
 channel; a name-only reopen or autonomous I/O proxy is not presumed equivalent.
+
+## Console and WOW immediate-boundary refinement
+
+This continuation rechecked clean source at `c42ef7c56`. The preceding turn
+made implementation/runtime progress; the resource-transfer authority question
+is still unanswered. No resource exception, broker implementation or new source
+import was performed. The following bounded source research is independent of
+that decision and narrows the remaining design requirements.
+
+Inputs are the same pinned OpenNT tree, selected `srvvdm.c` and
+`mvdm-host/wow32/wkman.c`. Out-of-MVDM private USER files below are read-only
+evidence, not newly accepted source packages.
+
+| Boundary | Original evidence | Restoration requirement |
+| --- | --- | --- |
+| Shared-WOW command acquisition | `srvvdm.c:146-189` explicitly forbids blocking WOWEXEC in GetNextVDMCommand; an empty queue returns success, zero lengths and zero WaitObjectForVDM. | Do not unify DOS/WOW acquisition into a generic blocking broker receive. Test empty response, notification followed by draining multiple commands, PIF query and short captures separately. |
+| DOS wait/reentry | `srvvdm.c:193-299` chooses DOS records, reports prior completion, and returns/reset-creates its wait handle when appropriate; separate-WOW and the second RETURN_ON_NO_COMMAND request have their own STATUS_NO_MEMORY branch. `BaseSrvSetReenterCount:2529` signals an existing VDM event on decrement. | Retain original branches, not the local pending/count-zero predicate. Test notification arriving before client wait and reentry during acquisition; do not overwrite original no-command status with a generic broker error. |
+| WOWEXEC registration | `wkman.c:WK32RegisterShellWindowHandle:1801` registers the actual translated shell window only for shared WOW. `srvvdm.c:BaseSrvRegisterWowExec:569` retains HWND, TID, PID and CSR process sequence. | Keep registration driven by original WOW32, not an app-created substitute window. The finite binding must reject stale/disconnected generations and preserve the separate-WOW branch. |
+| WOWEXEC delivery | `srvvdm.c:849-905` revalidates window owner TID/PID/process sequence, then calls public PostMessageA with WM_WOWEXECSTARTAPP; otherwise it frees the stale WOW head. | A scalar broker notification is not complete until the original WOWEXEC message loop receives the message. Do not substitute a callback-success stub or wake a blocking GetNextVDMCommand. HWND routing remains an explicit binding design, not a generic kernel-handle attachment. |
+| Interactive identity | `windows/core/ntuser/server/exports.c:_UserTestTokenForInteractive:103` queries TokenStatistics and returns AuthenticationId. Its final kernel call reaches `kernel/security.c:TestForInteractiveUser:258`, which compares that LUID with the first interactive windowstation's luidUser. | This is logon-session identity, not merely equal user SID. Token querying is composable user-mode logic; the original global interactive-windowstation list is unavailable. Per-user/session broker admission must explicitly account for logon LUID and noninteractive/SYSTEM-impersonation branches before claiming equivalence. |
+| USER startup notification | `srvvdm.c:843` and `1509` call UserNotifyProcessCreate only when installed. Original `windows/core/ntuser/kernel/queue.c:UserNotifyProcessCreate:292` handles activation and WinExec/WaitForInputIdle synchronization; flag 4 builds WOWTHREADINFO and records the parent/task wait object. | This is not WOWEXEC command delivery. Do not relabel it optional cosmetic feedback or duplicate the USER thread/process shell in broker. Original guarded absence is a possible unsupported boundary, not proof of native input-idle semantics; its product disposition remains explicit before closure. |
+
+Console lookup is also not a process-ID lookup: original
+`BaseSrvGetConsoleRecord:1976` keys by nonzero hConsole, whereas pre-registration
+`GetConsoleRecordDosSesId` selects a zero-console record by DosSesId. The PIF
+branch later associates that record with its Console. Preserve these transitions;
+do not flatten both into one worker ID or route an arbitrary new launcher into
+a busy interactive COMMAND.
+
+Required identity design proof is now concrete: first launch with inherited
+Console, later caller in the same Console, different Console, detached launch,
+Console closure/recreation, and caller/worker PID reuse. A broker-issued cookie
+must be bound to actual Console membership, not just a claimed PID, terminal
+window title or HWND. No public remote-console identity provider has been
+verified in this continuation; that is still design work, not a fabricated
+unavailable implementation or an excuse to import Console Server.
+
+Four-rung disposition: original BaseSrv selection/wait/cleanup and original
+WOW32 registration remain first-choice retained owners. Public posting and
+token-query operations can supply finite mechanics, but do not replace those
+owners. CSR sequence lookup, interactive-windowstation globals and USER startup
+synchronization identify the precise unavailable private dependencies. No new
+kernel/USER mirror import, success stub or project-owned replacement state
+machine is justified by this review. Focused/runtime verification must establish
+each selected binding before S2/S5 can claim its corresponding contract.
