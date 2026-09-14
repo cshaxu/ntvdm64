@@ -2,30 +2,39 @@
 
 ## Current Work
 
-**Active: M0 T411 S2.**
+**Active: M0 T411 S3.**
 
 ## Active Packet
 
-### M0 T411 S2 — C-VID vector-generation closure
+### M0 T411 S3 — Original quick-event provider closure
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T411 S2, Ordinary Mode. |
-| Admission And Approval | Owner approved the admitted T411 to begin execution: “准入本t任务开始执行”. S1 is closed below; this is the first restoration group in its approved proposal. |
+| Identifier Mode | M0 T411 S3, Ordinary Mode. |
+| Admission And Approval | Owner approved the admitted T411 to begin execution: “准入本t任务开始执行”. S2 is closed below; this is the second restoration group in its approved proposal. |
 | Candidate Proposal | [CCPU40 C-VID and event-path research and restoration](../proposals/proposal-ccpu40-cvid-event-path-restoration-001.md). |
-| Objective | Prove the complete selected C-VID public/private vector composition and initialization order, then remove only a source-proven redundant binder/generated-provider portion while retaining exactly one Cpu/Sas/Video owner. |
-| Non-goals | No timing-provider replacement, event-bitmap policy change, CPU instruction change, CPU30/MONITOR selection, broker work, guest execution claim, or whole-binder deletion merely because it is project-authored. |
-| Reference Baseline | [S1 audit](../etc/evidence/m0-t411-s1-ccpu40-cvid-event-audit.md) classifies C04 as a missing generated carrier, C05 as the separate timing replacement, and P01/P02 as registered NTVDMx64 carriers. Selected Win32/x86 CCPU40 remains sole product profile. |
-| Files And ABI Surface | `c2cpusad.h`, C-VID/CCPU `cpu4gen.h`, `ev_glue.c`, `accessfn.c`, `base/support/main.c`, vector binder/generator, selected x86 Ninja graph and a focused C-VID fixture. No public ABI change. |
+| Objective | Recover or precisely bound the original CCPU-compatible provider for C-VID `Get/SetJump*` slots, including qevnt initialization/reset/calibration semantics, and remove the local shared-100 replacement only if the source-backed provider is executable through a finite standalone boundary. |
+| Non-goals | No event-bitmap policy change, CPU instruction change, CPU30/MONITOR selection, broker work, arbitrary timing algorithm, or deletion of the C-VID binder. |
+| Reference Baseline | [S1 audit](../etc/evidence/m0-t411-s1-ccpu40-cvid-event-audit.md) classifies C05 as the only quantified autonomous C-VID timing replacement; [S2 closure](../etc/evidence/m0-t411-s2-cvidc-vector-closure.md) proves the binder is retained. |
+| Files And ABI Surface | `qevnt.c`, `quick_ev.c`, C-VID `accessfn.c`, CCPU timing provider, binder/generator, original selected system manifest and focused x86 timing fixture. No public ABI change. |
 | Applicable Rules | Goal, architecture, coding, execution, documentation and source-policy authorities; historical-recovery and CPU compatibility-profile gates. |
-| Verification | Generate a slot ledger from original metadata; prove provider declarations/definitions and unique assignments; focused x86 compile/link/run covering `setup_global_data_ptr`, `setup_vga_globals`, vector installation and one C-VID overwrite call; source/current diff review, governance and diff checks. |
-| Expected Markers | No selected null/recursive vector call; exactly one owner for Cpu/Sas/Video; original initialization ordering is preserved or each required pre-init binder call has a source-backed reason; actual reduction count is proved. |
-| Asset Needs | Existing selected OpenNT/OpenNT-4.5 source, registered NTVDMx64 carrier evidence, local x86 build toolchain and a new disposable build root under `build/M0-T411/S2/`. |
-| Reporting Requirements | Separate original source, adapter, external-patch and autonomous material; list every retained slot and explain its original owner or unavailable boundary; report positive and negative fixture results. |
-| Stop Conditions | Required slot has no original provider, a proposed change would introduce duplicate SoftPC state, the profile reaches CPU semantics/timing policy, or source/build evidence conflicts. Preserve current behavior and stop at the named receiver. |
-| Exit Criteria | One complete selected slot ledger, focused x86 positive/negative proof and any minimal source-backed cleanup are committed/pushed; C05 and E01 remain explicitly deferred to later sequential S packets. |
+| Verification | Compare complete original quick-event APIs and selected manifest; trace every Get/SetJump caller; prove initialization/reset/conversion behavior; focused x86 positive/negative timing fixture, source/current diff review, governance and diff checks. |
+| Expected Markers | Separate calibration/restart semantics or a proven source-shaped unavailable boundary; no recursive vector route; actual removed/retained count proved. |
+| Asset Needs | Existing selected OpenNT/OpenNT-4.5 source, local x86 toolchain and a disposable build root under `build/M0-T411/S3/`. |
+| Reporting Requirements | Separate original source, adapter, external-patch and autonomous material; name every unavailable dependency and report positive/negative evidence. |
+| Stop Conditions | No original provider can cross a finite standalone ABI, a proposed replacement would invent timing policy, source/build evidence conflicts, or the path enters event-bitmap consumption. Preserve current behavior and hand off E01 to S4. |
+| Exit Criteria | Source-first disposition of all C05 providers, any minimal restoration committed/pushed with focused x86 proof, and exact retained/removal count. |
 | Original Owner Request | “准入本t任务开始执行”. |
-| Similar-Issue Sweep | CPU/SAS/Video globals, duplicate generated slot names, null entries, setup before config versus post-CPU init, `ntstubs.c` collisions, NTVDMx64 generated declaration carriers and C-VID overwrite vector. |
+| Similar-Issue Sweep | qevnt/quick_ev source manifests, calibration versus restart calls, C-VID access wrappers, CCPU heartbeat conversion, reset and overflow paths, threaded callback and lock boundaries. |
+
+## S2 Closure Record
+
+S2 delivered the selected C-VID slot/layout and one-owner proof at the linked
+evidence record.  The actual 125-line binder/generator carrier has **zero
+source-proven removable lines**: early video publication and later full
+publication serve separate original-order requirements.  The focused x86
+fixture passes both positive routing and retained-null negative cases.  C05
+and E01 remain unmodified and transfer respectively to S3 and S4.
 
 ## S1 Closure Record
 

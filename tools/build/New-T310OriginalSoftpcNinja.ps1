@@ -97,6 +97,8 @@ $launchDeclarationWowEntryTestSource = Join-Path $root 'tests/app/launch_declara
 $cpu40DescriptorDomainFixtureSource = Join-Path $root 'tests/mvdm-host/dpmi/cpu40_descriptor_domain_fixture.c'
 $rtlX86FixtureSource = Join-Path $root 'tests/opennt-host/rtl_x86_fixture.c'
 $environmentProjectionFixtureSource = Join-Path $root 'tests/opennt-host/environment_projection_fixture.c'
+$cvidcVectorBindingFixtureSource = Join-Path $root 'tests/mvdm-host/cvidc_vector_binding_fixture.c'
+$cvidcVectorProviderStubGenerator = Join-Path $root 'tools/build/GenerateCvidcVectorProviderStubs.mjs'
 $baseDebugRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/debug'
 $hostRoot = Join-Path $root 'src/mvdm-host/softpc.new/host/src'
 $hostEntryRoot = Join-Path $root 'src/mvdm-host/softpc.new/obj.vdm'
@@ -899,6 +901,17 @@ $rtlX86FixtureObject = 'obj/tests/rtl_x86_fixture.obj'
 $graph.Add('build ' + $rtlX86FixtureObject + ': cc ' + (NinjaPath $rtlX86FixtureSource))
 $environmentProjectionFixtureObject = 'obj/tests/environment_projection_fixture.obj'
 $graph.Add('build ' + $environmentProjectionFixtureObject + ': cc ' + (NinjaPath $environmentProjectionFixtureSource))
+$cvidcVectorBindingFixtureObject = 'obj/tests/cvidc_vector_binding_fixture.obj'
+# This fixture must see C-VID's generated (non-CCPU) CpuVector view, just as
+# accessfn.c does; it therefore validates the actual cross-profile ABI seam.
+$graph.Add('build ' + $cvidcVectorBindingFixtureObject + ': cc_cvidc_access ' + (NinjaPath $cvidcVectorBindingFixtureSource))
+$cvidcVectorProviderStubSource = 'generated/cvidc_vector_provider_stubs.c'
+$cvidcVectorProviderStubObject = 'obj/tests/cvidc_vector_provider_stubs.obj'
+$graph.Add('rule generate_cvidc_vector_provider_stubs')
+$graph.Add('  command = "' + (NinjaPath $NodeExecutable) + '" "' + (NinjaPath $cvidcVectorProviderStubGenerator) + '" $out "' + (NinjaPath (Join-Path $build 'generated/cvidc_cpu_binding.inc')) + '"')
+$graph.Add('  description = GEN-CVIDC-PROVIDER-STUBS $out')
+$graph.Add('build ' + $cvidcVectorProviderStubSource + ': generate_cvidc_vector_provider_stubs generated/cvidc_cpu_binding.inc')
+$graph.Add('build ' + $cvidcVectorProviderStubObject + ': cc ' + $cvidcVectorProviderStubSource)
 $baseDebugObjects = foreach ($name in $baseDebugNames) {
     $object = 'obj/base-debug/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $baseDebugRoot $name)))
@@ -1079,6 +1092,7 @@ $graph.Add('rule memory_test_link')
 $graph.Add('  command = link.exe /nologo /map:$out.map /out:$out $in kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib libcmt.lib libvcruntime.lib libucrt.lib')
 $graph.Add('build obj/tests/original_external_memory_test.obj: cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/original_external_memory_test.c')))
 $graph.Add('build original-external-memory-test.exe: memory_test_link obj/tests/original_external_memory_test.obj app-machine-shell.lib original-softpc-host-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib original-opennt-rtl-x86.lib softpc-bindings.lib redirector-bindings.lib vdd-bindings.lib softpc-win32-bindings.lib basesrv-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib broker.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib original-ccpu386.lib obj/host/softpc-resource.res')
+$graph.Add('build cvidc-vector-binding-fixture.exe: memory_test_link ' + $cvidcVectorBindingFixtureObject + ' ' + $cvidcVectorProviderStubObject + ' obj/cvidc/mvdm_cvidc_vector_binding.obj')
 $graph.Add('build VDMREDIR.dll | VDMREDIR.dll.lib: redir_dll_link ' + (($redirObjects + @($redirResourceObject)) -join ' ') + ' original-softpc-process-import.lib redirector-bindings.lib original-opennt-netlib.lib original-opennt-netapi-api.lib softpc-bindings.lib softpc-win32-bindings.lib session.lib broker.lib')
 $graph.Add('build original-softpc-forced-closure.dll: forced_link_audit original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-softpc-host-roots.lib softpc-bindings.lib app-machine-shell.lib softpc-win32-bindings.lib basesrv-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib broker.lib mvdm-softpc-effective-address.lib softpc-patch-evidence.lib softpc-ccpu-vector-defaults.lib')
 $graph.Add('default original-softpc-candidate')
