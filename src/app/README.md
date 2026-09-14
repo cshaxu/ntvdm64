@@ -133,6 +133,21 @@ exit status. DOS/WOW dispatch deliberately fails while S3 IPC integration is
 unfinished. This intermediate target is not publishable and does not replace
 the deployed ntvdm32.exe. See the [entry evidence](../../docs/etc/evidence/m0-t412-s3-entry-integration.md).
 
+The build-only run16 also has the reserved `--internal-console-probe` role
+implemented in `console_probe.c`. It is not a user launch option or an
+authentication credential. An initially detached helper accepts a versioned
+fixed-width header and up to 4096 candidate PIDs through an inherited input
+pipe and emits status/membership through its output pipe. It caches these
+handles before Console attachment, rejects attached/non-pipe invocations,
+handles partial transfers, and exits after one observation. Oversized/invalid
+headers fail without allocating candidate storage. This finite private channel
+is newly authored because the NT4 Console identity transport cannot be reused;
+original BaseSrv policy is unchanged. Verify-BrokerConsoleMembership launches
+the formal run16 with an explicit inherited-handle allowlist and verifies a
+real query and invalid-version response. The product broker parent, timeout,
+authenticated transaction and process-generation revalidation are still open;
+the helper alone grants no reuse or record-selection authority.
+
 ## T412 standalone service composition
 
 `basesrv_entry.c` is the formal build-only broker entry. It selects original

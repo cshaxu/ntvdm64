@@ -1097,7 +1097,9 @@ if ($Architecture -eq 'x86') {
     $graph.Add('  cflags = ' + $baseOwnerFlags + ' /Gy')
     $graph.Add('rule run16_link')
     $graph.Add('  command = link.exe /nologo /subsystem:console /entry:wWinMainCRTStartup /opt:ref /out:$out /map:$out.map $in ntdll.lib kernel32.lib shell32.lib legacy_stdio_definitions.lib')
-    $graph.Add('build run16.exe: run16_link obj/run16/entry.obj obj/run16/support.obj opennt-base-client.lib opennt-base-bindings.lib original-opennt-rtl-x86.lib')
+    $graph.Add('build obj/run16/console_probe.obj: cc ' + (NinjaPath (Join-Path $root 'src/app/console_probe.c')))
+    $graph.Add('  cflags = /nologo /c /MT /W4 /we4013 /showIncludes /I "' + (NinjaPath (Join-Path $root 'src')) + '"')
+    $graph.Add('build run16.exe: run16_link obj/run16/entry.obj obj/run16/console_probe.obj obj/run16/support.obj opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib')
     $graph.Add('rule basesrv_idl')
     $graph.Add('  command = midl.exe /nologo /env win32 /target NT100 /prefix client Client_ /prefix server Server_ /out obj/basesrv /h service.h /cstub service_c.c /sstub service_s.c $in')
     $graph.Add('build obj/basesrv/service_s.c | obj/basesrv/service_c.c obj/basesrv/service.h: basesrv_idl ' + (NinjaPath (Join-Path $root 'src/broker/service.idl')))
@@ -1254,7 +1256,7 @@ $graph.Add('default original-softpc-candidate')
         target = 'run16.exe'
         selected = ($Architecture -eq 'x86')
         disposition = 'explicit build-only S3 work in progress; native branch only; no publication'
-        sources = @('src/app/run16_entry.c', 'src/adapter-mvdm-host-out/win32/source/opennt_support_rtl.c' | ForEach-Object {
+        sources = @('src/app/run16_entry.c', 'src/app/console_probe.c', 'src/adapter-mvdm-host-out/win32/source/opennt_support_rtl.c' | ForEach-Object {
             [ordered]@{ path = $_; sha256 = Get-NodeSha256 (Join-Path $root $_) }
         })
         libraries = @('opennt-base-client.lib', 'opennt-base-bindings.lib', 'original-opennt-rtl-x86.lib')

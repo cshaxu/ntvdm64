@@ -9,6 +9,7 @@
 #include <wchar.h>
 
 UNICODE_STRING BaseDotComSuffixName, BaseDotPifSuffixName, BaseDotExeSuffixName;
+DWORD app_console_probe(void);
 
 int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int show)
 {
@@ -28,6 +29,10 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
      * Decode only to identify the target; never rebuild the guest/native tail. */
     arguments=CommandLineToArgvW(command,&count);
     if (!arguments) return (int)GetLastError();
+    if (count==1 && !wcscmp(arguments[0],L"--internal-console-probe")) {
+        LocalFree(arguments);
+        return (int)app_console_probe();
+    }
     RtlInitUnicodeString(&BaseDotComSuffixName,L".com");
     RtlInitUnicodeString(&BaseDotPifSuffixName,L".pif");
     RtlInitUnicodeString(&BaseDotExeSuffixName,L".exe");

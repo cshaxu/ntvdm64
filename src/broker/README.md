@@ -151,7 +151,7 @@ Its ABI accepts a caller PID and candidate PIDs and returns membership bytes;
 it neither opens unrelated processes nor treats PID membership as authority.
 An isolated detached helper must call it. The parent must pin and revalidate
 authenticated process lifetimes/generations. That helper transaction is not
-yet integrated into run16 or basesrv. The formal broker-transport archive is
+yet integrated into basesrv; run16 now supplies the private helper entry. The formal broker-transport archive is
 selected by Verify-BrokerConsoleMembership, whose link map and real owned
 Console tests cover same/different membership, attached refusal, unchanged
 failure output and detached return. Concurrent snapshot growth, detach failure

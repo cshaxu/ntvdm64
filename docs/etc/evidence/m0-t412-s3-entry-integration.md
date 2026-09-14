@@ -923,3 +923,20 @@ pinned process-generation revalidation, snapshot races and helper-failure
 integration remain open. Neither the persistent broker nor a user process is
 detached by this component. No original BaseSrv selection policy is replaced,
 and this verification does not execute a guest or complete S3.
+
+The subsequent formal run16 composition now includes console_probe.c and
+links the membership component. Its private inherited-pipe request/reply
+header is registered in broker/console_probe.h; no native handles or pointers
+are serialized. The real hidden run16 helper test uses an explicit two-handle
+inheritance allowlist, DETACHED_PROCESS, a live owned Console caller and
+bounded owned-process wait. The returned three-candidate membership matches
+the formal query; an invalid version returns ERROR_INVALID_DATA with no
+membership bytes. Both helpers exit normally. The native run16 entry suite
+also passes after this link change (original classification, untouched command
+tail, directory/environment/streams and exit status).
+
+These results discharge the helper-entry portion only. The production broker
+parent transaction, deadline/disconnect integration and pinned generation
+revalidation are not yet implemented. The reserved internal switch is not an
+authentication mechanism, and the public program-launch syntax is unchanged.
+No DOS command is dispatched by this test and no deployment was performed.

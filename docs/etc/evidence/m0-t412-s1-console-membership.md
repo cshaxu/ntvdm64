@@ -2,9 +2,12 @@
 
 ## Probe and result
 
-Run `node tools/audit/Verify-BrokerConsoleMembership.mjs`. The driver rebuilds
-an x86 MSVC /MT fixture under `build/M0-T412/S1/console-membership`, verifies
-its PE machine, and records `result.json`. No runtime product is modified.
+The historical S1 probe built an x86 MSVC /MT fixture under
+`build/M0-T412/S1/console-membership`, verified its PE machine and recorded
+`result.json`. No deployed product was modified. The maintained
+`Verify-BrokerConsoleMembership.mjs` now tests the formal S3 library and run16
+helper under `build/M0-T412/S3/console-membership`. The observations below
+describe the original S1 design evidence.
 
 The isolated controller creates hidden Console A with child A, attaches only
 its own process to A, then creates child B inheriting that Console. It creates

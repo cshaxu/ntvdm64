@@ -1,10 +1,70 @@
 /* Formal Console membership mechanism; not a broker identity provider. */
 #include <windows.h>
 #include "broker/console_membership.h"
+#include "broker/console_probe.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 static HANDLE ready;
+
+static BOOL probe(const char *image,DWORD caller,DWORD *candidates,BYTE *expected,DWORD version)
+{
+    SECURITY_ATTRIBUTES sa={sizeof(sa),NULL,TRUE};
+    HANDLE input=NULL,writer=NULL,reader=NULL,output=NULL,handles[2];
+    STARTUPINFOEXA startup={0};
+    PROCESS_INFORMATION process={0};
+    BROKER_CONSOLE_PROBE_REQUEST request={version,caller,3,0};
+    BROKER_CONSOLE_PROBE_REPLY reply;
+    BYTE members[3];
+    SIZE_T size=0;
+    DWORD done,code;
+    BOOL ok=FALSE;
+    char command[2048];
+    if (!CreatePipe(&input,&writer,&sa,0) || !CreatePipe(&reader,&output,&sa,0)) goto cleanup;
+    if (!SetHandleInformation(writer,HANDLE_FLAG_INHERIT,0) ||
+        !SetHandleInformation(reader,HANDLE_FLAG_INHERIT,0)) goto cleanup;
+    InitializeProcThreadAttributeList(NULL,1,0,&size);
+    startup.lpAttributeList=HeapAlloc(GetProcessHeap(),0,size);
+    if (!startup.lpAttributeList) goto cleanup;
+    if (!InitializeProcThreadAttributeList(startup.lpAttributeList,1,0,&size)) {
+        HeapFree(GetProcessHeap(),0,startup.lpAttributeList);startup.lpAttributeList=NULL;goto cleanup;
+    }
+    handles[0]=input; handles[1]=output;
+    if (!UpdateProcThreadAttribute(startup.lpAttributeList,0,PROC_THREAD_ATTRIBUTE_HANDLE_LIST,
+        handles,sizeof(handles),NULL,NULL)) goto cleanup;
+    startup.StartupInfo.cb=sizeof(startup);
+    startup.StartupInfo.dwFlags=STARTF_USESTDHANDLES;
+    startup.StartupInfo.hStdInput=input;
+    startup.StartupInfo.hStdOutput=startup.StartupInfo.hStdError=output;
+    if (sprintf_s(command,sizeof(command),"\"%s\" --internal-console-probe",image)<0) goto cleanup;
+    if (!CreateProcessA(image,command,NULL,NULL,TRUE,DETACHED_PROCESS|EXTENDED_STARTUPINFO_PRESENT,
+        NULL,NULL,&startup.StartupInfo,&process)) goto cleanup;
+    CloseHandle(input);input=NULL; CloseHandle(output);output=NULL;
+    if (!WriteFile(writer,&request,sizeof(request),&done,NULL) || done!=sizeof(request)) goto cleanup;
+    if (version==BROKER_CONSOLE_PROBE_VERSION &&
+        (!WriteFile(writer,candidates,3*sizeof(DWORD),&done,NULL) || done!=3*sizeof(DWORD))) goto cleanup;
+    CloseHandle(writer);writer=NULL;
+    if (WaitForSingleObject(process.hProcess,5000)!=WAIT_OBJECT_0) goto cleanup;
+    if (!GetExitCodeProcess(process.hProcess,&code) ||
+        code!=(version==BROKER_CONSOLE_PROBE_VERSION ? 0u : (DWORD)ERROR_INVALID_DATA)) goto cleanup;
+    if (!ReadFile(reader,&reply,sizeof(reply),&done,NULL) || done!=sizeof(reply) ||
+        reply.version!=BROKER_CONSOLE_PROBE_VERSION || reply.reserved || reply.status!=code) goto cleanup;
+    if (code) {ok=reply.count==0;goto cleanup;}
+    if (reply.count!=3 || !ReadFile(reader,members,3,&done,NULL) || done!=3 ||
+        memcmp(members,expected,3)) goto cleanup;
+    ok=TRUE;
+cleanup:
+    if (process.hProcess) {
+        if (WaitForSingleObject(process.hProcess,0)!=WAIT_OBJECT_0) {
+            TerminateProcess(process.hProcess,99);WaitForSingleObject(process.hProcess,5000);ok=FALSE;
+        }
+        CloseHandle(process.hThread);CloseHandle(process.hProcess);
+    }
+    if (startup.lpAttributeList) {DeleteProcThreadAttributeList(startup.lpAttributeList);HeapFree(GetProcessHeap(),0,startup.lpAttributeList);}
+    if (input) CloseHandle(input);if (output) CloseHandle(output);
+    if (reader) CloseHandle(reader);if (writer) CloseHandle(writer);
+    return ok;
+}
 
 static BOOL child(char *image, char *event, DWORD flags, PROCESS_INFORMATION *p)
 {
@@ -68,6 +128,9 @@ int main(int argc, char **argv)
     if (GetConsoleProcessList(&code,1)) goto done;
     if (broker_console_membership(0,candidates,3,members)!=ERROR_INVALID_PARAMETER ||
         members[0]!=0 || members[1]!=0 || members[2]!=1) goto done;
+    if (argc!=2) goto done;
+    if (!probe(argv[1],c.dwProcessId,candidates,members,BROKER_CONSOLE_PROBE_VERSION) ||
+        !probe(argv[1],c.dwProcessId,candidates,members,0)) goto done;
     result = 0;
 done:
     FreeConsole();
