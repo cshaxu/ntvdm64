@@ -4,6 +4,7 @@
 #include <windows.h>
 #include <rpc.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include "service.h"
 #include "broker/rpc_security.h"
 #include "broker/vdm_receipt.h"
@@ -30,6 +31,43 @@ static BOOL receipt_seen(const ULONG receipts[3],ULONG limit,ULONG receipt)
     return FALSE;
 }
 
+/* A retained original BaseCheckVDM record can describe an inherited standard
+ * stream using the caller's exact handle value.  On current Windows that
+ * value is not necessarily an NT4 pseudo Console handle, so identify the
+ * caller's three live standard handles before the RPC attachment boundary.
+ * This deliberately does not treat a same-type file/pipe as Console. */
+static BOOL current_standard_console(HANDLE value,DWORD standard_id)
+{
+    HANDLE current=GetStdHandle(standard_id);
+    DWORD mode;
+
+    return value!=NULL && value==current &&
+        GetConsoleMode(current,&mode);
+}
+
+/* Default-off adapter-boundary trace.  It records only three Boolean masks,
+ * never a native handle, copied command byte, or guest address. */
+static void trace_standard_stream_classification(DWORD present,DWORD original,
+    DWORD current)
+{
+    char path[MAX_PATH],line[128];
+    DWORD bytes,written;
+    HANDLE file;
+    int length;
+
+    bytes=GetEnvironmentVariableA("MVDM_BASESRV_TRACE_PATH",path,sizeof(path));
+    if (!bytes || bytes>=sizeof(path)) return;
+    length=snprintf(line,sizeof(line),
+        "BASECLIENT-STREAMS present=%X original-console=%X current-console=%X state=copied\r\n",
+        (unsigned int)present,(unsigned int)original,(unsigned int)current);
+    if (length<=0 || (size_t)length>=sizeof(line)) return;
+    file=CreateFileA(path,FILE_APPEND_DATA,FILE_SHARE_READ,NULL,OPEN_ALWAYS,
+        FILE_ATTRIBUTE_NORMAL,NULL);
+    if (file==INVALID_HANDLE_VALUE) return;
+    (void)WriteFile(file,line,(DWORD)length,&written,NULL);
+    CloseHandle(file);
+}
+
 /* Generated client stubs own only their transient marshalling buffers. */
 void *__RPC_USER MIDL_user_allocate(size_t bytes) { return malloc(bytes); }
 void __RPC_USER MIDL_user_free(void *value) { free(value); }
@@ -49,12 +87,32 @@ static DWORD attach_standard_streams(PBASE_API_MSG message,ULONG receipts[3])
     HANDLE values[3]={message->u.CheckVDM.StdIn,message->u.CheckVDM.StdOut,
         message->u.CheckVDM.StdErr};
     ULONG roles[3]={BROKER_VDM_STDIN,BROKER_VDM_STDOUT,BROKER_VDM_STDERR};
+    DWORD standard_ids[3]={STD_INPUT_HANDLE,STD_OUTPUT_HANDLE,STD_ERROR_HANDLE};
+    DWORD present_mask=0u,original_console_mask=0u,current_console_mask=0u;
     ULONG index,previous;
     DWORD type;
     DWORD error=ERROR_SUCCESS;
     if (!receipts) return ERROR_INVALID_PARAMETER;
     receipts[0]=receipts[1]=receipts[2]=0;
     for (index=0;index<3;++index) {
+        BOOL original_console;
+        BOOL current_console;
+        if (values[index]) present_mask|=1u<<index;
+        original_console=OpenNtBaseIsConsoleHandle(values[index]);
+        current_console=current_standard_console(values[index],standard_ids[index]);
+        if (original_console) original_console_mask|=1u<<index;
+        if (current_console) current_console_mask|=1u<<index;
+        /* Original BaseCheckVDM/CSR represents the interactive Console via
+         * its ConsoleRecord, not through the three redirected standard-stream
+         * fields.  The modern Console exposes ordinary Win32 handles, so the
+         * cross-process carrier must recognize them before attempting a file
+         * attachment.  Pipes and files deliberately remain untouched: they
+         * are the original redirection contract and retain their typed
+         * receipts below. */
+        if (original_console || current_console) {
+            values[index]=NULL;
+            continue;
+        }
         /* COMMAND's native-child startup can carry the original DOS
          * INVALID_HANDLE_VALUE stdin sentinel.  It denotes no inheritable
          * stream, not an OS resource eligible for typed attachment. */
@@ -78,6 +136,8 @@ static DWORD attach_standard_streams(PBASE_API_MSG message,ULONG receipts[3])
         RpcEndExcept
         if (error || !receipts[index]) break;
     }
+    trace_standard_stream_classification(present_mask,original_console_mask,
+        current_console_mask);
     if (error || index!=3) {
         for (index=0;index<3;++index) if (receipts[index] &&
             !receipt_seen(receipts,index,receipts[index])) {
@@ -185,6 +245,18 @@ static NTSTATUS get_command(PCSR_API_MSG message,ULONG length)
                 base->u.GetNextVDMCommand.StdOut=stream_handles[1];
                 base->u.GetNextVDMCommand.StdErr=stream_handles[2];
             }
+        } else {
+            /* The scalar reply explicitly says whether original BaseSrv
+             * returned a standard stream.  With no typed attachment it is
+             * either absent (must become NULL) or already inherited by this
+             * worker from the suspended launch; never leave the caller's
+             * pre-RPC stack residue in these original result fields. */
+            base->u.GetNextVDMCommand.StdIn=
+                base->u.GetNextVDMCommand.StdIn ? GetStdHandle(STD_INPUT_HANDLE) : NULL;
+            base->u.GetNextVDMCommand.StdOut=
+                base->u.GetNextVDMCommand.StdOut ? GetStdHandle(STD_OUTPUT_HANDLE) : NULL;
+            base->u.GetNextVDMCommand.StdErr=
+                base->u.GetNextVDMCommand.StdErr ? GetStdHandle(STD_ERROR_HANDLE) : NULL;
         }
         /* Update may have copied standard streams directly into the already
          * registered suspended worker before it connected.  In that original

@@ -49,6 +49,41 @@ Check/reserve/prepare/worker-Get sequence and the native child returned 0.
 The redirected output files remain empty, so this does not prove
 byte-producing guest redirection.
 
+## First interactive COMMAND record repair
+
+The three-program first-shell control initially reached original
+`cmdGetNextCmd` but repeatedly reopened `COMMAND.COM` before the DOS Console
+wait.  This was not a guest-media, PIF-parser, SoftPC, or CCPU failure: the
+same current x86 graph reached the banner, prompt and `ver` input through the
+monolithic control.  A default-off shape witness at the existing original
+`GetNextVDMCommand` call showed the decisive difference: the three-program
+reply exposed `std=111`, while the monolithic record exposed `std=000`.
+
+The Check request itself had no standard-stream fields (`present=0`).  The
+loss occurred later because `broker_vdm_get_values` omitted the three result
+fields from the Get reply.  The worker therefore retained pre-RPC stack
+residue in `BASE_GET_NEXT_VDM_COMMAND_MSG.StdIn/StdOut/StdErr`, which original
+`cmdCheckStandardHandles` correctly interpreted as redirection.
+
+The repaired scalar wire carries only a three-bit standard-stream presence
+mask, never a native HANDLE.  Typed attachments still replace present streams
+when the server returns them; a no-attachment reply now explicitly clears an
+absent stream or selects the worker's already-inherited counterpart.  The
+adapter also recognizes both the retained NT4 Console pseudo-handle signature
+and a modern Console object before attempting a stream attachment.  It leaves
+file and pipe behavior untouched.
+
+After the full three-program rebuild, fixed-console observation
+`O:\\ntvdm64\\logs\\m0-t412-s4-stream-presence-reply-r21` recorded the
+original first-command record as `std=000`, reached the original DOS
+buffered-console-input marker, and captured the DOS banner and
+`O:\\NTVDM64>` prompt.  A follow-up input run at
+`O:\\ntvdm64\\logs\\m0-t412-s4-stream-presence-reply-r22` echoed `ver` and
+returned to the prompt.  Both runs used a temporary exact copy of the
+immutable pure-DOS profile PIF as `O:\\ntvdm64\\COMMAND.PIF`, removed in
+`finally`; neither changes guest media nor proves `exit`/worker-return,
+byte-producing redirection, or general PIF compatibility.
+
 The direct CLI regression initially exposed a second boundary error: after
 the original Update-time duplication had made the three standard handles local
 to the suspended worker, the broker's subsequent Get tried to resolve their

@@ -2025,3 +2025,48 @@ void mvdm_softpc_record_sas_store(uint32_t guest_linear_address,
     mvdm_softpc_write_captured_report(mvdm_softpc_sas_store_report_path,
         message, (DWORD)formatted);
 }
+
+static unsigned long mvdm_softpc_payload_fingerprint(const void *bytes,
+    unsigned int length)
+{
+    const unsigned char *cursor = (const unsigned char *)bytes;
+    unsigned long value = 2166136261u;
+    unsigned int index;
+
+    if ((length != 0u && cursor == NULL) || length > 0xffffu)
+        return 0u;
+    for (index = 0u; index < length; ++index)
+        value = (value ^ cursor[index]) * 16777619u;
+    return value;
+}
+
+void mvdm_softpc_record_command_vdm_record(unsigned int command_bytes,
+    const void *command, unsigned int application_bytes, const void *application,
+    unsigned int pif_bytes, const void *pif, unsigned int environment_bytes,
+    const void *environment, unsigned int directory_bytes, const void *directory,
+    unsigned int vdm_state, unsigned int current_drive, unsigned int code_page,
+    unsigned int creation_flags, unsigned int coming_from_bat,
+    unsigned int has_standard_input, unsigned int has_standard_output,
+    unsigned int has_standard_error)
+{
+    char message[384];
+    int formatted;
+
+    if (mvdm_softpc_command_continuation_report_path[0] == '\0')
+        return;
+    formatted = snprintf(message, sizeof(message),
+        "MVDM-CMD-RECORD cmd=%04X/%08lX app=%04X/%08lX pif=%04X/%08lX env=%04X/%08lX dir=%04X/%08lX vdm-state=%04X drive=%04X cp=%08lX flags=%08lX bat=%u std=%u%u%u state=copied\r\n",
+        command_bytes & 0xffffu, mvdm_softpc_payload_fingerprint(command, command_bytes),
+        application_bytes & 0xffffu, mvdm_softpc_payload_fingerprint(application, application_bytes),
+        pif_bytes & 0xffffu, mvdm_softpc_payload_fingerprint(pif, pif_bytes),
+        environment_bytes & 0xffffu, mvdm_softpc_payload_fingerprint(environment, environment_bytes),
+        directory_bytes & 0xffffu, mvdm_softpc_payload_fingerprint(directory, directory_bytes),
+        vdm_state & 0xffffu, current_drive & 0xffffu,
+        (unsigned long)code_page, (unsigned long)creation_flags,
+        coming_from_bat ? 1u : 0u, has_standard_input ? 1u : 0u,
+        has_standard_output ? 1u : 0u, has_standard_error ? 1u : 0u);
+    if (formatted <= 0 || (size_t)formatted >= sizeof(message))
+        return;
+    mvdm_softpc_write_captured_report(mvdm_softpc_command_continuation_report_path,
+        message, (DWORD)formatted);
+}

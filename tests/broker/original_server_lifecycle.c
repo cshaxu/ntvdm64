@@ -185,20 +185,31 @@ static BOOL scalar_roundtrip(PBASE_API_MSG message, uint32_t operation)
     unsigned char values[sizeof(broker_vdm_get_values)], zero[sizeof(values)]={0};
     uint32_t size=operation==BROKER_VDM_CHECK?sizeof(broker_vdm_check_values):
         operation==BROKER_VDM_UPDATE?sizeof(broker_vdm_update_values):sizeof(broker_vdm_get_values);
-    BASE_API_MSG copy=*message;
+    BASE_API_MSG copy=*message,expected=*message;
     if (operation!=BROKER_VDM_CHECK && operation!=BROKER_VDM_UPDATE && operation!=BROKER_VDM_GET_NEXT) return TRUE;
+    if (operation==BROKER_VDM_GET_NEXT) {
+        /* The Get scalar wire deliberately returns standard-stream presence,
+         * not sender-local handles.  Typed RPC attachments later replace
+         * these Boolean placeholders in the client binding. */
+        expected.u.GetNextVDMCommand.StdIn=(HANDLE)(ULONG_PTR)
+            (message->u.GetNextVDMCommand.StdIn!=NULL);
+        expected.u.GetNextVDMCommand.StdOut=(HANDLE)(ULONG_PTR)
+            (message->u.GetNextVDMCommand.StdOut!=NULL);
+        expected.u.GetNextVDMCommand.StdErr=(HANDLE)(ULONG_PTR)
+            (message->u.GetNextVDMCommand.StdErr!=NULL);
+    }
     return OpenNtBaseEncodeValues(message,operation,values,size) &&
         OpenNtBaseDecodeValues(zero,size,operation,&copy) &&
-        OpenNtBaseDecodeValues(values,size,operation,&copy) && !memcmp(message,&copy,sizeof(copy));
+        OpenNtBaseDecodeValues(values,size,operation,&copy) && !memcmp(&expected,&copy,sizeof(copy));
 }
 
 static BOOL scalar_negatives(void)
 {
     BASE_API_MSG original, target;
-    uint32_t op,i,size,values[7],expected[7]={1,2,3,4,5,6,7};
+    uint32_t op,i,size,values[8],expected[8]={1,2,3,4,5,6,7,7};
     memset(&original,0xa5,sizeof(original));
     for (op=BROKER_VDM_CHECK;op<=BROKER_VDM_GET_NEXT;++op) {
-        size=op==BROKER_VDM_CHECK?24:op==BROKER_VDM_UPDATE?16:28;
+        size=op==BROKER_VDM_CHECK?24:op==BROKER_VDM_UPDATE?16:32;
         if (op==BROKER_VDM_CHECK) {
             original.u.CheckVDM.iTask=1; original.u.CheckVDM.BinaryType=2;
             original.u.CheckVDM.CodePage=3; original.u.CheckVDM.dwCreationFlags=4;
@@ -461,7 +472,7 @@ int main(int argc, char **argv)
     {
         BASE_API_MSG input={0},decodedInput={0},untouched={0};
         OPENNT_BASE_GET_COMMAND state={0};
-        unsigned char request[228],shortBuffer[228];
+        unsigned char request[232],shortBuffer[232];
         broker_vdm_get_values values;
         uint32_t bytes,cut;
         /* Only presence is input: encoding must not dereference this output
@@ -475,12 +486,13 @@ int main(int argc, char **argv)
         input.u.GetNextVDMCommand.VDMState=ASKING_FOR_FIRST_COMMAND;
         input.u.GetNextVDMCommand.ExitCode=37;
         memset(shortBuffer,0xa5,sizeof(shortBuffer));
-        CHECK(!OpenNtBaseEncodeGetCommand(&input,4,7,shortBuffer,227,&bytes) && bytes==228);
+        CHECK(!OpenNtBaseEncodeGetCommand(&input,4,7,shortBuffer,231,&bytes) && bytes==232);
         for (cut=0;cut<sizeof(shortBuffer);++cut) CHECK(shortBuffer[cut]==0xa5);
         CHECK(OpenNtBaseEncodeGetCommand(&input,4,7,request,sizeof(request),&bytes));
         memcpy(&values,request+sizeof(broker_vdm_message_header),sizeof(values));
         CHECK(values.task==0 && values.code_page==0 && values.drive==0 && values.creation_flags==0 && values.from_bat==0);
-        CHECK(values.state==ASKING_FOR_FIRST_COMMAND && values.exit_code==37);
+        CHECK(values.state==ASKING_FOR_FIRST_COMMAND && values.exit_code==37 &&
+            values.standard_mask==0);
         for (cut=0;cut<bytes;++cut) {
             CHECK(OpenNtBasePrepareGetCommand(request,cut,7,&decodedInput,&state)==ERROR_INVALID_PARAMETER);
             CHECK(!memcmp(&decodedInput,&untouched,sizeof(untouched)) && !state.reply && !state.payload.bytes);

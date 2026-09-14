@@ -248,6 +248,18 @@ void mvdm_softpc_record_command_vdm_result(unsigned int stage,
     unsigned int error_code, unsigned int vdm_state, unsigned int succeeded,
     unsigned int first_call, unsigned int repeat_call);
 
+/* Default-off shape-only witness of a completed original VDMINFO record.
+ * Values are bounded payload lengths plus content fingerprints; it neither
+ * retains nor emits command, environment, PIF, or directory text. */
+void mvdm_softpc_record_command_vdm_record(unsigned int command_bytes,
+    const void *command, unsigned int application_bytes, const void *application,
+    unsigned int pif_bytes, const void *pif, unsigned int environment_bytes,
+    const void *environment, unsigned int directory_bytes, const void *directory,
+    unsigned int vdm_state, unsigned int current_drive, unsigned int code_page,
+    unsigned int creation_flags, unsigned int coming_from_bat,
+    unsigned int has_standard_input, unsigned int has_standard_output,
+    unsigned int has_standard_error);
+
 /* Default-off, scalar-only observation of the original guest CMDINFO return
  * code when COMMAND re-enters cmdGetNextCmd. */
 void mvdm_softpc_record_command_guest_return(unsigned int return_code,

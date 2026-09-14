@@ -58,7 +58,7 @@ typedef struct get_prefix {
     broker_vdm_get_values values;
     broker_vdm_startup startup;
 } get_prefix;
-typedef char get_prefix_size[sizeof(get_prefix)==100?1:-1];
+typedef char get_prefix_size[sizeof(get_prefix)==104?1:-1];
 typedef struct update_request {
     broker_vdm_message_header header;
     broker_vdm_update_values values;

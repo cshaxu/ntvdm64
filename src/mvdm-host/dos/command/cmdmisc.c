@@ -294,6 +294,13 @@ char    AppName[MAX_PATH + 13];
     mvdm_softpc_record_command_vdm_result(1u, (unsigned int)VDMInfo.ErrorCode,
         (unsigned int)VDMInfo.VDMState, 1u, IsFirstCall ? 1u : 0u,
         IsRepeatCall ? 1u : 0u);
+    mvdm_softpc_record_command_vdm_record(VDMInfo.CmdSize, VDMInfo.CmdLine,
+        VDMInfo.AppLen, VDMInfo.AppName, VDMInfo.PifLen, VDMInfo.PifFile,
+        VDMInfo.EnviornmentSize, VDMInfo.Enviornment,
+        VDMInfo.CurDirectoryLen, VDMInfo.CurDirectory, VDMInfo.VDMState,
+        VDMInfo.CurDrive, VDMInfo.CodePage, VDMInfo.dwCreationFlags,
+        VDMInfo.fComingFromBat, VDMInfo.StdIn != NULL, VDMInfo.StdOut != NULL,
+        VDMInfo.StdErr != NULL);
 
 
     IsRepeatCall = FALSE;
