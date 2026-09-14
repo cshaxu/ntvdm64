@@ -7,6 +7,7 @@
 #include "resource_attachment.h"
 #include "rpc_security.h"
 #include "vdm_receipt.h"
+#include "vdm_message.h"
 
 void *__RPC_USER midl_user_allocate(size_t size) { return malloc(size); }
 void __RPC_USER midl_user_free(void *value) { free(value); }
@@ -16,6 +17,14 @@ static DWORD revoke_remote(handle_t binding,HANDLE process,ULONG fileId,ULONG ev
     if (!fileId && !eventId) return result;
     if (!fileId || !eventId) return ERROR_INVALID_DATA;
     RpcTryExcept {
+        broker_vdm_message_header request={BROKER_VDM_MESSAGE_VERSION,32,BROKER_VDM_IS_FIRST,1,2,0,0,0};
+        ULONG first=123;
+        if (Client_QueryFirst(binding,process,(unsigned char *)&request,&first)!=ERROR_INVALID_DATA || first)
+            result=ERROR_INVALID_DATA;
+        request.generation=1;
+        if (Client_QueryFirst(binding,process,(unsigned char *)&request,&first)!=0 || first!=1) result=ERROR_INVALID_DATA;
+        request.request_id=2;
+        if (Client_QueryFirst(binding,process,(unsigned char *)&request,&first)!=0 || first!=0) result=ERROR_INVALID_DATA;
         if (Client_Revoke(binding,process,2,fileId)!=ERROR_ACCESS_DENIED ||
             Client_Revoke(binding,process,1,fileId)!=ERROR_SUCCESS ||
             Client_Revoke(binding,process,1,fileId)!=ERROR_SUCCESS ||
@@ -30,10 +39,26 @@ static DWORD revoke_remote(handle_t binding,HANDLE process,ULONG fileId,ULONG ev
 DWORD test_registration_start(void);
 DWORD test_registration_retain(HANDLE,DWORD);
 DWORD test_registration_finish(void);
+DWORD test_registration_first(ULONG *);
 static RPC_BINDING_HANDLE downstream;
 static broker_rpc_scope serverScope;
 static broker_vdm_receipts receipts;
 static DWORD registeredPeer;
+error_status_t Server_QueryFirst(handle_t binding,HANDLE process,unsigned char request[32],ULONG *first)
+{
+    DWORD pid;
+    broker_vdm_message_header header;
+    RPC_STATUS status;
+    *first=0;
+    status=broker_rpc_peer_process(&serverScope,binding,process,&pid);
+    if (status) return status;
+    if (pid!=registeredPeer) return ERROR_ACCESS_DENIED;
+    if (!broker_vdm_message_read(request,32,1,0,&header) ||
+        header.operation!=BROKER_VDM_IS_FIRST || header.payload_bytes) return ERROR_INVALID_DATA;
+    status=test_registration_first(first);
+    printf("ORIGINAL-FIRST status=%lu value=%lu\n",status,*first); fflush(stdout);
+    return status;
+}
 static RPC_STATUS RPC_ENTRY authorize(RPC_IF_HANDLE interface_id, void *context)
 {
     ULONG level=0, service=0;

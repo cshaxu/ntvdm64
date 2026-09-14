@@ -24,7 +24,7 @@ const commands = [
     'cl.exe /nologo /MT /W4 /I . /c resource_attachment_s.c /Foserver-stub.obj',
     `cl.exe /nologo /MT /W4 /I . ${securityInclude} /c "${source}" /Foclient.obj`,
     'cl.exe /nologo /MT /W4 /I . /c resource_attachment_c.c /Foclient-stub.obj',
-    `link.exe /nologo /out:resource-server.exe /map:resource-server.map server.obj registration.obj "${ownerBuild}/broker-transport.lib" "${ownerBuild}/opennt-base-bindings.lib" server-stub.obj client-stub.obj rpcrt4.lib advapi32.lib kernel32.lib`,
+    `link.exe /nologo /opt:ref /out:resource-server.exe /map:resource-server.map server.obj registration.obj "${ownerBuild}/obj/run16/support.obj" "${ownerBuild}/broker-transport.lib" "${ownerBuild}/opennt-base-server.lib" "${ownerBuild}/opennt-base-bindings.lib" "${ownerBuild}/original-opennt-rtl-x86.lib" server-stub.obj client-stub.obj rpcrt4.lib advapi32.lib kernel32.lib ntdll.lib user32.lib legacy_stdio_definitions.lib`,
     'link.exe /nologo /out:resource-client.exe client.obj client-stub.obj rpcrt4.lib advapi32.lib kernel32.lib',
 ];
 for (const command of commands) {
@@ -35,6 +35,9 @@ for (const command of commands) {
 }
 fs.closeSync(log);
 const serverMap=fs.readFileSync(path.join(build,'resource-server.map'),'utf8');
+for (const [symbol,unit] of [['_BaseSrvIsFirstVDM','opennt-base-server:srvvdm.obj'],['_OpenNtBaseDispatchOperation','opennt-base-bindings:dispatch.obj']])
+    if (!serverMap.split(/\r?\n/).some(line=>line.includes(symbol)&&line.includes(unit)))
+        throw Error(`Original service dispatch provider missing: ${symbol}`);
 for (const [symbol,unit] of [['_broker_rpc_peer_process','rpc_security'],['_broker_vdm_receipt_accept','vdm_receipt']])
     if (!serverMap.split(/\r?\n/).some(line=>line.includes(symbol)&&line.includes(`broker-transport:${unit}.obj`)))
         throw Error(`Formal transport provider missing: ${symbol}`);
@@ -109,6 +112,9 @@ try {
     if (!mode.startsWith('wrong-')) {
         for (const instance of [relay,...(target?[target]:[])]) {
             const transcript=instance.transcript();
+            if ((transcript.match(/ORIGINAL-FIRST status=0 value=1/g)||[]).length!==1 ||
+                (transcript.match(/ORIGINAL-FIRST status=0 value=0/g)||[]).length!==1)
+                throw Error('Original first-VDM state was not preserved across authenticated requests');
             if (!transcript.includes('RECEIPT wrong-role=denied stream-alias=accepted'))
                 throw Error('Receipt role/stream-alias checks missing');
             if (!transcript.includes('REVOKE generation=2 id=1 status=5') ||

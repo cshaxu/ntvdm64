@@ -662,3 +662,25 @@ Formal Verify-BrokerOriginalLifecycle passes with map-provider checks. Empty
 test bodies prove header validation only, not semantic validity of a command.
 Body bindings, actual RPC exchange, resource callbacks and three product entry
 points remain unfinished; no deployment changed.
+
+## Original service reached through authenticated RPC
+
+Verify-BrokerResourceAttachment now links the formal original server archive,
+dispatch/registry bindings and process support into its test server. Link-map
+checks require BaseSrvIsFirstVDM from srvvdm.obj and the production operation
+dispatcher, rather than a test implementation of service policy. The RPC
+attachment is checked against the authenticated runtime caller PID and retained
+registered process before dispatch. This operation needs no remote thread ID;
+the bridge does not invent one from the server RPC thread.
+
+The nine-case suite passes. Each positive server receives an invalid generation
+request first (rejected without source dispatch), followed by two valid queries
+that return the original first-VDM flag as 1 then 0. Both relay and downstream
+servers are checked independently. Existing receipt revocation, read-only
+rights, scope/session mismatch and wrong-peer checks continue to pass. Generated
+logs and maps are in build/M0-T412/S3/rpc-resource.
+
+This proves actual RPC reaches an original service with authenticated registered
+context. The endpoint and serialization lock remain fixture composition, not
+the final basesrv executable. Full command/resource exchange and three-product
+DOS execution are still pending. No deployed executable changed.

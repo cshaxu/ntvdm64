@@ -6,6 +6,11 @@ import "wtypes.idl";
 ]
 interface resource_attachment
 {
+    error_status_t QueryFirst(
+        [in] handle_t binding,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] byte request[32],
+        [out] unsigned long *first);
     error_status_t Transfer(
         [in] handle_t binding,
         [in, system_handle(sh_process)] HANDLE process,
