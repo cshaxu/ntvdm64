@@ -67,6 +67,16 @@ static NTSTATUS deliver_stream_then_fail(void *context,HANDLE sourceProcess,HAND
     *target=(HANDLE)receipt;
     return STATUS_SUCCESS;
 }
+/* Adapter callback target uses the existing journalled failure fixture above,
+ * after the formal source-side receipt translator has resolved the resource. */
+static NTSTATUS accept_stream_then_fail(void *context,HANDLE resource,uint32_t *receipt)
+{
+    HANDLE target=NULL;
+    NTSTATUS status=deliver_stream_then_fail(context,GetCurrentProcess(),resource,GetCurrentProcess(),
+        &target,0,OBJ_INHERIT,DUPLICATE_SAME_ACCESS);
+    if (status>=0) *receipt=(uint32_t)target;
+    return status;
+}
 typedef struct resource_failure_test {
     HANDLE event;
     ULONG duplicated,closed;
@@ -588,6 +598,23 @@ int main(int argc, char **argv)
         CHECK(ReadFile(reader,&value,1,&bytes,NULL) && bytes==1 && value=='x');
         BaseSrvCloseStandardHandles(GetCurrentProcess(),&record);
         CHECK(target.closes==2 && !info.StdOut && !info.StdErr);
+        {
+            stream_rollback_test failed={0};
+            uint32_t second;
+            CHECK(!broker_vdm_receipts_initialize(&failed.receipts,7));
+            CHECK(!broker_vdm_receipt_accept(&source,BROKER_VDM_STDIN,writer,&second));
+            CHECK(second!=1);
+            streams.context=&failed;streams.deliver=accept_stream_then_fail;
+            info.StdIn=info.StdOut=(HANDLE)second;
+            CHECK(BaseSrvDupStandardHandles(GetCurrentProcess(),&record)==(ULONG)STATUS_ACCESS_DENIED);
+            CHECK(failed.attempts==2 && info.StdIn==(HANDLE)1 && info.StdOut==(HANDLE)second && !info.StdErr);
+            CHECK(!broker_vdm_delivery_rollback(&failed.delivery) && !failed.delivery.pending);
+            CHECK(!broker_vdm_receipt_resolve(&source,1,second,BROKER_VDM_STDIN,&borrowed));
+            CHECK(WriteFile(borrowed,"y",1,&bytes,NULL) && bytes==1);
+            CHECK(ReadFile(reader,&value,1,&bytes,NULL) && bytes==1 && value=='y');
+            CHECK(broker_vdm_receipt_resolve(&failed.receipts,7,1,BROKER_VDM_STDIN,&borrowed)==ERROR_NOT_FOUND);
+            broker_vdm_receipts_drain(&failed.receipts);
+        }
         CHECK(OpenNtBaseBindResources(NULL)==&resources);
         CHECK(OpenNtBaseBindServerRequestThread(NULL)==&thread);
         broker_vdm_receipts_drain(&source);broker_vdm_receipts_drain(&target.receipts);

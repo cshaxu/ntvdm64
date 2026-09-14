@@ -189,7 +189,10 @@ resource operations are explicitly unsupported by this slice. The original
 lifecycle test selects streams.obj from the formal binding archive and drives
 original BaseSrvDupStandardHandles/CloseStandardHandles: one delivery for an
 stdout/stderr alias, distinct destination receipt, actual pipe byte transfer,
-two repeat-safe closes, wrong source generation and target rejection. Target
+two repeat-safe closes, wrong source generation and target rejection. A second
+delivery failure also passes through this translator and the existing journal:
+source-shaped mixed fields remain, target rollback succeeds and the retained
+sender stream still transfers pipe data. Target
 delivery in this test is local; product worker RPC/journal integration remains
 open. This finite missing CSR transport is newly authored, not original policy.
 

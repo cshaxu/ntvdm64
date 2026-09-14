@@ -1105,3 +1105,14 @@ build and extended original lifecycle suite pass; the map confirms the owner.
 The test target is an in-process receiver, not the product worker RPC endpoint.
 Journal/ack and full resource-operation composition are still required before
 selecting this callback for product command dispatch.
+
+The same formal source translator is now exercised with the existing journal
+target fixture: first stream delivery succeeds, second definitively fails.
+Original BaseSrv leaves the first field as the target receipt and the second
+as its source receipt. Journal rollback removes the acquired target receipt;
+the source receipt remains resolvable and successfully writes another byte
+through the real pipe. No original stream-loop code or replacement rollback
+table was added. The formal original-lifecycle suite passes this case together
+with the successful alias and negative identity cases. This proves the local
+translator/journal composition, not remote ambiguous-reply recovery or worker
+RPC delivery.
