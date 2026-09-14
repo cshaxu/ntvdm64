@@ -8,6 +8,9 @@
 #include "rpc_security.h"
 #include "vdm_receipt.h"
 #include "vdm_message.h"
+#include "vdm_values.h"
+#include "vdm_startup.h"
+#include "vdm_payload.h"
 
 void *__RPC_USER midl_user_allocate(size_t size) { return malloc(size); }
 void __RPC_USER midl_user_free(void *value) { free(value); }
@@ -17,8 +20,27 @@ static DWORD revoke_remote(handle_t binding,HANDLE process,ULONG fileId,ULONG ev
     if (!fileId && !eventId) return result;
     if (!fileId || !eventId) return ERROR_INVALID_DATA;
     RpcTryExcept {
+        struct {
+            broker_vdm_message_header header;
+            broker_vdm_check_values values;
+            broker_vdm_startup startup;
+            unsigned char payload[128+sizeof("MEM.EXE\r\n")];
+        } check={0};
+        broker_vdm_payload_input fields[BROKER_VDM_PAYLOAD_FIELDS]={0};
+        uint32_t payloadBytes;
+        ULONG task=0,state=0;
         broker_vdm_message_header request={BROKER_VDM_MESSAGE_VERSION,32,BROKER_VDM_IS_FIRST,1,2,0,0,0};
         ULONG first=123;
+        fields[0].present=1; fields[0].length=fields[0].data_bytes=sizeof("MEM.EXE\r\n");
+        fields[0].data="MEM.EXE\r\n";
+        if (!broker_vdm_payload_encode(fields,check.payload,sizeof(check.payload),&payloadBytes)) result=ERROR_INVALID_DATA;
+        check.header.version=BROKER_VDM_MESSAGE_VERSION;
+        check.header.bytes=96+payloadBytes; check.header.operation=BROKER_VDM_CHECK;
+        check.header.request_id=3; check.header.generation=1;
+        check.header.payload_bytes=check.header.bytes-32;
+        check.values.binary_type=0x10; /* Original basevdm.h BINARY_TYPE_DOS. */
+        if (Client_CheckAndAbort(binding,process,check.header.bytes,(unsigned char *)&check,&task,&state) ||
+            !task || state!=1) result=ERROR_INVALID_DATA; /* Original VDM_NOT_PRESENT. */
         if (Client_QueryFirst(binding,process,(unsigned char *)&request,&first)!=ERROR_INVALID_DATA || first)
             result=ERROR_INVALID_DATA;
         request.generation=1;
@@ -40,10 +62,21 @@ DWORD test_registration_start(void);
 DWORD test_registration_retain(HANDLE,DWORD);
 DWORD test_registration_finish(void);
 DWORD test_registration_first(ULONG *);
+DWORD test_registration_check(void *,ULONG,ULONG *,ULONG *);
 static RPC_BINDING_HANDLE downstream;
 static broker_rpc_scope serverScope;
 static broker_vdm_receipts receipts;
 static DWORD registeredPeer;
+error_status_t Server_CheckAndAbort(handle_t binding,HANDLE process,ULONG bytes,unsigned char *request,ULONG *task,ULONG *state)
+{
+    DWORD pid;
+    RPC_STATUS status;
+    *task=*state=0;
+    status=broker_rpc_peer_process(&serverScope,binding,process,&pid);
+    if (status) return status;
+    if (pid!=registeredPeer) return ERROR_ACCESS_DENIED;
+    return test_registration_check(request,bytes,task,state);
+}
 error_status_t Server_QueryFirst(handle_t binding,HANDLE process,unsigned char request[32],ULONG *first)
 {
     DWORD pid;

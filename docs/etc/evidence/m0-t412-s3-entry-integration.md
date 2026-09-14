@@ -723,3 +723,27 @@ source-owned DOS/WOW admission, command ownership, resource rollback and waits
 remain passing. Maps select the formal command.obj provider. This is copied
 request integration, not authenticated resource delivery or DOS execution.
 Full RPC transaction and three-product entry/deployment gates remain open.
+
+## First DOS admission and original abort over RPC
+
+The authenticated resource RPC suite now submits a copied CheckVDM request
+through the production command decoder and dispatcher to original srvvdm.c.
+Its bounded no-Console/no-worker case returns the original nonzero DosSesId and
+VDM_NOT_PRESENT without a parent wait handle. The fixture verifies the original
+record's command survives erasing the decoded request buffer, then calls
+original UpdateVDMEntry/UPDATE_VDM_UNDO_CREATION with VDM_PARTIALLY_CREATED and
+checks that the record is gone. No test-owned task table or cleanup algorithm
+substitutes for those original paths.
+
+All nine RPC cases pass, including independent relay/downstream positive
+instances. This advances real transport evidence from first-VDM flag queries
+to actual command ownership and partial-launch rollback. The generated logs
+contain ORIGINAL-CHECK copied=1 no-worker=1 abort=0. The fixture deliberately
+uses no guest, no worker and no standard streams for this admission; its
+immediate abort is a test, not the product launch flow. Existing authenticated
+file/event attachment tests remain separate from source-site resource delivery.
+
+Original BaseSrvCheckDOS allocates/copies on the absent-record path. The parent
+event and standard-stream delivery belong to later update/reuse paths, not
+this first admission. Actual run16 worker creation/registration, resource
+callbacks, full command return and three executable deployment remain open.
