@@ -210,3 +210,29 @@ resource-delivery result synchronously at the original NtDuplicateObject call.
 Deferring acquisition to GetNextVDMCommand would move failure after original
 record publication. The admitted recipient receipt/revocation binding remains
 required; this registry verification does not replace that remaining work.
+
+## Receiver-local stream and wait receipts
+
+The S3 resource binding now has vdm_receipt.c/.h in broker. Original BaseSrv
+retains task policy; unavailable CSR target-local HANDLE delivery is replaced
+only by same-access local retention and numeric generation-scoped IDs. The
+existing broker record fixtures do not provide resource ownership and are not
+reused as a task provider. No original mirror or overlay was changed.
+
+Authentication and typed OS file/event attachments precede receipt acceptance.
+The caller owns serialization and prevents revoke during borrowed-reference use.
+Console handles are excluded. IDs are issued only after duplication succeeds,
+never wrap, and are not reused in the same generation. Repeat revocation is
+harmless; drain closes remaining owned handles. Fresh generation assignment,
+role authorization and synchronization belong to the surrounding endpoint,
+not this storage routine. Initialization requires fresh or drained storage.
+
+Verify-BrokerResourceAttachment.mjs compiles the production receipt TU with
+MSVC x86 /MT. Its nine real-process cases now perform I/O through retained file
+and event receipts, preserving file position and read-only access. They check
+wrong-generation refusal, revoke/resolve failure, repeat revoke and final drain.
+Startup checks reject invalid input and ID exhaustion without publishing an ID.
+No guest/CCPU execution is involved. Receipt retention is not final wire
+acknowledgement: product receipt IDs, aliases, lost-response rollback, concurrent
+receiver serialization and original NtDuplicateObject/NtClose binding are still
+required before command dispatch and three-program acceptance.

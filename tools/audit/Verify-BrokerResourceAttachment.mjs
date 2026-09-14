@@ -20,12 +20,13 @@ const registryFlags=ownerGraph.match(/^build obj\/opennt-base-bindings\/registry
 const commands = [
     `cl.exe ${registryFlags} "${root}/tests/broker/resource_registration.c" /Foregistration.obj`,
     `cl.exe /nologo /MT /W4 /c "${root}/src/broker/rpc_security.c" /Fosecurity.obj`,
+    `cl.exe /nologo /MT /W4 /c "${root}/src/broker/vdm_receipt.c" /Foreceipt.obj`,
     `midl.exe /nologo /env win32 /target NT100 /prefix client Client_ /prefix server Server_ /out . "${idl}"`,
     `cl.exe /nologo /MT /W4 /DRESOURCE_SERVER /I . ${securityInclude} /c "${source}" /Foserver.obj`,
     'cl.exe /nologo /MT /W4 /I . /c resource_attachment_s.c /Foserver-stub.obj',
     `cl.exe /nologo /MT /W4 /I . ${securityInclude} /c "${source}" /Foclient.obj`,
     'cl.exe /nologo /MT /W4 /I . /c resource_attachment_c.c /Foclient-stub.obj',
-    `link.exe /nologo /out:resource-server.exe /map:resource-server.map server.obj security.obj registration.obj "${ownerBuild}/opennt-base-bindings.lib" server-stub.obj client-stub.obj rpcrt4.lib advapi32.lib kernel32.lib`,
+    `link.exe /nologo /out:resource-server.exe /map:resource-server.map server.obj security.obj receipt.obj registration.obj "${ownerBuild}/opennt-base-bindings.lib" server-stub.obj client-stub.obj rpcrt4.lib advapi32.lib kernel32.lib`,
     'link.exe /nologo /out:resource-client.exe client.obj client-stub.obj rpcrt4.lib advapi32.lib kernel32.lib',
 ];
 for (const command of commands) {
@@ -107,7 +108,8 @@ try {
     if (!mode.startsWith('wrong-')) {
         for (const instance of [relay,...(target?[target]:[])])
             if (!instance.transcript().includes('REGISTER status=0') ||
-                !instance.transcript().includes('REGISTER retained-after-call=1 drained=1'))
+                !instance.transcript().includes('REGISTER retained-after-call=1 drained=1') ||
+                !instance.transcript().includes('RECEIPT revoked=1 repeat-safe=1 drained=1'))
                 throw Error('Registered process did not survive RPC attachment lifetime and drain');
     }
     console.log(JSON.stringify(record));

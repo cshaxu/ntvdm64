@@ -22,6 +22,23 @@ registry must retain its own reference before return and assign a generation,
 not keep a borrowed handle or use PID alone. This is peer identity, not authority
 to register an arbitrary worker on behalf of that peer.
 
+`vdm_receipt.c/.h` supplies the admitted receiver-local stream/wait retention
+mechanic. The original CSR target-local HANDLE delivery cannot cross the
+fixed-width standalone protocol; source policy remains in BaseSrv. Authenticated
+typed file/event endpoints may retain a same-access reference and issue a
+generation-scoped numeric receipt. Failed acquisition publishes no ID; IDs do
+not wrap or get reused within a generation; revocation is repeat-safe and drain
+releases outstanding references. Console objects are excluded from this path.
+The owner must serialize receipt operations and resource use/revocation; a
+resolved HANDLE is borrowed until revocation, never serialized. Initialization
+requires fresh/drained storage and a fresh trusted generation. This is not a
+generic remote handle service, task policy, or authentication layer.
+The real RPC fixture exercises retention/use/drain, but final wire receipt
+acknowledgement, source-shaped duplication binding, alias/reply-loss handling
+and concurrent endpoint integration remain unfinished. It is not yet selected
+by a published product executable. Details are in the
+[S3 entry evidence](../../docs/etc/evidence/m0-t412-s3-entry-integration.md).
+
 M0 T272 S5 disposition register:
 
 - `wire.c` and `wire.h`: `new neutral contract`.  There is no reusable

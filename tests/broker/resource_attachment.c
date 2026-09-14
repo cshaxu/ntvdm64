@@ -6,6 +6,7 @@
 #include <string.h>
 #include "resource_attachment.h"
 #include "rpc_security.h"
+#include "vdm_receipt.h"
 
 void *__RPC_USER midl_user_allocate(size_t size) { return malloc(size); }
 void __RPC_USER midl_user_free(void *value) { free(value); }
@@ -16,6 +17,7 @@ DWORD test_registration_retain(HANDLE,DWORD);
 DWORD test_registration_finish(void);
 static RPC_BINDING_HANDLE downstream;
 static broker_rpc_scope serverScope;
+static broker_vdm_receipts receipts;
 static RPC_STATUS RPC_ENTRY authorize(RPC_IF_HANDLE interface_id, void *context)
 {
     ULONG level=0, service=0;
@@ -36,6 +38,18 @@ error_status_t Server_Transfer(handle_t binding, HANDLE process, HANDLE input, H
     if (result!=RPC_S_OK) return result;
     result=test_registration_retain(process,peerPid);
     if (result!=ERROR_SUCCESS) return result;
+    {
+        uint32_t fileId=0,eventId=0;
+        HANDLE rejected=(HANDLE)1;
+        result=broker_vdm_receipt_accept(&receipts,BROKER_VDM_STDOUT,input,&fileId);
+        if (!result) result=broker_vdm_receipt_accept(&receipts,BROKER_VDM_PARENT_WAIT,event,&eventId);
+        if (result) { if (fileId) broker_vdm_receipt_revoke(&receipts,1,fileId); return result; }
+        if (broker_vdm_receipt_resolve(&receipts,2,fileId,&rejected)!=ERROR_ACCESS_DENIED || rejected)
+            return ERROR_INVALID_DATA;
+        if (broker_vdm_receipt_resolve(&receipts,1,fileId,&input) ||
+            broker_vdm_receipt_resolve(&receipts,1,eventId,&event)) return ERROR_INVALID_DATA;
+        puts("RECEIPT retained=1 wrong-generation=denied"); fflush(stdout);
+    }
     if (downstream) {
         HANDLE self=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION | SYNCHRONIZE,FALSE,GetCurrentProcessId());
         if (!self) return GetLastError();
@@ -80,10 +94,38 @@ int main(int argc, char **argv)
         NULL, NULL, RPC_IF_ALLOW_LOCAL_ONLY | RPC_IF_ALLOW_SECURE_ONLY, 2, authorize);
     if (status != RPC_S_OK) { fprintf(stderr, "server setup=%lu\n", status); return 2; }
     if (test_registration_start()!=0) return 6;
+    if (broker_vdm_receipts_initialize(&receipts,1)!=ERROR_SUCCESS) return 8;
+    {
+        uint32_t invalid=123;
+        if (broker_vdm_receipt_accept(&receipts,BROKER_VDM_STDOUT,NULL,&invalid)!=ERROR_INVALID_HANDLE || invalid)
+            return 10;
+        if (broker_vdm_receipt_revoke(&receipts,1,1)!=ERROR_NOT_FOUND) return 11;
+        receipts.issued=UINT32_MAX;
+        if (broker_vdm_receipt_accept(&receipts,BROKER_VDM_PARENT_WAIT,NULL,&invalid)!=ERROR_ARITHMETIC_OVERFLOW || invalid)
+            return 12;
+        receipts.issued=0;
+    }
+    {
+        uint32_t invalid=123;
+        if (broker_vdm_receipt_accept(&receipts,BROKER_VDM_STDOUT,NULL,&invalid)!=ERROR_INVALID_HANDLE || invalid)
+            return 10;
+        if (broker_vdm_receipt_revoke(&receipts,1,1)!=ERROR_NOT_FOUND) return 11;
+        receipts.issued=UINT32_MAX;
+        if (broker_vdm_receipt_accept(&receipts,BROKER_VDM_PARENT_WAIT,NULL,&invalid)!=ERROR_ARITHMETIC_OVERFLOW || invalid)
+            return 12;
+        receipts.issued=0;
+    }
     puts("READY"); fflush(stdout);
     status = RpcServerListen(1, 2, FALSE);
     (void)RpcServerUnregisterIf(NULL, NULL, TRUE);
     if (test_registration_finish()!=0) return 7;
+    if (receipts.issued) {
+        HANDLE released=(HANDLE)1;
+        if (broker_vdm_receipt_revoke(&receipts,1,1) || broker_vdm_receipt_revoke(&receipts,1,1) ||
+            broker_vdm_receipt_resolve(&receipts,1,1,&released)!=ERROR_NOT_FOUND || released) return 9;
+        broker_vdm_receipts_drain(&receipts);
+        puts("RECEIPT revoked=1 repeat-safe=1 drained=1"); fflush(stdout);
+    }
     if (downstream) RpcBindingFree(&downstream);
     return status == RPC_S_OK ? 0 : 3;
 }
