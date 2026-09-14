@@ -63,6 +63,17 @@ nonzero child result reaches the COMMAND-side completion path without
 stranding the worker. The log is
 `O:\ntvdm64\logs\m0-t412-s4-bop-nonzero-r1`.
 
+### Owner-visible EDIT click
+
+The owner launched the staged three-program `run16.exe EDIT.COM` session in a
+normal Console and verified that a mouse click succeeded.  The associated
+startup trace is `O:\ntvdm64\logs\m0-t412-s4-visible-edit-r1`; it records the
+expected `run16 -> basesrv -> ntvdm` reservation and worker-command sequence.
+The click result is owner-visible acceptance, not an inference from that trace.
+It deliberately does not claim keyboard input, mouse movement, button-release
+pairing, or welcome-dialog handling: those remain separate S4 interaction
+checks.
+
 ## Limit
 
 This establishes the host-side replacement boundary, copied stream route and
