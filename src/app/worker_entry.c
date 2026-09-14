@@ -4,6 +4,7 @@
  * transport. Never link this entry against the legacy local queue provider. */
 #include "app/machine_shell.h"
 #include "app/package_layout.h"
+#include "adapter-opennt-host/basesrv/include/base_rpc_client.h"
 #include <windows.h>
 
 /* Original BaseClient capture storage is private to one worker process.  The
@@ -27,6 +28,10 @@ int main(int argc,char **argv)
         result=ERROR_BAD_PATHNAME;
         goto finish;
     }
+    if (OpenNtBaseClientConnectCurrent()!=ERROR_SUCCESS) {
+        result=ERROR_SERVICE_NOT_ACTIVE;
+        goto finish;
+    }
     if (!app_machine_shell_select_backend(&owner,SESSION_MACHINE_BACKEND_SOFTPC) ||
         !session_activate(&owner)) goto finish;
     if (app_machine_shell_open(&shell,&owner,1u,UINT64_C(1))!=APP_MACHINE_SHELL_OK) goto finish;
@@ -35,6 +40,7 @@ int main(int argc,char **argv)
     if (app_machine_shell_run(&shell,argc,argv,&result)!=APP_MACHINE_SHELL_OK)
         result=ERROR_PROCESS_ABORTED;
 finish:
+    OpenNtBaseClientDisconnectCurrent();
     if (!session_dispose_with_reason(&owner,&dispose_reason)) result=ERROR_BUSY;
     if (capture_heap_started && !HeapDestroy(CsrPortHeap)) result=ERROR_BUSY;
     CsrPortHeap=NULL;

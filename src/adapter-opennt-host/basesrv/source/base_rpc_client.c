@@ -1,0 +1,110 @@
+/* Smallest public-RPC replacement for the unavailable NT4 CSR port.  This
+ * file owns no BaseSrv policy: it authenticates/binds one local process and
+ * forwards only operations with an implemented copied endpoint. */
+#include <windows.h>
+#include <rpc.h>
+#include <stdlib.h>
+#include "service.h"
+#include "broker/rpc_security.h"
+#include <base_client.h>
+#include <base_rpc_client.h>
+
+typedef struct OPENNT_BASE_RPC_CLIENT {
+    RPC_BINDING_HANDLE binding;
+    VDM_CONNECTION connection;
+    HANDLE process;
+    ULONG generation;
+} OPENNT_BASE_RPC_CLIENT;
+
+static OPENNT_BASE_RPC_CLIENT client;
+
+/* Generated client stubs own only their transient marshalling buffers. */
+void *__RPC_USER MIDL_user_allocate(size_t bytes) { return malloc(bytes); }
+void __RPC_USER MIDL_user_free(void *value) { free(value); }
+
+static NTSTATUS rpc_failure(DWORD error)
+{
+    (void)error;
+    return STATUS_UNSUCCESSFUL;
+}
+
+DWORD OpenNtBaseClientConnectCurrent(void)
+{
+    broker_rpc_scope scope;
+    RPC_WSTR text=NULL;
+    WCHAR endpoint[128];
+    DWORD error=ERROR_GEN_FAILURE;
+    ULONG generation=0;
+    VDM_CONNECTION connection=NULL;
+
+    if (client.connection) return ERROR_ALREADY_EXISTS;
+    if (!broker_rpc_capture_scope(&scope)) return GetLastError();
+    wsprintfW(endpoint,L"ntvdm-basesrv-%lu-%08lx-%08lx",scope.session,
+        (ULONG)scope.logon.HighPart,scope.logon.LowPart);
+    if (RpcStringBindingComposeW(NULL,(RPC_WSTR)L"ncalrpc",NULL,
+            (RPC_WSTR)endpoint,NULL,&text)) goto done;
+    if (RpcBindingFromStringBindingW(text,&client.binding)) goto done;
+    if (RpcBindingSetAuthInfoW(client.binding,NULL,RPC_C_AUTHN_LEVEL_PKT_PRIVACY,
+            RPC_C_AUTHN_WINNT,NULL,RPC_C_AUTHZ_NONE)) goto done;
+    client.process=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION|SYNCHRONIZE,
+        FALSE,GetCurrentProcessId());
+    if (!client.process) { error=GetLastError(); goto done; }
+    RpcTryExcept {
+        error=Client_Connect(client.binding,client.process,&connection,&generation);
+    }
+    RpcExcept(1) { error=RpcExceptionCode(); }
+    RpcEndExcept
+    if (error || !connection || !generation) goto done;
+    client.connection=connection;
+    client.generation=generation;
+    error=ERROR_SUCCESS;
+done:
+    if (text) RpcStringFreeW(&text);
+    if (error) OpenNtBaseClientDisconnectCurrent();
+    return error;
+}
+
+void OpenNtBaseClientDisconnectCurrent(void)
+{
+    VDM_CONNECTION connection;
+    if (client.connection && client.binding && client.process) {
+        connection=client.connection;
+        RpcTryExcept {
+            (void)Client_Disconnect(client.binding,client.process,
+                client.generation,&connection);
+        }
+        RpcExcept(1) { }
+        RpcEndExcept
+    }
+    if (client.process) CloseHandle(client.process);
+    if (client.binding) RpcBindingFree(&client.binding);
+    ZeroMemory(&client,sizeof(client));
+}
+
+NTSTATUS NTAPI OpenNtBaseClientCallServer(PCSR_API_MSG message,
+    PCSR_CAPTURE_HEADER capture,CSR_API_NUMBER number,ULONG length)
+{
+    ULONG first=0;
+    DWORD error=ERROR_NOT_SUPPORTED;
+    (void)capture;
+    if (!message || !client.connection || !client.binding || !client.process)
+        return STATUS_UNSUCCESSFUL;
+    if (number!=CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepIsFirstVDM) ||
+        length!=sizeof(BASE_IS_FIRST_VDM_MSG)) {
+        message->ReturnValue=STATUS_UNSUCCESSFUL;
+        return STATUS_UNSUCCESSFUL;
+    }
+    RpcTryExcept {
+        error=Client_First(client.binding,client.connection,client.process,
+            client.generation,&first);
+    }
+    RpcExcept(1) { error=RpcExceptionCode(); }
+    RpcEndExcept
+    if (error) {
+        message->ReturnValue=rpc_failure(error);
+        return (NTSTATUS)message->ReturnValue;
+    }
+    ((PBASE_IS_FIRST_VDM_MSG)&message->u.ApiMessageData)->FirstVDM=first;
+    message->ReturnValue=STATUS_SUCCESS;
+    return STATUS_SUCCESS;
+}

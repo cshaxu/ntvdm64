@@ -1,5 +1,40 @@
 # T412 S3 entry integration
 
+## Product BaseClient first-VDM transport checkpoint
+
+The independent x86 `ntvdm.exe` now links the original BaseClient archive with
+an explicit replacement for its unavailable NT4 CSR transport.  The original
+callers still name `CsrClientCallServer` in source; the admitted private header
+maps that declaration to `OpenNtBaseClientCallServer`, preventing the modern
+`ntdll` export from satisfying the dependency accidentally.  The new client
+binding performs an authenticated local RPC `Connect`, then forwards the
+source-shaped `BasepIsFirstVDM` message to the existing real BaseSrv
+`BaseSrvIsFirstVDM` owner.  It creates only the original per-process capture
+heap; no command, worker, Console, or queue policy was added to the client.
+
+`Verify-BasesrvProduct.mjs` builds a second x86 test client from the product
+transport source and generated RPC client stub, starts an owned temporary
+`basesrv.exe`, and proves `Connect -> BasepIsFirstVDM -> Disconnect`.  Its map
+requires `_OpenNtBaseClientCallServer@16` from `rpc-client.obj` and rejects a
+host `_CsrClientCallServer@16`.  The same test requests `BasepGetNextVDMCommand`
+and requires `STATUS_UNSUCCESSFUL`: no unimplemented CSR operation may report
+success or escape to host CSR.  The complete verifier also retains the original
+first-state, typed stream, identity/generation and RPC-rundown cases.
+
+On 2026-09-14 the following passed against a temporary test-owned broker:
+
+```text
+cmd /d /c build\M0-T412\S3\product\run-ninja-parallel.cmd run16.exe basesrv.exe ntvdm.exe
+node tools/audit/Verify-BasesrvProduct.mjs
+node tools/audit/Verify-Run16Entry.mjs
+```
+
+The three EXEs are build artifacts only.  This checkpoint does **not** deliver
+DOS command submission, launch reservations, Console membership, worker
+creation/registration, `BasepGetNextVDMCommand`, completion, or publication.
+Those are still mandatory S3 work; the explicit rejection is a guard against
+misrepresenting this link/transport result as guest execution.
+
 ## Launcher process-support dependency
 
 S2's classifier test supplied its own NtCurrentPeb, current TEB and process-heap
