@@ -776,3 +776,37 @@ The verifier terminates only its owned server after explicit client disconnect.
 Idle/empty shutdown, all source command/resource paths, launcher integration,
 worker composition and three-program DOS execution remain unfinished. The
 deployed ntvdm32.exe is unchanged; basesrv.exe is not ready for user deployment.
+
+## Independent worker composition audit
+
+At e33bad7e7 the existing product still selects app/entry.c and
+launch_declaration.c. The original worker entry is present:
+mvdm-host/softpc.new/obj.vdm/ntvdm.c runs TimerInit, CpuEnvInit, nls_init and
+host_main. The formal graph renames only its main symbol to
+mvdm_softpc_original_entry, which machine_shell invokes through
+adapter-mvdm-host-out/softpc/mvdm_softpc_execution.c. A renamed ntvdm32 binary
+would therefore retain the unwanted outer launcher/local-service composition;
+it would not create the independent worker.
+
+The required cuts are source-specific, not a whole adapter-directory deletion:
+
+| Current owner/call | Independent-worker disposition |
+| --- | --- |
+| app/entry.c: consume_options, resolve_requested_command, requested_image and native/shell launch | Exclude from worker entry. run16 owns target classification and launch through original BaseClient. |
+| launch_declaration.c: prepare_softpc_arguments | Remove private argv injection from worker. run16 supplies the original BaseGetVdmConfigInfo command line to CreateProcess; OS command line and CRT argv then describe the same invocation. |
+| entry.c: mvdm_base_vdm_environment_prepare/restore | Do not project and restore environment inside worker. Original parent-side BaseCreateVDMEnvironment supplies the child environment at process creation. |
+| entry.c: app_launch_declaration_bind/publish | Exclude local command publication and command-exhaustion policy. Worker binds authenticated original BaseClient transport before entering the original worker. |
+| selected base_vdm_client/local/broker.c | Exclude these three local provider units from final worker link; select original client vdm.c and real CsrClientCallServer transport instead. |
+| machine_shell and mvdm_softpc_execution | Retain required session activation, thread binding, guest-memory lease and original entry/cleanup ordering. No evidence here authorizes removing these mechanics or changing CCPU. |
+
+The same BaseSrv adapter source list also contains mvdm_command_guest_state,
+mvdm_command_native_child and image-classification bindings. Their BOP/reentry
+consumers prevent indiscriminate removal with the three obsolete local service
+units; their final call selection remains the S4 source-route gate.
+
+The immediate dependency is a complete original BaseClient transport, including
+GetNextVDMCommand's buffers, returned resources and wait/retry result. The formal
+basesrv endpoint currently supplies only registration/first-VDM. Creating an
+ntvdm link against local fallback or success stubs would hide this dependency
+and violate S3. This audit changes no worker behavior or published artifact and
+does not count as worker build, DOS execution or task closure.
