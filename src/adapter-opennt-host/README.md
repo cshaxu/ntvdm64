@@ -106,7 +106,8 @@ the original CsrLockProcessByClientId/CsrUnlockProcess shape. Original CSR
 process.c depends on CsrRootProcess and CSR reference/deletion machinery;
 that full runtime is excluded. The finite binding owns duplicated process
 references and borrows caller-owned CSR_PROCESS storage until removal. The
-registry lock remains held across original service use; pins reject reentrant
+registry retains the incoming process rights with DUPLICATE_SAME_ACCESS rather
+than acquiring broader rights. Its lock remains held across original service use; pins reject reentrant
 removal, duplicate registration fails, sequence allocation never wraps, and
 nonempty destruction fails. Registration derives PID from the process object,
 not wire fields. Authentication and worker-role authorization must precede it.

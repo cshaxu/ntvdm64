@@ -14,14 +14,18 @@ const source = path.join(root, 'tests/broker/resource_attachment.c');
 const idl = path.join(root, 'tests/broker/resource_attachment.idl');
 const log = fs.openSync(path.join(build, 'build.log'), 'w');
 const securityInclude = `/I "${root}/src/broker"`;
+const ownerBuild=path.resolve('build/M0-T412/S3/product');
+const ownerGraph=fs.readFileSync(path.join(ownerBuild,'build.ninja'),'utf8');
+const registryFlags=ownerGraph.match(/^build obj\/opennt-base-bindings\/registry.obj:.*\r?\n  cflags = (.*)$/m)[1].replaceAll('$:',':');
 const commands = [
+    `cl.exe ${registryFlags} "${root}/tests/broker/resource_registration.c" /Foregistration.obj`,
     `cl.exe /nologo /MT /W4 /c "${root}/src/broker/rpc_security.c" /Fosecurity.obj`,
     `midl.exe /nologo /env win32 /target NT100 /prefix client Client_ /prefix server Server_ /out . "${idl}"`,
     `cl.exe /nologo /MT /W4 /DRESOURCE_SERVER /I . ${securityInclude} /c "${source}" /Foserver.obj`,
     'cl.exe /nologo /MT /W4 /I . /c resource_attachment_s.c /Foserver-stub.obj',
     `cl.exe /nologo /MT /W4 /I . ${securityInclude} /c "${source}" /Foclient.obj`,
     'cl.exe /nologo /MT /W4 /I . /c resource_attachment_c.c /Foclient-stub.obj',
-    'link.exe /nologo /out:resource-server.exe server.obj security.obj server-stub.obj client-stub.obj rpcrt4.lib advapi32.lib kernel32.lib',
+    `link.exe /nologo /out:resource-server.exe /map:resource-server.map server.obj security.obj registration.obj "${ownerBuild}/opennt-base-bindings.lib" server-stub.obj client-stub.obj rpcrt4.lib advapi32.lib kernel32.lib`,
     'link.exe /nologo /out:resource-client.exe client.obj client-stub.obj rpcrt4.lib advapi32.lib kernel32.lib',
 ];
 for (const command of commands) {
@@ -31,6 +35,10 @@ for (const command of commands) {
     if (result.status !== 0) { fs.closeSync(log); throw Error(`Build failed (${result.status}): ${command}; see ${build}/build.log`); }
 }
 fs.closeSync(log);
+const serverMap=fs.readFileSync(path.join(build,'resource-server.map'),'utf8');
+for (const symbol of ['_OpenNtBaseRegisterProcess','_OpenNtBaseRemoveProcess','_CsrLockProcessByClientId@8'])
+    if (!serverMap.split(/\r?\n/).some(line=>line.includes(symbol)&&line.includes('opennt-base-bindings:registry.obj')))
+        throw Error(`Formal registered-process provider missing: ${symbol}`);
 for (const name of ['resource-server.exe', 'resource-client.exe']) {
     const image = fs.readFileSync(path.join(build, name));
     if (image.readUInt16LE(image.readUInt32LE(0x3c) + 4) !== 0x14c) throw Error('Not x86');
@@ -52,6 +60,8 @@ return {server, serverDone, ready, transcript() { return stdout + stderr; }, asy
     if (server.exitCode === null) server.kill();
     await serverDone;
     fs.writeFileSync(path.join(build, `${name}-server.log`), stdout + stderr);
+    if (name.startsWith('wrong-') && stdout.includes('REGISTER status='))
+        throw Error('Rejected caller reached process registration');
     if (name === 'wrong-peer' && !stdout.includes('PEER status=5 matched=0'))
         throw Error('Wrong process was not rejected by the peer-process binding');
 }};
@@ -94,6 +104,12 @@ try {
         record.observedAuthentication = 'requested integrity; server observed WINNT packet privacy';
     }
     if (target) record.targetStatus = await finished(target);
+    if (!mode.startsWith('wrong-')) {
+        for (const instance of [relay,...(target?[target]:[])])
+            if (!instance.transcript().includes('REGISTER status=0') ||
+                !instance.transcript().includes('REGISTER retained-after-call=1 drained=1'))
+                throw Error('Registered process did not survive RPC attachment lifetime and drain');
+    }
     console.log(JSON.stringify(record));
     fs.writeFileSync(path.join(build, `${mode}-result.json`), JSON.stringify(record, null, 2));
 } finally {

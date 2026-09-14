@@ -12,7 +12,8 @@ BOOL OpenNtBaseInitializeProcessRegistry(OPENNT_BASE_PROCESS_REGISTRY *);
 BOOL OpenNtBaseDestroyProcessRegistry(OPENNT_BASE_PROCESS_REGISTRY *);
 OPENNT_BASE_PROCESS_REGISTRY *OpenNtBaseBindProcessRegistry(OPENNT_BASE_PROCESS_REGISTRY *);
 /* Trusted registration only, after RPC authentication; borrows record storage
- * until removal, owns a duplicate of process. PID is derived, never supplied.
+ * until removal, owns a same-access duplicate of process; never widens rights.
+ * PID is derived, never supplied. Query and synchronize rights are required.
  * Caller must serialize registration/removal and service use as designed. */
 BOOL OpenNtBaseRegisterProcess(OPENNT_BASE_PROCESS_REGISTRY *, PCSR_PROCESS, HANDLE);
 BOOL OpenNtBaseRemoveProcess(OPENNT_BASE_PROCESS_REGISTRY *, PCSR_PROCESS);

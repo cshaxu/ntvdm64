@@ -159,3 +159,29 @@ invalid process reference, re-registration and sequence exhaustion. Run with
 OPENNT_BROKER_OWNER_BUILD pointing to S3/product. Real cross-process removal
 races, death-watch cleanup, authenticated worker registration and resource
 receipts remain open integration gates. This local test cannot prove them.
+
+## RPC attachment registration and rights correction
+
+The first registry version requested query/duplicate/synchronize rights while
+RPC peer fixtures supply only query-limited/synchronize. The local full-access
+process fixture had hidden that mismatch. Registration now duplicates with
+DUPLICATE_SAME_ACCESS and never widens permissions. A local test closes the
+limited input, verifies the retained reference supports query/wait, and checks
+that using it as a DuplicateHandle source process fails with ACCESS_DENIED.
+Original remote resource duplication still requires the admitted receipt
+binding, not implicit permission acquisition by this registration mechanic.
+
+resource_registration.c is a test-only bridge that connects the actual RPC
+receiver to the formal registry library. Registration follows real peer
+authentication. After RpcServerUnregisterIf waits for pending calls, the test
+queries the retained process object, removes the record and destroys the empty
+registry. The incoming RPC attachment has ended but the owned reference remains.
+Map assertions require opennt-base-bindings:registry.obj, not a test provider.
+
+The nine existing resource cases pass with this integration: accepted calls
+record registration and retained-after-call drain, while wrong scope/session/
+peer cases do not register. Original local lifecycle tests also pass. The
+scope/session negatives remain controlled expectations rather than genuine
+other-user runs. This test does not authorize launcher registration of another
+worker, implement launch reservations or deliver VDM commands. Those product
+integration and death-race gates remain open; no deployment changed.

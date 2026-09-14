@@ -517,6 +517,22 @@ int main(void)
     CHECK(OpenNtBaseRegisterProcess(&processRegistry,&caller,GetCurrentProcess()));
     CHECK(caller.SequenceNumber==2);
     CHECK(OpenNtBaseRemoveProcess(&processRegistry,&caller));
+    {
+        HANDLE limited=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION|SYNCHRONIZE,FALSE,GetCurrentProcessId());
+        HANDLE unexpected=NULL;
+        PCSR_PROCESS found=NULL;
+        CHECK(limited!=NULL);
+        CHECK(OpenNtBaseRegisterProcess(&processRegistry,&caller,limited));
+        CHECK(CloseHandle(limited));
+        CHECK(CsrLockProcessByClientId((HANDLE)GetCurrentProcessId(),&found)==0);
+        CHECK(GetProcessId(found->ProcessHandle)==GetCurrentProcessId());
+        CHECK(WaitForSingleObject(found->ProcessHandle,0)==WAIT_TIMEOUT);
+        CHECK(!DuplicateHandle(found->ProcessHandle,GetCurrentProcess(),GetCurrentProcess(),
+            &unexpected,0,FALSE,DUPLICATE_SAME_ACCESS));
+        CHECK(GetLastError()==ERROR_ACCESS_DENIED && unexpected==NULL);
+        CHECK(CsrUnlockProcess(found)==0);
+        CHECK(OpenNtBaseRemoveProcess(&processRegistry,&caller));
+    }
     processRegistry.NextSequence=MAXULONG;
     CHECK(!OpenNtBaseRegisterProcess(&processRegistry,&caller,GetCurrentProcess()));
     CHECK(GetLastError()==ERROR_ARITHMETIC_OVERFLOW);

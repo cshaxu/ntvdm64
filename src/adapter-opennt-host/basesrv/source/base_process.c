@@ -30,7 +30,7 @@ BOOL OpenNtBaseRegisterProcess(OPENNT_BASE_PROCESS_REGISTRY *state, PCSR_PROCESS
     BOOL result=FALSE;
     if (!state || !process) { SetLastError(ERROR_INVALID_PARAMETER); return FALSE; }
     if (!DuplicateHandle(GetCurrentProcess(),handle,GetCurrentProcess(),&owned,
-        PROCESS_QUERY_INFORMATION|PROCESS_DUP_HANDLE|SYNCHRONIZE,FALSE,0)) return FALSE;
+        0,FALSE,DUPLICATE_SAME_ACCESS)) return FALSE;
     pid=GetProcessId(owned);
     if (!pid || WaitForSingleObject(owned,0)!=WAIT_TIMEOUT) {
         CloseHandle(owned); SetLastError(ERROR_INVALID_HANDLE); return FALSE;

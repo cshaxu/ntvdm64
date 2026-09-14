@@ -11,6 +11,9 @@ void *__RPC_USER midl_user_allocate(size_t size) { return malloc(size); }
 void __RPC_USER midl_user_free(void *value) { free(value); }
 
 #ifdef RESOURCE_SERVER
+DWORD test_registration_start(void);
+DWORD test_registration_retain(HANDLE,DWORD);
+DWORD test_registration_finish(void);
 static RPC_BINDING_HANDLE downstream;
 static broker_rpc_scope serverScope;
 static RPC_STATUS RPC_ENTRY authorize(RPC_IF_HANDLE interface_id, void *context)
@@ -31,6 +34,8 @@ error_status_t Server_Transfer(handle_t binding, HANDLE process, HANDLE input, H
     result=broker_rpc_peer_process(&serverScope,binding,process,&peerPid);
     printf("PEER status=%lu matched=%d\n",result,peerPid!=0); fflush(stdout);
     if (result!=RPC_S_OK) return result;
+    result=test_registration_retain(process,peerPid);
+    if (result!=ERROR_SUCCESS) return result;
     if (downstream) {
         HANDLE self=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION | SYNCHRONIZE,FALSE,GetCurrentProcessId());
         if (!self) return GetLastError();
@@ -74,9 +79,11 @@ int main(int argc, char **argv)
     if (status == RPC_S_OK) status = RpcServerRegisterIfEx(Server_resource_attachment_v1_0_s_ifspec,
         NULL, NULL, RPC_IF_ALLOW_LOCAL_ONLY | RPC_IF_ALLOW_SECURE_ONLY, 2, authorize);
     if (status != RPC_S_OK) { fprintf(stderr, "server setup=%lu\n", status); return 2; }
+    if (test_registration_start()!=0) return 6;
     puts("READY"); fflush(stdout);
     status = RpcServerListen(1, 2, FALSE);
     (void)RpcServerUnregisterIf(NULL, NULL, TRUE);
+    if (test_registration_finish()!=0) return 7;
     if (downstream) RpcBindingFree(&downstream);
     return status == RPC_S_OK ? 0 : 3;
 }
