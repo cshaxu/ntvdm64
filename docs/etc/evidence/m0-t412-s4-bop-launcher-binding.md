@@ -92,6 +92,30 @@ input path.  Together with the owner-visible click above, it supports click
 usability; it does not substitute a separate keyboard or all-editor-behavior
 acceptance run.
 
+### Direct interactive COMMAND remains open
+
+Fresh bounded three-program runs of both `run16.exe COMMAND.COM` and
+`run16.exe O:\ntvdm64\system32\COMMAND.COM /p` displayed `File not found`
+and never reached the source-owned buffered-console-input boundary.  The
+path spelling and `/p` form therefore are not the cause.  A trace-only
+`COMMAND.COM /c MEM.EXE` control reached `Check`, reservation, worker prepare
+and worker connection, but not its first `GetNextVDMCommand`.
+
+The existing startup traces show repeated successful original `DEM` opens of
+the same `COMMAND.COM` path after `CONFIG-DONE`: the queued initial
+`BaseCheckVDM` record asks the configured default `COMMAND /p` to EXEC another
+`COMMAND.COM`, rather than registering a worker with no initial task.  That
+is a direct-interactive-entry topology gap, not evidence against Console
+keyboard delivery or the already-proved BOP child path.  Logs are retained at
+`O:\ntvdm64\logs\m0-t412-s4-observer-command-p-r1` and
+`O:\ntvdm64\logs\m0-t412-s4-command-c-trace-r2`.
+
+No workaround is accepted here.  The next design must establish how a new
+interactive worker is authenticated, reserved and registered without
+manufacturing an initial `BaseCheckVDM` command record; only then can the
+original default shell wait for Console input and be used for the remaining
+keyboard/interactive COMMAND acceptance.
+
 ## Limit
 
 This establishes the host-side replacement boundary, copied stream route and
