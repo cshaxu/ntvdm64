@@ -196,7 +196,20 @@ COMMAND invocation with the same form at
 `O:\ntvdm64\logs\m0-t412-s4-bop-shell-fallback-r2` reached
 run16/basesrv/ntvdm connection and reservation, but the worker did not reach
 GetNextVDMCommand before the observation bound and was explicitly cleaned up.
-It therefore provides no BOP or byte-producing guest-shell success claim.
+That observation had redirected all standard handles and consequently did not
+provide a Console for the original event-thread suspend handshake; it is not a
+product failure claim.
+
+The corrected fixed-Console observation at
+`O:\ntvdm64\logs\m0-t412-s4-bop-shell-fallback-r4` used a temporary,
+byte-identical `COMMAND.PIF` sidecar, removed after the run. Its retained
+original guest payload is `run16.exe echo MVDM_T412_GUEST_SHELL`. The broker
+records worker Get, `reenter-inc`, `reenter-dec` and parent disconnect, while
+the original native-child body records phases 24, 30, 31, 10--12, 0 and 1 all
+successful; phase 1 returns zero. Thus the real guest `54:08` route reaches
+the no-parser public-shell fallback and returns. This proves the shell-tail
+control/exit path, not guest byte-producing stdout/stderr or guest
+redirection, whose distinct acceptance remains open.
 
 ## Interpretation
 
