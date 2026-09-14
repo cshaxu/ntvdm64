@@ -60,6 +60,10 @@ restores the original COMMAND increment/decrement route through BaseSrv; guest
 The [S4 BOP launcher binding](../etc/evidence/m0-t412-s4-bop-launcher-binding.md)
 now routes the retained original COMMAND `COMSPEC /c` spawn to the public
 `run16` owner without adding a second classifier to the worker or broker.
+The [S4 stream reservation binding](../etc/evidence/m0-t412-s4-stream-reservation.md)
+records the executable original Update-time worker-local stream path and the
+unaccepted receipt-only first-command variant; nested DOS return and
+byte-producing redirection remain open S4 acceptance.
 
 ## T412 S1 historical checkpoints
 

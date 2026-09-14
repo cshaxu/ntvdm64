@@ -7,6 +7,7 @@
 #include <base_reservation.h>
 #include <base_command.h>
 #include <base_wait.h>
+#include <base_stream.h>
 #include "broker/vdm_receipt.h"
 struct OPENNT_BASE_SERVICE {
     OPENNT_BASE_PROCESS_REGISTRY registry;
@@ -37,6 +38,17 @@ static NTSTATUS service_wait_deliver(void *context,HANDLE event,uint32_t *receip
     error=broker_vdm_receipt_accept(&scope->connection->streams,scope->role,event,receipt);
     return error ? STATUS_INVALID_HANDLE : STATUS_SUCCESS;
 }
+static NTSTATUS service_stream_deliver(void *context,HANDLE stream,uint32_t *receipt)
+{
+    OPENNT_BASE_SERVICE_RESOURCES *scope=context;
+    DWORD error;
+    if (!scope || !stream || !receipt) return STATUS_INVALID_PARAMETER;
+    /* Update precedes worker Connect.  The reservation is the only finite
+     * owner spanning that interval; srvvdm.c retains alias comparison. */
+    error=OpenNtBaseReservationAcceptStream(scope->connection->service->reservations,
+        scope->connection->reservation,stream,receipt);
+    return error ? STATUS_INVALID_HANDLE : STATUS_SUCCESS;
+}
 static NTSTATUS service_wait_revoke(void *context,uint32_t receipt)
 {
     OPENNT_BASE_SERVICE_RESOURCES *scope=context;
@@ -50,6 +62,7 @@ static NTSTATUS service_duplicate_resource(void *context,HANDLE source_process,H
     HANDLE target_process,PHANDLE target,ACCESS_MASK access,ULONG attributes,ULONG options)
 {
     OPENNT_BASE_SERVICE_RESOURCES *scope=context;
+    OPENNT_BASE_STREAM_BINDING streams;
     if (!scope) return STATUS_INVALID_PARAMETER;
     /* BaseSrvUpdateDOSEntry duplicates the newly created VDM process into
      * BaseSrv.  In NT4 its source was a raw handle in the launcher's CSR
@@ -63,6 +76,34 @@ static NTSTATUS service_duplicate_resource(void *context,HANDLE source_process,H
             return STATUS_SUCCESS;
         return STATUS_ACCESS_DENIED;
     }
+    /* Keep the original Update-before-Connect ordering executable while S4
+     * completes the receipt-only first-command path.  This branch is scoped
+     * to the already reserved suspended worker and precedes its Connect. */
+    if (scope->worker && source && target && !access && attributes==OBJ_INHERIT &&
+        options==DUPLICATE_SAME_ACCESS) {
+        HANDLE stream=NULL;
+        if (!broker_vdm_receipt_resolve(&scope->connection->streams,
+                scope->connection->process.SequenceNumber,(uint32_t)(ULONG_PTR)source,
+                BROKER_VDM_STDIN,&stream) && DuplicateHandle(GetCurrentProcess(),stream,
+                scope->worker,target,0,TRUE,DUPLICATE_SAME_ACCESS)) return STATUS_SUCCESS;
+        return STATUS_INVALID_HANDLE;
+    }
+    /* The retained srvvdm.c body asks to duplicate a source-shaped standard
+     * handle into its VDM process.  In standalone the field is a receipt
+     * issued to the launcher, so resolve only that authenticated source and
+     * deliver an actual typed attachment to this worker connection. */
+    if (scope->connection->reservation && source && target && !access &&
+        attributes==OBJ_INHERIT && options==DUPLICATE_SAME_ACCESS) {
+        ZeroMemory(&streams,sizeof(streams));
+        streams.source_process=source_process;
+        streams.target_process=target_process;
+        streams.source_receipts=&scope->connection->streams;
+        streams.source_generation=scope->connection->process.SequenceNumber;
+        streams.context=scope;
+        streams.deliver=service_stream_deliver;
+        return OpenNtBaseDuplicateStream(&streams,source_process,source,target_process,
+            target,access,attributes,options);
+    }
     return OpenNtBaseDuplicateWait(&scope->wait,source_process,source,target_process,
         target,access,attributes,options);
 }
@@ -71,6 +112,12 @@ static NTSTATUS service_close_resource(void *context,HANDLE handle)
     OPENNT_BASE_SERVICE_RESOURCES *scope=context;
     if (!scope || !handle) return STATUS_INVALID_HANDLE;
     if (handle==scope->wait.local_event) return OpenNtBaseCloseWait(&scope->wait,handle);
+    if (scope->connection->reservation &&
+        !OpenNtBaseReservationRevokeStream(scope->connection->service->reservations,
+            scope->connection->reservation,(uint32_t)(ULONG_PTR)handle)) return STATUS_SUCCESS;
+    if (broker_vdm_receipt_revoke(&scope->connection->streams,
+            scope->connection->process.SequenceNumber,(uint32_t)(ULONG_PTR)handle)==ERROR_SUCCESS)
+        return STATUS_SUCCESS;
     return CloseHandle(handle) ? STATUS_SUCCESS : STATUS_INVALID_HANDLE;
 }
 static void service_resources_init(OPENNT_BASE_SERVICE_RESOURCES *scope,
@@ -453,7 +500,8 @@ done:
 }
 
 DWORD OpenNtBaseServiceGet(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD generation,
-    const void *input,uint32_t bytes,void **output,uint32_t *output_bytes,HANDLE *wait_event)
+    const void *input,uint32_t bytes,void **output,uint32_t *output_bytes,HANDLE *wait_event,
+    HANDLE standard[3],ULONG *standard_count)
 {
     BASE_API_MSG message={0};
     OPENNT_BASE_GET_COMMAND state={0};
@@ -464,8 +512,10 @@ DWORD OpenNtBaseServiceGet(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD ge
     const OPENNT_BASE_RESOURCE_BINDING *previous_resources;
     NTSTATUS status;
     DWORD error;
-    if (!output || !output_bytes || !wait_event) return ERROR_INVALID_PARAMETER;
+    if (!output || !output_bytes || !wait_event || !standard || !standard_count)
+        return ERROR_INVALID_PARAMETER;
     *output=NULL; *output_bytes=0; *wait_event=NULL;
+    standard[0]=standard[1]=standard[2]=NULL;*standard_count=0;
     if (!connection || !OpenNtBaseServicePeer(connection,pid,generation))
         return ERROR_ACCESS_DENIED;
     error=OpenNtBasePrepareGetCommand(input,bytes,generation,&message,&state);
@@ -489,6 +539,18 @@ DWORD OpenNtBaseServiceGet(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD ge
     OpenNtBaseBindServerRequestThread(previous_thread);
     if (status && !message.ReturnValue) message.ReturnValue=status;
     if (!OpenNtBaseFinishGetCommand(&message,&state)) { error=ERROR_INVALID_DATA; goto done; }
+    if (message.u.GetNextVDMCommand.StdIn || message.u.GetNextVDMCommand.StdOut ||
+        message.u.GetNextVDMCommand.StdErr) {
+        HANDLE ids[3]={message.u.GetNextVDMCommand.StdIn,message.u.GetNextVDMCommand.StdOut,
+            message.u.GetNextVDMCommand.StdErr};
+        DWORD index;
+        for (index=0;index<3;++index) if (ids[index] &&
+            OpenNtBaseReservationResolveStream(connection->service->reservations,
+                connection->reservation,(uint32_t)(ULONG_PTR)ids[index],&standard[index])) {
+            error=ERROR_INVALID_HANDLE;goto done;
+        }
+        *standard_count=3;
+    }
     *output=state.reply; *output_bytes=state.reply_bytes; state.reply=NULL;
     /* This is an original target event, held by the console record. It crosses
      * process boundaries only as a typed RPC event attachment, never in the

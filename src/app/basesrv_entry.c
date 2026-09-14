@@ -109,19 +109,22 @@ error_status_t Server_Check(handle_t binding,VDM_CONNECTION connection,HANDLE pr
     return error;
 }
 error_status_t Server_Get(handle_t binding,VDM_CONNECTION connection,HANDLE process,
-    ULONG generation,ULONG requestBytes,unsigned char *request,ULONG *waitEventCount,HANDLE **waitEvents,ULONG *replyBytes,
+    ULONG generation,ULONG requestBytes,unsigned char *request,ULONG *waitEventCount,HANDLE **waitEvents,
+    ULONG *streamCount,HANDLE **streams,ULONG *replyBytes,
     unsigned char **reply)
 {
     DWORD pid,error;
     uint32_t bytes=0;
+    ULONG standard_count=0;
     void *source_reply=NULL;
     HANDLE wait_event=NULL;
-    if (!waitEventCount || !waitEvents || !replyBytes || !reply) return ERROR_INVALID_PARAMETER;
-    *waitEventCount=0; *waitEvents=NULL; *replyBytes=0; *reply=NULL;
+    HANDLE standard[3]={NULL,NULL,NULL};
+    if (!waitEventCount || !waitEvents || !streamCount || !streams || !replyBytes || !reply) return ERROR_INVALID_PARAMETER;
+    *waitEventCount=0; *waitEvents=NULL; *streamCount=0; *streams=NULL; *replyBytes=0; *reply=NULL;
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
     if (error) return error;
     error=OpenNtBaseServiceGet(connection,pid,generation,request,requestBytes,
-        &source_reply,&bytes,&wait_event);
+        &source_reply,&bytes,&wait_event,standard,&standard_count);
     if (error) {
         basesrv_trace("get",pid,error);
         fprintf(stderr,"basesrv: Get rejected %lu\n",error); fflush(stderr);
@@ -141,6 +144,15 @@ error_status_t Server_Get(handle_t binding,VDM_CONNECTION connection,HANDLE proc
         return ERROR_NOT_ENOUGH_MEMORY;
     }
     memcpy(*reply,source_reply,bytes);
+    *streamCount=standard_count;
+    if (*streamCount) {
+        ULONG index;
+        *streams=MIDL_user_allocate(sizeof(**streams)*(*streamCount));
+        if (!*streams) { MIDL_user_free(*reply); *reply=NULL;
+            if (*waitEvents) { MIDL_user_free(*waitEvents); *waitEvents=NULL; *waitEventCount=0; }
+            OpenNtBaseServiceReleaseCommandReply(source_reply); return ERROR_NOT_ENOUGH_MEMORY; }
+        for (index=0;index<*streamCount;++index) (*streams)[index]=standard[index];
+    }
     OpenNtBaseServiceReleaseCommandReply(source_reply);
     *replyBytes=bytes;
     basesrv_trace("get",pid,ERROR_SUCCESS);

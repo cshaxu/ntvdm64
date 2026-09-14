@@ -1,6 +1,7 @@
 /* Finite worker-launch binding below original BaseSrv record ownership.
  * This has no command queue or selection logic: srvvdm.c owns those. */
 #include <base_reservation.h>
+#include "broker/vdm_receipt.h"
 
 typedef struct OPENNT_BASE_RESERVATION {
     LIST_ENTRY link;
@@ -9,6 +10,7 @@ typedef struct OPENNT_BASE_RESERVATION {
     DWORD worker_pid,worker_generation;
     ULONG task;
     HANDLE console,worker;
+    broker_vdm_receipts streams;
 } OPENNT_BASE_RESERVATION;
 
 struct OPENNT_BASE_RESERVATIONS {
@@ -67,10 +69,57 @@ DWORD OpenNtBaseReservationCreate(OPENNT_BASE_RESERVATIONS *state,DWORD launcher
     entry->id=state->next++;
     entry->launcher_pid=launcher_pid;entry->launcher_generation=launcher_generation;
     entry->task=task;entry->console=console;
+    if (broker_vdm_receipts_initialize(&entry->streams,launcher_generation)) {
+        LeaveCriticalSection(&state->lock);HeapFree(GetProcessHeap(),0,entry);
+        return ERROR_INVALID_DATA;
+    }
     InsertTailList(&state->entries,&entry->link);
     *reservation=entry->id;
     LeaveCriticalSection(&state->lock);
     return ERROR_SUCCESS;
+}
+
+DWORD OpenNtBaseReservationAcceptStream(OPENNT_BASE_RESERVATIONS *state,uint64_t reservation,
+    HANDLE stream,uint32_t *receipt)
+{
+    OPENNT_BASE_RESERVATION *entry;
+    DWORD error;
+    if (!state || !reservation || !stream || !receipt) return ERROR_INVALID_PARAMETER;
+    EnterCriticalSection(&state->lock);
+    entry=find(state,reservation);
+    if (!entry) error=ERROR_NOT_FOUND;
+    else error=broker_vdm_receipt_accept(&entry->streams,BROKER_VDM_STDIN,stream,receipt);
+    LeaveCriticalSection(&state->lock);
+    return error;
+}
+
+DWORD OpenNtBaseReservationResolveStream(OPENNT_BASE_RESERVATIONS *state,uint64_t reservation,
+    uint32_t receipt,HANDLE *stream)
+{
+    OPENNT_BASE_RESERVATION *entry;
+    DWORD error;
+    if (!state || !reservation || !receipt || !stream) return ERROR_INVALID_PARAMETER;
+    EnterCriticalSection(&state->lock);
+    entry=find(state,reservation);
+    if (!entry) error=ERROR_NOT_FOUND;
+    else error=broker_vdm_receipt_resolve(&entry->streams,entry->launcher_generation,receipt,
+        BROKER_VDM_STDIN,stream);
+    LeaveCriticalSection(&state->lock);
+    return error;
+}
+
+DWORD OpenNtBaseReservationRevokeStream(OPENNT_BASE_RESERVATIONS *state,uint64_t reservation,
+    uint32_t receipt)
+{
+    OPENNT_BASE_RESERVATION *entry;
+    DWORD error;
+    if (!state || !reservation || !receipt) return ERROR_INVALID_PARAMETER;
+    EnterCriticalSection(&state->lock);
+    entry=find(state,reservation);
+    if (!entry) error=ERROR_NOT_FOUND;
+    else error=broker_vdm_receipt_revoke(&entry->streams,entry->launcher_generation,receipt);
+    LeaveCriticalSection(&state->lock);
+    return error;
 }
 
 DWORD OpenNtBaseReservationPrepareWorker(OPENNT_BASE_RESERVATIONS *state,uint64_t reservation,
@@ -160,6 +209,7 @@ DWORD OpenNtBaseReservationRelease(OPENNT_BASE_RESERVATIONS *state,uint64_t rese
         LeaveCriticalSection(&state->lock);return ERROR_ACCESS_DENIED;
     }
     RemoveEntryList(&entry->link);LeaveCriticalSection(&state->lock);
+    broker_vdm_receipts_drain(&entry->streams);
     if (entry->worker) CloseHandle(entry->worker);
     HeapFree(GetProcessHeap(),0,entry);
     return ERROR_SUCCESS;

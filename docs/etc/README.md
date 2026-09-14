@@ -26,6 +26,7 @@ proves the original `FSTI` continuation reaches BOP `FDh`.
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T412 S4 stream reservation](evidence/m0-t412-s4-stream-reservation.md) | M0 T412 S4 | Preserves original Update-before-worker-connect standard-stream timing through finite authenticated reservation receipts; records the remaining nested-DOS and byte-stream limits. | Retain through S4 and T412 closure. |
 | [T412 S2 original lifecycle](evidence/m0-t412-s2-original-lifecycle.md) | M0 T412 S2 | Actual original server command/capacity/event/reentry/cleanup execution and explicit integration limits. | Retain through product selection and T412 closure. |
 | [T412 S3 RPC security](evidence/m0-t412-s3-rpc-security.md) | M0 T412 S3 | Reusable native RPC scope checks, resource-transfer regression and explicit product/security limits. | Retain through T412 integration and closure. |
 | [T412 S3 entry integration](evidence/m0-t412-s3-entry-integration.md) | M0 T412 S3 | Real launcher dependency selection and remaining entry integration requirements. | Retain through T412 closure. |

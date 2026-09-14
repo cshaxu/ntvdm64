@@ -5,6 +5,8 @@
 #include "app/machine_shell.h"
 #include "app/package_layout.h"
 #include "adapter-opennt-host/basesrv/include/base_rpc_client.h"
+#include "adapter-mvdm-host-out/basesrv/include/mvdm_command_native_child.h"
+#include "adapter-mvdm-host-out/softpc/include/mvdm_softpc_termination.h"
 #include <windows.h>
 #include <stdio.h>
 
@@ -33,6 +35,11 @@ int main(int argc,char **argv)
     BOOL capture_heap_started=FALSE;
     session_initialize(&owner,1u);
     app_machine_shell_initialize(&shell);
+    /* Retain the existing default-off reports before original cmdenv.c imports
+     * inherited variables into guest state.  They record only copied host
+     * observations and do not enter the BaseSrv wire or alter control flow. */
+    mvdm_softpc_capture_command_continuation_report_path();
+    mvdm_command_native_child_capture_report_path();
     CsrPortHeap=HeapCreate(0,0,0);
     if (!CsrPortHeap) { worker_trace("capture-heap",ERROR_NOT_ENOUGH_MEMORY); return ERROR_NOT_ENOUGH_MEMORY; }
     capture_heap_started=TRUE;

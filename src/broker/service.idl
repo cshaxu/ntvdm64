@@ -39,6 +39,10 @@ interface vdm_service
         [in, size_is(request_bytes)] byte *request,
         [out] unsigned long *wait_event_count,
         [out, system_handle(sh_event), size_is(,*wait_event_count)] HANDLE **wait_events,
+        /* Standard streams are returned only through authenticated typed
+         * attachments.  The copied reply retains receipt IDs, not HANDLEs. */
+        [out] unsigned long *stream_count,
+        [out, system_handle(sh_file), size_is(,*stream_count)] HANDLE **streams,
         [out] unsigned long *reply_bytes,
         [out, size_is(,*reply_bytes)] byte **reply);
     error_status_t Update(

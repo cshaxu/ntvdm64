@@ -51,9 +51,37 @@ static void record_standard_handles(const ULONG handles[3])
 
     if (native_child_report_path[0] == '\0' || handles == NULL) return;
     formatted = snprintf(message, sizeof(message),
-        "MVDM-CMD-STDHANDLES in=%08lX out=%08lX err=%08lX\\r\\n",
+        "MVDM-CMD-STDHANDLES err=%08lX out=%08lX in=%08lX\\r\\n",
         (unsigned long)handles[0], (unsigned long)handles[1],
         (unsigned long)handles[2]);
+    if (formatted <= 0 || (size_t)formatted >= sizeof(message)) return;
+    report = CreateFileA(native_child_report_path, FILE_APPEND_DATA,
+        FILE_SHARE_READ, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+    if (report == INVALID_HANDLE_VALUE) return;
+    (void)WriteFile(report, message, (DWORD)formatted, &written, NULL);
+    CloseHandle(report);
+}
+
+/* Default-off witness for the unchanged cmdExec BOP ingress. These are the
+ * source-defined guest register locations, not host pointers; recording them
+ * distinguishes an address-binding failure from a source standard-stream
+ * value without changing capture semantics. */
+static void record_guest_capture_locations(uint16_t command_segment,
+    uint16_t command_offset, uint16_t environment_segment,
+    uint16_t environment_offset, uint16_t standard_segment,
+    uint16_t standard_offset)
+{
+    char message[176];
+    HANDLE report;
+    DWORD written;
+    int formatted;
+
+    if (native_child_report_path[0] == '\0') return;
+    formatted = snprintf(message, sizeof(message),
+        "MVDM-CMD-LOC cmd=%04X:%04X env=%04X:%04X std=%04X:%04X\\r\\n",
+        (unsigned int)command_segment, (unsigned int)command_offset,
+        (unsigned int)environment_segment, (unsigned int)environment_offset,
+        (unsigned int)standard_segment, (unsigned int)standard_offset);
     if (formatted <= 0 || (size_t)formatted >= sizeof(message)) return;
     report = CreateFileA(native_child_report_path, FILE_APPEND_DATA,
         FILE_SHARE_READ, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
@@ -274,13 +302,15 @@ int mvdm_command_native_child_capture_guest(uint16_t command_segment,
     mvdm_guest_location environment;
     mvdm_guest_location standard;
 
-    return state_ensure(&state) &&
-        mvdm_guest_location_set_real_mode(&command, command_segment, command_offset) &&
-        mvdm_guest_location_set_real_mode(&environment, environment_segment,
-            environment_offset) &&
-        mvdm_guest_location_set_real_mode(&standard, standard_segment,
-            standard_offset) &&
-        capture_locations(state, NULL, &command, &environment, &standard);
+    if (!state_ensure(&state) ||
+        !mvdm_guest_location_set_real_mode(&command, command_segment, command_offset) ||
+        !mvdm_guest_location_set_real_mode(&environment, environment_segment,
+            environment_offset) || !mvdm_guest_location_set_real_mode(&standard,
+            standard_segment, standard_offset) || !capture_locations(state, NULL,
+            &command, &environment, &standard)) return 0;
+    record_guest_capture_locations(command_segment, command_offset,
+        environment_segment, environment_offset, standard_segment, standard_offset);
+    return 1;
 }
 
 int mvdm_command_native_child_capture_host_command(const char *command,

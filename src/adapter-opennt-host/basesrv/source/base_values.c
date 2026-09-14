@@ -3,7 +3,7 @@
 #include "basesrv.h"
 #include <base_values.h>
 #include <string.h>
-typedef char check_values_size[sizeof(broker_vdm_check_values)==24?1:-1];
+typedef char check_values_size[sizeof(broker_vdm_check_values)==36?1:-1];
 typedef char update_values_size[sizeof(broker_vdm_update_values)==16?1:-1];
 typedef char get_values_size[sizeof(broker_vdm_get_values)==28?1:-1];
 #define CHECK_VALUES(X) X(task,iTask,ULONG) X(binary_type,BinaryType,ULONG) X(code_page,CodePage,ULONG) \

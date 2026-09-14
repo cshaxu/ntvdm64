@@ -19,6 +19,15 @@ DWORD OpenNtBaseReservationPrepareWorker(OPENNT_BASE_RESERVATIONS *,uint64_t res
  * pre-registered live process identity matches this authenticated connection. */
 DWORD OpenNtBaseReservationClaimWorker(OPENNT_BASE_RESERVATIONS *,DWORD worker_pid,
     DWORD worker_generation,uint64_t *reservation,ULONG *task,HANDLE *console);
+/* Standard streams are copied by original BaseSrvUpdateVDMEntry before the
+ * worker connects.  Retain typed broker resources under that finite
+ * reservation until original GetNextVDMCommand consumes them. */
+DWORD OpenNtBaseReservationAcceptStream(OPENNT_BASE_RESERVATIONS *,uint64_t reservation,
+    HANDLE stream,uint32_t *receipt);
+DWORD OpenNtBaseReservationResolveStream(OPENNT_BASE_RESERVATIONS *,uint64_t reservation,
+    uint32_t receipt,HANDLE *stream);
+DWORD OpenNtBaseReservationRevokeStream(OPENNT_BASE_RESERVATIONS *,uint64_t reservation,
+    uint32_t receipt);
 /* The launcher may retain only the live worker it registered under its own
  * reservation.  This is the finite replacement for the original CSR client
  * process-handle namespace; command records still contain no OS handles. */

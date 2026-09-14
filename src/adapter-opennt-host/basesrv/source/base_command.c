@@ -12,7 +12,7 @@ typedef struct check_prefix {
     broker_vdm_startup startup;
     uint32_t console_mode;
 } check_prefix;
-typedef char check_prefix_size[sizeof(check_prefix)==100?1:-1];
+typedef char check_prefix_size[sizeof(check_prefix)==112?1:-1];
 
 typedef struct check_reply {
     broker_vdm_message_header header;
@@ -143,6 +143,9 @@ BOOL OpenNtBaseEncodeCheckCommand(const BASE_API_MSG *message, uint32_t request,
     prefix.values.code_page=message->u.CheckVDM.CodePage;
     prefix.values.creation_flags=message->u.CheckVDM.dwCreationFlags;
     prefix.values.drive=message->u.CheckVDM.CurDrive;
+    prefix.values.std_in=(uint32_t)(ULONG_PTR)message->u.CheckVDM.StdIn;
+    prefix.values.std_out=(uint32_t)(ULONG_PTR)message->u.CheckVDM.StdOut;
+    prefix.values.std_err=(uint32_t)(ULONG_PTR)message->u.CheckVDM.StdErr;
     if (message->u.CheckVDM.ConsoleHandle==OPENNT_BASE_CONSOLE_WOW)
         prefix.console_mode=2;
     else if (!message->u.CheckVDM.ConsoleHandle)
@@ -183,6 +186,9 @@ BOOL OpenNtBaseDecodeCheckCommand(void *input, uint32_t bytes, uint32_t generati
     decoded.u.CheckVDM.StartupInfo=prefix.startup.present?startup:NULL;
     decoded.u.CheckVDM.ConsoleHandle=prefix.console_mode==2 ? OPENNT_BASE_CONSOLE_WOW :
         prefix.console_mode==1 ? OPENNT_BASE_CONSOLE_EXISTING : OPENNT_BASE_CONSOLE_NEW;
+    decoded.u.CheckVDM.StdIn=(HANDLE)(ULONG_PTR)prefix.values.std_in;
+    decoded.u.CheckVDM.StdOut=(HANDLE)(ULONG_PTR)prefix.values.std_out;
+    decoded.u.CheckVDM.StdErr=(HANDLE)(ULONG_PTR)prefix.values.std_err;
     *startup=decodedStartup;
     *message=decoded;
     *request=header.request_id;
