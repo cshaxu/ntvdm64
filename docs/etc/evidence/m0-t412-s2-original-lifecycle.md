@@ -93,3 +93,39 @@ client still needs its own asynchronous test. Other BaseClient lifecycle
 routines and product bindings remain S2 work; the old selected product policy
 has not yet been retired. Adding original source reduces the missing-source
 scope, but is not a claimed net line deletion or product rollout.
+
+## Coherent client lifecycle and real wait continuation
+
+The same original source cohort now includes ExitVDM,
+SetVDMCurrentDirectories, GetVDMCurrentDirectories, CmdBatNotification and
+RegisterWowExec: a contiguous 320-line original block, LF-normalized SHA-256
+`2936de23dcbbdec23cf9ea23416606a7a3faeb96473d407e4bfaee00f89ac3aa`, from the same
+pinned source/revision. Together with GetNextVDMCommand, 710 original lines
+have been restored; this is restored source volume, not net code deletion.
+The driver validates both source hashes and each selected client symbol owner.
+
+Additional passing tests now cover:
+
+- Original client directory size query, retained data on short capacity,
+  successful copy/consume and capture cleanup.
+- Original batch start/terminate notifications create/remove the actual
+  server BAT record for the fixture's Console key.
+- Original RegisterWowExec registers a real test-owned message-only window
+  through native USER loading and original PID/sequence checks. Clearing the
+  invalid registration removes the saved HWND. This does not prove guest
+  WOWEXEC message delivery or shared-WOW task execution.
+- The original client waits on the real server-created event. Only after the
+  server returns that wait handle does a test thread submit NEXT.COM through
+  original CheckVDM. The original queue/event code wakes the client. Exactly
+  two client dispatches occur; the retry carries exit code zero rather than
+  the initial 99, and the returned command and drained captures are asserted.
+- Original ExitVDM routes through original BaseSrv cleanup, signals the
+  pending parent and closes the returned worker-side wait reference. The test
+  verifies the closed reference is invalid before any further allocation.
+
+The first directory capture implementation in the test needed its allocation
+capacity rounded to the original four-byte message-pointer alignment. This
+was a test-transport correction, not an edit to the original directory code.
+No new outgoing interface shape or service policy was required for this group.
+Native program classification, launch/update client routines and product
+resource/authentication bindings remain unfinished; S2 stays open.

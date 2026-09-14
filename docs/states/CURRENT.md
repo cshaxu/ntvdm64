@@ -46,6 +46,12 @@ default environment cohort still compiles. The command cohort is not yet a
 deployed product provider. Remaining client lifecycle and finite bindings
 must be completed before the local policy can be removed.
 
+The same source cohort now includes original exit, current directories, BAT
+notification and WOWEXEC registration (710 original lines restored in total).
+Focused tests pass real client wait/wake/retry with cleared exit code and
+original cleanup. This remains test-graph selection, not product publication;
+classification, launch/update client routines and product bindings remain S2 work.
+
 ## T412 S1 historical checkpoints
 
 S1 execution checkpoint: [source audit](../etc/evidence/m0-t412-s1-broker-owner-audit.md)

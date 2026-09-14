@@ -8,6 +8,8 @@ static CSR_THREAD thread;
 static OPENNT_SUPPORT_PROCESS_PARAMETERS parameters;
 static OPENNT_SUPPORT_PEB peb;
 static OPENNT_SUPPORT_TEB teb;
+extern HANDLE hwndWowExec;
+extern ULONG ulWowExecProcessSequenceNumber;
 POPENNT_SUPPORT_PEB NTAPI NtCurrentPeb(VOID) { return &peb; }
 POPENNT_SUPPORT_TEB NTAPI opennt_support_current_teb(VOID) { return &teb; }
 PFNNOTIFYPROCESSCREATE UserNotifyProcessCreate = NULL;
@@ -23,11 +25,15 @@ NTSTATUS NTAPI CsrUnlockProcess(PCSR_PROCESS process) { (void)process; return 0;
 
 /* Test-local capture/dispatch transport; original client owns retry/copy policy. */
 static ULONG captures;
+static HANDLE enqueueGate, queuedParent;
+static ULONG retryCalls, retryExit;
+static ULONG enqueueStatus;
 PCSR_CAPTURE_HEADER NTAPI CsrAllocateCaptureBuffer(ULONG messages, ULONG pointers, ULONG size)
 {
     PCSR_CAPTURE_HEADER capture;
     (void)messages; (void)pointers;
     if (size > 1024 * 1024) return NULL;
+    size = ROUND_UP(size,4);
     capture = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, sizeof(*capture) + size);
     if (!capture) return NULL;
     capture->Length = sizeof(*capture) + size;
@@ -60,13 +66,49 @@ NTSTATUS NTAPI CsrClientCallServer(PCSR_API_MSG message, PCSR_CAPTURE_HEADER cap
     case CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepIsFirstVDM):
         result = BaseSrvIsFirstVDM(message,&reply); break;
     case CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepGetNextVDMCommand):
-        result = BaseSrvGetNextVDMCommand(message,&reply); break;
+        if (enqueueGate) {
+            PBASE_GET_NEXT_VDM_COMMAND_MSG request = &((PBASE_API_MSG)message)->u.GetNextVDMCommand;
+            ++retryCalls;
+            if (retryCalls == 2) retryExit = request->ExitCode;
+        }
+        result = BaseSrvGetNextVDMCommand(message,&reply);
+        if (enqueueGate && ((PBASE_API_MSG)message)->u.GetNextVDMCommand.WaitObjectForVDM)
+            SetEvent(enqueueGate);
+        break;
     case CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepSetReenterCount):
         result = BaseSrvSetReenterCount(message,&reply); break;
+    case CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepExitVDM):
+        result = BaseSrvExitVDM(message,&reply); break;
+    case CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepSetVDMCurDirs):
+        result = BaseSrvSetVDMCurDirs(message,&reply); break;
+    case CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepGetVDMCurDirs):
+        result = BaseSrvGetVDMCurDirs(message,&reply); break;
+    case CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepBatNotification):
+        result = BaseSrvBatNotification(message,&reply); break;
+    case CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepRegisterWowExec):
+        result = BaseSrvRegisterWowExec(message,&reply); break;
     default: return (NTSTATUS)STATUS_INVALID_PARAMETER;
     }
     message->ReturnValue = result;
     return result;
+}
+
+static DWORD WINAPI enqueue_after_wait(LPVOID unused)
+{
+    BASE_API_MSG message = {0};
+    CSR_REPLY_STATUS reply = 0;
+    STARTUPINFOA startup = {sizeof(startup)};
+    char command[] = "NEXT.COM\r\n";
+    (void)unused;
+    if (WaitForSingleObject(enqueueGate,5000) != WAIT_OBJECT_0) return 2;
+    message.u.CheckVDM.ConsoleHandle = (HANDLE)1;
+    message.u.CheckVDM.BinaryType = BINARY_TYPE_DOS;
+    message.u.CheckVDM.CmdLine = command;
+    message.u.CheckVDM.CmdLen = sizeof(command);
+    message.u.CheckVDM.StartupInfo = &startup;
+    enqueueStatus = BaseSrvCheckVDM((PCSR_API_MSG)&message,&reply);
+    queuedParent = message.u.CheckVDM.WaitObjectForParent;
+    return 0;
 }
 
 #define CHECK(x) do { if (!(x)) { fprintf(stderr,"FAIL line %d: %s\n",__LINE__,#x); return 1; } } while(0)
@@ -81,6 +123,9 @@ int main(void)
     ULONG status;
     HANDLE parentWait, workerWait;
     VDMINFO clientInfo;
+    HWND registrationWindow;
+    HANDLE sender;
+    DWORD senderExit;
     BaseSrvHeap = GetProcessHeap();
     parameters.ConsoleHandle = (HANDLE)1;
     peb.ProcessParameters = &parameters;
@@ -124,6 +169,26 @@ int main(void)
     CHECK(!memcmp(output,dirs,sizeof(dirs)) && record->lpszzCurDirs == NULL);
     CHECK(BaseSrvGetVDMCurDirs((PCSR_API_MSG)&m,&reply) == 0);
     CHECK(m.u.GetSetVDMCurDirs.cchCurDirs == 0);
+    CHECK(SetVDMCurrentDirectories(sizeof(dirs),dirs) && captures == 0);
+    CHECK(GetVDMCurrentDirectories(0,NULL) == sizeof(dirs) && captures == 0);
+    CHECK(record->lpszzCurDirs != NULL);
+    CHECK(GetVDMCurrentDirectories(sizeof(output),output) == sizeof(dirs));
+    CHECK(!memcmp(output,dirs,sizeof(dirs)) && captures == 0);
+    CHECK(GetVDMCurrentDirectories(sizeof(output),output) == 0 && captures == 0);
+    CmdBatNotification(CMD_BAT_OPERATION_STARTING);
+    CHECK(BaseSrvGetBatRecord((HANDLE)1) != NULL);
+    CmdBatNotification(CMD_BAT_OPERATION_TERMINATING);
+    CHECK(BaseSrvGetBatRecord((HANDLE)1) == NULL);
+
+    /* Registration-only test: an owned message-only window, not guest UI. */
+    registrationWindow = CreateWindowExA(0,"STATIC","broker-registration-fixture",
+        0,0,0,1,1,HWND_MESSAGE,NULL,GetModuleHandleW(NULL),NULL);
+    CHECK(registrationWindow != NULL);
+    RegisterWowExec(registrationWindow);
+    CHECK(hwndWowExec == registrationWindow && ulWowExecProcessSequenceNumber == 1);
+    CHECK(DestroyWindow(registrationWindow));
+    RegisterWowExec(NULL);
+    CHECK(hwndWowExec == NULL);
 
     ZeroMemory(&m,sizeof(m));
     m.u.UpdateVDMEntry.ConsoleHandle = (HANDLE)1;
@@ -177,11 +242,30 @@ int main(void)
     CHECK(record->nReEntrancy == 1 && WaitForSingleObject(workerWait,0) == WAIT_OBJECT_0);
     CHECK(BaseSrvSetReenterCount((PCSR_API_MSG)&m,&reply) == TRUE);
 
+    enqueueGate = CreateEventW(NULL,TRUE,FALSE,NULL);
+    CHECK(enqueueGate != NULL);
+    sender = CreateThread(NULL,0,enqueue_after_wait,NULL,0,NULL);
+    CHECK(sender != NULL);
+    ZeroMemory(&clientInfo,sizeof(clientInfo));
+    clientInfo.VDMState = NO_PARENT_TO_WAKE;
+    clientInfo.ErrorCode = 99;
+    clientInfo.CmdLine = output;
+    clientInfo.CmdSize = sizeof(output);
+    CHECK(GetNextVDMCommand(&clientInfo));
+    CHECK(WaitForSingleObject(sender,5000) == WAIT_OBJECT_0);
+    CHECK(GetExitCodeThread(sender,&senderExit) && senderExit == 0 && enqueueStatus == 0);
+    CHECK(retryCalls == 2 && retryExit == 0 && captures == 0);
+    CHECK(!strcmp(output,"NEXT.COM\r\n") && queuedParent != NULL);
+    CHECK(WaitForSingleObject(queuedParent,0) == WAIT_TIMEOUT);
+    CloseHandle(sender); CloseHandle(enqueueGate); enqueueGate = NULL;
+
     ZeroMemory(&m,sizeof(m));
     m.u.ExitVDM.ConsoleHandle = (HANDLE)1;
-    CHECK(BaseSrvExitDOSTask(&m.u.ExitVDM) == 0);
-    CHECK(m.u.ExitVDM.WaitObjectForVDM == workerWait);
-    CloseHandle(workerWait);
+    ExitVDM(FALSE,0);
+    CHECK(WaitForSingleObject(queuedParent,0) == WAIT_OBJECT_0);
+    CloseHandle(queuedParent);
+    { DWORD handleFlags;
+      CHECK(!GetHandleInformation(workerWait,&handleFlags) && GetLastError() == ERROR_INVALID_HANDLE); }
     CHECK(BaseSrvGetConsoleRecord((HANDLE)1,&record) == (ULONG)STATUS_INVALID_PARAMETER);
     CHECK(BaseSrvExitDOSTask(&m.u.ExitVDM) == (ULONG)STATUS_INVALID_PARAMETER);
     CHECK(BaseSrvIsFirstVDM((PCSR_API_MSG)&m,&reply) == 0 && !m.u.IsFirstVDM.FirstVDM);

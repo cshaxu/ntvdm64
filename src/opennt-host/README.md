@@ -109,7 +109,12 @@ is not yet selected in the deployed product. Source: pinned OpenNT revision
 `base/win32/client/vdm.c`; LF-normalized restored function SHA-256
 `47cf285cbc505d9d43a50af16e283ea51d1d9ef8d2ff093795086d0ca327addd`.
 Only cohort guards and the finite declaration include are added around it;
-the function body is unchanged. See the
+the function body is unchanged. The same cohort now also restores original
+ExitVDM, SetVDMCurrentDirectories, GetVDMCurrentDirectories, CmdBatNotification
+and RegisterWowExec as one contiguous 320-line source group. Its LF-normalized
+SHA-256 is `2936de23dcbbdec23cf9ea23416606a7a3faeb96473d407e4bfaee00f89ac3aa`,
+from the same pinned source/revision. No additional outgoing CSR operation
+shape is needed beyond the four declared bindings. See the
 [S2 execution evidence](../../docs/etc/evidence/m0-t412-s2-original-lifecycle.md).
 
 | Identifier | Original purpose | Reason for divergence | Selected implementation | Files |

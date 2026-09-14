@@ -35,3 +35,8 @@ OpenNT `public/sdk/inc/ntcsrdll.h`, without importing its CSR runtime:
 The test implementations in `tests/broker/original_server_lifecycle.c` are
 not product providers. No command-selection, waiting/retry or completion policy
 may move here from the original client/server bodies.
+
+The same four declarations also serve the restored original ExitVDM,
+SetVDMCurrentDirectories, GetVDMCurrentDirectories, CmdBatNotification and
+RegisterWowExec cohort. Their service opcodes dispatch to the corresponding
+original BaseSrv routines; no per-opcode policy implementation is added here.

@@ -14,6 +14,9 @@ const clientSource=fs.readFileSync('src/opennt-host/base/win32/client/vdm.c','ut
 const clientBody=clientSource.match(/BOOL\r?\nAPIENTRY\r?\nGetNextVDMCommand\([\s\S]*?\r?\n}\r?\n/)[0].replace(/\r\n/g,'\n');
 assert.equal(createHash('sha256').update(clientBody).digest('hex'),
     '47cf285cbc505d9d43a50af16e283ea51d1d9ef8d2ff093795086d0ca327addd','Original client body changed');
+const lifecycleBody=clientSource.match(/VOID\r?\nAPIENTRY\r?\nExitVDM\([\s\S]*?VOID\r?\nAPIENTRY\r?\nRegisterWowExec\([\s\S]*?\r?\n}\r?\n/)[0].replace(/\r\n/g,'\n');
+assert.equal(createHash('sha256').update(lifecycleBody).digest('hex'),
+    '2936de23dcbbdec23cf9ea23416606a7a3faeb96473d407e4bfaee00f89ac3aa','Original client lifecycle group changed');
 const env=path.join(build,'msvc.cmd');
 fs.writeFileSync(env,'@echo off\r\nset "lifecycle_cwd=%CD%"\r\ncall "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat" -arch=x86 -host_arch=x64 >nul\r\nif errorlevel 1 exit /b %errorlevel%\r\ncd /d "%lifecycle_cwd%"\r\n%*\r\n');
 fs.writeFileSync(path.join(build,'ntdddfs.h'),'/* Unused umbrella dependency in test-only composition. */\n');
@@ -42,10 +45,12 @@ const image=fs.readFileSync(path.join(build,'original-lifecycle.exe'));
 assert.equal(image.readUInt16LE(image.readUInt32LE(0x3c)+4),0x14c);
 const map=fs.readFileSync(path.join(build,'original-lifecycle.map'),'utf8');
 assert(map.split(/\r?\n/).some(line=>line.includes('_GetNextVDMCommand@4')&&line.includes('client.obj')),'Original client provider missing');
+for (const symbol of ['ExitVDM','SetVDMCurrentDirectories','GetVDMCurrentDirectories','CmdBatNotification','RegisterWowExec'])
+    assert(map.split(/\r?\n/).some(line=>line.includes(`_${symbol}@`)&&line.includes('client.obj')),`Original client provider missing: ${symbol}`);
 for(const symbol of ['BaseSrvCheckVDM','BaseSrvGetNextVDMCommand','BaseSrvSetReenterCount','BaseSrvExitDOSTask'])
     assert(map.split(/\r?\n/).some(line=>line.includes(`_${symbol}`)&&line.includes('srvvdm.obj')),`Original provider missing for ${symbol}`);
 const result=spawnSync(path.join(build,'original-lifecycle.exe'),[],{cwd:build,windowsHide:true,encoding:'utf8',timeout:15000});
 fs.writeFileSync(path.join(build,'result.json'),JSON.stringify({status:result.status,stdout:result.stdout,stderr:result.stderr,error:result.error?.message},null,2));
 console.log(result.stdout,result.stderr);
 assert.equal(result.status,0,'Original lifecycle fixture failed');
-console.log('PASS: restored original BaseClient capture, short-buffer retry, error mapping, result copy and empty WOW; captures drained');
+console.log('PASS: original BaseClient capture/copy, directories, exit, BAT/WOW registration, real wait/wake/retry with cleared exit code; captures drained');

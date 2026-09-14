@@ -566,4 +566,325 @@ retry:
 	return FALSE;
 	}
 }
+
+VOID
+APIENTRY
+ExitVDM(
+    BOOL IsWowCaller,
+    ULONG iWowTask
+    )
+
+/*++
+
+Routine Description:
+    This routine is used by MVDM to exit.
+
+
+Arguments:
+    IsWowCaller - TRUE if the caller is WOWVDM.
+                  FALSE if the caller is DOSVDM
+
+    iWowTask - if IsWowCaller == FALSE then Dont Care
+	     - if IsWowCaller == TRUE && iWowTask != -1 kill iWowTask task
+	     - if IsWowCaller == TRUE && iWowTask == -1 kill all wow task
+
+Return Value:
+    None
+
+--*/
+
+{
+
+    NTSTATUS Status;
+    BASE_API_MSG m;
+    PBASE_EXIT_VDM_MSG c= (PBASE_EXIT_VDM_MSG)&m.u.ExitVDM;
+
+
+    if(IsWowCaller){
+	c->ConsoleHandle = (HANDLE)-1;
+	c->iWowTask = iWowTask;
+	}
+    else {
+        c->ConsoleHandle = NtCurrentPeb()->ProcessParameters->ConsoleHandle;
+        }
+
+    c->WaitObjectForVDM =0;
+
+    Status = CsrClientCallServer(
+                      (PCSR_API_MSG)&m,
+                      NULL,
+                      CSR_MAKE_API_NUMBER( BASESRV_SERVERDLL_INDEX,
+                                           BasepExitVDM
+                                         ),
+                      sizeof( *c )
+                      );
+    if (NT_SUCCESS(Status) && c->WaitObjectForVDM) {
+        NtClose (c->WaitObjectForVDM);
+        }
+
+    return;
+}
+
+/*++
+
+Routine Description:
+    Set new VDM current directories
+
+Arguments:
+    cchCurDir - length of buffer in bytes
+    lpszCurDir - buffer to return the current director of NTVDM
+
+Return Value:
+    TRUE if function succeed
+    FALSE if function failed, GetLastError() has the error code
+--*/
+
+
+BOOL
+APIENTRY
+SetVDMCurrentDirectories(
+    IN ULONG  cchCurDirs,
+    IN LPSTR  lpszzCurDirs
+    )
+{
+    NTSTATUS Status;
+    PCSR_CAPTURE_HEADER CaptureBuffer;
+    BASE_API_MSG m;
+    PBASE_GET_SET_VDM_CUR_DIRS_MSG a = (PBASE_GET_SET_VDM_CUR_DIRS_MSG)&m.u.GetSetVDMCurDirs;
+
+    a->ConsoleHandle = NtCurrentPeb()->ProcessParameters->ConsoleHandle;
+    // caller must have a valid console(WOW will fail)
+    if (a->ConsoleHandle == (HANDLE) -1) {
+	BaseSetLastNTError(STATUS_INVALID_PARAMETER);
+	return FALSE;
+    }
+    if (cchCurDirs && lpszzCurDirs) {
+	// get capture buffer, one pointer in the message
+
+	CaptureBuffer = CsrAllocateCaptureBuffer(1, 0, cchCurDirs);
+        if (CaptureBuffer == NULL) {
+            BaseSetLastNTError( STATUS_NO_MEMORY );
+            return FALSE;
+            }
+
+	CsrAllocateMessagePointer( CaptureBuffer,
+				   cchCurDirs,
+				   (PVOID *)&a->lpszzCurDirs
+				   );
+
+	a->cchCurDirs = cchCurDirs;
+	try {
+	    RtlMoveMemory(a->lpszzCurDirs, lpszzCurDirs, cchCurDirs);
+	}
+	except (EXCEPTION_EXECUTE_HANDLER) {
+	    BaseSetLastNTError(GetExceptionCode());
+	    CsrFreeCaptureBuffer(CaptureBuffer);
+	    return FALSE;
+	}
+        Status = CsrClientCallServer(
+                            (PCSR_API_MSG)&m,
+			    CaptureBuffer,
+			    CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,
+						BasepSetVDMCurDirs
+						),
+			    sizeof( *a )
+			    );
+	CsrFreeCaptureBuffer(CaptureBuffer);
+
+        if (!NT_SUCCESS(Status) || !NT_SUCCESS((NTSTATUS)m.ReturnValue)) {
+	    BaseSetLastNTError(Status);
+	    return FALSE;
+	}
+    }
+    return TRUE;
+}
+
+
+
+
+/*++
+
+Routine Description:
+    To return current directory of NTVDM.
+    This allows the parent process(CMD.EXE in most cases) to keep track the
+    current directory after each VDM execution.
+    NOTE: this function doesn't apply to wow
+
+Arguments:
+    cchCurDir - length of buffer in bytes
+    lpszCurDir - buffer to return the current director of NTVDM
+
+    Note: We don't require the process id to the running VDM because
+	  current directories are global to every VDMs under a single NTVDM
+	  control -- each console handle has its own current directories
+Return Value:
+    ULONG - (1). number of bytes written to the given buffer if succeed
+	    (2). lentgh of the current directory including NULL
+		 if the provided buffer is not large enough
+	    (3). 0  then GetLastError() has the error code
+--*/
+
+
+ULONG
+APIENTRY
+GetVDMCurrentDirectories(
+    IN ULONG  cchCurDirs,
+    IN LPSTR  lpszzCurDirs
+    )
+{
+    NTSTATUS Status;
+    PCSR_CAPTURE_HEADER CaptureBuffer;
+    BASE_API_MSG m;
+    PBASE_GET_SET_VDM_CUR_DIRS_MSG a = (PBASE_GET_SET_VDM_CUR_DIRS_MSG)&m.u.GetSetVDMCurDirs;
+
+
+    a->ConsoleHandle = NtCurrentPeb()->ProcessParameters->ConsoleHandle;
+    if (a->ConsoleHandle == (HANDLE) -1) {
+	BaseSetLastNTError(STATUS_INVALID_PARAMETER);
+	return 0L;
+    }
+    if (cchCurDirs && lpszzCurDirs) {
+	CaptureBuffer = CsrAllocateCaptureBuffer(1, 0, cchCurDirs);
+        if (CaptureBuffer == NULL) {
+            BaseSetLastNTError( STATUS_NO_MEMORY );
+            return FALSE;
+            }
+
+	CsrAllocateMessagePointer( CaptureBuffer,
+				   cchCurDirs,
+				   (PVOID *)&a->lpszzCurDirs
+				   );
+
+	a->cchCurDirs = cchCurDirs;
+    }
+    else {
+	a->cchCurDirs = 0;
+	a->lpszzCurDirs = NULL;
+	CaptureBuffer = NULL;
+    }
+
+    m.ReturnValue = 0xffffffff;
+
+    Status = CsrClientCallServer(
+                         (PCSR_API_MSG)&m,
+			 CaptureBuffer,
+			 CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,
+					     BasepGetVDMCurDirs
+                                             ),
+                         sizeof( *a )
+                         );
+
+    if (m.ReturnValue == 0xffffffff) {
+        a->cchCurDirs = 0;
+        }
+
+    if (NT_SUCCESS(Status)) {
+        Status = m.ReturnValue;
+        }
+
+    if (NT_SUCCESS(Status)) {
+
+        try {
+            RtlMoveMemory(lpszzCurDirs, a->lpszzCurDirs, a->cchCurDirs);
+            }
+        except(EXCEPTION_EXECUTE_HANDLER) {
+            Status = GetExceptionCode();
+            a->cchCurDirs = 0;
+            }
+        }
+    else {
+        BaseSetLastNTError(Status);
+        }
+
+    if (CaptureBuffer) {
+        CsrFreeCaptureBuffer(CaptureBuffer);
+        }
+
+    return a->cchCurDirs;
+}
+
+
+VOID
+APIENTRY
+CmdBatNotification(
+    IN  ULONG   fBeginEnd
+    )
+
+/*++
+
+Routine Description:
+    This API lets base know about .bat processing from cmd. This is
+    required by VDM, so that it can decided correctly when to  put
+    command.com prompt on TSRs. If the command came from .bat file
+    then VDM should'nt put its prompt. This is important for
+    ventura publisher and civilization apps.
+
+Arguments:
+    fBeginEnd - CMD_BAT_OPERATION_STARTING  -> .BAT processing is starting
+                CMD_BAT_OPERATION_TERMINATING -> .BAT processing is ending
+
+Return Value:
+    None
+--*/
+
+{
+    BASE_API_MSG m;
+    PBASE_BAT_NOTIFICATION_MSG a = (PBASE_BAT_NOTIFICATION_MSG)&m.u.BatNotification;
+
+    a->ConsoleHandle = NtCurrentPeb()->ProcessParameters->ConsoleHandle;
+
+    if (a->ConsoleHandle == (HANDLE) -1)
+        return;
+
+    a->fBeginEnd = fBeginEnd;
+
+    CsrClientCallServer((PCSR_API_MSG)&m,
+                         NULL,
+			 CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,
+                                             BasepBatNotification
+					     ),
+                         sizeof( *a )
+                         );
+
+    return;
+}
+
+
+VOID
+APIENTRY
+RegisterWowExec(
+    IN  HANDLE   hwndWowExec
+    )
+
+/*++
+
+Routine Description:
+    This API gives basesrv the window handle for the shared WowExec so
+    it can send WM_WOWEXECSTARTAPP messages to WowExec.  This
+    saves having a thread in WOW dedicated to GetNextVDMCommand.
+
+Arguments:
+    hwndWowExec - Win32 window handle for WowExec in shared WOW VDM.
+                  Separate WOW VDMs don't register their WowExec handle
+                  because they never get commands from base.
+
+Return Value:
+    None.
+--*/
+
+{
+    BASE_API_MSG m;
+    PBASE_REGISTER_WOWEXEC_MSG a = &m.u.RegisterWowExec;
+
+    a->hwndWowExec = hwndWowExec;
+
+    CsrClientCallServer((PCSR_API_MSG)&m,
+                         NULL,
+			 CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,
+                                             BasepRegisterWowExec
+					     ),
+                         sizeof( *a )
+                        );
+    return;
+}
 #endif
