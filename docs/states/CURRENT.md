@@ -10,7 +10,7 @@
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T412 S1; sequential S packets, one active packet. |
+| Identifier Mode | M0 T412 S1; Ordinary Mode, one implementer and one active sequential S packet. |
 | Admission And Approval | Owner admitted the queue-head broker package on 2026-09-13 and requested S decomposition first. Existing authorization covers commit and push to main. This admission records the plan; it does not claim implementation or audit completion. |
 | Objective | Audit D01--D07/D10 and design one original BaseSrv/BaseClient lifecycle across run16.exe, basesrv.exe and ntvdm.exe, minimizing mirror diff, overlay and duplicate autonomous policy. |
 | Non-goals | No source implementation during S1; no CSRSS/kernel shell, CPU30/x64 executor, generic shell parser, or claim of full WRITE recovery. |

@@ -28,7 +28,200 @@ those state machines. App owns composition.
 | S5 — WOW coordination and idle cleanup | Restore broker-side WOW acquisition/PIF/notification/waits/failures; singleton, eligible-idle retirement and empty-broker exit. | Source-owned coordination tests and reachable real-worker evidence; simultaneous startup, reconnect, new work versus retirement, restart/first-VDM and exact-once cleanup. Quiet active COMMAND/EDIT must not be reaped. |
 | S6 — Integrated verification and removal | Build/test final composition, remove superseded autonomous policy and obsolete bridges, reconcile registers and publish verified products. | Final per-row disposition; measured mirror diff/overlay/autonomous line deltas; real-program and process-race matrix; no mandatory unproved contract; clean committed/pushed worktree and indexed closure evidence. |
 
-## Required S1 decisions
+## Detailed execution
+
+The detailed sequence below is an execution specification, not a claim that
+the inventory or designs have already been verified. Work groups are deliberately
+package-sized; they are not new numeric S tasks or per-symbol admission gates.
+
+## S1 detailed procedure — establish the recovery contract
+
+1. Freeze the entry revision, selected upstream provenance, formal build
+   manifests, deployed executable hash and available regression evidence.
+   Separate historically observed results from freshly reproduced results.
+   Any later diagnostic run records its exact source/artifact identity.
+2. Trace each of D01--D07/D10 from real caller through the selected provider
+   to its outgoing boundary. Include compiled-out alternatives and orphaned
+   duplicates, but distinguish them from active product code. Inspect matching
+   mirror overlays, adapters, app and broker/session code together.
+3. Produce one row per behavior group, recording original source path/function,
+   current file/provider, source/build selection, changed control/data/failure
+   semantics, four-rung recovery disposition, replacement prerequisites and
+   the exact tests needed to remove the current implementation safely.
+4. Design the whole launch and return sequence: classification -> service
+   selection -> launch reservation when needed -> worker creation/registration
+   -> command delivery -> completion/reentry -> resource release or reuse.
+   Every transition records caller, original policy owner, finite binding,
+   precondition, payload/resource owner, failure rollback and observable result.
+5. Resolve Console compatibility and worker eligibility before implementing
+   reuse. An unrelated run16 invocation must not inject a command into a busy
+   interactive COMMAND merely because both share a Console. Reuse follows
+   original source-proven selection and guest readiness, not a generic pool.
+6. Specify security, transport, resource transfer, idle/shutdown and public
+   entry contracts. Record concrete designs and rejected alternatives with
+   reasons. No wire opcode/layout or platform mechanism is final merely because
+   it appears convenient in this planning document.
+7. Review existing worker prerequisite evidence against the actual provider:
+   thread binding, wait/alert, guest return, termination and reset. Separate a
+   missing test from a source-proven defect. Name the dependency and disposition
+   before advancing work that relies on it; do not restart a global CPU audit.
+8. Report removal estimates separately for mirrored changed lines, overlays,
+   duplicate autonomous behavior and retained modern mechanics. State counting
+   commands, baseline, generated/vendor exclusions and overlapping categories.
+   Do not add overlapping totals or count relocated code twice.
+
+S1 delivers an indexed audit/design record containing that ledger, source-backed
+transition table, product-entry/deployment decision, finite ABI design and test
+matrix. It does not deliver a new runtime implementation. Unresolved mandatory
+design choices remain explicit and prevent claiming the design is complete.
+
+## S2 detailed procedure — restore source policy in coherent groups
+
+1. Restore service admission and ownership together: CheckVDM, selected
+   DOS/WOW records, UpdateVDMEntry, worker association, failure rollback and
+   release. Keep original record semantics and ordering; represent only missing
+   host resources through bounded package-private bindings.
+2. Restore command and client behavior together: GetNextVDMCommand, capacity
+   negotiation, PIF, first-VDM state, current-directory exchange and the original
+   BaseClient capture/copy/wait/retry flow. Include short-buffer retries without
+   consuming commands, correct retry exit-code handling and source-defined
+   consume-on-get behavior. Classification D10 belongs to the original owner,
+   not a second image parser in run16.
+3. Restore completion and reentry together: task exit status, notifications,
+   SetReenterCount, native-child wait, record freeing and disconnect cleanup.
+   Validate original source ordering before inventing locks or durable states.
+4. After each group, compile/link the selected original owner and run focused
+   contract tests. Test doubles may supply unavailable OS mechanics but must
+   not implement the policy being asserted. Record selected symbols/link maps.
+5. Replace or remove the superseded provider once its replacement is selected
+   and verified. Do not keep two production policies behind a diagnostic switch.
+   A temporary fixture transport is explicitly test-only and cannot count as
+   cross-process acceptance; S3 must replace it with real IPC evidence.
+
+S2 exits with the original service/client lifecycle selected and its finite
+bindings enumerated. A compilation success with calls still routed to an old
+autonomous provider does not satisfy this stage.
+
+## S3 detailed procedure — connect the real process topology
+
+1. Apply the S1 naming/publication decision to the authoritative design/rules,
+   formal build graph and staging tool before publishing a renamed executable.
+   Build the three x86 programs from the same recorded source configuration.
+   Decide explicitly whether any temporary ntvdm32 entry remains; never silently
+   preserve it as a fourth independent launch-policy implementation.
+2. Implement run16 entry as a thin composition of selected original client
+   behavior: positional target, existence/type errors, untouched guest tail,
+   environment and stream capture, broker connection/start, requested worker
+   creation and registration. No user-required diagnostic switches.
+3. Implement broker endpoint discovery and authenticated handshake. Concurrent
+   starters converge on one healthy instance in the agreed user/session scope.
+   A stale endpoint is not a healthy broker; failure must be bounded and visible.
+4. Bind original BaseClient/service calls through validated copied records.
+   Validate peer identity, version, type, lengths, arithmetic and IDs before
+   invoking the service. Define how native stream/process resources become
+   process-local handles without serializing handle values as resource identity.
+5. Connect original worker startup and GetNextVDMCommand call sites. Compare
+   OS command line and SoftPC argv consumers so startup flags cannot disagree.
+   Prove which process owns worker creation, registration and execution.
+6. Exercise first launch, existing-broker launch, existing-eligible-worker
+   selection, required-new-worker selection, duplicate registration, failed
+   creation and disconnect at each launch boundary. Assert no orphan reservation
+   or command loss, and no unauthorized peer can register/control a worker.
+
+S3 exits with real-process command delivery/return evidence and no shadow local
+service fallback. Full DOS stream/reentry behavior is validated in S4, not
+inferred from successful handshake.
+
+## S4 detailed procedure — preserve DOS command semantics end to end
+
+1. Establish fresh direct positional MEM, COMMAND and EDIT results in the
+   three-program topology, including normal task return and launcher exit code.
+   Record the Console host used; do not substitute an independent GUI window.
+2. Trace the actual COMMAND BOP 54:08 helper call through run16 classification
+   and the original permcom/reentry path. Test both a DOS child and a native
+   child, including return to the same interactive COMMAND session.
+3. Audit and bind the async capture boundary before worker creation: copied
+   command tail, double-NUL environment and each standard stream's lifetime.
+   Test cancellation and failure after capture but before dispatch/completion.
+4. Validate quoted paths/spaces, arguments, current directory, environment,
+   input/output/error streams, EOF, child nonzero exit and parent wait/wakeup.
+   Use fixtures only for missing controlled behaviors; compiled fixture outputs
+   remain in build/, never among the owner-provided runtime binaries.
+5. Run separate redirection cases: host shell consuming `>` before run16;
+   a literal `>` delivered to the CLI; and redirection parsed inside guest
+   COMMAND through BOP. Assert the declared S1 contract for each case. A literal
+   operator is not silently claimed to have shell semantics.
+6. Regress real EDIT keyboard and mouse movement/click/release, including
+   dismissal of its welcome dialog before interaction assertions. Capture and
+   assert observable behavior; injected input alone is not a successful test.
+
+Automate repeatable Console/process tests where possible. Do not offload
+routine diagnostic iterations to the owner. Report an automation limitation
+honestly when a visible interactive result cannot be asserted.
+
+## S5 detailed procedure — coordination, retention and failure races
+
+1. Trace the selected real WOW startup client's command acquisition, PIF,
+   first-task, notification, wait/retry and completion/error paths. Separate
+   service coordination from WOW provider execution and private USER boundaries.
+2. Exercise source-defined DOS/WOW separation, no-work waits, command arrival,
+   caller disappearance and notification delivery. Check source-owned results,
+   not an invented success response for unavailable WOWEXEC/USER behavior.
+3. Derive idle eligibility from the verified lifecycle. Start its timeout only
+   after all required task/lease conditions permit retirement. Test completed
+   idle worker retirement and active interactive COMMAND/EDIT survival beyond
+   the default interval; a short focused-clock test alone is insufficient.
+4. Race new commands against the retirement decision, worker registration
+   against broker drain, and two launchers against startup. Each accepted
+   request must either execute once or receive a defined retry/failure; it
+   cannot disappear or execute twice.
+5. Exercise worker abnormal exit, launcher disconnect and broker loss with
+   owned test processes. Verify deterministic pending-request outcomes and
+   bounded cleanup. Do not kill arbitrary cmd/conhost/ntvdm processes by name.
+   Restart does not silently replay an indeterminate previously executed task.
+6. Confirm empty-broker exit only when workers, reservations, queues and client
+   operations drain; then prove a new launch starts a fresh service with correct
+   first-VDM semantics and no host boot-file mutation.
+
+## S6 detailed procedure — prove and deliver the final replacement
+
+1. Rebuild final programs from the recorded formal graph; record architecture,
+   source/configuration identity, selected original providers and file hashes.
+2. Run the complete S2--S5 suite against that same final product. Include real
+   DOS workloads, original broker-side WOW contracts, security negatives,
+   startup/disconnect races and actual idle intervals. A previous build's
+   success is not acceptance of an untested final executable.
+3. Audit remaining old entry paths, single-slot local service policy, shadow
+   ownership tables, compatibility seams and test-only bridges. Delete only
+   proved superseded/unreachable code; preserve required finite interfaces with
+   original-owner rationale and exact positive/negative evidence.
+4. Recompute the source diff/overlay/autonomous ledger against the S1 baseline.
+   Name recovered original functions and deleted autonomous groups, retained
+   seams and their removal conditions. Added transport code is reported, not
+   hidden by gross deletion totals.
+5. Review all requirements and update source registers, current authority,
+   evidence and closure records. Stage only verified formal products under the
+   revised publication contract; all logs remain under the runtime logs path.
+6. Review actual Git changes, run governance and diff checks, commit/push and
+   verify clean local state and upstream synchronization. T closure requires
+   every mandatory scoped contract to pass or an explicit owner-approved scope
+   disposition; it cannot be inferred from a neat worktree.
+
+## Delivery cadence and failure handling
+
+Implement one coherent group at a time, then build and run its focused tests;
+run the selected real workload after changes affecting its path. Complete the
+active S evidence and sequential P delivery before advancing the Status packet.
+Do not ask for renewed permission for unchanged already-admitted T scope;
+material boundary changes still follow the execution rules.
+
+A failed group stays open: retain its baseline, exact error, selected provider
+and narrow next check. Preserve previous artifacts by recorded identity when
+needed for comparison; never silently replace a known-working product with an
+unverified diagnostic build. Do not revert unrelated user work or declare a
+test passed because it was skipped, unavailable or terminated by a timeout.
+
+## Required S1 decisions (binding checklist)
 
 - run16 validates/classifies, requests service selection, creates a worker only
   when requested and registers it. basesrv owns the original service policy;
