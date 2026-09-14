@@ -1,6 +1,7 @@
 #ifndef OPENNT_BASE_SERVICE_H
 #define OPENNT_BASE_SERVICE_H
 #include <windows.h>
+#include <stdint.h>
 /* Native composition boundary; opaque pointers never enter command records.
  * One service instance per process, matching original BaseSrv globals.
  * Call only after RPC identity authentication. All operations serialized by
@@ -16,6 +17,16 @@ BOOL OpenNtBaseServicePeer(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation);
  * retaining it does not extend the RPC context or registration lifetime. */
 DWORD OpenNtBaseServiceRetainPeer(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,HANDLE *);
 DWORD OpenNtBaseServiceFirst(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,DWORD *);
+/* These are authenticated service bindings around the original CheckVDM
+ * no-worker result.  They never implement task selection or command payloads. */
+DWORD OpenNtBaseServiceCreateReservation(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,
+    ULONG task,HANDLE console,uint64_t *reservation);
+DWORD OpenNtBaseServicePrepareWorker(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,
+    uint64_t reservation,HANDLE worker);
+DWORD OpenNtBaseServiceReleaseReservation(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,
+    uint64_t reservation);
+BOOL OpenNtBaseServiceWorkerReservation(OPENNT_BASE_CONNECTION *,uint64_t *reservation,
+    ULONG *task,HANDLE *console);
 DWORD OpenNtBaseServiceAttachStream(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,DWORD role,HANDLE,DWORD *);
 DWORD OpenNtBaseServiceRevokeStream(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,DWORD receipt);
 #endif

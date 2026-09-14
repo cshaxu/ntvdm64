@@ -94,6 +94,7 @@ $brokerRoot = Join-Path $root 'src/broker'
 $brokerRecordTestSource = Join-Path $root 'tests/broker/base_vdm_record_test.c'
 $baseVdmBrokerTestSource = Join-Path $root 'tests/adapter-basesrv/base_vdm_broker_test.c'
 $baseReservationTestSource = Join-Path $root 'tests/adapter-basesrv/base_reservation_test.c'
+$baseServiceReservationTestSource = Join-Path $root 'tests/adapter-basesrv/base_service_reservation_test.c'
 $launchDeclarationWowEntryTestSource = Join-Path $root 'tests/app/launch_declaration_wow_entry_test.c'
 $cpu40DescriptorDomainFixtureSource = Join-Path $root 'tests/mvdm-host/dpmi/cpu40_descriptor_domain_fixture.c'
 $rtlX86FixtureSource = Join-Path $root 'tests/opennt-host/rtl_x86_fixture.c'
@@ -1099,6 +1100,12 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build ' + $baseReservationTestObject + ': cc ' + (NinjaPath $baseReservationTestSource))
     $graph.Add('  cflags = ' + $baseOwnerFlags)
     $graph.Add('build basesrv-reservation-test.exe: broker_test_link ' + $baseReservationTestObject + ' opennt-base-bindings.lib')
+    $baseServiceReservationTestObject = 'obj/tests/base_service_reservation_test.obj'
+    $graph.Add('build ' + $baseServiceReservationTestObject + ': cc ' + (NinjaPath $baseServiceReservationTestSource))
+    $graph.Add('  cflags = ' + $baseOwnerFlags)
+    $graph.Add('rule basesrv_service_test_link')
+    $graph.Add('  command = link.exe /nologo /out:$out $in ntdll.lib kernel32.lib user32.lib advapi32.lib libcmt.lib libvcruntime.lib libucrt.lib')
+    $graph.Add('build basesrv-service-reservation-test.exe: basesrv_service_test_link ' + $baseServiceReservationTestObject + ' obj/run16/support.obj opennt-base-server.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib')
     $graph.Add('build obj/run16/entry.obj: cc ' + (NinjaPath (Join-Path $root 'src/app/run16_entry.c')))
     $graph.Add('  cflags = ' + $baseOwnerFlags)
     $graph.Add('build obj/run16/support.obj: cc ' + (NinjaPath (Join-Path $root 'src/adapter-mvdm-host-out/win32/source/opennt_support_rtl.c')))

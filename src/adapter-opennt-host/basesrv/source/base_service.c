@@ -4,15 +4,20 @@
 #include <base_service.h>
 #include <base_process.h>
 #include <base_dispatch.h>
+#include <base_reservation.h>
 #include "broker/vdm_receipt.h"
 struct OPENNT_BASE_SERVICE {
     OPENNT_BASE_PROCESS_REGISTRY registry;
+    OPENNT_BASE_RESERVATIONS *reservations;
     CRITICAL_SECTION lock;
 };
 struct OPENNT_BASE_CONNECTION {
     OPENNT_BASE_SERVICE *service;
     CSR_PROCESS process;
     broker_vdm_receipts streams;
+    uint64_t reservation;
+    ULONG task;
+    HANDLE console;
 };
 /* Original guarded USER hook is absent in standalone CLI composition. */
 PFNNOTIFYPROCESSCREATE UserNotifyProcessCreate=NULL;
@@ -26,13 +31,18 @@ OPENNT_BASE_SERVICE *OpenNtBaseServiceStart(void)
     if (!OpenNtBaseInitializeProcessRegistry(&service->registry)) {
         DeleteCriticalSection(&service->lock); HeapFree(GetProcessHeap(),0,service); return NULL;
     }
+    if (!OpenNtBaseReservationsInitialize(&service->reservations)) {
+        OpenNtBaseDestroyProcessRegistry(&service->registry);
+        DeleteCriticalSection(&service->lock);HeapFree(GetProcessHeap(),0,service);return NULL;
+    }
     BaseSrvVDMInit();
     return service;
 }
 BOOL OpenNtBaseServiceStop(OPENNT_BASE_SERVICE *service)
 {
     /* Transport has stopped and joined all calls/rundowns before stop. */
-    if (!service || !OpenNtBaseDestroyProcessRegistry(&service->registry)) return FALSE;
+    if (!service || !OpenNtBaseReservationsDestroy(service->reservations) ||
+        !OpenNtBaseDestroyProcessRegistry(&service->registry)) return FALSE;
     DeleteCriticalSection(&service->lock);
     HeapFree(GetProcessHeap(),0,service);
     return TRUE;
@@ -50,8 +60,19 @@ DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *service,HANDLE process,
     EnterCriticalSection(&service->lock);
     if (!OpenNtBaseRegisterProcess(&service->registry,&connection->process,process)) error=GetLastError();
     else {
+        uint64_t reservation=0;
+        ULONG task=0;
+        HANDLE console=NULL;
         broker_vdm_receipts_initialize(&connection->streams,connection->process.SequenceNumber);
-        *output=connection; *generation=connection->process.SequenceNumber;
+        error=OpenNtBaseReservationClaimWorker(service->reservations,
+            (DWORD)connection->process.ClientId.UniqueProcess,connection->process.SequenceNumber,
+            &reservation,&task,&console);
+        if (error==ERROR_NOT_FOUND) error=ERROR_SUCCESS;
+        else if (!error) {
+            connection->reservation=reservation;connection->task=task;connection->console=console;
+        }
+        if (!error) { *output=connection; *generation=connection->process.SequenceNumber; }
+        else (void)OpenNtBaseRemoveProcess(&service->registry,&connection->process);
     }
     LeaveCriticalSection(&service->lock);
     if (error) HeapFree(GetProcessHeap(),0,connection);
@@ -140,4 +161,38 @@ DWORD OpenNtBaseServiceFirst(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD 
     if (status) return RtlNtStatusToDosError(status);
     *first=message.u.IsFirstVDM.FirstVDM;
     return 0;
+}
+
+DWORD OpenNtBaseServiceCreateReservation(OPENNT_BASE_CONNECTION *connection,DWORD pid,
+    DWORD generation,ULONG task,HANDLE console,uint64_t *reservation)
+{
+    if (!connection || !reservation) return ERROR_INVALID_PARAMETER;
+    if (!OpenNtBaseServicePeer(connection,pid,generation)) return ERROR_ACCESS_DENIED;
+    return OpenNtBaseReservationCreate(connection->service->reservations,pid,generation,
+        task,console,reservation);
+}
+
+DWORD OpenNtBaseServicePrepareWorker(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD generation,
+    uint64_t reservation,HANDLE worker)
+{
+    if (!connection) return ERROR_INVALID_PARAMETER;
+    if (!OpenNtBaseServicePeer(connection,pid,generation)) return ERROR_ACCESS_DENIED;
+    return OpenNtBaseReservationPrepareWorker(connection->service->reservations,reservation,
+        pid,generation,worker);
+}
+
+DWORD OpenNtBaseServiceReleaseReservation(OPENNT_BASE_CONNECTION *connection,DWORD pid,
+    DWORD generation,uint64_t reservation)
+{
+    if (!connection) return ERROR_INVALID_PARAMETER;
+    if (!OpenNtBaseServicePeer(connection,pid,generation)) return ERROR_ACCESS_DENIED;
+    return OpenNtBaseReservationRelease(connection->service->reservations,reservation,pid,generation);
+}
+
+BOOL OpenNtBaseServiceWorkerReservation(OPENNT_BASE_CONNECTION *connection,uint64_t *reservation,
+    ULONG *task,HANDLE *console)
+{
+    if (!connection || !connection->reservation || !reservation || !task || !console) return FALSE;
+    *reservation=connection->reservation;*task=connection->task;*console=connection->console;
+    return TRUE;
 }

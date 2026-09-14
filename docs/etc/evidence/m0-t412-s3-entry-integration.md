@@ -59,6 +59,17 @@ wrong-owner release and clean destruction.  This is deliberately a binding test,
 not an assertion that `run16` has yet created/resumed/registerd a worker or that
 the original rollback branch has been called.
 
+The service now owns this table for its lifetime.  On a successful authenticated
+worker `Connect`, it attempts a PID/generation claim; a missing reservation
+remains an ordinary client connection, while a stale/duplicate prepared worker
+fails connection rather than becoming an unbound worker.  The product-linked
+`basesrv-service-reservation-test.exe` passed on 2026-09-14: an owned launcher
+connection creates a reservation, registers a suspended owned child process,
+then the child connection claims that exact task/Console surrogate.  The test
+links the real `srvvdm.obj`, BaseSrv bindings, transport archive and process
+support provider; it is not a mock server.  Original `CheckVDM` and the RPC
+endpoints that create/prepare these records remain the next integration step.
+
 ## Launcher process-support dependency
 
 S2's classifier test supplied its own NtCurrentPeb, current TEB and process-heap
