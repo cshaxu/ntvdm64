@@ -905,3 +905,21 @@ launch/resource rollback, concurrent disconnect during command consumption,
 worker death or idle shutdown. The test still terminates its owned service
 after verification; automatic broker retirement remains unfinished. The new
 rundown observation changes no cleanup or original service policy.
+
+## Formal Console membership mechanism
+
+The S1 Console feasibility observation now selects console_membership.obj from
+the formal broker-transport.lib, verified by its link map. The x86 build and
+Verify-BrokerConsoleMembership pass using hidden owned children: two share a
+Console and the third has a separate Console. The component returns only the
+requested candidate membership, refuses an already-attached controller without
+altering output, leaves the querying controller detached on success, and
+rejects an invalid caller without publishing output. All children exit normally.
+Build, map and result are under build/M0-T412/S3/console-membership.
+
+This is a reusable mechanism, not a stable Console identity or authenticated
+transaction. run16's internal helper entry and broker-owned launch/channel,
+pinned process-generation revalidation, snapshot races and helper-failure
+integration remain open. Neither the persistent broker nor a user process is
+detached by this component. No original BaseSrv selection policy is replaced,
+and this verification does not execute a guest or complete S3.

@@ -140,6 +140,23 @@ M0 T272 S5 disposition register:
   is the only permitted original-call binding, and a later public pipe/event
   transport may use this exact record contract.
 
+`console_membership.h/.c` implement the finite modern Console observation
+mechanism selected by the T412 S1 Console design. NT4 Console HANDLE identity
+cannot be transported as a modern cross-process identity, and the original
+BaseSrv record-selection policy remains its owner rather than being rewritten.
+The reviewed S1 feasibility fixture supplied the public API sequence; the
+formal component adds attached-process refusal, bounded snapshot resizing,
+caller-presence validation and publish-only-after-detach failure semantics.
+Its ABI accepts a caller PID and candidate PIDs and returns membership bytes;
+it neither opens unrelated processes nor treats PID membership as authority.
+An isolated detached helper must call it. The parent must pin and revalidate
+authenticated process lifetimes/generations. That helper transaction is not
+yet integrated into run16 or basesrv. The formal broker-transport archive is
+selected by Verify-BrokerConsoleMembership, whose link map and real owned
+Console tests cover same/different membership, attached refusal, unchanged
+failure output and detached return. Concurrent snapshot growth, detach failure
+and parent-generation revalidation are not proven by this test.
+
 Project-owned per-user cross-process coordination component. Command records
 contain only versioned copied values. Required native resources use only the
 separate authenticated OS-managed attachment exception, never command fields.

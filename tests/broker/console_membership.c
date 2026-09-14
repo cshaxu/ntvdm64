@@ -1,17 +1,10 @@
-/* Isolated Console membership feasibility, not a broker identity provider. */
+/* Formal Console membership mechanism; not a broker identity provider. */
 #include <windows.h>
+#include "broker/console_membership.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 static HANDLE ready;
-
-static int member(DWORD pid)
-{
-    DWORD ids[32], count = GetConsoleProcessList(ids, 32), i;
-    if (!count || count > 32) return -1;
-    for (i = 0; i < count; ++i) if (ids[i] == pid) return 1;
-    return 0;
-}
 
 static BOOL child(char *image, char *event, DWORD flags, PROCESS_INFORMATION *p)
 {
@@ -33,6 +26,8 @@ int main(int argc, char **argv)
     char image[MAX_PATH], event[128], readyName[160];
     int result = 1;
     DWORD code, i;
+    DWORD candidates[3];
+    BYTE members[3] = {7,7,7};
     PROCESS_INFORMATION *children[] = {&a, &b, &c};
     if (argc == 3 && !strcmp(argv[1], "wait")) {
         stop = OpenEventA(SYNCHRONIZE, FALSE, argv[2]);
@@ -58,16 +53,21 @@ int main(int argc, char **argv)
     if (!child(image, event, CREATE_NEW_CONSOLE, &a)) goto done;
     if (!AttachConsole(a.dwProcessId)) goto done;
     if (!child(image, event, 0, &b)) goto done;
-    if (member(a.dwProcessId) != 1 || member(b.dwProcessId) != 1) goto done;
+    candidates[0]=a.dwProcessId; candidates[1]=b.dwProcessId;
+    if (broker_console_membership(a.dwProcessId,candidates,2,members)!=ERROR_ACCESS_DENIED ||
+        members[0]!=7 || members[1]!=7) goto done;
     FreeConsole();
     if (!child(image, event, CREATE_NEW_CONSOLE, &c)) goto done;
-    if (!AttachConsole(b.dwProcessId)) goto done;
-    if (member(a.dwProcessId) != 1 || member(b.dwProcessId) != 1 ||
-        member(c.dwProcessId) != 0) goto done;
-    FreeConsole();
-    if (!AttachConsole(c.dwProcessId)) goto done;
-    if (member(c.dwProcessId) != 1 || member(a.dwProcessId) != 0 ||
-        member(b.dwProcessId) != 0) goto done;
+    candidates[2]=c.dwProcessId;
+    if (broker_console_membership(b.dwProcessId,candidates,3,members) ||
+        members[0]!=1 || members[1]!=1 || members[2]!=0) goto done;
+    if (broker_console_membership(c.dwProcessId,candidates,3,members) ||
+        members[0]!=0 || members[1]!=0 || members[2]!=1) goto done;
+    /* Successful queries leave this controller detached. Invalid requests
+     * neither attach nor publish partial output. */
+    if (GetConsoleProcessList(&code,1)) goto done;
+    if (broker_console_membership(0,candidates,3,members)!=ERROR_INVALID_PARAMETER ||
+        members[0]!=0 || members[1]!=0 || members[2]!=1) goto done;
     result = 0;
 done:
     FreeConsole();
@@ -83,7 +83,7 @@ done:
     }
     CloseHandle(stop);
     CloseHandle(ready);
-    if (!result) puts("PASS: same-console membership, different-console isolation, owned-child normal exit");
+    if (!result) puts("PASS: formal membership, same/different Console, attached-controller refusal, unchanged failure output, detached return, owned-child normal exit");
     else fprintf(stderr, "FAIL console membership result=%d error=%lu\n", result, GetLastError());
     return result;
 }
