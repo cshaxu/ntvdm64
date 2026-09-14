@@ -173,6 +173,31 @@ three-program startup boundary: EDIT/QBASIC execution is reached; its visible
 editor, keyboard and mouse behavior still require the dedicated real-Console
 acceptance path specified by S4.
 
+## COMMAND shell-tail fallback
+
+The retained COMMAND `54:08` route may hand the public launcher a copied
+`COMSPEC /c` tail whose first token is a shell built-in or shell syntax rather
+than a PE, DOS, PIF or NE image. Rejecting that token at `GetBinaryTypeW`
+would be a launcher-owned parser policy and loses the original public-shell
+fallback. `run16` now preserves the untouched Unicode tail and starts the
+public `COMSPEC` through its existing Unicode CreateProcess/standard-handle
+convention. It does not classify the tail a second time or send it back into
+the VDM.
+
+After the x86 `run16.exe` relink, bounded host smoke
+`build/M0-T412/S4/run16-shell-fallback-r5` ran one tail containing both
+`echo MVDM_T412_STDOUT` and `echo MVDM_T412_STDERR 1>&2`. It returned zero
+and captured the two markers in distinct inherited stdout and stderr files.
+The deployed `O:\ntvdm64\run16.exe` has SHA-256
+`A3A9DF96DEEC83ED4F714BA98A84A502E29C0C0965E387203B95CF7FDCD6F33A`.
+
+This does not yet replace the real guest acceptance. The first bounded
+COMMAND invocation with the same form at
+`O:\ntvdm64\logs\m0-t412-s4-bop-shell-fallback-r2` reached
+run16/basesrv/ntvdm connection and reservation, but the worker did not reach
+GetNextVDMCommand before the observation bound and was explicitly cleaned up.
+It therefore provides no BOP or byte-producing guest-shell success claim.
+
 ## Interpretation
 
 Confidence is high that the original Update-before-Connect ordering and

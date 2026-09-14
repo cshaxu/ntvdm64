@@ -157,7 +157,8 @@ int WINAPI wWinMain(HINSTANCE instance,HINSTANCE previous,PWSTR command,int show
     STARTUPINFOW startup={sizeof(startup)};
     PROCESS_INFORMATION child={0};
     WCHAR application[MAX_PATH];
-    DWORD type,result=ERROR_INVALID_PARAMETER,binary=0;
+    WCHAR shell_command[MAX_PATH + MAXIMUM_VDM_COMMAND_LENGTH + 8u];
+    DWORD type,result=ERROR_INVALID_PARAMETER,binary=0,comspec_bytes;
     int count;
     size_t bytes;
     (void)instance;(void)previous;(void)show;
@@ -176,7 +177,38 @@ int WINAPI wWinMain(HINSTANCE instance,HINSTANCE previous,PWSTR command,int show
     RtlInitUnicodeString(&BaseDotPifSuffixName,L".pif");
     RtlInitUnicodeString(&BaseDotExeSuffixName,L".exe");
     if (!count || !*arguments[0]) goto done;
-    if (!OpenNtBaseGetBinaryTypeW(arguments[0],&type)) { result=GetLastError(); goto done; }
+    if (!OpenNtBaseGetBinaryTypeW(arguments[0],&type)) {
+        /* The original COMMAND worker has already chosen COMSPEC /c before
+         * this public launcher sees a native-child tail.  A token which is
+         * not an image may be a command built-in, batch file, or shell
+         * syntax.  Preserve its copied text for the public shell; do not add
+         * a second classifier/parser to run16 or redirect it into the VDM.
+         * This entry is already Unicode CreateProcessW-based, so retain its
+         * standard-handle and command-text convention rather than crossing
+         * an unrelated ANSI classification helper. */
+        comspec_bytes=GetEnvironmentVariableW(L"COMSPEC",application,MAX_PATH);
+        if (!comspec_bytes || comspec_bytes>=MAX_PATH) {
+            result=comspec_bytes ? ERROR_FILENAME_EXCED_RANGE : GetLastError();
+            goto done;
+        }
+        if (swprintf_s(shell_command,sizeof(shell_command)/sizeof(shell_command[0]),
+                L"\"%s\" /c %s",application,command)<0) {
+            result=ERROR_FILENAME_EXCED_RANGE; goto done;
+        }
+        startup.dwFlags=STARTF_USESTDHANDLES;
+        startup.hStdInput=GetStdHandle(STD_INPUT_HANDLE);
+        startup.hStdOutput=GetStdHandle(STD_OUTPUT_HANDLE);
+        startup.hStdError=GetStdHandle(STD_ERROR_HANDLE);
+        if (!CreateProcessW(application,shell_command,NULL,NULL,TRUE,0,NULL,NULL,
+                &startup,&child)) result=GetLastError();
+        else {
+            CloseHandle(child.hThread);
+            if (WaitForSingleObject(child.hProcess,INFINITE)!=WAIT_OBJECT_0 ||
+                !GetExitCodeProcess(child.hProcess,&result)) result=GetLastError();
+            CloseHandle(child.hProcess);
+        }
+        goto done;
+    }
     if (type==SCS_DOS_BINARY) binary=BINARY_TYPE_DOS;
     else if (type==SCS_PIF_BINARY) binary=BINARY_TYPE_DOS|BINARY_TYPE_DOS_PIF;
     else if (type==SCS_WOW_BINARY) binary=BINARY_TYPE_WIN16;
