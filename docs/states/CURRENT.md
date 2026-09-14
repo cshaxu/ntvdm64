@@ -42,6 +42,13 @@ Five attachment cases pass, including three-process shared-position/read-only
 and absent-target failure. Durable receipt/rollback integration is not yet
 implemented. Console identity remains the next S1 design gate.
 
+[Console membership evidence](../etc/evidence/m0-t412-s1-console-membership.md)
+now proves same/different Console separation in an isolated native Console
+fixture and selects an owned short-lived query helper, not persistent broker
+attachment. Worker readiness requires explicit acknowledgement. This is not
+ConPTY, close/recreation or stale-generation integration acceptance. S1 remains
+active pending the consolidated design/exit review before S2 activation.
+
 The earlier source-audit checkpoint
 records all eight discussion rows, the 1,349-line local-provider replacement
 envelope (not net deletion), and outstanding finite-boundary designs. The
