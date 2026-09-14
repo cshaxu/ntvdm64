@@ -314,3 +314,23 @@ successful publication boundary. Original explicit closes still revoke their
 identified receipts idempotently. The production transaction/receipt wiring
 has not been implemented or accepted by this test; it is the next required
 integration step before the current callback can safely deliver real streams.
+
+## Original successful stream identity and close sequence
+
+The formal lifecycle test now also executes original BaseSrvDupStandardHandles
+and BaseSrvCloseStandardHandles for distinct streams and shared stdout/stderr.
+Its callback assigns distinct test-only destination markers, with no OS handles
+or autonomous implementation of the original helper. Distinct streams cause
+three duplication calls. Shared stdout/stderr causes two and preserves the
+same destination marker for both output fields. Every duplicate uses the
+original OBJ_INHERIT / DUPLICATE_SAME_ACCESS shape.
+
+Original cleanup issues three DUPLICATE_CLOSE_SOURCE calls even for shared
+stdout/stderr, then zeroes all fields; repeating cleanup issues no further
+calls. The test checks argument shape, exact marker sequence and field clearing.
+It passes with the same formal original-owner libraries and complete lifecycle
+suite. Together with the preceding partial-failure test this fixes the required
+receipt identity/cleanup contract: preserve output alias identity, tolerate its
+repeated revocation, and separately journal only completed acquisitions on
+failure. It does not prove remote standard-stream dispatch or handle leak
+freedom, and does not change the original source or deployed executable.

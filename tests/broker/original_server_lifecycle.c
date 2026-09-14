@@ -42,6 +42,25 @@ static NTSTATUS partial_stream_delivery(void *context,HANDLE sourceProcess,HANDL
     }
     return (NTSTATUS)0xc0000022L;
 }
+typedef struct stream_identity_test {
+    ULONG copied, revoked;
+    HANDLE closed[3];
+} stream_identity_test;
+static NTSTATUS stream_identity_delivery(void *context,HANDLE sourceProcess,HANDLE source,HANDLE targetProcess,
+    PHANDLE target,ACCESS_MASK access,ULONG attributes,ULONG options)
+{
+    stream_identity_test *test=(stream_identity_test *)context;
+    (void)sourceProcess; (void)access;
+    if (options==DUPLICATE_CLOSE_SOURCE) {
+        if (targetProcess || target || test->revoked>=3) return (NTSTATUS)0xc000000dL;
+        test->closed[test->revoked++]=source;
+        return 0;
+    }
+    if (options!=DUPLICATE_SAME_ACCESS || attributes!=OBJ_INHERIT || !target)
+        return (NTSTATUS)0xc000000dL;
+    *target=(HANDLE)(100+ ++test->copied); /* Distinct test receipt identities. */
+    return 0;
+}
 typedef struct registry_remove_test {
     HANDLE started;
     HANDLE finished;
@@ -285,6 +304,30 @@ int main(int argc, char **argv)
         CHECK(test.duplicated==2 && test.closed==0);
         CHECK(info.StdIn==(HANDLE)101 && info.StdOut==(HANDLE)20 && info.StdErr==(HANDLE)30);
         puts("PASS: original partial stream failure retains mixed source/destination fields; no helper rollback");
+    }
+    {
+        ULONG alias;
+        for (alias=0;alias<2;++alias) {
+            stream_identity_test test={0};
+            OPENNT_BASE_RESOURCE_BINDING binding={&test,stream_identity_delivery,NULL};
+            VDMINFO info={0};
+            DOSRECORD record={0};
+            info.StdIn=(HANDLE)10; info.StdOut=(HANDLE)20; info.StdErr=(HANDLE)(alias?20:30);
+            record.lpVDMInfo=&info;
+            CHECK(OpenNtBaseBindResources(&binding)==NULL);
+            CHECK(BaseSrvDupStandardHandles(GetCurrentProcess(),&record)==STATUS_SUCCESS);
+            CHECK(test.copied==(alias?2:3));
+            CHECK(info.StdIn==(HANDLE)101 && info.StdOut==(HANDLE)102);
+            CHECK(info.StdErr==(HANDLE)(alias?102:103));
+            BaseSrvCloseStandardHandles(GetCurrentProcess(),&record);
+            CHECK(test.revoked==3 && test.closed[0]==(HANDLE)101 && test.closed[1]==(HANDLE)102);
+            CHECK(test.closed[2]==(HANDLE)(alias?102:103));
+            CHECK(!info.StdIn && !info.StdOut && !info.StdErr);
+            BaseSrvCloseStandardHandles(GetCurrentProcess(),&record);
+            CHECK(test.revoked==3);
+            CHECK(OpenNtBaseBindResources(NULL)==&binding);
+        }
+        puts("PASS: original distinct/aliased stream delivery, duplicate alias close and cleared repeat cleanup");
     }
     { LUID negative=RtlConvertLongToLuid(-1), positive=RtlConvertLongToLuid(0x7fffffff);
       CHECK(negative.LowPart==0xffffffff && negative.HighPart==-1);
