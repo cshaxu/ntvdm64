@@ -1024,6 +1024,49 @@ $openntBaseVdmObjects = foreach ($name in $openntBaseVdmNames) {
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $openntBaseVdmRoot $name)))
     $object
 }
+# T412 owner archives are explicit targets until the three-process links replace
+# the legacy local provider. No fixture object or generated declaration enters
+# these libraries; their process/transport imports remain composition edges.
+$baseOwnerManifest = @()
+if ($Architecture -eq 'x86') {
+    $baseBindingInclude = NinjaPath (Join-Path $root 'src/adapter-opennt-host/basesrv/include')
+    $baseOwnerFlags = $baseFlags + ' /we4013 /I "' + $baseBindingInclude + '"' +
+        ' /I "' + (NinjaPath (Join-Path $root 'src/opennt-host/base/win32/inc')) + '"' +
+        ' /I "' + (NinjaPath (Join-Path $root 'src/opennt-host/base/win32/server')) + '"'
+    $baseServerFlags = $baseOwnerFlags + ' /D_CSRSRV_ /DOPENNT_BASE_VDM_SERVER /FI "' +
+        $baseBindingInclude + '/base_server.h"'
+    $baseOwnerGroups = @{
+        'opennt-base-client' = @(
+            @('client', 'src/opennt-host/base/win32/client/vdm.c', ($baseOwnerFlags + ' /Gy /DOPENNT_BASE_CLIENT_VDM_COMMANDS')),
+            @('classifier', 'src/opennt-host/base/win32/client/vdm.c', ($baseOwnerFlags + ' /Gy /DOPENNT_BASE_CLIENT_CLASSIFIER')),
+            @('capture', 'src/opennt-host/base/ntdll/csrutil.c', ($baseOwnerFlags + ' /Gz')))
+        'opennt-base-server' = @(
+            @('srvvdm', 'src/opennt-host/base/win32/server/srvvdm.c', $baseServerFlags),
+            @('exports', 'src/opennt-host/windows/core/ntuser/server/exports.c', $baseServerFlags))
+        'opennt-base-bindings' = @(
+            @('config', 'src/adapter-opennt-host/basesrv/source/base_config.c', $baseOwnerFlags),
+            @('process', 'src/adapter-opennt-host/basesrv/source/base_client_process.c', $baseOwnerFlags),
+            @('interactive', 'src/adapter-opennt-host/basesrv/source/base_interactive.c', $baseOwnerFlags),
+            @('classifier-path', 'src/adapter-opennt-host/basesrv/source/base_classifier_path.c', $baseOwnerFlags))
+    }
+    foreach ($group in @('opennt-base-client', 'opennt-base-server', 'opennt-base-bindings')) {
+        $members = foreach ($member in $baseOwnerGroups[$group]) {
+            $object = 'obj/' + $group + '/' + $member[0] + '.obj'
+            $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $root $member[1])))
+            $graph.Add('  cflags = ' + $member[2])
+            $baseOwnerManifest += [ordered]@{
+                archive = $group + '.lib'
+                path = $member[1]
+                sha256 = Get-NodeSha256 (Join-Path $root $member[1])
+                object = $object
+                buildDisposition = 'explicit-x86-owner-archive; not-yet-selected-by-product-exe'
+            }
+            $object
+        }
+        $graph.Add('build ' + $group + '.lib: lib ' + ($members -join ' '))
+    }
+    $graph.Add('build opennt-broker-owners: phony opennt-base-client.lib opennt-base-server.lib opennt-base-bindings.lib')
+}
 $appObjects = foreach ($name in $appNames) {
     $object = 'obj/app/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $appRoot $name)))
@@ -1153,6 +1196,7 @@ $graph.Add('default original-softpc-candidate')
     openntRtlX86Sources = @($openntRtlX86Names)
     openntRtlSources = @($openntRtlNames)
     openntBaseVdmSources = @($openntBaseVdmNames)
+    openntBrokerOwnerArchives = @($baseOwnerManifest)
     patchInputs = @($patchNames | ForEach-Object {
         [ordered]@{
             path = 'src/mvdm-softpc-patch/x86/prod/' + $_

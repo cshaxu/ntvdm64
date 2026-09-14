@@ -47,8 +47,8 @@ relative-output size and NULL-directory differences. Final
 run16 selection, remaining launch closure and local-policy retirement remain
 unfinished. This is not guest execution or three-product acceptance.
 
-Original client/server archives pass with private declarations and the original
-LUID inline, without generated declaration scaffolding. Shared-WOW admission
+Formal x86 client/server/binding archives pass both suites with original policy
+and no client-side forced server declarations. Shared-WOW admission
 passes scoped-logon and rollback tests using the original token helper. Three
 original capture routines now replace test-authored allocators; pointer tables,
 alignment, real heap exhaustion and cleanup pass. See the linked S2 evidence.

@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {spawnSync} from 'node:child_process';
 const root=process.cwd(), build=path.resolve('build/M0-T412/S2/original-lifecycle');
+const ownerBuild=process.env.OPENNT_BROKER_OWNER_BUILD ? path.resolve(process.env.OPENNT_BROKER_OWNER_BUILD) : null;
 fs.mkdirSync(build,{recursive:true});
 const graph=fs.readFileSync('build/M0-T412/S1/text-cell-repair/product/build.ninja','utf8');
 const flags=graph.match(/^cflags = (.*)$/m)[1].replaceAll('$:',':');
@@ -45,7 +46,7 @@ assert.equal(createHash('sha256').update(updateBody).digest('hex'),
 const env=path.join(build,'msvc.cmd');
 fs.writeFileSync(env,'@echo off\r\nset "lifecycle_cwd=%CD%"\r\ncall "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat" -arch=x86 -host_arch=x64 >nul\r\nif errorlevel 1 exit /b %errorlevel%\r\ncd /d "%lifecycle_cwd%"\r\n%*\r\n');
 const includes=`/D_CSRSRV_ /DOPENNT_BASE_VDM_SERVER /we4013 /FI "${root}/src/adapter-opennt-host/basesrv/include/base_server.h" /I "${root}/src/adapter-opennt-host/basesrv/include" /I "${root}/src/opennt-host/base/win32/inc" /I "${root}/src/opennt-host/base/win32/server"`;
-const commands=[
+let commands=[
     `cl.exe ${flags} ${includes} /Fo"${build}/config.obj" "${root}/src/adapter-opennt-host/basesrv/source/base_config.c"`,
     `cl.exe ${flags} /Fo"${build}/environment-check.obj" "${root}/src/opennt-host/base/win32/client/vdm.c"`,
     `cl.exe ${flags} ${includes} /Fo"${build}/srvvdm.obj" "${root}/src/opennt-host/base/win32/server/srvvdm.c"`,
@@ -60,6 +61,15 @@ const commands=[
     'lib.exe /nologo /out:opennt-base-client.lib client.obj capture.obj',
     'link.exe /nologo /opt:ref /out:original-lifecycle.exe /map:original-lifecycle.map fixture.obj opennt-base-server.lib opennt-base-client.lib config.obj process.obj interactive.obj error.obj ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib'
 ];
+if(ownerBuild) {
+    for(const name of ['opennt-base-client.lib','opennt-base-server.lib','opennt-base-bindings.lib'])
+        assert(fs.existsSync(path.join(ownerBuild,name)),`Missing formal owner archive ${name}`);
+    commands=[
+        `cl.exe ${flags} ${includes} /Fo"${build}/fixture.obj" "${root}/tests/broker/original_server_lifecycle.c"`,
+        `cl.exe ${rtlFlags} /Fo"${build}/error.obj" "${root}/src/opennt-host/base/ntos/rtl/error.c"`,
+        `link.exe /nologo /opt:ref /out:original-lifecycle.exe /map:original-lifecycle.map fixture.obj "${ownerBuild}/opennt-base-server.lib" "${ownerBuild}/opennt-base-client.lib" "${ownerBuild}/opennt-base-bindings.lib" error.obj ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib`
+    ];
+}
 const log=fs.openSync(path.join(build,'build.log'),'w');
 for(const command of commands) {
     const result=spawnSync('cmd.exe',['/d','/c',`call "${env}" ${command}`],{cwd:build,windowsHide:true,windowsVerbatimArguments:true,stdio:['ignore',log,log],timeout:60000});
@@ -92,7 +102,7 @@ for(const symbol of ['BaseSrvCheckVDM','BaseSrvGetNextVDMCommand','BaseSrvSetRee
 assert(map.split(/\r?\n/).some(line=>line.includes('_BaseGetVdmConfigInfo')&&line.includes('client.obj')),'Original worker configuration provider missing');
 assert(map.split(/\r?\n/).some(line=>line.includes('_BaseCheckForVDM')&&line.includes('client.obj')),'Original task-exit provider missing');
 const result=spawnSync(path.join(build,'original-lifecycle.exe'),[],{cwd:build,windowsHide:true,encoding:'utf8',timeout:15000});
-fs.writeFileSync(path.join(build,'result.json'),JSON.stringify({status:result.status,stdout:result.stdout,stderr:result.stderr,error:result.error?.message},null,2));
+fs.writeFileSync(path.join(build,'result.json'),JSON.stringify({ownerBuild,status:result.status,stdout:result.stdout,stderr:result.stderr,error:result.error?.message},null,2));
 console.log(result.stdout,result.stderr);
 assert.equal(result.status,0,'Original lifecycle fixture failed');
 console.log('PASS: original BaseClient capture/copy, directories, exit, BAT/WOW registration, real wait/wake/retry with cleared exit code; captures drained');

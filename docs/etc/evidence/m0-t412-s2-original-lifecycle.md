@@ -536,3 +536,41 @@ The verifier checks original hash, the exact single source substitution and
 client-library symbol ownership. Earlier lifecycle tests remain required.
 This adds finite configuration glue, not net code removal; superseded current
 launch-declaration code cannot be deleted until real product selection passes.
+
+## Formal owner archive integration
+
+New-T310OriginalSoftpcNinja.ps1 now exposes the explicit x86 target
+opennt-broker-owners with opennt-base-client.lib, opennt-base-server.lib and
+opennt-base-bindings.lib. Nine compilation members are recorded with paths,
+hashes and explicit non-product-link disposition in source-manifest.json.
+Client command/classifier cohorts and capture compile independently of the
+server forced header; only server owners receive their private server binding.
+Capture retains /Gz. No fixture object or generated declaration is archived.
+
+The first graph attempt omitted per-member flag suffixes because PowerShell
+array concatenation parsed the flag expression incorrectly. The resulting
+capture calling-convention error was fixed in the generator with parenthesized
+flag expressions, not by altering original function signatures. All nine
+members and three archives then built; regeneration followed by the same
+target reported no work to do.
+
+Both existing verifiers accept OPENNT_BROKER_OWNER_BUILD. In that mode they
+compile only fixture and original RTL error support, then link the actual
+formal archives rather than separately compiling the service/client/bindings.
+Map checks identify original library providers; result.json records the owner
+build directory. Both suites pass under build/M0-T412/S2/formal-owners:
+DOS/WOW worker arguments, lifecycle/capture/wait/cleanup, task-exit consumption,
+scoped WOW admission, real-media classification and negative classifier cases.
+The fixture still supplies local process/dispatch mechanics; it is not RPC or
+guest execution evidence.
+
+Observed archive SHA-256 values:
+
+- Client: `768b471bd25136e0397c6cd6e7215bbf25af1765d60d2208087cb53277e8915d`.
+- Server: `8bb79537154de71a8bd5227a2127e3f2bb16b44af4d3182d38c8fcf1f60a73e6`.
+- Bindings: `d5087f426a59fcd37e97287f41841b175e44662a1ef970b07ab636617c085ab8`.
+
+These are reusable formal graph targets, not a new default product policy.
+The current EXE still selects basesrv-bindings.lib and the old local provider.
+Three-process entry/transport selection and its retirement gate remain open;
+neither S2 closure nor a new deployed executable is claimed by this delivery.
