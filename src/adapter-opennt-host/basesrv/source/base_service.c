@@ -5,11 +5,13 @@
 #include <base_process.h>
 #include <base_dispatch.h>
 #include <base_reservation.h>
+#include <base_command.h>
 #include "broker/vdm_receipt.h"
 struct OPENNT_BASE_SERVICE {
     OPENNT_BASE_PROCESS_REGISTRY registry;
     OPENNT_BASE_RESERVATIONS *reservations;
     CRITICAL_SECTION lock;
+    ULONG next_console;
 };
 struct OPENNT_BASE_CONNECTION {
     OPENNT_BASE_SERVICE *service;
@@ -195,4 +197,50 @@ BOOL OpenNtBaseServiceWorkerReservation(OPENNT_BASE_CONNECTION *connection,uint6
     if (!connection || !connection->reservation || !reservation || !task || !console) return FALSE;
     *reservation=connection->reservation;*task=connection->task;*console=connection->console;
     return TRUE;
+}
+
+DWORD OpenNtBaseServiceCheck(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD generation,
+    void *input,uint32_t bytes,void *output,uint32_t capacity,uint32_t *required)
+{
+    BASE_API_MSG message={0};
+    STARTUPINFOA startup;
+    CSR_THREAD thread={0};
+    PCSR_THREAD previousThread;
+    OPENNT_BASE_PROCESS_REGISTRY *previousRegistry;
+    uint32_t request;
+    uint32_t needed=0;
+    NTSTATUS status;
+    if (required) *required=0;
+    if (!connection || !required || !OpenNtBaseServicePeer(connection,pid,generation) ||
+        !OpenNtBaseDecodeCheckCommand(input,bytes,generation,&message,&startup,&request))
+        return ERROR_INVALID_PARAMETER;
+    /* CheckVDM publishes an original record.  Reject a short reply before
+     * dispatch so a caller retry cannot submit/consume the command twice. */
+    if (!OpenNtBaseEncodeCheckReply(&message,request,generation,NULL,0,&needed))
+        return ERROR_INVALID_PARAMETER;
+    *required=needed;
+    if (!output || capacity<needed) return ERROR_INSUFFICIENT_BUFFER;
+    EnterCriticalSection(&connection->service->lock);
+    if (message.u.CheckVDM.ConsoleHandle==OPENNT_BASE_CONSOLE_EXISTING) {
+        if (!connection->console) {
+            if (!++connection->service->next_console || connection->service->next_console==MAXDWORD) {
+                LeaveCriticalSection(&connection->service->lock);return ERROR_ARITHMETIC_OVERFLOW;
+            }
+            connection->console=(HANDLE)(ULONG_PTR)connection->service->next_console;
+        }
+        message.u.CheckVDM.ConsoleHandle=connection->console;
+    }
+    thread.Process=&connection->process;
+    thread.ClientId.UniqueProcess=connection->process.ClientId.UniqueProcess;
+    previousThread=OpenNtBaseBindServerRequestThread(&thread);
+    previousRegistry=OpenNtBaseBindProcessRegistry(&connection->service->registry);
+    status=OpenNtBaseDispatchOperation((PCSR_API_MSG)&message,BROKER_VDM_CHECK,
+        sizeof(message.u.CheckVDM));
+    OpenNtBaseBindProcessRegistry(previousRegistry);
+    OpenNtBaseBindServerRequestThread(previousThread);
+    LeaveCriticalSection(&connection->service->lock);
+    if (status && !message.ReturnValue) message.ReturnValue=status;
+    if (!OpenNtBaseEncodeCheckReply(&message,request,generation,output,capacity,required))
+        return ERROR_INVALID_PARAMETER;
+    return ERROR_SUCCESS;
 }

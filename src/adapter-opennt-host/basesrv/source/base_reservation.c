@@ -57,7 +57,7 @@ DWORD OpenNtBaseReservationCreate(OPENNT_BASE_RESERVATIONS *state,DWORD launcher
     DWORD launcher_generation,ULONG task,HANDLE console,uint64_t *reservation)
 {
     OPENNT_BASE_RESERVATION *entry;
-    if (!state || !launcher_pid || !launcher_generation || !task || !console || !reservation)
+    if (!state || !launcher_pid || !launcher_generation || !console || !reservation)
         return ERROR_INVALID_PARAMETER;
     *reservation=0;
     entry=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*entry));

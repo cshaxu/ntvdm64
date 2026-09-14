@@ -10,8 +10,9 @@ typedef struct check_prefix {
     broker_vdm_message_header header;
     broker_vdm_check_values values;
     broker_vdm_startup startup;
+    uint32_t console_mode;
 } check_prefix;
-typedef char check_prefix_size[sizeof(check_prefix)==96?1:-1];
+typedef char check_prefix_size[sizeof(check_prefix)==100?1:-1];
 
 typedef struct check_reply {
     broker_vdm_message_header header;
@@ -142,6 +143,12 @@ BOOL OpenNtBaseEncodeCheckCommand(const BASE_API_MSG *message, uint32_t request,
     prefix.values.code_page=message->u.CheckVDM.CodePage;
     prefix.values.creation_flags=message->u.CheckVDM.dwCreationFlags;
     prefix.values.drive=message->u.CheckVDM.CurDrive;
+    if (message->u.CheckVDM.ConsoleHandle==OPENNT_BASE_CONSOLE_WOW)
+        prefix.console_mode=2;
+    else if (!message->u.CheckVDM.ConsoleHandle)
+        prefix.console_mode=0;
+    else
+        prefix.console_mode=1;
     OpenNtBaseEncodeStartup(message->u.CheckVDM.StartupInfo,&prefix.startup);
     prefix.header.version=BROKER_VDM_MESSAGE_VERSION;
     prefix.header.bytes=total; prefix.header.operation=BROKER_VDM_CHECK;
@@ -168,12 +175,14 @@ BOOL OpenNtBaseDecodeCheckCommand(void *input, uint32_t bytes, uint32_t generati
         header.operation!=BROKER_VDM_CHECK) return FALSE;
     memcpy(&prefix,input,sizeof(prefix));
     decoded=*message;
-    if (prefix.values.task || prefix.values.state ||
+    if (prefix.values.task || prefix.values.state || prefix.console_mode>2 ||
         !OpenNtBaseDecodeValues(&prefix.values,sizeof(prefix.values),BROKER_VDM_CHECK,&decoded) ||
         !OpenNtBaseDecodeStartup(&prefix.startup,&decodedStartup) ||
         !OpenNtBaseDecodeCheckPayload((unsigned char *)input+sizeof(prefix),
             bytes-sizeof(prefix),&decoded.u.CheckVDM)) return FALSE;
     decoded.u.CheckVDM.StartupInfo=prefix.startup.present?startup:NULL;
+    decoded.u.CheckVDM.ConsoleHandle=prefix.console_mode==2 ? OPENNT_BASE_CONSOLE_WOW :
+        prefix.console_mode==1 ? OPENNT_BASE_CONSOLE_EXISTING : OPENNT_BASE_CONSOLE_NEW;
     *startup=decodedStartup;
     *message=decoded;
     *request=header.request_id;

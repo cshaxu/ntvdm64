@@ -1,6 +1,11 @@
 #ifndef OPENNT_BASE_COMMAND_H
 #define OPENNT_BASE_COMMAND_H
 #include "broker/vdm_message.h"
+/* Decoded CheckVDM ConsoleHandle carries only one of these service-local
+ * semantic sentinels.  A native Console handle is never serialized. */
+#define OPENNT_BASE_CONSOLE_NEW ((HANDLE)0)
+#define OPENNT_BASE_CONSOLE_EXISTING ((HANDLE)1)
+#define OPENNT_BASE_CONSOLE_WOW ((HANDLE)(LONG_PTR)-1)
 /* Complete copied CheckVDM request: envelope, scalar/startup fragments and
  * eight buffers. Authenticated attachments remain a separate mandatory path.
  * Source/output must not overlap; NULL output queries required bytes. */
