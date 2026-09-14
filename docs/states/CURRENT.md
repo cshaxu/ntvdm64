@@ -29,6 +29,13 @@
 | Working Plan | [T412 sequential S plan](../etc/operations/m0-t412-broker-restoration-plan.md). |
 
 S1 execution checkpoint: [source audit](../etc/evidence/m0-t412-s1-broker-owner-audit.md)
+is supplemented by [original server compilation](../etc/evidence/m0-t412-s1-original-server-compilation.md):
+the unchanged complete srvvdm.c compiles for x86 with no implicit API declarations.
+This proves the declaration boundary is finite, not a linked/runtime provider.
+S1 remains active while resource duplication timing and finite process/Console
+bindings are resolved; S2--S6 retain the owner's sequential approval.
+
+The earlier source-audit checkpoint
 records all eight discussion rows, the 1,349-line local-provider replacement
 envelope (not net deletion), and outstanding finite-boundary designs. The
 inherited HALT/RESET source-equivalence claim is contradicted by actual local
