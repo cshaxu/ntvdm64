@@ -2,6 +2,7 @@
 #include <windows.h>
 #include "broker/console_membership.h"
 #include "broker/console_probe.h"
+#include "app/console_query.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -109,6 +110,8 @@ int main(int argc, char **argv)
     BYTE members[3] = {7,7,7};
     DWORD many[BROKER_CONSOLE_PROBE_MAX_CANDIDATES];
     BYTE expected[BROKER_CONSOLE_PROBE_MAX_CANDIDATES];
+    HANDLE processes[3],cancel;
+    WCHAR helper[MAX_PATH];
     PROCESS_INFORMATION *children[] = {&a, &b, &c};
     if (argc == 3 && !strcmp(argv[1], "wait")) {
         stop = OpenEventA(SYNCHRONIZE, FALSE, argv[2]);
@@ -158,6 +161,15 @@ int main(int argc, char **argv)
     }
     if (!probe(argv[1],c.dwProcessId,many,expected,BROKER_CONSOLE_PROBE_VERSION,
         BROKER_CONSOLE_PROBE_MAX_CANDIDATES)) goto done;
+    if (!MultiByteToWideChar(CP_ACP,0,argv[1],-1,helper,MAX_PATH)) goto done;
+    processes[0]=a.hProcess;processes[1]=b.hProcess;processes[2]=c.hProcess;
+    if (app_console_query(helper,c.hProcess,processes,3,NULL,5000,members) ||
+        members[0]!=0 || members[1]!=0 || members[2]!=1) goto done;
+    cancel=CreateEventW(NULL,TRUE,TRUE,NULL);
+    if (!cancel) goto done;
+    code=app_console_query(helper,c.hProcess,processes,3,cancel,5000,members);
+    CloseHandle(cancel);
+    if (code!=ERROR_CANCELLED || members[0]!=0 || members[1]!=0 || members[2]!=1) goto done;
     result = 0;
 done:
     FreeConsole();

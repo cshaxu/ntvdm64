@@ -148,6 +148,23 @@ real query and invalid-version response. The product broker parent, timeout,
 authenticated transaction and process-generation revalidation are still open;
 the helper alone grants no reuse or record-selection authority.
 
+`console_query.h/.c` provide the app-side helper parent, currently an explicit
+formal object tested against run16, not a selected BaseSrv RPC operation.
+It takes already-pinned authenticated process handles, queries their PIDs
+without OpenProcess, creates a detached helper with a two-handle inheritance
+allowlist, and sends the bounded request on an owned writer thread while
+draining the reply. Deadline/cancellation aborts only the owned helper; its
+exit unblocks the writer, which is joined before request memory is freed.
+Malformed/failed replies leave caller output unchanged. Live handles are
+checked again before publishing membership; the service caller must still
+revalidate registration generations. The private pipe orchestration is a
+new finite modern-Console dependency, not recovered BaseSrv policy. Tests
+cover the actual parent-to-run16 query and a signaled cancellation with
+unchanged output. Timeout/stalled-helper fault injection and authenticated
+service integration remain open. An impossible failure to terminate a live
+owned helper is fail-fast rather than returning with a writer using freed
+memory; this exceptional path is not injected or claimed tested.
+
 ## T412 standalone service composition
 
 `basesrv_entry.c` is the formal build-only broker entry. It selects original

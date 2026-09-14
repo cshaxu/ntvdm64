@@ -951,3 +951,22 @@ Production parent implementation must bound both request transmission and
 response reception; the fixture's synchronous request write is not a model
 for an authenticated service's disconnect/deadline handling. This result
 proves the valid maximum payload path, not arbitrary stalled-child recovery.
+
+## Console helper parent composition
+
+The formal obj/basesrv/console_query.obj now implements app-side creation,
+bounded pipe request/reply, cancellation and owned-child/writer cleanup.
+Verify-BrokerConsoleMembership links that object and calls it against the
+real run16 helper with three live owned process handles. The query returns
+the expected separate-Console membership. A pre-signaled cancellation returns
+ERROR_CANCELLED without changing output; the implementation joins its owned
+writer and reaps its helper before returning. The x86 object builds without
+new warnings and the extended suite passes. No process is opened by PID.
+
+This object is not yet called by the BaseSrv RPC entry. The caller must pin
+authenticated records and revalidate generations; process liveness alone is
+not registration validity. Stalled/malformed helper injection, timeout and
+disconnect races remain unverified. The request writer is asynchronous so
+pipe backpressure cannot block the parent's deadline loop; cleanup waits for
+the owned helper and writer before freeing state. No guest ran and the
+three-program DOS gate remains open.
