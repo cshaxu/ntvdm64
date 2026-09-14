@@ -545,3 +545,25 @@ dispatch; only original server-owned command copies survive. Outputs remain
 under S3/original-lifecycle. Full command envelope, receive/reply translation,
 resource identities and actual RPC service integration remain unfinished.
 No three-program acceptance or deployment is claimed.
+
+## PIF reply lengths are not write counts
+
+Return-path review found a wrong codec assumption: copied bytes were required
+not to exceed original length. Original BaseSrvFillPifInfo first writes NUL
+to requested PIF/title/current-directory buffers, then reports source lengths
+which may be zero. Even its error path can clear strings before returning.
+Generic success-only or returned-length-only copying would lose writes.
+The original function is unchanged. The codec now separates copied bytes from
+returned lengths; canonical spans, overflow and presence checks remain.
+Native CheckVDM input still enforces exact byte/length equality and widths.
+Future reply decoding must validate bytes against independently retained
+destination capacities, never against returned required length alone.
+
+Formal owners/transport rebuilt under S3/product. Verify-VdmPayload and formal
+Verify-BrokerOriginalLifecycle pass. The latter calls original BaseSrvFillPifInfo
+with empty source info and sentinel-filled PIF/title/directory buffers: returned
+lengths are zero, first bytes become NUL, second bytes are unchanged. The codec
+now carries these three single-byte writes with zero reported lengths. Existing
+CheckVDM negatives and lifecycle tests pass. Full GetNext request/reply binding
+remains incomplete; this is a source-proven transport correction, not real RPC
+command execution or three-program deployment.

@@ -51,14 +51,11 @@ passes command-tail, directory/environment/stream and exit tests. Actual broker
 dispatch and DOS/WOW delivery remain pending; this build-only checkpoint is
 neither published nor three-program acceptance. Original resource-call binding
 and synchronous wait-event failure rollback also pass; remote callbacks remain open.
-The formal x86 transport archive now supplies all three boundary suites, with
-map-provider checks and passing lifecycle/journal/nine-case RPC regressions.
-The formal local dispatch binding replaces the fixture handler switch and
-passes length/identity negatives. Eight-buffer payload copying and malformed-span
-tests pass. Original startup scalars also roundtrip through the formal binding;
-Receipt resolution now checks stream/wait roles with passing real RPC negatives.
-CheckVDM captures now pass through native payload/startup translation in the
-original suite. Complete RPC command decoding and deployment remain open.
+Formal archives now supply dispatch, copied CheckVDM payload/startup and typed
+receipt bindings. Original lifecycle, journal and nine-case RPC suites pass
+with provider maps and boundary negatives. PIF terminator writes remain distinct
+from returned lengths. Full RPC command decoding and deployment remain open;
+the linked S3 evidence owns detailed source findings and tests.
 
 ## T412 S1 historical checkpoints
 

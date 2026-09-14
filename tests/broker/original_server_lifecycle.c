@@ -321,6 +321,30 @@ int main(int argc, char **argv)
     }
     BaseSrvVDMInit();
     {
+        VDMINFO info={0};
+        BASE_GET_NEXT_VDM_COMMAND_MSG query={0};
+        char pif[2]={0x7b,0x7b},title[2]={0x7b,0x7b},directory[2]={0x7b,0x7b};
+        broker_vdm_payload_input fields[BROKER_VDM_PAYLOAD_FIELDS]={0};
+        unsigned char wire[131];
+        broker_vdm_payload_span span;
+        uint32_t bytes;
+        query.PifFile=pif; query.PifLen=sizeof(pif);
+        query.Title=title; query.TitleLen=sizeof(title);
+        query.CurDirectory=directory; query.CurDirectoryLen=sizeof(directory);
+        CHECK(BaseSrvFillPifInfo(&info,&query)==0);
+        CHECK(!query.PifLen && !query.TitleLen && !query.CurDirectoryLen);
+        CHECK(!pif[0] && !title[0] && !directory[0]);
+        CHECK(pif[1]==0x7b && title[1]==0x7b && directory[1]==0x7b);
+        fields[BROKER_VDM_PIF].present=1; fields[BROKER_VDM_PIF].data_bytes=1; fields[BROKER_VDM_PIF].data=pif;
+        fields[BROKER_VDM_TITLE].present=1; fields[BROKER_VDM_TITLE].data_bytes=1; fields[BROKER_VDM_TITLE].data=title;
+        fields[BROKER_VDM_DIRECTORY].present=1; fields[BROKER_VDM_DIRECTORY].data_bytes=1; fields[BROKER_VDM_DIRECTORY].data=directory;
+        CHECK(broker_vdm_payload_encode(fields,wire,sizeof(wire),&bytes));
+        CHECK(bytes==sizeof(wire) && broker_vdm_payload_validate(wire,bytes));
+        memcpy(&span,wire+16*BROKER_VDM_TITLE,sizeof(span));
+        CHECK(span.length==0 && span.data_bytes==1 && wire[span.offset]==0);
+        puts("PASS: original PIF writes terminators despite zero returned lengths; copied payload preserves them");
+    }
+    {
         broker_vdm_payload_input fields[BROKER_VDM_PAYLOAD_FIELDS]={0};
         BASE_CHECKVDM_MSG decoded,saved;
         uint32_t bytes;

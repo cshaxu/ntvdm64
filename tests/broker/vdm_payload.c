@@ -64,7 +64,8 @@ int main(void)
     input[0].present=2;
     CHECK(!broker_vdm_payload_encode(input,output,sizeof(output),&required));
     input[0].present=1; input[0].length=0;
-    CHECK(!broker_vdm_payload_encode(input,output,sizeof(output),&required));
+    CHECK(broker_vdm_payload_encode(input,output,sizeof(output),&required));
+    CHECK(broker_vdm_payload_validate(output,required));
     puts("PASS: all eight copied VDM fields, independent presence/capacity, short-output nonmutation, truncation/overlap/overflow rejection");
     return 0;
 }

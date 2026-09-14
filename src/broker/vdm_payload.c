@@ -16,7 +16,6 @@ int broker_vdm_payload_encode(const broker_vdm_payload_input *input,
     if (!input) return 0;
     for (i=0;i<BROKER_VDM_PAYLOAD_FIELDS;++i) {
         if (input[i].present>1 || (!input[i].present && input[i].data_bytes) ||
-            input[i].data_bytes>input[i].length ||
             (input[i].data_bytes && !input[i].data) ||
             input[i].data_bytes>UINT32_MAX-total) return 0;
         total+=input[i].data_bytes;
@@ -47,8 +46,7 @@ int broker_vdm_payload_validate(const void *payload, uint32_t bytes)
     for (i=0;i<BROKER_VDM_PAYLOAD_FIELDS;++i) {
         broker_vdm_payload_span span;
         memcpy(&span,(const unsigned char *)payload+i*16u,sizeof(span));
-        if (span.present>1 || (!span.present && span.data_bytes) ||
-            span.data_bytes>span.length) return 0;
+        if (span.present>1 || (!span.present && span.data_bytes)) return 0;
         if (!span.data_bytes) {
             if (span.offset) return 0;
         } else {

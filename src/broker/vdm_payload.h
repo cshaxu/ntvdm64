@@ -11,7 +11,10 @@ enum broker_vdm_payload_field {
 };
 /* Wire scalars are little-endian, as in the selected x86 RPC composition.
  * length is the original input capacity/output required length. It is not
- * inferred from data_bytes; NULL buffers and capacity replies remain distinct. */
+ * inferred from data_bytes; NULL buffers and capacity replies remain distinct.
+ * data_bytes may exceed length: original PIF output writes a NUL even when
+ * its returned required length is zero. Operation bindings must validate bytes
+ * against the independently retained actual buffer capacity. */
 typedef struct broker_vdm_payload_span {
     uint32_t present, length, data_bytes, offset;
 } broker_vdm_payload_span;

@@ -68,7 +68,11 @@ original CheckVDM/GetNextVDMCommand: command, application, PIF, directory,
 environment, desktop, title and reserved text. Native CSR capture pointers
 cannot be reused as cross-process values. Each fixed-width span separately
 preserves pointer presence, original capacity/required length and copied byte
-count. Canonical contiguous offsets reject overlap/trailing bytes; overflow
+count. Copied bytes may exceed returned length: original PIF queries can write
+a terminator while returning length zero. A receiving operation must validate
+copied bytes against the saved buffer capacity, not the returned length;
+CheckVDM input still requires exact length equality. Canonical contiguous
+offsets reject overlap/trailing bytes; overflow
 and short encode buffers fail without writing output. No task slots, length
 negotiation policy, pointers or handles are serialized. Inputs must not overlap
 output. This x86 little-endian payload fragment is in broker-transport.lib and
