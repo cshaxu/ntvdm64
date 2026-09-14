@@ -135,6 +135,28 @@ and registry providers in the product map and passes live RPC generation,
 duplicate, reconnect and process-exit rundown cases. Console-query result
 revalidation/consumption and worker-candidate selection remain pending.
 
+The Check reply in `base_command.c` is a forty-byte versioned response:
+original NTSTATUS plus iTask and VDMState, correlated to request/generation.
+BaseCheckVDM in the original client checks NT_SUCCESS before consuming iTask;
+failure replies therefore omit undefined output scalars and publish only the
+status. Successful application changes only those two scalars and status,
+leaving locally bound wait resources and all input buffers untouched. This is
+a finite replacement of CSR copying, not a BaseSrv algorithm. The original
+lifecycle fixture now roundtrips every reached Check reply and checks all
+truncated lengths, wrong request/generation and unchanged resource fields.
+Actual RPC command/resource composition remains unfinished.
+
+The Check reply in `base_command.c` is a forty-byte versioned response:
+original NTSTATUS plus iTask and VDMState, correlated to request/generation.
+BaseCheckVDM in the original client checks NT_SUCCESS before consuming iTask;
+failure replies therefore omit undefined output scalars and publish only the
+status. Successful application changes only those two scalars and status,
+leaving locally bound wait resources and all input buffers untouched. This is
+a finite replacement of CSR copying, not a BaseSrv algorithm. The original
+lifecycle fixture now roundtrips every reached Check reply and checks all
+truncated lengths, wrong request/generation and unchanged resource fields.
+Actual RPC command/resource composition remains unfinished.
+
 `base_process.h`/`base_process.c` supply scoped registered-process lookup with
 the original CsrLockProcessByClientId/CsrUnlockProcess shape. Original CSR
 process.c depends on CsrRootProcess and CSR reference/deletion machinery;

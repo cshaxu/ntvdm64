@@ -285,6 +285,30 @@ NTSTATUS NTAPI CsrClientCallServer(PCSR_API_MSG message, PCSR_CAPTURE_HEADER cap
         request->PifFile=savedCheck.PifFile; request->CurDirectory=savedCheck.CurDirectory;
         request->Env=savedCheck.Env; request->Desktop=savedCheck.Desktop;
         request->Title=savedCheck.Title; request->Reserved=savedCheck.Reserved;
+        {
+            unsigned char wire[40];
+            uint32_t size,cut;
+            BASE_API_MSG original=*(PBASE_API_MSG)message,copy;
+            if (!OpenNtBaseEncodeCheckReply(&original,1,1,wire,sizeof(wire),&size) || size!=sizeof(wire))
+                result=STATUS_INVALID_PARAMETER;
+            else {
+                for (cut=0;cut<sizeof(wire);++cut) {
+                    copy=original;
+                    if (OpenNtBaseApplyCheckReply(wire,cut,1,1,&copy) || memcmp(&copy,&original,sizeof(copy)))
+                        result=STATUS_INVALID_PARAMETER;
+                }
+                copy=original;
+                if (OpenNtBaseApplyCheckReply(wire,size,2,1,&copy) ||
+                    OpenNtBaseApplyCheckReply(wire,size,1,2,&copy) || memcmp(&copy,&original,sizeof(copy)))
+                    result=STATUS_INVALID_PARAMETER;
+                if (NT_SUCCESS((NTSTATUS)original.ReturnValue)) {
+                    copy.u.CheckVDM.iTask=0xdeadbeef;copy.u.CheckVDM.VDMState=0xffff;
+                }
+                if (!OpenNtBaseApplyCheckReply(wire,size,1,1,&copy) || memcmp(&copy,&original,sizeof(copy)))
+                    result=STATUS_INVALID_PARAMETER;
+                else *(PBASE_API_MSG)message=copy;
+            }
+        }
         HeapFree(GetProcessHeap(),0,payload);
     }
     if (enqueueGate && number == CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepGetNextVDMCommand) &&

@@ -1014,3 +1014,16 @@ rejection, original first-VDM, reconnect and process-exit rundown against the
 same owned service. The test still terminates its own server because idle
 shutdown is unfinished. Console helper result consumption, worker selection,
 command delivery and the three-program DOS gate remain open.
+
+## Check command reply boundary
+
+The formal command binding now includes a forty-byte Check reply (envelope,
+iTask, VDMState), not merely request encoding. Original BaseCheckVDM checks
+NT_SUCCESS before consuming iTask; failure encoding does not read undefined
+output scalars. Native wait handles never enter this record. Applying a valid
+reply modifies only the source output scalars/status and preserves locally
+bound resources and input pointers. Every reached Check response in the
+original lifecycle fixture now traverses this boundary; all truncated sizes,
+wrong request ID and wrong generation are rejected without mutation. The
+formal owner build and full original lifecycle suite pass. This is still a
+transport composition prerequisite, not a real RPC command-delivery result.

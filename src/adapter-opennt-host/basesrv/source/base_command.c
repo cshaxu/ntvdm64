@@ -12,6 +12,46 @@ typedef struct check_prefix {
     broker_vdm_startup startup;
 } check_prefix;
 typedef char check_prefix_size[sizeof(check_prefix)==96?1:-1];
+
+typedef struct check_reply {
+    broker_vdm_message_header header;
+    uint32_t task,state;
+} check_reply;
+typedef char check_reply_size[sizeof(check_reply)==40?1:-1];
+BOOL OpenNtBaseEncodeCheckReply(const BASE_API_MSG *message,uint32_t request,uint32_t generation,
+    void *output,uint32_t capacity,uint32_t *required)
+{
+    check_reply wire={0};
+    if (required) *required=0;
+    if (!message || !request || !generation || !required) return FALSE;
+    wire.header.version=BROKER_VDM_MESSAGE_VERSION;wire.header.bytes=sizeof(wire);
+    wire.header.operation=BROKER_VDM_CHECK;wire.header.request_id=request;
+    wire.header.generation=generation;wire.header.reply=1;
+    wire.header.status=message->ReturnValue;wire.header.payload_bytes=8;
+    if (NT_SUCCESS((NTSTATUS)message->ReturnValue)) {
+        wire.task=message->u.CheckVDM.iTask;wire.state=message->u.CheckVDM.VDMState;
+    }
+    *required=sizeof(wire);
+    if (!output) return TRUE;
+    if (capacity<sizeof(wire)) return FALSE;
+    memcpy(output,&wire,sizeof(wire));return TRUE;
+}
+BOOL OpenNtBaseApplyCheckReply(const void *input,uint32_t bytes,uint32_t generation,
+    uint32_t request,PBASE_API_MSG message)
+{
+    check_reply wire;
+    broker_vdm_message_header header;
+    if (!message || !request || bytes!=sizeof(wire) ||
+        !broker_vdm_message_read(input,bytes,generation,1,&header) ||
+        header.operation!=BROKER_VDM_CHECK || header.request_id!=request) return FALSE;
+    memcpy(&wire,input,sizeof(wire));
+    if (wire.state>0xffffu || (!NT_SUCCESS((NTSTATUS)header.status) && (wire.task || wire.state))) return FALSE;
+    if (NT_SUCCESS((NTSTATUS)header.status)) {
+        message->u.CheckVDM.iTask=wire.task;message->u.CheckVDM.VDMState=(USHORT)wire.state;
+    }
+    message->ReturnValue=header.status;
+    return TRUE;
+}
 typedef struct get_prefix {
     broker_vdm_message_header header;
     broker_vdm_get_values values;
