@@ -12,6 +12,9 @@ typedef struct _HARDERROR_MSG *PHARDERROR_MSG;
 #include <ntcsrsrv.h>
 #undef CSR_SERVER_QUERYCLIENTTHREAD
 PCSR_THREAD OpenNtBaseServerRequestThread(void);
+/* Trusted dispatch only: borrow a locally authenticated context until unbind.
+ * This does not authenticate, register, copy, or retain a wire-supplied object. */
+PCSR_THREAD OpenNtBaseBindServerRequestThread(PCSR_THREAD);
 #define CSR_SERVER_QUERYCLIENTTHREAD() OpenNtBaseServerRequestThread()
 #ifndef STATUS_ACCESS_DENIED
 #define STATUS_ACCESS_DENIED ((NTSTATUS)0xC0000022L)

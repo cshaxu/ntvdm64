@@ -1044,6 +1044,7 @@ if ($Architecture -eq 'x86') {
             @('srvvdm', 'src/opennt-host/base/win32/server/srvvdm.c', $baseServerFlags),
             @('exports', 'src/opennt-host/windows/core/ntuser/server/exports.c', $baseServerFlags))
         'opennt-base-bindings' = @(
+            @('request', 'src/adapter-opennt-host/basesrv/source/base_request.c', $baseServerFlags),
             @('config', 'src/adapter-opennt-host/basesrv/source/base_config.c', $baseOwnerFlags),
             @('process', 'src/adapter-opennt-host/basesrv/source/base_client_process.c', $baseOwnerFlags),
             @('interactive', 'src/adapter-opennt-host/basesrv/source/base_interactive.c', $baseOwnerFlags),

@@ -3,7 +3,7 @@ import path from 'node:path';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {spawnSync} from 'node:child_process';
-const root=process.cwd(), build=path.resolve('build/M0-T412/S2/original-lifecycle');
+const root=process.cwd(), build=path.resolve('build/M0-T412/S3/original-lifecycle');
 const ownerBuild=process.env.OPENNT_BROKER_OWNER_BUILD ? path.resolve(process.env.OPENNT_BROKER_OWNER_BUILD) : null;
 fs.mkdirSync(build,{recursive:true});
 const graph=fs.readFileSync('build/M0-T412/S1/text-cell-repair/product/build.ninja','utf8');
@@ -47,6 +47,7 @@ const env=path.join(build,'msvc.cmd');
 fs.writeFileSync(env,'@echo off\r\nset "lifecycle_cwd=%CD%"\r\ncall "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat" -arch=x86 -host_arch=x64 >nul\r\nif errorlevel 1 exit /b %errorlevel%\r\ncd /d "%lifecycle_cwd%"\r\n%*\r\n');
 const includes=`/D_CSRSRV_ /DOPENNT_BASE_VDM_SERVER /we4013 /FI "${root}/src/adapter-opennt-host/basesrv/include/base_server.h" /I "${root}/src/adapter-opennt-host/basesrv/include" /I "${root}/src/opennt-host/base/win32/inc" /I "${root}/src/opennt-host/base/win32/server"`;
 let commands=[
+    `cl.exe ${flags} ${includes} /Fo"${build}/request.obj" "${root}/src/adapter-opennt-host/basesrv/source/base_request.c"`,
     `cl.exe ${flags} ${includes} /Fo"${build}/config.obj" "${root}/src/adapter-opennt-host/basesrv/source/base_config.c"`,
     `cl.exe ${flags} /Fo"${build}/environment-check.obj" "${root}/src/opennt-host/base/win32/client/vdm.c"`,
     `cl.exe ${flags} ${includes} /Fo"${build}/srvvdm.obj" "${root}/src/opennt-host/base/win32/server/srvvdm.c"`,
@@ -59,7 +60,7 @@ let commands=[
     `cl.exe ${rtlFlags} /Fo"${build}/error.obj" "${root}/src/opennt-host/base/ntos/rtl/error.c"`,
     'lib.exe /nologo /out:opennt-base-server.lib srvvdm.obj exports.obj',
     'lib.exe /nologo /out:opennt-base-client.lib client.obj capture.obj',
-    'link.exe /nologo /opt:ref /out:original-lifecycle.exe /map:original-lifecycle.map fixture.obj opennt-base-server.lib opennt-base-client.lib config.obj process.obj interactive.obj error.obj ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib'
+    'link.exe /nologo /opt:ref /out:original-lifecycle.exe /map:original-lifecycle.map fixture.obj opennt-base-server.lib opennt-base-client.lib request.obj config.obj process.obj interactive.obj error.obj ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib'
 ];
 if(ownerBuild) {
     for(const name of ['opennt-base-client.lib','opennt-base-server.lib','opennt-base-bindings.lib'])
@@ -89,6 +90,8 @@ assert.equal(image.readUInt16LE(image.readUInt32LE(0x3c)+4),0x14c);
 const map=fs.readFileSync(path.join(build,'original-lifecycle.map'),'utf8');
 assert(map.includes('opennt-base-server:srvvdm.obj')&&map.includes('opennt-base-client:client.obj'),'Original owner libraries not selected');
 assert(!map.includes('luid.obj'),'Generated inline replacement still linked');
+for (const symbol of ['_OpenNtBaseServerRequestThread','_OpenNtBaseBindServerRequestThread'])
+    assert(map.split(/\r?\n/).some(line=>line.includes(symbol)&&line.includes('request.obj')),`Real request binding missing: ${symbol}`);
 for(const symbol of ['_CsrAllocateCaptureBuffer@12','_CsrAllocateMessagePointer@12','_CsrFreeCaptureBuffer@4'])
     assert(map.split(/\r?\n/).some(line=>line.includes(symbol)&&line.includes('opennt-base-client:capture.obj')),`Original capture provider missing: ${symbol}`);
 assert(map.split(/\r?\n/).some(line=>line.includes('__UserTestTokenForInteractive')&&line.includes('opennt-base-server:exports.obj')),'Original token provider missing');

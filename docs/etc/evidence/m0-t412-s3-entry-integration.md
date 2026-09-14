@@ -71,3 +71,31 @@ temporary S3 implementation gap, not accepted DOS behavior or the final product
 contract. Broker discovery/dispatch, worker creation/registration, DOS/WOW
 delivery and original completion/rollback remain required. No staged or runtime
 EXE was replaced, and neither S3 nor T412 is closed by this checkpoint.
+
+## Server request-context binding
+
+S3 removes the lifecycle fixture's constant OpenNtBaseServerRequestThread
+provider. Original OpenNT public/sdk/inc/ntcsrsrv.h lines 175--176 define
+CSR_SERVER_QUERYCLIENTTHREAD as a lookup of NT4's private TEB CsrClientThread
+field. That field is not a usable standalone binding on modern Windows;
+recreating the CSR thread runtime is excluded. The smallest retained-interface
+binding is base_request.c in adapter-opennt-host/basesrv: a borrowed thread-local
+original CSR_THREAD pointer and explicit bind/restore. srvvdm.c is unchanged.
+
+This is a dispatch mechanic, not authentication or a replacement registry.
+RPC dispatch must authenticate and obtain a registered live context before
+binding, then restore it on every exit before freeing that context. No native
+pointer enters wire records. Unbound lookup returns NULL, never a manufactured
+default caller; original service entry must not run in that state.
+
+`node tools/audit/Verify-BrokerOriginalLifecycle.mjs` passes with outputs under
+S3/original-lifecycle, preserving S2 evidence. The map selects request.obj;
+tests check empty initial TLS, nested restoration, independent enqueue-thread
+binding and explicit teardown, together with all original lifecycle checks.
+Process records and dispatch remain fixture-owned: this is not actual broker
+command delivery or worker-death registration. Formal owner composition now
+also includes this binding, without changing the deployed executable.
+The formal `opennt-broker-owners` target in S3/product builds successfully;
+rerunning the verifier with OPENNT_BROKER_OWNER_BUILD set to that directory
+also passes and selects opennt-base-bindings:request.obj. Existing original
+source compiler warnings remain; this is not a warning-free build claim.

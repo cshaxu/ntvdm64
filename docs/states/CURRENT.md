@@ -50,6 +50,8 @@ also selects real process support, removing its fixture-owned PEB/TEB/heap.
 The explicit run16 build now verifies native launch and unchanged command-tail,
 directory/environment/stream inheritance. DOS/WOW dispatch remains unfinished;
 this build-only checkpoint is not published or three-program acceptance.
+Original lifecycle tests also pass with the real thread-local request binding
+instead of a constant fixture accessor; actual broker dispatch remains pending.
 
 ## T412 S1 historical checkpoints
 

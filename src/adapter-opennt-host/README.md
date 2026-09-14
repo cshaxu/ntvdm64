@@ -92,8 +92,15 @@ the unchanged srvvdm.c owner. Its declaration shapes were audited through the
 S1 compile probe and now belong to this package, not a tests/ include. They
 cover event/token/loader/duplication APIs, source-shaped CSR record types and
 the request-thread accessor. OpenNtBaseServerRequestThread must return the
-currently authenticated bound request context; the focused fixture supplies
-its own process, while production authentication/registration is still pending.
+currently authenticated bound request context. `base_request.c` now supplies
+the borrowed thread-local binding used by the original lifecycle test; the
+fixture still supplies its process records, while actual product dispatch and
+registration are pending. Original ntcsrsrv.h reads NT4's private TEB
+CsrClientThread field, which cannot be used as a modern standalone TEB slot.
+The finite TLS substitution preserves lookup shape without a CSR runtime.
+Trusted dispatch must authenticate first, bind its local record, and restore
+the previous binding on every exit before releasing the record. The binder
+does not authenticate, register, retain, or validate an arbitrary peer record.
 The header supplies no CSR runtime, command policy or success stubs. Keeping
 original CSR declaration records does not admit their historical transport.
 

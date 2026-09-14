@@ -23,7 +23,6 @@ POPENNT_SUPPORT_PEB NTAPI NtCurrentPeb(VOID) { return &peb; }
 POPENNT_SUPPORT_TEB NTAPI opennt_support_current_teb(VOID) { return &teb; }
 PFNNOTIFYPROCESSCREATE UserNotifyProcessCreate = NULL;
 PVOID NTAPI RtlProcessHeap(VOID) { return GetProcessHeap(); }
-PCSR_THREAD OpenNtBaseServerRequestThread(void) { return &thread; }
 NTSTATUS NTAPI CsrLockProcessByClientId(HANDLE id, PCSR_PROCESS *out)
 {
     if (id != (HANDLE)GetCurrentProcessId()) return (NTSTATUS)0xc000000b;
@@ -101,7 +100,12 @@ static DWORD WINAPI enqueue_after_wait(LPVOID unused)
     STARTUPINFOA startup = {sizeof(startup)};
     char command[] = "NEXT.COM\r\n";
     (void)unused;
+    CSR_THREAD localThread = thread;
+    if (OpenNtBaseServerRequestThread()!=NULL) return 3;
     if (WaitForSingleObject(enqueueGate,5000) != WAIT_OBJECT_0) return 2;
+    localThread.ThreadHandle=GetCurrentThread();
+    localThread.ClientId.UniqueThread=(HANDLE)GetCurrentThreadId();
+    if (OpenNtBaseBindServerRequestThread(&localThread)!=NULL) return 4;
     message.u.CheckVDM.ConsoleHandle = (HANDLE)1;
     message.u.CheckVDM.BinaryType = BINARY_TYPE_DOS;
     message.u.CheckVDM.CmdLine = command;
@@ -109,6 +113,9 @@ static DWORD WINAPI enqueue_after_wait(LPVOID unused)
     message.u.CheckVDM.StartupInfo = &startup;
     enqueueStatus = BaseSrvCheckVDM((PCSR_API_MSG)&message,&reply);
     queuedParent = message.u.CheckVDM.WaitObjectForParent;
+    if (OpenNtBaseServerRequestThread()!=&localThread ||
+        OpenNtBaseBindServerRequestThread(NULL)!=&localThread ||
+        OpenNtBaseServerRequestThread()!=NULL) return 5;
     return 0;
 }
 
@@ -188,6 +195,15 @@ int main(void)
     thread.ThreadHandle = GetCurrentThread();
     thread.ClientId.UniqueProcess = (HANDLE)GetCurrentProcessId();
     thread.ClientId.UniqueThread = (HANDLE)GetCurrentThreadId();
+    CHECK(OpenNtBaseServerRequestThread()==NULL);
+    CHECK(OpenNtBaseBindServerRequestThread(&thread)==NULL);
+    {
+        CSR_THREAD nested=thread;
+        PCSR_THREAD previous=OpenNtBaseBindServerRequestThread(&nested);
+        CHECK(previous==&thread && OpenNtBaseServerRequestThread()==&nested);
+        CHECK(OpenNtBaseBindServerRequestThread(previous)==&nested);
+        CHECK(OpenNtBaseServerRequestThread()==&thread);
+    }
     BaseSrvVDMInit();
     { LUID negative=RtlConvertLongToLuid(-1), positive=RtlConvertLongToLuid(0x7fffffff);
       CHECK(negative.LowPart==0xffffffff && negative.HighPart==-1);
@@ -482,6 +498,10 @@ int main(void)
         CHECK(OpenNtBaseBindInteractiveScope(NULL)==&scope);
         puts("PASS: original DOS/WOW generation registration and termination cleanup, wrong generation/role rejection and repeat cleanup");
     }
+    CHECK(OpenNtBaseServerRequestThread()==&thread);
+    CHECK(OpenNtBaseBindServerRequestThread(NULL)==&thread);
+    CHECK(OpenNtBaseServerRequestThread()==NULL);
+    puts("PASS: request-thread isolation, nested restoration and explicit unbind");
     CHECK(captures==0 && HeapDestroy(CsrPortHeap));
     puts("PASS: original first-VDM, record/command/directory capacity, dispatch/completion, parent/worker events, reentry, empty-WOW, cleanup");
     return 0;
