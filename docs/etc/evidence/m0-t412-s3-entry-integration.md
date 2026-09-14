@@ -940,3 +940,14 @@ parent transaction, deadline/disconnect integration and pinned generation
 revalidation are not yet implemented. The reserved internal switch is not an
 authentication mechanism, and the public program-launch syntax is unchanged.
 No DOS command is dispatched by this test and no deployment was performed.
+
+The helper suite additionally passes zero and 4096 candidates through the real
+run16 executable. The maximum response is 4112 bytes, so a parent must drain
+the response while the helper runs instead of waiting for process exit first:
+pipe backpressure can otherwise prevent the child from exiting. The fixture
+now peeks/drains the pipe with a five-second observation deadline, rejects
+oversized/trailing output and requires exact reply length and normal exit.
+Production parent implementation must bound both request transmission and
+response reception; the fixture's synchronous request write is not a model
+for an authenticated service's disconnect/deadline handling. This result
+proves the valid maximum payload path, not arbitrary stalled-child recovery.

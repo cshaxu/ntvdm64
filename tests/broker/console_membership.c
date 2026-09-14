@@ -7,17 +7,18 @@
 #include <string.h>
 static HANDLE ready;
 
-static BOOL probe(const char *image,DWORD caller,DWORD *candidates,BYTE *expected,DWORD version)
+static BOOL probe(const char *image,DWORD caller,DWORD *candidates,BYTE *expected,DWORD version,DWORD count)
 {
     SECURITY_ATTRIBUTES sa={sizeof(sa),NULL,TRUE};
     HANDLE input=NULL,writer=NULL,reader=NULL,output=NULL,handles[2];
     STARTUPINFOEXA startup={0};
     PROCESS_INFORMATION process={0};
-    BROKER_CONSOLE_PROBE_REQUEST request={version,caller,3,0};
+    BROKER_CONSOLE_PROBE_REQUEST request={version,caller,count,0};
     BROKER_CONSOLE_PROBE_REPLY reply;
-    BYTE members[3];
+    BYTE wire[sizeof(reply)+BROKER_CONSOLE_PROBE_MAX_CANDIDATES];
     SIZE_T size=0;
-    DWORD done,code;
+    DWORD done,code,available,received=0;
+    ULONGLONG deadline;
     BOOL ok=FALSE;
     char command[2048];
     if (!CreatePipe(&input,&writer,&sa,0) || !CreatePipe(&reader,&output,&sa,0)) goto cleanup;
@@ -42,16 +43,34 @@ static BOOL probe(const char *image,DWORD caller,DWORD *candidates,BYTE *expecte
     CloseHandle(input);input=NULL; CloseHandle(output);output=NULL;
     if (!WriteFile(writer,&request,sizeof(request),&done,NULL) || done!=sizeof(request)) goto cleanup;
     if (version==BROKER_CONSOLE_PROBE_VERSION &&
-        (!WriteFile(writer,candidates,3*sizeof(DWORD),&done,NULL) || done!=3*sizeof(DWORD))) goto cleanup;
+        count && (!WriteFile(writer,candidates,count*sizeof(DWORD),&done,NULL) || done!=count*sizeof(DWORD))) goto cleanup;
     CloseHandle(writer);writer=NULL;
+    /* Drain while the child is alive: the largest valid response exceeds a
+     * default anonymous pipe buffer, so waiting for exit first can deadlock. */
+    deadline=GetTickCount64()+5000;
+    for (;;) {
+        if (!PeekNamedPipe(reader,NULL,0,NULL,&available,NULL)) {
+            if (GetLastError()==ERROR_BROKEN_PIPE) break;
+            goto cleanup;
+        }
+        if (available) {
+            if (available>sizeof(wire)-received) goto cleanup;
+            if (!ReadFile(reader,wire+received,available,&done,NULL) || !done) goto cleanup;
+            received+=done;
+            continue;
+        }
+        if (GetTickCount64()>=deadline) goto cleanup;
+        WaitForSingleObject(process.hProcess,10);
+    }
     if (WaitForSingleObject(process.hProcess,5000)!=WAIT_OBJECT_0) goto cleanup;
     if (!GetExitCodeProcess(process.hProcess,&code) ||
         code!=(version==BROKER_CONSOLE_PROBE_VERSION ? 0u : (DWORD)ERROR_INVALID_DATA)) goto cleanup;
-    if (!ReadFile(reader,&reply,sizeof(reply),&done,NULL) || done!=sizeof(reply) ||
-        reply.version!=BROKER_CONSOLE_PROBE_VERSION || reply.reserved || reply.status!=code) goto cleanup;
-    if (code) {ok=reply.count==0;goto cleanup;}
-    if (reply.count!=3 || !ReadFile(reader,members,3,&done,NULL) || done!=3 ||
-        memcmp(members,expected,3)) goto cleanup;
+    if (received<sizeof(reply)) goto cleanup;
+    memcpy(&reply,wire,sizeof(reply));
+    if (reply.version!=BROKER_CONSOLE_PROBE_VERSION || reply.reserved || reply.status!=code) goto cleanup;
+    if (code) {ok=reply.count==0 && received==sizeof(reply);goto cleanup;}
+    if (reply.count!=count || received!=sizeof(reply)+count ||
+        (count && memcmp(wire+sizeof(reply),expected,count))) goto cleanup;
     ok=TRUE;
 cleanup:
     if (process.hProcess) {
@@ -88,6 +107,8 @@ int main(int argc, char **argv)
     DWORD code, i;
     DWORD candidates[3];
     BYTE members[3] = {7,7,7};
+    DWORD many[BROKER_CONSOLE_PROBE_MAX_CANDIDATES];
+    BYTE expected[BROKER_CONSOLE_PROBE_MAX_CANDIDATES];
     PROCESS_INFORMATION *children[] = {&a, &b, &c};
     if (argc == 3 && !strcmp(argv[1], "wait")) {
         stop = OpenEventA(SYNCHRONIZE, FALSE, argv[2]);
@@ -129,8 +150,14 @@ int main(int argc, char **argv)
     if (broker_console_membership(0,candidates,3,members)!=ERROR_INVALID_PARAMETER ||
         members[0]!=0 || members[1]!=0 || members[2]!=1) goto done;
     if (argc!=2) goto done;
-    if (!probe(argv[1],c.dwProcessId,candidates,members,BROKER_CONSOLE_PROBE_VERSION) ||
-        !probe(argv[1],c.dwProcessId,candidates,members,0)) goto done;
+    if (!probe(argv[1],c.dwProcessId,candidates,members,BROKER_CONSOLE_PROBE_VERSION,3) ||
+        !probe(argv[1],c.dwProcessId,candidates,members,0,3) ||
+        !probe(argv[1],c.dwProcessId,NULL,NULL,BROKER_CONSOLE_PROBE_VERSION,0)) goto done;
+    for (i=0;i<BROKER_CONSOLE_PROBE_MAX_CANDIDATES;++i) {
+        many[i]=candidates[i%3];expected[i]=members[i%3];
+    }
+    if (!probe(argv[1],c.dwProcessId,many,expected,BROKER_CONSOLE_PROBE_VERSION,
+        BROKER_CONSOLE_PROBE_MAX_CANDIDATES)) goto done;
     result = 0;
 done:
     FreeConsole();
