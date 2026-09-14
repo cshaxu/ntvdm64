@@ -145,6 +145,34 @@ retirement and empty-broker exit remain T412 S5 work. The PIF remains an
 immutable test input in S4; moving or deleting guest media is outside this
 packet.
 
+## Direct MEM and EDIT boundary observations
+
+Fresh direct positional run `run16.exe MEM.EXE`, recorded at
+`O:\ntvdm64\logs\m0-t412-s4-direct-mem-r3`, deliberately had no same-name
+PIF sidecar. It exited `0`, opened the package-root `MEM.EXE`, and displayed
+its memory report in the fixed Console. Its original default configuration
+also opened `DOSX.EXE`; this is a valid direct-CLI configuration branch, not
+the pure-DOS first-shell profile used by the separate interactive COMMAND
+test. The retained broker and worker PIDs were explicitly cleaned after the
+observation.
+
+`EDIT.COM` is the retained 413-byte QBASIC launcher. Three direct three-program
+observations prove `EDIT.COM` and package-root `QBASIC.EXE` open successfully:
+the inherited-environment run is
+`m0-t412-s4-direct-edit-r1`, the package-root/system-directory PATH control is
+`m0-t412-s4-direct-edit-minimal-env-r2`, and the temporary same-name PIF A/B
+is `m0-t412-s4-direct-edit-pif-r3`. The minimal PATH reduces `QBASIC.INI`
+searches to the expected package and system locations, but neither it nor the
+PIF changes the fixed non-visible Console outcome: QBASIC remains alive past
+the bounded observation without a text Console frame or mouse-input mode.
+
+This is not a missing-QBASIC or PIF-selection diagnosis, nor an EDIT failure
+claim. The prior selected presentation evidence already establishes that this
+observer cannot replace visible EDIT mouse acceptance. It is an honest
+three-program startup boundary: EDIT/QBASIC execution is reached; its visible
+editor, keyboard and mouse behavior still require the dedicated real-Console
+acceptance path specified by S4.
+
 ## Interpretation
 
 Confidence is high that the original Update-before-Connect ordering and
