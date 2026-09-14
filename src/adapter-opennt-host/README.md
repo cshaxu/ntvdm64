@@ -194,7 +194,12 @@ delivery failure also passes through this translator and the existing journal:
 source-shaped mixed fields remain, target rollback succeeds and the retained
 sender stream still transfers pipe data. Target
 delivery in this test is local; product worker RPC/journal integration remains
-open. This finite missing CSR transport is newly authored, not original policy.
+open. A separate formal-broker test now calls the same original stream loops
+and adapter with the real basesrv process as receiver: one typed pipe RPC
+delivery for a shared stdout/stderr, two original revoke calls and final pipe
+closure. The fixture obtains the receiver handle from its driver's exact
+owned process PID; this is not product worker registration or task execution.
+This finite missing CSR transport is newly authored, not original policy.
 
 `base_process.h`/`base_process.c` supply scoped registered-process lookup with
 the original CsrLockProcessByClientId/CsrUnlockProcess shape. Original CSR

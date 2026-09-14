@@ -4,11 +4,32 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdint.h>
 #include "service.h"
 #include "broker/rpc_security.h"
 void *__RPC_USER midl_user_allocate(size_t bytes) { return malloc(bytes); }
 void __RPC_USER midl_user_free(void *value) { free(value); }
 static int phase;
+typedef struct stream_rpc_test {
+    RPC_BINDING_HANDLE binding;VDM_CONNECTION connection;HANDLE process;
+    ULONG generation;DWORD delivered,revoked,error;
+} stream_rpc_test;
+DWORD test_original_stream_rpc(HANDLE,HANDLE,void *,LONG (*)(void *,HANDLE,uint32_t *),LONG (*)(void *,uint32_t));
+static LONG deliver_original_stream(void *context,HANDLE stream,uint32_t *receipt)
+{
+    stream_rpc_test *test=context;ULONG id=0;
+    ++test->delivered;
+    test->error=Client_AttachPipe(test->binding,test->connection,test->process,test->generation,2,stream,&id);
+    if (test->error) return (LONG)0xc0000001L;
+    *receipt=id;return 0;
+}
+static LONG revoke_original_stream(void *context,uint32_t receipt)
+{
+    stream_rpc_test *test=context;
+    ++test->revoked;
+    test->error=Client_RevokeStream(test->binding,test->connection,test->process,test->generation,receipt);
+    return test->error ? (LONG)0xc0000001L : 0;
+}
 #define REQUIRE(x) do { phase=__LINE__; if (!(x)) { fprintf(stderr,"FAIL line %d\n",__LINE__); return 1; } } while(0)
 int main(int argc,char **argv)
 {
@@ -22,6 +43,8 @@ int main(int argc,char **argv)
     HANDLE reader=NULL,writer=NULL;
     DWORD available;
     char temporary[MAX_PATH];
+    char receiverPid[32];HANDLE receiver;
+    stream_rpc_test streamTest={0};
     HANDLE process=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION|SYNCHRONIZE,FALSE,GetCurrentProcessId());
     int abandon=argc==2 && !strcmp(argv[1],"--abandon");
     ULONG expectedFirst=argc==2 && !strcmp(argv[1],"--existing")?0:1;
@@ -42,6 +65,16 @@ int main(int argc,char **argv)
         REQUIRE(Client_First(binding,connection,process,0,&first)==ERROR_ACCESS_DENIED && first==0);
         REQUIRE(!Client_First(binding,connection,process,generation,&first) && first==expectedFirst);
         REQUIRE(!Client_First(binding,connection,process,generation,&first) && first==0);
+        REQUIRE(GetEnvironmentVariableA("BASESRV_TEST_PID",receiverPid,sizeof(receiverPid)));
+        receiver=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION|SYNCHRONIZE,FALSE,strtoul(receiverPid,NULL,10));
+        REQUIRE(receiver && WaitForSingleObject(receiver,0)==WAIT_TIMEOUT);
+        REQUIRE(CreatePipe(&reader,&writer,NULL,0));
+        streamTest.binding=binding;streamTest.connection=connection;streamTest.process=process;streamTest.generation=generation;
+        REQUIRE(!test_original_stream_rpc(receiver,writer,&streamTest,deliver_original_stream,revoke_original_stream));
+        REQUIRE(streamTest.delivered==1 && streamTest.revoked==2 && !streamTest.error);
+        REQUIRE(CloseHandle(writer) && CloseHandle(receiver));writer=NULL;
+        REQUIRE(!PeekNamedPipe(reader,NULL,0,NULL,&available,NULL) && GetLastError()==ERROR_BROKEN_PIPE);
+        REQUIRE(CloseHandle(reader));reader=NULL;
         REQUIRE(GetTempFileNameA(".","vdm",0,temporary));
         writer=CreateFileA(temporary,GENERIC_READ|GENERIC_WRITE,FILE_SHARE_READ|FILE_SHARE_WRITE|FILE_SHARE_DELETE,
             NULL,OPEN_EXISTING,FILE_ATTRIBUTE_TEMPORARY|FILE_FLAG_DELETE_ON_CLOSE,NULL);

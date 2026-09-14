@@ -1116,3 +1116,21 @@ table was added. The formal original-lifecycle suite passes this case together
 with the successful alias and negative identity cases. This proves the local
 translator/journal composition, not remote ambiguous-reply recovery or worker
 RPC delivery.
+
+## Original stream loops to real broker RPC
+
+Verify-BasesrvProduct also links a fixture-only private source bridge with the
+original server and formal stream binding libraries. Map checks require the
+original duplication/close functions from srvvdm.obj and the callback from
+streams.obj. The driver supplies its exact owned receiver PID, with no
+unrelated process discovery. The original source loop resolves a source
+receipt and invokes AttachPipe on formal basesrv. Shared stdout/stderr produces
+one RPC delivery; the original close loop produces two successful revokes.
+Closing the sender's remaining handle leaves the pipe broken, proving no
+receiver writer remains. Existing formal broker tests pass as well.
+
+This is a real cross-process original-loop/resource-boundary test, but the
+receiver is basesrv, not an independent ntvdm worker. It does not implement
+worker registration, Check/Get dispatch or ambiguous-reply journal recovery.
+The source bridge is test-only and excluded from the product broker link.
+No guest program ran and the deployed package remains unchanged.

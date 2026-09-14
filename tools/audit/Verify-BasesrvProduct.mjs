@@ -7,17 +7,26 @@ fs.mkdirSync(build,{recursive:true});
 const env=path.join(build,'msvc.cmd');
 fs.writeFileSync(env,'@echo off\r\nset "service_test_cwd=%CD%"\r\ncall "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat" -arch=x86 -host_arch=x64 >nul\r\nif errorlevel 1 exit /b %errorlevel%\r\ncd /d "%service_test_cwd%"\r\n%*\r\n');
 const flags=`/nologo /c /MT /W4 /I "${product}/obj/basesrv" /I "${root}/src"`;
+const ownerGraph=fs.readFileSync(path.join(product,'build.ninja'),'utf8');
+const sourceFlags=ownerGraph.match(/^build obj\/opennt-base-bindings\/registry.obj:.*\r?\n  cflags = (.*)$/m)[1].replaceAll('$:',':');
 const log=fs.openSync(path.join(build,'build.log'),'w');
 try {
     for (const command of [
         `cl.exe ${flags} "${root}/tests/broker/service_client.c" /Foclient.obj`,
         `cl.exe ${flags} "${product}/obj/basesrv/service_c.c" /Fostub.obj`,
-        `link.exe /nologo /out:client.exe client.obj stub.obj "${product}/broker-transport.lib" rpcrt4.lib kernel32.lib advapi32.lib`
+        `cl.exe ${sourceFlags} "${root}/tests/broker/service_stream_source.c" /Fostream-source.obj`,
+        `link.exe /nologo /opt:ref /map:client.map /out:client.exe client.obj stub.obj stream-source.obj "${product}/obj/run16/support.obj" "${product}/broker-transport.lib" "${product}/opennt-base-server.lib" "${product}/opennt-base-bindings.lib" "${product}/original-opennt-rtl-x86.lib" rpcrt4.lib ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib`
     ]) {
         const result=spawnSync('cmd.exe',['/d','/c',`call "${env}" ${command}`],{cwd:build,windowsHide:true,windowsVerbatimArguments:true,stdio:['ignore',log,log],timeout:60000});
         if(result.status!==0) throw Error(`Client build failed ${result.status}; see ${build}/build.log`);
     }
 } finally {fs.closeSync(log);}
+const clientMap=fs.readFileSync(path.join(build,'client.map'),'utf8');
+for(const [symbol,owner] of [['_BaseSrvDupStandardHandles','opennt-base-server:srvvdm.obj'],
+    ['_BaseSrvCloseStandardHandles','opennt-base-server:srvvdm.obj'],
+    ['_OpenNtBaseDuplicateStream','opennt-base-bindings:streams.obj']])
+    if(!clientMap.split(/\r?\n/).some(line=>line.includes(symbol)&&line.includes(owner)))
+        throw Error(`Wrong source-to-RPC provider ${symbol}`);
 const map=fs.readFileSync(path.join(product,'basesrv.exe.map'),'utf8');
 for(const [symbol,owner] of [['_BaseSrvIsFirstVDM','opennt-base-server:srvvdm.obj'],['_OpenNtBaseServiceFirst','opennt-base-bindings:service.obj'],['_OpenNtBaseServiceRetainPeer','opennt-base-bindings:service.obj'],['_OpenNtBaseRetainRegisteredProcess','opennt-base-bindings:registry.obj']])
     if(!map.split(/\r?\n/).some(line=>line.includes(symbol)&&line.includes(owner))) throw Error(`Wrong product provider ${symbol}`);
@@ -36,10 +45,11 @@ try {
         server.stdout.on('data',()=>{if(output.includes('basesrv: listening')) resolve();});
     });
     clearTimeout(timer);
+    const clientEnvironment={...process.env,BASESRV_TEST_PID:String(server.pid)};
     const duplicate=spawnSync(path.join(product,'basesrv.exe'),[],{cwd:build,windowsHide:true,encoding:'utf8',timeout:5000});
     fs.writeFileSync(path.join(build,'duplicate.log'),JSON.stringify({status:duplicate.status,error:duplicate.error?.message,stdout:duplicate.stdout,stderr:duplicate.stderr},null,2));
     if(duplicate.status!==1740) throw Error(`Duplicate endpoint owner not rejected: ${duplicate.status}`);
-    const result=spawnSync(path.join(build,'client.exe'),[],{cwd:build,windowsHide:true,encoding:'utf8',timeout:15000});
+    const result=spawnSync(path.join(build,'client.exe'),[],{cwd:build,env:clientEnvironment,windowsHide:true,encoding:'utf8',timeout:15000});
     fs.writeFileSync(path.join(build,'client.log'),(result.stdout||'')+(result.stderr||''));
     if(result.status!==0) throw Error(`Product RPC client failed ${result.status}`);
     console.log(result.stdout.trim());
@@ -55,7 +65,7 @@ try {
         timer=setTimeout(()=>{server.stderr.off('data',observed);reject(Error('RPC context rundown not observed'));},10000);
         server.stderr.on('data',observed); observed();
     });
-    const reconnected=spawnSync(path.join(build,'client.exe'),['--existing'],{cwd:build,windowsHide:true,encoding:'utf8',timeout:15000});
+    const reconnected=spawnSync(path.join(build,'client.exe'),['--existing'],{cwd:build,env:clientEnvironment,windowsHide:true,encoding:'utf8',timeout:15000});
     fs.writeFileSync(path.join(build,'after-rundown.log'),(reconnected.stdout||'')+(reconnected.stderr||''));
     if(reconnected.status!==0) throw Error(`Service failed after rundown ${reconnected.status}`);
     console.log('PASS: process-exit RPC rundown removes the registered connection; original service remains responsive.');
