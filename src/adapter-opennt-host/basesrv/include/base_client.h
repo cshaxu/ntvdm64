@@ -15,4 +15,21 @@ PCSR_CAPTURE_HEADER NTAPI CsrAllocateCaptureBuffer(ULONG, ULONG, ULONG);
 VOID NTAPI CsrFreeCaptureBuffer(PCSR_CAPTURE_HEADER);
 ULONG NTAPI CsrAllocateMessagePointer(PCSR_CAPTURE_HEADER, ULONG, PVOID *);
 BOOL BaseUpdateVDMEntry(ULONG, HANDLE *, ULONG, ULONG);
+BOOL BaseCheckVDM(ULONG, PCWCH, PCWCH, PCWCH, ANSI_STRING *, PBASE_API_MSG, PULONG, DWORD, LPSTARTUPINFOW);
+/* Original process shape is the finite support carrier, never the host PEB. */
+#define PPEB POPENNT_SUPPORT_PEB
+#ifndef STARTF_HASSHELLDATA
+#define STARTF_HASSHELLDATA 0x00000400
+#endif
+#ifndef STATUS_INVALID_IMAGE_NOT_MZ
+#define STATUS_INVALID_IMAGE_NOT_MZ ((NTSTATUS)0xC000012FL)
+#endif
+BOOL OpenNtBaseIsConsoleHandle(HANDLE);
+/* Original conroute.h's low-two-bit test described NT4 pseudo handles;
+ * modern Console identity is queried, not inferred from a numeric value. */
+#undef CONSOLE_HANDLE
+#define CONSOLE_HANDLE(value) OpenNtBaseIsConsoleHandle(value)
+#undef swprintf
+/* Original NT4 call has Microsoft's pre-ISO signature, without a count. */
+#define swprintf _swprintf
 #endif

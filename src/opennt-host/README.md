@@ -133,6 +133,15 @@ empty, retaining the original full-path branch without passing an undersized
 NT4 structure to modern NTDLL. Classifier bodies/branches are unchanged.
 The focused x86 graph selects these bodies; final run16 selection is pending.
 
+The command cohort also restores complete BaseCheckVDM (876 lines, same pinned
+source; LF-normalized SHA-256
+`579840e2d5598051d157d9e92871027b543ecfcba8d299a745928bfd71c6386e`).
+No body change is made: command-tail/OEM conversion, PIF search, current
+directory, startup capture and cleanup remain original. Private declarations
+bind the finite process fields, modern Console capability predicate and the
+historical Microsoft swprintf signature. The actual original client/server
+test covers dispatch/deep copy, hotkey conversion and pre-dispatch failures.
+
 | Identifier | Original purpose | Reason for divergence | Selected implementation | Files |
 | --- | --- | --- | --- | --- |
 | OPENNT-HOST-001 | `public/sdk/inc/ntexapi.h` declares the historical NT Ex system-service surface. | The selected non-MONITOR `softpc.new/host/src/nt_eoi.c` preserves its original include, and `nt_timer.c` reaches only its performance-counter/tick declarations. Importing the complete header would falsely enlarge the user-mode host closure. | Retain the source-identified true subset as the same-named OpenNT declaration carrier. The selected MVDM sources remain unchanged; no Ex service, controller, or kernel-VDM substitute is supplied. | `public/sdk/inc/ntexapi.h` |

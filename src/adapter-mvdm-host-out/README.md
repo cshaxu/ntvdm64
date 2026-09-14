@@ -1,5 +1,11 @@
 # adapter-mvdm-host-out
 
+T412 S2 registers ADAPTER-WIN32-059: original BaseCheckVDM's standard stream
+fields are refreshed from GetStdHandle when the private PEB carrier is queried;
+WindowFlags comes from GetStartupInfoW. No native PEB layout is assumed and
+these local handles are not broker wire values. Product selection is pending;
+focused source-owned launch tests and support compilation are in S2 evidence.
+
 T412 S2 registers ADAPTER-WIN32-058: the existing private support PEB now
 supplies ImageBaseAddress from GetModuleHandleW(NULL) for original BaseClient
 GetBinaryTypeW's native machine check. This adds one process-local field and

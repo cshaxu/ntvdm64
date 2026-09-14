@@ -256,3 +256,62 @@ no guest program is executed and no deployment is changed. Native x64 image
 rejection, OS/2 media, path-race cases and final production selection remain
 unproven. S2 stays active: BaseCheckVDM and the remaining coherent launch
 closure, finite product bindings and old local-policy retirement still remain.
+
+## Complete original launch-request restoration
+
+BaseCheckVDM is restored as one unchanged 876-line function from the same
+pinned vdm.c. LF-normalized SHA-256 is
+`579840e2d5598051d157d9e92871027b543ecfcba8d299a745928bfd71c6386e`.
+The verifier checks both source equality and this fixed identity and requires
+the linked symbol to come from client.obj. S2 now restores 1,914 original
+client lines; this is source recovery, not net deletion of the old provider.
+
+The original function retains DOS/PIF/new-console decisions, command-tail
+extraction, OEM/ANSI conversions, short-path/PIF lookup, directory limits,
+startup fields, capture construction, BaseSrv dispatch and cleanup. It does
+not classify the file again. The launcher supplies the previously determined
+BinaryType. In the focused test actual BaseCheckVDM calls actual BaseSrvCheckVDM;
+the transport only dispatches and the original server owns the copied result.
+
+Finite outgoing bindings, after reviewing the whole body:
+
+- Existing native/public path, conversion and heap APIs supply the original
+  operations; no new parser, PIF policy or environment algorithm is authored.
+- Private PPEB binds the existing support carrier, with startup WindowFlags
+  from GetStartupInfoW and standard streams refreshed through GetStdHandle.
+  These are process-local fields, not a native PEB cast or IPC identity.
+- Original public/internal/base/inc/conroute.h identifies NT4 Console pseudo
+  handles by low bits. The modern predicate uses GetConsoleMode and preserves
+  LastError. Original stream filtering stays in BaseCheckVDM. Cross-process
+  Console binding and resource attachment acceptance remain S3 work.
+- Compilation exposed a pre-ISO swprintf call in the original hotkey branch.
+  The private header selects Microsoft's _swprintf shape, as documented by
+  installed SDK corecrt_wstdio.h's _CRT_NON_CONFORMING_SWPRINTFS mapping.
+  No original formatting expression or hotkey policy is changed.
+
+Recovery ladder: the complete original function compiles unchanged through
+these finite bindings (rung 2); direct modern headers lack those historical
+process/Console/CRT contracts (rung 1 cannot close alone). Neither mirror-body
+intrusion nor autonomous launch policy is necessary (rungs 3/4 rejected).
+
+`node tools/audit/Verify-BrokerOriginalLifecycle.mjs` now additionally passes:
+
+- Quoted full application path and whitespace yield the exact /? CR/LF/NUL
+  command tail in the original server-owned record.
+- Application name, double-NUL environment, title, desktop and reserved
+  fields survive capture cleanup in the original deep copy; captures drain.
+- Original ExitVDM removes the newly admitted record.
+- STARTF_USEHOTKEY with value 42 yields exactly `hotkey.42 test reserved`,
+  clears the source-defined flag/handle and preserves the server copy. The
+  fixture discards the original routine's freed temporary reserved pointer.
+- Injected capture-allocation failure returns out-of-memory without dispatch;
+  NULL environment returns invalid-parameter without dispatch or live capture.
+- Earlier first-VDM, capacity, event/wake/retry, directory/BAT/WOW registration
+  and teardown assertions continue to pass. No implicit-function or mismatched
+  argument warnings remain in this final lifecycle compilation.
+
+The original classifier regression also passes and compile-checks the actual
+support translation unit. This is still same-process focused protocol proof,
+not product selection, shared-WOW launch, full PIF coverage, cross-process
+transfer or guest execution. S2 remains active; formal owner selection,
+remaining launch dependencies and old local-policy retirement are not done.

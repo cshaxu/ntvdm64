@@ -889,6 +889,883 @@ Return Value:
 }
 
 BOOL
+BaseCheckVDM(
+    IN	ULONG BinaryType,
+    IN	PCWCH lpApplicationName,
+    IN	PCWCH lpCommandLine,
+    IN  PCWCH lpCurrentDirectory,
+    IN	ANSI_STRING *pAnsiStringEnv,
+    IN	PBASE_API_MSG m,
+    IN OUT PULONG iTask,
+    IN	DWORD dwCreationFlags,
+    LPSTARTUPINFOW lpStartupInfo
+    )
+/*++
+
+Routine Description:
+
+    This routine calls the windows server to find out if the VDM for the
+    current session is already present. If so, a new process is'nt created
+    instead the DOS binary is dispatched to the existing VDM. Otherwise,
+    a new VDM process is created. This routine also passes the app name
+    and command line to the server in DOS int21/0ah style which is later
+    passed by the server to the VDM.
+
+Arguments:
+
+    BinaryType - DOS/WOW binary
+    lpApplicationName -- pointer to the full path name of the executable.
+    lpCommandLine -- command line
+    lpCurrentDirectory - Current directory
+    lpEnvironment,     - Envirinment strings
+    m - pointer to the base api message.
+    iTask - taskid for win16 apps, and no-console dos apps
+    dwCreationFlags - creation flags as passed to createprocess
+    lpStartupInfo =- pointer to startupinfo as passed to createprocess
+
+
+Return Value:
+
+    OEM vs. ANSI:
+    The command line, Application Name, title are converted to OEM strings,
+    suitable for the VDM. All other strings are returned as ANSI.
+
+    TRUE -- Operation successful, VDM state and other relevant information
+	    is in base api message.
+    FALSE -- Operation failed.
+
+--*/
+{
+
+    NTSTATUS Status;
+    PPEB Peb;
+    PBASE_CHECKVDM_MSG b= (PBASE_CHECKVDM_MSG)&m->u.CheckVDM;
+    PCSR_CAPTURE_HEADER CaptureBuffer;
+    ANSI_STRING AnsiStringCurrentDir,AnsiStringDesktop;
+    ANSI_STRING AnsiStringReserved, AnsiStringPif;
+    OEM_STRING OemStringCmd, OemStringAppName, OemStringTitle;
+    UNICODE_STRING UnicodeString;
+    PCHAR pch, pSlash, Buffer = NULL;
+    ULONG Len;
+    ULONG bufPointers;
+    LPWSTR wsBuffer;
+    LPWSTR wsAppName;
+    LPWSTR wsPifName;
+    LPWSTR wsCmdLine;
+    LPWSTR wsPif=(PWSTR)".\0p\0i\0f\0\0";    // L".pif"
+    LPWSTR wsSharedWowPif=L"wowexec.pif";
+    PWCHAR pwch;
+    BOOLEAN bNewConsole;
+    BOOLEAN bReturn = FALSE;
+    DWORD   dw, dwTotal, Length;
+    WCHAR   *pSrc, *pDot, *pTmp;
+    UNICODE_STRING  * pUnicodeStringExtName;
+    WCHAR   wchBuffer[MAX_PATH + 1];
+    ULONG BinarySubType;
+    LPWSTR lpAllocatedReserved = NULL;
+    DWORD   HandleFlags;
+
+    // does a trivial test of the environment
+    if (!ARGUMENT_PRESENT(pAnsiStringEnv) ||
+	pAnsiStringEnv->Length > MAXIMUM_VDM_ENVIORNMENT) {
+	SetLastError(ERROR_INVALID_PARAMETER);
+	return FALSE;
+        }
+
+    wsCmdLine = wsAppName = NULL;
+    OemStringCmd.Buffer = NULL;
+    OemStringAppName.Buffer = NULL;
+    AnsiStringCurrentDir.Buffer = NULL;
+    AnsiStringDesktop.Buffer = NULL;
+    AnsiStringPif.Buffer = NULL;
+    OemStringTitle.Buffer = NULL;
+    AnsiStringReserved.Buffer = NULL;
+    wsBuffer = NULL;
+    wsPifName = NULL;
+
+    BinarySubType = BinaryType & BINARY_SUBTYPE_MASK;
+    BinaryType = BinaryType & ~BINARY_SUBTYPE_MASK;
+    bNewConsole = !NtCurrentPeb()->ProcessParameters->ConsoleHandle ||
+                  (dwCreationFlags & CREATE_NEW_CONSOLE);
+
+    try {
+
+        if (BinaryType == BINARY_TYPE_DOS) {
+
+            //
+            // if the command line is a pif file we must have a new
+            // console since a pif file defines its own settings. This
+            // could be forced into a new console, but forcedos isn't
+            // cooperative.
+            //
+
+            if (BinarySubType == BINARY_TYPE_DOS_PIF && !bNewConsole) {
+                BaseSetLastNTError(STATUS_INVALID_IMAGE_NOT_MZ);
+                goto BCVTryExit;
+                }
+
+            Peb = NtCurrentPeb();
+            if (lpStartupInfo && lpStartupInfo->dwFlags & STARTF_USESTDHANDLES) {
+                b->StdIn = lpStartupInfo->hStdInput;
+                b->StdOut = lpStartupInfo->hStdOutput;
+                b->StdErr = lpStartupInfo->hStdError;
+
+                }
+            else {
+                b->StdIn = Peb->ProcessParameters->StandardInput;
+		b->StdOut = Peb->ProcessParameters->StandardOutput;
+                b->StdErr = Peb->ProcessParameters->StandardError;
+
+		//
+		// Verify that the standard handles ntvdm process will inherit
+		// from the calling process are real handles. They are not
+		// handles if the calling process was created with
+		// STARTF_USEHOTKEY | STARTF_HASSHELLDATA.
+		// Note that CreateProcess clears STARTF_USESTANDHANDLES
+		// if either STARTF_USEHOTKEY or STARTF_HASSHELLDATA is set.
+		//
+		if (Peb->ProcessParameters->WindowFlags &
+		    (STARTF_USEHOTKEY | STARTF_HASSHELLDATA)) {
+
+		    if (b->StdIn && !CONSOLE_HANDLE(b->StdIn) &&
+			!GetHandleInformation(b->StdIn, &HandleFlags))
+			b->StdIn = 0;
+		    if (b->StdOut && !CONSOLE_HANDLE(b->StdOut) &&
+			!GetHandleInformation(b->StdOut, &HandleFlags)) {
+			if (b->StdErr == b->StdOut)
+			    b->StdErr = 0;
+			b->StdOut = 0;
+			}
+		    if (b->StdErr && b->StdErr != b->StdOut &&
+			!CONSOLE_HANDLE(b->StdErr) &&
+			!GetHandleInformation(b->StdErr, &HandleFlags))
+			b->StdErr = 0;
+		    }
+		}
+	    if (CONSOLE_HANDLE((b->StdIn)))
+		b->StdIn = 0;
+
+	    if (CONSOLE_HANDLE((b->StdOut)))
+		b->StdOut = 0;
+
+	    if (CONSOLE_HANDLE((b->StdErr)))
+		b->StdErr = 0;
+            }
+
+
+        if (BinaryType == BINARY_TYPE_SEPWOW) {
+            bNewConsole = TRUE;
+            }
+
+        //
+        // Convert Unicode Application Name to Oem short name
+        //
+             // skiping leading white space
+        while(*lpApplicationName == (WCHAR)' ' || *lpApplicationName == (WCHAR)'\t' ) {
+              lpApplicationName++;
+              }
+
+             // space for short AppName
+        Len = wcslen(lpApplicationName);
+        dwTotal = Len + 1 + MAX_PATH;
+        wsAppName =  RtlAllocateHeap(RtlProcessHeap(),
+                                    MAKE_TAG(VDM_TAG),
+                                    dwTotal * sizeof(WCHAR)
+                                    );
+        if (wsAppName == NULL) {
+            SetLastError(ERROR_NOT_ENOUGH_MEMORY);
+            goto BCVTryExit;
+            }
+
+        dw = GetShortPathNameW(lpApplicationName, wsAppName, dwTotal);
+	// If getting the short name is impossible, stop right here.
+	// We can not execute a 16bits biranry if we can not find
+	// its appropriate short name alias. Sorry HPFS, Sorry NFS
+
+	if (0 == dw || dw > dwTotal) {
+	    SetLastError(ERROR_BAD_PATHNAME);
+            goto BCVTryExit;
+            }
+
+	RtlInitUnicodeString(&UnicodeString, wsAppName);
+        Status = RtlUnicodeStringToOemString(&OemStringAppName,
+                                             &UnicodeString,
+                                             TRUE
+                                             );
+        if (!NT_SUCCESS(Status) ){
+            BaseSetLastNTError(Status);
+            goto BCVTryExit;
+            }
+
+
+        //
+        // Find len of basename excluding extension,
+        // for CommandTail max len check.
+        //
+        dw = OemStringAppName.Length;
+        pch = OemStringAppName.Buffer;
+        Length = 1;        // start at one for space between cmdname & cmdtail
+        while (dw-- && *pch != '.') {
+            if (*pch == '\\') {
+                Length = 1;
+                }
+            else {
+                Length++;
+                }
+            pch++;
+            }
+
+
+        //
+        // Find the beg of the command tail to pass as the CmdLine
+        //
+
+        Len = wcslen(lpApplicationName);
+
+        if (L'"' == lpCommandLine[0]) {
+
+            //
+            // Application name is quoted, skip the quoted text
+            // to get command tail.
+            //
+
+            pwch = (LPWSTR)&lpCommandLine[1];
+            while (*pwch && L'"' != *pwch++) {
+                ;
+            }
+
+        } else if (Len < wcslen(lpCommandLine) &&
+            0 == _wcsnicmp(lpApplicationName, lpCommandLine, Len)) {
+
+            //
+            // Application path is also on the command line, skip past
+            // that to reach the command tail instead of looking for
+            // the first white space.
+            //
+
+            pwch = (LPWSTR)lpCommandLine + Len;
+
+        } else {
+
+            //
+            // We assume first token is exename (argv[0]).
+            //
+
+            pwch = (LPWSTR)lpCommandLine;
+
+               // skip leading white characters
+            while (*pwch != UNICODE_NULL &&
+                   (*pwch == (WCHAR) ' ' || *pwch == (WCHAR) '\t')) {
+                pwch++;
+                }
+
+               // skip first token
+            if (*pwch == (WCHAR) '\"') {    // quotes as delimiter
+                pwch++;
+                while (*pwch && *pwch++ != '\"') {
+                      ;
+                      }
+                }
+            else {                         // white space as delimiter
+                while (*pwch && *pwch != ' ' && *pwch != '\t') {
+                       pwch++;
+                       }
+                }
+        }
+
+        //
+        // pwch points past the application name, now skip any trailing
+        // whitespace.
+        //
+
+        while (*pwch && (L' ' == *pwch || L'\t' == *pwch)) {
+            pwch++;
+        }
+
+        wsCmdLine = pwch;
+        dw = wcslen(wsCmdLine);
+
+        // convert to oem
+        UnicodeString.Length = (USHORT)(dw * sizeof(WCHAR));
+        UnicodeString.MaximumLength = UnicodeString.Length + sizeof(WCHAR);
+        UnicodeString.Buffer = wsCmdLine;
+        Status = RtlUnicodeStringToOemString(
+                    &OemStringCmd,
+                    &UnicodeString,
+                    TRUE);
+
+        if (!NT_SUCCESS(Status) ){
+            BaseSetLastNTError(Status);
+            goto BCVTryExit;
+            }
+
+        //
+        // check len of command line for dos compatibility
+        //
+        if (OemStringCmd.Length >= MAXIMUM_VDM_COMMAND_LENGTH - Length) {
+            SetLastError(ERROR_INVALID_PARAMETER);
+            goto BCVTryExit;
+            }
+
+
+        //
+        // Search for matching pif file. Search order is AppName dir,
+        // followed by win32 default search path. For the shared wow, pif
+        // is wowexec.pif if it exists.
+        //
+        wsBuffer = RtlAllocateHeap(RtlProcessHeap(),MAKE_TAG( VDM_TAG ),MAX_PATH*sizeof(WCHAR));
+        if (!wsBuffer) {
+            SetLastError(ERROR_NOT_ENOUGH_MEMORY);
+            goto BCVTryExit;
+            }
+
+        wsPifName = RtlAllocateHeap(RtlProcessHeap(),MAKE_TAG( VDM_TAG ),MAX_PATH*sizeof(WCHAR));
+        if (!wsPifName) {
+            SetLastError(ERROR_NOT_ENOUGH_MEMORY);
+            goto BCVTryExit;
+            }
+
+        if (BinaryType == BINARY_TYPE_WIN16) {
+            wcscpy(wsBuffer, wsSharedWowPif);
+            Len = 0;
+            }
+        else {
+            // start with fully qualified app name
+            wcscpy(wsBuffer, lpApplicationName);
+
+             // strip extension if any
+            pwch = wcsrchr(wsBuffer, (WCHAR)'.');
+            // dos application must have an extention
+            if (pwch == NULL) {
+                 SetLastError(ERROR_INVALID_PARAMETER);
+                 goto BCVTryExit;
+                }
+            wcscpy(pwch, wsPif);
+            Len = GetFileAttributesW(wsBuffer);
+            if (Len == (DWORD)(-1) || (Len & FILE_ATTRIBUTE_DIRECTORY)) {
+                Len = 0;
+                }
+            else {
+                Len = wcslen(wsBuffer) + 1;
+                wcsncpy(wsPifName, wsBuffer, Len);
+                }
+            }
+
+        if (!Len)  {  // try basename
+
+               // find beg of basename
+            pwch = wcsrchr(wsBuffer, (WCHAR)'\\');
+            if (!pwch ) {
+                 pwch = wcsrchr(wsBuffer, (WCHAR)':');
+                 }
+
+               // move basename to beg of wsBuffer
+            if (pwch++) {
+                 while (*pwch != UNICODE_NULL &&
+                        *pwch != (WCHAR)' '   && *pwch != (WCHAR)'\t' )
+                       {
+                        wsBuffer[Len++] = *pwch++;
+                        }
+                 wsBuffer[Len] = UNICODE_NULL;
+                 }
+
+            if (Len)  {
+                Len = SearchPathW(
+                            NULL,
+                            wsBuffer,
+                            wsPif,              // L".pif"
+                            MAX_PATH,
+                            wsPifName,
+                            NULL
+                            );
+                if (Len >= MAX_PATH) {
+                    SetLastError(ERROR_NOT_ENOUGH_MEMORY);
+                    goto BCVTryExit;
+                    }
+                }
+            }
+
+        if (!Len)
+            *wsPifName = UNICODE_NULL;
+
+
+
+        if (!ARGUMENT_PRESENT( lpCurrentDirectory )) {
+
+	    dw = RtlGetCurrentDirectory_U(sizeof (wchBuffer), wchBuffer);
+
+	    wchBuffer[dw / sizeof(WCHAR)] = UNICODE_NULL;
+	    dw = GetShortPathNameW(wchBuffer,
+				   wchBuffer,
+				   sizeof(wchBuffer) / sizeof(WCHAR)
+				   );
+	    if (dw > sizeof(wchBuffer) / sizeof(WCHAR))
+		goto BCVTryExit;
+
+	    else if (dw == 0) {
+		RtlInitUnicodeString(&UnicodeString, wchBuffer);
+		dw = UnicodeString.Length / sizeof(WCHAR);
+		}
+	    else {
+		UnicodeString.Length = (USHORT)(dw * sizeof(WCHAR));
+		UnicodeString.Buffer = wchBuffer;
+		UnicodeString.MaximumLength = (USHORT)sizeof(wchBuffer);
+		}
+            // DOS limit of 64 includes the final NULL but not the leading
+            // drive and slash. So here we should be checking the ansi length
+            // of current directory + 1 (for NULL) - 3 (for c:\).
+	    if ( dw - 2 <= MAXIMUM_VDM_CURRENT_DIR ) {
+		Status = RtlUnicodeStringToAnsiString(
+						      &AnsiStringCurrentDir,
+						      &UnicodeString,
+						      TRUE
+						     );
+		}
+	    else {
+		SetLastError(ERROR_INVALID_PARAMETER);
+                goto BCVTryExit;
+		}
+
+	    if ( !NT_SUCCESS(Status) ) {
+		BaseSetLastNTError(Status);
+                goto BCVTryExit;
+		}
+	    }
+	else {
+
+
+	    dw = GetShortPathNameW(lpCurrentDirectory, wchBuffer,
+				   sizeof(wchBuffer) / sizeof(WCHAR)
+				   );
+	    if (dw > sizeof(wchBuffer) / sizeof(WCHAR))
+		goto BCVTryExit;
+
+	    if (dw != 0) {
+		UnicodeString.Buffer = wchBuffer;
+		UnicodeString.Length = (USHORT)(dw * sizeof(WCHAR));
+		UnicodeString.MaximumLength = sizeof(wchBuffer);
+		}
+	    else
+		RtlInitUnicodeString(&UnicodeString, lpCurrentDirectory);
+
+	    Status = RtlUnicodeStringToAnsiString(
+		&AnsiStringCurrentDir,
+		&UnicodeString,
+		TRUE);
+
+	    if ( !NT_SUCCESS(Status) ){
+		BaseSetLastNTError(Status);
+                goto BCVTryExit;
+	       }
+
+            // DOS limit of 64 includes the final NULL but not the leading
+            // drive and slash. So here we should be checking the ansi length
+            // of current directory + 1 (for NULL) - 3 (for c:\).
+            if((AnsiStringCurrentDir.Length - 2) > MAXIMUM_VDM_CURRENT_DIR) {
+		SetLastError(ERROR_INVALID_PARAMETER);
+                goto BCVTryExit;
+		}
+	    }
+
+	// NT allows applications to use UNC name as their current directory.
+	// while NTVDM can't do that. We will end up a weird drive number
+	// like '\' - 'a') here ????????????????????????????????
+	// BUGBUG
+	// Place Current Drive
+	if(AnsiStringCurrentDir.Buffer[0] <= 'Z')
+	    b->CurDrive = AnsiStringCurrentDir.Buffer[0] - 'A';
+	else
+	    b->CurDrive = AnsiStringCurrentDir.Buffer[0] - 'a';
+
+        //
+        // Hotkey info in NT traditionally is specified in the
+        // startupinfo.lpReserved field, but Win95 added a
+        // duplicate mechanism.  If the Win95 method was used,
+        // map it to the NT method here so the rest of the
+        // VDM code only has to deal with one method.
+        //
+        // If the caller was stupid enough to specify a hotkey
+        // in lpReserved as well as using STARTF_USEHOTKEY,
+        // the STARTF_USEHOTKEY hotkey will take precedence.
+        //
+
+        if (lpStartupInfo && lpStartupInfo->dwFlags & STARTF_USEHOTKEY) {
+
+            DWORD cbAlloc = sizeof(WCHAR) *
+                            (20 +                            // "hotkey.4294967295 " (MAXULONG)
+                             (lpStartupInfo->lpReserved      // length of prev lpReserved
+                              ? wcslen(lpStartupInfo->lpReserved)
+                              : 0
+                             ) +
+                             1                               // NULL terminator
+                            );
+
+
+            lpAllocatedReserved = RtlAllocateHeap(RtlProcessHeap(),
+                                                  MAKE_TAG( VDM_TAG ),
+                                                  cbAlloc
+                                                 );
+            if (lpAllocatedReserved) {
+
+                swprintf(lpAllocatedReserved,
+                         L"hotkey.%u %s",
+                         (DWORD) lpStartupInfo->hStdInput,
+                         lpStartupInfo->lpReserved ? lpStartupInfo->lpReserved : L""
+                         );
+
+                lpStartupInfo->dwFlags &= ~STARTF_USEHOTKEY;
+                lpStartupInfo->hStdInput = 0;
+                lpStartupInfo->lpReserved = lpAllocatedReserved;
+
+            }
+
+        }
+
+
+        //
+        // Allocate Capture Buffer
+        //
+        //
+        bufPointers = 2;  // CmdLine, AppName
+
+        //
+        // CmdLine for capture buffer, 3 for 0xd,0xa and NULL
+        //
+        Len = ROUND_UP((OemStringCmd.Length + 3),4);
+
+        // AppName, 1 for NULL
+        Len += ROUND_UP((OemStringAppName.Length + 1),4);
+
+        // Env
+	if (pAnsiStringEnv->Length) {
+	    bufPointers++;
+	    Len += ROUND_UP(pAnsiStringEnv->Length, 4);
+            }
+
+        // CurrentDir
+	if (AnsiStringCurrentDir.Length){
+	    bufPointers++;
+            Len += ROUND_UP((AnsiStringCurrentDir.Length +1),4); // 1 for NULL
+            }
+
+
+        // pif file name, 1 for NULL
+        if (wsPifName && *wsPifName != UNICODE_NULL) {
+            bufPointers++;
+            RtlInitUnicodeString(&UnicodeString,wsPifName);
+            Status = RtlUnicodeStringToAnsiString(&AnsiStringPif,
+                                                  &UnicodeString,
+                                                  TRUE
+                                                  );
+            if ( !NT_SUCCESS(Status) ){
+                BaseSetLastNTError(Status);
+                goto BCVTryExit;
+                }
+
+            Len += ROUND_UP((AnsiStringPif.Length+1),4);
+            }
+
+        //
+        // startupinfo space
+        //
+	if (lpStartupInfo) {
+	    Len += ROUND_UP(sizeof(STARTUPINFOA),4);
+	    bufPointers++;
+            if (lpStartupInfo->lpDesktop) {
+                bufPointers++;
+		RtlInitUnicodeString(&UnicodeString,lpStartupInfo->lpDesktop);
+		Status = RtlUnicodeStringToAnsiString(
+			    &AnsiStringDesktop,
+			    &UnicodeString,
+			    TRUE);
+
+		if ( !NT_SUCCESS(Status) ){
+		    BaseSetLastNTError(Status);
+                    goto BCVTryExit;
+		    }
+		Len += ROUND_UP((AnsiStringDesktop.Length+1),4);
+                }
+
+            if (lpStartupInfo->lpTitle) {
+                bufPointers++;
+                RtlInitUnicodeString(&UnicodeString,lpStartupInfo->lpTitle);
+                Status = RtlUnicodeStringToOemString(
+                            &OemStringTitle,
+			    &UnicodeString,
+			    TRUE);
+
+		if ( !NT_SUCCESS(Status) ){
+		    BaseSetLastNTError(Status);
+                    goto BCVTryExit;
+		    }
+                Len += ROUND_UP((OemStringTitle.Length+1),4);
+                }
+
+            if (lpStartupInfo->lpReserved) {
+		bufPointers++;
+                RtlInitUnicodeString(&UnicodeString,lpStartupInfo->lpReserved);
+		Status = RtlUnicodeStringToAnsiString(
+                            &AnsiStringReserved,
+			    &UnicodeString,
+			    TRUE);
+
+		if ( !NT_SUCCESS(Status) ){
+		    BaseSetLastNTError(Status);
+                    goto BCVTryExit;
+		    }
+                Len += ROUND_UP((AnsiStringReserved.Length+1),4);
+		}
+            }
+
+
+        // capture message buffer
+        CaptureBuffer = CsrAllocateCaptureBuffer(bufPointers, 0, Len);
+        if (CaptureBuffer == NULL) {
+            BaseSetLastNTError( STATUS_NO_MEMORY );
+            goto BCVTryExit;
+            }
+
+	// Allocate CmdLine pointer
+        CsrAllocateMessagePointer( CaptureBuffer,
+                                   ROUND_UP((OemStringCmd.Length + 3),4),
+				   (PVOID *)&b->CmdLine
+                                 );
+
+        // Copy Command Line
+        RtlMoveMemory (b->CmdLine, OemStringCmd.Buffer, OemStringCmd.Length);
+        b->CmdLine[OemStringCmd.Length] = 0xd;
+        b->CmdLine[OemStringCmd.Length+1] = 0xa;
+        b->CmdLine[OemStringCmd.Length+2] = 0;
+        b->CmdLen = (USHORT)(OemStringCmd.Length + 3);
+
+        // Allocate AppName pointer
+        CsrAllocateMessagePointer( CaptureBuffer,
+                                   ROUND_UP((OemStringAppName.Length + 1),4),
+                                   (PVOID *)&b->AppName
+                                 );
+
+        // Copy AppName
+        RtlMoveMemory (b->AppName,
+                       OemStringAppName.Buffer,
+                       OemStringAppName.Length
+                       );
+        b->AppName[OemStringAppName.Length] = 0;
+        b->AppLen = OemStringAppName.Length + 1;
+
+
+
+
+        // Allocate PifFile pointer, Copy PifFile name
+        if(AnsiStringPif.Buffer) {
+	    CsrAllocateMessagePointer( CaptureBuffer,
+                                       ROUND_UP((AnsiStringPif.Length + 1),4),
+                                       (PVOID *)&b->PifFile
+                                     );
+
+            RtlMoveMemory(b->PifFile,
+                          AnsiStringPif.Buffer,
+                          AnsiStringPif.Length);
+
+            b->PifFile[AnsiStringPif.Length] = 0;
+            b->PifLen = AnsiStringPif.Length + 1;
+
+            }
+        else {
+            b->PifLen = 0;
+            b->PifFile = NULL;
+            }
+
+
+
+        // Allocate Env pointer, Copy Env strings
+        if(pAnsiStringEnv->Length) {
+	    CsrAllocateMessagePointer( CaptureBuffer,
+				       ROUND_UP((pAnsiStringEnv->Length),4),
+				       (PVOID *)&b->Env
+                                     );
+
+            RtlMoveMemory(b->Env,
+			  pAnsiStringEnv->Buffer,
+			  pAnsiStringEnv->Length);
+
+	    b->EnvLen = pAnsiStringEnv->Length;
+
+            }
+        else {
+	    b->EnvLen = 0;
+	    b->Env = NULL;
+            }
+
+
+	if(AnsiStringCurrentDir.Length) {
+	    // Allocate Curdir pointer
+	    CsrAllocateMessagePointer( CaptureBuffer,
+				       ROUND_UP((AnsiStringCurrentDir.Length + 1),4),
+				       (PVOID *)&b->CurDirectory
+				       );
+	    // copy cur directory
+	    RtlMoveMemory (b->CurDirectory,
+			   AnsiStringCurrentDir.Buffer,
+			   AnsiStringCurrentDir.Length+1);
+
+	    b->CurDirectoryLen = AnsiStringCurrentDir.Length+1;
+            }
+	else {
+	    b->CurDirectory = NULL;
+	    b->CurDirectoryLen = 0;
+            }
+
+	// Allocate startupinfo pointer
+	if (lpStartupInfo) {
+	    CsrAllocateMessagePointer( CaptureBuffer,
+				       ROUND_UP(sizeof(STARTUPINFOA),4),
+				       (PVOID *)&b->StartupInfo
+				     );
+	    // Copy startupinfo
+	    b->StartupInfo->dwX	 =  lpStartupInfo->dwX;
+	    b->StartupInfo->dwY	 =  lpStartupInfo->dwY;
+	    b->StartupInfo->dwXSize	 =  lpStartupInfo->dwXSize;
+	    b->StartupInfo->dwYSize	 =  lpStartupInfo->dwYSize;
+	    b->StartupInfo->dwXCountChars=	lpStartupInfo->dwXCountChars;
+	    b->StartupInfo->dwYCountChars=	lpStartupInfo->dwYCountChars;
+	    b->StartupInfo->dwFillAttribute=lpStartupInfo->dwFillAttribute;
+	    b->StartupInfo->dwFlags	 =  lpStartupInfo->dwFlags;
+	    b->StartupInfo->wShowWindow =	lpStartupInfo->wShowWindow;
+	    b->StartupInfo->cb		 =  sizeof(STARTUPINFOA);
+	    }
+        else {
+            b->StartupInfo = NULL;
+            }
+
+	// Allocate pointer for Desktop info if needed
+	if (AnsiStringDesktop.Buffer) {
+	    CsrAllocateMessagePointer( CaptureBuffer,
+				       ROUND_UP((AnsiStringDesktop.Length + 1),4),
+				       (PVOID *)&b->Desktop
+				     );
+	    // Copy desktop string
+	    RtlMoveMemory (b->Desktop,
+			   AnsiStringDesktop.Buffer,
+			   AnsiStringDesktop.Length+1);
+	    b->DesktopLen =AnsiStringDesktop.Length+1;
+	    }
+	else {
+	    b->Desktop = NULL;
+	    b->DesktopLen =0;
+	    }
+
+	// Allocate pointer for Title info if needed
+        if (OemStringTitle.Buffer) {
+	    CsrAllocateMessagePointer( CaptureBuffer,
+                                       ROUND_UP((OemStringTitle.Length + 1),4),
+				       (PVOID *)&b->Title
+				     );
+	    // Copy title string
+	    RtlMoveMemory (b->Title,
+                           OemStringTitle.Buffer,
+                           OemStringTitle.Length+1);
+            b->TitleLen = OemStringTitle.Length+1;
+	    }
+	else {
+	    b->Title = NULL;
+	    b->TitleLen = 0;
+            }
+
+        // Allocate pointer for Reserved field if needed
+        if (AnsiStringReserved.Buffer) {
+            CsrAllocateMessagePointer( CaptureBuffer,
+                                       ROUND_UP((AnsiStringReserved.Length + 1),4),
+                                       (PVOID *)&b->Reserved
+				     );
+            // Copy reserved string
+            RtlMoveMemory (b->Reserved,
+                           AnsiStringReserved.Buffer,
+                           AnsiStringReserved.Length+1);
+            b->ReservedLen = AnsiStringReserved.Length+1;
+	    }
+	else {
+            b->Reserved = NULL;
+            b->ReservedLen = 0;
+	    }
+
+
+        if (BinaryType == BINARY_TYPE_WIN16)
+	    b->ConsoleHandle = (HANDLE)-1;
+        else if (bNewConsole)
+            b->ConsoleHandle = 0;
+        else
+            b->ConsoleHandle = NtCurrentPeb()->ProcessParameters->ConsoleHandle;
+
+        b->VDMState = FALSE;
+	b->BinaryType = BinaryType;
+	b->CodePage = (ULONG) GetConsoleCP ();
+        b->dwCreationFlags = dwCreationFlags;
+
+
+        Status = CsrClientCallServer(
+                          (PCSR_API_MSG)m,
+                          CaptureBuffer,
+                          CSR_MAKE_API_NUMBER( BASESRV_SERVERDLL_INDEX,
+                                               BasepCheckVDM
+                                             ),
+                          sizeof( *b )
+                          );
+
+        CsrFreeCaptureBuffer(CaptureBuffer);
+
+        if (!NT_SUCCESS(Status) || !NT_SUCCESS((NTSTATUS)m->ReturnValue)) {
+	    BaseSetLastNTError((NTSTATUS)m->ReturnValue);
+            goto BCVTryExit;
+	    }
+
+        *iTask = b->iTask;
+        bReturn = TRUE;
+BCVTryExit:;
+        }
+
+    finally {
+	if(Buffer != NULL)
+            RtlFreeHeap(RtlProcessHeap(), 0, (PVOID)Buffer);
+
+        if(wsBuffer != NULL)
+            RtlFreeHeap(RtlProcessHeap(), 0, (PVOID)wsBuffer);
+
+        if(wsPifName != NULL)
+            RtlFreeHeap(RtlProcessHeap(), 0, (PVOID)wsPifName);
+
+        if(OemStringCmd.Buffer != NULL)
+            RtlFreeOemString(&OemStringCmd);
+
+        if(OemStringAppName.Buffer != NULL)
+            RtlFreeOemString(&OemStringAppName);
+
+        if(AnsiStringPif.Buffer != NULL)
+           RtlFreeAnsiString(&AnsiStringPif);
+
+        if(AnsiStringCurrentDir.Buffer != NULL)
+	    RtlFreeAnsiString(&AnsiStringCurrentDir);
+
+	if(AnsiStringDesktop.Buffer != NULL)
+	    RtlFreeAnsiString(&AnsiStringDesktop);
+
+        if(OemStringTitle.Buffer != NULL)
+            RtlFreeAnsiString(&OemStringTitle);
+
+        if(AnsiStringReserved.Buffer != NULL)
+            RtlFreeAnsiString(&AnsiStringReserved);
+
+        if (wsAppName != NULL)
+            RtlFreeHeap(RtlProcessHeap(), 0, wsAppName);
+
+        if (lpAllocatedReserved != NULL)
+            RtlFreeHeap(RtlProcessHeap(), 0, lpAllocatedReserved);
+
+	}
+
+    return bReturn;
+}
+
+BOOL
 BaseUpdateVDMEntry(
     IN ULONG UpdateIndex,
     IN OUT HANDLE *WaitHandle,

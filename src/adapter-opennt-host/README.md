@@ -59,3 +59,14 @@ The original body therefore composes at the finite-binding recovery rung;
 no mirror-body intrusion or new classifier algorithm is required. Focused
 positive/negative proof and remaining limits are recorded in the
 [S2 evidence](../../docs/etc/evidence/m0-t412-s2-original-lifecycle.md).
+
+Original BaseCheckVDM now consumes the existing capture/dispatch declarations.
+Its private PPEB spelling binds only the existing support carrier; standard
+streams and startup flags are public-API fields, not host PEB layout guesses.
+`basesrv/source/base_client_process.c` implements only CONSOLE_HANDLE's modern
+capability query via GetConsoleMode, preserving LastError. The original
+conroute.h low-two-bit pseudo-handle test cannot identify modern Console
+handles. Command/stream routing policy stays in the original function; no
+native handle enters a broker record. The header maps historical swprintf to
+the CRT's _swprintf signature, avoiding ISO's extra count parameter. The
+original hotkey-to-reserved-string branch is tested with an exact result.

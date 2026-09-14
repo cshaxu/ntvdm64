@@ -86,11 +86,14 @@ static OPENNT_SUPPORT_THREAD_STATE *opennt_support_thread(void)
 {
     OPENNT_SUPPORT_THREAD_STATE *state = &opennt_support_thread_state;
     if (state->Teb.StaticUnicodeString.Buffer == NULL) {
+        STARTUPINFOW startup;
+        GetStartupInfoW(&startup);
         state->Teb.StaticUnicodeString.Buffer = state->StaticBuffer;
         state->Teb.StaticUnicodeString.MaximumLength = (USHORT)sizeof(state->StaticBuffer);
         state->Parameters.CurrentDirectory.DosPath.Buffer = state->CurrentDirectory;
         state->Parameters.CurrentDirectory.DosPath.MaximumLength = (USHORT)sizeof(state->CurrentDirectory);
         state->Parameters.ConsoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+        state->Parameters.WindowFlags = startup.dwFlags;
         state->Parameters.Environment = opennt_support_environment_snapshot();
         state->Peb.ProcessParameters = &state->Parameters;
         state->Peb.ProcessHeap = GetProcessHeap();
@@ -211,6 +214,9 @@ POPENNT_SUPPORT_PEB NTAPI NtCurrentPeb(VOID)
     DWORD characters = GetCurrentDirectoryW((DWORD)(sizeof(state->CurrentDirectory) / sizeof(state->CurrentDirectory[0])), state->CurrentDirectory);
     if (characters >= (sizeof(state->CurrentDirectory) / sizeof(state->CurrentDirectory[0]))) characters = 0;
     state->Parameters.CurrentDirectory.DosPath.Length = (USHORT)(characters * sizeof(WCHAR));
+    state->Parameters.StandardInput = GetStdHandle(STD_INPUT_HANDLE);
+    state->Parameters.StandardOutput = GetStdHandle(STD_OUTPUT_HANDLE);
+    state->Parameters.StandardError = GetStdHandle(STD_ERROR_HANDLE);
     return &state->Peb;
 }
 

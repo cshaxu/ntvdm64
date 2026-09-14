@@ -209,6 +209,10 @@ typedef struct _OPENNT_SUPPORT_PROCESS_PARAMETERS {
     OPENNT_SUPPORT_CURDIR CurrentDirectory;
     PVOID Environment;
     HANDLE ConsoleHandle;
+    /* DIVERGENCE(ADAPTER-WIN32-059): BaseCheckVDM reads only these original
+     * process-start fields; values come from public startup/std-handle APIs. */
+    HANDLE StandardInput, StandardOutput, StandardError;
+    ULONG WindowFlags;
 } OPENNT_SUPPORT_PROCESS_PARAMETERS, *POPENNT_SUPPORT_PROCESS_PARAMETERS;
 
 typedef struct _OPENNT_SUPPORT_PEB {

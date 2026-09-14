@@ -47,10 +47,12 @@ Detailed source identities and assertions are retained in the linked S2
 evidence. Product selection and retirement of local policy remain unfinished.
 
 Original GetBinaryTypeW/BaseIsDosApplication now pass focused x86 guest-type,
-PE, DLL, suffix and missing-file tests (1,038 original client lines restored
-total). A finite full-path binding avoids modern relative-output size and
-NULL-directory differences; original classifier bodies are unchanged. Final
-run16 selection, BaseCheckVDM/launch closure and local-policy retirement remain
+PE, DLL, suffix and missing-file tests. Complete original BaseCheckVDM now
+passes request/deep-copy, hotkey and pre-dispatch failure tests (1,914 lines
+restored across client groups). Finite startup/Console/CRT bindings retain
+the original launch body. The classifier's full-path binding avoids modern
+relative-output size and NULL-directory differences. Final
+run16 selection, remaining launch closure and local-policy retirement remain
 unfinished. This is not guest execution or three-product acceptance.
 
 ## T412 S1 historical checkpoints

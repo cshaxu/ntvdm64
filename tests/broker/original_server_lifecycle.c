@@ -11,6 +11,7 @@ static OPENNT_SUPPORT_TEB teb;
 extern HANDLE hwndWowExec;
 extern ULONG ulWowExecProcessSequenceNumber;
 BOOL BaseUpdateVDMEntry(ULONG, HANDLE *, ULONG, ULONG);
+BOOL BaseCheckVDM(ULONG, PCWCH, PCWCH, PCWCH, ANSI_STRING *, PBASE_API_MSG, PULONG, DWORD, LPSTARTUPINFOW);
 POPENNT_SUPPORT_PEB NTAPI NtCurrentPeb(VOID) { return &peb; }
 POPENNT_SUPPORT_TEB NTAPI opennt_support_current_teb(VOID) { return &teb; }
 PFNNOTIFYPROCESSCREATE UserNotifyProcessCreate = NULL;
@@ -26,6 +27,8 @@ NTSTATUS NTAPI CsrUnlockProcess(PCSR_PROCESS process) { (void)process; return 0;
 
 /* Test-local capture/dispatch transport; original client owns retry/copy policy. */
 static ULONG captures;
+static BOOL failCapture;
+static ULONG launchCalls;
 static HANDLE enqueueGate, queuedParent;
 static ULONG retryCalls, retryExit;
 static ULONG enqueueStatus;
@@ -33,6 +36,7 @@ PCSR_CAPTURE_HEADER NTAPI CsrAllocateCaptureBuffer(ULONG messages, ULONG pointer
 {
     PCSR_CAPTURE_HEADER capture;
     (void)messages; (void)pointers;
+    if(failCapture) return NULL;
     if (size > 1024 * 1024) return NULL;
     size = ROUND_UP(size,4);
     capture = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, sizeof(*capture) + size);
@@ -64,6 +68,9 @@ NTSTATUS NTAPI CsrClientCallServer(PCSR_API_MSG message, PCSR_CAPTURE_HEADER cap
     ULONG result;
     (void)capture; (void)length;
     switch (number) {
+    case CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepCheckVDM):
+        ++launchCalls;
+        result = BaseSrvCheckVDM(message,&reply); break;
     case CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepIsFirstVDM):
         result = BaseSrvIsFirstVDM(message,&reply); break;
     case CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepGetNextVDMCommand):
@@ -284,6 +291,50 @@ int main(void)
     clientInfo.CmdSize = sizeof(output);
     CHECK(GetNextVDMCommand(&clientInfo));
     CHECK(!clientInfo.CmdSize && captures == 0);
+    /* Original launcher construction -> actual original server deep copy. */
+    {
+        STARTUPINFOW launch={sizeof(launch)};
+        CHAR envBytes[]="PATH=O:\\ntvdm64\0";
+        ANSI_STRING env={sizeof(envBytes),sizeof(envBytes),envBytes};
+        ULONG task=0, before;
+        launch.lpTitle=L"original launch test";
+        launch.lpDesktop=L"default";
+        launch.lpReserved=L"test reserved";
+        launch.dwFlags=STARTF_USESTDHANDLES;
+        ZeroMemory(&m,sizeof(m));
+        CHECK(BaseCheckVDM(BINARY_TYPE_DOS|BINARY_TYPE_DOS_EXE,L"O:\\ntvdm64\\MEM.EXE",
+            L"\"O:\\ntvdm64\\MEM.EXE\"  /?",L"O:\\ntvdm64",&env,&m,&task,0,&launch));
+        CHECK(launchCalls==1 && captures==0 && m.u.CheckVDM.VDMState==VDM_NOT_PRESENT);
+        CHECK(BaseSrvGetConsoleRecord((HANDLE)1,&record)==0 && record!=NULL);
+        CHECK(!strcmp(record->DOSRecord->lpVDMInfo->CmdLine,"/?\r\n"));
+        CHECK(!strcmp(record->DOSRecord->lpVDMInfo->AppName,"O:\\ntvdm64\\MEM.EXE"));
+        CHECK(record->DOSRecord->lpVDMInfo->EnviornmentSize==sizeof(envBytes));
+        CHECK(!memcmp(record->DOSRecord->lpVDMInfo->Enviornment,envBytes,sizeof(envBytes)));
+        CHECK(!strcmp(record->DOSRecord->lpVDMInfo->Title,"original launch test"));
+        CHECK(!strcmp(record->DOSRecord->lpVDMInfo->Desktop,"default"));
+        CHECK(!strcmp(record->DOSRecord->lpVDMInfo->Reserved,"test reserved"));
+        ExitVDM(FALSE,0);
+        CHECK(BaseSrvGetConsoleRecord((HANDLE)1,&record)==(ULONG)STATUS_INVALID_PARAMETER);
+        launch.dwFlags=STARTF_USEHOTKEY;
+        launch.hStdInput=(HANDLE)42;
+        ZeroMemory(&m,sizeof(m));
+        CHECK(BaseCheckVDM(BINARY_TYPE_DOS,L"O:\\ntvdm64\\MEM.EXE",L"MEM.EXE",L"O:\\ntvdm64",&env,&m,&task,0,&launch));
+        CHECK(BaseSrvGetConsoleRecord((HANDLE)1,&record)==0 && record!=NULL);
+        CHECK(!strcmp(record->DOSRecord->lpVDMInfo->Reserved,"hotkey.42 test reserved"));
+        CHECK(!(launch.dwFlags & STARTF_USEHOTKEY) && launch.hStdInput==NULL && captures==0);
+        /* Original routine frees its replacement reserved string on return. */
+        launch.lpReserved=NULL;
+        ExitVDM(FALSE,0);
+        before=launchCalls;
+        failCapture=TRUE;
+        ZeroMemory(&m,sizeof(m));
+        CHECK(!BaseCheckVDM(BINARY_TYPE_DOS,L"O:\\ntvdm64\\MEM.EXE",L"MEM.EXE",L"O:\\ntvdm64",&env,&m,&task,0,&launch));
+        CHECK(GetLastError()==ERROR_NOT_ENOUGH_MEMORY && captures==0 && launchCalls==before);
+        failCapture=FALSE;
+        CHECK(!BaseCheckVDM(BINARY_TYPE_DOS,L"O:\\ntvdm64\\MEM.EXE",L"MEM.EXE",L"O:\\ntvdm64",NULL,&m,&task,0,&launch));
+        CHECK(GetLastError()==ERROR_INVALID_PARAMETER && captures==0 && launchCalls==before);
+        puts("PASS: original BaseCheckVDM command/environment/startup capture, server ownership and allocation failure");
+    }
     puts("PASS: original first-VDM, record/command/directory capacity, dispatch/completion, parent/worker events, reentry, empty-WOW, cleanup");
     return 0;
 }
