@@ -28,7 +28,20 @@
 | Candidate Proposal | [Broker design](../proposals/proposal-cross-process-broker-closure-001.md). |
 | Working Plan | [T412 sequential S plan](../etc/operations/m0-t412-broker-restoration-plan.md). |
 
+S1 execution checkpoint: [source audit](../etc/evidence/m0-t412-s1-broker-owner-audit.md)
+records all eight discussion rows, the 1,349-line local-provider replacement
+envelope (not net deletion), and outstanding finite-boundary designs. The
+inherited HALT/RESET source-equivalence claim is contradicted by actual local
+bit consumption. The stop condition is reached: S1 remains open, with no S2
+activation or production change, pending owner disposition of the bounded
+event-consumer prerequisite. Full S1 design/count/runtime-proof work is not
+claimed complete.
+
 ## T411 Closed Packet
+
+T412 S1 found an inherited event-evidence contradiction; see the current
+[audit checkpoint](../etc/evidence/m0-t412-s1-broker-owner-audit.md).
+The historical closure below does not prove HALT/RESET equivalence.
 
 ### M0 T411 S4 — CCPU event-profile closure
 

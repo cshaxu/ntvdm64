@@ -2,6 +2,12 @@
 
 ## Result
 
+Subsequent qualification: the [T412 S1 source audit](m0-t412-s1-broker-owner-audit.md#stop-finding-inherited-reset-consumption-claim-contradicted)
+found that HALT consumes RESET before the normal reset handler, unlike the
+original observe-only HALT check. The blanket consumer-order equivalence
+claim below is therefore not valid for that path. The original record is
+retained as history; runtime repair/revalidation remains outstanding.
+
 `c_main.c` has five producers (reset, timer, SIGIO, hardware interrupt and
 SAD) and two consumer regions (HALT and normal inter-instruction processing).
 The original source uses `|=` and `&= ~` on one shared map.  In the standalone
