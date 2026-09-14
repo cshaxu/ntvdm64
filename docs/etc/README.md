@@ -26,6 +26,7 @@ proves the original `FSTI` continuation reaches BOP `FDh`.
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T412 S1 RESET-consumer repair](evidence/m0-t412-s1-reset-consumer-repair.md) | M0 T412 S1 | Original CCPU A/B proof, bounded source repair and three-way EDIT regression/publication hold. | Retain through T412 prerequisite disposition and closure. |
 | [T412 S1 broker owner audit checkpoint](evidence/m0-t412-s1-broker-owner-audit.md) | M0 T412 S1 | Actual D01--D07/D10 providers, measured replacement envelope and inherited RESET evidence stop. | Retain through T412 closure and prerequisite disposition. |
 | [T412 broker restoration working plan](operations/m0-t412-broker-restoration-plan.md) | M0 T412 | Sequential audit, original-owner recovery, three-program integration and closure plan. | Retain through T412 closure. |
 | [T411 S4 CCPU event-profile disposition](evidence/m0-t411-s4-ccpu-event-profile.md) | M0 T411 S4 | Proves why standalone atomic event transport must remain. | Retain through T411 closure. |

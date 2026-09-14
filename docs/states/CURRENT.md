@@ -11,15 +11,15 @@
 | Field | Record |
 | --- | --- |
 | Identifier Mode | M0 T412 S1; Ordinary Mode, one implementer and one active sequential S packet. |
-| Admission And Approval | Owner admitted the queue-head broker package on 2026-09-13 and requested S decomposition first. Existing authorization covers commit and push to main. This admission records the plan; it does not claim implementation or audit completion. |
+| Admission And Approval | Owner admitted the broker package on 2026-09-13, then S1 execution and the explicitly proposed event-consumer prerequisite repair. Existing authorization covers commit and push to main. This does not admit broader CPU/video implementation or claim S1 completion. |
 | Objective | Audit D01--D07/D10 and design one original BaseSrv/BaseClient lifecycle across run16.exe, basesrv.exe and ntvdm.exe, minimizing mirror diff, overlay and duplicate autonomous policy. |
-| Non-goals | No source implementation during S1; no CSRSS/kernel shell, CPU30/x64 executor, generic shell parser, or claim of full WRITE recovery. |
+| Non-goals | No broker production implementation during S1; no CSRSS/kernel shell, CPU30/x64 executor, generic shell parser, or claim of full WRITE recovery. Owner approval following the audit checkpoint admits the bounded event-consumer prerequisite repair, not instruction-decoder changes. |
 | Reference Baseline | Entry commit bb9fe640d; selected original OpenNT package provenance and current formal x86 CCPU40 graph. Prior closure records are evidence indexes, not substitutes for selected-provider/runtime proof. |
-| Files And ABI Surface | Governance and indexed audit/design records; review BaseSrv/BaseClient VDM APIs, app entry, broker/session lifecycle and their existing mirror/overlay/adapter providers. No production ABI changes in S1. |
+| Files And ABI Surface | Governance and indexed audit/design records; BaseSrv/BaseClient and finite broker boundary review. Approved prerequisite: c_main.c event-consumer profile, mirror register and focused verification tools/tests; no public ABI changes. |
 | Applicable Rules | Source policy; execution, architecture, coding and document rules; package-first recovery and original-owner placement. |
-| Verification | Per-row original/current provider comparison, build and runtime evidence attribution, IPC/resource/state-transition design review; documentation governance and git diff checks. S1 is research/design and has no new machine acceptance row. |
+| Verification | Per-row provider/design review; approved prerequisite uses source-extracted x86 consumer checks plus actual original CCPU/SAS HALT RESET A/B, formal product build and Console runtime smoke. Distinguish each evidence level; governance and diff checks remain required. |
 | Expected Markers | D01--D07/D10 owner/disposition ledger; measured removal candidates; finite IPC contract; positive/negative integration matrix; explicit prerequisite gaps. No fabricated runtime PASS markers. |
-| Asset Needs | Existing selected source and immutable guest media; build outputs under build/, real-run observations under O:\ntvdm64\logs. No media import or deployment in this admission. |
+| Asset Needs | Existing selected source and immutable guest media; build outputs under build/M0-T412/S1/event-profile, observations under O:\ntvdm64\logs. No media import. Approved prerequisite candidates may be temporarily staged for comparison; restore the previous publication on regression. |
 | Reporting Requirements | Report original code recoverable, retained seams with reasons, estimated removable lines by mirror/overlay/autonomous category, unresolved decisions and S2 implementation boundary. |
 | Stop Conditions | Missing provenance, unbounded platform dependency, contradictory selected-provider evidence, or changed product scope: record the exact issue; do not manufacture success or a parallel provider. |
 | Exit Criteria | Complete scoped audit and coherent design covering all mandatory broker rows; reconcile executable naming/deployment rules; identify and disposition direct prerequisite gaps before implementation. Report the design before advancing. |
@@ -33,9 +33,21 @@ records all eight discussion rows, the 1,349-line local-provider replacement
 envelope (not net deletion), and outstanding finite-boundary designs. The
 inherited HALT/RESET source-equivalence claim is contradicted by actual local
 bit consumption. The stop condition is reached: S1 remains open, with no S2
-activation or production change, pending owner disposition of the bounded
-event-consumer prerequisite. Full S1 design/count/runtime-proof work is not
+activation. The owner subsequently approved the bounded event-consumer
+prerequisite: audit HALT/normal RESET, timer/SAD and PIC acknowledgement as one
+profile; preserve atomic notification mechanics and original consumption order.
+Build/fixture outputs use build/M0-T412/S1/event-profile; real-run logs remain
+under O:\ntvdm64\logs. Source-extracted checks are not full CCPU runtime proof.
+Full S1 design/count/runtime-proof work is not
 claimed complete.
+
+Approved prerequisite delivery: [RESET repair evidence](../etc/evidence/m0-t412-s1-reset-consumer-repair.md)
+proves original-CPU pre-fix AX=DEAD versus repaired AX=BEEF. Formal x86 build
+and MEM/COMMAND smoke completed. EDIT is corrupted in both same-graph repaired
+and pre-fix builds, while the old published product renders cleanly in this
+comparison. Both publication paths have been restored to the old C0771B...652F
+binary. No EDIT acceptance, S1 closure or S2 activation is claimed. The
+source/build lineage regression requires disposition before product acceptance.
 
 ## T411 Closed Packet
 

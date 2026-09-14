@@ -4070,7 +4070,9 @@ TYPEE8:
        while ( TRUE )
 	 {
 	 /* RESET ends the halt state. */
-	 if ( c_cpu_take_event(CPU_RESET_EXCEPTION_MASK) )
+	 /* DIVERGENCE(MVDM-HOST-DIV-214): atomically observe only, as in
+	  * the original HALT path; the normal RESET handler consumes it. */
+	 if ( c_cpu_event_snapshot() & CPU_RESET_EXCEPTION_MASK )
 	    break;
 
 	 /* An enabled INTR ends the halt state. */
