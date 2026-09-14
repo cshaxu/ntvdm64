@@ -1052,6 +1052,7 @@ if ($Architecture -eq 'x86') {
             @('startup', 'src/adapter-opennt-host/basesrv/source/base_startup.c', $baseOwnerFlags),
             @('dispatch', 'src/adapter-opennt-host/basesrv/source/base_dispatch.c', $baseServerFlags),
             @('resources', 'src/adapter-opennt-host/basesrv/source/base_resource.c', ($baseServerFlags + ' /DOPENNT_BASE_NATIVE_RESOURCES')),
+            @('streams', 'src/adapter-opennt-host/basesrv/source/base_stream.c', $baseServerFlags),
             @('registry', 'src/adapter-opennt-host/basesrv/source/base_process.c', $baseServerFlags),
             @('request', 'src/adapter-opennt-host/basesrv/source/base_request.c', $baseServerFlags),
             @('config', 'src/adapter-opennt-host/basesrv/source/base_config.c', $baseOwnerFlags),

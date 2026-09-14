@@ -1090,3 +1090,18 @@ Forcing a new-console/DosSesId route to bypass this unfinished binding would
 therefore change source behavior and is not a valid three-program shortcut.
 This checkpoint is source evidence for the next binding change, not a claim
 that command dispatch or worker receipt delivery has been implemented.
+
+The formal base_stream.c callback now implements this stream-only translation
+slice. It requires the trusted source/target process pair and source receipt
+generation, resolves the source into a borrowed native reference and delegates
+target publication/revocation. Original BaseSrv remains the copy/alias/cleanup
+owner. Unsupported native operations do not fall back to remote duplication.
+The lifecycle suite links streams.obj from the formal bindings archive and
+drives the original functions: a shared stdout/stderr source is delivered
+once, becomes a distinct target receipt, transfers an actual pipe byte, and
+is revoked twice by the unchanged original close loop. Wrong generation and
+target are rejected before any delivery or field change. The formal archive
+build and extended original lifecycle suite pass; the map confirms the owner.
+The test target is an in-process receiver, not the product worker RPC endpoint.
+Journal/ack and full resource-operation composition are still required before
+selecting this callback for product command dispatch.

@@ -9,6 +9,7 @@
 #include <base_payload.h>
 #include <base_values.h>
 #include <base_command.h>
+#include <base_stream.h>
 #include "broker/vdm_receipt.h"
 #include "broker/vdm_delivery.h"
 #include <stdio.h>
@@ -17,6 +18,22 @@
 static CSR_PROCESS caller;
 static CSR_THREAD thread;
 static OPENNT_BASE_PROCESS_REGISTRY processRegistry;
+typedef struct stream_target_test {
+    broker_vdm_receipts receipts;
+    DWORD copies,closes;
+} stream_target_test;
+static NTSTATUS accept_stream_target(void *context,HANDLE resource,uint32_t *receipt)
+{
+    stream_target_test *test=context;
+    ++test->copies;
+    return broker_vdm_receipt_accept(&test->receipts,BROKER_VDM_STDOUT,resource,receipt) ? STATUS_INVALID_HANDLE : 0;
+}
+static NTSTATUS revoke_stream_target(void *context,uint32_t receipt)
+{
+    stream_target_test *test=context;
+    ++test->closes;
+    return broker_vdm_receipt_revoke(&test->receipts,2,receipt) ? STATUS_INVALID_HANDLE : 0;
+}
 typedef struct stream_rollback_test {
     broker_vdm_receipts receipts;
     broker_vdm_delivery delivery;
@@ -535,6 +552,47 @@ int main(int argc, char **argv)
         CHECK(CsrLockProcessByClientId((HANDLE)GetCurrentProcessId(),&found)==0 && found==&caller);
         CHECK(!OpenNtBaseRemoveProcess(&processRegistry,&caller) && GetLastError()==ERROR_BUSY);
         CHECK(CsrUnlockProcess(found)==0);
+    }
+    {
+        broker_vdm_receipts source={0};
+        stream_target_test target={0};
+        OPENNT_BASE_STREAM_BINDING streams={0};
+        OPENNT_BASE_RESOURCE_BINDING resources={&streams,OpenNtBaseDuplicateStream,NULL};
+        VDMINFO info={0}; DOSRECORD record={0};
+        HANDLE reader,writer,event,borrowed;
+        uint32_t id,padding;
+        DWORD bytes;char value;
+        CHECK(broker_vdm_receipts_initialize(&source,1)==0);
+        CHECK(broker_vdm_receipts_initialize(&target.receipts,2)==0);
+        CHECK(CreatePipe(&reader,&writer,NULL,0));
+        event=CreateEventW(NULL,TRUE,FALSE,NULL);CHECK(event!=NULL);
+        CHECK(!broker_vdm_receipt_accept(&target.receipts,BROKER_VDM_PARENT_WAIT,event,&padding));
+        CHECK(!broker_vdm_receipt_accept(&source,BROKER_VDM_STDOUT,writer,&id));
+        streams.source_process=caller.ProcessHandle;streams.target_process=GetCurrentProcess();
+        streams.source_receipts=&source;streams.source_generation=1;
+        streams.context=&target;streams.deliver=accept_stream_target;streams.revoke=revoke_stream_target;
+        info.StdOut=info.StdErr=(HANDLE)id;record.lpVDMInfo=&info;
+        thread.Process=&caller;
+        CHECK(OpenNtBaseBindServerRequestThread(&thread)==NULL);
+        CHECK(OpenNtBaseBindResources(&resources)==NULL);
+        streams.source_generation=2;
+        CHECK(BaseSrvDupStandardHandles(GetCurrentProcess(),&record)==(ULONG)STATUS_INVALID_HANDLE);
+        CHECK(target.copies==0 && info.StdOut==(HANDLE)id && info.StdErr==(HANDLE)id);
+        streams.source_generation=1;
+        CHECK(BaseSrvDupStandardHandles((HANDLE)1,&record)==0xc00000bbUL);
+        CHECK(target.copies==0 && info.StdOut==(HANDLE)id && info.StdErr==(HANDLE)id);
+        CHECK(BaseSrvDupStandardHandles(GetCurrentProcess(),&record)==0);
+        CHECK(target.copies==1 && info.StdOut==info.StdErr && info.StdOut!=(HANDLE)id);
+        CHECK(!broker_vdm_receipt_resolve(&target.receipts,2,(uint32_t)info.StdOut,BROKER_VDM_STDERR,&borrowed));
+        CHECK(WriteFile(borrowed,"x",1,&bytes,NULL) && bytes==1);
+        CHECK(ReadFile(reader,&value,1,&bytes,NULL) && bytes==1 && value=='x');
+        BaseSrvCloseStandardHandles(GetCurrentProcess(),&record);
+        CHECK(target.closes==2 && !info.StdOut && !info.StdErr);
+        CHECK(OpenNtBaseBindResources(NULL)==&resources);
+        CHECK(OpenNtBaseBindServerRequestThread(NULL)==&thread);
+        broker_vdm_receipts_drain(&source);broker_vdm_receipts_drain(&target.receipts);
+        CHECK(CloseHandle(writer) && CloseHandle(reader) && CloseHandle(event));
+        puts("PASS: original stream copy/alias/close calls use receipt translation and actual pipe data");
     }
     thread.Process = &caller;
     thread.ThreadHandle = GetCurrentThread();

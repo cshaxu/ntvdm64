@@ -177,6 +177,22 @@ file and anonymous pipe, reject wrong generation/wait role, and prove revoke
 and disconnect close the broker's last pipe writer. Command/worker binding of
 these receipts and ambiguous-reply rollback remain unimplemented.
 
+`base_stream.h/.c` implement the standard-stream slice of the existing native
+resource callback. A trusted synchronous scope pins source/target processes and
+the source receipt generation. Source-shaped local carrier values are receipt
+IDs, never passed to NtDuplicateObject as native handles. The callback resolves
+the source stream, delegates acknowledged target delivery, or delegates target
+revocation for CLOSE_SOURCE. It admits only the exact original stream flags,
+keeps output unchanged on failure and does not rewrite the ordered original
+copy/alias/close loops. There is no fallback native remote duplication. Other
+resource operations are explicitly unsupported by this slice. The original
+lifecycle test selects streams.obj from the formal binding archive and drives
+original BaseSrvDupStandardHandles/CloseStandardHandles: one delivery for an
+stdout/stderr alias, distinct destination receipt, actual pipe byte transfer,
+two repeat-safe closes, wrong source generation and target rejection. Target
+delivery in this test is local; product worker RPC/journal integration remains
+open. This finite missing CSR transport is newly authored, not original policy.
+
 `base_process.h`/`base_process.c` supply scoped registered-process lookup with
 the original CsrLockProcessByClientId/CsrUnlockProcess shape. Original CSR
 process.c depends on CsrRootProcess and CSR reference/deletion machinery;
