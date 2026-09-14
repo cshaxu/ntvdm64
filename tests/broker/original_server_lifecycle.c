@@ -7,6 +7,7 @@
 #include <base_dispatch.h>
 #include <base_startup.h>
 #include <base_payload.h>
+#include <base_values.h>
 #include "broker/vdm_receipt.h"
 #include "broker/vdm_delivery.h"
 #include <stdio.h>
@@ -138,6 +139,58 @@ static ULONG capture_blocks(void)
     HeapUnlock(CsrPortHeap);
     return count;
 }
+static BOOL scalar_roundtrip(PBASE_API_MSG message, uint32_t operation)
+{
+    unsigned char values[sizeof(broker_vdm_get_values)], zero[sizeof(values)]={0};
+    uint32_t size=operation==BROKER_VDM_CHECK?sizeof(broker_vdm_check_values):
+        operation==BROKER_VDM_UPDATE?sizeof(broker_vdm_update_values):sizeof(broker_vdm_get_values);
+    BASE_API_MSG copy=*message;
+    if (operation!=BROKER_VDM_CHECK && operation!=BROKER_VDM_UPDATE && operation!=BROKER_VDM_GET_NEXT) return TRUE;
+    return OpenNtBaseEncodeValues(message,operation,values,size) &&
+        OpenNtBaseDecodeValues(zero,size,operation,&copy) &&
+        OpenNtBaseDecodeValues(values,size,operation,&copy) && !memcmp(message,&copy,sizeof(copy));
+}
+
+static BOOL scalar_negatives(void)
+{
+    BASE_API_MSG original, target;
+    uint32_t op,i,size,values[7],expected[7]={1,2,3,4,5,6,7};
+    memset(&original,0xa5,sizeof(original));
+    for (op=BROKER_VDM_CHECK;op<=BROKER_VDM_GET_NEXT;++op) {
+        size=op==BROKER_VDM_CHECK?24:op==BROKER_VDM_UPDATE?16:28;
+        if (op==BROKER_VDM_CHECK) {
+            original.u.CheckVDM.iTask=1; original.u.CheckVDM.BinaryType=2;
+            original.u.CheckVDM.CodePage=3; original.u.CheckVDM.dwCreationFlags=4;
+            original.u.CheckVDM.CurDrive=5; original.u.CheckVDM.VDMState=6;
+        } else if (op==BROKER_VDM_UPDATE) {
+            original.u.UpdateVDMEntry.iTask=1; original.u.UpdateVDMEntry.BinaryType=2;
+            original.u.UpdateVDMEntry.EntryIndex=3; original.u.UpdateVDMEntry.VDMCreationState=4;
+        } else {
+            original.u.GetNextVDMCommand.iTask=1; original.u.GetNextVDMCommand.CodePage=2;
+            original.u.GetNextVDMCommand.dwCreationFlags=3; original.u.GetNextVDMCommand.ExitCode=4;
+            original.u.GetNextVDMCommand.CurrentDrive=5; original.u.GetNextVDMCommand.VDMState=6;
+            original.u.GetNextVDMCommand.fComingFromBat=7;
+        }
+        if (!scalar_roundtrip(&original,op) || !OpenNtBaseEncodeValues(&original,op,values,size) ||
+            memcmp(values,expected,size)) return FALSE;
+        for (i=0;i<size;++i) {
+            target=original;
+            if (OpenNtBaseDecodeValues(values,i,op,&target) || memcmp(&target,&original,sizeof(target))) return FALSE;
+        }
+        /* Each narrowing field independently rejects overflow, without
+         * changing any preceding scalar, pointer or resource field. */
+        for (i=op==BROKER_VDM_UPDATE?2:4;i<size/4;++i) {
+            uint32_t saved=values[i];
+            values[i]=(op==BROKER_VDM_GET_NEXT && i==6)?0x100u:0x10000u;
+            target=original;
+            if (OpenNtBaseDecodeValues(values,size,op,&target) || memcmp(&target,&original,sizeof(target))) return FALSE;
+            values[i]=saved;
+        }
+    }
+    target=original;
+    return !OpenNtBaseDecodeValues(values,28,0,&target) && !memcmp(&target,&original,sizeof(target));
+}
+
 NTSTATUS NTAPI CsrClientCallServer(PCSR_API_MSG message, PCSR_CAPTURE_HEADER capture,
     CSR_API_NUMBER number, ULONG length)
 {
@@ -152,6 +205,7 @@ NTSTATUS NTAPI CsrClientCallServer(PCSR_API_MSG message, PCSR_CAPTURE_HEADER cap
     OPENNT_BASE_GET_PAYLOAD getPayload={0};
     unsigned char getRequest[16*BROKER_VDM_PAYLOAD_FIELDS];
     (void)capture;
+    if (!scalar_negatives() || !scalar_roundtrip((PBASE_API_MSG)message,OpenNtBaseVdmOperation(number))) return STATUS_INVALID_PARAMETER;
     if (number == CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepCheckVDM)) ++launchCalls;
     if (enqueueGate && number == CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepGetNextVDMCommand)) {
         PBASE_GET_NEXT_VDM_COMMAND_MSG request = &((PBASE_API_MSG)message)->u.GetNextVDMCommand;
@@ -182,6 +236,7 @@ NTSTATUS NTAPI CsrClientCallServer(PCSR_API_MSG message, PCSR_CAPTURE_HEADER cap
         if (OpenNtBasePrepareGetPayload(getRequest,payloadBytes,request,&getPayload)) return STATUS_NO_MEMORY;
     }
     result = OpenNtBaseDispatchOperation(message,OpenNtBaseVdmOperation(number),length);
+    if (!scalar_roundtrip((PBASE_API_MSG)message,OpenNtBaseVdmOperation(number))) result=STATUS_INVALID_PARAMETER;
     if (number == CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepGetNextVDMCommand)) {
         PBASE_GET_NEXT_VDM_COMMAND_MSG response=&((PBASE_API_MSG)message)->u.GetNextVDMCommand;
         BOOL prepared=OpenNtBaseFinishGetPayload(response,&getPayload);

@@ -684,3 +684,25 @@ This proves actual RPC reaches an original service with authenticated registered
 context. The endpoint and serialization lock remain fixture composition, not
 the final basesrv executable. Full command/resource exchange and three-product
 DOS execution are still pending. No deployed executable changed.
+
+## Launch/update/command scalar fragments
+
+The formal binding archive now includes base_values.c. Its operation-selected
+24/16/28-byte fragments carry all non-buffer numeric CheckVDM, UpdateVDMEntry
+and GetNextVDMCommand fields from original basemsg.h. They deliberately exclude
+Console, process, stream and wait HANDLEs and StartupInfo pointers. No original
+service body is changed. Validation checks the exact fragment size and every
+USHORT/WORD/BOOLEAN width before changing any native field; original service
+policy remains responsible for interpreting state, flags and task IDs.
+
+The formal owner build and original lifecycle suite pass. Distinct numeric
+values verify field order independently of the encoder/decoder roundtrip.
+Every truncated size and each narrowing overflow are rejected without native
+message mutation. Actual original client requests and service responses also
+roundtrip these scalars while whole-message comparison protects unrelated
+pointer/resource fields. Map checks require the formal values.obj provider.
+Only inherited private-header anonymous-union warnings remain for the new unit.
+
+These are still fragments, not a complete authenticated command exchange.
+Envelope/body combination, native attachment resolution, product entry points
+and real DOS execution remain S3 obligations. No deployed executable changed.

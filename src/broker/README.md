@@ -80,6 +80,13 @@ has formal-provider tests, but is not a full/versioned command envelope or
 native-message decoder. Operation/direction/string semantics,
 resource IDs and authentication remain required integration work.
 
+`vdm_values.h` carries operation-selected CheckVDM, UpdateVDMEntry and GetNext
+numeric fragments (24, 16 and 28 bytes). Task IDs, flags, state and exit codes
+retain original fields; no Console/stream/process/wait HANDLE is included.
+The native binding validates exact sizes and narrowing before mutation. These
+fragments still require the envelope, copied buffers and authenticated resource
+binding; they are not independently executable commands.
+
 `vdm_startup.h` contains the separate forty-byte numeric startup fragment:
 presence and the nine scalar fields copied by original BaseCheckVDM. Its
 package-private encode/decode binding is in adapter-opennt-host; strings,

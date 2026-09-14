@@ -153,6 +153,15 @@ message layout becomes the wire protocol. Original BaseClient lifecycle calls in
 fixture now pass through this mapping. Authentication and full message-body
 validation remain prerequisites of product endpoint use.
 
+`base_values.h`/`base_values.c` bind original basemsg.h's CheckVDM,
+UpdateVDMEntry and GetNextVDMCommand numeric fields. Exact-size copied fragments
+replace unavailable CSR address-space transport, not original service policy.
+All USHORT/WORD/BOOLEAN width checks precede writes; resources, pointers and
+startup storage remain untouched. Formal owner archives select this binding;
+the original lifecycle suite checks distinct field values, full-message
+preservation, truncation and each narrowing overflow. Product command transport
+must still combine these fragments with authenticated resources and buffers.
+
 `base_startup.h`/`base_startup.c` bind only original BaseCheckVDM's nine numeric
 STARTUPINFO fields to the broker's fixed-width startup fragment. Original
 vdm.c selects these fields explicitly and transmits strings and standard
