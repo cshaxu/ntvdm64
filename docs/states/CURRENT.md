@@ -52,6 +52,13 @@ Focused tests pass real client wait/wake/retry with cleared exit code and
 original cleanup. This remains test-graph selection, not product publication;
 classification, launch/update client routines and product bindings remain S2 work.
 
+BaseUpdateVDMEntry is now restored and passes original client/server process-to-
+wait conversion (767 original client lines restored total). Classification
+review proves modern native path conversion writes beyond the old 12-byte
+relative-name structure; the guarded ABI probe is recorded in S2 evidence.
+Its correctly sized binding and classifier restoration are next. No current
+runtime regression or three-product acceptance is claimed from this finding.
+
 ## T412 S1 historical checkpoints
 
 S1 execution checkpoint: [source audit](../etc/evidence/m0-t412-s1-broker-owner-audit.md)

@@ -10,6 +10,7 @@ static OPENNT_SUPPORT_PEB peb;
 static OPENNT_SUPPORT_TEB teb;
 extern HANDLE hwndWowExec;
 extern ULONG ulWowExecProcessSequenceNumber;
+BOOL BaseUpdateVDMEntry(ULONG, HANDLE *, ULONG, ULONG);
 POPENNT_SUPPORT_PEB NTAPI NtCurrentPeb(VOID) { return &peb; }
 POPENNT_SUPPORT_TEB NTAPI opennt_support_current_teb(VOID) { return &teb; }
 PFNNOTIFYPROCESSCREATE UserNotifyProcessCreate = NULL;
@@ -87,6 +88,8 @@ NTSTATUS NTAPI CsrClientCallServer(PCSR_API_MSG message, PCSR_CAPTURE_HEADER cap
         result = BaseSrvBatNotification(message,&reply); break;
     case CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepRegisterWowExec):
         result = BaseSrvRegisterWowExec(message,&reply); break;
+    case CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepUpdateVDMEntry):
+        result = BaseSrvUpdateVDMEntry(message,&reply); break;
     default: return (NTSTATUS)STATUS_INVALID_PARAMETER;
     }
     message->ReturnValue = result;
@@ -195,8 +198,8 @@ int main(void)
     m.u.UpdateVDMEntry.BinaryType = BINARY_TYPE_DOS;
     m.u.UpdateVDMEntry.EntryIndex = UPDATE_VDM_PROCESS_HANDLE;
     m.u.UpdateVDMEntry.VDMProcessHandle = GetCurrentProcess();
-    CHECK(BaseSrvUpdateVDMEntry((PCSR_API_MSG)&m,&reply) == 0);
-    parentWait = m.u.UpdateVDMEntry.WaitObjectForParent;
+    parentWait = GetCurrentProcess();
+    CHECK(BaseUpdateVDMEntry(UPDATE_VDM_PROCESS_HANDLE,&parentWait,0,BINARY_TYPE_DOS));
     CHECK(parentWait && WaitForSingleObject(parentWait,0) == WAIT_TIMEOUT);
 
     ZeroMemory(&m,sizeof(m));

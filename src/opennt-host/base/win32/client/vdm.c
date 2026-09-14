@@ -887,4 +887,62 @@ Return Value:
                         );
     return;
 }
+
+BOOL
+BaseUpdateVDMEntry(
+    IN ULONG UpdateIndex,
+    IN OUT HANDLE *WaitHandle,
+    IN ULONG IndexInfo,
+    IN ULONG BinaryType
+    )
+{
+    NTSTATUS Status;
+    BASE_API_MSG m;
+    PBASE_UPDATE_VDM_ENTRY_MSG c= (PBASE_UPDATE_VDM_ENTRY_MSG)&m.u.UpdateVDMEntry;
+
+    switch (UpdateIndex) {
+	case UPDATE_VDM_UNDO_CREATION:
+	    c->iTask = (ULONG)*WaitHandle;
+	    c->VDMCreationState = (USHORT)IndexInfo;
+	    break;
+	case UPDATE_VDM_PROCESS_HANDLE:
+	    c->VDMProcessHandle = *WaitHandle;	// Actually this is VDM handle
+	    c->iTask = IndexInfo;
+	    break;
+        }
+
+    if(BinaryType == BINARY_TYPE_WIN16)
+        c->ConsoleHandle = (HANDLE)-1;
+    else if (c->iTask)
+        c->ConsoleHandle = 0;
+    else
+	c->ConsoleHandle = NtCurrentPeb()->ProcessParameters->ConsoleHandle;
+
+    c->EntryIndex = (WORD)UpdateIndex;
+    c->BinaryType = BinaryType;
+
+
+    Status = CsrClientCallServer(
+                      (PCSR_API_MSG)&m,
+                      NULL,
+                      CSR_MAKE_API_NUMBER( BASESRV_SERVERDLL_INDEX,
+                                           BasepUpdateVDMEntry
+                                         ),
+                      sizeof( *c )
+                      );
+
+    if (!NT_SUCCESS(Status) || !NT_SUCCESS((NTSTATUS)m.ReturnValue)) {
+	BaseSetLastNTError((NTSTATUS)m.ReturnValue);
+	return FALSE;
+	}
+
+    switch (UpdateIndex) {
+	case UPDATE_VDM_UNDO_CREATION:
+	    break;
+	case UPDATE_VDM_PROCESS_HANDLE:
+	    *WaitHandle = c->WaitObjectForParent;
+	    break;
+    }
+    return TRUE;
+}
 #endif

@@ -117,6 +117,14 @@ from the same pinned source/revision. No additional outgoing CSR operation
 shape is needed beyond the four declared bindings. See the
 [S2 execution evidence](../../docs/etc/evidence/m0-t412-s2-original-lifecycle.md).
 
+BaseUpdateVDMEntry is also restored unchanged in that cohort (57 lines;
+LF-normalized SHA-256
+`de56cfccd08922ae57df7332cc8df70f60db186f44f177336188c2d236e9fd26`).
+Its process-reference to wait-handle update is exercised against the original
+server. Classification remains pending its native path-output ABI binding;
+do not mistake the retained NT4 12-byte relative-name declaration for the
+modern native output capacity.
+
 | Identifier | Original purpose | Reason for divergence | Selected implementation | Files |
 | --- | --- | --- | --- | --- |
 | OPENNT-HOST-001 | `public/sdk/inc/ntexapi.h` declares the historical NT Ex system-service surface. | The selected non-MONITOR `softpc.new/host/src/nt_eoi.c` preserves its original include, and `nt_timer.c` reaches only its performance-counter/tick declarations. Importing the complete header would falsely enlarge the user-mode host closure. | Retain the source-identified true subset as the same-named OpenNT declaration carrier. The selected MVDM sources remain unchanged; no Ex service, controller, or kernel-VDM substitute is supplied. | `public/sdk/inc/ntexapi.h` |

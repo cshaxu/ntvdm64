@@ -129,3 +129,32 @@ was a test-transport correction, not an edit to the original directory code.
 No new outgoing interface shape or service policy was required for this group.
 Native program classification, launch/update client routines and product
 resource/authentication bindings remain unfinished; S2 stays open.
+
+## Launch update and native path ABI continuation
+
+Original BaseUpdateVDMEntry is restored unchanged (57 lines, LF-normalized
+SHA-256 `de56cfccd08922ae57df7332cc8df70f60db186f44f177336188c2d236e9fd26`,
+same pinned source/revision). The lifecycle test now sends its actual test
+process handle through that original client and original server, verifies
+conversion to the unsignaled parent wait and retains the subsequent dispatch,
+completion and cleanup assertions. Total restored original client source is
+767 lines; this is not net deletion or product selection.
+
+Classification review found a concrete ABI hazard before importing its body.
+Original GetBinaryTypeW allocates RTL_RELATIVE_NAME locally. Its original
+declaration in public/sdk/inc/nturtl.h contains STRING plus HANDLE: 12 bytes
+on x86. The installed native RtlDosPathNameToNtPathName_U writes a fourth
+DWORD. `node tools/audit/Verify-BrokerPathNameAbi.mjs` proves this with an
+overallocated guarded fixture for both absolute and relative paths: the DWORD
+at offset 12 changes from A5A5A5A5 to zero, while four guard DWORDs beginning
+at offset 16 remain unchanged. The original 12-byte storage would be too small.
+
+The probe builds x86 /MT under build/M0-T412/S2/path-abi, calls native NTDLL,
+frees its returned path and changes no runtime files. It proves write extent
+for these cases, not the semantic meaning/ownership of the extra DWORD or
+all path forms. This is an integration constraint for the pending classifier,
+not a diagnosed fault in the currently deployed classifier or in original
+NT4 logic. The next restoration must supply a correctly sized finite native
+declaration binding and verify image statuses, malformed names, DLL rejection
+and cleanup before selecting the original classifier. Do not patch the
+classification algorithm or invoke modern NTDLL with the undersized old type.

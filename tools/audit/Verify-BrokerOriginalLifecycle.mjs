@@ -17,6 +17,9 @@ assert.equal(createHash('sha256').update(clientBody).digest('hex'),
 const lifecycleBody=clientSource.match(/VOID\r?\nAPIENTRY\r?\nExitVDM\([\s\S]*?VOID\r?\nAPIENTRY\r?\nRegisterWowExec\([\s\S]*?\r?\n}\r?\n/)[0].replace(/\r\n/g,'\n');
 assert.equal(createHash('sha256').update(lifecycleBody).digest('hex'),
     '2936de23dcbbdec23cf9ea23416606a7a3faeb96473d407e4bfaee00f89ac3aa','Original client lifecycle group changed');
+const updateBody=clientSource.match(/BOOL\r?\nBaseUpdateVDMEntry\([\s\S]*?\r?\n}\r?\n/)[0].replace(/\r\n/g,'\n');
+assert.equal(createHash('sha256').update(updateBody).digest('hex'),
+    'de56cfccd08922ae57df7332cc8df70f60db186f44f177336188c2d236e9fd26','Original update body changed');
 const env=path.join(build,'msvc.cmd');
 fs.writeFileSync(env,'@echo off\r\nset "lifecycle_cwd=%CD%"\r\ncall "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat" -arch=x86 -host_arch=x64 >nul\r\nif errorlevel 1 exit /b %errorlevel%\r\ncd /d "%lifecycle_cwd%"\r\n%*\r\n');
 fs.writeFileSync(path.join(build,'ntdddfs.h'),'/* Unused umbrella dependency in test-only composition. */\n');
@@ -45,6 +48,7 @@ const image=fs.readFileSync(path.join(build,'original-lifecycle.exe'));
 assert.equal(image.readUInt16LE(image.readUInt32LE(0x3c)+4),0x14c);
 const map=fs.readFileSync(path.join(build,'original-lifecycle.map'),'utf8');
 assert(map.split(/\r?\n/).some(line=>line.includes('_GetNextVDMCommand@4')&&line.includes('client.obj')),'Original client provider missing');
+assert(map.split(/\r?\n/).some(line=>line.includes('_BaseUpdateVDMEntry')&&line.includes('client.obj')),'Original update provider missing');
 for (const symbol of ['ExitVDM','SetVDMCurrentDirectories','GetVDMCurrentDirectories','CmdBatNotification','RegisterWowExec'])
     assert(map.split(/\r?\n/).some(line=>line.includes(`_${symbol}@`)&&line.includes('client.obj')),`Original client provider missing: ${symbol}`);
 for(const symbol of ['BaseSrvCheckVDM','BaseSrvGetNextVDMCommand','BaseSrvSetReenterCount','BaseSrvExitDOSTask'])

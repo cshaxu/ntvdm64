@@ -40,3 +40,5 @@ The same four declarations also serve the restored original ExitVDM,
 SetVDMCurrentDirectories, GetVDMCurrentDirectories, CmdBatNotification and
 RegisterWowExec cohort. Their service opcodes dispatch to the corresponding
 original BaseSrv routines; no per-opcode policy implementation is added here.
+BaseUpdateVDMEntry is now another original client caller of that same dispatch
+binding; its signature is declared for the forthcoming launcher composition.
