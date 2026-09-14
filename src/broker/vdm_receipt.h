@@ -22,7 +22,9 @@ DWORD broker_vdm_receipts_initialize(broker_vdm_receipts *, uint32_t generation)
 DWORD broker_vdm_receipt_accept(broker_vdm_receipts *, uint32_t role, HANDLE, uint32_t *id);
 /* Borrowed native reference, valid until revoke/drain. Owner must not revoke
  * during its use. Neither the pointer nor this HANDLE is a wire field. */
-DWORD broker_vdm_receipt_resolve(broker_vdm_receipts *, uint32_t generation, uint32_t id, HANDLE *);
+/* Expected role is supplied by the decoded operation, not by the sender's
+ * receipt claim. Stream aliases share a family; wait roles remain distinct. */
+DWORD broker_vdm_receipt_resolve(broker_vdm_receipts *, uint32_t generation, uint32_t id, uint32_t expected_role, HANDLE *);
 DWORD broker_vdm_receipt_revoke(broker_vdm_receipts *, uint32_t generation, uint32_t id);
 void broker_vdm_receipts_drain(broker_vdm_receipts *);
 #endif

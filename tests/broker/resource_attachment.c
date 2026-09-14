@@ -63,10 +63,14 @@ error_status_t Server_Transfer(handle_t binding, HANDLE process, HANDLE input, H
         result=broker_vdm_receipt_accept(&receipts,BROKER_VDM_STDOUT,input,&fileId);
         if (!result) result=broker_vdm_receipt_accept(&receipts,BROKER_VDM_PARENT_WAIT,event,&eventId);
         if (result) { if (fileId) broker_vdm_receipt_revoke(&receipts,1,fileId); return result; }
-        if (broker_vdm_receipt_resolve(&receipts,2,fileId,&rejected)!=ERROR_ACCESS_DENIED || rejected)
+        if (broker_vdm_receipt_resolve(&receipts,2,fileId,BROKER_VDM_STDOUT,&rejected)!=ERROR_ACCESS_DENIED || rejected)
             return ERROR_INVALID_DATA;
-        if (broker_vdm_receipt_resolve(&receipts,1,fileId,&input) ||
-            broker_vdm_receipt_resolve(&receipts,1,eventId,&event)) return ERROR_INVALID_DATA;
+        if (broker_vdm_receipt_resolve(&receipts,1,eventId,BROKER_VDM_STDOUT,&rejected)!=ERROR_ACCESS_DENIED || rejected ||
+            broker_vdm_receipt_resolve(&receipts,1,fileId,BROKER_VDM_PARENT_WAIT,&rejected)!=ERROR_ACCESS_DENIED || rejected)
+            return ERROR_INVALID_DATA;
+        if (broker_vdm_receipt_resolve(&receipts,1,fileId,BROKER_VDM_STDERR,&input) ||
+            broker_vdm_receipt_resolve(&receipts,1,eventId,BROKER_VDM_PARENT_WAIT,&event)) return ERROR_INVALID_DATA;
+        puts("RECEIPT wrong-role=denied stream-alias=accepted");
         *fileReceipt=fileId; *eventReceipt=eventId;
         puts("RECEIPT retained=1 wrong-generation=denied"); fflush(stdout);
     }
@@ -155,7 +159,7 @@ int main(int argc, char **argv)
     if (receipts.issued) {
         HANDLE released=(HANDLE)1;
         if (broker_vdm_receipt_revoke(&receipts,1,1) || broker_vdm_receipt_revoke(&receipts,1,1) ||
-            broker_vdm_receipt_resolve(&receipts,1,1,&released)!=ERROR_NOT_FOUND || released) return 9;
+            broker_vdm_receipt_resolve(&receipts,1,1,BROKER_VDM_STDOUT,&released)!=ERROR_NOT_FOUND || released) return 9;
         broker_vdm_receipts_drain(&receipts);
         puts("RECEIPT revoked=1 repeat-safe=1 drained=1"); fflush(stdout);
     }

@@ -493,3 +493,29 @@ negatives, plus the original lifecycle/capture/rollback suite. This is local
 marshalling evidence, not RPC command delivery or three-program acceptance.
 Full envelope, resource identities and endpoint composition remain open;
 no runtime executable was deployed.
+
+## Receipt role validation before native materialization
+
+Reviewing the pending command-resource decoder found that receipt entries
+retained a native reference but discarded the accepted stream/wait role.
+Generation/ID lookup alone could therefore materialize an event for a stream
+field. The finite receipt binding now retains that role and requires the
+operation decoder's expected role at lookup. Wrong families, and distinct
+parent/worker wait roles, fail with ACCESS_DENIED and a NULL output. Invalid
+expected roles fail INVALID_PARAMETER. The three standard streams share one
+family, preserving original BaseSrvDupStandardHandles stdout/stderr aliases
+without widening retained access rights. The expected role is not taken from
+an untrusted receipt claim. Kernel object-type validation remains the typed
+authenticated attachment endpoint's prerequisite.
+
+This corrects the modern unavailable-CSR resource binding, not original BaseSrv
+policy. Regenerated S3/product and rebuilt the formal transport archive.
+Verify-VdmDeliveryJournal.mjs and formal Verify-BrokerOriginalLifecycle.mjs
+pass. Verify-BrokerResourceAttachment.mjs passes all nine real-process cases;
+each positive receiver transcript must prove event-as-stream and
+stream-as-event rejection plus stdout receipt resolution as stderr. Existing
+shared position, read-only denial, remote revoke and ownership checks remain.
+The journal fixture also checks parent/worker role mismatch and invalid role.
+All outputs remain under the existing S3 build roots. Actual command RPC
+decoding, resource callback integration and three-program execution are still
+open; no deployment or guest acceptance is claimed.

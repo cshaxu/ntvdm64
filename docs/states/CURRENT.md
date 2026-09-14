@@ -56,7 +56,8 @@ map-provider checks and passing lifecycle/journal/nine-case RPC regressions.
 The formal local dispatch binding replaces the fixture handler switch and
 passes length/identity negatives. Eight-buffer payload copying and malformed-span
 tests pass. Original startup scalars also roundtrip through the formal binding;
-complete RPC command decoding and deployment remain open.
+Receipt resolution now checks stream/wait roles with passing real RPC negatives.
+Complete RPC command decoding and deployment remain open.
 
 ## T412 S1 historical checkpoints
 

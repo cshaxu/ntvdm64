@@ -4,7 +4,7 @@
 #include "vdm_receipt.h"
 struct broker_vdm_receipt_entry {
     struct broker_vdm_receipt_entry *next;
-    uint32_t id;
+    uint32_t id, role;
     HANDLE resource;
 };
 DWORD broker_vdm_receipts_initialize(broker_vdm_receipts *state, uint32_t generation)
@@ -31,17 +31,21 @@ DWORD broker_vdm_receipt_accept(broker_vdm_receipts *state, uint32_t role, HANDL
         0,role<=BROKER_VDM_STDERR,DUPLICATE_SAME_ACCESS)) {
         error=GetLastError(); HeapFree(GetProcessHeap(),0,entry); return error;
     }
-    entry->id=++state->issued; entry->next=state->entries; state->entries=entry;
+    entry->id=++state->issued; entry->role=role;
+    entry->next=state->entries; state->entries=entry;
     *id=entry->id;
     return ERROR_SUCCESS;
 }
-DWORD broker_vdm_receipt_resolve(broker_vdm_receipts *state, uint32_t generation, uint32_t id, HANDLE *resource)
+DWORD broker_vdm_receipt_resolve(broker_vdm_receipts *state, uint32_t generation, uint32_t id, uint32_t expected_role, HANDLE *resource)
 {
     broker_vdm_receipt_entry *entry;
     if (!resource) return ERROR_INVALID_PARAMETER;
     *resource=NULL;
+    if (expected_role<BROKER_VDM_STDIN || expected_role>BROKER_VDM_WORKER_WAIT) return ERROR_INVALID_PARAMETER;
     if (!state || !generation || generation!=state->generation) return ERROR_ACCESS_DENIED;
     for (entry=state->entries;entry;entry=entry->next) if (entry->id==id) {
+        if (entry->role!=expected_role &&
+            !(entry->role<=BROKER_VDM_STDERR && expected_role<=BROKER_VDM_STDERR)) return ERROR_ACCESS_DENIED;
         *resource=entry->resource; return ERROR_SUCCESS;
     }
     return ERROR_NOT_FOUND;

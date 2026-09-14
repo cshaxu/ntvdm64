@@ -27,7 +27,7 @@ int main(void)
     CHECK(broker_vdm_receipt_accept(&peer.receipts,BROKER_VDM_WORKER_WAIT,NULL,&invalid)==ERROR_INVALID_HANDLE);
     CHECK(!broker_vdm_delivery_forget(&journal,second)); /* Proven non-delivery. */
     CHECK(!broker_vdm_delivery_rollback(&journal) && !journal.pending && peer.calls==1);
-    CHECK(broker_vdm_receipt_resolve(&peer.receipts,7,id,&borrowed)==ERROR_NOT_FOUND);
+    CHECK(broker_vdm_receipt_resolve(&peer.receipts,7,id,BROKER_VDM_PARENT_WAIT,&borrowed)==ERROR_NOT_FOUND);
     CHECK(SetEvent(event)); /* Rollback did not close the sender's original. */
     CHECK(!broker_vdm_delivery_prepare(&journal,&peer,revoke,&first));
     CHECK(broker_vdm_delivery_commit(&journal)==ERROR_IO_PENDING);
@@ -42,7 +42,10 @@ int main(void)
     CHECK(!broker_vdm_receipt_accept(&peer.receipts,BROKER_VDM_PARENT_WAIT,event,&id));
     CHECK(!broker_vdm_delivery_acknowledge(first,7,id));
     CHECK(!broker_vdm_delivery_commit(&journal) && !journal.pending);
-    CHECK(!broker_vdm_receipt_resolve(&peer.receipts,7,id,&borrowed));
+    CHECK(broker_vdm_receipt_resolve(&peer.receipts,7,id,BROKER_VDM_WORKER_WAIT,&borrowed)==ERROR_ACCESS_DENIED && !borrowed);
+    CHECK(broker_vdm_receipt_resolve(&peer.receipts,7,id,BROKER_VDM_STDIN,&borrowed)==ERROR_ACCESS_DENIED && !borrowed);
+    CHECK(broker_vdm_receipt_resolve(&peer.receipts,7,id,0,&borrowed)==ERROR_INVALID_PARAMETER && !borrowed);
+    CHECK(!broker_vdm_receipt_resolve(&peer.receipts,7,id,BROKER_VDM_PARENT_WAIT,&borrowed));
     CHECK(WaitForSingleObject(borrowed,0)==WAIT_OBJECT_0);
     CHECK(GetHandleInformation(borrowed,&flags) && !(flags&HANDLE_FLAG_INHERIT));
     broker_vdm_receipts_drain(&peer.receipts);

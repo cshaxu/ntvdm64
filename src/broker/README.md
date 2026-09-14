@@ -29,6 +29,11 @@ typed file/event endpoints may retain a same-access reference and issue a
 generation-scoped numeric receipt. Failed acquisition publishes no ID; IDs do
 not wrap or get reused within a generation; revocation is repeat-safe and drain
 releases outstanding references. Console objects are excluded from this path.
+Each entry retains its accepted role. Resolve requires the decoder's expected
+role, rejecting stream/event confusion and parent/worker-wait substitution.
+The three stream roles share one family to preserve source stream aliases;
+this neither widens retained access rights nor validates the kernel object
+type (the authenticated typed attachment endpoint must do that first).
 The owner must serialize receipt operations and resource use/revocation; a
 resolved HANDLE is borrowed until revocation, never serialized. Initialization
 requires fresh/drained storage and a fresh trusted generation. This is not a

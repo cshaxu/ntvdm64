@@ -109,6 +109,8 @@ try {
     if (!mode.startsWith('wrong-')) {
         for (const instance of [relay,...(target?[target]:[])]) {
             const transcript=instance.transcript();
+            if (!transcript.includes('RECEIPT wrong-role=denied stream-alias=accepted'))
+                throw Error('Receipt role/stream-alias checks missing');
             if (!transcript.includes('REVOKE generation=2 id=1 status=5') ||
                 (transcript.match(/REVOKE generation=1 id=1 status=0/g)||[]).length!==2 ||
                 !transcript.includes('REVOKE generation=1 id=2 status=0'))

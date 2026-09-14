@@ -391,12 +391,12 @@ int main(int argc, char **argv)
         CHECK(BaseSrvDupStandardHandles(GetCurrentProcess(),&record)==(ULONG)STATUS_ACCESS_DENIED);
         CHECK(OpenNtBaseBindResources(NULL)==&binding);
         CHECK(test.attempts==2 && info.StdOut==source && info.StdErr==source);
-        CHECK(!broker_vdm_receipt_resolve(&test.receipts,7,(uint32_t)info.StdIn,&received));
+        CHECK(!broker_vdm_receipt_resolve(&test.receipts,7,(uint32_t)info.StdIn,BROKER_VDM_STDIN,&received));
         CHECK(GetFileSize(received,NULL)==1);
         CHECK(GetHandleInformation(received,&handleFlags) && (handleFlags&HANDLE_FLAG_INHERIT));
         CHECK(!broker_vdm_delivery_rollback(&test.delivery));
         CHECK(!test.delivery.pending && !test.receipts.entries);
-        CHECK(broker_vdm_receipt_resolve(&test.receipts,7,(uint32_t)info.StdIn,&received)==ERROR_NOT_FOUND);
+        CHECK(broker_vdm_receipt_resolve(&test.receipts,7,(uint32_t)info.StdIn,BROKER_VDM_STDIN,&received)==ERROR_NOT_FOUND);
         CHECK(WriteFile(source,"B",1,&written,NULL) && written==1 && GetFileSize(source,NULL)==2);
         broker_vdm_receipts_drain(&test.receipts);
         CHECK(CloseHandle(source) && DeleteFileW(name));
