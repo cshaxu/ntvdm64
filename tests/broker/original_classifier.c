@@ -1,15 +1,10 @@
-/* Execute the original classifier. Only process fields/suffix initialization
- * are test bindings; file/path/section services are native operations. */
+/* Execute the original classifier with the selected real process-support
+ * provider. Only original BaseInit suffix initialization is fixture-owned. */
 #include <nt.h>
 #include <base_classifier.h>
 #include <stdio.h>
 #include <wchar.h>
 UNICODE_STRING BaseDotComSuffixName, BaseDotPifSuffixName, BaseDotExeSuffixName;
-static OPENNT_SUPPORT_PEB peb;
-static OPENNT_SUPPORT_TEB teb;
-POPENNT_SUPPORT_PEB NTAPI NtCurrentPeb(VOID) { return &peb; }
-POPENNT_SUPPORT_TEB NTAPI opennt_support_current_teb(VOID) { return &teb; }
-PVOID NTAPI RtlProcessHeap(VOID) { return GetProcessHeap(); }
 int main(void)
 {
     LPCWSTR names[]={L"O:\\ntvdm64\\MEM.EXE",L"O:\\ntvdm64\\COMMAND.COM",
@@ -18,7 +13,7 @@ int main(void)
     WCHAR self[MAX_PATH];
     DWORD type,i,error;
     BOOL ok;
-    peb.ImageBaseAddress=GetModuleHandleW(NULL);
+    if(NtCurrentPeb()->ImageBaseAddress!=GetModuleHandleW(NULL)) return 14;
     /* Original base/win32/client/baseinit.c initialization values. */
     RtlInitUnicodeString(&BaseDotComSuffixName,L".com");
     RtlInitUnicodeString(&BaseDotPifSuffixName,L".pif");
@@ -45,7 +40,7 @@ int main(void)
     type=0xffffffff;
     ok=GetBinaryTypeW(L"missing-original-classifier-input.exe",&type);
     error=GetLastError();
-    printf("missing result=%u error=%lu type=%lu native=%08lx\n",ok,error,type,(ULONG)teb.LastStatusValue);
+    printf("missing result=%u error=%lu type=%lu native=%08lx\n",ok,error,type,(ULONG)opennt_support_current_teb()->LastStatusValue);
     if(ok || error!=ERROR_FILE_NOT_FOUND || type!=0xffffffff) return 6;
     puts("PASS: original classifier guest formats, absolute/relative PE, DLL rejection, suffix policy, missing-file failure");
     return 0;

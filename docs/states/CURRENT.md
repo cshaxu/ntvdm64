@@ -45,6 +45,8 @@ The [S3 RPC security boundary](../etc/evidence/m0-t412-s3-rpc-security.md) now
 passes nine real-process cases, including rejecting another process's valid
 attachment as caller identity. This is not service dispatch or product acceptance;
 genuine cross-user/session and remaining security/receipt gates stay open.
+The [launcher dependency test](../etc/evidence/m0-t412-s3-entry-integration.md)
+also selects real process support, removing its fixture-owned PEB/TEB/heap.
 
 ## T412 S1 historical checkpoints
 
