@@ -1134,3 +1134,18 @@ receiver is basesrv, not an independent ntvdm worker. It does not implement
 worker registration, Check/Get dispatch or ambiguous-reply journal recovery.
 The source bridge is test-only and excluded from the product broker link.
 No guest program ran and the deployed package remains unchanged.
+## Original wait-pair resource callback
+
+The formal wait binding now delegates delivery/revocation without replacing
+BaseSrvCreatePairWaitHandles or BaseSrvClosePairWaitHandles. The original
+notification event remains native and source-owned; its target carrier is a
+receipt ID. A per-pair trusted scope records the local event so original
+failure cleanup calls actual NtClose on that event. Later record cleanup must
+restore the original record's local event into its scope.
+
+The formal archive builds and original lifecycle suite passes: target receipt
+is non-inheritable, initially unsignaled and observes SetEvent on the original
+server handle. Original close clears both record fields and closes the local
+event. Forced delivery failure also causes the original code to close its
+new event synchronously. This is a local target test, not event RPC delivery
+to launcher/worker, and not proof of the complete three-program chain.

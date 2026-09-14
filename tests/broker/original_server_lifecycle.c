@@ -10,6 +10,7 @@
 #include <base_values.h>
 #include <base_command.h>
 #include <base_stream.h>
+#include <base_wait.h>
 #include "broker/vdm_receipt.h"
 #include "broker/vdm_delivery.h"
 #include <stdio.h>
@@ -33,6 +34,18 @@ static NTSTATUS revoke_stream_target(void *context,uint32_t receipt)
     stream_target_test *test=context;
     ++test->closes;
     return broker_vdm_receipt_revoke(&test->receipts,2,receipt) ? STATUS_INVALID_HANDLE : 0;
+}
+static NTSTATUS accept_wait_target(void *context,HANDLE event,uint32_t *receipt)
+{
+    stream_target_test *test=context;
+    ++test->copies;
+    return broker_vdm_receipt_accept(&test->receipts,BROKER_VDM_PARENT_WAIT,event,receipt) ? STATUS_INVALID_HANDLE : 0;
+}
+static NTSTATUS reject_wait_target(void *context,HANDLE event,uint32_t *receipt)
+{
+    *(HANDLE *)context=event;
+    (void)receipt;
+    return STATUS_ACCESS_DENIED;
 }
 typedef struct stream_rollback_test {
     broker_vdm_receipts receipts;
@@ -627,6 +640,29 @@ int main(int argc, char **argv)
     thread.ClientId.UniqueThread = (HANDLE)GetCurrentThreadId();
     CHECK(OpenNtBaseServerRequestThread()==NULL);
     CHECK(OpenNtBaseBindServerRequestThread(&thread)==NULL);
+    {
+        stream_target_test target={0};
+        OPENNT_BASE_WAIT_BINDING wait={caller.ProcessHandle,NULL,&target,accept_wait_target,revoke_stream_target};
+        OPENNT_BASE_RESOURCE_BINDING resources={&wait,OpenNtBaseDuplicateWait,OpenNtBaseCloseWait};
+        HANDLE server=NULL,client=NULL,borrowed,failed=NULL;DOSRECORD record={0};DWORD flags;
+        CHECK(!broker_vdm_receipts_initialize(&target.receipts,2));
+        CHECK(OpenNtBaseBindResources(&resources)==NULL);
+        CHECK(BaseSrvCreatePairWaitHandles(&server,&client)==0 && server && client && wait.local_event==server);
+        CHECK(!broker_vdm_receipt_resolve(&target.receipts,2,(uint32_t)client,BROKER_VDM_PARENT_WAIT,&borrowed));
+        CHECK(GetHandleInformation(borrowed,&flags) && !(flags&HANDLE_FLAG_INHERIT));
+        CHECK(WaitForSingleObject(borrowed,0)==WAIT_TIMEOUT);
+        CHECK(SetEvent(server) && WaitForSingleObject(borrowed,0)==WAIT_OBJECT_0);
+        record.hWaitForParentDup=server;record.hWaitForParent=client;
+        BaseSrvClosePairWaitHandles(&record);
+        CHECK(!record.hWaitForParentDup && !record.hWaitForParent && !wait.local_event && target.closes==1);
+        CHECK(!GetHandleInformation(server,&flags));
+        wait.context=&failed;wait.deliver=reject_wait_target;
+        CHECK(BaseSrvCreatePairWaitHandles(&server,&client)==(ULONG)STATUS_ACCESS_DENIED);
+        CHECK(failed && !wait.local_event && !GetHandleInformation(failed,&flags));
+        CHECK(OpenNtBaseBindResources(NULL)==&resources);
+        broker_vdm_receipts_drain(&target.receipts);
+        puts("PASS: original wait pair retains notification semantics, non-inheritance, original close and failed-delivery cleanup");
+    }
     {
         CSR_THREAD nested=thread;
         PCSR_THREAD previous=OpenNtBaseBindServerRequestThread(&nested);

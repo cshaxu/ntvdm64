@@ -201,6 +201,34 @@ closure. The fixture obtains the receiver handle from its driver's exact
 owned process PID; this is not product worker registration or task execution.
 This finite missing CSR transport is newly authored, not original policy.
 
+`base_wait.h/.c` provide the separate original wait-pair resource scope. The
+original BaseSrvCreatePairWaitHandles still creates its notification event and
+owns failure cleanup; the callback retains the local event identity, delegates
+authenticated/journalled target delivery and returns only the target receipt
+carrier. Original BaseSrvClosePairWaitHandles closes the native server event,
+revokes the recipient receipt and zeros its record. Native close is confined
+to that scope's local event. Later close scopes must initialize this identity
+from the original record; the scope is not another durable event registry.
+The original lifecycle suite verifies shared signal state, non-inheritance,
+original close and synchronous local close after failed target delivery.
+The formal binding archive supplies waits.obj. Target reception is local in
+this test; product event RPC, journal/unknown-reply and other native resource
+operations remain outside this slice and are not claimed complete.
+
+`base_wait.h/.c` provide the separate original wait-pair resource scope. The
+original BaseSrvCreatePairWaitHandles still creates its notification event and
+owns failure cleanup; the callback retains the local event identity, delegates
+authenticated/journalled target delivery and returns only the target receipt
+carrier. Original BaseSrvClosePairWaitHandles closes the native server event,
+revokes the recipient receipt and zeros its record. Native close is confined
+to that scope's local event. Later close scopes must initialize this identity
+from the original record; the scope is not another durable event registry.
+The original lifecycle suite verifies shared signal state, non-inheritance,
+original close and synchronous local close after failed target delivery.
+The formal binding archive supplies waits.obj. Target reception is local in
+this test; product event RPC, journal/unknown-reply and other native resource
+operations remain outside this slice and are not claimed complete.
+
 `base_process.h`/`base_process.c` supply scoped registered-process lookup with
 the original CsrLockProcessByClientId/CsrUnlockProcess shape. Original CSR
 process.c depends on CsrRootProcess and CSR reference/deletion machinery;

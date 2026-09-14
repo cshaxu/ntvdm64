@@ -78,11 +78,14 @@ if(ownerBuild) {
         `link.exe /nologo /opt:ref /out:original-lifecycle.exe /map:original-lifecycle.map fixture.obj "${ownerBuild}/opennt-base-server.lib" "${ownerBuild}/opennt-base-client.lib" "${ownerBuild}/opennt-base-bindings.lib" error.obj ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib`
     ];
 }
-if(!ownerBuild) commands.unshift(`cl.exe ${flags} ${includes} /Fo"${build}/streams.obj" "${root}/src/adapter-opennt-host/basesrv/source/base_stream.c"`);
+if(!ownerBuild) {
+    commands.unshift(`cl.exe ${flags} ${includes} /Fo"${build}/streams.obj" "${root}/src/adapter-opennt-host/basesrv/source/base_stream.c"`);
+    commands.unshift(`cl.exe ${flags} ${includes} /DOPENNT_BASE_NATIVE_RESOURCES /Fo"${build}/waits.obj" "${root}/src/adapter-opennt-host/basesrv/source/base_wait.c"`);
+}
 commands.unshift(`cl.exe ${flags} /Gy /Fo"${build}/support.obj" "${root}/src/adapter-mvdm-host-out/win32/source/opennt_support_rtl.c"`);
 const transportBuild=ownerBuild || path.resolve('build/M0-T412/S3/product');
 assert(fs.existsSync(path.join(transportBuild,'broker-transport.lib')),'Build the formal transport archive first');
-commands=commands.map(command=>command.startsWith('link.exe ')?command.replace(' fixture.obj ', ` fixture.obj support.obj "${transportBuild}/broker-transport.lib" ${ownerBuild?'':'streams.obj registry.obj resources.obj dispatch.obj startup.obj payload.obj values.obj command.obj '}`):command);
+commands=commands.map(command=>command.startsWith('link.exe ')?command.replace(' fixture.obj ', ` fixture.obj support.obj "${transportBuild}/broker-transport.lib" ${ownerBuild?'':'waits.obj streams.obj registry.obj resources.obj dispatch.obj startup.obj payload.obj values.obj command.obj '}`):command);
 const log=fs.openSync(path.join(build,'build.log'),'w');
 for(const command of commands) {
     const result=spawnSync('cmd.exe',['/d','/c',`call "${env}" ${command}`],{cwd:build,windowsHide:true,windowsVerbatimArguments:true,stdio:['ignore',log,log],timeout:60000});
@@ -119,6 +122,12 @@ for (const [symbol,unit] of [['_broker_vdm_delivery_rollback','vdm_delivery'],['
     assert(map.split(/\r?\n/).some(line=>line.includes(symbol)&&line.includes(`broker-transport:${unit}.obj`)),`Missing formal transport provider: ${symbol}`);
 assert(map.includes('opennt-base-server:srvvdm.obj')&&map.includes('opennt-base-client:client.obj'),'Original owner libraries not selected');
 assert(!map.includes('luid.obj'),'Generated inline replacement still linked');
+for(const symbol of ['_OpenNtBaseDuplicateWait','_OpenNtBaseCloseWait'])
+    assert(map.split(/\r?\n/).some(line=>line.includes(symbol)&&
+        line.includes(ownerBuild?'opennt-base-bindings:waits.obj':'waits.obj')),`Wrong wait binding provider ${symbol}`);
+for(const symbol of ['_OpenNtBaseDuplicateWait','_OpenNtBaseCloseWait'])
+    assert(map.split(/\r?\n/).some(line=>line.includes(symbol)&&
+        line.includes(ownerBuild?'opennt-base-bindings:waits.obj':'waits.obj')),`Wrong wait binding provider ${symbol}`);
 assert(map.split(/\r?\n/).some(line=>line.includes('_OpenNtBaseDuplicateStream')&&
     line.includes(ownerBuild?'opennt-base-bindings:streams.obj':'streams.obj')),'Wrong stream receipt binding provider');
 for (const symbol of ['_NtCurrentPeb@0','_opennt_support_current_teb@0','_RtlProcessHeap@0'])
