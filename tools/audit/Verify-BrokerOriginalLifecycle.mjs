@@ -103,6 +103,9 @@ assert.deepEqual(fs.readFileSync(ownerPath),ownerBefore,'Original owner changed 
 const image=fs.readFileSync(path.join(build,'original-lifecycle.exe'));
 assert.equal(image.readUInt16LE(image.readUInt32LE(0x3c)+4),0x14c);
 const map=fs.readFileSync(path.join(build,'original-lifecycle.map'),'utf8');
+assert(map.split(/\r?\n/).some(line=>line.includes('_OpenNtBaseClientCallServer@16')&&line.includes('fixture.obj')),
+    'Original client must select the explicit test transport, never system CSR');
+assert(!map.includes('_CsrClientCallServer@16'), 'System CSR transport entered the lifecycle link');
 for (const symbol of ['_OpenNtBaseEncodeCheckCommand','_OpenNtBaseDecodeCheckCommand',
     '_OpenNtBaseEncodeUpdateCommand','_OpenNtBaseDecodeUpdateCommand',
     '_OpenNtBaseEncodeGetCommand','_OpenNtBasePrepareGetCommand','_OpenNtBaseFinishGetCommand',

@@ -252,7 +252,7 @@ static BOOL command_negatives(void *payload,uint32_t bytes,const BASE_API_MSG *o
         !memcmp(&startup,&saved,sizeof(saved)) && id==0xabcdu;
 }
 
-NTSTATUS NTAPI CsrClientCallServer(PCSR_API_MSG message, PCSR_CAPTURE_HEADER capture,
+NTSTATUS NTAPI OpenNtBaseClientCallServer(PCSR_API_MSG message, PCSR_CAPTURE_HEADER capture,
     CSR_API_NUMBER number, ULONG length)
 {
     NTSTATUS result;

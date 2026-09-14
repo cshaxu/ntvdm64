@@ -52,6 +52,15 @@ The test implementations in `tests/broker/original_server_lifecycle.c` are
 not product providers. No command-selection, waiting/retry or completion policy
 may move here from the original client/server bodies.
 
+The package-private header binds the original CsrClientCallServer spelling to
+OpenNtBaseClientCallServer with the same signature and NTAPI convention. This
+avoids accidental resolution from modern ntdll.lib; the unavailable NT4 CSR
+transport remains the already admitted IPC stopping boundary. No original
+caller body changes and no replacement policy are introduced. The lifecycle
+test explicitly supplies that symbol and rejects a system CSR link-map entry.
+The production implementation is still pending, so an independent worker link
+must fail until its real project transport is supplied.
+
 The same four declarations also serve the restored original ExitVDM,
 SetVDMCurrentDirectories, GetVDMCurrentDirectories, CmdBatNotification and
 RegisterWowExec cohort. Their service opcodes dispatch to the corresponding

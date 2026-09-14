@@ -1189,3 +1189,33 @@ select the project BaseClient transport, not an accidental system CSR import
 or the legacy local provider. Broker registration and authenticated command
 retrieval remain to be composed. Deployment and the existing app entry are
 unchanged; this source is not selected by the old product target.
+
+## Strict worker link and explicit transport selection
+
+At 47fc91445, built original-softpc-candidate (447 edges) plus the original
+environment archive, VDD bindings and embedded resource in the S3 product root.
+A strict diagnostic link reused the process target inputs, substituting
+worker_entry.obj, worker-shell.lib and worker-command-bindings.lib plus the
+formal BaseClient/bindings/transport archives. No /force option was used.
+It failed on three old local-service symbols in COMMAND, __swprintf and
+CsrPortHeap. This is not an executable or runtime pass.
+
+SDK 10.0.22621.0 x86 ntdll.lib /linkermember:1 exposes
+_CsrClientCallServer@16. Its absence from the failure list therefore did not
+prove project IPC. The private base_client.h now maps the unchanged original
+call spelling/signature to OpenNtBaseClientCallServer. This is the smallest
+link-name binding behind the already admitted unavailable CSR boundary, not a
+new provider or mirror change. The original lifecycle suite passes with its
+explicit fixture implementation and assertions excluding system CSR. The
+strict worker link now reports the missing project transport explicitly.
+
+Adding legacy_stdio_definitions.lib resolves __swprintf but conflicts with
+the original host fprt.obj printf definition; that broad CRT addition is not
+selected as a fix. Worker CRT composition still needs a narrow binding.
+cmddisp.c's local-state dependency is diagnostic-only; cmdexec.c's begin/cancel
+calls maintain the old local record's launch-pending flag and event. Original
+OpenNT cmdExec32 lacks those calls and uses GetNextVDMCommand reentry instead.
+They cannot simply be removed from the still-deployed local-provider build
+before the real original service path is selected. Capture heap initialization,
+transport implementation and COMMAND migration remain open. No deployed file
+was changed and no DOS execution is claimed.

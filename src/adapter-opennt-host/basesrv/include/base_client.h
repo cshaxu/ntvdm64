@@ -12,6 +12,10 @@
 #include <vdmapi.h>
 #include <base_event.h>
 BOOL BaseCheckForVDM(HANDLE, LPDWORD);
+/* Bind the admitted CSR-shaped boundary explicitly. Modern ntdll.lib also
+ * exports CsrClientCallServer; it must never silently satisfy this dependency.
+ * Original callers, parameters and NTAPI convention remain unchanged. */
+#define CsrClientCallServer OpenNtBaseClientCallServer
 NTSTATUS NTAPI CsrClientCallServer(PCSR_API_MSG, PCSR_CAPTURE_HEADER, CSR_API_NUMBER, ULONG);
 PCSR_CAPTURE_HEADER NTAPI CsrAllocateCaptureBuffer(ULONG, ULONG, ULONG);
 VOID NTAPI CsrFreeCaptureBuffer(PCSR_CAPTURE_HEADER);
