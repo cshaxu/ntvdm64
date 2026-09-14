@@ -1,9 +1,31 @@
 #include "vdm_payload.h"
+#include "vdm_message.h"
 #include <stdio.h>
 #include <string.h>
 #define CHECK(x) do { if (!(x)) { printf("FAIL line %d: %s\n",__LINE__,#x); return 1; } } while (0)
 int main(void)
 {
+    {
+        broker_vdm_message_header request={BROKER_VDM_MESSAGE_VERSION,32,BROKER_VDM_CHECK,1,7,0,0,0};
+        broker_vdm_message_header decoded,saved;
+        uint32_t op;
+        for (op=BROKER_VDM_CHECK;op<=BROKER_VDM_WOWEXEC;++op) {
+            request.operation=op;
+            CHECK(broker_vdm_message_read(&request,sizeof(request),7,0,&decoded));
+        }
+        memset(&decoded,0xa5,sizeof(decoded)); saved=decoded;
+        CHECK(!broker_vdm_message_read(&request,31,7,0,&decoded));
+        CHECK(!broker_vdm_message_read(&request,32,8,0,&decoded));
+        CHECK(!broker_vdm_message_read(&request,32,7,1,&decoded));
+        request.version=2; CHECK(!broker_vdm_message_read(&request,32,7,0,&decoded)); request.version=1;
+        request.payload_bytes=UINT32_MAX; CHECK(!broker_vdm_message_read(&request,32,7,0,&decoded)); request.payload_bytes=0;
+        request.operation=0; CHECK(!broker_vdm_message_read(&request,32,7,0,&decoded)); request.operation=BROKER_VDM_CHECK;
+        request.request_id=0; CHECK(!broker_vdm_message_read(&request,32,7,0,&decoded)); request.request_id=1;
+        request.status=5; CHECK(!broker_vdm_message_read(&request,32,7,0,&decoded));
+        CHECK(!memcmp(&decoded,&saved,sizeof(saved)));
+        request.reply=1; CHECK(broker_vdm_message_read(&request,32,7,1,&decoded) && decoded.status==5);
+        puts("PASS: eleven operation envelopes, version/length/direction/generation negatives and explicit reply status");
+    }
     broker_vdm_payload_input input[BROKER_VDM_PAYLOAD_FIELDS]={0};
     unsigned char output[256], saved[256];
     broker_vdm_payload_span span;

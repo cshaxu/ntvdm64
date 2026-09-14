@@ -86,6 +86,17 @@ package-private encode/decode binding is in adapter-opennt-host; strings,
 standard streams and native reserved pointers are not members. It is not a
 complete command envelope or a standalone Windows STARTUPINFO serialization.
 
+`vdm_message.h/.c` define the versioned thirty-two-byte VDM envelope: exact
+total/body byte lengths, one of eleven admitted operations, nonzero request
+ID, authenticated generation, direction and explicit reply status. The reader
+requires a separately trusted generation and expected direction, leaves output
+unchanged on failure and does not expose generic CSR API numbers. It contains
+no sender identity or native resource. It does not validate operation bodies,
+authenticate the caller, correlate a reply to a saved request, or authorize
+replay. The existing wire/user-key modules are not selected for this protocol.
+The native Base binding explicitly maps these operations to original APIs;
+full operation bodies and actual RPC endpoint composition remain pending.
+
 M0 T272 S5 disposition register:
 
 - `wire.c` and `wire.h`: `new neutral contract`.  There is no reusable

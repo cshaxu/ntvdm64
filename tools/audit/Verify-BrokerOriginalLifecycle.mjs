@@ -101,6 +101,8 @@ for (const symbol of ['_OpenNtBaseEncodeCheckPayload','_OpenNtBaseDecodeCheckPay
     '_OpenNtBaseEncodeGetRequest','_OpenNtBasePrepareGetPayload','_OpenNtBaseFinishGetPayload','_OpenNtBaseReleaseGetPayload'])
     assert(map.split(/\r?\n/).some(line=>line.includes(symbol)&&line.includes(ownerBuild?'opennt-base-bindings:payload.obj':'payload.obj')),`Native payload provider missing: ${symbol}`);
 assert(map.split(/\r?\n/).some(line=>line.includes('_OpenNtBaseDispatch')&&line.includes(ownerBuild?'opennt-base-bindings:dispatch.obj':'dispatch.obj')),'Production dispatch provider missing');
+for (const symbol of ['_OpenNtBaseVdmOperation','_OpenNtBaseDispatchOperation'])
+    assert(map.split(/\r?\n/).some(line=>line.includes(symbol)&&line.includes(ownerBuild?'opennt-base-bindings:dispatch.obj':'dispatch.obj')),`Wire operation binding missing: ${symbol}`);
 for (const symbol of ['_OpenNtBaseEncodeStartup','_OpenNtBaseDecodeStartup'])
     assert(map.split(/\r?\n/).some(line=>line.includes(symbol)&&line.includes(ownerBuild?'opennt-base-bindings:startup.obj':'startup.obj')),`Startup provider missing: ${symbol}`);
 for (const [symbol,unit] of [['_broker_vdm_delivery_rollback','vdm_delivery'],['_broker_vdm_receipt_accept','vdm_receipt']])

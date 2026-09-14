@@ -640,3 +640,25 @@ Each negative is isolated from other malformed fields. Original BaseCheckVDM
 captures and complete local GetNext buffer roundtrips still pass. Evidence
 remains local/native; operation/resource authentication and actual RPC command
 dispatch are pending. No deployment changed and S3 remains active.
+
+## Versioned envelope and original API mapping
+
+The S1 version/operation/request/generation contract now has a 32-byte fixed-
+width envelope in broker/vdm_message: exact lengths, eleven operations,
+nonzero request ID, generation, direction and reply status. Validation uses
+a separately trusted generation and expected direction, leaving output
+unchanged on failure. This replaces unavailable CSR metadata only. It does
+not authenticate peers, validate operation bodies, correlate a reply to a
+saved request or authorize replay. No native resource or claimed sender
+identity is transported. Original service policy remains unchanged; the old
+wire/user-key and fixed-slot DOS record providers are not selected.
+
+The native binding maps standalone operations to the eleven original Base API
+numbers. Original BaseClient lifecycle calls now use this mapping before
+source dispatch; CSR numeric APIs are not the wire namespace. Formal S3/product
+owners/transport build passes. Verify-VdmPayload passes all eleven envelope
+operations and version/length/direction/generation/request-ID/status negatives.
+Formal Verify-BrokerOriginalLifecycle passes with map-provider checks. Empty
+test bodies prove header validation only, not semantic validity of a command.
+Body bindings, actual RPC exchange, resource callbacks and three product entry
+points remain unfinished; no deployment changed.

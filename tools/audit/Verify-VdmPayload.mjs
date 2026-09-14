@@ -14,6 +14,7 @@ assert.equal(compile.status,0,'Build failed; see build.log');
 const map=fs.readFileSync(path.join(build,'payload.map'),'utf8');
 for (const symbol of ['_broker_vdm_payload_encode','_broker_vdm_payload_validate'])
     assert(map.split(/\r?\n/).some(line=>line.includes(symbol)&&line.includes('broker-transport:vdm_payload.obj')),`Missing formal provider: ${symbol}`);
+assert(map.split(/\r?\n/).some(line=>line.includes('_broker_vdm_message_read')&&line.includes('broker-transport:vdm_message.obj')),'Missing formal message provider');
 const exe=path.join(build,'payload.exe'), bytes=fs.readFileSync(exe);
 assert.equal(bytes.readUInt16LE(bytes.readUInt32LE(0x3c)+4),0x14c);
 const result=spawnSync(exe,[],{cwd:build,windowsHide:true,encoding:'utf8',timeout:10000});

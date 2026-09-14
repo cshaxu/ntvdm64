@@ -5,6 +5,30 @@
 #include "basesrv.h"
 #include <base_dispatch.h>
 
+/* Explicit standalone opcode to original Base API mapping. Never assume CSR
+ * numeric API values are a wire protocol or expose other Base services. */
+static const ULONG vdm_operations[] = {
+    BasepCheckVDM, BasepUpdateVDMEntry, BasepGetNextVDMCommand,
+    BasepExitVDM, BasepIsFirstVDM, BasepGetVDMExitCode, BasepSetReenterCount,
+    BasepSetVDMCurDirs, BasepGetVDMCurDirs, BasepBatNotification, BasepRegisterWowExec
+};
+uint32_t OpenNtBaseVdmOperation(CSR_API_NUMBER number)
+{
+    uint32_t i;
+    for (i=0;i<sizeof(vdm_operations)/sizeof(vdm_operations[0]);++i)
+        if (number==CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,vdm_operations[i])) return i+1;
+    return 0;
+}
+NTSTATUS OpenNtBaseDispatchOperation(PCSR_API_MSG message, uint32_t operation, ULONG length)
+{
+    if (!operation || operation>sizeof(vdm_operations)/sizeof(vdm_operations[0])) {
+        if (message) message->ReturnValue=STATUS_INVALID_PARAMETER;
+        return STATUS_INVALID_PARAMETER;
+    }
+    return OpenNtBaseDispatch(message,
+        CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,vdm_operations[operation-1]),length);
+}
+
 NTSTATUS OpenNtBaseDispatch(PCSR_API_MSG message, CSR_API_NUMBER number,
     ULONG length)
 {

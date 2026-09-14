@@ -181,7 +181,7 @@ NTSTATUS NTAPI CsrClientCallServer(PCSR_API_MSG message, PCSR_CAPTURE_HEADER cap
         if (!OpenNtBaseEncodeGetRequest(request,getRequest,sizeof(getRequest),&payloadBytes)) return STATUS_INVALID_PARAMETER;
         if (OpenNtBasePrepareGetPayload(getRequest,payloadBytes,request,&getPayload)) return STATUS_NO_MEMORY;
     }
-    result = OpenNtBaseDispatch(message,number,length);
+    result = OpenNtBaseDispatchOperation(message,OpenNtBaseVdmOperation(number),length);
     if (number == CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepGetNextVDMCommand)) {
         PBASE_GET_NEXT_VDM_COMMAND_MSG response=&((PBASE_API_MSG)message)->u.GetNextVDMCommand;
         BOOL prepared=OpenNtBaseFinishGetPayload(response,&getPayload);

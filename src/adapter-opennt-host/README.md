@@ -146,6 +146,12 @@ validates arbitrary native pointers. Broker composition must serialize source
 service access and maintain context lifetime. Formal lifecycle tests now use
 this entry instead of a fixture-owned handler switch; real RPC decoding remains
 pending. This finite source-shaped adapter replaces routing only, not CSR.
+OpenNtBaseVdmOperation/OpenNtBaseDispatchOperation explicitly translate between
+the eleven standalone operation IDs and original Base API numbers. No other
+Base API is exposed; neither the original CSR numeric namespace nor native
+message layout becomes the wire protocol. Original BaseClient lifecycle calls in the
+fixture now pass through this mapping. Authentication and full message-body
+validation remain prerequisites of product endpoint use.
 
 `base_startup.h`/`base_startup.c` bind only original BaseCheckVDM's nine numeric
 STARTUPINFO fields to the broker's fixed-width startup fragment. Original
