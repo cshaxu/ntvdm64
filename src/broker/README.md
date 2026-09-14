@@ -51,6 +51,13 @@ callbacks must not mutate/reenter that journal. This is resource cleanup only,
 not a new task transaction or a replacement of original service ordering.
 The focused local test passes; real transport integration/rundown is pending.
 
+The formal x86 `opennt-broker-owners` target also builds `broker-transport.lib`
+from rpc_security, vdm_receipt and vdm_delivery using native SDK declarations
+and /MT. Its manifest records source hashes and object membership. Resource,
+delivery and original-lifecycle tests link this archive and check map providers,
+rather than privately recompiling those production units. This is a shared
+build input for the pending product links, not a completed broker executable.
+
 M0 T272 S5 disposition register:
 
 - `wire.c` and `wire.h`: `new neutral contract`.  There is no reusable

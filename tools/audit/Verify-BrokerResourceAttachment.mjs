@@ -19,14 +19,12 @@ const ownerGraph=fs.readFileSync(path.join(ownerBuild,'build.ninja'),'utf8');
 const registryFlags=ownerGraph.match(/^build obj\/opennt-base-bindings\/registry.obj:.*\r?\n  cflags = (.*)$/m)[1].replaceAll('$:',':');
 const commands = [
     `cl.exe ${registryFlags} "${root}/tests/broker/resource_registration.c" /Foregistration.obj`,
-    `cl.exe /nologo /MT /W4 /c "${root}/src/broker/rpc_security.c" /Fosecurity.obj`,
-    `cl.exe /nologo /MT /W4 /c "${root}/src/broker/vdm_receipt.c" /Foreceipt.obj`,
     `midl.exe /nologo /env win32 /target NT100 /prefix client Client_ /prefix server Server_ /out . "${idl}"`,
     `cl.exe /nologo /MT /W4 /DRESOURCE_SERVER /I . ${securityInclude} /c "${source}" /Foserver.obj`,
     'cl.exe /nologo /MT /W4 /I . /c resource_attachment_s.c /Foserver-stub.obj',
     `cl.exe /nologo /MT /W4 /I . ${securityInclude} /c "${source}" /Foclient.obj`,
     'cl.exe /nologo /MT /W4 /I . /c resource_attachment_c.c /Foclient-stub.obj',
-    `link.exe /nologo /out:resource-server.exe /map:resource-server.map server.obj security.obj receipt.obj registration.obj "${ownerBuild}/opennt-base-bindings.lib" server-stub.obj client-stub.obj rpcrt4.lib advapi32.lib kernel32.lib`,
+    `link.exe /nologo /out:resource-server.exe /map:resource-server.map server.obj registration.obj "${ownerBuild}/broker-transport.lib" "${ownerBuild}/opennt-base-bindings.lib" server-stub.obj client-stub.obj rpcrt4.lib advapi32.lib kernel32.lib`,
     'link.exe /nologo /out:resource-client.exe client.obj client-stub.obj rpcrt4.lib advapi32.lib kernel32.lib',
 ];
 for (const command of commands) {
@@ -37,6 +35,9 @@ for (const command of commands) {
 }
 fs.closeSync(log);
 const serverMap=fs.readFileSync(path.join(build,'resource-server.map'),'utf8');
+for (const [symbol,unit] of [['_broker_rpc_peer_process','rpc_security'],['_broker_vdm_receipt_accept','vdm_receipt']])
+    if (!serverMap.split(/\r?\n/).some(line=>line.includes(symbol)&&line.includes(`broker-transport:${unit}.obj`)))
+        throw Error(`Formal transport provider missing: ${symbol}`);
 for (const symbol of ['_OpenNtBaseRegisterProcess','_OpenNtBaseRemoveProcess','_CsrLockProcessByClientId@8'])
     if (!serverMap.split(/\r?\n/).some(line=>line.includes(symbol)&&line.includes('opennt-base-bindings:registry.obj')))
         throw Error(`Formal registered-process provider missing: ${symbol}`);

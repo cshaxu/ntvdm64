@@ -51,6 +51,9 @@ passes command-tail, directory/environment/stream and exit tests. Actual broker
 dispatch and DOS/WOW delivery remain pending; this build-only checkpoint is
 neither published nor three-program acceptance. Original resource-call binding
 and synchronous wait-event failure rollback also pass; remote callbacks remain open.
+The formal x86 transport archive now supplies all three boundary suites, with
+map-provider checks and passing lifecycle/journal/nine-case RPC regressions.
+It is not yet connected to product command dispatch or deployed.
 
 ## T412 S1 historical checkpoints
 
@@ -316,14 +319,6 @@ Latest published EXE: 3,236,864 bytes; SHA-256
 653ec3875887ed10a4d24ef7e264560d986c30c458d6b77648f0a9ce765a9aac.
 Earlier artifact identities below are historical. Group 3 and remaining
 width disposition are still open; full WRITE is not accepted.
-
-Group 2 working root: build/M0-T406/S2/r002-dib-restoration. Approved lower
-binding design: allocate the finite per-session physical-page translation
-storage during InitIntelMemory, before publishing successful initialization.
-VdmSetPhysRecStructs then performs no allocation, matching its original void
-call contract. Restore original VdmAddVirtualMemory/VdmRemoveVirtualMemory
-bodies and remove publish/prepare/cancel. This lower table is explicitly an
-unavailable-implementation adapter, not an imported original function body.
 
 Group 2 working root: build/M0-T406/S2/r002-dib-restoration. Approved lower
 binding design: allocate the finite per-session physical-page translation

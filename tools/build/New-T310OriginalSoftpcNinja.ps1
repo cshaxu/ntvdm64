@@ -1028,6 +1028,7 @@ $openntBaseVdmObjects = foreach ($name in $openntBaseVdmNames) {
 # the legacy local provider. No fixture object or generated declaration enters
 # these libraries; their process/transport imports remain composition edges.
 $baseOwnerManifest = @()
+$brokerTransportManifest = @()
 if ($Architecture -eq 'x86') {
     $baseBindingInclude = NinjaPath (Join-Path $root 'src/adapter-opennt-host/basesrv/include')
     $baseOwnerFlags = $baseFlags + ' /we4013 /I "' + $baseBindingInclude + '"' +
@@ -1068,7 +1069,22 @@ if ($Architecture -eq 'x86') {
         }
         $graph.Add('build ' + $group + '.lib: lib ' + ($members -join ' '))
     }
-    $graph.Add('build opennt-broker-owners: phony opennt-base-client.lib opennt-base-server.lib opennt-base-bindings.lib')
+    $transportObjects = foreach ($unit in @('rpc_security', 'vdm_receipt', 'vdm_delivery')) {
+        $source = 'src/broker/' + $unit + '.c'
+        $object = 'obj/broker-transport/' + $unit + '.obj'
+        $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $root $source)))
+        $graph.Add('  cflags = /nologo /c /MT /W4 /we4013')
+        $brokerTransportManifest += [ordered]@{
+            archive = 'broker-transport.lib'
+            path = $source
+            sha256 = Get-NodeSha256 (Join-Path $root $source)
+            object = $object
+            buildDisposition = 'explicit-x86-native-transport; product-dispatch-integration-pending'
+        }
+        $object
+    }
+    $graph.Add('build broker-transport.lib: lib ' + ($transportObjects -join ' '))
+    $graph.Add('build opennt-broker-owners: phony opennt-base-client.lib opennt-base-server.lib opennt-base-bindings.lib broker-transport.lib')
     $graph.Add('build obj/run16/entry.obj: cc ' + (NinjaPath (Join-Path $root 'src/app/run16_entry.c')))
     $graph.Add('  cflags = ' + $baseOwnerFlags)
     $graph.Add('build obj/run16/support.obj: cc ' + (NinjaPath (Join-Path $root 'src/adapter-mvdm-host-out/win32/source/opennt_support_rtl.c')))
@@ -1207,6 +1223,7 @@ $graph.Add('default original-softpc-candidate')
     openntRtlSources = @($openntRtlNames)
     openntBaseVdmSources = @($openntBaseVdmNames)
     openntBrokerOwnerArchives = @($baseOwnerManifest)
+    brokerTransportArchive = @($brokerTransportManifest)
     launcherComposition = [ordered]@{
         target = 'run16.exe'
         selected = ($Architecture -eq 'x86')

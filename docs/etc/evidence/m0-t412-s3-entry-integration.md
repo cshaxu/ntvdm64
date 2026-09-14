@@ -381,3 +381,31 @@ This is concrete local source-to-receipt rollback, not merely numeric markers.
 The callback still uses an in-process receiver and controlled second failure;
 real RPC source dispatch, reply-loss recovery, commit placement and three-program
 execution remain required. No deployed executable changed and S3 stays open.
+
+## Formal transport archive integration
+
+The x86 formal generator now builds `broker-transport.lib` alongside the
+original Base owner archives. It contains the existing rpc_security,
+vdm_receipt and vdm_delivery production units, using native SDK declarations
+and /MT rather than the imported OpenNT forced-header island. Source hashes,
+object membership and pending-product disposition are in the graph manifest.
+There is no new runtime policy or mirror change in this build integration.
+
+Regenerated build/M0-T412/S3/product with New-T310OriginalSoftpcNinja.ps1,
+Architecture x86, Node v22.22.1 and ParallelJobs 4; built the explicit
+opennt-broker-owners target. The initial sandbox Ninja invocation produced no
+compiler progress and was stopped by its verified process identity; its handle
+then reported exit 1. The elevated retry completed all four compile/archive
+steps with exit zero. Archive SHA-256:
+`3e381499094c55b24ea0d7b38daced83494ec8d610b41325174df1cd16e69530`.
+
+Verify-VdmDeliveryJournal.mjs, Verify-BrokerOriginalLifecycle.mjs (formal
+OPENNT_BROKER_OWNER_BUILD), and Verify-BrokerResourceAttachment.mjs all pass
+after linking this archive instead of compiling private copies of those
+production units. Each checks the linked map for its actual archive providers.
+The lifecycle run preserves original command/capture/wait/rollback checks; all
+nine RPC cases retain their previous limits, including controlled scope
+negatives and integrity upgraded by the runtime to packet privacy. Outputs
+remain in the corresponding S3 build test roots. No guest run or deployment
+was performed. Product command dispatch and the three executable links remain
+incomplete; this archive is not evidence of their acceptance.

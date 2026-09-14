@@ -74,9 +74,9 @@ if(ownerBuild) {
     ];
 }
 commands.unshift(`cl.exe ${flags} /Gy /Fo"${build}/support.obj" "${root}/src/adapter-mvdm-host-out/win32/source/opennt_support_rtl.c"`);
-for (const unit of ['vdm_delivery','vdm_receipt'])
-    commands.unshift(`cl.exe /nologo /c /MT /W4 /Fo"${build}/${unit}.obj" "${root}/src/broker/${unit}.c"`);
-commands=commands.map(command=>command.startsWith('link.exe ')?command.replace(' fixture.obj ', ` fixture.obj support.obj vdm_delivery.obj vdm_receipt.obj ${ownerBuild?'':'registry.obj resources.obj '}`):command);
+const transportBuild=ownerBuild || path.resolve('build/M0-T412/S3/product');
+assert(fs.existsSync(path.join(transportBuild,'broker-transport.lib')),'Build the formal transport archive first');
+commands=commands.map(command=>command.startsWith('link.exe ')?command.replace(' fixture.obj ', ` fixture.obj support.obj "${transportBuild}/broker-transport.lib" ${ownerBuild?'':'registry.obj resources.obj '}`):command);
 const log=fs.openSync(path.join(build,'build.log'),'w');
 for(const command of commands) {
     const result=spawnSync('cmd.exe',['/d','/c',`call "${env}" ${command}`],{cwd:build,windowsHide:true,windowsVerbatimArguments:true,stdio:['ignore',log,log],timeout:60000});
@@ -94,6 +94,8 @@ assert.deepEqual(fs.readFileSync(ownerPath),ownerBefore,'Original owner changed 
 const image=fs.readFileSync(path.join(build,'original-lifecycle.exe'));
 assert.equal(image.readUInt16LE(image.readUInt32LE(0x3c)+4),0x14c);
 const map=fs.readFileSync(path.join(build,'original-lifecycle.map'),'utf8');
+for (const [symbol,unit] of [['_broker_vdm_delivery_rollback','vdm_delivery'],['_broker_vdm_receipt_accept','vdm_receipt']])
+    assert(map.split(/\r?\n/).some(line=>line.includes(symbol)&&line.includes(`broker-transport:${unit}.obj`)),`Missing formal transport provider: ${symbol}`);
 assert(map.includes('opennt-base-server:srvvdm.obj')&&map.includes('opennt-base-client:client.obj'),'Original owner libraries not selected');
 assert(!map.includes('luid.obj'),'Generated inline replacement still linked');
 for (const symbol of ['_NtCurrentPeb@0','_opennt_support_current_teb@0','_RtlProcessHeap@0'])
