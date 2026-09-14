@@ -167,6 +167,16 @@ That handle must be separately bound locally. The reply codec never reads or
 changes it. The original lifecycle fixture roundtrips reached Update replies,
 preserves every native field, and rejects truncated and miscorrelated replies.
 
+Formal service connections now own the existing broker_vdm_receipts container,
+initialized with their registered generation. Typed AttachFile/AttachPipe RPC
+entries authenticate the process/context and call the same stream-only binder;
+wait roles are refused. Revoke is repeat-safe, and disconnect/rundown drains
+remaining references before freeing connection storage. No new receipt table
+or original resource policy is introduced. Product RPC tests transfer a real
+file and anonymous pipe, reject wrong generation/wait role, and prove revoke
+and disconnect close the broker's last pipe writer. Command/worker binding of
+these receipts and ambiguous-reply rollback remain unimplemented.
+
 `base_process.h`/`base_process.c` supply scoped registered-process lookup with
 the original CsrLockProcessByClientId/CsrUnlockProcess shape. Original CSR
 process.c depends on CsrRootProcess and CSR reference/deletion machinery;

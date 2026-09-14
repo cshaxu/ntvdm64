@@ -157,6 +157,14 @@ Console tests cover same/different membership, attached refusal, unchanged
 failure output and detached return. Concurrent snapshot growth, detach failure
 and parent-generation revalidation are not proven by this test.
 
+The formal service.idl now has separate sh_file and sh_pipe input endpoints
+for standard-stream receipts, plus revocation. Both use authenticated connection
+generation checks and the same existing receipt lifecycle. Wait roles are not
+admitted on these operations; Console remains outside file/pipe attachment.
+Product tests prove actual file/pipe transfer and pipe closure on revoke or
+disconnect. These incoming receipts are not yet consumed by original commands
+or delivered to workers; ambiguous replies still require journal integration.
+
 Project-owned per-user cross-process coordination component. Command records
 contain only versioned copied values. Required native resources use only the
 separate authenticated OS-managed attachment exception, never command fields.

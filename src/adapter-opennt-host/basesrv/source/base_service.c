@@ -4,6 +4,7 @@
 #include <base_service.h>
 #include <base_process.h>
 #include <base_dispatch.h>
+#include "broker/vdm_receipt.h"
 struct OPENNT_BASE_SERVICE {
     OPENNT_BASE_PROCESS_REGISTRY registry;
     CRITICAL_SECTION lock;
@@ -11,6 +12,7 @@ struct OPENNT_BASE_SERVICE {
 struct OPENNT_BASE_CONNECTION {
     OPENNT_BASE_SERVICE *service;
     CSR_PROCESS process;
+    broker_vdm_receipts streams;
 };
 /* Original guarded USER hook is absent in standalone CLI composition. */
 PFNNOTIFYPROCESSCREATE UserNotifyProcessCreate=NULL;
@@ -47,7 +49,10 @@ DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *service,HANDLE process,
     connection->service=service;
     EnterCriticalSection(&service->lock);
     if (!OpenNtBaseRegisterProcess(&service->registry,&connection->process,process)) error=GetLastError();
-    else { *output=connection; *generation=connection->process.SequenceNumber; }
+    else {
+        broker_vdm_receipts_initialize(&connection->streams,connection->process.SequenceNumber);
+        *output=connection; *generation=connection->process.SequenceNumber;
+    }
     LeaveCriticalSection(&service->lock);
     if (error) HeapFree(GetProcessHeap(),0,connection);
     return error;
@@ -60,6 +65,7 @@ DWORD OpenNtBaseServiceDisconnect(OPENNT_BASE_CONNECTION *connection)
     service=connection->service;
     EnterCriticalSection(&service->lock);
     if (!OpenNtBaseRemoveProcess(&service->registry,&connection->process)) error=GetLastError();
+    if (!error) broker_vdm_receipts_drain(&connection->streams);
     LeaveCriticalSection(&service->lock);
     if (!error) HeapFree(GetProcessHeap(),0,connection);
     return error;
@@ -70,6 +76,32 @@ BOOL OpenNtBaseServicePeer(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD ge
     DWORD error=OpenNtBaseServiceRetainPeer(connection,pid,generation,&process);
     if (process) CloseHandle(process);
     return error==0;
+}
+DWORD OpenNtBaseServiceAttachStream(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD generation,
+    DWORD role,HANDLE stream,DWORD *receipt)
+{
+    uint32_t id=0;
+    DWORD error;
+    if (!receipt) return ERROR_INVALID_PARAMETER;
+    *receipt=0;
+    if (!connection) return ERROR_ACCESS_DENIED;
+    if (role<BROKER_VDM_STDIN || role>BROKER_VDM_STDERR) return ERROR_INVALID_PARAMETER;
+    EnterCriticalSection(&connection->service->lock);
+    error=OpenNtBaseServicePeer(connection,pid,generation) ?
+        broker_vdm_receipt_accept(&connection->streams,role,stream,&id) : ERROR_ACCESS_DENIED;
+    LeaveCriticalSection(&connection->service->lock);
+    if (!error) *receipt=id;
+    return error;
+}
+DWORD OpenNtBaseServiceRevokeStream(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD generation,DWORD receipt)
+{
+    DWORD error;
+    if (!connection) return ERROR_ACCESS_DENIED;
+    EnterCriticalSection(&connection->service->lock);
+    error=OpenNtBaseServicePeer(connection,pid,generation) ?
+        broker_vdm_receipt_revoke(&connection->streams,generation,receipt) : ERROR_ACCESS_DENIED;
+    LeaveCriticalSection(&connection->service->lock);
+    return error;
 }
 DWORD OpenNtBaseServiceRetainPeer(OPENNT_BASE_CONNECTION *connection,DWORD pid,
     DWORD generation,HANDLE *output)

@@ -23,4 +23,26 @@ interface vdm_service
         [in, system_handle(sh_process)] HANDLE process,
         [in] unsigned long generation,
         [in,out] VDM_CONNECTION *connection);
+    error_status_t AttachFile(
+        [in] handle_t binding,
+        [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [in] unsigned long role,
+        [in, system_handle(sh_file)] HANDLE stream,
+        [out] unsigned long *receipt);
+    error_status_t AttachPipe(
+        [in] handle_t binding,
+        [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [in] unsigned long role,
+        [in, system_handle(sh_pipe)] HANDLE stream,
+        [out] unsigned long *receipt);
+    error_status_t RevokeStream(
+        [in] handle_t binding,
+        [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [in] unsigned long receipt);
 }

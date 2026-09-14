@@ -48,7 +48,8 @@ genuine cross-user/session and remaining security/receipt gates stay open.
 The [entry and lifecycle tests](../etc/evidence/m0-t412-s3-entry-integration.md)
 select real PEB/TEB/heap, request-thread and registered-process bindings. Run16's native branch
 passes command-tail, directory/environment/stream and exit tests. Formal basesrv
-now links original service registration/first-VDM dispatch; full command delivery
+now links original service registration/first-VDM dispatch and typed file/pipe
+stream retention, revocation and disconnect cleanup; full command delivery
 and three-program acceptance remain open. Original resource-call binding
 and synchronous wait-event failure rollback also pass; remote callbacks remain open.
 Formal archives now supply dispatch, copied CheckVDM payload/startup and typed

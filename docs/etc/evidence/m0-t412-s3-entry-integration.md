@@ -1038,3 +1038,26 @@ reached Update reply, rejects all shorter lengths and wrong request/generation,
 and compares the full native message to prove the resource fields unchanged.
 Formal owner compilation and the complete original lifecycle suite pass.
 Actual RPC resource delivery and three-program DOS execution remain open.
+## Formal incoming stream resources
+
+The formal basesrv RPC interface now appends AttachFile, AttachPipe and
+RevokeStream to the existing operations. Authenticated connection generations
+own the already-tested receipt container; only stdin/stdout/stderr roles are
+accepted. Disconnect/rundown drains retained input references. No task or
+worker dispatch is added and no native handle appears in copied records.
+
+Initial anonymous-pipe transfer through sh_file failed with 1764. The SDK
+defines this as RPC_S_CANNOT_SUPPORT (not context mismatch). Microsoft's
+[system_handle documentation](https://learn.microsoft.com/en-us/windows/win32/midl/system-handle)
+requires the distinct sh_pipe type for named/anonymous pipes. Separate typed
+entrypoints now share one native receipt implementation, preserving same-access
+rights. A real file and pipe both transfer successfully in Verify-BasesrvProduct.
+The sender closes its pipe writer; the pipe remains open until receipt revoke
+or disconnect, when the reader observes ERROR_BROKEN_PIPE. Wrong generations
+and wait roles are rejected, repeat revoke succeeds, and existing registration,
+first-VDM, reconnect and process-exit rundown cases still pass.
+
+The owned test server is terminated after verification; idle shutdown is not
+proved. Ambiguous-reply recovery, direct resource use by Check/Update/Get,
+worker delivery and three-program DOS execution remain open. Files and logs
+for this test stay under build/M0-T412/S3/basesrv-product; deployment unchanged.

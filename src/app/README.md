@@ -175,8 +175,9 @@ generated from broker/service.idl. Endpoint scope is the captured logon LUID
 and session; WINNT packet privacy and attached live caller PID are checked
 before registration/query/disconnect. Duplicate endpoint ownership fails;
 successful authenticated RPC, not a printed line, establishes readiness.
-No fixture source enters this link. Current operations are connection
-registration, original first-VDM query and disconnect only. DOS commands,
+No fixture source enters this link. Current operations include connection
+registration, original first-VDM query, typed file/pipe stream attachment,
+receipt revocation and disconnect. DOS commands,
 worker registration, resource callbacks and empty/idle shutdown are unfinished;
 this executable must not be published or substituted for the three-program
 delivery. Tests also observe RPC rundown after a registered client exits

@@ -1,5 +1,5 @@
 /* Standalone BaseSrv composition. S3 integration in progress: the current
- * endpoint offers authenticated registration/first-VDM only, not DOS launch.
+ * endpoint offers registration/first-VDM and typed stream receipts, not DOS launch.
  * It is build-only until command/resource/worker and idle gates are complete. */
 #include <windows.h>
 #include <rpc.h>
@@ -10,11 +10,32 @@
 #include "adapter-opennt-host/basesrv/include/base_service.h"
 static broker_rpc_scope scope;
 static OPENNT_BASE_SERVICE *service;
+error_status_t Server_AttachFile(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+    ULONG generation,ULONG role,HANDLE stream,ULONG *receipt)
+{
+    DWORD pid,error;
+    *receipt=0;
+    error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    if (error) return error;
+    return OpenNtBaseServiceAttachStream(connection,pid,generation,role,stream,receipt);
+}
+error_status_t Server_AttachPipe(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+    ULONG generation,ULONG role,HANDLE stream,ULONG *receipt)
+{
+    return Server_AttachFile(binding,connection,process,generation,role,stream,receipt);
+}
+error_status_t Server_RevokeStream(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+    ULONG generation,ULONG receipt)
+{
+    DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    if (error) return error;
+    return OpenNtBaseServiceRevokeStream(connection,pid,generation,receipt);
+}
 void *__RPC_USER midl_user_allocate(size_t bytes) { return malloc(bytes); }
 void __RPC_USER midl_user_free(void *value) { free(value); }
 void __RPC_USER VDM_CONNECTION_rundown(VDM_CONNECTION connection)
 {
-    /* No commands/resources can be admitted by this endpoint yet. */
+    /* No tasks yet; disconnect also drains retained input stream receipts. */
     if (OpenNtBaseServiceDisconnect(connection)) RaiseFailFastException(NULL,NULL,0);
     fputs("basesrv: connection rundown completed\n",stderr); fflush(stderr);
 }
