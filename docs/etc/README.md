@@ -26,6 +26,7 @@ proves the original `FSTI` continuation reaches BOP `FDh`.
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T412 broker restoration working plan](operations/m0-t412-broker-restoration-plan.md) | M0 T412 | Sequential audit, original-owner recovery, three-program integration and closure plan. | Retain through T412 closure. |
 | [T411 S4 CCPU event-profile disposition](evidence/m0-t411-s4-ccpu-event-profile.md) | M0 T411 S4 | Proves why standalone atomic event transport must remain. | Retain through T411 closure. |
 | [T411 S3 quick-event provider disposition](evidence/m0-t411-s3-quick-event-provider.md) | M0 T411 S3 | Separates unavailable CCPU calibration from writable restart state. | Retain through T411 closure. |
 | [T411 S2 C-VID vector closure](evidence/m0-t411-s2-cvidc-vector-closure.md) | M0 T411 S2 | Proves selected CCPU40/C-VID vector layout, provider routing and one-owner publication with a focused x86 fixture. | Retain through T411 closure. |

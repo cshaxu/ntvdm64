@@ -2,9 +2,11 @@
 
 ## Status and objective
 
-This is the unadmitted broker proposal linked from Queue. The owner approved
-broker-before-WOW-restoration sequencing on 2026-09-12; implementation still
-requires admission after the preceding queued restoration packages. Its
+The owner admitted this broker package on 2026-09-13. Active packet authority
+is [Status](../states/CURRENT.md); the
+[working plan](../etc/operations/m0-t412-broker-restoration-plan.md) owns the
+sequential stages and supersedes the provisional grouping below. This remains
+the single design proposal, not a second active-packet record. Its
 objective is to recover the required BaseSrv-style registration, command
 queue, notification, and disconnect-cleanup behavior through public IPC while
 returning the MVDM process to a source-shaped worker role.
@@ -32,9 +34,9 @@ broker first and replacing its policy later.
 
 The owner approved this sequencing change on 2026-09-12; Queue now places
 broker before the WOW/debugger restoration and final WOW16 workload packages.
-This is candidate ordering, not implementation admission. At admission,
-preserve the open audit/restoration task and its findings
-at an explicit handoff; do not mark it complete or run two active S packets.
+That sequencing decision alone was not implementation admission; the later
+admission is recorded in Status. Preserve outstanding audit findings through
+explicit handoffs; do not run two active S packets.
 Broker transport is not a substitute for missing single-worker DOSX, DPMI or
 WOW behavior. Resume the remaining owner recovery after the bounded broker
 work, with failures attributed to their actual owners.

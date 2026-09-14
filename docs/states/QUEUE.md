@@ -41,8 +41,9 @@ package alone owns the cross-owner compatibility matrix.
 Each candidate has its own proposal below. The
 [runtime recovery program](../proposals/proposal-ntvdm-runtime-recovery-program-20260901.md)
 provides shared background for the runtime candidates. The former queue-head
-DOS file-service candidate is now the active Status packet; its D31--D33 and
-D08 work is therefore not duplicated here.
+ [broker candidate](../proposals/proposal-cross-process-broker-closure-001.md)
+is now admitted in Status; its D01--D07/D10 restoration is
+therefore not duplicated here.
 
 On 2026-09-12 the owner approved the revised candidate sequence: physical-memory
 mapping, DPMI/XMS, RTL,
@@ -74,10 +75,9 @@ later package merely because an earlier linked component has no runtime proof.
 
 | Next order | Candidate implementation package | Proposal |
 | --- | --- | --- |
-| 1 | Cross-process broker closure — restore D01-D07/D10 as one original BaseSrv/BaseClient lifecycle with three-program composition and finite IPC. Prove selected coordination rows without acquiring guest, COMMAND, SoftPC or WOW provider behavior. | [Proposal](../proposals/proposal-cross-process-broker-closure-001.md) |
-| 2 | WOW and debugger original-owner restoration — resolve D17-D22 and D27 through original font, glyph, scheduling, cursor/icon, error-response, debugger and callback owners; remove proved inactive duplicates and preserve finite modern bindings. | [Proposal](../proposals/proposal-wow-debugger-original-owner-restoration-001.md) |
-| 3 | Single-process WOW16 application lifecycle recovery — after broker and WOW/debugger restoration, prove the selected WRITE workload's original start/run/return within one x86 worker, or record the exact source-proven unavailable boundary. No substitute guest/UI failure policy, private USER/CSRSS shell or transport-based workaround. | [Proposal](../proposals/proposal-wow16-single-process-lifecycle-recovery-001.md) |
-| 4 | Multi-process matrix and product release — prove the brokered multi-process x86-worker profile, the cross-owner DOS/Win16 compatibility matrix, portable media layout and release packaging. Host x64 Windows is an x86-worker acceptance platform, not a native-x64 worker requirement. | [Proposal](../proposals/proposal-multiprocess-release-matrix-001.md) |
+| 1 | WOW and debugger original-owner restoration — resolve D17-D22 and D27 through original font, glyph, scheduling, cursor/icon, error-response, debugger and callback owners; remove proved inactive duplicates and preserve finite modern bindings. | [Proposal](../proposals/proposal-wow-debugger-original-owner-restoration-001.md) |
+| 2 | Single-process WOW16 application lifecycle recovery — after broker and WOW/debugger restoration, prove the selected WRITE workload's original start/run/return within one x86 worker, or record the exact source-proven unavailable boundary. No substitute guest/UI failure policy, private USER/CSRSS shell or transport-based workaround. | [Proposal](../proposals/proposal-wow16-single-process-lifecycle-recovery-001.md) |
+| 3 | Multi-process matrix and product release — prove the brokered multi-process x86-worker profile, the cross-owner DOS/Win16 compatibility matrix, portable media layout and release packaging. Host x64 Windows is an x86-worker acceptance platform, not a native-x64 worker requirement. | [Proposal](../proposals/proposal-multiprocess-release-matrix-001.md) |
 
 ## Unresolved audit-family ownership
 

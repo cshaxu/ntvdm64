@@ -2,7 +2,31 @@
 
 ## Current Work
 
-**No active M/T/S packet.**
+**Active: M0 T412 S1.**
+
+## Active Packet
+
+### M0 T412 S1 — Broker baseline audit and source-first design
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T412 S1; sequential S packets, one active packet. |
+| Admission And Approval | Owner admitted the queue-head broker package on 2026-09-13 and requested S decomposition first. Existing authorization covers commit and push to main. This admission records the plan; it does not claim implementation or audit completion. |
+| Objective | Audit D01--D07/D10 and design one original BaseSrv/BaseClient lifecycle across run16.exe, basesrv.exe and ntvdm.exe, minimizing mirror diff, overlay and duplicate autonomous policy. |
+| Non-goals | No source implementation during S1; no CSRSS/kernel shell, CPU30/x64 executor, generic shell parser, or claim of full WRITE recovery. |
+| Reference Baseline | Entry commit bb9fe640d; selected original OpenNT package provenance and current formal x86 CCPU40 graph. Prior closure records are evidence indexes, not substitutes for selected-provider/runtime proof. |
+| Files And ABI Surface | Governance and indexed audit/design records; review BaseSrv/BaseClient VDM APIs, app entry, broker/session lifecycle and their existing mirror/overlay/adapter providers. No production ABI changes in S1. |
+| Applicable Rules | Source policy; execution, architecture, coding and document rules; package-first recovery and original-owner placement. |
+| Verification | Per-row original/current provider comparison, build and runtime evidence attribution, IPC/resource/state-transition design review; documentation governance and git diff checks. S1 is research/design and has no new machine acceptance row. |
+| Expected Markers | D01--D07/D10 owner/disposition ledger; measured removal candidates; finite IPC contract; positive/negative integration matrix; explicit prerequisite gaps. No fabricated runtime PASS markers. |
+| Asset Needs | Existing selected source and immutable guest media; build outputs under build/, real-run observations under O:\ntvdm64\logs. No media import or deployment in this admission. |
+| Reporting Requirements | Report original code recoverable, retained seams with reasons, estimated removable lines by mirror/overlay/autonomous category, unresolved decisions and S2 implementation boundary. |
+| Stop Conditions | Missing provenance, unbounded platform dependency, contradictory selected-provider evidence, or changed product scope: record the exact issue; do not manufacture success or a parallel provider. |
+| Exit Criteria | Complete scoped audit and coherent design covering all mandatory broker rows; reconcile executable naming/deployment rules; identify and disposition direct prerequisite gaps before implementation. Report the design before advancing. |
+| Original Owner Request | Admit the next queued T package and first split it into S tasks. Preserve original OpenNT behavior with the smallest finite modern binding. |
+| Similar-Issue Sweep | Include mirrored diffs, private overlays and adapters; command ownership/capacity/retry, launch rollback, async payload lifetime, worker cleanup and every duplicated local policy in scope. |
+| Candidate Proposal | [Broker design](../proposals/proposal-cross-process-broker-closure-001.md). |
+| Working Plan | [T412 sequential S plan](../etc/operations/m0-t412-broker-restoration-plan.md). |
 
 ## T411 Closed Packet
 
