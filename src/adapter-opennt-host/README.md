@@ -70,3 +70,13 @@ handles. Command/stream routing policy stays in the original function; no
 native handle enters a broker record. The header maps historical swprintf to
 the CRT's _swprintf signature, avoiding ISO's extra count parameter. The
 original hotkey-to-reserved-string branch is tested with an exact result.
+
+`basesrv/include/base_server.h` is the finite native declaration binding for
+the unchanged srvvdm.c owner. Its declaration shapes were audited through the
+S1 compile probe and now belong to this package, not a tests/ include. They
+cover event/token/loader/duplication APIs, source-shaped CSR record types and
+the request-thread accessor. OpenNtBaseServerRequestThread must return the
+currently authenticated bound request context; the focused fixture supplies
+its own process, while production authentication/registration is still pending.
+The header supplies no CSR runtime, command policy or success stubs. Keeping
+original CSR declaration records does not admit their historical transport.

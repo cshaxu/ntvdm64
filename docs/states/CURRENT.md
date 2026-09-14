@@ -33,18 +33,10 @@ S2 is the only active packet under the existing whole-T approval. The following
 S1 checkpoints are chronological evidence, not current admission or hold state.
 
 S2 [original server lifecycle tests](../etc/evidence/m0-t412-s2-original-lifecycle.md)
-now compile/link and execute the unchanged server owner: first-query state,
-DOS command/curdir capacity, dispatch/completion, real parent/worker events,
-nonzero reentry wake, empty-WOW polling and cleanup. Link-map ownership is
-checked. This is same-process focused evidence, not product selection or
-cross-process acceptance; S2 remains active and the deployed baseline is unchanged.
-
-The original command cohort restores GetNextVDMCommand, exit, current
-directories, BAT notification, WOWEXEC registration and launch update.
-Focused tests pass client capacity/error mapping, wait/wake/retry, capture
-cleanup and registration; the default environment cohort still compiles.
-Detailed source identities and assertions are retained in the linked S2
-evidence. Product selection and retirement of local policy remain unfinished.
+compile/link actual original client/server owners and pass capacity,
+dispatch/completion, wait/retry, directory, BAT/WOW registration and cleanup.
+The linked evidence retains exact source identities and assertions. These
+are focused tests, not product selection; the deployed baseline is unchanged.
 
 Original GetBinaryTypeW/BaseIsDosApplication now pass focused x86 guest-type,
 PE, DLL, suffix and missing-file tests. Complete original BaseCheckVDM now
@@ -54,6 +46,11 @@ the original launch body. The classifier's full-path binding avoids modern
 relative-output size and NULL-directory differences. Final
 run16 selection, remaining launch closure and local-policy retirement remain
 unfinished. This is not guest execution or three-product acceptance.
+
+Original client/server archives now pass the lifecycle tests using the
+package-private declaration header and original LUID inline, without the
+test-only forced header, empty DFS header or generated LUID object. Final
+product selection remains unfinished; see the linked S2 evidence.
 
 ## T412 S1 historical checkpoints
 

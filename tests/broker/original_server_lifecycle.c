@@ -16,7 +16,7 @@ POPENNT_SUPPORT_PEB NTAPI NtCurrentPeb(VOID) { return &peb; }
 POPENNT_SUPPORT_TEB NTAPI opennt_support_current_teb(VOID) { return &teb; }
 PFNNOTIFYPROCESSCREATE UserNotifyProcessCreate = NULL;
 PVOID NTAPI RtlProcessHeap(VOID) { return GetProcessHeap(); }
-PCSR_THREAD ProbeAuthenticatedRequestThread(void) { return &thread; }
+PCSR_THREAD OpenNtBaseServerRequestThread(void) { return &thread; }
 NTSTATUS NTAPI CsrLockProcessByClientId(HANDLE id, PCSR_PROCESS *out)
 {
     if (id != (HANDLE)GetCurrentProcessId()) return (NTSTATUS)0xc000000b;
@@ -146,6 +146,9 @@ int main(void)
     thread.ClientId.UniqueProcess = (HANDLE)GetCurrentProcessId();
     thread.ClientId.UniqueThread = (HANDLE)GetCurrentThreadId();
     BaseSrvVDMInit();
+    { LUID negative=RtlConvertLongToLuid(-1), positive=RtlConvertLongToLuid(0x7fffffff);
+      CHECK(negative.LowPart==0xffffffff && negative.HighPart==-1);
+      CHECK(positive.LowPart==0x7fffffff && positive.HighPart==0); }
 
     ZeroMemory(&m,sizeof(m));
     CHECK(BaseSrvIsFirstVDM((PCSR_API_MSG)&m,&reply) == 0 && m.u.IsFirstVDM.FirstVDM);

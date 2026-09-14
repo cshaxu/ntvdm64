@@ -315,3 +315,43 @@ support translation unit. This is still same-process focused protocol proof,
 not product selection, shared-WOW launch, full PIF coverage, cross-process
 transfer or guest execution. S2 remains active; formal owner selection,
 remaining launch dependencies and old local-policy retirement are not done.
+
+## Original owner libraries without test declaration scaffolding
+
+The selected lifecycle build no longer force-includes tests/broker/
+source_compile_probe.h, creates an empty ntdddfs.h or generates a non-inline
+RtlConvertLongToLuid body. The source audit identified the DFS include as an
+unrelated final include in basesrv.h: srvvdm.c uses no DFS declarations. The
+registered OPENNT_BASE_VDM_SERVER header group omits that include and imports
+the finite package-private base_server.h instead. All service algorithms and
+the entire srvvdm.c file remain unchanged.
+
+The private header retains audited native/event/token/loader and original CSR
+record declarations. Its request-thread accessor replaces the historical
+TEB lookup but must be supplied by authenticated process binding; it does not
+create authentication or service policy. Tests bind their own caller context.
+This is recovery rung 2, not importing a CSR subsystem or manufacturing an
+empty subsystem header. The older S1 compile probe remains historical test
+evidence, but is not an input to this selected library build.
+
+Original public/sdk/inc/ntrtl.h's RtlConvertLongToLuid inline is now retained
+in the mirrored header subset. It preserves its original body and __inline
+shape (blank-line trailing whitespace normalized), so the prior generated
+external definition and object are unnecessary. Tests compare the inline
+against the pinned original and assert positive and negative sign extension.
+Three disposable files were removed from the validated S2 build root:
+luid.c, luid.obj and ntdddfs.h. They were generated test products, not source
+or runtime assets; their old recipes remain in Git history.
+
+The lifecycle driver now creates opennt-base-server.lib and
+opennt-base-client.lib and links the actual service/client owners from those
+archives. Provider-map assertions require both library/object identities,
+reject luid.obj, and build-log assertions reject the three retired include/
+generated-source dependencies. The complete original launch/lifecycle tests
+pass with these files absent; the classifier/support compile regression also
+passes. Outputs remain under build/M0-T412/S2/original-lifecycle.
+
+This proves reusable original-owner library composition, not final product
+graph selection: the deployed executable still selects the old local policy.
+Authenticated product context, resource transfer and final process wiring
+remain required. S2/T412 are not closed by these library tests.

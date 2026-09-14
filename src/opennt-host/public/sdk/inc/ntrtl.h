@@ -127,6 +127,24 @@ NTSTATUS NTAPI NtTerminateProcess(HANDLE ProcessHandle, NTSTATUS ExitStatus);
 #define InsertHeadList(ListHead,Entry) { PLIST_ENTRY _flink = (ListHead)->Flink; (Entry)->Flink = _flink; (Entry)->Blink = (ListHead); _flink->Blink = (Entry); (ListHead)->Flink = (Entry); }
 #endif
 
+/* DIVERGENCE(OPENNT-HOST-029): original header inline required by BaseSrv's
+ * IsClientSystem; retain its body rather than generating a test-only copy. */
+__inline LUID
+NTAPI
+RtlConvertLongToLuid(
+    LONG Long
+    )
+{
+    LUID TempLuid;
+    LARGE_INTEGER TempLi;
+
+    TempLi.QuadPart = Long;
+    TempLuid.LowPart = TempLi.LowPart;
+    TempLuid.HighPart = TempLi.HighPart;
+
+    return TempLuid;
+}
+
 #ifdef __cplusplus
 }
 #endif

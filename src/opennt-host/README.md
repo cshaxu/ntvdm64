@@ -100,6 +100,17 @@ admitted merely to make the larger historical API product shell link.
 
 ## Divergence register
 
+T412 S2 registers OPENNT-HOST-028 in `base/win32/server/basesrv.h`: the
+`OPENNT_BASE_VDM_SERVER` compilation group includes the finite BaseSrv-private
+declaration binding and omits the unrelated DFS device header. The original
+header is otherwise retained and srvvdm.c remains byte-identical. This removes
+the generated empty DFS header from the selected original-owner library test.
+OPENNT-HOST-029 restores original RtlConvertLongToLuid in the selected
+`public/sdk/inc/ntrtl.h` subset, including its __inline storage shape; only
+trailing blank-line whitespace is normalized. Origin is the same pinned
+OpenNT public/sdk/inc/ntrtl.h. No generated function-body replacement is
+needed; positive and negative sign-extension assertions pass. See S2 evidence.
+
 T412 S2 extends OPENNT-HOST-014 with the complete original GetNextVDMCommand
 body (390 lines including its signature/comment), selected by
 `OPENNT_BASE_CLIENT_VDM_COMMANDS` for the focused original-client/server graph.
