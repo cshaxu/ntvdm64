@@ -14,6 +14,14 @@ header is not wire data. Every impersonated path reverts; failed RPC reversion
 denies access and falls back to public RevertToSelf, with fail-fast if neither
 can restore the thread. That exceptional failure branch remains unexercised.
 
+The same module validates a process attachment at request entry by repeating
+authorization, querying the runtime's local client PID and comparing it with
+GetProcessId on the attached live process. A valid handle to a different
+same-user process is not caller identity. The input remains RPC-owned; a future
+registry must retain its own reference before return and assign a generation,
+not keep a borrowed handle or use PID alone. This is peer identity, not authority
+to register an arbitrary worker on behalf of that peer.
+
 M0 T272 S5 disposition register:
 
 - `wire.c` and `wire.h`: `new neutral contract`.  There is no reusable

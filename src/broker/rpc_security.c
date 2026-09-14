@@ -1,6 +1,29 @@
 /* Modern local RPC authentication only. Original BaseSrv remains the VDM
  * policy owner; NT4 CSR port/process internals are not recreated here. */
 #include "rpc_security.h"
+#include <rpcasync.h>
+
+RPC_STATUS broker_rpc_peer_process(const broker_rpc_scope *scope,
+    RPC_BINDING_HANDLE binding, HANDLE process, DWORD *pid)
+{
+    RPC_CALL_ATTRIBUTES_V2_W call={0};
+    DWORD actual;
+    RPC_STATUS status;
+    if (!pid) return RPC_S_INVALID_ARG;
+    *pid=0;
+    status=broker_rpc_authorize(scope,binding);
+    if (status!=RPC_S_OK) return status;
+    call.Version=2;
+    call.Flags=RPC_QUERY_CLIENT_PID | RPC_QUERY_IS_CLIENT_LOCAL;
+    status=RpcServerInqCallAttributesW(binding,&call);
+    if (status!=RPC_S_OK) return status;
+    actual=GetProcessId(process);
+    if (call.IsClientLocal!=rcclLocal || !actual ||
+        (ULONG_PTR)call.ClientPID!=actual || WaitForSingleObject(process,0)!=WAIT_TIMEOUT)
+        return RPC_S_ACCESS_DENIED;
+    *pid=actual;
+    return RPC_S_OK;
+}
 
 static BOOL token_scope(HANDLE token, broker_rpc_scope *scope)
 {

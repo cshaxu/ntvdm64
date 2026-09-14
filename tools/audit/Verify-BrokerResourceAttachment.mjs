@@ -52,6 +52,8 @@ return {server, serverDone, ready, transcript() { return stdout + stderr; }, asy
     if (server.exitCode === null) server.kill();
     await serverDone;
     fs.writeFileSync(path.join(build, `${name}-server.log`), stdout + stderr);
+    if (name === 'wrong-peer' && !stdout.includes('PEER status=5 matched=0'))
+        throw Error('Wrong process was not rejected by the peer-process binding');
 }};
 }
 async function finished(child) {
@@ -76,7 +78,7 @@ try {
     await relay.ready;
     const result = spawnSync(path.join(build, 'resource-client.exe'),
         [endpoint, path.join(build, `${endpoint}.tmp`), ...(mode.endsWith('readonly') ? ['readonly'] :
-            mode === 'unavailable' ? ['unavailable'] : mode.startsWith('wrong-') ? ['denied'] : mode === 'low-auth' ? ['low-auth'] : [])],
+            mode === 'unavailable' ? ['unavailable'] : mode === 'wrong-peer' ? ['denied', String(process.pid)] : mode.startsWith('wrong-') ? ['denied'] : mode === 'low-auth' ? ['low-auth'] : [])],
         {cwd: build, windowsHide: true, encoding: 'utf8', timeout: 15000});
     const record = {clientStatus: result.status, clientOutput: result.stdout,
         clientError: result.stderr, spawnError: result.error?.message};
@@ -100,4 +102,4 @@ try {
     await target?.cleanup(`${mode}-target`);
 }
 }
-for (const mode of ['shared', 'readonly', 'relay', 'relay-readonly', 'unavailable', 'wrong-scope', 'wrong-session', 'low-auth']) await runCase(mode);
+for (const mode of ['shared', 'readonly', 'relay', 'relay-readonly', 'unavailable', 'wrong-scope', 'wrong-session', 'low-auth', 'wrong-peer']) await runCase(mode);

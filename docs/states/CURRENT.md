@@ -42,8 +42,8 @@ library tests, not real-process acceptance. S3 starts with the deployed product
 unchanged; product selection and local-policy retirement are pending.
 
 The [S3 RPC security boundary](../etc/evidence/m0-t412-s3-rpc-security.md) now
-passes eight real-process resource/authentication cases using reusable broker
-code. This is not original service dispatch or three-product acceptance;
+passes nine real-process cases, including rejecting another process's valid
+attachment as caller identity. This is not service dispatch or product acceptance;
 genuine cross-user/session and remaining security/receipt gates stay open.
 
 ## T412 S1 historical checkpoints

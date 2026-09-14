@@ -54,3 +54,29 @@ final cases pass, with status retained in per-case result files; no guest progra
 executed. Three-product links, real request dispatch, resource receipt lifetime,
 unauthenticated peers, genuine other-user/session access and reversion failure
 injection remain outstanding integration/security gates.
+
+## Process-attachment identity
+
+The next registration prerequisite is broker_rpc_peer_process. It authorizes
+the current call, queries RPC_CALL_ATTRIBUTES_V2 for local client PID/locality,
+compares that OS-derived PID with GetProcessId on the process attachment and
+requires the attached process to remain unsignaled. The exact declarations
+come from the installed SDK rpcasync.h, not a copied wire field. Failure leaves
+the output PID zero. No process is opened by an untrusted message PID.
+
+The fixture now carries a typed sh_process attachment, opened with only query
+and synchronize rights. Every direct and relay request validates its actual
+immediate caller; the relay supplies its own process reference downstream.
+A new negative case sends the test orchestrator's legitimate process handle
+instead of the client's. Its identity differs from the RPC runtime caller,
+so the broker rejects before file/event mutation and continues listening.
+The PEER status/matched trace distinguishes this binding rejection from an
+earlier RPC authentication rejection. All nine cases pass in the extended
+suite. No unrelated process is terminated or modified.
+
+This validates only the borrowed process attachment during a call. Registration
+must duplicate any retained reference before RPC cleanup, assign authenticated
+generations, and separately authorize launcher-to-worker association. PID reuse,
+death races, unsupported call-attribute queries and retained-reference teardown
+are not proven by this fixture. The operation cannot substitute for actual
+worker registration/readiness or original BaseSrv process-record binding.

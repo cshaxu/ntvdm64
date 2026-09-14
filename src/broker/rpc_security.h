@@ -10,4 +10,7 @@ typedef struct broker_rpc_scope {
 } broker_rpc_scope;
 BOOL broker_rpc_capture_scope(broker_rpc_scope *scope);
 RPC_STATUS broker_rpc_authorize(const broker_rpc_scope *scope, RPC_BINDING_HANDLE binding);
+/* Validate a process attachment against the live local RPC peer. The caller
+ * must duplicate a retained reference before the RPC-owned input expires. */
+RPC_STATUS broker_rpc_peer_process(const broker_rpc_scope *, RPC_BINDING_HANDLE, HANDLE, DWORD *);
 #endif

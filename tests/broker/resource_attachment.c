@@ -22,18 +22,23 @@ static RPC_STATUS RPC_ENTRY authorize(RPC_IF_HANDLE interface_id, void *context)
     return broker_rpc_authorize(&serverScope,context);
 }
 
-error_status_t Server_Transfer(handle_t binding, HANDLE input, HANDLE event, HANDLE *output)
+error_status_t Server_Transfer(handle_t binding, HANDLE process, HANDLE input, HANDLE event, HANDLE *output)
 {
-    DWORD written;
+    DWORD written, peerPid;
     LARGE_INTEGER zero = {0}, position;
     error_status_t result = ERROR_INVALID_DATA;
-    (void)binding;
     *output = NULL;
+    result=broker_rpc_peer_process(&serverScope,binding,process,&peerPid);
+    printf("PEER status=%lu matched=%d\n",result,peerPid!=0); fflush(stdout);
+    if (result!=RPC_S_OK) return result;
     if (downstream) {
+        HANDLE self=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION | SYNCHRONIZE,FALSE,GetCurrentProcessId());
+        if (!self) return GetLastError();
         /* Synchronous third-process delivery; no file reopen or byte pump. */
-        RpcTryExcept { result = Client_Transfer(downstream, input, event, output); }
+        RpcTryExcept { result = Client_Transfer(downstream, self, input, event, output); }
         RpcExcept(1) { result = RpcExceptionCode(); }
         RpcEndExcept
+        CloseHandle(self);
         (void)RpcMgmtStopServerListening(NULL);
         return result;
     }
@@ -80,16 +85,19 @@ int main(int argc, char **argv)
 {
     RPC_CSTR text = NULL;
     RPC_BINDING_HANDLE binding = NULL;
-    HANDLE input, event, output = NULL;
+    HANDLE input, event, process, output = NULL;
     LARGE_INTEGER zero = {0}, position;
     DWORD count;
     char data[2];
     error_status_t status = RPC_S_CALL_FAILED;
     int readonly, unavailable, denied;
-    if (argc != 3 && argc != 4) return 1;
+    if (argc != 3 && argc != 4 && argc != 5) return 1;
     readonly = argc == 4 && strcmp(argv[3], "readonly") == 0;
     unavailable = argc == 4 && strcmp(argv[3], "unavailable") == 0;
-    denied = argc == 4 && strcmp(argv[3], "denied") == 0;
+    denied = (argc == 4 && strcmp(argv[3], "denied") == 0) || argc==5;
+    process=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION | SYNCHRONIZE,FALSE,
+        argc==5?(DWORD)strtoul(argv[4],NULL,10):GetCurrentProcessId());
+    if (!process) return 10;
     input = CreateFileA(argv[2], GENERIC_READ | GENERIC_WRITE,
         FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, CREATE_NEW, FILE_ATTRIBUTE_NORMAL, NULL);
     event = CreateEventW(NULL, TRUE, FALSE, NULL);
@@ -106,9 +114,10 @@ int main(int argc, char **argv)
         RpcBindingFromStringBindingA(text, &binding) ||
         RpcBindingSetAuthInfoA(binding, NULL, argc==4 && !strcmp(argv[3],"low-auth") ? RPC_C_AUTHN_LEVEL_PKT_INTEGRITY : RPC_C_AUTHN_LEVEL_PKT_PRIVACY,
             RPC_C_AUTHN_WINNT, NULL, RPC_C_AUTHZ_NONE)) return 3;
-    RpcTryExcept { status = Client_Transfer(binding, input, event, &output); }
+    RpcTryExcept { status = Client_Transfer(binding, process, input, event, &output); }
     RpcExcept(1) { status = RpcExceptionCode(); }
     RpcEndExcept
+    CloseHandle(process);
     if (denied) {
         if (status!=RPC_S_ACCESS_DENIED || output!=NULL ||
             WaitForSingleObject(event,0)!=WAIT_TIMEOUT || GetFileSize(input,NULL)!=1) {

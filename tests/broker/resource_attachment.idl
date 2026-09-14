@@ -8,6 +8,7 @@ interface resource_attachment
 {
     error_status_t Transfer(
         [in] handle_t binding,
+        [in, system_handle(sh_process)] HANDLE process,
         [in, system_handle(sh_file)] HANDLE input,
         [in, system_handle(sh_event)] HANDLE event,
         [out, system_handle(sh_file)] HANDLE *output);
