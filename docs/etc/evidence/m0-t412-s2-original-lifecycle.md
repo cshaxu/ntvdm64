@@ -355,3 +355,73 @@ This proves reusable original-owner library composition, not final product
 graph selection: the deployed executable still selects the old local policy.
 Authenticated product context, resource transfer and final process wiring
 remain required. S2/T412 are not closed by these library tests.
+
+## Source-owned shared-WOW identity admission
+
+The complete outgoing boundary of original BaseSrv OkToRunInSharedWOW was
+reviewed with original windows/core/ntuser/server/exports.c and
+windows/core/ntuser/kernel/security.c. The first contains a directly reusable
+token-query helper; the second assumes the first global kernel windowstation
+is the only interactive one. S1 already admitted a per-user/session/logon
+replacement for that unavailable singleton predicate, not a success stub.
+
+Only `_UserTestTokenForInteractive` is imported as a true exports.c subset.
+Origin: the same pinned OpenNT revision; original file SHA-256
+`dbeb0ad48349bf5887a1333f21b427d8e0fdd3cb226977a9dc786373e961c71f`;
+67-line function SHA-256 (LF normalized, without trailing newline)
+`7b6c9072220144e4b77aca973682838333994c3bc962eb802143e210e912a520`.
+The helper's token sizing/query, LocalAlloc/LocalFree, AuthenticationId output
+and status behavior are unchanged. The included LATER block stays inactive.
+No other winsrv function or USER subsystem is admitted; no original notice
+is removed and this is not a distribution/license grant.
+
+Recovery ledger:
+
+1. The original token helper is composable unchanged and retained under its
+   original-relative opennt-host path. Modern native token query and public
+   allocation supply its ordinary dependencies.
+2. Its NtUserTestForInteractiveUser edge cannot call NT4's private syscall or
+   access grpwinstaList. The finite binding captures the trusted broker process
+   AuthenticationId only when its process windowstation is visible, then binds
+   that immutable scope to the dispatch thread. It compares the original
+   helper's queried LUID, not a wire-provided identity. Missing/invalid scope
+   or mismatch returns access-denied; no windowstation is created or modified.
+   This is the S1-approved scoped replacement, not global interactive-user
+   enumeration. The initializer rejects NULL and fails closed when host queries
+   cannot establish this scope.
+3. No expression in srvvdm.c or the imported token helper is changed.
+4. No autonomous token-query or SYSTEM-impersonation policy is introduced.
+   Only unavailable interactive-scope capture/binding/comparison is new.
+
+The lifecycle fixture installs the linked original helper into the original
+service callback slot, captures its own real interactive scope, and stamps the
+test-authenticated caller identity into the local message header. Tests now
+exercise original BaseCheckVDM -> BaseSrvCheckWOW -> OkToRunInSharedWOW ->
+original token helper -> finite predicate. They assert:
+
+- no bound scope rejects with access-denied, no WOW record and drained captures;
+- a deliberately mismatched expected AuthenticationId likewise rejects (this
+  is a controlled predicate-negative test, not another user's real token);
+- matching actual logon admits WRITE's command record as VDM_NOT_PRESENT and
+  preserves its application/task identity and original WowAuthId;
+- original partial-creation undo removes the record and resets WowAuthId to
+  the original invalid LUID; the thread scope is unbound before leaving it;
+- an invalid token fails without modifying the caller's AuthenticationId output;
+- earlier DOS/client/server/registration/wait/cleanup tests still pass.
+
+Function hash/source equality and library map ownership are checked by
+Verify-BrokerOriginalLifecycle.mjs; outputs remain in the existing S2 build
+root. These tests do not run WRITE, load modern winsrv, create a VDM worker or
+alter tokens. Actual SYSTEM impersonation, another logon/session, non-visible
+windowstation initialization and production RPC identity binding are not yet
+verified. The formal broker must install this source helper and bind a trusted
+scope before service dispatch. Product selection and T412 closure remain open.
+
+The scope capture/predicate explicitly refuses the original winnt.h SYSTEM_LUID
+as an interactive-user identity, even on a visible windowstation. A controlled
+predicate test verifies this refusal. This does not disable original BaseSrv's
+SYSTEM-caller impersonation branch: that branch must match the independently
+captured real interactive-user scope, not grant access to SYSTEM itself. A
+broker started under SYSTEM cannot derive an interactive-user scope from its
+own token and therefore fails shared-WOW scope initialization rather than
+guessing another user's identity.

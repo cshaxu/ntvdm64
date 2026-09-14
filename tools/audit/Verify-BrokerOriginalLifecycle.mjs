@@ -21,6 +21,10 @@ const updateBody=clientSource.match(/BOOL\r?\nBaseUpdateVDMEntry\([\s\S]*?\r?\n}
 const checkBody=clientSource.match(/BOOL\r?\nBaseCheckVDM\([\s\S]*?\r?\n}\r?\n/)[0].replace(/\r\n/g,'\n');
 const checkOriginal=fs.readFileSync('O:/repos.external/OpenNT/base/win32/client/vdm.c','utf8').match(/BOOL\r?\nBaseCheckVDM\([\s\S]*?\r?\n}\r?\n/)[0].replace(/\r\n/g,'\n');
 assert.equal(checkBody,checkOriginal,'Original launch body changed');
+const tokenPattern=/NTSTATUS\r?\n_UserTestTokenForInteractive\([\s\S]*?\r?\n}/;
+const tokenSource=fs.readFileSync('src/opennt-host/windows/core/ntuser/server/exports.c','utf8').match(tokenPattern)[0].replace(/\r\n/g,'\n');
+assert.equal(createHash('sha256').update(tokenSource).digest('hex'),'7b6c9072220144e4b77aca973682838333994c3bc962eb802143e210e912a520','Pinned token helper changed');
+assert.equal(tokenSource,fs.readFileSync('O:/repos.external/OpenNT/windows/core/ntuser/server/exports.c','utf8').match(tokenPattern)[0].replace(/\r\n/g,'\n'),'Original token helper changed');
 assert.equal(createHash('sha256').update(checkBody).digest('hex'),'579840e2d5598051d157d9e92871027b543ecfcba8d299a745928bfd71c6386e','Pinned launch body changed');
 assert.equal(createHash('sha256').update(updateBody).digest('hex'),
     'de56cfccd08922ae57df7332cc8df70f60db186f44f177336188c2d236e9fd26','Original update body changed');
@@ -32,11 +36,13 @@ const commands=[
     `cl.exe ${flags} ${includes} /Fo"${build}/srvvdm.obj" "${root}/src/opennt-host/base/win32/server/srvvdm.c"`,
     `cl.exe ${flags} ${includes} /Fo"${build}/fixture.obj" "${root}/tests/broker/original_server_lifecycle.c"`,
     `cl.exe ${flags} /Fo"${build}/process.obj" "${root}/src/adapter-opennt-host/basesrv/source/base_client_process.c"`,
+    `cl.exe ${flags} ${includes} /Fo"${build}/interactive.obj" "${root}/src/adapter-opennt-host/basesrv/source/base_interactive.c"`,
+    `cl.exe ${flags} ${includes} /Fo"${build}/exports.obj" "${root}/src/opennt-host/windows/core/ntuser/server/exports.c"`,
     `cl.exe ${flags} ${includes} /Gy /DOPENNT_BASE_CLIENT_VDM_COMMANDS /Fo"${build}/client.obj" "${root}/src/opennt-host/base/win32/client/vdm.c"`,
     `cl.exe ${rtlFlags} /Fo"${build}/error.obj" "${root}/src/opennt-host/base/ntos/rtl/error.c"`,
-    'lib.exe /nologo /out:opennt-base-server.lib srvvdm.obj',
+    'lib.exe /nologo /out:opennt-base-server.lib srvvdm.obj exports.obj',
     'lib.exe /nologo /out:opennt-base-client.lib client.obj',
-    'link.exe /nologo /opt:ref /out:original-lifecycle.exe /map:original-lifecycle.map fixture.obj opennt-base-server.lib opennt-base-client.lib process.obj error.obj ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib'
+    'link.exe /nologo /opt:ref /out:original-lifecycle.exe /map:original-lifecycle.map fixture.obj opennt-base-server.lib opennt-base-client.lib process.obj interactive.obj error.obj ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib'
 ];
 const log=fs.openSync(path.join(build,'build.log'),'w');
 for(const command of commands) {
@@ -57,6 +63,7 @@ assert.equal(image.readUInt16LE(image.readUInt32LE(0x3c)+4),0x14c);
 const map=fs.readFileSync(path.join(build,'original-lifecycle.map'),'utf8');
 assert(map.includes('opennt-base-server:srvvdm.obj')&&map.includes('opennt-base-client:client.obj'),'Original owner libraries not selected');
 assert(!map.includes('luid.obj'),'Generated inline replacement still linked');
+assert(map.split(/\r?\n/).some(line=>line.includes('__UserTestTokenForInteractive')&&line.includes('opennt-base-server:exports.obj')),'Original token provider missing');
 assert(map.split(/\r?\n/).some(line=>line.includes('_GetNextVDMCommand@4')&&line.includes('client.obj')),'Original client provider missing');
 assert(map.split(/\r?\n/).some(line=>line.includes('_BaseUpdateVDMEntry')&&line.includes('client.obj')),'Original update provider missing');
 assert(map.split(/\r?\n/).some(line=>line.includes('_BaseCheckVDM')&&line.includes('client.obj')),'Original launch provider missing');

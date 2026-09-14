@@ -80,3 +80,15 @@ currently authenticated bound request context; the focused fixture supplies
 its own process, while production authentication/registration is still pending.
 The header supplies no CSR runtime, command policy or success stubs. Keeping
 original CSR declaration records does not admit their historical transport.
+
+`base_interactive.h`/`base_interactive.c` bind the single private predicate
+below original winsrv `_UserTestTokenForInteractive`. The original kernel
+TestForInteractiveUser compares against grpwinstaList's first windowstation
+user, an unavailable global NT4 service contract. The admitted standalone
+scope is captured from the broker's real process token on a visible process
+windowstation; an immutable caller-owned scope is bound per dispatch thread
+and restored/unbound afterward. Only equal AuthenticationId succeeds; absent,
+invalid and mismatched scope fails closed. No wire LUID may initialize it.
+Original token inspection and BaseSrv SYSTEM impersonation decisions stay in
+their original owners. App must capture/bind this scope and install the linked
+original helper before serving shared-WOW requests; product wiring is pending.

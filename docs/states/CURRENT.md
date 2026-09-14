@@ -51,6 +51,10 @@ Original client/server archives now pass the lifecycle tests using the
 package-private declaration header and original LUID inline, without the
 test-only forced header, empty DFS header or generated LUID object. Final
 product selection remains unfinished; see the linked S2 evidence.
+Shared-WOW admission now uses the original token helper and passes absent/
+mismatched/matching scoped-logon and partial-launch-undo tests. This is protocol
+proof only; real SYSTEM impersonation, RPC binding and guest execution remain
+unverified in this group.
 
 ## T412 S1 historical checkpoints
 

@@ -100,6 +100,20 @@ admitted merely to make the larger historical API product shell link.
 
 ## Divergence register
 
+OPENNT-HOST-030 admits only `_UserTestTokenForInteractive` from pinned OpenNT
+`windows/core/ntuser/server/exports.c` (original file SHA-256
+`dbeb0ad48349bf5887a1333f21b427d8e0fdd3cb226977a9dc786373e961c71f`).
+This directly serves srvvdm.c's OkToRunInSharedWOW. Its 67-line body is unchanged
+(LF-normalized SHA-256
+`7b6c9072220144e4b77aca973682838333994c3bc962eb802143e210e912a520`).
+The true subset crops all unrelated winsrv exports and replaces precomp.h with
+the finite private binding. Outgoing closure is native token query, public
+LocalAlloc/LocalFree and the admitted scoped interactive-logon predicate.
+No USER/Win32k subsystem, windowstation list, CSR shell or new token-query
+policy is imported. Original BaseSrv SYSTEM/impersonation policy is unchanged;
+actual SYSTEM impersonation is not tested by this fixture. Source-first
+admission and the exact replacement predicate are recorded in S2 evidence.
+
 T412 S2 registers OPENNT-HOST-028 in `base/win32/server/basesrv.h`: the
 `OPENNT_BASE_VDM_SERVER` compilation group includes the finite BaseSrv-private
 declaration binding and omits the unrelated DFS device header. The original

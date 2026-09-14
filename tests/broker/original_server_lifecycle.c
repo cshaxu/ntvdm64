@@ -1,5 +1,6 @@
 /* Test host mechanics only. All VDM record policy is linked from srvvdm.c. */
 #include "basesrv.h"
+#include <base_interactive.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -10,6 +11,9 @@ static OPENNT_SUPPORT_PEB peb;
 static OPENNT_SUPPORT_TEB teb;
 extern HANDLE hwndWowExec;
 extern ULONG ulWowExecProcessSequenceNumber;
+extern NTSTATUS (*UserTestTokenForInteractive)(HANDLE, PLUID);
+extern PWOWHEAD WOWHead;
+extern LUID WowAuthId;
 BOOL BaseUpdateVDMEntry(ULONG, HANDLE *, ULONG, ULONG);
 BOOL BaseCheckVDM(ULONG, PCWCH, PCWCH, PCWCH, ANSI_STRING *, PBASE_API_MSG, PULONG, DWORD, LPSTARTUPINFOW);
 POPENNT_SUPPORT_PEB NTAPI NtCurrentPeb(VOID) { return &peb; }
@@ -67,6 +71,8 @@ NTSTATUS NTAPI CsrClientCallServer(PCSR_API_MSG message, PCSR_CAPTURE_HEADER cap
     CSR_REPLY_STATUS reply = 0;
     ULONG result;
     (void)capture; (void)length;
+    /* Test transport supplies its authenticated local caller, never wire PID. */
+    message->h.ClientId=thread.ClientId;
     switch (number) {
     case CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepCheckVDM):
         ++launchCalls;
@@ -337,6 +343,44 @@ int main(void)
         CHECK(!BaseCheckVDM(BINARY_TYPE_DOS,L"O:\\ntvdm64\\MEM.EXE",L"MEM.EXE",L"O:\\ntvdm64",NULL,&m,&task,0,&launch));
         CHECK(GetLastError()==ERROR_INVALID_PARAMETER && captures==0 && launchCalls==before);
         puts("PASS: original BaseCheckVDM command/environment/startup capture, server ownership and allocation failure");
+    }
+    {
+        OPENNT_BASE_INTERACTIVE_SCOPE scope,wrong;
+        STARTUPINFOW launch={sizeof(launch)};
+        CHAR envBytes[]="PATH=O:\\ntvdm64\0";
+        ANSI_STRING env={sizeof(envBytes),sizeof(envBytes),envBytes};
+        ULONG task=0;
+        HANDLE undo;
+        LUID invalidOutput={0x12345678,0x12345678};
+        CHECK(!OpenNtBaseInitializeInteractiveScope(NULL) && GetLastError()==ERROR_INVALID_PARAMETER);
+        CHECK(!NT_SUCCESS(_UserTestTokenForInteractive(NULL,&invalidOutput)));
+        CHECK(invalidOutput.LowPart==0x12345678 && invalidOutput.HighPart==0x12345678);
+        CHECK(OpenNtBaseInitializeInteractiveScope(&scope));
+        wrong=scope; wrong.AuthenticationId.LowPart=0x3e7; wrong.AuthenticationId.HighPart=0;
+        CHECK(OpenNtBaseBindInteractiveScope(&wrong)==NULL);
+        CHECK(!NT_SUCCESS(NtUserTestForInteractiveUser(&wrong.AuthenticationId)));
+        CHECK(OpenNtBaseBindInteractiveScope(NULL)==&wrong);
+        UserTestTokenForInteractive=_UserTestTokenForInteractive;
+        ZeroMemory(&m,sizeof(m));
+        CHECK(!BaseCheckVDM(BINARY_TYPE_WIN16,L"O:\\ntvdm64\\system32\\WRITE.EXE",L"WRITE.EXE",L"O:\\ntvdm64",&env,&m,&task,0,&launch));
+        CHECK(GetLastError()==ERROR_ACCESS_DENIED && WOWHead==NULL && captures==0);
+        wrong=scope; wrong.AuthenticationId.LowPart^=1;
+        CHECK(OpenNtBaseBindInteractiveScope(&wrong)==NULL);
+        ZeroMemory(&m,sizeof(m));
+        CHECK(!BaseCheckVDM(BINARY_TYPE_WIN16,L"O:\\ntvdm64\\system32\\WRITE.EXE",L"WRITE.EXE",L"O:\\ntvdm64",&env,&m,&task,0,&launch));
+        CHECK(GetLastError()==ERROR_ACCESS_DENIED && WOWHead==NULL && captures==0);
+        CHECK(OpenNtBaseBindInteractiveScope(&scope)==&wrong);
+        ZeroMemory(&m,sizeof(m));
+        CHECK(BaseCheckVDM(BINARY_TYPE_WIN16,L"O:\\ntvdm64\\system32\\WRITE.EXE",L"WRITE.EXE",L"O:\\ntvdm64",&env,&m,&task,0,&launch));
+        CHECK(WOWHead!=NULL && task!=0 && m.u.CheckVDM.VDMState==VDM_NOT_PRESENT && captures==0);
+        CHECK(WOWHead->WOWRecord->iTask==task);
+        CHECK(WowAuthId.LowPart==scope.AuthenticationId.LowPart && WowAuthId.HighPart==scope.AuthenticationId.HighPart);
+        CHECK(!strcmp(WOWHead->WOWRecord->lpVDMInfo->AppName,"O:\\ntvdm64\\system32\\WRITE.EXE"));
+        undo=(HANDLE)task;
+        CHECK(BaseUpdateVDMEntry(UPDATE_VDM_UNDO_CREATION,&undo,VDM_PARTIALLY_CREATED,BINARY_TYPE_WIN16));
+        CHECK(WOWHead==NULL && OpenNtBaseBindInteractiveScope(NULL)==&scope);
+        CHECK(WowAuthId.LowPart==0xffffffff && WowAuthId.HighPart==-1);
+        puts("PASS: original shared-WOW admission rejects absent/wrong scope, accepts matching logon and undoes launch");
     }
     puts("PASS: original first-VDM, record/command/directory capacity, dispatch/completion, parent/worker events, reentry, empty-WOW, cleanup");
     return 0;
