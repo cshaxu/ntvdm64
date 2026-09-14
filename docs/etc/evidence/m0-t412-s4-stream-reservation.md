@@ -74,6 +74,12 @@ current Redirector/guest-redirection unavailable boundary, not evidence that
 the direct CLI file handles failed to transfer. The direct and guest cases are
 therefore explicitly distinguished.
 
+The third comparison passed literal `>` as an argument to `run16.exe MEM.EXE
+> literal-target.txt`, without a host shell. It reached normal
+Check/reserve/prepare/Get and exit at
+`O:\ntvdm64\logs\m0-t412-s4-literal-redir-r1`; no host output target was
+created. Thus run16 did not invent shell parsing for a literal operator.
+
 ## Interpretation
 
 Confidence is high that the original Update-before-Connect ordering and
