@@ -970,3 +970,16 @@ disconnect races remain unverified. The request writer is asynchronous so
 pipe backpressure cannot block the parent's deadline loop; cleanup waits for
 the owned helper and writer before freeing state. No guest ran and the
 three-program DOS gate remains open.
+
+The next parent fault tests pass using a fixture-only helper executable:
+one never reads its request, while the parent sends 4096 candidates. A 200ms
+deadline returns ERROR_TIMEOUT with total test-observed completion below five
+seconds, all output bytes unchanged and identical parent process handle count
+before/after. This verifies stalled-helper cleanup in that case, not a hard
+200ms bound on process termination or arbitrary OS failure. Another helper
+returns a correctly sized successful reply containing membership byte 2.
+The parent now rejects any membership value outside 0/1 with
+ERROR_INVALID_DATA and unchanged output. The fault environment is read only
+by the fixture executable, never by run16 or the production parent. Real
+run16 positive and cancellation cases also continue to pass. Authenticated
+RPC registration-generation and disconnect integration remain outstanding.

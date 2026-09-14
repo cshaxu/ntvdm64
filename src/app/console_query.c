@@ -106,6 +106,8 @@ DWORD app_console_query(const WCHAR *helper,HANDLE caller,const HANDLE *candidat
         if (reply.version!=BROKER_CONSOLE_PROBE_VERSION || reply.reserved || code!=reply.status ||
             reply.count!=(reply.status ? 0 : count) || received!=sizeof(reply)+reply.count) error=ERROR_INVALID_DATA;
         else error=reply.status;
+        if (!error) for (i=0;i<count;++i)
+            if (response[sizeof(reply)+i]>1) {error=ERROR_INVALID_DATA;break;}
     }
 cleanup:
     if (child.hProcess) {

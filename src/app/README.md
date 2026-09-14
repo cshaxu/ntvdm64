@@ -160,8 +160,10 @@ checked again before publishing membership; the service caller must still
 revalidate registration generations. The private pipe orchestration is a
 new finite modern-Console dependency, not recovered BaseSrv policy. Tests
 cover the actual parent-to-run16 query and a signaled cancellation with
-unchanged output. Timeout/stalled-helper fault injection and authenticated
-service integration remain open. An impossible failure to terminate a live
+unchanged output. Fixture-only stalled-helper injection also verifies timeout
+return, unchanged output and restored parent handle count; malformed non-boolean
+membership is rejected. Authenticated service integration remains open.
+An impossible failure to terminate a live
 owned helper is fail-fast rather than returning with a writer using freed
 memory; this exceptional path is not injected or claimed tested.
 

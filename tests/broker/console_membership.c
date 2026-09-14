@@ -111,8 +111,30 @@ int main(int argc, char **argv)
     DWORD many[BROKER_CONSOLE_PROBE_MAX_CANDIDATES];
     BYTE expected[BROKER_CONSOLE_PROBE_MAX_CANDIDATES];
     HANDLE processes[3],cancel;
+    HANDLE manyProcesses[BROKER_CONSOLE_PROBE_MAX_CANDIDATES];
+    DWORD handlesBefore,handlesAfter;
+    ULONGLONG started;
     WCHAR helper[MAX_PATH];
     PROCESS_INFORMATION *children[] = {&a, &b, &c};
+    if (argc==2 && !strcmp(argv[1],"--internal-console-probe")) {
+        char fault[16];
+        if (GetEnvironmentVariableA("CONSOLE_FIXTURE_BAD_REPLY",fault,sizeof(fault))) {
+            BROKER_CONSOLE_PROBE_REQUEST request;
+            BROKER_CONSOLE_PROBE_REPLY reply={BROKER_CONSOLE_PROBE_VERSION,0,3,0};
+            DWORD payload[3],bytes;
+            BYTE invalid[3]={0,2,1};
+            HANDLE input=GetStdHandle(STD_INPUT_HANDLE),output=GetStdHandle(STD_OUTPUT_HANDLE);
+            if (!ReadFile(input,&request,sizeof(request),&bytes,NULL) || bytes!=sizeof(request) ||
+                request.count!=3 || !ReadFile(input,payload,sizeof(payload),&bytes,NULL) || bytes!=sizeof(payload)) return 98;
+            if (!WriteFile(output,&reply,sizeof(reply),&bytes,NULL) ||
+                !WriteFile(output,invalid,sizeof(invalid),&bytes,NULL)) return 97;
+            return 0;
+        }
+        /* Deliberately never read the pipe: only this fixture executable has
+         * the fault role; no product diagnostic switch or environment gate. */
+        Sleep(30000);
+        return 99;
+    }
     if (argc == 3 && !strcmp(argv[1], "wait")) {
         stop = OpenEventA(SYNCHRONIZE, FALSE, argv[2]);
         if (!stop) return 10;
@@ -170,6 +192,21 @@ int main(int argc, char **argv)
     code=app_console_query(helper,c.hProcess,processes,3,cancel,5000,members);
     CloseHandle(cancel);
     if (code!=ERROR_CANCELLED || members[0]!=0 || members[1]!=0 || members[2]!=1) goto done;
+    if (!MultiByteToWideChar(CP_ACP,0,image,-1,helper,MAX_PATH)) goto done;
+    for (i=0;i<BROKER_CONSOLE_PROBE_MAX_CANDIDATES;++i) {
+        manyProcesses[i]=processes[i%3];expected[i]=7;
+    }
+    if (!GetProcessHandleCount(GetCurrentProcess(),&handlesBefore)) goto done;
+    started=GetTickCount64();
+    code=app_console_query(helper,c.hProcess,manyProcesses,BROKER_CONSOLE_PROBE_MAX_CANDIDATES,
+        NULL,200,expected);
+    if (code!=ERROR_TIMEOUT || GetTickCount64()-started>5000) goto done;
+    for (i=0;i<BROKER_CONSOLE_PROBE_MAX_CANDIDATES;++i) if (expected[i]!=7) goto done;
+    if (!GetProcessHandleCount(GetCurrentProcess(),&handlesAfter) || handlesBefore!=handlesAfter) goto done;
+    if (!SetEnvironmentVariableA("CONSOLE_FIXTURE_BAD_REPLY","1")) goto done;
+    code=app_console_query(helper,c.hProcess,processes,3,NULL,5000,members);
+    SetEnvironmentVariableA("CONSOLE_FIXTURE_BAD_REPLY",NULL);
+    if (code!=ERROR_INVALID_DATA || members[0]!=0 || members[1]!=0 || members[2]!=1) goto done;
     result = 0;
 done:
     FreeConsole();
