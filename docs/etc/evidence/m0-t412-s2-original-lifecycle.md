@@ -603,3 +603,34 @@ was terminated in this fixture: OS death detection, authenticated registration,
 concurrent cleanup and process-generation allocation remain real-process
 integration requirements. Source-owned cleanup coverage does not prove those
 mechanics or authorize a new shadow record table.
+
+## S2 bounded conclusion and S3 transition
+
+S2 source recovery is delivered through 3d14d6535: original client/server
+archives are formal x86 targets; lifecycle and classifier fixtures link those
+archives and pass the positive/negative cases documented above. Original
+service bodies, capture routines, classifier, launcher argument construction,
+task-exit retrieval and process-generation cleanup now have concrete providers.
+Finite private ABI/configuration/path/interactive-scope bindings remain named.
+
+The former S2 Exit Criteria also said superseded policy must be removed, while
+its Non-goals assigned three-process transport to S3. The actual product still
+uses the old local provider; that clause is not satisfied. Advancing by claiming
+it passed would be false, while inventing another local product bridge solely
+to satisfy it would move away from the approved architecture.
+
+Under the owner's existing approval of the entire sequential S1--S6 proposal,
+the stage boundary is explicitly corrected, without changing the T objective
+or accepting a missing capability. S2 concludes original-owner recovery only.
+S3 assumes the outstanding mandatory product-selection/local-fallback-removal
+gate along with its already planned real transport and three-program build.
+S6 retains complete obsolete-source deletion and net diff accounting. None of
+those requirements is waived, claimed passed or moved outside this T.
+
+S3 admission therefore starts with known unfinished work: real authenticated
+request/process contexts, resource receipts, worker registration/readiness and
+death detection, consistent original worker entry, selected product links and
+publication-rule migration. Native SYSTEM impersonation and the later complete
+runtime/race matrices remain explicit unverified requirements. No new EXE has
+been deployed and the goal remains incomplete. Earlier statements that S2 is
+open are chronological checkpoints superseded by this bounded transition.

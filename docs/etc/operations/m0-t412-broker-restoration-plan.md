@@ -5,8 +5,9 @@
 Owner admission on 2026-09-13 covers the queue-head broker package and asks
 for S decomposition first. [Status](../../states/CURRENT.md) alone owns the
 active packet. S1 design is closed by the
-[consolidated review](../evidence/m0-t412-s1-design-closure.md); S2 is active,
-and S3--S6 remain sequential planned work. The [single broker proposal](../../proposals/proposal-cross-process-broker-closure-001.md)
+[consolidated review](../evidence/m0-t412-s1-design-closure.md); S2 reached its
+source-recovery conclusion and S3 is active. S4--S6 remain sequential planned
+work. The [single broker proposal](../../proposals/proposal-cross-process-broker-closure-001.md)
 retains the detailed requirements; this plan supersedes its provisional stage
 grouping without creating another proposal.
 
@@ -105,9 +106,15 @@ design choices remain explicit and prevent claiming the design is complete.
    A temporary fixture transport is explicitly test-only and cannot count as
    cross-process acceptance; S3 must replace it with real IPC evidence.
 
-S2 exits with the original service/client lifecycle selected and its finite
-bindings enumerated. A compilation success with calls still routed to an old
-autonomous provider does not satisfy this stage.
+S2's bounded source-recovery conclusion selects the original service/client
+lifecycle in formal owner archives and tests, with finite bindings enumerated.
+The earlier wording also required removal of the old product provider before
+S3's transport existed. That dependency ordering is corrected explicitly:
+product selection and removal of the local fallback are mandatory S3 gates;
+final obsolete-source deletion remains S6. They have not passed in S2 and are
+not waived or exported to another T. A test using an old autonomous provider
+still cannot count as original-body evidence. See the
+[S2 transition record](../evidence/m0-t412-s2-original-lifecycle.md#s2-bounded-conclusion-and-s3-transition).
 
 ## S3 detailed procedure — connect the real process topology
 
