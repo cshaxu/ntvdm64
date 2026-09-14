@@ -2,9 +2,9 @@
 
 ## Current Work
 
-**Active: M0 T411 S4.**
+**Active: none.**
 
-## Active Packet
+## T411 Closed Packet
 
 ### M0 T411 S4 — CCPU event-profile closure
 
@@ -41,6 +41,10 @@ and E01 remain unmodified and transfer respectively to S3 and S4.
 S3 corrected C05: calibration is now the registered unavailable value zero,
 while restart remains independently writable. The focused x86 fixture passes;
 the source and verification record is indexed in `docs/etc/evidence`.
+
+## T411 Closure Record
+
+T411 is closed at the linked [closure record](../history/m0-t411-ccpu40-cvid-event-closure.md).
 
 ## S1 Closure Record
 
