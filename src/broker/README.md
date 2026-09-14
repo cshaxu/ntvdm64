@@ -9,8 +9,10 @@ build-only basesrv entry and real RPC fixtures. Three-program delivery is pendin
 opaque context handles and typed process attachments. Context handles are
 transport capabilities, not serialized native command fields. App authenticates
 every connect/query/disconnect and the original binding validates PID/generation;
-rundown drops registration after outstanding calls. Command/resource endpoints
-are not admitted by this initial interface yet. Generated stubs stay under build.
+rundown drops registration after outstanding calls. Its `Check` endpoint carries
+only the existing bounded copied `BasepCheckVDM` request and fixed forty-byte
+reply; it delegates to the original service binding. `GetNextVDMCommand` and
+completion endpoints remain pending. Generated stubs stay under build.
 
 `rpc_security.c/.h` is new finite modern transport glue, not original BaseSrv
 policy. NT4 CSR port/process authentication cannot be reused without the

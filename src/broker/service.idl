@@ -18,6 +18,18 @@ interface vdm_service
         [in, system_handle(sh_process)] HANDLE process,
         [in] unsigned long generation,
         [out] unsigned long *first);
+    /* The body is the existing versioned, copied BasepCheckVDM binding.
+     * Its fixed-size reply is the existing forty-byte Check reply envelope;
+     * no native pointer, Console identity or HANDLE crosses this operation. */
+    error_status_t Check(
+        [in] handle_t binding,
+        [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [in] unsigned long request_bytes,
+        [in, size_is(request_bytes)] byte *request,
+        [out] unsigned long *reply_bytes,
+        [out] byte reply[40]);
     error_status_t Disconnect(
         [in] handle_t binding,
         [in, system_handle(sh_process)] HANDLE process,

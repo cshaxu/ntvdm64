@@ -19,7 +19,7 @@ try {
         `cl.exe ${flags} "${product}/obj/basesrv/service_c.c" /Fostub.obj`,
         `cl.exe ${sourceFlags} "${root}/tests/broker/service_stream_source.c" /Fostream-source.obj`,
         `link.exe /nologo /opt:ref /map:client.map /out:client.exe client.obj stub.obj stream-source.obj "${product}/obj/run16/support.obj" "${product}/broker-transport.lib" "${product}/opennt-base-server.lib" "${product}/opennt-base-bindings.lib" "${product}/original-opennt-rtl-x86.lib" rpcrt4.lib ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib`,
-        `link.exe /nologo /opt:ref /map:base-client-rpc-first.map /out:base-client-rpc-first.exe base-client-rpc-first.obj rpc-client.obj stub.obj "${product}/broker-transport.lib" rpcrt4.lib ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib`
+        `link.exe /nologo /opt:ref /map:base-client-rpc-first.map /out:base-client-rpc-first.exe base-client-rpc-first.obj rpc-client.obj stub.obj "${product}/broker-transport.lib" "${product}/opennt-base-bindings.lib" "${product}/opennt-base-server.lib" "${product}/original-opennt-rtl-x86.lib" rpcrt4.lib ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib`
     ]) {
         const result=spawnSync('cmd.exe',['/d','/c',`call "${env}" ${command}`],{cwd:build,windowsHide:true,windowsVerbatimArguments:true,stdio:['ignore',log,log],timeout:60000});
         if(result.status!==0) throw Error(`Client build failed ${result.status}; see ${build}/build.log`);
@@ -34,10 +34,12 @@ for(const [symbol,owner] of [['_BaseSrvDupStandardHandles','opennt-base-server:s
 const baseClientMap=fs.readFileSync(path.join(build,'base-client-rpc-first.map'),'utf8');
 if(!baseClientMap.split(/\r?\n/).some(line=>line.includes('_OpenNtBaseClientCallServer@16')&&line.includes('rpc-client.obj')))
     throw Error('BaseClient RPC facade did not select the product provider');
+if(!baseClientMap.split(/\r?\n/).some(line=>line.includes('_Client_Check')&&line.includes('stub.obj')))
+    throw Error('BaseClient Check route did not select the generated RPC stub');
 if(baseClientMap.includes('_CsrClientCallServer@16'))
     throw Error('Host ntdll CSR client entered the BaseClient RPC test');
 const map=fs.readFileSync(path.join(product,'basesrv.exe.map'),'utf8');
-for(const [symbol,owner] of [['_BaseSrvIsFirstVDM','opennt-base-server:srvvdm.obj'],['_OpenNtBaseServiceFirst','opennt-base-bindings:service.obj'],['_OpenNtBaseServiceRetainPeer','opennt-base-bindings:service.obj'],['_OpenNtBaseRetainRegisteredProcess','opennt-base-bindings:registry.obj']])
+for(const [symbol,owner] of [['_BaseSrvIsFirstVDM','opennt-base-server:srvvdm.obj'],['_Server_Check','entry.obj'],['_OpenNtBaseServiceFirst','opennt-base-bindings:service.obj'],['_OpenNtBaseServiceCheck','opennt-base-bindings:service.obj'],['_OpenNtBaseServiceRetainPeer','opennt-base-bindings:service.obj'],['_OpenNtBaseRetainRegisteredProcess','opennt-base-bindings:registry.obj']])
     if(!map.split(/\r?\n/).some(line=>line.includes(symbol)&&line.includes(owner))) throw Error(`Wrong product provider ${symbol}`);
 if(/fixture|registration\.obj|resource_attachment/i.test(map)) throw Error('Fixture entered product link');
 const image=fs.readFileSync(path.join(product,'basesrv.exe'));

@@ -10,6 +10,7 @@
 #include "adapter-opennt-host/basesrv/include/base_service.h"
 static broker_rpc_scope scope;
 static OPENNT_BASE_SERVICE *service;
+#define BASE_CHECK_REPLY_BYTES 40u
 error_status_t Server_AttachFile(handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,ULONG role,HANDLE stream,ULONG *receipt)
 {
@@ -61,6 +62,22 @@ error_status_t Server_First(handle_t binding,VDM_CONNECTION connection,HANDLE pr
     status=broker_rpc_peer_process(&scope,binding,process,&pid);
     if (status) return status;
     return OpenNtBaseServiceFirst(connection,pid,generation,first);
+}
+error_status_t Server_Check(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+    ULONG generation,ULONG requestBytes,unsigned char *request,ULONG *replyBytes,
+    unsigned char reply[BASE_CHECK_REPLY_BYTES])
+{
+    DWORD pid,error;
+    uint32_t required=0;
+    if (!replyBytes || !reply) return ERROR_INVALID_PARAMETER;
+    *replyBytes=0;
+    error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    if (error) return error;
+    error=OpenNtBaseServiceCheck(connection,pid,generation,request,requestBytes,
+        reply,BASE_CHECK_REPLY_BYTES,&required);
+    if (!error && required!=BASE_CHECK_REPLY_BYTES) return ERROR_INVALID_DATA;
+    if (!error) *replyBytes=required;
+    return error;
 }
 error_status_t Server_Disconnect(handle_t binding,HANDLE process,ULONG generation,VDM_CONNECTION *connection)
 {

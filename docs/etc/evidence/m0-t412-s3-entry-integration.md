@@ -1331,3 +1331,46 @@ the original COMMAND archive and the complete current x86 process target
 passes. A fresh independent strict link now has exactly one unresolved symbol,
 `OpenNtBaseClientCallServer@16`. This is the intended hard boundary: no legacy
 local policy, system CSR import or `force` linker option can now conceal it.
+
+## Product CheckVDM RPC composition
+
+Question: can the real x86 BaseClient `BasepCheckVDM` call reach the retained
+original BaseSrv owner without a local fallback, a second pipe protocol, or a
+native pointer/HANDLE in a command record?
+
+Inputs: the existing versioned copied Check command/reply binding
+(`base_command.c`), authenticated `ncalrpc` connection/context and process-peer
+checks, and the already-proven MIDL bounded-byte transport used by the resource
+fixture. The prior named-pipe experiment was removed before this composition:
+it could not open on this host (`ERROR_ACCESS_DENIED`) and was not retained as
+product code.
+
+The formal `vdm_service` now exposes one narrow `Check` RPC call: authenticated
+context, authenticated `sh_process`, generation, `request_bytes` plus copied
+bytes, and a fixed 40-byte Check reply. The server validates the live peer then
+calls the existing `OpenNtBaseServiceCheck`; that binding decodes the existing
+record, binds the original request/registry context, dispatches unchanged
+`BaseSrvCheckVDM`, and encodes the existing reply. The client keeps the original
+`CsrClientCallServer` call shape, encodes the existing record, calls generated
+`Client_Check`, and applies the existing reply. No selector, task, queue,
+Console HANDLE, stream HANDLE, pointer, or new policy crosses RPC.
+
+Manual exact x86 MIDL/CL/LINK rebuild was required because the host's Ninja
+process remained idle without child compiler processes. The generated maps show
+`_Server_Check` from `entry.obj`, `_OpenNtBaseServiceCheck` from
+`opennt-base-bindings:service.obj`, and `_Client_Check` from the generated
+worker stub. A controlled owned-process run at
+`build/M0-T412/S3/basesrv-product/check-live` passed:
+
+```text
+ready=True timed_out=False client_exit=0
+PASS: product BaseClient RPC first-VDM and copied original CheckVDM route
+```
+
+An initial test failure returned `ERROR_INSUFFICIENT_BUFFER` because C array
+parameter decay made `sizeof(reply)` four bytes in the server handler. Replacing
+it with the explicit IDL-defined 40-byte reply constant fixed that integration
+bug; no original owner or command format changed. This proves only first-VDM
+and a no-worker DOS CheckVDM admission/response. Worker creation/registration,
+resource handoff, GetNextVDMCommand, completion, idle cleanup and a DOS guest
+run remain S3 obligations; it is not three-program acceptance or publication.

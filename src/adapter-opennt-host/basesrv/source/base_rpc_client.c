@@ -7,6 +7,7 @@
 #include "service.h"
 #include "broker/rpc_security.h"
 #include <base_client.h>
+#include <base_command.h>
 #include <base_rpc_client.h>
 
 typedef struct OPENNT_BASE_RPC_CLIENT {
@@ -17,6 +18,7 @@ typedef struct OPENNT_BASE_RPC_CLIENT {
 } OPENNT_BASE_RPC_CLIENT;
 
 static OPENNT_BASE_RPC_CLIENT client;
+static LONG request_id;
 
 /* Generated client stubs own only their transient marshalling buffers. */
 void *__RPC_USER MIDL_user_allocate(size_t bytes) { return malloc(bytes); }
@@ -26,6 +28,39 @@ static NTSTATUS rpc_failure(DWORD error)
 {
     (void)error;
     return STATUS_UNSUCCESSFUL;
+}
+
+static NTSTATUS check_command(PCSR_API_MSG message,ULONG length)
+{
+    PBASE_API_MSG base=(PBASE_API_MSG)message;
+    unsigned char reply[40];
+    void *wire=NULL;
+    uint32_t request=(uint32_t)InterlockedIncrement(&request_id),wireBytes=0;
+    ULONG replyBytes=0;
+    DWORD error=ERROR_INVALID_DATA;
+    BOOL applied=FALSE;
+    if (!request) request=(uint32_t)InterlockedIncrement(&request_id);
+    if (length!=sizeof(BASE_CHECKVDM_MSG) ||
+        !OpenNtBaseEncodeCheckCommand(base,request,client.generation,NULL,0,&wireBytes) ||
+        !(wire=HeapAlloc(GetProcessHeap(),0,wireBytes)) ||
+        !OpenNtBaseEncodeCheckCommand(base,request,client.generation,wire,wireBytes,&wireBytes))
+        goto done;
+    RpcTryExcept {
+        error=Client_Check(client.binding,client.connection,client.process,client.generation,
+            wireBytes,wire,&replyBytes,reply);
+    }
+    RpcExcept(1) { error=RpcExceptionCode(); }
+    RpcEndExcept
+    if (!error && replyBytes==sizeof(reply))
+        applied=OpenNtBaseApplyCheckReply(reply,(uint32_t)replyBytes,client.generation,request,base);
+done:
+    if (wire) HeapFree(GetProcessHeap(),0,wire);
+    if (error || !applied) {
+        SetLastError(error ? error : ERROR_INVALID_DATA);
+        message->ReturnValue=(ULONG)STATUS_UNSUCCESSFUL;
+        return STATUS_UNSUCCESSFUL;
+    }
+    return (NTSTATUS)message->ReturnValue;
 }
 
 DWORD OpenNtBaseClientConnectCurrent(void)
@@ -89,9 +124,11 @@ NTSTATUS NTAPI OpenNtBaseClientCallServer(PCSR_API_MSG message,
     (void)capture;
     if (!message || !client.connection || !client.binding || !client.process)
         return STATUS_UNSUCCESSFUL;
+    if (number==CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepCheckVDM))
+        return check_command(message,length);
     if (number!=CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepIsFirstVDM) ||
         length!=sizeof(BASE_IS_FIRST_VDM_MSG)) {
-        message->ReturnValue=STATUS_UNSUCCESSFUL;
+        message->ReturnValue=(ULONG)STATUS_UNSUCCESSFUL;
         return STATUS_UNSUCCESSFUL;
     }
     RpcTryExcept {
