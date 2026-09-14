@@ -11,6 +11,8 @@ typedef struct OPENNT_BASE_RESERVATION {
     ULONG task;
     HANDLE console,worker;
     broker_vdm_receipts streams;
+    HANDLE worker_streams[3];
+    DWORD worker_stream_count;
 } OPENNT_BASE_RESERVATION;
 
 struct OPENNT_BASE_RESERVATIONS {
@@ -120,6 +122,42 @@ DWORD OpenNtBaseReservationRevokeStream(OPENNT_BASE_RESERVATIONS *state,uint64_t
     else error=broker_vdm_receipt_revoke(&entry->streams,entry->launcher_generation,receipt);
     LeaveCriticalSection(&state->lock);
     return error;
+}
+
+DWORD OpenNtBaseReservationMarkWorkerLocalStream(OPENNT_BASE_RESERVATIONS *state,
+    uint64_t reservation,HANDLE stream)
+{
+    OPENNT_BASE_RESERVATION *entry;
+    DWORD index,error=ERROR_SUCCESS;
+    if (!state || !reservation || !stream) return ERROR_INVALID_PARAMETER;
+    EnterCriticalSection(&state->lock);
+    entry=find(state,reservation);
+    if (!entry) error=ERROR_NOT_FOUND;
+    else {
+        for (index=0;index<entry->worker_stream_count;++index)
+            if (entry->worker_streams[index]==stream) break;
+        if (index==entry->worker_stream_count) {
+            if (index==ARRAYSIZE(entry->worker_streams)) error=ERROR_TOO_MANY_OPEN_FILES;
+            else entry->worker_streams[entry->worker_stream_count++]=stream;
+        }
+    }
+    LeaveCriticalSection(&state->lock);
+    return error;
+}
+
+BOOL OpenNtBaseReservationIsWorkerLocalStream(OPENNT_BASE_RESERVATIONS *state,
+    uint64_t reservation,HANDLE stream)
+{
+    OPENNT_BASE_RESERVATION *entry;
+    DWORD index;
+    BOOL found=FALSE;
+    if (!state || !reservation || !stream) return FALSE;
+    EnterCriticalSection(&state->lock);
+    entry=find(state,reservation);
+    if (entry) for (index=0;index<entry->worker_stream_count;++index)
+        if (entry->worker_streams[index]==stream) { found=TRUE; break; }
+    LeaveCriticalSection(&state->lock);
+    return found;
 }
 
 DWORD OpenNtBaseReservationPrepareWorker(OPENNT_BASE_RESERVATIONS *state,uint64_t reservation,

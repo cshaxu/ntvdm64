@@ -28,6 +28,13 @@ DWORD OpenNtBaseReservationResolveStream(OPENNT_BASE_RESERVATIONS *,uint64_t res
     uint32_t receipt,HANDLE *stream);
 DWORD OpenNtBaseReservationRevokeStream(OPENNT_BASE_RESERVATIONS *,uint64_t reservation,
     uint32_t receipt);
+/* Original Update can duplicate a standard stream directly into the suspended
+ * worker before its first Get.  Its resulting numeric value is worker-local,
+ * not a broker receipt; record that finite fact so Get does not re-resolve it. */
+DWORD OpenNtBaseReservationMarkWorkerLocalStream(OPENNT_BASE_RESERVATIONS *,
+    uint64_t reservation,HANDLE stream);
+BOOL OpenNtBaseReservationIsWorkerLocalStream(OPENNT_BASE_RESERVATIONS *,
+    uint64_t reservation,HANDLE stream);
 /* The launcher may retain only the live worker it registered under its own
  * reservation.  This is the finite replacement for the original CSR client
  * process-handle namespace; command records still contain no OS handles. */

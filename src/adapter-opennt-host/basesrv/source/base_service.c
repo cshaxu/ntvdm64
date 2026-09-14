@@ -85,7 +85,10 @@ static NTSTATUS service_duplicate_resource(void *context,HANDLE source_process,H
         if (!broker_vdm_receipt_resolve(&scope->connection->streams,
                 scope->connection->process.SequenceNumber,(uint32_t)(ULONG_PTR)source,
                 BROKER_VDM_STDIN,&stream) && DuplicateHandle(GetCurrentProcess(),stream,
-                scope->worker,target,0,TRUE,DUPLICATE_SAME_ACCESS)) return STATUS_SUCCESS;
+                scope->worker,target,0,TRUE,DUPLICATE_SAME_ACCESS) &&
+            OpenNtBaseReservationMarkWorkerLocalStream(
+                scope->connection->service->reservations,
+                scope->connection->reservation,*target)==ERROR_SUCCESS) return STATUS_SUCCESS;
         return STATUS_INVALID_HANDLE;
     }
     /* The retained srvvdm.c body asks to duplicate a source-shaped standard
@@ -545,11 +548,18 @@ DWORD OpenNtBaseServiceGet(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD ge
             message.u.GetNextVDMCommand.StdErr};
         DWORD index;
         for (index=0;index<3;++index) if (ids[index] &&
+            !OpenNtBaseReservationIsWorkerLocalStream(connection->service->reservations,
+                connection->reservation,ids[index]) &&
             OpenNtBaseReservationResolveStream(connection->service->reservations,
                 connection->reservation,(uint32_t)(ULONG_PTR)ids[index],&standard[index])) {
             error=ERROR_INVALID_HANDLE;goto done;
         }
-        *standard_count=3;
+        if (!OpenNtBaseReservationIsWorkerLocalStream(connection->service->reservations,
+                connection->reservation,ids[0]) &&
+            !OpenNtBaseReservationIsWorkerLocalStream(connection->service->reservations,
+                connection->reservation,ids[1]) &&
+            !OpenNtBaseReservationIsWorkerLocalStream(connection->service->reservations,
+                connection->reservation,ids[2])) *standard_count=3;
     }
     *output=state.reply; *output_bytes=state.reply_bytes; state.reply=NULL;
     /* This is an original target event, held by the console record. It crosses

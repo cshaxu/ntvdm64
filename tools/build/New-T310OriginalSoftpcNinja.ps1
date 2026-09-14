@@ -1099,7 +1099,7 @@ if ($Architecture -eq 'x86') {
     $baseReservationTestObject = 'obj/tests/base_reservation_test.obj'
     $graph.Add('build ' + $baseReservationTestObject + ': cc ' + (NinjaPath $baseReservationTestSource))
     $graph.Add('  cflags = ' + $baseOwnerFlags)
-    $graph.Add('build basesrv-reservation-test.exe: broker_test_link ' + $baseReservationTestObject + ' opennt-base-bindings.lib')
+    $graph.Add('build basesrv-reservation-test.exe: broker_test_link ' + $baseReservationTestObject + ' opennt-base-bindings.lib broker-transport.lib')
     $baseServiceReservationTestObject = 'obj/tests/base_service_reservation_test.obj'
     $graph.Add('build ' + $baseServiceReservationTestObject + ': cc ' + (NinjaPath $baseServiceReservationTestSource))
     $graph.Add('  cflags = ' + $baseServerFlags)

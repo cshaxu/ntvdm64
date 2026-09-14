@@ -49,6 +49,21 @@ Check/reserve/prepare/worker-Get sequence and the native child returned 0.
 The redirected output files remain empty, so this does not prove
 byte-producing guest redirection.
 
+The direct CLI regression initially exposed a second boundary error: after
+the original Update-time duplication had made the three standard handles local
+to the suspended worker, the broker's subsequent Get tried to resolve their
+numeric values as reservation receipts and returned `ERROR_INVALID_HANDLE`.
+The reservation now records only the finite fact that a value was made local
+by that same Update duplication. Get leaves those values untouched and sends
+no second typed attachment. The x86 reservation test covers absent, marked and
+duplicate local values. An isolated x86 relink staged `basesrv.exe` and
+`ntvdm.exe`; `run16.exe` was unchanged. The live
+`O:\ntvdm64\run16.exe O:\ntvdm64\MEM.EXE` direct-redirection observation
+then recorded three successful Get calls, parent exit-code and disconnect at
+`O:\ntvdm64\logs\m0-t412-s4-direct-mem-r2`. `MEM` writes its display through
+the DOS Console path, so its empty redirected files are expected and do not
+claim byte-producing output acceptance.
+
 ## Interpretation
 
 Confidence is high that the original Update-before-Connect ordering and

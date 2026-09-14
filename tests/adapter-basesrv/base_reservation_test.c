@@ -12,6 +12,12 @@ int main(void)
     CHECK(OpenNtBaseReservationPrepareWorker(state,first,102,7,self)==ERROR_ACCESS_DENIED);
     CHECK(OpenNtBaseReservationPrepareWorker(state,first,101,7,self)==ERROR_SUCCESS);
     CHECK(OpenNtBaseReservationPrepareWorker(state,first,101,7,self)==ERROR_ALREADY_EXISTS);
+    CHECK(!OpenNtBaseReservationIsWorkerLocalStream(state,first,(HANDLE)0x51));
+    CHECK(OpenNtBaseReservationMarkWorkerLocalStream(state,first,(HANDLE)0x51)==ERROR_SUCCESS);
+    CHECK(OpenNtBaseReservationMarkWorkerLocalStream(state,first,(HANDLE)0x52)==ERROR_SUCCESS);
+    CHECK(OpenNtBaseReservationMarkWorkerLocalStream(state,first,(HANDLE)0x51)==ERROR_SUCCESS);
+    CHECK(OpenNtBaseReservationIsWorkerLocalStream(state,first,(HANDLE)0x51));
+    CHECK(!OpenNtBaseReservationIsWorkerLocalStream(state,first,(HANDLE)0x53));
     CHECK(OpenNtBaseReservationClaimWorker(state,GetCurrentProcessId(),9,&claimed,&task,&console)==ERROR_SUCCESS);
     CHECK(claimed==first && task==41 && console==(HANDLE)0x1234);
     CHECK(OpenNtBaseReservationClaimWorker(state,GetCurrentProcessId(),10,&claimed,&task,&console)==ERROR_ALREADY_EXISTS);
