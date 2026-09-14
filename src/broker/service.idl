@@ -52,6 +52,29 @@ interface vdm_service
         [out, system_handle(sh_event), size_is(,*parent_event_count)] HANDLE **parent_events,
         [out] unsigned long *reply_bytes,
         [out] byte reply[32]);
+    /* Reservation identifiers correlate a launch rollback only.  Worker
+     * authority is the authenticated system process attachment in Prepare,
+     * and Console identity remains local to the broker connection. */
+    error_status_t Reserve(
+        [in] handle_t binding,
+        [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [in] unsigned long task,
+        [out] hyper *reservation);
+    error_status_t Prepare(
+        [in] handle_t binding,
+        [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [in] hyper reservation,
+        [in, system_handle(sh_process)] HANDLE worker);
+    error_status_t Release(
+        [in] handle_t binding,
+        [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [in] hyper reservation);
     error_status_t Disconnect(
         [in] handle_t binding,
         [in, system_handle(sh_process)] HANDLE process,

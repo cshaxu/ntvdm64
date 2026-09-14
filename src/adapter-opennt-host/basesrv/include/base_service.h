@@ -20,7 +20,7 @@ DWORD OpenNtBaseServiceFirst(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation
 /* These are authenticated service bindings around the original CheckVDM
  * no-worker result.  They never implement task selection or command payloads. */
 DWORD OpenNtBaseServiceCreateReservation(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,
-    ULONG task,HANDLE console,uint64_t *reservation);
+    ULONG task,uint64_t *reservation);
 DWORD OpenNtBaseServicePrepareWorker(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,
     uint64_t reservation,HANDLE worker);
 DWORD OpenNtBaseServiceReleaseReservation(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,

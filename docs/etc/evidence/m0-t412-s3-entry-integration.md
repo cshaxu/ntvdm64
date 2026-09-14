@@ -1439,3 +1439,44 @@ in the basesrv entry, and `_OpenNtBaseServiceUpdate` in the original-binding
 archive. This proves authenticated service composition, not yet separate
 `run16.exe` creation/registration of an `ntvdm.exe` worker, completion/cleanup,
 or deployment.
+
+## Product launcher reservation and registered worker route
+
+The finite `base_reservation` binding already held the required launch
+ownership: a launcher creates a correlation-only reservation from the original
+`CheckVDM` task result, registers the suspended worker process, and the
+authenticated worker `Connect` claims only the pre-registered live process.
+The missing product boundary was three authenticated RPC calls. `Reserve`,
+`Prepare`, and `Release` now expose only the reservation number and typed
+`sh_process` attachment. Console identity remains in the broker's existing
+connection-local `CheckVDM` record; it is not serialized or re-created by the
+launcher.
+
+An owned x86 three-process test proves the complete finite transition:
+
+```text
+launcher Connect + original CheckVDM(MEM)
+  -> Reserve(task)
+  -> CreateProcess(CREATE_SUSPENDED, reservation-child)
+  -> Prepare(reservation, typed worker process)
+  -> ResumeThread
+  -> worker Connect claims reservation
+  -> original UpdateVDMEntry(PROCESS_HANDLE)
+  -> original GetNextVDMCommand(FIRST) returns MEM\r\n
+  -> launcher Release(reservation)
+```
+
+The result was:
+
+```text
+PASS: reserved worker claimed, registered and received original command
+PASS: launcher reserved and registered a real worker process
+```
+
+The formal maps select `_Server_Reserve`, `_Server_Prepare`, and
+`_Server_Release` from the broker entry and the existing
+`OpenNtBaseService*Reservation` owner from the original-binding archive.
+This is the verified IPC substrate for `run16`; it is not yet proof that the
+public `run16.exe` entry constructs the original `CheckVDM` request, starts a
+broker, or launches `ntvdm.exe` itself. Those app-composition steps remain
+open, as do task completion, reuse/idle policy and publication.

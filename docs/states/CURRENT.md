@@ -49,9 +49,11 @@ The [entry and lifecycle tests](../etc/evidence/m0-t412-s3-entry-integration.md)
 select real PEB/TEB/heap, request-thread and registered-process bindings. Run16's native branch
 passes command-tail, directory/environment/stream and exit tests. Formal basesrv
 now links original service registration/first-VDM dispatch and typed file/pipe
-stream retention, revocation and disconnect cleanup; full command delivery
-and three-program acceptance remain open. Original resource-call binding
-and synchronous wait-event failure rollback also pass; remote callbacks remain open.
+stream retention, revocation and disconnect cleanup. The existing reservation
+owner now passes a real launcher/child claim, update, get and release route;
+public run16 composition, completion and three-program acceptance remain open.
+Original resource-call binding and synchronous wait-event failure rollback also
+pass; remote callbacks remain open.
 Formal archives now supply dispatch, copied CheckVDM payload/startup and typed
 receipt bindings. Original lifecycle, journal and nine-case RPC suites pass
 with provider maps and boundary negatives. PIF terminator writes remain distinct

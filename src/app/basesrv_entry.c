@@ -142,6 +142,37 @@ error_status_t Server_Update(handle_t binding,VDM_CONNECTION connection,HANDLE p
     *replyBytes=required;
     return ERROR_SUCCESS;
 }
+error_status_t Server_Reserve(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+    ULONG generation,ULONG task,hyper *reservation)
+{
+    DWORD pid,error;
+    uint64_t id=0;
+    if (!reservation) return ERROR_INVALID_PARAMETER;
+    *reservation=0;
+    error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    if (error) return error;
+    error=OpenNtBaseServiceCreateReservation(connection,pid,generation,task,&id);
+    if (!error) *reservation=(hyper)id;
+    return error;
+}
+error_status_t Server_Prepare(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+    ULONG generation,hyper reservation,HANDLE worker)
+{
+    DWORD pid,error;
+    if (reservation<=0 || !worker || worker==INVALID_HANDLE_VALUE) return ERROR_INVALID_PARAMETER;
+    error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    if (error) return error;
+    return OpenNtBaseServicePrepareWorker(connection,pid,generation,(uint64_t)reservation,worker);
+}
+error_status_t Server_Release(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+    ULONG generation,hyper reservation)
+{
+    DWORD pid,error;
+    if (reservation<=0) return ERROR_INVALID_PARAMETER;
+    error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    if (error) return error;
+    return OpenNtBaseServiceReleaseReservation(connection,pid,generation,(uint64_t)reservation);
+}
 error_status_t Server_Disconnect(handle_t binding,HANDLE process,ULONG generation,VDM_CONNECTION *connection)
 {
     DWORD pid,result=broker_rpc_peer_process(&scope,binding,process,&pid);

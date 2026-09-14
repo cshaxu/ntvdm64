@@ -14,8 +14,10 @@ only the existing bounded copied `BasepCheckVDM` request and fixed forty-byte
 reply; it delegates to the original service binding. `GetNextVDMCommand` now
 has the same copied ready-command route and a bounded zero-or-one `sh_event`
 output attachment for the original wait event. `Update` now restores the
-original worker process-handle registration and the parent-event attachment;
-the Check/Update/Get service sequence has real-process coverage. Separate
+original worker process-handle registration and the parent-event attachment.
+`Reserve`/`Prepare`/`Release` bind the existing launch-reservation owner over
+authenticated typed worker-process attachments; a real child worker has
+claimed a reservation and received an original command. Separate public
 launcher/worker composition and completion remain pending. Generated stubs
 stay under build.
 

@@ -206,6 +206,52 @@ void OpenNtBaseClientDisconnectCurrent(void)
     ZeroMemory(&client,sizeof(client));
 }
 
+DWORD OpenNtBaseClientReserveWorker(ULONG task,uint64_t *reservation)
+{
+    hyper id=0;
+    DWORD error=ERROR_INVALID_STATE;
+    if (!reservation) return ERROR_INVALID_PARAMETER;
+    *reservation=0;
+    if (!client.connection || !client.binding || !client.process) return error;
+    RpcTryExcept {
+        error=Client_Reserve(client.binding,client.connection,client.process,
+            client.generation,task,&id);
+    }
+    RpcExcept(1) { error=RpcExceptionCode(); }
+    RpcEndExcept
+    if (!error && id>0) *reservation=(uint64_t)id;
+    else if (!error) error=ERROR_INVALID_DATA;
+    return error;
+}
+
+DWORD OpenNtBaseClientPrepareWorker(uint64_t reservation,HANDLE worker)
+{
+    DWORD error=ERROR_INVALID_STATE;
+    if (!reservation || !worker || worker==INVALID_HANDLE_VALUE) return ERROR_INVALID_PARAMETER;
+    if (!client.connection || !client.binding || !client.process) return error;
+    RpcTryExcept {
+        error=Client_Prepare(client.binding,client.connection,client.process,
+            client.generation,(hyper)reservation,worker);
+    }
+    RpcExcept(1) { error=RpcExceptionCode(); }
+    RpcEndExcept
+    return error;
+}
+
+DWORD OpenNtBaseClientReleaseWorker(uint64_t reservation)
+{
+    DWORD error=ERROR_INVALID_STATE;
+    if (!reservation) return ERROR_INVALID_PARAMETER;
+    if (!client.connection || !client.binding || !client.process) return error;
+    RpcTryExcept {
+        error=Client_Release(client.binding,client.connection,client.process,
+            client.generation,(hyper)reservation);
+    }
+    RpcExcept(1) { error=RpcExceptionCode(); }
+    RpcEndExcept
+    return error;
+}
+
 NTSTATUS NTAPI OpenNtBaseClientCallServer(PCSR_API_MSG message,
     PCSR_CAPTURE_HEADER capture,CSR_API_NUMBER number,ULONG length)
 {

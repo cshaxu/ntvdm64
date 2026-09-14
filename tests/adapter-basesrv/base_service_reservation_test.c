@@ -42,7 +42,7 @@ int main(int argc,char **argv)
     CHECK(reply.ReturnValue==STATUS_SUCCESS && !reply.u.CheckVDM.iTask && reply.u.CheckVDM.VDMState==VDM_NOT_PRESENT);
     task=reply.u.CheckVDM.iTask;
     CHECK(OpenNtBaseServiceCreateReservation(launcher,GetCurrentProcessId(),launcherGeneration,
-        task,(HANDLE)0x1444,&reservation)==ERROR_SUCCESS);
+        task,&reservation)==ERROR_SUCCESS);
     CHECK(GetModuleFileNameA(NULL,command,MAX_PATH));
     strcat_s(command,sizeof(command)," --reservation-child");
     CHECK(CreateProcessA(NULL,command,NULL,NULL,FALSE,CREATE_SUSPENDED,NULL,NULL,&startup,&child));
@@ -51,7 +51,7 @@ int main(int argc,char **argv)
     CHECK(ResumeThread(child.hThread)!=(DWORD)-1);
     CHECK(OpenNtBaseServiceConnect(service,child.hProcess,&worker,&workerGeneration)==ERROR_SUCCESS);
     CHECK(OpenNtBaseServiceWorkerReservation(worker,&claimed,&task,&console));
-    CHECK(claimed==reservation && task==reply.u.CheckVDM.iTask && console==(HANDLE)0x1444);
+    CHECK(claimed==reservation && task==reply.u.CheckVDM.iTask && console!=NULL);
     CHECK(OpenNtBaseServiceDisconnect(worker)==ERROR_SUCCESS);worker=NULL;
     CHECK(OpenNtBaseServicePrepareWorker(launcher,GetCurrentProcessId(),launcherGeneration,
         reservation,child.hProcess)==ERROR_ALREADY_EXISTS);

@@ -233,12 +233,13 @@ DWORD OpenNtBaseServiceFirst(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD 
 }
 
 DWORD OpenNtBaseServiceCreateReservation(OPENNT_BASE_CONNECTION *connection,DWORD pid,
-    DWORD generation,ULONG task,HANDLE console,uint64_t *reservation)
+    DWORD generation,ULONG task,uint64_t *reservation)
 {
     if (!connection || !reservation) return ERROR_INVALID_PARAMETER;
     if (!OpenNtBaseServicePeer(connection,pid,generation)) return ERROR_ACCESS_DENIED;
+    if (!connection->console) return ERROR_INVALID_HANDLE;
     return OpenNtBaseReservationCreate(connection->service->reservations,pid,generation,
-        task,console,reservation);
+        task,connection->console,reservation);
 }
 
 DWORD OpenNtBaseServicePrepareWorker(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD generation,
