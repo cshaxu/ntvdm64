@@ -148,6 +148,9 @@ NTSTATUS NTAPI CsrClientCallServer(PCSR_API_MSG message, PCSR_CAPTURE_HEADER cap
     BASE_CHECKVDM_MSG savedCheck;
     void *payload=NULL;
     uint32_t payloadBytes;
+    BASE_GET_NEXT_VDM_COMMAND_MSG savedGet;
+    OPENNT_BASE_GET_PAYLOAD getPayload={0};
+    unsigned char getRequest[16*BROKER_VDM_PAYLOAD_FIELDS];
     (void)capture;
     if (number == CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepCheckVDM)) ++launchCalls;
     if (enqueueGate && number == CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepGetNextVDMCommand)) {
@@ -172,7 +175,25 @@ NTSTATUS NTAPI CsrClientCallServer(PCSR_API_MSG message, PCSR_CAPTURE_HEADER cap
         }
         request->StartupInfo=startupWire.present?&decoded:NULL;
     }
+    if (number == CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepGetNextVDMCommand)) {
+        PBASE_GET_NEXT_VDM_COMMAND_MSG request=&((PBASE_API_MSG)message)->u.GetNextVDMCommand;
+        savedGet=*request;
+        if (!OpenNtBaseEncodeGetRequest(request,getRequest,sizeof(getRequest),&payloadBytes)) return STATUS_INVALID_PARAMETER;
+        if (OpenNtBasePrepareGetPayload(getRequest,payloadBytes,request,&getPayload)) return STATUS_NO_MEMORY;
+    }
     result = OpenNtBaseDispatch(message,number,length);
+    if (number == CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepGetNextVDMCommand)) {
+        PBASE_GET_NEXT_VDM_COMMAND_MSG response=&((PBASE_API_MSG)message)->u.GetNextVDMCommand;
+        BOOL prepared=OpenNtBaseFinishGetPayload(response,&getPayload);
+#define RESTORE_GET(p,n) response->p=savedGet.p; response->n=savedGet.n;
+        RESTORE_GET(CmdLine,CmdLen) RESTORE_GET(AppName,AppLen)
+        RESTORE_GET(PifFile,PifLen) RESTORE_GET(CurDirectory,CurDirectoryLen)
+        RESTORE_GET(Env,EnvLen) RESTORE_GET(Desktop,DesktopLen)
+        RESTORE_GET(Title,TitleLen) RESTORE_GET(Reserved,ReservedLen)
+#undef RESTORE_GET
+        if (!prepared || !OpenNtBaseApplyGetPayload(getPayload.bytes,getPayload.size,response)) result=STATUS_INVALID_PARAMETER;
+        OpenNtBaseReleaseGetPayload(&getPayload);
+    }
     if (number == CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepCheckVDM)) {
         PBASE_CHECKVDM_MSG request=&((PBASE_API_MSG)message)->u.CheckVDM;
         request->StartupInfo=savedStartup;
@@ -320,6 +341,31 @@ int main(int argc, char **argv)
         CHECK(OpenNtBaseServerRequestThread()==&thread);
     }
     BaseSrvVDMInit();
+    {
+        broker_vdm_payload_input fields[BROKER_VDM_PAYLOAD_FIELDS]={0};
+        unsigned char wire[128];
+        uint32_t bytes;
+        BASE_GET_NEXT_VDM_COMMAND_MSG request={0},saved;
+        OPENNT_BASE_GET_PAYLOAD storage={0};
+        fields[BROKER_VDM_ENVIRONMENT].present=1;
+        fields[BROKER_VDM_ENVIRONMENT].length=UINT32_MAX;
+        CHECK(broker_vdm_payload_encode(fields,wire,sizeof(wire),&bytes));
+        saved=request;
+        CHECK(OpenNtBasePrepareGetPayload(wire,bytes,&request,&storage)==ERROR_ARITHMETIC_OVERFLOW);
+        CHECK(!storage.bytes && !memcmp(&request,&saved,sizeof(saved)));
+        memset(fields,0,sizeof(fields)); fields[0].present=1; fields[0].length=4;
+        CHECK(broker_vdm_payload_encode(fields,wire,sizeof(wire),&bytes));
+        CHECK(OpenNtBasePrepareGetPayload(wire,bytes,&request,&storage)==0);
+        CHECK(request.CmdLine && request.CmdLen==4 && !memcmp(request.CmdLine,"\0\0\0\0",4));
+        CHECK(OpenNtBasePrepareGetPayload(wire,bytes,&request,&storage)==ERROR_INVALID_PARAMETER);
+        request.CmdLine[0]='A'; request.CmdLen=100;
+        CHECK(OpenNtBaseFinishGetPayload(&request,&storage));
+        CHECK(broker_vdm_payload_validate(storage.bytes,storage.size));
+        request.CmdLine=NULL;
+        OpenNtBaseReleaseGetPayload(&storage); OpenNtBaseReleaseGetPayload(&storage);
+        CHECK(!storage.bytes && !storage.size);
+        puts("PASS: GetNext capacity overflow refused before mutation, storage zeroed, reply preallocated and release repeat-safe");
+    }
     {
         VDMINFO info={0};
         BASE_GET_NEXT_VDM_COMMAND_MSG query={0};

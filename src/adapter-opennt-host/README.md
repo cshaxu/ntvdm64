@@ -164,8 +164,8 @@ variable fields to the broker copied-buffer fragment. Decoding validates the
 complete spans, requires actual input bytes rather than advertised output
 capacity, and checks the four USHORT lengths before changing native fields.
 Only those fields change; returned pointers borrow the mutable payload until
-the original synchronous service copies it. No allocator, command selection,
-resource or capture ownership policy is added. Full-operation validation,
+the original synchronous service copies it. This CheckVDM decoder adds no
+allocator, command selection or resource policy. Full-operation validation,
 including semantic string validation and authentication, is still required
 before dispatch. The original lifecycle fixture now sends its real BaseCheckVDM
 captures through this binding and restores original capture pointers before
@@ -175,8 +175,16 @@ capacities. It validates all eight spans, presence and original length widths
 before any destination write, then copies bytes and publishes returned lengths.
 Copied bytes are bounded by saved capacity, not the returned required length.
 Payload/destinations must not overlap and must remain owned for the call.
-This leaves source status/wait/retry/consumption logic untouched; response
-construction and actual RPC integration are still pending.
+GetNext preparation validates capacity-only spans and reserves one zeroed
+allocation for all native output buffers and the complete reply before source
+dispatch. Integer overflow and allocation failure occur before command
+consumption. Reply construction only updates length metadata in that allocation;
+the initialized full-capacity bytes preserve partial writes and PIF terminators
+without serializing uninitialized memory. The per-call context is private and
+must be fresh, with borrowed pointers discarded/restored before release.
+Repeat release is harmless. This replaces unavailable CSR shared-capture
+storage, not source status/wait/retry/consumption policy. The original lifecycle
+fixture uses the complete local buffer roundtrip. RPC integration is pending.
 
 The header supplies no CSR runtime, command policy or success stubs. Keeping
 original CSR declaration records does not admit their historical transport.

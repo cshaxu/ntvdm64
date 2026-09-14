@@ -588,3 +588,31 @@ late title field rejects the whole application without changing earlier PIF/
 directory bytes or message fields. Existing source and lifecycle tests pass.
 This proves local reply application, not full reply construction, RPC exchange,
 worker command execution or deployment. Those S3 requirements remain open.
+
+## Complete local GetNext buffer roundtrip
+
+The finite native payload binding now encodes GetNext pointer presence and
+capacities without reading uninitialized capture buffers. Preparation checks
+all spans and width/sum overflow, then allocates a single zeroed block for
+native output buffers and the eventual reply header/data. All required storage
+is acquired before original command consumption; finishing writes only the
+returned length metadata, without an additional allocation. Reply data covers
+the saved initialized capacities independently of returned lengths, preserving
+partial/PIF writes without exposing server heap contents. Original capture,
+selection, status and retry algorithms remain unchanged. This is an explicit
+finite replacement for unavailable CSR shared capture-address translation,
+not a new command provider or generic capture runtime.
+
+Formal S3/product owners build passes. The lifecycle fixture now routes every
+original BaseClient GetNext call through prepare, original BaseSrv dispatch,
+finish, restored client capture pointers/capacities, apply and release. Startup
+and native resource exchange are not thereby transported. Formal map checks
+select all four new functions from the same binding archive. All original
+lifecycle tests pass, including capacity failure and wait/retry; focused checks
+prove overflowing aggregate capacity is rejected before mutation, initial
+buffer bytes are zero, required length can exceed copied capacity in the reply,
+live context reuse is rejected and release is repeat-safe. Heap-allocation
+failure is returned explicitly but was not fault-injected in this step.
+Outputs remain in S3/original-lifecycle. Full operation envelope, authenticated
+RPC command exchange, resource callbacks and three-program execution remain
+required; no deployment or guest acceptance is claimed.

@@ -12,4 +12,16 @@ BOOL OpenNtBaseDecodeCheckPayload(void *, uint32_t, PBASE_CHECKVDM_MSG);
  * spans before writes, then copy response bytes and update returned lengths.
  * Payload must not overlap destinations; no other message fields change. */
 BOOL OpenNtBaseApplyGetPayload(const void *, uint32_t, PBASE_GET_NEXT_VDM_COMMAND_MSG);
+/* Per-call native storage, zero-initialized before prepare; never wire data.
+ * The complete reply storage is reserved before original command consumption. */
+typedef struct OPENNT_BASE_GET_PAYLOAD {
+    void *bytes;
+    uint32_t size;
+    broker_vdm_payload_span spans[BROKER_VDM_PAYLOAD_FIELDS];
+} OPENNT_BASE_GET_PAYLOAD;
+BOOL OpenNtBaseEncodeGetRequest(const BASE_GET_NEXT_VDM_COMMAND_MSG *, void *, uint32_t, uint32_t *);
+DWORD OpenNtBasePrepareGetPayload(const void *, uint32_t, PBASE_GET_NEXT_VDM_COMMAND_MSG, OPENNT_BASE_GET_PAYLOAD *);
+BOOL OpenNtBaseFinishGetPayload(const BASE_GET_NEXT_VDM_COMMAND_MSG *, OPENNT_BASE_GET_PAYLOAD *);
+/* Discard/restore the borrowed message pointers before releasing storage. */
+void OpenNtBaseReleaseGetPayload(OPENNT_BASE_GET_PAYLOAD *);
 #endif

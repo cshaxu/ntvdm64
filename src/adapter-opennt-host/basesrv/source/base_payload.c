@@ -58,4 +58,67 @@ BOOL OpenNtBaseApplyGetPayload(const void *payload, uint32_t bytes,
 #undef APPLY_REPLY
     return TRUE;
 }
+BOOL OpenNtBaseEncodeGetRequest(const BASE_GET_NEXT_VDM_COMMAND_MSG *message,
+    void *output, uint32_t capacity, uint32_t *required)
+{
+    broker_vdm_payload_input input[BROKER_VDM_PAYLOAD_FIELDS];
+    if (!message) { if (required) *required=0; return FALSE; }
+#define GET_REQUEST(i,p,n,t) input[i].present=message->p!=NULL; input[i].length=message->n; \
+    input[i].data_bytes=0; input[i].data=NULL;
+    CHECK_FIELDS(GET_REQUEST)
+#undef GET_REQUEST
+    return broker_vdm_payload_encode(input,output,capacity,required);
+}
+
+DWORD OpenNtBasePrepareGetPayload(const void *payload, uint32_t bytes,
+    PBASE_GET_NEXT_VDM_COMMAND_MSG message, OPENNT_BASE_GET_PAYLOAD *state)
+{
+    broker_vdm_payload_span spans[BROKER_VDM_PAYLOAD_FIELDS];
+    uint32_t i,total=sizeof(spans),offset=sizeof(spans);
+    void *storage;
+    if (!message || !state || state->bytes || !broker_vdm_payload_validate(payload,bytes))
+        return ERROR_INVALID_PARAMETER;
+    memcpy(spans,payload,sizeof(spans));
+    for (i=0;i<BROKER_VDM_PAYLOAD_FIELDS;++i) {
+        if (spans[i].data_bytes || (i<4 && spans[i].length>0xffffu)) return ERROR_INVALID_PARAMETER;
+        if (spans[i].present) {
+            if (spans[i].length>UINT32_MAX-total) return ERROR_ARITHMETIC_OVERFLOW;
+            total+=spans[i].length;
+        }
+        spans[i].data_bytes=spans[i].present?spans[i].length:0;
+        spans[i].offset=spans[i].data_bytes?offset:0;
+        offset+=spans[i].data_bytes;
+    }
+    storage=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,total);
+    if (!storage) return ERROR_NOT_ENOUGH_MEMORY;
+    state->bytes=storage; state->size=total;
+    memcpy(state->spans,spans,sizeof(spans));
+#define GET_BUFFER(i,p,n,t) message->p=spans[i].present? \
+    (PCHAR)storage+(spans[i].data_bytes?spans[i].offset:sizeof(spans)):NULL; message->n=(t)spans[i].length;
+    CHECK_FIELDS(GET_BUFFER)
+#undef GET_BUFFER
+    return ERROR_SUCCESS;
+}
+
+BOOL OpenNtBaseFinishGetPayload(const BASE_GET_NEXT_VDM_COMMAND_MSG *message,
+    OPENNT_BASE_GET_PAYLOAD *state)
+{
+    broker_vdm_payload_span spans[BROKER_VDM_PAYLOAD_FIELDS];
+    if (!message || !state || !state->bytes) return FALSE;
+    memcpy(spans,state->spans,sizeof(spans));
+#define GET_RESULT(i,p,n,t) spans[i].length=message->n;
+    CHECK_FIELDS(GET_RESULT)
+#undef GET_RESULT
+    /* Data is already in this reply allocation. No post-consumption allocation
+     * or fallible resource acquisition is introduced by reply construction. */
+    memcpy(state->bytes,spans,sizeof(spans));
+    return TRUE;
+}
+
+void OpenNtBaseReleaseGetPayload(OPENNT_BASE_GET_PAYLOAD *state)
+{
+    if (!state) return;
+    if (state->bytes) HeapFree(GetProcessHeap(),0,state->bytes);
+    memset(state,0,sizeof(*state));
+}
 #undef CHECK_FIELDS
