@@ -49,7 +49,8 @@ The [entry and lifecycle tests](../etc/evidence/m0-t412-s3-entry-integration.md)
 select real PEB/TEB/heap, request-thread and registered-process bindings. Run16's native branch
 passes command-tail, directory/environment/stream and exit tests. Actual broker
 dispatch and DOS/WOW delivery remain pending; this build-only checkpoint is
-neither published nor three-program acceptance.
+neither published nor three-program acceptance. Original resource-call binding
+and synchronous wait-event failure rollback also pass; remote callbacks remain open.
 
 ## T412 S1 historical checkpoints
 

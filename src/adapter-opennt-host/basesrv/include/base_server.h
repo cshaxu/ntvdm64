@@ -37,4 +37,9 @@ BOOLEAN NTAPI RtlEqualSid(PSID, PSID);
 #define RTL_HEAP_MAKE_TAG HEAP_MAKE_TAG_FLAGS
 #define KdPrint(x) DbgPrint x
 ULONG __cdecl DbgPrint(PCSTR, ...);
+#include <base_resource.h>
+#ifndef OPENNT_BASE_NATIVE_RESOURCES
+#define NtDuplicateObject OpenNtBaseDuplicateObject
+#define NtClose OpenNtBaseClose
+#endif
 #endif

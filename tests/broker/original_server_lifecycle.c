@@ -10,6 +10,26 @@
 static CSR_PROCESS caller;
 static CSR_THREAD thread;
 static OPENNT_BASE_PROCESS_REGISTRY processRegistry;
+typedef struct resource_failure_test {
+    HANDLE event;
+    ULONG duplicated,closed;
+} resource_failure_test;
+static NTSTATUS reject_delivery(void *context,HANDLE sourceProcess,HANDLE source,HANDLE targetProcess,
+    PHANDLE target,ACCESS_MASK access,ULONG attributes,ULONG options)
+{
+    resource_failure_test *test=(resource_failure_test *)context;
+    (void)sourceProcess; (void)targetProcess; (void)target; (void)access; (void)attributes;
+    if (options!=DUPLICATE_SAME_ACCESS) return (NTSTATUS)0xc000000dL;
+    test->event=source; ++test->duplicated;
+    return (NTSTATUS)0xc0000022L;
+}
+static NTSTATUS close_failed_delivery(void *context,HANDLE event)
+{
+    resource_failure_test *test=(resource_failure_test *)context;
+    if (event!=test->event || test->duplicated!=1) return (NTSTATUS)0xc000000dL;
+    ++test->closed;
+    return CloseHandle(event)?0:(NTSTATUS)0xc0000008L;
+}
 typedef struct registry_remove_test {
     HANDLE started;
     HANDLE finished;
@@ -228,6 +248,18 @@ int main(int argc, char **argv)
         CHECK(OpenNtBaseServerRequestThread()==&thread);
     }
     BaseSrvVDMInit();
+    {
+        resource_failure_test test={0};
+        OPENNT_BASE_RESOURCE_BINDING binding={&test,reject_delivery,close_failed_delivery};
+        HANDLE server=NULL,client=NULL;
+        DWORD flags;
+        CHECK(OpenNtBaseBindResources(&binding)==NULL);
+        CHECK(BaseSrvCreatePairWaitHandles(&server,&client)==(ULONG)STATUS_ACCESS_DENIED);
+        CHECK(OpenNtBaseBindResources(NULL)==&binding);
+        CHECK(test.duplicated==1 && test.closed==1 && client==NULL);
+        CHECK(!GetHandleInformation(test.event,&flags) && GetLastError()==ERROR_INVALID_HANDLE);
+        puts("PASS: original pair-wait delivery failure closes the created server event synchronously");
+    }
     { LUID negative=RtlConvertLongToLuid(-1), positive=RtlConvertLongToLuid(0x7fffffff);
       CHECK(negative.LowPart==0xffffffff && negative.HighPart==-1);
       CHECK(positive.LowPart==0x7fffffff && positive.HighPart==0); }
@@ -586,6 +618,12 @@ int main(int argc, char **argv)
         CHECK(CloseHandle(child.hThread));
         CHECK(WaitForSingleObject(child.hProcess,5000)==WAIT_OBJECT_0);
         CHECK(GetExitCodeProcess(child.hProcess,&code) && code==0);
+        {
+            HANDLE unexpected=NULL;
+            CHECK(OpenNtBaseDuplicateObject(GetCurrentProcess(),GetCurrentProcess(),child.hProcess,
+                &unexpected,0,0,DUPLICATE_SAME_ACCESS)==(NTSTATUS)0xc00000bbL);
+            CHECK(unexpected==NULL);
+        }
         CHECK(CloseHandle(child.hProcess));
         CHECK(CsrLockProcessByClientId((HANDLE)child.dwProcessId,&found)==0 && found==&childRecord);
         CHECK(WaitForSingleObject(found->ProcessHandle,0)==WAIT_OBJECT_0);

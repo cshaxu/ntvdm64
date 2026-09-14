@@ -261,3 +261,32 @@ Response loss before receipt IDs arrive, abrupt peer death, product concurrency
 and source-shaped duplicate/close call-site integration are not proved here.
 No VDM task was dispatched and no deployed executable changed. The complete
 S3 product gate remains open despite successful resource-protocol evidence.
+
+## Original resource-call binding and synchronous rollback
+
+The formal BaseSrv library now binds NtDuplicateObject/NtClose via its private
+base_server.h declarations to base_resource.c. srvvdm.c remains unchanged.
+The wrapper preserves original arguments, synchronous status and cleanup calls.
+A trusted thread-bound resource implementation receives both operations. A
+missing bound operation fails; absent transport permits only current-process
+native duplication and local close. Remote native duplication is refused,
+not silently used as an alternative to authenticated attachment delivery.
+
+This is the smallest same-shaped binding below original algorithms, not a
+replacement resource/task policy or a CSR import. The binding TU alone defines
+OPENNT_BASE_NATIVE_RESOURCES to call native APIs without remap recursion.
+Dispatch must authenticate before binding, keep the local context alive, and
+restore it on every exit. Native pointers remain process-local. The final
+callback must distinguish admitted receipts from local token/event handles;
+it cannot serialize or trust arbitrary source HANDLE values.
+
+The formal S3/product owner build succeeds. The lifecycle map selects both
+resource wrappers from resources.obj. A test invokes the original
+BaseSrvCreatePairWaitHandles with delivery returning ACCESS_DENIED: it observes
+one duplicate attempt followed by the original close callback, verifies the
+event is no longer valid, and receives the original failure. The rest of the
+original lifecycle suite passes unbound through the local-only native route.
+A foreign process-handle test requires NOT_SUPPORTED rather than native fallback.
+This verifies the source call site and failure ordering, not successful remote
+delivery through a finished product callback. Connecting authenticated receipts,
+partial-stream rollback and lost-reply cleanup remain required S3 work.

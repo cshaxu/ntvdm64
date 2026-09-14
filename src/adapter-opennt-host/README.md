@@ -119,6 +119,19 @@ The source/lifetime proof and pending process-race gates are in the S3 entry
 evidence. Product resource transfer must preserve the admitted attachment and
 receipt protocol; this local registration API is not remote duplication policy.
 
+`base_resource.h`/`base_resource.c` bind original BaseSrv NtDuplicateObject and
+NtClose calls without editing srvvdm.c. A trusted per-dispatch binding routes
+them synchronously to the resource transport; missing operations fail instead
+of falling through. Without a binding only verified current-process native
+duplication is allowed; cross-process duplication returns NOT_SUPPORTED.
+Native local close remains available for original tokens/events. The resource
+TU alone disables the declaration remap to reach native APIs without recursion.
+The callback context is private local state, never wire data; it must outlive
+the synchronous call, and dispatch restores the previous binding on exit.
+The original failure branch is tested with a rejected wait-event delivery;
+actual authenticated receipt callbacks remain to be connected before product
+dispatch. This is not permission to forward arbitrary native handle numbers.
+
 The header supplies no CSR runtime, command policy or success stubs. Keeping
 original CSR declaration records does not admit their historical transport.
 
