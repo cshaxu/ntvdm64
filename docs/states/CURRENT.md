@@ -57,6 +57,9 @@ DOS reentry, stream and BOP integration are now S4 work, not inferred from S3.
 The [S4 reentry binding](../etc/evidence/m0-t412-s4-reenter-binding.md) now
 restores the original COMMAND increment/decrement route through BaseSrv; guest
 `54:08`, native-child streams and DOS parent return remain open S4 acceptance.
+The [S4 BOP launcher binding](../etc/evidence/m0-t412-s4-bop-launcher-binding.md)
+now routes the retained original COMMAND `COMSPEC /c` spawn to the public
+`run16` owner without adding a second classifier to the worker or broker.
 
 ## T412 S1 historical checkpoints
 

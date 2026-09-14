@@ -3,7 +3,7 @@
 
 #include "command_process_compat.h"
 
-int main(void)
+int main(int argc, char **argv)
 {
     SECURITY_ATTRIBUTES attributes;
     STARTUPINFOA startup;
@@ -17,11 +17,19 @@ int main(void)
     HANDLE original_input;
     HANDLE original_output;
     HANDLE original_error;
-    CHAR command_line[] = "cmd.exe /d /c echo COMMAND-CHILD-STREAM";
+    CHAR command_line[MAX_PATH + 32];
+    CHAR comspec[MAX_PATH];
     CHAR output[128];
     DWORD bytes = 0u;
     DWORD exit_code = 0u;
 
+    if (argc == 2 && !strcmp(argv[1], "--launcher-child")) {
+        puts("COMMAND-CHILD-STREAM");
+        return 0;
+    }
+    if (GetEnvironmentVariableA("COMSPEC", comspec, sizeof(comspec)) == 0u ||
+        _snprintf_s(command_line, sizeof(command_line), _TRUNCATE,
+            "\"%s\" /c --launcher-child", comspec) < 0) return 1;
     attributes.nLength = sizeof(attributes);
     attributes.lpSecurityDescriptor = NULL;
     attributes.bInheritHandle = TRUE;

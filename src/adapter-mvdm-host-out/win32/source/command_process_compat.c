@@ -72,18 +72,26 @@ static BOOL opennt_command_launch_vdm_child(
     LPSTARTUPINFOA startup_info,
     LPPROCESS_INFORMATION process_information)
 {
-    char product[MAX_PATH];
+    char launcher[MAX_PATH];
     char child_command[MAX_PATH + MAXIMUM_VDM_COMMAND_LENGTH + 4u];
-    DWORD product_bytes;
+    char *leaf;
+    DWORD launcher_bytes;
     int formatted;
 
-    product_bytes = GetModuleFileNameA(NULL, product, (DWORD)sizeof(product));
-    if (product_bytes == 0u || product_bytes >= sizeof(product)) {
+    /* The original worker has already chosen COMMAND's COMSPEC /c route.
+     * Standalone composition replaces only the historical system VDM spawn:
+     * use the sibling public launcher, whose original BaseClient path owns
+     * type classification, broker startup and new worker registration. */
+    launcher_bytes = GetModuleFileNameA(NULL, launcher, (DWORD)sizeof(launcher));
+    if (launcher_bytes == 0u || launcher_bytes >= sizeof(launcher) ||
+        (leaf = strrchr(launcher, '\\')) == NULL ||
+        (size_t)(leaf - launcher) + sizeof("run16.exe") >= sizeof(launcher)) {
         SetLastError(ERROR_FILENAME_EXCED_RANGE);
         return FALSE;
     }
+    memcpy(leaf + 1, "run16.exe", sizeof("run16.exe"));
     formatted = snprintf(child_command, sizeof(child_command), "\"%s\" %s",
-        product, tail);
+        launcher, tail);
     if (formatted < 0 || (size_t)formatted >= sizeof(child_command)) {
         SetLastError(ERROR_FILENAME_EXCED_RANGE);
         return FALSE;
