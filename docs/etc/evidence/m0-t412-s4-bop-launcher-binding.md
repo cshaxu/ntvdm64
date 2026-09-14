@@ -48,12 +48,18 @@ recognition form, sibling-launcher selection, copied tail and standard-stream
 binding.  Medium confidence for full guest behavior until a COMMAND session
 reaches the original BOP and records its normal parent return.
 
+The staged product now provides that observation. `COMMAND.COM /c run16.exe
+MEM.EXE` records outer-worker `reenter-inc`, a nested public
+`run16 -> basesrv -> ntvdm` Check/reserve/prepare/Get sequence, nested child
+exit zero, outer `reenter-dec`, and outer parent exit-code/disconnect. The
+original native-child reporter retains the copied tail and zero child result.
+The log is `O:\ntvdm64\logs\m0-t412-s4-bop-native-child-r2`.
+
 ## Limit
 
-This establishes the host-side replacement boundary and copied stream route.
-It is not yet an end-to-end guest observation of `BOP 54:08`, guest command
-redirection, or DOS parent return.  Those are still required S4 acceptance
-tests with COMMAND/MEM/EDIT.
+This establishes the host-side replacement boundary, copied stream route and
+an end-to-end staged `BOP 54:08`/DOS-parent return. Guest command redirection
+remains a separate unavailable Redirector boundary.
 
 ## Follow-up
 

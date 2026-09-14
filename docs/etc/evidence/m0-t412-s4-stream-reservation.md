@@ -64,6 +64,16 @@ then recorded three successful Get calls, parent exit-code and disconnect at
 the DOS Console path, so its empty redirected files are expected and do not
 claim byte-producing output acceptance.
 
+## Direct versus guest redirection
+
+The staged guest case was separately run as `COMMAND.COM /c MEM.EXE >
+O:\ntvdm64\logs\m0-t412-s4-command-flow-r1\guest.out`. COMMAND consumed
+and returned from its initial command (the original continuation trace records
+the service sequence), but no guest output file was created. That is the
+current Redirector/guest-redirection unavailable boundary, not evidence that
+the direct CLI file handles failed to transfer. The direct and guest cases are
+therefore explicitly distinguished.
+
 ## Interpretation
 
 Confidence is high that the original Update-before-Connect ordering and
