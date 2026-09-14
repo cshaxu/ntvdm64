@@ -74,7 +74,9 @@ if(ownerBuild) {
     ];
 }
 commands.unshift(`cl.exe ${flags} /Gy /Fo"${build}/support.obj" "${root}/src/adapter-mvdm-host-out/win32/source/opennt_support_rtl.c"`);
-commands=commands.map(command=>command.startsWith('link.exe ')?command.replace(' fixture.obj ', ` fixture.obj support.obj ${ownerBuild?'':'registry.obj resources.obj '}`):command);
+for (const unit of ['vdm_delivery','vdm_receipt'])
+    commands.unshift(`cl.exe /nologo /c /MT /W4 /Fo"${build}/${unit}.obj" "${root}/src/broker/${unit}.c"`);
+commands=commands.map(command=>command.startsWith('link.exe ')?command.replace(' fixture.obj ', ` fixture.obj support.obj vdm_delivery.obj vdm_receipt.obj ${ownerBuild?'':'registry.obj resources.obj '}`):command);
 const log=fs.openSync(path.join(build,'build.log'),'w');
 for(const command of commands) {
     const result=spawnSync('cmd.exe',['/d','/c',`call "${env}" ${command}`],{cwd:build,windowsHide:true,windowsVerbatimArguments:true,stdio:['ignore',log,log],timeout:60000});

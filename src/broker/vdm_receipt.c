@@ -25,8 +25,10 @@ DWORD broker_vdm_receipt_accept(broker_vdm_receipts *state, uint32_t role, HANDL
     if (state->issued==UINT32_MAX) return ERROR_ARITHMETIC_OVERFLOW;
     entry=HeapAlloc(GetProcessHeap(),0,sizeof(*entry));
     if (!entry) return ERROR_NOT_ENOUGH_MEMORY;
+    /* Original BaseSrvDupStandardHandles requests OBJ_INHERIT, whereas
+     * BaseSrvCreatePairWaitHandles requests non-inheritable wait references. */
     if (!DuplicateHandle(GetCurrentProcess(),resource,GetCurrentProcess(),&entry->resource,
-        0,FALSE,DUPLICATE_SAME_ACCESS)) {
+        0,role<=BROKER_VDM_STDERR,DUPLICATE_SAME_ACCESS)) {
         error=GetLastError(); HeapFree(GetProcessHeap(),0,entry); return error;
     }
     entry->id=++state->issued; entry->next=state->entries; state->entries=entry;

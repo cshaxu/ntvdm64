@@ -359,3 +359,25 @@ event survival. It uses production receipt storage and real local event
 references; the failed revoke result is controlled, not a real broken RPC.
 This is not final sender dispatch wiring, loss reconciliation or rundown proof.
 Those remain mandatory before the source callback can publish real commands.
+
+## Original partial delivery with actual received file ownership
+
+The formal lifecycle fixture connects original BaseSrvDupStandardHandles through
+base_resource to production receipt storage and the delivery journal. It reserves
+bookkeeping, retains a real build-local file, and acknowledges that receipt;
+the second acquisition is explicitly rejected before delivery. After the original
+function returns ACCESS_DENIED, journal rollback removes the received reference
+without using mixed stream fields. The sender file remains writable. Only the
+fixture's temporary file is closed/deleted afterward. Original source is unchanged.
+
+This exposed a receipt attribute mismatch: original standard-stream duplication
+requests OBJ_INHERIT, but waiting-event duplication requests no inheritance.
+Same-access retention now follows these admitted roles instead of always FALSE.
+Actual handle flags verify inheritable streams and non-inheritable wait events.
+The formal original lifecycle and local journal tests pass; the existing nine
+RPC scenarios are the cross-process regression for this change.
+
+This is concrete local source-to-receipt rollback, not merely numeric markers.
+The callback still uses an in-process receiver and controlled second failure;
+real RPC source dispatch, reply-loss recovery, commit placement and three-program
+execution remain required. No deployed executable changed and S3 stays open.

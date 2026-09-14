@@ -4,12 +4,47 @@
 #include <base_capture.h>
 #include <base_config.h>
 #include <base_process.h>
+#include "broker/vdm_receipt.h"
+#include "broker/vdm_delivery.h"
 #include <stdio.h>
 #include <string.h>
 
 static CSR_PROCESS caller;
 static CSR_THREAD thread;
 static OPENNT_BASE_PROCESS_REGISTRY processRegistry;
+typedef struct stream_rollback_test {
+    broker_vdm_receipts receipts;
+    broker_vdm_delivery delivery;
+    ULONG attempts;
+} stream_rollback_test;
+static DWORD revoke_pending_stream(void *context,uint32_t generation,uint32_t receipt)
+{
+    stream_rollback_test *test=context;
+    return broker_vdm_receipt_revoke(&test->receipts,generation,receipt);
+}
+static NTSTATUS deliver_stream_then_fail(void *context,HANDLE sourceProcess,HANDLE source,HANDLE targetProcess,
+    PHANDLE target,ACCESS_MASK access,ULONG attributes,ULONG options)
+{
+    stream_rollback_test *test=context;
+    broker_vdm_delivery_item *ticket;
+    uint32_t receipt;
+    DWORD error;
+    (void)sourceProcess; (void)targetProcess; (void)access; (void)attributes; (void)options;
+    error=broker_vdm_delivery_prepare(&test->delivery,test,revoke_pending_stream,&ticket);
+    if (error) return (NTSTATUS)0xc0000017L;
+    if (++test->attempts==2) {
+        broker_vdm_delivery_forget(&test->delivery,ticket); /* Explicit non-delivery. */
+        return (NTSTATUS)0xc0000022L;
+    }
+    error=broker_vdm_receipt_accept(&test->receipts,BROKER_VDM_STDIN,source,&receipt);
+    if (error) {
+        broker_vdm_delivery_forget(&test->delivery,ticket);
+        return (NTSTATUS)0xc0000008L;
+    }
+    if (broker_vdm_delivery_acknowledge(ticket,7,receipt)) return (NTSTATUS)0xc000000dL;
+    *target=(HANDLE)receipt;
+    return STATUS_SUCCESS;
+}
 typedef struct resource_failure_test {
     HANDLE event;
     ULONG duplicated,closed;
@@ -328,6 +363,35 @@ int main(int argc, char **argv)
             CHECK(OpenNtBaseBindResources(NULL)==&binding);
         }
         puts("PASS: original distinct/aliased stream delivery, duplicate alias close and cleared repeat cleanup");
+    }
+    {
+        stream_rollback_test test={0};
+        OPENNT_BASE_RESOURCE_BINDING binding={&test,deliver_stream_then_fail,NULL};
+        VDMINFO info={0};
+        DOSRECORD record={0};
+        WCHAR name[80];
+        HANDLE source,received;
+        DWORD written,handleFlags;
+        CHECK(_snwprintf(name,80,L"stream-rollback-%lu.tmp",GetCurrentProcessId())>0);
+        source=CreateFileW(name,GENERIC_READ|GENERIC_WRITE,0,NULL,CREATE_NEW,FILE_ATTRIBUTE_TEMPORARY,NULL);
+        CHECK(source!=INVALID_HANDLE_VALUE);
+        CHECK(WriteFile(source,"A",1,&written,NULL) && written==1);
+        CHECK(!broker_vdm_receipts_initialize(&test.receipts,7));
+        info.StdIn=source; info.StdOut=source; info.StdErr=source; record.lpVDMInfo=&info;
+        CHECK(OpenNtBaseBindResources(&binding)==NULL);
+        CHECK(BaseSrvDupStandardHandles(GetCurrentProcess(),&record)==(ULONG)STATUS_ACCESS_DENIED);
+        CHECK(OpenNtBaseBindResources(NULL)==&binding);
+        CHECK(test.attempts==2 && info.StdOut==source && info.StdErr==source);
+        CHECK(!broker_vdm_receipt_resolve(&test.receipts,7,(uint32_t)info.StdIn,&received));
+        CHECK(GetFileSize(received,NULL)==1);
+        CHECK(GetHandleInformation(received,&handleFlags) && (handleFlags&HANDLE_FLAG_INHERIT));
+        CHECK(!broker_vdm_delivery_rollback(&test.delivery));
+        CHECK(!test.delivery.pending && !test.receipts.entries);
+        CHECK(broker_vdm_receipt_resolve(&test.receipts,7,(uint32_t)info.StdIn,&received)==ERROR_NOT_FOUND);
+        CHECK(WriteFile(source,"B",1,&written,NULL) && written==1 && GetFileSize(source,NULL)==2);
+        broker_vdm_receipts_drain(&test.receipts);
+        CHECK(CloseHandle(source) && DeleteFileW(name));
+        puts("PASS: original partial stream failure rolls back actual receipt without closing sender file");
     }
     { LUID negative=RtlConvertLongToLuid(-1), positive=RtlConvertLongToLuid(0x7fffffff);
       CHECK(negative.LowPart==0xffffffff && negative.HighPart==-1);

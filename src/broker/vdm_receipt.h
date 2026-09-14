@@ -17,7 +17,8 @@ typedef struct broker_vdm_receipts {
 /* Generation is supplied by trusted registration, not command payload. */
 DWORD broker_vdm_receipts_initialize(broker_vdm_receipts *, uint32_t generation);
 /* Input type must already be validated by the typed OS attachment endpoint.
- * Console resources are not admissible through these file/event operations. */
+ * Console resources are not admissible through these file/event operations.
+ * Original standard-stream roles retain OBJ_INHERIT; wait roles do not. */
 DWORD broker_vdm_receipt_accept(broker_vdm_receipts *, uint32_t role, HANDLE, uint32_t *id);
 /* Borrowed native reference, valid until revoke/drain. Owner must not revoke
  * during its use. Neither the pointer nor this HANDLE is a wire field. */

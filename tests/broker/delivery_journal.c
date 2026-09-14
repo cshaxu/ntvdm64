@@ -17,6 +17,7 @@ int main(void)
     broker_vdm_delivery_item *first,*second;
     uint32_t id,invalid;
     HANDLE event=CreateEventW(NULL,TRUE,FALSE,NULL),borrowed;
+    DWORD flags;
     CHECK(event!=NULL);
     CHECK(!broker_vdm_receipts_initialize(&peer.receipts,7));
     CHECK(!broker_vdm_delivery_prepare(&journal,&peer,revoke,&first));
@@ -43,6 +44,7 @@ int main(void)
     CHECK(!broker_vdm_delivery_commit(&journal) && !journal.pending);
     CHECK(!broker_vdm_receipt_resolve(&peer.receipts,7,id,&borrowed));
     CHECK(WaitForSingleObject(borrowed,0)==WAIT_OBJECT_0);
+    CHECK(GetHandleInformation(borrowed,&flags) && !(flags&HANDLE_FLAG_INHERIT));
     broker_vdm_receipts_drain(&peer.receipts);
     CHECK(CloseHandle(event));
     puts("PASS: partial acquisition rollback, unknown/retry retention, successful ownership commit and sender survival");
