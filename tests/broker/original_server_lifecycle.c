@@ -5,6 +5,7 @@
 #include <base_config.h>
 #include <base_process.h>
 #include <base_dispatch.h>
+#include <base_startup.h>
 #include "broker/vdm_receipt.h"
 #include "broker/vdm_delivery.h"
 #include <stdio.h>
@@ -140,6 +141,9 @@ NTSTATUS NTAPI CsrClientCallServer(PCSR_API_MSG message, PCSR_CAPTURE_HEADER cap
     CSR_API_NUMBER number, ULONG length)
 {
     NTSTATUS result;
+    STARTUPINFOA decoded;
+    LPSTARTUPINFOA savedStartup=NULL;
+    broker_vdm_startup startupWire;
     (void)capture;
     if (number == CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepCheckVDM)) ++launchCalls;
     if (enqueueGate && number == CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepGetNextVDMCommand)) {
@@ -147,7 +151,16 @@ NTSTATUS NTAPI CsrClientCallServer(PCSR_API_MSG message, PCSR_CAPTURE_HEADER cap
         ++retryCalls;
         if (retryCalls == 2) retryExit = request->ExitCode;
     }
+    if (number == CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepCheckVDM)) {
+        PBASE_CHECKVDM_MSG request=&((PBASE_API_MSG)message)->u.CheckVDM;
+        savedStartup=request->StartupInfo;
+        OpenNtBaseEncodeStartup(savedStartup,&startupWire);
+        if (!OpenNtBaseDecodeStartup(&startupWire,&decoded)) return STATUS_INVALID_PARAMETER;
+        request->StartupInfo=startupWire.present?&decoded:NULL;
+    }
     result = OpenNtBaseDispatch(message,number,length);
+    if (number == CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepCheckVDM))
+        ((PBASE_API_MSG)message)->u.CheckVDM.StartupInfo=savedStartup;
     if (enqueueGate && number == CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepGetNextVDMCommand) &&
         ((PBASE_API_MSG)message)->u.GetNextVDMCommand.WaitObjectForVDM) SetEvent(enqueueGate);
     return result;
@@ -286,6 +299,30 @@ int main(int argc, char **argv)
         CHECK(OpenNtBaseServerRequestThread()==&thread);
     }
     BaseSrvVDMInit();
+    {
+        STARTUPINFOA original,decoded,saved;
+        broker_vdm_startup wire;
+        memset(&original,0xa5,sizeof(original));
+        original.dwX=1; original.dwY=2; original.dwXSize=3; original.dwYSize=4;
+        original.dwXCountChars=5; original.dwYCountChars=6;
+        original.dwFillAttribute=7; original.dwFlags=8; original.wShowWindow=0xffff;
+        OpenNtBaseEncodeStartup(&original,&wire);
+        CHECK(OpenNtBaseDecodeStartup(&wire,&decoded));
+        CHECK(decoded.cb==sizeof(decoded) && decoded.dwX==1 && decoded.dwY==2);
+        CHECK(decoded.dwXSize==3 && decoded.dwYSize==4 && decoded.dwXCountChars==5 && decoded.dwYCountChars==6);
+        CHECK(decoded.dwFillAttribute==7 && decoded.dwFlags==8 && decoded.wShowWindow==0xffff);
+        CHECK(!decoded.lpReserved && !decoded.lpDesktop && !decoded.lpTitle && !decoded.lpReserved2 && !decoded.cbReserved2);
+        CHECK(!decoded.hStdInput && !decoded.hStdOutput && !decoded.hStdError);
+        saved=decoded; wire.show=0x10000;
+        CHECK(!OpenNtBaseDecodeStartup(&wire,&decoded) && !memcmp(&saved,&decoded,sizeof(saved)));
+        OpenNtBaseEncodeStartup(NULL,&wire);
+        CHECK(!wire.present && OpenNtBaseDecodeStartup(&wire,&decoded) && decoded.cb==0);
+        wire.flags=1;
+        CHECK(!OpenNtBaseDecodeStartup(&wire,&decoded));
+        wire.flags=0; wire.present=2;
+        CHECK(!OpenNtBaseDecodeStartup(&wire,&decoded));
+        puts("PASS: nine source startup scalars roundtrip without native pointers/handles; absent and invalid forms checked");
+    }
     {
         resource_failure_test test={0};
         OPENNT_BASE_RESOURCE_BINDING binding={&test,reject_delivery,close_failed_delivery};

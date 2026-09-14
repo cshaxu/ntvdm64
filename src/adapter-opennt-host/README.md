@@ -147,6 +147,18 @@ service access and maintain context lifetime. Formal lifecycle tests now use
 this entry instead of a fixture-owned handler switch; real RPC decoding remains
 pending. This finite source-shaped adapter replaces routing only, not CSR.
 
+`base_startup.h`/`base_startup.c` bind only original BaseCheckVDM's nine numeric
+STARTUPINFO fields to the broker's fixed-width startup fragment. Original
+vdm.c selects these fields explicitly and transmits strings and standard
+streams separately; copying the entire native structure would carry pointers
+and unselected fields. Decode reconstructs cb locally and leaves all native
+pointer/handle members zero. Original GetNextVDMCommand later rebinds the
+desktop/title/reserved strings; resources follow their independent protocol.
+Presence distinguishes absent StartupInfo; invalid presence/show-width or
+nonempty absent form fails without modifying output. The original lifecycle
+fixture passes with this binding around real BaseCheckVDM requests. Full RPC
+integration remains open; this is not a general STARTUPINFO replacement.
+
 The header supplies no CSR runtime, command policy or success stubs. Keeping
 original CSR declaration records does not admit their historical transport.
 

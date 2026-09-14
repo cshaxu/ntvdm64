@@ -466,3 +466,30 @@ and overflow rejection. Outputs are below build/M0-T412/S3/payload.
 StartupInfo, resource IDs, protocol envelope, native-message translation and
 actual RPC command integration remain missing; this fragment is not a complete
 command protocol and its test is not three-program or guest acceptance.
+
+## Startup numeric binding
+
+Original client vdm.c BaseCheckVDM's Copy startupinfo block copies only
+dwX/dwY/dwXSize/dwYSize/dwXCountChars/dwYCountChars/dwFillAttribute/dwFlags/
+wShowWindow and constructs cb. Strings and standard streams are separate Base
+message fields. GetNextVDMCommand subsequently rebinds string pointers to its
+caller's buffers. No native STARTUPINFO pointer, reserved pointer or HANDLE
+belongs in this fragment.
+
+The original capture algorithm is retained. Reusing its native structure as
+wire bytes requires the excluded CSR address/handle environment. The finite
+base_startup adapter selects exactly the nine original scalars plus presence
+in forty fixed-width bytes. Decode constructs local cb and zeroes unselected
+members; invalid presence, show-width overflow and nonempty absent forms fail
+without modifying output. NULL StartupInfo remains absent. This is transport
+binding, not a new startup policy or imported original algorithm.
+
+Regenerated S3/product and built opennt-broker-owners. The formal lifecycle
+test now encodes/decodes actual BaseCheckVDM startup captures before original
+server dispatch and restores the captured pointer before original cleanup.
+Verify-BrokerOriginalLifecycle.mjs passes with formal map-provider checks,
+all nine scalar values, absence, poisoned native members and malformed-form
+negatives, plus the original lifecycle/capture/rollback suite. This is local
+marshalling evidence, not RPC command delivery or three-program acceptance.
+Full envelope, resource identities and endpoint composition remain open;
+no runtime executable was deployed.

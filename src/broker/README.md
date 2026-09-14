@@ -68,8 +68,14 @@ and short encode buffers fail without writing output. No task slots, length
 negotiation policy, pointers or handles are serialized. Inputs must not overlap
 output. This x86 little-endian payload fragment is in broker-transport.lib and
 has formal-provider tests, but is not a full/versioned command envelope or
-native-message decoder. Operation/direction/string semantics, startup scalar
-state, resource IDs and authentication remain required integration work.
+native-message decoder. Operation/direction/string semantics,
+resource IDs and authentication remain required integration work.
+
+`vdm_startup.h` contains the separate forty-byte numeric startup fragment:
+presence and the nine scalar fields copied by original BaseCheckVDM. Its
+package-private encode/decode binding is in adapter-opennt-host; strings,
+standard streams and native reserved pointers are not members. It is not a
+complete command envelope or a standalone Windows STARTUPINFO serialization.
 
 M0 T272 S5 disposition register:
 
