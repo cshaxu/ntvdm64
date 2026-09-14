@@ -115,12 +115,43 @@ Check/reserve/prepare/Get and exit at
 `O:\ntvdm64\logs\m0-t412-s4-literal-redir-r1`; no host output target was
 created. Thus run16 did not invent shell parsing for a literal operator.
 
+## Interactive task-return observation
+
+The preceding `r22` Console script treated each public Console `KEY_EVENT`
+pair as if the original SoftPC worker promised a matching Scan-1 break byte
+before the next pair. That is not an OpenNT contract. `KeyMsgToKeyCode` first
+maps the Console Scan-1 value to its internal key number (Enter is
+`1Ch -> 2Bh`), and the original BIOS/device path may defer an Enter release
+when its typeahead buffer is full. The observation harness was corrected to
+queue its small ordinary `ver\r`/`exit\r` sequence at the already-observed
+original DOS line-input boundary, with normal human inter-key cadence. It does
+not write guest memory, synthesize a BOP, or duplicate a keyboard map. Its
+acceptance boundaries are source-owned command output and final process exit.
+
+Fresh fixed-container run
+`O:\ntvdm64\logs\m0-t412-s4-console-exit-r27` used the rebuilt three x86
+programs and a temporary byte-identical `O:\ntvdm64\COMMAND.PIF` sidecar
+removed in `finally`. It recorded `scripted-console-input=delivered`,
+`scripted-console-input-remaining=0`, and `run16.exe` exit `0`. The captured
+Console shows the original banner/prompt, `ver`, a returned prompt, and
+`exit`; the child trace records corresponding stream output and retained
+original `54:08` dispatch. Thus the first interactive task now returns
+through the three-program topology.
+
+The run intentionally leaves `basesrv.exe` and `ntvdm.exe` resident after
+the launcher returns. Their exact PIDs were recorded and explicitly cleaned
+up after observation. This is not accepted as cleanup behavior: idle worker
+retirement and empty-broker exit remain T412 S5 work. The PIF remains an
+immutable test input in S4; moving or deleting guest media is outside this
+packet.
+
 ## Interpretation
 
 Confidence is high that the original Update-before-Connect ordering and
-worker-local standard-handle consumption execute.  The receipt-only form is
+worker-local standard-handle consumption execute, and that the first
+interactive COMMAND task returns to the launcher. The receipt-only form is
 not accepted: it remains an open design issue rather than a completed
-transport claim.  Nested DOS execution, byte-producing stdout/stderr, EOF
+transport claim. Nested DOS execution, byte-producing stdout/stderr, EOF
 and guest redirection remain required acceptance cases.
 
 ## Follow-up

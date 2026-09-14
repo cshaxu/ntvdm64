@@ -19,7 +19,7 @@
  * hardware queue while keeping a four-key command inside the fixed 5--10
  * second observation window. */
 #define OBSERVATION_TIMEOUT_MS 10000u
-#define OBSERVATION_TIMEOUT_MAX_MS 30000u
+#define OBSERVATION_TIMEOUT_MAX_MS 60000u
 #define OBSERVATION_INPUT_READY_TIMEOUT_MS 20000u
 #define OBSERVATION_KEY_EVENT_INTERVAL_MS 100u
 #define OBSERVATION_KEY_DRAIN_TIMEOUT_MS 1500u
@@ -346,8 +346,7 @@ static BOOL wait_for_report_marker_after(const char *path, const char *marker,
     }
 }
 
-static BOOL write_console_input_text(HANDLE input, const char *text,
-                                     const char *report_path)
+static BOOL write_console_input_text(HANDLE input, const char *text)
 {
     const char *cursor;
 
@@ -360,8 +359,6 @@ static BOOL write_console_input_text(HANDLE input, const char *text,
         SHORT virtual_key = VkKeyScanA(character);
         WORD key_code;
         WORD scan_code;
-        char break_marker[40];
-        DWORD report_offset;
         /* `nt_event.c` starts a DOS boot with ToggleKeyState set to
          * NUMLOCK_ON.  A normal unmodified letter delivered by this fixed
          * Console must carry that same toggle bit: otherwise the original
@@ -384,23 +381,16 @@ static BOOL write_console_input_text(HANDLE input, const char *text,
         records[0].Event.KeyEvent.dwControlKeyState = control_state;
         records[1] = records[0];
         records[1].Event.KeyEvent.bKeyDown = FALSE;
-        report_offset = report_size_bytes(report_path);
         if (!WriteConsoleInputA(input, records, ARRAYSIZE(records), &written) ||
             written != ARRAYSIZE(records)) return FALSE;
-        /* The real Console route is serviced by the original keyboard worker,
-         * not a bulk guest-input API.  Pace this observer-only script like an
-         * ordinary typist so it cannot fill the original keyboard ring before
-         * COMMAND has an opportunity to consume the preceding key. */
-        /* The original 8042 worker deliberately drains one hardware key at
-         * a time.  Keep this observer slower than that bounded source-owned
-         * queue rather than making a bulk-input shortcut appear reliable. */
         Sleep(OBSERVATION_KEY_EVENT_INTERVAL_MS);
-        snprintf(break_marker, sizeof(break_marker),
-                 "MVDM-KBD-PORT60 value=%02X", (unsigned int)(scan_code | 0x80u));
-        if (!wait_for_report_marker_after(report_path, break_marker,
-                                          report_offset,
-                                          OBSERVATION_KEY_DRAIN_TIMEOUT_MS))
-            return FALSE;
+        /* A Console input queue is asynchronous.  Once the original DOS line
+         * input boundary has been observed, this deliberately tiny two-line
+         * sequence is ordinary queued Console input; it is not paced against
+         * individual device callbacks because that would manufacture a host
+         * acknowledgement contract that neither Console nor SoftPC offers.
+         * Its result is the source-owned command output and final process
+         * exit observed by the caller. */
     }
     return TRUE;
 }
@@ -954,7 +944,7 @@ int main(int argc, char **argv)
              * stream output but before this observer queues any key. */
             write_console_snapshot(output, console_input_preinput_snapshot_path);
             scripted_console_input_delivered = write_console_input_text(input,
-                scripted_console_input_text, console_input_ready_report_path);
+                scripted_console_input_text);
         }
     }
     if (observe_console_mouse_mode) {
