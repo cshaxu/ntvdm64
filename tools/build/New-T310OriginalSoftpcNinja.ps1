@@ -1160,6 +1160,7 @@ $graph.Add('build original-opennt-netapi-api.lib: lib ' + ($openntNetapiObjects 
 $graph.Add('build original-opennt-base-vdm.lib: lib ' + ($openntBaseVdmObjects -join ' '))
 $graph.Add('build original-opennt-rtl-x86.lib: lib ' + ((@($openntRtlObjects) + @($openntRtlX86Objects)) -join ' '))
 $graph.Add('build app-machine-shell.lib: lib ' + ($appObjects -join ' '))
+$graph.Add('build worker-shell.lib: lib obj/app/machine_shell.obj obj/app/package_layout.obj')
 $graph.Add('build session.lib: lib ' + ($sessionObjects -join ' '))
 $graph.Add('build broker.lib: lib ' + ($brokerObjects -join ' '))
 $graph.Add('build broker-base-vdm-record-test.exe: broker_test_link ' + $brokerRecordTestObject + ' broker.lib')
@@ -1171,6 +1172,9 @@ $graph.Add('build environment-projection-fixture.exe: rtl_fixture_link ' + $envi
 $graph.Add('build mvdm-softpc-effective-address.lib: lib ' + $effectiveAddressObject)
 $graph.Add('build softpc-win32-bindings.lib: lib ' + ($adapterWin32Objects -join ' '))
 $graph.Add('build basesrv-bindings.lib: lib ' + ($adapterBaseSrvObjects -join ' '))
+# Worker composition keeps reached COMMAND/BOP support but cannot select the
+# legacy local BaseVDM producer, retry loop or queue from this archive.
+$graph.Add('build worker-command-bindings.lib: lib obj/adapter-basesrv/mvdm_image_classification.obj obj/adapter-basesrv/mvdm_command_guest_state.obj obj/adapter-basesrv/mvdm_command_native_child.obj')
 $graph.Add('build monitor-bindings.lib: lib ' + ($adapterMonitorObjects -join ' '))
 $graph.Add('build kernel-vdm-printer.lib: lib ' + $kernelVdmPrinterObject)
 $graph.Add('build debugger-bindings.lib: lib ' + ($adapterDebuggerObjects -join ' '))

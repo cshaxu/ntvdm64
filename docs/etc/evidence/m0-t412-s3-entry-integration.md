@@ -1156,3 +1156,20 @@ cleanup. The adapter now records that local event before target/callback
 validation. The original lifecycle suite passes additional missing-deliver
 and wrong-target cases: STATUS_NOT_SUPPORTED is preserved and the just-created
 event is no longer a valid handle afterward. Original source is unchanged.
+## Worker composition archive split
+
+The generator now emits two explicit worker-only composition archives.
+worker-shell.lib contains exactly machine_shell.obj and package_layout.obj;
+worker-command-bindings.lib contains exactly mvdm_image_classification.obj,
+mvdm_command_guest_state.obj and mvdm_command_native_child.obj. The x86 build
+passes and librarian /list confirms those members. No source body was copied
+or rewritten. The old combined archives and deployed product are unchanged.
+
+This excludes public entry/launch_declaration and the three legacy local
+BaseVDM policy objects from these new archive inputs. It does not prove they
+cannot enter a future link via another library: final link-map checks remain
+mandatory. The COMMAND image helper remains for reached child-launch consumers,
+not as ntvdm's public image classifier; S4 still owns its run16 migration.
+Independent worker entry, original BaseClient transport selection and the
+actual ntvdm.exe link are still pending. These archives are not three-program
+execution evidence or evidence of removed mirror diff/overlay lines.

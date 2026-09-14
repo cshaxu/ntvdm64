@@ -167,6 +167,24 @@ An impossible failure to terminate a live
 owned helper is fail-fast rather than returning with a writer using freed
 memory; this exceptional path is not injected or claimed tested.
 
+The generator now provides `worker-shell.lib` containing only machine_shell
+and package_layout. It excludes entry and launch_declaration, unlike the old
+combined app archive. `worker-command-bindings.lib` separately retains the
+three reached image/COMMAND guest-state/native-child support objects, excluding
+base_vdm_client/local/broker. These are explicit composition targets, not an
+ntvdm executable or runtime acceptance. COMMAND's retained image helper is not
+a new public worker launcher; S4 still must route child launches through run16.
+Both archives build and their actual librarian member lists were checked.
+
+The generator now provides `worker-shell.lib` containing only machine_shell
+and package_layout. It excludes entry and launch_declaration, unlike the old
+combined app archive. `worker-command-bindings.lib` separately retains the
+three reached image/COMMAND guest-state/native-child support objects, excluding
+base_vdm_client/local/broker. These are explicit composition targets, not an
+ntvdm executable or runtime acceptance. COMMAND's retained image helper is not
+a new public worker launcher; S4 still must route child launches through run16.
+Both archives build and their actual librarian member lists were checked.
+
 ## T412 standalone service composition
 
 `basesrv_entry.c` is the formal build-only broker entry. It selects original
