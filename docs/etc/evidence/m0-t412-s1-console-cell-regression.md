@@ -71,3 +71,58 @@ This diagnostic turn does not change production source or replace either
 published `ntvdm32.exe`; both retain C0771B...652F. Diagnostic EXEs and graph
 remain recoverable under build, and observation logs stay under the runtime
 logs directory.
+
+## Approved repair and verification
+
+The subsequent owner request, "请你连续执行", admits the minimum repair and
+verification described above. Production change is one allocation argument
+plus correction of its comment; original painter, CPU and overlay are unchanged.
+Recovery ladder: original `nt_text` remains directly composed; private Console
+Server registration cannot be imported because its section/controller state is
+inside CSRSS. The existing ADAPTER-WIN32-032/048 public-Console binding is the
+smallest seam and now preserves the selected producer's four-byte contract.
+No imported-source intrusion, new ABI or new rendering algorithm is needed.
+
+The existing Console fixture had duplicated the wrong two-byte assumption.
+It now checks allocation before writing, poisoned reserved bytes, characters
+and attributes, full 80-by-50 capacity, final-row/final-column presentation,
+short-snapshot rejection, out-of-range rectangle rejection and unregister /
+same-size re-register pointer retention. Its original queue/input tests remain.
+It explicitly owns a fresh Console rather than consuming an inherited user's
+input. The initial inherited-Console run rejected resize with error 87;
+detaching that fixture and allocating its own Console makes the full test pass.
+No assertion is skipped on an unavailable Console.
+
+Build root: `build/M0-T412/S1/text-cell-repair`. A new formal product graph
+compiled all 441 steps, with no reused previous-run product objects. Toolchain
+is MSVC Win32/x86 `/MT`; generator uses Node 22.22.1. Existing observer binary
+is reused unchanged from event-profile; it supplies no product/link input.
+
+Verification:
+
+- `Verify-ConsoleTextCellContract.mjs <formal-build.ninja>`: pass; selected
+  original painter profile, four-byte allocation and fixture agree, no MONITOR.
+- Actual linked adapter/session fixture: pass, exit 0. The same new fixture
+  linked to adapter source at `bcb623db5` fails at the pre-write capacity
+  assertion, exit 24. Inputs and results are preserved in the build root's
+  `test-fixture.mjs`, `fixture/before.ninja` and `fixture/results.json`.
+- Fresh formal `ccpu-halt-reset-test.exe`: exit 0, `AX=beef producer=0`.
+- Published formal product, positional `MEM.EXE`: exit 0. Its pre-existing
+  implausible largest-program-size output remains; this is launch/return
+  smoke, not proof that MEM's memory accounting is correct.
+- `COMMAND.COM /c ver`: exit 0, `MS-DOS Version 5.00.500`.
+- Two `EDIT.COM` observations: both snapshots equal the old clean reference
+  `BC26704C...E35`, 4096 bytes and zero NULs. Both end at the bounded interactive
+  watchdog; this proves stable initial rendering, not full input/exit acceptance.
+
+Real reports: `O:/ntvdm64/logs/t412-s1-cell-repaired-{mem,command,edit,edit-repeat}.txt`
+with their `.console.txt` snapshots. Build scripts/results stay under build.
+Only the formal `ntvdm32.exe` was staged this turn, using StageProductExecutable.
+Both publication paths contain 3,228,672 bytes, SHA-256
+`33C551379435F054EDBEA1FE253B2A0A82E7A712D9D641A4D820B7C7E7AE43AA`.
+The old publication remains recoverable at
+`build/M0-T412/S1/event-profile/ntvdm32-before.exe`. No media changed.
+
+This closes the diagnosed text-layout prerequisite, not T412 S1 or the broker
+design. The existing MEM output limitation and full EDIT/WOW interaction remain
+explicit; no additional rendering or CPU implementation is admitted by this fix.

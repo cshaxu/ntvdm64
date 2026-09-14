@@ -15,7 +15,7 @@
 | Objective | Audit D01--D07/D10 and design one original BaseSrv/BaseClient lifecycle across run16.exe, basesrv.exe and ntvdm.exe, minimizing mirror diff, overlay and duplicate autonomous policy. |
 | Non-goals | No broker production implementation during S1; no CSRSS/kernel shell, CPU30/x64 executor, generic shell parser, or claim of full WRITE recovery. Owner approval following the audit checkpoint admits the bounded event-consumer prerequisite repair, not instruction-decoder changes. |
 | Reference Baseline | Entry commit bb9fe640d; selected original OpenNT package provenance and current formal x86 CCPU40 graph. Prior closure records are evidence indexes, not substitutes for selected-provider/runtime proof. |
-| Files And ABI Surface | Governance and indexed audit/design records; BaseSrv/BaseClient and finite broker boundary review. Approved prerequisite: c_main.c event-consumer profile, mirror register and focused verification tools/tests; no public ABI changes. |
+| Files And ABI Surface | Governance and indexed audit/design records; BaseSrv/BaseClient and finite broker boundary review. Approved prerequisites: c_main.c event-consumer profile and Console adapter text-cell contract, registers and focused verification tools/tests; no public ABI changes. |
 | Applicable Rules | Source policy; execution, architecture, coding and document rules; package-first recovery and original-owner placement. |
 | Verification | Per-row provider/design review; approved prerequisite uses source-extracted x86 consumer checks plus actual original CCPU/SAS HALT RESET A/B, formal product build and Console runtime smoke. Distinguish each evidence level; governance and diff checks remain required. |
 | Expected Markers | D01--D07/D10 owner/disposition ledger; measured removal candidates; finite IPC contract; positive/negative integration matrix; explicit prerequisite gaps. No fabricated runtime PASS markers. |
@@ -56,6 +56,22 @@ diagnostic build restoring four-byte allocation reproduces the old clean
 snapshot exactly. Production source/publication remain unchanged in this
 diagnostic turn; minimum adapter repair and stride/capacity regression are
 identified, not yet product-delivered. No CPU or original painter edit needed.
+
+Owner now requests continuous execution. This admits the diagnosed minimum
+Console adapter repair and matching producer-stride/capacity tests, formal x86
+build and MEM/COMMAND/EDIT verification, followed by verified publication and
+S1 audit/design continuation. The original painter and CPU profile remain
+unchanged. Working root is build/M0-T412/S1/text-cell-repair; existing formal
+event-profile objects may be reused only with recorded input identity.
+
+Text-layout prerequisite delivered: the new text-cell-repair formal build
+compiles all 441 steps; source/profile check, actual adapter fixture with
+old-source negative control, and original CCPU HALT test pass. MEM and COMMAND
+exit zero; two EDIT startup snapshots exactly match the old clean reference.
+MEM's existing implausible largest-program-size field is not accepted as correct.
+Both publication paths now carry SHA-256 33C55137...AE43AA, 3,228,672 bytes.
+The [repair evidence](../etc/evidence/m0-t412-s1-console-cell-regression.md)
+records exact hashes and limits. S1 broker audit/design resumes; S2 stays inactive.
 
 ## T411 Closed Packet
 
