@@ -74,6 +74,24 @@ It deliberately does not claim keyboard input, mouse movement, button-release
 pairing, or welcome-dialog handling: those remain separate S4 interaction
 checks.
 
+### Automated Console mouse delivery
+
+The existing console-owning, non-debug observer was run without product code
+changes against `O:\ntvdm64\run16.exe EDIT.COM`.  With only its default-off
+presentation trace enabled, the observer reported
+`console-mouse-mode-observed=yes`, input mode `0x000001b8`, and
+`console-mouse-input=delivered`.  It wrote the ordinary public Console move,
+left-down, drag and left-up records to `CONIN$`; the trace records the
+selected original mouse queue (`stage=2`) and callback return (`stage=7`) for
+each.  The result and presentation trace are retained at
+`O:\ntvdm64\logs\m0-t412-s4-observer-edit-r2\result.txt` and
+`O:\ntvdm64\logs\m0-t412-s4-observer-edit-r2\presentation.txt`.
+
+This is an automated delivery proof for the three-program Console-to-SoftPC
+input path.  Together with the owner-visible click above, it supports click
+usability; it does not substitute a separate keyboard or all-editor-behavior
+acceptance run.
+
 ## Limit
 
 This establishes the host-side replacement boundary, copied stream route and
