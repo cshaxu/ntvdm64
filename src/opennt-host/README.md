@@ -100,6 +100,18 @@ admitted merely to make the larger historical API product shell link.
 
 ## Divergence register
 
+OPENNT-HOST-031 admits the three local capture-memory functions from pinned
+OpenNT `base/ntdll/csrutil.c`, not its CSR/LPC transport. Original source file
+SHA-256 is `7a176482498e1aca00e9651c326a9b62a8ba2ada0aa7f90f8b585acd1a376e6a`;
+the unchanged 235-line group has LF-normalized SHA-256
+`41d54b575c6895809c956136c3a35067dc3b87610a6226d8ec23fab431e11cab`.
+CsrAllocateCaptureBuffer, CsrAllocateMessagePointer and CsrFreeCaptureBuffer
+retain their pointer tables, alignment and original calling convention (/Gz).
+A local process-owned heap replaces the port heap; tags are metadata only.
+No shared port section, pointer rebasing or CsrClientCallServer body is imported.
+The original library replaces the test-owned allocator; heap walks, actual
+heap exhaustion, source identities and link ownership are verified in S2.
+
 OPENNT-HOST-030 admits only `_UserTestTokenForInteractive` from pinned OpenNT
 `windows/core/ntuser/server/exports.c` (original file SHA-256
 `dbeb0ad48349bf5887a1333f21b427d8e0fdd3cb226977a9dc786373e961c71f`).

@@ -1,6 +1,7 @@
 /* Test host mechanics only. All VDM record policy is linked from srvvdm.c. */
 #include "basesrv.h"
 #include <base_interactive.h>
+#include <base_capture.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -29,41 +30,21 @@ NTSTATUS NTAPI CsrLockProcessByClientId(HANDLE id, PCSR_PROCESS *out)
 }
 NTSTATUS NTAPI CsrUnlockProcess(PCSR_PROCESS process) { (void)process; return 0; }
 
-/* Test-local capture/dispatch transport; original client owns retry/copy policy. */
-static ULONG captures;
-static BOOL failCapture;
+/* Test dispatch only; original capture routines use a real private heap. */
+PVOID CsrPortHeap;
+#define captures capture_blocks()
 static ULONG launchCalls;
 static HANDLE enqueueGate, queuedParent;
 static ULONG retryCalls, retryExit;
 static ULONG enqueueStatus;
-PCSR_CAPTURE_HEADER NTAPI CsrAllocateCaptureBuffer(ULONG messages, ULONG pointers, ULONG size)
+static ULONG capture_blocks(void)
 {
-    PCSR_CAPTURE_HEADER capture;
-    (void)messages; (void)pointers;
-    if(failCapture) return NULL;
-    if (size > 1024 * 1024) return NULL;
-    size = ROUND_UP(size,4);
-    capture = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, sizeof(*capture) + size);
-    if (!capture) return NULL;
-    capture->Length = sizeof(*capture) + size;
-    capture->FreeSpace = (PCHAR)(capture + 1);
-    ++captures;
-    return capture;
-}
-VOID NTAPI CsrFreeCaptureBuffer(PCSR_CAPTURE_HEADER capture)
-{
-    if (capture) { --captures; HeapFree(GetProcessHeap(),0,capture); }
-}
-ULONG NTAPI CsrAllocateMessagePointer(PCSR_CAPTURE_HEADER capture, ULONG size, PVOID *pointer)
-{
-    ULONG aligned = ROUND_UP(size,4);
-    if (aligned < size || aligned > capture->Length ||
-        capture->FreeSpace > (PCHAR)capture + capture->Length - aligned) {
-        *pointer = NULL; return 0;
-    }
-    *pointer = capture->FreeSpace;
-    capture->FreeSpace += aligned;
-    return aligned;
+    PROCESS_HEAP_ENTRY entry={0};
+    ULONG count=0;
+    if(!HeapLock(CsrPortHeap)) return MAXULONG;
+    while(HeapWalk(CsrPortHeap,&entry)) if(entry.wFlags & PROCESS_HEAP_ENTRY_BUSY) ++count;
+    HeapUnlock(CsrPortHeap);
+    return count;
 }
 NTSTATUS NTAPI CsrClientCallServer(PCSR_API_MSG message, PCSR_CAPTURE_HEADER capture,
     CSR_API_NUMBER number, ULONG length)
@@ -143,6 +124,22 @@ int main(void)
     HANDLE sender;
     DWORD senderExit;
     BaseSrvHeap = GetProcessHeap();
+    CsrPortHeap=HeapCreate(0,0,0);
+    CHECK(CsrPortHeap!=NULL && captures==0);
+    {
+        PCSR_CAPTURE_HEADER capture=CsrAllocateCaptureBuffer(3,0,5);
+        PVOID first=NULL,empty=(PVOID)1,last=NULL;
+        CHECK(capture!=NULL && captures==1);
+        CHECK(CsrAllocateMessagePointer(capture,1,&first)==4);
+        CHECK(CsrAllocateMessagePointer(capture,0,&empty)==0 && empty==NULL);
+        CHECK(CsrAllocateMessagePointer(capture,3,&last)==4 && (PCHAR)last==(PCHAR)first+4);
+        CHECK(capture->CountMessagePointers==3 && capture->CountCapturePointers==0);
+        CHECK(capture->MessagePointerOffsets[0]==(ULONG)&first && capture->MessagePointerOffsets[1]==0);
+        CHECK(capture->MessagePointerOffsets[2]==(ULONG)&last);
+        CHECK(capture->FreeSpace<=(PCHAR)capture+capture->Length);
+        CsrFreeCaptureBuffer(capture);
+        CHECK(captures==0 && CsrAllocateCaptureBuffer(1,0,MAXLONG)==NULL && captures==0);
+    }
     parameters.ConsoleHandle = (HANDLE)1;
     peb.ProcessParameters = &parameters;
     caller.ProcessHandle = GetCurrentProcess();
@@ -335,11 +332,18 @@ int main(void)
         launch.lpReserved=NULL;
         ExitVDM(FALSE,0);
         before=launchCalls;
-        failCapture=TRUE;
+        HANDLE normalHeap=CsrPortHeap;
+        HANDLE exhaustedHeap=HeapCreate(0,4096,4096);
+        ULONG allocations=0;
+        CHECK(exhaustedHeap!=NULL);
+        while(allocations<4096 && HeapAlloc(exhaustedHeap,0,128)) ++allocations;
+        CHECK(allocations<4096);
+        CsrPortHeap=exhaustedHeap;
         ZeroMemory(&m,sizeof(m));
         CHECK(!BaseCheckVDM(BINARY_TYPE_DOS,L"O:\\ntvdm64\\MEM.EXE",L"MEM.EXE",L"O:\\ntvdm64",&env,&m,&task,0,&launch));
-        CHECK(GetLastError()==ERROR_NOT_ENOUGH_MEMORY && captures==0 && launchCalls==before);
-        failCapture=FALSE;
+        CHECK(GetLastError()==ERROR_NOT_ENOUGH_MEMORY && launchCalls==before);
+        CsrPortHeap=normalHeap;
+        CHECK(captures==0 && HeapDestroy(exhaustedHeap));
         CHECK(!BaseCheckVDM(BINARY_TYPE_DOS,L"O:\\ntvdm64\\MEM.EXE",L"MEM.EXE",L"O:\\ntvdm64",NULL,&m,&task,0,&launch));
         CHECK(GetLastError()==ERROR_INVALID_PARAMETER && captures==0 && launchCalls==before);
         puts("PASS: original BaseCheckVDM command/environment/startup capture, server ownership and allocation failure");
@@ -382,6 +386,7 @@ int main(void)
         CHECK(WowAuthId.LowPart==0xffffffff && WowAuthId.HighPart==-1);
         puts("PASS: original shared-WOW admission rejects absent/wrong scope, accepts matching logon and undoes launch");
     }
+    CHECK(captures==0 && HeapDestroy(CsrPortHeap));
     puts("PASS: original first-VDM, record/command/directory capacity, dispatch/completion, parent/worker events, reentry, empty-WOW, cleanup");
     return 0;
 }

@@ -11,6 +11,10 @@ const rtlFlags=graph.match(/^build obj\/opennt-rtl\/error\.obj:.*\r?\n  rtl_cfla
 const ownerPath=path.resolve('src/opennt-host/base/win32/server/srvvdm.c');
 const ownerBefore=fs.readFileSync(ownerPath);
 const clientSource=fs.readFileSync('src/opennt-host/base/win32/client/vdm.c','utf8');
+const capturePattern=/PCSR_CAPTURE_HEADER\r?\nCsrAllocateCaptureBuffer\([\s\S]*?ULONG\r?\nCsrAllocateMessagePointer\([\s\S]*?\r?\n}/;
+const captureBody=fs.readFileSync('src/opennt-host/base/ntdll/csrutil.c','utf8').match(capturePattern)[0].replace(/\r\n/g,'\n');
+assert.equal(captureBody,fs.readFileSync('O:/repos.external/OpenNT/base/ntdll/csrutil.c','utf8').match(capturePattern)[0].replace(/\r\n/g,'\n'));
+assert.equal(createHash('sha256').update(captureBody).digest('hex'),'41d54b575c6895809c956136c3a35067dc3b87610a6226d8ec23fab431e11cab');
 const clientBody=clientSource.match(/BOOL\r?\nAPIENTRY\r?\nGetNextVDMCommand\([\s\S]*?\r?\n}\r?\n/)[0].replace(/\r\n/g,'\n');
 assert.equal(createHash('sha256').update(clientBody).digest('hex'),
     '47cf285cbc505d9d43a50af16e283ea51d1d9ef8d2ff093795086d0ca327addd','Original client body changed');
@@ -38,10 +42,11 @@ const commands=[
     `cl.exe ${flags} /Fo"${build}/process.obj" "${root}/src/adapter-opennt-host/basesrv/source/base_client_process.c"`,
     `cl.exe ${flags} ${includes} /Fo"${build}/interactive.obj" "${root}/src/adapter-opennt-host/basesrv/source/base_interactive.c"`,
     `cl.exe ${flags} ${includes} /Fo"${build}/exports.obj" "${root}/src/opennt-host/windows/core/ntuser/server/exports.c"`,
+    `cl.exe ${flags} ${includes} /Gz /Fo"${build}/capture.obj" "${root}/src/opennt-host/base/ntdll/csrutil.c"`,
     `cl.exe ${flags} ${includes} /Gy /DOPENNT_BASE_CLIENT_VDM_COMMANDS /Fo"${build}/client.obj" "${root}/src/opennt-host/base/win32/client/vdm.c"`,
     `cl.exe ${rtlFlags} /Fo"${build}/error.obj" "${root}/src/opennt-host/base/ntos/rtl/error.c"`,
     'lib.exe /nologo /out:opennt-base-server.lib srvvdm.obj exports.obj',
-    'lib.exe /nologo /out:opennt-base-client.lib client.obj',
+    'lib.exe /nologo /out:opennt-base-client.lib client.obj capture.obj',
     'link.exe /nologo /opt:ref /out:original-lifecycle.exe /map:original-lifecycle.map fixture.obj opennt-base-server.lib opennt-base-client.lib process.obj interactive.obj error.obj ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib'
 ];
 const log=fs.openSync(path.join(build,'build.log'),'w');
@@ -63,6 +68,8 @@ assert.equal(image.readUInt16LE(image.readUInt32LE(0x3c)+4),0x14c);
 const map=fs.readFileSync(path.join(build,'original-lifecycle.map'),'utf8');
 assert(map.includes('opennt-base-server:srvvdm.obj')&&map.includes('opennt-base-client:client.obj'),'Original owner libraries not selected');
 assert(!map.includes('luid.obj'),'Generated inline replacement still linked');
+for(const symbol of ['_CsrAllocateCaptureBuffer@12','_CsrAllocateMessagePointer@12','_CsrFreeCaptureBuffer@4'])
+    assert(map.split(/\r?\n/).some(line=>line.includes(symbol)&&line.includes('opennt-base-client:capture.obj')),`Original capture provider missing: ${symbol}`);
 assert(map.split(/\r?\n/).some(line=>line.includes('__UserTestTokenForInteractive')&&line.includes('opennt-base-server:exports.obj')),'Original token provider missing');
 assert(map.split(/\r?\n/).some(line=>line.includes('_GetNextVDMCommand@4')&&line.includes('client.obj')),'Original client provider missing');
 assert(map.split(/\r?\n/).some(line=>line.includes('_BaseUpdateVDMEntry')&&line.includes('client.obj')),'Original update provider missing');

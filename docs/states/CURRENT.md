@@ -47,14 +47,13 @@ relative-output size and NULL-directory differences. Final
 run16 selection, remaining launch closure and local-policy retirement remain
 unfinished. This is not guest execution or three-product acceptance.
 
-Original client/server archives now pass the lifecycle tests using the
-package-private declaration header and original LUID inline, without the
-test-only forced header, empty DFS header or generated LUID object. Final
-product selection remains unfinished; see the linked S2 evidence.
-Shared-WOW admission now uses the original token helper and passes absent/
-mismatched/matching scoped-logon and partial-launch-undo tests. This is protocol
-proof only; real SYSTEM impersonation, RPC binding and guest execution remain
-unverified in this group.
+Original client/server archives pass with private declarations and the original
+LUID inline, without generated declaration scaffolding. Shared-WOW admission
+passes scoped-logon and rollback tests using the original token helper. Three
+original capture routines now replace test-authored allocators; pointer tables,
+alignment, real heap exhaustion and cleanup pass. See the linked S2 evidence.
+Product selection, RPC binding, SYSTEM impersonation and guest acceptance remain
+unfinished; classification belongs to run16, not broker or worker.
 
 ## T412 S1 historical checkpoints
 

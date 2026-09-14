@@ -1,5 +1,13 @@
 # adapter-opennt-host
 
+The BaseClient capture-memory binding is declaration-only in base_capture.h:
+the process supplies CsrPortHeap as a local heap, initializes it before calls
+and destroys it only after requests drain. All three memory routines now come
+from original opennt-host/base/ntdll/csrutil.c, replacing test-authored bodies.
+Original pointer-offset tables contain local addresses and never form the RPC
+wire format. Counts/spans are supplied by the original bounded callers, not
+remote peers; the future transport validates copied message fields separately.
+
 This component is the package-private historical host-interface adapter for
 `opennt-host`. It has one named subfamily for each accepted non-MVDM OpenNT
 owner package that needs a private historical binding. BaseSrv/client VDM is

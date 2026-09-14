@@ -425,3 +425,38 @@ captured real interactive-user scope, not grant access to SYSTEM itself. A
 broker started under SYSTEM cannot derive an interactive-user scope from its
 own token and therefore fails shared-WOW scope initialization rather than
 guessing another user's identity.
+
+## Original local capture memory recovery
+
+The original BaseClient requires three capture-memory functions. The admitted
+slice is CsrAllocateCaptureBuffer, CsrFreeCaptureBuffer and
+CsrAllocateMessagePointer from pinned OpenNT base/ntdll/csrutil.c. Its original
+file SHA-256 is
+`7a176482498e1aca00e9651c326a9b62a8ba2ada0aa7f90f8b585acd1a376e6a`;
+the unchanged 235-line function group (LF, no final newline) hashes to
+`41d54b575c6895809c956136c3a35067dc3b87610a6226d8ec23fab431e11cab`.
+The original copyright notice remains; this grants no distribution rights.
+
+Recovery ladder: the three original bodies compose unchanged using a private
+process heap. The declaration-only base_capture.h binds CsrPortHeap and omits
+historical heap tag metadata. No source-body intrusion or autonomous allocator
+is needed. CSR/LPC transport, shared port sections and pointer rebasing are
+explicitly rejected; CsrClientCallServer remains a separate transport boundary.
+The original pointer tables contain local addresses, never RPC wire values.
+Original routines trust their callers' counts; they are not hostile-input
+validators. The future wire binding must validate copied fields independently.
+
+Verify-BrokerOriginalLifecycle.mjs compiles the original slice with its /Gz
+calling convention, checks source equality/hash and verifies all three symbols
+come from opennt-base-client:capture.obj. The fixture deletes its three authored
+allocator functions and observes a real private heap using HeapWalk. Tests cover
+four-byte alignment, zero-length entries, pointer-table field identities,
+MAXLONG rejection and drained allocations. A genuinely exhausted non-growing
+heap makes original BaseCheckVDM fail before dispatch with out-of-memory;
+destroying that heap releases its deliberate exhaustion allocations.
+
+The focused x86 run passes these checks and the existing DOS/shared-WOW
+lifecycle tests; build and result records remain under
+build/M0-T412/S2/original-lifecycle. This does not execute guest programs.
+Production heap initialization/drain/destruction and RPC integration remain
+unfinished. The deployed ntvdm32.exe is unchanged; S2 and T412 remain open.
