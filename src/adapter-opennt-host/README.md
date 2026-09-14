@@ -163,6 +163,11 @@ integration remains open; this is not a general STARTUPINFO replacement.
 variable fields to the broker copied-buffer fragment. Decoding validates the
 complete spans, requires actual input bytes rather than advertised output
 capacity, and checks the four USHORT lengths before changing native fields.
+It requires the command and NUL termination of present nonempty text fields.
+Environment termination follows BaseCreateVDMEnvironment: one NUL is accepted
+for empty input, otherwise a double NUL. A present zero-byte input is rejected;
+it must not become a pointer alias to unrelated payload bytes. These checks
+do not parse shell syntax, alter text/encoding or select programs.
 Only those fields change; returned pointers borrow the mutable payload until
 the original synchronous service copies it. This CheckVDM decoder adds no
 allocator, command selection or resource policy. Full-operation validation,

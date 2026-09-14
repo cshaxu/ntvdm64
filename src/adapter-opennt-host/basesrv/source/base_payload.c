@@ -33,7 +33,16 @@ BOOL OpenNtBaseDecodeCheckPayload(void *payload, uint32_t bytes,
         if (spans[i].length!=spans[i].data_bytes ||
             (!spans[i].present && spans[i].length) ||
             (i<4 && spans[i].length>0xffffu)) return FALSE;
+        if (spans[i].present) {
+            const unsigned char *data=(const unsigned char *)payload+spans[i].offset;
+            if (!spans[i].length || data[spans[i].length-1]!=0) return FALSE;
+            /* Original BaseCreateVDMEnvironment emits one NUL for an empty
+             * environment; nonempty entries end in a double NUL. */
+            if (i==BROKER_VDM_ENVIRONMENT && spans[i].length>1 &&
+                data[spans[i].length-2]!=0) return FALSE;
+        }
     }
+    if (!spans[BROKER_VDM_COMMAND].present) return FALSE;
 #define DECODE(i,p,n,t) message->p=spans[i].present? \
     (PCHAR)payload+(spans[i].data_bytes?spans[i].offset:sizeof(spans)):NULL; \
     message->n=(t)spans[i].length;

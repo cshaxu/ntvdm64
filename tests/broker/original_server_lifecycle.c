@@ -343,6 +343,32 @@ int main(int argc, char **argv)
     BaseSrvVDMInit();
     {
         broker_vdm_payload_input fields[BROKER_VDM_PAYLOAD_FIELDS]={0};
+        BASE_CHECKVDM_MSG message={0},saved;
+        char commandText[2]={'X',0},emptyEnv[1]={0},badEnv[2]={'A',0};
+        unsigned char wire[256]; uint32_t bytes;
+        fields[0].present=1; fields[0].length=2; fields[0].data_bytes=2; fields[0].data=commandText;
+        fields[4].present=1; fields[4].length=1; fields[4].data_bytes=1; fields[4].data=emptyEnv;
+        CHECK(broker_vdm_payload_encode(fields,wire,sizeof(wire),&bytes));
+        CHECK(OpenNtBaseDecodeCheckPayload(wire,bytes,&message));
+        CHECK(message.EnvLen==1 && message.Env[0]==0 && !strcmp(message.CmdLine,"X"));
+        memset(&message,0xa5,sizeof(message)); saved=message;
+        commandText[1]='Y';
+        CHECK(broker_vdm_payload_encode(fields,wire,sizeof(wire),&bytes));
+        CHECK(!OpenNtBaseDecodeCheckPayload(wire,bytes,&message) && !memcmp(&message,&saved,sizeof(message)));
+        commandText[1]=0; fields[4].length=2; fields[4].data_bytes=2; fields[4].data=badEnv;
+        CHECK(broker_vdm_payload_encode(fields,wire,sizeof(wire),&bytes));
+        CHECK(!OpenNtBaseDecodeCheckPayload(wire,bytes,&message) && !memcmp(&message,&saved,sizeof(message)));
+        fields[4].length=1; fields[4].data_bytes=1; fields[4].data=emptyEnv;
+        fields[0].length=0; fields[0].data_bytes=0;
+        CHECK(broker_vdm_payload_encode(fields,wire,sizeof(wire),&bytes));
+        CHECK(!OpenNtBaseDecodeCheckPayload(wire,bytes,&message));
+        fields[0].present=0;
+        CHECK(broker_vdm_payload_encode(fields,wire,sizeof(wire),&bytes));
+        CHECK(!OpenNtBaseDecodeCheckPayload(wire,bytes,&message));
+        puts("PASS: CheckVDM rejects unterminated text/environment and empty present buffers; original single-NUL empty environment accepted");
+    }
+    {
+        broker_vdm_payload_input fields[BROKER_VDM_PAYLOAD_FIELDS]={0};
         unsigned char wire[128];
         uint32_t bytes;
         BASE_GET_NEXT_VDM_COMMAND_MSG request={0},saved;

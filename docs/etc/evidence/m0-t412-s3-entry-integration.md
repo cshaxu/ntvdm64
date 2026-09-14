@@ -616,3 +616,27 @@ failure is returned explicitly but was not fault-injected in this step.
 Outputs remain in S3/original-lifecycle. Full operation envelope, authenticated
 RPC command exchange, resource callbacks and three-program execution remain
 required; no deployment or guest acceptance is claimed.
+
+## CheckVDM text termination boundary
+
+Before admitting network data to original string consumers, the native
+CheckVDM payload decoder now requires a command and NUL termination of every
+present input field. Present zero-length buffers are rejected instead of being
+materialized as aliases to unrelated payload data. Environment input accepts
+one NUL for the empty environment; otherwise its final two bytes must be NUL.
+This follows original OpenNT base/win32/client/vdm.c BaseCreateVDMEnvironment:
+pDst starts at pNewEnv, the entry loop is skipped for empty input and the final
+single UNICODE_NULL is included in the converted length (external source lines
+3089-3181). BaseCheckVDM explicitly terminates the other captured strings.
+No text conversion, shell parsing or program-selection policy is added, and
+no mirror code changes. This is validation at the unavailable CSR boundary,
+not permission to trust a complete unauthenticated message.
+
+Formal S3/product build and original lifecycle suite pass. Focused checks
+accept single-NUL empty environment and reject unterminated command text,
+nonempty environment lacking its double terminator, present zero-byte command
+and absent command. Malformed-text checks preserve the destination message.
+Each negative is isolated from other malformed fields. Original BaseCheckVDM
+captures and complete local GetNext buffer roundtrips still pass. Evidence
+remains local/native; operation/resource authentication and actual RPC command
+dispatch are pending. No deployment changed and S3 remains active.
