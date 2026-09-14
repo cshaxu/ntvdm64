@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**No M/T/S packet is active.**
+**No active M/T/S packet.**
 
 ## T411 Closed Packet
 
