@@ -144,7 +144,12 @@ leaving locally bound wait resources and all input buffers untouched. This is
 a finite replacement of CSR copying, not a BaseSrv algorithm. The original
 lifecycle fixture now roundtrips every reached Check reply and checks all
 truncated lengths, wrong request/generation and unchanged resource fields.
-Actual RPC command/resource composition remains unfinished.
+Actual RPC command/resource composition remains unfinished. Update's reply
+uses only the thirty-two-byte status envelope: original BaseUpdateVDMEntry
+consumes no output scalar, but does consume WaitObjectForParent after success.
+That handle must be separately bound locally. The reply codec never reads or
+changes it. The original lifecycle fixture roundtrips reached Update replies,
+preserves every native field, and rejects truncated and miscorrelated replies.
 
 The Check reply in `base_command.c` is a forty-byte versioned response:
 original NTSTATUS plus iTask and VDMState, correlated to request/generation.
@@ -155,7 +160,12 @@ leaving locally bound wait resources and all input buffers untouched. This is
 a finite replacement of CSR copying, not a BaseSrv algorithm. The original
 lifecycle fixture now roundtrips every reached Check reply and checks all
 truncated lengths, wrong request/generation and unchanged resource fields.
-Actual RPC command/resource composition remains unfinished.
+Actual RPC command/resource composition remains unfinished. Update's reply
+uses only the thirty-two-byte status envelope: original BaseUpdateVDMEntry
+consumes no output scalar, but does consume WaitObjectForParent after success.
+That handle must be separately bound locally. The reply codec never reads or
+changes it. The original lifecycle fixture roundtrips reached Update replies,
+preserves every native field, and rejects truncated and miscorrelated replies.
 
 `base_process.h`/`base_process.c` supply scoped registered-process lookup with
 the original CsrLockProcessByClientId/CsrUnlockProcess shape. Original CSR

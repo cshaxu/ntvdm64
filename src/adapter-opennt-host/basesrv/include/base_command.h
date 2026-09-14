@@ -24,6 +24,12 @@ BOOL OpenNtBaseEncodeUpdateCommand(const BASE_API_MSG *,uint32_t request,uint32_
     void *,uint32_t capacity,uint32_t *required);
 BOOL OpenNtBaseDecodeUpdateCommand(const void *,uint32_t bytes,uint32_t generation,
     PBASE_API_MSG,uint32_t *request);
+/* Update has no scalar output beyond NTSTATUS. Its parent wait handle is
+ * separately bound before the original caller consumes a successful reply. */
+BOOL OpenNtBaseEncodeUpdateReply(const BASE_API_MSG *,uint32_t request,uint32_t generation,
+    void *,uint32_t capacity,uint32_t *required);
+BOOL OpenNtBaseApplyUpdateReply(const void *,uint32_t bytes,uint32_t generation,
+    uint32_t request,PBASE_API_MSG);
 #include <base_payload.h>
 /* Per-call native ownership. Initialize to zero; prepare reserves all reply
  * storage before source consumption. Never serialize this structure. */

@@ -1027,3 +1027,14 @@ original lifecycle fixture now traverses this boundary; all truncated sizes,
 wrong request ID and wrong generation are rejected without mutation. The
 formal owner build and full original lifecycle suite pass. This is still a
 transport composition prerequisite, not a real RPC command-delivery result.
+## Update command reply boundary
+
+Original BaseUpdateVDMEntry checks returned NTSTATUS and, for process-handle
+registration, consumes WaitObjectForParent. There is no other scalar output.
+The formal command binding therefore adds only a thirty-two-byte Update status
+reply, leaving the authenticated wait-resource attachment separate. Application
+changes ReturnValue only. The original lifecycle fixture now roundtrips every
+reached Update reply, rejects all shorter lengths and wrong request/generation,
+and compares the full native message to prove the resource fields unchanged.
+Formal owner compilation and the complete original lifecycle suite pass.
+Actual RPC resource delivery and three-program DOS execution remain open.

@@ -262,6 +262,25 @@ NTSTATUS NTAPI CsrClientCallServer(PCSR_API_MSG message, PCSR_CAPTURE_HEADER cap
         if (OpenNtBasePrepareGetCommand(getRequest,payloadBytes,1,(PBASE_API_MSG)message,&getCommand)) return STATUS_NO_MEMORY;
     }
     result = OpenNtBaseDispatchOperation(message,OpenNtBaseVdmOperation(number),length);
+    if (number==CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepUpdateVDMEntry)) {
+        unsigned char wire[32];
+        uint32_t size,cut;
+        BASE_API_MSG original=*(PBASE_API_MSG)message,copy;
+        if (!OpenNtBaseEncodeUpdateReply(&original,3,1,wire,sizeof(wire),&size) || size!=sizeof(wire))
+            return STATUS_INVALID_PARAMETER;
+        for (cut=0;cut<sizeof(wire);++cut) {
+            copy=original;
+            if (OpenNtBaseApplyUpdateReply(wire,cut,1,3,&copy) || memcmp(&copy,&original,sizeof(copy)))
+                return STATUS_INVALID_PARAMETER;
+        }
+        copy=original;
+        if (OpenNtBaseApplyUpdateReply(wire,size,2,3,&copy) || OpenNtBaseApplyUpdateReply(wire,size,1,4,&copy) ||
+            memcmp(&copy,&original,sizeof(copy))) return STATUS_INVALID_PARAMETER;
+        copy.ReturnValue=~original.ReturnValue;
+        if (!OpenNtBaseApplyUpdateReply(wire,size,1,3,&copy) || memcmp(&copy,&original,sizeof(copy)))
+            return STATUS_INVALID_PARAMETER;
+        *(PBASE_API_MSG)message=copy;
+    }
     if (!scalar_roundtrip((PBASE_API_MSG)message,OpenNtBaseVdmOperation(number))) result=STATUS_INVALID_PARAMETER;
     if (number == CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepGetNextVDMCommand)) {
         PBASE_GET_NEXT_VDM_COMMAND_MSG response=&((PBASE_API_MSG)message)->u.GetNextVDMCommand;

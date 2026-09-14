@@ -64,6 +64,31 @@ typedef struct update_request {
 } update_request;
 typedef char update_request_size[sizeof(update_request)==48?1:-1];
 
+BOOL OpenNtBaseEncodeUpdateReply(const BASE_API_MSG *message,uint32_t request,uint32_t generation,
+    void *output,uint32_t capacity,uint32_t *required)
+{
+    broker_vdm_message_header wire={0};
+    if (required) *required=0;
+    if (!message || !required || !request || !generation) return FALSE;
+    wire.version=BROKER_VDM_MESSAGE_VERSION;wire.bytes=sizeof(wire);
+    wire.operation=BROKER_VDM_UPDATE;wire.request_id=request;wire.generation=generation;
+    wire.reply=1;wire.status=message->ReturnValue;
+    *required=sizeof(wire);
+    if (!output) return TRUE;
+    if (capacity<sizeof(wire)) return FALSE;
+    memcpy(output,&wire,sizeof(wire));return TRUE;
+}
+BOOL OpenNtBaseApplyUpdateReply(const void *input,uint32_t bytes,uint32_t generation,
+    uint32_t request,PBASE_API_MSG message)
+{
+    broker_vdm_message_header wire;
+    if (!message || !request || bytes!=sizeof(wire) ||
+        !broker_vdm_message_read(input,bytes,generation,1,&wire) ||
+        wire.operation!=BROKER_VDM_UPDATE || wire.request_id!=request) return FALSE;
+    message->ReturnValue=wire.status;
+    return TRUE;
+}
+
 BOOL OpenNtBaseEncodeUpdateCommand(const BASE_API_MSG *message,uint32_t request,uint32_t generation,
     void *output,uint32_t capacity,uint32_t *required)
 {
