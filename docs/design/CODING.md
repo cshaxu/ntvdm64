@@ -147,10 +147,14 @@ and unbinds it on exit. No project-global current machine or generic resource
 table is allowed; a source-shaped process-local table is permitted only where
 its fixed-width original ABI requires it.
 
-Broker messages contain only versioned copied fields and broker-owned IDs.
-They never contain local surrogate IDs, native HANDLEs/pointers, guest
-pointers, C++ objects or cross-process callbacks. Process discovery is
-cooperative registration with leases, not arbitrary process enumeration.
+Broker command records contain only versioned copied fields and broker-owned
+IDs, never local surrogate IDs, native/guest pointers, C++ objects or callbacks.
+Separate authenticated OS-managed resource attachments may convey required
+file, pipe, event and process capabilities; ordinary fields never treat a
+sender-local handle number as identity or authority. The receiver materializes
+and closes its own local references under the original lifetime contract.
+Process discovery is cooperative registration with leases, not arbitrary
+process enumeration. Console handles use a separate local binding.
 
 ## Mirror and overlay practice
 

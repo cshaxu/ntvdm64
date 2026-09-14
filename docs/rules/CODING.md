@@ -122,8 +122,12 @@
 - Broker IPC uses copied versioned records, explicit sizes, per-user access
   control, stable broker IDs, leases and deterministic disconnect cleanup.
   Never enumerate/control unrelated processes as a discovery mechanism.
-- Native resources and any source-shaped narrow handle IDs are process-local
-  and never appear in broker messages.
+- Native pointers and source-shaped narrow handle IDs never appear in broker
+  command records. Required native resources may cross only through the
+  architecture's authenticated OS-managed attachment exception, not as trusted
+  sender-local numbers. Record object type, rights, recipient ownership,
+  aliasing and every failure/cleanup transition. Never expose a generic remote
+  duplication service or apply the file/pipe route to Console handles.
 
 ## Guest inputs
 

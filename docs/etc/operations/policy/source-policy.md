@@ -154,8 +154,13 @@ build shims to editing historical code.
 
 Opaque host identity uses the same session-owned 32-bit surrogate path on x86
 and x64; native-value identity pass-through is forbidden. Numeric data is not
-tokenized. Cross-process broker messages use separate fixed-width broker IDs
-and never contain a local surrogate, native resource or guest pointer.
+tokenized. Cross-process broker command records use separate fixed-width broker
+IDs and never contain local surrogates, native/guest pointers or trusted
+sender-local handle values. The owner-approved architecture exception permits
+separate authenticated OS-managed resource attachments, preserving original
+file/pipe/event/process rights, aliasing and lifetime. This is a finite binding
+behind retained source policy, not admission of a generic duplication service
+or a kernel/CSR shell; Console resources remain a separate local contract.
 
 User-approved binary research artifacts must live below `artifacts/`, include
 a source/role/hash/size/redistribution manifest, and remain outside source,

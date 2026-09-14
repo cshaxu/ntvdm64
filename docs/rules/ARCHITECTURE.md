@@ -82,9 +82,14 @@
     notifications, leases and cleanup. It may recover source-proven observable
     BaseSrv coordination contracts but must not recreate CSRSS, scan or
     control unrelated processes, or acquire machine/BOP/guest semantics.
-12. Broker IPC is versioned and fixed-width. A broker message may not contain
-    a native pointer/HANDLE, local mapping token, guest pointer, Bochs object,
-    CRT-owned object or cross-process callback.
+12. Broker command records are versioned and fixed-width. They contain stable
+    broker IDs, never native pointers, sender-local HANDLE values, local mapping
+    tokens, guest pointers, CRT objects or cross-process callbacks. The
+    owner-approved resource-transfer exception permits a separate authenticated
+    OS-managed capability attachment for required file, pipe, event and process
+    resources. Only the recipient's valid local reference may be materialized;
+    it is not a cross-process identity. Preserve rights, aliasing, file position,
+    lifetime and rollback. Console handles require a separate local binding.
 13. Guest width and host width are orthogonal. Imported MVDM code observes
     original 16/32-bit ABI values; directly composable native x86 resources
     retain their original process-local carrier.

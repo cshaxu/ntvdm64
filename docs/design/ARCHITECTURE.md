@@ -250,9 +250,13 @@ app -> mvdm-softpc-firmware                       (manifest-selected immutable i
 `session` never calls a component-specific provider. No
 `adapter-mvdm-host-out` family includes a retired-machine type or global. The
 SoftPC path remains within the original `mvdm-host` source-shaped composition.
-The broker never receives a native pointer, local HANDLE or guest pointer. It
-exchanges versioned fixed-width copied messages and stable
-cross-process identities only.
+The broker never receives native or guest pointers. Command records exchange
+versioned fixed-width copied fields and stable cross-process identities only.
+The approved resource-transfer boundary separately accepts authenticated
+OS-managed attachments for required file, pipe, event and process resources.
+Recipient-local handles are lifetime-managed capabilities, not wire identities;
+sender-local handle numbers are never trusted as authority. Console attachment
+and local streams remain separate from kernel file/pipe resource transfer.
 
 Each specialist adapter owns one historical external/product interface family;
 it is not a convenience shim and it may not absorb another adapter's caller or
@@ -287,9 +291,10 @@ flags, times, error codes and guest addresses retain numeric meaning and
 receive explicit range/overflow checks. A directly dereferenced guest pointer
 is a bounded epoch-scoped lease, not durable state. When an original narrow
 ABI cannot carry a pointer (for example a Redirector WORD handle), its owner
-maintains the smallest source-shaped private table. Native pointers, handles
-and private tables never cross the broker boundary; broker identities use their
-own fixed-width wire contract.
+maintains the smallest source-shaped private table. Native pointers and private
+tables never cross the broker boundary; broker identities use their own
+fixed-width wire contract. Native resources cross only via the authenticated
+OS-managed attachment boundary, preserving original ownership and cleanup.
 
 ## Source union and mirror rules
 

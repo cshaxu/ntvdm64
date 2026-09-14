@@ -1,0 +1,14 @@
+import "wtypes.idl";
+[
+    uuid(0b52f591-2d42-47ce-b6d3-57692a17e511),
+    version(1.0),
+    pointer_default(unique)
+]
+interface resource_attachment
+{
+    error_status_t Transfer(
+        [in] handle_t binding,
+        [in, system_handle(sh_file)] HANDLE input,
+        [in, system_handle(sh_event)] HANDLE event,
+        [out, system_handle(sh_file)] HANDLE *output);
+}

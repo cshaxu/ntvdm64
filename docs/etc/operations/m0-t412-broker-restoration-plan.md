@@ -9,6 +9,12 @@ active packets. The [single broker proposal](../../proposals/proposal-cross-proc
 retains the detailed requirements; this plan supersedes its provisional stage
 grouping without creating another proposal.
 
+The owner subsequently approved completing the whole T according to this
+proposal, including the finite OS-managed resource-attachment exception. S1--S6
+advance sequentially on evidence, without repeated routine approval. Current
+S1 feasibility outputs use build/M0-T412/S1/rpc-resource; they are test-only
+transport evidence, never a substitute for the original BaseSrv service owner.
+
 Restore D01--D07/D10 as one original BaseSrv/BaseClient lifecycle: command
 selection, PIF, first-VDM state, current directories, exit, reentry, client
 capture/wait/retry and image classification. Include CheckVDM, UpdateVDMEntry,
@@ -232,7 +238,8 @@ test passed because it was skipped, unavailable or terminated by a timeout.
 - Specify per-user/session singleton identity, endpoint authorization, message
   version/length validation, stable IDs, process-local resource duplication,
   reservation expiry and exact-once completion. No native/guest pointer or
-  local HANDLE value crosses IPC.
+  trusted sender-local HANDLE value enters a command record. Required resources
+  use only the approved separate authenticated OS-managed attachment boundary.
 - Default idle eligibility is approximately 60 seconds after completed work,
   not 60 seconds without mouse/keyboard input. Assigned/queued tasks, launch
   reservations, active guests, parent waits/reentry, Console leases and pending

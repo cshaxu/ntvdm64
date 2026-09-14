@@ -124,7 +124,8 @@ WOW32, DPMI, DOSX or WRITE internal behavior into the broker.
 - Supply verified caller/worker identity and explicit event/resource
   ownership behind the reached original interfaces. Account for creation,
   duplication, notification, waiting and closure without fabricating a CSR
-  process/thread object hierarchy or serializing native handles. The admission
+  process/thread object hierarchy or trusting serialized sender-local handles.
+  Required native resources use the approved OS-managed attachments. The admission
   must resolve the permitted cross-process resource binding before claiming
   parent waits or standard-stream transfer work.
 - Give Console-associated records an explicit registered identity contract;
@@ -139,17 +140,21 @@ WOW32, DPMI, DOSX or WRITE internal behavior into the broker.
   an eligible worker should exit. Remove direct product-session termination
   from the service command-acquisition policy when its replacement is proved.
 
-### Pending resource-transfer clarification
+### Approved resource-transfer clarification
 
-Resource-transfer clarification is pending owner decision in the
+The owner approved completion according to this proposal, including the
+resource-transfer clarification recorded in the
 [continued S1 audit](../etc/evidence/m0-t412-s1-broker-owner-audit.md#resource-transfer-authority-decision-required).
 The recommended exception permits only authenticated OS-managed resource
 attachments, separate from copied command records/stable IDs, to preserve
 original duplicated file/pipe/event semantics. Native and guest pointers remain
 forbidden; ordinary payloads must not use local handle numbers as identity or
-authority. Local RPC system_handle is a researched candidate, not an admitted
-or tested transport. Current stricter rules remain binding until the owner
-approves a precise amendment; Console handles need a distinct local binding.
+authority. Local RPC system_handle is a researched implementation candidate;
+its x86 availability, access, lifetime and failure behavior must be tested
+before selection. The authority amendment permits this finite capability
+boundary, not an arbitrary numeric-HANDLE protocol. Console handles need a
+distinct local binding. S1--S6 may proceed sequentially within this approved
+scope without repeated admission requests; verification gates still apply.
 
 ### D03: first-VDM state and prohibited host-file mutation
 

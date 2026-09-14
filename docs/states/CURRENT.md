@@ -11,7 +11,7 @@
 | Field | Record |
 | --- | --- |
 | Identifier Mode | M0 T412 S1; Ordinary Mode, one implementer and one active sequential S packet. |
-| Admission And Approval | Owner admitted the broker package on 2026-09-13, then S1 execution, the event-consumer prerequisite and continued execution of the diagnosed Console text-layout repair. Existing authorization covers commit and push to main. This does not admit broader CPU/video implementation or claim S1 completion. |
+| Admission And Approval | Owner now explicitly approves completion of T412 according to its proposal, including the authenticated OS-managed resource-transfer exception. Execute S1--S6 sequentially without repeated scope approvals; one S remains active and each verification gate still applies. Commit/push to main remains approved. No kernel/CSR shell or broader CPU/video redesign is admitted. |
 | Objective | Audit D01--D07/D10 and design one original BaseSrv/BaseClient lifecycle across run16.exe, basesrv.exe and ntvdm.exe, minimizing mirror diff, overlay and duplicate autonomous policy. |
 | Non-goals | No broker production implementation during S1; no CSRSS/kernel shell, CPU30/x64 executor, generic shell parser, or claim of full WRITE recovery. Owner approval following the audit checkpoint admits the bounded event-consumer prerequisite repair, not instruction-decoder changes. |
 | Reference Baseline | Entry commit bb9fe640d; selected original OpenNT package provenance and current formal x86 CCPU40 graph. Prior closure records are evidence indexes, not substitutes for selected-provider/runtime proof. |
@@ -89,6 +89,20 @@ Console/generation tests are recorded in the
 [continued boundary audit](../etc/evidence/m0-t412-s1-broker-owner-audit.md#console-and-wow-immediate-boundary-refinement).
 The resource-transfer exception remains unapproved; no production changes or
 new import follow from this continuation.
+
+Owner decision superseding that historical hold: "批准按照proposal完成当前T任务。"
+The authenticated OS-managed attachment exception is now reflected in the
+architecture/coding/source rules. S1 may finish its finite design and feasibility
+checks, then advance sequentially through the approved S2--S6 gates without
+another routine admission request. Resource transfer still needs actual x86
+verification; approval is not implementation or test evidence.
+
+Resource feasibility now passes in two actual x86 process pairs: authenticated
+local RPC file/event attachments retain shared file position and returned
+ownership; read-only attachments deny writes without signaling or mutation.
+The [feasibility evidence](../etc/evidence/m0-t412-s1-rpc-resource-feasibility.md)
+separates these tests from original BaseSrv policy and the three product EXEs.
+No publication change; S1 finite composition design continues under approval.
 
 ## T411 Closed Packet
 
