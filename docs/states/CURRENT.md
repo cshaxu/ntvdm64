@@ -54,7 +54,8 @@ original capture routines now replace test-authored allocators; pointer tables,
 alignment, real heap exhaustion and cleanup pass. See the linked S2 evidence.
 Product selection, RPC binding, SYSTEM impersonation and guest acceptance remain
 unfinished; classification belongs to run16, not broker or worker. Original
-BaseCheckForVDM task-exit query now passes pending/completed/invalid-handle tests.
+BaseCheckForVDM passes task-exit tests. Original worker argument construction
+now binds package paths at one system32-specific seam; integration remains open.
 
 ## T412 S1 historical checkpoints
 

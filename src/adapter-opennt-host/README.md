@@ -1,5 +1,13 @@
 # adapter-opennt-host
 
+BaseClient's base_config binding supplies caller-owned immutable package paths
+to original BaseGetVdmConfigInfo. Run16 must validate files and convert paths to
+ANSI without loss before initialization and own binding lifetime on its thread.
+The original 256-byte configuration envelope is retained and rejects oversized
+inputs. No registry access, image classification, process launch or arbitrary
+command parser lives here. The worker-path-end helper replaces only the original
+system32 pathname assumption; these configuration records never cross RPC.
+
 The BaseClient capture-memory binding is declaration-only in base_capture.h:
 the process supplies CsrPortHeap as a local heap, initializes it before calls
 and destroys it only after requests drain. All three memory routines now come

@@ -1824,6 +1824,222 @@ BaseUpdateVDMEntry(
 }
 #endif
 
+/* DIVERGENCE(OPENNT-HOST-014): package configuration replaces the NT4 WOW
+ * registry. Image-tail lookup binds the configured side-by-side worker path;
+ * the original argument construction and all remaining body text are kept. */
+#if defined(OPENNT_BASE_CLIENT_VDM_COMMANDS)
+#include <base_config.h>
+BOOL
+BaseGetVdmConfigInfo(
+    IN  LPCWSTR CommandLine,
+    IN  ULONG   DosSeqId,
+    IN  ULONG   BinaryType,
+    IN  PUNICODE_STRING CmdLineString,
+    OUT PULONG VdmSize
+    )
+/*++
+
+Routine Description:
+
+    This routine locates the VDM configuration information for Wow vdms in
+    the system configuration file.  It also reconstructs the commandline so
+    that we can start the VDM.  The new command line is composed from the
+    information in the configuration file + the old command line.
+
+Arguments:
+
+    CommandLine -- pointer to a string pointer that is used to pass the
+        command line string
+
+    DosSeqId - new console session id.
+
+    VdmSize -- Returns the size in bytes of the VDM to be created
+
+    BinaryType - dos, sharedwow, sepwow
+
+
+Return Value:
+
+    TRUE -- VDM configuration information was available
+    FALSE -- VDM configuration information was not available
+
+Notes:
+
+--*/
+{
+    NTSTATUS Status;
+    BOOL bRet;
+    DWORD dw;
+    ANSI_STRING AnsiString;
+    LPSTR NewCmdLine=NULL;
+    PCH   pSrc, pDst, pch;
+    ULONG Len;
+    char CmdLine[MAX_VDM_CFG_LINE];
+
+    CmdLineString->Buffer = NULL;
+
+    Len = MAX_VDM_CFG_LINE;
+
+
+    if (BinaryType == BINARY_TYPE_DOS) {
+        bRet = BaseGetVDMKeyword(CMDLINE, CmdLine, &Len, DOSSIZE, VdmSize);
+        }
+    else {
+        bRet = BaseGetVDMKeyword(WOWCMDLINE, CmdLine, &Len, WOWSIZE, VdmSize);
+        }
+
+    if (!bRet) {
+        SetLastError(ERROR_NOT_ENOUGH_MEMORY);
+        return FALSE;
+        }
+
+    //
+    // Allocate memory to replace the CommandLine
+    // extra space is needed for long->short name conversion,
+    // separate wow, and extension.
+    //
+
+    NewCmdLine = RtlAllocateHeap(RtlProcessHeap(),
+                                 MAKE_TAG( VDM_TAG ),
+                                 MAX_PATH + MAX_VDM_CFG_LINE
+                                 );
+    if (!NewCmdLine) {
+        SetLastError(ERROR_NOT_ENOUGH_MEMORY);
+        return FALSE;
+        }
+
+
+    //
+    // Copy over the cmdline checking for special args
+    // and locating the beg of wowkernel
+    //
+    pSrc = CmdLine;
+    pDst = NewCmdLine;
+
+
+    //
+    // first token must be "\\%SystemRoot%\\system32\\ntvdm", search
+    // for the tail of the pathname to traverse possible long file name
+    // safely.
+    //
+    pch = OpenNtBaseVdmImageEnd(pSrc);
+    if (!pch) {
+        BaseSetLastNTError(STATUS_INVALID_PARAMETER);
+        return FALSE;
+        }
+
+    // mov pch to trailing space in "ntvdm "
+    while (*pch && *pch != ' ') {
+        pch++;
+        }
+
+    //
+    // copy first token (ntvdm path name), surrounded by quotes for
+    // possible long file name
+    //
+   *pDst++ = '\"';
+    while (pSrc < pch) {
+       *pDst++ = *pSrc++;
+       }
+    *pDst++ = '\"';
+
+
+    //
+    // Add -f arg, so ntvdm knows it wasn't invoked directly
+    //
+    *pDst++ = ' ';
+    *pDst++ = '-';
+    *pDst++ = 'f';
+
+    //
+    // Add DosSeqId for new console
+    //
+    if (DosSeqId) {
+        sprintf(pDst, " -i%lx", DosSeqId);
+        pDst += strlen(pDst);
+        }
+
+    //
+    // Copy over everything up to the " -a " (exclusive)
+    // CAVEAT: we assume -a is last
+    //
+    pch = strstr(pSrc, " -a ");
+    if (pch) {
+        while (pSrc < pch) {
+           *pDst++ = *pSrc++;
+           }
+        }
+    else {
+        while (*pSrc) {
+           *pDst++ = *pSrc++;
+           }
+        }
+
+    *pDst = '\0';
+
+
+    //
+    // for wow -a is mandatory to specify win16 krnl, and is expected
+    // to be the last cmdline parameter
+    //
+    if (BinaryType != BINARY_TYPE_DOS) { // shared wow, sep wow
+        PCH pWowKernel;
+
+        if (!*pSrc) {
+            BaseSetLastNTError(STATUS_INVALID_PARAMETER);
+            return FALSE;
+            }
+
+        //
+        // Add -w to tell ntvdm its wow (mandatory)
+        //
+        *pDst++ = ' ';
+        *pDst++ = '-';
+        *pDst++ = 'w';
+
+        //
+        // copy over the " -a WowKernelPathname" argument
+        // and locate beg of WowKernelPathname in destination
+        //
+        pWowKernel = pDst;
+        while (*pSrc) {
+           *pDst++ = *pSrc++;
+           }
+        pWowKernel += 4;      // find beg of WowKernelPathaname
+        while (*pWowKernel == ' ') {
+           pWowKernel++;
+           }
+
+        //
+        // Append file extension to destination
+        //
+        strcpy(pDst, ".exe");
+
+        //
+        // convert wowkernel to short name
+        //
+        Len = MAX_PATH + MAX_VDM_CFG_LINE - ((ULONG)pWowKernel - (ULONG)NewCmdLine) -1;
+        dw = GetShortPathNameA(pWowKernel, pWowKernel, Len);
+        if (dw > Len) {
+            RtlFreeHeap(RtlProcessHeap(), 0, NewCmdLine);
+            return FALSE;
+            }
+        }
+
+    RtlInitAnsiString(&AnsiString, NewCmdLine);
+    Status = RtlAnsiStringToUnicodeString(CmdLineString, &AnsiString, TRUE);
+    if (!NT_SUCCESS(Status)) {
+        BaseSetLastNTError(Status);
+        RtlFreeHeap(RtlProcessHeap(), 0, NewCmdLine);
+        CmdLineString->Buffer = NULL;
+        return FALSE;
+        }
+
+    RtlFreeHeap(RtlProcessHeap(), 0, NewCmdLine);
+    return TRUE;
+}
+#endif
+
 /* DIVERGENCE(OPENNT-HOST-014): original launcher task-exit query. */
 #if defined(OPENNT_BASE_CLIENT_VDM_COMMANDS)
 BOOL

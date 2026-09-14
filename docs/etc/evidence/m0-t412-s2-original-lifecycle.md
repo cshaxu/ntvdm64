@@ -494,3 +494,45 @@ The verifier checks exact original body/hash and client-library map ownership.
 This is focused x86 lifecycle evidence, not deployed run16 or guest execution.
 Final process-local event attachment and CLI return-code propagation remain S3/
 S4 integration work. Product binaries and current T/S status are unchanged.
+
+## Original worker command construction
+
+Original process.c calls BaseGetVdmConfigInfo after service admission selects a
+new worker. This is launcher behavior. Neither broker nor worker reclassifies
+the target. The original 209-line function is restored with one call-site
+adaptation under OPENNT-HOST-014. Original function hash (LF, no final newline):
+`2d57d7b0edaf2534e9a5654d3a2e30a6d91e2a24aea04fcc9e282af747a8c667`.
+The original file/revision is the same as the preceding client restorations.
+
+The full original configuration group was reviewed: BaseGetVDMKeyword and
+GetVDMConfigValue read the machine WOW registry and expand its environment.
+That host-installed configuration is not this standalone package's authority.
+Those bodies are rejected, not reimplemented as a registry emulator. The finite
+base_config binding receives app-owned image and kernel-stem paths, validates
+the original 256-byte template envelope, quotes/newlines and keyword/capacity
+contract, and returns the original 16 MiB reservation value. It owns no files,
+handles, guest memory or launch/service policy. Bound storage is immutable and
+thread-local in use, and must outlive calls until unbound. It is not wire input.
+
+Unchanged BaseGetVdmConfigInfo cannot support the agreed layout: it literally
+searches for backslash-system32-backslash-ntvdm before finding the image end.
+One source call is therefore replaced by OpenNtBaseVdmImageEnd, which returns
+the already configured image boundary. All remaining source text is checked
+against upstream. This avoids creating a fake system32 image or changing argv[0]
+to an executable different from the one launched. Original quoting and internal
+-f, hexadecimal -i, WOW -w/-a, extension and short-name conversion are retained.
+These are worker arguments supplied by run16, not public diagnostic switches.
+
+The x86 test constructs DOS and WOW command lines, including an image path with
+spaces and session 0x12ab. It verifies native short-name conversion against the
+existing KRNL386.EXE without executing or modifying it. Unbound configuration,
+oversized/quoted input, short output and wrong keyword pairing reject. The
+original routine retains its historical error behavior; this binding does not
+claim to repair arbitrary malformed original registry configuration. Run16 must
+validate actual files and lossless ANSI conversion before binding; those app
+calls and real worker startup are still integration work, not proven here.
+
+The verifier checks original hash, the exact single source substitution and
+client-library symbol ownership. Earlier lifecycle tests remain required.
+This adds finite configuration glue, not net code removal; superseded current
+launch-declaration code cannot be deleted until real product selection passes.

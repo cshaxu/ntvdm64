@@ -100,6 +100,14 @@ admitted merely to make the larger historical API product shell link.
 
 ## Divergence register
 
+OPENNT-HOST-014 restores BaseGetVdmConfigInfo (209 original lines, one call-site
+change) with original SHA-256
+`2d57d7b0edaf2534e9a5654d3a2e30a6d91e2a24aea04fcc9e282af747a8c667`.
+Its hardcoded system32/ntvdm search is replaced by the configured worker path
+boundary; original quoting, -f/-i/-w/-a construction remains source-owned.
+base_config.h/.c supply validated immutable app configuration instead of the
+NT4 WOW registry. No host registry, environment or system-directory mutation.
+
 OPENNT-HOST-014 also restores unchanged BaseCheckForVDM (39 lines) from the
 same pinned base/win32/client/vdm.c for the launcher's task-exit query, not
 image classification. Normalized function SHA-256:

@@ -11,6 +11,11 @@ const rtlFlags=graph.match(/^build obj\/opennt-rtl\/error\.obj:.*\r?\n  rtl_cfla
 const ownerPath=path.resolve('src/opennt-host/base/win32/server/srvvdm.c');
 const ownerBefore=fs.readFileSync(ownerPath);
 const clientSource=fs.readFileSync('src/opennt-host/base/win32/client/vdm.c','utf8');
+const configPattern=/BOOL\r?\nBaseGetVdmConfigInfo\([\s\S]*?\r?\n}/;
+const configOriginal=fs.readFileSync('O:/repos.external/OpenNT/base/win32/client/vdm.c','utf8').match(configPattern)[0].replace(/\r\n/g,'\n');
+assert.equal(createHash('sha256').update(configOriginal).digest('hex'),'2d57d7b0edaf2534e9a5654d3a2e30a6d91e2a24aea04fcc9e282af747a8c667');
+assert.equal(clientSource.match(configPattern)[0].replace(/\r\n/g,'\n'),
+    configOriginal.replace('pch = strstr(pSrc, "\\\\system32\\\\ntvdm");','pch = OpenNtBaseVdmImageEnd(pSrc);'));
 const exitPattern=/BOOL\r?\nBaseCheckForVDM\([\s\S]*?\r?\n}/;
 assert.equal(createHash('sha256').update(clientSource.match(exitPattern)[0].replace(/\r\n/g,'\n')).digest('hex'),
     'c6cf2dfdab281ee73c257c5f0a051eebe3439355f273d4a2a5eae5fa7e9d7b85');
@@ -41,6 +46,7 @@ const env=path.join(build,'msvc.cmd');
 fs.writeFileSync(env,'@echo off\r\nset "lifecycle_cwd=%CD%"\r\ncall "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat" -arch=x86 -host_arch=x64 >nul\r\nif errorlevel 1 exit /b %errorlevel%\r\ncd /d "%lifecycle_cwd%"\r\n%*\r\n');
 const includes=`/D_CSRSRV_ /DOPENNT_BASE_VDM_SERVER /we4013 /FI "${root}/src/adapter-opennt-host/basesrv/include/base_server.h" /I "${root}/src/adapter-opennt-host/basesrv/include" /I "${root}/src/opennt-host/base/win32/inc" /I "${root}/src/opennt-host/base/win32/server"`;
 const commands=[
+    `cl.exe ${flags} ${includes} /Fo"${build}/config.obj" "${root}/src/adapter-opennt-host/basesrv/source/base_config.c"`,
     `cl.exe ${flags} /Fo"${build}/environment-check.obj" "${root}/src/opennt-host/base/win32/client/vdm.c"`,
     `cl.exe ${flags} ${includes} /Fo"${build}/srvvdm.obj" "${root}/src/opennt-host/base/win32/server/srvvdm.c"`,
     `cl.exe ${flags} ${includes} /Fo"${build}/fixture.obj" "${root}/tests/broker/original_server_lifecycle.c"`,
@@ -52,7 +58,7 @@ const commands=[
     `cl.exe ${rtlFlags} /Fo"${build}/error.obj" "${root}/src/opennt-host/base/ntos/rtl/error.c"`,
     'lib.exe /nologo /out:opennt-base-server.lib srvvdm.obj exports.obj',
     'lib.exe /nologo /out:opennt-base-client.lib client.obj capture.obj',
-    'link.exe /nologo /opt:ref /out:original-lifecycle.exe /map:original-lifecycle.map fixture.obj opennt-base-server.lib opennt-base-client.lib process.obj interactive.obj error.obj ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib'
+    'link.exe /nologo /opt:ref /out:original-lifecycle.exe /map:original-lifecycle.map fixture.obj opennt-base-server.lib opennt-base-client.lib config.obj process.obj interactive.obj error.obj ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib'
 ];
 const log=fs.openSync(path.join(build,'build.log'),'w');
 for(const command of commands) {
@@ -83,6 +89,7 @@ for (const symbol of ['ExitVDM','SetVDMCurrentDirectories','GetVDMCurrentDirecto
     assert(map.split(/\r?\n/).some(line=>line.includes(`_${symbol}@`)&&line.includes('client.obj')),`Original client provider missing: ${symbol}`);
 for(const symbol of ['BaseSrvCheckVDM','BaseSrvGetNextVDMCommand','BaseSrvSetReenterCount','BaseSrvExitDOSTask'])
     assert(map.split(/\r?\n/).some(line=>line.includes(`_${symbol}`)&&line.includes('srvvdm.obj')),`Original provider missing for ${symbol}`);
+assert(map.split(/\r?\n/).some(line=>line.includes('_BaseGetVdmConfigInfo')&&line.includes('client.obj')),'Original worker configuration provider missing');
 assert(map.split(/\r?\n/).some(line=>line.includes('_BaseCheckForVDM')&&line.includes('client.obj')),'Original task-exit provider missing');
 const result=spawnSync(path.join(build,'original-lifecycle.exe'),[],{cwd:build,windowsHide:true,encoding:'utf8',timeout:15000});
 fs.writeFileSync(path.join(build,'result.json'),JSON.stringify({status:result.status,stdout:result.stdout,stderr:result.stderr,error:result.error?.message},null,2));

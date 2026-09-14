@@ -2,6 +2,7 @@
 #include "basesrv.h"
 #include <base_interactive.h>
 #include <base_capture.h>
+#include <base_config.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -127,6 +128,42 @@ int main(void)
     HANDLE sender;
     DWORD senderExit;
     BaseSrvHeap = GetProcessHeap();
+    {
+        OPENNT_BASE_VDM_CONFIG config;
+        UNICODE_STRING commandLine={0};
+        ULONG reserve=0;
+        WCHAR shortKernel[MAX_PATH];
+        CHAR tooLong[MAX_VDM_CFG_LINE+1];
+        memset(tooLong,'x',sizeof(tooLong)-1); tooLong[sizeof(tooLong)-1]=0;
+        CHECK(!OpenNtBaseInitializeVdmConfig(&config,tooLong,"kernel"));
+        CHECK(!OpenNtBaseInitializeVdmConfig(&config,"bad\"image","kernel"));
+        CHECK(!BaseGetVdmConfigInfo(NULL,0,BINARY_TYPE_DOS,&commandLine,&reserve));
+        CHECK(commandLine.Buffer==NULL);
+        CHECK(OpenNtBaseInitializeVdmConfig(&config,"O:\\package with spaces\\ntvdm.exe",
+            "O:\\ntvdm64\\system32\\KRNL386"));
+        CHECK(OpenNtBaseBindVdmConfig(&config)==NULL);
+        {
+            CHAR small[2]={'x',0};
+            DWORD capacity=sizeof(small), size=0xfeed;
+            CHECK(!BaseGetVDMKeyword(CMDLINE,small,&capacity,DOSSIZE,&size));
+            CHECK(small[0]=='x' && capacity==sizeof(small) && size==0xfeed);
+            CHECK(!BaseGetVDMKeyword(CMDLINE,small,&capacity,WOWSIZE,&size));
+        }
+        CHECK(BaseGetVdmConfigInfo(NULL,0,BINARY_TYPE_DOS,&commandLine,&reserve));
+        CHECK(!wcscmp(commandLine.Buffer,L"\"O:\\package with spaces\\ntvdm.exe\" -f"));
+        CHECK(reserve==16*1024*1024);
+        CHECK(HeapFree(GetProcessHeap(),0,commandLine.Buffer));
+        CHECK(BaseGetVdmConfigInfo(NULL,0x12ab,BINARY_TYPE_DOS,&commandLine,&reserve));
+        CHECK(!wcscmp(commandLine.Buffer,L"\"O:\\package with spaces\\ntvdm.exe\" -f -i12ab"));
+        CHECK(HeapFree(GetProcessHeap(),0,commandLine.Buffer));
+        CHECK(GetShortPathNameW(L"O:\\ntvdm64\\system32\\KRNL386.exe",shortKernel,MAX_PATH)>0);
+        CHECK(BaseGetVdmConfigInfo(NULL,0,BINARY_TYPE_WIN16,&commandLine,&reserve));
+        CHECK(wcsstr(commandLine.Buffer,L"\" -f -w -a ")!=NULL);
+        CHECK(!wcscmp(wcsstr(commandLine.Buffer,L" -a ")+4,shortKernel));
+        CHECK(HeapFree(GetProcessHeap(),0,commandLine.Buffer));
+        CHECK(OpenNtBaseBindVdmConfig(NULL)==&config);
+        puts("PASS: original DOS/WOW worker command construction, package path spaces, session ID and config rejection");
+    }
     CsrPortHeap=HeapCreate(0,0,0);
     CHECK(CsrPortHeap!=NULL && captures==0);
     {
