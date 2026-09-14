@@ -92,16 +92,33 @@ input path.  Together with the owner-visible click above, it supports click
 usability; it does not substitute a separate keyboard or all-editor-behavior
 acceptance run.
 
-### Direct interactive COMMAND remains open
+### Direct interactive COMMAND: original PIF predecessor
+
+A bounded no-source-change A/B established that the direct first shell needs
+the original PIF selection before `config.c` asks its first
+`GetNextVDMCommand(ASKING_FOR_PIF)`. `run16.exe COMMAND.COM` resolves the
+package-root `O:\ntvdm64\COMMAND.COM`; original `BaseCheckVDM` searches for a
+same-root `COMMAND.PIF`. A temporary, byte-identical sidecar copied from the
+retained `profiles\pure-dos\pure-dos.pif` removed the former visible `File not
+found` result. The sidecar was deleted in a `finally` block after observation;
+neither source nor guest media changed. The bounded run still did not reach
+the source-owned buffered-console-input boundary, so this proves only the PIF
+predecessor, not prompt or keyboard success. The result is retained at
+`O:\ntvdm64\logs\m0-t412-s4-command-pif-sidecar-r2`.
+
+An earlier `system32\COMMAND.PIF` A/B did not change the result, as expected:
+that is not the application path selected by the positional package-root
+launch. Its log is retained at
+`O:\ntvdm64\logs\m0-t412-s4-command-pif-sidecar-r1`.
 
 Fresh bounded three-program runs of both `run16.exe COMMAND.COM` and
-`run16.exe O:\ntvdm64\system32\COMMAND.COM /p` displayed `File not found`
-and never reached the source-owned buffered-console-input boundary.  The
-path spelling and `/p` form therefore are not the cause.  A trace-only
-`COMMAND.COM /c MEM.EXE` control reached `Check`, reservation, worker prepare
-and worker connection, but not its first `GetNextVDMCommand`.
+`run16.exe O:\ntvdm64\system32\COMMAND.COM /p` without the PIF sidecar
+displayed `File not found` and never reached the buffered-console-input
+boundary. A trace-only `COMMAND.COM /c MEM.EXE` control reached `Check`,
+reservation, worker prepare and worker connection, but not its first
+`GetNextVDMCommand`.
 
-The existing startup traces show repeated successful original `DEM` opens of
+The existing startup traces without the selected PIF show repeated successful original `DEM` opens of
 the same `COMMAND.COM` path after `CONFIG-DONE`: the queued initial
 `BaseCheckVDM` record asks the configured default `COMMAND /p` to EXEC another
 `COMMAND.COM`, rather than registering a worker with no initial task.  That
@@ -114,10 +131,9 @@ The original `BaseSrvCheckDOS` itself creates the first Console's DOS record,
 copies the `BaseCheckVDM` payload into it and marks it
 `VDM_TO_TAKE_A_COMMAND`.  Therefore a new no-initial-record registration mode
 would be an invented policy and is not accepted as a workaround.  The next
-repair investigation must compare the actual first `VDMINFO` fields
-(`AppName`, `CmdLine`, PIF, directory, environment and stream state) with the
-retained original self-`COMMAND.COM` execution route, then repair the first
-divergent field while preserving that original BaseSrv lifecycle.
+repair must bind the retained PIF through `BaseCheckVDM` before its original
+capture/dispatch—not by modifying a returned message—and then trace the
+remaining prompt handoff while preserving that original BaseSrv lifecycle.
 
 ## Limit
 
