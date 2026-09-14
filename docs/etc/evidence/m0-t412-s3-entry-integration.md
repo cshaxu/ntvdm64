@@ -290,3 +290,27 @@ A foreign process-handle test requires NOT_SUPPORTED rather than native fallback
 This verifies the source call site and failure ordering, not successful remote
 delivery through a finished product callback. Connecting authenticated receipts,
 partial-stream rollback and lost-reply cleanup remain required S3 work.
+
+## Partial standard-stream delivery constraint
+
+The actual original BaseSrvDupStandardHandles is now tested with a controlled
+first-duplicate success and second-duplicate ACCESS_DENIED. It calls duplication
+twice, performs no close, and leaves StdIn in destination form while StdOut and
+StdErr retain source form. The fixture uses distinct numeric markers only;
+it creates no remote resources and does not claim a measured OS handle leak.
+The original source is unchanged and the formal lifecycle suite passes.
+
+Caller review confirms BaseSrvCheckDOS's ready branch immediately leaves on
+duplication failure; its busy branch closes the wait pair and frees the record.
+BaseSrvUpdateDOSEntry likewise closes the recorded wait pair on stream failure.
+These calls cannot be assumed to revoke every already acknowledged stream.
+This is a transport-integration constraint, not a license to rewrite original
+service policy or interpret every field as a destination receipt after failure.
+
+The pending resource binding must track the exact successful acquisitions of
+the current request independently of those mixed fields, revoke only those
+pending receipts on failure, and commit their ownership only at the original
+successful publication boundary. Original explicit closes still revoke their
+identified receipts idempotently. The production transaction/receipt wiring
+has not been implemented or accepted by this test; it is the next required
+integration step before the current callback can safely deliver real streams.

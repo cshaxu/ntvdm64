@@ -30,6 +30,18 @@ static NTSTATUS close_failed_delivery(void *context,HANDLE event)
     ++test->closed;
     return CloseHandle(event)?0:(NTSTATUS)0xc0000008L;
 }
+static NTSTATUS partial_stream_delivery(void *context,HANDLE sourceProcess,HANDLE source,HANDLE targetProcess,
+    PHANDLE target,ACCESS_MASK access,ULONG attributes,ULONG options)
+{
+    resource_failure_test *test=(resource_failure_test *)context;
+    (void)sourceProcess; (void)targetProcess; (void)access; (void)attributes; (void)options;
+    ++test->duplicated;
+    if (test->duplicated==1 && source==(HANDLE)10) {
+        *target=(HANDLE)101; /* Test-only distinct destination identity; no OS resource. */
+        return 0;
+    }
+    return (NTSTATUS)0xc0000022L;
+}
 typedef struct registry_remove_test {
     HANDLE started;
     HANDLE finished;
@@ -259,6 +271,20 @@ int main(int argc, char **argv)
         CHECK(test.duplicated==1 && test.closed==1 && client==NULL);
         CHECK(!GetHandleInformation(test.event,&flags) && GetLastError()==ERROR_INVALID_HANDLE);
         puts("PASS: original pair-wait delivery failure closes the created server event synchronously");
+    }
+    {
+        resource_failure_test test={0};
+        OPENNT_BASE_RESOURCE_BINDING binding={&test,partial_stream_delivery,close_failed_delivery};
+        VDMINFO info={0};
+        DOSRECORD record={0};
+        info.StdIn=(HANDLE)10; info.StdOut=(HANDLE)20; info.StdErr=(HANDLE)30;
+        record.lpVDMInfo=&info;
+        CHECK(OpenNtBaseBindResources(&binding)==NULL);
+        CHECK(BaseSrvDupStandardHandles(GetCurrentProcess(),&record)==(ULONG)STATUS_ACCESS_DENIED);
+        CHECK(OpenNtBaseBindResources(NULL)==&binding);
+        CHECK(test.duplicated==2 && test.closed==0);
+        CHECK(info.StdIn==(HANDLE)101 && info.StdOut==(HANDLE)20 && info.StdErr==(HANDLE)30);
+        puts("PASS: original partial stream failure retains mixed source/destination fields; no helper rollback");
     }
     { LUID negative=RtlConvertLongToLuid(-1), positive=RtlConvertLongToLuid(0x7fffffff);
       CHECK(negative.LowPart==0xffffffff && negative.HighPart==-1);
