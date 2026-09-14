@@ -46,7 +46,7 @@ passes nine real-process cases, including rejecting another process's valid
 attachment as caller identity. This is not service dispatch or product acceptance;
 genuine cross-user/session and remaining security/receipt gates stay open.
 The [entry and lifecycle tests](../etc/evidence/m0-t412-s3-entry-integration.md)
-select real PEB/TEB/heap and request-thread bindings. Run16's native branch
+select real PEB/TEB/heap, request-thread and registered-process bindings. Run16's native branch
 passes command-tail, directory/environment/stream and exit tests. Actual broker
 dispatch and DOS/WOW delivery remain pending; this build-only checkpoint is
 neither published nor three-program acceptance.

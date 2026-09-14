@@ -101,6 +101,23 @@ The finite TLS substitution preserves lookup shape without a CSR runtime.
 Trusted dispatch must authenticate first, bind its local record, and restore
 the previous binding on every exit before releasing the record. The binder
 does not authenticate, register, retain, or validate an arbitrary peer record.
+`base_process.h`/`base_process.c` supply scoped registered-process lookup with
+the original CsrLockProcessByClientId/CsrUnlockProcess shape. Original CSR
+process.c depends on CsrRootProcess and CSR reference/deletion machinery;
+that full runtime is excluded. The finite binding owns duplicated process
+references and borrows caller-owned CSR_PROCESS storage until removal. The
+registry lock remains held across original service use; pins reject reentrant
+removal, duplicate registration fails, sequence allocation never wraps, and
+nonempty destruction fails. Registration derives PID from the process object,
+not wire fields. Authentication and worker-role authorization must precede it.
+No system enumeration, task-selection state or automatic process termination
+is introduced. All service calls bind the same registry; unbind/destruction
+requires quiescent users and balanced unlocks. This is a registered modern
+mechanic, not an imported CSR implementation or an already connected broker.
+The source/lifetime proof and pending process-race gates are in the S3 entry
+evidence. Product resource transfer must preserve the admitted attachment and
+receipt protocol; this local registration API is not remote duplication policy.
+
 The header supplies no CSR runtime, command policy or success stubs. Keeping
 original CSR declaration records does not admit their historical transport.
 

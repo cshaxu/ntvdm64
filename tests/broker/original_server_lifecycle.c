@@ -3,11 +3,13 @@
 #include <base_interactive.h>
 #include <base_capture.h>
 #include <base_config.h>
+#include <base_process.h>
 #include <stdio.h>
 #include <string.h>
 
 static CSR_PROCESS caller;
 static CSR_THREAD thread;
+static OPENNT_BASE_PROCESS_REGISTRY processRegistry;
 extern HANDLE hwndWowExec;
 extern ULONG ulWowExecProcessSequenceNumber;
 extern NTSTATUS (*UserTestTokenForInteractive)(HANDLE, PLUID);
@@ -17,13 +19,6 @@ BOOL BaseUpdateVDMEntry(ULONG, HANDLE *, ULONG, ULONG);
 BOOL BaseCheckForVDM(HANDLE, LPDWORD);
 BOOL BaseCheckVDM(ULONG, PCWCH, PCWCH, PCWCH, ANSI_STRING *, PBASE_API_MSG, PULONG, DWORD, LPSTARTUPINFOW);
 PFNNOTIFYPROCESSCREATE UserNotifyProcessCreate = NULL;
-NTSTATUS NTAPI CsrLockProcessByClientId(HANDLE id, PCSR_PROCESS *out)
-{
-    if (id != (HANDLE)GetCurrentProcessId()) return (NTSTATUS)0xc000000b;
-    *out = &caller;
-    return 0;
-}
-NTSTATUS NTAPI CsrUnlockProcess(PCSR_PROCESS process) { (void)process; return 0; }
 
 /* Test dispatch only; original capture routines use a real private heap. */
 PVOID CsrPortHeap;
@@ -100,6 +95,7 @@ static DWORD WINAPI enqueue_after_wait(LPVOID unused)
     localThread.ThreadHandle=GetCurrentThread();
     localThread.ClientId.UniqueThread=(HANDLE)GetCurrentThreadId();
     if (OpenNtBaseBindServerRequestThread(&localThread)!=NULL) return 4;
+    if (OpenNtBaseBindProcessRegistry(&processRegistry)!=NULL) return 6;
     message.u.CheckVDM.ConsoleHandle = (HANDLE)1;
     message.u.CheckVDM.BinaryType = BINARY_TYPE_DOS;
     message.u.CheckVDM.CmdLine = command;
@@ -107,6 +103,7 @@ static DWORD WINAPI enqueue_after_wait(LPVOID unused)
     message.u.CheckVDM.StartupInfo = &startup;
     enqueueStatus = BaseSrvCheckVDM((PCSR_API_MSG)&message,&reply);
     queuedParent = message.u.CheckVDM.WaitObjectForParent;
+    if (OpenNtBaseBindProcessRegistry(NULL)!=&processRegistry) return 7;
     if (OpenNtBaseServerRequestThread()!=&localThread ||
         OpenNtBaseBindServerRequestThread(NULL)!=&localThread ||
         OpenNtBaseServerRequestThread()!=NULL) return 5;
@@ -187,8 +184,22 @@ int main(void)
     /* Local fixture Console association only. A stdout HANDLE is not the
      * authenticated cross-process Console ID required by product dispatch. */
     NtCurrentPeb()->ProcessParameters->ConsoleHandle = (HANDLE)1;
-    caller.ProcessHandle = GetCurrentProcess();
-    caller.SequenceNumber = 1;
+    CHECK(OpenNtBaseInitializeProcessRegistry(&processRegistry));
+    CHECK(OpenNtBaseBindProcessRegistry(&processRegistry)==NULL);
+    CHECK(OpenNtBaseRegisterProcess(&processRegistry,&caller,GetCurrentProcess()));
+    CHECK(caller.SequenceNumber==1);
+    {
+        CSR_PROCESS duplicate={0};
+        PCSR_PROCESS found=(PCSR_PROCESS)1;
+        CHECK(!OpenNtBaseRegisterProcess(&processRegistry,&duplicate,GetCurrentProcess()));
+        CHECK(GetLastError()==ERROR_ALREADY_EXISTS);
+        CHECK(!OpenNtBaseDestroyProcessRegistry(&processRegistry));
+        CHECK(GetLastError()==ERROR_BUSY);
+        CHECK(CsrLockProcessByClientId(NULL,&found)<0 && found==NULL);
+        CHECK(CsrLockProcessByClientId((HANDLE)GetCurrentProcessId(),&found)==0 && found==&caller);
+        CHECK(!OpenNtBaseRemoveProcess(&processRegistry,&caller) && GetLastError()==ERROR_BUSY);
+        CHECK(CsrUnlockProcess(found)==0);
+    }
     thread.Process = &caller;
     thread.ThreadHandle = GetCurrentThread();
     thread.ClientId.UniqueProcess = (HANDLE)GetCurrentProcessId();
@@ -500,6 +511,18 @@ int main(void)
     CHECK(OpenNtBaseBindServerRequestThread(NULL)==&thread);
     CHECK(OpenNtBaseServerRequestThread()==NULL);
     puts("PASS: request-thread isolation, nested restoration and explicit unbind");
+    CHECK(OpenNtBaseRemoveProcess(&processRegistry,&caller));
+    CHECK(!OpenNtBaseRemoveProcess(&processRegistry,&caller) && GetLastError()==ERROR_NOT_FOUND);
+    CHECK(!OpenNtBaseRegisterProcess(&processRegistry,&caller,NULL));
+    CHECK(OpenNtBaseRegisterProcess(&processRegistry,&caller,GetCurrentProcess()));
+    CHECK(caller.SequenceNumber==2);
+    CHECK(OpenNtBaseRemoveProcess(&processRegistry,&caller));
+    processRegistry.NextSequence=MAXULONG;
+    CHECK(!OpenNtBaseRegisterProcess(&processRegistry,&caller,GetCurrentProcess()));
+    CHECK(GetLastError()==ERROR_ARITHMETIC_OVERFLOW);
+    CHECK(OpenNtBaseBindProcessRegistry(NULL)==&processRegistry);
+    CHECK(OpenNtBaseDestroyProcessRegistry(&processRegistry));
+    puts("PASS: registered process ownership, duplicate/missing/pinned removal, empty teardown and sequence exhaustion");
     CHECK(captures==0 && HeapDestroy(CsrPortHeap));
     puts("PASS: original first-VDM, record/command/directory capacity, dispatch/completion, parent/worker events, reentry, empty-WOW, cleanup");
     return 0;

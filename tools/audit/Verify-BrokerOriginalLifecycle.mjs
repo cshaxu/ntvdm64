@@ -47,6 +47,7 @@ const env=path.join(build,'msvc.cmd');
 fs.writeFileSync(env,'@echo off\r\nset "lifecycle_cwd=%CD%"\r\ncall "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat" -arch=x86 -host_arch=x64 >nul\r\nif errorlevel 1 exit /b %errorlevel%\r\ncd /d "%lifecycle_cwd%"\r\n%*\r\n');
 const includes=`/D_CSRSRV_ /DOPENNT_BASE_VDM_SERVER /we4013 /FI "${root}/src/adapter-opennt-host/basesrv/include/base_server.h" /I "${root}/src/adapter-opennt-host/basesrv/include" /I "${root}/src/opennt-host/base/win32/inc" /I "${root}/src/opennt-host/base/win32/server"`;
 let commands=[
+    `cl.exe ${flags} ${includes} /Fo"${build}/registry.obj" "${root}/src/adapter-opennt-host/basesrv/source/base_process.c"`,
     `cl.exe ${flags} ${includes} /Fo"${build}/request.obj" "${root}/src/adapter-opennt-host/basesrv/source/base_request.c"`,
     `cl.exe ${flags} ${includes} /Fo"${build}/config.obj" "${root}/src/adapter-opennt-host/basesrv/source/base_config.c"`,
     `cl.exe ${flags} /Fo"${build}/environment-check.obj" "${root}/src/opennt-host/base/win32/client/vdm.c"`,
@@ -72,7 +73,7 @@ if(ownerBuild) {
     ];
 }
 commands.unshift(`cl.exe ${flags} /Gy /Fo"${build}/support.obj" "${root}/src/adapter-mvdm-host-out/win32/source/opennt_support_rtl.c"`);
-commands=commands.map(command=>command.startsWith('link.exe ')?command.replace(' fixture.obj ', ' fixture.obj support.obj '):command);
+commands=commands.map(command=>command.startsWith('link.exe ')?command.replace(' fixture.obj ', ` fixture.obj support.obj ${ownerBuild?'':'registry.obj '}`):command);
 const log=fs.openSync(path.join(build,'build.log'),'w');
 for(const command of commands) {
     const result=spawnSync('cmd.exe',['/d','/c',`call "${env}" ${command}`],{cwd:build,windowsHide:true,windowsVerbatimArguments:true,stdio:['ignore',log,log],timeout:60000});
@@ -94,6 +95,8 @@ assert(map.includes('opennt-base-server:srvvdm.obj')&&map.includes('opennt-base-
 assert(!map.includes('luid.obj'),'Generated inline replacement still linked');
 for (const symbol of ['_NtCurrentPeb@0','_opennt_support_current_teb@0','_RtlProcessHeap@0'])
     assert(map.split(/\r?\n/).some(line=>line.includes(symbol)&&line.includes('support.obj')),`Real process support missing: ${symbol}`);
+for (const symbol of ['_CsrLockProcessByClientId@8','_CsrUnlockProcess@4'])
+    assert(map.split(/\r?\n/).some(line=>line.includes(symbol)&&line.includes('registry.obj')),`Real registered-process binding missing: ${symbol}`);
 for (const symbol of ['_OpenNtBaseServerRequestThread','_OpenNtBaseBindServerRequestThread'])
     assert(map.split(/\r?\n/).some(line=>line.includes(symbol)&&line.includes('request.obj')),`Real request binding missing: ${symbol}`);
 for(const symbol of ['_CsrAllocateCaptureBuffer@12','_CsrAllocateMessagePointer@12','_CsrFreeCaptureBuffer@4'])

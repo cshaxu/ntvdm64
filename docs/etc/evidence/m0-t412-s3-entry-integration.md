@@ -126,3 +126,36 @@ A PID lookup returning an unpinned pointer cannot preserve that contract.
 The full CSR runtime remains excluded. The nullable UserNotifyProcessCreate
 symbol retains the already approved absent-hook disposition, not emulated
 success. These tests do not yet establish a production broker or S3 closure.
+
+## Registered-process lookup integration
+
+S3 replaces the fixture's two Csr process lookup/unlock functions with
+base_process.c in adapter-opennt-host/basesrv. The preceding map description
+is the pre-integration checkpoint. Original srvvdm.c is unchanged. Existing
+broker.c's test-only fixed-size array lacks process-object lifetime and the
+original lock contract; it is not reused as a product provider.
+
+Recovery ladder: original CSR process.c lookup/unlock were inspected, but the
+TU requires excluded CSR root/thread/reference/deletion machinery. The finite
+same-shaped binding retains lock-held service use over caller-owned original
+CSR_PROCESS records. Its modern mechanics are a critical section, ListLink,
+owned process references, monotonic sequence assignment and pins preventing
+reentrant removal. It is not imported original code, an overlay, or task policy.
+No CSR shell is recreated. Balanced lookup/unlock and quiescent destruction
+are internal preconditions; the caller unbinds before releasing registry state.
+
+Trusted registration duplicates a supplied process reference with local
+query/duplication/synchronize rights and derives PID from GetProcessId. It
+rejects duplicate records/PIDs and exhausted sequences; removal closes its
+owned reference. Authentication and worker-role authorization must precede
+this API. It is not a remote duplication service or launch reservation, and
+does not enumerate unrelated processes or trust wire PID values.
+
+The actual map requires the Csr functions from registry.obj. The formal
+S3/product opennt-broker-owners target builds successfully. The lifecycle test
+uses the real binding and covers original DOS/WOW operations, unknown PID,
+duplicate registration, pinned removal, nonempty destruction, missing record,
+invalid process reference, re-registration and sequence exhaustion. Run with
+OPENNT_BROKER_OWNER_BUILD pointing to S3/product. Real cross-process removal
+races, death-watch cleanup, authenticated worker registration and resource
+receipts remain open integration gates. This local test cannot prove them.
