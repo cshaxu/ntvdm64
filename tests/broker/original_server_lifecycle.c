@@ -474,6 +474,14 @@ int main(int argc, char **argv)
     CHECK(OpenNtBaseRegisterProcess(&processRegistry,&caller,GetCurrentProcess()));
     CHECK(caller.SequenceNumber==1);
     {
+        HANDLE retained=NULL;
+        CHECK(!OpenNtBaseRetainRegisteredProcess(&processRegistry,GetCurrentProcessId(),2,&retained));
+        CHECK(GetLastError()==ERROR_ACCESS_DENIED && retained==NULL);
+        CHECK(OpenNtBaseRetainRegisteredProcess(&processRegistry,GetCurrentProcessId(),1,&retained));
+        CHECK(GetProcessId(retained)==GetCurrentProcessId());
+        CHECK(processRegistry.Pins==0 && CloseHandle(retained));
+    }
+    {
         CSR_PROCESS duplicate={0};
         PCSR_PROCESS found=(PCSR_PROCESS)1;
         CHECK(!OpenNtBaseRegisterProcess(&processRegistry,&duplicate,GetCurrentProcess()));
@@ -1029,6 +1037,18 @@ int main(int argc, char **argv)
     CHECK(!OpenNtBaseRegisterProcess(&processRegistry,&caller,NULL));
     CHECK(OpenNtBaseRegisterProcess(&processRegistry,&caller,GetCurrentProcess()));
     CHECK(caller.SequenceNumber==2);
+    {
+        HANDLE retained=NULL,stale=NULL;
+        CHECK(!OpenNtBaseRetainRegisteredProcess(&processRegistry,GetCurrentProcessId(),1,&stale));
+        CHECK(GetLastError()==ERROR_ACCESS_DENIED && stale==NULL);
+        CHECK(OpenNtBaseRetainRegisteredProcess(&processRegistry,GetCurrentProcessId(),2,&retained));
+        CHECK(OpenNtBaseRemoveProcess(&processRegistry,&caller));
+        CHECK(WaitForSingleObject(retained,0)==WAIT_TIMEOUT);
+        CHECK(!OpenNtBaseRetainRegisteredProcess(&processRegistry,GetCurrentProcessId(),2,&stale));
+        CHECK(GetLastError()==ERROR_NOT_FOUND && stale==NULL);
+        CHECK(CloseHandle(retained));
+        CHECK(OpenNtBaseRegisterProcess(&processRegistry,&caller,GetCurrentProcess()));
+    }
     CHECK(OpenNtBaseRemoveProcess(&processRegistry,&caller));
     {
         HANDLE limited=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION|SYNCHRONIZE,FALSE,GetCurrentProcessId());

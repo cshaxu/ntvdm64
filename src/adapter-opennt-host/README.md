@@ -101,6 +101,26 @@ The finite TLS substitution preserves lookup shape without a CSR runtime.
 Trusted dispatch must authenticate first, bind its local record, and restore
 the previous binding on every exit before releasing the record. The binder
 does not authenticate, register, retain, or validate an arbitrary peer record.
+`OpenNtBaseRetainRegisteredProcess` reuses the same CsrLockProcessByClientId /
+CsrUnlockProcess binding to check the trusted PID/generation and retain a
+non-inheritable same-access process handle before releasing the registry lock.
+This is a finite lifetime binding for external helper I/O, not a second
+registry or an authorization endpoint. A retained handle survives unregister;
+the caller must repeat registration-generation validation before accepting
+results. The original lifecycle suite verifies wrong/old generation rejection,
+zero retained registry pins and missing registration after removal despite a
+still-live retained handle. Authenticated service composition remains pending.
+
+`OpenNtBaseRetainRegisteredProcess` reuses the same CsrLockProcessByClientId /
+CsrUnlockProcess binding to check the trusted PID/generation and retain a
+non-inheritable same-access process handle before releasing the registry lock.
+This is a finite lifetime binding for external helper I/O, not a second
+registry or an authorization endpoint. A retained handle survives unregister;
+the caller must repeat registration-generation validation before accepting
+results. The original lifecycle suite verifies wrong/old generation rejection,
+zero retained registry pins and missing registration after removal despite a
+still-live retained handle. Authenticated service composition remains pending.
+
 `base_process.h`/`base_process.c` supply scoped registered-process lookup with
 the original CsrLockProcessByClientId/CsrUnlockProcess shape. Original CSR
 process.c depends on CsrRootProcess and CSR reference/deletion machinery;

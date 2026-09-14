@@ -983,3 +983,20 @@ ERROR_INVALID_DATA and unchanged output. The fault environment is read only
 by the fixture executable, never by run16 or the production parent. Real
 run16 positive and cancellation cases also continue to pass. Authenticated
 RPC registration-generation and disconnect integration remain outstanding.
+
+## Registered-process retention for external observation
+
+The existing process binding now offers OpenNtBaseRetainRegisteredProcess.
+It temporarily binds the requested registry, uses its existing Csr lookup /
+unlock lifetime, checks the expected generation and live process, duplicates
+the handle with the same rights and no inheritance, and restores the previous
+thread binding. It does not hold the registry lock during external I/O or
+introduce another process table. Only trusted service composition may call it.
+
+The rebuilt formal owner archives and Verify-BrokerOriginalLifecycle pass.
+Added assertions reject wrong and previous registration generations, confirm
+no outstanding registry pin, remove a record while its retained handle stays
+live, and reject subsequent lookup of the removed generation. A retained
+kernel handle is therefore deliberately not evidence of active registration.
+The service must still revalidate the generation at result consumption; this
+test does not complete authenticated RPC/helper composition or the DOS gate.

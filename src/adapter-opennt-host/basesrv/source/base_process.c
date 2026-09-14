@@ -116,3 +116,26 @@ BOOL OpenNtBaseDestroyProcessRegistry(OPENNT_BASE_PROCESS_REGISTRY *state)
     DeleteCriticalSection(&state->Lock);
     return TRUE;
 }
+
+BOOL OpenNtBaseRetainRegisteredProcess(OPENNT_BASE_PROCESS_REGISTRY *state,
+    DWORD pid,ULONG generation,HANDLE *output)
+{
+    OPENNT_BASE_PROCESS_REGISTRY *previous;
+    PCSR_PROCESS process=NULL;
+    DWORD error=0;
+    if (!output) {SetLastError(ERROR_INVALID_PARAMETER);return FALSE;}
+    *output=NULL;
+    if (!state || !pid || !generation) {SetLastError(ERROR_INVALID_PARAMETER);return FALSE;}
+    previous=OpenNtBaseBindProcessRegistry(state);
+    if (CsrLockProcessByClientId((HANDLE)pid,&process)<0) error=ERROR_NOT_FOUND;
+    else {
+        if (process->SequenceNumber!=generation) error=ERROR_ACCESS_DENIED;
+        else if (WaitForSingleObject(process->ProcessHandle,0)!=WAIT_TIMEOUT) error=ERROR_PROCESS_ABORTED;
+        else if (!DuplicateHandle(GetCurrentProcess(),process->ProcessHandle,
+            GetCurrentProcess(),output,0,FALSE,DUPLICATE_SAME_ACCESS)) error=GetLastError();
+        CsrUnlockProcess(process);
+    }
+    OpenNtBaseBindProcessRegistry(previous);
+    if (error) SetLastError(error);
+    return error==0;
+}
