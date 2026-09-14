@@ -26,6 +26,7 @@ proves the original `FSTI` continuation reaches BOP `FDh`.
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T412 S1 EDIT text-cell regression](evidence/m0-t412-s1-console-cell-regression.md) | M0 T412 S1 | Original four-byte writer versus two-byte adapter, single-variable real EDIT proof and minimum repair disposition. | Retain through T412 prerequisite disposition and closure. |
 | [T412 S1 RESET-consumer repair](evidence/m0-t412-s1-reset-consumer-repair.md) | M0 T412 S1 | Original CCPU A/B proof, bounded source repair and three-way EDIT regression/publication hold. | Retain through T412 prerequisite disposition and closure. |
 | [T412 S1 broker owner audit checkpoint](evidence/m0-t412-s1-broker-owner-audit.md) | M0 T412 S1 | Actual D01--D07/D10 providers, measured replacement envelope and inherited RESET evidence stop. | Retain through T412 closure and prerequisite disposition. |
 | [T412 broker restoration working plan](operations/m0-t412-broker-restoration-plan.md) | M0 T412 | Sequential audit, original-owner recovery, three-program integration and closure plan. | Retain through T412 closure. |

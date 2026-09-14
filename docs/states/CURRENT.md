@@ -49,6 +49,14 @@ comparison. Both publication paths have been restored to the old C0771B...652F
 binary. No EDIT acceptance, S1 closure or S2 activation is claimed. The
 source/build lineage regression requires disposition before product acceptance.
 
+Continued owner-requested diagnosis [isolates the EDIT regression](../etc/evidence/m0-t412-s1-console-cell-regression.md)
+to T410 commit 64acfb123: the adapter assumes two-byte text cells while the
+selected original non-MONITOR painter writes four-byte cells. A single-token
+diagnostic build restoring four-byte allocation reproduces the old clean
+snapshot exactly. Production source/publication remain unchanged in this
+diagnostic turn; minimum adapter repair and stride/capacity regression are
+identified, not yet product-delivered. No CPU or original painter edit needed.
+
 ## T411 Closed Packet
 
 T412 S1 found an inherited event-evidence contradiction; see the current
