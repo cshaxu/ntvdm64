@@ -34,6 +34,5 @@ for(const name of [path.join(build,'native child.exe'),'native child.exe']) {
 }
 assert.match(run('',87).stderr.toString(),/Usage:/);
 run('missing-run16-test.exe',2);
-assert.match(run('O:\\ntvdm64\\MEM.EXE',50).stderr.toString(),/not integrated/);
 fs.writeFileSync(path.join(build,'result.json'),JSON.stringify({sha256:createHash('sha256').update(image).digest('hex'),records},null,2));
-console.log('PASS: real run16 console entry, original classification, raw command tail, cwd/environment/streams, native exit; VDM remains explicitly unsupported');
+console.log('PASS: real run16 console entry, original classification, raw command tail, cwd/environment/streams, and native exit. Brokered VDM execution is covered by its separate three-program integration evidence.');

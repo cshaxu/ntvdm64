@@ -1040,7 +1040,7 @@ if ($Architecture -eq 'x86') {
         $baseBindingInclude + '/base_server.h"'
     $baseOwnerGroups = @{
         'opennt-base-client' = @(
-            @('client', 'src/opennt-host/base/win32/client/vdm.c', ($baseOwnerFlags + ' /Gy /DOPENNT_BASE_CLIENT_VDM_COMMANDS')),
+            @('client', 'src/opennt-host/base/win32/client/vdm.c', ($baseOwnerFlags + ' /Gy /DOPENNT_BASE_CLIENT_VDM_COMMANDS /DOPENNT_BASE_CLIENT_VDM_ENVIRONMENT')),
             @('classifier', 'src/opennt-host/base/win32/client/vdm.c', ($baseOwnerFlags + ' /Gy /DOPENNT_BASE_CLIENT_CLASSIFIER')),
             @('capture', 'src/opennt-host/base/ntdll/csrutil.c', ($baseOwnerFlags + ' /Gz')))
         'opennt-base-server' = @(
@@ -1106,15 +1106,20 @@ if ($Architecture -eq 'x86') {
     $graph.Add('rule basesrv_service_test_link')
     $graph.Add('  command = link.exe /nologo /out:$out $in ntdll.lib kernel32.lib user32.lib advapi32.lib libcmt.lib libvcruntime.lib libucrt.lib')
     $graph.Add('build basesrv-service-reservation-test.exe: basesrv_service_test_link ' + $baseServiceReservationTestObject + ' obj/run16/support.obj opennt-base-server.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib')
+    $nativeServiceFlags = '/nologo /c /MT /W4 /we4013 /showIncludes /I obj/basesrv /I "' + (NinjaPath (Join-Path $root 'src')) + '"'
     $graph.Add('build obj/run16/entry.obj: cc ' + (NinjaPath (Join-Path $root 'src/app/run16_entry.c')))
     $graph.Add('  cflags = ' + $baseOwnerFlags)
     $graph.Add('build obj/run16/support.obj: cc ' + (NinjaPath (Join-Path $root 'src/adapter-mvdm-host-out/win32/source/opennt_support_rtl.c')))
     $graph.Add('  cflags = ' + $baseOwnerFlags + ' /Gy')
+    $graph.Add('build obj/run16/rpc_client.obj: cc ' + (NinjaPath (Join-Path $root 'src/adapter-opennt-host/basesrv/source/base_rpc_client.c')) + ' | obj/basesrv/service.h')
+    $graph.Add('  cflags = ' + $baseOwnerFlags + ' /I obj/basesrv')
+    $graph.Add('build obj/run16/stub.obj: cc obj/basesrv/service_c.c | obj/basesrv/service.h')
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('rule run16_link')
-    $graph.Add('  command = link.exe /nologo /subsystem:console /entry:wWinMainCRTStartup /opt:ref /out:$out /map:$out.map $in ntdll.lib kernel32.lib shell32.lib legacy_stdio_definitions.lib')
+    $graph.Add('  command = link.exe /nologo /subsystem:console /entry:wWinMainCRTStartup /opt:ref /out:$out /map:$out.map $in rpcrt4.lib ntdll.lib kernel32.lib shell32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib')
     $graph.Add('build obj/run16/console_probe.obj: cc ' + (NinjaPath (Join-Path $root 'src/app/console_probe.c')))
     $graph.Add('  cflags = /nologo /c /MT /W4 /we4013 /showIncludes /I "' + (NinjaPath (Join-Path $root 'src')) + '"')
-    $graph.Add('build run16.exe: run16_link obj/run16/entry.obj obj/run16/console_probe.obj obj/run16/support.obj opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib')
+    $graph.Add('build run16.exe: run16_link obj/run16/entry.obj obj/run16/console_probe.obj obj/run16/support.obj obj/run16/rpc_client.obj obj/run16/stub.obj opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib')
     $graph.Add('rule basesrv_idl')
     $graph.Add('  command = midl.exe /nologo /env win32 /target NT100 /prefix client Client_ /prefix server Server_ /out obj/basesrv /h service.h /cstub service_c.c /sstub service_s.c $in')
     $graph.Add('build obj/basesrv/service_s.c | obj/basesrv/service_c.c obj/basesrv/service.h: basesrv_idl ' + (NinjaPath (Join-Path $root 'src/broker/service.idl')))

@@ -25,6 +25,7 @@ struct OPENNT_BASE_CONNECTION {
 typedef struct OPENNT_BASE_SERVICE_RESOURCES {
     OPENNT_BASE_CONNECTION *connection;
     DWORD role;
+    HANDLE worker;
     OPENNT_BASE_WAIT_BINDING wait;
     OPENNT_BASE_RESOURCE_BINDING binding;
 } OPENNT_BASE_SERVICE_RESOURCES;
@@ -50,13 +51,15 @@ static NTSTATUS service_duplicate_resource(void *context,HANDLE source_process,H
 {
     OPENNT_BASE_SERVICE_RESOURCES *scope=context;
     if (!scope) return STATUS_INVALID_PARAMETER;
-    /* BaseSrvUpdateDOSEntry duplicates the authenticated worker's own process
-     * pseudo-handle into BaseSrv. This is the one process-object carrier; all
-     * event delivery remains receipt-backed below. */
-    if (source_process==scope->connection->process.ProcessHandle && source==NtCurrentProcess() &&
-        target_process==NtCurrentProcess() && target && !access && !attributes &&
+    /* BaseSrvUpdateDOSEntry duplicates the newly created VDM process into
+     * BaseSrv.  In NT4 its source was a raw handle in the launcher's CSR
+     * namespace.  Here that value cannot cross RPC; use only the live worker
+     * retained from this launcher's authenticated reservation. */
+    if (source==NtCurrentProcess() && target_process==NtCurrentProcess() && target &&
+        !access && !attributes &&
         options==DUPLICATE_SAME_ACCESS) {
-        if (DuplicateHandle(source_process,source,target_process,target,0,FALSE,DUPLICATE_SAME_ACCESS))
+        if (scope->worker && DuplicateHandle(GetCurrentProcess(),scope->worker,
+                target_process,target,0,FALSE,DUPLICATE_SAME_ACCESS))
             return STATUS_SUCCESS;
         return STATUS_ACCESS_DENIED;
     }
@@ -80,6 +83,10 @@ static void service_resources_init(OPENNT_BASE_SERVICE_RESOURCES *scope,
     scope->wait.revoke=service_wait_revoke;
     scope->binding.Context=scope; scope->binding.Duplicate=service_duplicate_resource;
     scope->binding.Close=service_close_resource;
+}
+static void service_resources_release(OPENNT_BASE_SERVICE_RESOURCES *scope)
+{
+    if (scope && scope->worker) CloseHandle(scope->worker);
 }
 static DWORD service_wait_resolve(OPENNT_BASE_CONNECTION *connection,DWORD generation,
     HANDLE receipt,DWORD role,HANDLE *event)
@@ -238,8 +245,10 @@ DWORD OpenNtBaseServiceCreateReservation(OPENNT_BASE_CONNECTION *connection,DWOR
     if (!connection || !reservation) return ERROR_INVALID_PARAMETER;
     if (!OpenNtBaseServicePeer(connection,pid,generation)) return ERROR_ACCESS_DENIED;
     if (!connection->console) return ERROR_INVALID_HANDLE;
-    return OpenNtBaseReservationCreate(connection->service->reservations,pid,generation,
+    DWORD error=OpenNtBaseReservationCreate(connection->service->reservations,pid,generation,
         task,connection->console,reservation);
+    if (!error) connection->reservation=*reservation;
+    return error;
 }
 
 DWORD OpenNtBaseServicePrepareWorker(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD generation,
@@ -314,7 +323,8 @@ DWORD OpenNtBaseServiceCheck(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD 
 }
 
 DWORD OpenNtBaseServiceUpdate(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD generation,
-    const void *input,uint32_t bytes,void *output,uint32_t capacity,uint32_t *required,HANDLE *parent_event)
+    const void *input,uint32_t bytes,void *output,uint32_t capacity,uint32_t *required,
+    HANDLE *parent_event,uint32_t *parent_receipt)
 {
     BASE_API_MSG message={0};
     CSR_THREAD thread={0};
@@ -326,8 +336,8 @@ DWORD OpenNtBaseServiceUpdate(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD
     NTSTATUS status;
     DWORD error;
     if (required) *required=0;
-    if (!parent_event) return ERROR_INVALID_PARAMETER;
-    *parent_event=NULL;
+    if (!parent_event || !parent_receipt) return ERROR_INVALID_PARAMETER;
+    *parent_event=NULL;*parent_receipt=0;
     if (!connection || !OpenNtBaseServicePeer(connection,pid,generation) ||
         !OpenNtBaseDecodeUpdateCommand(input,bytes,generation,&message,&request) ||
         !OpenNtBaseEncodeUpdateReply(&message,request,generation,NULL,0,&needed))
@@ -345,6 +355,11 @@ DWORD OpenNtBaseServiceUpdate(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD
     if (message.u.UpdateVDMEntry.EntryIndex==UPDATE_VDM_PROCESS_HANDLE)
         message.u.UpdateVDMEntry.VDMProcessHandle=NtCurrentProcess();
     service_resources_init(&resources,connection,BROKER_VDM_PARENT_WAIT);
+    if (message.u.UpdateVDMEntry.EntryIndex==UPDATE_VDM_PROCESS_HANDLE) {
+        error=OpenNtBaseReservationRetainWorker(connection->service->reservations,
+            connection->reservation,pid,generation,&resources.worker);
+        if (error) goto done;
+    }
     thread.Process=&connection->process;
     thread.ClientId.UniqueProcess=connection->process.ClientId.UniqueProcess;
     previous_thread=OpenNtBaseBindServerRequestThread(&thread);
@@ -355,13 +370,48 @@ DWORD OpenNtBaseServiceUpdate(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD
     OpenNtBaseBindResources(previous_resources);
     OpenNtBaseBindProcessRegistry(previous_registry);
     OpenNtBaseBindServerRequestThread(previous_thread);
+    service_resources_release(&resources);
     if (status && !message.ReturnValue) message.ReturnValue=status;
     if (!OpenNtBaseEncodeUpdateReply(&message,request,generation,output,capacity,required)) {
         error=ERROR_INVALID_DATA; goto done;
     }
+    *parent_receipt=(uint32_t)(ULONG_PTR)message.u.UpdateVDMEntry.WaitObjectForParent;
     error=service_wait_resolve(connection,generation,message.u.UpdateVDMEntry.WaitObjectForParent,
         BROKER_VDM_PARENT_WAIT,parent_event);
     if (error) goto done;
+    error=ERROR_SUCCESS;
+done:
+    LeaveCriticalSection(&connection->service->lock);
+    return error;
+}
+
+DWORD OpenNtBaseServiceExitCode(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD generation,
+    uint32_t parent_receipt,DWORD *exit_code)
+{
+    BASE_API_MSG message={0};
+    CSR_THREAD thread={0};
+    PCSR_THREAD previous_thread;
+    OPENNT_BASE_PROCESS_REGISTRY *previous_registry;
+    NTSTATUS status;
+    DWORD error;
+    if (!connection || !exit_code || !parent_receipt ||
+        !OpenNtBaseServicePeer(connection,pid,generation)) return ERROR_INVALID_PARAMETER;
+    EnterCriticalSection(&connection->service->lock);
+    if (!connection->console) { error=ERROR_INVALID_HANDLE; goto done; }
+    message.u.GetVDMExitCode.ConsoleHandle=connection->console;
+    /* srvvdm.c owns this exact receipt-shaped hWaitForParent value. */
+    message.u.GetVDMExitCode.hParent=(HANDLE)(ULONG_PTR)parent_receipt;
+    thread.Process=&connection->process;
+    thread.ClientId.UniqueProcess=connection->process.ClientId.UniqueProcess;
+    previous_thread=OpenNtBaseBindServerRequestThread(&thread);
+    previous_registry=OpenNtBaseBindProcessRegistry(&connection->service->registry);
+    status=OpenNtBaseDispatchOperation((PCSR_API_MSG)&message,BROKER_VDM_EXIT_CODE,
+        sizeof(message.u.GetVDMExitCode));
+    OpenNtBaseBindProcessRegistry(previous_registry);
+    OpenNtBaseBindServerRequestThread(previous_thread);
+    if (status && !message.ReturnValue) message.ReturnValue=status;
+    if (!NT_SUCCESS((NTSTATUS)message.ReturnValue)) { error=RtlNtStatusToDosError((NTSTATUS)message.ReturnValue); goto done; }
+    *exit_code=(DWORD)message.u.GetVDMExitCode.ExitCode;
     error=ERROR_SUCCESS;
 done:
     LeaveCriticalSection(&connection->service->lock);

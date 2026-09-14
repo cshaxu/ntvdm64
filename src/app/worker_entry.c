@@ -6,10 +6,23 @@
 #include "app/package_layout.h"
 #include "adapter-opennt-host/basesrv/include/base_rpc_client.h"
 #include <windows.h>
+#include <stdio.h>
 
 /* Original BaseClient capture storage is private to one worker process.  The
  * broker protocol never observes this heap or pointers allocated from it. */
 PVOID CsrPortHeap;
+
+/* Default-off integration evidence; it never alters worker control flow. */
+static void worker_trace(const char *phase,DWORD status)
+{
+    char path[MAX_PATH];
+    FILE *file;
+    if (!GetEnvironmentVariableA("MVDM_BASESRV_TRACE_PATH",path,sizeof(path))) return;
+    file=fopen(path,"a");
+    if (!file) return;
+    fprintf(file,"NTVDM-S3 phase=%s status=%08lx\n",phase,status);
+    fclose(file);
+}
 
 int main(int argc,char **argv)
 {
@@ -21,24 +34,30 @@ int main(int argc,char **argv)
     session_initialize(&owner,1u);
     app_machine_shell_initialize(&shell);
     CsrPortHeap=HeapCreate(0,0,0);
-    if (!CsrPortHeap) return ERROR_NOT_ENOUGH_MEMORY;
+    if (!CsrPortHeap) { worker_trace("capture-heap",ERROR_NOT_ENOUGH_MEMORY); return ERROR_NOT_ENOUGH_MEMORY; }
     capture_heap_started=TRUE;
     if (!app_package_layout_set_process_media_roots(&owner) ||
         !app_package_layout_validate_command_configuration_root(&owner)) {
         result=ERROR_BAD_PATHNAME;
+        worker_trace("package",result);
         goto finish;
     }
     if (OpenNtBaseClientConnectCurrent()!=ERROR_SUCCESS) {
         result=ERROR_SERVICE_NOT_ACTIVE;
+        worker_trace("connect",result);
         goto finish;
     }
+    worker_trace("connect",ERROR_SUCCESS);
     if (!app_machine_shell_select_backend(&owner,SESSION_MACHINE_BACKEND_SOFTPC) ||
-        !session_activate(&owner)) goto finish;
-    if (app_machine_shell_open(&shell,&owner,1u,UINT64_C(1))!=APP_MACHINE_SHELL_OK) goto finish;
+        !session_activate(&owner)) { worker_trace("session",result); goto finish; }
+    if (app_machine_shell_open(&shell,&owner,1u,UINT64_C(1))!=APP_MACHINE_SHELL_OK) {
+        worker_trace("machine-open",result); goto finish;
+    }
     /* No private argv shadow: original ntvdm.c/host_main see the launcher's
      * actual command line, with the original -w/-a/-i contract intact. */
     if (app_machine_shell_run(&shell,argc,argv,&result)!=APP_MACHINE_SHELL_OK)
         result=ERROR_PROCESS_ABORTED;
+    worker_trace("run",result);
 finish:
     OpenNtBaseClientDisconnectCurrent();
     if (!session_dispose_with_reason(&owner,&dispose_reason)) result=ERROR_BUSY;

@@ -32,7 +32,7 @@ static VOID BaseSetLastNTError(NTSTATUS Status)
     SetLastError(RtlNtStatusToDosError(Status));
 }
 
-#if !defined(OPENNT_BASE_CLIENT_VDM_COMMANDS) && !defined(OPENNT_BASE_CLIENT_CLASSIFIER)
+#if (!defined(OPENNT_BASE_CLIENT_VDM_COMMANDS) && !defined(OPENNT_BASE_CLIENT_CLASSIFIER)) || defined(OPENNT_BASE_CLIENT_VDM_ENVIRONMENT)
 UINT BaseGetEnvNameType_U(WCHAR *Name, DWORD NameLength);
 
 BOOL BaseCreateVDMEnvironment(

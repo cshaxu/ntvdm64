@@ -50,8 +50,19 @@ interface vdm_service
         [in, size_is(request_bytes)] byte *request,
         [out] unsigned long *parent_event_count,
         [out, system_handle(sh_event), size_is(,*parent_event_count)] HANDLE **parent_events,
+        [out] unsigned long *parent_receipt,
         [out] unsigned long *reply_bytes,
         [out] byte reply[32]);
+    /* A receipt identifies the broker-local parent wait object already
+     * created by original BaseSrv.  It is not a handle and is valid only for
+     * this authenticated connection/generation. */
+    error_status_t ExitCode(
+        [in] handle_t binding,
+        [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [in] unsigned long parent_receipt,
+        [out] unsigned long *exit_code);
     /* Reservation identifiers correlate a launch rollback only.  Worker
      * authority is the authenticated system process attachment in Prepare,
      * and Console identity remains local to the broker connection. */

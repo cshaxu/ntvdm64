@@ -1,5 +1,57 @@
 # T412 S3 entry integration
 
+## Current S3 three-program integration — 2026-09-14
+
+This section supersedes the earlier checkpoint language below.  The formal x86
+composition now produces three separate product executables:
+
+- `run16.exe`: the CLI CreateProcess boundary; it selects the original
+  classifier, performs original `BaseCheckVDM`/`BaseGetVdmConfigInfo`, starts
+  a broker candidate, creates a suspended worker, prepares the authenticated
+  reservation, and performs the original `BaseUpdateVDMEntry` parent-side
+  registration before resuming the worker.
+- `basesrv.exe`: the single RPC endpoint owner.  Its original `srvvdm.c`
+  dispatch remains the owner of command records, standard-handle duplication,
+  paired parent waits, and exit-code lookup.
+- `ntvdm.exe`: the pure worker.  It connects as the prepared OS process and
+  retains its original machine-shell command execution shape; it does not
+  classify a program or select a task.
+
+The unavailable CSR handle-transfer mechanism is narrowed to authenticated,
+generation-scoped local receipts.  Parent/worker wait receipts are always even:
+original `BaseSrvGetVDMExitCode` masks bit zero of its HANDLE-shaped parent
+identifier, so issuing receipt `1` would silently turn the first wait lookup
+into zero.  This is a source-proven adapter requirement, not new task policy.
+
+Focused product evidence passed with a temporary owned `basesrv.exe`:
+
+```text
+launcher: Check -> Reserve -> Prepare -> BaseUpdateVDMEntry -> Resume
+worker:   Connect -> original BasepGetNextVDMCommand -> follow-up completion
+parent:   paired wait signalled -> original BaseCheckForVDM returns 7
+```
+
+The test rejects an unreserved process registration, rather than permitting a
+fixture to fabricate the former CSR-local process carrier.  It uses the
+selected product `opennt-base-client.lib`, `opennt-base-server.lib`, bindings,
+transport and generated RPC stub, and map checks reject host CSR transport.
+
+A real staged `O:\\ntvdm64\\run16.exe MEM.EXE` run then recorded:
+
+```text
+BASESRV-S3 phase=connect/check/reserve/prepare   (launcher)
+NTVDM-S3 phase=connect                           (worker)
+BASESRV-S3 phase=get                             (worker, three calls)
+BASESRV-S3 phase=exit-code/disconnect            (launcher)
+```
+
+The three current x86 artifacts were rebuilt and copied as `run16.exe`,
+`basesrv.exe`, and `ntvdm.exe` under `O:\\ntvdm64`; `ntvdm32.exe` was not
+changed.  Test-owned resident worker/broker PIDs were explicitly stopped after
+each observation.  The stage trace is default-off and only activates when
+`MVDM_BASESRV_TRACE_PATH` is supplied; it records worker phase/status without
+command text or handles.
+
 ## Product BaseClient first-VDM transport checkpoint
 
 The independent x86 `ntvdm.exe` now links the original BaseClient archive with

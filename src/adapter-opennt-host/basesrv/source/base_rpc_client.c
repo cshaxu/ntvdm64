@@ -19,6 +19,8 @@ typedef struct OPENNT_BASE_RPC_CLIENT {
 
 static OPENNT_BASE_RPC_CLIENT client;
 static LONG request_id;
+static HANDLE parent_event_handle;
+static ULONG parent_receipt;
 
 /* Generated client stubs own only their transient marshalling buffers. */
 void *__RPC_USER MIDL_user_allocate(size_t bytes) { return malloc(bytes); }
@@ -115,7 +117,7 @@ static NTSTATUS update_command(PCSR_API_MSG message,ULONG length)
     void *wire=NULL;
     HANDLE parent_event=NULL,*parent_events=NULL;
     uint32_t request=(uint32_t)InterlockedIncrement(&request_id),wire_bytes=0;
-    ULONG parent_event_count=0,reply_bytes=0;
+    ULONG parent_event_count=0,reply_bytes=0,receipt=0;
     DWORD error=ERROR_INVALID_DATA;
     BOOL applied=FALSE;
     if (!request) request=(uint32_t)InterlockedIncrement(&request_id);
@@ -126,7 +128,7 @@ static NTSTATUS update_command(PCSR_API_MSG message,ULONG length)
         goto done;
     RpcTryExcept {
         error=Client_Update(client.binding,client.connection,client.process,client.generation,
-            wire_bytes,wire,&parent_event_count,&parent_events,&reply_bytes,reply);
+            wire_bytes,wire,&parent_event_count,&parent_events,&receipt,&reply_bytes,reply);
     }
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
@@ -137,6 +139,8 @@ static NTSTATUS update_command(PCSR_API_MSG message,ULONG length)
     }
     if (applied) {
         base->u.UpdateVDMEntry.WaitObjectForParent=parent_event;
+        parent_event_handle=parent_event;
+        parent_receipt=receipt;
         parent_event=NULL;
     }
 done:
@@ -149,6 +153,31 @@ done:
         return STATUS_UNSUCCESSFUL;
     }
     return (NTSTATUS)message->ReturnValue;
+}
+
+static NTSTATUS exit_code_command(PCSR_API_MSG message,ULONG length)
+{
+    PBASE_GET_VDM_EXIT_CODE_MSG exit_message=(PBASE_GET_VDM_EXIT_CODE_MSG)&message->u.ApiMessageData;
+    DWORD error=ERROR_INVALID_PARAMETER;
+    ULONG exit_code=0;
+    if (length!=sizeof(*exit_message) || exit_message->hParent!=parent_event_handle || !parent_receipt)
+        goto done;
+    RpcTryExcept {
+        error=Client_ExitCode(client.binding,client.connection,client.process,client.generation,
+            parent_receipt,&exit_code);
+    }
+    RpcExcept(1) { error=RpcExceptionCode(); }
+    RpcEndExcept
+    if (!error) {
+        exit_message->ExitCode=exit_code;
+        parent_event_handle=NULL;parent_receipt=0;
+        message->ReturnValue=STATUS_SUCCESS;
+        return STATUS_SUCCESS;
+    }
+done:
+    SetLastError(error);
+    message->ReturnValue=STATUS_UNSUCCESSFUL;
+    return STATUS_UNSUCCESSFUL;
 }
 
 DWORD OpenNtBaseClientConnectCurrent(void)
@@ -266,6 +295,8 @@ NTSTATUS NTAPI OpenNtBaseClientCallServer(PCSR_API_MSG message,
         return get_command(message,length);
     if (number==CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepUpdateVDMEntry))
         return update_command(message,length);
+    if (number==CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepGetVDMExitCode))
+        return exit_code_command(message,length);
     if (number!=CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepIsFirstVDM) ||
         length!=sizeof(BASE_IS_FIRST_VDM_MSG)) {
         message->ReturnValue=(ULONG)STATUS_UNSUCCESSFUL;

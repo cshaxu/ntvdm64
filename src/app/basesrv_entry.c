@@ -12,6 +12,30 @@ static broker_rpc_scope scope;
 static OPENNT_BASE_SERVICE *service;
 #define BASE_CHECK_REPLY_BYTES 40u
 #define BASE_UPDATE_REPLY_BYTES 32u
+
+/* Default-off S3 transport observation.  This intentionally records neither
+ * copied command bytes nor any OS handle/pointer: it exists only to identify
+ * the original service operation and its externally observable result. */
+static void basesrv_trace(const char *phase,DWORD pid,DWORD status)
+{
+    CHAR path[MAX_PATH],line[128];
+    DWORD length,written,saved=GetLastError();
+    HANDLE file;
+    int bytes;
+    length=GetEnvironmentVariableA("MVDM_BASESRV_TRACE_PATH",path,sizeof(path));
+    if (!length || length>=sizeof(path)) goto done;
+    bytes=wsprintfA(line,"BASESRV-S3 phase=%s pid=%lu status=%08lX\r\n",
+        phase,(unsigned long)pid,(unsigned long)status);
+    if (bytes<=0 || (size_t)bytes>=sizeof(line)) goto done;
+    file=CreateFileA(path,FILE_APPEND_DATA,FILE_SHARE_READ,NULL,OPEN_ALWAYS,
+        FILE_ATTRIBUTE_NORMAL,NULL);
+    if (file!=INVALID_HANDLE_VALUE) {
+        (void)WriteFile(file,line,(DWORD)bytes,&written,NULL);
+        CloseHandle(file);
+    }
+done:
+    SetLastError(saved);
+}
 error_status_t Server_AttachFile(handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,ULONG role,HANDLE stream,ULONG *receipt)
 {
@@ -52,8 +76,10 @@ error_status_t Server_Connect(handle_t binding,HANDLE process,VDM_CONNECTION *co
     RPC_STATUS status;
     *connection=NULL; *generation=0;
     status=broker_rpc_peer_process(&scope,binding,process,&pid);
-    if (status) return status;
-    return OpenNtBaseServiceConnect(service,process,(OPENNT_BASE_CONNECTION **)connection,generation);
+    if (status) { basesrv_trace("connect-auth",0,status); return status; }
+    status=OpenNtBaseServiceConnect(service,process,(OPENNT_BASE_CONNECTION **)connection,generation);
+    basesrv_trace("connect",pid,status);
+    return status;
 }
 error_status_t Server_First(handle_t binding,VDM_CONNECTION connection,HANDLE process,ULONG generation,ULONG *first)
 {
@@ -78,6 +104,7 @@ error_status_t Server_Check(handle_t binding,VDM_CONNECTION connection,HANDLE pr
         reply,BASE_CHECK_REPLY_BYTES,&required);
     if (!error && required!=BASE_CHECK_REPLY_BYTES) return ERROR_INVALID_DATA;
     if (!error) *replyBytes=required;
+    basesrv_trace("check",pid,error);
     return error;
 }
 error_status_t Server_Get(handle_t binding,VDM_CONNECTION connection,HANDLE process,
@@ -95,6 +122,7 @@ error_status_t Server_Get(handle_t binding,VDM_CONNECTION connection,HANDLE proc
     error=OpenNtBaseServiceGet(connection,pid,generation,request,requestBytes,
         &source_reply,&bytes,&wait_event);
     if (error) {
+        basesrv_trace("get",pid,error);
         fprintf(stderr,"basesrv: Get rejected %lu\n",error); fflush(stderr);
         return error;
     }
@@ -114,21 +142,22 @@ error_status_t Server_Get(handle_t binding,VDM_CONNECTION connection,HANDLE proc
     memcpy(*reply,source_reply,bytes);
     OpenNtBaseServiceReleaseCommandReply(source_reply);
     *replyBytes=bytes;
+    basesrv_trace("get",pid,ERROR_SUCCESS);
     return ERROR_SUCCESS;
 }
 error_status_t Server_Update(handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,ULONG requestBytes,unsigned char *request,ULONG *parentEventCount,HANDLE **parentEvents,
-    ULONG *replyBytes,unsigned char reply[BASE_UPDATE_REPLY_BYTES])
+    ULONG *parentReceipt,ULONG *replyBytes,unsigned char reply[BASE_UPDATE_REPLY_BYTES])
 {
     DWORD pid,error;
     uint32_t required=0;
     HANDLE parent_event=NULL;
-    if (!parentEventCount || !parentEvents || !replyBytes || !reply) return ERROR_INVALID_PARAMETER;
-    *parentEventCount=0; *parentEvents=NULL; *replyBytes=0;
+    if (!parentEventCount || !parentEvents || !parentReceipt || !replyBytes || !reply) return ERROR_INVALID_PARAMETER;
+    *parentEventCount=0; *parentEvents=NULL; *parentReceipt=0; *replyBytes=0;
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
     if (error) return error;
     error=OpenNtBaseServiceUpdate(connection,pid,generation,request,requestBytes,reply,
-        BASE_UPDATE_REPLY_BYTES,&required,&parent_event);
+        BASE_UPDATE_REPLY_BYTES,&required,&parent_event,parentReceipt);
     if (error) {
         fprintf(stderr,"basesrv: Update rejected %lu\n",error); fflush(stderr);
         return error;
@@ -142,6 +171,18 @@ error_status_t Server_Update(handle_t binding,VDM_CONNECTION connection,HANDLE p
     *replyBytes=required;
     return ERROR_SUCCESS;
 }
+error_status_t Server_ExitCode(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+    ULONG generation,ULONG parentReceipt,ULONG *exitCode)
+{
+    DWORD pid,error;
+    if (!exitCode || !parentReceipt) return ERROR_INVALID_PARAMETER;
+    *exitCode=0;
+    error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    if (error) return error;
+    error=OpenNtBaseServiceExitCode(connection,pid,generation,parentReceipt,exitCode);
+    basesrv_trace("exit-code",pid,error);
+    return error;
+}
 error_status_t Server_Reserve(handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,ULONG task,hyper *reservation)
 {
@@ -153,6 +194,7 @@ error_status_t Server_Reserve(handle_t binding,VDM_CONNECTION connection,HANDLE 
     if (error) return error;
     error=OpenNtBaseServiceCreateReservation(connection,pid,generation,task,&id);
     if (!error) *reservation=(hyper)id;
+    basesrv_trace("reserve",pid,error);
     return error;
 }
 error_status_t Server_Prepare(handle_t binding,VDM_CONNECTION connection,HANDLE process,
@@ -162,7 +204,9 @@ error_status_t Server_Prepare(handle_t binding,VDM_CONNECTION connection,HANDLE 
     if (reservation<=0 || !worker || worker==INVALID_HANDLE_VALUE) return ERROR_INVALID_PARAMETER;
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
     if (error) return error;
-    return OpenNtBaseServicePrepareWorker(connection,pid,generation,(uint64_t)reservation,worker);
+    error=OpenNtBaseServicePrepareWorker(connection,pid,generation,(uint64_t)reservation,worker);
+    basesrv_trace("prepare",pid,error);
+    return error;
 }
 error_status_t Server_Release(handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,hyper reservation)
@@ -180,6 +224,7 @@ error_status_t Server_Disconnect(handle_t binding,HANDLE process,ULONG generatio
     if (!OpenNtBaseServicePeer(*connection,pid,generation)) return ERROR_ACCESS_DENIED;
     result=OpenNtBaseServiceDisconnect(*connection);
     if (!result) *connection=NULL;
+    basesrv_trace("disconnect",pid,result);
     return result;
 }
 int main(void)

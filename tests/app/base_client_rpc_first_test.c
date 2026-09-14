@@ -6,6 +6,10 @@
 #include "adapter-opennt-host/basesrv/include/base_client.h"
 #include "adapter-opennt-host/basesrv/include/base_rpc_client.h"
 
+/* BaseCheckForVDM shares its original client translation unit with
+ * BaseCheckVDM, whose retained capture helpers require this local carrier. */
+PVOID CsrPortHeap;
+
 #define REQUIRE(value) do { if (!(value)) { \
     fprintf(stderr,"FAIL line %d\\n",__LINE__); return 1; } } while (0)
 
@@ -29,26 +33,33 @@ static NTSTATUS get_first_command(CHAR *returnedCommand,ULONG returnedBytes)
     return STATUS_SUCCESS;
 }
 
-static int reservation_child(void)
+/* A pure worker reports completion through the original ordinary follow-up
+ * GetNextVDMCommand shape.  ASKING_FOR_SECOND_TIME is specifically a pending
+ * re-entry query; it searches a ready record rather than the busy worker. */
+static NTSTATUS report_task_exit(void)
 {
     BASE_API_MSG message={0};
-    HANDLE parent_event=NULL;
     CHAR command[1024]={0};
-    NTSTATUS status;
+    STARTUPINFOA startup={sizeof(startup)};
+    message.u.GetNextVDMCommand.VDMState=0;
+    message.u.GetNextVDMCommand.ExitCode=7;
+    message.u.GetNextVDMCommand.CmdLine=command;
+    message.u.GetNextVDMCommand.CmdLen=sizeof(command);
+    message.u.GetNextVDMCommand.StartupInfo=&startup;
+    return OpenNtBaseClientCallServer((PCSR_API_MSG)&message,NULL,
+        CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepGetNextVDMCommand),
+        sizeof(message.u.GetNextVDMCommand));
+}
+
+static int reservation_child(void)
+{
+    CHAR command[1024]={0};
     REQUIRE(OpenNtBaseClientConnectCurrent()==ERROR_SUCCESS);
-    message.u.UpdateVDMEntry.EntryIndex=UPDATE_VDM_PROCESS_HANDLE;
-    message.u.UpdateVDMEntry.BinaryType=BINARY_TYPE_DOS;
-    status=OpenNtBaseClientCallServer((PCSR_API_MSG)&message,NULL,
-        CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepUpdateVDMEntry),
-        sizeof(message.u.UpdateVDMEntry));
-    REQUIRE(status==STATUS_SUCCESS && message.ReturnValue==STATUS_SUCCESS);
-    parent_event=message.u.UpdateVDMEntry.WaitObjectForParent;
-    REQUIRE(parent_event!=NULL && WaitForSingleObject(parent_event,0)==WAIT_TIMEOUT);
     REQUIRE(get_first_command(command,sizeof(command))==STATUS_SUCCESS);
     REQUIRE(!lstrcmpA(command,"MEM\\r\\n"));
-    CloseHandle(parent_event);
+    REQUIRE(report_task_exit()==STATUS_SUCCESS);
     OpenNtBaseClientDisconnectCurrent();
-    puts("PASS: reserved worker claimed, registered and received original command");
+    puts("PASS: reserved worker claimed and received original command");
     return 0;
 }
 
@@ -60,17 +71,24 @@ static int reservation_parent(void)
     CHAR command[]="MEM\\r\\n",image[MAX_PATH],childCommand[MAX_PATH+32];
     uint64_t reservation=0;
     NTSTATUS status;
-    DWORD error;
+    ULONG task;
+    DWORD error,exit_code=STILL_ACTIVE;
+    HANDLE parent_event;
     REQUIRE(OpenNtBaseClientConnectCurrent()==ERROR_SUCCESS);
     message.u.CheckVDM.ConsoleHandle=(HANDLE)1;
     message.u.CheckVDM.BinaryType=BINARY_TYPE_DOS;
     message.u.CheckVDM.CmdLine=command;
     message.u.CheckVDM.CmdLen=sizeof(command);
+    startup.dwFlags=STARTF_USESTDHANDLES;
+    startup.hStdInput=GetStdHandle(STD_INPUT_HANDLE);
+    startup.hStdOutput=GetStdHandle(STD_OUTPUT_HANDLE);
+    startup.hStdError=GetStdHandle(STD_ERROR_HANDLE);
     message.u.CheckVDM.StartupInfo=&startup;
     status=OpenNtBaseClientCallServer((PCSR_API_MSG)&message,NULL,
         CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepCheckVDM),sizeof(message.u.CheckVDM));
     REQUIRE(status==STATUS_SUCCESS && message.ReturnValue==STATUS_SUCCESS);
-    REQUIRE(OpenNtBaseClientReserveWorker(message.u.CheckVDM.iTask,&reservation)==ERROR_SUCCESS);
+    task=message.u.CheckVDM.iTask;
+    REQUIRE(OpenNtBaseClientReserveWorker(task,&reservation)==ERROR_SUCCESS);
     REQUIRE(GetModuleFileNameA(NULL,image,sizeof(image)) &&
         _snprintf_s(childCommand,sizeof(childCommand),_TRUNCATE,"\"%s\" --reservation-child",image)>0);
     ZeroMemory(&startup,sizeof(startup));
@@ -84,9 +102,32 @@ static int reservation_parent(void)
         OpenNtBaseClientDisconnectCurrent();
         return (int)error;
     }
+    /* The original parent side, not the worker, registers the new VDM
+     * process.  The RPC binding resolves this through the launch reservation,
+     * then returns the original BaseSrv parent-completion event. */
+    ZeroMemory(&message,sizeof(message));
+    parent_event=child.hProcess;
+    message.u.UpdateVDMEntry.EntryIndex=UPDATE_VDM_PROCESS_HANDLE;
+    message.u.UpdateVDMEntry.iTask=task;
+    message.u.UpdateVDMEntry.BinaryType=BINARY_TYPE_DOS;
+    status=OpenNtBaseClientCallServer((PCSR_API_MSG)&message,NULL,
+        CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepUpdateVDMEntry),
+        sizeof(message.u.UpdateVDMEntry));
+    REQUIRE(status==STATUS_SUCCESS && message.ReturnValue==STATUS_SUCCESS);
+    parent_event=message.u.UpdateVDMEntry.WaitObjectForParent;
+    REQUIRE(parent_event!=NULL && WaitForSingleObject(parent_event,0)==WAIT_TIMEOUT);
     REQUIRE(ResumeThread(child.hThread)!=(DWORD)-1);
     REQUIRE(WaitForSingleObject(child.hProcess,15000)==WAIT_OBJECT_0);
     REQUIRE(GetExitCodeProcess(child.hProcess,&error) && error==0);
+    REQUIRE(WaitForSingleObject(parent_event,15000)==WAIT_OBJECT_0);
+    {
+    BOOL check_for_vdm=BaseCheckForVDM(parent_event,&exit_code);
+    if (!check_for_vdm)
+        fprintf(stderr,"BaseCheckForVDM failed: %lu\\n",GetLastError());
+    if (exit_code!=7) fprintf(stderr,"BaseCheckForVDM returned: %lu\\n",exit_code);
+    REQUIRE(check_for_vdm && exit_code==7);
+    }
+    CloseHandle(parent_event);
     CloseHandle(child.hThread);CloseHandle(child.hProcess);
     REQUIRE(OpenNtBaseClientReleaseWorker(reservation)==ERROR_SUCCESS);
     OpenNtBaseClientDisconnectCurrent();
@@ -132,6 +173,18 @@ int main(int argc,char **argv)
     status=OpenNtBaseClientCallServer((PCSR_API_MSG)&message,NULL,
         CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepUpdateVDMEntry),
         sizeof(message.u.UpdateVDMEntry));
+    /* A process-handle registration is valid only after the launcher has
+     * reserved and prepared this worker.  The old fixture fabricated the
+     * CSR-local process carrier and therefore tested a path the product no
+     * longer exposes.  Keep it as the explicit negative half; the
+     * --reservation-parent route below proves the admitted positive path. */
+    if (argc==2 && !lstrcmpA(argv[1],"--existing")) {
+        REQUIRE(status==STATUS_UNSUCCESSFUL && message.ReturnValue==STATUS_UNSUCCESSFUL);
+        REQUIRE(GetLastError()==ERROR_INVALID_PARAMETER);
+        OpenNtBaseClientDisconnectCurrent();
+        puts("PASS: unreserved process-handle registration is rejected");
+        return 0;
+    }
     if (status!=STATUS_SUCCESS || message.ReturnValue!=STATUS_SUCCESS)
         fprintf(stderr,"Update status=%08lx return=%08lx last=%lu\n",
             (ULONG)status,message.ReturnValue,GetLastError());

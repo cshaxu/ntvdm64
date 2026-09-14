@@ -22,7 +22,13 @@ DWORD broker_vdm_receipt_accept(broker_vdm_receipts *state, uint32_t role, HANDL
     if (!state || !state->generation || role<BROKER_VDM_STDIN || role>BROKER_VDM_WORKER_WAIT)
         return ERROR_INVALID_PARAMETER;
     if (role<=BROKER_VDM_STDERR && GetConsoleMode(resource,&mode)) return ERROR_NOT_SUPPORTED;
-    if (state->issued==UINT32_MAX) return ERROR_ARITHMETIC_OVERFLOW;
+    /* BaseSrv stores parent/worker waits in a HANDLE-shaped field and its
+     * GetVDMExitCode path masks bit zero as an original tag.  A remote wait
+     * receipt must therefore reserve that bit too; ordinary stream receipts
+     * have no such source-level constraint. */
+    if (state->issued==UINT32_MAX ||
+        (role>=BROKER_VDM_PARENT_WAIT && state->issued>=UINT32_MAX-1))
+        return ERROR_ARITHMETIC_OVERFLOW;
     entry=HeapAlloc(GetProcessHeap(),0,sizeof(*entry));
     if (!entry) return ERROR_NOT_ENOUGH_MEMORY;
     /* Original BaseSrvDupStandardHandles requests OBJ_INHERIT, whereas
@@ -31,7 +37,9 @@ DWORD broker_vdm_receipt_accept(broker_vdm_receipts *state, uint32_t role, HANDL
         0,role<=BROKER_VDM_STDERR,DUPLICATE_SAME_ACCESS)) {
         error=GetLastError(); HeapFree(GetProcessHeap(),0,entry); return error;
     }
-    entry->id=++state->issued; entry->role=role;
+    entry->id=++state->issued;
+    if (role>=BROKER_VDM_PARENT_WAIT && (entry->id&1)) entry->id=++state->issued;
+    entry->role=role;
     entry->next=state->entries; state->entries=entry;
     *id=entry->id;
     return ERROR_SUCCESS;

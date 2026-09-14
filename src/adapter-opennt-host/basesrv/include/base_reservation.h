@@ -19,6 +19,11 @@ DWORD OpenNtBaseReservationPrepareWorker(OPENNT_BASE_RESERVATIONS *,uint64_t res
  * pre-registered live process identity matches this authenticated connection. */
 DWORD OpenNtBaseReservationClaimWorker(OPENNT_BASE_RESERVATIONS *,DWORD worker_pid,
     DWORD worker_generation,uint64_t *reservation,ULONG *task,HANDLE *console);
+/* The launcher may retain only the live worker it registered under its own
+ * reservation.  This is the finite replacement for the original CSR client
+ * process-handle namespace; command records still contain no OS handles. */
+DWORD OpenNtBaseReservationRetainWorker(OPENNT_BASE_RESERVATIONS *,uint64_t reservation,
+    DWORD launcher_pid,DWORD launcher_generation,HANDLE *worker);
 DWORD OpenNtBaseReservationRelease(OPENNT_BASE_RESERVATIONS *,uint64_t reservation,
     DWORD launcher_pid,DWORD launcher_generation);
 #endif

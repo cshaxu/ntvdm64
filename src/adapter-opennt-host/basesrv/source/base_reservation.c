@@ -121,6 +121,33 @@ DWORD OpenNtBaseReservationClaimWorker(OPENNT_BASE_RESERVATIONS *state,DWORD wor
     LeaveCriticalSection(&state->lock);return ERROR_NOT_FOUND;
 }
 
+DWORD OpenNtBaseReservationRetainWorker(OPENNT_BASE_RESERVATIONS *state,uint64_t reservation,
+    DWORD launcher_pid,DWORD launcher_generation,HANDLE *worker)
+{
+    OPENNT_BASE_RESERVATION *entry;
+    HANDLE retained=NULL;
+    if (!state || !reservation || !launcher_pid || !launcher_generation || !worker)
+        return ERROR_INVALID_PARAMETER;
+    *worker=NULL;
+    EnterCriticalSection(&state->lock);
+    entry=find(state,reservation);
+    if (!entry) { LeaveCriticalSection(&state->lock);return ERROR_NOT_FOUND; }
+    if (entry->launcher_pid!=launcher_pid || entry->launcher_generation!=launcher_generation) {
+        LeaveCriticalSection(&state->lock);return ERROR_ACCESS_DENIED;
+    }
+    if (!entry->worker || WaitForSingleObject(entry->worker,0)!=WAIT_TIMEOUT) {
+        LeaveCriticalSection(&state->lock);return ERROR_PROCESS_ABORTED;
+    }
+    if (!DuplicateHandle(GetCurrentProcess(),entry->worker,GetCurrentProcess(),&retained,
+            0,FALSE,DUPLICATE_SAME_ACCESS)) {
+        DWORD error=GetLastError();
+        LeaveCriticalSection(&state->lock);return error;
+    }
+    LeaveCriticalSection(&state->lock);
+    *worker=retained;
+    return ERROR_SUCCESS;
+}
+
 DWORD OpenNtBaseReservationRelease(OPENNT_BASE_RESERVATIONS *state,uint64_t reservation,
     DWORD launcher_pid,DWORD launcher_generation)
 {
