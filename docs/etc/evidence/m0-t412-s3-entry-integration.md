@@ -439,3 +439,30 @@ unadmitted requests do not consume original first-VDM state; the next valid
 request succeeds and replaces a forged message ClientId with the bound local
 identity. This is local dispatch acceptance, not authenticated RPC command
 delivery, a complete basesrv executable or guest execution. S3 remains open.
+
+## Copied command buffer spans
+
+Original basemsg.h CheckVDM/GetNextVDMCommand and srvvdm.c capacity/copy
+paths carry eight variable buffers, plus separate STARTUPINFO and native
+resources. A present output buffer with capacity is not an incoming byte
+string; a required-length response does not prove that many bytes were copied.
+The vdm_payload fragment preserves presence, original length and copied byte
+count independently for command/application/PIF/directory/environment/desktop/
+title/reserved fields.
+
+Recovery disposition: original client/server copying and capacity policy stay
+unchanged. CSR capture pointers require the excluded shared CSR address
+translation and cannot be sent to another process. This is the admitted finite
+copied-byte binding, not a replacement queue/provider or original algorithm.
+Fixed-width little-endian fields on the selected x86 graph contain no native
+pointer or resource. Presence does not authorize memory access: the eventual
+operation decoder must validate semantic lengths and materialize local buffers.
+
+Regenerated S3/product and built opennt-broker-owners with the vdm_payload
+member in broker-transport.lib. Verify-VdmPayload.mjs passes with map-provider
+and PE/x86 checks, all eight copied fields, present/empty distinctions,
+short-output nonmutation, every truncated size, overlap/noncanonical offsets
+and overflow rejection. Outputs are below build/M0-T412/S3/payload.
+StartupInfo, resource IDs, protocol envelope, native-message translation and
+actual RPC command integration remain missing; this fragment is not a complete
+command protocol and its test is not three-program or guest acceptance.

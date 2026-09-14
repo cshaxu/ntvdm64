@@ -1070,7 +1070,7 @@ if ($Architecture -eq 'x86') {
         }
         $graph.Add('build ' + $group + '.lib: lib ' + ($members -join ' '))
     }
-    $transportObjects = foreach ($unit in @('rpc_security', 'vdm_receipt', 'vdm_delivery')) {
+    $transportObjects = foreach ($unit in @('rpc_security', 'vdm_receipt', 'vdm_delivery', 'vdm_payload')) {
         $source = 'src/broker/' + $unit + '.c'
         $object = 'obj/broker-transport/' + $unit + '.obj'
         $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $root $source)))

@@ -58,6 +58,19 @@ delivery and original-lifecycle tests link this archive and check map providers,
 rather than privately recompiling those production units. This is a shared
 build input for the pending product links, not a completed broker executable.
 
+`vdm_payload.c/.h` defines only the eight copied variable-buffer spans from
+original CheckVDM/GetNextVDMCommand: command, application, PIF, directory,
+environment, desktop, title and reserved text. Native CSR capture pointers
+cannot be reused as cross-process values. Each fixed-width span separately
+preserves pointer presence, original capacity/required length and copied byte
+count. Canonical contiguous offsets reject overlap/trailing bytes; overflow
+and short encode buffers fail without writing output. No task slots, length
+negotiation policy, pointers or handles are serialized. Inputs must not overlap
+output. This x86 little-endian payload fragment is in broker-transport.lib and
+has formal-provider tests, but is not a full/versioned command envelope or
+native-message decoder. Operation/direction/string semantics, startup scalar
+state, resource IDs and authentication remain required integration work.
+
 M0 T272 S5 disposition register:
 
 - `wire.c` and `wire.h`: `new neutral contract`.  There is no reusable
