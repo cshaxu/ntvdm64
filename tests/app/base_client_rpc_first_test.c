@@ -16,6 +16,7 @@ int main(int argc,char **argv)
     CHAR command[]="MEM\r\n";
     CHAR returnedCommand[1024]={0},app[1024]={0},pif[1024]={0},directory[1024]={0};
     CHAR environment[1024]={0},desktop[1024]={0},title[1024]={0},reserved[1024]={0};
+    HANDLE parent_event=NULL;
     NTSTATUS status;
     ULONG expected=argc==2 && !lstrcmpA(argv[1],"--existing")?0:1;
     REQUIRE(OpenNtBaseClientConnectCurrent()==ERROR_SUCCESS);
@@ -38,6 +39,19 @@ int main(int argc,char **argv)
             (ULONG)status,message.ReturnValue,GetLastError());
     REQUIRE(status==STATUS_SUCCESS && message.ReturnValue==STATUS_SUCCESS);
     REQUIRE(message.u.CheckVDM.VDMState==VDM_NOT_PRESENT);
+    ZeroMemory(&message,sizeof(message));
+    message.u.UpdateVDMEntry.EntryIndex=UPDATE_VDM_PROCESS_HANDLE;
+    message.u.UpdateVDMEntry.BinaryType=BINARY_TYPE_DOS;
+    status=OpenNtBaseClientCallServer((PCSR_API_MSG)&message,NULL,
+        CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepUpdateVDMEntry),
+        sizeof(message.u.UpdateVDMEntry));
+    if (status!=STATUS_SUCCESS || message.ReturnValue!=STATUS_SUCCESS)
+        fprintf(stderr,"Update status=%08lx return=%08lx last=%lu\n",
+            (ULONG)status,message.ReturnValue,GetLastError());
+    REQUIRE(status==STATUS_SUCCESS && message.ReturnValue==STATUS_SUCCESS);
+    parent_event=message.u.UpdateVDMEntry.WaitObjectForParent;
+    REQUIRE(parent_event!=NULL);
+    REQUIRE(WaitForSingleObject(parent_event,0)==WAIT_TIMEOUT);
     ZeroMemory(&message,sizeof(message));
     message.u.GetNextVDMCommand.VDMState=ASKING_FOR_FIRST_COMMAND;
     message.u.GetNextVDMCommand.CmdLine=returnedCommand;
@@ -66,11 +80,19 @@ int main(int argc,char **argv)
     REQUIRE(status==STATUS_SUCCESS && message.ReturnValue==STATUS_SUCCESS);
     REQUIRE(message.u.GetNextVDMCommand.WaitObjectForVDM==NULL);
     REQUIRE(!lstrcmpA(returnedCommand,command));
-    /* The no-command branch creates the original worker wait event only after
-     * BasepUpdateVDMEntry has registered that worker process. That original
-     * registration route is the next S3 endpoint, so this owned process test
-     * deliberately proves the ready-command branch without inventing one. */
+    ZeroMemory(&message,sizeof(message));
+    message.u.GetNextVDMCommand.ExitCode=7;
+    message.u.GetNextVDMCommand.StartupInfo=&startup;
+    status=OpenNtBaseClientCallServer((PCSR_API_MSG)&message,NULL,
+        CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepGetNextVDMCommand),
+        sizeof(message.u.GetNextVDMCommand));
+    REQUIRE(status==STATUS_SUCCESS && message.ReturnValue==STATUS_SUCCESS);
+    REQUIRE(message.u.GetNextVDMCommand.WaitObjectForVDM!=NULL);
+    REQUIRE(WaitForSingleObject(message.u.GetNextVDMCommand.WaitObjectForVDM,0)==WAIT_TIMEOUT);
+    REQUIRE(WaitForSingleObject(parent_event,0)==WAIT_OBJECT_0);
+    CloseHandle(message.u.GetNextVDMCommand.WaitObjectForVDM);
+    CloseHandle(parent_event);
     OpenNtBaseClientDisconnectCurrent();
-    puts("PASS: product BaseClient RPC first-VDM, CheckVDM and GetNext ready-command route");
+    puts("PASS: product BaseClient RPC Check, Update and GetNext wait-event route");
     return 0;
 }

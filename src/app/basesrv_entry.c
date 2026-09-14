@@ -11,6 +11,7 @@
 static broker_rpc_scope scope;
 static OPENNT_BASE_SERVICE *service;
 #define BASE_CHECK_REPLY_BYTES 40u
+#define BASE_UPDATE_REPLY_BYTES 32u
 error_status_t Server_AttachFile(handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,ULONG role,HANDLE stream,ULONG *receipt)
 {
@@ -113,6 +114,32 @@ error_status_t Server_Get(handle_t binding,VDM_CONNECTION connection,HANDLE proc
     memcpy(*reply,source_reply,bytes);
     OpenNtBaseServiceReleaseCommandReply(source_reply);
     *replyBytes=bytes;
+    return ERROR_SUCCESS;
+}
+error_status_t Server_Update(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+    ULONG generation,ULONG requestBytes,unsigned char *request,ULONG *parentEventCount,HANDLE **parentEvents,
+    ULONG *replyBytes,unsigned char reply[BASE_UPDATE_REPLY_BYTES])
+{
+    DWORD pid,error;
+    uint32_t required=0;
+    HANDLE parent_event=NULL;
+    if (!parentEventCount || !parentEvents || !replyBytes || !reply) return ERROR_INVALID_PARAMETER;
+    *parentEventCount=0; *parentEvents=NULL; *replyBytes=0;
+    error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    if (error) return error;
+    error=OpenNtBaseServiceUpdate(connection,pid,generation,request,requestBytes,reply,
+        BASE_UPDATE_REPLY_BYTES,&required,&parent_event);
+    if (error) {
+        fprintf(stderr,"basesrv: Update rejected %lu\n",error); fflush(stderr);
+        return error;
+    }
+    if (required!=BASE_UPDATE_REPLY_BYTES) return ERROR_INVALID_DATA;
+    if (parent_event) {
+        if (!(*parentEvents=MIDL_user_allocate(sizeof(**parentEvents)))) return ERROR_NOT_ENOUGH_MEMORY;
+        **parentEvents=parent_event;
+        *parentEventCount=1;
+    }
+    *replyBytes=required;
     return ERROR_SUCCESS;
 }
 error_status_t Server_Disconnect(handle_t binding,HANDLE process,ULONG generation,VDM_CONNECTION *connection)

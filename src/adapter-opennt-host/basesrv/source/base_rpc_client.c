@@ -108,6 +108,49 @@ done:
     return (NTSTATUS)message->ReturnValue;
 }
 
+static NTSTATUS update_command(PCSR_API_MSG message,ULONG length)
+{
+    PBASE_API_MSG base=(PBASE_API_MSG)message;
+    unsigned char reply[32];
+    void *wire=NULL;
+    HANDLE parent_event=NULL,*parent_events=NULL;
+    uint32_t request=(uint32_t)InterlockedIncrement(&request_id),wire_bytes=0;
+    ULONG parent_event_count=0,reply_bytes=0;
+    DWORD error=ERROR_INVALID_DATA;
+    BOOL applied=FALSE;
+    if (!request) request=(uint32_t)InterlockedIncrement(&request_id);
+    if (length!=sizeof(BASE_UPDATE_VDM_ENTRY_MSG) ||
+        !OpenNtBaseEncodeUpdateCommand(base,request,client.generation,NULL,0,&wire_bytes) ||
+        !(wire=HeapAlloc(GetProcessHeap(),0,wire_bytes)) ||
+        !OpenNtBaseEncodeUpdateCommand(base,request,client.generation,wire,wire_bytes,&wire_bytes))
+        goto done;
+    RpcTryExcept {
+        error=Client_Update(client.binding,client.connection,client.process,client.generation,
+            wire_bytes,wire,&parent_event_count,&parent_events,&reply_bytes,reply);
+    }
+    RpcExcept(1) { error=RpcExceptionCode(); }
+    RpcEndExcept
+    if (!error && reply_bytes==sizeof(reply) && parent_event_count<=1 &&
+        (!parent_event_count || parent_events)) {
+        if (parent_event_count) parent_event=parent_events[0];
+        applied=OpenNtBaseApplyUpdateReply(reply,(uint32_t)reply_bytes,client.generation,request,base);
+    }
+    if (applied) {
+        base->u.UpdateVDMEntry.WaitObjectForParent=parent_event;
+        parent_event=NULL;
+    }
+done:
+    if (parent_events) MIDL_user_free(parent_events);
+    if (parent_event) CloseHandle(parent_event);
+    if (wire) HeapFree(GetProcessHeap(),0,wire);
+    if (error || !applied) {
+        SetLastError(error ? error : ERROR_INVALID_DATA);
+        message->ReturnValue=(ULONG)STATUS_UNSUCCESSFUL;
+        return STATUS_UNSUCCESSFUL;
+    }
+    return (NTSTATUS)message->ReturnValue;
+}
+
 DWORD OpenNtBaseClientConnectCurrent(void)
 {
     broker_rpc_scope scope;
@@ -126,7 +169,9 @@ DWORD OpenNtBaseClientConnectCurrent(void)
     if (RpcBindingFromStringBindingW(text,&client.binding)) goto done;
     if (RpcBindingSetAuthInfoW(client.binding,NULL,RPC_C_AUTHN_LEVEL_PKT_PRIVACY,
             RPC_C_AUTHN_WINNT,NULL,RPC_C_AUTHZ_NONE)) goto done;
-    client.process=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION|SYNCHRONIZE,
+    /* Original BaseSrvUpdateDOSEntry duplicates the authenticated worker's
+     * self pseudo-handle; no broader process access is needed. */
+    client.process=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION|SYNCHRONIZE|PROCESS_DUP_HANDLE,
         FALSE,GetCurrentProcessId());
     if (!client.process) { error=GetLastError(); goto done; }
     RpcTryExcept {
@@ -173,6 +218,8 @@ NTSTATUS NTAPI OpenNtBaseClientCallServer(PCSR_API_MSG message,
         return check_command(message,length);
     if (number==CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepGetNextVDMCommand))
         return get_command(message,length);
+    if (number==CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepUpdateVDMEntry))
+        return update_command(message,length);
     if (number!=CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepIsFirstVDM) ||
         length!=sizeof(BASE_IS_FIRST_VDM_MSG)) {
         message->ReturnValue=(ULONG)STATUS_UNSUCCESSFUL;

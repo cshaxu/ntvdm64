@@ -1394,10 +1394,48 @@ PASS: product BaseClient RPC first-VDM, CheckVDM and GetNext ready-command route
 ```
 
 The original no-command branch creates a worker wait event only after
-`BasepUpdateVDMEntry` has registered the worker process. That endpoint is not
-yet in the product route; invoking the branch before registration yields the
-original `STATUS_NO_MEMORY`, not a transport substitute. The formal Get RPC
-therefore carries a bounded zero-or-one typed `sh_event` attachment, but this
-branch is explicitly unaccepted until the original registration endpoint and
-its event-transfer test are present. This is command delivery progress, not
+`BasepUpdateVDMEntry` has registered the worker process. That requirement was
+the next product endpoint and is now covered below; it does not require a
+transport substitute. The formal Get RPC carries a bounded zero-or-one typed
+`sh_event` attachment. This remains service composition, not separate
 three-program execution or publication.
+
+## Product UpdateVDMEntry and original wait-pair composition
+
+`BaseSrvUpdateDOSEntry` is retained unchanged. Its original process-handle
+path duplicates the caller's `NtCurrentProcess()` pseudo-handle into BaseSrv,
+then creates the parent wait pair. The initial product RPC process attachment
+requested only query/synchronize rights. Once the existing resource binding
+was in place, the reached original duplication required `PROCESS_DUP_HANDLE`.
+The client now asks for that one additional right, solely for that original
+`NtDuplicateObject` call.
+
+The existing `base_resource` guard correctly rejects unbound cross-process
+duplication. Product dispatch now binds the existing `base_wait` adapter only
+for the duration of original Update/Get calls. The adapter preserves original
+create/signal/close order, retains a local event under the existing typed
+parent- or worker-wait receipt role, and exposes a duplicate only through a
+bounded `sh_event` RPC output. No HANDLE, receipt, Console value, or process
+pointer enters the copied command record.
+
+An owned x86 broker/client process test now proves this exact sequence:
+
+```text
+CheckVDM(MEM)
+  -> UpdateVDMEntry(PROCESS_HANDLE)
+  -> GetNextVDMCommand(FIRST) returns MEM
+  -> GetNextVDMCommand(exit=7) returns worker wait
+```
+
+The parent wait is initially unsignaled and is signaled by the final Get; the
+worker wait remains unsignaled. The passing result is:
+
+```text
+PASS: product BaseClient RPC Check, Update and GetNext wait-event route
+```
+
+Maps select `_Client_Update` in the generated worker stub, `_Server_Update`
+in the basesrv entry, and `_OpenNtBaseServiceUpdate` in the original-binding
+archive. This proves authenticated service composition, not yet separate
+`run16.exe` creation/registration of an `ntvdm.exe` worker, completion/cleanup,
+or deployment.

@@ -55,8 +55,9 @@ and synchronous wait-event failure rollback also pass; remote callbacks remain o
 Formal archives now supply dispatch, copied CheckVDM payload/startup and typed
 receipt bindings. Original lifecycle, journal and nine-case RPC suites pass
 with provider maps and boundary negatives. PIF terminator writes remain distinct
-from returned lengths. Check RPC and the Get ready-command route now run; the
-registered-worker wait/completion/deployment paths remain open;
+from returned lengths. Check, Update and Get now run with source-shaped typed
+parent/worker waits; separate launcher-worker composition, completion and
+deployment paths remain open;
 the linked S3 evidence owns detailed source findings and tests.
 
 ## T412 S1 historical checkpoints

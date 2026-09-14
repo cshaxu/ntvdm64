@@ -6,6 +6,7 @@
 #include <base_dispatch.h>
 #include <base_reservation.h>
 #include <base_command.h>
+#include <base_wait.h>
 #include "broker/vdm_receipt.h"
 struct OPENNT_BASE_SERVICE {
     OPENNT_BASE_PROCESS_REGISTRY registry;
@@ -21,6 +22,72 @@ struct OPENNT_BASE_CONNECTION {
     ULONG task;
     HANDLE console;
 };
+typedef struct OPENNT_BASE_SERVICE_RESOURCES {
+    OPENNT_BASE_CONNECTION *connection;
+    DWORD role;
+    OPENNT_BASE_WAIT_BINDING wait;
+    OPENNT_BASE_RESOURCE_BINDING binding;
+} OPENNT_BASE_SERVICE_RESOURCES;
+static NTSTATUS service_wait_deliver(void *context,HANDLE event,uint32_t *receipt)
+{
+    OPENNT_BASE_SERVICE_RESOURCES *scope=context;
+    DWORD error;
+    if (!scope || !event || !receipt) return STATUS_INVALID_PARAMETER;
+    error=broker_vdm_receipt_accept(&scope->connection->streams,scope->role,event,receipt);
+    return error ? STATUS_INVALID_HANDLE : STATUS_SUCCESS;
+}
+static NTSTATUS service_wait_revoke(void *context,uint32_t receipt)
+{
+    OPENNT_BASE_SERVICE_RESOURCES *scope=context;
+    DWORD error;
+    if (!scope) return STATUS_INVALID_PARAMETER;
+    error=broker_vdm_receipt_revoke(&scope->connection->streams,
+        scope->connection->process.SequenceNumber,receipt);
+    return error ? STATUS_INVALID_HANDLE : STATUS_SUCCESS;
+}
+static NTSTATUS service_duplicate_resource(void *context,HANDLE source_process,HANDLE source,
+    HANDLE target_process,PHANDLE target,ACCESS_MASK access,ULONG attributes,ULONG options)
+{
+    OPENNT_BASE_SERVICE_RESOURCES *scope=context;
+    if (!scope) return STATUS_INVALID_PARAMETER;
+    /* BaseSrvUpdateDOSEntry duplicates the authenticated worker's own process
+     * pseudo-handle into BaseSrv. This is the one process-object carrier; all
+     * event delivery remains receipt-backed below. */
+    if (source_process==scope->connection->process.ProcessHandle && source==NtCurrentProcess() &&
+        target_process==NtCurrentProcess() && target && !access && !attributes &&
+        options==DUPLICATE_SAME_ACCESS) {
+        if (DuplicateHandle(source_process,source,target_process,target,0,FALSE,DUPLICATE_SAME_ACCESS))
+            return STATUS_SUCCESS;
+        return STATUS_ACCESS_DENIED;
+    }
+    return OpenNtBaseDuplicateWait(&scope->wait,source_process,source,target_process,
+        target,access,attributes,options);
+}
+static NTSTATUS service_close_resource(void *context,HANDLE handle)
+{
+    OPENNT_BASE_SERVICE_RESOURCES *scope=context;
+    if (!scope || !handle) return STATUS_INVALID_HANDLE;
+    if (handle==scope->wait.local_event) return OpenNtBaseCloseWait(&scope->wait,handle);
+    return CloseHandle(handle) ? STATUS_SUCCESS : STATUS_INVALID_HANDLE;
+}
+static void service_resources_init(OPENNT_BASE_SERVICE_RESOURCES *scope,
+    OPENNT_BASE_CONNECTION *connection,DWORD role)
+{
+    ZeroMemory(scope,sizeof(*scope));
+    scope->connection=connection; scope->role=role;
+    scope->wait.target_process=connection->process.ProcessHandle;
+    scope->wait.context=scope; scope->wait.deliver=service_wait_deliver;
+    scope->wait.revoke=service_wait_revoke;
+    scope->binding.Context=scope; scope->binding.Duplicate=service_duplicate_resource;
+    scope->binding.Close=service_close_resource;
+}
+static DWORD service_wait_resolve(OPENNT_BASE_CONNECTION *connection,DWORD generation,
+    HANDLE receipt,DWORD role,HANDLE *event)
+{
+    if (!receipt) { *event=NULL; return ERROR_SUCCESS; }
+    return broker_vdm_receipt_resolve(&connection->streams,generation,(uint32_t)(ULONG_PTR)receipt,
+        role,event);
+}
 /* Original guarded USER hook is absent in standalone CLI composition. */
 PFNNOTIFYPROCESSCREATE UserNotifyProcessCreate=NULL;
 OPENNT_BASE_SERVICE *OpenNtBaseServiceStart(void)
@@ -245,6 +312,61 @@ DWORD OpenNtBaseServiceCheck(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD 
     return ERROR_SUCCESS;
 }
 
+DWORD OpenNtBaseServiceUpdate(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD generation,
+    const void *input,uint32_t bytes,void *output,uint32_t capacity,uint32_t *required,HANDLE *parent_event)
+{
+    BASE_API_MSG message={0};
+    CSR_THREAD thread={0};
+    PCSR_THREAD previous_thread;
+    OPENNT_BASE_PROCESS_REGISTRY *previous_registry;
+    OPENNT_BASE_SERVICE_RESOURCES resources;
+    const OPENNT_BASE_RESOURCE_BINDING *previous_resources;
+    uint32_t request,needed=0;
+    NTSTATUS status;
+    DWORD error;
+    if (required) *required=0;
+    if (!parent_event) return ERROR_INVALID_PARAMETER;
+    *parent_event=NULL;
+    if (!connection || !OpenNtBaseServicePeer(connection,pid,generation) ||
+        !OpenNtBaseDecodeUpdateCommand(input,bytes,generation,&message,&request) ||
+        !OpenNtBaseEncodeUpdateReply(&message,request,generation,NULL,0,&needed))
+        return ERROR_INVALID_PARAMETER;
+    *required=needed;
+    if (!output || capacity<needed) return ERROR_INSUFFICIENT_BUFFER;
+    EnterCriticalSection(&connection->service->lock);
+    if (message.u.UpdateVDMEntry.BinaryType==BINARY_TYPE_WIN16)
+        message.u.UpdateVDMEntry.ConsoleHandle=(HANDLE)-1;
+    else if (message.u.UpdateVDMEntry.iTask)
+        message.u.UpdateVDMEntry.ConsoleHandle=NULL;
+    else if (connection->console)
+        message.u.UpdateVDMEntry.ConsoleHandle=connection->console;
+    else { error=ERROR_INVALID_HANDLE; goto done; }
+    if (message.u.UpdateVDMEntry.EntryIndex==UPDATE_VDM_PROCESS_HANDLE)
+        message.u.UpdateVDMEntry.VDMProcessHandle=NtCurrentProcess();
+    service_resources_init(&resources,connection,BROKER_VDM_PARENT_WAIT);
+    thread.Process=&connection->process;
+    thread.ClientId.UniqueProcess=connection->process.ClientId.UniqueProcess;
+    previous_thread=OpenNtBaseBindServerRequestThread(&thread);
+    previous_registry=OpenNtBaseBindProcessRegistry(&connection->service->registry);
+    previous_resources=OpenNtBaseBindResources(&resources.binding);
+    status=OpenNtBaseDispatchOperation((PCSR_API_MSG)&message,BROKER_VDM_UPDATE,
+        sizeof(message.u.UpdateVDMEntry));
+    OpenNtBaseBindResources(previous_resources);
+    OpenNtBaseBindProcessRegistry(previous_registry);
+    OpenNtBaseBindServerRequestThread(previous_thread);
+    if (status && !message.ReturnValue) message.ReturnValue=status;
+    if (!OpenNtBaseEncodeUpdateReply(&message,request,generation,output,capacity,required)) {
+        error=ERROR_INVALID_DATA; goto done;
+    }
+    error=service_wait_resolve(connection,generation,message.u.UpdateVDMEntry.WaitObjectForParent,
+        BROKER_VDM_PARENT_WAIT,parent_event);
+    if (error) goto done;
+    error=ERROR_SUCCESS;
+done:
+    LeaveCriticalSection(&connection->service->lock);
+    return error;
+}
+
 DWORD OpenNtBaseServiceGet(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD generation,
     const void *input,uint32_t bytes,void **output,uint32_t *output_bytes,HANDLE *wait_event)
 {
@@ -253,6 +375,8 @@ DWORD OpenNtBaseServiceGet(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD ge
     CSR_THREAD thread={0};
     PCSR_THREAD previous_thread;
     OPENNT_BASE_PROCESS_REGISTRY *previous_registry;
+    OPENNT_BASE_SERVICE_RESOURCES resources;
+    const OPENNT_BASE_RESOURCE_BINDING *previous_resources;
     NTSTATUS status;
     DWORD error;
     if (!output || !output_bytes || !wait_event) return ERROR_INVALID_PARAMETER;
@@ -267,12 +391,15 @@ DWORD OpenNtBaseServiceGet(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD ge
      * its launcher reservation; a same-connection test obtains it from Check. */
     if (!connection->console) { error=ERROR_INVALID_HANDLE; goto done; }
     message.u.GetNextVDMCommand.ConsoleHandle=connection->console;
+    service_resources_init(&resources,connection,BROKER_VDM_WORKER_WAIT);
     thread.Process=&connection->process;
     thread.ClientId.UniqueProcess=connection->process.ClientId.UniqueProcess;
     previous_thread=OpenNtBaseBindServerRequestThread(&thread);
     previous_registry=OpenNtBaseBindProcessRegistry(&connection->service->registry);
+    previous_resources=OpenNtBaseBindResources(&resources.binding);
     status=OpenNtBaseDispatchOperation((PCSR_API_MSG)&message,BROKER_VDM_GET_NEXT,
         sizeof(message.u.GetNextVDMCommand));
+    OpenNtBaseBindResources(previous_resources);
     OpenNtBaseBindProcessRegistry(previous_registry);
     OpenNtBaseBindServerRequestThread(previous_thread);
     if (status && !message.ReturnValue) message.ReturnValue=status;
@@ -281,7 +408,9 @@ DWORD OpenNtBaseServiceGet(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD ge
     /* This is an original target event, held by the console record. It crosses
      * process boundaries only as a typed RPC event attachment, never in the
      * copied VDM command record. */
-    *wait_event=message.u.GetNextVDMCommand.WaitObjectForVDM;
+    error=service_wait_resolve(connection,generation,message.u.GetNextVDMCommand.WaitObjectForVDM,
+        BROKER_VDM_WORKER_WAIT,wait_event);
+    if (error) goto done;
     error=ERROR_SUCCESS;
 done:
     LeaveCriticalSection(&connection->service->lock);

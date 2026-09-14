@@ -29,6 +29,11 @@ BOOL OpenNtBaseServiceWorkerReservation(OPENNT_BASE_CONNECTION *,uint64_t *reser
     ULONG *task,HANDLE *console);
 DWORD OpenNtBaseServiceCheck(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,
     void *input,uint32_t bytes,void *output,uint32_t capacity,uint32_t *required);
+/* Update carries scalar entry input only. For PROCESS_HANDLE the authenticated
+ * caller process is restored as the original NtCurrentProcess pseudo-handle;
+ * its parent event is a separate typed RPC attachment. */
+DWORD OpenNtBaseServiceUpdate(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,
+    const void *input,uint32_t bytes,void *output,uint32_t capacity,uint32_t *required,HANDLE *parent_event);
 /* GetNextVDMCommand's Console identity remains connection-local. The copied
  * request/reply contains no native handle. The original wait event is a
  * separate, typed RPC attachment; reply ownership transfers to the caller and
