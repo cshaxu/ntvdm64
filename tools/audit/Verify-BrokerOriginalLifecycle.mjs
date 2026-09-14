@@ -99,7 +99,9 @@ assert.deepEqual(fs.readFileSync(ownerPath),ownerBefore,'Original owner changed 
 const image=fs.readFileSync(path.join(build,'original-lifecycle.exe'));
 assert.equal(image.readUInt16LE(image.readUInt32LE(0x3c)+4),0x14c);
 const map=fs.readFileSync(path.join(build,'original-lifecycle.map'),'utf8');
-for (const symbol of ['_OpenNtBaseEncodeCheckCommand','_OpenNtBaseDecodeCheckCommand'])
+for (const symbol of ['_OpenNtBaseEncodeCheckCommand','_OpenNtBaseDecodeCheckCommand',
+    '_OpenNtBaseEncodeGetCommand','_OpenNtBasePrepareGetCommand','_OpenNtBaseFinishGetCommand',
+    '_OpenNtBaseApplyGetCommand','_OpenNtBaseReleaseGetCommand'])
     assert(map.split(/\r?\n/).some(line=>line.includes(symbol)&&line.includes(ownerBuild?'opennt-base-bindings:command.obj':'command.obj')),`Command binding provider missing: ${symbol}`);
 for (const symbol of ['_OpenNtBaseEncodeValues','_OpenNtBaseDecodeValues'])
     assert(map.split(/\r?\n/).some(line=>line.includes(symbol)&&line.includes(ownerBuild?'opennt-base-bindings:values.obj':'values.obj')),`Scalar binding provider missing: ${symbol}`);

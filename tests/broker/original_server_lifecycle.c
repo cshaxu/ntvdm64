@@ -222,10 +222,10 @@ NTSTATUS NTAPI CsrClientCallServer(PCSR_API_MSG message, PCSR_CAPTURE_HEADER cap
     void *payload=NULL;
     uint32_t payloadBytes,requestId;
     BASE_GET_NEXT_VDM_COMMAND_MSG savedGet;
-    OPENNT_BASE_GET_PAYLOAD getPayload={0};
-    unsigned char getRequest[16*BROKER_VDM_PAYLOAD_FIELDS];
+    OPENNT_BASE_GET_COMMAND getCommand={0};
+    unsigned char getRequest[100+16*BROKER_VDM_PAYLOAD_FIELDS];
     (void)capture;
-    if (!scalar_negatives() || !scalar_roundtrip((PBASE_API_MSG)message,OpenNtBaseVdmOperation(number))) return STATUS_INVALID_PARAMETER;
+    if (!scalar_negatives()) return STATUS_INVALID_PARAMETER;
     if (number == CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepCheckVDM)) ++launchCalls;
     if (enqueueGate && number == CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepGetNextVDMCommand)) {
         PBASE_GET_NEXT_VDM_COMMAND_MSG request = &((PBASE_API_MSG)message)->u.GetNextVDMCommand;
@@ -252,22 +252,25 @@ NTSTATUS NTAPI CsrClientCallServer(PCSR_API_MSG message, PCSR_CAPTURE_HEADER cap
     if (number == CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepGetNextVDMCommand)) {
         PBASE_GET_NEXT_VDM_COMMAND_MSG request=&((PBASE_API_MSG)message)->u.GetNextVDMCommand;
         savedGet=*request;
-        if (!OpenNtBaseEncodeGetRequest(request,getRequest,sizeof(getRequest),&payloadBytes)) return STATUS_INVALID_PARAMETER;
-        if (OpenNtBasePrepareGetPayload(getRequest,payloadBytes,request,&getPayload)) return STATUS_NO_MEMORY;
+        if (!OpenNtBaseEncodeGetCommand((PBASE_API_MSG)message,2,1,getRequest,sizeof(getRequest),&payloadBytes)) return STATUS_INVALID_PARAMETER;
+        if (OpenNtBasePrepareGetCommand(getRequest,payloadBytes,1,(PBASE_API_MSG)message,&getCommand)) return STATUS_NO_MEMORY;
     }
     result = OpenNtBaseDispatchOperation(message,OpenNtBaseVdmOperation(number),length);
     if (!scalar_roundtrip((PBASE_API_MSG)message,OpenNtBaseVdmOperation(number))) result=STATUS_INVALID_PARAMETER;
     if (number == CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepGetNextVDMCommand)) {
         PBASE_GET_NEXT_VDM_COMMAND_MSG response=&((PBASE_API_MSG)message)->u.GetNextVDMCommand;
-        BOOL prepared=OpenNtBaseFinishGetPayload(response,&getPayload);
+        BOOL prepared=OpenNtBaseFinishGetCommand((PBASE_API_MSG)message,&getCommand);
 #define RESTORE_GET(p,n) response->p=savedGet.p; response->n=savedGet.n;
         RESTORE_GET(CmdLine,CmdLen) RESTORE_GET(AppName,AppLen)
         RESTORE_GET(PifFile,PifLen) RESTORE_GET(CurDirectory,CurDirectoryLen)
         RESTORE_GET(Env,EnvLen) RESTORE_GET(Desktop,DesktopLen)
         RESTORE_GET(Title,TitleLen) RESTORE_GET(Reserved,ReservedLen)
 #undef RESTORE_GET
-        if (!prepared || !OpenNtBaseApplyGetPayload(getPayload.bytes,getPayload.size,response)) result=STATUS_INVALID_PARAMETER;
-        OpenNtBaseReleaseGetPayload(&getPayload);
+        response->StartupInfo=savedGet.StartupInfo;
+        if (!prepared || OpenNtBaseApplyGetCommand(getCommand.reply,getCommand.reply_bytes,2,2,(PBASE_API_MSG)message) ||
+            OpenNtBaseApplyGetCommand(getCommand.reply,getCommand.reply_bytes,1,3,(PBASE_API_MSG)message) ||
+            !OpenNtBaseApplyGetCommand(getCommand.reply,getCommand.reply_bytes,1,2,(PBASE_API_MSG)message)) result=STATUS_INVALID_PARAMETER;
+        OpenNtBaseReleaseGetCommand(&getCommand);
     }
     if (number == CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepCheckVDM)) {
         PBASE_CHECKVDM_MSG request=&((PBASE_API_MSG)message)->u.CheckVDM;
@@ -328,6 +331,42 @@ int main(int argc, char **argv)
     DWORD senderExit;
     if (argc==2 && !strcmp(argv[1],"--registry-child")) return 0;
     BaseSrvHeap = GetProcessHeap();
+    {
+        BASE_API_MSG input={0},decodedInput={0},untouched={0};
+        OPENNT_BASE_GET_COMMAND state={0};
+        unsigned char request[228],shortBuffer[228];
+        broker_vdm_get_values values;
+        uint32_t bytes,cut;
+        /* Only presence is input: encoding must not dereference this output
+         * capture or read output-only scalar fields from the original call. */
+        input.u.GetNextVDMCommand.StartupInfo=(LPSTARTUPINFOA)1;
+        input.u.GetNextVDMCommand.iTask=0xccccccccu;
+        input.u.GetNextVDMCommand.CodePage=0xccccccccu;
+        input.u.GetNextVDMCommand.CurrentDrive=0xccccu;
+        input.u.GetNextVDMCommand.dwCreationFlags=0xccccccccu;
+        input.u.GetNextVDMCommand.fComingFromBat=0xcc;
+        input.u.GetNextVDMCommand.VDMState=ASKING_FOR_FIRST_COMMAND;
+        input.u.GetNextVDMCommand.ExitCode=37;
+        memset(shortBuffer,0xa5,sizeof(shortBuffer));
+        CHECK(!OpenNtBaseEncodeGetCommand(&input,4,7,shortBuffer,227,&bytes) && bytes==228);
+        for (cut=0;cut<sizeof(shortBuffer);++cut) CHECK(shortBuffer[cut]==0xa5);
+        CHECK(OpenNtBaseEncodeGetCommand(&input,4,7,request,sizeof(request),&bytes));
+        memcpy(&values,request+sizeof(broker_vdm_message_header),sizeof(values));
+        CHECK(values.task==0 && values.code_page==0 && values.drive==0 && values.creation_flags==0 && values.from_bat==0);
+        CHECK(values.state==ASKING_FOR_FIRST_COMMAND && values.exit_code==37);
+        for (cut=0;cut<bytes;++cut) {
+            CHECK(OpenNtBasePrepareGetCommand(request,cut,7,&decodedInput,&state)==ERROR_INVALID_PARAMETER);
+            CHECK(!memcmp(&decodedInput,&untouched,sizeof(untouched)) && !state.reply && !state.payload.bytes);
+        }
+        CHECK(OpenNtBasePrepareGetCommand(request,bytes,8,&decodedInput,&state)==ERROR_INVALID_PARAMETER);
+        CHECK(!OpenNtBasePrepareGetCommand(request,bytes,7,&decodedInput,&state));
+        CHECK(decodedInput.u.GetNextVDMCommand.StartupInfo==&state.startup);
+        CHECK(state.startup.dwFlags==0 && state.startup.lpReserved==NULL);
+        memset(&decodedInput,0,sizeof(decodedInput));
+        OpenNtBaseReleaseGetCommand(&state); OpenNtBaseReleaseGetCommand(&state);
+        CHECK(!state.reply && !state.payload.bytes);
+        puts("PASS: GetNext envelope excludes uninitialized output fields, validates truncation/generation and preallocates reply");
+    }
     {
         OPENNT_BASE_VDM_CONFIG config;
         UNICODE_STRING commandLine={0};

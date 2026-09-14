@@ -809,4 +809,32 @@ GetNextVDMCommand's buffers, returned resources and wait/retry result. The forma
 basesrv endpoint currently supplies only registration/first-VDM. Creating an
 ntvdm link against local fallback or success stubs would hide this dependency
 and violate S3. This audit changes no worker behavior or published artifact and
-does not count as worker build, DOS execution or task closure.
+does not establish worker build, DOS execution or task closure.
+
+## Composed GetNext request and reply
+
+base_command now composes both sides of GetNextVDMCommand. Source inspection of
+client/vdm.c shows StartupInfo is allocated as an output capture; CodePage,
+creation flags, drive and BAT state are output fields, and iTask is input only
+for ASKING_FOR_PIF. The request encoder therefore reads state/exit code, the
+conditional PIF task, buffer capacities and startup presence only. It does not
+serialize output scratch bytes. Server decode rejects noncanonical output-only
+values and materializes cleared native output storage.
+
+Prepare reserves the copied payload and complete reply allocation before
+original dispatch. Finish copies into this reserved reply without allocating
+after source command consumption. Apply validates generation, request ID,
+direction, widths, startup and all saved capacities before writes. Original
+NTSTATUS is retained in the response, including short-buffer failure; original
+BaseClient still owns the subsequent copy/error/wait/retry behavior. Resource
+fields are neither serialized nor replaced by this codec.
+
+Formal build and original lifecycle tests pass with actual original client
+GetNext calls through the composed path, including PIF, environment/capacity,
+startup, waits and retry-cleared exit code. Focused tests encode a deliberately
+unreadable output StartupInfo pointer without dereferencing it, suppress poisoned
+output-only scalars, preserve short encode output, reject every truncated
+request and wrong generation, and verify repeat-safe release. Reply generation
+and request-ID mismatches are rejected in the actual lifecycle path. Maps select
+the formal command.obj functions. Real RPC GetNext resource transfer and the
+independent worker remain pending; no executable has been deployed.

@@ -173,7 +173,14 @@ the entire message into local temporary storage before publishing borrowed
 payload/startup pointers or the request ID. Resource fields remain locally
 bound and untouched; authentication and attachment resolution are required
 outside this codec. Original client lifecycle tests use this same production
-composition. It is not yet a complete RPC request/resource transaction.
+composition. GetNext now composes request/reply envelopes too: input carries
+only source-defined state/exit code, PIF task when relevant, capacities and
+startup presence, never uninitialized output fields. Prepare allocates cleared
+payload and complete reply storage before source consumption. Finish allocates
+nothing; apply validates generation/request ID, scalar widths, startup and all
+buffer capacities before publication. Original client code retains its error,
+wait and retry policy. Native resources remain separately bound. This is not
+yet a complete RPC request/resource transaction.
 
 `base_values.h`/`base_values.c` bind original basemsg.h's CheckVDM,
 UpdateVDMEntry and GetNextVDMCommand numeric fields. Exact-size copied fragments
