@@ -29,6 +29,13 @@ BOOL OpenNtBaseServiceWorkerReservation(OPENNT_BASE_CONNECTION *,uint64_t *reser
     ULONG *task,HANDLE *console);
 DWORD OpenNtBaseServiceCheck(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,
     void *input,uint32_t bytes,void *output,uint32_t capacity,uint32_t *required);
+/* GetNextVDMCommand's Console identity remains connection-local. The copied
+ * request/reply contains no native handle. The original wait event is a
+ * separate, typed RPC attachment; reply ownership transfers to the caller and
+ * must be released by OpenNtBaseServiceReleaseCommandReply. */
+DWORD OpenNtBaseServiceGet(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,
+    const void *input,uint32_t bytes,void **output,uint32_t *output_bytes,HANDLE *wait_event);
+void OpenNtBaseServiceReleaseCommandReply(void *);
 DWORD OpenNtBaseServiceAttachStream(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,DWORD role,HANDLE,DWORD *);
 DWORD OpenNtBaseServiceRevokeStream(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,DWORD receipt);
 #endif

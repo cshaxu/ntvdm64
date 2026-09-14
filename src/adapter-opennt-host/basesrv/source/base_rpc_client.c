@@ -63,6 +63,51 @@ done:
     return (NTSTATUS)message->ReturnValue;
 }
 
+static NTSTATUS get_command(PCSR_API_MSG message,ULONG length)
+{
+    PBASE_API_MSG base=(PBASE_API_MSG)message;
+    uint32_t request=(uint32_t)InterlockedIncrement(&request_id),wire_bytes=0;
+    unsigned char *reply=NULL;
+    void *wire=NULL;
+    HANDLE wait_event=NULL;
+    HANDLE *wait_events=NULL;
+    ULONG wait_event_count=0;
+    ULONG reply_bytes=0;
+    DWORD error=ERROR_INVALID_DATA;
+    BOOL applied=FALSE;
+    if (!request) request=(uint32_t)InterlockedIncrement(&request_id);
+    if (length!=sizeof(BASE_GET_NEXT_VDM_COMMAND_MSG) ||
+        !OpenNtBaseEncodeGetCommand(base,request,client.generation,NULL,0,&wire_bytes) ||
+        !(wire=HeapAlloc(GetProcessHeap(),0,wire_bytes)) ||
+        !OpenNtBaseEncodeGetCommand(base,request,client.generation,wire,wire_bytes,&wire_bytes))
+        goto done;
+    RpcTryExcept {
+        error=Client_Get(client.binding,client.connection,client.process,client.generation,
+            wire_bytes,wire,&wait_event_count,&wait_events,&reply_bytes,&reply);
+    }
+    RpcExcept(1) { error=RpcExceptionCode(); }
+    RpcEndExcept
+    if (!error && wait_event_count<=1 && (!wait_event_count || wait_events) && reply && reply_bytes) {
+        if (wait_event_count) wait_event=wait_events[0];
+        applied=OpenNtBaseApplyGetCommand(reply,(uint32_t)reply_bytes,client.generation,request,base);
+    }
+    if (applied) {
+        base->u.GetNextVDMCommand.WaitObjectForVDM=wait_event;
+        wait_event=NULL;
+    }
+done:
+    if (wait_events) MIDL_user_free(wait_events);
+    if (wait_event) CloseHandle(wait_event);
+    if (reply) MIDL_user_free(reply);
+    if (wire) HeapFree(GetProcessHeap(),0,wire);
+    if (error || !applied) {
+        SetLastError(error ? error : ERROR_INVALID_DATA);
+        message->ReturnValue=(ULONG)STATUS_UNSUCCESSFUL;
+        return STATUS_UNSUCCESSFUL;
+    }
+    return (NTSTATUS)message->ReturnValue;
+}
+
 DWORD OpenNtBaseClientConnectCurrent(void)
 {
     broker_rpc_scope scope;
@@ -126,6 +171,8 @@ NTSTATUS NTAPI OpenNtBaseClientCallServer(PCSR_API_MSG message,
         return STATUS_UNSUCCESSFUL;
     if (number==CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepCheckVDM))
         return check_command(message,length);
+    if (number==CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepGetNextVDMCommand))
+        return get_command(message,length);
     if (number!=CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepIsFirstVDM) ||
         length!=sizeof(BASE_IS_FIRST_VDM_MSG)) {
         message->ReturnValue=(ULONG)STATUS_UNSUCCESSFUL;

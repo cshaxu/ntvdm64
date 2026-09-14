@@ -1374,3 +1374,30 @@ bug; no original owner or command format changed. This proves only first-VDM
 and a no-worker DOS CheckVDM admission/response. Worker creation/registration,
 resource handoff, GetNextVDMCommand, completion, idle cleanup and a DOS guest
 run remain S3 obligations; it is not three-program acceptance or publication.
+
+## Product GetNextVDMCommand ready-command RPC composition
+
+The next retained original owner is `BaseSrvGetNextVDMCommand` in `srvvdm.c`.
+Its Console record key remains broker-local: `CheckVDM` materializes it on the
+authenticated connection, and `OpenNtBaseServiceGet` supplies it only after
+peer/generation validation. The wire request remains the existing bounded
+Get-command payload; no Console or wait HANDLE is serialized.
+
+The real x86 BaseClient test now performs `IsFirstVDM`, `CheckVDM(MEM)`, then
+`GetNextVDMCommand(ASKING_FOR_FIRST_COMMAND)` against an owned `basesrv.exe`.
+It receives the original `MEM` command through `Client_Get`, with map owners
+`_Client_Get` (generated worker stub), `_Server_Get` (basesrv entry) and
+`_OpenNtBaseServiceGet` (original-binding archive). The controlled result is:
+
+```text
+PASS: product BaseClient RPC first-VDM, CheckVDM and GetNext ready-command route
+```
+
+The original no-command branch creates a worker wait event only after
+`BasepUpdateVDMEntry` has registered the worker process. That endpoint is not
+yet in the product route; invoking the branch before registration yields the
+original `STATUS_NO_MEMORY`, not a transport substitute. The formal Get RPC
+therefore carries a bounded zero-or-one typed `sh_event` attachment, but this
+branch is explicitly unaccepted until the original registration endpoint and
+its event-transfer test are present. This is command delivery progress, not
+three-program execution or publication.

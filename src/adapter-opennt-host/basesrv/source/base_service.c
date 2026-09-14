@@ -244,3 +244,52 @@ DWORD OpenNtBaseServiceCheck(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD 
         return ERROR_INVALID_PARAMETER;
     return ERROR_SUCCESS;
 }
+
+DWORD OpenNtBaseServiceGet(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD generation,
+    const void *input,uint32_t bytes,void **output,uint32_t *output_bytes,HANDLE *wait_event)
+{
+    BASE_API_MSG message={0};
+    OPENNT_BASE_GET_COMMAND state={0};
+    CSR_THREAD thread={0};
+    PCSR_THREAD previous_thread;
+    OPENNT_BASE_PROCESS_REGISTRY *previous_registry;
+    NTSTATUS status;
+    DWORD error;
+    if (!output || !output_bytes || !wait_event) return ERROR_INVALID_PARAMETER;
+    *output=NULL; *output_bytes=0; *wait_event=NULL;
+    if (!connection || !OpenNtBaseServicePeer(connection,pid,generation))
+        return ERROR_ACCESS_DENIED;
+    error=OpenNtBasePrepareGetCommand(input,bytes,generation,&message,&state);
+    if (error) return error;
+    EnterCriticalSection(&connection->service->lock);
+    /* BasepGetNextVDMCommand's ConsoleHandle is a local service identity,
+     * not a copied client field. A registered worker receives this value from
+     * its launcher reservation; a same-connection test obtains it from Check. */
+    if (!connection->console) { error=ERROR_INVALID_HANDLE; goto done; }
+    message.u.GetNextVDMCommand.ConsoleHandle=connection->console;
+    thread.Process=&connection->process;
+    thread.ClientId.UniqueProcess=connection->process.ClientId.UniqueProcess;
+    previous_thread=OpenNtBaseBindServerRequestThread(&thread);
+    previous_registry=OpenNtBaseBindProcessRegistry(&connection->service->registry);
+    status=OpenNtBaseDispatchOperation((PCSR_API_MSG)&message,BROKER_VDM_GET_NEXT,
+        sizeof(message.u.GetNextVDMCommand));
+    OpenNtBaseBindProcessRegistry(previous_registry);
+    OpenNtBaseBindServerRequestThread(previous_thread);
+    if (status && !message.ReturnValue) message.ReturnValue=status;
+    if (!OpenNtBaseFinishGetCommand(&message,&state)) { error=ERROR_INVALID_DATA; goto done; }
+    *output=state.reply; *output_bytes=state.reply_bytes; state.reply=NULL;
+    /* This is an original target event, held by the console record. It crosses
+     * process boundaries only as a typed RPC event attachment, never in the
+     * copied VDM command record. */
+    *wait_event=message.u.GetNextVDMCommand.WaitObjectForVDM;
+    error=ERROR_SUCCESS;
+done:
+    LeaveCriticalSection(&connection->service->lock);
+    OpenNtBaseReleaseGetCommand(&state);
+    return error;
+}
+
+void OpenNtBaseServiceReleaseCommandReply(void *reply)
+{
+    if (reply) HeapFree(GetProcessHeap(),0,reply);
+}

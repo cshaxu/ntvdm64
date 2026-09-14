@@ -30,6 +30,17 @@ interface vdm_service
         [in, size_is(request_bytes)] byte *request,
         [out] unsigned long *reply_bytes,
         [out] byte reply[40]);
+    error_status_t Get(
+        [in] handle_t binding,
+        [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [in] unsigned long request_bytes,
+        [in, size_is(request_bytes)] byte *request,
+        [out] unsigned long *wait_event_count,
+        [out, system_handle(sh_event), size_is(,*wait_event_count)] HANDLE **wait_events,
+        [out] unsigned long *reply_bytes,
+        [out, size_is(,*reply_bytes)] byte **reply);
     error_status_t Disconnect(
         [in] handle_t binding,
         [in, system_handle(sh_process)] HANDLE process,

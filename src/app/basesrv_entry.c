@@ -79,6 +79,42 @@ error_status_t Server_Check(handle_t binding,VDM_CONNECTION connection,HANDLE pr
     if (!error) *replyBytes=required;
     return error;
 }
+error_status_t Server_Get(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+    ULONG generation,ULONG requestBytes,unsigned char *request,ULONG *waitEventCount,HANDLE **waitEvents,ULONG *replyBytes,
+    unsigned char **reply)
+{
+    DWORD pid,error;
+    uint32_t bytes=0;
+    void *source_reply=NULL;
+    HANDLE wait_event=NULL;
+    if (!waitEventCount || !waitEvents || !replyBytes || !reply) return ERROR_INVALID_PARAMETER;
+    *waitEventCount=0; *waitEvents=NULL; *replyBytes=0; *reply=NULL;
+    error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    if (error) return error;
+    error=OpenNtBaseServiceGet(connection,pid,generation,request,requestBytes,
+        &source_reply,&bytes,&wait_event);
+    if (error) {
+        fprintf(stderr,"basesrv: Get rejected %lu\n",error); fflush(stderr);
+        return error;
+    }
+    if (wait_event) {
+        if (!(*waitEvents=MIDL_user_allocate(sizeof(**waitEvents)))) {
+            OpenNtBaseServiceReleaseCommandReply(source_reply);
+            return ERROR_NOT_ENOUGH_MEMORY;
+        }
+        **waitEvents=wait_event;
+        *waitEventCount=1;
+    }
+    if (!bytes || !(*reply=MIDL_user_allocate(bytes))) {
+        if (*waitEvents) MIDL_user_free(*waitEvents);
+        OpenNtBaseServiceReleaseCommandReply(source_reply);
+        return ERROR_NOT_ENOUGH_MEMORY;
+    }
+    memcpy(*reply,source_reply,bytes);
+    OpenNtBaseServiceReleaseCommandReply(source_reply);
+    *replyBytes=bytes;
+    return ERROR_SUCCESS;
+}
 error_status_t Server_Disconnect(handle_t binding,HANDLE process,ULONG generation,VDM_CONNECTION *connection)
 {
     DWORD pid,result=broker_rpc_peer_process(&scope,binding,process,&pid);

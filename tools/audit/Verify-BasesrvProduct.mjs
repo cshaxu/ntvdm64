@@ -34,12 +34,13 @@ for(const [symbol,owner] of [['_BaseSrvDupStandardHandles','opennt-base-server:s
 const baseClientMap=fs.readFileSync(path.join(build,'base-client-rpc-first.map'),'utf8');
 if(!baseClientMap.split(/\r?\n/).some(line=>line.includes('_OpenNtBaseClientCallServer@16')&&line.includes('rpc-client.obj')))
     throw Error('BaseClient RPC facade did not select the product provider');
-if(!baseClientMap.split(/\r?\n/).some(line=>line.includes('_Client_Check')&&line.includes('stub.obj')))
-    throw Error('BaseClient Check route did not select the generated RPC stub');
+for(const symbol of ['_Client_Check','_Client_Get'])
+    if(!baseClientMap.split(/\r?\n/).some(line=>line.includes(symbol)&&line.includes('stub.obj')))
+        throw Error(`BaseClient RPC route did not select generated stub ${symbol}`);
 if(baseClientMap.includes('_CsrClientCallServer@16'))
     throw Error('Host ntdll CSR client entered the BaseClient RPC test');
 const map=fs.readFileSync(path.join(product,'basesrv.exe.map'),'utf8');
-for(const [symbol,owner] of [['_BaseSrvIsFirstVDM','opennt-base-server:srvvdm.obj'],['_Server_Check','entry.obj'],['_OpenNtBaseServiceFirst','opennt-base-bindings:service.obj'],['_OpenNtBaseServiceCheck','opennt-base-bindings:service.obj'],['_OpenNtBaseServiceRetainPeer','opennt-base-bindings:service.obj'],['_OpenNtBaseRetainRegisteredProcess','opennt-base-bindings:registry.obj']])
+for(const [symbol,owner] of [['_BaseSrvIsFirstVDM','opennt-base-server:srvvdm.obj'],['_Server_Check','entry.obj'],['_Server_Get','entry.obj'],['_OpenNtBaseServiceFirst','opennt-base-bindings:service.obj'],['_OpenNtBaseServiceCheck','opennt-base-bindings:service.obj'],['_OpenNtBaseServiceGet','opennt-base-bindings:service.obj'],['_OpenNtBaseServiceRetainPeer','opennt-base-bindings:service.obj'],['_OpenNtBaseRetainRegisteredProcess','opennt-base-bindings:registry.obj']])
     if(!map.split(/\r?\n/).some(line=>line.includes(symbol)&&line.includes(owner))) throw Error(`Wrong product provider ${symbol}`);
 if(/fixture|registration\.obj|resource_attachment/i.test(map)) throw Error('Fixture entered product link');
 const image=fs.readFileSync(path.join(product,'basesrv.exe'));

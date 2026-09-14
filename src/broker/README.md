@@ -11,8 +11,11 @@ transport capabilities, not serialized native command fields. App authenticates
 every connect/query/disconnect and the original binding validates PID/generation;
 rundown drops registration after outstanding calls. Its `Check` endpoint carries
 only the existing bounded copied `BasepCheckVDM` request and fixed forty-byte
-reply; it delegates to the original service binding. `GetNextVDMCommand` and
-completion endpoints remain pending. Generated stubs stay under build.
+reply; it delegates to the original service binding. `GetNextVDMCommand` now
+has the same copied ready-command route and a bounded zero-or-one `sh_event`
+output attachment for the original wait event. The latter awaits the original
+worker-registration route before it can be accepted end-to-end. Completion
+remains pending. Generated stubs stay under build.
 
 `rpc_security.c/.h` is new finite modern transport glue, not original BaseSrv
 policy. NT4 CSR port/process authentication cannot be reused without the
