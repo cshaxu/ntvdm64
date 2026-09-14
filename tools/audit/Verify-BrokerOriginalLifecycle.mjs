@@ -97,7 +97,7 @@ assert.deepEqual(fs.readFileSync(ownerPath),ownerBefore,'Original owner changed 
 const image=fs.readFileSync(path.join(build,'original-lifecycle.exe'));
 assert.equal(image.readUInt16LE(image.readUInt32LE(0x3c)+4),0x14c);
 const map=fs.readFileSync(path.join(build,'original-lifecycle.map'),'utf8');
-for (const symbol of ['_OpenNtBaseEncodeCheckPayload','_OpenNtBaseDecodeCheckPayload'])
+for (const symbol of ['_OpenNtBaseEncodeCheckPayload','_OpenNtBaseDecodeCheckPayload','_OpenNtBaseApplyGetPayload'])
     assert(map.split(/\r?\n/).some(line=>line.includes(symbol)&&line.includes(ownerBuild?'opennt-base-bindings:payload.obj':'payload.obj')),`Native payload provider missing: ${symbol}`);
 assert(map.split(/\r?\n/).some(line=>line.includes('_OpenNtBaseDispatch')&&line.includes(ownerBuild?'opennt-base-bindings:dispatch.obj':'dispatch.obj')),'Production dispatch provider missing');
 for (const symbol of ['_OpenNtBaseEncodeStartup','_OpenNtBaseDecodeStartup'])

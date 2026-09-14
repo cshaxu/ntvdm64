@@ -41,4 +41,21 @@ BOOL OpenNtBaseDecodeCheckPayload(void *payload, uint32_t bytes,
 #undef DECODE
     return TRUE;
 }
+BOOL OpenNtBaseApplyGetPayload(const void *payload, uint32_t bytes,
+    PBASE_GET_NEXT_VDM_COMMAND_MSG message)
+{
+    broker_vdm_payload_span spans[BROKER_VDM_PAYLOAD_FIELDS];
+    if (!message || !broker_vdm_payload_validate(payload,bytes)) return FALSE;
+    memcpy(spans,payload,sizeof(spans));
+#define CHECK_REPLY(i,p,n,t) if (spans[i].present!=(uint32_t)(message->p!=NULL) || \
+    spans[i].data_bytes>message->n || (i<4 && spans[i].length>0xffffu)) return FALSE;
+    CHECK_FIELDS(CHECK_REPLY)
+#undef CHECK_REPLY
+#define APPLY_REPLY(i,p,n,t) if (spans[i].data_bytes) \
+    memcpy(message->p,(const unsigned char *)payload+spans[i].offset,spans[i].data_bytes); \
+    message->n=(t)spans[i].length;
+    CHECK_FIELDS(APPLY_REPLY)
+#undef APPLY_REPLY
+    return TRUE;
+}
 #undef CHECK_FIELDS

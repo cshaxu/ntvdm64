@@ -342,6 +342,22 @@ int main(int argc, char **argv)
         CHECK(bytes==sizeof(wire) && broker_vdm_payload_validate(wire,bytes));
         memcpy(&span,wire+16*BROKER_VDM_TITLE,sizeof(span));
         CHECK(span.length==0 && span.data_bytes==1 && wire[span.offset]==0);
+        {
+            BASE_GET_NEXT_VDM_COMMAND_MSG destination={0},saved;
+            char returnedPif[2]={0x7b,0x7b},returnedTitle[2]={0x7b,0x7b},returnedDirectory[2]={0x7b,0x7b};
+            destination.PifFile=returnedPif; destination.PifLen=2;
+            destination.Title=returnedTitle; destination.TitleLen=0;
+            destination.CurDirectory=returnedDirectory; destination.CurDirectoryLen=2;
+            saved=destination;
+            CHECK(!OpenNtBaseApplyGetPayload(wire,bytes,&destination));
+            CHECK(!memcmp(&saved,&destination,sizeof(saved)));
+            CHECK(returnedPif[0]==0x7b && returnedDirectory[0]==0x7b && returnedTitle[0]==0x7b);
+            destination.TitleLen=2;
+            CHECK(OpenNtBaseApplyGetPayload(wire,bytes,&destination));
+            CHECK(!destination.PifLen && !destination.TitleLen && !destination.CurDirectoryLen);
+            CHECK(!returnedPif[0] && !returnedDirectory[0] && !returnedTitle[0]);
+            CHECK(returnedPif[1]==0x7b && returnedDirectory[1]==0x7b && returnedTitle[1]==0x7b);
+        }
         puts("PASS: original PIF writes terminators despite zero returned lengths; copied payload preserves them");
     }
     {

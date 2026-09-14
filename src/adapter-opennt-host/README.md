@@ -170,6 +170,13 @@ including semantic string validation and authentication, is still required
 before dispatch. The original lifecycle fixture now sends its real BaseCheckVDM
 captures through this binding and restores original capture pointers before
 cleanup. This is a native marshalling component, not the full RPC decoder.
+The GetNext response application binds to saved native request pointers and
+capacities. It validates all eight spans, presence and original length widths
+before any destination write, then copies bytes and publishes returned lengths.
+Copied bytes are bounded by saved capacity, not the returned required length.
+Payload/destinations must not overlap and must remain owned for the call.
+This leaves source status/wait/retry/consumption logic untouched; response
+construction and actual RPC integration are still pending.
 
 The header supplies no CSR runtime, command policy or success stubs. Keeping
 original CSR declaration records does not admit their historical transport.

@@ -567,3 +567,24 @@ now carries these three single-byte writes with zero reported lengths. Existing
 CheckVDM negatives and lifecycle tests pass. Full GetNext request/reply binding
 remains incomplete; this is a source-proven transport correction, not real RPC
 command execution or three-program deployment.
+
+## GetNext response buffer application
+
+OpenNtBaseApplyGetPayload now binds a validated copied reply to the original
+client's saved native pointers/capacities. It checks all eight spans, matching
+presence, actual copied-byte capacity and USHORT length widths before writing
+any destination. Only copied buffers and returned length fields change; no
+status, resource, startup or wait/consumption policy is introduced. Native
+storage and nonoverlapping payload remain caller-owned for this synchronous
+operation. This finite binding replaces only unavailable CSR response-address
+translation; original GetNextVDMCommand remains responsible for its subsequent
+source-defined user-buffer copy, error and retry behavior.
+
+Formal S3/product owner build and Verify-BrokerOriginalLifecycle pass with the
+new provider in the map. The original PIF output fixture now applies its encoded
+three terminator writes to separate destination buffers: zero required lengths
+are preserved, first bytes change and trailing sentinels do not. A zero-capacity
+late title field rejects the whole application without changing earlier PIF/
+directory bytes or message fields. Existing source and lifecycle tests pass.
+This proves local reply application, not full reply construction, RPC exchange,
+worker command execution or deployment. Those S3 requirements remain open.
