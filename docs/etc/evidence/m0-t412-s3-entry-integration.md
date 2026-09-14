@@ -1251,3 +1251,13 @@ three intentional blockers only: the two legacy `cmdExec32` local launch-pending
 hooks, and `OpenNtBaseClientCallServer`. The former must migrate with the real
 broker reentry protocol; the latter must become authenticated IPC. No old local
 service object was reintroduced merely to obtain a link.
+
+`cmdExec32` still had two MVDM-HOST-DIV-197 calls into the old local service:
+one set its private launch-pending state before the original CreateThread and
+one cleared it on CreateThread failure. The selected OpenNT `cmdExec32` body
+has neither call; it uses its existing increment/decrement GetNextVDMCommand
+sequence. Both hooks and their mirror register row were removed. Rebuilding
+the original COMMAND archive and the complete current x86 process target
+passes. A fresh independent strict link now has exactly one unresolved symbol,
+`OpenNtBaseClientCallServer@16`. This is the intended hard boundary: no legacy
+local policy, system CSR import or `force` linker option can now conceal it.

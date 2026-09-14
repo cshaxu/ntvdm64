@@ -26,11 +26,6 @@
  * the worker starts; the original COMMAND worker remains the owner of every
  * conversion, process, wait, exit-code and re-entry decision. */
 #include "adapter-mvdm-host-out/basesrv/include/mvdm_command_native_child.h"
-/* DIVERGENCE(MVDM-HOST-DIV-197): original BaseSrv holds RETURN_ON_NO_COMMAND
- * during the narrow CreateThread-to-INCREMENT_REENTER_COUNT interval.  The
- * one-session Base VDM seam records only that source-shaped pending interval;
- * it neither publishes a command nor changes COMMAND's VDMINFO states. */
-#include "adapter-mvdm-host-out/basesrv/include/base_vdm_local.h"
 /* DIVERGENCE(MVDM-HOST-DIV-109): cmdCreateProcess is the original void,
  * cdecl worker entry, not a WINAPI DWORD start routine.  Keep its source
  * body and original CreateThread call ordering while binding that call to
@@ -555,20 +550,6 @@ VOID cmdExec32 (PCHAR pCmd32, PCHAR pEnv)
     fSoftpcRedirectionOnShellOut = fSoftpcRedirection;
     fBlock = TRUE;
 
-    mvdm_command_native_child_record_execution(25u, TRUE, 0u);
-    if (!base_vdm_local_native_child_begin()) {
-        setCF(0);
-        setAL((UCHAR)ERROR_BUSY);
-        nt_resume_event_thread();
-        nt_std_handle_notification(fSoftpcRedirectionOnShellOut);
-        fBlock = FALSE;
-        CntrlHandlerState = (CntrlHandlerState & ~CNTRL_SHELLCOUNT) |
-                         (((WORD)(CntrlHandlerState & CNTRL_SHELLCOUNT))-1);
-        mvdm_command_native_child_abort();
-        return;
-    }
-    mvdm_command_native_child_record_execution(26u, TRUE, 0u);
-
     mvdm_command_native_child_record_execution(30u, TRUE, 0u);
     if((hThread = CreateThread (NULL,
                      0,
@@ -581,7 +562,6 @@ VOID cmdExec32 (PCHAR pCmd32, PCHAR pEnv)
         nt_resume_event_thread();
         nt_std_handle_notification(fSoftpcRedirectionOnShellOut);
         fBlock = FALSE;
-        base_vdm_local_native_child_cancel();
         mvdm_command_native_child_abort();
         CntrlHandlerState = (CntrlHandlerState & ~CNTRL_SHELLCOUNT) |
                          (((WORD)(CntrlHandlerState & CNTRL_SHELLCOUNT))-1);
