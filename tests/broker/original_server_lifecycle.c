@@ -659,6 +659,12 @@ int main(int argc, char **argv)
         wait.context=&failed;wait.deliver=reject_wait_target;
         CHECK(BaseSrvCreatePairWaitHandles(&server,&client)==(ULONG)STATUS_ACCESS_DENIED);
         CHECK(failed && !wait.local_event && !GetHandleInformation(failed,&flags));
+        wait.deliver=NULL;
+        CHECK(BaseSrvCreatePairWaitHandles(&server,&client)==0xc00000bbUL);
+        CHECK(!wait.local_event && !GetHandleInformation(server,&flags));
+        wait.deliver=accept_wait_target;wait.context=&target;wait.target_process=(HANDLE)1;
+        CHECK(BaseSrvCreatePairWaitHandles(&server,&client)==0xc00000bbUL);
+        CHECK(!wait.local_event && !GetHandleInformation(server,&flags));
         CHECK(OpenNtBaseBindResources(NULL)==&resources);
         broker_vdm_receipts_drain(&target.receipts);
         puts("PASS: original wait pair retains notification semantics, non-inheritance, original close and failed-delivery cleanup");

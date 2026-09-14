@@ -13,11 +13,13 @@ NTSTATUS OpenNtBaseDuplicateWait(void *context,HANDLE sourceProcess,HANDLE sourc
             return (NTSTATUS)0xc00000bbL;
         return binding->revoke(binding->context,(uint32_t)source);
     }
-    if (options!=DUPLICATE_SAME_ACCESS || sourceProcess!=NtCurrentProcess() ||
-        targetProcess!=binding->target_process || !target || !binding->deliver || binding->local_event)
+    if (options!=DUPLICATE_SAME_ACCESS || sourceProcess!=NtCurrentProcess() || !target)
         return (NTSTATUS)0xc00000bbL;
-    /* Save before delivery so original failure cleanup can close its event. */
+    /* The original owner already created this event. Even a rejected target
+     * must leave it identifiable to the original NtClose failure path. */
     binding->local_event=source;
+    if (targetProcess!=binding->target_process || !binding->deliver)
+        return (NTSTATUS)0xc00000bbL;
     status=binding->deliver(binding->context,source,&receipt);
     if (status<0) return status;
     if (!receipt) return (NTSTATUS)0xc000000dL;

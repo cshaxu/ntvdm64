@@ -211,6 +211,12 @@ to that scope's local event. Later close scopes must initialize this identity
 from the original record; the scope is not another durable event registry.
 The original lifecycle suite verifies shared signal state, non-inheritance,
 original close and synchronous local close after failed target delivery.
+The callback records the source-created event before validating the target
+configuration, so missing delivery callbacks and mismatched targets also
+allow the original failure NtClose to release that event; both cases pass.
+The callback records the source-created event before validating the target
+configuration, so missing delivery callbacks and mismatched targets also
+allow the original failure NtClose to release that event; both cases pass.
 The formal binding archive supplies waits.obj. Target reception is local in
 this test; product event RPC, journal/unknown-reply and other native resource
 operations remain outside this slice and are not claimed complete.

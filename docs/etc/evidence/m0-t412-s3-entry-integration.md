@@ -1149,3 +1149,10 @@ server handle. Original close clears both record fields and closes the local
 event. Forced delivery failure also causes the original code to close its
 new event synchronously. This is a local target test, not event RPC delivery
 to launcher/worker, and not proof of the complete three-program chain.
+
+Review found that rejecting the target before recording the newly created
+event prevented the scoped Close callback from honoring original failure
+cleanup. The adapter now records that local event before target/callback
+validation. The original lifecycle suite passes additional missing-deliver
+and wrong-target cases: STATUS_NOT_SUPPORTED is preserved and the just-created
+event is no longer a valid handle afterward. Original source is unchanged.
