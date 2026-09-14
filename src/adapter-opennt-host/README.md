@@ -386,6 +386,15 @@ fixture uses the complete local buffer roundtrip. RPC integration is pending.
 The header supplies no CSR runtime, command policy or success stubs. Keeping
 original CSR declaration records does not admit their historical transport.
 
+The selected global SoftPC graph disables UCRT stdio inlines so original
+`fprt.c` retains its historical printf ownership. BaseClient reaches one NT4
+two-fixed-argument `_swprintf` call while constructing its private hotkey
+reserved string. The existing named `win32/crt_compat.c` binding now maps only
+that spelling to `__stdio_common_vswprintf`, preserving the source allocation,
+format and failure order. Enabling the whole UCRT inline layer instead causes
+an incompatible `_sprintf` duplicate with the existing compatibility binding;
+it is therefore not selected.
+
 `base_interactive.h`/`base_interactive.c` bind the single private predicate
 below original winsrv `_UserTestTokenForInteractive`. The original kernel
 TestForInteractiveUser compares against grpwinstaList's first windowstation

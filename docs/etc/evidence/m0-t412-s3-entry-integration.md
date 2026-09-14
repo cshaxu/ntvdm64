@@ -1219,3 +1219,15 @@ They cannot simply be removed from the still-deployed local-provider build
 before the real original service path is selected. Capture heap initialization,
 transport implementation and COMMAND migration remain open. No deployed file
 was changed and no DOS execution is claimed.
+
+The original client has one reached historical `swprintf(buffer, format, ...)`
+call, for its private STARTF_USEHOTKEY reserved string. Restoring UCRT stdio
+inlines only for this translation unit made `_sprintf` collide with the
+existing selected SoftPC CRT compatibility body. The selected fix leaves the
+global original compile policy intact and adds the same-signature `_swprintf`
+binding beside existing `sprintf`/`sscanf` bindings; it delegates to UCRT's
+`__stdio_common_vswprintf` with the original unbounded count. The S3 formal
+x86 archives and the complete original lifecycle suite pass. The strict worker
+link consequently reports only the three old local COMMAND hooks, explicit
+project transport and CsrPortHeap initialization; it does not create a worker
+EXE or claim command delivery.

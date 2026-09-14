@@ -1,8 +1,8 @@
 /*
  * DIVERGENCE(ADAPTER-WIN32-036): selected OpenNT source retains the NT4 CRT
- * `sprintf` and `sscanf` entrypoint spellings, while the selected original
+ * `sprintf`, `sscanf` and `_swprintf` entrypoint spellings, while the selected original
  * fprt.c remains the owner of its paired printf/fprintf interposition.  The
- * current UCRT no longer exports those two old spellings independently.
+ * current UCRT no longer exports those old spellings independently.
  * Keep the original unbounded formatting/scanning contract and bind only at
  * the modern UCRT ABI below; callers and their control flow stay unchanged.
  */
@@ -20,7 +20,13 @@ extern int __cdecl __stdio_common_vsscanf(unsigned __int64 options,
                                            size_t buffer_count,
                                            const char *format,
                                            void *locale,
-                                           va_list arguments);
+                                            va_list arguments);
+extern int __cdecl __stdio_common_vswprintf(unsigned __int64 options,
+                                             wchar_t *buffer,
+                                             size_t buffer_count,
+                                             const wchar_t *format,
+                                             void *locale,
+                                             va_list arguments);
 
 int __cdecl sprintf(char *buffer, const char *format, ...)
 {
@@ -40,6 +46,21 @@ int __cdecl sscanf(const char *buffer, const char *format, ...)
 
     va_start(arguments, format);
     result = __stdio_common_vsscanf(0u, buffer, (size_t)-1, format, NULL, arguments);
+    va_end(arguments);
+    return result;
+}
+
+/* The only reached BaseClient call uses the NT4 unbounded two-fixed-argument
+ * swprintf spelling.  UCRT hides _swprintf behind its disabled stdio inline
+ * layer; retain that exact caller contract through the narrow modern ABI.
+ * This does not change the original buffer allocation or formatting order. */
+int __cdecl _swprintf(wchar_t *buffer, const wchar_t *format, ...)
+{
+    va_list arguments;
+    int result;
+
+    va_start(arguments, format);
+    result=__stdio_common_vswprintf(0u,buffer,(size_t)-1,format,NULL,arguments);
     va_end(arguments);
     return result;
 }
