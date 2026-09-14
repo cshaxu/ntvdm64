@@ -418,6 +418,40 @@ done:
     return error;
 }
 
+DWORD OpenNtBaseServiceReenter(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD generation,
+    uint32_t increment)
+{
+    BASE_API_MSG message={0};
+    CSR_THREAD thread={0};
+    PCSR_THREAD previous_thread;
+    OPENNT_BASE_PROCESS_REGISTRY *previous_registry;
+    NTSTATUS status;
+    DWORD error;
+
+    if (increment!=INCREMENT_REENTER_COUNT && increment!=DECREMENT_REENTER_COUNT)
+        return ERROR_INVALID_PARAMETER;
+    if (!connection || !OpenNtBaseServicePeer(connection,pid,generation))
+        return ERROR_ACCESS_DENIED;
+    EnterCriticalSection(&connection->service->lock);
+    if (!connection->console) { error=ERROR_INVALID_HANDLE; goto done; }
+    message.u.SetReenterCount.ConsoleHandle=connection->console;
+    message.u.SetReenterCount.fIncDec=increment;
+    thread.Process=&connection->process;
+    thread.ClientId.UniqueProcess=connection->process.ClientId.UniqueProcess;
+    previous_thread=OpenNtBaseBindServerRequestThread(&thread);
+    previous_registry=OpenNtBaseBindProcessRegistry(&connection->service->registry);
+    status=OpenNtBaseDispatchOperation((PCSR_API_MSG)&message,BROKER_VDM_REENTER,
+        sizeof(message.u.SetReenterCount));
+    OpenNtBaseBindProcessRegistry(previous_registry);
+    OpenNtBaseBindServerRequestThread(previous_thread);
+    if (status && !message.ReturnValue) message.ReturnValue=status;
+    error=NT_SUCCESS((NTSTATUS)message.ReturnValue) ? ERROR_SUCCESS :
+        RtlNtStatusToDosError((NTSTATUS)message.ReturnValue);
+done:
+    LeaveCriticalSection(&connection->service->lock);
+    return error;
+}
+
 DWORD OpenNtBaseServiceGet(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD generation,
     const void *input,uint32_t bytes,void **output,uint32_t *output_bytes,HANDLE *wait_event)
 {

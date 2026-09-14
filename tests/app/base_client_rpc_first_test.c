@@ -51,13 +51,28 @@ static NTSTATUS report_task_exit(void)
         sizeof(message.u.GetNextVDMCommand));
 }
 
+/* Exercise the exact original vdm.c special case used by cmdCreateProcess:
+ * its ConsoleHandle is intentionally ignored by the standalone client and
+ * resolved from this authenticated worker connection at BaseSrv. */
+static NTSTATUS set_reenter_count(ULONG state)
+{
+    BASE_API_MSG message={0};
+    message.u.SetReenterCount.ConsoleHandle=(HANDLE)(ULONG_PTR)0x1234u;
+    message.u.SetReenterCount.fIncDec=state;
+    return OpenNtBaseClientCallServer((PCSR_API_MSG)&message,NULL,
+        CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepSetReenterCount),
+        sizeof(message.u.SetReenterCount));
+}
+
 static int reservation_child(void)
 {
     CHAR command[1024]={0};
     REQUIRE(OpenNtBaseClientConnectCurrent()==ERROR_SUCCESS);
     REQUIRE(get_first_command(command,sizeof(command))==STATUS_SUCCESS);
     REQUIRE(!lstrcmpA(command,"MEM\\r\\n"));
+    REQUIRE(set_reenter_count(INCREMENT_REENTER_COUNT)==STATUS_SUCCESS);
     REQUIRE(report_task_exit()==STATUS_SUCCESS);
+    REQUIRE(set_reenter_count(DECREMENT_REENTER_COUNT)==STATUS_SUCCESS);
     OpenNtBaseClientDisconnectCurrent();
     puts("PASS: reserved worker claimed and received original command");
     return 0;

@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include "service.h"
 #include "broker/rpc_security.h"
+#include "opennt-abi/source/public/internal/base/inc/vdmapi.h"
 #include "adapter-opennt-host/basesrv/include/base_service.h"
 static broker_rpc_scope scope;
 static OPENNT_BASE_SERVICE *service;
@@ -181,6 +182,17 @@ error_status_t Server_ExitCode(handle_t binding,VDM_CONNECTION connection,HANDLE
     if (error) return error;
     error=OpenNtBaseServiceExitCode(connection,pid,generation,parentReceipt,exitCode);
     basesrv_trace("exit-code",pid,error);
+    return error;
+}
+error_status_t Server_Reenter(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+    ULONG generation,ULONG increment)
+{
+    DWORD pid,error;
+    error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    if (error) return error;
+    error=OpenNtBaseServiceReenter(connection,pid,generation,increment);
+    basesrv_trace(increment==INCREMENT_REENTER_COUNT ? "reenter-inc" : "reenter-dec",
+        pid,error);
     return error;
 }
 error_status_t Server_Reserve(handle_t binding,VDM_CONNECTION connection,HANDLE process,

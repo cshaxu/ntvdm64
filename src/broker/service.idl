@@ -63,6 +63,15 @@ interface vdm_service
         [in] unsigned long generation,
         [in] unsigned long parent_receipt,
         [out] unsigned long *exit_code);
+    /* This carries only the original INCREMENT_REENTER_COUNT or
+     * DECREMENT_REENTER_COUNT selector.  Console identity stays bound to
+     * the authenticated connection at BaseSrv, just as it is for GetNext. */
+    error_status_t Reenter(
+        [in] handle_t binding,
+        [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [in] unsigned long increment);
     /* Reservation identifiers correlate a launch rollback only.  Worker
      * authority is the authenticated system process attachment in Prepare,
      * and Console identity remains local to the broker connection. */

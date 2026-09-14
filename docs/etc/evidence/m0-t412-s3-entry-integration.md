@@ -36,7 +36,8 @@ fixture to fabricate the former CSR-local process carrier.  It uses the
 selected product `opennt-base-client.lib`, `opennt-base-server.lib`, bindings,
 transport and generated RPC stub, and map checks reject host CSR transport.
 
-A real staged `O:\\ntvdm64\\run16.exe MEM.EXE` run then recorded:
+A real staged three-program `MEM.EXE` run (with its observation retained under
+`O:\ntvdm64\logs`) then recorded:
 
 ```text
 BASESRV-S3 phase=connect/check/reserve/prepare   (launcher)
@@ -46,7 +47,7 @@ BASESRV-S3 phase=exit-code/disconnect            (launcher)
 ```
 
 The three current x86 artifacts were rebuilt and copied as `run16.exe`,
-`basesrv.exe`, and `ntvdm.exe` under `O:\\ntvdm64`; `ntvdm32.exe` was not
+`basesrv.exe`, and `ntvdm.exe` in the approved runtime package; `ntvdm32.exe` was not
 changed.  Test-owned resident worker/broker PIDs were explicitly stopped after
 each observation.  The stage trace is default-off and only activates when
 `MVDM_BASESRV_TRACE_PATH` is supplied; it records worker phase/status without

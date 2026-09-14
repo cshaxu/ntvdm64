@@ -37,6 +37,10 @@ DWORD OpenNtBaseServiceUpdate(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generatio
     HANDLE *parent_event,uint32_t *parent_receipt);
 DWORD OpenNtBaseServiceExitCode(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,
     uint32_t parent_receipt,DWORD *exit_code);
+/* Source-shaped BasepSetReenterCount binding.  The client cannot supply a
+ * Console HANDLE across RPC; the authenticated connection already owns it. */
+DWORD OpenNtBaseServiceReenter(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,
+    uint32_t increment);
 /* GetNextVDMCommand's Console identity remains connection-local. The copied
  * request/reply contains no native handle. The original wait event is a
  * separate, typed RPC attachment; reply ownership transfers to the caller and

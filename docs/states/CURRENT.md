@@ -2,36 +2,36 @@
 
 ## Current Work
 
-**Active: M0 T412 S3.**
+**Active: M0 T412 S4.**
 
 ## Active Packet
 
-### M0 T412 S3 — Three-program composition and authenticated IPC
+### M0 T412 S4 — DOS execution, reentry and streams
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T412 S3; Ordinary Mode, one implementer and one active sequential S packet. |
-| Admission And Approval | Owner now explicitly approves completion of T412 according to its proposal, including the authenticated OS-managed resource-transfer exception. Execute S1--S6 sequentially without repeated scope approvals; one S remains active and each verification gate still applies. Commit/push to main remains approved. No kernel/CSR shell or broader CPU/video redesign is admitted. |
-| Objective | Build run16.exe, basesrv.exe and ntvdm.exe using recovered original owners; authenticate real IPC, create/register workers from run16, deliver commands and return results without the old local service fallback. |
-| Non-goals | No CSR/kernel subsystem, CPU/video redesign, guest-media changes or claim of complete WRITE recovery. Full DOS stream/reentry matrix remains S4; idle/race closure remains S5. Neither stage waives required S3 command delivery. |
-| Reference Baseline | T entry bb9fe640d; S1 consolidated design; S2 formal owner archives and tests through 3d14d6535. Existing deployed x86 product remains the pre-migration baseline. |
-| Files And ABI Surface | App entries/composition, broker IPC/resource bindings, adapter-opennt-host finite client/server bindings, original call-site selection, formal build/staging and publication authorities, tests and registers. |
+| Identifier Mode | M0 T412 S4; Ordinary Mode, one implementer and one active sequential S packet. |
+| Admission And Approval | Owner approved completion of T412 according to its proposal, including the authenticated OS-managed resource-transfer exception. Execute S1--S6 sequentially without repeated scope approvals; one S remains active and each verification gate still applies. Commit/push to main remains approved. No kernel/CSR shell or broader CPU/video redesign is admitted. |
+| Objective | Connect BOP 54:08 and original DOS reentry/native-child waits through run16, basesrv and ntvdm; preserve copied command/environment/stream lifetime and verify normal task return. |
+| Non-goals | No CSR/kernel subsystem, CPU/video redesign, guest-media changes, generic cmd parser, idle-reuse policy (S5), or claim of complete WRITE recovery. |
+| Reference Baseline | T412 S3 three-program composition, published at bd2de31b9; S1 consolidated design and S2 formal original-owner archives. |
+| Files And ABI Surface | Original DOS command/reentry call sites, app/BOP boundary, BaseClient stream capture and transport receipts, three-program staging, focused tests and evidence. |
 | Applicable Rules | Source policy; execution, architecture, coding and document rules; package-first recovery and original-owner placement. |
-| Verification | Formal x86 three-program builds/maps; original suites; real process startup/handshake, worker creation/registration, command delivery/return, duplicate/failed registration and disconnect; identity/version/length negatives. Governance and diff checks. |
-| Expected Markers | Launcher owns classification and worker creation; broker owns original service records; worker consumes source-shaped commands. No fixture dispatch or old local policy in the product link, no false readiness on CreateProcess alone. |
-| Asset Needs | Accepted OpenNT source and immutable guest media; build/M0-T412/S3 for generated/build/test outputs; O:\ntvdm64\logs for real-package observations. Preserve current deployed baseline until publication authorities and verified three-product staging agree. |
-| Reporting Requirements | Report actual EXEs, link owners, IPC/resource ownership and positive/negative results. Carry all unresolved integration/removal gates explicitly; never equate an archive or handshake with guest success. |
+| Verification | Real COMMAND/MEM/EDIT and DOS/native-child runs through the three-program topology; quoted tail/environment/stdin/stdout/stderr/EOF/nonzero exit and rollback/disconnect tests; direct CLI versus guest COMMAND redirection. Formal x86 maps, governance and diff checks. |
+| Expected Markers | BOP 54:08 reaches run16 without an invented parser; original DOS reentry owns task result/waits; copied records outlive async worker creation; stream ownership is explicit. |
+| Asset Needs | Accepted OpenNT source and immutable guest media; build/M0-T412/S4 for generated/build/test outputs; O:\ntvdm64\logs for real-package observations. |
+| Reporting Requirements | Report source owner and process boundary for each command/reentry/stream case, with real Console observations and negative rollback evidence. |
 | Stop Conditions | Missing provenance, unbounded platform dependency, contradictory selected-provider evidence, or changed product scope: record the exact issue; do not manufacture success or a parallel provider. |
-| Exit Criteria | Three real x86 programs use original service/client owners over authenticated IPC; command delivery/return, concurrent startup, registration failure and disconnect checks pass. No shadow local service fallback. Publication contract updated before verified deployment. S2 product-selection obligation is discharged here; final obsolete-source deletion is tracked through S6. |
+| Exit Criteria | Original BOP 54:08 to run16 and DOS/native-child reentry work end to end with copied command/environment/stream lifetimes; direct CLI and guest redirection cases are distinguished; real COMMAND/MEM/EDIT and required negatives pass. |
 | Original Owner Request | 批准按照proposal完成当前T任务。 Reduce diff, reuse original OpenNT code/architecture and build three programs. |
 | Similar-Issue Sweep | Include mirrored diffs, private overlays and adapters; command ownership/capacity/retry, launch rollback, async payload lifetime, worker cleanup and every duplicated local policy in scope. |
 | Candidate Proposal | [Broker design](../proposals/proposal-cross-process-broker-closure-001.md). |
 | Working Plan | [T412 sequential S plan](../etc/operations/m0-t412-broker-restoration-plan.md). |
 
 S1 audit/design is closed by the [consolidated design](../etc/evidence/m0-t412-s1-design-closure.md).
-S3 is the only active packet under the existing whole-T approval. S2 reached its
-source-recovery conclusion; its unfulfilled product-selection/removal clause is
-explicitly carried into S3/S6, not recorded as passed. See the
+S4 is the only active packet under the existing whole-T approval. S3 delivered
+the three-product command path; its final obsolete-source deletion remains
+explicitly carried into S6. See the
 [S2 transition](../etc/evidence/m0-t412-s2-original-lifecycle.md#s2-bounded-conclusion-and-s3-transition).
 Historical checkpoints are not current admission or hold state.
 
@@ -46,21 +46,17 @@ passes nine real-process cases, now with process references, remote receipt revo
 wrong-peer rejection. This is not service dispatch or product acceptance;
 genuine cross-user/session and remaining security/receipt gates stay open.
 The [entry and lifecycle tests](../etc/evidence/m0-t412-s3-entry-integration.md)
-select real PEB/TEB/heap, request-thread and registered-process bindings. Run16's native branch
-passes command-tail, directory/environment/stream and exit tests. Formal basesrv
-now links original service registration/first-VDM dispatch and typed file/pipe
-stream retention, revocation and disconnect cleanup. The existing reservation
-owner now passes a real launcher/child claim, update, get and release route;
-public run16 composition, completion and three-program acceptance remain open.
-Original resource-call binding and synchronous wait-event failure rollback also
-pass; remote callbacks remain open.
-Formal archives now supply dispatch, copied CheckVDM payload/startup and typed
-receipt bindings. Original lifecycle, journal and nine-case RPC suites pass
-with provider maps and boundary negatives. PIF terminator writes remain distinct
-from returned lengths. Check, Update and Get now run with source-shaped typed
-parent/worker waits; separate launcher-worker composition, completion and
-deployment paths remain open;
-the linked S3 evidence owns detailed source findings and tests.
+select real PEB/TEB/heap, request-thread and registered-process bindings. S3
+now composes `run16.exe`, `basesrv.exe` and `ntvdm.exe` from one x86 graph;
+real MEM command delivery/return and concurrent launcher evidence pass, with
+source-shaped Check/Update/Get/exit-code calls, typed receipts, worker
+reservation/claim, registration failure and disconnect/rundown negatives.
+The old local service fallback is absent from the product map. The published
+three-program staging is recorded in the evidence; `ntvdm32.exe` is unchanged.
+DOS reentry, stream and BOP integration are now S4 work, not inferred from S3.
+The [S4 reentry binding](../etc/evidence/m0-t412-s4-reenter-binding.md) now
+restores the original COMMAND increment/decrement route through BaseSrv; guest
+`54:08`, native-child streams and DOS parent return remain open S4 acceptance.
 
 ## T412 S1 historical checkpoints
 

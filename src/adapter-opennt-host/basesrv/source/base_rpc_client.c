@@ -180,6 +180,30 @@ done:
     return STATUS_UNSUCCESSFUL;
 }
 
+static NTSTATUS reenter_command(PCSR_API_MSG message,ULONG length)
+{
+    PBASE_SET_REENTER_COUNT_MSG reenter=(PBASE_SET_REENTER_COUNT_MSG)&message->u.ApiMessageData;
+    DWORD error=ERROR_INVALID_PARAMETER;
+
+    if (length!=sizeof(*reenter) ||
+        (reenter->fIncDec!=INCREMENT_REENTER_COUNT &&
+         reenter->fIncDec!=DECREMENT_REENTER_COUNT)) goto done;
+    RpcTryExcept {
+        error=Client_Reenter(client.binding,client.connection,client.process,client.generation,
+            reenter->fIncDec);
+    }
+    RpcExcept(1) { error=RpcExceptionCode(); }
+    RpcEndExcept
+    if (!error) {
+        message->ReturnValue=STATUS_SUCCESS;
+        return STATUS_SUCCESS;
+    }
+done:
+    SetLastError(error);
+    message->ReturnValue=STATUS_UNSUCCESSFUL;
+    return STATUS_UNSUCCESSFUL;
+}
+
 DWORD OpenNtBaseClientConnectCurrent(void)
 {
     broker_rpc_scope scope;
@@ -297,6 +321,8 @@ NTSTATUS NTAPI OpenNtBaseClientCallServer(PCSR_API_MSG message,
         return update_command(message,length);
     if (number==CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepGetVDMExitCode))
         return exit_code_command(message,length);
+    if (number==CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepSetReenterCount))
+        return reenter_command(message,length);
     if (number!=CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepIsFirstVDM) ||
         length!=sizeof(BASE_IS_FIRST_VDM_MSG)) {
         message->ReturnValue=(ULONG)STATUS_UNSUCCESSFUL;
