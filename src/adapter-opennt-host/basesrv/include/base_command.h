@@ -12,6 +12,12 @@ BOOL OpenNtBaseEncodeCheckCommand(const BASE_API_MSG *, uint32_t request,
  * Both outputs stay unchanged on invalid input. Storage must not overlap. */
 BOOL OpenNtBaseDecodeCheckCommand(void *, uint32_t bytes, uint32_t generation,
     PBASE_API_MSG, STARTUPINFOA *, uint32_t *request);
+/* Update request carries only scalar inputs; worker/wait handles are separate
+ * authenticated resources. The caller must initialize the original task ID. */
+BOOL OpenNtBaseEncodeUpdateCommand(const BASE_API_MSG *,uint32_t request,uint32_t generation,
+    void *,uint32_t capacity,uint32_t *required);
+BOOL OpenNtBaseDecodeUpdateCommand(const void *,uint32_t bytes,uint32_t generation,
+    PBASE_API_MSG,uint32_t *request);
 #include <base_payload.h>
 /* Per-call native ownership. Initialize to zero; prepare reserves all reply
  * storage before source consumption. Never serialize this structure. */

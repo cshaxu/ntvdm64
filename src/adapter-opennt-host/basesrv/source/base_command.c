@@ -18,6 +18,48 @@ typedef struct get_prefix {
     broker_vdm_startup startup;
 } get_prefix;
 typedef char get_prefix_size[sizeof(get_prefix)==100?1:-1];
+typedef struct update_request {
+    broker_vdm_message_header header;
+    broker_vdm_update_values values;
+} update_request;
+typedef char update_request_size[sizeof(update_request)==48?1:-1];
+
+BOOL OpenNtBaseEncodeUpdateCommand(const BASE_API_MSG *message,uint32_t request,uint32_t generation,
+    void *output,uint32_t capacity,uint32_t *required)
+{
+    update_request wire={0};
+    if (required) *required=0;
+    if (!message || !required || !request || !generation ||
+        message->u.UpdateVDMEntry.EntryIndex>UPDATE_VDM_HOOKED_CTRLC) return FALSE;
+    wire.values.entry=message->u.UpdateVDMEntry.EntryIndex;
+    wire.values.binary_type=message->u.UpdateVDMEntry.BinaryType;
+    wire.values.task=message->u.UpdateVDMEntry.iTask;
+    if (wire.values.entry==UPDATE_VDM_UNDO_CREATION) wire.values.creation_state=message->u.UpdateVDMEntry.VDMCreationState;
+    wire.header.version=BROKER_VDM_MESSAGE_VERSION;
+    wire.header.bytes=sizeof(wire); wire.header.operation=BROKER_VDM_UPDATE;
+    wire.header.request_id=request; wire.header.generation=generation;
+    wire.header.payload_bytes=sizeof(wire.values);
+    *required=sizeof(wire);
+    if (!output) return TRUE;
+    if (capacity<sizeof(wire)) return FALSE;
+    memcpy(output,&wire,sizeof(wire));
+    return TRUE;
+}
+BOOL OpenNtBaseDecodeUpdateCommand(const void *input,uint32_t bytes,uint32_t generation,
+    PBASE_API_MSG message,uint32_t *request)
+{
+    update_request wire;
+    broker_vdm_message_header header;
+    if (!message || !request || bytes!=sizeof(wire) ||
+        !broker_vdm_message_read(input,bytes,generation,0,&header) ||
+        header.operation!=BROKER_VDM_UPDATE) return FALSE;
+    memcpy(&wire,input,sizeof(wire));
+    if (wire.values.entry>UPDATE_VDM_HOOKED_CTRLC ||
+        (wire.values.entry!=UPDATE_VDM_UNDO_CREATION && wire.values.creation_state) ||
+        !OpenNtBaseDecodeValues(&wire.values,sizeof(wire.values),BROKER_VDM_UPDATE,message)) return FALSE;
+    *request=header.request_id;
+    return TRUE;
+}
 
 BOOL OpenNtBaseEncodeCheckCommand(const BASE_API_MSG *message, uint32_t request,
     uint32_t generation, void *output, uint32_t capacity, uint32_t *required)
@@ -29,7 +71,12 @@ BOOL OpenNtBaseEncodeCheckCommand(const BASE_API_MSG *message, uint32_t request,
         !OpenNtBaseEncodeCheckPayload(&message->u.CheckVDM,NULL,0,&payloadBytes) ||
         payloadBytes>UINT32_MAX-sizeof(prefix)) return FALSE;
     total=sizeof(prefix)+payloadBytes;
-    if (!OpenNtBaseEncodeValues(message,BROKER_VDM_CHECK,&prefix.values,sizeof(prefix.values))) return FALSE;
+    /* iTask is output-only; VDMState is initialized to FALSE by BaseCheckVDM.
+     * Neither caller scratch value is a command request field. */
+    prefix.values.binary_type=message->u.CheckVDM.BinaryType;
+    prefix.values.code_page=message->u.CheckVDM.CodePage;
+    prefix.values.creation_flags=message->u.CheckVDM.dwCreationFlags;
+    prefix.values.drive=message->u.CheckVDM.CurDrive;
     OpenNtBaseEncodeStartup(message->u.CheckVDM.StartupInfo,&prefix.startup);
     prefix.header.version=BROKER_VDM_MESSAGE_VERSION;
     prefix.header.bytes=total; prefix.header.operation=BROKER_VDM_CHECK;
@@ -56,7 +103,8 @@ BOOL OpenNtBaseDecodeCheckCommand(void *input, uint32_t bytes, uint32_t generati
         header.operation!=BROKER_VDM_CHECK) return FALSE;
     memcpy(&prefix,input,sizeof(prefix));
     decoded=*message;
-    if (!OpenNtBaseDecodeValues(&prefix.values,sizeof(prefix.values),BROKER_VDM_CHECK,&decoded) ||
+    if (prefix.values.task || prefix.values.state ||
+        !OpenNtBaseDecodeValues(&prefix.values,sizeof(prefix.values),BROKER_VDM_CHECK,&decoded) ||
         !OpenNtBaseDecodeStartup(&prefix.startup,&decodedStartup) ||
         !OpenNtBaseDecodeCheckPayload((unsigned char *)input+sizeof(prefix),
             bytes-sizeof(prefix),&decoded.u.CheckVDM)) return FALSE;

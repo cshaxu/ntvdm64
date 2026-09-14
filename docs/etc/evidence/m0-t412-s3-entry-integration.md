@@ -837,4 +837,28 @@ output-only scalars, preserve short encode output, reject every truncated
 request and wrong generation, and verify repeat-safe release. Reply generation
 and request-ID mismatches are rejected in the actual lifecycle path. Maps select
 the formal command.obj functions. Real RPC GetNext resource transfer and the
-independent worker remain pending; no executable has been deployed.
+independent worker remain pending; deployment is unchanged.
+
+## Check/Update input direction review
+
+Original BaseCheckVDM initializes VDMState to FALSE and receives iTask from the
+server. Its request encoder now sends neither caller scratch value; decoder
+requires both canonical zero values before original dispatch. This corrects
+the earlier direction-neutral scalar-fragment composition without changing
+original source. Valid input code page, drive, binary type and flags remain.
+
+The 48-byte UpdateVDMEntry request now combines envelope and original scalar
+inputs. Task ID remains input to the original record lookup for every entry;
+creation state is input only for UPDATE_VDM_UNDO_CREATION. Process/wait/Console
+handles stay in the separate authenticated binding. The three original entry
+indexes are validated before dispatch; no replacement update/undo policy is
+introduced. An explicit original task input is required, including direct
+hooked-CtrlC messages; no uninitialized task value is invented or normalized.
+
+Formal compilation, nine-case RPC regression and original lifecycle pass. Actual original
+BaseUpdateVDMEntry calls now use the composed request. Focused tests verify
+poisoned Check output fields are omitted, Update entry-specific field values,
+every truncated Update length, request-ID publication and unchanged native
+resource fields. Existing command/capacity/startup/wait/cleanup cases remain
+passing. Source resource callbacks and complete product command admission are
+still unfinished; this is not three-program acceptance.

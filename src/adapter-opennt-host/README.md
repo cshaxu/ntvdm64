@@ -180,7 +180,12 @@ payload and complete reply storage before source consumption. Finish allocates
 nothing; apply validates generation/request ID, scalar widths, startup and all
 buffer capacities before publication. Original client code retains its error,
 wait and retry policy. Native resources remain separately bound. This is not
-yet a complete RPC request/resource transaction.
+yet a complete RPC request/resource transaction. Check request encoding omits
+output-only iTask and fixes VDMState to the original FALSE input. Update request
+encoding preserves task/binary/entry and includes creation state only for undo;
+other entries never read that unused scratch field. Its decoder checks the three
+original entry indexes and leaves native resource fields untouched. Original
+BaseUpdateVDMEntry calls use this composed request in lifecycle verification.
 
 `base_values.h`/`base_values.c` bind original basemsg.h's CheckVDM,
 UpdateVDMEntry and GetNextVDMCommand numeric fields. Exact-size copied fragments

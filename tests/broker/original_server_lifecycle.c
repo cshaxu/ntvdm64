@@ -226,6 +226,12 @@ NTSTATUS NTAPI CsrClientCallServer(PCSR_API_MSG message, PCSR_CAPTURE_HEADER cap
     unsigned char getRequest[100+16*BROKER_VDM_PAYLOAD_FIELDS];
     (void)capture;
     if (!scalar_negatives()) return STATUS_INVALID_PARAMETER;
+    if (number==CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepUpdateVDMEntry)) {
+        unsigned char update[48];
+        if (!OpenNtBaseEncodeUpdateCommand((PBASE_API_MSG)message,3,1,update,sizeof(update),&payloadBytes) ||
+            !OpenNtBaseDecodeUpdateCommand(update,payloadBytes,1,(PBASE_API_MSG)message,&requestId) || requestId!=3)
+            return STATUS_INVALID_PARAMETER;
+    }
     if (number == CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepCheckVDM)) ++launchCalls;
     if (enqueueGate && number == CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepGetNextVDMCommand)) {
         PBASE_GET_NEXT_VDM_COMMAND_MSG request = &((PBASE_API_MSG)message)->u.GetNextVDMCommand;
@@ -331,6 +337,44 @@ int main(int argc, char **argv)
     DWORD senderExit;
     if (argc==2 && !strcmp(argv[1],"--registry-child")) return 0;
     BaseSrvHeap = GetProcessHeap();
+    {
+        BASE_API_MSG input={0},target={0},saved;
+        STARTUPINFOA startup={0};
+        unsigned char check[234],update[48];
+        uint32_t size,id,cut,index;
+        broker_vdm_check_values checkValues;
+        broker_vdm_update_values updateValues;
+        input.u.CheckVDM.CmdLine="X.COM"; input.u.CheckVDM.CmdLen=6;
+        input.u.CheckVDM.iTask=0xccccccccu; input.u.CheckVDM.VDMState=0xcccc;
+        CHECK(OpenNtBaseEncodeCheckCommand(&input,1,1,check,sizeof(check),&size));
+        memcpy(&checkValues,check+32,sizeof(checkValues));
+        CHECK(!checkValues.task && !checkValues.state);
+        CHECK(OpenNtBaseDecodeCheckCommand(check,size,1,&target,&startup,&id));
+        CHECK(!target.u.CheckVDM.iTask && !target.u.CheckVDM.VDMState);
+        for(index=UPDATE_VDM_UNDO_CREATION;index<=UPDATE_VDM_HOOKED_CTRLC;++index) {
+            memset(&input,0,sizeof(input)); memset(&target,0,sizeof(target));
+            input.u.UpdateVDMEntry.EntryIndex=(WORD)index;
+            input.u.UpdateVDMEntry.iTask=42;
+            input.u.UpdateVDMEntry.BinaryType=BINARY_TYPE_DOS;
+            input.u.UpdateVDMEntry.VDMCreationState=VDM_PARTIALLY_CREATED;
+            target.u.UpdateVDMEntry.VDMProcessHandle=(HANDLE)0x1234;
+            target.u.UpdateVDMEntry.WaitObjectForParent=(HANDLE)0x5678;
+            saved=target;
+            CHECK(OpenNtBaseEncodeUpdateCommand(&input,8,9,update,sizeof(update),&size));
+            memcpy(&updateValues,update+32,sizeof(updateValues));
+            CHECK(updateValues.task==42 && updateValues.entry==index &&
+                updateValues.creation_state==(index==UPDATE_VDM_UNDO_CREATION?VDM_PARTIALLY_CREATED:0));
+            for(cut=0;cut<size;++cut) {
+                id=99;
+                CHECK(!OpenNtBaseDecodeUpdateCommand(update,cut,9,&target,&id));
+                CHECK(id==99 && !memcmp(&target,&saved,sizeof(saved)));
+            }
+            CHECK(OpenNtBaseDecodeUpdateCommand(update,size,9,&target,&id) && id==8);
+            CHECK(target.u.UpdateVDMEntry.VDMProcessHandle==(HANDLE)0x1234 &&
+                target.u.UpdateVDMEntry.WaitObjectForParent==(HANDLE)0x5678);
+        }
+        puts("PASS: Check output-only fields omitted; Update original scalar inputs composed without resource values");
+    }
     {
         BASE_API_MSG input={0},decodedInput={0},untouched={0};
         OPENNT_BASE_GET_COMMAND state={0};
