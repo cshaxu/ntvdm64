@@ -135,6 +135,29 @@ repair must bind the retained PIF through `BaseCheckVDM` before its original
 capture/dispatch—not by modifying a returned message—and then trace the
 remaining prompt handoff while preserving that original BaseSrv lifecycle.
 
+### PIF-sidecar RPC trace
+
+The fresh, rebuilt three-program set was deployed together and observed with
+the same temporary package-root sidecar.  Its BaseSrv trace records successful
+launcher `Check`/reservation/prepare, worker connection, and exactly two
+successful original `GetNextVDMCommand` requests.  The unchanged COMMAND
+observer records the first request as `state=0005` (PIF plus DOS request) and
+the second as `state=0200` with success (the source-defined
+`STARTUP_INFO_RETURNED` result).  This proves that the current RPC route
+delivers both the selected PIF and the first normal DOS command record; it is
+not a missing-PIF or missing-command failure.
+
+After that second result, the guest repeatedly opens and reads
+`system32\COMMAND.COM` but does not reach its buffered-console-input
+boundary or write Console text within the bounded observation.  The existing
+Console presentation observer produced no invalidation record, consistent with
+the guest not yet emitting a text update; it does not establish a presentation
+failure.  The temporary PIF was removed after the run and the orphaned broker
+and worker processes created by the observer timeout were explicitly cleaned
+up.  Logs are retained at
+`O:\ntvdm64\logs\m0-t412-s4-command-pif-rpc-trace-r3` and
+`O:\ntvdm64\logs\m0-t412-s4-command-pif-console-trace-r4`.
+
 ## Limit
 
 This establishes the host-side replacement boundary, copied stream route and
