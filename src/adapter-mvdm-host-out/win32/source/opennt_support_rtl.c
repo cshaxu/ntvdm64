@@ -94,6 +94,7 @@ static OPENNT_SUPPORT_THREAD_STATE *opennt_support_thread(void)
         state->Parameters.Environment = opennt_support_environment_snapshot();
         state->Peb.ProcessParameters = &state->Parameters;
         state->Peb.ProcessHeap = GetProcessHeap();
+        state->Peb.ImageBaseAddress = GetModuleHandleW(NULL);
         InitializeCriticalSection(&state->PebLock);
         state->Peb.FastPebLock = &state->PebLock;
         state->Teb.ClientId.UniqueProcess = (HANDLE)(ULONG_PTR)GetCurrentProcessId();

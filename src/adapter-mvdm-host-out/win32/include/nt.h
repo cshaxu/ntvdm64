@@ -216,6 +216,10 @@ typedef struct _OPENNT_SUPPORT_PEB {
     PVOID ProcessHeap;
     PRTL_CRITICAL_SECTION FastPebLock;
     ULONG EnvironmentUpdateCount;
+    /* DIVERGENCE(ADAPTER-WIN32-058): original BaseClient classifier compares
+     * the process image's machine field. This is a local public-API value,
+     * not a cast of the modern PEB or a guest-visible address. */
+    PVOID ImageBaseAddress;
 } OPENNT_SUPPORT_PEB, *POPENNT_SUPPORT_PEB;
 
 typedef struct _OPENNT_SUPPORT_TEB {

@@ -1,5 +1,14 @@
 # adapter-mvdm-host-out
 
+T412 S2 registers ADAPTER-WIN32-058: the existing private support PEB now
+supplies ImageBaseAddress from GetModuleHandleW(NULL) for original BaseClient
+GetBinaryTypeW's native machine check. This adds one process-local field and
+one public-API assignment, not a modern PEB cast or guest projection. The
+classifier fixture verifies native x86 image acceptance and DLL rejection;
+its production support translation unit is compile-checked. Product classifier
+selection remains pending. See the
+[S2 evidence](../../docs/etc/evidence/m0-t412-s2-original-lifecycle.md).
+
 This component owns only historical OpenNT-facing interface bindings required
 by imported `mvdm-host` source. It is not a BOP provider, an alternate MVDM
 implementation, or a general compatibility layer.

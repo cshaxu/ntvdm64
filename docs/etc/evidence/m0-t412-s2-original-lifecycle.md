@@ -191,3 +191,68 @@ acceptance, PE/DLL/malformed-image coverage or S2 closure. The finding supports
 keeping the original classification branches rather than introducing another
 binary parser. In the final composition only run16 invokes file classification;
 basesrv receives BinaryType for original DOS/WOW policy and ntvdm is the worker.
+
+## Original classifier restoration and relative-path boundary
+
+The independent launcher classifier cohort now compiles and links original
+GetBinaryTypeW (211 lines) and BaseIsDosApplication (60 lines) from the pinned
+OpenNT vdm.c. Their bodies are unchanged; the verifier compares normalized
+text against the source and fixed SHA-256 identities:
+
+- GetBinaryTypeW: `f7fd9766ea08e676a2fd457fb3fa508384630640032ce0615f752dc8a43f9fbd`.
+- BaseIsDosApplication: `9487407a2efc02764466cedbabb4e89424fd12d87d11601cce9fa5ad477f3711`.
+
+This restores another 271 original lines, totaling 1,038 across the S2 client
+groups; these are restored source lines, not net deletion. Source ownership
+remains opennt-host. The private symbol maps to OpenNtBaseGetBinaryTypeW to
+avoid Kernel32's import, and the link map proves both bodies come from the
+original client object rather than the native convenience API.
+
+The first linked run passed all four guest types and native PE but failed the
+missing relative-file test: native status C000003B mapped to error 161 rather
+than file-not-found. A direct probe showed nonzero relative-name length with
+NULL ContainingDirectory and NULL extra DWORD. Merely enlarging the NT4
+structure therefore did not restore the original contract. Original NT4
+curdir.c publishes a relative name only with a borrowed current-directory
+handle. The modern observed API does not supply that pair.
+
+Recovery disposition:
+
+1. Original classifier and suffix algorithm compose unchanged and are retained.
+2. Original NTDLL curdir.c requires its native PEB/current-directory ownership
+   and process-heap/lock environment; importing that subsystem is outside the
+   finite boundary. Instead the same-shaped adapter requests the existing
+   native full-path result (optional relative output NULL), clears the original
+   relative record and lets unchanged BaseClient take its existing full-path
+   branch. No extra output DWORD, directory reference, parser or state machine
+   is needed. Returned path allocation/free ownership remains native heap.
+3. No changed expression inside either original function is required.
+4. No newly authored classifier policy is required. The adapter body is three
+   statements, implementing only the declared path-result binding.
+
+The private declaration header also selects native NtOpenFile rather than the
+existing DEM DOS-path wrapper, retains the 48-byte x86 image-information
+structure and binds omitted native declarations/status constants. Existing
+private support PEB gains ImageBaseAddress from GetModuleHandleW(NULL), not a
+cast into modern PEB memory. Test suffix initialization uses the original
+baseinit.c values. Notices remain with imported source; no new source family
+or redistribution permission is claimed.
+
+`node tools/audit/Verify-BrokerOriginalClassifier.mjs` passes:
+
+- MEM, COMMAND and EDIT classify as DOS; WRITE as WOW.
+- The fixture's native x86 PE classifies correctly by absolute and relative path.
+- Loaded Kernel32 DLL is rejected with error 193 and untouched type output.
+- Controlled non-MZ .COM/.pif/.exe inputs follow the original suffix policy;
+  .bin is rejected with error 193 and untouched type output.
+- A missing relative file returns error 2/C0000034 and untouched type output.
+- Original-body hashes, link providers and x86 PE machine are checked. The
+  actual support translation unit is compile-checked; fixture bindings provide
+  the small process/TEB fields, not classification policy.
+
+The original lifecycle regression and native path/image probe also pass.
+Generated malformed inputs and binaries remain under build/M0-T412/S2;
+no guest program is executed and no deployment is changed. Native x64 image
+rejection, OS/2 media, path-race cases and final production selection remain
+unproven. S2 stays active: BaseCheckVDM and the remaining coherent launch
+closure, finite product bindings and old local-policy retirement still remain.

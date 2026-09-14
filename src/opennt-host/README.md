@@ -121,9 +121,17 @@ BaseUpdateVDMEntry is also restored unchanged in that cohort (57 lines;
 LF-normalized SHA-256
 `de56cfccd08922ae57df7332cc8df70f60db186f44f177336188c2d236e9fd26`).
 Its process-reference to wait-handle update is exercised against the original
-server. Classification remains pending its native path-output ABI binding;
-do not mistake the retained NT4 12-byte relative-name declaration for the
-modern native output capacity.
+server. The independent `OPENNT_BASE_CLIENT_CLASSIFIER` cohort now restores
+GetBinaryTypeW (211 lines) and BaseIsDosApplication (60 lines), unchanged from
+the same pinned source. LF-normalized hashes are respectively
+`f7fd9766ea08e676a2fd457fb3fa508384630640032ce0615f752dc8a43f9fbd` and
+`9487407a2efc02764466cedbabb4e89424fd12d87d11601cce9fa5ad477f3711`.
+Its finite private header renames the imported Kernel32 symbol collision,
+uses native NT file opening and supplies image declarations. The path binding
+requests the native full-path result and marks the original relative result
+empty, retaining the original full-path branch without passing an undersized
+NT4 structure to modern NTDLL. Classifier bodies/branches are unchanged.
+The focused x86 graph selects these bodies; final run16 selection is pending.
 
 | Identifier | Original purpose | Reason for divergence | Selected implementation | Files |
 | --- | --- | --- | --- | --- |

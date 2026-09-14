@@ -46,17 +46,12 @@ cleanup and registration; the default environment cohort still compiles.
 Detailed source identities and assertions are retained in the linked S2
 evidence. Product selection and retirement of local policy remain unfinished.
 
-BaseUpdateVDMEntry is now restored and passes original client/server process-to-
-wait conversion (767 original client lines restored total). Classification
-review proves modern native path conversion writes beyond the old 12-byte
-relative-name structure; the guarded ABI probe is recorded in S2 evidence.
-Its correctly sized binding and classifier restoration are next. No current
-runtime regression or three-product acceptance is claimed from this finding.
-
-The native classifier dependency now passes exact original-status assertions
-for real MEM, COMMAND, EDIT and WRITE files, with unchanged input hashes.
-This supports retaining original classification branches in run16; it is
-not a guest execution test or selected classifier. See the same S2 evidence.
+Original GetBinaryTypeW/BaseIsDosApplication now pass focused x86 guest-type,
+PE, DLL, suffix and missing-file tests (1,038 original client lines restored
+total). A finite full-path binding avoids modern relative-output size and
+NULL-directory differences; original classifier bodies are unchanged. Final
+run16 selection, BaseCheckVDM/launch closure and local-policy retirement remain
+unfinished. This is not guest execution or three-product acceptance.
 
 ## T412 S1 historical checkpoints
 

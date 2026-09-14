@@ -42,3 +42,20 @@ RegisterWowExec cohort. Their service opcodes dispatch to the corresponding
 original BaseSrv routines; no per-opcode policy implementation is added here.
 BaseUpdateVDMEntry is now another original client caller of that same dispatch
 binding; its signature is declared for the forthcoming launcher composition.
+
+T412 S2 adds `basesrv/include/base_classifier.h` and
+`basesrv/source/base_classifier_path.c` for original BaseClient classification.
+The header retains original nturtl/ntmmapi structures and status constants,
+provides a private GetBinaryTypeW symbol and selects native NtOpenFile instead
+of the DOS-path DEM adapter. This is a run16 client dependency, not broker
+classification policy. The only new executable path binding calls native
+RtlDosPathNameToNtPathName_U with its optional relative result omitted and
+clears the original relative record, selecting the original full-path branch.
+Native relative output writes 16 bytes and can return a nonempty name without
+a directory handle, unlike original NT4's 12-byte borrowed-directory contract.
+No parser, handle table, queue or current-directory policy is added. Original
+curdir.c depends on native PEB/current-directory ownership and is not imported.
+The original body therefore composes at the finite-binding recovery rung;
+no mirror-body intrusion or new classifier algorithm is required. Focused
+positive/negative proof and remaining limits are recorded in the
+[S2 evidence](../../docs/etc/evidence/m0-t412-s2-original-lifecycle.md).

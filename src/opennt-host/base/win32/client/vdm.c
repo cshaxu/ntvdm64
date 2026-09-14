@@ -32,7 +32,7 @@ static VOID BaseSetLastNTError(NTSTATUS Status)
     SetLastError(RtlNtStatusToDosError(Status));
 }
 
-#if !defined(OPENNT_BASE_CLIENT_VDM_COMMANDS)
+#if !defined(OPENNT_BASE_CLIENT_VDM_COMMANDS) && !defined(OPENNT_BASE_CLIENT_CLASSIFIER)
 UINT BaseGetEnvNameType_U(WCHAR *Name, DWORD NameLength);
 
 BOOL BaseCreateVDMEnvironment(
@@ -944,5 +944,283 @@ BaseUpdateVDMEntry(
 	    break;
     }
     return TRUE;
+}
+#endif
+
+/* DIVERGENCE(OPENNT-HOST-014): independent launcher classifier cohort;
+ * finite native declarations and private symbol binding, original bodies. */
+#if defined(OPENNT_BASE_CLIENT_CLASSIFIER)
+#include <base_classifier.h>
+BOOL
+WINAPI
+GetBinaryTypeW(
+    IN  LPCWSTR  lpApplicationName,
+    OUT LPDWORD  lpBinaryType
+    )
+
+/*++
+
+Routine Description: Unicode version.
+    This API returns the binary type of lpApplicationName.
+
+Arguments:
+    lpApplicationName - Full pathname of the binary
+    lpBinaryType - pointer where binary type will be returned.
+
+Return Value:
+    TRUE - if SUCCESS; lpBinaryType has following
+                SCS_32BIT_BINARY    - Win32 Binary (NT or Chicago)
+                SCS_DOS_BINARY      - DOS Binary
+                SCS_WOW_BINARY      - Windows 3.X Binary
+                SCS_PIF_BINARY      - PIF file
+                SCS_POSIX_BINARY    - POSIX Binary
+                SCS_OS216_BINARY    - OS/2 Binary
+    FALSE - if file not found or of unknown type. More info with GetLastError
+--*/
+
+{
+    NTSTATUS Status;
+    UNICODE_STRING PathName;
+    RTL_RELATIVE_NAME RelativeName;
+    BOOLEAN TranslationStatus;
+    OBJECT_ATTRIBUTES Obja;
+    PVOID FreeBuffer = NULL;
+    HANDLE FileHandle, SectionHandle=NULL;
+    IO_STATUS_BLOCK IoStatusBlock;
+    LONG fBinaryType = SCS_32BIT_BINARY;
+    BOOLEAN bReturn = FALSE;
+    SECTION_IMAGE_INFORMATION ImageInformation;
+
+
+    try {
+        //
+        // Translate to an NT name.
+        //
+
+        TranslationStatus = RtlDosPathNameToNtPathName_U(
+				// DynamicCommandLine.Buffer ? DynamicCommandLine.Buffer : CommandLine->Buffer,
+				lpApplicationName,
+                                &PathName,
+                                NULL,
+                                &RelativeName
+                                );
+
+        if ( !TranslationStatus ) {
+            BaseSetLastNTError(STATUS_OBJECT_NAME_INVALID);
+            goto GBTtryexit;
+            }
+
+        FreeBuffer = PathName.Buffer;
+
+        if ( RelativeName.RelativeName.Length ) {
+            PathName = *(PUNICODE_STRING)&RelativeName.RelativeName;
+            }
+        else {
+            RelativeName.ContainingDirectory = NULL;
+            }
+
+	InitializeObjectAttributes(
+            &Obja,
+            &PathName,
+            OBJ_CASE_INSENSITIVE,
+            RelativeName.ContainingDirectory,
+            NULL
+            );
+
+        //
+        // Open the file for execute access
+        //
+
+        Status = NtOpenFile(
+                    &FileHandle,
+                    SYNCHRONIZE | FILE_EXECUTE,
+                    &Obja,
+                    &IoStatusBlock,
+                    FILE_SHARE_READ | FILE_SHARE_DELETE,
+                    FILE_SYNCHRONOUS_IO_NONALERT | FILE_NON_DIRECTORY_FILE
+                    );
+        if (!NT_SUCCESS(Status) ) {
+            BaseSetLastNTError(Status);
+            goto GBTtryexit;
+            }
+
+        //
+        // Create a section object backed by the file
+        //
+
+        Status = NtCreateSection(
+                    &SectionHandle,
+                    SECTION_ALL_ACCESS,
+                    NULL,
+                    NULL,
+                    PAGE_EXECUTE,
+                    SEC_IMAGE,
+                    FileHandle
+                    );
+        NtClose(FileHandle);
+
+        if (!NT_SUCCESS(Status) ) {
+
+            SectionHandle = NULL;
+
+	    switch (Status) {
+                case STATUS_INVALID_IMAGE_NE_FORMAT:
+#ifdef _X86_
+                    fBinaryType = SCS_OS216_BINARY;
+                    break;
+#endif
+
+		case STATUS_INVALID_IMAGE_PROTECT:
+		    fBinaryType = SCS_DOS_BINARY;
+		    break;
+
+		case STATUS_INVALID_IMAGE_WIN_16:
+		    fBinaryType = SCS_WOW_BINARY;
+		    break;
+
+                case STATUS_INVALID_IMAGE_NOT_MZ:
+                    fBinaryType = BaseIsDosApplication(&PathName, Status);
+                    if (!fBinaryType){
+                        BaseSetLastNTError(Status);
+                        goto GBTtryexit;
+		    }
+		    fBinaryType = (fBinaryType	== BINARY_TYPE_DOS_PIF) ?
+				  SCS_PIF_BINARY : SCS_DOS_BINARY;
+                    break;
+
+                default:
+                    BaseSetLastNTError(Status);
+                    goto GBTtryexit;
+                }
+            }
+        else {
+            //
+            // Query the section
+            //
+
+            Status = NtQuerySection(
+                        SectionHandle,
+                        SectionImageInformation,
+                        &ImageInformation,
+                        sizeof( ImageInformation ),
+                        NULL
+                        );
+
+            if (!NT_SUCCESS( Status )) {
+                BaseSetLastNTError(Status);
+                goto GBTtryexit;
+            }
+
+            if (ImageInformation.ImageCharacteristics & IMAGE_FILE_DLL) {
+                SetLastError(ERROR_BAD_EXE_FORMAT);
+                goto GBTtryexit;
+            }
+
+            if (ImageInformation.Machine !=
+                    RtlImageNtHeader(NtCurrentPeb()->ImageBaseAddress)->FileHeader.Machine) {
+
+#ifdef _MIPS_
+                if ( ImageInformation.Machine == IMAGE_FILE_MACHINE_R3000 ||
+                     ImageInformation.Machine == IMAGE_FILE_MACHINE_R4000 ) {
+                    ;
+                }
+                else {
+                    SetLastError(ERROR_BAD_EXE_FORMAT);
+                    goto GBTtryexit;
+                }
+#else
+                SetLastError(ERROR_BAD_EXE_FORMAT);
+                goto GBTtryexit;
+#endif // _MIPS_
+            }
+
+            if ( ImageInformation.SubSystemType != IMAGE_SUBSYSTEM_WINDOWS_GUI &&
+                ImageInformation.SubSystemType != IMAGE_SUBSYSTEM_WINDOWS_CUI ) {
+
+
+                if ( ImageInformation.SubSystemType == IMAGE_SUBSYSTEM_POSIX_CUI ) {
+                    fBinaryType = SCS_POSIX_BINARY;
+                }
+            }
+
+
+        }
+
+	*lpBinaryType = fBinaryType;
+
+	bReturn = TRUE;
+
+GBTtryexit:;
+	}
+    finally {
+
+        if (SectionHandle)
+            NtClose(SectionHandle);
+
+	if (FreeBuffer)
+            RtlFreeHeap(RtlProcessHeap(), 0,FreeBuffer);
+    }
+    return bReturn;
+}
+
+ULONG
+BaseIsDosApplication(
+    IN PUNICODE_STRING PathName,
+    IN NTSTATUS Status
+    )
+/*++
+
+Routine Description:
+
+    Determines if app is a ".com" or a ".pif" type of app
+    by looking at the extension, and the Status from NtCreateSection
+    for PAGE_EXECUTE.
+
+Arguments:
+
+    PathName    -- Supplies a pointer to the path string
+    Status      -- Status code from CreateSection call
+    bNewConsole -- Pif can exec only from a new console
+
+Return Value:
+
+    file is a com\pif dos application
+    SCS_DOS_BINARY - ".com", may also be a .exe extension
+    SCS_PIF_BINARY - ".pif"
+
+
+    0 -- file is not a dos application, may be a .bat or .cmd file
+
+--*/
+{
+    UNICODE_STRING String;
+
+         // check for .com extension
+    String.Length = BaseDotComSuffixName.Length;
+    String.Buffer = &(PathName->Buffer[(PathName->Length - String.Length) /
+                    sizeof(WCHAR)]);
+
+    if (RtlEqualUnicodeString(&String, &BaseDotComSuffixName, TRUE))
+	return BINARY_TYPE_DOS_COM;
+
+
+        // check for .pif extension
+    String.Length = BaseDotPifSuffixName.Length;
+    String.Buffer = &(PathName->Buffer[(PathName->Length - String.Length) /
+                    sizeof(WCHAR)]);
+
+    if (RtlEqualUnicodeString(&String, &BaseDotPifSuffixName, TRUE))
+	return BINARY_TYPE_DOS_PIF;
+
+
+        // check for .exe extension
+    String.Length = BaseDotExeSuffixName.Length;
+    String.Buffer = &(PathName->Buffer[(PathName->Length - String.Length) /
+        sizeof(WCHAR)]);
+
+    if (RtlEqualUnicodeString(&String, &BaseDotExeSuffixName, TRUE))
+	return BINARY_TYPE_DOS_EXE;
+
+    return 0;
 }
 #endif

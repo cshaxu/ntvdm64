@@ -19,8 +19,8 @@ int main(void)
         for(j=0;j<4;j++) value.guard[j]=0xa5a5a5a5;
         if(!RtlDosPathNameToNtPathName_U(names[i],&path,NULL,&value.relative)) return 3;
         /* The fourth DWORD is outside the original 12-byte structure. */
-        printf("case=%u old-size=%u extra-dword=%08lx relative-length=%u\n",
-            i,(unsigned)sizeof(OLD_RELATIVE),value.tail,value.relative.RelativeName.Length);
+        printf("case=%u old-size=%u extra-dword=%08lx relative-length=%u directory=%p\n",
+            i,(unsigned)sizeof(OLD_RELATIVE),value.tail,value.relative.RelativeName.Length,value.relative.ContainingDirectory);
         RtlFreeUnicodeString(&path);
         if(value.tail != 0) return 4;
         for(j=0;j<4;j++) if(value.guard[j] != 0xa5a5a5a5) return 5;
