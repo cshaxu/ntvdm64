@@ -337,3 +337,60 @@ synchronization identify the precise unavailable private dependencies. No new
 kernel/USER mirror import, success stub or project-owned replacement state
 machine is justified by this review. Focused/runtime verification must establish
 each selected binding before S2/S5 can claim its corresponding contract.
+
+## Resource-binding design after approval and transport probes
+
+The owner-approved exception supersedes the earlier authority hold above.
+The [transport probe](m0-t412-s1-rpc-resource-feasibility.md) now verifies direct
+and three-process delivery, shared position, read-only failure and absent
+target failure. The [full original compile probe](m0-t412-s1-original-server-compilation.md)
+proves the complete server owner can compile without rewriting its functions.
+Neither is original-lifecycle runtime acceptance.
+
+The binding must preserve these original call sites, not merely final bytes:
+
+| Original path | Resource action and required timing |
+| --- | --- |
+| BaseSrvCheckDOS, ready/returned record, around 1138 | Copy standard streams into the existing worker before paired parent wait creation and publication of VDM_TO_TAKE_A_COMMAND. |
+| BaseSrvCheckDOS, busy/pending record, around 1194 | Create the paired wait first, then duplicate streams, then add the DOS record. Failure closes the pair through the original helper. |
+| BaseSrvUpdateDOSEntry, around 1554/1618 | Acquire the actual worker process resource; applicable same-console DOS branch creates the parent wait and duplicates streams before returning the updated entry. Detached/new-console branch is distinct. |
+| BaseSrvGetNextVDMCommand, around 432 | Publish already prepared stream references. Do not introduce first delivery or a new duplication failure at this later point. |
+| BaseSrvCloseStandardHandles / BaseSrvClosePairWaitHandles | Release references in their recorded owner process. Preserve alias relationships; do not interpret a target-local number in the broker's handle table. |
+
+Selected finite design for implementation:
+
+1. RPC command payloads carry versioned bytes and stable identities; separate
+   typed OS attachments carry file/pipe, event and process resources. Original
+   request structures exist only locally after validated capture. Repeated
+   stdout/stderr references are represented by one attachment plus explicit
+   alias indices, not two independently duplicated values.
+2. Each product process that can receive an original duplicated reference
+   has a bounded authenticated resource-receipt endpoint. This is a transport
+   role in the existing three executables, not a fourth service or a generic
+   remote duplication API. Its operations accept only the admitted standard
+   stream and VDM/parent-wait roles for an authenticated registered generation.
+3. A package-private NtDuplicateObject-shaped binding calls that recipient
+   synchronously at the original source call site. The recipient retains its
+   OS attachment and acknowledges a non-pointer receipt ID. Only after that
+   acknowledgement may the original call return success. Failure propagates
+   immediately to the original branch; it is not deferred to command pickup.
+4. The server keeps role-specific local resource bindings alongside the
+   original records, not another DOS/WOW task state machine. The original
+   local handle-shaped fields refer to those local bindings. Outgoing command
+   capture sends receipt IDs; the recipient resolves only its own registered
+   receipt to a local native handle. No raw target-local HANDLE is serialized.
+5. Original release calls revoke the corresponding receipt. Aliased streams,
+   duplicate cleanup, caller/worker disappearance and failed RPC replies need
+   exact-once/negative tests. The receipt layer owns only resource acquisition,
+   handoff and release; original records own dispatch, retry and completion.
+6. The authenticated CSR request context retains the actual caller identity
+   and process/token resources. Do not substitute the broker PID merely to
+   make local attachment handles fit NtDuplicateObject arguments. The finite
+   binding translates resource provenance, not the service's identity checks.
+
+This chooses synchronous resource delivery over deferred acquisition. S2/S3
+must implement and test retention, receipt revocation, aliases and disconnect
+before this can be called a working original service. The tested transport
+does not yet prove these stateful resource contracts. Console membership and
+its shutdown-safe query mechanism remain the next S1 design gate; file/event
+receipt support must never be applied to Console pseudo-handles.

@@ -96,8 +96,9 @@
 14. A fixed-width original ABI that cannot carry a native value may own the
     smallest source-shaped table required by that ABI. It must not become a
     shared session mapping/token service.
-15. A native resource never enters guest state or broker IPC. Native x64 is
-    not a product, build, runtime or acceptance target.
+15. A native resource never enters guest state or broker command records.
+    Broker resource attachments are limited to the rule 12 exception. Native
+    x64 is not a product, build, runtime or acceptance target.
 16. Numeric data is not an opaque identity. Lengths, offsets, times, flags,
     errors, registers and guest addresses retain original semantics and must
     receive explicit range and overflow validation.

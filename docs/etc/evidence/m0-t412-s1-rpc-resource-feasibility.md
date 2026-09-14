@@ -55,7 +55,30 @@ The positive and read-only-negative cases pass. `shared-result.json` and
 logs remain in the build directory. No guest workload was executed by this
 transport-only test. The existing published product remains unchanged.
 
-## Scope and next gate
+## Three-process delivery continuation
+
+The same driver now also builds prefixed MIDL client/server entry points into
+the server fixture. In relay mode, the first server forwards the received
+file/event attachments synchronously to a separately launched target server.
+Only the target writes `B` and signals the event. The relay neither reopens
+the file nor copies its bytes. Returned OS references traverse both calls.
+
+All five cases pass: direct shared/read-only, relayed shared/read-only, and
+an absent downstream endpoint. Both relay cases require client, relay and
+target to exit zero. The absent-target case requires RPC_S_SERVER_UNAVAILABLE,
+null output, unsignaled event, unchanged file size and unchanged position.
+It does not start a target and is not a successful delivery. The relay exits
+zero only after returning the expected failure to the asserting client.
+
+The driver retains per-case JSON and process logs under the same build root;
+fresh MIDL generation and fixture compilation precede execution. These are
+three **fixture** processes, not the requested three product executables.
+
+This demonstrates synchronous third-process resource delivery and error
+propagation are available. It does not establish durable receipt ownership,
+rollback after partial delivery, or execution of original BaseSrv bodies.
+
+## Remaining integration gate
 
 This establishes the selected toolchain/OS can convey authenticated local
 file/event capabilities without reopening files or authoring a byte-pump.

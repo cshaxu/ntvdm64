@@ -35,6 +35,13 @@ This proves the declaration boundary is finite, not a linked/runtime provider.
 S1 remains active while resource duplication timing and finite process/Console
 bindings are resolved; S2--S6 retain the owner's sequential approval.
 
+The resource binding now selects synchronous recipient acknowledgement at
+the original duplication call sites, as specified in the
+[continued owner audit](../etc/evidence/m0-t412-s1-broker-owner-audit.md#resource-binding-design-after-approval-and-transport-probes).
+Five attachment cases pass, including three-process shared-position/read-only
+and absent-target failure. Durable receipt/rollback integration is not yet
+implemented. Console identity remains the next S1 design gate.
+
 The earlier source-audit checkpoint
 records all eight discussion rows, the 1,349-line local-provider replacement
 envelope (not net deletion), and outstanding finite-boundary designs. The

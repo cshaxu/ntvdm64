@@ -10,6 +10,7 @@ void *__RPC_USER midl_user_allocate(size_t size) { return malloc(size); }
 void __RPC_USER midl_user_free(void *value) { free(value); }
 
 #ifdef RESOURCE_SERVER
+static RPC_BINDING_HANDLE downstream;
 static RPC_STATUS RPC_ENTRY authorize(RPC_IF_HANDLE interface_id, void *context)
 {
     HANDLE caller = NULL, own = NULL;
@@ -31,13 +32,21 @@ static RPC_STATUS RPC_ENTRY authorize(RPC_IF_HANDLE interface_id, void *context)
     return result;
 }
 
-error_status_t Transfer(handle_t binding, HANDLE input, HANDLE event, HANDLE *output)
+error_status_t Server_Transfer(handle_t binding, HANDLE input, HANDLE event, HANDLE *output)
 {
     DWORD written;
     LARGE_INTEGER zero = {0}, position;
     error_status_t result = ERROR_INVALID_DATA;
     (void)binding;
     *output = NULL;
+    if (downstream) {
+        /* Synchronous third-process delivery; no file reopen or byte pump. */
+        RpcTryExcept { result = Client_Transfer(downstream, input, event, output); }
+        RpcExcept(1) { result = RpcExceptionCode(); }
+        RpcEndExcept
+        (void)RpcMgmtStopServerListening(NULL);
+        return result;
+    }
     if (SetFilePointerEx(input, zero, &position, FILE_CURRENT) && position.QuadPart == 1) {
         if (!WriteFile(input, "B", 1, &written, NULL)) result = GetLastError();
         else if (written == 1 &&
@@ -52,15 +61,25 @@ error_status_t Transfer(handle_t binding, HANDLE input, HANDLE event, HANDLE *ou
 int main(int argc, char **argv)
 {
     RPC_STATUS status;
-    if (argc != 2) return 1;
+    RPC_CSTR text = NULL;
+    if (argc != 2 && argc != 3) return 1;
+    if (argc == 3) {
+        if (RpcStringBindingComposeA(NULL, (RPC_CSTR)"ncalrpc", NULL,
+                (RPC_CSTR)argv[2], NULL, &text) ||
+            RpcBindingFromStringBindingA(text, &downstream) ||
+            RpcBindingSetAuthInfoA(downstream, NULL, RPC_C_AUTHN_LEVEL_PKT_PRIVACY,
+                RPC_C_AUTHN_WINNT, NULL, RPC_C_AUTHZ_NONE)) return 4;
+        RpcStringFreeA(&text);
+    }
     status = RpcServerUseProtseqEpA((RPC_CSTR)"ncalrpc", 2, (RPC_CSTR)argv[1], NULL);
     if (status == RPC_S_OK) status = RpcServerRegisterAuthInfoA(NULL, RPC_C_AUTHN_WINNT, NULL, NULL);
-    if (status == RPC_S_OK) status = RpcServerRegisterIfEx(resource_attachment_v1_0_s_ifspec,
+    if (status == RPC_S_OK) status = RpcServerRegisterIfEx(Server_resource_attachment_v1_0_s_ifspec,
         NULL, NULL, RPC_IF_ALLOW_LOCAL_ONLY | RPC_IF_ALLOW_SECURE_ONLY, 2, authorize);
     if (status != RPC_S_OK) { fprintf(stderr, "server setup=%lu\n", status); return 2; }
     puts("READY"); fflush(stdout);
     status = RpcServerListen(1, 2, FALSE);
     (void)RpcServerUnregisterIf(NULL, NULL, TRUE);
+    if (downstream) RpcBindingFree(&downstream);
     return status == RPC_S_OK ? 0 : 3;
 }
 #else
@@ -73,9 +92,10 @@ int main(int argc, char **argv)
     DWORD count;
     char data[2];
     error_status_t status = RPC_S_CALL_FAILED;
-    int readonly;
+    int readonly, unavailable;
     if (argc != 3 && argc != 4) return 1;
     readonly = argc == 4 && strcmp(argv[3], "readonly") == 0;
+    unavailable = argc == 4 && strcmp(argv[3], "unavailable") == 0;
     input = CreateFileA(argv[2], GENERIC_READ | GENERIC_WRITE,
         FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, CREATE_NEW, FILE_ATTRIBUTE_NORMAL, NULL);
     event = CreateEventW(NULL, TRUE, FALSE, NULL);
@@ -92,9 +112,21 @@ int main(int argc, char **argv)
         RpcBindingFromStringBindingA(text, &binding) ||
         RpcBindingSetAuthInfoA(binding, NULL, RPC_C_AUTHN_LEVEL_PKT_PRIVACY,
             RPC_C_AUTHN_WINNT, NULL, RPC_C_AUTHZ_NONE)) return 3;
-    RpcTryExcept { status = Transfer(binding, input, event, &output); }
+    RpcTryExcept { status = Client_Transfer(binding, input, event, &output); }
     RpcExcept(1) { status = RpcExceptionCode(); }
     RpcEndExcept
+    if (unavailable) {
+        if (status != RPC_S_SERVER_UNAVAILABLE || output != NULL ||
+            WaitForSingleObject(event, 0) != WAIT_TIMEOUT ||
+            !SetFilePointerEx(input, zero, &position, FILE_CURRENT) ||
+            position.QuadPart != 1 || GetFileSize(input, NULL) != 1) {
+            fprintf(stderr, "unavailable=%lu\n", status); return 8;
+        }
+        CloseHandle(input); CloseHandle(event);
+        RpcBindingFree(&binding); RpcStringFreeA(&text);
+        puts("PASS: unavailable target fails synchronously without mutation or signaling");
+        return 0;
+    }
     if (readonly) {
         if (status != ERROR_ACCESS_DENIED || output != NULL ||
             WaitForSingleObject(event, 0) != WAIT_TIMEOUT ||
