@@ -334,3 +334,28 @@ receipt identity/cleanup contract: preserve output alias identity, tolerate its
 repeated revocation, and separately journal only completed acquisitions on
 failure. It does not prove remote standard-stream dispatch or handle leak
 freedom, and does not change the original source or deployed executable.
+
+## Pending acquisition journal
+
+vdm_delivery.c/.h implements only the cleanup bookkeeping required by the
+source-proven mixed-field failure. Original CSR native-handle ownership cannot
+serve as cross-process receipt bookkeeping; original BaseSrv remains the
+algorithm owner. Existing receipt storage owns received resources, not sender
+acquisitions. The journal therefore reserves memory before delivery, stores
+validated generation/receipt acknowledgements, and permits ownership commit
+only when every tracked acquisition is known. No original mirror is modified.
+
+Rollback visits the known acquisitions and retains failed revoke attempts;
+unknown replies stay pending rather than being treated as no delivery. Explicit
+forget is allowed only after definitive non-delivery or confirmed recipient
+rundown. All local recipient contexts must outlive pending work; the owner
+serializes operations, and callbacks must not reenter the journal. Commit only
+releases bookkeeping and adds no fallible remote operation after publication.
+
+`node tools/audit/Verify-VdmDeliveryJournal.mjs` builds x86 /MT below
+build/M0-T412/S3/delivery-journal and passes partial-acquisition rollback,
+unknown-reply retention, revoke failure/retry, successful commit and sender
+event survival. It uses production receipt storage and real local event
+references; the failed revoke result is controlled, not a real broken RPC.
+This is not final sender dispatch wiring, loss reconciliation or rundown proof.
+Those remain mandatory before the source callback can publish real commands.

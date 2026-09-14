@@ -39,6 +39,18 @@ and concurrent endpoint integration remain unfinished. It is not yet selected
 by a published product executable. Details are in the
 [S3 entry evidence](../../docs/etc/evidence/m0-t412-s3-entry-integration.md).
 
+`vdm_delivery.c/.h` is the pending-acquisition journal required by original
+BaseSrv's partial stream update behavior. Reserve bookkeeping before RPC,
+acknowledge only a validated generation/receipt, and commit at original
+successful ownership publication. Rollback revokes only acknowledged receipts,
+retains failed revocations for retry, and leaves unknown replies pending. The
+explicit forget operation requires proven non-delivery or recipient rundown;
+it must never discard an indeterminate live-peer receipt. Endpoint contexts
+and journal storage must outlive pending work. Operations are owner-serialized;
+callbacks must not mutate/reenter that journal. This is resource cleanup only,
+not a new task transaction or a replacement of original service ordering.
+The focused local test passes; real transport integration/rundown is pending.
+
 M0 T272 S5 disposition register:
 
 - `wire.c` and `wire.h`: `new neutral contract`.  There is no reusable
