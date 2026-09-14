@@ -55,6 +55,14 @@ exit zero, outer `reenter-dec`, and outer parent exit-code/disconnect. The
 original native-child reporter retains the copied tail and zero child result.
 The log is `O:\ntvdm64\logs\m0-t412-s4-bop-native-child-r2`.
 
+The negative staged regression used `COMMAND.COM /c run16.exe
+NOT-A-REAL-S4-PROGRAM.EXE`. The original native-child reporter recorded phase
+1 value `2` (file not found), while the outer worker still recorded
+`reenter-inc`, `reenter-dec` and normal parent exit cleanup. This proves the
+nonzero child result reaches the COMMAND-side completion path without
+stranding the worker. The log is
+`O:\ntvdm64\logs\m0-t412-s4-bop-nonzero-r1`.
+
 ## Limit
 
 This establishes the host-side replacement boundary, copied stream route and
