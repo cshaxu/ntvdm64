@@ -6,8 +6,9 @@ Owner requested research/repair, build/test, publication, commit/push, then
 wait. Baseline is pushed `accf1e865` (S8 admission), with S7 code at
 `8335f38bd`. The apparent result corruption is **not a demonstrated host
 divergence**. Both surprising results below are explicit original COMMAND
-paths. No product repair or changed guest behavior is claimed. S8 awaits
-owner disposition; T412 and its remaining acceptance obligations stay open.
+paths. No product repair or changed guest behavior is claimed. The subsequent
+[owner acceptance](#owner-accepted-s8-closure) closes S8; T412 and its remaining
+acceptance obligations stay open.
 
 | Workload | Observed result | Original owner |
 | --- | --- | --- |
@@ -156,8 +157,23 @@ Formal build products copied to `O:\winnt`, with build/deployment hashes equal:
 S8 retains test-only observer/service assertions, a source/image check, a
 runtime matrix driver and indexed evidence. Product-source delta is zero;
 the guest is unchanged. This is a completed diagnosis and verification,
-**not** a behavioral repair or full T412 closure. Owner decision is needed
-before changing original guest exit behavior. No next S/T is admitted.
+**not** a behavioral repair or full T412 closure. The owner subsequently
+required retaining that original behavior, as recorded below. No next S/T is admitted.
 
 Full WOW/WRITE recovery, redirection, MEM accounting and the remaining T412
 matrix are neither retested nor closed by these exit-code controls.
+
+## Owner-accepted S8 closure
+
+Owner: “就按照原版语义来 不得改动 那么当前s任务就算收口啦？”
+This accepts the source/image/runtime findings delivered at pushed `67ee292cb`
+and closes S8. Original prompt EXIT and resident /c results remain unchanged;
+neither guest patching nor host exit-code normalization is authorized.
+The pending behavior decision is resolved, not deferred as an exit-code bug.
+
+Closure relies on the existing 15-case final-c Console matrix, image/source
+identity test, nonzero-then-zero service check, VdmTib gate and published hashes
+above. This delivery changes governance records only: no source, build,
+guest media or deployed executable changes, and no new runtime claim.
+Documentation governance, relative links and diff checks are the closure gates.
+T412 stays open between S packets; no next S/T is activated. Await owner direction.

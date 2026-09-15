@@ -310,8 +310,10 @@ This sequential extension does not allocate a new T or change candidate order.
 S8's [source/image/runtime result](../evidence/m0-t412-s8-command-exit-provenance.md)
 proves the observed 1 and /c zero are original guest exits, not a demonstrated
 host propagation defect. Products remain unchanged; regression tests and
-evidence are delivered. Changing those guest semantics requires owner
-disposition outside S8's load-only-media scope. Current Status owns the wait.
+evidence are delivered. The owner subsequently required original semantics
+unchanged and [accepted S8 closure](../evidence/m0-t412-s8-command-exit-provenance.md#owner-accepted-s8-closure).
+No exit-code behavior change remains pending. T412 stays open between S packets;
+current Status owns the intermission and any subsequent admission.
 
 The first no-source-change control, `run16 COMMAND.COM /c MEM.EXE`, displays
 MEM output and returns zero (`O:\winnt\logs\m0-t412-s6-nested-mem.txt`). It

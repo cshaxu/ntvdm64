@@ -2,21 +2,20 @@
 
 ## Current Work
 
-**Active: M0 T412 S8.**
+**No active M/T/S packet.**
 
 S7 is [closed by owner direction](../etc/evidence/m0-t412-s7-interactive-child-repair.md#s7-owner-directed-closure-and-s8-handoff)
 at pushed `8335f38bd`: nested COMMAND/MEM and EDIT return are delivered.
-S8 [diagnosis and verification](../etc/evidence/m0-t412-s8-command-exit-provenance.md)
-prove EXIT=1 and resident /c=0 originate in unchanged original COMMAND.
+S8 is [closed by owner acceptance](../etc/evidence/m0-t412-s8-command-exit-provenance.md#owner-accepted-s8-closure)
+at delivered `67ee292cb`: preserve original COMMAND exit semantics unchanged.
 All 15 Console cases pass; direct DOS/native result 7 propagates correctly.
-No product repair is justified. Await owner disposition before any guest
-behavior change; no next packet is admitted.
+T412 remains open between S packets. No next packet is admitted; await owner.
 
 The [S6 VDM TIB repair](../etc/evidence/m0-t412-s6-vdm-tib-storage-repair.md)
 retains its full-storage link gate. Current products are at `O:\winnt`;
 full T412 matrix and owner acceptance remain open.
 
-## Active Packet
+## Closed S8 Packet
 
 ### M0 T412 S8 — COMMAND exit-code provenance and repair
 
@@ -45,7 +44,7 @@ S4 is closed by its [requirement ledger](../etc/evidence/m0-t412-s4-closure.md):
 real COMMAND/MEM/EDIT, BOP reentry, copied native-child lifetime, Console
 stdout/stderr, EOF and nonzero status are now observed.  Guest COMMAND `>` is
 distinguished and remains the existing Redirector boundary; it was not folded
-into S4. S5 is closed by its [completion disposition](../etc/evidence/m0-t412-s5-wow-idle-lifecycle.md#s5-completion-disposition). S6 and S7 are closed by owner direction at their bounded repairs; S8 is the only active packet. The remaining S6 full-T matrix and removal accounting are retained, not marked passed. S3
+into S4. S5 is closed by its [completion disposition](../etc/evidence/m0-t412-s5-wow-idle-lifecycle.md#s5-completion-disposition). S6 and S7 are closed by owner direction at their bounded repairs; S8 is closed with original exit semantics accepted. The remaining S6 full-T matrix and removal accounting are retained, not marked passed. S3
 delivered the three-product command path; its final obsolete-source deletion
 remains explicitly carried into S6. See the
 [S2 transition](../etc/evidence/m0-t412-s2-original-lifecycle.md#s2-bounded-conclusion-and-s3-transition).
