@@ -581,8 +581,30 @@ is selected.
 The same exit code was observed in a separately redirected diagnostic run, so
 it is not attributed to that altered Console container.  This is narrow
 evidence that reservation-bound WOW identity, the `-1` original server
-sentinel and completion cleanup are active in the real package.  It is **not**
-evidence that WOWEXEC, DOSX, WOW32, USER private callbacks or WRITE itself has
-started: none of their subsequent command/callback markers occurred before
-the source-owned worker exit.  Those remain the explicit WOW16 workload
-boundary; S5 does not manufacture a provider-side success response.
+sentinel and completion cleanup are active in the real package.  It is not
+evidence that WOWEXEC, a successful WOW32 provider initialization, USER
+private callbacks or WRITE itself completed; those remain the explicit WOW16
+workload boundary, and S5 does not manufacture a provider-side success
+response.
+
+### Correction: worker reaches the original WOW ingress
+
+The existing host-only observations were then enabled without changing worker
+control flow.  In the same staged package,
+`O:\winnt\logs\m0-t412-s5-wow-depth-20260914-213645.config.log` records
+original configuration completion with `COMMAND.COM` copied from the package
+system directory, and the paired `*.wow-bop.log` records
+`MVDM-WOW-BOP-ENTRY cs=01C7 ip=AEBC`.  This is the direct entry to original
+`MS_bop_1`, the `KRNL386 → SafeLoadLibrary("WOW32") → W32Init/W32Dispatch`
+owner path.  The broker trace for that exact run again records the shared-WOW
+PIF request and completion with exit `6`.
+
+Accordingly, the previous statement that no WOW32 boundary had been reached
+is corrected: the worker does reach the original WOW ingress.  The current
+run does **not** yet distinguish the next internal result (DLL load failure,
+missing export, `W32Init` false, or later dispatch failure), because the
+staged worker is not the same artifact as the current formal product and did
+not emit a matching provider-result witness.  The evidence therefore narrows
+the defect to *after* original WOW ingress and before a successful provider
+ready marker; it neither blames BaseSrv nor claims the known historical
+`W32Init FALSE` frontier has been reproduced by this artifact.
