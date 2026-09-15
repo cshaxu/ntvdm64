@@ -10,6 +10,7 @@ typedef struct OPENNT_BASE_RESERVATION {
     DWORD worker_pid,worker_generation;
     ULONG task;
     HANDLE console,worker;
+    BOOL shared_wow;
     broker_vdm_receipts streams;
     HANDLE worker_streams[3];
     DWORD worker_stream_count;
@@ -83,7 +84,7 @@ DWORD OpenNtBaseReservationCreate(OPENNT_BASE_RESERVATIONS *state,DWORD launcher
     if (!state->next) { LeaveCriticalSection(&state->lock);HeapFree(GetProcessHeap(),0,entry);return ERROR_ARITHMETIC_OVERFLOW; }
     entry->id=state->next++;
     entry->launcher_pid=launcher_pid;entry->launcher_generation=launcher_generation;
-    entry->task=task;entry->console=console;
+    entry->task=task;entry->console=console;entry->shared_wow=shared_wow;
     if (broker_vdm_receipts_initialize(&entry->streams,launcher_generation)) {
         LeaveCriticalSection(&state->lock);HeapFree(GetProcessHeap(),0,entry);
         return ERROR_INVALID_DATA;
@@ -198,12 +199,12 @@ DWORD OpenNtBaseReservationPrepareWorker(OPENNT_BASE_RESERVATIONS *state,uint64_
 }
 
 DWORD OpenNtBaseReservationClaimWorker(OPENNT_BASE_RESERVATIONS *state,DWORD worker_pid,
-    DWORD worker_generation,uint64_t *reservation,ULONG *task,HANDLE *console)
+    DWORD worker_generation,uint64_t *reservation,ULONG *task,HANDLE *console,BOOL *shared_wow)
 {
     LIST_ENTRY *cursor;
-    if (!state || !worker_pid || !worker_generation || !reservation || !task || !console)
+    if (!state || !worker_pid || !worker_generation || !reservation || !task || !console || !shared_wow)
         return ERROR_INVALID_PARAMETER;
-    *reservation=0;*task=0;*console=NULL;
+    *reservation=0;*task=0;*console=NULL;*shared_wow=FALSE;
     EnterCriticalSection(&state->lock);
     for (cursor=state->entries.Flink;cursor!=&state->entries;cursor=cursor->Flink) {
         OPENNT_BASE_RESERVATION *entry=CONTAINING_RECORD(cursor,OPENNT_BASE_RESERVATION,link);
@@ -215,7 +216,7 @@ DWORD OpenNtBaseReservationClaimWorker(OPENNT_BASE_RESERVATIONS *state,DWORD wor
             LeaveCriticalSection(&state->lock);return ERROR_ALREADY_EXISTS;
         }
         entry->worker_generation=worker_generation;
-        *reservation=entry->id;*task=entry->task;*console=entry->console;
+        *reservation=entry->id;*task=entry->task;*console=entry->console;*shared_wow=entry->shared_wow;
         LeaveCriticalSection(&state->lock);return ERROR_SUCCESS;
     }
     LeaveCriticalSection(&state->lock);return ERROR_NOT_FOUND;

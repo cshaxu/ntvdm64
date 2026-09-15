@@ -336,21 +336,24 @@ DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *service,HANDLE process,
         uint64_t reservation=0;
         ULONG task=0;
         HANDLE console=NULL;
+        BOOL shared_wow=FALSE;
         broker_vdm_receipts_initialize(&connection->streams,connection->process.SequenceNumber);
         error=OpenNtBaseReservationClaimWorker(service->reservations,
             (DWORD)connection->process.ClientId.UniqueProcess,connection->process.SequenceNumber,
-            &reservation,&task,&console);
+            &reservation,&task,&console,&shared_wow);
         if (error==ERROR_NOT_FOUND) error=ERROR_SUCCESS;
         else if (!error) {
             OPENNT_BASE_WORKER_WATCH *watch;
-            connection->reservation=reservation;connection->task=task;connection->console=console;
+            connection->reservation=reservation;connection->task=task;
+            connection->console=console;connection->wow=shared_wow;
             /* This is the post-create registration performed by original
              * BaseSrvCreateProcess: publish the authenticated worker as a
              * VDM and attach its CSR sequence to the source ConsoleRecord.
              * The standalone learns that fact only when the reservation-bound
              * worker connects; it does not invent another worker state. */
             connection->process.fVDM=TRUE;
-            BaseSrvUpdateVDMSequenceNumber(console,connection->process.SequenceNumber,task);
+            BaseSrvUpdateVDMSequenceNumber(shared_wow ? OPENNT_BASE_CONSOLE_WOW : console,
+                connection->process.SequenceNumber,task);
             watch=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*watch));
             if (!watch || !DuplicateHandle(GetCurrentProcess(),connection->process.ProcessHandle,
                 GetCurrentProcess(),&watch->process.ProcessHandle,0,FALSE,DUPLICATE_SAME_ACCESS)) {

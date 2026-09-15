@@ -22,13 +22,13 @@ static DWORD WINAPI same_console_query(void *context,HANDLE caller,const HANDLE 
 int main(int argc,char **argv)
 {
     OPENNT_BASE_SERVICE *service=NULL;
-    OPENNT_BASE_CONNECTION *launcher=NULL,*worker=NULL,*later=NULL;
-    PROCESS_INFORMATION child={0},laterChild={0};
+    OPENNT_BASE_CONNECTION *launcher=NULL,*worker=NULL,*later=NULL,*wowWorker=NULL;
+    PROCESS_INFORMATION child={0},laterChild={0},wowChild={0};
     STARTUPINFOA startup={sizeof(startup)};
     HANDLE self=NULL;
-    DWORD launcherGeneration=0,workerGeneration=0,laterGeneration=0,queryCalls=0;
-    uint64_t reservation=0,claimed=0;
-    ULONG task=0;
+    DWORD launcherGeneration=0,workerGeneration=0,laterGeneration=0,wowGeneration=0,queryCalls=0;
+    uint64_t reservation=0,claimed=0,wowReservation=0;
+    ULONG task=0,wowTask=0;
     HANDLE console=NULL;
     char command[MAX_PATH+32];
     BASE_API_MSG check={0},reply={0},update={0},get={0};
@@ -193,6 +193,65 @@ int main(int argc,char **argv)
     CHECK(OpenNtBaseServiceDisconnect(later)==ERROR_SUCCESS);later=NULL;
     TerminateProcess(laterChild.hProcess,0);WaitForSingleObject(laterChild.hProcess,INFINITE);
     CloseHandle(laterChild.hThread);CloseHandle(laterChild.hProcess);laterChild.hThread=laterChild.hProcess=NULL;
+
+    /* The worker learns WOW from its launcher reservation.  This retains the
+     * original -1 Console sentinel for sequence publication and ExitVDM;
+     * it is not inferred from a worker-supplied request bit. */
+    check.u.CheckVDM.BinaryType=BINARY_TYPE_WIN16;
+    check.u.CheckVDM.ConsoleHandle=OPENNT_BASE_CONSOLE_EXISTING;
+    CHECK(OpenNtBaseEncodeCheckCommand(&check,8,launcherGeneration,NULL,0,&wireBytes));
+    free(wire);wire=malloc(wireBytes);CHECK(wire && OpenNtBaseEncodeCheckCommand(
+        &check,8,launcherGeneration,wire,wireBytes,&wireBytes));
+    CHECK(OpenNtBaseServiceCheck(launcher,GetCurrentProcessId(),launcherGeneration,
+        wire,wireBytes,NULL,0,&answerBytes,&parentEvent,&parentReceipt)==ERROR_INSUFFICIENT_BUFFER && answerBytes);
+    free(answer);answer=malloc(answerBytes);CHECK(answer && OpenNtBaseServiceCheck(
+        launcher,GetCurrentProcessId(),launcherGeneration,wire,wireBytes,answer,answerBytes,
+        &answerBytes,&parentEvent,&parentReceipt)==ERROR_SUCCESS);
+    CHECK(OpenNtBaseApplyCheckReply(answer,answerBytes,launcherGeneration,8,&reply));
+    CHECK(reply.ReturnValue==STATUS_SUCCESS && reply.u.CheckVDM.VDMState==VDM_NOT_PRESENT);
+    wowTask=reply.u.CheckVDM.iTask;
+    CHECK(OpenNtBaseServiceCreateReservation(launcher,GetCurrentProcessId(),launcherGeneration,
+        wowTask,&wowReservation)==ERROR_SUCCESS);
+    CHECK(CreateProcessA(NULL,command,NULL,NULL,FALSE,CREATE_SUSPENDED,NULL,NULL,&startup,&wowChild));
+    CHECK(OpenNtBaseServicePrepareWorker(launcher,GetCurrentProcessId(),launcherGeneration,
+        wowReservation,wowChild.hProcess)==ERROR_SUCCESS);
+    ZeroMemory(&update,sizeof(update));
+    update.u.UpdateVDMEntry.EntryIndex=UPDATE_VDM_PROCESS_HANDLE;
+    update.u.UpdateVDMEntry.BinaryType=BINARY_TYPE_WIN16;
+    update.u.UpdateVDMEntry.iTask=wowTask;
+    CHECK(OpenNtBaseEncodeUpdateCommand(&update,9,launcherGeneration,NULL,0,&updateWireBytes));
+    free(updateWire);updateWire=malloc(updateWireBytes);CHECK(updateWire && OpenNtBaseEncodeUpdateCommand(
+        &update,9,launcherGeneration,updateWire,updateWireBytes,&updateWireBytes));
+    CHECK(OpenNtBaseServiceUpdate(launcher,GetCurrentProcessId(),launcherGeneration,
+        updateWire,updateWireBytes,NULL,0,&updateAnswerBytes,&parentEvent,&parentReceipt)==ERROR_INSUFFICIENT_BUFFER && updateAnswerBytes);
+    free(updateAnswer);updateAnswer=malloc(updateAnswerBytes);CHECK(updateAnswer && OpenNtBaseServiceUpdate(
+        launcher,GetCurrentProcessId(),launcherGeneration,updateWire,updateWireBytes,
+        updateAnswer,updateAnswerBytes,&updateAnswerBytes,&parentEvent,&parentReceipt)==ERROR_SUCCESS);
+    CHECK(ResumeThread(wowChild.hThread)!=(DWORD)-1);
+    CHECK(OpenNtBaseServiceConnect(service,wowChild.hProcess,&wowWorker,&wowGeneration)==ERROR_SUCCESS);
+    ZeroMemory(&get,sizeof(get));
+    get.u.GetNextVDMCommand.StartupInfo=&getStartup;
+    get.u.GetNextVDMCommand.VDMState=ASKING_FOR_WOW_BINARY;
+    get.u.GetNextVDMCommand.CmdLine=getCmd;get.u.GetNextVDMCommand.CmdLen=sizeof(getCmd);
+    get.u.GetNextVDMCommand.AppName=getApp;get.u.GetNextVDMCommand.AppLen=sizeof(getApp);
+    get.u.GetNextVDMCommand.Env=getEnv;get.u.GetNextVDMCommand.EnvLen=sizeof(getEnv);
+    get.u.GetNextVDMCommand.PifFile=getPif;get.u.GetNextVDMCommand.PifLen=sizeof(getPif);
+    get.u.GetNextVDMCommand.CurDirectory=getDirectory;get.u.GetNextVDMCommand.CurDirectoryLen=sizeof(getDirectory);
+    CHECK(OpenNtBaseEncodeGetCommand(&get,10,wowGeneration,NULL,0,&getWireBytes));
+    free(getWire);getWire=malloc(getWireBytes);CHECK(getWire && OpenNtBaseEncodeGetCommand(
+        &get,10,wowGeneration,getWire,getWireBytes,&getWireBytes));
+    CHECK(OpenNtBaseServiceGet(wowWorker,wowChild.dwProcessId,wowGeneration,getWire,getWireBytes,
+        &getAnswer,&wireBytes,&getWait,standard,&standardCount)==ERROR_SUCCESS);
+    CHECK(getAnswer!=NULL && getWait==NULL && standardCount==0);
+    OpenNtBaseServiceReleaseCommandReply(getAnswer);getAnswer=NULL;
+    { BOOL closeWowWait=FALSE;
+      CHECK(OpenNtBaseServiceExit(wowWorker,wowChild.dwProcessId,wowGeneration,TRUE,wowTask,
+          &closeWowWait)==ERROR_SUCCESS && !closeWowWait); }
+    CHECK(OpenNtBaseServiceDisconnect(wowWorker)==ERROR_SUCCESS);wowWorker=NULL;
+    CHECK(OpenNtBaseServiceReleaseReservation(launcher,GetCurrentProcessId(),launcherGeneration,wowReservation)==ERROR_SUCCESS);
+    TerminateProcess(wowChild.hProcess,0);WaitForSingleObject(wowChild.hProcess,INFINITE);
+    CloseHandle(wowChild.hThread);CloseHandle(wowChild.hProcess);wowChild.hThread=wowChild.hProcess=NULL;
+    Sleep(100);
     CHECK(OpenNtBaseServiceDisconnect(launcher)==ERROR_SUCCESS);launcher=NULL;
     CHECK(OpenNtBaseServiceIsEmpty(service));
     CHECK(OpenNtBaseServiceStop(service));service=NULL;

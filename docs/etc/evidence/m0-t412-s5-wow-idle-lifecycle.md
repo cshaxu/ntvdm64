@@ -450,3 +450,30 @@ empty-grace reevaluation, and a fresh second `Check → Reserve → Prepare →
 worker connect` path.  Exact test-owned `basesrv.exe` and `ntvdm.exe`
 processes were stopped afterward.  `O:\winnt` is the active test/package
 root; historical `O:\ntvdm64` references above are archive evidence only.
+
+### Reservation-bound WOW worker identity
+
+The original `BaseSrvUpdateVDMSequenceNumber` uses the `ConsoleHandle == -1`
+sentinel to associate an authenticated worker with the shared WOW record.
+The standalone reservation already carried the original `shared_wow` fact to
+allow a no-Console launch, but it had failed to retain that fact through the
+worker's later authenticated `Connect`.  That made the worker locally look
+like DOS: sequence publication selected the wrong record and a later original
+WOW `ExitVDM` branch would be rejected by the transport guard.
+
+The finite reservation binding now returns the already launcher-selected WOW
+kind together with task and Console identity.  On worker registration, the
+service sets its connection role from that retained fact and calls the original
+sequence publisher with the original WOW sentinel.  No worker-supplied field
+selects the role, and no new task classification or broker lifecycle policy
+was added.
+
+`basesrv-reservation-test.exe` verifies both ordinary DOS and no-Console
+shared-WOW claim results.  The authenticated service lifecycle fixture extends
+that proof through original `CheckWOW → UpdateVDMEntry →
+GetNextVDMCommand(ASKING_FOR_WOW_BINARY) → BaseSrvExitWOWTask`, with the
+reservation-bound worker role accepted and no worker wait closure requested.
+This is source-owned broker coordination evidence only.  It does not claim
+that the downstream WOW provider, DOSX, USER boundary, or the WRITE workload
+has completed; those belong to the separately queued WOW/debugger and WOW16
+workload packages.

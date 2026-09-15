@@ -19,7 +19,7 @@ DWORD OpenNtBaseReservationPrepareWorker(OPENNT_BASE_RESERVATIONS *,uint64_t res
 /* A worker cannot nominate a reservation.  The service finds the one whose
  * pre-registered live process identity matches this authenticated connection. */
 DWORD OpenNtBaseReservationClaimWorker(OPENNT_BASE_RESERVATIONS *,DWORD worker_pid,
-    DWORD worker_generation,uint64_t *reservation,ULONG *task,HANDLE *console);
+    DWORD worker_generation,uint64_t *reservation,ULONG *task,HANDLE *console,BOOL *shared_wow);
 /* Standard streams are copied by original BaseSrvUpdateVDMEntry before the
  * worker connects.  Retain typed broker resources under that finite
  * reservation until original GetNextVDMCommand consumes them. */
