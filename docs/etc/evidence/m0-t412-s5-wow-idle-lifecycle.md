@@ -673,3 +673,47 @@ exit-code zero.  The exact test-created worker PID 20420 and broker PID 28724
 were stopped after the observation.  This is a positive regression of the
 new earlier cancellation site; it does not claim a controlled
 timer-callback-in-progress race fixture, which remains an explicit S5 gate.
+
+### Controlled timer-callback / arriving-launcher race
+
+The remaining timer race was then exercised without relying on a near-expiry
+observation.  A disposable x86 `basesrv.exe` was compiled from the same
+production source with a test-only `MVDM_BASESRV_CALLBACK_BARRIER` definition.
+The definition is absent from the production source and production binary; it
+only opened `Local\\MvdmS5TimerReady` and `Local\\MvdmS5TimerRelease` while
+the real empty-timer callback held its existing lifecycle lock.  No BaseSrv
+state, record or worker policy was replaced.
+
+The isolated test broker entered the real 60-second empty grace and signalled
+the ready event at callback entry.  The controller then started positional
+`run16.exe MEM.EXE` while the callback was held, waited 750 ms, and released
+the callback.  The trace
+`O:\winnt\logs\m0-t412-s5-callback-barrier-20260914.trace` records the first
+broker's `empty-stop`, followed by a clean new broker's `empty-grace`, then
+the arriving launcher's authenticated `Connect → Check → Reserve → Prepare`,
+worker connect and original PIF/DOS/next-command acquisition.  The controller
+recorded `ready=yes launch-exit=0`; no stale record from the stopped instance
+was selected.  This proves the required safe outcome for the narrowest race:
+an arrival already in flight while an empty callback wins is retried by the
+bounded launcher path against one clean broker, rather than hanging, sharing
+old state, or leaving an orphaned endpoint.
+
+The exact test worker PID 35936 and replacement broker PID 24672 were stopped
+afterwards.  The test binary was replaced with the backed-up production broker
+(SHA-256 `3BA132779F25C62867CC080C28C4989E7D23D044CA6FCBE6F372D2F439B0D782`),
+and the temporary source hook was removed before this record was written.
+
+## S5 completion disposition
+
+S5 is complete for its admitted coordination/lifecycle scope.  The selected
+original `ExitVDM`, WOW PIF/first-VDM, DOS wait/reuse, broker singleton,
+authenticated reconnect, abnormal-worker cleanup and empty-service paths are
+all exercised by the focused x86 fixtures and the recorded three-program
+observations.  The controlled callback result closes the previously remaining
+drain/arrival race, and no worker idle timer or reaper was introduced.
+
+This does not claim successful `W32Init`, WOWEXEC/USER behavior or full
+WRITE execution.  Those are provider/workload concerns explicitly outside S5
+and remain named evidence limits for the later WOW16 work; they are not
+broker coordination failures.  T412 advances to S6 for same-product final
+verification, removal accounting and delivery closure.
