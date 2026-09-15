@@ -8,12 +8,16 @@
 #include <base_command.h>
 #include <base_wait.h>
 #include <base_stream.h>
+#include <base_interactive.h>
 #include "broker/vdm_receipt.h"
+typedef NTSTATUS (*OPENNT_USER_TEST_TOKEN_FOR_INTERACTIVE)(HANDLE,PLUID);
+extern OPENNT_USER_TEST_TOKEN_FOR_INTERACTIVE UserTestTokenForInteractive;
 struct OPENNT_BASE_SERVICE {
     OPENNT_BASE_PROCESS_REGISTRY registry;
     OPENNT_BASE_RESERVATIONS *reservations;
     CRITICAL_SECTION lock;
     ULONG next_console;
+    OPENNT_BASE_INTERACTIVE_SCOPE interactive;
 };
 struct OPENNT_BASE_CONNECTION {
     OPENNT_BASE_SERVICE *service;
@@ -161,6 +165,16 @@ OPENNT_BASE_SERVICE *OpenNtBaseServiceStart(void)
         OpenNtBaseDestroyProcessRegistry(&service->registry);
         DeleteCriticalSection(&service->lock);HeapFree(GetProcessHeap(),0,service);return NULL;
     }
+    /* srvvdm.c normally resolves this private winsrv entry point lazily.  The
+     * standalone broker has no winsrv DLL, but the original CheckWOW body
+     * already accepts precisely this predicate.  Supply the existing adapter
+     * binding and keep its trusted local logon scope outside the wire format. */
+    if (!OpenNtBaseInitializeInteractiveScope(&service->interactive)) {
+        OpenNtBaseReservationsDestroy(service->reservations);
+        OpenNtBaseDestroyProcessRegistry(&service->registry);
+        DeleteCriticalSection(&service->lock); HeapFree(GetProcessHeap(),0,service); return NULL;
+    }
+    UserTestTokenForInteractive=_UserTestTokenForInteractive;
     BaseSrvVDMInit();
     return service;
 }
@@ -334,6 +348,7 @@ DWORD OpenNtBaseServiceCheck(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD 
     CSR_THREAD thread={0};
     PCSR_THREAD previousThread;
     OPENNT_BASE_PROCESS_REGISTRY *previousRegistry;
+    const OPENNT_BASE_INTERACTIVE_SCOPE *previousInteractive;
     uint32_t request;
     uint32_t needed=0;
     NTSTATUS status;
@@ -361,8 +376,10 @@ DWORD OpenNtBaseServiceCheck(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD 
     thread.ClientId.UniqueProcess=connection->process.ClientId.UniqueProcess;
     previousThread=OpenNtBaseBindServerRequestThread(&thread);
     previousRegistry=OpenNtBaseBindProcessRegistry(&connection->service->registry);
+    previousInteractive=OpenNtBaseBindInteractiveScope(&connection->service->interactive);
     status=OpenNtBaseDispatchOperation((PCSR_API_MSG)&message,BROKER_VDM_CHECK,
         sizeof(message.u.CheckVDM));
+    OpenNtBaseBindInteractiveScope(previousInteractive);
     OpenNtBaseBindProcessRegistry(previousRegistry);
     OpenNtBaseBindServerRequestThread(previousThread);
     LeaveCriticalSection(&connection->service->lock);
