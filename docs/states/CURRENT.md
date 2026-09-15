@@ -2,102 +2,68 @@
 
 ## Current Work
 
-**Active: M0 T412 S10.**
+**Active: M0 T412 S11.**
 
-S7 is [closed by owner direction](../etc/evidence/m0-t412-s7-interactive-child-repair.md#s7-owner-directed-closure-and-s8-handoff)
-at pushed `8335f38bd`: nested COMMAND/MEM and EDIT return are delivered.
-S8 is [closed by owner acceptance](../etc/evidence/m0-t412-s8-command-exit-provenance.md#owner-accepted-s8-closure)
-at delivered `67ee292cb`: preserve original COMMAND exit semantics unchanged.
-All 15 Console cases pass; direct DOS/native result 7 propagates correctly.
-S9 [implementation and verification](../etc/evidence/m0-t412-s9-version-agreement.md)
-deliver shared APP_VERSION 0.0.412 and protocol 2, mutual rejection and
-incompatible-worker rollback at pushed df2467de0. Owner now authorizes the
-final closure packet and confirms DOSX/HIMEM/MSCDEX load at startup.
-This advances the delivered S9; it is not full device or WRITE acceptance.
-
-The [S6 VDM TIB repair](../etc/evidence/m0-t412-s6-vdm-tib-storage-repair.md)
-retains its full-storage link gate. Current products are at `O:\winnt`;
-full T412 matrix and owner acceptance remain open.
-
-S10 P3 implements the owner-authorized process-loss contract in the
-[final verification and accounting](../etc/evidence/m0-t412-s10-final-verification.md).
-Broker death fails running clients with 1722; premature worker death fails its
-unfinished task with 1067. Startup alone may start a missing broker; no runtime
-restart/replay. Launcher death rolls back unclaimed startup, preserving claimed
-VDMs and unrelated workers. Atomic startup Job protection closes the interval
-before the broker knows the child. Original guest semantics are unchanged.
-Final product verification passes: 17 Console cases, dual-worker failure
-isolation, three startup cut points, original-owner/RPC/version fixtures and
-broker empty/drain races. P3 is delivered for owner real-package confirmation;
-no next T is admitted and the task remains at the owner acceptance gate.
+Owner directs workspace cleanup and a new S to repair the Console regression
+with a correct, compact architecture. S10 reaches an owner-directed bounded
+handoff at pushed `157267256`, not full T acceptance. Its
+[broker verification](../etc/evidence/m0-t412-s10-final-verification.md) remains
+valid within its recorded matrix; EDIT-to-MEM display acceptance failed in
+the owner's narrow Windows Terminal session. The
+[investigation and handoff](../etc/evidence/m0-t412-s11-console-handoff.md)
+preserves reproduction evidence, limitations and retained research inputs.
+T412 remains open; no next T is admitted.
 
 ## Active Packet
 
-### M0 T412 S10 — Final broker package verification and closure
+### M0 T412 S11 — Console output geometry and lifecycle repair
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T412 S10; Ordinary Mode, one implementer then reviewer. |
-| Admission And Approval | Owner admits final T closure work, then explicitly authorizes startup-only broker creation and runtime failure on broker/worker death, plus three-process exception cleanup; build/test/commit/push then wait. |
-| Objective | Verify final three-program composition, process-loss containment, D01-D07/D10 and measured accounting without changing original guest lifetime/results. |
-| Non-goals | No new T, full WRITE recovery, guest changes, worker idle reaper, automatic runtime restart or task replay. |
-| Reference Baseline | df2467de0 delivery; whole-T comparison starts at S1 input 08b33351b1c341bb433f27ab517ee9a4e0bc3e0c. |
-| Files And ABI Surface | App wait/cleanup, authenticated broker lifetime attachment and client binding, original service process cleanup, tests/evidence. Protocol advances to 3 for the lifetime capability; APP_VERSION stays 0.0.412. |
-| Applicable Rules | All current execution, source, architecture, coding and document authorities; source-first minimal diff. |
-| Verification | Fresh x86 /MT build; original-owner fixtures, actual RPC/security/resources, Console matrix, WOW coordination and broker lifecycle/races; hashes, governance and Git synchronization. |
-| Expected Markers | Every mandatory broker contract passes on identified final inputs; separate historical proof, current proof and out-of-scope workload limits. |
-| Asset Needs | Final P3 build/M0-T412/S10/process-loss; historical P1/P2 final root; existing MSVC/Node and O:\winnt media; logs in O:\winnt\logs. |
-| Reporting Requirements | Measured mirror/overlay/project deltas, retained seam rationale, exact products and tests; stop after delivery. |
-| Stop Conditions | Unresolved mandatory contract, runtime regression or material owner-boundary change; record failure, never declare unsupported proof passed. |
-| Exit Criteria | Final scoped matrix and accounting complete, verified products published, closure evidence committed/pushed, worktree clean; await owner. |
-| Original Owner Request | “请你准入一个s任务来执行收口工作 完成了以后 编译测试提交推送等我”; then “if broker is dead, the ntvdm worker should exit”; startup can start broker, otherwise fail during the run when broker/worker dies. |
-| Similar-Issue Sweep | Final artifact lineage, obsolete local providers/entries, startup/drain/disconnect, version rejection and original DOS/WOW separation. |
+| Identifier Mode | M0 T412 S11; Ordinary Mode, implementer followed by final diff review. |
+| Admission And Approval | Owner authorizes cleanup and sequential S admission to solve the EDIT-to-MEM display bug through correct, compact architecture; commit and push authorized. |
+| Objective | COMMAND -> EDIT -> exit EDIT -> repeated MEM displays correct text, cursor and scrolling in native conhost and narrow ConPTY/Terminal, with correct host restoration. |
+| Non-goals | No graphical replacement, guest/CPU algorithm changes, broker redesign, forced stream-mode workaround, worker idle reaper, full WRITE recovery or bulk SoftPC-lib import. |
+| Reference Baseline | Pushed 157267256; S10 process-loss products at `O:\winnt`, APP_VERSION 0.0.412 / protocol 3; linked handoff preserves exact hashes and adverse results. |
+| Files And ABI Surface | Existing win32 Console adapter and its declarations, neutral session resource storage only as needed, minimal registered mirror bindings in nt_graph.c/nt_fulsc.c, focused observation tests and evidence. No planned wire ABI change. |
+| Applicable Rules | Execution/source recovery ladder, architecture/coding/document rules; preserve original owner, call shape, ordering and failure behavior. |
+| Verification | Original-source boundary review; automated conhost and ConPTY before/after EDIT matrix, repeated MEM, resize/scroll/cursor/mouse, clipping and API-failure negatives, cleanup and host restoration; fresh x86 /MT CCPU40 build, existing broker regressions, product hashes, governance and Git synchronization. |
+| Expected Markers | Actual viewport/buffer geometry and returned paint rectangles agree with the selected mapping; no unexplained blank gaps or clipped success; same mapping for paint/cursor/mouse; no runtime crash. |
+| Asset Needs | Intentionally retained manifested S10 investigation sources; new products below build/M0-T412/S11; existing O:\winnt media; observations only O:\winnt\logs. |
+| Reporting Requirements | Source-first design decision, before/after reproduction, mirror/overlay/autonomous line accounting, rejected workarounds, exact product identities and remaining owner acceptance. |
+| Stop Conditions | Source-proven need for CPU semantics, new component or other material boundary expansion; document and seek revised scope, never mask crashes or count VT replay as real Terminal acceptance. |
+| Exit Criteria | Repair and focused/regression tests pass; verified three-program package published, evidence committed/pushed and worktree clean; report for owner Terminal/RDP confirmation. T closure still requires final acceptance. |
+| Original Owner Request | “清理干净当前工作区 处理好未提交文档和代码 然后准入一个新的s任务 要求能用正确和精简的合理架构解决这个bug”. |
+| Similar-Issue Sweep | Stream/frame transitions, active screen-buffer lifetime, actual versus requested dimensions, scrollback, palette-triggered resize, paint clipping, cursor/mouse coordinates, nested/native child and exit restoration; separately triage recorded short-window C-VID fault. |
 | Working Plan | [T412 S plan](../etc/operations/m0-t412-broker-restoration-plan.md). |
-
-## Closure work
-
-S1-S8 reached their recorded bounded conclusions; S9 delivery is advanced by
-owner authorization of S10. The indexed [working plan](../etc/operations/m0-t412-broker-restoration-plan.md)
-and [supporting records](../etc/README.md) retain the complete requirement chain.
-Earlier status chronology is preserved in the [snapshot](../etc/evidence/m0-t412-s10-status-snapshot.md),
-not repeated as live admission state.
-
-S10 found and repaired a dormant Check scalar encoder's uninitialized reserved
-fields, obsolete fixture capacities/media paths, and UNKNOWN_IF misclassification
-when an empty broker drains. The existing pending-worker query is relocated
-unchanged into the mirror's private overlay and explicitly registered.
-P3 resolves the previously blocking admitted-broker-loss negative and adds
-worker/launcher death isolation, startup rollback and protocol 3 lifetime
-capabilities. Original-owner cleanup stays in the mirror; no new mirror or
-overlay diff is introduced. Owner real-package confirmation remains pending.
 
 ## Current Technical Baseline
 
-- Product package: run16.exe, basesrv.exe and ntvdm.exe; MSVC x86 /MT,
-  original CCPU40. APP_VERSION 0.0.412 and RPC protocol 3.
+- Package: run16.exe, basesrv.exe, ntvdm.exe; MSVC x86 /MT, original CCPU40.
+  APP_VERSION 0.0.412; RPC protocol 3. This admission changes no products.
 - Public entry: run16.exe <binary> [arguments]. Original COMMAND exit/reentry
-  semantics are retained; no worker idle timer or reaper.
-- Formal outputs and fixtures stay under build/. Published products are at
-  `O:\winnt`; observations belong only below `O:\winnt\logs`.
-- Owner confirms DOSX, HIMEM and MSCDEX load at startup. This is not complete
-  device validation, full DPMI compatibility or successful WRITE execution.
-- Full WRITE/WOW provider recovery remains with the existing queued owners.
-  Broker-side WOW acquisition/completion tests do not prove GUI execution.
-- [Queue](QUEUE.md) owns the unchanged next-candidate order; [TODO](TODO.md)
-  owns unplanned debt. No next T is admitted by this closure packet.
+  semantics and worker lifetime remain unchanged.
+- S7 nested execution, S8 original exit semantics and S9 version agreement
+  retain their indexed bounded conclusions. S10 process-loss tests do not
+  establish narrow-Terminal rendering correctness.
+- Startup can start a missing broker; runtime broker/worker loss fails without
+  restart/replay. Launcher failure preserves claimed and unrelated workers.
+- Owner confirms DOSX/HIMEM/MSCDEX startup loading, not full WRITE execution.
+  Full WOW/debugger and WRITE recovery retain their queued owners.
+- Build outputs stay below build/; formal publication is `O:\winnt` and
+  runtime observations are `O:\winnt\logs`. Previous status chronology is in
+  the [snapshot](../etc/evidence/m0-t412-s10-status-snapshot.md).
+- [Queue](QUEUE.md) is unchanged. S11 owns the current display regression and
+  its explicit adverse-test disposition; it is not silently deferred to release.
 
 ## Recent M0 Closures
 
-| Task | Compact result |
-| --- | --- |
-| T411 | CCPU40 C-VID/event bounded closure; its RESET evidence correction was completed in T412 S1. |
-| T410 | Retired project-owned presentation-window path; native Console remains selected. |
-| T409 | Original DOS file-service ownership and guest fast-I/O fallback restored. |
-| T407 | Original DPMI/XMS source package and bounded DOSX transition restored; full WRITE remains outside that closure. |
-| T406 | Original mapping contracts and bounded EMS lease restored; x86-width cohorts cleaned. |
+T411 C-VID/event, T410 native Console selection, T409 DOS file services,
+T407 bounded DPMI/XMS and T406 mapping restoration retain their indexed
+bounded conclusions. They are not full workload compatibility acceptance.
 
 ## Recent Governance
 
-- **M0 Td S10 P1:** 8f7f6ec3d assigned U03-U08 to named proposal owners.
-- Earlier governance deliveries and closure details remain in the indexed
-  [status snapshot](../etc/evidence/m0-t412-s10-status-snapshot.md).
+This delivery preserves S10 investigation evidence, removes disposable probe
+binaries and objects, and admits S11 without changing the candidate queue.
+Earlier governance chronology remains in the indexed status snapshot.

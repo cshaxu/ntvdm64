@@ -2,6 +2,12 @@
 
 ## Inputs and scope
 
+Owner subsequently directs a bounded S10 handoff and admits S11 for the
+EDIT-to-MEM Console regression. The [handoff](m0-t412-s11-console-handoff.md)
+preserves later adverse evidence and exact unchanged P3 products. This is not
+full T412 acceptance; the earlier Console matrix did not prove narrow-Terminal
+rendering correctness. No S10 product patch remains uncommitted.
+
 Owner admits final closure, build/test/commit/push, then wait. S9 predecessor
 is df2467de0; whole-T input is 08b33351b1c341bb433f27ab517ee9a4e0bc3e0c.
 Owner confirms current DOSX/HIMEM/MSCDEX startup loading, not complete device

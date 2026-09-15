@@ -289,6 +289,45 @@ test passed because it was skipped, unavailable or terminated by a timeout.
 
 ## Acceptance discipline
 
+### Owner-approved S11 Console repair
+
+The owner directs cleanup followed by a sequential S for correct, compact
+repair of COMMAND -> EDIT -> exit EDIT -> MEM. The
+[handoff](../evidence/m0-t412-s11-console-handoff.md) freezes investigation
+inputs; Status alone owns admission. S10 concludes only its bounded broker
+delivery. The display regression remains a T412 acceptance blocker.
+
+1. Audit the complete immediate Console output boundary: original nt_graph.c,
+   nt_fulsc.c, the current win32 presentation binding, original OpenNT screen
+   buffer lifecycle and the individually reviewed neighboring SoftPC reference.
+   Record all four recovery rungs before selecting implementation. Review
+   existing source before inventing a presenter or adding an overlay.
+2. Select one coherent contract for stream/frame buffer ownership, logical
+   guest geometry, actual host viewport, paint, cursor and mouse coordinates.
+   Evaluate separate buffers and restoration against original source; do not
+   presuppose that unconditional resize no-ops or an extra buffer alone fix it.
+   Keep modern Console mechanics in the existing win32 adapter and original
+   MVDM policy in its mirror. No new generic Console subsystem or broker work.
+3. Implement the smallest source-shaped binding. Validate actual dimensions,
+   partial writes, failed resizing and cleanup; restore host output state on
+   normal exit and admitted failure paths. Remove superseded duplicate glue.
+   Never force stream mode or alter guest scrolling to hide blank rows.
+4. Build fresh under build/M0-T412/S11. Automate conhost and ConPTY controls
+   at 80x25 and narrow/tall dimensions, with prefilled history, initial MEM,
+   EDIT welcome dismissal, exit and repeated MEM. Exercise live resizing,
+   scrolling, EDIT mouse/cursor, native/nested child return and failure cleanup.
+   Record observed rather than requested geometry. Triage the separate
+   short-window C-VID fault; do not silently omit the failing case.
+5. Re-run applicable broker/version/lifetime regressions on the final x86
+   CCPU40 build. Publish verified products only to `O:\winnt`; keep all runtime
+   observations in `O:\winnt\logs`. Report actual Terminal/RDP acceptance
+   separately from bounded VT replay, retain measured source footprint and
+   hashes, commit/push and leave a clean worktree for owner confirmation.
+
+No repair is claimed by this planning delivery. If source evidence requires
+a CPU-semantic or broader architectural change, stop at the recorded boundary
+and revise the brief rather than extending this Console repair implicitly.
+
 ### Owner-approved S7 extension
 
 On 2026-09-15 the owner accepted direct launch after the S6 VDM TIB storage
