@@ -48,7 +48,6 @@
 #include "nt_uis.h"
 #include "nt_com.h"
 #include "nt_reset.h"
-#include "mvdm_softpc_termination.h"
 #include "nt_event.h"
 #include "nt_fulsc.h"
 #include "nt_eoi.h"
@@ -244,18 +243,7 @@ void  host_applInit(int argc,char *argv[])
 
 
     if (bSwitchF == FALSE)
-    {
-        /* DIVERGENCE(MVDM-HOST-DIV-147): the original process-owned branch
-         * ends with ExitProcess(0), which atomically destroys its heartbeat
-         * and all other process resources.  A session cannot end the app
-         * process.  Preserve the source-owned close cohort before transferring
-         * the same completion to the session boundary; otherwise the direct
-         * session escape bypasses TerminateHeartBeat and leaves its worker
-         * binding live. */
-        host_applClose();
-        (void)mvdm_softpc_terminate_current_session((uint32_t)VDMForWOW, 0u);
-        return;
-    }
+        ExitProcess (0);
 
     // If VDM Is for WOW keep showing the glass
     if (VDMForWOW) {
@@ -347,22 +335,17 @@ host_applClose(void)
 void host_terminate(void)
 {
 
-    /* Preserve process-exit cleanup for source paths, such as reset.c,
-     * which historically entered host_terminate directly. */
-    host_applClose();
-
 #ifdef HUNTER
     if (TrapperDump != (HANDLE) -1)
 	CloseHandle(TrapperDump);
 #endif /* HUNTER */
 
-    /* DIVERGENCE(MVDM-HOST-DIV-147): the original NT4 product exits its
-     * dedicated ntvdm.exe after reporting through BaseSrv.  This in-process
-     * app composition retains the original host_terminate/TerminateVDM call
-     * order but transfers the same VDM outcome to the bound session escape,
-     * so a guest failure cannot terminate the application process. */
-    (void)mvdm_softpc_terminate_current_session((uint32_t)VDMForWOW,
-        (uint32_t)VdmExitCode);
+    if(VDMForWOW)
+        ExitVDM(VDMForWOW,(ULONG)-1);    /* Kill everything for WOW VDM */
+    else
+        ExitVDM(FALSE,0);
+
+    ExitProcess(VdmExitCode);
 }
 
 

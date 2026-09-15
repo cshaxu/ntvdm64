@@ -180,3 +180,70 @@ active COMMAND/EDIT residency is preserved; original completion/disconnect
 cleans records exactly once; broker drain versus a new arrival is safe; and a
 new broker startup has no stale record. Do not poll an empty command queue or
 kill an otherwise connected worker.
+
+## Original worker exit restoration
+
+### Question
+
+Does the standalone `ntvdm.exe` still suppress the selected OpenNT worker
+completion path after the three-program split?
+
+### Source comparison and change
+
+The selected OpenNT `softpc.new/host/src/nt_reset.c` owns the actual worker
+terminal path. `host_terminate` calls `ExitVDM(VDMForWOW, (ULONG)-1)` for WOW
+or `ExitVDM(FALSE, 0)` for DOS, then calls `ExitProcess(VdmExitCode)`.
+`host_applInit` likewise rejects a non-`-f` direct worker invocation with
+`ExitProcess(0)`. The original BaseClient `ExitVDM` dispatches `BasepExitVDM`;
+the selected `srvvdm.c:BaseSrvExitDOSTask` signals pending parents, closes the
+worker wait and frees the Console record.
+
+The project mirror had replaced both `nt_reset.c` process exits with
+`mvdm_softpc_terminate_current_session`. That was a single-process
+`ntvdm32.exe` precaution. It is invalid for the now separate `ntvdm.exe`
+worker: the escape bypasses the original `ExitVDM` service notification and
+can leave broker state to disconnect cleanup rather than source-owned terminal
+cleanup.
+
+The mirror now restores the selected original `nt_reset.c` bodies and removes
+its private termination include. `MVDM-HOST-DIV-147` remains only for the
+separate `sim32.c` in-process allocation-failure boundary; it no longer covers
+worker lifecycle.
+
+### Verification and limit
+
+The x86 translation unit was rebuilt using the formal Ninja command shape,
+then its `original-softpc-host-roots.lib` and `ntvdm.exe` product link were
+rebuilt. The focused
+`basesrv-service-reservation-test.exe` passed the original
+`Check/Update/Get/ExitVDM` lifecycle through the authenticated binding. The
+staged `O:\ntvdm64\ntvdm.exe` is SHA-256
+`D1A4F0D9E7FA5FF2BA8EB75510DC4E061798BF7C2AA995267B2F0FA872409E4D`.
+
+This proves source selection, compilation, link and service-side terminal
+contract.
+
+### Real standalone worker observation
+
+An unredirected package-root `run16.exe MEM.EXE` smoke used the staged worker
+above and the new log
+`O:\ntvdm64\logs\m0-t412-s5-original-worker-exit-smoke-20260914-193001.log`.
+The authenticated launcher PID 14592 reached `Check → Reserve → Prepare`; its
+worker PID 19752 connected and then produced the decisive source-owned
+sequence:
+
+```
+BASESRV-S3 phase=exit pid=19752 status=00000000
+BASESRV-S3 phase=exit-code pid=14592 status=00000000
+BASESRV-S3 phase=disconnect pid=14592 status=00000000
+BASESRV-S3 phase=empty-grace pid=0 status=00000000
+BASESRV-S3 phase=empty-stop pid=0 status=00000000
+```
+
+Thus the real worker reached the broker's original `BasepExitVDM` path; the
+parent received its original exit-code result; the worker record disconnected;
+and the now-empty broker exited under its own empty-grace. The test did not
+kill the worker. The attempted exact-root cleanup found PID 14592 already
+gone; the broker PID 48324 was then observed to emit `empty-stop` and exit.
+This is a noninteractive startup/exit observation, not acceptance of an
+interactive COMMAND/EDIT session or full WOW/WRITE behavior.
