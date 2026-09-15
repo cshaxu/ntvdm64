@@ -33,7 +33,7 @@ those state machines. App owns composition.
 | S2 — Original BaseSrv/BaseClient recovery | Restore the coherent selected original lifecycle including capacity, ownership, wait/retry, errors and cleanup; finite same-shaped bindings only. | Original selected bodies compile/link on x86 and pass focused positive/negative tests. A fixture duplicating provider policy is not proof. Track transitional harnesses for integration/removal. |
 | S3 — Three programs and IPC | Compose run16.exe, basesrv.exe and ntvdm.exe; authenticate endpoint, reserve launch, let launcher create/register requested worker, dispatch and clean disconnects. Preserve original worker entry and consistent OS/SoftPC command-line facts. | Formal three-program build/provider maps; concurrent startup/registration and failure tests; copied versioned messages and explicit resource ownership. Update publication rules before deploying renamed products. |
 | S4 — DOS execution and streams | Connect BOP 54:08 to run16, original DOS reentry/native-child waits, and asynchronous command/environment/stream capture. | Real COMMAND/MEM/EDIT and DOS/native-child runs; spaces, environment, stdin/stdout/stderr, EOF, exit codes, rollback and disconnect. Explicit direct CLI versus guest COMMAND redirection tests; no invented generic cmd parser. |
-| S5 — WOW coordination and idle cleanup | Restore broker-side WOW acquisition/PIF/notification/waits/failures; singleton, eligible-idle retirement and empty-broker exit. | Source-owned coordination tests and reachable real-worker evidence; simultaneous startup, reconnect, new work versus retirement, restart/first-VDM and exact-once cleanup. Quiet active COMMAND/EDIT must not be reaped. |
+| S5 — WOW coordination and broker lifecycle | Restore broker-side WOW acquisition/PIF/notification/waits/failures; singleton and empty-broker exit. Worker residence and exit remain the original OpenNT worker/COMMAND/Console lifecycle. | Source-owned coordination tests and reachable real-worker evidence; simultaneous startup, reconnect, broker drain/arrival, restart/first-VDM and exact-once cleanup. No worker timeout or reaper exists. |
 | S6 — Integrated verification and removal | Build/test final composition, remove superseded autonomous policy and obsolete bridges, reconcile registers and publish verified products. | Final per-row disposition; measured mirror diff/overlay/autonomous line deltas; real-program and process-race matrix; no mandatory unproved contract; clean committed/pushed worktree and indexed closure evidence. |
 
 ## Detailed execution
@@ -181,11 +181,10 @@ honestly when a visible interactive result cannot be asserted.
 2. Exercise source-defined DOS/WOW separation, no-work waits, command arrival,
    caller disappearance and notification delivery. Check source-owned results,
    not an invented success response for unavailable WOWEXEC/USER behavior.
-3. Derive idle eligibility from the verified lifecycle. Start its timeout only
-   after all required task/lease conditions permit retirement. Test completed
-   idle worker retirement and active interactive COMMAND/EDIT survival beyond
-   the default interval; a short focused-clock test alone is insufficient.
-4. Race new commands against the retirement decision, worker registration
+3. Recover and verify the original worker completion/exit path. Do not derive
+   a standalone ready/idle state, timer or cooperative-exit request: worker
+   residency is owned by the original COMMAND/Console/`ExitVDM` lifecycle.
+4. Race new commands against broker drain, worker registration
    against broker drain, and two launchers against startup. Each accepted
    request must either execute once or receive a defined retry/failure; it
    cannot disappear or execute twice.
@@ -203,7 +202,7 @@ honestly when a visible interactive result cannot be asserted.
    source/configuration identity, selected original providers and file hashes.
 2. Run the complete S2--S5 suite against that same final product. Include real
    DOS workloads, original broker-side WOW contracts, security negatives,
-   startup/disconnect races and actual idle intervals. A previous build's
+   startup/disconnect and broker-empty-grace intervals. A previous build's
    success is not acceptance of an untested final executable.
 3. Audit remaining old entry paths, single-slot local service policy, shadow
    ownership tables, compatibility seams and test-only bridges. Delete only
@@ -248,11 +247,11 @@ test passed because it was skipped, unavailable or terminated by a timeout.
   reservation expiry and exact-once completion. No native/guest pointer or
   trusted sender-local HANDLE value enters a command record. Required resources
   use only the approved separate authenticated OS-managed attachment boundary.
-- Default idle eligibility is approximately 60 seconds after completed work,
-  not 60 seconds without mouse/keyboard input. Assigned/queued tasks, launch
-  reservations, active guests, parent waits/reentry, Console leases and pending
-  cleanup prevent retirement. Define cooperative exit and timeout policy.
-  Empty-broker exit must account for in-flight clients and startup/arrival races.
+- No worker idle lease, cooperative worker-exit request or worker timeout is
+  permitted. Assigned/queued tasks, active guests, Console residency and
+  original task completion are governed by the original worker lifecycle.
+  The broker's empty-grace applies only after no worker, reservation, queue or
+  client remains, and must account for in-flight clients and startup/arrival races.
 - Preserve service-instance first-VDM semantics and existing protection against
   mutation of host IO.SYS/MSDOS.SYS. Original-source recovery does not authorize
   host installation changes.

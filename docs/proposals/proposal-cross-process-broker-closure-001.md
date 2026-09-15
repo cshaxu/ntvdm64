@@ -135,9 +135,9 @@ WOW32, DPMI, DOSX or WRITE internal behavior into the broker.
   and USER callbacks individually. Select proven public bindings or record
   the exact unavailable operation; no success-returning empty substitutes.
   DOS closure does not establish shared-WOW closure.
-- Keep one-shot exit and idle-retention decisions in product composition.
-  Original task state determines completion; product policy determines when
-  an eligible worker should exit. Remove direct product-session termination
+- Keep one-shot exit and worker-retention decisions in the original worker
+  lifecycle. Original task/COMMAND/Console state determines completion and
+  exit; product composition must not add a worker retirement policy. Remove direct product-session termination
   from the service command-acquisition policy when its replacement is proved.
 
 ### Approved resource-transfer clarification
@@ -226,17 +226,17 @@ map them to sequential S briefs without treating a stage as full T closure.
    launch and return, standard streams, exit codes, creation failure rollback,
    client/worker disconnect and abnormal exit. Include first acquisition,
    insufficient-buffer retry, pending DOS wait, and parent notification.
-4. **WOW coordination and retention (proposed S4):** verify the selected WOW
+4. **WOW coordination and broker lifecycle (proposed S4):** verify the selected WOW
    submission/acquisition/completion path and nonblocking empty-WOW response;
-   complete single-instance startup and safe idle/empty-broker shutdown tests.
+   complete single-instance startup and safe empty-broker shutdown tests.
    Name any blocked guest/provider workload explicitly rather than calling a
    DOS-only result complete WOW support or using IPC to bypass that owner.
 
-An empty command queue is not an idle worker: EDIT, interactive COMMAND or a
-WOW task can still be running. Start the proposed one-minute timer only from
-an explicitly eligible, completed-task state, and cancel it on renewed work.
-Test arrival-versus-reaping and startup-versus-broker-exit races; no live
-interactive session may be reaped solely because no new command is queued.
+An empty command queue is not a worker-exit indication: EDIT, interactive
+COMMAND or a WOW task can still be running. No worker timer or broker-directed
+reaper is permitted. Test worker completion/disconnect as owned by the original
+lifecycle and test startup-versus-empty-broker-exit races; no live session may
+be reaped solely because no new command is queued.
 
 Before implementation admission, reconcile the three executable names and
 publication layout with the current single-`ntvdm32.exe` build/deployment
@@ -285,26 +285,20 @@ system-wide controller.  A second `basesrv.exe` first checks the product
 mutex/endpoint; when the first instance is healthy it exits without disturbing
 it.  Discovery/control of unrelated processes is prohibited.
 
-The following are proposed product retention policies, not claims about
-historical OpenNT behavior:
+The following are source-bound lifecycle rules:
 
-- A worker may be reused only after it explicitly reports a broker-defined
-  ready/idle state through the copied wire contract.
-- The default idle lease is one minute.  At expiry `basesrv.exe` asks an
-  eligible idle worker to exit and removes it if its connection then closes.
-- A worker is ineligible for that reaper while it has an assigned or queued
-  command, a launch reservation, pending parent wait/re-entry, active guest
-  work, an interactive-console lease, outstanding request/notification, or
-  incomplete registration/disconnect cleanup.
+- A worker may be selected only through the original BaseSrv state/Console
+  selection path. It exits only through the original worker lifecycle or an
+  authenticated abnormal-disconnect cleanup; no copied ready/idle state,
+  lease, timer or broker exit request is introduced.
 - When no registered workers, launch reservations, queued commands, or live
   client operations remain, `basesrv.exe` exits cleanly rather than remaining
   resident.  A later `run16.exe` invocation starts it again.
 
-The admission packet must choose the exact worker state transitions, the
-graceful-exit/forced-cleanup limit, and focused positive/negative evidence.
-It must also decide whether an interactive `COMMAND.COM` session ever advertises
-the reusable idle state; a quiet interactive console must not be silently
-destroyed merely because it exceeds one minute.
+The admission packet must recover the exact original worker state transitions
+and focused positive/negative evidence. An interactive `COMMAND.COM` session
+is never subject to a standalone product idle policy; a quiet Console remains
+until its original lifecycle exits.
 
 ## Source shape and IPC boundary
 
@@ -356,7 +350,7 @@ An admitted package must provide:
    ready-worker selection, no-worker creation request, command delivery,
    notification, disconnect, malformed messages, and per-user access denial;
 3. lifecycle evidence that duplicate `basesrv.exe` startup converges safely,
-   the one-minute idle policy reaps only eligible workers, and an empty broker
+   worker completion follows the original lifecycle, and an empty broker
    terminates without orphaned records; and
 4. real x86 runtime evidence for the selected brokered DOS/Win16 rows, while
    preserving the source-owned worker startup and `GetNextVDMCommand` call

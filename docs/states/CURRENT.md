@@ -6,23 +6,23 @@
 
 ## Active Packet
 
-### M0 T412 S5 — WOW coordination and idle cleanup
+### M0 T412 S5 — WOW coordination and broker lifecycle
 
 | Field | Record |
 | --- | --- |
 | Identifier Mode | M0 T412 S5; Ordinary Mode, one implementer and one active sequential S packet. |
 | Admission And Approval | Owner approved completion of T412 according to its proposal, including the authenticated OS-managed resource-transfer exception. Execute S1--S6 sequentially without repeated scope approvals; one S remains active and each verification gate still applies. Commit/push to main remains approved. No kernel/CSR shell or broader CPU/video redesign is admitted. |
-| Objective | Recover the selected original BaseSrv WOW coordination, then implement source-bounded singleton, eligible-idle worker retirement and empty-broker exit without reaping active COMMAND/EDIT sessions. |
+| Objective | Recover the selected original BaseSrv WOW coordination, then implement source-bounded singleton and empty-broker exit. Worker residence, completion and exit follow the selected original OpenNT worker/COMMAND/Console lifecycle; no product timer may retire a worker. |
 | Non-goals | No CSR/kernel subsystem, CPU/video redesign, guest-media changes, generic cmd parser, guest COMMAND redirection, or claim of full WOW16/WRITE execution. |
 | Reference Baseline | S4 closure at [m0-t412-s4-closure](../etc/evidence/m0-t412-s4-closure.md), T412 S3 three-program composition, and S1/S2 original-owner records. |
 | Files And ABI Surface | Original `srvvdm.c` WOW/first-VDM/wait/notification owners, BaseClient call paths, bounded broker lifecycle/connection state, app worker creation and focused lifecycle tests. |
 | Applicable Rules | Source policy; execution, architecture, coding and document rules; package-first recovery and original-owner placement. |
-| Verification | Original-source/caller audit; focused singleton, WOW request, first-VDM, reconnect, worker-abnormal-exit and idle/arrival race tests; real COMMAND/EDIT survival beyond idle interval and exact-once eligible cleanup; formal x86 maps, governance and diff checks. |
-| Expected Markers | Original coordination owner handles WOW/first-task states; active Console worker is retained; only an eligible completed worker retires; broker exits only after workers, reservations, queues and clients drain; a later launch starts a clean instance. |
+| Verification | Original-source/caller audit; focused singleton, WOW request, first-VDM, reconnect, worker-abnormal-exit and broker-drain/arrival race tests; real COMMAND/EDIT residency and source-owned completion/exit observations; formal x86 maps, governance and diff checks. |
+| Expected Markers | Original coordination owner handles WOW/first-task states; worker residence and exit have no standalone timeout policy; broker exits only after workers, reservations, queues and clients drain; a later launch starts a clean instance. |
 | Asset Needs | Accepted OpenNT source, immutable guest media, existing formal x86 product, `build/M0-T412/S5` for generated/build/test outputs, and `O:\ntvdm64\logs` for real-package observations. |
-| Reporting Requirements | Report original owner, selected bounded binding, timing/eligibility predicate, race result, resource cleanup and every unavailable WOW operation; distinguish source audit, focused tests and real worker evidence. |
+| Reporting Requirements | Report original owner, selected bounded binding, broker-only empty-grace predicate, race result, resource cleanup and every unavailable WOW operation; distinguish source audit, focused tests and real worker evidence. |
 | Stop Conditions | Missing provenance, unbounded platform dependency, contradictory selected-provider evidence, or changed product scope: record the exact issue; do not manufacture success or a parallel provider. |
-| Exit Criteria | Source-owned WOW/first-VDM/wait disposition plus verified singleton and eligible-idle/empty-broker lifecycle; simultaneous startup, reconnect, work-versus-retirement and abnormal-disconnect cases are exact-once; quiet active COMMAND/EDIT is not reaped. |
+| Exit Criteria | Source-owned WOW/first-VDM/wait disposition plus verified singleton and empty-broker lifecycle; simultaneous startup, reconnect, broker-drain/arrival and abnormal-disconnect cases are exact-once; worker exit is demonstrated only through the original lifecycle, never a project timeout. |
 | Original Owner Request | 批准按照proposal完成当前T任务。 Reduce diff, reuse original OpenNT code/architecture and build three programs. |
 | Similar-Issue Sweep | Include mirrored diffs, private overlays and adapters; command ownership/capacity/retry, launch rollback, async payload lifetime, worker cleanup and every duplicated local policy in scope. |
 | Candidate Proposal | [Broker design](../proposals/proposal-cross-process-broker-closure-001.md). |

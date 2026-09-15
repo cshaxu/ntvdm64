@@ -169,9 +169,14 @@ product EXEs were rebuilt and staged at `O:\ntvdm64`.
 
 ## Remaining S5 gate
 
-Recover and prove the original task-completion/ready notification needed to
-classify a worker as eligible for reuse or retirement.  Required acceptance:
-active COMMAND/EDIT survives beyond the grace; a completed eligible worker is
-retired exactly once; concurrent arrival cancels retirement; disconnect and
-new broker startup leave no stale reservation/record.  Do not implement this
-by polling an empty command queue or by killing an otherwise connected worker.
+The owner superseded the former worker-retirement hypothesis: every VDM worker
+now follows the selected original OpenNT COMMAND/Console/`ExitVDM` lifecycle.
+S5 must recover and prove that path, including completion, disconnect and
+record cleanup, rather than inventing an eligible-idle notification, lease,
+timer or broker-directed exit. The existing 60-second delay is broker-only:
+it runs only after the service has no worker, reservation, queue or client and
+allows the otherwise empty `basesrv.exe` instance to stop. Required acceptance:
+active COMMAND/EDIT residency is preserved; original completion/disconnect
+cleans records exactly once; broker drain versus a new arrival is safe; and a
+new broker startup has no stale record. Do not poll an empty command queue or
+kill an otherwise connected worker.
