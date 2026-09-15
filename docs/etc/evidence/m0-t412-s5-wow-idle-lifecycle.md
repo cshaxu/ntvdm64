@@ -608,3 +608,44 @@ not emit a matching provider-result witness.  The evidence therefore narrows
 the defect to *after* original WOW ingress and before a successful provider
 ready marker; it neither blames BaseSrv nor claims the known historical
 `W32Init FALSE` frontier has been reproduced by this artifact.
+
+### Corrected standalone WOW32 parent identity
+
+The preceding artifact gap is now mechanically identified.  The selected
+OpenNT worker definition is `ntvdm.exe`
+(`src/mvdm-host/softpc.new/obj.vdm/obj/i386/ntvdm.def`), and T412 stages that
+same worker identity.  The older staged `O:\winnt\WOW32.DLL`, however,
+imported `ntvdm32.exe`; no such file exists in the package.  Thus the original
+`SafeLoadLibrary("WOW32")` path could not load that provider regardless of the
+five required exports.
+
+The rebuilt provider is assembled from the selected original 77 WOW32 bodies
+and 105 existing carriers, with no new WOW algorithm.  Its parent import
+library is generated from the selected worker definition, retaining the
+original export spellings.  Two build-only ABI corrections are required:
+
+- the historical WOW32 callers use `_Function@N`, while the parent definition
+  exports its original undecorated loader spelling; generated COFF aliases now
+  correctly target the parent's C symbol (`_Function`), not an absent bare
+  symbol;
+- the original `host_CreateThread` and `host_ExitThread` exports require the
+  corresponding `@24` and `@4` caller aliases.
+
+`dumpbin` validates the resulting `wow32.dll` as x86 and shows `ntvdm.exe`
+(not `ntvdm32.exe`) among its dependencies.  It exports all required ingress
+symbols: `W32Init`, `W32Dispatch`, `GetCommHandle`, `GetCommShadowMSR`, and
+`W32HungAppNotifyThread`.  Its SHA-256 is
+`EBA4C084C8E818110A32E6FE3963074F10A3EC9673CC4D29B19B8FE3E637D6C5`.
+
+For the bounded package observation, the former `O:\winnt\WOW32.DLL`
+(SHA-256 `446F64073EBEFFCE151BCAA0591EEC928141438BD8020531F36133F4A0B8937C`)
+was copied to `build/M0-T412/S5/wow32-parent-identity/previous-WOW32.DLL`,
+then only `O:\winnt\WOW32.DLL` was replaced.  `run16.exe system32\WRITE.EXE`
+again reaches the original WOW BOP (`cs=01C7 ip=AEBC`), issues original shared
+WOW state `0x0102`, and completes cleanup with launcher exit `6`; see
+`O:\winnt\logs\m0-t412-s5-wow-parent-identity-20260914.trace` and its paired
+`*.wow-bop.log`/`*.config.log`.  The existing staged `ntvdm.exe` lacks the
+newer mapping-observer witness, so this run cannot distinguish a later
+`W32Init FALSE` from another provider-internal result.  It does prove the
+previously impossible parent DLL import is now structurally valid and that no
+worker binary or user physical-mapping change was deployed.

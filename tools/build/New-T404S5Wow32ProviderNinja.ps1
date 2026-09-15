@@ -188,6 +188,8 @@ foreach ($alias in @(
     [pscustomobject]@{ Decorated = 'opennt_support_current_teb@0'; Raw = 'opennt_support_current_teb' },
     [pscustomobject]@{ Decorated = 'NtCurrentPeb@0'; Raw = 'NtCurrentPeb' },
     [pscustomobject]@{ Decorated = 'ExitVDM@8'; Raw = 'ExitVDM' },
+    [pscustomobject]@{ Decorated = 'host_CreateThread@24'; Raw = 'host_CreateThread' },
+    [pscustomobject]@{ Decorated = 'host_ExitThread@4'; Raw = 'host_ExitThread' },
     [pscustomobject]@{ Decorated = 'GetNextVDMCommand@4'; Raw = 'GetNextVDMCommand' },
     [pscustomobject]@{ Decorated = 'GetCurrentDirectoryOem@8'; Raw = 'GetCurrentDirectoryOem' },
     [pscustomobject]@{ Decorated = 'SetCurrentDirectoryOem@4'; Raw = 'SetCurrentDirectoryOem' },
@@ -204,7 +206,7 @@ foreach ($alias in @(
     [pscustomobject]@{ Decorated = 'CreateFileOem@28'; Raw = 'CreateFileOem' },
     [pscustomobject]@{ Decorated = 'GetVolumeInformationOem@32'; Raw = 'GetVolumeInformationOem' }
 )) {
-    $parentImportAliasLines.Add('#pragma comment(linker, "/alternatename:_' + $alias.Decorated + '=' + $alias.Raw + '")')
+    $parentImportAliasLines.Add('#pragma comment(linker, "/alternatename:_' + $alias.Decorated + '=_' + $alias.Raw + '")')
 }
 [IO.File]::WriteAllLines($parentImportAliasSource, $parentImportAliasLines,
     [Text.UTF8Encoding]::new($false))

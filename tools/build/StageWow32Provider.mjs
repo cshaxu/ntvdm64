@@ -27,10 +27,10 @@ if (image.subarray(peOffset, peOffset + 4).toString('ascii') !== 'PE\0\0') {
   fail(`input is not a PE image: ${source}`);
 }
 if (image.readUInt16LE(peOffset + 4) !== 0x14c) fail('input is not x86');
-/* The provider must bind to the public staged worker, not a descriptive build
- * filename or an original-only module name. */
-if (!image.includes(Buffer.from('ntvdm32.exe\0', 'ascii'))) {
-  fail('provider does not import the public ntvdm32.exe worker identity');
+/* The provider must bind to the actual staged worker identity, not a stale
+ * descriptive build filename. */
+if (!image.includes(Buffer.from('ntvdm.exe\0', 'ascii'))) {
+  fail('provider does not import the staged ntvdm.exe worker identity');
 }
 
 const outputRoot = path.join(repositoryRoot, 'build', 'output');

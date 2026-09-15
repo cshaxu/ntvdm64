@@ -8,7 +8,7 @@ static int verify_wow_arguments(void)
 {
     app_launch_declaration declaration;
     session owner;
-    char executable[] = "ntvdm32.exe";
+    char executable[] = "ntvdm.exe";
     char *arguments[] = { executable };
     char **forwarded = NULL;
     int forwarded_count = 0;
@@ -47,7 +47,7 @@ static int verify_dos_arguments(void)
 {
     app_launch_declaration declaration;
     session owner;
-    char executable[] = "ntvdm32.exe";
+    char executable[] = "ntvdm.exe";
     char *arguments[] = { executable };
     char **forwarded = NULL;
     int forwarded_count = 0;
@@ -79,7 +79,7 @@ done:
 static int verify_public_worker_options_rejected(void)
 {
     app_launch_declaration declaration;
-    char executable[] = "ntvdm32.exe";
+    char executable[] = "ntvdm.exe";
     char write[] = "WRITE.EXE";
     char command[] = "--command";
     char wow[] = "-w";

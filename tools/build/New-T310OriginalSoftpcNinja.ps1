@@ -409,11 +409,11 @@ $wow32ProviderExportDefinition = Join-Path $build 'generated/ntvdm-wow32-provide
 $wow32ProviderExportLines = [Collections.Generic.List[string]]::new()
 foreach ($line in Get-Content -LiteralPath $hostExportDefinition) {
     if ($line -match '^\s*NAME\s+') {
-        # The original image is named ntvdm.exe.  The standalone product's
-        # public executable is ntvdm32.exe, so the late-loaded provider must
-        # import that actual loader module name while retaining every original
-        # export spelling below.
-        $wow32ProviderExportLines.Add('NAME ntvdm32.exe')
+        # The selected three-program worker retains the original ntvdm.exe
+        # module identity.  WOW32 is late-loaded by that worker, so its import
+        # library must name the actual parent module, while retaining every
+        # original export spelling below.
+        $wow32ProviderExportLines.Add('NAME ntvdm.exe')
     } else {
         $wow32ProviderExportLines.Add($line)
     }
