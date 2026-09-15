@@ -231,6 +231,14 @@ COMMAND session then follows its normal zero-valued session-return path.
 Thus nonzero native-child status reaches the original guest return service;
 the observer's outer zero is not a status-loss claim.
 
+Finally, `O:\ntvdm64\logs\m0-t412-s4-bop-shell-eof-r1` retained guest
+payload `run16.exe "more < NUL & echo MVDM_T412_EOF"`. The fixed Console
+snapshot contains the marker, and native-child phase 1 returns zero after the
+same original reentry cycle. `more` is therefore a real native child which
+received the public-shell `NUL` EOF and returned before the marker was
+emitted. This is an EOF control-flow check for the admitted COMSPEC fallback;
+it does not assert that guest COMMAND `>` redirection is implemented.
+
 ## Interpretation
 
 Confidence is high that the original Update-before-Connect ordering and
