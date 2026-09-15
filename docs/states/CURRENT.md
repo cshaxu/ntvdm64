@@ -2,13 +2,13 @@
 
 ## Current Work
 
-**Active: M0 T412 S7.**
+**Active: M0 T412 S8.**
 
-S7 [interactive child repair checkpoint](../etc/evidence/m0-t412-s7-interactive-child-repair.md)
-now also repairs repeated RPC wait delivery and exported-handle ownership.
-Two nested COMMAND levels execute MEM and return to their parents; EDIT returns
-to MEM. Explicit COMMAND EXIT still returns 1 and needs provenance acceptance.
-S7 remains open; this sequential delivery is not full-T closure.
+S7 is [closed by owner direction](../etc/evidence/m0-t412-s7-interactive-child-repair.md#s7-owner-directed-closure-and-s8-handoff)
+at pushed `8335f38bd`: nested COMMAND/MEM and EDIT return are delivered.
+S8 owns the unresolved explicit COMMAND EXIT result of 1: establish its original
+source provenance and repair incorrect propagation without forcing success.
+No new S8 implementation or runtime acceptance is claimed at admission.
 
 The [S6 VDM TIB repair](../etc/evidence/m0-t412-s6-vdm-tib-storage-repair.md)
 retains its full-storage link gate. Current products are at `O:\winnt`;
@@ -16,25 +16,25 @@ full T412 matrix and owner acceptance remain open.
 
 ## Active Packet
 
-### M0 T412 S7 — interactive COMMAND child execution
+### M0 T412 S8 — COMMAND exit-code provenance and repair
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T412 S7; Ordinary Mode, one implementer and one active sequential S packet. |
-| Admission And Approval | Owner: “批准提交推送当前s 并准入下一个s任务修复第二份command功能”. S6 closes its delivered regression repair by owner direction. S7 admits original-source-first repair of interactive COMMAND child execution. Commit/push to the existing origin/main remains approved. |
-| Objective | Restore MEM, nested COMMAND and EDIT launches from the second interactive COMMAND, including child return and continued parent input, without regressing direct positional launch. |
-| Non-goals | No CSR/kernel subsystem, CPU/video redesign, guest-media changes, generic cmd parser, guest COMMAND redirection, or claim of full WOW16/WRITE execution. |
-| Reference Baseline | S6 storage repair at 9619326d5 and its published package; owner confirms direct launch but reports second-COMMAND failures. S4 BOP evidence used an explicit run16 child and does not prove this interactive workload. |
-| Files And ABI Surface | Original COMMAND EXEC/BOP/reentry, command-process and payload bindings, run16 image/environment/stream handoff, original BaseClient/BaseSrv command delivery; formal x86 build and scoped observations. |
+| Identifier Mode | M0 T412 S8; Ordinary Mode, one implementer. |
+| Admission And Approval | Owner: “提交推送收口s任务 再准入一个新的s任务解决退出码问题”. S7 closes at its delivered nested-execution repair; unresolved exit status transfers explicitly to S8. Commit/push to origin/main remains approved. |
+| Objective | Establish the complete COMMAND guest-to-parent exit-code contract and repair source-proven divergence; retain nested execution and faithfully propagate normal and nonzero results. |
+| Non-goals | No forced-zero exit policy, worker reaper, CPU/video redesign, guest-media replacement, new parser, full redirection or WOW16 recovery. MEM size-accounting debt and the remaining full-T matrix are not closed here. |
+| Reference Baseline | Pushed 8335f38bd and the three O:\winnt images identified in S7 evidence. Nested MEM/EDIT return works; explicit COMMAND EXIT returns 1, while direct MEM and COMMAND /c ver return 0. |
+| Files And ABI Surface | COMMAND RetCode/WAITPROCESS/BOP, cmdexec/cmdmisc, BaseClient/BaseSrv results/waits, RPC and run16 completion. Guest source is comparison only. |
 | Applicable Rules | Source policy; execution, architecture, coding and document rules; package-first recovery and original-owner placement. |
-| Verification | Reproduce the actual interactive second COMMAND, not only COMMAND /c. Compare original owner and historical product; verify MEM output/return, nested COMMAND exit to parent, EDIT startup/input/exit, missing-child error and subsequent parent command; rerun direct MEM/COMMAND controls and VDM TIB link gate. |
-| Expected Markers | Correct child resolution, command ownership, source-defined BOP/reentry, valid environment/streams, child completion and responsive parent prompt. No new parser, worker reaper or fabricated success. |
-| Asset Needs | Accepted OpenNT source, immutable package binaries, retained S4--S6 evidence, build/M0-T412/S7 outputs and O:\winnt\logs observations. |
-| Reporting Requirements | Report exact final source/artifact identity, per-row removal/retention ledger, source owner and bounded adapter for every retained seam, real workload/race results and every unavailable WOW operation. |
+| Verification | Same-build x86: no-child/post-MEM/nonzero-child EXIT, /c, two nested levels, missing-command recovery, repeated runs, EDIT return, direct controls and VdmTib gate. Correlate guest RetCode through BOP/DOSRecord/native-child to run16. |
+| Expected Markers | Proven first mismatch; per-task result preserved without stale/shared values, premature completion or forced success; responsive parents. |
+| Asset Needs | Accepted local OpenNT source, immutable O:\winnt binaries, S7 source/artifact/log baseline; disposable build/M0-T412/S8/ run roots and O:\winnt\logs observations. |
+| Reporting Requirements | Original owner/four-rung disposition, before/after result chain, negative tests, build/hashes, diff/overlay/autonomous footprint and limitations. |
 | Stop Conditions | Missing provenance, unbounded platform dependency, contradictory selected-provider evidence, unproved mandatory contract or changed product scope: record the exact issue; do not manufacture success or a parallel provider. |
-| Exit Criteria | Same-build interactive workload and direct controls pass; source-first repair is recorded, staged and committed/pushed; test processes cleaned without touching owner sessions. Remaining full-T matrix/removal accounting stays explicitly open. |
-| Original Owner Request | “直接启动是可以了 但是 第二份command里面无法运行mem command edit这些”; then approval to close S6 and admit S7. |
-| Similar-Issue Sweep | Include mirrored diffs, private overlays and adapters; command ownership/capacity/retry, launch rollback, async payload lifetime, worker cleanup and every duplicated local policy in scope. |
+| Exit Criteria | Proven exit semantics, minimal repair, passing positive/nonzero/nested regressions without normalization; verified publication, reviewed evidence, commit/push and scoped test cleanup. Unresolved mandatory results block closure. |
+| Original Owner Request | “提交推送收口s任务 再准入一个新的s任务解决退出码问题”. |
+| Similar-Issue Sweep | RetCode initialization and lifetime, dwExitCode32 ownership, nested completion association, receipt/result conversion, wait-before-query ordering and failure paths; include mirrors, overlays and adapters in this bounded chain. |
 | Candidate Proposal | [Broker design](../proposals/proposal-cross-process-broker-closure-001.md). |
 | Working Plan | [T412 sequential S plan](../etc/operations/m0-t412-broker-restoration-plan.md). |
 
@@ -43,7 +43,7 @@ S4 is closed by its [requirement ledger](../etc/evidence/m0-t412-s4-closure.md):
 real COMMAND/MEM/EDIT, BOP reentry, copied native-child lifetime, Console
 stdout/stderr, EOF and nonzero status are now observed.  Guest COMMAND `>` is
 distinguished and remains the existing Redirector boundary; it was not folded
-into S4. S5 is closed by its [completion disposition](../etc/evidence/m0-t412-s5-wow-idle-lifecycle.md#s5-completion-disposition). S6 is closed by owner direction at its bounded storage repair; S7 is the only active packet. The remaining S6 full-T matrix and removal accounting are retained, not marked passed. S3
+into S4. S5 is closed by its [completion disposition](../etc/evidence/m0-t412-s5-wow-idle-lifecycle.md#s5-completion-disposition). S6 and S7 are closed by owner direction at their bounded repairs; S8 is the only active packet. The remaining S6 full-T matrix and removal accounting are retained, not marked passed. S3
 delivered the three-product command path; its final obsolete-source deletion
 remains explicitly carried into S6. See the
 [S2 transition](../etc/evidence/m0-t412-s2-original-lifecycle.md#s2-bounded-conclusion-and-s3-transition).
@@ -58,8 +58,8 @@ boundary, not a S4 acceptance surrogate.
 ## S6 owner-directed closure
 
 Owner confirms direct launch works and approves S6 closure after the VDM TIB
-storage repair. The second interactive COMMAND workload is not accepted; S7
-owns its repair. Full T412 closure still requires outstanding same-build S2--S5
+storage repair. Its then-unaccepted interactive COMMAND workload transferred
+to S7, now delivered; exit-code acceptance transfers to S8. Full T412 closure still requires outstanding same-build S2--S5
 matrix and removal accounting after this regression is resolved. The storage
 repair evidence records the tested package and explicit limits.
 

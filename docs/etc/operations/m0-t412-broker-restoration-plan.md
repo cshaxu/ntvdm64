@@ -278,7 +278,34 @@ reaper or CPU change follows from this admission.
 
 The S6 outstanding same-build S2--S5 matrix and final removal accounting are
 still required before T412 closure. They are not silently waived by either
-S6 owner-directed closure or S7 admission. The current Status owns the S7 brief.
+S6 owner-directed closure or S7 admission. The current Status owns the active brief.
+
+### Owner-approved S8 exit-code follow-up
+
+On 2026-09-15 the owner closed S7's delivered nested-execution repair at pushed
+`8335f38bd` and admitted S8 to resolve COMMAND exit codes. The
+[S7 handoff](../evidence/m0-t412-s7-interactive-child-repair.md#s7-owner-directed-closure-and-s8-handoff)
+retains the exact accepted scope, published hashes and unresolved result of 1.
+This sequential extension does not allocate a new T or change candidate order.
+
+1. Freeze the S7 source/products and reproduce no-child EXIT, post-MEM EXIT,
+   known nonzero child, /c and two nested levels. Establish original expected
+   results from the selected source/media, not an assumption that EXIT means 0.
+2. Correlate guest RetCode/WAITPROCESS, COMMAND BOP return, cmdexec completion,
+   original BaseSrv DOSRecord and BaseClient/run16 results. Audit the entire
+   immediate result/wait/lifetime boundary, including shared or stale values.
+3. Restore the first source-proven divergent contract with minimum diff and
+   the required four-rung recovery record. Preserve nonzero failure results;
+   do not mask them with a launcher success override or add a worker reaper.
+4. Run focused result/ordering regressions and the same-build real Console
+   matrix, including repeated nesting, missing-command recovery, EDIT return
+   and direct MEM/COMMAND controls. Build below build/M0-T412/S8; publish only
+   verified product EXEs to O:\winnt and observations to O:\winnt\logs.
+5. Record provenance, before/after evidence, footprint, hashes and limitations;
+   review, commit/push and verify a clean synchronized worktree. S8 closes only
+   with proved exit semantics; remaining full-T obligations are not waived.
+
+### Continuing T412 acceptance constraints
 
 The first no-source-change control, `run16 COMMAND.COM /c MEM.EXE`, displays
 MEM output and returns zero (`O:\winnt\logs\m0-t412-s6-nested-mem.txt`). It

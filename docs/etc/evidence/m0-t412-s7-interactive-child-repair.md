@@ -162,3 +162,23 @@ stores the DOS WAITPROCESS result. Do not rewrite an observed 1 to 0 to obtain
 a passing test. Its guest-to-parent provenance remains to be established.
 Nested execution/return is delivered; S7 exit-status acceptance and the existing
 full-T matrix/removal ledger remain open.
+
+## S7 owner-directed closure and S8 handoff
+
+On 2026-09-15 the owner requested: “提交推送收口s任务 再准入一个新的s任务解决退出码问题”.
+S7 is closed at pushed `8335f38bda21fe7860364465867e2bb9943275b2` for the
+delivered interactive child and nested COMMAND repairs. Earlier open-S7
+statements above describe their checkpoints and are superseded by this explicit
+disposition, not by changing failed observations into passes.
+
+Accepted delivery scope: two nested COMMAND levels execute MEM, return to their
+parents and continue input; EDIT opens and returns to MEM; missing-command and
+direct-launch controls are recorded above. Published identities are unchanged.
+
+The explicit EXIT result of 1 is unresolved and transfers to T412 S8, admitted
+in CURRENT. S8 must establish the original guest-to-parent result chain and
+repair any divergence, preserving meaningful nonzero outcomes. This closure
+does not assert the observed 1 is correct. Existing MEM size-accounting debt,
+the S6 full-T matrix/removal ledger and full WRITE limitations remain unchanged.
+This handoff edits documentation only: no rebuild, product replacement or new
+runtime result is claimed. T412 remains open with only S8 active.
