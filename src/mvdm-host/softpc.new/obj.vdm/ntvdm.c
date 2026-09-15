@@ -11,6 +11,8 @@
 #include "host_nls.h"
 #include "nt_timer.h"
 #include "mvdm_softpc_termination.h"
+#include "mvdm_standalone_worker.h"
+#include <setjmp.h>
 
 
 
@@ -34,6 +36,17 @@ INT host_main(INT argc, CHAR **argv);  // located in base\support\main.c
 _CRTAPI1 main(int argc, CHAR ** argv)
 {
    int ret=-1;
+   DWORD bootstrap;
+
+    /* NT4's process creation had already supplied this worker-local state.
+     * Keep the standalone replacement explicit at the original C entry rather
+     * than installing a second CRT/application entry. */
+    bootstrap=mvdm_standalone_worker_begin();
+    if (bootstrap!=ERROR_SUCCESS) return (int)bootstrap;
+    if (setjmp(*mvdm_standalone_worker_termination_escape()) != 0) {
+        ret=(int)mvdm_standalone_worker_completion_code();
+        goto finish;
+    }
 
     /*
      *  Intialize synchronization events for the timer\heartbeat
@@ -66,8 +79,9 @@ _CRTAPI1 main(int argc, CHAR ** argv)
      * a thread/process termination that bypasses it.  The adapter records
      * only an already-selected return value when explicitly requested; it
      * does not alter SEH, ret, process lifetime or guest state. */
+finish:
     mvdm_softpc_record_main_return(ret);
-    return ret;
+    return mvdm_standalone_worker_finish(ret);
 }
 
 

@@ -9,12 +9,14 @@ Application composition is deliberately split by process role:
 - `basesrv_entry.c` hosts the standalone BaseSrv transport. Original `srvvdm.c`
   remains the DOS/WOW record owner; this entry supplies only authenticated local
   RPC, resource attachment and modern Console membership observation.
-- `worker_entry.c` is the pure `ntvdm.exe` worker. It starts one original SoftPC
-  machine, connects to BaseClient transport and has no launcher, classifier,
+- `ntvdm.c` is the pure `ntvdm.exe` worker entry. Its explicit finite
+  standalone binding supplies worker-local BaseClient/session state before the
+  unchanged original initialization sequence; it has no launcher, classifier,
   local command queue or private argv shadow.
 - `package_layout.{c,h}` validates immutable worker package media.  Worker
   backend selection and entry dispatch have no separate app-shell abstraction:
-  `worker_entry.c` makes the one selected SoftPC/session call directly.
+  the finite binding is compiled with the worker and hands directly to
+  `ntvdm.c`.
 
 `console_probe.c` and `console_query.{c,h}` form the bounded, private modern
 Console membership observation used by BaseSrv. They do not assign command

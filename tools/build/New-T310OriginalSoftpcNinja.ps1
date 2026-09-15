@@ -263,6 +263,7 @@ $openntRtlNames = @('environ.c', 'error.c')
 $openntRtlX86Names = @('largeint-selected.asm', 'movemem-selected.asm')
 $adapterSoftpcNames = @('mvdm_softpc_firmware.c', 'mvdm_xms_memory.c', 'mvdm_a20.c', 'mvdm_softpc_guest_memory.c', 'mvdm_softpc_physical_mapping.c',
                         'mvdm_guest_location.c', 'mvdm_softpc_execution.c', 'mvdm_softpc_termination.c',
+                        'mvdm_standalone_worker.c',
                         'mvdm_softpc_event_thread.c',
                         'mvdm_softpc_presentation_font.c',
                         'mvdm_softpc_descriptor_fields.c')
@@ -930,10 +931,6 @@ $graph.Add('build obj/host/mvdm_ica_eoi_bridge.obj: cc ' + (NinjaPath $eoiOverla
 $hostObjects += 'obj/host/mvdm_ica_eoi_bridge.obj'
 $hostEntryObject = 'obj/host/ntvdm_entry.obj'
 $graph.Add('build ' + $hostEntryObject + ': cc_host ' + (NinjaPath $hostEntrySource))
-# Preserve the exact original entry body while reserving the executable entry
-# point for app.  This is a build binding only, not a source edit or a second
-# startup implementation.
-$graph.Add('  host_cflags = ' + $hostFlags + ' /Dmain=mvdm_softpc_original_entry')
 $graph.Add('build obj/host/softpc-resource.res: rc ' + (NinjaPath $embeddedRomResourceSource))
 $hostObjects += $hostEntryObject
 $adapterWin32Objects = foreach ($name in $adapterWin32Names) {
@@ -1132,14 +1129,13 @@ if ($Architecture -eq 'x86') {
     # This import library is the one worker parent ABI.  Late-loaded original
     # providers import it rather than a retired second `original-softpc-process`
     # image with its own local BaseVDM queue.
-    $graph.Add('build ntvdm.exe | ntvdm.lib: worker_link obj/app/worker_entry.obj obj/worker/rpc_client.obj obj/worker/stub.obj worker-shell.lib worker-command-bindings.lib original-softpc-host-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib opennt-base-client.lib opennt-base-bindings.lib original-opennt-rtl-x86.lib softpc-bindings.lib redirector-bindings.lib vdd-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib broker.lib broker-transport.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib original-ccpu386.lib original-softpc-host-roots.lib obj/host/softpc-resource.res')
+    $graph.Add('build ntvdm.exe | ntvdm.lib: worker_link obj/worker/rpc_client.obj obj/worker/stub.obj worker-shell.lib worker-command-bindings.lib original-softpc-host-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib opennt-base-client.lib opennt-base-bindings.lib original-opennt-rtl-x86.lib softpc-bindings.lib redirector-bindings.lib vdd-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib broker.lib broker-transport.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib original-ccpu386.lib original-softpc-host-roots.lib obj/host/softpc-resource.res')
 }
 $appObjects = foreach ($name in $appNames) {
     $object = 'obj/app/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $appRoot $name)))
     $object
 }
-$graph.Add('build obj/app/worker_entry.obj: cc ' + (NinjaPath (Join-Path $root 'src/app/worker_entry.c')))
 $graph.Add('build ' + $effectiveAddressObject + ': cc ' + (NinjaPath $effectiveAddressSource))
 $patchBodyObjects = @(foreach ($name in $patchBodyNames) {
     $object = 'obj/patch/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'

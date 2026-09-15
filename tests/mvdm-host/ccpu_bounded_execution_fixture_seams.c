@@ -9,8 +9,6 @@
  */
 #include <stdint.h>
 
-#include "mvdm_softpc_termination.h"
-
 typedef void (*fixture_callback)(void);
 
 void rom_init(void) {}
@@ -62,15 +60,4 @@ fixture_callback BIOS[256];
 fixture_callback read_pointers;
 void *trace_file;
 void *Gdp;
-
-/* The fixture exercises `mvdm_softpc_execution_run_until_return`, not the
- * process-lifetime original `obj.vdm/ntvdm.c` entry.  The execution adapter
- * exports both source-shaped routes, so retain this asserted-unreached test
- * link seam rather than pull startup/UI roots into the bounded CPU proof. */
-int mvdm_softpc_original_entry(int argc, char **argv)
-{
-    (void)argv;
-    if (argc == 37)
-        (void)mvdm_softpc_terminate_current_session(0u, 37u);
-    return 1;
-}
+/* No process-entry seam: the product now links original ntvdm.c::main. */

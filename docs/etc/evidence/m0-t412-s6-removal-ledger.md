@@ -41,15 +41,14 @@ duplicates:
 | `GetNextVDMCommand`, `ExitVDM` and related client bodies | original `opennt-host/base/win32/client/vdm.c` | The recovered original BaseClient calls the finite authenticated transport. |
 | `run16.exe` | `run16_entry.c` plus original BaseClient classification/config calls | This is the standalone representation of the CreateProcess parent role. |
 | `basesrv.exe` | `basesrv_entry.c` plus original BaseSrv service dispatch | This is the one broker process; it has no retired local queue provider. |
-| `ntvdm.exe` | current `worker_entry.c` plus original `ntvdm.c` | The wrapper remains a recorded reduction target, not a second command-policy provider: it still binds process-private capture heap, broker connection, guest-memory/session lifetime and package media roots before calling the renamed original entry.  Its formerly separate `app_machine_shell` selection/dispatch layer has been retired; the worker now makes the one selected SoftPC/session call directly. |
+| `ntvdm.exe` | original `softpc.new/obj.vdm/ntvdm.c::main` | The original worker C entry is the PE entry.  A finite standalone binding is called by that entry solely to supply process-private BaseClient capture storage, broker connection, selected session, guest-memory lease and termination escape; it contains no classification, record queue, argv rewriting or worker scheduling policy. |
 
-The final row is intentionally **not** declared restored.  Original
-`obj.vdm/ntvdm.c` has its own `main`, but a raw link currently lacks those
-process-private standalone bindings.  S6 must not hide them in a CRT hook or
-claim that merely renaming `worker_entry.c` makes original entry semantics
-true.  The required follow-up is to move each proven binding to its actual
-host/API boundary, then remove `/Dmain=mvdm_softpc_original_entry` and prove
-the linked `main` comes from original `ntvdm.c`.
+The original worker entry is restored without a CRT hook or renamed `main`.
+The source keeps its original `TimerInit → CpuEnvInit → nls_init → host_main`
+sequence.  The only surrounding calls are explicit, process-local setup before
+that sequence and matching cleanup after it.  This is the smallest boundary
+that replaces NT4 process/CSRSS initialization which cannot be held by either
+`run16.exe` or `basesrv.exe` in the worker address space.
 
 ## Formal graph check
 
@@ -64,18 +63,20 @@ VDMREDIR.dll: redir_dll_link
 
 Searching that graph for `base_vdm_local`, `base_vdm_client`,
 `base_vdm_broker`, `basesrv-bindings`, `original-softpc-process`,
-`app-machine-shell` and `launch_declaration` has no hits.  `ntvdm.lib` is the
-sole worker parent import library used by `VDMREDIR.dll`; no second SoftPC
-process image remains.
+`app-machine-shell`, `launch_declaration`, `worker_entry` and
+`mvdm_softpc_original_entry` has no hits.  `ntvdm.lib` is the sole worker
+parent import library used by `VDMREDIR.dll`; no second SoftPC process image
+or second worker entry remains.
 
 ## Verification status
 
-Generation and graph-reachability checks pass.  A direct x86 compilation of a
-clean original CCPU object succeeds with the generated flags.  The complete
-formal rebuild is not claimed: Ninja's verbose MSVC include-output path stalled
-in this environment, and the owner reported Defender detection during the
-subsequent build attempt.  The exact Defender detection record is unavailable
-to the current process.  No new formal-clean binary was staged to `O:\winnt`.
+Generation and graph-reachability checks pass.  Direct x86 compilations of the
+new standalone binding and the original `ntvdm.c` entry succeed with the
+generated flags (the binding retains only the pre-existing `fopen` warning).
+The complete formal rebuild is not claimed: Ninja's verbose MSVC include-output
+path stalled in this environment, and the owner reported Defender detection
+during a previous hidden-process build attempt.  This work does not use that
+launch method.  No new formal-clean binary was staged to `O:\winnt`.
 
 S6 closure therefore still requires a security-approved, fully completed clean
 x86 rebuild followed by the S2--S5 same-build matrix and package hashes.
