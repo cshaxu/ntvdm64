@@ -380,3 +380,24 @@ reservation fixture separately and exactly covers the source predicate for
 that case: an existing DOS record without a pending original wait is not
 reused; after `GetNextVDMCommand` installs its wait, it is reusable.  The
 prior `O:\ntvdm64` paths above are retained as historical evidence only.
+
+### Native-Console resident-worker re-entry
+
+After deployment at the new package root, an independent native `cmd.exe`
+Console ran two positional `run16.exe MEM.EXE` launches in sequence.  Both
+launchers returned `0`; the first left `O:\winnt\ntvdm.exe -f` resident, and
+the second did not create another worker.  The bounded observation was then
+cleaned up by exact executable path.
+
+`O:\winnt\logs\m0-t412-s5-native-console-reuse-20260914.trace` records the
+first worker's PIF/DOS/next-command sequence, then the second launch's
+`CheckVDM` state `00000004` (`VDM_PRESENT_AND_READY`) and the same worker's
+second-time command requests.  Its `0000040C` request is the selected original
+COMMAND re-entry shape: `RETURN_ON_NO_COMMAND`, `ASKING_FOR_SECOND_TIME` and
+the DOS request bit.  The one `C000000D` response is the original size-query
+round trip before the successful retry, not an emulator fault.
+
+This is real package evidence that an actually resident worker receives the
+subsequent launch without the former infinite parent wait.  It does not claim
+interactive keyboard/EDIT semantics, full redirected COMMAND behavior or
+WOW/WRITE acceptance; those remain their separately stated boundaries.
