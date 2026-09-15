@@ -165,7 +165,8 @@ static NTSTATUS check_command(PCSR_API_MSG message,ULONG length)
     unsigned char reply[40];
     void *wire=NULL;
     uint32_t request=(uint32_t)InterlockedIncrement(&request_id),wireBytes=0;
-    ULONG replyBytes=0;
+    HANDLE parent_event=NULL,*parent_events=NULL;
+    ULONG parent_event_count=0,parent_receipt_value=0,replyBytes=0;
     DWORD error=ERROR_INVALID_DATA;
     BOOL applied=FALSE;
     ULONG streams[3]={0,0,0};
@@ -182,13 +183,26 @@ static NTSTATUS check_command(PCSR_API_MSG message,ULONG length)
         goto done;
     RpcTryExcept {
         error=Client_Check(client.binding,client.connection,client.process,client.generation,
-            wireBytes,wire,&replyBytes,reply);
+            wireBytes,wire,&parent_event_count,&parent_events,&parent_receipt_value,&replyBytes,reply);
     }
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
-    if (!error && replyBytes==sizeof(reply))
+    if (!error && replyBytes==sizeof(reply) && parent_event_count<=1 &&
+        (!parent_event_count || parent_events)) {
+        if (parent_event_count) parent_event=parent_events[0];
         applied=OpenNtBaseApplyCheckReply(reply,(uint32_t)replyBytes,client.generation,request,base);
+    }
+    if (applied && base->u.CheckVDM.VDMState==VDM_PRESENT_AND_READY &&
+        parent_event && parent_receipt_value) {
+        base->u.CheckVDM.WaitObjectForParent=parent_event;
+        parent_event_handle=parent_event;parent_receipt=parent_receipt_value;
+        parent_event=NULL;
+    } else if (applied && (parent_event || parent_receipt_value)) {
+        applied=FALSE;
+    }
 done:
+    if (parent_events) MIDL_user_free(parent_events);
+    if (parent_event) CloseHandle(parent_event);
     if (wire) HeapFree(GetProcessHeap(),0,wire);
     if (error || !applied) {
         ULONG index;

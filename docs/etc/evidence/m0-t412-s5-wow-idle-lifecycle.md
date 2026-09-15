@@ -104,6 +104,33 @@ The second reports:
 PASS: original Check/Update/Get/ExitVDM lifecycle completes through authenticated worker binding
 ```
 
+### Resident-DOS reuse recovery
+
+The original `BaseSrvCheckDOS` ready/busy branches create a pair of parent
+completion events, retain the broker-side event in the DOS record, return its
+caller duplicate through `CheckVDM.WaitObjectForParent`, and later use that
+identity in `BaseSrvGetVDMExitCode`. The prior copied `Check` RPC preserved
+only task and state scalars. Consequently a same-Console launcher could
+identify a resident record but had no completion object and `run16` refused
+the original `VDM_PRESENT_AND_READY` outcome.
+
+The S5 binding now transfers this one unavailable OS resource as an
+authenticated typed event attachment plus a broker-local receipt. No native
+handle is copied into the scalar envelope. `run16` waits on the attachment
+and invokes the existing `BaseCheckForVDM`; its copied client binding returns
+the retained receipt only to original `BasepGetVDMExitCode`. `srvvdm.c`
+continues to decide ready/busy, queue the DOS record, duplicate streams, wake
+the worker and calculate the exit code.
+
+The focused lifecycle test now also proves this sequence: a second same-
+Console launcher gets `VDM_PRESENT_AND_READY`, an event attachment and a
+nonzero receipt; the original worker's next `GetNextVDMCommand` consumes that
+queued command; `ExitVDM` signals the attachment; and original
+`BaseSrvGetVDMExitCode` resolves the receipt to exit code zero. This is a
+service-level original-owner proof, not yet a real persistent COMMAND runtime
+acceptance. Therefore `profiles/pure-dos/pure-dos.pif` remains until default
+three-program COMMAND/MEM/EDIT runs prove the non-PIF DOSX path.
+
 Real empty-broker observation used an isolated build `basesrv.exe`, with no
 client or worker.  `O:\ntvdm64\logs\m0-t412-s5-empty-broker-r2.trace` contains:
 

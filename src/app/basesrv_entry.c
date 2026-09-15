@@ -167,18 +167,26 @@ error_status_t Server_First(handle_t binding,VDM_CONNECTION connection,HANDLE pr
     return OpenNtBaseServiceFirst(connection,pid,generation,first);
 }
 error_status_t Server_Check(handle_t binding,VDM_CONNECTION connection,HANDLE process,
-    ULONG generation,ULONG requestBytes,unsigned char *request,ULONG *replyBytes,
+    ULONG generation,ULONG requestBytes,unsigned char *request,ULONG *parentEventCount,
+    HANDLE **parentEvents,ULONG *parentReceipt,ULONG *replyBytes,
     unsigned char reply[BASE_CHECK_REPLY_BYTES])
 {
     DWORD pid,error;
     uint32_t required=0;
-    if (!replyBytes || !reply) return ERROR_INVALID_PARAMETER;
-    *replyBytes=0;
+    uint32_t parent_receipt=0;
+    HANDLE parent_event=NULL;
+    if (!parentEventCount || !parentEvents || !parentReceipt || !replyBytes || !reply) return ERROR_INVALID_PARAMETER;
+    *parentEventCount=0;*parentEvents=NULL;*parentReceipt=0;*replyBytes=0;
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
     if (error) return error;
     error=OpenNtBaseServiceCheck(connection,pid,generation,request,requestBytes,
-        reply,BASE_CHECK_REPLY_BYTES,&required);
+        reply,BASE_CHECK_REPLY_BYTES,&required,&parent_event,&parent_receipt);
     if (!error && required!=BASE_CHECK_REPLY_BYTES) return ERROR_INVALID_DATA;
+    if (!error && parent_event) {
+        if (!(*parentEvents=MIDL_user_allocate(sizeof(**parentEvents)))) return ERROR_NOT_ENOUGH_MEMORY;
+        **parentEvents=parent_event;*parentEventCount=1;
+    }
+    if (!error) *parentReceipt=(ULONG)parent_receipt;
     if (!error) *replyBytes=required;
     basesrv_trace("check",pid,error);
     return error;

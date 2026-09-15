@@ -86,10 +86,18 @@ static DWORD launch_vdm(ULONG binary,PCWSTR application,PCWSTR command)
     if (!BaseCheckVDM(binary,application,command,NULL,&environment,&message,&task,0,&startup)) {
         result=GetLastError(); goto done;
     }
-    /* Worker reuse is source-owned selection work for S5.  Do not send a new
-     * command into a currently resident guest before that contract exists. */
+    /* srvvdm.c has already selected and queued a same-Console resident DOS
+     * record.  Its original Check reply carries the parent completion event;
+     * wait and query the original exit-code route, never create another VDM. */
+    if (message.u.CheckVDM.VDMState==VDM_PRESENT_AND_READY) {
+        parent_wait=message.u.CheckVDM.WaitObjectForParent;
+        if (!parent_wait || WaitForSingleObject(parent_wait,INFINITE)!=WAIT_OBJECT_0 ||
+            !BaseCheckForVDM(parent_wait,&result)) result=GetLastError();
+        CloseHandle(parent_wait);
+        goto done;
+    }
     if (message.u.CheckVDM.VDMState!=VDM_NOT_PRESENT) {
-        result=ERROR_NOT_SUPPORTED; goto done;
+        result=ERROR_INVALID_DATA; goto done;
     }
     result=OpenNtBaseClientReserveWorker(task,&reservation);
     if (result) goto done;

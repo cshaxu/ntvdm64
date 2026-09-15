@@ -483,7 +483,8 @@ done:
 }
 
 DWORD OpenNtBaseServiceCheck(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD generation,
-    void *input,uint32_t bytes,void *output,uint32_t capacity,uint32_t *required)
+    void *input,uint32_t bytes,void *output,uint32_t capacity,uint32_t *required,
+    HANDLE *parent_event,uint32_t *parent_receipt)
 {
     BASE_API_MSG message={0};
     STARTUPINFOA startup;
@@ -491,10 +492,14 @@ DWORD OpenNtBaseServiceCheck(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD 
     PCSR_THREAD previousThread;
     OPENNT_BASE_PROCESS_REGISTRY *previousRegistry;
     const OPENNT_BASE_INTERACTIVE_SCOPE *previousInteractive;
+    OPENNT_BASE_SERVICE_RESOURCES resources;
+    const OPENNT_BASE_RESOURCE_BINDING *previousResources;
     uint32_t request;
     uint32_t needed=0;
     NTSTATUS status;
     if (required) *required=0;
+    if (!parent_event || !parent_receipt) return ERROR_INVALID_PARAMETER;
+    *parent_event=NULL;*parent_receipt=0;
     if (!connection || !required || !OpenNtBaseServicePeer(connection,pid,generation) ||
         !OpenNtBaseDecodeCheckCommand(input,bytes,generation,&message,&startup,&request))
         return ERROR_INVALID_PARAMETER;
@@ -512,20 +517,30 @@ DWORD OpenNtBaseServiceCheck(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD 
     EnterCriticalSection(&connection->service->lock);
     thread.Process=&connection->process;
     thread.ClientId.UniqueProcess=connection->process.ClientId.UniqueProcess;
+    service_resources_init(&resources,connection,BROKER_VDM_PARENT_WAIT);
     previousThread=OpenNtBaseBindServerRequestThread(&thread);
     previousRegistry=OpenNtBaseBindProcessRegistry(&connection->service->registry);
     previousInteractive=OpenNtBaseBindInteractiveScope(&connection->service->interactive);
+    previousResources=OpenNtBaseBindResources(&resources.binding);
     status=OpenNtBaseDispatchOperation((PCSR_API_MSG)&message,BROKER_VDM_CHECK,
         sizeof(message.u.CheckVDM));
+    OpenNtBaseBindResources(previousResources);
     OpenNtBaseBindInteractiveScope(previousInteractive);
     OpenNtBaseBindProcessRegistry(previousRegistry);
     OpenNtBaseBindServerRequestThread(previousThread);
+    service_resources_release(&resources);
     if (!status && NT_SUCCESS((NTSTATUS)message.ReturnValue))
         connection->wow=message.u.CheckVDM.BinaryType==BINARY_TYPE_WIN16;
     LeaveCriticalSection(&connection->service->lock);
     if (status && !message.ReturnValue) message.ReturnValue=status;
     if (!OpenNtBaseEncodeCheckReply(&message,request,generation,output,capacity,required))
         return ERROR_INVALID_PARAMETER;
+    if (NT_SUCCESS((NTSTATUS)message.ReturnValue) &&
+        message.u.CheckVDM.VDMState==VDM_PRESENT_AND_READY) {
+        *parent_receipt=(uint32_t)(ULONG_PTR)message.u.CheckVDM.WaitObjectForParent;
+        return service_wait_resolve(connection,generation,message.u.CheckVDM.WaitObjectForParent,
+            BROKER_VDM_PARENT_WAIT,parent_event);
+    }
     return ERROR_SUCCESS;
 }
 

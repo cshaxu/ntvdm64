@@ -38,7 +38,8 @@ DWORD OpenNtBaseServiceReleaseReservation(OPENNT_BASE_CONNECTION *,DWORD pid,DWO
 BOOL OpenNtBaseServiceWorkerReservation(OPENNT_BASE_CONNECTION *,uint64_t *reservation,
     ULONG *task,HANDLE *console);
 DWORD OpenNtBaseServiceCheck(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,
-    void *input,uint32_t bytes,void *output,uint32_t capacity,uint32_t *required);
+    void *input,uint32_t bytes,void *output,uint32_t capacity,uint32_t *required,
+    HANDLE *parent_event,uint32_t *parent_receipt);
 /* Update carries scalar entry input only.  For PROCESS_HANDLE the broker
  * resolves the source-shaped pseudo-handle to the worker retained under the
  * authenticated launch reservation; its parent event is a typed RPC attachment. */

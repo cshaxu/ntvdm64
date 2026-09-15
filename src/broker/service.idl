@@ -18,9 +18,10 @@ interface vdm_service
         [in, system_handle(sh_process)] HANDLE process,
         [in] unsigned long generation,
         [out] unsigned long *first);
-    /* The body is the existing versioned, copied BasepCheckVDM binding.
-     * Its fixed-size reply is the existing forty-byte Check reply envelope;
-     * no native pointer, Console identity or HANDLE crosses this operation. */
+    /* The fixed-size reply is the copied BasepCheckVDM scalar envelope.
+     * A resident VDM's source-shaped parent completion event crosses only as
+     * a typed attachment; the companion receipt remains broker-local for
+     * the original BasepGetVDMExitCode lookup. */
     error_status_t Check(
         [in] handle_t binding,
         [in] VDM_CONNECTION connection,
@@ -28,6 +29,9 @@ interface vdm_service
         [in] unsigned long generation,
         [in] unsigned long request_bytes,
         [in, size_is(request_bytes)] byte *request,
+        [out] unsigned long *parent_event_count,
+        [out, system_handle(sh_event), size_is(,*parent_event_count)] HANDLE **parent_events,
+        [out] unsigned long *parent_receipt,
         [out] unsigned long *reply_bytes,
         [out] byte reply[40]);
     error_status_t Get(
