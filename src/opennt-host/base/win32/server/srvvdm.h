@@ -91,6 +91,9 @@ ULONG BaseSrvIsFirstVDM(PCSR_API_MSG, PCSR_REPLY_STATUS);
 ULONG BaseSrvSetReenterCount (PCSR_API_MSG, PCSR_REPLY_STATUS);
 ULONG BaseSrvCheckWOW(PBASE_CHECKVDM_MSG, HANDLE);
 ULONG BaseSrvCheckDOS(PBASE_CHECKVDM_MSG);
+/* READY is a record state, not proof the worker is inside GetNextVDMCommand.
+ * The standalone broker asks this original owner before reusing a Console. */
+BOOL  BaseSrvDOSWorkerWaitPending(HANDLE,PBOOL);
 BOOL  BaseSrvCopyCommand(PBASE_CHECKVDM_MSG,PINFORECORD);
 ULONG BaseSrvUpdateWOWEntry(PBASE_UPDATE_VDM_ENTRY_MSG);
 ULONG BaseSrvUpdateDOSEntry(PBASE_UPDATE_VDM_ENTRY_MSG);

@@ -483,6 +483,24 @@ done:
     return error;
 }
 
+/* A no-console DOS record receives its actual Console identity only when the
+ * reserved worker makes its original ASKING_FOR_PIF request.  This finite
+ * local key is the transport replacement for that unavailable handle; it is
+ * not a second record list or worker scheduler. */
+static DWORD service_allocate_console(OPENNT_BASE_SERVICE *service,HANDLE *console)
+{
+    DWORD error=ERROR_SUCCESS;
+    if (!service || !console) return ERROR_INVALID_PARAMETER;
+    *console=NULL;
+    EnterCriticalSection(&service->lock);
+    if (!++service->next_console || service->next_console==MAXDWORD)
+        error=ERROR_ARITHMETIC_OVERFLOW;
+    else
+        *console=(HANDLE)(ULONG_PTR)service->next_console;
+    LeaveCriticalSection(&service->lock);
+    return error;
+}
+
 DWORD OpenNtBaseServiceCheck(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD generation,
     void *input,uint32_t bytes,void *output,uint32_t capacity,uint32_t *required,
     HANDLE *parent_event,uint32_t *parent_receipt)
@@ -498,6 +516,9 @@ DWORD OpenNtBaseServiceCheck(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD 
     uint32_t request;
     uint32_t needed=0;
     NTSTATUS status;
+    HANDLE separate_console=NULL;
+    BOOL separate_dos=FALSE;
+    BOOL console_record_exists=FALSE;
     if (required) *required=0;
     if (!parent_event || !parent_receipt) return ERROR_INVALID_PARAMETER;
     *parent_event=NULL;*parent_receipt=0;
@@ -513,7 +534,20 @@ DWORD OpenNtBaseServiceCheck(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD 
     if (message.u.CheckVDM.ConsoleHandle==OPENNT_BASE_CONSOLE_EXISTING) {
         DWORD bind=service_bind_existing_console(connection);
         if (bind) return bind;
-        message.u.CheckVDM.ConsoleHandle=connection->console;
+        /* VDM_READY is not worker readiness.  Reuse only a worker that has
+         * already reached its original GetNextVDMCommand wait.  Otherwise
+         * preserve resident COMMAND and let CheckDOS create its original
+         * hConsole==0/DosSesId record for a separate worker. */
+        if (message.u.CheckVDM.BinaryType==BINARY_TYPE_DOS &&
+            !BaseSrvDOSWorkerWaitPending(connection->console,&console_record_exists) &&
+            console_record_exists) {
+            DWORD allocate=service_allocate_console(connection->service,&separate_console);
+            if (allocate) return allocate;
+            message.u.CheckVDM.ConsoleHandle=NULL;
+            separate_dos=TRUE;
+        } else {
+            message.u.CheckVDM.ConsoleHandle=connection->console;
+        }
     }
     EnterCriticalSection(&connection->service->lock);
     thread.Process=&connection->process;
@@ -532,8 +566,17 @@ DWORD OpenNtBaseServiceCheck(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD 
     service_resources_release(&resources);
     if (!status && NT_SUCCESS((NTSTATUS)message.ReturnValue))
         connection->wow=message.u.CheckVDM.BinaryType==BINARY_TYPE_WIN16;
+    /* Once source has published the no-console record, the launcher and its
+     * reservation must use the new identity.  The worker's first PIF request
+     * then binds this record, not the resident COMMAND ConsoleRecord. */
+    if (!status && NT_SUCCESS((NTSTATUS)message.ReturnValue) && separate_dos &&
+        message.u.CheckVDM.VDMState==VDM_NOT_PRESENT)
+        connection->console=separate_console;
     LeaveCriticalSection(&connection->service->lock);
     if (status && !message.ReturnValue) message.ReturnValue=status;
+    if (separate_dos)
+        service_trace_operation("check-separate-dos-session",message.u.CheckVDM.VDMState,
+            (NTSTATUS)message.ReturnValue);
     service_trace_operation("check-dispatched",message.u.CheckVDM.VDMState,
         (NTSTATUS)message.ReturnValue);
     if (!OpenNtBaseEncodeCheckReply(&message,request,generation,output,capacity,required))

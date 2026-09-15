@@ -172,6 +172,42 @@ acceptance result. S5 must recover the source-shaped re-entry/delivery
 contract, with trace evidence that a pending worker wait was signalled and
 then consumed, before same-Console `run16 MEM.EXE` can be accepted.
 
+### Follow-up repair: worker wait is the reuse boundary
+
+The repair keeps the observation with the selected original owner, not in a
+broker-local worker state machine. `srvvdm.c:BaseSrvDOSWorkerWaitPending`
+holds `BaseSrvDOSCriticalSection`, distinguishes an absent `ConsoleRecord`
+from an existing record, and queries the original server-side
+`hWaitForVDMDup` event. A record is reusable only when that event exists and
+is nonsignalled: this is the state installed by an actual
+`GetNextVDMCommand` no-command return. `VDM_READY` alone is deliberately not
+enough.
+
+For an existing record with no pending worker wait,
+`base_service.c:OpenNtBaseServiceCheck` presents `NULL` ConsoleHandle to the
+unchanged `BaseSrvCheckDOS`. That selects its original no-console record and
+returns a nonzero `DosSesId`; the binding allocates one finite service-local
+Console identity for the reservation, so the new worker's original PIF
+request binds that new record rather than the resident COMMAND record.
+`run16` creates that `DosSesId` worker with `CREATE_NEW_CONSOLE`. The default-
+off `MVDM_BASESRV_TRACE_PATH` trace now emits
+`check-separate-dos-session`; it contains only state and status.
+
+The focused x86 `basesrv-service-reservation-test.exe` passes after proving
+both directions: an existing ready record without a wait is rejected as not
+reusable; after the original worker completes its current command and enters
+`GetNextVDMCommand` wait, Check signals that wait and the source-owned
+second-time Get consumes the command. The full x86 `run16.exe`, `basesrv.exe`
+and `ntvdm.exe` links also pass from `build/M0-T412/S5/product` (with only the
+pre-existing `ntvdm32.exe` export-name link warning).
+
+No package-root runtime claim is made here. The reported live `run16 mem`
+launcher, resident worker and broker were deliberately left untouched; this
+build has not replaced their files or reused their endpoint. A later clean
+package run must observe either the separate-session trace/worker or the
+actual wait signal and command consumption before this is accepted as real
+runtime closure.
+
 Earlier redirected-stdio observations timed out with empty output because
 the launcher had no Console-standard handles. They are retained as a distinct
 non-Console execution result, not treated as a failure of the Console product

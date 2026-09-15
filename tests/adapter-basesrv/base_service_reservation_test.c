@@ -89,23 +89,10 @@ int main(int argc,char **argv)
     CHECK(OpenNtBaseServiceConnect(service,child.hProcess,&worker,&workerGeneration)==ERROR_SUCCESS);
     CHECK(OpenNtBaseServiceWorkerReservation(worker,&claimed,&task,&console));
     CHECK(claimed==reservation && task==reply.u.CheckVDM.iTask && console!=NULL);
-    /* A second launcher in this Console must receive the original CheckDOS
-     * completion pair, not manufacture a second worker.  The worker will
-     * consume this command on its next original GetNext request below. */
-    CHECK(CreateProcessA(NULL,command,NULL,NULL,FALSE,CREATE_SUSPENDED,NULL,NULL,&startup,&laterChild));
-    CHECK(OpenNtBaseServiceConnect(service,laterChild.hProcess,&later,&laterGeneration)==ERROR_SUCCESS);
-    check.u.CheckVDM.ConsoleHandle=OPENNT_BASE_CONSOLE_EXISTING;
-    CHECK(OpenNtBaseEncodeCheckCommand(&check,6,laterGeneration,NULL,0,&wireBytes));
-    free(wire);wire=malloc(wireBytes);CHECK(wire && OpenNtBaseEncodeCheckCommand(
-        &check,6,laterGeneration,wire,wireBytes,&wireBytes));
-    CHECK(OpenNtBaseServiceCheck(later,laterChild.dwProcessId,laterGeneration,
-        wire,wireBytes,NULL,0,&answerBytes,&laterParentEvent,&laterParentReceipt)==ERROR_INSUFFICIENT_BUFFER && answerBytes);
-    free(answer);answer=malloc(answerBytes);CHECK(answer && OpenNtBaseServiceCheck(
-        later,laterChild.dwProcessId,laterGeneration,wire,wireBytes,answer,answerBytes,&answerBytes,
-        &laterParentEvent,&laterParentReceipt)==ERROR_SUCCESS);
-    CHECK(queryCalls==1 && OpenNtBaseApplyCheckReply(answer,answerBytes,laterGeneration,6,&reply));
-    CHECK(reply.ReturnValue==STATUS_SUCCESS && reply.u.CheckVDM.VDMState==VDM_PRESENT_AND_READY &&
-        laterParentEvent!=NULL && laterParentReceipt!=0);
+    /* READY alone is not worker readiness: a resident COMMAND prompt has no
+     * outstanding GetNextVDMCommand wait to receive an unrelated launch. */
+    { BOOL recordExists=FALSE;
+      CHECK(!BaseSrvDOSWorkerWaitPending(console,&recordExists) && recordExists); }
     get.u.GetNextVDMCommand.StartupInfo=&getStartup;
     get.u.GetNextVDMCommand.VDMState=ASKING_FOR_PIF|ASKING_FOR_DOS_BINARY;
     CHECK(OpenNtBaseEncodeGetCommand(&get,3,workerGeneration,NULL,0,&getWireBytes));
@@ -135,12 +122,55 @@ int main(int argc,char **argv)
     free(getWire);getWire=NULL;
     ZeroMemory(&get,sizeof(get));
     get.u.GetNextVDMCommand.StartupInfo=&getStartup;
-    /* The original command client requests again.  CheckDOS above already
-     * queued the second record, so this consumes it instead of parking. */
-    get.u.GetNextVDMCommand.VDMState=ASKING_FOR_SECOND_TIME|ASKING_FOR_DOS_BINARY;
+    /* Complete the first command and enter the original GetNext wait. */
+    get.u.GetNextVDMCommand.VDMState=ASKING_FOR_DOS_BINARY;
     CHECK(OpenNtBaseEncodeGetCommand(&get,5,workerGeneration,NULL,0,&getWireBytes));
     getWire=malloc(getWireBytes);CHECK(getWire && OpenNtBaseEncodeGetCommand(
         &get,5,workerGeneration,getWire,getWireBytes,&getWireBytes));
+    CHECK(OpenNtBaseServiceGet(worker,child.dwProcessId,workerGeneration,getWire,getWireBytes,
+        &getAnswer,&wireBytes,&getWait,standard,&standardCount)==ERROR_SUCCESS);
+    CHECK(getAnswer!=NULL && getWait!=NULL && standardCount==0);
+    OpenNtBaseServiceReleaseCommandReply(getAnswer);getAnswer=NULL;
+    CHECK(WaitForSingleObject(getWait,0)==WAIT_TIMEOUT);
+    { BOOL recordExists=FALSE;
+      CHECK(BaseSrvDOSWorkerWaitPending(console,&recordExists) && recordExists); }
+    CHECK(WaitForSingleObject(parentEvent,0)==WAIT_OBJECT_0);
+    { DWORD exitCode=STILL_ACTIVE;
+      CHECK(OpenNtBaseServiceExitCode(launcher,GetCurrentProcessId(),launcherGeneration,
+          parentReceipt,&exitCode)==ERROR_SUCCESS && exitCode==0); }
+    CloseHandle(parentEvent);parentEvent=NULL;
+
+    /* A same-Console launch may now use the original ready record: CheckDOS
+     * signals the actual worker wait and the second-time Get consumes it. */
+    CHECK(CreateProcessA(NULL,command,NULL,NULL,FALSE,CREATE_SUSPENDED,NULL,NULL,&startup,&laterChild));
+    CHECK(OpenNtBaseServiceConnect(service,laterChild.hProcess,&later,&laterGeneration)==ERROR_SUCCESS);
+    check.u.CheckVDM.ConsoleHandle=OPENNT_BASE_CONSOLE_EXISTING;
+    CHECK(OpenNtBaseEncodeCheckCommand(&check,6,laterGeneration,NULL,0,&wireBytes));
+    free(wire);wire=malloc(wireBytes);CHECK(wire && OpenNtBaseEncodeCheckCommand(
+        &check,6,laterGeneration,wire,wireBytes,&wireBytes));
+    CHECK(OpenNtBaseServiceCheck(later,laterChild.dwProcessId,laterGeneration,
+        wire,wireBytes,NULL,0,&answerBytes,&laterParentEvent,&laterParentReceipt)==ERROR_INSUFFICIENT_BUFFER && answerBytes);
+    free(answer);answer=malloc(answerBytes);CHECK(answer && OpenNtBaseServiceCheck(
+        later,laterChild.dwProcessId,laterGeneration,wire,wireBytes,answer,answerBytes,&answerBytes,
+        &laterParentEvent,&laterParentReceipt)==ERROR_SUCCESS);
+    CHECK(queryCalls==1 && OpenNtBaseApplyCheckReply(answer,answerBytes,laterGeneration,6,&reply));
+    CHECK(reply.ReturnValue==STATUS_SUCCESS && reply.u.CheckVDM.VDMState==VDM_PRESENT_AND_READY &&
+        laterParentEvent!=NULL && laterParentReceipt!=0);
+    CHECK(WaitForSingleObject(getWait,0)==WAIT_OBJECT_0);
+    CloseHandle(getWait);getWait=NULL;
+
+    ZeroMemory(&get,sizeof(get));
+    get.u.GetNextVDMCommand.StartupInfo=&getStartup;
+    get.u.GetNextVDMCommand.VDMState=ASKING_FOR_SECOND_TIME|ASKING_FOR_DOS_BINARY;
+    get.u.GetNextVDMCommand.CmdLine=getCmd;get.u.GetNextVDMCommand.CmdLen=sizeof(getCmd);
+    get.u.GetNextVDMCommand.AppName=getApp;get.u.GetNextVDMCommand.AppLen=sizeof(getApp);
+    get.u.GetNextVDMCommand.Env=getEnv;get.u.GetNextVDMCommand.EnvLen=sizeof(getEnv);
+    get.u.GetNextVDMCommand.PifFile=getPif;get.u.GetNextVDMCommand.PifLen=sizeof(getPif);
+    get.u.GetNextVDMCommand.CurDirectory=getDirectory;
+    get.u.GetNextVDMCommand.CurDirectoryLen=sizeof(getDirectory);
+    CHECK(OpenNtBaseEncodeGetCommand(&get,7,workerGeneration,NULL,0,&getWireBytes));
+    free(getWire);getWire=malloc(getWireBytes);CHECK(getWire && OpenNtBaseEncodeGetCommand(
+        &get,7,workerGeneration,getWire,getWireBytes,&getWireBytes));
     CHECK(OpenNtBaseServiceGet(worker,child.dwProcessId,workerGeneration,getWire,getWireBytes,
         &getAnswer,&wireBytes,&getWait,standard,&standardCount)==ERROR_SUCCESS);
     CHECK(getAnswer!=NULL && getWait==NULL && standardCount==0);
