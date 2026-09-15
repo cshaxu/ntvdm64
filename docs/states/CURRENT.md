@@ -14,6 +14,13 @@ the owner's narrow Windows Terminal session. The
 preserves reproduction evidence, limitations and retained research inputs.
 T412 remains open; no next T is admitted.
 
+S11's first inactive-buffer candidate compiled and passed focused binding
+checks but failed the real COMMAND/EDIT/MEM ConPTY sequence. It is withdrawn;
+published products are restored unchanged. The linked handoff records the
+negative result and retained candidate identity. Resize suppression alone is
+not a sufficient root-cause repair. Stream/frame copy and native-child handoff
+remain under investigation; S11 is not closed and no owner test is requested.
+
 ## Active Packet
 
 ### M0 T412 S11 — Console output geometry and lifecycle repair

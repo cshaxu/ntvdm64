@@ -99,7 +99,55 @@ processes; no process termination was necessary.
 
 ## Next verification
 
+### Rejected implementation experiment
+
+The inactive-buffer capability probe under build/M0-T412/S11/buffer-probe,
+compiled with MSVC x86 /MT, reports before=45,34 after=45,34 backing=80,25
+resize=1,1. No resize sequence appears in its ConPTY output. This proves a
+platform mechanism, not repaired guest execution.
+
+Recovery ladder: (1) original nt_graph/nt_fulsc algorithms remain selected;
+the NT4 server bitmap.c SrvInvalidateBitMapRect/WriteToScreen translation
+unit cannot compose because it requires CSR Console objects, private locks
+and GDI window/server state; no whole-server compilation is claimed.
+(2) the attempted facade retained Console API shapes over native inactive
+cell storage, keeping inherited stream handles intact. (3) a candidate
+ResetConsoleState release hook ended the binding; no algorithm overlay was
+attempted. (4) finite viewport/input translation was experimentally labelled
+ADAPTER-WIN32-052. These identifiers are withdrawn with the failed code, not
+accepted production recovery entries.
+
+The first focused fixture disproved native window/cursor isolation: manipulating
+an inactive buffer's window still affected shared Console geometry/cursor.
+A revised candidate retained native cell storage but held logical geometry
+locally. Its native fixture passed geometry, cursor/mouse mapping, release,
+rebind and invalid-handle checks. A fresh x86 /MT three-program link succeeded
+under build/M0-T412/S11/formal, including the VDM_TIB storage gate.
+
+Integration nevertheless FAILED: m0-t412-s11-conpty-45x34.raw under the
+runtime log root completed COMMAND -> MEM -> EDIT -> MEM twice -> EXIT,
+but bounded replay still showed corrupted text and an 11-row gap. Resize
+sequences were absent. Guest COMMAND's final 1 is its original result, not
+an assertion that rendering passed. The harness's first empty capture was
+an executable-quoting defect and is not product evidence.
+
+This falsifies resize suppression/viewport projection as a sufficient fix.
+Do not claim the remaining cause is proved: original stream/frame transitions,
+screen-to-regen copy and native-child handoff require correlated cell/cursor
+observations before another implementation. No broader CPU change is justified.
+
+All candidate production, fixture and build-selection edits were withdrawn.
+Their reviewable diff and added sources are intentionally retained only at
+build/M0-T412/S11/rejected-candidate.txt, SHA-256
+B52C6332DFCCC2330E0A31586EE55B863EC4B37D35672FBDC7172E1282143679.
+The failed formal build and prior-products backup are retained as identified
+comparison artifacts, never a new default or release input. The prior three
+products were restored to the exact hashes above; the test's Job cleaned its
+own process tree and no package processes remained before restoration.
+No user testing is requested for this rejected candidate.
+
 The [working plan](../operations/m0-t412-broker-restoration-plan.md)
 defines source audit, one coherent boundary repair, and real-program checks.
 This record is investigation preservation and admission evidence only;
-implementation, fresh build and repaired-product acceptance remain pending.
+repair implementation and repaired-product acceptance remain pending; the
+failed candidate's successful build is not repair acceptance.
