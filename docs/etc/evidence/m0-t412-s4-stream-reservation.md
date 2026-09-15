@@ -208,8 +208,20 @@ records worker Get, `reenter-inc`, `reenter-dec` and parent disconnect, while
 the original native-child body records phases 24, 30, 31, 10--12, 0 and 1 all
 successful; phase 1 returns zero. Thus the real guest `54:08` route reaches
 the no-parser public-shell fallback and returns. This proves the shell-tail
-control/exit path, not guest byte-producing stdout/stderr or guest
-redirection, whose distinct acceptance remains open.
+control/exit path; the Console byte-output observation and the separate
+guest-redirection boundary are recorded below.
+
+The same route was then run in the existing Console-owning observer, whose
+child receives real `CONIN$`/`CONOUT$` handles. Its r5 Console snapshot
+contains `MVDM_T412_GUEST_SHELL`. The r6 payload retained the distinct shell
+operations `echo MVDM_T412_GUEST_STDOUT` and
+`echo MVDM_T412_GUEST_STDERR 1>&2`; its result exited zero, records the same
+Get/reenter/return sequence, and its Console snapshot contains both markers.
+The `FFFFFFFF` values in the retained COMMAND standard-handle capture are the
+original no-redirection sentinels for this Console case, not failed attachment
+receipts. This is positive byte-producing stdout and stderr evidence for the
+real guest path. It deliberately does not claim guest `>` redirection, which
+remains the separately recorded Redirector boundary.
 
 ## Interpretation
 
