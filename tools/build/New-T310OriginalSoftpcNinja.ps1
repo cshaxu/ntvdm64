@@ -92,10 +92,8 @@ $oemuniRoot = Join-Path $root 'src/mvdm-host/oemuni'
 $sessionRoot = Join-Path $root 'src/session'
 $brokerRoot = Join-Path $root 'src/broker'
 $brokerRecordTestSource = Join-Path $root 'tests/broker/base_vdm_record_test.c'
-$baseVdmBrokerTestSource = Join-Path $root 'tests/adapter-basesrv/base_vdm_broker_test.c'
 $baseReservationTestSource = Join-Path $root 'tests/adapter-basesrv/base_reservation_test.c'
 $baseServiceReservationTestSource = Join-Path $root 'tests/adapter-basesrv/base_service_reservation_test.c'
-$launchDeclarationWowEntryTestSource = Join-Path $root 'tests/app/launch_declaration_wow_entry_test.c'
 $cpu40DescriptorDomainFixtureSource = Join-Path $root 'tests/mvdm-host/dpmi/cpu40_descriptor_domain_fixture.c'
 $rtlX86FixtureSource = Join-Path $root 'tests/opennt-host/rtl_x86_fixture.c'
 $environmentProjectionFixtureSource = Join-Path $root 'tests/opennt-host/environment_projection_fixture.c'
@@ -243,8 +241,10 @@ $adapterWin32Names = @('ntioapi_facade.c', 'thread_start_compat.c',
 # ExitVDM is an original Base client call reached by selected SoftPC teardown
 # sources.  It already has one same-shaped session-owned implementation; keep
 # it in the formal closure instead of accepting an unresolved external edge.
-$adapterBaseSrvNames = @('base_vdm_client.c', 'base_vdm_local.c', 'base_vdm_broker.c',
-                          'mvdm_image_classification.c', 'mvdm_command_guest_state.c',
+# The reached COMMAND helpers are worker bindings.  The former local
+# BaseVDM queue/client/broker was the retired single-process product and must
+# never be rebuilt into an audit or production archive.
+$adapterBaseSrvNames = @('mvdm_image_classification.c', 'mvdm_command_guest_state.c',
                           'mvdm_command_native_child.c')
 $adapterVddNames = @('mvdm_softpc_vdd_unavailable.c',
                      'mvdm_softpc_vdd_configuration.c')
@@ -266,7 +266,7 @@ $adapterSoftpcNames = @('mvdm_softpc_firmware.c', 'mvdm_xms_memory.c', 'mvdm_a20
                         'mvdm_softpc_event_thread.c',
                         'mvdm_softpc_presentation_font.c',
                         'mvdm_softpc_descriptor_fields.c')
-$appNames = @('machine_shell.c', 'package_layout.c', 'launch_declaration.c', 'entry.c')
+$appNames = @('machine_shell.c', 'package_layout.c')
 $effectiveAddressSource = Join-Path $adapterSoftpcRoot 'mvdm_softpc_effective_address.c'
 $effectiveAddressObject = 'obj/adapter-softpc/mvdm_softpc_effective_address.obj'
 $patchNames = @('PigReg_c.h', 'sas4gen.h', 'gdpvar.h')
@@ -338,9 +338,6 @@ foreach ($name in $brokerNames) {
 }
 if (!(Test-Path -LiteralPath $brokerRecordTestSource -PathType Leaf)) {
     throw "Required broker record test missing: $brokerRecordTestSource"
-}
-if (!(Test-Path -LiteralPath $baseVdmBrokerTestSource -PathType Leaf)) {
-    throw "Required BaseVDM broker test missing: $baseVdmBrokerTestSource"
 }
 foreach ($name in $baseDebugNames) {
     if (!(Test-Path -LiteralPath (Join-Path $baseDebugRoot $name))) { throw "Original SoftPC base debug source missing: $name" }
@@ -699,13 +696,7 @@ $graph.Add('rule forced_link_audit')
 # This deliberately produces a non-runnable DLL.  /WHOLEARCHIVE makes the
 # candidate's complete original membership visible to LINK; /FORCE keeps the
 # unresolved physical forms in the adjacent log for source-first ownership.
-$graph.Add('  command = link.exe /nologo /dll /noentry /force:unresolved /force:multiple /out:$out /implib:$out.lib /wholearchive:original-ccpu386.lib /wholearchive:original-softpc-bios.lib /wholearchive:original-softpc-keymouse.lib /wholearchive:original-softpc-system.lib /wholearchive:original-softpc-disks.lib /wholearchive:original-softpc-support.lib /wholearchive:original-softpc-video.lib /wholearchive:original-softpc-cvidc.lib /wholearchive:original-softpc-comms.lib /wholearchive:original-softpc-dos.lib /wholearchive:original-mvdm-dem.lib /wholearchive:original-mvdm-command.lib /wholearchive:original-mvdm-xms.lib /wholearchive:original-mvdm-dpmi32.lib /wholearchive:original-mvdm-host-suballoc.lib /wholearchive:original-mvdm-host-oemuni.lib /wholearchive:original-softpc-base-trace.lib /wholearchive:original-softpc-host-roots.lib /wholearchive:softpc-bindings.lib /wholearchive:softpc-win32-bindings.lib /wholearchive:basesrv-bindings.lib /wholearchive:monitor-bindings.lib /wholearchive:debugger-bindings.lib /wholearchive:session.lib /wholearchive:broker.lib /wholearchive:mvdm-softpc-effective-address.lib /wholearchive:softpc-patch-evidence.lib softpc-ccpu-vector-defaults.lib kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib')
-$graph.Add('rule process_link')
-# The historical `ntvdm.exe` exported this source-defined CCPU/SoftPC ABI for
-# late-loaded owner DLLs such as VDMREDIR.  Retain the original export surface
-# in the parent process so a DLL imports the one already-running machine rather
-# than linking a second SoftPC instance into itself.
-$graph.Add('  command = link.exe /nologo /map:$out.map /def:' + (NinjaPath $wow32ProviderExportDefinition) + ' /implib:original-softpc-process-import.lib /out:$out $in kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib libcmt.lib libvcruntime.lib libucrt.lib')
+$graph.Add('  command = link.exe /nologo /dll /noentry /force:unresolved /force:multiple /out:$out /implib:$out.lib /wholearchive:original-ccpu386.lib /wholearchive:original-softpc-bios.lib /wholearchive:original-softpc-keymouse.lib /wholearchive:original-softpc-system.lib /wholearchive:original-softpc-disks.lib /wholearchive:original-softpc-support.lib /wholearchive:original-softpc-video.lib /wholearchive:original-softpc-cvidc.lib /wholearchive:original-softpc-comms.lib /wholearchive:original-softpc-dos.lib /wholearchive:original-mvdm-dem.lib /wholearchive:original-mvdm-command.lib /wholearchive:original-mvdm-xms.lib /wholearchive:original-mvdm-dpmi32.lib /wholearchive:original-mvdm-host-suballoc.lib /wholearchive:original-mvdm-host-oemuni.lib /wholearchive:original-softpc-base-trace.lib /wholearchive:original-softpc-host-roots.lib /wholearchive:softpc-bindings.lib /wholearchive:softpc-win32-bindings.lib /wholearchive:monitor-bindings.lib /wholearchive:debugger-bindings.lib /wholearchive:session.lib /wholearchive:broker.lib /wholearchive:mvdm-softpc-effective-address.lib /wholearchive:softpc-patch-evidence.lib softpc-ccpu-vector-defaults.lib kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib')
 $graph.Add('rule redir_dll_link')
 # Keep the original VDMREDIR DLL boundary.  The parent import library is an
 # implicit output of the original process link, so this rule cannot create a
@@ -892,10 +883,6 @@ $brokerObjects = foreach ($name in $brokerNames) {
 }
 $brokerRecordTestObject = 'obj/tests/base_vdm_record_test.obj'
 $graph.Add('build ' + $brokerRecordTestObject + ': cc ' + (NinjaPath $brokerRecordTestSource))
-$baseVdmBrokerTestObject = 'obj/tests/base_vdm_broker_test.obj'
-$graph.Add('build ' + $baseVdmBrokerTestObject + ': cc ' + (NinjaPath $baseVdmBrokerTestSource))
-$launchDeclarationWowEntryTestObject = 'obj/tests/launch_declaration_wow_entry_test.obj'
-$graph.Add('build ' + $launchDeclarationWowEntryTestObject + ': cc ' + (NinjaPath $launchDeclarationWowEntryTestSource))
 $cpu40DescriptorDomainFixtureObject = 'obj/tests/cpu40_descriptor_domain_fixture.obj'
 $graph.Add('build ' + $cpu40DescriptorDomainFixtureObject + ': cc_dpmi ' + (NinjaPath $cpu40DescriptorDomainFixtureSource))
 $graph.Add('  dpmi_cflags = ' + $dpmiFlags + ' /DLINKED_INTO_MONITOR')
@@ -1142,7 +1129,10 @@ if ($Architecture -eq 'x86') {
     # CCPU40 and DPMI discover the original nt_inthk providers only after their
     # archives have been scanned. Retain the normal source-order occurrence,
     # then rescan this one original host archive at the tail for those hooks.
-    $graph.Add('build ntvdm.exe: worker_link obj/app/worker_entry.obj obj/worker/rpc_client.obj obj/worker/stub.obj worker-shell.lib worker-command-bindings.lib original-softpc-host-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib opennt-base-client.lib opennt-base-bindings.lib original-opennt-rtl-x86.lib softpc-bindings.lib redirector-bindings.lib vdd-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib broker.lib broker-transport.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib original-ccpu386.lib original-softpc-host-roots.lib obj/host/softpc-resource.res')
+    # This import library is the one worker parent ABI.  Late-loaded original
+    # providers import it rather than a retired second `original-softpc-process`
+    # image with its own local BaseVDM queue.
+    $graph.Add('build ntvdm.exe | ntvdm.lib: worker_link obj/app/worker_entry.obj obj/worker/rpc_client.obj obj/worker/stub.obj worker-shell.lib worker-command-bindings.lib original-softpc-host-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib opennt-base-client.lib opennt-base-bindings.lib original-opennt-rtl-x86.lib softpc-bindings.lib redirector-bindings.lib vdd-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib broker.lib broker-transport.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib original-ccpu386.lib original-softpc-host-roots.lib obj/host/softpc-resource.res')
 }
 $appObjects = foreach ($name in $appNames) {
     $object = 'obj/app/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
@@ -1188,44 +1178,38 @@ $graph.Add('build original-opennt-netlib.lib: lib ' + ($openntNetlibObjects -joi
 $graph.Add('build original-opennt-netapi-api.lib: lib ' + ($openntNetapiObjects -join ' '))
 $graph.Add('build original-opennt-base-vdm.lib: lib ' + ($openntBaseVdmObjects -join ' '))
 $graph.Add('build original-opennt-rtl-x86.lib: lib ' + ((@($openntRtlObjects) + @($openntRtlX86Objects)) -join ' '))
-$graph.Add('build app-machine-shell.lib: lib ' + ($appObjects -join ' '))
 $graph.Add('build worker-shell.lib: lib obj/app/machine_shell.obj obj/app/package_layout.obj')
 $graph.Add('build session.lib: lib ' + ($sessionObjects -join ' '))
 $graph.Add('build broker.lib: lib ' + ($brokerObjects -join ' '))
 $graph.Add('build broker-base-vdm-record-test.exe: broker_test_link ' + $brokerRecordTestObject + ' broker.lib')
-$graph.Add('build basesrv-base-vdm-broker-test.exe: broker_test_link ' + $baseVdmBrokerTestObject + ' basesrv-bindings.lib broker.lib session.lib')
-$graph.Add('build app-launch-declaration-wow-entry-test.exe: broker_test_link ' + $launchDeclarationWowEntryTestObject + ' obj/app/launch_declaration.obj softpc-bindings.lib basesrv-bindings.lib broker.lib session.lib')
 $graph.Add('build cpu40-descriptor-domain-fixture.exe: broker_test_link ' + $cpu40DescriptorDomainFixtureObject + ' original-mvdm-dpmi32.lib')
 $graph.Add('build rtl-x86-fixture.exe: rtl_fixture_link ' + $rtlX86FixtureObject + ' original-opennt-rtl-x86.lib')
 $graph.Add('build environment-projection-fixture.exe: rtl_fixture_link ' + $environmentProjectionFixtureObject + ' original-opennt-base-vdm.lib original-opennt-rtl-x86.lib softpc-win32-bindings.lib')
 $graph.Add('build mvdm-softpc-effective-address.lib: lib ' + $effectiveAddressObject)
 $graph.Add('build softpc-win32-bindings.lib: lib ' + ($adapterWin32Objects -join ' '))
-$graph.Add('build basesrv-bindings.lib: lib ' + ($adapterBaseSrvObjects -join ' '))
-# Worker composition keeps reached COMMAND/BOP support but cannot select the
-# legacy local BaseVDM producer, retry loop or queue from this archive.
-$graph.Add('build worker-command-bindings.lib: lib obj/adapter-basesrv/mvdm_image_classification.obj obj/adapter-basesrv/mvdm_command_guest_state.obj obj/adapter-basesrv/mvdm_command_native_child.obj')
+# Worker composition contains only reached COMMAND/BOP support.  It has no
+# local BaseVDM producer, retry loop or single-process queue.
+$graph.Add('build worker-command-bindings.lib: lib ' + ($adapterBaseSrvObjects -join ' '))
 $graph.Add('build monitor-bindings.lib: lib ' + ($adapterMonitorObjects -join ' '))
 $graph.Add('build kernel-vdm-printer.lib: lib ' + $kernelVdmPrinterObject)
 $graph.Add('build debugger-bindings.lib: lib ' + ($adapterDebuggerObjects -join ' '))
 $graph.Add('build softpc-patch-evidence.lib: lib ' + ($patchBodyObjects -join ' '))
 $graph.Add('build softpc-ccpu-vector-defaults.lib: lib ' + $patchVectorDefaultsObject)
 $graph.Add('build softpc-activity-check.lib: lib ' + $patchActivityCheckObject)
-$graph.Add('build original-softpc-candidate: phony original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-redir.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-softpc-host-roots.lib original-opennt-netlib.lib original-opennt-netapi-api.lib original-opennt-rtl-x86.lib softpc-bindings.lib redirector-bindings.lib app-machine-shell.lib softpc-win32-bindings.lib basesrv-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib broker.lib mvdm-softpc-effective-address.lib softpc-patch-evidence.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib')
-$graph.Add('build original-softpc-process.exe | original-softpc-process-import.lib: process_link obj/app/entry.obj app-machine-shell.lib original-softpc-host-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib original-opennt-rtl-x86.lib softpc-bindings.lib redirector-bindings.lib vdd-bindings.lib softpc-win32-bindings.lib basesrv-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib broker.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib original-ccpu386.lib obj/host/softpc-resource.res')
+$graph.Add('build original-softpc-candidate: phony original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-redir.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-softpc-host-roots.lib original-opennt-netlib.lib original-opennt-netapi-api.lib original-opennt-rtl-x86.lib softpc-bindings.lib redirector-bindings.lib worker-shell.lib worker-command-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib broker.lib mvdm-softpc-effective-address.lib softpc-patch-evidence.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib')
 $graph.Add('build obj/tests/ccpu_halt_reset_test.obj: cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/ccpu_halt_reset_test.c')))
 # Same original owner libraries as the product, with a fixture main only.
-$eventTestLink = $graph[$graph.Count - 2].Replace('original-softpc-process.exe | original-softpc-process-import.lib', 'ccpu-halt-reset-test.exe').Replace('process_link obj/app/entry.obj', 'event_test_link obj/tests/ccpu_halt_reset_test.obj')
 $graph.Add('rule event_test_link')
 $graph.Add('  command = link.exe /nologo /map:$out.map /out:$out $in kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib libcmt.lib libvcruntime.lib libucrt.lib')
-$graph.Add($eventTestLink)
+$graph.Add('build ccpu-halt-reset-test.exe: event_test_link obj/tests/ccpu_halt_reset_test.obj worker-shell.lib worker-command-bindings.lib original-softpc-host-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib original-opennt-rtl-x86.lib softpc-bindings.lib redirector-bindings.lib vdd-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib broker.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib original-ccpu386.lib obj/host/softpc-resource.res')
 # Same production libraries; only the entry is a source-shaped memory test.
 $graph.Add('rule memory_test_link')
 $graph.Add('  command = link.exe /nologo /map:$out.map /out:$out $in kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib libcmt.lib libvcruntime.lib libucrt.lib')
 $graph.Add('build obj/tests/original_external_memory_test.obj: cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/original_external_memory_test.c')))
-$graph.Add('build original-external-memory-test.exe: memory_test_link obj/tests/original_external_memory_test.obj app-machine-shell.lib original-softpc-host-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib original-opennt-rtl-x86.lib softpc-bindings.lib redirector-bindings.lib vdd-bindings.lib softpc-win32-bindings.lib basesrv-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib broker.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib original-ccpu386.lib obj/host/softpc-resource.res')
+$graph.Add('build original-external-memory-test.exe: memory_test_link obj/tests/original_external_memory_test.obj worker-shell.lib worker-command-bindings.lib original-softpc-host-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib original-opennt-rtl-x86.lib softpc-bindings.lib redirector-bindings.lib vdd-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib broker.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib original-ccpu386.lib obj/host/softpc-resource.res')
 $graph.Add('build cvidc-vector-binding-fixture.exe: memory_test_link ' + $cvidcVectorBindingFixtureObject + ' ' + $cvidcVectorProviderStubObject + ' obj/cvidc/mvdm_cvidc_vector_binding.obj')
-$graph.Add('build VDMREDIR.dll | VDMREDIR.dll.lib: redir_dll_link ' + (($redirObjects + @($redirResourceObject)) -join ' ') + ' original-softpc-process-import.lib redirector-bindings.lib original-opennt-netlib.lib original-opennt-netapi-api.lib softpc-bindings.lib softpc-win32-bindings.lib session.lib broker.lib')
-$graph.Add('build original-softpc-forced-closure.dll: forced_link_audit original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-softpc-host-roots.lib softpc-bindings.lib app-machine-shell.lib softpc-win32-bindings.lib basesrv-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib broker.lib mvdm-softpc-effective-address.lib softpc-patch-evidence.lib softpc-ccpu-vector-defaults.lib')
+$graph.Add('build VDMREDIR.dll | VDMREDIR.dll.lib: redir_dll_link ' + (($redirObjects + @($redirResourceObject)) -join ' ') + ' ntvdm.lib redirector-bindings.lib original-opennt-netlib.lib original-opennt-netapi-api.lib softpc-bindings.lib softpc-win32-bindings.lib session.lib broker.lib')
+$graph.Add('build original-softpc-forced-closure.dll: forced_link_audit original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-softpc-host-roots.lib softpc-bindings.lib worker-shell.lib worker-command-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib broker.lib mvdm-softpc-effective-address.lib softpc-patch-evidence.lib softpc-ccpu-vector-defaults.lib')
 $graph.Add('default original-softpc-candidate')
 [IO.File]::WriteAllText((Join-Path $build 'build.ninja'), (($graph -join [Environment]::NewLine) + [Environment]::NewLine), [Text.UTF8Encoding]::new($false))
 

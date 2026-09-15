@@ -39,20 +39,17 @@ interface shapes and does not introduce an alternate machine facade.
 
 ## Current state
 
-Families remain separately admitted. The first recovered capability is the
-T302 local Base VDM protocol in `basesrv`; all other family implementation
-requires its own source/ABI/failure audit and must not use this protocol as a
-generic host-service shortcut.
+Families remain separately admitted. BaseSrv record policy is now selected
+from the original `opennt-host` owner through the standalone broker; adapter
+families provide only finite host API/transport bindings and may not recreate a
+local command queue.
 
 ## Registered divergences
 
-- `ADAPTER-BASESRV-010` — `basesrv/source/base_vdm_local.c` is the bounded,
-  one-session counterpart of the original BaseSrv copied-record service. It
-  retains the original `VDMINFO` PIF/title/current-directory capture order,
-  including the `PifFile`/`PifLen` payload needed by original SoftPC PIF
-  selection, while replacing private CSRSS storage and wait handles with
-  session-owned state. It neither parses PIF data nor exposes host data to the
-  guest; original `GetPIFData` remains its parser/owner.
+- The former `ADAPTER-BASESRV-010` local BaseVDM provider was retired in T412
+  S6. Its one-session queue, client retry and broker were duplicate policy;
+  the product now invokes the original BaseSrv record owner through the
+  authenticated transport.
 - `ADAPTER-BASESRV-011` — `basesrv/source/mvdm_image_classification.c` is the
   direct product-entry counterpart of the Windows loader's pre-VDM image
   selection. It resolves one token in DOS `.COM`/`.EXE`/`.BAT` order first
