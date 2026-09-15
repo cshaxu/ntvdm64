@@ -165,7 +165,17 @@ or modifying original COMMAND/CCPU policy. The next queued T is not admitted.
 | --- | --- |
 | run16.exe | A4327C2B14D9606C451F4E2A64093220C4B7E05BA72ACD8304BD1172E92FA989 |
 | basesrv.exe | 4479626FC6DCE8252988DA7489A44E200DA8723F810FABB3C2848DC1446825B8 |
-| ntvdm.exe | 329FF716EDD942F9B8CB9C84F7B4116F418027AB1363D9F666C18EB40A96534A |
+| ntvdm.exe | 76233D1FC9F3012AF8EF6F86A93BBF1052B54E209615F7A7C27EE565FA9B6D99 |
+
+Artifact correction: rebuilding the observer through the all-target wrapper
+also relinked ntvdm.exe without recompiling its product objects. The earlier
+same-source version/lifecycle runs used worker SHA-256
+329FF716EDD942F9B8CB9C84F7B4116F418027AB1363D9F666C18EB40A96534A.
+The final table names the actually published last link; its exact 17-case
+Console repetition is m0-t412-s10-published-summary.json. These identities are
+not interchangeable: earlier lifecycle evidence is same-source, not the same
+EXE hash. The outstanding full closure still requires the final artifact
+matrix after the broker-loss repair. Run16 and basesrv hashes did not change.
 
 The current launcher also rejects the old formal S8 worker with 1306 and
 releases its reservation (m0-t412-s10-old-worker-summary.json). The final
