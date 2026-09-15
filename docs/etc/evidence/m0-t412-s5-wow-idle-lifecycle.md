@@ -131,6 +131,31 @@ service-level original-owner proof, not yet a real persistent COMMAND runtime
 acceptance. Therefore `profiles/pure-dos/pure-dos.pif` remains until default
 three-program COMMAND/MEM/EDIT runs prove the non-PIF DOSX path.
 
+### Real three-program DOS reuse observation
+
+The current staged `O:\ntvdm64\run16.exe`/`basesrv.exe`/`ntvdm.exe` set was
+observed without redirected standard handles. A direct package-root
+`run16.exe MEM.EXE` returned zero while leaving its original `ntvdm.exe -f`
+worker resident; `m0-t412-s5-run16-mem-cmdline-20260914-185905.status.log`
+records that worker command line and launcher result. The companion trace
+records initial `Check → Reserve → Prepare → worker Connect` followed by the
+original PIF, DOS and next-command `GetNextVDMCommand` requests.
+
+A single `cmd.exe` Console then launched the same positional `run16 MEM.EXE`
+twice. In `m0-t412-s5-same-console-probe-20260914-190456.log`, the first
+launcher has the expected `Check → Reserve → Prepare` sequence. The second
+authenticated launcher has `Check` but **no** second `Reserve`, `Prepare`, or
+worker `Connect`; the existing worker alone performs the subsequent original
+GetNext requests, and that second launcher has disconnected by the seven-
+second process snapshot. This is real-process evidence for same-Console
+resident-worker selection and command delivery. The probe's exact broker and
+worker PIDs were then terminated; no test process was retained.
+
+Earlier redirected-stdio observations timed out with empty output because
+the launcher had no Console-standard handles. They are retained as a distinct
+non-Console execution result, not treated as a failure of the Console product
+route or a reason to alter original BaseSrv selection.
+
 Real empty-broker observation used an isolated build `basesrv.exe`, with no
 client or worker.  `O:\ntvdm64\logs\m0-t412-s5-empty-broker-r2.trace` contains:
 
