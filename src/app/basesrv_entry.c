@@ -155,6 +155,30 @@ static RPC_STATUS RPC_ENTRY authorize(RPC_IF_HANDLE interfaceId,void *binding)
     if (!status) basesrv_cancel_empty_timer();
     return status;
 }
+/* RPC [out, system_handle] consumes its server-side handle.  Service
+ * receipts remain owned by BaseSrv; export only independent duplicates. */
+static DWORD export_handles(const HANDLE *source,ULONG count,HANDLE **output)
+{
+    ULONG index;
+    DWORD error;
+    *output=NULL;
+    if (!count) return ERROR_SUCCESS;
+    *output=MIDL_user_allocate(sizeof(**output)*count);
+    if (!*output) return ERROR_NOT_ENOUGH_MEMORY;
+    for (index=0;index<count;++index) {
+        (*output)[index]=NULL;
+        if (!source[index]) continue;
+        if (!DuplicateHandle(GetCurrentProcess(),source[index],GetCurrentProcess(),
+                &(*output)[index],0,FALSE,DUPLICATE_SAME_ACCESS)) {
+            error=GetLastError();
+            basesrv_trace("export-handle",GetCurrentProcessId(),error);
+            while (index) { --index; if ((*output)[index]) CloseHandle((*output)[index]); }
+            MIDL_user_free(*output); *output=NULL;
+            return error;
+        }
+    }
+    return ERROR_SUCCESS;
+}
 error_status_t Server_Connect(handle_t binding,HANDLE process,VDM_CONNECTION *connection,ULONG *generation)
 {
     DWORD pid;
@@ -199,10 +223,12 @@ error_status_t Server_Check(handle_t binding,VDM_CONNECTION connection,HANDLE pr
     if (error) return error;
     error=OpenNtBaseServiceCheck(connection,pid,generation,request,requestBytes,
         reply,BASE_CHECK_REPLY_BYTES,&required,&parent_event,&parent_receipt);
+    if (error) basesrv_trace("check-service",pid,error);
     if (!error && required!=BASE_CHECK_REPLY_BYTES) return ERROR_INVALID_DATA;
     if (!error && parent_event) {
-        if (!(*parentEvents=MIDL_user_allocate(sizeof(**parentEvents)))) return ERROR_NOT_ENOUGH_MEMORY;
-        **parentEvents=parent_event;*parentEventCount=1;
+        error=export_handles(&parent_event,1,parentEvents);
+        if (error) return error;
+        *parentEventCount=1;
     }
     if (!error) *parentReceipt=(ULONG)parent_receipt;
     if (!error) *replyBytes=required;
@@ -232,28 +258,28 @@ error_status_t Server_Get(handle_t binding,VDM_CONNECTION connection,HANDLE proc
         return error;
     }
     if (wait_event) {
-        if (!(*waitEvents=MIDL_user_allocate(sizeof(**waitEvents)))) {
+        error=export_handles(&wait_event,1,waitEvents);
+        if (error) {
             OpenNtBaseServiceReleaseCommandReply(source_reply);
-            return ERROR_NOT_ENOUGH_MEMORY;
+            return error;
         }
-        **waitEvents=wait_event;
         *waitEventCount=1;
     }
     if (!bytes || !(*reply=MIDL_user_allocate(bytes))) {
-        if (*waitEvents) MIDL_user_free(*waitEvents);
+        if (*waitEvents) { CloseHandle(**waitEvents); MIDL_user_free(*waitEvents);
+            *waitEvents=NULL; *waitEventCount=0; }
         OpenNtBaseServiceReleaseCommandReply(source_reply);
         return ERROR_NOT_ENOUGH_MEMORY;
     }
     memcpy(*reply,source_reply,bytes);
-    *streamCount=standard_count;
-    if (*streamCount) {
-        ULONG index;
-        *streams=MIDL_user_allocate(sizeof(**streams)*(*streamCount));
-        if (!*streams) { MIDL_user_free(*reply); *reply=NULL;
-            if (*waitEvents) { MIDL_user_free(*waitEvents); *waitEvents=NULL; *waitEventCount=0; }
-            OpenNtBaseServiceReleaseCommandReply(source_reply); return ERROR_NOT_ENOUGH_MEMORY; }
-        for (index=0;index<*streamCount;++index) (*streams)[index]=standard[index];
+    error=export_handles(standard,standard_count,streams);
+    if (error) {
+        MIDL_user_free(*reply); *reply=NULL;
+        if (*waitEvents) { CloseHandle(**waitEvents); MIDL_user_free(*waitEvents);
+            *waitEvents=NULL; *waitEventCount=0; }
+        OpenNtBaseServiceReleaseCommandReply(source_reply); return error;
     }
+    *streamCount=standard_count;
     OpenNtBaseServiceReleaseCommandReply(source_reply);
     *replyBytes=bytes;
     basesrv_trace("get",pid,ERROR_SUCCESS);
@@ -297,8 +323,8 @@ error_status_t Server_Update(handle_t binding,VDM_CONNECTION connection,HANDLE p
     }
     if (required!=BASE_UPDATE_REPLY_BYTES) return ERROR_INVALID_DATA;
     if (parent_event) {
-        if (!(*parentEvents=MIDL_user_allocate(sizeof(**parentEvents)))) return ERROR_NOT_ENOUGH_MEMORY;
-        **parentEvents=parent_event;
+        error=export_handles(&parent_event,1,parentEvents);
+        if (error) return error;
         *parentEventCount=1;
     }
     *parentReceipt=(ULONG)parent_receipt;

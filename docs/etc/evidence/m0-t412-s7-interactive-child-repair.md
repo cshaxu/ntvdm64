@@ -90,3 +90,75 @@ original cmdexec +6/-2 lines (moving one existing lifecycle hook plus its
 reason). No overlay added; original BaseSrv and SoftPC mirrors unchanged.
 Test-created processes are cleaned by exact PID/parent/path, never a blanket
 product-name kill. Commit/push approval does not imply S7 acceptance.
+
+## Nested COMMAND RPC repair delivery
+
+2026-09-15, subsequent sequential delivery based on `c60e1c843`.
+The preceding table is historical; this section identifies the newer products.
+S7 remains open for COMMAND exit-status acceptance; no full-T closure is claimed.
+
+Two additional transport defects were isolated without changing any mirror:
+
+- Original `vdm.c::GetNextVDMCommand` retries a returned wait; original
+  `srvvdm.c` reuses the ConsoleRecord event. The client adapter instead rejected
+  a second delivery merely because `worker_wait_event` was already populated.
+  It now retains the first local reference and closes subsequent duplicates.
+- RPC `[out, system_handle]` transfers ownership of the server handle. The
+  server entry returned borrowed receipt handles, destroying resources still
+  retained for later original calls. Check/Update parent waits, Get worker waits
+  and Get stream attachments now export independent duplicates. Allocation or
+  duplication failure closes only newly exported references and resets outputs.
+  Null stream slots remain null. Source receipts and original record policy stay
+  unchanged. Default-off broker trace records export failures.
+
+The ownership rule is explicit in Microsoft's
+[system_handle documentation](https://learn.microsoft.com/en-us/windows/win32/midl/system-handle).
+This is an RPC binding correction, not an invented VDM scheduling policy.
+
+### Reproduction and verification
+
+Formal graph: `build/M0-T412/S7/nested-command`; same generator, x86 MSVC and
+four Ninja jobs as above. `formal-build.log`, `final-build.log`,
+`rpc-test-build.log` and `observer-build.log` retain build evidence.
+The formal VdmTib storage gate passes. The service reservation fixture passes.
+
+`tests/app/base_client_rpc_first_test.c --reservation-parent`, linked against
+the formal RPC client and real server, adds three consecutive no-command Gets.
+Before server ownership repair it failed at repeat 0 with STATUS_UNSUCCESSFUL,
+last-error 6, despite a successful server dispatch. After repair it passes and
+asserts every returned local wait is the same live, unsignaled event.
+
+The Console observer now saves each completed input-line snapshot. These are
+observations after paced keyboard input, not a fabricated guest acknowledgement.
+Runtime records are at `O:\winnt\logs`, prefixes `m0-t412-s7-`:
+
+| Prefix | Actual observation | Limit |
+| --- | --- | --- |
+| `nest-b` | COMMAND, MEM, EXIT, MEM: two MEM reports and restored outer prompt. | Deliberately omitted final EXIT; observer timeout is expected. |
+| `deep` | Two nested COMMANDs; MEM at each depth, two EXITs, MISSING error, VER, final MEM: three reports and continued input. | Explicit COMMAND exits return 1; not accepted as correct status. |
+| `edit-final` | EDIT welcome/editor, ESC, Alt-F/X, then MEM output and child 0. | Outer explicit EXIT returns 1. |
+| `deep-final` | Final published build: two nested COMMANDs, MEM at all three depths, sequential EXIT; line-07 snapshot contains three MEM reports. | Outer explicit EXIT returns 1, not a timeout. |
+| `direct-mem-final`, `direct-command-final` | Final build positional MEM and COMMAND /c ver both exit 0. | Direct controls, not substitutes for interactive nesting. |
+
+No script changes guest code, CPU, BOP or product arguments. Input-line snapshots
+prove execution and parent return rather than merely successful request capture.
+The implausible MEM largest-program-size value remains a separate unaccepted
+observation, not evidence of correct memory accounting.
+
+### New published identities and retained work
+
+Final three-program build and copied `O:\winnt` images:
+
+| Product | SHA-256 |
+| --- | --- |
+| run16.exe | E3AC3A346B1A7993176C3E0DECF7E3725B9D11EF84A5A0D89CC8E00E06EEA3D2 |
+| basesrv.exe | 7439A830CA4A17C52ED3A129F75F7FF340A20275230A7D819FFF7A9959F4B058 |
+| ntvdm.exe | B32DFB18F5B3D09BECD243F45A59153B96FD3B82A9BA0121DE6265E3B5D8BFD0 |
+
+Production changes: RPC client +7/-2, server entry +42/-16; no mirrored source
+or overlay changes. The added code owns only RPC handle export/rollback.
+Original `tcmd2b.asm::$EXIT` returns guest RetCode; original `command1.asm`
+stores the DOS WAITPROCESS result. Do not rewrite an observed 1 to 0 to obtain
+a passing test. Its guest-to-parent provenance remains to be established.
+Nested execution/return is delivered; S7 exit-status acceptance and the existing
+full-T matrix/removal ledger remain open.

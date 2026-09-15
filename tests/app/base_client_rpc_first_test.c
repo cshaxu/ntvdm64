@@ -72,6 +72,29 @@ static int reservation_child(void)
     REQUIRE(!lstrcmpA(command,"MEM\\r\\n"));
     REQUIRE(set_reenter_count(INCREMENT_REENTER_COUNT)==STATUS_SUCCESS);
     REQUIRE(report_task_exit()==STATUS_SUCCESS);
+    /* The original ConsoleRecord returns its wait again when no command is
+     * queued. Repeated typed delivery must preserve one live local handle. */
+    {
+        HANDLE first_wait=NULL;
+        unsigned index;
+        for (index=0;index<3;++index) {
+            BASE_API_MSG message={0};
+            NTSTATUS wait_status;
+            STARTUPINFOA startup={sizeof(startup)};
+            message.u.GetNextVDMCommand.VDMState=NO_PARENT_TO_WAKE;
+            message.u.GetNextVDMCommand.StartupInfo=&startup;
+            wait_status=OpenNtBaseClientCallServer((PCSR_API_MSG)&message,NULL,
+                CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepGetNextVDMCommand),
+                sizeof(message.u.GetNextVDMCommand));
+            if (wait_status!=STATUS_SUCCESS)
+                fprintf(stderr,"repeat %u status=%08lx last=%lu\n",index,(ULONG)wait_status,GetLastError());
+            REQUIRE(wait_status==STATUS_SUCCESS);
+            REQUIRE(message.u.GetNextVDMCommand.WaitObjectForVDM!=NULL);
+            if (!first_wait) first_wait=message.u.GetNextVDMCommand.WaitObjectForVDM;
+            REQUIRE(message.u.GetNextVDMCommand.WaitObjectForVDM==first_wait);
+            REQUIRE(WaitForSingleObject(first_wait,0)==WAIT_TIMEOUT);
+        }
+    }
     REQUIRE(set_reenter_count(DECREMENT_REENTER_COUNT)==STATUS_SUCCESS);
     OpenNtBaseClientDisconnectCurrent();
     puts("PASS: reserved worker claimed and received original command");

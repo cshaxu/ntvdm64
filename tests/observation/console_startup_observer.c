@@ -347,9 +347,11 @@ static BOOL wait_for_report_marker_after(const char *path, const char *marker,
     }
 }
 
-static BOOL write_console_input_text(HANDLE input, const char *text, DWORD line_delay_ms)
+static BOOL write_console_input_text(HANDLE input, const char *text, DWORD line_delay_ms,
+                                     HANDLE output, const char *report)
 {
     const char *cursor;
+    unsigned line = 0;
 
     if (input == NULL || input == INVALID_HANDLE_VALUE || text == NULL)
         return FALSE;
@@ -386,6 +388,11 @@ static BOOL write_console_input_text(HANDLE input, const char *text, DWORD line_
             written != ARRAYSIZE(records)) return FALSE;
         Sleep(OBSERVATION_KEY_EVENT_INTERVAL_MS);
         if (character == '\r' && line_delay_ms) Sleep(line_delay_ms);
+        if (character == '\r' && report) {
+            char path[MAX_PATH];
+            snprintf(path, sizeof(path), "%s.line-%02u", report, ++line);
+            write_console_snapshot(output, path);
+        }
         /* A Console input queue is asynchronous.  Once the original DOS line
          * input boundary has been observed, this deliberately tiny two-line
          * sequence is ordinary queued Console input; it is not paced against
@@ -964,7 +971,7 @@ int main(int argc, char **argv)
              * stream output but before this observer queues any key. */
             write_console_snapshot(output, console_input_preinput_snapshot_path);
             scripted_console_input_delivered = write_console_input_text(input,
-                scripted_console_input_text, scripted_console_line_delay_ms);
+                scripted_console_input_text, scripted_console_line_delay_ms, output, argv[3]);
         }
     }
     if (observe_console_mouse_mode) {
@@ -980,7 +987,7 @@ int main(int argc, char **argv)
         if (observed_console_mouse_mode) {
             snprintf(edit_snapshot, sizeof(edit_snapshot), "%s.edit.txt", argv[3]);
             write_console_snapshot(output, edit_snapshot);
-            scripted_console_input_delivered = write_console_input_text(input, "\x1b", 0);
+            scripted_console_input_delivered = write_console_input_text(input, "\x1b", 0, output, NULL);
             Sleep(500);
             menu[0].EventType = KEY_EVENT;
             menu[0].Event.KeyEvent.bKeyDown = TRUE;
@@ -1004,10 +1011,10 @@ int main(int argc, char **argv)
             }
             Sleep(500);
             scripted_console_input_delivered = scripted_console_input_delivered &&
-                write_console_input_text(input, "x", 0);
+                write_console_input_text(input, "x", 0, output, NULL);
             Sleep(1500);
             scripted_console_input_delivered = scripted_console_input_delivered &&
-                write_console_input_text(input, "mem\rexit\r", 1500);
+                write_console_input_text(input, "mem\rexit\r", 1500, output, argv[3]);
         } else scripted_console_input_delivered = FALSE;
     }
     if (observe_console_mouse_input) {

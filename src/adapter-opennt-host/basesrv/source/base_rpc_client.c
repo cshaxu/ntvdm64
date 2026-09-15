@@ -302,8 +302,13 @@ static NTSTATUS get_command(PCSR_API_MSG message,ULONG length)
                 base->u.GetNextVDMCommand.StdErr ? GetStdHandle(STD_ERROR_HANDLE) : NULL;
         }
         if (applied && wait_event) {
-            if (worker_wait_event) { applied=FALSE; goto done; }
-            worker_wait_event=wait_event;
+            /* Original srvvdm.c reuses its ConsoleRecord event across Get
+             * calls. RPC supplies another local duplicate on each reply;
+             * retain the first until ExitVDM, not a one-delivery restriction. */
+            if (worker_wait_event) {
+                CloseHandle(wait_event);
+                base->u.GetNextVDMCommand.WaitObjectForVDM=worker_wait_event;
+            } else worker_wait_event=wait_event;
         }
         /* Update may have copied standard streams directly into the already
          * registered suspended worker before it connected.  In that original

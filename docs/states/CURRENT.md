@@ -5,10 +5,10 @@
 **Active: M0 T412 S7.**
 
 S7 [interactive child repair checkpoint](../etc/evidence/m0-t412-s7-interactive-child-repair.md)
-repairs Console candidate stride, colliding parent-wait receipts and excessive
-async capture lifetime. Real interactive MEM and EDIT launch/return are observed;
-deeper nested COMMAND output and outer completion ordering remain unaccepted.
-S7 is open; the checkpoint is not full-T closure.
+now also repairs repeated RPC wait delivery and exported-handle ownership.
+Two nested COMMAND levels execute MEM and return to their parents; EDIT returns
+to MEM. Explicit COMMAND EXIT still returns 1 and needs provenance acceptance.
+S7 remains open; this sequential delivery is not full-T closure.
 
 The [S6 VDM TIB repair](../etc/evidence/m0-t412-s6-vdm-tib-storage-repair.md)
 retains its full-storage link gate. Current products are at `O:\winnt`;
