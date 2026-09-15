@@ -158,6 +158,8 @@ char    AppName[MAX_PATH + 13];
                 nt_block_event_thread(0);
 
             if (DosSessionId) {
+		mvdm_softpc_record_command_exit_policy((unsigned int)DosSessionId,
+		    (unsigned int)pfdata.CloseOnExit, (unsigned int)VDMInfo.ErrorCode);
 		if (!pfdata.CloseOnExit){
 		    char  achTitle[MAX_PATH];
                     char  achInactive[60];     //should be plenty for 'inactive'

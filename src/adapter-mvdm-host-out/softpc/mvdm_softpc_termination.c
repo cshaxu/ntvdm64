@@ -2034,6 +2034,23 @@ void mvdm_softpc_record_sas_store(uint32_t guest_linear_address,
         message, (DWORD)formatted);
 }
 
+void mvdm_softpc_record_command_exit_policy(unsigned int dos_session,
+    unsigned int close_on_exit, unsigned int return_code)
+{
+    char message[144];
+    int formatted;
+
+    if (mvdm_softpc_command_continuation_report_path[0] == '\0')
+        return;
+    formatted = snprintf(message, sizeof(message),
+        "MVDM-CMD-EXIT-POLICY session=%u close=%u code=%04X\\r\\n",
+        dos_session, close_on_exit ? 1u : 0u, return_code & 0xffffu);
+    if (formatted <= 0 || (size_t)formatted >= sizeof(message))
+        return;
+    mvdm_softpc_write_captured_report(mvdm_softpc_command_continuation_report_path,
+        message, (DWORD)formatted);
+}
+
 static unsigned long mvdm_softpc_payload_fingerprint(const void *bytes,
     unsigned int length)
 {

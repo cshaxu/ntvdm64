@@ -265,6 +265,11 @@ void mvdm_softpc_record_command_vdm_record(unsigned int command_bytes,
 void mvdm_softpc_record_command_guest_return(unsigned int return_code,
     unsigned int first_call, unsigned int repeat_call);
 
+/* Default-off scalar witness of COMMAND's already-selected post-program
+ * lifecycle branch.  It records neither PIF text nor guest state. */
+void mvdm_softpc_record_command_exit_policy(unsigned int dos_session,
+    unsigned int close_on_exit, unsigned int return_code);
+
 /* Default-off, fixed-container observation of the original COMMAND
  * GetInitEnvironment table entry.  The caller supplies only already-live
  * scalar registers; the captured report path was removed from inherited host
