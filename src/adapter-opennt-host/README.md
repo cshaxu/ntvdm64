@@ -1,5 +1,12 @@
 # adapter-opennt-host
 
+T412 S9's BaseClient RPC binding consumes the explicitly shared
+`app/version.h` identity metadata, not app behavior. It checks both protocol
+and application identity before exposing a connection to original BaseClient.
+Mismatches, including legacy RPC interfaces, return ERROR_REVISION_MISMATCH;
+a context returned with an incompatible response is disconnected. Original
+CSR-shaped calls and BaseSrv/DOS/WOW policy are unchanged.
+
 BaseClient's base_config binding supplies caller-owned immutable package paths
 to original BaseGetVdmConfigInfo. Run16 must validate files and convert paths to
 ANSI without loss before initialization and own binding lifetime on its thread.

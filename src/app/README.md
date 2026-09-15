@@ -1,5 +1,20 @@
 # app
 
+`version.h` is the sole shared application identity for all three executables.
+`APP_VERSION` is `0.0.<admitted T number>` (currently `0.0.412`); S/P changes
+do not independently change that version. `APP_PROTOCOL_VERSION` identifies
+the incompatible RPC service contract (currently 2, matching service.idl 2.0).
+Incompatible changes within a T must advance the protocol. Launcher and worker
+link the same metadata-consuming RPC client; BaseSrv uses the same header.
+Connect requires exact protocol and zero-padded application-version agreement
+in both directions. Mismatch returns 1306 with a diagnostic, before any task
+request; run16 must not retry it as an absent broker. Replace all three EXEs
+together and end old resident processes before testing a new protocol.
+If a created worker rejects the version before connecting, run16 observes its
+process exit alongside the parent event and invokes original creation rollback;
+it must not hang waiting for a task that never started. Ordinary guest results
+still follow the original completion path.
+
 Application composition is deliberately split by process role:
 
 - `run16_entry.c` is the public CreateProcess-shaped CLI. It performs original

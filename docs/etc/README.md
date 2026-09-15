@@ -26,6 +26,7 @@ proves the original `FSTI` continuation reaches BOP `FDh`.
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T412 S9 version agreement](evidence/m0-t412-s9-version-agreement.md) | M0 T412 S9 | Shared application/protocol identity, two-sided RPC rejection and incompatible-worker rollback with actual positive/negative tests. | Retain through T412 closure. |
 | [T412 S8 COMMAND exit provenance](evidence/m0-t412-s8-command-exit-provenance.md) | M0 T412 S8 | Source/image/runtime proof of original EXIT and /c results; nonzero propagation controls and unchanged-product publication. | Retain through T412 closure. |
 | [T412 S7 interactive child repair](evidence/m0-t412-s7-interactive-child-repair.md) | M0 T412 S7 | Console candidate stride, parent-wait identity and async capture lifetime fixes; explicit remaining nested-COMMAND acceptance. | Retain through T412 closure. |
 | [T412 S6 VDM TIB storage repair](evidence/m0-t412-s6-vdm-tib-storage-repair.md) | M0 T412 S6 | Hardware-watchpoint cause, full original storage selection, formal link gate and real DOS regression observations. | Retain through T412 closure. |

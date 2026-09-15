@@ -7,6 +7,7 @@
 #include <stdint.h>
 #include "service.h"
 #include "broker/rpc_security.h"
+#include "app/version.h"
 void *__RPC_USER midl_user_allocate(size_t bytes) { return malloc(bytes); }
 void __RPC_USER midl_user_free(void *value) { free(value); }
 static int phase;
@@ -40,6 +41,8 @@ int main(int argc,char **argv)
     VDM_CONNECTION connection=NULL,duplicate=NULL;
     ULONG generation=0,next=0,first=99;
     ULONG receipt=0;
+    unsigned char app_version[APP_VERSION_BYTES]=APP_VERSION,server_version[APP_VERSION_BYTES]={0};
+    ULONG server_protocol=0;
     HANDLE reader=NULL,writer=NULL;
     DWORD available;
     char temporary[MAX_PATH];
@@ -54,14 +57,27 @@ int main(int argc,char **argv)
     REQUIRE(!RpcBindingFromStringBindingW(text,&binding));
     REQUIRE(!RpcBindingSetAuthInfoW(binding,NULL,RPC_C_AUTHN_LEVEL_PKT_PRIVACY,RPC_C_AUTHN_WINNT,NULL,RPC_C_AUTHZ_NONE));
     RpcTryExcept {
-        REQUIRE(!Client_Connect(binding,process,&connection,&generation) && connection && generation);
+        REQUIRE(Client_Connect(binding,process,APP_PROTOCOL_VERSION+1,app_version,
+            &server_protocol,server_version,&connection,&generation)==ERROR_REVISION_MISMATCH && !connection && !generation);
+        REQUIRE(server_protocol==APP_PROTOCOL_VERSION && !memcmp(server_version,app_version,sizeof(app_version)));
+        app_version[0]='9';
+        REQUIRE(Client_Connect(binding,process,APP_PROTOCOL_VERSION,app_version,
+            &server_protocol,server_version,&connection,&generation)==ERROR_REVISION_MISMATCH && !connection && !generation);
+        memset(app_version,'X',sizeof(app_version)); /* no terminator */
+        REQUIRE(Client_Connect(binding,process,APP_PROTOCOL_VERSION,app_version,
+            &server_protocol,server_version,&connection,&generation)==ERROR_REVISION_MISMATCH && !connection && !generation);
+        memset(app_version,0,sizeof(app_version));memcpy(app_version,APP_VERSION,sizeof(APP_VERSION));
+        REQUIRE(!Client_Connect(binding,process,APP_PROTOCOL_VERSION,app_version,
+            &server_protocol,server_version,&connection,&generation) && connection && generation);
+        REQUIRE(server_protocol==APP_PROTOCOL_VERSION && !memcmp(server_version,app_version,sizeof(app_version)));
         if (abandon) {
             /* Deliberately leave the context open and let process exit test
              * the real RPC rundown path, not explicit Disconnect. */
             puts("PASS: registered context intentionally abandoned at process exit");
             return 0;
         }
-        REQUIRE(Client_Connect(binding,process,&duplicate,&next)==ERROR_ALREADY_EXISTS && !duplicate && !next);
+        REQUIRE(Client_Connect(binding,process,APP_PROTOCOL_VERSION,app_version,
+            &server_protocol,server_version,&duplicate,&next)==ERROR_ALREADY_EXISTS && !duplicate && !next);
         REQUIRE(Client_First(binding,connection,process,0,&first)==ERROR_ACCESS_DENIED && first==0);
         REQUIRE(!Client_First(binding,connection,process,generation,&first) && first==expectedFirst);
         REQUIRE(!Client_First(binding,connection,process,generation,&first) && first==0);
@@ -101,7 +117,8 @@ int main(int argc,char **argv)
         REQUIRE(!Client_Disconnect(binding,process,generation,&connection) && !connection);
         REQUIRE(!PeekNamedPipe(reader,NULL,0,NULL,&available,NULL) && GetLastError()==ERROR_BROKEN_PIPE);
         REQUIRE(CloseHandle(reader));reader=NULL;
-        REQUIRE(!Client_Connect(binding,process,&connection,&next) && next>generation);
+        REQUIRE(!Client_Connect(binding,process,APP_PROTOCOL_VERSION,app_version,
+            &server_protocol,server_version,&connection,&next) && next>generation);
         REQUIRE(!Client_First(binding,connection,process,next,&first) && first==0);
         REQUIRE(!Client_Disconnect(binding,process,next,&connection) && !connection);
     }

@@ -2,42 +2,46 @@
 
 ## Current Work
 
-**No active M/T/S packet.**
+**Active: M0 T412 S9.**
 
 S7 is [closed by owner direction](../etc/evidence/m0-t412-s7-interactive-child-repair.md#s7-owner-directed-closure-and-s8-handoff)
 at pushed `8335f38bd`: nested COMMAND/MEM and EDIT return are delivered.
 S8 is [closed by owner acceptance](../etc/evidence/m0-t412-s8-command-exit-provenance.md#owner-accepted-s8-closure)
 at delivered `67ee292cb`: preserve original COMMAND exit semantics unchanged.
 All 15 Console cases pass; direct DOS/native result 7 propagates correctly.
-T412 remains open between S packets. No next packet is admitted; await owner.
+S9 [implementation and verification](../etc/evidence/m0-t412-s9-version-agreement.md)
+deliver shared APP_VERSION 0.0.412 and protocol 2, mutual rejection and
+incompatible-worker rollback. Final product regressions pass; await owner
+confirmation after delivery. No next packet or T412 closure is implied.
 
 The [S6 VDM TIB repair](../etc/evidence/m0-t412-s6-vdm-tib-storage-repair.md)
 retains its full-storage link gate. Current products are at `O:\winnt`;
 full T412 matrix and owner acceptance remain open.
 
-## Closed S8 Packet
+## Active Packet
 
-### M0 T412 S8 — COMMAND exit-code provenance and repair
+### M0 T412 S9 — Three-program version agreement
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T412 S8; Ordinary Mode, one implementer. |
-| Admission And Approval | Owner: “提交推送收口s任务 再准入一个新的s任务解决退出码问题”. S7 closes at its delivered nested-execution repair; unresolved exit status transfers explicitly to S8. Commit/push to origin/main remains approved. |
-| Objective | Establish the complete COMMAND guest-to-parent exit-code contract and repair source-proven divergence; retain nested execution and faithfully propagate normal and nonzero results. |
-| Non-goals | No forced-zero exit policy, worker reaper, CPU/video redesign, guest-media replacement, new parser, full redirection or WOW16 recovery. MEM size-accounting debt and the remaining full-T matrix are not closed here. |
-| Reference Baseline | Pushed 8335f38bd and the three O:\winnt images identified in S7 evidence. Nested MEM/EDIT return works; explicit COMMAND EXIT returns 1, while direct MEM and COMMAND /c ver return 0. |
-| Files And ABI Surface | COMMAND RetCode/WAITPROCESS/BOP, cmdexec/cmdmisc, BaseClient/BaseSrv results/waits, RPC and run16 completion. Guest source is comparison only. |
-| Applicable Rules | Source policy; execution, architecture, coding and document rules; package-first recovery and original-owner placement. |
-| Verification | Same-build x86: no-child/post-MEM/nonzero-child EXIT, /c, two nested levels, missing-command recovery, repeated runs, EDIT return, direct controls and VdmTib gate. Correlate guest RetCode through BOP/DOSRecord/native-child to run16. |
-| Expected Markers | Proven first mismatch; per-task result preserved without stale/shared values, premature completion or forced success; responsive parents. |
-| Asset Needs | Accepted local OpenNT source, immutable O:\winnt binaries, S7 source/artifact/log baseline; disposable build/M0-T412/S8/ run roots and O:\winnt\logs observations. |
-| Reporting Requirements | Original owner/four-rung disposition, before/after result chain, negative tests, build/hashes, diff/overlay/autonomous footprint and limitations. |
-| Stop Conditions | Missing provenance, unbounded platform dependency, contradictory selected-provider evidence, unproved mandatory contract or changed product scope: record the exact issue; do not manufacture success or a parallel provider. |
-| Exit Criteria | Proven exit semantics, minimal repair, passing positive/nonzero/nested regressions without normalization; verified publication, reviewed evidence, commit/push and scoped test cleanup. Unresolved mandatory results block closure. |
-| Original Owner Request | “提交推送收口s任务 再准入一个新的s任务解决退出码问题”. |
-| Similar-Issue Sweep | RetCode initialization and lifetime, dwExitCode32 ownership, nested completion association, receipt/result conversion, wait-before-query ordering and failure paths; include mirrors, overlays and adapters in this bounded chain. |
-| Candidate Proposal | [Broker design](../proposals/proposal-cross-process-broker-closure-001.md). |
-| Working Plan | [T412 sequential S plan](../etc/operations/m0-t412-broker-restoration-plan.md). |
+| Identifier Mode | M0 T412 S9; Ordinary Mode, one implementer. |
+| Admission And Approval | Owner requires protocol plus program version checking, shared src/app/version.h, APP_VERSION 0.0.<T id>, build/test/commit/push then wait. |
+| Objective | run16 and ntvdm connect only to a basesrv with exactly matching protocol and APP_VERSION 0.0.412; mismatches fail explicitly before task admission, without startup retries. |
+| Non-goals | No original COMMAND/BaseSrv policy or guest changes; no automatic S10/T closure; no compatibility negotiation or version override switch. |
+| Reference Baseline | dc4455afd, S8 accepted; current RPC 1.0 has no program-version handshake. |
+| Files And ABI Surface | Shared app/version.h metadata, local RPC Connect IDL/client/server, launcher retry boundary, build dependencies and tests. |
+| Applicable Rules | Source-first original-owner preservation; execution, architecture, coding and document authorities. Shared app version metadata is explicitly owner-required, not an adapter call into app policy. |
+| Verification | Fresh x86 three-product build; actual RPC matching, mismatched protocol/app, malformed version and recovery cases; client rejection and no-retry checks; legacy-interface rejection; Console DOS/nested/EDIT/exit matrix; governance, hashes and clean pushed Git. |
+| Expected Markers | No context/generation/task accepted on mismatch; both peers validate identities; explicit mismatch diagnostic and nonzero result; normal same-version behavior unchanged. |
+| Asset Needs | Existing MSVC x86 /MT toolchain; build/M0-T412/S9/version-agreement; selected O:\winnt products and media; runtime logs below O:\winnt\logs. |
+| Reporting Requirements | Exact version contract, tests and limits, retained original semantics, published hashes and commit; await owner confirmation. |
+| Stop Conditions | Unproved peer contract or need for original guest/service semantic change; preserve baseline and report rather than bypass verification. |
+| Exit Criteria | Positive/negative and product regressions pass; same formal EXEs published; evidence, commit/push and clean worktree; stop for owner confirmation. |
+| Original Owner Request | “使用协议版本号+程序版本号来检查 ... all 3 exe should refer to the same version.h ... APP_VERSION ... 0.0.<t_task_id>”. |
+| Similar-Issue Sweep | Launcher and worker client, server pre-registration, legacy RPC ABI, retry classification, build header invalidation and test-only mismatched peers. |
+| Working Plan | [T412 S plan](../etc/operations/m0-t412-broker-restoration-plan.md). |
+
+S8's closed admission brief is retained with its evidence record.
 
 S1 audit/design is closed by the [consolidated design](../etc/evidence/m0-t412-s1-design-closure.md).
 S4 is closed by its [requirement ledger](../etc/evidence/m0-t412-s4-closure.md):

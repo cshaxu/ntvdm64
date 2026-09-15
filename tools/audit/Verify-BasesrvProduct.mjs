@@ -1,8 +1,10 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {spawn,spawnSync} from 'node:child_process';
-const root=process.cwd(),product=path.resolve('build/M0-T412/S3/product');
-const build=path.resolve('build/M0-T412/S3/basesrv-product');
+const root=process.cwd(),product=path.resolve(process.env.OPENNT_BROKER_PRODUCT_BUILD || 'build/M0-T412/S3/product');
+const build=path.resolve(process.env.OPENNT_BROKER_TEST_BUILD || 'build/M0-T412/S3/basesrv-product');
+const logs=path.resolve(process.env.OPENNT_BROKER_TEST_LOGS || 'O:/winnt/logs/basesrv-product');
+fs.mkdirSync(logs,{recursive:true});
 fs.mkdirSync(build,{recursive:true});
 const env=path.join(build,'msvc.cmd');
 fs.writeFileSync(env,'@echo off\r\nset "service_test_cwd=%CD%"\r\ncall "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat" -arch=x86 -host_arch=x64 >nul\r\nif errorlevel 1 exit /b %errorlevel%\r\ncd /d "%service_test_cwd%"\r\n%*\r\n');
@@ -61,22 +63,22 @@ try {
     clearTimeout(timer);
     const clientEnvironment={...process.env,BASESRV_TEST_PID:String(server.pid)};
     const duplicate=spawnSync(path.join(product,'basesrv.exe'),[],{cwd:build,windowsHide:true,encoding:'utf8',timeout:5000});
-    fs.writeFileSync(path.join(build,'duplicate.log'),JSON.stringify({status:duplicate.status,error:duplicate.error?.message,stdout:duplicate.stdout,stderr:duplicate.stderr},null,2));
+    fs.writeFileSync(path.join(logs,'duplicate.log'),JSON.stringify({status:duplicate.status,error:duplicate.error?.message,stdout:duplicate.stdout,stderr:duplicate.stderr},null,2));
     if(duplicate.status!==1740) throw Error(`Duplicate endpoint owner not rejected: ${duplicate.status}`);
     const result=spawnSync(path.join(build,'client.exe'),[],{cwd:build,env:clientEnvironment,windowsHide:true,encoding:'utf8',timeout:15000});
-    fs.writeFileSync(path.join(build,'client.log'),(result.stdout||'')+(result.stderr||''));
+    fs.writeFileSync(path.join(logs,'client.log'),(result.stdout||'')+(result.stderr||''));
     if(result.status!==0) throw Error(`Product RPC client failed ${result.status}`);
     console.log(result.stdout.trim());
     const baseClientFirst=spawnSync(path.join(build,'base-client-rpc-first.exe'),['--existing'],{cwd:build,windowsHide:true,encoding:'utf8',timeout:15000});
-    fs.writeFileSync(path.join(build,'base-client-first.log'),(baseClientFirst.stdout||'')+(baseClientFirst.stderr||''));
+    fs.writeFileSync(path.join(logs,'base-client-first.log'),(baseClientFirst.stdout||'')+(baseClientFirst.stderr||''));
     if(baseClientFirst.status!==0) throw Error(`BaseClient RPC facade failed ${baseClientFirst.status}`);
     console.log(baseClientFirst.stdout.trim());
     const reservation=spawnSync(path.join(build,'base-client-rpc-first.exe'),['--reservation-parent'],{cwd:build,windowsHide:true,encoding:'utf8',timeout:20000});
-    fs.writeFileSync(path.join(build,'reservation.log'),(reservation.stdout||'')+(reservation.stderr||''));
+    fs.writeFileSync(path.join(logs,'reservation.log'),(reservation.stdout||'')+(reservation.stderr||''));
     if(reservation.status!==0) throw Error(`Launcher/worker reservation route failed ${reservation.status}`);
     console.log(reservation.stdout.trim());
     const abandoned=spawnSync(path.join(build,'client.exe'),['--abandon'],{cwd:build,windowsHide:true,encoding:'utf8',timeout:15000});
-    fs.writeFileSync(path.join(build,'abandoned.log'),(abandoned.stdout||'')+(abandoned.stderr||''));
+    fs.writeFileSync(path.join(logs,'abandoned.log'),(abandoned.stdout||'')+(abandoned.stderr||''));
     if(abandoned.status!==0) throw Error(`Abandon client failed ${abandoned.status}`);
     await new Promise((resolve,reject)=>{
         const observed=()=>{
@@ -88,7 +90,7 @@ try {
         server.stderr.on('data',observed); observed();
     });
     const reconnected=spawnSync(path.join(build,'client.exe'),['--existing'],{cwd:build,env:clientEnvironment,windowsHide:true,encoding:'utf8',timeout:15000});
-    fs.writeFileSync(path.join(build,'after-rundown.log'),(reconnected.stdout||'')+(reconnected.stderr||''));
+    fs.writeFileSync(path.join(logs,'after-rundown.log'),(reconnected.stdout||'')+(reconnected.stderr||''));
     if(reconnected.status!==0) throw Error(`Service failed after rundown ${reconnected.status}`);
     const baseClientExisting=spawnSync(path.join(build,'base-client-rpc-first.exe'),['--existing'],{cwd:build,windowsHide:true,encoding:'utf8',timeout:15000});
     if(baseClientExisting.status!==0) throw Error(`BaseClient RPC facade failed after rundown ${baseClientExisting.status}`);
@@ -97,6 +99,6 @@ try {
     clearTimeout(timer);
     if(server.exitCode===null) server.kill();
     await done;
-    fs.writeFileSync(path.join(build,'server.log'),output);
+    fs.writeFileSync(path.join(logs,'server.log'),output);
 }
-console.log('Product remains WIP: owned test server terminated; idle shutdown and DOS execution not asserted.');
+console.log('PASS: protocol/app-version rejection and service boundary checks; owned server stopped. DOS execution is a separate gate.');

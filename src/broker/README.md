@@ -1,5 +1,13 @@
 # broker
 
+T412 S9 adds a strict Connect handshake: RPC interface 2.0 plus copied protocol
+number and fixed 32-byte application-version fields in both directions.
+All three products share `app/version.h` metadata. The server authenticates
+the peer and rejects mismatches before registering a context; the client also
+validates the response and releases any rejected context. Legacy RPC 1.0 is
+incompatible and cannot decode the new signature. This does not change the
+existing command-envelope format version 1 or original BaseSrv policy.
+
 Versioned, fixed-width cross-process coordination contract. The legacy wire/
 registry modules below remain in-process contract fixtures. S3's rpc_security
 module supplies the reusable native authentication boundary, selected by the

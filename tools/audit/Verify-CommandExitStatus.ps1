@@ -21,7 +21,7 @@ if ((!$Cases -or 'guest-seven' -in $Cases -or 'command-guest-seven' -in $Cases) 
 }
 $guest=Join-Path (Split-Path -Parent $Observer) 'G7.COM'
 # Test-only DOS program: MOV AX,4C07h; INT 21h. Never replaces package media.
-if ($guest -notlike '*\build\M0-T412\S8\*') { throw 'Guest fixture must stay in S8 build root' }
+if ($guest -notmatch '\\build\\M0-T412\\S[0-9]+\\') { throw 'Guest fixture must stay in an admitted T412 S build root' }
 [IO.File]::WriteAllBytes($guest,[byte[]](0xb8,0x07,0x4c,0xcd,0x21))
 if ($GuestFixturePath) {
     if (!(Test-Path -LiteralPath $GuestFixturePath) -or
@@ -47,6 +47,7 @@ $matrix = @(
     @{ Name='command-guest-seven'; Args=@('COMMAND.COM','/c',$guest); Code=0 },
     @{ Name='direct-seven'; Args=@('cmd.exe','/c','exit','7'); Code=7 },
     @{ Name='edit'; Edit=$true; Code=1 }
+    @{ Name='worker-version-rejection'; Args=@('MEM.EXE'); Code=1306; Negative=$true }
 )
 foreach ($selected in $Cases) {
     if ($selected -notin $matrix.Name) { throw "Unknown case: $selected" }
@@ -57,6 +58,7 @@ foreach ($name in $environmentNames) { $previous[$name]=[Environment]::GetEnviro
 $results = @()
 try {
     foreach ($case in $matrix) {
+        if ($case.Negative -and !$Cases) { continue }
         if ($Cases -and $case.Name -notin $Cases) { continue }
         $report=Join-Path $PackageRoot "logs\$LogPrefix-$($case.Name).txt"
         if (Test-Path -LiteralPath $report) { throw "Use a fresh log prefix: $report exists" }
@@ -82,7 +84,7 @@ try {
             if (($case.Text -or $case.Edit) -and $record -notmatch '(?m)^scripted-console-input=delivered') {
                 throw "Input not delivered: $($case.Name)"
             }
-            if ($case.Name -ne 'direct-seven') {
+            if ($case.Name -notin @('direct-seven','worker-version-rejection')) {
                 $guestReport=Get-Content -LiteralPath "$report.command.log" -Raw
                 $returns=[regex]::Matches($guestReport,'MVDM-CMD-GUEST-RETURN code=([0-9A-F]+) first=0 repeat=0')
                 if (!$returns.Count -or [Convert]::ToUInt32($returns[$returns.Count-1].Groups[1].Value,16) -ne $actual) {
@@ -97,6 +99,13 @@ try {
                 $opens=Get-Content -LiteralPath "$report.dem-open.txt" -Raw
                 if ($opens -notmatch ('phase=1[^\r\n]*cf=0 path='+[regex]::Escape($GuestFixturePath))) {
                     throw 'DOS guest fixture was not successfully opened; not exit-code evidence'
+                }
+            }
+            if ($case.Name -eq 'worker-version-rejection') {
+                $broker=Get-Content -LiteralPath "$report.broker.log" -Raw
+                if ($broker -notmatch 'phase=prepare' -or
+                    [regex]::Matches($broker,'phase=empty-grace').Count -lt 2) {
+                    throw 'Version-rejected worker did not release the prepared launch back to an empty broker'
                 }
             }
             if ($case.Name -eq 'nested-mem') {

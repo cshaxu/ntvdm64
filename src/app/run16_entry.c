@@ -111,6 +111,8 @@ static DWORD connect_broker(void)
         error = OpenNtBaseClientConnectCurrent();
         if (!error)
             return ERROR_SUCCESS;
+        if (error == ERROR_REVISION_MISMATCH)
+            return error; /* Never start/retry a broker for an incompatible peer. */
         /* Re-try only at bounded intervals.  This covers a listener which
          * has stopped between the failed Connect and the first candidate's
          * endpoint registration without turning the launcher into a broker
@@ -153,6 +155,7 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command)
     BOOL published = FALSE;
     BOOL registered = FALSE;
     BOOL resumed = FALSE;
+    BOOL version_rejected = FALSE;
 
     /* This is the original parent-side VDM environment projection.  The
      * ANSI record is captured by BaseCheckVDM; the matching Unicode record
@@ -256,6 +259,27 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command)
         goto done;
     }
     resumed = TRUE;
+    /* A version-rejected worker exits before connecting to BaseSrv, so it
+     * cannot publish the normal task completion. Observe our own child too;
+     * leave every ordinary guest result on the original parent-wait route. */
+    {
+        HANDLE completion[2]={parent_wait ? parent_wait : worker.hProcess,worker.hProcess};
+        DWORD code,wait=WaitForMultipleObjects(completion[0]==completion[1] ? 1 : 2,
+            completion,FALSE,INFINITE);
+        if (wait==WAIT_FAILED) {
+            result=GetLastError();
+            goto waited;
+        }
+        if (WaitForSingleObject(worker.hProcess,0)==WAIT_OBJECT_0 &&
+            GetExitCodeProcess(worker.hProcess,&code) &&
+            (code==ERROR_REVISION_MISMATCH || code==RPC_S_UNKNOWN_IF ||
+             code==RPC_S_PROCNUM_OUT_OF_RANGE)) {
+            fputs("run16: version mismatch: ntvdm worker rejected the broker protocol/application version\n",stderr);
+            result=ERROR_REVISION_MISMATCH;
+            version_rejected=TRUE;
+            goto waited;
+        }
+    }
     if (WaitForSingleObject(parent_wait ? parent_wait : worker.hProcess, INFINITE) != WAIT_OBJECT_0)
     {
         result = GetLastError();
@@ -269,10 +293,11 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command)
     {
         result = GetLastError();
     }
+waited:
     if (parent_wait && parent_wait != worker.hProcess)
         CloseHandle(parent_wait);
 done:
-    if (published && !resumed && result)
+    if (published && (!resumed || version_rejected) && result)
     {
         HANDLE undo_task = (HANDLE)(ULONG_PTR)task;
         ULONG undo_state = registered ? VDM_FULLY_CREATED : VDM_PARTIALLY_CREATED;

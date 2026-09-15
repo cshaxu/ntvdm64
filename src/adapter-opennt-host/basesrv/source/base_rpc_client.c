@@ -11,6 +11,7 @@
 #include <base_client.h>
 #include <base_command.h>
 #include <base_rpc_client.h>
+#include "app/version.h" /* Shared three-product metadata, no app behavior. */
 
 typedef struct OPENNT_BASE_RPC_CLIENT {
     RPC_BINDING_HANDLE binding;
@@ -453,6 +454,9 @@ done:
 
 DWORD OpenNtBaseClientConnectCurrent(void)
 {
+    static const unsigned char expected[APP_VERSION_BYTES]=APP_VERSION;
+    unsigned char server_version[APP_VERSION_BYTES]={0};
+    ULONG server_protocol=0;
     broker_rpc_scope scope;
     RPC_WSTR text=NULL;
     WCHAR endpoint[128];
@@ -475,13 +479,27 @@ DWORD OpenNtBaseClientConnectCurrent(void)
         FALSE,GetCurrentProcessId());
     if (!client.process) { error=GetLastError(); goto done; }
     RpcTryExcept {
-        error=Client_Connect(client.binding,client.process,&connection,&generation);
+        error=Client_Connect(client.binding,client.process,APP_PROTOCOL_VERSION,
+            (unsigned char *)expected,&server_protocol,server_version,&connection,&generation);
     }
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
-    if (error || !connection || !generation) goto done;
-    client.connection=connection;
-    client.generation=generation;
+    /* A legacy RPC major cannot safely decode this Connect signature. */
+    if (error==RPC_S_UNKNOWN_IF || error==RPC_S_PROCNUM_OUT_OF_RANGE) {
+        fprintf(stderr,"ntvdm client: version mismatch: local protocol=%u app=%s; broker RPC interface incompatible\n",
+            APP_PROTOCOL_VERSION,APP_VERSION);
+        error=ERROR_REVISION_MISMATCH;
+    } else if (error==ERROR_REVISION_MISMATCH || (!error &&
+        (server_protocol!=APP_PROTOCOL_VERSION || memcmp(server_version,expected,sizeof(expected))))) {
+        fprintf(stderr,"ntvdm client: version mismatch: local protocol=%u app=%s; broker protocol=%lu app=%.32s\n",
+            APP_PROTOCOL_VERSION,APP_VERSION,server_protocol,(const char *)server_version);
+        error=ERROR_REVISION_MISMATCH;
+    }
+    /* Retain any returned context solely for cleanup on a rejected response;
+     * it never becomes available to original BaseClient task operations. */
+    if (connection) { client.connection=connection; client.generation=generation; }
+    if (!error && (!connection || !generation)) error=ERROR_INVALID_DATA;
+    if (error) goto done;
     error=ERROR_SUCCESS;
 done:
     if (text) RpcStringFreeW(&text);

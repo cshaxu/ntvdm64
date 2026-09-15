@@ -36,6 +36,16 @@ those state machines. App owns composition.
 | S5 — WOW coordination and broker lifecycle | Restore broker-side WOW acquisition/PIF/notification/waits/failures; singleton and empty-broker exit. Worker residence and exit remain the original OpenNT worker/COMMAND/Console lifecycle. | Source-owned coordination tests and reachable real-worker evidence; simultaneous startup, reconnect, broker drain/arrival, restart/first-VDM and exact-once cleanup. No worker timeout or reaper exists. |
 | S6 — Integrated verification and removal | Build/test final composition, remove superseded autonomous policy and obsolete bridges, reconcile registers and publish verified products. | Final per-row disposition; measured mirror diff/overlay/autonomous line deltas; real-program and process-race matrix; no mandatory unproved contract; clean committed/pushed worktree and indexed closure evidence. |
 
+### Owner-approved S9 version agreement
+
+After accepting S8, the owner admits protocol plus application-version checks
+as S9. All three products use shared `src/app/version.h`; APP_VERSION is
+`0.0.412` for T412. Connect validates both directions before accepting work;
+incompatible or legacy peers fail explicitly, not through startup retries.
+Run matching/mismatching protocol/application, malformed and legacy-peer
+tests, then rebuild and regress the three products, publish, commit/push and
+wait for owner confirmation. The final integrated T412 closure remains separate.
+
 ## Detailed execution
 
 The detailed sequence below is an execution specification, not a claim that

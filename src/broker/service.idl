@@ -1,7 +1,7 @@
 import "wtypes.idl";
 [
     uuid(7d3e78bd-0472-4736-8797-e64e966d692e),
-    version(1.0),
+    version(2.0),
     pointer_default(unique)
 ]
 interface vdm_service
@@ -10,6 +10,10 @@ interface vdm_service
     error_status_t Connect(
         [in] handle_t binding,
         [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long protocol,
+        [in] byte application_version[32],
+        [out] unsigned long *server_protocol,
+        [out] byte server_version[32],
         [out] VDM_CONNECTION *connection,
         [out] unsigned long *generation);
     error_status_t First(

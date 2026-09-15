@@ -177,3 +177,27 @@ above. This delivery changes governance records only: no source, build,
 guest media or deployed executable changes, and no new runtime claim.
 Documentation governance, relative links and diff checks are the closure gates.
 T412 stays open between S packets; no next S/T is activated. Await owner direction.
+
+## Closed S8 Packet
+
+### M0 T412 S8 — COMMAND exit-code provenance and repair
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T412 S8; Ordinary Mode, one implementer. |
+| Admission And Approval | Owner: “提交推送收口s任务 再准入一个新的s任务解决退出码问题”. S7 closes at its delivered nested-execution repair; unresolved exit status transfers explicitly to S8. Commit/push to origin/main remains approved. |
+| Objective | Establish the complete COMMAND guest-to-parent exit-code contract and repair source-proven divergence; retain nested execution and faithfully propagate normal and nonzero results. |
+| Non-goals | No forced-zero exit policy, worker reaper, CPU/video redesign, guest-media replacement, new parser, full redirection or WOW16 recovery. MEM size-accounting debt and the remaining full-T matrix are not closed here. |
+| Reference Baseline | Pushed 8335f38bd and the three O:\winnt images identified in S7 evidence. Nested MEM/EDIT return works; explicit COMMAND EXIT returns 1, while direct MEM and COMMAND /c ver return 0. |
+| Files And ABI Surface | COMMAND RetCode/WAITPROCESS/BOP, cmdexec/cmdmisc, BaseClient/BaseSrv results/waits, RPC and run16 completion. Guest source is comparison only. |
+| Applicable Rules | Source policy; execution, architecture, coding and document rules; package-first recovery and original-owner placement. |
+| Verification | Same-build x86: no-child/post-MEM/nonzero-child EXIT, /c, two nested levels, missing-command recovery, repeated runs, EDIT return, direct controls and VdmTib gate. Correlate guest RetCode through BOP/DOSRecord/native-child to run16. |
+| Expected Markers | Proven first mismatch; per-task result preserved without stale/shared values, premature completion or forced success; responsive parents. |
+| Asset Needs | Accepted local OpenNT source, immutable O:\winnt binaries, S7 source/artifact/log baseline; disposable build/M0-T412/S8/ run roots and O:\winnt\logs observations. |
+| Reporting Requirements | Original owner/four-rung disposition, before/after result chain, negative tests, build/hashes, diff/overlay/autonomous footprint and limitations. |
+| Stop Conditions | Missing provenance, unbounded platform dependency, contradictory selected-provider evidence, unproved mandatory contract or changed product scope: record the exact issue; do not manufacture success or a parallel provider. |
+| Exit Criteria | Proven exit semantics, minimal repair, passing positive/nonzero/nested regressions without normalization; verified publication, reviewed evidence, commit/push and scoped test cleanup. Unresolved mandatory results block closure. |
+| Original Owner Request | “提交推送收口s任务 再准入一个新的s任务解决退出码问题”. |
+| Similar-Issue Sweep | RetCode initialization and lifetime, dwExitCode32 ownership, nested completion association, receipt/result conversion, wait-before-query ordering and failure paths; include mirrors, overlays and adapters in this bounded chain. |
+| Candidate Proposal | [Broker design](../../proposals/proposal-cross-process-broker-closure-001.md). |
+| Working Plan | [T412 sequential S plan](../operations/m0-t412-broker-restoration-plan.md). |

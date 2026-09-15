@@ -10,6 +10,7 @@
 #include "opennt-abi/source/public/internal/base/inc/vdmapi.h"
 #include "adapter-opennt-host/basesrv/include/base_service.h"
 #include "app/console_query.h"
+#include "app/version.h"
 static broker_rpc_scope scope;
 static OPENNT_BASE_SERVICE *service;
 static WCHAR console_helper[MAX_PATH];
@@ -179,13 +180,25 @@ static DWORD export_handles(const HANDLE *source,ULONG count,HANDLE **output)
     }
     return ERROR_SUCCESS;
 }
-error_status_t Server_Connect(handle_t binding,HANDLE process,VDM_CONNECTION *connection,ULONG *generation)
+error_status_t Server_Connect(handle_t binding,HANDLE process,ULONG protocol,
+    unsigned char application_version[32],ULONG *server_protocol,
+    unsigned char server_version[32],VDM_CONNECTION *connection,ULONG *generation)
 {
+    static const unsigned char expected[APP_VERSION_BYTES]=APP_VERSION;
     DWORD pid;
     RPC_STATUS status;
     *connection=NULL; *generation=0;
+    *server_protocol=APP_PROTOCOL_VERSION;
+    memcpy(server_version,expected,sizeof(expected));
     status=broker_rpc_peer_process(&scope,binding,process,&pid);
     if (status) { basesrv_trace("connect-auth",0,status); return status; }
+    if (protocol!=APP_PROTOCOL_VERSION || memcmp(application_version,expected,sizeof(expected))) {
+        fprintf(stderr,"basesrv: version mismatch: local protocol=%u app=%s; peer protocol=%lu app=%.32s\n",
+            APP_PROTOCOL_VERSION,APP_VERSION,protocol,(const char *)application_version);
+        basesrv_trace("connect-version",pid,ERROR_REVISION_MISMATCH);
+        basesrv_schedule_empty_stop();
+        return ERROR_REVISION_MISMATCH;
+    }
     /* Cancel before registering the new peer.  The callback and this
      * registration are serialized by idle_lock, so an arrival cannot be
      * mistaken for an empty broker between its health check and stop call. */
@@ -423,7 +436,7 @@ int main(void)
         (void)OpenNtBaseServiceStop(service);
         return (int)error;
     }
-    result=RpcServerRegisterIf3(Server_vdm_service_v1_0_s_ifspec,NULL,NULL,
+    result=RpcServerRegisterIf3(Server_vdm_service_v2_0_s_ifspec,NULL,NULL,
         RPC_IF_ALLOW_SECURE_ONLY | RPC_IF_ALLOW_LOCAL_ONLY,RPC_C_LISTEN_MAX_CALLS_DEFAULT,
         (unsigned)-1,authorize,NULL);
     if (!result) {
@@ -434,7 +447,7 @@ int main(void)
          * normal worker/launcher teardown. */
         basesrv_schedule_empty_stop();
         result=RpcServerListen(1,RPC_C_LISTEN_MAX_CALLS_DEFAULT,FALSE);
-        RpcServerUnregisterIf(Server_vdm_service_v1_0_s_ifspec,NULL,TRUE);
+        RpcServerUnregisterIf(Server_vdm_service_v2_0_s_ifspec,NULL,TRUE);
     }
     basesrv_cancel_empty_timer();
     if (!OpenNtBaseServiceStop(service)) return ERROR_BUSY;
