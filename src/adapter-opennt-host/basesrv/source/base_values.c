@@ -14,7 +14,7 @@ typedef char get_values_size[sizeof(broker_vdm_get_values)==32?1:-1];
     X(exit_code,ExitCode,ULONG) X(drive,CurrentDrive,USHORT) X(state,VDMState,USHORT) X(from_bat,fComingFromBat,BOOLEAN)
 #define ENCODE_FIELD(w,n,t) value.w=source->n;
 #define ENCODE_CASE(op,type,native,member,fields) case op: { \
-    type value; const native *source=&message->u.member; \
+    type value={0}; const native *source=&message->u.member; \
     if (bytes!=sizeof(value)) return FALSE; fields(ENCODE_FIELD) \
     memcpy(output,&value,sizeof(value)); return TRUE; }
 BOOL OpenNtBaseEncodeValues(const BASE_API_MSG *message, uint32_t operation,

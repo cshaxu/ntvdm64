@@ -3,11 +3,11 @@ import path from 'node:path';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {spawnSync} from 'node:child_process';
-const root=process.cwd(),build=path.resolve('build/M0-T412/S3/original-classifier');
+const root=process.cwd(),build=path.resolve(process.env.OPENNT_CLASSIFIER_TEST_BUILD || 'build/M0-T412/S3/original-classifier');
 const ownerBuild=process.env.OPENNT_BROKER_OWNER_BUILD ? path.resolve(process.env.OPENNT_BROKER_OWNER_BUILD) : null;
 fs.mkdirSync(build,{recursive:true});
 for(const suffix of ['COM','pif','exe','bin']) fs.writeFileSync(path.join(build,`suffix.${suffix}`),Buffer.alloc(64,0x41));
-const graph=fs.readFileSync('build/M0-T412/S1/text-cell-repair/product/build.ninja','utf8');
+const graph=fs.readFileSync(path.join(ownerBuild || 'build/M0-T412/S1/text-cell-repair/product','build.ninja'),'utf8');
 const flags=graph.match(/^cflags = (.*)$/m)[1].replaceAll('$:',':')+` /I "${root}/src/adapter-opennt-host/basesrv/include"`;
 const rtlFlags=graph.match(/^build obj\/opennt-rtl\/error\.obj:.*\r?\n  rtl_cflags = (.*)$/m)[1].replaceAll('$:',':');
 const source=fs.readFileSync('src/opennt-host/base/win32/client/vdm.c','utf8');
@@ -49,6 +49,6 @@ for(const symbol of ['_OpenNtBaseGetBinaryTypeW@8','_BaseIsDosApplication'])
 for(const symbol of ['_NtCurrentPeb@0','_opennt_support_current_teb@0','_RtlProcessHeap@0'])
     assert(map.split(/\r?\n/).some(line=>line.includes(symbol)&&line.includes('support.obj')),`Test-owned process provider remains: ${symbol}`);
 const run=spawnSync(exe,[],{cwd:build,windowsHide:true,encoding:'utf8',timeout:10000});
-fs.writeFileSync(path.join(build,'result.json'),JSON.stringify({ownerBuild,processSupport:'selected opennt_support_rtl.c',hashes,status:run.status,stdout:run.stdout,stderr:run.stderr,error:run.error?.message},null,2));
+fs.writeFileSync(process.env.OPENNT_CLASSIFIER_TEST_REPORT || path.join(build,'result.json'),JSON.stringify({ownerBuild,processSupport:'selected opennt_support_rtl.c',hashes,status:run.status,stdout:run.stdout,stderr:run.stderr,error:run.error?.message},null,2));
 console.log(run.stdout,run.stderr);
 assert.equal(run.status,0,'Original classifier failed');

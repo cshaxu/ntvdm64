@@ -115,7 +115,8 @@ identity, never by a bare same-spelled function name.
 ## Host-width coding model
 
 The current recovery build has one MSVC `/MT` Win32/x86 compilation and
-acceptance row, producing `ntvdm32.exe` with the original CCPU40 executor.
+acceptance row, producing `run16.exe`, `basesrv.exe` and `ntvdm.exe`, with
+the original CCPU40 executor in the worker.
 Native x64 compile/link output is outside the product target and must not
 drive a source change. `CPU_30_STYLE` is an NT4 kernel-VDM
 V86-monitor contract. It is retired and prohibited from every project-owned

@@ -147,8 +147,8 @@
 
 ## Build and evidence hygiene
 - The current recovery build and product acceptance have one MSVC `/MT`
-  Win32/x86 row, producing `ntvdm32.exe` with the selected original
-  `CPU_40_STYLE` / CCPU40 executor. Native x64 compilation and linking are
+  Win32/x86 row, producing `run16.exe`, `basesrv.exe` and `ntvdm.exe` with
+  the selected original `CPU_40_STYLE` / CCPU40 worker. Native x64 compilation and linking are
   not a closure criterion: do not repair, preserve, or create an x64-only
   difference unless it is a demonstrated architecture-neutral
   mapping-manager correctness defect. `CPU_30_STYLE` is an

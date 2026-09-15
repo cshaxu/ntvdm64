@@ -182,7 +182,7 @@ static ULONG capture_blocks(void)
 }
 static BOOL scalar_roundtrip(PBASE_API_MSG message, uint32_t operation)
 {
-    unsigned char values[sizeof(broker_vdm_get_values)], zero[sizeof(values)]={0};
+    unsigned char values[sizeof(broker_vdm_check_values)], zero[sizeof(values)]={0};
     uint32_t size=operation==BROKER_VDM_CHECK?sizeof(broker_vdm_check_values):
         operation==BROKER_VDM_UPDATE?sizeof(broker_vdm_update_values):sizeof(broker_vdm_get_values);
     BASE_API_MSG copy=*message,expected=*message;
@@ -206,10 +206,12 @@ static BOOL scalar_roundtrip(PBASE_API_MSG message, uint32_t operation)
 static BOOL scalar_negatives(void)
 {
     BASE_API_MSG original, target;
-    uint32_t op,i,size,values[8],expected[8]={1,2,3,4,5,6,7,7};
+    uint32_t op,i,size,values[9],expected[9]={1,2,3,4,5,6,0,0,0};
     memset(&original,0xa5,sizeof(original));
     for (op=BROKER_VDM_CHECK;op<=BROKER_VDM_GET_NEXT;++op) {
-        size=op==BROKER_VDM_CHECK?24:op==BROKER_VDM_UPDATE?16:32;
+        size=op==BROKER_VDM_CHECK?sizeof(broker_vdm_check_values):
+            op==BROKER_VDM_UPDATE?sizeof(broker_vdm_update_values):sizeof(broker_vdm_get_values);
+        expected[6]=expected[7]=op==BROKER_VDM_GET_NEXT?7:0;
         if (op==BROKER_VDM_CHECK) {
             original.u.CheckVDM.iTask=1; original.u.CheckVDM.BinaryType=2;
             original.u.CheckVDM.CodePage=3; original.u.CheckVDM.dwCreationFlags=4;
@@ -231,7 +233,7 @@ static BOOL scalar_negatives(void)
         }
         /* Each narrowing field independently rejects overflow, without
          * changing any preceding scalar, pointer or resource field. */
-        for (i=op==BROKER_VDM_UPDATE?2:4;i<size/4;++i) {
+        for (i=op==BROKER_VDM_UPDATE?2:4;i<(op==BROKER_VDM_CHECK?6:size/4);++i) {
             uint32_t saved=values[i];
             values[i]=(op==BROKER_VDM_GET_NEXT && i==6)?0x100u:0x10000u;
             target=original;
@@ -274,7 +276,7 @@ NTSTATUS NTAPI OpenNtBaseClientCallServer(PCSR_API_MSG message, PCSR_CAPTURE_HEA
     uint32_t payloadBytes,requestId;
     BASE_GET_NEXT_VDM_COMMAND_MSG savedGet;
     OPENNT_BASE_GET_COMMAND getCommand={0};
-    unsigned char getRequest[100+16*BROKER_VDM_PAYLOAD_FIELDS];
+    unsigned char getRequest[104+16*BROKER_VDM_PAYLOAD_FIELDS];
     (void)capture;
     if (!scalar_negatives()) return STATUS_INVALID_PARAMETER;
     if (number==CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepUpdateVDMEntry)) {
@@ -434,12 +436,15 @@ int main(int argc, char **argv)
     {
         BASE_API_MSG input={0},target={0},saved;
         STARTUPINFOA startup={0};
-        unsigned char check[234],update[48];
+        unsigned char check[256],update[48];
         uint32_t size,id,cut,index;
         broker_vdm_check_values checkValues;
         broker_vdm_update_values updateValues;
         input.u.CheckVDM.CmdLine="X.COM"; input.u.CheckVDM.CmdLen=6;
         input.u.CheckVDM.iTask=0xccccccccu; input.u.CheckVDM.VDMState=0xcccc;
+        CHECK(OpenNtBaseEncodeCheckCommand(&input,1,1,NULL,0,&size));
+        CHECK(size<=sizeof(check));
+        CHECK(!OpenNtBaseEncodeCheckCommand(&input,1,1,check,size-1,&size));
         CHECK(OpenNtBaseEncodeCheckCommand(&input,1,1,check,sizeof(check),&size));
         memcpy(&checkValues,check+32,sizeof(checkValues));
         CHECK(!checkValues.task && !checkValues.state);
@@ -518,7 +523,7 @@ int main(int argc, char **argv)
         CHECK(!BaseGetVdmConfigInfo(NULL,0,BINARY_TYPE_DOS,&commandLine,&reserve));
         CHECK(commandLine.Buffer==NULL);
         CHECK(OpenNtBaseInitializeVdmConfig(&config,"O:\\package with spaces\\ntvdm.exe",
-            "O:\\ntvdm64\\system32\\KRNL386"));
+            "O:\\winnt\\system32\\KRNL386"));
         CHECK(OpenNtBaseBindVdmConfig(&config)==NULL);
         {
             CHAR small[2]={'x',0};
@@ -534,7 +539,7 @@ int main(int argc, char **argv)
         CHECK(BaseGetVdmConfigInfo(NULL,0x12ab,BINARY_TYPE_DOS,&commandLine,&reserve));
         CHECK(!wcscmp(commandLine.Buffer,L"\"O:\\package with spaces\\ntvdm.exe\" -f -i12ab"));
         CHECK(HeapFree(GetProcessHeap(),0,commandLine.Buffer));
-        CHECK(GetShortPathNameW(L"O:\\ntvdm64\\system32\\KRNL386.exe",shortKernel,MAX_PATH)>0);
+        CHECK(GetShortPathNameW(L"O:\\winnt\\system32\\KRNL386.exe",shortKernel,MAX_PATH)>0);
         CHECK(BaseGetVdmConfigInfo(NULL,0,BINARY_TYPE_WIN16,&commandLine,&reserve));
         CHECK(wcsstr(commandLine.Buffer,L"\" -f -w -a ")!=NULL);
         CHECK(!wcscmp(wcsstr(commandLine.Buffer,L" -a ")+4,shortKernel));
@@ -1081,7 +1086,7 @@ int main(int argc, char **argv)
     /* Original launcher construction -> actual original server deep copy. */
     {
         STARTUPINFOW launch={sizeof(launch)};
-        CHAR envBytes[]="PATH=O:\\ntvdm64\0";
+        CHAR envBytes[]="PATH=O:\\winnt\0";
         ANSI_STRING env={sizeof(envBytes),sizeof(envBytes),envBytes};
         ULONG task=0, before;
         launch.lpTitle=L"original launch test";
@@ -1089,12 +1094,12 @@ int main(int argc, char **argv)
         launch.lpReserved=L"test reserved";
         launch.dwFlags=STARTF_USESTDHANDLES;
         ZeroMemory(&m,sizeof(m));
-        CHECK(BaseCheckVDM(BINARY_TYPE_DOS|BINARY_TYPE_DOS_EXE,L"O:\\ntvdm64\\MEM.EXE",
-            L"\"O:\\ntvdm64\\MEM.EXE\"  /?",L"O:\\ntvdm64",&env,&m,&task,0,&launch));
+        CHECK(BaseCheckVDM(BINARY_TYPE_DOS|BINARY_TYPE_DOS_EXE,L"O:\\winnt\\MEM.EXE",
+            L"\"O:\\winnt\\MEM.EXE\"  /?",L"O:\\winnt",&env,&m,&task,0,&launch));
         CHECK(launchCalls==1 && captures==0 && m.u.CheckVDM.VDMState==VDM_NOT_PRESENT);
         CHECK(BaseSrvGetConsoleRecord((HANDLE)1,&record)==0 && record!=NULL);
         CHECK(!strcmp(record->DOSRecord->lpVDMInfo->CmdLine,"/?\r\n"));
-        CHECK(!strcmp(record->DOSRecord->lpVDMInfo->AppName,"O:\\ntvdm64\\MEM.EXE"));
+        CHECK(!strcmp(record->DOSRecord->lpVDMInfo->AppName,"O:\\winnt\\MEM.EXE"));
         CHECK(record->DOSRecord->lpVDMInfo->EnviornmentSize==sizeof(envBytes));
         CHECK(!memcmp(record->DOSRecord->lpVDMInfo->Enviornment,envBytes,sizeof(envBytes)));
         CHECK(!strcmp(record->DOSRecord->lpVDMInfo->Title,"original launch test"));
@@ -1105,7 +1110,7 @@ int main(int argc, char **argv)
         launch.dwFlags=STARTF_USEHOTKEY;
         launch.hStdInput=(HANDLE)42;
         ZeroMemory(&m,sizeof(m));
-        CHECK(BaseCheckVDM(BINARY_TYPE_DOS,L"O:\\ntvdm64\\MEM.EXE",L"MEM.EXE",L"O:\\ntvdm64",&env,&m,&task,0,&launch));
+        CHECK(BaseCheckVDM(BINARY_TYPE_DOS,L"O:\\winnt\\MEM.EXE",L"MEM.EXE",L"O:\\winnt",&env,&m,&task,0,&launch));
         CHECK(BaseSrvGetConsoleRecord((HANDLE)1,&record)==0 && record!=NULL);
         CHECK(!strcmp(record->DOSRecord->lpVDMInfo->Reserved,"hotkey.42 test reserved"));
         CHECK(!(launch.dwFlags & STARTF_USEHOTKEY) && launch.hStdInput==NULL && captures==0);
@@ -1121,18 +1126,18 @@ int main(int argc, char **argv)
         CHECK(allocations<4096);
         CsrPortHeap=exhaustedHeap;
         ZeroMemory(&m,sizeof(m));
-        CHECK(!BaseCheckVDM(BINARY_TYPE_DOS,L"O:\\ntvdm64\\MEM.EXE",L"MEM.EXE",L"O:\\ntvdm64",&env,&m,&task,0,&launch));
+        CHECK(!BaseCheckVDM(BINARY_TYPE_DOS,L"O:\\winnt\\MEM.EXE",L"MEM.EXE",L"O:\\winnt",&env,&m,&task,0,&launch));
         CHECK(GetLastError()==ERROR_NOT_ENOUGH_MEMORY && launchCalls==before);
         CsrPortHeap=normalHeap;
         CHECK(captures==0 && HeapDestroy(exhaustedHeap));
-        CHECK(!BaseCheckVDM(BINARY_TYPE_DOS,L"O:\\ntvdm64\\MEM.EXE",L"MEM.EXE",L"O:\\ntvdm64",NULL,&m,&task,0,&launch));
+        CHECK(!BaseCheckVDM(BINARY_TYPE_DOS,L"O:\\winnt\\MEM.EXE",L"MEM.EXE",L"O:\\winnt",NULL,&m,&task,0,&launch));
         CHECK(GetLastError()==ERROR_INVALID_PARAMETER && captures==0 && launchCalls==before);
         puts("PASS: original BaseCheckVDM command/environment/startup capture, server ownership and allocation failure");
     }
     {
         OPENNT_BASE_INTERACTIVE_SCOPE scope,wrong;
         STARTUPINFOW launch={sizeof(launch)};
-        CHAR envBytes[]="PATH=O:\\ntvdm64\0";
+        CHAR envBytes[]="PATH=O:\\winnt\0";
         ANSI_STRING env={sizeof(envBytes),sizeof(envBytes),envBytes};
         ULONG task=0;
         HANDLE undo;
@@ -1147,20 +1152,20 @@ int main(int argc, char **argv)
         CHECK(OpenNtBaseBindInteractiveScope(NULL)==&wrong);
         UserTestTokenForInteractive=_UserTestTokenForInteractive;
         ZeroMemory(&m,sizeof(m));
-        CHECK(!BaseCheckVDM(BINARY_TYPE_WIN16,L"O:\\ntvdm64\\system32\\WRITE.EXE",L"WRITE.EXE",L"O:\\ntvdm64",&env,&m,&task,0,&launch));
+        CHECK(!BaseCheckVDM(BINARY_TYPE_WIN16,L"O:\\winnt\\system32\\WRITE.EXE",L"WRITE.EXE",L"O:\\winnt",&env,&m,&task,0,&launch));
         CHECK(GetLastError()==ERROR_ACCESS_DENIED && WOWHead==NULL && captures==0);
         wrong=scope; wrong.AuthenticationId.LowPart^=1;
         CHECK(OpenNtBaseBindInteractiveScope(&wrong)==NULL);
         ZeroMemory(&m,sizeof(m));
-        CHECK(!BaseCheckVDM(BINARY_TYPE_WIN16,L"O:\\ntvdm64\\system32\\WRITE.EXE",L"WRITE.EXE",L"O:\\ntvdm64",&env,&m,&task,0,&launch));
+        CHECK(!BaseCheckVDM(BINARY_TYPE_WIN16,L"O:\\winnt\\system32\\WRITE.EXE",L"WRITE.EXE",L"O:\\winnt",&env,&m,&task,0,&launch));
         CHECK(GetLastError()==ERROR_ACCESS_DENIED && WOWHead==NULL && captures==0);
         CHECK(OpenNtBaseBindInteractiveScope(&scope)==&wrong);
         ZeroMemory(&m,sizeof(m));
-        CHECK(BaseCheckVDM(BINARY_TYPE_WIN16,L"O:\\ntvdm64\\system32\\WRITE.EXE",L"WRITE.EXE",L"O:\\ntvdm64",&env,&m,&task,0,&launch));
+        CHECK(BaseCheckVDM(BINARY_TYPE_WIN16,L"O:\\winnt\\system32\\WRITE.EXE",L"WRITE.EXE",L"O:\\winnt",&env,&m,&task,0,&launch));
         CHECK(WOWHead!=NULL && task!=0 && m.u.CheckVDM.VDMState==VDM_NOT_PRESENT && captures==0);
         CHECK(WOWHead->WOWRecord->iTask==task);
         CHECK(WowAuthId.LowPart==scope.AuthenticationId.LowPart && WowAuthId.HighPart==scope.AuthenticationId.HighPart);
-        CHECK(!strcmp(WOWHead->WOWRecord->lpVDMInfo->AppName,"O:\\ntvdm64\\system32\\WRITE.EXE"));
+        CHECK(!strcmp(WOWHead->WOWRecord->lpVDMInfo->AppName,"O:\\winnt\\system32\\WRITE.EXE"));
         undo=(HANDLE)task;
         CHECK(BaseUpdateVDMEntry(UPDATE_VDM_UNDO_CREATION,&undo,VDM_PARTIALLY_CREATED,BINARY_TYPE_WIN16));
         CHECK(WOWHead==NULL && OpenNtBaseBindInteractiveScope(NULL)==&scope);
@@ -1170,7 +1175,7 @@ int main(int argc, char **argv)
     {
         OPENNT_BASE_INTERACTIVE_SCOPE scope;
         STARTUPINFOW launch={sizeof(launch)};
-        CHAR envBytes[]="PATH=O:\\ntvdm64\0";
+        CHAR envBytes[]="PATH=O:\\winnt\0";
         ANSI_STRING env={sizeof(envBytes),sizeof(envBytes),envBytes};
         ULONG types[2]={BINARY_TYPE_DOS,BINARY_TYPE_WIN16},i;
         CHECK(OpenNtBaseInitializeInteractiveScope(&scope));
@@ -1180,9 +1185,9 @@ int main(int argc, char **argv)
             ULONG task=0, sequence=0x100+i;
             HANDLE console=i?(HANDLE)-1:(HANDLE)1;
             HANDLE wait=GetCurrentProcess();
-            LPCWSTR app=i?L"O:\\ntvdm64\\system32\\WRITE.EXE":L"O:\\ntvdm64\\MEM.EXE";
+            LPCWSTR app=i?L"O:\\winnt\\system32\\WRITE.EXE":L"O:\\winnt\\MEM.EXE";
             ZeroMemory(&m,sizeof(m));
-            CHECK(BaseCheckVDM(types[i],app,app,L"O:\\ntvdm64",&env,&m,&task,0,&launch));
+            CHECK(BaseCheckVDM(types[i],app,app,L"O:\\winnt",&env,&m,&task,0,&launch));
             CHECK(BaseUpdateVDMEntry(UPDATE_VDM_PROCESS_HANDLE,&wait,task,types[i]));
             CHECK(WaitForSingleObject(wait,0)==WAIT_TIMEOUT);
             BaseSrvUpdateVDMSequenceNumber(console,sequence,task);

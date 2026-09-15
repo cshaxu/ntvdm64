@@ -3,10 +3,10 @@ import path from 'node:path';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {spawnSync} from 'node:child_process';
-const root=process.cwd(), build=path.resolve('build/M0-T412/S3/original-lifecycle');
+const root=process.cwd(), build=path.resolve(process.env.OPENNT_LIFECYCLE_TEST_BUILD || 'build/M0-T412/S3/original-lifecycle');
 const ownerBuild=process.env.OPENNT_BROKER_OWNER_BUILD ? path.resolve(process.env.OPENNT_BROKER_OWNER_BUILD) : null;
 fs.mkdirSync(build,{recursive:true});
-const graph=fs.readFileSync('build/M0-T412/S1/text-cell-repair/product/build.ninja','utf8');
+const graph=fs.readFileSync(path.join(ownerBuild || 'build/M0-T412/S1/text-cell-repair/product','build.ninja'),'utf8');
 const flags=graph.match(/^cflags = (.*)$/m)[1].replaceAll('$:',':');
 const rtlFlags=graph.match(/^build obj\/opennt-rtl\/error\.obj:.*\r?\n  rtl_cflags = (.*)$/m)[1].replaceAll('$:',':');
 const ownerPath=path.resolve('src/opennt-host/base/win32/server/srvvdm.c');
@@ -75,7 +75,7 @@ if(ownerBuild) {
     commands=[
         `cl.exe ${flags} ${includes} /Fo"${build}/fixture.obj" "${root}/tests/broker/original_server_lifecycle.c"`,
         `cl.exe ${rtlFlags} /Fo"${build}/error.obj" "${root}/src/opennt-host/base/ntos/rtl/error.c"`,
-        `link.exe /nologo /opt:ref /out:original-lifecycle.exe /map:original-lifecycle.map fixture.obj "${ownerBuild}/opennt-base-server.lib" "${ownerBuild}/opennt-base-client.lib" "${ownerBuild}/opennt-base-bindings.lib" error.obj ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib`
+        `link.exe /nologo /opt:ref /out:original-lifecycle.exe /map:original-lifecycle.map fixture.obj "${ownerBuild}/opennt-base-server.lib" "${ownerBuild}/opennt-base-client.lib" "${ownerBuild}/opennt-base-bindings.lib" "${ownerBuild}/original-opennt-rtl-x86.lib" error.obj ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib`
     ];
 }
 if(!ownerBuild) {
@@ -155,7 +155,7 @@ assert(map.split(/\r?\n/).some(line=>line.includes('_BaseGetVdmConfigInfo')&&lin
 assert(map.split(/\r?\n/).some(line=>line.includes('_BaseCheckForVDM')&&line.includes('client.obj')),'Original task-exit provider missing');
 const result=spawnSync(path.join(build,'original-lifecycle.exe'),[],{cwd:build,windowsHide:true,encoding:'utf8',timeout:15000});
 const processSupport='src/adapter-mvdm-host-out/win32/source/opennt_support_rtl.c';
-fs.writeFileSync(path.join(build,'result.json'),JSON.stringify({ownerBuild,
+fs.writeFileSync(process.env.OPENNT_LIFECYCLE_TEST_REPORT || path.join(build,'result.json'),JSON.stringify({ownerBuild,
     processSupport:{path:processSupport,sha256:createHash('sha256').update(fs.readFileSync(processSupport)).digest('hex')},
     consoleAssociation:'fixture-local only; not authenticated product Console identity',
     status:result.status,stdout:result.stdout,stderr:result.stderr,error:result.error?.message},null,2));

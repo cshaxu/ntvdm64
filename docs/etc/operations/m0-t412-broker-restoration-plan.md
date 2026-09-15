@@ -5,9 +5,9 @@
 Owner admission on 2026-09-13 covers the queue-head broker package and asks
 for S decomposition first. [Status](../../states/CURRENT.md) alone owns the
 active packet. S1 design is closed by the
-[consolidated review](../evidence/m0-t412-s1-design-closure.md); S2 reached its
-source-recovery conclusion and S3 is active. S4--S6 remain sequential planned
-work. The [single broker proposal](../../proposals/proposal-cross-process-broker-closure-001.md)
+[consolidated review](../evidence/m0-t412-s1-design-closure.md). S2-S9 reached
+their recorded bounded deliveries; the owner now admits S10 final integration,
+accounting and closure. The [single broker proposal](../../proposals/proposal-cross-process-broker-closure-001.md)
 retains the detailed requirements; this plan supersedes its provisional stage
 grouping without creating another proposal.
 
@@ -45,6 +45,14 @@ incompatible or legacy peers fail explicitly, not through startup retries.
 Run matching/mismatching protocol/application, malformed and legacy-peer
 tests, then rebuild and regress the three products, publish, commit/push and
 wait for owner confirmation. The final integrated T412 closure remains separate.
+
+### Owner-approved S10 final closure
+
+The owner confirms DOSX/HIMEM/MSCDEX startup loading and directs a final S to
+complete closure, compile/test/commit/push and wait. S10 carries the remaining
+S6 same-build matrix and whole-T accounting, preserves original guest behavior,
+and does not admit the next queued T or full WRITE recovery. Its source baseline
+is delivered df2467de0; T-wide accounting starts at S1 input 08b33351b1.
 
 ## Detailed execution
 

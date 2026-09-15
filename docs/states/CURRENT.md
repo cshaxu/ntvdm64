@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T412 S9.**
+**Active: M0 T412 S10.**
 
 S7 is [closed by owner direction](../etc/evidence/m0-t412-s7-interactive-child-repair.md#s7-owner-directed-closure-and-s8-handoff)
 at pushed `8335f38bd`: nested COMMAND/MEM and EDIT return are delivered.
@@ -11,428 +11,86 @@ at delivered `67ee292cb`: preserve original COMMAND exit semantics unchanged.
 All 15 Console cases pass; direct DOS/native result 7 propagates correctly.
 S9 [implementation and verification](../etc/evidence/m0-t412-s9-version-agreement.md)
 deliver shared APP_VERSION 0.0.412 and protocol 2, mutual rejection and
-incompatible-worker rollback. Final product regressions pass; await owner
-confirmation after delivery. No next packet or T412 closure is implied.
+incompatible-worker rollback at pushed df2467de0. Owner now authorizes the
+final closure packet and confirms DOSX/HIMEM/MSCDEX load at startup.
+This advances the delivered S9; it is not full device or WRITE acceptance.
 
 The [S6 VDM TIB repair](../etc/evidence/m0-t412-s6-vdm-tib-storage-repair.md)
 retains its full-storage link gate. Current products are at `O:\winnt`;
 full T412 matrix and owner acceptance remain open.
 
+S10 P1 delivers the [final verification and accounting](../etc/evidence/m0-t412-s10-final-verification.md):
+17 Console rows, original-owner/RPC/version tests and controlled empty-drain
+race pass. The separately controlled admitted-broker-loss test fails with a
+20-second timeout after typed EXIT. S10/T412 therefore remain open; no closure
+or next T admission is claimed. Deliver the verified changes and wait for owner
+direction on the recorded remaining fault contract.
+
 ## Active Packet
 
-### M0 T412 S9 — Three-program version agreement
+### M0 T412 S10 — Final broker package verification and closure
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T412 S9; Ordinary Mode, one implementer. |
-| Admission And Approval | Owner requires protocol plus program version checking, shared src/app/version.h, APP_VERSION 0.0.<T id>, build/test/commit/push then wait. |
-| Objective | run16 and ntvdm connect only to a basesrv with exactly matching protocol and APP_VERSION 0.0.412; mismatches fail explicitly before task admission, without startup retries. |
-| Non-goals | No original COMMAND/BaseSrv policy or guest changes; no automatic S10/T closure; no compatibility negotiation or version override switch. |
-| Reference Baseline | dc4455afd, S8 accepted; current RPC 1.0 has no program-version handshake. |
-| Files And ABI Surface | Shared app/version.h metadata, local RPC Connect IDL/client/server, launcher retry boundary, build dependencies and tests. |
-| Applicable Rules | Source-first original-owner preservation; execution, architecture, coding and document authorities. Shared app version metadata is explicitly owner-required, not an adapter call into app policy. |
-| Verification | Fresh x86 three-product build; actual RPC matching, mismatched protocol/app, malformed version and recovery cases; client rejection and no-retry checks; legacy-interface rejection; Console DOS/nested/EDIT/exit matrix; governance, hashes and clean pushed Git. |
-| Expected Markers | No context/generation/task accepted on mismatch; both peers validate identities; explicit mismatch diagnostic and nonzero result; normal same-version behavior unchanged. |
-| Asset Needs | Existing MSVC x86 /MT toolchain; build/M0-T412/S9/version-agreement; selected O:\winnt products and media; runtime logs below O:\winnt\logs. |
-| Reporting Requirements | Exact version contract, tests and limits, retained original semantics, published hashes and commit; await owner confirmation. |
-| Stop Conditions | Unproved peer contract or need for original guest/service semantic change; preserve baseline and report rather than bypass verification. |
-| Exit Criteria | Positive/negative and product regressions pass; same formal EXEs published; evidence, commit/push and clean worktree; stop for owner confirmation. |
-| Original Owner Request | “使用协议版本号+程序版本号来检查 ... all 3 exe should refer to the same version.h ... APP_VERSION ... 0.0.<t_task_id>”. |
-| Similar-Issue Sweep | Launcher and worker client, server pre-registration, legacy RPC ABI, retry classification, build header invalidation and test-only mismatched peers. |
+| Identifier Mode | M0 T412 S10; Ordinary Mode, one implementer then reviewer. |
+| Admission And Approval | Owner admits final T closure work, build/test/commit/push then wait. S9 delivery is the predecessor. |
+| Objective | Verify final same-source three-program composition and settle D01-D07/D10, code accounting and explicit residual boundaries. |
+| Non-goals | No new T, full WRITE recovery, guest changes, worker reaper or invented service policy. |
+| Reference Baseline | df2467de0 delivery; whole-T comparison starts at S1 input 08b33351b1c341bb433f27ab517ee9a4e0bc3e0c. |
+| Files And ABI Surface | Final verification tools/tests, scoped source registers and governance/evidence; existing protocol 2 and APP_VERSION 0.0.412 unchanged. |
+| Applicable Rules | All current execution, source, architecture, coding and document authorities; source-first minimal diff. |
+| Verification | Fresh x86 /MT build; original-owner fixtures, actual RPC/security/resources, Console matrix, WOW coordination and broker lifecycle/races; hashes, governance and Git synchronization. |
+| Expected Markers | Every mandatory broker contract passes on identified final inputs; separate historical proof, current proof and out-of-scope workload limits. |
+| Asset Needs | build/M0-T412/S10/final; existing MSVC/Node and O:\winnt media; all runtime logs in O:\winnt\logs. |
+| Reporting Requirements | Measured mirror/overlay/project deltas, retained seam rationale, exact products and tests; stop after delivery. |
+| Stop Conditions | Unresolved mandatory contract, runtime regression or material owner-boundary change; record failure, never declare unsupported proof passed. |
+| Exit Criteria | Final scoped matrix and accounting complete, verified products published, closure evidence committed/pushed, worktree clean; await owner. |
+| Original Owner Request | “请你准入一个s任务来执行收口工作 完成了以后 编译测试提交推送等我”. |
+| Similar-Issue Sweep | Final artifact lineage, obsolete local providers/entries, startup/drain/disconnect, version rejection and original DOS/WOW separation. |
 | Working Plan | [T412 S plan](../etc/operations/m0-t412-broker-restoration-plan.md). |
 
-S8's closed admission brief is retained with its evidence record.
+## Closure work
 
-S1 audit/design is closed by the [consolidated design](../etc/evidence/m0-t412-s1-design-closure.md).
-S4 is closed by its [requirement ledger](../etc/evidence/m0-t412-s4-closure.md):
-real COMMAND/MEM/EDIT, BOP reentry, copied native-child lifetime, Console
-stdout/stderr, EOF and nonzero status are now observed.  Guest COMMAND `>` is
-distinguished and remains the existing Redirector boundary; it was not folded
-into S4. S5 is closed by its [completion disposition](../etc/evidence/m0-t412-s5-wow-idle-lifecycle.md#s5-completion-disposition). S6 and S7 are closed by owner direction at their bounded repairs; S8 is closed with original exit semantics accepted. The remaining S6 full-T matrix and removal accounting are retained, not marked passed. S3
-delivered the three-product command path; its final obsolete-source deletion
-remains explicitly carried into S6. See the
-[S2 transition](../etc/evidence/m0-t412-s2-original-lifecycle.md#s2-bounded-conclusion-and-s3-transition).
-Historical checkpoints are not current admission or hold state.
+S1-S8 reached their recorded bounded conclusions; S9 delivery is advanced by
+owner authorization of S10. The indexed [working plan](../etc/operations/m0-t412-broker-restoration-plan.md)
+and [supporting records](../etc/README.md) retain the complete requirement chain.
+Earlier status chronology is preserved in the [snapshot](../etc/evidence/m0-t412-s10-status-snapshot.md),
+not repeated as live admission state.
 
-T412’s compact predecessor chain is S2 original lifecycle, S3 entry/security,
-and S4 reentry/BOP/stream evidence. The corresponding records remain indexed
-under [T412 evidence](../etc/README.md); they are not duplicated as current
-control state. Guest COMMAND redirection remains the explicit Redirector
-boundary, not a S4 acceptance surrogate.
-
-## S6 owner-directed closure
-
-Owner confirms direct launch works and approves S6 closure after the VDM TIB
-storage repair. Its then-unaccepted interactive COMMAND workload transferred
-to S7, now delivered; exit-code acceptance transfers to S8. Full T412 closure still requires outstanding same-build S2--S5
-matrix and removal accounting after this regression is resolved. The storage
-repair evidence records the tested package and explicit limits.
-
-## T412 S1 historical checkpoints
-
-S1 execution checkpoint: [source audit](../etc/evidence/m0-t412-s1-broker-owner-audit.md)
-is supplemented by [original server compilation](../etc/evidence/m0-t412-s1-original-server-compilation.md):
-the unchanged complete srvvdm.c compiles for x86 with no implicit API declarations.
-This proves the declaration boundary is finite, not a linked/runtime provider.
-S1 remains active while resource duplication timing and finite process/Console
-bindings are resolved; S2--S6 retain the owner's sequential approval.
-
-The resource binding now selects synchronous recipient acknowledgement at
-the original duplication call sites, as specified in the
-[continued owner audit](../etc/evidence/m0-t412-s1-broker-owner-audit.md#resource-binding-design-after-approval-and-transport-probes).
-Five attachment cases pass, including three-process shared-position/read-only
-and absent-target failure. Durable receipt/rollback integration is not yet
-implemented. Console identity remains the next S1 design gate.
-
-[Console membership evidence](../etc/evidence/m0-t412-s1-console-membership.md)
-now proves same/different Console separation in an isolated native Console
-fixture and selects an owned short-lived query helper, not persistent broker
-attachment. Worker readiness requires explicit acknowledgement. This is not
-ConPTY, close/recreation or stale-generation integration acceptance. S1 remains
-active pending the consolidated design/exit review before S2 activation.
-
-The earlier source-audit checkpoint
-records all eight discussion rows, the 1,349-line local-provider replacement
-envelope (not net deletion), and outstanding finite-boundary designs. The
-inherited HALT/RESET source-equivalence claim is contradicted by actual local
-bit consumption. The stop condition is reached: S1 remains open, with no S2
-activation. The owner subsequently approved the bounded event-consumer
-prerequisite: audit HALT/normal RESET, timer/SAD and PIC acknowledgement as one
-profile; preserve atomic notification mechanics and original consumption order.
-Build/fixture outputs use build/M0-T412/S1/event-profile; real-run logs remain
-under O:\ntvdm64\logs. Source-extracted checks are not full CCPU runtime proof.
-Full S1 design/count/runtime-proof work is not
-claimed complete.
-
-Approved prerequisite delivery: [RESET repair evidence](../etc/evidence/m0-t412-s1-reset-consumer-repair.md)
-proves original-CPU pre-fix AX=DEAD versus repaired AX=BEEF. Formal x86 build
-and MEM/COMMAND smoke completed. EDIT is corrupted in both same-graph repaired
-and pre-fix builds, while the old published product renders cleanly in this
-comparison. Both publication paths have been restored to the old C0771B...652F
-binary. No EDIT acceptance, S1 closure or S2 activation is claimed. The
-source/build lineage regression requires disposition before product acceptance.
-
-Continued owner-requested diagnosis [isolates the EDIT regression](../etc/evidence/m0-t412-s1-console-cell-regression.md)
-to T410 commit 64acfb123: the adapter assumes two-byte text cells while the
-selected original non-MONITOR painter writes four-byte cells. A single-token
-diagnostic build restoring four-byte allocation reproduces the old clean
-snapshot exactly. Production source/publication remain unchanged in this
-diagnostic turn; minimum adapter repair and stride/capacity regression are
-identified, not yet product-delivered. No CPU or original painter edit needed.
-
-Owner now requests continuous execution. This admits the diagnosed minimum
-Console adapter repair and matching producer-stride/capacity tests, formal x86
-build and MEM/COMMAND/EDIT verification, followed by verified publication and
-S1 audit/design continuation. The original painter and CPU profile remain
-unchanged. Working root is build/M0-T412/S1/text-cell-repair; existing formal
-event-profile objects may be reused only with recorded input identity.
-
-Text-layout prerequisite delivered: the new text-cell-repair formal build
-compiles all 441 steps; source/profile check, actual adapter fixture with
-old-source negative control, and original CCPU HALT test pass. MEM and COMMAND
-exit zero; two EDIT startup snapshots exactly match the old clean reference.
-MEM's existing implausible largest-program-size field is not accepted as correct.
-Both publication paths now carry SHA-256 33C55137...AE43AA, 3,228,672 bytes.
-The [repair evidence](../etc/evidence/m0-t412-s1-console-cell-regression.md)
-records exact hashes and limits. S1 broker audit/design resumes; S2 stays inactive.
-
-Continued S1 audit verifies modern SEC_IMAGE statuses for actual MEM/COMMAND/
-EDIT/WRITE and supports original BaseClient classification without a new header
-parser. It also identifies an authority decision: original standard-stream/event
-duplication needs an authenticated resource-transfer binding, while current rules
-ban HANDLEs in every message. The proposed narrow OS-attachment exception is
-[recorded, not implemented](../etc/evidence/m0-t412-s1-broker-owner-audit.md#resource-transfer-authority-decision-required).
-S1 remains open pending that decision and remaining finite-boundary design;
-there is no S2 admission or source implementation beyond the approved prerequisites.
-
-Further read-only S1 review distinguishes nonblocking shared-WOW polling,
-validated WOWEXEC window notification, logon-LUID identity, and the separate
-private USER startup/input-idle hook. Their exact original owners and required
-Console/generation tests are recorded in the
-[continued boundary audit](../etc/evidence/m0-t412-s1-broker-owner-audit.md#console-and-wow-immediate-boundary-refinement).
-The resource-transfer exception remains unapproved; no production changes or
-new import follow from this continuation.
-
-Owner decision superseding that historical hold: "批准按照proposal完成当前T任务。"
-The authenticated OS-managed attachment exception is now reflected in the
-architecture/coding/source rules. S1 may finish its finite design and feasibility
-checks, then advance sequentially through the approved S2--S6 gates without
-another routine admission request. Resource transfer still needs actual x86
-verification; approval is not implementation or test evidence.
-
-Resource feasibility now passes in two actual x86 process pairs: authenticated
-local RPC file/event attachments retain shared file position and returned
-ownership; read-only attachments deny writes without signaling or mutation.
-The [feasibility evidence](../etc/evidence/m0-t412-s1-rpc-resource-feasibility.md)
-separates these tests from original BaseSrv policy and the three product EXEs.
-No publication change; S1 finite composition design continues under approval.
-
-## T411 Closed Packet
-
-T412 S1 found an inherited event-evidence contradiction; see the current
-[audit checkpoint](../etc/evidence/m0-t412-s1-broker-owner-audit.md).
-The historical closure below does not prove HALT/RESET equivalence.
-
-### M0 T411 S4 — CCPU event-profile closure
-
-| Field | Record |
-| --- | --- |
-| Identifier Mode | M0 T411 S4, Ordinary Mode. |
-| Admission And Approval | Owner approved the admitted T411 to begin execution: “准入本t任务开始执行”. S2 is closed below; this is the second restoration group in its approved proposal. |
-| Candidate Proposal | [CCPU40 C-VID and event-path research and restoration](../proposals/proposal-ccpu40-cvid-event-path-restoration-001.md). |
-| Objective | Audit every CCPU event producer and consumer, restore original acknowledgement ordering where source-proven, retaining only minimum thread-safe transport. |
-| Non-goals | No event-bitmap policy change, CPU instruction change, CPU30/MONITOR selection, broker work, arbitrary timing algorithm, or deletion of the C-VID binder. |
-| Reference Baseline | [S1 audit](../etc/evidence/m0-t411-s1-ccpu40-cvid-event-audit.md) classifies C05 as the only quantified autonomous C-VID timing replacement; [S2 closure](../etc/evidence/m0-t411-s2-cvidc-vector-closure.md) proves the binder is retained. |
-| Files And ABI Surface | `qevnt.c`, `quick_ev.c`, C-VID `accessfn.c`, CCPU timing provider, binder/generator, original selected system manifest and focused x86 timing fixture. No public ABI change. |
-| Applicable Rules | Goal, architecture, coding, execution, documentation and source-policy authorities; historical-recovery and CPU compatibility-profile gates. |
-| Verification | Compare complete original quick-event APIs and selected manifest; trace every Get/SetJump caller; prove initialization/reset/conversion behavior; focused x86 positive/negative timing fixture, source/current diff review, governance and diff checks. |
-| Expected Markers | Separate calibration/restart semantics or a proven source-shaped unavailable boundary; no recursive vector route; actual removed/retained count proved. |
-| Asset Needs | Existing selected OpenNT/OpenNT-4.5 source, local x86 toolchain and a disposable build root under `build/M0-T411/S3/`. |
-| Reporting Requirements | Separate original source, adapter, external-patch and autonomous material; name every unavailable dependency and report positive/negative evidence. |
-| Stop Conditions | No original provider can cross a finite standalone ABI, a proposed replacement would invent timing policy, source/build evidence conflicts, or the path enters event-bitmap consumption. Preserve current behavior and hand off E01 to S4. |
-| Exit Criteria | Source-first event-profile disposition with focused x86 proof, committed/pushed; remaining integration follows S5. |
-| Original Owner Request | “准入本t任务开始执行”. |
-| Similar-Issue Sweep | qevnt/quick_ev source manifests, calibration versus restart calls, C-VID access wrappers, CCPU heartbeat conversion, reset and overflow paths, threaded callback and lock boundaries. |
-
-## S2 Closure Record
-
-S2 delivered the selected C-VID slot/layout and one-owner proof at the linked
-evidence record.  The actual 125-line binder/generator carrier has **zero
-source-proven removable lines**: early video publication and later full
-publication serve separate original-order requirements.  The focused x86
-fixture passes both positive routing and retained-null negative cases.  C05
-and E01 remain unmodified and transfer respectively to S3 and S4.
-
-## S3 Closure Record
-
-S3 corrected C05: calibration is now the registered unavailable value zero,
-while restart remains independently writable. The focused x86 fixture passes;
-the source and verification record is indexed in `docs/etc/evidence`.
-
-## T411 Closure Record
-
-T411 is closed at the linked [closure record](../history/m0-t411-ccpu40-cvid-event-closure.md).
-
-## S1 Closure Record
-
-S1 delivered the full selected CCPU40 C-VID/event ledger and a four-group
-source-first restoration proposal at `cc1d0516d`. It identified C05's shared
-timing value as the only quantified autonomous C-VID target (about 20
-conditional source/generator lines), classified P01/P02 as registered
-NTVDMx64 carriers rather than project-owned behavior, and did not perform a
-product repair. Full evidence is [indexed here](../etc/evidence/m0-t411-s1-ccpu40-cvid-event-audit.md).
-
-## M0 T410 S1 Closure Record
-
-S1 removed 1,033 lines of isolated project-owned window/input-presentation
-code and stale test/build wiring, without adding a replacement GUI. The final
-x86 product linked and was staged at `O:\ntvdm64\ntvdm32.exe` (3,229,696
-bytes, SHA-256 `c0771b414f93b1f1644765447f89439860e23e6f9fb67a1319222955b267652f`).
-The native text Console path remains selected. The automated disposable-stage
-COMMAND observations stopped at exit `0x40` before guest input, so no new
-runtime keyboard/mouse acceptance is claimed. Full source/build and runtime
-evidence is [recorded here](../etc/evidence/m0-t410-s1-native-console-window-retirement.md).
-
-## T406 Closure Record
-
-M0 T405 S3 and T405 closed by owner direction on 2026-09-12:
-static audit completed; restoration and verification transferred to approved
-candidates, not declared implemented. See the
-[closure and receiver table](../history/m0-t405-source-diff-audit.md).
-The [original proposal](../history/m0-t405-source-diff-audit-proposal.md) and
-[combined audit](../etc/evidence/opennt-replacement-audit-20260912.md) remain
-preserved. The owner admitted the physical-memory mapping package on
-2026-09-12; only research/design S1 is active. Report before S2 repair.
-
-S1 findings are ready in the [research/design report](../etc/evidence/m0-t406-s1-physical-mapping-design.md):
-224 changed mirror lines in the selected cohort; 159 gross rollback candidates
-(128 x86-width cohort, 31 conditional remap protocol), plus 85 gross
-adapter/header protocol-retirement lines. These are not tested net savings.
-Lower original mapping bodies remain unlocated in searched inputs; no repair
-or new runtime acceptance is claimed. S1 follow-up research continues under
-the owner amendment below; S2 has not started.
-
-Owner amendment: extend this T to audit and subsequently remove unnecessary
-x64-width patterns beyond the U02 files, with paired original/current evidence
-and x86 ABI/regression proof. First research the original-vs-local history,
-MONITOR/CCPU branch differences, empty-stub significance and COMMAND/EDIT
-runtime coverage. This extends S1 research now, not permission to implement
-an unreviewed lower mapping substitute. Width-only cleanup stays in this T;
-unrelated functional repairs retain their existing candidate owners.
-
-Owner observation amendment (2026-09-12): “在保留它们当前行为的基础上，
-加一些logging或者弹窗，这样我跑的时候可以确认它们有在用”. S1 now
-includes bounded mapping call/hit logging, focused unchanged-behavior tests,
-a fresh x86 formal build at build/M0-T406/S1/r001-mapping-observation and
-deployment to the existing runtime EXE. No mapping repair is admitted.
-Observation is implemented and verified: fresh x86 link, baseline/observed
-adapter tests and denied-log test pass; command.com /c exit returns 0 and
-records observer-active only. See the linked S1 evidence P3 section for log
-events, limitations and build identity. Actual EDIT/EMS/DIB coverage remains open.
-Owner follow-up: “我要的是咱们跑集成测试 比如mem.exe command.com edit.com
-还有write.exe 看看是否有过命中”. Run these four deployed ordinary CLI
-workloads with bounded real-Console observation, automated welcome dismissal
-and command exit, PID-correlated mapping logs and test-owned process cleanup.
-Only a test harness may be added under tests/observation; its fresh build root
-is build/M0-T406/S1/r002-workload-observation. No product change is needed.
-Four-program integration completed and repeated with Job PID tracking: MEM
-and COMMAND exit 0; EDIT reaches welcome/editor and accepts Esc before timed
-cleanup; WRITE exits 255 before visible UI. All four logs contain observer-active
-only, no mapping call/hit. See S1 evidence P4; this does not prove mapping
-unnecessary or WRITE/DIB correctness. MEM's anomalous size output is debt.
-
-Owner approved upstream observation: “批准执行” for EMS configuration,
-initialization and service ingress; WRITE's earliest exit and WOW reachability;
-then a real guest EMS allocation/map/switch/free workload using an isolated PIF
-if default EMS is disabled. S1 may add minimal registered observational hooks
-and test media, with build root build/M0-T406/S1/r003-upstream-observation.
-Keep normal CLI, defaults and mapping behavior unchanged. Report the first
-blocked edge and restoration design before functional repair; no CPU change.
-The prior P4 push remains pending destination approval after safety rejection.
-
-## S1 Closure Record
-
-[S1 research and observation](../etc/evidence/m0-t406-s1-physical-mapping-design.md)
-is delivered through pushed a03a6b4e3. Owner now approves restoration. This
-closes bounded research/observation, not the T or its unresolved contracts;
-remaining width classification and mapping proofs transfer explicitly to S2.
-
-## S2 Approval And Group Gates
-
-Owner: “批准修复为opennt原始实现  并测试通过”, followed by
-“你把可以恢复的原始代码分组，每次恢复一组便跑一次编译测试 不要划分太细 要有效率”.
-The preceding S1 paragraphs are historical scope; this approval supersedes their
-research-only restrictions. S1's bounded findings and P4/P5 are delivered at
-pushed a03a6b4e3; wider per-hunk review continues as S2 implementation work.
-Only S2 is active. The one agent implements, then switches to reviewer role.
-
-Groups: (1) paired original x86-width declarations/definitions/callers, retaining
-necessary Win32 ABI repairs; (2) original external mapping add/alignment/remove
-contract and retirement of extra publication protocol; (3) approved minimal
-guest-memory lease access binding for EMS cross-window spans, then source-proven
-remaining SAS/bulk/cross-page consistency. Each group builds and tests before the next.
-No lower function is labelled original unless its original body is identified.
-Build root: build/M0-T406/S2/r001-original-restoration. Real runtime logs remain
-under O:\ntvdm64\logs\. Frozen reference is a03a6b4e3 and its S1 EMS/WRITE traces.
-Original source stays in its mirror; only unavailable lower mechanics stay in
-an explicitly reviewed adapter. Mapping group tests must use original-shaped
-callers without fixture-only preregistration, verify shared bytes and backing
-restoration, and retain positive EMS guest coverage. Width group tests include
-paired source checks, x86 compile/link and ordinary DOS/WOW-frontier regression.
-This admission does not declare S1's unverified candidates already correct.
-
-## Historical T406 Packet
-
-Group 2 implemented and verified: original add/remove function bodies match
-OpenNT; extra publication protocol removed. Real native DIB/CCPU shared
-storage, alignment, allocation failure and ordinary-backing restoration
-tests pass, as does the EMS guest regression. See
-[P2 evidence](../etc/evidence/m0-t406-s2-original-restoration.md).
-Latest published EXE: 3,236,864 bytes; SHA-256
-653ec3875887ed10a4d24ef7e264560d986c30c458d6b77648f0a9ce765a9aac.
-Earlier artifact identities below are historical. Group 3 and remaining
-width disposition are still open; full WRITE is not accepted.
-
-Group 2 working root: build/M0-T406/S2/r002-dib-restoration. Approved lower
-binding design: allocate the finite per-session physical-page translation
-storage during InitIntelMemory, before publishing successful initialization.
-VdmSetPhysRecStructs then performs no allocation, matching its original void
-call contract. Restore original VdmAddVirtualMemory/VdmRemoveVirtualMemory
-bodies and remove publish/prepare/cancel. This lower table is explicitly an
-unavailable-implementation adapter, not an imported original function body.
-
-T406 closure: paired original x86-width cohorts and the external-memory
-add/remove contract are restored; final candidate disposition and retained
-access limitations are in the [closure evidence](../etc/evidence/m0-t406-s2-original-restoration.md#s2-final-x86-width-and-access-boundary-disposition).
-No further T406 implementation is active.
-
-### M0 T406 S2 - Original mapping and x86-width restoration
-
-| Field | Record |
-| --- | --- |
-| Identifier Mode | M0 T406 S2, Ordinary Mode, one agent executing then reviewing. |
-| Admission And Approval | Owner: “准入队列第一个T任务，完成彻底调研和设计，并报告可以减少多少不需要的diff；哪些diff和overlay或者自主实现是依然必要的、原始opennt代码无法提供准确内容的；理想情况是完全0自主实现，全面复通原始代码。” |
-| Candidate Proposal | [Physical mapping](../proposals/proposal-physical-memory-mapping-restoration-001.md). |
-| Objective | Implement approved original mapping contracts and grouped x86-width restoration; verify EMS/DIB/access boundaries and report retained lower mechanics honestly. |
-| Non-goals | No CPU instruction changes, kernel/CSR shell, broker or unrelated U03 redesign. No claim of full WRITE acceptance. |
-| Reference Baseline | f2646d80b; T405 audit and current proposal; source/runtime acceptance remain distinct. |
-| Files And ABI Surface | Physical mapping adapter observation and focused tests; Status and indexed S1 evidence. No public ABI, mapping-state or return-contract change. |
-| Applicable Rules | Repository source, architecture, coding, execution and documentation rules; corresponding governance skills. |
-| Verification | Bounded original/current source searches and hashes; per-file numstat and hunk disposition; selected compile macros/callers; governance, links, diff review, commit/push. |
-| Expected Markers | Original owner and four-rung disposition per interface; proved versus conditional removal counts; necessary bindings and unresolved original-source gaps; positive/negative S2 test design. |
-| Asset Needs | Existing local OpenNT/OpenNT-4.5 originals, selected mirrors and retained build inputs; comparisons read-only. No new source/media. |
-| Reporting Requirements | Separate mirror diff, overlay, autonomous code, declarations and test footprint. Report bounded search limits; zero autonomous code is a target, not assumed feasibility. |
-| Stop Conditions | Missing provenance or unavailable original implementation is explicit uncertainty; no invented fix. New source/runtime authority or expanded boundary requires review. |
-| Exit Criteria | Restore the approved source contracts and x86-width cohorts; pass group-level formal build, focused tests and integration; review, commit and push. Unknown original lower bodies remain explicit. |
-| Original Owner Request | Full request retained in Admission And Approval above. |
-| Similar-Issue Sweep | EMS, external DIB, CPU/SAS byte and bulk/cross-page accesses, backing lifetime and fixture-only publication bypasses. |
-
-Owner verification amendment: every T406 semantic binding retained because an
-original implementation is unavailable must have its registered divergence,
-a bounded first-hit trace at its semantic boundary, and a PID-correlated
-real-program run that records whether it hit. A formal fixture proves its
-contract but does not substitute for this runtime-hit evidence. No-hit rows
-remain explicitly unverified rather than inferred correct from compilation.
+S10 found and repaired a dormant Check scalar encoder's uninitialized reserved
+fields, obsolete fixture capacities/media paths, and UNKNOWN_IF misclassification
+when an empty broker drains. The existing pending-worker query is relocated
+unchanged into the mirror's private overlay and explicitly registered.
+Final same-source positive verification and accounting are recorded; admitted
+broker loss remains a blocking negative. No T closure is claimed.
 
 ## Current Technical Baseline
 
-- Sole product: Win32/x86 ntvdm32.exe with original CCPU40; native x64 and
-  CPU30 are not product/build/acceptance targets.
-- Audited source: 3d127962c82133cb6adad50f52733250bac5f11a, including
-  unaccepted 1daff0ace WIP. T405 changed no product behavior and proves no new
-  WRITE execution. [T404 closure](../history/m0-t404-owner-directed-closure.md)
-  preserves prior runtime limitations.
-- Historical T406 deployment was `O:\ntvdm64\ntvdm32.exe`; all current and
-  future test publication uses the `O:\winnt` package root (and `O:\winnt\logs`)
-  instead. That historical deployment was T406 S2 external
-  memory restoration plus working EMS/allocator/host-word and C-VID x86
-  carrier cohorts, original current-process pseudo-handle spelling, restored
-  original COMMAND standard-handle carrier, and the approved EMS cross-window
-  lease binding and its bounded trace, 3,236,864 bytes; SHA-256
-  14e94e2091a9d837f6485cd20a68f6a7c591579bc77891dd91629110d5802a16.
-  Formal build, native DIB sharing and isolated EMS guest tests pass. MEM and
-  COMMAND exit normally; EDIT reaches its editor after Esc and bounded cleanup.
-  WRITE still reaches W32Init FALSE, exit 255; no full WRITE acceptance.
-  [S2 evidence](../etc/evidence/m0-t406-s2-original-restoration.md) owns details.
-- Extended EMS conventional-window regression formerly failed with c0000005
-  in host copying. The owner-approved minimal lease binding now passes both
-  direct original `nt_emm` and real INT 67h guest coverage for a reversed
-  two-window span. It preserves original EMS dispatch/public functions and
-  uses the existing session lease only for alias-overlapping spans; no CPU
-  change or generic mapping manager is admitted. Native alias experiments
-  remain only evidence because their decommit semantics are incompatible.
-- S1, S2 P1/P2 and the grouped restoration at 78d492964 are pushed to main.
-  The owner explicitly approved permanent main pushes. T406's final grouped
-  width/access disposition is included in the final T406 delivery; the latest EMS repair
-  verifies original `nt_emm` bulk-copy callers and real guest INT 67h coverage
-  across reversed pages. Full WRITE and unrelated access contracts remain
-  assigned to their named future owners, not accepted by this closure.
-- [Queue](QUEUE.md) owns candidate order and pending repairs; [debt](TODO.md)
-  retains full WRITE limitations. Ignored builds and runtime logs are preserved,
-  not deleted to obtain Git cleanliness. Commit/push and status verification
-  follow the closure record; an unavailable push remains pending delivery.
+- Product package: run16.exe, basesrv.exe and ntvdm.exe; MSVC x86 /MT,
+  original CCPU40. APP_VERSION 0.0.412 and RPC protocol 2.
+- Public entry: run16.exe <binary> [arguments]. Original COMMAND exit/reentry
+  semantics are retained; no worker idle timer or reaper.
+- Formal outputs and fixtures stay under build/. Published products are at
+  `O:\winnt`; observations belong only below `O:\winnt\logs`.
+- Owner confirms DOSX, HIMEM and MSCDEX load at startup. This is not complete
+  device validation, full DPMI compatibility or successful WRITE execution.
+- Full WRITE/WOW provider recovery remains with the existing queued owners.
+  Broker-side WOW acquisition/completion tests do not prove GUI execution.
+- [Queue](QUEUE.md) owns the unchanged next-candidate order; [TODO](TODO.md)
+  owns unplanned debt. No next T is admitted by this closure packet.
 
 ## Recent M0 Closures
 
 | Task | Compact result |
 | --- | --- |
-| T409 | Original DEM/VDD handle lifecycle restored and standalone fast I/O now takes the original guest CF slow-path fallback; formal build and source proofs pass, while the inherited-console MEM watchdog limitation remains explicitly unaccepted. |
-| T407 | Original DPMI/XMS and immediate DOSX transition recovery closed; `FSTI` reaches BOP `FDh`, MEM/COMMAND pass, while WRITE remains assigned to WOW lifecycle recovery. |
-| T405 | Static diff/overlay audit complete; 37 overlap rows and eight unresolved families transferred to candidate owners. No restoration/runtime acceptance claim. |
-| T406 | Original mapping contracts, bounded EMS lease binding and admitted x86-width cohorts restored; final remaining candidates are either registered seams or named future-owner revalidation. |
-| T404 | Owner-directed closure with unaccepted WIP preserved; mouse acceptance retained, WRITE incomplete. |
-| T403 | x64 mapping/overlay residue retired; formal x86 build and owner test passed. |
+| T411 | CCPU40 C-VID/event bounded closure; its RESET evidence correction was completed in T412 S1. |
+| T410 | Retired project-owned presentation-window path; native Console remains selected. |
+| T409 | Original DOS file-service ownership and guest fast-I/O fallback restored. |
+| T407 | Original DPMI/XMS source package and bounded DOSX transition restored; full WRITE remains outside that closure. |
+| T406 | Original mapping contracts and bounded EMS lease restored; x86-width cohorts cleaned. |
 
 ## Recent Governance
 
-- **M0 Td S10 P1:** 8f7f6ec3d assigned U03-U08 owners and acceptance in existing proposals; pushed.
-- **M0 Td S9 P1:** de5c4f969 placed physical mapping first and CCPU40 event recovery before broker.
-- **M0 Td S8 P1:** recorded DPMI/XMS memory and transition restoration.
-- **M0 Td S7 P1:** consolidated RTL, Console and WOW restoration with broker-before-WOW sequencing.
-
-## Historical Status Ledger
-
-The pre-compaction ledger remains in the
-[archived status snapshot](../../artifacts/documentation-archive/20260910/etc/evidence/status-ledgers/status-ledger-snapshot-20260910.md).
-It is historical evidence, not current authority. Closed-task detail belongs
-in history; candidate plans remain in their linked proposals.
+- **M0 Td S10 P1:** 8f7f6ec3d assigned U03-U08 to named proposal owners.
+- Earlier governance deliveries and closure details remain in the indexed
+  [status snapshot](../etc/evidence/m0-t412-s10-status-snapshot.md).

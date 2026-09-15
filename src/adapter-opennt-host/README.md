@@ -1,5 +1,13 @@
 # adapter-opennt-host
 
+T412 S10 distinguishes a confirmed legacy RPC interface from UNKNOWN_IF during
+empty-broker drain by querying the same authenticated endpoint's interface IDs.
+Only a completed matching Connect exposes original service calls. The dormant
+Check scalar encoder now zeroes receipt slots; actual Check command encoding
+continues to own and initialize its complete prefix. Original policies and
+wire layouts are unchanged. Admitted-broker loss remains explicitly unclosed
+in the S10 evidence, not hidden by replay or worker retirement.
+
 T412 S9's BaseClient RPC binding consumes the explicitly shared
 `app/version.h` identity metadata, not app behavior. It checks both protocol
 and application identity before exposing a connection to original BaseClient.

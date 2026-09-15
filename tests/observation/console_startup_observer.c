@@ -971,6 +971,23 @@ int main(int argc, char **argv)
             /* Snapshot the exact shared CONOUT$ buffer after original guest
              * stream output but before this observer queues any key. */
             write_console_snapshot(output, console_input_preinput_snapshot_path);
+            /* Test-only gate: let the controller stop its broker before the
+             * first guest keystroke. No product or guest state is modified. */
+            {
+                char gate_name[128];
+                DWORD gate_length = GetEnvironmentVariableA("MVDM_OBSERVER_INPUT_GATE",
+                    gate_name, sizeof(gate_name));
+                if (gate_length) {
+                    HANDLE gate = gate_length < sizeof(gate_name) ?
+                        OpenEventA(SYNCHRONIZE, FALSE, gate_name) : NULL;
+                    if (gate == NULL) return 90;
+                    if (WaitForSingleObject(gate, 15000) != WAIT_OBJECT_0) {
+                        CloseHandle(gate);
+                        return 91;
+                    }
+                    CloseHandle(gate);
+                }
+            }
             scripted_console_input_delivered = write_console_input_text(input,
                 scripted_console_input_text, scripted_console_line_delay_ms, output, argv[3]);
         }

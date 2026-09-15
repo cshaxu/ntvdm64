@@ -7,8 +7,8 @@
 UNICODE_STRING BaseDotComSuffixName, BaseDotPifSuffixName, BaseDotExeSuffixName;
 int main(void)
 {
-    LPCWSTR names[]={L"O:\\ntvdm64\\MEM.EXE",L"O:\\ntvdm64\\COMMAND.COM",
-        L"O:\\ntvdm64\\EDIT.COM",L"O:\\ntvdm64\\system32\\WRITE.EXE"};
+    LPCWSTR names[]={L"O:\\winnt\\MEM.EXE",L"O:\\winnt\\COMMAND.COM",
+        L"O:\\winnt\\EDIT.COM",L"O:\\winnt\\system32\\WRITE.EXE"};
     DWORD expected[]={SCS_DOS_BINARY,SCS_DOS_BINARY,SCS_DOS_BINARY,SCS_WOW_BINARY};
     WCHAR self[MAX_PATH];
     DWORD type,i,error;

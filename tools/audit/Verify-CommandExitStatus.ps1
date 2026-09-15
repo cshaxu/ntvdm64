@@ -20,6 +20,7 @@ if ((!$Cases -or 'guest-seven' -in $Cases -or 'command-guest-seven' -in $Cases) 
     throw 'Guest cases require -GuestFixturePath with a verified DOS-accessible short path to the build fixture.'
 }
 $guest=Join-Path (Split-Path -Parent $Observer) 'G7.COM'
+$fixtureRoot=Split-Path -Parent $Observer
 # Test-only DOS program: MOV AX,4C07h; INT 21h. Never replaces package media.
 if ($guest -notmatch '\\build\\M0-T412\\S[0-9]+\\') { throw 'Guest fixture must stay in an admitted T412 S build root' }
 [IO.File]::WriteAllBytes($guest,[byte[]](0xb8,0x07,0x4c,0xcd,0x21))
@@ -30,11 +31,16 @@ if ($GuestFixturePath) {
     }
     $guest=$GuestFixturePath
 }
+[IO.File]::WriteAllText((Join-Path $fixtureRoot 'STREAM.CMD'),"@echo off`r`necho S10_STDOUT`r`necho S10_STDERR 1>&2`r`n",[Text.Encoding]::ASCII)
+[IO.File]::WriteAllText((Join-Path $fixtureRoot 'EOF.CMD'),"@echo off`r`nmore <nul`r`nexit /b 37`r`n",[Text.Encoding]::ASCII)
+$shortFixtureRoot=if($GuestFixturePath){Split-Path -Parent $GuestFixturePath}else{$fixtureRoot}
 $matrix = @(
     @{ Name='empty'; Text="exit`r"; Code=0 },
     @{ Name='native-zero'; Text="ver`rexit`r"; Code=0 },
     @{ Name='missing'; Text="missing`rver`rexit`r"; Code=0 },
     @{ Name='native-seven'; Text="cmd /c exit 7`rexit`r"; Code=0 },
+    @{ Name='native-streams'; Args=@('COMMAND.COM','/c','cmd','/c',(Join-Path $shortFixtureRoot 'STREAM.CMD')); Code=0 },
+    @{ Name='native-eof'; Args=@('COMMAND.COM','/c','cmd','/c',(Join-Path $shortFixtureRoot 'EOF.CMD')); Code=0 },
     @{ Name='mem'; Text="mem`rexit`r"; Code=1 },
     @{ Name='nested-empty'; Text="command`rexit`rexit`r"; Code=1 },
     @{ Name='nested-mem'; Text="command`rcommand`rmem`rexit`rmem`rexit`rmem`rexit`r"; Code=1 },
@@ -94,6 +100,16 @@ try {
             if ($case.Name -in @('native-seven','command-c-seven')) {
                 $native=Get-Content -LiteralPath "$report.child.log" -Raw
                 if ($native -notmatch 'phase=1 status=1 value=00000007') { throw 'Native child 7 not observed' }
+            }
+            if ($case.Name -eq 'native-streams') {
+                $screen=Get-Content -LiteralPath "$report.console.txt" -Raw
+                foreach($marker in @('S10_STDOUT','S10_STDERR')) {
+                    if([regex]::Matches($screen,$marker).Count -ne 1){throw "Missing or duplicate emitted stream marker: $marker"}
+                }
+            }
+            if ($case.Name -eq 'native-eof') {
+                $native=Get-Content -LiteralPath "$report.child.log" -Raw
+                if($native -notmatch 'phase=1 status=1 value=00000025'){throw 'EOF/native result 37 not observed'}
             }
             if ($case.Name -in @('guest-seven','command-guest-seven')) {
                 $opens=Get-Content -LiteralPath "$report.dem-open.txt" -Raw

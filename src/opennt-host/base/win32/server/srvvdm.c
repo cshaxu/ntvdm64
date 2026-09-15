@@ -1266,44 +1266,15 @@ BaseSrvCheckDOS(
 }
 
 
-/*
- * CheckDOS wakes hWaitForVDMDup only when a worker has reached its original
- * GetNextVDMCommand wait.  A resident COMMAND can leave its sole record READY
- * after an earlier parent completion without any pending GetNext call.  Keep
- * that distinction with the record owner and its DOS lock; modern Console
- * membership and VDM_READY cannot supply it.
- */
+/* DIVERGENCE(OPENNT-HOST-031): retain the existing standalone wait query
+ * behind the mirror's public boundary; its body is mirror-private overlay. */
 BOOL
 BaseSrvDOSWorkerWaitPending(
     IN HANDLE ConsoleHandle,
     OUT PBOOL ConsoleRecordExists
     )
 {
-    NTSTATUS Status;
-    PCONSOLERECORD pConsoleRecord;
-    EVENT_BASIC_INFORMATION EventInformation;
-    BOOL Pending = FALSE;
-
-    if (!ConsoleRecordExists)
-        return FALSE;
-    *ConsoleRecordExists = FALSE;
-
-    Status = RtlEnterCriticalSection(&BaseSrvDOSCriticalSection);
-    ASSERT(NT_SUCCESS(Status));
-    Status = BaseSrvGetConsoleRecord(ConsoleHandle,&pConsoleRecord);
-    if (NT_SUCCESS(Status)) {
-        *ConsoleRecordExists = TRUE;
-        if (pConsoleRecord->hWaitForVDMDup) {
-            Status = NtQueryEvent(pConsoleRecord->hWaitForVDMDup,
-                                  EventBasicInformation,
-                                  &EventInformation,
-                                  sizeof(EventInformation),
-                                  NULL);
-            Pending = NT_SUCCESS(Status) && !EventInformation.EventState;
-        }
-    }
-    RtlLeaveCriticalSection(&BaseSrvDOSCriticalSection);
-    return Pending;
+#include "opennt-host-overlay/base/win32/server/dos_worker_wait.inc"
 }
 
 

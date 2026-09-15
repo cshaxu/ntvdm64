@@ -452,6 +452,32 @@ done:
     return STATUS_UNSUCCESSFUL;
 }
 
+/* UNKNOWN_IF also occurs while a healthy-version endpoint drains. Query the
+ * same authenticated local endpoint before calling it a version mismatch.
+ * This never admits work or relaxes the subsequent Connect identity check. */
+static DWORD classify_missing_interface(RPC_BINDING_HANDLE binding)
+{
+    RPC_IF_ID expected;
+    RPC_IF_ID_VECTOR *interfaces=NULL;
+    RPC_STATUS status,uuid_status;
+    unsigned int index;
+    DWORD result=RPC_S_SERVER_UNAVAILABLE;
+    status=RpcIfInqId(Client_vdm_service_v2_0_c_ifspec,&expected);
+    if (status) return status;
+    status=RpcMgmtInqIfIds(binding,&interfaces);
+    if (status) return status;
+    for (index=0;index<interfaces->Count;++index) {
+        RPC_IF_ID *peer=interfaces->IfId[index];
+        if (UuidEqual(&peer->Uuid,&expected.Uuid,&uuid_status) &&
+            (peer->VersMajor!=expected.VersMajor || peer->VersMinor!=expected.VersMinor)) {
+            result=ERROR_REVISION_MISMATCH;
+            break;
+        }
+    }
+    RpcIfIdVectorFree(&interfaces);
+    return result;
+}
+
 DWORD OpenNtBaseClientConnectCurrent(void)
 {
     static const unsigned char expected[APP_VERSION_BYTES]=APP_VERSION;
@@ -484,8 +510,10 @@ DWORD OpenNtBaseClientConnectCurrent(void)
     }
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
-    /* A legacy RPC major cannot safely decode this Connect signature. */
-    if (error==RPC_S_UNKNOWN_IF || error==RPC_S_PROCNUM_OUT_OF_RANGE) {
+    if (error==RPC_S_UNKNOWN_IF) error=classify_missing_interface(client.binding);
+    /* A confirmed legacy RPC major cannot decode this Connect signature. */
+    if (error==RPC_S_PROCNUM_OUT_OF_RANGE ||
+        (error==ERROR_REVISION_MISMATCH && !server_protocol)) {
         fprintf(stderr,"ntvdm client: version mismatch: local protocol=%u app=%s; broker RPC interface incompatible\n",
             APP_PROTOCOL_VERSION,APP_VERSION);
         error=ERROR_REVISION_MISMATCH;
