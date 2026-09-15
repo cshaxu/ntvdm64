@@ -10,9 +10,16 @@
 static DWORD WINAPI same_console_query(void *context,HANDLE caller,const HANDLE *candidates,
     DWORD count,HANDLE cancel,DWORD timeout,BYTE *members)
 {
-    DWORD *calls=context;
-    (void)caller;(void)candidates;(void)cancel;(void)timeout;
+    DWORD *calls=context,index;
+    (void)cancel;(void)timeout;
     if (!calls || !count || !members) return ERROR_INVALID_PARAMETER;
+    /* Exercise the service-to-query ABI, not just the membership result.
+     * The original launcher and worker are two distinct live candidates. */
+    if (!GetProcessId(caller)) return ERROR_INVALID_HANDLE;
+    for (index=0;index<count;++index)
+        if (!GetProcessId(candidates[index]) ||
+            WaitForSingleObject(candidates[index],0)!=WAIT_TIMEOUT)
+            return ERROR_INVALID_HANDLE;
     ++*calls;
     ZeroMemory(members,count);
     members[0]=1;
@@ -155,6 +162,7 @@ int main(int argc,char **argv)
     CHECK(queryCalls==1 && OpenNtBaseApplyCheckReply(answer,answerBytes,laterGeneration,6,&reply));
     CHECK(reply.ReturnValue==STATUS_SUCCESS && reply.u.CheckVDM.VDMState==VDM_PRESENT_AND_READY &&
         laterParentEvent!=NULL && laterParentReceipt!=0);
+    CHECK(laterParentReceipt!=parentReceipt);
     CHECK(WaitForSingleObject(getWait,0)==WAIT_OBJECT_0);
     CloseHandle(getWait);getWait=NULL;
 

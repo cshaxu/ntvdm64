@@ -490,6 +490,12 @@ VOID cmdCreateProcess ( VOID )
     mvdm_command_native_child_record_execution(0u, Status,
         Status ? 0u : dwExitCode32);
 
+    /* DIVERGENCE(MVDM-HOST-DIV-196): CreateProcess has consumed the copied
+     * command/environment and the standard handles are already local.
+     * Release before ResumeThread can request another guest command; keeping
+     * the singleton capture until child exit rejects original nested EXEC. */
+    mvdm_command_native_child_finish();
+
     if (hStd16In != (HANDLE)-1)
         SetStdHandle (STD_INPUT_HANDLE, SCS_hStdIn);
 
@@ -510,8 +516,6 @@ VOID cmdCreateProcess ( VOID )
 
     if (Env_A.Buffer)
 	RtlFreeAnsiString(&Env_A);
-
-    mvdm_command_native_child_finish();
 
     // Decrement the Re-enterancy count for the VDM
     VDMInfoForCount.VDMState = DECREMENT_REENTER_COUNT;

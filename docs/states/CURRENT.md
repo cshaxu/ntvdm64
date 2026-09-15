@@ -4,12 +4,15 @@
 
 **Active: M0 T412 S7.**
 
-Current regression repair: [VDM TIB storage evidence](../etc/evidence/m0-t412-s6-vdm-tib-storage-repair.md)
-identifies the four-byte placeholder incorrectly satisfying the original printer
-carrier. Full original storage and startup binding are restored, with a formal
-link ownership/overlap gate. The rebuilt three-program package is at `O:\winnt`;
-MEM returns normally and EDIT startup is observed. Full T412 matrix/closure and
-owner interactive acceptance are not claimed by this bounded repair.
+S7 [interactive child repair checkpoint](../etc/evidence/m0-t412-s7-interactive-child-repair.md)
+repairs Console candidate stride, colliding parent-wait receipts and excessive
+async capture lifetime. Real interactive MEM and EDIT launch/return are observed;
+deeper nested COMMAND output and outer completion ordering remain unaccepted.
+S7 is open; the checkpoint is not full-T closure.
+
+The [S6 VDM TIB repair](../etc/evidence/m0-t412-s6-vdm-tib-storage-repair.md)
+retains its full-storage link gate. Current products are at `O:\winnt`;
+full T412 matrix and owner acceptance remain open.
 
 ## Active Packet
 

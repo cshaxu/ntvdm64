@@ -41,6 +41,7 @@ struct OPENNT_BASE_SERVICE {
     OPENNT_BASE_RESERVATIONS *reservations;
     CRITICAL_SECTION lock;
     ULONG next_console;
+    ULONG next_wait_receipt;
     OPENNT_BASE_INTERACTIVE_SCOPE interactive;
     LIST_ENTRY connections;
     LIST_ENTRY retired_connections;
@@ -125,7 +126,14 @@ static NTSTATUS service_wait_deliver(void *context,HANDLE event,uint32_t *receip
     OPENNT_BASE_SERVICE_RESOURCES *scope=context;
     DWORD error;
     if (!scope || !event || !receipt) return STATUS_INVALID_PARAMETER;
+    /* Original DOS records compare hWaitForParent across one Console list.
+     * Independent connection counters must not give a nested parent the
+     * same identity as its still-active outer parent. The service lock is
+     * held by every original dispatch reaching this finite delivery seam. */
+    if (scope->connection->streams.issued < scope->connection->service->next_wait_receipt)
+        scope->connection->streams.issued=scope->connection->service->next_wait_receipt;
     error=broker_vdm_receipt_accept(&scope->connection->streams,scope->role,event,receipt);
+    if (!error) scope->connection->service->next_wait_receipt=*receipt;
     return error ? STATUS_INVALID_HANDLE : STATUS_SUCCESS;
 }
 static NTSTATUS service_stream_deliver(void *context,HANDLE stream,uint32_t *receipt)
@@ -524,6 +532,7 @@ static DWORD service_bind_existing_console(OPENNT_BASE_CONNECTION *connection)
 {
     OPENNT_BASE_SERVICE *service;
     OPENNT_BASE_CONSOLE_CANDIDATE *candidates=NULL;
+    HANDLE *processes=NULL;
     OPENNT_BASE_CONSOLE_QUERY query;
     void *context;
     HANDLE caller=NULL,selected=NULL;
@@ -547,8 +556,9 @@ static DWORD service_bind_existing_console(OPENNT_BASE_CONNECTION *connection)
     }
     if (!query) { LeaveCriticalSection(&service->lock); return ERROR_NOT_SUPPORTED; }
     candidates=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,count*sizeof(*candidates));
+    processes=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,count*sizeof(*processes));
     members=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,count);
-    if (!candidates || !members) { LeaveCriticalSection(&service->lock); error=ERROR_NOT_ENOUGH_MEMORY; goto done; }
+    if (!candidates || !processes || !members) { LeaveCriticalSection(&service->lock); error=ERROR_NOT_ENOUGH_MEMORY; goto done; }
     if (!OpenNtBaseRetainRegisteredProcess(&service->registry,
             (DWORD)connection->process.ClientId.UniqueProcess,connection->process.SequenceNumber,&caller)) {
         LeaveCriticalSection(&service->lock); error=GetLastError(); goto done;
@@ -563,11 +573,15 @@ static DWORD service_bind_existing_console(OPENNT_BASE_CONNECTION *connection)
                 &candidates[index].process)) {
             LeaveCriticalSection(&service->lock); error=GetLastError(); goto done;
         }
+        processes[index]=candidates[index].process;
         ++index;
     }
     LeaveCriticalSection(&service->lock);
     if (index!=count) { error=ERROR_RETRY; goto done; }
-    error=query(context,caller,&candidates[0].process,count,NULL,5000,members);
+    /* The query consumes a packed HANDLE vector, not the first field of an
+     * array whose stride also includes generation and Console identity.
+     * candidates retains ownership and the post-query identity checks. */
+    error=query(context,caller,processes,count,NULL,5000,members);
     if (error) goto done;
     for (index=0;index<count;++index) if (members[index]) {
         HANDLE verified=NULL;
@@ -591,6 +605,7 @@ done:
         HeapFree(GetProcessHeap(),0,candidates);
     }
     if (members) HeapFree(GetProcessHeap(),0,members);
+    if (processes) HeapFree(GetProcessHeap(),0,processes);
     return error;
 }
 

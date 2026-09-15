@@ -274,6 +274,7 @@ static BOOL set1_scan_code_for_ascii(char character, WORD *scan_code)
     }
     switch (character == '\n' ? '\r' : character) {
     case '\r': *scan_code = 0x1c; return TRUE;
+    case '\x1b': *scan_code = 0x01; return TRUE;
     case ' ':  *scan_code = 0x39; return TRUE;
     case '0':  *scan_code = 0x0b; return TRUE;
     case '1':  *scan_code = 0x02; return TRUE;
@@ -346,7 +347,7 @@ static BOOL wait_for_report_marker_after(const char *path, const char *marker,
     }
 }
 
-static BOOL write_console_input_text(HANDLE input, const char *text)
+static BOOL write_console_input_text(HANDLE input, const char *text, DWORD line_delay_ms)
 {
     const char *cursor;
 
@@ -384,6 +385,7 @@ static BOOL write_console_input_text(HANDLE input, const char *text)
         if (!WriteConsoleInputA(input, records, ARRAYSIZE(records), &written) ||
             written != ARRAYSIZE(records)) return FALSE;
         Sleep(OBSERVATION_KEY_EVENT_INTERVAL_MS);
+        if (character == '\r' && line_delay_ms) Sleep(line_delay_ms);
         /* A Console input queue is asynchronous.  Once the original DOS line
          * input boundary has been observed, this deliberately tiny two-line
          * sequence is ordinary queued Console input; it is not paced against
@@ -564,6 +566,7 @@ int main(int argc, char **argv)
     char timed_fault_text[256] = { 0 };
     BOOL have_timed_fault_text = FALSE;
     BOOL scripted_console_input = FALSE;
+    BOOL observe_edit_return = FALSE;
     BOOL observe_console_mouse_mode = FALSE;
     BOOL observed_console_mouse_mode = FALSE;
     DWORD observed_console_input_mode = 0u;
@@ -573,6 +576,7 @@ int main(int argc, char **argv)
     char presentation_report_path[MAX_PATH];
     const char *scripted_console_input_text = "ver\rexit\r";
     const char *scripted_console_input_sequence = "ver+exit";
+    DWORD scripted_console_line_delay_ms = 0;
     BOOL scripted_console_input_ready = FALSE;
     BOOL scripted_console_input_delivered = FALSE;
     DWORD scripted_console_input_remaining = 0;
@@ -686,6 +690,22 @@ int main(int argc, char **argv)
                                               &command_length, "EXIT")) return 68;
         } else {
             for (argument_index = 4; argument_index < argc; ++argument_index) {
+                if (strcmp(argv[argument_index], "--observe-console-input-text") == 0) {
+                    if (++argument_index >= argc) return 68;
+                    scripted_console_input = TRUE;
+                    scripted_console_input_text = argv[argument_index];
+                    scripted_console_input_sequence = "explicit-observer-text";
+                    scripted_console_line_delay_ms = 1500;
+                    continue;
+                }
+                if (strcmp(argv[argument_index], "--observe-console-edit-return") == 0) {
+                    scripted_console_input = TRUE;
+                    observe_edit_return = TRUE;
+                    scripted_console_input_text = "edit\r";
+                    scripted_console_input_sequence = "edit-escape-alt-f-x-mem-exit";
+                    scripted_console_line_delay_ms = 1500;
+                    continue;
+                }
                 if (strcmp(argv[argument_index], "--observe-console-input") == 0) {
                     scripted_console_input = TRUE;
                     continue;
@@ -944,12 +964,51 @@ int main(int argc, char **argv)
              * stream output but before this observer queues any key. */
             write_console_snapshot(output, console_input_preinput_snapshot_path);
             scripted_console_input_delivered = write_console_input_text(input,
-                scripted_console_input_text);
+                scripted_console_input_text, scripted_console_line_delay_ms);
         }
     }
     if (observe_console_mouse_mode) {
         observed_console_mouse_mode = wait_for_console_mouse_mode(input,
             &observed_console_input_mode, OBSERVATION_INPUT_READY_TIMEOUT_MS);
+    }
+    if (observe_edit_return && scripted_console_input_delivered) {
+        INPUT_RECORD menu[4] = {0};
+        DWORD written = 0, key_index;
+        char edit_snapshot[MAX_PATH];
+        observed_console_mouse_mode = wait_for_console_mouse_mode(input,
+            &observed_console_input_mode, OBSERVATION_INPUT_READY_TIMEOUT_MS);
+        if (observed_console_mouse_mode) {
+            snprintf(edit_snapshot, sizeof(edit_snapshot), "%s.edit.txt", argv[3]);
+            write_console_snapshot(output, edit_snapshot);
+            scripted_console_input_delivered = write_console_input_text(input, "\x1b", 0);
+            Sleep(500);
+            menu[0].EventType = KEY_EVENT;
+            menu[0].Event.KeyEvent.bKeyDown = TRUE;
+            menu[0].Event.KeyEvent.wRepeatCount = 1;
+            menu[0].Event.KeyEvent.wVirtualKeyCode = VK_MENU;
+            menu[0].Event.KeyEvent.wVirtualScanCode = 0x38;
+            menu[0].Event.KeyEvent.dwControlKeyState = NUMLOCK_ON | LEFT_ALT_PRESSED;
+            menu[1] = menu[0];
+            menu[1].Event.KeyEvent.wVirtualKeyCode = 'F';
+            menu[1].Event.KeyEvent.wVirtualScanCode = 0x21;
+            menu[1].Event.KeyEvent.uChar.AsciiChar = 'f';
+            menu[2] = menu[1];
+            menu[2].Event.KeyEvent.bKeyDown = FALSE;
+            menu[3] = menu[0];
+            menu[3].Event.KeyEvent.bKeyDown = FALSE;
+            menu[3].Event.KeyEvent.dwControlKeyState = NUMLOCK_ON;
+            for (key_index = 0; key_index < ARRAYSIZE(menu); ++key_index) {
+                scripted_console_input_delivered = scripted_console_input_delivered &&
+                    WriteConsoleInputA(input, &menu[key_index], 1, &written) && written == 1;
+                Sleep(OBSERVATION_KEY_EVENT_INTERVAL_MS);
+            }
+            Sleep(500);
+            scripted_console_input_delivered = scripted_console_input_delivered &&
+                write_console_input_text(input, "x", 0);
+            Sleep(1500);
+            scripted_console_input_delivered = scripted_console_input_delivered &&
+                write_console_input_text(input, "mem\rexit\r", 1500);
+        } else scripted_console_input_delivered = FALSE;
     }
     if (observe_console_mouse_input) {
         DWORD presentation_report_length = GetEnvironmentVariableA(
