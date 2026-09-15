@@ -41,7 +41,7 @@ duplicates:
 | `GetNextVDMCommand`, `ExitVDM` and related client bodies | original `opennt-host/base/win32/client/vdm.c` | The recovered original BaseClient calls the finite authenticated transport. |
 | `run16.exe` | `run16_entry.c` plus original BaseClient classification/config calls | This is the standalone representation of the CreateProcess parent role. |
 | `basesrv.exe` | `basesrv_entry.c` plus original BaseSrv service dispatch | This is the one broker process; it has no retired local queue provider. |
-| `ntvdm.exe` | current `worker_entry.c` plus original `ntvdm.c` | The wrapper remains a recorded reduction target, not a second command-policy provider: it still binds process-private capture heap, broker connection, guest-memory/session lifetime and package media roots before calling the renamed original entry. |
+| `ntvdm.exe` | current `worker_entry.c` plus original `ntvdm.c` | The wrapper remains a recorded reduction target, not a second command-policy provider: it still binds process-private capture heap, broker connection, guest-memory/session lifetime and package media roots before calling the renamed original entry.  Its formerly separate `app_machine_shell` selection/dispatch layer has been retired; the worker now makes the one selected SoftPC/session call directly. |
 
 The final row is intentionally **not** declared restored.  Original
 `obj.vdm/ntvdm.c` has its own `main`, but a raw link currently lacks those

@@ -12,8 +12,9 @@ Application composition is deliberately split by process role:
 - `worker_entry.c` is the pure `ntvdm.exe` worker. It starts one original SoftPC
   machine, connects to BaseClient transport and has no launcher, classifier,
   local command queue or private argv shadow.
-- `machine_shell.{c,h}` and `package_layout.{c,h}` are shared worker assembly:
-  they select the original SoftPC entry and validate immutable package media.
+- `package_layout.{c,h}` validates immutable worker package media.  Worker
+  backend selection and entry dispatch have no separate app-shell abstraction:
+  `worker_entry.c` makes the one selected SoftPC/session call directly.
 
 `console_probe.c` and `console_query.{c,h}` form the bounded, private modern
 Console membership observation used by BaseSrv. They do not assign command

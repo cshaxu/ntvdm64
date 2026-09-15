@@ -266,7 +266,7 @@ $adapterSoftpcNames = @('mvdm_softpc_firmware.c', 'mvdm_xms_memory.c', 'mvdm_a20
                         'mvdm_softpc_event_thread.c',
                         'mvdm_softpc_presentation_font.c',
                         'mvdm_softpc_descriptor_fields.c')
-$appNames = @('machine_shell.c', 'package_layout.c')
+$appNames = @('package_layout.c')
 $effectiveAddressSource = Join-Path $adapterSoftpcRoot 'mvdm_softpc_effective_address.c'
 $effectiveAddressObject = 'obj/adapter-softpc/mvdm_softpc_effective_address.obj'
 $patchNames = @('PigReg_c.h', 'sas4gen.h', 'gdpvar.h')
@@ -1178,7 +1178,7 @@ $graph.Add('build original-opennt-netlib.lib: lib ' + ($openntNetlibObjects -joi
 $graph.Add('build original-opennt-netapi-api.lib: lib ' + ($openntNetapiObjects -join ' '))
 $graph.Add('build original-opennt-base-vdm.lib: lib ' + ($openntBaseVdmObjects -join ' '))
 $graph.Add('build original-opennt-rtl-x86.lib: lib ' + ((@($openntRtlObjects) + @($openntRtlX86Objects)) -join ' '))
-$graph.Add('build worker-shell.lib: lib obj/app/machine_shell.obj obj/app/package_layout.obj')
+$graph.Add('build worker-shell.lib: lib obj/app/package_layout.obj')
 $graph.Add('build session.lib: lib ' + ($sessionObjects -join ' '))
 $graph.Add('build broker.lib: lib ' + ($brokerObjects -join ' '))
 $graph.Add('build broker-base-vdm-record-test.exe: broker_test_link ' + $brokerRecordTestObject + ' broker.lib')
