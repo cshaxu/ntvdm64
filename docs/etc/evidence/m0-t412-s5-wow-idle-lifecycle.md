@@ -564,3 +564,25 @@ single broker and both test workers were then stopped by exact test paths.
 This establishes the real concurrent-startup row for the current staged
 three-program package.  It does not replace the separate controlled
 callback-in-progress drain race requirement.
+
+### Shared-WOW broker boundary observation
+
+An unredirected, bounded `O:\winnt\run16.exe system32\WRITE.EXE` observation
+returned `6`.  Its trace at
+`O:\winnt\logs\m0-t412-s5-wow-check-console-20260914-213414.trace` proves
+the preceding broker coordination path: one launcher `Check → Reserve →
+Prepare`, authenticated worker Connect, and an original Get request with
+state `0x0102` (`ASKING_FOR_PIF | ASKING_FOR_WOW_BINARY`).  That request is
+the original shared-WOW PIF acquisition; it is followed by `first-yes`, a
+successful shared-WOW `ExitVDM`, launcher `ExitCode` of `6`, and the retained
+worker-process cleanup callback.  No second DOS worker or DOS Console record
+is selected.
+
+The same exit code was observed in a separately redirected diagnostic run, so
+it is not attributed to that altered Console container.  This is narrow
+evidence that reservation-bound WOW identity, the `-1` original server
+sentinel and completion cleanup are active in the real package.  It is **not**
+evidence that WOWEXEC, DOSX, WOW32, USER private callbacks or WRITE itself has
+started: none of their subsequent command/callback markers occurred before
+the source-owned worker exit.  Those remain the explicit WOW16 workload
+boundary; S5 does not manufacture a provider-side success response.
