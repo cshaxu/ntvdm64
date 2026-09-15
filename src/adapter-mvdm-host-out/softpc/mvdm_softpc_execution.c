@@ -1,5 +1,6 @@
 #include "mvdm_softpc_execution.h"
 #include "mvdm_softpc_guest_memory.h"
+#include "mvdm_softpc_termination.h"
 
 /* Original SoftPC host spelling; its body remains in mvdm-host. */
 extern void host_start_cpu(void);
@@ -8,11 +9,9 @@ extern void host_applClose(void);
  * its C entry symbol to leave application composition as the product entry. */
 extern int mvdm_softpc_original_entry(int argc, char **argv);
 
-/* The original `host_main` normally reaches this cohort itself.  The app
- * owns a bounded in-process session rather than NT4's dedicated process, so
- * every return to the composition boundary also asks the original close body
- * to finish its once-per-host-start cleanup.  `host_applClose` retains the
- * source-owned order and rejects a pre-start or repeated close. */
+/* The bounded execution fixture starts directly at host_start_cpu(), unlike
+ * the original ntvdm.c -> host_main path.  It therefore retains this original
+ * close cohort after that fixture-only entry returns. */
 static void mvdm_softpc_execution_close_original_host(void)
 {
     host_applClose();
@@ -107,7 +106,6 @@ int mvdm_softpc_execution_run_original_entry(session *owner, int argc,
             session_record_mechanical_resume_status(owner,
                 SESSION_MECHANICAL_STATUS_SOFTPC_RETURNED);
         }
-        mvdm_softpc_execution_close_original_host();
         session_disarm_termination_escape(owner);
         if (did_memory_bind) mvdm_softpc_guest_memory_end(owner);
         if (did_bind) (void)session_thread_unbind(owner);
@@ -122,7 +120,6 @@ int mvdm_softpc_execution_run_original_entry(session *owner, int argc,
     *result_out = result;
     session_record_mechanical_resume_status(owner,
         SESSION_MECHANICAL_STATUS_SOFTPC_RETURNED);
-    mvdm_softpc_execution_close_original_host();
     session_disarm_termination_escape(owner);
     if (did_memory_bind) mvdm_softpc_guest_memory_end(owner);
 

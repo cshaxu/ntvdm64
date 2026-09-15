@@ -17,6 +17,10 @@ extern int c_sas_twenty_bit_wrapping_enabled(void);
 extern unsigned short c_getMSW(void);
 extern unsigned int c_getDS_BASE(void);
 extern unsigned int c_getDS_LIMIT(void);
+/* Original host close is idempotent: it rejects both pre-start and repeated
+ * calls.  Direct standalone termination otherwise longjmps around the normal
+ * original `host_main -> host_applClose` tail. */
+extern void host_applClose(void);
 
 static __declspec(thread) const char *mvdm_softpc_termination_origin =
     "unattributed";
@@ -332,6 +336,10 @@ int mvdm_softpc_terminate_current_session(uint32_t vdm_for_wow,
     int formatted;
 
     (void)vdm_for_wow;
+    /* Restore the original host close cohort before the standalone escape.
+     * In NT4 this escape was ExitProcess; in this process it is longjmp, so
+     * an outer application entry cannot be the cleanup owner. */
+    host_applClose();
     mvdm_softpc_mapping_observe(MVDM_MAPPING_TERMINATION,
         mvdm_softpc_termination_origin, completion_code, vdm_for_wow, 0);
     formatted = snprintf(message, sizeof(message),
