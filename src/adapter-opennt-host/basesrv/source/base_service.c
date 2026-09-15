@@ -43,8 +43,12 @@ struct OPENNT_BASE_SERVICE {
     ULONG next_console;
     OPENNT_BASE_INTERACTIVE_SCOPE interactive;
     LIST_ENTRY connections;
+    LIST_ENTRY retired_connections;
+    LIST_ENTRY worker_watches;
     OPENNT_BASE_CONSOLE_QUERY console_query;
     void *console_query_context;
+    OPENNT_BASE_EMPTY_NOTIFY empty_notify;
+    void *empty_notify_context;
 };
 struct OPENNT_BASE_CONNECTION {
     OPENNT_BASE_SERVICE *service;
@@ -54,8 +58,16 @@ struct OPENNT_BASE_CONNECTION {
     ULONG task;
     HANDLE console;
     BOOL wow;
+    BOOL retired;
     LIST_ENTRY service_link;
+    LIST_ENTRY retired_link;
 };
+typedef struct OPENNT_BASE_WORKER_WATCH {
+    LIST_ENTRY link;
+    OPENNT_BASE_SERVICE *service;
+    CSR_PROCESS process;
+    HANDLE wait;
+} OPENNT_BASE_WORKER_WATCH;
 typedef struct OPENNT_BASE_CONSOLE_CANDIDATE {
     HANDLE process;
     ULONG generation;
@@ -68,6 +80,46 @@ typedef struct OPENNT_BASE_SERVICE_RESOURCES {
     OPENNT_BASE_WAIT_BINDING wait;
     OPENNT_BASE_RESOURCE_BINDING binding;
 } OPENNT_BASE_SERVICE_RESOURCES;
+static VOID CALLBACK service_worker_terminated(PVOID context,BOOLEAN fired)
+{
+    OPENNT_BASE_WORKER_WATCH *watch=context;
+    OPENNT_BASE_CONNECTION *connection=NULL;
+    LIST_ENTRY *entry;
+    OPENNT_BASE_EMPTY_NOTIFY notify=NULL;
+    void *notify_context=NULL;
+    (void)fired;
+    if (!watch || !watch->service) return;
+    EnterCriticalSection(&watch->service->lock);
+    /* Equivalent to the selected BaseClientDisconnectRoutine: a one-shot
+     * authenticated process-exit signal, never queue polling or a reaper. */
+    BaseSrvCleanupVDMResources(&watch->process);
+    /* CSR removes the dead process during disconnect rundown.  A standalone
+     * RPC context can outlive an abruptly killed client, so detach its local
+     * registration now; keep its opaque context until rundown to avoid UAF. */
+    for (entry=watch->service->connections.Flink;
+         entry!=&watch->service->connections;entry=entry->Flink) {
+        OPENNT_BASE_CONNECTION *candidate=CONTAINING_RECORD(entry,OPENNT_BASE_CONNECTION,service_link);
+        if (candidate->process.SequenceNumber==watch->process.SequenceNumber) {
+            connection=candidate;
+            break;
+        }
+    }
+    if (connection) {
+        (void)OpenNtBaseRemoveProcess(&watch->service->registry,&connection->process);
+        RemoveEntryList(&connection->service_link);
+        broker_vdm_receipts_drain(&connection->streams);
+        connection->retired=TRUE;
+        InsertTailList(&watch->service->retired_connections,&connection->retired_link);
+    }
+    RemoveEntryList(&watch->link);
+    notify=watch->service->empty_notify;
+    notify_context=watch->service->empty_notify_context;
+    LeaveCriticalSection(&watch->service->lock);
+    service_trace_operation("worker-process-cleanup",0,STATUS_SUCCESS);
+    CloseHandle(watch->process.ProcessHandle);
+    HeapFree(GetProcessHeap(),0,watch);
+    if (notify) notify(notify_context);
+}
 static NTSTATUS service_wait_deliver(void *context,HANDLE event,uint32_t *receipt)
 {
     OPENNT_BASE_SERVICE_RESOURCES *scope=context;
@@ -193,6 +245,8 @@ OPENNT_BASE_SERVICE *OpenNtBaseServiceStart(void)
         HeapFree(GetProcessHeap(),0,service); return NULL;
     }
     InitializeListHead(&service->connections);
+    InitializeListHead(&service->retired_connections);
+    InitializeListHead(&service->worker_watches);
     if (!OpenNtBaseInitializeProcessRegistry(&service->registry)) {
         DeleteCriticalSection(&service->lock); HeapFree(GetProcessHeap(),0,service); return NULL;
     }
@@ -227,12 +281,31 @@ BOOL OpenNtBaseServiceConfigureConsoleQuery(OPENNT_BASE_SERVICE *service,
     LeaveCriticalSection(&service->lock);
     return result;
 }
+BOOL OpenNtBaseServiceConfigureEmptyNotify(OPENNT_BASE_SERVICE *service,
+    OPENNT_BASE_EMPTY_NOTIFY notify,void *context)
+{
+    BOOL result=FALSE;
+    if (!service || !notify) { SetLastError(ERROR_INVALID_PARAMETER); return FALSE; }
+    EnterCriticalSection(&service->lock);
+    if (IsListEmpty(&service->connections) && IsListEmpty(&service->worker_watches)) {
+        service->empty_notify=notify;
+        service->empty_notify_context=context;
+        result=TRUE;
+    } else SetLastError(ERROR_BUSY);
+    LeaveCriticalSection(&service->lock);
+    return result;
+}
 BOOL OpenNtBaseServiceStop(OPENNT_BASE_SERVICE *service)
 {
+    LIST_ENTRY *entry;
     /* Transport has stopped and joined all calls/rundowns before stop. */
-    if (!service || !IsListEmpty(&service->connections) ||
+    if (!service || !IsListEmpty(&service->connections) || !IsListEmpty(&service->worker_watches) ||
         !OpenNtBaseReservationsDestroy(service->reservations) ||
         !OpenNtBaseDestroyProcessRegistry(&service->registry)) return FALSE;
+    while (!IsListEmpty(&service->retired_connections)) {
+        entry=RemoveHeadList(&service->retired_connections);
+        HeapFree(GetProcessHeap(),0,CONTAINING_RECORD(entry,OPENNT_BASE_CONNECTION,retired_link));
+    }
     DeleteCriticalSection(&service->lock);
     HeapFree(GetProcessHeap(),0,service);
     return TRUE;
@@ -242,7 +315,7 @@ BOOL OpenNtBaseServiceIsEmpty(OPENNT_BASE_SERVICE *service)
     BOOL empty;
     if (!service) return FALSE;
     EnterCriticalSection(&service->lock);
-    empty=OpenNtBaseProcessRegistryIsEmpty(&service->registry) &&
+    empty=IsListEmpty(&service->worker_watches) && OpenNtBaseProcessRegistryIsEmpty(&service->registry) &&
         OpenNtBaseReservationsIsEmpty(service->reservations);
     LeaveCriticalSection(&service->lock);
     return empty;
@@ -269,7 +342,37 @@ DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *service,HANDLE process,
             &reservation,&task,&console);
         if (error==ERROR_NOT_FOUND) error=ERROR_SUCCESS;
         else if (!error) {
+            OPENNT_BASE_WORKER_WATCH *watch;
             connection->reservation=reservation;connection->task=task;connection->console=console;
+            /* This is the post-create registration performed by original
+             * BaseSrvCreateProcess: publish the authenticated worker as a
+             * VDM and attach its CSR sequence to the source ConsoleRecord.
+             * The standalone learns that fact only when the reservation-bound
+             * worker connects; it does not invent another worker state. */
+            connection->process.fVDM=TRUE;
+            BaseSrvUpdateVDMSequenceNumber(console,connection->process.SequenceNumber,task);
+            watch=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*watch));
+            if (!watch || !DuplicateHandle(GetCurrentProcess(),connection->process.ProcessHandle,
+                GetCurrentProcess(),&watch->process.ProcessHandle,0,FALSE,DUPLICATE_SAME_ACCESS)) {
+                error=watch ? GetLastError() : ERROR_NOT_ENOUGH_MEMORY;
+                if (watch) HeapFree(GetProcessHeap(),0,watch);
+                BaseSrvCleanupVDMResources(&connection->process);
+            } else {
+                watch->service=service;
+                watch->process.ClientId=connection->process.ClientId;
+                watch->process.SequenceNumber=connection->process.SequenceNumber;
+                watch->process.fVDM=TRUE;
+                if (!RegisterWaitForSingleObject(&watch->wait,watch->process.ProcessHandle,
+                    service_worker_terminated,watch,INFINITE,WT_EXECUTEONLYONCE)) {
+                    error=GetLastError();
+                    CloseHandle(watch->process.ProcessHandle);
+                    HeapFree(GetProcessHeap(),0,watch);
+                    BaseSrvCleanupVDMResources(&connection->process);
+                } else {
+                    InsertTailList(&service->worker_watches,&watch->link);
+                    service_trace_operation("worker-process-watch",0,STATUS_SUCCESS);
+                }
+            }
         }
         if (!error) {
             InsertTailList(&service->connections,&connection->service_link);
@@ -288,7 +391,12 @@ DWORD OpenNtBaseServiceDisconnect(OPENNT_BASE_CONNECTION *connection)
     if (!connection) return ERROR_INVALID_PARAMETER;
     service=connection->service;
     EnterCriticalSection(&service->lock);
-    if (!OpenNtBaseRemoveProcess(&service->registry,&connection->process)) error=GetLastError();
+    /* A client RPC context may close while resident COMMAND remains alive.
+     * Only the retained process-exit watch may invoke the original cleanup. */
+    if (connection->retired) {
+        RemoveEntryList(&connection->retired_link);
+    }
+    else if (!OpenNtBaseRemoveProcess(&service->registry,&connection->process)) error=GetLastError();
     else {
         RemoveEntryList(&connection->service_link);
         broker_vdm_receipts_drain(&connection->streams);

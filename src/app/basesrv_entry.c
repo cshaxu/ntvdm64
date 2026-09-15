@@ -106,6 +106,13 @@ static void basesrv_schedule_empty_stop(void)
     }
     ReleaseSRWLockExclusive(&idle_lock);
 }
+/* The service invokes this only after the retained, authenticated worker
+ * process has actually exited and the original BaseSrv cleanup has run. */
+static void WINAPI basesrv_worker_terminated(void *context)
+{
+    (void)context;
+    basesrv_schedule_empty_stop();
+}
 error_status_t Server_AttachFile(handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,ULONG role,HANDLE stream,ULONG *receipt)
 {
@@ -377,7 +384,8 @@ int main(void)
     service=OpenNtBaseServiceStart();
     if (!service) return ERROR_NOT_ENOUGH_MEMORY;
     if (!basesrv_sibling_path(L"run16.exe",console_helper,MAX_PATH) ||
-        !OpenNtBaseServiceConfigureConsoleQuery(service,basesrv_console_query,console_helper)) {
+        !OpenNtBaseServiceConfigureConsoleQuery(service,basesrv_console_query,console_helper) ||
+        !OpenNtBaseServiceConfigureEmptyNotify(service,basesrv_worker_terminated,NULL)) {
         DWORD error=GetLastError();
         (void)OpenNtBaseServiceStop(service);
         return (int)error;

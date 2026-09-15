@@ -39,7 +39,6 @@ int main(int argc,char **argv)
     HANDLE parentEvent=NULL,laterParentEvent=NULL,getWait=NULL,standard[3]={NULL,NULL,NULL};
     uint32_t parentReceipt=0,laterParentReceipt=0;
     ULONG standardCount=0;
-    BOOL closeWorkerWait=FALSE;
     STARTUPINFOA getStartup={sizeof(getStartup)};
     if (argc==2 && !strcmp(argv[1],"--reservation-child")) { Sleep(15000);return 0; }
     self=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION|SYNCHRONIZE,FALSE,GetCurrentProcessId());
@@ -175,9 +174,13 @@ int main(int argc,char **argv)
         &getAnswer,&wireBytes,&getWait,standard,&standardCount)==ERROR_SUCCESS);
     CHECK(getAnswer!=NULL && getWait==NULL && standardCount==0);
     OpenNtBaseServiceReleaseCommandReply(getAnswer);getAnswer=NULL;
-    CHECK(OpenNtBaseServiceExit(worker,child.dwProcessId,workerGeneration,FALSE,0,
-        &closeWorkerWait)==ERROR_SUCCESS);
-    CHECK(WaitForSingleObject(laterParentEvent,0)==WAIT_OBJECT_0);
+    /* The authenticated worker disappears before ExitVDM.  The retained OS
+     * process-exit watch is the standalone source for the original CSR
+     * disconnect cleanup: the queued parent must wake and the DOS record
+     * must be removed.  A mere RPC-context disconnect is deliberately not
+     * enough because resident COMMAND can be alive without that context. */
+    CHECK(TerminateProcess(child.hProcess,0));
+    CHECK(WaitForSingleObject(laterParentEvent,5000)==WAIT_OBJECT_0);
     { DWORD exitCode=STILL_ACTIVE;
       CHECK(OpenNtBaseServiceExitCode(later,laterChild.dwProcessId,laterGeneration,
           laterParentReceipt,&exitCode)==ERROR_SUCCESS && exitCode==0); }
@@ -185,7 +188,7 @@ int main(int argc,char **argv)
     CloseHandle(parentEvent);parentEvent=NULL;
     CHECK(OpenNtBaseServiceDisconnect(worker)==ERROR_SUCCESS);worker=NULL;
     CHECK(OpenNtBaseServicePrepareWorker(launcher,GetCurrentProcessId(),launcherGeneration,
-        reservation,child.hProcess)==ERROR_ALREADY_EXISTS);
+        reservation,child.hProcess)==ERROR_PROCESS_ABORTED);
     CHECK(OpenNtBaseServiceReleaseReservation(launcher,GetCurrentProcessId(),launcherGeneration,reservation)==ERROR_SUCCESS);
     CHECK(OpenNtBaseServiceDisconnect(later)==ERROR_SUCCESS);later=NULL;
     TerminateProcess(laterChild.hProcess,0);WaitForSingleObject(laterChild.hProcess,INFINITE);
@@ -193,7 +196,7 @@ int main(int argc,char **argv)
     CHECK(OpenNtBaseServiceDisconnect(launcher)==ERROR_SUCCESS);launcher=NULL;
     CHECK(OpenNtBaseServiceIsEmpty(service));
     CHECK(OpenNtBaseServiceStop(service));service=NULL;
-    TerminateProcess(child.hProcess,0);WaitForSingleObject(child.hProcess,INFINITE);
+    WaitForSingleObject(child.hProcess,INFINITE);
     CloseHandle(child.hThread);CloseHandle(child.hProcess);CloseHandle(self);
     if (laterChild.hThread) CloseHandle(laterChild.hThread);
     if (laterChild.hProcess) CloseHandle(laterChild.hProcess);

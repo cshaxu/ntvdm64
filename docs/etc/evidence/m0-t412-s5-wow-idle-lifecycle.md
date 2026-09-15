@@ -418,3 +418,35 @@ were stopped, a fresh broker and worker returned zero and
 `O:\winnt\logs\m0-t412-s5-first-vdm-restart-20260914.trace` records
 `first-yes` again.  Thus the bit is consumed exactly once per broker process
 and resets only with the fresh process, as the selected source specifies.
+
+### Abrupt worker exit cleanup
+
+An authenticated standalone worker now retains a duplicate of its OS process
+handle and registers a one-shot process-exit wait.  It publishes the original
+`fVDM` and VDM sequence-number association at reservation-bound worker
+registration, then invokes the existing `BaseSrvCleanupVDMResources` only
+when that process actually exits.  Ordinary RPC-context disconnect remains
+insufficient: resident COMMAND can be alive without a live RPC context.
+
+The callback also removes the dead local process registration from the
+standalone Console-membership transport.  Its opaque RPC connection is held
+only until a later rundown, avoiding a use-after-free while preventing a dead
+candidate handle from poisoning the next `CheckVDM` Console probe.  This is
+an OS process-exit equivalent of the original CSR cleanup source, not a VDM
+idle timer, polling loop, or worker reaper.
+
+Focused `basesrv-service-reservation-test.exe` passes after terminating its
+actual child process before `ExitVDM`; it verifies that the original parent
+event is signaled, the DOS record is removed, and the reservation's dead
+worker handle is rejected as `ERROR_PROCESS_ABORTED`.
+
+The real package observation at `O:\winnt` is
+`O:\winnt\logs\m0-t412-s5-worker-exit-watch.trace`.  A first positional
+`run16.exe MEM.EXE` returned `0` and left worker PID 26668.  The test ended
+that exact worker, then a second positional `run16.exe MEM.EXE` returned `0`
+instead of the prior `0x42B` process-aborted failure.  The trace records
+`worker-process-watch`, `worker-process-cleanup`, the broker's existing
+empty-grace reevaluation, and a fresh second `Check → Reserve → Prepare →
+worker connect` path.  Exact test-owned `basesrv.exe` and `ntvdm.exe`
+processes were stopped afterward.  `O:\winnt` is the active test/package
+root; historical `O:\ntvdm64` references above are archive evidence only.
