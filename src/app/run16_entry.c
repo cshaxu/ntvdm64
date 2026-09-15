@@ -104,7 +104,12 @@ static DWORD launch_vdm(ULONG binary,PCWSTR application,PCWSTR command)
         result=GetLastError(); goto done;
     }
     previous_configuration=OpenNtBaseBindVdmConfig(&configuration);
-    if (!BaseGetVdmConfigInfo(worker_path,task,binary,&worker_command,&vdm_size)) {
+    /* BaseGetVdmConfigInfo's second parameter is only the DOS new-console
+     * session id.  BaseCheckVDM also returns a nonzero WOW task id, but that
+     * is owned by the shared-WOW record and must not become the worker's
+     * original -i switch (which selects separate WOW). */
+    if (!BaseGetVdmConfigInfo(worker_path,
+            binary==BINARY_TYPE_DOS ? task : 0,binary,&worker_command,&vdm_size)) {
         result=GetLastError();
         (void)OpenNtBaseBindVdmConfig(previous_configuration);
         goto done;

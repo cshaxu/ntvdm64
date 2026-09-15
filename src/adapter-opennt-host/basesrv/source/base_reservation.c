@@ -58,10 +58,13 @@ BOOL OpenNtBaseReservationsDestroy(OPENNT_BASE_RESERVATIONS *state)
 }
 
 DWORD OpenNtBaseReservationCreate(OPENNT_BASE_RESERVATIONS *state,DWORD launcher_pid,
-    DWORD launcher_generation,ULONG task,HANDLE console,uint64_t *reservation)
+    DWORD launcher_generation,ULONG task,HANDLE console,BOOL shared_wow,uint64_t *reservation)
 {
     OPENNT_BASE_RESERVATION *entry;
-    if (!state || !launcher_pid || !launcher_generation || !console || !reservation)
+    /* A shared WOW request has no DOS ConsoleRecord in original srvvdm.c.
+     * Its launch reservation still binds one worker/task, so NULL is a valid
+     * service-local Console identity only after BaseService verifies WIN16. */
+    if (!state || !launcher_pid || !launcher_generation || (!console && !shared_wow) || !reservation)
         return ERROR_INVALID_PARAMETER;
     *reservation=0;
     entry=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*entry));

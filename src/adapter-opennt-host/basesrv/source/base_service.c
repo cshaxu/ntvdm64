@@ -12,6 +12,29 @@
 #include "broker/vdm_receipt.h"
 typedef NTSTATUS (*OPENNT_USER_TEST_TOKEN_FOR_INTERACTIVE)(HANDLE,PLUID);
 extern OPENNT_USER_TEST_TOKEN_FOR_INTERACTIVE UserTestTokenForInteractive;
+
+/* Default-off evidence for the shared-WOW acquisition seam.  It writes only
+ * operation state and status, never command text, guest addresses or handles. */
+static void service_trace_get(const char *phase,ULONG state,NTSTATUS status)
+{
+    CHAR path[MAX_PATH],line[160];
+    DWORD length,written,saved=GetLastError();
+    HANDLE file;
+    int bytes;
+    length=GetEnvironmentVariableA("MVDM_BASESRV_TRACE_PATH",path,sizeof(path));
+    if (!length || length>=sizeof(path)) goto done;
+    bytes=wsprintfA(line,"BASESRV-S5 phase=%s state=%08lX status=%08lX\r\n",
+        phase,(unsigned long)state,(unsigned long)status);
+    if (bytes<=0 || (size_t)bytes>=sizeof(line)) goto done;
+    file=CreateFileA(path,FILE_APPEND_DATA,FILE_SHARE_READ,NULL,OPEN_ALWAYS,
+        FILE_ATTRIBUTE_NORMAL,NULL);
+    if (file!=INVALID_HANDLE_VALUE) {
+        (void)WriteFile(file,line,(DWORD)bytes,&written,NULL);
+        CloseHandle(file);
+    }
+done:
+    SetLastError(saved);
+}
 struct OPENNT_BASE_SERVICE {
     OPENNT_BASE_PROCESS_REGISTRY registry;
     OPENNT_BASE_RESERVATIONS *reservations;
@@ -26,6 +49,7 @@ struct OPENNT_BASE_CONNECTION {
     uint64_t reservation;
     ULONG task;
     HANDLE console;
+    BOOL wow;
 };
 typedef struct OPENNT_BASE_SERVICE_RESOURCES {
     OPENNT_BASE_CONNECTION *connection;
@@ -308,9 +332,9 @@ DWORD OpenNtBaseServiceCreateReservation(OPENNT_BASE_CONNECTION *connection,DWOR
 {
     if (!connection || !reservation) return ERROR_INVALID_PARAMETER;
     if (!OpenNtBaseServicePeer(connection,pid,generation)) return ERROR_ACCESS_DENIED;
-    if (!connection->console) return ERROR_INVALID_HANDLE;
+    if (!connection->console && !connection->wow) return ERROR_INVALID_HANDLE;
     DWORD error=OpenNtBaseReservationCreate(connection->service->reservations,pid,generation,
-        task,connection->console,reservation);
+        task,connection->console,connection->wow,reservation);
     if (!error) connection->reservation=*reservation;
     return error;
 }
@@ -382,6 +406,8 @@ DWORD OpenNtBaseServiceCheck(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD 
     OpenNtBaseBindInteractiveScope(previousInteractive);
     OpenNtBaseBindProcessRegistry(previousRegistry);
     OpenNtBaseBindServerRequestThread(previousThread);
+    if (!status && NT_SUCCESS((NTSTATUS)message.ReturnValue))
+        connection->wow=message.u.CheckVDM.BinaryType==BINARY_TYPE_WIN16;
     LeaveCriticalSection(&connection->service->lock);
     if (status && !message.ReturnValue) message.ReturnValue=status;
     if (!OpenNtBaseEncodeCheckReply(&message,request,generation,output,capacity,required))
@@ -540,12 +566,18 @@ DWORD OpenNtBaseServiceGet(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD ge
         return ERROR_ACCESS_DENIED;
     error=OpenNtBasePrepareGetCommand(input,bytes,generation,&message,&state);
     if (error) return error;
+    service_trace_get("get-prepared",message.u.GetNextVDMCommand.VDMState,STATUS_SUCCESS);
     EnterCriticalSection(&connection->service->lock);
-    /* BasepGetNextVDMCommand's ConsoleHandle is a local service identity,
-     * not a copied client field. A registered worker receives this value from
-     * its launcher reservation; a same-connection test obtains it from Check. */
-    if (!connection->console) { error=ERROR_INVALID_HANDLE; goto done; }
-    message.u.GetNextVDMCommand.ConsoleHandle=connection->console;
+    /* The original client sends -1 for the shared-WOW PIF/acquisition path;
+     * that selects BaseSrv's WOW record and deliberately has no DOS Console.
+     * Every other request retains the reservation's service-local Console
+     * identity, never a copied native handle. */
+    if (message.u.GetNextVDMCommand.VDMState & ASKING_FOR_WOW_BINARY)
+        message.u.GetNextVDMCommand.ConsoleHandle=OPENNT_BASE_CONSOLE_WOW;
+    else {
+        if (!connection->console) { error=ERROR_INVALID_HANDLE; goto done; }
+        message.u.GetNextVDMCommand.ConsoleHandle=connection->console;
+    }
     service_resources_init(&resources,connection,BROKER_VDM_WORKER_WAIT);
     thread.Process=&connection->process;
     thread.ClientId.UniqueProcess=connection->process.ClientId.UniqueProcess;
@@ -558,6 +590,8 @@ DWORD OpenNtBaseServiceGet(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD ge
     OpenNtBaseBindProcessRegistry(previous_registry);
     OpenNtBaseBindServerRequestThread(previous_thread);
     if (status && !message.ReturnValue) message.ReturnValue=status;
+    service_trace_get("get-dispatched",message.u.GetNextVDMCommand.VDMState,
+        (NTSTATUS)message.ReturnValue);
     if (!OpenNtBaseFinishGetCommand(&message,&state)) { error=ERROR_INVALID_DATA; goto done; }
     if (message.u.GetNextVDMCommand.StdIn || message.u.GetNextVDMCommand.StdOut ||
         message.u.GetNextVDMCommand.StdErr) {
@@ -569,6 +603,8 @@ DWORD OpenNtBaseServiceGet(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD ge
                 connection->reservation,ids[index]) &&
             OpenNtBaseReservationResolveStream(connection->service->reservations,
                 connection->reservation,(uint32_t)(ULONG_PTR)ids[index],&standard[index])) {
+            service_trace_get("get-unresolved-stream",message.u.GetNextVDMCommand.VDMState,
+                STATUS_INVALID_HANDLE);
             error=ERROR_INVALID_HANDLE;goto done;
         }
         if (!OpenNtBaseReservationIsWorkerLocalStream(connection->service->reservations,
@@ -584,6 +620,8 @@ DWORD OpenNtBaseServiceGet(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD ge
      * copied VDM command record. */
     error=service_wait_resolve(connection,generation,message.u.GetNextVDMCommand.WaitObjectForVDM,
         BROKER_VDM_WORKER_WAIT,wait_event);
+    if (error) service_trace_get("get-unresolved-wait",message.u.GetNextVDMCommand.VDMState,
+        STATUS_INVALID_HANDLE);
     if (error) goto done;
     error=ERROR_SUCCESS;
 done:

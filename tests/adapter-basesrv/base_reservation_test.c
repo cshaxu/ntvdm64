@@ -5,10 +5,12 @@ int main(void)
 {
     OPENNT_BASE_RESERVATIONS *state=NULL;
     HANDLE self=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION|SYNCHRONIZE,FALSE,GetCurrentProcessId());
-    uint64_t first=0,second=0,claimed=0;ULONG task=0;HANDLE console=NULL;
+    uint64_t first=0,second=0,third=0,claimed=0;ULONG task=0;HANDLE console=NULL;
     CHECK(self && OpenNtBaseReservationsInitialize(&state));
-    CHECK(OpenNtBaseReservationCreate(state,101,7,41,(HANDLE)0x1234,&first)==ERROR_SUCCESS);
-    CHECK(OpenNtBaseReservationCreate(state,102,8,42,(HANDLE)0x1235,&second)==ERROR_SUCCESS && second>first);
+    CHECK(OpenNtBaseReservationCreate(state,101,7,41,(HANDLE)0x1234,FALSE,&first)==ERROR_SUCCESS);
+    CHECK(OpenNtBaseReservationCreate(state,102,8,42,(HANDLE)0x1235,FALSE,&second)==ERROR_SUCCESS && second>first);
+    CHECK(OpenNtBaseReservationCreate(state,103,9,43,NULL,FALSE,&third)==ERROR_INVALID_PARAMETER);
+    CHECK(OpenNtBaseReservationCreate(state,103,9,43,NULL,TRUE,&third)==ERROR_SUCCESS && third>second);
     CHECK(OpenNtBaseReservationPrepareWorker(state,first,102,7,self)==ERROR_ACCESS_DENIED);
     CHECK(OpenNtBaseReservationPrepareWorker(state,first,101,7,self)==ERROR_SUCCESS);
     CHECK(OpenNtBaseReservationPrepareWorker(state,first,101,7,self)==ERROR_ALREADY_EXISTS);
@@ -24,6 +26,7 @@ int main(void)
     CHECK(OpenNtBaseReservationRelease(state,first,102,7)==ERROR_ACCESS_DENIED);
     CHECK(OpenNtBaseReservationRelease(state,first,101,7)==ERROR_SUCCESS);
     CHECK(OpenNtBaseReservationRelease(state,second,102,8)==ERROR_SUCCESS);
+    CHECK(OpenNtBaseReservationRelease(state,third,103,9)==ERROR_SUCCESS);
     CHECK(OpenNtBaseReservationsDestroy(state));CloseHandle(self);
     puts("PASS: launcher-owned worker reservation, authenticated claim, generation and release");
     return 0;
