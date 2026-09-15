@@ -477,3 +477,24 @@ This is source-owned broker coordination evidence only.  It does not claim
 that the downstream WOW provider, DOSX, USER boundary, or the WRITE workload
 has completed; those belong to the separately queued WOW/debugger and WOW16
 workload packages.
+
+### Singleton clean-drain and restart observation
+
+The active runtime root `O:\winnt` was used for an isolated broker-only
+observation, with no launcher, reservation, command queue, or worker.  The
+first `basesrv.exe` instance wrote `empty-grace`.  A second instance exited
+with status `1740` while the first remained live, which is the expected
+exclusive ncalrpc-endpoint result and did not disturb its owner.  After the
+configured 60-second broker-only grace, the trace at
+`O:\winnt\logs\m0-t412-s5-empty-restart.trace` recorded `empty-stop` and
+the first exact PID was absent.  A fresh `basesrv.exe` then successfully
+created a new endpoint (PID 11568) and was immediately stopped as a
+test-owned no-client process.
+
+This proves clean singleton ownership, empty-broker self-stop, and fresh
+endpoint creation.  It deliberately does not claim the separate
+drain-versus-arrival race: the available `O:\winnt` `run16.exe` and
+`ntvdm.exe` hashes differ from the current formal build because an owner
+physical-mapping change is still uncommitted.  Their mixed-package MEM run
+left a worker resident and therefore never reached the empty predicate.  That
+observation is invalid for the race gate and was cleaned up by exact path.
