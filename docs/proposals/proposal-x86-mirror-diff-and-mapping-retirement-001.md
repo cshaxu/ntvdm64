@@ -42,7 +42,7 @@ working original-width product, not speculative cross-width preservation.
    native-x64 or in-process multi-session guarantee.
 6. Build the selected CCPU40 Win32/x86 product below its admitted build root,
    verify the I386 PE machine, stage only `build/output/ntvdm32.exe`, and copy
-   that verified executable to `O:\ntvdm64\ntvdm32.exe` for owner testing.
+   that verified executable to `O:\winnt\ntvdm32.exe` for owner testing.
 
 ## Expected reduction
 
@@ -62,7 +62,7 @@ delete a file that has a separate current x86 purpose.
   SoftPC physical-memory prepare/resolve/cancel behavior, and affected DEM,
   DPMI32, Redirector, VDD, and graphics paths.
 - The formal CCPU40 Win32/x86 build and link pass; `ntvdm32.exe` is verified
-  as I386 before staging. Runtime observations stay under `O:\ntvdm64\logs`.
+  as I386 before staging. Runtime observations stay under `O:\winnt\logs`.
 
 ## Non-goals and stop conditions
 

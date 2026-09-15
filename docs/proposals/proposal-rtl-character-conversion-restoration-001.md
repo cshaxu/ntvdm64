@@ -129,7 +129,7 @@ All three stages require focused positive/negative tests and affected runtime
 regressions. Unknown mandatory semantics remain closure blockers. Build and
 fixture products stay in `build/`; verified publication uses
 `build/output/ntvdm32.exe` and deliberate deployment to
-`O:\ntvdm64\ntvdm32.exe`, with runtime logs under `O:\ntvdm64\logs\`.
+`O:\winnt\ntvdm32.exe`, with runtime logs under `O:\winnt\logs\`.
 Review, governance checks, commit and push follow
 [Execution](../rules/EXECUTION.md). This proposal imports or repairs no code.
 

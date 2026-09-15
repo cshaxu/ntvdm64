@@ -169,8 +169,8 @@ Retain source identities, actual provider selection, contract tests, runtime
 baseline comparisons and separate counts for removed autonomous code,
 reverted mirror diff, added original source and necessary binding code.
 Build/fixture outputs stay under `build/`; only verified formal publication
-is copied to `O:\ntvdm64\ntvdm32.exe`, with observations under
-`O:\ntvdm64\logs\`. Review, governance verification, commit and push follow
+is copied to `O:\winnt\ntvdm32.exe`, with observations under
+`O:\winnt\logs\`. Review, governance verification, commit and push follow
 [Execution](../rules/EXECUTION.md). S1 research alone does not close the T:
 the reviewed restoration or proved-equivalent retention and S2 verification
 must be complete, with mandatory unresolved contracts explicitly blocking

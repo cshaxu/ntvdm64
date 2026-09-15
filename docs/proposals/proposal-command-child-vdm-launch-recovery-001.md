@@ -108,7 +108,7 @@ HANDLE or retained parent-memory address.
 
 The product executable is named by host architecture: `ntvdm32.exe` for a
 Win32/x86 final link and `ntvdm64.exe` for a Win64/x64 final link. Each is
-published at both `build/output` and the package root (`O:\ntvdm64` for the
+published at both `build/output` and the package root (`O:\winnt` for the
 current local profile). A disposable formal build may call its linked file
 `original-softpc-process.exe`, but no task-specific filename is published as a
 product executable and no architecture may stand in for the other.

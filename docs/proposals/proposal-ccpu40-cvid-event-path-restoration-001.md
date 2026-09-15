@@ -160,6 +160,6 @@ a kernel scheduler, trap layer, generic guest-pointer manager or task policy.
 See [T407 S6 evidence](../etc/evidence/m0-t407-s6-platform-carrier-disposition.md).
 
 Builds/intermediates stay in build/, current approved publication follows
-ntvdm32.exe and runtime observations stay in `O:\ntvdm64\logs\`. Run
+ntvdm32.exe and runtime observations stay in `O:\winnt\logs\`. Run
 documentation governance, link and diff checks. Unresolved mandatory behavior
 requires explicit owner disposition; it is not an accepted restoration.

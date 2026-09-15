@@ -45,7 +45,7 @@ non-comparable replacements, inactive inputs, declarations and diagnostics.
 Working COMMAND/EDIT are regression baselines, not audit exemptions.
 
 Preserve guest media and the positional public command. Builds belong under
-build/M0-T405/Sn/run-id; runtime logs remain under O:\ntvdm64\logs. S4/S5 may
+build/M0-T405/Sn/run-id; runtime logs remain under O:\winnt\logs. S4/S5 may
 use sequential P deliveries for coherent original-owner packages, never
 trace-selected symbol-by-symbol recovery. WRITE depth is measured evidence,
 not proof of complete WOW acceptance. The T cannot close on a report alone:

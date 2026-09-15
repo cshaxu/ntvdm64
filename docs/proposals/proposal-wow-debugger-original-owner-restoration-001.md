@@ -84,7 +84,7 @@ Report original source added, autonomous code removed and retained adapter/diff
 footprint separately. Full WRITE start/run/return remains the subsequent workload
 package's acceptance, not implied by broker or helper composition.
 
-Builds stay under `build/`, runtime observations under `O:\ntvdm64\logs\`;
+Builds stay under `build/`, runtime observations under `O:\winnt\logs\`;
 publication follows the executable contract admitted at implementation time.
 Run governance, relative-link and diff checks. Candidate documentation is not
 runtime repair or authorization to install fonts or attach a debugger now.

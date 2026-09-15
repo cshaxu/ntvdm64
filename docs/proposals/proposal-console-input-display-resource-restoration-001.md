@@ -108,8 +108,8 @@ and missing/corrupt-resource failures without mutating real host system files.
 
 Record conhost, Terminal and RDP evidence separately; unavailable environments
 are limitations, not passes. Builds stay in `build/`; admitted current-product
-deployment uses `O:\ntvdm64\ntvdm32.exe`, with observations under
-`O:\ntvdm64\logs\`. Run documentation governance and diff checks. Each row
+deployment uses `O:\winnt\ntvdm32.exe`, with observations under
+`O:\winnt\logs\`. Run documentation governance and diff checks. Each row
 requires verified restoration/removal or an explicit owner-approved limitation
 before closure. This proposal does not admit implementation now, change the
 product entry, or authorize broker or internal WOW/DPMI repairs.

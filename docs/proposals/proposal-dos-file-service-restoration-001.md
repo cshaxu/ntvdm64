@@ -110,8 +110,8 @@ becoming a successful unsupported row by omission.
 
 Build and fixture products stay under the admitted `build/` run root. Publish
 only a verified formal x86 executable to `build/output/ntvdm32.exe`, with a
-deliberate test copy to `O:\ntvdm64\ntvdm32.exe`; runtime observations belong
-under `O:\ntvdm64\logs\`. Each admitted S closes through review, governance
+deliberate test copy to `O:\winnt\ntvdm32.exe`; runtime observations belong
+under `O:\winnt\logs\`. Each admitted S closes through review, governance
 checks, commit and push under [Execution](../rules/EXECUTION.md). The T closes
 only after both stages meet their approved contracts and superseded duplicate
 providers/caller hooks have explicit removal or bounded retention evidence.

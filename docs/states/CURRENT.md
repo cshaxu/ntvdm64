@@ -359,7 +359,9 @@ remain explicitly unverified rather than inferred correct from compilation.
   unaccepted 1daff0ace WIP. T405 changed no product behavior and proves no new
   WRITE execution. [T404 closure](../history/m0-t404-owner-directed-closure.md)
   preserves prior runtime limitations.
-- Latest deployed executable: O:\ntvdm64\ntvdm32.exe, T406 S2 external
+- Historical T406 deployment was `O:\ntvdm64\ntvdm32.exe`; all current and
+  future test publication uses the `O:\winnt` package root (and `O:\winnt\logs`)
+  instead. That historical deployment was T406 S2 external
   memory restoration plus working EMS/allocator/host-word and C-VID x86
   carrier cohorts, original current-process pseudo-handle spelling, restored
   original COMMAND standard-handle carrier, and the approved EMS cross-window

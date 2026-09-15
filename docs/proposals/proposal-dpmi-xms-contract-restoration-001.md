@@ -130,8 +130,8 @@ to these rows without runtime evidence.
 
 All build/fixture products remain under `build/`. Publish only a verified
 formal x86 executable at `build/output/ntvdm32.exe`, deliberately copied to
-`O:\ntvdm64\ntvdm32.exe` for acceptance; runtime logs belong under
-`O:\ntvdm64\logs\`. Each stage follows review, governance checks, commit and
+`O:\winnt\ntvdm32.exe` for acceptance; runtime logs belong under
+`O:\winnt\logs\`. Each stage follows review, governance checks, commit and
 push under [Execution](../rules/EXECUTION.md). Complete this bounded worker
 restoration before broker work; do not make all remaining WOW recovery an
 implicit prerequisite or use broker changes to hide unresolved worker state.
