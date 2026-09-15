@@ -548,3 +548,19 @@ can own the endpoint after the old listener drains.  The normal fresh-launch
 and resident-worker observations above pass through this code.  A controlled
 timer-callback barrier is still required before claiming the narrowest
 callback-in-progress race has been reproduced.
+
+### Concurrent launcher startup
+
+With no prior broker or worker, two `O:\winnt\run16.exe MEM.EXE` processes
+were started back-to-back under the same trace setting.  Both returned `0`
+within 20 seconds.  Exactly one `basesrv.exe` was live, and the trace at
+`O:\winnt\logs\m0-t412-s5-concurrent-launch-20260914-213116.trace` contains
+two authenticated launcher connections, exactly two `Check → Reserve →
+Prepare → worker Connect` chains, one `first-yes` and one `first-no`, and one
+`exit-code`/`disconnect` pair for each launcher.  It contains no failed
+reservation, duplicate worker registration, or third command chain.  The
+single broker and both test workers were then stopped by exact test paths.
+
+This establishes the real concurrent-startup row for the current staged
+three-program package.  It does not replace the separate controlled
+callback-in-progress drain race requirement.
