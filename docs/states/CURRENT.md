@@ -2,68 +2,48 @@
 
 ## Current Work
 
-**Active: M0 T412 S4.**
+**Active: M0 T412 S5.**
 
 ## Active Packet
 
-### M0 T412 S4 — DOS execution, reentry and streams
+### M0 T412 S5 — WOW coordination and idle cleanup
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T412 S4; Ordinary Mode, one implementer and one active sequential S packet. |
+| Identifier Mode | M0 T412 S5; Ordinary Mode, one implementer and one active sequential S packet. |
 | Admission And Approval | Owner approved completion of T412 according to its proposal, including the authenticated OS-managed resource-transfer exception. Execute S1--S6 sequentially without repeated scope approvals; one S remains active and each verification gate still applies. Commit/push to main remains approved. No kernel/CSR shell or broader CPU/video redesign is admitted. |
-| Objective | Connect BOP 54:08 and original DOS reentry/native-child waits through run16, basesrv and ntvdm; preserve copied command/environment/stream lifetime and verify normal task return. |
-| Non-goals | No CSR/kernel subsystem, CPU/video redesign, guest-media changes, generic cmd parser, idle-reuse policy (S5), or claim of complete WRITE recovery. |
-| Reference Baseline | T412 S3 three-program composition, published at bd2de31b9; S1 consolidated design and S2 formal original-owner archives. |
-| Files And ABI Surface | Original DOS command/reentry call sites, app/BOP boundary, BaseClient stream capture and transport receipts, three-program staging, focused tests and evidence. |
+| Objective | Recover the selected original BaseSrv WOW coordination, then implement source-bounded singleton, eligible-idle worker retirement and empty-broker exit without reaping active COMMAND/EDIT sessions. |
+| Non-goals | No CSR/kernel subsystem, CPU/video redesign, guest-media changes, generic cmd parser, guest COMMAND redirection, or claim of full WOW16/WRITE execution. |
+| Reference Baseline | S4 closure at [m0-t412-s4-closure](../etc/evidence/m0-t412-s4-closure.md), T412 S3 three-program composition, and S1/S2 original-owner records. |
+| Files And ABI Surface | Original `srvvdm.c` WOW/first-VDM/wait/notification owners, BaseClient call paths, bounded broker lifecycle/connection state, app worker creation and focused lifecycle tests. |
 | Applicable Rules | Source policy; execution, architecture, coding and document rules; package-first recovery and original-owner placement. |
-| Verification | Real COMMAND/MEM/EDIT and DOS/native-child runs through the three-program topology; quoted tail/environment/stdin/stdout/stderr/EOF/nonzero exit and rollback/disconnect tests; direct CLI versus guest COMMAND redirection. Formal x86 maps, governance and diff checks. |
-| Expected Markers | BOP 54:08 reaches run16 without an invented parser; original DOS reentry owns task result/waits; copied records outlive async worker creation; stream ownership is explicit. |
-| Asset Needs | Accepted OpenNT source and immutable guest media; build/M0-T412/S4 for generated/build/test outputs; O:\ntvdm64\logs for real-package observations. |
-| Reporting Requirements | Report source owner and process boundary for each command/reentry/stream case, with real Console observations and negative rollback evidence. |
+| Verification | Original-source/caller audit; focused singleton, WOW request, first-VDM, reconnect, worker-abnormal-exit and idle/arrival race tests; real COMMAND/EDIT survival beyond idle interval and exact-once eligible cleanup; formal x86 maps, governance and diff checks. |
+| Expected Markers | Original coordination owner handles WOW/first-task states; active Console worker is retained; only an eligible completed worker retires; broker exits only after workers, reservations, queues and clients drain; a later launch starts a clean instance. |
+| Asset Needs | Accepted OpenNT source, immutable guest media, existing formal x86 product, `build/M0-T412/S5` for generated/build/test outputs, and `O:\ntvdm64\logs` for real-package observations. |
+| Reporting Requirements | Report original owner, selected bounded binding, timing/eligibility predicate, race result, resource cleanup and every unavailable WOW operation; distinguish source audit, focused tests and real worker evidence. |
 | Stop Conditions | Missing provenance, unbounded platform dependency, contradictory selected-provider evidence, or changed product scope: record the exact issue; do not manufacture success or a parallel provider. |
-| Exit Criteria | Original BOP 54:08 to run16 and DOS/native-child reentry work end to end with copied command/environment/stream lifetimes; direct CLI and guest redirection cases are distinguished; real COMMAND/MEM/EDIT and required negatives pass. |
+| Exit Criteria | Source-owned WOW/first-VDM/wait disposition plus verified singleton and eligible-idle/empty-broker lifecycle; simultaneous startup, reconnect, work-versus-retirement and abnormal-disconnect cases are exact-once; quiet active COMMAND/EDIT is not reaped. |
 | Original Owner Request | 批准按照proposal完成当前T任务。 Reduce diff, reuse original OpenNT code/architecture and build three programs. |
 | Similar-Issue Sweep | Include mirrored diffs, private overlays and adapters; command ownership/capacity/retry, launch rollback, async payload lifetime, worker cleanup and every duplicated local policy in scope. |
 | Candidate Proposal | [Broker design](../proposals/proposal-cross-process-broker-closure-001.md). |
 | Working Plan | [T412 sequential S plan](../etc/operations/m0-t412-broker-restoration-plan.md). |
 
 S1 audit/design is closed by the [consolidated design](../etc/evidence/m0-t412-s1-design-closure.md).
-S4 is the only active packet under the existing whole-T approval. S3 delivered
-the three-product command path; its final obsolete-source deletion remains
-explicitly carried into S6. See the
+S4 is closed by its [requirement ledger](../etc/evidence/m0-t412-s4-closure.md):
+real COMMAND/MEM/EDIT, BOP reentry, copied native-child lifetime, Console
+stdout/stderr, EOF and nonzero status are now observed.  Guest COMMAND `>` is
+distinguished and remains the existing Redirector boundary; it was not folded
+into S4. S5 is the only active packet under the existing whole-T approval. S3
+delivered the three-product command path; its final obsolete-source deletion
+remains explicitly carried into S6. See the
 [S2 transition](../etc/evidence/m0-t412-s2-original-lifecycle.md#s2-bounded-conclusion-and-s3-transition).
 Historical checkpoints are not current admission or hold state.
 
-The [S2 evidence](../etc/evidence/m0-t412-s2-original-lifecycle.md) preserves
-source identities, restored-line counts, formal archive hashes and passing
-classifier/lifecycle/rollback/capture/registration/cleanup tests. These are
-library tests, not real-process acceptance. S3 starts with the deployed product
-unchanged; product selection and local-policy retirement are pending.
-
-The [S3 RPC security boundary](../etc/evidence/m0-t412-s3-rpc-security.md) now
-passes nine real-process cases, now with process references, remote receipt revocation and
-wrong-peer rejection. This is not service dispatch or product acceptance;
-genuine cross-user/session and remaining security/receipt gates stay open.
-The [entry and lifecycle tests](../etc/evidence/m0-t412-s3-entry-integration.md)
-select real PEB/TEB/heap, request-thread and registered-process bindings. S3
-now composes `run16.exe`, `basesrv.exe` and `ntvdm.exe` from one x86 graph;
-real MEM command delivery/return and concurrent launcher evidence pass, with
-source-shaped Check/Update/Get/exit-code calls, typed receipts, worker
-reservation/claim, registration failure and disconnect/rundown negatives.
-The old local service fallback is absent from the product map. The published
-three-program staging is recorded in the evidence; `ntvdm32.exe` is unchanged.
-DOS reentry, stream and BOP integration are now S4 work, not inferred from S3.
-The [S4 reentry binding](../etc/evidence/m0-t412-s4-reenter-binding.md) now
-restores the original COMMAND increment/decrement route through BaseSrv; guest
-`54:08`, native-child streams and DOS parent return remain open S4 acceptance.
-The [S4 BOP launcher binding](../etc/evidence/m0-t412-s4-bop-launcher-binding.md)
-now routes the retained original COMMAND `COMSPEC /c` spawn to the public
-`run16` owner without adding a second classifier to the worker or broker.
-The [S4 stream reservation binding](../etc/evidence/m0-t412-s4-stream-reservation.md)
-records the executable original Update-time worker-local stream path and the
-unaccepted receipt-only first-command variant; nested DOS return and
-byte-producing redirection remain open S4 acceptance.
+T412’s compact predecessor chain is S2 original lifecycle, S3 entry/security,
+and S4 reentry/BOP/stream evidence. The corresponding records remain indexed
+under [T412 evidence](../etc/README.md); they are not duplicated as current
+control state. Guest COMMAND redirection remains the explicit Redirector
+boundary, not a S4 acceptance surrogate.
 
 ## T412 S1 historical checkpoints
 

@@ -74,13 +74,13 @@ and a modern Console object before attempting a stream attachment.  It leaves
 file and pipe behavior untouched.
 
 After the full three-program rebuild, fixed-console observation
-`O:\\ntvdm64\\logs\\m0-t412-s4-stream-presence-reply-r21` recorded the
+`O:\ntvdm64\logs\m0-t412-s4-stream-presence-reply-r21` recorded the
 original first-command record as `std=000`, reached the original DOS
 buffered-console-input marker, and captured the DOS banner and
-`O:\\NTVDM64>` prompt.  A follow-up input run at
-`O:\\ntvdm64\\logs\\m0-t412-s4-stream-presence-reply-r22` echoed `ver` and
+DOS current-directory prompt.  A follow-up input run at
+`O:\ntvdm64\logs\m0-t412-s4-stream-presence-reply-r22` echoed `ver` and
 returned to the prompt.  Both runs used a temporary exact copy of the
-immutable pure-DOS profile PIF as `O:\\ntvdm64\\COMMAND.PIF`, removed in
+immutable pure-DOS profile PIF as `O:\ntvdm64\COMMAND.PIF`, removed in
 `finally`; neither changes guest media nor proves `exit`/worker-return,
 byte-producing redirection, or general PIF compatibility.
 
