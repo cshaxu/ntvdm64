@@ -155,7 +155,11 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command)
     BOOL published = FALSE;
     BOOL registered = FALSE;
     BOOL resumed = FALSE;
-    BOOL version_rejected = FALSE;
+    BOOL startup_failed = FALSE;
+    HANDLE startup_job=NULL;
+    STARTUPINFOEXW guarded_startup={0};
+    JOBOBJECT_EXTENDED_LIMIT_INFORMATION job_limits={0};
+    SIZE_T attributes_bytes=0;
 
     /* This is the original parent-side VDM environment projection.  The
      * ANSI record is captured by BaseCheckVDM; the matching Unicode record
@@ -177,6 +181,8 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command)
     if (message.u.CheckVDM.VDMState == VDM_PRESENT_AND_READY)
     {
         parent_wait = message.u.CheckVDM.WaitObjectForParent;
+        result=OpenNtBaseClientWatchBroker();
+        if (result) { CloseHandle(parent_wait); goto done; }
         if (!parent_wait || WaitForSingleObject(parent_wait, INFINITE) != WAIT_OBJECT_0 ||
             !BaseCheckForVDM(parent_wait, &result))
             result = GetLastError();
@@ -231,10 +237,32 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command)
      * Create the matching physical Console rather than letting that worker
      * inherit the resident COMMAND Console it was deliberately separated
      * from. */
+    /* Atomic startup containment. If this launcher dies before Prepare, the
+     * broker cannot know this child yet. A non-inherited kill-on-close job,
+     * installed as part of CreateProcess, closes that otherwise orphaned
+     * suspended-child window. Disarm only after broker ownership is bound. */
+    startup_job=CreateJobObjectW(NULL,NULL);
+    if (!startup_job) { result=GetLastError(); goto done; }
+    job_limits.BasicLimitInformation.LimitFlags=JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE;
+    if (!SetInformationJobObject(startup_job,JobObjectExtendedLimitInformation,
+            &job_limits,sizeof(job_limits))) { result=GetLastError(); goto done; }
+    InitializeProcThreadAttributeList(NULL,1,0,&attributes_bytes);
+    guarded_startup.lpAttributeList=HeapAlloc(GetProcessHeap(),0,attributes_bytes);
+    if (!guarded_startup.lpAttributeList) { result=ERROR_NOT_ENOUGH_MEMORY; goto done; }
+    if (!InitializeProcThreadAttributeList(guarded_startup.lpAttributeList,1,0,&attributes_bytes)) {
+        result=GetLastError(); HeapFree(GetProcessHeap(),0,guarded_startup.lpAttributeList);
+        guarded_startup.lpAttributeList=NULL; goto done;
+    }
+    if (!UpdateProcThreadAttribute(guarded_startup.lpAttributeList,0,
+            PROC_THREAD_ATTRIBUTE_JOB_LIST,&startup_job,sizeof(startup_job),NULL,NULL)) {
+        result=GetLastError(); goto done;
+    }
+    guarded_startup.StartupInfo=startup;
+    guarded_startup.StartupInfo.cb=sizeof(guarded_startup);
     if (!CreateProcessW(worker_path, worker_command.Buffer, NULL, NULL, TRUE,
-                        CREATE_SUSPENDED | CREATE_UNICODE_ENVIRONMENT |
+                        CREATE_SUSPENDED | CREATE_UNICODE_ENVIRONMENT | EXTENDED_STARTUPINFO_PRESENT |
                         (binary == BINARY_TYPE_DOS && task ? CREATE_NEW_CONSOLE : 0),
-                        unicode_environment.Buffer, NULL, &startup, &worker))
+                        unicode_environment.Buffer, NULL, &guarded_startup.StartupInfo, &worker))
     {
         result = GetLastError();
         goto done;
@@ -243,6 +271,10 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command)
     if (result)
         goto done;
     prepared = TRUE;
+    job_limits.BasicLimitInformation.LimitFlags=0;
+    if (!SetInformationJobObject(startup_job,JobObjectExtendedLimitInformation,
+            &job_limits,sizeof(job_limits))) { result=GetLastError(); goto done; }
+    CloseHandle(startup_job);startup_job=NULL;
     /* Preserve the original post-CreateProcess registration shape.  The
      * broker resolves the worker from the authenticated reservation; it does
      * not receive this raw handle in its command wire. */
@@ -259,9 +291,14 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command)
         goto done;
     }
     resumed = TRUE;
-    /* A version-rejected worker exits before connecting to BaseSrv, so it
-     * cannot publish the normal task completion. Observe our own child too;
-     * leave every ordinary guest result on the original parent-wait route. */
+    result=OpenNtBaseClientWatchBroker();
+    if (result) {
+        TerminateProcess(worker.hProcess,result);
+        startup_failed=TRUE;
+        goto waited;
+    }
+    /* A dead worker cannot deliver another completion. Keep original task
+     * results, but never return to an infinite event wait after process exit. */
     {
         HANDLE completion[2]={parent_wait ? parent_wait : worker.hProcess,worker.hProcess};
         DWORD code,wait=WaitForMultipleObjects(completion[0]==completion[1] ? 1 : 2,
@@ -270,21 +307,23 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command)
             result=GetLastError();
             goto waited;
         }
+        if (wait==WAIT_OBJECT_0+1 &&
+            WaitForSingleObject(parent_wait,2000)!=WAIT_OBJECT_0) {
+            result=ERROR_PROCESS_ABORTED;
+            fputs("run16: ntvdm exited without task completion\n",stderr);
+            goto waited;
+        }
         if (WaitForSingleObject(worker.hProcess,0)==WAIT_OBJECT_0 &&
             GetExitCodeProcess(worker.hProcess,&code) &&
             (code==ERROR_REVISION_MISMATCH || code==RPC_S_UNKNOWN_IF ||
              code==RPC_S_PROCNUM_OUT_OF_RANGE)) {
             fputs("run16: version mismatch: ntvdm worker rejected the broker protocol/application version\n",stderr);
             result=ERROR_REVISION_MISMATCH;
-            version_rejected=TRUE;
+            startup_failed=TRUE;
             goto waited;
         }
     }
-    if (WaitForSingleObject(parent_wait ? parent_wait : worker.hProcess, INFINITE) != WAIT_OBJECT_0)
-    {
-        result = GetLastError();
-    }
-    else if (parent_wait && parent_wait != worker.hProcess)
+    if (parent_wait && parent_wait != worker.hProcess)
     {
         if (!BaseCheckForVDM(parent_wait, &result))
             result = GetLastError();
@@ -297,7 +336,12 @@ waited:
     if (parent_wait && parent_wait != worker.hProcess)
         CloseHandle(parent_wait);
 done:
-    if (published && (!resumed || version_rejected) && result)
+    if (guarded_startup.lpAttributeList) {
+        DeleteProcThreadAttributeList(guarded_startup.lpAttributeList);
+        HeapFree(GetProcessHeap(),0,guarded_startup.lpAttributeList);
+    }
+    if (startup_job) CloseHandle(startup_job);
+    if (published && (!resumed || startup_failed) && result)
     {
         HANDLE undo_task = (HANDLE)(ULONG_PTR)task;
         ULONG undo_state = registered ? VDM_FULLY_CREATED : VDM_PARTIALLY_CREATED;
@@ -305,7 +349,7 @@ done:
          * original record owner may itself report an earlier cleanup fault. */
         (void)BaseUpdateVDMEntry(UPDATE_VDM_UNDO_CREATION, &undo_task, undo_state, binary);
     }
-    if (worker.hProcess && !prepared)
+    if (worker.hProcess && (!prepared || !resumed))
     {
         (void)TerminateProcess(worker.hProcess, result ? result : ERROR_PROCESS_ABORTED);
         (void)WaitForSingleObject(worker.hProcess, INFINITE);

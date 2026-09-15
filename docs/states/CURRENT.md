@@ -19,12 +19,17 @@ The [S6 VDM TIB repair](../etc/evidence/m0-t412-s6-vdm-tib-storage-repair.md)
 retains its full-storage link gate. Current products are at `O:\winnt`;
 full T412 matrix and owner acceptance remain open.
 
-S10 P1 delivers the [final verification and accounting](../etc/evidence/m0-t412-s10-final-verification.md):
-17 Console rows, original-owner/RPC/version tests and controlled empty-drain
-race pass. The separately controlled admitted-broker-loss test fails with a
-20-second timeout after typed EXIT. S10/T412 therefore remain open; no closure
-or next T admission is claimed. Deliver the verified changes and wait for owner
-direction on the recorded remaining fault contract.
+S10 P3 implements the owner-authorized process-loss contract in the
+[final verification and accounting](../etc/evidence/m0-t412-s10-final-verification.md).
+Broker death fails running clients with 1722; premature worker death fails its
+unfinished task with 1067. Startup alone may start a missing broker; no runtime
+restart/replay. Launcher death rolls back unclaimed startup, preserving claimed
+VDMs and unrelated workers. Atomic startup Job protection closes the interval
+before the broker knows the child. Original guest semantics are unchanged.
+Final product verification passes: 17 Console cases, dual-worker failure
+isolation, three startup cut points, original-owner/RPC/version fixtures and
+broker empty/drain races. P3 is delivered for owner real-package confirmation;
+no next T is admitted and the task remains at the owner acceptance gate.
 
 ## Active Packet
 
@@ -33,19 +38,19 @@ direction on the recorded remaining fault contract.
 | Field | Record |
 | --- | --- |
 | Identifier Mode | M0 T412 S10; Ordinary Mode, one implementer then reviewer. |
-| Admission And Approval | Owner admits final T closure work, build/test/commit/push then wait. S9 delivery is the predecessor. |
-| Objective | Verify final same-source three-program composition and settle D01-D07/D10, code accounting and explicit residual boundaries. |
-| Non-goals | No new T, full WRITE recovery, guest changes, worker reaper or invented service policy. |
+| Admission And Approval | Owner admits final T closure work, then explicitly authorizes startup-only broker creation and runtime failure on broker/worker death, plus three-process exception cleanup; build/test/commit/push then wait. |
+| Objective | Verify final three-program composition, process-loss containment, D01-D07/D10 and measured accounting without changing original guest lifetime/results. |
+| Non-goals | No new T, full WRITE recovery, guest changes, worker idle reaper, automatic runtime restart or task replay. |
 | Reference Baseline | df2467de0 delivery; whole-T comparison starts at S1 input 08b33351b1c341bb433f27ab517ee9a4e0bc3e0c. |
-| Files And ABI Surface | Final verification tools/tests, scoped source registers and governance/evidence; existing protocol 2 and APP_VERSION 0.0.412 unchanged. |
+| Files And ABI Surface | App wait/cleanup, authenticated broker lifetime attachment and client binding, original service process cleanup, tests/evidence. Protocol advances to 3 for the lifetime capability; APP_VERSION stays 0.0.412. |
 | Applicable Rules | All current execution, source, architecture, coding and document authorities; source-first minimal diff. |
 | Verification | Fresh x86 /MT build; original-owner fixtures, actual RPC/security/resources, Console matrix, WOW coordination and broker lifecycle/races; hashes, governance and Git synchronization. |
 | Expected Markers | Every mandatory broker contract passes on identified final inputs; separate historical proof, current proof and out-of-scope workload limits. |
-| Asset Needs | build/M0-T412/S10/final; existing MSVC/Node and O:\winnt media; all runtime logs in O:\winnt\logs. |
+| Asset Needs | Final P3 build/M0-T412/S10/process-loss; historical P1/P2 final root; existing MSVC/Node and O:\winnt media; logs in O:\winnt\logs. |
 | Reporting Requirements | Measured mirror/overlay/project deltas, retained seam rationale, exact products and tests; stop after delivery. |
 | Stop Conditions | Unresolved mandatory contract, runtime regression or material owner-boundary change; record failure, never declare unsupported proof passed. |
 | Exit Criteria | Final scoped matrix and accounting complete, verified products published, closure evidence committed/pushed, worktree clean; await owner. |
-| Original Owner Request | “请你准入一个s任务来执行收口工作 完成了以后 编译测试提交推送等我”. |
+| Original Owner Request | “请你准入一个s任务来执行收口工作 完成了以后 编译测试提交推送等我”; then “if broker is dead, the ntvdm worker should exit”; startup can start broker, otherwise fail during the run when broker/worker dies. |
 | Similar-Issue Sweep | Final artifact lineage, obsolete local providers/entries, startup/drain/disconnect, version rejection and original DOS/WOW separation. |
 | Working Plan | [T412 S plan](../etc/operations/m0-t412-broker-restoration-plan.md). |
 
@@ -61,13 +66,15 @@ S10 found and repaired a dormant Check scalar encoder's uninitialized reserved
 fields, obsolete fixture capacities/media paths, and UNKNOWN_IF misclassification
 when an empty broker drains. The existing pending-worker query is relocated
 unchanged into the mirror's private overlay and explicitly registered.
-Final same-source positive verification and accounting are recorded; admitted
-broker loss remains a blocking negative. No T closure is claimed.
+P3 resolves the previously blocking admitted-broker-loss negative and adds
+worker/launcher death isolation, startup rollback and protocol 3 lifetime
+capabilities. Original-owner cleanup stays in the mirror; no new mirror or
+overlay diff is introduced. Owner real-package confirmation remains pending.
 
 ## Current Technical Baseline
 
 - Product package: run16.exe, basesrv.exe and ntvdm.exe; MSVC x86 /MT,
-  original CCPU40. APP_VERSION 0.0.412 and RPC protocol 2.
+  original CCPU40. APP_VERSION 0.0.412 and RPC protocol 3.
 - Public entry: run16.exe <binary> [arguments]. Original COMMAND exit/reentry
   semantics are retained; no worker idle timer or reaper.
 - Formal outputs and fixtures stay under build/. Published products are at

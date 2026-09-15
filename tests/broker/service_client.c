@@ -76,6 +76,15 @@ int main(int argc,char **argv)
             puts("PASS: registered context intentionally abandoned at process exit");
             return 0;
         }
+        {
+            HANDLE server=NULL;
+            REQUIRE(Client_BrokerProcess(binding,connection,process,0,&server)==ERROR_ACCESS_DENIED && !server);
+            REQUIRE(!Client_BrokerProcess(binding,connection,process,generation,&server) && server);
+            REQUIRE(WaitForSingleObject(server,0)==WAIT_TIMEOUT);
+            /* Wait-only: never grant a client process-termination authority. */
+            REQUIRE(!TerminateProcess(server,123) && GetLastError()==ERROR_ACCESS_DENIED);
+            CloseHandle(server);
+        }
         REQUIRE(Client_Connect(binding,process,APP_PROTOCOL_VERSION,app_version,
             &server_protocol,server_version,&duplicate,&next)==ERROR_ALREADY_EXISTS && !duplicate && !next);
         REQUIRE(Client_First(binding,connection,process,0,&first)==ERROR_ACCESS_DENIED && first==0);

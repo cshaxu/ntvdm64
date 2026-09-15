@@ -80,6 +80,8 @@ DWORD mvdm_standalone_worker_begin(void)
     }
     error=OpenNtBaseClientConnectCurrent();
     if (error!=ERROR_SUCCESS) goto fail;
+    error=OpenNtBaseClientWatchBroker();
+    if (error!=ERROR_SUCCESS) goto fail;
     if (!session_select_machine_backend(&worker_session,
             SESSION_MACHINE_BACKEND_SOFTPC) || !session_activate(&worker_session) ||
         !session_thread_bind_owned(&worker_session,

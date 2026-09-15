@@ -1,12 +1,19 @@
 import "wtypes.idl";
 [
     uuid(7d3e78bd-0472-4736-8797-e64e966d692e),
-    version(2.0),
+    version(3.0),
     pointer_default(unique)
 ]
 interface vdm_service
 {
     typedef [context_handle] void *VDM_CONNECTION;
+    /* Authenticated lifetime capability, not a PID or restart authority. */
+    error_status_t BrokerProcess(
+        [in] handle_t binding,
+        [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [out, system_handle(sh_process)] HANDLE *server);
     error_status_t Connect(
         [in] handle_t binding,
         [in, system_handle(sh_process)] HANDLE process,

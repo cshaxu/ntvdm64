@@ -22,12 +22,26 @@ int main(void)
     CHECK(!OpenNtBaseReservationIsWorkerLocalStream(state,first,(HANDLE)0x53));
     CHECK(OpenNtBaseReservationClaimWorker(state,GetCurrentProcessId(),9,&claimed,&task,&console,&shared_wow)==ERROR_SUCCESS);
     CHECK(claimed==first && task==41 && console==(HANDLE)0x1234 && !shared_wow);
+    CHECK(OpenNtBaseReservationAbandon(state,first)); /* Claimed self must survive. */
     CHECK(OpenNtBaseReservationClaimWorker(state,GetCurrentProcessId(),10,&claimed,&task,&console,&shared_wow)==ERROR_ALREADY_EXISTS);
     CHECK(OpenNtBaseReservationRelease(state,first,102,7)==ERROR_ACCESS_DENIED);
     CHECK(OpenNtBaseReservationRelease(state,first,101,7)==ERROR_SUCCESS);
     CHECK(OpenNtBaseReservationPrepareWorker(state,third,103,9,self)==ERROR_SUCCESS);
     CHECK(OpenNtBaseReservationClaimWorker(state,GetCurrentProcessId(),11,&claimed,&task,&console,&shared_wow)==ERROR_SUCCESS);
     CHECK(claimed==third && task==43 && console==NULL && shared_wow);
+    {
+        WCHAR image[MAX_PATH];
+        STARTUPINFOW startup={sizeof(startup)};
+        PROCESS_INFORMATION child={0};
+        CHECK(GetSystemDirectoryW(image,MAX_PATH));
+        CHECK(lstrlenW(image)+9<MAX_PATH);lstrcatW(image,L"\\cmd.exe");
+        CHECK(CreateProcessW(image,NULL,NULL,NULL,FALSE,CREATE_SUSPENDED|CREATE_NO_WINDOW,
+            NULL,NULL,&startup,&child));
+        CHECK(OpenNtBaseReservationPrepareWorker(state,second,102,8,child.hProcess)==ERROR_SUCCESS);
+        CHECK(!OpenNtBaseReservationAbandon(state,second));
+        CHECK(WaitForSingleObject(child.hProcess,5000)==WAIT_OBJECT_0);
+        CloseHandle(child.hThread);CloseHandle(child.hProcess);
+    }
     CHECK(OpenNtBaseReservationRelease(state,second,102,8)==ERROR_SUCCESS);
     CHECK(OpenNtBaseReservationRelease(state,third,103,9)==ERROR_SUCCESS);
     CHECK(OpenNtBaseReservationsDestroy(state));CloseHandle(self);

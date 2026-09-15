@@ -11,6 +11,7 @@ typedef struct OPENNT_BASE_RESERVATION {
     ULONG task;
     HANDLE console,worker;
     BOOL shared_wow;
+    BOOL abandoned;
     broker_vdm_receipts streams;
     HANDLE worker_streams[3];
     DWORD worker_stream_count;
@@ -247,6 +248,33 @@ DWORD OpenNtBaseReservationRetainWorker(OPENNT_BASE_RESERVATIONS *state,uint64_t
     LeaveCriticalSection(&state->lock);
     *worker=retained;
     return ERROR_SUCCESS;
+}
+
+BOOL OpenNtBaseReservationAbandon(OPENNT_BASE_RESERVATIONS *state,uint64_t reservation)
+{
+    OPENNT_BASE_RESERVATION *entry;
+    BOOL claimed=FALSE;
+    EnterCriticalSection(&state->lock);
+    entry=find(state,reservation);
+    if (entry) {
+        claimed=entry->worker_generation!=0;
+        entry->abandoned=TRUE;
+        if (!claimed && entry->worker)
+            TerminateProcess(entry->worker,ERROR_PROCESS_ABORTED);
+    }
+    LeaveCriticalSection(&state->lock);
+    return claimed;
+}
+
+void OpenNtBaseReservationCollectAbandoned(OPENNT_BASE_RESERVATIONS *state,uint64_t reservation)
+{
+    OPENNT_BASE_RESERVATION *entry;
+    EnterCriticalSection(&state->lock);
+    entry=find(state,reservation);
+    if (entry && entry->abandoned && entry->worker &&
+        WaitForSingleObject(entry->worker,0)==WAIT_OBJECT_0)
+        OpenNtBaseReservationRelease(state,reservation,entry->launcher_pid,entry->launcher_generation);
+    LeaveCriticalSection(&state->lock);
 }
 
 DWORD OpenNtBaseReservationRelease(OPENNT_BASE_RESERVATIONS *state,uint64_t reservation,

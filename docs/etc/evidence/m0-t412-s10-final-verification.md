@@ -7,10 +7,113 @@ is df2467de0; whole-T input is 08b33351b1c341bb433f27ab517ee9a4e0bc3e0c.
 Owner confirms current DOSX/HIMEM/MSCDEX startup loading, not complete device
 or WRITE acceptance. Final build root is build/M0-T412/S10/final, MSVC x86
 /MT, original CCPU40. Runtime package is `O:\winnt` and all observations are
-under `O:\winnt\logs`. APP_VERSION remains 0.0.412, protocol remains 2;
-neither the wire layout nor compatible application identity changes in S10.
+under `O:\winnt\logs`. At P1/P2 APP_VERSION was 0.0.412 and protocol was 2.
+The owner-authorized P3 below advances the protocol to 3 without changing the
+application version. Historical P1/P2 inputs and findings are retained.
 
 ## Audit repairs
+
+### Follow-up admission: process loss (P3)
+
+After P2 the owner authorizes fail-stop containment: startup may start a
+missing broker; a running task never reconnects/replays. Broker death must
+terminate connected workers and launchers. Protocol 3 adds a wait-only typed
+broker-process capability; APP_VERSION stays 0.0.412. Fresh build root:
+build/M0-T412/S10/process-loss, MSVC x86 /MT CCPU40. P3 verification is
+recorded below; preceding protocol-2 observations remain historical inputs.
+
+Recovery ladder: original srvvdm.c BaseSrvCleanupVDMResources,
+BaseSrvExitVDMWorker and UPDATE_VDM_UNDO_CREATION remain composed and own
+record cleanup. Original BaseClientDisconnectRoutine's CSR process notification
+is unavailable in standalone RPC; existing process-watch/rundown mechanics
+are reused. No mirror/overlay change is needed. Newly authored broker-death
+containment is the explicit owner product exception: an authenticated wait-only
+process attachment plus local wait/abort, not an NT4 kernel/CSR substitute.
+The earlier rungs do not supply independent basesrv.exe crash containment:
+NT4's service is hosted by the excluded system CSR shell. This seam remains
+transport lifetime only and must not acquire guest state or command policy.
+Launcher death preserves an already claimed VDM, matching original ownership;
+unclaimed launch resources use original UndoCreation and finite reservation
+release. Negative verification must include all three process deaths and
+unrelated-worker isolation, alongside normal COMMAND/EDIT and version tests.
+
+The startup Job is an additional explicit product mechanic, not an OpenNT
+algorithm: PROC_THREAD_ATTRIBUTE_JOB_LIST installs it atomically during
+CreateProcess. Only the launcher owns its non-inherited kill-on-close handle.
+After authenticated Prepare the limit is disabled and the handle closed;
+normal resident/nested worker lifetime is unaffected. Before then launcher
+death cannot leave an unknown suspended worker. Runtime fail-stop is armed
+only after Resume in run16 (immediately after Connect in ntvdm), so startup
+RPC failure retains the opportunity to roll back its child and original record.
+
+Two failures found during this follow-up were fixed rather than counted as
+passing: worker death originally woke its parent but original missing-record
+exit lookup returned zero; the service now marks an unsignalled original
+notification event as failed before original cleanup, and returns 1067.
+The first abandoned-launch test also exposed an omitted request-thread binding
+at UndoCreation; it now uses the same thread/registry/resource binding as Update.
+Neither original mirror nor private overlay is modified by P3.
+
+### P3 identified products and evidence
+
+Final products are copied from build/M0-T412/S10/process-loss to `O:\winnt`.
+The build-only startup-barrier executables are never published there.
+
+| Product | Final SHA-256 |
+| --- | --- |
+| run16.exe | 20709EC0F1DB68D465EB994C3D14E134618A2CB289A64B2B4080FCA6E80F6C49 |
+| basesrv.exe | 2152439F487D305E77A1AFD5DCC7D7D4F0079AD48E3BBDF398749CC4AD30D8B2 |
+| ntvdm.exe | 3344EA956EF4EA19E53966190C922A78A61263D408B4190EF53A57304A1EAE50 |
+
+Observed P3 rows (all reports under `O:\winnt\logs`):
+
+- m0-t412-s10-p3-product-summary.json: all 17 original Console cases pass,
+  including nested COMMAND/MEM, EDIT return, streams/EOF and exact exit codes.
+- m0-t412-s10-p3-broker-results.txt: two admitted COMMAND workers and launchers
+  exit on broker death; the second launcher explicitly returns 1722; new MEM
+  starts a fresh broker and returns zero. No task replay.
+- m0-t412-s10-p3-worker-results.txt: killing one worker fails its waiting
+  launcher; the unrelated worker completes normally and broker survives.
+- m0-t412-s10-p3-launcher-results.txt: claimed worker survives launcher death
+  until normal guest exit/test cleanup; the other command completes normally.
+- m0-t412-s10-startup-loss-c-results.txt: build-only barriers before and after
+  Prepare prove launcher death leaves no suspended child; broker death before
+  Prepare also fails and reclaims the child. Trace records successful original
+  launcher-abandon cleanup. This is controlled cut-point evidence, distinct
+  from unmodified-product runtime rows.
+- m0-t412-s10-p3-reservation.txt and m0-t412-s10-p3-service-reservation.txt:
+  claimed-worker preservation, unclaimed rollback and original DOS/WOW service
+  lifecycle pass. A reused worker killed with process code zero still returns
+  ERROR_PROCESS_ABORTED to its unfinished task, not false success.
+- m0-t412-s10-p3-owner-lifecycle.json, p3-classifier.json and p3-membership.json:
+  original source identity, service waits/resources, image classification and
+  same/different Console boundary pass on final formal libraries.
+- m0-t412-s10-p3-service/: actual RPC, typed resources, rundown, forged/stale
+  identity refusal and wait-only BrokerProcess attachment pass; attempted
+  termination through that wait-only handle is denied.
+- m0-t412-s10-p3-version/: all five negative peers against both run16 and
+  ntvdm return 1306 before task admission; no retry on version mismatch.
+- m0-t412-s10-p3-lifetime-results.txt: concurrent startup/singleton, worker
+  cleanup, empty grace cancellation, empty broker exit/restart and real shared
+  WOW PIF acquisition pass. WRITE still times out after acquisition and is not
+  claimed as application acceptance; its original provider recovery stays queued.
+- m0-t412-s10-p3-drain-results.txt: controlled empty callback wins its race;
+  startup connects to a new broker and MEM returns zero. This startup retry
+  is not runtime task replay. Final product hashes remain unchanged.
+
+The final product matrix and focused fault tests pass. Documentation and
+relative-link gates pass. P3 is the implementation delivery for owner testing;
+no next T is admitted, and owner real-package confirmation is still pending.
+
+P3 source delta from 99e86538e (excluding README/tests/tools/docs): +275/-20,
+net +255 lines. Mirror and overlay delta is zero. These are registered lifetime
+bindings and explicit failure policy, not falsely claimed recovered original
+code or a footprint reduction. The updated whole-T report
+m0-t412-s10-p3-accounting.json records +8533/-2071, net +6462 across 98 source
+paths; the paired mirror-distance results and 29-line private overlay are
+unchanged from P1. Imported original source is not counted as autonomous code.
+
+### P1 repairs (retained history)
 
 1. The old original-lifecycle driver did not link the now-selected original
    RTL environment owner. Its Check/Get test buffers predated added stream
@@ -46,7 +149,7 @@ that interactive COMMAND is awaiting GetNextVDMCommand. The fixture verifies
 both no-wait refusal and actual-wait command delivery. Its eventual removal
 requires a source-proven delivery contract, not a pool or worker timer.
 
-## Whole-T physical source accounting
+## P1 whole-T physical source accounting
 
 Run tools/audit/Measure-BrokerClosure.mjs. Output is
 `O:\winnt\logs\m0-t412-s10-accounting.json`. Counts are physical text lines,
@@ -95,7 +198,7 @@ worker-local pre-init. The retired local BaseVDM queue, its client retry policy,
 second worker entry and old app shell are absent from the final graph. Retained
 trace hooks provide evidence only and are not counted as functional recovery.
 
-## Verification ledger
+## P1/P2 verification ledger
 
 The following final same-source checks pass:
 
@@ -136,7 +239,7 @@ and D07 client capture/retry to original srvvdm.c/vdm.c bodies. D10 classifier
 remains original GetBinaryTypeW/BaseIsDosApplication. Modern resources and
 transport are the retained finite boundaries, not alternate policy owners.
 
-### Blocking finding: loss of an admitted broker
+### P1/P2 blocking finding: loss of an admitted broker
 
 The planned S5 abnormal-broker-loss requirement was not discharged by the
 older S5 closure or by the positive rows above. S10 now includes its failing
@@ -154,12 +257,12 @@ VER/EXIT trial also timed out but mixes in a new shell-out request, so the gated
 EXIT-only case is the selected failure evidence. No arbitrary watchdog,
 worker reaper, task replay or original guest change is introduced to hide it.
 
-**S10 and T412 remain open.** This delivery completes the verified repairs and
+**S10 and T412 remained open at P2.** That delivery completed the verified repairs and
 accounting, not T closure. Follow-up must define and prove loss handling for
 already-admitted parent/worker waits, without replaying an indeterminate task
 or modifying original COMMAND/CCPU policy. The next queued T is not admitted.
 
-### Published formal products
+### P1/P2 published formal products (superseded by P3)
 
 | Product | SHA-256 |
 | --- | --- |

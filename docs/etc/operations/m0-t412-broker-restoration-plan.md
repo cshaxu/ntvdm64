@@ -11,6 +11,13 @@ accounting and closure. The [single broker proposal](../../proposals/proposal-cr
 retains the detailed requirements; this plan supersedes its provisional stage
 grouping without creating another proposal.
 
+The S10 follow-up explicitly authorizes startup-only broker creation and
+runtime fail-stop on broker/worker loss, with launcher startup rollback.
+Protocol 3 binds the authenticated broker process lifetime. Original claimed
+worker lifetime and guest exit semantics remain unchanged; no replay or worker
+idle reaper is introduced. The S10 evidence records final same-artifact tests
+and the owner real-package acceptance gate.
+
 The owner subsequently approved completing the whole T according to this
 proposal, including the finite OS-managed resource-attachment exception. S1--S6
 advance sequentially on evidence, without repeated routine approval. Current

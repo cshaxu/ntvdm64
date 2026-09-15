@@ -5,8 +5,14 @@ empty-broker drain by querying the same authenticated endpoint's interface IDs.
 Only a completed matching Connect exposes original service calls. The dormant
 Check scalar encoder now zeroes receipt slots; actual Check command encoding
 continues to own and initialize its complete prefix. Original policies and
-wire layouts are unchanged. Admitted-broker loss remains explicitly unclosed
-in the S10 evidence, not hidden by replay or worker retirement.
+command layouts are unchanged. S10's owner-approved follow-up adds protocol 3
+broker lifetime attachment and fail-stop containment, not replay or a reaper.
+`base_rpc_client.c` watches the authenticated broker and aborts locally with
+1722 on death. `base_service.c` classifies an unsignalled task before original
+worker cleanup removes its record, returning 1067 instead of false success.
+Rundown invokes original UndoCreation for unclaimed launches; claimed workers
+retain reservation resources until process exit. These finite bindings replace
+unavailable CSR transport lifetime, not original DOS/WOW algorithms.
 
 T412 S9's BaseClient RPC binding consumes the explicitly shared
 `app/version.h` identity metadata, not app behavior. It checks both protocol

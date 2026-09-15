@@ -6,6 +6,9 @@
 #include <windows.h>
 #include <stdint.h>
 DWORD OpenNtBaseClientConnectCurrent(void);
+/* Arm only after launcher creation rollback is no longer required. Workers
+ * arm immediately after Connect, before entering guest code. */
+DWORD OpenNtBaseClientWatchBroker(void);
 void OpenNtBaseClientDisconnectCurrent(void);
 /* App-only launch composition over the authenticated connection.  These do
  * not carry Console or command data: original CheckVDM owns both locally. */

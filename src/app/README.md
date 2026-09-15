@@ -3,7 +3,7 @@
 `version.h` is the sole shared application identity for all three executables.
 `APP_VERSION` is `0.0.<admitted T number>` (currently `0.0.412`); S/P changes
 do not independently change that version. `APP_PROTOCOL_VERSION` identifies
-the incompatible RPC service contract (currently 2, matching service.idl 2.0).
+the incompatible RPC service contract (currently 3, matching service.idl 3.0).
 Incompatible changes within a T must advance the protocol. Launcher and worker
 link the same metadata-consuming RPC client; BaseSrv uses the same header.
 Connect requires exact protocol and zero-padded application-version agreement
@@ -14,6 +14,16 @@ If a created worker rejects the version before connecting, run16 observes its
 process exit alongside the parent event and invokes original creation rollback;
 it must not hang waiting for a task that never started. Ordinary guest results
 still follow the original completion path.
+
+Protocol 3 adds an authenticated, non-inheritable wait-only broker process
+attachment. Connected clients abort with 1722 if that exact process dies;
+there is no runtime restart/replay. Startup alone can start a missing broker.
+An uncompleted task whose worker dies fails with 1067. Launcher rundown
+rolls back unclaimed startup resources but preserves an already claimed VDM's
+original lifetime; its outstanding reservation lives until worker exit.
+Before Prepare, an atomic non-inherited startup Job prevents a dead launcher
+from leaving a suspended unregistered worker. Its kill-on-close limit is removed
+after Prepare; it is not a worker runtime/reuse policy.
 
 Application composition is deliberately split by process role:
 

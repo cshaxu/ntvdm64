@@ -1,5 +1,11 @@
 # broker
 
+Current protocol 3 adds BrokerProcess: only a matching authenticated context
+can obtain a SYNCHRONIZE-only server-process attachment. It grants no process
+termination or duplication rights, is not inherited, and is closed on client
+disconnect. The client waits for that exact process, so a replacement broker
+cannot silently take over a running command. Protocol 1/2 peers are rejected.
+
 T412 S9 adds a strict Connect handshake: RPC interface 2.0 plus copied protocol
 number and fixed 32-byte application-version fields in both directions.
 All three products share `app/version.h` metadata. The server authenticates

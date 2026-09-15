@@ -43,4 +43,7 @@ DWORD OpenNtBaseReservationRetainWorker(OPENNT_BASE_RESERVATIONS *,uint64_t rese
     DWORD launcher_pid,DWORD launcher_generation,HANDLE *worker);
 DWORD OpenNtBaseReservationRelease(OPENNT_BASE_RESERVATIONS *,uint64_t reservation,
     DWORD launcher_pid,DWORD launcher_generation);
+/* Dead launcher rollback: terminate only its not-yet-claimed worker. */
+BOOL OpenNtBaseReservationAbandon(OPENNT_BASE_RESERVATIONS *,uint64_t reservation);
+void OpenNtBaseReservationCollectAbandoned(OPENNT_BASE_RESERVATIONS *,uint64_t reservation);
 #endif

@@ -192,6 +192,25 @@ is authorized without that per-family result-contract review.
 
 ## Runtime cardinality
 
+### Standalone process failure contract
+
+Run16 may start a missing broker during startup. After connection/task admission,
+there is no automatic runtime reconnect, task replay or replacement worker.
+Protocol 3 supplies an authenticated wait-only broker process capability;
+connected workers and running launchers fail with 1722 if that process exits.
+An unfinished task whose worker exits fails with 1067 rather than interpreting
+the original record-removal zero as success. Original task results and normal
+worker lifecycle remain unchanged; this is an owner-approved standalone fault
+contract, not a recovered kernel/CSRSS behavior.
+
+Launcher death rolls back an unclaimed startup through original UndoCreation.
+A temporary non-inherited Job installed atomically at worker creation protects
+the interval before broker registration; its kill-on-close policy is disarmed
+after Prepare. A claimed worker keeps its original lifetime and retains needed
+reservation resources until exit, independent of its launcher's lifetime.
+Other workers are not killed when one launcher or worker exits. No worker idle
+timer is introduced; the broker retains its existing empty-only grace.
+
 The current runtime binds exactly one active imported MVDM host context to each
 `ntvdm.exe` process. Multiple processes may run concurrently. Inside one
 session, original DOS `EXEC`, COMMAND child/re-entry behavior and multiple

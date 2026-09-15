@@ -60,6 +60,10 @@ struct OPENNT_BASE_CONNECTION {
     HANDLE console;
     BOOL wow;
     BOOL retired;
+    BOOL pending_creation;
+    BOOL registered_worker;
+    HANDLE parent_wait; /* Borrowed from this connection's receipt table. */
+    BOOL worker_failed;
     LIST_ENTRY service_link;
     LIST_ENTRY retired_link;
 };
@@ -68,6 +72,9 @@ typedef struct OPENNT_BASE_WORKER_WATCH {
     OPENNT_BASE_SERVICE *service;
     CSR_PROCESS process;
     HANDLE wait;
+    HANDLE console;
+    BOOL wow;
+    uint64_t reservation;
 } OPENNT_BASE_WORKER_WATCH;
 typedef struct OPENNT_BASE_CONSOLE_CANDIDATE {
     HANDLE process;
@@ -91,9 +98,22 @@ static VOID CALLBACK service_worker_terminated(PVOID context,BOOLEAN fired)
     (void)fired;
     if (!watch || !watch->service) return;
     EnterCriticalSection(&watch->service->lock);
+    /* Original cleanup wakes waiters and removes records; a later original
+     * exit-code query then returns zero for a missing record. Preserve that
+     * body, but classify an unsignalled task as failed BEFORE removing it.
+     * These are original notification events (non-consuming zero wait). */
+    for (entry=watch->service->connections.Flink;
+         entry!=&watch->service->connections;entry=entry->Flink) {
+        OPENNT_BASE_CONNECTION *parent=CONTAINING_RECORD(entry,OPENNT_BASE_CONNECTION,service_link);
+        if (!parent->process.fVDM && parent->wow==watch->wow &&
+            parent->console==watch->console && parent->parent_wait &&
+            WaitForSingleObject(parent->parent_wait,0)==WAIT_TIMEOUT)
+            parent->worker_failed=TRUE;
+    }
     /* Equivalent to the selected BaseClientDisconnectRoutine: a one-shot
      * authenticated process-exit signal, never queue polling or a reaper. */
     BaseSrvCleanupVDMResources(&watch->process);
+    OpenNtBaseReservationCollectAbandoned(watch->service->reservations,watch->reservation);
     /* CSR removes the dead process during disconnect rundown.  A standalone
      * RPC context can outlive an abruptly killed client, so detach its local
      * registration now; keep its opaque context until rundown to avoid UAF. */
@@ -243,6 +263,51 @@ static DWORD service_wait_resolve(OPENNT_BASE_CONNECTION *connection,DWORD gener
     return broker_vdm_receipt_resolve(&connection->streams,generation,(uint32_t)(ULONG_PTR)receipt,
         role,event);
 }
+/* RPC rundown replaces only unavailable CSR transport. Original UndoCreation
+ * still owns record/stream cleanup. A claimed VDM is no longer the launcher's
+ * child resource to kill: its guest lifetime and process watch remain intact. */
+static void service_abandon_launch(OPENNT_BASE_CONNECTION *connection)
+{
+    BOOL claimed=FALSE;
+    if (connection->process.fVDM) return;
+    if (connection->reservation)
+        claimed=OpenNtBaseReservationAbandon(connection->service->reservations,connection->reservation);
+    if (claimed)
+        OpenNtBaseReservationCollectAbandoned(connection->service->reservations,connection->reservation);
+    if (connection->pending_creation && !claimed) {
+        BASE_API_MSG message={0};
+        CSR_THREAD thread={0};
+        PCSR_THREAD previous_thread;
+        OPENNT_BASE_PROCESS_REGISTRY *previous_registry;
+        OPENNT_BASE_SERVICE_RESOURCES resources;
+        const OPENNT_BASE_RESOURCE_BINDING *previous;
+        message.u.UpdateVDMEntry.ConsoleHandle=connection->wow ? (HANDLE)-1 :
+            (connection->task ? NULL : connection->console);
+        message.u.UpdateVDMEntry.iTask=connection->task;
+        message.u.UpdateVDMEntry.BinaryType=connection->wow ? BINARY_TYPE_WIN16 : BINARY_TYPE_DOS;
+        message.u.UpdateVDMEntry.EntryIndex=UPDATE_VDM_UNDO_CREATION;
+        message.u.UpdateVDMEntry.VDMCreationState=connection->registered_worker ?
+            VDM_FULLY_CREATED : VDM_PARTIALLY_CREATED;
+        service_resources_init(&resources,connection,BROKER_VDM_PARENT_WAIT);
+        thread.Process=&connection->process;
+        thread.ClientId.UniqueProcess=connection->process.ClientId.UniqueProcess;
+        previous_thread=OpenNtBaseBindServerRequestThread(&thread);
+        previous_registry=OpenNtBaseBindProcessRegistry(&connection->service->registry);
+        previous=OpenNtBaseBindResources(&resources.binding);
+        OpenNtBaseDispatchOperation((PCSR_API_MSG)&message,BROKER_VDM_UPDATE,sizeof(message.u.UpdateVDMEntry));
+        OpenNtBaseBindResources(previous);
+        OpenNtBaseBindProcessRegistry(previous_registry);
+        OpenNtBaseBindServerRequestThread(previous_thread);
+        service_resources_release(&resources);
+        service_trace_operation("launcher-abandon",0,(NTSTATUS)message.ReturnValue);
+    }
+    if (connection->reservation && !claimed) {
+        OpenNtBaseReservationRelease(connection->service->reservations,connection->reservation,
+            (DWORD)connection->process.ClientId.UniqueProcess,connection->process.SequenceNumber);
+        connection->reservation=0;
+    }
+    connection->pending_creation=FALSE;
+}
 /* Original guarded USER hook is absent in standalone CLI composition. */
 PFNNOTIFYPROCESSCREATE UserNotifyProcessCreate=NULL;
 OPENNT_BASE_SERVICE *OpenNtBaseServiceStart(void)
@@ -373,6 +438,9 @@ DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *service,HANDLE process,
                 watch->process.ClientId=connection->process.ClientId;
                 watch->process.SequenceNumber=connection->process.SequenceNumber;
                 watch->process.fVDM=TRUE;
+                watch->console=console;
+                watch->wow=shared_wow;
+                watch->reservation=reservation;
                 if (!RegisterWaitForSingleObject(&watch->wait,watch->process.ProcessHandle,
                     service_worker_terminated,watch,INFINITE,WT_EXECUTEONLYONCE)) {
                     error=GetLastError();
@@ -402,6 +470,7 @@ DWORD OpenNtBaseServiceDisconnect(OPENNT_BASE_CONNECTION *connection)
     if (!connection) return ERROR_INVALID_PARAMETER;
     service=connection->service;
     EnterCriticalSection(&service->lock);
+    service_abandon_launch(connection);
     /* A client RPC context may close while resident COMMAND remains alive.
      * Only the retained process-exit watch may invoke the original cleanup. */
     if (connection->retired) {
@@ -512,9 +581,17 @@ DWORD OpenNtBaseServicePrepareWorker(OPENNT_BASE_CONNECTION *connection,DWORD pi
 DWORD OpenNtBaseServiceReleaseReservation(OPENNT_BASE_CONNECTION *connection,DWORD pid,
     DWORD generation,uint64_t reservation)
 {
+    DWORD error;
     if (!connection) return ERROR_INVALID_PARAMETER;
     if (!OpenNtBaseServicePeer(connection,pid,generation)) return ERROR_ACCESS_DENIED;
-    return OpenNtBaseReservationRelease(connection->service->reservations,reservation,pid,generation);
+    EnterCriticalSection(&connection->service->lock);
+    error=OpenNtBaseReservationRelease(connection->service->reservations,reservation,pid,generation);
+    if (!error) {
+        connection->reservation=0; connection->pending_creation=FALSE;
+        connection->parent_wait=NULL; connection->worker_failed=FALSE;
+    }
+    LeaveCriticalSection(&connection->service->lock);
+    return error;
 }
 
 BOOL OpenNtBaseServiceWorkerReservation(OPENNT_BASE_CONNECTION *connection,uint64_t *reservation,
@@ -692,12 +769,29 @@ DWORD OpenNtBaseServiceCheck(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD 
     service_resources_release(&resources);
     if (!status && NT_SUCCESS((NTSTATUS)message.ReturnValue))
         connection->wow=message.u.CheckVDM.BinaryType==BINARY_TYPE_WIN16;
+    if (!status && NT_SUCCESS((NTSTATUS)message.ReturnValue) &&
+        message.u.CheckVDM.VDMState==VDM_NOT_PRESENT) {
+        connection->pending_creation=TRUE;
+        connection->task=message.u.CheckVDM.iTask;
+        connection->registered_worker=FALSE;
+        connection->worker_failed=FALSE;
+        connection->parent_wait=NULL;
+    }
     /* Once source has published the no-console record, the launcher and its
      * reservation must use the new identity.  The worker's first PIF request
      * then binds this record, not the resident COMMAND ConsoleRecord. */
     if (!status && NT_SUCCESS((NTSTATUS)message.ReturnValue) && separate_dos &&
         message.u.CheckVDM.VDMState==VDM_NOT_PRESENT)
         connection->console=separate_console;
+    if (!status && NT_SUCCESS((NTSTATUS)message.ReturnValue) &&
+        message.u.CheckVDM.VDMState==VDM_PRESENT_AND_READY) {
+        HANDLE event=NULL;
+        if (!service_wait_resolve(connection,generation,message.u.CheckVDM.WaitObjectForParent,
+                BROKER_VDM_PARENT_WAIT,&event)) {
+            connection->parent_wait=event;
+            connection->worker_failed=FALSE;
+        }
+    }
     LeaveCriticalSection(&connection->service->lock);
     if (status && !message.ReturnValue) message.ReturnValue=status;
     if (separate_dos)
@@ -769,10 +863,17 @@ DWORD OpenNtBaseServiceUpdate(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD
     if (!OpenNtBaseEncodeUpdateReply(&message,request,generation,output,capacity,required)) {
         error=ERROR_INVALID_DATA; goto done;
     }
+    if (NT_SUCCESS((NTSTATUS)message.ReturnValue)) {
+        if (message.u.UpdateVDMEntry.EntryIndex==UPDATE_VDM_PROCESS_HANDLE)
+            connection->registered_worker=TRUE;
+        if (message.u.UpdateVDMEntry.EntryIndex==UPDATE_VDM_UNDO_CREATION)
+            connection->pending_creation=FALSE;
+    }
     *parent_receipt=(uint32_t)(ULONG_PTR)message.u.UpdateVDMEntry.WaitObjectForParent;
     error=service_wait_resolve(connection,generation,message.u.UpdateVDMEntry.WaitObjectForParent,
         BROKER_VDM_PARENT_WAIT,parent_event);
     if (error) goto done;
+    connection->parent_wait=*parent_event;
     error=ERROR_SUCCESS;
 done:
     LeaveCriticalSection(&connection->service->lock);
@@ -791,6 +892,7 @@ DWORD OpenNtBaseServiceExitCode(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWO
     if (!connection || !exit_code || !parent_receipt ||
         !OpenNtBaseServicePeer(connection,pid,generation)) return ERROR_INVALID_PARAMETER;
     EnterCriticalSection(&connection->service->lock);
+    if (connection->worker_failed) { error=ERROR_PROCESS_ABORTED; goto done; }
     if (!connection->console) { error=ERROR_INVALID_HANDLE; goto done; }
     message.u.GetVDMExitCode.ConsoleHandle=connection->console;
     /* srvvdm.c owns this exact receipt-shaped hWaitForParent value. */

@@ -193,7 +193,7 @@ int main(int argc,char **argv)
     CHECK(WaitForSingleObject(laterParentEvent,5000)==WAIT_OBJECT_0);
     { DWORD exitCode=STILL_ACTIVE;
       CHECK(OpenNtBaseServiceExitCode(later,laterChild.dwProcessId,laterGeneration,
-          laterParentReceipt,&exitCode)==ERROR_SUCCESS && exitCode==0); }
+          laterParentReceipt,&exitCode)==ERROR_PROCESS_ABORTED); }
     CloseHandle(laterParentEvent);laterParentEvent=NULL;
     CloseHandle(parentEvent);parentEvent=NULL;
     CHECK(OpenNtBaseServiceDisconnect(worker)==ERROR_SUCCESS);worker=NULL;
@@ -262,7 +262,25 @@ int main(int argc,char **argv)
     TerminateProcess(wowChild.hProcess,0);WaitForSingleObject(wowChild.hProcess,INFINITE);
     CloseHandle(wowChild.hThread);CloseHandle(wowChild.hProcess);wowChild.hThread=wowChild.hProcess=NULL;
     Sleep(100);
+    /* Launcher dies after Check/Prepare but before worker Connect. Exercise
+     * the same Disconnect entry used by real RPC rundown, including original
+     * UndoCreation and termination of the still-suspended, unclaimed child. */
+    CHECK(OpenNtBaseEncodeCheckCommand(&check,8,launcherGeneration,NULL,0,&wireBytes));
+    free(wire);wire=malloc(wireBytes);
+    CHECK(wire && OpenNtBaseEncodeCheckCommand(&check,8,launcherGeneration,wire,wireBytes,&wireBytes));
+    CHECK(OpenNtBaseServiceCheck(launcher,GetCurrentProcessId(),launcherGeneration,
+        wire,wireBytes,answer,answerBytes,&answerBytes,&parentEvent,&parentReceipt)==ERROR_SUCCESS);
+    CHECK(OpenNtBaseApplyCheckReply(answer,answerBytes,launcherGeneration,8,&reply));
+    CHECK(reply.ReturnValue==STATUS_SUCCESS && reply.u.CheckVDM.VDMState==VDM_NOT_PRESENT);
+    CHECK(OpenNtBaseServiceCreateReservation(launcher,GetCurrentProcessId(),launcherGeneration,
+        reply.u.CheckVDM.iTask,&wowReservation)==ERROR_SUCCESS);
+    CHECK(CreateProcessA(NULL,command,NULL,NULL,FALSE,CREATE_SUSPENDED,NULL,NULL,&startup,&wowChild));
+    CHECK(OpenNtBaseServicePrepareWorker(launcher,GetCurrentProcessId(),launcherGeneration,
+        wowReservation,wowChild.hProcess)==ERROR_SUCCESS);
     CHECK(OpenNtBaseServiceDisconnect(launcher)==ERROR_SUCCESS);launcher=NULL;
+    CHECK(WaitForSingleObject(wowChild.hProcess,5000)==WAIT_OBJECT_0);
+    CloseHandle(wowChild.hThread);CloseHandle(wowChild.hProcess);
+    wowChild.hThread=wowChild.hProcess=NULL;
     CHECK(OpenNtBaseServiceIsEmpty(service));
     CHECK(OpenNtBaseServiceStop(service));service=NULL;
     WaitForSingleObject(child.hProcess,INFINITE);

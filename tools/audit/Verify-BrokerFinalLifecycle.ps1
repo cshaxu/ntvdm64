@@ -4,7 +4,10 @@ param(
     [string]$PackageRoot='O:\winnt',
     [Parameter(Mandatory)][string]$LogPrefix,
     [string]$BarrierBroker,
-    [switch]$BrokerLoss
+    [switch]$BrokerLoss,
+    [switch]$WorkerLoss,
+    [switch]$LauncherLoss,
+    [switch]$TwoWorkers
 )
 $ErrorActionPreference='Stop'
 $Observer=(Resolve-Path -LiteralPath $Observer).Path
@@ -65,24 +68,52 @@ function StopOwnedWorkers {
 }
 try {
     [Environment]::SetEnvironmentVariable('MVDM_BASESRV_TRACE_PATH',$trace)
-    if($BrokerLoss){
+    if($BrokerLoss -or $WorkerLoss -or $LauncherLoss){
         $inputGate=[Threading.EventWaitHandle]::new($false,[Threading.EventResetMode]::ManualReset,'Local\MvdmS10BrokerLost')
         [Environment]::SetEnvironmentVariable('MVDM_OBSERVER_INPUT_GATE','Local\MvdmS10BrokerLost')
         $loss=StartObserved 'broker-loss' 'COMMAND.COM' "exit`r"
+        $other=if($TwoWorkers){StartObserved 'unrelated-worker' 'COMMAND.COM' "exit`r"}else{$null}
+        $requiredTasks=if($TwoWorkers){2}else{1}
         $deadline=[DateTime]::UtcNow.AddSeconds(15)
-        while((TraceText) -notmatch 'phase=get-dispatched state=00000200' -and [DateTime]::UtcNow -lt $deadline){Start-Sleep -Milliseconds 50}
-        if((TraceText) -notmatch 'phase=get-dispatched state=00000200'){throw 'No admitted DOS task before broker-loss test'}
+        while([regex]::Matches((TraceText),'phase=get-dispatched state=00000200').Count -lt $requiredTasks -and [DateTime]::UtcNow -lt $deadline){Start-Sleep -Milliseconds 50}
+        if([regex]::Matches((TraceText),'phase=get-dispatched state=00000200').Count -lt $requiredTasks){throw 'No admitted DOS task before loss test'}
         CollectOwned
         $servers=@(PackageProcesses | Where-Object {$_.Name -eq 'basesrv.exe' -and $owned.Contains([int]$_.ProcessId)})
         if($servers.Count -ne 1){throw 'Cannot identify owned broker'}
-        Stop-Process -Id $servers[0].ProcessId
+        $workers=@(PackageProcesses | Where-Object {$_.Name -eq 'ntvdm.exe' -and $owned.Contains([int]$_.ProcessId)})
+        $launchers=@(PackageProcesses | Where-Object {$_.Name -eq 'run16.exe' -and $owned.Contains([int]$_.ProcessId)})
+        $launcher=@($launchers | Where-Object {$_.ParentProcessId -eq $loss.Process.Id})
+        if($launcher.Count -ne 1){throw 'Cannot identify observer-owned launcher'}
+        $launcherId=[int]$launcher[0].ProcessId
+        $worker=@($workers | Where-Object {$_.ParentProcessId -eq $launcherId})
+        if($workers.Count -ne $requiredTasks -or $worker.Count -ne 1){throw 'Cannot identify owned pairs'}
+        $victim=if($WorkerLoss){$worker[0]}elseif($LauncherLoss){$launchers | Where-Object {$_.ProcessId -eq $launcherId}}else{$servers[0]}
+        Stop-Process -Id $victim.ProcessId
+        if($TwoWorkers -and !$BrokerLoss){
+            Start-Sleep -Milliseconds 500
+            $otherWorker=$workers | Where-Object {$_.ProcessId -ne $worker[0].ProcessId}
+            if(!(PackageProcesses | Where-Object {$_.ProcessId -eq $otherWorker.ProcessId})){throw 'Unrelated worker was terminated'}
+        }
+        if($LauncherLoss -and !(PackageProcesses | Where-Object {$_.ProcessId -eq $worker[0].ProcessId})){throw 'Claimed worker killed with launcher'}
         [void]$inputGate.Set()
         if(!$loss.Process.WaitForExit(55000)){throw 'Broker-loss observer timeout'}
         $record=Get-Content -LiteralPath $loss.Report -Raw
         if($record -notmatch '(?m)^result=exited' -or $record -match '(?m)^exit=0x00000000'){
-            throw 'Broker loss did not produce a bounded explicit failure after the guest EXIT request'
+            throw 'Process loss did not produce a bounded explicit failure'
         }
-        $results.Add('PASS broker loss after DOS admission: explicit nonzero failure, no replay')
+        if($other){FinishObserved $other $(if($BrokerLoss){1722}else{0})}
+        if($BrokerLoss){
+            $deadline=[DateTime]::UtcNow.AddSeconds(5)
+            while((PackageProcesses | Where-Object {$_.Name -eq 'ntvdm.exe'}) -and [DateTime]::UtcNow -lt $deadline){Start-Sleep -Milliseconds 50}
+            if(PackageProcesses | Where-Object {$_.Name -eq 'ntvdm.exe'}){throw 'Worker survived broker loss'}
+            $results.Add('PASS broker loss: launcher and worker exit, no replay')
+        } else {
+            if(!(PackageProcesses | Where-Object {$_.ProcessId -eq $servers[0].ProcessId})){throw 'Unrelated broker terminated'}
+            $results.Add("PASS $($victim.Name) loss: bounded parent outcome, broker survives")
+            StopOwnedWorkers
+        }
+        Start-Sleep -Seconds 2
+        $after=StartObserved 'after-loss' 'MEM.EXE'; FinishObserved $after 0
     } elseif($BarrierBroker){
         $BarrierBroker=(Resolve-Path -LiteralPath $BarrierBroker).Path
         if($BarrierBroker -notmatch '\\build\\M0-T412\\S10\\'){throw 'Barrier binary must remain in S10 build'}

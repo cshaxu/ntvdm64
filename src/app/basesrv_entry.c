@@ -208,6 +208,20 @@ error_status_t Server_Connect(handle_t binding,HANDLE process,ULONG protocol,
     basesrv_trace("connect",pid,status);
     return status;
 }
+error_status_t Server_BrokerProcess(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+    ULONG generation,HANDLE *server)
+{
+    DWORD pid,error;
+    *server=NULL;
+    error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    if (error) return error;
+    if (!OpenNtBaseServicePeer(connection,pid,generation)) return ERROR_ACCESS_DENIED;
+    /* RPC consumes this non-inheritable, wait-only duplicate. The receiver
+     * cannot terminate or modify the server through this capability. */
+    if (!DuplicateHandle(GetCurrentProcess(),GetCurrentProcess(),GetCurrentProcess(),
+            server,SYNCHRONIZE,FALSE,0)) return GetLastError();
+    return ERROR_SUCCESS;
+}
 error_status_t Server_First(handle_t binding,VDM_CONNECTION connection,HANDLE process,ULONG generation,ULONG *first)
 {
     DWORD pid;
@@ -436,7 +450,7 @@ int main(void)
         (void)OpenNtBaseServiceStop(service);
         return (int)error;
     }
-    result=RpcServerRegisterIf3(Server_vdm_service_v2_0_s_ifspec,NULL,NULL,
+    result=RpcServerRegisterIf3(Server_vdm_service_v3_0_s_ifspec,NULL,NULL,
         RPC_IF_ALLOW_SECURE_ONLY | RPC_IF_ALLOW_LOCAL_ONLY,RPC_C_LISTEN_MAX_CALLS_DEFAULT,
         (unsigned)-1,authorize,NULL);
     if (!result) {
@@ -447,7 +461,7 @@ int main(void)
          * normal worker/launcher teardown. */
         basesrv_schedule_empty_stop();
         result=RpcServerListen(1,RPC_C_LISTEN_MAX_CALLS_DEFAULT,FALSE);
-        RpcServerUnregisterIf(Server_vdm_service_v2_0_s_ifspec,NULL,TRUE);
+        RpcServerUnregisterIf(Server_vdm_service_v3_0_s_ifspec,NULL,TRUE);
     }
     basesrv_cancel_empty_timer();
     if (!OpenNtBaseServiceStop(service)) return ERROR_BUSY;

@@ -17,6 +17,9 @@ typedef struct OPENNT_BASE_RPC_CLIENT {
     RPC_BINDING_HANDLE binding;
     VDM_CONNECTION connection;
     HANDLE process;
+    HANDLE server;
+    HANDLE stop;
+    HANDLE watcher;
     ULONG generation;
 } OPENNT_BASE_RPC_CLIENT;
 
@@ -30,6 +33,23 @@ static ULONG parent_receipt;
  * close it.  This is one VDM client's single ConsoleRecord wait, not a task
  * scheduler or a reusable-worker policy. */
 static HANDLE worker_wait_event;
+
+/* Owner-approved standalone failure containment, not guest termination or
+ * BaseSrv scheduling. Never reconnect a live command to a replacement server.
+ * TerminateProcess avoids deadlocking in CRT/DLL teardown while other threads
+ * are inside guest or RPC code after the service has disappeared. */
+static DWORD WINAPI broker_lifetime_watch(void *context)
+{
+    OPENNT_BASE_RPC_CLIENT *state=context;
+    HANDLE waits[2]={state->stop,state->server};
+    DWORD result=WaitForMultipleObjects(2,waits,FALSE,INFINITE);
+    if (result!=WAIT_OBJECT_0) {
+        /* Do not write redirected stderr here: a full pipe can itself block
+         * forever. The process exit status is the failure witness. */
+        TerminateProcess(GetCurrentProcess(),RPC_S_SERVER_UNAVAILABLE);
+    }
+    return 0;
+}
 
 static BOOL receipt_seen(const ULONG receipts[3],ULONG limit,ULONG receipt)
 {
@@ -462,7 +482,7 @@ static DWORD classify_missing_interface(RPC_BINDING_HANDLE binding)
     RPC_STATUS status,uuid_status;
     unsigned int index;
     DWORD result=RPC_S_SERVER_UNAVAILABLE;
-    status=RpcIfInqId(Client_vdm_service_v2_0_c_ifspec,&expected);
+    status=RpcIfInqId(Client_vdm_service_v3_0_c_ifspec,&expected);
     if (status) return status;
     status=RpcMgmtInqIfIds(binding,&interfaces);
     if (status) return status;
@@ -528,6 +548,16 @@ DWORD OpenNtBaseClientConnectCurrent(void)
     if (connection) { client.connection=connection; client.generation=generation; }
     if (!error && (!connection || !generation)) error=ERROR_INVALID_DATA;
     if (error) goto done;
+    RpcTryExcept {
+        error=Client_BrokerProcess(client.binding,client.connection,client.process,
+            client.generation,&client.server);
+    }
+    RpcExcept(1) { error=RpcExceptionCode(); }
+    RpcEndExcept
+    if (error) goto done;
+    if (!client.server || WaitForSingleObject(client.server,0)!=WAIT_TIMEOUT) {
+        error=RPC_S_SERVER_UNAVAILABLE; goto done;
+    }
     error=ERROR_SUCCESS;
 done:
     if (text) RpcStringFreeW(&text);
@@ -535,9 +565,30 @@ done:
     return error;
 }
 
+DWORD OpenNtBaseClientWatchBroker(void)
+{
+    if (!client.server) return ERROR_INVALID_STATE;
+    if (client.watcher) return ERROR_ALREADY_EXISTS;
+    client.stop=CreateEventW(NULL,TRUE,FALSE,NULL);
+    if (!client.stop) return GetLastError();
+    client.watcher=CreateThread(NULL,0,broker_lifetime_watch,&client,0,NULL);
+    if (!client.watcher) {
+        DWORD error=GetLastError();
+        CloseHandle(client.stop);client.stop=NULL;
+        return error;
+    }
+    return ERROR_SUCCESS;
+}
+
 void OpenNtBaseClientDisconnectCurrent(void)
 {
     VDM_CONNECTION connection;
+    if (client.watcher) {
+        SetEvent(client.stop);
+        WaitForSingleObject(client.watcher,INFINITE);
+        CloseHandle(client.watcher);
+    }
+    if (client.stop) CloseHandle(client.stop);
     if (client.connection && client.binding && client.process) {
         connection=client.connection;
         RpcTryExcept {
@@ -548,6 +599,7 @@ void OpenNtBaseClientDisconnectCurrent(void)
         RpcEndExcept
     }
     if (client.process) CloseHandle(client.process);
+    if (client.server) CloseHandle(client.server);
     if (client.binding) RpcBindingFree(&client.binding);
     if (worker_wait_event) CloseHandle(worker_wait_event);
     ZeroMemory(&client,sizeof(client));
