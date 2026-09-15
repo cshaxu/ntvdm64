@@ -223,6 +223,14 @@ receipts. This is positive byte-producing stdout and stderr evidence for the
 real guest path. It deliberately does not claim guest `>` redirection, which
 remains the separately recorded Redirector boundary.
 
+The fixed-Console nonzero counterpart at
+`O:\ntvdm64\logs\m0-t412-s4-bop-shell-nonzero-r1` used guest payload
+`run16.exe exit 37`. Its original native-child phase 1 records `0x25`, and
+the retained COMMAND service-08 return records `AX=0025`; the surrounding
+COMMAND session then follows its normal zero-valued session-return path.
+Thus nonzero native-child status reaches the original guest return service;
+the observer's outer zero is not a status-loss claim.
+
 ## Interpretation
 
 Confidence is high that the original Update-before-Connect ordering and
