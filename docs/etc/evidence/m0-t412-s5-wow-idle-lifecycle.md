@@ -498,3 +498,53 @@ drain-versus-arrival race: the available `O:\winnt` `run16.exe` and
 physical-mapping change is still uncommitted.  Their mixed-package MEM run
 left a worker resident and therefore never reached the empty predicate.  That
 observation is invalid for the race gate and was cleaned up by exact path.
+
+### Arrival during broker empty grace
+
+A separate controlled observation used a broker that had entered its
+60-second no-client grace.  Near the end of that interval, positional
+`O:\winnt\run16.exe O:\winnt\MEM.EXE` returned `0`.  The same broker PID
+remained live and `O:\winnt\logs\m0-t412-s5-drain-arrival-race.trace`
+records its authenticated launcher connection and normal original
+`Check → Reserve → Prepare → worker Connect` sequence, with no `empty-stop`
+marker.  Exact test-owned broker and worker processes were then stopped.
+
+This proves the existing serialized `Connect` cancellation prevents a
+grace-period arrival from being treated as empty.  It is intentionally not
+presented as a proof of the narrower timer-callback-in-progress race: that
+requires a controlled callback barrier rather than timing a real 60-second
+window.  The latter remains an S5 test requirement.
+
+### DOS command arrival with a resident worker
+
+The reported `run16 MEM` **resident-worker scenario** was reproduced against
+the three-program package at `O:\winnt` with default-off
+`MVDM_BASESRV_TRACE_PATH` evidence enabled.  A first positional
+`run16.exe MEM.EXE` returned `0` and left one
+resident `ntvdm.exe`; a second positional invocation in that same Console
+also returned `0` within the 20-second bound.  The trace
+`O:\winnt\logs\m0-t412-s5-run16-reuse-20260914-212852.trace` records two
+separate original DOS command sequences, each with `Check → Reserve →
+Prepare → worker Connect → GetNextVDMCommand`; the second worker reports
+`first-no`.  The two test workers and singleton broker were then stopped by
+their exact test paths.
+
+This is deliberately **not** a pool or reaper: the original
+`BaseSrvDOSWorkerWaitPending` predicate distinguishes a record merely marked
+READY from a worker currently blocked in original `GetNextVDMCommand`.  When
+the resident COMMAND has not reached that wait, the existing selected
+`CheckDOS` no-console path creates a separate DOS session rather than giving
+the new parent an event no worker can signal.  The same source-derived
+condition is therefore exercised by the real process result, not inferred
+from a record state.
+
+`run16`'s broker-connect seam was rebuilt from the current x86 formal product
+object and copied to `O:\winnt\run16.exe` (SHA-256
+`2CB7DEB0B6C68ABC5617F21FDA7BC2B99A1C69F4F4F71620AB06CE9A7C7469E8`).
+It keeps a bounded 100 × 50 ms connection interval, starting a candidate only
+at attempts 0, 20 and 60.  Thus a candidate that loses an old endpoint race
+does not falsely make the launcher regard a broker as ready; a later candidate
+can own the endpoint after the old listener drains.  The normal fresh-launch
+and resident-worker observations above pass through this code.  A controlled
+timer-callback barrier is still required before claiming the narrowest
+callback-in-progress race has been reproduced.

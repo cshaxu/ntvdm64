@@ -99,24 +99,33 @@ static DWORD connect_broker(void)
     WCHAR broker[MAX_PATH];
     STARTUPINFOW startup = {sizeof(startup)};
     PROCESS_INFORMATION child = {0};
-    DWORD error = OpenNtBaseClientConnectCurrent(), attempt;
-    if (!error)
-        return ERROR_SUCCESS;
+    DWORD error=ERROR_GEN_FAILURE, attempt;
     if (!sibling_path(L"basesrv.exe", broker, MAX_PATH))
         return GetLastError();
-    /* A concurrent launcher may win endpoint creation.  CreateProcess only
-     * starts a candidate; successful authenticated Connect is readiness. */
-    if (!CreateProcessW(broker, NULL, NULL, NULL, FALSE, CREATE_NO_WINDOW, NULL, NULL,
-                        &startup, &child))
-        return GetLastError();
-    CloseHandle(child.hThread);
-    CloseHandle(child.hProcess);
+    /* A concurrent launcher may own a healthy endpoint, or may be in the
+     * broker-only empty-stop window.  Candidate creation is never readiness:
+     * an instance losing the endpoint race exits, while a candidate started
+     * after the old listener has drained becomes the fresh singleton. */
     for (attempt = 0; attempt < 100; ++attempt)
     {
-        Sleep(50);
         error = OpenNtBaseClientConnectCurrent();
         if (!error)
             return ERROR_SUCCESS;
+        /* Re-try only at bounded intervals.  This covers a listener which
+         * has stopped between the failed Connect and the first candidate's
+         * endpoint registration without turning the launcher into a broker
+         * supervisor or keeping any product-local lifecycle state. */
+        if (attempt==0 || attempt==20 || attempt==60)
+        {
+            if (CreateProcessW(broker, NULL, NULL, NULL, FALSE, CREATE_NO_WINDOW,
+                NULL, NULL, &startup, &child))
+            {
+                CloseHandle(child.hThread);
+                CloseHandle(child.hProcess);
+                ZeroMemory(&child,sizeof(child));
+            }
+        }
+        Sleep(50);
     }
     return error;
 }
