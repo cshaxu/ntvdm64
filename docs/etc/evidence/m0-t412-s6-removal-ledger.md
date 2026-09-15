@@ -73,10 +73,18 @@ or second worker entry remains.
 Generation and graph-reachability checks pass.  Direct x86 compilations of the
 new standalone binding and the original `ntvdm.c` entry succeed with the
 generated flags (the binding retains only the pre-existing `fopen` warning).
-The complete formal rebuild is not claimed: Ninja's verbose MSVC include-output
-path stalled in this environment, and the owner reported Defender detection
-during a previous hidden-process build attempt.  This work does not use that
-launch method.  No new formal-clean binary was staged to `O:\winnt`.
+A fresh, one-job graph at `build/M0-T412/S6/direct-entry-clean2` then compiled
+and linked all 465 `ntvdm.exe` prerequisites, followed by `run16.exe` and
+`basesrv.exe`.  It used the visible generated `run-ninja-parallel.cmd` path;
+there was no hidden process or Defender exclusion.
 
-S6 closure therefore still requires a security-approved, fully completed clean
-x86 rebuild followed by the S2--S5 same-build matrix and package hashes.
+The three linked products were published to the declared runtime root:
+
+| Product | Bytes | SHA-256 |
+| --- | ---: | --- |
+| `O:\winnt\run16.exe` | 244,224 | `F54C36F18DD95E5A6870F77B39161A106AEB1BDCD7493F642026032AA442B10E` |
+| `O:\winnt\basesrv.exe` | 259,072 | `A943C67F7B46E28445B35EA973EAC3B41ACBC4752DCD18E2A347ED5F6B6A6F1A` |
+| `O:\winnt\ntvdm.exe` | 3,245,056 | `40F61F4065BC75F7F13871CAFD9D87B3F8D5E725B88441B8BCB520A28E901F0E` |
+
+The S2--S5 same-build runtime matrix remains the behavioral gate; this ledger
+claims compilation, link and exact publication only, not guest acceptance.
