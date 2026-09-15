@@ -13,9 +13,10 @@
 typedef NTSTATUS (*OPENNT_USER_TEST_TOKEN_FOR_INTERACTIVE)(HANDLE,PLUID);
 extern OPENNT_USER_TEST_TOKEN_FOR_INTERACTIVE UserTestTokenForInteractive;
 
-/* Default-off evidence for the shared-WOW acquisition seam.  It writes only
- * operation state and status, never command text, guest addresses or handles. */
-static void service_trace_get(const char *phase,ULONG state,NTSTATUS status)
+/* Default-off evidence at the original Base VDM request boundary. It writes
+ * only operation state and status, never command text, guest addresses or
+ * handles. */
+static void service_trace_operation(const char *phase,ULONG state,NTSTATUS status)
 {
     CHAR path[MAX_PATH],line[160];
     DWORD length,written,saved=GetLastError();
@@ -533,6 +534,8 @@ DWORD OpenNtBaseServiceCheck(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD 
         connection->wow=message.u.CheckVDM.BinaryType==BINARY_TYPE_WIN16;
     LeaveCriticalSection(&connection->service->lock);
     if (status && !message.ReturnValue) message.ReturnValue=status;
+    service_trace_operation("check-dispatched",message.u.CheckVDM.VDMState,
+        (NTSTATUS)message.ReturnValue);
     if (!OpenNtBaseEncodeCheckReply(&message,request,generation,output,capacity,required))
         return ERROR_INVALID_PARAMETER;
     if (NT_SUCCESS((NTSTATUS)message.ReturnValue) &&
@@ -695,7 +698,7 @@ DWORD OpenNtBaseServiceGet(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD ge
         return ERROR_ACCESS_DENIED;
     error=OpenNtBasePrepareGetCommand(input,bytes,generation,&message,&state);
     if (error) return error;
-    service_trace_get("get-prepared",message.u.GetNextVDMCommand.VDMState,STATUS_SUCCESS);
+    service_trace_operation("get-prepared",message.u.GetNextVDMCommand.VDMState,STATUS_SUCCESS);
     EnterCriticalSection(&connection->service->lock);
     /* The original client sends -1 for the shared-WOW PIF/acquisition path;
      * that selects BaseSrv's WOW record and deliberately has no DOS Console.
@@ -719,7 +722,7 @@ DWORD OpenNtBaseServiceGet(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD ge
     OpenNtBaseBindProcessRegistry(previous_registry);
     OpenNtBaseBindServerRequestThread(previous_thread);
     if (status && !message.ReturnValue) message.ReturnValue=status;
-    service_trace_get("get-dispatched",message.u.GetNextVDMCommand.VDMState,
+    service_trace_operation("get-dispatched",message.u.GetNextVDMCommand.VDMState,
         (NTSTATUS)message.ReturnValue);
     if (!OpenNtBaseFinishGetCommand(&message,&state)) { error=ERROR_INVALID_DATA; goto done; }
     if (message.u.GetNextVDMCommand.StdIn || message.u.GetNextVDMCommand.StdOut ||
@@ -732,7 +735,7 @@ DWORD OpenNtBaseServiceGet(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD ge
                 connection->reservation,ids[index]) &&
             OpenNtBaseReservationResolveStream(connection->service->reservations,
                 connection->reservation,(uint32_t)(ULONG_PTR)ids[index],&standard[index])) {
-            service_trace_get("get-unresolved-stream",message.u.GetNextVDMCommand.VDMState,
+            service_trace_operation("get-unresolved-stream",message.u.GetNextVDMCommand.VDMState,
                 STATUS_INVALID_HANDLE);
             error=ERROR_INVALID_HANDLE;goto done;
         }
@@ -749,7 +752,7 @@ DWORD OpenNtBaseServiceGet(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD ge
      * copied VDM command record. */
     error=service_wait_resolve(connection,generation,message.u.GetNextVDMCommand.WaitObjectForVDM,
         BROKER_VDM_WORKER_WAIT,wait_event);
-    if (error) service_trace_get("get-unresolved-wait",message.u.GetNextVDMCommand.VDMState,
+    if (error) service_trace_operation("get-unresolved-wait",message.u.GetNextVDMCommand.VDMState,
         STATUS_INVALID_HANDLE);
     if (error) goto done;
     error=ERROR_SUCCESS;

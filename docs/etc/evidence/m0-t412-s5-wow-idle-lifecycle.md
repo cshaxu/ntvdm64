@@ -145,11 +145,32 @@ A single `cmd.exe` Console then launched the same positional `run16 MEM.EXE`
 twice. In `m0-t412-s5-same-console-probe-20260914-190456.log`, the first
 launcher has the expected `Check → Reserve → Prepare` sequence. The second
 authenticated launcher has `Check` but **no** second `Reserve`, `Prepare`, or
-worker `Connect`; the existing worker alone performs the subsequent original
-GetNext requests, and that second launcher has disconnected by the seven-
-second process snapshot. This is real-process evidence for same-Console
-resident-worker selection and command delivery. The probe's exact broker and
-worker PIDs were then terminated; no test process was retained.
+worker `Connect`; the existing worker alone performs the subsequently logged
+original GetNext requests, and that second launcher has disconnected by the
+seven-second process snapshot. This proves same-Console resident-record
+selection only. It does **not** prove that an already-interactive COMMAND
+worker consumed the second record or completed MEM. The probe's exact broker
+and worker PIDs were then terminated; no test process was retained.
+
+### Correction: resident COMMAND is not automatically fetchable
+
+The later real `run16 mem` hang established the omitted distinction. After a
+parent has collected an earlier command's exit code, original
+`BaseSrvGetVDMExitCode` changes the sole DOS record from
+`VDM_HAS_RETURNED_ERROR_CODE` to `VDM_READY`. A later original
+`BaseSrvCheckDOS` treats that state as reusable, changes it to
+`VDM_TO_TAKE_A_COMMAND`, returns `VDM_PRESENT_AND_READY`, and signals the
+worker event only when `hWaitForVDMDup` already exists. It does not establish
+that the worker is currently in `GetNextVDMCommand`.
+
+An interactive COMMAND prompt reaches that client call only through its
+source-owned child/re-entry routes (`cmdExec32` or `cmdReturnExitCode`), not
+merely because it is sitting at a prompt. Consequently the product cannot
+interpret `VDM_PRESENT_AND_READY` as an unconditional right for `run16` to
+wait forever. The apparent second-launcher success above is therefore not an
+acceptance result. S5 must recover the source-shaped re-entry/delivery
+contract, with trace evidence that a pending worker wait was signalled and
+then consumed, before same-Console `run16 MEM.EXE` can be accepted.
 
 Earlier redirected-stdio observations timed out with empty output because
 the launcher had no Console-standard handles. They are retained as a distinct
@@ -247,3 +268,49 @@ kill the worker. The attempted exact-root cleanup found PID 14592 already
 gone; the broker PID 48324 was then observed to emit `empty-stop` and exit.
 This is a noninteractive startup/exit observation, not acceptance of an
 interactive COMMAND/EDIT session or full WOW/WRITE behavior.
+
+## Package-local launcher discovery
+
+The owner-directed `run16_entry.c` change keeps image classification with the
+selected original `OpenNtBaseGetBinaryTypeW` caller.  It adds only product
+file discovery: for a bare target name, `run16.exe` first searches the
+directory containing the installed three-program package, then falls back to
+the ordinary process search path.  The selected classifier and the eventual
+`CreateProcessW` receive the resolved canonical path; this does not add a
+second header parser or program-type policy.
+
+The formal x86 S5 product rebuilt `run16.exe` from the changed translation
+unit and linked it against the unchanged formal BaseClient/broker libraries.
+Its SHA-256 is
+`2C24A5AEC75BDDE08686E46B58591CE2529AEE3743F8FFC6A2F2E68AF8101C06`.
+The companion formal products remain `basesrv.exe`
+`5EEC4226F6D98C8C4ABB20C408688BA93108B67EA315C8E1DC09D819B2110710`
+and `ntvdm.exe`
+`E0DEA3FDAC51BCABD47A01A979C53607BB2261ECE8A83F5BCB159D5F63D7F389`.
+
+The formal graph also required one source-neutral archive-order correction.
+`nt_inthk.c` is an original host translation unit which defines the CCPU40
+hardware/software/fault hook installation entry points.  Its archive had been
+scanned before the CCPU40 and DPMI archives first referenced those symbols.
+The `ntvdm.exe` link row now repeats the same original
+`original-softpc-host-roots.lib` at the tail.  No new provider, hook or
+runtime policy was added; the final formal graph reports `ninja: no work to
+do` after the x86 link completes.
+
+For a behavioral check, the staged `O:\ntvdm64\run16.exe` was launched
+with bare `MEM.EXE` while its working directory was
+`build/M0-T412/S5/package-search-cwd`, which contains no `MEM.EXE`.  The
+package directory does contain the immutable `O:\ntvdm64\MEM.EXE`.
+The final-runtime log
+`O:\ntvdm64\logs\m0-t412-s5-run16-final-sibling-search-20260914-195000.log`
+contains the authenticated worker connection marker:
+
+```
+NTVDM-S3 phase=connect status=00000000
+```
+
+The exact launcher PID 40248 and any child had naturally exited by the
+five-second observation.  This proves the final staged `run16.exe` reached
+the existing three-program chain through package-local resolution, without
+relying on the current directory.  It is not a replacement for the separate
+interactive COMMAND/EDIT or WOW acceptance gates.

@@ -34,6 +34,53 @@ static BOOL sibling_path(PCWSTR name,PWSTR output,DWORD capacity)
     return TRUE;
 }
 
+static BOOL image_has_extension(PCWSTR image)
+{
+    PCWSTR dot,slash,forward;
+    if (!image || !*image) return FALSE;
+    dot=wcsrchr(image,L'.');
+    slash=wcsrchr(image,L'\\');
+    forward=wcsrchr(image,L'/');
+    if (forward && (!slash || forward>slash)) slash=forward;
+    return dot && (!slash || dot>slash);
+}
+
+/* This is product executable discovery, not image classification.  Resolve a
+ * bare target beside the installed three-program package before consulting the
+ * process search path, then pass only that canonical path to the selected
+ * original OpenNT classifier. */
+static BOOL resolve_image_path(PCWSTR image,PWSTR output,DWORD capacity)
+{
+    static PCWSTR const extensions[]={L".com",L".exe",L".pif",L".bat"};
+    WCHAR package[MAX_PATH];
+    PWSTR slash;
+    DWORD result;
+    size_t index,count;
+    BOOL bare;
+
+    if (!image || !*image || !output || !capacity) return FALSE;
+    bare=!wcschr(image,L'\\') && !wcschr(image,L'/');
+    package[0]=L'\0';
+    if (bare) {
+        if (!GetModuleFileNameW(NULL,package,MAX_PATH)) return FALSE;
+        slash=wcsrchr(package,L'\\');
+        if (!slash) return FALSE;
+        *slash=L'\0';
+    }
+    count=image_has_extension(image) ? 1u :
+        sizeof(extensions)/sizeof(extensions[0]);
+    for (index=0;index<count;++index) {
+        PCWSTR extension=image_has_extension(image) ? NULL : extensions[index];
+        if (bare) {
+            result=SearchPathW(package,image,extension,capacity,output,NULL);
+            if (result && result<capacity) return TRUE;
+        }
+        result=SearchPathW(NULL,image,extension,capacity,output,NULL);
+        if (result && result<capacity) return TRUE;
+    }
+    return FALSE;
+}
+
 static DWORD connect_broker(void)
 {
     WCHAR broker[MAX_PATH];
@@ -172,6 +219,7 @@ int WINAPI wWinMain(HINSTANCE instance,HINSTANCE previous,PWSTR command,int show
     WCHAR application[MAX_PATH];
     WCHAR shell_command[MAX_PATH + MAXIMUM_VDM_COMMAND_LENGTH + 8u];
     DWORD type,result=ERROR_INVALID_PARAMETER,binary=0,comspec_bytes;
+    BOOL image_resolved;
     int count;
     size_t bytes;
     (void)instance;(void)previous;(void)show;
@@ -190,7 +238,8 @@ int WINAPI wWinMain(HINSTANCE instance,HINSTANCE previous,PWSTR command,int show
     RtlInitUnicodeString(&BaseDotPifSuffixName,L".pif");
     RtlInitUnicodeString(&BaseDotExeSuffixName,L".exe");
     if (!count || !*arguments[0]) goto done;
-    if (!OpenNtBaseGetBinaryTypeW(arguments[0],&type)) {
+    image_resolved=resolve_image_path(arguments[0],application,MAX_PATH);
+    if (!OpenNtBaseGetBinaryTypeW(image_resolved ? application : arguments[0],&type)) {
         /* The original COMMAND worker has already chosen COMSPEC /c before
          * this public launcher sees a native-child tail.  A token which is
          * not an image may be a command built-in, batch file, or shell
@@ -226,7 +275,10 @@ int WINAPI wWinMain(HINSTANCE instance,HINSTANCE previous,PWSTR command,int show
     else if (type==SCS_PIF_BINARY) binary=BINARY_TYPE_DOS|BINARY_TYPE_DOS_PIF;
     else if (type==SCS_WOW_BINARY) binary=BINARY_TYPE_WIN16;
     if (binary) {
-        if (!GetFullPathNameW(arguments[0],MAX_PATH,application,NULL)) { result=GetLastError(); goto done; }
+        if (!image_resolved &&
+            !GetFullPathNameW(arguments[0],MAX_PATH,application,NULL)) {
+            result=GetLastError(); goto done;
+        }
         CsrPortHeap=HeapCreate(0,0,0);
         if (!CsrPortHeap) { result=ERROR_NOT_ENOUGH_MEMORY; goto done; }
         result=connect_broker();
@@ -245,7 +297,8 @@ int WINAPI wWinMain(HINSTANCE instance,HINSTANCE previous,PWSTR command,int show
     startup.hStdInput=GetStdHandle(STD_INPUT_HANDLE);
     startup.hStdOutput=GetStdHandle(STD_OUTPUT_HANDLE);
     startup.hStdError=GetStdHandle(STD_ERROR_HANDLE);
-    if (!CreateProcessW(arguments[0],childCommand,NULL,NULL,TRUE,0,NULL,NULL,&startup,&child))
+    if (!CreateProcessW(image_resolved ? application : arguments[0],childCommand,
+            NULL,NULL,TRUE,0,NULL,NULL,&startup,&child))
         result=GetLastError();
     else {
         CloseHandle(child.hThread);
