@@ -649,3 +649,27 @@ newer mapping-observer witness, so this run cannot distinguish a later
 `W32Init FALSE` from another provider-internal result.  It does prove the
 previously impossible parent DLL import is now structurally valid and that no
 worker binary or user physical-mapping change was deployed.
+
+### Authenticated arrival precedes empty-drain registration
+
+The empty-grace cancellation was initially placed only in `Server_Connect`.
+That is too late for an RPC call the runtime has accepted but that has not yet
+completed server authorization and context registration: an empty-timer
+callback could acquire the lifecycle lock first and stop listening.  The
+minimal product binding now cancels the timer immediately after
+`broker_rpc_authorize` succeeds in the RPC authorization callback.  The
+existing `Server_Connect` cancellation remains idempotent and still protects
+direct context registration; no BaseSrv command, worker or record policy is
+changed.
+
+The rebuilt `basesrv.exe` (SHA-256
+`3BA132779F25C62867CC080C28C4989E7D23D044CA6FCBE6F372D2F439B0D782`) was
+staged by itself beside the existing `O:\winnt` worker and launcher.  A fresh
+`run16.exe MEM.EXE` returned `0`; trace
+`O:\winnt\logs\m0-t412-s5-authorized-arrival-20260914.trace` records one
+authenticated launcher `Check → Reserve → Prepare`, worker connect, original
+PIF/DOS/next-command `GetNextVDMCommand` requests, `first-yes`, and parent
+exit-code zero.  The exact test-created worker PID 20420 and broker PID 28724
+were stopped after the observation.  This is a positive regression of the
+new earlier cancellation site; it does not claim a controlled
+timer-callback-in-progress race fixture, which remains an explicit S5 gate.

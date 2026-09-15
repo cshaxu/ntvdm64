@@ -145,8 +145,15 @@ void __RPC_USER VDM_CONNECTION_rundown(VDM_CONNECTION connection)
 }
 static RPC_STATUS RPC_ENTRY authorize(RPC_IF_HANDLE interfaceId,void *binding)
 {
+    RPC_STATUS status;
     (void)interfaceId;
-    return broker_rpc_authorize(&scope,binding);
+    status=broker_rpc_authorize(&scope,binding);
+    /* An RPC call that has passed endpoint authentication is already an
+     * accepted arrival, even before Server_Connect can register its context.
+     * Cancel here so an empty-grace callback cannot stop listening between
+     * RPC acceptance and the later connection registration. */
+    if (!status) basesrv_cancel_empty_timer();
+    return status;
 }
 error_status_t Server_Connect(handle_t binding,HANDLE process,VDM_CONNECTION *connection,ULONG *generation)
 {
