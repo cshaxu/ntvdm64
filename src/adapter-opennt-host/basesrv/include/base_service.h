@@ -10,6 +10,10 @@ typedef struct OPENNT_BASE_SERVICE OPENNT_BASE_SERVICE;
 typedef struct OPENNT_BASE_CONNECTION OPENNT_BASE_CONNECTION;
 OPENNT_BASE_SERVICE *OpenNtBaseServiceStart(void);
 BOOL OpenNtBaseServiceStop(OPENNT_BASE_SERVICE *);
+/* True only when all authenticated client connections and all finite launch
+ * reservations are gone.  It deliberately says nothing about a quiet but
+ * connected interactive VDM. */
+BOOL OpenNtBaseServiceIsEmpty(OPENNT_BASE_SERVICE *);
 DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *,HANDLE,OPENNT_BASE_CONNECTION **,DWORD *);
 DWORD OpenNtBaseServiceDisconnect(OPENNT_BASE_CONNECTION *);
 BOOL OpenNtBaseServicePeer(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation);
@@ -48,6 +52,12 @@ DWORD OpenNtBaseServiceReenter(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generati
 DWORD OpenNtBaseServiceGet(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,
     const void *input,uint32_t bytes,void **output,uint32_t *output_bytes,HANDLE *wait_event,
     HANDLE standard[3],ULONG *standard_count);
+/* Source-shaped BasepExitVDM binding.  The original Console/WOW selection
+ * stays service-local; only the original WOW discriminator/task are copied.
+ * A true close_worker_wait tells the client to close the already-delivered
+ * local worker wait event. */
+DWORD OpenNtBaseServiceExit(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,
+    BOOL is_wow,ULONG wow_task,BOOL *close_worker_wait);
 void OpenNtBaseServiceReleaseCommandReply(void *);
 DWORD OpenNtBaseServiceAttachStream(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,DWORD role,HANDLE,DWORD *);
 DWORD OpenNtBaseServiceRevokeStream(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,DWORD receipt);

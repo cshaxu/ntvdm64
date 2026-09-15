@@ -1,0 +1,97 @@
+# M0 T412 S5 — ExitVDM and empty-broker lifecycle checkpoint
+
+## Scope and result
+
+This checkpoint restores the omitted `BasepExitVDM` client crossing and
+implements only the safe product-level **empty broker** grace policy.  It does
+not claim S5 or T412 closure: no source-proven worker-ready/completed state is
+yet available for retiring a resident worker, so a quiet interactive
+`COMMAND.COM` or `EDIT.COM` is deliberately never reaped.
+
+## Original-owner recovery
+
+OpenNT's `base/win32/client/vdm.c:ExitVDM` selects its original server branch
+using the Console sentinel (`(HANDLE)-1` for WOW) and calls `BasepExitVDM`.
+`base/win32/server/srvvdm.c:BaseSrvExitVDM` then invokes either
+`BaseSrvExitDOSTask` or `BaseSrvExitWOWTask`.
+
+Before this checkpoint the standalone service dispatch table included
+`BasepExitVDM`, but `base_rpc_client.c` did not forward it.  Consequently the
+worker could not report original completion across the RPC boundary.
+
+The selected binding is deliberately narrow:
+
+- the copied RPC request carries only `is_wow` and the original WOW task id;
+- the authenticated connection supplies the service-local Console identity;
+- the worker wait remains an OS-managed typed attachment.  The broker revokes
+  its receipt only after the original server has removed the record; the
+  client receives the already-held worker-local event solely to close it, as
+  original `ExitVDM` does.
+
+This restores the original source's branch and record cleanup without sending
+native handles or making a second task state machine.
+
+## Empty-broker policy
+
+`basesrv.exe` is still singleton-by-exclusive ncalrpc endpoint.  The new
+product policy starts a 60-second grace only when both conditions are true:
+
+1. the authenticated process registry has no entries or pins; and
+2. the finite launcher-to-worker reservation list is empty.
+
+An arriving `Connect` cancels the timer before registration.  The timer uses
+an epoch under an SRW lock, so a cancelled/stale callback cannot stop a broker
+that has accepted a new connection.  This is a broker retention policy, not
+an interpretation of original BaseSrv task state.
+
+In particular, an active worker connection makes the service nonempty even if
+no command is queued.  Therefore this checkpoint does not reap interactive
+COMMAND/EDIT and does not claim eligible-idle worker retirement.
+
+## Verification
+
+The focused x86 lifecycle test now executes actual retained OpenNT dispatch:
+
+```
+CheckVDM → UpdateVDMEntry → GetNextVDMCommand(PIF) →
+GetNextVDMCommand(DOS) → GetNextVDMCommand(wait) → ExitVDM
+```
+
+It verifies the original ConsoleRecord/pair-wait route, broker receipt
+revocation after original `BaseSrvExitDOSTask`, and the worker-side event
+close obligation.  It also proves the empty predicate is false while an
+authenticated launcher/worker or reservation exists and true only after both
+disconnect/release.
+
+Commands passing from `build/M0-T412/S5/product`:
+
+```
+basesrv-reservation-test.exe
+basesrv-service-reservation-test.exe
+```
+
+The second reports:
+
+```
+PASS: original Check/Update/Get/ExitVDM lifecycle completes through authenticated worker binding
+```
+
+Real empty-broker observation used an isolated build `basesrv.exe`, with no
+client or worker.  `O:\ntvdm64\logs\m0-t412-s5-empty-broker-r2.trace` contains:
+
+```
+BASESRV-S3 phase=empty-grace pid=0 status=00000000
+BASESRV-S3 phase=empty-stop pid=0 status=00000000
+```
+
+The observed process exited after the configured grace.  The three current
+product EXEs were rebuilt and staged at `O:\ntvdm64`.
+
+## Remaining S5 gate
+
+Recover and prove the original task-completion/ready notification needed to
+classify a worker as eligible for reuse or retirement.  Required acceptance:
+active COMMAND/EDIT survives beyond the grace; a completed eligible worker is
+retired exactly once; concurrent arrival cancels retirement; disconnect and
+new broker startup leave no stale reservation/record.  Do not implement this
+by polling an empty command queue or by killing an otherwise connected worker.

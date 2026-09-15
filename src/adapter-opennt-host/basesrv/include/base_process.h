@@ -17,6 +17,10 @@ OPENNT_BASE_PROCESS_REGISTRY *OpenNtBaseBindProcessRegistry(OPENNT_BASE_PROCESS_
  * Caller must serialize registration/removal and service use as designed. */
 BOOL OpenNtBaseRegisterProcess(OPENNT_BASE_PROCESS_REGISTRY *, PCSR_PROCESS, HANDLE);
 BOOL OpenNtBaseRemoveProcess(OPENNT_BASE_PROCESS_REGISTRY *, PCSR_PROCESS);
+/* Snapshot only: caller provides higher-level serialization when using this
+ * for product lifetime decisions.  A registered process is never inferred
+ * idle from its lack of current requests. */
+BOOL OpenNtBaseProcessRegistryIsEmpty(OPENNT_BASE_PROCESS_REGISTRY *);
 /* Trusted owner only: retain a same-access handle without holding the registry
  * lock during external I/O. A retained handle does not keep registration valid;
  * repeat this generation lookup before accepting results. Caller closes it. */

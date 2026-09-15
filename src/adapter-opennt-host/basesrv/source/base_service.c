@@ -211,6 +211,16 @@ BOOL OpenNtBaseServiceStop(OPENNT_BASE_SERVICE *service)
     HeapFree(GetProcessHeap(),0,service);
     return TRUE;
 }
+BOOL OpenNtBaseServiceIsEmpty(OPENNT_BASE_SERVICE *service)
+{
+    BOOL empty;
+    if (!service) return FALSE;
+    EnterCriticalSection(&service->lock);
+    empty=OpenNtBaseProcessRegistryIsEmpty(&service->registry) &&
+        OpenNtBaseReservationsIsEmpty(service->reservations);
+    LeaveCriticalSection(&service->lock);
+    return empty;
+}
 DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *service,HANDLE process,
     OPENNT_BASE_CONNECTION **output,DWORD *generation)
 {
@@ -627,6 +637,62 @@ DWORD OpenNtBaseServiceGet(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD ge
 done:
     LeaveCriticalSection(&connection->service->lock);
     OpenNtBaseReleaseGetCommand(&state);
+    return error;
+}
+
+DWORD OpenNtBaseServiceExit(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD generation,
+    BOOL is_wow,ULONG wow_task,BOOL *close_worker_wait)
+{
+    BASE_API_MSG message={0};
+    CSR_THREAD thread={0};
+    PCSR_THREAD previous_thread;
+    OPENNT_BASE_PROCESS_REGISTRY *previous_registry;
+    NTSTATUS status;
+    DWORD error=ERROR_SUCCESS;
+    HANDLE worker_wait;
+
+    if (!close_worker_wait) return ERROR_INVALID_PARAMETER;
+    *close_worker_wait=FALSE;
+    if (!connection || !OpenNtBaseServicePeer(connection,pid,generation))
+        return ERROR_ACCESS_DENIED;
+    /* ExitVDM's branch is selected by the original ConsoleHandle sentinel.
+     * Do not let a copied client bit switch an authenticated DOS connection
+     * to WOW (or vice versa). */
+    if (!!is_wow!=!!connection->wow) return ERROR_INVALID_PARAMETER;
+    EnterCriticalSection(&connection->service->lock);
+    if (is_wow) {
+        message.u.ExitVDM.ConsoleHandle=(HANDLE)-1;
+        message.u.ExitVDM.iWowTask=wow_task;
+    } else {
+        if (!connection->console) { error=ERROR_INVALID_HANDLE; goto done; }
+        message.u.ExitVDM.ConsoleHandle=connection->console;
+        message.u.ExitVDM.iWowTask=0;
+    }
+    thread.Process=&connection->process;
+    thread.ClientId.UniqueProcess=connection->process.ClientId.UniqueProcess;
+    previous_thread=OpenNtBaseBindServerRequestThread(&thread);
+    previous_registry=OpenNtBaseBindProcessRegistry(&connection->service->registry);
+    status=OpenNtBaseDispatchOperation((PCSR_API_MSG)&message,BROKER_VDM_EXIT,
+        sizeof(message.u.ExitVDM));
+    OpenNtBaseBindProcessRegistry(previous_registry);
+    OpenNtBaseBindServerRequestThread(previous_thread);
+    if (status && !message.ReturnValue) message.ReturnValue=status;
+    if (!NT_SUCCESS((NTSTATUS)message.ReturnValue)) {
+        error=RtlNtStatusToDosError((NTSTATUS)message.ReturnValue); goto done;
+    }
+    /* BaseSrvExitDOSTask returns the same client-side wait identity it had
+     * published through Get.  Here it is a broker receipt, never a native
+     * handle.  Revoke the broker copy only after original record cleanup;
+     * the worker still owns its typed local duplicate and closes it below. */
+    worker_wait=message.u.ExitVDM.WaitObjectForVDM;
+    if (worker_wait) {
+        error=broker_vdm_receipt_revoke(&connection->streams,generation,
+            (uint32_t)(ULONG_PTR)worker_wait);
+        if (error) goto done;
+        *close_worker_wait=TRUE;
+    }
+done:
+    LeaveCriticalSection(&connection->service->lock);
     return error;
 }
 

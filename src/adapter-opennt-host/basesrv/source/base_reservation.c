@@ -57,6 +57,16 @@ BOOL OpenNtBaseReservationsDestroy(OPENNT_BASE_RESERVATIONS *state)
     return TRUE;
 }
 
+BOOL OpenNtBaseReservationsIsEmpty(OPENNT_BASE_RESERVATIONS *state)
+{
+    BOOL empty;
+    if (!state) return FALSE;
+    EnterCriticalSection(&state->lock);
+    empty=IsListEmpty(&state->entries);
+    LeaveCriticalSection(&state->lock);
+    return empty;
+}
+
 DWORD OpenNtBaseReservationCreate(OPENNT_BASE_RESERVATIONS *state,DWORD launcher_pid,
     DWORD launcher_generation,ULONG task,HANDLE console,BOOL shared_wow,uint64_t *reservation)
 {

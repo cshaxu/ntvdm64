@@ -45,6 +45,19 @@ interface vdm_service
         [out, system_handle(sh_file), size_is(,*stream_count)] HANDLE **streams,
         [out] unsigned long *reply_bytes,
         [out, size_is(,*reply_bytes)] byte **reply);
+    /* ExitVDM has no caller-owned command payload.  The worker states only
+     * which original branch it is executing and, for WOW, the original task
+     * identifier.  Console identity remains bound to its authenticated
+     * connection.  The reply is deliberately a Boolean: a worker-local wait
+     * event was already delivered by Get and must now be closed locally. */
+    error_status_t Exit(
+        [in] handle_t binding,
+        [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [in] unsigned long is_wow,
+        [in] unsigned long wow_task,
+        [out] unsigned long *close_worker_wait);
     error_status_t Update(
         [in] handle_t binding,
         [in] VDM_CONNECTION connection,

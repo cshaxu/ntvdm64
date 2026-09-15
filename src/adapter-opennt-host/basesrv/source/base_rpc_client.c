@@ -23,6 +23,12 @@ static OPENNT_BASE_RPC_CLIENT client;
 static LONG request_id;
 static HANDLE parent_event_handle;
 static ULONG parent_receipt;
+/* Get delivers this source-shaped worker wait through a typed attachment.
+ * ExitVDM later receives only the original broker receipt, so retain the
+ * worker-local duplicate here until the original ExitVDM completion says to
+ * close it.  This is one VDM client's single ConsoleRecord wait, not a task
+ * scheduler or a reusable-worker policy. */
+static HANDLE worker_wait_event;
 
 static BOOL receipt_seen(const ULONG receipts[3],ULONG limit,ULONG receipt)
 {
@@ -258,6 +264,10 @@ static NTSTATUS get_command(PCSR_API_MSG message,ULONG length)
             base->u.GetNextVDMCommand.StdErr=
                 base->u.GetNextVDMCommand.StdErr ? GetStdHandle(STD_ERROR_HANDLE) : NULL;
         }
+        if (applied && wait_event) {
+            if (worker_wait_event) { applied=FALSE; goto done; }
+            worker_wait_event=wait_event;
+        }
         /* Update may have copied standard streams directly into the already
          * registered suspended worker before it connected.  In that original
          * timing path these are already valid worker-local handles, so Get
@@ -276,6 +286,32 @@ done:
         return STATUS_UNSUCCESSFUL;
     }
     return (NTSTATUS)message->ReturnValue;
+}
+
+static NTSTATUS exit_command(PCSR_API_MSG message,ULONG length)
+{
+    PBASE_EXIT_VDM_MSG exit_message=(PBASE_EXIT_VDM_MSG)&message->u.ApiMessageData;
+    DWORD error=ERROR_INVALID_PARAMETER;
+    ULONG close_worker_wait=0;
+    BOOL is_wow;
+
+    if (length!=sizeof(*exit_message)) goto done;
+    is_wow=exit_message->ConsoleHandle==(HANDLE)-1;
+    RpcTryExcept {
+        error=Client_Exit(client.binding,client.connection,client.process,client.generation,
+            is_wow ? 1u : 0u,is_wow ? exit_message->iWowTask : 0u,&close_worker_wait);
+    }
+    RpcExcept(1) { error=RpcExceptionCode(); }
+    RpcEndExcept
+    if (error || close_worker_wait>1u || (close_worker_wait && !worker_wait_event)) goto done;
+    exit_message->WaitObjectForVDM=close_worker_wait ? worker_wait_event : NULL;
+    if (close_worker_wait) worker_wait_event=NULL;
+    message->ReturnValue=STATUS_SUCCESS;
+    return STATUS_SUCCESS;
+done:
+    SetLastError(error ? error : ERROR_INVALID_DATA);
+    message->ReturnValue=STATUS_UNSUCCESSFUL;
+    return STATUS_UNSUCCESSFUL;
 }
 
 static NTSTATUS update_command(PCSR_API_MSG message,ULONG length)
@@ -424,7 +460,9 @@ void OpenNtBaseClientDisconnectCurrent(void)
     }
     if (client.process) CloseHandle(client.process);
     if (client.binding) RpcBindingFree(&client.binding);
+    if (worker_wait_event) CloseHandle(worker_wait_event);
     ZeroMemory(&client,sizeof(client));
+    worker_wait_event=NULL;
 }
 
 DWORD OpenNtBaseClientReserveWorker(ULONG task,uint64_t *reservation)
@@ -485,6 +523,8 @@ NTSTATUS NTAPI OpenNtBaseClientCallServer(PCSR_API_MSG message,
         return check_command(message,length);
     if (number==CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepGetNextVDMCommand))
         return get_command(message,length);
+    if (number==CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepExitVDM))
+        return exit_command(message,length);
     if (number==CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepUpdateVDMEntry))
         return update_command(message,length);
     if (number==CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepGetVDMExitCode))

@@ -77,6 +77,16 @@ BOOL OpenNtBaseRemoveProcess(OPENNT_BASE_PROCESS_REGISTRY *state, PCSR_PROCESS p
     return found;
 }
 
+BOOL OpenNtBaseProcessRegistryIsEmpty(OPENNT_BASE_PROCESS_REGISTRY *state)
+{
+    BOOL empty;
+    if (!state) return FALSE;
+    EnterCriticalSection(&state->Lock);
+    empty=state->Pins==0 && IsListEmpty(&state->Processes);
+    LeaveCriticalSection(&state->Lock);
+    return empty;
+}
+
 NTSTATUS NTAPI CsrLockProcessByClientId(HANDLE id, PCSR_PROCESS *out)
 {
     LIST_ENTRY *entry;
