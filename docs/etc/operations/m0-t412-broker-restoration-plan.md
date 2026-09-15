@@ -264,6 +264,27 @@ test passed because it was skipped, unavailable or terminated by a timeout.
 
 ## Acceptance discipline
 
+### Owner-approved S7 extension
+
+On 2026-09-15 the owner accepted direct launch after the S6 VDM TIB storage
+repair, closed that S at its bounded delivery, and admitted S7 to repair the
+second interactive COMMAND's MEM, COMMAND and EDIT launches. T412 remains open.
+S7 first reproduces typed commands in the actual interactive shell, audits
+the original EXEC/BOP/reentry selection and its immediate host bindings, then
+implements the smallest source-shaped repair and verifies child completion
+and return to a usable parent prompt. Missing-child failure and direct launch
+are regression controls. No new classifier, generic shell parser, worker
+reaper or CPU change follows from this admission.
+
+The S6 outstanding same-build S2--S5 matrix and final removal accounting are
+still required before T412 closure. They are not silently waived by either
+S6 owner-directed closure or S7 admission. The current Status owns the S7 brief.
+
+The first no-source-change control, `run16 COMMAND.COM /c MEM.EXE`, displays
+MEM output and returns zero (`O:\winnt\logs\m0-t412-s6-nested-mem.txt`). It
+does not emit the native-child report and does not reproduce the owner's typed
+interactive-shell failure; it must not be substituted for that workload.
+
 Runtime verification uses the formal Win32/x86 CCPU40 product and records
 artifact identity, selected providers, expected/observed outcomes and trace
 markers. Build/intermediate outputs stay in build/; real-package observations

@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T412 S6.**
+**Active: M0 T412 S7.**
 
 Current regression repair: [VDM TIB storage evidence](../etc/evidence/m0-t412-s6-vdm-tib-storage-repair.md)
 identifies the four-byte placeholder incorrectly satisfying the original printer
@@ -13,24 +13,24 @@ owner interactive acceptance are not claimed by this bounded repair.
 
 ## Active Packet
 
-### M0 T412 S6 — integrated verification and removal
+### M0 T412 S7 — interactive COMMAND child execution
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T412 S6; Ordinary Mode, one implementer and one active sequential S packet. |
-| Admission And Approval | Owner approved completion of T412 according to its proposal, including the authenticated OS-managed resource-transfer exception. Execute S1--S6 sequentially without repeated scope approvals; one S remains active and each verification gate still applies. Commit/push to main remains approved. No kernel/CSR shell or broader CPU/video redesign is admitted. |
-| Objective | Rebuild and verify one formal x86 three-program package, remove only proved superseded autonomous/obsolete bridges, reconcile the T412 source-diff ledger, publish the verified package and close T412. |
+| Identifier Mode | M0 T412 S7; Ordinary Mode, one implementer and one active sequential S packet. |
+| Admission And Approval | Owner: “批准提交推送当前s 并准入下一个s任务修复第二份command功能”. S6 closes its delivered regression repair by owner direction. S7 admits original-source-first repair of interactive COMMAND child execution. Commit/push to the existing origin/main remains approved. |
+| Objective | Restore MEM, nested COMMAND and EDIT launches from the second interactive COMMAND, including child return and continued parent input, without regressing direct positional launch. |
 | Non-goals | No CSR/kernel subsystem, CPU/video redesign, guest-media changes, generic cmd parser, guest COMMAND redirection, or claim of full WOW16/WRITE execution. |
-| Reference Baseline | S5 completion disposition in [m0-t412-s5-wow-idle-lifecycle](../etc/evidence/m0-t412-s5-wow-idle-lifecycle.md#s5-completion-disposition), S4 closure, T412 S3 three-program composition, and S1/S2 original-owner records. |
-| Files And ABI Surface | Formal x86 build/staging graph, three executable package, selected original BaseSrv/BaseClient/MVDM owners, overlays/adapters/broker/app removal ledger, source registers and final evidence. |
+| Reference Baseline | S6 storage repair at 9619326d5 and its published package; owner confirms direct launch but reports second-COMMAND failures. S4 BOP evidence used an explicit run16 child and does not prove this interactive workload. |
+| Files And ABI Surface | Original COMMAND EXEC/BOP/reentry, command-process and payload bindings, run16 image/environment/stream handoff, original BaseClient/BaseSrv command delivery; formal x86 build and scoped observations. |
 | Applicable Rules | Source policy; execution, architecture, coding and document rules; package-first recovery and original-owner placement. |
-| Verification | Rebuild the same formal product; rerun S2--S5 focused and real-package matrices against it; audit/deletion proof for every proposed obsolete path; measured diff/overlay/autonomous delta; x86 maps, governance, diff and package hashes. |
-| Expected Markers | `run16.exe`, `basesrv.exe` and `ntvdm.exe` share one verified x86 package; no retired worker timer/reaper or duplicate autonomous service policy remains; every retained seam has original-owner rationale and an exercised bound. |
-| Asset Needs | Accepted OpenNT source, immutable guest media, `build/M0-T412/S6` outputs, formal x86 product inputs, and `O:\winnt\logs` for real-package observations. |
+| Verification | Reproduce the actual interactive second COMMAND, not only COMMAND /c. Compare original owner and historical product; verify MEM output/return, nested COMMAND exit to parent, EDIT startup/input/exit, missing-child error and subsequent parent command; rerun direct MEM/COMMAND controls and VDM TIB link gate. |
+| Expected Markers | Correct child resolution, command ownership, source-defined BOP/reentry, valid environment/streams, child completion and responsive parent prompt. No new parser, worker reaper or fabricated success. |
+| Asset Needs | Accepted OpenNT source, immutable package binaries, retained S4--S6 evidence, build/M0-T412/S7 outputs and O:\winnt\logs observations. |
 | Reporting Requirements | Report exact final source/artifact identity, per-row removal/retention ledger, source owner and bounded adapter for every retained seam, real workload/race results and every unavailable WOW operation. |
 | Stop Conditions | Missing provenance, unbounded platform dependency, contradictory selected-provider evidence, unproved mandatory contract or changed product scope: record the exact issue; do not manufacture success or a parallel provider. |
-| Exit Criteria | One same-build x86 package passes the S2--S5 matrix; final ledger measures mirror diff/overlay/autonomous deltas and has no mandatory unproved contract; selected package is staged at `O:\winnt`, all evidence is indexed, relevant Git changes are committed/pushed, and only owner changes remain in the worktree. |
-| Original Owner Request | 批准按照proposal完成当前T任务。 Reduce diff, reuse original OpenNT code/architecture and build three programs. |
+| Exit Criteria | Same-build interactive workload and direct controls pass; source-first repair is recorded, staged and committed/pushed; test processes cleaned without touching owner sessions. Remaining full-T matrix/removal accounting stays explicitly open. |
+| Original Owner Request | “直接启动是可以了 但是 第二份command里面无法运行mem command edit这些”; then approval to close S6 and admit S7. |
 | Similar-Issue Sweep | Include mirrored diffs, private overlays and adapters; command ownership/capacity/retry, launch rollback, async payload lifetime, worker cleanup and every duplicated local policy in scope. |
 | Candidate Proposal | [Broker design](../proposals/proposal-cross-process-broker-closure-001.md). |
 | Working Plan | [T412 sequential S plan](../etc/operations/m0-t412-broker-restoration-plan.md). |
@@ -40,7 +40,7 @@ S4 is closed by its [requirement ledger](../etc/evidence/m0-t412-s4-closure.md):
 real COMMAND/MEM/EDIT, BOP reentry, copied native-child lifetime, Console
 stdout/stderr, EOF and nonzero status are now observed.  Guest COMMAND `>` is
 distinguished and remains the existing Redirector boundary; it was not folded
-into S4. S5 is closed by its [completion disposition](../etc/evidence/m0-t412-s5-wow-idle-lifecycle.md#s5-completion-disposition). S6 is the only active packet under the existing whole-T approval. S3
+into S4. S5 is closed by its [completion disposition](../etc/evidence/m0-t412-s5-wow-idle-lifecycle.md#s5-completion-disposition). S6 is closed by owner direction at its bounded storage repair; S7 is the only active packet. The remaining S6 full-T matrix and removal accounting are retained, not marked passed. S3
 delivered the three-product command path; its final obsolete-source deletion
 remains explicitly carried into S6. See the
 [S2 transition](../etc/evidence/m0-t412-s2-original-lifecycle.md#s2-bounded-conclusion-and-s3-transition).
@@ -51,6 +51,14 @@ and S4 reentry/BOP/stream evidence. The corresponding records remain indexed
 under [T412 evidence](../etc/README.md); they are not duplicated as current
 control state. Guest COMMAND redirection remains the explicit Redirector
 boundary, not a S4 acceptance surrogate.
+
+## S6 owner-directed closure
+
+Owner confirms direct launch works and approves S6 closure after the VDM TIB
+storage repair. The second interactive COMMAND workload is not accepted; S7
+owns its repair. Full T412 closure still requires outstanding same-build S2--S5
+matrix and removal accounting after this regression is resolved. The storage
+repair evidence records the tested package and explicit limits.
 
 ## T412 S1 historical checkpoints
 
