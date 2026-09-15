@@ -41,6 +41,9 @@ struct OPENNT_BASE_SERVICE {
     CRITICAL_SECTION lock;
     ULONG next_console;
     OPENNT_BASE_INTERACTIVE_SCOPE interactive;
+    LIST_ENTRY connections;
+    OPENNT_BASE_CONSOLE_QUERY console_query;
+    void *console_query_context;
 };
 struct OPENNT_BASE_CONNECTION {
     OPENNT_BASE_SERVICE *service;
@@ -50,7 +53,13 @@ struct OPENNT_BASE_CONNECTION {
     ULONG task;
     HANDLE console;
     BOOL wow;
+    LIST_ENTRY service_link;
 };
+typedef struct OPENNT_BASE_CONSOLE_CANDIDATE {
+    HANDLE process;
+    ULONG generation;
+    HANDLE console;
+} OPENNT_BASE_CONSOLE_CANDIDATE;
 typedef struct OPENNT_BASE_SERVICE_RESOURCES {
     OPENNT_BASE_CONNECTION *connection;
     DWORD role;
@@ -182,6 +191,7 @@ OPENNT_BASE_SERVICE *OpenNtBaseServiceStart(void)
     if (!InitializeCriticalSectionEx(&service->lock,0,0)) {
         HeapFree(GetProcessHeap(),0,service); return NULL;
     }
+    InitializeListHead(&service->connections);
     if (!OpenNtBaseInitializeProcessRegistry(&service->registry)) {
         DeleteCriticalSection(&service->lock); HeapFree(GetProcessHeap(),0,service); return NULL;
     }
@@ -202,10 +212,25 @@ OPENNT_BASE_SERVICE *OpenNtBaseServiceStart(void)
     BaseSrvVDMInit();
     return service;
 }
+BOOL OpenNtBaseServiceConfigureConsoleQuery(OPENNT_BASE_SERVICE *service,
+    OPENNT_BASE_CONSOLE_QUERY query,void *context)
+{
+    BOOL result=FALSE;
+    if (!service || !query) { SetLastError(ERROR_INVALID_PARAMETER); return FALSE; }
+    EnterCriticalSection(&service->lock);
+    if (IsListEmpty(&service->connections)) {
+        service->console_query=query;
+        service->console_query_context=context;
+        result=TRUE;
+    } else SetLastError(ERROR_BUSY);
+    LeaveCriticalSection(&service->lock);
+    return result;
+}
 BOOL OpenNtBaseServiceStop(OPENNT_BASE_SERVICE *service)
 {
     /* Transport has stopped and joined all calls/rundowns before stop. */
-    if (!service || !OpenNtBaseReservationsDestroy(service->reservations) ||
+    if (!service || !IsListEmpty(&service->connections) ||
+        !OpenNtBaseReservationsDestroy(service->reservations) ||
         !OpenNtBaseDestroyProcessRegistry(&service->registry)) return FALSE;
     DeleteCriticalSection(&service->lock);
     HeapFree(GetProcessHeap(),0,service);
@@ -245,7 +270,10 @@ DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *service,HANDLE process,
         else if (!error) {
             connection->reservation=reservation;connection->task=task;connection->console=console;
         }
-        if (!error) { *output=connection; *generation=connection->process.SequenceNumber; }
+        if (!error) {
+            InsertTailList(&service->connections,&connection->service_link);
+            *output=connection; *generation=connection->process.SequenceNumber;
+        }
         else (void)OpenNtBaseRemoveProcess(&service->registry,&connection->process);
     }
     LeaveCriticalSection(&service->lock);
@@ -260,7 +288,10 @@ DWORD OpenNtBaseServiceDisconnect(OPENNT_BASE_CONNECTION *connection)
     service=connection->service;
     EnterCriticalSection(&service->lock);
     if (!OpenNtBaseRemoveProcess(&service->registry,&connection->process)) error=GetLastError();
-    if (!error) broker_vdm_receipts_drain(&connection->streams);
+    else {
+        RemoveEntryList(&connection->service_link);
+        broker_vdm_receipts_drain(&connection->streams);
+    }
     LeaveCriticalSection(&service->lock);
     if (!error) HeapFree(GetProcessHeap(),0,connection);
     return error;
@@ -374,6 +405,83 @@ BOOL OpenNtBaseServiceWorkerReservation(OPENNT_BASE_CONNECTION *connection,uint6
     return TRUE;
 }
 
+/* Reintroduce only the modern transport for the original ConsoleHandle
+ * discriminator.  srvvdm.c still decides whether that ConsoleRecord is
+ * READY/BUSY and performs all command-record mutation. */
+static DWORD service_bind_existing_console(OPENNT_BASE_CONNECTION *connection)
+{
+    OPENNT_BASE_SERVICE *service;
+    OPENNT_BASE_CONSOLE_CANDIDATE *candidates=NULL;
+    OPENNT_BASE_CONSOLE_QUERY query;
+    void *context;
+    HANDLE caller=NULL,selected=NULL;
+    BYTE *members=NULL;
+    DWORD count=0,index=0,error=0;
+    LIST_ENTRY *entry;
+    if (!connection) return ERROR_INVALID_PARAMETER;
+    service=connection->service;
+    EnterCriticalSection(&service->lock);
+    if (connection->console) { LeaveCriticalSection(&service->lock); return ERROR_SUCCESS; }
+    for (entry=service->connections.Flink;entry!=&service->connections;entry=entry->Flink) {
+        OPENNT_BASE_CONNECTION *other=CONTAINING_RECORD(entry,OPENNT_BASE_CONNECTION,service_link);
+        if (other!=connection && other->console) ++count;
+    }
+    query=service->console_query;context=service->console_query_context;
+    if (!count) {
+        if (!++service->next_console || service->next_console==MAXDWORD) error=ERROR_ARITHMETIC_OVERFLOW;
+        else connection->console=(HANDLE)(ULONG_PTR)service->next_console;
+        LeaveCriticalSection(&service->lock);
+        return error;
+    }
+    if (!query) { LeaveCriticalSection(&service->lock); return ERROR_NOT_SUPPORTED; }
+    candidates=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,count*sizeof(*candidates));
+    members=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,count);
+    if (!candidates || !members) { LeaveCriticalSection(&service->lock); error=ERROR_NOT_ENOUGH_MEMORY; goto done; }
+    if (!OpenNtBaseRetainRegisteredProcess(&service->registry,
+            (DWORD)connection->process.ClientId.UniqueProcess,connection->process.SequenceNumber,&caller)) {
+        LeaveCriticalSection(&service->lock); error=GetLastError(); goto done;
+    }
+    for (entry=service->connections.Flink;entry!=&service->connections;entry=entry->Flink) {
+        OPENNT_BASE_CONNECTION *other=CONTAINING_RECORD(entry,OPENNT_BASE_CONNECTION,service_link);
+        if (other==connection || !other->console) continue;
+        candidates[index].generation=other->process.SequenceNumber;
+        candidates[index].console=other->console;
+        if (!OpenNtBaseRetainRegisteredProcess(&service->registry,
+                (DWORD)other->process.ClientId.UniqueProcess,other->process.SequenceNumber,
+                &candidates[index].process)) {
+            LeaveCriticalSection(&service->lock); error=GetLastError(); goto done;
+        }
+        ++index;
+    }
+    LeaveCriticalSection(&service->lock);
+    if (index!=count) { error=ERROR_RETRY; goto done; }
+    error=query(context,caller,&candidates[0].process,count,NULL,5000,members);
+    if (error) goto done;
+    for (index=0;index<count;++index) if (members[index]) {
+        HANDLE verified=NULL;
+        if (!OpenNtBaseRetainRegisteredProcess(&service->registry,GetProcessId(candidates[index].process),
+                candidates[index].generation,&verified)) { error=ERROR_RETRY; goto done; }
+        CloseHandle(verified);
+        if (selected && selected!=candidates[index].console) { error=ERROR_RETRY; goto done; }
+        selected=candidates[index].console;
+    }
+    EnterCriticalSection(&service->lock);
+    if (!connection->console) {
+        if (selected) connection->console=selected;
+        else if (!++service->next_console || service->next_console==MAXDWORD) error=ERROR_ARITHMETIC_OVERFLOW;
+        else connection->console=(HANDLE)(ULONG_PTR)service->next_console;
+    }
+    LeaveCriticalSection(&service->lock);
+done:
+    if (caller) CloseHandle(caller);
+    if (candidates) {
+        for (index=0;index<count;++index) if (candidates[index].process) CloseHandle(candidates[index].process);
+        HeapFree(GetProcessHeap(),0,candidates);
+    }
+    if (members) HeapFree(GetProcessHeap(),0,members);
+    return error;
+}
+
 DWORD OpenNtBaseServiceCheck(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD generation,
     void *input,uint32_t bytes,void *output,uint32_t capacity,uint32_t *required)
 {
@@ -396,16 +504,12 @@ DWORD OpenNtBaseServiceCheck(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD 
         return ERROR_INVALID_PARAMETER;
     *required=needed;
     if (!output || capacity<needed) return ERROR_INSUFFICIENT_BUFFER;
-    EnterCriticalSection(&connection->service->lock);
     if (message.u.CheckVDM.ConsoleHandle==OPENNT_BASE_CONSOLE_EXISTING) {
-        if (!connection->console) {
-            if (!++connection->service->next_console || connection->service->next_console==MAXDWORD) {
-                LeaveCriticalSection(&connection->service->lock);return ERROR_ARITHMETIC_OVERFLOW;
-            }
-            connection->console=(HANDLE)(ULONG_PTR)connection->service->next_console;
-        }
+        DWORD bind=service_bind_existing_console(connection);
+        if (bind) return bind;
         message.u.CheckVDM.ConsoleHandle=connection->console;
     }
+    EnterCriticalSection(&connection->service->lock);
     thread.Process=&connection->process;
     thread.ClientId.UniqueProcess=connection->process.ClientId.UniqueProcess;
     previousThread=OpenNtBaseBindServerRequestThread(&thread);

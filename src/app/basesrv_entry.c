@@ -9,14 +9,34 @@
 #include "broker/rpc_security.h"
 #include "opennt-abi/source/public/internal/base/inc/vdmapi.h"
 #include "adapter-opennt-host/basesrv/include/base_service.h"
+#include "app/console_query.h"
 static broker_rpc_scope scope;
 static OPENNT_BASE_SERVICE *service;
+static WCHAR console_helper[MAX_PATH];
 static SRWLOCK idle_lock=SRWLOCK_INIT;
 static HANDLE idle_timer;
 static ULONG idle_epoch;
 #define BASESRV_EMPTY_GRACE_MS 60000u
 #define BASE_CHECK_REPLY_BYTES 40u
 #define BASE_UPDATE_REPLY_BYTES 32u
+
+static BOOL basesrv_sibling_path(PCWSTR name,PWSTR output,DWORD capacity)
+{
+    DWORD length;
+    PWSTR slash;
+    if (!name || !output || !capacity) return FALSE;
+    length=GetModuleFileNameW(NULL,output,capacity);
+    if (!length || length>=capacity || !(slash=wcsrchr(output,L'\\'))) return FALSE;
+    ++slash;
+    if ((DWORD)(slash-output)+lstrlenW(name)+1>capacity) return FALSE;
+    lstrcpyW(slash,name);
+    return TRUE;
+}
+static DWORD WINAPI basesrv_console_query(void *context,HANDLE caller,
+    const HANDLE *candidates,DWORD count,HANDLE cancel,DWORD timeout,BYTE *members)
+{
+    return app_console_query((const WCHAR *)context,caller,candidates,count,cancel,timeout,members);
+}
 
 /* Default-off S3 transport observation.  This intentionally records neither
  * copied command bytes nor any OS handle/pointer: it exists only to identify
@@ -344,6 +364,12 @@ int main(void)
     if (result) return (int)result;
     service=OpenNtBaseServiceStart();
     if (!service) return ERROR_NOT_ENOUGH_MEMORY;
+    if (!basesrv_sibling_path(L"run16.exe",console_helper,MAX_PATH) ||
+        !OpenNtBaseServiceConfigureConsoleQuery(service,basesrv_console_query,console_helper)) {
+        DWORD error=GetLastError();
+        (void)OpenNtBaseServiceStop(service);
+        return (int)error;
+    }
     result=RpcServerRegisterIf3(Server_vdm_service_v1_0_s_ifspec,NULL,NULL,
         RPC_IF_ALLOW_SECURE_ONLY | RPC_IF_ALLOW_LOCAL_ONLY,RPC_C_LISTEN_MAX_CALLS_DEFAULT,
         (unsigned)-1,authorize,NULL);

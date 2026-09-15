@@ -8,8 +8,14 @@
  * the service; transport guarantees connection rundown follows active calls. */
 typedef struct OPENNT_BASE_SERVICE OPENNT_BASE_SERVICE;
 typedef struct OPENNT_BASE_CONNECTION OPENNT_BASE_CONNECTION;
+/* The original service owns ConsoleRecord selection.  This callback only
+ * answers membership for already authenticated, live process handles; it
+ * never accepts a caller-supplied Console identity or selects a command. */
+typedef DWORD (WINAPI *OPENNT_BASE_CONSOLE_QUERY)(void *,HANDLE,const HANDLE *,DWORD,HANDLE,DWORD,BYTE *);
 OPENNT_BASE_SERVICE *OpenNtBaseServiceStart(void);
 BOOL OpenNtBaseServiceStop(OPENNT_BASE_SERVICE *);
+/* Configure before the first authenticated connection. */
+BOOL OpenNtBaseServiceConfigureConsoleQuery(OPENNT_BASE_SERVICE *,OPENNT_BASE_CONSOLE_QUERY,void *);
 /* True only when all authenticated client connections and all finite launch
  * reservations are gone.  It deliberately says nothing about a quiet but
  * connected interactive VDM. */

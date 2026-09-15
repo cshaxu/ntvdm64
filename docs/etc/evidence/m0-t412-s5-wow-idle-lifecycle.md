@@ -31,6 +31,24 @@ The selected binding is deliberately narrow:
 This restores the original source's branch and record cleanup without sending
 native handles or making a second task state machine.
 
+## ConsoleRecord identity recovery
+
+Original `BaseSrvCheckDOS` selects and mutates records by its Console handle;
+that owner is unchanged. The former standalone binding instead assigned a
+fresh local key to every authenticated connection, so a later `run16` from
+the same modern Console could never reach the original `VDM_READY`/`VDM_BUSY`
+selection path.
+
+The selected S1 finite Console probe is now connected to the service. Before
+its first `CheckVDM(EXISTING_CONSOLE)`, a new connection snapshots only live,
+already authenticated registered candidates, asks an owned detached
+`run16 --internal-console-probe` helper for membership, and revalidates each
+process generation before publishing one existing local key. A failed,
+ambiguous, stale, or unconfigured query fails closed; it never guesses a
+Console relation. The broker itself never attaches to a user Console. This is
+only the unavailable modern identity transport: it does not select a VDM,
+queue a command, or create a pool.
+
 ## Empty-broker policy
 
 `basesrv.exe` is still singleton-by-exclusive ncalrpc endpoint.  The new
@@ -62,6 +80,16 @@ revocation after original `BaseSrvExitDOSTask`, and the worker-side event
 close obligation.  It also proves the empty predicate is false while an
 authenticated launcher/worker or reservation exists and true only after both
 disconnect/release.
+
+The same test now configures a finite membership observer, retains an
+authenticated first launcher, and submits a second launcher `CheckVDM`.
+The observer is called exactly once and the unchanged original owner returns
+success. A separate fresh x86 fixture launches the current `run16.exe` probe
+and passes same/different Console separation, attached-controller refusal,
+unchanged failure output, detached return, and owned-child cleanup. The formal
+BaseSrv map contains `app_console_query`,
+`OpenNtBaseServiceConfigureConsoleQuery`, and
+`service_bind_existing_console`.
 
 Commands passing from `build/M0-T412/S5/product`:
 

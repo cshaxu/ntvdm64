@@ -7,14 +7,26 @@
 
 #define CHECK(value) do { if (!(value)) { fprintf(stderr,"FAIL %d\\n",__LINE__);return 1; } } while (0)
 
+static DWORD WINAPI same_console_query(void *context,HANDLE caller,const HANDLE *candidates,
+    DWORD count,HANDLE cancel,DWORD timeout,BYTE *members)
+{
+    DWORD *calls=context;
+    (void)caller;(void)candidates;(void)cancel;(void)timeout;
+    if (!calls || !count || !members) return ERROR_INVALID_PARAMETER;
+    ++*calls;
+    ZeroMemory(members,count);
+    members[0]=1;
+    return ERROR_SUCCESS;
+}
+
 int main(int argc,char **argv)
 {
     OPENNT_BASE_SERVICE *service=NULL;
-    OPENNT_BASE_CONNECTION *launcher=NULL,*worker=NULL;
-    PROCESS_INFORMATION child={0};
+    OPENNT_BASE_CONNECTION *launcher=NULL,*worker=NULL,*later=NULL;
+    PROCESS_INFORMATION child={0},laterChild={0};
     STARTUPINFOA startup={sizeof(startup)};
     HANDLE self=NULL;
-    DWORD launcherGeneration=0,workerGeneration=0;
+    DWORD launcherGeneration=0,workerGeneration=0,laterGeneration=0,queryCalls=0;
     uint64_t reservation=0,claimed=0;
     ULONG task=0;
     HANDLE console=NULL;
@@ -33,6 +45,7 @@ int main(int argc,char **argv)
     self=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION|SYNCHRONIZE,FALSE,GetCurrentProcessId());
     service=OpenNtBaseServiceStart();
     CHECK(self && service!=NULL);
+    CHECK(OpenNtBaseServiceConfigureConsoleQuery(service,same_console_query,&queryCalls));
     CHECK(OpenNtBaseServiceIsEmpty(service));
     CHECK(OpenNtBaseServiceConnect(service,self,&launcher,&launcherGeneration)==ERROR_SUCCESS);
     CHECK(!OpenNtBaseServiceIsEmpty(service));
@@ -127,11 +140,32 @@ int main(int argc,char **argv)
     CHECK(OpenNtBaseServicePrepareWorker(launcher,GetCurrentProcessId(),launcherGeneration,
         reservation,child.hProcess)==ERROR_ALREADY_EXISTS);
     CHECK(OpenNtBaseServiceReleaseReservation(launcher,GetCurrentProcessId(),launcherGeneration,reservation)==ERROR_SUCCESS);
+    /* A second authenticated launcher has no copied Console HANDLE.  The
+     * service must ask its configured finite membership binding about the
+     * already registered first launcher, then pass the selected local key to
+     * the unchanged original CheckVDM owner. */
+    CHECK(CreateProcessA(NULL,command,NULL,NULL,FALSE,CREATE_SUSPENDED,NULL,NULL,&startup,&laterChild));
+    CHECK(OpenNtBaseServiceConnect(service,laterChild.hProcess,&later,&laterGeneration)==ERROR_SUCCESS);
+    check.u.CheckVDM.ConsoleHandle=OPENNT_BASE_CONSOLE_EXISTING;
+    CHECK(OpenNtBaseEncodeCheckCommand(&check,6,laterGeneration,NULL,0,&wireBytes));
+    free(wire);wire=malloc(wireBytes);CHECK(wire && OpenNtBaseEncodeCheckCommand(
+        &check,6,laterGeneration,wire,wireBytes,&wireBytes));
+    CHECK(OpenNtBaseServiceCheck(later,laterChild.dwProcessId,laterGeneration,
+        wire,wireBytes,NULL,0,&answerBytes)==ERROR_INSUFFICIENT_BUFFER && answerBytes);
+    free(answer);answer=malloc(answerBytes);CHECK(answer && OpenNtBaseServiceCheck(
+        later,laterChild.dwProcessId,laterGeneration,wire,wireBytes,answer,answerBytes,&answerBytes)==ERROR_SUCCESS);
+    CHECK(queryCalls==1 && OpenNtBaseApplyCheckReply(answer,answerBytes,laterGeneration,6,&reply));
+    CHECK(reply.ReturnValue==STATUS_SUCCESS && reply.u.CheckVDM.VDMState==VDM_NOT_PRESENT);
+    CHECK(OpenNtBaseServiceDisconnect(later)==ERROR_SUCCESS);later=NULL;
+    TerminateProcess(laterChild.hProcess,0);WaitForSingleObject(laterChild.hProcess,INFINITE);
+    CloseHandle(laterChild.hThread);CloseHandle(laterChild.hProcess);laterChild.hThread=laterChild.hProcess=NULL;
     CHECK(OpenNtBaseServiceDisconnect(launcher)==ERROR_SUCCESS);launcher=NULL;
     CHECK(OpenNtBaseServiceIsEmpty(service));
     CHECK(OpenNtBaseServiceStop(service));service=NULL;
     TerminateProcess(child.hProcess,0);WaitForSingleObject(child.hProcess,INFINITE);
     CloseHandle(child.hThread);CloseHandle(child.hProcess);CloseHandle(self);
+    if (laterChild.hThread) CloseHandle(laterChild.hThread);
+    if (laterChild.hProcess) CloseHandle(laterChild.hProcess);
     free(getWire);free(updateAnswer);free(updateWire);free(answer);free(wire);
     puts("PASS: original Check/Update/Get/ExitVDM lifecycle completes through authenticated worker binding");
     return 0;
