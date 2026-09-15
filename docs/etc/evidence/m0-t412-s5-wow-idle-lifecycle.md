@@ -401,3 +401,20 @@ This is real package evidence that an actually resident worker receives the
 subsequent launch without the former infinite parent wait.  It does not claim
 interactive keyboard/EDIT semantics, full redirected COMMAND behavior or
 WOW/WRITE acceptance; those remain their separately stated boundaries.
+
+### Original first-VDM scope
+
+The selected `BaseSrvIsFirstVDM` owns one process-global `fIsFirstVDM` bit:
+the first request returns true and clears it.  It is neither a worker-local
+flag nor a persistent machine-wide setting.  The standalone server now has a
+default-off `first-yes`/`first-no` observation at that existing RPC boundary;
+it reports the already-selected original result and creates no new state.
+
+With a newly started `O:\winnt\basesrv.exe`, two independent native-Console
+`run16.exe MEM.EXE` workers returned zero.  The first trace at
+`O:\winnt\logs\m0-t412-s5-first-vdm-20260914.trace` records `first-yes`; the
+second records `first-no`.  After the exact test-owned worker/broker processes
+were stopped, a fresh broker and worker returned zero and
+`O:\winnt\logs\m0-t412-s5-first-vdm-restart-20260914.trace` records
+`first-yes` again.  Thus the bit is consumed exactly once per broker process
+and resets only with the fresh process, as the selected source specifies.

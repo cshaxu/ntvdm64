@@ -164,7 +164,11 @@ error_status_t Server_First(handle_t binding,VDM_CONNECTION connection,HANDLE pr
     *first=0;
     status=broker_rpc_peer_process(&scope,binding,process,&pid);
     if (status) return status;
-    return OpenNtBaseServiceFirst(connection,pid,generation,first);
+    status=OpenNtBaseServiceFirst(connection,pid,generation,first);
+    /* Default-off observation of the original BaseSrvIsFirstVDM result.  The
+     * broker owns no substitute first-worker state. */
+    basesrv_trace(status ? "first-error" : (*first ? "first-yes" : "first-no"),pid,status);
+    return status;
 }
 error_status_t Server_Check(handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,ULONG requestBytes,unsigned char *request,ULONG *parentEventCount,
