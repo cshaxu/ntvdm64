@@ -276,6 +276,7 @@ static BOOL set1_scan_code_for_ascii(char character, WORD *scan_code)
     case '\r': *scan_code = 0x1c; return TRUE;
     case '\x1b': *scan_code = 0x01; return TRUE;
     case ' ':  *scan_code = 0x39; return TRUE;
+    case '/':  *scan_code = 0x35; return TRUE;
     case '0':  *scan_code = 0x0b; return TRUE;
     case '1':  *scan_code = 0x02; return TRUE;
     case '2':  *scan_code = 0x03; return TRUE;

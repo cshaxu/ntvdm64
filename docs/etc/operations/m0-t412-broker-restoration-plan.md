@@ -307,6 +307,12 @@ This sequential extension does not allocate a new T or change candidate order.
 
 ### Continuing T412 acceptance constraints
 
+S8's [source/image/runtime result](../evidence/m0-t412-s8-command-exit-provenance.md)
+proves the observed 1 and /c zero are original guest exits, not a demonstrated
+host propagation defect. Products remain unchanged; regression tests and
+evidence are delivered. Changing those guest semantics requires owner
+disposition outside S8's load-only-media scope. Current Status owns the wait.
+
 The first no-source-change control, `run16 COMMAND.COM /c MEM.EXE`, displays
 MEM output and returns zero (`O:\winnt\logs\m0-t412-s6-nested-mem.txt`). It
 does not emit the native-child report and does not reproduce the owner's typed

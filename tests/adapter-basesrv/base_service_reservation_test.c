@@ -128,8 +128,10 @@ int main(int argc,char **argv)
     free(getWire);getWire=NULL;
     ZeroMemory(&get,sizeof(get));
     get.u.GetNextVDMCommand.StartupInfo=&getStartup;
-    /* Complete the first command and enter the original GetNext wait. */
+    /* Complete with a nonzero result and enter the original GetNext wait.
+     * The later task's zero must not inherit this result (S8). */
     get.u.GetNextVDMCommand.VDMState=ASKING_FOR_DOS_BINARY;
+    get.u.GetNextVDMCommand.ExitCode=7;
     CHECK(OpenNtBaseEncodeGetCommand(&get,5,workerGeneration,NULL,0,&getWireBytes));
     getWire=malloc(getWireBytes);CHECK(getWire && OpenNtBaseEncodeGetCommand(
         &get,5,workerGeneration,getWire,getWireBytes,&getWireBytes));
@@ -143,7 +145,7 @@ int main(int argc,char **argv)
     CHECK(WaitForSingleObject(parentEvent,0)==WAIT_OBJECT_0);
     { DWORD exitCode=STILL_ACTIVE;
       CHECK(OpenNtBaseServiceExitCode(launcher,GetCurrentProcessId(),launcherGeneration,
-          parentReceipt,&exitCode)==ERROR_SUCCESS && exitCode==0); }
+          parentReceipt,&exitCode)==ERROR_SUCCESS && exitCode==7); }
     CloseHandle(parentEvent);parentEvent=NULL;
 
     /* A same-Console launch may now use the original ready record: CheckDOS

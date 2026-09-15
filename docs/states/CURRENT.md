@@ -6,9 +6,11 @@
 
 S7 is [closed by owner direction](../etc/evidence/m0-t412-s7-interactive-child-repair.md#s7-owner-directed-closure-and-s8-handoff)
 at pushed `8335f38bd`: nested COMMAND/MEM and EDIT return are delivered.
-S8 owns the unresolved explicit COMMAND EXIT result of 1: establish its original
-source provenance and repair incorrect propagation without forcing success.
-No new S8 implementation or runtime acceptance is claimed at admission.
+S8 [diagnosis and verification](../etc/evidence/m0-t412-s8-command-exit-provenance.md)
+prove EXIT=1 and resident /c=0 originate in unchanged original COMMAND.
+All 15 Console cases pass; direct DOS/native result 7 propagates correctly.
+No product repair is justified. Await owner disposition before any guest
+behavior change; no next packet is admitted.
 
 The [S6 VDM TIB repair](../etc/evidence/m0-t412-s6-vdm-tib-storage-repair.md)
 retains its full-storage link gate. Current products are at `O:\winnt`;
