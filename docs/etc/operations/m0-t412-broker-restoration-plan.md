@@ -267,7 +267,7 @@ test passed because it was skipped, unavailable or terminated by a timeout.
 Runtime verification uses the formal Win32/x86 CCPU40 product and records
 artifact identity, selected providers, expected/observed outcomes and trace
 markers. Build/intermediate outputs stay in build/; real-package observations
-stay in O:\ntvdm64\logs. Newly required autonomous semantics need divergence
+stay in O:\winnt\logs. Newly required autonomous semantics need divergence
 reasons and exercised traces, not merely compilation success.
 
 Full WRITE application recovery belongs to the later WOW16 package. This does

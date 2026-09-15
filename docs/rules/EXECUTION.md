@@ -103,15 +103,15 @@ begins, unless a recorded manifest proves their source/toolchain/input identity
 and reuse is intentional. Do not emit build products into the repository root,
 `src/`, `tests/`, `tools/`, or `artifacts/`.
 
-The only permitted deployment exception is a deliberate copy of the selected
-formal product executable to `O:\ntvdm64\ntvdm32.exe` for real-package runtime
-execution. `O:\ntvdm64` is not a build root: no object, library, generated
+The only permitted deployment exception is a deliberate copy of selected
+formal product executable(s) to the `O:\winnt` package root for real-package
+runtime execution. `O:\winnt` is not a build root: no object, library, generated
 source, intermediate, fixture executable, or other build result may be written
 there. Every observation, diagnostic, stdout/stderr capture, trace, report,
 and runtime log from that execution must be written below
-`O:\ntvdm64\logs\`, never beside the executable or guest media. A closed
+`O:\winnt\logs\`, never beside the executable or guest media. A closed
 diagnosis retains only a concise reviewed excerpt, hash, manifest, or conclusion
-in its admitted evidence record; raw logs stay in `O:\ntvdm64\logs\` until the
+in its admitted evidence record; raw logs stay in `O:\winnt\logs\` until the
 owner's retention decision. `artifacts/` may receive only an owner-requested
 report or `artifacts/build/<task-id>-<version>/`, which is reserved for an
 explicitly approved versioned executable publication and its manifest, not for
@@ -119,19 +119,19 @@ a configure tree, retry root, object cache, probe, or raw observation log.
 
 ### Product Executable
 
-The current product publication contract has one executable:
+The legacy monolithic publication row has one executable:
 
 - `build/output/ntvdm32.exe` — the formal Win32/x86 product link.
 
-The deployable local package mirrors that exact name at its root. The
-currently selected owner test root is `O:\ntvdm64`, so its required executable
-path is `O:\ntvdm64\ntvdm32.exe`. Native x64 is retired as a product,
+The active packet may instead select a formal multi-program package and records
+its exact executable set.  Every deployable local package mirrors its selected
+formal executable names at the `O:\winnt` root. Native x64 is retired as a product,
 staging, runtime and acceptance target. Native-x64/cross-width-only source
 differences are removed when the selected original Win32/x86 form composes.
 
-`O:\ntvdm64` is a runtime-package root, not a build or diagnostic workspace.
+`O:\winnt` is a runtime-package root, not a build or diagnostic workspace.
 JSON, TXT, LOG, MAP, PDB and other observation/debug records must be written
-below `O:\ntvdm64\logs\`, never beside the product executable or guest media at
+below `O:\winnt\logs\`, never beside the product executable or guest media at
 the package root.
 
 A build run may use a descriptive temporary executable name inside its

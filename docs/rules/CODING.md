@@ -167,11 +167,11 @@
 - Put all disposable compiler, linker, generated, intermediate, fixture and
   build-result output under `build/<task-id>/<run-id>/` (or formal
   `build/output/`). Do not emit it into the repository root, `src/`, `tests/`,
-  `tools/`, `artifacts/`, or `O:\ntvdm64`.
-- A real-package run may copy only the selected formal `ntvdm32.exe` to
-  `O:\ntvdm64\ntvdm32.exe`. Every observation, diagnostic and runtime log for
+  `tools/`, `artifacts/`, or `O:\winnt`.
+- A real-package run may copy only selected formal product executable(s) to
+  the `O:\winnt` package root. Every observation, diagnostic and runtime log for
   that run, including stdout/stderr captures, belongs below
-  `O:\ntvdm64\logs\`; no build product or log belongs beside the package-root
+  `O:\winnt\logs\`; no build product or log belongs beside the package-root
   executable or guest media.
 - Put concise tracked evidence, inventories and manifests in `docs/etc/`.
   `artifacts/` is reserved for owner-requested reports and formally manifested

@@ -346,7 +346,12 @@ foreach ($currentPath in @($markdownPaths | Where-Object { $_.FullName -notmatch
     $currentText = [System.IO.File]::ReadAllText($currentPath.FullName, [System.Text.UTF8Encoding]::new($false, $true))
     foreach ($pathMatch in [regex]::Matches($currentText, '(?i)\b[a-z]:\\[^\s`"'']+')) {
         $value = $pathMatch.Value
-        if ($value -notmatch '^(?i:O:\\ntvdm64(?:\\|$)|O:\\repos\.external(?:\\|$))') { throw "Unapproved local path in current authority: $($currentPath.FullName): $value" }
+        # O:\winnt is the sole current runtime-package root.  O:\ntvdm64 may
+        # occur only in retained supporting evidence or compact historical
+        # checkpoints inside CURRENT; it cannot re-enter a current rule/design.
+        $legacyNtvdm64 = $value -match '^(?i:O:\\ntvdm64(?:\\|$))' -and
+            $currentPath.FullName -match '(?i)\\docs\\(?:etc\\|states\\CURRENT\.md$)'
+        if ($value -notmatch '^(?i:O:\\winnt(?:\\|$)|O:\\repos\.external(?:\\|$))' -and -not $legacyNtvdm64) { throw "Unapproved local path in current authority: $($currentPath.FullName): $value" }
     }
 }
 Assert-RelativeLinks @($markdownPaths | ForEach-Object FullName)

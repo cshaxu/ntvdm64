@@ -141,6 +141,9 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command)
     HANDLE parent_wait;
     DWORD result = ERROR_GEN_FAILURE;
     BOOL prepared = FALSE;
+    BOOL published = FALSE;
+    BOOL registered = FALSE;
+    BOOL resumed = FALSE;
 
     /* This is the original parent-side VDM environment projection.  The
      * ANSI record is captured by BaseCheckVDM; the matching Unicode record
@@ -173,6 +176,11 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command)
         result = ERROR_INVALID_DATA;
         goto done;
     }
+    /* CheckVDM has published an original DOS/WOW record.  Every failure
+     * before the worker actually runs must use the matching original
+     * UPDATE_VDM_UNDO_CREATION cleanup, not leave that record to a later
+     * unrelated launcher. */
+    published = TRUE;
     result = OpenNtBaseClientReserveWorker(task, &reservation);
     if (result)
         goto done;
@@ -232,11 +240,13 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command)
         result = GetLastError();
         goto done;
     }
+    registered = TRUE;
     if (ResumeThread(worker.hThread) == (DWORD)-1)
     {
         result = GetLastError();
         goto done;
     }
+    resumed = TRUE;
     if (WaitForSingleObject(parent_wait ? parent_wait : worker.hProcess, INFINITE) != WAIT_OBJECT_0)
     {
         result = GetLastError();
@@ -253,6 +263,14 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command)
     if (parent_wait && parent_wait != worker.hProcess)
         CloseHandle(parent_wait);
 done:
+    if (published && !resumed && result)
+    {
+        HANDLE undo_task = (HANDLE)(ULONG_PTR)task;
+        ULONG undo_state = registered ? VDM_FULLY_CREATED : VDM_PARTIALLY_CREATED;
+        /* Preserve the launch failure.  This is best-effort only because the
+         * original record owner may itself report an earlier cleanup fault. */
+        (void)BaseUpdateVDMEntry(UPDATE_VDM_UNDO_CREATION, &undo_task, undo_state, binary);
+    }
     if (worker.hProcess && !prepared)
     {
         (void)TerminateProcess(worker.hProcess, result ? result : ERROR_PROCESS_ABORTED);

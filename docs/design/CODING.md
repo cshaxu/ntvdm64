@@ -171,10 +171,10 @@ mirror may call or link its overlay.
 
 Ninja is generated from the source-owner and package-selection manifests.
 Disposable objects, libraries, generated files, fixture executables and build
-results belong under `build/<task-id>/<run-id>/`; the selected formal product
-may be published at `build/output/ntvdm32.exe`. A real-package run copies only
-that selected executable to `O:\ntvdm64\ntvdm32.exe`; its observations and all
-runtime logs belong in `O:\ntvdm64\logs\`, never in the repository or beside
+results belong under `build/<task-id>/<run-id>/`; selected formal product
+executables may be published at `build/output/`. A real-package run copies only
+those selected executables to the `O:\winnt` package root; its observations and all
+runtime logs belong in `O:\winnt\logs\`, never in the repository or beside
 the package-root executable. Guest objects and libraries are
 packaging/loading inputs only and never enter the host link. Formal verification
 currently covers accepted x86 CCPU40 compilation plus architecture-neutral token

@@ -20,10 +20,10 @@ or acceptance dependency.
 
 The supported build graph is the manifest-driven Win32/x86 MSVC `/MT` Ninja
 route selected by the active packet. Build trees, compiler output and fixture
-results belong below `build/<task-id>/<run-id>/`; only a verified final product
-is staged as `build/output/ntvdm32.exe`. The deployment exception is an
-intentional copy to `O:\ntvdm64\ntvdm32.exe`; runtime observations belong under
-`O:\ntvdm64\logs\`.
+results belong below `build/<task-id>/<run-id>/`; only selected verified final
+products are staged under `build/output/`. The deployment exception is an
+intentional copy to the `O:\winnt` package root; runtime observations belong under
+`O:\winnt\logs\`.
 ## Current Boundary
 
 The product directly composes selected original MVDM source and preserves its

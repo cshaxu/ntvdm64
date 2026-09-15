@@ -350,3 +350,33 @@ five-second observation.  This proves the final staged `run16.exe` reached
 the existing three-program chain through package-local resolution, without
 relying on the current directory.  It is not a replacement for the separate
 interactive COMMAND/EDIT or WOW acceptance gates.
+
+## Launch rollback recovery
+
+`BaseCheckVDM` publishes the original DOS/WOW record before the launcher
+creates, registers and resumes its worker.  The standalone `run16` caller had
+omitted the selected original failure leg: a failed pre-resume creation or
+registration could leave that published record in the broker.  A later launch
+could then mistake it for a reusable worker record.
+
+The launcher now records the three source-shaped milestones—published,
+registered and resumed—and, only when a failure occurs before `ResumeThread`,
+calls `BaseUpdateVDMEntry(UPDATE_VDM_UNDO_CREATION, ...)` with the original
+`VDM_PARTIALLY_CREATED` or `VDM_FULLY_CREATED` state.  It preserves the first
+launch error and treats cleanup as best effort, matching the server's record
+owner.  It does not run after a resumed worker: normal worker completion stays
+on the existing original `ExitVDM` route.
+
+The formal x86 `run16.exe` relink and the focused
+`basesrv-service-reservation-test.exe` pass after this recovery.  A new
+real-package observation from `O:\winnt` ran two same-Console, unredirected
+`run16.exe MEM.EXE` launches.  Both launcher processes returned `0` inside
+the 30-second bound and
+`O:\winnt\logs\m0-t412-s5-reuse-routing-20260914.trace` records the complete
+`Check → Reserve → Prepare → worker connect → ExitVDM → parent exit` sequence
+for each.  The first MEM worker exited normally, so the live package did not
+leave an interactive COMMAND worker available to exercise reuse.  The focused
+reservation fixture separately and exactly covers the source predicate for
+that case: an existing DOS record without a pending original wait is not
+reused; after `GetNextVDMCommand` installs its wait, it is reusable.  The
+prior `O:\ntvdm64` paths above are retained as historical evidence only.
