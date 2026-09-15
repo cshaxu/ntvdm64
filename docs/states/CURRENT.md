@@ -4,6 +4,13 @@
 
 **Active: M0 T412 S6.**
 
+Current regression repair: [VDM TIB storage evidence](../etc/evidence/m0-t412-s6-vdm-tib-storage-repair.md)
+identifies the four-byte placeholder incorrectly satisfying the original printer
+carrier. Full original storage and startup binding are restored, with a formal
+link ownership/overlap gate. The rebuilt three-program package is at `O:\winnt`;
+MEM returns normally and EDIT startup is observed. Full T412 matrix/closure and
+owner interactive acceptance are not claimed by this bounded repair.
+
 ## Active Packet
 
 ### M0 T412 S6 — integrated verification and removal

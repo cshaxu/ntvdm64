@@ -1,5 +1,12 @@
 # mvdm-host
 
+MVDM-HOST-DIV-VDM-TIB-STORAGE: `softpc.new/host/src/stubs.c` omits the
+non-MONITOR four-byte `VdmTib` placeholder. The selected original printer
+carrier requires the full original `VDM_TIB`, defined by
+`adapter-mvdm-host-out/monitor/mvdm_vdm_tib.c` and bound at worker startup.
+Keeping the placeholder can satisfy static-library resolution without loading
+the real storage, turning original printer-field stores into global corruption.
+
 Temporary observation register: MVDM-HOST-DIV-266 adds scalar-only hooks in
 softpc.new/host/src/{config.c,nt_bop.c} and softpc.new/base/bios/emm_fncs.c for EMS size,
 initialization result, request/result registers and original WOW loader failures. The existing physical

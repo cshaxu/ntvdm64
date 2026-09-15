@@ -3,7 +3,9 @@
 /* Source-shaped storage from the original user-mode monitor: one NTVDM
  * worker has one process-global VDM TIB.  It deliberately does not expose
  * an NT kernel VDM object, a CCPU executor or a cross-session broker. */
-VDM_TIB VdmTib;
+/* A real definition, not a tentative COMMON symbol: the link must select
+ * this complete original-layout storage, never an unrelated scalar stub. */
+VDM_TIB VdmTib = {0};
 ULONG mvdm_monitor_ntvdm_state;
 
 int mvdm_monitor_bind_current_thread(void)

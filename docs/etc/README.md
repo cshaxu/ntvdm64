@@ -26,6 +26,7 @@ proves the original `FSTI` continuation reaches BOP `FDh`.
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T412 S6 VDM TIB storage repair](evidence/m0-t412-s6-vdm-tib-storage-repair.md) | M0 T412 S6 | Hardware-watchpoint cause, full original storage selection, formal link gate and real DOS regression observations. | Retain through T412 closure. |
 | [T412 S4 stream reservation](evidence/m0-t412-s4-stream-reservation.md) | M0 T412 S4 | Preserves original Update-before-worker-connect standard-stream timing through finite authenticated reservation receipts; records the remaining nested-DOS and byte-stream limits. | Retain through S4 and T412 closure. |
 | [T412 S4 closure](evidence/m0-t412-s4-closure.md) | M0 T412 S4 | Requirement ledger for real COMMAND/MEM/EDIT, BOP reentry, Console streams, EOF/nonzero and the explicit Redirector boundary. | Retain through T412 closure. |
 | [T412 S2 original lifecycle](evidence/m0-t412-s2-original-lifecycle.md) | M0 T412 S2 | Actual original server command/capacity/event/reentry/cleanup execution and explicit integration limits. | Retain through product selection and T412 closure. |

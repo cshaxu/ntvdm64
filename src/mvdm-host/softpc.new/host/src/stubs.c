@@ -544,7 +544,9 @@ word  val;
 
 int FlatAddress[1];
 int Ldt[1];
-int VdmTib;
+/* DIVERGENCE(MVDM-HOST-DIV-VDM-TIB-STORAGE): the selected printer carrier
+ * uses the complete original VDM_TIB. Its storage belongs to the monitor
+ * binding; a four-byte non-MONITOR placeholder must not satisfy that symbol. */
 int VdmTibStruct;
 
 void DispatchInterrupts()

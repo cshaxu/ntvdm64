@@ -7,6 +7,7 @@
 #include "mvdm_softpc_guest_memory.h"
 #include "mvdm_softpc_termination.h"
 #include "session/session.h"
+#include "adapter-mvdm-host-out/monitor/include/monitor_context.h"
 
 #include <stdio.h>
 
@@ -86,6 +87,9 @@ DWORD mvdm_standalone_worker_begin(void)
         error=ERROR_INVALID_STATE; goto fail;
     }
     worker_thread=TRUE;
+    if (!mvdm_monitor_bind_current_thread()) {
+        error=ERROR_INVALID_STATE; goto fail;
+    }
     if (!mvdm_softpc_guest_memory_begin(&worker_session)) {
         error=ERROR_NOT_ENOUGH_MEMORY; goto fail;
     }
