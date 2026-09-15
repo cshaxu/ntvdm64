@@ -36,17 +36,29 @@ static void mapping_observe(const char *event, uint32_t a, uint32_t b,
     DWORD saved_error = GetLastError();
     int saved_errno = errno;
     FILETIME created = {0}, exited, kernel, user;
+    char directory[MAX_PATH];
     char path[MAX_PATH];
+    char *slash;
     char line[256];
     HANDLE file;
+    DWORD directory_length;
     DWORD written;
     int length;
 
+    /* The package root is the directory containing this executable.  Keep
+     * observations under its logs child; no deployment drive or directory is
+     * embedded in the product. */
+    directory_length = GetModuleFileNameA(NULL, directory, (DWORD)sizeof(directory));
+    if (directory_length == 0u || directory_length >= sizeof(directory) ||
+        (slash = strrchr(directory, '\\')) == NULL) goto done;
+    *slash = '\0';
     (void)GetProcessTimes(GetCurrentProcess(), &created, &exited, &kernel, &user);
-    (void)snprintf(path, sizeof(path),
-        "O:\\ntvdm64\\logs\\physical-mapping-%lu-%08lx%08lx.log",
-        GetCurrentProcessId(), created.dwHighDateTime, created.dwLowDateTime);
-    (void)CreateDirectoryA("O:\\ntvdm64\\logs", NULL);
+    length = snprintf(path, sizeof(path), "%s\\logs", directory);
+    if (length <= 0 || (size_t)length >= sizeof(path)) goto done;
+    (void)CreateDirectoryA(path, NULL);
+    length = snprintf(path, sizeof(path), "%s\\logs\\physical-mapping-%lu-%08lx%08lx.log",
+        directory, GetCurrentProcessId(), created.dwHighDateTime, created.dwLowDateTime);
+    if (length <= 0 || (size_t)length >= sizeof(path)) goto done;
     file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ | FILE_SHARE_WRITE,
         NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
     if (file != INVALID_HANDLE_VALUE) {
@@ -59,6 +71,7 @@ static void mapping_observe(const char *event, uint32_t a, uint32_t b,
             (void)WriteFile(file, line, (DWORD)length, &written, NULL);
         CloseHandle(file);
     }
+done:
     errno = saved_errno;
     SetLastError(saved_error);
 }

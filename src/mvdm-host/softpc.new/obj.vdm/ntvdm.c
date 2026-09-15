@@ -43,6 +43,7 @@ _CRTAPI1 main(int argc, CHAR ** argv)
      * than installing a second CRT/application entry. */
     bootstrap=mvdm_standalone_worker_begin();
     if (bootstrap!=ERROR_SUCCESS) return (int)bootstrap;
+    mvdm_standalone_worker_record_phase("original-entry");
     if (setjmp(*mvdm_standalone_worker_termination_escape()) != 0) {
         ret=(int)mvdm_standalone_worker_completion_code();
         goto finish;
@@ -53,22 +54,30 @@ _CRTAPI1 main(int argc, CHAR ** argv)
      *  so that we can always suspend the heartbeat when an exception
      *  occurs.
      */
+    mvdm_standalone_worker_record_phase("before-timer");
     TimerInit();
+    mvdm_standalone_worker_record_phase("after-timer");
 
 
 
     try {
 
+        mvdm_standalone_worker_record_phase("before-cpuenv");
         CpuEnvInit();
+        mvdm_standalone_worker_record_phase("after-cpuenv");
 
         /*
          *  Load in the default system error message, since a resource load
          *  will fail when we are out of memory, if this fails we must exit
          *  to avoid confusion.
          */
+        mvdm_standalone_worker_record_phase("before-nls");
         nls_init();
+        mvdm_standalone_worker_record_phase("after-nls");
 
+        mvdm_standalone_worker_record_phase("before-host-main");
         ret = host_main(argc, argv);
+        mvdm_standalone_worker_record_phase("after-host-main");
         }
     except(VdmUnhandledExceptionFilter(GetExceptionInformation())) {
         ;  // we shouldn't arrive here

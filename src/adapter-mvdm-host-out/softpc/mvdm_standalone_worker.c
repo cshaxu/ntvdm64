@@ -118,3 +118,10 @@ int mvdm_standalone_worker_finish(int result)
     mvdm_standalone_worker_trace("run",(DWORD)result);
     return mvdm_standalone_worker_cleanup(result);
 }
+
+void mvdm_standalone_worker_record_phase(const char *phase)
+{
+    /* Default-off host-local witness for the original ntvdm.c entry.  This
+     * does not participate in worker setup or change source ordering. */
+    mvdm_standalone_worker_trace(phase,ERROR_SUCCESS);
+}

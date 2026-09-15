@@ -43,6 +43,7 @@
 #include <stdlib.h>
 #include <conapi.h>
 #include "nt_timer.h"
+#include "mvdm_standalone_worker.h"
 #include "nt_graph.h"
 #include "ntcheese.h"
 #include "nt_uis.h"
@@ -241,6 +242,8 @@ void  host_applInit(int argc,char *argv[])
         }
     }
 
+    mvdm_standalone_worker_record_phase("host-appl-flags");
+
 
     if (bSwitchF == FALSE)
         ExitProcess (0);
@@ -256,6 +259,7 @@ void  host_applInit(int argc,char *argv[])
     }
     else if (StreamIoSwitchOn)
 	    enable_stream_io();
+    mvdm_standalone_worker_record_phase("host-appl-streams");
 
     /*
      * Get a handle to the main thread so it can be suspended during
@@ -268,12 +272,16 @@ void  host_applInit(int argc,char *argv[])
 		    (DWORD) 0,
 		    FALSE,
 		    (DWORD) DUPLICATE_SAME_ACCESS);
+    mvdm_standalone_worker_record_phase("host-appl-main-thread");
 
     InitializeIcaLock();
     host_ica_lock();
+    mvdm_standalone_worker_record_phase("host-appl-ica");
 
     init_host_uis();    /* console setup */
+    mvdm_standalone_worker_record_phase("host-appl-uis");
     nt_start_event_thread();      /* Start event processing thread */
+    mvdm_standalone_worker_record_phase("host-appl-event-thread");
 }
 
 

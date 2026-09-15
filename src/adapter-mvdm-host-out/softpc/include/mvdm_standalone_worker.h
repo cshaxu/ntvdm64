@@ -11,5 +11,6 @@ DWORD mvdm_standalone_worker_begin(void);
 jmp_buf *mvdm_standalone_worker_termination_escape(void);
 DWORD mvdm_standalone_worker_completion_code(void);
 int mvdm_standalone_worker_finish(int result);
+void mvdm_standalone_worker_record_phase(const char *phase);
 
 #endif

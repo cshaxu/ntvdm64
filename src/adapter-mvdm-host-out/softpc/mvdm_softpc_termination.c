@@ -510,7 +510,7 @@ void mvdm_softpc_record_bop_dispatch(unsigned int selector,
 
     if (mvdm_softpc_dpmi_publication_report_path[0] != '\0' &&
         selector == 0x53u && (service == 0x00u || service == 0x01u ||
-        service == 0x11u || (service == 0x02u &&
+        service == 0x0fu || service == 0x11u || (service == 0x02u &&
         InterlockedIncrement(&dpmi_02_enters) <= 32))) {
         char publication_message[112];
         int formatted;
@@ -624,7 +624,7 @@ void mvdm_softpc_record_bop_return(unsigned int selector,
     message[54] = guest_if ? '1' : '0';
     if (mvdm_softpc_dpmi_publication_report_path[0] != '\0' &&
         selector == 0x53u && (service == 0x00u || service == 0x01u ||
-        service == 0x11u || (service == 0x02u &&
+        service == 0x0fu || service == 0x11u || (service == 0x02u &&
         InterlockedIncrement(&dpmi_02_leaves) <= 32))) {
         char publication_message[112];
         int formatted;
