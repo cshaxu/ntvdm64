@@ -91,6 +91,10 @@ struct	VideoVector	{
 extern	struct	VideoVector	Video;
 
 #define	getVideolatches()	(*(Video.GetVideolatches))()
+/* DIVERGENCE(MVDM-HOST-DIV-156): CPU40 egacpu.h declares the original
+ * direct vglob.c accessors. Keep the full C-VID latch/table layout, but do
+ * not replace those typed calls with the older generated scratch users. */
+#ifndef CPU_40_STYLE
 #define	getVideorplane()	(*(Video.GetVideorplane))()
 #define	getVideowplane()	(*(Video.GetVideowplane))()
 #define	getVideoscratch()	(*(Video.GetVideoscratch))()
@@ -129,7 +133,9 @@ extern	struct	VideoVector	Video;
 #define	getVideowrmode()	(*(Video.GetVideowrmode))()
 #define	getVideochain()	(*(Video.GetVideochain))()
 #define	getVideowrstate()	(*(Video.GetVideowrstate))()
+#endif
 #define	setVideolatches(value)	(*(Video.SetVideolatches))(value)
+#ifndef CPU_40_STYLE
 #define	setVideorplane(value)	(*(Video.SetVideorplane))(value)
 #define	setVideowplane(value)	(*(Video.SetVideowplane))(value)
 #define	setVideoscratch(value)	(*(Video.SetVideoscratch))(value)
@@ -168,6 +174,7 @@ extern	struct	VideoVector	Video;
 #define	setVideowrmode(value)	(*(Video.SetVideowrmode))(value)
 #define	setVideochain(value)	(*(Video.SetVideochain))(value)
 #define	setVideowrstate(value)	(*(Video.SetVideowrstate))(value)
+#endif
 #define	SetWritePointers()	(*(Video.setWritePointers))()
 #define	SetReadPointers(readset)	(*(Video.setReadPointers))(readset)
 #define	SetMarkPointers(markset)	(*(Video.setMarkPointers))(markset)

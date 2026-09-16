@@ -33,33 +33,22 @@ const videoHeader = fs.readFileSync(path.join(sourceRoot, 'cvidc', 'evidgen.h'),
 const accessorSource = fs.readFileSync(path.join(sourceRoot, 'cpu', 'src', 'evid', 'vglob.c'), 'utf8');
 const accessors = [...accessorSource.matchAll(/setVideo(\w+) IFN1\(([^,]+), value\)/g)];
 if (accessors.length !== 38) throw new Error('Original video accessor profile changed');
-const videoDeclarations = [], videoSlots = [], videoCases = [];
+const videoCases = [];
 const setters = ['sinit011.c', 'sinit012.c', 'sinit013.c'].map(n => fs.readFileSync(path.join(sourceRoot, 'cvidc', n), 'utf8')).join('\n');
 for (const [, name, rawType] of accessors) {
   const type = rawType.trim();
   const slotType = videoHeader.match(new RegExp('([\\w]+(?:\\s*\\*)?)\\s*\\(\\*GetVideo' + name + '\\)'))?.[1].trim();
   if (!slotType) throw new Error(`Missing original VideoVector slot: ${name}`);
-  // Parentheses keep original evidgen function-like macros out of declarations.
-  videoDeclarations.push(`extern ${type} (getVideo${name})(void);`, `extern void (setVideo${name})(${type});`);
-  const same = type.replaceAll(' ', '') === slotType.replaceAll(' ', '');
-  if (!same) {
-    videoDeclarations.push(`static ${slotType} video_get_${name}(void) { return (${slotType})(getVideo${name})(); }`,
-      `static void video_set_${name}(${slotType} value) { (setVideo${name})((${type})value); }`);
-  }
-  videoSlots.push(`    boundVideo.GetVideo${name} = ${same ? 'getVideo' + name : 'video_get_' + name};`,
-    `    boundVideo.SetVideo${name} = ${same ? 'setVideo' + name : 'video_set_' + name};`);
   const body = setters.match(new RegExp('case\\s+S_\\d+_CiSetVideo' + name + '_\\w+_id\\s*:[\\s\\S]*?(?=case\\s|$)'))?.[0];
   const offset = body?.match(/&\(r20\)\)\s*=\s*\(IS32\)\((\d+)\)/)?.[1];
   if (!offset) throw new Error(`Missing independent generated GDP offset: ${name}`);
-  videoCases.push(`CHECK_FIELD(${name}, ${slotType}, ${offset});`);
+  videoCases.push(`CHECK_FIELD(${name}, ${type}, ${offset});`);
 }
 const text = [
   '/* Generated from original cvidc/c2cpusad.h. Do not edit. */\n',
   `/* public=${slots.CpuVectorNames.length}; private=${slots.CpuPrivateVectorNames.length} */\n`,
   emit('MVDM_CVIDC_CPU_PUBLIC_SLOTS', slots.CpuVectorNames, publicSpecial),
   emit('MVDM_CVIDC_CPU_PRIVATE_SLOTS', slots.CpuPrivateVectorNames, privateSpecial),
-  '#ifdef MVDM_CVIDC_VIDEO_DECLARATIONS\n', videoDeclarations.join('\n'), '\n#endif\n',
-  '#ifdef MVDM_CVIDC_VIDEO_BIND\n', videoSlots.join('\n'), '\n#endif\n',
 ].join('');
 fs.mkdirSync(path.dirname(output), { recursive: true });
 if (!fs.existsSync(output) || fs.readFileSync(output, 'utf8') !== text) fs.writeFileSync(output, text);

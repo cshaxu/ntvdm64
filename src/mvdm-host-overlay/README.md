@@ -7,11 +7,11 @@ component.
 
 ## Divergence register
 
-T413 restores the unchanged original cpu/src/evid/vglob.c host accessors in
-the existing DIV-156 binder. The generated binding selects all 38 pairs;
-only ten pairs need typed pointer/signed conversions. Latches and pointer
-selectors remain original. This private composition removes generated host
-accessor writes to shared J-code scratch, not the original C-VID engine.
+T413 restores unchanged original cpu/src/evid/vglob.c host accessors through
+the original typed egacpu.h declarations. S4 removes the 38-pair rebinding and
+all 20 typed conversion wrappers from DIV-156. The binder again copies only
+the original C_Video table; CPU40 host field accesses no longer dispatch
+through it. Latches and pointer selectors retain their original routes.
 
 | ID | Original purpose | Reason | Implementation | Files |
 | --- | --- | --- | --- | --- |

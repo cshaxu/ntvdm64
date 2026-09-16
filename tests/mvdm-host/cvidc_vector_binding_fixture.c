@@ -5,7 +5,7 @@
 #include <string.h>
 #include "insignia.h"
 #include "host_def.h"
-#include "evidgen.h"
+#include "egacpu.h"
 #define CPU_PRIVATE
 #include "cpu4.h"
 #include "sas.h"
@@ -31,8 +31,8 @@ static IUH *scratch[] = { &r0,&r1,&r2,&r3,&r4,&r5,&r6,&r7,
     type value=(type)values[test]; \
     memset(Gdp,0xa5,65536); memcpy(expected,Gdp,65536); \
     memcpy(expected+(offset),&value,sizeof(value)); \
-    Video.SetVideo##name(value); \
-    CHECK(Video.GetVideo##name()==value); \
+    setVideo##name(value); \
+    CHECK(getVideo##name()==value); \
     CHECK(memcmp(Gdp,expected,65536)==0); \
     for(i=0;i<32;i++) CHECK(*scratch[i]==100+i); \
 } while(0)
@@ -41,7 +41,7 @@ static DWORD WINAPI refresh(void *unused)
 {
     unsigned i;
     (void)unused;
-    for(i=0;i<100000;i++) Video.SetVideodirty_total(1000000);
+    for(i=0;i<100000;i++) setVideodirty_total(1000000);
     return 0;
 }
 
@@ -73,8 +73,8 @@ int main(void)
     /* Latches and pointer selection deliberately remain original EDL owners. */
     Video.SetVideolatches(0x12345678); CHECK(Video.GetVideolatches()==0x12345678);
     setReadPointers(0); setMarkPointers(0);
-    CHECK(Video.GetVideomark_byte()!=0 && Video.GetVideomark_word()!=0 && Video.GetVideomark_string()!=0);
-    Video.SetVideochain(CHAIN_2); Video.SetVideowrmode(0); setWritePointers();
+    CHECK(getVideomark_byte()!=0 && getVideomark_word()!=0 && getVideomark_string()!=0);
+    setVideochain(CHAIN_2); setVideowrmode(0); setWritePointers();
     /* Negative control: the original generated setter reproduces the
      * shared-scratch clobber; the newly selected direct setter must not. */
     r21=121;
@@ -84,7 +84,7 @@ int main(void)
     thread=CreateThread(NULL,0,refresh,NULL,0,NULL); CHECK(thread!=NULL);
     for(test=0;test<100000;test++) for(i=0;i<32;i++) CHECK(*scratch[i]==100+i);
     CHECK(WaitForSingleObject(thread,10000)==WAIT_OBJECT_0); CloseHandle(thread);
-    CHECK(Video.GetVideodirty_total()==1000000);
+    CHECK(getVideodirty_total()==1000000);
     for(i=0;i<32;i++) CHECK(*scratch[i]==100+i);
     { const char message[]="PASS original C-VID setup: 38 pairs x 4 values, 81 slots, latches/selectors, republish, old-provider negative control, concurrent scratch preservation\r\n";
       WriteFile(GetStdHandle(STD_OUTPUT_HANDLE),message,sizeof(message)-1,&written,NULL); }

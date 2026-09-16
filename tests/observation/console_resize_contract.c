@@ -17,7 +17,7 @@ int main(void)
     output=CreateFileW(L"CONOUT$",GENERIC_READ|GENERIC_WRITE,
         FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,OPEN_EXISTING,0,NULL);
     CHECK(output!=INVALID_HANDLE_VALUE);
-    CHECK(SetConsoleWindowInfo(output,TRUE,&window));
+    CHECK(MvdmSetConsoleWindowInfo(output,TRUE,&window));
     CHECK(SetConsoleScreenBufferSize(output,size));
     for(y=0;y<25;++y)for(x=0;x<80;++x) {
         cells[y*80+x].Char.UnicodeChar=(WCHAR)(L'A'+y);
@@ -25,7 +25,12 @@ int main(void)
     }
     CHECK(WriteConsoleOutputW(output,cells,size,zero,&rect));
     CHECK(SetConsoleCursorPosition(output,cursor));
-    CHECK(MvdmSetConsoleWindowInfo(output,TRUE,&window));
+    /* Establish the crop input after window setup. A modern Terminal can
+     * resize its buffer when its viewport is changed; do not assume that
+     * a second viewport change preserves this test's 80x25 source grid. */
+    CHECK(GetConsoleScreenBufferInfo(output,&info));
+    CHECK(info.dwSize.X==80 && info.dwSize.Y==25);
+    CHECK(info.dwCursorPosition.X==70 && info.dwCursorPosition.Y==20);
     size.X=40; size.Y=12;
     CHECK(MvdmSetConsoleScreenBufferSize(output,size));
     CHECK(GetConsoleScreenBufferInfo(output,&info));

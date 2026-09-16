@@ -37,6 +37,13 @@ const evGlue = requireText(root, 'src/mvdm-host/softpc.new/base/cvidc/ev_glue.c'
   /setup_vga_globals[\s\S]*mvdm_cvidc_bind_vectors\(\)/);
 const main = requireText(root, 'src/mvdm-host/softpc.new/base/support/main.c',
   /mvdm_cvidc_bind_video_vector\(\)[\s\S]*config\(/);
+requireText(root, 'src/mvdm-host/softpc.new/base/cvidc/evidgen.h',
+  /#ifndef CPU_40_STYLE\s+#define\s+getVideorplane/);
+requireText(root, 'src/mvdm-host/softpc.new/base/inc/egacpu.h',
+  /extern IS32 getVideodirty_low IPT0\(\)/);
+if (/video_get_|video_set_|MVDM_CVIDC_VIDEO_BIND|boundVideo/.test(binder + generator)) {
+  throw new Error('Autonomous accessor rebinding or typed wrapper generation returned');
+}
 
 if (publicSlots.length !== 154 || privateSlots.length !== 55) {
   throw new Error(`unexpected original metadata count: public=${publicSlots.length}, private=${privateSlots.length}`);

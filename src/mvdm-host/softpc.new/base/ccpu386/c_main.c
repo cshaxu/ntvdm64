@@ -620,9 +620,8 @@ GLOBAL	PHY_ADDR	SasWrapMask = 0xfffff;
  * Note we only mask to 16 bits if the original EIP was 16bits so that
  * pigger scripts that result in very large EIP values pig correctly.
  */
-#define CCPU_INSTRUCTION_DELTA(x) ((IU32)DIFF_INST_BYTE((x), p_start))
 #define UPDATE_INTEL_IP(x)						\
-   {  IU32 len = CCPU_INSTRUCTION_DELTA(x);				\
+   {  int len = DIFF_INST_BYTE(x, p_start);				\
       IU32 mask = 0xFFFFFFFF;						\
       IU32 oldEIP = GET_EIP();						\
       if ((oldEIP < 0x10000) && (GET_CS_AR_X() == USE16))		\
@@ -633,9 +632,9 @@ GLOBAL	PHY_ADDR	SasWrapMask = 0xfffff;
 /* update Intel format EIP from host format IP (mask if 16 operand) */
 #define UPDATE_INTEL_IP_USE_OP_SIZE(x)					\
    if ( GET_OPERAND_SIZE() == USE16 )					\
-      SET_EIP(GET_EIP() + (CCPU_INSTRUCTION_DELTA(x) & WORD_MASK));\
+      SET_EIP(GET_EIP() + DIFF_INST_BYTE(x, p_start) & WORD_MASK);\
    else								\
-      SET_EIP(GET_EIP() + CCPU_INSTRUCTION_DELTA(x));
+      SET_EIP(GET_EIP() + DIFF_INST_BYTE(x, p_start));
 
 /* mark host format IP as inoperative */
 #define CANCEL_HOST_IP()					\
@@ -4750,7 +4749,7 @@ LOCAL VOID
       IU32 ip_phy_addr;	/* Used when setting up IP (cf SETUP_HOST_IP) */
 
       /* update Intel IP up to end of the old page */
-      SET_EIP(GET_EIP() + CCPU_INSTRUCTION_DELTA(*q));
+      SET_EIP(GET_EIP() + DIFF_INST_BYTE(*q, p_start));
 
       /* move onto new page in host format */
       SETUP_HOST_IP(*q)

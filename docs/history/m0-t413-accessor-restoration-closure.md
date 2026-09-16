@@ -47,3 +47,26 @@ build and automated native/ConPTY acceptance gates are all satisfied.
 
 No active numeric M/T/S packet remains. Owner visual feedback can reopen this
 task for a demonstrated regression; it does not automatically admit the next T.
+
+## S4 cleanup and owner-expanded IP repair closure
+
+The owner reopened this package at 65aa091f6, then explicitly added the IP-wrap
+repair. [S4 evidence](../etc/evidence/m0-t413-s4-binding-cleanup.md) supersedes
+the earlier retained-binding and excluded-IP dispositions above. It restores
+direct original typed field calls, deletes 20 wrappers and 76 runtime slot
+reassignments, and restores the complete original instruction-delta cohort.
+The remaining seven-line header seam preserves the original full latch layout;
+it is measured and registered, not a claim of zero original-source differences.
+
+Fresh three-program build, full accessor fixture, 168 IP-expression cases,
+11 functional native guest instruction cases, 17 command cases, six ConPTY
+profiles, native resize contract and five short-window runs pass. The separate
+divide-error case fails on both old and new workers and is explicitly retained
+as an unchanged original NTVDM-profile limitation in Debt, not counted as a
+functional pass or silently repaired. Full exception delivery is not claimed.
+
+Mirror distance is now 417 (89 below pre-task 506); overlay cohort is 125,
+back to its pre-task size. The runtime generated include loses 176 lines;
+there is no replacement accessor algorithm. Formal and O:\winnt hashes match
+the S4 evidence. S4 cleanup and the expanded IP repair are complete; no next
+candidate is admitted. Owner visual confirmation remains separate.
