@@ -35,7 +35,7 @@
 #undef MVDM_WOW32_RESTORE_X86_FOR_VDMDBG
 #endif
 #include "wowfax.h"
-#include "adapter-mvdm-host-out/wow/include/wow_private_user_compat.h"
+#include "ntvdm/wow/include/wow_private_user_compat.h"
 
 extern void UnloadNetworkFonts( UINT id );
 

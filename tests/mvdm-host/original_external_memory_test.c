@@ -1,9 +1,9 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <windows.h>
-#include "session/session.h"
-#include "adapter-mvdm-host-out/softpc/include/mvdm_softpc_guest_memory.h"
-#include "adapter-mvdm-host-out/softpc/include/mvdm_softpc_physical_mapping.h"
+#include "ntvdm/session/session.h"
+#include "ntvdm/softpc/include/mvdm_softpc_guest_memory.h"
+#include "ntvdm/softpc/include/mvdm_softpc_physical_mapping.h"
 
 /* Link the formal CCPU40/nt_mem libraries, never replacement memory bodies. */
 extern void sas_init(uint32_t);

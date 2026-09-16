@@ -22,7 +22,7 @@ assert.deepEqual(hashes,{GetBinaryTypeW:'f7fd9766ea08e676a2fd457fb3fa50838463064
 const env=path.join(build,'msvc.cmd');
 fs.writeFileSync(env,'@echo off\r\nset "classifier_cwd=%CD%"\r\ncall "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat" -arch=x86 -host_arch=x64 >nul\r\nif errorlevel 1 exit /b %errorlevel%\r\ncd /d "%classifier_cwd%"\r\n%*\r\n');
 let commands=[
-    `cl.exe ${flags} /we4013 /Gy /Fo"${build}/support.obj" "${root}/src/adapter-mvdm-host-out/win32/source/opennt_support_rtl.c"`,
+    `cl.exe ${flags} /we4013 /Gy /Fo"${build}/support.obj" "${root}/src/opennt-abi/host-compat/opennt_support_rtl.c"`,
     `cl.exe ${flags} /we4013 /Gy /DOPENNT_BASE_CLIENT_CLASSIFIER /Fo"${build}/client.obj" "${root}/src/opennt-host/base/win32/client/vdm.c"`,
     `cl.exe ${flags} /we4013 /Fo"${build}/fixture.obj" "${root}/tests/broker/original_classifier.c"`,
     `cl.exe ${flags} /we4013 /Fo"${build}/path.obj" "${root}/src/adapter-opennt-host/basesrv/source/base_classifier_path.c"`,
@@ -30,7 +30,7 @@ let commands=[
     'link.exe /nologo /opt:ref /out:original-classifier.exe /map:original-classifier.map client.obj fixture.obj path.obj support.obj error.obj ntdll.lib kernel32.lib legacy_stdio_definitions.lib'
 ];
 if(ownerBuild) commands=[
-    `cl.exe ${flags} /we4013 /Gy /Fo"${build}/support.obj" "${root}/src/adapter-mvdm-host-out/win32/source/opennt_support_rtl.c"`,
+    `cl.exe ${flags} /we4013 /Gy /Fo"${build}/support.obj" "${root}/src/opennt-abi/host-compat/opennt_support_rtl.c"`,
     `cl.exe ${flags} /we4013 /Fo"${build}/fixture.obj" "${root}/tests/broker/original_classifier.c"`,
     `cl.exe ${rtlFlags} /Fo"${build}/error.obj" "${root}/src/opennt-host/base/ntos/rtl/error.c"`,
     `link.exe /nologo /opt:ref /out:original-classifier.exe /map:original-classifier.map fixture.obj "${ownerBuild}/opennt-base-client.lib" "${ownerBuild}/opennt-base-bindings.lib" support.obj error.obj ntdll.lib kernel32.lib legacy_stdio_definitions.lib`

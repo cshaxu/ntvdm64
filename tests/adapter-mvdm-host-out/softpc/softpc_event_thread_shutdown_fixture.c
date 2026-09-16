@@ -1,6 +1,6 @@
 #include <windows.h>
 
-#include "adapter-mvdm-host-out/softpc/include/mvdm_softpc_event_thread.h"
+#include "ntvdm/softpc/include/mvdm_softpc_event_thread.h"
 
 static DWORD WINAPI alertable_event_worker(LPVOID unused)
 {

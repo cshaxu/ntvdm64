@@ -77,7 +77,7 @@ function Get-LexicalFamilies {
     if ($text -match '(?i)(nt_vdd\.h|\bVDD[A-Za-z0-9_]*\s*\()') { $families.Add('adapter-mvdm-host-out/vdd (VDD lexical surface)') }
     if ($text -match '(?i)(oemuni\.h|\bOem[A-Za-z0-9_]*\s*\()') { $families.Add('mvdm-support (OEM/NLS lexical surface)') }
     if ($text -match '(?i)(cmdsvc\.h|dossvc\.h|\bBOP\b)') { $families.Add('adapter-mvdm-host-in (BOP ABI lexical surface)') }
-    if ($text -match '(?i)(mvdm\.h|\bVDM(?:INFO|ENV|TIB|STATE)|\bReEnter)') { $families.Add('session (VDM session/lifecycle lexical surface)') }
+    if ($text -match '(?i)(mvdm\.h|\bVDM(?:INFO|ENV|TIB|STATE)|\bReEnter)') { $families.Add('session (VDM ntvdm/session/lifecycle lexical surface)') }
     if ($families.Count -eq 0) { return 'none detected in retained source text' }
     return [string]::Join('; ', $families)
 }

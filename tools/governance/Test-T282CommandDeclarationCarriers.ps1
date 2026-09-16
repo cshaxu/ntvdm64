@@ -32,7 +32,7 @@ foreach ($architecture in @('x86', 'x64')) {
     if ($RequireArchitectureProbes) {
         if (-not (Test-Path -LiteralPath $graph)) { throw "Missing $architecture declaration-carrier graph." }
         $content = Get-Content -Raw -LiteralPath $graph
-        if ($content -notmatch 'adapter-mvdm-host-out/win32/include' -or $content -notmatch 'internal/windows/inc') {
+        if ($content -notmatch 'opennt-abi/host-compat/include' -or $content -notmatch 'internal/windows/inc') {
             throw "$architecture graph does not select both adapter vdmapi and original pif carriers."
         }
         foreach ($object in @('cmdexec.obj', 'cmdpif.obj')) {

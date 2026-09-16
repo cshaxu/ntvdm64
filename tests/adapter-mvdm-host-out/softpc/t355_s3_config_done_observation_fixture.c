@@ -5,7 +5,7 @@
 
 #include <windows.h>
 
-#include "session/session.h"
+#include "ntvdm/session/session.h"
 
 enum {
     fixture_memory_bytes = 0x5000u,

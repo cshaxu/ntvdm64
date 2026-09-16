@@ -1,4 +1,4 @@
-#include "session/session.h"
+#include "ntvdm/session/session.h"
 
 #include <string.h>
 

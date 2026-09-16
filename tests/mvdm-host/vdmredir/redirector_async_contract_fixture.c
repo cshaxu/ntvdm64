@@ -1,6 +1,6 @@
 #include <string.h>
 
-#include "session/session.h"
+#include "ntvdm/session/session.h"
 #include "vrnmpipe.h"
 #include "mvdm_redirector_async.h"
 #include "mvdm_redirector_guest_copy.h"

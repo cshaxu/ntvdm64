@@ -13,7 +13,7 @@ $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path.Replace('\', '/')
 $build = Join-Path $root ("build/M0-T279/{0}" -f $Architecture)
 New-Item -ItemType Directory -Force $build | Out-Null
 
-$common = '/nologo /std:c11 /MT /W4 /showIncludes /I ' + $root + '/src/adapter-mvdm-host-out/win32/include /I ' + $root + '/src/mvdm-host/inc /I ' + $root + '/src/mvdm-host/oemuni'
+$common = '/nologo /std:c11 /MT /W4 /showIncludes /I ' + $root + '/src/opennt-abi/host-compat/include /I ' + $root + '/src/mvdm-host/inc /I ' + $root + '/src/mvdm-host/oemuni'
 
 $content = @"
 ninja_required_version = 1.10
@@ -39,7 +39,7 @@ rule run
   command = `$in
   description = RUN `$in
 
-build obj/opennt_support_rtl.obj: cc `$root/src/adapter-mvdm-host-out/win32/source/opennt_support_rtl.c
+build obj/opennt_support_rtl.obj: cc `$root/src/opennt-abi/host-compat/opennt_support_rtl.c
 build adapter-mvdm-host-out-win32.lib: lib obj/opennt_support_rtl.obj
 build obj/file.obj: cc `$root/src/mvdm-host/oemuni/file.c
 build obj/process.obj: cc `$root/src/mvdm-host/oemuni/process.c

@@ -27,7 +27,7 @@ if ($RequireArchitectureProbes) {
         if (-not (Test-Path -LiteralPath $graph) -or -not (Test-Path -LiteralPath $object)) {
             throw "Missing $architecture COMMAND console declaration probe."
         }
-        if ((Get-Content -Raw -LiteralPath $graph) -notmatch 'adapter-mvdm-host-out/win32/include') {
+        if ((Get-Content -Raw -LiteralPath $graph) -notmatch 'opennt-abi/host-compat/include') {
             throw "$architecture graph does not select the adapter declaration carrier."
         }
     }

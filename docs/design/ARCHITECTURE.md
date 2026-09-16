@@ -268,37 +268,29 @@ global as immutable process state, per-session state, TLS/thread state,
 guest-owned state or broker-owned state. It is not achieved by swapping an
 unbounded block of globals.
 
-The `monitor` family of `adapter-mvdm-host-out` binds the active session/`VDM_TIB`
-context to each participating thread. Worker threads bind before entering
-imported MVDM code and unbind on exit. No raw session pointer enters guest
-state or a fixed-width component ABI.
+`ntvdm/monitor` binds the active worker-local session/`VDM_TIB` context to each
+participating worker thread.  It binds before entering imported MVDM code and
+unbinds on exit.  No raw session pointer enters guest state or a fixed-width
+component ABI.
 
 ## Dependency direction
 
 ```text
-app -> session
-app -> broker client -> broker process
-app -> adapter-mvdm-host-in -> mvdm-host
-app -> mvdm/dos/v86 / mvdm/bin86 / mvdm/wow16 / opennt-host/base/win32/winnls/fontsup/system
-                                                   (data/load only)
+run16 -> basesrv protocol client
+run16 -> opennt-host Base client + opennt-abi/host-compat
+basesrv -> basesrv transport + opennt-host BaseSrv owner
+ntvdm -> worker-local session, command, monitor, SoftPC, Redirector, VDD, WOW and debugger bindings
+ntvdm -> original mvdm + opennt-host + opennt-abi/host-compat
 
-mvdm-host -> mvdm-platform-abi
-mvdm-host -> opennt-host                           (only an admitted original host-service package)
-mvdm-host -> adapter-mvdm-host-out
-mvdm-host -> session                              (neutral contract only)
-adapter-mvdm-host-out/softpc -> original mvdm/softpc.new
-adapter-mvdm-host-in -> adapter-mvdm-host-out/softpc  (typed mechanics only)
-adapter-mvdm-host-out/win32 -> broker client      (only for brokered historical calls)
-opennt-host -> mvdm-platform-abi
-opennt-host -> adapter-opennt-host                 (only source-audited package-private bindings)
-opennt-host -> broker                              (only after package closure admits fixed-width transport)
-mvdm-tools -> mvdm-host / mvdm-platform-abi       (independent tool builds only)
-app -> mvdm-softpc-firmware                       (manifest-selected immutable input only)
+opennt-abi/host-compat -> public modern Win32/NTDLL only
+product-abi -> versioned fixed-width protocol declarations only
+product-package -> package layout/media declarations only
+mvdm-tools -> original mvdm/opennt declarations only (independent tool builds)
 ```
 
-`session` never calls a component-specific provider. No
-`adapter-mvdm-host-out` family includes a retired-machine type or global. The
-SoftPC path remains within the original `mvdm-host` source-shaped composition.
+`ntvdm/session` never calls a component-specific provider.  `src/ntvdm` is a
+worker-private composition root, not a reusable host/session framework.  The
+SoftPC path remains within the original MVDM source-shaped composition.
 The broker never receives native or guest pointers. Command records exchange
 versioned fixed-width copied fields and stable cross-process identities only.
 The approved resource-transfer boundary separately accepts authenticated
@@ -307,16 +299,15 @@ Recipient-local handles are lifetime-managed capabilities, not wire identities;
 sender-local handle numbers are never trusted as authority. Console attachment
 and local streams remain separate from kernel file/pipe resource transfer.
 
-Each specialist adapter owns one historical external/product interface family;
-it is not a convenience shim and it may not absorb another adapter's caller or
-provider semantics. A missing interface is first assigned to this inventory,
-then recovered with original source evidence, rather than edited out of an
-OpenNT mirror.
+Each `ntvdm` specialist directory owns one worker-local historical interface
+family; it is not a convenience shim and may not absorb another provider's
+semantics.  A missing interface is recovered with original source evidence
+where available, rather than edited into an OpenNT mirror.
 
-`adapter-opennt-host` preserves the original spelling, ABI shape and observable
-order for each reached accepted-package private-host interface family. It is
-not a second generic Win32 shim and is consumed only by its owning
-`opennt-host` package.
+`opennt-abi/host-compat` is the sole narrow cross-process exception: it carries
+historical declaration shapes and a source-shaped RTL binding which is compiled
+separately into each consuming EXE.  It has no broker state, guest state,
+cross-process identity, shared DLL or generic compatibility policy.
 
 `mvdm-tools` has no inbound production-runtime edge at all.
 `mvdm-softpc-firmware` has no host

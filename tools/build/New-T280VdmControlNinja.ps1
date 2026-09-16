@@ -16,7 +16,7 @@ New-Item -ItemType Directory -Force $build | Out-Null
 # (`ntpsapi.h`, `ntexapi.h`) under opennt-host.  Keep this focused fixture on
 # the same include boundary as the formal SoftPC graph rather than relying on
 # an old aggregate tree.
-$cflags = '/nologo /std:c11 /MT /W4 /showIncludes /I ' + $root + '/src/adapter-mvdm-host-out/monitor/include /I ' + $root + '/src/adapter-mvdm-host-out/win32/include /I ' + $root + '/src/opennt-host/public/sdk/inc /I ' + $root + '/src/opennt-abi/source/public/sdk/inc /I ' + $root + '/src/opennt-abi/source/public/internal/base/inc /I ' + $root + '/src/session'
+$cflags = '/nologo /std:c11 /MT /W4 /showIncludes /I ' + $root + '/src/ntvdm/monitor/include /I ' + $root + '/src/opennt-abi/host-compat/include /I ' + $root + '/src/opennt-host/public/sdk/inc /I ' + $root + '/src/opennt-abi/source/public/sdk/inc /I ' + $root + '/src/opennt-abi/source/public/internal/base/inc /I ' + $root + '/src/session'
 $content = @"
 ninja_required_version = 1.10
 root = $root
@@ -33,10 +33,10 @@ rule run
   command = `$in
   description = RUN `$in
 
-build obj/vdm_control_fixture.obj: cc `$root/tests/adapter-mvdm-host-out/monitor/vdm_control_fixture.c
-build obj/vdm_control.obj: cc `$root/src/adapter-mvdm-host-out/monitor/source/vdm_control.c
-build obj/session.obj: cc `$root/src/session/session.c
-build obj/guest_memory_lease.obj: cc `$root/src/session/guest_memory_lease.c
+build obj/vdm_control_fixture.obj: cc `$root/tests/ntvdm/monitor/vdm_control_fixture.c
+build obj/vdm_control.obj: cc `$root/src/ntvdm/monitor/source/vdm_control.c
+build obj/session.obj: cc `$root/src/ntvdm/session/session.c
+build obj/guest_memory_lease.obj: cc `$root/src/ntvdm/session/guest_memory_lease.c
 build vdm_control_fixture.exe: link obj/vdm_control_fixture.obj obj/vdm_control.obj obj/session.obj obj/guest_memory_lease.obj
 build test: run vdm_control_fixture.exe
 default vdm_control_fixture.exe

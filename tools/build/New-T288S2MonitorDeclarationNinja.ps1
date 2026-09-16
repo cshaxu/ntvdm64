@@ -20,7 +20,7 @@ $build = Join-Path $root ("build/M0-T288/S2/{0}" -f $Architecture)
 $vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 if (!(Test-Path -LiteralPath $vs -PathType Leaf)) { throw "Missing MSVC: $vs" }
 if (!(Get-Command ninja -ErrorAction SilentlyContinue)) { throw 'Ninja is required.' }
-$fixture = 'tests/adapter-mvdm-host-out/monitor/t288_s2_sim32_declaration_fixture.c'
+$fixture = 'tests/ntvdm/monitor/t288_s2_sim32_declaration_fixture.c'
 $source = 'src/mvdm-host/sim32/sim32.h'
 foreach ($path in @($fixture, $source)) {
     if (!(Test-Path -LiteralPath (Join-Path $root $path) -PathType Leaf) -or $path -match '(^|/)src\.old(/|$)') { throw "Invalid S2 input: $path" }
@@ -34,7 +34,7 @@ $manifest = [ordered]@{ schema = 'm0.t288.s2.monitor-declaration.v1'; architectu
     sources = @($fixture, $source | ForEach-Object { [ordered]@{ path = $_; sha256 = Sha256 (Join-Path $root $_) } });
     forbiddenInputs = @('src.old', 'sim32.c', 'v86 monitor body', 'prebuilt product archive') }
 $manifest | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath (Join-Path $build 'source-manifest.json') -Encoding utf8
-$includes = @('src', 'src/mvdm-host/sim32', 'src/adapter-mvdm-host-out/win32/include',
+$includes = @('src', 'src/mvdm-host/sim32', 'src/opennt-abi/host-compat/include',
     'src/mvdm-platform-abi/source/public/sdk/inc', 'src/mvdm-platform-abi/source/public/internal/base/inc',
     'src/mvdm-platform-abi/source/public/ddk/inc') | ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }
 $flags = '/nologo /TC /c /std:c11 /MT /W4 /showIncludes /DWIN_32 /Di386 ' + ($includes -join ' ')

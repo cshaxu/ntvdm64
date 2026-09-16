@@ -3,8 +3,8 @@ import fs from 'node:fs';
 
 const read = file => fs.readFileSync(file, 'utf8').replace(/\r\n/g, '\n');
 const cmdmisc = read('src/mvdm/dos/command/cmdmisc.c');
-const firmware = read('src/adapter-mvdm-host-out/softpc/mvdm_softpc_firmware.c');
-const firmwareHeader = read('src/adapter-mvdm-host-out/softpc/include/mvdm_softpc_firmware.h');
+const firmware = read('src/ntvdm/softpc/mvdm_softpc_firmware.c');
+const firmwareHeader = read('src/ntvdm/softpc/include/mvdm_softpc_firmware.h');
 const sessionHeader = read('src/session/session.h');
 const session = read('src/session/session.c');
 const launcher = read('src/app/run16_entry.c');

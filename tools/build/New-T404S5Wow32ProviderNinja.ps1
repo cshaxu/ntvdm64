@@ -42,7 +42,7 @@ if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
 }
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $wow = Join-Path $root 'src/mvdm-host/wow32'
-$adapterWow = Join-Path $root 'src/adapter-mvdm-host-out/wow'
+$adapterWow = Join-Path $root 'src/ntvdm/wow'
 $manifest = Join-Path $wow 'sources'
 $definition = Join-Path $wow 'wow32.def'
 $resource = Join-Path $wow 'wow32.rc'
@@ -67,11 +67,11 @@ $providerSupportSources = @(
     (Join-Path $adapterWow 'wow_user_callback_callconv.c'),
     (Join-Path $adapterWow 'wow_private_user_compat.c'),
     (Join-Path $root 'src/opennt-host/windows/core/ntuser/rtl/chartran.c'),
-    (Join-Path $root 'src/adapter-mvdm-host-out/win32/source/ntuser_rtl_compat.c'),
-    (Join-Path $root 'src/adapter-mvdm-host-out/win32/source/wow_public_user_facade.c'),
+    (Join-Path $root 'src/ntvdm/win32/ntuser_rtl_compat.c'),
+    (Join-Path $root 'src/ntvdm/win32/wow_public_user_facade.c'),
     # This is the already-admitted narrow historical CRT spelling bridge.  It
     # has no parent-machine state, so the late-loaded DLL may own its copy.
-    (Join-Path $root 'src/adapter-mvdm-host-out/win32/source/crt_compat.c')
+    (Join-Path $root 'src/ntvdm/win32/crt_compat.c')
 )
 foreach ($path in $providerSupportSources) {
     if (!(Test-Path -LiteralPath $path -PathType Leaf)) {
@@ -244,8 +244,8 @@ $environment = Join-Path $build 'msvc-x86.cmd'
 
 $includeRoots = @(
     'src',
-    'src/adapter-mvdm-host-out/win32/include',
-    'src/adapter-mvdm-host-out/wow/include',
+    'src/opennt-abi/host-compat/include',
+    'src/ntvdm/wow/include',
     'src/mvdm-host/wow32',
     'src/mvdm-host/inc',
     'src/mvdm-host/softpc.new/base/inc',
@@ -256,14 +256,14 @@ $includeRoots = @(
     'src/opennt-abi/source/public/internal/windows/inc',
     'src/opennt-abi/source/public/internal/shell/inc',
     'src/opennt-abi/source/private/windows/inc',
-    'src/adapter-mvdm-host-out/softpc/include',
-    'src/adapter-mvdm-host-out/basesrv/include',
-    'src/adapter-mvdm-host-out/monitor/include',
-    'src/adapter-mvdm-host-out/vdd/include',
+    'src/ntvdm/softpc/include',
+    'src/ntvdm/command/include',
+    'src/ntvdm/monitor/include',
+    'src/ntvdm/vdd/include',
     'src/session'
 )
 $includes = ($includeRoots | ForEach-Object { '/I "' + (Join-Path $root $_) + '"' }) -join ' '
-$force = '/FI "' + (Join-Path $root 'src/adapter-mvdm-host-out/win32/include/nt.h') + '"'
+$force = '/FI "' + (Join-Path $root 'src/opennt-abi/host-compat/include/nt.h') + '"'
 $cflags = '/nologo /TC /c /MT /W3 /Gd /showIncludes /DMVDM_WOW32_PROVIDER /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD ' + $force + ' ' + $includes
 
 $ninja = [System.Collections.Generic.List[string]]::new()

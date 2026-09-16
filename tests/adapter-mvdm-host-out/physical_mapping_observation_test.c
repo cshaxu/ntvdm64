@@ -2,7 +2,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <windows.h>
-#include "session/session.h"
+#include "ntvdm/session/session.h"
 #include "mvdm_softpc_physical_mapping.h"
 
 /* Adapter-only contract test, not a guest/CCPU or WOW acceptance workload. */

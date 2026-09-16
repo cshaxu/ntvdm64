@@ -26,11 +26,11 @@ $environment = Join-Path $BuildRoot ("msvc-{0}.cmd" -f $Architecture)
   'if errorlevel 1 exit /b %errorlevel%', ':ready', 'cd /d "%MVDM_T324_CALLER_CWD%"', '%*') |
     Set-Content -LiteralPath $environment -Encoding ascii
 $includeRoots = @(
-    'src', 'src/adapter-mvdm-host-out/redir/include', 'src/mvdm-host/inc', 'src/mvdm-host/vdmredir',
+    'src', 'src/ntvdm/redir/include', 'src/mvdm-host/inc', 'src/mvdm-host/vdmredir',
     'src/mvdm-host/dos/command', 'src/opennt-host/netapi/netlib',
     'src/mvdm-host/softpc.new/base/inc', 'src/mvdm-host/softpc.new/host/inc',
-    'src/adapter-mvdm-host-out/softpc/include',
-    'src/adapter-mvdm-host-out/win32/include',
+    'src/ntvdm/softpc/include',
+    'src/opennt-abi/host-compat/include',
     'src/opennt-abi/source/public/internal/base/inc',
     'src/opennt-abi/source/public/internal/ds/inc',
     'src/opennt-host/public/sdk/inc',
@@ -38,7 +38,7 @@ $includeRoots = @(
     'src/opennt-abi/source/private/inc') | ForEach-Object {
         '/I "' + (Join-Path $root $_).Replace('\', '/') + '"'
     }
-$threadHeader = (Join-Path $root 'src/adapter-mvdm-host-out/win32/include/thread_start_compat.h').Replace('\', '/')
+$threadHeader = (Join-Path $root 'src/opennt-abi/host-compat/include/thread_start_compat.h').Replace('\', '/')
 $cflags = '/nologo /TC /c /std:c11 /MT /W4 /Gy /showIncludes /DWIN_32 /DVDMREDIR_DLL /DCPU_40_STYLE /FI "' +
     $threadHeader + '" ' + ($includeRoots -join ' ')
 $ninjaRoot = $root.Replace('\', '/').Replace(':', '$:')
@@ -64,12 +64,12 @@ build obj/vrmisc.obj: cc `$root/src/mvdm-host/vdmredir/vrmisc.c
 build obj/vrmslot.obj: cc `$root/src/mvdm-host/vdmredir/vrmslot.c
 build obj/cmdredir.obj: cc `$root/src/mvdm-host/dos/command/cmdredir.c
 build obj/ntstatus.obj: cc `$root/src/opennt-host/netapi/netlib/ntstatus.c
-build obj/async.obj: cc `$root/src/adapter-mvdm-host-out/redir/mvdm_redirector_async.c
-build obj/guest-copy.obj: cc `$root/src/adapter-mvdm-host-out/redir/mvdm_redirector_guest_copy.c
-build obj/location.obj: cc `$root/src/adapter-mvdm-host-out/softpc/mvdm_guest_location.c
-build obj/thread.obj: cc `$root/src/adapter-mvdm-host-out/win32/source/thread_start_compat.c
-build obj/session.obj: cc `$root/src/session/session.c
-build obj/lease.obj: cc `$root/src/session/guest_memory_lease.c
+build obj/async.obj: cc `$root/src/ntvdm/redir/mvdm_redirector_async.c
+build obj/guest-copy.obj: cc `$root/src/ntvdm/redir/mvdm_redirector_guest_copy.c
+build obj/location.obj: cc `$root/src/ntvdm/softpc/mvdm_guest_location.c
+build obj/thread.obj: cc `$root/src/ntvdm/win32/thread_start_compat.c
+build obj/session.obj: cc `$root/src/ntvdm/session/session.c
+build obj/lease.obj: cc `$root/src/ntvdm/session/guest_memory_lease.c
 build obj/fixture.obj: cc `$root/tests/mvdm-host/vdmredir/redirector_async_contract_fixture.c
 build bin/redirector-async-contract-fixture.exe: link obj/async.obj obj/guest-copy.obj obj/location.obj obj/session.obj obj/lease.obj obj/fixture.obj
 default obj/vrnmpipe.obj obj/vrputil.obj obj/vrdisp.obj obj/vrmisc.obj obj/vrmslot.obj obj/cmdredir.obj obj/ntstatus.obj bin/redirector-async-contract-fixture.exe

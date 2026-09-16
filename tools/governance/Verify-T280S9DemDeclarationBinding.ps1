@@ -7,7 +7,7 @@ if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
 $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 foreach ($relative in @(
-    'src/adapter-mvdm-host-out/win32/include/nt.h',
+    'src/opennt-abi/host-compat/include/nt.h',
     'src/adapter-mvdm-host-out/win32/README.md',
     'tests/adapter-mvdm-host-out/win32/t280_s9_dem_declaration_fixture.c',
     'tools/build/New-T280S9DemDeclarationNinja.ps1',
@@ -16,7 +16,7 @@ foreach ($relative in @(
 )) {
     if (-not (Test-Path -LiteralPath (Join-Path $root $relative) -PathType Leaf)) { throw "Missing T280 S9 artifact: $relative" }
 }
-$facade = Get-Content -LiteralPath (Join-Path $root 'src/adapter-mvdm-host-out/win32/include/nt.h') -Raw
+$facade = Get-Content -LiteralPath (Join-Path $root 'src/opennt-abi/host-compat/include/nt.h') -Raw
 foreach ($token in @('#include <devioctl.h>', '#undef GetDiskSpaceInformation', 'ntioapi.h awaits its own complete ABI binding', 'DIVERGENCE:')) {
     if ($facade -notmatch [regex]::Escape($token)) { throw "T280 S9 facade misses: $token" }
 }

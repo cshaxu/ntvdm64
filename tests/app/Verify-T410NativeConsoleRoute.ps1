@@ -41,7 +41,7 @@ foreach ($source in $appSources) {
     }
 }
 
-$console = Read-TrackedText 'src/adapter-mvdm-host-out/win32/source/console_compat.c'
+$console = Read-TrackedText 'src/ntvdm/win32/console_compat.c'
 foreach ($marker in @('RegisterConsoleVDM', 'present_text_invalidation',
                        'WriteConsoleOutputA')) {
     if ($console -notmatch [regex]::Escape($marker)) {

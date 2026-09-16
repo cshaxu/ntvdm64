@@ -26,7 +26,7 @@ function seedDisposition(seed) {
     return ['bochs-machine-boundary', 'adapter-bochs + adapter-mvdm-host-out/softpc', 'retain source contract; never import a second executor'];
   }
   if (seed.source_class === 'baseclient-candidate') {
-    return ['source-shaped-basevdm-boundary', 'adapter-mvdm-host-out/basesrv', 'use original BaseClient/BaseSrv as source contract; stop at CSR/CSRSS'];
+    return ['source-shaped-basevdm-boundary', 'ntvdm/command', 'use original BaseClient/BaseSrv as source contract; stop at CSR/CSRSS'];
   }
   if (seed.source_class === 'netapi-package-candidate') {
     if (seed.callee_spelling === 'NetpNtStatusToApiStatus') return ['opennt-host-netstatus-slice', 'opennt-host/netapi/netlib', 'future exact ntstatus.c mirror slice'];

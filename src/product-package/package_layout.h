@@ -1,7 +1,7 @@
 #ifndef APP_PACKAGE_LAYOUT_H
 #define APP_PACKAGE_LAYOUT_H
 
-#include "session/session.h"
+#include "ntvdm/session/session.h"
 
 #ifdef __cplusplus
 extern "C" {

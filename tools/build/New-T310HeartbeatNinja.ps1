@@ -33,21 +33,21 @@ $environment = Join-Path $build 'msvc-mt.cmd'
 $sources = @(
     ,
     ,
-    'src/session/guest_memory_lease.c',
-    'src/session/session.c',
-    'src/adapter-mvdm-host-out/win32/source/thread_start_compat.c',
-    'src/adapter-mvdm-host-out/win32/source/nt_thread_alert_compat.c',
-    'src/adapter-mvdm-host-out/softpc/mvdm_softpc_event_thread.c',
+    'src/ntvdm/session/guest_memory_lease.c',
+    'src/ntvdm/session/session.c',
+    'src/ntvdm/win32/thread_start_compat.c',
+    'src/ntvdm/win32/nt_thread_alert_compat.c',
+    'src/ntvdm/softpc/mvdm_softpc_event_thread.c',
     'tests/adapter-mvdm-host-out/nt_thread_alert_compat_fixture.c',
     'tests/adapter-mvdm-host-out/thread_start_session_fixture.c',
-    'tests/adapter-mvdm-host-out/softpc/softpc_event_thread_shutdown_fixture.c'
+    'tests/ntvdm/softpc/softpc_event_thread_shutdown_fixture.c'
 )
 $graph = [Collections.Generic.List[string]]::new()
 $graph.Add('ninja_required_version = 1.10')
 $graph.Add('cflags = /nologo /TC /c /MT /W4 /showIncludes /I "' +
     (NinjaPath (Join-Path $root 'src')) + '" /I "' +
-    (NinjaPath (Join-Path $root 'src/adapter-mvdm-host-out/win32/include')) + '" /I "' +
-    (NinjaPath (Join-Path $root 'src/adapter-mvdm-host-out/softpc/include')) + '"')
+    (NinjaPath (Join-Path $root 'src/opennt-abi/host-compat/include')) + '" /I "' +
+    (NinjaPath (Join-Path $root 'src/ntvdm/softpc/include')) + '"')
 $graph.Add('rule cc')
 $graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' cl.exe $cflags /Fo$out $in')
 $graph.Add('  deps = msvc')

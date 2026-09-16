@@ -129,7 +129,7 @@ $runtimeSupportOut = @(
         original_interface_shape = 'OEM process/environment/path wrappers declared by inc/oemuni.h; source preserves OEM-to-Unicode conversion, STARTUPINFOA/PROCESS_INFORMATION and SetLastError mapping'
         required_owner = 'adapter-mvdm-host-out/win32'
         binding_disposition = 'same-shaped historical Win32/NTDLL binding review required'
-        retained_source_rule = 'retain process.c conversion/order/error logic and original entrypoint names; no session/COMMAND logic enters oemuni'
+        retained_source_rule = 'retain process.c conversion/order/error logic and original entrypoint names; no ntvdm/session/COMMAND logic enters oemuni'
         prerequisite = 'exact CreateProcess/environment/current-directory and RTL string/heap ABI/error mapping audit for x86 and x64'
         state = 'adapter-pending-not-enabled'
     }

@@ -22,7 +22,7 @@ const normalizedEnvironment = environment.replaceAll("\\", "/");
 const ninja = [
   "ninja_required_version = 1.10",
   `root = ${root}`,
-  `cflags = /nologo /TC /MT /W4 /showIncludes /I ${root}/src /I ${root}/src/adapter-mvdm-host-out/win32/include`,
+  `cflags = /nologo /TC /MT /W4 /showIncludes /I ${root}/src /I ${root}/src/opennt-abi/host-compat/include`,
   `environment = ${normalizedEnvironment}`,
   "",
   "rule cc",
@@ -34,7 +34,7 @@ const ninja = [
   "  command = $in",
   "",
   "build obj/fixture.obj: cc $root/tests/adapter-mvdm-host-out/win32/console_input_contract_fixture.c",
-  "build obj/console_compat.obj: cc $root/src/adapter-mvdm-host-out/win32/source/console_compat.c",
+  "build obj/console_compat.obj: cc $root/src/ntvdm/win32/console_compat.c",
   "build obj/session.obj: cc $root/src/session/session.c",
   "build obj/guest_memory_lease.obj: cc $root/src/session/guest_memory_lease.c",
   "build console_input_contract_fixture.exe: link obj/fixture.obj obj/console_compat.obj obj/session.obj obj/guest_memory_lease.obj",

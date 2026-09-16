@@ -10,7 +10,7 @@ const cflags = [
   '/nologo', '/std:c11', '/MT', '/W4', '/showIncludes',
   `/I ${ninjaRoot}/src`,
   `/I ${ninjaRoot}/src/session`,
-  `/I ${ninjaRoot}/src/adapter-mvdm-host-out/softpc/include`
+  `/I ${ninjaRoot}/src/ntvdm/softpc/include`
 ].join(' ');
 
 fs.mkdirSync(path.join(build, 'obj'), { recursive: true });
@@ -29,8 +29,8 @@ fs.writeFileSync(path.join(build, 'build.ninja'), [
   '',
   'build obj/guest_memory_lease.obj: cc $root/src/session/guest_memory_lease.c',
   'build obj/session.obj: cc $root/src/session/session.c',
-  'build obj/location.obj: cc $root/src/adapter-mvdm-host-out/softpc/mvdm_guest_location.c',
-  'build obj/fixture.obj: cc $root/tests/adapter-mvdm-host-out/softpc/t365_s2_dem_file_lifecycle_lease_fixture.c',
+  'build obj/location.obj: cc $root/src/ntvdm/softpc/mvdm_guest_location.c',
+  'build obj/fixture.obj: cc $root/tests/ntvdm/softpc/t365_s2_dem_file_lifecycle_lease_fixture.c',
   'build dem_file_lifecycle_lease_fixture.exe: link obj/guest_memory_lease.obj obj/session.obj obj/location.obj obj/fixture.obj',
   'default dem_file_lifecycle_lease_fixture.exe',
   ''

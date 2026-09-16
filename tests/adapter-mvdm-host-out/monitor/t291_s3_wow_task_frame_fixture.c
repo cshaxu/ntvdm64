@@ -2,7 +2,7 @@
 
 #include <string.h>
 
-#include "session/session.h"
+#include "ntvdm/session/session.h"
 
 static int read_memory(void *context, uint32_t address, uint8_t *bytes,
     uint32_t byte_count)

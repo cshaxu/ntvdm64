@@ -1,7 +1,7 @@
 #include <stdint.h>
 #include <string.h>
 
-#include "adapter-mvdm-host-out/softpc/include/mvdm_softpc_presentation_font.h"
+#include "ntvdm/softpc/include/mvdm_softpc_presentation_font.h"
 
 static uint32_t observed_address;
 static uint32_t observed_bytes;

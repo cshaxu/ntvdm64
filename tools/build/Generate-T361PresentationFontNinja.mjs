@@ -13,8 +13,8 @@ const lines = [
   'ninja_required_version = 1.10',
   'cflags = /nologo /TC /c /MT /W4 /WX /showIncludes /I ' + source('src') +
     ' /I ' + source('src/session') +
-    ' /I ' + source('src/adapter-mvdm-host-out/softpc/include') +
-    ' /I ' + source('src/adapter-mvdm-host-out/win32/include'),
+    ' /I ' + source('src/ntvdm/softpc/include') +
+    ' /I ' + source('src/opennt-abi/host-compat/include'),
   'rule cc',
   '  command = cl.exe $cflags /Fo$out $in',
   '  deps = msvc',
@@ -24,10 +24,10 @@ const lines = [
   '  command = $in',
   'build obj/guest_memory_lease.obj: cc ' + source('src/session/guest_memory_lease.c'),
   'build obj/session.obj: cc ' + source('src/session/session.c'),
-  'build obj/presentation_font.obj: cc ' + source('src/adapter-mvdm-host-out/softpc/mvdm_softpc_presentation_font.c'),
-  'build obj/fixture.obj: cc ' + source('tests/adapter-mvdm-host-out/softpc/presentation_font_snapshot_fixture.c'),
+  'build obj/presentation_font.obj: cc ' + source('src/ntvdm/softpc/mvdm_softpc_presentation_font.c'),
+  'build obj/fixture.obj: cc ' + source('tests/ntvdm/softpc/presentation_font_snapshot_fixture.c'),
   'build presentation-font-snapshot-fixture.exe: link obj/guest_memory_lease.obj obj/session.obj obj/presentation_font.obj obj/fixture.obj',
-  'build obj/console_compat.obj: cc ' + source('src/adapter-mvdm-host-out/win32/source/console_compat.c'),
+  'build obj/console_compat.obj: cc ' + source('src/ntvdm/win32/console_compat.c'),
   'build obj/console_toggle_fixture.obj: cc ' + source('tests/adapter-mvdm-host-out/win32/console_display_toggle_fixture.c'),
   'build console-display-toggle-fixture.exe: link obj/guest_memory_lease.obj obj/session.obj obj/console_compat.obj obj/console_toggle_fixture.obj',
   '  libs = kernel32.lib user32.lib gdi32.lib',

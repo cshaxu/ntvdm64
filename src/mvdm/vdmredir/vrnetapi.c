@@ -84,7 +84,7 @@ Revision History:
 #include <netlibnt.h>   // NetpNtStatusToApiStatus()
 #include "vrputil.h"    // VrpMapDosError()
 #include "vrdebug.h"    // VrDebugFlags etc
-#include "adapter-mvdm-host-out/redir/include/mvdm_redirector_guest_copy.h"
+#include "ntvdm/redir/include/mvdm_redirector_guest_copy.h"
 #include "dlstruct.h"   // down-level structures
 #include <rxuser.h>     // RxNetUser...
 #include <lmaccess.h>   // USER_PASSWORD_PARMNUM

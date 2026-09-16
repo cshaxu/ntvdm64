@@ -13,18 +13,18 @@ $build = Join-Path $root ("build/M0-T308/S1/{0}" -f $Architecture)
 $vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 if (!(Test-Path $vs) -or !(Get-Command ninja -ErrorAction SilentlyContinue)) { throw 'Missing MSVC Build Tools or Ninja.' }
 $sources = @(
-    'src/session/guest_memory_lease.c', 'src/session/session.c',
-    'src/adapter-mvdm-host-out/win32/source/opennt_support_rtl.c',
-    'src/adapter-mvdm-host-out/monitor/source/vdm_control.c',
-    'src/adapter-mvdm-host-out/monitor/mvdm_vdm_tib.c')
+    'src/ntvdm/session/guest_memory_lease.c', 'src/ntvdm/session/session.c',
+    'src/opennt-abi/host-compat/opennt_support_rtl.c',
+    'src/ntvdm/monitor/source/vdm_control.c',
+    'src/ntvdm/monitor/mvdm_vdm_tib.c')
 $fixtures = @(
-    'tests/adapter-mvdm-host-out/monitor/vdm_control_fixture.c',
-    'tests/adapter-mvdm-host-out/monitor/vdm_tib_fixture.c')
+    'tests/ntvdm/monitor/vdm_control_fixture.c',
+    'tests/ntvdm/monitor/vdm_tib_fixture.c')
 foreach ($path in $sources + $fixtures) { if (!(Test-Path (Join-Path $root $path)) -or $path -match '(^|/)src\.old(/|$)') { throw "Invalid T308 input: $path" } }
 New-Item -ItemType Directory -Force $build, (Join-Path $build 'obj'), (Join-Path $build 'bin') | Out-Null
 $envFile = Join-Path $build 'msvc-mt.cmd'
 @('@echo off', 'set "MVDM_T308_CALLER_CWD=%CD%"', 'if defined VSCMD_VER goto ready', ('call "' + $vs + '" -arch=' + $Architecture + ' -host_arch=x64 >nul'), 'if errorlevel 1 exit /b %errorlevel%', ':ready', 'cd /d "%MVDM_T308_CALLER_CWD%"', '%*') | Set-Content $envFile -Encoding ascii
-$includes = @('src/session','src/adapter-mvdm-host-out/win32/include','src/opennt-host/public/sdk/inc','src/opennt-abi/source/public/sdk/inc','src/opennt-abi/source/public/internal/base/inc','src/adapter-mvdm-host-out/monitor/include') | ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }
+$includes = @('src/ntvdm/session','src/opennt-abi/host-compat/include','src/opennt-host/public/sdk/inc','src/opennt-abi/source/public/sdk/inc','src/opennt-abi/source/public/internal/base/inc','src/ntvdm/monitor/include') | ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }
 # Do not define the historical i386 product marker globally.  The monitor
 # context selects only the original _X86_ declaration gate for this x86 build.
 $flags = '/nologo /TC /c /std:c11 /MT /W4 /WX /showIncludes /DWIN_32 ' + ($includes -join ' ')

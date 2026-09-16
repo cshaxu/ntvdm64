@@ -23,7 +23,7 @@ const ninjaPath = value => value.replaceAll('\\', '/').replace(/^([A-Za-z]):/, '
 const baseNinja = readFileSync(join(base, 'build.ninja'), 'utf8');
 const baseFlags = baseNinja.match(/^cflags = (.+)$/m)?.[1];
 if (!baseFlags) throw new Error(`missing cflags in ${join(base, 'build.ninja')}`);
-const cflags = `${baseFlags} /I "${ninjaPath(join(root, 'src/mvdm-host/inc'))}" /I "${ninjaPath(join(root, 'src/mvdm-host/wow32'))}" /I "${ninjaPath(join(root, 'src/adapter-mvdm-host-out/wow/include'))}"`;
+const cflags = `${baseFlags} /I "${ninjaPath(join(root, 'src/mvdm-host/inc'))}" /I "${ninjaPath(join(root, 'src/mvdm-host/wow32'))}" /I "${ninjaPath(join(root, 'src/ntvdm/wow/include'))}"`;
 const environment = ninjaPath(join(base, 'msvc-x86.cmd'));
 const source = path => ninjaPath(join(root, path));
 const local = path => ninjaPath(join(out, path));
@@ -44,9 +44,9 @@ const lines = [
   '',
   `build ${local('fixture.obj')}: cc ${source('tests/mvdm-host/t335_s3_original_callback_ccpu_fixture.c')}`,
   `build ${local('seams.obj')}: cc ${source('tests/mvdm-host/t335_s3_wcall16_unreachable_seams.c')}`,
-  `build ${local('lease.obj')}: cc ${source('src/adapter-mvdm-host-out/wow/wow_callback_frame_lease.c')}`,
+  `build ${local('lease.obj')}: cc ${source('src/ntvdm/wow/wow_callback_frame_lease.c')}`,
   `build ${local('nt-aorc.obj')}: cc ${source('src/mvdm-host/softpc.new/host/src/nt_aorc.c')}`,
-  `build ${local('opennt-support-rtl.obj')}: cc ${source('src/adapter-mvdm-host-out/win32/source/opennt_support_rtl.c')}`,
+  `build ${local('opennt-support-rtl.obj')}: cc ${source('src/opennt-abi/host-compat/opennt_support_rtl.c')}`,
   `build ${local('wcall16.obj')}: cc ${source('src/mvdm-host/wow32/wcall16.c')}`,
   `build ${local('original-wcall16.lib')}: lib ${local('wcall16.obj')}`,
   `build ${local('original-callback-ccpu-x86.exe')}: link ${local('fixture.obj')} ${local('seams.obj')} ${local('lease.obj')} ${local('nt-aorc.obj')} ${local('opennt-support-rtl.obj')} ${local('original-wcall16.lib')} ${baseFile('obj/test/ccpu_bounded_execution_fixture_seams.obj')} ${baseFile('obj/controller/at_dma.obj')} ${baseFile('obj/controller/ica.obj')} ${baseFile('obj/support/ios.obj')} ${baseFile('obj/patch/fmstubs_edl_fast_bop.obj')} ${baseFile('original-ccpu40.lib')} ${baseFile('original-host-lifecycle.lib')} ${baseFile('lifecycle-adapter.lib')}`,

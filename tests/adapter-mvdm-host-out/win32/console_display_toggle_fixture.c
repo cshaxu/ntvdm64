@@ -1,7 +1,7 @@
 #include <windows.h>
 
 #include "conapi.h"
-#include "session/session.h"
+#include "ntvdm/session/session.h"
 
 static session_video_event observed_event;
 static uint32_t observed_count;

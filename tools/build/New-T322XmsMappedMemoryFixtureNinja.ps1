@@ -32,17 +32,17 @@ $environment = Join-Path $build 'msvc-mt.cmd'
 $environmentNinja = $environment.Replace('\', '/')
 
 $sources = @(
-    'tests/adapter-mvdm-host-out/softpc/xms_mapped_memory_fixture.c',
-    'src/adapter-mvdm-host-out/softpc/mvdm_xms_memory.c',
-    'src/adapter-mvdm-host-out/softpc/mvdm_softpc_guest_memory.c',
-    'src/session/guest_memory_lease.c',
-    'src/session/session.c'
+    'tests/ntvdm/softpc/xms_mapped_memory_fixture.c',
+    'src/ntvdm/softpc/mvdm_xms_memory.c',
+    'src/ntvdm/softpc/mvdm_softpc_guest_memory.c',
+    'src/ntvdm/session/guest_memory_lease.c',
+    'src/ntvdm/session/session.c'
 )
 $cflags = '/nologo /std:c11 /MT /W4 /DWIN_32 /DCPU_40_STYLE ' +
-    '/FI ' + $root + '/src/adapter-mvdm-host-out/win32/include/nt.h ' +
+    '/FI ' + $root + '/src/opennt-abi/host-compat/include/nt.h ' +
     '/I ' + $root + '/src ' +
-    '/I ' + $root + '/src/adapter-mvdm-host-out/win32/include ' +
-    '/I ' + $root + '/src/adapter-mvdm-host-out/softpc/include ' +
+    '/I ' + $root + '/src/opennt-abi/host-compat/include ' +
+    '/I ' + $root + '/src/ntvdm/softpc/include ' +
     '/I ' + $root + '/src/opennt-host/public/sdk/inc ' +
     '/I ' + $root + '/src/mvdm-host/xms.486 ' +
     '/I ' + $root + '/src/mvdm-host/inc ' +

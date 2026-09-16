@@ -34,7 +34,7 @@ $environment = Join-Path $build 'msvc-mt.cmd'
 
 $includes = @(
     'src',
-    'src/adapter-mvdm-host-out/win32/include',
+    'src/opennt-abi/host-compat/include',
     'src/opennt-host/public/sdk/inc',
     'src/opennt-abi/source/public/sdk/inc',
     'src/opennt-abi/source/public/internal/base/inc',
@@ -42,20 +42,20 @@ $includes = @(
     'src/opennt-abi/source/private/windows/inc',
     'src/opennt-abi/source/public/ddk/inc',
     'src/mvdm-support/inc',
-    'src/adapter-mvdm-host-out/softpc/include/generated/x86/prod',
+    'src/ntvdm/softpc/include/generated/x86/prod',
     'src/mvdm-host/softpc.new/base/ccpu386',
     'src/mvdm-host/softpc.new/host/inc',
     'src/mvdm-host/softpc.new/base/cvidc',
     'src/mvdm-host-overlay/softpc.new/base/cvidc',
     'src/mvdm-host-overlay/softpc.new/host/src',
     'src/mvdm-host/softpc.new/base/inc',
-    'src/adapter-mvdm-host-out/softpc/include',
-    'src/adapter-mvdm-host-out/monitor/include'
+    'src/ntvdm/softpc/include',
+    'src/ntvdm/monitor/include'
 ) | ForEach-Object {
     $includePath = if ([IO.Path]::IsPathRooted($_)) { $_ } else { Join-Path $root $_ }
     '/I "' + (NinjaPath $includePath) + '"'
 }
-$nt = NinjaPath (Join-Path $root 'src/adapter-mvdm-host-out/win32/include/nt.h')
+$nt = NinjaPath (Join-Path $root 'src/opennt-abi/host-compat/include/nt.h')
 $ntexapi = NinjaPath (Join-Path $root 'src/opennt-host/public/sdk/inc/ntexapi.h')
 $cflags = '/nologo /TC /c /MT /Gy /W4 /showIncludes /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DSPC386 /DSIM32 /DANSI /DPROD /FI "' + $nt + '" /FI "' + $ntexapi + '" ' + ($includes -join ' ')
 $graph = [Collections.Generic.List[string]]::new()

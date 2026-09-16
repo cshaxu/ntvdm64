@@ -19,15 +19,15 @@ const sources = [
   "tests/mvdm-host/xms/xms_init_fixture.c",
   "src/mvdm-host/xms.486/xms.c",
   "src/mvdm-host/suballoc/suballoc.c",
-  "src/adapter-mvdm-host-out/softpc/mvdm_xms_memory.c",
-  "src/adapter-mvdm-host-out/softpc/mvdm_softpc_guest_memory.c",
+  "src/ntvdm/softpc/mvdm_xms_memory.c",
+  "src/ntvdm/softpc/mvdm_softpc_guest_memory.c",
   "src/session/guest_memory_lease.c",
   "src/session/session.c"
 ];
 const includes = [
   "src",
-  "src/adapter-mvdm-host-out/win32/include",
-  "src/adapter-mvdm-host-out/softpc/include",
+  "src/opennt-abi/host-compat/include",
+  "src/ntvdm/softpc/include",
   "src/opennt-host/public/sdk/inc",
   "src/mvdm-host/inc",
   "src/mvdm-host/xms.486",
@@ -39,7 +39,7 @@ const includes = [
 const flags = [
   "/nologo", "/std:c11", "/MT", "/W4", "/showIncludes",
   "/DWIN32", "/DWINNT", "/DWIN_32", "/DCPU_40_STYLE", "/DDEVL",
-  `/FI "${source("src/adapter-mvdm-host-out/win32/include/nt.h")}"`, includes
+  `/FI "${source("src/opennt-abi/host-compat/include/nt.h")}"`, includes
 ].join(" ");
 const objects = sources.map((path, index) => `obj/${String(index).padStart(2, "0")}-${basename(path, ".c")}.obj`);
 const lines = [

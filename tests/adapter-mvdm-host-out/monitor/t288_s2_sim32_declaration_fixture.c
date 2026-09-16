@@ -1,4 +1,4 @@
-#include "adapter-mvdm-host-out/win32/include/nt.h"
+#include "opennt-abi/host-compat/include/nt.h"
 #include "sim32.h"
 
 int monitor_declaration_fixture(void)

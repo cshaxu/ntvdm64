@@ -41,7 +41,7 @@ $environmentNinja = $environment.Replace('\', '/')
 # historical i386 host-pointer condition.
 $units = @('xms', 'xmsa20', 'xmsblock', 'xmsdisp', 'xmsmisc', 'xmsumb')
 $sources = $units | ForEach-Object { "$root/src/mvdm-host/xms.486/$_.c" }
-$adapterSources = @('src/adapter-mvdm-host-out/softpc/mvdm_xms_memory.c')
+$adapterSources = @('src/ntvdm/softpc/mvdm_xms_memory.c')
 $adapterSourcePaths = $adapterSources | ForEach-Object { "$root/$_" }
 $hashLines = @($sources + $adapterSourcePaths) | ForEach-Object {
     $path = $_.Replace('/', '\')
@@ -52,13 +52,13 @@ $hashLines = @($sources + $adapterSourcePaths) | ForEach-Object {
     (New-Object System.Text.UTF8Encoding($false)))
 
 $cflags = '/nologo /std:c11 /MT /W4 /showIncludes /DWIN_32 /DMVDM_XMS_SESSION_BACKEND /DDEVL /DCPU_40_STYLE ' +
-    '/FI ' + $root + '/src/adapter-mvdm-host-out/win32/include/nt.h ' +
-    '/FI ' + $root + '/src/adapter-mvdm-host-out/softpc/include/error_abi.h ' +
-    '/FI ' + $root + '/src/adapter-mvdm-host-out/monitor/include/monitor_context.h ' +
+    '/FI ' + $root + '/src/opennt-abi/host-compat/include/nt.h ' +
+    '/FI ' + $root + '/src/ntvdm/softpc/include/error_abi.h ' +
+    '/FI ' + $root + '/src/ntvdm/monitor/include/monitor_context.h ' +
     '/I ' + $root + '/src ' +
-    '/I ' + $root + '/src/adapter-mvdm-host-out/win32/include ' +
-    '/I ' + $root + '/src/adapter-mvdm-host-out/softpc/include ' +
-    '/I ' + $root + '/src/adapter-mvdm-host-out/monitor/include ' +
+    '/I ' + $root + '/src/opennt-abi/host-compat/include ' +
+    '/I ' + $root + '/src/ntvdm/softpc/include ' +
+    '/I ' + $root + '/src/ntvdm/monitor/include ' +
     '/I ' + $root + '/src/opennt-host/public/sdk/inc ' +
     '/I ' + $root + '/src/mvdm-host/xms.486 ' +
     '/I ' + $root + '/src/mvdm-host-overlay/softpc.new/host/src ' +

@@ -82,7 +82,7 @@ if(!ownerBuild) {
     commands.unshift(`cl.exe ${flags} ${includes} /Fo"${build}/streams.obj" "${root}/src/adapter-opennt-host/basesrv/source/base_stream.c"`);
     commands.unshift(`cl.exe ${flags} ${includes} /DOPENNT_BASE_NATIVE_RESOURCES /Fo"${build}/waits.obj" "${root}/src/adapter-opennt-host/basesrv/source/base_wait.c"`);
 }
-commands.unshift(`cl.exe ${flags} /Gy /Fo"${build}/support.obj" "${root}/src/adapter-mvdm-host-out/win32/source/opennt_support_rtl.c"`);
+commands.unshift(`cl.exe ${flags} /Gy /Fo"${build}/support.obj" "${root}/src/opennt-abi/host-compat/opennt_support_rtl.c"`);
 const transportBuild=ownerBuild || path.resolve('build/M0-T412/S3/product');
 assert(fs.existsSync(path.join(transportBuild,'broker-transport.lib')),'Build the formal transport archive first');
 commands=commands.map(command=>command.startsWith('link.exe ')?command.replace(' fixture.obj ', ` fixture.obj support.obj "${transportBuild}/broker-transport.lib" ${ownerBuild?'':'waits.obj streams.obj registry.obj resources.obj dispatch.obj startup.obj payload.obj values.obj command.obj '}`):command);
@@ -154,7 +154,7 @@ for(const symbol of ['BaseSrvCheckVDM','BaseSrvGetNextVDMCommand','BaseSrvSetRee
 assert(map.split(/\r?\n/).some(line=>line.includes('_BaseGetVdmConfigInfo')&&line.includes('client.obj')),'Original worker configuration provider missing');
 assert(map.split(/\r?\n/).some(line=>line.includes('_BaseCheckForVDM')&&line.includes('client.obj')),'Original task-exit provider missing');
 const result=spawnSync(path.join(build,'original-lifecycle.exe'),[],{cwd:build,windowsHide:true,encoding:'utf8',timeout:15000});
-const processSupport='src/adapter-mvdm-host-out/win32/source/opennt_support_rtl.c';
+const processSupport='src/opennt-abi/host-compat/opennt_support_rtl.c';
 fs.writeFileSync(process.env.OPENNT_LIFECYCLE_TEST_REPORT || path.join(build,'result.json'),JSON.stringify({ownerBuild,
     processSupport:{path:processSupport,sha256:createHash('sha256').update(fs.readFileSync(processSupport)).digest('hex')},
     consoleAssociation:'fixture-local only; not authenticated product Console identity',

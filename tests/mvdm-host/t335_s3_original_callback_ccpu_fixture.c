@@ -18,8 +18,8 @@
 #include "sas.h"
 #include "cpu.h"
 #include "c_main.h"
-#include "session/session.h"
-#include "adapter-mvdm-host-out/softpc/include/mvdm_softpc_guest_memory.h"
+#include "ntvdm/session/session.h"
+#include "ntvdm/softpc/include/mvdm_softpc_guest_memory.h"
 
 extern void sas_init(PHY_ADDR size);
 extern void sas_term(void);

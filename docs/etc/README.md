@@ -126,5 +126,6 @@ proves the original `FSTI` continuation reaches BOP `FDh`.
 
 | [T413 S5 exception scope](evidence/m0-t413-s5-exception-scope.md) | M0 T413 S5 | Five upstream conditional-scope corrections and focused/native verification. | Retain with T413 closure. |
 | [T416 S5 integrated footprint verification](evidence/m0-t416-s5-integrated-footprint-verification.md) | M0 T416 S5 | Fresh x86 three-program, Console/ConPTY/CCPU verification and final separated footprint accounting. | Retain with T416 closure. |
+| [T418 S4 worker ownership reorganization](evidence/m0-t418-s4-worker-ownership-reorganization.md) | M0 T418 S4 | Worker-only implementation relocation, fresh x86 three-program/CCPU/C-VID/memory proof, and BaseSrv lifecycle proof. | Retain through T418 closure. |
 
 All other historical supporting material is in the [external documentation archive](../../artifacts/documentation-archive/20260910/strict-topology/).

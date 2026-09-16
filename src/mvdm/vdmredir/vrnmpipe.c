@@ -140,12 +140,12 @@ Revision History:
  * requires a WINAPI callback at the public CreateThread boundary; the shared
  * same-shaped thread adapter performs only that ABI transition and binds the
  * creator session for the worker lifetime. */
-#include "adapter-mvdm-host-out/win32/include/thread_start_compat.h"
+#include "opennt-abi/host-compat/include/thread_start_compat.h"
 /* DIVERGENCE(MVDM-HOST-DIV-167): original async requests retained flat
  * GetVDMAddr aliases. Keep dispatch, queue and ICA control flow in the
  * mirror; enter the Redirector adapter only at the guest-memory lifetime
  * seam. */
-#include "adapter-mvdm-host-out/redir/include/mvdm_redirector_async.h"
+#include "ntvdm/redir/include/mvdm_redirector_async.h"
 
 #include <stdio.h>
 

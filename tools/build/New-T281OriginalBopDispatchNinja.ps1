@@ -40,13 +40,13 @@ $environmentNinja = $environment.Replace('\', '/')
 # applies the same source form to both architecture graphs; it does not select
 # a provider or create a runtime route.
 $cflags = '/nologo /std:c11 /MT /W4 /showIncludes /DPROD /DMONITOR /DC_VID /DX86GFX /DANSI ' +
-    '/FI ' + $root + '/src/adapter-mvdm-host-out/win32/include/nt.h ' +
-    '/FI ' + $root + '/src/adapter-mvdm-host-out/softpc/include/error_abi.h ' +
-    '/FI ' + $root + '/src/adapter-mvdm-host-out/softpc/include/mvdm_command_registers.h ' +
+    '/FI ' + $root + '/src/opennt-abi/host-compat/include/nt.h ' +
+    '/FI ' + $root + '/src/ntvdm/softpc/include/error_abi.h ' +
+    '/FI ' + $root + '/src/ntvdm/softpc/include/mvdm_command_registers.h ' +
     '/I ' + $root + '/src/mvdm-platform-abi/source/public/internal/base/inc ' +
     '/I ' + $root + '/src/mvdm-support/inc ' +
-    '/I ' + $root + '/src/adapter-mvdm-host-out/win32/include ' +
-    '/I ' + $root + '/src/adapter-mvdm-host-out/softpc/include ' +
+    '/I ' + $root + '/src/opennt-abi/host-compat/include ' +
+    '/I ' + $root + '/src/ntvdm/softpc/include ' +
     '/I ' + $root + '/src/mvdm-host/softpc.new/host/inc ' +
     '/I ' + $root + '/src/mvdm-host/softpc.new/base/inc ' +
     '/I ' + $root + '/src/mvdm-host/softpc.new/base/cvidc'

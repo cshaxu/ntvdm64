@@ -1,5 +1,5 @@
 #include "mvdm_guest_location.h"
-#include "session/session.h"
+#include "ntvdm/session/session.h"
 
 /*
  * The SAS-store observer fixture calls no session or guest-location operation.

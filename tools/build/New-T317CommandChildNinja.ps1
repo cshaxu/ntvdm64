@@ -18,7 +18,7 @@ $environment = Join-Path $build 'msvc-mt.cmd'
 @('@echo off', 'set "MVDM_T317_CALLER_CWD=%CD%"', 'if defined VSCMD_VER goto ready', ('call "' + $vs + '" -arch=' + $Architecture + ' -host_arch=x64 >nul'), 'if errorlevel 1 exit /b %errorlevel%', ':ready', 'cd /d "%MVDM_T317_CALLER_CWD%"', '%*') |
     Set-Content -LiteralPath $environment -Encoding ascii
 $cflags = '/nologo /std:c11 /MT /W4 /WX /showIncludes /I ' + $root +
-    '/src /I ' + $root + '/src/adapter-mvdm-host-out/win32/include'
+    '/src /I ' + $root + '/src/opennt-abi/host-compat/include'
 $content = @"
 ninja_required_version = 1.10
 root = $root
@@ -37,7 +37,7 @@ rule run
   description = RUN `$in
 
 build obj/fixture.obj: cc `$root/tests/adapter-mvdm-host-out/win32/command_process_compat_fixture.c
-build obj/command_process_compat.obj: cc `$root/src/adapter-mvdm-host-out/win32/source/command_process_compat.c
+build obj/command_process_compat.obj: cc `$root/src/ntvdm/win32/command_process_compat.c
 build command_process_compat_fixture.exe: link obj/fixture.obj obj/command_process_compat.obj
 build test: run command_process_compat_fixture.exe
 default command_process_compat_fixture.exe

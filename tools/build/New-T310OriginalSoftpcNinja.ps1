@@ -83,7 +83,7 @@ $xmsRoot = Join-Path $root 'src/mvdm/xms.486'
 $dpmiRoot = Join-Path $root 'src/mvdm/dpmi32'
 $suballocRoot = Join-Path $root 'src/mvdm/suballoc'
 $oemuniRoot = Join-Path $root 'src/mvdm/oemuni'
-$sessionRoot = Join-Path $root 'src/session'
+$sessionRoot = Join-Path $root 'src/ntvdm/session'
 $baseReservationTestSource = Join-Path $root 'tests/adapter-basesrv/base_reservation_test.c'
 $baseServiceReservationTestSource = Join-Path $root 'tests/adapter-basesrv/base_service_reservation_test.c'
 $cpu40DescriptorDomainFixtureSource = Join-Path $root 'tests/mvdm-host/dpmi/cpu40_descriptor_domain_fixture.c'
@@ -94,17 +94,18 @@ $cvidcVectorProviderStubGenerator = Join-Path $root 'tools/build/GenerateCvidcVe
 $baseDebugRoot = Join-Path $root 'src/mvdm/softpc.new/base/debug'
 $hostRoot = Join-Path $root 'src/mvdm/softpc.new/host/src'
 $hostEntryRoot = Join-Path $root 'src/mvdm/softpc.new/obj.vdm'
-$adapterSoftpcRoot = Join-Path $root 'src/adapter-mvdm-host-out/softpc'
-$adapterWin32Root = Join-Path $root 'src/adapter-mvdm-host-out/win32/source'
-$hostCrtRedirect = Join-Path $root 'src/adapter-mvdm-host-out/win32/include/mvdm_crt_redirect.h'
-$softpcSymbolCompat = Join-Path $root 'src/adapter-mvdm-host-out/softpc/include/mvdm_softpc_symbol_compat.h'
+$adapterSoftpcRoot = Join-Path $root 'src/ntvdm/softpc'
+$adapterWin32Root = Join-Path $root 'src/ntvdm/win32'
+$hostCompatSource = Join-Path $root 'src/opennt-abi/host-compat/opennt_support_rtl.c'
+$hostCrtRedirect = Join-Path $root 'src/opennt-abi/host-compat/include/mvdm_crt_redirect.h'
+$softpcSymbolCompat = Join-Path $root 'src/ntvdm/softpc/include/mvdm_softpc_symbol_compat.h'
 $run16Root = Join-Path $root 'src/run16'
 $productPackageRoot = Join-Path $root 'src/product-package'
-$adapterBaseSrvRoot = Join-Path $root 'src/adapter-mvdm-host-out/basesrv/source'
-$adapterMonitorRoot = Join-Path $root 'src/adapter-mvdm-host-out/monitor/source'
+$adapterBaseSrvRoot = Join-Path $root 'src/ntvdm/command/source'
+$adapterMonitorRoot = Join-Path $root 'src/ntvdm/monitor/source'
 $kernelVdmPrinterSource = Join-Path $adapterMonitorRoot 'monitor_printer.c'
-$adapterRedirRoot = Join-Path $root 'src/adapter-mvdm-host-out/redir'
-$adapterVddRoot = Join-Path $root 'src/adapter-mvdm-host-out/vdd'
+$adapterRedirRoot = Join-Path $root 'src/ntvdm/redir'
+$adapterVddRoot = Join-Path $root 'src/ntvdm/vdd'
 $ccpuFallbackSource = Join-Path $adapterSoftpcRoot 'mvdm_softpc_ccpu_fallback.c'
 $ccpuProductIncludeRoot = Join-Path $adapterSoftpcRoot 'include/generated/x86/prod'
 $ccpuManifest = Join-Path $ccpuRoot 'sources'
@@ -220,7 +221,7 @@ if (!(Test-Path -LiteralPath $redirResourceSource)) { throw "Original Redirector
 if (!(Test-Path -LiteralPath $redirExportDefinition)) { throw "Original Redirector export definition missing: $redirExportDefinition" }
 $adapterWin32Names = @('ntioapi_facade.c', 'thread_start_compat.c',
                           'nt_thread_alert_compat.c', 'nt_wait_compat.c',
-                          'opennt_support_rtl.c', 'console_compat.c', 'crt_compat.c',
+                          'console_compat.c', 'crt_compat.c',
                            'command_process_compat.c', 'wow_private_unavailable.c',
                            'wow_hard_error_dialog.c',
                            'mvdm_base_vdm_environment.c')
@@ -316,6 +317,9 @@ foreach ($name in $hostNames) {
 foreach ($name in $adapterWin32Names) {
     if (!(Test-Path -LiteralPath (Join-Path $adapterWin32Root $name))) { throw "Required Win32 adapter source missing: $name" }
 }
+if (!(Test-Path -LiteralPath $hostCompatSource)) {
+    throw "Required OpenNT host-compat source missing: $hostCompatSource"
+}
 foreach ($name in $adapterSoftpcNames) {
     if (!(Test-Path -LiteralPath (Join-Path $adapterSoftpcRoot $name))) { throw "Required SoftPC adapter source missing: $name" }
 }
@@ -358,7 +362,7 @@ foreach ($name in @('PigReg_c.h', 'sas4gen.h', 'gdpvar.h')) {
 }
 if (!(Test-Path -LiteralPath $ccpuFallbackSource)) { throw "Selected CCPU fallback source missing: $ccpuFallbackSource" }
 
-New-Item -ItemType Directory -Force $build, (Join-Path $build 'generated'), (Join-Path $build 'obj/ccpu'), (Join-Path $build 'obj/bios'), (Join-Path $build 'obj/keymouse'), (Join-Path $build 'obj/system'), (Join-Path $build 'obj/disks'), (Join-Path $build 'obj/support'), (Join-Path $build 'obj/video'), (Join-Path $build 'obj/cvidc'), (Join-Path $build 'obj/comms'), (Join-Path $build 'obj/dos'), (Join-Path $build 'obj/dem'), (Join-Path $build 'obj/command'), (Join-Path $build 'obj/xms'), (Join-Path $build 'obj/dpmi'), (Join-Path $build 'obj/suballoc'), (Join-Path $build 'obj/session'), (Join-Path $build 'obj/debug'), (Join-Path $build 'obj/host'), (Join-Path $build 'obj/adapter-softpc'), (Join-Path $build 'obj/adapter-win32'), (Join-Path $build 'obj/adapter-redir'), (Join-Path $build 'obj/adapter-vdd'), (Join-Path $build 'obj/opennt-netlib'), (Join-Path $build 'obj/opennt-base-vdm'), (Join-Path $build 'obj/patch') | Out-Null
+New-Item -ItemType Directory -Force $build, (Join-Path $build 'generated'), (Join-Path $build 'obj/ccpu'), (Join-Path $build 'obj/bios'), (Join-Path $build 'obj/keymouse'), (Join-Path $build 'obj/system'), (Join-Path $build 'obj/disks'), (Join-Path $build 'obj/support'), (Join-Path $build 'obj/video'), (Join-Path $build 'obj/cvidc'), (Join-Path $build 'obj/comms'), (Join-Path $build 'obj/dos'), (Join-Path $build 'obj/dem'), (Join-Path $build 'obj/command'), (Join-Path $build 'obj/xms'), (Join-Path $build 'obj/dpmi'), (Join-Path $build 'obj/suballoc'), (Join-Path $build 'obj/session'), (Join-Path $build 'obj/debug'), (Join-Path $build 'obj/host'), (Join-Path $build 'obj/adapter-softpc'), (Join-Path $build 'obj/adapter-win32'), (Join-Path $build 'obj/opennt-abi-host-compat'), (Join-Path $build 'obj/adapter-redir'), (Join-Path $build 'obj/adapter-vdd'), (Join-Path $build 'obj/opennt-netlib'), (Join-Path $build 'obj/opennt-base-vdm'), (Join-Path $build 'obj/patch') | Out-Null
 
 # OpenNT's WOW32 build imports the running NTVDM and OEMUNI owners rather
 # than linking a second machine into WOW32.DLL.  Keep the original NTVDM
@@ -460,12 +464,12 @@ $includeRootPaths = @(
     # historical HANDLE_FROM_WORDS carrier to the existing session identity
     # facade.  This must precede mvdm-host/inc so the selected original
     # Redirector bodies never cast a guest-visible DWORD to a native HANDLE.
-    'src/adapter-mvdm-host-out/redir/include',
-    'src/adapter-mvdm-host-out/vdd/include',
+    'src/ntvdm/redir/include',
+    'src/ntvdm/vdd/include',
     # The adapter owns the modern `nt.h` type binding. Original reached NT
     # public-header subsets are restored under opennt-host below, so source
     # files still resolve historical short names without an adapter copy.
-    'src/adapter-mvdm-host-out/win32/include',
+    'src/opennt-abi/host-compat/include',
     # Reached original non-MVDM OpenNT declaration slices retain their
     # source identity under opennt-host. Keep this after the adapter's nt.h:
     # nt.h owns modern type binding while this directory owns original
@@ -487,7 +491,7 @@ $includeRootPaths = @(
     # The selected x86 product generator output is absent from the source
     # union, so it remains a bounded SoftPC adapter carrier, not a new mirror
     # file under mvdm.
-    'src/adapter-mvdm-host-out/softpc/include/generated/x86/prod',
+    'src/ntvdm/softpc/include/generated/x86/prod',
     'src/mvdm/xms.486',
     # DPMI's original precompiled header owns dpmidata.h beside its source
     # bodies.  Select the original directory rather than copying the carrier
@@ -501,17 +505,17 @@ $includeRootPaths = @(
     'src/mvdm/softpc.new/base/cvidc',
     'src/mvdm/dos/dem',
     'src/mvdm/softpc.new/base/inc',
-    'src/adapter-mvdm-host-out/softpc/include',
-    'src/adapter-mvdm-host-out/basesrv/include',
-    'src/adapter-mvdm-host-out/monitor/include',
-    'src/session'
+    'src/ntvdm/softpc/include',
+    'src/ntvdm/command/include',
+    'src/ntvdm/monitor/include',
+    'src/ntvdm/session'
 )
 $includeRoots = $includeRootPaths | ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }
 $softpcIncludeRootPaths = [System.Collections.Generic.List[string]]::new()
 foreach ($path in $includeRootPaths) {
     if ($path -eq 'src/mvdm/softpc.new/base/inc') { continue }
     $softpcIncludeRootPaths.Add($path)
-    if ($path -eq 'src/adapter-mvdm-host-out/win32/include') {
+    if ($path -eq 'src/opennt-abi/host-compat/include') {
         # SoftPC's original `config.h` must precede the unrelated OpenNT Net
         # `config.h`.  This is an original header-basename disambiguation,
         # not a source divergence.  Non-SoftPC MVDM packages retain the
@@ -548,7 +552,7 @@ $cvidcFirstIncludeRoots = $cvidcFirstRootPaths | ForEach-Object { '/I "' + (Ninj
 # `v7vga.rom` package already retained by mvdm-softpc-firmware rather than
 # fabricating an unavailable `vga.rom` alias.
 $baseCommonFlags = '/nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD ' +
-    '/FI "' + (NinjaPath (Join-Path $root 'src/adapter-mvdm-host-out/win32/include/nt.h')) + '" ' +
+    '/FI "' + (NinjaPath (Join-Path $root 'src/opennt-abi/host-compat/include/nt.h')) + '" ' +
     '/FI "' + (NinjaPath $softpcSymbolCompat) + '" ' +
     ''
 $baseFlags = $baseCommonFlags + ($softpcIncludeRoots -join ' ')
@@ -817,7 +821,7 @@ $oemuniObjects = foreach ($name in $oemuniNames) {
     $object
 }
 $sessionObjects = foreach ($name in $sessionNames) {
-    $object = 'obj/session/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
+    $object = 'obj/ntvdm/session/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $sessionRoot $name)))
     $object
 }
@@ -853,7 +857,7 @@ $graph.Add('build ' + $object + ': cc_host ' + (NinjaPath (Join-Path $hostRoot $
         # separately; this does not select the CPU30 monitor executor.
         $graph.Add('  host_cflags = ' + $hostFlags + ' /DMONITOR')
     } elseif ($name -in @('nt_timer.c', 'nt_thred.c', 'nt_com.c', 'nt_event.c', 'nt_error.c')) {
-        $threadCompat = NinjaPath (Join-Path $root 'src/adapter-mvdm-host-out/win32/include/thread_start_compat.h')
+        $threadCompat = NinjaPath (Join-Path $root 'src/opennt-abi/host-compat/include/thread_start_compat.h')
         # `nt.h` from the modern SDK can predefine the historical include
         # guard before the original source reaches <ntexapi.h>.  Force the
         # selected opennt-host subset after nt.h so the original timer's
@@ -877,6 +881,9 @@ $adapterWin32Objects = foreach ($name in $adapterWin32Names) {
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $adapterWin32Root $name)))
     $object
 }
+$hostCompatObject = 'obj/opennt-abi-host-compat/opennt_support_rtl.obj'
+$graph.Add('build ' + $hostCompatObject + ': cc ' + (NinjaPath $hostCompatSource))
+$adapterWin32Objects += $hostCompatObject
 $adapterBaseSrvObjects = foreach ($name in $adapterBaseSrvNames) {
     $object = 'obj/adapter-basesrv/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $adapterBaseSrvRoot $name)))
@@ -887,7 +894,7 @@ $adapterMonitorObjects = foreach ($name in $adapterMonitorNames) {
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $adapterMonitorRoot $name)))
     $object
 }
-$adapterDebuggerRoot = Join-Path $root 'src/adapter-mvdm-host-out/debugger/source'
+$adapterDebuggerRoot = Join-Path $root 'src/ntvdm/debugger/source'
 $adapterDebuggerObjects = foreach ($name in $adapterDebuggerNames) {
     $object = 'obj/adapter-debugger/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $adapterDebuggerRoot $name)))
@@ -1035,7 +1042,7 @@ if ($Architecture -eq 'x86') {
     $nativeServiceFlags = '/nologo /c /MT /W4 /we4013 /showIncludes /I obj/basesrv /I "' + (NinjaPath (Join-Path $root 'src')) + '"'
     $graph.Add('build obj/run16/entry.obj: cc ' + (NinjaPath (Join-Path $run16Root 'main.c')))
     $graph.Add('  cflags = ' + $baseOwnerFlags)
-    $graph.Add('build obj/run16/support.obj: cc ' + (NinjaPath (Join-Path $root 'src/adapter-mvdm-host-out/win32/source/opennt_support_rtl.c')))
+    $graph.Add('build obj/run16/support.obj: cc ' + (NinjaPath (Join-Path $root 'src/opennt-abi/host-compat/opennt_support_rtl.c')))
     $graph.Add('  cflags = ' + $baseOwnerFlags + ' /Gy')
     $graph.Add('build obj/run16/rpc_client.obj: cc ' + (NinjaPath (Join-Path $root 'src/basesrv/opennt/source/base_rpc_client.c')) + ' | obj/basesrv/service.h')
     $graph.Add('  cflags = ' + $baseOwnerFlags + ' /I obj/basesrv')
@@ -1215,26 +1222,26 @@ $graph.Add('default original-softpc-candidate')
         target = 'run16.exe'
         selected = ($Architecture -eq 'x86')
         disposition = 'explicit build-only S3 work in progress; native branch only; no publication'
-        sources = @('src/run16/main.c', 'src/run16/console_probe.c', 'src/adapter-mvdm-host-out/win32/source/opennt_support_rtl.c' | ForEach-Object {
+        sources = @('src/run16/main.c', 'src/run16/console_probe.c', 'src/opennt-abi/host-compat/opennt_support_rtl.c' | ForEach-Object {
             [ordered]@{ path = $_; sha256 = Get-NodeSha256 (Join-Path $root $_) }
         })
         libraries = @('opennt-base-client.lib', 'opennt-base-bindings.lib', 'original-opennt-rtl-x86.lib')
     }
     selectedX86GeneratedInputs = @('PigReg_c.h', 'sas4gen.h', 'gdpvar.h' | ForEach-Object {
         [ordered]@{
-            path = 'src/adapter-mvdm-host-out/softpc/include/generated/x86/prod/' + $_
+            path = 'src/ntvdm/softpc/include/generated/x86/prod/' + $_
             sha256 = Get-NodeSha256 (Join-Path $ccpuProductIncludeRoot $_)
         }
     })
     selectedCcpuFallbacks = @(
         [ordered]@{
-            path = 'src/adapter-mvdm-host-out/softpc/mvdm_softpc_ccpu_fallback.c'
+            path = 'src/ntvdm/softpc/mvdm_softpc_ccpu_fallback.c'
             selector = 'MVDM_CCPU_VECTOR_DEFAULTS_ONLY'
             symbols = @('EDL_fast_bop', 'c_sas_touch', 'c_VirtualiseInstruction')
             buildDisposition = 'compile-and-force-link-debugbreak-vector-defaults-only'
         }
         [ordered]@{
-            path = 'src/adapter-mvdm-host-out/softpc/mvdm_softpc_ccpu_fallback.c'
+            path = 'src/ntvdm/softpc/mvdm_softpc_ccpu_fallback.c'
             selector = 'MVDM_CCPU_ACTIVITY_CHECK_ONLY'
             symbols = @('ActivityCheckAfterTimeSlice')
             buildDisposition = 'compile-and-normal-link-empty-activity-callback-only'

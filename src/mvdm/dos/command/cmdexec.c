@@ -19,20 +19,20 @@
 /* DIVERGENCE(MVDM-HOST-DIV-111): retain the original SCSINFO layout and
  * field order, but lease its saved 16:16 guest position for this synchronous
  * operation instead of subtracting a native GetVDMAddr process pointer. */
-#include "adapter-mvdm-host-out/basesrv/include/mvdm_command_guest_state.h"
+#include "ntvdm/command/include/mvdm_command_guest_state.h"
 /* DIVERGENCE(MVDM-HOST-DIV-196): original cmdExec32 leaves guest command,
  * environment and STD_HANDLES aliases in globals until its detached worker
  * runs.  Snapshot those same bounded inputs in the session adapter before
  * the worker starts; the original COMMAND worker remains the owner of every
  * conversion, process, wait, exit-code and re-entry decision. */
-#include "adapter-mvdm-host-out/basesrv/include/mvdm_command_native_child.h"
+#include "ntvdm/command/include/mvdm_command_native_child.h"
 /* DIVERGENCE(MVDM-HOST-DIV-109): cmdCreateProcess is the original void,
  * cdecl worker entry, not a WINAPI DWORD start routine.  Keep its source
  * body and original CreateThread call ordering while binding that call to
  * the adapter's void-worker bridge, which carries the creator session and
  * records only the original worker spelling for a default-off disposal
  * diagnostic. */
-#include "adapter-mvdm-host-out/win32/include/thread_start_compat.h"
+#include "opennt-abi/host-compat/include/thread_start_compat.h"
 #undef CreateThread
 #define CreateThread(attributes, stack_bytes, start_routine, parameter, flags, thread_id) \
     opennt_create_void_cdecl_thread_named((attributes), (stack_bytes), \
@@ -41,7 +41,7 @@
 /* DIVERGENCE(MVDM-HOST-DIV-149): retain the source's standard-handle swap
  * order but bind it to a child-only STARTUPINFO carrier, not this app's
  * process-wide standard streams. */
-#include "adapter-mvdm-host-out/win32/include/command_process_compat.h"
+#include "opennt-abi/host-compat/include/command_process_compat.h"
 
 //*****************************************************************************
 // IsWowAppRunnable

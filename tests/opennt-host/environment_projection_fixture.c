@@ -2,7 +2,7 @@
 #include <nt.h>
 #include <ntrtl.h>
 #include "opennt-host/base/ntos/rtl/environapi.h"
-#include "adapter-mvdm-host-out/win32/include/mvdm_base_vdm_environment.h"
+#include "opennt-abi/host-compat/include/mvdm_base_vdm_environment.h"
 
 BOOL BaseCreateVDMEnvironment(PWCHAR environment, ANSI_STRING *ansi,
     UNICODE_STRING *unicode);

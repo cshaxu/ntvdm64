@@ -30,7 +30,7 @@ function Classify([string]$symbol) {
         return @('original-source-candidate', 'mvdm-host/softpc.new/host/src/nt_pif.c', 'adapter-backed through adapter-win32/session; no independent launch policy')
     }
     if ($symbol -match '^(nt_(init|block|resume)_event_thread|cmdPushExitInConsoleBuffer|nt_std_handle_notification|CntrlHandlerState|SCS_hStd(In|Out|Err))$') {
-        return @('original-source-candidate', 'mvdm-host/softpc.new/host/src/nt_event.c; mvdm-host/softpc.new/host/src/nt_hosts.c', 'adapter-backed session/console lifecycle; no CSRSS reconstruction')
+        return @('original-source-candidate', 'mvdm-host/softpc.new/host/src/nt_event.c; mvdm-host/softpc.new/host/src/nt_hosts.c', 'adapter-backed ntvdm/session/console lifecycle; no CSRSS reconstruction')
     }
     if ($symbol -eq 'TerminateVDM') {
         return @('existing-adapter', 'session; adapter-mvdm-host-out/monitor', 'same-shaped controlled session stop; do not enter the excluded v86 scaffold executor')
@@ -51,7 +51,7 @@ function Classify([string]$symbol) {
         return @('original-source-candidate', 'mvdm-host/softpc.new/host/src/nt_lpt.c', 'adapter-backed LPT endpoint lifecycle; Bochs remains device owner')
     }
     if ($symbol -match '^(fSeparateWow|VdmExitCode)$') {
-        return @('original-source-candidate', 'mvdm-host/softpc.new/host/src/nt_reset.c', 'adapter-backed session/app lifecycle state; no historical process-global exit behavior')
+        return @('original-source-candidate', 'mvdm-host/softpc.new/host/src/nt_reset.c', 'adapter-backed ntvdm/session/app lifecycle state; no historical process-global exit behavior')
     }
     if ($symbol -match '^(get|set)(AH|AL|BH|BL|CH|CL|DH|DL|DS|ES|BP|CF|ZF)$') {
         return @('existing-adapter', 'adapter-mvdm-host-out/softpc', 'same-shaped register facade')

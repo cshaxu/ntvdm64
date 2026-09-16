@@ -1,4 +1,4 @@
-#include "session/session.h"
+#include "ntvdm/session/session.h"
 #include "mvdm_softpc_guest_memory.h"
 #include "mvdm_xms_memory.h"
 #include "xms.h"

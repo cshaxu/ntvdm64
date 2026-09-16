@@ -30,7 +30,7 @@
 #include "nt_event.h"
 #include <ntddvdeo.h>
 #include "nt_fulsc.h"
-#include "adapter-mvdm-host-out/softpc/include/mvdm_softpc_termination.h"
+#include "ntvdm/softpc/include/mvdm_softpc_termination.h"
 
 
 #define TEXT_MODE          1

@@ -1,7 +1,7 @@
 #include <string.h>
 #include <wchar.h>
 
-#include "session/session.h"
+#include "ntvdm/session/session.h"
 #include "mvdm_redirector_guest_copy.h"
 
 typedef struct fixture_memory { unsigned char bytes[0x200]; } fixture_memory;
