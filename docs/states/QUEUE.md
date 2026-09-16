@@ -44,7 +44,8 @@ provides shared background for the runtime candidates. The former queue-head
  [broker candidate](../proposals/proposal-cross-process-broker-closure-001.md)
 has closed with its D01--D07/D10 restoration recorded in the
 [Broker proposal's closure record](../proposals/proposal-cross-process-broker-closure-001.md).
-The owner moves the separate C-VID accessor defect to the new first candidate.
+The owner-promoted [C-VID accessor proposal](../proposals/proposal-ccpu40-cvid-accessor-layout-restoration-001.md)
+has now been admitted in Status and is absent from the remaining candidates.
 
 On 2026-09-12 the owner approved the revised candidate sequence: physical-memory
 mapping, DPMI/XMS, RTL,
@@ -76,11 +77,10 @@ later package merely because an earlier linked component has no runtime proof.
 
 | Next order | Candidate implementation package | Proposal |
 | --- | --- | --- |
-| 1 | CCPU40 C-VID original accessor/layout restoration — transferred from the Broker follow-up; restore original accessors, eliminate redundant bindings and prove the prefilled short-window crash is fixed. | [Proposal](../proposals/proposal-ccpu40-cvid-accessor-layout-restoration-001.md) |
-| 2 | CCPU40 x87 host-layout restoration — audit and recover the selected `cfpu_def.h` little-endian MSVC bitfield and multi-DWORD declaration layout, retaining the original FPU algorithms; prove IEEE single/double, x87 extended-precision and packed-BCD instruction paths. | [Proposal](../proposals/proposal-ccpu40-x87-host-layout-restoration-001.md) |
-| 3 | WOW and debugger original-owner restoration — resolve D17-D22 and D27 through original font, glyph, scheduling, cursor/icon, error-response, debugger and callback owners; remove proved inactive duplicates and preserve finite modern bindings. | [Proposal](../proposals/proposal-wow-debugger-original-owner-restoration-001.md) |
-| 4 | Single-process WOW16 application lifecycle recovery — after broker and WOW/debugger restoration, prove the selected WRITE workload's original start/run/return within one x86 worker, or record the exact source-proven unavailable boundary. No substitute guest/UI failure policy, private USER/CSRSS shell or transport-based workaround. | [Proposal](../proposals/proposal-wow16-single-process-lifecycle-recovery-001.md) |
-| 5 | Multi-process matrix and product release — prove the brokered multi-process x86-worker profile, the cross-owner DOS/Win16 compatibility matrix, portable media layout and release packaging. Host x64 Windows is an x86-worker acceptance platform, not a native-x64 worker requirement. | [Proposal](../proposals/proposal-multiprocess-release-matrix-001.md) |
+| 1 | CCPU40 x87 host-layout restoration — audit and recover the selected `cfpu_def.h` little-endian MSVC bitfield and multi-DWORD declaration layout, retaining the original FPU algorithms; prove IEEE single/double, x87 extended-precision and packed-BCD instruction paths. | [Proposal](../proposals/proposal-ccpu40-x87-host-layout-restoration-001.md) |
+| 2 | WOW and debugger original-owner restoration — resolve D17-D22 and D27 through original font, glyph, scheduling, cursor/icon, error-response, debugger and callback owners; remove proved inactive duplicates and preserve finite modern bindings. | [Proposal](../proposals/proposal-wow-debugger-original-owner-restoration-001.md) |
+| 3 | Single-process WOW16 application lifecycle recovery — after broker and WOW/debugger restoration, prove the selected WRITE workload's original start/run/return within one x86 worker, or record the exact source-proven unavailable boundary. No substitute guest/UI failure policy, private USER/CSRSS shell or transport-based workaround. | [Proposal](../proposals/proposal-wow16-single-process-lifecycle-recovery-001.md) |
+| 4 | Multi-process matrix and product release — prove the brokered multi-process x86-worker profile, the cross-owner DOS/Win16 compatibility matrix, portable media layout and release packaging. Host x64 Windows is an x86-worker acceptance platform, not a native-x64 worker requirement. | [Proposal](../proposals/proposal-multiprocess-release-matrix-001.md) |
 
 ## Unresolved audit-family ownership
 

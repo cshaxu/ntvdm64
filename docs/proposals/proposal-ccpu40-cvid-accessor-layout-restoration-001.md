@@ -2,6 +2,10 @@
 
 ## Origin and objective
 
+Admitted as M0 T413 S1 after owner-approved T412 closure and queue-head
+promotion. [Status](../states/CURRENT.md) is the sole active-packet authority.
+This remains the task's single proposal, not a second status record.
+
 Owner-directed successor to the transferred T412 S12 scope. Close the known
 prefilled 80x5 C-VID crash through source-proven original accessor/layout
 composition, preserving the S11 blank-gap repair and reducing unnecessary
