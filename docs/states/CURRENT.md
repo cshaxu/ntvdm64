@@ -2,18 +2,29 @@
 
 ## Current Work
 
-## T417 Closure
+## Active Packet
 
-**No active M/T/S packet.** M0 T417 is closed; the next admission is Queue
-candidate 1.
+**Active: M0 T418 S1** — legacy broker archive removal proof
+(Ordinary Mode).
 
-| Field | Closure record |
+| Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T417, Ordinary Mode. |
-| Candidate Proposal | [Mirror-private component elimination and project-component reorganization](../proposals/proposal-retire-mvdm-softpc-patch-001.md). |
-| Result | All three private roots are retired; S5 completed the required component audit without unreviewed reorganization. |
-| Evidence | [S3--S4 overlay owner recovery](../etc/evidence/m0-t417-s3-s4-overlay-owner-recovery.md), [S5 component relationship audit](../etc/evidence/m0-t417-s5-component-relationship-audit.md), and [T417 closure](../history/m0-t417-private-component-elimination-closure.md). |
-| Follow-up | Queue candidate 1: [component-boundary normalization and legacy broker retirement](../proposals/proposal-component-boundary-normalization-001.md). |
+| Identifier Mode | M0 T418 S1, Ordinary Mode. |
+| Admission And Approval | Owner: “批准收口当前的T任务，准入下一个任务并开始执行。” Admits former Queue candidate 1 after T417 closure. |
+| Candidate Proposal | [Component-boundary normalization and legacy broker retirement](../proposals/proposal-component-boundary-normalization-001.md). |
+| Objective | Freeze every `broker.lib` source/export/link edge, prove whether its six-file legacy local state plane has any retained production or fixture consumer, and remove it only if a fresh x86 graph and map prove it unnecessary. |
+| Non-goals | No BaseSrv policy rewrite; no move of modern RPC/Console/ABI mechanics into either mirror; no session-extension extraction or adapter-family reorganization in S1; no WOW completion claim. |
+| Reference Baseline | T417 closure `3bb6d9e79`; S5 relationship audit; formal x86 graph `build/M0-T417/S4/formal-x86-003`; current x86 package at `O:\winnt`. |
+| Files And ABI Surface | `src/broker/{broker,wire,base_vdm_record}.{c,h}`, generator archive/link lists and focused fixtures. No public wire or product ABI change. |
+| Applicable Rules | docs/README, EXECUTION, ARCHITECTURE, CODING, DOCUMENT, CONTRIBUTING and source-policy; strict no-new-mirror-file and original-owner recovery ladder. |
+| Verification | Source/export/reference sweep; fresh Win32/x86 graph with and without `broker.lib`; map inspection; focused CCPU/C-VID and BaseClient/BaseSrv lifecycle tests; COMMAND/MEM/EDIT/nested-COMMAND/broker-death regressions if removal is reached. |
+| Expected Markers | Either no retained reference and a successful archive-free build/map, or the exact retained caller and a revised disposition; no speculation from archive linkage alone. |
+| Asset Needs | Current selected OpenNT/MVDM sources, formal generator, broker lifecycle fixtures and local `O:\winnt` runtime package. |
+| Reporting Requirements | Record each source, archive, link and symbol edge; state net deleted versus retained lines and every test result/limitation. |
+| Stop Conditions | Any retained caller, export, ABI/lifetime dependency, build failure, or runtime regression outside the proposed 387-line plane pauses deletion and requires an evidence-backed scope decision. |
+| Exit Criteria | A separately reviewable S1 evidence record establishes deletion or exact retention; no source deletion without fresh x86 link/map proof and required regressions. |
+| Original Owner Request | “批准收口当前的T任务，准入下一个任务并开始执行。” The standing objective is to clean adapters while preserving the completed runnable paths. |
+| Similar-Issue Sweep | All product, fixture and generator link lists; archive symbols; direct and indirect source includes; broker transport versus local-plane callers; stale documentation references. |
 
 ## S1 Closure Record
 
