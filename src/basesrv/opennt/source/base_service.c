@@ -9,7 +9,7 @@
 #include <base_wait.h>
 #include <base_stream.h>
 #include <base_interactive.h>
-#include "broker/vdm_receipt.h"
+#include "basesrv/transport/vdm_receipt.h"
 typedef NTSTATUS (*OPENNT_USER_TEST_TOKEN_FOR_INTERACTIVE)(HANDLE,PLUID);
 extern OPENNT_USER_TEST_TOKEN_FOR_INTERACTIVE UserTestTokenForInteractive;
 

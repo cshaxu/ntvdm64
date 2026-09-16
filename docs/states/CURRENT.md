@@ -56,6 +56,11 @@ documentation-governance checks are recorded in the
 
 ## S3 Closure Record
 
+T418 S3 moves the live BaseSrv entry, transport and private bindings to
+`src/basesrv`, retaining the mirrored original record owner. Fresh x86 build,
+reservation and original lifecycle proof are recorded in the
+[BaseSrv ownership evidence](../etc/evidence/m0-t418-s3-basesrv-ownership.md).
+
 S3 updates the canonical C-VID contract verifier and concludes that no private
 overlay body can be safely deleted or relocated; the source/caller/build proof
 is in the [overlay composition disposition](../etc/evidence/m0-t416-s3-overlay-composition-disposition.md).

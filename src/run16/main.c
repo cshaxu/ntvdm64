@@ -4,10 +4,10 @@
  * suspended-worker rollback around the admitted standalone boundary. */
 #include <nt.h>
 #include <base_classifier.h>
-#include "adapter-opennt-host/basesrv/include/base_capture.h"
-#include "adapter-opennt-host/basesrv/include/base_client.h"
-#include "adapter-opennt-host/basesrv/include/base_config.h"
-#include "adapter-opennt-host/basesrv/include/base_rpc_client.h"
+#include "basesrv/opennt/include/base_capture.h"
+#include "basesrv/opennt/include/base_client.h"
+#include "basesrv/opennt/include/base_config.h"
+#include "basesrv/opennt/include/base_rpc_client.h"
 #include <shellapi.h>
 #include <stdio.h>
 #include <wchar.h>

@@ -1,7 +1,7 @@
 #ifndef OPENNT_BASE_VALUES_H
 #define OPENNT_BASE_VALUES_H
-#include "broker/vdm_message.h"
-#include "broker/vdm_values.h"
+#include "basesrv/transport/vdm_message.h"
+#include "basesrv/transport/vdm_values.h"
 /* BASE_API_MSG must be declared. Exact operation-selected size is required.
  * Only scalar fields change. Handles, borrowed buffers and startup storage
  * must be bound separately. Decode validates all narrowing before mutation;

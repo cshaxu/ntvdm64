@@ -6,10 +6,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "service.h"
-#include "broker/rpc_security.h"
+#include "basesrv/transport/rpc_security.h"
 #include "opennt-abi/source/public/internal/base/inc/vdmapi.h"
-#include "adapter-opennt-host/basesrv/include/base_service.h"
-#include "app/console_query.h"
+#include "basesrv/opennt/include/base_service.h"
+#include "basesrv/console_query.h"
 #include "product-abi/version.h"
 static broker_rpc_scope scope;
 static OPENNT_BASE_SERVICE *service;

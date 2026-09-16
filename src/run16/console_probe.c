@@ -1,8 +1,8 @@
 /* Short-lived run16 role selected by the S1 Console design. Never selects
  * BaseSrv records. Only its parent's private pipe carries query/results. */
 #include <windows.h>
-#include "broker/console_probe.h"
-#include "broker/console_membership.h"
+#include "basesrv/transport/console_probe.h"
+#include "basesrv/transport/console_membership.h"
 
 static DWORD transfer(HANDLE pipe,void *data,DWORD length,BOOL write)
 {

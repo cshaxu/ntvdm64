@@ -1,6 +1,6 @@
 #ifndef OPENNT_BASE_COMMAND_H
 #define OPENNT_BASE_COMMAND_H
-#include "broker/vdm_message.h"
+#include "basesrv/transport/vdm_message.h"
 /* Decoded CheckVDM ConsoleHandle carries only one of these service-local
  * semantic sentinels.  A native Console handle is never serialized. */
 #define OPENNT_BASE_CONSOLE_NEW ((HANDLE)0)

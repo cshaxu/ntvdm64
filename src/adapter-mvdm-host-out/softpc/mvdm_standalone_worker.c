@@ -1,7 +1,7 @@
 #include "mvdm_standalone_worker.h"
 
 #include "product-package/package_layout.h"
-#include "adapter-opennt-host/basesrv/include/base_rpc_client.h"
+#include "basesrv/opennt/include/base_rpc_client.h"
 #include "adapter-mvdm-host-out/basesrv/include/mvdm_command_native_child.h"
 #include "mvdm_softpc_execution.h"
 #include "mvdm_softpc_guest_memory.h"

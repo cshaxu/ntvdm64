@@ -3,8 +3,8 @@
  * replacement reaches the real standalone BaseSrv first-VDM owner. */
 #include <windows.h>
 #include <stdio.h>
-#include "adapter-opennt-host/basesrv/include/base_client.h"
-#include "adapter-opennt-host/basesrv/include/base_rpc_client.h"
+#include "basesrv/opennt/include/base_client.h"
+#include "basesrv/opennt/include/base_rpc_client.h"
 
 /* BaseCheckForVDM shares its original client translation unit with
  * BaseCheckVDM, whose retained capture helpers require this local carrier. */

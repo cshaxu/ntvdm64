@@ -1,6 +1,6 @@
 #ifndef OPENNT_BASE_PAYLOAD_H
 #define OPENNT_BASE_PAYLOAD_H
-#include "broker/vdm_payload.h"
+#include "basesrv/transport/vdm_payload.h"
 /* Base message types must already be declared. This binds only CheckVDM's
  * eight copied buffers, not scalar fields, authentication or resources. */
 BOOL OpenNtBaseEncodeCheckPayload(const BASE_CHECKVDM_MSG *, void *, uint32_t, uint32_t *);

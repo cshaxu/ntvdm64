@@ -1,7 +1,7 @@
 #ifndef OPENNT_BASE_STARTUP_H
 #define OPENNT_BASE_STARTUP_H
 #include <windows.h>
-#include "broker/vdm_startup.h"
+#include "basesrv/transport/vdm_startup.h"
 /* Local caller supplies valid storage; no native value is serialized. */
 void OpenNtBaseEncodeStartup(const STARTUPINFOA *, broker_vdm_startup *);
 /* Invalid input leaves destination unchanged. On success, absent source

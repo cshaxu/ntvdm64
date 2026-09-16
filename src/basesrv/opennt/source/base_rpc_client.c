@@ -6,8 +6,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "service.h"
-#include "broker/rpc_security.h"
-#include "broker/vdm_receipt.h"
+#include "basesrv/transport/rpc_security.h"
+#include "basesrv/transport/vdm_receipt.h"
 #include <base_client.h>
 #include <base_command.h>
 #include <base_rpc_client.h>

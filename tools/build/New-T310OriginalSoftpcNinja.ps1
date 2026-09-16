@@ -958,7 +958,7 @@ $openntBaseVdmObjects = foreach ($name in $openntBaseVdmNames) {
 $baseOwnerManifest = @()
 $brokerTransportManifest = @()
 if ($Architecture -eq 'x86') {
-    $baseBindingInclude = NinjaPath (Join-Path $root 'src/adapter-opennt-host/basesrv/include')
+    $baseBindingInclude = NinjaPath (Join-Path $root 'src/basesrv/opennt/include')
     $baseOwnerFlags = $baseFlags + ' /we4013 /I "' + $baseBindingInclude + '"' +
         ' /I "' + (NinjaPath (Join-Path $root 'src/opennt-host/base/win32/inc')) + '"' +
         ' /I "' + (NinjaPath (Join-Path $root 'src/opennt-host/base/win32/server')) + '"'
@@ -973,22 +973,22 @@ if ($Architecture -eq 'x86') {
             @('srvvdm', 'src/opennt-host/base/win32/server/srvvdm.c', $baseServerFlags),
             @('exports', 'src/opennt-host/windows/core/ntuser/server/exports.c', $baseServerFlags))
         'opennt-base-bindings' = @(
-            @('service', 'src/adapter-opennt-host/basesrv/source/base_service.c', $baseServerFlags),
-            @('command', 'src/adapter-opennt-host/basesrv/source/base_command.c', $baseServerFlags),
-            @('values', 'src/adapter-opennt-host/basesrv/source/base_values.c', $baseServerFlags),
-            @('payload', 'src/adapter-opennt-host/basesrv/source/base_payload.c', $baseServerFlags),
-            @('startup', 'src/adapter-opennt-host/basesrv/source/base_startup.c', $baseOwnerFlags),
-            @('dispatch', 'src/adapter-opennt-host/basesrv/source/base_dispatch.c', $baseServerFlags),
-            @('resources', 'src/adapter-opennt-host/basesrv/source/base_resource.c', ($baseServerFlags + ' /DOPENNT_BASE_NATIVE_RESOURCES')),
-            @('streams', 'src/adapter-opennt-host/basesrv/source/base_stream.c', $baseServerFlags),
-            @('waits', 'src/adapter-opennt-host/basesrv/source/base_wait.c', ($baseServerFlags + ' /DOPENNT_BASE_NATIVE_RESOURCES')),
-            @('registry', 'src/adapter-opennt-host/basesrv/source/base_process.c', $baseServerFlags),
-            @('reservation', 'src/adapter-opennt-host/basesrv/source/base_reservation.c', $baseOwnerFlags),
-            @('request', 'src/adapter-opennt-host/basesrv/source/base_request.c', $baseServerFlags),
-            @('config', 'src/adapter-opennt-host/basesrv/source/base_config.c', $baseOwnerFlags),
-            @('process', 'src/adapter-opennt-host/basesrv/source/base_client_process.c', $baseOwnerFlags),
-            @('interactive', 'src/adapter-opennt-host/basesrv/source/base_interactive.c', $baseOwnerFlags),
-            @('classifier-path', 'src/adapter-opennt-host/basesrv/source/base_classifier_path.c', $baseOwnerFlags))
+            @('service', 'src/basesrv/opennt/source/base_service.c', $baseServerFlags),
+            @('command', 'src/basesrv/opennt/source/base_command.c', $baseServerFlags),
+            @('values', 'src/basesrv/opennt/source/base_values.c', $baseServerFlags),
+            @('payload', 'src/basesrv/opennt/source/base_payload.c', $baseServerFlags),
+            @('startup', 'src/basesrv/opennt/source/base_startup.c', $baseOwnerFlags),
+            @('dispatch', 'src/basesrv/opennt/source/base_dispatch.c', $baseServerFlags),
+            @('resources', 'src/basesrv/opennt/source/base_resource.c', ($baseServerFlags + ' /DOPENNT_BASE_NATIVE_RESOURCES')),
+            @('streams', 'src/basesrv/opennt/source/base_stream.c', $baseServerFlags),
+            @('waits', 'src/basesrv/opennt/source/base_wait.c', ($baseServerFlags + ' /DOPENNT_BASE_NATIVE_RESOURCES')),
+            @('registry', 'src/basesrv/opennt/source/base_process.c', $baseServerFlags),
+            @('reservation', 'src/basesrv/opennt/source/base_reservation.c', $baseOwnerFlags),
+            @('request', 'src/basesrv/opennt/source/base_request.c', $baseServerFlags),
+            @('config', 'src/basesrv/opennt/source/base_config.c', $baseOwnerFlags),
+            @('process', 'src/basesrv/opennt/source/base_client_process.c', $baseOwnerFlags),
+            @('interactive', 'src/basesrv/opennt/source/base_interactive.c', $baseOwnerFlags),
+            @('classifier-path', 'src/basesrv/opennt/source/base_classifier_path.c', $baseOwnerFlags))
     }
     foreach ($group in @('opennt-base-client', 'opennt-base-server', 'opennt-base-bindings')) {
         $members = foreach ($member in $baseOwnerGroups[$group]) {
@@ -1007,7 +1007,7 @@ if ($Architecture -eq 'x86') {
         $graph.Add('build ' + $group + '.lib: lib ' + ($members -join ' '))
     }
     $transportObjects = foreach ($unit in @('console_membership', 'rpc_security', 'vdm_receipt', 'vdm_delivery', 'vdm_payload', 'vdm_message')) {
-        $source = 'src/broker/' + $unit + '.c'
+        $source = 'src/basesrv/transport/' + $unit + '.c'
         $object = 'obj/broker-transport/' + $unit + '.obj'
         $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $root $source)))
         $graph.Add('  cflags = /nologo /c /MT /W4 /we4013')
@@ -1037,7 +1037,7 @@ if ($Architecture -eq 'x86') {
     $graph.Add('  cflags = ' + $baseOwnerFlags)
     $graph.Add('build obj/run16/support.obj: cc ' + (NinjaPath (Join-Path $root 'src/adapter-mvdm-host-out/win32/source/opennt_support_rtl.c')))
     $graph.Add('  cflags = ' + $baseOwnerFlags + ' /Gy')
-    $graph.Add('build obj/run16/rpc_client.obj: cc ' + (NinjaPath (Join-Path $root 'src/adapter-opennt-host/basesrv/source/base_rpc_client.c')) + ' | obj/basesrv/service.h')
+    $graph.Add('build obj/run16/rpc_client.obj: cc ' + (NinjaPath (Join-Path $root 'src/basesrv/opennt/source/base_rpc_client.c')) + ' | obj/basesrv/service.h')
     $graph.Add('  cflags = ' + $baseOwnerFlags + ' /I obj/basesrv')
     $graph.Add('build obj/run16/stub.obj: cc obj/basesrv/service_c.c | obj/basesrv/service.h')
     $graph.Add('  cflags = ' + $nativeServiceFlags)
@@ -1048,15 +1048,15 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build run16.exe: run16_link obj/run16/entry.obj obj/run16/console_probe.obj obj/run16/support.obj obj/run16/rpc_client.obj obj/run16/stub.obj opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib')
     $graph.Add('rule basesrv_idl')
     $graph.Add('  command = midl.exe /nologo /env win32 /target NT100 /prefix client Client_ /prefix server Server_ /out obj/basesrv /h service.h /cstub service_c.c /sstub service_s.c $in')
-    $graph.Add('build obj/basesrv/service_s.c | obj/basesrv/service_c.c obj/basesrv/service.h: basesrv_idl ' + (NinjaPath (Join-Path $root 'src/broker/service.idl')))
+    $graph.Add('build obj/basesrv/service_s.c | obj/basesrv/service_c.c obj/basesrv/service.h: basesrv_idl ' + (NinjaPath (Join-Path $root 'src/basesrv/transport/service.idl')))
     $nativeServiceFlags = '/nologo /c /MT /W4 /we4013 /showIncludes /I obj/basesrv /I "' + (NinjaPath (Join-Path $root 'src')) + '"'
-    $graph.Add('build obj/basesrv/entry.obj: cc ' + (NinjaPath (Join-Path $root 'src/app/basesrv_entry.c')) + ' | obj/basesrv/service.h')
+    $graph.Add('build obj/basesrv/entry.obj: cc ' + (NinjaPath (Join-Path $root 'src/basesrv/main.c')) + ' | obj/basesrv/service.h')
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build obj/basesrv/stub.obj: cc obj/basesrv/service_s.c | obj/basesrv/service.h')
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build obj/basesrv/console_query.obj: cc ' + (NinjaPath (Join-Path $root 'src/app/console_query.c')))
+    $graph.Add('build obj/basesrv/console_query.obj: cc ' + (NinjaPath (Join-Path $root 'src/basesrv/console_query.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build obj/worker/rpc_client.obj: cc ' + (NinjaPath (Join-Path $root 'src/adapter-opennt-host/basesrv/source/base_rpc_client.c')) + ' | obj/basesrv/service.h')
+    $graph.Add('build obj/worker/rpc_client.obj: cc ' + (NinjaPath (Join-Path $root 'src/basesrv/opennt/source/base_rpc_client.c')) + ' | obj/basesrv/service.h')
     $graph.Add('  cflags = ' + $baseOwnerFlags + ' /I obj/basesrv')
     $graph.Add('build obj/worker/stub.obj: cc obj/basesrv/service_c.c | obj/basesrv/service.h')
     $graph.Add('  cflags = ' + $nativeServiceFlags)
@@ -1206,7 +1206,7 @@ $graph.Add('default original-softpc-candidate')
         target = 'basesrv.exe'
         selected = ($Architecture -eq 'x86')
         disposition = 'explicit build-only S3 WIP; authenticated registration/first-VDM; commands and publication pending'
-        sources = @('src/app/basesrv_entry.c', 'src/broker/service.idl' | ForEach-Object {
+        sources = @('src/basesrv/main.c', 'src/basesrv/transport/service.idl' | ForEach-Object {
             [ordered]@{ path = $_; sha256 = Get-NodeSha256 (Join-Path $root $_) }
         })
         libraries = @('opennt-base-server.lib', 'opennt-base-bindings.lib', 'broker-transport.lib', 'original-opennt-rtl-x86.lib')

@@ -1,8 +1,8 @@
 /* Formal Console membership mechanism; not a broker identity provider. */
 #include <windows.h>
-#include "broker/console_membership.h"
-#include "broker/console_probe.h"
-#include "app/console_query.h"
+#include "basesrv/transport/console_membership.h"
+#include "basesrv/transport/console_probe.h"
+#include "basesrv/console_query.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

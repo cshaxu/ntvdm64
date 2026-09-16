@@ -1,6 +1,6 @@
 #ifndef OPENNT_BASE_DISPATCH_H
 #define OPENNT_BASE_DISPATCH_H
-#include "broker/vdm_message.h"
+#include "basesrv/transport/vdm_message.h"
 
 /* Local materialized message only. The transport must authenticate, validate
  * all variable payloads/resources and bind the registered caller first.

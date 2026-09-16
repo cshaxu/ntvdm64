@@ -1,6 +1,6 @@
 /* App composition of the S1 short-lived run16 Console observation role. */
 #include "console_query.h"
-#include "broker/console_probe.h"
+#include "basesrv/transport/console_probe.h"
 #include <wchar.h>
 typedef struct {HANDLE pipe;BYTE *data;DWORD bytes,error;} QUERY_WRITE;
 static DWORD WINAPI send_request(void *context)
