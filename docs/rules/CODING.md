@@ -43,10 +43,10 @@ MVDM overlay material at `src/mvdm-overlay/v86/monitor/i386/`.
   MVDM carriers, and accepted non-MVDM OpenNT host package
   topology respectively; package libraries do not create ad-hoc new source
   owners.
-- `mvdm-softpc-patch` is reserved for individually provenance-registered
-  NTVDMx64-derived SoftPC patch bodies. Preserve each original SoftPC interface
-  shape and use `adapter-mvdm-host-out/softpc` for an approved mapping-manager
-  binding; it is never a generic helper, Bochs consumer or session owner.
+- Individually provenance-registered NTVDMx64-derived declarations or missing
+  providers belong to the named adapter/ABI family. They must not create a
+  file below `mvdm` or `opennt-host`; an existing mirror file may change only
+  when it is the original owner of the logic.
 - A newly accepted non-MVDM OpenNT package keeps its original relative path
   below `opennt-host`. Its private historical boundary, if one is needed,
   belongs below the correspondingly named `adapter-opennt-host` subfamily;

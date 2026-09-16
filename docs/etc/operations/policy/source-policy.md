@@ -105,8 +105,9 @@ comparative evidence only and cannot become runtime/acceptance dependencies.
 
 The owner has expressly approved a narrow exception for
 `O:\repos.external\ntvdmx64`: an individually audited SoftPC patch body or
-generated SoftPC build carrier may be copied only into
-`src/mvdm-softpc-patch`. Each imported file must have a register row naming
+generated SoftPC build carrier may be copied only into its named adapter/ABI
+carrier; it must not create a file below `src/mvdm` or `src/opennt-host`. Each
+imported file must have a register row naming
 the exact NTVDMx64 path and hash, the original SoftPC caller/interface it
 serves, the original-source alternative, the reason that alternative lacks a
 usable x86 build carrier, mapping-manager handling if applicable, and focused
@@ -115,8 +116,8 @@ repair criterion unless it exposes a demonstrated architecture-neutral
 mapping-manager correctness defect. This exception does not admit NTVDMx64's injector,
 loader, HAXM path, driver, CSRSS stubs, registry policy, host mutation, or its
 product composition. `src.old` remains evidence only. Original SoftPC callers
-remain in the `mvdm-host` mirror and may use only a minimal registered
-`DIVERGENCE:` hook to enter the imported patch body.
+remain in the MVDM mirror and may use only a minimal registered `DIVERGENCE:`
+hook to enter the bounded adapter/ABI carrier.
 
 Every imported file, copied fragment, ABI conclusion, or historical-source
 change records its source tree/path/revision, role, notices present, rationale,

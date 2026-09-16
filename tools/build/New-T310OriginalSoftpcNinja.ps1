@@ -112,9 +112,8 @@ $adapterMonitorRoot = Join-Path $root 'src/adapter-mvdm-host-out/monitor/source'
 $kernelVdmPrinterSource = Join-Path $root 'src/mvdm-overlay/v86/monitor/i386/monitor_printer.c'
 $adapterRedirRoot = Join-Path $root 'src/adapter-mvdm-host-out/redir'
 $adapterVddRoot = Join-Path $root 'src/adapter-mvdm-host-out/vdd'
-$patchRoot = Join-Path $root 'src/mvdm-softpc-patch/x86/prod'
-$patchBodyRoot = Join-Path $root 'src/mvdm-softpc-patch/patches/common'
-$patchEvidenceRoot = Join-Path $root 'src/mvdm-softpc-patch/patches'
+$ccpuFallbackSource = Join-Path $adapterSoftpcRoot 'mvdm_softpc_ccpu_fallback.c'
+$ccpuProductIncludeRoot = Join-Path $adapterSoftpcRoot 'include/generated/x86/prod'
 $ccpuManifest = Join-Path $ccpuRoot 'sources'
 $biosManifest = Join-Path $biosRoot 'sources'
 $keymouseManifest = Join-Path $keymouseRoot 'sources'
@@ -269,9 +268,6 @@ $adapterSoftpcNames = @('mvdm_softpc_firmware.c', 'mvdm_xms_memory.c', 'mvdm_a20
 $appNames = @('package_layout.c')
 $effectiveAddressSource = Join-Path $adapterSoftpcRoot 'mvdm_softpc_effective_address.c'
 $effectiveAddressObject = 'obj/adapter-softpc/mvdm_softpc_effective_address.obj'
-$patchNames = @('PigReg_c.h', 'sas4gen.h', 'gdpvar.h')
-$patchBodyNames = @('fmstubs.c')
-$patchEvidenceNames = @('minnt/callconv.patch')
 foreach ($name in $ccpuNames) {
     if (!(Test-Path -LiteralPath (Join-Path $ccpuRoot $name))) { throw "Original CCPU source missing: $name" }
 }
@@ -385,15 +381,10 @@ foreach ($name in $adapterMonitorNames) {
     if (!(Test-Path -LiteralPath (Join-Path $adapterMonitorRoot $name))) { throw "Required monitor adapter source missing: $name" }
 }
 if (!(Test-Path -LiteralPath $kernelVdmPrinterSource)) { throw "Required kernel VDM printer carrier missing: $kernelVdmPrinterSource" }
-foreach ($name in $patchNames) {
-    if (!(Test-Path -LiteralPath (Join-Path $patchRoot $name))) { throw "Registered SoftPC patch carrier missing: $name" }
+foreach ($name in @('PigReg_c.h', 'sas4gen.h', 'gdpvar.h')) {
+    if (!(Test-Path -LiteralPath (Join-Path $ccpuProductIncludeRoot $name))) { throw "Selected x86 CCPU product carrier missing: $name" }
 }
-foreach ($name in $patchBodyNames) {
-    if (!(Test-Path -LiteralPath (Join-Path $patchBodyRoot $name))) { throw "Registered SoftPC patch body missing: $name" }
-}
-foreach ($name in $patchEvidenceNames) {
-    if (!(Test-Path -LiteralPath (Join-Path $patchEvidenceRoot $name))) { throw "Registered SoftPC patch evidence missing: $name" }
-}
+if (!(Test-Path -LiteralPath $ccpuFallbackSource)) { throw "Selected CCPU fallback source missing: $ccpuFallbackSource" }
 
 New-Item -ItemType Directory -Force $build, (Join-Path $build 'generated'), (Join-Path $build 'obj/ccpu'), (Join-Path $build 'obj/bios'), (Join-Path $build 'obj/keymouse'), (Join-Path $build 'obj/system'), (Join-Path $build 'obj/disks'), (Join-Path $build 'obj/support'), (Join-Path $build 'obj/video'), (Join-Path $build 'obj/cvidc'), (Join-Path $build 'obj/comms'), (Join-Path $build 'obj/dos'), (Join-Path $build 'obj/dem'), (Join-Path $build 'obj/command'), (Join-Path $build 'obj/xms'), (Join-Path $build 'obj/dpmi'), (Join-Path $build 'obj/suballoc'), (Join-Path $build 'obj/session'), (Join-Path $build 'obj/debug'), (Join-Path $build 'obj/host'), (Join-Path $build 'obj/adapter-softpc'), (Join-Path $build 'obj/adapter-win32'), (Join-Path $build 'obj/adapter-redir'), (Join-Path $build 'obj/adapter-vdd'), (Join-Path $build 'obj/opennt-netlib'), (Join-Path $build 'obj/opennt-base-vdm'), (Join-Path $build 'obj/patch') | Out-Null
 
@@ -523,11 +514,10 @@ $includeRootPaths = @(
     'src/opennt-abi/source/private/windows/inc',
     'src/opennt-abi/source/public/ddk/inc',
     'src/mvdm/inc',
-    # NTVDMx64's original patch script deletes the CCPU-local generated GDP
-    # carrier, then supplies this selected x86 product carrier. Keep the
-    # mirror source intact and express that historical selection in build
-    # include order instead.
-    'src/mvdm-softpc-patch/x86/prod',
+    # The selected x86 product generator output is absent from the source
+    # union, so it remains a bounded SoftPC adapter carrier, not a new mirror
+    # file under mvdm.
+    'src/adapter-mvdm-host-out/softpc/include/generated/x86/prod',
     'src/mvdm/xms.486',
     # DPMI's original precompiled header owns dpmidata.h beside its source
     # bodies.  Select the original directory rather than copying the carrier
@@ -621,8 +611,8 @@ $cvidcRuleFlags = $cvidcFirstFlags
 # second `c_cpu_*` executor provider.  The one translation unit therefore
 # retains the same original vector call shape without claiming CCPU ownership.
 $cvidcAccessFlags = $cvidcRuleFlags.Replace('/DCCPU ', '').Replace('/DPROD ', '')
-$patchVectorDefaultsFlags = $baseFlags + ' /DMVDM_SOFTPC_PATCH_CCPU_VECTOR_DEFAULTS_ONLY'
-$patchActivityCheckFlags = $baseFlags + ' /DMVDM_SOFTPC_PATCH_ACTIVITY_CHECK_ONLY'
+$patchVectorDefaultsFlags = $baseFlags + ' /DMVDM_CCPU_VECTOR_DEFAULTS_ONLY'
+$patchActivityCheckFlags = $baseFlags + ' /DMVDM_CCPU_ACTIVITY_CHECK_ONLY'
 
 $graph = [Collections.Generic.List[string]]::new()
 $graph.Add('ninja_required_version = 1.10')
@@ -696,7 +686,7 @@ $graph.Add('rule forced_link_audit')
 # This deliberately produces a non-runnable DLL.  /WHOLEARCHIVE makes the
 # candidate's complete original membership visible to LINK; /FORCE keeps the
 # unresolved physical forms in the adjacent log for source-first ownership.
-$graph.Add('  command = link.exe /nologo /dll /noentry /force:unresolved /force:multiple /out:$out /implib:$out.lib /wholearchive:original-ccpu386.lib /wholearchive:original-softpc-bios.lib /wholearchive:original-softpc-keymouse.lib /wholearchive:original-softpc-system.lib /wholearchive:original-softpc-disks.lib /wholearchive:original-softpc-support.lib /wholearchive:original-softpc-video.lib /wholearchive:original-softpc-cvidc.lib /wholearchive:original-softpc-comms.lib /wholearchive:original-softpc-dos.lib /wholearchive:original-mvdm-dem.lib /wholearchive:original-mvdm-command.lib /wholearchive:original-mvdm-xms.lib /wholearchive:original-mvdm-dpmi32.lib /wholearchive:original-mvdm-host-suballoc.lib /wholearchive:original-mvdm-host-oemuni.lib /wholearchive:original-softpc-base-trace.lib /wholearchive:original-softpc-host-roots.lib /wholearchive:softpc-bindings.lib /wholearchive:softpc-win32-bindings.lib /wholearchive:monitor-bindings.lib /wholearchive:debugger-bindings.lib /wholearchive:session.lib /wholearchive:broker.lib /wholearchive:mvdm-softpc-effective-address.lib /wholearchive:softpc-patch-evidence.lib softpc-ccpu-vector-defaults.lib kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib')
+    $graph.Add('  command = link.exe /nologo /dll /noentry /force:unresolved /force:multiple /out:$out /implib:$out.lib /wholearchive:original-ccpu386.lib /wholearchive:original-softpc-bios.lib /wholearchive:original-softpc-keymouse.lib /wholearchive:original-softpc-system.lib /wholearchive:original-softpc-disks.lib /wholearchive:original-softpc-support.lib /wholearchive:original-softpc-video.lib /wholearchive:original-softpc-cvidc.lib /wholearchive:original-softpc-comms.lib /wholearchive:original-softpc-dos.lib /wholearchive:original-mvdm-dem.lib /wholearchive:original-mvdm-command.lib /wholearchive:original-mvdm-xms.lib /wholearchive:original-mvdm-dpmi32.lib /wholearchive:original-mvdm-host-suballoc.lib /wholearchive:original-mvdm-host-oemuni.lib /wholearchive:original-softpc-base-trace.lib /wholearchive:original-softpc-host-roots.lib /wholearchive:softpc-bindings.lib /wholearchive:softpc-win32-bindings.lib /wholearchive:monitor-bindings.lib /wholearchive:debugger-bindings.lib /wholearchive:session.lib /wholearchive:broker.lib /wholearchive:mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib')
 $graph.Add('rule redir_dll_link')
 # Keep the original VDMREDIR DLL boundary.  The parent import library is an
 # implicit output of the original process link, so this rule cannot create a
@@ -1147,15 +1137,10 @@ $appObjects = foreach ($name in $appNames) {
     $object
 }
 $graph.Add('build ' + $effectiveAddressObject + ': cc ' + (NinjaPath $effectiveAddressSource))
-$patchBodyObjects = @(foreach ($name in $patchBodyNames) {
-    $object = 'obj/patch/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
-    $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $patchBodyRoot $name)))
-    $object
-})
-$patchVectorDefaultsObject = 'obj/patch/fmstubs_ccpu_vector_defaults.obj'
-$graph.Add('build ' + $patchVectorDefaultsObject + ': cc_patch_vector_defaults ' + (NinjaPath (Join-Path $patchBodyRoot 'fmstubs.c')))
-$patchActivityCheckObject = 'obj/patch/fmstubs_activity_check.obj'
-$graph.Add('build ' + $patchActivityCheckObject + ': cc_patch_activity_check ' + (NinjaPath (Join-Path $patchBodyRoot 'fmstubs.c')))
+$patchVectorDefaultsObject = 'obj/ccpu/fmstubs_vector_defaults.obj'
+$graph.Add('build ' + $patchVectorDefaultsObject + ': cc_patch_vector_defaults ' + (NinjaPath $ccpuFallbackSource))
+$patchActivityCheckObject = 'obj/ccpu/fmstubs_activity_check.obj'
+$graph.Add('build ' + $patchActivityCheckObject + ': cc_patch_activity_check ' + (NinjaPath $ccpuFallbackSource))
 $redirResourceObject = 'obj/redir/vdmredir.res'
 $graph.Add('build ' + $redirResourceObject + ': rc ' + (NinjaPath $redirResourceSource))
 $graph.Add('build original-ccpu386.lib: lib ' + ($ccpuObjects -join ' '))
@@ -1201,10 +1186,9 @@ $graph.Add('build worker-command-bindings.lib: lib ' + ($adapterBaseSrvObjects -
 $graph.Add('build monitor-bindings.lib: lib ' + ($adapterMonitorObjects -join ' '))
 $graph.Add('build kernel-vdm-printer.lib: lib ' + $kernelVdmPrinterObject)
 $graph.Add('build debugger-bindings.lib: lib ' + ($adapterDebuggerObjects -join ' '))
-$graph.Add('build softpc-patch-evidence.lib: lib ' + ($patchBodyObjects -join ' '))
 $graph.Add('build softpc-ccpu-vector-defaults.lib: lib ' + $patchVectorDefaultsObject)
 $graph.Add('build softpc-activity-check.lib: lib ' + $patchActivityCheckObject)
-$graph.Add('build original-softpc-candidate: phony original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-redir.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-softpc-host-roots.lib original-opennt-netlib.lib original-opennt-netapi-api.lib original-opennt-rtl-x86.lib softpc-bindings.lib redirector-bindings.lib worker-shell.lib worker-command-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib broker.lib mvdm-softpc-effective-address.lib softpc-patch-evidence.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib')
+$graph.Add('build original-softpc-candidate: phony original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-redir.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-softpc-host-roots.lib original-opennt-netlib.lib original-opennt-netapi-api.lib original-opennt-rtl-x86.lib softpc-bindings.lib redirector-bindings.lib worker-shell.lib worker-command-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib broker.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib')
 $graph.Add('build obj/tests/ccpu_halt_reset_test.obj: cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/ccpu_halt_reset_test.c')))
 $hostFixtureSeamsObject = 'obj/tests/ccpu_host_fixture_seams.obj'
 $graph.Add('build ' + $hostFixtureSeamsObject + ': cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/ccpu_host_fixture_seams.c')))
@@ -1220,7 +1204,7 @@ $graph.Add('build obj/tests/original_external_memory_test.obj: cc ' + (NinjaPath
 $graph.Add('build original-external-memory-test.exe: memory_test_link obj/tests/original_external_memory_test.obj ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
 $graph.Add('build cvidc-vector-binding-fixture.exe: memory_test_link ' + $cvidcVectorBindingFixtureObject + ' ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
 $graph.Add('build VDMREDIR.dll | VDMREDIR.dll.lib: redir_dll_link ' + (($redirObjects + @($redirResourceObject)) -join ' ') + ' ntvdm.lib redirector-bindings.lib original-opennt-netlib.lib original-opennt-netapi-api.lib softpc-bindings.lib softpc-win32-bindings.lib session.lib broker.lib')
-$graph.Add('build original-softpc-forced-closure.dll: forced_link_audit original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-softpc-host-roots.lib softpc-bindings.lib worker-shell.lib worker-command-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib broker.lib mvdm-softpc-effective-address.lib softpc-patch-evidence.lib softpc-ccpu-vector-defaults.lib')
+$graph.Add('build original-softpc-forced-closure.dll: forced_link_audit original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-softpc-host-roots.lib softpc-bindings.lib worker-shell.lib worker-command-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib broker.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib')
 $graph.Add('default original-softpc-candidate')
 [IO.File]::WriteAllText((Join-Path $build 'build.ninja'), (($graph -join [Environment]::NewLine) + [Environment]::NewLine), [Text.UTF8Encoding]::new($false))
 
@@ -1298,39 +1282,26 @@ $graph.Add('default original-softpc-candidate')
         })
         libraries = @('opennt-base-client.lib', 'opennt-base-bindings.lib', 'original-opennt-rtl-x86.lib')
     }
-    patchInputs = @($patchNames | ForEach-Object {
+    selectedX86GeneratedInputs = @('PigReg_c.h', 'sas4gen.h', 'gdpvar.h' | ForEach-Object {
         [ordered]@{
-            path = 'src/mvdm-softpc-patch/x86/prod/' + $_
-            sha256 = Get-NodeSha256 (Join-Path $patchRoot $_)
+            path = 'src/adapter-mvdm-host-out/softpc/include/generated/x86/prod/' + $_
+            sha256 = Get-NodeSha256 (Join-Path $ccpuProductIncludeRoot $_)
         }
     })
-    patchBodies = @($patchBodyNames | ForEach-Object {
+    selectedCcpuFallbacks = @(
         [ordered]@{
-            path = 'src/mvdm-softpc-patch/patches/common/' + $_
-            sha256 = Get-NodeSha256 (Join-Path $patchBodyRoot $_)
-            buildDisposition = 'compile-and-archive-debugbreak-evidence-only'
-        }
-    })
-    patchSelectedRuntimeBodies = @(
-        [ordered]@{
-            path = 'src/mvdm-softpc-patch/patches/common/fmstubs.c'
-            selector = 'MVDM_SOFTPC_PATCH_CCPU_VECTOR_DEFAULTS_ONLY'
+            path = 'src/adapter-mvdm-host-out/softpc/mvdm_softpc_ccpu_fallback.c'
+            selector = 'MVDM_CCPU_VECTOR_DEFAULTS_ONLY'
             symbols = @('EDL_fast_bop', 'c_sas_touch', 'c_VirtualiseInstruction')
-            buildDisposition = 'compile-and-force-link-original-debugbreak-vector-defaults-only'
-        },
+            buildDisposition = 'compile-and-force-link-debugbreak-vector-defaults-only'
+        }
         [ordered]@{
-            path = 'src/mvdm-softpc-patch/patches/common/fmstubs.c'
-            selector = 'MVDM_SOFTPC_PATCH_ACTIVITY_CHECK_ONLY'
+            path = 'src/adapter-mvdm-host-out/softpc/mvdm_softpc_ccpu_fallback.c'
+            selector = 'MVDM_CCPU_ACTIVITY_CHECK_ONLY'
             symbols = @('ActivityCheckAfterTimeSlice')
-            buildDisposition = 'compile-and-normal-link-imported-original-empty-activity-callback-only'
+            buildDisposition = 'compile-and-normal-link-empty-activity-callback-only'
         }
     )
-    patchEvidence = @($patchEvidenceNames | ForEach-Object {
-        [ordered]@{
-            path = 'src/mvdm-softpc-patch/patches/' + $_
-            sha256 = Get-NodeSha256 (Join-Path $patchEvidenceRoot $_)
-        }
-    })
     forbiddenInputs = @('src.old', 'bochs-core', 'adapter-bochs')
 } | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (Join-Path $build 'source-manifest.json') -Encoding utf8
 

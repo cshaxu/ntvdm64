@@ -10,7 +10,7 @@ $files=@(& git -C $repo ls-files src)
 if ($LASTEXITCODE -ne 0) { throw 'Cannot enumerate tracked source.' }
 $roles=@{
     'mvdm-host'='S2-original-mvdm'; 'mvdm-host-overlay'='S2-overlay';
-    'mvdm-softpc-patch'='S2-adopted-patch'; 'opennt-host'='S3-original-non-mvdm';
+    'opennt-host'='S3-original-non-mvdm';
     'adapter-mvdm-host-out'='S2-S3-assign-by-original-owner';
     'adapter-opennt-host'='S3-private-host-binding'; 'opennt-abi'='S2-S3-declaration-provenance';
     'app'='S2-S3-composition-or-replacement'; 'session'='S2-S3-neutral-or-replacement';

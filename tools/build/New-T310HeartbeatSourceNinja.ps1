@@ -42,7 +42,7 @@ $includes = @(
     'src/opennt-abi/source/private/windows/inc',
     'src/opennt-abi/source/public/ddk/inc',
     'src/mvdm-support/inc',
-    'src/mvdm-softpc-patch/x86/prod',
+    'src/adapter-mvdm-host-out/softpc/include/generated/x86/prod',
     'src/mvdm-host/softpc.new/base/ccpu386',
     'src/mvdm-host/softpc.new/host/inc',
     'src/mvdm-host/softpc.new/base/cvidc',

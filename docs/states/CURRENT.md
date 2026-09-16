@@ -4,27 +4,27 @@
 
 ## Active Packet
 
-**Active: M0 T417 S1** — Mirror-private component ownership and graph freeze
+**Active: M0 T417 S3** — MVDM overlay owner recovery
 (Ordinary Mode).
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T417 S1, Ordinary Mode. |
+| Identifier Mode | M0 T417 S3, Ordinary Mode. |
 | Admission And Approval | Owner: “准入执行”; admits Queue candidate 1. |
 | Candidate Proposal | [Mirror-private component elimination and project-component reorganization](../proposals/proposal-retire-mvdm-softpc-patch-001.md). |
-| Objective | Freeze every selected source, include, object, archive, link and caller edge under `mvdm-softpc-patch`, `mvdm-overlay` and `opennt-host-overlay`; give each body a source-first owner disposition and a bounded next implementation group. |
-| Non-goals | No source relocation/deletion, adapter reorganization, new behavior, runtime-policy change, WOW/WRITE claim, or direct modification of the owner-edited Queue/proposal during S1. |
+| Objective | Retire each MVDM overlay body using only a bounded adapter/ABI carrier or a minimal diff in its existing original mirror owner; neither mirror may gain a new file. |
+| Non-goals | No OpenNT-host overlay move, adapter reorganization, new behavior, runtime-policy change, WOW/WRITE claim, or changes to the owner-edited Queue/proposal. |
 | Reference Baseline | T416 closure `0c0f3232c`; canonical `src/mvdm` topology; the owner-edited Queue/proposal candidate; current x86 CCPU40 package at `O:\winnt`. |
-| Files And ABI Surface | Read-only production graph/source inventory; T417 S1 evidence, Status and evidence index only. No product ABI surface. |
+| Files And ABI Surface | MVDM overlay bodies and their original mirror callers, bounded adapter/ABI bindings, formal build manifest and CCPU/C-VID/printer verification. No public product ABI change. |
 | Applicable Rules | docs/README, EXECUTION, ARCHITECTURE, CODING, DOCUMENT, CONTRIBUTING and source-policy; original-source recovery ladder is mandatory for every disposition. |
-| Verification | Reproducible tracked-file inventory; formal-graph include/object/link sweep; original-owner/caller/reachability review; baseline metric capture; documentation governance and diff checks. |
-| Expected Markers | Every private path and provider has a build edge, caller, source-owner ladder and one disposition: direct mirror merge, bounded adapter binding, retained seam, provenance archive or deletion. |
+| Verification | Fresh formal Win32/x86 graph; original-owner/caller review; CCPU/C-VID/printer fixtures; COMMAND/MEM/EDIT regression; formal root and diff checks. |
+| Expected Markers | Each retired overlay has a direct existing-mirror diff or named adapter/ABI carrier, single ownership, and no new file under either mirror. |
 | Asset Needs | Current checkout, T416 formal graph, pinned OpenNT/OpenNT-4.5 comparison trees, and retained NTVDMx64 provenance only where its registered patch exception applies. |
-| Reporting Requirements | Record file/line counts, executable versus declaration/provenance roles, selected original owner, unavailable dependency, proposed destination, expected net deletion versus relocation, and focused regressions. |
-| Stop Conditions | A candidate move changes ownership/ABI/order/failure behavior; a needed original source is absent; a retained body has no finite boundary; or S1 finds an immediate runtime defect requiring a separately admitted repair. |
-| Exit Criteria | Complete evidence-backed disposition for every selected private source/graph edge and an implementation plan grouped by coherent provider boundary; no source movement occurs in S1. |
+| Reporting Requirements | Record per-overlay deleted/relocated lines, original owner, selected carrier, and focused regression evidence. |
+| Stop Conditions | A move adds a mirror file, changes single-state ownership or guest behavior, or has no finite adapter/ABI boundary. |
+| Exit Criteria | `mvdm-overlay` is absent, all retained behavior has one valid owner under the strict mirror rule, and focused/formal regressions pass. |
 | Original Owner Request | “以减少 mvdm和opennt-host相对原始opennt代码的diff为目标（包括他们的overlay甚至adapter），同时保证架构合理、不破坏当前已经实现跑通的部分.” and “准入执行”. |
-| Similar-Issue Sweep | All private-root production references, generated carriers, build manifests, overlay callers, adapter boundary candidates and stale directory references. |
+| Similar-Issue Sweep | Product and focused generator roots, include ordering, generated formal manifest, audit scripts, MVDM divergence register and every stale live-root reference. |
 
 ## S1 Closure Record
 

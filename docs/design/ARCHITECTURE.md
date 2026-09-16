@@ -121,9 +121,10 @@ prevents permanent parallel providers.
   It preserves immutable ROM and data inputs but is neither a host-runtime
   library nor a second machine executor. Executable `softpc.new/base/*`
   packages remain in `mvdm-host`.
-- `mvdm-softpc-patch`: a narrow component for reviewed NTVDMx64-derived SoftPC
-  patch bodies. It is neither a generic shim nor an alternate machine; original
-  `mvdm/softpc.new` control flow remains in the mirror caller.
+- Reviewed NTVDMx64-derived declarations or missing-provider fallbacks belong
+  to the named adapter/ABI family. They never create a mirror component or a
+  new file below `mvdm` or `opennt-host`; only an existing original file may
+  receive a minimal owner-local divergence.
 - `mvdm-platform-abi`: exact original declarations and contracts outside
   MVDM required to compile imported MVDM packages. It contains no replacement
   behavior.
@@ -260,11 +261,9 @@ app -> mvdm/dos/v86 / mvdm/bin86 / mvdm/wow16 / opennt-host/base/win32/winnls/fo
 
 mvdm-host -> mvdm-platform-abi
 mvdm-host -> opennt-host                           (only an admitted original host-service package)
-mvdm-host -> mvdm-softpc-patch                   (only registered SoftPC hooks)
 mvdm-host -> adapter-mvdm-host-out
 mvdm-host -> session                              (neutral contract only)
 adapter-mvdm-host-out/softpc -> original mvdm/softpc.new
-mvdm-softpc-patch -> adapter-mvdm-host-out/softpc
 adapter-mvdm-host-in -> adapter-mvdm-host-out/softpc  (typed mechanics only)
 adapter-mvdm-host-out/win32 -> broker client      (only for brokered historical calls)
 opennt-host -> mvdm-platform-abi

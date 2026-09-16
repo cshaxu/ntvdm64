@@ -176,9 +176,8 @@ visual comparison.
     build.  Retain upstream path/name/control structure in the mirror; use a
     registered local `DIVERGENCE:` hook only for a minimal binding, and move
     any material added mechanism to the paired overlay.
-32. `mvdm-softpc-patch` is a narrow component for individually reviewed
-    NTVDMx64-derived SoftPC patch bodies. Each body must have a register row
-    identifying its original SoftPC caller and interface shape, NTVDMx64
-    provenance, reason, x86/x64 disposition, mapping-manager use and removal
-    condition. It is neither a generic adapter nor a second executor and may
-    reach mechanics only through `adapter-mvdm-host-out/softpc`.
+32. NTVDMx64-derived declarations or missing-provider fallbacks must have a
+    register row identifying their caller/interface shape, provenance, reason,
+    x86/x64 disposition, mapping-manager use and removal condition. They live
+    in the named adapter/ABI family, never as a mirror component or a new file
+    below `mvdm` or `opennt-host`.

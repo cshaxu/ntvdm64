@@ -7,7 +7,6 @@ src/
   mvdm/
   mvdm-overlay/
   opennt-host/
-  mvdm-softpc-patch/
   mvdm-platform-abi/
   opennt-host/base/win32/winnls/fontsup/system/
   adapter-mvdm-host-in/
@@ -69,11 +68,10 @@ historical record is evidence, not a selectable configuration.
   immutable inputs through its admitted composition binding.
 - `mvdm-platform-abi` contains exact declarations outside MVDM required by
   those packages; it has no implementation.
-- `mvdm-softpc-patch` contains only individually provenance-registered
-  NTVDMx64-derived SoftPC patch bodies. Each register row names the original
-  caller, source identity, interface shape, mapping-manager use and removal
-  condition. It reaches mechanics only through the same-shaped `softpc` family
-  of `adapter-mvdm-host-out`.
+- NTVDMx64-derived declarations or missing-provider fallbacks are provenance-
+  registered adapter/ABI inputs, never a mirror component. They may not add a
+  file below `mvdm` or `opennt-host`; a mirror change is permitted only in an
+  existing upstream-mirror file and only when that file owns the logic.
 - `mvdm/dos/v86`, `mvdm/bin86` and `mvdm/wow16` are load-only selected guest
   carries; `opennt-host/base/win32/winnls/fontsup/system` is the separately sourced load-only Win16 font
   carry. None implies an unselected external source-universe import.

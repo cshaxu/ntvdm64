@@ -12,7 +12,7 @@ import path from 'node:path';
 
 const root = path.resolve(process.argv[2] ?? '.');
 const input = path.resolve(root, process.argv[3] ??
-  'src/mvdm-softpc-patch/x86/prod/gdpvar.h');
+  'src/adapter-mvdm-host-out/softpc/include/generated/x86/prod/gdpvar.h');
 const output = path.resolve(root, process.argv[4] ??
   'docs/etc/operations/m0-t310-s8-p4-gdp-generated-layout-inventory.tsv');
 
