@@ -167,6 +167,35 @@ prevents permanent parallel providers.
   source-shaped fault and permitted responses, but may not own final product
   dialog UI.
 
+### Executable-owned component transition
+
+T418 retires the generic project-component topology without changing the strict
+original-mirror boundary. The completed layout is deliberately executable
+owned:
+
+```text
+src/run16/   -> run16.exe
+src/basesrv/ -> basesrv.exe
+src/ntvdm/   -> ntvdm.exe
+```
+
+Until staged moves finish, `app`, `session`, `broker` and existing adapter
+roots are compatibility locations, not destinations for unrelated new
+functionality. `run16` owns the public CreateProcess-style CLI path; `basesrv`
+owns its service endpoint, authentication, liveness and transport assembly
+around mirrored `srvvdm.c`; and `ntvdm` owns worker-local setup, guest-memory
+leases, thread binding, teardown and process-local presentation. The broker
+does not acquire DOS/WOW record policy, and the worker does not acquire broker
+policy.
+
+There is no generic shared Win32/compatibility component. A process-local
+Win32 binding belongs to the executable that uses it, or to its existing named
+historical adapter family. The only cross-executable product code is the
+small, stateless `product-abi`/`package` surface for version identity and
+package layout. The BaseSrv service IDL and broker wire protocol are owned by
+`basesrv`; shared records are copied, versioned protocol data, never session,
+console or native-resource policy.
+
 ## Interactive failure policy
 
 All user-facing error-dialog interaction uses one app-owned custom Win32

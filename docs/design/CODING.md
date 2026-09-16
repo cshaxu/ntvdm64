@@ -31,6 +31,21 @@ explicitly read-only external reference roots under `O:\repos.external`.
 `src.old/` is quarantined comparison material and never a source, build, link
 or runtime input.
 
+## Executable-owned transition
+
+T418 converges project-owned code onto `src/run16/`, `src/basesrv/` and
+`src/ntvdm/`, each producing exactly its named executable. During the staged
+move, existing `app`, `session`, `broker` and adapter paths are retained only
+to preserve behavior and provide a reviewed source-move history; they are not
+generic new-code destinations. `session` is worker-local implementation and
+therefore moves into `ntvdm`; broker service transport moves into `basesrv`.
+
+Do not create a shared Win32 helper root. Place a Win32 binding in the one
+executable that owns its process-local resource, or in an already declared
+historical adapter family. The sole shared product component is a small
+stateless `product-abi`/`package` surface for version/package constants.
+`basesrv` owns its service IDL and the copied, versioned broker protocol.
+
 ## Machine-profile selection
 
 Every product build manifest defines `CPU_40_STYLE` and selects the original

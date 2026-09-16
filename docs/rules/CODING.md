@@ -54,6 +54,13 @@ monitor-adapter material.
 - `session` contains neutral per-instance mechanisms. `broker` contains only
   cross-process registration/queue/notification mechanics. `app` alone wires
   instances and product policy.
+- During T418, migrate those responsibilities into their executable owner:
+  `run16` owns the parent-side CLI path, `basesrv` owns service transport and
+  `ntvdm` owns worker-local session state. Do not add a generic shared Win32
+  helper. Process-local Win32 bindings stay with that executable or with its
+  named historical adapter; only stateless version/package declarations may
+  be shared through `product-abi`/`package`, while the service IDL and broker
+  protocol remain `basesrv` owned.
 - Do not add a generic compatibility/common component. Use the declared owner
   or obtain explicit architecture admission for a source-proven specialist
   interface family.

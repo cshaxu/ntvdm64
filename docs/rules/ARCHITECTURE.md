@@ -13,6 +13,10 @@ visual comparison.
    `opennt-host/base/win32/winnls/fontsup/system`,
    `adapter-mvdm-host-in`, `adapter-mvdm-host-out`, `session`, `broker`,
    `adapter-opennt-host`, and `app`.
+   T418 is the admitted transition from those project-owned roots to the
+   executable-owned `run16`, `basesrv` and `ntvdm` roots. Until each move is
+   accepted, the old root is retained only as the audited source location; no
+   new generic project component may be introduced.
 2. `mvdm` is the sole complete selected OpenNT `base/mvdm` physical mirror;
    its manifest-selected executable slice is the MVDM host-runtime mirror.
    `opennt-host` is the sole original non-MVDM OpenNT host-service mirror and
