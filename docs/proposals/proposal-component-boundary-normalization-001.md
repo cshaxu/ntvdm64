@@ -1,83 +1,101 @@
-# Component-boundary normalization and legacy broker retirement
+# Three-program component normalization and adapter retirement
 
 ## Status and objective
 
-This is an unadmitted candidate produced by M0 T417 S5.  It receives a T
-number only on admission in `CURRENT.md` and makes no source change before
-then.
+M0 T418 is owner-readmitted with this revised proposal. It first completes the
+already-admitted archive-cleanup proof, then performs a **no-behaviour-change**
+physical reorganization so that project-owned executable components are legible
+by process:
 
-Normalize project-component ownership without changing the original MVDM or
-OpenNT provider semantics, while deleting the proved-unused legacy in-process
-broker state plane.  The desired result is fewer autonomous project mechanisms,
-not a cosmetic directory reshuffle.
+```text
+src/run16/       → run16.exe
+src/basesrv/     → basesrv.exe
+src/ntvdm/       → ntvdm.exe
+```
 
-The governing invariant is strict: `src/mvdm` and `src/opennt-host` may not
-receive a new file.  Existing mirror files may take only a minimal registered
-owner-local divergence.  Modern RPC, Console, ABI, guest-memory and process
-mechanics remain in a named adapter/ABI component.
+The objective is to retire broad, free-standing `adapter-*`, `session` and
+obsolete local broker ownership where they conceal a single executable's
+private implementation. The two original source mirrors remain unchanged in
+principle: `src/mvdm` and `src/opennt-host` retain their strict no-new-file rule
+and own only original source or minimal owner-local divergences.
 
-## Frozen audit findings
+## Final component model
 
-T417 S5 identifies the following execution groups:
+| Component | Owns | Must not own |
+| --- | --- | --- |
+| `run16` | public CLI `main.c`; discovery; original classifier invocation; BaseSrv startup/connection; suspended worker creation/registration; parent completion wait | BaseSrv DOS/WOW records, worker machine/session state, Console presentation, a new command parser |
+| `basesrv` | thin `main.c`; RPC endpoint/authentication/rundown; stream/receipt transfer; Console membership; broker liveness; transport assembly around `opennt-host` `srvvdm.c` | original DOS/WOW record selection, queue policy, or a replacement of BaseSrv semantics |
+| `ntvdm` | original entry behind the thinnest process-local pre-init; worker lifecycle; guest-memory lease; thread binding; termination cleanup; SoftPC/CCPU and worker-local Console presentation | cross-process broker policy, launcher creation, global reusable session management |
+| `product-abi` / `product-package` | deliberately tiny shared product-version identity and package/media layout contract | generic utilities, state, process policy or a generic `common` component |
 
-1. **B1 — legacy broker retirement.** `broker.c/.h`, `wire.c/.h` and
-   `base_vdm_record.c/.h` total 387 lines and have no direct production source
-   caller.  They are presently carried only by `broker.lib` link lists.  The
-   actual product RPC route is `basesrv_entry.c` → `OpenNtBaseService*` →
-   original `srvvdm.c` through `adapter-opennt-host`; the retained broker
-   transport files are separate, necessary IPC mechanics.
-2. **B2 — BaseSrv adapter partition.** Partition the existing
-   `adapter-opennt-host/basesrv` build groups by BaseClient local binding,
-   BaseSrv local binding and RPC/handle facade.  Preserve exported spelling,
-   ownership and failure rules; do not move record selection or command policy
-   from `opennt-host`.
-3. **B3 — session extension boundary.** Replace session's untyped
-   `mvdm_command_native_child` slot only with a typed private extension whose
-   teardown and nested-COMMAND lifetime are demonstrated.  Do not move the
-   active Console text plane or guest-memory lease until their separate
-   original-owner and runtime contracts are proved.
-4. **B4 — adapter-family tightening.** Give the existing Win32 and SoftPC
-   families build-local subgroups (Console/presentation, wait/thread,
-   process/CRT; and CCPU/SAS/mapping/worker binding respectively).  Delete a
-   wrapper only when an original selected provider is already linkable.
+The BaseSrv RPC protocol contract is owned by `basesrv`; generated client
+artifacts are build outputs. Product identity remains in the shared fixed-width
+`product-abi` contract. Native handles, worker session pointers and guest
+pointers never enter that boundary.
 
-## Sequential work
+## Required source placement
 
-### S1 — prove and retire the legacy broker archive
+- Move a binding out of `adapter-*` only when exactly one executable owns all
+  callers and its lifetime. Preserve source-facing names, ABI and failures in
+  a named subdirectory of that executable component.
+- `session` is not a reusable cross-product service. Its worker-local
+  lifecycle, lease, bind, termination and presentation state move into
+  `ntvdm`; `session.lib` becomes a private `ntvdm.exe` link group.
+- BaseClient bindings divide by caller: run16 launcher bindings and worker
+  bindings go to their owning process; BaseSrv server bindings and transport
+  facilities go to `basesrv`.
+- Worker-only SoftPC, CCPU, monitor, VDD, Redirector, WOW, debugger and Console
+  bindings enter `ntvdm` under named subfamilies, never either original mirror.
+- The obsolete local `broker.lib` plane is removed first. Live authenticated
+  transport remains in `basesrv`, never as a second neutral broker component.
 
-Freeze all `broker.lib` graph edges, exports and source references.  Link a
-fresh x86 graph without the archive.  If every product and fixture link and
-the map contains no retained legacy export, delete exactly the six frozen
-files and their graph edges.  If any caller appears, retain the smallest
-needed source and transfer it to the appropriate group instead of deleting
-blindly.
+## Sequential S packets
 
-### S2 — partition BaseClient/BaseSrv adapter build ownership
+### S1 — legacy broker archive proof and removal
 
-Split only existing adapter source/build groups and headers.  Record every
-export with original caller, modern transport dependency, state owner and
-cleanup owner.  No function body moves to `app`, `broker`, `session` or either
-mirror merely because it uses an OpenNT name.
+Freeze all legacy broker source/export/link/test edges. Build a fresh x86
+archive-free graph, inspect product and fixture maps, and run regressions. Only
+then delete the six proved-unused local-state files, obsolete tests and every
+build edge. Retain live RPC transport.
 
-### S3 — typed native-child extension
+### S2 — product ABI/package extraction and run16 ownership
 
-Introduce the smallest private typed extension boundary for native-child
-capture state, preserving the current session teardown order.  Prove the
-asynchronous guest-copy, standard stream, error, cancellation and nested
-COMMAND paths.  Stop if the extension requires an ABI/lifetime policy change.
+Create only the named `product-abi`/`product-package` surface needed by all
+programs, then move run16-only entry and BaseClient-launch bindings to
+`src/run16`. Preserve discovery, version rejection, suspended-worker rollback
+and parent wait behaviour.
 
-### S4 — family tightening and closure
+### S3 — basesrv ownership reorganization
 
-Use dependency-checked build groups for the Win32 and SoftPC adapters.  Remove
-only proved duplicate wrappers, then run the integrated regression matrix and
-report separate net deletion, relocation and retained-adapter figures.
+Move service entry, protocol contract, authenticated transport and BaseSrv
+bindings to `src/basesrv`; retain `srvvdm.c` as original record owner under
+`opennt-host`. Prove connection/rundown, stream/receipt, Console membership,
+protocol mismatch and broker-death behaviour without changing DOS/WOW policy.
 
-## Acceptance
+### S4 — ntvdm worker-local reorganization
 
-Closure requires a fresh x86 `/MT` three-program graph; link-map evidence that
-the legacy broker archive is absent or an exact retained-caller reason; passing
-CCPU/C-VID fixtures; BaseClient/BaseSrv RPC version, death and pending-command
-tests; COMMAND/MEM, nested COMMAND, EDIT keyboard/mouse and EDIT-exit→MEM;
-and a documentation/diff-governance pass.  It must report mirror diff,
-overlay, adapter and autonomous-project-code changes separately.  No WOW16
-completion claim is part of this package.
+Move `session` and all worker-only adapter families to `src/ntvdm`, making the
+original entry's standalone pre-init explicit and private. Preserve lease,
+CCPU, Console, native-child teardown, Redirector, VDD, WOW and debugger
+boundaries without turning them into mirror code.
+
+### S5 — three-program build and runtime closure
+
+Regenerate the formal x86 graph using only final component roots. Prove no live
+`adapter-*`/`session`/legacy-broker source or archive edge remains, then run
+version checks, broker death/pending command, COMMAND/MEM, nested COMMAND,
+EDIT keyboard/mouse and EDIT-exit→MEM. Publish only a tested package to
+`O:\winnt`; report mirror diff, adapter deletion, relocation and retained
+boundary counts separately.
+
+## Stop conditions and acceptance
+
+Any move that changes a public wire layout, original ordering, state owner,
+teardown, standard-handle lifetime, lease epoch, Console behaviour or original
+DOS/WOW record policy stops that S for separate design review. A directory move
+alone is never acceptance.
+
+Closure requires all S evidence, fresh MSVC Win32/x86 `/MT` links for three
+products and fixtures, a clean production source/build sweep, and the runtime
+matrix above. The final report distinguishes true deletion from relocation and
+names every retained modern boundary with its unavailable original dependency.
