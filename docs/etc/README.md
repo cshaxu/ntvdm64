@@ -29,6 +29,7 @@ proves the original `FSTI` continuation reaches BOP `FDh`.
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T414 S1 canonical MVDM tree map](evidence/m0-t414-s1-canonical-mvdm-tree-map.md) | M0 T414 S1 | Reproducible canonical path map, blob-identity checker and explicit non-MVDM exclusions before physical source re-rooting. | Retain through T414 closure. |
 | [T413 S4 binding cleanup](evidence/m0-t413-s4-binding-cleanup.md) | M0 T413 S4 | Direct original accessors, removed autonomous binding, restored IP cohort, runtime evidence and explicit exception limit. | Retain with closure. |
 | [T413 S3 integrated verification](evidence/m0-t413-s3-integrated-verification.md) | M0 T413 S3 | Final product identities, real Console/ConPTY and command regression, adverse harness evidence and footprint. | Retain with owner acceptance and closure. |
 | [T413 S2 accessor restoration](evidence/m0-t413-s2-accessor-restoration.md) | M0 T413 S2 | Original C accessor composition, full-library focused tests and measured mirror/overlay change. | Retain through integrated acceptance. |

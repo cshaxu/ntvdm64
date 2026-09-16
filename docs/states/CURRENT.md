@@ -2,16 +2,36 @@
 
 ## Current Work
 
-The owner cancelled S6 Terminal handoff investigation because the symptom is
-no longer reproducible. No repair is claimed. Temporary observer changes are
-removed; [cancellation evidence](../etc/evidence/m0-t413-s6-terminal-handoff-investigation.md)
-retains the bounded negative results. The published S5 products are unchanged.
+## Active Packet
 
-**No active M/T/S packet.** M0 T413 S5 concludes the owner-approved five
-NTVDMx64 exception-hook scope corrections. The
-[closure audit](../history/m0-t413-accessor-restoration-closure.md#s5-exception-scope-closure)
-and [S5 evidence](../etc/evidence/m0-t413-s5-exception-scope.md) retain scope,
-provenance, tests and explicit compatibility limits. No next T is admitted.
+**Active: M0 T414 S2** — Canonical MVDM source-tree mechanical recomposition
+(Ordinary Mode).
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T414 S2, Ordinary Mode. |
+| Admission And Approval | Owner requested recompose of the original MVDM directory into its OpenNT-relative structure. S1 has closed its blob-checked path map; S2 performs only the admitted mechanical re-root and current-consumer path repair. |
+| Candidate Proposal | [Canonical MVDM source-tree recomposition](../proposals/proposal-canonical-mvdm-tree-recomposition-001.md). |
+| Objective | Move the 4,615 mapped selected files to `src/mvdm/<OpenNT-relative-path>`, re-root the private overlay to `src/mvdm-overlay`, and update only current formal consumers without content or role changes. |
+| Non-goals | No source behavior repair, no content rewrite, no change to host/guest/tool/firmware link roles, no migration of the excluded non-MVDM carriers, and no mixing private overlay code into the original tree. |
+| Reference Baseline | T413 S5 published x86 CCPU40 package; selected union is pinned OpenNT/OpenNT-4.5 `base/mvdm`; [proposal](../proposals/proposal-canonical-mvdm-tree-recomposition-001.md). |
+| Files And ABI Surface | Mapped MVDM roots, `mvdm-host-overlay`, current formal generator/stager and current source-layout/architecture authorities. No public ABI change. |
+| Applicable Rules | docs/README, EXECUTION, DOCUMENT, ARCHITECTURE, CODING, source-policy and CONTRIBUTING. |
+| Verification | `Test-T414CanonicalMvdmTree.ps1 -Phase after -BaselineRef 9162b97fe`, Git rename/content review, current-generator/stager path audit and source-layout authority review. |
+| Expected Markers | All 4,615 destination blobs equal baseline; no old mapped roots remain; `mvdm-overlay` stays private and absent from original comparison tree; only current consumers use new paths. |
+| Asset Needs | Existing repository, pinned OpenNT/OpenNT-4.5 source union and S1 evidence/checker; no new external input. |
+| Reporting Requirements | State moved/excluded file totals, renamed roots, updated current consumers, any unchanged historical paths, and content-identity outcome. |
+| Stop Conditions | Any blob mismatch, ambiguous/case-colliding target, formal consumer not captured by S1, unexpected build-role change, or a required source-content modification. |
+| Exit Criteria | Mechanical moves and current path repairs are complete, 4,615 blob identities pass, architecture records describe the new physical root, and S3 is bounded to build/runtime/governance closure. |
+| Original Owner Request | “把原来 mvdm整个目录按照原始 opennt 的mvdm目录结构重新组合起来，不要再散开了。” |
+| Similar-Issue Sweep | Check split guest, tool and firmware roots, private overlay re-root, generated formal output, staging inputs, path-case collisions and all current build/stage references; do not rewrite historical records. |
+
+## S1 Closure Record
+
+S1 passed the reproducible canonical-map check at baseline `9162b97fe`: 4,615
+selected MVDM blobs map without collision (host 1,975; DOS 877; WOW16 1,658;
+Bin86 19; tool 45; firmware 41). The two non-MVDM carries and project READMEs
+are explicit exclusions. Evidence: [canonical MVDM tree map](../etc/evidence/m0-t414-s1-canonical-mvdm-tree-map.md).
 
 ## Current Technical Baseline
 
