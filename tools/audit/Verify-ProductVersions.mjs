@@ -3,17 +3,17 @@ import fs from 'node:fs';
 import path from 'node:path';
 import assert from 'node:assert/strict';
 import {spawn, spawnSync} from 'node:child_process';
-const root=process.cwd(), product=path.resolve(process.env.OPENNT_BROKER_PRODUCT_BUILD || 'build/M0-T412/S9/version-agreement');
+const root=process.cwd(), product=path.resolve(process.env.OPENNT_BROKER_PRODUCT_BUILD || 'build/M0-T418/S7/formal-x86-001');
 const build=path.resolve(process.env.OPENNT_VERSION_TEST_BUILD || 'build/M0-T412/S9/version-negative');
 const logs=path.resolve(process.env.OPENNT_VERSION_TEST_LOGS || 'O:/winnt/logs/m0-t412-s9-version-negative');
 fs.mkdirSync(build,{recursive:true});fs.mkdirSync(logs,{recursive:true});
-const source=fs.readFileSync('src/app/basesrv_entry.c','utf8');
-const header=fs.readFileSync('src/app/version.h','utf8');
+const source=fs.readFileSync('src/basesrv/main.c','utf8');
+const header=fs.readFileSync('src/product-abi/version.h','utf8');
 const version=header.match(/#define APP_VERSION "(0\.0\.[0-9]+)"/)[1];
 const protocol=Number(header.match(/#define APP_PROTOCOL_VERSION ([0-9]+)u/)[1]);
 const active=fs.readFileSync('docs/states/CURRENT.md','utf8').match(/\*\*Active: M[0-9]+ T([0-9]+) S[0-9]+\./);
 if(active)assert.equal(version,`0.0.${active[1]}`,'Application version must match admitted T');
-const idl=fs.readFileSync('src/broker/service.idl','utf8');
+const idl=fs.readFileSync('src/basesrv/transport/service.idl','utf8');
 assert(idl.includes(`version(${protocol}.0)`),'RPC major and protocol must agree');
 assert.match(idl,/application_version\[32\]/);
 assert.match(header,/#define APP_VERSION_BYTES 32u/);
@@ -77,4 +77,4 @@ for (const [name] of variants) {
     if(name.startsWith('reply-')) assert.match(events,/disconnect/,'Rejected successful context must be disconnected');
     console.log(`PASS ${name}: launcher and worker reject before task delivery, no launcher retry`);
 }
-assert.equal(fs.readFileSync('src/app/basesrv_entry.c','utf8'),source,'Production source must be unchanged');
+assert.equal(fs.readFileSync('src/basesrv/main.c','utf8'),source,'Production source must be unchanged');

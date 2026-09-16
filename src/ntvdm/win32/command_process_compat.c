@@ -1,8 +1,6 @@
 #include "command_process_compat.h"
 #include "vdmapi.h"
 
-#include "ntvdm/command/include/mvdm_image_classification.h"
-
 #include <stdio.h>
 #include <string.h>
 

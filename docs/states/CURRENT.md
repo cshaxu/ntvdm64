@@ -4,12 +4,20 @@
 
 ## Intermission
 
-**No active M/T/S packet.** M0 T418 closed after its final x86 three-program
-build, original-owner fixtures, automatic COMMAND→MEM→EDIT→MEM ConPTY run and
-separate broker/worker/launcher-loss matrix. See the
-[T418 closure](../history/m0-t418-three-program-component-normalization-closure.md)
-and [S5 evidence](../etc/evidence/m0-t418-s5-three-program-final-closure.md).
-The ordered [Queue](QUEUE.md) is the sole authority for the next admission.
+**No active M/T/S packet.**  M0 T418 closes after S7; the next numbered task
+must be admitted from [Queue](QUEUE.md) by the owner.
+
+## S7 Closure Record
+
+T418 S7 deletes the source-proven non-mirror dead-code subset: one selected
+264-line classifier, plus unselected duplicate idle/stub providers totalling
+28 C lines and their declarations.  The fresh x86 closure moves from 74 /
+12,427 to 73 / 12,163 selected non-mirror physical lines.  Original
+`nt_unix.c` remains the only mapped `HostIdleNoActivity` provider.  Formal
+builds, all focused fixtures, deployed direct COMMAND/MEM regressions and
+version rejection pass; the hidden interactive-input observer is accurately
+recorded as unavailable.  The full proof and deferred cohort are in the
+[S7 retirement evidence](../etc/evidence/m0-t418-s7-proven-dead-code-retirement.md).
 
 ## S1 Closure Record
 
@@ -71,8 +79,8 @@ and [T416 closure](../history/m0-t416-footprint-cleanup-closure.md).
 
 - The source baseline selects formal x86 `/MT` run16.exe, basesrv.exe and
   ntvdm.exe with original CCPU40, APP_VERSION 0.0.418 and protocol 3. The
-  deployed O:\winnt package is the verified T418 formal product from
-  `build/M0-T418/S5/formal-x86-002`.
+  deployed O:\winnt package is the verified T418 S7 formal product from
+  `build/M0-T418/S7/formal-x86-001`.
 - Original vglob.c supplies all 38 getter/setter pairs through original typed
   declarations. The registered seven-line header seam retains original full
   vector layout; autonomous field rebinding and 20 conversion wrappers remain
@@ -91,7 +99,7 @@ and [T416 closure](../history/m0-t416-footprint-cleanup-closure.md).
 - Final paired MVDM mirror distance is 4,621 versus S1's 4,695; OpenNT-host
   remains 14,410. Overlay cohorts remain 266 and 30 physical lines; the raw
   adapter-mvdm-host-out inventory falls 10,219 to 9,719 lines.
-- Build roots: `build/M0-T418/S5/formal-x86-002`; runtime logs only
+- Build roots: `build/M0-T418/S7/formal-x86-001`; runtime logs only
   `O:\winnt\logs`.
   Owner Terminal/RDP visual acceptance remains separate.
 
@@ -116,7 +124,7 @@ queue head receives a numeric T only on the owner's next admission.
 ## Recent M0 Closures
 
 | T416 | [Footprint cleanup](../history/m0-t416-footprint-cleanup-closure.md) | S1--S5 reduced paired MVDM mirror distance by 74 lines and raw adapter inventory by 500 lines; final x86 package and runtime matrix passed. |
-| T418 | [Three-program component normalization](../history/m0-t418-three-program-component-normalization-closure.md) | S1--S5 retired generic production roots, finalized the cross-EXE ownership rule, and passed fresh x86, ConPTY and failure-lifecycle acceptance. |
+| T418 | [Three-program component normalization](../history/m0-t418-three-program-component-normalization-closure.md) | S1--S5 normalized the three-process ownership model; S6--S7 then removed one selected duplicate classifier and two unselected dead providers, with fresh x86 deployment and focused runtime proof. |
 | T417 | [Private component elimination](../history/m0-t417-private-component-elimination-closure.md) | Retired all three private roots under the no-new-mirror-file rule and produced the separately queued component-boundary plan. |
 | T415 | [Final MVDM-root elimination](../history/m0-t415-final-mvdm-root-elimination-closure.md) | 42 exact WinNLS fonts and two exact `v86/util` blobs moved to upstream paths; printer carrier moved to private overlay; formal x86 three-program graph passed. |
 | T414 | [Canonical MVDM tree](../history/m0-t414-canonical-mvdm-tree-closure.md) | 4,615 original MVDM blobs physically recomposed at `src/mvdm`; private overlay is adjacent and separate; formal x86/focused checks passed. |

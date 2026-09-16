@@ -231,7 +231,7 @@ $adapterWin32Names = @('ntioapi_facade.c', 'thread_start_compat.c',
 # The reached COMMAND helpers are worker bindings.  The former local
 # BaseVDM queue/client/broker was the retired single-process product and must
 # never be rebuilt into an audit or production archive.
-$adapterBaseSrvNames = @('mvdm_image_classification.c', 'mvdm_command_guest_state.c',
+$adapterBaseSrvNames = @('mvdm_command_guest_state.c',
                           'mvdm_command_native_child.c')
 $adapterVddNames = @('mvdm_softpc_vdd_unavailable.c',
                      'mvdm_softpc_vdd_configuration.c')

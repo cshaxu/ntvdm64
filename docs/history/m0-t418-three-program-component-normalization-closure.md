@@ -29,3 +29,15 @@ and limits are recorded in the [S5 closure evidence](../etc/evidence/m0-t418-s5-
 The deployed formal package is `O:\winnt\{run16,basesrv,ntvdm}.exe` plus
 `VDMREDIR.dll`. T418 does not claim WOW16 completion; the ordered queue owns
 that later recovery work.
+
+## S6--S7 footprint supplement
+
+The owner subsequently reopened T418 for a bounded non-mirror footprint audit
+and only its source-proven immediate retirements.  S6 established a 74-input,
+12,427-physical-line formal non-mirror baseline.  S7 removed the unused
+264-line duplicate classifier from the selected graph, plus 28 lines of
+unselected duplicate/stub C bodies and their declarations.  The resulting
+formal closure is 73 inputs and 12,163 physical lines.  The tested formal
+x86 package is deployed to `O:\winnt`; details, retained fixture-only sources
+and the one unavailable hidden-observer interaction are recorded in the
+[S7 evidence](../etc/evidence/m0-t418-s7-proven-dead-code-retirement.md).

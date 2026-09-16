@@ -107,6 +107,32 @@ EDIT keyboard/mouse and EDIT-exit→MEM. Publish only a tested package to
 report mirror diff, adapter deletion, relocation and retained boundary counts
 separately.
 
+### S6 — non-mirror footprint recovery audit
+
+Reopen only because S1 deleted the dead local broker plane while S2--S5 mostly
+relocated live code. Inventory every selected body below `run16`, `basesrv`,
+`ntvdm`, `opennt-abi/host-compat`, `product-abi` and `product-package`.
+For each, record its physical-line count, callers/build targets, original
+owner/source-first recovery ladder and exactly one disposition: delete,
+restore original owner, retain as finite binding, or defer with a named
+unavailable boundary. Do not make a source or behavior change in this audit.
+The resulting grouped proposal must distinguish actual removable lines from
+relocation and state the focused/runtime proof required for each deletion or
+restoration group.
+
+### S7 — proven dead-code retirement
+
+Apply only source-proven S6 retirements. Remove the no-caller/no-map duplicate
+image classifier, the unselected duplicate `HostIdleNoActivity` provider and
+the unreferenced unavailable Redirector-thread stub. Remove formal product
+archive inputs only when the final worker/DLL maps prove that they contribute
+no provider; preserve a still-useful historical fixture as test-only material,
+not a product dependency. The mixed termination/observation source is
+explicitly out of this S: first split its real standalone termination binding
+from its mirror observation calls in a separately evidenced package. Rebuild
+all x86 products and fixtures, re-run the established three-program matrix,
+then deploy the tested package to `O:\\winnt`.
+
 ## Stop conditions and acceptance
 
 Any move that changes a public wire layout, original ordering, state owner,

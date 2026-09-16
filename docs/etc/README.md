@@ -2,6 +2,7 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T418 S7 proven dead-code retirement](evidence/m0-t418-s7-proven-dead-code-retirement.md) | M0 T418 S7 | Removes one selected duplicate classifier and two unselected dead providers; records map, formal-x86 and deployed-package proof. | Retain with T418 closure. |
 | [T418 S5 three-program final closure](evidence/m0-t418-s5-three-program-final-closure.md) | M0 T418 S5 | Final ownership disposition, fresh x86 build/fixtures, deployed ConPTY and standalone-failure matrix. | Retain with T418 closure. |
 | [T418 S3 BaseSrv ownership](evidence/m0-t418-s3-basesrv-ownership.md) | M0 T418 S3 | Moves live BaseSrv service code to its executable owner with fresh x86 and lifecycle proof. | Retain through T418 closure. |
 | [T418 S2 run16 and product ownership](evidence/m0-t418-s2-run16-product-ownership.md) | M0 T418 S2 | Moves launcher and static product layout/identity to final owners with fresh x86 evidence. | Retain through T418 closure. |
