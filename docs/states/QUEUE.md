@@ -77,10 +77,9 @@ later package merely because an earlier linked component has no runtime proof.
 
 | Next order | Candidate implementation package | Proposal |
 | --- | --- | --- |
-| 1 | Selective NTVDMx64 source-correction recovery — prove and repair remaining CPU/device/ABI, rendering and DPMI lifecycle defects; account for existing equivalent fixes and reject unsupported optimization/hack imports. | [Proposal](../proposals/proposal-ntvdmx64-source-corrections-001.md) |
-| 2 | WOW and debugger original-owner restoration — resolve D17-D22 and D27 through original font, glyph, scheduling, cursor/icon, error-response, debugger and callback owners; remove proved inactive duplicates and preserve finite modern bindings. | [Proposal](../proposals/proposal-wow-debugger-original-owner-restoration-001.md) |
-| 3 | Single-process WOW16 application lifecycle recovery — after broker and WOW/debugger restoration, prove the selected WRITE workload's original start/run/return within one x86 worker, or record the exact source-proven unavailable boundary. No substitute guest/UI failure policy, private USER/CSRSS shell or transport-based workaround. | [Proposal](../proposals/proposal-wow16-single-process-lifecycle-recovery-001.md) |
-| 4 | Multi-process matrix and product release — prove the brokered multi-process x86-worker profile, the cross-owner DOS/Win16 compatibility matrix, portable media layout and release packaging. Host x64 Windows is an x86-worker acceptance platform, not a native-x64 worker requirement. | [Proposal](../proposals/proposal-multiprocess-release-matrix-001.md) |
+| 1 | WOW and debugger original-owner restoration — resolve D17-D22 and D27 through original font, glyph, scheduling, cursor/icon, error-response, debugger and callback owners; remove proved inactive duplicates and preserve finite modern bindings. | [Proposal](../proposals/proposal-wow-debugger-original-owner-restoration-001.md) |
+| 2 | Single-process WOW16 application lifecycle recovery — after broker and WOW/debugger restoration, prove the selected WRITE workload's original start/run/return within one x86 worker, including any reached DPMI/CPU40 platform-lifecycle prerequisite. No substitute guest/UI failure policy, private USER/CSRSS shell or transport-based workaround. | [Proposal](../proposals/proposal-wow16-single-process-lifecycle-recovery-001.md) |
+| 3 | Multi-process matrix and product release — prove the brokered multi-process x86-worker profile, the cross-owner DOS/Win16 compatibility matrix, portable media layout and release packaging. Host x64 Windows is an x86-worker acceptance platform, not a native-x64 worker requirement. | [Proposal](../proposals/proposal-multiprocess-release-matrix-001.md) |
 
 ## Unresolved audit-family ownership
 

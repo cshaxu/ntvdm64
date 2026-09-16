@@ -109,7 +109,9 @@ Mirror distance is 437 versus original pre-task 506, a reduction of 69; the
 necessary S5 scope repair adds 20 diff-distance lines (+15/-5, net +10).
 Overlay remains 125 lines. Test/provenance files are not new runtime providers.
 
-The other [NTVDMx64 corrections](../proposals/proposal-ntvdmx64-source-corrections-001.md)
-are queued second, after x87 layout and before WOW/debugger, without a numeric
-admission. S5 P2 closes the reopened task; no next T is admitted. Owner visual
-acceptance remains separate from the passing automated gates.
+The former remaining NTVDMx64 candidates are subsequently classified in the
+[candidate disposition](../etc/evidence/ntvdmx64-source-corrections-disposition-20260916.md):
+the blanket external-patch package is withdrawn, reached lifecycle work moves
+to WOW16, and unreproduced timer behavior becomes debt. S5 P2 closes the
+reopened task; no next T is admitted. Owner visual acceptance remains separate
+from the passing automated gates.

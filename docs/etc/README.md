@@ -3,6 +3,7 @@
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
 | [T419 S1 x87 audit](evidence/m0-t419-s1-x87-audit.md) | M0 T419 S1--S3 | Records the SoftPC/OpenNT layout and conversion comparison, formal-x86 unit/fixture proof, and the outstanding Ninja-runner limitation. | Retain through T419 closure. |
+| [NTVDMx64 correction-candidate disposition](evidence/ntvdmx64-source-corrections-disposition-20260916.md) | M0 Td | Closes the unadmitted blanket external-patch candidate, records its already-recovered and rejected cohorts, transfers reached DPMI lifecycle work to WOW16, and defers the unreproduced 8253 case. | Retain as source-policy and queue provenance. |
 | [T418 S7 proven dead-code retirement](evidence/m0-t418-s7-proven-dead-code-retirement.md) | M0 T418 S7 | Removes one selected duplicate classifier and two unselected dead providers; records map, formal-x86 and deployed-package proof. | Retain with T418 closure. |
 | [T418 S5 three-program final closure](evidence/m0-t418-s5-three-program-final-closure.md) | M0 T418 S5 | Final ownership disposition, fresh x86 build/fixtures, deployed ConPTY and standalone-failure matrix. | Retain with T418 closure. |
 | [T418 S3 BaseSrv ownership](evidence/m0-t418-s3-basesrv-ownership.md) | M0 T418 S3 | Moves live BaseSrv service code to its executable owner with fresh x86 and lifecycle proof. | Retain through T418 closure. |

@@ -112,7 +112,7 @@ Owner visual acceptance remains separate and is not asserted as received.
 
 ## Follow-up
 
-Other NTVDMx64 changes are isolated in the
-[queued proposal](../../proposals/proposal-ntvdmx64-source-corrections-001.md).
+Other NTVDMx64 changes are classified by the
+[candidate disposition](ntvdmx64-source-corrections-disposition-20260916.md).
 In particular existing DIV-221 already handles negative PIC acknowledgement
 upstream: absence of spurint.patch at c_intr.c is not proof of a missing fix.

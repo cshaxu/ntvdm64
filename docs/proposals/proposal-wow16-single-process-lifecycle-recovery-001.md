@@ -27,5 +27,14 @@ remaining prerequisite requires an explicit owner/receiver under Queue's
 dependency-first rule. Successful WRITE execution is not blanket proof of all
 negative boundary cases or closure of every unresolved audit family.
 
+When the reached blocker is DPMI/CPU40 platform lifecycle, this package first
+audits the exact original owner and selected caller for the affected TSS/TR,
+IDT, GDT/LDT, selector teardown, VDM_TIB/PM-stack projection, or guest-memory
+publication operation. It may recover a directly composable original owner or
+its smallest finite standalone binding. It must not import an NTVDMx64 patch
+bundle: that tree is comparative evidence only, and its MONITOR, HAXM,
+HungApp, debugger, guest-artifact, optimization, and compatibility-policy
+hunks remain excluded unless a separately reproduced defect earns admission.
+
 Prove one bounded Win16 start/return workload through its original-owner path,
 or record the exact source-proven unavailable boundary and its receiver.
