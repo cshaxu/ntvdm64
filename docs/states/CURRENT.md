@@ -2,29 +2,20 @@
 
 ## Current Work
 
-## Active Packet
+## T417 Closure
 
-**Active: M0 T417 S5** — project-component relationship audit
-(Ordinary Mode).
+**No active M/T/S packet.** M0 T417 is closed; the next admission is Queue
+candidate 1.
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T417 S5, Ordinary Mode. |
-| Admission And Approval | Owner: “准入执行”; admits Queue candidate 1. |
+| Field | Closure record |
+| --- | --- |
+| Identifier Mode | M0 T417, Ordinary Mode. |
 | Candidate Proposal | [Mirror-private component elimination and project-component reorganization](../proposals/proposal-retire-mvdm-softpc-patch-001.md). |
-| Objective | Produce the proposal-required non-mutating relationship audit for app, broker, session and every adapter family, with each production interface, state owner, lifecycle owner and build direction recorded. |
-| Non-goals | No unreviewed component reorganization, new behavior, runtime-policy change, WOW/WRITE claim, or changes to the owner-edited Queue/proposal. |
-| Reference Baseline | T416 closure `0c0f3232c`; canonical `src/mvdm` topology; the owner-edited Queue/proposal candidate; current x86 CCPU40 package at `O:\winnt`. |
-| Files And ABI Surface | app, broker, session and adapter family source/build interfaces. No public product ABI change. |
-| Applicable Rules | docs/README, EXECUTION, ARCHITECTURE, CODING, DOCUMENT, CONTRIBUTING and source-policy; original-source recovery ladder is mandatory for every disposition. |
-| Verification | Read-only caller/callee, public-interface, state/lifecycle-owner and build/link-direction audit; a separately queued reorganization proposal if changes are warranted. |
-| Expected Markers | Every cross-component interface has one owner and direction; any needed reorganization has a safe destination, ABI migration and test matrix, not an unreviewed source move. |
-| Asset Needs | Current checkout, T416 formal graph, pinned OpenNT/OpenNT-4.5 comparison trees, and retained NTVDMx64 provenance only where its registered patch exception applies. |
-| Reporting Requirements | Record each interface, caller, callee, process boundary, state/lifecycle owner, original-source owner, build direction and any proposed migration. |
-| Stop Conditions | A proposed move changes ABI, state ownership, lifetime or guest behavior without separate admission. |
-| Exit Criteria | Relationship audit and separately reviewable reorganization proposal are complete; no source reorganization is silently implemented. |
-| Original Owner Request | “以减少 mvdm和opennt-host相对原始opennt代码的diff为目标（包括他们的overlay甚至adapter），同时保证架构合理、不破坏当前已经实现跑通的部分.” and “准入执行”. |
-| Similar-Issue Sweep | Product and focused generator roots, include ordering, generated formal manifest, audit scripts, MVDM divergence register and every stale live-root reference. |
+| Result | All three private roots are retired; S5 completed the required component audit without unreviewed reorganization. |
+| Evidence | [S3--S4 overlay owner recovery](../etc/evidence/m0-t417-s3-s4-overlay-owner-recovery.md), [S5 component relationship audit](../etc/evidence/m0-t417-s5-component-relationship-audit.md), and [T417 closure](../history/m0-t417-private-component-elimination-closure.md). |
+| Follow-up | Queue candidate 1: [component-boundary normalization and legacy broker retirement](../proposals/proposal-component-boundary-normalization-001.md). |
 
 ## S1 Closure Record
 
@@ -116,15 +107,15 @@ and [T416 closure](../history/m0-t416-footprint-cleanup-closure.md).
 
 ## Next Work
 
-[Queue](QUEUE.md) remains the sole ordering authority. The owner-requested
-[footprint cleanup proposal](../proposals/proposal-mirror-overlay-footprint-cleanup-001.md)
-is first, with five planned S packets and separate mirror-diff, overlay and
-adapter-autonomous-code acceptance metrics. Existing candidates keep their
-relative order behind it. T414 closure does not admit the next numeric T.
+[Queue](QUEUE.md) remains the sole ordering authority.  T417's owner-reviewed
+follow-up is the first candidate: [component-boundary normalization and legacy
+broker retirement](../proposals/proposal-component-boundary-normalization-001.md).
+It does not admit a new numeric T until the owner chooses it.
 
 ## Recent M0 Closures
 
 | T416 | [Footprint cleanup](../history/m0-t416-footprint-cleanup-closure.md) | S1--S5 reduced paired MVDM mirror distance by 74 lines and raw adapter inventory by 500 lines; final x86 package and runtime matrix passed. |
+| T417 | [Private component elimination](../history/m0-t417-private-component-elimination-closure.md) | Retired all three private roots under the no-new-mirror-file rule and produced the separately queued component-boundary plan. |
 | T415 | [Final MVDM-root elimination](../history/m0-t415-final-mvdm-root-elimination-closure.md) | 42 exact WinNLS fonts and two exact `v86/util` blobs moved to upstream paths; printer carrier moved to private overlay; formal x86 three-program graph passed. |
 | T414 | [Canonical MVDM tree](../history/m0-t414-canonical-mvdm-tree-closure.md) | 4,615 original MVDM blobs physically recomposed at `src/mvdm`; private overlay is adjacent and separate; formal x86/focused checks passed. |
 
