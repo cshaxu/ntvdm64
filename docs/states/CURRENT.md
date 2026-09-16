@@ -2,14 +2,34 @@
 
 ## Current Work
 
-**No active numeric M/T/S packet.** T415 closed after its exact-source,
-formal-x86 and governance evidence; the ordered candidates remain in
-[Queue](QUEUE.md).
+## Active Packet
+
+**Active: M0 T416 S1** — Mirror, overlay and adapter footprint baseline
+(Ordinary Mode).
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T416 S1, Ordinary Mode. |
+| Admission And Approval | Owner approved Queue candidate 1 for execution: reduce original-mirror diff, overlay and adapter autonomous footprint without breaking currently working behavior. |
+| Candidate Proposal | [Mirror, overlay and adapter footprint cleanup](../proposals/proposal-mirror-overlay-footprint-cleanup-001.md). |
+| Objective | Freeze a reproducible complete workset, upstream ownership, formal build selection, callers, and before metrics for MVDM/OpenNT-host mirror diff, private overlay and adapter autonomous implementation. |
+| Non-goals | No functional deletion or source restoration in S1; no global BFS; no x87, NTVDMx64, WOW/debugger or full-WRITE recovery. |
+| Reference Baseline | T415 closure `47521444c`; selected original OpenNT families; current formal x86 three-program graph. |
+| Files And ABI Surface | Evidence/measurement tools and current authorities only. No runtime ABI or source behavior change in S1. |
+| Applicable Rules | docs/README, EXECUTION, ARCHITECTURE, CODING, DOCUMENT, source-policy and CONTRIBUTING. |
+| Verification | Reproducible upstream-normalized diff, overlay and adapter classifications; direct caller/build selection review; documentation governance and diff review. |
+| Expected Markers | Every scoped row has a source owner, caller/build status, disposition and receiver; all metric denominators and exclusions are explicit. |
+| Asset Needs | Pinned OpenNT baseline, current source tree, formal generator and prior closure evidence; no external download. |
+| Reporting Requirements | Report baseline counts separately for mirrors, overlay and adapter autonomous code; group repairs by original-owner dependency and state preservation regressions. |
+| Stop Conditions | An alleged deletion with an unresolved caller, source owner conflict, metric ambiguity, or any scope that needs new semantic behavior. |
+| Exit Criteria | Indexed S1 ledger and repair design with no unknown scoped row; owner review before source modification in later S packets. |
+| Original Owner Request | “以减少 mvdm和opennt-host相对原始opennt代码的diff为目标（包括overlay，甚至adapter的精简），同时保证架构合理、不破坏当前已经实现跑通的部分？” and “准入执行！” |
+| Similar-Issue Sweep | Startup, diagnostics, declarations, private composition, C-VID, BaseSrv query, x64-pattern remnants and generated-binding costs within the bounded workset. |
 
 ## Current Technical Baseline
 
 - The source baseline selects formal x86 `/MT` run16.exe, basesrv.exe and
-  ntvdm.exe with original CCPU40, APP_VERSION 0.0.415 and protocol 3. The
+  ntvdm.exe with original CCPU40, APP_VERSION 0.0.416 and protocol 3. The
   deployed O:\winnt package remains the last tested T413 product (0.0.413);
   T414 does not publish a layout-only rebuild.
 - Original vglob.c supplies all 38 getter/setter pairs through original typed
@@ -38,6 +58,7 @@ formal-x86 and governance evidence; the ordered candidates remain in
 
 | Delivery | Evidence |
 | --- | --- |
+| S1, pending P1 | [Footprint baseline and ownership ledger](../etc/evidence/m0-t416-s1-footprint-baseline.md) |
 | S1, 23a4fa83c | [Source audit](../etc/evidence/m0-t413-s1-accessor-layout-audit.md) |
 | S2, 3cc7851e5 | [Accessor restoration](../etc/evidence/m0-t413-s2-accessor-restoration.md) |
 | S3, d9d814b00 and fbb121d72 | [Integrated verification](../etc/evidence/m0-t413-s3-integrated-verification.md) |

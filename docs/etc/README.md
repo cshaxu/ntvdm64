@@ -1,5 +1,9 @@
 # Supporting Material
 
+| Record | Owner | Purpose | Retirement condition |
+| --- | --- | --- | --- |
+| [T416 S1 footprint baseline](evidence/m0-t416-s1-footprint-baseline.md) | M0 T416 S1 | Fixed paired mirror, overlay and adapter-inventory measures plus every bounded cleanup disposition. | Superseded by T416 closure measurements. |
+
 This directory contains only the following owner-approved supporting records.
 
 [T413 S6 Terminal handoff investigation](evidence/m0-t413-s6-terminal-handoff-investigation.md)
