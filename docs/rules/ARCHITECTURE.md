@@ -9,13 +9,15 @@ visual comparison.
 1. The production source owners are exactly the canonical physical `mvdm`
    tree (with manifest-declared host, guest, tool and firmware slices), its
    private `mvdm-overlay`, `opennt-host`, `mvdm-softpc-patch`,
-   `mvdm-platform-abi`, the separately sourced `mvdm-guest/font16`,
+   `mvdm-platform-abi`, the exact OpenNT WinNLS font mirror under
+   `opennt-host/base/win32/winnls/fontsup/system`,
    `adapter-mvdm-host-in`, `adapter-mvdm-host-out`, `session`, `broker`,
    `adapter-opennt-host`, and `app`.
 2. `mvdm` is the sole complete selected OpenNT `base/mvdm` physical mirror;
    its manifest-selected executable slice is the MVDM host-runtime mirror.
-   `opennt-host` is the sole original non-MVDM OpenNT host-service mirror. It
-   contains every separately accepted original owner package, not only the
+   `opennt-host` is the sole original non-MVDM OpenNT host-service mirror and
+   location for separately admitted load-only OpenNT inputs. It contains every
+   separately accepted original owner package, not only the
    first Base VDM slice, and accepts only a required original slice after a complete package-boundary
    audit proves: a
    direct selected-MVDM caller; a retained original algorithm/state-machine
@@ -114,7 +116,7 @@ visual comparison.
     access and epoch. No such pointer crosses an ABI or reaches asynchronous
     work.
 18. `mvdm/dos/v86`, `mvdm/bin86`, `mvdm/wow16` and the separately sourced
-   `mvdm-guest/font16` are complete load-only mirrors. Their source, objects,
+   `opennt-host/base/win32/winnls/fontsup/system` fonts are complete load-only mirrors. Their source, objects,
     libraries and products never satisfy a host symbol. App loads
     manifest-selected immutable bytes through the selected backend binding.
 19. The selected OpenNT tree is one package-scope union of the pinned OpenNT

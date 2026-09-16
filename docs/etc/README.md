@@ -29,6 +29,7 @@ proves the original `FSTI` continuation reaches BOP `FDh`.
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T415 S1 final root elimination](evidence/m0-t415-s1-final-root-elimination.md) | M0 T415 S1 | Exact font/tool/carrier relocation proof and the local compiler-launch limitation. | Retain through T415 closure. |
 | [T414 S3 canonical MVDM tree closure](evidence/m0-t414-s3-canonical-mvdm-tree-closure.md) | M0 T414 S3 | Final canonical-tree, formal x86 build, focused fixture, governance, version and no-publication record. | Retain with T414 closure. |
 | [T414 S2 mechanical MVDM recomposition](evidence/m0-t414-s2-mechanical-recomposition.md) | M0 T414 S2 | Canonical `src/mvdm` physical re-root, blob-identity proof, current-consumer repair, and focused formal-build evidence. | Retain through T414 closure. |
 | [T414 S1 canonical MVDM tree map](evidence/m0-t414-s1-canonical-mvdm-tree-map.md) | M0 T414 S1 | Reproducible canonical path map, blob-identity checker and explicit non-MVDM exclusions before physical source re-rooting. | Retain through T414 closure. |

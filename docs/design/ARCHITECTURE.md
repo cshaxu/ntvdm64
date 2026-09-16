@@ -106,7 +106,8 @@ prevents permanent parallel providers.
   It owns every complete, source-audited OpenNT host package accepted for use
   by `mvdm-host`; BaseSrv/client VDM is merely its first accepted service
   slice, not this component's boundary. It is neither a replacement MVDM
-  provider nor a generic compatibility layer. Individually audited original
+  provider nor a generic compatibility layer. Separately admitted load-only
+  OpenNT inputs retain their exact upstream paths here. Individually audited original
   kernel VDM slices from outside MVDM also belong here, retaining source
   paths and algorithm shape behind a finite standalone ABI; this does not
   admit a kernel product shell or a second executor. Adapters bind missing
@@ -129,7 +130,8 @@ prevents permanent parallel providers.
 - `mvdm/dos/v86`: complete selected DOS/V86 guest source, resources, build
   descriptions, intermediates and original products. `mvdm/bin86` and
   `mvdm/wow16` are the selected load-only Bin86 and WOW16 carries; the separate
-  `mvdm-guest/font16` carries externally sourced original 16-bit fonts. None
+  `opennt-host/base/win32/winnls/fontsup/system` carries exact original
+  16-bit fonts. None
   implies an external WOW16 source-universe mirror.
 
 ### Mechanical adapters
@@ -253,7 +255,7 @@ state or a fixed-width component ABI.
 app -> session
 app -> broker client -> broker process
 app -> adapter-mvdm-host-in -> mvdm-host
-app -> mvdm/dos/v86 / mvdm/bin86 / mvdm/wow16 / mvdm-guest/font16
+app -> mvdm/dos/v86 / mvdm/bin86 / mvdm/wow16 / opennt-host/base/win32/winnls/fontsup/system
                                                    (data/load only)
 
 mvdm-host -> mvdm-platform-abi

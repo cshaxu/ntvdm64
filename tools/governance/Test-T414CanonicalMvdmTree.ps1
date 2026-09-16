@@ -26,7 +26,6 @@ $excluded = @(
     'src/mvdm-host/kernel-vdm/',
     'src/mvdm-host/README.md',
     'src/mvdm-guest/README.md',
-    'src/mvdm-guest/font16/',
     'src/mvdm-tools/README.md',
     'src/mvdm-softpc-firmware/README.md'
 )

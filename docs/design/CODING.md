@@ -9,7 +9,7 @@ src/
   opennt-host/
   mvdm-softpc-patch/
   mvdm-platform-abi/
-  mvdm-guest/font16/
+  opennt-host/base/win32/winnls/fontsup/system/
   adapter-mvdm-host-in/
   adapter-mvdm-host-out/
   adapter-opennt-host/
@@ -22,9 +22,9 @@ src/
 host, guest, tool and firmware slices retain their upstream-relative paths and
 their manifest-declared build roles. `mvdm-overlay/` is its private non-original
 partner and is excluded from direct original-tree comparison. The remaining
-`mvdm-guest/font16/` carries `win16/fonts`, which is not under `base/mvdm`.
-The outside-MVDM kernel carrier temporarily remains at
-`mvdm-host/kernel-vdm/` until its separately governed original-owner move.
+`opennt-host/base/win32/winnls/fontsup/system/` carries the exact selected
+OpenNT font files, which are not under `base/mvdm`. The extracted printer
+carrier is private `mvdm-overlay` material, not a second original root.
 One physical tree may generate several libraries; a path move does not create
 a link edge. Production roots contain production inputs only; tests and
 examples stay under `tests/`; historical source comparison stays in the
@@ -49,7 +49,9 @@ historical record is evidence, not a selectable configuration.
   original relative paths. Build manifests, rather than parallel source roots,
   declare their host/guest/tool/firmware role.
 - `opennt-host` contains every complete selected original OpenNT host-service
-  package outside MVDM, each retaining upstream-relative paths and filenames.
+  package outside MVDM, plus separately admitted load-only OpenNT inputs such
+  as the exact WinNLS font directory; each retains upstream-relative paths and
+  filenames.
   Base VDM is its first accepted slice, not a limit on future admitted owner
   packages. Each package is admitted only with rows in the shared
   file/interface/dependency/build trackers and the external package-boundary
@@ -73,7 +75,7 @@ historical record is evidence, not a selectable configuration.
   condition. It reaches mechanics only through the same-shaped `softpc` family
   of `adapter-mvdm-host-out`.
 - `mvdm/dos/v86`, `mvdm/bin86` and `mvdm/wow16` are load-only selected guest
-  carries; `mvdm-guest/font16` is the separately sourced load-only Win16 font
+  carries; `opennt-host/base/win32/winnls/fontsup/system` is the separately sourced load-only Win16 font
   carry. None implies an unselected external source-universe import.
 - `adapter-mvdm-host-in` contains only its declared selector-blind typed
   machine-event boundary. `adapter-mvdm-host-out` contains the named same-shaped historical

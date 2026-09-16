@@ -1,8 +1,8 @@
 # Coding Rules
 
 `mvdm-host` below is a logical host-slice name. Its selected original files
-live physically under `src/mvdm/`; only the separately governed outside-MVDM
-kernel carrier remains at `src/mvdm-host/kernel-vdm/` pending its own move.
+live physically under `src/mvdm/`; the extracted printer carrier is private
+MVDM overlay material at `src/mvdm-overlay/v86/monitor/i386/`.
 
 ## Source-first implementation
 
@@ -24,10 +24,13 @@ kernel carrier remains at `src/mvdm-host/kernel-vdm/` pending its own move.
   project-owned implementation that it would supersede. Do not recurse into
   CSR/CSRSS, NTDLL CSR transport, full BaseClient/Kernel32, Win32k, or
   USER/GDI server merely to satisfy an import. A Kernel VDM function may be
-  admitted only under the source policy's semantic-carrier rule: retain it
-  under `mvdm-host/kernel-vdm/<original-relative-path>`, document its direct
-  MVDM consumer and every excluded kernel dependency, and confine any adapter
-  to the finite unavailable-kernel ABI rather than its state machine.
+  admitted only under the source policy's semantic-carrier rule: retain its
+  original source under `opennt-host/<original-relative-path>`, document its
+  direct MVDM consumer and every excluded kernel dependency, and confine any
+  adapter to the finite unavailable-kernel ABI rather than its state machine.
+  A non-original extraction from an MVDM-owned monitor file, such as the
+  printer carrier, belongs in the matching private `mvdm-overlay` path and is
+  never represented as a Kernel VDM import.
 - Every project-defined replacement interface records the unavailable
   dependency, rejected earlier rungs, smallest new ABI, failure contract,
   focused test and disposition.
@@ -35,9 +38,9 @@ kernel carrier remains at `src/mvdm-host/kernel-vdm/` pending its own move.
 ## Placement and dependencies
 
 - Place each production file in one of the architecture roots declared by the
-  architecture rules. `mvdm-host`, `opennt-host`, `mvdm-tools` and
-  `mvdm-softpc-firmware` preserve selected MVDM runtime (including its
-  original support paths), accepted non-MVDM OpenNT host, standalone-tool and firmware-input package
+  architecture rules. `mvdm`, `mvdm-overlay` and `opennt-host` preserve
+  selected MVDM runtime (including its original support paths), private
+  MVDM carriers, and accepted non-MVDM OpenNT host package
   topology respectively; package libraries do not create ad-hoc new source
   owners.
 - `mvdm-softpc-patch` is reserved for individually provenance-registered
