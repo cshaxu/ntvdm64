@@ -2,6 +2,7 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T418 S2 run16 and product ownership](evidence/m0-t418-s2-run16-product-ownership.md) | M0 T418 S2 | Moves launcher and static product layout/identity to final owners with fresh x86 evidence. | Retain through T418 closure. |
 | [T418 S1 legacy broker archive removal](evidence/m0-t418-s1-legacy-broker-archive-removal.md) | M0 T418 S1 | Proves and removes the unreachable 387-line local broker archive while retaining the live authenticated transport. | Retain through T418 closure. |
 | [T417 S1 private-component ownership freeze](evidence/m0-t417-s1-private-component-ownership-freeze.md) | M0 T417 S1 | Complete production-edge, original-owner and relocation/deletion disposition for the three private component roots. | Superseded by T417 phased implementation closure. |
 | [T417 S2 SoftPC patch-boundary recovery](evidence/m0-t417-s2-softpc-patch-boundary-recovery.md) | M0 T417 S2 | Retires the private patch root, records the strict mirror boundary, and proves fresh x86 three-program compilation plus CCPU fixture. | Retain through T417 closure. |

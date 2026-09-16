@@ -11,7 +11,7 @@
 #include <base_client.h>
 #include <base_command.h>
 #include <base_rpc_client.h>
-#include "app/version.h" /* Shared three-product metadata, no app behavior. */
+#include "product-abi/version.h" /* Shared metadata, no product behavior. */
 
 typedef struct OPENNT_BASE_RPC_CLIENT {
     RPC_BINDING_HANDLE binding;

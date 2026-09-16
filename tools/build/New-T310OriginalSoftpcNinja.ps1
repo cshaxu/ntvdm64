@@ -98,7 +98,8 @@ $adapterSoftpcRoot = Join-Path $root 'src/adapter-mvdm-host-out/softpc'
 $adapterWin32Root = Join-Path $root 'src/adapter-mvdm-host-out/win32/source'
 $hostCrtRedirect = Join-Path $root 'src/adapter-mvdm-host-out/win32/include/mvdm_crt_redirect.h'
 $softpcSymbolCompat = Join-Path $root 'src/adapter-mvdm-host-out/softpc/include/mvdm_softpc_symbol_compat.h'
-$appRoot = Join-Path $root 'src/app'
+$run16Root = Join-Path $root 'src/run16'
+$productPackageRoot = Join-Path $root 'src/product-package'
 $adapterBaseSrvRoot = Join-Path $root 'src/adapter-mvdm-host-out/basesrv/source'
 $adapterMonitorRoot = Join-Path $root 'src/adapter-mvdm-host-out/monitor/source'
 $kernelVdmPrinterSource = Join-Path $adapterMonitorRoot 'monitor_printer.c'
@@ -252,7 +253,7 @@ $adapterSoftpcNames = @('mvdm_softpc_firmware.c', 'mvdm_xms_memory.c', 'mvdm_a20
                         'mvdm_softpc_event_thread.c',
                         'mvdm_softpc_presentation_font.c',
                         'mvdm_softpc_descriptor_fields.c')
-$appNames = @('package_layout.c')
+$productPackageNames = @('package_layout.c')
 $effectiveAddressSource = Join-Path $adapterSoftpcRoot 'mvdm_softpc_effective_address.c'
 $effectiveAddressObject = 'obj/adapter-softpc/mvdm_softpc_effective_address.obj'
 foreach ($name in $ccpuNames) {
@@ -345,8 +346,8 @@ foreach ($name in $openntNetapiNames) {
 foreach ($name in $openntBaseVdmNames) {
     if (!(Test-Path -LiteralPath (Join-Path $openntBaseVdmRoot $name))) { throw "Original OpenNT Base VDM source missing: $name" }
 }
-foreach ($name in $appNames) {
-    if (!(Test-Path -LiteralPath (Join-Path $appRoot $name))) { throw "Required app composition source missing: $name" }
+foreach ($name in $productPackageNames) {
+    if (!(Test-Path -LiteralPath (Join-Path $productPackageRoot $name))) { throw "Required package source missing: $name" }
 }
 foreach ($name in $adapterMonitorNames) {
     if (!(Test-Path -LiteralPath (Join-Path $adapterMonitorRoot $name))) { throw "Required monitor adapter source missing: $name" }
@@ -1032,7 +1033,7 @@ if ($Architecture -eq 'x86') {
     $graph.Add('  command = link.exe /nologo /out:$out $in ntdll.lib kernel32.lib user32.lib advapi32.lib libcmt.lib libvcruntime.lib libucrt.lib')
     $graph.Add('build basesrv-service-reservation-test.exe: basesrv_service_test_link ' + $baseServiceReservationTestObject + ' obj/run16/support.obj opennt-base-server.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib')
     $nativeServiceFlags = '/nologo /c /MT /W4 /we4013 /showIncludes /I obj/basesrv /I "' + (NinjaPath (Join-Path $root 'src')) + '"'
-    $graph.Add('build obj/run16/entry.obj: cc ' + (NinjaPath (Join-Path $root 'src/app/run16_entry.c')))
+    $graph.Add('build obj/run16/entry.obj: cc ' + (NinjaPath (Join-Path $run16Root 'main.c')))
     $graph.Add('  cflags = ' + $baseOwnerFlags)
     $graph.Add('build obj/run16/support.obj: cc ' + (NinjaPath (Join-Path $root 'src/adapter-mvdm-host-out/win32/source/opennt_support_rtl.c')))
     $graph.Add('  cflags = ' + $baseOwnerFlags + ' /Gy')
@@ -1042,7 +1043,7 @@ if ($Architecture -eq 'x86') {
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('rule run16_link')
     $graph.Add('  command = link.exe /nologo /subsystem:console /entry:wWinMainCRTStartup /opt:ref /out:$out /map:$out.map $in rpcrt4.lib ntdll.lib kernel32.lib shell32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib')
-    $graph.Add('build obj/run16/console_probe.obj: cc ' + (NinjaPath (Join-Path $root 'src/app/console_probe.c')))
+    $graph.Add('build obj/run16/console_probe.obj: cc ' + (NinjaPath (Join-Path $run16Root 'console_probe.c')))
     $graph.Add('  cflags = /nologo /c /MT /W4 /we4013 /showIncludes /I "' + (NinjaPath (Join-Path $root 'src')) + '"')
     $graph.Add('build run16.exe: run16_link obj/run16/entry.obj obj/run16/console_probe.obj obj/run16/support.obj obj/run16/rpc_client.obj obj/run16/stub.obj opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib')
     $graph.Add('rule basesrv_idl')
@@ -1072,9 +1073,9 @@ if ($Architecture -eq 'x86') {
     # image with its own local BaseVDM queue.
     $graph.Add('build ntvdm.exe | ntvdm.lib: worker_link obj/worker/rpc_client.obj obj/worker/stub.obj worker-shell.lib worker-command-bindings.lib original-softpc-host-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib opennt-base-client.lib opennt-base-bindings.lib original-opennt-rtl-x86.lib softpc-bindings.lib redirector-bindings.lib vdd-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib broker-transport.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib original-ccpu386.lib original-softpc-host-roots.lib obj/host/softpc-resource.res')
 }
-$appObjects = foreach ($name in $appNames) {
-    $object = 'obj/app/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
-    $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $appRoot $name)))
+$productPackageObjects = foreach ($name in $productPackageNames) {
+    $object = 'obj/product-package/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
+    $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $productPackageRoot $name)))
     $object
 }
 $graph.Add('build ' + $effectiveAddressObject + ': cc ' + (NinjaPath $effectiveAddressSource))
@@ -1112,7 +1113,7 @@ $graph.Add('build original-opennt-netlib.lib: lib ' + ($openntNetlibObjects -joi
 $graph.Add('build original-opennt-netapi-api.lib: lib ' + ($openntNetapiObjects -join ' '))
 $graph.Add('build original-opennt-base-vdm.lib: lib ' + ($openntBaseVdmObjects -join ' '))
 $graph.Add('build original-opennt-rtl-x86.lib: lib ' + ((@($openntRtlObjects) + @($openntRtlX86Objects)) -join ' '))
-$graph.Add('build worker-shell.lib: lib obj/app/package_layout.obj')
+$graph.Add('build worker-shell.lib: lib obj/product-package/package_layout.obj')
 $graph.Add('build session.lib: lib ' + ($sessionObjects -join ' '))
 $graph.Add('build cpu40-descriptor-domain-fixture.exe: broker_test_link ' + $cpu40DescriptorDomainFixtureObject + ' original-mvdm-dpmi32.lib')
 $graph.Add('build rtl-x86-fixture.exe: rtl_fixture_link ' + $rtlX86FixtureObject + ' original-opennt-rtl-x86.lib')
@@ -1193,7 +1194,7 @@ $graph.Add('default original-softpc-candidate')
     }
     adapterSoftpcSources = @($adapterSoftpcNames)
     adapterRedirectorSources = @($adapterRedirNames)
-    appSources = @($appNames)
+    productPackageSources = @($productPackageNames)
     sessionSources = @($sessionNames)
     adapterWin32Sources = @($adapterWin32Names)
     openntRtlX86Sources = @($openntRtlX86Names)
@@ -1214,7 +1215,7 @@ $graph.Add('default original-softpc-candidate')
         target = 'run16.exe'
         selected = ($Architecture -eq 'x86')
         disposition = 'explicit build-only S3 work in progress; native branch only; no publication'
-        sources = @('src/app/run16_entry.c', 'src/app/console_probe.c', 'src/adapter-mvdm-host-out/win32/source/opennt_support_rtl.c' | ForEach-Object {
+        sources = @('src/run16/main.c', 'src/run16/console_probe.c', 'src/adapter-mvdm-host-out/win32/source/opennt_support_rtl.c' | ForEach-Object {
             [ordered]@{ path = $_; sha256 = Get-NodeSha256 (Join-Path $root $_) }
         })
         libraries = @('opennt-base-client.lib', 'opennt-base-bindings.lib', 'original-opennt-rtl-x86.lib')

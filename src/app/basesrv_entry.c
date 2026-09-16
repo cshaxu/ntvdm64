@@ -10,7 +10,7 @@
 #include "opennt-abi/source/public/internal/base/inc/vdmapi.h"
 #include "adapter-opennt-host/basesrv/include/base_service.h"
 #include "app/console_query.h"
-#include "app/version.h"
+#include "product-abi/version.h"
 static broker_rpc_scope scope;
 static OPENNT_BASE_SERVICE *service;
 static WCHAR console_helper[MAX_PATH];

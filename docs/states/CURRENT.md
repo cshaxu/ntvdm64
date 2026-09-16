@@ -37,10 +37,10 @@ S2 is the executable-owned product-ABI/run16 move group.
 
 ## S2 Closure Record
 
-S2 P2 `c59b1008a` removes the unreachable session-based WOW fallback and
-restores original missing-`-a` handling; the source proof, original lifecycle
-fixture and fresh x86 formal graph are recorded in the
-[WOW command-carrier evidence](../etc/evidence/m0-t416-s2-wow-command-carrier-restoration.md).
+T418 S2 moves run16-only entry/probe code and the small version/package surface
+to their executable/static owners. The fresh 506-command x86 graph, dedicated
+layout fixture and core CCPU/C-VID/memory regressions are recorded in the
+[run16/product ownership evidence](../etc/evidence/m0-t418-s2-run16-product-ownership.md).
 
 ## T417 S3--S4 Closure Record
 

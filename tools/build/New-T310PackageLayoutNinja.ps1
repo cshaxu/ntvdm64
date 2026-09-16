@@ -30,7 +30,7 @@ $environment = Join-Path $build 'msvc-mt.cmd'
     Set-Content -LiteralPath $environment -Encoding ascii
 
 $sources = @('src/session/guest_memory_lease.c',
-    'src/session/session.c', 'src/app/package_layout.c',
+    'src/session/session.c', 'src/product-package/package_layout.c',
     'tests/app/package_layout_fixture.c')
 $graph = [Collections.Generic.List[string]]::new()
 $graph.Add('ninja_required_version = 1.10')
