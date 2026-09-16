@@ -4,27 +4,34 @@
 
 ## Active Packet
 
-**Active: M0 T416 S1** — Mirror, overlay and adapter footprint baseline
+**Active: M0 T416 S2** — Restore the original WOW command-line carrier
 (Ordinary Mode).
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T416 S1, Ordinary Mode. |
-| Admission And Approval | Owner approved Queue candidate 1 for execution: reduce original-mirror diff, overlay and adapter autonomous footprint without breaking currently working behavior. |
+| Identifier Mode | M0 T416 S2, Ordinary Mode. |
+| Admission And Approval | Sequential execution under the owner's T416 approval; S1 P1 `2031f14de` froze the removal ledger. |
 | Candidate Proposal | [Mirror, overlay and adapter footprint cleanup](../proposals/proposal-mirror-overlay-footprint-cleanup-001.md). |
-| Objective | Freeze a reproducible complete workset, upstream ownership, formal build selection, callers, and before metrics for MVDM/OpenNT-host mirror diff, private overlay and adapter autonomous implementation. |
-| Non-goals | No functional deletion or source restoration in S1; no global BFS; no x87, NTVDMx64, WOW/debugger or full-WRITE recovery. |
-| Reference Baseline | T415 closure `47521444c`; selected original OpenNT families; current formal x86 three-program graph. |
-| Files And ABI Surface | Evidence/measurement tools and current authorities only. No runtime ABI or source behavior change in S1. |
+| Objective | Prove the run16-produced original WOW `-a` command line reaches the worker, then remove the unreachable session fallback and its complete autonomous carrier without changing DOS, nested COMMAND or original WOW parser behavior. |
+| Non-goals | No full WOW/WRITE recovery, program reclassification, broker policy change, guest-memory redesign, x87 or NTVDMx64 correction. |
+| Reference Baseline | S1 P1 `2031f14de`; original `BaseGetVdmConfigInfo` command construction; existing three-program formal x86 graph. |
+| Files And ABI Surface | `cmdmisc.c`, firmware/session fallback carrier and focused fixtures/evidence only; original WOW `-a` parser remains the sole worker interface. |
 | Applicable Rules | docs/README, EXECUTION, ARCHITECTURE, CODING, DOCUMENT, source-policy and CONTRIBUTING. |
-| Verification | Reproducible upstream-normalized diff, overlay and adapter classifications; direct caller/build selection review; documentation governance and diff review. |
-| Expected Markers | Every scoped row has a source owner, caller/build status, disposition and receiver; all metric denominators and exclusions are explicit. |
-| Asset Needs | Pinned OpenNT baseline, current source tree, formal generator and prior closure evidence; no external download. |
-| Reporting Requirements | Report baseline counts separately for mirrors, overlay and adapter autonomous code; group repairs by original-owner dependency and state preservation regressions. |
-| Stop Conditions | An alleged deletion with an unresolved caller, source owner conflict, metric ambiguity, or any scope that needs new semantic behavior. |
-| Exit Criteria | Indexed S1 ledger and repair design with no unknown scoped row; owner review before source modification in later S packets. |
+| Verification | Static complete-caller sweep, original BaseGetVdmConfigInfo DOS/WOW fixture, source-shape assertion that `cmdmisc.c` retains only original ` -a ` parser, formal x86 build and DOS regressions. |
+| Expected Markers | No setter/caller for fallback storage before removal; original `-w -a` command construction; no fallback symbol, storage field or declaration remains after removal. |
+| Asset Needs | Pinned OpenNT, existing original server lifecycle fixture, formal generator and staged DOS regressions; no external download. |
+| Reporting Requirements | State exact mirror and adapter-autonomous reduction separately; distinguish direct WOW proof from unavailable full WRITE acceptance. |
+| Stop Conditions | Any selected worker launch path lacks ` -a `, a retained fallback caller is discovered, or a DOS/nested COMMAND regression appears. |
+| Exit Criteria | Complete fallback chain removed, source-shaped WOW parser retained, formal x86/DOS checks pass, metrics recomputed and evidence indexed. |
 | Original Owner Request | “以减少 mvdm和opennt-host相对原始opennt代码的diff为目标（包括overlay，甚至adapter的精简），同时保证架构合理、不破坏当前已经实现跑通的部分？” and “准入执行！” |
-| Similar-Issue Sweep | Startup, diagnostics, declarations, private composition, C-VID, BaseSrv query, x64-pattern remnants and generated-binding costs within the bounded workset. |
+| Similar-Issue Sweep | All `mvdm_wow_bootstrap_kernel` definitions/callers, Base config binding, direct worker entry and shared/separate WOW construction. |
+
+## S1 Closure Record
+
+S1 P1 `2031f14de` freezes the paired OpenNT measurement, overlay inventory,
+adapter classification rule and every bounded cohort disposition in the
+[footprint baseline](../etc/evidence/m0-t416-s1-footprint-baseline.md). No
+runtime source changed in S1; S2 is the first approved restoration group.
 
 ## Current Technical Baseline
 
@@ -58,7 +65,8 @@
 
 | Delivery | Evidence |
 | --- | --- |
-| S1, pending P1 | [Footprint baseline and ownership ledger](../etc/evidence/m0-t416-s1-footprint-baseline.md) |
+| S2, pending P2 | [Original WOW command-carrier restoration](../etc/evidence/m0-t416-s2-wow-command-carrier-restoration.md) |
+| S1, 2031f14de | [Footprint baseline and ownership ledger](../etc/evidence/m0-t416-s1-footprint-baseline.md) |
 | S1, 23a4fa83c | [Source audit](../etc/evidence/m0-t413-s1-accessor-layout-audit.md) |
 | S2, 3cc7851e5 | [Accessor restoration](../etc/evidence/m0-t413-s2-accessor-restoration.md) |
 | S3, d9d814b00 and fbb121d72 | [Integrated verification](../etc/evidence/m0-t413-s3-integrated-verification.md) |

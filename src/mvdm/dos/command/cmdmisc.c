@@ -32,7 +32,6 @@
  * source record through the session host-resource mapping instead; the
  * original record allocation, use and free ordering remain in cmdredir.c. */
 #include "adapter-mvdm-host-out/redir/include/mvdm_command_redirection.h"
-#include "adapter-mvdm-host-out/softpc/include/mvdm_softpc_firmware.h"
 
 
 VOID GetWowKernelCmdLine(VOID);
@@ -529,7 +528,6 @@ PCHAR	 pch, pEnvStrings;
 PCHAR    pSlash;
 int      Len;
 LPSTR    pszCmdLine;
-char     WowKernelPath[MAX_PATH];
 
 
     DeleteConfigFiles();   // get rid of the temp boot files
@@ -618,14 +616,6 @@ char     WowKernelPath[MAX_PATH];
             while (*pszCmdLine && *pszCmdLine == ' ') {
                    pszCmdLine++;
             }
-        }
-        /* DIVERGENCE(MVDM-HOST-DIV-230): NT4's BaseVDM-created WOW worker
-         * carries KRNL386 in its process command line.  The product's one
-         * process entry preserves that parser first; only its absent carrier
-         * is supplied from the app-frozen, session-bound package path. */
-        else if (mvdm_softpc_wow_bootstrap_kernel_copy(WowKernelPath,
-                sizeof(WowKernelPath))) {
-            pszCmdLine = WowKernelPath;
         }
         else {
             pszCmdLine = NULL;
