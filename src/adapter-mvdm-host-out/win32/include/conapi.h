@@ -7,6 +7,13 @@
 
 #include <windows.h>
 
+/* ADAPTER-WIN32-052: retain NT4 cell-grid resize semantics at the modern
+ * Console boundary. Original callers and argument shapes are unchanged. */
+BOOL WINAPI MvdmSetConsoleScreenBufferSize(HANDLE output, COORD size);
+#define SetConsoleScreenBufferSize MvdmSetConsoleScreenBufferSize
+BOOL WINAPI MvdmSetConsoleWindowInfo(HANDLE output, BOOL absolute, const SMALL_RECT *window);
+#define SetConsoleWindowInfo MvdmSetConsoleWindowInfo
+
 /* DIVERGENCE(ADAPTER-WIN32-012): The selected OpenNT declaration carrier
  * pulls private NT headers which are not a valid modern user-mode closure.
  * Retain only the declarations reached by the selected original SoftPC

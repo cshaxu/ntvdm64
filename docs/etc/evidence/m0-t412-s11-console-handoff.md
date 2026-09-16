@@ -1,5 +1,146 @@
 # T412 S11 Console investigation handoff
 
+## P3: cell-grid repair; owner-directed bounded S11 closure
+
+The owner now directs S11 closure for the verified blank-gap repair and a new
+S12 for the CCPU/C-VID investigation and original-source restoration. This
+supersedes the earlier instruction to include the accessor repair in S11.
+The 80x5 crash remains a failed test assigned to S12, not a passing S11 result
+or full T412 acceptance. Live external resizing and owner Terminal/RDP visual
+confirmation are not claimed by the static-size matrix; S12 retains the
+adjacent geometry/adverse regression checks while repairing the crash.
+
+The unverified accessor/build edits were removed from the product source and
+retained in `build/M0-T412/S12/admission/accessor-research.patch`, SHA-256
+79ACAD335642107F72FC8D8B4605C60B492DB18A9452C8095565A67D57A7A78F.
+It is a research candidate, not a fix or acceptance input. Its generated S11
+accessor-profile graph is also non-release material. No stash or extra worktree
+is required to preserve this work.
+
+The native cell observer, not just VT replay, reproduces the defect at 45x34:
+after EDIT, repeated MEM paints text at rows 4--11 while the prompt reaches
+row 25. The default-off temporary PAINT/RESTORE observations show that malformed
+rows already enter copyConsoleToRegen from the native Console. Painter stride
+remains 80 columns / 160 bytes; changing CPU or guest cursor semantics is not
+justified. Diagnostic mirror edits were removed after collecting these traces.
+
+Original owner: OpenNT windows/core/ntcon/server/output.c::ResizeScreenBuffer
+and getset.c::SrvSetConsoleScreenBufferSize / SrvSetConsoleWindowInfo. The
+original operation copies/clips cells by row, extends columns with spaces and
+the row's last attribute, selects TopRow when height excludes the cursor, and
+clamps cursor X to zero / Y to the final row. It does not reflow paragraphs.
+Modern ConPTY can also resize/reflow storage when SetConsoleWindowInfo changes
+the viewport. Restoring only SetConsoleScreenBufferSize is insufficient.
+
+Recovery ladder: the original translation unit cannot compose directly because
+it owns private SCREEN_INFORMATION/ROW, CSR allocation and GDI window painting.
+The selected same-shaped facade retains the reached cell-copy, clipping,
+attribute and cursor rules using Read/WriteConsoleOutputW around the native
+geometry operation. No external-source intrusion or CPU changes are selected.
+This finite facade is the recovery exception; it does not invent a worker,
+alternate presenter, stream-mode override or persistent second screen model.
+Native validation decides invalid handle/size/window/access failures. Partial
+cell transfers fail explicitly. A failure after native resizing is not claimed
+to roll back the native geometry; the original caller retains error handling.
+The reached read/write Console handle is required, not an arbitrary write-only
+handle. This is a finite modern binding, not a whole Console Server recovery.
+
+Retained runtime inputs below the prescribed logs directory are
+m0-t412-s11-baseline-cells.raw[.cells.txt], m0-t412-s11-cells-boundary.txt,
+m0-t412-s11-noreflow.raw and m0-t412-s11-window-grid.raw[.cells.txt]. The first
+two-API candidate removed the repeated-MEM blank gap in native cell data. The
+final shared implementation also blanks newly added rows after window resizing,
+removing a duplicate EXIT echo left by reflow. xterm
+headless is isolated under build/M0-T412/S11/terminal-check, not a dependency.
+
+### Verified delivery and limits
+
+Closure publication copies the three exact products below to `O:\winnt`.
+The intermediate capture `m0-t412-s11-closure-45x34.raw` passes on the earlier
+link (worker SHA-256 9728C7390F6E6FBDC8E80F12C17BA1D3C48F62783E4EEB156DEA4A5C6C8F6DAE).
+After withdrawing the accessor candidate, final build revalidation recompiles
+the unchanged binding/termination sources and relinks the worker. Four fresh
+`m0-t412-s11-final-<size>.raw` runs and all 17 cases in
+`m0-t412-s11-final-summary.json` pass on this final link. Each final Console
+capture has original exit 1, MEM gaps 1, restored mode 7 and one EXIT echo.
+All three destination hashes match the following final-product table.
+The final `m0-t412-s11-final-mouse.raw` run also passes: 26 frames, two MEM
+blocks with gaps 1/1, output mode 7 and one EXIT echo. Its mouse journal
+retains stage-1/2 move/down/up button values 0/1/0 and stage-3 delivery.
+The isolated native resize fixture passes again. Invoking that fixture directly
+through the agent's inherited Console failed its row check; its explicit
+independent-process launch passes, so the inherited launch is not counted.
+
+Fresh formal root: build/M0-T412/S11/cell-grid, MSVC x86 /MT, original CCPU40,
+APP_VERSION 0.0.412 / protocol 3. All three product links and the 4208-byte
+VDM_TIB storage gate pass. The selected source contains no temporary SoftPC or
+C-VID diagnostic hook. Product hashes:
+
+| Product | SHA-256 |
+| --- | --- |
+| run16.exe | 532AB1738C7D0747EF6C894FE37AA9FAAFF6D56F1D090EEF578D708B3B1A778F |
+| basesrv.exe | 02D93ED396792873B1BDCC5F7FCCD3566B70BB89F4E243C09BD9976ED35A967B |
+| ntvdm.exe | A33D3EE327732F2A46A3F626770AADFA80DAF379BC9883E3F94F482E3F1B065E |
+
+Initial source-equivalent link verification (the final rerun is recorded above):
+
+- Native console_resize_contract: original row selection/crop/grow, cursor
+  clamps, invalid handle/size/window and read-only handle rejection pass.
+- Real ConPTY COMMAND -> initial MEM -> EDIT welcome/Esc -> Alt-F/X -> MEM
+  twice -> EXIT passes at 80x25, 45x34, 60x50 and 120x30. Native cell journals
+  `m0-t412-s11-verified-<size>.raw.cells.txt` show exactly one blank row between
+  each final MEM block and its next prompt, one EXIT echo and restored mode 7.
+  Verify-ConsoleResizeCapture.ps1 checks those facts, not just process exit.
+- The same product passes all 17 Verify-CommandExitStatus cases, including
+  native streams/EOF, nested COMMAND/MEM, EDIT and original exit statuses.
+  Results: `m0-t412-s11-verified-summary.json` under the runtime log directory.
+  Temporary Z: points only to this build fixture root and was removed afterward.
+- The optional ConPTY mouse sequence records movement at row 9/column 19 with
+  buttons 0, then down 1, then up 0 at original stages 1/2, with stage-3 guest
+  delivery. EDIT exits normally and repeated MEM still passes the cell checks;
+  retained input is `m0-t412-s11-mouse.raw[.mouse.txt,.cells.txt]`.
+- At 45 columns the original fixed-cell resize clips long lines; it does not
+  invent a paragraph-wrap policy. A narrow viewport is not evidence of full
+  80-column visibility. Actual owner's Windows Terminal/RDP acceptance is still
+  separate from native Console journals and independent headless VT replay.
+
+Footprint: zero mirror/overlay edits and no CPU, guest, broker or protocol
+change. Production additions are two same-shaped declarations/macros and one
+shared synchronous Console resize implementation (109 lines total); temporary
+geometry and exception observations are not part of the delivered source.
+
+### Remaining short-window C-VID gate
+
+The retained prefilled-history observer confirms real 40x5 and 80x5 viewports
+over 300-row buffers, with 40 preceding shell lines. The 40x5 run passes with
+normal guest exit 1. The 80x5 run fails: worker access violation, launcher 1067.
+It must not be counted as passing. The owner moves its repair to S12 when
+closing the bounded S11 blank-gap delivery; T412 is not closed by P3.
+
+`m0-t412-s11-history-80.txt.exception.txt` maps to original
+SEVID019.c::S_2696_Chain2ByteWrite_Copy's ring write. Read-only follow-up
+`m0-t412-s11-cvid-2-fault.txt` records r1/Gdp=012025a8, r21=012025a8,
+ring pointer=017a65e4, bounds=005a3fe0..005a4040 and GDP state=6666. Subtracting
+Gdp gives 005a403c: the ring increment used Gdp, not the source's constant 4.
+State 6666 belongs to SINIT013.c::CiSetVideodirty_total, which shares the global
+J-code scratch registers. This strongly identifies accessor interference;
+the thread/reentry owner and complete interface-profile repair still need proof.
+
+Original vglob.c already supplies direct field access without this context
+switch. It is compiled but not selected in the product map. Its CCPU header
+uses VGAGlobals offset 1535, whereas C-VID uses 1280, and their VideoVector
+layouts differ. Merely enabling that object or changing one vector slot is
+unsafe. The owner's later direction explicitly moves this complete original
+accessor/layout composition repair from S11 to S12. It remains required within
+T412, not an unowned queue item. Admission is not implementation or acceptance
+evidence: the repair and repeated adverse runs still need to pass.
+
+The diagnostic-only source patch is explicitly retained at
+build/M0-T412/S11/cvid-diagnostic.patch, SHA-256
+9AA5DF69B4E057D284937D1DD775BDB81F6D666630D56C594465259C8F13728A,
+with its comparison products under S11/geometry. It is not a stash, worktree,
+runtime dependency or release input. Raw records remain in `O:\winnt\logs`.
+
 ## Question and bounded predecessor conclusion
 
 On 2026-09-15 the owner requests cleanup and a new S to repair abnormal blank

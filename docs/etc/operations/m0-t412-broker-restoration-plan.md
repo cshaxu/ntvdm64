@@ -324,9 +324,64 @@ delivery. The display regression remains a T412 acceptance blocker.
    separately from bounded VT replay, retain measured source footprint and
    hashes, commit/push and leave a clean worktree for owner confirmation.
 
-No repair is claimed by this planning delivery. If source evidence requires
+S11 P3 implements the shared fixed-cell resize facade and verifies ordinary
+ConPTY, native Console and mouse/command regressions. The indexed handoff
+retains the failed prefilled 80x5 C-VID case. The owner's latest direction
+closes S11 for the verified blank-gap repair and moves the complete accessor
+profile repair into the next S12, superseding its earlier S11 admission.
+Audit all external accessor slots and both VideoVector layouts; compose original
+C VGLOB bodies with the correct GDP layout, preserving original latch and
+pointer-selection contracts. Verify field offsets, slot signatures and absence
+of J-code scratch/ring interference, then repeat the prefilled-history adverse
+case and the complete Console/command regression matrix on the final products.
+No single-slot workaround or ordinary-size pass substitutes for this gate.
+P3 is bounded S11 closure, not whole-T closure. If source evidence requires
 a CPU-semantic or broader architectural change, stop at the recorded boundary
 and revise the brief rather than extending this Console repair implicitly.
+
+### Owner-approved S12 — original CCPU/C-VID accessor composition
+
+The owner requests S11 closure followed by this dedicated investigation and
+repair. Its subject is the selected CCPU40/C-VID product binding, not an
+assumption that the CCPU instruction executor is broken. Retained S11 fault
+evidence identifies shared scratch-state interference near a video accessor;
+the exact thread or reentrant caller must still be established.
+
+1. Freeze the S11 P3 baseline and inspect every VideoVector consumer, both
+   generated layouts, GDP/VGAGlobals offsets and selected link-map providers.
+   Audit overlay/build bindings alongside mirror differences. Record each
+   original owner and removable/retained source lines; no promised reduction
+   count before the actual diff is measured.
+2. Apply the source-recovery ladder to original
+   `softpc.new/base/cpu/src/evid/vglob.c`, its CCPU copy, generated C-VID tables
+   and EvPtrs latch/pointer-selection exceptions. Prefer unchanged original
+   C bodies with the correct historical header profile. Do not select the
+   CCPU-local GDP layout merely because its identical body already compiles.
+   Minimize or delete redundant local providers; retain only evidenced ABI
+   conversions and missing product binding, with explicit justification.
+3. Complete the whole external-accessor profile before guest testing: all
+   38 getter/setter pairs, original latch and three pointer-selector slots,
+   full versus five-slot structure consumers, signed/pointer call types,
+   field offsets, initialization order and preservation of scratch registers
+   and the C-VID ring. Test real original bodies, not just inert table stubs.
+   CPU scalar/RMW/string/stack/fetch algorithms are outside this profile:
+   only host accessor dispatch/layout is changed, and no CPU algorithm repair
+   is authorized by a failing trace.
+4. Build fresh x86 /MT three-program products below build/M0-T412/S12.
+   Repeat the prefilled 80x5 adverse case with declared repetitions, retain
+   failures without reinterpretation, and run COMMAND/EDIT/MEM plus the four
+   ConPTY dimensions, live geometry changes, mouse and command regressions.
+   Use default-off observations only where the original provider boundary
+   requires proof; do not retain temporary instruction-core diagnostics.
+5. Review source footprint, publish the verified package to `O:\winnt`, record
+   hashes and limitations, commit/push and leave the worktree clean. S12 is
+   not complete until the crash is resolved and the whole profile passes.
+   Owner Terminal/RDP acceptance and whole-T closure remain explicit gates.
+
+The preserved admission patch is an unverified research candidate, not the
+design authority. In particular it has not yet solved all short/full vector
+consumers or proven the call/thread ownership. It must be reviewed and may be
+replaced entirely; restoring it verbatim is not required.
 
 ### Owner-approved S7 extension
 
