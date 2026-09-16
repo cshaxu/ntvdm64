@@ -4,18 +4,18 @@
 
 ## Active Packet
 
-**Active: M0 T418 S3** — basesrv ownership reorganization
+**Active: M0 T418 S4** — ntvdm worker-local reorganization
 (Ordinary Mode).
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T418 S3, Ordinary Mode. |
+| Identifier Mode | M0 T418 S4, Ordinary Mode. |
 | Admission And Approval | Initial owner admission: “批准收口当前的T任务，准入下一个任务并开始执行。” Revised owner admission: “修改任务目标和proposal…更新proposal并重新准入本任务。” |
 | Candidate Proposal | [Three-program component normalization and adapter retirement](../proposals/proposal-component-boundary-normalization-001.md). |
-| Objective | Move the BaseSrv entry, versioned service contract, authenticated transport and package-private BaseSrv bindings into `src/basesrv` while retaining original `opennt-host/base/win32/server/srvvdm.c` as the sole DOS/WOW record-policy owner. |
-| Non-goals | No BaseSrv policy rewrite; no worker/session move; no modern RPC/Console/ABI move into either mirror; no generic `common` component; no WOW completion claim. |
+| Objective | Move worker-local session, guest-memory lease and worker-only adapter families into `src/ntvdm` as one closure, retaining the original worker entry and all mirror boundaries. |
+| Non-goals | No BaseSrv policy rewrite; no reusable shared session service; no modern RPC/Console/ABI move into either mirror; no generic `common` component; no WOW completion claim. |
 | Reference Baseline | T417 closure `3bb6d9e79`; S5 relationship audit; formal x86 graph `build/M0-T417/S4/formal-x86-003`; current x86 package at `O:\winnt`. |
-| Files And ABI Surface | Live `src/broker`, `src/app/{basesrv_entry,console_query}.{c,h}`, `src/adapter-opennt-host/basesrv`, affected consumers/tests and generator lists; create only `src/basesrv`. No public wire or product ABI change. |
+| Files And ABI Surface | `src/session` and worker-only `adapter-mvdm-host-out` families plus their consumers/tests/generator lists; create only `src/ntvdm`. No public wire or product ABI change. |
 | Applicable Rules | docs/README, EXECUTION, ARCHITECTURE, CODING, DOCUMENT, CONTRIBUTING and source-policy; strict no-new-mirror-file and original-owner recovery ladder. |
 | Verification | Include/build-list sweep before and after each move; fresh x86 graph/maps; original-server lifecycle, Console membership, service-client and protocol/death fixtures; full COMMAND/MEM/EDIT/nested-COMMAND runtime remains the S5 gate. |
 | Expected Markers | Every service source has `basesrv` ownership; generated graph has no selected broker/app/adapter-opennt-host service edge; `srvvdm.c` remains in the mirror; no move changes protocol, resource, Console, path or wait semantics. |
