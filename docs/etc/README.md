@@ -2,6 +2,7 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T416 S3 overlay composition disposition](evidence/m0-t416-s3-overlay-composition-disposition.md) | M0 T416 S3 | Source-first disposition of every private MVDM/OpenNT-host overlay carrier and its canonical C-VID verifier repair. | Retain through T416 closure. |
 | [T416 S2 WOW command carrier](evidence/m0-t416-s2-wow-command-carrier-restoration.md) | M0 T416 S2 | Source-first removal and x86 verification of the unreachable WOW session fallback. | Retain through T416 closure. |
 | [T416 S1 footprint baseline](evidence/m0-t416-s1-footprint-baseline.md) | M0 T416 S1 | Fixed paired mirror, overlay and adapter-inventory measures plus every bounded cleanup disposition. | Superseded by T416 closure measurements. |
 

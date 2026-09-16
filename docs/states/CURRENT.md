@@ -4,27 +4,27 @@
 
 ## Active Packet
 
-**Active: M0 T416 S2** — Restore the original WOW command-line carrier
+**Active: M0 T416 S4** — Retire default-off MVDM diagnostic carriers
 (Ordinary Mode).
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T416 S2, Ordinary Mode. |
-| Admission And Approval | Sequential execution under the owner's T416 approval; S1 P1 `2031f14de` froze the removal ledger. |
+| Identifier Mode | M0 T416 S4, Ordinary Mode. |
+| Admission And Approval | Sequential execution under the owner's T416 approval; S3 concludes the overlay disposition without invented relocation. |
 | Candidate Proposal | [Mirror, overlay and adapter footprint cleanup](../proposals/proposal-mirror-overlay-footprint-cleanup-001.md). |
-| Objective | Prove the run16-produced original WOW `-a` command line reaches the worker, then remove the unreachable session fallback and its complete autonomous carrier without changing DOS, nested COMMAND or original WOW parser behavior. |
-| Non-goals | No full WOW/WRITE recovery, program reclassification, broker policy change, guest-memory redesign, x87 or NTVDMx64 correction. |
-| Reference Baseline | S1 P1 `2031f14de`; original `BaseGetVdmConfigInfo` command construction; existing three-program formal x86 graph. |
-| Files And ABI Surface | `cmdmisc.c`, firmware/session fallback carrier and focused fixtures/evidence only; original WOW `-a` parser remains the sole worker interface. |
+| Objective | Remove the S1-identified default-off COMMAND diagnostic calls and their recorder-only adapter support, restoring original MVDM control flow without changing MVDM functional carriers. |
+| Non-goals | No removal of functional termination/lifecycle support, EOI/keyboard diagnostics, overlay relocation, Console behavior change, broker policy change or WOW/WRITE recovery. |
+| Reference Baseline | S1 P1 `2031f14de`, S2 P2 `c59b1008a`, S3 overlay disposition, original `cmddisp.c`/`cmdmisc.c` and adapter termination recorder. |
+| Files And ABI Surface | Original MVDM diagnostic hook call sites, recorder declarations/definitions and tests/evidence only; no product ABI addition. |
 | Applicable Rules | docs/README, EXECUTION, ARCHITECTURE, CODING, DOCUMENT, source-policy and CONTRIBUTING. |
-| Verification | Static complete-caller sweep, original BaseGetVdmConfigInfo DOS/WOW fixture, source-shape assertion that `cmdmisc.c` retains only original ` -a ` parser, formal x86 build and DOS regressions. |
-| Expected Markers | No setter/caller for fallback storage before removal; original `-w -a` command construction; no fallback symbol, storage field or declaration remains after removal. |
-| Asset Needs | Pinned OpenNT, existing original server lifecycle fixture, formal generator and staged DOS regressions; no external download. |
-| Reporting Requirements | State exact mirror and adapter-autonomous reduction separately; distinguish direct WOW proof from unavailable full WRITE acceptance. |
-| Stop Conditions | Any selected worker launch path lacks ` -a `, a retained fallback caller is discovered, or a DOS/nested COMMAND regression appears. |
-| Exit Criteria | Complete fallback chain removed, source-shaped WOW parser retained, formal x86/DOS checks pass, metrics recomputed and evidence indexed. |
+| Verification | Original hunk comparison, complete symbol/caller/build sweep before and after, focused original lifecycle/CCPU contracts and formal x86 build when changed sources are selected. |
+| Expected Markers | Each deleted recorder symbol has no callers/build input; original COMMAND/EOI control structures remain except deleted observation calls. |
+| Asset Needs | Pinned OpenNT source, current adapter termination recorder, formal graph and focused fixtures; no external download. |
+| Reporting Requirements | Separate mirror-diff, adapter-autonomous and diagnostic-code deletion counts; name all retained functional recorder APIs. |
+| Stop Conditions | A recorder call gates behavior, a remaining caller needs retained storage, an original function diverges beyond the diagnosed call, or a focused regression appears. |
+| Exit Criteria | Complete default-off diagnostic family removed or each non-removable member proved; no dead declaration/definition/build edge remains and evidence is indexed. |
 | Original Owner Request | “以减少 mvdm和opennt-host相对原始opennt代码的diff为目标（包括overlay，甚至adapter的精简），同时保证架构合理、不破坏当前已经实现跑通的部分？” and “准入执行！” |
-| Similar-Issue Sweep | All `mvdm_wow_bootstrap_kernel` definitions/callers, Base config binding, direct worker entry and shared/separate WOW construction. |
+| Similar-Issue Sweep | COMMAND dispatch, command-environment/stub/return reports, child report-path capture/restore, and every COMMAND-family recorder caller. |
 
 ## S1 Closure Record
 
@@ -32,6 +32,19 @@ S1 P1 `2031f14de` freezes the paired OpenNT measurement, overlay inventory,
 adapter classification rule and every bounded cohort disposition in the
 [footprint baseline](../etc/evidence/m0-t416-s1-footprint-baseline.md). No
 runtime source changed in S1; S2 is the first approved restoration group.
+
+## S2 Closure Record
+
+S2 P2 `c59b1008a` removes the unreachable session-based WOW fallback and
+restores original missing-`-a` handling; the source proof, original lifecycle
+fixture and fresh x86 formal graph are recorded in the
+[WOW command-carrier evidence](../etc/evidence/m0-t416-s2-wow-command-carrier-restoration.md).
+
+## S3 Closure Record
+
+S3 updates the canonical C-VID contract verifier and concludes that no private
+overlay body can be safely deleted or relocated; the source/caller/build proof
+is in the [overlay composition disposition](../etc/evidence/m0-t416-s3-overlay-composition-disposition.md).
 
 ## Current Technical Baseline
 
@@ -65,7 +78,7 @@ runtime source changed in S1; S2 is the first approved restoration group.
 
 | Delivery | Evidence |
 | --- | --- |
-| S2, pending P2 | [Original WOW command-carrier restoration](../etc/evidence/m0-t416-s2-wow-command-carrier-restoration.md) |
+| S2, c59b1008a | [Original WOW command-carrier restoration](../etc/evidence/m0-t416-s2-wow-command-carrier-restoration.md) |
 | S1, 2031f14de | [Footprint baseline and ownership ledger](../etc/evidence/m0-t416-s1-footprint-baseline.md) |
 | S1, 23a4fa83c | [Source audit](../etc/evidence/m0-t413-s1-accessor-layout-audit.md) |
 | S2, 3cc7851e5 | [Accessor restoration](../etc/evidence/m0-t413-s2-accessor-restoration.md) |
