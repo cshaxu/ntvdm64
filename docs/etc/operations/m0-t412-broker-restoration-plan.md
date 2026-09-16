@@ -2,6 +2,12 @@
 
 ## Authority and scope
 
+T412 is closed by owner direction; see the
+[closure audit](../../history/m0-t412-broker-architecture-closure.md).
+The former S12 section below is retained historical planning, superseded by
+the independent [accessor proposal](../../proposals/proposal-ccpu40-cvid-accessor-layout-restoration-001.md).
+No paragraph below admits current T412 implementation.
+
 Owner admission on 2026-09-13 covers the queue-head broker package and asks
 for S decomposition first. [Status](../../states/CURRENT.md) alone owns the
 active packet. S1 design is closed by the

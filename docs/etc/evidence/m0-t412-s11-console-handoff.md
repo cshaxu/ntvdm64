@@ -1,5 +1,10 @@
 # T412 S11 Console investigation handoff
 
+Subsequent owner decision closes T412 and transfers its former S12 to the
+independent [accessor proposal](../../proposals/proposal-ccpu40-cvid-accessor-layout-restoration-001.md).
+The [T412 closure](../../history/m0-t412-broker-architecture-closure.md) owns
+that disposition; references to S12 below preserve the earlier handoff history.
+
 ## P3: cell-grid repair; owner-directed bounded S11 closure
 
 The owner now directs S11 closure for the verified blank-gap repair and a new

@@ -1,5 +1,10 @@
 # Cross-process broker closure
 
+T412 has closed by owner direction. The
+[closure audit](../history/m0-t412-broker-architecture-closure.md) records
+delivered Broker contracts and explicit transfers. The proposal below retains
+the original requirements; it is not a current active packet.
+
 ## Status and objective
 
 The owner admitted this broker package on 2026-09-13. Active packet authority
