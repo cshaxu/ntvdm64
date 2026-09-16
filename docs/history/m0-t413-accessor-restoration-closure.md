@@ -2,6 +2,11 @@
 
 ## Decision and scope
 
+Subsequent owner disposition: T413 is reopened for further autonomous-binding
+cleanup in [Status](../states/CURRENT.md). The results below remain historical
+S1-S3 evidence; they do not prove the retained overlay/generator is minimal.
+The former no-active-packet conclusion describes this closure's delivery only.
+
 Close the admitted accessor/layout task under the owner's standing objective
 to complete original-source recovery, three-program build, tests and closure.
 S1 audit is 23a4fa83c; S2 restoration is 3cc7851e5; S3 integrated delivery is

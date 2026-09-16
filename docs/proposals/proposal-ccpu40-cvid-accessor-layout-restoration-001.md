@@ -3,7 +3,9 @@
 ## Origin and objective
 
 Admitted as M0 T413 after owner-approved T412 closure and queue-head promotion;
-now completed with the [requirement audit and closure](../history/m0-t413-accessor-restoration-closure.md).
+with S1-S3 results in the [earlier closure audit](../history/m0-t413-accessor-restoration-closure.md).
+The owner subsequently reopened the same package for autonomous-binding cleanup;
+the appended S brief and its acceptance requirements live only in Status.
 [Status](../states/CURRENT.md) remains the sole active-packet authority.
 The plan below preserves the admitted scope and is not a new active packet.
 
