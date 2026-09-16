@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import assert from 'node:assert/strict';
 const out=path.resolve(process.argv[2]);
-assert(out.replaceAll('\\','/').includes('/build/M0-T413/S4/'));
+assert(/^build\/M\d+-T\d+\/S\d+\/.+/.test(path.relative(process.cwd(),out).replaceAll('\\','/')));
 fs.mkdirSync(out,{recursive:true});
 const read=p=>fs.readFileSync(p,'utf8').replaceAll('\r','');
 const current=read('src/mvdm-host/softpc.new/base/ccpu386/c_main.c');

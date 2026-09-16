@@ -17,6 +17,23 @@ registered `DIVERGENCE:` hook in its original mirror caller.
 | MVDM-SOFTPC-PATCH-004 | `softpc.new/base/ccpu386/c_main.c` / `EDL_fast_bop(ULONG)` and the generated `SasVector` tails `c_sas_touch(IU32,IU32)`, `c_VirtualiseInstruction(IU32,IUH,IU32,IU32)` | Same `ntvdmpatch/patches/common/fmstubs.c` provenance as PATCH-002 | Keeps the reached extended-BOP fallback and the selected-x86-unreached MIPS/PPC vector defaults at their patch-provided debugger-break disposition | The full patch object also defines unrelated empty placeholders. Linking it whole would falsely mask distinct unresolved SoftPC interfaces; the generated vector requires its exact native-word ABI on x86. | `patches/common/fmstubs.c`, compiled with `MVDM_SOFTPC_PATCH_CCPU_VECTOR_DEFAULTS_ONLY` | None: inputs are fixed guest/CCPU scalars; no host identity is published. | Formal x86 Ninja force-links `softpc-ccpu-vector-defaults.lib`; each selected entry retains `__debugbreak()` and no fabricated successful return. | Replace only after the exact original operation obtains an admitted source-shaped provider, semantics and focused execution evidence. |
 | MVDM-SOFTPC-PATCH-006 | `softpc.new/host/src/nt_unix.c` `WaitIfIdle`/`host_release_timeslice`/`PrioWaitIfIdle`, and `nt_eoi.c` `BlockWOWIdle` / `ActivityCheckAfterTimeSlice()` | Same `ntvdmpatch/patches/common/fmstubs.c` provenance as PATCH-002 | Ends an original host-idle/timeslice interval after its source-owned `WaitForSingleObject`/heartbeat conditions; the OpenNT source union retains callers and CCPU declaration but no provider body. | The current product had invented a controlled-stop adapter, turning an ordinary reached idle callback into `ERROR_CALL_NOT_IMPLEMENTED`.  Select only the imported patch's exact empty `VOID` body.  It preserves all original caller timing/idle decisions and returns without adding a scheduler, yield, timer, BOP or guest mutation. | `patches/common/fmstubs.c`, compiled with `MVDM_SOFTPC_PATCH_ACTIVITY_CHECK_ONLY` | None: no pointer, handle or guest numeric value crosses this callback. | Formal x86 CPU40 product link and the unchanged fixed-container `command.com` observation must show that the callback no longer terminates the session; this does not claim a full historical activity scheduler. | Replace only if an original provider body is recovered or a separately admitted source-shaped scheduler contract proves a different required behavior. |
 
+MVDM-SOFTPC-PATCH-007: `patches/common/ccpu-exception-scope.patch` retains only
+the five conditional-scope hunks from NTVDMx64 commit
+`84a13d2e7bb1a55d11148971e5b9c8ec99f670bf`,
+`ntvdmpatch/patches/common/ccpu.patch`, full source SHA-256
+`D3EA35D3F7C3BD4617F5F6EDC90725D3A70F503E353677C251720D9E5C9929FC`.
+The excerpt preserves upstream hunk text (LF-normalized), not the full patch.
+The source patch has no separate license notice; existing original source
+notices remain unchanged and distribution review is not implied.
+Original caller: `c_xcptn.c` contributory/IDT, DF, Int0 and PF routines.
+Both original OpenNT variants retain the missing scope; no adapter can repair
+lexical branch ownership. DIV-268 applies only braces and attribution to the
+mirror. No copied function, new runtime provider, mapping, ABI or overlay is
+introduced. Selected x86 CCPU40 proof compiles actual source with observed
+hook/delivery boundaries plus a real guest divide test. No x64/CPU30 admission.
+Remove only when a selected original source supplies equivalent corrected
+scope. See the [S5 evidence](../../docs/etc/evidence/m0-t413-s5-exception-scope.md).
+
 Rules:
 
 - This is not a generic helper, adapter, or alternative machine root.

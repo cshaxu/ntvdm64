@@ -1,0 +1,32 @@
+--- NT4\private\mvdm\softpc.new\base\ccpu386\c_xcptn.c
++++ nt\private\mvdm\softpc.new\base\ccpu386\c_xcptn.c
+252c259
+< 	if(GET_PE() && host_exint_hook((IS32) nmbr, (IS32)error_code))
+---
+> 	if(GET_PE() && host_exint_hook((IS32) nmbr, (IS32)error_code)) {
+254a262
+> 	}
+312c320
+< 	  if(GET_PE() && host_exint_hook((IS32) nmbr, (IS32)error_code))
+---
+> 	  if(GET_PE() && host_exint_hook((IS32) nmbr, (IS32)error_code)) {
+314a323
+> 	  }
+373c382
+< 	  if(GET_PE() && host_exint_hook((IS32) DF_INT_NR, (IS32)NULL_ERROR_CODE))
+---
+> 	  if(GET_PE() && host_exint_hook((IS32) DF_INT_NR, (IS32)NULL_ERROR_CODE)) {
+375a385
+> 	  }
+437c447
+< 	  if(GET_PE() && host_exint_hook((IS32) I0_INT_NR, (IS32)NULL_ERROR_CODE))
+---
+> 	  if(GET_PE() && host_exint_hook((IS32) I0_INT_NR, (IS32)NULL_ERROR_CODE)) {
+440a451
+> 	  }
+583c603
+< 	  if(GET_PE() && host_exint_hook((IS32) PF_INT_NR, (IS32)page_error))
+---
+> 	  if(GET_PE() && host_exint_hook((IS32) PF_INT_NR, (IS32)page_error)) {
+586a607
+> 	  }

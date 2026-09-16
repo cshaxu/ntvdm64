@@ -249,9 +249,11 @@ IFN3(
     {
 	extern BOOL host_exint_hook IPT2(IS32, exp_no, IS32, error_code);
 
-	if(GET_PE() && host_exint_hook((IS32) nmbr, (IS32)error_code))
+	/* DIVERGENCE: MVDM-HOST-DIV-268: NTVDMx64 handled-hook scope. */
+	if(GET_PE() && host_exint_hook((IS32) nmbr, (IS32)error_code)) {
         doing_contributory = FALSE;
 	    c_cpu_continue();	    /* DOES NOT RETURN */
+	}
     }
 #endif
 
@@ -309,9 +311,11 @@ IFN3(
       {
 	  extern BOOL host_exint_hook IPT2(IS32, exp_no, IS32, error_code);
 
-	  if(GET_PE() && host_exint_hook((IS32) nmbr, (IS32)error_code))
+	  /* DIVERGENCE: MVDM-HOST-DIV-268: NTVDMx64 handled-hook scope. */
+	  if(GET_PE() && host_exint_hook((IS32) nmbr, (IS32)error_code)) {
           doing_contributory = FALSE;
 	      c_cpu_continue();	/* DOES NOT RETURN */
+	  }
       }
 #endif
 
@@ -370,9 +374,11 @@ IFN1(
       {
 	  extern BOOL host_exint_hook IPT2(IS32, exp_no, IS32, error_code);
 
-	  if(GET_PE() && host_exint_hook((IS32) DF_INT_NR, (IS32)NULL_ERROR_CODE))
+	  /* DIVERGENCE: MVDM-HOST-DIV-268: NTVDMx64 handled-hook scope. */
+	  if(GET_PE() && host_exint_hook((IS32) DF_INT_NR, (IS32)NULL_ERROR_CODE)) {
             doing_double_fault = FALSE;
 		    c_cpu_continue(); /* DOES NOT RETURN */
+	  }
       }
 #endif
 
@@ -434,10 +440,12 @@ GLOBAL VOID Int0 IFN0 ()
       {
 	  extern BOOL host_exint_hook IPT2(IS32, exp_no, IS32, error_code);
 
-	  if(GET_PE() && host_exint_hook((IS32) I0_INT_NR, (IS32)NULL_ERROR_CODE))
+	  /* DIVERGENCE: MVDM-HOST-DIV-268: NTVDMx64 handled-hook scope. */
+	  if(GET_PE() && host_exint_hook((IS32) I0_INT_NR, (IS32)NULL_ERROR_CODE)) {
           doing_fault = FALSE;
           doing_contributory = FALSE;
 	      c_cpu_continue(); /* DOES NOT RETURN */
+	  }
       }
 #endif
 
@@ -580,10 +588,12 @@ IFN2(
       {
 	  extern BOOL host_exint_hook IPT2(IS32, exp_no, IS32, error_code);
 
-	  if(GET_PE() && host_exint_hook((IS32) PF_INT_NR, (IS32)page_error))
+	  /* DIVERGENCE: MVDM-HOST-DIV-268: NTVDMx64 handled-hook scope. */
+	  if(GET_PE() && host_exint_hook((IS32) PF_INT_NR, (IS32)page_error)) {
           doing_fault = FALSE;
           doing_page_fault = FALSE;
 	      c_cpu_continue(); /* DOES NOT RETURN */
+	  }
       }
 #endif
 

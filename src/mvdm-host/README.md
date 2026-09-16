@@ -1,5 +1,13 @@
 # mvdm-host
 
+MVDM-HOST-DIV-268: `softpc.new/base/ccpu386/c_xcptn.c` applies the five
+NTVDMx64 PATCH-007 brace corrections, keeping flag cleanup and immediate CPU
+continuation inside the successful protected-mode exception-hook condition.
+Unhandled and real-mode exceptions reach original `do_intrupt`; no handler,
+stack algorithm, API, opcode or overlay changes. The selected originals have
+the same lexical defect and an adapter cannot correct it. Provenance and
+focused/native verification: [S5 evidence](../../docs/etc/evidence/m0-t413-s5-exception-scope.md).
+
 T413 S4 narrows MVDM-HOST-DIV-156: base/cvidc/evidgen.h retains its original
 full VideoVector layout and latch/selector macros, but excludes its 76 older
 field-dispatch macros under CPU_40_STYLE. Original base/inc/egacpu.h already

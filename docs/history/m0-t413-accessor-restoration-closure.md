@@ -75,3 +75,32 @@ back to its pre-task size. The runtime generated include loses 176 lines;
 there is no replacement accessor algorithm. Formal and O:\winnt hashes match
 the S4 evidence. S4 cleanup and the expanded IP repair are complete; no next
 candidate is admitted. Owner visual confirmation remains separate.
+
+## S5 exception scope closure
+
+Owner reopened the same T at 03847f34b for five NTVDMx64 conditional-scope
+corrections, then directed the other candidate patches into a separate proposal.
+[S5 evidence](../etc/evidence/m0-t413-s5-exception-scope.md) records upstream
+hash/hunks, source-recovery ladder and the focused/integrated results.
+
+Only c_xcptn.c product code changes: braces around handled-hook cleanup and
+continuation in contributory_exception, contributory_idt_exception, DF, Int0
+and PF. No function, provider or overlay is added. Actual-source 27-case proof
+passes; uncorrected negative control fails 101 assertions. Actual DOS divide
+now enters its guest handler, validates stacked fault IP and exits zero.
+This supersedes S4's real-mode divide timeout, not the unrelated WOW limitation.
+
+All 12 native instruction cases, 168 IP-expression cases, full C-VID fixture,
+17 command cases, six ConPTY profiles, native resize and five short-window
+EDIT runs pass (20 post-EDIT MEM completions). Formal products are published
+to O:\winnt with matching hashes and recoverable previous products.
+Protected-mode source-boundary proof is not a full IDT/TSS/WOW workload claim.
+
+Mirror distance is 437 versus original pre-task 506, a reduction of 69; the
+necessary S5 scope repair adds 20 diff-distance lines (+15/-5, net +10).
+Overlay remains 125 lines. Test/provenance files are not new runtime providers.
+
+The other [NTVDMx64 corrections](../proposals/proposal-ntvdmx64-source-corrections-001.md)
+are queued second, after x87 layout and before WOW/debugger, without a numeric
+admission. S5 P2 closes the reopened task; no next T is admitted. Owner visual
+acceptance remains separate from the passing automated gates.
