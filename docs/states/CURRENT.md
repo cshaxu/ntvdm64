@@ -4,25 +4,25 @@
 
 ## Active Packet
 
-**Active: M0 T418 S2** — product ABI/package extraction and run16 ownership
+**Active: M0 T418 S3** — basesrv ownership reorganization
 (Ordinary Mode).
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T418 S2, Ordinary Mode. |
+| Identifier Mode | M0 T418 S3, Ordinary Mode. |
 | Admission And Approval | Initial owner admission: “批准收口当前的T任务，准入下一个任务并开始执行。” Revised owner admission: “修改任务目标和proposal…更新proposal并重新准入本任务。” |
 | Candidate Proposal | [Three-program component normalization and adapter retirement](../proposals/proposal-component-boundary-normalization-001.md). |
-| Objective | Move the minimal cross-EXE product version/package contract and run16-only entry bindings into their final owners without changing discovery, classification, broker startup, worker creation, rollback, protocol rejection or parent wait. |
+| Objective | Move the BaseSrv entry, versioned service contract, authenticated transport and package-private BaseSrv bindings into `src/basesrv` while retaining original `opennt-host/base/win32/server/srvvdm.c` as the sole DOS/WOW record-policy owner. |
 | Non-goals | No BaseSrv policy rewrite; no worker/session move; no modern RPC/Console/ABI move into either mirror; no generic `common` component; no WOW completion claim. |
 | Reference Baseline | T417 closure `3bb6d9e79`; S5 relationship audit; formal x86 graph `build/M0-T417/S4/formal-x86-003`; current x86 package at `O:\winnt`. |
-| Files And ABI Surface | `src/app/{run16_entry,console_probe}.{c,h}`, `src/app/{package_layout,version}.{c,h}`, their consumer includes/tests and generator source lists; create only `src/run16` and narrow `src/product-abi`/`src/product-package` owners. No public wire or product ABI change. |
+| Files And ABI Surface | Live `src/broker`, `src/app/{basesrv_entry,console_query}.{c,h}`, `src/adapter-opennt-host/basesrv`, affected consumers/tests and generator lists; create only `src/basesrv`. No public wire or product ABI change. |
 | Applicable Rules | docs/README, EXECUTION, ARCHITECTURE, CODING, DOCUMENT, CONTRIBUTING and source-policy; strict no-new-mirror-file and original-owner recovery ladder. |
-| Verification | Include/build-list sweep before and after each move; fresh x86 graph and maps; package-layout fixture; run16/basesrv/ntvdm protocol agreement and existing COMMAND/MEM/EDIT/nested-COMMAND regression remain the S5 runtime gate. |
-| Expected Markers | Every moved binding has one executable or static-product owner; generated graph has no selected old app source edge; no move changes protocol, path, process or wait semantics. |
+| Verification | Include/build-list sweep before and after each move; fresh x86 graph/maps; original-server lifecycle, Console membership, service-client and protocol/death fixtures; full COMMAND/MEM/EDIT/nested-COMMAND runtime remains the S5 gate. |
+| Expected Markers | Every service source has `basesrv` ownership; generated graph has no selected broker/app/adapter-opennt-host service edge; `srvvdm.c` remains in the mirror; no move changes protocol, resource, Console, path or wait semantics. |
 | Asset Needs | Current selected OpenNT/MVDM sources, formal generator, broker lifecycle fixtures and local `O:\winnt` runtime package. |
 | Reporting Requirements | Record source/archive/link/symbol edges; report deleted versus relocated code, final ownership, mirror diffs, retained adapter boundaries and every result/limitation. |
-| Stop Conditions | Any observed change to package discovery, protocol/version rejection, process creation/rollback, parent wait, ABI layout, build failure or regression pauses the move for a source-level ownership decision. |
-| Exit Criteria | `run16` and static product code have final owners, all old selected source paths are gone, and fresh x86 build/fixtures prove unchanged behavior before S3. |
+| Stop Conditions | Any observed change to protocol/version rejection, RPC authentication, Console membership, resource/receipt ownership, broker death, ABI layout, build failure or regression pauses the move for a source-level ownership decision. |
+| Exit Criteria | Live service code has final ownership, old selected source paths are gone, and fresh x86 build/service fixtures prove unchanged behavior before S4. |
 | Original Owner Request | “修改任务目标和proposal…先完成包括旧 broker archive 删除在内的精简清理工作，再进行这种‘一个组件对应一个 EXE’的无行为变化重组，并用三程序回归验证。” |
 | Similar-Issue Sweep | All product, fixture and generator link lists; archive symbols; direct and indirect source includes; broker transport versus local-plane callers; stale documentation references. |
 
