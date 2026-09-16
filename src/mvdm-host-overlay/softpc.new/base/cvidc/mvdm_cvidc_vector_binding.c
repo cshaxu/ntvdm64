@@ -18,6 +18,12 @@ extern struct VideoVector Video;
 extern struct SasVector Sas;
 IMPORT void c_sas_overwrite_memory IPT2(PHY_ADDR, addr, PHY_ADDR, length);
 
+/* Original cpu/src/evid/vglob.c uses the C-VID GDP profile. Only differing
+ * pointer/signed signatures need bridges; no J-code scratch is touched. */
+#define MVDM_CVIDC_VIDEO_DECLARATIONS
+#include "cvidc_cpu_binding.inc"
+#undef MVDM_CVIDC_VIDEO_DECLARATIONS
+
 /* The selected original sources retain the C-VID access shims but omit this
  * generated CCPU timing provider.  Keeping the timing value beside the
  * vector binding prevents the public access shims from being rebound to
@@ -77,4 +83,7 @@ void mvdm_cvidc_bind_vectors(void)
 void mvdm_cvidc_bind_video_vector(void)
 {
     Video = C_Video;
+#define MVDM_CVIDC_VIDEO_BIND
+#include "cvidc_cpu_binding.inc"
+#undef MVDM_CVIDC_VIDEO_BIND
 }

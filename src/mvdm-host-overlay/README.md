@@ -7,6 +7,12 @@ component.
 
 ## Divergence register
 
+T413 restores the unchanged original cpu/src/evid/vglob.c host accessors in
+the existing DIV-156 binder. The generated binding selects all 38 pairs;
+only ten pairs need typed pointer/signed conversions. Latches and pointer
+selectors remain original. This private composition removes generated host
+accessor writes to shared J-code scratch, not the original C-VID engine.
+
 | ID | Original purpose | Reason | Implementation | Files |
 | --- | --- | --- | --- | --- |
 | MVDM-HOST-DIV-137 | Provide selected CCPU shared Gdp/Cpu/Video state without a duplicate SAS vector. | Historical `localfm.c` declares all four globals, but selected `ccpusas4.c` already owns the original `Sas` vector. Linking both would make two SAS states. | A narrow overlay preserves the original Gdp, Cpu and Video declaration spellings and omits only duplicate `Sas`; no algorithm, guest value or host identity is added. | `softpc.new/base/ccpu386/localfm.c`; original reference `../mvdm-host/softpc.new/base/ccpu386/localfm.c` |

@@ -491,43 +491,24 @@ static BOOL write_console_mouse_sequence(HANDLE input, const char *report_path)
     return TRUE;
 }
 
-/* The command row must not use a wall-clock guess for initial COMMAND setup.
- * The product's default-off source marker records an original BIOS keyboard
- * read/status edge (BOP 16, AH=0/1/2).  This is the source-owned point at
- * which a normal Console key can be queued without guessing at startup.  The observer only waits for
- * that external report; it neither alters guest state nor treats the marker
- * as a product result. */
-static BOOL wait_for_report_marker(const char *path, const char *marker,
-                                   DWORD timeout_ms)
+/* Observe the real COMMAND prompt, not a diagnostic CPU hook. Retiring
+ * the INTx observer must not turn source cleanup into a test-only failure. */
+static BOOL wait_for_console_prompt(HANDLE output, DWORD timeout_ms)
 {
-    DWORD started_at;
-    char buffer[65537];
-
-    if (path == NULL || marker == NULL || *marker == '\0') return FALSE;
-    started_at = GetTickCount();
-    for (;;) {
-        HANDLE file = CreateFileA(path, GENERIC_READ,
-                                  FILE_SHARE_READ | FILE_SHARE_WRITE,
-                                  NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL,
-                                  NULL);
-        if (file != INVALID_HANDLE_VALUE) {
-            DWORD size = GetFileSize(file, NULL);
-            DWORD to_read = size == INVALID_FILE_SIZE ? 0u :
-                (size < (DWORD)(sizeof(buffer) - 1u) ? size :
-                 (DWORD)(sizeof(buffer) - 1u));
-            DWORD read = 0;
-            if (to_read != 0u && ReadFile(file, buffer, to_read, &read, NULL)) {
-                buffer[read] = '\0';
-                if (strstr(buffer, marker) != NULL) {
-                    CloseHandle(file);
-                    return TRUE;
-                }
-            }
-            CloseHandle(file);
+    DWORD begin=GetTickCount();
+    do {
+        CONSOLE_SCREEN_BUFFER_INFO info;
+        char row[512]; DWORD count=0;
+        if(GetConsoleScreenBufferInfo(output,&info) &&
+           info.dwCursorPosition.X>2 && info.dwCursorPosition.X<sizeof(row)) {
+            COORD pos={0,info.dwCursorPosition.Y};
+            if(ReadConsoleOutputCharacterA(output,row,info.dwCursorPosition.X,pos,&count) &&
+               count==(DWORD)info.dwCursorPosition.X &&
+               row[count-1]=='>' && row[1]==':') return TRUE;
         }
-        if ((DWORD)(GetTickCount() - started_at) >= timeout_ms) return FALSE;
-        Sleep(25u);
-    }
+        Sleep(25);
+    } while(GetTickCount()-begin<timeout_ms);
+    return FALSE;
 }
 
 /* The original INT 33h entry turns off stream I/O and the host transition
@@ -964,8 +945,7 @@ int main(int argc, char **argv)
         /* The original real-mode DOS buffered-console-input interrupt is the
          * source-owned CONIN$ line boundary, not a timeout, a BIOS startup
          * poll, or a synthesized BOP. */
-        scripted_console_input_ready = wait_for_report_marker(
-            console_input_ready_report_path, "MVDM-DOS-CON-LINE-INPUT",
+        scripted_console_input_ready = wait_for_console_prompt(output,
             OBSERVATION_INPUT_READY_TIMEOUT_MS);
         if (scripted_console_input_ready) {
             /* Snapshot the exact shared CONOUT$ buffer after original guest

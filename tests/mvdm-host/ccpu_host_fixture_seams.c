@@ -36,3 +36,10 @@ char * __cdecl mvdm_host_getenv(const char *name)
     (void)name;
     return NULL;
 }
+
+/* Product lifecycle must not be entered by an isolated machine fixture. */
+void mvdm_standalone_worker_record_phase(const char *phase)
+{
+    (void)phase;
+    ExitProcess(ERROR_CALL_NOT_IMPLEMENTED);
+}

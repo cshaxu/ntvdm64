@@ -153,10 +153,9 @@ $ccpuNames = Get-OriginalSources $ccpuManifest
 # this profile.  The separately selected NTVDMx64 CCPU-vector-default patch
 # owns only its registered default symbols.
 $ccpuNames = @($ccpuNames | Where-Object { $_ -ne 'ntstubs.c' })
-# The original CCPU manifest omits the identical `vglob.c` carrier even though
-# the selected original video sources call its public VGLOB accessors. Select
-# the same-named original CCPU-root form rather than synthesize those globals.
-$ccpuNames = @($ccpuNames + 'vglob.c' + 'localfm.c') | Select-Object -Unique
+# vglob's CCPU-local GDP profile is not the selected C-VID layout. Compile
+# the identical shared original below with the C-VID header/profile instead.
+$ccpuNames = @($ccpuNames + 'localfm.c') | Select-Object -Unique
 $ccpuOverlayNames = @('localfm.c')
 $ccpuSasFacadeSource = Join-Path $ccpuOverlayRoot 'sas_overwrite_memory.c'
 $biosNames = Get-OriginalSources $biosManifest
@@ -795,6 +794,9 @@ $cvidcCpuBindingGenerator = Join-Path $root 'tools/build/GenerateCvidcCpuBinding
 if ($LASTEXITCODE -ne 0) { throw 'C-VID CPU binding generation failed.' }
 $graph.Add('build obj/cvidc/mvdm_cvidc_vector_binding.obj: cc_cvidc_rule ' + (NinjaPath $cvidcVectorBindingSource) + ' | ' + (NinjaPath $cvidcCpuBindingInclude))
 $cvidcObjects += 'obj/cvidc/mvdm_cvidc_vector_binding.obj'
+$cvidcAccessorSource = Join-Path $root 'src/mvdm-host/softpc.new/base/cpu/src/evid/vglob.c'
+$graph.Add('build obj/cvidc/vglob.obj: cc_cvidc_rule ' + (NinjaPath $cvidcAccessorSource))
+$cvidcObjects += 'obj/cvidc/vglob.obj'
 $commsObjects = foreach ($name in $commsNames) {
     $object = 'obj/comms/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
 $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $commsRoot $name)))
@@ -1216,7 +1218,7 @@ $graph.Add('rule memory_test_link')
 $graph.Add('  command = link.exe /nologo /map:$out.map /out:$out $in kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib libcmt.lib libvcruntime.lib libucrt.lib')
 $graph.Add('build obj/tests/original_external_memory_test.obj: cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/original_external_memory_test.c')))
 $graph.Add('build original-external-memory-test.exe: memory_test_link obj/tests/original_external_memory_test.obj ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
-$graph.Add('build cvidc-vector-binding-fixture.exe: memory_test_link ' + $cvidcVectorBindingFixtureObject + ' ' + $cvidcVectorProviderStubObject + ' obj/cvidc/mvdm_cvidc_vector_binding.obj')
+$graph.Add('build cvidc-vector-binding-fixture.exe: memory_test_link ' + $cvidcVectorBindingFixtureObject + ' ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
 $graph.Add('build VDMREDIR.dll | VDMREDIR.dll.lib: redir_dll_link ' + (($redirObjects + @($redirResourceObject)) -join ' ') + ' ntvdm.lib redirector-bindings.lib original-opennt-netlib.lib original-opennt-netapi-api.lib softpc-bindings.lib softpc-win32-bindings.lib session.lib broker.lib')
 $graph.Add('build original-softpc-forced-closure.dll: forced_link_audit original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-softpc-host-roots.lib softpc-bindings.lib worker-shell.lib worker-command-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib broker.lib mvdm-softpc-effective-address.lib softpc-patch-evidence.lib softpc-ccpu-vector-defaults.lib')
 $graph.Add('default original-softpc-candidate')
