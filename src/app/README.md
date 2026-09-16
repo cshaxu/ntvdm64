@@ -1,7 +1,7 @@
 # app
 
 `version.h` is the sole shared application identity for all three executables.
-`APP_VERSION` is `0.0.<admitted T number>` (currently `0.0.412`); S/P changes
+`APP_VERSION` is `0.0.<admitted T number>` (currently `0.0.415`); S/P changes
 do not independently change that version. `APP_PROTOCOL_VERSION` identifies
 the incompatible RPC service contract (currently 3, matching service.idl 3.0).
 Incompatible changes within a T must advance the protocol. Launcher and worker

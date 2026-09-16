@@ -2,28 +2,9 @@
 
 ## Current Work
 
-## Active Packet
-
-**Active: M0 T415 S1** — Final retired-MVDM-root elimination (Ordinary Mode).
-
-| Field | Record |
-| --- | --- |
-| Identifier Mode | M0 T415 S1, Ordinary Mode. |
-| Admission And Approval | Owner directed completion of the remaining old MVDM roots after moving fonts and `v86/util`; explicitly authorized moving the remaining `mvdm-host` printer carrier. |
-| Candidate Proposal | [Final MVDM-root tail elimination](../proposals/proposal-final-mvdm-root-tail-elimination-001.md). |
-| Objective | Verify and retain the user’s font/tool moves, move the standalone printer carrier to `mvdm-overlay`, remove all three retired roots, and repair only direct path consumers. |
-| Non-goals | No functional source recovery, no monitor algorithm change, no new adapter, no runtime publication, and no content rewrite of original blobs. |
-| Reference Baseline | T414 canonical MVDM closure `622b71cda`; original OpenNT `base/mvdm` and `base/win32/winnls/fontsup/system`. |
-| Files And ABI Surface | User-moved font and `v86/util` files, monitor printer carrier, formal generator, source-layout authorities and APP_VERSION metadata. No public ABI change. |
-| Applicable Rules | docs/README, EXECUTION, ARCHITECTURE, CODING, DOCUMENT, source-policy and CONTRIBUTING. |
-| Verification | Exact blob comparison to OpenNT, fresh x86 worker link, final tree/path audit, documentation governance and diff review. Identity/tree/graph checks pass; the actual x86 link is temporarily blocked before `cl.exe` creation by local Defender/process launch. |
-| Expected Markers | No `src/mvdm-guest`, `src/mvdm-tools`, or `src/mvdm-host` tracked content; printer carrier selected only from `src/mvdm-overlay`; all original inputs remain byte-identical. |
-| Asset Needs | Existing OpenNT baseline, user’s working-tree moves and formal build generator; no external download. |
-| Reporting Requirements | State font/tool upstream paths, carrier classification, updated consumer count, verification and any retained root. |
-| Stop Conditions | Any blob mismatch, a non-mechanical source-content change, a link-role change, or an unexpected remaining root. |
-| Exit Criteria | Identity/build/governance pass and a clean pushed T415 closure. The actual x86 link remains the only unmet condition. |
-| Original Owner Request | “字体目录、mvdm-tool都已经改好。这个你帮我也移动了吧。” |
-| Similar-Issue Sweep | Verify all three retired roots, user move nesting, original path identity, formal-generator selections and source-layout documentation. |
+**No active numeric M/T/S packet.** T415 closed after its exact-source,
+formal-x86 and governance evidence; the ordered candidates remain in
+[Queue](QUEUE.md).
 
 ## Current Technical Baseline
 
@@ -57,7 +38,6 @@
 
 | Delivery | Evidence |
 | --- | --- |
-| T415 S1 P1, pending actual-link closure | [Final root elimination](../etc/evidence/m0-t415-s1-final-root-elimination.md) |
 | S1, 23a4fa83c | [Source audit](../etc/evidence/m0-t413-s1-accessor-layout-audit.md) |
 | S2, 3cc7851e5 | [Accessor restoration](../etc/evidence/m0-t413-s2-accessor-restoration.md) |
 | S3, d9d814b00 and fbb121d72 | [Integrated verification](../etc/evidence/m0-t413-s3-integrated-verification.md) |
@@ -74,6 +54,7 @@ relative order behind it. T414 closure does not admit the next numeric T.
 
 ## Recent M0 Closures
 
+| T415 | [Final MVDM-root elimination](../history/m0-t415-final-mvdm-root-elimination-closure.md) | 42 exact WinNLS fonts and two exact `v86/util` blobs moved to upstream paths; printer carrier moved to private overlay; formal x86 three-program graph passed. |
 | T414 | [Canonical MVDM tree](../history/m0-t414-canonical-mvdm-tree-closure.md) | 4,615 original MVDM blobs physically recomposed at `src/mvdm`; private overlay is adjacent and separate; formal x86/focused checks passed. |
 
 T413 S5 supersedes the previous real-mode divide timeout disposition, without

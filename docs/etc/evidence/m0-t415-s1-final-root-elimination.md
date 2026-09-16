@@ -35,12 +35,15 @@ runtime source content or leaving an obsolete MVDM root?
 - The fresh graph selects that exact overlay path for
   `obj/kernel-vdm/monitor_printer.obj`, then `kernel-vdm-printer.lib`, and
   links the library into `ntvdm.exe`.
-- The static dry-run resolves 465 worker actions. Actual Ninja invocations,
-  including the one-target printer-library attempt, remained at zero CPU with
-  no `cl.exe` child and no output before the first command; both were stopped.
-  This is a local Defender/process-launch block, not a compiler or source
-  diagnostic. Consequently, no actual T415 link, executable test, or runtime
-  publication is claimed.
+- Direct Ninja completion notification hangs in this Codex host after the
+  first child exits, although its exported command is valid. The formal graph
+  was therefore exported with `ninja -t commands` and executed sequentially
+  in one `VsDevCmd -arch=x86 -host_arch=x64` command session. All 478 formal
+  graph commands completed, including the printer library and final worker
+  link. The link's `Verify-VdmTibStorage.mjs` gate passed with a 4,208-byte
+  `mvdm_vdm_tib.obj` owner. The resulting x86 products are `run16.exe`
+  (256,000 bytes), `basesrv.exe` (266,240 bytes), and `ntvdm.exe`
+  (3,250,688 bytes).
 - `git diff --check` passes.
 
 ## Interpretation
@@ -52,7 +55,6 @@ production generators and were deliberately not rewritten.
 
 ## Follow-up
 
-After local compilation is permitted again, run the admitted formal x86
-three-program build and its printer-containing worker link from
-`build/M0-T415/S1/formal-x86`; only then may T415 close. No `O:\winnt`
-publication is needed because this task changes only source placement.
+No runtime publication is needed because this task changes only source
+placement. The direct-Ninja completion-notification defect is local build-host
+debt; the formal graph and all of its actual commands have been executed.
