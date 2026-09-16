@@ -8,10 +8,9 @@ recreating a private NT subsystem, or requiring installation-time host
 mutation. Public Win32 APIs and ordinary host resources remain valid integration
 mechanisms.
 
-The product has nineteen production source components. A source file has one
-owner. Original mirrors preserve upstream package identity, adapters preserve
-historical interface shape while translating mechanics, and project components
-own composition, session lifetime and cross-process coordination.
+Each production source file has one final owner. Original mirrors preserve
+upstream package identity; the three executable roots own their process-local
+mechanics; and the two small product roots own only stateless shared contracts.
 
 T414 uses `src/mvdm/` as the physical canonical selected-OpenNT
 `base/mvdm` tree. In this document, **MVDM host slice** (and retained shorthand
@@ -129,7 +128,11 @@ prevents permanent parallel providers.
   16-bit fonts. None
   implies an external WOW16 source-universe mirror.
 
-### Mechanical adapters
+### Historical adapter placement (retired production roots)
+
+The following names describe the source-family recovery rationale only. Their
+former roots contain no selected production source after T418; the live
+process-local bindings have moved to the owning executable root.
 
 - `adapter-mvdm-host-in`: selector-blind fixed-width machine-event/frame
   transport into the original MVDM host. It does not select, replace or
@@ -152,7 +155,11 @@ prevents permanent parallel providers.
   meaning. Its subfamilies remain named by the accepted original owner package
   rather than being merged into a generic compatibility layer.
 
-### Project components
+### Historical project-component placement (retired production roots)
+
+`session`, `broker` and `app` are likewise historical ownership labels. Their
+live implementation is worker-local `ntvdm`, `basesrv`, and `run16`
+respectively; they are not current production components.
 
 - `session`: dependency-neutral lifecycle, mappings, resource tables,
   completion/events and teardown for one independent VDM instance.
@@ -179,9 +186,8 @@ src/basesrv/ -> basesrv.exe
 src/ntvdm/   -> ntvdm.exe
 ```
 
-Until staged moves finish, `app`, `session`, `broker` and existing adapter
-roots are compatibility locations, not destinations for unrelated new
-functionality. `run16` owns the public CreateProcess-style CLI path; `basesrv`
+The former `app`, `session`, `broker` and adapter roots are README-only move
+markers, not compatibility locations or destinations. `run16` owns the public CreateProcess-style CLI path; `basesrv`
 owns its service endpoint, authentication, liveness and transport assembly
 around mirrored `srvvdm.c`; and `ntvdm` owns worker-local setup, guest-memory
 leases, thread binding, teardown and process-local presentation. The broker
@@ -189,12 +195,20 @@ does not acquire DOS/WOW record policy, and the worker does not acquire broker
 policy.
 
 There is no generic shared Win32/compatibility component. A process-local
-Win32 binding belongs to the executable that uses it, or to its existing named
-historical adapter family. The only cross-executable product code is the
-small, stateless `product-abi`/`package` surface for version identity and
-package layout. The BaseSrv service IDL and broker wire protocol are owned by
-`basesrv`; shared records are copied, versioned protocol data, never session,
-console or native-resource policy.
+Win32 binding belongs to the executable that owns the relevant HANDLE,
+Console, thread or teardown: `run16`, `basesrv` or `ntvdm`. Original code
+stays in its original mirror even when several executables link it. The
+BaseSrv service IDL, protocol implementation and client library are
+`basesrv`-owned; `run16` and `ntvdm` may link that library but do not own a
+parallel protocol. The only shared product data is the small, stateless
+`product-abi`/`package` surface for version identity and package layout.
+
+`opennt-abi/host-compat` is the sole exception for a same-shaped historical
+host ABI needed by multiple executable owners. Its README must name the
+original contract, its finite public-Win32/NTDLL binding and all consumers.
+It may not contain broker policy, worker/session state, guest pointers or a
+general-purpose helper collection. Shared records are copied, versioned data,
+never session, Console or native-resource policy.
 
 ## Interactive failure policy
 
@@ -311,7 +325,7 @@ cross-process identity, shared DLL or generic compatibility policy.
 
 `mvdm-tools` has no inbound production-runtime edge at all.
 `mvdm-softpc-firmware` has no host
-compile or link edge; `app` stages an explicitly admitted, manifest-selected
+compile or link edge; `ntvdm` stages an explicitly admitted, manifest-selected
 immutable firmware input to the selected backend's source-shaped binding.
 
 ## Guest and host width model
@@ -347,7 +361,7 @@ using source, build, resource and artifact lineage. Parallel edition roots and
 undocumented per-file hybrids are forbidden.
 
 The two guest mirrors are load-only. Their C, assembly, objects and libraries
-never satisfy a host symbol. `app` selects immutable products through a
+never satisfy a host symbol. `ntvdm` selects immutable products through a
 guest-image manifest and loads bytes through the selected backend binding; subsequent
 communication is only BOP, interrupts, ports and guest-memory contracts.
 

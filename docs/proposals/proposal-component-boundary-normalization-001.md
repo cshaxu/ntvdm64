@@ -33,6 +33,24 @@ artifacts are build outputs. Product identity remains in the shared fixed-width
 `product-abi` contract. Native handles, worker session pointers and guest
 pointers never enter that boundary.
 
+## Cross-executable code rule
+
+"Shared" is a linkage fact, not a reason to create a fourth generic runtime
+component.  Each such source item has one semantic owner and may be linked into
+more than one executable only through that owner's narrow static library:
+
+| Kind | Final owner and use |
+| --- | --- |
+| Original OpenNT/MVDM algorithm | Its existing file in `mvdm` or `opennt-host`; each consumer links the selected original-owner library. |
+| BaseSrv protocol, client stubs and copied wire records | `basesrv`; `run16` and `ntvdm` may link its versioned client library, but cannot own a second protocol implementation. |
+| Process-local Win32 operation | The one executable whose process owns the HANDLE, Console, thread or lifetime: `run16`, `basesrv`, or `ntvdm`. |
+| Same-shaped unavailable historical host ABI needed by several owners | `opennt-abi/host-compat`, only when its README names the original declaration, finite public-Win32/NTDLL binding and consumers. It is a host-ABI compatibility island, not a `common` utility layer. |
+| Product version and package/media constants | Stateless `product-abi` and `product-package` only. |
+
+Thus no new `win32api`, `common`, or generic compatibility root is admitted.
+Duplicated wrappers are removed or moved to the owner above; a function that
+only happens to call Win32 does not become shared merely for build convenience.
+
 ## Required source placement
 
 - Move a binding out of `adapter-*` only when exactly one executable owns all
@@ -79,14 +97,15 @@ original entry's standalone pre-init explicit and private. Preserve lease,
 CCPU, Console, native-child teardown, Redirector, VDD, WOW and debugger
 boundaries without turning them into mirror code.
 
-### S5 — three-program build and runtime closure
+### S5 — three-program build, shared-boundary and runtime closure
 
 Regenerate the formal x86 graph using only final component roots. Prove no live
 `adapter-*`/`session`/legacy-broker source or archive edge remains, then run
 version checks, broker death/pending command, COMMAND/MEM, nested COMMAND,
 EDIT keyboard/mouse and EDIT-exit→MEM. Publish only a tested package to
-`O:\winnt`; report mirror diff, adapter deletion, relocation and retained
-boundary counts separately.
+`O:\winnt`; prove the cross-executable rule by source/include/link sweep;
+report mirror diff, adapter deletion, relocation and retained boundary counts
+separately.
 
 ## Stop conditions and acceptance
 

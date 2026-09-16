@@ -6,14 +6,12 @@
 src/
   mvdm/
   opennt-host/
-  mvdm-platform-abi/
-  opennt-host/base/win32/winnls/fontsup/system/
-  adapter-mvdm-host-in/
-  adapter-mvdm-host-out/
-  adapter-opennt-host/
-  session/
-  broker/
-  app/
+  opennt-abi/host-compat/
+  product-abi/
+  product-package/
+  run16/
+  basesrv/
+  ntvdm/
 ```
 
 `mvdm/` is the one canonical physical selected-OpenNT `base/mvdm` tree: its
@@ -33,18 +31,20 @@ or runtime input.
 
 ## Executable-owned transition
 
-T418 converges project-owned code onto `src/run16/`, `src/basesrv/` and
-`src/ntvdm/`, each producing exactly its named executable. During the staged
-move, existing `app`, `session`, `broker` and adapter paths are retained only
-to preserve behavior and provide a reviewed source-move history; they are not
-generic new-code destinations. `session` is worker-local implementation and
-therefore moves into `ntvdm`; broker service transport moves into `basesrv`.
+T418 has moved project-owned runtime code to `src/run16/`, `src/basesrv/` and
+`src/ntvdm/`, each producing exactly its named executable.  Retained
+`app`/adapter directory READMEs are archival move markers, never production
+source roots or destinations. `session` is worker-local implementation inside
+`ntvdm`; broker service transport is inside `basesrv`.
 
 Do not create a shared Win32 helper root. Place a Win32 binding in the one
-executable that owns its process-local resource, or in an already declared
-historical adapter family. The sole shared product component is a small
-stateless `product-abi`/`package` surface for version/package constants.
-`basesrv` owns its service IDL and the copied, versioned broker protocol.
+executable that owns its process-local resource. Original code remains in its
+mirror even when several EXEs link it; BaseSrv protocol/client code remains
+`basesrv`-owned even when both clients link it. Only a named, same-shaped
+historical host ABI whose finite public-Win32/NTDLL binding is recorded may
+live in `opennt-abi/host-compat`. The stateless shared product surface is
+limited to `product-abi`/`product-package`; `basesrv` owns the service IDL and
+copied, versioned broker protocol. There is no `common` or `win32api` root.
 
 ## Machine-profile selection
 
@@ -79,10 +79,12 @@ historical record is evidence, not a selectable configuration.
 - `mvdm/vdmutils` is an independent original tool and never a main-program
   library. `mvdm/softpc.new/{bios,roms,data}` remains immutable firmware input,
   not a host-runtime library or a second machine. Executable
-  `mvdm/softpc.new/base/{bios,keymouse}` remains host-selected; `app` selects
+  `mvdm/softpc.new/base/{bios,keymouse}` remains host-selected; `ntvdm` selects
   immutable inputs through its admitted composition binding.
-- `mvdm-platform-abi` contains exact declarations outside MVDM required by
-  those packages; it has no implementation.
+- `opennt-abi/host-compat` contains only the named, same-shaped historical
+  host ABI declarations and finite public-Win32/NTDLL bindings that are used
+  by more than one executable. It owns no broker wire policy, session state or
+  guest state.
 - NTVDMx64-derived declarations or missing-provider fallbacks are provenance-
   registered adapter/ABI inputs, never a mirror component. They may not add a
   file below `mvdm` or `opennt-host`; a mirror change is permitted only in an
@@ -90,20 +92,11 @@ historical record is evidence, not a selectable configuration.
 - `mvdm/dos/v86`, `mvdm/bin86` and `mvdm/wow16` are load-only selected guest
   carries; `opennt-host/base/win32/winnls/fontsup/system` is the separately sourced load-only Win16 font
   carry. None implies an unselected external source-universe import.
-- `adapter-mvdm-host-in` contains only its declared selector-blind typed
-  machine-event boundary. `adapter-mvdm-host-out` contains the named same-shaped historical
-  interface families `win32`, `softpc`, `monitor`, `redir`, `wow`, `vdd` and
-  `debugger`; a missing historical product interface is assigned to one of
-  those families before a mirror source is changed to avoid it.
-- `adapter-opennt-host` contains only the same-shaped package-private host
-  interface family required by each owning `opennt-host` package. Its source
-  subdirectories identify that original owner package. It cannot be used by
-  `mvdm-host` directly or become a generic compatibility root.
-- `session` contains neutral per-instance lifetime, mappings, resources,
-  events and teardown.
-- `broker` contains the versioned IPC client/server contract and per-user
-  cross-process coordination state.
-- `app` contains CLI admission and final wiring.
+- `run16` owns discovery, CreateProcess-style admission and parent waiting.
+  `basesrv` owns authenticated endpoint/transport and the original-record
+  assembly. `ntvdm` owns its worker-local session, machine bindings, Console,
+  redirector, VDD, WOW and debugger bindings. Their code is not made shared by
+  naming it Win32 compatibility.
 
 Historical MVDM build tools such as `tools16`, `bin86`, `convert` and
 `dat2obj` belong under `tools/opennt`, not `src/`.

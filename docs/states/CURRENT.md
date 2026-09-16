@@ -2,29 +2,14 @@
 
 ## Current Work
 
-## Active Packet
+## Intermission
 
-**Active: M0 T418 S4** — ntvdm worker-local reorganization
-(Ordinary Mode).
-
-| Field | Record |
-| --- | --- |
-| Identifier Mode | M0 T418 S4, Ordinary Mode. |
-| Admission And Approval | Initial owner admission: “批准收口当前的T任务，准入下一个任务并开始执行。” Revised owner admission: “修改任务目标和proposal…更新proposal并重新准入本任务。” |
-| Candidate Proposal | [Three-program component normalization and adapter retirement](../proposals/proposal-component-boundary-normalization-001.md). |
-| Objective | Move worker-local session, guest-memory lease and worker-only adapter families into `src/ntvdm` as one closure, retaining the original worker entry and all mirror boundaries. |
-| Non-goals | No BaseSrv policy rewrite; no reusable shared session service; no modern RPC/Console/ABI move into either mirror; no generic `common` component; no WOW completion claim. |
-| Reference Baseline | T417 closure `3bb6d9e79`; S5 relationship audit; formal x86 graph `build/M0-T417/S4/formal-x86-003`; current x86 package at `O:\winnt`. |
-| Files And ABI Surface | Worker-local source moves into `src/ntvdm/{session,command,softpc,monitor,redir,vdd,debugger,wow,win32}` and the narrow cross-EXE declaration/RTL binding in `src/opennt-abi/host-compat`; consumers/tests/generator lists move with their owner. No public wire or product ABI change. |
-| Applicable Rules | docs/README, EXECUTION, ARCHITECTURE, CODING, DOCUMENT, CONTRIBUTING and source-policy; strict no-new-mirror-file and original-owner recovery ladder. |
-| Verification | Include/build-list sweep before and after each move; fresh x86 graph/maps; CCPU, C-VID and original-memory fixtures; original-server lifecycle, Console membership, service-client and protocol/death fixtures; full COMMAND/MEM/EDIT/nested-COMMAND runtime remains the S5 gate. |
-| Expected Markers | Every service source has `basesrv` ownership; every worker binding has `ntvdm` ownership; the generated graph selects no legacy adapter source; `srvvdm.c` remains in the mirror; `opennt-abi/host-compat` has no broker or guest state; no move changes protocol, resource, Console, path or wait semantics. |
-| Asset Needs | Current selected OpenNT/MVDM sources, formal generator, broker lifecycle fixtures and local `O:\winnt` runtime package. |
-| Reporting Requirements | Record source/archive/link/symbol edges; report deleted versus relocated code, final ownership, mirror diffs, retained adapter boundaries and every result/limitation. |
-| Stop Conditions | Any observed change to protocol/version rejection, RPC authentication, Console membership, resource/receipt ownership, broker death, ABI layout, build failure or regression pauses the move for a source-level ownership decision. |
-| Exit Criteria | Live service code has final ownership, old selected source paths are gone, and fresh x86 build/service fixtures prove unchanged behavior before S4. |
-| Original Owner Request | “修改任务目标和proposal…先完成包括旧 broker archive 删除在内的精简清理工作，再进行这种‘一个组件对应一个 EXE’的无行为变化重组，并用三程序回归验证。” |
-| Similar-Issue Sweep | All product, fixture and generator link lists; archive symbols; direct and indirect source includes; broker transport versus local-plane callers; stale documentation references. |
+**No active M/T/S packet.** M0 T418 closed after its final x86 three-program
+build, original-owner fixtures, automatic COMMAND→MEM→EDIT→MEM ConPTY run and
+separate broker/worker/launcher-loss matrix. See the
+[T418 closure](../history/m0-t418-three-program-component-normalization-closure.md)
+and [S5 evidence](../etc/evidence/m0-t418-s5-three-program-final-closure.md).
+The ordered [Queue](QUEUE.md) is the sole authority for the next admission.
 
 ## S1 Closure Record
 
@@ -85,8 +70,9 @@ and [T416 closure](../history/m0-t416-footprint-cleanup-closure.md).
 ## Current Technical Baseline
 
 - The source baseline selects formal x86 `/MT` run16.exe, basesrv.exe and
-  ntvdm.exe with original CCPU40, APP_VERSION 0.0.416 and protocol 3. The
-  deployed O:\winnt package is the verified T416 formal product.
+  ntvdm.exe with original CCPU40, APP_VERSION 0.0.418 and protocol 3. The
+  deployed O:\winnt package is the verified T418 formal product from
+  `build/M0-T418/S5/formal-x86-002`.
 - Original vglob.c supplies all 38 getter/setter pairs through original typed
   declarations. The registered seven-line header seam retains original full
   vector layout; autonomous field rebinding and 20 conversion wrappers remain
@@ -105,8 +91,8 @@ and [T416 closure](../history/m0-t416-footprint-cleanup-closure.md).
 - Final paired MVDM mirror distance is 4,621 versus S1's 4,695; OpenNT-host
   remains 14,410. Overlay cohorts remain 266 and 30 physical lines; the raw
   adapter-mvdm-host-out inventory falls 10,219 to 9,719 lines.
-- Build roots: build/M0-T416/S5/formal-x86-002 and integration; runtime logs
-  only O:\winnt\logs.
+- Build roots: `build/M0-T418/S5/formal-x86-002`; runtime logs only
+  `O:\winnt\logs`.
   Owner Terminal/RDP visual acceptance remains separate.
 
 ## Delivery References
@@ -123,14 +109,14 @@ and [T416 closure](../history/m0-t416-footprint-cleanup-closure.md).
 
 ## Next Work
 
-[Queue](QUEUE.md) remains the sole ordering authority.  T417's owner-reviewed
-follow-up is the first candidate: [component-boundary normalization and legacy
-broker retirement](../proposals/proposal-component-boundary-normalization-001.md).
-It does not admit a new numeric T until the owner chooses it.
+[Queue](QUEUE.md) remains the sole ordering authority. T418 is closed; its
+former proposal is retained as closure provenance, not as a candidate. The
+queue head receives a numeric T only on the owner's next admission.
 
 ## Recent M0 Closures
 
 | T416 | [Footprint cleanup](../history/m0-t416-footprint-cleanup-closure.md) | S1--S5 reduced paired MVDM mirror distance by 74 lines and raw adapter inventory by 500 lines; final x86 package and runtime matrix passed. |
+| T418 | [Three-program component normalization](../history/m0-t418-three-program-component-normalization-closure.md) | S1--S5 retired generic production roots, finalized the cross-EXE ownership rule, and passed fresh x86, ConPTY and failure-lifecycle acceptance. |
 | T417 | [Private component elimination](../history/m0-t417-private-component-elimination-closure.md) | Retired all three private roots under the no-new-mirror-file rule and produced the separately queued component-boundary plan. |
 | T415 | [Final MVDM-root elimination](../history/m0-t415-final-mvdm-root-elimination-closure.md) | 42 exact WinNLS fonts and two exact `v86/util` blobs moved to upstream paths; printer carrier moved to private overlay; formal x86 three-program graph passed. |
 | T414 | [Canonical MVDM tree](../history/m0-t414-canonical-mvdm-tree-closure.md) | 4,615 original MVDM blobs physically recomposed at `src/mvdm`; private overlay is adjacent and separate; formal x86/focused checks passed. |

@@ -1199,11 +1199,11 @@ $graph.Add('default original-softpc-candidate')
         sha256 = Get-NodeSha256 $hostEntryResourceSource
         buildDisposition = 'selected-original-resource-source; compiled unchanged per host-width row'
     }
-    adapterSoftpcSources = @($adapterSoftpcNames)
-    adapterRedirectorSources = @($adapterRedirNames)
+    ntvdmSoftpcSources = @($adapterSoftpcNames)
+    ntvdmRedirectorSources = @($adapterRedirNames)
     productPackageSources = @($productPackageNames)
-    sessionSources = @($sessionNames)
-    adapterWin32Sources = @($adapterWin32Names)
+    ntvdmSessionSources = @($sessionNames)
+    ntvdmWin32Sources = @($adapterWin32Names)
     openntRtlX86Sources = @($openntRtlX86Names)
     openntRtlSources = @($openntRtlNames)
     openntBaseVdmSources = @($openntBaseVdmNames)
@@ -1212,7 +1212,7 @@ $graph.Add('default original-softpc-candidate')
     brokerComposition = [ordered]@{
         target = 'basesrv.exe'
         selected = ($Architecture -eq 'x86')
-        disposition = 'explicit build-only S3 WIP; authenticated registration/first-VDM; commands and publication pending'
+        disposition = 'selected x86 product broker; authenticated registration, command delivery and bounded death handling verified'
         sources = @('src/basesrv/main.c', 'src/basesrv/transport/service.idl' | ForEach-Object {
             [ordered]@{ path = $_; sha256 = Get-NodeSha256 (Join-Path $root $_) }
         })
@@ -1221,7 +1221,7 @@ $graph.Add('default original-softpc-candidate')
     launcherComposition = [ordered]@{
         target = 'run16.exe'
         selected = ($Architecture -eq 'x86')
-        disposition = 'explicit build-only S3 work in progress; native branch only; no publication'
+        disposition = 'selected x86 product launcher; broker startup, worker registration and parent completion verified'
         sources = @('src/run16/main.c', 'src/run16/console_probe.c', 'src/opennt-abi/host-compat/opennt_support_rtl.c' | ForEach-Object {
             [ordered]@{ path = $_; sha256 = Get-NodeSha256 (Join-Path $root $_) }
         })
