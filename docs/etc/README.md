@@ -4,6 +4,7 @@
 | --- | --- | --- | --- |
 | [T417 S1 private-component ownership freeze](evidence/m0-t417-s1-private-component-ownership-freeze.md) | M0 T417 S1 | Complete production-edge, original-owner and relocation/deletion disposition for the three private component roots. | Superseded by T417 phased implementation closure. |
 | [T417 S2 SoftPC patch-boundary recovery](evidence/m0-t417-s2-softpc-patch-boundary-recovery.md) | M0 T417 S2 | Retires the private patch root, records the strict mirror boundary, and proves fresh x86 three-program compilation plus CCPU fixture. | Retain through T417 closure. |
+| [T417 S3--S4 overlay owner recovery](evidence/m0-t417-s3-s4-overlay-owner-recovery.md) | M0 T417 S3--S4 | Retires both remaining overlay roots, records each owner disposition, strict no-new-mirror-file rule and x86 verification. | Retain through T417 closure. |
 | [T416 S4 COMMAND observer retirement](evidence/m0-t416-s4-command-observer-retirement.md) | M0 T416 S4 | First verified removal cohort of default-off COMMAND observers. | Superseded by S4 closure evidence. |
 | [T416 S3 overlay composition disposition](evidence/m0-t416-s3-overlay-composition-disposition.md) | M0 T416 S3 | Source-first disposition of every private MVDM/OpenNT-host overlay carrier and its canonical C-VID verifier repair. | Retain through T416 closure. |
 | [T416 S2 WOW command carrier](evidence/m0-t416-s2-wow-command-carrier-restoration.md) | M0 T416 S2 | Source-first removal and x86 verification of the unreachable WOW session fallback. | Retain through T416 closure. |

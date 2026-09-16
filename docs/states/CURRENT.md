@@ -4,25 +4,25 @@
 
 ## Active Packet
 
-**Active: M0 T417 S3** — MVDM overlay owner recovery
+**Active: M0 T417 S5** — project-component relationship audit
 (Ordinary Mode).
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T417 S3, Ordinary Mode. |
+| Identifier Mode | M0 T417 S5, Ordinary Mode. |
 | Admission And Approval | Owner: “准入执行”; admits Queue candidate 1. |
 | Candidate Proposal | [Mirror-private component elimination and project-component reorganization](../proposals/proposal-retire-mvdm-softpc-patch-001.md). |
-| Objective | Retire each MVDM overlay body using only a bounded adapter/ABI carrier or a minimal diff in its existing original mirror owner; neither mirror may gain a new file. |
-| Non-goals | No OpenNT-host overlay move, adapter reorganization, new behavior, runtime-policy change, WOW/WRITE claim, or changes to the owner-edited Queue/proposal. |
+| Objective | Produce the proposal-required non-mutating relationship audit for app, broker, session and every adapter family, with each production interface, state owner, lifecycle owner and build direction recorded. |
+| Non-goals | No unreviewed component reorganization, new behavior, runtime-policy change, WOW/WRITE claim, or changes to the owner-edited Queue/proposal. |
 | Reference Baseline | T416 closure `0c0f3232c`; canonical `src/mvdm` topology; the owner-edited Queue/proposal candidate; current x86 CCPU40 package at `O:\winnt`. |
-| Files And ABI Surface | MVDM overlay bodies and their original mirror callers, bounded adapter/ABI bindings, formal build manifest and CCPU/C-VID/printer verification. No public product ABI change. |
+| Files And ABI Surface | app, broker, session and adapter family source/build interfaces. No public product ABI change. |
 | Applicable Rules | docs/README, EXECUTION, ARCHITECTURE, CODING, DOCUMENT, CONTRIBUTING and source-policy; original-source recovery ladder is mandatory for every disposition. |
-| Verification | Fresh formal Win32/x86 graph; original-owner/caller review; CCPU/C-VID/printer fixtures; COMMAND/MEM/EDIT regression; formal root and diff checks. |
-| Expected Markers | Each retired overlay has a direct existing-mirror diff or named adapter/ABI carrier, single ownership, and no new file under either mirror. |
+| Verification | Read-only caller/callee, public-interface, state/lifecycle-owner and build/link-direction audit; a separately queued reorganization proposal if changes are warranted. |
+| Expected Markers | Every cross-component interface has one owner and direction; any needed reorganization has a safe destination, ABI migration and test matrix, not an unreviewed source move. |
 | Asset Needs | Current checkout, T416 formal graph, pinned OpenNT/OpenNT-4.5 comparison trees, and retained NTVDMx64 provenance only where its registered patch exception applies. |
-| Reporting Requirements | Record per-overlay deleted/relocated lines, original owner, selected carrier, and focused regression evidence. |
-| Stop Conditions | A move adds a mirror file, changes single-state ownership or guest behavior, or has no finite adapter/ABI boundary. |
-| Exit Criteria | `mvdm-overlay` is absent, all retained behavior has one valid owner under the strict mirror rule, and focused/formal regressions pass. |
+| Reporting Requirements | Record each interface, caller, callee, process boundary, state/lifecycle owner, original-source owner, build direction and any proposed migration. |
+| Stop Conditions | A proposed move changes ABI, state ownership, lifetime or guest behavior without separate admission. |
+| Exit Criteria | Relationship audit and separately reviewable reorganization proposal are complete; no source reorganization is silently implemented. |
 | Original Owner Request | “以减少 mvdm和opennt-host相对原始opennt代码的diff为目标（包括他们的overlay甚至adapter），同时保证架构合理、不破坏当前已经实现跑通的部分.” and “准入执行”. |
 | Similar-Issue Sweep | Product and focused generator roots, include ordering, generated formal manifest, audit scripts, MVDM divergence register and every stale live-root reference. |
 
@@ -39,6 +39,18 @@ S2 P2 `c59b1008a` removes the unreachable session-based WOW fallback and
 restores original missing-`-a` handling; the source proof, original lifecycle
 fixture and fresh x86 formal graph are recorded in the
 [WOW command-carrier evidence](../etc/evidence/m0-t416-s2-wow-command-carrier-restoration.md).
+
+## T417 S3--S4 Closure Record
+
+S3--S4 remove `mvdm-overlay` and `opennt-host-overlay` under the strict
+mirror rule: no new file was added to either mirror.  Existing original owners
+now carry the bounded local state/EOI/BaseSrv changes; the generated C-VID
+binder and kernel-monitor printer subset are named adapters.  The redundant
+SAS facade was deleted after the fresh link proved the original C-VID owner
+already exports it.  Fresh x86 graph, affected-owner compilation, three
+product artifacts, CCPU fixture, C-VID contract, root-elimination and
+documentation-governance checks are recorded in the
+[S3--S4 evidence](../etc/evidence/m0-t417-s3-s4-overlay-owner-recovery.md).
 
 ## S3 Closure Record
 

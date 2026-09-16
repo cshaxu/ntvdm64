@@ -62,7 +62,6 @@ if (!(Test-Path -LiteralPath $vs -PathType Leaf) -or !(Get-Command ninja -ErrorA
 }
 
 $ccpuRoot = Join-Path $root 'src/mvdm/softpc.new/base/ccpu386'
-$ccpuOverlayRoot = Join-Path $root 'src/mvdm-overlay/softpc.new/base/ccpu386'
 $biosRoot = Join-Path $root 'src/mvdm/softpc.new/base/bios'
 $keymouseRoot = Join-Path $root 'src/mvdm/softpc.new/base/keymouse'
 $systemRoot = Join-Path $root 'src/mvdm/softpc.new/base/system'
@@ -70,10 +69,6 @@ $disksRoot = Join-Path $root 'src/mvdm/softpc.new/base/disks'
 $supportRoot = Join-Path $root 'src/mvdm/softpc.new/base/support'
 $videoRoot = Join-Path $root 'src/mvdm/softpc.new/base/video'
 $cvidcRoot = Join-Path $root 'src/mvdm/softpc.new/base/cvidc'
-$gdpOverlayRoot = Join-Path $root 'src/mvdm-overlay/softpc.new/base/cvidc'
-$umbOverlayRoot = Join-Path $root 'src/mvdm-overlay/softpc.new/host/src'
-$commandOverlayRoot = Join-Path $root 'src/mvdm-overlay/dos/command'
-$demOverlayRoot = Join-Path $root 'src/mvdm-overlay/dos/dem'
 $commsRoot = Join-Path $root 'src/mvdm/softpc.new/base/comms'
 $dosRoot = Join-Path $root 'src/mvdm/softpc.new/base/dos'
 $demRoot = Join-Path $root 'src/mvdm/dos/dem'
@@ -86,7 +81,6 @@ $openntRtlRoot = Join-Path $root 'src/opennt-host/base/ntos/rtl'
 $openntRtlX86Root = Join-Path $root 'src/opennt-host/base/ntos/rtl/x86'
 $xmsRoot = Join-Path $root 'src/mvdm/xms.486'
 $dpmiRoot = Join-Path $root 'src/mvdm/dpmi32'
-$xmsOverlayRoot = Join-Path $root 'src/mvdm-overlay/xms.486'
 $suballocRoot = Join-Path $root 'src/mvdm/suballoc'
 $oemuniRoot = Join-Path $root 'src/mvdm/oemuni'
 $sessionRoot = Join-Path $root 'src/session'
@@ -109,7 +103,7 @@ $softpcSymbolCompat = Join-Path $root 'src/adapter-mvdm-host-out/softpc/include/
 $appRoot = Join-Path $root 'src/app'
 $adapterBaseSrvRoot = Join-Path $root 'src/adapter-mvdm-host-out/basesrv/source'
 $adapterMonitorRoot = Join-Path $root 'src/adapter-mvdm-host-out/monitor/source'
-$kernelVdmPrinterSource = Join-Path $root 'src/mvdm-overlay/v86/monitor/i386/monitor_printer.c'
+$kernelVdmPrinterSource = Join-Path $adapterMonitorRoot 'monitor_printer.c'
 $adapterRedirRoot = Join-Path $root 'src/adapter-mvdm-host-out/redir'
 $adapterVddRoot = Join-Path $root 'src/adapter-mvdm-host-out/vdd'
 $ccpuFallbackSource = Join-Path $adapterSoftpcRoot 'mvdm_softpc_ccpu_fallback.c'
@@ -155,8 +149,6 @@ $ccpuNames = @($ccpuNames | Where-Object { $_ -ne 'ntstubs.c' })
 # vglob's CCPU-local GDP profile is not the selected C-VID layout. Compile
 # the identical shared original below with the C-VID header/profile instead.
 $ccpuNames = @($ccpuNames + 'localfm.c') | Select-Object -Unique
-$ccpuOverlayNames = @('localfm.c')
-$ccpuSasFacadeSource = Join-Path $ccpuOverlayRoot 'sas_overwrite_memory.c'
 $biosNames = Get-OriginalSources $biosManifest
 $keymouseNames = Get-OriginalSources $keymouseManifest
 $systemNames = Get-OriginalSources $systemManifest
@@ -209,8 +201,6 @@ $dpmiNames = @((Get-OriginalSources $dpmiManifest) + 'dpmimemr.c' + 'dpmimscr.c'
 # missing adapter symbols, rather than selecting their original owner.
 $suballocNames = @(Get-OriginalSources $suballocManifest)
 $oemuniNames = @(Get-OriginalSources $oemuniManifest)
-$xmsOverlayNames = @()
-$demOverlayNames = @()
 $sessionNames = @('guest_memory_lease.c', 'session.c')
 $brokerNames = @('broker.c', 'wire.c', 'base_vdm_record.c')
 # `trace_file` belongs to the selected SoftPC base debug implementation.  The
@@ -271,10 +261,6 @@ $effectiveAddressObject = 'obj/adapter-softpc/mvdm_softpc_effective_address.obj'
 foreach ($name in $ccpuNames) {
     if (!(Test-Path -LiteralPath (Join-Path $ccpuRoot $name))) { throw "Original CCPU source missing: $name" }
 }
-foreach ($name in $ccpuOverlayNames) {
-    if (!(Test-Path -LiteralPath (Join-Path $ccpuOverlayRoot $name))) { throw "Required CCPU private overlay missing: $name" }
-}
-if (!(Test-Path -LiteralPath $ccpuSasFacadeSource)) { throw "Required CCPU SAS facade missing: $ccpuSasFacadeSource" }
 foreach ($name in $biosNames) {
     if (!(Test-Path -LiteralPath (Join-Path $biosRoot $name))) { throw "Original SoftPC BIOS source missing: $name" }
 }
@@ -319,12 +305,6 @@ foreach ($name in $suballocNames) {
 }
 foreach ($name in $oemuniNames) {
     if (!(Test-Path -LiteralPath (Join-Path $oemuniRoot $name))) { throw "Original MVDM OEM/Unicode support source missing: $name" }
-}
-foreach ($name in $xmsOverlayNames) {
-    if (!(Test-Path -LiteralPath (Join-Path $xmsOverlayRoot $name))) { throw "MVDM XMS private overlay source missing: $name" }
-}
-foreach ($name in $demOverlayNames) {
-    if (!(Test-Path -LiteralPath (Join-Path $demOverlayRoot $name))) { throw "MVDM DEM private overlay source missing: $name" }
 }
 foreach ($name in $sessionNames) {
     if (!(Test-Path -LiteralPath (Join-Path $sessionRoot $name))) { throw "Required session source missing: $name" }
@@ -456,8 +436,6 @@ foreach ($romSource in $embeddedRomSources) {
 }
 [IO.File]::WriteAllText($embeddedRomResourceSource, $embeddedRomResource,
     [Text.Encoding]::ASCII)
-if (!(Test-Path -LiteralPath $gdpOverlayRoot -PathType Container)) { throw "GDP overlay root missing: $gdpOverlayRoot" }
-if (!(Test-Path -LiteralPath $umbOverlayRoot -PathType Container)) { throw "UMB overlay root missing: $umbOverlayRoot" }
 if ([string]::IsNullOrWhiteSpace($NodeExecutable)) { $NodeExecutable = $env:MVDM_NODE22 }
 if ([string]::IsNullOrWhiteSpace($NodeExecutable) -or !(Test-Path -LiteralPath $NodeExecutable -PathType Leaf)) {
     throw 'Node 22 is required for the GDP slot generator; pass -NodeExecutable or set MVDM_NODE22.'
@@ -529,10 +507,6 @@ $includeRootPaths = @(
     # Original sas.h includes generated sas4gen.h. The selected mirror retains
     # the CVIDC generated carrier; the historical host/genPg output is absent.
     'src/mvdm/softpc.new/base/cvidc',
-    'src/mvdm-overlay/softpc.new/base/cvidc',
-    'src/mvdm-overlay/softpc.new/host/src',
-    'src/mvdm-overlay/dos/command',
-    'src/mvdm-overlay/dos/dem',
     'src/mvdm/dos/dem',
     'src/mvdm/softpc.new/base/inc',
     'src/adapter-mvdm-host-out/softpc/include',
@@ -699,16 +673,12 @@ $graph.Add('  command = link.exe /nologo /out:$out $in kernel32.lib user32.lib n
 
 $ccpuObjects = foreach ($name in $ccpuNames) {
     $object = 'obj/ccpu/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
-    # CCPU itself owns `Sas`; the original localfm state carrier also declares
-    # it.  The narrow overlay retains only this profile's original Gdp/Cpu/
-    # Video state declarations and avoids a second SAS owner.
-    $source = if ($name -in $ccpuOverlayNames) { Join-Path $ccpuOverlayRoot $name } else { Join-Path $ccpuRoot $name }
+    # Existing localfm.c retains this profile's original Gdp/Cpu/Video state
+    # declarations while omitting the already-owned Sas vector.
+    $source = Join-Path $ccpuRoot $name
 $graph.Add('build ' + $object + ': cc ' + (NinjaPath $source))
     $object
 }
-$ccpuSasFacadeObject = 'obj/ccpu/sas_overwrite_memory.obj'
-$graph.Add('build ' + $ccpuSasFacadeObject + ': cc ' + (NinjaPath $ccpuSasFacadeSource))
-$ccpuObjects += $ccpuSasFacadeObject
 $biosObjects = foreach ($name in $biosNames) {
     $object = 'obj/bios/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
 $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $biosRoot $name)))
@@ -777,7 +747,7 @@ $cvidcObjects = foreach ($name in $cvidcNames) {
     $graph.Add('build ' + $object + ': ' + $rule + ' ' + (NinjaPath (Join-Path $cvidcRoot $name)))
     $object
 }
-$cvidcVectorBindingSource = Join-Path $gdpOverlayRoot 'mvdm_cvidc_vector_binding.c'
+$cvidcVectorBindingSource = Join-Path $adapterSoftpcRoot 'mvdm_cvidc_vector_binding.c'
 $cvidcCpuBindingInclude = Join-Path $build 'generated/cvidc_cpu_binding.inc'
 $cvidcCpuBindingGenerator = Join-Path $root 'tools/build/GenerateCvidcCpuBinding.mjs'
 & $NodeExecutable $cvidcCpuBindingGenerator $cvidcCpuBindingInclude (Split-Path $cvidcRoot -Parent)
@@ -818,11 +788,6 @@ $demObjects = foreach ($name in $demNames) {
     $graph.Add('  cflags = ' + $baseFlags + ' /DWIN_32 /DDEVL')
     $object
 }
-$demOverlayObjects = foreach ($name in $demOverlayNames) {
-    $object = 'obj/dem/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
-    $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $demOverlayRoot $name)))
-    $object
-}
 $commandObjects = foreach ($name in $commandNames) {
     $object = 'obj/command/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $commandRoot $name)))
@@ -839,11 +804,6 @@ $xmsObjects = foreach ($name in $xmsNames) {
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $xmsRoot $name)))
     # Exact original XMS manifest `C_DEFINES=-DWIN_32`.
     $graph.Add('  cflags = ' + $baseFlags + ' /DWIN_32')
-    $object
-}
-$xmsOverlayObjects = foreach ($name in $xmsOverlayNames) {
-    $object = 'obj/xms/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
-    $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $xmsOverlayRoot $name)))
     $object
 }
 $dpmiObjects = foreach ($name in $dpmiNames) {
@@ -918,9 +878,6 @@ $graph.Add('build ' + $object + ': cc_host ' + (NinjaPath (Join-Path $hostRoot $
     }
     $object
 }
-$eoiOverlaySource = Join-Path $umbOverlayRoot 'mvdm_ica_eoi_bridge.c'
-$graph.Add('build obj/host/mvdm_ica_eoi_bridge.obj: cc ' + (NinjaPath $eoiOverlaySource))
-$hostObjects += 'obj/host/mvdm_ica_eoi_bridge.obj'
 # Focused host fixtures exercise the original CPU/host bodies with their own
 # test main.  Keep that archive identical except for the product's original
 # ntvdm.c process entry; it is neither a second worker entry nor a substitute
@@ -1153,10 +1110,10 @@ $graph.Add('build original-softpc-video.lib: lib ' + ($videoObjects -join ' '))
 $graph.Add('build original-softpc-cvidc.lib: lib ' + ($cvidcObjects -join ' '))
 $graph.Add('build original-softpc-comms.lib: lib ' + ($commsObjects -join ' '))
 $graph.Add('build original-softpc-dos.lib: lib ' + ($dosObjects -join ' '))
-$graph.Add('build original-mvdm-dem.lib: lib ' + (($demObjects + $demOverlayObjects) -join ' '))
+$graph.Add('build original-mvdm-dem.lib: lib ' + ($demObjects -join ' '))
 $graph.Add('build original-mvdm-command.lib: lib ' + ($commandObjects -join ' '))
 $graph.Add('build original-mvdm-redir.lib: lib ' + ($redirObjects -join ' '))
-$graph.Add('build original-mvdm-xms.lib: lib ' + (($xmsObjects + $xmsOverlayObjects) -join ' '))
+$graph.Add('build original-mvdm-xms.lib: lib ' + ($xmsObjects -join ' '))
 $graph.Add('build original-mvdm-dpmi32.lib: lib ' + ($dpmiObjects -join ' '))
 $graph.Add('build original-mvdm-host-suballoc.lib: lib ' + ($suballocObjects -join ' '))
 $graph.Add('build original-mvdm-host-oemuni.lib: lib ' + ($oemuniObjects -join ' '))
@@ -1220,8 +1177,7 @@ $graph.Add('default original-softpc-candidate')
     originalHostManifest = 'src/mvdm/softpc.new/host/src/sources'
     ccpuSourceCount = @($ccpuNames).Count
     ccpuSources = @($ccpuNames)
-    ccpuPrivateOverlaySources = @($ccpuOverlayNames)
-    ccpuSasFacadeSource = 'src/mvdm-overlay/softpc.new/base/ccpu386/sas_overwrite_memory.c'
+    privateComponentSources = @()
     biosSources = @($biosNames)
     keymouseSources = @($keymouseNames)
     systemSources = @($systemNames)
@@ -1241,8 +1197,7 @@ $graph.Add('default original-softpc-candidate')
     redirectorSources = @($redirNames)
     xmsSources = @($xmsNames)
     dpmiSources = @($dpmiNames)
-    xmsPrivateOverlaySources = @($xmsOverlayNames)
-    demPrivateOverlaySources = @($demOverlayNames)
+    privateOverlaySources = @()
     suballocSources = @($suballocNames)
     oemuniSources = @($oemuniNames)
     baseDebugSources = @($baseDebugNames)

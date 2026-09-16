@@ -1266,15 +1266,40 @@ BaseSrvCheckDOS(
 }
 
 
-/* DIVERGENCE(OPENNT-HOST-031): retain the existing standalone wait query
- * behind the mirror's public boundary; its body is mirror-private overlay. */
+/* DIVERGENCE(OPENNT-HOST-031): CheckDOS readiness alone does not prove a
+ * pending GetNextVDMCommand wait.  The original record and lock remain the
+ * sole state owners. */
 BOOL
 BaseSrvDOSWorkerWaitPending(
     IN HANDLE ConsoleHandle,
     OUT PBOOL ConsoleRecordExists
     )
 {
-#include "opennt-host-overlay/base/win32/server/dos_worker_wait.inc"
+    NTSTATUS Status;
+    PCONSOLERECORD pConsoleRecord;
+    EVENT_BASIC_INFORMATION EventInformation;
+    BOOL Pending = FALSE;
+
+    if (!ConsoleRecordExists)
+        return FALSE;
+    *ConsoleRecordExists = FALSE;
+
+    Status = RtlEnterCriticalSection(&BaseSrvDOSCriticalSection);
+    ASSERT(NT_SUCCESS(Status));
+    Status = BaseSrvGetConsoleRecord(ConsoleHandle,&pConsoleRecord);
+    if (NT_SUCCESS(Status)) {
+        *ConsoleRecordExists = TRUE;
+        if (pConsoleRecord->hWaitForVDMDup) {
+            Status = NtQueryEvent(pConsoleRecord->hWaitForVDMDup,
+                                  EventBasicInformation,
+                                  &EventInformation,
+                                  sizeof(EventInformation),
+                                  NULL);
+            Pending = NT_SUCCESS(Status) && !EventInformation.EventState;
+        }
+    }
+    RtlLeaveCriticalSection(&BaseSrvDOSCriticalSection);
+    return Pending;
 }
 
 

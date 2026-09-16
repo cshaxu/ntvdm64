@@ -15,7 +15,7 @@ if(process.argv.includes('--collect')){
  fs.writeFileSync(path.join(out,'short-consumers.json'),JSON.stringify(result,null,2));
  console.log(JSON.stringify(result,null,2));process.exit(0);
 }
-const mirror='src/mvdm-host/softpc.new';
+const mirror='src/mvdm/softpc.new';
 const hash=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
 function git(args){const r=spawnSync(process.env.AUDIT_GIT||'git.exe',args,{encoding:'utf8',maxBuffer:32*1024*1024});if(r.error)throw r.error;if(r.status>1)throw Error(r.stderr);return r.stdout;}
 const census={};
@@ -38,8 +38,7 @@ for(const p of pairs){
  if(!offset)throw Error(`No generated offset for ${p.name}`);
  p.offset=+offset[1];
 }
-const overlayNames=['ccpu386/localfm.c','ccpu386/sas_overwrite_memory.c','cvidc/mvdm_cvidc_vector_binding.c','cvidc/mvdm_cvidc_vector_binding.h'];
-const overlays=overlayNames.map(n=>({file:n,lines:read('src/mvdm-host-overlay/softpc.new/base/'+n).trimEnd().split('\n').length}));
+const overlays=[];
 const diagnosticRestore=['c_xfer.c','call.c','intx.c','iret.c','jmp.c','ret.c','sti.c'];
 const report={baseline:git(['rev-parse','HEAD']).trim(),upstream,census,pairs,overlays,
  diagnosticRestore:census.ccpu386.rows.filter(x=>diagnosticRestore.includes(x.file)),

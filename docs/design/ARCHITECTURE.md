@@ -27,21 +27,15 @@ recognisably comparable with its selected upstream source.  A successful build
 does not justify absorbing an original package into adapters or replacing its
 control flow with newly authored code.
 
-Each original mirror may have one private paired `*-overlay` implementation
-root.  That root is not an additional architectural component or a generic
-compatibility layer: it is part of its matching mirror's implementation and is
-compiled into that mirror's library only.  The mirror is the overlay's sole
-caller and linker.  Adapters and project components call the mirror's original
-or explicitly registered public boundary; they never call an overlay.
-
 Consequently, an imported translation unit retains its selected upstream path,
 name, data layout, function shape, original algorithm and failure order.  A
 small changed include, declaration binding or one-line hook stays in the mirror
-with a local `DIVERGENCE:` marker.  A material added mechanism is implemented
-in the paired overlay and reached through the smallest possible hook.  If a
-file would cease to be a byte-exact upstream file, true subset, or same-shaped
-minimal modification, it is not admitted as a mirror file.  The mirror README
-is the index of every crop, modified expression, hook and overlay binding.
+with a local `DIVERGENCE:` marker.  A material added mechanism belongs in its
+named adapter/ABI family.  No file may be added below `mvdm` or `opennt-host`:
+if a file would cease to be a byte-exact upstream file, true subset, or
+same-shaped minimal modification in an existing file, it is not admitted as a
+mirror file.  The mirror README is the index of every crop and modified
+expression.
 
 ## Package-first recovery boundary
 
@@ -338,9 +332,10 @@ guest-image manifest and loads bytes through the selected backend binding; subse
 communication is only BOP, interrupts, ports and guest-memory contracts.
 
 Every mirror file is exact upstream, a registered true subset, or a registered
-same-shaped minimal modification. A changed expression carries `DIVERGENCE:`
-and a README register row. A material added implementation belongs in the
-matching private `*-overlay`; only that mirror may call its overlay.
+same-shaped minimal modification in an existing upstream-relative file. A
+changed expression carries `DIVERGENCE:` and a README register row. A material
+added implementation belongs in a named adapter/ABI family; neither mirror may
+gain a file.
 
 Existing project-owned component code is an audited recovery source, not
 discarded work. Before authoring a replacement, a packet reviews applicable

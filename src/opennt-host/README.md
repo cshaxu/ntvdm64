@@ -1,13 +1,12 @@
 # opennt-host
 
-T412 S10 registers OPENNT-HOST-031: the existing standalone
-BaseSrvDOSWorkerWaitPending query in base/win32/server/srvvdm.c is not original
-OpenNT source. Its unchanged body now lives in the matching private
-[overlay](../opennt-host-overlay/README.md); only srvvdm.c includes that fragment.
-The function remains the mirror's public boundary and keeps the original DOS
-lock/record/event query. The S2 byte-identical srvvdm.c statement below is
-historical, superseded by this registered standalone extension. There is no
-new task state machine or behavioral change in this relocation.
+T417 S4 registers OPENNT-HOST-031: the existing standalone
+BaseSrvDOSWorkerWaitPending query in `base/win32/server/srvvdm.c` is not
+original OpenNT source. It is a minimal registered divergence in its existing
+original BaseSrv owner: the body keeps the original DOS lock, record and event
+as the sole state owners, and adds no task state machine or transport policy.
+The former private fragment has been retired; strict mirror policy forbids
+adding a new file for this small owner-local correction.
 
 This is the original non-MVDM OpenNT host-service mirror. It contains only
 complete source-audited packages used by a selected MVDM caller. It is not an

@@ -7,8 +7,8 @@ logical dependency vocabulary without splitting original source for builds or
 visual comparison.
 
 1. The production source owners are exactly the canonical physical `mvdm`
-   tree (with manifest-declared host, guest, tool and firmware slices), its
-   private `mvdm-overlay`, `opennt-host`, `mvdm-softpc-patch`,
+   tree (with manifest-declared host, guest, tool and firmware slices),
+   `opennt-host`,
    `mvdm-platform-abi`, the exact OpenNT WinNLS font mirror under
    `opennt-host/base/win32/winnls/fontsup/system`,
    `adapter-mvdm-host-in`, `adapter-mvdm-host-out`, `session`, `broker`,
@@ -125,8 +125,8 @@ visual comparison.
     edition roots and undocumented file-level hybrids are forbidden.
 20. Recovery order is mandatory: audit an applicable project-owned current or
     quarantined owner candidate; directly composable original source; the
-    smallest same-shaped adapter/build seam; a registered mirror-private
-    overlay or external-code intrusion; newly authored behavior only when no
+    smallest same-shaped adapter/build seam; a registered external-code
+    intrusion; newly authored behavior only when no
     usable source remains. A candidate may be selectively copied only after
     per-file provenance, owner, dependency, behavior and test review; no whole
     component tree may be revived by default. Convenience and trace order do
@@ -134,9 +134,10 @@ visual comparison.
 21. Every mirror file is exact upstream, a registered true subset, or a
     registered same-shaped minimal modification. Every changed imported
     expression carries `DIVERGENCE:` and a component README register entry.
-22. A material added body belongs in the matching `*-overlay`. An overlay is
-    private to its mirror, exposes no public ABI and may not be called,
-    included or linked by another component or fixture.
+22. A material added body belongs in the named adapter/ABI family that owns
+    its unavailable modern boundary. Neither `mvdm` nor `opennt-host` may gain
+    a file; an existing mirror file may change only when it owns the original
+    logic.
 23. Do not introduce generic `compat`, `common`, `adapter-host` or
     `adapter-common` roots. A new specialist adapter requires a complete
     original owner-package and ABI audit plus explicit admission.
@@ -166,17 +167,13 @@ visual comparison.
     as a host provider; `app` may stage its immutable inputs only through the
     selected machine backend. Executable `softpc.new/base/*` source packages
     belong to `mvdm-host`, not the firmware component.
-30. A `*-overlay` is a private implementation partition of its matching
-    original mirror, not an additional generic source component.  It compiles
-    into that mirror's library only; the matching mirror is its sole caller
-    and linker.  Adapters, `session`, `broker`, `app`, fixtures and every other
-    mirror must use the mirror boundary, never an overlay boundary.
-31. Mirror similarity is a release property.  An original package may not be
+30. Mirror similarity is a release property.  An original package may not be
     relocated into an adapter or replaced by autonomous code merely to reach a
     build.  Retain upstream path/name/control structure in the mirror; use a
-    registered local `DIVERGENCE:` hook only for a minimal binding, and move
-    any material added mechanism to the paired overlay.
-32. NTVDMx64-derived declarations or missing-provider fallbacks must have a
+    registered local `DIVERGENCE:` hook only for a minimal binding. A material
+    added mechanism belongs in a named adapter/ABI family, never a mirror
+    overlay.
+31. NTVDMx64-derived declarations or missing-provider fallbacks must have a
     register row identifying their caller/interface shape, provenance, reason,
     x86/x64 disposition, mapping-manager use and removal condition. They live
     in the named adapter/ABI family, never as a mirror component or a new file

@@ -5,7 +5,6 @@
 ```text
 src/
   mvdm/
-  mvdm-overlay/
   opennt-host/
   mvdm-platform-abi/
   opennt-host/base/win32/winnls/fontsup/system/
@@ -19,11 +18,12 @@ src/
 
 `mvdm/` is the one canonical physical selected-OpenNT `base/mvdm` tree: its
 host, guest, tool and firmware slices retain their upstream-relative paths and
-their manifest-declared build roles. `mvdm-overlay/` is its private non-original
-partner and is excluded from direct original-tree comparison. The remaining
+their manifest-declared build roles. It has no private implementation partner:
+strict mirror policy permits a change only in an existing original owner file.
+The remaining
 `opennt-host/base/win32/winnls/fontsup/system/` carries the exact selected
 OpenNT font files, which are not under `base/mvdm`. The extracted printer
-carrier is private `mvdm-overlay` material, not a second original root.
+carrier is named monitor-adapter material, not a second original root.
 One physical tree may generate several libraries; a path move does not create
 a link edge. Production roots contain production inputs only; tests and
 examples stay under `tests/`; historical source comparison stays in the
@@ -154,15 +154,14 @@ and closes its own local references under the original lifetime contract.
 Process discovery is cooperative registration with leases, not arbitrary
 process enumeration. Console handles use a separate local binding.
 
-## Mirror and overlay practice
+## Strict mirror practice
 
 An imported production file is exact upstream, a true subset, or a
-same-shaped minimal modification. Each crop or changed expression is marked
-`DIVERGENCE:` and indexed in the component README. If more than half the
-retained source differs, or an inserted semantic body needs more than three
-executable lines, move that implementation to the matching private
-`*-overlay` and leave the smallest registered call boundary. Only the matching
-mirror may call or link its overlay.
+same-shaped minimal modification in an existing upstream-relative file. Each
+crop or changed expression is marked `DIVERGENCE:` and indexed in the component
+README. A proposed new mirror file, material added mechanism, or body that
+would cease to be a small owner-local correction belongs in its named adapter
+or ABI family; it may not be placed in a private overlay.
 
 
 ## Build layout

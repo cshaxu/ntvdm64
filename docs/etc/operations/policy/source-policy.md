@@ -69,8 +69,8 @@ Kernel VDM state machine or provider policy. A missing interface must first
 be traced to its original owner and audited for reuse, not replaced by an
 invented state machine. Any unavoidable non-original binding requires a
 documented unavailable boundary and the smallest registered divergence;
-moving autonomous replacement logic into a mirror or overlay does not make
-it an original implementation.
+moving autonomous replacement logic into a mirror does not make it an
+original implementation; private overlays are not production roots.
 
 The admission excludes kernel scheduling, process/thread-object internals,
 APC delivery, IDT/trap or fault installation, ring-0 V86 context switching,

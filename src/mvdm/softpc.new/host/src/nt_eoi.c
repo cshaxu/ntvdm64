@@ -36,9 +36,6 @@
 #include "nt_reset.h"
 #include "nt_eoi.h"
 #include <mvdm_softpc_termination.h>
-/* DIVERGENCE(MVDM-HOST-DIV-050): the vdmredir public wrapper retains the
- * original int* carrier, while the selected PIC contract is LONG*. */
-#include <mvdm_ica_eoi_bridge.h>
 
 // from monitor.lib
 HANDLE ThreadLookUp(PVOID);
@@ -431,7 +428,15 @@ VOID WaitIcaLockFullyInitialized(VOID)
 // Exported for vdmredir
 
 void SoftPcEoi(int Adapter, int* Line) {
-    mvdm_ica_eoi_bridge(Adapter, Line);
+    IS32 pic_line;
+
+    if (Line == 0) {
+        return;
+    }
+
+    pic_line = (IS32)*Line;
+    ica_eoi((IU32)Adapter, &pic_line, 0);
+    *Line = (int)pic_line;
 }
 
 

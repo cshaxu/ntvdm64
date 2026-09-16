@@ -12,7 +12,7 @@ $RepositoryRoot = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $openNt = 'O:\repos.external\OpenNT'
 $fontRoot = Join-Path $RepositoryRoot 'src/opennt-host/base/win32/winnls/fontsup/system'
 $utilRoot = Join-Path $RepositoryRoot 'src/mvdm/v86/util'
-$carrier = 'src/mvdm-overlay/v86/monitor/i386/monitor_printer.c'
+$carrier = 'src/adapter-mvdm-host-out/monitor/source/monitor_printer.c'
 $formerCarrier = 'src/mvdm-host/kernel-vdm/v86/monitor/i386/monitor_printer.c'
 
 function Get-Blob([string]$Path) {

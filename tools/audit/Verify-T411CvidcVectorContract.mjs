@@ -23,7 +23,7 @@ const privateSlots = listFromMetadata(metadata, 'CpuPrivateVectorNames');
 const generator = requireText(root, 'tools/build/GenerateCvidcCpuBinding.mjs',
   /CalcQuickEventInstTime:\s*'c_cpu_calc_q_ev_inst_for_time'/);
 const binder = requireText(root,
-  'src/mvdm-overlay/softpc.new/base/cvidc/mvdm_cvidc_vector_binding.c',
+  'src/adapter-mvdm-host-out/softpc/mvdm_cvidc_vector_binding.c',
   /Cpu\.Sas\s*=\s*&Sas[\s\S]*Sas\.Sas_overwrite_memory\s*=\s*c_sas_overwrite_memory[\s\S]*Cpu\.Video\s*=\s*\(IHP\)&Video/);
 const cvidAccess = requireText(root,
   'src/mvdm/softpc.new/base/cvidc/accessfn.c',

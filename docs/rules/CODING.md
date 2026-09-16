@@ -1,14 +1,14 @@
 # Coding Rules
 
 `mvdm-host` below is a logical host-slice name. Its selected original files
-live physically under `src/mvdm/`; the extracted printer carrier is private
-MVDM overlay material at `src/mvdm-overlay/v86/monitor/i386/`.
+live physically under `src/mvdm/`; the extracted printer carrier is named
+monitor-adapter material.
 
 ## Source-first implementation
 
 - Attempt and record recovery in this order: directly composable original
-  source; smallest same-shaped adapter/build shim; registered mirror overlay
-  or adopted-code intrusion; newly authored behavior as the last resort.
+  source; smallest same-shaped adapter/build shim; registered adopted-code
+  intrusion; newly authored behavior as the last resort.
 - Audit same-owner current and quarantined project code before authoring a new
   mechanic. Selectively reuse/copy only a per-file reviewed candidate that
   satisfies final component ownership, dependency direction and mirror rules;
@@ -29,8 +29,8 @@ MVDM overlay material at `src/mvdm-overlay/v86/monitor/i386/`.
   direct MVDM consumer and every excluded kernel dependency, and confine any
   adapter to the finite unavailable-kernel ABI rather than its state machine.
   A non-original extraction from an MVDM-owned monitor file, such as the
-  printer carrier, belongs in the matching private `mvdm-overlay` path and is
-  never represented as a Kernel VDM import.
+  printer carrier, belongs in the named monitor adapter and is never
+  represented as a Kernel VDM import.
 - Every project-defined replacement interface records the unavailable
   dependency, rejected earlier rungs, smallest new ABI, failure contract,
   focused test and disposition.
@@ -38,11 +38,10 @@ MVDM overlay material at `src/mvdm-overlay/v86/monitor/i386/`.
 ## Placement and dependencies
 
 - Place each production file in one of the architecture roots declared by the
-  architecture rules. `mvdm`, `mvdm-overlay` and `opennt-host` preserve
-  selected MVDM runtime (including its original support paths), private
-  MVDM carriers, and accepted non-MVDM OpenNT host package
-  topology respectively; package libraries do not create ad-hoc new source
-  owners.
+  architecture rules. `mvdm` and `opennt-host` preserve selected MVDM runtime
+  (including its original support paths) and accepted non-MVDM OpenNT host
+  package topology respectively; package libraries do not create ad-hoc new
+  source owners.
 - Individually provenance-registered NTVDMx64-derived declarations or missing
   providers belong to the named adapter/ABI family. They must not create a
   file below `mvdm` or `opennt-host`; an existing mirror file may change only
@@ -79,18 +78,13 @@ MVDM overlay material at `src/mvdm-overlay/v86/monitor/i386/`.
   Each changed expression has a local `DIVERGENCE:` explanation and README
   row identifying original purpose, reason and implementation.
 - If more than 50 percent of retained source/preprocessor/data lines differ,
-  the implementation is not a mirror file. Move it to the matching overlay
-  and retain the smallest registered call boundary.
+  the implementation is not a mirror file. Place it in the named adapter/ABI
+  family and retain only the smallest registered owner-local boundary.
 - If added semantics require more than three executable lines at an imported
-  insertion point, place the body in the matching private overlay.
-- A `*-overlay` is callable only by its matching mirror. It has no standalone
-  public ABI and cannot be linked directly by app, adapters, session, broker,
-  another mirror or tests.
-- Build a mirror and its private overlay as one owner library.  The overlay
-  may contain added mechanics but may not duplicate an imported algorithm,
-  become the provider selected by an adapter, or acquire a public header.
-  Preserve the smallest possible `DIVERGENCE:` hook in the original source;
-  the corresponding mirror README registers both the hook and overlay file.
+  insertion point, place the body in the named adapter/ABI family.
+- A mirror cannot acquire a private overlay or a new file. Preserve the
+  smallest possible `DIVERGENCE:` hook in the existing original source; the
+  corresponding mirror README registers the hook and its adapter boundary.
 - Keep upstream names and paths after re-rooting. Reference/example/test code
   stays outside production roots.
 
