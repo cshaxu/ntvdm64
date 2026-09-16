@@ -28,10 +28,12 @@
 
 ## S1 Closure Record
 
-S1 freezes all selected source/include/object/archive/link/caller edges and
-records an evidence-backed source-first disposition for every private body in
-the [private-component ownership freeze](../etc/evidence/m0-t417-s1-private-component-ownership-freeze.md).
-No runtime source changed.  S2 is the patch-root exit group.
+T418 S1 removes the unreachable 387-line local `broker.lib` registry plane and
+its two isolated fixtures after a source/export/link sweep and a fresh 506-step
+x86 graph build.  The live authenticated broker transport and mirrored BaseSrv
+owner remain selected.  The resulting source, graph and VDMREDIR RTL-closure
+proof is recorded in the [legacy broker archive removal evidence](../etc/evidence/m0-t418-s1-legacy-broker-archive-removal.md).
+S2 is the executable-owned product-ABI/run16 move group.
 
 ## S2 Closure Record
 

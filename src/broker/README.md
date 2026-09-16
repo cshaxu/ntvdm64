@@ -144,24 +144,13 @@ replay. The existing wire/user-key modules are not selected for this protocol.
 The native Base binding explicitly maps these operations to original APIs;
 full operation bodies and actual RPC endpoint composition remain pending.
 
-M0 T272 S5 disposition register:
-
-- `wire.c` and `wire.h`: `new neutral contract`.  There is no reusable
-  project-local broker source.  The fixed-size record deliberately excludes
-  native pointers, handles, local surrogate IDs and guest pointers.
-- `broker.c` and `broker.h`: `new neutral registry`.  It gives stable,
-  monotonic broker IDs, binds each client to an already-authenticated fixed
-  user key, and removes the record on disconnect.  A later transport must
-  authenticate the user key using public OS facilities before dispatch; it
-  cannot manufacture a cross-user route.
-- `base_vdm_record.c` and `base_vdm_record.h`: `new source-shaped record
-  boundary`. They are the fixed-width DOS subset of the original BaseClient /
-  BaseSrv `VDMINFO` exchange: copied request/result fields, same-record
-  pending/no-command state, and disconnect ownership. They deliberately omit
-  CSR capture buffers, raw `HANDLE`s, guest pointers and local mapping IDs.
-  The current state core is transport-neutral; `adapter-mvdm-host-out/basesrv`
-  is the only permitted original-call binding, and a later public pipe/event
-  transport may use this exact record contract.
+M0 T418 S1 retired the former `wire`, `broker` and `base_vdm_record` local
+registry plane.  It had no production caller and duplicated neither the live
+service transport nor the mirrored BaseSrv owner.  The selected broker surface
+is the versioned `vdm_message`/`vdm_values`/`vdm_startup` transport plus its
+authenticated receipt, delivery, Console-membership and RPC-security bindings.
+The service protocol is owned by `basesrv` in the executable-owned transition;
+it must not be revived here as a second local registry.
 
 `console_membership.h/.c` implement the finite modern Console observation
 mechanism selected by the T412 S1 Console design. NT4 Console HANDLE identity

@@ -2,6 +2,7 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T418 S1 legacy broker archive removal](evidence/m0-t418-s1-legacy-broker-archive-removal.md) | M0 T418 S1 | Proves and removes the unreachable 387-line local broker archive while retaining the live authenticated transport. | Retain through T418 closure. |
 | [T417 S1 private-component ownership freeze](evidence/m0-t417-s1-private-component-ownership-freeze.md) | M0 T417 S1 | Complete production-edge, original-owner and relocation/deletion disposition for the three private component roots. | Superseded by T417 phased implementation closure. |
 | [T417 S2 SoftPC patch-boundary recovery](evidence/m0-t417-s2-softpc-patch-boundary-recovery.md) | M0 T417 S2 | Retires the private patch root, records the strict mirror boundary, and proves fresh x86 three-program compilation plus CCPU fixture. | Retain through T417 closure. |
 | [T417 S3--S4 overlay owner recovery](evidence/m0-t417-s3-s4-overlay-owner-recovery.md) | M0 T417 S3--S4 | Retires both remaining overlay roots, records each owner disposition, strict no-new-mirror-file rule and x86 verification. | Retain through T417 closure. |
