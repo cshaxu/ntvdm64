@@ -37,6 +37,15 @@ S1 audits the complete original accessor profile and designs its restoration.
 
 ## Current Technical Baseline
 
+- S1 [audit and design](../etc/evidence/m0-t413-s1-accessor-layout-audit.md)
+  accounts for all 29 changed CCPU/C-VID files (506 diff-distance lines) and
+  125 overlay lines. All 38 original accessor pairs pass the x86 research
+  fixture; nine short-vector consumers have no evaluated vector-field uses.
+  The event-thread accessor route and shared-scratch corruption are identified.
+  Seven original-file restorations can remove 75 diagnostic lines; no product
+  changes or integration-fix acceptance are claimed. An independent IP-mask
+  regression is recorded outside the admitted instruction-algorithm scope.
+  S1 remains the active packet at audit delivery; no S2 implementation begun.
 - Published package: run16.exe, basesrv.exe and ntvdm.exe at `O:\winnt`;
   x86 /MT CCPU40, APP_VERSION 0.0.412, protocol 3.
 - S11 P3 `3af4aa001` fixes the blank-gap regression; four-size ConPTY, native

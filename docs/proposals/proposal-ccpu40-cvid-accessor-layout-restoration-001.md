@@ -29,8 +29,10 @@ Audit every selected consumer, not merely the faulting setter.
 - Full and five-slot VideoVector layouts, GDP/VGAGlobals field offsets,
   signed and pointer call types, initialization and actual link-map ownership.
 - Shared scratch-register/ring preservation and precise caller/thread/reentry
-  ownership. The recorded corruption implicates accessor interference but does
-  not yet prove its full scheduling cause.
+  ownership. The [S1 audit](../etc/evidence/m0-t413-s1-accessor-layout-audit.md)
+  identifies the original Console event-thread route into shared generated
+  accessor scratch and proves direct original C accessors preserve that scratch.
+  Real repaired-product stress remains an integration gate.
 - Mirror, overlay, adapter and build composition together. Prefer unchanged
   original translation units; then the smallest source-shaped binding. Record
   every retained exception and measure actual additions/removals separately.
@@ -55,6 +57,11 @@ scope, not an instruction-level fix selected from a trace.
    live resize, mouse and the 17 command regressions. Preserve failure evidence.
    Publish verified products, record exact hashes and source footprint, commit,
    push and leave a clean worktree for owner confirmation.
+
+The audit's seven observation-only original-file restorations form one
+75-line cleanup group with regression verification, not seven separate tasks.
+The additional instruction-IP masking finding is explicitly outside this
+profile; recording it does not admit an instruction-algorithm implementation.
 
 ## Gates and boundaries
 
