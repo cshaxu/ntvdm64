@@ -4,27 +4,27 @@
 
 ## Active Packet
 
-**Active: M0 T416 S4** — Retire default-off MVDM diagnostic carriers
+**Active: M0 T416 S5** — Integrated footprint-cleanup verification
 (Ordinary Mode).
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T416 S4, Ordinary Mode. |
-| Admission And Approval | Sequential execution under the owner's T416 approval; S3 concludes the overlay disposition without invented relocation. |
+| Identifier Mode | M0 T416 S5, Ordinary Mode. |
+| Admission And Approval | Sequential execution under the owner's T416 approval; S4 completes the bounded COMMAND-observer retirement. |
 | Candidate Proposal | [Mirror, overlay and adapter footprint cleanup](../proposals/proposal-mirror-overlay-footprint-cleanup-001.md). |
-| Objective | Remove the S1-identified default-off COMMAND diagnostic calls and their recorder-only adapter support, restoring original MVDM control flow without changing MVDM functional carriers. |
-| Non-goals | No removal of functional termination/lifecycle support, EOI/keyboard diagnostics, overlay relocation, Console behavior change, broker policy change or WOW/WRITE recovery. |
+| Objective | Rebuild the three-program x86 CCPU40 package and verify that S1--S4 reductions preserve the accepted COMMAND, nested COMMAND, MEM, EDIT, broker and affected CCPU/C-VID behavior; quantify final mirror, overlay and adapter-autonomous reductions. |
+| Non-goals | No new functional repair, overlay relocation, Console behavior change, broker policy change or claim of complete WOW/WRITE compatibility. |
 | Reference Baseline | S1 P1 `2031f14de`, S2 P2 `c59b1008a`, S3 overlay disposition, original `cmddisp.c`/`cmdmisc.c` and adapter termination recorder. |
-| Files And ABI Surface | Original MVDM diagnostic hook call sites, recorder declarations/definitions and tests/evidence only; no product ABI addition. |
+| Files And ABI Surface | Formal build graph, existing focused fixtures, evidence and status only; no product ABI addition. |
 | Applicable Rules | docs/README, EXECUTION, ARCHITECTURE, CODING, DOCUMENT, source-policy and CONTRIBUTING. |
-| Verification | Original hunk comparison, complete symbol/caller/build sweep before and after, focused original lifecycle/CCPU contracts and formal x86 build when changed sources are selected. |
-| Expected Markers | Each deleted recorder symbol has no callers/build input; original COMMAND/EOI control structures remain except deleted observation calls. |
-| Asset Needs | Pinned OpenNT source, current adapter termination recorder, formal graph and focused fixtures; no external download. |
-| Reporting Requirements | Separate mirror-diff, adapter-autonomous and diagnostic-code deletion counts; name all retained functional recorder APIs. |
-| Stop Conditions | A recorder call gates behavior, a remaining caller needs retained storage, an original function diverges beyond the diagnosed call, or a focused regression appears. |
-| Exit Criteria | Complete default-off diagnostic family removed or each non-removable member proved; no dead declaration/definition/build edge remains and evidence is indexed. |
+| Verification | Fresh MSVC x86 /MT CCPU40 formal build; COMMAND/MEM/nested COMMAND, EDIT keyboard/mouse and post-EDIT MEM fixtures; broker behavior; affected IP/exception/C-VID fixtures; exact S1 metric recomputation; diff, link and governance checks. |
+| Expected Markers | Three EXEs link from one formal x86 graph; every required fixture has a recorded result; metric accounting distinguishes deletion from relocation and records retained seams. |
+| Asset Needs | Pinned OpenNT source, formal graph, existing fixtures and O:\winnt runtime package; no external download. |
+| Reporting Requirements | Separate final mirror-diff, overlay and adapter-autonomous reductions; name retained functional seams and every unavailable visual/runtime check. |
+| Stop Conditions | A fresh build or required regression fails, a runtime result demands a new semantic repair, metrics cannot be reproduced, or deployment would overwrite a running package. |
+| Exit Criteria | All required checks have passed or have an evidence-backed limitation, metrics are recomputed, final diff is reviewed, products are staged only after formal success, and the T closure record is ready. |
 | Original Owner Request | “以减少 mvdm和opennt-host相对原始opennt代码的diff为目标（包括overlay，甚至adapter的精简），同时保证架构合理、不破坏当前已经实现跑通的部分？” and “准入执行！” |
-| Similar-Issue Sweep | COMMAND dispatch, command-environment/stub/return reports, child report-path capture/restore, and every COMMAND-family recorder caller. |
+| Similar-Issue Sweep | All S1--S4 changed call paths, retained diagnostic selectors, emitted artifacts, package deployment state and metric cohorts. |
 
 ## S1 Closure Record
 
@@ -45,6 +45,14 @@ fixture and fresh x86 formal graph are recorded in the
 S3 updates the canonical C-VID contract verifier and concludes that no private
 overlay body can be safely deleted or relocated; the source/caller/build proof
 is in the [overlay composition disposition](../etc/evidence/m0-t416-s3-overlay-composition-disposition.md).
+
+## S4 Closure Record
+
+S4 removes all eight COMMAND-only default-off recorders, their continuation
+report selector and tool/test acceptance. The retained child-selector restore
+seam supports other diagnostics and is not a COMMAND recorder. The source
+sweep, original hunk review and focused x86 CCPU40 compilation are recorded in
+the [COMMAND observer retirement evidence](../etc/evidence/m0-t416-s4-command-observer-retirement.md).
 
 ## Current Technical Baseline
 

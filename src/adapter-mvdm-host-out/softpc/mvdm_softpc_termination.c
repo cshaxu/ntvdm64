@@ -11,12 +11,6 @@
 
 #include "mvdm_guest_location.h"
 
-/* Original CPU40 query; its nonzero result means 20-bit wrapping is active
- * (therefore A20 is off).  This observer never changes that state. */
-extern int c_sas_twenty_bit_wrapping_enabled(void);
-extern unsigned short c_getMSW(void);
-extern unsigned int c_getDS_BASE(void);
-extern unsigned int c_getDS_LIMIT(void);
 /* Original host close is idempotent: it rejects both pre-start and repeated
  * calls.  Direct standalone termination otherwise longjmps around the normal
  * original `host_main -> host_applClose` tail. */
@@ -24,7 +18,6 @@ extern void host_applClose(void);
 
 static __declspec(thread) const char *mvdm_softpc_termination_origin =
     "unattributed";
-static char mvdm_softpc_command_continuation_report_path[MAX_PATH];
 static char mvdm_softpc_bop_return_report_path[MAX_PATH];
 static char mvdm_softpc_dpmi_publication_report_path[MAX_PATH];
 static char mvdm_softpc_cpu_return_report_path[MAX_PATH];
@@ -98,19 +91,6 @@ static void mvdm_softpc_write_captured_report(const char *report_path,
 void mvdm_softpc_capture_command_continuation_report_path(void)
 {
     DWORD bytes;
-
-    /* DIVERGENCE(APP-DIV-015): original cmdenv.c copies inherited variables
-     * into the guest DOS environment.  A host-only observation selector must
-     * be captured before original startup and then removed, rather than
-     * becoming a new guest/environment allocation input. */
-    mvdm_softpc_command_continuation_report_path[0] = '\0';
-    bytes = GetEnvironmentVariableA("MVDM_COMMAND_CONTINUATION_REPORT_PATH",
-        mvdm_softpc_command_continuation_report_path,
-        (DWORD)sizeof(mvdm_softpc_command_continuation_report_path));
-    (void)SetEnvironmentVariableA("MVDM_COMMAND_CONTINUATION_REPORT_PATH",
-        NULL);
-    if (bytes == 0u || bytes >= sizeof(mvdm_softpc_command_continuation_report_path))
-        mvdm_softpc_command_continuation_report_path[0] = '\0';
 
     /* RETF records are host-only scalar observations.  Capture the shared
      * BOP/return report selector before cmdenv.c snapshots inherited values,
@@ -1455,227 +1435,6 @@ void mvdm_softpc_record_dpmi_interrupt_registration(unsigned int vector,
         (DWORD)formatted);
 }
 
-
-void mvdm_softpc_record_command_environment(unsigned int stage,
-    unsigned int guest_es, unsigned int guest_bx, unsigned int guest_ax,
-    unsigned int guest_cf, unsigned int guest_ds, unsigned int guest_ss,
-    unsigned int guest_sp)
-{
-    enum {
-        mvdm_command_envsiz_offset = 0x203cu,
-        mvdm_command_ressiz_offset = 0x0592u,
-        mvdm_dos_mcb_size_offset = 0x0003u
-    };
-    mvdm_guest_location environment_size_location;
-    mvdm_guest_location resident_size_location;
-    mvdm_guest_location mcb_size_location;
-    char message[128];
-    unsigned int cpu_ds_base;
-    unsigned int cpu_ds_limit;
-    unsigned int cpu_msw;
-    uint16_t environment_size;
-    uint16_t resident_size;
-    uint16_t mcb_size;
-    int formatted;
-
-    /* Reuse the captured-and-scrubbed path: unlike the generic BOP report
-     * selector, this diagnostic can never be copied into the initial DOS
-     * environment by original cmdenv.c. */
-    if (mvdm_softpc_command_continuation_report_path[0] == '\0')
-        return;
-    formatted = snprintf(message, sizeof(message),
-        "MVDM-CMD-ENV svc=0F stage=%u es=%04X bx=%04X ax=%04X cf=%u ds=%04X ss=%04X sp=%04X\r\n",
-        stage, guest_es & 0xffffu, guest_bx & 0xffffu,
-        guest_ax & 0xffffu, guest_cf ? 1u : 0u, guest_ds & 0xffffu,
-        guest_ss & 0xffffu, guest_sp & 0xffffu);
-    if (formatted <= 0 || (size_t)formatted >= sizeof(message))
-        return;
-    {
-        HANDLE report = CreateFileA(mvdm_softpc_command_continuation_report_path,
-            FILE_APPEND_DATA, FILE_SHARE_READ, NULL, OPEN_ALWAYS,
-            FILE_ATTRIBUTE_NORMAL, NULL);
-        DWORD written;
-        if (report == INVALID_HANDLE_VALUE)
-            return;
-        (void)WriteFile(report, message, (DWORD)formatted, &written, NULL);
-        CloseHandle(report);
-    }
-    /* The unchanged guest immediately compares the returned BX with this
-     * selected-source scalar. Observe it only after the provider returns;
-     * this does not retain a guest alias or participate in the comparison. */
-    if (stage != 1u || !mvdm_guest_location_set_real_mode(
-            &environment_size_location, (uint16_t)guest_ds,
-            mvdm_command_envsiz_offset) ||
-        !mvdm_guest_location_read_u16(&environment_size_location,
-            &environment_size))
-        return;
-    formatted = snprintf(message, sizeof(message),
-        "MVDM-CMD-ENVSIZ ds=%04X value=%04X state=copied\r\n",
-        guest_ds & 0xffffu, (unsigned int)environment_size);
-    if (formatted <= 0 || (size_t)formatted >= sizeof(message))
-        return;
-    {
-        HANDLE report = CreateFileA(mvdm_softpc_command_continuation_report_path,
-            FILE_APPEND_DATA, FILE_SHARE_READ, NULL, OPEN_ALWAYS,
-            FILE_ATTRIBUTE_NORMAL, NULL);
-        DWORD written;
-        if (report == INVALID_HANDLE_VALUE)
-            return;
-        (void)WriteFile(report, message, (DWORD)formatted, &written, NULL);
-        CloseHandle(report);
-    }
-    /* CPU40 alone owns the hidden segment cache.  Copy its state after the
-     * unchanged table return so this default-off observer can establish
-     * whether the session real-mode lease names the same guest word. */
-    cpu_msw = (unsigned int)c_getMSW();
-    cpu_ds_base = (unsigned int)c_getDS_BASE();
-    cpu_ds_limit = (unsigned int)c_getDS_LIMIT();
-    formatted = snprintf(message, sizeof(message),
-        "MVDM-CMD-ENV-DS msw=%04X selector=%04X base=%08X limit=%08X expected-base=%08X state=copied\r\n",
-        cpu_msw & 0xffffu, guest_ds & 0xffffu, cpu_ds_base, cpu_ds_limit,
-        ((guest_ds & 0xffffu) << 4));
-    if (formatted <= 0 || (size_t)formatted >= sizeof(message))
-        return;
-    {
-        HANDLE report = CreateFileA(mvdm_softpc_command_continuation_report_path,
-            FILE_APPEND_DATA, FILE_SHARE_READ, NULL, OPEN_ALWAYS,
-            FILE_ATTRIBUTE_NORMAL, NULL);
-        DWORD written;
-        if (report == INVALID_HANDLE_VALUE)
-            return;
-        (void)WriteFile(report, message, (DWORD)formatted, &written, NULL);
-        CloseHandle(report);
-    }
-    /* ResSize is the original COMMAND input to AH=4Ah; the preceding MCB's
-     * size is the original NTDOS result.  Read both through bounded leases
-     * only, after the original environment-table return. */
-    if (guest_ds == 0u || !mvdm_guest_location_set_real_mode(
-            &resident_size_location, (uint16_t)guest_ds,
-            mvdm_command_ressiz_offset) ||
-        !mvdm_guest_location_read_u16(&resident_size_location, &resident_size) ||
-        !mvdm_guest_location_set_real_mode(&mcb_size_location,
-            (uint16_t)(guest_ds - 1u), mvdm_dos_mcb_size_offset) ||
-        !mvdm_guest_location_read_u16(&mcb_size_location, &mcb_size)) return;
-    formatted = snprintf(message, sizeof(message),
-        "MVDM-CMD-ARENA ds=%04X ressize=%04X mcb-size=%04X state=copied\r\n",
-        guest_ds & 0xffffu, (unsigned int)resident_size,
-        (unsigned int)mcb_size);
-    if (formatted <= 0 || (size_t)formatted >= sizeof(message))
-        return;
-    {
-        HANDLE report = CreateFileA(mvdm_softpc_command_continuation_report_path,
-            FILE_APPEND_DATA, FILE_SHARE_READ, NULL, OPEN_ALWAYS,
-            FILE_ATTRIBUTE_NORMAL, NULL);
-        DWORD written;
-        if (report == INVALID_HANDLE_VALUE)
-            return;
-        (void)WriteFile(report, message, (DWORD)formatted, &written, NULL);
-        CloseHandle(report);
-    }
-}
-
-void mvdm_softpc_record_command_stub_table(uint16_t guest_cs)
-{
-    static const uint16_t offsets[] = { 0x011cu, 0x0120u, 0x0124u };
-    static const char * const names[] = {
-        "TrnLodCom1", "LodCom", "MsgRetrv"
-    };
-    unsigned int index;
-    char message[256];
-    int formatted;
-    mvdm_guest_location entry;
-    mvdm_guest_location target;
-    mvdm_guest_location lodcom_target;
-    mvdm_guest_location_lease code_lease;
-    uint16_t com_in_hma_word = 0u;
-    uint16_t pdb_version = 0u;
-    unsigned int a20_wrap;
-
-    if (mvdm_softpc_command_continuation_report_path[0] == '\0')
-        return;
-    for (index = 0u; index < sizeof(offsets) / sizeof(offsets[0]); ++index) {
-        if (!mvdm_guest_location_set_real_mode(&entry, guest_cs,
-                offsets[index]) || !mvdm_guest_location_read_far(&entry,
-                &target))
-            return;
-        if (index == 1u)
-            lodcom_target = target;
-        formatted = snprintf(message, sizeof(message),
-            "MVDM-CMD-STUB name=%s entry=%04X:%04X target=%04X:%04X state=copied\r\n",
-            names[index], (unsigned int)guest_cs, (unsigned int)offsets[index],
-            (unsigned int)target.segment, (unsigned int)target.offset);
-        if (formatted <= 0 || (size_t)formatted >= sizeof(message)) return;
-        {
-            HANDLE report = CreateFileA(mvdm_softpc_command_continuation_report_path,
-                FILE_APPEND_DATA, FILE_SHARE_READ, NULL, OPEN_ALWAYS,
-                FILE_ATTRIBUTE_NORMAL, NULL);
-            DWORD written;
-            if (report == INVALID_HANDLE_VALUE) return;
-            (void)WriteFile(report, message, (DWORD)formatted, &written, NULL);
-            CloseHandle(report);
-        }
-    }
-    if (!mvdm_guest_location_set_real_mode(&entry, guest_cs, 0x0134u) ||
-        !mvdm_guest_location_read_u16(&entry, &com_in_hma_word)) return;
-    a20_wrap = c_sas_twenty_bit_wrapping_enabled() ? 1u : 0u;
-    formatted = snprintf(message, sizeof(message),
-        "MVDM-CMD-HMA cominhma=%u a20-wrap=%u state=copied\r\n",
-        (unsigned int)(com_in_hma_word & 0xffu), a20_wrap);
-    if (formatted <= 0 || (size_t)formatted >= sizeof(message)) return;
-    {
-        HANDLE report = CreateFileA(mvdm_softpc_command_continuation_report_path,
-            FILE_APPEND_DATA, FILE_SHARE_READ, NULL, OPEN_ALWAYS,
-            FILE_ATTRIBUTE_NORMAL, NULL);
-        DWORD written;
-        if (report == INVALID_HANDLE_VALUE) return;
-        (void)WriteFile(report, message, (DWORD)formatted, &written, NULL);
-        CloseHandle(report);
-    }
-
-    /* The unchanged COMMAND initialization immediately sets its PSP as the
-     * current DOS PDB, then INT 21h/AH=30h reads PDB_Version at PSP:0040.
-     * Record that source-defined scalar only; this observer neither creates
-     * nor modifies the PDB or the DOS return frame. */
-    if (!mvdm_guest_location_set_real_mode(&entry, guest_cs, 0x0040u) ||
-        !mvdm_guest_location_read_u16(&entry, &pdb_version)) return;
-    formatted = snprintf(message, sizeof(message),
-        "MVDM-CMD-PDB segment=%04X version=%04X expected=0005 state=copied\r\n",
-        (unsigned int)guest_cs, (unsigned int)pdb_version);
-    if (formatted <= 0 || (size_t)formatted >= sizeof(message)) return;
-    {
-        HANDLE report = CreateFileA(mvdm_softpc_command_continuation_report_path,
-            FILE_APPEND_DATA, FILE_SHARE_READ, NULL, OPEN_ALWAYS,
-            FILE_ATTRIBUTE_NORMAL, NULL);
-        DWORD written;
-        if (report == INVALID_HANDLE_VALUE) return;
-        (void)WriteFile(report, message, (DWORD)formatted, &written, NULL);
-        CloseHandle(report);
-    }
-
-    /* The far pointer itself is insufficient evidence: source immediately
-     * transfers through LodCom_Entry.  Copy its first instruction bytes via
-     * a bounded lease, so HMA mapping is verified without changing it. */
-    if (!mvdm_guest_location_acquire(&lodcom_target, 8u,
-            GUEST_MEMORY_ACCESS_READ,
-            &code_lease)) return;
-    formatted = snprintf(message, sizeof(message),
-        "MVDM-CMD-HMA-CODE target=%04X:%04X bytes=%02X %02X %02X %02X %02X %02X %02X %02X state=copied\r\n",
-        (unsigned int)lodcom_target.segment, (unsigned int)lodcom_target.offset,
-        code_lease.bytes[0], code_lease.bytes[1], code_lease.bytes[2],
-        code_lease.bytes[3], code_lease.bytes[4], code_lease.bytes[5],
-        code_lease.bytes[6], code_lease.bytes[7]);
-    if (!mvdm_guest_location_release(&code_lease, 0) || formatted <= 0 ||
-        (size_t)formatted >= sizeof(message)) return;
-    {
-        HANDLE report = CreateFileA(mvdm_softpc_command_continuation_report_path,
-            FILE_APPEND_DATA, FILE_SHARE_READ, NULL, OPEN_ALWAYS,
-            FILE_ATTRIBUTE_NORMAL, NULL);
-        DWORD written;
-        if (report == INVALID_HANDLE_VALUE) return;
-        (void)WriteFile(report, message, (DWORD)formatted, &written, NULL);
-        CloseHandle(report);
-    }
-}
 
 static void mvdm_softpc_record_dem_path(const char *environment_name,
     const char *record_name, uint16_t guest_ds, uint16_t guest_si,

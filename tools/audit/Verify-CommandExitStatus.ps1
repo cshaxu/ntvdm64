@@ -58,7 +58,7 @@ $matrix = @(
 foreach ($selected in $Cases) {
     if ($selected -notin $matrix.Name) { throw "Unknown case: $selected" }
 }
-$environmentNames = @('MVDM_BASESRV_TRACE_PATH','MVDM_NATIVE_CHILD_REPORT_PATH','MVDM_COMMAND_CONTINUATION_REPORT_PATH')
+$environmentNames = @('MVDM_BASESRV_TRACE_PATH','MVDM_NATIVE_CHILD_REPORT_PATH')
 $previous = @{}
 foreach ($name in $environmentNames) { $previous[$name]=[Environment]::GetEnvironmentVariable($name) }
 $results = @()

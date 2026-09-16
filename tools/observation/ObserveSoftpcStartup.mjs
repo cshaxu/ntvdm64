@@ -4,7 +4,7 @@ import { isAbsolute, relative, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 
 function usage() {
-  throw new Error('usage: node tools/observation/ObserveSoftpcStartup.mjs --launcher <observer.exe> --product <product.exe> --stage <runtime-dir> --report <result.txt> [--interactive | --interactive-script | --interactive-script-ver-only] [--product-command <declared-DOS-command>] [--observation-timeout-ms 10000..30000] [--minimal-host-environment] [--child-environment MVDM_SESSION_DISPOSE_REPORT_PATH=<absolute-path>|MVDM_COMMAND_CONTINUATION_REPORT_PATH=<absolute-path>|MVDM_DEM_OPEN_REPORT_PATH=<absolute-path>|MVDM_CONSOLE_PRESENTATION_REPORT_PATH=<absolute-path>]');
+  throw new Error('usage: node tools/observation/ObserveSoftpcStartup.mjs --launcher <observer.exe> --product <product.exe> --stage <runtime-dir> --report <result.txt> [--interactive | --interactive-script | --interactive-script-ver-only] [--product-command <declared-DOS-command>] [--observation-timeout-ms 10000..30000] [--minimal-host-environment] [--child-environment MVDM_SESSION_DISPOSE_REPORT_PATH=<absolute-path>|MVDM_DEM_OPEN_REPORT_PATH=<absolute-path>|MVDM_CONSOLE_PRESENTATION_REPORT_PATH=<absolute-path>]');
 }
 
 function sha256(path) {
@@ -88,7 +88,6 @@ let childEnvironment = undefined;
 if (options['child-environment'] !== undefined) {
   const names = [
     'MVDM_SESSION_DISPOSE_REPORT_PATH',
-    'MVDM_COMMAND_CONTINUATION_REPORT_PATH',
     'MVDM_NATIVE_CHILD_REPORT_PATH',
     /* An already-existing default-off original DEM observer. This records
      * only the source-owned path/scalar call boundary for fixed media. */
