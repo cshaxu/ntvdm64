@@ -118,5 +118,6 @@ proves the original `FSTI` continuation reaches BOP `FDh`.
 | [T404 S5 matching WOW32 provider build](evidence/m0-t404-s5-wow32-matching-provider-build-001.md) | M0 T404 S5 | Same-version x86 WOW32 build, parent import closure, staged hash, and public runtime frontier. | Retain while T404 remains active or its closure links it. |
 
 | [T413 S5 exception scope](evidence/m0-t413-s5-exception-scope.md) | M0 T413 S5 | Five upstream conditional-scope corrections and focused/native verification. | Retain with T413 closure. |
+| [T416 S5 integrated footprint verification](evidence/m0-t416-s5-integrated-footprint-verification.md) | M0 T416 S5 | Fresh x86 three-program, Console/ConPTY/CCPU verification and final separated footprint accounting. | Retain with T416 closure. |
 
 All other historical supporting material is in the [external documentation archive](../../artifacts/documentation-archive/20260910/strict-topology/).

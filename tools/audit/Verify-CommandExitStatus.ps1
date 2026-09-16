@@ -70,7 +70,6 @@ try {
         if (Test-Path -LiteralPath $report) { throw "Use a fresh log prefix: $report exists" }
         [Environment]::SetEnvironmentVariable($environmentNames[0],"$report.broker.log")
         [Environment]::SetEnvironmentVariable($environmentNames[1],"$report.child.log")
-        [Environment]::SetEnvironmentVariable($environmentNames[2],"$report.command.log")
         $arguments=@((Join-Path $PackageRoot 'run16.exe'),$PackageRoot,$report)
         if ($case.Args) { $arguments += $case.Args } else { $arguments += 'COMMAND.COM' }
         if ($case.Text) { $arguments += @('--observe-console-input-text',('"'+$case.Text+'"')) }
@@ -89,13 +88,6 @@ try {
             }
             if (($case.Text -or $case.Edit) -and $record -notmatch '(?m)^scripted-console-input=delivered') {
                 throw "Input not delivered: $($case.Name)"
-            }
-            if ($case.Name -notin @('direct-seven','worker-version-rejection')) {
-                $guestReport=Get-Content -LiteralPath "$report.command.log" -Raw
-                $returns=[regex]::Matches($guestReport,'MVDM-CMD-GUEST-RETURN code=([0-9A-F]+) first=0 repeat=0')
-                if (!$returns.Count -or [Convert]::ToUInt32($returns[$returns.Count-1].Groups[1].Value,16) -ne $actual) {
-                    throw "Guest/launcher result mismatch: $($case.Name)"
-                }
             }
             if ($case.Name -in @('native-seven','command-c-seven')) {
                 $native=Get-Content -LiteralPath "$report.child.log" -Raw

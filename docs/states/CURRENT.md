@@ -2,29 +2,11 @@
 
 ## Current Work
 
-## Active Packet
+## Intermission
 
-**Active: M0 T416 S5** — Integrated footprint-cleanup verification
-(Ordinary Mode).
-
-| Field | Record |
-| --- | --- |
-| Identifier Mode | M0 T416 S5, Ordinary Mode. |
-| Admission And Approval | Sequential execution under the owner's T416 approval; S4 completes the bounded COMMAND-observer retirement. |
-| Candidate Proposal | [Mirror, overlay and adapter footprint cleanup](../proposals/proposal-mirror-overlay-footprint-cleanup-001.md). |
-| Objective | Rebuild the three-program x86 CCPU40 package and verify that S1--S4 reductions preserve the accepted COMMAND, nested COMMAND, MEM, EDIT, broker and affected CCPU/C-VID behavior; quantify final mirror, overlay and adapter-autonomous reductions. |
-| Non-goals | No new functional repair, overlay relocation, Console behavior change, broker policy change or claim of complete WOW/WRITE compatibility. |
-| Reference Baseline | S1 P1 `2031f14de`, S2 P2 `c59b1008a`, S3 overlay disposition, original `cmddisp.c`/`cmdmisc.c` and adapter termination recorder. |
-| Files And ABI Surface | Formal build graph, existing focused fixtures, evidence and status only; no product ABI addition. |
-| Applicable Rules | docs/README, EXECUTION, ARCHITECTURE, CODING, DOCUMENT, source-policy and CONTRIBUTING. |
-| Verification | Fresh MSVC x86 /MT CCPU40 formal build; COMMAND/MEM/nested COMMAND, EDIT keyboard/mouse and post-EDIT MEM fixtures; broker behavior; affected IP/exception/C-VID fixtures; exact S1 metric recomputation; diff, link and governance checks. |
-| Expected Markers | Three EXEs link from one formal x86 graph; every required fixture has a recorded result; metric accounting distinguishes deletion from relocation and records retained seams. |
-| Asset Needs | Pinned OpenNT source, formal graph, existing fixtures and O:\winnt runtime package; no external download. |
-| Reporting Requirements | Separate final mirror-diff, overlay and adapter-autonomous reductions; name retained functional seams and every unavailable visual/runtime check. |
-| Stop Conditions | A fresh build or required regression fails, a runtime result demands a new semantic repair, metrics cannot be reproduced, or deployment would overwrite a running package. |
-| Exit Criteria | All required checks have passed or have an evidence-backed limitation, metrics are recomputed, final diff is reviewed, products are staged only after formal success, and the T closure record is ready. |
-| Original Owner Request | “以减少 mvdm和opennt-host相对原始opennt代码的diff为目标（包括overlay，甚至adapter的精简），同时保证架构合理、不破坏当前已经实现跑通的部分？” and “准入执行！” |
-| Similar-Issue Sweep | All S1--S4 changed call paths, retained diagnostic selectors, emitted artifacts, package deployment state and metric cohorts. |
+M0 T416 is closed.  **No active M/T/S packet.**  The Queue is
+the sole authority for the next admission.  Its closure evidence records the
+fresh x86 product build, runtime matrix, metrics and retained limitations.
 
 ## S1 Closure Record
 
@@ -54,12 +36,20 @@ seam supports other diagnostics and is not a COMMAND recorder. The source
 sweep, original hunk review and focused x86 CCPU40 compilation are recorded in
 the [COMMAND observer retirement evidence](../etc/evidence/m0-t416-s4-command-observer-retirement.md).
 
+## S5 And T416 Closure Record
+
+S5's fresh 478-command x86 graph, deployed hashes, COMMAND/MEM/EDIT,
+ConPTY mouse/resize, CCPU exception and C-VID verification all pass.  Final
+accounting records -74 paired `mvdm` mirror lines and -500 raw
+`adapter-mvdm-host-out` lines, with both overlay cohorts unchanged.  See the
+[S5 verification](../etc/evidence/m0-t416-s5-integrated-footprint-verification.md)
+and [T416 closure](../history/m0-t416-footprint-cleanup-closure.md).
+
 ## Current Technical Baseline
 
 - The source baseline selects formal x86 `/MT` run16.exe, basesrv.exe and
   ntvdm.exe with original CCPU40, APP_VERSION 0.0.416 and protocol 3. The
-  deployed O:\winnt package remains the last tested T413 product (0.0.413);
-  T414 does not publish a layout-only rebuild.
+  deployed O:\winnt package is the verified T416 formal product.
 - Original vglob.c supplies all 38 getter/setter pairs through original typed
   declarations. The registered seven-line header seam retains original full
   vector layout; autonomous field rebinding and 20 conversion wrappers remain
@@ -75,11 +65,11 @@ the [COMMAND observer retirement evidence](../etc/evidence/m0-t416-s4-command-ob
   pass. The latter include 20 post-EDIT MEM completions.
 - Protected-mode tests prove repaired branch behavior and delivery arguments,
   not complete IDT/TSS or WOW/WRITE runtime compatibility. No such claim is made.
-- Mirror diff distance is 437 versus pre-T413 506; overlay cohort stays 125
-  lines. S5 adds only ten braces and five attribution comments across existing
-  condition lines (+15/-5); no executable statement is added.
-- Build roots: build/M0-T413/S5/formal and integration. Prior products remain
-  recoverable under integration/prior-products; runtime logs only O:\winnt\logs.
+- Final paired MVDM mirror distance is 4,621 versus S1's 4,695; OpenNT-host
+  remains 14,410. Overlay cohorts remain 266 and 30 physical lines; the raw
+  adapter-mvdm-host-out inventory falls 10,219 to 9,719 lines.
+- Build roots: build/M0-T416/S5/formal-x86-002 and integration; runtime logs
+  only O:\winnt\logs.
   Owner Terminal/RDP visual acceptance remains separate.
 
 ## Delivery References
@@ -104,6 +94,7 @@ relative order behind it. T414 closure does not admit the next numeric T.
 
 ## Recent M0 Closures
 
+| T416 | [Footprint cleanup](../history/m0-t416-footprint-cleanup-closure.md) | S1--S5 reduced paired MVDM mirror distance by 74 lines and raw adapter inventory by 500 lines; final x86 package and runtime matrix passed. |
 | T415 | [Final MVDM-root elimination](../history/m0-t415-final-mvdm-root-elimination-closure.md) | 42 exact WinNLS fonts and two exact `v86/util` blobs moved to upstream paths; printer carrier moved to private overlay; formal x86 three-program graph passed. |
 | T414 | [Canonical MVDM tree](../history/m0-t414-canonical-mvdm-tree-closure.md) | 4,615 original MVDM blobs physically recomposed at `src/mvdm`; private overlay is adjacent and separate; formal x86/focused checks passed. |
 

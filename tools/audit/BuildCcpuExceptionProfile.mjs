@@ -8,7 +8,7 @@ const out=path.resolve(process.argv[2]);
 assert(/^build\/M\d+-T\d+\/S\d+\/.+/.test(path.relative(process.cwd(),out).replaceAll('\\','/')));
 fs.mkdirSync(out,{recursive:true});
 const read=p=>fs.readFileSync(p,'utf8').replaceAll('\r','');
-const file='src/mvdm-host/softpc.new/base/ccpu386/c_xcptn.c';
+const file='src/mvdm/softpc.new/base/ccpu386/c_xcptn.c';
 const current=read(file);
 const original=read('O:/repos.external/OpenNT/base/mvdm/softpc.new/base/ccpu386/c_xcptn.c');
 const patch=fs.readFileSync('O:/repos.external/ntvdmx64/ntvdmpatch/patches/common/ccpu.patch');
