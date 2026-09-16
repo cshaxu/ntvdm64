@@ -4,7 +4,7 @@
 #include <string.h>
 
 #include "adapter-mvdm-host-out/softpc/include/mvdm_guest_location.h"
-#include "mvdm-host/inc/vrnmpipe.h"
+#include "mvdm/inc/vrnmpipe.h"
 
 typedef struct mvdm_redirector_async_state {
     mvdm_guest_location buffer;

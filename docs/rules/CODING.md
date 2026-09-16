@@ -1,5 +1,9 @@
 # Coding Rules
 
+`mvdm-host` below is a logical host-slice name. Its selected original files
+live physically under `src/mvdm/`; only the separately governed outside-MVDM
+kernel carrier remains at `src/mvdm-host/kernel-vdm/` pending its own move.
+
 ## Source-first implementation
 
 - Attempt and record recovery in this order: directly composable original

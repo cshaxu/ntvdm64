@@ -1,0 +1,21 @@
+# mvdm-overlay
+
+Private implementation support for material modern bindings that cannot remain
+inside an original `mvdm` mirror file.  It is callable only by the
+matching mirror; it exports no product ABI to app, session, a test, or another
+component.
+
+## Divergence register
+
+T413 restores unchanged original cpu/src/evid/vglob.c host accessors through
+the original typed egacpu.h declarations. S4 removes the 38-pair rebinding and
+all 20 typed conversion wrappers from DIV-156. The binder again copies only
+the original C_Video table; CPU40 host field accesses no longer dispatch
+through it. Latches and pointer selectors retain their original routes.
+
+| ID | Original purpose | Reason | Implementation | Files |
+| --- | --- | --- | --- | --- |
+| MVDM-HOST-DIV-137 | Provide selected CCPU shared Gdp/Cpu/Video state without a duplicate SAS vector. | Historical `localfm.c` declares all four globals, but selected `ccpusas4.c` already owns the original `Sas` vector. Linking both would make two SAS states. | A narrow overlay preserves the original Gdp, Cpu and Video declaration spellings and omits only duplicate `Sas`; no algorithm, guest value or host identity is added. | `softpc.new/base/ccpu386/localfm.c`; original reference `../mvdm/softpc.new/base/ccpu386/localfm.c` |
+| MVDM-HOST-DIV-156 | Recover the omitted generated CCPU-to-C-VID vector binder. | The retained CCPU40 manifests contain the original slot metadata (`c2cpusad.h`) and providers but omit the historical generated assembly unit; generic include order also selected the incompatible CCPU vector layout for the shared carrier. | `localfm` declares the original C-VID layout, while the overlay generator expands the original 154 public and 55 private slot names into typed assignments at C-VID's original setup point. Twenty-six source-unselected or source-absent slots remain explicit null/unavailable entries rather than invented providers. | `softpc.new/base/{ccpu386/localfm.c,cvidc/mvdm_cvidc_vector_binding.c}`; `tools/build/GenerateCvidcCpuBinding.mjs`; mirror call site `../mvdm/softpc.new/base/cvidc/ev_glue.c` |
+| MVDM-HOST-DIV-138 | Export `sas_overwrite_memory`, the direct CCPU physical-range invalidation facade used by original SIM32, `nt_mem` and EMS bodies. | The original `ntstubs.c` also owns alternate Cpu/Gdp/Video/FPU-facing carriers which conflict with the selected CCPU40 state owners, so linking its complete translation unit would duplicate selected source state. | Retain the exact original wrapper body as the smallest source subset: fixed-width physical address/length go directly to original `c_sas_overwrite_memory`; it allocates no mapping, exposes no host pointer and adds no behavior. | `softpc.new/base/ccpu386/sas_overwrite_memory.c`; original reference `../mvdm/softpc.new/base/ccpu386/ntstubs.c` |
+| MVDM-HOST-DIV-050 | Retain the original public SoftPC EOI wrapper form while honoring the typed selected PIC ABI. | The original exported Redirector-facing wrapper takes `int*`; `ica_eoi` takes `LONG*`. NT4 C permitted the mismatch but it is not a checked modern call contract. | `mvdm_ica_eoi_bridge` converts the 32-bit carrier to a local `LONG`, invokes original `ica_eoi`, then returns the result through the original `int*` carrier. The timer remainder repair remains in the mirror because it is a bounded scalar conversion. | `softpc.new/host/src/mvdm_ica_eoi_bridge.[ch]`; mirror callers `../mvdm/softpc.new/host/src/{nt_eoi.c,nt_timer.c}` |

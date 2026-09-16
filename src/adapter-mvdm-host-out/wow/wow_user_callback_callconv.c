@@ -3,7 +3,7 @@
  * historical USER callback table invokes these four slots with WINAPI.
  * Keep the original algorithms and provide only the required ABI bridge.
  */
-#include "mvdm-host/wow32/precomp.h"
+#include "mvdm/wow32/precomp.h"
 #include "adapter-mvdm-host-out/wow/include/wow_user_callback_callconv.h"
 
 VOID WINAPI mvdm_wow_user_empty_clipboard(VOID)

@@ -13,6 +13,12 @@ owner. Original mirrors preserve upstream package identity, adapters preserve
 historical interface shape while translating mechanics, and project components
 own composition, session lifetime and cross-process coordination.
 
+T414 uses `src/mvdm/` as the physical canonical selected-OpenNT
+`base/mvdm` tree. In this document, **MVDM host slice** (and retained shorthand
+`mvdm-host` in logical dependency names) means the manifest-selected executable
+portion of that tree, not a second filesystem root. Guest, tool and firmware
+paths in the same tree remain subject to their existing no-link rules.
+
 ## Mirror-preserving recovery model
 
 Source recovery has a second product objective in addition to executable
@@ -116,15 +122,15 @@ prevents permanent parallel providers.
   packages remain in `mvdm-host`.
 - `mvdm-softpc-patch`: a narrow component for reviewed NTVDMx64-derived SoftPC
   patch bodies. It is neither a generic shim nor an alternate machine; original
-  `mvdm-host/softpc.new` control flow remains in the mirror caller.
+  `mvdm/softpc.new` control flow remains in the mirror caller.
 - `mvdm-platform-abi`: exact original declarations and contracts outside
   MVDM required to compile imported MVDM packages. It contains no replacement
   behavior.
-- `mvdm-guest/dos/v86`: complete selected DOS/V86 guest source, resources,
-  build descriptions, intermediates and original products.
-- `mvdm-guest/bin86`, `mvdm-guest/wow16` and `mvdm-guest/font16`: the selected
-  load-only Bin86, WOW16 and original 16-bit font carries. They do not imply
-  an external WOW16 source-universe mirror.
+- `mvdm/dos/v86`: complete selected DOS/V86 guest source, resources, build
+  descriptions, intermediates and original products. `mvdm/bin86` and
+  `mvdm/wow16` are the selected load-only Bin86 and WOW16 carries; the separate
+  `mvdm-guest/font16` carries externally sourced original 16-bit fonts. None
+  implies an external WOW16 source-universe mirror.
 
 ### Mechanical adapters
 
@@ -247,7 +253,7 @@ state or a fixed-width component ABI.
 app -> session
 app -> broker client -> broker process
 app -> adapter-mvdm-host-in -> mvdm-host
-app -> mvdm-guest/dos/v86 / mvdm-guest/bin86 / mvdm-guest/wow16 / mvdm-guest/font16
+app -> mvdm/dos/v86 / mvdm/bin86 / mvdm/wow16 / mvdm-guest/font16
                                                    (data/load only)
 
 mvdm-host -> mvdm-platform-abi
@@ -255,7 +261,7 @@ mvdm-host -> opennt-host                           (only an admitted original ho
 mvdm-host -> mvdm-softpc-patch                   (only registered SoftPC hooks)
 mvdm-host -> adapter-mvdm-host-out
 mvdm-host -> session                              (neutral contract only)
-adapter-mvdm-host-out/softpc -> original mvdm-host/softpc.new
+adapter-mvdm-host-out/softpc -> original mvdm/softpc.new
 mvdm-softpc-patch -> adapter-mvdm-host-out/softpc
 adapter-mvdm-host-in -> adapter-mvdm-host-out/softpc  (typed mechanics only)
 adapter-mvdm-host-out/win32 -> broker client      (only for brokered historical calls)

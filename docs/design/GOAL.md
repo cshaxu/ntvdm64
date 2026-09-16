@@ -17,16 +17,14 @@ OpenNT and SoftPC recovery is source-first:
    the original unit composable;
 4. author new behavior only under a recorded last-resort exception.
 
-The production architecture separates canonical original MVDM host runtime,
-standalone-tool and firmware-input mirrors: `mvdm-host`, `mvdm-tools` and
-`mvdm-softpc-firmware`. Its original support paths remain inside
-`mvdm-host` at their upstream-relative locations. It also
-keeps exact `mvdm-platform-abi`, complete load-only DOS and WOW16 guest
-mirrors, the original SoftPC CCPU40 execution package and its bounded
-historical-interface adapters, neutral `session`, cross-process
-`broker`, and final `app` composition. A preserved/buildable historical tool
-is never treated as a host-runtime dependency merely because it shares the
-MVDM source tree.
+The canonical `src/mvdm` tree preserves the complete selected OpenNT
+`base/mvdm` relative layout. Its manifest distinguishes executable MVDM host,
+standalone-tool, immutable firmware and load-only DOS/WOW guest slices without
+splitting their source paths. It also keeps exact `mvdm-platform-abi`, the
+original SoftPC CCPU40 execution package and bounded historical-interface
+adapters, neutral `session`, cross-process `broker`, and final `app`
+composition. A preserved/buildable historical tool is never treated as a
+host-runtime dependency merely because it shares the MVDM source tree.
 
 The current execution profile is one active MVDM session per `ntvdm.exe`
 process, with multiple processes allowed concurrently. A session must support

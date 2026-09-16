@@ -2,41 +2,18 @@
 
 ## Current Work
 
-## Active Packet
-
-**Active: M0 T414 S2** — Canonical MVDM source-tree mechanical recomposition
-(Ordinary Mode).
-
-| Field | Record |
-| --- | --- |
-| Identifier Mode | M0 T414 S2, Ordinary Mode. |
-| Admission And Approval | Owner requested recompose of the original MVDM directory into its OpenNT-relative structure. S1 has closed its blob-checked path map; S2 performs only the admitted mechanical re-root and current-consumer path repair. |
-| Candidate Proposal | [Canonical MVDM source-tree recomposition](../proposals/proposal-canonical-mvdm-tree-recomposition-001.md). |
-| Objective | Move the 4,615 mapped selected files to `src/mvdm/<OpenNT-relative-path>`, re-root the private overlay to `src/mvdm-overlay`, and update only current formal consumers without content or role changes. |
-| Non-goals | No source behavior repair, no content rewrite, no change to host/guest/tool/firmware link roles, no migration of the excluded non-MVDM carriers, and no mixing private overlay code into the original tree. |
-| Reference Baseline | T413 S5 published x86 CCPU40 package; selected union is pinned OpenNT/OpenNT-4.5 `base/mvdm`; [proposal](../proposals/proposal-canonical-mvdm-tree-recomposition-001.md). |
-| Files And ABI Surface | Mapped MVDM roots, `mvdm-host-overlay`, current formal generator/stager and current source-layout/architecture authorities. No public ABI change. |
-| Applicable Rules | docs/README, EXECUTION, DOCUMENT, ARCHITECTURE, CODING, source-policy and CONTRIBUTING. |
-| Verification | `Test-T414CanonicalMvdmTree.ps1 -Phase after -BaselineRef 9162b97fe`, Git rename/content review, current-generator/stager path audit and source-layout authority review. |
-| Expected Markers | All 4,615 destination blobs equal baseline; no old mapped roots remain; `mvdm-overlay` stays private and absent from original comparison tree; only current consumers use new paths. |
-| Asset Needs | Existing repository, pinned OpenNT/OpenNT-4.5 source union and S1 evidence/checker; no new external input. |
-| Reporting Requirements | State moved/excluded file totals, renamed roots, updated current consumers, any unchanged historical paths, and content-identity outcome. |
-| Stop Conditions | Any blob mismatch, ambiguous/case-colliding target, formal consumer not captured by S1, unexpected build-role change, or a required source-content modification. |
-| Exit Criteria | Mechanical moves and current path repairs are complete, 4,615 blob identities pass, architecture records describe the new physical root, and S3 is bounded to build/runtime/governance closure. |
-| Original Owner Request | “把原来 mvdm整个目录按照原始 opennt 的mvdm目录结构重新组合起来，不要再散开了。” |
-| Similar-Issue Sweep | Check split guest, tool and firmware roots, private overlay re-root, generated formal output, staging inputs, path-case collisions and all current build/stage references; do not rewrite historical records. |
-
-## S1 Closure Record
-
-S1 passed the reproducible canonical-map check at baseline `9162b97fe`: 4,615
-selected MVDM blobs map without collision (host 1,975; DOS 877; WOW16 1,658;
-Bin86 19; tool 45; firmware 41). The two non-MVDM carries and project READMEs
-are explicit exclusions. Evidence: [canonical MVDM tree map](../etc/evidence/m0-t414-s1-canonical-mvdm-tree-map.md).
+**No active numeric M/T/S packet.** T414 is closed: the selected 4,615-file
+OpenNT MVDM union is physically canonical at `src/mvdm/`, with its private
+overlay adjacent at `src/mvdm-overlay/`. See the
+[T414 closure](../history/m0-t414-canonical-mvdm-tree-closure.md). The queue
+remains the sole authority for the next admission.
 
 ## Current Technical Baseline
 
-- O:\winnt contains fresh formal x86 /MT run16.exe, basesrv.exe and ntvdm.exe,
-  original CCPU40, APP_VERSION 0.0.413 and protocol 3. Hashes match S5 evidence.
+- The source baseline builds formal x86 `/MT` run16.exe, basesrv.exe and
+  ntvdm.exe with original CCPU40, APP_VERSION 0.0.414 and protocol 3. The
+  deployed O:\winnt package remains the last tested T413 product (0.0.413);
+  T414 does not publish a layout-only rebuild.
 - Original vglob.c supplies all 38 getter/setter pairs through original typed
   declarations. The registered seven-line header seam retains original full
   vector layout; autonomous field rebinding and 20 conversion wrappers remain
@@ -75,9 +52,11 @@ are explicit exclusions. Evidence: [canonical MVDM tree map](../etc/evidence/m0-
 [footprint cleanup proposal](../proposals/proposal-mirror-overlay-footprint-cleanup-001.md)
 is first, with five planned S packets and separate mirror-diff, overlay and
 adapter-autonomous-code acceptance metrics. Existing candidates keep their
-relative order behind it. This documentation delivery admits no numeric T.
+relative order behind it. T414 closure does not admit the next numeric T.
 
 ## Recent M0 Closures
+
+| T414 | [Canonical MVDM tree](../history/m0-t414-canonical-mvdm-tree-closure.md) | 4,615 original MVDM blobs physically recomposed at `src/mvdm`; private overlay is adjacent and separate; formal x86/focused checks passed. |
 
 T413 S5 supersedes the previous real-mode divide timeout disposition, without
 reopening T412 Broker or claiming full WRITE recovery. T411/T410/T409/T407/T406

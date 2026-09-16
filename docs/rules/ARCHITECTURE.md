@@ -1,12 +1,19 @@
 # Architecture Rules
 
-1. The production source owners are exactly `mvdm-host`, `opennt-host`,
-   `mvdm-tools`, `mvdm-softpc-firmware`, `mvdm-softpc-patch`,
-   `mvdm-platform-abi`, `mvdm-guest/dos/v86`, `mvdm-guest/bin86`,
-   `mvdm-guest/wow16`, `mvdm-guest/font16`,
+For these rules, `mvdm-host` names the manifest-selected executable host slice
+of the canonical physical `src/mvdm/` OpenNT `base/mvdm` tree. It is not a
+separate filesystem root; explicit paths use `mvdm/`. This preserves existing
+logical dependency vocabulary without splitting original source for builds or
+visual comparison.
+
+1. The production source owners are exactly the canonical physical `mvdm`
+   tree (with manifest-declared host, guest, tool and firmware slices), its
+   private `mvdm-overlay`, `opennt-host`, `mvdm-softpc-patch`,
+   `mvdm-platform-abi`, the separately sourced `mvdm-guest/font16`,
    `adapter-mvdm-host-in`, `adapter-mvdm-host-out`, `session`, `broker`,
    `adapter-opennt-host`, and `app`.
-2. `mvdm-host` is the sole complete selected MVDM host-runtime mirror.
+2. `mvdm` is the sole complete selected OpenNT `base/mvdm` physical mirror;
+   its manifest-selected executable slice is the MVDM host-runtime mirror.
    `opennt-host` is the sole original non-MVDM OpenNT host-service mirror. It
    contains every separately accepted original owner package, not only the
    first Base VDM slice, and accepts only a required original slice after a complete package-boundary
@@ -39,7 +46,7 @@
    under a `mvdm-*` component. Existing but unreachable support, tool, firmware
    and guest definitions are not zero-degree. The rule creates no runtime link
    edge and matches source identity rather than function spelling.
-3. The selected executable `mvdm-host/softpc.new` source composition is the
+3. The selected executable `mvdm/softpc.new` source composition is the
    sole production machine implementation and owns its original CPU, memory,
    firmware and PC-device semantics. The `softpc` family of
    `adapter-mvdm-host-out` preserves only reached historical SoftPC/CCPU
@@ -106,8 +113,8 @@
     the `softpc` family of `adapter-mvdm-host-out` with a checked synchronous mapping lease with address, span,
     access and epoch. No such pointer crosses an ABI or reaches asynchronous
     work.
-18. `mvdm-guest/dos/v86`, `mvdm-guest/bin86`, `mvdm-guest/wow16` and
-    `mvdm-guest/font16` are complete load-only mirrors. Their source, objects,
+18. `mvdm/dos/v86`, `mvdm/bin86`, `mvdm/wow16` and the separately sourced
+   `mvdm-guest/font16` are complete load-only mirrors. Their source, objects,
     libraries and products never satisfy a host symbol. App loads
     manifest-selected immutable bytes through the selected backend binding.
 19. The selected OpenNT tree is one package-scope union of the pinned OpenNT

@@ -37,7 +37,12 @@ function Invoke-Git([string[]]$Arguments) {
     return @($output)
 }
 
-$tracked = Invoke-Git @('ls-files')
+$tracked = if ($Phase -eq 'before') {
+    Invoke-Git @('ls-files')
+} else {
+    @(& git -C $RepositoryRoot ls-tree -r --name-only $BaselineRef -- src)
+}
+if ($LASTEXITCODE -ne 0) { throw "Cannot enumerate baseline tree: $BaselineRef" }
 $rows = [System.Collections.Generic.List[object]]::new()
 foreach ($map in $maps) {
     $hits = @($tracked | Where-Object { $_.StartsWith($map.Old, [System.StringComparison]::Ordinal) })
@@ -57,6 +62,7 @@ foreach ($map in $maps) {
     }
 }
 foreach ($path in $excluded) {
+    if ($Phase -eq 'after' -and $path -in @('src/mvdm-host/README.md', 'src/mvdm-guest/README.md', 'src/mvdm-tools/README.md', 'src/mvdm-softpc-firmware/README.md')) { continue }
     if ($path.EndsWith('/')) {
         if (@($tracked | Where-Object { $_.StartsWith($path, [System.StringComparison]::Ordinal) }).Count -eq 0) {
             throw "Expected exclusion is absent: $path"

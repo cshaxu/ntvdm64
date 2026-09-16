@@ -1,14 +1,9 @@
-# mvdm-guest
+# mvdm-guest font exception
 
-Complete load-only MVDM guest mirror.  The explicit guest roots are:
-
-- `dos/v86/`: selected DOS/V86 guest;
-- `bin86/`: selected Bin86 bootstrap carry;
-- `wow16/`: selected WOW16 source, resources and products; and
-- `font16/`: selected original 16-bit font products.
-
-None is a host library, compile input or link input. App loads only
-manifest-selected immutable guest bytes.
+T414 moved every selected `base/mvdm` guest carry to the canonical physical
+tree: `../mvdm/dos/v86`, `../mvdm/bin86` and `../mvdm/wow16`. This remaining
+root retains only `font16/`, whose original provenance is `win16/fonts` rather
+than `base/mvdm`. It is load-only and never a host compile or link input.
 
 T301 S1 P21 preserves additional byte-exact original build products from
 `opennt-src-2` in their existing guest-relative paths.  They are historical

@@ -61,34 +61,34 @@ if (!(Test-Path -LiteralPath $vs -PathType Leaf) -or !(Get-Command ninja -ErrorA
     throw 'MSVC Build Tools and Ninja are required.'
 }
 
-$ccpuRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/ccpu386'
-$ccpuOverlayRoot = Join-Path $root 'src/mvdm-host-overlay/softpc.new/base/ccpu386'
-$biosRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/bios'
-$keymouseRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/keymouse'
-$systemRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/system'
-$disksRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/disks'
-$supportRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/support'
-$videoRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/video'
-$cvidcRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/cvidc'
-$gdpOverlayRoot = Join-Path $root 'src/mvdm-host-overlay/softpc.new/base/cvidc'
-$umbOverlayRoot = Join-Path $root 'src/mvdm-host-overlay/softpc.new/host/src'
-$commandOverlayRoot = Join-Path $root 'src/mvdm-host-overlay/dos/command'
-$demOverlayRoot = Join-Path $root 'src/mvdm-host-overlay/dos/dem'
-$commsRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/comms'
-$dosRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/dos'
-$demRoot = Join-Path $root 'src/mvdm-host/dos/dem'
-$commandRoot = Join-Path $root 'src/mvdm-host/dos/command'
-$redirRoot = Join-Path $root 'src/mvdm-host/vdmredir'
+$ccpuRoot = Join-Path $root 'src/mvdm/softpc.new/base/ccpu386'
+$ccpuOverlayRoot = Join-Path $root 'src/mvdm-overlay/softpc.new/base/ccpu386'
+$biosRoot = Join-Path $root 'src/mvdm/softpc.new/base/bios'
+$keymouseRoot = Join-Path $root 'src/mvdm/softpc.new/base/keymouse'
+$systemRoot = Join-Path $root 'src/mvdm/softpc.new/base/system'
+$disksRoot = Join-Path $root 'src/mvdm/softpc.new/base/disks'
+$supportRoot = Join-Path $root 'src/mvdm/softpc.new/base/support'
+$videoRoot = Join-Path $root 'src/mvdm/softpc.new/base/video'
+$cvidcRoot = Join-Path $root 'src/mvdm/softpc.new/base/cvidc'
+$gdpOverlayRoot = Join-Path $root 'src/mvdm-overlay/softpc.new/base/cvidc'
+$umbOverlayRoot = Join-Path $root 'src/mvdm-overlay/softpc.new/host/src'
+$commandOverlayRoot = Join-Path $root 'src/mvdm-overlay/dos/command'
+$demOverlayRoot = Join-Path $root 'src/mvdm-overlay/dos/dem'
+$commsRoot = Join-Path $root 'src/mvdm/softpc.new/base/comms'
+$dosRoot = Join-Path $root 'src/mvdm/softpc.new/base/dos'
+$demRoot = Join-Path $root 'src/mvdm/dos/dem'
+$commandRoot = Join-Path $root 'src/mvdm/dos/command'
+$redirRoot = Join-Path $root 'src/mvdm/vdmredir'
 $openntNetlibRoot = Join-Path $root 'src/opennt-host/netapi/netlib'
 $openntNetapiRoot = Join-Path $root 'src/opennt-host/netapi/api'
 $openntBaseVdmRoot = Join-Path $root 'src/opennt-host/base/win32/client'
 $openntRtlRoot = Join-Path $root 'src/opennt-host/base/ntos/rtl'
 $openntRtlX86Root = Join-Path $root 'src/opennt-host/base/ntos/rtl/x86'
-$xmsRoot = Join-Path $root 'src/mvdm-host/xms.486'
-$dpmiRoot = Join-Path $root 'src/mvdm-host/dpmi32'
-$xmsOverlayRoot = Join-Path $root 'src/mvdm-host-overlay/xms.486'
-$suballocRoot = Join-Path $root 'src/mvdm-host/suballoc'
-$oemuniRoot = Join-Path $root 'src/mvdm-host/oemuni'
+$xmsRoot = Join-Path $root 'src/mvdm/xms.486'
+$dpmiRoot = Join-Path $root 'src/mvdm/dpmi32'
+$xmsOverlayRoot = Join-Path $root 'src/mvdm-overlay/xms.486'
+$suballocRoot = Join-Path $root 'src/mvdm/suballoc'
+$oemuniRoot = Join-Path $root 'src/mvdm/oemuni'
 $sessionRoot = Join-Path $root 'src/session'
 $brokerRoot = Join-Path $root 'src/broker'
 $brokerRecordTestSource = Join-Path $root 'tests/broker/base_vdm_record_test.c'
@@ -99,9 +99,9 @@ $rtlX86FixtureSource = Join-Path $root 'tests/opennt-host/rtl_x86_fixture.c'
 $environmentProjectionFixtureSource = Join-Path $root 'tests/opennt-host/environment_projection_fixture.c'
 $cvidcVectorBindingFixtureSource = Join-Path $root 'tests/mvdm-host/cvidc_vector_binding_fixture.c'
 $cvidcVectorProviderStubGenerator = Join-Path $root 'tools/build/GenerateCvidcVectorProviderStubs.mjs'
-$baseDebugRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/debug'
-$hostRoot = Join-Path $root 'src/mvdm-host/softpc.new/host/src'
-$hostEntryRoot = Join-Path $root 'src/mvdm-host/softpc.new/obj.vdm'
+$baseDebugRoot = Join-Path $root 'src/mvdm/softpc.new/base/debug'
+$hostRoot = Join-Path $root 'src/mvdm/softpc.new/host/src'
+$hostEntryRoot = Join-Path $root 'src/mvdm/softpc.new/obj.vdm'
 $adapterSoftpcRoot = Join-Path $root 'src/adapter-mvdm-host-out/softpc'
 $adapterWin32Root = Join-Path $root 'src/adapter-mvdm-host-out/win32/source'
 $hostCrtRedirect = Join-Path $root 'src/adapter-mvdm-host-out/win32/include/mvdm_crt_redirect.h'
@@ -137,9 +137,9 @@ $hostEntrySource = Join-Path $hostEntryRoot 'ntvdm.c'
 $hostEntryResourceSource = Join-Path $hostEntryRoot 'resource.rc'
 $embeddedRomResourceSource = Join-Path $build 'generated/softpc-embedded-roms.rc'
 $embeddedRomSources = @(
-    (Join-Path $root 'src/mvdm-softpc-firmware/softpc.new/roms/bios1.rom'),
-    (Join-Path $root 'src/mvdm-softpc-firmware/softpc.new/roms/bios4.rom'),
-    (Join-Path $root 'src/mvdm-softpc-firmware/softpc.new/roms/v7vga.rom')
+    (Join-Path $root 'src/mvdm/softpc.new/roms/bios1.rom'),
+    (Join-Path $root 'src/mvdm/softpc.new/roms/bios4.rom'),
+    (Join-Path $root 'src/mvdm/softpc.new/roms/v7vga.rom')
 )
 $hostExportDefinition = Join-Path $hostEntryRoot 'obj/i386/ntvdm.def'
 $redirResourceSource = Join-Path $redirRoot 'vdmredir.rc'
@@ -522,29 +522,29 @@ $includeRootPaths = @(
     'src/opennt-abi/source/private/ds/netapi/rpcxlate',
     'src/opennt-abi/source/private/windows/inc',
     'src/opennt-abi/source/public/ddk/inc',
-    'src/mvdm-host/inc',
+    'src/mvdm/inc',
     # NTVDMx64's original patch script deletes the CCPU-local generated GDP
     # carrier, then supplies this selected x86 product carrier. Keep the
     # mirror source intact and express that historical selection in build
     # include order instead.
     'src/mvdm-softpc-patch/x86/prod',
-    'src/mvdm-host/xms.486',
+    'src/mvdm/xms.486',
     # DPMI's original precompiled header owns dpmidata.h beside its source
     # bodies.  Select the original directory rather than copying the carrier
     # into an adapter or overlay.
-    'src/mvdm-host/dpmi32',
-    'src/mvdm-host/vdmredir',
-    'src/mvdm-host/softpc.new/base/ccpu386',
-    'src/mvdm-host/softpc.new/host/inc',
+    'src/mvdm/dpmi32',
+    'src/mvdm/vdmredir',
+    'src/mvdm/softpc.new/base/ccpu386',
+    'src/mvdm/softpc.new/host/inc',
     # Original sas.h includes generated sas4gen.h. The selected mirror retains
     # the CVIDC generated carrier; the historical host/genPg output is absent.
-    'src/mvdm-host/softpc.new/base/cvidc',
-    'src/mvdm-host-overlay/softpc.new/base/cvidc',
-    'src/mvdm-host-overlay/softpc.new/host/src',
-    'src/mvdm-host-overlay/dos/command',
-    'src/mvdm-host-overlay/dos/dem',
-    'src/mvdm-host/dos/dem',
-    'src/mvdm-host/softpc.new/base/inc',
+    'src/mvdm/softpc.new/base/cvidc',
+    'src/mvdm-overlay/softpc.new/base/cvidc',
+    'src/mvdm-overlay/softpc.new/host/src',
+    'src/mvdm-overlay/dos/command',
+    'src/mvdm-overlay/dos/dem',
+    'src/mvdm/dos/dem',
+    'src/mvdm/softpc.new/base/inc',
     'src/adapter-mvdm-host-out/softpc/include',
     'src/adapter-mvdm-host-out/basesrv/include',
     'src/adapter-mvdm-host-out/monitor/include',
@@ -553,14 +553,14 @@ $includeRootPaths = @(
 $includeRoots = $includeRootPaths | ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }
 $softpcIncludeRootPaths = [System.Collections.Generic.List[string]]::new()
 foreach ($path in $includeRootPaths) {
-    if ($path -eq 'src/mvdm-host/softpc.new/base/inc') { continue }
+    if ($path -eq 'src/mvdm/softpc.new/base/inc') { continue }
     $softpcIncludeRootPaths.Add($path)
     if ($path -eq 'src/adapter-mvdm-host-out/win32/include') {
         # SoftPC's original `config.h` must precede the unrelated OpenNT Net
         # `config.h`.  This is an original header-basename disambiguation,
         # not a source divergence.  Non-SoftPC MVDM packages retain the
         # ordinary OpenNT include order below.
-        $softpcIncludeRootPaths.Add('src/mvdm-host/softpc.new/base/inc')
+        $softpcIncludeRootPaths.Add('src/mvdm/softpc.new/base/inc')
     }
 }
 $softpcIncludeRoots = $softpcIncludeRootPaths | ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }
@@ -574,9 +574,9 @@ $cvidcGeneratedInclude = '/I "' + (NinjaPath $cvidcGeneratedRoot) + '"'
 # preference or a replacement API.
 $cvidcFirstRootPaths = [System.Collections.Generic.List[string]]::new()
 foreach ($path in $softpcIncludeRootPaths) {
-    if ($path -eq 'src/mvdm-host/softpc.new/base/cvidc') { continue }
-    if ($path -eq 'src/mvdm-host/softpc.new/base/ccpu386') {
-        $cvidcFirstRootPaths.Add('src/mvdm-host/softpc.new/base/cvidc')
+    if ($path -eq 'src/mvdm/softpc.new/base/cvidc') { continue }
+    if ($path -eq 'src/mvdm/softpc.new/base/ccpu386') {
+        $cvidcFirstRootPaths.Add('src/mvdm/softpc.new/base/cvidc')
     }
     $cvidcFirstRootPaths.Add($path)
 }
@@ -794,7 +794,7 @@ $cvidcCpuBindingGenerator = Join-Path $root 'tools/build/GenerateCvidcCpuBinding
 if ($LASTEXITCODE -ne 0) { throw 'C-VID CPU binding generation failed.' }
 $graph.Add('build obj/cvidc/mvdm_cvidc_vector_binding.obj: cc_cvidc_rule ' + (NinjaPath $cvidcVectorBindingSource) + ' | ' + (NinjaPath $cvidcCpuBindingInclude))
 $cvidcObjects += 'obj/cvidc/mvdm_cvidc_vector_binding.obj'
-$cvidcAccessorSource = Join-Path $root 'src/mvdm-host/softpc.new/base/cpu/src/evid/vglob.c'
+$cvidcAccessorSource = Join-Path $root 'src/mvdm/softpc.new/base/cpu/src/evid/vglob.c'
 $graph.Add('build obj/cvidc/vglob.obj: cc_cvidc_rule ' + (NinjaPath $cvidcAccessorSource))
 $cvidcObjects += 'obj/cvidc/vglob.obj'
 $commsObjects = foreach ($name in $commsNames) {
@@ -1232,12 +1232,12 @@ $graph.Add('default original-softpc-candidate')
     ninjaParallelDefault = $ParallelJobs
     ninjaParallelOverride = 'MVDM_BUILD_JOBS'
     i386Define = $false
-    originalCcpuManifest = 'src/mvdm-host/softpc.new/base/ccpu386/sources'
-    originalHostManifest = 'src/mvdm-host/softpc.new/host/src/sources'
+    originalCcpuManifest = 'src/mvdm/softpc.new/base/ccpu386/sources'
+    originalHostManifest = 'src/mvdm/softpc.new/host/src/sources'
     ccpuSourceCount = @($ccpuNames).Count
     ccpuSources = @($ccpuNames)
     ccpuPrivateOverlaySources = @($ccpuOverlayNames)
-    ccpuSasFacadeSource = 'src/mvdm-host-overlay/softpc.new/base/ccpu386/sas_overwrite_memory.c'
+    ccpuSasFacadeSource = 'src/mvdm-overlay/softpc.new/base/ccpu386/sas_overwrite_memory.c'
     biosSources = @($biosNames)
     keymouseSources = @($keymouseNames)
     systemSources = @($systemNames)
@@ -1246,7 +1246,7 @@ $graph.Add('default original-softpc-candidate')
     videoSources = @($videoNames)
     cvidcSources = @($cvidcNames)
     cvidcOriginalAccessor = [ordered]@{
-        path = 'src/mvdm-host/softpc.new/base/cpu/src/evid/vglob.c'
+        path = 'src/mvdm/softpc.new/base/cpu/src/evid/vglob.c'
         sha256 = Get-NodeSha256 $cvidcAccessorSource
         profile = 'C-VID GDP 1280; 38 original pairs; ten typed conversion pairs; original latch/selector exceptions'
     }
@@ -1264,9 +1264,9 @@ $graph.Add('default original-softpc-candidate')
     baseDebugSources = @($baseDebugNames)
     baseDebugBuildDisposition = 'selected-original-softpc-trace-only; mvdm-debugger product excluded'
     hostRoots = @($hostNames)
-    hostEntrySource = 'src/mvdm-host/softpc.new/obj.vdm/ntvdm.c'
+    hostEntrySource = 'src/mvdm/softpc.new/obj.vdm/ntvdm.c'
     hostEntryResource = [ordered]@{
-        path = 'src/mvdm-host/softpc.new/obj.vdm/resource.rc'
+        path = 'src/mvdm/softpc.new/obj.vdm/resource.rc'
         sha256 = Get-NodeSha256 $hostEntryResourceSource
         buildDisposition = 'selected-original-resource-source; compiled unchanged per host-width row'
     }

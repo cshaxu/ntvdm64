@@ -10,10 +10,10 @@
 /* The CCPU carrier owns the complete CPU vector, while the paired C-VID
  * generator owns the complete VideoVector declaration.  Do not let generic
  * include ordering silently select CCPU's five-slot generated evidgen.h. */
-#include "../../../../mvdm-host/softpc.new/base/cvidc/cpuint_c.h"
+#include "../../../../mvdm/softpc.new/base/cvidc/cpuint_c.h"
 typedef enum CPU_INT_TYPE CPU_INT_TYPE;
-#include "../../../../mvdm-host/softpc.new/base/cvidc/cpu4gen.h"
-#include "../../../../mvdm-host/softpc.new/base/cvidc/evidgen.h"
+#include "../../../../mvdm/softpc.new/base/cvidc/cpu4gen.h"
+#include "../../../../mvdm/softpc.new/base/cvidc/evidgen.h"
 
 IHP Gdp;
 struct CpuVector Cpu;

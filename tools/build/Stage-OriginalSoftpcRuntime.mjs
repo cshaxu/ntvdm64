@@ -5,35 +5,35 @@ import { fileURLToPath } from 'node:url';
 
 const scriptRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const requiredAssets = [
-  ['src/mvdm-guest/dos/v86/doskrnl/bios/NTIO.SYS', 'NTIO.SYS'],
-  ['src/mvdm-guest/dos/v86/doskrnl/dos/NTDOS.SYS', 'NTDOS.SYS'],
-  ['src/mvdm-guest/dos/v86/cmd/command/COMMAND.COM', 'COMMAND.COM'],
+  ['src/mvdm/dos/v86/doskrnl/bios/NTIO.SYS', 'NTIO.SYS'],
+  ['src/mvdm/dos/v86/doskrnl/dos/NTDOS.SYS', 'NTDOS.SYS'],
+  ['src/mvdm/dos/v86/cmd/command/COMMAND.COM', 'COMMAND.COM'],
   /* Immutable original .COM workload used only by the bounded DOS EXEC
    * observation.  It is byte-identical to the source-built output, so the
    * staged media contract remains an original guest artifact, not a harness
    * program or a host-side loader input. */
-  ['src/mvdm-guest/dos/v86/cmd/loadfix/LOADFIX.COM', 'LOADFIX.COM'],
+  ['src/mvdm/dos/v86/cmd/loadfix/LOADFIX.COM', 'LOADFIX.COM'],
   /* Small original MZ workload paired with LOADFIX.COM for the same bounded
    * DOS EXEC package.  FASTOPEN is the original no-op NT stub; it exercises
    * the guest MZ path without introducing a new host implementation. */
-  ['src/mvdm-guest/dos/v86/cmd/fastopen/FASTOPEN.EXE', 'FASTOPEN.EXE'],
+  ['src/mvdm/dos/v86/cmd/fastopen/FASTOPEN.EXE', 'FASTOPEN.EXE'],
   /* T377's immutable device matrix.  The original programs resolve their
    * companions from the selected DOS system root; no guest payload is made
    * or patched by staging. */
-  ['src/mvdm-guest/dos/v86/cmd/mem/mem.exe', 'MEM.EXE'],
-  ['src/mvdm-guest/dos/v86/cmd/keyb/KB16.COM', 'KB16.COM'],
-  ['src/mvdm-guest/dos/v86/dev/keyboard/KEYBOARD.SYS', 'KEYBOARD.SYS'],
-  ['src/mvdm-guest/dos/v86/cmd/graphics/GRAPHICS.COM', 'GRAPHICS.COM'],
-  ['src/mvdm-guest/dos/v86/cmd/graphics/graphics.pro', 'GRAPHICS.PRO'],
-  ['src/mvdm-guest/bin86/config.nt', 'config.nt'],
-  ['src/mvdm-guest/bin86/autoexec.nt', 'autoexec.nt'],
-  ['src/mvdm-guest/dos/v86/cmd/command/COMMAND.COM', 'system32/COMMAND.COM'],
-  ['src/mvdm-guest/dos/v86/dev/country/COUNTRY.SYS', 'system32/COUNTRY.SYS'],
-  ['src/mvdm-guest/dos/v86/dev/himem/HIMEM.SYS', 'system32/HIMEM.SYS'],
+  ['src/mvdm/dos/v86/cmd/mem/mem.exe', 'MEM.EXE'],
+  ['src/mvdm/dos/v86/cmd/keyb/KB16.COM', 'KB16.COM'],
+  ['src/mvdm/dos/v86/dev/keyboard/KEYBOARD.SYS', 'KEYBOARD.SYS'],
+  ['src/mvdm/dos/v86/cmd/graphics/GRAPHICS.COM', 'GRAPHICS.COM'],
+  ['src/mvdm/dos/v86/cmd/graphics/graphics.pro', 'GRAPHICS.PRO'],
+  ['src/mvdm/bin86/config.nt', 'config.nt'],
+  ['src/mvdm/bin86/autoexec.nt', 'autoexec.nt'],
+  ['src/mvdm/dos/v86/cmd/command/COMMAND.COM', 'system32/COMMAND.COM'],
+  ['src/mvdm/dos/v86/dev/country/COUNTRY.SYS', 'system32/COUNTRY.SYS'],
+  ['src/mvdm/dos/v86/dev/himem/HIMEM.SYS', 'system32/HIMEM.SYS'],
   ['build/output/dos/REDIR.EXE', 'system32/REDIR.EXE'],
   ['build/output/dos/DOSX.EXE', 'system32/DOSX.EXE'],
-  ['src/mvdm-softpc-firmware/softpc.new/roms/profile.spc', 'softpc/profile.spc'],
-  ['src/mvdm-softpc-firmware/softpc.new/roms/cmos.ram', 'softpc/cmos.ram']
+  ['src/mvdm/softpc.new/roms/profile.spc', 'softpc/profile.spc'],
+  ['src/mvdm/softpc.new/roms/cmos.ram', 'softpc/cmos.ram']
 ];
 
 function usage() {

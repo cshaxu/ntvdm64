@@ -4,15 +4,11 @@
 
 ```text
 src/
-  mvdm-host/
+  mvdm/
+  mvdm-overlay/
   opennt-host/
-  mvdm-tools/
-  mvdm-softpc-firmware/
   mvdm-softpc-patch/
   mvdm-platform-abi/
-  mvdm-guest/dos/v86/
-  mvdm-guest/bin86/
-  mvdm-guest/wow16/
   mvdm-guest/font16/
   adapter-mvdm-host-in/
   adapter-mvdm-host-out/
@@ -22,13 +18,19 @@ src/
   app/
 ```
 
-The eight original mirror roots preserve selected upstream-relative paths after
-re-rooting and maintain component README exception registers. One source
-component may generate several libraries. Production roots contain production
-inputs only; tests and examples stay under `tests/`; historical source
-comparison stays in the explicitly read-only external reference roots under
-`O:\repos.external`. `src.old/` is quarantined comparison
-material and never a source, build, link or runtime input.
+`mvdm/` is the one canonical physical selected-OpenNT `base/mvdm` tree: its
+host, guest, tool and firmware slices retain their upstream-relative paths and
+their manifest-declared build roles. `mvdm-overlay/` is its private non-original
+partner and is excluded from direct original-tree comparison. The remaining
+`mvdm-guest/font16/` carries `win16/fonts`, which is not under `base/mvdm`.
+The outside-MVDM kernel carrier temporarily remains at
+`mvdm-host/kernel-vdm/` until its separately governed original-owner move.
+One physical tree may generate several libraries; a path move does not create
+a link edge. Production roots contain production inputs only; tests and
+examples stay under `tests/`; historical source comparison stays in the
+explicitly read-only external reference roots under `O:\repos.external`.
+`src.old/` is quarantined comparison material and never a source, build, link
+or runtime input.
 
 ## Machine-profile selection
 
@@ -41,11 +43,11 @@ historical record is evidence, not a selectable configuration.
 
 ## Owner placement
 
-- `mvdm-host` contains canonical selected MVDM host-runtime packages,
-  retaining package-internal paths and filenames, plus individually admitted
-  Kernel VDM semantic carriers under `kernel-vdm/<original-relative-path>`.
-  A carrier preserves the original upstream shape and is owned by its direct
-  MVDM consumer; an adapter may expose only its finite unavailable-kernel ABI.
+- `mvdm` is the canonical physical selected-OpenNT `base/mvdm` mirror. Its
+  executable host packages, load-only DOS/V86/Bin86/WOW16 carries, independent
+  `vdmutils` tool and immutable `softpc.new/{bios,roms,data}` inputs preserve
+  original relative paths. Build manifests, rather than parallel source roots,
+  declare their host/guest/tool/firmware role.
 - `opennt-host` contains every complete selected original OpenNT host-service
   package outside MVDM, each retaining upstream-relative paths and filenames.
   Base VDM is its first accepted slice, not a limit on future admitted owner
@@ -55,18 +57,14 @@ historical record is evidence, not a selectable configuration.
   service value and a finite outward modern-binding closure; a standalone
   convenience helper, a symbol hit or a recursively required NT4 product-shell
   package never qualifies.
-- `mvdm-host` retains selected shared MVDM build/header carriers and original
+- `mvdm` retains selected shared MVDM build/header carriers and original
   support libraries at their original relative paths (`inc`, `dirs`,
   `makefil0`, `oemuni`, and `suballoc`); no separate support component exists.
-- `mvdm-tools` contains selected standalone MVDM tools and their
-  resources (`vdmutils`). It is a production mirror with optional independent
-  tool builds, never a main-program library.
-- `mvdm-softpc-firmware` contains only selected immutable original MVDM
-  firmware and machine-input paths (`softpc.new/bios`, `roms`, and `data`).
-  It is never a host-runtime library or a second machine implementation. The
-  executable `softpc.new/base/bios` and `base/keymouse` packages stay in
-  `mvdm-host`; `app` selects immutable inputs for the chosen backend through
-  its admitted source-shaped composition binding.
+- `mvdm/vdmutils` is an independent original tool and never a main-program
+  library. `mvdm/softpc.new/{bios,roms,data}` remains immutable firmware input,
+  not a host-runtime library or a second machine. Executable
+  `mvdm/softpc.new/base/{bios,keymouse}` remains host-selected; `app` selects
+  immutable inputs through its admitted composition binding.
 - `mvdm-platform-abi` contains exact declarations outside MVDM required by
   those packages; it has no implementation.
 - `mvdm-softpc-patch` contains only individually provenance-registered
@@ -74,10 +72,9 @@ historical record is evidence, not a selectable configuration.
   caller, source identity, interface shape, mapping-manager use and removal
   condition. It reaches mechanics only through the same-shaped `softpc` family
   of `adapter-mvdm-host-out`.
-- `mvdm-guest/dos/v86`, `mvdm-guest/bin86`, `mvdm-guest/wow16` and
-  `mvdm-guest/font16` are the complete selected local DOS/V86, Bin86, WOW16
-  and 16-bit-font carries. They remain data/load-only input roots and do not
-  imply an unselected external source-universe import.
+- `mvdm/dos/v86`, `mvdm/bin86` and `mvdm/wow16` are load-only selected guest
+  carries; `mvdm-guest/font16` is the separately sourced load-only Win16 font
+  carry. None implies an unselected external source-universe import.
 - `adapter-mvdm-host-in` contains only its declared selector-blind typed
   machine-event boundary. `adapter-mvdm-host-out` contains the named same-shaped historical
   interface families `win32`, `softpc`, `monitor`, `redir`, `wow`, `vdd` and
