@@ -4,6 +4,7 @@ param(
     [string]$RepositoryRoot = '',
     [string]$BuildRoot = '',
     [string]$NodeExecutable = '',
+    [string]$NinjaExecutable = '',
     [ValidateRange(0, 64)] [int]$ParallelJobs = 0
 )
 
@@ -57,7 +58,16 @@ if ($ParallelJobs -eq 0) {
     $ParallelJobs = [Math]::Min(12, [Environment]::ProcessorCount)
 }
 $vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
-if (!(Test-Path -LiteralPath $vs -PathType Leaf) -or !(Get-Command ninja -ErrorAction SilentlyContinue)) {
+$nativeNinja = if ([string]::IsNullOrWhiteSpace($NinjaExecutable)) {
+    Get-Command ninja.exe -All -ErrorAction SilentlyContinue |
+        Where-Object { $_.Source -match 'Ninja-build\.Ninja' } |
+        Select-Object -First 1 -ExpandProperty Source
+} else {
+    (Resolve-Path -LiteralPath $NinjaExecutable).Path
+}
+if (!(Test-Path -LiteralPath $vs -PathType Leaf) -or
+    [string]::IsNullOrWhiteSpace($nativeNinja) -or
+    !(Test-Path -LiteralPath $nativeNinja -PathType Leaf)) {
     throw 'MSVC Build Tools and Ninja are required.'
 }
 
@@ -90,6 +100,7 @@ $cpu40DescriptorDomainFixtureSource = Join-Path $root 'tests/mvdm-host/dpmi/cpu4
 $rtlX86FixtureSource = Join-Path $root 'tests/opennt-host/rtl_x86_fixture.c'
 $environmentProjectionFixtureSource = Join-Path $root 'tests/opennt-host/environment_projection_fixture.c'
 $cvidcVectorBindingFixtureSource = Join-Path $root 'tests/mvdm-host/cvidc_vector_binding_fixture.c'
+$x87LayoutFixtureSource = Join-Path $root 'tests/mvdm-host/x87_layout_fixture.c'
 $cvidcVectorProviderStubGenerator = Join-Path $root 'tools/build/GenerateCvidcVectorProviderStubs.mjs'
 $baseDebugRoot = Join-Path $root 'src/mvdm/softpc.new/base/debug'
 $hostRoot = Join-Path $root 'src/mvdm/softpc.new/host/src'
@@ -332,6 +343,9 @@ if (!(Test-Path -LiteralPath $rtlX86FixtureSource -PathType Leaf)) {
 if (!(Test-Path -LiteralPath $environmentProjectionFixtureSource -PathType Leaf)) {
     throw "Required environment projection fixture missing: $environmentProjectionFixtureSource"
 }
+if (!(Test-Path -LiteralPath $x87LayoutFixtureSource -PathType Leaf)) {
+    throw "Required x87 layout fixture missing: $x87LayoutFixtureSource"
+}
 foreach ($name in $openntRtlX86Names) {
     if (!(Test-Path -LiteralPath (Join-Path $openntRtlX86Root $name))) { throw "Selected original x86 RTL source missing: $name" }
 }
@@ -455,7 +469,7 @@ $parallelRunner = Join-Path $build 'run-ninja-parallel.cmd'
   ('call "' + $vs + '" -arch=' + $Architecture + ' -host_arch=x64 >nul'),
   'if errorlevel 1 exit /b %errorlevel%',
   ('if "%MVDM_BUILD_JOBS%"=="" set "MVDM_BUILD_JOBS=' + $ParallelJobs + '"'),
-  ('ninja -C "' + $build + '" -j %MVDM_BUILD_JOBS% %*')) |
+  ('"' + $nativeNinja + '" -C "' + $build + '" -j %MVDM_BUILD_JOBS% %*')) |
     Set-Content -LiteralPath $parallelRunner -Encoding ascii
 
 $includeRootPaths = @(
@@ -836,6 +850,8 @@ $cvidcVectorBindingFixtureObject = 'obj/tests/cvidc_vector_binding_fixture.obj'
 # This fixture must see C-VID's generated (non-CCPU) CpuVector view, just as
 # accessfn.c does; it therefore validates the actual cross-profile ABI seam.
 $graph.Add('build ' + $cvidcVectorBindingFixtureObject + ': cc_cvidc_access ' + (NinjaPath $cvidcVectorBindingFixtureSource))
+$x87LayoutFixtureObject = 'obj/tests/x87_layout_fixture.obj'
+$graph.Add('build ' + $x87LayoutFixtureObject + ': cc ' + (NinjaPath $x87LayoutFixtureSource))
 $cvidcVectorProviderStubSource = 'generated/cvidc_vector_provider_stubs.c'
 $cvidcVectorProviderStubObject = 'obj/tests/cvidc_vector_provider_stubs.obj'
 $graph.Add('rule generate_cvidc_vector_provider_stubs')
@@ -1150,6 +1166,7 @@ $graph.Add('  command = link.exe /nologo /map:$out.map /out:$out $in kernel32.li
 $graph.Add('build obj/tests/original_external_memory_test.obj: cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/original_external_memory_test.c')))
 $graph.Add('build original-external-memory-test.exe: memory_test_link obj/tests/original_external_memory_test.obj ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
 $graph.Add('build cvidc-vector-binding-fixture.exe: memory_test_link ' + $cvidcVectorBindingFixtureObject + ' ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
+$graph.Add('build x87-layout-fixture.exe: rtl_fixture_link ' + $x87LayoutFixtureObject)
 $graph.Add('build VDMREDIR.dll | VDMREDIR.dll.lib: redir_dll_link ' + (($redirObjects + @($redirResourceObject)) -join ' ') + ' ntvdm.lib redirector-bindings.lib original-opennt-netlib.lib original-opennt-netapi-api.lib original-opennt-rtl-x86.lib softpc-bindings.lib softpc-win32-bindings.lib session.lib')
 $graph.Add('build original-softpc-forced-closure.dll: forced_link_audit original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-softpc-host-roots.lib softpc-bindings.lib worker-shell.lib worker-command-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib')
 $graph.Add('default original-softpc-candidate')

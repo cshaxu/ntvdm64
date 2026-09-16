@@ -17,7 +17,6 @@
 ]*/
 #include "insignia.h"
 #include "host_def.h"
-/* DIVERGENCE(MVDM-HOST-DIV-076): preserve the native C varargs ABI. */
 #include <stdio.h>
 #include <math.h>
 #include "cfpu_def.h"
@@ -1041,16 +1040,19 @@ LOCAL VOID CVTI64FPH IFN1(FPU_I64 *, as64)
 
 LOCAL VOID CVTFPHI64 IFN2(FPU_I64 *, as64, FPH *, FPPtr)
 {
+	FPHOST bits;
 	IU32    high32 = 0;
 	IU32	low32 = 0;
 	IS32	exp;
 	IU32	holder;
 	IU32	signbit = 0;
 
-	exp = ((FPHOST *)FPPtr)->hiword.exp;
+	/* T60: copy the representation without aliasing a double as FP64. */
+	memcpy(&bits, FPPtr, sizeof(bits));
+	exp = bits.hiword.exp;
 	if (exp != 0) {
-		high32 = ((FPHOST *)FPPtr)->hiword.mant_hi;
-		low32 = ((FPHOST *)FPPtr)->mant_lo;
+		high32 = bits.hiword.mant_hi;
+		low32 = bits.mant_lo;
 		/* Now stick a 1 at the top of the mantissa */
 		/* Calculate where this is */
 		holder = HOST_MAX_EXP+1;
@@ -1062,7 +1064,7 @@ LOCAL VOID CVTFPHI64 IFN2(FPU_I64 *, as64, FPH *, FPPtr)
 		exp -= HOST_BIAS;
 		exp -= (64-signbit);
 
-		signbit = ((FPHOST *)FPPtr)->hiword.sign;
+		signbit = bits.hiword.sign;
 
 		/* high32 and low32 are (mantissa)*(2^52 )
 		 * exp is (true exponent-52) = number of bit positions to shift
@@ -3251,7 +3253,9 @@ GLOBAL VOID FIST IFN1(VOID *, memPtr)
 						exp_value = 1;	/* flag exception */
 					  }
 				          break;
-			case M64I	: CVTFPHI64((FPU_I64 *)&FPTemp, &(TOSPtr->fpvalue)); /* Must be writing the result to FPTemp as well... */
+			case M64I	: /* T60: convert the rounded value, as for M16I/M32I. */
+					  FPRes = npx_rint(TOSPtr->fpvalue);
+					  CVTFPHI64((FPU_I64 *)&FPTemp, &FPRes);
 					  CVTI64FPH((FPU_I64 *)&FPTemp);	/* Result in FPRes */
 					  /* Check for overflow */
 					  if (FPRes != npx_rint(TOSPtr->fpvalue)) {
@@ -5858,10 +5862,6 @@ GLOBAL	void NpxStackRegAsString IFN3(FPSTACKENTRY *, fpStPtr, char *, buf, IU32,
 /* this one is only ever used in trace.c and only if pure CCPU */
 GLOBAL char * getNpxStackReg IFN2(IU32, reg_num, char *, buffer)
 {
-	/* DIVERGENCE(MVDM-HOST-DIV-130): TOSPtr and FPUStackBase delimit the
-	 * original eight-entry private FPU stack, so their pointer difference is
-	 * a bounded stack index, not a host identity.  Make the retained IU32
-	 * register arithmetic explicit on both host widths. */
 	reg_num += (IU32)(TOSPtr - FPUStackBase);
 	NpxStackRegAsString (&FPUStackBase[reg_num&7], buffer, 12);
 	return buffer;

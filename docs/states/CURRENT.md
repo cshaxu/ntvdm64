@@ -4,8 +4,43 @@
 
 ## Intermission
 
-**No active M/T/S packet.**  M0 T418 closes after S7; the next numbered task
-must be admitted from [Queue](QUEUE.md) by the owner.
+**No active M/T/S packet.** M0 T419 closes after its S1--S3 x87 recovery;
+the next numeric task must be admitted from [Queue](QUEUE.md).
+
+## T419 S3 and T Closure Record
+
+T419 restores the complete audited SoftPC x87 recovery set: little-endian
+carrier declarations plus representation-safe binary64 conversion and rounded
+`FIST m64int`. `fpu.c` is text-identical to the SoftPC comparison owner;
+`cfpu_def.h` retains only SoftPC's inapplicable standalone `fenv` branch.
+The formal x86 graph built `run16.exe`, `basesrv.exe`, `ntvdm.exe`,
+`VDMREDIR.dll` and all four fixtures. The fixtures pass, and the four product
+files were deployed to `O:\winnt`. Full evidence is in the
+[T419 x87 audit](../etc/evidence/m0-t419-s1-x87-audit.md).
+
+## S2 Closure Record
+
+S2 restores the exact SoftPC T59 little-endian declaration/member order in
+`cfpu_def.h`, as recorded in the [x87 audit evidence](../etc/evidence/m0-t419-s1-x87-audit.md).  The original failure (`FP64.hiword=0`, `mant_lo=4`) becomes the
+required layout (`mant_lo=0`, `hiword=4`); FP32, FP80 and FPU_I64 checks also
+pass when the fixture uses the same `insignia.h`, `host_def.h`, `cfpu_def.h`
+order as the production `fpu.c`.  The only residual header difference is
+SoftPC's standalone `fenv` policy, which is intentionally inapplicable to the
+NTVDM `_controlfp` host contract.  The `fpu.c` semantic hunks triggered S3,
+as required by S2's stop condition.
+
+## S1 Closure Record
+
+S1 froze OpenNT, current and SoftPC identities in the
+[x87 audit evidence](../etc/evidence/m0-t419-s1-x87-audit.md).  The SoftPC
+source correction is `2c05238335a22d125e0e35f71692c3b2a1b0b15d`.  Its layout probe, compiled
+against the current MSVC/x86 header, fails at `FP64.mant_lo` offset: current
+reports `hiword=0`, `mant_lo=4`, while the IEEE little-endian carrier requires
+the inverse.  The same probe shows incorrect FP32/FP64 fields and an FP80
+exponent of 24575 for byte representation `-1.5`.  The failure is a host-C
+layout fault, not a guest-endian or formatting issue.  S2 therefore admits
+only the conditional declarations; SoftPC's `fenv` branch and all `fpu.c`
+algorithm candidates remain separately tested rather than copied.
 
 ## S7 Closure Record
 

@@ -2,17 +2,17 @@
 
 ## Status and objective
 
-This is an unadmitted candidate at the head of the
-[Queue](../states/QUEUE.md).  It does not allocate a T number, alter the
-active M0 T412 S4 packet, or authorize a source change until admission.
+M0 T419 admits this proposal.  Its governing S packet is the active
+[Current](../states/CURRENT.md) record; it replaces the stale historical
+reference to T412.
 
 Restore the selected CCPU40 x87 host-representation declarations in
-`src/mvdm-host/softpc.new/host/inc/cfpu_def.h` where Microsoft x86 C bitfield
+`src/mvdm/softpc.new/host/inc/cfpu_def.h` where Microsoft x86 C bitfield
 allocation and little-endian multi-word member order disagree with the
 declaration currently mirrored by this repository.  The intended recovery is
-narrow: retain the original FPU algorithms and instruction flow, correct only
-the host-layout declarations proved necessary for the selected compiler/profile,
-and prove the affected guest instruction paths.
+narrow: correct only the host-layout declarations and the directly dependent
+representation/rounding hunks proved necessary for the selected
+compiler/profile, and prove the affected guest instruction paths.
 
 This is not a guest x86 byte-order change.  x86 guest byte order can be
 correct while a C bitfield declaration is still interpreted incorrectly by the
@@ -45,12 +45,23 @@ load/inspect paths in `fpu.c` (including the field-consuming path near the
 current line 1541) and distinguish them from whole-word stores such as the
 current path near line 873.
 
+## SoftPC parity and placement rules
+
+The neighbouring SoftPC tree is a clean comparison baseline, not an import
+or runtime dependency.  For every adopted x87 hunk, first preserve the exact
+SoftPC source text and line-ending convention where it is compatible with the
+selected MSVC/x86 NTVDM host ABI.  Any remaining current/SoftPC difference
+must name the unavailable or deliberately different host contract; formatting
+alone is never a reason to retain a difference.  SoftPC's standalone executor,
+`fenv` policy, GDP carrier and presentation bindings remain out of scope.
+
 ## Source and placement rules
 
 The affected header is an existing MVDM/SoftPC mirror, so a proved correction
 belongs there, with the smallest registered divergence and exact provenance.
-No adapter, private overlay, CCPU algorithm, opcode semantic change, CPU30 or
-MONITOR path is authorized.  Do not import a broad neighbouring-project patch;
+No adapter, private overlay, broad CCPU algorithm rewrite, opcode semantic
+change, CPU30 or MONITOR path is authorized.  Do not import a broad
+neighbouring-project patch;
 the implementation must be the audited declaration-only subset.  If the
 source audit proves a different original owner or an unavailable compiler-only
 binding, record that result and place only that binding at the approved
@@ -88,7 +99,12 @@ adapter/overlay implementation was added.  A failure to prove the exact
 layout must leave the mirror unchanged rather than prompt a compensating FPU
 algorithm patch.
 
-### S3 — instruction-level CCPU40 regression and closure
+### S3 — direct x87 conversion recovery and instruction-level closure
+
+After S2 proves the layout, audit the remaining `fpu.c` differences.  Only a
+direct SoftPC hunk that removes host representation aliasing or aligns M64I
+with already-existing M16I/M32I x87 rounding may be adopted.  It must be
+source-identical, preserve the NTVDM control policy and add no provider.
 
 Run focused guest instruction fixtures that require field parsing rather than
 only whole-word stores:
