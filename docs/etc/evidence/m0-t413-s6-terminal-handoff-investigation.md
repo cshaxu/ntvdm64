@@ -1,5 +1,13 @@
 # T413 S6 — Terminal resize and parent-CMD handoff investigation
 
+## Owner cancellation
+
+The owner reports the symptom can no longer be reproduced and explicitly
+cancels the task, requesting a clean workspace. S6 is cancelled, not repaired
+or accepted. Its temporary observer changes are removed back to 58c535e2e;
+no product source or deployed EXE was changed. The earlier procedure below is
+historical and can be recovered from e40b7a812 if the symptom returns.
+
 ## Request and baseline
 
 The requested defect is Windows Terminal maximize/resize during the sequence
@@ -52,9 +60,9 @@ cursor-position response is also not a complete terminal emulator.
 
 ## Disposition
 
-S6 remains open at the reproduction gate. The original hypothesis of stale
+Before cancellation, S6 stopped at the reproduction gate. The hypothesis of stale
 restored dimensions is unproved, and no speculative product patch is made.
 Need the real Terminal frontend before/after-typing state and matching server
 state, or a reproducer using that exact frontend/runtime. Owner screenshots
-have been requested without asking for unrelated EDIT tests. No fresh product
+were requested without asking for unrelated EDIT tests. No fresh product
 build/publication or completed-repair claim is justified by these observations.

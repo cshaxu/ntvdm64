@@ -1,5 +1,14 @@
 # M0 T413 — Original C-VID accessor restoration closure
 
+## S6 Terminal investigation cancellation
+
+After S5, the owner requested Terminal resize/parent-CMD handoff investigation.
+Admission and four bounded negative reproduction runs were delivered as
+e40b7a812. The owner then reported inability to reproduce and cancelled S6.
+Temporary test-source additions are removed; no product code or EXE changed.
+[Investigation evidence](../etc/evidence/m0-t413-s6-terminal-handoff-investigation.md)
+is retained without a repair claim. No active packet or new queue item follows.
+
 ## Decision and scope
 
 Subsequent owner disposition after the cleanup closure: reopen the same T
