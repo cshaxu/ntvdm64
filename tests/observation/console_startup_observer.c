@@ -128,19 +128,24 @@ static DWORD capture_process_threads(HANDLE process, DWORD process_id,
 
 static void write_console_snapshot(HANDLE output, const char *report_path)
 {
-    char screen[4097];
+    char *screen;
     char path[MAX_PATH];
-    DWORD count = 0;
+    DWORD count = 0, cells;
+    CONSOLE_SCREEN_BUFFER_INFO info;
     FILE *file = NULL;
 
-    if (!ReadConsoleOutputCharacterA(output, screen, 4096,
-                                     (COORD){ 0, 0 }, &count)) return;
-    screen[count] = '\0';
+    if (!GetConsoleScreenBufferInfo(output,&info)) return;
+    cells=(DWORD)info.dwSize.X*(DWORD)info.dwSize.Y;
+    if (!cells || cells>4u*1024u*1024u) return;
+    screen=(char*)malloc(cells); if(!screen)return;
+    if (!ReadConsoleOutputCharacterA(output, screen, cells,
+                                     (COORD){ 0, 0 }, &count)) { free(screen); return; }
     snprintf(path, sizeof(path), "%s.console.txt", report_path);
     if (fopen_s(&file, path, "wb") == 0 && file != NULL) {
         fwrite(screen, 1, count, file);
         fclose(file);
     }
+    free(screen);
 }
 
 static void clear_console(HANDLE output)
@@ -639,6 +644,9 @@ int main(int argc, char **argv)
                  argv[2]) < 0) return 68;
     fixed_system_root_short_length = GetShortPathNameA(fixed_system_root,
         fixed_system_root_short, (DWORD)sizeof(fixed_system_root_short));
+    /* Match the historical short-window reproducer: never resize an inherited
+     * controller Console or accept its viewport constraints as test geometry. */
+    if (GetEnvironmentVariableA("MVDM_OBSERVER_SHORT_HISTORY",NULL,0)) FreeConsole();
     if (!AllocConsole() && GetLastError() != ERROR_ACCESS_DENIED) return 65;
     input = CreateFileA("CONIN$", GENERIC_READ | GENERIC_WRITE,
                         FILE_SHARE_READ | FILE_SHARE_WRITE, &inherit,
@@ -649,6 +657,45 @@ int main(int argc, char **argv)
     if (input == INVALID_HANDLE_VALUE || output == INVALID_HANDLE_VALUE) return 66;
 
     clear_console(output);
+    /* Reproduce the previously failing short-window/history profile with
+     * observed native geometry, never silently accept a failed resize. */
+    if (GetEnvironmentVariableA("MVDM_OBSERVER_SHORT_HISTORY", NULL, 0)) {
+        SMALL_RECT tiny={0,0,19,4}, window={0,0,79,4};
+        COORD size={80,300}, origin={0,0};
+        CONSOLE_SCREEN_BUFFER_INFO info;
+        DWORD written; unsigned int row;
+        char geometry_path[MAX_PATH]; FILE *geometry;
+        unsigned step=1;
+        BOOL ok=SetConsoleWindowInfo(output,TRUE,&tiny);
+        if(ok){step=2;ok=SetConsoleCursorPosition(output,origin);}
+        if(ok){step=3;ok=SetConsoleScreenBufferSize(output,size);}
+        if(ok && GetLargestConsoleWindowSize(output).X<80) {
+            /* RDP desktop pixels can limit an otherwise valid 80-column
+             * native window. Change only this disposable test Console font. */
+            CONSOLE_FONT_INFOEX font={sizeof(font)};
+            step=5;ok=GetCurrentConsoleFontEx(output,FALSE,&font);
+            if(ok){font.dwFontSize.X=4;font.dwFontSize.Y=8;ok=SetCurrentConsoleFontEx(output,FALSE,&font);}
+        }
+        if(ok){step=4;ok=SetConsoleWindowInfo(output,TRUE,&window);}
+        snprintf(geometry_path,sizeof(geometry_path),"%s.geometry.txt",argv[3]);
+        if(!ok) {
+            DWORD error=GetLastError(); GetConsoleScreenBufferInfo(output,&info);
+            geometry=fopen(geometry_path,"w");
+            if(geometry){fprintf(geometry,"FAILED step=%u error=%lu buffer=%d,%d view=%d,%d,%d,%d\n",step,error,info.dwSize.X,info.dwSize.Y,info.srWindow.Left,info.srWindow.Top,info.srWindow.Right,info.srWindow.Bottom);fclose(geometry);}
+            return 93;
+        }
+        for(row=0;row<40;row++) WriteConsoleA(output,"prior shell output\r\n",20,&written,NULL);
+        if(!GetConsoleScreenBufferInfo(output,&info) ||
+           info.srWindow.Right-info.srWindow.Left+1!=80 ||
+           info.srWindow.Bottom-info.srWindow.Top+1!=5 ||
+           info.dwCursorPosition.Y!=40) return 94;
+        snprintf(geometry_path,sizeof(geometry_path),"%s.geometry.txt",argv[3]);
+        geometry=fopen(geometry_path,"w"); if(!geometry)return 95;
+        fprintf(geometry,"buffer=%d,%d view=%d,%d,%d,%d cursor=%d,%d prefill=40\n",
+            info.dwSize.X,info.dwSize.Y,info.srWindow.Left,info.srWindow.Top,
+            info.srWindow.Right,info.srWindow.Bottom,info.dwCursorPosition.X,info.dwCursorPosition.Y);
+        fclose(geometry);
+    }
     /* A newly allocated Console can retain an inherited key event from the
      * launcher context.  This fixed container models an untouched interactive
      * session, so establish an empty CONIN$ queue before the product inherits
@@ -942,9 +989,7 @@ int main(int argc, char **argv)
     else
         SetEnvironmentVariableA("MVDM_DEM_READ_REPORT_PATH", NULL);
     if (scripted_console_input) {
-        /* The original real-mode DOS buffered-console-input interrupt is the
-         * source-owned CONIN$ line boundary, not a timeout, a BIOS startup
-         * poll, or a synthesized BOP. */
+        /* Await visible COMMAND readiness, without an execution-core hook. */
         scripted_console_input_ready = wait_for_console_prompt(output,
             OBSERVATION_INPUT_READY_TIMEOUT_MS);
         if (scripted_console_input_ready) {
@@ -1012,7 +1057,10 @@ int main(int argc, char **argv)
                 write_console_input_text(input, "x", 0, output, NULL);
             Sleep(1500);
             scripted_console_input_delivered = scripted_console_input_delivered &&
-                write_console_input_text(input, "mem\rexit\r", 1500, output, argv[3]);
+                write_console_input_text(input,
+                    GetEnvironmentVariableA("MVDM_OBSERVER_SHORT_HISTORY",NULL,0) ?
+                    "mem\rmem\rmem\rmem\rexit\r" : "mem\rexit\r",
+                    1500, output, argv[3]);
         } else scripted_console_input_delivered = FALSE;
     }
     if (observe_console_mouse_input) {
@@ -1093,7 +1141,7 @@ int main(int argc, char **argv)
             fprintf(report, "console-mouse-input-ready=%s\n",
                     observed_console_mouse_input_ready ? "yes" : "no");
         if (scripted_console_input) {
-            fprintf(report, "scripted-console-input-trigger=dos-int21-buffered-console-input\n");
+            fprintf(report, "scripted-console-input-trigger=visible-command-prompt\n");
             fprintf(report, "scripted-console-input-sequence=%s\n",
                     scripted_console_input_sequence);
             fprintf(report, "scripted-console-input-ready=%s\n",

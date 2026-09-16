@@ -82,8 +82,10 @@ void mvdm_cvidc_bind_vectors(void)
 
 void mvdm_cvidc_bind_video_vector(void)
 {
-    Video = C_Video;
+    /* Never republish a generated accessor, even transiently during setup. */
+    struct VideoVector boundVideo = C_Video;
 #define MVDM_CVIDC_VIDEO_BIND
 #include "cvidc_cpu_binding.inc"
 #undef MVDM_CVIDC_VIDEO_BIND
+    Video = boundVideo;
 }

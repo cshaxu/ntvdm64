@@ -22,7 +22,7 @@ if ((!$Cases -or 'guest-seven' -in $Cases -or 'command-guest-seven' -in $Cases) 
 $guest=Join-Path (Split-Path -Parent $Observer) 'G7.COM'
 $fixtureRoot=Split-Path -Parent $Observer
 # Test-only DOS program: MOV AX,4C07h; INT 21h. Never replaces package media.
-if ($guest -notmatch '\\build\\M0-T412\\S[0-9]+\\') { throw 'Guest fixture must stay in an admitted T412 S build root' }
+if ($guest -notmatch '\\build\\M[0-9]+-T[0-9]+\\S[0-9]+\\') { throw 'Guest fixture must stay in an admitted task S build root' }
 [IO.File]::WriteAllBytes($guest,[byte[]](0xb8,0x07,0x4c,0xcd,0x21))
 if ($GuestFixturePath) {
     if (!(Test-Path -LiteralPath $GuestFixturePath) -or

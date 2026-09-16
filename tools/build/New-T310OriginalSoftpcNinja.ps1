@@ -1245,6 +1245,11 @@ $graph.Add('default original-softpc-candidate')
     supportSources = @($supportNames)
     videoSources = @($videoNames)
     cvidcSources = @($cvidcNames)
+    cvidcOriginalAccessor = [ordered]@{
+        path = 'src/mvdm-host/softpc.new/base/cpu/src/evid/vglob.c'
+        sha256 = Get-NodeSha256 $cvidcAccessorSource
+        profile = 'C-VID GDP 1280; 38 original pairs; ten typed conversion pairs; original latch/selector exceptions'
+    }
     commsSources = @($commsNames)
     dosSources = @($dosNames)
     demSources = @($demNames)

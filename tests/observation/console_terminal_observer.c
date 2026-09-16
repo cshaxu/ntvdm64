@@ -63,13 +63,13 @@ int main(int argc,char **argv) {
     HPCON pty;
     STARTUPINFOEXA si={0};PROCESS_INFORMATION pi={0};SIZE_T bytes=0;
     COORD size;
-    if(argc!=4 && (argc!=5 || strcmp(argv[4],"--mouse")))return 64;
+    if(argc!=4 && (argc!=5 || (strcmp(argv[4],"--mouse") && strcmp(argv[4],"--resize"))))return 64;
     size.X=(SHORT)atoi(argv[1]);size.Y=(SHORT)atoi(argv[2]);
     JOBOBJECT_EXTENDED_LIMIT_INFORMATION limits={0};
     char executable[MAX_PATH], command[MAX_PATH+16];
     GetModuleFileNameA(NULL,executable,sizeof(executable));
     snprintf(command,sizeof(command),"\"%s\" --child",executable);
-    if(argc==5) { char path[MAX_PATH];snprintf(path,sizeof(path),"%s.mouse.txt",argv[3]);SetEnvironmentVariableA("MVDM_CONSOLE_PRESENTATION_REPORT_PATH",path); }
+    if(argc==5 && !strcmp(argv[4],"--mouse")) { char path[MAX_PATH];snprintf(path,sizeof(path),"%s.mouse.txt",argv[3]);SetEnvironmentVariableA("MVDM_CONSOLE_PRESENTATION_REPORT_PATH",path); }
     { char path[MAX_PATH]; snprintf(path,sizeof(path),"%s.rpc.txt",argv[3]);SetEnvironmentVariableA("MVDM_BASESRV_TRACE_PATH",path);snprintf(path,sizeof(path),"%s.stream.txt",argv[3]);SetEnvironmentVariableA("MVDM_STREAM_IO_REPORT_PATH",path); }
     { char path[MAX_PATH];snprintf(path,sizeof(path),"%s.cells.txt",argv[3]);SetEnvironmentVariableA("TEST_CELL_LOG",path); }
     raw_log=CreateFileA(argv[3],GENERIC_WRITE,FILE_SHARE_READ,NULL,CREATE_ALWAYS,0,NULL);
@@ -94,7 +94,13 @@ int main(int argc,char **argv) {
     Sleep(3000);
     send_keys("mem\r");Sleep(2500);
     send_keys("edit\r");Sleep(3500);send_keys("\x1b");Sleep(500);
-    if(argc==5) {
+    if(argc==5 && !strcmp(argv[4],"--resize")) {
+        COORD narrow={45,10}, wide={120,30};
+        if(FAILED(ResizePseudoConsole(pty,narrow)))return 67; Sleep(400);
+        if(FAILED(ResizePseudoConsole(pty,wide)))return 67; Sleep(400);
+        if(FAILED(ResizePseudoConsole(pty,size)))return 67; Sleep(400);
+    }
+    if(argc==5 && !strcmp(argv[4],"--mouse")) {
         send_keys("\x1b[<35;20;10M");Sleep(250);
         send_keys("\x1b[<0;20;10M");Sleep(250);
         send_keys("\x1b[<0;20;10m");Sleep(250);

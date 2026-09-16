@@ -4,7 +4,8 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import {spawnSync} from 'node:child_process';
 const root=process.cwd(), upstream='O:/repos.external/OpenNT/base/mvdm/softpc.new';
-const out=path.resolve('build/M0-T413/S1/accessor-audit');
+const outputIndex=process.argv.indexOf('--output');
+const out=path.resolve(outputIndex<0?'build/M0-T413/S1/accessor-audit':process.argv[outputIndex+1]);
 fs.mkdirSync(out,{recursive:true});
 const read=p=>fs.readFileSync(p,'utf8').replace(/\r\n/g,'\n');
 if(process.argv.includes('--collect')){

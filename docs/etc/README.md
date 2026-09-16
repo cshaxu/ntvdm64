@@ -26,6 +26,7 @@ proves the original `FSTI` continuation reaches BOP `FDh`.
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T413 S3 integrated verification](evidence/m0-t413-s3-integrated-verification.md) | M0 T413 S3 | Final product identities, real Console/ConPTY and command regression, adverse harness evidence and footprint. | Retain with owner acceptance and closure. |
 | [T413 S2 accessor restoration](evidence/m0-t413-s2-accessor-restoration.md) | M0 T413 S2 | Original C accessor composition, full-library focused tests and measured mirror/overlay change. | Retain through integrated acceptance. |
 | [T413 S1 accessor audit](evidence/m0-t413-s1-accessor-layout-audit.md) | M0 T413 S1 | Complete CCPU/C-VID changed-file disposition, original-accessor fixture, concurrency route and measured restoration targets. | Retain through T413 integration and closure. |
 | [T412 S11 Console handoff](evidence/m0-t412-s11-console-handoff.md) | M0 T412 S11 | Preserves Terminal reproduction, adverse results, cleanup manifest and bounded S10 handoff. | Retain through repair and T412 acceptance. |

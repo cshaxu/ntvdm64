@@ -46,8 +46,8 @@ for (const [, name, rawType] of accessors) {
     videoDeclarations.push(`static ${slotType} video_get_${name}(void) { return (${slotType})(getVideo${name})(); }`,
       `static void video_set_${name}(${slotType} value) { (setVideo${name})((${type})value); }`);
   }
-  videoSlots.push(`    Video.GetVideo${name} = ${same ? 'getVideo' + name : 'video_get_' + name};`,
-    `    Video.SetVideo${name} = ${same ? 'setVideo' + name : 'video_set_' + name};`);
+  videoSlots.push(`    boundVideo.GetVideo${name} = ${same ? 'getVideo' + name : 'video_get_' + name};`,
+    `    boundVideo.SetVideo${name} = ${same ? 'setVideo' + name : 'video_set_' + name};`);
   const body = setters.match(new RegExp('case\\s+S_\\d+_CiSetVideo' + name + '_\\w+_id\\s*:[\\s\\S]*?(?=case\\s|$)'))?.[0];
   const offset = body?.match(/&\(r20\)\)\s*=\s*\(IS32\)\((\d+)\)/)?.[1];
   if (!offset) throw new Error(`Missing independent generated GDP offset: ${name}`);
