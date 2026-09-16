@@ -7,8 +7,6 @@
 **No active M/T/S packet.** M0 T417 is closed; the next admission is Queue
 candidate 1.
 
-| Field | Record |
-| --- | --- |
 | Field | Closure record |
 | --- | --- |
 | Identifier Mode | M0 T417, Ordinary Mode. |
