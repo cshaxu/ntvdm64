@@ -7,6 +7,8 @@ with S1-S3 results in the [earlier closure audit](../history/m0-t413-accessor-re
 The owner subsequently reopened the same package for autonomous-binding cleanup
 and IP-wrap repair; the [follow-up closure](../history/m0-t413-accessor-restoration-closure.md#s4-cleanup-and-owner-expanded-ip-repair-closure)
 records that completed extension and its explicit exception-delivery limitation.
+The owner has now admitted the bounded NTVDMx64 exception-branch repair in
+Status; this does not admit the rest of the upstream patch bundle.
 [Status](../states/CURRENT.md) remains the sole active-packet authority.
 The plan below preserves the admitted scope and is not a new active packet.
 

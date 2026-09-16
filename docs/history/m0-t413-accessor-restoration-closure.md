@@ -2,6 +2,11 @@
 
 ## Decision and scope
 
+Subsequent owner disposition after the cleanup closure: reopen the same T
+for NTVDMx64's five exception-hook conditional-scope corrections, as admitted
+in [Status](../states/CURRENT.md). Historical passing and failed results below
+remain unchanged; the known divide failure is transferred, not declared fixed.
+
 Subsequent owner disposition: T413 is reopened for further autonomous-binding
 cleanup in [Status](../states/CURRENT.md). The results below remain historical
 S1-S3 evidence; they do not prove the retained overlay/generator is minimal.
