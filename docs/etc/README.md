@@ -2,6 +2,9 @@
 
 This directory contains only the following owner-approved supporting records.
 
+[T413 S6 Terminal handoff investigation](evidence/m0-t413-s6-terminal-handoff-investigation.md)
+retains the parent-CMD resize reproducer and its explicit non-reproduction limits.
+
 T407's current fast-carrier retirement evidence is
 [indexed here](evidence/m0-t407-s9-fast-carrier-retirement.md).
 

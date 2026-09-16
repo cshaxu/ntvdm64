@@ -25,7 +25,7 @@ static DWORD WINAPI watch_cells(void *unused) {
     char path[MAX_PATH];GetEnvironmentVariableA("TEST_CELL_LOG",path,sizeof(path));
     FILE *f=fopen(path,"w");if(!f)return 1;
     DWORD previous=0,begin=GetTickCount();WCHAR data[16000];
-    while(GetTickCount()-begin<22000) {
+    while(GetTickCount()-begin<30000) {
         CONSOLE_SCREEN_BUFFER_INFO info;DWORD count=0,hash=2166136261u,mode=0;
         if(GetConsoleScreenBufferInfo(h,&info)) {
             DWORD total=(DWORD)info.dwSize.X*info.dwSize.Y;if(total>16000)total=16000;
@@ -54,7 +54,9 @@ int main(int argc,char **argv) {
         char msg[128];snprintf(msg,sizeof(msg),"PTY child console input=%d output=%d\r\n",GetConsoleMode(ci,&mode),GetConsoleMode(co,&mode));WriteFile(co,msg,(DWORD)strlen(msg),&n,NULL);
         SetStdHandle(STD_INPUT_HANDLE,ci);SetStdHandle(STD_OUTPUT_HANDLE,co);SetStdHandle(STD_ERROR_HANDLE,co);
         CloseHandle(CreateThread(NULL,0,watch_cells,NULL,0,NULL));
-        STARTUPINFOA startup={sizeof(startup)};PROCESS_INFORMATION child={0};char cmd[]="O:\\winnt\\run16.exe COMMAND.COM";
+        STARTUPINFOA startup={sizeof(startup)};PROCESS_INFORMATION child={0};char cmd[256];
+        snprintf(cmd,sizeof(cmd),!strcmp(argv[1],"--host-shell") ?
+            "cmd.exe /d /q /k prompt HOST$G" : "O:\\winnt\\run16.exe COMMAND.COM");
         startup.dwFlags=STARTF_USESTDHANDLES;startup.hStdInput=ci;startup.hStdOutput=startup.hStdError=co;
         if(!CreateProcessA(NULL,cmd,NULL,NULL,TRUE,0,NULL,"O:\\winnt",&startup,&child))return 66;
         WaitForSingleObject(child.hProcess,INFINITE);GetExitCodeProcess(child.hProcess,&n);Sleep(400);return n;
@@ -63,12 +65,13 @@ int main(int argc,char **argv) {
     HPCON pty;
     STARTUPINFOEXA si={0};PROCESS_INFORMATION pi={0};SIZE_T bytes=0;
     COORD size;
-    if(argc!=4 && (argc!=5 || (strcmp(argv[4],"--mouse") && strcmp(argv[4],"--resize"))))return 64;
+    if(argc!=4 && (argc!=5 || (strcmp(argv[4],"--mouse") && strcmp(argv[4],"--resize") && strcmp(argv[4],"--handoff"))))return 64;
     size.X=(SHORT)atoi(argv[1]);size.Y=(SHORT)atoi(argv[2]);
     JOBOBJECT_EXTENDED_LIMIT_INFORMATION limits={0};
     char executable[MAX_PATH], command[MAX_PATH+16];
     GetModuleFileNameA(NULL,executable,sizeof(executable));
-    snprintf(command,sizeof(command),"\"%s\" --child",executable);
+    snprintf(command,sizeof(command),"\"%s\" %s",executable,
+        argc==5 && !strcmp(argv[4],"--handoff") ? "--host-shell" : "--child");
     if(argc==5 && !strcmp(argv[4],"--mouse")) { char path[MAX_PATH];snprintf(path,sizeof(path),"%s.mouse.txt",argv[3]);SetEnvironmentVariableA("MVDM_CONSOLE_PRESENTATION_REPORT_PATH",path); }
     { char path[MAX_PATH]; snprintf(path,sizeof(path),"%s.rpc.txt",argv[3]);SetEnvironmentVariableA("MVDM_BASESRV_TRACE_PATH",path);snprintf(path,sizeof(path),"%s.stream.txt",argv[3]);SetEnvironmentVariableA("MVDM_STREAM_IO_REPORT_PATH",path); }
     { char path[MAX_PATH];snprintf(path,sizeof(path),"%s.cells.txt",argv[3]);SetEnvironmentVariableA("TEST_CELL_LOG",path); }
@@ -91,6 +94,30 @@ int main(int argc,char **argv) {
     AssignProcessToJobObject(job,pi.hProcess);ResumeThread(pi.hThread);
     printf("launcher=%lu width=%d height=%d\n",pi.dwProcessId,size.X,size.Y);fflush(stdout);
     send_keys("\x1b[I");
+    if(argc==5 && !strcmp(argv[4],"--handoff")) {
+        COORD maximized={120,40};
+        char stage[16]="guest";
+        GetEnvironmentVariableA("TEST_HANDOFF_STAGE",stage,sizeof(stage));
+        Sleep(1000);
+        if(GetEnvironmentVariableA("TEST_HANDOFF_HISTORY",NULL,0)) {
+            send_keys("for /l %i in (1,1,60) do @echo HISTORY-%i-abcdefghijklmnopqrstuvwxyz-abcdefghijklmnopqrstuvwxyz-abcdefghijklmnopqrstuvwxyz-abcdefghijklmnopqrstuvwxyz\r");
+            Sleep(1000);
+        }
+        send_keys("run16 command.com\r");Sleep(3000);
+        if(!strcmp(stage,"guest") && FAILED(ResizePseudoConsole(pty,maximized)))return 67;
+        Sleep(2000);send_keys("exit\r");Sleep(2000);
+        if(!strcmp(stage,"host") && FAILED(ResizePseudoConsole(pty,maximized)))return 67;
+        send_keys("dir\r");Sleep(2000);
+        if(!strcmp(stage,"input") && FAILED(ResizePseudoConsole(pty,maximized)))return 67;
+        send_keys("echo S6_TYPED");Sleep(2000);
+        send_keys("\r");Sleep(1000);send_keys("exit\r");
+        DWORD wait=WaitForSingleObject(pi.hProcess,5000),code=0;
+        GetExitCodeProcess(pi.hProcess,&code);
+        printf("handoff wait=%lu exit=%lu\n",wait,code);fflush(stdout);
+        CloseHandle(job);ClosePseudoConsole(pty);CloseHandle(write_pipe);
+        WaitForSingleObject(thread,3000);CloseHandle(raw_log);
+        return wait==WAIT_OBJECT_0 && code==0?0:1;
+    }
     Sleep(3000);
     send_keys("mem\r");Sleep(2500);
     send_keys("edit\r");Sleep(3500);send_keys("\x1b");Sleep(500);

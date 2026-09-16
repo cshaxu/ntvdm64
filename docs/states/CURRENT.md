@@ -2,7 +2,64 @@
 
 ## Current Work
 
-**No active M/T/S packet.** M0 T413 S5 concludes the owner-approved five
+**Active: M0 T413 S6** — Terminal resize and parent-CMD exit handoff.
+
+The owner explicitly corrects the requested repair to Windows Terminal:
+run16 COMMAND, maximize while running, EXIT, parent CMD DIR fills the screen,
+then typed input jumps about three rows above the visible prompt. S5 remains
+closed; this owner-approved extension does not reopen exception repair.
+
+## Active Packet
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T413 S6, Ordinary Mode. |
+| Candidate Proposal | [Accessor and Console regression context](../proposals/proposal-ccpu40-cvid-accessor-layout-restoration-001.md). |
+| Admission And Approval | Owner requests a new S to fix Terminal, then compile/test/commit/push; clarification overrides the mistakenly selected exception quotation. |
+| Objective | Preserve coherent Console geometry, modes and cursor ownership when a resized Terminal returns from VDM to native CMD and begins cooked input after scrolling. |
+| Non-goals | No CCPU, guest cursor arithmetic, exception repair, broker protocol or Terminal settings changes. No fixed three-row cursor compensation. |
+| Reference Baseline | 58c535e2e, S5 published three-program package, existing Console grid-resize and handoff code. |
+| Files And ABI Surface | Original nt_hosts/nt_event/nt_fulsc/nt_graph consumers; existing Console adapter; only source-proven affected boundary changes, related regression observers and evidence. |
+| Applicable Rules | Execution, architecture, coding, document and source policies; source-first finite Console boundary. |
+| Verification | Reproduce native CMD before/after child VDM and live ConPTY resize; observe buffer/window/cursor/modes and partial cooked input; contrast old/new exact builds; retain existing COMMAND/EDIT/MEM, resize and mouse regression checks; governance/link and git diff checks. |
+| Expected Markers | Parent CMD prompt and typed characters stay on one logical line after scroll; current Terminal dimensions remain coherent; original failure reproduced and corrected without guest changes. |
+| Asset Needs | Existing OpenNT mirrors and selected sources; MSVC x86 /MT; build/M0-T413/S6/{formal,integration}; runtime media O:\winnt and observations only O:\winnt\logs. |
+| Reporting Requirements | Exact root cause, changed owner, source rationale, negative control, test limits, published hashes and clean pushed revision. |
+| Stop Conditions | Conflicting concurrent edits, inability to reproduce or a required new platform boundary; report rather than invent a repair. Never terminate an unrelated live session. |
+| Exit Criteria | Demonstrated minimal repair, three formal EXEs, focused and integration tests, tracked evidence, commit/push and clean worktree. |
+| Original Owner Request | “我就是要你处理terminal的问题啊”; new S, compile/test/commit/push as requested immediately beforehand. |
+| Similar-Issue Sweep | No resize, grow/maximize, shrink/restore, scroll then partial cooked input; ordinary conhost versus ConPTY and child exit versus app transition. |
+
+## S6 Investigation Progress
+
+[Initial evidence](../etc/evidence/m0-t413-s6-terminal-handoff-investigation.md):
+four system-ConPTY parent-CMD handoff runs do not reproduce the owner's visible
+row mismatch. Native buffer/window/cursor records remain consistent. Actual
+Windows Terminal frontend/runtime observation is still required; screenshots
+requested. S6 pauses at its reproduction gate, not closed. No product source,
+build or published EXE change; admission/test evidence only in this delivery.
+
+## S1 Closure Record
+
+[S1 audit](../etc/evidence/m0-t413-s1-accessor-layout-audit.md), 23a4fa83c.
+
+## S2 Closure Record
+
+[S2 restoration](../etc/evidence/m0-t413-s2-accessor-restoration.md), 3cc7851e5.
+
+## S3 Closure Record
+
+[S3 integration](../etc/evidence/m0-t413-s3-integrated-verification.md), d9d814b00.
+
+## S4 Closure Record
+
+[S4 cleanup](../etc/evidence/m0-t413-s4-binding-cleanup.md), eb0c4fa33.
+
+## S5 Closure Record
+
+[S5 exception repair](../etc/evidence/m0-t413-s5-exception-scope.md), 58c535e2e.
+
+M0 T413 S5 concludes the owner-approved five
 NTVDMx64 exception-hook scope corrections. The
 [closure audit](../history/m0-t413-accessor-restoration-closure.md#s5-exception-scope-closure)
 and [S5 evidence](../etc/evidence/m0-t413-s5-exception-scope.md) retain scope,
