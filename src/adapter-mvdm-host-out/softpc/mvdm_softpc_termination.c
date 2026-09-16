@@ -641,8 +641,6 @@ void mvdm_softpc_record_bop_return(unsigned int selector,
     }
     mvdm_softpc_write_optional_report("MVDM_BOP_RETURN_REPORT_PATH", message,
         (DWORD)(sizeof(message) - 1));
-    if (selector == 0x54u && service == 0x0fu)
-        mvdm_softpc_record_command_environment_return_code(guest_cs, guest_ip);
 }
 
 void mvdm_softpc_record_dpmi_unhandled_exception(unsigned int vector,
@@ -1439,34 +1437,6 @@ void mvdm_softpc_record_keyboard_pump(unsigned int stage,
             message, (DWORD)formatted);
 }
 
-void mvdm_softpc_record_command_call(unsigned int service,
-                                    unsigned int stage,
-                                    unsigned int guest_ax,
-                                    unsigned int guest_cf)
-{
-    static const char hex[] = "0123456789ABCDEF";
-    char message[] = "MVDM-CMD-CALL svc=00 stage=0 ax=0000 cf=0\r\n";
-
-    message[18] = hex[(service >> 4) & 0x0fu];
-    message[19] = hex[service & 0x0fu];
-    message[27] = hex[stage & 0x0fu];
-    message[32] = hex[(guest_ax >> 12) & 0x0fu];
-    message[33] = hex[(guest_ax >> 8) & 0x0fu];
-    message[34] = hex[(guest_ax >> 4) & 0x0fu];
-    message[35] = hex[guest_ax & 0x0fu];
-    message[40] = guest_cf ? '1' : '0';
-    mvdm_softpc_write_optional_report("MVDM_BOP_RETURN_REPORT_PATH", message,
-        (DWORD)(sizeof(message) - 1));
-    /* The continuation report path is captured and removed before cmdenv.c
-     * imports the host environment.  Mirroring this already-decoded scalar
-     * BOP observation there lets one fixed interactive run distinguish an
-     * internal COMMAND table hit (no SVC_CMDCHECKBINARY) from an external
-     * unknown-image handoff, without placing a diagnostic selector in the
-     * guest environment or altering dispatch. */
-    mvdm_softpc_write_captured_report(mvdm_softpc_command_continuation_report_path,
-        message, (DWORD)(sizeof(message) - 1));
-}
-
 void mvdm_softpc_record_dpmi_interrupt_registration(unsigned int vector,
     unsigned int flags, unsigned int selector, uint32_t eip)
 {
@@ -1485,94 +1455,6 @@ void mvdm_softpc_record_dpmi_interrupt_registration(unsigned int vector,
         (DWORD)formatted);
 }
 
-
-void mvdm_softpc_record_command_vdm_result(unsigned int stage,
-    unsigned int error_code, unsigned int vdm_state, unsigned int succeeded,
-    unsigned int first_call, unsigned int repeat_call)
-{
-    char message[176];
-    int formatted;
-
-    if (mvdm_softpc_command_continuation_report_path[0] == '\0')
-        return;
-    formatted = snprintf(message, sizeof(message),
-        "MVDM-CMD-VDMINFO stage=%u error=%04X state=%04X success=%u first=%u repeat=%u\\r\\n",
-        stage, error_code & 0xffffu, vdm_state & 0xffffu, succeeded ? 1u : 0u,
-        first_call ? 1u : 0u, repeat_call ? 1u : 0u);
-    if (formatted <= 0 || (size_t)formatted >= sizeof(message))
-        return;
-    {
-        HANDLE report = CreateFileA(mvdm_softpc_command_continuation_report_path,
-            FILE_APPEND_DATA, FILE_SHARE_READ, NULL, OPEN_ALWAYS,
-            FILE_ATTRIBUTE_NORMAL, NULL);
-        DWORD written;
-        if (report == INVALID_HANDLE_VALUE)
-            return;
-        (void)WriteFile(report, message, (DWORD)formatted, &written, NULL);
-        CloseHandle(report);
-    }
-}
-
-void mvdm_softpc_record_command_guest_return(unsigned int return_code,
-    unsigned int first_call, unsigned int repeat_call)
-{
-    char message[144];
-    int formatted;
-
-    if (mvdm_softpc_command_continuation_report_path[0] == '\0')
-        return;
-    formatted = snprintf(message, sizeof(message),
-        "MVDM-CMD-GUEST-RETURN code=%04X first=%u repeat=%u\\r\\n",
-        return_code & 0xffffu, first_call ? 1u : 0u, repeat_call ? 1u : 0u);
-    if (formatted <= 0 || (size_t)formatted >= sizeof(message))
-        return;
-    {
-        HANDLE report = CreateFileA(mvdm_softpc_command_continuation_report_path,
-            FILE_APPEND_DATA, FILE_SHARE_READ, NULL, OPEN_ALWAYS,
-            FILE_ATTRIBUTE_NORMAL, NULL);
-        DWORD written;
-        if (report == INVALID_HANDLE_VALUE)
-            return;
-        (void)WriteFile(report, message, (DWORD)formatted, &written, NULL);
-        CloseHandle(report);
-    }
-}
-
-void mvdm_softpc_record_command_environment_return_code(unsigned int guest_cs,
-    unsigned int guest_ip)
-{
-    mvdm_guest_location location;
-    mvdm_guest_location_lease lease;
-    char message[224];
-    int formatted;
-
-    if (mvdm_softpc_command_continuation_report_path[0] == '\0')
-        return;
-    if (!mvdm_guest_location_set_real_mode(&location, (uint16_t)guest_cs,
-            (uint16_t)guest_ip) ||
-        !mvdm_guest_location_acquire(&location, 12u, GUEST_MEMORY_ACCESS_READ,
-            &lease))
-        return;
-    formatted = snprintf(message, sizeof(message),
-        "MVDM-CMD-ENV-RETURN cs=%04X ip=%04X bytes=%02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X state=copied\r\n",
-        guest_cs & 0xffffu, guest_ip & 0xffffu, lease.bytes[0], lease.bytes[1],
-        lease.bytes[2], lease.bytes[3], lease.bytes[4], lease.bytes[5],
-        lease.bytes[6], lease.bytes[7], lease.bytes[8], lease.bytes[9],
-        lease.bytes[10], lease.bytes[11]);
-    if (!mvdm_guest_location_release(&lease, 0) || formatted <= 0 ||
-        (size_t)formatted >= sizeof(message))
-        return;
-    {
-        HANDLE report = CreateFileA(mvdm_softpc_command_continuation_report_path,
-            FILE_APPEND_DATA, FILE_SHARE_READ, NULL, OPEN_ALWAYS,
-            FILE_ATTRIBUTE_NORMAL, NULL);
-        DWORD written;
-        if (report == INVALID_HANDLE_VALUE)
-            return;
-        (void)WriteFile(report, message, (DWORD)formatted, &written, NULL);
-        CloseHandle(report);
-    }
-}
 
 void mvdm_softpc_record_command_environment(unsigned int stage,
     unsigned int guest_es, unsigned int guest_bx, unsigned int guest_ax,
@@ -2031,67 +1913,5 @@ void mvdm_softpc_record_sas_store(uint32_t guest_linear_address,
         (unsigned long)byte_count, (unsigned long)value);
     if (formatted <= 0 || (size_t)formatted >= sizeof(message)) return;
     mvdm_softpc_write_captured_report(mvdm_softpc_sas_store_report_path,
-        message, (DWORD)formatted);
-}
-
-void mvdm_softpc_record_command_exit_policy(unsigned int dos_session,
-    unsigned int close_on_exit, unsigned int return_code)
-{
-    char message[144];
-    int formatted;
-
-    if (mvdm_softpc_command_continuation_report_path[0] == '\0')
-        return;
-    formatted = snprintf(message, sizeof(message),
-        "MVDM-CMD-EXIT-POLICY session=%u close=%u code=%04X\\r\\n",
-        dos_session, close_on_exit ? 1u : 0u, return_code & 0xffffu);
-    if (formatted <= 0 || (size_t)formatted >= sizeof(message))
-        return;
-    mvdm_softpc_write_captured_report(mvdm_softpc_command_continuation_report_path,
-        message, (DWORD)formatted);
-}
-
-static unsigned long mvdm_softpc_payload_fingerprint(const void *bytes,
-    unsigned int length)
-{
-    const unsigned char *cursor = (const unsigned char *)bytes;
-    unsigned long value = 2166136261u;
-    unsigned int index;
-
-    if ((length != 0u && cursor == NULL) || length > 0xffffu)
-        return 0u;
-    for (index = 0u; index < length; ++index)
-        value = (value ^ cursor[index]) * 16777619u;
-    return value;
-}
-
-void mvdm_softpc_record_command_vdm_record(unsigned int command_bytes,
-    const void *command, unsigned int application_bytes, const void *application,
-    unsigned int pif_bytes, const void *pif, unsigned int environment_bytes,
-    const void *environment, unsigned int directory_bytes, const void *directory,
-    unsigned int vdm_state, unsigned int current_drive, unsigned int code_page,
-    unsigned int creation_flags, unsigned int coming_from_bat,
-    unsigned int has_standard_input, unsigned int has_standard_output,
-    unsigned int has_standard_error)
-{
-    char message[384];
-    int formatted;
-
-    if (mvdm_softpc_command_continuation_report_path[0] == '\0')
-        return;
-    formatted = snprintf(message, sizeof(message),
-        "MVDM-CMD-RECORD cmd=%04X/%08lX app=%04X/%08lX pif=%04X/%08lX env=%04X/%08lX dir=%04X/%08lX vdm-state=%04X drive=%04X cp=%08lX flags=%08lX bat=%u std=%u%u%u state=copied\r\n",
-        command_bytes & 0xffffu, mvdm_softpc_payload_fingerprint(command, command_bytes),
-        application_bytes & 0xffffu, mvdm_softpc_payload_fingerprint(application, application_bytes),
-        pif_bytes & 0xffffu, mvdm_softpc_payload_fingerprint(pif, pif_bytes),
-        environment_bytes & 0xffffu, mvdm_softpc_payload_fingerprint(environment, environment_bytes),
-        directory_bytes & 0xffffu, mvdm_softpc_payload_fingerprint(directory, directory_bytes),
-        vdm_state & 0xffffu, current_drive & 0xffffu,
-        (unsigned long)code_page, (unsigned long)creation_flags,
-        coming_from_bat ? 1u : 0u, has_standard_input ? 1u : 0u,
-        has_standard_output ? 1u : 0u, has_standard_error ? 1u : 0u);
-    if (formatted <= 0 || (size_t)formatted >= sizeof(message))
-        return;
-    mvdm_softpc_write_captured_report(mvdm_softpc_command_continuation_report_path,
         message, (DWORD)formatted);
 }

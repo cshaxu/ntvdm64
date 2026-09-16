@@ -10,7 +10,8 @@
 
 #include <cmdsvc.h>
 #include <softpc.h>
-/* DIVERGENCE(MVDM-HOST-DIV-177): diagnostic-only COMMAND call recorder. */
+/* DIVERGENCE(MVDM-HOST-DIV-263): restore host-only report selectors after
+ * original environment import so a native child can scrub them again. */
 #include "adapter-mvdm-host-out/softpc/include/mvdm_softpc_termination.h"
 
 
@@ -52,34 +53,9 @@ BOOL CmdDispatch (ULONG iSvc)
 	return FALSE;
     }
 #endif
-    /* DIVERGENCE(MVDM-HOST-DIV-177): state-neutral table-call attribution. */
-    mvdm_softpc_record_command_call((unsigned int)iSvc, 0u,
-        (unsigned int)getAX(), (unsigned int)getCF());
-    /* DIVERGENCE(MVDM-HOST-DIV-199): default-off scalar evidence for the
-     * original 54:0F ES:0/BX contract.  It observes the existing table call,
-     * does not read its buffer, and cannot alter the original provider. */
-    if (iSvc == SVC_GETINITENVIRONMENT)
-        mvdm_softpc_record_command_environment(0u, (unsigned int)getES(),
-            (unsigned int)getBX(), (unsigned int)getAX(),
-            (unsigned int)getCF(), (unsigned int)getDS(), (unsigned int)getSS(),
-            (unsigned int)getSP());
     (apfnSVCCmd [iSvc])();
     if (iSvc == SVC_GETINITENVIRONMENT)
         mvdm_softpc_restore_child_report_paths();
-    /* DIVERGENCE(MVDM-HOST-DIV-177): state-neutral table-return attribution. */
-    mvdm_softpc_record_command_call((unsigned int)iSvc, 1u,
-        (unsigned int)getAX(), (unsigned int)getCF());
-    if (iSvc == SVC_GETINITENVIRONMENT)
-        mvdm_softpc_record_command_environment(1u, (unsigned int)getES(),
-            (unsigned int)getBX(), (unsigned int)getAX(),
-            (unsigned int)getCF(), (unsigned int)getDS(), (unsigned int)getSS(),
-            (unsigned int)getSP());
-    /* DIVERGENCE(MVDM-HOST-DIV-202): a fixed-image, default-off read of the
-     * original resident stub table after its unchanged 54:0F call.  It uses
-     * short mapping-manager leases and cannot modify the table or any CPU
-     * state. */
-    if (iSvc == SVC_GETINITENVIRONMENT)
-        mvdm_softpc_record_command_stub_table((uint16_t)getCS());
 
     return TRUE;
 }

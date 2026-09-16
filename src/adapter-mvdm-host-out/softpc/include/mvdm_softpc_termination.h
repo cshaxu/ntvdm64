@@ -228,47 +228,10 @@ void mvdm_softpc_record_keyboard_pump(unsigned int stage,
                                       unsigned int keyboard_disabled,
                                       unsigned int waiting_for_upcode);
 
-/* Fixed-container diagnostic only.  `stage` identifies an already-selected
- * original COMMAND call boundary; it does not route or alter that call. */
-void mvdm_softpc_record_command_call(unsigned int service,
-                                    unsigned int stage,
-                                    unsigned int guest_ax,
-                                    unsigned int guest_cf);
-
 /* Default-off scalar observation of the original DPMI 53:02 registration.
  * The caller has already decoded the registration frame. */
 void mvdm_softpc_record_dpmi_interrupt_registration(unsigned int vector,
     unsigned int flags, unsigned int selector, uint32_t eip);
-
-/* Default-off, scalar-only observation of the original cmdGetNextCmd
- * BaseClient request/result.  It distinguishes a command-record completion
- * from a command-returned DOS error without reading command bytes, retaining
- * a VDMINFO pointer, or changing the request. */
-void mvdm_softpc_record_command_vdm_result(unsigned int stage,
-    unsigned int error_code, unsigned int vdm_state, unsigned int succeeded,
-    unsigned int first_call, unsigned int repeat_call);
-
-/* Default-off shape-only witness of a completed original VDMINFO record.
- * Values are bounded payload lengths plus content fingerprints; it neither
- * retains nor emits command, environment, PIF, or directory text. */
-void mvdm_softpc_record_command_vdm_record(unsigned int command_bytes,
-    const void *command, unsigned int application_bytes, const void *application,
-    unsigned int pif_bytes, const void *pif, unsigned int environment_bytes,
-    const void *environment, unsigned int directory_bytes, const void *directory,
-    unsigned int vdm_state, unsigned int current_drive, unsigned int code_page,
-    unsigned int creation_flags, unsigned int coming_from_bat,
-    unsigned int has_standard_input, unsigned int has_standard_output,
-    unsigned int has_standard_error);
-
-/* Default-off, scalar-only observation of the original guest CMDINFO return
- * code when COMMAND re-enters cmdGetNextCmd. */
-void mvdm_softpc_record_command_guest_return(unsigned int return_code,
-    unsigned int first_call, unsigned int repeat_call);
-
-/* Default-off scalar witness of COMMAND's already-selected post-program
- * lifecycle branch.  It records neither PIF text nor guest state. */
-void mvdm_softpc_record_command_exit_policy(unsigned int dos_session,
-    unsigned int close_on_exit, unsigned int return_code);
 
 /* Default-off, fixed-container observation of the original COMMAND
  * GetInitEnvironment table entry.  The caller supplies only already-live
@@ -284,11 +247,6 @@ void mvdm_softpc_record_command_environment(unsigned int stage,
  * short session leases after the existing environment table call; it never
  * retains a guest alias or changes guest/CPU/BOP state. */
 void mvdm_softpc_record_command_stub_table(uint16_t guest_cs);
-
-/* Default-off COMMAND environment-return observation.  It copies only a
- * bounded instruction window at the already-advanced BOP return location. */
-void mvdm_softpc_record_command_environment_return_code(unsigned int guest_cs,
-    unsigned int guest_ip);
 
 /* App captures optional continuation and stream-I/O report paths before
  * original MVDM reads its inherited environment, then removes those

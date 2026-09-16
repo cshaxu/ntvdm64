@@ -14,8 +14,6 @@
  * process-address aliases in NT4.  Preserve their 16:16 source positions and
  * obtain session-mapped guest leases only at the original access points. */
 #include "adapter-mvdm-host-out/basesrv/include/mvdm_command_guest_state.h"
-/* DIVERGENCE(MVDM-HOST-DIV-177): diagnostic-only COMMAND call recorder. */
-#include "adapter-mvdm-host-out/softpc/include/mvdm_softpc_termination.h"
 
 #include <cmdsvc.h>
 #include <demexp.h>
@@ -94,13 +92,6 @@ char    AppName[MAX_PATH + 13];
     }
     pCMDInfo = &CmdInfo;
 
-    /* DIVERGENCE(MVDM-HOST-DIV-203): CMDINFO.ReturnCode is the original
-     * 16-bit guest result supplied by the prior command lifecycle.  Copy
-     * only that scalar for a default-off observer; do not inspect or alter
-     * command text, guest buffers, record ownership, or the return flow. */
-    mvdm_softpc_record_command_guest_return(FETCHWORD(pCMDInfo->ReturnCode),
-        IsFirstCall ? 1u : 0u, IsRepeatCall ? 1u : 0u);
-
     VDMInfo.ErrorCode = FETCHWORD(pCMDInfo->ReturnCode);
     VDMInfo.CmdSize = sizeof(CmdLine);
     VDMInfo.CmdLine = CmdLine;
@@ -157,8 +148,6 @@ char    AppName[MAX_PATH + 13];
                 nt_block_event_thread(0);
 
             if (DosSessionId) {
-		mvdm_softpc_record_command_exit_policy((unsigned int)DosSessionId,
-		    (unsigned int)pfdata.CloseOnExit, (unsigned int)VDMInfo.ErrorCode);
 		if (!pfdata.CloseOnExit){
 		    char  achTitle[MAX_PATH];
                     char  achInactive[60];     //should be plenty for 'inactive'
@@ -278,30 +267,10 @@ char    AppName[MAX_PATH + 13];
     if (DosEnvCreated)
 	VDMInfo.VDMState |= ASKING_FOR_SECOND_TIME;
 
-    /* DIVERGENCE(MVDM-HOST-DIV-203): observe only the original VDMINFO
-     * scalar request/result at this existing BaseClient boundary.  The
-     * observer is default-off, retains no pointer or payload, and cannot
-     * alter COMMAND's request, record, or error direction. */
-    mvdm_softpc_record_command_vdm_result(0u, (unsigned int)VDMInfo.ErrorCode,
-        (unsigned int)VDMInfo.VDMState, 0u, IsFirstCall ? 1u : 0u,
-        IsRepeatCall ? 1u : 0u);
     if(!GetNextVDMCommand(&VDMInfo)){
-       mvdm_softpc_record_command_vdm_result(1u,
-           (unsigned int)VDMInfo.ErrorCode, (unsigned int)VDMInfo.VDMState,
-           0u, IsFirstCall ? 1u : 0u, IsRepeatCall ? 1u : 0u);
        RcErrorDialogBox(EG_ENVIRONMENT_ERR, NULL, NULL);
        TerminateVDM();
     }
-    mvdm_softpc_record_command_vdm_result(1u, (unsigned int)VDMInfo.ErrorCode,
-        (unsigned int)VDMInfo.VDMState, 1u, IsFirstCall ? 1u : 0u,
-        IsRepeatCall ? 1u : 0u);
-    mvdm_softpc_record_command_vdm_record(VDMInfo.CmdSize, VDMInfo.CmdLine,
-        VDMInfo.AppLen, VDMInfo.AppName, VDMInfo.PifLen, VDMInfo.PifFile,
-        VDMInfo.EnviornmentSize, VDMInfo.Enviornment,
-        VDMInfo.CurDirectoryLen, VDMInfo.CurDirectory, VDMInfo.VDMState,
-        VDMInfo.CurDrive, VDMInfo.CodePage, VDMInfo.dwCreationFlags,
-        VDMInfo.fComingFromBat, VDMInfo.StdIn != NULL, VDMInfo.StdOut != NULL,
-        VDMInfo.StdErr != NULL);
 
 
     IsRepeatCall = FALSE;
@@ -783,9 +752,6 @@ UINT  DriveType;
 VOID cmdSetInfo (VOID)
 {
 
-    /* DIVERGENCE(MVDM-HOST-DIV-177): state-neutral selected-handler entry. */
-    mvdm_softpc_record_command_call(5u, 2u, (unsigned int)getAX(),
-        (unsigned int)getCF());
     /* DIVERGENCE MVDM-HOST-DIV-111: record all three original SCS scalar
      * locations numerically; their values are acquired only at each use. */
     if (!mvdm_command_guest_state_set_scs_scalars(getDS(), getDX(),
@@ -794,15 +760,9 @@ VOID cmdSetInfo (VOID)
             getDS(), getBX(), getDS(), getCX())) {
         setCF(1);
         setAX((USHORT)ERROR_INVALID_ADDRESS);
-        /* DIVERGENCE(MVDM-HOST-DIV-177): state-neutral failure return. */
-        mvdm_softpc_record_command_call(5u, 3u, (unsigned int)getAX(),
-            (unsigned int)getCF());
         return;
     }
 
-    /* DIVERGENCE(MVDM-HOST-DIV-177): state-neutral success return. */
-    mvdm_softpc_record_command_call(5u, 3u, (unsigned int)getAX(),
-        (unsigned int)getCF());
     return;
 }
 
