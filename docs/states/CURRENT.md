@@ -51,12 +51,11 @@ provenance, tests and explicit compatibility limits. No next T is admitted.
 
 ## Next Work
 
-[Queue](QUEUE.md) remains the sole ordering authority. Existing x87 host-layout
-restoration is first. The owner-requested
-[remaining NTVDMx64 corrections proposal](../proposals/proposal-ntvdmx64-source-corrections-001.md)
-is second, before WOW/debugger. It requires hunk-level applicability proof,
-accounts for existing equivalent fixes such as DIV-221, and rejects blanket
-optimization/hack imports. Neither candidate is admitted by S5 closure.
+[Queue](QUEUE.md) remains the sole ordering authority. The owner-requested
+[footprint cleanup proposal](../proposals/proposal-mirror-overlay-footprint-cleanup-001.md)
+is first, with five planned S packets and separate mirror-diff, overlay and
+adapter-autonomous-code acceptance metrics. Existing candidates keep their
+relative order behind it. This documentation delivery admits no numeric T.
 
 ## Recent M0 Closures
 
@@ -65,6 +64,13 @@ reopening T412 Broker or claiming full WRITE recovery. T411/T410/T409/T407/T406
 retain their recorded scopes and limitations.
 
 ## Recent Governance
+
+Owner-requested footprint planning (M0 Td, Ordinary Mode) adds one candidate
+proposal at Queue head with five planned S packets. Scope is documentation only;
+the current source/runtime baseline is unchanged. Acceptance requires separate
+mirror, overlay and adapter-autonomous reductions, generated-code accounting
+and an explicit relocation guard. Documentation governance, relative links and
+diff checks pass; the delivery commit carries the proposal and ordering change.
 
 S5 P2 delivers the source repair, upstream hunk evidence and separate queued
 proposal in one reviewed commit. The current packet is closed without admitting
