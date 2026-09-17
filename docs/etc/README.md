@@ -2,6 +2,7 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T420 S1 CCPU386 package audit](evidence/m0-t420-s1-ccpu386-package-audit.md) | M0 T420 S1 | Freezes the complete CCPU386 selected manifest, providers, difference dispositions and the implementation-ready C-VID S2 boundary. | Retain through T420 package completion. |
 | [T419 S5 DTASKMGR RPC and compact entry](evidence/m0-t419-s5-dtaskmgr-rpc-and-run16-compact-entry.md) | M0 T419 S5 | Records the real-system-handle repair, live worker projection, generic bare-image compact-option boundary, x86/package proof and owner visual boundary. | Retain through T419 closure. |
 | [T419 S4 DTASKMGR disconnected state](evidence/m0-t419-s4-dtaskmgr-disconnected-state.md) | M0 T419 S4 | Retains the normal empty-table presentation when BaseSrv is absent, formal x86/package proof and owner visual acceptance boundary. | Retain through T419 closure. |
 | [T419 S2--S3 DTASKMGR integration](evidence/m0-t419-s2-s3-dtaskmgr-integration.md) | M0 T419 S2--S3 | Fixed-width BaseSrv management projection, server-owned worker termination, four-program x86 build and deployed COMMAND/MEM/EDIT regression evidence. | Retain through T419 closure. |

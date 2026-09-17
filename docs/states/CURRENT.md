@@ -32,7 +32,10 @@
 - T419 is closed at `e769ac104`: four EXE component directories are explicit,
   `dtmgr.exe` replaces `dtaskmgr.exe`, and the clean-Console plus
   COMMAND/MEM/EDIT regressions passed.
-- The next package is an audit/design S only. No package is called complete
+- S1 freezes all 130 selected CCPU compile nodes, the `ntstubs`/`localfm`
+  profile split, the 120/10 final-map extraction split and finite external
+  owners in [its evidence](../etc/evidence/m0-t420-s1-ccpu386-package-audit.md).
+  S2 remains the already-planned C-VID package; no package is called complete
   merely because it links or has a focused fixture.
 
 ## Prior Closure
