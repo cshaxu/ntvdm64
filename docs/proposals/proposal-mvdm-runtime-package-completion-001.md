@@ -90,14 +90,30 @@ classifies every manifest member as direct, same-shaped finite binding or
 explicit profile exclusion; proves all reached external functions, globals,
 callbacks, structures, resources and failure paths; and removes a duplicate
 local implementation whenever the original owner now composes. It must run
-the full package-local positive/negative matrix, fresh formal x86 build, and a
-declared integration workload. It reports original mirror diff, adapter code,
-removed autonomous code and residual binding lines separately.
+the full package-local positive/negative matrix, fresh formal x86 build, and
+the following mandatory established-product regression matrix before it may
+close:
+
+| Entry route | Required workloads |
+| --- | --- |
+| Direct launcher route | `run16.exe COMMAND.COM`, `run16.exe MEM.EXE`, and `run16.exe EDIT.COM` each start, run and return with their established expected behavior. |
+| Interactive COMMAND route | Start `COMMAND.COM` through `run16.exe`; at its prompt run `COMMAND`, `MEM`, and `EDIT`; each child must execute and return to the same usable parent prompt. |
+
+The interactive route is not a cosmetic duplicate: it proves original COMMAND
+re-entry, broker delivery, worker lifecycle and Console state survive a child
+run. `EDIT` must leave the parent prompt usable, after which `MEM` must still
+produce its established normal output. A missing interactive-input observer
+may limit automation, but cannot convert an unrun or failed owner-run test
+into a pass. The S evidence records the exact commands, package hashes,
+observed result and any owner-performed visual acceptance. It reports original
+mirror diff, adapter code, removed autonomous code and residual binding lines
+separately.
 
 The package remains partial if any manifest member is silently omitted, an
 adapter still owns original policy, a lifecycle/teardown path is unproved, or
-a local matrix is missing. A profile exclusion closes only when the source
-policy and product profile prove the package cannot be a runtime dependency.
+a local or mandatory established-product regression is missing or fails. A
+profile exclusion closes only when the source policy and product profile prove
+the package cannot be a runtime dependency.
 
 ## Boundaries
 
