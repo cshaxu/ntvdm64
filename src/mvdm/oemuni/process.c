@@ -137,11 +137,13 @@ Routine Description:
     PUNICODE_STRING Unicode;
     UNICODE_STRING xlpExtension;
     PWSTR xlpBuffer;
-    DWORD ReturnValue;
+    /* DIVERGENCE MVDM-HOST-DIV-269: preserve zero as the original SearchPath
+       failure result if the local Unicode buffer cannot be allocated. */
+    DWORD ReturnValue = 0;
     OEM_STRING OemString;
     UNICODE_STRING UnicodeString;
     NTSTATUS Status;
-    PWSTR FilePart;
+    PWSTR FilePart = NULL;
     PWSTR *FilePartPtr;
 
     if ( ARGUMENT_PRESENT(lpFilePart) ) {
@@ -854,11 +856,12 @@ GetShortPathNameOem(
 
 {
 
-	UNICODE_STRING	UString, UStringRet;
+	UNICODE_STRING	UString = { 0 }, UStringRet;
     OEM_STRING	   OemString;
     NTSTATUS	    Status;
-    LPWSTR	    lpDstW;
-    DWORD	    ReturnValue;
+	LPWSTR	    lpDstW = NULL;
+	/* The original finally block returns this value after every early path. */
+	DWORD	    ReturnValue = 0;
 
     if (lpSrc == NULL) {
 	SetLastError(ERROR_INVALID_PARAMETER);

@@ -515,7 +515,10 @@ Routine Description:
     OEM_STRING OemString;
     OEM_STRING OemResult;
     PWSTR Ubuff;
-    PWSTR FilePart;
+    /* DIVERGENCE MVDM-HOST-DIV-269: original optional output is consumed
+       after a successful conversion; initialize the local sentinel so an
+       unusual provider result cannot publish an uninitialized host pointer. */
+    PWSTR FilePart = NULL;
     PWSTR *FilePartPtr;
 
     if ( ARGUMENT_PRESENT(lpFilePart) ) {
@@ -871,7 +874,9 @@ Routine Description:
     UNICODE_STRING UnicodeFileSystemName;
     OEM_STRING OemVolumeName;
     OEM_STRING OemFileSystemName;
-    BOOL ReturnValue;
+    /* DIVERGENCE MVDM-HOST-DIV-269: retain the original false failure
+       contract when an allocation/SEH cleanup path reaches the final return. */
+    BOOL ReturnValue = FALSE;
 
     Unicode = &NtCurrentTeb()->StaticUnicodeString;
     InitOemString(
