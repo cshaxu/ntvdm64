@@ -4,24 +4,24 @@
 
 ## Active Packet
 
-**Active: M0 T420 S11**
+**Active: M0 T420 S12**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T420 S11 — Ordinary Mode. |
+| Identifier Mode | M0 T420 S12 — Ordinary Mode. |
 | Candidate Proposal | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md) |
 | Admission And Approval | The owner approved on 2026-09-17: “批准所有推送 请你自动准入每个s任务”. This reopens T420 for the next sequential package and authorizes later sequential S admissions and pushes. |
-| Objective | Complete the selected original `softpc.new/base/debug` package, including both `trace.c` and `btrace.c`, rather than retaining a trace-only partial selection. |
+| Objective | Complete the selected original `softpc.new/host/src` worker startup, Console, thread and host-lifecycle package. |
 | Non-goals | No CPU30 monitor, replacement firmware loader, guest-media patching, renderer change, WOW expansion or new mirror files. |
 | Reference Baseline | T420 S1--S10 are closed; current `O:\winnt` four-EXE x86 package passed direct/interactive COMMAND/MEM/EDIT, Console geometry, mouse and short-window EDIT→MEM regression. |
-| Files And ABI Surface | Freeze the complete selected `src/mvdm/softpc.new/base/debug` manifest and every reached debug/profile boundary. No new file below mirrors. |
+| Files And ABI Surface | Freeze the complete selected `src/mvdm/softpc.new/host/src` manifest and every reached worker lifecycle boundary. No new file below mirrors. |
 | Applicable Rules | Project design/rules, source policy, strict mirror rule and source-recovery ladder. |
 | Verification | Freeze manifest/source-diff ledger; mechanically compare every selected mirror file bytewise and normalized; fresh x86 formal build; focused debug/profile checks; direct and interactive COMMAND/MEM/EDIT regressions; governance and diff review. |
 | Expected Markers | Complete selected debug disposition; original trace/profile ordering and evidence; retained finite host boundary ledger; separated mirror/adapter/autonomous footprint report. |
 | Asset Needs | Existing selected OpenNT MVDM union, current formal generator and `O:\winnt` runtime package. No new historical source or guest media import is admitted. |
 | Reporting Requirements | Report each manifest source, external boundary, source-first recovery result, exact footprint change, focused and established-product results, limitations and next owner. |
-| Stop Conditions | Pause for a required package beyond `debug`, a kernel/CPU30 dependency, a new behavior interface, or COMMAND/MEM/EDIT regression. |
-| Exit Criteria | All selected debug units and reached interfaces have dispositions; any change is source-first/mirror-compliant; formal x86/focused tests and established regressions pass; evidence/index/status updated; reviewed P pushed. |
+| Stop Conditions | Pause for a required package beyond `host/src`, a kernel/CPU30 dependency, a new behavior interface, or COMMAND/MEM/EDIT regression. |
+| Exit Criteria | All selected host units and reached interfaces have dispositions; any change is source-first/mirror-compliant; formal x86/focused tests and established regressions pass; evidence/index/status updated; reviewed P pushed. |
 | Original Owner Request | “批准所有推送 请你自动准入每个s任务”；“已提交的S任务和当前S任务，现在就帮我处理好一起提交；将来的每个S任务也要遵循。” |
 | Similar-Issue Sweep | Compare every selected debug source to OpenNT; audit all divergence markers and reached trace/profile consumers for duplicate local policy. |
 

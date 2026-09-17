@@ -213,10 +213,19 @@ $dpmiNames = @((Get-OriginalSources $dpmiManifest) + 'dpmimemr.c' + 'dpmimscr.c'
 $suballocNames = @(Get-OriginalSources $suballocManifest)
 $oemuniNames = @(Get-OriginalSources $oemuniManifest)
 $sessionNames = @('guest_memory_lease.c', 'session.c')
-# `trace_file` belongs to the selected SoftPC base debug implementation.  The
-# separate MVDM `dbg` product is a debugger/CSR owner package and must not be
-# smuggled into this machine candidate merely to satisfy this one trace edge.
-$baseDebugNames = @('trace.c')
+# The complete original SoftPC base debug package remains a worker-local
+# provider.  The separate MVDM `dbg` product is a debugger/CSR owner package
+# and is not selected merely to satisfy these original debug edges.
+$baseDebugNames = @(
+    'debuggng.c',
+    'ega_dump.c',
+    'btrace.c',
+    'trace.c',
+    'profile.c',
+    'pigyoda.c',
+    'yoda.c',
+    'dasm.c'
+)
 # Select the complete original SoftPC host source package before deciding which
 # unresolved edges are genuine modern-boundary adapters.  Individual fixtures
 # and hand-written stand-ins are not a source-selection mechanism.
@@ -1223,7 +1232,7 @@ $graph.Add('default original-softpc-candidate')
     suballocSources = @($suballocNames)
     oemuniSources = @($oemuniNames)
     baseDebugSources = @($baseDebugNames)
-    baseDebugBuildDisposition = 'selected-original-softpc-trace-only; mvdm-debugger product excluded'
+    baseDebugBuildDisposition = 'selected-complete-original-softpc-debug; mvdm-debugger product excluded'
     hostRoots = @($hostNames)
     hostEntrySource = 'src/mvdm/softpc.new/obj.vdm/ntvdm.c'
     hostEntryResource = [ordered]@{
