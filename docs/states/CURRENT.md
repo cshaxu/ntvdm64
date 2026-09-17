@@ -4,24 +4,24 @@
 
 ## Active Packet
 
-**Active: M0 T420 S9**
+**Active: M0 T420 S10**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T420 S9 — Ordinary Mode. |
+| Identifier Mode | M0 T420 S10 — Ordinary Mode. |
 | Candidate Proposal | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md) |
 | Admission And Approval | The owner approved on 2026-09-17: “批准所有推送 请你自动准入每个s任务”. This reopens T420 for the next sequential package and authorizes later sequential S admissions and pushes. |
-| Objective | Complete the selected original `softpc.new/base/comms` package: communications-device state and selected host-I/O boundary, retaining original source behavior through only finite unavailable host bindings. |
+| Objective | Complete the selected original `softpc.new/base/dos` package: SoftPC DOS-device hooks and complete BOP/device contract, retaining original source behavior through only finite unavailable host bindings. |
 | Non-goals | No CPU30 monitor, replacement firmware loader, guest-media patching, renderer change, WOW expansion or new mirror files. |
-| Reference Baseline | T420 S1--S8 are closed; current `O:\winnt` four-EXE x86 package passed direct/interactive COMMAND/MEM/EDIT, Console geometry, mouse and short-window EDIT→MEM regression. |
-| Files And ABI Surface | Freeze the complete selected `src/mvdm/softpc.new/base/comms` manifest and every reached communications/host-I/O boundary. No new file below mirrors. |
+| Reference Baseline | T420 S1--S9 are closed; current `O:\winnt` four-EXE x86 package passed direct/interactive COMMAND/MEM/EDIT, Console geometry, mouse and short-window EDIT→MEM regression. |
+| Files And ABI Surface | Freeze the complete selected `src/mvdm/softpc.new/base/dos` manifest and every reached DOS-device/BOP boundary. No new file below mirrors. |
 | Applicable Rules | Project design/rules, source policy, strict mirror rule and source-recovery ladder. |
-| Verification | Freeze manifest/source-diff ledger; mechanically compare every selected mirror file bytewise and normalized; fresh x86 formal build; focused communications positive and negative checks; direct and interactive COMMAND/MEM/EDIT regressions; governance and diff review. |
-| Expected Markers | Complete selected comms disposition; original I/O/failure ordering and evidence; retained finite host boundary ledger; separated mirror/adapter/autonomous footprint report. |
+| Verification | Freeze manifest/source-diff ledger; mechanically compare every selected mirror file bytewise and normalized; fresh x86 formal build; focused DOS-device/BOP positive and negative checks; direct and interactive COMMAND/MEM/EDIT regressions; governance and diff review. |
+| Expected Markers | Complete selected DOS disposition; original BOP/device ordering and evidence; retained finite host boundary ledger; separated mirror/adapter/autonomous footprint report. |
 | Asset Needs | Existing selected OpenNT MVDM union, current formal generator and `O:\winnt` runtime package. No new historical source or guest media import is admitted. |
 | Reporting Requirements | Report each manifest source, external boundary, source-first recovery result, exact footprint change, focused and established-product results, limitations and next owner. |
-| Stop Conditions | Pause for a required package beyond `comms`, a kernel/CPU30 dependency, a new behavior interface, or COMMAND/MEM/EDIT regression. |
-| Exit Criteria | All selected comms units and reached interfaces have dispositions; any change is source-first/mirror-compliant; formal x86/focused tests and established regressions pass; evidence/index/status updated; reviewed P pushed. |
+| Stop Conditions | Pause for a required package beyond `dos`, a kernel/CPU30 dependency, a new behavior interface, or COMMAND/MEM/EDIT regression. |
+| Exit Criteria | All selected DOS units and reached interfaces have dispositions; any change is source-first/mirror-compliant; formal x86/focused tests and established regressions pass; evidence/index/status updated; reviewed P pushed. |
 | Original Owner Request | “批准所有推送 请你自动准入每个s任务”；“已提交的S任务和当前S任务，现在就帮我处理好一起提交；将来的每个S任务也要遵循。” |
 | Similar-Issue Sweep | Compare every selected BIOS source to OpenNT; audit all divergence markers and reached ROM/reset/firmware consumers for duplicate local policy. |
 
@@ -96,6 +96,13 @@ mouse and five short-window EDIT→MEM runs passed. The preceding S8 P restored
 all proven S1--S8 format-only drift and made that audit mandatory for later S
 closures.
 
+## S9 Closure Record
+
+[T420 S9 comms package recovery](../etc/evidence/m0-t420-s9-comms-package-recovery.md)
+closes all five selected communications units as byte-exact pinned OpenNT.
+Fresh x86 linkage, deployed direct/interactive COMMAND/MEM/EDIT, Console
+geometry, mouse and five short-window EDIT→MEM runs passed.
+
 ## Current Technical Baseline
 
 - Product package: Win32/x86 CCPU40 `run16.exe`, `basesrv.exe`, `ntvdm.exe`,
@@ -104,9 +111,9 @@ closures.
   correction: four EXE component directories are explicit, `dtmgr.exe`
   replaces `dtaskmgr.exe`, and the task display derives depth from original
   BaseSrv DOS records rather than a parallel stack.
-- T420 S1--S8 are delivered: CCPU386, C-VID, video, system, keymouse, BIOS,
-  support and disks are closed complete package units. S9 comms is auto-admitted
-  by the owner's standing sequential-S authority.
+- T420 S1--S9 are delivered: CCPU386, C-VID, video, system, keymouse, BIOS,
+  support, disks and comms are closed complete package units. S10 DOS is
+  auto-admitted by the owner's standing sequential-S authority.
 
 ## Prior Closure
 

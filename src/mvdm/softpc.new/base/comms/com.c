@@ -1552,7 +1552,7 @@ void com_recv_char(int adapter)
 
     {
     error = 0;
-    host_com_read(adapter, (UTINY *)&asp->rx_buffer, &error);
+    host_com_read(adapter, (char *)&asp->rx_buffer, &error);
     if (error != 0)
     {
         lsr_change(asp, error);
