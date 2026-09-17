@@ -184,6 +184,7 @@ owned:
 src/run16/   -> run16.exe
 src/basesrv/ -> basesrv.exe
 src/ntvdm/   -> ntvdm.exe
+src/dtaskmgr/ -> DTASKMGR.EXE
 ```
 
 The former `app`, `session`, `broker` and adapter roots are README-only move
@@ -193,6 +194,11 @@ around mirrored `srvvdm.c`; and `ntvdm` owns worker-local setup, guest-memory
 leases, thread binding, teardown and process-local presentation. The broker
 does not acquire DOS/WOW record policy, and the worker does not acquire broker
 policy.
+
+`dtaskmgr` owns only native Console task-management presentation and its
+client-side selection state. It queries BaseSrv's copied, authenticated task
+snapshot and asks BaseSrv to terminate one selected registered task; it neither
+owns a second registry nor enumerates or controls arbitrary Windows processes.
 
 There is no generic shared Win32/compatibility component. A process-local
 Win32 binding belongs to the executable that owns the relevant HANDLE,
@@ -291,6 +297,7 @@ component ABI.
 
 ```text
 run16 -> basesrv protocol client
+dtaskmgr -> basesrv management protocol client
 run16 -> opennt-host Base client + opennt-abi/host-compat
 basesrv -> basesrv transport + opennt-host BaseSrv owner
 ntvdm -> worker-local session, command, monitor, SoftPC, Redirector, VDD, WOW and debugger bindings

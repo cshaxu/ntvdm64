@@ -2,10 +2,39 @@
 
 ## Current Work
 
-## Intermission
+## Active Packet
 
-**No active M/T/S packet.** M0 T419 closes after its S1--S3 x87 recovery;
-the next numeric task must be admitted from [Queue](QUEUE.md).
+**Active: M0 T419 S2** — DTASKMGR read-only BaseSrv snapshot and Terminal TUI.
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T419 S2, Ordinary Mode. |
+| Admission And Approval | The owner admitted the former queue-head BDM candidate, approved worker-scoped termination, and directed a `src/dtaskmgr/` component producing 8.3-named `DTASKMGR.EXE`. |
+| Candidate Proposal | [BDM Terminal Task Manager](../proposals/proposal-bdm-terminal-task-manager-001.md). |
+| Objective | Implement the authenticated, read-only BaseSrv worker snapshot and `DTASKMGR.EXE` Terminal/conhost TUI: connected, empty, unavailable and version-mismatch states; bounded rendering; refresh; Up/Down selection; and worker/hosted-child disclosure. |
+| Non-goals | No termination request yet; no second task registry, per-child DOS/WOW termination, Windows process enumeration, direct `TerminateProcess` client path, GUI/guest TUI, arbitrary-process control, or MVDM/OpenNT mirror change. |
+| Reference Baseline | S1 [worker-contract audit](../etc/evidence/m0-t419-s1-dtaskmgr-worker-contract-audit.md), `456270147` candidate and formal x86 three-program baseline. |
+| Files And ABI Surface | `src/dtaskmgr/`, `src/basesrv/transport/service.idl`, BaseSrv management binding/source, formal build graph and product package selection. New copied fixed-width management records remain BaseSrv-owned. |
+| Applicable Rules | Documentation, execution, architecture and coding authorities; authenticated fixed-width broker ABI and executable-owned placement rules. |
+| Verification | Focused snapshot/ABI and TUI fixtures; empty/unavailable/version-negative states; rendering/selection/resize checks; fresh formal x86 four-program build; direct and interactive COMMAND/MEM/EDIT regressions, with unavailable automation reported honestly. |
+| Expected Markers | Copied epoch/worker rows, no registered DTASKMGR peer, stable selection by worker ID, explicit hosted-child scope and no broker timer retention leak. |
+| Asset Needs | Existing local source, formal x86 build scripts and `O:\winnt\logs`; no external source or guest-media acquisition. |
+| Reporting Requirements | Record source/boundary, ABI layout, all negative behavior, exact build route, product hashes and owner visual acceptance; report no fabricated WOW16 row. |
+| Stop Conditions | A required display field lacks an original worker/record source; snapshot needs a second registry/native value on wire; polling keeps an empty broker alive; formal build cannot be completed by a recorded route; or any established regression fails. Pause for owner decision. |
+| Exit Criteria | Read-only management endpoint and DTASKMGR TUI built into the formal x86 package; snapshot/negative/selection tests pass; established regressions pass or have an explicit unavailable result; governance/diff checks and committed/pushed clean worktree. |
+| Original Owner Request | Add a Terminal character-mode Task Manager that lists this product's DOS/Win16/WOW16 tasks, shows IDs/times/status, handles no broker/tasks, supports Up/Down selection and kills selected tasks; use `DTASKMGR.EXE`. The owner approved termination at the selected VDM worker scope, with all hosted child tasks disclosed in the confirmation. |
+| Similar-Issue Sweep | Inspect all BaseSrv connection/auth/empty-timer paths and Console state adapters, plus version rejection and worker registration/rundown, to avoid a peer-registration leak or stale presentation state. |
+
+## S1 Closure Record
+
+S1 proves the worker—not individual DOS/WOW child—is the only existing
+source-shaped selectable/terminable unit. The selected `{broker_epoch,
+worker_sequence}` identity, read-only record traversal, server-only handle
+use and original post-exit cleanup ordering are recorded in the
+[worker-contract audit](../etc/evidence/m0-t419-s1-dtaskmgr-worker-contract-audit.md).
+It also records the native Ninja startup lock and deliberately stopped slow
+serial fallback as unavailable baseline evidence; neither is claimed as a
+formal build pass. S2 owns a recorded full-build route before its closure.
 
 ## T419 S3 and T Closure Record
 

@@ -12,6 +12,7 @@ src/
   run16/
   basesrv/
   ntvdm/
+  dtaskmgr/
 ```
 
 `mvdm/` is the one canonical physical selected-OpenNT `base/mvdm` tree: its
@@ -31,8 +32,9 @@ or runtime input.
 
 ## Executable-owned transition
 
-T418 has moved project-owned runtime code to `src/run16/`, `src/basesrv/` and
-`src/ntvdm/`, each producing exactly its named executable.  Retained
+T418 has moved the original three-program runtime to `src/run16/`,
+`src/basesrv/` and `src/ntvdm/`; T419 adds the product-owned native Console
+manager at `src/dtaskmgr/`, producing `DTASKMGR.EXE`. Retained
 `app`/adapter directory READMEs are archival move markers, never production
 source roots or destinations. `session` is worker-local implementation inside
 `ntvdm`; broker service transport is inside `basesrv`.
@@ -95,8 +97,10 @@ historical record is evidence, not a selectable configuration.
 - `run16` owns discovery, CreateProcess-style admission and parent waiting.
   `basesrv` owns authenticated endpoint/transport and the original-record
   assembly. `ntvdm` owns its worker-local session, machine bindings, Console,
-  redirector, VDD, WOW and debugger bindings. Their code is not made shared by
-  naming it Win32 compatibility.
+  redirector, VDD, WOW and debugger bindings. `dtaskmgr` owns only its native
+  Console presentation and client selection state; task records and task
+  termination remain BaseSrv-owned. Their code is not made shared by naming it
+  Win32 compatibility.
 
 Historical MVDM build tools such as `tools16`, `bin86`, `convert` and
 `dat2obj` belong under `tools/opennt`, not `src/`.

@@ -2,6 +2,7 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T419 S1 DTASKMGR worker contract audit](evidence/m0-t419-s1-dtaskmgr-worker-contract-audit.md) | M0 T419 S1 | Proves the BaseSrv worker-watch and original DOS/WOW-record boundary; selects epoch plus worker-sequence identity and server-owned worker termination. | Retain through T419 closure. |
 | [T419 S1 x87 audit](evidence/m0-t419-s1-x87-audit.md) | M0 T419 S1--S3 | Records the SoftPC/OpenNT layout and conversion comparison, formal-x86 unit/fixture proof, and the outstanding Ninja-runner limitation. | Retain through T419 closure. |
 | [NTVDMx64 correction-candidate disposition](evidence/ntvdmx64-source-corrections-disposition-20260916.md) | M0 Td | Closes the unadmitted blanket external-patch candidate, records its already-recovered and rejected cohorts, transfers reached DPMI lifecycle work to WOW16, and defers the unreproduced 8253 case. | Retain as source-policy and queue provenance. |
 | [MVDM runtime package-completion audit](evidence/mvdm-runtime-package-completion-audit-20260916.md) | M0 Td | Reclassifies the 23 canonical MVDM package roots and 19 selected build units as complete, partial or excluded; replaces trace-led recovery with whole-package S closures. | Retain as queue and package-scope provenance. |

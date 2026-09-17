@@ -9,7 +9,7 @@ visual comparison.
 1. The production source owners are the canonical physical `mvdm` tree (with
    manifest-declared host, guest, tool and firmware slices), `opennt-host`,
    `opennt-abi/host-compat`, `product-abi`, `product-package`, and the
-   executable-owned `run16`, `basesrv` and `ntvdm` roots.  T418 has retired
+   executable-owned `run16`, `basesrv`, `ntvdm` and `dtaskmgr` roots.  T418 has retired
    generic `app`, `session`, `broker` and `adapter-*` production roots;
    retained README-only directories are historical move markers. No generic
    `common`, `compat` or `win32api` component may be introduced.
@@ -64,10 +64,13 @@ visual comparison.
    raw local pointer enters guest state or a cross-executable ABI. Multiple
    worker processes are permitted; multiple imported MVDM contexts in one
    worker require a separate reentrancy/global-state audit.
-6. `run16` owns CLI admission/parent behavior. `basesrv` owns the versioned
+6. `run16` owns CLI admission/parent behavior. `dtaskmgr` owns only native
+   Console management presentation and client selection state. `basesrv` owns the versioned
    IPC endpoint, cooperative registration, identities, command queue and
-   original BaseSrv-record assembly; it cannot acquire machine/BOP/guest
-   semantics or recreate CSRSS.
+   original BaseSrv-record assembly, including copied task snapshot and
+   broker-authorized registered-task termination; it cannot acquire
+   machine/BOP/guest semantics or recreate CSRSS. `dtaskmgr` never enumerates
+   or controls unrelated Windows processes.
 7. DOS child programs, COMMAND re-entry and multiple WOW16 tasks inside one
    machine are intra-session guest/task lifecycles, not separate VDM sessions.
 8. `basesrv` is the per-user process boundary for cooperative VDM
