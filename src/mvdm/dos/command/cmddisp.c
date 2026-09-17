@@ -51,5 +51,6 @@ BOOL CmdDispatch (ULONG iSvc)
     }
 #endif
     (apfnSVCCmd [iSvc])();
+
     return TRUE;
 }

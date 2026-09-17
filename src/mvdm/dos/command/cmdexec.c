@@ -116,7 +116,7 @@ BOOL IsWowAppRunnable(LPSTR lpAppName)
                               szModName,
                               0,
                               &dwType,
-                              (LPBYTE)szHexAsciiFlags,
+                              szHexAsciiFlags,
                               &cbData
                               );
 
@@ -170,7 +170,7 @@ VOID cmdCheckBinary (VOID)
 {
 
     LPSTR  lpAppName;
-    DWORD  BinaryType;
+    ULONG  BinaryType;
     PPARAMBLOCK lpParamBlock;
     PCHAR  lpCommandTail,lpTemp;
     ULONG  AppNameLen,CommandTailLen = 0;
@@ -200,7 +200,7 @@ VOID cmdCheckBinary (VOID)
     if ( !NT_SUCCESS(Status) ) {
         Status = RtlNtStatusToDosError(Status);
         }
-    else if (GetBinaryType (AnsiString.Buffer,&BinaryType) == FALSE)
+    else if (GetBinaryType (AnsiString.Buffer,(LPLONG)&BinaryType) == FALSE)
        {
         Status =  GetLastError();
         }
@@ -751,14 +751,7 @@ PREDIRCOMPLETE_INFO pRdrInfo;
     cmdUpdateCurrentDirectories((BYTE)getAL());
 
     // Check for any copying needed for redirection
-    pRdrInfo = NULL;
-    if ((getBX() != 0 || getCX() != 0) &&
-        !mvdm_command_redirection_resolve(getBX(), getCX(),
-            (PVOID *)&pRdrInfo)) {
-        setAX((USHORT)ERROR_INVALID_HANDLE);
-        setCF(1);
-        return;
-    }
+    pRdrInfo = (PREDIRCOMPLETE_INFO) (((ULONG)getBX() << 16) + (ULONG)getCX());
 
     if (cmdCheckCopyForRedirection (pRdrInfo) == FALSE)
             VDMInfo.ErrorCode = ERROR_NOT_ENOUGH_MEMORY;

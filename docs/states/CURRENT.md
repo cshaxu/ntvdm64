@@ -4,26 +4,26 @@
 
 ## Active Packet
 
-**Active: M0 T420 S14**
+**Active: M0 T420 S15**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T420 S14 — Ordinary Mode. |
+| Identifier Mode | M0 T420 S15 — Ordinary Mode. |
 | Candidate Proposal | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md) |
-| Admission And Approval | The owner approved on 2026-09-17: “批准所有推送 请你自动准入每个s任务”. S13 closed at `a2ec4d531`; this admits the next sequential package and retains standing push authority. |
-| Objective | Complete the original `dos/command` COMMAND EXEC, native-child, environment, return and error lifecycle package as one source-first unit. |
-| Non-goals | No CPU30 monitor, guest-media patching, new mirror files, XMS/DPMI expansion, renderer redesign, or removal of a demonstrated standalone ABI/guest-memory boundary. |
-| Reference Baseline | T420 S1--S13 are closed. The `O:\winnt` four-EXE x86 package passed direct and interactive COMMAND/MEM/EDIT, Console geometry, mouse and short-window EDIT→MEM regression. |
-| Files And ABI Surface | Freeze the complete selected `src/mvdm/dos/command` manifest and all reached COMMAND BOP, child, environment, return and error interfaces. No new file below mirrors. |
+| Admission And Approval | The owner approved on 2026-09-17: “批准所有推送 请你自动准入每个s任务”. S14 closes in this packet; this admits the next sequential package and retains standing push authority. |
+| Objective | Complete the original `xms.486` allocation, move, mapping lease and teardown package as one source-first unit. |
+| Non-goals | No CPU30 monitor, guest-media patching, new mirror files, DPMI expansion, renderer redesign, or removal of a demonstrated standalone ABI/guest-memory boundary. |
+| Reference Baseline | T420 S1--S14 are closed. The formal x86 package passed direct and interactive COMMAND/MEM/EDIT, Console geometry, mouse and short-window EDIT→MEM regression. |
+| Files And ABI Surface | Freeze the complete selected `src/mvdm/xms.486` manifest and all reached XMS allocation, move, mapping and teardown interfaces. No new file below mirrors. |
 | Applicable Rules | Project design/rules, source policy, strict mirror rule and source-recovery ladder. |
-| Verification | Freeze manifest/source-diff ledger; compare selected mirror files bytewise and normalized; classify every command/BOP/child/environment/return interface; fresh x86 formal build; focused COMMAND failure tests; direct and interactive COMMAND/MEM/EDIT regressions; governance and diff review. |
-| Expected Markers | Complete selected COMMAND disposition; original child and return ordering; source-first external-boundary ledger; separated mirror/adapter/autonomous footprint report. |
+| Verification | Freeze manifest/source-diff ledger; compare selected mirror files bytewise and normalized; classify every XMS allocation/move/map/teardown interface; fresh x86 formal build; focused XMS tests; direct and interactive COMMAND/MEM/EDIT regressions; governance and diff review. |
+| Expected Markers | Complete selected XMS disposition; original allocation and teardown ordering; source-first external-boundary ledger; separated mirror/adapter/autonomous footprint report. |
 | Asset Needs | Existing selected OpenNT MVDM union, formal generator and `O:\winnt` runtime package. No new historical source or guest media import is admitted. |
 | Reporting Requirements | Report each manifest source, external boundary, source-first result, exact footprint change, focused and established-product results, limitations and next owner. |
-| Stop Conditions | Pause for a required package beyond COMMAND, a kernel/CPU30 dependency, a new behavior interface, or COMMAND/MEM/EDIT regression. |
-| Exit Criteria | All selected COMMAND units and reached interfaces have dispositions; changes are source-first/mirror-compliant; formal x86/focused tests and established regressions pass; evidence/index/status updated; reviewed P pushed. |
+| Stop Conditions | Pause for a required package beyond XMS, a kernel/CPU30 dependency, a new behavior interface, or COMMAND/MEM/EDIT regression. |
+| Exit Criteria | All selected XMS units and reached interfaces have dispositions; changes are source-first/mirror-compliant; formal x86/focused tests and established regressions pass; evidence/index/status updated; reviewed P pushed. |
 | Original Owner Request | “批准所有推送 请你自动准入每个s任务”；“按照最小化diff且不改变功能语义和编译成功的原则来做，所有已经提交的S任务如果不符合这个标准，应该继续减少diff而不是继续走下一个diff。” |
-| Similar-Issue Sweep | Compare every selected COMMAND source to OpenNT; audit all divergence markers and reached BOP/child/environment/return consumers for duplicate local policy. |
+| Similar-Issue Sweep | Compare every selected XMS source to OpenNT; audit all divergence markers and reached allocation/mapping/teardown consumers for duplicate local policy. |
 
 ## S1 Closure Record
 
@@ -126,6 +126,19 @@ pinned OpenNT bytes, `stubs.c` retains only its established VDM_TIB storage
 binding, and the owner-supplied BaseSrv grace constant is included in the
 fresh x86 four-program and deployed regression evidence.
 
+## S13 Closure Record
+
+[T420 S13 DEM package recovery](../etc/evidence/m0-t420-s13-dem-and-residual-diff-recovery.md)
+closes the DEM package and its source-first residual boundary ledger.
+
+## S14 Closure Record
+
+[T420 S14 COMMAND package recovery](../etc/evidence/m0-t420-s14-command-package-recovery.md)
+closes COMMAND as a source-first package.  It removes both discovered empty
+x86 pointer/handle carriers, preserves the necessary guest-memory, async and
+cross-process resource bindings, passes fresh formal x86 linkage and the
+owner-accepted direct/interactive COMMAND, MEM and EDIT route.
+
 ## Current Technical Baseline
 
 - Product package: Win32/x86 CCPU40 `run16.exe`, `basesrv.exe`, `ntvdm.exe`,
@@ -134,9 +147,10 @@ fresh x86 four-program and deployed regression evidence.
   correction: four EXE component directories are explicit, `dtmgr.exe`
   replaces `dtaskmgr.exe`, and the task display derives depth from original
   BaseSrv DOS records rather than a parallel stack.
-- T420 S1--S13 are delivered: CCPU386, C-VID, video, system, keymouse, BIOS,
+- T420 S1--S14 are delivered: CCPU386, C-VID, video, system, keymouse, BIOS,
   support, disks, comms, DOS, debug, host and DEM are closed complete package
-  units. S14 COMMAND is the active next package.
+  units.  S14 COMMAND restored two empty x86 adapter carriers to their
+  original OpenNT forms; S15 XMS is the active next package.
 
 ## Prior Closure
 
@@ -153,5 +167,5 @@ No standalone governance delivery is active or pending.
 
 ## Next Work
 
-M0 T420 S14 is active. The remaining candidate order is authoritative in
+M0 T420 S15 is active. The remaining candidate order is authoritative in
 [Queue](QUEUE.md) after T420 closure.

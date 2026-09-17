@@ -257,9 +257,8 @@ $adapterVddNames = @('mvdm_softpc_vdd_unavailable.c',
                      'mvdm_softpc_vdd_configuration.c')
 $adapterMonitorNames = @('vdm_control.c', '../mvdm_vdm_tib.c')
 $adapterDebuggerNames = @('dbg_init.c', 'dbg_state.c', 'dbg_dispatch.c', 'dbg_unavailable.c')
-$adapterRedirNames = @('mvdm_redirector_handle.c', 'mvdm_redirector_guest_copy.c', 'mvdm_redirector_async.c',
-                       'mvdm_redirector_remote_unavailable.c',
-                       'mvdm_command_redirection.c')
+$adapterRedirNames = @('mvdm_redirector_guest_copy.c', 'mvdm_redirector_async.c',
+                       'mvdm_redirector_remote_unavailable.c')
 # `vrnetapi.c` directly consumes this original OpenNT status-to-LAN-Manager
 # conversion algorithm.  Keep it in its separately mirrored non-MVDM owner
 # rather than duplicating a status table in Redirector or an adapter.
@@ -483,10 +482,6 @@ $parallelRunner = Join-Path $build 'run-ninja-parallel.cmd'
 
 $includeRootPaths = @(
     'src',
-    # Preserve the original vdmredir.h declarations while binding only its
-    # historical HANDLE_FROM_WORDS carrier to the existing session identity
-    # facade.  This must precede mvdm-host/inc so the selected original
-    # Redirector bodies never cast a guest-visible DWORD to a native HANDLE.
     'src/ntvdm-exe/redir/include',
     'src/ntvdm-exe/vdd/include',
     # The adapter owns the modern `nt.h` type binding. Original reached NT

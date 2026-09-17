@@ -13,7 +13,6 @@
 #include <mvdm.h>
 #include <ctype.h>
 
-#include "mvdm_command_redirection.h"
 /* DIVERGENCE(MVDM-HOST-DIV-120): the two original pipe workers are cdecl
  * void(LPVOID) forms.  Bind their original calls to the same session-aware
  * WINAPI boundary used by the selected COMMAND child worker.  The bridge also
@@ -104,10 +103,6 @@ PPIPE_OUTPUT pPipeOut;
 	WaitForSingleObject(pRdrInfo->ri_hStdErrThread, 1000);
 	CloseHandle(pRdrInfo->ri_hStdErrThread);
     }
-    /* DIVERGENCE(MVDM-HOST-DIV-020): the record can have crossed the VDM
-     * ABI as a session identity; retire that identity before the original
-     * ownership/free point. */
-    mvdm_command_redirection_retire(pRdrInfo);
     free (pRdrInfo);
 
     return TRUE;
@@ -253,17 +248,9 @@ VOID cmdGetStdHandle (VOID)
 {
 USHORT iStdHandle;
 PREDIRCOMPLETE_INFO pRdrInfo;
-VOID *pRdrInfoValue;
 
     iStdHandle = getCX();
-    /* DIVERGENCE(MVDM-HOST-DIV-020): AX:BX was an x86 process pointer.
-     * Resolve its same-width session identity before using the source record. */
-    if (!mvdm_command_redirection_resolve(getAX(), getBX(), &pRdrInfoValue)) {
-        setAX(ERROR_INVALID_HANDLE);
-        setCF(1);
-        return;
-    }
-    pRdrInfo = (PREDIRCOMPLETE_INFO)pRdrInfoValue;
+    pRdrInfo = (PREDIRCOMPLETE_INFO) (((ULONG)getAX() << 16) + (ULONG)getBX());
 
     switch (iStdHandle) {
 
