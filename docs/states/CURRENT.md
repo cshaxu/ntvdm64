@@ -4,24 +4,24 @@
 
 ## Active Packet
 
-**Active: M0 T420 S6**
+**Active: M0 T420 S7**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T420 S6 — Ordinary Mode. |
+| Identifier Mode | M0 T420 S7 — Ordinary Mode. |
 | Candidate Proposal | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md) |
 | Admission And Approval | The owner approved on 2026-09-17: “批准所有推送 请你自动准入每个s任务”. This reopens T420 for the next sequential package and authorizes later sequential S admissions and pushes. |
-| Objective | Complete the selected original `softpc.new/base/bios` package: firmware state initialisation and selected host-facing failure paths, retaining original source behavior through only finite unavailable host bindings. |
+| Objective | Complete the selected original `softpc.new/base/support` package: shared SoftPC support state, resource ownership and failure contracts, retaining original source behavior through only finite unavailable host bindings. |
 | Non-goals | No CPU30 monitor, replacement firmware loader, guest-media patching, renderer change, WOW expansion or new mirror files. |
-| Reference Baseline | T420 S1--S5 are closed; current `O:\winnt` four-EXE x86 package passed direct/interactive COMMAND/MEM/EDIT, Console geometry and mouse regression. |
-| Files And ABI Surface | Freeze the complete selected `src/mvdm/softpc.new/base/bios` manifest and every reached firmware/ROM/reset boundary. No new file below mirrors. |
+| Reference Baseline | T420 S1--S6 are closed; current `O:\winnt` four-EXE x86 package passed direct/interactive COMMAND/MEM/EDIT, Console geometry, mouse and short-window EDIT→MEM regression. |
+| Files And ABI Surface | Freeze the complete selected `src/mvdm/softpc.new/base/support` manifest and every reached support/resource/failure boundary. No new file below mirrors. |
 | Applicable Rules | Project design/rules, source policy, strict mirror rule and source-recovery ladder. |
-| Verification | Freeze manifest/source-diff ledger; audit every reached external function/global/callback; fresh x86 formal build; focused firmware/reset/ROM positive and negative checks; direct and interactive COMMAND/MEM/EDIT regressions; governance and diff review. |
-| Expected Markers | Complete selected BIOS disposition; original ROM/reset/firmware ordering and failure evidence; retained finite host boundary ledger; separated mirror/adapter/autonomous footprint report. |
+| Verification | Freeze manifest/source-diff ledger; audit every reached external function/global/callback; fresh x86 formal build; focused support/resource positive and negative checks; direct and interactive COMMAND/MEM/EDIT regressions; governance and diff review. |
+| Expected Markers | Complete selected support disposition; original resource/failure ordering and failure evidence; retained finite host boundary ledger; separated mirror/adapter/autonomous footprint report. |
 | Asset Needs | Existing selected OpenNT MVDM union, current formal generator and `O:\winnt` runtime package. No new historical source or guest media import is admitted. |
 | Reporting Requirements | Report each manifest source, external boundary, source-first recovery result, exact footprint change, focused and established-product results, limitations and next owner. |
-| Stop Conditions | Pause for a required package beyond `bios`, a kernel/CPU30 dependency, a new behavior interface, or COMMAND/MEM/EDIT regression. |
-| Exit Criteria | All selected BIOS units and reached interfaces have dispositions; any change is source-first/mirror-compliant; formal x86/focused tests and established regressions pass; evidence/index/status updated; reviewed P pushed. |
+| Stop Conditions | Pause for a required package beyond `support`, a kernel/CPU30 dependency, a new behavior interface, or COMMAND/MEM/EDIT regression. |
+| Exit Criteria | All selected support units and reached interfaces have dispositions; any change is source-first/mirror-compliant; formal x86/focused tests and established regressions pass; evidence/index/status updated; reviewed P pushed. |
 | Original Owner Request | “批准所有推送 请你自动准入每个s任务”. |
 | Similar-Issue Sweep | Compare every selected BIOS source to OpenNT; audit all divergence markers and reached ROM/reset/firmware consumers for duplicate local policy. |
 
@@ -67,6 +67,16 @@ diagnostic lines while retaining and proving the only three finite source-first
 CPU40/guest-memory boundaries.  Fresh x86 linkage, deployed COMMAND/MEM/EDIT,
 and the Console mouse/geometry plus five short-window EDIT→MEM matrix passed.
 
+## S6 Closure Record
+
+[T420 S6 BIOS package recovery](../etc/evidence/m0-t420-s6-bios-package-recovery.md)
+closes all fourteen selected BIOS units.  It removes 13 EMS-only mirror
+observation lines, leaving ten selected units byte-identical to pinned OpenNT
+and three finite source-first declaration/CPU40-continuation boundaries.
+Fresh x86 linkage, VdmTib ownership audit, deployed direct/interactive
+COMMAND/MEM/EDIT, six Console geometry modes, mouse move/click/release and
+five short-window EDIT→MEM runs passed.
+
 ## Current Technical Baseline
 
 - Product package: Win32/x86 CCPU40 `run16.exe`, `basesrv.exe`, `ntvdm.exe`,
@@ -75,9 +85,9 @@ and the Console mouse/geometry plus five short-window EDIT→MEM matrix passed.
   correction: four EXE component directories are explicit, `dtmgr.exe`
   replaces `dtaskmgr.exe`, and the task display derives depth from original
   BaseSrv DOS records rather than a parallel stack.
-- T420 S1--S5 are delivered: CCPU386, C-VID, video, system and keymouse are
-  closed complete package units. S6 BIOS is auto-admitted by the owner's
-  standing sequential-S authority.
+- T420 S1--S6 are delivered: CCPU386, C-VID, video, system, keymouse and BIOS
+  are closed complete package units. S7 support is auto-admitted by the
+  owner's standing sequential-S authority.
 
 ## Prior Closure
 
