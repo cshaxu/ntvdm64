@@ -9,7 +9,9 @@ every reached external contract has one finite owner, its original lifecycle
 and failure rules are retained, duplicate project policy is removed or
 explicitly retained, and its local acceptance matrix passes.
 
-One S closes exactly one original package unit. A focused runtime trace may
+One S closes exactly one original package unit.  It may not combine two units
+under one heading, treat a guest activation contract as an unnumbered suffix,
+or claim a selected file is an entire package. A focused runtime trace may
 verify an already-complete package; it may not select a new function, shrink a
 package, or authorize a new provider. No S closes merely because it compiles.
 
@@ -39,43 +41,46 @@ S packets, never by host linkage.
 
 ## Ordered S package units
 
-The exact S order is dependency-first. Each S admits one named original unit,
-freezes its manifest and sources, proves all outgoing interfaces, composes the
-original bodies before adapters, runs its complete local matrix and one
-integrated regression, measures mirror/adapter changes, then commits/pushes.
+The exact S order is dependency-first.  This is a **24-S plan**: every row is
+one named original package unit and one eventual S packet.  No row may close
+two units, and no later S may quietly absorb an earlier row's residual.  Each
+S freezes its complete original manifest and source hashes, proves its
+outgoing interfaces, composes original bodies before adapters, runs its local
+matrix plus one integrated regression, measures mirror/adapter changes, then
+commits and pushes.
 
-1. `softpc.new/base/ccpu386` — CPU execution, exception, interrupt, event and
-   descriptor contracts.
-2. `softpc.new/base/cvidc` — complete C-VID vector, timing and publication
-   contract.
-3. `softpc.new/base/video` — original text/graphics update and presentation
-   boundary.
-4. `softpc.new/base/system` — timers, PIC, reset, device lifecycle.
-5. `softpc.new/base/keymouse` — keyboard/mouse controller and callback
-   lifecycle.
-6. `softpc.new/base/{bios,support,disks,comms,dos}` — each is a separate S,
-   in that order, with its full manifest and device/failure matrix.
-7. `softpc.new/host/src` — worker startup, Console, thread, host lifecycle and
-   trace versus debugger disposition; `base trace` is retired or absorbed here.
-8. `dos/dem`, then `dos/command` — complete BOP, EXEC, native-child,
-   environment, return and error contracts as two separate S packets.
-9. `xms.486`, then `suballoc`, then `oemuni` — complete memory, allocation and
-   conversion package closures as three separate S packets.
-10. `dpmi32` plus its load-only `dpmi` guest contract — descriptor, PM stack,
-    selector, interrupt, teardown and DOSX activation closure.
-11. `vdmredir` — complete DLL, handle/guest-copy, stream and redirection
-    lifecycle closure.
-12. `wow32` plus its load-only `wow16` guest contract — full original provider
-    load, task/callback, font/glyph, icon/cursor, scheduler and hard-error
-    owner recovery.
-13. `dbg` — original debugger initialization, state, dispatch and event
-    contract, or a source-proven product-profile exclusion with all thin
-    substitutes removed. `vdd` is a separate final package S only if its
-    product-profile consumer remains after the preceding closures.
+| Planned S | One original package unit | Whole-package completion obligation |
+| --- | --- | --- |
+| S1 | `softpc.new/base/ccpu386` | CPU execution, exception, interrupt, event and descriptor lifecycle. |
+| S2 | `softpc.new/base/cvidc` | C-VID vector table, timing, publication and all selected consumers. |
+| S3 | `softpc.new/base/video` | Original text/graphics update path and finite Console presentation boundary. |
+| S4 | `softpc.new/base/system` | Timers, PIC, reset and device lifecycle. |
+| S5 | `softpc.new/base/keymouse` | Keyboard/mouse controller, callback and teardown lifecycle. |
+| S6 | `softpc.new/base/bios` | Firmware-state initialization and every selected host-facing failure path. |
+| S7 | `softpc.new/base/support` | Shared SoftPC support state, resource and failure contracts. |
+| S8 | `softpc.new/base/disks` | Disk device contract, backing storage and error/teardown behavior. |
+| S9 | `softpc.new/base/comms` | Communications device state and selected host I/O boundary. |
+| S10 | `softpc.new/base/dos` | SoftPC DOS-device hooks and their complete BOP/device contract. |
+| S11 | `softpc.new/base/debug` | The full original debug package, including both `trace.c` and `btrace.c`; current trace-only selection is not completion. |
+| S12 | `softpc.new/host/src` | Original worker startup, Console, thread and host lifecycle; it must consume the settled S11 debug disposition rather than own debug policy. |
+| S13 | `dos/dem` | Full DEM DOS-execution, BOP, file/guest-copy and failure contract. |
+| S14 | `dos/command` | COMMAND EXEC, native-child, environment, return and error lifecycle. |
+| S15 | `xms.486` | XMS allocation, move, mapping lease and teardown contract. |
+| S16 | `suballoc` | Original suballocator state, allocation and release lifecycle. |
+| S17 | `oemuni` | OEM/Unicode conversion source, buffers and failure behavior. |
+| S18 | `dpmi32` | Descriptor, PM stack, selector, interrupt and protected-mode teardown contract. |
+| S19 | `dpmi` | Load-only guest DPMI manifest, DOSX activation and return contract; no host-link substitution may stand in for it. |
+| S20 | `vdmredir` | The complete redirector DLL, handle/guest-copy, stream and redirection lifecycle. |
+| S21 | `wow32` | Original provider load, task/callback, font/glyph, icon/cursor, scheduler and hard-error contract. |
+| S22 | `wow16` | Load-only guest WOW16 media, loader/task activation and callback-return contract. |
+| S23 | `dbg` | Original debugger initialization, state, dispatch and event contract, or a source-proven complete product-profile exclusion that deletes every thin substitute. |
+| S24 | `vdd` | Original VDD lifecycle and consumers, or a source-proven complete product-profile exclusion that deletes every thin substitute. |
 
-Items containing several names are ordering headings only: every named source
-unit after a comma or “then” is an individual S. The current `dbg` binding,
-the former WOW/debugger proposal and any local replacement scheduler do not
+The 19 currently formal-linked library/DLL units are only a starting build
+inventory, not the S structure: their trace-only `base/debug` selection,
+limited `dbg`/`vdd` bindings, and load-only `dpmi`/`wow16` media are precisely
+why these four rows are independent S packets. The current `dbg` binding, the
+former WOW/debugger proposal and any local replacement scheduler do not
 constitute completion.
 
 ## Package S exit criteria
