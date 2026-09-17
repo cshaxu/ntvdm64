@@ -42,7 +42,7 @@ if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
 }
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $wow = Join-Path $root 'src/mvdm-host/wow32'
-$adapterWow = Join-Path $root 'src/ntvdm/wow'
+$adapterWow = Join-Path $root 'src/ntvdm-exe/wow'
 $manifest = Join-Path $wow 'sources'
 $definition = Join-Path $wow 'wow32.def'
 $resource = Join-Path $wow 'wow32.rc'
@@ -67,11 +67,11 @@ $providerSupportSources = @(
     (Join-Path $adapterWow 'wow_user_callback_callconv.c'),
     (Join-Path $adapterWow 'wow_private_user_compat.c'),
     (Join-Path $root 'src/opennt-host/windows/core/ntuser/rtl/chartran.c'),
-    (Join-Path $root 'src/ntvdm/win32/ntuser_rtl_compat.c'),
-    (Join-Path $root 'src/ntvdm/win32/wow_public_user_facade.c'),
+    (Join-Path $root 'src/ntvdm-exe/win32/ntuser_rtl_compat.c'),
+    (Join-Path $root 'src/ntvdm-exe/win32/wow_public_user_facade.c'),
     # This is the already-admitted narrow historical CRT spelling bridge.  It
     # has no parent-machine state, so the late-loaded DLL may own its copy.
-    (Join-Path $root 'src/ntvdm/win32/crt_compat.c')
+    (Join-Path $root 'src/ntvdm-exe/win32/crt_compat.c')
 )
 foreach ($path in $providerSupportSources) {
     if (!(Test-Path -LiteralPath $path -PathType Leaf)) {
@@ -245,7 +245,7 @@ $environment = Join-Path $build 'msvc-x86.cmd'
 $includeRoots = @(
     'src',
     'src/opennt-abi/host-compat/include',
-    'src/ntvdm/wow/include',
+    'src/ntvdm-exe/wow/include',
     'src/mvdm-host/wow32',
     'src/mvdm-host/inc',
     'src/mvdm-host/softpc.new/base/inc',
@@ -256,10 +256,10 @@ $includeRoots = @(
     'src/opennt-abi/source/public/internal/windows/inc',
     'src/opennt-abi/source/public/internal/shell/inc',
     'src/opennt-abi/source/private/windows/inc',
-    'src/ntvdm/softpc/include',
-    'src/ntvdm/command/include',
-    'src/ntvdm/monitor/include',
-    'src/ntvdm/vdd/include',
+    'src/ntvdm-exe/softpc/include',
+    'src/ntvdm-exe/command/include',
+    'src/ntvdm-exe/monitor/include',
+    'src/ntvdm-exe/vdd/include',
     'src/session'
 )
 $includes = ($includeRoots | ForEach-Object { '/I "' + (Join-Path $root $_) + '"' }) -join ' '

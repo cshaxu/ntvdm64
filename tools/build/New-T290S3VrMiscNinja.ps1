@@ -21,7 +21,7 @@ $includes = @('src', 'src/opennt-abi/host-compat/include',
     # declaration slice (`ntpsapi.h`). This is the same source-facing order
     # as the formal CPU40 graph, not a fixture-local declaration substitute.
     'src/opennt-host/public/sdk/inc',
-    'src/ntvdm/softpc/include', 'src/mvdm-support/inc',
+    'src/ntvdm-exe/softpc/include', 'src/mvdm-support/inc',
     'src/mvdm-host/inc',
     'src/mvdm-host/softpc.new/base/inc',
     'src/mvdm-host/vdmredir') | ForEach-Object { '/I "' + (Join-Path $root $_).Replace('\', '/') + '"' }

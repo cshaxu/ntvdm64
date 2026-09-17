@@ -145,7 +145,7 @@ Revision History:
  * GetVDMAddr aliases. Keep dispatch, queue and ICA control flow in the
  * mirror; enter the Redirector adapter only at the guest-memory lifetime
  * seam. */
-#include "ntvdm/redir/include/mvdm_redirector_async.h"
+#include "ntvdm-exe/redir/include/mvdm_redirector_async.h"
 
 #include <stdio.h>
 

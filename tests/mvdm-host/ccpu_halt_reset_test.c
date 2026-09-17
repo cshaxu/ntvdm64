@@ -1,7 +1,7 @@
 #include <stdint.h>
 #include <windows.h>
-#include "ntvdm/session/session.h"
-#include "ntvdm/softpc/include/mvdm_softpc_guest_memory.h"
+#include "ntvdm-exe/session/session.h"
+#include "ntvdm-exe/softpc/include/mvdm_softpc_guest_memory.h"
 
 /* Formal original CCPU/SAS providers, not replacement decode/reset bodies. */
 extern void *setup_global_data_ptr(void);
@@ -64,7 +64,7 @@ int main(void)
         0xb8,0xad,0xde,0xd6,0xfe};
     unsigned char reset_vector[] = {0xb8,0xef,0xbe,0xd6,0xfe};
     SetUnhandledExceptionFilter(report_exception);
-    report("ntvdm/session/gdp\n");
+    report("ntvdm-exe/session/gdp\n");
     session_initialize(&owner, 412);
     if (!session_activate(&owner) || !session_thread_bind(&owner) ||
         setup_global_data_ptr() == NULL) return 2;

@@ -2,10 +2,10 @@
 
 #include <string.h>
 
-#include "ntvdm/monitor/include/mvdm_wow_task_frame.h"
-#include "ntvdm/softpc/include/mvdm_protected_span.h"
-#include "ntvdm/softpc/include/mvdm_vdm_stack.h"
-#include "ntvdm/session/session.h"
+#include "ntvdm-exe/monitor/include/mvdm_wow_task_frame.h"
+#include "ntvdm-exe/softpc/include/mvdm_protected_span.h"
+#include "ntvdm-exe/softpc/include/mvdm_vdm_stack.h"
+#include "ntvdm-exe/session/session.h"
 
 /* The callback-frame fixture intentionally exercises the real-mode source
  * branch. Protected span resolution is covered by the dedicated P1 fixture. */

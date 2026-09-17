@@ -32,7 +32,7 @@
 #include <stdarg.h>
 #include <ntlpcapi.h>
 #include <ntcsrdll.h>
-#include "ntvdm/wow/include/wow_user_callback_callconv.h"
+#include "ntvdm-exe/wow/include/wow_user_callback_callconv.h"
 #define SHAREWOW_MAIN
 #include <sharewow.h>
 

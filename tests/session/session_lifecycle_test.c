@@ -1,4 +1,4 @@
-#include "ntvdm/session/session.h"
+#include "ntvdm-exe/session/session.h"
 
 static uint32_t teardown_order[2];
 static uint32_t teardown_count;

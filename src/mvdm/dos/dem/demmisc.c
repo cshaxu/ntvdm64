@@ -17,7 +17,7 @@
 #include <mvdm.h>
 #include <dbgsvc.h>
 #include <nt_vdd.h>
-#include "ntvdm/command/include/mvdm_command_guest_state.h"
+#include "ntvdm-exe/command/include/mvdm_command_guest_state.h"
 
 
 #if DEVL

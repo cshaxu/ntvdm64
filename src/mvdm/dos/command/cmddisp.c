@@ -12,7 +12,7 @@
 #include <softpc.h>
 /* DIVERGENCE(MVDM-HOST-DIV-263): restore host-only report selectors after
  * original environment import so a native child can scrub them again. */
-#include "ntvdm/softpc/include/mvdm_softpc_termination.h"
+#include "ntvdm-exe/softpc/include/mvdm_softpc_termination.h"
 
 
 PFNSVC	apfnSVCCmd [] = {

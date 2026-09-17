@@ -16,8 +16,8 @@ New-Item -ItemType Directory -Force -Path $build | Out-Null
 $environment = Join-Path $build ("msvc-{0}.cmd" -f $Architecture)
 @('@echo off', 'set "MVDM_T290_CALLER_CWD=%CD%"', 'if defined VSCMD_VER goto ready', ('call "' + $vs + '" -arch=' + $Architecture + ' -host_arch=x64 >nul'), 'if errorlevel 1 exit /b %errorlevel%', ':ready', 'cd /d "%MVDM_T290_CALLER_CWD%"', '%*') |
     Set-Content -LiteralPath $environment -Encoding ascii
-$includes = @('src', 'src/ntvdm/session', 'src/ntvdm/redir/include',
-    'src/ntvdm/softpc/include') |
+$includes = @('src', 'src/ntvdm-exe/session', 'src/ntvdm-exe/redir/include',
+    'src/ntvdm-exe/softpc/include') |
     ForEach-Object { '/I "' + (Join-Path $root $_).Replace('\', '/') + '"' }
 $cflags = '/nologo /TC /c /std:c11 /MT /W4 /WX /showIncludes ' + ($includes -join ' ')
 $content = @"
@@ -34,9 +34,9 @@ rule link
   command = cmd /c "`$environment link /nologo /out:`$out `$in"
   description = LINK `$out
 
-build obj/guest_memory_lease.obj: cc `$root/src/ntvdm/session/guest_memory_lease.c
-build obj/session.obj: cc `$root/src/ntvdm/session/session.c
-build obj/mvdm_redirector_handle.obj: cc `$root/src/ntvdm/redir/mvdm_redirector_handle.c
+build obj/guest_memory_lease.obj: cc `$root/src/ntvdm-exe/session/guest_memory_lease.c
+build obj/session.obj: cc `$root/src/ntvdm-exe/session/session.c
+build obj/mvdm_redirector_handle.obj: cc `$root/src/ntvdm-exe/redir/mvdm_redirector_handle.c
 build obj/fixture.obj: cc `$root/tests/ntvdm/redir/t290_s3_redirector_handle_fixture.c
 build bin/t290-s3-redirector-handle-fixture.exe: link obj/guest_memory_lease.obj obj/session.obj obj/mvdm_redirector_handle.obj obj/fixture.obj
 default bin/t290-s3-redirector-handle-fixture.exe

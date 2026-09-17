@@ -5,7 +5,7 @@
 #include <string.h>
 
 #include "mvdm_guest_location.h"
-#include "ntvdm/session/session.h"
+#include "ntvdm-exe/session/session.h"
 
 typedef struct fixture_memory {
     uint8_t bytes[0x20000];

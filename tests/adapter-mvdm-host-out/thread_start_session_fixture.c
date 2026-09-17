@@ -1,7 +1,7 @@
 #include <windows.h>
 
 #include "opennt-abi/host-compat/include/thread_start_compat.h"
-#include "ntvdm/session/session.h"
+#include "ntvdm-exe/session/session.h"
 
 static DWORD __cdecl bound_worker(LPVOID parameter)
 {

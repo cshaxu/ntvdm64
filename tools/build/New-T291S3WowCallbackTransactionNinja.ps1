@@ -13,7 +13,7 @@ $vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\To
 New-Item -ItemType Directory -Force -Path $build | Out-Null
 $environment = Join-Path $build ("msvc-{0}.cmd" -f $Architecture)
 @('@echo off', 'set "MVDM_T291_CALLER_CWD=%CD%"', 'if defined VSCMD_VER goto ready', ('call "' + $vs + '" -arch=' + $Architecture + ' -host_arch=x64 >nul'), 'if errorlevel 1 exit /b %errorlevel%', ':ready', 'cd /d "%MVDM_T291_CALLER_CWD%"', '%*') | Set-Content -LiteralPath $environment -Encoding ascii
-$cflags = '/nologo /std:c11 /MT /W4 /WX /showIncludes /I ' + $root + '/src /I ' + $root + '/src/session /I ' + $root + '/src/ntvdm/monitor/include /I ' + $root + '/src/ntvdm/softpc/include /I ' + $root + '/src/ntvdm/wow'
+$cflags = '/nologo /std:c11 /MT /W4 /WX /showIncludes /I ' + $root + '/src /I ' + $root + '/src/session /I ' + $root + '/src/ntvdm-exe/monitor/include /I ' + $root + '/src/ntvdm-exe/softpc/include /I ' + $root + '/src/ntvdm-exe/wow'
 $content = @"
 ninja_required_version = 1.10
 root = $root
@@ -26,11 +26,11 @@ rule cc
 rule link
   command = cmd /c "`$environment link /nologo /out:`$out `$in"
   description = LINK `$out
-build obj/guest_memory_lease.obj: cc `$root/src/ntvdm/session/guest_memory_lease.c
-build obj/session.obj: cc `$root/src/ntvdm/session/session.c
-build obj/task_frame.obj: cc `$root/src/ntvdm/monitor/mvdm_wow_task_frame.c
-build obj/pointer_scope.obj: cc `$root/src/ntvdm/softpc/mvdm_wow_pointer_scope.c
-build obj/callback_transaction.obj: cc `$root/src/ntvdm/wow/mvdm_wow_callback_transaction.c
+build obj/guest_memory_lease.obj: cc `$root/src/ntvdm-exe/session/guest_memory_lease.c
+build obj/session.obj: cc `$root/src/ntvdm-exe/session/session.c
+build obj/task_frame.obj: cc `$root/src/ntvdm-exe/monitor/mvdm_wow_task_frame.c
+build obj/pointer_scope.obj: cc `$root/src/ntvdm-exe/softpc/mvdm_wow_pointer_scope.c
+build obj/callback_transaction.obj: cc `$root/src/ntvdm-exe/wow/mvdm_wow_callback_transaction.c
 build obj/fixture.obj: cc `$root/tests/ntvdm/wow/t291_s3_wow_callback_transaction_fixture.c
 build bin/t291-s3-wow-callback-transaction-fixture.exe: link obj/guest_memory_lease.obj obj/session.obj obj/task_frame.obj obj/pointer_scope.obj obj/callback_transaction.obj obj/fixture.obj
 default bin/t291-s3-wow-callback-transaction-fixture.exe

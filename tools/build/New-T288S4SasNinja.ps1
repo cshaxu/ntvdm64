@@ -19,7 +19,7 @@ $build = Join-Path $root ("build/M0-T288/S4/{0}" -f $Architecture)
 $vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 if (!(Test-Path -LiteralPath $vs -PathType Leaf)) { throw "Missing MSVC: $vs" }
 if (!(Get-Command ninja -ErrorAction SilentlyContinue)) { throw 'Ninja is required.' }
-$sources = @('src/ntvdm/softpc/mvdm_sas.c', 'tests/ntvdm/softpc/sas_memory_fixture.c')
+$sources = @('src/ntvdm-exe/softpc/mvdm_sas.c', 'tests/ntvdm/softpc/sas_memory_fixture.c')
 foreach ($path in $sources) {
     if (!(Test-Path -LiteralPath (Join-Path $root $path) -PathType Leaf) -or $path -match '(^|/)src\.old(/|$)') { throw "Invalid S4 input: $path" }
 }
@@ -31,7 +31,7 @@ $environment = Join-Path $build 'msvc-mt.cmd'
 $manifest = [ordered]@{ schema = 'm0.t288.s4.sas.v1'; architecture = $Architecture; runtimeLibrary = '/MT'; sources = $sources;
     forbiddenInputs = @('src.old', 'v86/monitor/i386/sas.c', 'prebuilt product archive') }
 $manifest | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (Join-Path $build 'source-manifest.json') -Encoding utf8
-$includes = @('src', 'src/ntvdm/softpc/include') | ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }
+$includes = @('src', 'src/ntvdm-exe/softpc/include') | ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }
 $flags = '/nologo /TC /c /std:c11 /MT /W4 /showIncludes ' + ($includes -join ' ')
 $graph = [Collections.Generic.List[string]]::new()
 $graph.Add('ninja_required_version = 1.10')

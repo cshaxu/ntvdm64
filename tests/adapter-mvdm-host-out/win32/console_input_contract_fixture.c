@@ -3,7 +3,7 @@
 #include <windows.h>
 
 #include "conapi.h"
-#include "ntvdm/session/session.h"
+#include "ntvdm-exe/session/session.h"
 
 HANDLE GetConsoleInputWaitHandle(VOID);
 

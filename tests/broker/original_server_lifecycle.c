@@ -11,8 +11,8 @@
 #include <base_command.h>
 #include <base_stream.h>
 #include <base_wait.h>
-#include "basesrv/transport/vdm_receipt.h"
-#include "basesrv/transport/vdm_delivery.h"
+#include "basesrv-exe/transport/vdm_receipt.h"
+#include "basesrv-exe/transport/vdm_delivery.h"
 #include <stdio.h>
 #include <string.h>
 

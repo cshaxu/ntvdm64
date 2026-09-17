@@ -42,14 +42,14 @@ $includes = @(
     'src/opennt-abi/source/private/windows/inc',
     'src/opennt-abi/source/public/ddk/inc',
     'src/mvdm-support/inc',
-    'src/ntvdm/softpc/include/generated/x86/prod',
+    'src/ntvdm-exe/softpc/include/generated/x86/prod',
     'src/mvdm-host/softpc.new/base/ccpu386',
     'src/mvdm-host/softpc.new/host/inc',
     'src/mvdm-host/softpc.new/base/cvidc',
     'src/mvdm-host-overlay/softpc.new/base/cvidc',
     'src/mvdm-host/softpc.new/base/inc',
-    'src/ntvdm/softpc/include',
-    'src/ntvdm/monitor/include'
+    'src/ntvdm-exe/softpc/include',
+    'src/ntvdm-exe/monitor/include'
 ) | ForEach-Object {
     $includePath = if ([IO.Path]::IsPathRooted($_)) { $_ } else { Join-Path $root $_ }
     '/I "' + (NinjaPath $includePath) + '"'

@@ -1,7 +1,7 @@
 #include <stdint.h>
 
 #include "mvdm_redirector_handle.h"
-#include "ntvdm/session/session.h"
+#include "ntvdm-exe/session/session.h"
 
 int main(void)
 {

@@ -5,7 +5,7 @@ int main(void)
 {
     OPENNT_BASE_RESERVATIONS *state=NULL;
     HANDLE self=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION|SYNCHRONIZE,FALSE,GetCurrentProcessId());
-    uint64_t first=0,second=0,third=0,claimed=0;ULONG task=0;HANDLE console=NULL;BOOL shared_wow=FALSE;
+    uint64_t first=0,second=0,third=0,claimed=0;ULONG task=0;HANDLE console=NULL,worker=NULL;BOOL shared_wow=FALSE;
     CHECK(self && OpenNtBaseReservationsInitialize(&state));
     CHECK(OpenNtBaseReservationCreate(state,101,7,41,(HANDLE)0x1234,FALSE,&first)==ERROR_SUCCESS);
     CHECK(OpenNtBaseReservationCreate(state,102,8,42,(HANDLE)0x1235,FALSE,&second)==ERROR_SUCCESS && second>first);
@@ -20,15 +20,17 @@ int main(void)
     CHECK(OpenNtBaseReservationMarkWorkerLocalStream(state,first,(HANDLE)0x51)==ERROR_SUCCESS);
     CHECK(OpenNtBaseReservationIsWorkerLocalStream(state,first,(HANDLE)0x51));
     CHECK(!OpenNtBaseReservationIsWorkerLocalStream(state,first,(HANDLE)0x53));
-    CHECK(OpenNtBaseReservationClaimWorker(state,GetCurrentProcessId(),9,&claimed,&task,&console,&shared_wow)==ERROR_SUCCESS);
+    CHECK(OpenNtBaseReservationClaimWorker(state,GetCurrentProcessId(),9,&claimed,&task,&console,&shared_wow,&worker)==ERROR_SUCCESS);
     CHECK(claimed==first && task==41 && console==(HANDLE)0x1234 && !shared_wow);
+    CHECK(worker!=NULL); CloseHandle(worker); worker=NULL;
     CHECK(OpenNtBaseReservationAbandon(state,first)); /* Claimed self must survive. */
-    CHECK(OpenNtBaseReservationClaimWorker(state,GetCurrentProcessId(),10,&claimed,&task,&console,&shared_wow)==ERROR_ALREADY_EXISTS);
+    CHECK(OpenNtBaseReservationClaimWorker(state,GetCurrentProcessId(),10,&claimed,&task,&console,&shared_wow,&worker)==ERROR_ALREADY_EXISTS);
     CHECK(OpenNtBaseReservationRelease(state,first,102,7)==ERROR_ACCESS_DENIED);
     CHECK(OpenNtBaseReservationRelease(state,first,101,7)==ERROR_SUCCESS);
     CHECK(OpenNtBaseReservationPrepareWorker(state,third,103,9,self)==ERROR_SUCCESS);
-    CHECK(OpenNtBaseReservationClaimWorker(state,GetCurrentProcessId(),11,&claimed,&task,&console,&shared_wow)==ERROR_SUCCESS);
+    CHECK(OpenNtBaseReservationClaimWorker(state,GetCurrentProcessId(),11,&claimed,&task,&console,&shared_wow,&worker)==ERROR_SUCCESS);
     CHECK(claimed==third && task==43 && console==NULL && shared_wow);
+    CHECK(worker!=NULL); CloseHandle(worker); worker=NULL;
     {
         WCHAR image[MAX_PATH];
         STARTUPINFOW startup={sizeof(startup)};

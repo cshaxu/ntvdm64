@@ -2,13 +2,13 @@
 
 ## Objective
 
-Deliver `DTASKMGR.EXE`: a native Windows Console character-mode task manager for
+Deliver `dtmgr.exe`: a native Windows Console character-mode task manager for
 this product's brokered DOS and Win16/WOW16 work only.  It presents a compact,
 continuously refreshable Terminal/conhost TUI with a graphical character
 layout, lets the user select a listed task with Up/Down, and asks BaseSrv to
 terminate the selected product task after an explicit confirmation.
 
-`DTASKMGR.EXE` is not a guest DOS program and does not emulate a DOS screen.  It is
+`dtmgr.exe` is not a guest DOS program and does not emulate a DOS screen.  It is
 a product-owned Console executable that may run in Windows Terminal, conhost,
 or another supported Console host.  It observes only tasks registered with
 this product's `basesrv.exe`; it never enumerates or controls unrelated
@@ -25,23 +25,23 @@ Windows processes.
   of the selected worker, and a visible confirmation is required before any
   state change. If it hosts COMMAND plus child DOS/WOW tasks, the confirmation
   names that scope and states that all of them will end. Escape/Q exits
-  DTASKMGR only.
+  dtmgr only.
 - If no task is registered, display an empty table and an explicit “no product
   tasks” state.  If BaseSrv is absent, unreachable, incompatible or exits while
-  DTASKMGR is running, display an empty table with the precise broker-status reason,
+  dtmgr is running, display an empty table with the precise broker-status reason,
   disable termination, and remain usable until the user exits or reconnection
   succeeds.
 - A terminate request is scoped to one selected broker worker ID. BaseSrv owns
   authorization, ID-to-worker resolution, cancellation/rundown and result
-  reporting; DTASKMGR must never call `TerminateProcess` or trust a client-supplied
+  reporting; dtmgr must never call `TerminateProcess` or trust a client-supplied
   native handle/PID. BaseSrv uses only its pre-existing authenticated,
   process-local worker handle, and its existing worker-exit watch performs the
   original cleanup after the process exits.
 
 ## Architecture and ownership
 
-`src/dtaskmgr/` will own the executable, Console rendering, keyboard navigation and
-presentation-only selection state. `src/basesrv/` will own a small versioned,
+`src/dtmgr-exe/` will own the executable, Console rendering, keyboard navigation and
+presentation-only selection state. `src/basesrv-exe/` will own a small versioned,
 authenticated management endpoint and the authoritative worker snapshot and
 termination state transitions. `src/product-abi/` may carry only fixed-width
 versioned request/response declarations where genuinely shared; the service
@@ -63,7 +63,7 @@ broker state, not a best-effort decode.
    how DOS, Win16 and WOW16 task kinds are represented without inventing a
    second registry. Identify original BaseSrv owner calls to retain and every
    required product-owned binding.
-2. **Read-only DTASKMGR TUI.** Implement and test `DTASKMGR.EXE` Console rendering,
+2. **Read-only dtmgr TUI.** Implement and test `dtmgr.exe` Console rendering,
    refresh, absent/incompatible broker state, empty state, selection stability,
    resize behavior and keyboard navigation. It must make no terminating call.
 3. **Broker-authorized termination and end-to-end closure.** Implement the
@@ -75,9 +75,24 @@ broker state, not a best-effort decode.
 4. **Disconnected empty-state repair.** When BaseSrv is absent, incompatible
    or disconnects, retain the ordinary empty table and the `No product tasks.`
    row, add a distinct `BaseSrv not connected` status/retry line, and do not
-   start a broker or exit DTASKMGR. Build, deploy and regress the four-program
+   start a broker or exit dtmgr. Build, deploy and regress the four-program
    package; leave T419 open for owner Console acceptance.
-
+5. **Real process-handle management binding.** Keep the authenticated server
+   check unchanged, but make dtmgr pass the same owned, real self-process
+   `system_handle` as its passing RPC fixture for both snapshot and terminate;
+   prove a live registered COMMAND worker is rendered before closing T419.
+   In the owner-approved shared delivery scope, restore the public run16
+   compact-first-option convention for every resolvable bare image (for
+   example `command/c`), before the original classifier; it is not a
+   COMMAND-specific parser and does not reinterpret drive- or
+   backslash-qualified paths.
+6. **Selected-worker authority completion.** Preserve the query/synchronize
+   worker self-handle used by the worker's authenticated connection, but let
+   the BaseSrv watch retain only the same-access duplicate of the worker
+   already prepared by the launcher reservation. This gives the server—not
+   dtmgr—the existing selected-worker termination authority. Prove it with
+   one controlled live COMMAND worker, then verify it disappears through the
+   normal watch cleanup.
 ## Verification and exit criteria
 
 Every S builds on the formal Win32/x86 row and preserves the established

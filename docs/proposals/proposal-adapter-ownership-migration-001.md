@@ -20,7 +20,7 @@ migration.
 ## Required end state
 
 1. A complete tracked owner ledger covers every file now below
-   `src/ntvdm/softpc`, including public headers, production
+   `src/ntvdm-exe/softpc`, including public headers, production
    implementations, tests, build references and generated-graph inputs.
 2. Each row has exactly one final semantic owner, original caller(s), ABI
    surface, dependency direction, migration operation, and verification row.

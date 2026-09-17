@@ -2,6 +2,7 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T419 S5 DTASKMGR RPC and compact entry](evidence/m0-t419-s5-dtaskmgr-rpc-and-run16-compact-entry.md) | M0 T419 S5 | Records the real-system-handle repair, live worker projection, generic bare-image compact-option boundary, x86/package proof and owner visual boundary. | Retain through T419 closure. |
 | [T419 S4 DTASKMGR disconnected state](evidence/m0-t419-s4-dtaskmgr-disconnected-state.md) | M0 T419 S4 | Retains the normal empty-table presentation when BaseSrv is absent, formal x86/package proof and owner visual acceptance boundary. | Retain through T419 closure. |
 | [T419 S2--S3 DTASKMGR integration](evidence/m0-t419-s2-s3-dtaskmgr-integration.md) | M0 T419 S2--S3 | Fixed-width BaseSrv management projection, server-owned worker termination, four-program x86 build and deployed COMMAND/MEM/EDIT regression evidence. | Retain through T419 closure. |
 | [T419 S1 DTASKMGR worker contract audit](evidence/m0-t419-s1-dtaskmgr-worker-contract-audit.md) | M0 T419 S1 | Proves the BaseSrv worker-watch and original DOS/WOW-record boundary; selects epoch plus worker-sequence identity and server-owned worker termination. | Retain through T419 closure. |

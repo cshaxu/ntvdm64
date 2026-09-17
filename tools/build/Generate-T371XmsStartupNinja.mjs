@@ -19,15 +19,15 @@ const sources = [
   "tests/mvdm-host/xms/xms_init_fixture.c",
   "src/mvdm-host/xms.486/xms.c",
   "src/mvdm-host/suballoc/suballoc.c",
-  "src/ntvdm/softpc/mvdm_xms_memory.c",
-  "src/ntvdm/softpc/mvdm_softpc_guest_memory.c",
+  "src/ntvdm-exe/softpc/mvdm_xms_memory.c",
+  "src/ntvdm-exe/softpc/mvdm_softpc_guest_memory.c",
   "src/session/guest_memory_lease.c",
   "src/session/session.c"
 ];
 const includes = [
   "src",
   "src/opennt-abi/host-compat/include",
-  "src/ntvdm/softpc/include",
+  "src/ntvdm-exe/softpc/include",
   "src/opennt-host/public/sdk/inc",
   "src/mvdm-host/inc",
   "src/mvdm-host/xms.486",

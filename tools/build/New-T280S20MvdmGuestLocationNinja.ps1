@@ -12,7 +12,7 @@ $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path.Replace('\', '/')
 $build = Join-Path $root ("build/M0-T280/{0}-mvdm-guest-location" -f $Architecture)
 New-Item -ItemType Directory -Force -Path $build | Out-Null
-$cflags = '/nologo /std:c11 /MT /W4 /showIncludes /I ' + $root + '/src /I ' + $root + '/src/session /I ' + $root + '/src/ntvdm/softpc/include'
+$cflags = '/nologo /std:c11 /MT /W4 /showIncludes /I ' + $root + '/src /I ' + $root + '/src/session /I ' + $root + '/src/ntvdm-exe/softpc/include'
 $content = @"
 ninja_required_version = 1.10
 root = $root
@@ -26,9 +26,9 @@ rule link
   command = link /nologo /out:`$out `$in
   description = LINK `$out
 
-build obj/guest_memory_lease.obj: cc `$root/src/ntvdm/session/guest_memory_lease.c
-build obj/session.obj: cc `$root/src/ntvdm/session/session.c
-build obj/mvdm_guest_location.obj: cc `$root/src/ntvdm/softpc/mvdm_guest_location.c
+build obj/guest_memory_lease.obj: cc `$root/src/ntvdm-exe/session/guest_memory_lease.c
+build obj/session.obj: cc `$root/src/ntvdm-exe/session/session.c
+build obj/mvdm_guest_location.obj: cc `$root/src/ntvdm-exe/softpc/mvdm_guest_location.c
 build obj/fixture.obj: cc `$root/tests/ntvdm/softpc/t280_s20_mvdm_guest_location_fixture.c
 build mvdm_guest_location_fixture.exe: link obj/guest_memory_lease.obj obj/session.obj obj/mvdm_guest_location.obj obj/fixture.obj
 default mvdm_guest_location_fixture.exe

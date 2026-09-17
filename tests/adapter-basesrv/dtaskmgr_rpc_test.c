@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "service.h"
-#include "basesrv/transport/rpc_security.h"
+#include "basesrv-exe/transport/rpc_security.h"
 #include "product-abi/version.h"
 
 #define CHECK(value) do { if (!(value)) { fprintf(stderr,"FAIL %d: %lu\n",__LINE__,(unsigned long)GetLastError()); return 1; } } while (0)
@@ -33,7 +33,7 @@ static RPC_BINDING_HANDLE bind_server(const broker_rpc_scope *scope)
     return binding;
 }
 
-int main(void)
+int main(int argc,char **argv)
 {
     broker_rpc_scope scope={0};
     RPC_BINDING_HANDLE binding;
@@ -45,10 +45,16 @@ int main(void)
     hyper epoch=0,valid_epoch=0;
     ULONG count=0;
     DTASKMGR_WORKER *entries=NULL;
+    BOOL existing=argc>=2 && (!_stricmp(argv[1],"--existing") || !_stricmp(argv[1],"--terminate"));
+    BOOL terminate=argc==2 && !_stricmp(argv[1],"--terminate");
+    ULONG index;
+    if (argc!=1 && !existing) { fputs("usage: dtaskmgr-rpc-test [--existing]\n",stderr); return 2; }
     CHECK(broker_rpc_capture_scope(&scope));
-    CHECK(GetModuleFileNameW(NULL,path,MAX_PATH));
-    slash=wcsrchr(path,L'\\'); CHECK(slash!=NULL); lstrcpyW(slash+1,L"basesrv.exe");
-    CHECK(CreateProcessW(path,NULL,NULL,NULL,FALSE,CREATE_NO_WINDOW,NULL,NULL,&startup,&broker));
+    if (!existing) {
+        CHECK(GetModuleFileNameW(NULL,path,MAX_PATH));
+        slash=wcsrchr(path,L'\\'); CHECK(slash!=NULL); lstrcpyW(slash+1,L"basesrv.exe");
+        CHECK(CreateProcessW(path,NULL,NULL,NULL,FALSE,CREATE_NO_WINDOW,NULL,NULL,&startup,&broker));
+    }
     self=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION|SYNCHRONIZE,FALSE,GetCurrentProcessId());
     CHECK(self!=NULL);
     binding=bind_server(&scope); CHECK(binding!=NULL);
@@ -62,7 +68,28 @@ int main(void)
         if (error==ERROR_SUCCESS) break;
         Sleep(50);
     }
-    CHECK(error==ERROR_SUCCESS && epoch!=0 && count==0 && entries==NULL);
+    CHECK(error==ERROR_SUCCESS && epoch!=0 && (!existing || count));
+    if (existing) {
+        for (index=0;index<count;++index)
+            wprintf(L"WORKER sequence=%lu task=%lu kind=%lu state=%lu image=%ls\n",
+                (unsigned long)entries[index].sequence,(unsigned long)entries[index].task,
+                (unsigned long)entries[index].kind,(unsigned long)entries[index].state,
+                entries[index].image);
+        if (terminate) {
+            RpcTryExcept {
+                error=Client_TerminateWorker(binding,self,APP_PROTOCOL_VERSION,(unsigned char *)version,
+                    epoch,entries[0].sequence);
+            }
+            RpcExcept(1) { error=RpcExceptionCode(); }
+            RpcEndExcept
+            CHECK(error==ERROR_SUCCESS);
+            puts("PASS: authenticated DTASKMGR RPC accepted selected live worker termination");
+        }
+        MIDL_user_free(entries); RpcBindingFree(&binding); CloseHandle(self);
+        puts("PASS: authenticated DTASKMGR RPC sees at least one live worker");
+        return 0;
+    }
+    CHECK(count==0 && entries==NULL);
     valid_epoch=epoch;
     RpcTryExcept {
         error=Client_TaskSnapshot(binding,self,APP_PROTOCOL_VERSION+1,(unsigned char *)version,

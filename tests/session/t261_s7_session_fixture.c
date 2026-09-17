@@ -1,5 +1,5 @@
-#include "ntvdm/session/session.h"
-#include "ntvdm/softpc/guest_pointer_manager.h"
+#include "ntvdm-exe/session/session.h"
+#include "ntvdm-exe/softpc/guest_pointer_manager.h"
 
 static unsigned int teardown_calls;
 

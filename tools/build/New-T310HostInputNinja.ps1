@@ -43,9 +43,9 @@ rule run
   description = RUN `$in
 
 build obj/fixture.obj: cc `$root/tests/adapter-mvdm-host-out/win32/console_input_contract_fixture.c
-build obj/console_compat.obj: cc `$root/src/ntvdm/win32/console_compat.c
-build obj/session.obj: cc `$root/src/ntvdm/session/session.c
-build obj/guest_memory_lease.obj: cc `$root/src/ntvdm/session/guest_memory_lease.c
+build obj/console_compat.obj: cc `$root/src/ntvdm-exe/win32/console_compat.c
+build obj/session.obj: cc `$root/src/ntvdm-exe/session/session.c
+build obj/guest_memory_lease.obj: cc `$root/src/ntvdm-exe/session/guest_memory_lease.c
 build console_input_contract_fixture.exe: link obj/fixture.obj obj/console_compat.obj obj/session.obj obj/guest_memory_lease.obj
 build test: run console_input_contract_fixture.exe
 default console_input_contract_fixture.exe

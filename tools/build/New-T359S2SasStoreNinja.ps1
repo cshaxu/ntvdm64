@@ -31,7 +31,7 @@ if (!(Test-Path -LiteralPath $vs -PathType Leaf)) { throw "Missing MSVC: $vs" }
 if (!(Get-Command ninja -ErrorAction SilentlyContinue)) { throw 'Ninja is required.' }
 
 $sources = @(
-    'src/ntvdm/softpc/mvdm_softpc_termination.c',
+    'src/ntvdm-exe/softpc/mvdm_softpc_termination.c',
     'tests/ntvdm/softpc/t355_s6_config_command_store_observation_fixture.c',
     'tests/ntvdm/softpc/t359_s2_sas_store_fixture_stubs.c'
 )
@@ -61,7 +61,7 @@ $manifest = [ordered]@{
 $manifest | ConvertTo-Json -Depth 4 |
     Set-Content -LiteralPath (Join-Path $build 'source-manifest.json') -Encoding utf8
 
-$includes = @('src', 'src/ntvdm/softpc/include') |
+$includes = @('src', 'src/ntvdm-exe/softpc/include') |
     ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }
 $flags = '/nologo /TC /c /std:c11 /MT /W4 /Gy /showIncludes ' +
     ($includes -join ' ')

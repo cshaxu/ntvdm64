@@ -4,10 +4,10 @@
 #include <string.h>
 #include <windows.h>
 
-#include "ntvdm/softpc/include/mvdm_softpc_execution.h"
-#include "ntvdm/softpc/include/mvdm_a20.h"
-#include "ntvdm/softpc/include/mvdm_softpc_effective_address.h"
-#include "ntvdm/softpc/include/mvdm_softpc_physical_mapping.h"
+#include "ntvdm-exe/softpc/include/mvdm_softpc_execution.h"
+#include "ntvdm-exe/softpc/include/mvdm_a20.h"
+#include "ntvdm-exe/softpc/include/mvdm_softpc_effective_address.h"
+#include "ntvdm-exe/softpc/include/mvdm_softpc_physical_mapping.h"
 #include "insignia.h"
 #include "host_def.h"
 #include "xt.h"

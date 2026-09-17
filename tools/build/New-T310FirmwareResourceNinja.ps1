@@ -34,9 +34,9 @@ $environment = Join-Path $build 'msvc-mt.cmd'
 # resource graph is architecture-neutral; source-local exceptions, if ever
 # required, must be separately audited and registered.
 $sources = @(
-    'src/ntvdm/session/guest_memory_lease.c',
-    'src/ntvdm/session/session.c',
-    'src/ntvdm/softpc/mvdm_softpc_firmware.c',
+    'src/ntvdm-exe/session/guest_memory_lease.c',
+    'src/ntvdm-exe/session/session.c',
+    'src/ntvdm-exe/softpc/mvdm_softpc_firmware.c',
     'tests/ntvdm/session/softpc_firmware_resource_fixture.c',
     'tests/ntvdm/session/softpc_media_resource_fixture.c'
 )
@@ -44,7 +44,7 @@ $graph = [Collections.Generic.List[string]]::new()
 $graph.Add('ninja_required_version = 1.10')
 $graph.Add('cflags = /nologo /TC /c /MT /W4 /showIncludes' +
     ' /I "' + (NinjaPath (Join-Path $root 'src')) + '" /I "' +
-    (NinjaPath (Join-Path $root 'src/ntvdm/softpc/include')) + '"')
+    (NinjaPath (Join-Path $root 'src/ntvdm-exe/softpc/include')) + '"')
 $graph.Add('rule cc')
 $graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' cl.exe $cflags /Fo$out $in')
 $graph.Add('  deps = msvc')

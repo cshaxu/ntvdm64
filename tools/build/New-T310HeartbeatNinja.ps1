@@ -33,11 +33,11 @@ $environment = Join-Path $build 'msvc-mt.cmd'
 $sources = @(
     ,
     ,
-    'src/ntvdm/session/guest_memory_lease.c',
-    'src/ntvdm/session/session.c',
-    'src/ntvdm/win32/thread_start_compat.c',
-    'src/ntvdm/win32/nt_thread_alert_compat.c',
-    'src/ntvdm/softpc/mvdm_softpc_event_thread.c',
+    'src/ntvdm-exe/session/guest_memory_lease.c',
+    'src/ntvdm-exe/session/session.c',
+    'src/ntvdm-exe/win32/thread_start_compat.c',
+    'src/ntvdm-exe/win32/nt_thread_alert_compat.c',
+    'src/ntvdm-exe/softpc/mvdm_softpc_event_thread.c',
     'tests/adapter-mvdm-host-out/nt_thread_alert_compat_fixture.c',
     'tests/adapter-mvdm-host-out/thread_start_session_fixture.c',
     'tests/ntvdm/softpc/softpc_event_thread_shutdown_fixture.c'
@@ -47,7 +47,7 @@ $graph.Add('ninja_required_version = 1.10')
 $graph.Add('cflags = /nologo /TC /c /MT /W4 /showIncludes /I "' +
     (NinjaPath (Join-Path $root 'src')) + '" /I "' +
     (NinjaPath (Join-Path $root 'src/opennt-abi/host-compat/include')) + '" /I "' +
-    (NinjaPath (Join-Path $root 'src/ntvdm/softpc/include')) + '"')
+    (NinjaPath (Join-Path $root 'src/ntvdm-exe/softpc/include')) + '"')
 $graph.Add('rule cc')
 $graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' cl.exe $cflags /Fo$out $in')
 $graph.Add('  deps = msvc')

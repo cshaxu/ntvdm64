@@ -33,12 +33,12 @@ if (!(Test-Path -LiteralPath $NodeExecutable -PathType Leaf)) { throw "Node 22 i
 
 $ccpuRoot = Join-Path $root 'src/mvdm/softpc.new/base/ccpu386'
 $hostRoot = Join-Path $root 'src/mvdm/softpc.new/host/src'
-$ccpuFallbackSource = Join-Path $root 'src/ntvdm/softpc/mvdm_softpc_ccpu_fallback.c'
+$ccpuFallbackSource = Join-Path $root 'src/ntvdm-exe/softpc/mvdm_softpc_ccpu_fallback.c'
 $ccpu = @(Get-OriginalSources (Join-Path $ccpuRoot 'sources') | Where-Object { $_ -ne 'ntstubs.c' })
 $hostSources = @('nt_cprgs.c', 'nt_cpu.c', 'sim32.c', 'nt_mem.c')
 $controllerSources = @('at_dma.c', 'ica.c')
 $supportSources = @('ios.c')
-$adapterSources = @('src/ntvdm/softpc/mvdm_softpc_execution.c', 'src/ntvdm/softpc/mvdm_softpc_termination.c', 'src/ntvdm/softpc/mvdm_softpc_effective_address.c', 'src/ntvdm/softpc/mvdm_softpc_guest_memory.c', 'src/ntvdm/softpc/mvdm_softpc_physical_mapping.c', 'src/ntvdm/softpc/mvdm_a20.c', 'src/ntvdm/session/session.c', 'src/ntvdm/session/guest_memory_lease.c')
+$adapterSources = @('src/ntvdm-exe/softpc/mvdm_softpc_execution.c', 'src/ntvdm-exe/softpc/mvdm_softpc_termination.c', 'src/ntvdm-exe/softpc/mvdm_softpc_effective_address.c', 'src/ntvdm-exe/softpc/mvdm_softpc_guest_memory.c', 'src/ntvdm-exe/softpc/mvdm_softpc_physical_mapping.c', 'src/ntvdm-exe/softpc/mvdm_a20.c', 'src/ntvdm-exe/session/session.c', 'src/ntvdm-exe/session/guest_memory_lease.c')
 $testSources = @('tests/mvdm-host/ccpu_bounded_execution_fixture.c', 'tests/mvdm-host/ccpu_bounded_execution_fixture_seams.c')
 foreach ($name in $ccpu) { if (!(Test-Path -LiteralPath (Join-Path $ccpuRoot $name))) { throw "Missing original CCPU source: $name" } }
 foreach ($name in $hostSources) { if (!(Test-Path -LiteralPath (Join-Path $hostRoot $name))) { throw "Missing original host source: $name" } }
@@ -50,7 +50,7 @@ if (!(Test-Path -LiteralPath $ccpuFallbackSource)) { throw 'Required selected so
 New-Item -ItemType Directory -Force $build, (Join-Path $build 'generated/gdp'), (Join-Path $build 'obj/ccpu'), (Join-Path $build 'obj/host'), (Join-Path $build 'obj/controller'), (Join-Path $build 'obj/support'), (Join-Path $build 'obj/adapter'), (Join-Path $build 'obj/test'), (Join-Path $build 'obj/overlay'), (Join-Path $build 'obj/patch') | Out-Null
 $environment = Join-Path $build 'msvc-x86.cmd'
 @('@echo off', 'set "MVDM_T313_CALLER_CWD=%CD%"', 'if defined VSCMD_VER goto ready', ('call "' + $vs + '" -arch=x86 -host_arch=x64 >nul'), 'if errorlevel 1 exit /b %errorlevel%', ':ready', 'cd /d "%MVDM_T313_CALLER_CWD%"', '%*') | Set-Content -LiteralPath $environment -Encoding ascii
-$includeRoots = @('src', 'src/opennt-abi/host-compat/include', 'src/opennt-host/public/sdk/inc', 'src/opennt-abi/source/public/sdk/inc', 'src/opennt-abi/source/public/internal/base/inc', 'src/opennt-abi/source/public/internal/windows/inc', 'src/opennt-abi/source/public/ddk/inc', 'src/mvdm-support/inc', 'src/ntvdm/softpc/include/generated/x86/prod', 'src/mvdm/softpc.new/base/ccpu386', 'src/mvdm/softpc.new/host/inc', 'src/mvdm/softpc.new/base/cvidc', 'src/mvdm/softpc.new/base/inc', 'src/ntvdm/softpc/include', 'src/ntvdm/session') | ForEach-Object { Join-Path $root $_ }
+$includeRoots = @('src', 'src/opennt-abi/host-compat/include', 'src/opennt-host/public/sdk/inc', 'src/opennt-abi/source/public/sdk/inc', 'src/opennt-abi/source/public/internal/base/inc', 'src/opennt-abi/source/public/internal/windows/inc', 'src/opennt-abi/source/public/ddk/inc', 'src/mvdm-support/inc', 'src/ntvdm-exe/softpc/include/generated/x86/prod', 'src/mvdm/softpc.new/base/ccpu386', 'src/mvdm/softpc.new/host/inc', 'src/mvdm/softpc.new/base/cvidc', 'src/mvdm/softpc.new/base/inc', 'src/ntvdm-exe/softpc/include', 'src/ntvdm-exe/session') | ForEach-Object { Join-Path $root $_ }
 $includes = $includeRoots | ForEach-Object { '/I "' + (NinjaPath $_) + '"' }
 $cflags = '/nologo /TC /c /MT /W4 /showIncludes /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DSPC386 /DSIM32 /DANSI /DPROD /FI "' + (NinjaPath (Join-Path $root 'src/opennt-abi/host-compat/include/nt.h')) + '" ' + ($includes -join ' ')
 $graph = [Collections.Generic.List[string]]::new()

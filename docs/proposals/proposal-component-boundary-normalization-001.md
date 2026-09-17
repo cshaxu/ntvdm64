@@ -8,9 +8,9 @@ physical reorganization so that project-owned executable components are legible
 by process:
 
 ```text
-src/run16/       → run16.exe
-src/basesrv/     → basesrv.exe
-src/ntvdm/       → ntvdm.exe
+src/run16-exe/   → run16.exe
+src/basesrv-exe/ → basesrv.exe
+src/ntvdm-exe/   → ntvdm.exe
 ```
 
 The objective is to retire broad, free-standing `adapter-*`, `session` and

@@ -19,7 +19,7 @@ $environment = Join-Path $build ("msvc-{0}.cmd" -f $Architecture)
 $includes = @(
     'src',
     'src/opennt-abi/host-compat/include',
-    'src/ntvdm/softpc/include',
+    'src/ntvdm-exe/softpc/include',
     'src/mvdm-support/inc',
     'src/mvdm-platform-abi/source/public/internal/ds/inc',
     'src/mvdm-platform-abi/source/public/internal/base/inc',

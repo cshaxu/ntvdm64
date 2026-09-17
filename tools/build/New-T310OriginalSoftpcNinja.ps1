@@ -93,7 +93,7 @@ $xmsRoot = Join-Path $root 'src/mvdm/xms.486'
 $dpmiRoot = Join-Path $root 'src/mvdm/dpmi32'
 $suballocRoot = Join-Path $root 'src/mvdm/suballoc'
 $oemuniRoot = Join-Path $root 'src/mvdm/oemuni'
-$sessionRoot = Join-Path $root 'src/ntvdm/session'
+$sessionRoot = Join-Path $root 'src/ntvdm-exe/session'
 $baseReservationTestSource = Join-Path $root 'tests/adapter-basesrv/base_reservation_test.c'
 $baseServiceReservationTestSource = Join-Path $root 'tests/adapter-basesrv/base_service_reservation_test.c'
 $cpu40DescriptorDomainFixtureSource = Join-Path $root 'tests/mvdm-host/dpmi/cpu40_descriptor_domain_fixture.c'
@@ -105,18 +105,18 @@ $cvidcVectorProviderStubGenerator = Join-Path $root 'tools/build/GenerateCvidcVe
 $baseDebugRoot = Join-Path $root 'src/mvdm/softpc.new/base/debug'
 $hostRoot = Join-Path $root 'src/mvdm/softpc.new/host/src'
 $hostEntryRoot = Join-Path $root 'src/mvdm/softpc.new/obj.vdm'
-$adapterSoftpcRoot = Join-Path $root 'src/ntvdm/softpc'
-$adapterWin32Root = Join-Path $root 'src/ntvdm/win32'
+$adapterSoftpcRoot = Join-Path $root 'src/ntvdm-exe/softpc'
+$adapterWin32Root = Join-Path $root 'src/ntvdm-exe/win32'
 $hostCompatSource = Join-Path $root 'src/opennt-abi/host-compat/opennt_support_rtl.c'
 $hostCrtRedirect = Join-Path $root 'src/opennt-abi/host-compat/include/mvdm_crt_redirect.h'
-$softpcSymbolCompat = Join-Path $root 'src/ntvdm/softpc/include/mvdm_softpc_symbol_compat.h'
-$run16Root = Join-Path $root 'src/run16'
+$softpcSymbolCompat = Join-Path $root 'src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h'
+$run16Root = Join-Path $root 'src/run16-exe'
 $productPackageRoot = Join-Path $root 'src/product-package'
-$adapterBaseSrvRoot = Join-Path $root 'src/ntvdm/command/source'
-$adapterMonitorRoot = Join-Path $root 'src/ntvdm/monitor/source'
+$adapterBaseSrvRoot = Join-Path $root 'src/ntvdm-exe/command/source'
+$adapterMonitorRoot = Join-Path $root 'src/ntvdm-exe/monitor/source'
 $kernelVdmPrinterSource = Join-Path $adapterMonitorRoot 'monitor_printer.c'
-$adapterRedirRoot = Join-Path $root 'src/ntvdm/redir'
-$adapterVddRoot = Join-Path $root 'src/ntvdm/vdd'
+$adapterRedirRoot = Join-Path $root 'src/ntvdm-exe/redir'
+$adapterVddRoot = Join-Path $root 'src/ntvdm-exe/vdd'
 $ccpuFallbackSource = Join-Path $adapterSoftpcRoot 'mvdm_softpc_ccpu_fallback.c'
 $ccpuProductIncludeRoot = Join-Path $adapterSoftpcRoot 'include/generated/x86/prod'
 $ccpuManifest = Join-Path $ccpuRoot 'sources'
@@ -478,8 +478,8 @@ $includeRootPaths = @(
     # historical HANDLE_FROM_WORDS carrier to the existing session identity
     # facade.  This must precede mvdm-host/inc so the selected original
     # Redirector bodies never cast a guest-visible DWORD to a native HANDLE.
-    'src/ntvdm/redir/include',
-    'src/ntvdm/vdd/include',
+    'src/ntvdm-exe/redir/include',
+    'src/ntvdm-exe/vdd/include',
     # The adapter owns the modern `nt.h` type binding. Original reached NT
     # public-header subsets are restored under opennt-host below, so source
     # files still resolve historical short names without an adapter copy.
@@ -505,7 +505,7 @@ $includeRootPaths = @(
     # The selected x86 product generator output is absent from the source
     # union, so it remains a bounded SoftPC adapter carrier, not a new mirror
     # file under mvdm.
-    'src/ntvdm/softpc/include/generated/x86/prod',
+    'src/ntvdm-exe/softpc/include/generated/x86/prod',
     'src/mvdm/xms.486',
     # DPMI's original precompiled header owns dpmidata.h beside its source
     # bodies.  Select the original directory rather than copying the carrier
@@ -519,10 +519,10 @@ $includeRootPaths = @(
     'src/mvdm/softpc.new/base/cvidc',
     'src/mvdm/dos/dem',
     'src/mvdm/softpc.new/base/inc',
-    'src/ntvdm/softpc/include',
-    'src/ntvdm/command/include',
-    'src/ntvdm/monitor/include',
-    'src/ntvdm/session'
+    'src/ntvdm-exe/softpc/include',
+    'src/ntvdm-exe/command/include',
+    'src/ntvdm-exe/monitor/include',
+    'src/ntvdm-exe/session'
 )
 $includeRoots = $includeRootPaths | ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }
 $softpcIncludeRootPaths = [System.Collections.Generic.List[string]]::new()
@@ -910,7 +910,7 @@ $adapterMonitorObjects = foreach ($name in $adapterMonitorNames) {
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $adapterMonitorRoot $name)))
     $object
 }
-$adapterDebuggerRoot = Join-Path $root 'src/ntvdm/debugger/source'
+$adapterDebuggerRoot = Join-Path $root 'src/ntvdm-exe/debugger/source'
 $adapterDebuggerObjects = foreach ($name in $adapterDebuggerNames) {
     $object = 'obj/adapter-debugger/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $adapterDebuggerRoot $name)))
@@ -981,7 +981,7 @@ $openntBaseVdmObjects = foreach ($name in $openntBaseVdmNames) {
 $baseOwnerManifest = @()
 $brokerTransportManifest = @()
 if ($Architecture -eq 'x86') {
-    $baseBindingInclude = NinjaPath (Join-Path $root 'src/basesrv/opennt/include')
+    $baseBindingInclude = NinjaPath (Join-Path $root 'src/basesrv-exe/opennt/include')
     $baseOwnerFlags = $baseFlags + ' /we4013 /I "' + $baseBindingInclude + '"' +
         ' /I "' + (NinjaPath (Join-Path $root 'src/opennt-host/base/win32/inc')) + '"' +
         ' /I "' + (NinjaPath (Join-Path $root 'src/opennt-host/base/win32/server')) + '"'
@@ -996,22 +996,22 @@ if ($Architecture -eq 'x86') {
             @('srvvdm', 'src/opennt-host/base/win32/server/srvvdm.c', $baseServerFlags),
             @('exports', 'src/opennt-host/windows/core/ntuser/server/exports.c', $baseServerFlags))
         'opennt-base-bindings' = @(
-            @('service', 'src/basesrv/opennt/source/base_service.c', $baseServerFlags),
-            @('command', 'src/basesrv/opennt/source/base_command.c', $baseServerFlags),
-            @('values', 'src/basesrv/opennt/source/base_values.c', $baseServerFlags),
-            @('payload', 'src/basesrv/opennt/source/base_payload.c', $baseServerFlags),
-            @('startup', 'src/basesrv/opennt/source/base_startup.c', $baseOwnerFlags),
-            @('dispatch', 'src/basesrv/opennt/source/base_dispatch.c', $baseServerFlags),
-            @('resources', 'src/basesrv/opennt/source/base_resource.c', ($baseServerFlags + ' /DOPENNT_BASE_NATIVE_RESOURCES')),
-            @('streams', 'src/basesrv/opennt/source/base_stream.c', $baseServerFlags),
-            @('waits', 'src/basesrv/opennt/source/base_wait.c', ($baseServerFlags + ' /DOPENNT_BASE_NATIVE_RESOURCES')),
-            @('registry', 'src/basesrv/opennt/source/base_process.c', $baseServerFlags),
-            @('reservation', 'src/basesrv/opennt/source/base_reservation.c', $baseOwnerFlags),
-            @('request', 'src/basesrv/opennt/source/base_request.c', $baseServerFlags),
-            @('config', 'src/basesrv/opennt/source/base_config.c', $baseOwnerFlags),
-            @('process', 'src/basesrv/opennt/source/base_client_process.c', $baseOwnerFlags),
-            @('interactive', 'src/basesrv/opennt/source/base_interactive.c', $baseOwnerFlags),
-            @('classifier-path', 'src/basesrv/opennt/source/base_classifier_path.c', $baseOwnerFlags))
+            @('service', 'src/basesrv-exe/opennt/source/base_service.c', $baseServerFlags),
+            @('command', 'src/basesrv-exe/opennt/source/base_command.c', $baseServerFlags),
+            @('values', 'src/basesrv-exe/opennt/source/base_values.c', $baseServerFlags),
+            @('payload', 'src/basesrv-exe/opennt/source/base_payload.c', $baseServerFlags),
+            @('startup', 'src/basesrv-exe/opennt/source/base_startup.c', $baseOwnerFlags),
+            @('dispatch', 'src/basesrv-exe/opennt/source/base_dispatch.c', $baseServerFlags),
+            @('resources', 'src/basesrv-exe/opennt/source/base_resource.c', ($baseServerFlags + ' /DOPENNT_BASE_NATIVE_RESOURCES')),
+            @('streams', 'src/basesrv-exe/opennt/source/base_stream.c', $baseServerFlags),
+            @('waits', 'src/basesrv-exe/opennt/source/base_wait.c', ($baseServerFlags + ' /DOPENNT_BASE_NATIVE_RESOURCES')),
+            @('registry', 'src/basesrv-exe/opennt/source/base_process.c', $baseServerFlags),
+            @('reservation', 'src/basesrv-exe/opennt/source/base_reservation.c', $baseOwnerFlags),
+            @('request', 'src/basesrv-exe/opennt/source/base_request.c', $baseServerFlags),
+            @('config', 'src/basesrv-exe/opennt/source/base_config.c', $baseOwnerFlags),
+            @('process', 'src/basesrv-exe/opennt/source/base_client_process.c', $baseOwnerFlags),
+            @('interactive', 'src/basesrv-exe/opennt/source/base_interactive.c', $baseOwnerFlags),
+            @('classifier-path', 'src/basesrv-exe/opennt/source/base_classifier_path.c', $baseOwnerFlags))
     }
     foreach ($group in @('opennt-base-client', 'opennt-base-server', 'opennt-base-bindings')) {
         $members = foreach ($member in $baseOwnerGroups[$group]) {
@@ -1030,7 +1030,7 @@ if ($Architecture -eq 'x86') {
         $graph.Add('build ' + $group + '.lib: lib ' + ($members -join ' '))
     }
     $transportObjects = foreach ($unit in @('console_membership', 'rpc_security', 'vdm_receipt', 'vdm_delivery', 'vdm_payload', 'vdm_message')) {
-        $source = 'src/basesrv/transport/' + $unit + '.c'
+        $source = 'src/basesrv-exe/transport/' + $unit + '.c'
         $object = 'obj/broker-transport/' + $unit + '.obj'
         $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $root $source)))
         $graph.Add('  cflags = /nologo /c /MT /W4 /we4013')
@@ -1060,7 +1060,7 @@ if ($Architecture -eq 'x86') {
     $graph.Add('  cflags = ' + $baseOwnerFlags)
     $graph.Add('build obj/run16/support.obj: cc ' + (NinjaPath (Join-Path $root 'src/opennt-abi/host-compat/opennt_support_rtl.c')))
     $graph.Add('  cflags = ' + $baseOwnerFlags + ' /Gy')
-    $graph.Add('build obj/run16/rpc_client.obj: cc ' + (NinjaPath (Join-Path $root 'src/basesrv/opennt/source/base_rpc_client.c')) + ' | obj/basesrv/service.h')
+    $graph.Add('build obj/run16/rpc_client.obj: cc ' + (NinjaPath (Join-Path $root 'src/basesrv-exe/opennt/source/base_rpc_client.c')) + ' | obj/basesrv/service.h')
     $graph.Add('  cflags = ' + $baseOwnerFlags + ' /I obj/basesrv')
     $graph.Add('build obj/run16/stub.obj: cc obj/basesrv/service_c.c | obj/basesrv/service.h')
     $graph.Add('  cflags = ' + $nativeServiceFlags)
@@ -1071,35 +1071,35 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build run16.exe: run16_link obj/run16/entry.obj obj/run16/console_probe.obj obj/run16/support.obj obj/run16/rpc_client.obj obj/run16/stub.obj opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib')
     $graph.Add('rule basesrv_idl')
     $graph.Add('  command = midl.exe /nologo /env win32 /target NT100 /prefix client Client_ /prefix server Server_ /out obj/basesrv /h service.h /cstub service_c.c /sstub service_s.c $in')
-    $graph.Add('build obj/basesrv/service_s.c | obj/basesrv/service_c.c obj/basesrv/service.h: basesrv_idl ' + (NinjaPath (Join-Path $root 'src/basesrv/transport/service.idl')))
+    $graph.Add('build obj/basesrv/service_s.c | obj/basesrv/service_c.c obj/basesrv/service.h: basesrv_idl ' + (NinjaPath (Join-Path $root 'src/basesrv-exe/transport/service.idl')))
     $nativeServiceFlags = '/nologo /c /MT /W4 /we4013 /showIncludes /I obj/basesrv /I "' + (NinjaPath (Join-Path $root 'src')) + '"'
-    $graph.Add('build obj/basesrv/entry.obj: cc ' + (NinjaPath (Join-Path $root 'src/basesrv/main.c')) + ' | obj/basesrv/service.h')
+    $graph.Add('build obj/basesrv/entry.obj: cc ' + (NinjaPath (Join-Path $root 'src/basesrv-exe/main.c')) + ' | obj/basesrv/service.h')
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build obj/basesrv/stub.obj: cc obj/basesrv/service_s.c | obj/basesrv/service.h')
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build obj/basesrv/console_query.obj: cc ' + (NinjaPath (Join-Path $root 'src/basesrv/console_query.c')))
+    $graph.Add('build obj/basesrv/console_query.obj: cc ' + (NinjaPath (Join-Path $root 'src/basesrv-exe/console_query.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build obj/worker/rpc_client.obj: cc ' + (NinjaPath (Join-Path $root 'src/basesrv/opennt/source/base_rpc_client.c')) + ' | obj/basesrv/service.h')
+    $graph.Add('build obj/worker/rpc_client.obj: cc ' + (NinjaPath (Join-Path $root 'src/basesrv-exe/opennt/source/base_rpc_client.c')) + ' | obj/basesrv/service.h')
     $graph.Add('  cflags = ' + $baseOwnerFlags + ' /I obj/basesrv')
     $graph.Add('build obj/worker/stub.obj: cc obj/basesrv/service_c.c | obj/basesrv/service.h')
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('rule basesrv_link')
     $graph.Add('  command = link.exe /nologo /subsystem:console /opt:ref /out:$out /map:$out.map $in rpcrt4.lib ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib')
     $graph.Add('build basesrv.exe: basesrv_link obj/basesrv/entry.obj obj/basesrv/stub.obj obj/basesrv/console_query.obj obj/run16/support.obj opennt-base-server.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib')
-    $graph.Add('build obj/dtaskmgr/main.obj: cc ' + (NinjaPath (Join-Path $root 'src/dtaskmgr/main.c')) + ' | obj/basesrv/service.h')
+    $graph.Add('build obj/dtmgr/main.obj: cc ' + (NinjaPath (Join-Path $root 'src/dtmgr-exe/main.c')) + ' | obj/basesrv/service.h')
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build obj/dtaskmgr/stub.obj: cc obj/basesrv/service_c.c | obj/basesrv/service.h')
+    $graph.Add('build obj/dtmgr/stub.obj: cc obj/basesrv/service_c.c | obj/basesrv/service.h')
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('rule dtaskmgr_link')
     $graph.Add('  command = link.exe /nologo /subsystem:console /opt:ref /out:$out /map:$out.map $in rpcrt4.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib')
-    # DTASKMGR is a client of the authenticated local BaseSrv endpoint.  It
+    # dtmgr is a client of the authenticated local BaseSrv endpoint.  It
     # shares only the native transport scope helper, never a BaseClient
     # registration or worker lifecycle library.
-    $graph.Add('build DTASKMGR.EXE: dtaskmgr_link obj/dtaskmgr/main.obj obj/dtaskmgr/stub.obj broker-transport.lib')
+    $graph.Add('build dtmgr.exe: dtaskmgr_link obj/dtmgr/main.obj obj/dtmgr/stub.obj broker-transport.lib')
     $dtaskmgrRpcTestObject = 'obj/tests/dtaskmgr_rpc_test.obj'
     $graph.Add('build ' + $dtaskmgrRpcTestObject + ': cc ' + (NinjaPath (Join-Path $root 'tests/adapter-basesrv/dtaskmgr_rpc_test.c')) + ' | obj/basesrv/service.h')
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build dtaskmgr-rpc-test.exe: dtaskmgr_link ' + $dtaskmgrRpcTestObject + ' obj/dtaskmgr/stub.obj broker-transport.lib')
+    $graph.Add('build dtaskmgr-rpc-test.exe: dtaskmgr_link ' + $dtaskmgrRpcTestObject + ' obj/dtmgr/stub.obj broker-transport.lib')
     $graph.Add('rule worker_link')
     $graph.Add('  command = cmd.exe /d /s /c "link.exe /nologo /subsystem:console /opt:ref /out:$out /map:$out.map /def:generated/ntvdm-wow32-provider.def $in rpcrt4.lib kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib libcmt.lib libvcruntime.lib libucrt.lib && "' + (NinjaPath $NodeExecutable) + '" "' + (NinjaPath (Join-Path $root 'tools/audit/Verify-VdmTibStorage.mjs')) + '" $out.map obj/adapter-monitor/mvdm_vdm_tib.obj"')
     # CCPU40 and DPMI discover the original nt_inthk providers only after their
@@ -1166,7 +1166,7 @@ $graph.Add('build debugger-bindings.lib: lib ' + ($adapterDebuggerObjects -join 
 $graph.Add('build softpc-ccpu-vector-defaults.lib: lib ' + $patchVectorDefaultsObject)
 $graph.Add('build softpc-activity-check.lib: lib ' + $patchActivityCheckObject)
 $graph.Add('build original-softpc-candidate: phony original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-redir.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-softpc-host-roots.lib original-opennt-netlib.lib original-opennt-netapi-api.lib original-opennt-rtl-x86.lib softpc-bindings.lib redirector-bindings.lib worker-shell.lib worker-command-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib')
-$graph.Add('build product-programs: phony run16.exe basesrv.exe ntvdm.exe DTASKMGR.EXE VDMREDIR.dll')
+$graph.Add('build product-programs: phony run16.exe basesrv.exe ntvdm.exe dtmgr.exe VDMREDIR.dll')
 $graph.Add('build obj/tests/ccpu_halt_reset_test.obj: cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/ccpu_halt_reset_test.c')))
 $hostFixtureSeamsObject = 'obj/tests/ccpu_host_fixture_seams.obj'
 $graph.Add('build ' + $hostFixtureSeamsObject + ': cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/ccpu_host_fixture_seams.c')))
@@ -1245,7 +1245,7 @@ $graph.Add('default original-softpc-candidate')
         target = 'basesrv.exe'
         selected = ($Architecture -eq 'x86')
         disposition = 'selected x86 product broker; authenticated registration, command delivery and bounded death handling verified'
-        sources = @('src/basesrv/main.c', 'src/basesrv/transport/service.idl' | ForEach-Object {
+        sources = @('src/basesrv-exe/main.c', 'src/basesrv-exe/transport/service.idl' | ForEach-Object {
             [ordered]@{ path = $_; sha256 = Get-NodeSha256 (Join-Path $root $_) }
         })
         libraries = @('opennt-base-server.lib', 'opennt-base-bindings.lib', 'broker-transport.lib', 'original-opennt-rtl-x86.lib')
@@ -1254,26 +1254,26 @@ $graph.Add('default original-softpc-candidate')
         target = 'run16.exe'
         selected = ($Architecture -eq 'x86')
         disposition = 'selected x86 product launcher; broker startup, worker registration and parent completion verified'
-        sources = @('src/run16/main.c', 'src/run16/console_probe.c', 'src/opennt-abi/host-compat/opennt_support_rtl.c' | ForEach-Object {
+        sources = @('src/run16-exe/main.c', 'src/run16-exe/console_probe.c', 'src/opennt-abi/host-compat/opennt_support_rtl.c' | ForEach-Object {
             [ordered]@{ path = $_; sha256 = Get-NodeSha256 (Join-Path $root $_) }
         })
         libraries = @('opennt-base-client.lib', 'opennt-base-bindings.lib', 'original-opennt-rtl-x86.lib')
     }
     selectedX86GeneratedInputs = @('PigReg_c.h', 'sas4gen.h', 'gdpvar.h' | ForEach-Object {
         [ordered]@{
-            path = 'src/ntvdm/softpc/include/generated/x86/prod/' + $_
+            path = 'src/ntvdm-exe/softpc/include/generated/x86/prod/' + $_
             sha256 = Get-NodeSha256 (Join-Path $ccpuProductIncludeRoot $_)
         }
     })
     selectedCcpuFallbacks = @(
         [ordered]@{
-            path = 'src/ntvdm/softpc/mvdm_softpc_ccpu_fallback.c'
+            path = 'src/ntvdm-exe/softpc/mvdm_softpc_ccpu_fallback.c'
             selector = 'MVDM_CCPU_VECTOR_DEFAULTS_ONLY'
             symbols = @('EDL_fast_bop', 'c_sas_touch', 'c_VirtualiseInstruction')
             buildDisposition = 'compile-and-force-link-debugbreak-vector-defaults-only'
         }
         [ordered]@{
-            path = 'src/ntvdm/softpc/mvdm_softpc_ccpu_fallback.c'
+            path = 'src/ntvdm-exe/softpc/mvdm_softpc_ccpu_fallback.c'
             selector = 'MVDM_CCPU_ACTIVITY_CHECK_ONLY'
             symbols = @('ActivityCheckAfterTimeSlice')
             buildDisposition = 'compile-and-normal-link-empty-activity-callback-only'

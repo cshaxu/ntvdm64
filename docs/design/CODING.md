@@ -32,9 +32,9 @@ or runtime input.
 
 ## Executable-owned transition
 
-T418 has moved the original three-program runtime to `src/run16/`,
-`src/basesrv/` and `src/ntvdm/`; T419 adds the product-owned native Console
-manager at `src/dtaskmgr/`, producing `DTASKMGR.EXE`. Retained
+T418 has moved the original three-program runtime to `src/run16-exe/`,
+`src/basesrv-exe/` and `src/ntvdm-exe/`; T419 adds the product-owned native Console
+manager at `src/dtmgr-exe/`, producing `dtmgr.exe`. Retained
 `app`/adapter directory READMEs are archival move markers, never production
 source roots or destinations. `session` is worker-local implementation inside
 `ntvdm`; broker service transport is inside `basesrv`.

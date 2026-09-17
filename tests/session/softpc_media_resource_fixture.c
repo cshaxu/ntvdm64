@@ -1,4 +1,4 @@
-#include "ntvdm/session/session.h"
+#include "ntvdm-exe/session/session.h"
 #include "mvdm_softpc_firmware.h"
 
 #include <string.h>

@@ -19,13 +19,13 @@
 /* DIVERGENCE(MVDM-HOST-DIV-111): retain the original SCSINFO layout and
  * field order, but lease its saved 16:16 guest position for this synchronous
  * operation instead of subtracting a native GetVDMAddr process pointer. */
-#include "ntvdm/command/include/mvdm_command_guest_state.h"
+#include "ntvdm-exe/command/include/mvdm_command_guest_state.h"
 /* DIVERGENCE(MVDM-HOST-DIV-196): original cmdExec32 leaves guest command,
  * environment and STD_HANDLES aliases in globals until its detached worker
  * runs.  Snapshot those same bounded inputs in the session adapter before
  * the worker starts; the original COMMAND worker remains the owner of every
  * conversion, process, wait, exit-code and re-entry decision. */
-#include "ntvdm/command/include/mvdm_command_native_child.h"
+#include "ntvdm-exe/command/include/mvdm_command_native_child.h"
 /* DIVERGENCE(MVDM-HOST-DIV-109): cmdCreateProcess is the original void,
  * cdecl worker entry, not a WINAPI DWORD start routine.  Keep its source
  * body and original CreateThread call ordering while binding that call to

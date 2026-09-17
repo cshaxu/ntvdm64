@@ -17,7 +17,7 @@
 #include <mvdm.h>
 #include <oemuni.h>
 #include "nt_pif.h"
-#include "ntvdm/command/include/mvdm_command_guest_state.h"
+#include "ntvdm-exe/command/include/mvdm_command_guest_state.h"
 
 VOID cmdCheckForPIF (PVDMINFO pvi)
 {

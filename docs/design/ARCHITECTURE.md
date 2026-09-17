@@ -181,10 +181,10 @@ original-mirror boundary. The completed layout is deliberately executable
 owned:
 
 ```text
-src/run16/   -> run16.exe
-src/basesrv/ -> basesrv.exe
-src/ntvdm/   -> ntvdm.exe
-src/dtaskmgr/ -> DTASKMGR.EXE
+src/run16-exe/   -> run16.exe
+src/basesrv-exe/ -> basesrv.exe
+src/ntvdm-exe/   -> ntvdm.exe
+src/dtmgr-exe/   -> dtmgr.exe
 ```
 
 The former `app`, `session`, `broker` and adapter roots are README-only move
@@ -309,7 +309,7 @@ product-package -> package layout/media declarations only
 mvdm-tools -> original mvdm/opennt declarations only (independent tool builds)
 ```
 
-`ntvdm/session` never calls a component-specific provider.  `src/ntvdm` is a
+`ntvdm/session` never calls a component-specific provider.  `src/ntvdm-exe` is a
 worker-private composition root, not a reusable host/session framework.  The
 SoftPC path remains within the original MVDM source-shaped composition.
 The broker never receives native or guest pointers. Command records exchange

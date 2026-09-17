@@ -48,8 +48,8 @@ $environment = Join-Path $build 'msvc-mt.cmd'
 $includes = @(
     'src',
     'src/opennt-abi/host-compat/include',
-    'src/ntvdm/softpc/include',
-    'src/ntvdm/monitor/include',
+    'src/ntvdm-exe/softpc/include',
+    'src/ntvdm-exe/monitor/include',
     'src/mvdm-support/inc',
     'src/opennt-abi/source/public/sdk/inc',
     'src/opennt-abi/source/public/internal/base/inc',
@@ -62,7 +62,7 @@ $includes = @(
 ) | ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }
 $flags = '/nologo /TC /c /std:c11 /MT /W4 /showIncludes /DWIN_32 /DDEVL /Di386 /DNTVDM ' +
     '/FI "' + (NinjaPath (Join-Path $root 'src/opennt-abi/host-compat/include/nt.h')) + '" ' +
-    '/FI "' + (NinjaPath (Join-Path $root 'src/ntvdm/softpc/include/error_abi.h')) + '" ' +
+    '/FI "' + (NinjaPath (Join-Path $root 'src/ntvdm-exe/softpc/include/error_abi.h')) + '" ' +
     ($includes -join ' ')
 
 $graph = @"
