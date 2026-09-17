@@ -2,6 +2,7 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T420 S19 guest DPMI/DOSX package recovery](evidence/m0-t420-s19-dpmi-guest-package-recovery.md) | M0 T420 S19 | Freezes exact original DOSX guest media, build provenance and BOP activation/return contract; proves no host substitute or guest patch exists. | Retain through T420 package completion. |
 | [T420 S18 DPMI32 package recovery](evidence/m0-t420-s18-dpmi32-package-recovery.md) | M0 T420 S18 | Completes the selected DPMI32 unit, restores all proven inert source drift, and classifies the finite CPU40/kernel-VDM execution boundaries with fresh x86 and deployed MEM proof. | Retain through T420 package completion. |
 | [T420 S17 OEMUNI package recovery](evidence/m0-t420-s17-oemuni-package-recovery.md) | M0 T420 S17 | Completes original OEM/Unicode conversion composition, bounded original failure-sentinel repair, and focused/formal x86 proof. | Retain through T420 package completion. |
 | [T420 S16 SubAlloc package recovery](evidence/m0-t420-s16-suballoc-package-recovery.md) | M0 T420 S16 | Closes the original SubAlloc package with an unchanged allocator body, a source-proven x86-granularity boundary, and allocation/relocation/release proof. | Retain through T420 package completion. |

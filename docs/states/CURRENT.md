@@ -4,26 +4,26 @@
 
 ## Active Packet
 
-**Active: M0 T420 S19**
+**Active: M0 T420 S20**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T420 S19 — Ordinary Mode. |
+| Identifier Mode | M0 T420 S20 — Ordinary Mode. |
 | Candidate Proposal | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md) |
-| Admission And Approval | The owner approved automatic sequential S admission and permanent push on 2026-09-17. S18 now closes; this admits the next proposal row. |
-| Objective | Complete the load-only original `dpmi` guest manifest, DOSX activation and return contract without substituting host linkage for guest ownership. |
-| Non-goals | No guest-media patch, CPU30 monitor, host DPMI32 rework, renderer redesign, or new mirror files without a source-policy-admitted original owner. |
-| Reference Baseline | T420 S1--S18 are closed. S18 freshly built the x86 product and passed deployed direct MEM plus COMMAND /C MEM. |
-| Files And ABI Surface | Freeze selected `src/mvdm/dpmi` media/build manifests and every reached DOSX load, BOP and return interface. |
+| Admission And Approval | The owner approved automatic sequential S admission and permanent push on 2026-09-17. S19 now closes; this admits the next proposal row. |
+| Objective | Complete the original `vdmredir` DLL handle, guest-copy, stream and redirection lifecycle as one source-first package unit. |
+| Non-goals | No redirector protocol redesign, remote/RAP enablement, guest-media patch, CPU30 monitor, or unrelated BaseSrv/COMMAND rework. |
+| Reference Baseline | T420 S1--S19 are closed. S19 freshly built the x86 product, preserved exact DOSX media and passed deployed direct MEM plus COMMAND /C MEM. |
+| Files And ABI Surface | Freeze the selected `src/mvdm/vdmredir` manifest, its host bindings and every reached handle, guest-copy, stream and teardown interface. |
 | Applicable Rules | Project design/rules, source policy, strict mirror rule and source-recovery ladder. |
-| Verification | Freeze guest manifest/media lineage; classify each DOSX loader, BOP activation and return edge; run source-shaped static/fixture proof, fresh x86 formal build, and established direct/interactive COMMAND/MEM/EDIT regression; review governance and diffs. |
-| Expected Markers | Complete guest-DPMI disposition; explicit DOSX activation/return owner ledger; no host substitute presented as guest recovery; separated mirror/adapter/autonomous footprint report. |
-| Asset Needs | Existing selected OpenNT MVDM union, formal generator and `O:\winnt` runtime package. No new media import is admitted. |
+| Verification | Freeze manifest/source-diff ledger; classify all original redirector APIs, guest pointer/handle ownership, remote exclusion and teardown; fresh x86 formal build, focused redirector proof, established regressions and governance review. |
+| Expected Markers | Complete VDMREDIR disposition; original redirector policy versus finite modern binding ledger; separated mirror/adapter/autonomous footprint report. |
+| Asset Needs | Existing selected OpenNT MVDM union, formal generator and `O:\winnt` runtime package. No new source import is admitted. |
 | Reporting Requirements | Report each manifest source, external boundary, source-first result, exact footprint change, focused and established-product results, limitations and next owner. |
-| Stop Conditions | Pause for guest-media change, a required package beyond `dpmi`, a CPU30/kernel dependency, a new behavior interface, or COMMAND/MEM/EDIT regression. |
-| Exit Criteria | All selected guest-DPMI files and reached activation/return interfaces have dispositions; no host-link substitution remains; formal x86/local proof and established regressions pass; evidence/index/status updated; reviewed P pushed. |
+| Stop Conditions | Pause for remote/RAP enablement, a required package beyond `vdmredir`, a new public protocol, a new behavior interface, or COMMAND/MEM/EDIT regression. |
+| Exit Criteria | All selected redirector units and reached interfaces have dispositions; changes are source-first/mirror-compliant; formal x86/focused tests and established regressions pass; evidence/index/status updated; reviewed P pushed. |
 | Original Owner Request | “批准所有推送 请你自动准入每个s任务”；“按照最小化diff且不改变功能语义和编译成功的原则来做，所有已经提交的S任务如果不符合这个标准，应该继续减少diff而不是继续走下一个diff。” |
-| Similar-Issue Sweep | Compare every selected `dpmi` media/build member to OpenNT; audit all reached DOSX BOP activation and return consumers for a duplicate local policy. |
+| Similar-Issue Sweep | Compare every selected VDMREDIR source to OpenNT; audit all handle/pointer/stream paths and adapter duplicates for autonomous policy. |
 
 ## S1 Closure Record
 
@@ -172,6 +172,14 @@ removes every proven inert source drift, retains only classified CPU40 versus
 kernel-VDM carriers, passes a fresh x86 product build and descriptor-domain
 fixture, and deploys direct MEM plus COMMAND /C MEM proof.
 
+## S19 Closure Record
+
+[T420 S19 guest DPMI/DOSX package recovery](../etc/evidence/m0-t420-s19-dpmi-guest-package-recovery.md)
+closes the full load-only DOSX package with all OpenNT sources exact, all
+OpenNT-src-2 intermediate products provenance-matched and the deployed DOSX
+hash verified. It proves original BOP 53 activation/return ownership, passes
+fresh x86 linkage and deployed direct/COMMAND MEM proof.
+
 ## Current Technical Baseline
 
 - Product package: Win32/x86 CCPU40 `run16.exe`, `basesrv.exe`, `ntvdm.exe`,
@@ -180,11 +188,12 @@ fixture, and deploys direct MEM plus COMMAND /C MEM proof.
   correction: four EXE component directories are explicit, `dtmgr.exe`
   replaces `dtaskmgr.exe`, and the task display derives depth from original
   BaseSrv DOS records rather than a parallel stack.
-- T420 S1--S18 are delivered: CCPU386, C-VID, video, system, keymouse, BIOS,
+- T420 S1--S19 are delivered: CCPU386, C-VID, video, system, keymouse, BIOS,
   support, disks, comms, DOS, debug, host and DEM are closed complete package
   units.  S14 COMMAND restored two empty x86 adapter carriers to their
   original OpenNT forms; S15 closes XMS, S16 closes SubAlloc, S17 closes
-  OEMUNI, and S18 closes DPMI32. S19 guest DPMI is active.
+  OEMUNI, S18 closes DPMI32, and S19 closes guest DPMI/DOSX. S20 VDMREDIR is
+  active.
 
 ## Prior Closure
 
@@ -201,5 +210,5 @@ No standalone governance delivery is active or pending.
 
 ## Next Work
 
-M0 T420 S19 is active. The remaining candidate order is authoritative in
+M0 T420 S20 is active. The remaining candidate order is authoritative in
 [Queue](QUEUE.md) after T420 closure.
