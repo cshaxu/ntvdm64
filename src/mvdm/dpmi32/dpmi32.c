@@ -23,9 +23,6 @@ Revision History:
 #include "precomp.h"
 #pragma hdrstop
 #include "softpc.h"
-/* DIVERGENCE(MVDM-HOST-DIV-164): default-off observation of the already
- * decoded DPMI selector.  It does not alter the original table, IP advance,
- * or provider call. */
 /* CPU40 exposes these generated CCPU accessors through cpu4gen.h, which is
  * intentionally not part of the DPMI provider's public include surface. */
 extern void setLDT_SELECTOR(USHORT val);
@@ -114,7 +111,6 @@ Return Value:
     }
 
     (*DpmiDispatchTable[Index])();
-
 }
 
 VOID
@@ -327,5 +323,4 @@ Return Value:
     setLDT_BASE_LIMIT(Cpu40LdtShadowAddress,
         (ULONG)(LDT_SIZE * sizeof(LDT_ENTRY) - 1));
 #endif
-
 }

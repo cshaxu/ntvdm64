@@ -53,7 +53,7 @@ Return Value:
     // if the buffer is already in low memory, don't do anything
     //
 
-    if ((ULONG)(Buffer + BufferLength) - IntelBase < MAX_V86_ADDRESS) {
+    if ((ULONG)(Buffer + BufferLength - IntelBase) < MAX_V86_ADDRESS) {
         return Buffer;
     }
 

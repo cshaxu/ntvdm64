@@ -199,16 +199,6 @@ Arguments:
     XNumber = *(VdmCodePointer);
 
     if ((XNumber > 7) || (XNumber == 6)) {
-        USHORT FaultCS;
-        ULONG FaultIP;
-
-        if (Frame32) {
-            FaultCS = (USHORT)*(PDWORD16)(VdmStackPointer + 16);
-            FaultIP = *(PDWORD16)(VdmStackPointer + 12);
-        } else {
-            FaultCS = *(PWORD16)(VdmStackPointer + 8);
-            FaultIP = (ULONG)*(PWORD16)(VdmStackPointer + 6);
-        }
         DpmiFatalExceptionHandler(XNumber, VdmStackPointer);
         return;
     }
@@ -531,7 +521,7 @@ Arguments:
     VdmSP -= 2;
     *(PWORD16)(VdmStackPointer+VdmSP) = (WORD) getIP();
     setSP(VdmSP);
-    pIVT = (PWORD16) (IntelBase + (ULONG)IntNumber * 4);
+    pIVT = (PWORD16) (IntelBase + IntNumber*4);
     setIP(*pIVT++);
     setCS(*pIVT);
 }

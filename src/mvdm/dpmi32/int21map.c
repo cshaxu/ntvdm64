@@ -935,7 +935,7 @@ Return Value:
     // If the new dta is not accessible in v86 mode, use the one
     // supplied by Dosx
     //
-    if ((ULONG)(NewDta + 128) - IntelBase > MAX_V86_ADDRESS) {
+    if ((ULONG)(NewDta + 128 - IntelBase) > MAX_V86_ADDRESS) {
         NewDta = DosxDtaBuffer;
     }
 
