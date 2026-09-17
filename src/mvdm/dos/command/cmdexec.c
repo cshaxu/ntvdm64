@@ -385,7 +385,7 @@ VOID cmdCreateProcess ( VOID )
 
     /* Default-off phase evidence only: preserve the original worker body and
      * establish whether execution reaches its first source statement. */
-    mvdm_command_native_child_record_execution(31u, TRUE, 0u);
+
 
     // we have one more 32 executable active
     Exe32ActiveCount++;
@@ -446,15 +446,14 @@ VOID cmdCreateProcess ( VOID )
 	    Status = FALSE;
 	}
 	else if (pEnv32 != NULL) {
-            mvdm_command_native_child_record_execution(10u, TRUE, 0u);
+
             if (!cmdXformEnvironment(pEnv32, &Env_A)) {
                 SetLastError(ERROR_NOT_ENOUGH_MEMORY);
                 Status = FALSE;
             }
             else {
-                mvdm_command_native_child_record_execution(11u, TRUE,
-                    (unsigned int)Env_A.Length);
-                mvdm_command_native_child_record_execution(12u, TRUE, 0u);
+
+
                 Status = CreateProcess (
                                 NULL,
                                 (LPTSTR)pCommand32,
@@ -470,7 +469,7 @@ VOID cmdCreateProcess ( VOID )
 	}
 	else {
 
-	    mvdm_command_native_child_record_execution(12u, TRUE, 0u);
+
 	    Status = CreateProcess (
                             NULL,
                            (LPTSTR)pCommand32,
@@ -487,8 +486,7 @@ VOID cmdCreateProcess ( VOID )
 
     if (Status == FALSE)
         dwExitCode32 = GetLastError ();
-    mvdm_command_native_child_record_execution(0u, Status,
-        Status ? 0u : dwExitCode32);
+
 
     /* DIVERGENCE(MVDM-HOST-DIV-196): CreateProcess has consumed the copied
      * command/environment and the standard handles are already local.
@@ -509,7 +507,7 @@ VOID cmdCreateProcess ( VOID )
 	ResumeThread (ProcessInformation.hThread);
         WaitForSingleObject(ProcessInformation.hProcess, (DWORD)-1);
         GetExitCodeProcess (ProcessInformation.hProcess, &dwExitCode32);
-        mvdm_command_native_child_record_execution(1u, TRUE, dwExitCode32);
+
         CloseHandle (ProcessInformation.hProcess);
         CloseHandle (ProcessInformation.hThread);
     }
@@ -549,12 +547,12 @@ VOID cmdExec32 (PCHAR pCmd32, PCHAR pEnv)
     CntrlHandlerState = (CntrlHandlerState & ~CNTRL_SHELLCOUNT) |
                          (((WORD)(CntrlHandlerState & CNTRL_SHELLCOUNT))+1);
 
-    mvdm_command_native_child_record_execution(24u, TRUE, 0u);
+
     nt_block_event_thread(0);
     fSoftpcRedirectionOnShellOut = fSoftpcRedirection;
     fBlock = TRUE;
 
-    mvdm_command_native_child_record_execution(30u, TRUE, 0u);
+
     if((hThread = CreateThread (NULL,
                      0,
                      cmdCreateProcess,

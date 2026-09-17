@@ -657,10 +657,6 @@ LOCAL VOID simple_update_b_move IFN4(UTINY *, laddr, UTINY *, haddr,
 	setVideodirty_total(getVideodirty_total() + 1);
 }
 
-#if !defined(CPU_40_STYLE) || !defined(C_VID)
-/* DIVERGENCE MVDM-HOST-DIV-088: this generic A2/debug table carries the
- * historical untyped callback forms.  The selected C-video profile installs
- * Glue_writes, so this unselected table remains outside that typed build. */
 MEM_HANDLERS vid_handlers =
 {
 	simple_handler,
@@ -670,7 +666,6 @@ MEM_HANDLERS vid_handlers =
 	simple_update_b_move,
 	simple_handler
 };
-#endif
 
 GLOBAL void dummy_calc IFN0()
 {

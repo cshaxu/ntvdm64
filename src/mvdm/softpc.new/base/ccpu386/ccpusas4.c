@@ -41,7 +41,6 @@
 #include <sas.h>
 #include <sasp.h>
 #include <ccpusas4.h>
-#include "mvdm_softpc_termination.h"
 #include <gmi.h>
 #include CpuH
 #include <cpu_vid.h>
@@ -847,9 +846,6 @@ IFN2(LIN_ADDR, addr, IU8, val)
 {
 	sub_note_trace2(SAS_VERBOSE, "c_sas_store addr=%x, val=%x\n", addr, val);
 	bios_write_byte(addr, val);
-	/* DIVERGENCE(MVDM-HOST-DIV-184): default-off selected-image observation
-	 * follows the original completed store and receives no CPU control capability. */
-	mvdm_softpc_record_sas_store((uint32_t)addr, 1u, (uint32_t)val);
 }
 
 /* store a word at the given address */
@@ -930,8 +926,6 @@ c_sas_storew IFN2(LIN_ADDR, addr, IU16, val)
 		bios_write_byte(addr+1, val >> 8);
 		bios_write_byte(addr, val & 0xFF);
 	}
-	/* DIVERGENCE(MVDM-HOST-DIV-184): records only scalar post-store state. */
-	mvdm_softpc_record_sas_store((uint32_t)addr, 2u, (uint32_t)val);
 }
 
 /* store a double word at the given address */
@@ -947,8 +941,6 @@ IFN2(LIN_ADDR, addr, IU32, val)
 		bios_write_word(addr+2, val >> 16);
 		bios_write_word(addr, val & 0xFFFF);
 	}
-	/* DIVERGENCE(MVDM-HOST-DIV-184): records only scalar post-store state. */
-	mvdm_softpc_record_sas_store((uint32_t)addr, 4u, (uint32_t)val);
 }
 
 /*********** STRING OPS ***********/
@@ -1338,15 +1330,6 @@ c_GetPhyAdd IFN1(PHY_ADDR, addr)
 		addr = (PHY_ADDR)translated_address;
 	if (mvdm_softpc_physical_mapping_resolve(addr, &retVal))
 		return(retVal);
-	/* DIVERGENCE(MVDM-HOST-DIV-190): a fixed-container source audit may
-	 * observe only the scalar state of the original normal-RAM fallback.  The
-	 * default-off helper executes after both existing adapter probes miss and
-	 * before the unchanged pointer calculation; it cannot change the mapping,
-	 * retain the pointer or access guest memory. */
-	mvdm_softpc_record_direct_ram_access((uint32_t)requested_address,
-		(uint32_t)addr, (uint32_t)SasWrapMask, (uint32_t)Length_of_M_area,
-		(uintptr_t)Start_of_M_area);
-
 #ifdef BACK_M
 	retVal = (IU8 *)((IHPE)end_of_M - (IHPE)addr);
 	return(retVal);

@@ -31,7 +31,6 @@
 #include "debug.h"
 #include "nt_reset.h"
 #include "nt_pif.h"
-#include "mvdm_softpc_termination.h"
 
 
 /*****************************************************************************
@@ -180,10 +179,6 @@ void HostIdleNoActivity(void)
      * until the CPU reaches its next original WaitForSingleObject call. */
     if (IdleEvent != NULL)
 	SetEvent(IdleEvent);
-    /* DIVERGENCE(MVDM-HOST-DIV-219): paired scalar-only activity witness;
-     * it is deliberately after the unchanged event signal. */
-    mvdm_softpc_record_idle_activity(0u, NowWaiting ? 1u : 0u,
-        IdleEvent != NULL ? 1u : 0u, 0u);
 }
 
 
@@ -227,19 +222,12 @@ void host_release_timeslice(void)
 	}
 
     NowWaiting = TRUE;
-    /* DIVERGENCE(MVDM-HOST-DIV-219): default-off observation after the
-     * original DOS CON boundary, before and after the unchanged original
-     * short idle wait. It reports only host-local scalar event state and
-     * cannot change the event, CPU, PIC, BIOS, or guest path. */
-    mvdm_softpc_record_idle_activity(1u, 1u, 1u, 0u);
     wait_result = WaitForSingleObject(IdleEvent, idletime);
     if (wait_result == WAIT_FAILED) {
         idletime = 0;
 	Sleep(0);
         }
     NowWaiting = FALSE;
-    mvdm_softpc_record_idle_activity(2u, 0u, 1u, wait_result);
-
 #ifndef MONITOR
     if (idletime) {
         ActivityCheckAfterTimeSlice();

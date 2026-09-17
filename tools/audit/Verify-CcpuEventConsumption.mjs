@@ -5,7 +5,7 @@ import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 const root = process.cwd();
 const revision = process.argv[2];
-const sourcePath = 'src/mvdm-host/softpc.new/base/ccpu386/c_main.c';
+const sourcePath = 'src/mvdm/softpc.new/base/ccpu386/c_main.c';
 const source = revision ? spawnSync('git', ['show', `${revision}:${sourcePath}`],
   { encoding: 'utf8' }) : { status: 0, stdout: fs.readFileSync(sourcePath, 'utf8') };
 if (source.status !== 0) throw new Error('Cannot read selected source revision');
@@ -76,7 +76,6 @@ static IS32 ica_intack(IU32 *hook) {
   if (reassert) c_cpu_raise_event(CPU_HW_INT_MASK);
   return ack_result;
 }
-static void mvdm_softpc_record_cpu_hw_interrupt_service(IU16 vector) { (void)vector; }
 static void do_intrupt(IU16 vector, int a, int b, IU16 c) {
   (void)a; (void)b; (void)c; assert(vector == 9); ++deliveries;
 }

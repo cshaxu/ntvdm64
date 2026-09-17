@@ -24,7 +24,6 @@
 #define CPU_PRIVATE
 #include "cpu4.h"
 #include "sas.h"
-#include "mvdm_softpc_termination.h"
 
 #ifdef CCPU
 
@@ -367,9 +366,6 @@ GLOBAL VOID setDI(IU16 val)
 #undef setIP
 GLOBAL VOID setIP(IU16 val)
 {
-	mvdm_softpc_record_cpu_low_fault_transfer("HOST-SETIP",
-	    (unsigned int)getCS(), (unsigned int)getIP(),
-	    (unsigned int)getCS(), (unsigned int)val);
 	c_setIP(val);
 }
 
@@ -383,9 +379,6 @@ GLOBAL ISM32 setES(IU16 val)
 #undef setCS
 GLOBAL ISM32 setCS(IU16 val)
 {
-	mvdm_softpc_record_cpu_low_fault_transfer("HOST-SETCS",
-	    (unsigned int)getCS(), (unsigned int)getIP(),
-	    (unsigned int)val, (unsigned int)getIP());
 	return c_setCS(val);
 }
 

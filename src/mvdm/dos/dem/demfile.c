@@ -20,7 +20,6 @@
 #include <vrnmpipe.h>
 #include <nt_vdd.h>
 
-#include <mvdm_softpc_termination.h>
 
 BOOL (*VrInitialized)(VOID);  // POINTER TO FUNCTION
 extern BOOL LoadVdmRedir(VOID);
@@ -203,10 +202,6 @@ mvdm_guest_location fileNameLocation;
         return;
     }
     lpFileName = fileName;
-    /* DIVERGENCE(MVDM-HOST-DIV-177): default-off copied observation only.
-     * Preserve the original DS:SI alias and all file-service behavior; the
-     * helper independently leases the numeric address and never retains it. */
-    mvdm_softpc_record_dem_open(getDS(), getSI(), 0u, 0u, getAX(), getCF());
 
 #if DBG
     if(fShowSVCMsg & DEMFILIO){
@@ -330,8 +325,6 @@ mvdm_guest_location fileNameLocation;
 errorReturn:
 
             demClientError(INVALID_HANDLE_VALUE, *lpFileName);
-            mvdm_softpc_record_dem_open(getDS(), getSI(), 2u,
-                (unsigned int)GetLastError(), getAX(), getCF());
             if (dupFileName) {
                 free(dupFileName);
             } else if (ItsANamedPipe && lpFileName) {
@@ -342,8 +335,6 @@ errorReturn:
         else
             break;
     }
-
-    mvdm_softpc_record_dem_open(getDS(), getSI(), 1u, 0u, getAX(), getCF());
 
     //
     // we have to keep some info around when we open a named pipe
@@ -514,11 +505,6 @@ LPSTR   lpFileName;
 DWORD   dwAttr;
 
     lpFileName = (LPSTR) GetVDMAddr (getDS(),getDX());
-    /* DIVERGENCE(MVDM-HOST-DIV-217): the fixed COMMAND-child observation
-       needs the original attribute path/result to distinguish a normal
-       child startup from a source-owned file-service loop.  The helper takes
-       only a short synchronous copy of DS:DX and cannot affect the service. */
-    mvdm_softpc_record_dem_chmod(getDS(), getDX(), 0u, 0u, getAX(), getCF());
 
 #if DBG
     if(fShowSVCMsg & DEMFILIO){
@@ -542,7 +528,6 @@ DWORD   dwAttr;
 
         setCX((USHORT)dwAttr);
         setCF(0);
-        mvdm_softpc_record_dem_chmod(getDS(), getDX(), 1u, 0u, getAX(), getCF());
         return;
     }
 
@@ -554,13 +539,10 @@ DWORD   dwAttr;
         goto dcerr;
 
     setCF(0);
-    mvdm_softpc_record_dem_chmod(getDS(), getDX(), 1u, 0u, getAX(), getCF());
     return;
 
 dcerr:
     demClientError(INVALID_HANDLE_VALUE, *lpFileName);
-    mvdm_softpc_record_dem_chmod(getDS(), getDX(), 2u,
-        (unsigned int)GetLastError(), getAX(), getCF());
     return;
 }
 
@@ -661,9 +643,6 @@ DWORD   dwLastError;
 
     lpFileName = (LPSTR) GetVDMAddr (getDS(),getSI());
     dwAttr = (DWORD)getCX();
-    /* DIVERGENCE(MVDM-HOST-DIV-205): default-off, bounded source-path
-       observation used only to establish the original create contract. */
-    mvdm_softpc_record_dem_create(getDS(), getSI(), 0u, 0u, getAX(), getCF());
 
     if ((dwAttr & 0xff) == 0)
     dwAttr = FILE_ATTRIBUTE_NORMAL;
@@ -782,7 +761,6 @@ DWORD   dwLastError;
     setBP((USHORT)hFile);
     setAX((USHORT)((ULONG)hFile >> 16));
     setCF(0);
-    mvdm_softpc_record_dem_create(getDS(), getSI(), 1u, 0u, getAX(), getCF());
     return;
 }
 

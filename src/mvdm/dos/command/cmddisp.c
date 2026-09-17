@@ -10,9 +10,6 @@
 
 #include <cmdsvc.h>
 #include <softpc.h>
-/* DIVERGENCE(MVDM-HOST-DIV-263): restore host-only report selectors after
- * original environment import so a native child can scrub them again. */
-#include "ntvdm-exe/softpc/include/mvdm_softpc_termination.h"
 
 
 PFNSVC	apfnSVCCmd [] = {
@@ -54,8 +51,5 @@ BOOL CmdDispatch (ULONG iSvc)
     }
 #endif
     (apfnSVCCmd [iSvc])();
-    if (iSvc == SVC_GETINITENVIRONMENT)
-        mvdm_softpc_restore_child_report_paths();
-
     return TRUE;
 }

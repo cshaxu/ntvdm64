@@ -27,23 +27,5 @@ int mvdm_softpc_physical_mapping_resolve(uint32_t intel_address,
 int mvdm_softpc_physical_mapping_span_is_aliased(uint32_t intel_address,
     uint32_t byte_count);
 
-/* Temporary scalar-only observation. EMS request/result slots correspond
- * to service numbers 40h..5fh. Not a mapping or dispatch interface. */
-enum mvdm_mapping_observation_slot {
-    MVDM_MAPPING_CONFIG, MVDM_MAPPING_EMS_INIT,
-    MVDM_MAPPING_DPMI, MVDM_MAPPING_WOW,
-    MVDM_MAPPING_MAIN_RETURN, MVDM_MAPPING_TERMINATION,
-    MVDM_MAPPING_EXCEPTION, MVDM_MAPPING_APP_RETURN,
-    MVDM_MAPPING_WOW_FAILURE, MVDM_MAPPING_WOW_READY,
-    MVDM_MAPPING_EMS_REQUEST = 32, MVDM_MAPPING_EMS_RESULT = 64,
-    MVDM_MAPPING_EMS_LEASE_LOAD = 72,
-    MVDM_MAPPING_EMS_LEASE_LOAD_RESULT,
-    MVDM_MAPPING_EMS_LEASE_STORE,
-    MVDM_MAPPING_EMS_LEASE_STORE_RESULT,
-    MVDM_MAPPING_EMS_LEASE_MOVE,
-    MVDM_MAPPING_EMS_LEASE_MOVE_RESULT
-};
-void mvdm_softpc_mapping_observe(unsigned slot, const char *event,
-    uint32_t a, uint32_t b, uint32_t c);
 
 #endif

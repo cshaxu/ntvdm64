@@ -39,29 +39,6 @@ static DWORD WINAPI basesrv_console_query(void *context,HANDLE caller,
     return app_console_query((const WCHAR *)context,caller,candidates,count,cancel,timeout,members);
 }
 
-/* Default-off S3 transport observation.  This intentionally records neither
- * copied command bytes nor any OS handle/pointer: it exists only to identify
- * the original service operation and its externally observable result. */
-static void basesrv_trace(const char *phase,DWORD pid,DWORD status)
-{
-    CHAR path[MAX_PATH],line[128];
-    DWORD length,written,saved=GetLastError();
-    HANDLE file;
-    int bytes;
-    length=GetEnvironmentVariableA("MVDM_BASESRV_TRACE_PATH",path,sizeof(path));
-    if (!length || length>=sizeof(path)) goto done;
-    bytes=wsprintfA(line,"BASESRV-S3 phase=%s pid=%lu status=%08lX\r\n",
-        phase,(unsigned long)pid,(unsigned long)status);
-    if (bytes<=0 || (size_t)bytes>=sizeof(line)) goto done;
-    file=CreateFileA(path,FILE_APPEND_DATA,FILE_SHARE_READ,NULL,OPEN_ALWAYS,
-        FILE_ATTRIBUTE_NORMAL,NULL);
-    if (file!=INVALID_HANDLE_VALUE) {
-        (void)WriteFile(file,line,(DWORD)bytes,&written,NULL);
-        CloseHandle(file);
-    }
-done:
-    SetLastError(saved);
-}
 /* This is product retention, not BaseSrv task policy.  An interactive
  * COMMAND/EDIT worker remains registered, so it never reaches this path just
  * because its command queue has no new entry.  The one-minute grace starts
@@ -81,7 +58,6 @@ static VOID CALLBACK basesrv_empty_timer(PVOID context,BOOLEAN fired)
     }
     idle_timer=NULL;
     if (service && OpenNtBaseServiceIsEmpty(service)) {
-        basesrv_trace("empty-stop",0,ERROR_SUCCESS);
         (void)RpcMgmtStopServerListening(NULL);
     }
     ReleaseSRWLockExclusive(&idle_lock);
@@ -101,9 +77,8 @@ static void basesrv_schedule_empty_stop(void)
     AcquireSRWLockExclusive(&idle_lock);
     if (!idle_timer && service && OpenNtBaseServiceIsEmpty(service)) {
         if (!++idle_epoch) ++idle_epoch;
-        if (CreateTimerQueueTimer(&idle_timer,NULL,basesrv_empty_timer,
-                (PVOID)(ULONG_PTR)idle_epoch,BASESRV_EMPTY_GRACE_MS,0,WT_EXECUTEDEFAULT))
-            basesrv_trace("empty-grace",0,ERROR_SUCCESS);
+        (void)CreateTimerQueueTimer(&idle_timer,NULL,basesrv_empty_timer,
+                (PVOID)(ULONG_PTR)idle_epoch,BASESRV_EMPTY_GRACE_MS,0,WT_EXECUTEDEFAULT);
     }
     ReleaseSRWLockExclusive(&idle_lock);
 }
@@ -181,7 +156,6 @@ done:
     if (error && *entries) { MIDL_user_free(*entries); *entries=NULL; }
     if (error) { *epoch=0; *count=0; }
     basesrv_schedule_empty_stop();
-    basesrv_trace("task-snapshot",pid,error);
     return error;
 }
 error_status_t Server_TerminateWorker(handle_t binding,HANDLE process,ULONG protocol,
@@ -193,7 +167,6 @@ error_status_t Server_TerminateWorker(handle_t binding,HANDLE process,ULONG prot
     error=basesrv_management_version(protocol,application_version);
     if (!error) error=OpenNtBaseServiceTerminateWorker(service,(uint64_t)epoch,sequence);
     basesrv_schedule_empty_stop();
-    basesrv_trace("task-terminate",pid,error);
     return error;
 }
 void *__RPC_USER midl_user_allocate(size_t bytes) { return malloc(bytes); }
@@ -233,7 +206,6 @@ static DWORD export_handles(const HANDLE *source,ULONG count,HANDLE **output)
         if (!DuplicateHandle(GetCurrentProcess(),source[index],GetCurrentProcess(),
                 &(*output)[index],0,FALSE,DUPLICATE_SAME_ACCESS)) {
             error=GetLastError();
-            basesrv_trace("export-handle",GetCurrentProcessId(),error);
             while (index) { --index; if ((*output)[index]) CloseHandle((*output)[index]); }
             MIDL_user_free(*output); *output=NULL;
             return error;
@@ -252,11 +224,10 @@ error_status_t Server_Connect(handle_t binding,HANDLE process,ULONG protocol,
     *server_protocol=APP_PROTOCOL_VERSION;
     memcpy(server_version,expected,sizeof(expected));
     status=broker_rpc_peer_process(&scope,binding,process,&pid);
-    if (status) { basesrv_trace("connect-auth",0,status); return status; }
+    if (status) return status;
     if (protocol!=APP_PROTOCOL_VERSION || memcmp(application_version,expected,sizeof(expected))) {
         fprintf(stderr,"basesrv: version mismatch: local protocol=%u app=%s; peer protocol=%lu app=%.32s\n",
             APP_PROTOCOL_VERSION,APP_VERSION,protocol,(const char *)application_version);
-        basesrv_trace("connect-version",pid,ERROR_REVISION_MISMATCH);
         basesrv_schedule_empty_stop();
         return ERROR_REVISION_MISMATCH;
     }
@@ -266,7 +237,6 @@ error_status_t Server_Connect(handle_t binding,HANDLE process,ULONG protocol,
     basesrv_cancel_empty_timer();
     status=OpenNtBaseServiceConnect(service,process,(OPENNT_BASE_CONNECTION **)connection,generation);
     if (status) basesrv_schedule_empty_stop();
-    basesrv_trace("connect",pid,status);
     return status;
 }
 error_status_t Server_BrokerProcess(handle_t binding,VDM_CONNECTION connection,HANDLE process,
@@ -291,9 +261,6 @@ error_status_t Server_First(handle_t binding,VDM_CONNECTION connection,HANDLE pr
     status=broker_rpc_peer_process(&scope,binding,process,&pid);
     if (status) return status;
     status=OpenNtBaseServiceFirst(connection,pid,generation,first);
-    /* Default-off observation of the original BaseSrvIsFirstVDM result.  The
-     * broker owns no substitute first-worker state. */
-    basesrv_trace(status ? "first-error" : (*first ? "first-yes" : "first-no"),pid,status);
     return status;
 }
 error_status_t Server_Check(handle_t binding,VDM_CONNECTION connection,HANDLE process,
@@ -311,7 +278,6 @@ error_status_t Server_Check(handle_t binding,VDM_CONNECTION connection,HANDLE pr
     if (error) return error;
     error=OpenNtBaseServiceCheck(connection,pid,generation,request,requestBytes,
         reply,BASE_CHECK_REPLY_BYTES,&required,&parent_event,&parent_receipt);
-    if (error) basesrv_trace("check-service",pid,error);
     if (!error && required!=BASE_CHECK_REPLY_BYTES) return ERROR_INVALID_DATA;
     if (!error && parent_event) {
         error=export_handles(&parent_event,1,parentEvents);
@@ -320,7 +286,6 @@ error_status_t Server_Check(handle_t binding,VDM_CONNECTION connection,HANDLE pr
     }
     if (!error) *parentReceipt=(ULONG)parent_receipt;
     if (!error) *replyBytes=required;
-    basesrv_trace("check",pid,error);
     return error;
 }
 error_status_t Server_Get(handle_t binding,VDM_CONNECTION connection,HANDLE process,
@@ -341,7 +306,6 @@ error_status_t Server_Get(handle_t binding,VDM_CONNECTION connection,HANDLE proc
     error=OpenNtBaseServiceGet(connection,pid,generation,request,requestBytes,
         &source_reply,&bytes,&wait_event,standard,&standard_count);
     if (error) {
-        basesrv_trace("get",pid,error);
         fprintf(stderr,"basesrv: Get rejected %lu\n",error); fflush(stderr);
         return error;
     }
@@ -370,7 +334,6 @@ error_status_t Server_Get(handle_t binding,VDM_CONNECTION connection,HANDLE proc
     *streamCount=standard_count;
     OpenNtBaseServiceReleaseCommandReply(source_reply);
     *replyBytes=bytes;
-    basesrv_trace("get",pid,ERROR_SUCCESS);
     return ERROR_SUCCESS;
 }
 error_status_t Server_Exit(handle_t binding,VDM_CONNECTION connection,HANDLE process,
@@ -388,7 +351,6 @@ error_status_t Server_Exit(handle_t binding,VDM_CONNECTION connection,HANDLE pro
         close_wait_wire=close_wait ? 1u : 0u;
         *closeWorkerWait=close_wait_wire;
     }
-    basesrv_trace("exit",pid,error);
     return error;
 }
 error_status_t Server_Update(handle_t binding,VDM_CONNECTION connection,HANDLE process,
@@ -428,7 +390,6 @@ error_status_t Server_ExitCode(handle_t binding,VDM_CONNECTION connection,HANDLE
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
     if (error) return error;
     error=OpenNtBaseServiceExitCode(connection,pid,generation,parentReceipt,exitCode);
-    basesrv_trace("exit-code",pid,error);
     return error;
 }
 error_status_t Server_Reenter(handle_t binding,VDM_CONNECTION connection,HANDLE process,
@@ -438,8 +399,6 @@ error_status_t Server_Reenter(handle_t binding,VDM_CONNECTION connection,HANDLE 
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
     if (error) return error;
     error=OpenNtBaseServiceReenter(connection,pid,generation,increment);
-    basesrv_trace(increment==INCREMENT_REENTER_COUNT ? "reenter-inc" : "reenter-dec",
-        pid,error);
     return error;
 }
 error_status_t Server_Reserve(handle_t binding,VDM_CONNECTION connection,HANDLE process,
@@ -453,7 +412,6 @@ error_status_t Server_Reserve(handle_t binding,VDM_CONNECTION connection,HANDLE 
     if (error) return error;
     error=OpenNtBaseServiceCreateReservation(connection,pid,generation,task,&id);
     if (!error) *reservation=(hyper)id;
-    basesrv_trace("reserve",pid,error);
     return error;
 }
 error_status_t Server_Prepare(handle_t binding,VDM_CONNECTION connection,HANDLE process,
@@ -464,7 +422,6 @@ error_status_t Server_Prepare(handle_t binding,VDM_CONNECTION connection,HANDLE 
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
     if (error) return error;
     error=OpenNtBaseServicePrepareWorker(connection,pid,generation,(uint64_t)reservation,worker);
-    basesrv_trace("prepare",pid,error);
     return error;
 }
 error_status_t Server_Release(handle_t binding,VDM_CONNECTION connection,HANDLE process,
@@ -486,7 +443,6 @@ error_status_t Server_Disconnect(handle_t binding,HANDLE process,ULONG generatio
     result=OpenNtBaseServiceDisconnect(*connection);
     if (!result) *connection=NULL;
     if (!result) basesrv_schedule_empty_stop();
-    basesrv_trace("disconnect",pid,result);
     return result;
 }
 int main(void)

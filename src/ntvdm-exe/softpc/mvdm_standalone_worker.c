@@ -2,14 +2,11 @@
 
 #include "product-package/package_layout.h"
 #include "basesrv-exe/opennt/include/base_rpc_client.h"
-#include "ntvdm-exe/command/include/mvdm_command_native_child.h"
 #include "mvdm_softpc_execution.h"
 #include "mvdm_softpc_guest_memory.h"
 #include "mvdm_softpc_termination.h"
 #include "ntvdm-exe/session/session.h"
 #include "ntvdm-exe/monitor/include/monitor_context.h"
-
-#include <stdio.h>
 
 /* Original BaseClient capture storage is private to this worker process. */
 PVOID CsrPortHeap;
@@ -21,19 +18,6 @@ static BOOL worker_memory;
 static BOOL worker_escape;
 static BOOL worker_started;
 static BOOL worker_session_initialized;
-
-static void mvdm_standalone_worker_trace(const char *phase,DWORD status)
-{
-    char path[MAX_PATH];
-    FILE *file;
-
-    if (!GetEnvironmentVariableA("MVDM_BASESRV_TRACE_PATH",path,sizeof(path)))
-        return;
-    file=fopen(path,"a");
-    if (!file) return;
-    fprintf(file,"NTVDM-S3 phase=%s status=%08lx\n",phase,status);
-    fclose(file);
-}
 
 static int mvdm_standalone_worker_cleanup(int result)
 {
@@ -69,8 +53,6 @@ DWORD mvdm_standalone_worker_begin(void)
     if (worker_started) return ERROR_ALREADY_EXISTS;
     session_initialize(&worker_session,1u);
     worker_session_initialized=TRUE;
-    mvdm_softpc_capture_command_continuation_report_path();
-    mvdm_command_native_child_capture_report_path();
     CsrPortHeap=HeapCreate(0,0,0);
     if (!CsrPortHeap) { error=ERROR_NOT_ENOUGH_MEMORY; goto fail; }
     worker_heap=TRUE;
@@ -101,10 +83,8 @@ DWORD mvdm_standalone_worker_begin(void)
     }
     worker_escape=TRUE;
     worker_started=TRUE;
-    mvdm_standalone_worker_trace("connect",ERROR_SUCCESS);
     return ERROR_SUCCESS;
 fail:
-    mvdm_standalone_worker_trace("bootstrap",error);
     (void)mvdm_standalone_worker_cleanup((int)error);
     return error;
 }
@@ -121,13 +101,5 @@ DWORD mvdm_standalone_worker_completion_code(void)
 
 int mvdm_standalone_worker_finish(int result)
 {
-    mvdm_standalone_worker_trace("run",(DWORD)result);
     return mvdm_standalone_worker_cleanup(result);
-}
-
-void mvdm_standalone_worker_record_phase(const char *phase)
-{
-    /* Default-off host-local witness for the original ntvdm.c entry.  This
-     * does not participate in worker setup or change source ordering. */
-    mvdm_standalone_worker_trace(phase,ERROR_SUCCESS);
 }

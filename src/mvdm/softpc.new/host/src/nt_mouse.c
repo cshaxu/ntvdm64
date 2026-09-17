@@ -30,7 +30,6 @@
 #include "nt_event.h"
 #include <ntddvdeo.h>
 #include "nt_fulsc.h"
-#include "ntvdm-exe/softpc/include/mvdm_softpc_termination.h"
 
 
 #define TEXT_MODE          1
@@ -573,10 +572,6 @@ AssembleCallMask(call_mask);
 //
 
 mcs->button_status=os_pointer_data.button_l | os_pointer_data.button_r<<1;
-mvdm_softpc_record_mouse_chain(4u, mcs->position.x, mcs->position.y,
-    *call_mask, ((unsigned int)(unsigned short)counter->x << 16) |
-    (unsigned short)counter->y);
-
 host_ica_unlock();  // synch with the event thread
 
 

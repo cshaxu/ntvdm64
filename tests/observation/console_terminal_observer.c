@@ -69,8 +69,6 @@ int main(int argc,char **argv) {
     char executable[MAX_PATH], command[MAX_PATH+16];
     GetModuleFileNameA(NULL,executable,sizeof(executable));
     snprintf(command,sizeof(command),"\"%s\" --child",executable);
-    if(argc==5 && !strcmp(argv[4],"--mouse")) { char path[MAX_PATH];snprintf(path,sizeof(path),"%s.mouse.txt",argv[3]);SetEnvironmentVariableA("MVDM_CONSOLE_PRESENTATION_REPORT_PATH",path); }
-    { char path[MAX_PATH]; snprintf(path,sizeof(path),"%s.rpc.txt",argv[3]);SetEnvironmentVariableA("MVDM_BASESRV_TRACE_PATH",path);snprintf(path,sizeof(path),"%s.stream.txt",argv[3]);SetEnvironmentVariableA("MVDM_STREAM_IO_REPORT_PATH",path); }
     { char path[MAX_PATH];snprintf(path,sizeof(path),"%s.cells.txt",argv[3]);SetEnvironmentVariableA("TEST_CELL_LOG",path); }
     raw_log=CreateFileA(argv[3],GENERIC_WRITE,FILE_SHARE_READ,NULL,CREATE_ALWAYS,0,NULL);
     CreatePipe(&in_read,&write_pipe,NULL,0);CreatePipe(&read_pipe,&out_write,NULL,0);

@@ -1,9 +1,6 @@
 #include "mvdm_softpc_physical_mapping.h"
 
 #include <stdlib.h>
-#include <errno.h>
-#include <stdio.h>
-#include <windows.h>
 
 #include "ntvdm-exe/session/session.h"
 
@@ -25,73 +22,6 @@ typedef struct physical_alias_record {
 
 static physical_mapping_record *records;
 static physical_alias_record *aliases;
-
-/* Temporary T406 observation: one record per call-site per process, not a
- * call counter or a correctness assertion. No guest bytes are read. Preserve
- * both error channels, close each handle, and never make logging a condition
- * of the mapping operation. Remove after consumer coverage is established. */
-static void mapping_observe(const char *event, uint32_t a, uint32_t b,
-    uint32_t c)
-{
-    DWORD saved_error = GetLastError();
-    int saved_errno = errno;
-    FILETIME created = {0}, exited, kernel, user;
-    char directory[MAX_PATH];
-    char path[MAX_PATH];
-    char *slash;
-    char line[256];
-    HANDLE file;
-    DWORD directory_length;
-    DWORD written;
-    int length;
-
-    /* The package root is the directory containing this executable.  Keep
-     * observations under its logs child; no deployment drive or directory is
-     * embedded in the product. */
-    directory_length = GetModuleFileNameA(NULL, directory, (DWORD)sizeof(directory));
-    if (directory_length == 0u || directory_length >= sizeof(directory) ||
-        (slash = strrchr(directory, '\\')) == NULL) goto done;
-    *slash = '\0';
-    (void)GetProcessTimes(GetCurrentProcess(), &created, &exited, &kernel, &user);
-    length = snprintf(path, sizeof(path), "%s\\logs", directory);
-    if (length <= 0 || (size_t)length >= sizeof(path)) goto done;
-    (void)CreateDirectoryA(path, NULL);
-    length = snprintf(path, sizeof(path), "%s\\logs\\physical-mapping-%lu-%08lx%08lx.log",
-        directory, GetCurrentProcessId(), created.dwHighDateTime, created.dwLowDateTime);
-    if (length <= 0 || (size_t)length >= sizeof(path)) goto done;
-    file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ | FILE_SHARE_WRITE,
-        NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-    if (file != INVALID_HANDLE_VALUE) {
-        length = snprintf(line, sizeof(line),
-            "mapping-observation-v1 pid=%lu tid=%lu tick=%lu event=%s "
-            "a=%08lx b=%08lx c=%08lx first-site-hit-only\r\n",
-            GetCurrentProcessId(), GetCurrentThreadId(), GetTickCount(), event,
-            (unsigned long)a, (unsigned long)b, (unsigned long)c);
-        if (length > 0 && length < sizeof(line))
-            (void)WriteFile(file, line, (DWORD)length, &written, NULL);
-        CloseHandle(file);
-    }
-done:
-    errno = saved_errno;
-    SetLastError(saved_error);
-}
-
-/* The volatile fast path avoids atomic operations and I/O on repeated SAS
- * accesses. Each expansion has a separate, bounded diagnostic-only flag. */
-#define MAPPING_OBSERVE(event, a, b, c) do { \
-    static volatile LONG observed; \
-    if (!observed && InterlockedCompareExchange(&observed, 1, 0) == 0) \
-        mapping_observe(event, (a), (b), (c)); \
-} while (0)
-
-void mvdm_softpc_mapping_observe(unsigned slot, const char *event,
-    uint32_t a, uint32_t b, uint32_t c)
-{
-    static volatile LONG observed[96];
-    if (slot < 96 && !observed[slot] &&
-        InterlockedCompareExchange(&observed[slot], 1, 0) == 0)
-        mapping_observe(event, a, b, c);
-}
 
 static physical_mapping_record *find_owner(session *owner)
 {
@@ -179,7 +109,7 @@ int mvdm_softpc_physical_mapping_initialize(void *normal_base, uint32_t size)
     }
     record->next = records;
     records = record;
-    MAPPING_OBSERVE("pages.initialized", size, record->page_count, 0);
+
     return 1;
 }
 
@@ -200,7 +130,7 @@ int32_t VdmMapDosMemory(uint32_t dos_intel_page, uint32_t vdm_intel_page,
     uint32_t byte_count;
     int teardown_registered = 0;
 
-    MAPPING_OBSERVE("VdmMapDosMemory.call", dos_intel_page, vdm_intel_page, page_count);
+
     if (owner == NULL || !session_valid(owner) ||
         !page_span(dos_intel_page, page_count, &destination_base, &byte_count) ||
         !page_span(vdm_intel_page, page_count, &source_base, NULL))
@@ -209,7 +139,7 @@ int32_t VdmMapDosMemory(uint32_t dos_intel_page, uint32_t vdm_intel_page,
         if (record->owner == owner && record->destination_base == destination_base &&
             record->byte_count == byte_count) {
             record->source_base = source_base;
-            MAPPING_OBSERVE("map.replaced", destination_base, source_base, byte_count);
+
             return 0;
         }
     }
@@ -240,7 +170,7 @@ int32_t VdmMapDosMemory(uint32_t dos_intel_page, uint32_t vdm_intel_page,
         remove_alias(record);
         return (int32_t)0xc0000001u; /* STATUS_UNSUCCESSFUL */
     }
-    MAPPING_OBSERVE("map.created", destination_base, source_base, byte_count);
+
     return 0;
 }
 
@@ -250,7 +180,7 @@ int32_t VdmUnmapDosMemory(uint32_t dos_intel_page, uint32_t page_count)
     physical_alias_record *record;
     uint32_t destination_base;
     uint32_t byte_count;
-    MAPPING_OBSERVE("VdmUnmapDosMemory.call", dos_intel_page, page_count, 0);
+
     if (owner == NULL || !session_valid(owner) ||
         !page_span(dos_intel_page, page_count, &destination_base, &byte_count))
         return (int32_t)0xc000000du; /* STATUS_INVALID_PARAMETER */
@@ -258,11 +188,11 @@ int32_t VdmUnmapDosMemory(uint32_t dos_intel_page, uint32_t page_count)
         if (record->owner == owner && record->destination_base == destination_base &&
             record->byte_count == byte_count) {
             remove_alias(record);
-            MAPPING_OBSERVE("unmap.removed", destination_base, byte_count, 0);
+
             return 0;
         }
     }
-    MAPPING_OBSERVE("unmap.not-found", destination_base, byte_count, 0);
+
     return (int32_t)0xc0000225u; /* STATUS_NOT_FOUND */
 }
 
@@ -271,7 +201,7 @@ int mvdm_softpc_physical_mapping_translate(uint32_t intel_address,
 {
     session *owner = session_thread_current();
     physical_alias_record *record;
-    MAPPING_OBSERVE("translate.observer-active", intel_address, 0, 0);
+
     if (translated_address_out != NULL) *translated_address_out = intel_address;
     if (owner == NULL || !session_valid(owner) || translated_address_out == NULL)
         return 0;
@@ -282,7 +212,7 @@ int mvdm_softpc_physical_mapping_translate(uint32_t intel_address,
         offset = intel_address - record->destination_base;
         if (offset >= record->byte_count) continue;
         *translated_address_out = record->source_base + offset;
-        MAPPING_OBSERVE("translate.alias-hit", intel_address, *translated_address_out, 0);
+
         return 1;
     }
     return 0;
@@ -299,7 +229,7 @@ int mvdm_softpc_physical_mapping_resolve(uint32_t intel_address,
     host = record->pages[intel_address >> 12];
     if (host == 0) return 0;
     *host_byte_out = (uint8_t *)((uintptr_t)host + (intel_address & 4095u));
-    MAPPING_OBSERVE("resolve.external-hit", intel_address, host, 0);
+
     return 1;
 }
 
@@ -335,7 +265,7 @@ void VdmSetPhysRecStructs(uint32_t host_address, uint32_t intel_address,
     physical_mapping_record *record = find_owner(session_thread_current());
     uint32_t first = intel_address >> 12, count = byte_count >> 12, i;
     int normal;
-    MAPPING_OBSERVE("VdmSetPhysRecStructs.call", host_address, intel_address, byte_count);
+
     if (record == NULL || host_address == 0 || (intel_address & 4095u) ||
         (byte_count & 4095u) || count == 0 || first >= record->page_count ||
         count > record->page_count - first ||
@@ -344,8 +274,8 @@ void VdmSetPhysRecStructs(uint32_t host_address, uint32_t intel_address,
     for (i = 0; i < count; ++i)
         record->pages[first + i] = normal ? 0 : host_address + (i << 12);
     if (normal) {
-        MAPPING_OBSERVE("set.normal-restored", intel_address, byte_count, 0);
+
     } else {
-        MAPPING_OBSERVE("set.activated", host_address, intel_address, byte_count);
+
     }
 }

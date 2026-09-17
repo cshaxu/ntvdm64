@@ -573,7 +573,6 @@ int main(int argc, char **argv)
     BOOL observe_console_mouse_input = FALSE;
     BOOL observed_console_mouse_input_ready = FALSE;
     BOOL observed_console_mouse_input_delivered = FALSE;
-    char presentation_report_path[MAX_PATH];
     const char *scripted_console_input_text = "ver\rexit\r";
     const char *scripted_console_input_sequence = "ver+exit";
     DWORD scripted_console_line_delay_ms = 0;
@@ -595,44 +594,15 @@ int main(int argc, char **argv)
     char previous_exception_report_path[MAX_PATH];
     char main_return_report_path[MAX_PATH];
     char previous_main_return_report_path[MAX_PATH];
-    char bop_return_report_path[MAX_PATH];
     char base_vdm_report_path[MAX_PATH];
-    char previous_bop_return_report_path[MAX_PATH];
-    char console_input_ready_report_path[MAX_PATH];
     char console_input_preinput_snapshot_path[MAX_PATH];
     char console_mouse_postinput_snapshot_path[MAX_PATH];
-    char previous_console_input_ready_report_path[MAX_PATH];
-    char dem_open_report_path[MAX_PATH];
-    char previous_dem_open_report_path[MAX_PATH];
-    char config_done_report_path[MAX_PATH];
-    char previous_config_done_report_path[MAX_PATH];
-    char config_command_store_report_path[MAX_PATH];
-    char previous_config_command_store_report_path[MAX_PATH];
-    char previous_config_command_linear[16];
-    char dem_read_report_path[MAX_PATH];
-    char previous_dem_read_report_path[MAX_PATH];
-    char dem_seek_report_path[MAX_PATH];
-    char dem_ioctl_report_path[MAX_PATH];
     char report_base_path[MAX_PATH];
     DWORD report_base_path_length;
     DWORD previous_exception_report_length;
     DWORD previous_main_return_report_length;
-    DWORD previous_bop_return_report_length;
-    DWORD previous_console_input_ready_report_length;
-    DWORD previous_dem_open_report_length;
-    DWORD previous_config_done_report_length;
-    DWORD previous_config_command_store_report_length;
-    DWORD previous_config_command_linear_length;
-    DWORD previous_dem_read_report_length;
     BOOL had_previous_exception_report;
     BOOL had_previous_main_return_report;
-    BOOL had_previous_bop_return_report;
-    BOOL had_previous_console_input_ready_report;
-    BOOL had_previous_dem_open_report;
-    BOOL had_previous_config_done_report;
-    BOOL had_previous_config_command_store_report;
-    BOOL had_previous_config_command_linear;
-    BOOL had_previous_dem_read_report;
     char fixed_system_root[MAX_PATH];
     char fixed_system_root_short[MAX_PATH];
     DWORD fixed_system_root_short_length = 0;
@@ -797,11 +767,6 @@ int main(int argc, char **argv)
              report_base_path);
     snprintf(main_return_report_path, sizeof(main_return_report_path), "%s.return.txt",
              report_base_path);
-    snprintf(bop_return_report_path, sizeof(bop_return_report_path), "%s.bop-return.txt",
-             report_base_path);
-    snprintf(console_input_ready_report_path,
-             sizeof(console_input_ready_report_path), "%s.console-ready.txt",
-             report_base_path);
     snprintf(console_input_preinput_snapshot_path,
              sizeof(console_input_preinput_snapshot_path),
              "%s.pre-input-console.txt", report_base_path);
@@ -810,19 +775,6 @@ int main(int argc, char **argv)
              "%s.mouse-post-input-console.txt", report_base_path);
     snprintf(base_vdm_report_path, sizeof(base_vdm_report_path), "%s.base-vdm.txt",
              report_base_path);
-    snprintf(dem_open_report_path, sizeof(dem_open_report_path), "%s.dem-open.txt",
-             report_base_path);
-    snprintf(config_done_report_path, sizeof(config_done_report_path),
-             "%s.config-done.txt", report_base_path);
-    snprintf(config_command_store_report_path,
-             sizeof(config_command_store_report_path),
-             "%s.config-command-store.txt", report_base_path);
-    snprintf(dem_read_report_path, sizeof(dem_read_report_path),
-             "%s.dem-read.txt", report_base_path);
-    snprintf(dem_seek_report_path, sizeof(dem_seek_report_path),
-             "%s.dem-seek.txt", report_base_path);
-    snprintf(dem_ioctl_report_path, sizeof(dem_ioctl_report_path),
-             "%s.dem-ioctl.txt", report_base_path);
     previous_exception_report_length = GetEnvironmentVariableA(
         "MVDM_EXCEPTION_REPORT_PATH", previous_exception_report_path,
         (DWORD)sizeof(previous_exception_report_path));
@@ -833,69 +785,9 @@ int main(int argc, char **argv)
         (DWORD)sizeof(previous_main_return_report_path));
     had_previous_main_return_report = previous_main_return_report_length != 0 &&
         previous_main_return_report_length < sizeof(previous_main_return_report_path);
-    previous_bop_return_report_length = GetEnvironmentVariableA(
-        "MVDM_BOP_RETURN_REPORT_PATH", previous_bop_return_report_path,
-        (DWORD)sizeof(previous_bop_return_report_path));
-    had_previous_bop_return_report = previous_bop_return_report_length != 0 &&
-        previous_bop_return_report_length < sizeof(previous_bop_return_report_path);
-    previous_console_input_ready_report_length = GetEnvironmentVariableA(
-        "MVDM_STREAM_IO_REPORT_PATH",
-        previous_console_input_ready_report_path,
-        (DWORD)sizeof(previous_console_input_ready_report_path));
-    had_previous_console_input_ready_report =
-        previous_console_input_ready_report_length != 0 &&
-        previous_console_input_ready_report_length <
-            sizeof(previous_console_input_ready_report_path);
-    previous_dem_open_report_length = GetEnvironmentVariableA(
-        "MVDM_DEM_OPEN_REPORT_PATH", previous_dem_open_report_path,
-        (DWORD)sizeof(previous_dem_open_report_path));
-    had_previous_dem_open_report = previous_dem_open_report_length != 0 &&
-        previous_dem_open_report_length < sizeof(previous_dem_open_report_path);
-    previous_config_done_report_length = GetEnvironmentVariableA(
-        "MVDM_CONFIG_DONE_REPORT_PATH", previous_config_done_report_path,
-        (DWORD)sizeof(previous_config_done_report_path));
-    had_previous_config_done_report = previous_config_done_report_length != 0 &&
-        previous_config_done_report_length < sizeof(previous_config_done_report_path);
-    previous_config_command_store_report_length = GetEnvironmentVariableA(
-        "MVDM_SAS_STORE_REPORT_PATH",
-        previous_config_command_store_report_path,
-        (DWORD)sizeof(previous_config_command_store_report_path));
-    had_previous_config_command_store_report =
-        previous_config_command_store_report_length != 0 &&
-        previous_config_command_store_report_length <
-            sizeof(previous_config_command_store_report_path);
-    previous_config_command_linear_length = GetEnvironmentVariableA(
-        "MVDM_SAS_STORE_LINEAR", previous_config_command_linear,
-        (DWORD)sizeof(previous_config_command_linear));
-    had_previous_config_command_linear = previous_config_command_linear_length != 0 &&
-        previous_config_command_linear_length < sizeof(previous_config_command_linear);
-    previous_dem_read_report_length = GetEnvironmentVariableA(
-        "MVDM_DEM_READ_REPORT_PATH", previous_dem_read_report_path,
-        (DWORD)sizeof(previous_dem_read_report_path));
-    had_previous_dem_read_report = previous_dem_read_report_length != 0 &&
-        previous_dem_read_report_length < sizeof(previous_dem_read_report_path);
     SetEnvironmentVariableA("MVDM_EXCEPTION_REPORT_PATH", exception_report_path);
     SetEnvironmentVariableA("MVDM_MAIN_RETURN_REPORT_PATH", main_return_report_path);
-    /* Keep the existing scalar CPU/PIC observer enabled for a scripted
-     * Console row as well.  It writes a separate report file and never
-     * supplies a guest command or changes the Console -> 8042 path. */
-    SetEnvironmentVariableA("MVDM_BOP_RETURN_REPORT_PATH", bop_return_report_path);
-    if (scripted_console_input)
-        SetEnvironmentVariableA("MVDM_STREAM_IO_REPORT_PATH",
-            console_input_ready_report_path);
     SetEnvironmentVariableA("MVDM_BASE_VDM_REPORT_PATH", base_vdm_report_path);
-    SetEnvironmentVariableA("MVDM_DEM_OPEN_REPORT_PATH", dem_open_report_path);
-    SetEnvironmentVariableA("MVDM_CONFIG_DONE_REPORT_PATH", config_done_report_path);
-    SetEnvironmentVariableA("MVDM_SAS_STORE_REPORT_PATH",
-        config_command_store_report_path);
-    /* S5 attributes this selected image's original trys `commnd` store to
-     * live CS 8E08 plus map offset 3466. This is a fixed-image observer
-     * input, not a guest ABI or an address translation facility. */
-    if (!had_previous_config_command_linear)
-        SetEnvironmentVariableA("MVDM_SAS_STORE_LINEAR", "0x914e6");
-    SetEnvironmentVariableA("MVDM_DEM_READ_REPORT_PATH", dem_read_report_path);
-    SetEnvironmentVariableA("MVDM_DEM_SEEK_REPORT_PATH", dem_seek_report_path);
-    SetEnvironmentVariableA("MVDM_DEM_IOCTL_REPORT_PATH", dem_ioctl_report_path);
 
     if (!CreateProcessA(NULL, command_line, NULL, NULL, TRUE, 0, NULL, argv[2],
                         &startup, &child)) {
@@ -909,41 +801,6 @@ int main(int argc, char **argv)
                                     previous_main_return_report_path);
         else
             SetEnvironmentVariableA("MVDM_MAIN_RETURN_REPORT_PATH", NULL);
-        if (had_previous_bop_return_report)
-            SetEnvironmentVariableA("MVDM_BOP_RETURN_REPORT_PATH",
-                                    previous_bop_return_report_path);
-        else
-            SetEnvironmentVariableA("MVDM_BOP_RETURN_REPORT_PATH", NULL);
-        if (had_previous_console_input_ready_report)
-            SetEnvironmentVariableA("MVDM_STREAM_IO_REPORT_PATH",
-                                    previous_console_input_ready_report_path);
-        else
-            SetEnvironmentVariableA("MVDM_STREAM_IO_REPORT_PATH", NULL);
-        if (had_previous_dem_open_report)
-            SetEnvironmentVariableA("MVDM_DEM_OPEN_REPORT_PATH",
-                                    previous_dem_open_report_path);
-        else
-            SetEnvironmentVariableA("MVDM_DEM_OPEN_REPORT_PATH", NULL);
-        if (had_previous_config_done_report)
-            SetEnvironmentVariableA("MVDM_CONFIG_DONE_REPORT_PATH",
-                                     previous_config_done_report_path);
-        else
-            SetEnvironmentVariableA("MVDM_CONFIG_DONE_REPORT_PATH", NULL);
-        if (had_previous_config_command_store_report)
-            SetEnvironmentVariableA("MVDM_SAS_STORE_REPORT_PATH",
-                                    previous_config_command_store_report_path);
-        else
-            SetEnvironmentVariableA("MVDM_SAS_STORE_REPORT_PATH", NULL);
-        if (had_previous_config_command_linear)
-            SetEnvironmentVariableA("MVDM_SAS_STORE_LINEAR",
-                                    previous_config_command_linear);
-        else
-            SetEnvironmentVariableA("MVDM_SAS_STORE_LINEAR", NULL);
-        if (had_previous_dem_read_report)
-            SetEnvironmentVariableA("MVDM_DEM_READ_REPORT_PATH",
-                                    previous_dem_read_report_path);
-        else
-            SetEnvironmentVariableA("MVDM_DEM_READ_REPORT_PATH", NULL);
         CloseHandle(input);
         CloseHandle(output);
         return 67;
@@ -959,41 +816,6 @@ int main(int argc, char **argv)
                                 previous_main_return_report_path);
     else
         SetEnvironmentVariableA("MVDM_MAIN_RETURN_REPORT_PATH", NULL);
-    if (had_previous_bop_return_report)
-        SetEnvironmentVariableA("MVDM_BOP_RETURN_REPORT_PATH",
-                                previous_bop_return_report_path);
-    else
-        SetEnvironmentVariableA("MVDM_BOP_RETURN_REPORT_PATH", NULL);
-    if (had_previous_console_input_ready_report)
-        SetEnvironmentVariableA("MVDM_STREAM_IO_REPORT_PATH",
-                                previous_console_input_ready_report_path);
-    else
-        SetEnvironmentVariableA("MVDM_STREAM_IO_REPORT_PATH", NULL);
-    if (had_previous_dem_open_report)
-        SetEnvironmentVariableA("MVDM_DEM_OPEN_REPORT_PATH",
-                                previous_dem_open_report_path);
-    else
-        SetEnvironmentVariableA("MVDM_DEM_OPEN_REPORT_PATH", NULL);
-    if (had_previous_config_done_report)
-        SetEnvironmentVariableA("MVDM_CONFIG_DONE_REPORT_PATH",
-                                 previous_config_done_report_path);
-    else
-        SetEnvironmentVariableA("MVDM_CONFIG_DONE_REPORT_PATH", NULL);
-    if (had_previous_config_command_store_report)
-        SetEnvironmentVariableA("MVDM_SAS_STORE_REPORT_PATH",
-                                previous_config_command_store_report_path);
-    else
-        SetEnvironmentVariableA("MVDM_SAS_STORE_REPORT_PATH", NULL);
-    if (had_previous_config_command_linear)
-        SetEnvironmentVariableA("MVDM_SAS_STORE_LINEAR",
-                                previous_config_command_linear);
-    else
-        SetEnvironmentVariableA("MVDM_SAS_STORE_LINEAR", NULL);
-    if (had_previous_dem_read_report)
-        SetEnvironmentVariableA("MVDM_DEM_READ_REPORT_PATH",
-                                previous_dem_read_report_path);
-    else
-        SetEnvironmentVariableA("MVDM_DEM_READ_REPORT_PATH", NULL);
     if (scripted_console_input) {
         /* Await visible COMMAND readiness, without an execution-core hook. */
         scripted_console_input_ready = wait_for_console_prompt(output,
@@ -1070,17 +892,11 @@ int main(int argc, char **argv)
         } else scripted_console_input_delivered = FALSE;
     }
     if (observe_console_mouse_input) {
-        DWORD presentation_report_length = GetEnvironmentVariableA(
-            "MVDM_CONSOLE_PRESENTATION_REPORT_PATH", presentation_report_path,
-            (DWORD)sizeof(presentation_report_path));
-        if (presentation_report_length != 0u &&
-            presentation_report_length < sizeof(presentation_report_path))
-            observed_console_mouse_input_ready = wait_for_console_mouse_mode(input,
-                &observed_console_input_mode,
-                OBSERVATION_INPUT_READY_TIMEOUT_MS);
+        observed_console_mouse_input_ready = wait_for_console_mouse_mode(input,
+            &observed_console_input_mode, OBSERVATION_INPUT_READY_TIMEOUT_MS);
         if (observed_console_mouse_input_ready)
             observed_console_mouse_input_delivered = write_console_mouse_sequence(
-                input, presentation_report_path);
+                input, argv[3]);
         if (observed_console_mouse_input_delivered)
             write_console_snapshot(output, console_mouse_postinput_snapshot_path);
     }

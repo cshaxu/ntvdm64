@@ -20,29 +20,6 @@ extern PCONSOLERECORD DOSHead;
 extern RTL_CRITICAL_SECTION BaseSrvWOWCriticalSection;
 extern RTL_CRITICAL_SECTION BaseSrvDOSCriticalSection;
 
-/* Default-off evidence at the original Base VDM request boundary. It writes
- * only operation state and status, never command text, guest addresses or
- * handles. */
-static void service_trace_operation(const char *phase,ULONG state,NTSTATUS status)
-{
-    CHAR path[MAX_PATH],line[160];
-    DWORD length,written,saved=GetLastError();
-    HANDLE file;
-    int bytes;
-    length=GetEnvironmentVariableA("MVDM_BASESRV_TRACE_PATH",path,sizeof(path));
-    if (!length || length>=sizeof(path)) goto done;
-    bytes=wsprintfA(line,"BASESRV-S5 phase=%s state=%08lX status=%08lX\r\n",
-        phase,(unsigned long)state,(unsigned long)status);
-    if (bytes<=0 || (size_t)bytes>=sizeof(line)) goto done;
-    file=CreateFileA(path,FILE_APPEND_DATA,FILE_SHARE_READ,NULL,OPEN_ALWAYS,
-        FILE_ATTRIBUTE_NORMAL,NULL);
-    if (file!=INVALID_HANDLE_VALUE) {
-        (void)WriteFile(file,line,(DWORD)bytes,&written,NULL);
-        CloseHandle(file);
-    }
-done:
-    SetLastError(saved);
-}
 struct OPENNT_BASE_SERVICE {
     OPENNT_BASE_PROCESS_REGISTRY registry;
     OPENNT_BASE_RESERVATIONS *reservations;
@@ -164,8 +141,7 @@ static VOID CALLBACK service_worker_terminated(PVOID context,BOOLEAN fired)
     notify=watch->service->empty_notify;
     notify_context=watch->service->empty_notify_context;
     LeaveCriticalSection(&watch->service->lock);
-    service_trace_operation("worker-process-cleanup",0,STATUS_SUCCESS);
-    service_clear_management_labels(watch);
+service_clear_management_labels(watch);
     CloseHandle(watch->process.ProcessHandle);
     HeapFree(GetProcessHeap(),0,watch);
     if (notify) notify(notify_context);
@@ -328,8 +304,7 @@ static void service_abandon_launch(OPENNT_BASE_CONNECTION *connection)
         OpenNtBaseBindProcessRegistry(previous_registry);
         OpenNtBaseBindServerRequestThread(previous_thread);
         service_resources_release(&resources);
-        service_trace_operation("launcher-abandon",0,(NTSTATUS)message.ReturnValue);
-    }
+}
     if (connection->reservation && !claimed) {
         OpenNtBaseReservationRelease(connection->service->reservations,connection->reservation,
             (DWORD)connection->process.ClientId.UniqueProcess,connection->process.SequenceNumber);
@@ -772,8 +747,7 @@ DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *service,HANDLE process,
                     BaseSrvCleanupVDMResources(&connection->process);
                 } else {
                     InsertTailList(&service->worker_watches,&watch->link);
-                    service_trace_operation("worker-process-watch",0,STATUS_SUCCESS);
-                }
+}
             }
         }
         if (reserved_worker) CloseHandle(reserved_worker);
@@ -1120,12 +1094,7 @@ DWORD OpenNtBaseServiceCheck(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD 
     }
     LeaveCriticalSection(&connection->service->lock);
     if (status && !message.ReturnValue) message.ReturnValue=status;
-    if (separate_dos)
-        service_trace_operation("check-separate-dos-session",message.u.CheckVDM.VDMState,
-            (NTSTATUS)message.ReturnValue);
-    service_trace_operation("check-dispatched",message.u.CheckVDM.VDMState,
-        (NTSTATUS)message.ReturnValue);
-    if (!OpenNtBaseEncodeCheckReply(&message,request,generation,output,capacity,required))
+if (!OpenNtBaseEncodeCheckReply(&message,request,generation,output,capacity,required))
         return ERROR_INVALID_PARAMETER;
     if (NT_SUCCESS((NTSTATUS)message.ReturnValue) &&
         message.u.CheckVDM.VDMState==VDM_PRESENT_AND_READY) {
@@ -1295,8 +1264,7 @@ DWORD OpenNtBaseServiceGet(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD ge
         return ERROR_ACCESS_DENIED;
     error=OpenNtBasePrepareGetCommand(input,bytes,generation,&message,&state);
     if (error) return error;
-    service_trace_operation("get-prepared",message.u.GetNextVDMCommand.VDMState,STATUS_SUCCESS);
-    EnterCriticalSection(&connection->service->lock);
+EnterCriticalSection(&connection->service->lock);
     /* The original client sends -1 for the shared-WOW PIF/acquisition path;
      * that selects BaseSrv's WOW record and deliberately has no DOS Console.
      * Every other request retains the reservation's service-local Console
@@ -1319,9 +1287,7 @@ DWORD OpenNtBaseServiceGet(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD ge
     OpenNtBaseBindProcessRegistry(previous_registry);
     OpenNtBaseBindServerRequestThread(previous_thread);
     if (status && !message.ReturnValue) message.ReturnValue=status;
-    service_trace_operation("get-dispatched",message.u.GetNextVDMCommand.VDMState,
-        (NTSTATUS)message.ReturnValue);
-    if (!OpenNtBaseFinishGetCommand(&message,&state)) { error=ERROR_INVALID_DATA; goto done; }
+if (!OpenNtBaseFinishGetCommand(&message,&state)) { error=ERROR_INVALID_DATA; goto done; }
     if (message.u.GetNextVDMCommand.StdIn || message.u.GetNextVDMCommand.StdOut ||
         message.u.GetNextVDMCommand.StdErr) {
         HANDLE ids[3]={message.u.GetNextVDMCommand.StdIn,message.u.GetNextVDMCommand.StdOut,
@@ -1332,9 +1298,7 @@ DWORD OpenNtBaseServiceGet(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD ge
                 connection->reservation,ids[index]) &&
             OpenNtBaseReservationResolveStream(connection->service->reservations,
                 connection->reservation,(uint32_t)(ULONG_PTR)ids[index],&standard[index])) {
-            service_trace_operation("get-unresolved-stream",message.u.GetNextVDMCommand.VDMState,
-                STATUS_INVALID_HANDLE);
-            error=ERROR_INVALID_HANDLE;goto done;
+error=ERROR_INVALID_HANDLE;goto done;
         }
         if (!OpenNtBaseReservationIsWorkerLocalStream(connection->service->reservations,
                 connection->reservation,ids[0]) &&
@@ -1349,9 +1313,7 @@ DWORD OpenNtBaseServiceGet(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD ge
      * copied VDM command record. */
     error=service_wait_resolve(connection,generation,message.u.GetNextVDMCommand.WaitObjectForVDM,
         BROKER_VDM_WORKER_WAIT,wait_event);
-    if (error) service_trace_operation("get-unresolved-wait",message.u.GetNextVDMCommand.VDMState,
-        STATUS_INVALID_HANDLE);
-    if (error) goto done;
+if (error) goto done;
     error=ERROR_SUCCESS;
 done:
     LeaveCriticalSection(&connection->service->lock);

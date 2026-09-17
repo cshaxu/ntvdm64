@@ -6,7 +6,6 @@
 #include "ntvdm-exe/session/session.h"
 
 #define MVDM_SOFTPC_EXECUTION_VERSION UINT32_C(1)
-#define SESSION_MECHANICAL_STATUS_SOFTPC_RETURNED UINT32_C(1)
 
 /* A composition-owned outer invocation.  It preserves the original
  * host_start_cpu() execution body and observes only its eventual return; it

@@ -7,13 +7,13 @@ const root=process.cwd(), product=path.resolve(process.env.OPENNT_BROKER_PRODUCT
 const build=path.resolve(process.env.OPENNT_VERSION_TEST_BUILD || 'build/M0-T412/S9/version-negative');
 const logs=path.resolve(process.env.OPENNT_VERSION_TEST_LOGS || 'O:/winnt/logs/m0-t412-s9-version-negative');
 fs.mkdirSync(build,{recursive:true});fs.mkdirSync(logs,{recursive:true});
-const source=fs.readFileSync('src/basesrv/main.c','utf8');
+const source=fs.readFileSync('src/basesrv-exe/main.c','utf8');
 const header=fs.readFileSync('src/product-abi/version.h','utf8');
 const version=header.match(/#define APP_VERSION "(0\.0\.[0-9]+)"/)[1];
 const protocol=Number(header.match(/#define APP_PROTOCOL_VERSION ([0-9]+)u/)[1]);
-const active=fs.readFileSync('docs/states/CURRENT.md','utf8').match(/\*\*Active: M[0-9]+ T([0-9]+) S[0-9]+\./);
+const active=fs.readFileSync('docs/states/CURRENT.md','utf8').match(/\*\*Active: M[0-9]+ T([0-9]+) S[0-9]+(?:\.|\*\*)/);
 if(active)assert.equal(version,`0.0.${active[1]}`,'Application version must match admitted T');
-const idl=fs.readFileSync('src/basesrv/transport/service.idl','utf8');
+const idl=fs.readFileSync('src/basesrv-exe/transport/service.idl','utf8');
 assert(idl.includes(`version(${protocol}.0)`),'RPC major and protocol must agree');
 assert.match(idl,/application_version\[32\]/);
 assert.match(header,/#define APP_VERSION_BYTES 32u/);
@@ -32,13 +32,19 @@ const variants=[
     ['reply-protocol','*server_protocol=APP_PROTOCOL_VERSION;','*server_protocol=APP_PROTOCOL_VERSION+1;'],
     ['legacy-interface',null,null]
 ];
+function mutateConnect(from,to) {
+    const start=source.indexOf('error_status_t Server_Connect');
+    assert.notEqual(start,-1,'Server_Connect must exist');
+    const head=source.slice(0,start),tail=source.slice(start);
+    assert.equal(tail.split(from).length,2,`Unique Connect mutation: ${from}`);
+    return head+tail.replace(from,to);
+}
 try {
     fs.writeFileSync(path.join(build,'legacy.idl'),idl.replace(`version(${protocol}.0)`,'version(1.0)'));
     compile('midl.exe /nologo /env win32 /target NT100 /prefix client Client_ /prefix server Server_ /h legacy.h /cstub legacy_c.c /sstub legacy_s.c legacy.idl');
     compile(`cl.exe /nologo /c /MT /W4 /I "${product}/obj/basesrv" /I "${root}/src" legacy_s.c /Folegacy-stub.obj`);
     for (const [name,from,to] of variants) {
-        if(from) assert.equal(source.split(from).length,2,`Unique mutation: ${name}`);
-        const body=from?source.replace(from,to):source.replace('"service.h"','"legacy.h"').replaceAll(`Server_vdm_service_v${protocol}_0_s_ifspec`,'Server_vdm_service_v1_0_s_ifspec');
+        const body=from?mutateConnect(from,to):source.replace('"service.h"','"legacy.h"').replaceAll(`Server_vdm_service_v${protocol}_0_s_ifspec`,'Server_vdm_service_v1_0_s_ifspec');
         fs.writeFileSync(path.join(build,`${name}.c`),body);
         compile(`cl.exe /nologo /c /MT /W4 /we4013 /I "${product}/obj/basesrv" /I "${root}/src" ${name}.c /Fo${name}.obj`);
         const stub=name==='legacy-interface'?'legacy-stub.obj':`"${product}/obj/basesrv/stub.obj"`;
@@ -46,10 +52,8 @@ try {
     }
 } finally {fs.closeSync(compileLog);}
 for (const [name] of variants) {
-    const trace=path.join(logs,`${name}.trace.log`);
-    assert(!fs.existsSync(trace),'Use a fresh observation directory');
     const server=spawn(path.join(build,`${name}.exe`),[],{cwd:build,windowsHide:true,
-        env:{...process.env,MVDM_BASESRV_TRACE_PATH:trace},stdio:['ignore','pipe','pipe']});
+        env:process.env,stdio:['ignore','pipe','pipe']});
     let output='',timer;
     const done=new Promise(resolve=>server.once('close',resolve));
     server.stdout.on('data',d=>output+=d);server.stderr.on('data',d=>output+=d);
@@ -72,9 +76,6 @@ for (const [name] of variants) {
         clearTimeout(timer);if(server.exitCode===null)server.kill();await done;
         fs.writeFileSync(path.join(logs,`${name}-server.log`),output);
     }
-    const events=fs.existsSync(trace)?fs.readFileSync(trace,'utf8'):'';
-    assert(!/phase=(?:check|get|prepare|reserve|update)\b/.test(events),'No task admitted by rejected peer');
-    if(name.startsWith('reply-')) assert.match(events,/disconnect/,'Rejected successful context must be disconnected');
     console.log(`PASS ${name}: launcher and worker reject before task delivery, no launcher retry`);
 }
-assert.equal(fs.readFileSync('src/basesrv/main.c','utf8'),source,'Production source must be unchanged');
+assert.equal(fs.readFileSync('src/basesrv-exe/main.c','utf8'),source,'Production source must be unchanged');

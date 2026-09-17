@@ -6,8 +6,6 @@
 #include "insignia.h"
 #include "host_def.h"
 #include <nt_thred.h>
-/* DIVERGENCE(MVDM-HOST-DIV-266): preserve original WOW loader outcomes. */
-#include "mvdm_softpc_physical_mapping.h"
 
 #ifndef MONITOR
 #include <gdpvar.h>
@@ -82,7 +80,6 @@ DATA OBJECTS      : None
 #include "yoda.h"
 /* DIVERGENCE(MVDM-HOST-DIV-164): fixed-container observation sink only;
    the original selector/service routing and return sequence remain unchanged. */
-#include "mvdm_softpc_termination.h"
 
 
 /* [3.1.2 DECLARATIONS]                                                 */
@@ -155,10 +152,7 @@ void MS_bop_0(void) {
                                          1,
                                          FALSE
                                          ));
-    /* DIVERGENCE(MVDM-HOST-DIV-164): state-neutral reached-ingress evidence. */
-    mvdm_softpc_record_bop_dispatch(0x50u, (unsigned int)DemCmd,
-        (unsigned int)getCS(), (unsigned int)getIP(),
-        (unsigned int)getDS(), (unsigned int)getDX());
+
     DemDispatch( DemCmd );
     setIP((USHORT)(getIP() + 1));
 
@@ -184,15 +178,13 @@ void MS_bop_1(void) {
      * ingress.  The report path is captured before COMMAND constructs the
      * guest environment, and the observation neither changes registers nor
      * affects the loader/dispatch result. */
-    mvdm_softpc_record_wow_bop_entry((unsigned int)getCS(),
-        (unsigned int)getIP());
+
 
     if (!WowModeInitialized) {
     //Load the WOW DLL
     if ((hWOWDll = SafeLoadLibrary("WOW32")) == NULL)
     {
-        /* DIVERGENCE(MVDM-HOST-DIV-266): before any cleanup changes LastError. */
-        mvdm_softpc_mapping_observe(MVDM_MAPPING_WOW_FAILURE, "wow.load.failed", GetLastError(), 0, 0);
+
 #ifndef PROD
         HostDebugBreak();
 #endif
@@ -203,8 +195,7 @@ void MS_bop_1(void) {
     // Get the init entry point and dispatch entry point
     if ((WOWInitEntry = (MYFARPROC)GetProcAddress(hWOWDll, "W32Init")) == NULL)
     {
-        /* DIVERGENCE(MVDM-HOST-DIV-266): observation only. */
-        mvdm_softpc_mapping_observe(MVDM_MAPPING_WOW_FAILURE, "wow.W32Init.missing", GetLastError(), 0, 0);
+
 #ifndef PROD
         HostDebugBreak();
 #endif
@@ -218,8 +209,7 @@ void MS_bop_1(void) {
        export address and call path; no WOW provider is enabled by this cast. */
     if ((WOWDispatchEntry = (MYFARPROC)GetProcAddress(hWOWDll, "W32Dispatch")) == NULL)
     {
-        /* DIVERGENCE(MVDM-HOST-DIV-266): observation only. */
-        mvdm_softpc_mapping_observe(MVDM_MAPPING_WOW_FAILURE, "wow.W32Dispatch.missing", GetLastError(), 0, 0);
+
 #ifndef PROD
         HostDebugBreak();
 #endif
@@ -231,8 +221,7 @@ void MS_bop_1(void) {
     //Get Comms functions
     if ((GetCommHandle = (GCHfn) GetProcAddress(hWOWDll, "GetCommHandle")) == NULL)
     {
-        /* DIVERGENCE(MVDM-HOST-DIV-266): observation only. */
-        mvdm_softpc_mapping_observe(MVDM_MAPPING_WOW_FAILURE, "wow.GetCommHandle.missing", GetLastError(), 0, 0);
+
 #ifndef PROD
         HostDebugBreak();
 #endif
@@ -243,8 +232,7 @@ void MS_bop_1(void) {
 
     if ((GetCommShadowMSR = (GCSfn) GetProcAddress(hWOWDll, "GetCommShadowMSR")) == NULL)
     {
-        /* DIVERGENCE(MVDM-HOST-DIV-266): observation only. */
-        mvdm_softpc_mapping_observe(MVDM_MAPPING_WOW_FAILURE, "wow.GetCommShadowMSR.missing", GetLastError(), 0, 0);
+
 #ifndef PROD
         HostDebugBreak();
 #endif
@@ -258,8 +246,7 @@ void MS_bop_1(void) {
                                                     "W32HungAppNotifyThread");
     if (!pW32HungAppNotifyThread)
     {
-        /* DIVERGENCE(MVDM-HOST-DIV-266): observation only. */
-        mvdm_softpc_mapping_observe(MVDM_MAPPING_WOW_FAILURE, "wow.HungAppNotify.missing", GetLastError(), 0, 0);
+
 #ifndef PROD
         HostDebugBreak();
 #endif
@@ -272,8 +259,7 @@ void MS_bop_1(void) {
     // Call the init routine
     if ((*WOWInitEntry)() == FALSE)
     {
-        /* DIVERGENCE(MVDM-HOST-DIV-266): FALSE is the original result. */
-        mvdm_softpc_mapping_observe(MVDM_MAPPING_WOW_FAILURE, "wow.W32Init.false", 0, 0, 0);
+
 #ifndef PROD
         HostDebugBreak();
 #endif
@@ -282,8 +268,7 @@ void MS_bop_1(void) {
     }
 
     WowModeInitialized = TRUE;
-    /* DIVERGENCE(MVDM-HOST-DIV-266): completed original initialization. */
-    mvdm_softpc_mapping_observe(MVDM_MAPPING_WOW_READY, "wow.ready", 0, 0, 0);
+
     }
 
 #if !defined(CPU_40_STYLE) || defined(CCPU)
@@ -352,17 +337,10 @@ void MS_bop_4(void)
     IMPORT BOOL CmdDispatch(ULONG);
 
     sas_load( ((ULONG)getCS()<<4) + getIP(), &Command);
-    /* DIVERGENCE(MVDM-HOST-DIV-164): state-neutral reached-ingress evidence. */
-    mvdm_softpc_record_bop_dispatch(0x54u, (unsigned int)Command,
-        (unsigned int)getCS(), (unsigned int)getIP(),
-        (unsigned int)getDS(), (unsigned int)getDX());
+
     CmdDispatch((ULONG) Command);
     setIP((USHORT)(getIP() + 1));
-    /* DIVERGENCE(MVDM-HOST-DIV-164): state-neutral post-return evidence. */
-    mvdm_softpc_record_bop_return(0x54u, (unsigned int)Command,
-        (unsigned int)getCS(), (unsigned int)getIP(),
-        (unsigned int)getAX(), (unsigned int)getCF(),
-        (unsigned int)getIF());
+
 }
 
 
@@ -764,7 +742,7 @@ void MS_bop_E(void)
         * copies selected-map offsets under the live original CS through
         * bounded leases and cannot alter this BOP's return, UMB, DEM, CPU or
         * guest state. */
-       mvdm_softpc_record_config_done((uint16_t)getCS());
+
        }
    else {
 #ifndef PROD
@@ -782,13 +760,9 @@ void MS_bop_F(void)
      * BOP 5F hands the selected KIO and IRET-BOP tables to the original C
      * BIOS; observing its already-live register inputs does not participate
      * in vector setup or alter its return state. */
-    mvdm_softpc_record_bop_dispatch(0x5fu, (unsigned int)getAX(),
-        (unsigned int)getCS(), (unsigned int)getIP(),
-        (unsigned int)getDS(), (unsigned int)getSI());
+
     kb_setup_vectors();
-    mvdm_softpc_record_bop_return(0x5fu, (unsigned int)getAX(),
-        (unsigned int)getCS(), (unsigned int)getIP(),
-        (unsigned int)getAX(), (unsigned int)getCF(), (unsigned int)getIF());
+
 
 
 #ifdef MONITOR

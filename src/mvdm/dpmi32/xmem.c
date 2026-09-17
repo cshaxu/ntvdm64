@@ -30,7 +30,6 @@ Revision History:
 #pragma hdrstop
 #include "softpc.h"
 #include <malloc.h>
-#include "mvdm_softpc_termination.h"
 
 //
 // Xmem structure

@@ -40,8 +40,6 @@ int mvdm_softpc_execution_run_until_return(session *owner)
         return 0;
     }
     if (setjmp(owner->termination_escape) != 0) {
-        session_record_mechanical_resume_status(owner,
-            SESSION_MECHANICAL_STATUS_SOFTPC_RETURNED);
         mvdm_softpc_execution_close_original_host();
         session_disarm_termination_escape(owner);
         if (did_memory_bind) mvdm_softpc_guest_memory_end(owner);
@@ -52,8 +50,6 @@ int mvdm_softpc_execution_run_until_return(session *owner)
     /* The original host entry owns CPU execution and may return only at its
      * original CCPU boundary.  This bridge owns no CPU, BOP or BIOS meaning. */
     host_start_cpu();
-    session_record_mechanical_resume_status(owner,
-        SESSION_MECHANICAL_STATUS_SOFTPC_RETURNED);
     mvdm_softpc_execution_close_original_host();
     session_disarm_termination_escape(owner);
     if (did_memory_bind) mvdm_softpc_guest_memory_end(owner);

@@ -21,7 +21,6 @@
 #include <vrnmpipe.h>
 #include <exterr.h>
 #include <mvdm.h>
-#include <mvdm_softpc_termination.h>
 
 BOOL (*VrInitialized)(VOID);  // POINTER TO FUNCTION
 extern BOOL IsVdmRedirLoaded(VOID);
@@ -151,8 +150,6 @@ BOOL    bufferLeaseActive;
     usDS = getDS();
     usDX = getDX();
     bufferLeaseActive = FALSE;
-    mvdm_softpc_record_dem_read(usDS, usDX, getCX(), getBX(), getSI(), 0u,
-        0u, getAX(), getCF());
     /* DIVERGENCE(MVDM-HOST-DIV-195): the source passes a durable guest alias
      * to synchronous host I/O.  Retain its ReadFile/named-pipe/CF/AX order,
      * but hold one bounded writable session lease only for this call. */
@@ -252,13 +249,9 @@ readFailureExit:
         if (GetLastError() == ERROR_BROKEN_PIPE)  {
              setAX(0);
              setCF(0);
-             mvdm_softpc_record_dem_read(usDS, usDX, getCX(), getBX(), getSI(),
-                 0u, 2u, getAX(), getCF());
              return;
          }
         demClientError(hFile, (CHAR)-1);
-        mvdm_softpc_record_dem_read(usDS, usDX, getCX(), getBX(), getSI(),
-            0u, 2u, getAX(), getCF());
         return ;
     }
 
@@ -273,8 +266,6 @@ readSuccessExit:
     }
     setCF(0);
     setAX((USHORT)dwBytesRead);
-    mvdm_softpc_record_dem_read(usDS, usDX, getCX(), getBX(), getSI(),
-        (USHORT)dwBytesRead, 1u, getAX(), getCF());
     return;
 }
 
@@ -310,10 +301,6 @@ DWORD	dwErrCode;
 
     hFile = GETHANDLE (getAX(),getBP());
     lpBuf  = (LPVOID) GetVDMAddr (getDS(),getDX());
-    /* DIVERGENCE(MVDM-HOST-DIV-205): default-off scalar-only observation;
-       it neither retains the guest buffer nor changes this write contract. */
-    mvdm_softpc_record_dem_write(getDS(), getDX(), getCX(), getBX(), getSI(),
-        0u, getAX(), getCF());
 
 
     //
@@ -389,8 +376,6 @@ writeFailureExit:
 writeSuccessExit:
     setCF(0);
     setAX((USHORT)dwBytesWritten);
-    mvdm_softpc_record_dem_write(getDS(), getDX(), getCX(), getBX(), getSI(),
-        1u, getAX(), getCF());
     return;
 }
 
@@ -430,24 +415,18 @@ DWORD   dwLoc;
 #endif
     hFile =  GETHANDLE (getAX(),getBP());
     lLoc  = (LONG)((((int)getCX()) << 16) + (int)getDX());
-    mvdm_softpc_record_dem_seek(getCX(), getDX(), getBL(), 0u, 0u, 0u,
-        getAX(), getCF());
 
     if ((dwLoc = SetFilePointer (hFile,
                                lLoc,
                                NULL,
                                (DWORD)getBL())) == -1L){
         demClientError(hFile, (CHAR)-1);
-        mvdm_softpc_record_dem_seek(getCX(), getDX(), getBL(), 2u, 0u, 0u,
-            getAX(), getCF());
         return ;
     }
 
     setCF(0);
     setAX((USHORT)dwLoc);
     setDX((USHORT)(dwLoc >> 16));
-    mvdm_softpc_record_dem_seek(getCX(), getDX(), getBL(), 1u,
-        (USHORT)(dwLoc >> 16), (USHORT)dwLoc, getAX(), getCF());
     return;
 }
 

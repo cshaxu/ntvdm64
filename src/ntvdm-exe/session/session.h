@@ -11,8 +11,6 @@
 #define SESSION_MAX_TEARDOWNS 8u
 #define SESSION_MAX_THREAD_HOOKS 8u
 #define SESSION_PRESENTATION_PALETTE_ENTRIES 256u
-#define SESSION_MECHANICAL_STATUS_NONE UINT32_MAX
-#define SESSION_MECHANICAL_STATUS_BACKEND_UNAVAILABLE UINT32_C(0xfffffffe)
 #define SESSION_FIRMWARE_ROOT_BYTES 1024u
 
 /* A fixed-width composition choice.  The numeric value is session-local
@@ -112,8 +110,6 @@ typedef struct session {
     uint32_t completion_code;
     uint32_t cancellation_reason;
     uint32_t machine_backend;
-    uint64_t mechanical_resume_budget;
-    uint32_t mechanical_resume_status;
     uint32_t video_event_active;
     uint32_t teardown_count;
     uint32_t thread_hook_count;
@@ -161,11 +157,6 @@ int session_unregister_thread_hook(session *instance, session_thread_bind_fn bin
     session_thread_unbind_fn unbind, void *context);
 int session_request_cancellation(session *instance, uint32_t reason);
 void session_complete(session *instance, uint32_t completion_code);
-int session_set_mechanical_resume_budget(session *instance, uint64_t budget);
-uint64_t session_mechanical_resume_budget(const session *instance);
-void session_record_mechanical_resume_status(session *instance,
-    uint32_t status);
-uint32_t session_mechanical_resume_status(const session *instance);
 int session_set_video_event_sink(session *instance, session_video_event_fn sink,
     void *context);
 int session_notify_video_event(session *instance,

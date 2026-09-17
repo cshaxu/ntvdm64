@@ -16,10 +16,6 @@ void mvdm_debugger_private_transport_unavailable(const char *origin)
 {
     session *owner = session_thread_current();
 
-    if (owner != NULL)
-        session_record_mechanical_resume_status(owner,
-            SESSION_MECHANICAL_STATUS_BACKEND_UNAVAILABLE);
-    mvdm_softpc_set_termination_origin(origin);
     (void)mvdm_softpc_terminate_current_session(0u,
         (uint32_t)ERROR_CALL_NOT_IMPLEMENTED);
     SetLastError(ERROR_CALL_NOT_IMPLEMENTED);

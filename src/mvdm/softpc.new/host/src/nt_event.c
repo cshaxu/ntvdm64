@@ -55,8 +55,8 @@
 
 #include "nt_mouse.h"
 #include "nt_event.h"
-#include "mvdm_softpc_event_thread.h"
 #include "mvdm_softpc_termination.h"
+#include "mvdm_softpc_event_thread.h"
 #include "nt_vdd.h"
 #include "nt_timer.h"
 
@@ -1085,10 +1085,6 @@ void nt_key_down_action(PKEY_EVENT_RECORD KeyEvent)
     ATcode = KeyMsgToKeyCode(KeyEvent);
 
     if(ATcode) {
-       /* DIVERGENCE(MVDM-HOST-DIV-207): fixed-container diagnostic only.
-        * The original scan-code conversion and callback remain unchanged;
-        * copy only the resulting byte before the original device call. */
-       mvdm_softpc_record_console_key((unsigned int)ATcode, 1u);
        (*host_key_down_fn_ptr)(ATcode);
     }
 
@@ -1105,9 +1101,6 @@ void nt_key_up_action(PKEY_EVENT_RECORD KeyEvent)
     ATcode = KeyMsgToKeyCode(KeyEvent);
 
     if(ATcode) {
-       /* DIVERGENCE(MVDM-HOST-DIV-207): same scalar-only witness for the
-        * original key-up callback; no event, device, or guest state changes. */
-       mvdm_softpc_record_console_key((unsigned int)ATcode, 0u);
        (*host_key_up_fn_ptr)(ATcode);
     }
 
@@ -1127,9 +1120,6 @@ void nt_process_mouse(PMOUSE_EVENT_RECORD MouseEvent)
     POINT mouse_pos;
     UCHAR mouse_button_left, mouse_button_right;
 
-    mvdm_softpc_record_mouse_chain(1u, MouseEvent->dwMousePosition.X,
-        MouseEvent->dwMousePosition.Y, MouseEvent->dwButtonState,
-        MouseEvent->dwEventFlags);
 
     host_ica_lock();
 
@@ -1248,8 +1238,6 @@ void nt_process_mouse(PMOUSE_EVENT_RECORD MouseEvent)
     MouseEventBuffer[LastMouseInx].mouse_button_right = mouse_button_right;
 
     DoMouseInterrupt();
-    mvdm_softpc_record_mouse_chain(2u, mouse_pos.x, mouse_pos.y,
-        MouseEvent->dwButtonState, MouseEvent->dwEventFlags);
 
     host_ica_unlock();
 }

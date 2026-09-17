@@ -13,10 +13,6 @@
 #define SCREEN_BYTES 32768u
 #define RUN_TIMEOUT_MS 30000u
 
-static const char *const diagnostic_variables[] = {
-    "MVDM_EXCEPTION_REPORT_PATH", "MVDM_MAIN_RETURN_REPORT_PATH", "MVDM_BOP_RETURN_REPORT_PATH", "MVDM_STREAM_IO_REPORT_PATH", "MVDM_BASE_VDM_REPORT_PATH", "MVDM_DEM_OPEN_REPORT_PATH", "MVDM_CONFIG_DONE_REPORT_PATH", "MVDM_SAS_STORE_REPORT_PATH", "MVDM_SAS_STORE_LINEAR", "MVDM_DEM_READ_REPORT_PATH", "MVDM_DEM_SEEK_REPORT_PATH", "MVDM_DEM_IOCTL_REPORT_PATH", "MVDM_SESSION_DISPOSE_REPORT_PATH", "MVDM_NATIVE_CHILD_REPORT_PATH", "MVDM_CONSOLE_PRESENTATION_REPORT_PATH"
-};
-
 static BOOL append_quoted(char *line, size_t capacity, size_t *used, const char *argument)
 {
     size_t count = strlen(argument);
@@ -40,31 +36,14 @@ static BOOL read_console(HANDLE output, char *text, DWORD capacity)
     if (!ReadConsoleOutputCharacterA(output, text, capacity - 1u, origin, &count)) return FALSE;
     text[count] = '\0'; return TRUE;
 }
-static void save_and_clear_diagnostics(char values[][MAX_PATH], BOOL present[])
-{
-    DWORD index;
-    for (index = 0u; index < ARRAYSIZE(diagnostic_variables); ++index) {
-        DWORD length = GetEnvironmentVariableA(diagnostic_variables[index], values[index], MAX_PATH);
-        present[index] = length != 0u && length < MAX_PATH;
-        SetEnvironmentVariableA(diagnostic_variables[index], NULL);
-    }
-}
-static void restore_diagnostics(const char values[][MAX_PATH], const BOOL present[])
-{
-    DWORD index;
-    for (index = 0u; index < ARRAYSIZE(diagnostic_variables); ++index)
-        SetEnvironmentVariableA(diagnostic_variables[index], present[index] ? values[index] : NULL);
-}
 static int run_case(const char *product, const char *working_directory,
                     const char *command, const char *expected, HANDLE input,
                     HANDLE output, char *screen, DWORD screen_capacity)
 {
-    STARTUPINFOA startup = { sizeof(startup) }; PROCESS_INFORMATION child = { 0 }; char command_line[4096]; char values[ARRAYSIZE(diagnostic_variables)][MAX_PATH]; BOOL present[ARRAYSIZE(diagnostic_variables)]; size_t used = 0u; DWORD wait_status, exit_code = 0u;
+    STARTUPINFOA startup = { sizeof(startup) }; PROCESS_INFORMATION child = { 0 }; char command_line[4096]; size_t used = 0u; DWORD wait_status, exit_code = 0u;
     command_line[0] = '\0'; if (!append_quoted(command_line, sizeof(command_line), &used, product) || !append_quoted(command_line, sizeof(command_line), &used, command)) return 10;
     clear_console(output); startup.dwFlags = STARTF_USESTDHANDLES; startup.hStdInput = input; startup.hStdOutput = output; startup.hStdError = output;
-    save_and_clear_diagnostics(values, present);
-    if (!CreateProcessA(NULL, command_line, NULL, NULL, TRUE, 0, NULL, working_directory, &startup, &child)) { restore_diagnostics(values, present); return 11; }
-    restore_diagnostics(values, present);
+    if (!CreateProcessA(NULL, command_line, NULL, NULL, TRUE, 0, NULL, working_directory, &startup, &child)) return 11;
     wait_status = WaitForSingleObject(child.hProcess, RUN_TIMEOUT_MS); if (wait_status == WAIT_OBJECT_0) GetExitCodeProcess(child.hProcess, &exit_code);
     if (wait_status == WAIT_TIMEOUT) {
         TerminateProcess(child.hProcess, 0x53504354u);

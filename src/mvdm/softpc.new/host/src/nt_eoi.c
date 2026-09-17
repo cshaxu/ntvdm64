@@ -35,7 +35,6 @@
 #include "nt_uis.h"
 #include "nt_reset.h"
 #include "nt_eoi.h"
-#include <mvdm_softpc_termination.h>
 
 // from monitor.lib
 HANDLE ThreadLookUp(PVOID);
@@ -205,11 +204,6 @@ VOID host_EOI_hook(int IrqLine, int CallCount)
          return;
          }
 
-     /* DIVERGENCE(MVDM-HOST-DIV-208): default-off scalar observation of the
-      * original EOI-hook dispatch.  It copies no guest data and does not
-      * alter registration, callback selection, or the original call below. */
-     mvdm_softpc_record_host_eoi_hook(IrqLine, CallCount,
-         EoiHooks[IrqLine] != NULL ? 1u : 0u);
      if (EoiHooks[IrqLine]) {
          (*EoiHooks[IrqLine])(IrqLine, CallCount);
          }
@@ -251,11 +245,6 @@ BOOL host_DelayHwInterrupt(int IrqLineNum, int CallCount, ULONG Delay)
    //
 
    IrqLine = 1 << IrqLineNum;
-   /* DIVERGENCE(MVDM-HOST-DIV-211): default-off scalar observation of the
-    * original IRQ1 delayed-interrupt admission.  It leaves timing, event
-    * scheduling and original PIC invocation unchanged. */
-   if (IrqLineNum == 1)
-       mvdm_softpc_record_keyboard_delay(1u, Delay, DelayIrqLine);
    if (!(DelayIrqLine & IrqLine) || Delay == 0xffffffff) {
 
        //
@@ -310,9 +299,6 @@ BOOL host_DelayHwInterrupt(int IrqLineNum, int CallCount, ULONG Delay)
                                                 Delay - 200,
                                                 IrqLineNum
                                                 );
-        if (IrqLineNum == 1)
-            mvdm_softpc_record_keyboard_delay(2u, Delay, DelayIrqLine);
-
         //
         // Keep Wow Tasks active
         //
@@ -354,8 +340,6 @@ void DelayIrqQuickEvent(long param)
    host_ica_lock();
 
    DelayHandle[IrqLineNum] = 0;
-   if (IrqLineNum == 1)
-       mvdm_softpc_record_keyboard_delay(3u, 0u, DelayIrqLine);
    ica_RestartInterrupts(1 << IrqLineNum);
 
    host_ica_unlock();

@@ -381,10 +381,8 @@ int main(void)
         session_initialize(&owner, 1u);
         if (!session_select_machine_backend(&owner, SESSION_MACHINE_BACKEND_SOFTPC) ||
             !session_activate(&owner) ||
-            !mvdm_softpc_execution_run_until_return(&owner) ||
-            session_mechanical_resume_status(&owner) !=
-                SESSION_MECHANICAL_STATUS_SOFTPC_RETURNED) {
-            fputs("typed SoftPC outer return was not recorded\n", stderr);
+            !mvdm_softpc_execution_run_until_return(&owner)) {
+            fputs("SoftPC outer return failed\n", stderr);
             sas_term();
             return 1;
         }

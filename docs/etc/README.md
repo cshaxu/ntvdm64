@@ -2,6 +2,7 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T420 S13 DEM and residual-diff recovery](evidence/m0-t420-s13-dem-and-residual-diff-recovery.md) | M0 T420 S13 | Completes DEM and removes S1--S12 compile-only/default-off residue, including the full analogous callback-ABI sweep. | Retain with T420 closure. |
 | [T420 S12 host package recovery](evidence/m0-t420-s12-host-package-recovery.md) | M0 T420 S12 | Restores proven OpenNT host-source formatting, freezes the complete host-package difference ledger, and records final x86/product regression. | Retain through T420 package completion. |
 | [T420 S11 debug package recovery](evidence/m0-t420-s11-debug-package-recovery.md) | M0 T420 S11 | Restores complete selected SoftPC debug-package composition and records x86/product regression. | Retain through T420 package completion. |
 | [T420 S10 DOS package recovery](evidence/m0-t420-s10-dos-package-recovery.md) | M0 T420 S10 | Freezes the complete selected DOS unit, restores its pinned OpenNT formatting, and records direct x86 compilation, fresh product linkage and deployed regression. | Retain through T420 package completion. |

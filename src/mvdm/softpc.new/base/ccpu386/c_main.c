@@ -32,7 +32,6 @@ Actual worker routines are spun off elsewhere.
 #include  <config.h>
 #ifdef NTVDM
 #include <ntthread.h>
-#include <mvdm_softpc_termination.h>
 #endif
 
 #include <c_main.h>	/* C CPU definitions-interfaces */
@@ -238,9 +237,6 @@ LOCAL IU16 cpu_hw_interrupt_number;
 /* This is a default-off attribution latch only.  `NEXT_INST` observes the
  * post-instruction CPU position, while `DECODE` is the last source-owned
  * point at which the preceding instruction address is known. */
-LOCAL IU16 mvdm_cpu_decode_origin_cs;
-LOCAL IU32 mvdm_cpu_decode_origin_ip;
-LOCAL IBOOL mvdm_cpu_decode_origin_valid = FALSE;
 #endif
 #if defined(SFELLOW)
 extern IU32	cpu_interrupt_map ;
@@ -880,24 +876,6 @@ DO_INST:
     */
 DECODE:
 
-#ifdef NTVDM
-   /* The one observed #UD frame names 0000:0036, inside the IVT.  Keep a
-    * bounded preceding-origin ladder only while decoding that impossible
-    * first 64-byte region, so its first record identifies the actual entry.
-    * It arrives at DECODE without a completed CALL/RETF/IRET/INT witness.
-    * Before replacing the prior decode origin, retain that immediately
-    * preceding instruction address for the existing default-off, target-
-    * latched observer.  This does not participate in instruction execution
-    * or retain any guest state beyond the next decode iteration. */
-   if (mvdm_cpu_decode_origin_valid && getCS() == 0u && getEIP() < 0x0040u)
-      mvdm_softpc_record_cpu_low_fault_transfer("DECODE",
-         (unsigned int)mvdm_cpu_decode_origin_cs,
-         (unsigned int)mvdm_cpu_decode_origin_ip,
-         (unsigned int)getCS(), (unsigned int)getEIP());
-   mvdm_cpu_decode_origin_cs = getCS();
-   mvdm_cpu_decode_origin_ip = getEIP();
-   mvdm_cpu_decode_origin_valid = TRUE;
-#endif
    opcode = GET_INST_BYTE(p);	/* get next byte */
    /*
       NB. Each opcode is categorised by a type, instruction name
@@ -3412,11 +3390,6 @@ TYPEC4:
 			    break;
 #endif /* SFELLOW */
 	  case 0xfe:
-		  /* DIVERGENCE(MVDM-HOST-DIV-203): fixed-container diagnosis
-		   * needs the source-owned CS:IP immediately before BOP FE takes
-		   * the original CCPU unwind.  This default-off scalar observer
-		   * neither routes the BOP nor changes CPU, guest, or session state. */
-		  mvdm_softpc_record_cpu_unsimulate(getCS(), getIP());
 		  c_cpu_unsimulate();
 			  /* Never returns (?) */
 		  default:
@@ -3717,12 +3690,6 @@ TYPED4:
 #ifndef	PIG
       if (ops[0].sng == 0xfe)
       {
-	      /* DIVERGENCE(MVDM-HOST-DIV-203): the ordinary decoded BOP path
-	       * reaches the same original CCPU unwind as the fast path above.
-	       * Keep the default-off scalar observation at both sites so a
-	       * fixed-container report identifies the actual source-owned exit
-	       * point without changing the decoded BOP or unwind semantics. */
-	      mvdm_softpc_record_cpu_unsimulate(getCS(), getIP());
 	      c_cpu_unsimulate();
       }
       in_C = 1;
@@ -4482,12 +4449,6 @@ TYPEFF_3:
    if (took_absolute_toc || took_relative_jump)
 #endif /* SYNCH_TIMERS */
 #ifndef SFELLOW
-   /* DIVERGENCE(MVDM-HOST-DIV-213): bounded, default-off scalar witness for
-    * the original CPU40 condition below.  It does not alter the interrupt
-    * map, guest flags, PIC state, instruction path, or acknowledge order. */
-   if ((c_cpu_event_snapshot() & CPU_HW_INT_MASK) && !GET_IF())
-      mvdm_softpc_record_cpu_hw_interrupt_deferred((unsigned int)GET_IF(),
-         (unsigned int)getCS(), (unsigned int)getIP());
    if (GET_IF() && c_cpu_take_event(CPU_HW_INT_MASK))
       {
 
@@ -4510,10 +4471,6 @@ TYPEFF_3:
 	 if (acknowledged_interrupt != -1)
 	 {
 	     cpu_hw_interrupt_number = (IU16)acknowledged_interrupt;
-	     /* DIVERGENCE(MVDM-HOST-DIV-207): default-off scalar-only witness after
-	      * the unchanged original PIC acknowledge and before the unchanged BIOS
-	      * interrupt transfer. */
-	     mvdm_softpc_record_cpu_hw_interrupt_service(cpu_hw_interrupt_number);
 	     EXT = EXTERNAL;
 	     SYNCH_TICK();
 	     /* DPMI registered a source-owned hardware handler through the original
@@ -4601,13 +4558,6 @@ TYPEFF_3:
 
 NEXT_INST:
 
-#ifdef NTVDM
-   if (mvdm_cpu_decode_origin_valid)
-      mvdm_softpc_record_cpu_low_fault_transfer("RETIRE",
-         (unsigned int)mvdm_cpu_decode_origin_cs,
-         (unsigned int)mvdm_cpu_decode_origin_ip,
-         (unsigned int)getCS(), (unsigned int)getEIP());
-#endif
    CCPU_save_EIP = GET_EIP();   /* to reflect IP change */
 
 #if defined(SFELLOW) && !defined(PROD)
@@ -4964,10 +4914,6 @@ LOCAL VOID
 	 in_C = 0;
 	 ccpu(FALSE);
 	 }
-	/* DIVERGENCE(MVDM-HOST-DIV-203): after the unchanged CCPU invocation
-	 * returns, record only its live scalar position for the fixed-container
-	 * diagnosis.  This does not select, resume, or terminate a CPU path. */
-	mvdm_softpc_record_cpu_simulate_return(getCS(), getIP());
       }
 
    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/

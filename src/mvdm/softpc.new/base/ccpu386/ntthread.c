@@ -71,10 +71,7 @@ void ccpu386foundnewthread()
 
     if (simstack == (ThreadSimBufPtr)0)
     {
-        /* DIVERGENCE(MVDM-HOST-DIV-116): sizeof is native-width on both
-         * supported hosts; retain the original diagnostic while using its
-         * matching C varargs conversion instead of the NT4 x86-only %d. */
-        fprintf(stderr, "ccpu386foundnewthread id:%#x cant malloc %zu bytes. Err:%#x\n", GetCurrentThreadId(), sizeof(ThreadSimBuf), GetLastError());
+        fprintf(stderr, "ccpu386foundnewthread id:%#x cant malloc %d bytes. Err:%#x\n", GetCurrentThreadId(), sizeof(ThreadSimBuf), GetLastError());
         return;
     }
     simstack->level = 0;

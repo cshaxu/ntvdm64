@@ -26,7 +26,6 @@ Revision History:
 /* DIVERGENCE(MVDM-HOST-DIV-164): default-off observation of the already
  * decoded DPMI selector.  It does not alter the original table, IP advance,
  * or provider call. */
-#include "mvdm_softpc_termination.h"
 /* CPU40 exposes these generated CCPU accessors through cpu4gen.h, which is
  * intentionally not part of the DPMI provider's public include surface. */
 extern void setLDT_SELECTOR(USHORT val);
@@ -107,13 +106,6 @@ Return Value:
 
     DBGTRACE(DPMI_DISPATCH_ENTRY, Index, 0, 0);
 
-    /* The original dispatcher has already consumed the one-byte subfunction
-     * into `Index`; record that existing scalar rather than reading guest
-     * memory again at the BOP ingress. */
-    mvdm_softpc_record_bop_dispatch(0x53u, (unsigned int)Index,
-        (unsigned int)getCS(), (unsigned int)getIP(),
-        (unsigned int)getDS(), (unsigned int)getDX());
-
     if (Index >= MAX_DPMI_BOP_FUNC) {
 #if DBG
         DbgPrint("NtVdm: Invalid DPMI BOP %lx\n", Index);
@@ -122,14 +114,6 @@ Return Value:
     }
 
     (*DpmiDispatchTable[Index])();
-
-    /* The original provider may transfer directly into protected guest code
-     * (notably 53:01), so record the state it has established rather than
-     * assuming that every DPMI service has ordinary call/return semantics. */
-    mvdm_softpc_record_bop_return(0x53u, (unsigned int)Index,
-        (unsigned int)getCS(), (unsigned int)getIP(),
-        (unsigned int)getAX(), (unsigned int)getCF(),
-        (unsigned int)getIF());
 
 }
 

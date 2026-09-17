@@ -40,7 +40,6 @@ Comments:
 #include <softpc.h>
 #include <dpmiint.h>
 #include <intapi.h>
-#include "mvdm_softpc_termination.h"
 
 
 VOID
@@ -80,11 +79,6 @@ Routine Description:
     Handlers[IntNumber].Flags = *(PWORD16)(StackPointer + 8);
     Handlers[IntNumber].CsSelector = *(PWORD16)(StackPointer + 4);
     Handlers[IntNumber].Eip = *(PDWORD16)(StackPointer);
-
-    mvdm_softpc_record_dpmi_interrupt_registration((unsigned int)IntNumber,
-        (unsigned int)Handlers[IntNumber].Flags,
-        (unsigned int)Handlers[IntNumber].CsSelector,
-        (uint32_t)Handlers[IntNumber].Eip);
 
     DBGTRACE(DPMI_SET_PMODE_INT_HANDLER, IntNumber,
                                          Handlers[IntNumber].CsSelector,
@@ -215,10 +209,6 @@ Arguments:
             FaultCS = *(PWORD16)(VdmStackPointer + 8);
             FaultIP = (ULONG)*(PWORD16)(VdmStackPointer + 6);
         }
-        mvdm_softpc_record_dpmi_unhandled_exception((unsigned int)XNumber,
-            (unsigned int)FaultCS, (uint32_t)FaultIP, (unsigned int)SegSs,
-            (uint32_t)(SEGMENT_IS_BIG(SegSs) ? getESP() : getSP()),
-            Frame32 ? 1u : 0u, (const uint16_t *)VdmStackPointer);
         DpmiFatalExceptionHandler(XNumber, VdmStackPointer);
         return;
     }
@@ -421,8 +411,6 @@ Notes:
             if (!NT_SUCCESS(Status)) {
                 setCX(0);
                 setDX(0);
-                mvdm_softpc_record_dpmi_pm_stack_info(LockedPMStackSel,
-                    (unsigned int)getCX(), (unsigned int)getDX(), 0u);
                 return;
             }
 
@@ -440,8 +428,6 @@ Notes:
 
         setCX(HIWORD(Cpu40PmStackInfoAddress));
         setDX(LOWORD(Cpu40PmStackInfoAddress));
-        mvdm_softpc_record_dpmi_pm_stack_info(LockedPMStackSel,
-            (unsigned int)getCX(), (unsigned int)getDX(), 1u);
         return;
     }
 #endif

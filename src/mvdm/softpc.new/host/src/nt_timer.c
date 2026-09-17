@@ -980,11 +980,6 @@ VdmUnhandledExceptionFilter(
 {
     LONG lRet;
 
-    /* DIVERGENCE(MVDM-HOST-DIV-159): preserve the original filter and
-     * termination result, but report its already-received exception identity
-     * through the fixed product console so the non-debug runtime container
-     * can attribute a pre-NTIO failure without a debugger or registry dump. */
-    mvdm_softpc_record_unhandled_exception(ExceptionInfo);
     SuspendTimerThread();
 
     lRet = UnhandledExceptionFilter(ExceptionInfo);

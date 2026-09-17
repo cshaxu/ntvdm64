@@ -31,7 +31,6 @@ Interrupt Support.
 #include <ccpusas4.h>
 #include <ccpupig.h>
 #include <fault.h>
-#include "mvdm_softpc_termination.h"
 #if defined(NTVDM) && defined(CPU_40_STYLE)
 extern BOOL host_swint_hook IPT1(IS32, int_no);
 #endif
@@ -233,9 +232,6 @@ IFN4(
       ivt_addr = (IU32)vector * 4;
       new_ip = (IU32)phy_read_word(ivt_addr);
       new_cs = phy_read_word(ivt_addr+2);
-      mvdm_softpc_record_cpu_low_fault_ivt_target((unsigned int)vector,
-         (unsigned int)new_ip, (unsigned int)new_cs,
-         (unsigned int)GET_CS_SELECTOR(), (unsigned int)GET_EIP());
 
 #ifdef	TAKE_REAL_MODE_LIMIT_FAULT
 	/*

@@ -72,52 +72,6 @@ static BOOL current_standard_console(HANDLE value,DWORD standard_id)
         GetConsoleMode(current,&mode);
 }
 
-/* Default-off adapter-boundary trace.  It records only three Boolean masks,
- * never a native handle, copied command byte, or guest address. */
-static void trace_standard_stream_classification(DWORD present,DWORD original,
-    DWORD current)
-{
-    char path[MAX_PATH],line[128];
-    DWORD bytes,written;
-    HANDLE file;
-    int length;
-
-    bytes=GetEnvironmentVariableA("MVDM_BASESRV_TRACE_PATH",path,sizeof(path));
-    if (!bytes || bytes>=sizeof(path)) return;
-    length=snprintf(line,sizeof(line),
-        "BASECLIENT-STREAMS present=%X original-console=%X current-console=%X state=copied\r\n",
-        (unsigned int)present,(unsigned int)original,(unsigned int)current);
-    if (length<=0 || (size_t)length>=sizeof(line)) return;
-    file=CreateFileA(path,FILE_APPEND_DATA,FILE_SHARE_READ,NULL,OPEN_ALWAYS,
-        FILE_ATTRIBUTE_NORMAL,NULL);
-    if (file==INVALID_HANDLE_VALUE) return;
-    (void)WriteFile(file,line,(DWORD)length,&written,NULL);
-    CloseHandle(file);
-}
-
-/* Default-off lifecycle observation at the finite BaseClient transport
- * boundary.  This deliberately records only original ExitVDM branch/result
- * scalars: no handle value, command payload, or guest state crosses it. */
-static void trace_exit_vdm(BOOL is_wow,DWORD error,ULONG close_worker_wait)
-{
-    char path[MAX_PATH],line[128];
-    DWORD bytes,written;
-    HANDLE file;
-    int length;
-
-    bytes=GetEnvironmentVariableA("MVDM_BASESRV_TRACE_PATH",path,sizeof(path));
-    if (!bytes || bytes>=sizeof(path)) return;
-    length=snprintf(line,sizeof(line),
-        "BASECLIENT-EXIT wow=%u error=%08lX close-worker-wait=%lu\r\n",
-        is_wow ? 1u : 0u,(unsigned long)error,(unsigned long)close_worker_wait);
-    if (length<=0 || (size_t)length>=sizeof(line)) return;
-    file=CreateFileA(path,FILE_APPEND_DATA,FILE_SHARE_READ,NULL,OPEN_ALWAYS,
-        FILE_ATTRIBUTE_NORMAL,NULL);
-    if (file==INVALID_HANDLE_VALUE) return;
-    (void)WriteFile(file,line,(DWORD)length,&written,NULL);
-    CloseHandle(file);
-}
-
 /* Generated client stubs own only their transient marshalling buffers. */
 void *__RPC_USER MIDL_user_allocate(size_t bytes) { return malloc(bytes); }
 void __RPC_USER MIDL_user_free(void *value) { free(value); }
@@ -186,9 +140,7 @@ static DWORD attach_standard_streams(PBASE_API_MSG message,ULONG receipts[3])
         RpcEndExcept
         if (error || !receipts[index]) break;
     }
-    trace_standard_stream_classification(present_mask,original_console_mask,
-        current_console_mask);
-    if (error || index!=3) {
+if (error || index!=3) {
         for (index=0;index<3;++index) if (receipts[index] &&
             !receipt_seen(receipts,index,receipts[index])) {
             RpcTryExcept { (void)Client_RevokeStream(client.binding,client.connection,
@@ -366,8 +318,7 @@ static NTSTATUS exit_command(PCSR_API_MSG message,ULONG length)
     }
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
-    trace_exit_vdm(is_wow,error,close_worker_wait);
-    if (error || close_worker_wait>1u || (close_worker_wait && !worker_wait_event)) goto done;
+if (error || close_worker_wait>1u || (close_worker_wait && !worker_wait_event)) goto done;
     exit_message->WaitObjectForVDM=close_worker_wait ? worker_wait_event : NULL;
     if (close_worker_wait) worker_wait_event=NULL;
     message->ReturnValue=STATUS_SUCCESS;

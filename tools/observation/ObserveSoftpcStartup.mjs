@@ -4,14 +4,14 @@ import { isAbsolute, relative, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 
 function usage() {
-  throw new Error('usage: node tools/observation/ObserveSoftpcStartup.mjs --launcher <observer.exe> --product <product.exe> --stage <runtime-dir> --report <result.txt> [--interactive | --interactive-script | --interactive-script-ver-only] [--product-command <declared-DOS-command>] [--observation-timeout-ms 10000..30000] [--minimal-host-environment] [--child-environment MVDM_SESSION_DISPOSE_REPORT_PATH=<absolute-path>|MVDM_DEM_OPEN_REPORT_PATH=<absolute-path>|MVDM_CONSOLE_PRESENTATION_REPORT_PATH=<absolute-path>]');
+  throw new Error('usage: node tools/observation/ObserveSoftpcStartup.mjs --launcher <observer.exe> --product <product.exe> --stage <runtime-dir> --report <result.txt> [--interactive | --interactive-script | --interactive-script-ver-only] [--product-command <declared-DOS-command>] [--observation-timeout-ms 10000..30000] [--minimal-host-environment]');
 }
 
 function sha256(path) {
   return createHash('sha256').update(readFileSync(path)).digest('hex');
 }
 
-const runtimeLogsRoot = resolve('O:/ntvdm64/logs');
+const runtimeLogsRoot = resolve('O:/winnt/logs');
 
 function isRuntimeLogPath(value) {
   const candidate = resolve(value);
@@ -62,7 +62,7 @@ for (let index = 2; index < process.argv.length; index += 1) {
   index += 1;
 }
 for (const key of Object.keys(options)) {
-  if (!['launcher', 'product', 'stage', 'report', 'interactive', 'interactiveScript', 'interactiveScriptVerOnly', 'minimalHostEnvironment', 'product-command', 'observation-timeout-ms', 'child-environment'].includes(key)) {
+  if (!['launcher', 'product', 'stage', 'report', 'interactive', 'interactiveScript', 'interactiveScriptVerOnly', 'minimalHostEnvironment', 'product-command', 'observation-timeout-ms'].includes(key)) {
     throw new Error(`unsupported observer option: --${key}`);
   }
 }
@@ -84,30 +84,6 @@ if (!isRuntimeLogPath(options.report)) {
   throw new Error(`observation report must be below ${runtimeLogsRoot}`);
 }
 mkdirSync(runtimeLogsRoot, { recursive: true });
-let childEnvironment = undefined;
-if (options['child-environment'] !== undefined) {
-  const names = [
-    'MVDM_SESSION_DISPOSE_REPORT_PATH',
-    'MVDM_NATIVE_CHILD_REPORT_PATH',
-    /* An already-existing default-off original DEM observer. This records
-     * only the source-owned path/scalar call boundary for fixed media. */
-    'MVDM_DEM_OPEN_REPORT_PATH',
-    'MVDM_CONSOLE_PRESENTATION_REPORT_PATH'
-  ];
-  const separator = options['child-environment'].indexOf('=');
-  const name = separator < 0 ? '' : options['child-environment'].slice(0, separator);
-  const reportPath = separator < 0 ? '' : options['child-environment'].slice(separator + 1);
-  if (!names.includes(name) || reportPath.length === 0) {
-    throw new Error('only an approved absolute diagnostic report path is permitted');
-  }
-  if (!resolve(reportPath) || resolve(reportPath) !== reportPath) {
-    throw new Error('child diagnostic report path must be absolute');
-  }
-  if (!isRuntimeLogPath(reportPath)) {
-    throw new Error(`child diagnostic report path must be below ${runtimeLogsRoot}`);
-  }
-  childEnvironment = { name, value: reportPath };
-}
 if (!existsSync(options.launcher) || !existsSync(options.product) || !existsSync(options.stage)) {
   throw new Error('launcher, product, and stage must already exist');
 }
@@ -165,11 +141,7 @@ const result = spawnSync(options.launcher, launcherArguments, {
   cwd: options.stage,
   encoding: 'utf8',
   windowsHide: false,
-  env: options.minimalHostEnvironment === undefined ?
-    (childEnvironment === undefined ? process.env : {
-      ...process.env,
-      [childEnvironment.name]: childEnvironment.value
-    }) : (() => {
+  env: options.minimalHostEnvironment === undefined ? process.env : (() => {
       const systemRoot = process.env.SystemRoot || process.env.SYSTEMROOT || 'C:\\Windows';
       const environment = {
         SystemRoot: systemRoot,
@@ -177,8 +149,6 @@ const result = spawnSync(options.launcher, launcherArguments, {
         ComSpec: `${systemRoot}\\System32\\cmd.exe`,
         PATH: `${systemRoot}\\System32`
       };
-      if (childEnvironment !== undefined)
-        environment[childEnvironment.name] = childEnvironment.value;
       return environment;
     })()
 });
@@ -186,7 +156,7 @@ writeFileSync(`${options.report}.json`, `${JSON.stringify({
   container: 'console-owning-nondebug',
   command: [options.launcher, ...launcherArguments],
   minimalHostEnvironment: options.minimalHostEnvironment === true,
-  childEnvironment: childEnvironment === undefined ? [] : [childEnvironment.name],
+  childEnvironment: [],
   stageManifestSha256: createHash('sha256').update(manifest).digest('hex'),
   fixedMediaManifestSha256,
   runtimeCompanionsManifestSha256,

@@ -23,22 +23,18 @@ Revision History:
 
 --*/
 
-typedef int (*VDM_HARDWARE_INT_HANDLER)(ULONG IntNumber);
-typedef int (*VDM_SOFTWARE_INT_HANDLER)(ULONG IntNumber);
-typedef int (*VDM_FAULT_HANDLER)(ULONG IntNumber, ULONG ErrorCode);
-
 NTSTATUS
 VdmInstallHardwareIntHandler(
-    VDM_HARDWARE_INT_HANDLER HwIntHandler
+    PVOID HwIntHandler
     );
 
 NTSTATUS
 VdmInstallSoftwareIntHandler(
-    VDM_SOFTWARE_INT_HANDLER SwIntHandler
+    PVOID SwIntHandler
     );
 
 NTSTATUS
 VdmInstallFaultHandler(
-    VDM_FAULT_HANDLER FaultHandler
+    PVOID FaultHandler
     );
 

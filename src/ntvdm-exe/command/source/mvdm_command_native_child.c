@@ -1,6 +1,5 @@
 #include "mvdm_command_native_child.h"
 
-#include <stdio.h>
 #include <string.h>
 
 #include "mvdm_guest_location.h"
@@ -9,98 +8,6 @@
 #define MVDM_COMMAND_NATIVE_CHILD_COMMAND_BYTES 128u
 #define MVDM_COMMAND_NATIVE_CHILD_ENVIRONMENT_BYTES (32u * 1024u)
 #define MVDM_COMMAND_NATIVE_CHILD_STANDARD_BYTES 12u
-
-static char native_child_report_path[MAX_PATH];
-
-static void record_command(const char *origin, const char *command)
-{
-    char message[320];
-    char text[257];
-    size_t index;
-    int formatted;
-    HANDLE report;
-    DWORD written;
-
-    if (native_child_report_path[0] == '\0' || origin == NULL || command == NULL)
-        return;
-    for (index = 0u; index + 1u < sizeof(text) && command[index] != '\0'; ++index)
-        text[index] = (command[index] >= ' ' && command[index] <= '~') ?
-            command[index] : '?';
-    text[index] = '\0';
-    formatted = snprintf(message, sizeof(message),
-        "MVDM-CMD-PAYLOAD origin=%s bytes=%lu command=%s%s\\r\\n", origin,
-        (unsigned long)strlen(command), text,
-        command[index] == '\0' ? "" : "<truncated>");
-    if (formatted < 0) return;
-    report = CreateFileA(native_child_report_path, FILE_APPEND_DATA,
-        FILE_SHARE_READ, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-    if (report == INVALID_HANDLE_VALUE) return;
-    (void)WriteFile(report, message, (DWORD)formatted, &written, NULL);
-    CloseHandle(report);
-}
-
-/* Default-off lifecycle evidence for the unchanged COMMAND worker.  These
- * are the three 32-bit source ABI values copied from its existing STD_HANDLES
- * record; no native HANDLE is exposed or changed here. */
-static void record_standard_handles(const ULONG handles[3])
-{
-    char message[176];
-    HANDLE report;
-    DWORD written;
-    int formatted;
-
-    if (native_child_report_path[0] == '\0' || handles == NULL) return;
-    formatted = snprintf(message, sizeof(message),
-        "MVDM-CMD-STDHANDLES err=%08lX out=%08lX in=%08lX\\r\\n",
-        (unsigned long)handles[0], (unsigned long)handles[1],
-        (unsigned long)handles[2]);
-    if (formatted <= 0 || (size_t)formatted >= sizeof(message)) return;
-    report = CreateFileA(native_child_report_path, FILE_APPEND_DATA,
-        FILE_SHARE_READ, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-    if (report == INVALID_HANDLE_VALUE) return;
-    (void)WriteFile(report, message, (DWORD)formatted, &written, NULL);
-    CloseHandle(report);
-}
-
-/* Default-off witness for the unchanged cmdExec BOP ingress. These are the
- * source-defined guest register locations, not host pointers; recording them
- * distinguishes an address-binding failure from a source standard-stream
- * value without changing capture semantics. */
-static void record_guest_capture_locations(uint16_t command_segment,
-    uint16_t command_offset, uint16_t environment_segment,
-    uint16_t environment_offset, uint16_t standard_segment,
-    uint16_t standard_offset)
-{
-    char message[176];
-    HANDLE report;
-    DWORD written;
-    int formatted;
-
-    if (native_child_report_path[0] == '\0') return;
-    formatted = snprintf(message, sizeof(message),
-        "MVDM-CMD-LOC cmd=%04X:%04X env=%04X:%04X std=%04X:%04X\\r\\n",
-        (unsigned int)command_segment, (unsigned int)command_offset,
-        (unsigned int)environment_segment, (unsigned int)environment_offset,
-        (unsigned int)standard_segment, (unsigned int)standard_offset);
-    if (formatted <= 0 || (size_t)formatted >= sizeof(message)) return;
-    report = CreateFileA(native_child_report_path, FILE_APPEND_DATA,
-        FILE_SHARE_READ, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-    if (report == INVALID_HANDLE_VALUE) return;
-    (void)WriteFile(report, message, (DWORD)formatted, &written, NULL);
-    CloseHandle(report);
-}
-
-void mvdm_command_native_child_capture_report_path(void)
-{
-    DWORD bytes;
-
-    native_child_report_path[0] = '\0';
-    bytes = GetEnvironmentVariableA("MVDM_NATIVE_CHILD_REPORT_PATH",
-        native_child_report_path, (DWORD)sizeof(native_child_report_path));
-    (void)SetEnvironmentVariableA("MVDM_NATIVE_CHILD_REPORT_PATH", NULL);
-    if (bytes == 0u || bytes >= sizeof(native_child_report_path))
-        native_child_report_path[0] = '\0';
-}
 
 typedef struct mvdm_command_native_child_state {
     session *owner;
@@ -287,8 +194,8 @@ static int capture_locations(mvdm_command_native_child_state *state,
         return 0;
     }
     state->active = 1u;
-    record_command(host_command != NULL ? "comspec" : "guest-tail", state->command);
-    record_standard_handles(state->standard_handles);
+
+
     return 1;
 }
 
@@ -308,8 +215,7 @@ int mvdm_command_native_child_capture_guest(uint16_t command_segment,
             environment_offset) || !mvdm_guest_location_set_real_mode(&standard,
             standard_segment, standard_offset) || !capture_locations(state, NULL,
             &command, &environment, &standard)) return 0;
-    record_guest_capture_locations(command_segment, command_offset,
-        environment_segment, environment_offset, standard_segment, standard_offset);
+
     return 1;
 }
 
@@ -381,7 +287,7 @@ int mvdm_command_native_child_replace_command(const char *command)
     SecureZeroMemory(state->command, sizeof(state->command));
     memcpy(state->command, command, bytes + 1u);
     state->command_bytes = (uint32_t)bytes + 1u;
-    record_command("worker", state->command);
+
     return 1;
 }
 
@@ -398,24 +304,4 @@ void mvdm_command_native_child_finish(void)
 void mvdm_command_native_child_abort(void)
 {
     mvdm_command_native_child_finish();
-}
-
-void mvdm_command_native_child_record_execution(unsigned int phase,
-    unsigned int status, unsigned int value)
-{
-    char message[144];
-    HANDLE report;
-    DWORD written;
-    int formatted;
-
-    if (native_child_report_path[0] == '\0') return;
-    formatted = snprintf(message, sizeof(message),
-        "MVDM-CMD-EXEC phase=%u status=%u value=%08X\\r\\n", phase,
-        status != 0u ? 1u : 0u, value);
-    if (formatted <= 0 || (size_t)formatted >= sizeof(message)) return;
-    report = CreateFileA(native_child_report_path, FILE_APPEND_DATA,
-        FILE_SHARE_READ, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-    if (report == INVALID_HANDLE_VALUE) return;
-    (void)WriteFile(report, message, (DWORD)formatted, &written, NULL);
-    CloseHandle(report);
 }
