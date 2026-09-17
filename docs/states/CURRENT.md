@@ -2,10 +2,8 @@
 
 ## Current Work
 
-## Active Packet
-
-No M/T/S packet is active. M0 T420 remains open between sequential package
-units; a new S requires explicit admission before implementation.
+**No active numeric M/T/S packet.** M0 T420 S3 closed pending an owner
+decision to admit its next complete original package unit.
 
 ## S1 Closure Record
 
@@ -23,6 +21,14 @@ dispositions, focused vector/map proof, the final four-executable x86 build,
 and deployed `COMMAND/MEM/EDIT` regression. T420 may next admit S3 (`video`)
 only on a new owner request.
 
+## S3 Closure Record
+
+[T420 S3 video package recovery](../etc/evidence/m0-t420-s3-video-package-recovery.md)
+closes all 19 selected original video sources. It records the retained CCPU40
+and C-VID ABI declarations, the finite worker-local public-Console boundary,
+fresh four-program x86 linkage, C-VID contract fixture, six Console geometry
+observations and direct/interactive COMMAND/MEM/EDIT regression.
+
 ## Current Technical Baseline
 
 - Product package: Win32/x86 CCPU40 `run16.exe`, `basesrv.exe`, `ntvdm.exe`,
@@ -31,9 +37,8 @@ only on a new owner request.
   correction: four EXE component directories are explicit, `dtmgr.exe`
   replaces `dtaskmgr.exe`, and the task display derives depth from original
   BaseSrv DOS records rather than a parallel stack.
-- T420 S1 and S2 are delivered: S1 freezes the CCPU/C-VID boundary and S2
-  closes its selected C-VID package. The next package, `video`, is not yet
-  admitted.
+- T420 S1--S3 are delivered: CCPU386, C-VID and video are closed complete
+  package units. The next package needs separate owner admission.
 
 ## Prior Closure
 
@@ -50,5 +55,5 @@ No standalone governance delivery is active or pending.
 
 ## Next Work
 
-The remaining candidate order is authoritative in [Queue](QUEUE.md). T420 S3
-(`softpc.new/base/video`) is the next sequential candidate, not active work.
+The remaining candidate order is authoritative in [Queue](QUEUE.md); no
+numeric packet is active.

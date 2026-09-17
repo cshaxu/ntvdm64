@@ -2,6 +2,7 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T420 S3 video package recovery](evidence/m0-t420-s3-video-package-recovery.md) | M0 T420 S3 | Freezes the complete selected original video unit, its finite public-Console boundary, retained profile contracts and x86/regression evidence. | Retain through T420 package completion. |
 | [T419 post-closure DTMgr record projection repair](evidence/m0-t419-post-closure-dtmgr-record-projection-repair.md) | M0 T419 follow-up | Replaces the autonomous DTMgr stack with an original-DOSRECORD projection and records x86 plus owner nested-COMMAND proof. | Retain with T419 closure. |
 | [T420 S2 C-VID package recovery](evidence/m0-t420-s2-cvidc-package-recovery.md) | M0 T420 S2 | Freezes and verifies complete selected C-VID composition, single Gdp ownership and profile-null vector dispositions. | Retain through T420 package completion. |
 | [T420 S1 CCPU386 package audit](evidence/m0-t420-s1-ccpu386-package-audit.md) | M0 T420 S1 | Freezes the complete CCPU386 selected manifest, providers, difference dispositions and the implementation-ready C-VID S2 boundary. | Retain through T420 package completion. |

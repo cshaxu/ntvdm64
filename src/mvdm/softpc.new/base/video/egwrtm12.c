@@ -153,10 +153,7 @@ SIGNALS ISSUED	  :	NONE
 /*
 [7.1 INTERMODULE DATA DEFINITIONS]				*/
 
-/* DIVERGENCE(MVDM-HOST-DIV-080): retain the original mode-1/mode-2 table
- * carrier for the selected CCPU40 C-VID profile instead of selecting legacy
- * A_VID movers that have no selected CCPU40 implementation. */
-/* DIVERGENCE(MVDM-HOST-DIV-080): retain the original mode-1/mode-2 table
+/* DIVERGENCE(MVDM-HOST-DIV-143): retain the original mode-1/mode-2 table
  * carrier for the selected CCPU40 C-VID profile instead of selecting legacy
  * A_VID movers that have no selected CCPU40 implementation. */
 #if defined(A_VID) || defined(CPU_40_STYLE)
@@ -168,7 +165,7 @@ IMPORT VOID	_ch2_mode1_chn_byte_move_glue();
 IMPORT VOID	_ch2_mode1_chn_word_move_glue();
 
 #ifdef CPU_40_STYLE
-/* DIVERGENCE MVDM-HOST-DIV-080: CPU_40_STYLE selects C-video EVID tables.
+/* DIVERGENCE MVDM-HOST-DIV-143: CPU_40_STYLE selects C-video EVID tables.
  * Preserve these historical table globals for EGA selection code, but do not
  * bind their unselected ULONG-carried native-pointer string callbacks. */
 WRT_POINTERS mode1_handlers;
@@ -425,7 +422,7 @@ ega_mode1_chn_w_write IFN2(ULONG, value, ULONG, offset )
 	update_alg.mark_word( offset );
 }
 
-/* DIVERGENCE MVDM-HOST-DIV-080: under CPU_40_STYLE the selected original
+/* DIVERGENCE MVDM-HOST-DIV-143: under CPU_40_STYLE the selected original
  * C-video EVID tables own the string fill/move route.  These WRT_POINTERS
  * helpers carry native pointers through legacy ULONG fields and are not
  * installed by the CPU_40_STYLE selection path. */
@@ -1048,7 +1045,7 @@ ega_mode2_chn_w_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
 	update_alg.mark_wfill( offset, offset + count - 1, 0 );
 }
 
-/* DIVERGENCE MVDM-HOST-DIV-080: the CPU_40 EVID path owns string moves. */
+/* DIVERGENCE MVDM-HOST-DIV-143: the CPU_40 EVID path owns string moves. */
 #ifndef CPU_40_STYLE
 LOCAL VOID
 ega_mode2_chn_move_guts IFN8(UTINY *, eas, UTINY *, ead, LONG, count,
