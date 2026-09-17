@@ -25,7 +25,7 @@ This is a bounded worker-host closure, not an assertion that `WRITE.EXE` runs.
 | Residual | Receiver |
 | --- | --- |
 | CCPU table/TR and worker event lifecycle | [CCPU40 C-VID/event restoration](../proposals/proposal-ccpu40-cvid-event-path-restoration-001.md) |
-| WOW callbacks, TEB/TD and debugger/resource boundaries | [WOW/debugger restoration](../proposals/proposal-wow-debugger-original-owner-restoration-001.md) |
+| WOW callbacks, TEB/TD and debugger/resource boundaries | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md) |
 | Integrated WRITE execution | [single-process WOW16 lifecycle recovery](../proposals/proposal-wow16-single-process-lifecycle-recovery-001.md) |
 
 These are assigned, unadmitted candidates. They may not use T407 closure as

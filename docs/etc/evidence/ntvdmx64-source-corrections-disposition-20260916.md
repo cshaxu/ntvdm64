@@ -33,7 +33,7 @@ No product source, build graph, or runtime artifact changed.
 
 The package is withdrawn. It is not an original-owner recovery package and
 its remaining material cannot be honestly grouped into one implementation
-scope. WOW/debugger restoration becomes the queue head. The subsequent WOW16
-package owns only source-proven DPMI/CPU40 lifecycle blockers encountered by
-the selected WRITE workload; it does not inherit a blanket external patch
-exception. The sole retained untested timer observation is recorded in TODO.
+scope. The package-completion candidate becomes the queue head. It owns
+whole-package DPMI/CPU40 and WOW/debugger recovery without inheriting a blanket
+external patch exception. The sole retained untested timer observation is
+recorded in TODO.

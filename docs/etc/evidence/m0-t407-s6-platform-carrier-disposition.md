@@ -43,7 +43,7 @@ because their fields resemble x86 structures.
 
 The [CCPU40 candidate](../../proposals/proposal-ccpu40-cvid-event-path-restoration-001.md)
 owns TR/TSS and table-register lifecycle acceptance. The
-[WOW/debugger candidate](../../proposals/proposal-wow-debugger-original-owner-restoration-001.md)
+[MVDM runtime package-completion candidate](../../proposals/proposal-mvdm-runtime-package-completion-001.md)
 owns FastWOW TEB/TD lifecycle acceptance. The final WOW16 package validates
 the integrated BOP 53:11/WRITE frontier. These are explicit unaccepted
 receivers, not successful T407 functionality claims.

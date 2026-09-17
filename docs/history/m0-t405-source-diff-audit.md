@@ -51,7 +51,7 @@ They own implementation plus verification, not a repeat report-only audit.
 | D09, D23-D25, D28-D30, D34; U05/U08-C | [Console/resources](../proposals/proposal-console-input-display-resource-restoration-001.md). |
 | U01; U07-T/U08-W | [CCPU40 C-VID/events](../proposals/proposal-ccpu40-cvid-event-path-restoration-001.md). |
 | D01-D07, D10; U07-B/U08-B | [Broker/Base lifecycle](../proposals/proposal-cross-process-broker-closure-001.md). |
-| D17-D22, D27; U06/U07-C/U08-S | [WOW/debugger](../proposals/proposal-wow-debugger-original-owner-restoration-001.md). |
+| D17-D22, D27; U06/U07-C/U08-S | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md). |
 | Integrated WRITE/release proof | [WOW16 workload](../proposals/proposal-wow16-single-process-lifecycle-recovery-001.md), then [release matrix](../proposals/proposal-multiprocess-release-matrix-001.md). |
 
 Each D identifier has one receiver group. U07/U08 subitems have unique owners
