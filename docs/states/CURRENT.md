@@ -40,6 +40,14 @@
 [T419 Terminal task-manager closure](../history/m0-t419-terminal-task-manager-closure.md)
 records the accepted task-manager delivery and its evidence boundary.
 
+## Recent M0 Closures
+
+| T419 | [Terminal task manager](../history/m0-t419-terminal-task-manager-closure.md) | Delivered `dtmgr.exe`, authenticated selected-worker management, compact first-option compatibility, and explicit executable component roots. |
+
+## Recent Governance
+
+No standalone governance delivery is active or pending.
+
 ## Next Work
 
 The remaining candidate order is authoritative in [Queue](QUEUE.md). T420 S1
