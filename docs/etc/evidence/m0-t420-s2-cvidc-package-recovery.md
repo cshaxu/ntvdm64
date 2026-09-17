@@ -86,7 +86,9 @@ only added non-mirror logic is audit/test logic, not product behavior.
 Fresh root: `build/M0-T420/S2/formal-x86-001`.
 
 1. Fresh formal x86 targets `run16.exe`, `basesrv.exe`, `ntvdm.exe`, and
-   `dtmgr.exe` linked successfully. `ntvdm.exe` is 3,243,008 bytes.
+   `dtmgr.exe` linked successfully. The same formal graph was re-linked after
+   T419's accepted DTMgr record-projection repair at `eeaebc995`; the final
+   product set is therefore the T419+S2 composition, not a stale S2 binary.
 2. `cvidc-vector-binding-fixture.exe` passed: `38 pairs x 4 values, 81 slots,
    latches/selectors, republish, old-provider negative control, concurrent
    scratch preservation`.
@@ -97,16 +99,20 @@ Fresh root: `build/M0-T420/S2/formal-x86-001`.
 4. `git diff --check` passed. The only emitted notices are repository
    CRLF-normalization warnings; no whitespace error was reported.
 
-The pre-existing `O:\winnt` package has active user-owned `basesrv.exe` and
-`ntvdm.exe` processes, so S2 deliberately did not overwrite it. An attempted
-isolated stage correctly stopped before host startup with `ERROR_BAD_PATHNAME`
-(`NTVDM-S3 phase=bootstrap status=000000a1`): its 53-character build root
-cannot satisfy the unchanged original `cmdconf.c` 64-byte short-root command
-contract. This is the expected `APP-DIV-014` product-layout guard, not a
-C-VID failure and not a reason to relax the original constraint. Deployment
-and the direct plus interactive `COMMAND → MEM → EDIT → MEM` product matrix
-must run from `O:\winnt` after those processes are no longer in use; no source
-or build blocker remains.
+The earlier isolated-stage attempt correctly stopped before host startup with
+`ERROR_BAD_PATHNAME` (`NTVDM-S3 phase=bootstrap status=000000a1`): its
+53-character build root cannot satisfy the unchanged original `cmdconf.c`
+64-byte short-root command contract. This is the expected `APP-DIV-014`
+product-layout guard, not a C-VID failure and not a reason to relax the
+original constraint.
+
+The final four formal EXEs were deliberately copied to `O:\winnt`; source and
+deployed SHA-256 values matched for every file. The real Console observer then
+passed `direct-mem=0`, `mem-repeat=1`, `nested-mem=1`, `command-c=0`, and
+`edit=1`. The nonzero interactive results are the already-recorded original
+COMMAND convention. The observer drove the required interactive sequences,
+including nested `COMMAND → MEM` and `EDIT → MEM`, and retained raw reports
+under `O:\winnt\logs\m0-t420-s2-final-*`.
 
 ## Confidence and remaining boundary
 
