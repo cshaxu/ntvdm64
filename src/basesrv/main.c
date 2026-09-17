@@ -107,6 +107,13 @@ static void basesrv_schedule_empty_stop(void)
     }
     ReleaseSRWLockExclusive(&idle_lock);
 }
+static DWORD basesrv_management_version(ULONG protocol,const unsigned char application_version[32])
+{
+    static const unsigned char expected[APP_VERSION_BYTES]=APP_VERSION;
+    if (protocol!=APP_PROTOCOL_VERSION || !application_version ||
+        memcmp(application_version,expected,sizeof(expected))) return ERROR_REVISION_MISMATCH;
+    return ERROR_SUCCESS;
+}
 /* The service invokes this only after the retained, authenticated worker
  * process has actually exited and the original BaseSrv cleanup has run. */
 static void WINAPI basesrv_worker_terminated(void *context)
@@ -134,6 +141,59 @@ error_status_t Server_RevokeStream(handle_t binding,VDM_CONNECTION connection,HA
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
     if (error) return error;
     return OpenNtBaseServiceRevokeStream(connection,pid,generation,receipt);
+}
+error_status_t Server_TaskSnapshot(handle_t binding,HANDLE process,ULONG protocol,
+    unsigned char application_version[32],hyper *epoch,ULONG *count,DTASKMGR_WORKER **entries)
+{
+    OPENNT_BASE_WORKER_INFO *local=NULL;
+    DWORD pid,error;
+    uint32_t actual=0,index;
+    uint64_t service_epoch=0;
+    if (!epoch || !count || !entries) return ERROR_INVALID_PARAMETER;
+    *epoch=0; *count=0; *entries=NULL;
+    error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    if (error) return error;
+    error=basesrv_management_version(protocol,application_version);
+    if (!error) error=OpenNtBaseServiceSnapshot(service,&service_epoch,NULL,0,&actual);
+    if (error!=ERROR_INSUFFICIENT_BUFFER && error!=ERROR_SUCCESS) goto done;
+    if (actual) {
+        local=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*local)*actual);
+        if (!local) { error=ERROR_NOT_ENOUGH_MEMORY; goto done; }
+        error=OpenNtBaseServiceSnapshot(service,&service_epoch,local,actual,&actual);
+        if (error) goto done;
+        *entries=MIDL_user_allocate(sizeof(**entries)*actual);
+        if (!*entries) { error=ERROR_NOT_ENOUGH_MEMORY; goto done; }
+        for (index=0;index<actual;++index) {
+            (*entries)[index].sequence=local[index].sequence;
+            (*entries)[index].kind=local[index].kind;
+            (*entries)[index].state=local[index].state;
+            (*entries)[index].reserved=0;
+            (*entries)[index].started_filetime=(hyper)local[index].started_filetime;
+            (*entries)[index].task=local[index].task;
+            memcpy((*entries)[index].image,local[index].image,sizeof(local[index].image));
+        }
+    }
+    *epoch=(hyper)service_epoch;
+    *count=actual;
+done:
+    if (local) HeapFree(GetProcessHeap(),0,local);
+    if (error && *entries) { MIDL_user_free(*entries); *entries=NULL; }
+    if (error) { *epoch=0; *count=0; }
+    basesrv_schedule_empty_stop();
+    basesrv_trace("task-snapshot",pid,error);
+    return error;
+}
+error_status_t Server_TerminateWorker(handle_t binding,HANDLE process,ULONG protocol,
+    unsigned char application_version[32],hyper epoch,ULONG sequence)
+{
+    DWORD pid,error;
+    error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    if (error) return error;
+    error=basesrv_management_version(protocol,application_version);
+    if (!error) error=OpenNtBaseServiceTerminateWorker(service,(uint64_t)epoch,sequence);
+    basesrv_schedule_empty_stop();
+    basesrv_trace("task-terminate",pid,error);
+    return error;
 }
 void *__RPC_USER midl_user_allocate(size_t bytes) { return malloc(bytes); }
 void __RPC_USER midl_user_free(void *value) { free(value); }

@@ -12,6 +12,13 @@
 #include "basesrv/transport/vdm_receipt.h"
 typedef NTSTATUS (*OPENNT_USER_TEST_TOKEN_FOR_INTERACTIVE)(HANDLE,PLUID);
 extern OPENNT_USER_TEST_TOKEN_FOR_INTERACTIVE UserTestTokenForInteractive;
+/* srvvdm.c owns these source-shaped lists and their lock objects.  They are
+ * intentionally not re-declared in a public product ABI: this binding only
+ * reads them while constructing a bounded management projection. */
+extern PWOWHEAD WOWHead;
+extern PCONSOLERECORD DOSHead;
+extern RTL_CRITICAL_SECTION BaseSrvWOWCriticalSection;
+extern RTL_CRITICAL_SECTION BaseSrvDOSCriticalSection;
 
 /* Default-off evidence at the original Base VDM request boundary. It writes
  * only operation state and status, never command text, guest addresses or
@@ -50,6 +57,7 @@ struct OPENNT_BASE_SERVICE {
     void *console_query_context;
     OPENNT_BASE_EMPTY_NOTIFY empty_notify;
     void *empty_notify_context;
+    uint64_t management_epoch;
 };
 struct OPENNT_BASE_CONNECTION {
     OPENNT_BASE_SERVICE *service;
@@ -75,6 +83,8 @@ typedef struct OPENNT_BASE_WORKER_WATCH {
     HANDLE console;
     BOOL wow;
     uint64_t reservation;
+    FILETIME started;
+    BOOL termination_requested;
 } OPENNT_BASE_WORKER_WATCH;
 typedef struct OPENNT_BASE_CONSOLE_CANDIDATE {
     HANDLE process;
@@ -313,6 +323,7 @@ PFNNOTIFYPROCESSCREATE UserNotifyProcessCreate=NULL;
 OPENNT_BASE_SERVICE *OpenNtBaseServiceStart(void)
 {
     OPENNT_BASE_SERVICE *service=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*service));
+    FILETIME now;
     if (!service) return NULL;
     if (!InitializeCriticalSectionEx(&service->lock,0,0)) {
         HeapFree(GetProcessHeap(),0,service); return NULL;
@@ -320,6 +331,10 @@ OPENNT_BASE_SERVICE *OpenNtBaseServiceStart(void)
     InitializeListHead(&service->connections);
     InitializeListHead(&service->retired_connections);
     InitializeListHead(&service->worker_watches);
+    GetSystemTimeAsFileTime(&now);
+    service->management_epoch=((uint64_t)now.dwHighDateTime<<32)|now.dwLowDateTime;
+    service->management_epoch^=(uint64_t)GetCurrentProcessId()<<17;
+    if (!service->management_epoch) service->management_epoch=1;
     if (!OpenNtBaseInitializeProcessRegistry(&service->registry)) {
         DeleteCriticalSection(&service->lock); HeapFree(GetProcessHeap(),0,service); return NULL;
     }
@@ -393,6 +408,117 @@ BOOL OpenNtBaseServiceIsEmpty(OPENNT_BASE_SERVICE *service)
     LeaveCriticalSection(&service->lock);
     return empty;
 }
+/* The task manager is deliberately a projection of the original VDM lists,
+ * not a second task registry.  All original list mutations in this
+ * composition occur under service->lock; the original locks below preserve
+ * the source owners' own DOS/WOW traversal contract as well. */
+static void service_copy_management_image(PVDMINFO info,WCHAR image[OPENNT_BASE_WORKER_IMAGE_CHARS])
+{
+    int copied;
+    if (!info || !info->AppName || !info->AppLen) return;
+    copied=MultiByteToWideChar(CP_ACP,0,(LPCCH)info->AppName,(int)info->AppLen,
+        image,OPENNT_BASE_WORKER_IMAGE_CHARS-1);
+    if (copied>0) image[copied]=L'\0';
+}
+static void service_copy_management_record(OPENNT_BASE_WORKER_WATCH *watch,
+    OPENNT_BASE_WORKER_INFO *item)
+{
+    PCONSOLERECORD console;
+    PDOSRECORD dos,selected=NULL;
+    PWOWRECORD wow,selected_wow=NULL;
+    if (watch->wow) {
+        (void)RtlEnterCriticalSection(&BaseSrvWOWCriticalSection);
+        if (WOWHead && WOWHead->SequenceNumber==watch->process.SequenceNumber) {
+            for (wow=WOWHead->WOWRecord;wow;wow=wow->WOWRecordNext) {
+                if (!selected_wow || wow->fDispatched) selected_wow=wow;
+                if (wow->fDispatched) break;
+            }
+            if (selected_wow) {
+                item->kind=3u; /* WOW16 / Win16 worker */
+                item->state=selected_wow->fDispatched ? VDM_BUSY : VDM_READY;
+                item->task=selected_wow->iTask;
+                service_copy_management_image(selected_wow->lpVDMInfo,item->image);
+            }
+        }
+        RtlLeaveCriticalSection(&BaseSrvWOWCriticalSection);
+        return;
+    }
+    (void)RtlEnterCriticalSection(&BaseSrvDOSCriticalSection);
+    for (console=DOSHead;console;console=console->Next) {
+        if (console->SequenceNumber!=watch->process.SequenceNumber) continue;
+        for (dos=console->DOSRecord;dos;dos=dos->DOSRecordNext) {
+            if (!selected || dos->VDMState==VDM_BUSY) selected=dos;
+            if (dos->VDMState==VDM_BUSY) break;
+        }
+        break;
+    }
+    if (selected) {
+        item->kind=1u; /* DOS worker */
+        item->state=selected->VDMState;
+        item->task=selected->lpVDMInfo ? selected->lpVDMInfo->iTask : 0;
+        service_copy_management_image(selected->lpVDMInfo,item->image);
+    }
+    RtlLeaveCriticalSection(&BaseSrvDOSCriticalSection);
+}
+DWORD OpenNtBaseServiceSnapshot(OPENNT_BASE_SERVICE *service,uint64_t *epoch,
+    OPENNT_BASE_WORKER_INFO *entries,uint32_t capacity,uint32_t *count)
+{
+    LIST_ENTRY *link;
+    uint32_t needed=0,index=0;
+    if (!service || !epoch || !count) return ERROR_INVALID_PARAMETER;
+    *count=0; *epoch=0;
+    EnterCriticalSection(&service->lock);
+    for (link=service->worker_watches.Flink;link!=&service->worker_watches;link=link->Flink) ++needed;
+    *epoch=service->management_epoch;
+    *count=needed;
+    if (needed>capacity || (needed && !entries)) {
+        LeaveCriticalSection(&service->lock);
+        return ERROR_INSUFFICIENT_BUFFER;
+    }
+    for (link=service->worker_watches.Flink;link!=&service->worker_watches;link=link->Flink) {
+        OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(link,OPENNT_BASE_WORKER_WATCH,link);
+        OPENNT_BASE_WORKER_INFO *item=&entries[index++];
+        DWORD copied=OPENNT_BASE_WORKER_IMAGE_CHARS;
+        ZeroMemory(item,sizeof(*item));
+        item->sequence=watch->process.SequenceNumber;
+        item->kind=watch->wow ? 3u : 1u;
+        item->state=watch->termination_requested ? 0x80000000u : VDM_READY;
+        item->started_filetime=((uint64_t)watch->started.dwHighDateTime<<32)|watch->started.dwLowDateTime;
+        service_copy_management_record(watch,item);
+        if (watch->termination_requested) item->state|=0x80000000u;
+        if (!item->image[0] &&
+            !QueryFullProcessImageNameW(watch->process.ProcessHandle,0,item->image,&copied))
+            lstrcpynW(item->image,L"ntvdm.exe",OPENNT_BASE_WORKER_IMAGE_CHARS);
+    }
+    LeaveCriticalSection(&service->lock);
+    return ERROR_SUCCESS;
+}
+DWORD OpenNtBaseServiceTerminateWorker(OPENNT_BASE_SERVICE *service,uint64_t epoch,uint32_t sequence)
+{
+    LIST_ENTRY *link;
+    HANDLE process=NULL;
+    DWORD error=ERROR_NOT_FOUND;
+    if (!service || !sequence) return ERROR_INVALID_PARAMETER;
+    EnterCriticalSection(&service->lock);
+    if (epoch!=service->management_epoch) error=ERROR_REVISION_MISMATCH;
+    else for (link=service->worker_watches.Flink;link!=&service->worker_watches;link=link->Flink) {
+        OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(link,OPENNT_BASE_WORKER_WATCH,link);
+        if (watch->process.SequenceNumber!=sequence) continue;
+        if (watch->termination_requested) { error=ERROR_BUSY; break; }
+        if (!DuplicateHandle(GetCurrentProcess(),watch->process.ProcessHandle,
+                GetCurrentProcess(),&process,PROCESS_TERMINATE|SYNCHRONIZE,FALSE,0)) {
+            error=GetLastError(); break;
+        }
+        watch->termination_requested=TRUE;
+        error=ERROR_SUCCESS;
+        break;
+    }
+    LeaveCriticalSection(&service->lock);
+    if (error) return error;
+    if (!TerminateProcess(process,ERROR_CANCELLED)) error=GetLastError();
+    CloseHandle(process);
+    return error;
+}
 DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *service,HANDLE process,
     OPENNT_BASE_CONNECTION **output,DWORD *generation)
 {
@@ -441,6 +567,11 @@ DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *service,HANDLE process,
                 watch->console=console;
                 watch->wow=shared_wow;
                 watch->reservation=reservation;
+                {
+                    FILETIME ignored;
+                    if (!GetProcessTimes(watch->process.ProcessHandle,&watch->started,&ignored,
+                            &ignored,&ignored)) ZeroMemory(&watch->started,sizeof(watch->started));
+                }
                 if (!RegisterWaitForSingleObject(&watch->wait,watch->process.ProcessHandle,
                     service_worker_terminated,watch,INFINITE,WT_EXECUTEONLYONCE)) {
                     error=GetLastError();

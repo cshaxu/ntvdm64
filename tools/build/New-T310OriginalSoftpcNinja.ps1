@@ -1086,6 +1086,20 @@ if ($Architecture -eq 'x86') {
     $graph.Add('rule basesrv_link')
     $graph.Add('  command = link.exe /nologo /subsystem:console /opt:ref /out:$out /map:$out.map $in rpcrt4.lib ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib')
     $graph.Add('build basesrv.exe: basesrv_link obj/basesrv/entry.obj obj/basesrv/stub.obj obj/basesrv/console_query.obj obj/run16/support.obj opennt-base-server.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib')
+    $graph.Add('build obj/dtaskmgr/main.obj: cc ' + (NinjaPath (Join-Path $root 'src/dtaskmgr/main.c')) + ' | obj/basesrv/service.h')
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build obj/dtaskmgr/stub.obj: cc obj/basesrv/service_c.c | obj/basesrv/service.h')
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('rule dtaskmgr_link')
+    $graph.Add('  command = link.exe /nologo /subsystem:console /opt:ref /out:$out /map:$out.map $in rpcrt4.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib')
+    # DTASKMGR is a client of the authenticated local BaseSrv endpoint.  It
+    # shares only the native transport scope helper, never a BaseClient
+    # registration or worker lifecycle library.
+    $graph.Add('build DTASKMGR.EXE: dtaskmgr_link obj/dtaskmgr/main.obj obj/dtaskmgr/stub.obj broker-transport.lib')
+    $dtaskmgrRpcTestObject = 'obj/tests/dtaskmgr_rpc_test.obj'
+    $graph.Add('build ' + $dtaskmgrRpcTestObject + ': cc ' + (NinjaPath (Join-Path $root 'tests/adapter-basesrv/dtaskmgr_rpc_test.c')) + ' | obj/basesrv/service.h')
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build dtaskmgr-rpc-test.exe: dtaskmgr_link ' + $dtaskmgrRpcTestObject + ' obj/dtaskmgr/stub.obj broker-transport.lib')
     $graph.Add('rule worker_link')
     $graph.Add('  command = cmd.exe /d /s /c "link.exe /nologo /subsystem:console /opt:ref /out:$out /map:$out.map /def:generated/ntvdm-wow32-provider.def $in rpcrt4.lib kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib libcmt.lib libvcruntime.lib libucrt.lib && "' + (NinjaPath $NodeExecutable) + '" "' + (NinjaPath (Join-Path $root 'tools/audit/Verify-VdmTibStorage.mjs')) + '" $out.map obj/adapter-monitor/mvdm_vdm_tib.obj"')
     # CCPU40 and DPMI discover the original nt_inthk providers only after their
@@ -1152,6 +1166,7 @@ $graph.Add('build debugger-bindings.lib: lib ' + ($adapterDebuggerObjects -join 
 $graph.Add('build softpc-ccpu-vector-defaults.lib: lib ' + $patchVectorDefaultsObject)
 $graph.Add('build softpc-activity-check.lib: lib ' + $patchActivityCheckObject)
 $graph.Add('build original-softpc-candidate: phony original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-redir.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-softpc-host-roots.lib original-opennt-netlib.lib original-opennt-netapi-api.lib original-opennt-rtl-x86.lib softpc-bindings.lib redirector-bindings.lib worker-shell.lib worker-command-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib')
+$graph.Add('build product-programs: phony run16.exe basesrv.exe ntvdm.exe DTASKMGR.EXE VDMREDIR.dll')
 $graph.Add('build obj/tests/ccpu_halt_reset_test.obj: cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/ccpu_halt_reset_test.c')))
 $hostFixtureSeamsObject = 'obj/tests/ccpu_host_fixture_seams.obj'
 $graph.Add('build ' + $hostFixtureSeamsObject + ': cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/ccpu_host_fixture_seams.c')))

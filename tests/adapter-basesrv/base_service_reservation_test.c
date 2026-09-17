@@ -45,6 +45,9 @@ int main(int argc,char **argv)
     uint32_t wireBytes=0,answerBytes=0,updateWireBytes=0,updateAnswerBytes=0,getWireBytes=0;
     HANDLE parentEvent=NULL,laterParentEvent=NULL,getWait=NULL,standard[3]={NULL,NULL,NULL};
     uint32_t parentReceipt=0,laterParentReceipt=0;
+    uint64_t managementEpoch=0;
+    OPENNT_BASE_WORKER_INFO workerInfo={0};
+    uint32_t workerInfoCount=0;
     ULONG standardCount=0;
     STARTUPINFOA getStartup={sizeof(getStartup)};
     if (argc==2 && !strcmp(argv[1],"--reservation-child")) { Sleep(15000);return 0; }
@@ -95,6 +98,15 @@ int main(int argc,char **argv)
     CHECK(OpenNtBaseServiceConnect(service,child.hProcess,&worker,&workerGeneration)==ERROR_SUCCESS);
     CHECK(OpenNtBaseServiceWorkerReservation(worker,&claimed,&task,&console));
     CHECK(claimed==reservation && task==reply.u.CheckVDM.iTask && console!=NULL);
+    /* The management plane copies a server-owned worker projection.  First
+     * probe the count, then require the same broker generation/sequence
+     * which original BaseSrv assigned at authenticated registration. */
+    CHECK(OpenNtBaseServiceSnapshot(service,&managementEpoch,NULL,0,&workerInfoCount)==ERROR_INSUFFICIENT_BUFFER);
+    CHECK(managementEpoch!=0 && workerInfoCount==1);
+    CHECK(OpenNtBaseServiceSnapshot(service,&managementEpoch,&workerInfo,1,&workerInfoCount)==ERROR_SUCCESS);
+    CHECK(workerInfoCount==1 && workerInfo.sequence==workerGeneration &&
+        workerInfo.started_filetime!=0 && !wcscmp(workerInfo.image,L"MEM.EXE"));
+    CHECK(OpenNtBaseServiceTerminateWorker(service,managementEpoch+1,workerGeneration)==ERROR_REVISION_MISMATCH);
     /* READY alone is not worker readiness: a resident COMMAND prompt has no
      * outstanding GetNextVDMCommand wait to receive an unrelated launch. */
     { BOOL recordExists=FALSE;
@@ -184,11 +196,39 @@ int main(int argc,char **argv)
         &getAnswer,&wireBytes,&getWait,standard,&standardCount)==ERROR_SUCCESS);
     CHECK(getAnswer!=NULL && getWait==NULL && standardCount==0);
     OpenNtBaseServiceReleaseCommandReply(getAnswer);getAnswer=NULL;
+    if (argc==2 && !strcmp(argv[1],"--management-terminate")) {
+        DWORD exitCode=STILL_ACTIVE;
+        /* The manager's positive path receives only the selected snapshot
+         * identity.  The service resolves its retained watch and the normal
+         * worker-exit callback must wake the waiting parent and remove the
+         * original record before this fixture tears down its own processes. */
+        CHECK(OpenNtBaseServiceTerminateWorker(service,managementEpoch,workerGeneration)==ERROR_SUCCESS);
+        CHECK(WaitForSingleObject(laterParentEvent,5000)==WAIT_OBJECT_0);
+        CHECK(OpenNtBaseServiceExitCode(later,laterChild.dwProcessId,laterGeneration,
+            laterParentReceipt,&exitCode)==ERROR_PROCESS_ABORTED);
+        CloseHandle(laterParentEvent);laterParentEvent=NULL;
+        CHECK(OpenNtBaseServiceDisconnect(worker)==ERROR_SUCCESS);worker=NULL;
+        CHECK(OpenNtBaseServiceReleaseReservation(launcher,GetCurrentProcessId(),launcherGeneration,
+            reservation)==ERROR_SUCCESS);
+        CHECK(OpenNtBaseServiceDisconnect(later)==ERROR_SUCCESS);later=NULL;
+        CHECK(OpenNtBaseServiceDisconnect(launcher)==ERROR_SUCCESS);launcher=NULL;
+        CHECK(WaitForSingleObject(child.hProcess,5000)==WAIT_OBJECT_0);
+        TerminateProcess(laterChild.hProcess,0);WaitForSingleObject(laterChild.hProcess,5000);
+        CloseHandle(laterChild.hThread);CloseHandle(laterChild.hProcess);
+        CloseHandle(child.hThread);CloseHandle(child.hProcess);CloseHandle(self);
+        free(getWire);free(updateAnswer);free(updateWire);free(answer);free(wire);
+        CHECK(OpenNtBaseServiceIsEmpty(service));
+        CHECK(OpenNtBaseServiceStop(service));
+        puts("PASS: management epoch/worker termination performs original worker-exit cleanup");
+        return 0;
+    }
     /* The authenticated worker disappears before ExitVDM.  The retained OS
      * process-exit watch is the standalone source for the original CSR
      * disconnect cleanup: the queued parent must wake and the DOS record
      * must be removed.  A mere RPC-context disconnect is deliberately not
      * enough because resident COMMAND can be alive without that context. */
+    /* Preserve the existing lifecycle fixture's independent abrupt-worker
+     * stimulus; management termination has its own product-level fixture. */
     CHECK(TerminateProcess(child.hProcess,0));
     CHECK(WaitForSingleObject(laterParentEvent,5000)==WAIT_OBJECT_0);
     { DWORD exitCode=STILL_ACTIVE;

@@ -9,6 +9,18 @@
 typedef struct OPENNT_BASE_SERVICE OPENNT_BASE_SERVICE;
 typedef struct OPENNT_BASE_CONNECTION OPENNT_BASE_CONNECTION;
 typedef void (WINAPI *OPENNT_BASE_EMPTY_NOTIFY)(void *);
+/* Copied management projection.  It deliberately contains no process ID,
+ * HANDLE, original record pointer, or guest address. */
+#define OPENNT_BASE_WORKER_IMAGE_CHARS 260u
+typedef struct OPENNT_BASE_WORKER_INFO {
+    uint32_t sequence;
+    uint32_t kind;
+    uint32_t state;
+    uint32_t reserved;
+    uint64_t started_filetime;
+    uint32_t task;
+    WCHAR image[OPENNT_BASE_WORKER_IMAGE_CHARS];
+} OPENNT_BASE_WORKER_INFO;
 /* The original service owns ConsoleRecord selection.  This callback only
  * answers membership for already authenticated, live process handles; it
  * never accepts a caller-supplied Console identity or selects a command. */
@@ -22,6 +34,11 @@ BOOL OpenNtBaseServiceConfigureEmptyNotify(OPENNT_BASE_SERVICE *,OPENNT_BASE_EMP
  * reservations are gone.  It deliberately says nothing about a quiet but
  * connected interactive VDM. */
 BOOL OpenNtBaseServiceIsEmpty(OPENNT_BASE_SERVICE *);
+/* Management callers are authenticated by the transport before reaching
+ * these methods.  The epoch rejects selections copied before a broker restart. */
+DWORD OpenNtBaseServiceSnapshot(OPENNT_BASE_SERVICE *,uint64_t *epoch,
+    OPENNT_BASE_WORKER_INFO *entries,uint32_t capacity,uint32_t *count);
+DWORD OpenNtBaseServiceTerminateWorker(OPENNT_BASE_SERVICE *,uint64_t epoch,uint32_t sequence);
 DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *,HANDLE,OPENNT_BASE_CONNECTION **,DWORD *);
 DWORD OpenNtBaseServiceDisconnect(OPENNT_BASE_CONNECTION *);
 BOOL OpenNtBaseServicePeer(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation);

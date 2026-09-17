@@ -7,6 +7,17 @@ import "wtypes.idl";
 interface vdm_service
 {
     typedef [context_handle] void *VDM_CONNECTION;
+    /* Management data is a copied broker projection.  It never serializes a
+     * HANDLE, PID, guest pointer or original record pointer. */
+    typedef struct _DTASKMGR_WORKER {
+        unsigned long sequence;
+        unsigned long kind;
+        unsigned long state;
+        unsigned long reserved;
+        hyper started_filetime;
+        unsigned long task;
+        wchar_t image[260];
+    } DTASKMGR_WORKER;
     /* Authenticated lifetime capability, not a PID or restart authority. */
     error_status_t BrokerProcess(
         [in] handle_t binding,
@@ -154,4 +165,21 @@ interface vdm_service
         [in, system_handle(sh_process)] HANDLE process,
         [in] unsigned long generation,
         [in] unsigned long receipt);
+    /* These calls deliberately have no VDM_CONNECTION.  A viewer must not
+     * become a registered worker/client merely by polling management state. */
+    error_status_t TaskSnapshot(
+        [in] handle_t binding,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long protocol,
+        [in] byte application_version[32],
+        [out] hyper *epoch,
+        [out] unsigned long *count,
+        [out, size_is(,*count)] DTASKMGR_WORKER **entries);
+    error_status_t TerminateWorker(
+        [in] handle_t binding,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long protocol,
+        [in] byte application_version[32],
+        [in] hyper epoch,
+        [in] unsigned long sequence);
 }
