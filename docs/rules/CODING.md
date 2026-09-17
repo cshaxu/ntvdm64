@@ -81,6 +81,12 @@ monitor-adapter material.
 
 - An imported mirror file has exactly one classification: byte-exact original;
   true original subset; or same-shaped minimal original/subset modification.
+- Every S closure must compare every selected mirror file against its pinned
+  upstream counterpart both bytewise and after newline normalization.  When
+  the normalized content is identical, restore the upstream file's exact line
+  ending, final-newline and whitespace formatting before closure; do not leave
+  a format-only difference as a mirror diff.  The evidence records the sweep
+  and every intentionally retained non-format difference.
 - Each deleted logical block has a `DIVERGENCE:` crop marker and README row.
   Each changed expression has a local `DIVERGENCE:` explanation and README
   row identifying original purpose, reason and implementation.

@@ -11,18 +11,18 @@
 | Identifier Mode | M0 T420 S8 — Ordinary Mode. |
 | Candidate Proposal | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md) |
 | Admission And Approval | The owner approved on 2026-09-17: “批准所有推送 请你自动准入每个s任务”. This reopens T420 for the next sequential package and authorizes later sequential S admissions and pushes. |
-| Objective | Complete the selected original `softpc.new/base/disks` package: disk-device state, backing storage and error/teardown contracts, retaining original source behavior through only finite unavailable host bindings. |
+| Objective | Complete the selected original `softpc.new/base/disks` package: disk-device state, backing storage and error/teardown contracts, retaining original source behavior through only finite unavailable host bindings.  The owner additionally admitted the S1--S8 mirror-format sweep: restore every proven line-ending/newline/whitespace-only drift to upstream bytes and make that check mandatory for every later S. |
 | Non-goals | No CPU30 monitor, replacement firmware loader, guest-media patching, renderer change, WOW expansion or new mirror files. |
 | Reference Baseline | T420 S1--S7 are closed; current `O:\winnt` four-EXE x86 package passed direct/interactive COMMAND/MEM/EDIT, Console geometry, mouse and short-window EDIT→MEM regression. |
-| Files And ABI Surface | Freeze the complete selected `src/mvdm/softpc.new/base/disks` manifest and every reached disk/backing/error/teardown boundary. No new file below mirrors. |
+| Files And ABI Surface | Freeze the complete selected `src/mvdm/softpc.new/base/disks` manifest and every reached disk/backing/error/teardown boundary. Sweep the already selected S1--S8 `src/mvdm` files for format-only upstream drift. No new file below mirrors. |
 | Applicable Rules | Project design/rules, source policy, strict mirror rule and source-recovery ladder. |
-| Verification | Freeze manifest/source-diff ledger; audit every reached external function/global/callback; fresh x86 formal build; focused disk/backing positive and negative checks; direct and interactive COMMAND/MEM/EDIT regressions; governance and diff review. |
+| Verification | Freeze manifest/source-diff ledger; mechanically compare every S1--S8 mirror file bytewise and normalized; fresh x86 formal build; focused disk/backing positive and negative checks; direct and interactive COMMAND/MEM/EDIT regressions; governance and diff review. |
 | Expected Markers | Complete selected disks disposition; original disk/backing failure ordering and evidence; retained finite host boundary ledger; separated mirror/adapter/autonomous footprint report. |
 | Asset Needs | Existing selected OpenNT MVDM union, current formal generator and `O:\winnt` runtime package. No new historical source or guest media import is admitted. |
 | Reporting Requirements | Report each manifest source, external boundary, source-first recovery result, exact footprint change, focused and established-product results, limitations and next owner. |
 | Stop Conditions | Pause for a required package beyond `disks`, a kernel/CPU30 dependency, a new behavior interface, or COMMAND/MEM/EDIT regression. |
 | Exit Criteria | All selected disks units and reached interfaces have dispositions; any change is source-first/mirror-compliant; formal x86/focused tests and established regressions pass; evidence/index/status updated; reviewed P pushed. |
-| Original Owner Request | “批准所有推送 请你自动准入每个s任务”. |
+| Original Owner Request | “批准所有推送 请你自动准入每个s任务”；“已提交的S任务和当前S任务，现在就帮我处理好一起提交；将来的每个S任务也要遵循。” |
 | Similar-Issue Sweep | Compare every selected BIOS source to OpenNT; audit all divergence markers and reached ROM/reset/firmware consumers for duplicate local policy. |
 
 ## S1 Closure Record

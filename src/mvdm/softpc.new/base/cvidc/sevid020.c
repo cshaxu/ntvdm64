@@ -1282,7 +1282,7 @@ switch ( id )
 	if(*((IUH	*)&(r20))>=8*sizeof(IUH))
 	CrulesRuntimeError("Bad	Bit	No");
 	else
-	if	((*((IUH	*)(LocalIUH+1))	&	(1	<<	*((IUH	*)&(r20))))	==	0)	goto	L21_246if_f;
+	if	((*((IUH	*)(LocalIUH+1))	&	(1	<<	*((IUH	*)&(r20))))	==	0)	goto	L21_246if_f;	
 	*((IUH	*)(LocalIUH+8))	=	(IS32)(1)	;	
 	{	extern	IUH	L21_247if_d()	;	
 	IUH	returnValue,v1=0,v2=0,v3=0,v4=0;		returnValue	=	L21_247if_d(v1,v2,v3,v4);	return(returnValue);	}	
