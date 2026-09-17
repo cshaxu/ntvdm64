@@ -111,6 +111,13 @@ retains only the allocator declaration and original CCPU40 LIM-writeback
 selection, and records direct x86 compilation plus freshly linked four-EXE
 and deployed COMMAND/Console regression.
 
+## S11 Closure Record
+
+[T420 S11 debug package recovery](../etc/evidence/m0-t420-s11-debug-package-recovery.md)
+closes all eight selected original SoftPC debug units, restores `trace.c` to
+upstream formatting, and records x86 compilation, fresh product linkage and
+deployed regression.
+
 ## Current Technical Baseline
 
 - Product package: Win32/x86 CCPU40 `run16.exe`, `basesrv.exe`, `ntvdm.exe`,
