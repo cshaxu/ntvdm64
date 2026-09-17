@@ -2,6 +2,8 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T419 post-closure DTMgr record projection repair](evidence/m0-t419-post-closure-dtmgr-record-projection-repair.md) | M0 T419 follow-up | Replaces the autonomous DTMgr stack with an original-DOSRECORD projection and records x86 plus owner nested-COMMAND proof. | Retain with T419 closure. |
+| [T420 S2 C-VID package recovery](evidence/m0-t420-s2-cvidc-package-recovery.md) | M0 T420 S2 | Freezes and verifies complete selected C-VID composition, single Gdp ownership and profile-null vector dispositions. | Retain through T420 package completion. |
 | [T420 S1 CCPU386 package audit](evidence/m0-t420-s1-ccpu386-package-audit.md) | M0 T420 S1 | Freezes the complete CCPU386 selected manifest, providers, difference dispositions and the implementation-ready C-VID S2 boundary. | Retain through T420 package completion. |
 | [T419 S5 DTASKMGR RPC and compact entry](evidence/m0-t419-s5-dtaskmgr-rpc-and-run16-compact-entry.md) | M0 T419 S5 | Records the real-system-handle repair, live worker projection, generic bare-image compact-option boundary, x86/package proof and owner visual boundary. | Retain through T419 closure. |
 | [T419 S4 DTASKMGR disconnected state](evidence/m0-t419-s4-dtaskmgr-disconnected-state.md) | M0 T419 S4 | Retains the normal empty-table presentation when BaseSrv is absent, formal x86/package proof and owner visual acceptance boundary. | Retain through T419 closure. |

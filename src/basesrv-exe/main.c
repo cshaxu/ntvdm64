@@ -167,9 +167,10 @@ error_status_t Server_TaskSnapshot(handle_t binding,HANDLE process,ULONG protoco
             (*entries)[index].sequence=local[index].sequence;
             (*entries)[index].kind=local[index].kind;
             (*entries)[index].state=local[index].state;
-            (*entries)[index].reserved=0;
+            (*entries)[index].reserved=local[index].reserved;
             (*entries)[index].started_filetime=(hyper)local[index].started_filetime;
             (*entries)[index].task=local[index].task;
+            (*entries)[index].stack_depth=local[index].stack_depth;
             memcpy((*entries)[index].image,local[index].image,sizeof(local[index].image));
         }
     }

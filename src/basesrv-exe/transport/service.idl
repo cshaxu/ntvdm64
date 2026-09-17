@@ -13,9 +13,11 @@ interface vdm_service
         unsigned long sequence;
         unsigned long kind;
         unsigned long state;
+        /* Count of the worker's original DOS/WOW task records. */
         unsigned long reserved;
         hyper started_filetime;
         unsigned long task;
+        unsigned long stack_depth;
         wchar_t image[260];
     } DTASKMGR_WORKER;
     /* Authenticated lifetime capability, not a PID or restart authority. */

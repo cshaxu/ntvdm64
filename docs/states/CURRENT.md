@@ -36,9 +36,10 @@ semantics.
 
 - Product package: Win32/x86 CCPU40 `run16.exe`, `basesrv.exe`, `ntvdm.exe`,
   and `dtmgr.exe`; latest selected artifacts are in `O:\winnt`.
-- T419 is closed at `e769ac104`: four EXE component directories are explicit,
-  `dtmgr.exe` replaces `dtaskmgr.exe`, and the clean-Console plus
-  COMMAND/MEM/EDIT regressions passed.
+- T419 is closed with its owner-accepted post-closure DTMgr record-projection
+  correction: four EXE component directories are explicit, `dtmgr.exe`
+  replaces `dtaskmgr.exe`, and the task display derives depth from original
+  BaseSrv DOS records rather than a parallel stack.
 - T420 S1 is delivered at `2d128cbaa`; its evidence freezes all 130 selected
   CCPU compile nodes, the `ntstubs`/`localfm` profile split, the 120/10
   final-map extraction split and finite external owners. S2 now audits and

@@ -16,9 +16,14 @@ typedef struct OPENNT_BASE_WORKER_INFO {
     uint32_t sequence;
     uint32_t kind;
     uint32_t state;
+    /* Count of original source records currently executing or queued for this
+     * worker. This is management-only metadata, not a guest-visible task ID. */
     uint32_t reserved;
     uint64_t started_filetime;
     uint32_t task;
+    /* Management-only depth: 0 is the resident PermCom, 1 its COMMAND,
+     * and each child command increases the visible call depth. */
+    uint32_t stack_depth;
     WCHAR image[OPENNT_BASE_WORKER_IMAGE_CHARS];
 } OPENNT_BASE_WORKER_INFO;
 /* The original service owns ConsoleRecord selection.  This callback only
