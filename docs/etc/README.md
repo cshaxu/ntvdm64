@@ -2,6 +2,7 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T419 S4 DTASKMGR disconnected state](evidence/m0-t419-s4-dtaskmgr-disconnected-state.md) | M0 T419 S4 | Retains the normal empty-table presentation when BaseSrv is absent, formal x86/package proof and owner visual acceptance boundary. | Retain through T419 closure. |
 | [T419 S2--S3 DTASKMGR integration](evidence/m0-t419-s2-s3-dtaskmgr-integration.md) | M0 T419 S2--S3 | Fixed-width BaseSrv management projection, server-owned worker termination, four-program x86 build and deployed COMMAND/MEM/EDIT regression evidence. | Retain through T419 closure. |
 | [T419 S1 DTASKMGR worker contract audit](evidence/m0-t419-s1-dtaskmgr-worker-contract-audit.md) | M0 T419 S1 | Proves the BaseSrv worker-watch and original DOS/WOW-record boundary; selects epoch plus worker-sequence identity and server-owned worker termination. | Retain through T419 closure. |
 | [T419 S1 x87 audit](evidence/m0-t419-s1-x87-audit.md) | M0 T419 S1--S3 | Records the SoftPC/OpenNT layout and conversion comparison, formal-x86 unit/fixture proof, and the outstanding Ninja-runner limitation. | Retain through T419 closure. |

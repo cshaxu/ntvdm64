@@ -72,6 +72,11 @@ broker state, not a best-effort decode.
    duplicate request). Prove that only the selected registered worker and its
    explicitly disclosed hosted tasks are affected, then run the established
    direct and interactive COMMAND/MEM/EDIT regression matrix unchanged.
+4. **Disconnected empty-state repair.** When BaseSrv is absent, incompatible
+   or disconnects, retain the ordinary empty table and the `No product tasks.`
+   row, add a distinct `BaseSrv not connected` status/retry line, and do not
+   start a broker or exit DTASKMGR. Build, deploy and regress the four-program
+   package; leave T419 open for owner Console acceptance.
 
 ## Verification and exit criteria
 

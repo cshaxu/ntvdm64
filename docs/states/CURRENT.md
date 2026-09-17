@@ -4,26 +4,46 @@
 
 ## Active Packet
 
-**Active: M0 T419 S3** — DTASKMGR authenticated worker termination and final package integration.
+**Active: M0 T419 S4** — delivery complete; awaiting owner Console acceptance.
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T419 S3, Ordinary Mode. |
-| Admission And Approval | The owner admitted the former queue-head BDM candidate, approved worker-scoped termination, directed a `src/dtaskmgr/` component producing 8.3-named `DTASKMGR.EXE`, and asked implementation to continue. |
+| Identifier Mode | M0 T419 S4, Ordinary Mode. |
+| Admission And Approval | The owner reopened T419 and admitted this repair: when `basesrv.exe` is absent, DTASKMGR must retain its normal empty-task interface, label BaseSrv as not connected, and retry rather than exit. |
 | Candidate Proposal | [BDM Terminal Task Manager](../proposals/proposal-bdm-terminal-task-manager-001.md). |
-| Objective | Complete the broker-authorized selected-worker termination path and four-program package: epoch/sequence stale-selection rejection, explicit hosted-child confirmation, BaseSrv-owned local-handle resolution, original worker-exit cleanup, and deployed `DTASKMGR.EXE`. |
-| Non-goals | No second task registry, per-child DOS/WOW termination, Windows process enumeration, direct `TerminateProcess` client path, GUI/guest TUI, arbitrary-process control, or MVDM/OpenNT mirror change. |
-| Reference Baseline | S1 [worker-contract audit](../etc/evidence/m0-t419-s1-dtaskmgr-worker-contract-audit.md), S2 management snapshot/TUI build and `456270147` candidate. |
-| Files And ABI Surface | `src/dtaskmgr/`, `src/basesrv/transport/service.idl`, BaseSrv management binding/source, lifecycle fixture, formal build graph and product package selection. New copied fixed-width management records remain BaseSrv-owned. |
-| Applicable Rules | Documentation, execution, architecture and coding authorities; authenticated fixed-width broker ABI and executable-owned placement rules. |
-| Verification | Stale-epoch negative plus server-owned termination lifecycle fixture; fresh formal x86 four-program build; deployed hashes; direct and interactive COMMAND/MEM/EDIT regressions; final diff/governance review. TUI visual acceptance remains an owner Console check, not an automated terminal action. |
-| Expected Markers | Copied epoch/worker rows, no registered DTASKMGR peer, stable selection by epoch/worker ID, explicit hosted-child scope, original worker-exit cleanup and no broker timer retention leak. |
+| Objective | Preserve the same empty task table when BaseSrv is absent, incompatible, or disconnects: label the connection state, disable selection/termination naturally through the empty list, and retry without exiting. Delivered; awaiting owner visual acceptance. |
+| Non-goals | No automatic broker startup, new registry, per-child DOS/WOW termination, Windows process enumeration, direct `TerminateProcess` client path, GUI/guest TUI, arbitrary-process control, or MVDM/OpenNT mirror change. |
+| Reference Baseline | S1 [worker-contract audit](../etc/evidence/m0-t419-s1-dtaskmgr-worker-contract-audit.md) and S2--S3 [integration evidence](../etc/evidence/m0-t419-s2-s3-dtaskmgr-integration.md). |
+| Files And ABI Surface | `src/dtaskmgr/main.c`, proposal, evidence and product package selection only; no management RPC ABI change. |
+| Applicable Rules | Documentation, execution, architecture and coding authorities; DTASKMGR remains a read-only observer when disconnected. |
+| Verification | Source-level disconnected-state rendering check; fresh formal x86 four-program build; BaseSrv reservation/termination and DTASKMGR RPC fixtures; established COMMAND/MEM/EDIT regressions; deployment, governance and diff review. Owner Console visual acceptance remains manual. |
+| Expected Markers | `No product tasks.` remains visible; a separate `BaseSrv not connected` line names the condition and retry; no BaseSrv process is created by DTASKMGR. |
 | Asset Needs | Existing local source, formal x86 build scripts and `O:\winnt\logs`; no external source or guest-media acquisition. |
-| Reporting Requirements | Record source/boundary, ABI layout, all negative behavior, exact build route, product hashes and owner visual acceptance; report no fabricated WOW16 row. |
-| Stop Conditions | A selected identity can reach a reused worker after broker restart; server termination bypasses its retained authenticated watch; polling keeps an empty broker alive; formal build cannot be completed by a recorded route; or any established regression fails. Pause for owner decision. |
-| Exit Criteria | Termination and stale-epoch negative fixtures pass; full x86 four-program build and deployment complete; established COMMAND/MEM/EDIT regressions pass; governance/diff checks and committed/pushed clean worktree. |
+| Reporting Requirements | Record the unchanged observer boundary, exact disconnected UI text, build route, product hashes and pending owner visual acceptance. |
+| Stop Conditions | DTASKMGR exits or hides the empty table while disconnected; it starts BaseSrv; a regression fails; or the formal build cannot be completed by a recorded route. Pause for owner decision. |
+| Exit Criteria | Empty/disconnected rendering is proven; full x86 four-program build and deployment complete; established regressions pass; governance/diff checks and committed/pushed clean worktree. T419 then remains open solely for owner visual acceptance. |
 | Original Owner Request | Add a Terminal character-mode Task Manager that lists this product's DOS/Win16/WOW16 tasks, shows IDs/times/status, handles no broker/tasks, supports Up/Down selection and kills selected tasks; use `DTASKMGR.EXE`. The owner approved termination at the selected VDM worker scope, with all hosted child tasks disclosed in the confirmation. |
-| Similar-Issue Sweep | Inspect all BaseSrv connection/auth/empty-timer paths and Console state adapters, plus version rejection and worker registration/rundown, to avoid a peer-registration leak or stale presentation state. |
+| Similar-Issue Sweep | Inspect BaseSrv connection/auth/empty-timer and Console presentation paths to ensure absence is represented as observer state, not a product-task claim, peer registration or service-start action. |
+
+## S3 Closure Record
+
+S3 delivered authenticated, BaseSrv-owned selected-worker termination in
+`df9bf79ef`, including the stale epoch/sequence rejection, explicit hosted-task
+confirmation, server-local handle use and original worker-exit cleanup.  The
+formal x86 product build, lifecycle fixtures and COMMAND/MEM/EDIT regressions
+are recorded in the [S2--S3 integration evidence](../etc/evidence/m0-t419-s2-s3-dtaskmgr-integration.md).
+T419 remains open: S4 repairs only the disconnected observer presentation and
+then waits for owner Console acceptance.
+
+## S4 Closure Record
+
+S4 changes only DTASKMGR presentation: its zero-row table now always says
+`No product tasks.` and appends `BaseSrv not connected` plus retry status when
+the management RPC is unavailable.  It neither exits nor starts a broker.
+The fresh x86 build, broker fixtures, deployed COMMAND/MEM/EDIT matrix and
+four package hashes are recorded in the [S4 disconnected-state evidence](../etc/evidence/m0-t419-s4-dtaskmgr-disconnected-state.md).
+S4 is ready for P delivery; T419 remains open only for the owner's real
+Console acceptance of the displayed offline and connected states.
 
 ## S2 Closure Record
 

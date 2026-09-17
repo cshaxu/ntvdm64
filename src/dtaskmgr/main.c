@@ -85,12 +85,14 @@ static void render(HANDLE output,DTASKMGR_STATE *state,DTASKMGR_WORKER *items,UL
     SYSTEMTIME clock;
     clear_screen(output);
     fwprintf(stdout,L"DTASKMGR  NTVDM Task Manager  |  BaseSrv %s\n",
-        state->status==ERROR_SUCCESS ? L"connected" : L"unavailable");
+        state->status==ERROR_SUCCESS ? L"connected" : L"not connected");
     fwprintf(stdout,L"%-2s %-8s %-7s %-7s %-11s %-12s %-10s %s\n",L"",L"WORKER",L"TASK",L"KIND",L"STATE",L"START",L"ELAPSED",L"IMAGE");
     fwprintf(stdout,L"--------------------------------------------------------------------------------\n");
     if (!count) {
-        fwprintf(stdout,state->status==ERROR_SUCCESS ? L"  No product tasks.\n" :
-            L"  Broker unavailable (error %lu); refresh will retry.\n",(unsigned long)state->status);
+        fwprintf(stdout,L"  No product tasks.\n");
+        if (state->status!=ERROR_SUCCESS)
+            fwprintf(stdout,L"  BaseSrv not connected (error %lu); refresh will retry.\n",
+                (unsigned long)state->status);
     }
     GetSystemTimeAsFileTime(&now);
     for (index=0;index<count;++index) {
