@@ -50,7 +50,6 @@
 /* DIVERGENCE(MVDM-HOST-DIV-162): selected CCPU40/C-VID sources retain their
  * original tables but not the historical generated pre-config binder. */
 #include "mvdm_cvidc_vector_binding.h"
-#include "mvdm_standalone_worker.h"
 #include "timer.h"
 #include "yoda.h"
 //#include "host_env.h"
@@ -159,9 +158,7 @@ INT      main IFN2(INT, argc, CHAR **, argv)
 #ifndef NTVDM
   ProcCommonCommLineArgs(argc,argv);
 #endif /* NTVDM */
-  mvdm_standalone_worker_record_phase("before-host-appl-init");
   host_applInit(argc,argv);	/* recommended home is host/xxxx_reset.c */
-  mvdm_standalone_worker_record_phase("after-host-appl-init");
 
 #ifdef SECURE
   /* Now that error panels are available, Validate SoftWindows Integrity. */
@@ -196,15 +193,12 @@ INT      main IFN2(INT, argc, CHAR **, argv)
    *
    * Setup the initial gfi funtion pointers before going into config
    */
-  mvdm_standalone_worker_record_phase("before-gfi-init");
   gfi_init();
-  mvdm_standalone_worker_record_phase("after-gfi-init");
 
   /* DIVERGENCE(MVDM-HOST-DIV-162): config() can initialise EGA before the
    * original later setup_vga_globals() hook. Bind the selected original
    * C-VID vector table before that first controller call. */
   mvdm_cvidc_bind_video_vector();
-  mvdm_standalone_worker_record_phase("after-video-vector");
 
   /*
    * Initialise any Windows 3.x compliant DOS Drivers.
@@ -220,16 +214,13 @@ INT      main IFN2(INT, argc, CHAR **, argv)
 
 #ifndef	macintosh
   init_virtual_drivers();
-  mvdm_standalone_worker_record_phase("after-vdds");
 #endif
 
 /*
  * Find our configuration
  *------------------------*/
 
-  mvdm_standalone_worker_record_phase("before-config");
   config();
-  mvdm_standalone_worker_record_phase("after-config");
 
 #if defined(PROFILE) && !defined(CPU_40_STYLE)
 /*
@@ -267,9 +258,7 @@ INT      main IFN2(INT, argc, CHAR **, argv)
  * initialise the cpu
  *----------------------*/
 
-  mvdm_standalone_worker_record_phase("before-cpu-init");
   cpu_init();
-  mvdm_standalone_worker_record_phase("after-cpu-init");
 
 #if defined(CCPU) && defined(CPU_40_STYLE)
   /* DIVERGENCE(MVDM-HOST-DIV-182): the original generated CCPU access-vector
@@ -339,9 +328,7 @@ INT      main IFN2(INT, argc, CHAR **, argv)
  * Initialise VDDs, Read in the Dos ntio.sys file and arrange for the cpu
  * to start execution at it's initialisation entry point.
  */
-    mvdm_standalone_worker_record_phase("before-dos-emulation");
     InitialiseDosEmulation(argc, argv);
-    mvdm_standalone_worker_record_phase("after-dos-emulation");
 #endif	/* NTVDM */
 
 /*
