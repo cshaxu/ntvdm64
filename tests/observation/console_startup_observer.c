@@ -503,13 +503,19 @@ static BOOL wait_for_console_prompt(HANDLE output, DWORD timeout_ms)
     DWORD begin=GetTickCount();
     do {
         CONSOLE_SCREEN_BUFFER_INFO info;
-        char row[512]; DWORD count=0;
-        if(GetConsoleScreenBufferInfo(output,&info) &&
-           info.dwCursorPosition.X>2 && info.dwCursorPosition.X<sizeof(row)) {
-            COORD pos={0,info.dwCursorPosition.Y};
-            if(ReadConsoleOutputCharacterA(output,row,info.dwCursorPosition.X,pos,&count) &&
-               count==(DWORD)info.dwCursorPosition.X &&
-               row[count-1]=='>' && row[1]==':') return TRUE;
+        char row[512]; DWORD count=0; SHORT y;
+        if(GetConsoleScreenBufferInfo(output,&info) && info.dwSize.X>2 &&
+           info.dwSize.X<(SHORT)sizeof(row)) {
+            /* COMMAND can paint its prompt before the public Console cursor
+             * settles on that row.  Identify the same drive-qualified prompt
+             * in the visible buffer instead of treating cursor timing as a
+             * guest readiness contract. */
+            for(y=info.srWindow.Top;y<=info.srWindow.Bottom;y++) {
+                COORD pos={0,y};
+                if(ReadConsoleOutputCharacterA(output,row,info.dwSize.X,pos,&count) &&
+                   count==(DWORD)info.dwSize.X && row[1]==':' &&
+                   memchr(row,'>',count)!=NULL) return TRUE;
+            }
         }
         Sleep(25);
     } while(GetTickCount()-begin<timeout_ms);

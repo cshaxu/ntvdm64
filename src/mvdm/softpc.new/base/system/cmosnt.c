@@ -445,7 +445,7 @@ int verify_equip_byte IFN1(half_word *, equip)
 
 	/* Check the Equipment Byte */
 	*equip = 0;
-	adapter = (SHORT) config_inquire(C_GFX_ADAPTER, NULL);
+        adapter = (SHORT) config_inquire(C_GFX_ADAPTER, NULL);
 	if(adapter != -1)
 		*equip |= display_mask[adapter];
 

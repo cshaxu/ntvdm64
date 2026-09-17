@@ -212,10 +212,6 @@ static int minFailedPolls = 10;
 
 
 #else
-/* DIVERGENCE MVDM-HOST-DIV-024: The exact NT4 relative include assumes the
- * original private\\mvdm directory depth.  This owner-rooted mirror obtains
- * the same selected vdm.h declaration carrier through its declared ABI path;
- * no algorithm or declaration is changed. */
 #include <vdm.h>
   
 /*  NTVDM

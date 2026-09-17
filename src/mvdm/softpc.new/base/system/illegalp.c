@@ -40,7 +40,6 @@
 #include "config.h"
 #include "debug.h"
 #include "yoda.h"
-#include "mvdm_softpc_termination.h"
 
 #ifndef PROD
 IU32	IntelMsgDest = IM_DST_TRACE;
@@ -96,19 +95,6 @@ void illegal_op_int()
 	cs = sas_hw_at(stack+2) + (sas_hw_at(stack+3)<<8);
 
 	where(string, cs, ip);
-
-#ifdef NTVDM
-        /* The original path has already extracted its exception-frame
-         * destination.  This optional observer copies that state before the
-         * unchanged original error dialog and continuation handling. */
-        ea = effective_addr(cs, ip);
-        mvdm_softpc_record_cpu_illegal_instruction(cs, ip, ea,
-            sas_hw_at(ea), sas_hw_at(ea + 1), sas_hw_at(ea + 2),
-            sas_hw_at(ea + 3), sas_hw_at(ea + 4),
-            ea >= 2 ? sas_hw_at(ea - 2) : 0, ea >= 1 ? sas_hw_at(ea - 1) : 0,
-            sas_hw_at(0x6u * 4u), sas_hw_at((0x6u * 4u) + 2u),
-            getCS(), getIP(), getMSW());
-#endif
 
 #ifndef NTVDM
 #ifdef PROD
