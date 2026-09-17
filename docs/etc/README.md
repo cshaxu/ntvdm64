@@ -2,6 +2,8 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T420 S14 COMMAND package recovery](evidence/m0-t420-s14-command-package-recovery.md) | M0 T420 S14 | Completes the selected COMMAND package and restores two empty x86 pointer/handle carriers to original OpenNT forms. | Retain through T420 package completion. |
+| [T420 S15 XMS package recovery](evidence/m0-t420-s15-xms-package-recovery.md) | M0 T420 S15 | Completes the selected XMS package, restores two source files, and records the finite callback/guest-memory boundaries plus x86 and deployed MEM proof. | Retain through T420 package completion. |
 | [T420 S13 DEM and residual-diff recovery](evidence/m0-t420-s13-dem-and-residual-diff-recovery.md) | M0 T420 S13 | Completes DEM and removes S1--S12 compile-only/default-off residue, including the full analogous callback-ABI sweep. | Retain with T420 closure. |
 | [T420 S12 host package recovery](evidence/m0-t420-s12-host-package-recovery.md) | M0 T420 S12 | Restores proven OpenNT host-source formatting, freezes the complete host-package difference ledger, and records final x86/product regression. | Retain through T420 package completion. |
 | [T420 S11 debug package recovery](evidence/m0-t420-s11-debug-package-recovery.md) | M0 T420 S11 | Restores complete selected SoftPC debug-package composition and records x86/product regression. | Retain through T420 package completion. |

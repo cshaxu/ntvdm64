@@ -40,7 +40,7 @@ $environmentNinja = $environment.Replace('\', '/')
 # product object. The selected x86 session callback path never uses the
 # historical i386 host-pointer condition.
 $units = @('xms', 'xmsa20', 'xmsblock', 'xmsdisp', 'xmsmisc', 'xmsumb')
-$sources = $units | ForEach-Object { "$root/src/mvdm-host/xms.486/$_.c" }
+$sources = $units | ForEach-Object { "$root/src/mvdm/xms.486/$_.c" }
 $adapterSources = @('src/ntvdm-exe/softpc/mvdm_xms_memory.c')
 $adapterSourcePaths = $adapterSources | ForEach-Object { "$root/$_" }
 $hashLines = @($sources + $adapterSourcePaths) | ForEach-Object {
@@ -51,7 +51,7 @@ $hashLines = @($sources + $adapterSourcePaths) | ForEach-Object {
 [IO.File]::WriteAllLines((Join-Path $build 'source-manifest.tsv'), $hashLines,
     (New-Object System.Text.UTF8Encoding($false)))
 
-$cflags = '/nologo /std:c11 /MT /W4 /showIncludes /DWIN_32 /DMVDM_XMS_SESSION_BACKEND /DDEVL /DCPU_40_STYLE ' +
+$cflags = '/nologo /std:c11 /MT /W4 /showIncludes /DWIN_32 /DDEVL /DCPU_40_STYLE ' +
     '/FI ' + $root + '/src/opennt-abi/host-compat/include/nt.h ' +
     '/FI ' + $root + '/src/ntvdm-exe/softpc/include/error_abi.h ' +
     '/FI ' + $root + '/src/ntvdm-exe/monitor/include/monitor_context.h ' +
@@ -60,17 +60,17 @@ $cflags = '/nologo /std:c11 /MT /W4 /showIncludes /DWIN_32 /DMVDM_XMS_SESSION_BA
     '/I ' + $root + '/src/ntvdm-exe/softpc/include ' +
     '/I ' + $root + '/src/ntvdm-exe/monitor/include ' +
     '/I ' + $root + '/src/opennt-host/public/sdk/inc ' +
-    '/I ' + $root + '/src/mvdm-host/xms.486 ' +
-    '/I ' + $root + '/src/mvdm-host-overlay/softpc.new/host/src ' +
-    '/I ' + $root + '/src/mvdm-host/inc ' +
+    '/I ' + $root + '/src/mvdm/xms.486 ' +
+    '/I ' + $root + '/src/mvdm/softpc.new/host/src ' +
+    '/I ' + $root + '/src/mvdm/inc ' +
     '/I ' + $root + '/src/opennt-abi/source/public/sdk/inc ' +
     '/I ' + $root + '/src/opennt-abi/source/public/internal/base/inc ' +
     '/I ' + $root + '/src/opennt-abi/source/public/ddk/inc ' +
-    '/I ' + $root + '/src/mvdm-host/softpc.new/host/inc ' +
-    '/I ' + $root + '/src/mvdm-host/softpc.new/base/inc '
+    '/I ' + $root + '/src/mvdm/softpc.new/host/inc ' +
+    '/I ' + $root + '/src/mvdm/softpc.new/base/inc '
 
 $buildLines = foreach ($unit in $units) {
-    "build obj/$unit.obj: cc `$root/src/mvdm-host/xms.486/$unit.c"
+    "build obj/$unit.obj: cc `$root/src/mvdm/xms.486/$unit.c"
 }
 $adapterBuildLines = foreach ($source in $adapterSources) {
     $name = [IO.Path]::GetFileNameWithoutExtension($source)

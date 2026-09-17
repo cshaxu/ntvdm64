@@ -44,11 +44,7 @@ BOOL XMSInit (int argc, char *argv[])
 
     XmsSize = xmsMemorySize * 1024 - (64*1024);
 
-/* DIVERGENCE MVDM-HOST-DIV-132: the historical `i386` spelling selected a
-   direct host-pointer XMS backend.  The CPU40/x86 product deliberately does
-   not define that host-architecture proxy, so it retains the original
-   virtual-memory allocator branch and callback order instead. */
-#if !defined(i386) && !defined(MVDM_XMS_SESSION_BACKEND)
+#ifndef i386
     Status = VdmAllocateVirtualMemory(&VdmAddress,
                                       XmsSize,
                                       FALSE);
@@ -56,7 +52,7 @@ BOOL XMSInit (int argc, char *argv[])
     if (Status == STATUS_NOT_IMPLEMENTED) {
 
         // Old emulator, just assume base address
-#endif ; // i386 or selected session backend
+#endif ; //i386
         //
         // Initialize the sub allocator
         //
@@ -68,7 +64,7 @@ BOOL XMSInit (int argc, char *argv[])
             xmsMoveMemory
             );
 
-#if !defined(i386) && !defined(MVDM_XMS_SESSION_BACKEND)
+#ifndef i386
     } else {
 
         //
@@ -97,7 +93,7 @@ BOOL XMSInit (int argc, char *argv[])
             );
             
     }
-#endif // i386 or selected session backend
+#endif // i386
 
     if (ExtMemSA == NULL) {
         return FALSE;

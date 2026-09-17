@@ -18,6 +18,7 @@ BOOL sas_twenty_bit_wrapping_enabled(void);
 
 BYTE * pHimemA20State = NULL;
 
+
 /* xmsA20 - Handle A20 requests
  *
  *

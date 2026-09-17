@@ -4,26 +4,26 @@
 
 ## Active Packet
 
-**Active: M0 T420 S15**
+**Active: M0 T420 S16**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T420 S15 — Ordinary Mode. |
+| Identifier Mode | M0 T420 S16 — Ordinary Mode. |
 | Candidate Proposal | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md) |
-| Admission And Approval | The owner approved on 2026-09-17: “批准所有推送 请你自动准入每个s任务”. S14 closes in this packet; this admits the next sequential package and retains standing push authority. |
-| Objective | Complete the original `xms.486` allocation, move, mapping lease and teardown package as one source-first unit. |
+| Admission And Approval | The owner approved on 2026-09-17: “批准所有推送 请你自动准入每个s任务”. S15 closes in this packet; this admits the next sequential package and retains standing push authority. |
+| Objective | Complete the original `suballoc` state, allocation and release lifecycle as one source-first package unit. |
 | Non-goals | No CPU30 monitor, guest-media patching, new mirror files, DPMI expansion, renderer redesign, or removal of a demonstrated standalone ABI/guest-memory boundary. |
-| Reference Baseline | T420 S1--S14 are closed. The formal x86 package passed direct and interactive COMMAND/MEM/EDIT, Console geometry, mouse and short-window EDIT→MEM regression. |
-| Files And ABI Surface | Freeze the complete selected `src/mvdm/xms.486` manifest and all reached XMS allocation, move, mapping and teardown interfaces. No new file below mirrors. |
+| Reference Baseline | T420 S1--S15 are closed. The formal x86 package passed direct and interactive COMMAND/MEM/EDIT, Console geometry, mouse and short-window EDIT→MEM regression. |
+| Files And ABI Surface | Freeze the complete selected `src/mvdm/suballoc` manifest and all reached suballocator state, allocation and release interfaces. No new file below mirrors. |
 | Applicable Rules | Project design/rules, source policy, strict mirror rule and source-recovery ladder. |
-| Verification | Freeze manifest/source-diff ledger; compare selected mirror files bytewise and normalized; classify every XMS allocation/move/map/teardown interface; fresh x86 formal build; focused XMS tests; direct and interactive COMMAND/MEM/EDIT regressions; governance and diff review. |
-| Expected Markers | Complete selected XMS disposition; original allocation and teardown ordering; source-first external-boundary ledger; separated mirror/adapter/autonomous footprint report. |
+| Verification | Freeze manifest/source-diff ledger; compare selected mirror files bytewise and normalized; classify every suballocator state/allocation/release interface; fresh x86 formal build; focused suballocator tests; direct and interactive COMMAND/MEM/EDIT regressions; governance and diff review. |
+| Expected Markers | Complete selected suballocator disposition; original allocation and release ordering; source-first external-boundary ledger; separated mirror/adapter/autonomous footprint report. |
 | Asset Needs | Existing selected OpenNT MVDM union, formal generator and `O:\winnt` runtime package. No new historical source or guest media import is admitted. |
 | Reporting Requirements | Report each manifest source, external boundary, source-first result, exact footprint change, focused and established-product results, limitations and next owner. |
-| Stop Conditions | Pause for a required package beyond XMS, a kernel/CPU30 dependency, a new behavior interface, or COMMAND/MEM/EDIT regression. |
-| Exit Criteria | All selected XMS units and reached interfaces have dispositions; changes are source-first/mirror-compliant; formal x86/focused tests and established regressions pass; evidence/index/status updated; reviewed P pushed. |
+| Stop Conditions | Pause for a required package beyond suballoc, a kernel/CPU30 dependency, a new behavior interface, or COMMAND/MEM/EDIT regression. |
+| Exit Criteria | All selected suballocator units and reached interfaces have dispositions; changes are source-first/mirror-compliant; formal x86/focused tests and established regressions pass; evidence/index/status updated; reviewed P pushed. |
 | Original Owner Request | “批准所有推送 请你自动准入每个s任务”；“按照最小化diff且不改变功能语义和编译成功的原则来做，所有已经提交的S任务如果不符合这个标准，应该继续减少diff而不是继续走下一个diff。” |
-| Similar-Issue Sweep | Compare every selected XMS source to OpenNT; audit all divergence markers and reached allocation/mapping/teardown consumers for duplicate local policy. |
+| Similar-Issue Sweep | Compare every selected suballocator source to OpenNT; audit all divergence markers and reached state/allocation/release consumers for duplicate local policy. |
 
 ## S1 Closure Record
 
@@ -139,6 +139,15 @@ x86 pointer/handle carriers, preserves the necessary guest-memory, async and
 cross-process resource bindings, passes fresh formal x86 linkage and the
 owner-accepted direct/interactive COMMAND, MEM and EDIT route.
 
+## S15 Closure Record
+
+[T420 S15 XMS package recovery](../etc/evidence/m0-t420-s15-xms-package-recovery.md)
+closes all eight selected XMS units. Six now match the pinned OpenNT sources;
+the two remaining deltas are the source-proven `xmsMoveMemory` callback ABI
+and a bounded CPU40 guest-memory lease in the original move-block path.
+Focused allocation/mapping tests, fresh x86 linkage, and deployed direct
+`MEM` plus `COMMAND /C MEM` passed.
+
 ## Current Technical Baseline
 
 - Product package: Win32/x86 CCPU40 `run16.exe`, `basesrv.exe`, `ntvdm.exe`,
@@ -147,10 +156,10 @@ owner-accepted direct/interactive COMMAND, MEM and EDIT route.
   correction: four EXE component directories are explicit, `dtmgr.exe`
   replaces `dtaskmgr.exe`, and the task display derives depth from original
   BaseSrv DOS records rather than a parallel stack.
-- T420 S1--S14 are delivered: CCPU386, C-VID, video, system, keymouse, BIOS,
+- T420 S1--S15 are delivered: CCPU386, C-VID, video, system, keymouse, BIOS,
   support, disks, comms, DOS, debug, host and DEM are closed complete package
   units.  S14 COMMAND restored two empty x86 adapter carriers to their
-  original OpenNT forms; S15 XMS is the active next package.
+  original OpenNT forms; S15 closes XMS and S16 suballoc is active.
 
 ## Prior Closure
 
@@ -167,5 +176,5 @@ No standalone governance delivery is active or pending.
 
 ## Next Work
 
-M0 T420 S15 is active. The remaining candidate order is authoritative in
+M0 T420 S16 is active. The remaining candidate order is authoritative in
 [Queue](QUEUE.md) after T420 closure.

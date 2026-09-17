@@ -16,8 +16,10 @@ if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path.Replace('\', '/')
 if ([string]::IsNullOrWhiteSpace($BuildRoot)) {
     $build = Join-Path $root ("build/M0-T322/S2/xms-mapped-memory/{0}" -f $Architecture)
-} else {
+} elseif ([IO.Path]::IsPathRooted($BuildRoot)) {
     $build = Join-Path $BuildRoot $Architecture
+} else {
+    $build = Join-Path (Join-Path $root $BuildRoot) $Architecture
 }
 New-Item -ItemType Directory -Force $build, (Join-Path $build 'obj') | Out-Null
 
@@ -32,7 +34,7 @@ $environment = Join-Path $build 'msvc-mt.cmd'
 $environmentNinja = $environment.Replace('\', '/')
 
 $sources = @(
-    'tests/ntvdm/softpc/xms_mapped_memory_fixture.c',
+    'tests/adapter-mvdm-host-out/softpc/xms_mapped_memory_fixture.c',
     'src/ntvdm-exe/softpc/mvdm_xms_memory.c',
     'src/ntvdm-exe/softpc/mvdm_softpc_guest_memory.c',
     'src/ntvdm-exe/session/guest_memory_lease.c',
@@ -44,13 +46,13 @@ $cflags = '/nologo /std:c11 /MT /W4 /DWIN_32 /DCPU_40_STYLE ' +
     '/I ' + $root + '/src/opennt-abi/host-compat/include ' +
     '/I ' + $root + '/src/ntvdm-exe/softpc/include ' +
     '/I ' + $root + '/src/opennt-host/public/sdk/inc ' +
-    '/I ' + $root + '/src/mvdm-host/xms.486 ' +
-    '/I ' + $root + '/src/mvdm-host/inc ' +
+    '/I ' + $root + '/src/mvdm/xms.486 ' +
+    '/I ' + $root + '/src/mvdm/inc ' +
     '/I ' + $root + '/src/opennt-abi/source/public/sdk/inc ' +
     '/I ' + $root + '/src/opennt-abi/source/public/internal/base/inc ' +
     '/I ' + $root + '/src/opennt-abi/source/public/ddk/inc ' +
-    '/I ' + $root + '/src/mvdm-host/softpc.new/host/inc ' +
-    '/I ' + $root + '/src/mvdm-host/softpc.new/base/inc '
+    '/I ' + $root + '/src/mvdm/softpc.new/host/inc ' +
+    '/I ' + $root + '/src/mvdm/softpc.new/base/inc '
 $objects = @()
 $buildLines = @()
 foreach ($source in $sources) {

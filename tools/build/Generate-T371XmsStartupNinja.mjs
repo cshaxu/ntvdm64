@@ -17,21 +17,21 @@ writeFileSync(msvc, [
 
 const sources = [
   "tests/mvdm-host/xms/xms_init_fixture.c",
-  "src/mvdm-host/xms.486/xms.c",
-  "src/mvdm-host/suballoc/suballoc.c",
+  "src/mvdm/xms.486/xms.c",
+  "src/mvdm/suballoc/suballoc.c",
   "src/ntvdm-exe/softpc/mvdm_xms_memory.c",
   "src/ntvdm-exe/softpc/mvdm_softpc_guest_memory.c",
-  "src/session/guest_memory_lease.c",
-  "src/session/session.c"
+  "src/ntvdm-exe/session/guest_memory_lease.c",
+  "src/ntvdm-exe/session/session.c"
 ];
 const includes = [
   "src",
   "src/opennt-abi/host-compat/include",
   "src/ntvdm-exe/softpc/include",
   "src/opennt-host/public/sdk/inc",
-  "src/mvdm-host/inc",
-  "src/mvdm-host/xms.486",
-  "src/mvdm-host/softpc.new/base/inc",
+  "src/mvdm/inc",
+  "src/mvdm/xms.486",
+  "src/mvdm/softpc.new/base/inc",
   "src/opennt-abi/source/public/sdk/inc",
   "src/opennt-abi/source/public/internal/base/inc",
   "src/opennt-abi/source/public/ddk/inc"
