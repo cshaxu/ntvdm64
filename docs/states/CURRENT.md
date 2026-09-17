@@ -4,26 +4,26 @@
 
 ## Active Packet
 
-**Active: M0 T420 S16**
+**Active: M0 T420 S17**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T420 S16 — Ordinary Mode. |
+| Identifier Mode | M0 T420 S17 — Ordinary Mode. |
 | Candidate Proposal | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md) |
-| Admission And Approval | The owner approved on 2026-09-17: “批准所有推送 请你自动准入每个s任务”. S15 closes in this packet; this admits the next sequential package and retains standing push authority. |
-| Objective | Complete the original `suballoc` state, allocation and release lifecycle as one source-first package unit. |
+| Admission And Approval | The owner approved on 2026-09-17: “批准所有推送 请你自动准入每个s任务”. S16 closes in this packet; this admits the next sequential package and retains standing push authority. |
+| Objective | Complete the original `oemuni` conversion source, buffers and failure behavior as one source-first package unit. |
 | Non-goals | No CPU30 monitor, guest-media patching, new mirror files, DPMI expansion, renderer redesign, or removal of a demonstrated standalone ABI/guest-memory boundary. |
-| Reference Baseline | T420 S1--S15 are closed. The formal x86 package passed direct and interactive COMMAND/MEM/EDIT, Console geometry, mouse and short-window EDIT→MEM regression. |
-| Files And ABI Surface | Freeze the complete selected `src/mvdm/suballoc` manifest and all reached suballocator state, allocation and release interfaces. No new file below mirrors. |
+| Reference Baseline | T420 S1--S16 are closed. The formal x86 package passed direct and interactive COMMAND/MEM/EDIT, Console geometry, mouse and short-window EDIT→MEM regression. |
+| Files And ABI Surface | Freeze the complete selected `src/mvdm/oemuni` manifest and all reached conversion, buffer and failure interfaces. No new file below mirrors. |
 | Applicable Rules | Project design/rules, source policy, strict mirror rule and source-recovery ladder. |
-| Verification | Freeze manifest/source-diff ledger; compare selected mirror files bytewise and normalized; classify every suballocator state/allocation/release interface; fresh x86 formal build; focused suballocator tests; direct and interactive COMMAND/MEM/EDIT regressions; governance and diff review. |
-| Expected Markers | Complete selected suballocator disposition; original allocation and release ordering; source-first external-boundary ledger; separated mirror/adapter/autonomous footprint report. |
+| Verification | Freeze manifest/source-diff ledger; compare selected mirror files bytewise and normalized; classify every conversion/buffer/failure interface; fresh x86 formal build; focused OEM/Unicode tests; direct and interactive COMMAND/MEM/EDIT regressions; governance and diff review. |
+| Expected Markers | Complete selected OEM/Unicode disposition; original conversion and failure ordering; source-first external-boundary ledger; separated mirror/adapter/autonomous footprint report. |
 | Asset Needs | Existing selected OpenNT MVDM union, formal generator and `O:\winnt` runtime package. No new historical source or guest media import is admitted. |
 | Reporting Requirements | Report each manifest source, external boundary, source-first result, exact footprint change, focused and established-product results, limitations and next owner. |
-| Stop Conditions | Pause for a required package beyond suballoc, a kernel/CPU30 dependency, a new behavior interface, or COMMAND/MEM/EDIT regression. |
-| Exit Criteria | All selected suballocator units and reached interfaces have dispositions; changes are source-first/mirror-compliant; formal x86/focused tests and established regressions pass; evidence/index/status updated; reviewed P pushed. |
+| Stop Conditions | Pause for a required package beyond OEM/Unicode, a kernel/CPU30 dependency, a new behavior interface, or COMMAND/MEM/EDIT regression. |
+| Exit Criteria | All selected OEM/Unicode units and reached interfaces have dispositions; changes are source-first/mirror-compliant; formal x86/focused tests and established regressions pass; evidence/index/status updated; reviewed P pushed. |
 | Original Owner Request | “批准所有推送 请你自动准入每个s任务”；“按照最小化diff且不改变功能语义和编译成功的原则来做，所有已经提交的S任务如果不符合这个标准，应该继续减少diff而不是继续走下一个diff。” |
-| Similar-Issue Sweep | Compare every selected suballocator source to OpenNT; audit all divergence markers and reached state/allocation/release consumers for duplicate local policy. |
+| Similar-Issue Sweep | Compare every selected OEM/Unicode source to OpenNT; audit all divergence markers and reached conversion/buffer/failure consumers for duplicate local policy. |
 
 ## S1 Closure Record
 
@@ -148,6 +148,14 @@ and a bounded CPU40 guest-memory lease in the original move-block path.
 Focused allocation/mapping tests, fresh x86 linkage, and deployed direct
 `MEM` plus `COMMAND /C MEM` passed.
 
+## S16 Closure Record
+
+[T420 S16 SubAlloc package recovery](../etc/evidence/m0-t420-s16-suballoc-package-recovery.md)
+closes the one-unit production manifest with zero allocator-body diff and
+zero product adapter additions.  The retained x86-granularity header condition
+is source-proven; focused allocation/relocation/release, fresh formal x86,
+and deployed direct `MEM` plus `COMMAND /C MEM` passed.
+
 ## Current Technical Baseline
 
 - Product package: Win32/x86 CCPU40 `run16.exe`, `basesrv.exe`, `ntvdm.exe`,
@@ -156,10 +164,11 @@ Focused allocation/mapping tests, fresh x86 linkage, and deployed direct
   correction: four EXE component directories are explicit, `dtmgr.exe`
   replaces `dtaskmgr.exe`, and the task display derives depth from original
   BaseSrv DOS records rather than a parallel stack.
-- T420 S1--S15 are delivered: CCPU386, C-VID, video, system, keymouse, BIOS,
+- T420 S1--S16 are delivered: CCPU386, C-VID, video, system, keymouse, BIOS,
   support, disks, comms, DOS, debug, host and DEM are closed complete package
   units.  S14 COMMAND restored two empty x86 adapter carriers to their
-  original OpenNT forms; S15 closes XMS and S16 suballoc is active.
+  original OpenNT forms; S15 closes XMS, S16 closes SubAlloc, and S17 OEMUNI
+  is active.
 
 ## Prior Closure
 
@@ -176,5 +185,5 @@ No standalone governance delivery is active or pending.
 
 ## Next Work
 
-M0 T420 S16 is active. The remaining candidate order is authoritative in
+M0 T420 S17 is active. The remaining candidate order is authoritative in
 [Queue](QUEUE.md) after T420 closure.
