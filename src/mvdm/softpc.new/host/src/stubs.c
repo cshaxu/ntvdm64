@@ -242,6 +242,7 @@ GLOBAL VOID setup_vga_globals()
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: ASSERT CODE */
 
+
 void _assert(void *exp, void *file, unsigned line)
 {
     char linestr[100];

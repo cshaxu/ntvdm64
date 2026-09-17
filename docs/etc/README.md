@@ -2,6 +2,7 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T420 S12 host package recovery](evidence/m0-t420-s12-host-package-recovery.md) | M0 T420 S12 | Restores proven OpenNT host-source formatting, freezes the complete host-package difference ledger, and records final x86/product regression. | Retain through T420 package completion. |
 | [T420 S11 debug package recovery](evidence/m0-t420-s11-debug-package-recovery.md) | M0 T420 S11 | Restores complete selected SoftPC debug-package composition and records x86/product regression. | Retain through T420 package completion. |
 | [T420 S10 DOS package recovery](evidence/m0-t420-s10-dos-package-recovery.md) | M0 T420 S10 | Freezes the complete selected DOS unit, restores its pinned OpenNT formatting, and records direct x86 compilation, fresh product linkage and deployed regression. | Retain through T420 package completion. |
 | [T420 S9 comms package recovery](evidence/m0-t420-s9-comms-package-recovery.md) | M0 T420 S9 | Restores the final COM caller spelling and freezes the complete comms package as byte-exact OpenNT. | Retain through T420 package completion. |

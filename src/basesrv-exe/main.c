@@ -17,7 +17,7 @@ static WCHAR console_helper[MAX_PATH];
 static SRWLOCK idle_lock=SRWLOCK_INIT;
 static HANDLE idle_timer;
 static ULONG idle_epoch;
-#define BASESRV_EMPTY_GRACE_MS 60000u
+#define BASESRV_EMPTY_GRACE_MS 10000u
 #define BASE_CHECK_REPLY_BYTES 40u
 #define BASE_UPDATE_REPLY_BYTES 32u
 

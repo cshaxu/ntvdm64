@@ -4,26 +4,26 @@
 
 ## Active Packet
 
-**Active: M0 T420 S12**
+**Active: M0 T420 S13**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T420 S12 — Ordinary Mode. |
+| Identifier Mode | M0 T420 S13 — Ordinary Mode. |
 | Candidate Proposal | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md) |
 | Admission And Approval | The owner approved on 2026-09-17: “批准所有推送 请你自动准入每个s任务”. This reopens T420 for the next sequential package and authorizes later sequential S admissions and pushes. |
-| Objective | Complete the selected original `softpc.new/host/src` worker startup, Console, thread and host-lifecycle package. |
-| Non-goals | No CPU30 monitor, replacement firmware loader, guest-media patching, renderer change, WOW expansion or new mirror files. |
-| Reference Baseline | T420 S1--S10 are closed; current `O:\winnt` four-EXE x86 package passed direct/interactive COMMAND/MEM/EDIT, Console geometry, mouse and short-window EDIT→MEM regression. |
-| Files And ABI Surface | Freeze the complete selected `src/mvdm/softpc.new/host/src` manifest and every reached worker lifecycle boundary. No new file below mirrors. |
+| Objective | Complete the original `dos/dem` DOS-execution, BOP, file/guest-copy and failure package. |
+| Non-goals | No CPU30 monitor, guest-media patching, new mirror files, COMMAND package ownership, XMS/DPMI expansion, or renderer change. |
+| Reference Baseline | T420 S1--S12 are closed; the final S12 `O:\winnt` four-EXE x86 package passed direct/interactive COMMAND/MEM/EDIT, Console geometry, mouse and short-window EDIT→MEM regression. |
+| Files And ABI Surface | Freeze the complete selected `src/mvdm/dos/dem` manifest and every reached DOS file/BOP/guest-copy boundary. No new file below mirrors. |
 | Applicable Rules | Project design/rules, source policy, strict mirror rule and source-recovery ladder. |
-| Verification | Freeze manifest/source-diff ledger; mechanically compare every selected mirror file bytewise and normalized; fresh x86 formal build; focused debug/profile checks; direct and interactive COMMAND/MEM/EDIT regressions; governance and diff review. |
-| Expected Markers | Complete selected debug disposition; original trace/profile ordering and evidence; retained finite host boundary ledger; separated mirror/adapter/autonomous footprint report. |
+| Verification | Freeze manifest/source-diff ledger; mechanically compare every selected mirror file bytewise and normalized; fresh x86 formal build; focused DEM/BOP/file failure checks; direct and interactive COMMAND/MEM/EDIT regressions; governance and diff review. |
+| Expected Markers | Complete selected DEM disposition; original DOS/BOP/file ordering and evidence; retained finite guest-copy boundary ledger; separated mirror/adapter/autonomous footprint report. |
 | Asset Needs | Existing selected OpenNT MVDM union, current formal generator and `O:\winnt` runtime package. No new historical source or guest media import is admitted. |
 | Reporting Requirements | Report each manifest source, external boundary, source-first recovery result, exact footprint change, focused and established-product results, limitations and next owner. |
-| Stop Conditions | Pause for a required package beyond `host/src`, a kernel/CPU30 dependency, a new behavior interface, or COMMAND/MEM/EDIT regression. |
+| Stop Conditions | Pause for a required package beyond `dos/dem`, a kernel/CPU30 dependency, a new behavior interface, or COMMAND/MEM/EDIT regression. |
 | Exit Criteria | All selected host units and reached interfaces have dispositions; any change is source-first/mirror-compliant; formal x86/focused tests and established regressions pass; evidence/index/status updated; reviewed P pushed. |
 | Original Owner Request | “批准所有推送 请你自动准入每个s任务”；“已提交的S任务和当前S任务，现在就帮我处理好一起提交；将来的每个S任务也要遵循。” |
-| Similar-Issue Sweep | Compare every selected debug source to OpenNT; audit all divergence markers and reached trace/profile consumers for duplicate local policy. |
+| Similar-Issue Sweep | Compare every selected DEM source to OpenNT; audit all divergence markers and reached file/BOP/guest-copy consumers for duplicate local policy. |
 
 ## S1 Closure Record
 
@@ -118,6 +118,14 @@ closes all eight selected original SoftPC debug units, restores `trace.c` to
 upstream formatting, and records x86 compilation, fresh product linkage and
 deployed regression.
 
+## S12 Closure Record
+
+[T420 S12 host package recovery](../etc/evidence/m0-t420-s12-host-package-recovery.md)
+closes the selected original host package: six source files are restored to
+pinned OpenNT bytes, `stubs.c` retains only its established VDM_TIB storage
+binding, and the owner-supplied BaseSrv grace constant is included in the
+fresh x86 four-program and deployed regression evidence.
+
 ## Current Technical Baseline
 
 - Product package: Win32/x86 CCPU40 `run16.exe`, `basesrv.exe`, `ntvdm.exe`,
@@ -126,9 +134,10 @@ deployed regression.
   correction: four EXE component directories are explicit, `dtmgr.exe`
   replaces `dtaskmgr.exe`, and the task display derives depth from original
   BaseSrv DOS records rather than a parallel stack.
-- T420 S1--S10 are delivered: CCPU386, C-VID, video, system, keymouse, BIOS,
-  support, disks, comms and DOS are closed complete package units. S11 debug
-  is auto-admitted by the owner's standing sequential-S authority.
+- T420 S1--S12 are delivered: CCPU386, C-VID, video, system, keymouse, BIOS,
+  support, disks, comms, DOS, debug and host are closed complete package
+  units. S13 DEM is auto-admitted by the owner's standing sequential-S
+  authority.
 
 ## Prior Closure
 

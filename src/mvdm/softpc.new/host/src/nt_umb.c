@@ -184,7 +184,7 @@ DWORD	*Size
 	    }
 #endif
 	    // return the block address
-            *Address = (PVOID)UMB->Base;
+	    *Address = (PVOID)UMB->Base;
 	    break;
 
 	case UMB_OWNER_XMS:
@@ -198,7 +198,7 @@ DWORD	*Size
 	    }
 	    else {
 		UMB->Owner = UMB_OWNER_XMS;
-        *Address = (PVOID)UMB->Base;
+		*Address = (PVOID)UMB->Base;
 		*Size = UMB->Size;
 	    }
 	    break;
@@ -363,7 +363,7 @@ DWORD	Size
 	    }
 #endif
 	    UMB->Owner = UMB_OWNER_RAM;
-        xmsReleaseUMBNotify((PVOID)UMB->Base, UMB->Size);
+	    xmsReleaseUMBNotify((PVOID)UMB->Base, UMB->Size);
 	    break;
 
 	case UMB_OWNER_VDD:
@@ -403,7 +403,7 @@ DWORD	Size
 	    }
 #endif
 	    UMB->Owner = UMB_OWNER_RAM;
-        xmsReleaseUMBNotify((PVOID)UMB->Base, UMB->Size);
+	    xmsReleaseUMBNotify((PVOID)UMB->Base, UMB->Size);
 	    break;
 
 	default:
