@@ -58,6 +58,7 @@ int main(void)
     CHECK(Cpu.Video==(IHP)&Video && Cpu.Sas==&Sas && Cpu.Private!=0);
     CHECK(Sas.Sas_overwrite_memory==c_sas_overwrite_memory);
     CHECK(Cpu.ClearHwInt==0);
+    CHECK(Cpu.Private->GetCpuState==0 && Cpu.Private->SetCpuState==0);
     CHECK(Video.GetVideolatches==C_Video.GetVideolatches);
     CHECK(Video.SetVideolatches==C_Video.SetVideolatches);
     CHECK(Video.setReadPointers==0 && Video.setWritePointers==0 && Video.setMarkPointers==0);

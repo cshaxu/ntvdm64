@@ -16,6 +16,7 @@ function listFromMetadata(source, name) {
 }
 
 const root = path.resolve(process.argv[2] ?? '.');
+const mapPath = process.argv[3] == null ? null : path.resolve(root, process.argv[3]);
 const metadata = requireText(root,
   'src/mvdm/softpc.new/base/cvidc/c2cpusad.h', /CpuVectorNames/);
 const publicSlots = listFromMetadata(metadata, 'CpuVectorNames');
@@ -23,7 +24,7 @@ const privateSlots = listFromMetadata(metadata, 'CpuPrivateVectorNames');
 const generator = requireText(root, 'tools/build/GenerateCvidcCpuBinding.mjs',
   /CalcQuickEventInstTime:\s*'c_cpu_calc_q_ev_inst_for_time'/);
 const binder = requireText(root,
-  'src/ntvdm/softpc/mvdm_cvidc_vector_binding.c',
+  'src/ntvdm-exe/softpc/mvdm_cvidc_vector_binding.c',
   /Cpu\.Sas\s*=\s*&Sas[\s\S]*Sas\.Sas_overwrite_memory\s*=\s*c_sas_overwrite_memory[\s\S]*Cpu\.Video\s*=\s*\(IHP\)&Video/);
 const cvidAccess = requireText(root,
   'src/mvdm/softpc.new/base/cvidc/accessfn.c',
@@ -35,6 +36,8 @@ const xt = requireText(root, 'src/mvdm/softpc.new/base/support/xt.c',
   /#ifdef CPU_30_STYLE[\s\S]*Cpu\.EffectiveAddr/);
 const evGlue = requireText(root, 'src/mvdm/softpc.new/base/cvidc/ev_glue.c',
   /setup_vga_globals[\s\S]*mvdm_cvidc_bind_vectors\(\)/);
+const localfm = requireText(root, 'src/mvdm/softpc.new/base/ccpu386/localfm.c',
+  /extern\s+IHP\s+Gdp\s*;/);
 const main = requireText(root, 'src/mvdm/softpc.new/base/support/main.c',
   /mvdm_cvidc_bind_video_vector\(\)[\s\S]*config\(/);
 requireText(root, 'src/mvdm/softpc.new/base/cvidc/evidgen.h',
@@ -49,7 +52,9 @@ if (publicSlots.length !== 154 || privateSlots.length !== 55) {
   throw new Error(`unexpected original metadata count: public=${publicSlots.length}, private=${privateSlots.length}`);
 }
 if (!publicSlots.includes('CalcQuickEventInstTime') ||
-    !generator.includes('ClearHwInt: \'0\'')) {
+    !generator.includes('ClearHwInt: \'0\'') ||
+    !generator.includes("GetCpuState: '0'") ||
+    !generator.includes("SetCpuState: '0'")) {
   throw new Error('selected C-VID provider/null-slot disposition drifted');
 }
 if (!binder.includes('mvdm_cvidc_bind_video_vector();') ||
@@ -58,6 +63,16 @@ if (!binder.includes('mvdm_cvidc_bind_video_vector();') ||
     !xt.includes('#ifdef CPU_30_STYLE') || !evGlue.includes('mvdm_cvidc_bind_vectors();') ||
     !main.includes('mvdm_cvidc_bind_video_vector();')) {
   throw new Error('CCPU/C-VID profile-routing contract drifted');
+}
+if (!/IHP\s+Gdp\s*=\s*\(IHP\)0\s*;/.test(evGlue) ||
+    /(^|\n)IHP\s+Gdp\s*;/.test(localfm)) {
+  throw new Error('GDP must have exactly one explicit C-VID state owner');
+}
+if (mapPath !== null) {
+  const map = fs.readFileSync(mapPath, 'utf8');
+  if (!/^.*_Gdp\s+\S+\s+original-softpc-cvidc:ev_glue\.obj\s*$/m.test(map)) {
+    throw new Error('final map does not attribute Gdp to C-VID ev_glue.obj');
+  }
 }
 
 console.log(JSON.stringify({
@@ -68,5 +83,7 @@ console.log(JSON.stringify({
   cpu30_only_indirection: true,
   early_video_bind: true,
   setup_bind: true,
+  gdp_owner: 'cvidc/ev_glue.c',
+  gdp_map_verified: mapPath !== null,
   unsupported_clear_hw_int: 'null'
 }));

@@ -55,7 +55,11 @@ extern IU32 gvi_pc_low_regen;
 #ifdef CCPU
 IUH ega_gc_outb_mask;
 
-IHP Gdp;
+/* DIVERGENCE(MVDM-HOST-DIV-137): C-VID owns the GDP allocation through
+ * setup_global_data_ptr().  Give that owner one strong zero-initialized
+ * definition instead of allowing C-VID and CCPU localfm.c to coalesce
+ * separate tentative definitions at link time. */
+IHP Gdp = (IHP)0;
 #endif
 
 #ifdef C_VID

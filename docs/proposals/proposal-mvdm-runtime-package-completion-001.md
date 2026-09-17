@@ -122,3 +122,26 @@ HAXM/injector, native x64 worker, guest-byte patch or blanket NTVDMx64 import.
 External patches remain comparative evidence for an individually reproduced,
 source-shaped correction only. `WRITE.EXE` is the successor package's
 integration workload, not a substitute for these package closures.
+
+### Kernel-VDM boundary recovery rule
+
+When selected original MVDM code calls an NT4 kernel-VDM service, recover the
+original user-mode caller and its exact public function name, parameter
+layout, call ordering, status/failure behavior and teardown first.  A
+directly composable original non-MVDM OpenNT implementation belongs under its
+original relative path in `opennt-host`; it must not be re-authored as an
+adapter merely because it sits outside MVDM.  Kernel-only implementation
+bodies whose required kernel state cannot compose in the standalone worker
+remain a finite worker-local adapter only after the source-first rung ledger
+records that exclusion.
+
+The adapter must preserve the original service-shaped facade and contain only
+the unavailable mechanism.  It may not take ownership of original MVDM
+policy.  Each package must explicitly measure and remove mirror-side probes,
+declarations, alternate control paths and autonomous state once the facade
+can provide the required original observable semantics.  In particular, a
+physical-memory facade that can establish the original contiguous alias
+semantics must retire CCPU-side translation/resolution probes rather than
+retain them for convenience.  A same-named facade alone is not proof of
+equivalence: address-space layout, synchronous-access lifetime, failure and
+worker teardown must be verified before claiming that reduction.
