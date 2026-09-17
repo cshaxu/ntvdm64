@@ -79,7 +79,6 @@ static char SccsID[]="@(#)keyba.c	1.57 06/22/95 Copyright Insignia Solutions Ltd
 #include "config.h"
 #include "ica.h"
 #include "keyba.h"
-#include "mvdm_softpc_termination.h"
 #include "quick_ev.h"
 #ifdef macintosh
 #include "ckmalloc.h"
@@ -106,9 +105,6 @@ static char SccsID[]="@(#)keyba.c	1.57 06/22/95 Copyright Insignia Solutions Ltd
 #ifdef NTVDM
 #include "idetect.h"
 #include "nt_eoi.h"
-/* DIVERGENCE(MVDM-HOST-DIV-085): the selected keyboard path invokes the
- * original XMS A20 providers. Use their original xms.h declaration carrier;
- * the historical conditional sas.h declaration is not effective here. */
 #include "xms.h"
 
 /* exported for NT host event code */
@@ -1355,14 +1351,6 @@ GLOBAL VOID host_key_down IFN1(int,key)
 LOCAL VOID filtered_host_key_down IFN1(int,key)
 #endif /* SECURE } */
 {
-/* DIVERGENCE(MVDM-HOST-DIV-207): default-off witness of the existing
- * source-owned 8042 admission predicate.  It copies scalar state only and
- * leaves the original stopped/disabled/repeat branches unchanged. */
-mvdm_softpc_record_keyboard_offer((unsigned int)key,
-    (!scanning_discontinued && !keyboard_disabled &&
-     (LastKeyDown != key || KbdHdwFull < 8)) ? 1u : 0u,
-    scanning_discontinued ? 1u : 0u, keyboard_disabled ? 1u : 0u,
-    (unsigned int)KbdHdwFull);
 if (scanning_discontinued)
 	{
 	held_event_type[held_event_count]=KEY_DOWN_EVENT;
@@ -2208,13 +2196,6 @@ if (free_6805_buff_size < BUFF_6805_VMAX)
 
 LOCAL VOID KbdIntDelay(VOID)
 {
-   /* DIVERGENCE(MVDM-HOST-DIV-207): default-off scalar witness of the
-    * original IRQ1 gate. The following return and interrupt path are
-    * unchanged. */
-   mvdm_softpc_record_keyboard_gate(2u, bKbdEoiPending ? 1u : 0u,
-       int_enabled ? 1u : 0u, output_full ? 1u : 0u,
-       keyboard_interface_disabled ? 1u : 0u);
-
        //
        // Wait until the kbd scancode has been read,
        // before invoking the next interrupt.
@@ -2279,12 +2260,6 @@ void KbdEOIHook(int IrqLine, int CallCount)
 
    bBiosBufferSpace = bBiosOwnsKbdHdw &&
                       (bios_buffer_size() < (bPifFastPaste ? 8 : 2));
-
-   /* DIVERGENCE(MVDM-HOST-DIV-210): default-off scalar witness of the
-    * original BIOS-ring admission result.  It observes the already-computed
-    * booleans only; buffer ownership and the following dispatch are unchanged. */
-   mvdm_softpc_record_keyboard_eoi_state(bBiosOwnsKbdHdw ? 1u : 0u,
-       bBiosBufferSpace ? 1u : 0u);
 
    output_full = FALSE;
    bKbdEoiPending = FALSE;
@@ -2761,14 +2736,6 @@ LOCAL VOID codes_to_translate  IFN0()
 {
 char tempscan;
 
-#ifdef NTVDM
-/* DIVERGENCE(MVDM-HOST-DIV-212): paired entry observation for the original
- * translation loop; see the pump declaration below. */
-mvdm_softpc_record_keyboard_pump(3u, bKbdEoiPending ? 1u : 0u,
-    output_full ? 1u : 0u, pending_8042 ? 1u : 0u,
-    (unsigned int)KbdHdwFull, keyboard_interface_disabled ? 1u : 0u,
-    waiting_for_upcode ? 1u : 0u);
-#endif
 while (!pending_8042 && (free_6805_buff_size < BUFF_6805_VMAX) && !keyboard_interface_disabled && !output_full)
 	{
 		tempscan= translate_6805_8042();
@@ -2784,13 +2751,6 @@ GLOBAL VOID continue_output IFN0()
 char tempscan;
 
 #ifdef NTVDM
-/* DIVERGENCE(MVDM-HOST-DIV-212): default-off fixed-container observation of
- * the existing 6805 output pump.  It copies only source-owned scalar flow
- * state; all original early-return and IRQ decisions remain unchanged. */
-mvdm_softpc_record_keyboard_pump(1u, bKbdEoiPending ? 1u : 0u,
-    output_full ? 1u : 0u, pending_8042 ? 1u : 0u,
-    (unsigned int)KbdHdwFull, keyboard_interface_disabled ? 1u : 0u,
-    waiting_for_upcode ? 1u : 0u);
 if (bKbdEoiPending || keyboard_interface_disabled) {
     return;
     }
@@ -2809,13 +2769,6 @@ if(!output_full)
 			{
 			tempscan=translate_6805_8042();
                         if (!waiting_for_upcode) {
-				mvdm_softpc_record_keyboard_pump(2u,
-                                    bKbdEoiPending ? 1u : 0u,
-                                    output_full ? 1u : 0u,
-                                    pending_8042 ? 1u : 0u,
-                                    (unsigned int)KbdHdwFull,
-                                    keyboard_interface_disabled ? 1u : 0u,
-                                    waiting_for_upcode ? 1u : 0u);
                                 do_q_int(tempscan);
                                 }
 			}
@@ -2844,12 +2797,6 @@ GLOBAL VOID KbdResume(VOID)
     bKbdEoiPending = FALSE;
     bKbdIntHooked = FALSE;
     bBiosBufferSpace = TRUE;
-    /* DIVERGENCE(MVDM-HOST-DIV-207): default-off scalar witness after the
-     * original resume state has been restored, before its unchanged IRQ1
-     * scheduling decision. */
-    mvdm_softpc_record_keyboard_gate(1u, bKbdEoiPending ? 1u : 0u,
-        int_enabled ? 1u : 0u, output_full ? 1u : 0u,
-        keyboard_interface_disabled ? 1u : 0u);
     if (!keyboard_interface_disabled && output_full)
         KbdIntDelay();
     HostReleaseKbd();
@@ -2912,11 +2859,6 @@ GLOBAL VOID kbd_inb IFN2(io_addr,port,half_word *,val)
 
         *val=KbdData;
         kbd_status &= 0xfe;
-        /* DIVERGENCE(MVDM-HOST-DIV-209): default-off scalar witness after
-         * the original port-60 value and status update.  It does not change
-         * the 8042, EOI, BIOS, or guest data path. */
-        mvdm_softpc_record_keyboard_port_read((unsigned int)*val,
-            output_full ? 1u : 0u);
         sure_note_trace1(AT_KBD_VERBOSE,"scan code read:0x%x",*val);
 
 

@@ -2,6 +2,7 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T420 S5 keymouse package recovery](evidence/m0-t420-s5-keymouse-package-recovery.md) | M0 T420 S5 | Freezes the complete keymouse manifest, source-first CPU40/guest-memory boundaries, and keyboard/mouse runtime evidence. | Retain through T420 package completion. |
 | [T420 S4 system package recovery](evidence/m0-t420-s4-system-package-recovery.md) | M0 T420 S4 | Freezes the complete selected original system unit, source-first PIC/illegal recovery and retained ROM-residency profile boundary. | Retain through T420 package completion. |
 | [T420 S3 video package recovery](evidence/m0-t420-s3-video-package-recovery.md) | M0 T420 S3 | Freezes the complete selected original video unit, its finite public-Console boundary, retained profile contracts and x86/regression evidence. | Retain through T420 package completion. |
 | [T419 post-closure DTMgr record projection repair](evidence/m0-t419-post-closure-dtmgr-record-projection-repair.md) | M0 T419 follow-up | Replaces the autonomous DTMgr stack with an original-DOSRECORD projection and records x86 plus owner nested-COMMAND proof. | Retain with T419 closure. |

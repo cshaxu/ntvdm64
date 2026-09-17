@@ -106,7 +106,6 @@
 #ifdef NTVDM
 #include "nt_event.h"
 #include "nt_mouse.h"
-#include "mvdm_softpc_termination.h"
 
 #ifdef MONITOR
 /*
@@ -2361,7 +2360,6 @@ void mouse_int1()
 
 
 	note_trace0(MOUSE_VERBOSE, "mouse_int1:");
-	mvdm_softpc_record_mouse_chain(3u, 0, 0, 0u, 0u);
 
 #ifdef NTVDM
 
@@ -2614,10 +2612,6 @@ LOCAL void mouse_update IFN1(MOUSE_CALL_MASK, condition_mask)
 
 #else   /* NTVDM */
 
-	mvdm_softpc_record_mouse_chain(5u, cursor_status.position.x,
-		cursor_status.position.y, condition_mask,
-		alt_found ? alt_user_subroutine_call_mask[i] : user_subroutine_call_mask);
-
 if (alt_found)
    {
    i--; /* Adjust for extra inc */
@@ -2667,8 +2661,6 @@ outb(ICA0_PORT_0, END_INTERRUPT);
 
 void mouse_int2()
 {
-	mvdm_softpc_record_mouse_chain(7u, getCS(), getIP(),
-		last_condition_mask, 0u);
 	/*
 	 *	Part 2 of the mouse hardware interrupt service routine. Control
 	 *	is passed to this routine when the "user subroutine" that may
@@ -3519,8 +3511,6 @@ LOCAL void mouse_set_subroutine IFN4(word *,junk1,word *,junk2,word *,call_mask,
 	user_subroutine_segment = getES();
 	user_subroutine_offset = *subroutine_address;
 	user_subroutine_call_mask = (*call_mask) & MOUSE_CALL_MASK_SIGNIFICANT_BITS;
-	mvdm_softpc_record_mouse_chain(8u, user_subroutine_segment,
-		user_subroutine_offset, user_subroutine_call_mask, 0u);
 
 	note_trace0(MOUSE_VERBOSE, "mouse_io:return()");
 }
@@ -6611,7 +6601,6 @@ LOCAL void inport_reset IFN0()
 
 LOCAL void jump_to_user_subroutine IFN3(MOUSE_CALL_MASK,condition_mask,word,segment,word,offset)
 {
-	mvdm_softpc_record_mouse_chain(6u, segment, offset, condition_mask, 0u);
 	/*
 	 *	This routine sets up the CPU registers so that when the CPU
 	 *	restarts, control will pass to the user subroutine, and when
