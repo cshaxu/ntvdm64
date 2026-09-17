@@ -15,24 +15,6 @@ typedef struct mvdm_redirector_async_state {
     int is_read;
 } mvdm_redirector_async_state;
 
-static volatile LONG redirector_worker_stop_requested;
-
-void mvdm_redirector_async_worker_begin(void)
-{
-    InterlockedExchange(&redirector_worker_stop_requested, FALSE);
-}
-
-void mvdm_redirector_async_worker_request_stop(void)
-{
-    InterlockedExchange(&redirector_worker_stop_requested, TRUE);
-}
-
-int mvdm_redirector_async_worker_stop_requested(void)
-{
-    return InterlockedCompareExchange(&redirector_worker_stop_requested,
-        FALSE, FALSE) != FALSE;
-}
-
 static uint16_t read_u16(uint8_t const *bytes)
 {
     return (uint16_t)((uint16_t)bytes[0] | ((uint16_t)bytes[1] << 8));

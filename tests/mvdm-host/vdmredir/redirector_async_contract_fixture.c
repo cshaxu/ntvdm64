@@ -113,10 +113,6 @@ int main(void)
     if (mvdm_redirector_async_complete(&request, 1u, 0u)) return 8;
     mvdm_redirector_async_release(&request);
 
-    mvdm_redirector_async_worker_begin();
-    if (mvdm_redirector_async_worker_stop_requested()) return 9;
-    mvdm_redirector_async_worker_request_stop();
-    if (!mvdm_redirector_async_worker_stop_requested()) return 10;
-    if (!session_thread_unbind(&instance) || !session_dispose(&instance)) return 11;
+    if (!session_thread_unbind(&instance) || !session_dispose(&instance)) return 9;
     return 0;
 }

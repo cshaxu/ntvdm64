@@ -14,8 +14,5 @@ int mvdm_redirector_async_prepare(PDOS_ASYNC_NAMED_PIPE_INFO request,
 int mvdm_redirector_async_complete(PDOS_ASYNC_NAMED_PIPE_INFO request,
     DWORD byte_count, DWORD error_code);
 void mvdm_redirector_async_release(PDOS_ASYNC_NAMED_PIPE_INFO request);
-void mvdm_redirector_async_worker_begin(void);
-void mvdm_redirector_async_worker_request_stop(void);
-int mvdm_redirector_async_worker_stop_requested(void);
 
 #endif

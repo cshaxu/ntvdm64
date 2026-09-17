@@ -385,11 +385,13 @@ Return Value:
 #endif
 
     //
-    // grab the next free 16-bit handle before allocating this record
+    // grab the next 16-bit handle value. This pre-allocates the handle. If we
+    // cannot allocate a handle return a path not found error. If we should
+    // fail anywhere along the line after this we must free up the handle
     //
 
     if ((Handle16 = VrpAllocateHandle16()) == 0) {
-        SET_ERROR(ERROR_PATH_NOT_FOUND);
+        SET_ERROR(ERROR_PATH_NOT_FOUND);    // all handles used!
         return;
     }
 
@@ -1401,15 +1403,43 @@ Return Value:
     DWORD   map;
     WORD    Handle16 = 1;
 
+    //
+    // this 'kind of' assumes that the bitmap is stored as DWORDs. Its
+    // actually more explicit, so don't change the type or MAX_16BIT_HANDLES
+    // without checking this code first
+    //
+
     for (i=0; i<sizeof(Handle16Bitmap)/sizeof(Handle16Bitmap[0]); ++i) {
         map = Handle16Bitmap[i];
+
+        //
+        // if this entry in the bitmap is already full, skip to the next one
+        // (if there is one, that is)
+        //
+
         if (map == -1) {
             Handle16 += BITSIN(DWORD);
             continue;
         } else {
             int j;
+
+            //
+            // use BFI method to find next available slot
+            //
+
             for (j=1, Handle16=1; map & j; ++Handle16, j <<= 1);
             Handle16Bitmap[i] |= j;
+
+#if DBG
+            IF_DEBUG(MAILSLOT) {
+                DbgPrint("VrpAllocateHandle16: returning handle %d, map=%#08x, i=%d\n",
+                         Handle16,
+                         Handle16Bitmap[i],
+                         i
+                         );
+            }
+#endif
+
             return Handle16;
         }
     }
@@ -1457,7 +1487,28 @@ Return Value:
 --*/
 
 {
+    //
+    // remember: we allocated the handle value as the next free bit + 1, so
+    // we started the handles at 1, not 0
+    //
+
     --Handle16;
+
+#if DBG
+    IF_DEBUG(MAILSLOT) {
+        if (Handle16/BITSIN(DWORD) > sizeof(Handle16Bitmap)/sizeof(Handle16Bitmap[0])) {
+            DbgPrint("Error: VrpFreeHandle16: out of range handle: %d\n", Handle16);
+            DbgBreakPoint();
+        }
+    }
+#endif
+
     Handle16Bitmap[Handle16/BITSIN(DWORD)] &= ~(1 << Handle16 % BITSIN(DWORD));
+
+#if DBG
+    IF_DEBUG(MAILSLOT) {
+        DbgPrint("VrpFreeHandle16: map=%#08x\n", Handle16Bitmap[Handle16/BITSIN(DWORD)]);
+    }
+#endif
 
 }

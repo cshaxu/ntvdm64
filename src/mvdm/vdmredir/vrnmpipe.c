@@ -135,12 +135,6 @@ Revision History:
 #include <idetect.h>    // WaitIfIdle
 #include <vrica.h>      // call_ica_hw_interrupt
 #include <vrnmpipe.h>   // routine prototypes
-/* DIVERGENCE(MVDM-HOST-DIV-173): VrpAsyncNmPipeThread retains the original
- * cdecl DWORD(LPVOID) body and original CreateThread call order. Modern x86
- * requires a WINAPI callback at the public CreateThread boundary; the shared
- * same-shaped thread adapter performs only that ABI transition and binds the
- * creator session for the worker lifetime. */
-#include "opennt-abi/host-compat/include/thread_start_compat.h"
 /* DIVERGENCE(MVDM-HOST-DIV-167): original async requests retained flat
  * GetVDMAddr aliases. Keep dispatch, queue and ICA control flow in the
  * mirror; enter the Redirector adapter only at the guest-memory lifetime
@@ -1246,12 +1240,6 @@ CRITICAL_SECTION VrNmpRequestQueueCritSec;
 PDOS_ASYNC_NAMED_PIPE_INFO RequestQueueHead = NULL;
 PDOS_ASYNC_NAMED_PIPE_INFO RequestQueueTail = NULL;
 HANDLE VrpNmpSomethingToDo;
-/* DIVERGENCE(MVDM-HOST-DIV-169): retain the original process-wide worker
- * shape, but make its owner and termination handle visible to the original
- * DOS-process termination entry below. The private stop state stays in the
- * matching Redirector overlay. */
-HANDLE VrpNmpThread = NULL;
-DWORD VrpNmpThreadId = 0;
 
 
 VOID
@@ -1331,6 +1319,9 @@ Return Value:
     // SuspendThread as we may see fit
     //
 
+    static HANDLE hThread = NULL;
+    static DWORD tid;
+
     //
     // get info from registers and the async named pipe structure
     //
@@ -1383,7 +1374,7 @@ Return Value:
     // not-signalled state
     //
 
-    if (VrpNmpThread == NULL) {
+    if (hThread == NULL) {
         VrpNmpSomethingToDo = CreateEvent(NULL, FALSE, FALSE, NULL);
         if (VrpNmpSomethingToDo == NULL) {
 
@@ -1407,14 +1398,14 @@ Return Value:
         // we have the "something to do" event. Now create the thread
         //
 
-        VrpNmpThread = CreateThread(NULL,
-                                    0,
-                                    VrpAsyncNmPipeThread,
-                                    NULL,
-                                    0,
-                                    &VrpNmpThreadId
-                                    );
-        if (VrpNmpThread == NULL) {
+        hThread = CreateThread(NULL,
+                               0,
+                               VrpAsyncNmPipeThread,
+                               NULL,
+                               0,
+                               &tid
+                               );
+        if (hThread == NULL) {
 
 #if DBG
             IF_DEBUG(NAMEPIPE) {
@@ -1425,11 +1416,9 @@ Return Value:
 #endif
 
             CloseHandle(VrpNmpSomethingToDo);
-            VrpNmpSomethingToDo = NULL;
             SET_ERROR(ERROR_NOT_ENOUGH_MEMORY);
             return;
         }
-        mvdm_redirector_async_worker_begin();
     }
 
     //
@@ -1730,36 +1719,12 @@ Return Value:
 --*/
 
 {
-    PDOS_ASYNC_NAMED_PIPE_INFO request;
 #if DBG
     IF_DEBUG(NAMEPIPE) {
         DbgPrint("VrTerminateNamedPipes\n");
     }
 #endif
 
-    /* DIVERGENCE(MVDM-HOST-DIV-169): the original source declares this
-     * process-termination cleanup but the retained body is empty. Preserve
-     * its owner and cleanup order: stop/join the original worker before
-     * releasing its original queue records. */
-    if (VrpNmpThread != NULL) {
-        mvdm_redirector_async_worker_request_stop();
-        if (VrpNmpSomethingToDo != NULL) SetEvent(VrpNmpSomethingToDo);
-        if (GetCurrentThreadId() != VrpNmpThreadId)
-            (void)WaitForSingleObject(VrpNmpThread, INFINITE);
-        CloseHandle(VrpNmpThread);
-        VrpNmpThread = NULL;
-        VrpNmpThreadId = 0;
-    }
-    while ((request = VrpDequeueAsyncRequest(RequestQueueHead)) != NULL) {
-        (void)CancelIoEx(request->Handle, &request->Overlapped);
-        CloseHandle(request->Overlapped.hEvent);
-        mvdm_redirector_async_release(request);
-        LocalFree(request);
-    }
-    if (VrpNmpSomethingToDo != NULL) {
-        CloseHandle(VrpNmpSomethingToDo);
-        VrpNmpSomethingToDo = NULL;
-    }
 }
 
 
@@ -1843,7 +1808,7 @@ Return Value:
     }
 #endif
 
-    while (!mvdm_redirector_async_worker_stop_requested()) {
+    while (TRUE) {
 
         //
         // create an array of event handles. The first handle in the array is
@@ -1853,8 +1818,6 @@ Return Value:
 
         numberOfHandles = VrpSnapshotEventList(eventList);
         index = WaitForMultipleObjects(numberOfHandles, eventList, FALSE, INFINITE);
-
-        if (mvdm_redirector_async_worker_stop_requested()) break;
 
         //
         // if the index is 0, then the "something to do" event has been signalled,

@@ -26,9 +26,9 @@ $environment = Join-Path $BuildRoot ("msvc-{0}.cmd" -f $Architecture)
   'if errorlevel 1 exit /b %errorlevel%', ':ready', 'cd /d "%MVDM_T324_CALLER_CWD%"', '%*') |
     Set-Content -LiteralPath $environment -Encoding ascii
 $includeRoots = @(
-    'src', 'src/ntvdm-exe/redir/include', 'src/mvdm-host/inc', 'src/mvdm-host/vdmredir',
-    'src/mvdm-host/dos/command', 'src/opennt-host/netapi/netlib',
-    'src/mvdm-host/softpc.new/base/inc', 'src/mvdm-host/softpc.new/host/inc',
+    'src', 'src/ntvdm-exe/redir/include', 'src/mvdm/inc', 'src/mvdm/vdmredir',
+    'src/mvdm/dos/command', 'src/opennt-host/netapi/netlib',
+    'src/mvdm/softpc.new/base/inc', 'src/mvdm/softpc.new/host/inc',
     'src/ntvdm-exe/softpc/include',
     'src/opennt-abi/host-compat/include',
     'src/opennt-abi/source/public/internal/base/inc',
@@ -57,12 +57,12 @@ rule link
   command = cmd /c "`$environment link /nologo /OPT:REF /out:`$out `$in"
   description = LINK `$out
 
-build obj/vrnmpipe.obj: cc `$root/src/mvdm-host/vdmredir/vrnmpipe.c
-build obj/vrputil.obj: cc `$root/src/mvdm-host/vdmredir/vrputil.c
-build obj/vrdisp.obj: cc `$root/src/mvdm-host/vdmredir/vrdisp.c
-build obj/vrmisc.obj: cc `$root/src/mvdm-host/vdmredir/vrmisc.c
-build obj/vrmslot.obj: cc `$root/src/mvdm-host/vdmredir/vrmslot.c
-build obj/cmdredir.obj: cc `$root/src/mvdm-host/dos/command/cmdredir.c
+build obj/vrnmpipe.obj: cc `$root/src/mvdm/vdmredir/vrnmpipe.c
+build obj/vrputil.obj: cc `$root/src/mvdm/vdmredir/vrputil.c
+build obj/vrdisp.obj: cc `$root/src/mvdm/vdmredir/vrdisp.c
+build obj/vrmisc.obj: cc `$root/src/mvdm/vdmredir/vrmisc.c
+build obj/vrmslot.obj: cc `$root/src/mvdm/vdmredir/vrmslot.c
+build obj/cmdredir.obj: cc `$root/src/mvdm/dos/command/cmdredir.c
 build obj/ntstatus.obj: cc `$root/src/opennt-host/netapi/netlib/ntstatus.c
 build obj/async.obj: cc `$root/src/ntvdm-exe/redir/mvdm_redirector_async.c
 build obj/guest-copy.obj: cc `$root/src/ntvdm-exe/redir/mvdm_redirector_guest_copy.c

@@ -807,10 +807,14 @@ $commandObjects = foreach ($name in $commandNames) {
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $commandRoot $name)))
     $object
 }
+$redirThreadCompat = NinjaPath (Join-Path $root 'src/opennt-abi/host-compat/include/thread_start_compat.h')
 $redirObjects = foreach ($name in $redirNames) {
     $object = 'obj/redir/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $redirRoot $name)))
-    $graph.Add('  cflags = ' + $baseFlags + ' /DWIN_32 /DVDMREDIR_DLL')
+    # Preserve original redirector source spelling.  Two original DLC/pipe
+    # entries use the historical cdecl CreateThread callback contract; this
+    # translation-unit-local forced facade is the finite modern ABI boundary.
+    $graph.Add('  cflags = ' + $baseFlags + ' /DWIN_32 /DVDMREDIR_DLL /FI "' + $redirThreadCompat + '"')
     $object
 }
 $xmsObjects = foreach ($name in $xmsNames) {
