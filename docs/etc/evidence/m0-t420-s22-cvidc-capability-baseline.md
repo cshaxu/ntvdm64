@@ -80,15 +80,18 @@ respective package rows above.
 
 ## Deployed regression
 
-The current `O:\winnt` package was exercised through its real ConPTY Console
-path. `VerifyCvidIntegrated.ps1` with log prefix
-`t420-s22-cvid-integrated-r2` passed all six video witnesses (`80x25`,
+The current formal x86 graph rebuilt `product-programs` and relinked
+`ntvdm.exe` plus `VDMREDIR.dll`. The resulting `run16.exe`, `basesrv.exe`,
+`ntvdm.exe`, `dtmgr.exe` and `VDMREDIR.dll` SHA-256 values each matched the
+deployed `O:\winnt` package before runtime acceptance. That package was then
+exercised through its real ConPTY Console path. `VerifyCvidIntegrated.ps1`
+with log prefix `t420-s22-cvid-integrated-r3` passed all six video witnesses (`80x25`,
 `45x34`, `60x50`, `120x30`, mouse and resize), plus five independent
 short-window `EDIT -> MEM` sequences. The observer captured guest text for
 each run; this is not an exit-code-only result.
 
 `Verify-CommandExitStatus.ps1` with log prefix
-`t420-s22-command-text-r1` then passed all 17 established Console-text-gated
+`t420-s22-command-text-r2` then passed all 17 established Console-text-gated
 routes: empty/native success and failure, stream/EOF handling, direct and
 nested `COMMAND`, direct and nested `MEM`, the verified `G7.COM` guest exit
 fixture, `COMMAND /C MEM`, and `EDIT`. Thus the deployed package has a fresh
@@ -119,8 +122,11 @@ This leaves no unclassified C-VID mirror difference in the selected profile.
 
 ## Current disposition
 
-The 26 already-recorded SPC386 non-PIG/non-SPC486 null slots remain a
-source-profile question, not missing provider candidates. S22 next needs to
-map every remaining selected vector/timing consumer to real guest evidence or
-a source-proven profile-null/no-caller disposition. This baseline does not
-close S22.
+The 26 SPC386 non-PIG/non-SPC486 null slots are source-profile dispositions,
+not missing provider candidates. The 180 original providers, three finite
+timing endpoints, 38 typed accessors, 81 selected table slots and all
+layout-sensitive consumers now have current formal or deployed witnesses and
+one explicit owner. This closes S22's C-VID publication capability. Actual
+guest EGA/CGA/VGA memory effects and their Console presentation remain S23's
+separate selected-video workload; timer/PIC execution remains S24's separate
+system workload. Neither is a missing C-VID publication implementation.

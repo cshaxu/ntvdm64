@@ -4,26 +4,26 @@
 
 ## Active Packet
 
-**Active: M0 T420 S22**
+**Active: M0 T420 S23**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T420 S22 — Ordinary Mode. |
+| Identifier Mode | M0 T420 S23 — Ordinary Mode. |
 | Candidate Proposal | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md) |
-| Admission And Approval | Owner previously authorized automatic admission of every sequential S. S21 is closed at `31cbee1f0`; this admits the next ordered T420 row, S22. |
-| Objective | Close the complete selected original `softpc.new/base/cvidc` capability unit with real selected-profile evidence for vector ownership, table publication, timing and every selected C-VID consumer. |
-| Non-goals | No CPU30/kernel-VDM monitor revival, a second video/SAS owner, synthetic guest success, WOW/WRITE integration, or unrelated Console/Broker/COMMAND policy. |
-| Reference Baseline | S2 recovered the complete C-VID source package and its one `Gdp`/SAS ownership boundary. S21 is now closed with CCPU40 execution evidence; its retained C-VID composition rows are inputs, not a substitute for C-VID capability acceptance. |
-| Files And ABI Surface | Freeze all selected C-VID source/vector manifests, `Cpu`/`Sas`/`Gdp` ownership, profile-null rows, timing publishers, and every selected CCPU/video/host consumer. |
+| Admission And Approval | Owner previously authorized automatic admission of every sequential S. S22 closes at `23558cadd`; this admits the next ordered T420 row, S23. |
+| Objective | Close the complete selected original `softpc.new/base/video` capability unit with real guest evidence for text/video update, scrolling and display-state behavior within the selected public Console presentation boundary. |
+| Non-goals | No CPU30/kernel-VDM monitor revival, a second video-memory/presentation owner, synthetic guest success, WOW/WRITE integration, or unrelated Broker/COMMAND policy. |
+| Reference Baseline | S22 closed C-VID vector, accessor and table publication. It is an input to this package; it does not prove that the selected EGA/CGA/VGA writer bodies perform real guest-memory and Console work. |
+| Files And ABI Surface | Freeze the selected 19-source video manifest, C-VID read/write/mark table handoff, guest video-memory aliases, text-mode scrolling/update state, and the finite public-Console presentation binding. |
 | Applicable Rules | Project design/rules, source policy, strict mirror rule, CCPU40-only product rule, and single original-owner composition. |
-| Verification | Establish a consumer-to-vector/timing matrix. Every positive reachable capability needs a real guest or current x86 host witness; every null row must be source-proven profile-null/no selected caller. Run fresh formal x86 linkage, local C-VID fixtures, deployed direct and interactive COMMAND/MEM/EDIT regression, and governance review. |
-| Expected Markers | Each selected C-VID vector/publication/timing family is end-to-end pass, source-proven profile-null/no selected caller, or owner-approved exclusion; one allocation owner; measured mirror/adapter footprint delta. |
-| Asset Needs | Pinned OpenNT C-VID union, existing S2 vector/map evidence, current formal x86 generator, test-only fixtures under `build/`, and `O:\winnt` runtime package. |
-| Reporting Requirements | Record selected manifest/hashes, vector/provider-to-consumer map, exact test commands/results, profile-null rationale, retained binding rationale, footprint changes and regressions. |
-| Stop Conditions | A required new public provider, CPU30/kernel dependency, second state owner, guest-media change, or COMMAND/MEM/EDIT regression pauses for renewed owner direction. |
-| Exit Criteria | Every selected C-VID family has real evidence, source-proven profile-null/no selected caller or owner-approved exclusion; mirror ownership is preserved; no duplicate vector/state policy remains; fresh formal x86, package matrix and established regressions pass; evidence/index/status updated; reviewed P pushed. |
+| Verification | Establish a writer-to-guest-memory-to-Console matrix. Every positive selected writer/update family needs a real guest or current x86 host witness; every unavailable family must be source-proven profile-null/no selected caller. Run fresh formal x86 linkage, focused original video fixtures, deployed geometry/mouse/resize plus direct and interactive COMMAND/MEM/EDIT regression, and governance review. |
+| Expected Markers | Each selected video writer/update/display family is end-to-end pass, source-proven profile-null/no selected caller, or owner-approved exclusion; one video-memory and presentation owner; measured mirror/adapter footprint delta. |
+| Asset Needs | Pinned OpenNT video union, S22 C-VID publication evidence, current formal x86 generator, test-only fixtures under `build/`, and `O:\winnt` runtime package. |
+| Reporting Requirements | Record selected manifest/hashes, writer/provider-to-memory/presentation map, exact test commands/results, profile-null rationale, retained public-Console binding rationale, footprint changes and regressions. |
+| Stop Conditions | A required CPU30/kernel dependency, second video-memory/presentation owner, guest-media change, or COMMAND/MEM/EDIT regression pauses for renewed owner direction. |
+| Exit Criteria | Every selected video writer/update/display family has real evidence, source-proven profile-null/no selected caller or owner-approved exclusion; mirror ownership is preserved; no duplicate guest-memory/presentation policy remains; fresh formal x86, package matrix and established regressions pass; evidence/index/status updated; reviewed P pushed. |
 | Original Owner Request | “批准所有推送 请你自动准入每个s任务”。 |
-| Similar-Issue Sweep | Audit every selected C-VID vector, timing/table publisher and CCPU/video/host consumer for duplicate state, stale pointer/table publication, profile mismatch and adapter-owned replacement logic. |
+| Similar-Issue Sweep | Audit every selected video writer/update/display path for duplicate guest-memory ownership, stale C-VID pointer publication, profile mismatch, fabricated Console success and adapter-owned replacement logic. |
 
 ## S1 Closure Record
 
@@ -201,6 +201,20 @@ residual-diff ledger, and all 17 Console-text-gated COMMAND/MEM/EDIT routes.
 Protected DPMI callback-provider lifecycle remains owned by S38; S21 adds no
 duplicate CCPU substitute.
 
+## S22 Closure Record
+
+[T420 S22 C-VID capability baseline](../etc/evidence/m0-t420-s22-cvidc-capability-baseline.md)
+closes the selected C-VID publication unit at `23558cadd`. It accounts for all
+209 CPU-table slots (180 original providers, three finite timing endpoints
+and 26 source-profile nulls), proves 38 typed accessors and all 81 table-slot
+selection families, preserves the one original `Gdp` and quick-event restart
+owners, and shows that all nine historical short-layout consumers are clean
+under the current formal x86 flags. The freshly linked formal package matches
+the deployed five-artifact package and passes six Console geometry/mouse/
+resize witnesses, five short-window `EDIT -> MEM` sequences, and all 17
+Console-text-gated COMMAND/MEM/EDIT routes. Actual video writer workload is
+now S23's explicit owner; no C-VID duplicate is introduced.
+
 ## Current Technical Baseline
 
 - Product package: Win32/x86 CCPU40 `run16.exe`, `basesrv.exe`, `ntvdm.exe`,
@@ -209,13 +223,13 @@ duplicate CCPU substitute.
   correction: four EXE component directories are explicit, `dtmgr.exe`
   replaces `dtaskmgr.exe`, and the task display derives depth from original
   BaseSrv DOS records rather than a parallel stack.
-- T420 S1--S21 are delivered: CCPU386, C-VID, video, system, keymouse, BIOS,
+- T420 S1--S22 are delivered: CCPU386, C-VID, video, system, keymouse, BIOS,
   support, disks, comms, DOS, debug, host and DEM are closed complete package
   units.  S14 COMMAND restored two empty x86 adapter carriers to their
   original OpenNT forms; S15 closes XMS, S16 closes SubAlloc, S17 closes
   OEMUNI, S18 closes DPMI32, S19 closes guest DPMI/DOSX, S20 closes VDMREDIR,
-  and S21 closes CCPU386 capability acceptance. S22 C-VID capability closure
-  is active.
+  and S21 closes CCPU386 capability acceptance. S22 closes C-VID publication
+  capability; S23 video capability closure is active.
 
 ## Prior Closure
 
@@ -232,6 +246,7 @@ No standalone governance delivery is active or pending.
 
 ## Next Work
 
-S22 is active. It must turn the recovered C-VID package into a complete
-selected-profile vector, publication, timing and consumer capability matrix;
-S2/S21 evidence is baseline only, not closure evidence.
+S23 is active. It must turn the recovered selected video package into a
+complete selected-profile guest-memory, text/scroll/update and public-Console
+presentation capability matrix; S22's publication evidence is an input, not
+a substitute for video-writer acceptance.
