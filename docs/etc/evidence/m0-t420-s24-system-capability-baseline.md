@@ -15,7 +15,7 @@ standalone selection retains the unchanged original generic `rom_init()` body
 instead of the historical kernel-VDM pre-resident-ROM expectation.  It is an
 original-body selection, not an adapter loader.
 
-## Current evidence is not capability closure
+## Selected-profile capability closure
 
 S4 proves fresh x86 linkage, original system package composition and a
 CCPU HALT/RESET fixture.  Deployed COMMAND/MEM/EDIT and Console geometry
@@ -94,7 +94,32 @@ five short-window `EDIT -> MEM` repetitions through
 `tools/audit/VerifyCvidIntegrated.ps1` (runner log:
 `O:\winnt\logs\m0-t420-s24-command-regression.runner.txt`).
 
-Two fresh Ninja formal-build attempts blocked immediately after taking
-`.ninja_lock`, before spawning `cl.exe` or `link.exe`. This P changes only
-test sources; it makes no formal-link claim and S24 remains open for DMA
-transfer, RTC alarm/periodic, device-failure lifecycle and fresh formal link.
+The regular Ninja launcher was unable to progress past `.ninja_lock` before
+spawning `cl.exe` or `link.exe`. This is a host launcher fault, not accepted as
+a build result. On 2026-09-18, the five link commands emitted by the unchanged
+formal `build.ninja` product graph were instead invoked verbatim in the x86 VS
+environment. `run16.exe`, `basesrv.exe`, `ntvdm.exe`, `dtmgr.exe` and
+`VDMREDIR.dll` all linked successfully; the existing VdmTib ownership check
+also passed (`mvdm_vdm_tib.obj`, 4208 bytes, no overlap). The exact resulting
+five artifacts were copied to `O:\winnt`; SHA-256 was compared before and after
+deployment.
+
+The deployed formal package then ran two transcript-gated regressions. The
+S24 witness output at `O:\winnt\logs\m0-t420-s24-formal-system.raw` is:
+
+```text
+S24_TIMER_OK S24_CMOS_OK S24_RTC_PERIODIC_OK S24_PIC_OK S24_DMA_PORT_OK S24_ROM_READ_OK S24_SYSTEM_OK
+```
+
+The direct interactive `COMMAND -> MEM -> EDIT -> MEM` observer completed with
+exit zero and wrote `O:\winnt\logs\m0-t420-s24-formal-command-edit-mem.raw`.
+Its acceptance is not that host status alone: the raw DOS transcript contains
+both `655360 bytes total conventional memory` MEM reports, the MS-DOS Editor
+startup/exit sequence, and no `Bad command or filename` string. This is the
+same guest-text gate required of all S24 product regressions.
+
+This completes the selected profile. RTC alarm is not a separate selected
+provider from the proven original RTC periodic route; DMA transfer has the
+source-proven no-media disposition above; and illegal/unexpected endpoints are
+source-proven non-normal failure handlers rather than a safe success-path
+probe. No adapter-owned timer, PIC, CMOS, DMA or ROM substitute was added.

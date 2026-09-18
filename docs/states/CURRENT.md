@@ -28,10 +28,12 @@
 ## S24 Progress
 
 S24's [system capability baseline](../etc/evidence/m0-t420-s24-system-capability-baseline.md)
-now records real DOS guest timer/PIC, CMOS/RTC periodic, DMA-port and ROM evidence plus
-complete deployed COMMAND/MEM/EDIT Console regression. HLT remains the S21
-CPL3 negative boundary. DMA transfer, RTC alarm/periodic, device-failure
-lifecycle and fresh formal product linkage remain open; no closure claim.
+now records real DOS guest timer/PIC, CMOS/RTC periodic, DMA-port and ROM
+evidence; source-proven DMA-transfer profile-null and device-failure endpoint
+dispositions; and a freshly linked/deployed x86 package.  The direct interactive
+`COMMAND -> MEM -> EDIT -> MEM` regression is transcript-gated: it requires the
+actual DOS output and rejects `Bad command or filename`, rather than treating an
+outer host exit code as acceptance. HLT remains the S21 CPL3 negative boundary.
 
 ## S1 Closure Record
 
@@ -236,6 +238,16 @@ gate proves the selected providers exist, the public Console is text-only and
 no graphics sink is installed; queued `kvm-window` exclusively owns that
 future worker-local presentation capability.
 
+## S24 Closure Record
+
+[T420 S24 system capability baseline](../etc/evidence/m0-t420-s24-system-capability-baseline.md)
+closes the complete selected system unit. It proves real guest timer/PIC,
+CMOS/RTC-periodic, DMA-port and ROM paths; source-proves the no-media DMA
+transfer profile-null and the intentionally destructive failure endpoints; and
+records a fresh formal x86 link/deployment. The direct interactive
+`COMMAND -> MEM -> EDIT -> MEM` regression is gated on the guest transcript,
+including both MEM reports and absence of command-resolution failure.
+
 ## Current Technical Baseline
 
 - Product package: Win32/x86 CCPU40 `run16.exe`, `basesrv.exe`, `ntvdm.exe`,
@@ -244,13 +256,14 @@ future worker-local presentation capability.
   correction: four EXE component directories are explicit, `dtmgr.exe`
   replaces `dtaskmgr.exe`, and the task display derives depth from original
   BaseSrv DOS records rather than a parallel stack.
-- T420 S1--S22 are delivered: CCPU386, C-VID, video, system, keymouse, BIOS,
+- T420 S1--S24 are delivered: CCPU386, C-VID, video, system, keymouse, BIOS,
   support, disks, comms, DOS, debug, host and DEM are closed complete package
   units.  S14 COMMAND restored two empty x86 adapter carriers to their
   original OpenNT forms; S15 closes XMS, S16 closes SubAlloc, S17 closes
   OEMUNI, S18 closes DPMI32, S19 closes guest DPMI/DOSX, S20 closes VDMREDIR,
-  and S21 closes CCPU386 capability acceptance. S22 closes C-VID publication
-  capability; S23 closes video capability within the public-Console boundary.
+and S21 closes CCPU386 capability acceptance. S22 closes C-VID publication
+capability; S23 closes video capability within the public-Console boundary;
+S24 closes system capability within the selected no-floppy-media profile.
 
 ## Prior Closure
 
@@ -267,7 +280,5 @@ No standalone governance delivery is active or pending.
 
 ## Next Work
 
-S24 is active. It must turn the recovered selected system package into a
-complete selected-profile timer/PIC/reset, CMOS/DMA/ROM and device-failure
-lifecycle matrix; S4's package-recovery evidence is an input, not a
-substitute for runtime capability acceptance.
+T420 has no active S packet. Its S1--S24 selected-package and capability
+closures are recorded above; a new scoped packet requires a new owner request.
