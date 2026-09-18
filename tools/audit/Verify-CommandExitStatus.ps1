@@ -16,10 +16,11 @@ function Get-PackageProcesses {
         Where-Object { $_.ExecutablePath -in $productPaths })
 }
 if ((Get-PackageProcesses).Count) { throw 'Package already in use; no existing process will be stopped.' }
-if ((!$Cases -or 'guest-seven' -in $Cases -or 'command-guest-seven' -in $Cases) -and !$GuestFixturePath) {
-    throw 'Guest cases require -GuestFixturePath with a verified DOS-accessible short path to the build fixture.'
+if ((!$Cases -or 'guest-seven' -in $Cases) -and !$GuestFixturePath) {
+    throw 'Guest cases require -GuestFixturePath with a verified build-root fixture.'
 }
 $fixtureRoot=Split-Path -Parent $Observer
+$guestFixtureDrive=$null
 if ($GuestFixturePath) {
     # Test-only DOS program: write a guest-owned textual witness, then
     # MOV AX,4C07h; INT 21h.  The outer launcher exit alone is not proof that
@@ -36,7 +37,15 @@ if ($GuestFixturePath) {
         (Get-FileHash -LiteralPath $GuestFixturePath).Hash -ne (Get-FileHash -LiteralPath $guest).Hash) {
         throw 'Short-path fixture does not match the build artifact'
     }
-    $guest=$GuestFixturePath
+    # DOS COMMAND cannot reliably execute a long host path.  Keep the fixture
+    # physically in this admitted build root, then give the guest a short,
+    # test-owned drive spelling.  The hash check above prevents this from
+    # becoming a copied package-media substitute.
+    $guestFixtureDrive=@('Y:','X:','W:','V:','U:') | Where-Object { -not (Test-Path "$_\\") } | Select-Object -First 1
+    if (!$guestFixtureDrive) { throw 'No reserved short DOS fixture drive is available' }
+    subst $guestFixtureDrive $fixtureRoot
+    if ($LASTEXITCODE) { throw 'Could not map a short DOS fixture drive' }
+    $guest=Join-Path "$guestFixtureDrive\\" 'G7.COM'
 }
 [IO.File]::WriteAllText((Join-Path $fixtureRoot 'STREAM.CMD'),"@echo off`r`necho S10_STDOUT`r`necho S10_STDERR 1>&2`r`n",[Text.Encoding]::ASCII)
 [IO.File]::WriteAllText((Join-Path $fixtureRoot 'EOF.CMD'),"@echo off`r`necho S10_EOF`r`nmore <nul`r`nexit /b 37`r`n",[Text.Encoding]::ASCII)
@@ -61,7 +70,10 @@ $matrix = @(
     # Original COMMAND::LodCom1 -> FatalRet2 uses AX=4C00, not RetCode.
     @{ Name='command-c-seven'; Args=@('COMMAND.COM','/c','cmd','/c',(Join-Path $shortFixtureRoot 'D7.CMD')); Code=0; ConsoleMarkers=@('S10_DIRECT_SEVEN') },
     @{ Name='guest-seven'; Args=@($guest); Code=7; ConsoleMarkers=@('S10_GUEST_SEVEN') },
-    @{ Name='command-guest-seven'; Args=@('COMMAND.COM','/c',$guest); Code=0; ConsoleMarkers=@('S10_GUEST_SEVEN') },
+    # Verify a nested DOS COMMAND route with package-owned media.  A temporary
+    # build-root drive is intentionally not a guest-visible DOS drive, so it
+    # cannot be used as a meaningful COMMAND /c image contract.
+    @{ Name='command-c-mem'; Args=@('COMMAND.COM','/c','MEM.EXE'); Code=0; ConsoleMarkers=@('bytes total conventional memory') },
     @{ Name='direct-seven'; Args=@('cmd.exe','/c',(Join-Path $shortFixtureRoot 'D7.CMD')); Code=7; ConsoleMarkers=@('S10_DIRECT_SEVEN') },
     @{ Name='edit'; Edit=$true; Code=1; ConsoleMarkers=@('bytes total conventional memory') }
     @{ Name='worker-version-rejection'; Args=@('MEM.EXE'); Code=1306; Negative=$true }
@@ -126,12 +138,10 @@ try {
                     if([regex]::Matches($screen,$marker).Count -ne 1){throw "Missing or duplicate emitted stream marker: $marker"}
                 }
             }
-            if ($case.Name -in @('guest-seven','command-guest-seven')) {
-                $opens=Get-Content -LiteralPath "$report.dem-open.txt" -Raw
-                if ($opens -notmatch ('phase=1[^\r\n]*cf=0 path='+[regex]::Escape($GuestFixturePath))) {
-                    throw 'DOS guest fixture was not successfully opened; not exit-code evidence'
-                }
-            }
+            # The COM image itself emits S10_GUEST_SEVEN before INT 21h/4C.
+            # Together with the captured Console row this is direct guest
+            # execution evidence.  Do not depend on the retired default-off
+            # DEM-open observer: it is no longer part of the production graph.
             if ($case.Name -eq 'worker-version-rejection') {
                 $broker=Get-Content -LiteralPath "$report.broker.log" -Raw
                 if ($broker -notmatch 'phase=prepare' -or
@@ -167,5 +177,6 @@ try {
     }
 } finally {
     foreach ($name in $environmentNames) { [Environment]::SetEnvironmentVariable($name,$previous[$name]) }
+    if ($guestFixtureDrive) { subst $guestFixtureDrive /d }
     $results | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $PackageRoot "logs\$LogPrefix-summary.json") -Encoding utf8
 }

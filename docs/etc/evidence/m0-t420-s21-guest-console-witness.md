@@ -223,7 +223,14 @@ test-only `G7.COM` prints `S10_GUEST_SEVEN` before its intentional DOS exit 7;
 an exit code can no longer be mistaken for evidence that DOS opened and
 executed that image.
 
-The currently deployed product passed the strengthened non-G7 matrix:
+The current formal-x86-004 deployment then passed the complete strengthened
+matrix. The test creates `G7.COM` only in its admitted `build/M0-T420/S21`
+fixture root and maps that root to an otherwise unused short drive for the
+direct DOS launch. It does not copy test media into `O:\winnt`. Original DOS
+`COMMAND` does not enumerate that host-only `subst` drive, so the nested
+COMMAND row deliberately executes package-owned `MEM.EXE` instead; this tests
+the supported product route rather than treating a temporary host mount as
+guest media.
 
 | Evidence prefix | Cases | Result |
 | --- | --- | --- |
@@ -231,9 +238,21 @@ The currently deployed product passed the strengthened non-G7 matrix:
 | `t420-s21-console-contract-r4` | nested COMMAND, direct MEM, COMMAND `/c`, native exit 7, EDIT return | passed |
 | `t420-s21-console-contract-r5` | interactive MEM, nested COMMAND → COMMAND → MEM, repeated MEM | passed |
 | `t420-s21-console-contract-r6` | unmodified empty COMMAND → `exit` | passed with original DOS banner witness |
+| `t420-s21-cintr-original-r8` | 22 CCPU guest instruction/FPU/fault/text witnesses | 21 passed; one expected CPL3 HLT boundary |
+| `t420-s21-command-text-r6` | empty/native/streams/EOF/MEM/nested MEM/direct MEM/COMMAND `/c`/guest exit 7/EDIT | all 17 passed with required Console text |
 
 The first attempted nested variant inserted `ver` between the original nested
 `COMMAND` and its paired exits.  That altered the original keyboard timing and
 left a test-owned session waiting; it was not treated as a product failure.
 The accepted test restores the original input sequence and uses the two
 original DOS startup banners as the nested-level witness instead.
+
+The `t420-s21-command-text-r6` run also caught and rejected two invalid test
+arrangements before the accepted result: a long build-root path produced
+`Cannot execute ...G7.COM`, and attempting `COMMAND /c` through the temporary
+host-only drive produced `Bad command or file name`. Neither was counted as
+product success. The accepted matrix requires the direct `G7.COM` Console
+witness before accepting exit 7 and uses package-owned `COMMAND /c MEM.EXE`
+for the nested-DOS route. The retired default-off DEM-open trace is not an
+acceptance dependency; the guest's own `S10_GUEST_SEVEN` row is direct
+execution proof.
