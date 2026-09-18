@@ -78,6 +78,17 @@ invent. DMA transfer is therefore profile-null in this package, while the
 guest fixture records the existing controller port provider. A future floppy
 media admission must validate it through an original INT 13h read.
 
+The remaining selected `illegalp`, `unexp_nt` and `dummy_nt` bodies are not
+ordinary DOS services: the original BIOS BOP table selects them only for
+illegal/unused BOP or unexpected-interrupt endpoints. `illegal_op_int` keeps
+the original fault-address/report-and-skip sequence; `unexpected_int` records
+the cause in the BDA and masks/EOIs an unexpected hardware line; `dummy_int`
+is intentionally empty. No selected normal COMMAND/MEM/EDIT caller targets
+these slots. They are source-proven failure endpoints, not safe runtime
+fixtures: injecting an illegal BOP into a healthy worker would deliberately
+corrupt its normal fault/lifecycle state and cannot demonstrate a successful
+device capability.
+
 The same deployment passed all six Console geometry/mouse/resize cases and
 five short-window `EDIT -> MEM` repetitions through
 `tools/audit/VerifyCvidIntegrated.ps1` (runner log:
