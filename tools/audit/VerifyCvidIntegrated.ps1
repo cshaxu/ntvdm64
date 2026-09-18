@@ -3,6 +3,30 @@ param([Parameter(Mandatory)][string]$FixtureRoot,[string]$LogPrefix='m0-t413-s4-
 $ErrorActionPreference='Stop'
 $FixtureRoot=(Resolve-Path $FixtureRoot).Path
 if($LogPrefix -notmatch '^[a-z0-9-]+$'){throw 'Invalid prefix'}
+function Assert-GuestConsoleTranscript {
+    param([Parameter(Mandatory)][string]$Path,[Parameter(Mandatory)][string]$Case)
+    if (!(Test-Path -LiteralPath $Path -PathType Leaf)) {
+        throw "Missing guest Console transcript: $Case"
+    }
+    $transcript=Get-Content -LiteralPath $Path -Raw
+    # The observer's process exit says only that the host-side test tree
+    # finished.  These are guest-owned COMMAND/MEM/EDIT witnesses captured
+    # from the same ConPTY stream; do not let command-resolution failure
+    # masquerade as a successful geometry run.
+    foreach($unexpected in @('Bad command or filename','is not recognized as an internal or external command')) {
+        if ($transcript -match [regex]::Escape($unexpected)) {
+            throw "Guest Console reported command-resolution failure ($Case): $unexpected"
+        }
+    }
+    foreach($marker in @('Microsoft(R) Windows NT DOS','MS-DOS Editor','bytes total conventional memory')) {
+        if ($transcript -notmatch [regex]::Escape($marker)) {
+            throw "Missing guest Console marker ($Case): $marker"
+        }
+    }
+    if ([regex]::Matches($transcript,[regex]::Escape('bytes total conventional memory')).Count -lt 3) {
+        throw "Missing pre-EDIT/post-EDIT MEM guest evidence: $Case"
+    }
+}
 $rows=@(@(80,25,''),@(45,34,''),@(60,50,''),@(120,30,''),@(80,25,'--mouse'),@(80,25,'--resize'))
 foreach($row in $rows){
     $tag=if($row[2]){$row[2].Substring(2)}else{"$($row[0])x$($row[1])"}
@@ -13,6 +37,7 @@ foreach($row in $rows){
     if(!$p.WaitForExit(55000)){throw "Terminal observer timeout: $tag"}
     $result=Get-Content "$log.runner.txt" -Raw
     if($result -notmatch '(?m)^wait=0 exit=1\r?$'){throw "Terminal observer failed: $tag; $result"}
+    Assert-GuestConsoleTranscript -Path $log -Case $tag
     & "$PSScriptRoot/Verify-ConsoleResizeCapture.ps1" -Capture $log
     Write-Output "PASS video $tag"
 }

@@ -45,3 +45,19 @@ each row for removal or tighter source ownership.
 
 The existing deployed `COMMAND/MEM/EDIT`, geometry, mouse and resize gates are
 regression inputs. They do not substitute for the writer-level witnesses above.
+
+## Guest transcript regression gate
+
+The shared ConPTY geometry runner now treats its raw guest Console transcript
+as an acceptance input, rather than accepting its host observer exit alone.
+Each geometry, mouse and resize row must contain the DOS COMMAND banner, the
+MS-DOS Editor screen identity, and at least three `MEM` conventional-memory
+reports (including the post-EDIT runs). It fails on `Bad command or filename`
+or the native COMMAND command-resolution diagnostic.
+
+The existing deployed 80x25 capture was checked against those predicates:
+all three required markers were present, it contained 25 `MEM` reports, and
+neither forbidden diagnostic occurred. A fresh single 80x25 ConPTY run also
+captured all markers and passed the same predicates; its observer report was
+`wait=0 exit=1`, the established guest COMMAND exit result. The observer
+process itself returns zero when that report is a pass.
