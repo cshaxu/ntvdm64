@@ -72,7 +72,7 @@ their scope is deliberately recorded rather than inflated.
 | IRQ/reset/event | Guest `TIMBUSY`; `ccpu-halt-reset-test.exe`; event consumer scan | `TIMBUSY` waited for three guest INT 1Ch callbacks and emitted a witness.  The original HALT/reset fixture restarted at `AX=BEEF`; the consumer scan passed, while explicitly not claiming full CPU/PIC execution. |
 | Descriptor state | `cpu40-descriptor-domain-fixture.exe` | Current x86 execution exit 0.  It is the S18 owner fixture for GDT/LDT/IDT domain publication; S21 does not duplicate DPMI descriptor policy. |
 | FPU layout | `x87-layout-fixture.exe` | Current x86 execution exit 0; guest FPU markers above validate the execution side. |
-| Worker TLS | `ccpu-thread-lifecycle-test.exe` | Current direct formal-library link/run emitted `CCPU thread lifecycle OK`; this is host-side proof and is not counted as a guest witness. |
+| Worker TLS/lifecycle | `ccpu-thread-lifecycle-test.exe` | The current formal x86 run first ends a worker with nonzero `53` through original `host_ExitThread`, then starts a second CCPU worker which obtains a fresh TLS/jmp frame and exits `0`. It emitted `CCPU thread lifecycle normal-and-abnormal OK`; this is host-side lifecycle proof and is not counted as a guest witness. |
 
 The remaining work is not to repeat those passing probes.  It is to complete
 the source-caller matrix: prove which selected `c_intr` and `c_xcptn` DPMI
