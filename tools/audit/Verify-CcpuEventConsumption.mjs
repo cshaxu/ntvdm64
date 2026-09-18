@@ -4,7 +4,19 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 const root = process.cwd();
-const revision = process.argv[2];
+const args = process.argv.slice(2);
+let revision;
+let requestedOut;
+for (let i = 0; i < args.length; ++i) {
+  if (args[i] === '--out') {
+    requestedOut = args[++i];
+    if (!requestedOut) throw new Error('--out requires a task build directory');
+  } else if (!revision) {
+    revision = args[i];
+  } else {
+    throw new Error(`Unexpected argument: ${args[i]}`);
+  }
+}
 const sourcePath = 'src/mvdm/softpc.new/base/ccpu386/c_main.c';
 const source = revision ? spawnSync('git', ['show', `${revision}:${sourcePath}`],
   { encoding: 'utf8' }) : { status: 0, stdout: fs.readFileSync(sourcePath, 'utf8') };
@@ -29,7 +41,11 @@ const timer = timerArea.slice(timerStart);
 const irq = between('   if (GET_IF() && c_cpu_take_event(CPU_HW_INT_MASK))', '#else\t/* SFELLOW */');
 const masks = [...text.matchAll(/^#define (CPU_(?:RESET|SIGALRM|SAD|HW_INT)[A-Z_]*MASK)\s+([^\r\n]+)/gm)]
   .map(m => `#ifndef ${m[1]}\n#define ${m[1]} ${m[2]}\n#endif`).join('\n');
-const out = path.join(root, 'build/M0-T412/S1/event-profile', revision ? 'baseline' : 'fixed');
+const out = requestedOut ? path.resolve(root, requestedOut) :
+  path.join(root, 'build/M0-T412/S1/event-profile', revision ? 'baseline' : 'fixed');
+if (!path.relative(root, out).replaceAll('\\', '/').match(/^build\/M\d+-T\d+\/S\d+\//)) {
+  throw new Error('Output must stay below a task S build directory');
+}
 fs.mkdirSync(out, { recursive: true });
 const body = `#include <windows.h>
 #include <stdio.h>

@@ -2,11 +2,28 @@
 
 ## Current Work
 
-## Task Intermission
+## Active Packet
 
-**No active M/T/S packet.** M0 T420 S20 is closed at the next P below.
-The owner-directed intermission awaits admission of the next T420 package
-row; no implementation is authorized during this intermission.
+**Active: M0 T420 S21**
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T420 S21 — Ordinary Mode. |
+| Candidate Proposal | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md) |
+| Admission And Approval | Owner: “准入下一个s任务开始执行” on 2026-09-18. This admits the next ordered T420 row, S21. |
+| Objective | Close the complete selected original `softpc.new/base/ccpu386` capability unit with real guest proof for instruction/FPU execution, exception/IRQ delivery, event progression, descriptor transitions and worker-thread lifetime. |
+| Non-goals | No CPU30/kernel-VDM monitor revival, emulator replacement, synthetic guest success, WOW/WRITE integration, or unrelated Console/Broker/COMMAND policy. |
+| Reference Baseline | T420 S1 recovered the full CCPU386 source package; S2--S20 have now closed their source-recovery units. The selected product is x86 CCPU40 and current S20 runtime regressions pass. |
+| Files And ABI Surface | Freeze the complete CCPU386 manifest, selected C-VID/SoftPC bindings, event/IRQ/descriptor seams, worker thread entry/exit bindings and every guest fixture used for evidence. |
+| Applicable Rules | Project design/rules, source policy, strict mirror rule, source-recovery ladder and CCPU40-only product rule. |
+| Verification | Establish a complete capability matrix; every positive guest route requires captured guest Console text as well as its outer exit. Run real guest instruction/FPU, fault/exception, IRQ/event, descriptor and normal/abnormal worker-lifetime workloads; fresh formal x86 build; direct and interactive COMMAND/MEM/EDIT regressions; governance review. |
+| Expected Markers | Every selected capability is guest-end-to-end pass, source-proven no selected caller or owner-approved exclusion; source-first disposition for every required fix; measured mirror/adapter footprint delta. |
+| Asset Needs | Existing selected OpenNT CCPU386 union, current formal x86 generator, test-only fixtures under `build/` and `O:\winnt` runtime package. |
+| Reporting Requirements | Record manifest/hashes, caller-to-capability map, exact guest commands and results, retained boundary rationale, footprint changes, regressions and any exclusion. |
+| Stop Conditions | A required new public provider, CPU30/kernel dependency, new behavior interface, guest-media change, or COMMAND/MEM/EDIT regression pauses for renewed owner direction. |
+| Exit Criteria | Every selected CCPU386 family has real guest evidence, source-proven absence or owner-approved exclusion; original source remains owner; no duplicate execution policy is retained; fresh formal x86, package matrix and established regressions pass; evidence/index/status updated; reviewed P pushed. |
+| Original Owner Request | “准入下一个s任务开始执行”。 |
+| Similar-Issue Sweep | Audit every selected CCPU386 source and all C-VID/worker consumers for the same capability, lifecycle or duplicate-adapter gap; do not close from a narrow opcode fixture alone. |
 
 ## S1 Closure Record
 
@@ -203,8 +220,6 @@ No standalone governance delivery is active or pending.
 
 ## Next Work
 
-No M/T/S packet is active. The next proposed T420 row is S21 CCPU386
-capability closure in the accepted
-[MVDM runtime package completion proposal](../proposals/proposal-mvdm-runtime-package-completion-001.md);
-it requires a new active-S admission before implementation. The candidate
-task order remains authoritative in [Queue](QUEUE.md).
+S21 remains active. Its initial guest-text and CPL3 HLT-boundary evidence is
+[recorded here](../etc/evidence/m0-t420-s21-guest-console-witness.md). The
+remaining CCPU capability and worker-lifetime matrix is not yet closed.

@@ -19,12 +19,12 @@ if ((Get-PackageProcesses).Count) { throw 'Package already in use; no existing p
 if ((!$Cases -or 'guest-seven' -in $Cases -or 'command-guest-seven' -in $Cases) -and !$GuestFixturePath) {
     throw 'Guest cases require -GuestFixturePath with a verified DOS-accessible short path to the build fixture.'
 }
-$guest=Join-Path (Split-Path -Parent $Observer) 'G7.COM'
 $fixtureRoot=Split-Path -Parent $Observer
-# Test-only DOS program: MOV AX,4C07h; INT 21h. Never replaces package media.
-if ($guest -notmatch '\\build\\M[0-9]+-T[0-9]+\\S[0-9]+\\') { throw 'Guest fixture must stay in an admitted task S build root' }
-[IO.File]::WriteAllBytes($guest,[byte[]](0xb8,0x07,0x4c,0xcd,0x21))
 if ($GuestFixturePath) {
+    # Test-only DOS program: MOV AX,4C07h; INT 21h. Never replaces package media.
+    $guest=Join-Path $fixtureRoot 'G7.COM'
+    if ($guest -notmatch '\\build\\M[0-9]+-T[0-9]+\\S[0-9]+\\') { throw 'Guest fixture must stay in an admitted task S build root' }
+    [IO.File]::WriteAllBytes($guest,[byte[]](0xb8,0x07,0x4c,0xcd,0x21))
     if (!(Test-Path -LiteralPath $GuestFixturePath) -or
         (Get-FileHash -LiteralPath $GuestFixturePath).Hash -ne (Get-FileHash -LiteralPath $guest).Hash) {
         throw 'Short-path fixture does not match the build artifact'
@@ -41,12 +41,12 @@ $matrix = @(
     @{ Name='native-seven'; Text="cmd /c exit 7`rexit`r"; Code=0 },
     @{ Name='native-streams'; Args=@('COMMAND.COM','/c','cmd','/c',(Join-Path $shortFixtureRoot 'STREAM.CMD')); Code=0 },
     @{ Name='native-eof'; Args=@('COMMAND.COM','/c','cmd','/c',(Join-Path $shortFixtureRoot 'EOF.CMD')); Code=0 },
-    @{ Name='mem'; Text="mem`rexit`r"; Code=1 },
+    @{ Name='mem'; Text="mem`rexit`r"; Code=1; ConsoleMarkers=@('bytes total conventional memory') },
     @{ Name='nested-empty'; Text="command`rexit`rexit`r"; Code=1 },
     @{ Name='nested-mem'; Text="command`rcommand`rmem`rexit`rmem`rexit`rmem`rexit`r"; Code=1 },
-    @{ Name='mem-repeat'; Text="mem`rmem`rexit`r"; Code=1 },
-    @{ Name='direct-mem'; Args=@('MEM.EXE'); Code=0 },
-    @{ Name='command-c'; Args=@('COMMAND.COM','/c','ver'); Code=0 },
+    @{ Name='mem-repeat'; Text="mem`rmem`rexit`r"; Code=1; ConsoleMarkers=@('bytes total conventional memory') },
+    @{ Name='direct-mem'; Args=@('MEM.EXE'); Code=0; ConsoleMarkers=@('bytes total conventional memory') },
+    @{ Name='command-c'; Args=@('COMMAND.COM','/c','ver'); Code=0; ConsoleMarkers=@('MS-DOS Version') },
     # Original COMMAND::LodCom1 -> FatalRet2 uses AX=4C00, not RetCode.
     @{ Name='command-c-seven'; Args=@('COMMAND.COM','/c','cmd','/c','exit','7'); Code=0 },
     @{ Name='guest-seven'; Args=@($guest); Code=7 },
@@ -87,6 +87,14 @@ try {
             }
             if (($case.Text -or $case.Edit) -and $record -notmatch '(?m)^scripted-console-input=delivered') {
                 throw "Input not delivered: $($case.Name)"
+            }
+            if ($case.ConsoleMarkers) {
+                $screen=Get-Content -LiteralPath "$report.console.txt" -Raw
+                foreach($marker in $case.ConsoleMarkers) {
+                    if ($screen -notmatch [regex]::Escape($marker)) {
+                        throw "Missing guest Console marker for $($case.Name): $marker"
+                    }
+                }
             }
             # The product deliberately has no native-child report hook.  A
             # successful observed COMMAND session is the regression contract:

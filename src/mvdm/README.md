@@ -16,6 +16,17 @@ that invalid input/allocation failure returns the documented zero/FALSE result
 without freeing or publishing an indeterminate pointer. Focused source-native
 verification: [S17 evidence](../../docs/etc/evidence/m0-t420-s17-oemuni-package-recovery.md).
 
+MVDM-HOST-DIV-270: `softpc.new/host/inc/cfpu_def.h` uses the MSVC x86
+floating-point status API for the three guest-visible sticky exception queries,
+then clears the x87 status and restores the historical all-masked host control
+word.  The OpenNT `_controlfp(0, ...)` spelling reads/changes modern MSVC's
+mask control rather than sticky status; a rounding `FISTP` consequently
+unmasked host inexact and terminated the worker.  This is the individually
+reproduced x86 correction in the comparative NTVDMx64 CCPU patch, not a guest
+algorithm replacement.  S21's real `FPU64`, `FPUI32`, `FPUCW`, and `FPUSW`
+guest cases cover rounded 64/32-bit stores, initial `037Fh` control word, and
+the guest-visible masked precision status bit.
+
 T413 S4 narrows MVDM-HOST-DIV-156: base/cvidc/evidgen.h retains its original
 full VideoVector layout and latch/selector macros, but excludes its 76 older
 field-dispatch macros under CPU_40_STYLE. Original base/inc/egacpu.h already

@@ -160,11 +160,11 @@ FP80SE	sign_exp;
 #ifdef NTVDM
 #include <float.h>
 
-#define HostGetOverflowException()	(_controlfp(0, 0) & _EM_OVERFLOW)
-#define HostGetUnderflowException()	(_controlfp(0, 0) & _EM_UNDERFLOW)
-#define HostGetPrecisionException()	(_controlfp(0, 0) & _EM_INEXACT)
+#define HostGetOverflowException()	(_statusfp() & _EM_OVERFLOW)
+#define HostGetUnderflowException()	(_statusfp() & _EM_UNDERFLOW)
+#define HostGetPrecisionException()	(_statusfp() & _EM_INEXACT)
 
-#define HostClearExceptions()		((VOID)_controlfp(0, _MCW_EM))
+#define HostClearExceptions()		((VOID)_clear87(), (VOID)_control87(MCW_EM, MCW_EM))
 
 #define HostSetRoundToNearest()		((VOID)_controlfp(_RC_NEAR, _MCW_RC))
 #define HostSetRoundDown()		    ((VOID)_controlfp(_RC_DOWN, _MCW_RC))
