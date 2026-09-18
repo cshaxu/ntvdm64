@@ -399,7 +399,7 @@ foreach ($name in @('PigReg_c.h', 'sas4gen.h', 'gdpvar.h')) {
 }
 if (!(Test-Path -LiteralPath $ccpuFallbackSource)) { throw "Selected CCPU fallback source missing: $ccpuFallbackSource" }
 
-New-Item -ItemType Directory -Force $build, (Join-Path $build 'generated'), (Join-Path $build 'obj/ccpu'), (Join-Path $build 'obj/bios'), (Join-Path $build 'obj/keymouse'), (Join-Path $build 'obj/system'), (Join-Path $build 'obj/disks'), (Join-Path $build 'obj/support'), (Join-Path $build 'obj/video'), (Join-Path $build 'obj/cvidc'), (Join-Path $build 'obj/comms'), (Join-Path $build 'obj/dos'), (Join-Path $build 'obj/dem'), (Join-Path $build 'obj/command'), (Join-Path $build 'obj/xms'), (Join-Path $build 'obj/dpmi'), (Join-Path $build 'obj/suballoc'), (Join-Path $build 'obj/session'), (Join-Path $build 'obj/debug'), (Join-Path $build 'obj/host'), (Join-Path $build 'obj/worker'), (Join-Path $build 'obj/basesrv'), (Join-Path $build 'obj/adapter-softpc'), (Join-Path $build 'obj/adapter-win32'), (Join-Path $build 'obj/opennt-abi-host-compat'), (Join-Path $build 'obj/adapter-redir'), (Join-Path $build 'obj/adapter-vdd'), (Join-Path $build 'obj/opennt-netlib'), (Join-Path $build 'obj/opennt-netapi-api'), (Join-Path $build 'obj/opennt-xactsrv'), (Join-Path $build 'obj/opennt-base-vdm'), (Join-Path $build 'obj/patch') | Out-Null
+New-Item -ItemType Directory -Force $build, (Join-Path $build 'generated') | Out-Null
 
 # OpenNT's WOW32 build imports the running NTVDM and OEMUNI owners rather
 # than linking a second machine into WOW32.DLL.  Keep the original NTVDM
@@ -1255,6 +1255,22 @@ $graph.Add('build VDMREDIR.dll | VDMREDIR.dll.lib: redir_dll_link ' + (($redirOb
 $graph.Add('build original-softpc-forced-closure.dll: forced_link_audit original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-softpc-host-roots.lib softpc-bindings.lib worker-shell.lib worker-command-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib')
 $graph.Add('default original-softpc-candidate')
 [IO.File]::WriteAllText((Join-Path $build 'build.ninja'), (($graph -join [Environment]::NewLine) + [Environment]::NewLine), [Text.UTF8Encoding]::new($false))
+
+# Some product objects live below a component-local namespace (for example
+# obj/ntvdm/session).  Keeping a hand-maintained list of those leaves made a
+# fresh graph depend on whichever target happened to be built first.  Derive
+# every object-output parent from the graph just emitted, so all selected
+# targets can compile independently in a new disposable root.
+$objectOutputDirectories = @(
+    [regex]::Matches(($graph -join [Environment]::NewLine), '(?m)^build\s+(obj/[^\s:|]+)') |
+        ForEach-Object { Split-Path -Parent $_.Groups[1].Value } |
+        Where-Object { -not [string]::IsNullOrWhiteSpace($_) } |
+        Select-Object -Unique |
+        ForEach-Object { Join-Path $build $_ }
+)
+if ($objectOutputDirectories.Count -gt 0) {
+    New-Item -ItemType Directory -Force $objectOutputDirectories | Out-Null
+}
 
 [ordered]@{
     schema = 'm0.t310.original-softpc-machine-candidate.v3'

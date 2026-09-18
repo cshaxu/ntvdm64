@@ -52,12 +52,22 @@ While preparing the required worker-local C-VID observation build, a clean
 formal graph exposed that the generator created neither `obj/worker` nor
 `obj/basesrv`.  Those are required by the generated MIDL service output and by
 the `ntvdm.exe` worker objects; the fixture-only graph did not require them and
-therefore masked the defect.  The generator now creates both directories (and
-explicitly retains the worker redirector output directory).  A new
-`formal-x86-cvid-r3` root was generated from empty state and contains all three
-directories.  Ninja dry-run enumerated the complete 466-step `ntvdm.exe`
-dependency graph.  This is a build-graph correction only: it changes neither
-the selected video sources nor the product runtime semantics.
+therefore masked the defect.  The generator now derives every `obj/` output
+parent from the emitted graph, including nested owners such as
+`obj/ntvdm/session`; no hand-maintained target directory list remains.  A new
+`formal-x86-cvid-r7` root verified that every declared object-output parent is
+pre-created.
+
+On this host, native Ninja can remain at its initial dispatch lock even though
+the generated graph is valid.  `Invoke-T310OriginalSoftpcSerial.ps1` is the
+bounded execution fallback: it obtains only the selected target's command
+order using `ninja -t commands`, then runs those exact commands under the
+graph-declared x86 Visual Studio environment.  In a fresh
+`formal-x86-cvid-r6` root it completed all 466 `ntvdm.exe` commands, produced
+`ntvdm.exe` (3,204,608 bytes), and passed the link-time
+`Verify-VdmTibStorage` owner/overlap check.  This is a build-graph and host
+dispatch correction only: it changes neither the selected video sources nor
+the product runtime semantics.
 
 ## Guest transcript regression gate
 

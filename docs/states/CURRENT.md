@@ -32,9 +32,12 @@ fixture proves original attributed write, upward scroll and teletype markers
 in captured public Console cells, with guest transcript gating. The remaining
 C-VID EGA read/write/mark, mode/display and teardown rows stay active.
 
-The fresh formal-worker graph now creates the generated BaseSrv/worker output
-directories required by `ntvdm.exe`; the remaining C-VID execution evidence is
-still an active S23 requirement, not implied by that build-graph correction.
+The fresh formal-worker graph now derives and creates every selected object
+output directory required by `ntvdm.exe`, including nested worker-session
+outputs.  Its bounded serial dispatch fallback completed the 466-command
+formal x86 `ntvdm.exe` graph and passed the linked VdmTib ownership check.  The
+remaining C-VID execution evidence is still an active S23 requirement, not
+implied by that build-graph correction.
 
 ## S1 Closure Record
 

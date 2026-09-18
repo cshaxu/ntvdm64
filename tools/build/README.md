@@ -14,6 +14,13 @@ CCPU40 formal graph in a caller-selected new build root. It rejects retired
 machine inputs and may refresh only graph metadata in an existing disposable
 root; it never imports cache output as a source or release input.
 
+`Invoke-T310OriginalSoftpcSerial.ps1` is the bounded fallback for a host where
+Ninja itself cannot dispatch its first job. It reads the generated graph's
+declared VS/Ninja paths, expands only the requested Ninja targets with
+`ninja -t commands`, and executes that already-expanded dependency order in
+one x86 toolchain environment. It stops at the first command failure; it is
+not an alternate graph, compiler profile or source input.
+
 The generated `run-ninja-parallel.cmd` is the formal execution entry point for
 that graph. It initializes the matching MSVC environment once, then invokes
 Ninja with eight translation-unit jobs. Build rules invoke `cl`, `rc`, `lib`,
