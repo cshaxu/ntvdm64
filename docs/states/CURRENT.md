@@ -2,28 +2,11 @@
 
 ## Current Work
 
-## Active Packet
+## Task Intermission
 
-**Active: M0 T420 S20**
-
-| Field | Record |
-| --- | --- |
-| Identifier Mode | M0 T420 S20 — Ordinary Mode. |
-| Candidate Proposal | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md) |
-| Admission And Approval | The owner approved automatic sequential S admission and permanent push on 2026-09-17. S19 now closes; this admits the next proposal row. |
-| Objective | Complete the original `vdmredir` DLL handle, guest-copy, stream and redirection lifecycle as one source-first package unit. |
-| Non-goals | No redirector protocol redesign, remote/RAP enablement, guest-media patch, CPU30 monitor, or unrelated BaseSrv/COMMAND rework. |
-| Reference Baseline | T420 S1--S19 are closed. S19 freshly built the x86 product, preserved exact DOSX media and passed deployed direct MEM plus COMMAND /C MEM. |
-| Files And ABI Surface | Freeze the selected `src/mvdm/vdmredir` manifest, its host bindings and every reached handle, guest-copy, stream and teardown interface. |
-| Applicable Rules | Project design/rules, source policy, strict mirror rule and source-recovery ladder. |
-| Verification | Freeze manifest/source-diff ledger; classify all original redirector APIs, guest pointer/handle ownership, remote exclusion and teardown; fresh x86 formal build, focused redirector proof, established regressions and governance review. |
-| Expected Markers | Complete VDMREDIR disposition; original redirector policy versus finite modern binding ledger; separated mirror/adapter/autonomous footprint report. |
-| Asset Needs | Existing selected OpenNT MVDM union, formal generator and `O:\winnt` runtime package. No new source import is admitted. |
-| Reporting Requirements | Report each manifest source, external boundary, source-first result, exact footprint change, focused and established-product results, limitations and next owner. |
-| Stop Conditions | Pause for remote/RAP enablement, a required package beyond `vdmredir`, a new public protocol, a new behavior interface, or COMMAND/MEM/EDIT regression. |
-| Exit Criteria | All selected redirector units and reached interfaces have dispositions; changes are source-first/mirror-compliant; formal x86/focused tests and established regressions pass; evidence/index/status updated; reviewed P pushed. |
-| Original Owner Request | “批准所有推送 请你自动准入每个s任务”；“按照最小化diff且不改变功能语义和编译成功的原则来做，所有已经提交的S任务如果不符合这个标准，应该继续减少diff而不是继续走下一个diff。” |
-| Similar-Issue Sweep | Compare every selected VDMREDIR source to OpenNT; audit all handle/pointer/stream paths and adapter duplicates for autonomous policy. |
+**No active M/T/S packet.** M0 T420 S20 is closed at the next P below.
+The owner-directed intermission awaits admission of the next T420 package
+row; no implementation is authorized during this intermission.
 
 ## S1 Closure Record
 
@@ -180,6 +163,16 @@ OpenNT-src-2 intermediate products provenance-matched and the deployed DOSX
 hash verified. It proves original BOP 53 activation/return ownership, passes
 fresh x86 linkage and deployed direct/COMMAND MEM proof.
 
+## S20 Closure Record
+
+[T420 S20 VDMREDIR package recovery](../etc/evidence/m0-t420-s20-vdmredir-package-recovery.md)
+closes the full selected redirector DLL package. The matching formal x86
+deployment passes all selected real DOS-guest named-pipe, mailslot, local
+NetAPI, NetBIOS, BOP 7 and lifecycle families plus `COMMAND -> MEM -> EDIT ->
+MEM`. Remote RAP and DLC are explicit owner-approved modern-host exclusions;
+the DLC guest probe preserves the original `07` unavailable result rather
+than adding a provider or a fake-success shim.
+
 ## Current Technical Baseline
 
 - Product package: Win32/x86 CCPU40 `run16.exe`, `basesrv.exe`, `ntvdm.exe`,
@@ -192,8 +185,8 @@ fresh x86 linkage and deployed direct/COMMAND MEM proof.
   support, disks, comms, DOS, debug, host and DEM are closed complete package
   units.  S14 COMMAND restored two empty x86 adapter carriers to their
   original OpenNT forms; S15 closes XMS, S16 closes SubAlloc, S17 closes
-  OEMUNI, S18 closes DPMI32, and S19 closes guest DPMI/DOSX. S20 VDMREDIR is
-  active.
+  OEMUNI, S18 closes DPMI32, S19 closes guest DPMI/DOSX, and S20 closes
+  VDMREDIR. No successor S is active.
 
 ## Prior Closure
 
@@ -210,5 +203,8 @@ No standalone governance delivery is active or pending.
 
 ## Next Work
 
-M0 T420 S20 is active. The remaining candidate order is authoritative in
-[Queue](QUEUE.md) after T420 closure.
+No M/T/S packet is active. The next proposed T420 row is S21 CCPU386
+capability closure in the accepted
+[MVDM runtime package completion proposal](../proposals/proposal-mvdm-runtime-package-completion-001.md);
+it requires a new active-S admission before implementation. The candidate
+task order remains authoritative in [Queue](QUEUE.md).

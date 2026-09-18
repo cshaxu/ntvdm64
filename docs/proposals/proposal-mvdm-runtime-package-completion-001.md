@@ -41,13 +41,15 @@ S packets, never by host linkage.
 
 ## Ordered S package units
 
-The exact S order is dependency-first.  This is a **24-S plan**: every row is
-one named original package unit and one eventual S packet.  No row may close
-two units, and no later S may quietly absorb an earlier row's residual.  Each
-S freezes its complete original manifest and source hashes, proves its
-outgoing interfaces, composes original bodies before adapters, runs its local
-matrix plus one integrated regression, measures mirror/adapter changes, then
-commits and pushes.
+The exact S order is dependency-first.  This is a **43-S plan**. S1--S20
+recover the original packages; S21--S39 then re-open those same packages one
+at a time for their missing real-capability acceptance. S40--S43 retain the
+subsequent original WOW/debug/VDD package order. Every S therefore has exactly
+one named original package owner. No later S may quietly absorb an earlier
+row's residual. Each S freezes its complete original manifest and source
+hashes, proves its outgoing interfaces, composes original bodies before
+adapters, runs its local matrix plus one integrated regression, measures
+mirror/adapter changes, then commits and pushes.
 
 | Planned S | One original package unit | Whole-package completion obligation |
 | --- | --- | --- |
@@ -71,10 +73,29 @@ commits and pushes.
 | S18 | `dpmi32` | Descriptor, PM stack, selector, interrupt and protected-mode teardown contract. |
 | S19 | `dpmi` | Load-only guest DPMI manifest, DOSX activation and return contract; no host-link substitution may stand in for it. |
 | S20 | `vdmredir` | The complete redirector DLL, handle/guest-copy, stream and redirection lifecycle. |
-| S21 | `wow32` | Original provider load, task/callback, font/glyph, icon/cursor, scheduler and hard-error contract. |
-| S22 | `wow16` | Load-only guest WOW16 media, loader/task activation and callback-return contract. |
-| S23 | `dbg` | Original debugger initialization, state, dispatch and event contract, or a source-proven complete product-profile exclusion that deletes every thin substitute. |
-| S24 | `vdd` | Original VDD lifecycle and consumers, or a source-proven complete product-profile exclusion that deletes every thin substitute. |
+| S21 | `softpc.new/base/ccpu386` capability closure | Real guest instruction/FPU, exception/IRQ, event, descriptor and worker-thread lifetime acceptance. |
+| S22 | `softpc.new/base/cvidc` capability closure | Real selected-profile vector/publication/timing/consumer acceptance. |
+| S23 | `softpc.new/base/video` capability closure | Real text/video update, scrolling and display-state acceptance within the selected Console presentation boundary. |
+| S24 | `softpc.new/base/system` capability closure | Real timer/PIC/reset, CMOS/DMA/ROM and device-failure lifecycle acceptance. |
+| S25 | `softpc.new/base/keymouse` capability closure | Real keyboard-controller/modifier and mouse INT 33h callback/teardown acceptance. |
+| S26 | `softpc.new/base/bios` capability closure | Real BIOS services, RTC/EMS and selected device/error-service acceptance. |
+| S27 | `softpc.new/base/support` capability closure | Real startup/environment/time/IOS/termination resource and failure acceptance. |
+| S28 | `softpc.new/base/disks` capability closure | Real disk read/write, backing-store, media/error and teardown acceptance. |
+| S29 | `softpc.new/base/comms` capability closure | Real COM transmit/receive, printer/Print-Screen and device-error acceptance. |
+| S30 | `softpc.new/base/dos` capability closure | Real EMS allocation/map/unmap/release and complete DOS-device/BOP acceptance. |
+| S31 | `softpc.new/base/debug` capability closure | Real original debug initialization, trace/btrace/event dispatch or a complete profile exclusion. |
+| S32 | `softpc.new/host/src` capability closure | Real worker thread, Console, host provider and normal/abnormal resource-lifecycle acceptance. |
+| S33 | `dos/dem` capability closure | Real DOS create/open/share/read/write/seek/find, error mapping and guest-buffer cleanup acceptance. |
+| S34 | `dos/command` capability closure | Direct/nested COMMAND child, standard-stream, redirection, pipe, return/error and cleanup acceptance. |
+| S35 | `xms.486` capability closure | Real DOS XMS allocate/move/overlap/free/A20 and failure/teardown acceptance. |
+| S36 | `suballoc` capability closure | Real XMS/DPMI-backed allocation, relocation, exhaustion/release and teardown acceptance. |
+| S37 | `oemuni` capability closure | Real DOS/Win16 OEM-Unicode non-ASCII path, buffer and failure acceptance. |
+| S38 | `dpmi32` capability closure | Real protected-mode selector/interrupt/memory/return/teardown acceptance. |
+| S39 | `dpmi` capability closure | Real DOSX BOP 53 activation, protected-to-real transition and repeated-entry release acceptance. |
+| S40 | `wow32` | Original provider load, task/callback, font/glyph, icon/cursor, scheduler and hard-error contract. |
+| S41 | `wow16` | Load-only guest WOW16 media, loader/task activation and callback-return contract. |
+| S42 | `dbg` | Original debugger initialization, state, dispatch and event contract, or a source-proven complete product-profile exclusion that deletes every thin substitute. |
+| S43 | `vdd` | Original VDD lifecycle and consumers, or a source-proven complete product-profile exclusion that deletes every thin substitute. |
 
 The 19 currently formal-linked library/DLL units are only a starting build
 inventory, not the S structure: their trace-only `base/debug` selection,
@@ -82,6 +103,50 @@ limited `dbg`/`vdd` bindings, and load-only `dpmi`/`wow16` media are precisely
 why these four rows are independent S packets. The current `dbg` binding, the
 former WOW/debugger proposal and any local replacement scheduler do not
 constitute completion.
+
+## S21--S39 retrospective capability closure
+
+The completed S1--S19 source-recovery records establish package selection,
+source shape and focused contracts. They do **not** by themselves establish
+that every original capability family is reachable from a real guest and
+returns through its original cleanup path. After S20's own redirector
+acceptance closes, S21--S39 execute before S40. Each is a mandatory,
+single-package acceptance S, not a way to rename a missing original package
+or to reopen source recovery without evidence.
+
+Each S creates a tracked test matrix. Every listed family must end as one
+of: real guest end-to-end pass; source-proven no selected caller; or an
+owner-approved exclusion. A compile, map entry, host-only fixture, or the
+generic COMMAND/MEM/EDIT smoke route is insufficient on its own. Every pass
+also records normal operation, representative failure, task/handle cleanup,
+and the mandatory direct plus interactive COMMAND regressions.
+
+| Capability-closure S | Revalidated original package | Required real-capability acceptance |
+| --- | --- | --- |
+| S21--S27 | S1 CCPU386 through S7 support | Each listed S proves its own real guest instruction/FPU/exception/event, vector/publication, text/video, timer/PIC/reset, keyboard/mouse, BIOS, startup/environment/termination capability as specified in the ordered table. Profile-null C-VID slots may remain null only with the existing original-profile proof. |
+| S28--S32 | S8 disks through S12 host | Each listed S proves its own disk, COM/printer, EMS/DOS-device, debug-profile or worker-host service through actual device/service workloads and normal plus abnormal cleanup. |
+| S33--S37 | S13 DEM through S17 OEMUNI | Each listed S proves its own DOS file/error, COMMAND child/standard-stream, XMS, SubAlloc or OEM/Unicode workload, including representative negative and cleanup cases. Standard-stream parsing/attachment remains COMMAND/BaseSrv-owned, while an attached named-pipe handle must be accepted by VDMREDIR. |
+| S38--S39 | S18 DPMI32 and S19 guest DPMI/DOSX | Each listed S proves its own protected-mode/DOSX portion: BOP 53, GDT/LDT/IDT, selectors, interrupts, DPMI/XMS memory, return to DOS, repeated entry and complete release. Descriptor-only host fixtures and a DOSX file hash do not close either S. |
+
+S21--S39 may add test-only host or guest fixtures only under the source policy
+and build-output rules. They may not patch immutable guest media, invent an
+adapter-owned replacement policy, or change a prior source-recovery result
+without a new source-first audit. A failure identifies its original package
+owner and the exact entry/caller; the repair is then contained within that
+same sequential capability-closure S rather than an unbounded workaround.
+
+## S40--S43 capability closure requirements
+
+S40--S43 retain their one-original-package ownership and must each satisfy its
+own real-workload closure; none may use the earlier generic COMMAND/MEM/EDIT
+matrix as its sole acceptance evidence.
+
+| S | Additional mandatory closure evidence |
+| --- | --- |
+| S40 `wow32` | Load the selected original provider in a real worker; prove task creation, callback enter/return, font/glyph and icon/cursor representations, scheduler/wait behavior, private hard-error delivery and task/worker teardown. A provider export or host-only callback fixture alone is insufficient. |
+| S41 `wow16` | Verify immutable guest-media identity, then launch a selected Win16 NE workload through its original loader. It must create a task, execute, return to the parent DOS/worker state, and leave a subsequent DOS workload usable. `WRITE.EXE` is the current planned workload, but a substitute requires an owner-recorded reason and equivalent loader/task coverage. |
+| S42 `dbg` | Exercise original debugger initialization, event/breakpoint or exception dispatch and termination through a controlled guest workload; otherwise prove all selected consumers are absent in the product profile and remove every remaining thin binding. Neither option may leave an untested partial provider. |
+| S43 `vdd` | For every selected VDD consumer, prove provider load, request/notification, resource lifetime and unload/worker termination; otherwise prove complete product-profile exclusion and remove every thin substitute and stale consumer edge. |
 
 ## Package S exit criteria
 

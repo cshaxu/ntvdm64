@@ -27,7 +27,27 @@ guest-copy (`+60/-68`) and unavailable NT4 RAP conversion (`+15/-6`).
 - The exact DLL was published to `O:\winnt\VDMREDIR.dll`, SHA-256
   `9B29F5C91703CF1931BC1A47EA76704E34179042FA03023056200FA18FF37EE`.
 
-## Limitation and follow-up
+## Final acceptance and approved exclusions
+
+The current matching formal package is
+`build/M0-T420/S20/formal-x86-013/VDMREDIR.dll` (SHA-256
+`7e4d189e5372a45e0b334bc003bb2c075b8ef74ae327640552fd56ac1b5d6a69`).
+The complete DOS-guest family sweep, including UNC named-pipe open/read,
+wait/state/peek/transact/call, asynchronous read/write and timeout, mailslot,
+local NetAPI, synchronous and asynchronous NetBIOS, BOP 7 dispatch and
+multi-task cleanup, is recorded in the linked
+[operation-family matrix](m0-t420-s20-vdmredir-operation-matrix.md).  The
+established `COMMAND -> MEM -> EDIT -> MEM` regression passed against the
+same deployment.
+
+Remote RAP transport remains excluded.  The owner also explicitly approved
+exclusion of DLC support on 2026-09-18: the real `VDMDLC.COM` guest probe
+reaches unchanged `VrDlc5cHandler` and its original `07` unavailable result;
+Windows 11 supplies no DLC provider.  No replacement provider, historic
+binary or fake-success shim is introduced.  Modern SMB is not excluded: the
+UNC named-pipe witness uses the host SMB/UNC provider successfully.
+
+## Superseded preliminary limitation
 
 The auxiliary Ninja invocation stalled in this host although direct formal
 MSVC invocations succeeded; this is an execution-wrapper issue, not a source

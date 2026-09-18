@@ -2,6 +2,7 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T420 S20 VDMREDIR operation-family matrix](evidence/m0-t420-s20-vdmredir-operation-matrix.md) | M0 T420 S20 | Complete selected redirector operation matrix: real DOS-guest proof, RAP/DLC exclusion evidence and matching-package regression. | Retain through T420 package completion. |
 | [T420 S20 VDMREDIR package recovery](evidence/m0-t420-s20-vdmredir-package-recovery.md) | M0 T420 S20 | Restores three mirror sources, removes autonomous named-pipe teardown and records x86 DLL/fixture evidence. | Retain through T420 package completion. |
 | [T420 S19 guest DPMI/DOSX package recovery](evidence/m0-t420-s19-dpmi-guest-package-recovery.md) | M0 T420 S19 | Freezes exact original DOSX guest media, build provenance and BOP activation/return contract; proves no host substitute or guest patch exists. | Retain through T420 package completion. |
 | [T420 S18 DPMI32 package recovery](evidence/m0-t420-s18-dpmi32-package-recovery.md) | M0 T420 S18 | Completes the selected DPMI32 unit, restores all proven inert source drift, and classifies the finite CPU40/kernel-VDM execution boundaries with fresh x86 and deployed MEM proof. | Retain through T420 package completion. |

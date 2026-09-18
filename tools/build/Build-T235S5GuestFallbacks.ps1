@@ -15,8 +15,15 @@ $buildBase = [IO.Path]::GetFullPath((Join-Path $repository 'build'))
 if (!$build.StartsWith($buildBase + [IO.Path]::DirectorySeparatorChar, [StringComparison]::OrdinalIgnoreCase)) { throw "BuildRoot must remain below ${buildBase}: $build" }
 if (Test-Path -LiteralPath $build) { throw "Refusing to overwrite existing build root: $build" }
 
-& (Join-Path $repository 'tools\build\Build-T235S5HimemFallback.ps1') -RepositoryRoot $repository -BuildRoot (Join-Path $build 'himem')
-$source = Join-Path $repository 'src\opennt\base\mvdm'
+$himemFallback = Join-Path $repository 'tools\build\Build-T235S5HimemFallback.ps1'
+$haveHimemFallback = Test-Path -LiteralPath $himemFallback -PathType Leaf
+if ($haveHimemFallback) {
+    & $himemFallback -RepositoryRoot $repository -BuildRoot (Join-Path $build 'himem')
+}
+# T414 recomposed the selected original MVDM tree at its historical-relative
+# canonical root.  The historical toolchain still consumes the same source
+# layout; only the retired parallel mirror prefix disappeared.
+$source = Join-Path $repository 'src\mvdm'
 $tools = Join-Path $repository 'tools\historical\opennt-4.5'
 $mvdm = Join-Path $build 'redir\base\mvdm'
 New-Item -ItemType Directory -Path $mvdm | Out-Null
@@ -24,7 +31,7 @@ Copy-Item -LiteralPath (Join-Path $source 'dos'), (Join-Path $source 'inc') -Des
 $redir = Join-Path $mvdm 'dos\v86\redir'
 Copy-Item -LiteralPath (Join-Path $tools 'masm.exe'), (Join-Path $tools 'link16.exe') -Destination $redir
 Copy-Item -LiteralPath (Join-Path $redir 'usa\redirmsg.inc') -Destination (Join-Path $redir 'redirmsg.inc')
-New-Item -ItemType Directory -Path (Join-Path $redir 'obj') | Out-Null
+New-Item -ItemType Directory -Force -Path (Join-Path $redir 'obj') | Out-Null
 Push-Location $redir
 try {
     foreach ($module in @('redir','resident','namepipe','mailslot','netapis','int2a','int5c','neterror','msgapi')) {
@@ -38,8 +45,12 @@ try {
 
 $result = Join-Path $build 'fallback-artifacts'
 New-Item -ItemType Directory -Path $result | Out-Null
-Copy-Item -LiteralPath (Join-Path $build 'himem\base\mvdm\dos\v86\dev\himem\HIMEM.SYS'), (Join-Path $redir 'obj\redir.exe') -Destination $result
-$expected = [ordered]@{ 'HIMEM.SYS' = '08aa2c47d835460ed3067fa7d6f8a3b37edeca524ad102b0588fdd1bf389ce08'; 'REDIR.EXE' = 'b6e9fad30a5423ead9ecb45c8e28197ea62a39187d36241f9018db82facac3a7' }
+if ($haveHimemFallback) {
+    Copy-Item -LiteralPath (Join-Path $build 'himem\base\mvdm\dos\v86\dev\himem\HIMEM.SYS') -Destination $result
+}
+Copy-Item -LiteralPath (Join-Path $redir 'obj\redir.exe') -Destination $result
+$expected = [ordered]@{ 'REDIR.EXE' = 'b6e9fad30a5423ead9ecb45c8e28197ea62a39187d36241f9018db82facac3a7' }
+if ($haveHimemFallback) { $expected['HIMEM.SYS'] = '08aa2c47d835460ed3067fa7d6f8a3b37edeca524ad102b0588fdd1bf389ce08' }
 foreach ($name in $expected.Keys) {
     $file = Join-Path $result $name
     if (!(Test-Path -LiteralPath $file) -or (Get-Sha256 $file) -ne $expected[$name]) { throw "Source-built identity mismatch: $file" }

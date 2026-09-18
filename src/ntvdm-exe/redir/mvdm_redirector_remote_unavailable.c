@@ -2,8 +2,8 @@
  * Source-shaped boundary for the original VDMREDIR remote RAP cohort.
  *
  * The original callers in vdmredir/vrremote.c and vrnetapi.c retain their
- * packet construction, status mapping and DOS-register failure paths.  Their
- * original providers live in the coupled RpcXlate/RxApi and XACTSRV products
+ * packet construction, status mapping and DOS-register failure paths.  The
+ * selected providers here live in the coupled RpcXlate/RxApi remote product
  * and require private Lanman redirector FSCTL/RAP transport that modern
  * public Win32 does not expose.  Returning STATUS_NOT_IMPLEMENTED at that
  * original import boundary is therefore preferable to fabricating an SMB/RAP
@@ -88,11 +88,4 @@ VdmRedirRemoteUnavailable(
 #define VDMREDIR_REMOTE_UNAVAILABLE(name) \
     NTSTATUS name(API_HANDLER_PARAMETERS) { return VdmRedirRemoteUnavailable(Header, Parameters, StructureDesc, AuxStructureDesc); }
 
-VDMREDIR_REMOTE_UNAVAILABLE(XsNetMessageBufferSend)
 VDMREDIR_REMOTE_UNAVAILABLE(XsNetServerEnum2)
-VDMREDIR_REMOTE_UNAVAILABLE(XsNetServiceControl)
-VDMREDIR_REMOTE_UNAVAILABLE(XsNetUseAdd)
-VDMREDIR_REMOTE_UNAVAILABLE(XsNetUseDel)
-VDMREDIR_REMOTE_UNAVAILABLE(XsNetUseEnum)
-VDMREDIR_REMOTE_UNAVAILABLE(XsNetUseGetInfo)
-VDMREDIR_REMOTE_UNAVAILABLE(XsNetWkstaGetInfo)

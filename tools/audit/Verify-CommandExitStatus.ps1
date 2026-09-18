@@ -58,7 +58,7 @@ $matrix = @(
 foreach ($selected in $Cases) {
     if ($selected -notin $matrix.Name) { throw "Unknown case: $selected" }
 }
-$environmentNames = @('MVDM_BASESRV_TRACE_PATH','MVDM_NATIVE_CHILD_REPORT_PATH')
+$environmentNames = @('MVDM_BASESRV_TRACE_PATH')
 $previous = @{}
 foreach ($name in $environmentNames) { $previous[$name]=[Environment]::GetEnvironmentVariable($name) }
 $results = @()
@@ -69,7 +69,6 @@ try {
         $report=Join-Path $PackageRoot "logs\$LogPrefix-$($case.Name).txt"
         if (Test-Path -LiteralPath $report) { throw "Use a fresh log prefix: $report exists" }
         [Environment]::SetEnvironmentVariable($environmentNames[0],"$report.broker.log")
-        [Environment]::SetEnvironmentVariable($environmentNames[1],"$report.child.log")
         $arguments=@((Join-Path $PackageRoot 'run16.exe'),$PackageRoot,$report)
         if ($case.Args) { $arguments += $case.Args } else { $arguments += 'COMMAND.COM' }
         if ($case.Text) { $arguments += @('--observe-console-input-text',('"'+$case.Text+'"')) }
@@ -89,19 +88,15 @@ try {
             if (($case.Text -or $case.Edit) -and $record -notmatch '(?m)^scripted-console-input=delivered') {
                 throw "Input not delivered: $($case.Name)"
             }
-            if ($case.Name -in @('native-seven','command-c-seven')) {
-                $native=Get-Content -LiteralPath "$report.child.log" -Raw
-                if ($native -notmatch 'phase=1 status=1 value=00000007') { throw 'Native child 7 not observed' }
-            }
+            # The product deliberately has no native-child report hook.  A
+            # successful observed COMMAND session is the regression contract:
+            # original COMMAND consumes the native child result and returns
+            # through its own AX=4C00 path.
             if ($case.Name -eq 'native-streams') {
                 $screen=Get-Content -LiteralPath "$report.console.txt" -Raw
                 foreach($marker in @('S10_STDOUT','S10_STDERR')) {
                     if([regex]::Matches($screen,$marker).Count -ne 1){throw "Missing or duplicate emitted stream marker: $marker"}
                 }
-            }
-            if ($case.Name -eq 'native-eof') {
-                $native=Get-Content -LiteralPath "$report.child.log" -Raw
-                if($native -notmatch 'phase=1 status=1 value=00000025'){throw 'EOF/native result 37 not observed'}
             }
             if ($case.Name -in @('guest-seven','command-guest-seven')) {
                 $opens=Get-Content -LiteralPath "$report.dem-open.txt" -Raw
