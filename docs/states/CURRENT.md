@@ -28,8 +28,11 @@
 ## S24 Progress
 
 S24 is admitted.  It starts with a fresh selected-system manifest and
-original-owner/device-lifecycle census; no S24 implementation claim or
-synthetic device pass exists yet.
+original-owner/device-lifecycle census.  The baseline confirms nine exact
+selected bodies, a finite include relocation and the declared original generic
+ROM-body selection; it also records that the old HALT/RESET and Console
+regressions are insufficient as timer/PIC/CMOS/DMA/ROM capability proof.  No
+S24 implementation claim or synthetic device pass exists yet.
 
 ## S1 Closure Record
 
