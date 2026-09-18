@@ -67,6 +67,26 @@ the same current formal flags. None retained a direct `C_Video`/`Video` field
 access after preprocessing. This is a consumer census, not proof that every
 C-VID vector has guest execution coverage.
 
+## Deployed regression
+
+The current `O:\winnt` package was exercised through its real ConPTY Console
+path. `VerifyCvidIntegrated.ps1` with log prefix
+`t420-s22-cvid-integrated-r2` passed all six video witnesses (`80x25`,
+`45x34`, `60x50`, `120x30`, mouse and resize), plus five independent
+short-window `EDIT -> MEM` sequences. The observer captured guest text for
+each run; this is not an exit-code-only result.
+
+`Verify-CommandExitStatus.ps1` with log prefix
+`t420-s22-command-text-r1` then passed all 17 established Console-text-gated
+routes: empty/native success and failure, stream/EOF handling, direct and
+nested `COMMAND`, direct and nested `MEM`, the verified `G7.COM` guest exit
+fixture, `COMMAND /C MEM`, and `EDIT`. Thus the deployed package has a fresh
+direct and interactive `COMMAND/MEM/EDIT` regression witness while this
+capability audit continues. These runs prove that the selected C-VID
+publication boundary did not regress the existing Console product path; they
+do not claim that every EGA memory writer was individually exercised, which
+remains S23's responsibility.
+
 ## Current disposition
 
 The 26 already-recorded SPC386 non-PIG/non-SPC486 null slots remain a
