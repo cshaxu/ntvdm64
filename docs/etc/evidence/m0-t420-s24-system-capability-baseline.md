@@ -61,6 +61,23 @@ short DOS drive mapped to `O:\winnt\tests\m0-t420-s24-r5`. The raw guest transcr
 S24_TIMER_OK S24_CMOS_OK S24_PIC_OK S24_DMA_PORT_OK S24_ROM_READ_OK S24_SYSTEM_OK
 ```
 
+The refined r9 guest run additionally exercised the original RTC periodic
+provider: it republishes the existing register-A rate, enables PIE through
+the original register-B path, waits under normal CPL3 execution, acknowledges
+register C and restores B. Its raw transcript contains
+`S24_RTC_PERIODIC_OK`. The initial requirement that C_IRQF still be visible
+at the guest read was withdrawn: C_PF is present, while C_IRQF may already be
+consumed by the original RTC IRQ/EOI acknowledgment route. Treating that
+normal consumption as a device failure was an invalid assertion.
+
+`at_dma.c` and its `gfi_sflp.c` caller are selected in the formal graph, but
+the current runtime profile provides no floppy image or A: attachment. The
+only source-shaped transfer route is original floppy I/O through
+`gfi_sflp -> dma_request -> do_transfer`; there is no DOS DMA-copy API to
+invent. DMA transfer is therefore profile-null in this package, while the
+guest fixture records the existing controller port provider. A future floppy
+media admission must validate it through an original INT 13h read.
+
 The same deployment passed all six Console geometry/mouse/resize cases and
 five short-window `EDIT -> MEM` repetitions through
 `tools/audit/VerifyCvidIntegrated.ps1` (runner log:

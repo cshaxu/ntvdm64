@@ -28,7 +28,7 @@
 ## S24 Progress
 
 S24's [system capability baseline](../etc/evidence/m0-t420-s24-system-capability-baseline.md)
-now records real DOS guest timer/PIC, CMOS, DMA-port and ROM evidence plus
+now records real DOS guest timer/PIC, CMOS/RTC periodic, DMA-port and ROM evidence plus
 complete deployed COMMAND/MEM/EDIT Console regression. HLT remains the S21
 CPL3 negative boundary. DMA transfer, RTC alarm/periodic, device-failure
 lifecycle and fresh formal product linkage remain open; no closure claim.
