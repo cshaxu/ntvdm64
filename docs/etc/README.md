@@ -2,6 +2,7 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T420 S23 selected video capability baseline](evidence/m0-t420-s23-video-capability-baseline.md) | M0 T420 S23 | Freezes the selected 19-source video manifest, normalized mirror-diff cohorts and writer-to-memory-to-Console acceptance matrix. | Retain through T420 package completion. |
 | [T420 S22 C-VID capability baseline](evidence/m0-t420-s22-cvidc-capability-baseline.md) | M0 T420 S22 | Freezes current-graph accessor, vector-owner and short-consumer baseline before complete C-VID capability closure. | Retain through T420 package completion. |
 | [T420 S21 guest Console witness](evidence/m0-t420-s21-guest-console-witness.md) | M0 T420 S21 | Requires real guest text for CCPU and COMMAND acceptance; records the source-shaped CPL3 HLT negative control. | Retain through T420 package completion. |
 | [T420 S20 VDMREDIR operation-family matrix](evidence/m0-t420-s20-vdmredir-operation-matrix.md) | M0 T420 S20 | Complete selected redirector operation matrix: real DOS-guest proof, RAP/DLC exclusion evidence and matching-package regression. | Retain through T420 package completion. |
