@@ -4,44 +4,32 @@
 
 ## Active Packet
 
-**Active: M0 T420 S23**
+**Active: M0 T420 S24**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T420 S23 — Ordinary Mode. |
+| Identifier Mode | M0 T420 S24 — Ordinary Mode. |
 | Candidate Proposal | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md) |
-| Admission And Approval | Owner previously authorized automatic admission of every sequential S. S22 closes at `23558cadd`; this admits the next ordered T420 row, S23. |
-| Objective | Close the complete selected original `softpc.new/base/video` capability unit with real guest evidence for text/video update, scrolling and display-state behavior within the selected public Console presentation boundary. |
-| Non-goals | No CPU30/kernel-VDM monitor revival, a second video-memory/presentation owner, synthetic guest success, WOW/WRITE integration, or unrelated Broker/COMMAND policy. |
-| Reference Baseline | S22 closed C-VID vector, accessor and table publication. It is an input to this package; it does not prove that the selected EGA/CGA/VGA writer bodies perform real guest-memory and Console work. |
-| Files And ABI Surface | Freeze the selected 19-source video manifest, C-VID read/write/mark table handoff, guest video-memory aliases, text-mode scrolling/update state, and the finite public-Console presentation binding. |
+| Admission And Approval | Owner previously authorized automatic admission of every sequential S. The reviewed S23 closure record admits the next ordered T420 row, S24. |
+| Objective | Close the complete selected original `softpc.new/base/system` capability unit with real timer/PIC/reset, CMOS/DMA/ROM and device-failure lifecycle evidence. |
+| Non-goals | No CPU30/kernel-VDM monitor revival, a replacement device subsystem, synthetic timing success, graphics presentation, WOW/WRITE integration, or unrelated Broker/COMMAND policy. |
+| Reference Baseline | S4 closed the selected system package's source/diff recovery. It is an input only; it does not prove device and failure lifecycle execution. |
+| Files And ABI Surface | Freeze the selected eleven-unit system manifest, timer/PIC/CMOS/DMA/ROM state, device notification, reset and normal/abnormal worker teardown. |
 | Applicable Rules | Project design/rules, source policy, strict mirror rule, CCPU40-only product rule, and single original-owner composition. |
-| Verification | Establish a writer-to-guest-memory-to-Console matrix. Every positive selected writer/update family needs a real guest or current x86 host witness; every unavailable family must be source-proven profile-null/no selected caller. Run fresh formal x86 linkage, focused original video fixtures, deployed geometry/mouse/resize plus direct and interactive COMMAND/MEM/EDIT regression, and governance review. |
-| Expected Markers | Each selected video writer/update/display family is end-to-end pass, source-proven profile-null/no selected caller, or owner-approved exclusion; one video-memory and presentation owner; measured mirror/adapter footprint delta. |
-| Asset Needs | Pinned OpenNT video union, S22 C-VID publication evidence, current formal x86 generator, test-only fixtures under `build/`, and `O:\winnt` runtime package. |
-| Reporting Requirements | Record selected manifest/hashes, writer/provider-to-memory/presentation map, exact test commands/results, profile-null rationale, retained public-Console binding rationale, footprint changes and regressions. |
-| Stop Conditions | A required CPU30/kernel dependency, second video-memory/presentation owner, guest-media change, or COMMAND/MEM/EDIT regression pauses for renewed owner direction. |
-| Exit Criteria | Every selected video writer/update/display family has real evidence, source-proven profile-null/no selected caller or owner-approved exclusion; mirror ownership is preserved; no duplicate guest-memory/presentation policy remains; fresh formal x86, package matrix and established regressions pass; evidence/index/status updated; reviewed P pushed. |
+| Verification | Establish real guest/device lifecycle evidence for every selected system family or source-prove a profile-null/no selected caller disposition. Run fresh formal x86 linkage, focused system fixtures, deployed direct/interactive COMMAND/MEM/EDIT regression, and governance review. |
+| Expected Markers | Each selected timer/PIC/reset/CMOS/DMA/ROM/device-failure family is pass, source-proven profile-null/no selected caller, or owner-approved exclusion; one owner per state; measured mirror/adapter footprint delta. |
+| Asset Needs | Pinned OpenNT system union, S4 recovery evidence, current formal x86 generator, test-only fixtures under `build/`, and `O:\winnt` runtime package. |
+| Reporting Requirements | Record selected manifest/hashes, provider-to-device/lifecycle map, exact test commands/results, profile-null rationale, retained adapter boundaries, footprint changes and regressions. |
+| Stop Conditions | A required CPU30/kernel dependency, a second device-state owner, guest-media change, or COMMAND/MEM/EDIT regression pauses for renewed owner direction. |
+| Exit Criteria | Every selected system family has real evidence, source-proven profile-null/no selected caller or owner-approved exclusion; mirror ownership is preserved; no duplicate device policy remains; fresh formal x86, package matrix and established regressions pass; evidence/index/status updated; reviewed P pushed. |
 | Original Owner Request | “批准所有推送 请你自动准入每个s任务”。 |
-| Similar-Issue Sweep | Audit every selected video writer/update/display path for duplicate guest-memory ownership, stale C-VID pointer publication, profile mismatch, fabricated Console success and adapter-owned replacement logic. |
+| Similar-Issue Sweep | Audit every selected timer/PIC/reset/device path for duplicate state ownership, profile mismatch, fabricated timing success and adapter-owned replacement logic. |
 
-## S23 Progress
+## S24 Progress
 
-The real guest text-writer and direct C-VID text-memory rows are delivered:
-the INT 10 fixture proves original attributed write, upward scroll and
-teletype markers, while the direct fixture establishes original mode 3 and
-then proves `B800:` guest write/read-back plus public-Console presentation.
-The full six-row geometry/mouse/resize matrix and five short-history
-EDIT-to-MEM repetitions pass with raw guest transcript gating.  Remaining S23
-work is only the explicit source disposition for graphics-only providers; it
-must not be faked as text-Console support.
-
-The fresh formal-worker graph now derives and creates every selected object
-output directory required by `ntvdm.exe`, including nested worker-session
-outputs.  Its bounded serial dispatch fallback completed the 466-command
-formal x86 `ntvdm.exe` graph and passed the linked VdmTib ownership check.  The
-remaining C-VID execution evidence is still an active S23 requirement, not
-implied by that build-graph correction.
+S24 is admitted.  It starts with a fresh selected-system manifest and
+original-owner/device-lifecycle census; no S24 implementation claim or
+synthetic device pass exists yet.
 
 ## S1 Closure Record
 
@@ -233,6 +221,19 @@ resize witnesses, five short-window `EDIT -> MEM` sequences, and all 17
 Console-text-gated COMMAND/MEM/EDIT routes. Actual video writer workload is
 now S23's explicit owner; no C-VID duplicate is introduced.
 
+## S23 Closure Record
+
+[T420 S23 video capability closure](../etc/evidence/m0-t420-s23-video-capability-baseline.md)
+closes the selected original video capability within the public-Console
+boundary.  Real guest fixtures prove original INT 10 write/scroll, direct
+`B800:` C-VID text read/write/presentation and direct mode-13 `A000:` graphics
+read/write with text recovery.  The full six-row geometry/mouse/resize matrix
+and five short-window EDIT-to-MEM repetitions pass from raw guest transcripts.
+Graphics pixel presentation is explicitly not fabricated: the source/graph
+gate proves the selected providers exist, the public Console is text-only and
+no graphics sink is installed; queued `kvm-window` exclusively owns that
+future worker-local presentation capability.
+
 ## Current Technical Baseline
 
 - Product package: Win32/x86 CCPU40 `run16.exe`, `basesrv.exe`, `ntvdm.exe`,
@@ -247,7 +248,7 @@ now S23's explicit owner; no C-VID duplicate is introduced.
   original OpenNT forms; S15 closes XMS, S16 closes SubAlloc, S17 closes
   OEMUNI, S18 closes DPMI32, S19 closes guest DPMI/DOSX, S20 closes VDMREDIR,
   and S21 closes CCPU386 capability acceptance. S22 closes C-VID publication
-  capability; S23 video capability closure is active.
+  capability; S23 closes video capability within the public-Console boundary.
 
 ## Prior Closure
 
@@ -264,7 +265,7 @@ No standalone governance delivery is active or pending.
 
 ## Next Work
 
-S23 is active. It must turn the recovered selected video package into a
-complete selected-profile guest-memory, text/scroll/update and public-Console
-presentation capability matrix; S22's publication evidence is an input, not
-a substitute for video-writer acceptance.
+S24 is active. It must turn the recovered selected system package into a
+complete selected-profile timer/PIC/reset, CMOS/DMA/ROM and device-failure
+lifecycle matrix; S4's package-recovery evidence is an input, not a
+substitute for runtime capability acceptance.

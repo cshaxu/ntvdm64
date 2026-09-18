@@ -3,7 +3,7 @@ param(
     [Parameter(Mandatory)][string]$FixtureRoot,
     [string]$LogPrefix='m0-t413-s4-video',
     [string]$VideoGuestFixturePath,
-    [ValidateSet('int10', 'direct-vram')][string]$VideoGuestRoute='int10',
+    [ValidateSet('int10', 'direct-vram', 'graphics-vram')][string]$VideoGuestRoute='int10',
     [switch]$VideoOnly
 )
 $ErrorActionPreference='Stop'
@@ -75,12 +75,19 @@ if($VideoGuestFixturePath) {
         $result=Get-Content "$log.runner.txt" -Raw
         if($result -notmatch '(?m)^video-int10 wait=0 exit=1\r?$'){throw "$VideoGuestRoute guest did not return through COMMAND: $result"}
         Assert-GuestConsoleTranscript -Path $log -Case "video-$VideoGuestRoute" -RequireEditor:$false -MinimumMemReports 1
-        foreach($marker in @('VVVV','S23I','S23_INT10_WRITER_OK')) {
+        $markers = if($VideoGuestRoute -eq 'graphics-vram') {
+            @('S23_GRAPHICS_VRAM_OK')
+        } else {
+            @('VVVV','S23I','S23_INT10_WRITER_OK')
+        }
+        foreach($marker in $markers) {
             if((Get-Content -LiteralPath $log -Raw) -notmatch [regex]::Escape($marker)) {
                 throw "Missing $VideoGuestRoute guest marker: $marker"
             }
         }
-        if($VideoGuestRoute -eq 'direct-vram') {
+        if($VideoGuestRoute -eq 'graphics-vram') {
+            Write-Output 'PASS video graphics-VRAM guest read/write/text restore'
+        } elseif($VideoGuestRoute -eq 'direct-vram') {
             Write-Output 'PASS video direct-VRAM guest read/write/presentation'
         } else {
             Write-Output 'PASS video INT 10 guest write/scroll'

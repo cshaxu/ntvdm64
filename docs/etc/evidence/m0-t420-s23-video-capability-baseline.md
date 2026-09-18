@@ -165,3 +165,44 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools/audit/VerifyCvidIntegr
   -VideoGuestFixturePath build/M0-T420/S23/video-direct-vram-r3/VIDTST.COM `
   -VideoGuestRoute direct-vram
 ```
+
+## Graphics-memory disposition
+
+Graphics providers are selected, not profile-null: the formal video rule uses
+`MONITOR`, `X86GFX` and `MVDM_STANDALONE_SAS_VIDEO`; original `vga_mode.c`
+selects `ega_graph_update` and `vga_graph_update` with
+`EGA_GRAPHICS_MARKING`.  A focused test-only mode-13 fixture then directly
+wrote and read `A000:0000`, restored mode 3, and emitted
+`S23_GRAPHICS_VRAM_OK`.  Its SHA-256 is
+`eb0f9d1f7c20afeb8cabb98b321e0560e138b986632a5f7e7e67f8666ab9301f`;
+the `t420-s23-graphics-vram-r1` guest transcript gate passed.
+
+This proves selected graphics guest-memory execution and clean text recovery;
+it intentionally does not claim a graphical pixel presentation in a terminal.
+`Verify-T420S23GraphicsDisposition.mjs` verifies the precise current boundary:
+the public Console adapter copies only the registered text surface, forwards
+non-text invalidations in their original event shape, and returns
+`ERROR_CALL_NOT_IMPLEMENTED` for a graphics palette rather than inventing a
+Console palette.  The only `session_set_video_event_sink` occurrences are its
+declaration and definition, so no product graphics sink is installed.  The
+queued `kvm-window` proposal is therefore the one explicit future worker-local
+graphics presentation owner.  It must not be silently implemented by S23 or
+represented as a text-Console pass.
+
+```powershell
+node tools/audit/Verify-T420S23GraphicsDisposition.mjs .
+powershell -NoProfile -ExecutionPolicy Bypass -File tools/audit/VerifyCvidIntegrated.ps1 `
+  -FixtureRoot build/M0-T420/S23/console-regression-r3 `
+  -LogPrefix t420-s23-graphics-vram-r1 `
+  -VideoGuestFixturePath build/M0-T420/S23/video-graphics-vram-r1/VIDTST.COM `
+  -VideoGuestRoute graphics-vram -VideoOnly
+```
+
+## S23 closure accounting
+
+The selected-video mirror remains ten files different from pinned OpenNT,
+totalling `+160/-76` physical normalized lines; S23 adds no mirror-side
+provider replacement and no adapter graphics substitute.  Its additions are
+three test-only guest fixtures and two verification gates.  The source-level
+residual rows remain the prior declared ABI, CCPU40 table and standalone SAS
+carrier boundaries; this acceptance pass neither hides nor expands them.

@@ -2,7 +2,7 @@
 param(
     [Parameter(Mandatory = $true)][string]$RepositoryRoot,
     [Parameter(Mandatory = $true)][string]$BuildRoot,
-    [ValidateSet('int10', 'direct-vram')][string]$GuestRoute = 'int10',
+    [ValidateSet('int10', 'direct-vram', 'graphics-vram')][string]$GuestRoute = 'int10',
     [string]$NasmExecutable = 'nasm.exe'
 )
 
@@ -22,10 +22,10 @@ if (Test-Path -LiteralPath $build) {
 
 $nasm = Get-Command -Name $NasmExecutable -ErrorAction Stop
 New-Item -ItemType Directory -Path $build | Out-Null
-$sourceName = if ($GuestRoute -eq 'direct-vram') {
-    'video_direct_vram.asm'
-} else {
-    'video_int10_writer.asm'
+$sourceName = switch ($GuestRoute) {
+    'direct-vram' { 'video_direct_vram.asm' }
+    'graphics-vram' { 'video_graphics_vram.asm' }
+    default { 'video_int10_writer.asm' }
 }
 $source = Join-Path $repository ('tests\observation\' + $sourceName)
 $output = Join-Path $build 'VIDTST.COM'
