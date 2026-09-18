@@ -165,6 +165,13 @@ calls the async entry.  `CPU_SIGIO_EVENT` is consequently a source-proven
 no-selected-caller disposition for this profile, rather than an untested
 claim that the CCPU currently consumes it.
 
+The same current-source event fixture was rerun at
+`build/M0-T420/S21/event-profile-r3/`. Its `ica_intack=-1` control observes
+one acknowledgement and zero deliveries, proving that DIV-221 does not narrow
+the signed stale-notification sentinel into an `IU16` vector. The normal
+vector-9 and reasserted-event controls also pass. This is a focused
+CPU/PIC-boundary proof, not a claim of full PIC hardware emulation.
+
 ## `c_xcptn` handled-hook scope disposition
 
 The five `MVDM-HOST-DIV-268` brace pairs in `c_xcptn.c` are retained as one
