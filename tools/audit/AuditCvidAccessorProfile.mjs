@@ -6,6 +6,8 @@ import {spawnSync} from 'node:child_process';
 const root=process.cwd(), upstream='O:/repos.external/OpenNT/base/mvdm/softpc.new';
 const outputIndex=process.argv.indexOf('--output');
 const out=path.resolve(outputIndex<0?'build/M0-T413/S1/accessor-audit':process.argv[outputIndex+1]);
+const graphIndex=process.argv.indexOf('--build-graph');
+const graphPath=graphIndex < 0 ? null : path.resolve(process.argv[graphIndex+1]);
 fs.mkdirSync(out,{recursive:true});
 const read=p=>fs.readFileSync(p,'utf8').replace(/\r\n/g,'\n');
 if(process.argv.includes('--collect')){
@@ -55,7 +57,13 @@ for(const p of pairs){
 }
 fixture+=regs.map((r,i)=>`CHECK(${r}==${i+100});`).join('')+'\nprintf("PASS 38 original accessor pairs: offsets, values, isolated field writes, scratch preservation\\n");return 0;}\n';
 fs.writeFileSync(path.join(out,'original-accessor-fixture.c'),fixture);
-const graph=read('build/M0-T412/S11/cell-grid/build.ninja');
+// This audit must compile against the caller's current formal x86 graph. A
+// historical graph would silently reintroduce stale include roots and turn a
+// source-layout change into a false C-VID failure.
+if (!graphPath || !fs.existsSync(graphPath)) {
+ throw Error('Require --build-graph <current-formal-x86-build.ninja>');
+}
+const graph=read(graphPath);
 const flags=graph.match(/^cvidc_rule_cflags = (.+)$/m)[1].replaceAll('$:',':').replace('/showIncludes','');
 const q=s=>'"'+path.resolve(s)+'"';
 const cmd=['@echo off','call "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat" -arch=x86 -host_arch=x64 >nul','if errorlevel 1 exit /b %errorlevel%',
