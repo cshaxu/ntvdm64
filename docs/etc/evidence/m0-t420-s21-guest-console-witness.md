@@ -165,6 +165,26 @@ calls the async entry.  `CPU_SIGIO_EVENT` is consequently a source-proven
 no-selected-caller disposition for this profile, rather than an untested
 claim that the CCPU currently consumes it.
 
+## `c_xcptn` handled-hook scope disposition
+
+The five `MVDM-HOST-DIV-268` brace pairs in `c_xcptn.c` are retained as one
+semantic correction, not formatting or a standalone adapter policy. In the
+pinned OpenNT body, a protected-mode `host_exint_hook(...)` condition governs
+only the preceding fault-state clear. The following `c_cpu_continue()` is
+unconditional. In the selected NTVDM build,
+`c_main.c::c_cpu_continue()` calls `ccpu386GotoThrdExptnPt()`; it does not
+return to the exception body. Consequently the original spelling abandons the
+CPU exception path even when the hook returns `FALSE`.
+
+The original `nt_inthk.c::host_exint_hook()` initializes its result to
+`FALSE` and forwards the provider's Boolean result. The selected
+`dpmiint.c::DpmiFaultHandler()` documents the same contract: `TRUE` means
+dispatched and `FALSE` means not handled. The retained braces therefore make
+the jump occur only for a handler that actually accepted the exception; the
+`FALSE` path reaches the existing original `do_intrupt()` delivery. This is
+the exact five-site correction in the archived NTVDMx64
+`patches/common/ccpu.patch`; no behavior was newly authored here.
+
 ## Interpretation and follow-up
 
 The text gate prevents false green acceptance when a wrapper exits zero after
