@@ -25,6 +25,13 @@
 | Original Owner Request | “批准所有推送 请你自动准入每个s任务”。 |
 | Similar-Issue Sweep | Audit every selected video writer/update/display path for duplicate guest-memory ownership, stale C-VID pointer publication, profile mismatch, fabricated Console success and adapter-owned replacement logic. |
 
+## S23 Progress
+
+The first real guest text-writer row is delivered: a test-only DOS INT 10
+fixture proves original attributed write, upward scroll and teletype markers
+in captured public Console cells, with guest transcript gating. The remaining
+C-VID EGA read/write/mark, mode/display and teardown rows stay active.
+
 ## S1 Closure Record
 
 [T420 S1 CCPU386 package audit](../etc/evidence/m0-t420-s1-ccpu386-package-audit.md)

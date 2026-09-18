@@ -61,3 +61,43 @@ neither forbidden diagnostic occurred. A fresh single 80x25 ConPTY run also
 captured all markers and passed the same predicates; its observer report was
 `wait=0 exit=1`, the established guest COMMAND exit result. The observer
 process itself returns zero when that report is a pass.
+
+## INT 10 text-write and scroll witness
+
+`tests/observation/video_int10_writer.asm` is a test-only DOS COM fixture.
+It invokes the selected worker's original INT 10 `AH=09h` attributed-write
+service, then `AH=06h` upward-scroll service over the same two-row rectangle,
+and finally uses `AH=0Eh` teletype for a post-scroll video marker. It does not
+link, replace or call a host-side video provider.
+
+`Build-T420S23VideoGuestTest.ps1` assembled the fixture below the task-owned
+build root; `VIDTST.COM` SHA-256 was
+`bd02e4806e0a770e47798c230afd9f903a9167b562f8a0949147811e2069a0f4`.
+The temporary `W:` mapping pointed only at that build root and was removed
+after the run. The `terminal-observer.exe --video-int10` run captured
+`O:\winnt\logs\t420-s23-video-int10-r3.raw` and its cell snapshots.
+
+The transcript contains the DOS completion marker `S23_INT10_WRITER_OK`,
+`VVVV`, the post-scroll `S23I`, and the subsequent `MEM` conventional-memory
+report. It contains neither command-resolution diagnostic. Cell snapshots
+first show `VVVV` on row 15 (the upper row after the intended upward scroll)
+and then `S23I` on row 18. Thus this is a real guest INT 10 attributed-write
+and scroll-to-public-Console witness, not a host exit-only observation.
+
+This closes only the text-write/scroll/Console portion of the S23 matrix. The
+separate SAS-cell attribution, C-VID EGA read/write/mark execution,
+mode/display families and teardown/resize ownership remain required.
+
+The reproducible focused gate is:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools/audit/VerifyCvidIntegrated.ps1 `
+  -FixtureRoot build/M0-T420/S23/console-regression-r3 `
+  -LogPrefix t420-s23-video-int10-r7 `
+  -VideoGuestFixturePath build/M0-T420/S23/video-int10-r3/VIDTST.COM -VideoOnly
+```
+
+It passed with `PASS video INT 10 guest write/scroll`; the child observer
+recorded `video-int10 wait=0 exit=1`. `VideoOnly` deliberately avoids
+re-running the broader geometry and EDIT matrix while iterating this one
+writer witness; the full matrix remains a separate S23 closure requirement.

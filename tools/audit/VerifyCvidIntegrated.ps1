@@ -1,10 +1,20 @@
 [CmdletBinding()]
-param([Parameter(Mandatory)][string]$FixtureRoot,[string]$LogPrefix='m0-t413-s4-video')
+param(
+    [Parameter(Mandatory)][string]$FixtureRoot,
+    [string]$LogPrefix='m0-t413-s4-video',
+    [string]$VideoGuestFixturePath,
+    [switch]$VideoOnly
+)
 $ErrorActionPreference='Stop'
 $FixtureRoot=(Resolve-Path $FixtureRoot).Path
 if($LogPrefix -notmatch '^[a-z0-9-]+$'){throw 'Invalid prefix'}
 function Assert-GuestConsoleTranscript {
-    param([Parameter(Mandatory)][string]$Path,[Parameter(Mandatory)][string]$Case)
+    param(
+        [Parameter(Mandatory)][string]$Path,
+        [Parameter(Mandatory)][string]$Case,
+        [bool]$RequireEditor = $true,
+        [int]$MinimumMemReports = 3
+    )
     if (!(Test-Path -LiteralPath $Path -PathType Leaf)) {
         throw "Missing guest Console transcript: $Case"
     }
@@ -18,16 +28,18 @@ function Assert-GuestConsoleTranscript {
             throw "Guest Console reported command-resolution failure ($Case): $unexpected"
         }
     }
-    foreach($marker in @('Microsoft(R) Windows NT DOS','MS-DOS Editor','bytes total conventional memory')) {
+    $markers=@('Microsoft(R) Windows NT DOS','bytes total conventional memory')
+    if($RequireEditor){$markers += 'MS-DOS Editor'}
+    foreach($marker in $markers) {
         if ($transcript -notmatch [regex]::Escape($marker)) {
             throw "Missing guest Console marker ($Case): $marker"
         }
     }
-    if ([regex]::Matches($transcript,[regex]::Escape('bytes total conventional memory')).Count -lt 3) {
-        throw "Missing pre-EDIT/post-EDIT MEM guest evidence: $Case"
+    if ([regex]::Matches($transcript,[regex]::Escape('bytes total conventional memory')).Count -lt $MinimumMemReports) {
+        throw "Missing required MEM guest evidence: $Case"
     }
 }
-$rows=@(@(80,25,''),@(45,34,''),@(60,50,''),@(120,30,''),@(80,25,'--mouse'),@(80,25,'--resize'))
+$rows=if($VideoOnly){@()}else{@(@(80,25,''),@(45,34,''),@(60,50,''),@(120,30,''),@(80,25,'--mouse'),@(80,25,'--resize'))}
 foreach($row in $rows){
     $tag=if($row[2]){$row[2].Substring(2)}else{"$($row[0])x$($row[1])"}
     $log="O:\winnt\logs\$LogPrefix-$tag.raw"
@@ -41,19 +53,53 @@ foreach($row in $rows){
     & "$PSScriptRoot/Verify-ConsoleResizeCapture.ps1" -Capture $log
     Write-Output "PASS video $tag"
 }
-$saved=$env:MVDM_OBSERVER_SHORT_HISTORY
-try {
-    $env:MVDM_OBSERVER_SHORT_HISTORY='1'
-    foreach($i in 1..5){
-        $prefix="$LogPrefix-short-$i"
-        & "$PSScriptRoot/Verify-CommandExitStatus.ps1" -Observer (Join-Path $FixtureRoot 'observer.exe') -Cases edit -LogPrefix $prefix
-        $report="O:\winnt\logs\$prefix-edit.txt"
-        $geometry=Get-Content "$report.geometry.txt" -Raw
-        if($geometry -notmatch 'buffer=80,300 view=0,36,79,40 cursor=0,40 prefill=40'){throw "Short geometry mismatch: $geometry"}
-        foreach($line in 1..4){
-            $screen=Get-Content ("$report.line-{0:D2}.console.txt" -f $line) -Raw
-            if($screen -notmatch 'MS-DOS resident in High Memory'){throw 'Missing post-EDIT MEM completion'}
-        }
-        Write-Output "PASS native short-window $i"
+if($VideoOnly -and !$VideoGuestFixturePath) {throw 'VideoOnly requires VideoGuestFixturePath'}
+if($VideoGuestFixturePath) {
+    $videoGuest=(Resolve-Path -LiteralPath $VideoGuestFixturePath).Path
+    if($videoGuest -notmatch '\\build\\M[0-9]+-T[0-9]+\\S[0-9]+\\' -or
+        [IO.Path]::GetFileName($videoGuest) -ne 'VIDTST.COM') {
+        throw 'Video guest fixture must be the task-owned build VIDTST.COM artifact'
     }
-} finally {$env:MVDM_OBSERVER_SHORT_HISTORY=$saved}
+    $videoDrive=@('W:','V:','U:','T:') | Where-Object { -not (Test-Path "$_\\") } | Select-Object -First 1
+    if(!$videoDrive){throw 'No reserved short DOS fixture drive is available'}
+    $log="O:\winnt\logs\$LogPrefix-video-int10.raw"
+    if(Test-Path $log){throw 'Use fresh log prefix'}
+    subst $videoDrive (Split-Path -Parent $videoGuest)
+    if($LASTEXITCODE){throw 'Could not map short DOS video-fixture drive'}
+    $savedVideoCommand=$env:MVDM_TEST_VIDEO_COMMAND
+    try {
+        $env:MVDM_TEST_VIDEO_COMMAND="$videoDrive\VIDTST.COM"
+        $p=Start-Process -FilePath (Join-Path $FixtureRoot 'terminal-observer.exe') -ArgumentList 80,25,$log,'--video-int10' -WorkingDirectory O:\winnt -WindowStyle Hidden -RedirectStandardOutput "$log.runner.txt" -RedirectStandardError "$log.stderr.txt" -PassThru
+        if(!$p.WaitForExit(55000)){throw 'INT 10 video observer timeout'}
+        $result=Get-Content "$log.runner.txt" -Raw
+        if($result -notmatch '(?m)^video-int10 wait=0 exit=1\r?$'){throw "INT 10 guest did not return through COMMAND: $result"}
+        Assert-GuestConsoleTranscript -Path $log -Case 'video-int10' -RequireEditor:$false -MinimumMemReports 1
+        foreach($marker in @('VVVV','S23I','S23_INT10_WRITER_OK')) {
+            if((Get-Content -LiteralPath $log -Raw) -notmatch [regex]::Escape($marker)) {
+                throw "Missing INT 10 guest marker: $marker"
+            }
+        }
+        Write-Output 'PASS video INT 10 guest write/scroll'
+    } finally {
+        $env:MVDM_TEST_VIDEO_COMMAND=$savedVideoCommand
+        subst $videoDrive /d
+    }
+}
+if(!$VideoOnly) {
+    $saved=$env:MVDM_OBSERVER_SHORT_HISTORY
+    try {
+        $env:MVDM_OBSERVER_SHORT_HISTORY='1'
+        foreach($i in 1..5){
+            $prefix="$LogPrefix-short-$i"
+            & "$PSScriptRoot/Verify-CommandExitStatus.ps1" -Observer (Join-Path $FixtureRoot 'observer.exe') -Cases edit -LogPrefix $prefix
+            $report="O:\winnt\logs\$prefix-edit.txt"
+            $geometry=Get-Content "$report.geometry.txt" -Raw
+            if($geometry -notmatch 'buffer=80,300 view=0,36,79,40 cursor=0,40 prefill=40'){throw "Short geometry mismatch: $geometry"}
+            foreach($line in 1..4){
+                $screen=Get-Content ("$report.line-{0:D2}.console.txt" -f $line) -Raw
+                if($screen -notmatch 'MS-DOS resident in High Memory'){throw 'Missing post-EDIT MEM completion'}
+            }
+            Write-Output "PASS native short-window $i"
+        }
+    } finally {$env:MVDM_OBSERVER_SHORT_HISTORY=$saved}
+}

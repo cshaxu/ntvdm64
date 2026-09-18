@@ -75,6 +75,11 @@ static int log_contains(const char *path,const char *needle) {
     CloseHandle(file);return found;
 }
 
+static int guest_command_failed(const char *path) {
+    return log_contains(path,"Bad command or filename") ||
+        log_contains(path,"is not recognized as an internal or external command");
+}
+
 static DWORD WINAPI watch_cells(void *unused) {
     HANDLE h=CreateFileA("CONOUT$",GENERIC_READ,FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,OPEN_EXISTING,0,NULL);
     (void)unused;
@@ -127,7 +132,7 @@ int main(int argc,char **argv) {
     HPCON pty;
     STARTUPINFOEXA si={0};PROCESS_INFORMATION pi={0};SIZE_T bytes=0;
     COORD size;
-    if(argc!=4 && (argc!=5 || (strcmp(argv[4],"--mouse") && strcmp(argv[4],"--resize") && strcmp(argv[4],"--vdmredir-pipe") && strcmp(argv[4],"--vdmredir-transact") && strcmp(argv[4],"--vdmredir-call") && strcmp(argv[4],"--vdmredir-timeout") && strcmp(argv[4],"--vdmredir-async") && strcmp(argv[4],"--vdmredir-async-write") && strcmp(argv[4],"--vdmredir-mailslot") && strcmp(argv[4],"--vdmredir-terminate") && strcmp(argv[4],"--vdmredir-netbios") && strcmp(argv[4],"--vdmredir-netbios-async") && strcmp(argv[4],"--vdmredir-dlc") && strcmp(argv[4],"--vdmredir-netapi") && strcmp(argv[4],"--vdmredir-net-enum") && strcmp(argv[4],"--vdmredir-wksta") && strcmp(argv[4],"--vdmredir-wksta-set") && strcmp(argv[4],"--vdmredir-message") && strcmp(argv[4],"--vdmredir-service") && strcmp(argv[4],"--vdmredir-assign") && strcmp(argv[4],"--vdmredir-use") && strcmp(argv[4],"--vdmredir-use-info") && strcmp(argv[4],"--vdmredir-use-lifecycle"))))return 64;
+    if(argc!=4 && (argc!=5 || (strcmp(argv[4],"--mouse") && strcmp(argv[4],"--resize") && strcmp(argv[4],"--video-int10") && strcmp(argv[4],"--vdmredir-pipe") && strcmp(argv[4],"--vdmredir-transact") && strcmp(argv[4],"--vdmredir-call") && strcmp(argv[4],"--vdmredir-timeout") && strcmp(argv[4],"--vdmredir-async") && strcmp(argv[4],"--vdmredir-async-write") && strcmp(argv[4],"--vdmredir-mailslot") && strcmp(argv[4],"--vdmredir-terminate") && strcmp(argv[4],"--vdmredir-netbios") && strcmp(argv[4],"--vdmredir-netbios-async") && strcmp(argv[4],"--vdmredir-dlc") && strcmp(argv[4],"--vdmredir-netapi") && strcmp(argv[4],"--vdmredir-net-enum") && strcmp(argv[4],"--vdmredir-wksta") && strcmp(argv[4],"--vdmredir-wksta-set") && strcmp(argv[4],"--vdmredir-message") && strcmp(argv[4],"--vdmredir-service") && strcmp(argv[4],"--vdmredir-assign") && strcmp(argv[4],"--vdmredir-use") && strcmp(argv[4],"--vdmredir-use-info") && strcmp(argv[4],"--vdmredir-use-lifecycle"))))return 64;
     size.X=(SHORT)atoi(argv[1]);size.Y=(SHORT)atoi(argv[2]);
     if(argc==5 && (!strcmp(argv[4],"--vdmredir-pipe") || !strcmp(argv[4],"--vdmredir-transact") || !strcmp(argv[4],"--vdmredir-call") || !strcmp(argv[4],"--vdmredir-async") || !strcmp(argv[4],"--vdmredir-async-write"))) {
         char pipe_name[80]; snprintf(pipe_name,sizeof(pipe_name),"\\\\.\\pipe\\NTPTEST");
@@ -172,6 +177,26 @@ int main(int argc,char **argv) {
       if(GetEnvironmentVariableA("MVDM_TEST_BOOT_WAIT_MS",boot_wait_text,
           sizeof(boot_wait_text))) boot_wait=(DWORD)strtoul(boot_wait_text,0,10);
       Sleep(boot_wait); }
+    if(argc==5 && !strcmp(argv[4],"--video-int10")) {
+        char video_command[MAX_PATH];
+        if (!GetEnvironmentVariableA("MVDM_TEST_VIDEO_COMMAND",video_command,
+                sizeof(video_command))) return 70;
+        send_keys(video_command); send_keys("\r"); Sleep(2500);
+        send_keys("mem\r"); Sleep(2000); send_keys("exit\r");
+        { DWORD video_wait=WaitForSingleObject(pi.hProcess,5000),video_code=0;
+          GetExitCodeProcess(pi.hProcess,&video_code);
+          printf("video-int10 wait=%lu exit=%lu\n",video_wait,video_code); fflush(stdout);
+          Sleep(300); CloseHandle(write_pipe); WaitForSingleObject(thread,3000);
+          CloseHandle(raw_log);
+          { int passed=video_wait==WAIT_OBJECT_0 && video_code==1 &&
+              log_contains(argv[3],"S23_INT10_WRITER_OK") &&
+              log_contains(argv[3],"VVVV") &&
+              log_contains(argv[3],"S23I") &&
+              log_contains(argv[3],"bytes total conventional memory") &&
+              !guest_command_failed(argv[3]);
+            CloseHandle(job);ClosePseudoConsole(pty);return passed?0:1; }
+        }
+    }
     if(argc==5 && !strcmp(argv[4],"--vdmredir-pipe")) {
         send_keys("REDIR.EXE\r"); Sleep(1500); send_keys("VDMPRDR.COM\r"); Sleep(3000); send_keys("mem\r");
         Sleep(2000); send_keys("exit\r");
