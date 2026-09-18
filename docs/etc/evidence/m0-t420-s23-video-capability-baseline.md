@@ -46,6 +46,19 @@ each row for removal or tighter source ownership.
 The existing deployed `COMMAND/MEM/EDIT`, geometry, mouse and resize gates are
 regression inputs. They do not substitute for the writer-level witnesses above.
 
+## Fresh formal-worker graph prerequisite
+
+While preparing the required worker-local C-VID observation build, a clean
+formal graph exposed that the generator created neither `obj/worker` nor
+`obj/basesrv`.  Those are required by the generated MIDL service output and by
+the `ntvdm.exe` worker objects; the fixture-only graph did not require them and
+therefore masked the defect.  The generator now creates both directories (and
+explicitly retains the worker redirector output directory).  A new
+`formal-x86-cvid-r3` root was generated from empty state and contains all three
+directories.  Ninja dry-run enumerated the complete 466-step `ntvdm.exe`
+dependency graph.  This is a build-graph correction only: it changes neither
+the selected video sources nor the product runtime semantics.
+
 ## Guest transcript regression gate
 
 The shared ConPTY geometry runner now treats its raw guest Console transcript

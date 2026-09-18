@@ -32,6 +32,10 @@ fixture proves original attributed write, upward scroll and teletype markers
 in captured public Console cells, with guest transcript gating. The remaining
 C-VID EGA read/write/mark, mode/display and teardown rows stay active.
 
+The fresh formal-worker graph now creates the generated BaseSrv/worker output
+directories required by `ntvdm.exe`; the remaining C-VID execution evidence is
+still an active S23 requirement, not implied by that build-graph correction.
+
 ## S1 Closure Record
 
 [T420 S1 CCPU386 package audit](../etc/evidence/m0-t420-s1-ccpu386-package-audit.md)
