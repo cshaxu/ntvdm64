@@ -59,6 +59,28 @@ printed `CCPU thread lifecycle OK` and exited zero.  This distinguishes a
 real initialized-and-released CCPU thread frame from a thread that merely
 starts and returns without ever entering the simulator.
 
+## Current capability matrix
+
+The following runs were repeated against the current S21 formal library set;
+their scope is deliberately recorded rather than inflated.
+
+| Family | Evidence | Result and scope |
+| --- | --- | --- |
+| Instruction/FPU | Guest `SKIP*`, `TAKEN*`, `CALL*`, `BACK*`, `PAGE`, `STRING`, `MUL32`, `DIV32`, `BSF32`, `RMW`, `FPU64`, `FPUI32`, `FPUCW`, `FPUSW` | Each positive DOS program emitted its `CCPU-*-OK` Console witness and exited zero. |
+| Guest exception boundary | Guest `TRAP`, `FAULT` | Both emitted their guest witnesses and exited zero.  They prove the selected worker reaches these CCPU exception paths, not all protected-mode handler registration. |
+| Exception algorithm | `exception-profile-r1/exception-profile.exe` | `PASS 27 actual-source exception cases; failures=0`.  This is a direct compilation of original `c_xcptn.c`, covering handled/unhandled GP, IDT-GP, DF, DIV, PF and invalid-opcode branches. |
+| IRQ/reset/event | Guest `TIMBUSY`; `ccpu-halt-reset-test.exe`; event consumer scan | `TIMBUSY` waited for three guest INT 1Ch callbacks and emitted a witness.  The original HALT/reset fixture restarted at `AX=BEEF`; the consumer scan passed, while explicitly not claiming full CPU/PIC execution. |
+| Descriptor state | `cpu40-descriptor-domain-fixture.exe` | Current x86 execution exit 0.  It is the S18 owner fixture for GDT/LDT/IDT domain publication; S21 does not duplicate DPMI descriptor policy. |
+| FPU layout | `x87-layout-fixture.exe` | Current x86 execution exit 0; guest FPU markers above validate the execution side. |
+| Worker TLS | `ccpu-thread-lifecycle-test.exe` | Current direct formal-library link/run emitted `CCPU thread lifecycle OK`; this is host-side proof and is not counted as a guest witness. |
+
+The remaining work is not to repeat those passing probes.  It is to complete
+the source-caller matrix: prove which selected `c_intr` and `c_xcptn` DPMI
+hooks are reachable through the current provider, and either obtain a true
+guest proof or record the original owner/no-selected-caller disposition for
+each.  The existing S18 descriptor provider proof and this table are inputs,
+not a premature S21 closure.
+
 ## Interpretation and follow-up
 
 The text gate prevents false green acceptance when a wrapper exits zero after
