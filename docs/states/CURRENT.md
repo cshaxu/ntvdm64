@@ -2,38 +2,10 @@
 
 ## Current Work
 
-## Active Packet
-
-**Active: M0 T420 S24**
-
-| Field | Record |
-| --- | --- |
-| Identifier Mode | M0 T420 S24 — Ordinary Mode. |
-| Candidate Proposal | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md) |
-| Admission And Approval | Owner previously authorized automatic admission of every sequential S. The reviewed S23 closure record admits the next ordered T420 row, S24. |
-| Objective | Close the complete selected original `softpc.new/base/system` capability unit with real timer/PIC/reset, CMOS/DMA/ROM and device-failure lifecycle evidence. |
-| Non-goals | No CPU30/kernel-VDM monitor revival, a replacement device subsystem, synthetic timing success, graphics presentation, WOW/WRITE integration, or unrelated Broker/COMMAND policy. |
-| Reference Baseline | S4 closed the selected system package's source/diff recovery. It is an input only; it does not prove device and failure lifecycle execution. |
-| Files And ABI Surface | Freeze the selected eleven-unit system manifest, timer/PIC/CMOS/DMA/ROM state, device notification, reset and normal/abnormal worker teardown. |
-| Applicable Rules | Project design/rules, source policy, strict mirror rule, CCPU40-only product rule, and single original-owner composition. |
-| Verification | Establish real guest/device lifecycle evidence for every selected system family or source-prove a profile-null/no selected caller disposition. Run fresh formal x86 linkage, focused system fixtures, deployed direct/interactive COMMAND/MEM/EDIT regression, and governance review. |
-| Expected Markers | Each selected timer/PIC/reset/CMOS/DMA/ROM/device-failure family is pass, source-proven profile-null/no selected caller, or owner-approved exclusion; one owner per state; measured mirror/adapter footprint delta. |
-| Asset Needs | Pinned OpenNT system union, S4 recovery evidence, current formal x86 generator, test-only fixtures under `build/`, and `O:\winnt` runtime package. |
-| Reporting Requirements | Record selected manifest/hashes, provider-to-device/lifecycle map, exact test commands/results, profile-null rationale, retained adapter boundaries, footprint changes and regressions. |
-| Stop Conditions | A required CPU30/kernel dependency, a second device-state owner, guest-media change, or COMMAND/MEM/EDIT regression pauses for renewed owner direction. |
-| Exit Criteria | Every selected system family has real evidence, source-proven profile-null/no selected caller or owner-approved exclusion; mirror ownership is preserved; no duplicate device policy remains; fresh formal x86, package matrix and established regressions pass; evidence/index/status updated; reviewed P pushed. |
-| Original Owner Request | “批准所有推送 请你自动准入每个s任务”。 |
-| Similar-Issue Sweep | Audit every selected timer/PIC/reset/device path for duplicate state ownership, profile mismatch, fabricated timing success and adapter-owned replacement logic. |
-
-## S24 Progress
-
-S24's [system capability baseline](../etc/evidence/m0-t420-s24-system-capability-baseline.md)
-now records real DOS guest timer/PIC, CMOS/RTC periodic, DMA-port and ROM
-evidence; source-proven DMA-transfer profile-null and device-failure endpoint
-dispositions; and a freshly linked/deployed x86 package.  The direct interactive
-`COMMAND -> MEM -> EDIT -> MEM` regression is transcript-gated: it requires the
-actual DOS output and rejects `Bad command or filename`, rather than treating an
-outer host exit code as acceptance. HLT remains the S21 CPL3 negative boundary.
+**No active M/T/S packet.** [T420 S24's closure record](../etc/evidence/m0-t420-s24-system-capability-baseline.md)
+is the latest completed package; the ordered unadmitted candidates remain in
+[Queue](QUEUE.md). A candidate may become a new numeric T only with owner
+admission.
 
 ## S1 Closure Record
 
