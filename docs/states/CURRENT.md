@@ -27,12 +27,11 @@
 
 ## S24 Progress
 
-S24 is admitted.  It starts with a fresh selected-system manifest and
-original-owner/device-lifecycle census.  The baseline confirms nine exact
-selected bodies, a finite include relocation and the declared original generic
-ROM-body selection; it also records that the old HALT/RESET and Console
-regressions are insufficient as timer/PIC/CMOS/DMA/ROM capability proof.  No
-S24 implementation claim or synthetic device pass exists yet.
+S24's [system capability baseline](../etc/evidence/m0-t420-s24-system-capability-baseline.md)
+now records real DOS guest timer/PIC, CMOS, DMA-port and ROM evidence plus
+complete deployed COMMAND/MEM/EDIT Console regression. HLT remains the S21
+CPL3 negative boundary. DMA transfer, RTC alarm/periodic, device-failure
+lifecycle and fresh formal product linkage remain open; no closure claim.
 
 ## S1 Closure Record
 

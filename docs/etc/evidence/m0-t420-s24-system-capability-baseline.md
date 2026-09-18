@@ -43,3 +43,30 @@ bindings needed to observe the existing original paths.  It must not add a
 timer, PIC, CMOS, DMA or ROM reimplementation to an adapter.  Any required
 worker-local Win32 wait/thread binding remains owned by the existing host
 lifecycle package and is verified as a finite provider, never duplicated.
+
+## S24 guest device witness
+
+`tests/observation/system_capability.asm` is a test-only DOS COM probe, built
+by `tools/build/Build-T420S24SystemGuestTest.ps1`. It uses guest BIOS ticks,
+CMOS/PIC/DMA port I/O and the selected ROM mapping; it installs no replacement
+device and changes no guest media. A bounded normal CPL3 instruction workload
+separates the two tick reads. HLT is intentionally not used: S21 establishes
+that CPL3 HLT is a timeout boundary in this selected CCPU40 profile.
+
+On 2026-09-18 the public Console route ran `W:\SYSTST.COM` from
+`O:\winnt\tests\m0-t420-s24-r5`. The raw guest transcript at
+`O:\winnt\logs\m0-t420-s24-system-r5.raw` contains:
+
+```text
+S24_TIMER_OK S24_CMOS_OK S24_PIC_OK S24_DMA_PORT_OK S24_ROM_READ_OK S24_SYSTEM_OK
+```
+
+The same deployment passed all six Console geometry/mouse/resize cases and
+five short-window `EDIT -> MEM` repetitions through
+`tools/audit/VerifyCvidIntegrated.ps1` (runner log:
+`O:\winnt\logs\m0-t420-s24-command-regression.runner.txt`).
+
+Two fresh Ninja formal-build attempts blocked immediately after taking
+`.ninja_lock`, before spawning `cl.exe` or `link.exe`. This P changes only
+test sources; it makes no formal-link claim and S24 remains open for DMA
+transfer, RTC alarm/periodic, device-failure lifecycle and fresh formal link.
