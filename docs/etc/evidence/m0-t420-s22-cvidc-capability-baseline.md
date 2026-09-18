@@ -41,6 +41,27 @@ non-null after publication.  This proves C-VID's table-selection boundary; it
 does not claim execution of those EGA memory functions, which remains S23's
 real guest-video workload obligation.
 
+## Selected consumer ownership
+
+The selected-profile source census finds no unowned C-VID consumer.  C-VID is
+the table/state publisher; a caller's operational workload remains with the
+package that contains that caller.
+
+| Consumer cohort | Selected reference files | Capability owner |
+| --- | --- | --- |
+| C-VID publication/forwarding | `accessfn.c`, `ev_glue.c` and their generated headers | S22: binding, `Gdp`, vector/table publication and profile-null disposition. |
+| CCPU execution | `c_getset.c`, `ntstubs.c`, `cpu4gen.h`, `evidgen.h` | S21: CPU execution/descriptor/SAS provider behavior. |
+| EGA/CGA/VGA writers | 11 source files from `cga.c` through `video.c` | S23: real guest video-memory read/write/display behavior. |
+| PIC and quick events | `ica.c`, `qevnt.c`, `quick_ev.c` | S24: timer/PIC/reset and full quick-event lifecycle. |
+| Keyboard integration | `keyba.c` | S25: keyboard-controller lifecycle. |
+| Startup/termination/effective address | `main.c`, `terminat.c`, `xt.c` | S27: worker startup/termination and support-state behavior. |
+| NT host bridges | `nt_aorc.c`, `nt_cpu.c`, `nt_msscs.c`, `nt_thred.c`, `nt_timer.c`, `stubs.c` | S32: real worker/host-provider lifecycle. |
+
+Thus S22 must prove that every selected pointer/table is published with one
+correct owner and can be consumed.  It must not relabel another package's
+guest workload as a C-VID-only pass.  The table rows above are mandatory
+incoming dependencies for those later capability units.
+
 Nine historical short-vector consumer translation units were preprocessed with
 the same current formal flags. None retained a direct `C_Video`/`Video` field
 access after preprocessing. This is a consumer census, not proof that every
