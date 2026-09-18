@@ -200,6 +200,40 @@ all 27 protected/real, handled/unhandled and escalation cases. Its paired
 original-spelling control fails 101 assertions, including the expected
 unhandled fault delivery, vector/error, mode-reset and stack-push checks.
 
+## Complete selected CCPU386 residual-diff ledger
+
+The final S21 source sweep compares the selected
+`softpc.new/base/ccpu386` mirror with pinned OpenNT, once bytewise and once
+with newline/whitespace normalization.  The bytewise report is deliberately
+inflated for a few historical CRLF mirror files; the normalized ledger has
+exactly **14 files, 227 added and 63 removed source lines**.  No other
+selected CCPU386 file has a normalized difference.  Each retained row below
+has an original owner and a finite reason; none is an autonomous replacement
+algorithm.
+
+| Mirror file | Normalized delta / owner | Disposition and evidence |
+| --- | --- | --- |
+| `c_bsic.h` | shared `c_getEFLAGS` declaration | Required by original `c_intr.c` and `pushf.c`; moving it to an adapter produces undeclared-call diagnostics. |
+| `c_main.c` | CCPU event/IRQ and thread-frame boundary | Header declarations and `setjmp(*jmp_buf)` are current compiler ABI corrections. DIV-214 atomic event consumption is covered by the selected producer/consumer fixture; DIV-221 rejects the original PIC `-1` stale acknowledgement instead of fabricating INT FF. The original DPMI hardware-hook call shape is retained; real protected handler work belongs to S38. |
+| `c_page.c` | PROD `check_D` selection | `yoda.h` supplies the original production no-op macro; removing it changes the historical macro into an unresolved external debug call. |
+| `c_reg.c`, `popf.c` | standard varargs declarations | Their original diagnostic `printf` calls remain unchanged; the declarations prevent an implicit, incompatible native call contract. |
+| `c_seg.c` | early selector `0040h` carrier | Bounded CPU40 DOSX `FSTI` bootstrap before original BIOS-data descriptor publication; T407/S18 trace proves the later original publication. It is not a general descriptor substitute. |
+| `c_xcptn.c` | DIV-268 handled-hook braces | Current-source exception profile passes 27 cases; the original spelling fails 101. |
+| `ccpusas4.c` | physical mapping translation/resolve | The original CCPU RAM path is unchanged after the checked EMS/DIB external-page binding. T406 guest EMS mapping/move/exchange evidence owns this necessary kernel-VDM replacement boundary. |
+| `cpu4gen.h` | selected return carriers | Declarations now agree with original selected `c_reg.c` definitions (`ISM32`), preventing incompatible generated-call ABI declarations. |
+| `fpu.c` | T60 representation/rounding fixes | `memcpy` prevents unsafe `double` aliasing; M64 integer store uses the same rounding route as M16/M32. The CCPU guest FPU rows exercise this selected body. |
+| `localfm.c` | C-VID singleton ownership | Selected C-VID owns `Sas` and `Gdp`; this removes duplicate CCPU allocation while preserving the original shared-state interface. S2 C-VID evidence owns the composition proof. |
+| `ntthread.c` | typed failed frame lookup | Both original bare pointer returns become typed null; current normal-and-abnormal real CCPU worker lifecycle witness proves the failure carrier does not poison a subsequent worker. |
+| `sascdef.c` | generated SAS null slot type | Preserves the original unavailable vector slot and layout with the selected function-pointer type. |
+| `zfrsrvd.c` | original declarations and SAS extent | Includes/prototypes expose reached original contracts; the retained physical extent is the same CCPU SAS boundary as `ccpusas4.c`, not a host pointer. |
+
+The sweep also rechecked the recently restored byte-exact `c_intr.c` and the
+dead `ccpusas4.c::requested_address` local removal.  Therefore the S21
+closure review has no remaining candidate whose only rationale is
+"modern compiler convenience" or "diagnostic tracing".  The ledger does not
+claim S38's protected DPMI provider lifecycle is complete; that capability
+remains explicitly with its already-admitted package owner.
+
 ## Interpretation and follow-up
 
 The text gate prevents false green acceptance when a wrapper exits zero after
