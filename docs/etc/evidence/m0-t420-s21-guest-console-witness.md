@@ -81,6 +81,28 @@ guest proof or record the original owner/no-selected-caller disposition for
 each.  The existing S18 descriptor provider proof and this table are inputs,
 not a premature S21 closure.
 
+## Protected-hook ownership disposition
+
+Source review resolves the CCPU-side edge without guessing:
+
+```text
+c_intr.c / c_xcptn.c
+  -> original host_swint_hook / host_exint_hook (nt_inthk.c)
+     -> installed original function pointer, or FALSE
+        -> DPMI EnableIntHooks()
+           -> DpmiHwIntHandler / DpmiSwIntHandler / DpmiFaultHandler
+```
+
+`nt_inthk.c` owns only pointer installation and a Boolean dispatch result; it
+does not construct DPMI frames.  `dpmiint.c::EnableIntHooks` conditionally
+publishes all three DPMI providers, and `DpmiFaultHandler` owns the protected
+stack/frame and callback return semantics.  Therefore S21's direct CCPU
+exception evidence verifies the generic CPU behavior and hook call shape, but
+the remaining real protected-handler workload is explicitly transferred to
+the existing **S38 DPMI32 capability closure**.  It is neither an absent
+caller nor a reason to add a CCPU-side substitute.  S21 must retain this
+owner mapping when it closes; S38 must supply the guest workload evidence.
+
 ## Interpretation and follow-up
 
 The text gate prevents false green acceptance when a wrapper exits zero after
