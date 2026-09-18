@@ -26,7 +26,7 @@ This is a bounded worker-host closure, not an assertion that `WRITE.EXE` runs.
 | --- | --- |
 | CCPU table/TR and worker event lifecycle | [CCPU40 C-VID/event restoration](../proposals/proposal-ccpu40-cvid-event-path-restoration-001.md) |
 | WOW callbacks, TEB/TD and debugger/resource boundaries | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md) |
-| Integrated WRITE execution | [single-process WOW16 lifecycle recovery](../proposals/proposal-wow16-single-process-lifecycle-recovery-001.md) |
+| Integrated WRITE execution | [withdrawn WOW16 lifecycle proposal](../../artifacts/documentation-archive/20260910/etc/archive/2026-09-17-withdrawn-proposals/proposal-wow16-single-process-lifecycle-recovery-001.md), now absorbed by T420 S41 |
 
 These are assigned, unadmitted candidates. They may not use T407 closure as
 evidence that their unproved kernel or WOW behavior already works.

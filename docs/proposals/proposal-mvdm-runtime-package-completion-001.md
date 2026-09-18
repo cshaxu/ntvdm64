@@ -93,7 +93,7 @@ mirror/adapter changes, then commits and pushes.
 | S38 | `dpmi32` capability closure | Real protected-mode selector/interrupt/memory/return/teardown acceptance. |
 | S39 | `dpmi` capability closure | Real DOSX BOP 53 activation, protected-to-real transition and repeated-entry release acceptance. |
 | S40 | `wow32` | Original provider load, task/callback, font/glyph, icon/cursor, scheduler and hard-error contract. |
-| S41 | `wow16` | Load-only guest WOW16 media, loader/task activation and callback-return contract. |
+| S41 | `wow16` | Load-only guest WOW16 media, loader/task activation and callback-return contract; attribute and recover the first `WRITE.EXE` blocker through its original owner. |
 | S42 | `dbg` | Original debugger initialization, state, dispatch and event contract, or a source-proven complete product-profile exclusion that deletes every thin substitute. |
 | S43 | `vdd` | Original VDD lifecycle and consumers, or a source-proven complete product-profile exclusion that deletes every thin substitute. |
 
@@ -144,7 +144,7 @@ matrix as its sole acceptance evidence.
 | S | Additional mandatory closure evidence |
 | --- | --- |
 | S40 `wow32` | Load the selected original provider in a real worker; prove task creation, callback enter/return, font/glyph and icon/cursor representations, scheduler/wait behavior, private hard-error delivery and task/worker teardown. A provider export or host-only callback fixture alone is insufficient. |
-| S41 `wow16` | Verify immutable guest-media identity, then launch a selected Win16 NE workload through its original loader. It must create a task, execute, return to the parent DOS/worker state, and leave a subsequent DOS workload usable. `WRITE.EXE` is the current planned workload, but a substitute requires an owner-recorded reason and equivalent loader/task coverage. |
+| S41 `wow16` | Verify immutable guest-media identity, then identify the first reached original owner that blocks `WRITE.EXE`, and recover it only through the source-first dependency rule. Launch `WRITE.EXE` through its original loader; it must create a task, execute, return to the parent DOS/worker state, and leave a subsequent DOS workload usable. No substitute workload may close S41. |
 | S42 `dbg` | Exercise original debugger initialization, event/breakpoint or exception dispatch and termination through a controlled guest workload; otherwise prove all selected consumers are absent in the product profile and remove every remaining thin binding. Neither option may leave an untested partial provider. |
 | S43 `vdd` | For every selected VDD consumer, prove provider load, request/notification, resource lifetime and unload/worker termination; otherwise prove complete product-profile exclusion and remove every thin substitute and stale consumer edge. |
 
