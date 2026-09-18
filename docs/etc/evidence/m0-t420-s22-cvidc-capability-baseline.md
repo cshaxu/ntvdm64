@@ -25,6 +25,14 @@ second adapter-owned restart variable.  The binding fixture's set/read and
 republish check passed against that owner.  The separate S24 system-capability
 unit still owns end-to-end quick-event timing and lifecycle evidence.
 
+`Audit-T420S22CvidcSlotDisposition.mjs` reads the generated binding used by
+the current formal graph and the current `ntvdm.exe` map.  It accounted for
+all 209 CPU-table slots: 180 resolve to linked original providers, three are
+the finite generated-timing endpoints, and the remaining 26 are the frozen
+SPC386 non-PIG/non-SPC486 profile-null set.  It fails on a missing provider,
+a changed null set, an unrecognised adapter endpoint, or a restored duplicate
+restart variable.
+
 Nine historical short-vector consumer translation units were preprocessed with
 the same current formal flags. None retained a direct `C_Video`/`Video` field
 access after preprocessing. This is a consumer census, not proof that every
