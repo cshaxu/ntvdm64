@@ -18,11 +18,11 @@ extern struct VideoVector Video;
 extern struct SasVector Sas;
 IMPORT void c_sas_overwrite_memory IPT2(PHY_ADDR, addr, PHY_ADDR, length);
 
-/* The selected original sources retain the C-VID access shims but omit this
- * generated CCPU timing provider.  Keeping the timing value beside the
- * vector binding prevents the public access shims from being rebound to
- * themselves.  qevnt.c's original initial qevJumpRestart value is 100. */
-static IUH mvdm_cvidc_jump_restart = 100;
+/* The selected original sources retain the C-VID access shims but omit their
+ * generated CCPU timing provider. qevnt.c owns the original restart state;
+ * retaining that owner prevents the vector binder from becoming a second
+ * quick-event state manager. */
+extern ULONG qevJumpRestart;
 
 IUH mvdm_cvidc_get_jump_calibration(void)
 {
@@ -34,12 +34,12 @@ IUH mvdm_cvidc_get_jump_calibration(void)
 
 IUH mvdm_cvidc_get_jump_restart(void)
 {
-    return mvdm_cvidc_jump_restart;
+    return (IUH)qevJumpRestart;
 }
 
 void mvdm_cvidc_set_jump_restart(IUH value)
 {
-    mvdm_cvidc_jump_restart = value;
+    qevJumpRestart = (ULONG)value;
 }
 
 static struct CpuPrivateVector CvidCpuPrivate;

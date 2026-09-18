@@ -26,6 +26,9 @@ const generator = requireText(root, 'tools/build/GenerateCvidcCpuBinding.mjs',
 const binder = requireText(root,
   'src/ntvdm-exe/softpc/mvdm_cvidc_vector_binding.c',
   /Cpu\.Sas\s*=\s*&Sas[\s\S]*Sas\.Sas_overwrite_memory\s*=\s*c_sas_overwrite_memory[\s\S]*Cpu\.Video\s*=\s*\(IHP\)&Video/);
+const qevnt = requireText(root,
+  'src/mvdm/softpc.new/base/system/qevnt.c',
+  /ULONG\s+qevJumpRestart\s*=\s*100\s*;/);
 const cvidAccess = requireText(root,
   'src/mvdm/softpc.new/base/cvidc/accessfn.c',
   /Cpu\.CalcQuickEventInstTime/);
@@ -46,6 +49,10 @@ requireText(root, 'src/mvdm/softpc.new/base/inc/egacpu.h',
   /extern IS32 getVideodirty_low IPT0\(\)/);
 if (/video_get_|video_set_|MVDM_CVIDC_VIDEO_BIND|boundVideo/.test(binder + generator)) {
   throw new Error('Autonomous accessor rebinding or typed wrapper generation returned');
+}
+if (!/extern\s+ULONG\s+qevJumpRestart\s*;[\s\S]*return\s+\(IUH\)qevJumpRestart\s*;[\s\S]*qevJumpRestart\s*=\s*\(ULONG\)value\s*;/.test(binder) ||
+    /static\s+IUH\s+mvdm_cvidc_jump_restart/.test(binder)) {
+  throw new Error('quick-event restart state must remain owned by original qevnt.c');
 }
 
 if (publicSlots.length !== 154 || privateSlots.length !== 55) {
@@ -83,6 +90,7 @@ console.log(JSON.stringify({
   cpu30_only_indirection: true,
   early_video_bind: true,
   setup_bind: true,
+  quick_event_restart_owner: 'system/qevnt.c::qevJumpRestart',
   gdp_owner: 'cvidc/ev_glue.c',
   gdp_map_verified: mapPath !== null,
   unsupported_clear_hw_int: 'null'

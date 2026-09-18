@@ -19,6 +19,11 @@ values, 81 slots, latches/selectors, republish, old-provider negative control,
 concurrent scratch preservation`. The current product map attributes `Gdp` to
 original `cvidc/ev_glue.obj`; metadata has 154 public and 55 private slots.
 The CPU40 quick-event and direct effective-address providers are selected.
+The restart getter/setter bind the selected original
+`system/qevnt.c::qevJumpRestart` (initial value 100), rather than retaining a
+second adapter-owned restart variable.  The binding fixture's set/read and
+republish check passed against that owner.  The separate S24 system-capability
+unit still owns end-to-end quick-event timing and lifecycle evidence.
 
 Nine historical short-vector consumer translation units were preprocessed with
 the same current formal flags. None retained a direct `C_Video`/`Video` field
