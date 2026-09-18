@@ -148,6 +148,23 @@ mapping translation/resolve calls.  `formal-build-r5` rebuilt the complete
 x86 product graph after its removal; the original CCPU lifecycle witness
 again printed `CCPU thread lifecycle OK` with exit zero.
 
+## Event producer and consumer disposition
+
+`Verify-CcpuEventConsumption.mjs --out build/M0-T420/S21/event-profile-r2`
+compiled the current extracted source and passed its HALT/RESET/timer/SAD/IRQ
+consumer matrix, including the stale-PIC acknowledgement boundary.  The test
+is intentionally host-side and does not replace the real guest `TIMBUSY`
+proof above.
+
+The selected producer search is closed: timer, reset and hardware delivery
+reach `c_cpu_interrupt()` through the CCPU40 `cpu_interrupt` binding, so they
+all use the atomic event raise path.  The only direct writer in `yoda.c` is
+non-PROD; CPU30/monitor direct-map code is unselected.  `ica_async_hw_interrupt`
+and `ica_sigio_event` remain original system bodies, but no selected source
+calls the async entry.  `CPU_SIGIO_EVENT` is consequently a source-proven
+no-selected-caller disposition for this profile, rather than an untested
+claim that the CCPU currently consumes it.
+
 ## Interpretation and follow-up
 
 The text gate prevents false green acceptance when a wrapper exits zero after
