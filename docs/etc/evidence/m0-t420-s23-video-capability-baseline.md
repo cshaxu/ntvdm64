@@ -146,7 +146,7 @@ unselected graphics provider is a text-console feature.
 The `direct-vram` fixture SHA-256 is
 `4d53200116fad6b2898a7eea36d559f59eb08bfeb256eb3f0db42a7f3b46a3fb`.
 The fresh full run used `t420-s23-direct-vram-full-r4` under
-`O:\\winnt\\logs\\`: all 80x25, 45x34, 60x50, 120x30, mouse and resize
+`O:\winnt\logs\`: all 80x25, 45x34, 60x50, 120x30, mouse and resize
 rows passed their raw guest transcript and cell assertions; the direct-VRAM
 row recorded `VVVV`, `S23I`, `S23_INT10_WRITER_OK`, and a subsequent `MEM`
 report; five short-history EDIT-to-MEM repetitions passed.  This closes the
