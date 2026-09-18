@@ -98,6 +98,25 @@ publication boundary did not regress the existing Console product path; they
 do not claim that every EGA memory writer was individually exercised, which
 remains S23's responsibility.
 
+## Residual mirror-diff disposition
+
+The current normalized C-VID comparison has five changed mirror files. One
+unneeded line was removed in this S22 pass: `ev_glue.c` no longer includes its
+unused direct `<stdlib.h>`; its exact current formal `ev_glue.obj` command
+compiled successfully after that removal, and the freshly relinked C-VID
+publication fixture passed. The remaining differences are not independent
+C-VID rewrites:
+
+| File | Remaining reason |
+| --- | --- |
+| `ev_glue.c` | C-VID's single strong `Gdp` owner and the call at the original setup point to the missing historical generated vector binder; `<stdio.h>` is required by its original `printf` calls. |
+| `evidfunc.h` | The fourteen mark declarations match the real generated `sevid001.c` ABI: `IUH` return plus four `IUH` arguments. The upstream K&R declarations conflict with those bodies under the selected compiler. |
+| `evidgen.h` | CPU40 selects the original typed direct `vglob.c` accessors rather than the incompatible generated scratch-table macros; the full 81-slot C-VID layout remains intact. |
+| `j_c_lang.c` | `<stdio.h>` declares its original diagnostic `printf` calls. |
+| `j_c_lang.h` | Declares `CrulesRuntimeError`, which is called by the generated `sevid*.c` bodies and implemented by original `ev_glue.c`. |
+
+This leaves no unclassified C-VID mirror difference in the selected profile.
+
 ## Current disposition
 
 The 26 already-recorded SPC386 non-PIG/non-SPC486 null slots remain a
