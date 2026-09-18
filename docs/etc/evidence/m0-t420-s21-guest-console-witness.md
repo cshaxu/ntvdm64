@@ -43,6 +43,22 @@ The fixture is retained as a negative control: it must not emit `AFTER` or a
 success marker.  Direct HLT wakeup requires the retired kernel V86-monitor
 virtualization contract and is not a selected standalone CPU40 feature.
 
+## Worker-thread lifecycle witness
+
+The guest Console gate applies to DOS execution.  CCPU's per-thread TLS
+allocation and release are host-side mechanics, so they have a separate,
+explicit host witness rather than pretending to be guest text.  The formal
+generator now includes `ccpu-thread-lifecycle-test.exe`.  Its test-only entry
+uses the selected original `host_CreateThread`, enters original CCPU through a
+two-byte direct-unsimulate BOP, returns through that thread's original CCPU
+TLS simulation frame, and exits with original `host_ExitThread`.
+
+The current formal library set was compiled x86 and the compatible direct
+fixture link/run at `build/M0-T420/S21/ccpu-thread-lifecycle-direct-r2/`
+printed `CCPU thread lifecycle OK` and exited zero.  This distinguishes a
+real initialized-and-released CCPU thread frame from a thread that merely
+starts and returns without ever entering the simulator.
+
 ## Interpretation and follow-up
 
 The text gate prevents false green acceptance when a wrapper exits zero after

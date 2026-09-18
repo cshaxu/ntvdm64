@@ -102,6 +102,7 @@ $rtlX86FixtureSource = Join-Path $root 'tests/opennt-host/rtl_x86_fixture.c'
 $environmentProjectionFixtureSource = Join-Path $root 'tests/opennt-host/environment_projection_fixture.c'
 $cvidcVectorBindingFixtureSource = Join-Path $root 'tests/mvdm-host/cvidc_vector_binding_fixture.c'
 $x87LayoutFixtureSource = Join-Path $root 'tests/mvdm-host/x87_layout_fixture.c'
+$ccpuThreadLifecycleFixtureSource = Join-Path $root 'tests/mvdm-host/ccpu_thread_lifecycle_test.c'
 $cvidcVectorProviderStubGenerator = Join-Path $root 'tools/build/GenerateCvidcVectorProviderStubs.mjs'
 $baseDebugRoot = Join-Path $root 'src/mvdm/softpc.new/base/debug'
 $hostRoot = Join-Path $root 'src/mvdm/softpc.new/host/src'
@@ -361,6 +362,9 @@ if (!(Test-Path -LiteralPath $environmentProjectionFixtureSource -PathType Leaf)
 }
 if (!(Test-Path -LiteralPath $x87LayoutFixtureSource -PathType Leaf)) {
     throw "Required x87 layout fixture missing: $x87LayoutFixtureSource"
+}
+if (!(Test-Path -LiteralPath $ccpuThreadLifecycleFixtureSource -PathType Leaf)) {
+    throw 'Required CCPU thread-lifecycle fixture source missing.'
 }
 foreach ($name in $openntRtlX86Names) {
     if (!(Test-Path -LiteralPath (Join-Path $openntRtlX86Root $name))) { throw "Selected original x86 RTL source missing: $name" }
@@ -1237,6 +1241,9 @@ $graph.Add('rule event_test_link')
 $graph.Add('  command = link.exe /nologo /map:$out.map /out:$out $in kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib libcmt.lib libvcruntime.lib libucrt.lib')
 $fixtureHostLibraries = 'worker-shell.lib worker-command-bindings.lib original-softpc-host-fixture-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib original-opennt-rtl-x86.lib softpc-fixture-bindings.lib redirector-bindings.lib vdd-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib original-ccpu386.lib obj/host/softpc-resource.res'
 $graph.Add('build ccpu-halt-reset-test.exe: event_test_link obj/tests/ccpu_halt_reset_test.obj ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
+$ccpuThreadLifecycleFixtureObject = 'obj/tests/ccpu_thread_lifecycle_test.obj'
+$graph.Add('build ' + $ccpuThreadLifecycleFixtureObject + ': cc ' + (NinjaPath $ccpuThreadLifecycleFixtureSource))
+$graph.Add('build ccpu-thread-lifecycle-test.exe: event_test_link ' + $ccpuThreadLifecycleFixtureObject + ' ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
 # Same production libraries; only the entry is a source-shaped memory test.
 $graph.Add('rule memory_test_link')
 $graph.Add('  command = link.exe /nologo /map:$out.map /out:$out $in kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib libcmt.lib libvcruntime.lib libucrt.lib')
