@@ -4,26 +4,26 @@
 
 ## Active Packet
 
-**Active: M0 T420 S21**
+**Active: M0 T420 S22**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T420 S21 — Ordinary Mode. |
+| Identifier Mode | M0 T420 S22 — Ordinary Mode. |
 | Candidate Proposal | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md) |
-| Admission And Approval | Owner: “准入下一个s任务开始执行” on 2026-09-18. This admits the next ordered T420 row, S21. |
-| Objective | Close the complete selected original `softpc.new/base/ccpu386` capability unit with real guest proof for instruction/FPU execution, exception/IRQ delivery, event progression, descriptor transitions and worker-thread lifetime. |
-| Non-goals | No CPU30/kernel-VDM monitor revival, emulator replacement, synthetic guest success, WOW/WRITE integration, or unrelated Console/Broker/COMMAND policy. |
-| Reference Baseline | T420 S1 recovered the full CCPU386 source package; S2--S20 have now closed their source-recovery units. The selected product is x86 CCPU40 and current S20 runtime regressions pass. |
-| Files And ABI Surface | Freeze the complete CCPU386 manifest, selected C-VID/SoftPC bindings, event/IRQ/descriptor seams, worker thread entry/exit bindings and every guest fixture used for evidence. |
-| Applicable Rules | Project design/rules, source policy, strict mirror rule, source-recovery ladder and CCPU40-only product rule. |
-| Verification | Establish a complete capability matrix; every positive guest route requires captured guest Console text as well as its outer exit. Run real guest instruction/FPU, fault/exception, IRQ/event, descriptor and normal/abnormal worker-lifetime workloads; the latter must have an explicit host lifecycle witness when it is not guest-visible; fresh formal x86 build; direct and interactive COMMAND/MEM/EDIT regressions; governance review. |
-| Expected Markers | Every selected capability is guest-end-to-end pass, source-proven no selected caller or owner-approved exclusion; source-first disposition for every required fix; measured mirror/adapter footprint delta. |
-| Asset Needs | Existing selected OpenNT CCPU386 union, current formal x86 generator, test-only fixtures under `build/` and `O:\winnt` runtime package. |
-| Reporting Requirements | Record manifest/hashes, caller-to-capability map, exact guest commands and results, retained boundary rationale, footprint changes, regressions and any exclusion. |
-| Stop Conditions | A required new public provider, CPU30/kernel dependency, new behavior interface, guest-media change, or COMMAND/MEM/EDIT regression pauses for renewed owner direction. |
-| Exit Criteria | Every selected CCPU386 family has real guest evidence, source-proven absence or owner-approved exclusion; original source remains owner; no duplicate execution policy is retained; fresh formal x86, package matrix and established regressions pass; evidence/index/status updated; reviewed P pushed. |
-| Original Owner Request | “准入下一个s任务开始执行”。 |
-| Similar-Issue Sweep | Audit every selected CCPU386 source and all C-VID/worker consumers for the same capability, lifecycle or duplicate-adapter gap; do not close from a narrow opcode fixture alone. |
+| Admission And Approval | Owner previously authorized automatic admission of every sequential S. S21 is closed at `31cbee1f0`; this admits the next ordered T420 row, S22. |
+| Objective | Close the complete selected original `softpc.new/base/cvidc` capability unit with real selected-profile evidence for vector ownership, table publication, timing and every selected C-VID consumer. |
+| Non-goals | No CPU30/kernel-VDM monitor revival, a second video/SAS owner, synthetic guest success, WOW/WRITE integration, or unrelated Console/Broker/COMMAND policy. |
+| Reference Baseline | S2 recovered the complete C-VID source package and its one `Gdp`/SAS ownership boundary. S21 is now closed with CCPU40 execution evidence; its retained C-VID composition rows are inputs, not a substitute for C-VID capability acceptance. |
+| Files And ABI Surface | Freeze all selected C-VID source/vector manifests, `Cpu`/`Sas`/`Gdp` ownership, profile-null rows, timing publishers, and every selected CCPU/video/host consumer. |
+| Applicable Rules | Project design/rules, source policy, strict mirror rule, CCPU40-only product rule, and single original-owner composition. |
+| Verification | Establish a consumer-to-vector/timing matrix. Every positive reachable capability needs a real guest or current x86 host witness; every null row must be source-proven profile-null/no selected caller. Run fresh formal x86 linkage, local C-VID fixtures, deployed direct and interactive COMMAND/MEM/EDIT regression, and governance review. |
+| Expected Markers | Each selected C-VID vector/publication/timing family is end-to-end pass, source-proven profile-null/no selected caller, or owner-approved exclusion; one allocation owner; measured mirror/adapter footprint delta. |
+| Asset Needs | Pinned OpenNT C-VID union, existing S2 vector/map evidence, current formal x86 generator, test-only fixtures under `build/`, and `O:\winnt` runtime package. |
+| Reporting Requirements | Record selected manifest/hashes, vector/provider-to-consumer map, exact test commands/results, profile-null rationale, retained binding rationale, footprint changes and regressions. |
+| Stop Conditions | A required new public provider, CPU30/kernel dependency, second state owner, guest-media change, or COMMAND/MEM/EDIT regression pauses for renewed owner direction. |
+| Exit Criteria | Every selected C-VID family has real evidence, source-proven profile-null/no selected caller or owner-approved exclusion; mirror ownership is preserved; no duplicate vector/state policy remains; fresh formal x86, package matrix and established regressions pass; evidence/index/status updated; reviewed P pushed. |
+| Original Owner Request | “批准所有推送 请你自动准入每个s任务”。 |
+| Similar-Issue Sweep | Audit every selected C-VID vector, timing/table publisher and CCPU/video/host consumer for duplicate state, stale pointer/table publication, profile mismatch and adapter-owned replacement logic. |
 
 ## S1 Closure Record
 
@@ -190,6 +190,17 @@ MEM`. Remote RAP and DLC are explicit owner-approved modern-host exclusions;
 the DLC guest probe preserves the original `07` unavailable result rather
 than adding a provider or a fake-success shim.
 
+## S21 Closure Record
+
+[T420 S21 CCPU386 capability closure](../etc/evidence/m0-t420-s21-guest-console-witness.md)
+closes the selected CCPU40 capability unit at `31cbee1f0`. Its current formal
+x86 deployment passes 21 real guest instruction/FPU/exception/event witnesses
+plus the one source-shaped CPL3 HLT boundary, descriptor-domain ownership,
+normal-and-abnormal real CCPU worker lifetime, the complete normalized
+residual-diff ledger, and all 17 Console-text-gated COMMAND/MEM/EDIT routes.
+Protected DPMI callback-provider lifecycle remains owned by S38; S21 adds no
+duplicate CCPU substitute.
+
 ## Current Technical Baseline
 
 - Product package: Win32/x86 CCPU40 `run16.exe`, `basesrv.exe`, `ntvdm.exe`,
@@ -198,12 +209,13 @@ than adding a provider or a fake-success shim.
   correction: four EXE component directories are explicit, `dtmgr.exe`
   replaces `dtaskmgr.exe`, and the task display derives depth from original
   BaseSrv DOS records rather than a parallel stack.
-- T420 S1--S19 are delivered: CCPU386, C-VID, video, system, keymouse, BIOS,
+- T420 S1--S21 are delivered: CCPU386, C-VID, video, system, keymouse, BIOS,
   support, disks, comms, DOS, debug, host and DEM are closed complete package
   units.  S14 COMMAND restored two empty x86 adapter carriers to their
   original OpenNT forms; S15 closes XMS, S16 closes SubAlloc, S17 closes
-  OEMUNI, S18 closes DPMI32, S19 closes guest DPMI/DOSX, and S20 closes
-  VDMREDIR. No successor S is active.
+  OEMUNI, S18 closes DPMI32, S19 closes guest DPMI/DOSX, S20 closes VDMREDIR,
+  and S21 closes CCPU386 capability acceptance. S22 C-VID capability closure
+  is active.
 
 ## Prior Closure
 
@@ -220,6 +232,6 @@ No standalone governance delivery is active or pending.
 
 ## Next Work
 
-S21 remains active. Its initial guest-text and CPL3 HLT-boundary evidence is
-[recorded here](../etc/evidence/m0-t420-s21-guest-console-witness.md). The
-remaining CCPU capability and worker-lifetime matrix is not yet closed.
+S22 is active. It must turn the recovered C-VID package into a complete
+selected-profile vector, publication, timing and consumer capability matrix;
+S2/S21 evidence is baseline only, not closure evidence.

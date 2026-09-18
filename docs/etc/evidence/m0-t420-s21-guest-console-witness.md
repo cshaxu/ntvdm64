@@ -237,10 +237,12 @@ remains explicitly with its already-admitted package owner.
 ## Interpretation and follow-up
 
 The text gate prevents false green acceptance when a wrapper exits zero after
-guest failure.  It does not claim S21 closure: the remaining CCPU family and
-worker-lifetime matrix must still be completed.  The HLT result is an explicit
-source-shaped CPL3 boundary, not a reason to alter original CCPU privilege
-semantics or introduce a CPU30/V86 monitor.
+guest failure. Together with the complete capability matrix, real worker
+lifecycle witness and residual-diff ledger above, it closes S21. The HLT
+result is an explicit source-shaped CPL3 boundary, not a reason to alter
+original CCPU privilege semantics or introduce a CPU30/V86 monitor. Real
+protected DPMI callback-provider lifecycle remains S38's separate original
+package obligation, rather than a missing CCPU or an S21-owned substitute.
 
 ## COMMAND acceptance requires Console text
 
