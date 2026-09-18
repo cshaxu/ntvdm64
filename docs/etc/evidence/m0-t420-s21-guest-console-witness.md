@@ -185,6 +185,14 @@ the jump occur only for a handler that actually accepted the exception; the
 the exact five-site correction in the archived NTVDMx64
 `patches/common/ccpu.patch`; no behavior was newly authored here.
 
+The current-source reconstruction at
+`build/M0-T420/S21/exception-profile-r2/` independently confirms that
+disposition. It checks the patch hash and exact five-block delta, compiles the
+actual current translation unit against observable CPU/host seams, and passes
+all 27 protected/real, handled/unhandled and escalation cases. Its paired
+original-spelling control fails 101 assertions, including the expected
+unhandled fault delivery, vector/error, mode-reset and stack-push checks.
+
 ## Interpretation and follow-up
 
 The text gate prevents false green acceptance when a wrapper exits zero after
