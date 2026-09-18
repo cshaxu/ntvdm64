@@ -182,9 +182,14 @@ Ninja is generated from the source-owner and package-selection manifests.
 Disposable objects, libraries, generated files, fixture executables and build
 results belong under `build/<task-id>/<run-id>/`; selected formal product
 executables may be published at `build/output/`. A real-package run copies only
-those selected executables to the `O:\winnt` package root; its observations and all
-runtime logs belong in `O:\winnt\logs\`, never in the repository or beside
-the package-root executable. Guest objects and libraries are
+original guest media/configuration, the selected three runtime executables and
+their two selected runtime DLLs to the `O:\winnt` package root. Its test
+harnesses, guest probes, manifests and test results belong in
+`O:\winnt\tests\`; observations and all runtime logs belong in
+`O:\winnt\logs\`, never in the repository or beside a package-root executable.
+`O:\winnt\builds\` is reserved only for deliberately retained versioned
+runtime-package history, never fixtures or disposable output.
+Guest objects and libraries are
 packaging/loading inputs only and never enter the host link. Formal verification
 currently covers accepted x86 CCPU40 compilation plus architecture-neutral token
 behavior; `CPU_30_STYLE` is retired and historical-only; x64 compatibility

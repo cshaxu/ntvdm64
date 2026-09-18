@@ -27,10 +27,14 @@
 
 ## S23 Progress
 
-The first real guest text-writer row is delivered: a test-only DOS INT 10
-fixture proves original attributed write, upward scroll and teletype markers
-in captured public Console cells, with guest transcript gating. The remaining
-C-VID EGA read/write/mark, mode/display and teardown rows stay active.
+The real guest text-writer and direct C-VID text-memory rows are delivered:
+the INT 10 fixture proves original attributed write, upward scroll and
+teletype markers, while the direct fixture establishes original mode 3 and
+then proves `B800:` guest write/read-back plus public-Console presentation.
+The full six-row geometry/mouse/resize matrix and five short-history
+EDIT-to-MEM repetitions pass with raw guest transcript gating.  Remaining S23
+work is only the explicit source disposition for graphics-only providers; it
+must not be faked as text-Console support.
 
 The fresh formal-worker graph now derives and creates every selected object
 output directory required by `ntvdm.exe`, including nested worker-session

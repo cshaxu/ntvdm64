@@ -182,11 +182,14 @@ monitor-adapter material.
   build-result output under `build/<task-id>/<run-id>/` (or formal
   `build/output/`). Do not emit it into the repository root, `src/`, `tests/`,
   `tools/`, `artifacts/`, or `O:\winnt`.
-- A real-package run may copy only selected formal product executable(s) to
-  the `O:\winnt` package root. Every observation, diagnostic and runtime log for
-  that run, including stdout/stderr captures, belongs below
-  `O:\winnt\logs\`; no build product or log belongs beside the package-root
-  executable or guest media.
+- A real-package run may place only original guest media/configuration, the
+  selected three runtime executables, and their two selected runtime DLLs at
+  the `O:\winnt` package root. Every harness, guest probe, test-only binary,
+  test manifest and test build result belongs below `O:\winnt\tests\`; every
+  observation, diagnostic and runtime log, including stdout/stderr captures,
+  belongs below `O:\winnt\logs\`. No test/build product or log belongs beside
+  package-root executables or guest media. `O:\winnt\builds\` is reserved
+  only for deliberately retained versioned runtime-package history.
 - Put concise tracked evidence, inventories and manifests in `docs/etc/`.
   `artifacts/` is reserved for owner-requested reports and formally manifested
   deliverables.

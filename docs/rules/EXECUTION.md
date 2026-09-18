@@ -103,13 +103,20 @@ begins, unless a recorded manifest proves their source/toolchain/input identity
 and reuse is intentional. Do not emit build products into the repository root,
 `src/`, `tests/`, `tools/`, or `artifacts/`.
 
-The only permitted deployment exception is a deliberate copy of selected
-formal product executable(s) to the `O:\winnt` package root for real-package
-runtime execution. `O:\winnt` is not a build root: no object, library, generated
-source, intermediate, fixture executable, or other build result may be written
-there. Every observation, diagnostic, stdout/stderr capture, trace, report,
-and runtime log from that execution must be written below
-`O:\winnt\logs\`, never beside the executable or guest media. A closed
+The only permitted deployment exception is a deliberate copy of the selected
+runtime package to `O:\winnt`: original guest media/configuration, the three
+runtime executables (`run16.exe`, `basesrv.exe`, `ntvdm.exe`), and the two
+selected runtime DLLs. `O:\winnt` is not a build root: no object, library,
+generated source, intermediate, fixture executable, test manifest, or other
+test/build result may be written at its root. Every executable test harness,
+guest probe, test-only DLL, test manifest, fixture media, or test build result
+must be written below `O:\winnt\tests\`; tests must refer to that location
+explicitly and must not rely on package-root discovery. Every observation,
+diagnostic, stdout/stderr capture, trace, report, and runtime log from that
+execution must be written below `O:\winnt\logs\`, never beside the executable
+or guest media. `O:\winnt\builds\` is reserved exclusively for deliberately
+retained, versioned runtime-package history; it is neither a test-artifact
+location nor a disposable build root. A closed
 diagnosis retains only a concise reviewed excerpt, hash, manifest, or conclusion
 in its admitted evidence record; raw logs stay in `O:\winnt\logs\` until the
 owner's retention decision. `artifacts/` may receive only an owner-requested
@@ -130,9 +137,11 @@ staging, runtime and acceptance target. Native-x64/cross-width-only source
 differences are removed when the selected original Win32/x86 form composes.
 
 `O:\winnt` is a runtime-package root, not a build or diagnostic workspace.
-JSON, TXT, LOG, MAP, PDB and other observation/debug records must be written
-below `O:\winnt\logs\`, never beside the product executable or guest media at
-the package root.
+`O:\winnt\tests\` is the sole runtime location for test artifacts; JSON, TXT,
+LOG, MAP, PDB and other observation/debug records must be written below
+`O:\winnt\logs\`, never beside the product executable or guest media at the
+package root. `O:\winnt\builds\` remains reserved for retained historical
+runtime-package versions only.
 
 A build run may use a descriptive temporary executable name inside its
 disposable `build/<task-id>/<run-id>/` root, but that name is never a product

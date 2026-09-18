@@ -124,3 +124,44 @@ It passed with `PASS video INT 10 guest write/scroll`; the child observer
 recorded `video-int10 wait=0 exit=1`. `VideoOnly` deliberately avoids
 re-running the broader geometry and EDIT matrix while iterating this one
 writer witness; the full matrix remains a separate S23 closure requirement.
+
+## Direct C-VID text-memory witness
+
+`tests/observation/video_direct_vram.asm` is the complementary test-only DOS
+COM fixture.  It first asks the original INT 10 mode service for mode 3 so the
+selected original text update state is established.  It then writes directly
+to `B800:` with `REP STOSW`, reads every `VVVV` cell back through that same
+guest mapping, writes a second `S23I` range, and reads its first and final
+cell back before using DOS only for its completion string.  It does not use an
+INT 10 text-write or scroll service as a substitute for those stores.
+
+This is the selected path in the sources: `vga_mode.c` selects
+`ega_text_update` for the text mode, `ega_writ.c` and `ega_read.c` publish the
+original `Glue_writes` and `Glue_reads` providers, and `nt_vga.c` reaches the
+single public-Console adapter only through `InvalidateConsoleDIBits`.  Thus
+the witness exercises guest text-memory read/write followed by the selected
+original update/presentation boundary.  It does not claim that every
+unselected graphics provider is a text-console feature.
+
+The `direct-vram` fixture SHA-256 is
+`4d53200116fad6b2898a7eea36d559f59eb08bfeb256eb3f0db42a7f3b46a3fb`.
+The fresh full run used `t420-s23-direct-vram-full-r4` under
+`O:\\winnt\\logs\\`: all 80x25, 45x34, 60x50, 120x30, mouse and resize
+rows passed their raw guest transcript and cell assertions; the direct-VRAM
+row recorded `VVVV`, `S23I`, `S23_INT10_WRITER_OK`, and a subsequent `MEM`
+report; five short-history EDIT-to-MEM repetitions passed.  This closes the
+real C-VID guest read/write/mark-to-presentation and text-mode/resize rows of
+the matrix.  The remaining disposition is limited to graphics-only providers:
+they are not a public text-Console presentation contract and must be recorded
+as source-proven profile/null or a future separately admitted graphics
+presentation capability, rather than fabricated as text output.
+
+The reproducible full gate is:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools/audit/VerifyCvidIntegrated.ps1 `
+  -FixtureRoot build/M0-T420/S23/console-regression-r3 `
+  -LogPrefix t420-s23-direct-vram-full-r4 `
+  -VideoGuestFixturePath build/M0-T420/S23/video-direct-vram-r3/VIDTST.COM `
+  -VideoGuestRoute direct-vram
+```
