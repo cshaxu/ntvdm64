@@ -21,10 +21,17 @@ if ((!$Cases -or 'guest-seven' -in $Cases -or 'command-guest-seven' -in $Cases) 
 }
 $fixtureRoot=Split-Path -Parent $Observer
 if ($GuestFixturePath) {
-    # Test-only DOS program: MOV AX,4C07h; INT 21h. Never replaces package media.
+    # Test-only DOS program: write a guest-owned textual witness, then
+    # MOV AX,4C07h; INT 21h.  The outer launcher exit alone is not proof that
+    # DOS opened and executed this COM image.  Never replaces package media.
     $guest=Join-Path $fixtureRoot 'G7.COM'
     if ($guest -notmatch '\\build\\M[0-9]+-T[0-9]+\\S[0-9]+\\') { throw 'Guest fixture must stay in an admitted task S build root' }
-    [IO.File]::WriteAllBytes($guest,[byte[]](0xb8,0x07,0x4c,0xcd,0x21))
+    [IO.File]::WriteAllBytes($guest,[byte[]](
+        0xba,0x0c,0x01,             # MOV DX,010Ch (COM message)
+        0xb4,0x09,0xcd,0x21,         # MOV AH,09h; INT 21h
+        0xb8,0x07,0x4c,0xcd,0x21,    # MOV AX,4C07h; INT 21h
+        0x53,0x31,0x30,0x5f,0x47,0x55,0x45,0x53,0x54,0x5f,0x53,0x45,0x56,0x45,0x4e,0x24
+    ))
     if (!(Test-Path -LiteralPath $GuestFixturePath) -or
         (Get-FileHash -LiteralPath $GuestFixturePath).Hash -ne (Get-FileHash -LiteralPath $guest).Hash) {
         throw 'Short-path fixture does not match the build artifact'
@@ -32,27 +39,31 @@ if ($GuestFixturePath) {
     $guest=$GuestFixturePath
 }
 [IO.File]::WriteAllText((Join-Path $fixtureRoot 'STREAM.CMD'),"@echo off`r`necho S10_STDOUT`r`necho S10_STDERR 1>&2`r`n",[Text.Encoding]::ASCII)
-[IO.File]::WriteAllText((Join-Path $fixtureRoot 'EOF.CMD'),"@echo off`r`nmore <nul`r`nexit /b 37`r`n",[Text.Encoding]::ASCII)
+[IO.File]::WriteAllText((Join-Path $fixtureRoot 'EOF.CMD'),"@echo off`r`necho S10_EOF`r`nmore <nul`r`nexit /b 37`r`n",[Text.Encoding]::ASCII)
+[IO.File]::WriteAllText((Join-Path $fixtureRoot 'D7.CMD'),"@echo off`r`necho S10_DIRECT_SEVEN`r`nexit /b 7`r`n",[Text.Encoding]::ASCII)
 $shortFixtureRoot=if($GuestFixturePath){Split-Path -Parent $GuestFixturePath}else{$fixtureRoot}
 $matrix = @(
-    @{ Name='empty'; Text="exit`r"; Code=0 },
-    @{ Name='native-zero'; Text="ver`rexit`r"; Code=0 },
-    @{ Name='missing'; Text="missing`rver`rexit`r"; Code=0 },
-    @{ Name='native-seven'; Text="cmd /c exit 7`rexit`r"; Code=0 },
-    @{ Name='native-streams'; Args=@('COMMAND.COM','/c','cmd','/c',(Join-Path $shortFixtureRoot 'STREAM.CMD')); Code=0 },
-    @{ Name='native-eof'; Args=@('COMMAND.COM','/c','cmd','/c',(Join-Path $shortFixtureRoot 'EOF.CMD')); Code=0 },
+    # Interactive COMMAND delegates these native built-ins through the
+    # original BOP 54:08 path, hence the modern cmd.exe banner is the actual
+    # Console witness.  Direct COMMAND /c remains a DOS COMMAND witness.
+    @{ Name='empty'; Text="exit`r"; Code=0; ConsoleMarkers=@('Microsoft(R) Windows NT DOS'); ConsoleMarkerCount=1 },
+    @{ Name='native-zero'; Text="ver`rexit`r"; Code=0; ConsoleMarkers=@('Microsoft Windows [Version') },
+    @{ Name='missing'; Text="missing`rver`rexit`r"; Code=0; ConsoleMarkers=@('is not recognized as an internal or external command','Microsoft Windows [Version'); ExpectedGuestError=$true },
+    @{ Name='native-seven'; Args=@('COMMAND.COM','/c','cmd','/c',(Join-Path $shortFixtureRoot 'D7.CMD')); Code=0; ConsoleMarkers=@('S10_DIRECT_SEVEN') },
+    @{ Name='native-streams'; Args=@('COMMAND.COM','/c','cmd','/c',(Join-Path $shortFixtureRoot 'STREAM.CMD')); Code=0; ConsoleMarkers=@('S10_STDOUT','S10_STDERR') },
+    @{ Name='native-eof'; Args=@('COMMAND.COM','/c','cmd','/c',(Join-Path $shortFixtureRoot 'EOF.CMD')); Code=0; ConsoleMarkers=@('S10_EOF') },
     @{ Name='mem'; Text="mem`rexit`r"; Code=1; ConsoleMarkers=@('bytes total conventional memory') },
-    @{ Name='nested-empty'; Text="command`rexit`rexit`r"; Code=1 },
+    @{ Name='nested-empty'; Text="command`rexit`rexit`r"; Code=1; ConsoleMarkers=@('Microsoft(R) Windows NT DOS'); ConsoleMarkerCount=2 },
     @{ Name='nested-mem'; Text="command`rcommand`rmem`rexit`rmem`rexit`rmem`rexit`r"; Code=1 },
     @{ Name='mem-repeat'; Text="mem`rmem`rexit`r"; Code=1; ConsoleMarkers=@('bytes total conventional memory') },
     @{ Name='direct-mem'; Args=@('MEM.EXE'); Code=0; ConsoleMarkers=@('bytes total conventional memory') },
     @{ Name='command-c'; Args=@('COMMAND.COM','/c','ver'); Code=0; ConsoleMarkers=@('MS-DOS Version') },
     # Original COMMAND::LodCom1 -> FatalRet2 uses AX=4C00, not RetCode.
-    @{ Name='command-c-seven'; Args=@('COMMAND.COM','/c','cmd','/c','exit','7'); Code=0 },
-    @{ Name='guest-seven'; Args=@($guest); Code=7 },
-    @{ Name='command-guest-seven'; Args=@('COMMAND.COM','/c',$guest); Code=0 },
-    @{ Name='direct-seven'; Args=@('cmd.exe','/c','exit','7'); Code=7 },
-    @{ Name='edit'; Edit=$true; Code=1 }
+    @{ Name='command-c-seven'; Args=@('COMMAND.COM','/c','cmd','/c',(Join-Path $shortFixtureRoot 'D7.CMD')); Code=0; ConsoleMarkers=@('S10_DIRECT_SEVEN') },
+    @{ Name='guest-seven'; Args=@($guest); Code=7; ConsoleMarkers=@('S10_GUEST_SEVEN') },
+    @{ Name='command-guest-seven'; Args=@('COMMAND.COM','/c',$guest); Code=0; ConsoleMarkers=@('S10_GUEST_SEVEN') },
+    @{ Name='direct-seven'; Args=@('cmd.exe','/c',(Join-Path $shortFixtureRoot 'D7.CMD')); Code=7; ConsoleMarkers=@('S10_DIRECT_SEVEN') },
+    @{ Name='edit'; Edit=$true; Code=1; ConsoleMarkers=@('bytes total conventional memory') }
     @{ Name='worker-version-rejection'; Args=@('MEM.EXE'); Code=1306; Negative=$true }
 )
 foreach ($selected in $Cases) {
@@ -88,20 +99,29 @@ try {
             if (($case.Text -or $case.Edit) -and $record -notmatch '(?m)^scripted-console-input=delivered') {
                 throw "Input not delivered: $($case.Name)"
             }
-            if ($case.ConsoleMarkers) {
-                $screen=Get-Content -LiteralPath "$report.console.txt" -Raw
-                foreach($marker in $case.ConsoleMarkers) {
-                    if ($screen -notmatch [regex]::Escape($marker)) {
-                        throw "Missing guest Console marker for $($case.Name): $marker"
-                    }
+            $consolePath="$report.console.txt"
+            if (!(Test-Path -LiteralPath $consolePath)) {
+                throw "Missing captured guest Console text: $($case.Name)"
+            }
+            $screen=Get-Content -LiteralPath $consolePath -Raw
+            if ($screen -match '(?im)(bad command or filename|is not recognized as an internal or external command)' -and
+                !$case.ExpectedGuestError) {
+                throw "Guest Console reported an unexpected command-resolution failure: $($case.Name)"
+            }
+            foreach($marker in $case.ConsoleMarkers) {
+                if ($screen -notmatch [regex]::Escape($marker)) {
+                    throw "Missing guest Console marker for $($case.Name): $marker"
                 }
+            }
+            if ($case.ConsoleMarkerCount -and
+                [regex]::Matches($screen,[regex]::Escape($case.ConsoleMarkers[0])).Count -ne $case.ConsoleMarkerCount) {
+                throw "Unexpected guest Console marker count for $($case.Name): $($case.ConsoleMarkers[0])"
             }
             # The product deliberately has no native-child report hook.  A
             # successful observed COMMAND session is the regression contract:
             # original COMMAND consumes the native child result and returns
             # through its own AX=4C00 path.
             if ($case.Name -eq 'native-streams') {
-                $screen=Get-Content -LiteralPath "$report.console.txt" -Raw
                 foreach($marker in @('S10_STDOUT','S10_STDERR')) {
                     if([regex]::Matches($screen,$marker).Count -ne 1){throw "Missing or duplicate emitted stream marker: $marker"}
                 }

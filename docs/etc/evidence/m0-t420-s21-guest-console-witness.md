@@ -172,3 +172,33 @@ guest failure.  It does not claim S21 closure: the remaining CCPU family and
 worker-lifetime matrix must still be completed.  The HLT result is an explicit
 source-shaped CPL3 boundary, not a reason to alter original CCPU privilege
 semantics or introduce a CPU30/V86 monitor.
+
+## COMMAND acceptance requires Console text
+
+`Verify-CommandExitStatus.ps1` now treats the observation record as a
+two-part contract for every positive case: the outer `run16` result must match
+the expected status **and** the observer must have captured guest Console
+text.  It rejects an unexpected `Bad command or filename` / native
+command-resolution diagnostic even if the wrapper exits successfully.
+
+The deliberately negative `missing` case is the sole exception: it must show
+the expected native command-resolution diagnostic and then the `ver` witness.
+All other cases carry a specific Console witness.  In particular, the
+test-only `G7.COM` prints `S10_GUEST_SEVEN` before its intentional DOS exit 7;
+an exit code can no longer be mistaken for evidence that DOS opened and
+executed that image.
+
+The currently deployed product passed the strengthened non-G7 matrix:
+
+| Evidence prefix | Cases | Result |
+| --- | --- | --- |
+| `t420-s21-console-contract-r3` | interactive native zero/missing, native child, streams, EOF | passed |
+| `t420-s21-console-contract-r4` | nested COMMAND, direct MEM, COMMAND `/c`, native exit 7, EDIT return | passed |
+| `t420-s21-console-contract-r5` | interactive MEM, nested COMMAND → COMMAND → MEM, repeated MEM | passed |
+| `t420-s21-console-contract-r6` | unmodified empty COMMAND → `exit` | passed with original DOS banner witness |
+
+The first attempted nested variant inserted `ver` between the original nested
+`COMMAND` and its paired exits.  That altered the original keyboard timing and
+left a test-owned session waiting; it was not treated as a product failure.
+The accepted test restores the original input sequence and uses the two
+original DOS startup banners as the nested-level witness instead.
