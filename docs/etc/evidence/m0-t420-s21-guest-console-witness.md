@@ -141,6 +141,13 @@ product regressions also passed under the same observer:
 and `EDIT` return (`t420-s21-cintr-command-r3` and
 `t420-s21-cintr-edit-r1`).
 
+A follow-up selected-CCPU sweep also removed the one dead local
+`requested_address` from `ccpusas4.c::c_GetPhyAdd`: it was initialized from
+`addr` but had no read, and therefore could not affect the retained physical
+mapping translation/resolve calls.  `formal-build-r5` rebuilt the complete
+x86 product graph after its removal; the original CCPU lifecycle witness
+again printed `CCPU thread lifecycle OK` with exit zero.
+
 ## Interpretation and follow-up
 
 The text gate prevents false green acceptance when a wrapper exits zero after

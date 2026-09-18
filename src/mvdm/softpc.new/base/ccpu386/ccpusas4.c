@@ -1317,7 +1317,6 @@ c_GetPhyAdd IFN1(PHY_ADDR, addr)
 {
 	IU8 *retVal;
 	uint32_t translated_address;
-	PHY_ADDR requested_address = addr;
 
 	/* DIVERGENCE MVDM-HOST-DIV-036: preserve the original CCPU fast path for
 	 * normal SoftPC RAM, but first ask the source-shaped adapter whether this
