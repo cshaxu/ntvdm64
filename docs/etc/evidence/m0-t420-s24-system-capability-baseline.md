@@ -53,8 +53,8 @@ device and changes no guest media. A bounded normal CPL3 instruction workload
 separates the two tick reads. HLT is intentionally not used: S21 establishes
 that CPL3 HLT is a timeout boundary in this selected CCPU40 profile.
 
-On 2026-09-18 the public Console route ran `W:\SYSTST.COM` from
-`O:\winnt\tests\m0-t420-s24-r5`. The raw guest transcript at
+On 2026-09-18 the public Console route ran `SYSTST.COM` through a temporary
+short DOS drive mapped to `O:\winnt\tests\m0-t420-s24-r5`. The raw guest transcript at
 `O:\winnt\logs\m0-t420-s24-system-r5.raw` contains:
 
 ```text
