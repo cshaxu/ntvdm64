@@ -103,6 +103,44 @@ the existing **S38 DPMI32 capability closure**.  It is neither an absent
 caller nor a reason to add a CCPU-side substitute.  S21 must retain this
 owner mapping when it closes; S38 must supply the guest workload evidence.
 
+## Original `c_intr.c` recovery and compact Console evidence
+
+The selected CCPU call graph has two original software-interrupt instruction
+owners: `INTx()` and `INTO()`.  Each already calls `host_swint_hook()` before
+calling `do_intrupt(..., TRUE, ...)`.  The CCPU opcode dispatcher reaches
+those two bodies directly.  The only other selected `do_intrupt` callers are
+exception and hardware-delivery paths, which pass `FALSE` and must not be
+treated as a software interrupt.
+
+Consequently, the former ten-line `c_intr.c` hook was duplicate policy, not a
+required CPU40 carrier.  It has been removed; the current
+`c_intr.c` SHA-256 is identical to the pinned OpenNT source:
+`9e6d69b1e05309ca87db41c66b89eb9d0862f2078c08a16fe20b82669bc46a7a`.
+The DPMI hook route remains owned by the original `INTx`/`INTO`, `nt_inthk`
+and `dpmiint` chain above.
+
+The fresh formal graph is `build/M0-T420/S21/formal-x86-004`; it linked
+`run16.exe`, `basesrv.exe`, `ntvdm.exe`, `dtmgr.exe` and
+`ccpu-thread-lifecycle-test.exe`.  The latter printed `CCPU thread lifecycle
+OK` and exited zero.
+
+The Console observer formerly wrote every cell in the host Console's full
+scrollback plane.  A default `120 x 9001` Console turned the one-line
+`TIMBUSY` witness into a 1,080,120-byte file of spaces.  This is an
+observer-only evidence defect, not guest output.  The observer now records
+only nonblank rows, retaining their original row numbers and buffer/viewport
+metadata.  Its `TIMBUSY` snapshot is 60 bytes and contains
+`CCPU-TIMBUSY-OK`.
+
+Deployed formal artifacts were copied to `O:\winnt` by matching SHA-256.
+`t420-s21-cintr-original-r7` then completed the entire 22-case guest matrix:
+21 positive guest Console passes plus the one expected original CPL3 HLT
+boundary.  All 22 Console evidence files were 56--68 bytes.  The established
+product regressions also passed under the same observer:
+`MEM`, nested `COMMAND -> COMMAND -> MEM`, direct `MEM`, `COMMAND /c VER`,
+and `EDIT` return (`t420-s21-cintr-command-r3` and
+`t420-s21-cintr-edit-r1`).
+
 ## Interpretation and follow-up
 
 The text gate prevents false green acceptance when a wrapper exits zero after

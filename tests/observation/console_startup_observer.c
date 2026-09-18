@@ -130,7 +130,7 @@ static void write_console_snapshot(HANDLE output, const char *report_path)
 {
     char *screen;
     char path[MAX_PATH];
-    DWORD count = 0, cells;
+    DWORD count = 0, cells, row, column;
     CONSOLE_SCREEN_BUFFER_INFO info;
     FILE *file = NULL;
 
@@ -142,7 +142,33 @@ static void write_console_snapshot(HANDLE output, const char *report_path)
                                      (COORD){ 0, 0 }, &count)) { free(screen); return; }
     snprintf(path, sizeof(path), "%s.console.txt", report_path);
     if (fopen_s(&file, path, "wb") == 0 && file != NULL) {
-        fwrite(screen, 1, count, file);
+        /* A modern Console commonly allocates thousands of scrollback rows.
+         * Persisting its full character plane makes an ordinary one-line DOS
+         * result into a megabyte of spaces, which obscures rather than proves
+         * the guest's output.  Keep every nonblank row, tagged with its
+         * original buffer position, so witnesses remain searchable and the
+         * capture stays a readable evidence artifact. */
+        fprintf(file, "# buffer=%d,%d viewport=%d,%d,%d,%d\r\n",
+                info.dwSize.X, info.dwSize.Y, info.srWindow.Left,
+                info.srWindow.Top, info.srWindow.Right, info.srWindow.Bottom);
+        for (row = 0; row < (DWORD)info.dwSize.Y; ++row) {
+            DWORD end = (row + 1u) * (DWORD)info.dwSize.X;
+            DWORD start = row * (DWORD)info.dwSize.X;
+
+            if (start >= count) break;
+            if (end > count) end = count;
+            while (end > start &&
+                   (screen[end - 1u] == ' ' || screen[end - 1u] == '\0')) {
+                --end;
+            }
+            if (end == start) continue;
+
+            fprintf(file, "[%lu] ", (unsigned long)row);
+            for (column = start; column < end; ++column) {
+                fputc(screen[column] == '\0' ? ' ' : screen[column], file);
+            }
+            fputs("\r\n", file);
+        }
         fclose(file);
     }
     free(screen);
