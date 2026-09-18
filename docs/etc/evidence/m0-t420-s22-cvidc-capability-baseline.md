@@ -67,6 +67,17 @@ the same current formal flags. None retained a direct `C_Video`/`Video` field
 access after preprocessing. This is a consumer census, not proof that every
 C-VID vector has guest execution coverage.
 
+That assertion was re-run from the current formal graph in
+`build/M0-T420/S22/accessor-consumer-audit-r1`, rather than inherited from the
+earlier layout work. The generated original-accessor fixture passed all 38
+pairs for field offset, value, isolated write and generated-scratch
+preservation. The nine preprocessed consumers (`mouse_io`, `trace`,
+`sascdef`, `nt_ega`, `nt_vga`, `nt_graph`, `nt_mouse`, `nt_fulsc` and
+`nt_det`) each had zero evaluated direct `C_Video`/`Video` field access. They
+therefore cannot select an incompatible short layout behind the C-VID vector
+publication boundary. Their actual operational paths remain owned by the
+respective package rows above.
+
 ## Deployed regression
 
 The current `O:\winnt` package was exercised through its real ConPTY Console
