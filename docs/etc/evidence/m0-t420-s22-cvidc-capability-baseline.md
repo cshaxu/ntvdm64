@@ -33,6 +33,14 @@ SPC386 non-PIG/non-SPC486 profile-null set.  It fails on a missing provider,
 a changed null set, an unrecognised adapter endpoint, or a restored duplicate
 restart variable.
 
+The production-library C-VID fixture now also invokes every valid original
+table-publication family: all mode-0/mode-1 chain reads plus disabled/simple
+reads, all four mark selections, and dither, unchained, chain-2, chain-4 and
+simple write selections.  Every selected read/write/mark endpoint was
+non-null after publication.  This proves C-VID's table-selection boundary; it
+does not claim execution of those EGA memory functions, which remains S23's
+real guest-video workload obligation.
+
 Nine historical short-vector consumer translation units were preprocessed with
 the same current formal flags. None retained a direct `C_Video`/`Video` field
 access after preprocessing. This is a consumer census, not proof that every
