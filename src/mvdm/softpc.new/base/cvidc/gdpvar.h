@@ -695,5 +695,4 @@
 #define GDP_SIZE 43513
 #define GDP_CHECKSUM 23234201
 extern IHP Gdp;
-
 #endif /* _gdpvar_h */
