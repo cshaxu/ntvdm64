@@ -4,24 +4,24 @@
 
 ## Active Packet
 
-**Active: M0 T420 S32**
+**Active: M0 T420 S33**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T420 S32 — Ordinary Mode. |
-| Candidate Proposal | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md) S32. |
-| Admission And Approval | S31 closed with formal and product evidence; owner standing authorization admits the next sequential S. |
-| Objective | Close the complete selected `softpc.new/host/src` capability unit: original worker startup, Console, host-provider and normal/abnormal lifecycle behavior. |
-| Non-goals | No new broker policy, no replacement CPU core, no non-product debug transport and no duplicate adapter lifecycle implementation. |
-| Reference Baseline | S12 recovered the original host source package; S31 has fixed the settled release-debug profile that this worker must consume. |
-| Files And ABI Surface | Selected original host manifest, original `obj.vdm/ntvdm.c` entry, worker-local pre-init/cleanup bindings, Console ownership and host process/thread lifetime. |
+| Identifier Mode | M0 T420 S33 — Ordinary Mode. |
+| Candidate Proposal | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md) S33. |
+| Admission And Approval | S32 closed with formal worker-lifecycle and product evidence; owner standing authorization admits the next sequential S. |
+| Objective | Close the complete selected `dos/dem` capability unit: real DOS create/open/share/read/write/seek/find, error mapping and guest-buffer cleanup. |
+| Non-goals | No command-shell redirection policy, no replacement DOS kernel, no synthetic filesystem provider and no broad host-file virtualization. |
+| Reference Baseline | S13 recovered the original DEM source package; S33 must convert its source-level dispositions into real guest-to-host capability proof. |
+| Files And ABI Surface | Selected original DEM manifest, DOS file handles, guest-buffer leases, original BOP/INT 21h paths, error mapping and normal/abnormal close cleanup. |
 | Applicable Rules | Project design/rules, source policy, strict mirror rule, original-owner recovery and transcript-gated acceptance. |
-| Verification | Establish source/caller ownership, formal x86 compile/link evidence, direct worker lifecycle witnesses and the established direct/interactive COMMAND/MEM/EDIT regressions. |
-| Expected Markers | Every selected host unit is live with an original owner or a proven profile exclusion; startup, Console and normal/abnormal teardown do not leak worker state. |
-| Asset Needs | Pinned OpenNT host union, current product maps, worker lifecycle fixtures and `O:\winnt` runtime/log roots. |
-| Reporting Requirements | Record source hashes, selected entry/caller graph, binding disposition, lifecycle/Console observations, mirror delta and regression results. |
-| Stop Conditions | A reached host body needs an unapproved system service, lifecycle ownership is ambiguous, or an established workload regresses. |
-| Exit Criteria | Every selected host unit has an original-owner disposition; formal x86 and lifecycle/product regressions pass; evidence/index/status updated; reviewed P pushed. |
+| Verification | Establish source/caller ownership, formal x86 compile/link evidence, real DOS file-operation witnesses, error/cleanup controls and established direct/interactive COMMAND/MEM/EDIT regressions. |
+| Expected Markers | Every selected DEM operation is real-guest proven, source-proven unavailable, or an explicitly approved external-medium boundary; guest buffers and handles have normal/abnormal cleanup evidence. |
+| Asset Needs | Pinned OpenNT DEM union, current product maps, disposable guest fixtures, formal x86 graph and `O:\winnt` runtime/log roots. |
+| Reporting Requirements | Record source hashes, selected entry/caller graph, operation-family disposition, error mapping, guest-buffer lifetime and regression results. |
+| Stop Conditions | A reached DEM body needs an unapproved system service, a guest-pointer lifetime is ambiguous, or an established workload regresses. |
+| Exit Criteria | Every selected DEM unit has an original-owner capability disposition; formal x86 and real-guest/product regressions pass; evidence/index/status updated; reviewed P pushed. |
 | Original Owner Request | Standing automatic sequential S authorization for the T420 whole-package capability sequence. |
 | Similar-Issue Sweep | Audit all debug macros, exported globals and selected host/CCPU callers for accidental non-PROD activation, duplicate debugger ownership, trace-file lifetime leaks or externally controllable release gates. |
 
@@ -129,6 +129,18 @@ inert. Formal x86, 27 current-source exception cases, an environment-enabled
 real `FAULT.EXE`, and all 17 text-gated COMMAND/MEM/EDIT routes passed.
 
 [T420 S31 debug capability closure](../etc/evidence/m0-t420-s31-debug-capability-closure.md)
+
+## S32 Closure Record
+
+[T420 S32 host capability closure](../etc/evidence/m0-t420-s32-host-capability-closure.md)
+closes all 47 selected original `softpc.new/host/src` units. Twenty are
+byte-identical; every remaining difference is a registered finite x86 ABI,
+CCPU40 execution, worker-local platform-binding or public-Console/lifecycle
+carrier. The retirement removes 40 mirror-side observation/unused-carrier
+lines from `nt_bop.c` and `nt_graph.c`, leaving no new worker shell or
+adapter lifecycle. Fresh formal x86 lifecycle proof and all 17 transcript-
+gated COMMAND/MEM/EDIT product routes passed from matching `O:\winnt`
+artifacts.
 
 ## S1 Closure Record
 
@@ -408,7 +420,7 @@ COMMAND/MEM/EDIT routes passed.
   correction: four EXE component directories are explicit, `dtmgr.exe`
   replaces `dtaskmgr.exe`, and the task display derives depth from original
   BaseSrv DOS records rather than a parallel stack.
-- T420 S1--S24 are delivered: CCPU386, C-VID, video, system, keymouse, BIOS,
+- T420 S1--S32 are delivered: CCPU386, C-VID, video, system, keymouse, BIOS,
   support, disks, comms, DOS, debug, host and DEM are closed complete package
   units.  S14 COMMAND restored two empty x86 adapter carriers to their
   original OpenNT forms; S15 closes XMS, S16 closes SubAlloc, S17 closes

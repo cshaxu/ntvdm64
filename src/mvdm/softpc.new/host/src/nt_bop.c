@@ -78,8 +78,6 @@ DATA OBJECTS      : None
 #include "nt_eoi.h"
 #include <nt_com.h>
 #include "yoda.h"
-/* DIVERGENCE(MVDM-HOST-DIV-164): fixed-container observation sink only;
-   the original selector/service routing and return sequence remain unchanged. */
 
 
 /* [3.1.2 DECLARATIONS]                                                 */
@@ -152,7 +150,6 @@ void MS_bop_0(void) {
                                          1,
                                          FALSE
                                          ));
-
     DemDispatch( DemCmd );
     setIP((USHORT)(getIP() + 1));
 
@@ -174,17 +171,10 @@ static BOOL WowModeInitialized = FALSE;
 
 void MS_bop_1(void) {
 
-    /* Default-off evidence only: this is the original KRNL386-to-WOW
-     * ingress.  The report path is captured before COMMAND constructs the
-     * guest environment, and the observation neither changes registers nor
-     * affects the loader/dispatch result. */
-
-
     if (!WowModeInitialized) {
     //Load the WOW DLL
     if ((hWOWDll = SafeLoadLibrary("WOW32")) == NULL)
     {
-
 #ifndef PROD
         HostDebugBreak();
 #endif
@@ -195,7 +185,6 @@ void MS_bop_1(void) {
     // Get the init entry point and dispatch entry point
     if ((WOWInitEntry = (MYFARPROC)GetProcAddress(hWOWDll, "W32Init")) == NULL)
     {
-
 #ifndef PROD
         HostDebugBreak();
 #endif
@@ -209,7 +198,6 @@ void MS_bop_1(void) {
        export address and call path; no WOW provider is enabled by this cast. */
     if ((WOWDispatchEntry = (MYFARPROC)GetProcAddress(hWOWDll, "W32Dispatch")) == NULL)
     {
-
 #ifndef PROD
         HostDebugBreak();
 #endif
@@ -221,7 +209,6 @@ void MS_bop_1(void) {
     //Get Comms functions
     if ((GetCommHandle = (GCHfn) GetProcAddress(hWOWDll, "GetCommHandle")) == NULL)
     {
-
 #ifndef PROD
         HostDebugBreak();
 #endif
@@ -232,7 +219,6 @@ void MS_bop_1(void) {
 
     if ((GetCommShadowMSR = (GCSfn) GetProcAddress(hWOWDll, "GetCommShadowMSR")) == NULL)
     {
-
 #ifndef PROD
         HostDebugBreak();
 #endif
@@ -246,7 +232,6 @@ void MS_bop_1(void) {
                                                     "W32HungAppNotifyThread");
     if (!pW32HungAppNotifyThread)
     {
-
 #ifndef PROD
         HostDebugBreak();
 #endif
@@ -259,7 +244,6 @@ void MS_bop_1(void) {
     // Call the init routine
     if ((*WOWInitEntry)() == FALSE)
     {
-
 #ifndef PROD
         HostDebugBreak();
 #endif
@@ -268,7 +252,6 @@ void MS_bop_1(void) {
     }
 
     WowModeInitialized = TRUE;
-
     }
 
 #if !defined(CPU_40_STYLE) || defined(CCPU)
@@ -337,10 +320,8 @@ void MS_bop_4(void)
     IMPORT BOOL CmdDispatch(ULONG);
 
     sas_load( ((ULONG)getCS()<<4) + getIP(), &Command);
-
     CmdDispatch((ULONG) Command);
     setIP((USHORT)(getIP() + 1));
-
 }
 
 
@@ -737,12 +718,6 @@ void MS_bop_E(void)
    if (code == 0) {
        UMBNotify(0);
        demDasdInit();
-       /* DIVERGENCE(MVDM-HOST-DIV-183): default-off fixed-container
-        * observation runs only after the original notification work. It
-        * copies selected-map offsets under the live original CS through
-        * bounded leases and cannot alter this BOP's return, UMB, DEM, CPU or
-        * guest state. */
-
        }
    else {
 #ifndef PROD
@@ -756,13 +731,8 @@ void MS_bop_F(void)
 {
     extern void kb_setup_vectors(void);
 
-    /* Default-off evidence for the original NTIO.SYS registration boundary.
-     * BOP 5F hands the selected KIO and IRET-BOP tables to the original C
-     * BIOS; observing its already-live register inputs does not participate
-     * in vector setup or alter its return state. */
 
     kb_setup_vectors();
-
 
 
 #ifdef MONITOR

@@ -63,12 +63,6 @@
 #include "nt_fulsc.h"
 #include "nt_det.h"
 
-/* DIVERGENCE(MVDM-HOST-DIV-203): default-off fixed-container observation
- * hooks are kept out of the original display decision.  The hook below sees
- * only the already-selected scalar count immediately before unchanged
- * WriteConsoleA; it never reads guest text, modifies the buffer, or changes
- * the original console call. */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <malloc.h>
@@ -547,6 +541,7 @@ GLOBAL VOID closeGraphicsBuffer IFN0()
                 CloseHandle(sc.ScreenBufHandle);
                 sc.ScreenBufHandle = (HANDLE)0;
                 sc.ColPalette = (HPALETTE)0;
+
                 /*
                  * Point to the current output handle.
                  */
@@ -635,7 +630,7 @@ void nt_init_screen(void)
     /* Set current screen height to prevent the window changing shape between
        init_screen and init_adaptor */
 
-	video_adapter = (half_word) config_inquire(C_GFX_ADAPTER, NULL);
+    video_adapter = (half_word) config_inquire(C_GFX_ADAPTER, NULL);
     switch (video_adapter)
     {
         case CGA:
@@ -649,7 +644,7 @@ void nt_init_screen(void)
 
     /*::::::::::::::::: Setup the screen dimensions for the initial adaptor */
 
-	host_set_screen_scale((SHORT) config_inquire(C_WIN_SIZE, NULL));
+    host_set_screen_scale((SHORT) config_inquire(C_WIN_SIZE, NULL));
     set_screen_sizes(video_adapter);
 
     /*:::: Set pixel values to be used for FG and BG (mainly in mono modes) */
@@ -2308,9 +2303,8 @@ void nt_scroll_complete()        { }
 void host_stream_io_update(half_word * buffer, word count)
 {
     DWORD dwBytesWritten;
-    BOOL wrote;
 
-    wrote = WriteConsoleA(sc.OutputHandle,
+    WriteConsoleA(sc.OutputHandle,
 		  buffer,
 		  count,
 		  &dwBytesWritten,
