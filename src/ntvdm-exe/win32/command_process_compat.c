@@ -54,9 +54,79 @@ static const char *opennt_command_comspec_tail(const char *command_line)
     return *cursor != '\0' ? cursor : NULL;
 }
 
+/* Quote one already-selected COMSPEC tail for CreateProcess.  This is only
+ * the Win32 argv boundary: COMMAND.COM remains the sole owner of parsing the
+ * tail's redirection, pipe and quoting grammar. */
+static BOOL opennt_command_append_windows_argument(char **cursor,
+                                                   const char *end,
+                                                   const char *argument)
+{
+    const char *source;
+    unsigned int slash_count = 0u;
+
+    if (cursor == NULL || *cursor == NULL || end == NULL || argument == NULL ||
+        *cursor >= end) return FALSE;
+    if (*cursor + 1 >= end) return FALSE;
+    *(*cursor)++ = '"';
+    for (source = argument; *source != '\0'; ++source) {
+        unsigned int index;
+
+        if (*source == '\\') {
+            ++slash_count;
+            continue;
+        }
+        if (*source == '"') {
+            for (index = 0u; index < slash_count * 2u + 1u; ++index) {
+                if (*cursor >= end) return FALSE;
+                *(*cursor)++ = '\\';
+            }
+            if (*cursor >= end) return FALSE;
+            *(*cursor)++ = *source;
+            slash_count = 0u;
+            continue;
+        }
+        while (slash_count != 0u) {
+            if (*cursor >= end) return FALSE;
+            *(*cursor)++ = '\\';
+            --slash_count;
+        }
+        if (*cursor >= end) return FALSE;
+        *(*cursor)++ = *source;
+    }
+    while (slash_count != 0u) {
+        if (*cursor + 1 >= end) return FALSE;
+        *(*cursor)++ = '\\';
+        *(*cursor)++ = '\\';
+        --slash_count;
+    }
+    if (*cursor + 1 >= end) return FALSE;
+    *(*cursor)++ = '"';
+    **cursor = '\0';
+    return TRUE;
+}
+
+static int opennt_command_nested_comspec_tail(const char *tail)
+{
+    const char *cursor=tail;
+    const char *begin;
+    size_t bytes;
+
+    if (cursor==NULL) return 0;
+    while (*cursor==' ' || *cursor=='\t') ++cursor;
+    begin=cursor;
+    while (*cursor!='\0' && *cursor!=' ' && *cursor!='\t') ++cursor;
+    bytes=(size_t)(cursor-begin);
+    if (bytes!=sizeof("COMMAND.COM")-1u ||
+        _strnicmp(begin,"COMMAND.COM",bytes)!=0) return 0;
+    while (*cursor==' ' || *cursor=='\t') ++cursor;
+    return _strnicmp(cursor,"/c",2u)==0 &&
+        (cursor[2]==' ' || cursor[2]=='\t');
+}
+
 static int opennt_command_simple_shell_tail(const char *tail)
 {
-    return tail != NULL && strpbrk(tail, "|&<>") == NULL;
+    return tail != NULL && strpbrk(tail, "|&<>") == NULL &&
+        !opennt_command_nested_comspec_tail(tail);
 }
 
 static BOOL opennt_command_launch_vdm_child(
@@ -71,10 +141,11 @@ static BOOL opennt_command_launch_vdm_child(
     LPPROCESS_INFORMATION process_information)
 {
     char launcher[MAX_PATH];
-    char child_command[MAX_PATH + MAXIMUM_VDM_COMMAND_LENGTH + 4u];
+    char child_command[MAX_PATH * 2u + MAXIMUM_VDM_COMMAND_LENGTH * 2u + 32u];
     char *leaf;
     DWORD launcher_bytes;
     int formatted;
+    char *tail_cursor;
 
     /* The original worker has already chosen COMMAND's COMSPEC /c route.
      * Standalone composition replaces only the historical system VDM spawn:
@@ -88,9 +159,26 @@ static BOOL opennt_command_launch_vdm_child(
         return FALSE;
     }
     memcpy(leaf + 1, "run16.exe", sizeof("run16.exe"));
-    formatted = snprintf(child_command, sizeof(child_command), "\"%s\" %s",
-        launcher, tail);
+    if (opennt_command_simple_shell_tail(tail)) {
+        formatted = snprintf(child_command, sizeof(child_command),
+            "\"%s\" %s", launcher, tail);
+        if (formatted < 0 || (size_t)formatted >= sizeof(child_command)) {
+            SetLastError(ERROR_FILENAME_EXCED_RANGE);
+            return FALSE;
+        }
+        return CreateProcessA(NULL, child_command, process_attributes,
+            thread_attributes, inherit_handles, creation_flags, environment,
+            current_directory, startup_info, process_information);
+    }
+    formatted = snprintf(child_command, sizeof(child_command),
+        "\"%s\" COMMAND.COM /c ", launcher);
     if (formatted < 0 || (size_t)formatted >= sizeof(child_command)) {
+        SetLastError(ERROR_FILENAME_EXCED_RANGE);
+        return FALSE;
+    }
+    tail_cursor = child_command + formatted;
+    if (!opennt_command_append_windows_argument(&tail_cursor,
+            child_command + sizeof(child_command) - 1u, tail)) {
         SetLastError(ERROR_FILENAME_EXCED_RANGE);
         return FALSE;
     }

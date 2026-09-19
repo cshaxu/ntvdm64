@@ -47,6 +47,11 @@ struct OPENNT_BASE_CONNECTION {
     BOOL retired;
     BOOL pending_creation;
     BOOL registered_worker;
+    /* The original BaseSrvDupStandardHandles copies these caller streams
+     * into the suspended worker during UpdateDOSEntry.  The standalone
+     * broker temporarily owns receipt-backed duplicates until that point;
+     * it must release them afterwards so a pipe reader can observe EOF. */
+    uint32_t pending_standard_streams[3];
     HANDLE parent_wait; /* Borrowed from this connection's receipt table. */
     BOOL worker_failed;
     LIST_ENTRY service_link;
@@ -118,7 +123,8 @@ static VOID CALLBACK service_worker_terminated(PVOID context,BOOLEAN fired)
     /* Equivalent to the selected BaseClientDisconnectRoutine: a one-shot
      * authenticated process-exit signal, never queue polling or a reaper. */
     BaseSrvCleanupVDMResources(&watch->process);
-    OpenNtBaseReservationCollectAbandoned(watch->service->reservations,watch->reservation);
+    (void)OpenNtBaseReservationReleaseWorker(watch->service->reservations,watch->reservation,
+        (DWORD)(ULONG_PTR)watch->process.ClientId.UniqueProcess,watch->process.SequenceNumber);
     /* CSR removes the dead process during disconnect rundown.  A standalone
      * RPC context can outlive an abruptly killed client, so detach its local
      * registration now; keep its opaque context until rundown to avoid UAF. */
@@ -161,16 +167,27 @@ static NTSTATUS service_wait_deliver(void *context,HANDLE event,uint32_t *receip
     if (!error) scope->connection->service->next_wait_receipt=*receipt;
     return error ? STATUS_INVALID_HANDLE : STATUS_SUCCESS;
 }
+static NTSTATUS service_stream_deliver_to_connection(OPENNT_BASE_CONNECTION *connection,
+    HANDLE stream,uint32_t *receipt)
+{
+    DWORD error;
+    if (!connection || !connection->reservation || !stream || !receipt)
+        return STATUS_INVALID_PARAMETER;
+    /* Update precedes worker Connect.  The reservation is the only finite
+     * owner spanning that interval; srvvdm.c retains alias comparison. */
+    error=OpenNtBaseReservationAcceptStream(connection->service->reservations,
+        connection->reservation,stream,receipt);
+    return error ? STATUS_INVALID_HANDLE : STATUS_SUCCESS;
+}
 static NTSTATUS service_stream_deliver(void *context,HANDLE stream,uint32_t *receipt)
 {
     OPENNT_BASE_SERVICE_RESOURCES *scope=context;
-    DWORD error;
-    if (!scope || !stream || !receipt) return STATUS_INVALID_PARAMETER;
-    /* Update precedes worker Connect.  The reservation is the only finite
-     * owner spanning that interval; srvvdm.c retains alias comparison. */
-    error=OpenNtBaseReservationAcceptStream(scope->connection->service->reservations,
-        scope->connection->reservation,stream,receipt);
-    return error ? STATUS_INVALID_HANDLE : STATUS_SUCCESS;
+    return scope ? service_stream_deliver_to_connection(scope->connection,stream,receipt) :
+        STATUS_INVALID_PARAMETER;
+}
+static NTSTATUS service_worker_stream_deliver(void *context,HANDLE stream,uint32_t *receipt)
+{
+    return service_stream_deliver_to_connection((OPENNT_BASE_CONNECTION *)context,stream,receipt);
 }
 static NTSTATUS service_wait_revoke(void *context,uint32_t receipt)
 {
@@ -186,6 +203,8 @@ static NTSTATUS service_duplicate_resource(void *context,HANDLE source_process,H
 {
     OPENNT_BASE_SERVICE_RESOURCES *scope=context;
     OPENNT_BASE_STREAM_BINDING streams;
+    OPENNT_BASE_CONNECTION *worker_connection=NULL;
+    LIST_ENTRY *entry;
     if (!scope) return STATUS_INVALID_PARAMETER;
     /* BaseSrvUpdateDOSEntry duplicates the newly created VDM process into
      * BaseSrv.  In NT4 its source was a raw handle in the launcher's CSR
@@ -199,25 +218,38 @@ static NTSTATUS service_duplicate_resource(void *context,HANDLE source_process,H
             return STATUS_SUCCESS;
         return STATUS_ACCESS_DENIED;
     }
-    /* Keep the original Update-before-Connect ordering executable while S4
-     * completes the receipt-only first-command path.  This branch is scoped
-     * to the already reserved suspended worker and precedes its Connect. */
-    if (scope->worker && source && target && !access && attributes==OBJ_INHERIT &&
-        options==DUPLICATE_SAME_ACCESS) {
-        HANDLE stream=NULL;
-        if (!broker_vdm_receipt_resolve(&scope->connection->streams,
-                scope->connection->process.SequenceNumber,(uint32_t)(ULONG_PTR)source,
-                BROKER_VDM_STDIN,&stream) && DuplicateHandle(GetCurrentProcess(),stream,
-                scope->worker,target,0,TRUE,DUPLICATE_SAME_ACCESS) &&
-            OpenNtBaseReservationMarkWorkerLocalStream(
-                scope->connection->service->reservations,
-                scope->connection->reservation,*target)==ERROR_SUCCESS) return STATUS_SUCCESS;
-        return STATUS_INVALID_HANDLE;
-    }
     /* The retained srvvdm.c body asks to duplicate a source-shaped standard
-     * handle into its VDM process.  In standalone the field is a receipt
-     * issued to the launcher, so resolve only that authenticated source and
-     * deliver an actual typed attachment to this worker connection. */
+     * handle into its VDM process. */
+    /* A present VDM receives another launcher's command.  Retained srvvdm.c
+     * has selected the target process already; resolve that process back to
+     * its authenticated worker connection, then retain the new launcher's
+     * stream in the target worker reservation.  The launcher cannot own this
+     * delivery: it has no worker reservation and exits after its parent wait.
+     */
+    if (source && target && !access && attributes==OBJ_INHERIT &&
+        options==DUPLICATE_SAME_ACCESS && target_process) {
+        for (entry=scope->connection->service->connections.Flink;
+                entry!=&scope->connection->service->connections;entry=entry->Flink) {
+            OPENNT_BASE_CONNECTION *candidate=CONTAINING_RECORD(entry,
+                OPENNT_BASE_CONNECTION,service_link);
+            if (candidate->process.fVDM && candidate->reservation &&
+                candidate->console==scope->connection->console) {
+                worker_connection=candidate;
+                break;
+            }
+        }
+        if (worker_connection) {
+            ZeroMemory(&streams,sizeof(streams));
+            streams.source_process=source_process;
+            streams.target_process=target_process;
+            streams.source_receipts=&scope->connection->streams;
+            streams.source_generation=scope->connection->process.SequenceNumber;
+            streams.context=worker_connection;
+            streams.deliver=service_worker_stream_deliver;
+            return OpenNtBaseDuplicateStream(&streams,source_process,source,target_process,
+                target,access,attributes,options);
+        }
+    }
     if (scope->connection->reservation && source && target && !access &&
         attributes==OBJ_INHERIT && options==DUPLICATE_SAME_ACCESS) {
         ZeroMemory(&streams,sizeof(streams));
@@ -1070,6 +1102,12 @@ DWORD OpenNtBaseServiceCheck(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD 
     if (!status && NT_SUCCESS((NTSTATUS)message.ReturnValue) &&
         message.u.CheckVDM.VDMState==VDM_NOT_PRESENT) {
         connection->pending_creation=TRUE;
+        connection->pending_standard_streams[0]=
+            (uint32_t)(ULONG_PTR)message.u.CheckVDM.StdIn;
+        connection->pending_standard_streams[1]=
+            (uint32_t)(ULONG_PTR)message.u.CheckVDM.StdOut;
+        connection->pending_standard_streams[2]=
+            (uint32_t)(ULONG_PTR)message.u.CheckVDM.StdErr;
         connection->task=message.u.CheckVDM.iTask;
         connection->registered_worker=FALSE;
         connection->worker_failed=FALSE;
@@ -1159,8 +1197,28 @@ DWORD OpenNtBaseServiceUpdate(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD
         error=ERROR_INVALID_DATA; goto done;
     }
     if (NT_SUCCESS((NTSTATUS)message.ReturnValue)) {
-        if (message.u.UpdateVDMEntry.EntryIndex==UPDATE_VDM_PROCESS_HANDLE)
+        if (message.u.UpdateVDMEntry.EntryIndex==UPDATE_VDM_PROCESS_HANDLE) {
+            DWORD index,previous;
+            uint32_t standard_streams[3];
             connection->registered_worker=TRUE;
+            /* The original source process, not BaseSrv, owns its standard
+             * handles. BaseSrvDupStandardHandles has copied each source
+             * receipt into the reservation's worker-delivery receipt. Close
+             * only the source carrier: the reservation copy remains live
+             * until the worker consumes it through GetNextVDMCommand. */
+            CopyMemory(standard_streams,connection->pending_standard_streams,
+                sizeof(standard_streams));
+            for (index=0;index<3;++index) {
+                uint32_t receipt=standard_streams[index];
+                for (previous=0;previous<index;++previous)
+                    if (standard_streams[previous]==receipt) break;
+                if (receipt && previous==index)
+                    (void)broker_vdm_receipt_revoke(&connection->streams,
+                        generation,receipt);
+            }
+            ZeroMemory(connection->pending_standard_streams,
+                sizeof(connection->pending_standard_streams));
+        }
         if (message.u.UpdateVDMEntry.EntryIndex==UPDATE_VDM_UNDO_CREATION)
             connection->pending_creation=FALSE;
     }
@@ -1293,30 +1351,50 @@ if (!OpenNtBaseFinishGetCommand(&message,&state)) { error=ERROR_INVALID_DATA; go
         HANDLE ids[3]={message.u.GetNextVDMCommand.StdIn,message.u.GetNextVDMCommand.StdOut,
             message.u.GetNextVDMCommand.StdErr};
         DWORD index;
-        for (index=0;index<3;++index) if (ids[index] &&
-            !OpenNtBaseReservationIsWorkerLocalStream(connection->service->reservations,
-                connection->reservation,ids[index]) &&
-            OpenNtBaseReservationResolveStream(connection->service->reservations,
-                connection->reservation,(uint32_t)(ULONG_PTR)ids[index],&standard[index])) {
-error=ERROR_INVALID_HANDLE;goto done;
+        for (index=0;index<3;++index) if (ids[index]) {
+            DWORD previous;
+            for (previous=0;previous<index;++previous)
+                if (ids[previous]==ids[index]) break;
+            if (previous<index) standard[index]=standard[previous];
+            else {
+                uint32_t receipt=(uint32_t)(ULONG_PTR)ids[index];
+                /* A first worker receives its streams through the launch
+                 * reservation.  Retained srvvdm.c sends streams for a
+                 * present-VDM re-entry directly to that existing worker's
+                 * authenticated connection.  Both are the same typed
+                 * receipt contract; choose the original delivery owner,
+                 * never reinterpret the scalar receipt as a HANDLE. */
+                error=OpenNtBaseReservationResolveStream(connection->service->reservations,
+                    connection->reservation,receipt,&standard[index]);
+                if (error==ERROR_NOT_FOUND)
+                    error=broker_vdm_receipt_take(&connection->streams,generation,receipt,
+                        BROKER_VDM_STDIN+index,&standard[index]);
+                if (error) { error=ERROR_INVALID_HANDLE;goto done; }
+            }
         }
-        if (!OpenNtBaseReservationIsWorkerLocalStream(connection->service->reservations,
-                connection->reservation,ids[0]) &&
-            !OpenNtBaseReservationIsWorkerLocalStream(connection->service->reservations,
-                connection->reservation,ids[1]) &&
-            !OpenNtBaseReservationIsWorkerLocalStream(connection->service->reservations,
-                connection->reservation,ids[2])) *standard_count=3;
+        *standard_count=3;
     }
-    *output=state.reply; *output_bytes=state.reply_bytes; state.reply=NULL;
     /* This is an original target event, held by the console record. It crosses
      * process boundaries only as a typed RPC event attachment, never in the
      * copied VDM command record. */
     error=service_wait_resolve(connection,generation,message.u.GetNextVDMCommand.WaitObjectForVDM,
         BROKER_VDM_WORKER_WAIT,wait_event);
-if (error) goto done;
+    if (error) goto done;
+    *output=state.reply; *output_bytes=state.reply_bytes; state.reply=NULL;
     error=ERROR_SUCCESS;
 done:
     LeaveCriticalSection(&connection->service->lock);
+    if (error) {
+        DWORD index;
+        for (index=0;index<3;++index) if (standard[index]) {
+            DWORD previous;
+            for (previous=0;previous<index;++previous)
+                if (standard[previous]==standard[index]) break;
+            if (previous==index) CloseHandle(standard[index]);
+            standard[index]=NULL;
+        }
+        *standard_count=0;
+    }
     OpenNtBaseReleaseGetCommand(&state);
     return error;
 }

@@ -33,6 +33,39 @@ static ULONG parent_receipt;
  * close it.  This is one VDM client's single ConsoleRecord wait, not a task
  * scheduler or a reusable-worker policy. */
 static HANDLE worker_wait_event;
+/* S34-only host diagnostic.  It is entirely opt-in, writes no guest Console
+ * data and carries no command/handle payload: its purpose is to distinguish
+ * a pre-Get worker stall from an RPC/command completion stall. */
+static void s34_trace(const char *stage,DWORD value)
+{
+    char path[MAX_PATH],line[128];
+    DWORD bytes,written;
+    HANDLE file;
+    if (!GetEnvironmentVariableA("MVDM_S34_TRACE_PATH",path,sizeof(path))) return;
+    file=CreateFileA(path,FILE_APPEND_DATA,FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,
+        OPEN_ALWAYS,FILE_ATTRIBUTE_NORMAL,NULL);
+    if (file==INVALID_HANDLE_VALUE) return;
+    bytes=(DWORD)sprintf_s(line,sizeof(line),"%lu %s %lu\r\n",
+        (unsigned long)GetCurrentProcessId(),stage,(unsigned long)value);
+    if (bytes) (void)WriteFile(file,line,bytes,&written,NULL);
+    CloseHandle(file);
+}
+static void s34_trace_command(const char *command,DWORD length)
+{
+    char path[MAX_PATH],line[320];
+    DWORD bytes,written,copy=length;
+    HANDLE file;
+    if (!GetEnvironmentVariableA("MVDM_S34_TRACE_PATH",path,sizeof(path))) return;
+    if (!command) { s34_trace("get-command-null",length); return; }
+    if (copy>240u) copy=240u;
+    file=CreateFileA(path,FILE_APPEND_DATA,FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,
+        OPEN_ALWAYS,FILE_ATTRIBUTE_NORMAL,NULL);
+    if (file==INVALID_HANDLE_VALUE) return;
+    bytes=(DWORD)sprintf_s(line,sizeof(line),"%lu get-command %.*s\r\n",
+        (unsigned long)GetCurrentProcessId(),(int)copy,command);
+    if (bytes) (void)WriteFile(file,line,bytes,&written,NULL);
+    CloseHandle(file);
+}
 
 /* Owner-approved standalone failure containment, not guest termination or
  * BaseSrv scheduling. Never reconnect a live command to a replacement server.
@@ -224,12 +257,16 @@ static NTSTATUS get_command(PCSR_API_MSG message,ULONG length)
     void *wire=NULL;
     HANDLE wait_event=NULL;
     HANDLE *wait_events=NULL;
-    HANDLE *stream_handles=NULL;
+    HANDLE *pipe_handles=NULL;
+    HANDLE *file_handles=NULL;
     ULONG wait_event_count=0;
-    ULONG stream_count=0;
+    ULONG pipe_mask=0,pipe_count=0,file_mask=0,file_count=0;
     ULONG reply_bytes=0;
     DWORD error=ERROR_INVALID_DATA;
     BOOL applied=FALSE;
+    s34_trace("get-enter",length);
+    s34_trace("get-state",base->u.GetNextVDMCommand.VDMState);
+    s34_trace("get-exit",base->u.GetNextVDMCommand.ExitCode);
     if (!request) request=(uint32_t)InterlockedIncrement(&request_id);
     if (length!=sizeof(BASE_GET_NEXT_VDM_COMMAND_MSG) ||
         !OpenNtBaseEncodeGetCommand(base,request,client.generation,NULL,0,&wire_bytes) ||
@@ -238,41 +275,63 @@ static NTSTATUS get_command(PCSR_API_MSG message,ULONG length)
         goto done;
     RpcTryExcept {
         error=Client_Get(client.binding,client.connection,client.process,client.generation,
-            wire_bytes,wire,&wait_event_count,&wait_events,&stream_count,&stream_handles,
+            wire_bytes,wire,&wait_event_count,&wait_events,
+            &pipe_mask,&pipe_count,&pipe_handles,&file_mask,&file_count,&file_handles,
             &reply_bytes,&reply);
     }
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
+    s34_trace("get-rpc",error);
     if (!error && wait_event_count<=1 && (!wait_event_count || wait_events) &&
-        stream_count<=3 && (!stream_count || stream_handles) && reply && reply_bytes) {
+        pipe_count<=3 && (!pipe_count || pipe_handles) &&
+        file_count<=3 && (!file_count || file_handles) && reply && reply_bytes) {
         if (wait_event_count) wait_event=wait_events[0];
         applied=OpenNtBaseApplyGetCommand(reply,(uint32_t)reply_bytes,client.generation,request,base);
+        if (applied) s34_trace_command(base->u.GetNextVDMCommand.CmdLine,
+            base->u.GetNextVDMCommand.CmdLen);
     }
+    s34_trace("get-wait",wait_event ? 1u : 0u);
     if (applied) {
         base->u.GetNextVDMCommand.WaitObjectForVDM=wait_event;
-        if (stream_count) {
-            if (stream_count!=3 ||
-                (!!base->u.GetNextVDMCommand.StdIn != !!stream_handles[0]) ||
-                (!!base->u.GetNextVDMCommand.StdOut != !!stream_handles[1]) ||
-                (!!base->u.GetNextVDMCommand.StdErr != !!stream_handles[2])) {
+        if (pipe_count || file_count) {
+            HANDLE streams[3]={NULL,NULL,NULL};
+            ULONG stream_mask=pipe_mask|file_mask;
+            ULONG pipe_index=0,file_index=0,index;
+            if ((pipe_mask&file_mask) || (pipe_mask&~7u) || (file_mask&~7u) ||
+                (!!base->u.GetNextVDMCommand.StdIn != !!(stream_mask&1u)) ||
+                (!!base->u.GetNextVDMCommand.StdOut != !!(stream_mask&2u)) ||
+                (!!base->u.GetNextVDMCommand.StdErr != !!(stream_mask&4u))) {
                 applied=FALSE;
             } else {
-                base->u.GetNextVDMCommand.StdIn=stream_handles[0];
-                base->u.GetNextVDMCommand.StdOut=stream_handles[1];
-                base->u.GetNextVDMCommand.StdErr=stream_handles[2];
+                for (index=0;index<3;++index) {
+                    if (pipe_mask&(1u<<index)) streams[index]=pipe_handles[pipe_index++];
+                    else if (file_mask&(1u<<index)) streams[index]=file_handles[file_index++];
+                }
+                if (pipe_index!=pipe_count || file_index!=file_count) { applied=FALSE; goto done; }
+                for (index=0;index<3;++index) if (streams[index] &&
+                    !SetHandleInformation(streams[index],HANDLE_FLAG_INHERIT,HANDLE_FLAG_INHERIT)) {
+                    error=GetLastError(); applied=FALSE; break;
+                }
+                if (!applied) goto done;
+                base->u.GetNextVDMCommand.StdIn=streams[0];
+                base->u.GetNextVDMCommand.StdOut=streams[1];
+                base->u.GetNextVDMCommand.StdErr=streams[2];
+                for (index=0;index<pipe_count;++index) pipe_handles[index]=NULL;
+                for (index=0;index<file_count;++index) file_handles[index]=NULL;
             }
         } else {
-            /* The scalar reply explicitly says whether original BaseSrv
-             * returned a standard stream.  With no typed attachment it is
-             * either absent (must become NULL) or already inherited by this
-             * worker from the suspended launch; never leave the caller's
-             * pre-RPC stack residue in these original result fields. */
-            base->u.GetNextVDMCommand.StdIn=
-                base->u.GetNextVDMCommand.StdIn ? GetStdHandle(STD_INPUT_HANDLE) : NULL;
-            base->u.GetNextVDMCommand.StdOut=
-                base->u.GetNextVDMCommand.StdOut ? GetStdHandle(STD_OUTPUT_HANDLE) : NULL;
-            base->u.GetNextVDMCommand.StdErr=
-                base->u.GetNextVDMCommand.StdErr ? GetStdHandle(STD_ERROR_HANDLE) : NULL;
+            /* A declared standard stream is carried only as a typed RPC
+             * attachment.  The scalar reply contains presence bits, never a
+             * usable HANDLE value, so reject a truncated/malformed reply. */
+            if (base->u.GetNextVDMCommand.StdIn ||
+                base->u.GetNextVDMCommand.StdOut ||
+                base->u.GetNextVDMCommand.StdErr) {
+                applied=FALSE;
+            } else {
+                base->u.GetNextVDMCommand.StdIn=NULL;
+                base->u.GetNextVDMCommand.StdOut=NULL;
+                base->u.GetNextVDMCommand.StdErr=NULL;
+            }
         }
         if (applied && wait_event) {
             /* Original srvvdm.c reuses its ConsoleRecord event across Get
@@ -283,23 +342,32 @@ static NTSTATUS get_command(PCSR_API_MSG message,ULONG length)
                 base->u.GetNextVDMCommand.WaitObjectForVDM=worker_wait_event;
             } else worker_wait_event=wait_event;
         }
-        /* Update may have copied standard streams directly into the already
-         * registered suspended worker before it connected.  In that original
-         * timing path these are already valid worker-local handles, so Get
-         * carries no second typed attachment. */
         wait_event=NULL;
     }
 done:
     if (wait_events) MIDL_user_free(wait_events);
-    if (stream_handles) MIDL_user_free(stream_handles);
+    if (pipe_handles) {
+        ULONG index;
+        for (index=0;index<pipe_count;++index) if (pipe_handles[index])
+            CloseHandle(pipe_handles[index]);
+        MIDL_user_free(pipe_handles);
+    }
+    if (file_handles) {
+        ULONG index;
+        for (index=0;index<file_count;++index) if (file_handles[index])
+            CloseHandle(file_handles[index]);
+        MIDL_user_free(file_handles);
+    }
     if (wait_event) CloseHandle(wait_event);
     if (reply) MIDL_user_free(reply);
     if (wire) HeapFree(GetProcessHeap(),0,wire);
     if (error || !applied) {
+        s34_trace("get-fail",error ? error : ERROR_INVALID_DATA);
         SetLastError(error ? error : ERROR_INVALID_DATA);
         message->ReturnValue=(ULONG)STATUS_UNSUCCESSFUL;
         return STATUS_UNSUCCESSFUL;
     }
+    s34_trace("get-ok",pipe_count+file_count);
     return (NTSTATUS)message->ReturnValue;
 }
 
@@ -312,15 +380,18 @@ static NTSTATUS exit_command(PCSR_API_MSG message,ULONG length)
 
     if (length!=sizeof(*exit_message)) goto done;
     is_wow=exit_message->ConsoleHandle==(HANDLE)-1;
+    s34_trace("exit-enter",is_wow ? exit_message->iWowTask : 0u);
     RpcTryExcept {
         error=Client_Exit(client.binding,client.connection,client.process,client.generation,
             is_wow ? 1u : 0u,is_wow ? exit_message->iWowTask : 0u,&close_worker_wait);
     }
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
-if (error || close_worker_wait>1u || (close_worker_wait && !worker_wait_event)) goto done;
+    s34_trace("exit-rpc",error);
+    if (error || close_worker_wait>1u || (close_worker_wait && !worker_wait_event)) goto done;
     exit_message->WaitObjectForVDM=close_worker_wait ? worker_wait_event : NULL;
     if (close_worker_wait) worker_wait_event=NULL;
+    s34_trace("exit-ok",close_worker_wait);
     message->ReturnValue=STATUS_SUCCESS;
     return STATUS_SUCCESS;
 done:
@@ -407,6 +478,7 @@ static NTSTATUS reenter_command(PCSR_API_MSG message,ULONG length)
     if (length!=sizeof(*reenter) ||
         (reenter->fIncDec!=INCREMENT_REENTER_COUNT &&
          reenter->fIncDec!=DECREMENT_REENTER_COUNT)) goto done;
+    s34_trace("reenter",reenter->fIncDec);
     RpcTryExcept {
         error=Client_Reenter(client.binding,client.connection,client.process,client.generation,
             reenter->fIncDec);

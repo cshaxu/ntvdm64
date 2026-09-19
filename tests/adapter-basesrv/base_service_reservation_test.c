@@ -1,6 +1,7 @@
 #include <base_service.h>
 #include "basesrv.h"
 #include <base_command.h>
+#include "basesrv-exe/transport/vdm_receipt.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -44,6 +45,9 @@ int main(int argc,char **argv)
     void *wire=NULL,*answer=NULL,*updateWire=NULL,*updateAnswer=NULL,*getWire=NULL,*getAnswer=NULL;
     uint32_t wireBytes=0,answerBytes=0,updateWireBytes=0,updateAnswerBytes=0,getWireBytes=0;
     HANDLE parentEvent=NULL,laterParentEvent=NULL,getWait=NULL,standard[3]={NULL,NULL,NULL};
+    HANDLE stdinRead=NULL,stdinWrite=NULL,stdoutRead=NULL,stdoutWrite=NULL;
+    DWORD stdinReceipt=0,stdoutReceipt=0,bytes=0;
+    char streamText[16]={0};
     uint32_t parentReceipt=0,laterParentReceipt=0;
     uint64_t managementEpoch=0;
     OPENNT_BASE_WORKER_INFO workerInfo={0};
@@ -58,12 +62,25 @@ int main(int argc,char **argv)
     CHECK(OpenNtBaseServiceIsEmpty(service));
     CHECK(OpenNtBaseServiceConnect(service,self,&launcher,&launcherGeneration)==ERROR_SUCCESS);
     CHECK(!OpenNtBaseServiceIsEmpty(service));
+    /* Standard streams cross the standalone service as receipts.  Keep the
+     * opposite pipe ends in this fixture so that the first worker delivery
+     * can prove it got usable stream attachments rather than local HANDLE
+     * numbers from the broker record. */
+    CHECK(CreatePipe(&stdinRead,&stdinWrite,NULL,0));
+    CHECK(CreatePipe(&stdoutRead,&stdoutWrite,NULL,0));
+    CHECK(OpenNtBaseServiceAttachStream(launcher,GetCurrentProcessId(),launcherGeneration,
+        BROKER_VDM_STDIN,stdinRead,&stdinReceipt)==ERROR_SUCCESS && stdinReceipt);
+    CHECK(OpenNtBaseServiceAttachStream(launcher,GetCurrentProcessId(),launcherGeneration,
+        BROKER_VDM_STDOUT,stdoutWrite,&stdoutReceipt)==ERROR_SUCCESS && stdoutReceipt);
     check.u.CheckVDM.CmdLine=cmd;check.u.CheckVDM.CmdLen=sizeof(cmd);
     check.u.CheckVDM.AppName=app;check.u.CheckVDM.AppLen=sizeof(app);
     check.u.CheckVDM.CurDirectory=directory;check.u.CheckVDM.CurDirectoryLen=sizeof(directory);
     check.u.CheckVDM.Env=environment;check.u.CheckVDM.EnvLen=sizeof(environment);
     check.u.CheckVDM.BinaryType=BINARY_TYPE_DOS;check.u.CheckVDM.CodePage=437;
     check.u.CheckVDM.CurDrive=2;check.u.CheckVDM.ConsoleHandle=OPENNT_BASE_CONSOLE_EXISTING;
+    check.u.CheckVDM.StdIn=(HANDLE)(ULONG_PTR)stdinReceipt;
+    check.u.CheckVDM.StdOut=(HANDLE)(ULONG_PTR)stdoutReceipt;
+    check.u.CheckVDM.StdErr=(HANDLE)(ULONG_PTR)stdoutReceipt;
     CHECK(OpenNtBaseEncodeCheckCommand(&check,1,launcherGeneration,NULL,0,&wireBytes));
     wire=malloc(wireBytes);CHECK(wire && OpenNtBaseEncodeCheckCommand(&check,1,launcherGeneration,wire,wireBytes,&wireBytes));
     CHECK(OpenNtBaseServiceCheck(launcher,GetCurrentProcessId(),launcherGeneration,wire,wireBytes,NULL,0,&answerBytes,&parentEvent,&parentReceipt)==ERROR_INSUFFICIENT_BUFFER && answerBytes);
@@ -94,6 +111,11 @@ int main(int argc,char **argv)
         launcher,GetCurrentProcessId(),launcherGeneration,updateWire,updateWireBytes,
         updateAnswer,updateAnswerBytes,&updateAnswerBytes,&parentEvent,&parentReceipt)==ERROR_SUCCESS);
     CHECK(parentEvent!=NULL && parentReceipt!=0);
+    /* Update has consumed the launcher's source receipts.  Subsequent
+     * independent Check calls must not replay those revoked source tokens. */
+    check.u.CheckVDM.StdIn=NULL;
+    check.u.CheckVDM.StdOut=NULL;
+    check.u.CheckVDM.StdErr=NULL;
     CHECK(ResumeThread(child.hThread)!=(DWORD)-1);
     CHECK(OpenNtBaseServiceConnect(service,child.hProcess,&worker,&workerGeneration)==ERROR_SUCCESS);
     CHECK(OpenNtBaseServiceWorkerReservation(worker,&claimed,&task,&console));
@@ -135,7 +157,11 @@ int main(int argc,char **argv)
         &get,4,workerGeneration,getWire,getWireBytes,&getWireBytes));
     CHECK(OpenNtBaseServiceGet(worker,child.dwProcessId,workerGeneration,getWire,getWireBytes,
         &getAnswer,&wireBytes,&getWait,standard,&standardCount)==ERROR_SUCCESS);
-    CHECK(getAnswer!=NULL && getWait==NULL && standardCount==0);
+    CHECK(getAnswer!=NULL && getWait==NULL && standardCount==3 &&
+        standard[0]!=NULL && standard[1]!=NULL && standard[2]!=NULL);
+    CHECK(WriteFile(standard[1],"S34\n",4,&bytes,NULL) && bytes==4);
+    CHECK(ReadFile(stdoutRead,streamText,4,&bytes,NULL) && bytes==4 &&
+        !memcmp(streamText,"S34\n",4));
     OpenNtBaseServiceReleaseCommandReply(getAnswer);getAnswer=NULL;
     free(getWire);getWire=NULL;
     ZeroMemory(&get,sizeof(get));
@@ -239,7 +265,12 @@ int main(int argc,char **argv)
     CHECK(OpenNtBaseServiceDisconnect(worker)==ERROR_SUCCESS);worker=NULL;
     CHECK(OpenNtBaseServicePrepareWorker(launcher,GetCurrentProcessId(),launcherGeneration,
         reservation,child.hProcess)==ERROR_PROCESS_ABORTED);
-    CHECK(OpenNtBaseServiceReleaseReservation(launcher,GetCurrentProcessId(),launcherGeneration,reservation)==ERROR_SUCCESS);
+    { DWORD release=OpenNtBaseServiceReleaseReservation(launcher,GetCurrentProcessId(),
+          launcherGeneration,reservation);
+      /* The worker-exit watch owns reservation teardown.  Depending on the
+       * scheduling point, either this launcher call performs the final
+       * release or the watch has already done so. */
+      CHECK(release==ERROR_SUCCESS || release==ERROR_NOT_FOUND); }
     CHECK(OpenNtBaseServiceDisconnect(later)==ERROR_SUCCESS);later=NULL;
     TerminateProcess(laterChild.hProcess,0);WaitForSingleObject(laterChild.hProcess,INFINITE);
     CloseHandle(laterChild.hThread);CloseHandle(laterChild.hProcess);laterChild.hThread=laterChild.hProcess=NULL;

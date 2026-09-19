@@ -16,9 +16,8 @@ typedef struct broker_vdm_update_values {
 } broker_vdm_update_values;
 typedef struct broker_vdm_get_values {
     uint32_t task, code_page, creation_flags, exit_code, drive, state, from_bat;
-    /* Presence only: native stream handles remain typed RPC attachments or
-     * worker-local inherited handles.  This prevents an uninitialized client
-     * BASE_GET_NEXT_VDM_COMMAND_MSG field from becoming a redirection input. */
+    /* Presence only: native stream handles remain typed RPC attachments.
+     * The Get reply never carries a sender- or worker-local HANDLE value. */
     uint32_t standard_mask;
 } broker_vdm_get_values;
 #endif

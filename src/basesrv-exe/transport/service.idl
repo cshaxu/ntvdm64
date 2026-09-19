@@ -69,8 +69,17 @@ interface vdm_service
         [out, system_handle(sh_event), size_is(,*wait_event_count)] HANDLE **wait_events,
         /* Standard streams are returned only through authenticated typed
          * attachments.  The copied reply retains receipt IDs, not HANDLEs. */
-        [out] unsigned long *stream_count,
-        [out, system_handle(sh_file), size_is(,*stream_count)] HANDLE **streams,
+        /* A standard stream can be either a file or a pipe.  MIDL validates
+         * system_handle object types, so do not mislabel a ConPTY pipe as a
+         * file.  Each packed array is mapped back to stdin/stdout/stderr by
+         * its position mask; the two masks must partition the scalar stream
+         * presence bits in the copied reply. */
+        [out] unsigned long *pipe_stream_mask,
+        [out] unsigned long *pipe_stream_count,
+        [out, system_handle(sh_pipe), size_is(,*pipe_stream_count)] HANDLE **pipe_streams,
+        [out] unsigned long *file_stream_mask,
+        [out] unsigned long *file_stream_count,
+        [out, system_handle(sh_file), size_is(,*file_stream_count)] HANDLE **file_streams,
         [out] unsigned long *reply_bytes,
         [out, size_is(,*reply_bytes)] byte **reply);
     /* ExitVDM has no caller-owned command payload.  The worker states only

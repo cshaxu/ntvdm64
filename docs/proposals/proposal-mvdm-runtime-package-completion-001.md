@@ -86,7 +86,7 @@ mirror/adapter changes, then commits and pushes.
 | S31 | `softpc.new/base/debug` capability closure | Real original debug initialization, trace/btrace/event dispatch or a complete profile exclusion. |
 | S32 | `softpc.new/host/src` capability closure | Real worker thread, Console, host provider and normal/abnormal resource-lifecycle acceptance. |
 | S33 | `dos/dem` capability closure | Real DOS create/open/share/read/write/seek/find, error mapping and guest-buffer cleanup acceptance. |
-| S34 | `dos/command` capability closure | Direct/nested COMMAND child, standard-stream, redirection, pipe, return/error and cleanup acceptance. |
+| S34 | `dos/command` capability closure | Direct/nested COMMAND child, including host-inherited and guest-created standard streams; `>`, `>>`, `<` and `|`; return/error and cleanup acceptance through first, second and third COMMAND depth. |
 | S35 | `xms.486` capability closure | Real DOS XMS allocate/move/overlap/free/A20 and failure/teardown acceptance. |
 | S36 | `suballoc` capability closure | Real XMS/DPMI-backed allocation, relocation, exhaustion/release and teardown acceptance. |
 | S37 | `oemuni` capability closure | Real DOS/Win16 OEM-Unicode non-ASCII path, buffer and failure acceptance. |
@@ -103,6 +103,25 @@ limited `dbg`/`vdd` bindings, and load-only `dpmi`/`wow16` media are precisely
 why these four rows are independent S packets. The current `dbg` binding, the
 former WOW/debugger proposal and any local replacement scheduler do not
 constitute completion.
+
+### S34 merged standard-stream and pipe scope
+
+The owner merged the former queued COMMAND standard-stream/pipe candidate
+into active S34 on 2026-09-18.  It is one COMMAND lifecycle, not a second
+original package: `run16.exe` must attach inherited `stdin`/`stdout`/`stderr`
+without parsing guest syntax; `basesrv.exe` must carry authenticated typed
+attachments independently of Console membership; `ntvdm.exe` must bind its
+process-local Console context separately; and original COMMAND/DOS remains
+the sole owner of `>`, `>>`, `<` and `|` parsing, DOS-handle mutation and
+restoration.
+
+S34 must prove, from real published x86 artifacts: a host file redirection;
+a host stdout pipe; guest parser rows at first depth; the same redirection and
+pipe rows at second and third nested `COMMAND.COM` depth; a native child that
+inherits a redirected guest standard stream; representative failures; and
+normal/abnormal stream, record and worker cleanup.  No raw handle, guest
+pointer or Console pseudo-handle may cross the broker record.  The original
+candidate remains retained below as historical design evidence only.
 
 ## S21--S39 retrospective capability closure
 

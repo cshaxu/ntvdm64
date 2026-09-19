@@ -10,20 +10,42 @@
 | --- | --- |
 | Identifier Mode | M0 T420 S34 — Ordinary Mode. |
 | Candidate Proposal | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md) S34. |
-| Admission And Approval | S33 closed with real DOS file capability and source-shaped error-map evidence; owner standing authorization admits the next sequential S. |
-| Objective | Close the complete selected `dos/command` capability unit: direct/nested COMMAND child, standard-stream, redirection, pipe, return/error and cleanup acceptance. |
+| Admission And Approval | S33 closed with real DOS file capability and source-shaped error-map evidence; owner standing authorization admits the next sequential S.  On 2026-09-18 the owner additionally merged the queued COMMAND standard-stream/pipe candidate into S34. |
+| Objective | Close the complete selected `dos/command` capability unit: direct/nested COMMAND child, host-inherited and guest-created standard streams, `>`, `>>`, `<` and `|`, return/error and cleanup acceptance through first, second and third COMMAND depth. |
 | Non-goals | No alternate command parser, no synthetic pipe server and no standalone reimplementation of BaseSrv command records. |
 | Reference Baseline | S14 recovered the COMMAND source package; S34 must prove its complete original command, stream and cleanup behavior from real guest paths. |
-| Files And ABI Surface | Selected original COMMAND manifest, standard handles, pipe/redirection records, nested command re-entry, return/error values and worker cleanup. |
+| Files And ABI Surface | Selected original COMMAND manifest; inherited standard-handle attachments; Console membership; broker receipts; pipe/redirection records; nested command re-entry; return/error values; and worker cleanup. |
 | Applicable Rules | Project design/rules, source policy, strict mirror rule, original-owner recovery and transcript-gated acceptance. |
-| Verification | Establish source/caller ownership, formal x86 compile/link evidence, direct/nested real COMMAND stream and cleanup witnesses, and established product regressions. |
-| Expected Markers | Every selected COMMAND operation is real-guest proven, source-proven unavailable or an explicit external boundary; no stream, command record or worker state leaks on completion. |
+| Verification | Establish source/caller ownership, formal x86 compile/link evidence, direct host-file/host-pipe plus first/second/third COMMAND real stream and cleanup witnesses, and established product regressions. |
+| Expected Markers | Every selected COMMAND operation is real-guest proven, source-proven unavailable or an explicit external boundary; host-provided streams remain distinct from Console membership; no stream, command record or worker state leaks on completion. |
 | Asset Needs | Pinned OpenNT COMMAND union, current product maps, disposable guest fixtures, formal x86 graph and `O:\winnt` runtime/log roots. |
 | Reporting Requirements | Record source hashes, selected entry/caller graph, stream/pipe disposition, nested-command lifecycle, return/error values and regression results. |
 | Stop Conditions | A reached COMMAND body needs an unapproved system service, stream ownership is ambiguous, or an established workload regresses. |
 | Exit Criteria | Every selected COMMAND unit has an original-owner capability disposition; formal x86 and real-guest/product regressions pass; evidence/index/status updated; reviewed P pushed. |
 | Original Owner Request | Standing automatic sequential S authorization for the T420 whole-package capability sequence. |
 | Similar-Issue Sweep | Audit all debug macros, exported globals and selected host/CCPU callers for accidental non-PROD activation, duplicate debugger ownership, trace-file lifetime leaks or externally controllable release gates. |
+
+## S34 Closure Record
+
+The merged COMMAND stream/pipe scope is complete.  The formal x86 graph
+`build/M0-T420/S34/formal-x86-r1` linked the three programs and `VDMREDIR.dll`.
+Published `O:\winnt` artifacts then passed the text-gated 17-route product
+matrix, including direct and interactive COMMAND, three nested MEM reports,
+direct MEM, `COMMAND.COM /c`, native stdout/stderr/EOF, guest exit status and
+the EDIT return route.  The host/guest stream matrix passed three fresh runs:
+host stdout pipe, host file output, host stdin pipe, guest `>`, `>>`, `<`, and
+`|`, plus the pipe at first, second and third nested COMMAND depth.  Every
+guest pipeline emitted the expected child-to-child marker.
+
+The former empty-output report was not a product failure: the test used an
+illegal long DOS result basename, whereas DOS correctly created its 8.3
+spelling.  The final matrix uses `G1.OUT`, `G2.OUT` and `G3.OUT` and checks
+each row's error level.  The retained original COMMAND mirror is now
+byte-identical; only finite product boundaries remain: inherited host-stream
+capture in `run16`, typed receipt delivery in `basesrv`, and the unavailable
+system-VDM spawn adapter in `ntvdm`.  No raw HANDLE, guest pointer or Console
+pseudo-handle crosses the broker record.  See the
+[S34 stream recovery evidence](../etc/evidence/m0-t420-s34-command-stream-recovery.md).
 
 ## S30 Closure Context
 

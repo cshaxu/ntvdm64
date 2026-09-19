@@ -637,11 +637,25 @@ USHORT  uErr;
 DWORD   dwDesiredAccess;
 SECURITY_ATTRIBUTES sa;
 CHAR    cFOTName[MAX_PATH];
+CHAR    fileName[MAX_PATH];
+ULONG   fileNameBytes;
+mvdm_guest_location fileNameLocation;
 BOOL    ttfOnce,IsFirst;
 DWORD   dwLastError;
 
 
-    lpFileName = (LPSTR) GetVDMAddr (getDS(),getSI());
+    /* DIVERGENCE(MVDM-HOST-DIV-231): the source borrows the DOS pathname
+     * through a synchronous GetVDMAddr alias.  CCPU40 guest backing cannot
+     * expose that alias to a Win32 call, so copy one bounded NUL-terminated
+     * pathname for this original handler invocation only. */
+    if (!mvdm_guest_location_set_real_mode(&fileNameLocation, getDS(),
+        getSI()) || !mvdm_guest_location_copy_c_string(&fileNameLocation,
+        (uint8_t *)fileName, (uint32_t)sizeof(fileName), &fileNameBytes)) {
+        SetLastError(ERROR_INVALID_ADDRESS);
+        demClientError(INVALID_HANDLE_VALUE, (CHAR)-1);
+        return;
+    }
+    lpFileName = fileName;
     dwAttr = (DWORD)getCX();
 
     if ((dwAttr & 0xff) == 0)

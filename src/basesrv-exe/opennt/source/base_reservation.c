@@ -13,8 +13,6 @@ typedef struct OPENNT_BASE_RESERVATION {
     BOOL shared_wow;
     BOOL abandoned;
     broker_vdm_receipts streams;
-    HANDLE worker_streams[3];
-    DWORD worker_stream_count;
 } OPENNT_BASE_RESERVATION;
 
 struct OPENNT_BASE_RESERVATIONS {
@@ -119,7 +117,11 @@ DWORD OpenNtBaseReservationResolveStream(OPENNT_BASE_RESERVATIONS *state,uint64_
     EnterCriticalSection(&state->lock);
     entry=find(state,reservation);
     if (!entry) error=ERROR_NOT_FOUND;
-    else error=broker_vdm_receipt_resolve(&entry->streams,entry->launcher_generation,receipt,
+    /* Delivery is one-way: after the broker has materialized the worker's
+     * typed RPC attachment, it must not retain another writer for the same
+     * host pipe.  The caller owns the returned source until it exports and
+     * closes it. */
+    else error=broker_vdm_receipt_take(&entry->streams,entry->launcher_generation,receipt,
         BROKER_VDM_STDIN,stream);
     LeaveCriticalSection(&state->lock);
     return error;
@@ -137,42 +139,6 @@ DWORD OpenNtBaseReservationRevokeStream(OPENNT_BASE_RESERVATIONS *state,uint64_t
     else error=broker_vdm_receipt_revoke(&entry->streams,entry->launcher_generation,receipt);
     LeaveCriticalSection(&state->lock);
     return error;
-}
-
-DWORD OpenNtBaseReservationMarkWorkerLocalStream(OPENNT_BASE_RESERVATIONS *state,
-    uint64_t reservation,HANDLE stream)
-{
-    OPENNT_BASE_RESERVATION *entry;
-    DWORD index,error=ERROR_SUCCESS;
-    if (!state || !reservation || !stream) return ERROR_INVALID_PARAMETER;
-    EnterCriticalSection(&state->lock);
-    entry=find(state,reservation);
-    if (!entry) error=ERROR_NOT_FOUND;
-    else {
-        for (index=0;index<entry->worker_stream_count;++index)
-            if (entry->worker_streams[index]==stream) break;
-        if (index==entry->worker_stream_count) {
-            if (index==ARRAYSIZE(entry->worker_streams)) error=ERROR_TOO_MANY_OPEN_FILES;
-            else entry->worker_streams[entry->worker_stream_count++]=stream;
-        }
-    }
-    LeaveCriticalSection(&state->lock);
-    return error;
-}
-
-BOOL OpenNtBaseReservationIsWorkerLocalStream(OPENNT_BASE_RESERVATIONS *state,
-    uint64_t reservation,HANDLE stream)
-{
-    OPENNT_BASE_RESERVATION *entry;
-    DWORD index;
-    BOOL found=FALSE;
-    if (!state || !reservation || !stream) return FALSE;
-    EnterCriticalSection(&state->lock);
-    entry=find(state,reservation);
-    if (entry) for (index=0;index<entry->worker_stream_count;++index)
-        if (entry->worker_streams[index]==stream) { found=TRUE; break; }
-    LeaveCriticalSection(&state->lock);
-    return found;
 }
 
 DWORD OpenNtBaseReservationPrepareWorker(OPENNT_BASE_RESERVATIONS *state,uint64_t reservation,
@@ -297,6 +263,24 @@ DWORD OpenNtBaseReservationRelease(OPENNT_BASE_RESERVATIONS *state,uint64_t rese
     entry=find(state,reservation);
     if (!entry) { LeaveCriticalSection(&state->lock);return ERROR_NOT_FOUND; }
     if (entry->launcher_pid!=launcher_pid || entry->launcher_generation!=launcher_generation) {
+        LeaveCriticalSection(&state->lock);return ERROR_ACCESS_DENIED;
+    }
+    RemoveEntryList(&entry->link);LeaveCriticalSection(&state->lock);
+    broker_vdm_receipts_drain(&entry->streams);
+    if (entry->worker) CloseHandle(entry->worker);
+    HeapFree(GetProcessHeap(),0,entry);
+    return ERROR_SUCCESS;
+}
+
+DWORD OpenNtBaseReservationReleaseWorker(OPENNT_BASE_RESERVATIONS *state,uint64_t reservation,
+    DWORD worker_pid,DWORD worker_generation)
+{
+    OPENNT_BASE_RESERVATION *entry;
+    if (!state || !reservation || !worker_pid || !worker_generation) return ERROR_INVALID_PARAMETER;
+    EnterCriticalSection(&state->lock);
+    entry=find(state,reservation);
+    if (!entry) { LeaveCriticalSection(&state->lock);return ERROR_NOT_FOUND; }
+    if (entry->worker_pid!=worker_pid || entry->worker_generation!=worker_generation) {
         LeaveCriticalSection(&state->lock);return ERROR_ACCESS_DENIED;
     }
     RemoveEntryList(&entry->link);LeaveCriticalSection(&state->lock);

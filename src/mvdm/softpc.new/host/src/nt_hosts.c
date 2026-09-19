@@ -159,6 +159,9 @@ void SetupConsoleMode(void)
 void InitScreenDesc(void)
 {
 SECURITY_ATTRIBUTES sa;
+DWORD console_mode;
+HANDLE inherited_handle;
+HANDLE inherited_error;
 
     /*::::::::::::::::::::::::::::::::::::::::::: Get console output handle */
 
@@ -179,7 +182,15 @@ SECURITY_ATTRIBUTES sa;
 
     /*:::::::::::::::::::::::::::::: check out if stdin has been redirected */
 
-    if(GetFileType(sc.InputHandle) != FILE_TYPE_CHAR)
+    /* DIVERGENCE(MVDM-HOST-DIV-272): NT4 Console character handles retained
+       their Console identity after BaseSrv duplicated them into the worker.
+       A modern ConPTY duplicate can remain FILE_TYPE_CHAR yet no longer be
+       usable by the original console-mode calls.  Preserve the original
+       redirected-input fallback, but select it from the actual Console
+       contract rather than an output-type proxy.  The DOS record retains
+       its separately duplicated input/output streams. */
+    if(GetFileType(sc.InputHandle) != FILE_TYPE_CHAR ||
+       !GetConsoleMode(sc.InputHandle, &console_mode))
     {
        sa.nLength = sizeof (SECURITY_ATTRIBUTES);
        sa.lpSecurityDescriptor = NULL;
@@ -199,6 +210,8 @@ SECURITY_ATTRIBUTES sa;
 
     if(GetFileType(sc.OutputHandle) != FILE_TYPE_CHAR)
     {
+       inherited_handle = sc.OutputHandle;
+       inherited_error = GetStdHandle(STD_ERROR_HANDLE);
        stdoutRedirected = TRUE;
        sa.nLength = sizeof (SECURITY_ATTRIBUTES);
        sa.lpSecurityDescriptor = NULL;
@@ -212,6 +225,14 @@ SECURITY_ATTRIBUTES sa;
        else {
           SetStdHandle (STD_OUTPUT_HANDLE,sc.OutputHandle);
           SetStdHandle (STD_ERROR_HANDLE,sc.OutputHandle);
+          /* BaseSrv has separately duplicated stdout/stderr into the DOS
+             record.  Once this host has replaced its process startup stream
+             with CONOUT$, release the superseded inherited handle so it
+             cannot retain a host pipe write end past COMMAND cleanup. */
+          CloseHandle(inherited_handle);
+          if (inherited_error != inherited_handle &&
+              inherited_error != NULL && inherited_error != INVALID_HANDLE_VALUE)
+             CloseHandle(inherited_error);
        }
     }
 

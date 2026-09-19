@@ -1,4 +1,8 @@
-# COMMAND standard-stream and pipe recovery
+# COMMAND standard-stream and pipe recovery — merged into M0 T420 S34
+
+> **Status (2026-09-18):** the owner merged this candidate into active
+> `M0 T420 S34`.  It is no longer a queue entry or separately admissible T
+> package.  Its design and acceptance rows are retained as S34 scope.
 
 ## Objective
 
@@ -71,7 +75,9 @@ worker to lose input, screen/event access, or its parent-session association.
 
 ## Admission and closure conditions
 
-Admit only after the active T420 package is closed.  Before implementation,
+The preceding admission timing applied while this was a queue candidate.  It
+was superseded by the owner's 2026-09-18 merge into active `M0 T420 S34`.
+Before implementation,
 record the current exact hang/zero-byte observation separately from successful
 rows.  Closure requires source/diff review, x86 compilation, focused
 attachment/COMMAND tests, the established direct and nested COMMAND/MEM/EDIT

@@ -30,13 +30,6 @@ DWORD OpenNtBaseReservationResolveStream(OPENNT_BASE_RESERVATIONS *,uint64_t res
     uint32_t receipt,HANDLE *stream);
 DWORD OpenNtBaseReservationRevokeStream(OPENNT_BASE_RESERVATIONS *,uint64_t reservation,
     uint32_t receipt);
-/* Original Update can duplicate a standard stream directly into the suspended
- * worker before its first Get.  Its resulting numeric value is worker-local,
- * not a broker receipt; record that finite fact so Get does not re-resolve it. */
-DWORD OpenNtBaseReservationMarkWorkerLocalStream(OPENNT_BASE_RESERVATIONS *,
-    uint64_t reservation,HANDLE stream);
-BOOL OpenNtBaseReservationIsWorkerLocalStream(OPENNT_BASE_RESERVATIONS *,
-    uint64_t reservation,HANDLE stream);
 /* The launcher may retain only the live worker it registered under its own
  * reservation.  This is the finite replacement for the original CSR client
  * process-handle namespace; command records still contain no OS handles. */
@@ -44,6 +37,10 @@ DWORD OpenNtBaseReservationRetainWorker(OPENNT_BASE_RESERVATIONS *,uint64_t rese
     DWORD launcher_pid,DWORD launcher_generation,HANDLE *worker);
 DWORD OpenNtBaseReservationRelease(OPENNT_BASE_RESERVATIONS *,uint64_t reservation,
     DWORD launcher_pid,DWORD launcher_generation);
+/* Once Connect has authenticated the prepared process, the worker owns the
+ * reservation lifetime. Its one-shot process watch performs this release. */
+DWORD OpenNtBaseReservationReleaseWorker(OPENNT_BASE_RESERVATIONS *,uint64_t reservation,
+    DWORD worker_pid,DWORD worker_generation);
 /* Dead launcher rollback: terminate only its not-yet-claimed worker. */
 BOOL OpenNtBaseReservationAbandon(OPENNT_BASE_RESERVATIONS *,uint64_t reservation);
 void OpenNtBaseReservationCollectAbandoned(OPENNT_BASE_RESERVATIONS *,uint64_t reservation);

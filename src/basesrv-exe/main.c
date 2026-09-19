@@ -290,17 +290,25 @@ error_status_t Server_Check(handle_t binding,VDM_CONNECTION connection,HANDLE pr
 }
 error_status_t Server_Get(handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,ULONG requestBytes,unsigned char *request,ULONG *waitEventCount,HANDLE **waitEvents,
-    ULONG *streamCount,HANDLE **streams,ULONG *replyBytes,
+    ULONG *pipeStreamMask,ULONG *pipeStreamCount,HANDLE **pipeStreams,
+    ULONG *fileStreamMask,ULONG *fileStreamCount,HANDLE **fileStreams,ULONG *replyBytes,
     unsigned char **reply)
 {
     DWORD pid,error;
     uint32_t bytes=0;
     ULONG standard_count=0;
+    ULONG index;
+    HANDLE pipe_standard[3]={NULL,NULL,NULL};
+    HANDLE file_standard[3]={NULL,NULL,NULL};
     void *source_reply=NULL;
     HANDLE wait_event=NULL;
     HANDLE standard[3]={NULL,NULL,NULL};
-    if (!waitEventCount || !waitEvents || !streamCount || !streams || !replyBytes || !reply) return ERROR_INVALID_PARAMETER;
-    *waitEventCount=0; *waitEvents=NULL; *streamCount=0; *streams=NULL; *replyBytes=0; *reply=NULL;
+    if (!waitEventCount || !waitEvents || !pipeStreamMask || !pipeStreamCount || !pipeStreams ||
+        !fileStreamMask || !fileStreamCount || !fileStreams || !replyBytes || !reply) return ERROR_INVALID_PARAMETER;
+    *waitEventCount=0; *waitEvents=NULL;
+    *pipeStreamMask=0; *pipeStreamCount=0; *pipeStreams=NULL;
+    *fileStreamMask=0; *fileStreamCount=0; *fileStreams=NULL;
+    *replyBytes=0; *reply=NULL;
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
     if (error) return error;
     error=OpenNtBaseServiceGet(connection,pid,generation,request,requestBytes,
@@ -324,14 +332,47 @@ error_status_t Server_Get(handle_t binding,VDM_CONNECTION connection,HANDLE proc
         return ERROR_NOT_ENOUGH_MEMORY;
     }
     memcpy(*reply,source_reply,bytes);
-    error=export_handles(standard,standard_count,streams);
+    for (index=0;index<standard_count;++index) if (standard[index]) {
+        if (GetFileType(standard[index])==FILE_TYPE_PIPE) {
+            pipe_standard[*pipeStreamCount]=standard[index];
+            *pipeStreamMask|=1u<<index;
+            ++*pipeStreamCount;
+        } else {
+            file_standard[*fileStreamCount]=standard[index];
+            *fileStreamMask|=1u<<index;
+            ++*fileStreamCount;
+        }
+    }
+    error=export_handles(pipe_standard,*pipeStreamCount,pipeStreams);
+    if (!error) error=export_handles(file_standard,*fileStreamCount,fileStreams);
     if (error) {
+        ULONG close_index;
         MIDL_user_free(*reply); *reply=NULL;
+        if (*pipeStreams) {
+            for (close_index=0;close_index<*pipeStreamCount;++close_index)
+                if ((*pipeStreams)[close_index]) CloseHandle((*pipeStreams)[close_index]);
+            MIDL_user_free(*pipeStreams); *pipeStreams=NULL;
+        }
+        if (*fileStreams) {
+            for (close_index=0;close_index<*fileStreamCount;++close_index)
+                if ((*fileStreams)[close_index]) CloseHandle((*fileStreams)[close_index]);
+            MIDL_user_free(*fileStreams); *fileStreams=NULL;
+        }
+        *pipeStreamMask=*pipeStreamCount=*fileStreamMask=*fileStreamCount=0;
         if (*waitEvents) { CloseHandle(**waitEvents); MIDL_user_free(*waitEvents);
             *waitEvents=NULL; *waitEventCount=0; }
         OpenNtBaseServiceReleaseCommandReply(source_reply); return error;
     }
-    *streamCount=standard_count;
+    /* Get consumed reservation ownership.  RPC has independently duplicated
+     * each selected resource into the worker, so close the broker's source
+     * copies now; do not let a resident broker keep a host-pipe writer open. */
+    for (index=0;index<standard_count;++index) {
+        ULONG previous;
+        if (!standard[index]) continue;
+        for (previous=0;previous<index;++previous)
+            if (standard[previous]==standard[index]) break;
+        if (previous==index) CloseHandle(standard[index]);
+    }
     OpenNtBaseServiceReleaseCommandReply(source_reply);
     *replyBytes=bytes;
     return ERROR_SUCCESS;

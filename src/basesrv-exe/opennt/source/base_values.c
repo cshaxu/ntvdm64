@@ -57,9 +57,8 @@ BOOL OpenNtBaseDecodeValues(const void *input, uint32_t bytes,
         if (value.drive>0xffffu || value.state>0xffffu || value.from_bat>0xffu ||
             value.standard_mask>7u) return FALSE;
         GET_VALUES(DECODE_FIELD)
-        /* These are Boolean placeholders until the RPC client either replaces
-         * them with typed attachments or selects its already-inherited stream.
-         * No sender-local HANDLE appears in this scalar wire fragment. */
+        /* Non-NULL placeholders let the client verify that every declared
+         * attachment arrived before it replaces them with local HANDLEs. */
         target->StdIn=(HANDLE)(ULONG_PTR)(value.standard_mask&1u);
         target->StdOut=(HANDLE)(ULONG_PTR)((value.standard_mask>>1)&1u);
         target->StdErr=(HANDLE)(ULONG_PTR)((value.standard_mask>>2)&1u);

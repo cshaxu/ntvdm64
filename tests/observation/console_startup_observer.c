@@ -289,7 +289,8 @@ static BOOL append_command_line_argument(char *line, size_t capacity,
  * keyboard worker route.  These are ordinary KEY_EVENT records, equivalent to
  * a user typing at CONIN$; this helper never reaches into the product, guest
  * RAM, BOP transport, or a COMMAND buffer. */
-static BOOL set1_scan_code_for_ascii(char character, WORD *scan_code)
+static BOOL set1_key_for_ascii(char character, WORD *virtual_key,
+                               WORD *scan_code, DWORD *control_state)
 {
     static const BYTE lowercase_set1[26] = {
         0x1e, 0x30, 0x2e, 0x20, 0x12, 0x21, 0x22, 0x23, 0x17,
@@ -297,29 +298,64 @@ static BOOL set1_scan_code_for_ascii(char character, WORD *scan_code)
         0x1f, 0x14, 0x16, 0x2f, 0x11, 0x2d, 0x15, 0x2c
     };
 
-    if (scan_code == NULL) return FALSE;
-    if (character >= 'A' && character <= 'Z') character += 'a' - 'A';
+    static const struct {
+        char character;
+        WORD virtual_key;
+        WORD scan_code;
+        BOOL shifted;
+    } punctuation[] = {
+        {' ', VK_SPACE, 0x39, FALSE}, {'-', VK_OEM_MINUS, 0x0c, FALSE},
+        {'_', VK_OEM_MINUS, 0x0c, TRUE},  {'=', VK_OEM_PLUS, 0x0d, FALSE},
+        {'+', VK_OEM_PLUS, 0x0d, TRUE},   {'[', VK_OEM_4, 0x1a, FALSE},
+        {'{', VK_OEM_4, 0x1a, TRUE},      {']', VK_OEM_6, 0x1b, FALSE},
+        {'}', VK_OEM_6, 0x1b, TRUE},      {';', VK_OEM_1, 0x27, FALSE},
+        {':', VK_OEM_1, 0x27, TRUE},      {'\'', VK_OEM_7, 0x28, FALSE},
+        {'\"', VK_OEM_7, 0x28, TRUE},    {'`', VK_OEM_3, 0x29, FALSE},
+        {'~', VK_OEM_3, 0x29, TRUE},      {'\\', VK_OEM_5, 0x2b, FALSE},
+        {'|', VK_OEM_5, 0x2b, TRUE},      {',', VK_OEM_COMMA, 0x33, FALSE},
+        {'<', VK_OEM_COMMA, 0x33, TRUE},  {'.', VK_OEM_PERIOD, 0x34, FALSE},
+        {'>', VK_OEM_PERIOD, 0x34, TRUE}, {'/', VK_OEM_2, 0x35, FALSE},
+        {'?', VK_OEM_2, 0x35, TRUE},      {'!', '1', 0x02, TRUE},
+        {'@', '2', 0x03, TRUE},           {'#', '3', 0x04, TRUE},
+        {'$', '4', 0x05, TRUE},           {'%', '5', 0x06, TRUE},
+        {'^', '6', 0x07, TRUE},           {'&', '7', 0x08, TRUE},
+        {'*', '8', 0x09, TRUE},           {'(', '9', 0x0a, TRUE},
+        {')', '0', 0x0b, TRUE}
+    };
+    size_t index;
+
+    if (virtual_key == NULL || scan_code == NULL || control_state == NULL)
+        return FALSE;
+    if (character >= 'A' && character <= 'Z') {
+        *virtual_key = (WORD)character;
+        *scan_code = lowercase_set1[character - 'A'];
+        *control_state |= SHIFT_PRESSED;
+        return TRUE;
+    }
     if (character >= 'a' && character <= 'z') {
+        *virtual_key = (WORD)(character - 'a' + 'A');
         *scan_code = lowercase_set1[character - 'a'];
         return TRUE;
     }
-    switch (character == '\n' ? '\r' : character) {
-    case '\r': *scan_code = 0x1c; return TRUE;
-    case '\x1b': *scan_code = 0x01; return TRUE;
-    case ' ':  *scan_code = 0x39; return TRUE;
-    case '/':  *scan_code = 0x35; return TRUE;
-    case '0':  *scan_code = 0x0b; return TRUE;
-    case '1':  *scan_code = 0x02; return TRUE;
-    case '2':  *scan_code = 0x03; return TRUE;
-    case '3':  *scan_code = 0x04; return TRUE;
-    case '4':  *scan_code = 0x05; return TRUE;
-    case '5':  *scan_code = 0x06; return TRUE;
-    case '6':  *scan_code = 0x07; return TRUE;
-    case '7':  *scan_code = 0x08; return TRUE;
-    case '8':  *scan_code = 0x09; return TRUE;
-    case '9':  *scan_code = 0x0a; return TRUE;
-    default: return FALSE;
+    if (character >= '0' && character <= '9') {
+        *virtual_key = (WORD)character;
+        *scan_code = character == '0' ? 0x0b : (WORD)(0x01 + character - '0');
+        return TRUE;
     }
+    switch (character == '\n' ? '\r' : character) {
+    case '\r': *virtual_key = VK_RETURN; *scan_code = 0x1c; return TRUE;
+    case '\x1b': *virtual_key = VK_ESCAPE; *scan_code = 0x01; return TRUE;
+    default: break;
+    }
+    for (index = 0; index < ARRAYSIZE(punctuation); ++index) {
+        if (punctuation[index].character == character) {
+            *virtual_key = punctuation[index].virtual_key;
+            *scan_code = punctuation[index].scan_code;
+            if (punctuation[index].shifted) *control_state |= SHIFT_PRESSED;
+            return TRUE;
+        }
+    }
+    return FALSE;
 }
 
 /* The original `KeyMsgToKeyCode` consumes a KEY_EVENT_RECORD's Set-1 scan
@@ -388,10 +424,10 @@ static BOOL write_console_input_text(HANDLE input, const char *text, DWORD line_
     if (input == NULL || input == INVALID_HANDLE_VALUE || text == NULL)
         return FALSE;
     for (cursor = text; *cursor != '\0'; ++cursor) {
-        INPUT_RECORD records[2];
+        INPUT_RECORD records[4];
         DWORD written = 0;
+        DWORD record_count = 2;
         char character = *cursor == '\n' ? '\r' : *cursor;
-        SHORT virtual_key = VkKeyScanA(character);
         WORD key_code;
         WORD scan_code;
         /* `nt_event.c` starts a DOS boot with ToggleKeyState set to
@@ -401,23 +437,43 @@ static BOOL write_console_input_text(HANDLE input, const char *text, DWORD line_
          * the requested key.  This is Console-record fidelity, not a guest
          * state mutation. */
         DWORD control_state = NUMLOCK_ON;
+        BOOL shifted;
 
-        if (virtual_key == -1 || !set1_scan_code_for_ascii(character, &scan_code))
+        if (!set1_key_for_ascii(character, &key_code, &scan_code,
+                                &control_state))
             return FALSE;
-        key_code = (WORD)(virtual_key & 0xff);
-        if ((virtual_key & 0x0100) != 0) control_state |= SHIFT_PRESSED;
+        shifted = (control_state & SHIFT_PRESSED) != 0;
         memset(records, 0, sizeof(records));
-        records[0].EventType = KEY_EVENT;
-        records[0].Event.KeyEvent.bKeyDown = TRUE;
-        records[0].Event.KeyEvent.wRepeatCount = 1;
-        records[0].Event.KeyEvent.wVirtualKeyCode = key_code;
-        records[0].Event.KeyEvent.wVirtualScanCode = scan_code;
-        records[0].Event.KeyEvent.uChar.AsciiChar = character;
-        records[0].Event.KeyEvent.dwControlKeyState = control_state;
-        records[1] = records[0];
-        records[1].Event.KeyEvent.bKeyDown = FALSE;
-        if (!WriteConsoleInputA(input, records, ARRAYSIZE(records), &written) ||
-            written != ARRAYSIZE(records)) return FALSE;
+        if (shifted) {
+            records[0].EventType = KEY_EVENT;
+            records[0].Event.KeyEvent.bKeyDown = TRUE;
+            records[0].Event.KeyEvent.wRepeatCount = 1;
+            records[0].Event.KeyEvent.wVirtualKeyCode = VK_SHIFT;
+            records[0].Event.KeyEvent.wVirtualScanCode = 0x2a;
+            records[0].Event.KeyEvent.dwControlKeyState = control_state;
+            records[1] = records[0];
+            records[1].Event.KeyEvent.wVirtualKeyCode = key_code;
+            records[1].Event.KeyEvent.wVirtualScanCode = scan_code;
+            records[1].Event.KeyEvent.uChar.AsciiChar = character;
+            records[2] = records[1];
+            records[2].Event.KeyEvent.bKeyDown = FALSE;
+            records[3] = records[0];
+            records[3].Event.KeyEvent.bKeyDown = FALSE;
+            records[3].Event.KeyEvent.dwControlKeyState = NUMLOCK_ON;
+            record_count = ARRAYSIZE(records);
+        } else {
+            records[0].EventType = KEY_EVENT;
+            records[0].Event.KeyEvent.bKeyDown = TRUE;
+            records[0].Event.KeyEvent.wRepeatCount = 1;
+            records[0].Event.KeyEvent.wVirtualKeyCode = key_code;
+            records[0].Event.KeyEvent.wVirtualScanCode = scan_code;
+            records[0].Event.KeyEvent.uChar.AsciiChar = character;
+            records[0].Event.KeyEvent.dwControlKeyState = control_state;
+            records[1] = records[0];
+            records[1].Event.KeyEvent.bKeyDown = FALSE;
+        }
+        if (!WriteConsoleInputA(input, records, record_count, &written) ||
+            written != record_count) return FALSE;
         Sleep(OBSERVATION_KEY_EVENT_INTERVAL_MS);
         if (character == '\r' && line_delay_ms) Sleep(line_delay_ms);
         if (character == '\r' && report) {
@@ -529,9 +585,9 @@ static BOOL wait_for_console_prompt(HANDLE output, DWORD timeout_ms)
     DWORD begin=GetTickCount();
     do {
         CONSOLE_SCREEN_BUFFER_INFO info;
-        char row[512]; DWORD count=0; SHORT y;
+        char row[1024]; DWORD count=0; SHORT y;
         if(GetConsoleScreenBufferInfo(output,&info) && info.dwSize.X>2 &&
-           info.dwSize.X<(SHORT)sizeof(row)) {
+           info.dwSize.X<=(SHORT)sizeof(row)) {
             /* COMMAND can paint its prompt before the public Console cursor
              * settles on that row.  Identify the same drive-qualified prompt
              * in the visible buffer instead of treating cursor timing as a
@@ -734,6 +790,18 @@ int main(int argc, char **argv)
                     scripted_console_input_text = argv[argument_index];
                     scripted_console_input_sequence = "explicit-observer-text";
                     scripted_console_line_delay_ms = 1500;
+                    continue;
+                }
+                if (strcmp(argv[argument_index],
+                           "--observe-console-line-delay-ms") == 0) {
+                    if (++argument_index >= argc ||
+                        (parsed_timeout_ms = strtoul(argv[argument_index],
+                                                     &timeout_parse_end, 10),
+                         timeout_parse_end == argv[argument_index] ||
+                         *timeout_parse_end != '\0') ||
+                        parsed_timeout_ms > OBSERVATION_TIMEOUT_MAX_MS)
+                        return 68;
+                    scripted_console_line_delay_ms = (DWORD)parsed_timeout_ms;
                     continue;
                 }
                 if (strcmp(argv[argument_index], "--observe-console-edit-return") == 0) {

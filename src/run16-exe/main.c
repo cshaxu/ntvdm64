@@ -19,6 +19,21 @@ BOOL BaseCreateVDMEnvironment(PWCHAR environment, ANSI_STRING *ansi,
                               UNICODE_STRING *unicode);
 BOOL BaseDestroyVDMEnvironment(ANSI_STRING *ansi, UNICODE_STRING *unicode);
 
+static void s34_run16_trace(const char *stage, DWORD value)
+{
+    char path[MAX_PATH],line[96];
+    HANDLE file;
+    DWORD bytes,written;
+    if (!GetEnvironmentVariableA("MVDM_S34_TRACE_PATH",path,sizeof(path))) return;
+    file=CreateFileA(path,FILE_APPEND_DATA,FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,
+        OPEN_ALWAYS,FILE_ATTRIBUTE_NORMAL,NULL);
+    if (file==INVALID_HANDLE_VALUE) return;
+    bytes=(DWORD)sprintf_s(line,sizeof(line),"%lu run16-%s %lu\r\n",
+        (unsigned long)GetCurrentProcessId(),stage,(unsigned long)value);
+    if (bytes) (void)WriteFile(file,line,bytes,&written,NULL);
+    CloseHandle(file);
+}
+
 static BOOL sibling_path(PCWSTR name, PWSTR output, DWORD capacity)
 {
     DWORD length;
@@ -170,6 +185,17 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command)
         goto done;
     }
     GetStartupInfoW(&startup);
+    /* The original BaseCheckVDM accepts either caller-supplied STARTF
+     * standard handles or the process-parameter equivalents.  The public
+     * CLI is itself that CreateProcess-shaped caller.  Modern Terminal may
+     * inherit file/pipe handles without reflecting them in GetStartupInfoW,
+     * while the historical PEB fallback is intentionally not a host PEB
+     * alias.  Publish the inherited stream triple explicitly, without
+     * changing BaseCheckVDM's record or classification policy. */
+    startup.dwFlags |= STARTF_USESTDHANDLES;
+    startup.hStdInput = GetStdHandle(STD_INPUT_HANDLE);
+    startup.hStdOutput = GetStdHandle(STD_OUTPUT_HANDLE);
+    startup.hStdError = GetStdHandle(STD_ERROR_HANDLE);
     if (!BaseCheckVDM(binary, application, command, NULL, &environment, &message, &task, 0, &startup))
     {
         result = GetLastError();
@@ -259,7 +285,16 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command)
     }
     guarded_startup.StartupInfo=startup;
     guarded_startup.StartupInfo.cb=sizeof(guarded_startup);
-    if (!CreateProcessW(worker_path, worker_command.Buffer, NULL, NULL, TRUE,
+    /* The command record owns the stream triple.  Do not also inherit it at
+     * process creation: a persistent worker retaining that duplicate pipe
+     * writer prevents the caller's downstream pipe from observing EOF after
+     * COMMAND exits.  GetNextVDMCommand receives the worker-local, typed
+     * attachments before it starts the guest command. */
+    guarded_startup.StartupInfo.dwFlags &= ~STARTF_USESTDHANDLES;
+    guarded_startup.StartupInfo.hStdInput=NULL;
+    guarded_startup.StartupInfo.hStdOutput=NULL;
+    guarded_startup.StartupInfo.hStdError=NULL;
+    if (!CreateProcessW(worker_path, worker_command.Buffer, NULL, NULL, FALSE,
                         CREATE_SUSPENDED | CREATE_UNICODE_ENVIRONMENT | EXTENDED_STARTUPINFO_PRESENT |
                         (binary == BINARY_TYPE_DOS && task ? CREATE_NEW_CONSOLE : 0),
                         unicode_environment.Buffer, NULL, &guarded_startup.StartupInfo, &worker))
@@ -354,7 +389,7 @@ done:
         (void)TerminateProcess(worker.hProcess, result ? result : ERROR_PROCESS_ABORTED);
         (void)WaitForSingleObject(worker.hProcess, INFINITE);
     }
-    if (reservation)
+    if (reservation && (!prepared || !resumed))
     {
         DWORD release = OpenNtBaseClientReleaseWorker(reservation);
         if (!result && release)
@@ -400,6 +435,7 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
     arguments = CommandLineToArgvW(command, &count);
     if (!arguments)
         return (int)GetLastError();
+    s34_run16_trace("args",(DWORD)count);
     if (count == 1 && !wcscmp(arguments[0], L"--internal-console-probe"))
     {
         LocalFree(arguments);
@@ -491,11 +527,34 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
         binary = BINARY_TYPE_WIN16;
     if (binary)
     {
+        s34_run16_trace("binary",binary);
+        PCWSTR image_name;
         if (!image_resolved &&
             !GetFullPathNameW(image_argument, MAX_PATH, application, NULL))
         {
             result = GetLastError();
             goto done;
+        }
+        image_name=wcsrchr(application,L'\\');
+        image_name=image_name ? image_name+1 : application;
+        /* `/c` receives one command-text argv item from a CreateProcess
+         * caller.  Its outer quotes exist only to preserve that one argv
+         * item through Windows tokenization.  Passing those transport quotes
+         * verbatim makes original COMMAND try to execute `left | right` as
+         * one image name.  For this exact COMMAND /c composite form, rebuild
+         * only the outer argv boundary; COMMAND remains the sole parser and
+         * owner of its <, > and | syntax. */
+        if (binary==BINARY_TYPE_DOS && count==3 &&
+            !_wcsicmp(image_name,L"COMMAND.COM") &&
+            (!_wcsicmp(arguments[1],L"/c") || !_wcsicmp(arguments[1],L"/C")))
+        {
+            if (swprintf_s(normalized_command,ARRAYSIZE(normalized_command),L"%ls %ls %ls",
+                arguments[0],arguments[1],arguments[2])<0)
+            {
+                result=ERROR_FILENAME_EXCED_RANGE;
+                goto done;
+            }
+            launch_command=normalized_command;
         }
         CsrPortHeap = HeapCreate(0, 0, 0);
         if (!CsrPortHeap)
@@ -542,6 +601,7 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
     }
     HeapFree(GetProcessHeap(), 0, childCommand);
 done:
+    s34_run16_trace("exit",result);
     LocalFree(arguments);
     return (int)result;
 }
