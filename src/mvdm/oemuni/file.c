@@ -625,7 +625,7 @@ Routine Description:
        using OEM bytes and the caller's actual capacity. */
     if ( nBufferLength >= RtlUnicodeStringToOemSize(Unicode) ) {
         OemString.Buffer = lpBuffer;
-        OemString.MaximumLength = (USHORT)nBufferLength;
+        OemString.MaximumLength = (USHORT)min(nBufferLength,65535);
         Status = RtlUnicodeStringToOemString(&OemString,Unicode,FALSE);
         if ( !NT_SUCCESS(Status) ) {
             BaseSetLastNTError(Status);

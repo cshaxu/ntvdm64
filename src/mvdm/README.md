@@ -6,6 +6,14 @@ required OEM bytes before conversion. Search returns converted byte length
 and prefix offset. Original owner conversion and resource cleanup remain.
 Volume-name and filesystem-name conversion likewise retain actual capacity;
 original conversion failure and finally cleanup handle insufficient space.
+Directory/search temporary Unicode storage is sized by its own full query,
+not the OEM caller's capacity. Query growth/failure and unrepresentable
+lengths fail before conversion; representable output capacity is saturated
+at the original USHORT limit instead of wrapping.
+Directory/search temporary Unicode storage is sized by its own full query,
+not the OEM caller's capacity. Query growth/failure and unrepresentable
+lengths fail before conversion; representable output capacity is saturated
+at the original USHORT limit instead of wrapping.
 [S37 evidence](../../docs/etc/evidence/m0-t420-s37-oemuni-capability-review.md).
 
 MVDM-HOST-DIV-274: `oemuni/file.c::GetFullPathNameOem` applies the original

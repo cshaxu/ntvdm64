@@ -373,10 +373,10 @@ packets remain supporting evidence, not per-interface hits.
 | OutputDebugStringOem | DEM diagnostics including demmisc | H call; debug-only consumers do not establish ordinary guest behavior |
 | GetComputerNameOem | DEM demgset | G INT21 5E00 name matched to host; H |
 | RemoveFontResourceOem | DEM demfile create-failure fallback; WOW wkman | H absent-font failure only; positive original callback contract pending |
-| GetSystemDirectoryOem | No production textual consumer found | H/M linked helper; tiny intermediate-buffer contract still open |
-| GetWindowsDirectoryOem | No production textual consumer found | H/M linked helper; tiny intermediate-buffer contract still open |
-| SearchPathOem | COMMAND cmdpif | H/M byte count/prefix/exact capacity; tiny intermediate query still open |
-| GetTempPathOem | No production textual consumer found | H/M; tiny intermediate query still open |
+| GetSystemDirectoryOem | No production textual consumer found | H/M complete-query size matrix and failure cleanup |
+| GetWindowsDirectoryOem | No production textual consumer found | H/M complete-query size matrix and failure cleanup |
+| SearchPathOem | COMMAND cmdpif | H/M byte count/prefix, complete-query size matrix and failure cleanup |
+| GetTempPathOem | No production textual consumer found | H/M complete-query size matrix and failure cleanup |
 | GetTempFileNameOem | WOW wkman | H create/delete; no WOW workload acceptance |
 | GetEnvironmentVariableOem | COMMAND cmdenv/cmdmisc; WOW wdos | H non-ASCII/missing; caller-specific guest witness pending |
 | SetEnvironmentVariableOem | DEM demdir; COMMAND cmdpif/cmdmisc; WOW wdos | H set/delete; caller-specific guest witness pending |
@@ -482,3 +482,45 @@ old-capacity use and is not approved for blind copying. The next correction
 must preserve the original query/conversion/cleanup owner, validate the full
 intermediate result and prevent narrowing; no fixed small-buffer workaround
 or fabricated success is accepted. These 17 failures remain active S37 work.
+
+## Complete-query recovery and capacity-matrix repair
+
+DIV-275 now separates intermediate Unicode capacity from caller OEM capacity
+in system/Windows/temp/search queries. The original query, allocation,
+conversion and cleanup remain in their original functions. A zero-capacity
+Unicode query obtains the required full size; the original heap allocation
+uses that size and the second query is checked before any USHORT assignment
+or conversion. This follows original BaseClient SearchPathA's complete-result
+principle without copying its ANSI policy or importing the whole client.
+The system-directory originals use an already complete Base global Unicode
+string; standalone obtains the same complete input through their public W
+query. The historical temp retry's stale capacity is not copied.
+
+The original UNICODE_STRING byte carrier limits complete input to 32767
+WCHARs including NUL. Larger requirements fail with the existing overflow
+status, rather than wrapping. A second query that fails retains its error;
+growth beyond the queried capacity fails with overflow instead of consuming
+an uninitialized path. Existing allocations are always released. Output
+MaximumLength uses min(caller capacity,65535), preserving the original
+descriptor representation without turning a valid large output into zero.
+No fixed path-sized workspace, retry loop, new adapter/provider, external
+intrusion or new mirror file is introduced.
+
+The previous 17 failures are now repaired: all 30 CP932 capacity cases pass,
+including 0/1/10/11 required-size queries and 12/65536 successful output.
+Sixteen additional cases cover four queried APIs with growth, second-query
+ERROR_NOT_READY, unrepresentable Unicode requirement and allocation failure.
+Each asserts zero result, exact error, untouched caller sentinel and zero
+remaining temporary allocations. All four OEMUNI fixture executables pass;
+these are boundary mocks, not a real CP932 system run.
+
+Formal x86 product rebuild succeeds. Mirror change in this delivery is
+file.c 1 added / 1 removed line and process.c 50 added / 26 removed lines;
+no overlay or adapter implementation is added. Latest deployed worker hash:
+`dd4d4c42b7e1fe3dca9391b8eb5ab2657cc2db767c78314de75de6418a4940fa`;
+DLL hash `77d15a95a790fe3f1c7eb71ae0de9bc06f475c46fae8ce35268958f4be467708`.
+Expanded real DOS file/directory/FCB/computer-name direct and nested routes
+pass under s37-query-guest-r1. Remaining font/caller and other API boundary
+review still belongs to S37; this is not full package closure.
+All 17 Console-text-gated product regressions pass under
+s37-query-product-r1, including EDIT and expected original COMMAND exits.

@@ -13,6 +13,9 @@ static ULONG NTAPI fixed_path(PCWSTR input, ULONG bytes, PWSTR output, PWSTR *pa
 {
     ULONG size = sizeof(full_path);
     (void)input;
+    if (path_mode == 4 && bytes) return size + sizeof(WCHAR);
+    if (path_mode == 5 && bytes) { SetLastError(ERROR_NOT_READY); return 0; }
+    if (path_mode == 6) return 32768 * sizeof(WCHAR);
     if (path_mode == 1) return 0;
     if (path_mode == 2) return (MAX_PATH + 1) * sizeof(WCHAR);
     if (bytes < size) return size;
@@ -68,10 +71,12 @@ static DWORD WINAPI fixed_temp(DWORD chars, LPWSTR output)
     return fixed_directory(output, chars);
 }
 
-static int volume_failure, outstanding;
+static int volume_failure, outstanding, fail_allocation;
 static PVOID NTAPI counted_alloc(PVOID heap, ULONG flags, SIZE_T size)
 {
-    PVOID p = RtlAllocateHeap(heap, flags, size);
+    PVOID p;
+    if (fail_allocation) return NULL;
+    p = RtlAllocateHeap(heap, flags, size);
     if (p) ++outstanding;
     return p;
 }
@@ -207,9 +212,25 @@ int main(void)
                     names[api], cap, actual, wanted, GetLastError(), valid ? "PASS" : "FAIL");
             }
         }
-        /* Diagnostic baseline, not package acceptance. */
-        if (!mismatches) return 22;
-        printf("S37_SIZE_MATRIX_OPEN_DEFECTS=%u NOT_ACCEPTED\n", mismatches);
+        if (mismatches) return 22;
+        puts("S37_SIZE_MATRIX_ALL_30_PASS");
+        for (path_mode = 4; path_mode <= 7; ++path_mode) {
+            for (api = 1; api < 5; ++api) {
+                DWORD error = path_mode == 5 ? ERROR_NOT_READY :
+                    path_mode == 7 ? ERROR_NOT_ENOUGH_MEMORY : ERROR_MORE_DATA;
+                fail_allocation = path_mode == 7;
+                memset(output, 0x5a, sizeof(output));
+                SetLastError(0);
+                switch (api) {
+                case 1: actual = GetSystemDirectoryOem(output, 12); break;
+                case 2: actual = GetWindowsDirectoryOem(output, 12); break;
+                case 3: actual = GetTempPathOem(12, output); break;
+                default: actual = SearchPathOem(NULL, "x.txt", NULL, 12, output, NULL); break;
+                }
+                if (actual || GetLastError() != error || output[0] != 0x5a || outstanding) return 23;
+            }
+        }
+        puts("S37_QUERY_GROWTH_FAILURE_OVERSIZE_ALLOCATION_CLEANUP_OK");
     }
     return 0;
 }

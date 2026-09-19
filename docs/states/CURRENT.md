@@ -63,10 +63,11 @@ Real two-file FCB wildcard deletion, no-match failure and host-matched DOS
 computer-name queries now pass direct/nested too. Font fallback proof and
 intermediate-buffer/narrowing cases are explicitly
 retained in S37; linking or host-only tests do not close those rows.
-The six-capacity/five-interface CP932 matrix quantifies 17 failing cases:
-intermediate Unicode character counts escape as OEM requirements, and
-65536-byte capacities wrap through USHORT. Original BaseClient retry/size
-flows are located for recovery; this diagnostic is not an acceptance pass.
+The six-capacity/five-interface CP932 matrix now passes all 30 cases after
+complete Unicode query sizing and safe descriptor-capacity saturation.
+Sixteen growth/provider-failure/oversize/allocation-failure cleanup cases
+also pass. Real expanded DOS direct/nested routes pass; remaining font and
+other caller/API-boundary review keeps S37 active.
 
 ## S36 Closure Record
 
