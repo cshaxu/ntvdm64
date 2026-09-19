@@ -863,3 +863,79 @@ Production footprint for this repair is nt_pif.c +3/-1, nt_msscs.c +2/-1,
 and the existing worker boundary +16 implementation lines/+4 declarations;
 there is no overlay. Tracked nt_msscs.c LF is restored before delivery,
 avoiding a format-only whole-file diff. Both governance gates pass.
+
+## Fresh pure-DOS comparison and current-source environment witness
+
+Question: does the failed pure-DOS control implicate the S37 OEM/PIF repair,
+or does this exact input reach the previously accepted immutable-guest defect?
+The comparison uses the same classic observer from S34/nested-console-observer-r1,
+`run16.exe tests\P30.COM`, a 15000 ms observation limit, ordinary inherited
+environment, and no pre-existing package processes. Each historical comparison
+replaces all five package artifacts together; the current five are retained in
+S37/pure-baseline-compare-r1 and restored afterward. Only children of the exact
+recorded test launcher are terminated. No guest input or environment policy is
+changed between package selections.
+
+Input SHA-256:
+
+- P30.COM: `706b0e5297624e5bc5d3ab3f4789b2d7f6fed3838ed6ddceebd799fe2cc00682`.
+- P30.PIF: `1e2ab254d79d548316ce29ff995b20d93a09c8daf9010a5bc9cf6ecea9be10af`.
+- P30.NT (`files=20`): `f9a6eb29dbde8837465d934508bc654704a8e989b391947faa8bbb30ed6a87dc`.
+- P30AUTO.NT (`@echo off`): `c134b2f85415ba5cfce3e3fe4745688335745a9bb22152ac8f5c77f190d8aee3`.
+- Original COMMAND.COM, deployed and mirrored:
+  `908a77ac617c2d741f0aa1b73f73973dcf29adc91f092e5bcb02173c8c732c43`.
+
+| Package | Runtime log prefix | Observation |
+| --- | --- | --- |
+| S30/formal-x86-r2, worker `8148dde31b9b4a5296f77da358df0ae3329e840a9200796738667a4877e6fee8` | s37-pure-s30-package-r1 | Exit 0 and S30_PURE_DOS_OK. |
+| S35/formal-native-wait-r2, worker `568292e2640d82cd8c5a542b489bc291e0decefe70a063be3aa3e0651f5853e2` | s37-pure-s35-package-r1 | Timeout; blank guest transcript. |
+| Current formal worker `d7427a75...9637d` | s37-pure-current-console-r1 | Timeout; blank guest transcript. |
+
+The current ConPTY control `s37-pure-clean-r1.raw` also lacks the required
+marker. The S35 classic failure establishes that this symptom predates S37;
+it does not by itself explain why the S30 package passes. A report-reader typo
+after the S35 run omitted `.txt` from the console filename; the actual retained
+`s37-pure-s35-package-r1.txt.console.txt` contains only buffer geometry.
+The finally block still restored the current package and verified its hash.
+
+The existing diagnostic includes the unchanged current cmdenv.c and surrounds
+only cmdGetInitEnvironment with read-only leases. Its new compile-time log-path
+option keeps this run separate from historical S35 logs without injecting any
+guest or host environment variable. The build script restricts that path to
+the runtime logs directory. Default historical behavior is unchanged; the
+formal product graph does not select this wrapper.
+
+Command: `Build-T420S35EnvironmentTrace.ps1 -FormalRoot
+build/M0-T420/S36/original-callback-product-r1 -BuildRoot
+build/M0-T420/S37/pure-environment-trace-r1 -EnvironmentTraceLog
+O:/winnt/logs/s37-pure-envtrace-r1.events.txt`. Its reused-inputs.json hashes
+every reused formal input. The x86 diagnostic links successfully, SHA-256
+`3541ac41cd36eee16c98d6522e53769b7015c18597814393cfc95254855d093b`.
+
+The identical P30 workload records:
+
+| Boundary | DS | ES | BX | EnvSiz | MCB owner / paragraphs | Contains EnvSiz |
+| --- | --- | --- | --- | --- | --- | --- |
+| First entry | 0BF4 | 0D22 | 0010 | 0010 | 0BF4 / 0010 | No |
+| First return | 0BF4 | 0D22 | 0119 | 0010 | 0BF4 / 0010 | No |
+| Second entry | 0BF4 | 0D22 | 0119 | 0119 | 0BF4 / 0119 | Yes |
+| Second return | 0BF4 | 0D22 | 0119 | 3B48 | 0BF4 / 0119 | Yes |
+
+The environment allocation `[0D220,0E3B0)` contains the discarded INIT
+variable at `DS:203C = 0DF7C`. The original in-bounds copy overwrites EnvSiz;
+the next original comparison of BX with EnvSiz must mismatch. Original
+command.map and rdata.asm::EndInit identify that offset and the subsequent
+branch to INIT-resident Alloc_error. This is direct evidence that this exact
+current pure-DOS workload reaches the already documented guest lifetime bug,
+not merely a similar timeout. The diagnostic exits zero without the required
+guest marker: still a failed workload, never a successful acceptance result.
+No environment contents are logged, and no guest byte is patched.
+
+Current formal artifacts are restored afterward. This delivery adds no product
+or mirror diff, no overlay and no workaround. The historical S30 success is
+not evidence that the guest defect is absent: its different execution/layout
+still needs attribution before claiming a complete historical explanation.
+S37 remains open for that reconciliation and the remaining caller ledger.
+The restored formal package passes all 17 transcript-gated COMMAND/MEM/EDIT
+regressions under `s37-pure-post-restore-r1`. Those default-profile passes do
+not turn the pure-DOS failure into a pass.

@@ -1,7 +1,8 @@
 [CmdletBinding()]
 param([Parameter(Mandatory)][string]$FormalRoot,
       [Parameter(Mandatory)][string]$BuildRoot,
-      [ValidateSet('environment','dpmi')][string]$Boundary = 'environment')
+      [ValidateSet('environment','dpmi')][string]$Boundary = 'environment',
+      [string]$EnvironmentTraceLog = 'O:\winnt\logs\s35-envtrace-r1.events.txt')
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path "$PSScriptRoot\..\..").Path
 $formal = (Resolve-Path $FormalRoot).Path
@@ -11,6 +12,13 @@ if (!$build.StartsWith("$repo\build\", [StringComparison]::OrdinalIgnoreCase) -o
 New-Item -ItemType Directory $build | Out-Null
 $graph = Get-Content (Join-Path $formal 'build.ninja')
 $flags = ($graph | Where-Object { $_.StartsWith('cflags = ') }).Substring(9).Replace('$:', ':')
+if ($Boundary -eq 'environment') {
+    $traceLog = [IO.Path]::GetFullPath($EnvironmentTraceLog).Replace('\', '/')
+    if ($traceLog -notmatch '^O:/winnt/logs/[A-Za-z0-9_.-]+$') {
+        throw 'Environment trace must name a file directly below O:\winnt\logs'
+    }
+    $flags += ' /DS35_ENVIRONMENT_TRACE_LOG=\"' + $traceLog + '\"'
+}
 $memberName = 'obj/command/cmdenv.obj'
 $libraryName = 'original-mvdm-command.lib'
 $traceSource = 'command_environment_trace.c'

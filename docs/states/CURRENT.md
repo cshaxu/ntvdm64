@@ -32,20 +32,12 @@ retains the complete chronology and 28 compiled-function caller ledger;
 original #if-0 CreateProcessOem is excluded. DIV-273 repairs environment
 expansion's missing OEM output copy and failure cleanup. Host fixtures and
 real direct/nested DOS probes pass; no full WOW/DBCS-host acceptance is claimed.
-A test-only CP932 boundary reproduces original GetFullPathNameOem using
-Unicode character counts for OEM byte length/copy and file-part offset.
-The original BaseClient DBCS correction supplies the fix: existing OEM RTL
-size operations now govern path and prefix bytes (DIV-274). All four x86
-OEMUNI fixtures and direct/nested real OEM437 file routes pass. CP932 remains
-mocked boundary evidence; remaining family/consumer review keeps S37 open.
-The adjacent CP932 sweep reproduces five original n+1 capacity violations
-(current/search/system/Windows/temp paths), plus SearchPath length/prefix
-errors. DIV-275 now corrects those reproduced branches as a group; four x86
-fixtures and real direct/nested OEM file routes pass. Intermediate-Unicode
-short-buffer and narrowing review remain open within S37. Volume-name and
-filesystem-name n+1 capacities are now also corrected: both short-output
-failures, exact outputs, omitted outputs and host failure prove original
-cleanup with zero temporary allocations left.
+DIV-274 applies the original BaseClient DBCS byte-sizing correction to full
+paths and file-part offsets. DIV-275 repairs reproduced capacity/length
+violations in current/search/system/Windows/temp and volume/filesystem names.
+The linked chronology retains each fixture, failure, cleanup and real OEM437
+direct/nested result. CP932 remains mocked boundary evidence, not real-host
+DBCS acceptance; remaining family/consumer review keeps S37 open.
 The linked review now reconciles all 28 compiled entries against source
 consumers and G/H/M evidence. Real direct/nested non-ASCII directory switch,
 restoration, file/subdirectory deletion and disk/drive queries now pass.
@@ -81,6 +73,13 @@ and fixes LIM's undersized output buffer. Fresh-worker ASCII/OEM PIF rows,
 seven native fixtures and real DOS direct/nested probes pass. Earlier PIF
 runs had retained workers and cannot establish an isolated A/B; pure-DOS
 controls require a fresh-worker rerun before attributing any failure.
+Fresh classic-Console controls pass with S30 but fail with both S35 and current
+packages, locating the symptom before S37. A current-source read-only trace
+proves P30 reaches the registered COMMAND INIT defect: its environment copy
+overwrites discarded EnvSiz from 0119 to 3B48 inside the valid allocation.
+The diagnostic's zero exit without a guest marker is not a pass. Current formal
+artifacts are restored; the S30 layout difference and final caller reconciliation
+remain open. No guest workaround or additional product diff is introduced.
 
 ## S36 Closure Record
 

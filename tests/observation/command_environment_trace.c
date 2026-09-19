@@ -5,6 +5,10 @@
 #include "../../src/mvdm/dos/command/cmdenv.c"
 #undef cmdGetInitEnvironment
 
+#ifndef S35_ENVIRONMENT_TRACE_LOG
+#define S35_ENVIRONMENT_TRACE_LOG "O:\\winnt\\logs\\s35-envtrace-r1.events.txt"
+#endif
+
 static void s35_environment_snapshot(FILE *log, const char *phase)
 {
     mvdm_guest_location location;
@@ -33,7 +37,7 @@ static void s35_environment_snapshot(FILE *log, const char *phase)
 
 VOID cmdGetInitEnvironment(VOID)
 {
-    FILE *log = fopen("O:\\winnt\\logs\\s35-envtrace-r1.events.txt", "a");
+    FILE *log = fopen(S35_ENVIRONMENT_TRACE_LOG, "a");
     if (log) s35_environment_snapshot(log, "before");
     s35_original_GetInitEnvironment();
     if (log) { s35_environment_snapshot(log, "after"); fclose(log); }
