@@ -2,6 +2,7 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T420 S31 debug capability closure](evidence/m0-t420-s31-debug-capability-closure.md) | M0 T420 S31 | Complete original `/DPROD` debug-package disposition, bounded release trace-gate repair, formal x86 and text-gated product regression evidence. | Retain through T420 package completion. |
 | [T420 S30 DOS profile and host-medium closure](evidence/m0-t420-s30-dos-profile-host-medium-closure.md) | M0 T420 S30 | Complete default/PIF profile, EMS, COM/LPT and test-only original-provider lifecycle disposition, with external COM peer boundary retained separately. | Retain through T420 package completion. |
 | [T420 S30 external COM boundary](evidence/m0-t420-s30-external-com-boundary.md) | M0 T420 S30 | Records the retained original serial path, exhaustive current-host audit and exact hardware/provider condition for deferred external COM TX/RX acceptance. | Retain until the TODO is verified or explicitly retired. |
 | [T420 S29 communications capability closure](evidence/m0-t420-s29-comms-capability-closure.md) | M0 T420 S29 | Complete selected COM/LPT manifest, real guest no-medium error/recovery and LPT table acceptance, plus formal/package regression. | Retain through T420 package completion. |

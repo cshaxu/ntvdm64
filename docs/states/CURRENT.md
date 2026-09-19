@@ -4,24 +4,24 @@
 
 ## Active Packet
 
-**Active: M0 T420 S31**
+**Active: M0 T420 S32**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T420 S31 — Ordinary Mode. |
-| Candidate Proposal | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md) S31. |
-| Admission And Approval | S30 reopened verification closed at `1a2aea873`; owner standing authorization admits the next sequential S. |
-| Objective | Close the complete selected `softpc.new/base/debug` capability unit by proving the original release-profile exclusion or every actually selected debug initialization, trace/backtrace and event path. |
-| Non-goals | No activation of an internal Yoda/debugger shell in the ordinary product, no private NT4 debugger/CSR transport, no CPU30/kernel monitor revival and no duplicate `mvdm/dbg` work. |
-| Reference Baseline | S11 recovered all eight original debug sources. The current formal x86 graph links them with original `/DPROD`; S31 must prove the complete resulting profile boundary rather than infer runtime capability from linkage. |
-| Files And ABI Surface | Freeze the eight-source `softpc.new/base/debug` manifest, its `PROD` gates, all selected worker callers and their startup/error/teardown behavior. |
-| Applicable Rules | Project design/rules, source policy, strict mirror rule, CCPU40-only product rule, original-owner recovery and transcript-gated acceptance. |
-| Verification | Audit every source-level feature gate and selected caller, establish a release-profile compile/link witness, exercise any externally controllable debug gate, then pass fresh formal x86 and established direct/interactive COMMAND/MEM/EDIT regressions. |
-| Expected Markers | Every debug source is classified as original live selected behavior or complete original release exclusion; no dormant alternate debugger/trace body is misrepresented as active, and no ordinary workload regresses. |
-| Asset Needs | Pinned OpenNT debug union, current build graph/map, selected runtime artifacts, test-only build roots and `O:\winnt` runtime/log roots. |
-| Reporting Requirements | Record source hashes, each `PROD`/feature gate, caller-to-disposition map, compile/link evidence, externally controllable gate result, mirror delta and regression results. |
-| Stop Conditions | A reached non-PROD-only body requires an unapproved debugger transport, an original profile gate has ambiguous selection, or established workload regresses. |
-| Exit Criteria | All eight selected units and their reachable caller edges have an original-profile disposition; formal x86 and established regressions pass; evidence/index/status updated; reviewed P pushed. |
+| Identifier Mode | M0 T420 S32 — Ordinary Mode. |
+| Candidate Proposal | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md) S32. |
+| Admission And Approval | S31 closed with formal and product evidence; owner standing authorization admits the next sequential S. |
+| Objective | Close the complete selected `softpc.new/host/src` capability unit: original worker startup, Console, host-provider and normal/abnormal lifecycle behavior. |
+| Non-goals | No new broker policy, no replacement CPU core, no non-product debug transport and no duplicate adapter lifecycle implementation. |
+| Reference Baseline | S12 recovered the original host source package; S31 has fixed the settled release-debug profile that this worker must consume. |
+| Files And ABI Surface | Selected original host manifest, original `obj.vdm/ntvdm.c` entry, worker-local pre-init/cleanup bindings, Console ownership and host process/thread lifetime. |
+| Applicable Rules | Project design/rules, source policy, strict mirror rule, original-owner recovery and transcript-gated acceptance. |
+| Verification | Establish source/caller ownership, formal x86 compile/link evidence, direct worker lifecycle witnesses and the established direct/interactive COMMAND/MEM/EDIT regressions. |
+| Expected Markers | Every selected host unit is live with an original owner or a proven profile exclusion; startup, Console and normal/abnormal teardown do not leak worker state. |
+| Asset Needs | Pinned OpenNT host union, current product maps, worker lifecycle fixtures and `O:\winnt` runtime/log roots. |
+| Reporting Requirements | Record source hashes, selected entry/caller graph, binding disposition, lifecycle/Console observations, mirror delta and regression results. |
+| Stop Conditions | A reached host body needs an unapproved system service, lifecycle ownership is ambiguous, or an established workload regresses. |
+| Exit Criteria | Every selected host unit has an original-owner disposition; formal x86 and lifecycle/product regressions pass; evidence/index/status updated; reviewed P pushed. |
 | Original Owner Request | Standing automatic sequential S authorization for the T420 whole-package capability sequence. |
 | Similar-Issue Sweep | Audit all debug macros, exported globals and selected host/CCPU callers for accidental non-PROD activation, duplicate debugger ownership, trace-file lifetime leaks or externally controllable release gates. |
 
@@ -117,18 +117,18 @@ recorded absence of a CTS-capable external peer is unchanged and may not be
 turned into a product-side substitute. See the S30 closure evidence's
 2026-09-18 reopened-verification record.
 
-## S31 Progress
+## S31 Closure Record
 
-Admission complete. The formal graph has been reconfirmed to compile all eight
-original debug translation units with `/DPROD`. S31 is tracing all `PROD` and
-feature gates, their reachable CCPU/host callers, and the externally controllable
-`CCPU_SHOW_EXCEPTIONS` path before it calls the release profile complete. The
-first source-proven repair is DIV-271: release `trace_file` remains the
-original zero-initialized common symbol, so the production profile now makes
-that non-product environment gate inert rather than reaching `fprintf(NULL)`.
-The fresh formal x86 five-artifact build and 27-case source-shaped exception
-fixture pass; runtime deployment waits until it cannot overwrite a live user
-worker package.
+The complete original eight-source debug manifest is byte-identical to pinned
+OpenNT and selected into the formal archive. `/DPROD` excludes all interactive
+debug/trace implementations; original `force_yoda` resolves to the CCPU stub.
+The sole source-proven release fault was `CCPU_SHOW_EXCEPTIONS`: it could send
+the product into `fprintf(NULL)` after the original production profile left
+`trace_file` unbound. DIV-271 makes only that non-product environment switch
+inert. Formal x86, 27 current-source exception cases, an environment-enabled
+real `FAULT.EXE`, and all 17 text-gated COMMAND/MEM/EDIT routes passed.
+
+[T420 S31 debug capability closure](../etc/evidence/m0-t420-s31-debug-capability-closure.md)
 
 ## S1 Closure Record
 
