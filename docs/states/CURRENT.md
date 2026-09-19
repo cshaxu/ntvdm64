@@ -4,32 +4,31 @@
 
 ## Active Packet
 
-**Active: M0 T420 S25**
+**Active: M0 T420 S26**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T420 S25 — Ordinary Mode. |
-| Candidate Proposal | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md) S25. |
-| Admission And Approval | Owner corrected the T420 sequence and directed admission of S25 after S24; the standing authorization admits sequential S packets within T420. |
-| Objective | Close the complete selected `softpc.new/base/keymouse` capability unit with real keyboard-controller/modifier and mouse INT 33h callback/teardown evidence. |
-| Non-goals | No Console replacement, cursor/text presentation change, CCPU executor change, new mouse provider, WOW work, or unrelated DLL reorganization. |
-| Reference Baseline | S5 restored the complete five-file original package and recorded Console mouse stages; that source/build recovery is input only, not complete real-capability acceptance. |
-| Files And ABI Surface | Freeze `keyba.c`, `keybd_io.c`, `mouse.c`, `mouse_io.c`, `ppi.c`; original keyboard controller ports, INT 16h/33h, callback frame, PIC and worker teardown interfaces. |
+| Identifier Mode | M0 T420 S26 — Ordinary Mode. |
+| Candidate Proposal | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md) S26. |
+| Admission And Approval | Owner corrected the T420 sequence to make S21--S39 sequential capability closures and authorized automatic sequential S admission; S25 is closed by its indexed evidence. |
+| Objective | Close the complete selected `softpc.new/base/bios` capability unit with real BIOS services, RTC/EMS and selected device/error-service acceptance. |
+| Non-goals | No new firmware media, CPU30/kernel monitor revival, guest-media mutation, emulator replacement, WOW work, or unrelated Console redesign. |
+| Reference Baseline | S6 restored the full fourteen-file original BIOS manifest and S24 has already proven only the system-side RTC/ROM provider boundary; neither establishes the BIOS guest-service and error lifecycle. |
+| Files And ABI Surface | Freeze `bios.c`, `cmos_bis.c`, `cntlbop.c`, `emm_fncs.c`, `reset.c`, `rom_basc.c`, `rtc_bios.c`, `slave_bs.c`, `tape_io.c`, `equipmnt.c`, `ill_bop.c`, `build_id.c`, `virtual.c`, `mem_size.c`; INT 11h/12h/13h/15h/1Ah, BOP, EMS, RTC and reset interfaces. |
 | Applicable Rules | Project design/rules, source policy, strict mirror rule, CCPU40-only product rule, original-owner recovery and transcript-gated acceptance. |
-| Verification | Build a tracked normal/failure/cleanup matrix: real guest keyboard/modifier paths, mouse INT 33h reset/show/range/position/callback and callback removal/worker teardown; run fresh formal x86 linkage and direct plus interactive COMMAND/MEM/EDIT regressions. |
-| Expected Markers | Every selected capability is real guest pass, source-proven no selected caller, or owner-approved exclusion; no fabricated input success, duplicate mouse state or stale callback remains. |
-| Asset Needs | Pinned OpenNT keymouse union, S5 recovery evidence, existing Console observer, test-only guest fixtures under `build/`, and `O:\winnt` runtime package/log roots. |
-| Reporting Requirements | Record source hashes, controller/callback/provider map, exact guest transcripts and failure/teardown observations, retained finite bindings, mirror/adapter delta and all regression results. |
-| Stop Conditions | A required CPU30/kernel dependency, second keyboard/mouse state owner, guest-media mutation, non-source-shaped input injection, or COMMAND/MEM/EDIT regression pauses for renewed owner direction. |
-| Exit Criteria | Every selected keymouse family has real evidence or a source-proven/approved disposition; original ownership is preserved; fresh x86, package-local positive/negative/teardown matrix and established regressions pass; evidence/index/status updated; reviewed P pushed. |
-| Original Owner Request | “我们应该要准入S25了是吧？” together with the owner’s correction that T420 S21--S39 are sequential capability closures. |
-| Similar-Issue Sweep | Audit all selected controller, modifier, mouse callback and teardown paths for stale callback offsets, duplicate input state, mismatched down/up pairing and fake Console-success handling. |
+| Verification | Build a tracked normal/failure/cleanup matrix covering each selected BIOS service family, then run fresh formal x86 linkage and direct plus interactive COMMAND/MEM/EDIT regressions. |
+| Expected Markers | Every selected BIOS family is a real guest pass, source-proven no selected caller, or owner-approved exclusion; no invented firmware/device provider or stale reset/EMS state remains. |
+| Asset Needs | Pinned OpenNT BIOS union, S6/S24 evidence, immutable existing guest media, test-only guest fixtures under `build/`, and `O:\winnt` runtime/log roots. |
+| Reporting Requirements | Record source hashes, service-to-owner/provider map, exact guest transcripts, error/cleanup observations, retained finite bindings, mirror/adapter delta and all regression results. |
+| Stop Conditions | A required new firmware/floppy medium, CPU30/kernel dependency, guest-media mutation, duplicate BIOS state owner, or COMMAND/MEM/EDIT regression pauses for renewed owner direction. |
+| Exit Criteria | Every selected BIOS family has real evidence or a source-proven/approved disposition; original ownership is preserved; fresh x86, package-local positive/negative/teardown matrix and established regressions pass; evidence/index/status updated; reviewed P pushed. |
+| Original Owner Request | “继续执行。” following the standing automatic sequential S authorization and the corrected S21--S39 T420 sequence. |
+| Similar-Issue Sweep | Audit selected reset, RTC, EMS, BOP and error endpoints for duplicate device state, guest-media substitution, stale callback/vector state and fake success. |
 
-## S25 Progress
+## S26 Progress
 
-Admission complete. S25 begins by freezing the five-file manifest and auditing
-the existing Console observer against the original INT 16h/33h and teardown
-paths; no source behavior has yet changed.
+Admission complete.  S26 starts with a whole-manifest source/caller and
+existing-evidence audit.  No BIOS product behavior has changed.
 
 ## S1 Closure Record
 
@@ -244,6 +243,14 @@ records a fresh formal x86 link/deployment. The direct interactive
 `COMMAND -> MEM -> EDIT -> MEM` regression is gated on the guest transcript,
 including both MEM reports and absence of command-resolution failure.
 
+## S25 Closure Record
+
+[T420 S25 keymouse capability closure](../etc/evidence/m0-t420-s25-keymouse-capability-baseline.md)
+closes the complete selected keymouse capability unit.  It adds no production
+code: three formal-package guest runs prove PPI, keyboard/modifier, INT 33
+callback move/down/up and disable teardown, followed by deployed COMMAND/MEM/
+EDIT regressions.
+
 ## Current Technical Baseline
 
 - Product package: Win32/x86 CCPU40 `run16.exe`, `basesrv.exe`, `ntvdm.exe`,
@@ -273,8 +280,3 @@ records the accepted task-manager delivery and its evidence boundary.
 ## Recent Governance
 
 No standalone governance delivery is active or pending.
-
-## Next Work
-
-T420 has no active S packet. Its S1--S24 selected-package and capability
-closures are recorded above; a new scoped packet requires a new owner request.

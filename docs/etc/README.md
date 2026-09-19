@@ -2,6 +2,7 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T420 S25 keymouse capability closure](evidence/m0-t420-s25-keymouse-capability-baseline.md) | M0 T420 S25 | Real guest keyboard/modifier, PPI, INT 33 callback and teardown evidence on the formal x86 package. | Retain through T420 package completion. |
 | [T420 S24 system capability baseline](evidence/m0-t420-s24-system-capability-baseline.md) | M0 T420 S24 | Selected system manifest, real DOS guest device witness and remaining closure limits. | Retain through T420 package completion. |
 | [T420 S23 selected video capability baseline](evidence/m0-t420-s23-video-capability-baseline.md) | M0 T420 S23 | Freezes the selected 19-source video manifest, normalized mirror-diff cohorts and writer-to-memory-to-Console acceptance matrix. | Retain through T420 package completion. |
 | [T420 S22 C-VID capability baseline](evidence/m0-t420-s22-cvidc-capability-baseline.md) | M0 T420 S22 | Freezes current-graph accessor, vector-owner and short-consumer baseline before complete C-VID capability closure. | Retain through T420 package completion. |
