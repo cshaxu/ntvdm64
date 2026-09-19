@@ -84,8 +84,9 @@ VOID GetPIFConfigFiles(BOOL bConfig, char *pchFileName)
        if (!dw || dw > MAX_PATH+12) {
            *pchFileName = '\0';
            }
-       free(*ppch);
-       *ppch = NULL;
+       /* DIVERGENCE(MVDM-HOST-DIV-157): CCPU LIM initialization and DOS
+        * boot both read this path. Retain it until the next PIF selection
+        * (or process exit), rather than consuming it on the first read. */
        }
 }
 
@@ -278,6 +279,9 @@ if (!strcmp(exthdr.extsig, STDHDRSIG))
 	     */
 	     if (!pd->IgnoreConfigAutoexec)
 		{
+		/* DIVERGENCE(MVDM-HOST-DIV-157): replace the retained paths. */
+		free(pchConfigFile);
+		free(pchAutoexecFile);
 		pchConfigFile = ch_malloc(PIFDEFPATHSIZE);
 		extWNT.nt31Prop.achConfigFile[PIFDEFPATHSIZE-1] = '\0';
 		if (pchConfigFile) {

@@ -25,6 +25,25 @@
 | Original Owner Request | Standing automatic sequential S authorization for the T420 whole-package capability sequence. |
 | Similar-Issue Sweep | Audit all XMS callback declarations, direct pointer casts, move/overlap copies, A20/UMB/INT15 callers and worker cleanup paths for duplicate policy, stale x64 seams, or host-only success shortcuts. |
 
+## S35 In-progress Evidence
+
+The real guest XMS fixture passes allocation, move, forward overlap,
+reallocation, locking, A20, free/reuse and representative errors. The separate
+PIF test reaches its AUTOEXEC marker but returns zero for `/INT15=128` and no
+free UMBs. This is not a passing profile result. Audit identified the two
+CONFIG consumers (`init_lim_configuration_data`, then `ExpandConfigFiles`)
+and the destructive first read in `GetPIFConfigFiles`. S35 is checking the
+minimal same-owner path lifetime correction; no guest image or CCPU ABI
+change is admitted. Formal test build root: `build/M0-T420/S35/formal-x86-r1`.
+The same-owner path lifetime correction now passes all 17 established product
+regressions. A boot-time guest driver proves UMB allocation/release and double
+free rejection before original DOS claims the remaining blocks. Default
+INT15 AH=88 returns zero as expected. `/INT15=128` still times out after that
+driver; S35 remains open. See the [progress evidence](../etc/evidence/m0-t420-s35-xms-capability-progress.md).
+The reproducible direct/profile/nested/repeat XMS gate also passes all four
+cases. P1 delivers this bounded correction and evidence, not S35 closure;
+reserved-INT15 and the complete lifecycle audit remain pending.
+
 ## S34 Closure Record
 
 The merged COMMAND stream/pipe scope is complete.  The formal x86 graph

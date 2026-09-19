@@ -2,6 +2,7 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T420 S35 XMS capability progress](evidence/m0-t420-s35-xms-capability-progress.md) | M0 T420 S35 | Real guest XMS/UMB evidence, PIF path lifetime correction and still-failing reserved-INT15 profile. | Supersede with complete S35 closure evidence; retain failed observations. |
 | [T420 S34 COMMAND stream recovery](evidence/m0-t420-s34-command-stream-recovery.md) | M0 T420 S34 | Original COMMAND stream-owner boundary, direct/second/third-depth pipe and redirection witnesses, and full existing product regression. | Retain through T420 package completion. |
 | [T420 S33 DEM file capability closure](evidence/m0-t420-s33-dem-capability-closure.md) | M0 T420 S33 | Real DOS file-operation, error-map and cleanup proof for the selected original DEM package. | Retain through T420 package completion. |
 | [T420 S32 host capability closure](evidence/m0-t420-s32-host-capability-closure.md) | M0 T420 S32 | Complete original host source disposition, worker-entry/lifecycle proof, formal x86 deployment and transcript-gated product regression. | Retain through T420 package completion. |
