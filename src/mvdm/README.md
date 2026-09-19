@@ -1,5 +1,12 @@
 # mvdm
 
+MVDM-HOST-DIV-278: `softpc.new/host/src/nt_pif.c` keeps original OEM PIF
+expansion, then binds its result to the ANSI configuration-file consumers
+through the bounded worker-local media-path conversion. The default ANSI
+path is unchanged. `nt_msscs.c` supplies the documented MAX_PATH+12 output
+capacity instead of MAX_PATH. No new file or provider enters the mirror.
+[S37 evidence](../../docs/etc/evidence/m0-t420-s37-oemuni-capability-review.md).
+
 MVDM-HOST-DIV-277: `oemuni/process.c::GetEnvironmentVariableOem` saturates
 the original ANSI/OEM descriptor capacity rather than wrapping at 65536,
 checks completion against the allocated capacity, preserves empty output,

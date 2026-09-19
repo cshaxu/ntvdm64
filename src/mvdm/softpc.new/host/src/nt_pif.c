@@ -81,7 +81,9 @@ VOID GetPIFConfigFiles(BOOL bConfig, char *pchFileName)
        }
    else {
        dw = ExpandEnvironmentStringsOem(*ppch, pchFileName, MAX_PATH+12);
-       if (!dw || dw > MAX_PATH+12) {
+       /* DIVERGENCE(MVDM-HOST-DIV-278): configuration consumers use ANSI. */
+       if (!dw || dw > MAX_PATH+12 ||
+           !mvdm_softpc_config_path_to_ansi(pchFileName, MAX_PATH+12)) {
            *pchFileName = '\0';
            }
        /* DIVERGENCE(MVDM-HOST-DIV-157): CCPU LIM initialization and DOS

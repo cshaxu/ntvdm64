@@ -29,6 +29,10 @@ int mvdm_softpc_system_find_file(const char *name, char *path_out,
  * existing file lookup; it neither opens media nor changes host state. */
 int mvdm_softpc_system_copy_root(char *path_out, uint32_t path_out_bytes);
 
+/* In-place, bounded OEM-to-ANSI boundary for original PIF configuration
+ * file consumers. Returns zero if conversion cannot fit; opens no file. */
+int mvdm_softpc_config_path_to_ansi(char *path, uint32_t capacity);
+
 /* Selected-product disposition for the historical first-session compatibility
  * probe.  The original AddSystemFiles() body creates C:\\MSDOS.SYS and
  * C:\\IO.SYS only to satisfy a legacy installer.  The current product keeps

@@ -76,11 +76,11 @@ The expanded real DOS probe now proves DEM's non-ASCII =X: publication and
 COMMAND 54:04 readback against the host directory, direct and nested. The
 observer harness correctly decodes its raw OEM437 output. No product change
 is added; PIF-specific and remaining caller dispositions stay under review.
-PIF A/B now passes expanded ASCII configuration paths but fails the same
-immutable default bytes at an OEM non-ASCII path. GetPIFConfigFiles mixes an
-OEM override result with ANSI file consumers/default path; its encoding
-contract must be reconciled before closure. Pure-DOS controls also lack their
-required marker and remain failures, not implicitly attributed to known debt.
+DIV-278 binds GetPIFConfigFiles' OEM override to its original ANSI consumers
+and fixes LIM's undersized output buffer. Fresh-worker ASCII/OEM PIF rows,
+seven native fixtures and real DOS direct/nested probes pass. Earlier PIF
+runs had retained workers and cannot establish an isolated A/B; pure-DOS
+controls require a fresh-worker rerun before attributing any failure.
 
 ## S36 Closure Record
 

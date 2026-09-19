@@ -372,7 +372,8 @@ void AddSystemFiles(void)
 
 boolean init_lim_configuration_data(PLIM_CONFIG_DATA lim_data)
 {
-    char config_sys_pathname[MAX_PATH];
+    /* DIVERGENCE(MVDM-HOST-DIV-278): match GetPIFConfigFiles' output contract. */
+    char config_sys_pathname[MAX_PATH+12];
     HANDLE  handle;
     DWORD   file_size, bytes_read, size;
     char    *buffer, *ptr;

@@ -812,3 +812,54 @@ binding. Therefore blindly changing both consumers to OEM is not a complete
 fix. The next S37 step must establish one bounded output encoding for both
 branches, preserve the original owners/cleanup, and rerun this exact A/B.
 No production change or renewed product acceptance is claimed in this step.
+
+## PIF encoding repair and corrected isolation
+
+Deployment inspection found surviving workers from earlier ASCII PIF test
+launchers 58216/45320. Original PIF task completion need not terminate a worker.
+The preceding timeout A/B therefore cannot prove an isolated encoding cause;
+pure-DOS controls also require fresh-worker revalidation. Only the exact test
+processes were stopped. The new verifier refuses pre-existing package processes
+and terminates only children of each recorded test launcher after observation.
+
+Without an old worker, unmodified 08977bd17 still failed the non-ASCII path:
+`s37-pif-oem-clean-before-r1` exited zero but emitted no guest marker. After
+repair, identical media/PIF/environment produced `S37_PIF_CWD=WINNT` and
+`S37_PIF_GUEST_OK` in `s37-pif-oem-clean-after-r1`. Exit zero alone is not a pass.
+
+Recovery ladder: original GetPIFConfigFiles, OEMUNI expansion, LIM and COMMAND
+readers remain compiled. Their original ANSI consumers/default path cannot
+directly consume repaired OEM expansion. The smallest same-shaped handoff is
+one hook to the existing worker media-path binding: bounded public OEM-to-
+Unicode-to-ANSI conversion, not a second environment expander/file provider.
+The unbounded OemToChar API cannot enforce caller capacity when encoding grows.
+No third-party intrusion, new mirror file or autonomous environment/file policy
+is needed. The finite capacity-aware handoff is registered under existing
+ADAPTER-SOFTPC-024/025 and DIV-278. Original read/failure/cleanup policy remains.
+
+The helper rejects absent/zero/oversized/unterminated input, uses bounded stack
+Unicode storage, and opens/allocates nothing. The original caller clears its
+path on failure. LIM's output buffer now matches GetPIFConfigFiles' documented
+MAX_PATH+12 contract; COMMAND already supplied that capacity. The default ANSI
+path and both original CreateFile consumers remain unchanged.
+
+`Verify-T420S37PifPaths.ps1` passes fresh-worker ASCII/OEM rows with identical
+default media at `s37-pif-clean-matrix-r1`. It gates on guest text and exit,
+checks inherited-Console cwd policy, restores process environment and removes
+its exact test objects. The seventh x86 fixture links the actual helper;
+unused session functions are fail-fast sentinels, never called. Non-ASCII,
+ASCII, empty, absent, zero/oversized-capacity and unterminated tests pass.
+All six prior fixtures pass; Ninja includes the new fixture in the same set.
+
+Formal x86 build passes (S37/pif-guest-r1/product-build.log). Deployed worker:
+`d7427a755f5327b835bd4abc22726d963d91b5292fd2a3f55bb907e7e529637d`;
+VDMREDIR DLL:
+`c4c28147423b96c0197c917a9e7ddd6952b8c0818c44f465950a376daa18c5c7`.
+Expanded real DOS direct/nested probes pass at `s37-pif-fixed-oem-r1`.
+Original guest/configuration media are untouched. Whole-package reconciliation
+and isolated pure-DOS follow-up remain open; S37 is not closed.
+All 17 transcript-gated product routes pass at `s37-pif-fixed-product-r1`.
+Production footprint for this repair is nt_pif.c +3/-1, nt_msscs.c +2/-1,
+and the existing worker boundary +16 implementation lines/+4 declarations;
+there is no overlay. Tracked nt_msscs.c LF is restored before delivery,
+avoiding a format-only whole-file diff. Both governance gates pass.
