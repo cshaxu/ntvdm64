@@ -208,6 +208,34 @@ environment_ready:
     jc failed
     cmp ax, 1
     ja failed
+    ; Original DOS misc.asm -> demGSetMediaID -> GetVolumeInformationOem.
+    mov ax, 6900h
+    xor bx, bx
+    mov dx, volume_info
+    int 21h
+    jc failed
+    cmp word [volume_guard], 0A55Ah
+    jne failed
+    push ds
+    pop es
+    mov si, volume_info
+    mov di, volume_hex
+    mov bx, hex_digits
+    mov cx, 25
+volume_encode:
+    lodsb
+    mov ah, al
+    shr al, 4
+    xlat
+    stosb
+    mov al, ah
+    and al, 0Fh
+    xlat
+    stosb
+    loop volume_encode
+    mov dx, volume_prefix
+    mov ah, 09h
+    int 21h
     mov dx, saved_directory
     mov ah, 3Bh
     int 21h
@@ -267,6 +295,12 @@ computer_prefix db 'S37_HOST=','$'
 environment_directory times 260 db 0
 environment_prefix db 'S37_ENV_DIR=','$'
 environment_success db 13,10,'S37_OEM_GUEST_COMMAND_ENV_OK',13,10,'$'
+volume_info times 25 db 0
+volume_guard dw 0A55Ah
+hex_digits db '0123456789ABCDEF'
+volume_prefix db 'S37_VOLUME='
+volume_hex times 50 db 0
+    db 13,10,'$'
 fcb_success db 13,10,'S37_OEM_GUEST_FCB_COMPUTER_OK',13,10,'$'
 directory_success db 'S37_OEM_GUEST_DIRECTORY_DELETE_DISK_OK',13,10,'$'
 success db 'S37_OEM_GUEST_CREATE_RENAME_ATTR_READ_OK',13,10,'$'

@@ -990,3 +990,58 @@ disposable probe and evidence, with zero product, mirror or overlay diff.
 The preceding 17-route formal regression remains applicable to those unchanged
 artifacts. S37's historical pure-DOS attribution is complete; remaining
 OEMUNI caller/whole-package reconciliation still prevents S37 closure.
+
+## Real volume-query consumer and original DEM padding repair
+
+The remaining GetVolumeInformationOem consumer is now exercised by the real
+DOS probe: INT21/6900, original misc.asm drive normalization, demGSetMediaID,
+GetMediaId and OEMUNI. The probe checks its trailing canary and prints all
+25 bytes of the packed result. The verifier obtains independent Unicode host
+volume information without changing the label, converts expected fixed-width
+fields to OEM437, and compares serial, label and filesystem bytes exactly.
+
+Before repair, `s37-volume-before-r1-direct.txt.console.txt` shows:
+`00002FE93528636F6465202020202020204E54465300000000`.
+The host-derived expected record ends in `4E54465320202020`. The guest query
+itself succeeded, but the strict oracle correctly rejected the NUL padding.
+Source review of both the current and pinned OpenNT demgset.c identifies the
+same typo: the filesystem NUL loop writes VolumeID instead of FileSystemType.
+On a longer volume label this also destroys label characters at those indices.
+
+Recovery ladder: the complete original DEM translation unit and OEMUNI remain
+selected. Direct original composition reproduced incorrect bytes. A binding
+cannot correct the private result assignment without duplicating owner policy.
+DIV-279 changes that one field reference in the original GetMediaId owner;
+the original query, structures, iteration, failure order and cleanup remain.
+No new interface, adapter, overlay, external-code import or guest change is
+needed. The mirror delta is +2/-1 including its one-line rationale, not a
+new implementation. Tracked LF is preserved to avoid format-only churn.
+
+The strengthened authored probe is S37/guest-volume-r1/O37.COM, SHA-256
+`dd643a9d94acc08e8d1548fee4b933e8f3747fcdad20bf9466cad75b14a87f78`.
+After the formal x86 six-edge build, direct and two-level nested COMMAND routes
+pass under `s37-volume-after-r1`, including all preceding file/FCB/directory/
+environment assertions. The actual record now matches the host oracle. The
+failed run's exact created payload and empty directories were checked and
+removed before rerunning; original guest media were not touched.
+
+The eighth native fixture extracts the actual GetMediaId body and packed
+VOLINFO declaration, with source hash and generated dependencies, rather than
+copying its algorithm. Only the OEM query endpoint is mocked. Four cases cover
+an eleven-character label with short filesystem (would expose label overwrite),
+short names, empty names, and truncated label with exact-width filesystem.
+All preserve info level and surrounding canaries. The fifth query-failure case
+returns ERROR_NOT_READY and preserves the complete output. It reports
+S37_DEM_MEDIA_PADDING_LABEL_CANARY_FAILURE_OK. This is mock owner-contract
+evidence, separate from the real DOS tests. All seven existing OEMUNI fixtures
+also pass from S37/media-fixtures-r1 using current formal RTL inputs.
+
+Deployed formal worker SHA-256:
+`c7150def0ac9d2a4cb6b280bfbbbe5185245c6bef2c165ec6460f092cfd38d26`;
+VDMREDIR DLL:
+`01cf9060393c1b3a4e3856c8da10251ca11158ef4e6b1939cf552dec4608f75b`.
+All 17 text-gated product routes pass under `s37-volume-product-r2`.
+The attempted r1 prefix was rejected because it belonged to an earlier S37
+run; its older results were not used to validate this build. Process inspection
+confirmed no active test before selecting the fresh r2 prefix. S37 remains
+open for final caller and residual-diff reconciliation, not another volume fix.

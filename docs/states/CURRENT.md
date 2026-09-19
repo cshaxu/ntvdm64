@@ -73,6 +73,11 @@ original INT21/3306 assertion rejects that historical false positive. The
 S30 evidence now withdraws full pure-profile acceptance. Current formal
 artifacts are restored; final OEMUNI caller reconciliation remains open.
 No guest workaround or additional product diff is introduced.
+The remaining real DOS volume query exposed an original DEM field typo:
+filesystem padding wrote VolumeID. DIV-279 corrects one field reference.
+Direct/nested guest records now match the Unicode host oracle; the original-
+body fixture, seven prior OEMUNI fixtures and all 17 product routes pass.
+The formal x86 repair is deployed; final caller/diff reconciliation remains.
 
 ## S36 Closure Record
 

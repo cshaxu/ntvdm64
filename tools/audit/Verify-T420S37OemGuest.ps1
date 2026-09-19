@@ -19,6 +19,35 @@ function Processes {
         Where-Object { $_.ExecutablePath -in $paths })
 }
 if ((Processes).Count) { throw 'Package in use' }
+if (-not ('S37VolumeOracle' -as [type])) {
+    Add-Type -TypeDefinition @'
+using System;
+using System.Text;
+using System.Runtime.InteropServices;
+public static class S37VolumeOracle {
+    [DllImport("kernel32.dll", CharSet=CharSet.Unicode, SetLastError=true)]
+    public static extern bool GetVolumeInformationW(string root,
+        StringBuilder label, uint labelSize, out uint serial,
+        out uint maxComponent, out uint flags, StringBuilder filesystem,
+        uint filesystemSize);
+}
+'@
+}
+$volumeLabel = New-Object Text.StringBuilder 261
+$filesystem = New-Object Text.StringBuilder 261
+[uint32]$serial = 0; [uint32]$maxComponent = 0; [uint32]$volumeFlags = 0
+if (![S37VolumeOracle]::GetVolumeInformationW([IO.Path]::GetPathRoot($PackageRoot),
+    $volumeLabel, 261, [ref]$serial, [ref]$maxComponent, [ref]$volumeFlags,
+    $filesystem, 261)) { throw 'Host volume oracle failed' }
+$volumeExpected = New-Object byte[] 25
+[BitConverter]::GetBytes($serial).CopyTo($volumeExpected, 2)
+for ($i=6; $i -lt 25; $i++) { $volumeExpected[$i] = 0x20 }
+$oem = [Text.Encoding]::GetEncoding(437)
+$labelBytes = $oem.GetBytes($volumeLabel.ToString())
+$fsBytes = $oem.GetBytes($filesystem.ToString())
+[Array]::Copy($labelBytes, 0, $volumeExpected, 6, [Math]::Min(11, $labelBytes.Length))
+[Array]::Copy($fsBytes, 0, $volumeExpected, 17, [Math]::Min(8, $fsBytes.Length))
+$volumeHex = [BitConverter]::ToString($volumeExpected).Replace('-', '')
 $root = Join-Path $PackageRoot 'tests\O37G'
 if (Test-Path -LiteralPath $root) { throw 'Previous test directory exists; inspect it' }
 Copy-Item -LiteralPath $Probe -Destination "$PackageRoot\tests\O37.COM"
@@ -41,6 +70,7 @@ foreach ($route in @('direct','nested')) {
         $screen = [Text.Encoding]::GetEncoding(437).GetString([IO.File]::ReadAllBytes("$report.console.txt"))
         if ($screen -notmatch 'S37_OEM_GUEST_CREATE_RENAME_ATTR_READ_OK' -or $screen -match 'S37_OEM_GUEST_FAIL|Bad command or filename') { throw 'Guest text failed' }
         if ($screen -notmatch 'S37_OEM_GUEST_DIRECTORY_DELETE_DISK_OK') { throw 'Directory/disk guest text failed' }
+        if ($screen -notmatch ('S37_VOLUME=' + $volumeHex)) { throw "Guest volume mismatch; expected $volumeHex; see $report.console.txt" }
         if ($screen -notmatch 'S37_OEM_GUEST_FCB_COMPUTER_OK' -or
             $screen -notmatch ('S37_HOST=' + [regex]::Escape($env:COMPUTERNAME))) { throw 'FCB/computer-name guest text failed' }
         $dir = Join-Path $root ('D' + [char]0xa3)

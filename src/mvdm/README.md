@@ -1,5 +1,12 @@
 # mvdm
 
+MVDM-HOST-DIV-279: `dos/dem/demgset.c::GetMediaId` corrects the original
+filesystem padding loop's destination field. Its source comment requires
+NUL-to-space padding in both fixed-width strings; writing VolumeID leaves
+filesystem NULs and can overwrite the label. Real INT21/6900 output reproduced
+the missing padding. Keep the original owner, layout, query and failure flow;
+no new provider or guest change. See the S37 OEMUNI capability evidence.
+
 MVDM-HOST-DIV-278: `softpc.new/host/src/nt_pif.c` keeps original OEM PIF
 expansion, then binds its result to the ANSI configuration-file consumers
 through the bounded worker-local media-path conversion. The default ANSI

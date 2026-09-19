@@ -17,6 +17,17 @@ const demEnd = demSource.indexOf("BOOL IsCdRomFile (PSTR pszPath)", demStart);
 if (demStart < 0 || demEnd <= demStart) throw new Error("DEM source boundaries changed");
 writeFileSync(`${build}/dem-create-body.inc`, demSource.slice(demStart, demEnd));
 writeFileSync(`${build}/dem-create-source.sha256`, createHash("sha256").update(demSource).digest("hex"));
+const mediaSource = readFileSync(`${root}/src/mvdm/dos/dem/demgset.c`, "utf8");
+const mediaStart = mediaSource.search(/BOOL\s+GetMediaId\(/);
+const mediaEnd = mediaSource.indexOf("/* demGetDPB", mediaStart);
+const mediaHeader = readFileSync(`${root}/src/mvdm/dos/dem/dosdef.h`, "utf8");
+const typeStart = mediaHeader.indexOf("#pragma pack(1)", mediaHeader.indexOf("/** VOLINFO"));
+const typeEnd = mediaHeader.indexOf("typedef VOLINFO *PVOLINFO;", typeStart);
+if (mediaStart < 0 || mediaEnd <= mediaStart || typeStart < 0 || typeEnd <= typeStart)
+  throw new Error("DEM media source boundaries changed");
+writeFileSync(`${build}/dem-media-type.inc`, mediaHeader.slice(typeStart, typeEnd + "typedef VOLINFO *PVOLINFO;".length));
+writeFileSync(`${build}/dem-media-body.inc`, mediaSource.slice(mediaStart, mediaEnd));
+writeFileSync(`${build}/dem-media-source.sha256`, createHash("sha256").update(mediaSource).digest("hex"));
 
 const cflags = [
   "/nologo", "/TC", "/c", "/MT", "/W4", "/showIncludes", "/DWIN32", "/DWINNT",
@@ -35,7 +46,7 @@ const lines = [
   "rule regenerate",
   `  command = \"${process.execPath.replaceAll("\\", "/")}\" \"$root/tools/build/Generate-T420S17OemUniNinja.mjs\" \"$root\" \"${build}\" \"$formal\"`,
   "  generator = 1",
-  "build build.ninja: regenerate $root/tools/build/Generate-T420S17OemUniNinja.mjs $root/src/mvdm/dos/dem/demfile.c",
+  "build build.ninja: regenerate $root/tools/build/Generate-T420S17OemUniNinja.mjs $root/src/mvdm/dos/dem/demfile.c $root/src/mvdm/dos/dem/demgset.c $root/src/mvdm/dos/dem/dosdef.h",
   "rule cc",
   "  command = cl.exe $cflags /Fo$out $in",
   "  deps = msvc",
@@ -61,6 +72,9 @@ const lines = [
   "build obj/font-retry.obj: cc $root/tests/mvdm/oemuni/oemuni_font_retry_fixture.c",
   `  cflags = $cflags /I \"${build}\"`,
   "build oemuni-font-retry-fixture.exe: link obj/font-retry.obj",
+  "build obj/media.obj: cc $root/tests/mvdm/oemuni/oemuni_media_fixture.c",
+  `  cflags = $cflags /I \"${build}\"`,
+  "build oemuni-media-fixture.exe: link obj/media.obj",
   "build oemuni-dbcs-fixture.exe: link obj/dbcs.obj",
   "build oemuni-family-fixture.exe: link obj/file.obj obj/process.obj obj/family.obj",
   "build oemuni-expand-failure-fixture.exe: link obj/expand-failure.obj",
