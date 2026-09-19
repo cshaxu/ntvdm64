@@ -285,3 +285,31 @@ Post-repair regression confirms all 17 product routes in
 the six-register source-consistency gate in
 `s36-dpmi-segment-fix-r2-summary.json`. These summaries reside under
 `O:\winnt\logs`; acceptance checks guest text as well as process completion.
+
+## Worker callback failure boundary
+
+The expanded existing `xms_mapped_memory_fixture.c` compiles the production
+XMS callback, guest-memory carrier, session and lease translation units under
+Win32/x86 CPU40. Only the backing read/write endpoints are test doubles; the
+allocator is not linked in this focused boundary test. Generate with
+`New-T322XmsMappedMemoryFixtureNinja.ps1 -Architecture x86 -BuildRoot
+build/M0-T420/S36/callback-failures-r1`, then build and run the resulting
+`x86/xms-mapped-memory-fixture.exe` using MSVC and Ninja.
+
+The run exits zero and reports
+`S36_XMS_CALLBACK_FAILURE_LEASE_RELEASE_REUSE_OK` and
+`S36_XMS_MOVE_FAILURE_CANCEL_OK`. Injected backing-read rejection reaches the
+real commit failure, backing-write rejection reaches the real decommit
+failure, and occupying all eight lease slots rejects another commit. Failed
+leases retain neither active slots nor bounce buffers; releasing the occupied
+slots permits commit again with an active session. Move failure requests the
+existing cancellation state, after which lease/session teardown succeeds.
+
+This is boundary evidence, not a real-host out-of-memory reproduction or an
+allocator rollback pass. Production SAS read/write endpoints reject invalid
+ranges but otherwise return success after their original void SAS operations;
+arbitrary backing failure is therefore only an injected test condition.
+Lease allocation and slot availability are separate real failure points.
+The outstanding work is a composed allocator/worker-callback failure test
+and disposition of the original bitmap rollback defect; no production code
+or immutable guest media changes are made by this test delivery.
