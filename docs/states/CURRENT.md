@@ -45,19 +45,11 @@ The original OEM font interface and five original DEM retry/failure scenarios
 pass non-invasive boundary tests; no real font installation or WOW acceptance
 is claimed. Full commands, inputs and historical findings remain in the linked
 review; final caller/buffer and mirror reconciliation remains open.
-DIV-276 repairs short-path doubled OEM capacity/WCHAR lengths and computer-
-name conversion false success. All six OEMUNI/DEM fixtures and expanded
-real DOS direct/nested routes pass. Environment-boundary and final package
-reconciliation remain; original/admission mirror counts stay in evidence.
-DIV-277 corrects reproduced environment-buffer wrap at 65536, empty-value
-output and conversion failure ordering. Six x86 fixtures and expanded real
-DOS direct/nested probes pass. Unequal ANSI/OEM short-query byte sizing now
-passes five capacities and four provider-change/failure cleanup cases. Final
-caller/whole-package reconciliation remains open; this is not an S37 closure.
-The expanded real DOS probe now proves DEM's non-ASCII =X: publication and
-COMMAND 54:04 readback against the host directory, direct and nested. The
-observer harness correctly decodes its raw OEM437 output. No product change
-is added; PIF-specific and remaining caller dispositions stay under review.
+DIV-276 repairs short-path lengths/capacities and computer-name false success.
+DIV-277 repairs environment capacity wrap, empty values, unequal ANSI/OEM byte
+counts and conversion failure ordering. Boundary fixtures and real direct/
+nested probes pass, including host-matched non-ASCII =X: publication/readback
+through COMMAND 54:04. Full case records and counts remain in the evidence.
 DIV-278 binds GetPIFConfigFiles' OEM override to its original ANSI consumers
 and fixes LIM's undersized output buffer. Fresh-worker ASCII/OEM PIF rows,
 seven native fixtures and real DOS direct/nested probes pass. Earlier PIF
@@ -78,6 +70,10 @@ filesystem padding wrote VolumeID. DIV-279 corrects one field reference.
 Direct/nested guest records now match the Unicode host oracle; the original-
 body fixture, seven prior OEMUNI fixtures and all 17 product routes pass.
 The formal x86 repair is deployed; final caller/diff reconciliation remains.
+The formal original cmdpif.obj passes five host caller scenarios through real
+OEM path APIs, twice with source-correct input capacities. This proves policy
+results/cleanup, not real new-console PIF execution. Remaining closure work:
+that entry disposition, WOW/debugger handoff and mirror counts.
 
 ## S36 Closure Record
 

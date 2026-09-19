@@ -10,6 +10,9 @@ if (!rootArgument || !buildArgument || !formalArgument) {
 const root = resolve(rootArgument).replaceAll("\\", "/");
 const build = resolve(buildArgument).replaceAll("\\", "/");
 const formal = resolve(formalArgument).replaceAll("\\", "/");
+const formalFlags = readFileSync(`${formal}/build.ninja`, "utf8")
+  .match(/^cflags = (.+)$/m)?.[1].trim().replaceAll("$:", ":");
+if (!formalFlags) throw new Error("Missing formal command-owner flags");
 mkdirSync(`${build}/obj`, { recursive: true });
 const demSource = readFileSync(`${root}/src/mvdm/dos/dem/demfile.c`, "utf8");
 const demStart = demSource.indexOf("VOID demCreateCommon (flCreateType)");
@@ -46,7 +49,7 @@ const lines = [
   "rule regenerate",
   `  command = \"${process.execPath.replaceAll("\\", "/")}\" \"$root/tools/build/Generate-T420S17OemUniNinja.mjs\" \"$root\" \"${build}\" \"$formal\"`,
   "  generator = 1",
-  "build build.ninja: regenerate $root/tools/build/Generate-T420S17OemUniNinja.mjs $root/src/mvdm/dos/dem/demfile.c $root/src/mvdm/dos/dem/demgset.c $root/src/mvdm/dos/dem/dosdef.h",
+  "build build.ninja: regenerate $root/tools/build/Generate-T420S17OemUniNinja.mjs $formal/build.ninja $root/src/mvdm/dos/dem/demfile.c $root/src/mvdm/dos/dem/demgset.c $root/src/mvdm/dos/dem/dosdef.h",
   "rule cc",
   "  command = cl.exe $cflags /Fo$out $in",
   "  deps = msvc",
@@ -75,6 +78,9 @@ const lines = [
   "build obj/media.obj: cc $root/tests/mvdm/oemuni/oemuni_media_fixture.c",
   `  cflags = $cflags /I \"${build}\"`,
   "build oemuni-media-fixture.exe: link obj/media.obj",
+  "build obj/pif-caller.obj: cc $root/tests/mvdm/oemuni/oemuni_pif_caller_fixture.c",
+  `  cflags = ${formalFlags} /I \"$root/src/mvdm/dos/command\"`,
+  "build oemuni-pif-caller-fixture.exe: link obj/pif-caller.obj $formal/obj/command/cmdpif.obj obj/file.obj obj/process.obj",
   "build oemuni-dbcs-fixture.exe: link obj/dbcs.obj",
   "build oemuni-family-fixture.exe: link obj/file.obj obj/process.obj obj/family.obj",
   "build oemuni-expand-failure-fixture.exe: link obj/expand-failure.obj",

@@ -1045,3 +1045,51 @@ The attempted r1 prefix was rejected because it belonged to an earlier S37
 run; its older results were not used to validate this build. Process inspection
 confirmed no active test before selecting the fresh r2 prefix. S37 remains
 open for final caller and residual-diff reconciliation, not another volume fix.
+
+## Formal PIF caller boundary verification
+
+cmdpif.c::cmdCheckForPIF skips startup policy for a non-PIF application with
+DosSessionId zero. Its new-console/explicit-PIF branches own full/search/short
+OEM path queries; BaseCheckVDM rejects explicit PIF execution on an inherited
+Console. Associated-PIF CONFIG tests therefore do not prove those startup
+branches. DEM SignalSegmentNotice's full-path call is behind IsDebuggee and
+belongs to debugger workload acceptance, not ordinary COMMAND/MEM evidence.
+
+The new oemuni_pif_caller_fixture links the actual formal cmdpif.obj, SHA-256
+`443b8f29207fe2e6e3a825f219526548748844e46d7ab353f4b99d8058e3942f`,
+current OEMUNI objects and formal RTL inputs. It uses original VDMINFO,
+PIF_DATA and COMMAND declarations with formal owner compile flags. Task/PIF
+inputs, literal-only expansion, error presentation and the final guest scalar
+sink are controlled boundaries. Unexpected PIF loading terminates the fixture;
+there is no fake parser. OEM full/search/short paths, attributes, directories
+and environment APIs are real. Native Unicode APIs independently check the
+selected non-ASCII name and cwd. This is host/caller evidence, not a guest
+launch, parser test or real new-console acceptance.
+
+Five scenarios pass in both pif-caller-capacity-1.txt and
+pif-caller-capacity-2.txt under S37/pif-caller-r1:
+
+| Input | Original observed result |
+| --- | --- |
+| Explicit PIF, first/new-console task, valid non-ASCII directory/file | No error; one scalar write; correct short path, AppLen, command tail and cwd. |
+| Associated application, inherited Console | Original early skip; no scalar/cwd/command change; PIF strings cleared. |
+| Missing startup directory | Error 19 (EG_PIF_STARTDIR_ERR); no scalar write; strings cleared. |
+| Missing application | Both original searches fail; error 20 (EG_PIF_STARTFILE_ERR); no scalar write; strings cleared. |
+| Existing unsupported extension | Error 28 (EG_DOS_PROG_EXTENSION); no scalar write; strings cleared. |
+
+Each case restores cwd; successful completion removes both empty files and
+private directories. Both executions emit
+S37_ORIGINAL_PIF_CALLER_OEM_PATH_ERRORS_CLEANUP_OK.
+
+The first fixture incorrectly used strdup for expandable fields. One run
+failed silently, one happened to pass, and a repeat failed with heap corruption
+(C0000374). All are discarded as malformed-input evidence: original nt_pif.c
+allocates MAX_PATH+1 for StartDir, StartFile and CmdLine. Correcting those
+fixture capacities yields the two clean results above, with no product change.
+Failed-run files were verified empty before exact nonrecursive cleanup.
+
+This step adds no product/mirror/overlay changes; the previous formal package
+and 17 s37-volume-product-r2 passes remain unchanged. Remaining S37 work is
+explicit: real no-console/new-console PIF entry coverage or justified original-
+owner disposition, final WOW/debugger consumer handoff, and byte/normalized
+diff accounting. A host fixture alone does not close real entry coverage.
