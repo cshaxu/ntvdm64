@@ -51,3 +51,28 @@ The previous null-short-path and valid file-part checks also pass. All
 environment changes are process-local. This proves the current SBCS host
 contract only; no DBCS, real DOS file operation, process creation or full-package
 closure is claimed. Those remaining selected-family checks continue in S37.
+
+## Real DOS non-ASCII file path
+
+NASM builds independent `oem_file_contract.asm` into
+`build/M0-T420/S37/oem-guest-r1/O37.COM`. The reusable
+Verify-T420S37OemGuest.ps1 runs it with the existing non-debug Console observer
+against the deployed formal x86 package, directly and under two COMMAND /c
+levels. This fixed-byte probe requires host OEM 437; it does not change host
+or guest code pages. Byte 9C is pound sign and has no case-fold ambiguity.
+
+The real guest calls INT 21 directory creation, create-new, write/close,
+rename, failed open of the old name (error 2), set/query/reset read-only
+attributes, and reopen/read/close with exact payload comparison. Guest paths
+include a non-ASCII directory and filename. The observer requires natural
+launcher exit zero and S37_OEM_GUEST_CREATE_RENAME_ATTR_READ_OK. The host then
+independently checks the actual Unicode `D£/B£.DAT` name and exact ASCII
+payload bytes, preventing a same-wrong-encoding guest roundtrip from passing.
+
+Both routes pass (`s37-oem-guest-r1`, runtime logs). The test creates only
+private O37G descendants under runtime tests, refuses an existing directory,
+and deletes only the verified file and empty directories. Failure preserves
+files for inspection; no recursive cleanup or original guest mutation occurs.
+Process isolation only terminates package children of its recorded launcher.
+This verifies the reached DEM/OEM file-operation family, not every OEMUNI
+entry or a WOW workload. Remaining consumer and buffer-family audit continues.

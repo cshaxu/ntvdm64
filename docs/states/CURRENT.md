@@ -30,8 +30,10 @@
 The [OEMUNI review](../etc/evidence/m0-t420-s37-oemuni-capability-review.md)
 inventories 29 original entry points and their initial textual consumers.
 Current-host OEM 437 versus ANSI 1252 non-ASCII path, file-part, short-buffer
-and environment tests pass in the x86 original-source fixture. Real guest
-paths and full consumer/buffer disposition remain open; no product changes.
+and environment tests pass in the x86 original-source fixture. Real DOS
+non-ASCII create/read/write/rename/attribute operations now pass direct and
+nested, with independent host Unicode-name/content verification. Full
+consumer/buffer disposition remains open; no product changes.
 
 ## S36 Closure Record
 
