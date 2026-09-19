@@ -76,6 +76,31 @@ this four-case gate. This bounded S35 P1 delivery does not close S35.
 
 ## Remaining closure work
 
+### Current disposition after 144b050e9
+
+Earlier paragraphs below retain chronological failed attempts and pending
+states; they are not the current deployment or delivery claim. Native wait
+restoration and pre-resume cleanup shipped at 76ec920d4 with formal x86,
+17 product routes, four XMS routes and a deterministic early-fault witness.
+144b050e9 adds verified free-capacity restoration and actual A20 OFF/ON/OFF
+alias comparison. The original-guest immutability rule shipped at 466c71f09.
+No outbound approval block remains after the owner's renewed authorization.
+S35 is still open: ordinary-environment low-DOS startup is not accepted, and
+the final source/hash and lifecycle requirement audit must precede closure.
+
+The additional startup-contract audit compares pinned OpenNT `cmdconf.c`
+and COMMAND `init.asm`: init.asm has zero normalized difference; cmdconf.c
+changes only the system-root binding, not shell/environment policy.
+Original ExpandConfigFiles preserves an explicit SHELL `/E:` argument but
+does not automatically size it from the host environment. Original
+COMMAND Init chooses its initial allocation from EnvSiz/UsedEnv; the later
+permanent-COMMAND GetInitEnvironment expansion remains in EndInit after
+resident shrink. Thus no omitted original host pre-sizing step was found
+in these owners. Automatically inserting `/E:`, dropping environment entries,
+or forcing DOS=HIGH is not admitted as an equivalent repair. The observed
+stale INIT reference remains a guest-lifetime limitation under investigation,
+not evidence for changing CCPU or weakening immutable-media policy.
+
 ### Original dispatch/caller ledger
 
 The selected `xmsdisp.c::apfnXMSSvc` contains twelve entries. The following
