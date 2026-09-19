@@ -662,3 +662,38 @@ including the host-matched DOS computer name. Guest media remain immutable.
 Environment-boundary and final package reconciliation remain S37 work.
 All 17 Console-text-gated product regressions pass under
 s37-short-computer-product-r1, including EDIT and original COMMAND exit values.
+
+## Environment descriptor and failure-order verification
+
+The current-source x86 native fixture reproduced a 65536-byte caller buffer
+wrapping to zero in GetEnvironmentVariableOem's USHORT descriptor: an existing
+`abc` value returned zero/error 234 without copying. The failing fixture
+exited 17 before repair (env-recheck-build.log under the S37 dbcs-r1 root).
+Original BaseClient `base/win32/client/process.c::GetEnvironmentVariableA`
+already clamps capacities before narrowing and returns converted byte length.
+Its original MVDM wrapper lacks those safeguards. DIV-277 applies them locally
+without importing BaseClient, replacing the environment provider or adding an
+adapter. The original ANSI query, RTL conversions and finally cleanup remain.
+
+The local correction also copies the successful empty terminator and stops
+after ANSI-to-Unicode conversion failure, before an invalid second conversion.
+All six x86 OEMUNI/DEM fixtures pass: the large buffer returns 3 and `abc\0`;
+short-buffer sizing matches the native provider; empty/deleted/missing values
+retain their tested results. Fault injection proves error 8 and zero return
+at both conversions, no borrowed-output free, untouched output, and exactly
+zero/one OEM conversion calls respectively. These are native/mock boundary
+checks, not claims that a DOS caller requests a 64-KiB buffer.
+
+Formal x86 product build passes (env-product-build.log). Expanded real DOS
+direct/nested OEM probes pass under `s37-env-guest-r1`. Deployed worker SHA-256:
+`27c878324c79fd111ee61585e848003e4165ba58abf8307d09b0bc574a15bafb`;
+VDMREDIR DLL:
+`d0f5dc3bea50aafade55c8512c0afd5dac8fd2743d993f297b4b07cc3f1ada42`.
+This correction changes process.c by 13 added / 3 removed lines. The current
+normalized totals versus pinned OpenNT are file.c 44 added / 13 removed and
+process.c 131 added / 49 removed; no adapter or overlay is added. Guest media
+are untouched. ANSI/OEM unequal-byte-count short-query behavior and final
+whole-package reconciliation remain open; S37 is not closed by these tests.
+All 17 Console-text/exit-code product regressions also pass under
+`s37-env-product-r1`, including repeated/nested MEM and EDIT return. The
+original COMMAND nonzero results remain unchanged; no test was skipped.

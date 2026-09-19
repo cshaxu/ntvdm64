@@ -66,6 +66,30 @@ main(void)
     if (GetEnvironmentVariableOem("S37_OEM_FIXTURE", path, sizeof(path)) ||
         GetLastError() != ERROR_ENVVAR_NOT_FOUND) return 12;
     puts("S37_OEM_ENV_NONASCII_DELETE_MISSING_OK");
+    {
+        static CHAR large[65536];
+        DWORD native_length, oem_length;
+        if (!SetEnvironmentVariableW(L"S37_OEM_MATRIX", L"abc")) return 16;
+        memset(large, 0x5a, sizeof(large));
+        SetLastError(0);
+        oem_length = GetEnvironmentVariableOem("S37_OEM_MATRIX", large, sizeof(large));
+        printf("S37_ENV_LARGE result=%lu expected=3 error=%lu copied=%d\n",
+            oem_length, GetLastError(), !memcmp(large,"abc",4));
+        if (oem_length != 3 || memcmp(large,"abc",4)) return 17;
+        memset(path,0x5a,sizeof(path));
+        native_length=GetEnvironmentVariableA("S37_OEM_MATRIX",expected,1);
+        oem_length=GetEnvironmentVariableOem("S37_OEM_MATRIX",path,1);
+        if (oem_length!=native_length || path[1]!=0x5a) return 18;
+        if (!SetEnvironmentVariableW(L"S37_OEM_MATRIX", L"")) return 19;
+        SetLastError(0);
+        native_length=GetEnvironmentVariableA("S37_OEM_MATRIX",expected,sizeof(expected));
+        memset(path,0x5a,sizeof(path));
+        SetLastError(0);
+        oem_length=GetEnvironmentVariableOem("S37_OEM_MATRIX",path,sizeof(path));
+        if (native_length || oem_length || expected[0] || path[0]) return 20;
+        if (!SetEnvironmentVariableOem("S37_OEM_MATRIX",NULL)) return 21;
+        puts("S37_ENV_LARGE_SHORT_EMPTY_DELETE_OK");
+    }
 
     return 0;
 }

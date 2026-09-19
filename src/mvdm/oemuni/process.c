@@ -656,7 +656,8 @@ GetEnvironmentVariableOem(
             goto try_exit;
             }
 
-        Buffer.MaximumLength = (USHORT)nSize;
+        // DIVERGENCE: MVDM-HOST-DIV-277 preserves descriptor capacity.
+        Buffer.MaximumLength = (USHORT)(nSize > 65535 ? 65535 : nSize);
         Buffer.Buffer = (PCHAR)
             RtlAllocateHeap( RtlProcessHeap(), 0, Buffer.MaximumLength );
         if (Buffer.Buffer == NULL) {
@@ -664,12 +665,16 @@ GetEnvironmentVariableOem(
             goto try_exit;
             }
 
+        SetLastError(ERROR_SUCCESS);
         ReturnValue = GetEnvironmentVariableA( Name.Buffer,
                                                Buffer.Buffer,
                                                Buffer.MaximumLength
                                              );
+        // DIVERGENCE: MVDM-HOST-DIV-277 retains successful empty output.
+        if (ReturnValue == 0 && GetLastError() == ERROR_SUCCESS && nSize != 0)
+            lpBuffer[0] = '\0';
         if (ReturnValue != 0) {
-            if ( ReturnValue < nSize ) {
+            if ( ReturnValue < Buffer.MaximumLength ) {
                 Buffer.Length = (USHORT)ReturnValue;
                 RtlFreeUnicodeString( &Unicode );
                 Unicode.Buffer = NULL;
@@ -677,14 +682,19 @@ GetEnvironmentVariableOem(
                 if (!NT_SUCCESS( Status )) {
                     BaseSetLastNTError( Status );
                     ReturnValue = 0;
+                    // DIVERGENCE: MVDM-HOST-DIV-277 keeps the first failure.
+                    goto try_exit;
                     }
 
                 OemString.Buffer        = lpBuffer;
-                OemString.MaximumLength = (USHORT)nSize;
+                OemString.MaximumLength = Buffer.MaximumLength;
                 Status = RtlUnicodeStringToOemString( &OemString, &Unicode, FALSE );
                 if (!NT_SUCCESS( Status )) {
                     BaseSetLastNTError( Status );
                     ReturnValue = 0;
+                    }
+                else {
+                    ReturnValue = OemString.Length;
                     }
                 }
             }

@@ -1,5 +1,15 @@
 # mvdm
 
+MVDM-HOST-DIV-277: `oemuni/process.c::GetEnvironmentVariableOem` saturates
+the original ANSI/OEM descriptor capacity rather than wrapping at 65536,
+checks completion against the allocated capacity, preserves empty output,
+stops at the first failed conversion and returns the converted OEM length.
+Original BaseClient `base/win32/client/process.c::GetEnvironmentVariableA`
+provides the capacity-clamping and converted-length precedent; no new
+environment provider is introduced. Short-query ANSI sizing remains under
+review, not claimed as complete DBCS acceptance.
+[S37 evidence](../../docs/etc/evidence/m0-t420-s37-oemuni-capability-review.md).
+
 MVDM-HOST-DIV-276: OEM short paths use complete Unicode queries and actual
 OEM capacity/length, retaining zero on conversion failure through finally.
 Computer names use the original documented maximum Unicode name size and

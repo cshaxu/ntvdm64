@@ -77,6 +77,10 @@ DIV-276 repairs short-path doubled OEM capacity/WCHAR lengths and computer-
 name conversion false success. All six OEMUNI/DEM fixtures and expanded
 real DOS direct/nested routes pass. Environment-boundary and final package
 reconciliation remain; original/admission mirror counts stay in evidence.
+DIV-277 corrects reproduced environment-buffer wrap at 65536, empty-value
+output and conversion failure ordering. Six x86 fixtures and expanded real
+DOS direct/nested probes pass. Unequal ANSI/OEM short-query byte sizing and
+final package reconciliation remain open; this is not an S37 closure.
 
 ## S36 Closure Record
 
