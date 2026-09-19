@@ -3,7 +3,8 @@ param(
     [Parameter(Mandatory)][string]$Observer,
     [Parameter(Mandatory)][string]$FixtureRoot,
     [string]$PackageRoot = 'O:\winnt',
-    [Parameter(Mandatory)][string]$LogPrefix
+    [Parameter(Mandatory)][string]$LogPrefix,
+    [switch]$Stress
 )
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path "$PSScriptRoot\..\..").Path
@@ -26,7 +27,8 @@ function PackageProcesses {
 }
 if ((PackageProcesses).Count) { throw 'Package already in use' }
 $results = @()
-foreach ($image in @('D36N.COM','D36E.COM')) {
+$images = if ($Stress) { @('D36R.COM') } else { @('D36N.COM','D36E.COM') }
+foreach ($image in $images) {
     $source = Join-Path $FixtureRoot $image
     $hash = (Get-FileHash -LiteralPath $source).Hash
     Copy-Item -LiteralPath $source -Destination (Join-Path "$PackageRoot\tests" $image)
@@ -49,6 +51,9 @@ foreach ($image in @('D36N.COM','D36E.COM')) {
             $screen = Get-Content -LiteralPath "$report.console.txt" -Raw
             if ($screen -match 'S36_DPMI_FAIL|Bad command or filename' -or
                 $screen -notmatch 'S36_DPMI_ALLOC_REALLOC_DATA_FREE_OK') { throw 'Missing successful guest transcript' }
+            if ($Stress -and $screen -notmatch 'S36_DPMI_FORCED_MOVE_FAILED_GROW_DATA_FREE_OK') {
+                throw 'Missing forced relocation/failure/data marker'
+            }
             $survivors = @(PackageProcesses | Select-Object ProcessId,ParentProcessId,ExecutablePath)
             $results += @{Image=$image; Sha256=$hash; Route=$route; Report=$report; ProcessesBeforeCleanup=$survivors}
             Write-Host "PASS DPMI $image $route"

@@ -194,7 +194,7 @@ Return Value:
 {
     PXMEM_BLOCK OldBlock;
     ULONG BlockAddress, NewSize;
-    NTSTATUS Status;
+    BOOL Status;
 
     OldBlock = (PVOID)(((ULONG)getSI() << 16) | getDI());
     NewSize = (((ULONG)getBX() << 16) | getCX());
@@ -207,7 +207,8 @@ Return Value:
         &NewSize
         );
 
-    if (!NT_SUCCESS(Status)) {
+    /* DIVERGENCE MVDM-HOST-DIV-272: this provider returns BOOL, not NTSTATUS. */
+    if (!Status) {
         setCF(1);
 #if DBG
         OutputDebugString("DPMI: DpmiAllocateXmem failed to get memory block\n");

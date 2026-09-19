@@ -42,6 +42,22 @@ enter_pm:
     mov [handle + 2], si
     mov [linear], cx
     mov [linear + 2], bx
+%ifdef STRESS
+    xor bx, bx
+    mov cx, 4096
+    mov ax, 0501h
+    int 31h
+    jc failed
+    mov [guard], di
+    mov [guard + 2], si
+    shl ebx, 16
+    mov bx, cx
+    mov eax, [linear]
+    mov [old_linear], eax
+    add eax, 4096
+    cmp eax, ebx
+    jne failed
+%endif
     mov dx, allocated
     mov ah, 09h
     int 21h
@@ -56,10 +72,29 @@ enter_pm:
     mov es, ax
     mov dword [es:0], 36504D44h
     mov dword [es:4092], 214B4F36h
+%ifdef STRESS
+    ; Larger than this product's admitted pool: failure must retain the block.
+    mov byte [failure_stage], '1'
+    mov si, [handle + 2]
+    mov di, [handle]
+    mov bx, 0200h
+    xor cx, cx
+    mov ax, 0503h
+    int 31h
+    jnc failed
+    mov byte [failure_stage], '2'
+    cmp dword [es:0], 36504D44h
+    jne failed
+    cmp dword [es:4092], 214B4F36h
+    jne failed
+%endif
     mov si, [handle + 2]
     mov di, [handle]
     xor bx, bx
     mov cx, 8192
+%ifdef STRESS
+    mov byte [failure_stage], '3'
+%endif
     mov ax, 0503h
     int 31h
     jc failed
@@ -67,6 +102,13 @@ enter_pm:
     mov [handle + 2], si
     mov [linear], cx
     mov [linear + 2], bx
+%ifdef STRESS
+    mov byte [failure_stage], '4'
+    mov eax, [linear]
+    cmp eax, [old_linear]
+    je failed
+    mov byte [failure_stage], '5'
+%endif
     call bind_memory
     jc failed
     mov ax, [selector]
@@ -90,6 +132,16 @@ enter_pm:
     mov ax, 0502h
     int 31h
     jc failed
+%ifdef STRESS
+    mov si, [guard + 2]
+    mov di, [guard]
+    mov ax, 0502h
+    int 31h
+    jc failed
+    mov dx, stress_success
+    mov ah, 09h
+    int 21h
+%endif
     mov dx, success
     mov ah, 09h
     int 21h
@@ -123,11 +175,17 @@ handle dd 0
 linear dd 0
 selector dw 0
 saved_es dw 0
+%ifdef STRESS
+guard dd 0
+old_linear dd 0
+stress_success db 'S36_DPMI_FORCED_MOVE_FAILED_GROW_DATA_FREE_OK',13,10,'$'
+%endif
 entering db 'S36_DPMI_ENTERING',13,10,'$'
 entered db 'S36_DPMI_ENTERED',13,10,'$'
 allocated db 'S36_DPMI_ALLOCATED',13,10,'$'
 success db 'S36_DPMI_ALLOC_REALLOC_DATA_FREE_OK',13,10,'$'
-failure db 'S36_DPMI_FAIL',13,10,'$'
+failure db 'S36_DPMI_FAIL stage='
+failure_stage db '0',13,10,'$'
 times 4096 db 0
 stack_top:
 image_end:

@@ -439,3 +439,43 @@ All 17 text-gated product routes also pass in
 `s36-original-callback-product-r1-summary.json`, including COMMAND nesting,
 MEM, EDIT return, native streams/EOF and expected guest exit codes. This is
 the recovery delivery; final S36 capability/teardown closure remains separate.
+
+## Real DPMI forced relocation and failed growth
+
+The independent DPMI probe now supports `-DSTRESS`: allocate a 4 KiB block
+and a second adjacent 4 KiB guard (assert adjacency), write two sentinel
+DWORDs, request an impossible 32 MiB growth, check failure and original data,
+then grow to 8 KiB and require a changed linear address. Rebind the selector,
+verify both sentinels, free the descriptor and both allocations, print both
+success markers and exit zero. It runs directly and through two COMMAND /c
+levels via Verify-T420S36DpmiGuest.ps1 -Stress. It does not patch DOSX.
+
+The first product run failed; added stage diagnostics localized it to the
+expected CF on impossible growth (`s36-dpmi-stress-r2`, stage 1). Original
+dpmi32/xmem.c::DpmiReallocateXmem stores the result of
+DpmiReallocateVirtualMemory in NTSTATUS and tests NT_SUCCESS. The original
+header, RISC implementation and i386 implementation all return BOOL. Thus
+FALSE is accepted as successful NTSTATUS, and the caller overwrites its
+allocation record with zero address and the rejected size. The same erroneous
+test is present in pinned OpenNT xmem.c; it is not introduced by our overlay
+or the original-SAS callback recovery. Only this call site uses the provider.
+
+DIV-272 corrects the local variable to BOOL and tests !Status. No allocator,
+guest instruction or failure policy is replaced. Formal x86 relink succeeds;
+the same stress binary now passes direct and nested cases under
+`s36-dpmi-stress-fixed-r1`. Input SHA-256:
+`05b817ee7507cb20b0f8c27b0420f3b822b3b9c3cfdcd7368a705c183fade43e`.
+Its guard and changed-address assertions prove actual relocation, while the
+failed growth precedes successful movement and verifies retained data.
+
+Deployed worker SHA-256:
+`99c10a74b6d43ed932810fa773aa393c01ee2079a649776a011e9dd843e6b3ae`;
+VDMREDIR.dll:
+`2c2684fb1ab896ad4c40f1fd5cf173e947edff0c8ad183f7cf2545979fffb073`.
+The four prior null/restored-ES cases also pass under
+`s36-dpmi-bool-basic-r1`. Process snapshots show resident workers before
+test-owned cleanup; these runs prove task return/free, not natural worker
+exit. Final lifecycle acceptance is still separate.
+All four XMS routes pass in `s36-dpmi-bool-xms-r1-summary.json`, and all
+17 product routes pass in `s36-dpmi-bool-product-r1-summary.json`. The
+allocator body/private header still hash byte-identically to pinned OpenNT.

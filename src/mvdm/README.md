@@ -1,5 +1,12 @@
 # mvdm
 
+MVDM-HOST-DIV-272: `dpmi32/xmem.c::DpmiReallocateXmem` tests the original
+BOOL return from DpmiReallocateVirtualMemory as BOOL, not NTSTATUS. This
+prevents failed growth from being reported as success and replacing the
+still-valid allocation record with address zero. Both original backends
+and the original declaration return BOOL.
+[S36 evidence](../../docs/etc/evidence/m0-t420-s36-suballoc-capability-review.md).
+
 MVDM-HOST-DIV-271: `xms.486/xmsmemr.c` restores original SAS commit/decommit
 callbacks for preallocated CCPU40 backing. Only its flat-base mover calls
 the existing bounded mapping-aware worker operation; original signatures,

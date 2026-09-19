@@ -46,6 +46,10 @@ callback is removed. Bounded mapped movement is retained. The composed
 fixture proves free/reuse even with saturated leases and rejected backing
 I/O, without clearing live bytes. Original generic allocator rollback defects
 remain recorded; the selected provider no longer introduces those failures.
+Real DPMI forced relocation and failed-growth data preservation now pass
+directly and nested. This exposed an original BOOL/NTSTATUS mismatch in
+DpmiReallocateXmem; its one caller now checks BOOL correctly (DIV-272).
+Resident-worker teardown and the final capability ledger still need closure.
 
 ## S35 Closure Record
 
