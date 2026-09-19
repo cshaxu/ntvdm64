@@ -40,6 +40,8 @@ const lines = [
   "build obj/expand-failure.obj: cc $root/tests/mvdm/oemuni/oemuni_expand_failure_fixture.c",
   "build obj/family.obj: cc $root/tests/mvdm/oemuni/oemuni_family_fixture.c",
   "build obj/dbcs.obj: cc $root/tests/mvdm/oemuni/oemuni_dbcs_fixture.c",
+  "build obj/font.obj: cc $root/tests/mvdm/oemuni/oemuni_font_fixture.c",
+  "build oemuni-font-fixture.exe: link obj/font.obj",
   "build oemuni-dbcs-fixture.exe: link obj/dbcs.obj",
   "build oemuni-family-fixture.exe: link obj/file.obj obj/process.obj obj/family.obj",
   "build oemuni-expand-failure-fixture.exe: link obj/expand-failure.obj",

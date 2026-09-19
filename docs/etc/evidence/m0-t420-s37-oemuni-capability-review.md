@@ -372,7 +372,7 @@ packets remain supporting evidence, not per-interface hits.
 | GetVolumeInformationOem | DEM demfile/demgset/demsrch; WOW wkfileio | H/M both capacities, optional outputs, host failure and cleanup |
 | OutputDebugStringOem | DEM diagnostics including demmisc | H call; debug-only consumers do not establish ordinary guest behavior |
 | GetComputerNameOem | DEM demgset | G INT21 5E00 name matched to host; H |
-| RemoveFontResourceOem | DEM demfile create-failure fallback; WOW wkman | H absent-font failure only; positive original callback contract pending |
+| RemoveFontResourceOem | DEM demfile create-failure fallback; WOW wkman | H absent-font failure; M original conversion/result/failure/TEB reuse; DEM retry chain pending |
 | GetSystemDirectoryOem | No production textual consumer found | H/M complete-query size matrix and failure cleanup |
 | GetWindowsDirectoryOem | No production textual consumer found | H/M complete-query size matrix and failure cleanup |
 | SearchPathOem | COMMAND cmdpif | H/M byte count/prefix, complete-query size matrix and failure cleanup |
@@ -524,3 +524,28 @@ pass under s37-query-guest-r1. Remaining font/caller and other API boundary
 review still belongs to S37; this is not full package closure.
 All 17 Console-text-gated product regressions pass under
 s37-query-product-r1, including EDIT and expected original COMMAND exits.
+
+## Non-invasive original font-interface proof
+
+oemuni_font_fixture includes the actual file.c translation unit and replaces
+only RemoveFontResourceW with a recording provider and the OEM conversion
+entry with a forwarding wrapper that can inject failures. Normal conversion
+uses the formal RTL binding on actual OEM437. Input byte 82 in a FON name
+must reach the GDI-shaped provider as U+00E9, not an ANSI-misinterpreted name.
+No installed font is loaded or removed.
+
+The x86 fixture verifies TRUE propagation, FALSE/ERROR_FILE_NOT_FOUND
+propagation, STATUS_BUFFER_OVERFLOW -> ERROR_FILENAME_EXCED_RANGE, and
+STATUS_NO_MEMORY -> ERROR_NOT_ENOUGH_MEMORY. Neither conversion failure may
+invoke GDI. The thread-local Unicode buffer address/capacity must remain
+unchanged and a subsequent success must still work. The original function
+requests non-allocating conversion into its TEB buffer; it owns no temporary
+font handle or heap allocation to release.
+
+Build root `build/M0-T420/S37/font-r1`, target oemuni-font-fixture.exe via the
+existing generator and formal RTL inputs. Exit zero and marker
+S37_FONT_ORIGINAL_OEM_CONVERSION_RESULT_FAILURE_TEB_REUSE_OK pass. This is
+explicitly mock-boundary evidence, not a real GDI font removal or a DEM
+create-failure/retry chain. That higher-level chain remains pending; its
+source reachability was established above. No production source, guest
+media or deployed binary changes in this delivery.
