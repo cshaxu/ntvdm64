@@ -1,5 +1,11 @@
 # mvdm
 
+MVDM-HOST-DIV-274: `oemuni/file.c::GetFullPathNameOem` applies the original
+BaseClient curdir.c DBCS byte-count correction using the existing OEM RTL
+size interface, including the file-part prefix. An oversized Unicode result
+is not read as a completed path. No new conversion provider is introduced.
+[S37 evidence](../../docs/etc/evidence/m0-t420-s37-oemuni-capability-review.md).
+
 MVDM-HOST-DIV-273: `oemuni/process.c::ExpandEnvironmentStringsOem` publishes
 the original conversion's OEM result instead of leaving ANSI bytes in the
 caller buffer, uses the converted byte count, and separates a borrowed output

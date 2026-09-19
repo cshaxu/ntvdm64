@@ -44,8 +44,10 @@ rename/delete, directory/temp-file and host-information checks. This is
 host-side SBCS evidence, not full guest/WOW or DBCS acceptance; S37 stays open.
 A test-only CP932 boundary reproduces original GetFullPathNameOem using
 Unicode character counts for OEM byte length/copy and file-part offset.
-The missing terminator/wrong offset are an open correctness finding, not a
-passing DBCS capability or a CCPU defect; production is unchanged this delivery.
+The original BaseClient DBCS correction supplies the fix: existing OEM RTL
+size operations now govern path and prefix bytes (DIV-274). All four x86
+OEMUNI fixtures and direct/nested real OEM437 file routes pass. CP932 remains
+mocked boundary evidence; remaining family/consumer review keeps S37 open.
 
 ## S36 Closure Record
 

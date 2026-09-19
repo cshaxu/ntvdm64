@@ -8,13 +8,16 @@
 
 /* Test-only CP932 boundary: never changes the host/system code page. */
 static const WCHAR full_path[] = L"C:\\\x8868\\x.txt";
+static int path_mode;
 static ULONG NTAPI fixed_path(PCWSTR input, ULONG bytes, PWSTR output, PWSTR *part)
 {
     ULONG size = sizeof(full_path);
     (void)input;
+    if (path_mode == 1) return 0;
+    if (path_mode == 2) return (MAX_PATH + 1) * sizeof(WCHAR);
     if (bytes < size) return size;
     memcpy(output, full_path, size);
-    if (part) *part = output + 5;
+    if (part) *part = path_mode == 3 ? NULL : output + 5;
     return size - sizeof(WCHAR);
 }
 
@@ -36,8 +39,16 @@ static NTSTATUS NTAPI cp932_oem(POEM_STRING dst, PUNICODE_STRING src, BOOLEAN al
     return 0;
 }
 
+static ULONG NTAPI cp932_size(PCUNICODE_STRING src)
+{
+    if (!src->Length) return 1;
+    return WideCharToMultiByte(932, 0, src->Buffer, src->Length / 2,
+        NULL, 0, NULL, NULL) + 1;
+}
+
 #define RtlGetFullPathName_U fixed_path
 #define RtlUnicodeStringToOemString cp932_oem
+#define RtlUnicodeStringToOemSize cp932_size
 #include "../../../src/mvdm/oemuni/file.c"
 
 int main(void)
@@ -52,11 +63,21 @@ int main(void)
     printf("S37_DBCS_FULLPATH actual_length=%lu expected_length=%d part=%ld expected_part=6 terminator=%u\n",
         actual, size - 1, part ? (long)(part - output) : -1,
         (unsigned char)output[size-1]);
-    /* Baseline witness, not a capability PASS: lock the three observed
-       violations until a reviewed original-owner correction is admitted. */
-    if (actual != 10 || part != output + 5 ||
-        (unsigned char)output[11] != 0x5a ||
-        memcmp(output, expected, 11)) return 3;
-    puts("S37_DBCS_ORIGINAL_LENGTH_COPY_FILEPART_DEFECT_REPRODUCED");
+    if (actual != 11 || part != output + 6 ||
+        memcmp(output, expected, size)) return 3;
+    memset(output, 0x5a, sizeof(output));
+    actual = GetFullPathNameOem("x.txt", 11, output, NULL);
+    if (actual != 12 || output[0] != 0x5a || output[11] != 0x5a) return 4;
+    actual = GetFullPathNameOem("x.txt", 12, output, NULL);
+    if (actual != 11 || memcmp(output, expected, size) || output[12] != 0x5a) return 5;
+    for (path_mode = 1; path_mode <= 2; ++path_mode) {
+        memset(output, 0x5a, sizeof(output));
+        if (GetFullPathNameOem("x.txt", sizeof(output), output, NULL) ||
+            output[0] != 0x5a) return 6;
+    }
+    path_mode = 3;
+    part = output;
+    if (GetFullPathNameOem("x.txt", sizeof(output), output, &part) != 11 || part) return 7;
+    puts("S37_DBCS_FULLPATH_LENGTH_COPY_FILEPART_SHORT_EXACT_BUFFER_OK");
     return 0;
 }

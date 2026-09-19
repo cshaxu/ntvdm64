@@ -550,6 +550,15 @@ Routine Description:
                         FilePartPtr
                         );
     UnicodeLength >>= 1;
+    /* DIVERGENCE MVDM-HOST-DIV-274: use encoded byte counts, as in the
+       original BaseClient curdir.c DBCS fix, but for OEM rather than ANSI. */
+    if ( UnicodeLength && UnicodeLength < MAX_PATH ) {
+        RtlInitUnicodeString(&UnicodeResult,Ubuff);
+        UnicodeLength = RtlUnicodeStringToOemSize(&UnicodeResult)-1;
+        }
+    else {
+        UnicodeLength = 0;
+        }
     if ( UnicodeLength && UnicodeLength < nBufferLength ) {
         RtlInitUnicodeString(&UnicodeResult,Ubuff);
         Status = RtlUnicodeStringToOemString(&OemResult,&UnicodeResult,TRUE);
@@ -562,8 +571,9 @@ Routine Description:
                     *lpFilePart = NULL;
                     }
                 else {
-                    *lpFilePart = (PSZ)(FilePart - Ubuff);
-                    *lpFilePart = *lpFilePart + (ULONG)lpBuffer;
+                    /* DIVERGENCE MVDM-HOST-DIV-274: OEM prefix bytes. */
+                    UnicodeResult.Length = (USHORT)((FilePart - Ubuff)*sizeof(WCHAR));
+                    *lpFilePart = lpBuffer + RtlUnicodeStringToOemSize(&UnicodeResult)-1;
                     }
                 }
             }

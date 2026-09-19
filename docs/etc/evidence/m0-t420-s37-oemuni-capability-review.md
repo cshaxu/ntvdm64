@@ -196,3 +196,45 @@ a DBCS host. S37 remains open: review the related length/capacity families,
 then make a minimal original-owner correction and replace the diagnostic
 expectation with positive/short-buffer/optional-output/failure verification.
 This delivery changes tests and evidence only; deployed products are unchanged.
+
+## Source-shaped DBCS correction
+
+Further source research found the same defect already corrected in original
+OpenNT `base/win32/client/curdir.c::GetFullPathNameA`, under its DBCS sections
+(lines 124--164 and 183--188): compute encoded path and prefix byte counts,
+not WCHAR counts. This supplies the algorithmic authority; the OEMUNI file
+in both pinned OpenNT and OpenNT-4.5 still retains the old calculation.
+
+Recovery ladder: retain the already composed OEMUNI translation unit; use
+the existing RtlUnicodeStringToOemSize interface for the original correction's
+two size operations. The ANSI BaseClient body is not directly substituted:
+its Basep8Bit policy can select ANSI whereas this API promises OEM. Full
+BaseClient import is neither required nor admitted. No external intrusion,
+new conversion algorithm, adapter body or overlay is necessary.
+
+DIV-274 adds bounded OEM byte sizing before the existing capacity/copy logic
+and sizes the Unicode prefix for lpFilePart. An unsuccessful or oversized
+Unicode path is not consumed as initialized text. Mirror delta against the
+preceding delivery is 12 added / 2 removed lines, including comments; the
+existing control/conversion/allocation owner remains in file.c. No
+opennt-host source or guest medium changes.
+
+The CP932 test now asserts success rather than the earlier diagnostic failure:
+length 11, prefix 6, terminator zero; capacity 11 returns required 12 without
+writing output, capacity 12 copies exactly and preserves the next-byte canary.
+Null optional output, null returned file-part, zero provider result and
+oversized provider result also pass. All four x86 OEMUNI fixtures pass,
+including existing SBCS file/environment and conversion-failure cases.
+The CP932 result is still explicitly a mocked conversion-boundary proof,
+not a real DBCS-host guest run.
+
+Formal x86 product relink succeeds in the intentionally reused S36 graph.
+Deployed worker SHA-256 is
+`f6188e688d02c55d1e2f1d6e663c5e0aa821a53e465a05206c2c03ae2457e057`;
+VDMREDIR.dll is
+`a9cb67092e5d5f9fb7111c2b9ee96d682537d0de5c6f6abcbf4cac92c69623b9`.
+Real OEM437 guest direct/nested file routes pass (s37-dbcs-guest-r1).
+All 17 Console-text-gated product routes pass under s37-dbcs-product-r1,
+including original expected nonzero COMMAND exits, native streams/EOF,
+direct/nested MEM and EDIT. S37's remaining whole-family disposition is not
+implied complete by this correction.
