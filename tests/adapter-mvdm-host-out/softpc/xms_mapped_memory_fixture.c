@@ -14,6 +14,8 @@ typedef struct fixture_memory {
     uint8_t bytes[FIXTURE_MEMORY_BYTES];
     int reject_read;
     int reject_write;
+    unsigned write_calls;
+    unsigned reject_write_call;
 } fixture_memory;
 
 /* The focused lease fixture binds its own memory callbacks rather than the
@@ -48,7 +50,8 @@ static int fixture_write(void *context, uint32_t address, const uint8_t *bytes,
     uint32_t byte_count)
 {
     fixture_memory *memory = (fixture_memory *)context;
-    if (memory->reject_write) return 0;
+    ++memory->write_calls;
+    if (memory->reject_write || memory->write_calls == memory->reject_write_call) return 0;
     if (address > FIXTURE_MEMORY_BYTES || byte_count > FIXTURE_MEMORY_BYTES - address)
         return 0;
     memcpy(memory->bytes + address, bytes, byte_count);
@@ -78,6 +81,21 @@ static int allocator_failure_audit(session *instance, fixture_memory *memory)
         memory->bytes[65536u] != 0x5a) return 23;
     free(pool);
     puts("S36_KNOWN_DEFECT_FAILED_FREE_PHANTOM_CAPACITY_REPRODUCED");
+
+    pool = SAInitialize(0u, FIXTURE_MEMORY_BYTES, xmsCommitBlock,
+        xmsDecommitBlock, xmsMoveMemory);
+    if (!pool || !SAAllocate(pool, FIXTURE_MEMORY_BYTES, &address)) return 25;
+    memset(memory->bytes + 65536u, 0x5a, 8192u);
+    memory->write_calls = 0;
+    memory->reject_write_call = 2;
+    if (SAFree(pool, 8192u, 65536u)) return 26;
+    memory->reject_write_call = 0;
+    if (memory->write_calls != 2 || memory->bytes[65536u] != 0 ||
+        memory->bytes[69632u] != 0x5a ||
+        !SAQueryFree(pool, &available, &largest) || available != 8192u ||
+        instance->state != SESSION_STATE_ACTIVE) return 27;
+    free(pool);
+    puts("S36_KNOWN_DEFECT_PARTIAL_FREE_ZEROED_DATA_REPRODUCED");
     return 0;
 }
 
@@ -92,6 +110,7 @@ int main(int argc, char **argv)
 
     memset(&memory, 0xff, sizeof(memory));
     memory.reject_read = memory.reject_write = 0;
+    memory.write_calls = memory.reject_write_call = 0;
     session_initialize(&instance, 322u);
     if (!session_activate(&instance) || !session_thread_bind(&instance) ||
         !session_guest_memory_begin(&instance, &memory, fixture_read, fixture_write))

@@ -340,3 +340,31 @@ the original rollback defect survives composition with actual worker
 callbacks. Product behavior is unchanged. Further disposition must preserve
 the original allocation contract and address partial multi-page failure,
 not merely repair this single bitmap example or conceal it with success.
+
+## Multi-page consequence and historical callback alternative
+
+The composed fixture now counts backing writes and rejects the second write
+during an 8 KiB free. Actual xmsDecommitBlock clears the first 4 KiB, the second
+page retains its sentinel, SAFree returns FALSE, SAQueryFree reports 8 KiB
+free, and the session remains active. The rebuilt x86 fixture reports
+`S36_KNOWN_DEFECT_PARTIAL_FREE_ZEROED_DATA_REPRODUCED`; its ordinary boundary
+checks still pass. This disproves a bitmap-only repair: the local callback
+has already destroyed part of the allocation before reporting failure.
+
+Source-first review also identifies an earlier unselected alternative:
+original `xms.486/xmsmemr.c` calls sas_manage_xms for commit/decommit, whereas
+the local callback zeroes through allocating bounce leases. The mirror and
+pinned OpenNT file both hash to
+`70970ed738101458f8036b5a283f034eb64baf32ead84a59a6b02278b327612c`.
+Original `softpc.new/host/src/stubs.c` supplies the CPU_40_STYLE
+sas_manage_xms body that prints a diagnostic and returns TRUE without changing
+backing. Thus zero-on-decommit is a local behavior, not established by that
+original CCPU40 path. The existing adapter rationale discusses the i386
+direct-host-pointer backend but does not settle this RISC/CCPU alternative.
+
+Before adding rollback machinery, the next source-recovery check must attempt
+composition of that original callback unit, classify its mover's GetVDMAddr /
+RtlMoveMemory / sas_overwrite_memory boundary, and verify the selected pool's
+backing and caller requirements. No no-op has been installed or declared
+correct solely because the original stub returns success. The original unit
+and product callback remain unchanged at this checkpoint.
