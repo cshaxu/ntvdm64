@@ -10,6 +10,11 @@ $ErrorActionPreference = 'Stop'
 $Observer = (Resolve-Path -LiteralPath $Observer).Path
 $PackageRoot = (Resolve-Path -LiteralPath $PackageRoot).Path
 if ($LogPrefix -notmatch '^[a-z0-9-]+$') { throw 'Invalid log prefix' }
+$runtimeFixtureRoot = Join-Path $PackageRoot 'tests'
+if (!(Test-Path -LiteralPath $runtimeFixtureRoot)) {
+    New-Item -ItemType Directory -Path $runtimeFixtureRoot -Force | Out-Null
+}
+$runtimeFixtureRoot = (Resolve-Path -LiteralPath $runtimeFixtureRoot).Path
 $productPaths = @('run16.exe','ntvdm.exe','basesrv.exe') | ForEach-Object { Join-Path $PackageRoot $_ }
 function Get-PackageProcesses {
     @(Get-CimInstance Win32_Process -Filter "Name='run16.exe' OR Name='ntvdm.exe' OR Name='basesrv.exe'" |
@@ -20,7 +25,6 @@ if ((!$Cases -or 'guest-seven' -in $Cases) -and !$GuestFixturePath) {
     throw 'Guest cases require -GuestFixturePath with a verified build-root fixture.'
 }
 $fixtureRoot=Split-Path -Parent $Observer
-$guestFixtureDrive=$null
 if ($GuestFixturePath) {
     # Test-only DOS program: write a guest-owned textual witness, then
     # MOV AX,4C07h; INT 21h.  The outer launcher exit alone is not proof that
@@ -37,20 +41,22 @@ if ($GuestFixturePath) {
         (Get-FileHash -LiteralPath $GuestFixturePath).Hash -ne (Get-FileHash -LiteralPath $guest).Hash) {
         throw 'Short-path fixture does not match the build artifact'
     }
-    # DOS COMMAND cannot reliably execute a long host path.  Keep the fixture
-    # physically in this admitted build root, then give the guest a short,
-    # test-owned drive spelling.  The hash check above prevents this from
-    # becoming a copied package-media substitute.
-    $guestFixtureDrive=@('Y:','X:','W:','V:','U:') | Where-Object { -not (Test-Path "$_\\") } | Select-Object -First 1
-    if (!$guestFixtureDrive) { throw 'No reserved short DOS fixture drive is available' }
-    subst $guestFixtureDrive $fixtureRoot
-    if ($LASTEXITCODE) { throw 'Could not map a short DOS fixture drive' }
-    $guest=Join-Path "$guestFixtureDrive\\" 'G7.COM'
+    # Guest fixture provenance remains the admitted build-root input.  A
+    # short, package-local test path is required by DOS COMMAND, but mapping a
+    # drive with SUBST leaks an OS-global device mapping into the spawned
+    # worker and is not reliably visible across its startup boundary.  Copy
+    # only this verified test fixture under the declared runtime test root.
+    $runtimeGuest = Join-Path $runtimeFixtureRoot 'G7.COM'
+    [IO.File]::Copy($guest, $runtimeGuest, $true)
+    if ((Get-FileHash -LiteralPath $guest).Hash -ne (Get-FileHash -LiteralPath $runtimeGuest).Hash) {
+        throw 'Runtime test fixture does not match the admitted build artifact'
+    }
+    $guest = $runtimeGuest
 }
-[IO.File]::WriteAllText((Join-Path $fixtureRoot 'STREAM.CMD'),"@echo off`r`necho S10_STDOUT`r`necho S10_STDERR 1>&2`r`n",[Text.Encoding]::ASCII)
-[IO.File]::WriteAllText((Join-Path $fixtureRoot 'EOF.CMD'),"@echo off`r`necho S10_EOF`r`nmore <nul`r`nexit /b 37`r`n",[Text.Encoding]::ASCII)
-[IO.File]::WriteAllText((Join-Path $fixtureRoot 'D7.CMD'),"@echo off`r`necho S10_DIRECT_SEVEN`r`nexit /b 7`r`n",[Text.Encoding]::ASCII)
-$shortFixtureRoot=if($GuestFixturePath){Split-Path -Parent $GuestFixturePath}else{$fixtureRoot}
+[IO.File]::WriteAllText((Join-Path $runtimeFixtureRoot 'STREAM.CMD'),"@echo off`r`necho S10_STDOUT`r`necho S10_STDERR 1>&2`r`n",[Text.Encoding]::ASCII)
+[IO.File]::WriteAllText((Join-Path $runtimeFixtureRoot 'EOF.CMD'),"@echo off`r`necho S10_EOF`r`nmore <nul`r`nexit /b 37`r`n",[Text.Encoding]::ASCII)
+[IO.File]::WriteAllText((Join-Path $runtimeFixtureRoot 'D7.CMD'),"@echo off`r`necho S10_DIRECT_SEVEN`r`nexit /b 7`r`n",[Text.Encoding]::ASCII)
+$shortFixtureRoot=$runtimeFixtureRoot
 $matrix = @(
     # Interactive COMMAND delegates these native built-ins through the
     # original BOP 54:08 path, hence the modern cmd.exe banner is the actual
@@ -181,6 +187,5 @@ try {
     }
 } finally {
     foreach ($name in $environmentNames) { [Environment]::SetEnvironmentVariable($name,$previous[$name]) }
-    if ($guestFixtureDrive) { subst $guestFixtureDrive /d }
     $results | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $PackageRoot "logs\$LogPrefix-summary.json") -Encoding utf8
 }
