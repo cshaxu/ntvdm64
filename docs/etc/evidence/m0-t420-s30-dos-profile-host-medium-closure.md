@@ -52,3 +52,21 @@ peer I/O, whose original failure is preserved with zero product diff and a
 concrete hardware/provider retest condition in `TODO.md`.  This closes S30
 under the project external-boundary rule without relabeling that missing
 physical capability as a pass.
+
+## 2026-09-18 reopened verification
+
+At the owner's direction S30 was reopened without changing the product.  The
+current package passed all five retained guest routes again: `D30.COM`
+(`S30_HIMEM_DOSX_OK`), `P30.COM` (`S30_PURE_DOS_OK`), `E30.COM` (all five
+EMS markers), `C31.COM` (`S30_COM3_LOOPBACK_TX_RX_OK`), and `L30.COM`
+(`S30_LPT1_WRITE_OK`, with the temporary LPT named-pipe mapping removed by the
+observer).  Their raw transcripts are `O:\winnt\logs\m0-t420-s30-reopen-*.raw`.
+The unchanged direct-source `nt_com.c` mock also again emitted
+`T420_S30_NT_COM_MOCK_OPEN_WRITE_READ_CLOSE_OK` from
+`build/M0-T420/S30/nt-com-mock-reopen-r1`.
+
+The live Windows serial map remains only `\Device\USBSER000 = COM3`; it
+does not add the CTS-capable external peer required for the original INT 14h
+transmit/host-receive route.  No source, overlay, adapter or deployed artifact
+changed.  The outstanding debt and its exact hardware retest condition remain
+unchanged.

@@ -4,26 +4,26 @@
 
 ## Active Packet
 
-**Active: M0 T420 S31**
+**Active: M0 T420 S30 (reopened verification)**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T420 S31 — Ordinary Mode. |
-| Candidate Proposal | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md) S31. |
-| Admission And Approval | Owner authorized automatic sequential S admission; S30 closed at `91a5be61a` and its independent rerun was recorded at `77a7223ab`. |
-| Objective | Close the complete selected `softpc.new/base/debug` capability unit by proving either the original release-profile debug exclusion or every actually selected debug initialization, trace/backtrace and event path. |
-| Non-goals | No activation of an internal Yoda/debugger shell in the ordinary product, no private NT4 debugger/CSR transport, no CPU30/kernel monitor revival and no duplicate `mvdm/dbg` work. |
-| Reference Baseline | S11 recovered all eight original debug sources. The current formal x86 graph links them with original `/DPROD`; S31 must prove the complete resulting profile boundary rather than infer runtime capability from linkage. |
-| Files And ABI Surface | Freeze the eight-source `softpc.new/base/debug` manifest, its `PROD` gates, all selected worker callers and their startup/error/teardown behavior. |
-| Applicable Rules | Project design/rules, source policy, strict mirror rule, CCPU40-only product rule, original-owner recovery and transcript-gated acceptance. |
-| Verification | Audit every source-level feature gate and selected caller, establish a release-profile compile/link witness, then pass fresh formal x86 and established direct/interactive COMMAND/MEM/EDIT regressions. |
-| Expected Markers | Every debug source is classified as original live selected behavior or complete original release exclusion; no dormant alternate debugger/trace body is misrepresented as active, and no ordinary workload regresses. |
-| Asset Needs | Pinned OpenNT debug union, current build graph/map, selected runtime artifacts, test-only build roots and `O:\winnt` runtime/log roots. |
-| Reporting Requirements | Record source hashes, each `PROD`/feature gate, caller-to-disposition map, compile/link evidence, mirror delta and regression results. |
-| Stop Conditions | A reached non-PROD-only body requires an unapproved debugger transport, an original profile gate has ambiguous selection, or established workload regresses. |
-| Exit Criteria | All eight selected units and their reachable caller edges have an original-profile disposition; formal x86 and established regressions pass; evidence/index/status updated; reviewed P pushed. |
+| Identifier Mode | M0 T420 S30 — reopened verification. |
+| Candidate Proposal | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md) S30. |
+| Admission And Approval | Owner explicitly directed return to S30 on 2026-09-18; the prior S30 closure remains evidence, while S31 is not active. |
+| Objective | Recheck the complete original DOS-profile and host-medium closure without widening the product: default DOS, HIMEM/DOSX, pure-DOS and EMS profiles, original COM/LPT paths, their real-host boundary and the test-only provider mock. |
+| Non-goals | No SoftPC debug audit, serial emulation, printer provider, fake success, mirror source change or unrelated package work. |
+| Reference Baseline | S30 closed at `91a5be61a`; independent COM3 loopback confirmation was recorded at `77a7223ab`. The only deferred real result is external COM peer I/O without a CTS-capable peer. |
+| Files And ABI Surface | Original DOS/EMM profile assets; `rs232_io.c`, `com.c`, `printer*.c`, `nt_com.c` and `nt_lpt.c` only as already selected; test-only fixtures and the S30 evidence/debt record. |
+| Applicable Rules | Project design/rules, source policy, strict mirror rule, no fake provider rule, original-owner recovery and transcript-gated acceptance. |
+| Verification | Re-run the reproducible S30 matrix and confirm the recorded external-host boundary remains accurate; use a test-only mock only for the unavailable CTS-capable provider success path. |
+| Expected Markers | Every selected S30 profile/device result is either a real guest pass, an unchanged original failure on the unavailable peer, or explicitly bounded test-only mock evidence. |
+| Asset Needs | Pinned OpenNT sources, current five-artifact x86 package, `O:\winnt` runtime/log roots, current serial/LPT inventory and declared test media. |
+| Reporting Requirements | Record exact commands, guest transcripts, process cleanup, artifact identity, real-host inventory, mock boundary and any changed debt condition. |
+| Stop Conditions | A normal S30 route regresses, a source change would be needed to simulate an unavailable peer, or the recorded host boundary no longer matches the real inventory. |
+| Exit Criteria | The recheck either confirms the existing S30 closure evidence without product changes, or records a newly reproducible defect with its original owner; workspace clean and reviewed P pushed. |
 | Original Owner Request | Standing automatic sequential S authorization for the T420 whole-package capability sequence. |
-| Similar-Issue Sweep | Audit all debug macros, exported globals and host/CCPU callers for accidental non-PROD activation, duplicate debugger ownership or trace file lifetime leaks. |
+| Similar-Issue Sweep | Recheck every selected DOS profile and COM/LPT route for stale test media, changed Windows endpoint inventory, leaked product processes or an accidental host-side substitute. |
 
 ## S30 Closure Context
 
@@ -107,12 +107,16 @@ close. A missing external medium is recorded as a platform limitation, never
 silently converted into a pass; the remaining S31--S43 rows retain the same
 per-package acceptance rule.
 
-## S31 Progress
+## S30 Reopened Progress
 
-Admission complete. Initial audit confirms the formal x86 graph compiles every
-selected original debug translation unit with `/DPROD`. S31 is tracing the
-complete source gate and reached call edges to distinguish original release
-exclusion from any selected worker-local behavior.
+The owner returned the active packet from prematurely admitted S31 to S30.
+The S31 debug audit is paused with no source or test changes. The reopened
+S30 matrix now passes again: DOSX/HIMEM, pure-DOS, EMS, COM3 controller
+loopback, LPT1 byte output and the isolated original `nt_com.c` success mock.
+The Windows serial map remains only `\Device\USBSER000 = COM3`, so the
+recorded absence of a CTS-capable external peer is unchanged and may not be
+turned into a product-side substitute. See the S30 closure evidence's
+2026-09-18 reopened-verification record.
 
 ## S1 Closure Record
 
