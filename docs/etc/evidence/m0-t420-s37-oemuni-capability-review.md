@@ -336,3 +336,67 @@ All 17 Console-text-gated product regression routes pass under
 s37-volume-product-r1, including EDIT and original expected exit codes.
 The outstanding S37 work remains intermediate-query sizing, narrowing and
 complete selected-caller disposition; this fix is not whole-package closure.
+
+## Selected-entry evidence reconciliation
+
+At revision 1edae5841 the formal ntvdm.exe.map contains all 28 definitions
+from original-mvdm-host-oemuni file.obj/process.obj. The original disabled
+CreateProcessOem is not in that map. Call-shaped searches cover DOS, SoftPC,
+WOW32, executable roots and opennt-host; a source-wide macro-alias search
+finds no aliases bringing the three otherwise uncalled directory helpers
+into selected call sites. Text matches establish source ownership, not
+runtime hits or successful WOW execution.
+
+Evidence labels below: G = actual S37 DOS probe plus independent host name/
+content oracle; H = original-owner host fixture; M = test-only CP932 boundary
+or failure injection. H/M do not substitute for G. Regressions from other
+packets remain supporting evidence, not per-interface hits.
+
+| Selected OEMUNI function | Original source consumer | Current direct evidence / remaining boundary |
+| --- | --- | --- |
+| CreateFileOem | DEM demfile/demfcb/demmisc; WOW wkfileio | G create/open/read/write/close and failed old-name open; H |
+| SetFileAttributesOem | DEM demfile/demfcb; WOW wkfileio/wkman | G set/reset read-only; H |
+| GetFileAttributesOem | DEM demfile/demdir; COMMAND cmdpif; WOW | G attribute query; H |
+| DeleteFileOem | DEM demfile/demfcb; WOW wkman | H success/missing; S37 guest delete witness still needed |
+| MoveFileOem | DEM demfile/demfcb; WOW wkman | G rename; H |
+| MoveFileExOem | WOW wkman delayed-delete workaround | H; no WOW workload acceptance |
+| FindFirstFileOem | DEM demfcb FCB delete/rename | H enumeration; ordinary DOS handle-find is not proof of this FCB path |
+| FindNextFileOem | DEM demfcb FCB delete/rename | H end-of-enumeration; FCB guest witness pending |
+| GetFullPathNameOem | DEM demmisc; COMMAND cmdpif; WOW wdos/wkman | H/M byte count, prefix, short/exact, zero/oversize result |
+| GetCurrentDirectoryOem | WOW wdos | H/M; no WOW workload acceptance |
+| SetCurrentDirectoryOem | DEM demdir/demgset; COMMAND cmdpif; WOW wdos | H restoration; guest directory-switch witness pending |
+| CreateDirectoryOem | DEM demdir | G non-ASCII directory create; H |
+| RemoveDirectoryOem | DEM demdir | H; S37 guest removal witness pending |
+| GetDriveTypeOem | DEM demioctl/demgset; COMMAND cmdmisc | H compared to native drive type; targeted guest evidence pending |
+| GetDiskFreeSpaceOem | DEM demgset | H; targeted guest evidence pending |
+| GetVolumeInformationOem | DEM demfile/demgset/demsrch; WOW wkfileio | H/M both capacities, optional outputs, host failure and cleanup |
+| OutputDebugStringOem | DEM diagnostics including demmisc | H call; debug-only consumers do not establish ordinary guest behavior |
+| GetComputerNameOem | DEM demgset | H; targeted guest evidence pending |
+| RemoveFontResourceOem | DEM demfile create-failure fallback; WOW wkman | H absent-font failure only; positive original callback contract pending |
+| GetSystemDirectoryOem | No production textual consumer found | H/M linked helper; tiny intermediate-buffer contract still open |
+| GetWindowsDirectoryOem | No production textual consumer found | H/M linked helper; tiny intermediate-buffer contract still open |
+| SearchPathOem | COMMAND cmdpif | H/M byte count/prefix/exact capacity; tiny intermediate query still open |
+| GetTempPathOem | No production textual consumer found | H/M; tiny intermediate query still open |
+| GetTempFileNameOem | WOW wkman | H create/delete; no WOW workload acceptance |
+| GetEnvironmentVariableOem | COMMAND cmdenv/cmdmisc; WOW wdos | H non-ASCII/missing; caller-specific guest witness pending |
+| SetEnvironmentVariableOem | DEM demdir; COMMAND cmdpif/cmdmisc; WOW wdos | H set/delete; caller-specific guest witness pending |
+| ExpandEnvironmentStringsOem | SoftPC host nt_pif | H/M non-ASCII, short buffer and two conversion failures |
+| GetShortPathNameOem | COMMAND cmdpif | H valid file path and null-input failure |
+
+The font fallback is not an unreachable-WOW exclusion: demfile.c's reached
+create failure path examines TTF/FON/FOT extensions, attempts removal and
+retries creation. It must receive a non-invasive original-call mock before
+closure; do not load/remove a user's installed font merely to generate a hit.
+
+Provider check: the formal map binds RtlUnicodeStringToOemString to the
+existing opennt_support_rtl.obj implementation, and RtlUnicodeStringToOemSize
+to NTDLL. The former measures WideCharToMultiByte(CP_OEMCP) output plus NUL
+and rejects insufficient MaximumLength before writing. The CP932 mock
+exercises this capacity rule but does not prove every native NLS behavior.
+No production provider change is made by this reconciliation.
+
+Closure work is therefore concrete, not an unspecified full sweep: complete
+intermediate-buffer/narrowing cases; add targeted DOS FCB/directory/info
+evidence; prove the font fallback contract with a test-only provider; and
+reconcile each remaining host-only/WOW-owned row without claiming a WOW
+workload. These remain part of active S37, not silent queue deferrals.
