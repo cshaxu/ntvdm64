@@ -132,7 +132,7 @@ int main(int argc,char **argv) {
     HPCON pty;
     STARTUPINFOEXA si={0};PROCESS_INFORMATION pi={0};SIZE_T bytes=0;
     COORD size;
-    if(argc!=4 && (argc!=5 || (strcmp(argv[4],"--mouse") && strcmp(argv[4],"--resize") && strcmp(argv[4],"--video-int10") && strcmp(argv[4],"--system-capability") && strcmp(argv[4],"--vdmredir-pipe") && strcmp(argv[4],"--vdmredir-transact") && strcmp(argv[4],"--vdmredir-call") && strcmp(argv[4],"--vdmredir-timeout") && strcmp(argv[4],"--vdmredir-async") && strcmp(argv[4],"--vdmredir-async-write") && strcmp(argv[4],"--vdmredir-mailslot") && strcmp(argv[4],"--vdmredir-terminate") && strcmp(argv[4],"--vdmredir-netbios") && strcmp(argv[4],"--vdmredir-netbios-async") && strcmp(argv[4],"--vdmredir-dlc") && strcmp(argv[4],"--vdmredir-netapi") && strcmp(argv[4],"--vdmredir-net-enum") && strcmp(argv[4],"--vdmredir-wksta") && strcmp(argv[4],"--vdmredir-wksta-set") && strcmp(argv[4],"--vdmredir-message") && strcmp(argv[4],"--vdmredir-service") && strcmp(argv[4],"--vdmredir-assign") && strcmp(argv[4],"--vdmredir-use") && strcmp(argv[4],"--vdmredir-use-info") && strcmp(argv[4],"--vdmredir-use-lifecycle"))))return 64;
+    if(argc!=4 && (argc!=5 || (strcmp(argv[4],"--mouse") && strcmp(argv[4],"--resize") && strcmp(argv[4],"--video-int10") && strcmp(argv[4],"--system-capability") && strcmp(argv[4],"--bios-capability") && strcmp(argv[4],"--vdmredir-pipe") && strcmp(argv[4],"--vdmredir-transact") && strcmp(argv[4],"--vdmredir-call") && strcmp(argv[4],"--vdmredir-timeout") && strcmp(argv[4],"--vdmredir-async") && strcmp(argv[4],"--vdmredir-async-write") && strcmp(argv[4],"--vdmredir-mailslot") && strcmp(argv[4],"--vdmredir-terminate") && strcmp(argv[4],"--vdmredir-netbios") && strcmp(argv[4],"--vdmredir-netbios-async") && strcmp(argv[4],"--vdmredir-dlc") && strcmp(argv[4],"--vdmredir-netapi") && strcmp(argv[4],"--vdmredir-net-enum") && strcmp(argv[4],"--vdmredir-wksta") && strcmp(argv[4],"--vdmredir-wksta-set") && strcmp(argv[4],"--vdmredir-message") && strcmp(argv[4],"--vdmredir-service") && strcmp(argv[4],"--vdmredir-assign") && strcmp(argv[4],"--vdmredir-use") && strcmp(argv[4],"--vdmredir-use-info") && strcmp(argv[4],"--vdmredir-use-lifecycle"))))return 64;
     size.X=(SHORT)atoi(argv[1]);size.Y=(SHORT)atoi(argv[2]);
     if(argc==5 && (!strcmp(argv[4],"--vdmredir-pipe") || !strcmp(argv[4],"--vdmredir-transact") || !strcmp(argv[4],"--vdmredir-call") || !strcmp(argv[4],"--vdmredir-async") || !strcmp(argv[4],"--vdmredir-async-write"))) {
         char pipe_name[80]; snprintf(pipe_name,sizeof(pipe_name),"\\\\.\\pipe\\NTPTEST");
@@ -209,6 +209,22 @@ int main(int argc,char **argv) {
           CloseHandle(raw_log);
           { int passed=log_contains(argv[3],"S24_SYSTEM_OK") &&
               !guest_command_failed(argv[3]);
+            CloseHandle(job);ClosePseudoConsole(pty);return passed?0:1; }
+        }
+    }
+    if(argc==5 && !strcmp(argv[4],"--bios-capability")) {
+        char bios_command[MAX_PATH];
+        if (!GetEnvironmentVariableA("MVDM_TEST_BIOS_COMMAND",bios_command,
+                sizeof(bios_command))) return 70;
+        send_keys(bios_command); send_keys("\r"); Sleep(3000);
+        { DWORD bios_wait=WaitForSingleObject(pi.hProcess,5000),bios_code=0;
+          GetExitCodeProcess(pi.hProcess,&bios_code);
+          printf("bios-capability wait=%lu exit=%lu\n",bios_wait,bios_code); fflush(stdout);
+          Sleep(300); CloseHandle(write_pipe); WaitForSingleObject(thread,3000);
+          CloseHandle(raw_log);
+          { int marker=log_contains(argv[3],"S26_BIOS_OK"),failed=guest_command_failed(argv[3]);
+            int passed=marker && !failed;
+            printf("bios-capability marker=%d guest-failure=%d\n",marker,failed); fflush(stdout);
             CloseHandle(job);ClosePseudoConsole(pty);return passed?0:1; }
         }
     }

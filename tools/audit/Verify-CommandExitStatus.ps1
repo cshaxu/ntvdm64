@@ -116,12 +116,16 @@ try {
                 throw "Missing captured guest Console text: $($case.Name)"
             }
             $screen=Get-Content -LiteralPath $consolePath -Raw
-            if ($screen -match '(?im)(bad command or filename|is not recognized as an internal or external command)' -and
+            # The Console observer preserves physical rows.  A narrow remote
+            # viewport may split one guest sentence across rows, so assertions
+            # must consume the same display text with row separators removed.
+            $screenForMarkers=($screen -replace '(?m)^\[\d+\]\s?','') -replace '\r?\n',''
+            if ($screenForMarkers -match '(?im)(bad command or filename|is not recognized as an internal or external command)' -and
                 !$case.ExpectedGuestError) {
                 throw "Guest Console reported an unexpected command-resolution failure: $($case.Name)"
             }
             foreach($marker in $case.ConsoleMarkers) {
-                if ($screen -notmatch [regex]::Escape($marker)) {
+                if ($screenForMarkers -notmatch [regex]::Escape($marker)) {
                     throw "Missing guest Console marker for $($case.Name): $marker"
                 }
             }

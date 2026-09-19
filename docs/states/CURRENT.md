@@ -4,31 +4,31 @@
 
 ## Active Packet
 
-**Active: M0 T420 S26**
+**Active: M0 T420 S27**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T420 S26 — Ordinary Mode. |
-| Candidate Proposal | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md) S26. |
-| Admission And Approval | Owner corrected the T420 sequence to make S21--S39 sequential capability closures and authorized automatic sequential S admission; S25 is closed by its indexed evidence. |
-| Objective | Close the complete selected `softpc.new/base/bios` capability unit with real BIOS services, RTC/EMS and selected device/error-service acceptance. |
+| Identifier Mode | M0 T420 S27 — Ordinary Mode. |
+| Candidate Proposal | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md) S27. |
+| Admission And Approval | Owner authorized automatic sequential S admission; S26 is closed by its indexed whole-package capability evidence. |
+| Objective | Close the complete selected `softpc.new/base/support` capability unit with real startup, environment, time, IOS, termination-resource and failure acceptance. |
 | Non-goals | No new firmware media, CPU30/kernel monitor revival, guest-media mutation, emulator replacement, WOW work, or unrelated Console redesign. |
-| Reference Baseline | S6 restored the full fourteen-file original BIOS manifest and S24 has already proven only the system-side RTC/ROM provider boundary; neither establishes the BIOS guest-service and error lifecycle. |
-| Files And ABI Surface | Freeze `bios.c`, `cmos_bis.c`, `cntlbop.c`, `emm_fncs.c`, `reset.c`, `rom_basc.c`, `rtc_bios.c`, `slave_bs.c`, `tape_io.c`, `equipmnt.c`, `ill_bop.c`, `build_id.c`, `virtual.c`, `mem_size.c`; INT 11h/12h/13h/15h/1Ah, BOP, EMS, RTC and reset interfaces. |
+| Reference Baseline | S7 restored the complete support manifest; S27 must now classify every current real capability and resource lifecycle. |
+| Files And ABI Surface | Freeze the selected `softpc.new/base/support` manifest and its startup/environment/time/IOS/termination interfaces after a whole-manifest audit. |
 | Applicable Rules | Project design/rules, source policy, strict mirror rule, CCPU40-only product rule, original-owner recovery and transcript-gated acceptance. |
-| Verification | Build a tracked normal/failure/cleanup matrix covering each selected BIOS service family, then run fresh formal x86 linkage and direct plus interactive COMMAND/MEM/EDIT regressions. |
-| Expected Markers | Every selected BIOS family is a real guest pass, source-proven no selected caller, or owner-approved exclusion; no invented firmware/device provider or stale reset/EMS state remains. |
-| Asset Needs | Pinned OpenNT BIOS union, S6/S24 evidence, immutable existing guest media, test-only guest fixtures under `build/`, and `O:\winnt` runtime/log roots. |
+| Verification | Build a tracked normal/failure/cleanup matrix for the full selected support manifest, then fresh formal x86 and direct plus interactive COMMAND/MEM/EDIT regressions. |
+| Expected Markers | Every selected support family is a real pass, source-proven no selected caller, or explicit original boundary; no duplicate support state or fake success. |
+| Asset Needs | Pinned OpenNT support union, prior evidence, immutable existing guest media, test-only fixtures under `build/`, and `O:\winnt` runtime/log roots. |
 | Reporting Requirements | Record source hashes, service-to-owner/provider map, exact guest transcripts, error/cleanup observations, retained finite bindings, mirror/adapter delta and all regression results. |
-| Stop Conditions | A required new firmware/floppy medium, CPU30/kernel dependency, guest-media mutation, duplicate BIOS state owner, or COMMAND/MEM/EDIT regression pauses for renewed owner direction. |
-| Exit Criteria | Every selected BIOS family has real evidence or a source-proven/approved disposition; original ownership is preserved; fresh x86, package-local positive/negative/teardown matrix and established regressions pass; evidence/index/status updated; reviewed P pushed. |
+| Stop Conditions | A required new firmware/floppy medium, CPU30/kernel dependency, guest-media mutation, duplicate support owner, or COMMAND/MEM/EDIT regression pauses for renewed owner direction. |
+| Exit Criteria | Every selected support family has real evidence or a source-proven disposition; original ownership is preserved; fresh x86, package-local matrix and established regressions pass; evidence/index/status updated; reviewed P pushed. |
 | Original Owner Request | “继续执行。” following the standing automatic sequential S authorization and the corrected S21--S39 T420 sequence. |
 | Similar-Issue Sweep | Audit selected reset, RTC, EMS, BOP and error endpoints for duplicate device state, guest-media substitution, stale callback/vector state and fake success. |
 
-## S26 Progress
+## S27 Progress
 
-Admission complete.  S26 starts with a whole-manifest source/caller and
-existing-evidence audit.  No BIOS product behavior has changed.
+Admission complete.  S27 starts with a whole-manifest source/caller and
+existing-evidence audit.  No support product behavior has changed.
 
 ## S1 Closure Record
 
@@ -250,6 +250,15 @@ closes the complete selected keymouse capability unit.  It adds no production
 code: three formal-package guest runs prove PPI, keyboard/modifier, INT 33
 callback move/down/up and disable teardown, followed by deployed COMMAND/MEM/
 EDIT regressions.
+
+## S26 Closure Record
+
+[T420 S26 BIOS capability closure](../etc/evidence/m0-t420-s26-bios-capability-baseline.md)
+closes all fourteen selected BIOS bodies: safe real guest INT 11h/12h/15h,
+Build-ID and control-BOP services pass; RTC is corroborated by S24; EMS is a
+source-proven PIF-zero profile-null; error/IRQ/VDD endpoints retain their
+original non-normal disposition.  Fresh formal x86 linkage, deployed hashes
+and all 17 established COMMAND/MEM/EDIT routes passed.
 
 ## Current Technical Baseline
 
