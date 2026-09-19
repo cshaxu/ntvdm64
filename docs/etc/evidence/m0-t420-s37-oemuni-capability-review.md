@@ -587,3 +587,39 @@ font retry mock requirement without adding product code; real font-medium
 integration is not falsely reported as done. Product artifacts remain those
 of c43364e54 and guest media remain untouched. Remaining whole-package
 caller/buffer and mirror reconciliation still govern S37 closure.
+
+## Final-review findings: short path and computer name
+
+The CP932 fixture now supplies original GetShortPathNameOem with the same
+10-WCHAR/11-byte path through a GetShortPathNameW-shaped test provider. With
+caller capacity 11, it returns 10 and writes the terminator at offset 11.
+The source advertises cchDst*sizeof(WCHAR) as OEM capacity, and returns the
+Unicode rather than converted length. Its finally return also requires
+review because it can override early conversion-error returns.
+
+GetComputerNameOem is separately supplied a one-WCHAR U+8868 name with caller
+capacity 2. Unicode retrieval succeeds but OEM conversion needs three bytes.
+The function ignores the failed conversion status and returns TRUE with
+length zero and unchanged output. The fixture records this false success,
+not an accepted behavior. Both mechanisms are in the original source; no
+new product change is made in this delivery. The previous 30-capacity and
+16-query-failure cases still pass. Fixture log is remaining-boundaries-build.log
+under dbcs-r1; final markers explicitly identify open/unaccepted defects.
+
+A normalized original comparison at product revision c43364e54, using
+git diff --no-index --ignore-space-at-eol --numstat, reports:
+
+| Mirror body | Versus pinned OpenNT added/deleted | Versus S37 admission added/deleted |
+| --- | --- | --- |
+| oemuni/file.c | 28 / 9 | 21 / 7 |
+| oemuni/process.c | 99 / 33 | 91 / 28 |
+
+Admission comparison uses S36 closure 5ad0ac874. These are gross diff lines,
+not executable-statement counts; they include registered correction comments.
+No overlay or adapter production code has been added in S37. The increases
+are proven original conversion defects, not autonomous duplicate providers;
+they still require the final minimality review. Pinned source hashes are
+file.c `a3184eb571d6822577b52849e2da3955689899ecc6dfd9df100ff3f3636be5df`
+and process.c `38c9125f9f3c43f32f696616e565e63b8f056da7ec264d980a5e5278cc640468`.
+Short-path/computer-name repairs and environment-boundary reconciliation
+remain S37 work; no package closure is claimed.

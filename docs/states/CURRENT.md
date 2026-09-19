@@ -73,6 +73,10 @@ failure, conversion-error and TEB-buffer reuse tests. Its actual DEM function
 slice now passes five source-shaped retry/failure scenarios through original
 OEMUNI and mocked Win32 endpoints; no real font installation/guest claim is
 made. Final whole-package caller/buffer and mirror reconciliation remains.
+Final-review mocks reproduce two further original defects: short-path OEM
+capacity is doubled and returns WCHAR length; computer-name conversion
+failure is ignored and reported as TRUE. Both remain unrepaired in S37;
+the normalized original/admission mirror counts are recorded in evidence.
 
 ## S36 Closure Record
 

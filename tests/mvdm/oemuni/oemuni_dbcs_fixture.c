@@ -70,6 +70,15 @@ static DWORD WINAPI fixed_temp(DWORD chars, LPWSTR output)
 {
     return fixed_directory(output, chars);
 }
+static DWORD WINAPI fixed_short(LPCWSTR input, LPWSTR output, DWORD chars)
+{
+    return fixed_path(input, chars*sizeof(WCHAR), output, NULL)/sizeof(WCHAR);
+}
+static BOOL WINAPI fixed_computer(LPWSTR output, LPDWORD chars)
+{
+    if (*chars < 2) { *chars = 2; SetLastError(ERROR_BUFFER_OVERFLOW); return FALSE; }
+    output[0] = 0x8868; output[1] = 0; *chars = 1; return TRUE;
+}
 
 static int volume_failure, outstanding, fail_allocation;
 static PVOID NTAPI counted_alloc(PVOID heap, ULONG flags, SIZE_T size)
@@ -107,6 +116,8 @@ static BOOL WINAPI fixed_volume(LPCWSTR root, LPWSTR volume, DWORD volume_size,
 #define GetSystemDirectoryW fixed_directory
 #define GetWindowsDirectoryW fixed_directory
 #define GetTempPathW fixed_temp
+#define GetShortPathNameW fixed_short
+#define GetComputerNameW fixed_computer
 #define GetVolumeInformationW fixed_volume
 #define RtlAllocateHeap counted_alloc
 #define RtlFreeHeap counted_free
@@ -231,6 +242,18 @@ int main(void)
             }
         }
         puts("S37_QUERY_GROWTH_FAILURE_OVERSIZE_ALLOCATION_CLEANUP_OK");
+        path_mode = 0;
+        fail_allocation = 0;
+        memset(output, 0x5a, sizeof(output));
+        actual = GetShortPathNameOem("x.txt", output, 11);
+        printf("S37_SHORTPATH_OPEN_DEFECT result=%lu expected_required=12 boundary=%u\n",
+            actual, (unsigned char)output[11]);
+        if (actual != 10 || output[11] != 0) return 24;
+        memset(output, 0x5a, sizeof(output));
+        actual = 2;
+        SetLastError(0);
+        if (!GetComputerNameOem(output, &actual) || actual != 0 || output[0] != 0x5a) return 25;
+        puts("S37_COMPUTER_CONVERSION_FAILURE_FALSE_SUCCESS_REPRODUCED_NOT_ACCEPTED");
     }
     return 0;
 }
