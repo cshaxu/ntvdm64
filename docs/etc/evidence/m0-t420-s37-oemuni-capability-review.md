@@ -372,7 +372,7 @@ packets remain supporting evidence, not per-interface hits.
 | GetVolumeInformationOem | DEM demfile/demgset/demsrch; WOW wkfileio | H/M both capacities, optional outputs, host failure and cleanup |
 | OutputDebugStringOem | DEM diagnostics including demmisc | H call; debug-only consumers do not establish ordinary guest behavior |
 | GetComputerNameOem | DEM demgset | G INT21 5E00 name matched to host; H |
-| RemoveFontResourceOem | DEM demfile create-failure fallback; WOW wkman | H absent-font failure; M original conversion/result/failure/TEB reuse; DEM retry chain pending |
+| RemoveFontResourceOem | DEM demfile create-failure fallback; WOW wkman | H absent-font failure; M original conversion and five original DEM retry scenarios; no real font installation claim |
 | GetSystemDirectoryOem | No production textual consumer found | H/M complete-query size matrix and failure cleanup |
 | GetWindowsDirectoryOem | No production textual consumer found | H/M complete-query size matrix and failure cleanup |
 | SearchPathOem | COMMAND cmdpif | H/M byte count/prefix, complete-query size matrix and failure cleanup |
@@ -549,3 +549,41 @@ explicitly mock-boundary evidence, not a real GDI font removal or a DEM
 create-failure/retry chain. That higher-level chain remains pending; its
 source reachability was established above. No production source, guest
 media or deployed binary changes in this delivery.
+
+## Original DEM font retry chain, test-only boundaries
+
+The fixture generator extracts the current demfile.c demCreateCommon body
+verbatim into its build root, records the source SHA-256, and registers
+Ninja regeneration on the generator/source file. It is a source-shaped
+function-slice fixture, not the full DEM translation unit or a guest run.
+Unrelated DEM handlers are not reimplemented to make the fixture link.
+The fixture composes that exact body with actual OEMUNI file.c and formal
+RTL, supplying synthetic guest registers/path-copy input and controlled
+CreateFileW, RemoveFontResourceW, GetFileSize and PostMessage endpoints.
+The CD-ROM predicate is explicitly false for this font scenario; its separate
+retry policy is not tested here. No installed font or actual broadcast occurs.
+
+Five x86 cases pass:
+
+- Original TTF removal succeeds; broadcast occurs once; second create succeeds.
+- TTF removal fails, original same-basename FOT removal succeeds; broadcast
+  once; second create succeeds. The Unicode FOT path is checked exactly.
+- Removal succeeds but second create still fails: no repeated removal loop;
+  original error endpoint receives ERROR_SHARING_VIOLATION.
+- Both TTF/FOT removal attempts fail: no broadcast or create retry; original
+  error endpoint is used.
+- Non-font DAT create fails: no font call or broadcast; original error path.
+
+The test validates non-ASCII OEM-to-Unicode filename delivery, original
+read/write access and sharing flags, inheritability, CREATE_ALWAYS,
+successful split-handle register publication and failure count/carry. No
+successful handle is prematurely closed. It does not prove real GDI state,
+DOS guest dispatch, CD-ROM fallback or GetFileSize failure handling.
+
+Build root `build/M0-T420/S37/font-retry-r1`; target
+oemuni-font-retry-fixture.exe exits zero with five S37_DEM_FONT_RETRY PASS
+lines. Both initial/final builds pass. This closes the pending source-shaped
+font retry mock requirement without adding product code; real font-medium
+integration is not falsely reported as done. Product artifacts remain those
+of c43364e54 and guest media remain untouched. Remaining whole-package
+caller/buffer and mirror reconciliation still govern S37 closure.

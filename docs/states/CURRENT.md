@@ -68,9 +68,11 @@ complete Unicode query sizing and safe descriptor-capacity saturation.
 Sixteen growth/provider-failure/oversize/allocation-failure cleanup cases
 also pass. Real expanded DOS direct/nested routes pass; remaining font and
 other caller/API-boundary review keeps S37 active.
-The original font OEM interface now passes non-invasive GDI-boundary success,
-failure, conversion-error and TEB-buffer reuse tests. The DEM create-failure/
-font-removal/retry chain is not yet runtime-proven and remains open.
+The original font OEM interface passes non-invasive GDI-boundary success,
+failure, conversion-error and TEB-buffer reuse tests. Its actual DEM function
+slice now passes five source-shaped retry/failure scenarios through original
+OEMUNI and mocked Win32 endpoints; no real font installation/guest claim is
+made. Final whole-package caller/buffer and mirror reconciliation remains.
 
 ## S36 Closure Record
 

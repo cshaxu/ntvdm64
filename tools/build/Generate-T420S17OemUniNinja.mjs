@@ -1,4 +1,5 @@
-import { mkdirSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { createHash } from "node:crypto";
 import { resolve } from "node:path";
 
 const [rootArgument, buildArgument, formalArgument] = process.argv.slice(2);
@@ -10,6 +11,12 @@ const root = resolve(rootArgument).replaceAll("\\", "/");
 const build = resolve(buildArgument).replaceAll("\\", "/");
 const formal = resolve(formalArgument).replaceAll("\\", "/");
 mkdirSync(`${build}/obj`, { recursive: true });
+const demSource = readFileSync(`${root}/src/mvdm/dos/dem/demfile.c`, "utf8");
+const demStart = demSource.indexOf("VOID demCreateCommon (flCreateType)");
+const demEnd = demSource.indexOf("BOOL IsCdRomFile (PSTR pszPath)", demStart);
+if (demStart < 0 || demEnd <= demStart) throw new Error("DEM source boundaries changed");
+writeFileSync(`${build}/dem-create-body.inc`, demSource.slice(demStart, demEnd));
+writeFileSync(`${build}/dem-create-source.sha256`, createHash("sha256").update(demSource).digest("hex"));
 
 const cflags = [
   "/nologo", "/TC", "/c", "/MT", "/W4", "/showIncludes", "/DWIN32", "/DWINNT",
@@ -25,6 +32,10 @@ const lines = [
   `root = ${root}`,
   `formal = ${formal}`,
   `cflags = ${cflags}`,
+  "rule regenerate",
+  `  command = \"${process.execPath.replaceAll("\\", "/")}\" \"$root/tools/build/Generate-T420S17OemUniNinja.mjs\" \"$root\" \"${build}\" \"$formal\"`,
+  "  generator = 1",
+  "build build.ninja: regenerate $root/tools/build/Generate-T420S17OemUniNinja.mjs $root/src/mvdm/dos/dem/demfile.c",
   "rule cc",
   "  command = cl.exe $cflags /Fo$out $in",
   "  deps = msvc",
@@ -42,6 +53,9 @@ const lines = [
   "build obj/dbcs.obj: cc $root/tests/mvdm/oemuni/oemuni_dbcs_fixture.c",
   "build obj/font.obj: cc $root/tests/mvdm/oemuni/oemuni_font_fixture.c",
   "build oemuni-font-fixture.exe: link obj/font.obj",
+  "build obj/font-retry.obj: cc $root/tests/mvdm/oemuni/oemuni_font_retry_fixture.c",
+  `  cflags = $cflags /I \"${build}\"`,
+  "build oemuni-font-retry-fixture.exe: link obj/font-retry.obj",
   "build oemuni-dbcs-fixture.exe: link obj/dbcs.obj",
   "build oemuni-family-fixture.exe: link obj/file.obj obj/process.obj obj/family.obj",
   "build oemuni-expand-failure-fixture.exe: link obj/expand-failure.obj",
