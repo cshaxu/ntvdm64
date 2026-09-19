@@ -140,12 +140,8 @@ xmsDecommitBlock(
 
 VOID
 xmsMoveMemory(
-    /* DIVERGENCE(MVDM-HOST-DIV-198): the selected original suballocator
-       callback typedef and both original XMS definitions use destination,
-       source, size.  Correct the imported declaration to that source-proved
-       callback ABI; no move algorithm or result semantics change. */
-    ULONG Destination,
     ULONG Source,
+    ULONG Destination,
     ULONG Count
     );
 

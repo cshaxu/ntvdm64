@@ -1,5 +1,11 @@
 # M0 T420 S15 XMS Package Recovery
 
+S35 review correction: the historical xms.h "ABI misdeclaration" rationale
+below was incorrect. Names of two ULONG prototype parameters do not change
+the C function type or argument order. S35 restores the upstream header
+byte-for-byte without changing any definition or call; see the
+[S35 evidence](m0-t420-s35-xms-capability-progress.md#header-only-difference-retirement).
+
 ## Scope and source-first result
 
 S15 closes the selected `src/mvdm/xms.486` package.  The manifest is eight

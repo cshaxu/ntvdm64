@@ -10,10 +10,28 @@ cleaning the worktree and resuming S35 closure review. The debt now links the
 direct copy witness and retains the permanent guest-media prohibition.
 This supersedes the historical "awaiting disposition" statements below;
 it does not convert the failing profile to a pass or authorize a workaround.
-S35 remains open until the remaining requirement-by-requirement review finishes.
+The final requirement review below completes S35 with this explicit debt;
+it does not close T420 or claim full DOS/WOW compatibility.
 
-S35 remains open. These are real guest observations, not an XMS package
-closure. The selected machine is MSVC x86 CCPU40; guest HIMEM is unchanged.
+### Final S35 closure review
+
+| Requirement | Verified disposition |
+| --- | --- |
+| Selected package and original ownership | Eight-member manifest, six compiled original XMS C units; seven manifest files now byte-exact. xmsblock.c retains only its registered bounded descriptor/copy seam. The RISC backend is not a selected executable provider. |
+| Dispatch coverage | Twelve-entry original caller ledger retained below. xmsSysPageSize has no selected original guest caller and is not claimed executed; public test results are not represented as independent per-BOP traces. |
+| XMS data and failure behavior | `s35-header-xms-r1` passes all four guest routes, including moves, forward overlap, growth/shrink, same-size, failed growth preserving data, locked rejection, lock/unlock, free/reuse and restored total capacity. |
+| A20, UMB and INT15 | Existing boot/low-environment witnesses prove actual A20 alias transitions and restoration, boot UMB allocation/release/errors, default zero and reserved 128KB INT15. Ordinary-environment low-DOS startup remains the owner-approved original guest bug in TODO, not a pass. |
+| Lifetime | Early CONFIG fault naturally exits after the pre-resume guard; same live worker completes two XMS tasks; broker loss ends the worker. Isolation cleanup is not natural-exit evidence and resident original command waits are not leaks. |
+| Formal product | Nine direct header consumers recompiled, 15-edge x86 rebuild and VdmTib ownership passed; five deployed artifacts hash-match this build. All 17 `s35-header-product-r1` transcript-gated regressions pass. |
+| Minimal differences | Remove the 58-line native-wait translator in favor of the original NT call; retain the bounded pre-start join guard and same-owner PIF lifetime correction. Retire the header parameter-name-only DIV-198. No new production overlay, guest patch or CPU semantic change. |
+
+S35 is closed with the explicit original guest bug debt. S36 owns the next
+suballocator capability review, including its complete relocation/fragmentation
+and DPMI-backed workload; that future work is not claimed complete here.
+The chronological pending statements below document earlier investigation
+states and are superseded by this closure review.
+
+The selected machine is MSVC x86 CCPU40; guest HIMEM is unchanged.
 Its deployed SHA-256 is
 `08aa2c47d835460ed3067fa7d6f8a3b37edeca524ad102b0588fdd1bf389ce08`,
 identical to `src/mvdm/dos/v86/dev/himem/himem.sys`.
@@ -27,6 +45,27 @@ equality was checked. The two existing semantic deltas remain `xms.h`'s
 callback parameter naming/order and `xmsblock.c`'s bounded guest-memory seam.
 
 ## PIF path lifetime finding and bounded correction
+
+### Header-only difference retirement
+
+The final mirror review retires DIV-198: swapping Source/Destination names
+in a prototype whose parameters are both ULONG cannot change the C type,
+call ABI or runtime semantics. Earlier S15/S35 statements describing an ABI
+repair are superseded by this correction. Actual callback definitions and
+suballocator calls are unchanged. xms.h now matches pinned OpenNT bytewise,
+SHA-256 `0fad52bf1e4c6db87bdc77cf9ec2f35540da2fc4972d2b32e32d57a46776a9fc`.
+Seven of the eight XMS manifest files are byte-exact; only xmsblock.c retains
+its registered descriptor/range lease boundary. Four explanatory lines and
+the parameter-name swap are removed; no runtime implementation is removed
+or added. The upstream newline bytes are restored too, so raw Git line counts
+include formatting churn and must not be presented as executable-line savings.
+
+All nine selected direct consumers of xms.h were explicitly cleaned within
+the formal build root and recompiled; the 15-edge x86 rebuild and VdmTib
+ownership gate passed. The five formal host artifacts were deployed to
+O:\winnt with exact source/destination hash checks; original guest media were
+not changed. Verification prefixes are `s35-header-xms-r1` and
+`s35-header-product-r1`; all four XMS routes and all 17 product routes passed.
 
 Original `config.c` calls `init_lim_configuration_data` before `sas_init`.
 That function reads CONFIG through `GetPIFConfigFiles(TRUE, ...)`.

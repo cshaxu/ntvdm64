@@ -2,80 +2,28 @@
 
 ## Current Work
 
-## Active Packet
+## Task Intermission
 
-**Active: M0 T420 S35**
+**No active M/T/S packet.**
 
-| Field | Record |
-| --- | --- |
-| Identifier Mode | M0 T420 S35 — Ordinary Mode. |
-| Candidate Proposal | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md) S35. |
-| Admission And Approval | S34 closed and was delivered as `62a3720e7`; the owner granted standing automatic admission for every sequential S in T420. |
-| Objective | Close the selected original `xms.486` capability unit: real DOS XMS initialization, allocation/free/reuse, move/overlap, A20, UMB, INT 15h, failure and worker-teardown behavior. |
-| Non-goals | No guest media rewrite, generic guest-pointer manager, invented XMS allocator, kernel VDM/MONITOR restoration, or acceptance by host-only fixture alone. |
-| Reference Baseline | S15 recovered the eight-unit XMS mirror and recorded two finite CPU40 guest-memory ABI boundaries; S30 proved HIMEM/DOSX, pure DOS and EMS profiles. S35 must establish the remaining real guest XMS contract. |
-| Files And ABI Surface | `src/mvdm/xms.486` eight-unit manifest; XMS BOP/dispatch table; original `xmsCommitBlock`, `xmsDecommitBlock`, `xmsMoveMemory`; SAS A20; UMB/INT 15h; CPU40 guest-memory lease and worker teardown. |
-| Applicable Rules | Project design/rules, source policy, strict mirror rule, original-owner recovery and transcript-gated acceptance. |
-| Verification | Freeze original caller/provider ledger; formal x86 compile/link; real guest success, failure and teardown witnesses for every selected XMS family; then the established text-gated direct/interactive COMMAND/MEM/EDIT regression. |
-| Expected Markers | Each selected operation is real-guest proven, source-proven unavailable, or an explicit modern-host boundary with a test-only source-shaped mock; no allocated block, mapping, A20 state or worker resource leaks across completion. |
-| Asset Needs | Pinned OpenNT XMS union; current XMS maps; disposable DOS fixtures; formal x86 graph; `O:\winnt\tests` and `O:\winnt\logs`. |
-| Reporting Requirements | Record source hashes, dispatch/caller graph, success/failure result, mapping lifetime, A20/UMB/INT15 disposition, teardown and regression results; separate original-mirror diff from required adapter mechanics. |
-| Stop Conditions | A reached XMS operation needs a new guest-memory ABI, changes a CCPU machine contract, requires guest-media modification, or regresses the established product matrix. |
-| Exit Criteria | Every selected XMS family has an original-owner capability disposition; formal x86 and real-guest/product regressions pass; evidence/index/status updated; reviewed P pushed. |
-| Original Owner Request | Standing automatic sequential S authorization for the T420 whole-package capability sequence. |
-| Similar-Issue Sweep | Audit all XMS callback declarations, direct pointer casts, move/overlap copies, A20/UMB/INT15 callers and worker cleanup paths for duplicate policy, stale x64 seams, or host-only success shortcuts. |
+T420 S35 is closed after the owner-approved original guest bug disposition.
+T420 remains open; S36 (suballocator capability review) is next under the
+standing sequential-admission authorization, but is not yet active.
 
-## S35 In-progress Evidence
+## S35 Closure Record
 
-The real guest XMS fixture passes allocation, move, forward overlap,
-reallocation, locking, A20, free/reuse and representative errors. The separate
-PIF test reaches its AUTOEXEC marker but returns zero for `/INT15=128` and no
-free UMBs. This is not a passing profile result. Audit identified the two
-CONFIG consumers (`init_lim_configuration_data`, then `ExpandConfigFiles`)
-and the destructive first read in `GetPIFConfigFiles`. S35 is checking the
-minimal same-owner path lifetime correction; no guest image or CCPU ABI
-change is admitted. Formal test build root: `build/M0-T420/S35/formal-x86-r1`.
-The same-owner path lifetime correction now passes all 17 established product
-regressions. A boot-time guest driver proves UMB allocation/release and double
-free rejection before original DOS claims the remaining blocks. Default
-INT15 AH=88 returns zero as expected. `/INT15=128` still times out after that
-driver; S35 remains open. See the [progress evidence](../etc/evidence/m0-t420-s35-xms-capability-progress.md).
-The reproducible direct/profile/nested/repeat XMS gate also passes all four
-cases. P1 delivers this bounded correction and evidence, not S35 closure;
-reserved-INT15 and the complete lifecycle audit remain pending.
-Further isolation proves reserved INT15 returns 128KB with a short child
-environment even without DOS=HIGH. Ordinary-environment low-DOS startup instead
-faults in COMMAND's discarded INIT area, now occupied by environment bytes;
-the subsequent event-thread join also stalls. See the progress evidence's
-low-DOS isolation record. This is not an XMS or CCPU failure verdict, and the
-short-environment control is not a product workaround or closure acceptance.
-The owner permanently prohibits guest-media modification, including rebuilt
-replacement binaries and runtime hot-patches. No guest repair admission is
-pending; continue original-contract host diagnosis and record proven guest
-limitations without disguising them as restored functionality.
-Native Console and pending-alert probes now pass. S35 is compiling a
-declaration-only restoration of NtWaitForMultipleObjects at
-`build/M0-T420/S35/formal-native-wait-r2`; the Win32 timeout/result translator
-is removed from this candidate. Its deployed five-artifact package now passes
-all 17 established product regressions (`s35-native-wait-regression-r1`) and
-four real XMS routes (`s35-native-wait-xms-r1`). Pre-resume event-thread
-shutdown and the low-DOS limitation remain unresolved. This is not closure.
-The pre-resume guard now passes isolated native-wait lifecycle tests, formal
-x86, a deterministic CONFIG-stage test-driver fault with a guest-written
-execution witness and natural worker exit, plus all 17 product routes
-(`s35-cleanup-regression-r1`) and four XMS routes (`s35-cleanup-xms-r1`).
-O:\winnt contains this tested host candidate; original guest media are unchanged.
-The ordinary-environment low-DOS failure remains unresolved. S35 stays open.
-An isolated non-debug diagnostic build now directly proves that the original
-environment copy is inside its allocated block but overwrites COMMAND's stale
-INIT-resident EnvSiz (0118 -> 4543); the original post-copy comparison then
-takes its error path. The formal EXE has been restored and hash-verified.
-This is a demonstrated immutable-guest limitation, not an XMS/lease overrun.
-The owner now explicitly approves recording this as an unresolved original
-guest bug in TODO and continuing S35 closure review. No guest patch or host-side
-environment/allocator workaround is admitted; the failing profile is not a
-passing result. All existing changes are authorized for one combined delivery.
-Detailed inputs and address arithmetic are in the linked progress evidence.
+The [S35 evidence](../etc/evidence/m0-t420-s35-xms-capability-progress.md#final-s35-closure-review)
+records the complete selected XMS capability review: allocate/free/reuse,
+move/overlap, growth/shrink/failure preservation, A20, UMB, INT15 and worker
+lifecycle. Seven of eight manifest files now match pinned OpenNT bytewise;
+the prototype-name-only DIV-198 was retired as unnecessary, not an ABI fix.
+
+Nine direct header consumers were recompiled in the formal x86 graph.
+All four XMS routes and all 17 product routes pass on the five hash-matched
+artifacts deployed to `O:\winnt`. Guest media remain unchanged.
+The proven low-DOS COMMAND INIT/environment lifetime bug remains explicitly
+unresolved in [TODO](TODO.md), as approved by the owner; it is not a pass
+and no environment, allocator or guest-patching workaround is admitted.
 
 ## S34 Closure Record
 
