@@ -124,3 +124,34 @@ closure obligation. The other ten files have retained non-newline changes.
 In particular, xmem's BOOL failure check is the S36 verified repair, not an
 unnecessary type-cleanup difference; removing it would reintroduce failure
 misclassification. No mirror edit has been made during this initial review.
+
+## True 32-bit Code And Exact Formatting Recovery
+
+The probe's `CODE32` variant uses original INT31 descriptor get/allocate/set
+services to clone its code descriptor, set the default-size bit and far-jump
+to independently assembled 32-bit code. Its exception handler consumes the
+original 32-bit frame. Bootstrap failures retain a separate 16-bit exit path.
+All variants now verify the complete EAX value rather than AX alone.
+
+NASM outputs in `build/M0-T420/S38/interrupt-guest-r3` are D38I (16-bit
+client), D38J (`CLIENT32`, 16-bit code) and D38K (`CLIENT32` plus `CODE32`).
+Prefixes `s38-frame16-r3`, `s38-frame32-r3`, `s38-code32-r3` record six passing
+direct/nested routes on the preceding deployed product. This closes these
+specific code/frame combinations, not hardware interrupt nesting or all APIs.
+
+The three normalized-exact mirror files buffer.c, int21map.c and stack.c
+were mechanically restored to their upstream bytes after checking normalized
+equality. Git attributes already preserve mirror bytes (`-text`). Byte hashes
+now match for eight of eighteen selected files. Raw diff is +3731/-3731
+solely from line endings; ignoring end-of-line differences produces no diff.
+Semantic diff reduction and autonomous production-code reduction are zero.
+
+The retained formal x86 S36 graph was intentionally reused for unchanged
+inputs. Its three affected objects and DPMI library rebuilt, followed by the
+explicit run16.exe/basesrv.exe/ntvdm.exe targets and successful VdmTib storage
+verification. New worker SHA256 is
+`9afae9d7903b39b607247c646f36d9ac8867919e739201fc2e81491130a5dc4c`.
+It was deployed after checking that the package was unused. On that worker,
+`s38-code32-formatted-r1` passes both routes. The full product regression
+prefix is `s38-format-product-r1`: all 17 routes completed and passed,
+including EDIT return. Original guest media remain unchanged.

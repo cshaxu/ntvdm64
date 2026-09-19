@@ -2,6 +2,12 @@
 ; Contracts: dpmi/486/dxint31.asm and dpmi32/dpmiint.c.
 bits 16
 org 100h
+%ifdef CODE32
+%ifndef CLIENT32
+%error CODE32 requires CLIENT32
+%endif
+%define failed failed16
+%endif
 start:
     mov sp, stack_top
     mov bx, (image_end - $$ + 100h + 15) / 16
@@ -23,12 +29,45 @@ start:
     mov es, ax
 enter_pm:
 %ifdef CLIENT32
-    mov ax, 1                   ; 32-bit DPMI contract, still 16-bit code.
+    mov ax, 1                   ; Select 32-bit DPMI return-frame contract.
 %else
     xor ax, ax
 %endif
     call far [entry]
     jc failed
+%ifdef CODE32
+    ; Publish a separate code selector using the original descriptor API.
+    ; Original DOSX is unchanged; only this probe's own descriptor is edited.
+    push ds
+    pop es
+    mov bx, cs
+    mov edi, descriptor
+    mov ax, 000Bh
+    int 31h
+    jc failed
+    xor ax, ax
+    mov cx, 1
+    int 31h
+    jc failed
+    mov [code_entry+4], ax
+    mov bx, ax
+    or byte [descriptor+6], 40h
+    mov edi, descriptor
+    mov ax, 000Ch
+    int 31h
+    jc failed
+    movzx esp, sp
+    jmp dword far [code_entry]
+failed16:
+    mov dx, fail_message
+    mov ah, 09h
+    int 21h
+    mov ax, 4C01h
+    int 21h
+%undef failed
+bits 32
+code32_start:
+%endif
     mov byte [stage], '1'
     mov ax, 0204h
     mov bl, 60h
@@ -43,11 +82,11 @@ enter_pm:
     int 31h
     jc failed
     mov [saved_sp], sp
-    mov ax, 1234h
+    mov eax, 56781234h
     stc
     int 60h
     jnc failed
-    cmp ax, 1234h
+    cmp eax, 56781234h
     jne failed
     cmp sp, [saved_sp]
     jne failed
@@ -78,13 +117,13 @@ enter_pm:
     mov [saved_sp], sp
     xor dx, dx
     xor bx, bx
-    mov ax, 4321h
+    mov eax, 87654321h
     stc
 fault_instruction:
     div bx
 fault_resume:
     jnc failed
-    cmp ax, 4321h
+    cmp eax, 87654321h
     jne failed
     cmp sp, [saved_sp]
     jne failed
@@ -114,6 +153,11 @@ interrupt_handler:
     iret
 %endif
 fault_handler:
+%ifdef CODE32
+    push ebp
+    mov ebp, esp
+    add dword [ss:ebp+16], fault_resume-fault_instruction
+%else
     push bp
     mov bp, sp
 %ifdef CLIENT32
@@ -123,8 +167,13 @@ fault_handler:
     ; far return, error word, IP, CS, FLAGS, SP, SS (16-bit client).
     add word [ss:bp+8], fault_resume-fault_instruction
 %endif
+%endif
     inc word [fault_count]
+%ifdef CODE32
+    pop ebp
+%else
     pop bp
+%endif
 %ifdef CLIENT32
     o32 retf
 %else
@@ -137,6 +186,11 @@ failed:
     mov ax, 4C01h
     int 21h
 entry dd 0
+%ifdef CODE32
+code_entry dd code32_start
+    dw 0
+descriptor times 8 db 0
+%endif
 old_int dd 0
     dw 0
 old_fault dd 0
