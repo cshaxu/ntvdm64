@@ -105,7 +105,7 @@ insufficient-buffer contract rather than changing the product to fit a test.
 Formal x86 incremental rebuild deliberately reuses the S36 graph and produces
 worker SHA-256 `22ff7c7978f5b5d5aa19e7a49771a2f88a93e929e4023717c956bb2731466fe3`
 and VDMREDIR.dll `09686f7f5def440326185f5d0257298220a980e674073bce11c8eba03e2ea197`.
-These non-diagnostic artifacts are deployed to O:\winnt. Both real non-ASCII
+These non-diagnostic artifacts are deployed to `O:\winnt`. Both real non-ASCII
 DOS routes pass under s37-oem-expand-guest-r1; all 17 product regressions pass
 under s37-oem-expand-product-r1. Product and guest observations remain in the
 runtime logs directory. No original guest file changes occurred.
