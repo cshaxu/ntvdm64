@@ -40,6 +40,8 @@ foreach ($route in @('direct','nested')) {
         $screen = Get-Content "$report.console.txt" -Raw
         if ($screen -notmatch 'S37_OEM_GUEST_CREATE_RENAME_ATTR_READ_OK' -or $screen -match 'S37_OEM_GUEST_FAIL|Bad command or filename') { throw 'Guest text failed' }
         if ($screen -notmatch 'S37_OEM_GUEST_DIRECTORY_DELETE_DISK_OK') { throw 'Directory/disk guest text failed' }
+        if ($screen -notmatch 'S37_OEM_GUEST_FCB_COMPUTER_OK' -or
+            $screen -notmatch ('S37_HOST=' + [regex]::Escape($env:COMPUTERNAME))) { throw 'FCB/computer-name guest text failed' }
         $dir = Join-Path $root ('D' + [char]0xa3)
         $file = Join-Path $dir ('B' + [char]0xa3 + '.DAT')
         if ([IO.File]::ReadAllText($file) -cne "S37-OEM-GUEST-BYTES`r`n") { throw 'Unicode file/content mismatch' }

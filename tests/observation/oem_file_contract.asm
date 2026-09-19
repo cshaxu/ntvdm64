@@ -104,6 +104,54 @@ start:
     mov ah, 3Ah
     int 21h
     jc failed
+    mov dx, fcb_first
+    call create_empty
+    mov dx, fcb_second
+    call create_empty
+    mov dx, delete_fcb
+    mov ah, 13h
+    int 21h
+    test al, al
+    jnz failed
+    mov dx, fcb_first
+    mov ax, 3D00h
+    int 21h
+    jnc failed
+    cmp ax, 2
+    jne failed
+    mov dx, fcb_second
+    mov ax, 3D00h
+    int 21h
+    jnc failed
+    cmp ax, 2
+    jne failed
+    mov dx, delete_fcb
+    mov ah, 13h
+    int 21h
+    cmp al, 0FFh
+    jne failed
+    mov dx, computer_name
+    mov ax, 5E00h
+    int 21h
+    jc failed
+    test ch, ch
+    jz failed
+    cmp byte [computer_name+15], 0
+    jne failed
+    mov dx, computer_prefix
+    mov ah, 09h
+    int 21h
+    mov bx, 1
+    mov dx, computer_name
+    mov cx, 15
+    mov ah, 40h
+    int 21h
+    jc failed
+    cmp ax, 15
+    jne failed
+    mov dx, fcb_success
+    mov ah, 09h
+    int 21h
     xor dl, dl
     mov ah, 36h
     int 21h
@@ -146,6 +194,16 @@ start:
     int 21h
     mov ax, 4C00h
     int 21h
+create_empty:
+    xor cx, cx
+    mov ah, 5Bh
+    int 21h
+    jc failed
+    mov bx, ax
+    mov ah, 3Eh
+    int 21h
+    jc failed
+    ret
 failed:
     mov dx, failure
     mov ah, 09h
@@ -163,6 +221,13 @@ saved_directory db '\'
 restored_directory times 64 db 0
 scratch_name db 'C',09Ch,'.DAT',0
 scratch_directory db 'E',09Ch,0
+fcb_first db 'F',09Ch,'1.DAT',0
+fcb_second db 'F',09Ch,'2.DAT',0
+delete_fcb db 0,'F',09Ch,'??????','DAT'
+    times 25 db 0
+computer_name times 16 db 0
+computer_prefix db 'S37_HOST=','$'
+fcb_success db 13,10,'S37_OEM_GUEST_FCB_COMPUTER_OK',13,10,'$'
 directory_success db 'S37_OEM_GUEST_DIRECTORY_DELETE_DISK_OK',13,10,'$'
 success db 'S37_OEM_GUEST_CREATE_RENAME_ATTR_READ_OK',13,10,'$'
 failure db 'S37_OEM_GUEST_FAIL',13,10,'$'

@@ -59,8 +59,9 @@ cleanup with zero temporary allocations left.
 The linked review now reconciles all 28 compiled entries against source
 consumers and G/H/M evidence. Real direct/nested non-ASCII directory switch,
 restoration, file/subdirectory deletion and disk/drive queries now pass.
-Missing FCB/computer-name guest witnesses,
-font fallback proof and intermediate-buffer/narrowing cases are explicitly
+Real two-file FCB wildcard deletion, no-match failure and host-matched DOS
+computer-name queries now pass direct/nested too. Font fallback proof and
+intermediate-buffer/narrowing cases are explicitly
 retained in S37; linking or host-only tests do not close those rows.
 
 ## S36 Closure Record

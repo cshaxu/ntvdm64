@@ -360,8 +360,8 @@ packets remain supporting evidence, not per-interface hits.
 | DeleteFileOem | DEM demfile/demfcb; WOW wkman | G delete plus reopen error 2; H success/missing |
 | MoveFileOem | DEM demfile/demfcb; WOW wkman | G rename; H |
 | MoveFileExOem | WOW wkman delayed-delete workaround | H; no WOW workload acceptance |
-| FindFirstFileOem | DEM demfcb FCB delete/rename | H enumeration; ordinary DOS handle-find is not proof of this FCB path |
-| FindNextFileOem | DEM demfcb FCB delete/rename | H end-of-enumeration; FCB guest witness pending |
+| FindFirstFileOem | DEM demfcb FCB delete/rename | G FCB wildcard deletion of two files and repeated no-match; H |
+| FindNextFileOem | DEM demfcb FCB delete/rename | G two-file loop and exhaustion; H end-of-enumeration |
 | GetFullPathNameOem | DEM demmisc; COMMAND cmdpif; WOW wdos/wkman | H/M byte count, prefix, short/exact, zero/oversize result |
 | GetCurrentDirectoryOem | WOW wdos | H/M; no WOW workload acceptance |
 | SetCurrentDirectoryOem | DEM demdir/demgset; COMMAND cmdpif; WOW wdos | G non-ASCII switch and exact restoration; H |
@@ -371,7 +371,7 @@ packets remain supporting evidence, not per-interface hits.
 | GetDiskFreeSpaceOem | DEM demgset | G INT21 36 valid sectors/bytes/capacity; H |
 | GetVolumeInformationOem | DEM demfile/demgset/demsrch; WOW wkfileio | H/M both capacities, optional outputs, host failure and cleanup |
 | OutputDebugStringOem | DEM diagnostics including demmisc | H call; debug-only consumers do not establish ordinary guest behavior |
-| GetComputerNameOem | DEM demgset | H; targeted guest evidence pending |
+| GetComputerNameOem | DEM demgset | G INT21 5E00 name matched to host; H |
 | RemoveFontResourceOem | DEM demfile create-failure fallback; WOW wkman | H absent-font failure only; positive original callback contract pending |
 | GetSystemDirectoryOem | No production textual consumer found | H/M linked helper; tiny intermediate-buffer contract still open |
 | GetWindowsDirectoryOem | No production textual consumer found | H/M linked helper; tiny intermediate-buffer contract still open |
@@ -424,3 +424,29 @@ each required check remains once. No guest medium or product source changed.
 These real calls cover the original DEM directory/file/disk-information
 families; they do not prove FCB enumeration, computer-name service, WOW or
 font retry. The coverage table above reflects only these new observations.
+
+## Real FCB loop and computer-name service
+
+Source inspection identifies demfcb.c::demDeleteFCB as the original
+FindFirstFileOem/FindNextFileOem owner; ordinary DOS handle-find would not
+prove those functions. The independent probe creates two private F-pound
+DAT files inside its non-ASCII directory, closes them, then calls INT21 13
+with a normal FCB wildcard. It requires AL=0, verifies both names can no
+longer be opened (error 2), and requires a repeated wildcard delete to return
+AL=FF. The original demDeleteFCB enumerates, deletes each match, advances
+FindNext and closes the search handle. The harness's remaining-file oracle
+independently confirms both disposable files are gone.
+
+DOS macro.asm UserGet invokes SVC_DEMGETCOMPUTERNAME, implemented by demgset.c.
+INT21 5E00 now requires success, nonzero CH and the 16-byte buffer's final
+NUL, then emits the 15-character name. The harness compares S37_HOST against
+the actual host COMPUTERNAME in addition to requiring the FCB/computer
+marker and all earlier markers. This does not invent a network server or
+use a mock. Only the current host's ASCII computer-name profile is covered.
+
+NASM builds `build/M0-T420/S37/guest-fcb-r1/O37.COM`. Both direct and two-level
+COMMAND /c routes pass, prefix s37-fcb-guest-r1, on unchanged formal product
+1edae5841. Original guest media remain unchanged; no product rebuild or new
+product implementation was needed. FCB rename's distinct policy and font
+retry are not inferred from FCB delete. Remaining OEM buffer/caller review
+still prevents S37 closure.
