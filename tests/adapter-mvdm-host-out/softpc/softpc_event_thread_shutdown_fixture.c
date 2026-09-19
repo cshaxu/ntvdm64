@@ -4,18 +4,28 @@
 
 static DWORD WINAPI alertable_event_worker(LPVOID unused)
 {
-    (void)unused;
-    return SleepEx(INFINITE, TRUE) == WAIT_IO_COMPLETION ? 0u : 1u;
+    LARGE_INTEGER timeout;
+    typedef LONG (NTAPI *delay_fn)(BOOLEAN, LARGE_INTEGER *);
+    delay_fn delay = (delay_fn)GetProcAddress(GetModuleHandleA("ntdll.dll"),
+        "NtDelayExecution");
+    if (!delay) return 2;
+    timeout.QuadPart = -50000000;
+    SetEvent((HANDLE)unused);
+    return delay(TRUE, &timeout) == 0x101 ? 0u : 1u;
 }
 
 int main(void)
 {
     HANDLE worker;
+    HANDLE ready;
     DWORD exit_code;
 
-    worker = CreateThread(NULL, 0u, alertable_event_worker, NULL, 0u, NULL);
+    ready = CreateEvent(NULL, TRUE, FALSE, NULL);
+    if (ready == NULL) return 4;
+    worker = CreateThread(NULL, 0u, alertable_event_worker, ready, 0u, NULL);
     if (worker == NULL) return 1;
-    if (!mvdm_softpc_event_thread_alert_and_join(worker)) {
+    if (WaitForSingleObject(ready, 1000) != WAIT_OBJECT_0) return 5;
+    if (!mvdm_softpc_event_thread_alert_and_join(worker, TRUE)) {
         CloseHandle(worker);
         return 2;
     }
@@ -24,5 +34,6 @@ int main(void)
         return 3;
     }
     CloseHandle(worker);
+    CloseHandle(ready);
     return 0;
 }

@@ -417,13 +417,15 @@ void nt_start_event_thread(void)
 
 void nt_remove_event_thread(void)
 {
+    extern BOOL nt_init_called;
     /* Must make sure that the thread has terminated */
     if (!VDMForWOW && ThreadInfo.EventMgr.Handle)  {
         /* DIVERGENCE(MVDM-HOST-DIV-206): the NT4 process exited after its
          * alert, so it did not need an explicit worker join.  This product
          * retains the original alert and adds only the adapter-owned join
          * needed before releasing the in-process session binding. */
-        (void)mvdm_softpc_event_thread_alert_and_join(ThreadInfo.EventMgr.Handle);
+        (void)mvdm_softpc_event_thread_alert_and_join(ThreadInfo.EventMgr.Handle,
+                                                   nt_init_called);
         }
 }
 

@@ -2,7 +2,7 @@
 
 #include "nt_thread_alert_compat.h"
 
-int mvdm_softpc_event_thread_alert_and_join(HANDLE event_thread)
+int mvdm_softpc_event_thread_alert_and_join(HANDLE event_thread, BOOL started)
 {
     HANDLE retained_thread;
     NTSTATUS status;
@@ -10,6 +10,11 @@ int mvdm_softpc_event_thread_alert_and_join(HANDLE event_thread)
 
     if (event_thread == NULL || event_thread == INVALID_HANDLE_VALUE)
         return 0;
+
+    /* Before the original first ResumeThread, the thread has no session
+     * binding and cannot touch teardown resources. Keep it suspended until
+     * this worker process exits; never start input while closing the host. */
+    if (!started) return 1;
 
     /* The original worker closes ThreadInfo.EventMgr.Handle immediately
      * before returning.  Retain a duplicate before alerting it, so the

@@ -4,6 +4,7 @@ param(
     [Parameter(Mandatory = $true)][string]$BuildRoot,
     [string]$RuntimeTestRoot = 'O:\winnt\tests',
     [switch]$ReserveInt15,
+    [switch]$StartupFault,
     [string]$NasmExecutable = 'nasm.exe'
 )
 
@@ -28,7 +29,9 @@ $profileDefines = @('-DUMB_PROFILE')
 if (!$ReserveInt15) { $profileDefines += '-DDEFAULT_INT15' }
 & $nasm.Source -f bin @profileDefines -o (Join-Path $build 'U35.COM') (Join-Path $repository 'tests\observation\xms_capability.asm')
 if ($LASTEXITCODE -ne 0) { throw "NASM S35 profile fixture failed: $LASTEXITCODE" }
-& $nasm.Source -f bin -o (Join-Path $build 'X35UMB.SYS') (Join-Path $repository 'tests\observation\xms_umb_driver.asm')
+$driverDefines = @()
+if ($StartupFault) { $driverDefines += '-DSTARTUP_FAULT' }
+& $nasm.Source -f bin @driverDefines -o (Join-Path $build 'X35UMB.SYS') (Join-Path $repository 'tests\observation\xms_umb_driver.asm')
 if ($LASTEXITCODE -ne 0) { throw "NASM S35 UMB boot fixture failed: $LASTEXITCODE" }
 $vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 $compile = "call `"$vs`" -arch=x86 -host_arch=x86 >nul && cl /nologo /MT /W4 /I `"$repository\src\opennt-abi\source\public\internal\windows\inc`" `"$repository\tests\observation\xms_profile_builder.c`" /Fo`"$build\profile.obj`" /Fe`"$build\profile.exe`""
@@ -42,6 +45,7 @@ if ($LASTEXITCODE -ne 0) { throw "S35 PIF generation failed: $LASTEXITCODE" }
     schema = 'm0.t420.s35.xms-guest.v1'
     source = 'tests/observation/xms_capability.asm'
     int15ReservedKb = $(if ($ReserveInt15) {128} else {0})
+    startupFault = [bool]$StartupFault
     outputs = @('X35.COM','U35.COM','U35.PIF','U35.NT','U35AUTO.NT','X35UMB.SYS','R35.BAT' | ForEach-Object {
         [ordered]@{ path = $_; sha256 = (Get-FileHash -LiteralPath (Join-Path $build $_) -Algorithm SHA256).Hash.ToLowerInvariant() }
     })

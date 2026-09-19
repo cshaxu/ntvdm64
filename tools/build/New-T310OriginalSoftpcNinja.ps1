@@ -242,7 +242,7 @@ if (!(Test-Path -LiteralPath $hostExportDefinition)) { throw "Original SoftPC ex
 if (!(Test-Path -LiteralPath $redirResourceSource)) { throw "Original Redirector resource missing: $redirResourceSource" }
 if (!(Test-Path -LiteralPath $redirExportDefinition)) { throw "Original Redirector export definition missing: $redirExportDefinition" }
 $adapterWin32Names = @('ntioapi_facade.c', 'thread_start_compat.c',
-                          'nt_thread_alert_compat.c', 'nt_wait_compat.c',
+                          'nt_thread_alert_compat.c',
                           'console_compat.c', 'crt_compat.c',
                            'command_process_compat.c', 'wow_private_unavailable.c',
                            'wow_hard_error_dialog.c',

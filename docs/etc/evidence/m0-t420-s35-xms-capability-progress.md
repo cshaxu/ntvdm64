@@ -233,6 +233,25 @@ The latest guard remains build-only WIP pending a deterministic real fault
 witness and the full regression matrix. Earlier deployed native-wait results
 remain historical evidence, not the current package identity.
 
+Deterministic early-fault follow-up: the independently authored test driver
+has STARTUP_FAULT mode: write `O:\winnt\tests\S35F.HIT`, then execute UD2
+during CONFIG. Original guest media are unchanged. The first run exited but
+its empty Console snapshot was insufficient evidence. The second run
+(`s35-deterministic-startup-fault-r2.txt`, launcher 35552) produced
+`S35_TEST_DRIVER_STARTUP_FAULT` in the initially absent witness file, then
+exited naturally with no worker remaining. Launcher exit was zero, recorded
+without inventing an error-code contract. The remaining test broker was
+cleaned by verified parent PID; default guest-r7 fixtures were restored.
+Four XMS routes pass on this guard candidate (`s35-cleanup-xms-r1`); the
+17-route regression (`s35-cleanup-regression-r1`) is in progress.
+
+That regression subsequently completed: all 17 routes passed. The existing
+thread-shutdown fixture was also updated to the native wait contract and
+passed direct x86 compilation/execution. The current deployed host package is
+the formal-native-wait-r2 incremental guard build used by these regressions,
+not the briefly restored older package. This bounded delivery fixes the
+proven wait/shutdown defects but does not close S35 or fix low-DOS startup.
+
 Resolve the reserved-INT15 startup failure without misclassifying it as
 default-profile success. Finish the dispatch/caller and negative-case ledger,
 repeat/task/worker teardown evidence, and source-manifest/hash review. Test

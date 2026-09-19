@@ -60,11 +60,12 @@ is removed from this candidate. Its deployed five-artifact package now passes
 all 17 established product regressions (`s35-native-wait-regression-r1`) and
 four real XMS routes (`s35-native-wait-xms-r1`). Pre-resume event-thread
 shutdown and the low-DOS limitation remain unresolved. This is not closure.
-The later pre-resume guard is unaccepted local WIP: isolated native-wait
-thread tests and incremental x86 compile pass, but a real low-DOS run remains
-corrupted and is not a deterministic shutdown witness. O:\winnt has been
-restored to the saved pre-native-wait host package, not left on this WIP.
-The 17+4 native-wait results above describe the earlier tested candidate.
+The pre-resume guard now passes isolated native-wait lifecycle tests, formal
+x86, a deterministic CONFIG-stage test-driver fault with a guest-written
+execution witness and natural worker exit, plus all 17 product routes
+(`s35-cleanup-regression-r1`) and four XMS routes (`s35-cleanup-xms-r1`).
+O:\winnt contains this tested host candidate; original guest media are unchanged.
+The ordinary-environment low-DOS failure remains unresolved. S35 stays open.
 
 ## S34 Closure Record
 

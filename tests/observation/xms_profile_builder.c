@@ -17,8 +17,13 @@ int main(int argc, char **argv)
     const char *config = "EMM=RAM\r\ndevice=%SystemRoot%\\system32\\himem.sys /INT15=128\r\ndevice=%SystemRoot%\\tests\\X35UMB.SYS\r\nfiles=20\r\n";
     if (argc != 3 && argc != 4) return 64; /* optional default INT15 profile */
     if (argc == 4) {
-        if (strcmp(argv[3], "--default-int15")) return 64;
-        config = "EMM=RAM\r\ndos=high\r\ndevice=%SystemRoot%\\system32\\himem.sys\r\ndevice=%SystemRoot%\\tests\\X35UMB.SYS\r\nfiles=20\r\n";
+        if (!strcmp(argv[3], "--default-int15"))
+            config = "EMM=RAM\r\ndos=high\r\ndevice=%SystemRoot%\\system32\\himem.sys\r\ndevice=%SystemRoot%\\tests\\X35UMB.SYS\r\nfiles=20\r\n";
+        else if (!strcmp(argv[3], "--default-low"))
+            config = "EMM=RAM\r\ndevice=%SystemRoot%\\system32\\himem.sys\r\ndevice=%SystemRoot%\\tests\\X35UMB.SYS\r\nfiles=20\r\n";
+        else if (!strcmp(argv[3], "--reserved-high"))
+            config = "EMM=RAM\r\ndos=high\r\ndevice=%SystemRoot%\\system32\\himem.sys /INT15=128\r\ndevice=%SystemRoot%\\tests\\X35UMB.SYS\r\nfiles=20\r\n";
+        else return 64;
     }
     strcpy_s(standard.appname, sizeof(standard.appname), "S35 XMS profile");
     if (sprintf_s(standard.startfile, sizeof(standard.startfile),
