@@ -6,6 +6,23 @@ machine owner. This component neither owns a CPU nor substitutes execution.
 
 ## Registered divergences
 
+S36 corrects ADAPTER-SOFTPC-029: current-mode address resolution retains its
+PE/VM rule, while SIM32's explicit protected request uses the same original
+descriptor walker regardless of PE/VM. No CPU cache is selected by register
+order and no descriptor algorithm is duplicated.
+
+ADAPTER-SOFTPC-STATUS restores the previously null Cpu.SetSTATUS slot using
+the eleven flag assignments from pinned OpenNT
+base/mvdm/softpc.new/host/src/nt_cpu.c::setSTATUS (SHA-256
+3f77f06e497854b00f58acde8bfe7b5e67af7c5e67174deb579cd76e13f5830f).
+That body is guarded by A3CPU together with an alternate host_cpu_init and
+EmulatorEndIretHook; enabling that backend is not a CPU40 composition route.
+The finite original body is retained here and bound to original CCPU flag
+setters. Unlike guest POPF/setFLAGS, this host restoration must not filter
+IF/IOPL by guest privilege. No instruction implementation or new flags policy
+is introduced. The generated binder and all-bit fixture own its reachability
+and regression check; original DPMI DpmiSimulateIretCF is the real caller.
+
 | ID | Original purpose | Reason | Implementation | Files |
 | --- | --- | --- | --- | --- |
 | ADAPTER-SOFTPC-001 | Declare historical host error forms required by reached source. | The matching declaration survives in a different original header. | Build-island declaration bridge only; no mirror body changes. | `include/error_abi.h` |

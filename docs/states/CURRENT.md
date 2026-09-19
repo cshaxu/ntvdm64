@@ -32,12 +32,13 @@ records direct and doubly nested real XMS forced relocation, plus original-sourc
 fixtures for preceding/elsewhere moves, byte preservation, fragmentation,
 exhaustion and release. Injected commit/decommit failures expose two upstream
 rollback limitations; current worker reachability is not yet established.
-No production code or guest media changed. Read-only dispatch observation
-proves protected entry and InitApp return; the first string-output translation
-does not return. SIM32's explicit protected-address request incorrectly flows
-through a current-CPU-mode adapter after PE is cleared. Its bounded binding
-repair and real DPMI memory validation remain pending. All 17 existing product
-regressions pass; this is not S36 closure.
+SIM32's explicit protected-address contract is repaired, and the null
+Cpu.SetSTATUS slot now binds the original host FLAGS-restoration body through
+existing CCPU setters. Formal x86 build, all-bit C-VID fixture and all 17
+product regressions pass. Real DPMI now allocates, resizes, checks data and
+frees, but its final string-output call still times out; full-client acceptance
+and failure-boundary disposition remain open. Guest media are unchanged;
+this is not S36 closure.
 
 ## S35 Closure Record
 

@@ -253,7 +253,7 @@ GLOBAL sys_addr sim32_effective_addr IFN2(double_word, addr, BOOL, pm)
     {
         IU32 linear;
 
-        if (!mvdm_softpc_effective_address(seg, off, &linear))
+        if (!mvdm_softpc_protected_address(seg, off, &linear))
             return ((sys_addr)-1);
         return (sys_addr)linear;
     }

@@ -74,6 +74,17 @@ int main(void)
     CHECK(Cpu.Video==(IHP)&Video && Cpu.Sas==&Sas && Cpu.Private!=0);
     CHECK(Sas.Sas_overwrite_memory==c_sas_overwrite_memory);
     CHECK(Cpu.ClearHwInt==0);
+    CHECK(Cpu.SetSTATUS!=0);
+    Cpu.SetSTATUS(0x7fd5);
+    CHECK(Cpu.GetNT()==1 && Cpu.GetIOPL()==3 && Cpu.GetOF()==1 &&
+          Cpu.GetDF()==1 && Cpu.GetIF()==1 && Cpu.GetTF()==1 &&
+          Cpu.GetSF()==1 && Cpu.GetZF()==1 && Cpu.GetAF()==1 &&
+          Cpu.GetPF()==1 && Cpu.GetCF()==1);
+    Cpu.SetSTATUS(0);
+    CHECK(Cpu.GetNT()==0 && Cpu.GetIOPL()==0 && Cpu.GetOF()==0 &&
+          Cpu.GetDF()==0 && Cpu.GetIF()==0 && Cpu.GetTF()==0 &&
+          Cpu.GetSF()==0 && Cpu.GetZF()==0 && Cpu.GetAF()==0 &&
+          Cpu.GetPF()==0 && Cpu.GetCF()==0);
     CHECK(Cpu.Private->GetCpuState==0 && Cpu.Private->SetCpuState==0);
     CHECK(Video.GetVideolatches==C_Video.GetVideolatches);
     CHECK(Video.SetVideolatches==C_Video.SetVideolatches);

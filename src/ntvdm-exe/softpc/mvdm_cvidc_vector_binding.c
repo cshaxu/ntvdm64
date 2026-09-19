@@ -44,6 +44,25 @@ void mvdm_cvidc_set_jump_restart(IUH value)
 
 static struct CpuPrivateVector CvidCpuPrivate;
 
+/* Original host/src/nt_cpu.c::setSTATUS (A3CPU): restore host-supplied FLAGS
+ * without guest POPF privilege filtering. That translation unit's A3CPU
+ * runtime is not the selected CCPU40 backend; bind its finite flag operation
+ * to the existing original CCPU setters, not a new instruction provider. */
+static void mvdm_cvidc_set_status(IU16 flags)
+{
+    setNT((flags >> 14) & 1);
+    setIOPL((flags >> 12) & 3);
+    setOF((flags >> 11) & 1);
+    setDF((flags >> 10) & 1);
+    setIF((flags >> 9) & 1);
+    setTF((flags >> 8) & 1);
+    setSF((flags >> 7) & 1);
+    setZF((flags >> 6) & 1);
+    setAF((flags >> 4) & 1);
+    setPF((flags >> 2) & 1);
+    setCF(flags & 1);
+}
+
 static void mvdm_cvidc_bind_cpu_private(void)
 {
 #include "cvidc_cpu_binding.inc"

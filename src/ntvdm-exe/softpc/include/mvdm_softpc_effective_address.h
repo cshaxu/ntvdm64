@@ -16,6 +16,10 @@ IMPORT IU32 c_effective_addr IPT2(IU16, selector, IU32, offset);
 IMPORT int mvdm_softpc_effective_address IPT3(IU16, selector, IU32, offset,
                                               IU32 *, address_out);
 
+/* SIM32's explicit protected address contract is independent of CPU PE/VM. */
+IMPORT int mvdm_softpc_protected_address IPT3(IU16, selector, IU32, offset,
+                                              IU32 *, address_out);
+
 #ifdef __cplusplus
 }
 #endif

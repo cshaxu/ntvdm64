@@ -16,7 +16,7 @@ const publicSpecial = {
   GetJumpCalibrateVal: 'mvdm_cvidc_get_jump_calibration', GetJumpInitialVal: 'mvdm_cvidc_get_jump_restart', SetJumpInitialVal: 'mvdm_cvidc_set_jump_restart', SetEOIEnable: 'setEOIEnableAddr',
   SetAddProfileData: 'setAddProfileDataPtr', SetMaxProfileData: 'setMaxProfileDataAddr', GetAddProfileDataAddr: 'getAddProfileDataAddr', PurgeLostIretHookLine: 'PurgeLostIretHookLine',
   ClearHwInt: '0', InitIOS: '0', DefineInb: '0', DefineInw: '0', DefineInd: '0', DefineOutb: '0', DefineOutw: '0', DefineOutd: '0',
-  SetSTATUS: '0', SetAC: '0', GetAC: '0', GetET: '0', GetNE: '0', GetWP: '0',
+  SetSTATUS: 'mvdm_cvidc_set_status', SetAC: '0', GetAC: '0', GetET: '0', GetNE: '0', GetWP: '0',
 };
 const privateSpecial = {
   InitNanoCpu: 'c_InitNanoCpu', PrepareBlocksToCompile: 'c_PrepareBlocksToCompile',

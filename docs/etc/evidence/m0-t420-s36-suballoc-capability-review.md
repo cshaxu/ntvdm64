@@ -195,3 +195,51 @@ explicit protected-address resolution from current-CPU-mode address resolution,
 preserve the latter for its other callers, and prove the fix through this
 same real probe and the existing product regressions. Runtime causality of
 that repair has not yet been tested; no S36 closure is claimed.
+
+## Address contract and missing FLAGS binding repair
+
+The SIM32 call now selects explicit protected-address translation. The
+adapter's existing descriptor-base helper becomes that checked numeric helper;
+its current-mode API delegates to it only for protected execution, preserving
+all other callers. The mirror changes one call, not the original descriptor
+algorithm. The first candidate still failed; the blank captured Console was
+not evidence of earlier startup failure: dispatch tracing reached the same
+AH=09h translation. Native exception observation records C0000005, execute
+address zero. Return-stack/map correlation identifies setSTATUS called from
+DpmiSimulateIretCF, and the generator explicitly assigned Cpu.SetSTATUS=0.
+
+The missing slot now uses the unchanged eleven flag assignments from original
+OpenNT host/src/nt_cpu.c::setSTATUS, through the already selected CCPU setters.
+The original whole-unit route is excluded by its A3CPU host-initialization and
+IRET-hook backend; the minimal same-shaped extracted binding is selected.
+No external-source intrusion or novel algorithm is needed. Ordinary CCPU
+setFLAGS is not substituted: its guest CPL/IOPL filtering is different from
+this host-supplied state restoration. The source hash and boundary rationale
+are registered in the softpc owner README. The executable code is in the
+existing binder, with no new mirror file, overlay or CPU instruction change.
+
+Verification deliberately reuses the existing formal x86 graph at
+build/M0-T420/S35/formal-native-wait-r2, whose reused input identities are
+captured by the S36 diagnostic manifests. Header consumers, SIM32, numeric
+binding, generated C-VID binder, worker and Redirector DLL were rebuilt;
+the VdmTib storage gate passes. The C-VID fixture now checks every original
+SetSTATUS flag both set and clear and passes its existing video-vector tests.
+All 17 product routes pass in s36-address-status-product-r1-summary.json.
+
+The same D36.COM now prints ENTERING, ENTERED and ALLOCATED. Diagnostic
+s36-dpmi-status-trace-r1 then records successful BOP 07 allocation, 09 resize
+and 08 free. The probe checks both sentinel DWORDs before its free; this
+demonstrates the actual shared-pool caller and data preservation. However,
+the final AH=09h output, now entered with ES=0 after descriptor disposal, does
+not return within 15 seconds. This is still a FAILED full-client test, not
+an accepted timeout, and its exact return/output boundary remains open.
+Only the identified test launcher's worker/broker children were terminated.
+The runtime package was then restored to the non-diagnostic formal candidate;
+no observation executable remains deployed. The earlier original rollback
+limitations and complete DPMI lifecycle verification are still unresolved.
+
+All four XMS routes also pass under s36-address-status-xms-r1. The deployed
+non-diagnostic worker hashes to
+`a48bc3de09ad48c73e95e71a9d465f2166e9b4f61069cb74ac22a6a84906a498`
+and VDMREDIR.dll to
+`29e07a07228b07fff1bfb7f8cb96b74975dd29e5a4f33318319724bf16a08ca1`.

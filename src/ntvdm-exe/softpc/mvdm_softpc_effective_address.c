@@ -25,22 +25,20 @@ IMPORT IU16 c_getMSW IPT0();
  * `selector_outside_GDT_LDT` and `read_descriptor_linear` routines are the
  * same CCPU40 mechanism used by protected-mode instruction paths.  Do not
  * recreate a CPU30 monitor descriptor table in this adapter. */
-static int descriptor_segment_base(IU16 selector, IU32 *base_out)
+int mvdm_softpc_protected_address(IU16 selector, IU32 offset, IU32 *address_out)
 {
     IU32 descriptor_address;
     CPU_DESCR descriptor;
 
-    if (base_out == 0 || selector_outside_GDT_LDT(selector,
+    if (address_out == 0 || selector_outside_GDT_LDT(selector,
         &descriptor_address)) return 0;
     read_descriptor_linear(descriptor_address, &descriptor);
-    *base_out = descriptor.base;
+    *address_out = descriptor.base + offset;
     return 1;
 }
 
 int mvdm_softpc_effective_address(IU16 selector, IU32 offset, IU32 *address_out)
 {
-    IU32 base;
-
     if (address_out == 0) return 0;
     if ((c_getMSW() & CCPU_MSW_PE) == 0 ||
         (c_getEFLAGS() & CCPU_EFLAGS_VM) != 0) {
@@ -50,9 +48,7 @@ int mvdm_softpc_effective_address(IU16 selector, IU32 offset, IU32 *address_out)
     /* SIM32's original protected-mode rule reads the selected descriptor.
      * A visible selector does not identify one of the six mutable hidden
      * segment caches, so never choose a cache by register order here. */
-    if (!descriptor_segment_base(selector, &base)) return 0;
-    *address_out = base + offset;
-    return 1;
+    return mvdm_softpc_protected_address(selector, offset, address_out);
 }
 
 IU32 c_effective_addr(IU16 selector, IU32 offset)
