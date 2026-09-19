@@ -4,55 +4,40 @@
 
 ## Active Packet
 
-**Active: M0 T420 S36**
+**Active: M0 T420 S37**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T420 S36 — Ordinary Mode, single implementer/reviewer. |
-| Candidate Proposal | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md), S36. |
-| Admission And Approval | Standing owner authorization automatically admits each sequential S; S35 closed and was pushed as 23d12c9f5. |
-| Objective | Verify the complete selected original suballocator capability through real XMS and DPMI-backed callers: allocation, relocation, fragmentation, exhaustion, release and teardown. |
-| Non-goals | No guest-media changes, replacement allocator, new CPU semantics or false success for an unavailable guest path. |
-| Reference Baseline | S16 original-source/host-fixture closure and S35 real XMS growth/shrink/error/reuse evidence; neither proves real forced relocation or the complete DPMI caller. |
-| Files And ABI Surface | Original suballoc.c, suballcp.h and inc/suballoc.h; XMS and DPMI allocation callers; existing commit/decommit/move bindings; independent tests only unless a source-proven defect is found. |
+| Identifier Mode | M0 T420 S37 — Ordinary Mode, single implementer/reviewer. |
+| Candidate Proposal | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md), S37. |
+| Admission And Approval | Standing owner authorization automatically admits each sequential S; S36 closes in the linked record below, following implementation delivery 8c081843a and lifecycle delivery 6f721457a. |
+| Objective | Verify the complete selected original OEMUNI package through non-ASCII DOS paths, conversions, buffers, failures and reached process callers. |
+| Non-goals | No guest-media changes, replacement conversion engine, unrelated code-page policy or unsupported WOW success claims. |
+| Reference Baseline | S17 source recovery and focused conversion/failure fixtures; current S36 formal product and all 17 established regressions. |
+| Files And ABI Surface | Original oemuni/file.c and process.c, inc/oemuni.h, actual DEM/COMMAND consumers and existing host conversion boundaries. |
 | Applicable Rules | Execution, source policy, mirror/minimal-diff, guest immutability, transcript-gated acceptance and build/runtime output hygiene. |
-| Verification | Freeze source and caller inventory; audit every allocator operation and callback; original-source fixture plus real guest normal/failure/relocation/release workloads; formal x86 and all 17 product regressions. |
-| Expected Markers | Data survives forced relocation, failed growth preserves the old block, released capacity is reusable, callback/lease lifetimes balance; unreachable or externally unavailable paths are explicitly evidenced, not fabricated. |
-| Asset Needs | Pinned OpenNT, formal x86 graph, disposable probes under build/M0-T420/S36 and runtime tests; logs under the approved runtime log directory. |
+| Verification | Inventory both source units and reached callers; source-shaped positive/negative buffer fixtures plus real DOS non-ASCII file/path workloads; formal x86 and all 17 product regressions. |
+| Expected Markers | Correct round-trip names/content, exact length and failure contracts, balanced allocation and handle cleanup; unreachable consumers explicitly classified. |
+| Asset Needs | Pinned OpenNT, current formal x86 graph, disposable probes under build/M0-T420/S37 and runtime tests; logs under the approved runtime log directory. |
 | Reporting Requirements | Byte/normalized mirror comparison, retained binding rationale, original callers, positive/negative/teardown results and exact residual debt; report changed production footprint separately from tests. |
-| Stop Conditions | Required guest-media mutation, new CPU/guest-memory ABI, unexplained product regression, or original-owner boundary expansion. |
+| Stop Conditions | Required guest-media mutation, new conversion policy, unexplained product regression, or original-owner boundary expansion. |
 | Exit Criteria | Complete original-owner capability dispositions; formal build and real guest/product tests pass or owner-approved limitation is recorded; reviewed evidence and state committed/pushed. |
 | Original Owner Request | Automatically admit every S and recover/verify each complete selected package with minimal original-source differences. |
-| Similar-Issue Sweep | Both XMS and DPMI callers, page granularity, rounding/overflow, in-place versus moved growth, shrink, allocation failure, callback failure and resource cleanup. |
+| Similar-Issue Sweep | Both OEMUNI units, OEM versus ANSI selection, bounded buffers, optional outputs, early failure cleanup and process/file callers. |
 
-## S36 Progress
+## S36 Closure Record
 
 The [S36 evidence](../etc/evidence/m0-t420-s36-suballoc-capability-review.md)
-records direct and doubly nested real XMS forced relocation, plus original-source
-fixtures for preceding/elsewhere moves, byte preservation, fragmentation,
-exhaustion and release. Injected commit/decommit failures expose two upstream
-rollback limitations; current worker reachability is not yet established.
-SIM32's explicit protected-address contract is repaired, and the null
-Cpu.SetSTATUS slot now binds the original host FLAGS-restoration body through
-existing CCPU setters. Formal x86 build, all-bit C-VID fixture and all 17
-product regressions pass. The remaining DPMI output timeout was traced to
-local ES/FS/GS cache indices 4/5/6 instead of original 0/4/5; correcting these
-completes allocation, resize, data checks, free, output and exit in all four
-direct/nested and null/restored-ES probe cases. Callback rollback and worker
-failure-boundary disposition remain open. Guest media are unchanged; this
-is not S36 closure. Original xmsmemr.c commit/decommit now compose through
-the existing original CPU40 SAS provider; the local allocating zero-on-free
-callback is removed. Bounded mapped movement is retained. The composed
-fixture proves free/reuse even with saturated leases and rejected backing
-I/O, without clearing live bytes. Original generic allocator rollback defects
-remain recorded; the selected provider no longer introduces those failures.
-Real DPMI forced relocation and failed-growth data preservation now pass
-directly and nested. This exposed an original BOOL/NTSTATUS mismatch in
-DpmiReallocateXmem; its one caller now checks BOOL correctly (DIV-272).
-Same-worker real DOS parent tests now prove four DPMI children exit with live
-allocations and restore the original XMS capacity after every exit, directly
-and nested. Broker-loss tests also prove each resident worker exits without
-an explicit worker kill. Final capability-ledger reconciliation remains.
+closes the selected original suballocator capability. Real XMS/DPMI forced
+movement, failed growth preserving data, explicit free, same-worker implicit
+task cleanup and broker-loss exit pass, alongside original-source branch,
+fragmentation/exhaustion/coalescing fixtures and all 17 product regressions.
+Original SAS callbacks replace local clearing; the allocator body remains
+byte-exact. Required repairs cover explicit protected addressing, original
+FLAGS restoration, segment indices and DPMI BOOL failure propagation. Guest
+media are untouched. Dormant upstream rollback defects for a future fallible
+provider remain in TODO, not misrepresented as repaired. S36 has no remaining
+selected-provider acceptance gap; S37 does not inherit its implementation work.
 
 ## S35 Closure Record
 

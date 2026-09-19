@@ -3,7 +3,8 @@
 ## Inputs and current disposition
 
 S36 follows S35 delivery 23d12c9f5 under standing sequential admission.
-It remains open. Product profile is MSVC Win32/x86 CCPU40; original guest
+S36 is closed by the final capability ledger below. Product profile is MSVC
+Win32/x86 CCPU40; original guest
 media remain immutable. Build/test products belong below build/M0-T420/S36,
 runtime probes below the approved tests directory and observations below logs.
 
@@ -509,3 +510,33 @@ The normal task-lifetime proof is the four repeated capacity restorations;
 the resident process is allowed to wait according to original semantics.
 Product code is unchanged from 8c081843a. This is additional lifecycle
 evidence, not a replacement for the final complete S36 ledger review.
+
+## Final capability ledger and closure
+
+This ledger supersedes earlier chronological statements that a boundary is
+still open. All selected suballocator capabilities have a disposition:
+
+| Capability | Current proof / disposition |
+| --- | --- |
+| Initialize, query, allocation, rounded size, shrink and tail growth | Unchanged original-source branch fixture passes; real XMS four-route matrix passes. |
+| Preceding overlapping move, elsewhere move | Original-source fixture asserts exact addresses and copied bytes; latest deployed product passes real XMS forced move directly and nested (`s36-final-xms-move-*`). |
+| Fragmentation, exhaustion, failed growth, coalescing/reuse | Original-source fixture fills the pool and fragmented holes; real DPMI stress rejects over-capacity growth with preserved data and subsequently forces successful relocation. |
+| DPMI explicit free and data preservation | Four basic ES variants plus two stress routes pass. BOOL result repair preserves the original failure contract. |
+| Implicit task release | Four live-allocation children per route restore largest and total free capacity in the same worker; direct and nested lifecycle tests pass. |
+| Commit/decommit failures | Production now uses original CPU40 SAS callbacks on preallocated backing; they do not perform fallible zeroing/lease allocation. Generic upstream rollback defects remain evidenced for a different fallible provider, not exercised product operations. |
+| Mover failure and worker lifetime | Real carrier fixture requests cancellation on failed movement and releases leases; real broker-loss matrix observes workers exiting without explicit worker termination. Original resident waiting is not labelled a leak. |
+| Formal product and existing workloads | Fresh x86 product graph plus final BOOL relink; current deployed hashes recorded above; all 17 text-gated product routes and four XMS routes pass. No original guest changes. |
+
+Final verification reruns the original branch fixture and original-callback
+fixture successfully. suballoc.c and suballcp.h remain byte-identical to
+pinned OpenNT. Current S36 production changes relative to admission
+6f5ae6690: four existing mirror C files, 18 added / 6 removed lines (net +12);
+worker implementation/header files 29 added / 52 removed (net -23), including
+the original eleven-flag restoration binding. README, tests and build graph
+changes are excluded from those counts. No overlay or mirror file was added.
+The added mirror changes each correct a demonstrated boundary or source bug;
+the original allocator body itself has zero diff.
+
+No WRITE/WOW acceptance is inferred from these DOSX clients. Later package
+owners retain those workloads. S36 closes its selected suballocator contract;
+S37 owns OEMUNI capability verification next.
