@@ -1125,3 +1125,45 @@ identity/reservation and launcher subtype handling expands the current
 OEMUNI surface and must be explicitly admitted under the active packet's
 original-owner boundary stop condition. S37 remains open; neither the five
 host cmdpif scenarios nor the previous 17 regressions cover this failed entry.
+
+## Current footprint and cross-package consumer reconciliation
+
+At 4ca7671b5, re-running git diff --no-index --numstat against pinned OpenNT
+and repeating with --ignore-space-at-eol gives identical counts for both
+OEMUNI units: file.c +44/-13, process.c +151/-49. These are diff-line counts,
+not runtime capability counts. Current SHA-256 values are respectively
+83cdb96808ad79df98c608be95cdd16f7229b2e4946b86e6a473edae8f2407ce and
+2337d69ca349f29ba4790620cf10080e7ff6aa19b28b4299007970cb8572f5a2.
+
+| Production mirror | Current normalized diff versus pinned OpenNT | S37 change versus admission 5ad0ac874 |
+| --- | --- | --- |
+| oemuni/file.c | +44/-13 | +37/-11 |
+| oemuni/process.c | +151/-49 | +143/-44 |
+| dos/dem/demgset.c | +37/-14 | +2/-1 |
+| softpc.new/host/src/nt_pif.c | +21/-7 | +3/-1 |
+| softpc.new/host/src/nt_msscs.c | +50/-16 | +2/-1 |
+| Total for these five files only | +303/-99 | +187/-58 |
+
+The total is not a repository-wide mirror inventory. S37 additionally adds
+16 implementation and four declaration lines to the existing worker-local
+firmware binding for OEM-to-ANSI CONFIG paths. There is no new overlay or
+adapter component. README registration and all tests/tools/evidence are
+excluded from production code counts. This packet increases corrective code;
+it must not be reported as net diff reduction.
+
+Source reconciliation confirms these outstanding workload dependencies:
+
+| Original caller | Contract still requiring its real consumer | Acceptance owner |
+| --- | --- | --- |
+| wow32/wdos.c, DIR_NT_TO_DOS | GetCurrentDirectoryOem followed by guest default-drive and current-directory publication; failure must not publish a false directory | S40 WOW32 and S41 actual WOW16 workload |
+| wow32/wkman.c, WK32WowDelFile | Delete succeeds but attributes still exist: full path, temporary name, replace-existing rename, delete, rollback and temporary-file cleanup; font-removal fallback is a separate branch | S40 WOW32/S41; host API tests alone do not establish guest reachability |
+| dos/dem/demmisc.c, SignalSegmentNotice | IsDebuggee gates full-path expansion and the original module notification | S42 debugger workload |
+
+For WK32WowDelFile, an ordinary successful delete does not exercise the
+GetTempFileNameOem/MoveFileExOem branch. Modern filesystem reachability must
+be measured by that package, not assumed from a linked symbol; an original-
+body injected boundary test can supplement, but cannot masquerade as, the
+real guest result. Existing OEMUNI host fixtures establish API contracts only.
+This table records dependencies, not an exclusion or a reduced S37 exit bar.
+The proposal's real Win16 wording and the explicit-PIF failure remain open;
+S37 is not closed and no WOW/debugger success is claimed.
