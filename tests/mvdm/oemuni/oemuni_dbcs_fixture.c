@@ -110,7 +110,7 @@ static BOOL WINAPI fixed_volume(LPCWSTR root, LPWSTR volume, DWORD volume_size,
 
 int main(void)
 {
-    CHAR output[64], expected[64], *part = NULL;
+    CHAR output[65536], expected[64], *part = NULL;
     DWORD actual;
     int size = WideCharToMultiByte(932, 0, full_path, -1,
         expected, sizeof(expected), NULL, NULL);
@@ -183,5 +183,33 @@ int main(void)
             GetLastError() != ERROR_NOT_READY || outstanding) return 21;
     }
     puts("S37_DBCS_VOLUME_BOTH_CAPACITIES_OPTIONAL_FAILURE_CLEANUP_OK");
+    {
+        static const DWORD capacities[] = {0, 1, 10, 11, 12, 65536};
+        static const char *names[] = {"current", "system", "windows", "temp", "search"};
+        unsigned i, api, mismatches = 0;
+        for (api = 0; api < 5; ++api) {
+            for (i = 0; i < sizeof(capacities)/sizeof(capacities[0]); ++i) {
+                DWORD cap = capacities[i], wanted = cap < 12 ? 12 : 11;
+                int valid;
+                memset(output, 0x5a, sizeof(output));
+                SetLastError(0);
+                switch (api) {
+                case 0: actual = GetCurrentDirectoryOem(cap, output); break;
+                case 1: actual = GetSystemDirectoryOem(output, cap); break;
+                case 2: actual = GetWindowsDirectoryOem(output, cap); break;
+                case 3: actual = GetTempPathOem(cap, output); break;
+                default: actual = SearchPathOem(NULL, "x.txt", NULL, cap, output, NULL); break;
+                }
+                valid = actual == wanted && (cap < 12 ? output[0] == 0x5a :
+                    memcmp(output, expected, 12) == 0);
+                if (!valid) ++mismatches;
+                printf("S37_SIZE_MATRIX api=%s cap=%lu actual=%lu expected=%lu error=%lu contract=%s\n",
+                    names[api], cap, actual, wanted, GetLastError(), valid ? "PASS" : "FAIL");
+            }
+        }
+        /* Diagnostic baseline, not package acceptance. */
+        if (!mismatches) return 22;
+        printf("S37_SIZE_MATRIX_OPEN_DEFECTS=%u NOT_ACCEPTED\n", mismatches);
+    }
     return 0;
 }

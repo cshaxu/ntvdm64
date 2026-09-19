@@ -450,3 +450,35 @@ COMMAND /c routes pass, prefix s37-fcb-guest-r1, on unchanged formal product
 product implementation was needed. FCB rename's distinct policy and font
 retry are not inferred from FCB delete. Remaining OEM buffer/caller review
 still prevents S37 closure.
+
+## Complete declared-capacity matrix
+
+The CP932 fixture now tests current/system/Windows/temp/search helpers at
+capacities 0, 1, 10, 11, 12 and 65536, with a real 65536-byte backing buffer.
+Each row checks both result length and output bytes/sentinel; a matching
+return number alone cannot pass. The sample needs 12 OEM bytes including
+NUL. Thirty cases produce 13 passes and 17 failures on 1edae5841:
+
+- Current directory passes all small capacities but fails 65536 with error
+  234: its USHORT capacity wraps to zero.
+- System/Windows/temp/search each fail 0/1/10: the intermediate Unicode
+  query returns its character requirement (11), not OEM byte requirement 12.
+- At 65536, system/Windows/temp return 11 without writing the expected path;
+  search fails with error 234. These are narrowing defects, not successful
+  results merely because some return values happen to equal expected length.
+
+The diagnostic reports S37_SIZE_MATRIX_OPEN_DEFECTS=17 NOT_ACCEPTED. Its
+zero exit confirms the expected open defects exist, NOT package acceptance.
+Earlier repaired full-path, boundary-11/12 and volume checks still pass.
+Build/run uses the existing dbcs-r1 target and size-matrix-build.log. No
+product source or deployed artifact changes in this delivery.
+
+Original recovery references are now located: BaseClient pathmisc.c contains
+DBCS sections in SearchPathA (line 717 onward), GetTempPathA (line 1214
+onward), and system/Windows directory routines. SearchPathA explicitly
+reallocates and re-queries a complete Unicode result before computing encoded
+required bytes. The temp-path historical retry itself retains suspicious
+old-capacity use and is not approved for blind copying. The next correction
+must preserve the original query/conversion/cleanup owner, validate the full
+intermediate result and prevent narrowing; no fixed small-buffer workaround
+or fabricated success is accepted. These 17 failures remain active S37 work.
