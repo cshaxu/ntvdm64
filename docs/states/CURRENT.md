@@ -32,8 +32,10 @@ records direct and doubly nested real XMS forced relocation, plus original-sourc
 fixtures for preceding/elsewhere moves, byte preservation, fragmentation,
 exhaustion and release. Injected commit/decommit failures expose two upstream
 rollback limitations; current worker reachability is not yet established.
-No production code or guest media changed. Real DPMI and the remaining failure
-and product-regression gates remain open; this is not S36 closure.
+No production code or guest media changed. The real DPMI probe fails between
+entry and its first protected-mode DOS output; no allocation hit is proven.
+All 17 existing product regressions pass afterward. DPMI root cause and the
+remaining failure gates remain open; this is not S36 closure.
 
 ## S35 Closure Record
 

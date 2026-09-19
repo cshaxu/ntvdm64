@@ -114,3 +114,42 @@ status to inject; its worker cancellation boundary requires separate evidence.
 Production footprint delta remains zero. Real DPMI allocation/reallocation,
 the remaining worker-boundary failure checks, formal build and complete product
 regression remain pending. S36 is not closed.
+
+## Real DPMI entry probe: failed, not accepted
+
+Independent tests/observation/dpmi_suballoc.asm follows the 16-bit client
+contract in original dpmi/dxfunc.asm (also present in 486/dxfunc.asm): query
+INT 2F/1687, allocate the requested host-data paragraphs, and far-call the
+returned entry with AX=0. Its subsequent workload uses INT 31/0501, 0503 and
+0502, with a data selector and two sentinel DWORDs to check preservation.
+It does not replace, rebuild or patch DOSX or any original guest component.
+
+NASM builds it as `build/M0-T420/S36/dpmi-guest-r1/D36.COM`, copied only to
+the runtime tests directory. Initial 512-byte-stack execution
+`s36-dpmi-direct-r1.txt` (launcher 40108) emits S36_DPMI_ENTERING, then garbled
+text, and the launcher exits 0x42b. A 4096-byte-stack control has the same
+result in `s36-dpmi-direct-r2.txt` (launcher 50880). The latter COM hashes to
+`08e42ee9e363294d3b621d2b2b27b970b8f9f85117a1fa0d8112a06697e400ac`.
+Both runs end without remaining package processes; no timeout or forced kill
+is being counted as successful guest completion.
+
+Neither S36_DPMI_ENTERED nor S36_DPMI_ALLOCATED nor the final success marker
+appears. This locates the unverified boundary between the real-mode entry
+call and its first protected-mode DOS text output; it does NOT yet establish
+whether mode entry failed or that first DOS translation failed. There is no
+evidence that SAAllocate was reached by this workload. A larger probe stack
+does not cure it. Root cause remains open, and the source-shaped entry/frame
+and return path need read-only observation before any production repair.
+
+The selected lease implementation additionally confirms that commit callbacks
+can return failure without OS VirtualAlloc: guest_memory_lease_acquire calls
+malloc and the bound reader, and release can fail in the bound writer.
+Therefore the original rollback findings cannot be dismissed merely because
+the CPU40 backing is pre-reserved. End-to-end reachability and consequences
+still require focused failure evidence; no new allocator policy is admitted.
+
+The unchanged deployed product subsequently passes all 17 transcript-gated
+Verify-CommandExitStatus routes, recorded in
+`s36-dpmi-baseline-r1-summary.json`: direct/nested COMMAND and MEM, repeated
+MEM, EDIT return, guest/native exit values and native stream/EOF cases.
+This is baseline regression evidence, not acceptance of the failed DPMI probe.
