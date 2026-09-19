@@ -110,6 +110,20 @@ original guest media changed; the low-DOS limitation still needs disposition.
 
 ### Direct environment-copy witness
 
+Post-diagnosis formal verification at 8080a1e7c: the five explicit x86 targets
+build successfully, with ntvdm.exe and VDMREDIR.dll relinked and the VdmTib
+single-owner gate passing. The deployed package passes all 17 established
+transcript-gated routes under `s35-final-product-r1`, including EDIT return,
+nested COMMAND/MEM, repeat execution, native streams and guest exit status.
+Run16, BaseSrv and DTMgr are byte-identical to the formal outputs. Worker and
+VDMREDIR differ by four bytes each, confined to the COFF timestamp and debug
+directory timestamp: worker offsets 280/281 and 2611636/2611637; DLL offsets
+296/297 and 170724/170725. Parsing their PE directories independently places
+the debug-directory timestamp at 2611636 and 170724 respectively. No code,
+data, import or export content differs. The deployed historical binary hashes
+remain unchanged; this is not a claim that the relinked hashes are identical.
+This verification does not accept the ordinary-environment low-DOS failure.
+
 `tests/observation/command_environment_trace.c` includes the unchanged current
 cmdenv translation unit under a renamed function, then surrounds that function
 with read-only guest leases. The formal graph never selects this wrapper.
