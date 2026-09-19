@@ -4,17 +4,17 @@
 
 ## Active Packet
 
-**Active: M0 T420 S29**
+**Active: M0 T420 S30**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T420 S29 — Ordinary Mode. |
-| Candidate Proposal | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md) S29. |
-| Admission And Approval | Owner authorized automatic sequential S admission; S28 is closed by its indexed whole-package capability evidence. |
-| Objective | Close the complete selected `softpc.new/base/comms` capability unit through real current-profile communications-device workloads, representative failure and worker teardown acceptance. |
-| Non-goals | No new serial/printer medium or device provider, CPU30/kernel monitor revival, emulator replacement, WOW work, or unrelated Console redesign. |
-| Reference Baseline | S9 restored the complete comms manifest; S29 must now classify every current real capability and resource lifecycle. |
-| Files And ABI Surface | Freeze the selected `softpc.new/base/comms` manifest and its COM/printer/device, error and teardown interfaces after a whole-manifest audit. |
+| Identifier Mode | M0 T420 S30 — Ordinary Mode. |
+| Candidate Proposal | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md) S30. |
+| Admission And Approval | Owner authorized automatic sequential S admission; S29 is closed by its indexed whole-package capability evidence. |
+| Objective | Close the complete selected `softpc.new/base/dos` capability unit through real EMS allocation/map/unmap/release and complete DOS-device/BOP acceptance. |
+| Non-goals | No new guest media, CPU30/kernel monitor revival, emulator replacement, WOW work, or unrelated Console redesign. |
+| Reference Baseline | S10 froze the complete DOS manifest; S30 must now classify every current real capability and resource lifecycle. |
+| Files And ABI Surface | Freeze the selected `softpc.new/base/dos` manifest and its EMS, DOS-device, BOP, error and teardown interfaces after a whole-manifest audit. |
 | Applicable Rules | Project design/rules, source policy, strict mirror rule, CCPU40-only product rule, original-owner recovery and transcript-gated acceptance. |
 | Verification | Build a tracked normal/failure/cleanup matrix for the full selected comms manifest, then fresh formal x86 and direct plus interactive COMMAND/MEM/EDIT regressions. |
 | Expected Markers | Every selected communications family is a real pass, source-proven no selected caller, or explicit original profile boundary; no duplicate device state or fake success. |
@@ -25,11 +25,11 @@
 | Original Owner Request | “继续执行。” following the standing automatic sequential S authorization and the corrected S21--S39 T420 sequence. |
 | Similar-Issue Sweep | Audit selected serial, printer, device, BOP and error endpoints for duplicate device state, autonomous provider substitution, stale handle state and fake success. |
 
-## S29 Progress
+## S30 Progress
 
 Admission complete under the standing automatic sequential authorization.
-S29 starts with a whole-manifest source/caller and existing-evidence audit.
-No communications product behavior has changed.
+S30 starts with a whole-manifest source/caller and existing-evidence audit.
+No DOS product behavior has changed.
 
 ## S1 Closure Record
 
@@ -279,6 +279,15 @@ medium: real original startup, controller reset and worker teardown pass;
 disk transfer and non-selected floppy providers are source-proven profile
 exclusions.  Fresh five-artifact x86 deployment and all 17 COMMAND/MEM/EDIT
 transcript-gated routes pass.
+
+## S29 Closure Record
+
+[T420 S29 communications capability closure](../etc/evidence/m0-t420-s29-comms-capability-closure.md)
+closes all five selected original comms bodies under the original no-device-
+medium profile.  It adds no serial/printer provider: real INT 14h failure and
+Ignore recovery plus INT 17h initialization/status pass, all 526 x86 build
+edges and the 17 established COMMAND/MEM/EDIT routes pass, and worker cleanup
+leaves no product process.
 
 ## Current Technical Baseline
 

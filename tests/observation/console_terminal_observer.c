@@ -11,6 +11,7 @@
 static HANDLE read_pipe, write_pipe, raw_log;
 static HANDLE named_pipe_server;
 static volatile LONG named_pipe_connected, named_pipe_sent, named_pipe_received;
+static volatile LONG comms_error_dialog_dismissed;
 static int named_pipe_transact, named_pipe_async, named_pipe_async_write;
 static DWORD WINAPI serve_named_pipe(void *unused) {
     DWORD written; (void)unused;
@@ -80,6 +81,32 @@ static int guest_command_failed(const char *path) {
         log_contains(path,"is not recognized as an internal or external command");
 }
 
+/* S29 alone exercises the original missing-COM error direction.  The product
+ * keeps the original modal ERRORPANEL and its explicit Abort/Ignore choices;
+ * this test-only observer selects its source-defined IDCANCEL/Ignore branch
+ * so a headless ConPTY run can prove return and cleanup rather than hang. */
+static BOOL CALLBACK dismiss_comms_error_dialog(HWND window, LPARAM unused) {
+    char title[128], klass[32];
+    (void)unused;
+    if (InterlockedCompareExchange(&comms_error_dialog_dismissed,0,0)) return FALSE;
+    if (!GetClassNameA(window,klass,sizeof(klass)) || strcmp(klass,"#32770")) return TRUE;
+    if (!GetWindowTextA(window,title,sizeof(title)) ||
+        !strstr(title,"16 bit MS-DOS Subsystem")) return TRUE;
+    if (PostMessageA(window,WM_COMMAND,MAKEWPARAM(IDCANCEL,0),0)) {
+        InterlockedExchange(&comms_error_dialog_dismissed,1);
+        return FALSE;
+    }
+    return TRUE;
+}
+
+static void dismiss_comms_error_dialog_until_seen(void) {
+    for (int attempt=0; attempt<20 &&
+         !InterlockedCompareExchange(&comms_error_dialog_dismissed,0,0); ++attempt) {
+        EnumWindows(dismiss_comms_error_dialog,0);
+        Sleep(250);
+    }
+}
+
 static DWORD WINAPI watch_cells(void *unused) {
     HANDLE h=CreateFileA("CONOUT$",GENERIC_READ,FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,OPEN_EXISTING,0,NULL);
     (void)unused;
@@ -132,7 +159,7 @@ int main(int argc,char **argv) {
     HPCON pty;
     STARTUPINFOEXA si={0};PROCESS_INFORMATION pi={0};SIZE_T bytes=0;
     COORD size;
-    if(argc!=4 && (argc!=5 || (strcmp(argv[4],"--mouse") && strcmp(argv[4],"--resize") && strcmp(argv[4],"--video-int10") && strcmp(argv[4],"--system-capability") && strcmp(argv[4],"--bios-capability") && strcmp(argv[4],"--support-capability") && strcmp(argv[4],"--disks-capability") && strcmp(argv[4],"--vdmredir-pipe") && strcmp(argv[4],"--vdmredir-transact") && strcmp(argv[4],"--vdmredir-call") && strcmp(argv[4],"--vdmredir-timeout") && strcmp(argv[4],"--vdmredir-async") && strcmp(argv[4],"--vdmredir-async-write") && strcmp(argv[4],"--vdmredir-mailslot") && strcmp(argv[4],"--vdmredir-terminate") && strcmp(argv[4],"--vdmredir-netbios") && strcmp(argv[4],"--vdmredir-netbios-async") && strcmp(argv[4],"--vdmredir-dlc") && strcmp(argv[4],"--vdmredir-netapi") && strcmp(argv[4],"--vdmredir-net-enum") && strcmp(argv[4],"--vdmredir-wksta") && strcmp(argv[4],"--vdmredir-wksta-set") && strcmp(argv[4],"--vdmredir-message") && strcmp(argv[4],"--vdmredir-service") && strcmp(argv[4],"--vdmredir-assign") && strcmp(argv[4],"--vdmredir-use") && strcmp(argv[4],"--vdmredir-use-info") && strcmp(argv[4],"--vdmredir-use-lifecycle"))))return 64;
+    if(argc!=4 && (argc!=5 || (strcmp(argv[4],"--mouse") && strcmp(argv[4],"--resize") && strcmp(argv[4],"--video-int10") && strcmp(argv[4],"--system-capability") && strcmp(argv[4],"--bios-capability") && strcmp(argv[4],"--support-capability") && strcmp(argv[4],"--disks-capability") && strcmp(argv[4],"--comms-capability") && strcmp(argv[4],"--vdmredir-pipe") && strcmp(argv[4],"--vdmredir-transact") && strcmp(argv[4],"--vdmredir-call") && strcmp(argv[4],"--vdmredir-timeout") && strcmp(argv[4],"--vdmredir-async") && strcmp(argv[4],"--vdmredir-async-write") && strcmp(argv[4],"--vdmredir-mailslot") && strcmp(argv[4],"--vdmredir-terminate") && strcmp(argv[4],"--vdmredir-netbios") && strcmp(argv[4],"--vdmredir-netbios-async") && strcmp(argv[4],"--vdmredir-dlc") && strcmp(argv[4],"--vdmredir-netapi") && strcmp(argv[4],"--vdmredir-net-enum") && strcmp(argv[4],"--vdmredir-wksta") && strcmp(argv[4],"--vdmredir-wksta-set") && strcmp(argv[4],"--vdmredir-message") && strcmp(argv[4],"--vdmredir-service") && strcmp(argv[4],"--vdmredir-assign") && strcmp(argv[4],"--vdmredir-use") && strcmp(argv[4],"--vdmredir-use-info") && strcmp(argv[4],"--vdmredir-use-lifecycle"))))return 64;
     size.X=(SHORT)atoi(argv[1]);size.Y=(SHORT)atoi(argv[2]);
     if(argc==5 && (!strcmp(argv[4],"--vdmredir-pipe") || !strcmp(argv[4],"--vdmredir-transact") || !strcmp(argv[4],"--vdmredir-call") || !strcmp(argv[4],"--vdmredir-async") || !strcmp(argv[4],"--vdmredir-async-write"))) {
         char pipe_name[80]; snprintf(pipe_name,sizeof(pipe_name),"\\\\.\\pipe\\NTPTEST");
@@ -257,6 +284,25 @@ int main(int argc,char **argv) {
           { int marker=log_contains(argv[3],"S28_DISKS_OK"),failed=guest_command_failed(argv[3]);
             int passed=marker && !failed;
             printf("disks-capability marker=%d guest-failure=%d\n",marker,failed); fflush(stdout);
+            CloseHandle(job);ClosePseudoConsole(pty);return passed?0:1; }
+        }
+    }
+    if(argc==5 && !strcmp(argv[4],"--comms-capability")) {
+        char comms_command[MAX_PATH];
+        if (!GetEnvironmentVariableA("MVDM_TEST_COMMS_COMMAND",comms_command,
+                sizeof(comms_command))) return 72;
+        send_keys(comms_command); send_keys("\r"); dismiss_comms_error_dialog_until_seen(); Sleep(1000);
+        send_keys("mem\r"); Sleep(2000); send_keys("exit\r");
+        { DWORD comms_wait=WaitForSingleObject(pi.hProcess,5000),comms_code=0;
+          GetExitCodeProcess(pi.hProcess,&comms_code);
+          printf("comms-capability wait=%lu exit=%lu\n",comms_wait,comms_code); fflush(stdout);
+          Sleep(300); CloseHandle(write_pipe); WaitForSingleObject(thread,3000);
+          CloseHandle(raw_log);
+          { int marker=log_contains(argv[3],"S29_COMMS_OK"),failed=guest_command_failed(argv[3]);
+            int dismissed=InterlockedCompareExchange(&comms_error_dialog_dismissed,0,0);
+            int passed=comms_wait==WAIT_OBJECT_0 && comms_code==1 && dismissed && marker && !failed &&
+                log_contains(argv[3],"bytes total conventional memory");
+            printf("comms-capability dialog-ignore=%d marker=%d guest-failure=%d\n",dismissed,marker,failed); fflush(stdout);
             CloseHandle(job);ClosePseudoConsole(pty);return passed?0:1; }
         }
     }
