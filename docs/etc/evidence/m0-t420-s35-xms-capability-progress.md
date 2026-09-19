@@ -140,6 +140,27 @@ or forcing DOS=HIGH is not admitted as an equivalent repair. The observed
 stale INIT reference remains a guest-lifetime limitation under investigation,
 not evidence for changing CCPU or weakening immutable-media policy.
 
+The next upstream check includes the actual first-shell launcher, not the
+unrelated CONFIG INSTALL launcher: `doskrnl/bios/sysinit1.asm` declares
+`comexe exec0 <0,command_line,default_drive,zero>` at line 718 and passes
+that block to INT 21h EXEC at lines 1613--1620. Its normalized diff against
+pinned OpenNT is empty. Thus a zero explicit environment segment at first
+shell startup is original, not evidence that the standalone host omitted a
+required pre-sized environment. COMMAND `init.asm` lines 506--526 either
+uses the PSP environment or builds its temporary COMSPEC/PATH environment;
+lines 1285--1295 size the initial allocation from EnvSiz and UsedEnv.
+
+The matching original map locates INIT at 1660--248F, EnvSiz at 203C and
+Alloc_error at 1F8D. `Setup_res_end` retains resident data plus code for a
+first low COMMAND, excluding INIT; `EndInit` explicitly saves initial sizing
+values before SETBLOCK, but the NTVDM-specific GETINITENVIRONMENT retry
+still reads and writes EnvSiz afterward. This is a concrete source-lifetime
+hazard. The existing fault snapshot proves those locations contain host
+environment bytes at failure, but a complete allocation/write timeline is
+still needed to prove the exact transition independently of the final
+snapshot. No environment injection, allocator policy change or guest patch
+is justified by this static check alone.
+
 ### Original dispatch/caller ledger
 
 The selected `xmsdisp.c::apfnXMSSvc` contains twelve entries. The following
