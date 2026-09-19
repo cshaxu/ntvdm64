@@ -33,7 +33,9 @@ Current-host OEM 437 versus ANSI 1252 non-ASCII path, file-part, short-buffer
 and environment tests pass in the x86 original-source fixture. Real DOS
 non-ASCII create/read/write/rename/attribute operations now pass direct and
 nested, with independent host Unicode-name/content verification. Full
-consumer/buffer disposition remains open; no product changes.
+consumer/buffer disposition remains open. Original environment expansion's
+missing OEM output copy is repaired (DIV-273); focused non-ASCII/short-buffer
+tests, real DOS file routes and all 17 product regressions pass.
 
 ## S36 Closure Record
 

@@ -45,6 +45,22 @@ main(void)
         sizeof(expected), NULL, &substituted) || substituted) return 9;
     length = GetEnvironmentVariableOem("S37_OEM_FIXTURE", path, sizeof(path));
     if (!length || strcmp(path, expected)) return 10;
+    length = ExpandEnvironmentStringsOem("%S37_OEM_FIXTURE%", path, sizeof(path));
+    if (length != strlen(expected)+1 || strcmp(path, expected)) {
+        printf("S37_OEM_EXPAND_MISMATCH actual=%02x expected=%02x length=%lu\n",
+            (unsigned char)path[0], (unsigned char)expected[0], length);
+        return 13;
+    }
+    puts("S37_OEM_EXPAND_NONASCII_OK");
+    memset(path, 0x5a, sizeof(path));
+    length = ExpandEnvironmentStringsOem("%S37_OEM_FIXTURE%", path, 1);
+    /* Preserve the reached ANSI API's insufficient-buffer sizing contract;
+     * its required count need not equal the successful OEM byte count. */
+    if (length != ExpandEnvironmentStringsA("%S37_OEM_FIXTURE%", expected, 1) ||
+        length <= 1 || (unsigned char)path[1] != 0x5a) return 14;
+    SetLastError(0);
+    if (ExpandEnvironmentStringsOem(NULL, path, sizeof(path)) ||
+        GetLastError() != ERROR_INVALID_PARAMETER) return 15;
     if (!SetEnvironmentVariableOem("S37_OEM_FIXTURE", NULL)) return 11;
     SetLastError(0);
     if (GetEnvironmentVariableOem("S37_OEM_FIXTURE", path, sizeof(path)) ||

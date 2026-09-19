@@ -805,6 +805,9 @@ ExpandEnvironmentStringsOem(
 	if (ReturnValue != 0 && ReturnValue <= cchDst) {
 	    RtlInitString(&Value, lpDst);
 	    Status = RtlAnsiStringToUnicodeString(&Unicode, &Value, TRUE);
+            /* DIVERGENCE MVDM-HOST-DIV-273: Value borrowed lpDst; only the
+               later OEM allocation belongs to this routine's cleanup. */
+            Value.Buffer = NULL;
             if ( !NT_SUCCESS(Status) ) {
                 if ( Status == STATUS_BUFFER_OVERFLOW ) {
                     SetLastError(ERROR_FILENAME_EXCED_RANGE);
@@ -819,6 +822,12 @@ ExpandEnvironmentStringsOem(
                 BaseSetLastNTError( Status );
                 goto try_exit;
                 }
+
+            /* DIVERGENCE MVDM-HOST-DIV-273: publish the converted bytes,
+               not the ANSI intermediate; count the OEM terminator. */
+            ReturnValue = Value.Length + 1;
+            if (ReturnValue <= cchDst)
+                RtlMoveMemory(lpDst, Value.Buffer, ReturnValue);
 
             }
 try_exit:;

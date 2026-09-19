@@ -1,5 +1,11 @@
 # mvdm
 
+MVDM-HOST-DIV-273: `oemuni/process.c::ExpandEnvironmentStringsOem` publishes
+the original conversion's OEM result instead of leaving ANSI bytes in the
+caller buffer, uses the converted byte count, and separates a borrowed output
+pointer from cleanup-owned allocations.
+[S37 evidence](../../docs/etc/evidence/m0-t420-s37-oemuni-capability-review.md).
+
 MVDM-HOST-DIV-272: `dpmi32/xmem.c::DpmiReallocateXmem` tests the original
 BOOL return from DpmiReallocateVirtualMemory as BOOL, not NTSTATUS. This
 prevents failed growth from being reported as success and replacing the

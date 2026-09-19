@@ -76,3 +76,36 @@ files for inspection; no recursive cleanup or original guest mutation occurs.
 Process isolation only terminates package children of its recorded launcher.
 This verifies the reached DEM/OEM file-operation family, not every OEMUNI
 entry or a WOW workload. Remaining consumer and buffer-family audit continues.
+
+## Original environment-expansion output defect
+
+Actual caller nt_pif.c uses ExpandEnvironmentStringsOem for path expansion.
+The original function converts OEM input to ANSI, calls the ANSI expansion,
+allocates a converted OEM result, then frees it without copying it back. The
+fixture sets Unicode e-acute in its process-local environment; before repair
+the output is E9 (ANSI 1252), expected 82 (OEM 437), with return length 2.
+The identical omission exists in pinned OpenNT process.c.
+
+DIV-273 retains the original conversion/Win32/cleanup sequence and publishes
+the converted OEM bytes only within the supplied capacity, returning their
+terminator-inclusive count. It also clears Value.Buffer after consuming its
+borrowed lpDst alias, so cleanup cannot free the caller buffer if that
+conversion fails. No new adapter, overlay or conversion engine is added;
+the mirror delta is nine added lines including comments, four executable
+statements. Allocation-failure injection and other conversion families remain
+separate pending checks, not inferred from the successful path.
+
+The original-source x86 fixture passes the repaired non-ASCII expansion,
+one-byte output with untouched next-byte canary, and null-source error.
+The first short-buffer assertion incorrectly assumed required length 2;
+the actual original ANSI provider returns 3 on this host, reproduced by a
+direct ExpandEnvironmentStringsA control. The corrected test preserves that
+insufficient-buffer contract rather than changing the product to fit a test.
+
+Formal x86 incremental rebuild deliberately reuses the S36 graph and produces
+worker SHA-256 `22ff7c7978f5b5d5aa19e7a49771a2f88a93e929e4023717c956bb2731466fe3`
+and VDMREDIR.dll `09686f7f5def440326185f5d0257298220a980e674073bce11c8eba03e2ea197`.
+These non-diagnostic artifacts are deployed to O:\winnt. Both real non-ASCII
+DOS routes pass under s37-oem-expand-guest-r1; all 17 product regressions pass
+under s37-oem-expand-product-r1. Product and guest observations remain in the
+runtime logs directory. No original guest file changes occurred.
