@@ -30,9 +30,12 @@ Revision History:
 extern void load_pseudo_descr(int index);
 extern void c_setGDT_BASE_LIMIT(ULONG base, USHORT limit);
 extern void c_setIDT_BASE_LIMIT(ULONG base, USHORT limit);
+#define CPU40_ES_REG 0
 #define CPU40_CS_REG 1
 #define CPU40_SS_REG 2
 #define CPU40_DS_REG 3
+#define CPU40_FS_REG 4
+#define CPU40_GS_REG 5
 
 VOID
 DpmiCpu40SwitchToProtectedMode(
@@ -209,9 +212,9 @@ Return Value:
     load_pseudo_descr(CPU40_CS_REG);
     load_pseudo_descr(CPU40_SS_REG);
     load_pseudo_descr(CPU40_DS_REG);
-    load_pseudo_descr(4); /* ES_REG */
-    load_pseudo_descr(5); /* FS_REG */
-    load_pseudo_descr(6); /* GS_REG */
+    load_pseudo_descr(CPU40_ES_REG);
+    load_pseudo_descr(CPU40_FS_REG);
+    load_pseudo_descr(CPU40_GS_REG);
 #endif
 }
 

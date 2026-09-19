@@ -35,10 +35,12 @@ rollback limitations; current worker reachability is not yet established.
 SIM32's explicit protected-address contract is repaired, and the null
 Cpu.SetSTATUS slot now binds the original host FLAGS-restoration body through
 existing CCPU setters. Formal x86 build, all-bit C-VID fixture and all 17
-product regressions pass. Real DPMI now allocates, resizes, checks data and
-frees, but its final string-output call still times out; full-client acceptance
-and failure-boundary disposition remain open. Guest media are unchanged;
-this is not S36 closure.
+product regressions pass. The remaining DPMI output timeout was traced to
+local ES/FS/GS cache indices 4/5/6 instead of original 0/4/5; correcting these
+completes allocation, resize, data checks, free, output and exit in all four
+direct/nested and null/restored-ES probe cases. Callback rollback and worker
+failure-boundary disposition remain open. Guest media are unchanged; this
+is not S36 closure.
 
 ## S35 Closure Record
 

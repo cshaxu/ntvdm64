@@ -243,3 +243,45 @@ non-diagnostic worker hashes to
 `a48bc3de09ad48c73e95e71a9d465f2166e9b4f61069cb74ac22a6a84906a498`
 and VDMREDIR.dll to
 `29e07a07228b07fff1bfb7f8cb96b74975dd29e5a4f33318319724bf16a08ca1`.
+
+## Final-output timeout: wrong local segment-index binding
+
+The independent probe now has two builds from one source: default D36N.COM
+retains ES=0 before disposing its descriptor; D36E.COM uses -DRESTORE_ES to
+restore the initial PSP selector instead. The latter passes on the preceding
+product (s36-dpmi-restore-es-r1, launcher 44632); the default still times out
+(s36-dpmi-null-es-control-r1, launcher 12148). This is a diagnostic contrast,
+not permission to reject null ES or weaken the guest contract.
+
+The original CCPU c_reg.h defines ES/CS/SS/DS/FS/GS as 0/1/2/3/4/5. The local
+DIV-230 mode-switch binding incorrectly called load_pseudo_descr(4/5/6) for
+ES/FS/GS. Consequently ES retained its protected null-selector access state,
+and index 6 lay outside the six original segment slots. The correction uses
+six explicitly named constants matching c_reg.h and changes only those three
+call arguments. The original CCPU core and original guest media are untouched.
+
+The identical D36N.COM then completes its entire output and exits zero
+(s36-dpmi-null-es-fix-r1, launcher 20652). The new reusable
+Verify-T420S36DpmiGuest.ps1 additionally checks all six constants against the
+original header and runs both binaries directly and through two COMMAND /c
+levels. All four cases pass with the complete guest success marker under
+s36-dpmi-segment-fix-r1. The matrix records each input SHA-256 and process state
+before test-owned cleanup; cleanup is not natural worker teardown evidence.
+Both source builds are generated with NASM -f bin from dpmi_suballoc.asm,
+with -DRESTORE_ES only for D36E.COM, below build/M0-T420/S36/dpmi-es-r1.
+
+Formal x86 product-programs was rebuilt through the intentionally reused
+formal graph; the VdmTib gate passed. Non-diagnostic deployed worker SHA-256 is
+`568292e2640d82cd8c5a542b489bc291e0decefe70a063be3aa3e0651f5853e2`,
+and VDMREDIR.dll is
+`96c6bc2718c99a269ab42eda91aaed400de77530b6309855f7ec09723a37a399`.
+The current memory/output/exit probe is now accepted, superseding the earlier
+timeout finding. The original allocation callback rollback findings and their
+worker-level failure/cleanup disposition remain open, so S36 is not closed.
+
+Post-repair regression confirms all 17 product routes in
+`s36-segment-product-r1-summary.json`, all four XMS routes in
+`s36-segment-xms-r1-summary.json`, and a repeated four-case DPMI matrix with
+the six-register source-consistency gate in
+`s36-dpmi-segment-fix-r2-summary.json`. These summaries reside under
+`O:\winnt\logs`; acceptance checks guest text as well as process completion.

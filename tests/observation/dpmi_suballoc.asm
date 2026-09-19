@@ -29,6 +29,7 @@ enter_pm:
     xor ax, ax
     call far [entry]
     jc failed
+    mov [saved_es], es
     mov dx, entered
     mov ah, 09h
     int 21h
@@ -74,7 +75,11 @@ enter_pm:
     jne failed
     cmp dword [es:4092], 214B4F36h
     jne failed
+%ifdef RESTORE_ES
+    mov ax, [saved_es]
+%else
     xor ax, ax
+%endif
     mov es, ax
     mov bx, [selector]
     mov ax, 0001h
@@ -117,6 +122,7 @@ entry dw 0, 0
 handle dd 0
 linear dd 0
 selector dw 0
+saved_es dw 0
 entering db 'S36_DPMI_ENTERING',13,10,'$'
 entered db 'S36_DPMI_ENTERED',13,10,'$'
 allocated db 'S36_DPMI_ALLOCATED',13,10,'$'
