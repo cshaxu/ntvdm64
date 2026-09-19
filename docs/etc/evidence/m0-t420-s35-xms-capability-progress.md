@@ -2,6 +2,16 @@
 
 ## Status and inputs
 
+### Owner-approved original guest bug disposition
+
+The owner explicitly approved registering the proven low-DOS COMMAND defect
+as an original guest bug in TODO, committing/pushing all current changes,
+cleaning the worktree and resuming S35 closure review. The debt now links the
+direct copy witness and retains the permanent guest-media prohibition.
+This supersedes the historical "awaiting disposition" statements below;
+it does not convert the failing profile to a pass or authorize a workaround.
+S35 remains open until the remaining requirement-by-requirement review finishes.
+
 S35 remains open. These are real guest observations, not an XMS package
 closure. The selected machine is MSVC x86 CCPU40; guest HIMEM is unchanged.
 Its deployed SHA-256 is

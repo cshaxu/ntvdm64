@@ -71,9 +71,11 @@ environment copy is inside its allocated block but overwrites COMMAND's stale
 INIT-resident EnvSiz (0118 -> 4543); the original post-copy comparison then
 takes its error path. The formal EXE has been restored and hash-verified.
 This is a demonstrated immutable-guest limitation, not an XMS/lease overrun.
-S35 awaits owner disposition of this limitation; no guest patch or host-side
-environment/allocator workaround is admitted. Detailed inputs and address
-arithmetic are in the linked progress evidence.
+The owner now explicitly approves recording this as an unresolved original
+guest bug in TODO and continuing S35 closure review. No guest patch or host-side
+environment/allocator workaround is admitted; the failing profile is not a
+passing result. All existing changes are authorized for one combined delivery.
+Detailed inputs and address arithmetic are in the linked progress evidence.
 
 ## S34 Closure Record
 
