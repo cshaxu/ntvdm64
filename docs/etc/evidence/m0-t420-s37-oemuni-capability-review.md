@@ -1093,3 +1093,35 @@ and 17 s37-volume-product-r2 passes remain unchanged. Remaining S37 work is
 explicit: real no-console/new-console PIF entry coverage or justified original-
 owner disposition, final WOW/debugger consumer handoff, and byte/normalized
 diff accounting. A host fixture alone does not close real entry coverage.
+
+## Detached explicit-PIF entry: failed integration observation
+
+The test-only pif_detached_observer.c starts the installed run16 with
+DETACHED_PROCESS in a private kill-on-close job, then attempts to observe a
+descendant ntvdm Console. It does not change guest media or product options.
+The x86 observer built without warnings in S37/pif-detached-r1. With the
+existing O37P.COM probe and generated P37DET/P30.PIF, using byte-identical
+default CONFIG/AUTOEXEC copies, logs/s37-pif-detached-r1.txt records launcher
+40680, wait=0, exit=6. No worker Console was observed. This is a failure,
+not PIF or OEMUNI acceptance. A subsequent package process query found no
+remaining run16, basesrv or ntvdm processes.
+
+Source review finds a concrete standalone binding gap. A fresh service
+connection starts with a null console. OpenNtBaseServiceCheck assigns an
+identity for an existing-Console request, or for its explicitly separated
+resident-DOS case, but not for an initially null DOS Console. After original
+CheckDOS publishes a new record, OpenNtBaseServiceCreateReservation rejects
+that null console with ERROR_INVALID_HANDLE. The observed exit is consistent
+with this path; it is not yet a traced call-site attribution.
+
+Separately, run16 compares the complete binary value with BINARY_TYPE_DOS
+when supplying the DOS session id and selecting CREATE_NEW_CONSOLE. An
+explicit PIF also carries BINARY_TYPE_DOS_PIF; original BaseCheckVDM masks
+the subtype before its DOS policy. This is another integration candidate,
+not evidence that the guest or OEM conversion failed.
+
+No production repair is made in this observation. Repairing broker Console
+identity/reservation and launcher subtype handling expands the current
+OEMUNI surface and must be explicitly admitted under the active packet's
+original-owner boundary stop condition. S37 remains open; neither the five
+host cmdpif scenarios nor the previous 17 regressions cover this failed entry.

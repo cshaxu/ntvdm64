@@ -38,13 +38,9 @@ violations in current/search/system/Windows/temp and volume/filesystem names.
 The linked chronology retains each fixture, failure, cleanup and real OEM437
 direct/nested result. CP932 remains mocked boundary evidence, not real-host
 DBCS acceptance; remaining family/consumer review keeps S37 open.
-The 28-entry ledger distinguishes real guest, host and mock evidence. Expanded
-direct/nested DOS directory/file/FCB/disk/computer-name probes pass. Thirty
-CP932 capacity cases and sixteen provider-change/failure cleanup cases pass.
-The original OEM font interface and five original DEM retry/failure scenarios
-pass non-invasive boundary tests; no real font installation or WOW acceptance
-is claimed. Full commands, inputs and historical findings remain in the linked
-review; final caller/buffer and mirror reconciliation remains open.
+The linked 28-entry ledger distinguishes real guest, host and mock evidence,
+including DOS file/FCB probes, CP932 capacities, provider failures and original
+DEM font retry scenarios; it does not claim real font or WOW acceptance.
 DIV-276 repairs short-path lengths/capacities and computer-name false success.
 DIV-277 repairs environment capacity wrap, empty values, unequal ANSI/OEM byte
 counts and conversion failure ordering. Boundary fixtures and real direct/
@@ -55,16 +51,11 @@ and fixes LIM's undersized output buffer. Fresh-worker ASCII/OEM PIF rows,
 seven native fixtures and real DOS direct/nested probes pass. Earlier PIF
 runs had retained workers and cannot establish an isolated A/B; pure-DOS
 controls require a fresh-worker rerun before attributing any failure.
-Fresh classic-Console controls pass with S30 but fail with both S35 and current
-packages, locating the symptom before S37. A current-source read-only trace
-proves P30 reaches the registered COMMAND INIT defect: its environment copy
-overwrites discarded EnvSiz from 0119 to 3B48 inside the valid allocation.
-The diagnostic's zero exit without a guest marker is not a pass. The S30
-difference is resolved: its consumed PIF CONFIG fell back to DOS=HIGH; a new
-original INT21/3306 assertion rejects that historical false positive. The
-S30 evidence now withdraws full pure-profile acceptance. Current formal
-artifacts are restored; final OEMUNI caller reconciliation remains open.
-No guest workaround or additional product diff is introduced.
+Read-only traces prove the registered COMMAND INIT/EnvSiz defect in P30.
+S30's apparent pure-profile pass instead consumed CONFIG and fell back to
+DOS=HIGH; INT21/3306 now rejects that false positive. The linked S30 correction
+withdraws full pure-profile acceptance. No guest workaround is introduced;
+formal artifacts are restored and OEMUNI caller reconciliation remains open.
 The remaining real DOS volume query exposed an original DEM field typo:
 filesystem padding wrote VolumeID. DIV-279 corrects one field reference.
 Direct/nested guest records now match the Unicode host oracle; the original-
@@ -74,6 +65,11 @@ The formal original cmdpif.obj passes five host caller scenarios through real
 OEM path APIs, twice with source-correct input capacities. This proves policy
 results/cleanup, not real new-console PIF execution. Remaining closure work:
 that entry disposition, WOW/debugger handoff and mirror counts.
+The detached explicit-PIF observation now fails with exit 6 before any
+observed worker Console. Source review identifies missing initial-null DOS
+Console reservation identity and launcher PIF-subtype comparisons as binding
+candidates. No production repair is applied: expanding into broker/launcher
+ownership requires revised admission under this packet's stop condition.
 
 ## S36 Closure Record
 
