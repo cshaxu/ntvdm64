@@ -170,3 +170,29 @@ successful loaded-font removal. No production source, deployed artifact or
 guest media changed in this delivery; the preceding formal build and 17-route
 product regression therefore remain its unchanged product baseline. Caller
 disposition, remaining buffer cases and DBCS analysis still prevent S37 closure.
+
+## DBCS full-path defect reproduced
+
+The test-only oemuni_dbcs_fixture compiles the actual file.c body. It supplies
+a fixed Unicode full path containing U+8868 and uses public
+WideCharToMultiByte(932) at the conversion boundary. No host/system code-page
+change, product hook or filesystem mutation occurs. The expected bytes come
+independently from conversion of the complete Unicode path; this is a mocked
+code-page boundary, not a CP932 DOS guest acceptance run.
+
+Build/run root: `build/M0-T420/S37/dbcs-r1`, generated through the existing
+S17 fixture generator, MSVC x86 target oemuni-dbcs-fixture.exe. Observed:
+actual_length=10 versus expected_length=11; file-part offset 5 versus 6;
+the expected terminator byte remains sentinel 90. The diagnostic marker is
+S37_DBCS_ORIGINAL_LENGTH_COPY_FILEPART_DEFECT_REPRODUCED. Zero fixture exit
+means the defect was reproduced, explicitly NOT that the capability passes.
+
+Pinned `O:/repos.external/OpenNT/base/mvdm/oemuni/file.c` contains the same
+UnicodeLength-based copy/count and WCHAR-based file-part arithmetic. This is
+an original-source SBCS assumption, not a local adapter or CCPU defect.
+Selected text callers include dos/dem/demmisc.c and dos/command/cmdpif.c.
+The current OEM437 success therefore cannot prove this interface correct on
+a DBCS host. S37 remains open: review the related length/capacity families,
+then make a minimal original-owner correction and replace the diagnostic
+expectation with positive/short-buffer/optional-output/failure verification.
+This delivery changes tests and evidence only; deployed products are unchanged.

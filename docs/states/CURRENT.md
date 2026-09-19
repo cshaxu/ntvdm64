@@ -42,6 +42,10 @@ OEMUNI functions plus original #if-0 CreateProcessOem, not 29 selected APIs.
 The x86 original-owner family fixture now also passes enumeration/search,
 rename/delete, directory/temp-file and host-information checks. This is
 host-side SBCS evidence, not full guest/WOW or DBCS acceptance; S37 stays open.
+A test-only CP932 boundary reproduces original GetFullPathNameOem using
+Unicode character counts for OEM byte length/copy and file-part offset.
+The missing terminator/wrong offset are an open correctness finding, not a
+passing DBCS capability or a CCPU defect; production is unchanged this delivery.
 
 ## S36 Closure Record
 
