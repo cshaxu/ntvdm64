@@ -27,11 +27,11 @@
 
 ## S30 Progress
 
-The real original PIF-to-EMM path is already witnessed: task inputs enabled
+The owner-expanded S30 scope is delivered at `91a5be61a`: task inputs enabled
 `EMM=RAM`, and a real DOS guest completed INT 67 allocation, map/remap,
-unmap and free on the formal product. The existing 17-route product matrix
-also passed. This is interim evidence only: the former S30 closure record is
-withdrawn because the owner expanded S30 before commit.
+unmap and free on the formal product. The complete 17-route product matrix
+also passed. The closure record below is the current disposition; it was not
+withdrawn.
 
 S30 now audits the original COM/LPT configuration and host providers against
 actual Windows endpoints, then adds the default DOS, HIMEM/DOSX and explicit
@@ -94,6 +94,11 @@ run. `L30.COM` invoked INT 17h byte output; unchanged `nt_lpt.c` opened
 `LPT1`, buffered it, and flushed during worker close. The pipe received `5A`
 and the guest reported `S30_LPT1_WRITE_OK`; no mapping, pipe, or product
 process remained afterward.
+
+An independent post-closure `C31.COM` ConPTY rerun also completed normally:
+the launcher returned `exit=0`, emitted `S30_COM3_LOOPBACK_TX_RX_OK`, and
+had no guest command-resolution failure. The earlier aggregate-run timeout
+is therefore not a reproducible worker-exit defect.
 
 The owner's clarification applies to the entire T420 capability sequence:
 every capability that the selected standalone NTVDM product itself owns must

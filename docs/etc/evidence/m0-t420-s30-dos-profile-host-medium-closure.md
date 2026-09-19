@@ -38,6 +38,12 @@ COMMAND/MEM/EDIT matrix passed in
 loopback, and LPT transcripts cited in the S30 status record remain the
 runtime evidence; test-only compilation does not alter that product build.
 
+A subsequent independent ConPTY rerun of `C31.COM` using the deployed package
+also returned `exit=0`, emitted `S30_COM3_LOOPBACK_TX_RX_OK`, and contained no
+guest command-resolution failure. This confirms that a transient timeout in a
+previous aggregate rerun was not a reproducible UART-loopback or worker-exit
+defect.
+
 ## Disposition
 
 The reachable selected profile, EMS, COM-controller, LPT and original-provider
