@@ -1,5 +1,19 @@
 # T420 S30 DOS profile and host-medium closure
 
+## Post-closure pure-profile evidence correction
+
+The [S37 historical comparison](m0-t420-s37-oemuni-capability-review.md#historical-pure-dos-false-positive-resolved)
+supersedes the full pure-DOS acceptance claim below. The old probe proved
+absence of DOSX/DPMI only. S30 consumed the PIF CONFIG path during LIM setup;
+DOS boot then used default DOS=HIGH/HIMEM while still using the separate
+no-DOSX AUTOEXEC. A new original INT21/3306 query rejects that archived package
+with S30_PURE_DOS_UNEXPECTED_HMA. Its old success marker is genuine but the
+full-profile inference was false. S35 corrected the path lifetime; current
+ordinary-environment low-DOS startup demonstrably reaches the owner-approved
+original COMMAND INIT bug in TODO. That profile remains failed, not accepted.
+Other recorded capabilities are not invalidated by this specific finding;
+the chronology is preserved below rather than silently rewritten.
+
 ## Scope and invariant
 
 S30 closes the selected original DOS/EMM profile work and the reachable

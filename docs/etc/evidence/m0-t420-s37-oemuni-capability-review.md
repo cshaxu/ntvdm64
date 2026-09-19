@@ -939,3 +939,54 @@ S37 remains open for that reconciliation and the remaining caller ledger.
 The restored formal package passes all 17 transcript-gated COMMAND/MEM/EDIT
 regressions under `s37-pure-post-restore-r1`. Those default-profile passes do
 not turn the pure-DOS failure into a pass.
+
+## Historical pure-DOS false positive resolved
+
+The historical difference is now attributed, superseding the open question
+above. Commit 4ff95fa9d repaired GetPIFConfigFiles' one-read ownership: original
+config.c invokes LIM configuration first, nt_msscs.c consumes the PIF CONFIG
+path, then cmdconf.c::ExpandConfigFiles requests it again for DOS boot. The
+S30 implementation frees and clears that path on the first read, so DOS uses
+the default CONFIG containing DOS=HIGH and HIMEM. The independent AUTOEXEC
+path still selects P30AUTO.NT and therefore excludes DOSX. Absence of DPMI
+alone could not distinguish this mixed profile from the requested pure profile.
+
+The diagnostic command used above was repeated with FormalRoot set to the
+retained S30/formal-x86-r2 graph, BuildRoot S37/pure-s30-environment-trace-r1
+and EnvironmentTraceLog s37-pure-s30-envtrace-r1.events.txt below runtime logs.
+cmdenv.c has no source diff between 91a5be61a and current HEAD. This is a
+diagnostic relink using archived formal inputs, not a source-exact rebuild of
+the whole historical product; reused-inputs.json records those input hashes.
+The diagnostic worker SHA-256 is
+`9a8b07b14bd7752b4fbf1114f010e9719b114a2f86f20d5433a1116d9f87a12d`.
+The same original P30 workload emits S30_PURE_DOS_OK and exits zero. Its trace
+has DS=0710, ES=07BB, BX growing from 0010 to 0119; after the second call
+EnvSiz remains 0119. The allocation `[07BB0,08D40)` does not contain
+`DS:203C = 0913C`, unlike the current low-DOS allocation. This corroborates
+the different layout but is not alone proof of the DOS placement policy.
+
+An independent real guest check provides that proof without instrumentation:
+original doskrnl/dos/msdisp.asm's INT21 AX=3306 returns DosHasHMA in DH;
+dos/v86/inc/versiona.inc defines DOSINHMA as bit 4. The strengthened authored
+pure_dos_capability.asm checks that bit after the original DPMI query and
+rejects unexpected HMA residency. NASM emits S37/pure-profile-contract-r1/
+P37L.COM, SHA-256
+`ee2ff94a749b0bbaaaa5f14ef678cb45bea3c6b9caa7ad4798f97b7a3f1d0fa2`.
+It is deployed only as tests/P37L.COM with a byte-identical associated copy
+of P30.PIF; original P30 inputs and guest media remain untouched.
+
+On the uninstrumented complete S30 package, `s37-pure-s30-hma-r1.txt` returns
+1 and its guest transcript contains `S30_PURE_DOS_UNEXPECTED_HMA`. This is a
+passing negative test of the strengthened assertion, not pure-DOS acceptance.
+The former S30 success therefore proved only the no-DOSX half of the profile.
+Its full CONFIG/pure-DOS claim is withdrawn in the linked S30 record. The
+corrected configuration path exposes the already owner-accepted original
+COMMAND INIT/environment lifetime defect; restoring the consumed-path bug or
+forcing DOS=HIGH would hide that defect, not repair it.
+
+Only test-owned processes are terminated; all five current formal artifacts
+are restored, including worker d7427a75...9637d. This step changes only a
+disposable probe and evidence, with zero product, mirror or overlay diff.
+The preceding 17-route formal regression remains applicable to those unchanged
+artifacts. S37's historical pure-DOS attribution is complete; remaining
+OEMUNI caller/whole-package reconciliation still prevents S37 closure.

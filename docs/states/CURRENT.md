@@ -38,23 +38,13 @@ violations in current/search/system/Windows/temp and volume/filesystem names.
 The linked chronology retains each fixture, failure, cleanup and real OEM437
 direct/nested result. CP932 remains mocked boundary evidence, not real-host
 DBCS acceptance; remaining family/consumer review keeps S37 open.
-The linked review now reconciles all 28 compiled entries against source
-consumers and G/H/M evidence. Real direct/nested non-ASCII directory switch,
-restoration, file/subdirectory deletion and disk/drive queries now pass.
-Real two-file FCB wildcard deletion, no-match failure and host-matched DOS
-computer-name queries now pass direct/nested too. Font fallback proof and
-intermediate-buffer/narrowing cases are explicitly
-retained in S37; linking or host-only tests do not close those rows.
-The six-capacity/five-interface CP932 matrix now passes all 30 cases after
-complete Unicode query sizing and safe descriptor-capacity saturation.
-Sixteen growth/provider-failure/oversize/allocation-failure cleanup cases
-also pass. Real expanded DOS direct/nested routes pass; remaining font and
-other caller/API-boundary review keeps S37 active.
-The original font OEM interface passes non-invasive GDI-boundary success,
-failure, conversion-error and TEB-buffer reuse tests. Its actual DEM function
-slice now passes five source-shaped retry/failure scenarios through original
-OEMUNI and mocked Win32 endpoints; no real font installation/guest claim is
-made. Final whole-package caller/buffer and mirror reconciliation remains.
+The 28-entry ledger distinguishes real guest, host and mock evidence. Expanded
+direct/nested DOS directory/file/FCB/disk/computer-name probes pass. Thirty
+CP932 capacity cases and sixteen provider-change/failure cleanup cases pass.
+The original OEM font interface and five original DEM retry/failure scenarios
+pass non-invasive boundary tests; no real font installation or WOW acceptance
+is claimed. Full commands, inputs and historical findings remain in the linked
+review; final caller/buffer and mirror reconciliation remains open.
 DIV-276 repairs short-path doubled OEM capacity/WCHAR lengths and computer-
 name conversion false success. All six OEMUNI/DEM fixtures and expanded
 real DOS direct/nested routes pass. Environment-boundary and final package
@@ -77,9 +67,12 @@ Fresh classic-Console controls pass with S30 but fail with both S35 and current
 packages, locating the symptom before S37. A current-source read-only trace
 proves P30 reaches the registered COMMAND INIT defect: its environment copy
 overwrites discarded EnvSiz from 0119 to 3B48 inside the valid allocation.
-The diagnostic's zero exit without a guest marker is not a pass. Current formal
-artifacts are restored; the S30 layout difference and final caller reconciliation
-remain open. No guest workaround or additional product diff is introduced.
+The diagnostic's zero exit without a guest marker is not a pass. The S30
+difference is resolved: its consumed PIF CONFIG fell back to DOS=HIGH; a new
+original INT21/3306 assertion rejects that historical false positive. The
+S30 evidence now withdraws full pure-profile acceptance. Current formal
+artifacts are restored; final OEMUNI caller reconciliation remains open.
+No guest workaround or additional product diff is introduced.
 
 ## S36 Closure Record
 
@@ -133,6 +126,11 @@ pseudo-handle crosses the broker record.  See the
 [S34 stream recovery evidence](../etc/evidence/m0-t420-s34-command-stream-recovery.md).
 
 ## S30 Closure Context
+
+The S37 comparison supersedes pure-profile acceptance below: the old marker
+proved no DOSX, not the intended CONFIG. See the corrected
+[S30 evidence](../etc/evidence/m0-t420-s30-dos-profile-host-medium-closure.md#post-closure-pure-profile-evidence-correction).
+Current low-DOS failure remains the accepted original guest debt, not a pass.
 
 The owner-expanded S30 scope is delivered at `91a5be61a`: task inputs enabled
 `EMM=RAM`, and a real DOS guest completed INT 67 allocation, map/remap,
