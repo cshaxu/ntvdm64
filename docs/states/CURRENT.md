@@ -4,28 +4,28 @@
 
 ## Active Packet
 
-**Active: M0 T420 S30**
+**Active: M0 T420 S31**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T420 S30 — Ordinary Mode, owner-expanded. |
-| Candidate Proposal | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md) S30. |
-| Admission And Approval | Owner authorized automatic sequential S admission and expressly expanded S30 to restore real COM/LPT capability and multi-profile acceptance; S31 is not admitted. |
-| Objective | Close selected DOS/EMM capability plus the real original COM/LPT host-medium path: default DOS, HIMEM/DOSX and explicit EMS profiles; actual serial transmit/receive on a CTS-capable host medium, parallel write, original failure behavior and teardown acceptance. |
-| Non-goals | No synthetic serial/printer success, CPU30/kernel-monitor revival, virtual-device driver installation, emulator replacement, WOW work, or unrelated Console redesign. |
-| Reference Baseline | S10 froze the DOS manifest; S29 proved the original COM/LPT no-medium failure path and table dispatch. S30 now closes the missing host-medium binding and profile matrix instead of treating it as a permanent exclusion. |
-| Files And ABI Surface | Freeze the selected `softpc.new/base/dos` manifest together with its original BIOS/host EMM and COM/LPT providers, original PIF/CONFIG/AUTOEXEC selection, device naming, open/read/write and teardown interfaces. |
+| Identifier Mode | M0 T420 S31 — Ordinary Mode. |
+| Candidate Proposal | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md) S31. |
+| Admission And Approval | Owner authorized automatic sequential S admission; S30 closed at `91a5be61a` and its independent rerun was recorded at `77a7223ab`. |
+| Objective | Close the complete selected `softpc.new/base/debug` capability unit by proving either the original release-profile debug exclusion or every actually selected debug initialization, trace/backtrace and event path. |
+| Non-goals | No activation of an internal Yoda/debugger shell in the ordinary product, no private NT4 debugger/CSR transport, no CPU30/kernel monitor revival and no duplicate `mvdm/dbg` work. |
+| Reference Baseline | S11 recovered all eight original debug sources. The current formal x86 graph links them with original `/DPROD`; S31 must prove the complete resulting profile boundary rather than infer runtime capability from linkage. |
+| Files And ABI Surface | Freeze the eight-source `softpc.new/base/debug` manifest, its `PROD` gates, all selected worker callers and their startup/error/teardown behavior. |
 | Applicable Rules | Project design/rules, source policy, strict mirror rule, CCPU40-only product rule, original-owner recovery and transcript-gated acceptance. |
-| Verification | Build a tracked normal/failure/cleanup matrix for default DOS, HIMEM/DOSX and explicit PIF EMS profiles; test genuine COM/LPT device open and I/O against an actual Windows endpoint when present; then fresh formal x86 and direct plus interactive COMMAND/MEM/EDIT regressions in every applicable profile. |
-| Expected Markers | Each profile has a genuine transcript; COM/LPT either completes actual host I/O or reports the original no-medium failure. No duplicate device state, fake success, or profile-specific regression. |
-| Asset Needs | Pinned OpenNT DOS/comms union, prior evidence, immutable guest media, a locally available Windows serial/printer endpoint if present, test-only fixtures under `build/`, and `O:\winnt` runtime/log roots. |
-| Reporting Requirements | Record profile inputs, source hashes, provider-to-endpoint map, exact guest transcripts, I/O/error/cleanup observations, retained finite bindings, mirror/adapter delta and all regression results. |
-| Stop Conditions | A required new serial/printer medium or driver, CPU30/kernel dependency, guest-media mutation, duplicate device owner, or COMMAND/MEM/EDIT regression pauses only for the missing external medium or renewed scope direction. |
-| Exit Criteria | Default DOS, HIMEM/DOSX and PIF EMS profiles pass their selected real tests; COM/LPT use real host endpoints if available and retain original failure otherwise; ownership is preserved; fresh x86, package-local matrix and established regressions pass; evidence/index/status updated; reviewed P pushed. |
-| Original Owner Request | “本项目暂时没有支持跑通comms 串口并口…在s30里面一并处理！” plus “S30 如果本身应当支持多种profile 那也应该验证，比如dosx himem这些”. |
-| Similar-Issue Sweep | Audit original PIF/config profile parsing, COM/LPT naming/open/reopen, device I/O, error delivery and teardown for duplicate state, autonomous provider substitution, stale callbacks and fake success. |
+| Verification | Audit every source-level feature gate and selected caller, establish a release-profile compile/link witness, then pass fresh formal x86 and established direct/interactive COMMAND/MEM/EDIT regressions. |
+| Expected Markers | Every debug source is classified as original live selected behavior or complete original release exclusion; no dormant alternate debugger/trace body is misrepresented as active, and no ordinary workload regresses. |
+| Asset Needs | Pinned OpenNT debug union, current build graph/map, selected runtime artifacts, test-only build roots and `O:\winnt` runtime/log roots. |
+| Reporting Requirements | Record source hashes, each `PROD`/feature gate, caller-to-disposition map, compile/link evidence, mirror delta and regression results. |
+| Stop Conditions | A reached non-PROD-only body requires an unapproved debugger transport, an original profile gate has ambiguous selection, or established workload regresses. |
+| Exit Criteria | All eight selected units and their reachable caller edges have an original-profile disposition; formal x86 and established regressions pass; evidence/index/status updated; reviewed P pushed. |
+| Original Owner Request | Standing automatic sequential S authorization for the T420 whole-package capability sequence. |
+| Similar-Issue Sweep | Audit all debug macros, exported globals and host/CCPU callers for accidental non-PROD activation, duplicate debugger ownership or trace file lifetime leaks. |
 
-## S30 Progress
+## S30 Closure Context
 
 The owner-expanded S30 scope is delivered at `91a5be61a`: task inputs enabled
 `EMM=RAM`, and a real DOS guest completed INT 67 allocation, map/remap,
@@ -106,6 +106,13 @@ be verified through its original guest-to-host path before its owning S can
 close. A missing external medium is recorded as a platform limitation, never
 silently converted into a pass; the remaining S31--S43 rows retain the same
 per-package acceptance rule.
+
+## S31 Progress
+
+Admission complete. Initial audit confirms the formal x86 graph compiles every
+selected original debug translation unit with `/DPROD`. S31 is tracing the
+complete source gate and reached call edges to distinguish original release
+exclusion from any selected worker-local behavior.
 
 ## S1 Closure Record
 
