@@ -12,7 +12,7 @@ const formal = resolve(formalArgument).replaceAll("\\", "/");
 mkdirSync(`${build}/obj`, { recursive: true });
 
 const cflags = [
-  "/nologo", "/TC", "/c", "/MT", "/W4", "/DWIN32", "/DWINNT",
+  "/nologo", "/TC", "/c", "/MT", "/W4", "/showIncludes", "/DWIN32", "/DWINNT",
   "/FI", `\"${root}/src/opennt-abi/host-compat/include/nt.h\"`,
   "/I", `\"${root}/src/mvdm/inc\"`,
   "/I", `\"${root}/src/mvdm/oemuni\"`,
@@ -37,6 +37,8 @@ const lines = [
   "  cflags = $cflags /Dgetch=oemuni_no_pause",
   "build obj/pause.obj: cc $root/tests/mvdm/oemuni/oemuni_pause_stub.c",
   "build obj/failure.obj: cc $root/tests/mvdm/oemuni/oemuni_failure_fixture.c",
+  "build obj/expand-failure.obj: cc $root/tests/mvdm/oemuni/oemuni_expand_failure_fixture.c",
+  "build oemuni-expand-failure-fixture.exe: link obj/expand-failure.obj",
   "build oemuni-original-test.exe: link obj/file.obj obj/process.obj obj/toemuni.obj obj/pause.obj",
   "build oemuni-failure-fixture.exe: link obj/file.obj obj/process.obj obj/failure.obj",
   "default oemuni-original-test.exe",

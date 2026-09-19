@@ -803,6 +803,8 @@ ExpandEnvironmentStringsOem(
 						cchDst
 					      );
 	if (ReturnValue != 0 && ReturnValue <= cchDst) {
+	    /* DIV-273: conversion failure must not retain ANSI success length. */
+	    ReturnValue = 0;
 	    RtlInitString(&Value, lpDst);
 	    Status = RtlAnsiStringToUnicodeString(&Unicode, &Value, TRUE);
             /* DIVERGENCE MVDM-HOST-DIV-273: Value borrowed lpDst; only the

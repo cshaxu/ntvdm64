@@ -36,6 +36,9 @@ nested, with independent host Unicode-name/content verification. Full
 consumer/buffer disposition remains open. Original environment expansion's
 missing OEM output copy is repaired (DIV-273); focused non-ASCII/short-buffer
 tests, real DOS file routes and all 17 product regressions pass.
+Failure injection now verifies zero return/error propagation and no freeing
+of borrowed output at both conversion failures. The inventory is 28 compiled
+OEMUNI functions plus original #if-0 CreateProcessOem, not 29 selected APIs.
 
 ## S36 Closure Record
 

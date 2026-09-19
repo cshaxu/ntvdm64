@@ -109,3 +109,35 @@ These non-diagnostic artifacts are deployed to `O:\winnt`. Both real non-ASCII
 DOS routes pass under s37-oem-expand-guest-r1; all 17 product regressions pass
 under s37-oem-expand-product-r1. Product and guest observations remain in the
 runtime logs directory. No original guest file changes occurred.
+
+## Conversion-failure proof and compiled inventory correction
+
+The test-only oemuni_expand_failure_fixture includes actual process.c and
+intercepts its ANSI-to-Unicode and Unicode-to-OEM calls plus a checked free.
+Each conversion can return STATUS_NO_MEMORY. Before repair, stage 1 returns
+length 4 with error 8: success is reported despite conversion failure.
+Clearing ReturnValue on entering the conversion block fixes both failure
+points. Both now return zero/error 8, preserve the output canary and never
+attempt to free the borrowed output pointer. The normal non-ASCII,
+short-buffer, null-input and environment checks also pass.
+
+The fixture generator specified Ninja msvc dependencies but omitted
+/showIncludes. Its first incremental run therefore reused the wrapper's old
+object after included process.c changed. Adding /showIncludes supplies the
+dependency record; rebuilding demonstrates both passing failure stages.
+This harness correction is not a product workaround. Artifacts/logs are in
+`build/M0-T420/S37/expand-failure-r1`.
+
+The 29 textual definitions are not 29 selected functions: CreateProcessOem
+is inside original `#if 0 // unused` (process.c lines 371--560). It has no
+source call, and the formal map contains the other 28 OEMUNI definitions but
+not CreateProcessOem. No process-launch implementation is missing from this
+selected package on that account. Remaining consumer, buffer and DBCS
+dispositions are still open.
+
+Formal x86 worker/DLL relink and deployment produce hashes
+`8415136752054e712ded3a1950051bb2de77900a10f8d00a403d7cd16bc87000`
+and `b2bd030c71fe7b2346cee09031dc5646587312234137b8b2debca09742e32142`.
+Direct/nested real DOS non-ASCII tests pass in s37-expand-failure-guest-r1;
+all 17 product routes pass in s37-expand-failure-product-r1. This adds one
+executable mirror statement to DIV-273; no new adapter or guest modification.
