@@ -4,26 +4,26 @@
 
 ## Active Packet
 
-**Active: M0 T420 S34**
+**Active: M0 T420 S35**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T420 S34 — Ordinary Mode. |
-| Candidate Proposal | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md) S34. |
-| Admission And Approval | S33 closed with real DOS file capability and source-shaped error-map evidence; owner standing authorization admits the next sequential S.  On 2026-09-18 the owner additionally merged the queued COMMAND standard-stream/pipe candidate into S34. |
-| Objective | Close the complete selected `dos/command` capability unit: direct/nested COMMAND child, host-inherited and guest-created standard streams, `>`, `>>`, `<` and `|`, return/error and cleanup acceptance through first, second and third COMMAND depth. |
-| Non-goals | No alternate command parser, no synthetic pipe server and no standalone reimplementation of BaseSrv command records. |
-| Reference Baseline | S14 recovered the COMMAND source package; S34 must prove its complete original command, stream and cleanup behavior from real guest paths. |
-| Files And ABI Surface | Selected original COMMAND manifest; inherited standard-handle attachments; Console membership; broker receipts; pipe/redirection records; nested command re-entry; return/error values; and worker cleanup. |
+| Identifier Mode | M0 T420 S35 — Ordinary Mode. |
+| Candidate Proposal | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md) S35. |
+| Admission And Approval | S34 closed and was delivered as `62a3720e7`; the owner granted standing automatic admission for every sequential S in T420. |
+| Objective | Close the selected original `xms.486` capability unit: real DOS XMS initialization, allocation/free/reuse, move/overlap, A20, UMB, INT 15h, failure and worker-teardown behavior. |
+| Non-goals | No guest media rewrite, generic guest-pointer manager, invented XMS allocator, kernel VDM/MONITOR restoration, or acceptance by host-only fixture alone. |
+| Reference Baseline | S15 recovered the eight-unit XMS mirror and recorded two finite CPU40 guest-memory ABI boundaries; S30 proved HIMEM/DOSX, pure DOS and EMS profiles. S35 must establish the remaining real guest XMS contract. |
+| Files And ABI Surface | `src/mvdm/xms.486` eight-unit manifest; XMS BOP/dispatch table; original `xmsCommitBlock`, `xmsDecommitBlock`, `xmsMoveMemory`; SAS A20; UMB/INT 15h; CPU40 guest-memory lease and worker teardown. |
 | Applicable Rules | Project design/rules, source policy, strict mirror rule, original-owner recovery and transcript-gated acceptance. |
-| Verification | Establish source/caller ownership, formal x86 compile/link evidence, direct host-file/host-pipe plus first/second/third COMMAND real stream and cleanup witnesses, and established product regressions. |
-| Expected Markers | Every selected COMMAND operation is real-guest proven, source-proven unavailable or an explicit external boundary; host-provided streams remain distinct from Console membership; no stream, command record or worker state leaks on completion. |
-| Asset Needs | Pinned OpenNT COMMAND union, current product maps, disposable guest fixtures, formal x86 graph and `O:\winnt` runtime/log roots. |
-| Reporting Requirements | Record source hashes, selected entry/caller graph, stream/pipe disposition, nested-command lifecycle, return/error values and regression results. |
-| Stop Conditions | A reached COMMAND body needs an unapproved system service, stream ownership is ambiguous, or an established workload regresses. |
-| Exit Criteria | Every selected COMMAND unit has an original-owner capability disposition; formal x86 and real-guest/product regressions pass; evidence/index/status updated; reviewed P pushed. |
+| Verification | Freeze original caller/provider ledger; formal x86 compile/link; real guest success, failure and teardown witnesses for every selected XMS family; then the established text-gated direct/interactive COMMAND/MEM/EDIT regression. |
+| Expected Markers | Each selected operation is real-guest proven, source-proven unavailable, or an explicit modern-host boundary with a test-only source-shaped mock; no allocated block, mapping, A20 state or worker resource leaks across completion. |
+| Asset Needs | Pinned OpenNT XMS union; current XMS maps; disposable DOS fixtures; formal x86 graph; `O:\winnt\tests` and `O:\winnt\logs`. |
+| Reporting Requirements | Record source hashes, dispatch/caller graph, success/failure result, mapping lifetime, A20/UMB/INT15 disposition, teardown and regression results; separate original-mirror diff from required adapter mechanics. |
+| Stop Conditions | A reached XMS operation needs a new guest-memory ABI, changes a CCPU machine contract, requires guest-media modification, or regresses the established product matrix. |
+| Exit Criteria | Every selected XMS family has an original-owner capability disposition; formal x86 and real-guest/product regressions pass; evidence/index/status updated; reviewed P pushed. |
 | Original Owner Request | Standing automatic sequential S authorization for the T420 whole-package capability sequence. |
-| Similar-Issue Sweep | Audit all debug macros, exported globals and selected host/CCPU callers for accidental non-PROD activation, duplicate debugger ownership, trace-file lifetime leaks or externally controllable release gates. |
+| Similar-Issue Sweep | Audit all XMS callback declarations, direct pointer casts, move/overlap copies, A20/UMB/INT15 callers and worker cleanup paths for duplicate policy, stale x64 seams, or host-only success shortcuts. |
 
 ## S34 Closure Record
 
