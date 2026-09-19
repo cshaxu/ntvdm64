@@ -4,6 +4,8 @@ MVDM-HOST-DIV-275: `oemuni/{file.c,process.c}` bounds current/search/system/
 Windows/temp directory conversion by the actual caller capacity and computes
 required OEM bytes before conversion. Search returns converted byte length
 and prefix offset. Original owner conversion and resource cleanup remain.
+Volume-name and filesystem-name conversion likewise retain actual capacity;
+original conversion failure and finally cleanup handle insufficient space.
 [S37 evidence](../../docs/etc/evidence/m0-t420-s37-oemuni-capability-review.md).
 
 MVDM-HOST-DIV-274: `oemuni/file.c::GetFullPathNameOem` applies the original

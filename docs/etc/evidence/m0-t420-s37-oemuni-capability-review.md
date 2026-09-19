@@ -302,3 +302,37 @@ Unicode query itself reports insufficient space still need encoded required-
 size review, as do volume-name/filesystem-name capacities and wide-to-USHORT
 narrowing. Existing tests do not prove these branches. Keep them in S37;
 CP932 remains test-only boundary evidence rather than real-host acceptance.
+
+## Volume dual-output capacity and cleanup
+
+The same fixture now binds GetVolumeInformationW to a non-mutating test
+provider returning U+8868 as each name. Its Unicode result fits two WCHARs,
+but its CP932 representation needs three bytes including NUL. Before repair,
+the original OEMUNI function with declared capacity 2 returned success and
+changed the offset-2 sentinel to zero (fixture exit 18). Pinned OpenNT file.c
+lines 898/900 contain the same erroneous n+1 capacities.
+
+DIV-275 now also removes those two +1 expressions. No new algorithm or
+adapter is needed: the already selected original RTL conversion reports
+STATUS_BUFFER_OVERFLOW, original OEMUNI maps it to ERROR_MORE_DATA (234),
+and its original finally block releases both Unicode buffers. This is direct
+original-owner reuse with a minimal capacity correction, not a facade or
+external import. Delta: file.c 4 added / 2 removed lines including comments.
+
+Test separately makes each output too small: both return FALSE/error 234,
+retain the boundary sentinel and finish with zero counted temporary heap
+allocations. Exact capacity 3 returns both expected CP932 names; both omitted
+outputs succeed; injected host ERROR_NOT_READY propagates with zero remaining
+allocations. No host volume label, code page or guest media is modified.
+All four x86 OEMUNI fixtures and formal x86 relink pass. Logs remain in the
+existing dbcs-r1 build root. The CP932 tests remain mock-boundary evidence.
+
+Deployed worker SHA-256:
+`0dc5c24f089d5e05b1cefbe40bfc774357bf3d6c6780dfa0668e300fb7e54b39`;
+VDMREDIR.dll:
+`5b72e5d6e939185b663bdfe69bcbf0f1e796137d2ce184e143062bf1fe5ea567`.
+Real OEM guest direct/nested file routes pass under s37-volume-guest-r1.
+All 17 Console-text-gated product regression routes pass under
+s37-volume-product-r1, including EDIT and original expected exit codes.
+The outstanding S37 work remains intermediate-query sizing, narrowing and
+complete selected-caller disposition; this fix is not whole-package closure.

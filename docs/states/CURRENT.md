@@ -52,7 +52,10 @@ The adjacent CP932 sweep reproduces five original n+1 capacity violations
 (current/search/system/Windows/temp paths), plus SearchPath length/prefix
 errors. DIV-275 now corrects those reproduced branches as a group; four x86
 fixtures and real direct/nested OEM file routes pass. Intermediate-Unicode
-short-buffer, volume-output and narrowing review remain open within S37.
+short-buffer and narrowing review remain open within S37. Volume-name and
+filesystem-name n+1 capacities are now also corrected: both short-output
+failures, exact outputs, omitted outputs and host failure prove original
+cleanup with zero temporary allocations left.
 
 ## S36 Closure Record
 

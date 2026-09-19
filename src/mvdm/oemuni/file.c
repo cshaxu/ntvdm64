@@ -912,9 +912,11 @@ Routine Description:
     UnicodeVolumeName.MaximumLength = 0;
     UnicodeFileSystemName.MaximumLength = 0;
     OemVolumeName.Buffer = lpVolumeNameBuffer;
-    OemVolumeName.MaximumLength = (USHORT)(nVolumeNameSize+1);
+    /* DIVERGENCE MVDM-HOST-DIV-275: no extra byte beyond caller capacity. */
+    OemVolumeName.MaximumLength = (USHORT)nVolumeNameSize;
     OemFileSystemName.Buffer = lpFileSystemNameBuffer;
-    OemFileSystemName.MaximumLength = (USHORT)(nFileSystemNameSize+1);
+    /* DIVERGENCE MVDM-HOST-DIV-275: same bound for the second output. */
+    OemFileSystemName.MaximumLength = (USHORT)nFileSystemNameSize;
 
     try {
         if ( ARGUMENT_PRESENT(lpVolumeNameBuffer) ) {

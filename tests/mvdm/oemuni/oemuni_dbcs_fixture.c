@@ -68,6 +68,32 @@ static DWORD WINAPI fixed_temp(DWORD chars, LPWSTR output)
     return fixed_directory(output, chars);
 }
 
+static int volume_failure, outstanding;
+static PVOID NTAPI counted_alloc(PVOID heap, ULONG flags, SIZE_T size)
+{
+    PVOID p = RtlAllocateHeap(heap, flags, size);
+    if (p) ++outstanding;
+    return p;
+}
+static BOOLEAN NTAPI counted_free(PVOID heap, ULONG flags, PVOID p)
+{
+    BOOLEAN result = RtlFreeHeap(heap, flags, p);
+    if (p && result) --outstanding;
+    return result;
+}
+static BOOL WINAPI fixed_volume(LPCWSTR root, LPWSTR volume, DWORD volume_size,
+    LPDWORD serial, LPDWORD component, LPDWORD flags, LPWSTR fs, DWORD fs_size)
+{
+    (void)root; (void)serial; (void)component; (void)flags;
+    if (volume_failure) { SetLastError(ERROR_NOT_READY); return FALSE; }
+    if ((volume && volume_size < 2) || (fs && fs_size < 2)) {
+        SetLastError(ERROR_MORE_DATA); return FALSE;
+    }
+    if (volume) { volume[0] = 0x8868; volume[1] = 0; }
+    if (fs) { fs[0] = 0x8868; fs[1] = 0; }
+    return TRUE;
+}
+
 #define RtlGetFullPathName_U fixed_path
 #define RtlUnicodeStringToOemString cp932_oem
 #define RtlUnicodeStringToOemSize cp932_size
@@ -76,6 +102,9 @@ static DWORD WINAPI fixed_temp(DWORD chars, LPWSTR output)
 #define GetSystemDirectoryW fixed_directory
 #define GetWindowsDirectoryW fixed_directory
 #define GetTempPathW fixed_temp
+#define GetVolumeInformationW fixed_volume
+#define RtlAllocateHeap counted_alloc
+#define RtlFreeHeap counted_free
 #include "../../../src/mvdm/oemuni/file.c"
 #include "../../../src/mvdm/oemuni/process.c"
 
@@ -131,5 +160,28 @@ int main(void)
     if (actual != 12 || output[0] != 0x5a || output[11] != 0x5a) return 12;
     if (GetTempPathOem(12, output) != 11 || memcmp(output, expected, 12)) return 17;
     puts("S37_DBCS_SYSTEM_WINDOWS_TEMP_CAPACITY_OK");
+    {
+        CHAR volume[8], fs[8];
+        int which;
+        for (which = 0; which < 2; ++which) {
+            memset(volume, 0x5a, sizeof(volume));
+            memset(fs, 0x5a, sizeof(fs));
+            SetLastError(0);
+            actual = GetVolumeInformationOem("C:\\", volume, which ? 3 : 2,
+                NULL, NULL, NULL, fs, which ? 2 : 3);
+            printf("S37_VOLUME_BOUNDARY side=%d result=%lu error=%lu canary=%u outstanding=%d\n",
+                which, actual, GetLastError(), (unsigned char)(which ? fs[2] : volume[2]), outstanding);
+            if (actual || GetLastError() != ERROR_MORE_DATA ||
+                (which ? fs[2] : volume[2]) != 0x5a || outstanding) return 18;
+        }
+        if (!GetVolumeInformationOem("C:\\", volume, 3, NULL, NULL, NULL, fs, 3) ||
+            (unsigned char)volume[0] != 0x95 || (unsigned char)volume[1] != 0x5c ||
+            volume[2] || memcmp(volume, fs, 3) || outstanding) return 19;
+        if (!GetVolumeInformationOem("C:\\", NULL, 0, NULL, NULL, NULL, NULL, 0) || outstanding) return 20;
+        volume_failure = 1;
+        if (GetVolumeInformationOem("C:\\", volume, 3, NULL, NULL, NULL, fs, 3) ||
+            GetLastError() != ERROR_NOT_READY || outstanding) return 21;
+    }
+    puts("S37_DBCS_VOLUME_BOTH_CAPACITIES_OPTIONAL_FAILURE_CLEANUP_OK");
     return 0;
 }
