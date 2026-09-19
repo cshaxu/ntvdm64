@@ -1,0 +1,25 @@
+/* Test-only observation wrapper; no guest writes or production graph change. */
+#define DpmiDispatch s36_original_DpmiDispatch
+#include "../../src/mvdm/dpmi32/dpmi32.c"
+#undef DpmiDispatch
+#include <stdio.h>
+
+static void snapshot(FILE *log, const char *phase)
+{
+    fprintf(log, "%s index=%02lX PE=%u CS:IP=%04X:%04X SS:SP=%04X:%04X "
+        "DS=%04X ES=%04X AX=%04X BX=%04X CX=%04X DX=%04X SI=%04X DI=%04X\n",
+        phase, Index, (unsigned)(getMSW() & 1), (WORD)getCS(), (WORD)getIP(),
+        (WORD)getSS(), (WORD)getSP(), (WORD)getDS(), (WORD)getES(),
+        (WORD)getAX(), (WORD)getBX(), (WORD)getCX(), (WORD)getDX(),
+        (WORD)getSI(), (WORD)getDI());
+    fflush(log);
+}
+
+VOID DpmiDispatch(VOID)
+{
+    FILE *log = fopen("O:\\winnt\\logs\\s36-dpmi-dispatch-r1.events.txt", "a");
+    /* Before.index is the previous dispatch; after.index is this dispatch. */
+    if (log) snapshot(log, "before");
+    s36_original_DpmiDispatch();
+    if (log) { snapshot(log, "after"); fclose(log); }
+}

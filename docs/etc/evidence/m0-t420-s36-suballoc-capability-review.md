@@ -153,3 +153,45 @@ Verify-CommandExitStatus routes, recorded in
 `s36-dpmi-baseline-r1-summary.json`: direct/nested COMMAND and MEM, repeated
 MEM, EDIT return, guest/native exit values and native stream/EOF cases.
 This is baseline regression evidence, not acceptance of the failed DPMI probe.
+
+## Read-only DPMI dispatch observation
+
+The diagnostic-only dpmi_dispatch_trace.c wraps the unchanged selected
+dpmi32.c translation unit. Build-T420S35EnvironmentTrace.ps1 now optionally
+selects this owner with `-Boundary dpmi`, using its exact per-object flags
+from the formal Ninja graph (generic cflags do not compile that owner).
+The default COMMAND environment wrapper remains selectable unchanged.
+Reused object/library hashes are captured in reused-inputs.json. No original
+source, CPU state or guest bytes are modified by this observation wrapper.
+
+The successful diagnostic build is
+`build/M0-T420/S36/dpmi-dispatch-r2/ntvdm.exe`, SHA-256
+`cf1a401110a2ed1cca70d1a77e50c50a89215fd904a16e1a4272896748d9ec66`.
+The initial r1 build failed because it used generic rather than owner-specific
+flags; it was never deployed. The r2 executable was temporarily selected in
+the idle runtime package for one probe, and the formal worker was restored
+afterward to verified SHA-256
+`4e7d060134e138da57e5fddbfd56543ff89f8daba2814bc08b15eb5f74148a69`.
+
+`s36-dpmi-dispatch-r1.txt` (launcher 2660) reproduces exit 0x42b and the same
+Console text. Its events log demonstrates:
+
+- BOP 53:01 returns with PE=1, CS:IP=00CF:1101, SS:SP=00B7:7D8A.
+- Descriptor publications complete; DpmiInUse (0C) and InitApp (05) return.
+- INT 21 translations of AX=3576 and AX=2576 return.
+- The last dispatch is AX=0900, DX=025C, SS:SP=019F:12B2; it has no after
+  record. No allocation (07) is observed in this client sequence.
+
+This narrows the failure to the first protected-mode string-output translation,
+not inability to enter protected mode. Original int21map.c::DisplayString
+first switches the CPU to real mode, then explicitly requests
+Sim32GetVDMPointer(..., TRUE) for the still-protected client string selector.
+Original sim32_effective_addr honors its pm argument independently of CPU PE.
+The current CPU40 adapter instead consults c_getMSW and returns selector*16
+when PE is clear, even though the SIM32 caller explicitly requested descriptor
+translation. This is a source-proven mismatch in the existing binding, not
+an original allocator or CCPU instruction defect. The next repair must separate
+explicit protected-address resolution from current-CPU-mode address resolution,
+preserve the latter for its other callers, and prove the fix through this
+same real probe and the existing product regressions. Runtime causality of
+that repair has not yet been tested; no S36 closure is claimed.

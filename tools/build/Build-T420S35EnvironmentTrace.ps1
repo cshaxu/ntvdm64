@@ -1,6 +1,7 @@
 [CmdletBinding()]
 param([Parameter(Mandatory)][string]$FormalRoot,
-      [Parameter(Mandatory)][string]$BuildRoot)
+      [Parameter(Mandatory)][string]$BuildRoot,
+      [ValidateSet('environment','dpmi')][string]$Boundary = 'environment')
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path "$PSScriptRoot\..\..").Path
 $formal = (Resolve-Path $FormalRoot).Path
@@ -10,10 +11,25 @@ if (!$build.StartsWith("$repo\build\", [StringComparison]::OrdinalIgnoreCase) -o
 New-Item -ItemType Directory $build | Out-Null
 $graph = Get-Content (Join-Path $formal 'build.ninja')
 $flags = ($graph | Where-Object { $_.StartsWith('cflags = ') }).Substring(9).Replace('$:', ':')
-$object = Join-Path $build 'cmdenv.obj'
-$library = Join-Path $build 'original-mvdm-command.lib'
+$memberName = 'obj/command/cmdenv.obj'
+$libraryName = 'original-mvdm-command.lib'
+$traceSource = 'command_environment_trace.c'
+if ($Boundary -eq 'dpmi') {
+    $memberName = 'obj/dpmi/dpmi32.obj'
+    $libraryName = 'original-mvdm-dpmi32.lib'
+    $traceSource = 'dpmi_dispatch_trace.c'
+    $ownerRow = [Array]::FindIndex($graph, [Predicate[string]]{
+        param($line) $line.StartsWith('build obj/dpmi/dpmi32.obj: ')
+    })
+    if ($ownerRow -lt 0 -or !$graph[$ownerRow + 1].StartsWith('  dpmi_cflags = ')) {
+        throw 'Missing original DPMI owner compile flags'
+    }
+    $flags = $graph[$ownerRow + 1].Substring('  dpmi_cflags = '.Length).Replace('$:', ':')
+}
+$object = Join-Path $build 'observed-owner.obj'
+$library = Join-Path $build $libraryName
 $exe = Join-Path $build 'ntvdm.exe'
-$commandObjects = ($graph | Where-Object { $_.StartsWith('build original-mvdm-command.lib: lib ') }).Split(' ',4)[3].Split(' ')
+$commandObjects = ($graph | Where-Object { $_.StartsWith("build ${libraryName}: lib ") }).Split(' ',4)[3].Split(' ')
 $workerInputs = ($graph | Where-Object { $_.StartsWith('build ntvdm.exe | ntvdm.lib: worker_link ') }).Substring('build ntvdm.exe | ntvdm.lib: worker_link '.Length).Split(' ')
 $inputs = @($commandObjects + $workerInputs | Sort-Object -Unique)
 $inputs | ForEach-Object { Get-FileHash (Join-Path $formal $_) } |
@@ -21,16 +37,16 @@ $inputs | ForEach-Object { Get-FileHash (Join-Path $formal $_) } |
 $vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 Push-Location $formal
 try {
-    $compile = "call `"$vs`" -arch=x86 -host_arch=x86 >nul && cl $flags /Fo`"$object`" `"$repo\tests\observation\command_environment_trace.c`""
+    $compile = "call `"$vs`" -arch=x86 -host_arch=x86 >nul && cl $flags /Fo`"$object`" `"$repo\tests\observation\$traceSource`""
     cmd.exe /d /s /c $compile *> "$build\compile.log"
     if ($LASTEXITCODE) { throw "Compile failed; see $build\compile.log" }
     $members = ($commandObjects | ForEach-Object {
-        if ($_ -eq 'obj/command/cmdenv.obj') { "`"$object`"" } else { $_ }
+        if ($_ -eq $memberName) { "`"$object`"" } else { $_ }
     }) -join ' '
     cmd.exe /d /s /c "call `"$vs`" -arch=x86 -host_arch=x86 >nul && lib /nologo /out:`"$library`" $members" *> "$build\archive.log"
     if ($LASTEXITCODE) { throw 'Archive failed' }
     $members = ($workerInputs | ForEach-Object {
-        if ($_ -eq 'original-mvdm-command.lib') { "`"$library`"" } else { $_ }
+        if ($_ -eq $libraryName) { "`"$library`"" } else { $_ }
     }) -join ' '
     cmd.exe /d /s /c "call `"$vs`" -arch=x86 -host_arch=x86 >nul && link /nologo /subsystem:console /opt:ref /out:`"$exe`" /map:`"$exe.map`" /implib:`"$build\ntvdm.lib`" /def:generated/ntvdm-wow32-provider.def $members rpcrt4.lib kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib libcmt.lib libvcruntime.lib libucrt.lib" *> "$build\link.log"
     if ($LASTEXITCODE) { throw 'Link failed' }
