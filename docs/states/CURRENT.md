@@ -48,6 +48,10 @@ The original BaseClient DBCS correction supplies the fix: existing OEM RTL
 size operations now govern path and prefix bytes (DIV-274). All four x86
 OEMUNI fixtures and direct/nested real OEM437 file routes pass. CP932 remains
 mocked boundary evidence; remaining family/consumer review keeps S37 open.
+The adjacent CP932 sweep reproduces five original n+1 capacity violations
+(current/search/system/Windows/temp paths), plus SearchPath length/prefix
+errors. These are explicitly failing capability witnesses, pending grouped
+correction in S37; no additional product change has been deployed.
 
 ## S36 Closure Record
 

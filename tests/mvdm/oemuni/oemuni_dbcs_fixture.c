@@ -46,10 +46,38 @@ static ULONG NTAPI cp932_size(PCUNICODE_STRING src)
         NULL, 0, NULL, NULL) + 1;
 }
 
+static ULONG NTAPI fixed_current(ULONG bytes, PWSTR output)
+{
+    return fixed_path(L"", bytes, output, NULL);
+}
+
+static DWORD WINAPI fixed_search(LPCWSTR path, LPCWSTR name, LPCWSTR extension,
+    DWORD chars, LPWSTR output, LPWSTR *part)
+{
+    (void)path; (void)name; (void)extension;
+    return fixed_path(L"", chars * sizeof(WCHAR), output, part) / sizeof(WCHAR);
+}
+
+static UINT WINAPI fixed_directory(LPWSTR output, UINT chars)
+{
+    return fixed_path(L"", chars * sizeof(WCHAR), output, NULL) / sizeof(WCHAR);
+}
+
+static DWORD WINAPI fixed_temp(DWORD chars, LPWSTR output)
+{
+    return fixed_directory(output, chars);
+}
+
 #define RtlGetFullPathName_U fixed_path
 #define RtlUnicodeStringToOemString cp932_oem
 #define RtlUnicodeStringToOemSize cp932_size
+#define RtlGetCurrentDirectory_U fixed_current
+#define SearchPathW fixed_search
+#define GetSystemDirectoryW fixed_directory
+#define GetWindowsDirectoryW fixed_directory
+#define GetTempPathW fixed_temp
 #include "../../../src/mvdm/oemuni/file.c"
+#include "../../../src/mvdm/oemuni/process.c"
 
 int main(void)
 {
@@ -79,5 +107,29 @@ int main(void)
     part = output;
     if (GetFullPathNameOem("x.txt", sizeof(output), output, &part) != 11 || part) return 7;
     puts("S37_DBCS_FULLPATH_LENGTH_COPY_FILEPART_SHORT_EXACT_BUFFER_OK");
+    path_mode = 0;
+    memset(output, 0x5a, sizeof(output));
+    actual = GetCurrentDirectoryOem(11, output);
+    printf("S37_DBCS_CURRENT_DEFECT length=%lu capacity=11 byte_after=%u\n",
+        actual, (unsigned char)output[11]);
+    /* Diagnostic assertions: original code advertises n+1 to the converter
+       and writes the NUL beyond the caller's declared capacity. */
+    if (actual != 11 || output[11] != 0) return 8;
+    memset(output, 0x5a, sizeof(output));
+    actual = SearchPathOem(NULL, "x.txt", NULL, 11, output, &part);
+    printf("S37_DBCS_SEARCH_DEFECT length=%lu expected=11 part=%ld expected_part=6 byte_after=%u\n",
+        actual, (long)(part-output), (unsigned char)output[11]);
+    if (actual != 10 || part != output+5 || output[11] != 0) return 9;
+    puts("S37_DBCS_CURRENT_SEARCH_CAPACITY_DEFECTS_REPRODUCED_NOT_ACCEPTED");
+    memset(output, 0x5a, sizeof(output));
+    actual = GetSystemDirectoryOem(output, 11);
+    if (actual != 11 || output[11] != 0) return 10;
+    memset(output, 0x5a, sizeof(output));
+    actual = GetWindowsDirectoryOem(output, 11);
+    if (actual != 11 || output[11] != 0) return 11;
+    memset(output, 0x5a, sizeof(output));
+    actual = GetTempPathOem(11, output);
+    if (actual != 11 || output[11] != 0) return 12;
+    puts("S37_DBCS_SYSTEM_WINDOWS_TEMP_CAPACITY_DEFECTS_REPRODUCED_NOT_ACCEPTED");
     return 0;
 }

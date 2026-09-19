@@ -238,3 +238,31 @@ All 17 Console-text-gated product routes pass under s37-dbcs-product-r1,
 including original expected nonzero COMMAND exits, native streams/EOF,
 direct/nested MEM and EDIT. S37's remaining whole-family disposition is not
 implied complete by this correction.
+
+## Adjacent capacity-family sweep
+
+The same x86 CP932 fixture now includes both actual OEMUNI translation units,
+with fixed Unicode providers for current/search/system/Windows/temp paths.
+All use the same 10-WCHAR / 11-OEM-byte sample and a caller-declared capacity
+of 11 inside a larger sentinel-filled test array. These are test-only API
+boundaries, not a change to the host code page or product provider.
+
+Five additional defects reproduce: GetCurrentDirectoryOem, SearchPathOem,
+GetSystemDirectoryOem, GetWindowsDirectoryOem and GetTempPathOem all write a
+NUL at offset 11, outside declared capacity. Their original n+1 conversion
+capacity causes this. SearchPathOem additionally returns 10 instead of 11
+and publishes file-part offset 5 instead of 6. The current-directory mock
+retains the original TEB buffer access; search/directory mocks retain the
+Unicode API's character-count contract.
+
+The markers ending DEFECTS_REPRODUCED_NOT_ACCEPTED deliberately distinguish
+these baseline witnesses from the already repaired full-path PASS. The test
+process exits zero only after proving every expected defect; it does not
+certify product correctness. Build log: family-sweep-build.log under the
+existing dbcs-r1 root. No additional product code or deployment changed.
+
+The family must be corrected together using original owner byte-size rules,
+actual caller capacity and required-size reporting. Remaining volume-name
+output capacities also contain n+1 expressions and still require their own
+boundary proof; no claim is made that the five reproductions exhaust the
+package. S37 remains active and these findings are not deferred out of scope.
