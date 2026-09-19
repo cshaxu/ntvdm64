@@ -1,5 +1,12 @@
 # mvdm
 
+MVDM-HOST-DIV-271: `xms.486/xmsmemr.c` restores original SAS commit/decommit
+callbacks for preallocated CCPU40 backing. Only its flat-base mover calls
+the existing bounded mapping-aware worker operation; original signatures,
+overlap behavior and cancellation on unavailable movement remain intact.
+No zero-on-free policy or replacement allocator is introduced.
+[S36 evidence](../../docs/etc/evidence/m0-t420-s36-suballoc-capability-review.md).
+
 MVDM-HOST-DIV-268: `softpc.new/base/ccpu386/c_xcptn.c` applies the five
 NTVDMx64 PATCH-007 brace corrections, keeping flag cleanup and immediate CPU
 continuation inside the successful protected-mode exception-hook condition.

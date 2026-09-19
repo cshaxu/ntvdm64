@@ -35,6 +35,7 @@ $environmentNinja = $environment.Replace('\', '/')
 
 $sources = @(
     'src/mvdm/suballoc/suballoc.c',
+    'src/mvdm/xms.486/xmsmemr.c',
     'tests/adapter-mvdm-host-out/softpc/xms_mapped_memory_fixture.c',
     'src/ntvdm-exe/softpc/mvdm_xms_memory.c',
     'src/ntvdm-exe/softpc/mvdm_softpc_guest_memory.c',

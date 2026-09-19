@@ -22,6 +22,10 @@ Revision History:
 #include <xms.h>
 #include <suballoc.h>
 #include <softpc.h>
+#ifdef CPU_40_STYLE
+/* DIVERGENCE MVDM-HOST-DIV-271: retain mapped, bounded CPU40 movement. */
+#include "mvdm_xms_memory.h"
+#endif
 
 NTSTATUS
 xmsCommitBlock(
@@ -142,6 +146,9 @@ Return Value:
 
 --*/
 {
+#ifdef CPU_40_STYLE
+    mvdm_xms_move_memory(Destination, Source, Count);
+#else
     ULONG SoftpcBase;
     
     //
@@ -163,5 +170,6 @@ Return Value:
     // know is its "linear address".
 
     sas_overwrite_memory((PBYTE)Destination, Count);
+#endif
 
 }

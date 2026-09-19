@@ -18,6 +18,7 @@ writeFileSync(msvc, [
 const sources = [
   "tests/mvdm-host/xms/xms_init_fixture.c",
   "src/mvdm/xms.486/xms.c",
+  "src/mvdm/xms.486/xmsmemr.c",
   "src/mvdm/suballoc/suballoc.c",
   "src/ntvdm-exe/softpc/mvdm_xms_memory.c",
   "src/ntvdm-exe/softpc/mvdm_softpc_guest_memory.c",

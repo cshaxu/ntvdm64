@@ -395,3 +395,47 @@ step must retain bounded mapped movement while composing the original
 commit/decommit owner; it must not recreate all three callbacks solely to
 avoid the mover boundary. No production or guest file changes accompany
 this compile proof.
+
+## Original SAS callbacks restored in the formal product
+
+The formal graph now adds original xmsmemr.c to its six common XMS units.
+Its original commit/decommit bodies are unchanged; original CPU40
+sas_manage_xms already owns the preallocated-backing operation. The only
+mirror insertion (DIV-271, eight added lines) routes the flat-base mover to
+the existing bounded mapping-aware operation. Local mvdm_xms_memory.c loses
+44 lines and gains one renamed signature, its header gains one declaration:
+net 42 fewer worker implementation/header lines. There is no new overlay,
+allocator implementation, mirror file or guest modification.
+
+This selects source-recovery rung 2: original translation unit plus one
+finite mapped-movement hook. Rung 1 was actually compiled, but its flat-base
+pointer arithmetic bypasses the selected physical mappings. No external
+intrusion or new callback policy is required. Generic suballoc callback
+rollback defects remain true of providers that can fail; the selected original
+SAS commit/decommit provider does not use malloc, leases, range writes or
+decommit, and therefore does not introduce those failure transitions.
+
+The revised composed fixture fills all eight lease slots, rejects backing
+I/O, frees and reallocates two pages through the original callbacks, and
+checks capacity, untouched bytes and zero backing accesses. It also verifies
+overlapping mapped movement and failure cancellation. Both markers pass in
+`build/M0-T420/S36/original-callback-fixture-r1/x86`. The startup fixture's
+two original branches pass in `build/M0-T420/S36/original-startup-r1`; its
+old zeroing assertions were local-policy expectations and are replaced by
+the source-proven no-clearing behavior. These fixture SAS endpoints are
+explicit mocks; real product selection is independently verified by the map.
+
+A fresh 526-edge Win32/x86 formal build completes in
+`build/M0-T420/S36/original-callback-product-r1`, followed by a final incremental
+relink after the mover conditional was tightened. ntvdm.exe.map places all
+three xms callbacks in original-mvdm-xms:xmsmemr.obj and sas_manage_xms in
+original-softpc-host-roots:stubs.obj. Deployed non-diagnostic hashes:
+ntvdm.exe `d24629a9a55e6423ae8ae1d46a8204b917fb591743281e45cff8f4ef694706c5`;
+VDMREDIR.dll `6f5d28e1d5a8c4c96f5f7a9f90ee66851d42cfb51682ac6e9a8d0f8caa169012`.
+All four real XMS routes pass under `s36-original-callback-xms-r1`, and all
+four real DPMI routes pass under `s36-original-callback-dpmi-r1`. Raw summaries
+and guest transcripts remain under `O:\winnt\logs`.
+All 17 text-gated product routes also pass in
+`s36-original-callback-product-r1-summary.json`, including COMMAND nesting,
+MEM, EDIT return, native streams/EOF and expected guest exit codes. This is
+the recovery delivery; final S36 capability/teardown closure remains separate.

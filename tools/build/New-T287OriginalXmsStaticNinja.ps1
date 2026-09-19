@@ -35,11 +35,11 @@ $environment = Join-Path $build 'msvc-mt.cmd'
     Set-Content -LiteralPath $environment -Encoding ascii
 $environmentNinja = $environment.Replace('\', '/')
 
-# This intentionally selects only OpenNT's six common XMS translation units.
+# Select OpenNT's six common XMS units and the original SAS callback unit.
 # The i386 xmsmem86.c direct-host-pointer backend is a source witness, not a
 # product object. The selected x86 session callback path never uses the
 # historical i386 host-pointer condition.
-$units = @('xms', 'xmsa20', 'xmsblock', 'xmsdisp', 'xmsmisc', 'xmsumb')
+$units = @('xms', 'xmsa20', 'xmsblock', 'xmsdisp', 'xmsmisc', 'xmsumb', 'xmsmemr')
 $sources = $units | ForEach-Object { "$root/src/mvdm/xms.486/$_.c" }
 $adapterSources = @('src/ntvdm-exe/softpc/mvdm_xms_memory.c')
 $adapterSourcePaths = $adapterSources | ForEach-Object { "$root/$_" }

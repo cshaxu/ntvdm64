@@ -40,10 +40,12 @@ local ES/FS/GS cache indices 4/5/6 instead of original 0/4/5; correcting these
 completes allocation, resize, data checks, free, output and exit in all four
 direct/nested and null/restored-ES probe cases. Callback rollback and worker
 failure-boundary disposition remain open. Guest media are unchanged; this
-is not S36 closure. A composed original-allocator/real-XMS-callback fixture
-now reproduces failed-free phantom capacity: query reports 4 KiB free while
-allocation rejects it. This is a failure finding, not an acceptance pass;
-partial-operation rollback disposition remains required.
+is not S36 closure. Original xmsmemr.c commit/decommit now compose through
+the existing original CPU40 SAS provider; the local allocating zero-on-free
+callback is removed. Bounded mapped movement is retained. The composed
+fixture proves free/reuse even with saturated leases and rejected backing
+I/O, without clearing live bytes. Original generic allocator rollback defects
+remain recorded; the selected provider no longer introduces those failures.
 
 ## S35 Closure Record
 

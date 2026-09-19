@@ -201,6 +201,7 @@ foreach ($name in $redirNames) {
     }
 }
 $xmsNames = @(Get-OriginalSources $xmsManifest)
+$xmsNames += 'xmsmemr.c' # Original SAS callbacks for the selected CCPU40 backing.
 # `i386_SOURCES` is an NT4 kernel-VDM host variant: it writes the host LDT,
 # queries VDM kernel feature bits and mutates the fixed NTVDM V86-state page.
 # It is retained in the complete mirror but is not a CCPU40 source member.

@@ -25,6 +25,11 @@ static ULONG allocation_address;
 static ULONG allocation_calls;
 static ULONG commit_calls;
 static ULONG decommit_calls;
+BOOL sas_manage_xms(PVOID address, ULONG size, int action)
+{
+    (void)address; (void)size; (void)action;
+    return TRUE; /* Original CPU40 preallocated backing contract. */
+}
 
 /* The fixture binds an explicit lease transport below.  These CCPU exports
  * remain link witnesses for the generic fallback only and are not reached. */
@@ -122,7 +127,7 @@ static int fixture_run_branch(fixture_memory *memory, NTSTATUS selected_status,
     before_commit = commit_calls;
     before_decommit = decommit_calls;
     if (!SAAllocate(ExtMemSA, 1024u, &address) || address != XMS_BASE_ADDRESS ||
-        memory->bytes[address] != 0u) return 0;
+        memory->bytes[address] != 0xffu) return 0;
     if (expect_vdm_callbacks) {
         if (commit_calls != before_commit + 1u) return 0;
     } else if (commit_calls != before_commit) {
@@ -135,7 +140,7 @@ static int fixture_run_branch(fixture_memory *memory, NTSTATUS selected_status,
     } else if (decommit_calls != before_decommit) {
         return 0;
     }
-    if (!SAAllocate(ExtMemSA, 1024u, &address) || memory->bytes[address] != 0u)
+    if (!SAAllocate(ExtMemSA, 1024u, &address) || memory->bytes[address] != 0x5au)
         return 0;
     free(ExtMemSA);
     ExtMemSA = NULL;
