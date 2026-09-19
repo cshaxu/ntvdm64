@@ -78,6 +78,45 @@ this four-case gate. This bounded S35 P1 delivery does not close S35.
 
 ### Current disposition after 144b050e9
 
+Lifecycle measurement is now separate from harness cleanup. The four-route
+gate records both immediate post-launcher processes and processes after a
+bounded five-second wait on each confirmed live test worker. All four
+`s35-natural-lifetime-r2` rows retain a worker and broker before isolation
+cleanup. This is not reported as natural worker exit. A separate direct run
+(`s35-idle-worker-r1`, launcher 16052, worker 5088) reaches the expected XMS
+marker and its exact-map stack is `MS_bop_4 -> CmdDispatch -> cmdGetNextCmd`
+at the native wait. It is not the previously fixed event-thread join.
+Original cmdGetNextCmd distinguishes nonzero DosSessionId termination from
+the existing-Console GetNextVDMCommand route; this source distinction must
+remain intact. Runtime reuse/termination acceptance must follow that ownership,
+not introduce an idle timeout or call harness termination a successful exit.
+The test-owned process group was cleaned after the snapshot. The r1 JSON
+used insufficient serialization depth; r2 preserves structured process rows.
+
+The follow-up `tests/observation/xms_worker_reuse.c` was compiled with MSVC
+Win32/x86 `/MT /W4` into `build/M0-T420/S35/diagnostics-r1/reuse.exe`.
+The existing Console observer ran it with package root `O:\winnt` and report
+`s35-reuse-r1.txt`; the probe itself wrote `s35-reuse-r1.reuse.txt`.
+It launches `run16 tests\X35.COM` twice in the same Console, resolves the
+attached worker by its full image path and retains a process handle across
+the calls to exclude PID recycling. Launchers 2660 and 3180 both completed
+against live worker 53792. The Console transcript contains exactly two
+`S35_XMS_ALLOC_MOVE_REALLOC_FREE_A20_OK` markers followed by
+`S35_SAME_LIVE_WORKER_REUSED_OK`; observer exit is zero. This proves actual
+task reuse, not two independent worker starts. Each guest invocation also
+checks restoration of its initial total free XMS capacity.
+
+After the observer exited, a fresh process query still found only broker
+42364 and worker 53792, both parented by first launcher 2660 and with exact
+package image paths. After rechecking those identities, the test terminated
+only broker 42364. A retained worker handle signaled within the 15-second
+observation bound; a fresh package process query was empty. The PowerShell
+process object's exit-code property was unavailable, so no exit-code claim
+is made. This is broker-loss lifecycle evidence, not graceful Console-close
+or internal destructor/lease instrumentation. Original guest media and
+product code were unchanged. Ordinary-environment low-DOS startup remains
+unaccepted; successful reuse does not close that separate failure.
+
 Earlier paragraphs below retain chronological failed attempts and pending
 states; they are not the current deployment or delivery claim. Native wait
 restoration and pre-resume cleanup shipped at 76ec920d4 with formal x86,

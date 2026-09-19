@@ -52,7 +52,21 @@ foreach ($case in $cases) {
             if (!$text.Contains($marker)) { throw "Missing guest marker: $marker" }
         }
         if ([regex]::Matches($text,[regex]::Escape($success)).Count -ne $case.Count) { throw 'Unexpected success marker count' }
-        $results += @{Case=$case.Name; Exit=$code; Report=$report}
+        # Record the authoritative pre-cleanup process state. Never infer
+        # natural worker exit from the isolation cleanup in finally.
+        $survivors = @(Get-TestPackageProcesses | Select-Object ProcessId,
+            ParentProcessId, ExecutablePath)
+        foreach ($remaining in $survivors) {
+            if ($remaining.ParentProcessId -eq $launcherId -and
+                $remaining.ExecutablePath -eq (Join-Path $PackageRoot 'ntvdm.exe')) {
+                $worker = Get-Process -Id $remaining.ProcessId -ErrorAction SilentlyContinue
+                if ($worker) { [void]$worker.WaitForExit(5000) }
+            }
+        }
+        $settled = @(Get-TestPackageProcesses | Select-Object ProcessId,
+            ParentProcessId, ExecutablePath)
+        $results += @{Case=$case.Name; Exit=$code; Report=$report;
+            ProcessesBeforeCleanup=$survivors; ProcessesAfterWorkerWait=$settled}
         Write-Host "PASS XMS $($case.Name)"
     } finally {
         # Isolate cases, not a claim of natural worker/lease teardown.
@@ -65,4 +79,4 @@ foreach ($case in $cases) {
     }
     if ((Get-TestPackageProcesses).Count) { throw 'Unclassified package process remains; refusing next test' }
 }
-$results | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $PackageRoot "logs\$LogPrefix-summary.json") -Encoding utf8
+$results | ConvertTo-Json -Depth 6 | Set-Content -LiteralPath (Join-Path $PackageRoot "logs\$LogPrefix-summary.json") -Encoding utf8
