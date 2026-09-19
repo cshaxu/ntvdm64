@@ -38,6 +38,8 @@ const lines = [
   "build obj/pause.obj: cc $root/tests/mvdm/oemuni/oemuni_pause_stub.c",
   "build obj/failure.obj: cc $root/tests/mvdm/oemuni/oemuni_failure_fixture.c",
   "build obj/expand-failure.obj: cc $root/tests/mvdm/oemuni/oemuni_expand_failure_fixture.c",
+  "build obj/family.obj: cc $root/tests/mvdm/oemuni/oemuni_family_fixture.c",
+  "build oemuni-family-fixture.exe: link obj/file.obj obj/process.obj obj/family.obj",
   "build oemuni-expand-failure-fixture.exe: link obj/expand-failure.obj",
   "build oemuni-original-test.exe: link obj/file.obj obj/process.obj obj/toemuni.obj obj/pause.obj",
   "build oemuni-failure-fixture.exe: link obj/file.obj obj/process.obj obj/failure.obj",

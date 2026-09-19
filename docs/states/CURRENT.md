@@ -39,6 +39,9 @@ tests, real DOS file routes and all 17 product regressions pass.
 Failure injection now verifies zero return/error propagation and no freeing
 of borrowed output at both conversion failures. The inventory is 28 compiled
 OEMUNI functions plus original #if-0 CreateProcessOem, not 29 selected APIs.
+The x86 original-owner family fixture now also passes enumeration/search,
+rename/delete, directory/temp-file and host-information checks. This is
+host-side SBCS evidence, not full guest/WOW or DBCS acceptance; S37 stays open.
 
 ## S36 Closure Record
 

@@ -141,3 +141,32 @@ and `b2bd030c71fe7b2346cee09031dc5646587312234137b8b2debca09742e32142`.
 Direct/nested real DOS non-ASCII tests pass in s37-expand-failure-guest-r1;
 all 17 product routes pass in s37-expand-failure-product-r1. This adds one
 executable mirror statement to DIV-273; no new adapter or guest modification.
+
+## Remaining API-family fixture
+
+The x86 `oemuni-family-fixture.exe`, generated through the S17 generator in
+`build/M0-T420/S37/family-r1`, links the actual file.c/process.c objects and
+the intentionally reused S36 formal RTL inputs. Running with that build root
+as its working directory exits zero with both family markers:
+
+- S37_OEM_ENUM_SEARCH_RENAME_DELETE_DIRECTORY_OK: CP437 non-ASCII filenames,
+  both rename APIs, attributes, FindFirst/FindNext including end-of-enumeration,
+  SearchPath/file-part, short-name lookup, deletion and missing-file failure.
+- S37_OEM_TEMP_SYSTEM_VOLUME_COMPUTER_NEGATIVE_FONT_OK: process-local TEMP/TMP,
+  temporary file creation/deletion, system/Windows directories, drive type,
+  disk capacity, volume/computer information, debug-string conversion and
+  rejection of an absent font.
+
+Directory creation/current-directory queries, a one-byte buffer canary,
+restoration of the original working directory and removal of the private
+O37CASE directory also pass. The test refuses an existing O37CASE directory
+and does not recursively clean anything. Review tightened the read-only
+attribute assertion to reject INVALID_FILE_ATTRIBUTES; otherwise a failed
+query would incorrectly satisfy a bit-only test.
+
+This is host-side original-owner API evidence on OEM 437, not additional
+guest end-to-end or DBCS proof. The absent-font check does not demonstrate
+successful loaded-font removal. No production source, deployed artifact or
+guest media changed in this delivery; the preceding formal build and 17-route
+product regression therefore remain its unchanged product baseline. Caller
+disposition, remaining buffer cases and DBCS analysis still prevent S37 closure.
