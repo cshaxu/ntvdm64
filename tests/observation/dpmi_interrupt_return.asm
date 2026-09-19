@@ -127,7 +127,7 @@ fault_resume:
     jne failed
     cmp sp, [saved_sp]
     jne failed
-    cmp word [fault_count], 1
+    cmp word [fault_count], 2
     jne failed
     mov ax, 0203h
     xor bx, bx
@@ -169,6 +169,20 @@ fault_handler:
 %endif
 %endif
     inc word [fault_count]
+    ; Raise a second divide fault while the first locked-stack frame is live.
+    ; The inner handler must return to this stack, the outer to the client.
+    cmp word [fault_count], 1
+    jne .nested_done
+    push eax
+    push edx
+    push ebx
+    xor dx, dx
+    xor bx, bx
+    div bx
+    pop ebx
+    pop edx
+    pop eax
+.nested_done:
 %ifdef CODE32
     pop ebp
 %else

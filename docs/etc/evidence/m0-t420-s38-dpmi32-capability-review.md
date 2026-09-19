@@ -155,3 +155,30 @@ It was deployed after checking that the package was unused. On that worker,
 `s38-code32-formatted-r1` passes both routes. The full product regression
 prefix is `s38-format-product-r1`: all 17 routes completed and passed,
 including EDIT return. Original guest media remain unchanged.
+
+## Nested Locked-stack Exception Verification
+
+The fault probe now raises a second divide exception inside the first
+handler, while retaining the outer frame. It preserves EAX/EDX/EBX around
+the inner trigger, advances each saved IP past its own DIV and requires
+exactly two handler invocations before checking the outer client state.
+This exercises nested locked-stack return rather than inferring it from
+a single exception. No original guest or product source changes are involved.
+
+NASM outputs under `build/M0-T420/S38/nested-fault-r1` retain the three
+variants. Prefixes `s38-nested-fault16-r1`, `s38-nested-frame32-r1` and
+`s38-nested-code32-r1` each pass direct and nested COMMAND on the deployed
+worker recorded above; verifier summaries retain probe hashes. These are
+six passing real-guest routes, not hardware-IRQ proof.
+
+The formal x86 `cpu40-descriptor-domain-fixture.exe` target was also rebuilt
+and executed successfully. Its inspected assertions cover GDT versus LDT
+selection, rejection before GDT publication, final DOSX IDT descriptor,
+replacement publication rather than first-address latching, and invalid IDT
+limit. This is explicitly host fixture evidence; the true CODE32 guest probe
+provides separate end-to-end descriptor publication and execution evidence.
+
+Source review distinguishes `DpmiSwIntHandler` (direct client IRET frame)
+from `DpmiHwIntHandler` (locked stack plus DOSX return-hook frame). Consequently
+software INT success alone does not verify BOP 14/15 hardware-return hooks.
+That hardware path remains a required follow-up before S38 closure.
