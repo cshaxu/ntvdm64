@@ -76,6 +76,52 @@ this four-case gate. This bounded S35 P1 delivery does not close S35.
 
 ## Remaining closure work
 
+### Direct environment-copy witness
+
+`tests/observation/command_environment_trace.c` includes the unchanged current
+cmdenv translation unit under a renamed function, then surrounds that function
+with read-only guest leases. The formal graph never selects this wrapper.
+`Build-T420S35EnvironmentTrace.ps1` retains the formal x86 compile flags and
+worker link inputs, hashes all reused inputs, and emits a separate diagnostic
+object/archive/EXE below `build/M0-T420/S35/environment-trace-r1`. No debugger
+is attached. The wrapper neither changes guest bytes nor reads environment
+string contents into the log; normal original environment writes still occur.
+
+Diagnostic EXE SHA-256:
+`fb14e1a586d2cbdcbc17ec596322b56c8634a9d1f3042a6a6715b012857757df`.
+With hash-checked guest-a20-low-r1 disposable inputs and the ordinary inherited
+environment, `s35-envtrace-r1.events.txt` records:
+
+| Boundary | DS | ES | BX | EnvSiz | MCB owner / paragraphs | EnvSiz inside environment allocation |
+| --- | --- | --- | --- | --- | --- | --- |
+| First entry | 0E2F | 0F5D | 0010 | 0010 | 0E2F / 0010 | No |
+| First return | 0E2F | 0F5D | 0118 | 0010 | 0E2F / 0010 | No |
+| Second entry | 0E2F | 0F5D | 0118 | 0118 | 0E2F / 0118 | Yes |
+| Second return | 0E2F | 0F5D | 0118 | 4543 | 0E2F / 0118 | Yes |
+
+The resized allocation spans linear `[0F5D0,10750)`; EnvSiz is at `1032C`.
+The first call only reports capacity. Before the second call, original guest
+EndInit has reallocated and stored 0118 in EnvSiz. The ordinary, in-bounds
+environment copy then overwrites that stale INIT variable. On return the
+original `cmp bx, EnvSiz` compares 0118 with 4543 and takes the mismatch/error
+path into the previously evidenced discarded Alloc_error location. This
+directly corroborates the original source lifetime defect; it is not an XMS
+allocator failure, an out-of-range host write, or evidence for altering CCPU.
+The run times out; this is defect evidence, not product acceptance.
+
+Only the test launcher's confirmed children were terminated. The first restore
+attempt raced process image unlocking and failed; the subsequent empty process
+query and successful copy restored the formal EXE, SHA-256
+`c9004da5219ecd4de8b640e75420e3e29fe027684411f2fd45b2f8be2457cc6f`.
+Default guest-a20-r2 test inputs were restored. No original guest media changed.
+The restored formal package then passed all four transcript-gated XMS routes
+with prefix `s35-post-trace-control-r1` (direct/profile/nested/repeat).
+Repairing the stale guest references would violate the owner's permanent
+guest-media prohibition. Do not preserve discarded guest memory through a
+host allocator special case, truncate the environment, inject /E:, or force
+DOS=HIGH and call that original-semantic restoration. S35 remains open pending
+an explicit disposition of this demonstrated immutable-guest limitation.
+
 ### Current disposition after 144b050e9
 
 Lifecycle measurement is now separate from harness cleanup. The four-route

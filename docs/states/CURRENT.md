@@ -66,6 +66,14 @@ execution witness and natural worker exit, plus all 17 product routes
 (`s35-cleanup-regression-r1`) and four XMS routes (`s35-cleanup-xms-r1`).
 O:\winnt contains this tested host candidate; original guest media are unchanged.
 The ordinary-environment low-DOS failure remains unresolved. S35 stays open.
+An isolated non-debug diagnostic build now directly proves that the original
+environment copy is inside its allocated block but overwrites COMMAND's stale
+INIT-resident EnvSiz (0118 -> 4543); the original post-copy comparison then
+takes its error path. The formal EXE has been restored and hash-verified.
+This is a demonstrated immutable-guest limitation, not an XMS/lease overrun.
+S35 awaits owner disposition of this limitation; no guest patch or host-side
+environment/allocator workaround is admitted. Detailed inputs and address
+arithmetic are in the linked progress evidence.
 
 ## S34 Closure Record
 
