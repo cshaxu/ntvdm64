@@ -697,3 +697,36 @@ whole-package reconciliation remain open; S37 is not closed by these tests.
 All 17 Console-text/exit-code product regressions also pass under
 `s37-env-product-r1`, including repeated/nested MEM and EDIT return. The
 original COMMAND nonzero results remain unchanged; no test was skipped.
+
+## Unequal environment encoding lengths
+
+The controlled CP932 OEM endpoint, with unchanged real host ACP 1252,
+reproduced three short-buffer faults for U+00A7: ANSI is one byte, OEM is two.
+Capacities 0/1 returned 2 rather than required 3; capacity 2 returned zero
+instead of required 3. Capacities 3/65536 already succeeded. This is an
+explicit mixed-encoding boundary fixture, not a Japanese-host claim.
+
+Original BaseClient process.c GetEnvironmentVariableA's DBCS insufficient-
+buffer branch fetches the complete intermediate value before computing the
+encoded required size. DIV-277 now follows that order in the original MVDM
+wrapper: query its original ANSI provider, allocate the complete intermediate,
+retain the existing ANSI-to-Unicode conversion, then size and copy OEM bytes.
+It does not replace the provider with a new environment implementation, import
+full BaseClient or add an adapter/overlay. A value growing between queries
+fails with error 234 before conversion; disappearance retains error 203;
+unrepresentable capacity fails 234; allocation failure returns zero/error 8.
+Finally cleanup remains original. These four injected paths preserve output
+and leave zero counted intermediate allocations. All five capacities now pass.
+
+All six x86 fixtures pass (env-sizing-all-build.log), and formal product build
+passes (env-sizing-product-build.log) in the existing S37 dbcs-r1 root. Real
+DOS direct/nested probes pass under `s37-env-sizing-guest-r1`. Worker SHA-256:
+`ac057e500139446953311d06fa9d9a07fb2f955a6d5bdc953cf3877151412ef5`;
+VDMREDIR DLL:
+`128849cd3f38e3193e7ae61d88923ad919a242552678571e58010ddbb34dde91`.
+This step changes process.c by 25 added / 5 removed lines; guest media and
+production adapter/overlay sources remain untouched. It closes this specific
+environment short-query defect, not the remaining package/caller audit.
+All 17 transcript-gated product routes pass under
+`s37-env-sizing-product-r1`, including nested COMMAND/MEM and EDIT. The
+documentation governance and whitespace gates pass as well.

@@ -656,12 +656,21 @@ GetEnvironmentVariableOem(
             goto try_exit;
             }
 
-        // DIVERGENCE: MVDM-HOST-DIV-277 preserves descriptor capacity.
-        Buffer.MaximumLength = (USHORT)(nSize > 65535 ? 65535 : nSize);
+        // DIVERGENCE: MVDM-HOST-DIV-277 sizes the ANSI intermediate itself.
+        ReturnValue = GetEnvironmentVariableA(Name.Buffer, NULL, 0);
+        if (ReturnValue == 0)
+            goto try_exit;
+        if (ReturnValue > 65535) {
+            BaseSetLastNTError(STATUS_BUFFER_OVERFLOW);
+            ReturnValue = 0;
+            goto try_exit;
+            }
+        Buffer.MaximumLength = (USHORT)ReturnValue;
         Buffer.Buffer = (PCHAR)
             RtlAllocateHeap( RtlProcessHeap(), 0, Buffer.MaximumLength );
         if (Buffer.Buffer == NULL) {
             BaseSetLastNTError( STATUS_NO_MEMORY );
+            ReturnValue = 0;
             goto try_exit;
             }
 
@@ -671,8 +680,11 @@ GetEnvironmentVariableOem(
                                                Buffer.MaximumLength
                                              );
         // DIVERGENCE: MVDM-HOST-DIV-277 retains successful empty output.
-        if (ReturnValue == 0 && GetLastError() == ERROR_SUCCESS && nSize != 0)
-            lpBuffer[0] = '\0';
+        if (ReturnValue == 0 && GetLastError() == ERROR_SUCCESS) {
+            if (nSize != 0) lpBuffer[0] = '\0';
+            else ReturnValue = 1;
+            goto try_exit;
+            }
         if (ReturnValue != 0) {
             if ( ReturnValue < Buffer.MaximumLength ) {
                 Buffer.Length = (USHORT)ReturnValue;
@@ -687,7 +699,10 @@ GetEnvironmentVariableOem(
                     }
 
                 OemString.Buffer        = lpBuffer;
-                OemString.MaximumLength = Buffer.MaximumLength;
+                OemString.MaximumLength = (USHORT)(nSize > 65535 ? 65535 : nSize);
+                ReturnValue = RtlUnicodeStringToOemSize(&Unicode);
+                if (ReturnValue > nSize)
+                    goto try_exit;
                 Status = RtlUnicodeStringToOemString( &OemString, &Unicode, FALSE );
                 if (!NT_SUCCESS( Status )) {
                     BaseSetLastNTError( Status );
@@ -696,6 +711,11 @@ GetEnvironmentVariableOem(
                 else {
                     ReturnValue = OemString.Length;
                     }
+                }
+            else {
+                // DIVERGENCE: MVDM-HOST-DIV-277 rejects growth before conversion.
+                BaseSetLastNTError(STATUS_BUFFER_OVERFLOW);
+                ReturnValue = 0;
                 }
             }
 try_exit:;

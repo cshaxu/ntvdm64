@@ -79,8 +79,9 @@ real DOS direct/nested routes pass. Environment-boundary and final package
 reconciliation remain; original/admission mirror counts stay in evidence.
 DIV-277 corrects reproduced environment-buffer wrap at 65536, empty-value
 output and conversion failure ordering. Six x86 fixtures and expanded real
-DOS direct/nested probes pass. Unequal ANSI/OEM short-query byte sizing and
-final package reconciliation remain open; this is not an S37 closure.
+DOS direct/nested probes pass. Unequal ANSI/OEM short-query byte sizing now
+passes five capacities and four provider-change/failure cleanup cases. Final
+caller/whole-package reconciliation remains open; this is not an S37 closure.
 
 ## S36 Closure Record
 

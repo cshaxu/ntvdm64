@@ -82,7 +82,14 @@ static BOOL WINAPI fixed_computer(LPWSTR output, LPDWORD chars)
     output[0] = 0x8868; output[1] = 0; *chars = 1; return TRUE;
 }
 
-static int volume_failure, outstanding, fail_allocation;
+static int volume_failure, outstanding, fail_allocation, environment_mode;
+static DWORD WINAPI checked_environment(LPCSTR name, LPSTR output, DWORD capacity)
+{
+    if (environment_mode == 1 && capacity) return capacity + 1;
+    if (environment_mode == 2 && capacity) { SetLastError(ERROR_ENVVAR_NOT_FOUND); return 0; }
+    if (environment_mode == 3) return 65536;
+    return GetEnvironmentVariableA(name, output, capacity);
+}
 static PVOID NTAPI counted_alloc(PVOID heap, ULONG flags, SIZE_T size)
 {
     PVOID p;
@@ -121,6 +128,7 @@ static BOOL WINAPI fixed_volume(LPCWSTR root, LPWSTR volume, DWORD volume_size,
 #define GetShortPathNameW fixed_short
 #define GetComputerNameW fixed_computer
 #define GetVolumeInformationW fixed_volume
+#define GetEnvironmentVariableA checked_environment
 #define RtlAllocateHeap counted_alloc
 #define RtlFreeHeap counted_free
 #include "../../../src/mvdm/oemuni/file.c"
@@ -274,6 +282,36 @@ int main(void)
         if (GetComputerNameOem(output,&actual) || GetLastError()!=ERROR_NOT_ENOUGH_MEMORY || outstanding) return 31;
         conversion_status=0;
         puts("S37_SHORTPATH_COMPUTER_CAPACITY_LENGTH_FAILURE_CLEANUP_OK");
+    }
+    {
+        static const DWORD capacities[] = {0,1,2,3,65536};
+        unsigned i;
+        int failures = 0;
+        if (GetACP() != 1252) return 32;
+        if (!SetEnvironmentVariableW(L"S37_ENV_DBCS", L"\x00a7")) return 33;
+        if (WideCharToMultiByte(932,0,L"\x00a7",-1,expected,sizeof(expected),NULL,NULL)!=3) return 34;
+        for (i=0;i<sizeof(capacities)/sizeof(capacities[0]);++i) {
+            DWORD cap=capacities[i], wanted=cap<3?3:2;
+            memset(output,0x5a,sizeof(output));
+            actual=GetEnvironmentVariableOem("S37_ENV_DBCS",cap?output:NULL,cap);
+            if (actual!=wanted || (cap<3?output[0]!=0x5a:memcmp(output,expected,3)) || outstanding)
+                ++failures;
+            printf("S37_ENV_DBCS cap=%lu actual=%lu expected=%lu failures=%d\n",cap,actual,wanted,failures);
+        }
+        if (failures) return 36;
+        puts("S37_ENV_ANSI_ONE_OEM_TWO_BYTE_CAPACITIES_OK");
+        for (environment_mode=1;environment_mode<=4;++environment_mode) {
+            DWORD error=environment_mode==2?ERROR_ENVVAR_NOT_FOUND:
+                environment_mode==4?ERROR_NOT_ENOUGH_MEMORY:ERROR_MORE_DATA;
+            fail_allocation=environment_mode==4;
+            memset(output,0x5a,sizeof(output));
+            SetLastError(0);
+            actual=GetEnvironmentVariableOem("S37_ENV_DBCS",output,sizeof(output));
+            if (actual || GetLastError()!=error || output[0]!=0x5a || outstanding) return 37;
+        }
+        fail_allocation=environment_mode=0;
+        if (!SetEnvironmentVariableW(L"S37_ENV_DBCS",NULL)) return 35;
+        puts("S37_ENV_GROWTH_REMOVAL_OVERSIZE_ALLOCATION_CLEANUP_OK");
     }
     return 0;
 }

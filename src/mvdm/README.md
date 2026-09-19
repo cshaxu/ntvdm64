@@ -6,8 +6,9 @@ checks completion against the allocated capacity, preserves empty output,
 stops at the first failed conversion and returns the converted OEM length.
 Original BaseClient `base/win32/client/process.c::GetEnvironmentVariableA`
 provides the capacity-clamping and converted-length precedent; no new
-environment provider is introduced. Short-query ANSI sizing remains under
-review, not claimed as complete DBCS acceptance.
+environment provider is introduced. A complete ANSI query now precedes OEM
+byte sizing, so short queries return required OEM capacity rather than ANSI
+length. Growth, disappearance and allocation/size failure keep bounded cleanup.
 [S37 evidence](../../docs/etc/evidence/m0-t420-s37-oemuni-capability-review.md).
 
 MVDM-HOST-DIV-276: OEM short paths use complete Unicode queries and actual
@@ -22,10 +23,6 @@ required OEM bytes before conversion. Search returns converted byte length
 and prefix offset. Original owner conversion and resource cleanup remain.
 Volume-name and filesystem-name conversion likewise retain actual capacity;
 original conversion failure and finally cleanup handle insufficient space.
-Directory/search temporary Unicode storage is sized by its own full query,
-not the OEM caller's capacity. Query growth/failure and unrepresentable
-lengths fail before conversion; representable output capacity is saturated
-at the original USHORT limit instead of wrapping.
 Directory/search temporary Unicode storage is sized by its own full query,
 not the OEM caller's capacity. Query growth/failure and unrepresentable
 lengths fail before conversion; representable output capacity is saturated
