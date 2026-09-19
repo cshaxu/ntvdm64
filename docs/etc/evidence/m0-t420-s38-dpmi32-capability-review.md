@@ -278,3 +278,29 @@ debug path in `486/dxint31.asm` uses guest MOV DRx in Store/Load_DBG_Regs,
 not BOP 0E. Zero hits at that slot cannot prove missing debug capability.
 Actual watchpoint behavior remains unverified; these source routes are not
 runtime success claims.
+
+## Watchpoint Admission/Execution Gap (Open)
+
+The independent `dpmi_watchpoint.asm` probe installs exception 1, calculates
+the linear address of its byte, sets a write watchpoint, writes that byte,
+then checks delivery, status/reset and removal. r1 mistakenly used 0Axx from
+stale internal function comments; `s38-watchpoint-r1` exits 1 at setup. The
+actual dispatch table selects 0B00-0B03. r2 corrects those numbers and adds
+setup attribution; `s38-watchpoint-r2` exits 1 at stage 2 after successful
+watchpoint registration but without the required one-handler result. Later
+status/reset/removal assertions were not reached and are not passing evidence.
+The r2 binary lives under `build/M0-T420/S38/watchpoint-r2`.
+
+Correction to the preceding source-route interpretation: immediately before
+the dispatch entries, `486/dxint31.asm` sets NO386=1 without WOW_x86 and
+includes 0Bxx only when NO386=0. The portable MOV DRx source alone therefore
+does not prove a selected guest entry. Current CPU40 `dpmidata.h` maps
+DpmiSetDebugRegisters to DpmiIllegalFunction, which does not enforce failure
+CF. This is a concrete contract-gap candidate: guest registration succeeds
+without proven CPU breakpoint installation. It remains to verify the loaded
+guest-to-BOP path and bind the original service to existing CPU debug state;
+do not label the watchpoint capability passed or silently exclude it.
+
+Original `dpmi32/i386/dpmi386.c::DpmiSetDebugRegisters` and CCPU `c_debug.c`
+are the next bounded source owners to compare. This discovery does not admit
+a replacement debugger, new execution profile or guest-media modification.

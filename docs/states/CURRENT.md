@@ -45,6 +45,11 @@ Real timer IRQ and nested-fault routes now pass all three code/frame variants.
 Unhandled 16/32-bit divide reflection passes after correcting the original
 DWORD IRET EFLAGS offset (DIV-280); no replacement provider or guest mutation.
 The evidence distinguishes earlier timeouts from direct source/layout proof.
+VCD discovery/version/port-range/refusal passes real direct/nested probes.
+The new watchpoint probe exposes an open failure: INT31/0B00 registration
+succeeds but its write does not satisfy the required exception-1 delivery.
+Original debug-service-to-CCPU binding is under review; S38 cannot close on
+the earlier generic regression results alone.
 
 ## S37 Closure Record
 
