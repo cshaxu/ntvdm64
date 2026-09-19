@@ -29,6 +29,7 @@ start:
     jz fail_query
     or dx, dx
     jz fail_query
+    mov [initial_free_kb], dx
 
     mov dx, 64                     ; Allocate 64 KiB extended block
     mov ah, 09h
@@ -181,6 +182,10 @@ start:
     mov word [xms_handle], 0
 
     ; Query UMB availability via an intentionally oversized allocation.
+    mov ah, 08h
+    call far [xms_entry]
+    cmp dx, [initial_free_kb]
+    jne fail_query                 ; all test-owned XMS capacity restored
     mov dx, 0FFFFh
     mov ah, 10h
     call far [xms_entry]
@@ -295,6 +300,7 @@ print_hex:
 
 xms_entry       dw 0, 0
 xms_handle      dw 0
+initial_free_kb dw 0
 umb_handle      dw 0
 move_length     dd 8
 move_src_handle dw 0

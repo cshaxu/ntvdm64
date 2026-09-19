@@ -76,6 +76,66 @@ this four-case gate. This bounded S35 P1 delivery does not close S35.
 
 ## Remaining closure work
 
+### Original dispatch/caller ledger
+
+The selected `xmsdisp.c::apfnXMSSvc` contains twelve entries. The following
+ledger distinguishes public guest witnesses from per-entry trace coverage;
+a passing public function is not represented as an independently logged BOP.
+Caller paths below are relative to `src/mvdm/dos/v86/dev/himem`.
+
+| Host provider | Original guest caller | Current evidence/disposition |
+| --- | --- | --- |
+| xmsA20 | himem1.asm, himem2.asm | Public local enable/query/disable passes. Actual alias-address wrap and full initial-state restoration still need an explicit witness. |
+| xmsMoveBlock | himem5.asm | Conventional-to-XMS and reverse data comparison, forward overlap and odd-length rejection pass. |
+| xmsAllocBlock | himem4.asm | Allocation, excessive-size rejection and post-free reuse pass. |
+| xmsFreeBlock | himem4.asm | Release and repeated-free rejection pass. |
+| xmsSysPageSize | No caller found in selected MVDM text | Full-tree symbol search finds declaration, definition and table slot only; no original guest XMSSVC invocation found. Do not invent a caller or count this as executed. |
+| xmsQueryExtMem | himem2.asm initialization | Source-connected to original HIMEM boot; public presence/free-memory witnesses pass, but no independent entry trace is claimed. |
+| xmsInitUMB | himem2.asm initialization | Source-connected to boot UMB setup; boot-driver allocation/release witness passes. |
+| xmsRequestUMB | himem4.asm | Boot oversized request, successful allocation, and post-boot no-free-block result pass. |
+| xmsReleaseUMB | himem4.asm | Boot release and double-release rejection pass. |
+| xmsNotifyHookI15 | himem.asm initialization | Source-connected to UpdateKbdInt15; default AH=88 and reserved 128KB control pass, without claiming an independent BOP trace. |
+| xmsQueryFreeExtMem | himem4.asm | Public largest/total query returns nonzero; exact free-total restoration across repeated allocations remains to be asserted. |
+| xmsReallocBlock | himem4.asm | Grow 64KB to 128KB, query size and verify retained bytes pass. Shrink/relocation/exhaustion details belong in the remaining lifecycle matrix and S36 allocator acceptance, not an assumed pass. |
+
+The existing lock-count query and repeated-unlock tests cover HIMEM-owned
+public policy; lock/unlock are not extra host dispatch slots. The selected
+eight-source manifest and the outgoing bounded commit/decommit/move bindings
+remain distinct from the twelve-entry guest-service table. Remaining S35
+verification must include real A20 state effects and resource restoration,
+not only table inclusion or host-only fixture results.
+
+The free-total gap now has an explicit public witness: the guest stores the
+initial XMS AH=08 DX total, then asserts equality after allocate/move/grow,
+lock/unlock, free, error cases and a second allocate/free. New fixture
+`guest-free-total-r1` passed all four direct/profile/nested/repeat routes
+under prefix `s35-free-total-r1` on the deployed cleanup candidate. This
+proves restoration of the test-owned XMS capacity, not all worker resources
+or host-memory lease counters. No product or original guest-media change.
+
+The boot driver now adds a read-only A20 address comparison: with interrupts
+saved/disabled, compare 256 bytes at 0000:0000 and FFFF:0010, bracketed by
+public HIMEM local-enable/local-disable calls, and verify the initial A20
+query state is restored before restoring flags. It never writes IVT/HMA.
+`guest-a20-r2`, prefix `s35-a20-r2`, passes all four XMS routes. Its profile
+emits `S35_XMS_BOOT_A20_ALIAS_STATE_RESTORED_OK`, not the distinct
+`S35_XMS_BOOT_A20_OFF_ON_OFF_ALIAS_OK` marker. Therefore this configuration
+starts with A20 already enabled: non-aliasing and nested state preservation
+are proven, while actual disabled wrap remains unverified. Do not force away
+the original enable-count ownership or claim that this run tested OFF/ON/OFF.
+
+The subsequent low-DOS control closes the physical-wrap witness:
+`guest-a20-low-r1` is built with `-LowDos`, and
+`s35-a20-low-r1.txt.console.txt` emits
+`S35_XMS_BOOT_A20_OFF_ON_OFF_ALIAS_OK`, the UMB boot marker, default INT15
+zero and the XMS core marker; launcher 28248 exits 0. This uses only a short
+child-process environment to isolate the already known COMMAND startup
+failure. It is a real A20 capability witness, not a product environment
+workaround or acceptance of ordinary-environment low-DOS startup. The fixture
+uses public balanced local-enable/disable calls and restores flags/state;
+no internal guest counter, original binary or IVT/HMA contents are patched.
+Owned test processes were cleaned and default test fixtures restored.
+
 ### 2026-09-19 low-DOS environment isolation
 
 The reserved-INT15 timeout is not sufficient evidence of an XMS failure.

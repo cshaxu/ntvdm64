@@ -5,6 +5,7 @@ param(
     [string]$RuntimeTestRoot = 'O:\winnt\tests',
     [switch]$ReserveInt15,
     [switch]$StartupFault,
+    [switch]$LowDos,
     [string]$NasmExecutable = 'nasm.exe'
 )
 
@@ -38,7 +39,9 @@ $compile = "call `"$vs`" -arch=x86 -host_arch=x86 >nul && cl /nologo /MT /W4 /I 
 cmd.exe /d /s /c $compile
 if ($LASTEXITCODE -ne 0) { throw "S35 profile builder failed: $LASTEXITCODE" }
 $profileArguments = @($build, $RuntimeTestRoot)
-if (!$ReserveInt15) { $profileArguments += '--default-int15' }
+if (!$ReserveInt15) {
+    $profileArguments += $(if ($LowDos) {'--default-low'} else {'--default-int15'})
+}
 & (Join-Path $build 'profile.exe') @profileArguments
 if ($LASTEXITCODE -ne 0) { throw "S35 PIF generation failed: $LASTEXITCODE" }
 [ordered]@{
@@ -46,6 +49,7 @@ if ($LASTEXITCODE -ne 0) { throw "S35 PIF generation failed: $LASTEXITCODE" }
     source = 'tests/observation/xms_capability.asm'
     int15ReservedKb = $(if ($ReserveInt15) {128} else {0})
     startupFault = [bool]$StartupFault
+    lowDos = [bool]($LowDos -or $ReserveInt15)
     outputs = @('X35.COM','U35.COM','U35.PIF','U35.NT','U35AUTO.NT','X35UMB.SYS','R35.BAT' | ForEach-Object {
         [ordered]@{ path = $_; sha256 = (Get-FileHash -LiteralPath (Join-Path $build $_) -Algorithm SHA256).Hash.ToLowerInvariant() }
     })

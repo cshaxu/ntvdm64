@@ -81,8 +81,46 @@ fault_witness_failed:
     jnz failure
     cmp bl, 0B2h
     jne failure
+    ; Read-only A20 witness before DOS claims HMA. Never write IVT or HMA.
+    pushf
+    cli
+    mov ah, 07h
+    call far [entry]
+    mov [initial_a20], ax
+    mov ah, 05h
+    call far [entry]
+    cmp ax, 1
+    jne a20_failed
+    call compare_a20_alias
+    setz byte [a20_bad]           ; enabled: low IVT and HMA must differ
+    mov ah, 06h
+    call far [entry]
+    cmp ax, 1
+    jne a20_failed
+    mov ah, 07h
+    call far [entry]
+    cmp ax, [initial_a20]
+    jne a20_failed
+    or ax, ax
+    jnz a20_checked
+    call compare_a20_alias
+    jne a20_failed               ; disabled: exact 1MB alias must match
+a20_checked:
+    popf
+    cmp byte [a20_bad], 0
+    jne failure
+    mov dx, a20_success
+    cmp word [initial_a20], 0
+    jne a20_print
+    mov dx, a20_wrap_success
+a20_print:
+    mov ah, 09h
+    int 21h
     mov dx, success
     jmp show
+a20_failed:
+    popf
+    jmp failure
 failure:
     mov dx, failed
 show:
@@ -99,6 +137,31 @@ done:
     popf
     retf
 success db 'S35_XMS_BOOT_UMB_ALLOC_RELEASE_DOUBLE_FREE_OK',13,10,'$'
+a20_success db 'S35_XMS_BOOT_A20_ALIAS_STATE_RESTORED_OK',13,10,'$'
+a20_wrap_success db 'S35_XMS_BOOT_A20_OFF_ON_OFF_ALIAS_OK',13,10,'$'
+initial_a20 dw 0
+a20_bad db 0
+compare_a20_alias:
+    push ds
+    push es
+    push si
+    push di
+    push cx
+    xor ax, ax
+    mov ds, ax
+    dec ax
+    mov es, ax
+    xor si, si
+    mov di, 10h
+    mov cx, 128
+    cld
+    repe cmpsw
+    pop cx
+    pop di
+    pop si
+    pop es
+    pop ds
+    ret
 failed db 'S35_XMS_BOOT_UMB_FAIL',13,10,'$'
 %ifdef STARTUP_FAULT
 fault_marker db 'S35_TEST_DRIVER_STARTUP_FAULT',13,10,'$'
