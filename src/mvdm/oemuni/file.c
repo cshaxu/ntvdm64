@@ -1080,12 +1080,16 @@ Routine Description:
     UNICODE_STRING UnicodeString;
     OEM_STRING     OemString;
     LPWSTR UnicodeBuffer;
+    /* DIVERGENCE MVDM-HOST-DIV-276: obtain the complete bounded computer
+       name independently of the caller's OEM capacity. */
+    DWORD UnicodeCapacity = MAX_COMPUTERNAME_LENGTH+1;
+    NTSTATUS Status;
 
     //
     // Work buffer needs to be twice the size of the user's buffer
     //
 
-    UnicodeBuffer = RtlAllocateHeap(RtlProcessHeap(), 0, *nSize * sizeof(WCHAR));
+    UnicodeBuffer = RtlAllocateHeap(RtlProcessHeap(), 0, UnicodeCapacity * sizeof(WCHAR));
     if (!UnicodeBuffer) {
         SetLastError(ERROR_NOT_ENOUGH_MEMORY);
         return(FALSE);
@@ -1095,7 +1099,7 @@ Routine Description:
     // Set up an ANSI_STRING that points to the user's buffer
     //
 
-    OemString.MaximumLength = (USHORT) *nSize;
+    OemString.MaximumLength = (USHORT) min(*nSize,65535);
     OemString.Length = 0;
     OemString.Buffer = lpBuffer;
 
@@ -1103,7 +1107,7 @@ Routine Description:
     // Call the UNICODE version to do the work
     //
 
-    if (!GetComputerNameW(UnicodeBuffer, nSize)) {
+    if (!GetComputerNameW(UnicodeBuffer, &UnicodeCapacity)) {
         RtlFreeHeap(RtlProcessHeap(), 0, UnicodeBuffer);
         return(FALSE);
     }
@@ -1113,7 +1117,15 @@ Routine Description:
     //
 
     RtlInitUnicodeString(&UnicodeString, UnicodeBuffer);
-    RtlUnicodeStringToOemString(&OemString, &UnicodeString, FALSE);
+    /* DIVERGENCE MVDM-HOST-DIV-276: conversion failure is not success;
+       publish the OEM requirement and preserve the name API error shape. */
+    Status = RtlUnicodeStringToOemString(&OemString, &UnicodeString, FALSE);
+    if ( !NT_SUCCESS(Status) ) {
+        *nSize = RtlUnicodeStringToOemSize(&UnicodeString);
+        RtlFreeHeap(RtlProcessHeap(), 0, UnicodeBuffer);
+        SetLastError(Status == STATUS_BUFFER_OVERFLOW ? ERROR_BUFFER_OVERFLOW : RtlNtStatusToDosError(Status));
+        return FALSE;
+    }
 
     *nSize = OemString.Length;
     RtlFreeHeap(RtlProcessHeap(), 0, UnicodeBuffer);

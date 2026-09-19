@@ -1,5 +1,11 @@
 # mvdm
 
+MVDM-HOST-DIV-276: OEM short paths use complete Unicode queries and actual
+OEM capacity/length, retaining zero on conversion failure through finally.
+Computer names use the original documented maximum Unicode name size and
+report OEM conversion failure/required bytes instead of false success.
+[S37 evidence](../../docs/etc/evidence/m0-t420-s37-oemuni-capability-review.md).
+
 MVDM-HOST-DIV-275: `oemuni/{file.c,process.c}` bounds current/search/system/
 Windows/temp directory conversion by the actual caller capacity and computes
 required OEM bytes before conversion. Search returns converted byte length

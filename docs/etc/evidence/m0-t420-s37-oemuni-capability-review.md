@@ -623,3 +623,42 @@ file.c `a3184eb571d6822577b52849e2da3955689899ecc6dfd9df100ff3f3636be5df`
 and process.c `38c9125f9f3c43f32f696616e565e63b8f056da7ec264d980a5e5278cc640468`.
 Short-path/computer-name repairs and environment-boundary reconciliation
 remain S37 work; no package closure is claimed.
+
+## Short-path and computer-name correction
+
+DIV-276 retains the two original OEMUNI owners and their Win32/RTL
+dependencies. Short-path Unicode input/output conversion and finally cleanup
+remain in process.c; the complete-query sizing principle already justified
+by original BaseClient is reused, not a new path resolver. Original
+BaseClient vdm.c's GetShortPathName contract explicitly returns copied length
+without NUL, required capacity on a short output and zero on failure.
+Computer-name Unicode storage uses the existing MAX_COMPUTERNAME_LENGTH
+contract instead of the caller's unrelated OEM capacity. No full BaseClient
+import, replacement conversion provider, adapter or overlay is necessary.
+
+Short-path output now uses actual OEM capacity (saturated to the original
+USHORT limit), encoded required/copied lengths, and zero ReturnValue on
+conversion failure so the original finally return cannot mask it. In the
+computer-name function, conversion failure returns FALSE, reports required
+OEM bytes, releases temporary Unicode storage and maps insufficient space
+to ERROR_BUFFER_OVERFLOW. Other conversion status failures retain their
+Win32 mapping. Unicode retrieval failure still follows the original cleanup.
+
+All six x86 OEMUNI/DEM fixtures pass. Added short-path tests cover the same
+six capacities, NULL output size query and injected conversion failure with
+zero live temporary allocations. Computer-name tests cover insufficient
+output (required 3), success with declared capacity 65536 (two encoded bytes),
+NULL/zero-capacity query, and conversion failure. Existing real host fixture
+and injected font/DEM cases continue passing. These CP932 edge tests remain
+mock-boundary evidence; no real DBCS-host acceptance is claimed.
+
+Formal x86 product rebuild succeeds; file.c delta is 16 added / 4 removed
+lines and process.c is 19 added / 13 removed lines, including comments.
+Deployed worker SHA-256:
+`c0f5c5ba1d7256fcddf39b5a26166159f81bf9e5763e7b15bf2f63708566e346`;
+DLL `29dd39ccd5f0df842b7105cb0035d80f766056f0df0d2773c288155df70d575b`.
+Expanded real DOS direct/nested tests pass under s37-short-computer-guest-r1,
+including the host-matched DOS computer name. Guest media remain immutable.
+Environment-boundary and final package reconciliation remain S37 work.
+All 17 Console-text-gated product regressions pass under
+s37-short-computer-product-r1, including EDIT and original COMMAND exit values.

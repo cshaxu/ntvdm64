@@ -925,6 +925,8 @@ GetShortPathNameOem(
 	LPWSTR	    lpDstW = NULL;
 	/* The original finally block returns this value after every early path. */
 	DWORD	    ReturnValue = 0;
+    /* DIVERGENCE MVDM-HOST-DIV-276: Unicode and OEM capacities differ. */
+    DWORD UnicodeCapacity;
 
     if (lpSrc == NULL) {
 	SetLastError(ERROR_INVALID_PARAMETER);
@@ -940,39 +942,43 @@ GetShortPathNameOem(
 	    BaseSetLastNTError(Status);
 	    return 0;
 	    }
-	if (ARGUMENT_PRESENT(lpDst) && cchDst > 0) {
+	UnicodeCapacity = GetShortPathNameW(UString.Buffer,NULL,0);
+    if (!UnicodeCapacity) return 0;
+    if (UnicodeCapacity > 32767) { BaseSetLastNTError(STATUS_BUFFER_OVERFLOW); return 0; }
 	    lpDstW = RtlAllocateHeap(RtlProcessHeap(), 0,
-					cchDst * sizeof(WCHAR)
+					UnicodeCapacity * sizeof(WCHAR)
 					);
 	    if (lpDstW == NULL) {
 		SetLastError(ERROR_NOT_ENOUGH_MEMORY);
 		return 0;
 		}
-	    }
-	else {
-	    lpDstW = NULL;
-	    cchDst = 0;
-	    }
 	ReturnValue = GetShortPathNameW(UString.Buffer,
 					lpDstW,
-					cchDst
+					UnicodeCapacity
 					);
-	if (ReturnValue != 0 && ReturnValue <= cchDst) {
-	    if (ARGUMENT_PRESENT(lpDst)) {
+	if (ReturnValue != 0 && ReturnValue < UnicodeCapacity) {
+        /* DIVERGENCE MVDM-HOST-DIV-276: size the full OEM result first. */
+        RtlInitUnicodeString(&UStringRet,lpDstW);
+        ReturnValue = RtlUnicodeStringToOemSize(&UStringRet);
+	    if (ARGUMENT_PRESENT(lpDst) && ReturnValue <= cchDst) {
 		OemString.Buffer = lpDst;
-		OemString.MaximumLength = (USHORT)(cchDst * sizeof(WCHAR));
-		UStringRet.Buffer = lpDstW;
-		UStringRet.Length = (USHORT)(ReturnValue * sizeof(WCHAR));
+		OemString.MaximumLength = (USHORT)min(cchDst,65535);
 		Status = RtlUnicodeStringToOemString(&OemString,
 						     &UStringRet,
 						     FALSE
 						     );
 		if (!NT_SUCCESS(Status)) {
 		    BaseSetLastNTError(Status);
+		    ReturnValue = 0;
 		    return 0;
 		    }
+        ReturnValue = OemString.Length;
 		}
 	    }
+    else if (ReturnValue) {
+        BaseSetLastNTError(STATUS_BUFFER_OVERFLOW);
+        ReturnValue = 0;
+        }
 	}
     finally {
 	    RtlFreeUnicodeString(&UString);

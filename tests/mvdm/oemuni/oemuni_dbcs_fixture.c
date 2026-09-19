@@ -9,6 +9,7 @@
 /* Test-only CP932 boundary: never changes the host/system code page. */
 static const WCHAR full_path[] = L"C:\\\x8868\\x.txt";
 static int path_mode;
+static NTSTATUS conversion_status;
 static ULONG NTAPI fixed_path(PCWSTR input, ULONG bytes, PWSTR output, PWSTR *part)
 {
     ULONG size = sizeof(full_path);
@@ -26,6 +27,7 @@ static ULONG NTAPI fixed_path(PCWSTR input, ULONG bytes, PWSTR output, PWSTR *pa
 
 static NTSTATUS NTAPI cp932_oem(POEM_STRING dst, PUNICODE_STRING src, BOOLEAN allocate)
 {
+    if (conversion_status) return conversion_status;
     int size = WideCharToMultiByte(932, 0, src->Buffer, src->Length / 2,
         NULL, 0, NULL, NULL);
     if (!size) return (NTSTATUS)0xc000000d;
@@ -246,14 +248,32 @@ int main(void)
         fail_allocation = 0;
         memset(output, 0x5a, sizeof(output));
         actual = GetShortPathNameOem("x.txt", output, 11);
-        printf("S37_SHORTPATH_OPEN_DEFECT result=%lu expected_required=12 boundary=%u\n",
-            actual, (unsigned char)output[11]);
-        if (actual != 10 || output[11] != 0) return 24;
+        if (actual != 12 || output[0] != 0x5a || output[11] != 0x5a) return 24;
+        for (i=0; i<sizeof(capacities)/sizeof(capacities[0]); ++i) {
+            DWORD cap=capacities[i];
+            memset(output,0x5a,sizeof(output));
+            actual=GetShortPathNameOem("x.txt",output,cap);
+            if (actual!=(cap<12 ? 12u:11u) || outstanding ||
+                (cap<12 ? output[0]!=0x5a : memcmp(output,expected,12))) return 26;
+        }
+        if (GetShortPathNameOem("x.txt",NULL,0)!=12 || outstanding) return 27;
+        conversion_status=STATUS_NO_MEMORY;
+        if (GetShortPathNameOem("x.txt",output,12) || GetLastError()!=ERROR_NOT_ENOUGH_MEMORY || outstanding) return 28;
+        conversion_status=0;
         memset(output, 0x5a, sizeof(output));
         actual = 2;
         SetLastError(0);
-        if (!GetComputerNameOem(output, &actual) || actual != 0 || output[0] != 0x5a) return 25;
-        puts("S37_COMPUTER_CONVERSION_FAILURE_FALSE_SUCCESS_REPRODUCED_NOT_ACCEPTED");
+        if (GetComputerNameOem(output, &actual) || actual != 3 || output[0] != 0x5a ||
+            GetLastError()!=ERROR_BUFFER_OVERFLOW || outstanding) return 25;
+        actual=65536;
+        if (!GetComputerNameOem(output,&actual) || actual!=2 || output[2] || outstanding) return 29;
+        actual=0;
+        if (GetComputerNameOem(NULL,&actual) || actual!=3 || GetLastError()!=ERROR_BUFFER_OVERFLOW || outstanding) return 30;
+        actual=12;
+        conversion_status=STATUS_NO_MEMORY;
+        if (GetComputerNameOem(output,&actual) || GetLastError()!=ERROR_NOT_ENOUGH_MEMORY || outstanding) return 31;
+        conversion_status=0;
+        puts("S37_SHORTPATH_COMPUTER_CAPACITY_LENGTH_FAILURE_CLEANUP_OK");
     }
     return 0;
 }
