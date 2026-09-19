@@ -304,3 +304,34 @@ do not label the watchpoint capability passed or silently exclude it.
 Original `dpmi32/i386/dpmi386.c::DpmiSetDebugRegisters` and CCPU `c_debug.c`
 are the next bounded source owners to compare. This discovery does not admit
 a replacement debugger, new execution profile or guest-media modification.
+
+## Watchpoint BOP Attribution
+
+The existing test-only DPMI wrapper and trace builder now accept an explicit
+log path, leaving product sources unchanged. Build root
+`build/M0-T420/S38/watchpoint-trace-r1` records reused formal input hashes;
+observed worker SHA256 is
+`2174e1e52e51f8729ca96e7ccc9c693d13aaf39960bf0c464c011d6bd06b4c2c`.
+It runs only in the independent `O:/winnt/tests/D38TRACE` package with
+byte-copied media. The official package worker was not replaced.
+
+The first isolated-package attempt exited before task completion: its long
+root exceeds the original 64-byte SHELL-value layout checked by
+`product-package/package_layout.c`. No DPMI trace was produced. A temporary
+unused V: mapping to `O:/winnt/tests` shortened the same package root to
+`V:/D38TRACE`; that mapping was removed in finally and its absence checked.
+
+`s38-watchpoint-trace-r2.txt` then exits 1 with `S38_FAIL_STAGE=2`.
+`s38-watchpoint-dispatch-r1.events.txt` line 690 records
+`after index=0E PE=1 CS:IP=00C7:4EF1`, DS=00B7 and SI=7B80. This confirms
+the real watchpoint request reaches the selected BOP 0E route; it is not
+lost in CLI admission or guest dispatch. The current macro maps that route
+to DpmiIllegalFunction rather than publishing debug registers.
+
+Bounded original owners identified for repair design are
+`dpmi32/i386/dpmi386.c::DpmiSetDebugRegisters`, external comparison
+`v86/monitor/i386/thread.c::ThreadSetDebugContext`, and CCPU
+`ccpu386/mov.c::MOV_DR` plus `c_debug.c::setup_breakpoints`. MOV_DR already
+applies valid-bit masks and rebuilds CPU breakpoint tables. A new breakpoint
+engine is neither needed nor admitted. The service restoration still needs
+source-shaped composition, pointer-span and rollback/lifecycle verification.

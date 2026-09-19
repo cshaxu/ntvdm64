@@ -3,10 +3,13 @@
 #include "../../src/mvdm/dpmi32/dpmi32.c"
 #undef DpmiDispatch
 #include <stdio.h>
+#ifndef DPMI_TRACE_LOG
+#define DPMI_TRACE_LOG "O:\\winnt\\logs\\s36-dpmi-dispatch-r1.events.txt"
+#endif
 
 static LONG native_fault(EXCEPTION_POINTERS *fault)
 {
-    FILE *log = fopen("O:\\winnt\\logs\\s36-dpmi-dispatch-r1.events.txt", "a");
+    FILE *log = fopen(DPMI_TRACE_LOG, "a");
     if (log) {
         fprintf(log, "native-exception=%08lX address=%p info=%08lX,%08lX\n",
             fault->ExceptionRecord->ExceptionCode,
@@ -36,7 +39,7 @@ static void snapshot(FILE *log, const char *phase)
 
 VOID DpmiDispatch(VOID)
 {
-    FILE *log = fopen("O:\\winnt\\logs\\s36-dpmi-dispatch-r1.events.txt", "a");
+    FILE *log = fopen(DPMI_TRACE_LOG, "a");
     /* Before.index is the previous dispatch; after.index is this dispatch. */
     if (log) snapshot(log, "before");
     __try { s36_original_DpmiDispatch(); }

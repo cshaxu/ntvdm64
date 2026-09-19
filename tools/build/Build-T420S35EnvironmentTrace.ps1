@@ -33,6 +33,11 @@ if ($Boundary -eq 'dpmi') {
         throw 'Missing original DPMI owner compile flags'
     }
     $flags = $graph[$ownerRow + 1].Substring('  dpmi_cflags = '.Length).Replace('$:', ':')
+    $traceLog = [IO.Path]::GetFullPath($EnvironmentTraceLog).Replace('\', '/')
+    if ($traceLog -notmatch '^O:/winnt/logs/[A-Za-z0-9_.-]+$') {
+        throw 'DPMI trace must name a file directly below O:\winnt\logs'
+    }
+    $flags += ' /DDPMI_TRACE_LOG=\"' + $traceLog + '\"'
 }
 $object = Join-Path $build 'observed-owner.obj'
 $library = Join-Path $build $libraryName
