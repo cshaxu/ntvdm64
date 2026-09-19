@@ -38,6 +38,13 @@ GLOBAL BOOL show_exceptions = FALSE;
 GLOBAL BOOL trap_exceptions = FALSE;
 LOCAL  BOOL first_exception = TRUE;
 
+#ifdef PROD
+/* DIVERGENCE(MVDM-HOST-DIV-271): trace_init deliberately leaves trace_file
+ * unbound in the original production profile.  The non-product exception
+ * environment switch must therefore be inert here, rather than turn an
+ * externally supplied CCPU_SHOW_EXCEPTIONS value into fprintf(NULL,...). */
+#define check_exception_env()
+#else
 #define check_exception_env()						\
 {									\
 	if (first_exception)						\
@@ -52,6 +59,7 @@ LOCAL  BOOL first_exception = TRUE;
 	}								\
 	first_exception = FALSE;					\
 }
+#endif
 
 IMPORT FILE *trace_file;
 IMPORT IBOOL took_absolute_toc;

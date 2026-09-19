@@ -20,11 +20,15 @@ for(const [start,end] of [['252c259','312c320'],['312c320','373c382'],['373c382'
 }
 const block=/if\(GET_PE\(\) && host_exint_hook\([^\n]+\) \{\n[\s\S]*?c_cpu_continue\(\);[^\n]*\n[\t ]*\}/g;
 assert.equal([...current.matchAll(block)].length,5);
-const before=current.replace(/^[\t ]*\/\* DIVERGENCE: MVDM-HOST-DIV-268:.*\n/gm,'')
+const releaseGuard=/^#ifdef PROD\n\/\* DIVERGENCE\(MVDM-HOST-DIV-271\):[\s\S]*?^#define check_exception_env\(\)\n#else\n(#define check_exception_env\(\)[\s\S]*?^}\n)#endif\n/m;
+assert.match(current,releaseGuard,
+ 'Production must make the non-product CCPU_SHOW_EXCEPTIONS gate inert');
+const before=current.replace(releaseGuard,'$1')
+ .replace(/^[\t ]*\/\* DIVERGENCE: MVDM-HOST-DIV-268:.*\n/gm,'')
  .replace(block,s=>s.replace(') {',')').replace(/\n[\t ]*\}$/,''));
 const normalize=s=>s.replace(/^#include <yoda.h>\n/m,'')
  .replace(/^\s*IMPORT char \*host_getenv.*\n/m,'');
-assert.equal(normalize(before),normalize(original),'Only five registered brace corrections may differ from original exception logic');
+assert.equal(normalize(before),normalize(original),'Only DIV-268 and the PROD-only DIV-271 release gate may differ from original exception logic');
 const prelude=String.raw`
 #include <stdio.h>
 #include <stdint.h>
@@ -70,7 +74,8 @@ IBOOL took_absolute_toc;
 #define SET_ADDRESS_SIZE(v) (address=(v))
 #define SET_POP_DISP(v) (pop=(v))
 #define strcasecmp _stricmp
-static char *host_getenv(char *s) { (void)s;return NULL; }
+static int expose_exception_environment;
+static char *host_getenv(char *s) { (void)s;return expose_exception_environment?"1":NULL; }
 static void force_yoda(void) { abort(); }
 static void check_interface_active(int n) { (void)n; }
 static void c_cpu_reset(void) { resets++; }
@@ -132,6 +137,25 @@ int main(void) {
  return failures?1:0;
 }
 `;
+const prodHarness=String.raw`
+int main(void) {
+ trace_file=NULL;expose_exception_environment=1;
+ pe=0;hook_result=0;hook_calls=deliveries=resets=0;
+ doing_fault=doing_contributory=doing_page_fault=doing_double_fault=0;
+ took_absolute_toc=0;EXT=EXTERNAL;ip=0x2222;CCPU_save_EIP=0xfffe;
+ operand=address=pop=7;observed_push=observed_priv=-1;observed_error=observed_vector=-1;
+ if(!setjmp(checkpoint)) Int0();
+ if(show_exceptions || trap_exceptions || deliveries!=1 || observed_vector!=0 ||
+    observed_error!=0 || observed_priv!=0) {
+  printf("FAIL PROD exception environment live=%d trap=%d deliveries=%d vector=%d error=%d priv=%d\\n",
+   show_exceptions,trap_exceptions,deliveries,observed_vector,observed_error,observed_priv);return 1;
+ }
+ printf("PASS PROD CCPU_SHOW_EXCEPTIONS is inert without trace_file\\n");
+ return 0;
+}
+`;
 for(const [name,source] of [['exception-profile',current],['exception-before',before]])
  fs.writeFileSync(path.join(out,name+'.c'),prelude+source.replace(/^#include[^\n]*\n/gm,'')+harness);
+fs.writeFileSync(path.join(out,'exception-prod-environment.c'),
+ prelude+'\n#define PROD 1\n'+current.replace(/^#include[^\n]*\n/gm,'')+prodHarness);
 console.log('PASS exact five-block source delta and pinned upstream patch hash');

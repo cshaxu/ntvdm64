@@ -6,6 +6,10 @@ cl /nologo /MT /W4 "%~1\exception-profile.c" /Fo"%~1\exception-profile.obj" /Fe"
 if errorlevel 1 exit /b %errorlevel%
 "%~1\exception-profile.exe"
 if errorlevel 1 exit /b %errorlevel%
+cl /nologo /MT /W4 "%~1\exception-prod-environment.c" /Fo"%~1\exception-prod-environment.obj" /Fe"%~1\exception-prod-environment.exe"
+if errorlevel 1 exit /b %errorlevel%
+"%~1\exception-prod-environment.exe"
+if errorlevel 1 exit /b %errorlevel%
 cl /nologo /MT /W4 "%~1\exception-before.c" /Fo"%~1\exception-before.obj" /Fe"%~1\exception-before.exe"
 if errorlevel 1 exit /b %errorlevel%
 "%~1\exception-before.exe"
