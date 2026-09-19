@@ -89,7 +89,7 @@ mirror/adapter changes, then commits and pushes.
 | S34 | `dos/command` capability closure | Direct/nested COMMAND child, including host-inherited and guest-created standard streams; `>`, `>>`, `<` and `|`; return/error and cleanup acceptance through first, second and third COMMAND depth. |
 | S35 | `xms.486` capability closure | Real DOS XMS allocate/move/overlap/free/A20 and failure/teardown acceptance. |
 | S36 | `suballoc` capability closure | Real XMS/DPMI-backed allocation, relocation, exhaustion/release and teardown acceptance. |
-| S37 | `oemuni` capability closure | Real DOS/Win16 OEM-Unicode non-ASCII path, buffer and failure acceptance. |
+| S37 | `oemuni` capability closure | OEMUNI interface/buffer/failure contracts and real DOS/PIF non-ASCII workloads; owner-approved Win16/debugger consumer acceptance is explicitly assigned to S40--S42 below, not claimed passed here. |
 | S38 | `dpmi32` capability closure | Real protected-mode selector/interrupt/memory/return/teardown acceptance. |
 | S39 | `dpmi` capability closure | Real DOSX BOP 53 activation, protected-to-real transition and repeated-entry release acceptance. |
 | S40 | `wow32` | Original provider load, task/callback, font/glyph, icon/cursor, scheduler and hard-error contract. |
@@ -216,6 +216,31 @@ matrix as its sole acceptance evidence.
 | S43 `vdd` | For every selected VDD consumer, prove provider load, request/notification, resource lifetime and unload/worker termination; otherwise prove complete product-profile exclusion and remove every thin substitute and stale consumer edge. |
 
 ## Package S exit criteria
+
+### Mandatory OEMUNI consumer acceptance transferred from S37
+
+The owner approves closing S37's verified OEMUNI interfaces and DOS/PIF
+scope while transferring the following still-unverified consumer workloads.
+This is an acceptance dependency, not a feature exclusion or a passing result.
+The [S37 evidence](../etc/evidence/m0-t420-s37-oemuni-capability-review.md)
+supplies API/buffer tests and the original caller ledger; those tests cannot
+substitute for the following receiver-owned evidence.
+
+| Acceptance item | Responsible S and original owner | Mandatory result before that S closes |
+| --- | --- | --- |
+| OEM-WOW-DIR | S40; `wow32/wdos.c`, `DIR_NT_TO_DOS` and related directory/environment synchronization | Reach the selected original WOW32 provider from a real Win16 task using a non-ASCII path. Prove OEM current-directory conversion, guest default drive/current directory and environment synchronization in both reached directions; invalid directory or conversion failure must not publish false state. Check subsequent task/parent usability and cleanup. |
+| OEM-WOW-DELETE | S40; `wow32/wkman.c::WK32WowDelFile` | Separately verify ordinary deletion and the retained-file branch: `GetFullPathNameOem`, `GetTempFileNameOem`, `MoveFileExOem`, final delete, rollback and temporary-file cleanup. Prove the branch condition rather than inferring it from ordinary delete success. Exercise the distinct font-removal fallback and its failure/cleanup contract. Real Win16 caller evidence is required; provider fault injection supplements hard-to-trigger branches. An unreachable branch needs source/provider proof and explicit owner-approved disposition, never silent omission. |
+| OEM-WIN16-INTEGRATION | S41; immutable WOW16 loader/task and original WOW32 consumers | Revalidate OEM-WOW-DIR and OEM-WOW-DELETE across actual guest task creation, callback/return and teardown, using S40 evidence as the baseline. Demonstrate non-ASCII names/content, failure mapping, absence of temporary-file/handle leakage, and a usable subsequent DOS workload. Keep the mandatory real `WRITE.EXE` acceptance; a test probe may cover branches WRITE does not exercise but cannot replace WRITE. |
+| OEM-DBG-PATH | S42; `dos/dem/demmisc.c::SignalSegmentNotice`, gated by `IsDebuggee` | A controlled debuggee with a non-ASCII module path must reach original full-path conversion and module notification, with correct path/length/termination, failed-path behavior, and debugger/task cleanup. If choosing the package's complete-profile-exclusion alternative, prove this consumer is absent too and remove its thin substitute; ordinary DOS runs, a map symbol or a host-only OEM call do not suffice. |
+
+Each receiver's admission brief, test matrix and closure evidence must name
+its items above and link concrete logs, artifact identities and outcomes.
+S40 owns implementation; S41 owns integrated guest revalidation, not a second
+conversion provider. A failed item blocks its receiver's closure until repaired
+or explicitly disposed by the owner. Passing COMMAND/MEM/EDIT remains an
+additional requirement for every receiver, not a replacement for these items.
+
+### Common package gates
 
 Every S records the exact original manifest and selected source hashes;
 classifies every manifest member as direct, same-shaped finite binding or

@@ -1262,3 +1262,53 @@ tests/docs excluded). No overlay grows. S37's mirror change since admission
 is now +192/-61 across six files; this is corrective growth, not diff removal.
 Real explicit PIF entry is now evidenced, but the previously recorded WOW/
 debugger workload dependencies still prevent claiming complete S37 acceptance.
+
+## S37 closure with explicitly accepted receiver obligations
+
+After delivery 6b80471d9 the owner approved closing the verified OEMUNI/DOS
+scope and transferring real WOW/debugger consumer acceptance, requiring that
+the receiving S briefs carry explicit additional criteria. This section
+supersedes the preceding provisional statements that those dependencies keep
+S37 open; it does not turn any unrun consumer workload into a pass.
+
+The proposal now binds four named acceptance items:
+
+- S40: OEM-WOW-DIR, original WOW directory/drive/environment synchronization,
+  including non-ASCII input, failed publication and task cleanup.
+- S40: OEM-WOW-DELETE, ordinary and retained-file delete branches, temporary
+  names, replace-existing rename, rollback, cleanup and separate font fallback.
+- S41: OEM-WIN16-INTEGRATION, real guest task/callback/return/teardown validation
+  of those S40 contracts, retaining mandatory WRITE and subsequent DOS usability.
+- S42: OEM-DBG-PATH, actual debuggee non-ASCII module-path conversion and
+  notification, failed-path behavior and cleanup, or the package's strictly
+  source-proven complete-profile-exclusion alternative.
+
+Each receiver must copy its named item into admission and test/closure evidence.
+API fixtures, linked symbols and ordinary DOS regressions cannot discharge
+these obligations. Branches lacking a real trigger retain boundary injection
+plus an explicit reachability disposition; they cannot silently disappear.
+Implementation stays with the original consumer owner; S41 revalidates rather
+than duplicates S40's implementation.
+
+The 28-function ledger is reconciled with later evidence: full/search/short
+path and expansion now have real detached-PIF proof; volume information has
+real DOS data checked against the host oracle. Host-only uncalled helpers,
+CP932 mock limits and the demonstrated immutable guest pure-profile defect
+remain classified as recorded above. Neither full DBCS-host nor Win16 success
+is asserted. The original disabled CreateProcessOem remains outside the 28.
+
+Closure rechecks confirm all 17 expected results match and all four deployed
+artifact hashes match the final repair record. No source/build input changed
+in this documentation-only delivery, so the final x86, ten fixture and OEM
+direct/nested/PIF evidence applies without another rebuild. S37 closes;
+T420 remains open, with S38 as the next sequential package.
+
+Final S37 change against 5ad0ac874: six mirror files +192/-61; non-mirror
+production code/header +72/-3; no new overlay. Documentation/tests are excluded.
+This is corrective growth, not autonomous-code reduction. The receiving
+packages cannot use this closure to waive their new mandatory tests.
+The six changed mirrors were also re-compared against pinned OpenNT with
+raw and end-of-line-normalized numstat: both give identical counts per file.
+cmdmisc.c is +201/-35; the other five retain the preceding table's +303/-99
+aggregate. These upstream totals include pre-S37 differences and must not be
+reported as changes introduced by S37.

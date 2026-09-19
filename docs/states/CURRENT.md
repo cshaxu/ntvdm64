@@ -2,77 +2,34 @@
 
 ## Current Work
 
-## Active Packet
+## Task Intermission
 
-**Active: M0 T420 S37**
+**No active M/T/S packet.** T420 remains open; S37 is closed under the
+owner-approved consumer-acceptance handoff below. The next sequential packet
+is S38 DPMI32 capability verification; this documentation delivery does not
+start its implementation.
 
-| Field | Record |
-| --- | --- |
-| Identifier Mode | M0 T420 S37 — Ordinary Mode, single implementer/reviewer. |
-| Candidate Proposal | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md), S37. |
-| Admission And Approval | Standing sequential S authorization; owner additionally approves detached-PIF broker Console binding and run16 subtype repair after evidence 333e1324e. S36 closure is linked below. |
-| Objective | Verify the complete selected original OEMUNI package through non-ASCII DOS paths, conversions, buffers, failures and reached process callers. |
-| Non-goals | No guest-media changes, replacement conversion engine, unrelated code-page policy or unsupported WOW success claims. |
-| Reference Baseline | S17 source recovery and focused conversion/failure fixtures; current S36 formal product and all 17 established regressions. |
-| Files And ABI Surface | OEMUNI units/header, DEM/COMMAND consumers and host conversion boundaries; existing basesrv Console reservation and run16 DOS/PIF subtype binding. No new wire ABI. |
-| Applicable Rules | Execution, source policy, mirror/minimal-diff, guest immutability, transcript-gated acceptance and build/runtime output hygiene. |
-| Verification | Both OEMUNI units/callers and buffer/failure fixtures; real non-ASCII DOS and detached PIF probes; null-Console reservation lifecycle; formal x86 and all 17 product regressions. |
-| Expected Markers | Correct round-trip names/content, exact length and failure contracts, balanced allocation and handle cleanup; unreachable consumers explicitly classified. |
-| Asset Needs | Pinned OpenNT, current formal x86 graph, disposable probes under build/M0-T420/S37 and runtime tests; logs under the approved runtime log directory. |
-| Reporting Requirements | Byte/normalized mirror comparison, retained binding rationale, original callers, positive/negative/teardown results and exact residual debt; report changed production footprint separately from tests. |
-| Stop Conditions | Required guest-media mutation, new conversion policy, unexplained product regression, or original-owner boundary expansion. |
-| Exit Criteria | Complete original-owner capability dispositions; formal build and real guest/product tests pass or owner-approved limitation is recorded; reviewed evidence and state committed/pushed. |
-| Original Owner Request | Automatically admit every S and recover/verify each complete selected package with minimal original-source differences. |
-| Similar-Issue Sweep | Both OEMUNI units, OEM versus ANSI selection, bounded buffers, optional outputs, early failure cleanup and process/file callers. |
+## S37 Closure Record
 
-## S37 Progress
+The [OEMUNI evidence](../etc/evidence/m0-t420-s37-oemuni-capability-review.md)
+closes the selected 28 compiled interfaces and real DOS/PIF workloads after
+product delivery 6b80471d9. Formal x86, ten native fixtures, real OEM direct/
+nested and ASCII/non-ASCII detached PIF probes, and all 17 established product
+regressions pass. Guest media remain immutable. CP932 is mocked boundary
+evidence, not a claim of real DBCS-host or full Win16 acceptance.
 
-The [OEMUNI review](../etc/evidence/m0-t420-s37-oemuni-capability-review.md)
-retains the complete chronology and 28 compiled-function caller ledger;
-original #if-0 CreateProcessOem is excluded. DIV-273 repairs environment
-expansion's missing OEM output copy and failure cleanup. Host fixtures and
-real direct/nested DOS probes pass; no full WOW/DBCS-host acceptance is claimed.
-DIV-274 applies the original BaseClient DBCS byte-sizing correction to full
-paths and file-part offsets. DIV-275 repairs reproduced capacity/length
-violations in current/search/system/Windows/temp and volume/filesystem names.
-The linked chronology retains each fixture, failure, cleanup and real OEM437
-direct/nested result. CP932 remains mocked boundary evidence, not real-host
-DBCS acceptance; remaining family/consumer review keeps S37 open.
-The linked 28-entry ledger distinguishes real guest, host and mock evidence,
-including DOS file/FCB probes, CP932 capacities, provider failures and original
-DEM font retry scenarios; it does not claim real font or WOW acceptance.
-DIV-276 repairs short-path lengths/capacities and computer-name false success.
-DIV-277 repairs environment capacity wrap, empty values, unequal ANSI/OEM byte
-counts and conversion failure ordering. Boundary fixtures and real direct/
-nested probes pass, including host-matched non-ASCII =X: publication/readback
-through COMMAND 54:04. Full case records and counts remain in the evidence.
-DIV-278 binds GetPIFConfigFiles' OEM override to its original ANSI consumers
-and fixes LIM's undersized output buffer. Fresh-worker ASCII/OEM PIF rows,
-seven native fixtures and real DOS direct/nested probes pass. Earlier PIF
-runs had retained workers and cannot establish an isolated A/B; pure-DOS
-controls require a fresh-worker rerun before attributing any failure.
-Read-only traces prove the registered COMMAND INIT/EnvSiz defect in P30.
-S30's apparent pure-profile pass instead consumed CONFIG and fell back to
-DOS=HIGH; INT21/3306 now rejects that false positive. The linked S30 correction
-withdraws full pure-profile acceptance. No guest workaround is introduced;
-formal artifacts are restored and OEMUNI caller reconciliation remains open.
-The remaining real DOS volume query exposed an original DEM field typo:
-filesystem padding wrote VolumeID. DIV-279 corrects one field reference.
-Direct/nested guest records now match the Unicode host oracle; the original-
-body fixture, seven prior OEMUNI fixtures and all 17 product routes pass.
-The formal x86 repair is deployed; final caller/diff reconciliation remains.
-The formal original cmdpif.obj passes five host caller scenarios through real
-OEM path APIs, twice with source-correct input capacities. This proves policy
-results/cleanup, not real new-console PIF execution. Remaining closure work:
-that entry disposition, WOW/debugger handoff and mirror counts.
-Detached explicit PIF fails with exit 6 before an observed worker Console.
-The owner approves minimal broker initial-null Console identity and launcher
-DOS/PIF subtype repairs, with focused lifecycle and full product regression.
-Those repairs now pass detached startup. DIV-194's former NULL first-command
-environment is replaced by a bounded copy for original PIF expansion; real
-ASCII/OEM startup directories and guest success/exit pass. Ten native fixtures
-and all 17 final-product regressions pass; WOW/debugger dependencies keep S37
-open. The linked evidence records exact deployed hashes and corrective growth.
+The owner explicitly transfers remaining real consumer acceptance to the
+[proposal's mandatory receiver matrix](../proposals/proposal-mvdm-runtime-package-completion-001.md#mandatory-oemuni-consumer-acceptance-transferred-from-s37):
+S40 owns OEM-WOW-DIR and OEM-WOW-DELETE, S41 owns OEM-WIN16-INTEGRATION,
+and S42 owns OEM-DBG-PATH. These items are unverified, not excluded or passed;
+each receiver must name them in its admission and closure evidence.
+
+Final S37 mirror change versus admission is +192/-61 across six files;
+existing non-mirror production bindings change +72/-3, with no new overlay.
+These are corrective additions, not diff reduction. The evidence retains
+source-first rationale, failure controls, exact hashes and the earlier S30
+pure-profile false-positive correction. S37 does not reopen that immutable
+guest limitation or conceal it as a passing profile.
 
 ## S36 Closure Record
 
