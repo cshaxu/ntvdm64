@@ -182,3 +182,31 @@ Source review distinguishes `DpmiSwIntHandler` (direct client IRET frame)
 from `DpmiHwIntHandler` (locked stack plus DOSX return-hook frame). Consequently
 software INT success alone does not verify BOP 14/15 hardware-return hooks.
 That hardware path remains a required follow-up before S38 closure.
+
+## Real Timer IRQ Return
+
+The probe now saves protected-mode vector 08h, installs its own small
+counter-and-chain handler and spins with interrupts enabled until two actual
+timer interrupts occur. It never executes software INT 08h. The handler
+far-jumps to the original vector, preserving timer/PIC handling. The probe
+checks the returned SP, restores vector 08h and requires the additional
+`S38_HARDWARE_IRQ_RETURN_OK` marker before successful exit.
+
+Builds under `build/M0-T420/S38/hardware-irq-r1` use the same three variants.
+Prefixes `s38-hardware16-r1`, `s38-hardware-frame32-r1` and
+`s38-hardware-code32-r1` each pass direct and twice-nested COMMAND: six real
+routes. The verifier now requires the IRQ marker as well as interrupt and
+nested-fault results. Product and guest-media bytes remain unchanged.
+
+Source attribution: `ccpu386/c_main.c` invokes `host_hwint_hook` for accepted
+hardware interrupts; the selected DPMI hardware path constructs its locked
+stack and DOSX return-hook frames in `dpmi32/dpmiint.c`. These runs establish
+observable hardware return behavior. They are not an independently captured
+per-BOP trace, nor proof that all possible IRQ devices or nesting cases pass.
+The earlier hardware-coverage follow-up is superseded for this timer case.
+
+Remaining audit includes the unhandled-fault-to-interrupt-chain behavior,
+special fast/debug/VCD service dispositions and complete selected-body/slot
+coverage. A registered exception handler passing does not prove unhandled
+exception behavior; `DpmiUnhandledExceptionHandler` has distinct reflection
+and fatal branches that must not be silently marked passed.

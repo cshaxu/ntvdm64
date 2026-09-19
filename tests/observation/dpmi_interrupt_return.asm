@@ -143,8 +143,59 @@ fault_resume:
     mov edx, fault_ok
     mov ah, 09h
     int 21h
+    mov byte [stage], '4'
+    mov ax, 0204h
+    mov bl, 8
+    int 31h
+    jc failed
+%ifdef CLIENT32
+    mov [old_irq], edx
+    mov [old_irq+4], cx
+%else
+    mov [old_irq], dx
+    mov [old_irq+2], cx
+%endif
+    mov ax, 0205h
+    mov bl, 8
+    mov cx, cs
+    mov edx, irq_handler
+    int 31h
+    jc failed
+    mov [saved_sp], sp
+    mov ecx, 100000000
+    sti
+.wait_irq:
+    cmp word [irq_count], 2
+    jae .irq_done
+    dec ecx
+    jnz .wait_irq
+    jmp failed
+.irq_done:
+    cmp sp, [saved_sp]
+    jne failed
+    mov ax, 0205h
+    mov bl, 8
+%ifdef CLIENT32
+    mov edx, [old_irq]
+    mov cx, [old_irq+4]
+%else
+    mov dx, [old_irq]
+    mov cx, [old_irq+2]
+%endif
+    int 31h
+    jc failed
+    mov edx, irq_ok
+    mov ah, 09h
+    int 21h
     mov ax, 4C00h
     int 21h
+irq_handler:
+    inc word [irq_count]
+%ifdef CLIENT32
+    jmp dword far [old_irq]
+%else
+    jmp word far [old_irq]
+%endif
 interrupt_handler:
     inc word [int_count]
 %ifdef CLIENT32
@@ -210,6 +261,10 @@ old_int dd 0
 old_fault dd 0
     dw 0
 saved_sp dw 0
+old_irq dd 0
+    dw 0
+irq_count dw 0
+irq_ok db 'S38_HARDWARE_IRQ_RETURN_OK',13,10,'$'
 int_count dw 0
 fault_count dw 0
 %ifdef CLIENT32

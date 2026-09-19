@@ -40,7 +40,8 @@ foreach ($route in @('direct','nested')) {
             ForEach-Object { $_.Groups[1].Value.TrimEnd("`r") }) -join ''
         if ($text -match 'S38_FAIL|Bad command or filename' -or
             $text -notmatch "S38_INT${ClientBits}_RETURN_OK" -or
-            $text -notmatch "S38_FAULT${ClientBits}_RETURN_NEGATIVE_OK") { throw 'Missing guest assertions' }
+            $text -notmatch "S38_FAULT${ClientBits}_RETURN_NEGATIVE_OK" -or
+            $text -notmatch 'S38_HARDWARE_IRQ_RETURN_OK') { throw 'Missing guest assertions' }
         $results += @{Route=$route; ClientBits=$ClientBits; Report=$report; ProbeSha256=(Get-FileHash $Probe).Hash}
         Write-Host "PASS S38 interrupt/fault return $route"
     } finally {
