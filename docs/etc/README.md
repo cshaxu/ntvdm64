@@ -2,6 +2,7 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T420 S33 DEM file capability closure](evidence/m0-t420-s33-dem-capability-closure.md) | M0 T420 S33 | Real DOS file-operation, error-map and cleanup proof for the selected original DEM package. | Retain through T420 package completion. |
 | [T420 S32 host capability closure](evidence/m0-t420-s32-host-capability-closure.md) | M0 T420 S32 | Complete original host source disposition, worker-entry/lifecycle proof, formal x86 deployment and transcript-gated product regression. | Retain through T420 package completion. |
 | [T420 S31 debug capability closure](evidence/m0-t420-s31-debug-capability-closure.md) | M0 T420 S31 | Complete original `/DPROD` debug-package disposition, bounded release trace-gate repair, formal x86 and text-gated product regression evidence. | Retain through T420 package completion. |
 | [T420 S30 DOS profile and host-medium closure](evidence/m0-t420-s30-dos-profile-host-medium-closure.md) | M0 T420 S30 | Complete default/PIF profile, EMS, COM/LPT and test-only original-provider lifecycle disposition, with external COM peer boundary retained separately. | Retain through T420 package completion. |

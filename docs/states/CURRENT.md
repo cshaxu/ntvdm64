@@ -4,24 +4,24 @@
 
 ## Active Packet
 
-**Active: M0 T420 S33**
+**Active: M0 T420 S34**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T420 S33 — Ordinary Mode. |
-| Candidate Proposal | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md) S33. |
-| Admission And Approval | S32 closed with formal worker-lifecycle and product evidence; owner standing authorization admits the next sequential S. |
-| Objective | Close the complete selected `dos/dem` capability unit: real DOS create/open/share/read/write/seek/find, error mapping and guest-buffer cleanup. |
-| Non-goals | No command-shell redirection policy, no replacement DOS kernel, no synthetic filesystem provider and no broad host-file virtualization. |
-| Reference Baseline | S13 recovered the original DEM source package; S33 must convert its source-level dispositions into real guest-to-host capability proof. |
-| Files And ABI Surface | Selected original DEM manifest, DOS file handles, guest-buffer leases, original BOP/INT 21h paths, error mapping and normal/abnormal close cleanup. |
+| Identifier Mode | M0 T420 S34 — Ordinary Mode. |
+| Candidate Proposal | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md) S34. |
+| Admission And Approval | S33 closed with real DOS file capability and source-shaped error-map evidence; owner standing authorization admits the next sequential S. |
+| Objective | Close the complete selected `dos/command` capability unit: direct/nested COMMAND child, standard-stream, redirection, pipe, return/error and cleanup acceptance. |
+| Non-goals | No alternate command parser, no synthetic pipe server and no standalone reimplementation of BaseSrv command records. |
+| Reference Baseline | S14 recovered the COMMAND source package; S34 must prove its complete original command, stream and cleanup behavior from real guest paths. |
+| Files And ABI Surface | Selected original COMMAND manifest, standard handles, pipe/redirection records, nested command re-entry, return/error values and worker cleanup. |
 | Applicable Rules | Project design/rules, source policy, strict mirror rule, original-owner recovery and transcript-gated acceptance. |
-| Verification | Establish source/caller ownership, formal x86 compile/link evidence, real DOS file-operation witnesses, error/cleanup controls and established direct/interactive COMMAND/MEM/EDIT regressions. |
-| Expected Markers | Every selected DEM operation is real-guest proven, source-proven unavailable, or an explicitly approved external-medium boundary; guest buffers and handles have normal/abnormal cleanup evidence. |
-| Asset Needs | Pinned OpenNT DEM union, current product maps, disposable guest fixtures, formal x86 graph and `O:\winnt` runtime/log roots. |
-| Reporting Requirements | Record source hashes, selected entry/caller graph, operation-family disposition, error mapping, guest-buffer lifetime and regression results. |
-| Stop Conditions | A reached DEM body needs an unapproved system service, a guest-pointer lifetime is ambiguous, or an established workload regresses. |
-| Exit Criteria | Every selected DEM unit has an original-owner capability disposition; formal x86 and real-guest/product regressions pass; evidence/index/status updated; reviewed P pushed. |
+| Verification | Establish source/caller ownership, formal x86 compile/link evidence, direct/nested real COMMAND stream and cleanup witnesses, and established product regressions. |
+| Expected Markers | Every selected COMMAND operation is real-guest proven, source-proven unavailable or an explicit external boundary; no stream, command record or worker state leaks on completion. |
+| Asset Needs | Pinned OpenNT COMMAND union, current product maps, disposable guest fixtures, formal x86 graph and `O:\winnt` runtime/log roots. |
+| Reporting Requirements | Record source hashes, selected entry/caller graph, stream/pipe disposition, nested-command lifecycle, return/error values and regression results. |
+| Stop Conditions | A reached COMMAND body needs an unapproved system service, stream ownership is ambiguous, or an established workload regresses. |
+| Exit Criteria | Every selected COMMAND unit has an original-owner capability disposition; formal x86 and real-guest/product regressions pass; evidence/index/status updated; reviewed P pushed. |
 | Original Owner Request | Standing automatic sequential S authorization for the T420 whole-package capability sequence. |
 | Similar-Issue Sweep | Audit all debug macros, exported globals and selected host/CCPU callers for accidental non-PROD activation, duplicate debugger ownership, trace-file lifetime leaks or externally controllable release gates. |
 
@@ -141,6 +141,17 @@ lines from `nt_bop.c` and `nt_graph.c`, leaving no new worker shell or
 adapter lifecycle. Fresh formal x86 lifecycle proof and all 17 transcript-
 gated COMMAND/MEM/EDIT product routes passed from matching `O:\winnt`
 artifacts.
+
+## S33 Closure Record
+
+[T420 S33 DEM file capability closure](../etc/evidence/m0-t420-s33-dem-capability-closure.md)
+closes the selected original normal file-operation family through direct DOS
+guest calls: create/write/commit/open/read/seek/share/lock/find/rename/FCB,
+attribute and directory services all pass. Missing-file and host sharing
+failures retain their observed original DOS mappings (`AX=2` and `AX=5`), and
+all fixture files/directories are removed. Existing S28 no-media evidence
+remains the explicit raw-media/IOCTL boundary; S33 adds no provider or
+product implementation.
 
 ## S1 Closure Record
 
