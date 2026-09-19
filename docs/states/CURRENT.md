@@ -28,20 +28,10 @@
 ## S37 Progress
 
 The [OEMUNI review](../etc/evidence/m0-t420-s37-oemuni-capability-review.md)
-inventories 29 original entry points and their initial textual consumers.
-Current-host OEM 437 versus ANSI 1252 non-ASCII path, file-part, short-buffer
-and environment tests pass in the x86 original-source fixture. Real DOS
-non-ASCII create/read/write/rename/attribute operations now pass direct and
-nested, with independent host Unicode-name/content verification. Full
-consumer/buffer disposition remains open. Original environment expansion's
-missing OEM output copy is repaired (DIV-273); focused non-ASCII/short-buffer
-tests, real DOS file routes and all 17 product regressions pass.
-Failure injection now verifies zero return/error propagation and no freeing
-of borrowed output at both conversion failures. The inventory is 28 compiled
-OEMUNI functions plus original #if-0 CreateProcessOem, not 29 selected APIs.
-The x86 original-owner family fixture now also passes enumeration/search,
-rename/delete, directory/temp-file and host-information checks. This is
-host-side SBCS evidence, not full guest/WOW or DBCS acceptance; S37 stays open.
+retains the complete chronology and 28 compiled-function caller ledger;
+original #if-0 CreateProcessOem is excluded. DIV-273 repairs environment
+expansion's missing OEM output copy and failure cleanup. Host fixtures and
+real direct/nested DOS probes pass; no full WOW/DBCS-host acceptance is claimed.
 A test-only CP932 boundary reproduces original GetFullPathNameOem using
 Unicode character counts for OEM byte length/copy and file-part offset.
 The original BaseClient DBCS correction supplies the fix: existing OEM RTL
@@ -82,6 +72,10 @@ output and conversion failure ordering. Six x86 fixtures and expanded real
 DOS direct/nested probes pass. Unequal ANSI/OEM short-query byte sizing now
 passes five capacities and four provider-change/failure cleanup cases. Final
 caller/whole-package reconciliation remains open; this is not an S37 closure.
+The expanded real DOS probe now proves DEM's non-ASCII =X: publication and
+COMMAND 54:04 readback against the host directory, direct and nested. The
+observer harness correctly decodes its raw OEM437 output. No product change
+is added; PIF-specific and remaining caller dispositions stay under review.
 
 ## S36 Closure Record
 

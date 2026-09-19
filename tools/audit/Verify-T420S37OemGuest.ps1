@@ -37,12 +37,15 @@ foreach ($route in @('direct','nested')) {
         $record = Get-Content $report -Raw
         $launcher = [int]([regex]::Match($record,'(?m)^pid=(\d+)').Groups[1].Value)
         if ($record -notmatch 'result=exited' -or $record -notmatch 'exit=0x00000000') { throw 'Guest failed' }
-        $screen = Get-Content "$report.console.txt" -Raw
+        # The observer writes ReadConsoleOutputCharacterA bytes, not UTF-8.
+        $screen = [Text.Encoding]::GetEncoding(437).GetString([IO.File]::ReadAllBytes("$report.console.txt"))
         if ($screen -notmatch 'S37_OEM_GUEST_CREATE_RENAME_ATTR_READ_OK' -or $screen -match 'S37_OEM_GUEST_FAIL|Bad command or filename') { throw 'Guest text failed' }
         if ($screen -notmatch 'S37_OEM_GUEST_DIRECTORY_DELETE_DISK_OK') { throw 'Directory/disk guest text failed' }
         if ($screen -notmatch 'S37_OEM_GUEST_FCB_COMPUTER_OK' -or
             $screen -notmatch ('S37_HOST=' + [regex]::Escape($env:COMPUTERNAME))) { throw 'FCB/computer-name guest text failed' }
         $dir = Join-Path $root ('D' + [char]0xa3)
+        if ($screen -notmatch 'S37_OEM_GUEST_COMMAND_ENV_OK' -or
+            $screen -notmatch ('S37_ENV_DIR=' + [regex]::Escape($dir))) { throw 'COMMAND environment path mismatch' }
         $file = Join-Path $dir ('B' + [char]0xa3 + '.DAT')
         if ([IO.File]::ReadAllText($file) -cne "S37-OEM-GUEST-BYTES`r`n") { throw 'Unicode file/content mismatch' }
         if (@(Get-ChildItem -LiteralPath $root -Force).Count -ne 1 -or

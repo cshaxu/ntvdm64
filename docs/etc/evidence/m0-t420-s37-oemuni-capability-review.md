@@ -378,8 +378,8 @@ packets remain supporting evidence, not per-interface hits.
 | SearchPathOem | COMMAND cmdpif | H/M byte count/prefix, complete-query size matrix and failure cleanup |
 | GetTempPathOem | No production textual consumer found | H/M complete-query size matrix and failure cleanup |
 | GetTempFileNameOem | WOW wkman | H create/delete; no WOW workload acceptance |
-| GetEnvironmentVariableOem | COMMAND cmdenv/cmdmisc; WOW wdos | H non-ASCII/missing; caller-specific guest witness pending |
-| SetEnvironmentVariableOem | DEM demdir; COMMAND cmdpif/cmdmisc; WOW wdos | H set/delete; caller-specific guest witness pending |
+| GetEnvironmentVariableOem | COMMAND cmdenv/cmdmisc; WOW wdos | G explicit original COMMAND 54:04 returns host-matched non-ASCII directory; H/M encoding/capacity/failure; no WOW acceptance |
+| SetEnvironmentVariableOem | DEM demdir; COMMAND cmdpif/cmdmisc; WOW wdos | G INT21 chdir publishes =X: and COMMAND 54:04 reads it back; H set/delete; no WOW acceptance |
 | ExpandEnvironmentStringsOem | SoftPC host nt_pif | H/M non-ASCII, short buffer and two conversion failures |
 | GetShortPathNameOem | COMMAND cmdpif | H valid file path and null-input failure |
 
@@ -730,3 +730,36 @@ environment short-query defect, not the remaining package/caller audit.
 All 17 transcript-gated product routes pass under
 `s37-env-sizing-product-r1`, including nested COMMAND/MEM and EDIT. The
 documentation governance and whitespace gates pass as well.
+
+## Real guest environment caller witness
+
+The original `dos/v86/doskrnl/dos/macro.asm::GetCDSFromDrv` synchronizes a
+drive through CMDSVC 54:04 with AL=drive and DS:SI=output. Its original
+`dos/command/cmdmisc.c::cmdGetCurrentDir` reads the `=X:` variable through
+GetEnvironmentVariableOem. Original `dos/dem/demdir.c::demSetCurrentDir`
+sets that variable with SetEnvironmentVariableOem after the real chdir succeeds.
+The expanded disposable probe now performs INT21 chdir to its non-ASCII
+private directory, explicitly issues that same BOP contract, prints the
+returned absolute path, and retains all prior OEM file/directory/FCB/disk tests.
+This proves actual guest-to-COMMAND-to-OEMUNI readback, not an inferred trace
+hit. It does not claim the DOS kernel's conditional CDS-cache branch was
+necessarily selected on every call, nor prove the distinct WOW consumer.
+
+First run `s37-env-caller-guest-r1` completed guest exit zero with all markers
+but the harness failed the path comparison: its UTF-8 default decoded raw
+OEM437 byte 9C as a replacement character. Original observer source uses
+ReadConsoleOutputCharacterA and writes raw bytes; a hex inspection and the
+independently created Unicode directory confirmed the exact pound-sign byte.
+The harness now decodes its already-required OEM437 profile explicitly. Only
+the exact verified test file and its empty directories were removed before
+retesting; no runtime media or user file was changed.
+
+Both direct and nested routes pass under `s37-env-caller-guest-r2`, including
+`S37_OEM_GUEST_COMMAND_ENV_OK` and the host-matched path. Probe SHA-256:
+`61dc69d0f54f37815b0c85484f73285b2954967c5fff6c51634da5ac5c308603`.
+NASM builds `tests/observation/oem_file_contract.asm` with `-f bin` to
+`build/M0-T420/S37/guest-env-r1/O37.COM`; only this independent probe is copied
+below runtime tests. Product source/artifacts are unchanged from 08977bd17
+and its formal x86/six-fixture/17-route verification. This step adds no mirror,
+adapter or overlay diff. PIF-specific path/expansion and remaining capability
+dispositions still require final review before S37 closure.

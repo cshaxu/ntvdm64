@@ -79,6 +79,43 @@ start:
     mov ah, 3Bh
     int 21h
     jc failed
+    ; The original GetCDSFromDrv uses CMDSVC 54:04 with AL drive, DS:SI.
+    ; Explicitly query after DEM's chdir has published its =X: environment.
+    mov ah, 19h
+    int 21h
+    mov si, environment_directory
+    db 0c4h, 0c4h, 54h, 04h
+    jc failed
+    cmp byte [environment_directory+1], ':'
+    jne failed
+    cmp byte [environment_directory+2], '\'
+    jne failed
+    mov si, environment_directory
+    xor cx, cx
+environment_length:
+    cmp byte [si], 0
+    je environment_ready
+    inc si
+    inc cx
+    cmp cx, 259
+    jae failed
+    jmp environment_length
+environment_ready:
+    push cx
+    mov dx, environment_prefix
+    mov ah, 09h
+    int 21h
+    pop cx
+    mov dx, environment_directory
+    mov bx, 1
+    mov ah, 40h
+    int 21h
+    jc failed
+    cmp ax, cx
+    jne failed
+    mov dx, environment_success
+    mov ah, 09h
+    int 21h
     mov dx, scratch_name
     xor cx, cx
     mov ah, 5Bh
@@ -227,6 +264,9 @@ delete_fcb db 0,'F',09Ch,'??????','DAT'
     times 25 db 0
 computer_name times 16 db 0
 computer_prefix db 'S37_HOST=','$'
+environment_directory times 260 db 0
+environment_prefix db 'S37_ENV_DIR=','$'
+environment_success db 13,10,'S37_OEM_GUEST_COMMAND_ENV_OK',13,10,'$'
 fcb_success db 13,10,'S37_OEM_GUEST_FCB_COMPUTER_OK',13,10,'$'
 directory_success db 'S37_OEM_GUEST_DIRECTORY_DELETE_DISK_OK',13,10,'$'
 success db 'S37_OEM_GUEST_CREATE_RENAME_ATTR_READ_OK',13,10,'$'
