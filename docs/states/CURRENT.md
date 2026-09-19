@@ -2,17 +2,32 @@
 
 ## Current Work
 
-## Task Intermission
+## Active Packet
 
-**No active M/T/S packet.**
+**Active: M0 T420 S36**
 
-T420 S35 is closed after the owner-approved original guest bug disposition.
-T420 remains open; S36 (suballocator capability review) is next under the
-standing sequential-admission authorization, but is not yet active.
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T420 S36 — Ordinary Mode, single implementer/reviewer. |
+| Candidate Proposal | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md), S36. |
+| Admission And Approval | Standing owner authorization automatically admits each sequential S; S35 closed and was pushed as 23d12c9f5. |
+| Objective | Verify the complete selected original suballocator capability through real XMS and DPMI-backed callers: allocation, relocation, fragmentation, exhaustion, release and teardown. |
+| Non-goals | No guest-media changes, replacement allocator, new CPU semantics or false success for an unavailable guest path. |
+| Reference Baseline | S16 original-source/host-fixture closure and S35 real XMS growth/shrink/error/reuse evidence; neither proves real forced relocation or the complete DPMI caller. |
+| Files And ABI Surface | Original suballoc.c, suballcp.h and inc/suballoc.h; XMS and DPMI allocation callers; existing commit/decommit/move bindings; independent tests only unless a source-proven defect is found. |
+| Applicable Rules | Execution, source policy, mirror/minimal-diff, guest immutability, transcript-gated acceptance and build/runtime output hygiene. |
+| Verification | Freeze source and caller inventory; audit every allocator operation and callback; original-source fixture plus real guest normal/failure/relocation/release workloads; formal x86 and all 17 product regressions. |
+| Expected Markers | Data survives forced relocation, failed growth preserves the old block, released capacity is reusable, callback/lease lifetimes balance; unreachable or externally unavailable paths are explicitly evidenced, not fabricated. |
+| Asset Needs | Pinned OpenNT, formal x86 graph, disposable probes under build/M0-T420/S36 and runtime tests; logs under the approved runtime log directory. |
+| Reporting Requirements | Byte/normalized mirror comparison, retained binding rationale, original callers, positive/negative/teardown results and exact residual debt; report changed production footprint separately from tests. |
+| Stop Conditions | Required guest-media mutation, new CPU/guest-memory ABI, unexplained product regression, or original-owner boundary expansion. |
+| Exit Criteria | Complete original-owner capability dispositions; formal build and real guest/product tests pass or owner-approved limitation is recorded; reviewed evidence and state committed/pushed. |
+| Original Owner Request | Automatically admit every S and recover/verify each complete selected package with minimal original-source differences. |
+| Similar-Issue Sweep | Both XMS and DPMI callers, page granularity, rounding/overflow, in-place versus moved growth, shrink, allocation failure, callback failure and resource cleanup. |
 
 ## S35 Closure Record
 
-The [S35 evidence](../etc/evidence/m0-t420-s35-xms-capability-progress.md#final-s35-closure-review)
+The [S35 evidence](../etc/evidence/m0-t420-s35-xms-capability-progress.md)
 records the complete selected XMS capability review: allocate/free/reuse,
 move/overlap, growth/shrink/failure preservation, A20, UMB, INT15 and worker
 lifecycle. Seven of eight manifest files now match pinned OpenNT bytewise;
