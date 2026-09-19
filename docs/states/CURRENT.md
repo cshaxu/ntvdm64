@@ -50,6 +50,12 @@ The new watchpoint probe exposes an open failure: INT31/0B00 registration
 succeeds but its write does not satisfy the required exception-1 delivery.
 Original debug-service-to-CCPU binding is under review; S38 cannot close on
 the earlier generic regression results alone.
+The experimental original-service/MOV_DR binding now proves a first debug
+hit, followed by repeated exception-1 delivery inside the handler while DR6
+remains set; it is not accepted. Independent host-boundary traces record
+the repeated entries and descending stack. O:/winnt retains the prior
+verified worker; the source/build experiment remains WIP pending complete
+debug status/return, checked-read and lifecycle verification.
 
 ## S37 Closure Record
 

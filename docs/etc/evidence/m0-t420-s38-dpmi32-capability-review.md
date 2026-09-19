@@ -1,6 +1,81 @@
 # T420 S38 DPMI32 Capability Review
 
+## Admitted Watchpoint Recovery Design
+
+Reuse the existing mirror `dpmi32/i386/dpmi386.c` translation unit with only
+its original DpmiSetDebugRegisters body selected for CPU40. Its other bodies
+require NT process LDT, passive monitor context and kernel fast-BOP machinery;
+they remain excluded, without defining the retired CPU30 profile. Preserve
+CF initialization and original all-zero rollback on ThreadSetDebugContext
+failure. Replace the zero-length guest alias request with a checked 24-byte
+read and handle a rejected pointer before dereference.
+
+Original `v86/monitor/i386/thread.c::ThreadSetDebugContext` walks native
+monitor threads and calls NtSetContextThread. That entire translation unit
+cannot implement software-CPU state: host DR registers are not guest DR
+registers. The existing worker debugger binding will preserve its six-DWORD
+interface and register order through original CCPU MOV_DR, including its
+reserved-bit masks and breakpoint-table rebuild. No new breakpoint policy,
+emulator, mirror file or overlay is admitted. This is recovery-ladder rung 2
+for the unavailable mechanism; original DPMI policy remains in its owner.
+External-code intrusion and a newly authored breakpoint engine are rejected
+because the original CCPU implementation already supplies the required work.
+
+Verification must include the real traced caller, write delivery, error and
+cleanup behavior, formal x86 link and established regressions. This design
+is not a passing implementation or permission to modify immutable guest code.
+
 ## Admission And Baseline
+
+### Watchpoint binding experiment: not accepted
+
+The fresh x86 graph `build/M0-T420/S38/debug-binding-r1` links the original
+debug-register service to CCPU MOV_DR. Worker SHA256
+`672db115721f4d1ff61a70de2c29b32b35423d408875c6863089f04a2fec514b`
+passes the direct/nested VCD probe, but the watchpoint probe has **not** passed.
+Both `s38-watchpoint-bound-r1.txt` and `s38-watchpoint-bound-r2.txt` report
+launcher exit zero with no guest success text. Exit zero is not acceptance.
+
+The independent test wrapper `dpmi_exception_trace.c` observes the original
+`nt_inthk.c::host_exint_hook` without modifying registers or guest memory.
+Its first 32 callbacks in `s38-watchpoint-exception-r1.events.txt` establish:
+
+- The watched write really triggers exception 1 at `01BF:01A6`, DR6=1.
+- The original DPMI handler dispatches to the probe at `01BF:022A`.
+- After the handler's first instruction, another exception 1 arrives at
+  `01BF:022E`, with DR6 still 1. The same handler is entered again.
+- SS remains 017F while SP descends FD0, FA0, F70 and onward by 30h per
+  entry. No completed exception-return/lifecycle assertion is demonstrated.
+
+This proves repeated nested debug delivery rather than a missing first hit.
+It does not by itself prove the final worker termination cause. The selected
+`c_main.c` tests DR6 status bits between instructions; `Int1_t` enters the
+original exception hook, and `DpmiFaultHandler` does not consume that status.
+The corresponding exception and status-query ownership must be resolved
+before accepting the new binding. Clearing DR6 blindly, hot-patching DOSX's
+DD_DR6, or calling this an original guest defect would be premature.
+
+The initial observer used common compile flags. Repeating with exact
+`host_cflags` exposed a test-output issue: the original host CRT redirects
+fprintf, producing an empty r2 event file. The wrapper now undefines only
+that output macro after including the original TU. The r3 observation uses
+formal host flags and independently reproduces the same 32 nested entries
+in `s38-watchpoint-exception-r3.events.txt`; observed worker SHA256 is
+`b2cee065ee380895e748d22f19efbeb1e58377765f47b377f1aa94b2ece6ed08`.
+
+The test-only observed worker is confined to `O:/winnt/tests/D38TRACE`;
+the temporary V: mapping is removed after each run. `O:/winnt/ntvdm.exe`
+has been restored to the previously verified formal worker SHA256
+`55214ce4a67d08716432b83b54e061eef37fc238eb2bc8c9ccc9bfe0307f11ec`.
+The unaccepted binding remains source/build WIP, not a released repair.
+Its copied-read helper also still needs descriptor-limit/access validation:
+checking the two translated linear addresses alone does not establish those
+properties. S38 stays open.
+The previously LF-indexed `dpmi386.c` WIP is mechanically normalized to its
+pinned original CRLF layout. Its raw +407/-386 count therefore includes
+format restoration; ignoring line endings gives +22/-1. Neither figure is a
+delivered semantic reduction, and the experiment is not included in the
+observation-only commit.
 
 The owner authorizes sequential automatic S admission after S37 closure
 `2e56df9eb`. S38 verifies the selected DPMI32 host package; S39 retains the

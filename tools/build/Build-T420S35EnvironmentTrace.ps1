@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param([Parameter(Mandatory)][string]$FormalRoot,
       [Parameter(Mandatory)][string]$BuildRoot,
-      [ValidateSet('environment','dpmi')][string]$Boundary = 'environment',
+      [ValidateSet('environment','dpmi','exception')][string]$Boundary = 'environment',
       [string]$EnvironmentTraceLog = 'O:\winnt\logs\s35-envtrace-r1.events.txt')
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path "$PSScriptRoot\..\..").Path
@@ -36,6 +36,17 @@ if ($Boundary -eq 'dpmi') {
     $traceLog = [IO.Path]::GetFullPath($EnvironmentTraceLog).Replace('\', '/')
     if ($traceLog -notmatch '^O:/winnt/logs/[A-Za-z0-9_.-]+$') {
         throw 'DPMI trace must name a file directly below O:\winnt\logs'
+    }
+    $flags += ' /DDPMI_TRACE_LOG=\"' + $traceLog + '\"'
+}
+if ($Boundary -eq 'exception') {
+    $flags = ($graph | Where-Object { $_.StartsWith('host_cflags = ') }).Substring(14).Replace('$:', ':')
+    $memberName = 'obj/host/nt_inthk.obj'
+    $libraryName = 'original-softpc-host-roots.lib'
+    $traceSource = 'dpmi_exception_trace.c'
+    $traceLog = [IO.Path]::GetFullPath($EnvironmentTraceLog).Replace('\', '/')
+    if ($traceLog -notmatch '^O:/winnt/logs/[A-Za-z0-9_.-]+$') {
+        throw 'Exception trace must name a file directly below O:\winnt\logs'
     }
     $flags += ' /DDPMI_TRACE_LOG=\"' + $traceLog + '\"'
 }
