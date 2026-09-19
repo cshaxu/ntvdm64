@@ -43,6 +43,28 @@ driver; S35 remains open. See the [progress evidence](../etc/evidence/m0-t420-s3
 The reproducible direct/profile/nested/repeat XMS gate also passes all four
 cases. P1 delivers this bounded correction and evidence, not S35 closure;
 reserved-INT15 and the complete lifecycle audit remain pending.
+Further isolation proves reserved INT15 returns 128KB with a short child
+environment even without DOS=HIGH. Ordinary-environment low-DOS startup instead
+faults in COMMAND's discarded INIT area, now occupied by environment bytes;
+the subsequent event-thread join also stalls. See the progress evidence's
+low-DOS isolation record. This is not an XMS or CCPU failure verdict, and the
+short-environment control is not a product workaround or closure acceptance.
+The owner permanently prohibits guest-media modification, including rebuilt
+replacement binaries and runtime hot-patches. No guest repair admission is
+pending; continue original-contract host diagnosis and record proven guest
+limitations without disguising them as restored functionality.
+Native Console and pending-alert probes now pass. S35 is compiling a
+declaration-only restoration of NtWaitForMultipleObjects at
+`build/M0-T420/S35/formal-native-wait-r2`; the Win32 timeout/result translator
+is removed from this candidate. Its deployed five-artifact package now passes
+all 17 established product regressions (`s35-native-wait-regression-r1`) and
+four real XMS routes (`s35-native-wait-xms-r1`). Pre-resume event-thread
+shutdown and the low-DOS limitation remain unresolved. This is not closure.
+The later pre-resume guard is unaccepted local WIP: isolated native-wait
+thread tests and incremental x86 compile pass, but a real low-DOS run remains
+corrupted and is not a deterministic shutdown witness. O:\winnt has been
+restored to the saved pre-native-wait host package, not left on this WIP.
+The 17+4 native-wait results above describe the earlier tested candidate.
 
 ## S34 Closure Record
 

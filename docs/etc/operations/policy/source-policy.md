@@ -1,6 +1,19 @@
 # Source And Research Policy
 
 OpenNT NT4 MVDM/NTDOS is the primary historical guest/service source family.
+
+### Permanent guest-media immutability
+
+The owner permanently prohibits modifying original guest media. Do not
+recompile it for replacement, patch its binaries, or hot-patch its loaded
+code/data to work around a defect. Original execution and normal guest writes
+are not patches. Independently authored disposable test probes remain test
+inputs, never replacements for original guest components. Diagnose host
+integration against the original contract; record any demonstrated original
+guest limitation without claiming a workaround as restored functionality.
+
+### Canonical source ownership
+
 The pinned local OpenNT and OpenNT-4.5 MVDM trees are merged into one canonical
 component superset: identical target paths collapse with dual provenance,
 one-sided paths are included, and content conflicts are resolved once at

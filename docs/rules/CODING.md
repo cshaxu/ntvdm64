@@ -150,6 +150,9 @@ monitor-adapter material.
   guest mirror paths and manifests.
 - Guest objects and libraries never enter a host compile/link graph. App loads
   only manifest-selected immutable bytes.
+- Original guest media must never be rebuilt for replacement, binary-patched
+  or runtime-hot-patched. Follow the permanent guest-media immutability rule
+  in [source policy](../etc/operations/policy/source-policy.md).
 
 ## Naming
 

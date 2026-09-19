@@ -76,6 +76,163 @@ this four-case gate. This bounded S35 P1 delivery does not close S35.
 
 ## Remaining closure work
 
+### 2026-09-19 low-DOS environment isolation
+
+The reserved-INT15 timeout is not sufficient evidence of an XMS failure.
+`s35-low-default-r1.txt` reproduces the failure without `/INT15=128` when
+`DOS=HIGH` is absent. Read-only snapshots of that test worker (PID 50200,
+launcher 49196) and its exact formal linker map identify the native path as
+`illegal_op_int -> host_error -> TerminateVDM -> nt_remove_event_thread ->
+mvdm_softpc_event_thread_alert_and_join`. The final wait is secondary to the
+guest fault, not evidence that the XMS operation itself is waiting.
+
+`s35-low-default-worker-r4.txt` records the real-mode exception frame
+`0E2F:1F8F`, flags `0297`. The segment begins with the COMMAND PSP, not DOS
+kernel code. Its fault location contains environment PATH bytes. The original
+COMMAND map places `Alloc_error` at `1F8D` and `EnvSiz` at `203C`; the latter
+contains `2E3B`, also environment data. The live `EndInit` bytes at offset
+`0332` match the deployed COMMAND image, corroborating map applicability.
+Source and deployed COMMAND SHA-256 both equal
+`908a77ac617c2d741f0aa1b73f73973dcf29adc91f092e5bcb02173c8c732c43`.
+
+Original `rdata.asm::EndInit` saves INIT variables before shrinking the
+resident allocation, but its permanent-COMMAND environment expansion still
+reads/writes `EnvSiz` after that shrink and branches to the INIT-resident
+`Alloc_error` on mismatch. The local `rdata.asm` has zero semantic diff from
+pinned OpenNT when ignoring CR/LF. `cmdenv.c::cmdGetInitEnvironment` retains
+the original ES:0 destination, required-byte count and BX paragraph result;
+its bounded lease does not relocate the guest environment. The evidence
+supports a stale INIT reference exposed by the low-DOS/environment layout,
+not a demonstrated CCPU instruction defect. No guest patch has been applied.
+
+Two isolated short-environment controls preserve all product binaries and use
+only a child-process environment, never changing the user's environment:
+
+| Configuration | Transcript and result |
+| --- | --- |
+| No DOS=HIGH, default INT15 | `s35-low-shortenv-r1.txt.console.txt`: boot UMB, AUTOEXEC, default-zero INT15 and XMS core markers; launcher exit 0. |
+| No DOS=HIGH, HIMEM /INT15=128 | `s35-reserved-shortenv-r1.txt.console.txt`: boot UMB, AUTOEXEC, AX=0080, `S35_XMS_INT15_RESERVED_OK` and XMS core markers; launcher exit 0. |
+
+These controls prove the reserved capability can execute; they do not repair
+or accept ordinary-environment low-DOS startup. Surviving test workers are
+also not counted as natural teardown success. The native alert/join failure
+needs its own lifecycle proof. The owner has now permanently prohibited guest
+media modification, including rebuilding replacements and runtime patches.
+The earlier request to expand scope for guest repair is withdrawn. Further
+work must audit original-contract host integration and explicitly preserve
+any proven original-guest limitation, not silently suppress the reproducer.
+The diagnostic sources are test-only, not product source or runtime inputs.
+
+The shutdown source audit additionally finds a concrete coverage gap:
+`nt_event.c` creates the event thread with `CREATE_SUSPENDED`, and
+`nt_fulsc.c::nt_init_event_thread` resumes it later. Original removal only
+calls `NtAlertThread`; our DIV-206 additionally waits indefinitely for exit.
+An alert cannot execute a still-suspended thread. The existing
+`softpc_event_thread_shutdown_fixture.c` creates its worker running, so it
+cannot validate pre-resume startup failure. The captured non-main threads
+include the heartbeat and a thread with no product frames; this is consistent
+with pre-resume failure but does not yet identify its suspension count.
+Do not claim this specific runtime cause proven until the original
+`nt_init_called` state/thread identity or a bounded reproducer corroborates it.
+
+The bounded local reproducer now confirms the helper defect independently:
+`tests/observation/event_thread_startup_failure.c` links the actual
+`mvdm_softpc_event_thread.c` and `nt_thread_alert_compat.c` with MSVC x86
+`/MT /W4`. Build root: `build/M0-T420/S35/shutdown-reproducer-r1`.
+Its child creates the thread suspended and calls the product join helper;
+the parent observes a two-second timeout, terminates only its own disposable
+child, and emits `S35_SUSPENDED_THREAD_JOIN_HANG_REPRODUCED`. Compilation and
+reproduction completed successfully. This is defect-reproduction success,
+not product acceptance; the earlier real-worker suspension state still needs
+direct corroboration. No product or guest-media change was made for this test.
+
+The next isolated real run (`s35-low-inputstate-r1.txt`, launcher 44240,
+worker 60656) timed out and its exact-map read-only snapshot reports
+`nt_init_called=0`, with CCPU still at the illegal-instruction BOP. Original
+`nt_init_event_thread` sets that flag before its sole initial ResumeThread;
+therefore this worker did not reach the initial input-thread resume path.
+`s35-low-inputstate-r1.threads.txt` preserves the host stacks. This
+corroborates the pre-resume cleanup defect; it does not repair or independently
+prove the precise environment-corruption branch in this fresh run. The test
+process group was explicitly terminated and the previously passing default
+fixtures restored. Product and original guest media remain unchanged.
+
+The shutdown sweep also reproduces a distinct running-wait mismatch. The same
+bounded fixture with `--running` creates an unsuspended `SleepEx(INFINITE,
+TRUE)` worker and emits `S35_RUNNING_SLEEP_EX_JOIN_HANG_REPRODUCED` after
+the child times out. Pinned OpenNT `base/win32/client/synch.c` explicitly
+retries `STATUS_ALERTED` in both `WaitForMultipleObjectsEx` and `SleepEx`
+(lines 1421 and 1535). The current thread-alert adapter prefers native
+`NtAlertThread`, whereas `opennt_NtWaitForMultipleObjects` wraps Win32
+`WaitForMultipleObjectsEx`. This composition loses the native alert-return
+contract. The old shutdown fixture's `SleepEx`/WAIT_IO_COMPLETION assumption
+therefore cannot validate the current native-alert implementation. Both
+pre-resume ownership and running-wait notification must be resolved before
+claiming lifecycle closure; arbitrary timeouts or TerminateThread are not
+accepted repairs.
+
+A local QueueUserAPC-only candidate was tested and rejected, then fully
+reverted without deployment. Without a worker-entry handshake its notification
+can execute before the thread procedure, leaving the subsequent SleepEx
+waiting. With an explicit test-only ready event the candidate returns zero,
+but this proves only the already-entered worker case. The retained fixture
+now includes that ready event; the unchanged native-alert product helper
+still reproduces the running-wait timeout with the handshake. Therefore the
+native/public wait mismatch is not merely the fixture's entry race, and an
+APC-only substitution is not an accepted lifecycle repair. Product source
+has no retained change from this experiment.
+
+Original-wait recovery now has one positive modern-host boundary witness:
+`tests/observation/native_console_wait_probe.c` compiles as x86 and runs in a
+hidden, real Console. It calls the exported NTDLL NtWaitForMultipleObjects
+with the actual STD_INPUT_HANDLE plus a signaled event. Log
+`s35-native-console-wait-r1.txt` records status `00000001` and exit 0.
+Thus the current Console handle is accepted by native NT wait; the public
+Win32 wait translation is not demonstrated necessary in this configuration.
+This is not yet Terminal/ConPTY or full pending-alert acceptance. Test the
+native contract before replacing the adapter; do not infer universal handle
+compatibility or close the pre-resume lifecycle issue from this one result.
+
+The extended probe `s35-native-console-wait-r2.txt` also queues a native
+alert to its own thread before entering a finite native wait, and receives
+exactly `00000101` (STATUS_ALERTED), exit 0. The product candidate now removes
+the 58-line `nt_wait_compat.c` and its build selection, retaining only the
+original-shaped NtWaitForMultipleObjects declaration linked from the existing
+ntdll.lib dependency. No MVDM body is changed. Formal x86 build
+`formal-native-wait-r2` completed all 525 edges, including the four EXEs,
+VDMREDIR.dll and VdmTib ownership gate. Deployment/runtime regression are
+still pending; the pre-resume cleanup issue is not solved by native wait.
+
+Subsequent bounded native-wait deployment validation passed: five host artifacts
+match formal-native-wait-r2 hashes (`s35-native-wait-artifacts-r1.json`). Prior
+host binaries remain in `build/M0-T420/S35/pre-native-wait-deployment`; guest
+media were not replaced. `Verify-CommandExitStatus.ps1`, prefix
+`s35-native-wait-regression-r1`, passed all 17 default transcript-gated routes.
+`Verify-T420S35XmsGuest.ps1`, fixture guest-r7, prefix
+`s35-native-wait-xms-r1`, passed direct/profile/nested/repeat. These results do
+not close pre-resume shutdown or ordinary-environment low-DOS startup.
+Commit/push remains pending the reported outbound approval block.
+
+The pre-resume guard is now an unaccepted local candidate: original
+`nt_init_called` is passed to the join helper; a never-resumed thread remains
+suspended for process-exit reclamation, while a started thread is alerted and
+joined. The updated bounded test uses native NtDelayExecution, verifies the
+started thread's exit status and verifies that the suspended thread never
+enters its procedure. Both child cases return zero; formal incremental x86
+build passes. No new independent lifecycle state or guest change is added.
+
+The subsequent ordinary-environment low-DOS run did NOT validate error
+shutdown: `s35-startup-cleanup-r1.txt` times out, but worker 18940's exact-map
+stack now shows CCPU executing `printer_io -> inb -> printer_inb ->
+notbusy_check`, not host_applClose or the event join. Corrupted guest startup
+is not a deterministic shutdown trigger. Do not count this as either a
+successful real shutdown test or proof the guard still hangs. The owned test
+group (launcher 59828) was terminated; O:\winnt was restored from
+`pre-native-wait-deployment` and the default guest-r7 test fixtures restored.
+The latest guard remains build-only WIP pending a deterministic real fault
+witness and the full regression matrix. Earlier deployed native-wait results
+remain historical evidence, not the current package identity.
+
 Resolve the reserved-INT15 startup failure without misclassifying it as
 default-profile success. Finish the dispatch/caller and negative-case ledger,
 repeat/task/worker teardown evidence, and source-manifest/hash review. Test
