@@ -92,3 +92,35 @@ This proves selected 16-bit guest-observable return behavior, not all BOP
 slots or 32-bit frames. Hardware interrupt nesting, 32-bit clients, complete
 descriptor coverage and the remaining package audit are still open. No
 product diff or immutable guest-media change was made in this delivery.
+
+## 32-bit Client Frame Verification
+
+The same independent probe now has `CLIENT32`: AX=1 at DPMI entry selects
+32-bit client frames, vector offsets retain EDX, and the handlers use IRETD
+and a 32-bit far return with the original DWORD exception frame. Its code
+segment remains 16-bit. This distinguishes frame-width coverage from a
+claim of complete 32-bit instruction/code-segment coverage.
+
+NASM builds under `build/M0-T420/S38/interrupt-guest-r2`: `D38I.COM` without
+defines and `D38J.COM` with `-DCLIENT32`. The retained verifier accepts
+`-ClientBits 16` or `32` and requires the corresponding guest markers.
+`s38-interrupt32-matrix-r1` and `s38-interrupt16-matrix-r2` both pass direct
+and twice-nested routes with zero exits and matching markers. Each summary
+under `O:/winnt/logs` retains the exact probe hash.
+
+The unchanged deployed product also passes all 17 established routes using
+`Verify-CommandExitStatus.ps1`, the S34 observer and `G7.COM`, with prefix
+`s38-product-baseline-r1`. This includes direct/nested/repeated MEM, COMMAND,
+native streams/EOF, exit codes and EDIT return. Expected historical nonzero
+codes are asserted by that matrix rather than misclassified as failures.
+
+## Current Mirror Comparison
+
+Byte/hash and CRLF-normalized comparison of the fifteen bodies and three
+headers against `O:/repos.external/OpenNT/base/mvdm/dpmi32` found five byte-exact
+files: debug, register, savestat, vxd and dpmimscr. Buffer, int21map and stack
+are normalized-exact but not byte-exact: their format restoration remains a
+closure obligation. The other ten files have retained non-newline changes.
+In particular, xmem's BOOL failure check is the S36 verified repair, not an
+unnecessary type-cleanup difference; removing it would reintroduce failure
+misclassification. No mirror edit has been made during this initial review.

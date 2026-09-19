@@ -35,7 +35,9 @@ Real 16-bit software interrupt and divide-error return probes now pass both
 direct and twice-nested COMMAND routes, including stack/register/carry and
 invalid-vector assertions. Allocation stress and task cleanup baselines also
 pass; a narrow-Console marker parsing defect was corrected in the harness.
-32-bit frames and the remaining complete-package coverage are still open.
+32-bit client frames also pass with 16-bit code segments; full 32-bit code
+segments and remaining complete-package coverage are still open. The 17-route
+product baseline passes under `s38-product-baseline-r1`.
 
 ## S37 Closure Record
 

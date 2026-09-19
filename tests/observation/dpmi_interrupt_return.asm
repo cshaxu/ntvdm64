@@ -22,7 +22,11 @@ start:
     jc failed
     mov es, ax
 enter_pm:
+%ifdef CLIENT32
+    mov ax, 1                   ; 32-bit DPMI contract, still 16-bit code.
+%else
     xor ax, ax
+%endif
     call far [entry]
     jc failed
     mov byte [stage], '1'
@@ -30,12 +34,12 @@ enter_pm:
     mov bl, 60h
     int 31h
     jc failed
-    mov [old_int], dx
-    mov [old_int+2], cx
+    mov [old_int], edx
+    mov [old_int+4], cx
     mov ax, 0205h
     mov bl, 60h
     mov cx, cs
-    mov dx, interrupt_handler
+    mov edx, interrupt_handler
     int 31h
     jc failed
     mov [saved_sp], sp
@@ -49,13 +53,13 @@ enter_pm:
     jne failed
     cmp word [int_count], 1
     jne failed
-    mov dx, [old_int]
-    mov cx, [old_int+2]
+    mov edx, [old_int]
+    mov cx, [old_int+4]
     mov ax, 0205h
     mov bl, 60h
     int 31h
     jc failed
-    mov dx, int_ok
+    mov edx, int_ok
     mov ah, 09h
     int 21h
     mov byte [stage], '2'
@@ -63,12 +67,12 @@ enter_pm:
     xor bx, bx
     int 31h
     jc failed
-    mov [old_fault], dx
-    mov [old_fault+2], cx
+    mov [old_fault], edx
+    mov [old_fault+4], cx
     mov ax, 0203h
     xor bx, bx
     mov cx, cs
-    mov dx, fault_handler
+    mov edx, fault_handler
     int 31h
     jc failed
     mov [saved_sp], sp
@@ -88,8 +92,8 @@ fault_resume:
     jne failed
     mov ax, 0203h
     xor bx, bx
-    mov dx, [old_fault]
-    mov cx, [old_fault+2]
+    mov edx, [old_fault]
+    mov cx, [old_fault+4]
     int 31h
     jc failed
     mov byte [stage], '3'
@@ -97,36 +101,56 @@ fault_resume:
     mov bl, 11h                 ; Original DOSX rejects exception > 10h.
     int 31h
     jnc failed
-    mov dx, fault_ok
+    mov edx, fault_ok
     mov ah, 09h
     int 21h
     mov ax, 4C00h
     int 21h
 interrupt_handler:
     inc word [int_count]
+%ifdef CLIENT32
+    iretd
+%else
     iret
+%endif
 fault_handler:
     push bp
     mov bp, sp
+%ifdef CLIENT32
+    ; 32-bit far return (8), error (4), EIP; plus saved BP (2).
+    add dword [ss:bp+14], fault_resume-fault_instruction
+%else
     ; far return, error word, IP, CS, FLAGS, SP, SS (16-bit client).
     add word [ss:bp+8], fault_resume-fault_instruction
+%endif
     inc word [fault_count]
     pop bp
+%ifdef CLIENT32
+    o32 retf
+%else
     retf
+%endif
 failed:
-    mov dx, fail_message
+    mov edx, fail_message
     mov ah, 09h
     int 21h
     mov ax, 4C01h
     int 21h
 entry dd 0
 old_int dd 0
+    dw 0
 old_fault dd 0
+    dw 0
 saved_sp dw 0
 int_count dw 0
 fault_count dw 0
+%ifdef CLIENT32
+int_ok db 'S38_INT32_RETURN_OK',13,10,'$'
+fault_ok db 'S38_FAULT32_RETURN_NEGATIVE_OK',13,10,'$'
+%else
 int_ok db 'S38_INT16_RETURN_OK',13,10,'$'
 fault_ok db 'S38_FAULT16_RETURN_NEGATIVE_OK',13,10,'$'
+%endif
 fail_message db 'S38_FAIL_STAGE='
 stage db '0',13,10,'$'
 times 4096 db 0
