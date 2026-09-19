@@ -25,6 +25,14 @@
 | Original Owner Request | Automatically admit every S and recover/verify each complete selected package with minimal original-source differences. |
 | Similar-Issue Sweep | Both OEMUNI units, OEM versus ANSI selection, bounded buffers, optional outputs, early failure cleanup and process/file callers. |
 
+## S37 Progress
+
+The [OEMUNI review](../etc/evidence/m0-t420-s37-oemuni-capability-review.md)
+inventories 29 original entry points and their initial textual consumers.
+Current-host OEM 437 versus ANSI 1252 non-ASCII path, file-part, short-buffer
+and environment tests pass in the x86 original-source fixture. Real guest
+paths and full consumer/buffer disposition remain open; no product changes.
+
 ## S36 Closure Record
 
 The [S36 evidence](../etc/evidence/m0-t420-s36-suballoc-capability-review.md)
