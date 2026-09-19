@@ -2,6 +2,7 @@
 #define MVDM_COMMAND_GUEST_STATE_H
 
 #include <stdint.h>
+#include <vdmapi.h>
 
 #include "mvdm_guest_location.h"
 
@@ -31,6 +32,8 @@ int mvdm_command_guest_state_write_is_dos_binary(uint8_t value);
 int mvdm_command_guest_state_read_fd_access(uint16_t *value_out);
 int mvdm_command_guest_state_write_fd_access(uint16_t value);
 int mvdm_command_guest_state_add_fd_access(uint16_t modular_delta);
+void mvdm_command_check_pif(PVDMINFO info, uint16_t environment_segment,
+    uint16_t environment_bytes);
 
 #ifdef __cplusplus
 }

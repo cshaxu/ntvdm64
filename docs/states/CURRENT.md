@@ -10,13 +10,13 @@
 | --- | --- |
 | Identifier Mode | M0 T420 S37 — Ordinary Mode, single implementer/reviewer. |
 | Candidate Proposal | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md), S37. |
-| Admission And Approval | Standing owner authorization automatically admits each sequential S; S36 closes in the linked record below, following implementation delivery 8c081843a and lifecycle delivery 6f721457a. |
+| Admission And Approval | Standing sequential S authorization; owner additionally approves detached-PIF broker Console binding and run16 subtype repair after evidence 333e1324e. S36 closure is linked below. |
 | Objective | Verify the complete selected original OEMUNI package through non-ASCII DOS paths, conversions, buffers, failures and reached process callers. |
 | Non-goals | No guest-media changes, replacement conversion engine, unrelated code-page policy or unsupported WOW success claims. |
 | Reference Baseline | S17 source recovery and focused conversion/failure fixtures; current S36 formal product and all 17 established regressions. |
-| Files And ABI Surface | Original oemuni/file.c and process.c, inc/oemuni.h, actual DEM/COMMAND consumers and existing host conversion boundaries. |
+| Files And ABI Surface | OEMUNI units/header, DEM/COMMAND consumers and host conversion boundaries; existing basesrv Console reservation and run16 DOS/PIF subtype binding. No new wire ABI. |
 | Applicable Rules | Execution, source policy, mirror/minimal-diff, guest immutability, transcript-gated acceptance and build/runtime output hygiene. |
-| Verification | Inventory both source units and reached callers; source-shaped positive/negative buffer fixtures plus real DOS non-ASCII file/path workloads; formal x86 and all 17 product regressions. |
+| Verification | Both OEMUNI units/callers and buffer/failure fixtures; real non-ASCII DOS and detached PIF probes; null-Console reservation lifecycle; formal x86 and all 17 product regressions. |
 | Expected Markers | Correct round-trip names/content, exact length and failure contracts, balanced allocation and handle cleanup; unreachable consumers explicitly classified. |
 | Asset Needs | Pinned OpenNT, current formal x86 graph, disposable probes under build/M0-T420/S37 and runtime tests; logs under the approved runtime log directory. |
 | Reporting Requirements | Byte/normalized mirror comparison, retained binding rationale, original callers, positive/negative/teardown results and exact residual debt; report changed production footprint separately from tests. |
@@ -65,11 +65,14 @@ The formal original cmdpif.obj passes five host caller scenarios through real
 OEM path APIs, twice with source-correct input capacities. This proves policy
 results/cleanup, not real new-console PIF execution. Remaining closure work:
 that entry disposition, WOW/debugger handoff and mirror counts.
-The detached explicit-PIF observation now fails with exit 6 before any
-observed worker Console. Source review identifies missing initial-null DOS
-Console reservation identity and launcher PIF-subtype comparisons as binding
-candidates. No production repair is applied: expanding into broker/launcher
-ownership requires revised admission under this packet's stop condition.
+Detached explicit PIF fails with exit 6 before an observed worker Console.
+The owner approves minimal broker initial-null Console identity and launcher
+DOS/PIF subtype repairs, with focused lifecycle and full product regression.
+Those repairs now pass detached startup. DIV-194's former NULL first-command
+environment is replaced by a bounded copy for original PIF expansion; real
+ASCII/OEM startup directories and guest success/exit pass. Ten native fixtures
+and all 17 final-product regressions pass; WOW/debugger dependencies keep S37
+open. The linked evidence records exact deployed hashes and corrective growth.
 
 ## S36 Closure Record
 

@@ -1074,13 +1074,19 @@ DWORD OpenNtBaseServiceCheck(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD 
         if (message.u.CheckVDM.BinaryType==BINARY_TYPE_DOS &&
             !BaseSrvDOSWorkerWaitPending(connection->console,&console_record_exists) &&
             console_record_exists) {
-            DWORD allocate=service_allocate_console(connection->service,&separate_console);
-            if (allocate) return allocate;
             message.u.CheckVDM.ConsoleHandle=NULL;
-            separate_dos=TRUE;
         } else {
             message.u.CheckVDM.ConsoleHandle=connection->console;
         }
+    }
+    /* Both an initially detached launcher and a busy resident Console use
+     * original CheckDOS's null-Console/session-id path. Reserve the same
+     * transport identity for either, without changing the source request. */
+    if (message.u.CheckVDM.BinaryType==BINARY_TYPE_DOS &&
+        !message.u.CheckVDM.ConsoleHandle) {
+        DWORD allocate=service_allocate_console(connection->service,&separate_console);
+        if (allocate) return allocate;
+        separate_dos=TRUE;
     }
     EnterCriticalSection(&connection->service->lock);
     thread.Process=&connection->process;

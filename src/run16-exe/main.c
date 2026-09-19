@@ -220,6 +220,9 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command)
         result = ERROR_INVALID_DATA;
         goto done;
     }
+    /* PIF is a CheckVDM input subtype, not a distinct worker kind.
+     * Config/Update and Console creation consume the original base type. */
+    binary &= ~BINARY_SUBTYPE_MASK;
     /* CheckVDM has published an original DOS/WOW record.  Every failure
      * before the worker actually runs must use the matching original
      * UPDATE_VDM_UNDO_CREATION cleanup, not leave that record to a later

@@ -22,7 +22,7 @@ int main(int argc, char **argv)
     static const char config[] = "files=20\r\n";
     static const char autoexec[] = "@echo off\r\n";
 
-    if ((argc != 2 && (argc != 3 || strcmp(argv[2], "--oem-paths"))) || snprintf(pif_path, sizeof(pif_path), "%s\\P30.PIF", argv[1]) < 0 ||
+    if ((argc != 2 && (argc != 3 || (strcmp(argv[2], "--oem-paths") && strcmp(argv[2], "--literal-startup")))) || snprintf(pif_path, sizeof(pif_path), "%s\\P30.PIF", argv[1]) < 0 ||
         snprintf(config_path, sizeof(config_path), "%s\\P30.NT", argv[1]) < 0 ||
         snprintf(autoexec_path, sizeof(autoexec_path), "%s\\P30AUTO.NT", argv[1]) < 0) return 64;
     memset(&standard, 0, sizeof(standard));
@@ -51,10 +51,15 @@ int main(int argc, char **argv)
     strcpy_s(nt.nt31Prop.achAutoexecFile, sizeof(nt.nt31Prop.achAutoexecFile), autoexec_path);
     if (argc == 3) {
         /* Independent S37 profile: exercise original PIF expansion and cwd. */
-        strcpy_s(standard.startfile, sizeof(standard.startfile), "%SystemRoot%\\tests\\O37P.COM");
+        standard.MSflags |= 0x10; /* Original PIF close-on-exit policy. */
+        strcpy_s(standard.startfile, sizeof(standard.startfile), "%S37_CONFIGROOT%\\O37P.COM");
         strcpy_s(standard.defpath, sizeof(standard.defpath), "%S37_CONFIGROOT%");
         strcpy_s(nt.nt31Prop.achConfigFile, sizeof(nt.nt31Prop.achConfigFile), "%S37_CONFIGROOT%\\P30.NT");
         strcpy_s(nt.nt31Prop.achAutoexecFile, sizeof(nt.nt31Prop.achAutoexecFile), "%S37_CONFIGROOT%\\P30AUTO.NT");
+        if (!strcmp(argv[2], "--literal-startup")) {
+            strcpy_s(standard.startfile, sizeof(standard.startfile), "O:\\winnt\\tests\\O37P.COM");
+            strcpy_s(standard.defpath, sizeof(standard.defpath), argv[1]);
+        }
     }
 
     file = CreateFileA(config_path, GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);

@@ -27,6 +27,45 @@ static DWORD WINAPI same_console_query(void *context,HANDLE caller,const HANDLE 
     return ERROR_SUCCESS;
 }
 
+static int detached_reservation(OPENNT_BASE_SERVICE *service,HANDLE self)
+{
+    OPENNT_BASE_CONNECTION *connection=NULL;
+    BASE_API_MSG request={0},reply={0};
+    DWORD generation=0,error;
+    uint32_t bytes=0,required=0,receipt=0;
+    HANDLE event=NULL;
+    uint64_t reservation=0;
+    void *wire,*answer;
+    char app[]="MEM.EXE",cmd[]="MEM.EXE\r\n",directory[]="C:\\",environment[]="X=Y\0";
+    CHECK(OpenNtBaseServiceConnect(service,self,&connection,&generation)==ERROR_SUCCESS);
+    request.u.CheckVDM.BinaryType=BINARY_TYPE_DOS;
+    request.u.CheckVDM.ConsoleHandle=NULL;
+    request.u.CheckVDM.CodePage=437;
+    request.u.CheckVDM.AppName=app;request.u.CheckVDM.AppLen=sizeof(app);
+    request.u.CheckVDM.CmdLine=cmd;request.u.CheckVDM.CmdLen=sizeof(cmd);
+    request.u.CheckVDM.CurDirectory=directory;request.u.CheckVDM.CurDirectoryLen=sizeof(directory);
+    request.u.CheckVDM.Env=environment;request.u.CheckVDM.EnvLen=sizeof(environment);
+    CHECK(OpenNtBaseEncodeCheckCommand(&request,1,generation,NULL,0,&bytes));
+    wire=malloc(bytes);
+    CHECK(wire && OpenNtBaseEncodeCheckCommand(&request,1,generation,wire,bytes,&bytes));
+    CHECK(OpenNtBaseServiceCheck(connection,GetCurrentProcessId(),generation,wire,bytes,
+        NULL,0,&required,&event,&receipt)==ERROR_INSUFFICIENT_BUFFER);
+    answer=malloc(required);
+    CHECK(answer && OpenNtBaseServiceCheck(connection,GetCurrentProcessId(),generation,
+        wire,bytes,answer,required,&required,&event,&receipt)==ERROR_SUCCESS);
+    CHECK(OpenNtBaseApplyCheckReply(answer,required,generation,1,&reply));
+    CHECK(reply.ReturnValue==STATUS_SUCCESS && reply.u.CheckVDM.iTask &&
+        reply.u.CheckVDM.VDMState==VDM_NOT_PRESENT);
+    error=OpenNtBaseServiceCreateReservation(connection,GetCurrentProcessId(),generation,
+        reply.u.CheckVDM.iTask,&reservation);
+    fprintf(stderr,"detached CheckDOS task=%lu reservation-error=%lu\n",reply.u.CheckVDM.iTask,error);
+    CHECK(error==ERROR_SUCCESS && reservation);
+    CHECK(OpenNtBaseServiceDisconnect(connection)==ERROR_SUCCESS);
+    CHECK(OpenNtBaseServiceIsEmpty(service));
+    free(answer);free(wire);
+    return 0;
+}
+
 int main(int argc,char **argv)
 {
     OPENNT_BASE_SERVICE *service=NULL;
@@ -60,6 +99,9 @@ int main(int argc,char **argv)
     CHECK(self && service!=NULL);
     CHECK(OpenNtBaseServiceConfigureConsoleQuery(service,same_console_query,&queryCalls));
     CHECK(OpenNtBaseServiceIsEmpty(service));
+    /* Repeating after rundown proves the failed-start record is not reused. */
+    CHECK(detached_reservation(service,self)==0);
+    CHECK(detached_reservation(service,self)==0);
     CHECK(OpenNtBaseServiceConnect(service,self,&launcher,&launcherGeneration)==ERROR_SUCCESS);
     CHECK(!OpenNtBaseServiceIsEmpty(service));
     /* Standard streams cross the standalone service as receipts.  Keep the

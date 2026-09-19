@@ -4,6 +4,27 @@
 #include <stdio.h>
 #include <string.h>
 
+typedef struct { FILE *report; DWORD worker; } WINDOW_REPORT;
+static BOOL CALLBACK child_text(HWND window, LPARAM context)
+{
+    char text[1024];
+    WINDOW_REPORT *state=(WINDOW_REPORT *)context;
+    if (GetWindowTextA(window,text,sizeof(text)))
+        fprintf(state->report,"window-text=%s\n",text);
+    return TRUE;
+}
+static BOOL CALLBACK worker_window(HWND window, LPARAM context)
+{
+    DWORD pid=0;
+    WINDOW_REPORT *state=(WINDOW_REPORT *)context;
+    GetWindowThreadProcessId(window,&pid);
+    if (pid==state->worker) {
+        child_text(window,context);
+        EnumChildWindows(window,child_text,context);
+    }
+    return TRUE;
+}
+
 static void snapshot(FILE *report, HANDLE output)
 {
     CONSOLE_SCREEN_BUFFER_INFO info;
@@ -32,6 +53,7 @@ int main(int argc, char **argv)
     char command[1024];
     DWORD code = STILL_ACTIVE, started, wait = WAIT_TIMEOUT;
     int attached = 0;
+    WINDOW_REPORT windows={0};
     if (argc != 3 || strncmp(argv[1], "O:\\winnt\\logs\\", 14) ||
         snprintf(command, sizeof(command), "\"O:\\winnt\\run16.exe\" \"%s\"", argv[2]) >= sizeof(command)) return 64;
     if (fopen_s(&report, argv[1], "wx") || !report) return 65;
@@ -63,6 +85,7 @@ int main(int argc, char **argv)
                     FreeConsole();
                     if (AttachConsole((DWORD)members.ids[i])) {
                         attached = 1;
+                        windows.worker=(DWORD)members.ids[i];
                         ShowWindow(GetConsoleWindow(), SW_HIDE);
                         output = CreateFileA("CONOUT$", GENERIC_READ | GENERIC_WRITE,
                             FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, 0, NULL);
@@ -78,6 +101,8 @@ int main(int argc, char **argv)
     }
     GetExitCodeProcess(child.hProcess, &code);
     fprintf(report, "wait=%lu exit=%lu\n", wait, code);
+    windows.report=report;
+    if (windows.worker) EnumWindows(worker_window,(LPARAM)&windows);
     if (output != INVALID_HANDLE_VALUE) snapshot(report, output);
 done:
     if (output != INVALID_HANDLE_VALUE) CloseHandle(output);

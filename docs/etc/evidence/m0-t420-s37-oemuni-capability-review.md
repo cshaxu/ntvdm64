@@ -1167,3 +1167,98 @@ real guest result. Existing OEMUNI host fixtures establish API contracts only.
 This table records dependencies, not an exclusion or a reduced S37 exit bar.
 The proposal's real Win16 wording and the explicit-PIF failure remain open;
 S37 is not closed and no WOW/debugger success is claimed.
+
+## Owner-approved detached PIF binding repair
+
+The owner approved extending S37 to the identified broker/launcher boundary.
+The unchanged formal x86 graph is intentionally reused; build and fixture
+logs are under S37/pif-binding-r1 and S37/pif-environment-fixtures-r1.
+
+The reservation fixture now submits a genuinely null-Console DOS request.
+Before repair, original CheckDOS returns task 1 successfully, immediately
+followed by reservation-error=6. After repair, two successive cases return
+tasks 1 and 2 with reservation-error=0; disconnect/rundown leaves the service
+empty, and the existing full Check/Update/Get/Exit/stream/WOW fixture passes.
+This resolves the previous source-only attribution of the error-6 boundary.
+
+Recovery ladder: original BaseCheckVDM, CheckDOS, BaseGetVdmConfigInfo and
+UpdateVDMEntry remain compiled owners. Private NT4 Console handles cannot be
+transported as modern broker identities; the already-admitted finite Console
+binding is reused, not replaced. Its existing allocation now covers both
+initially detached DOS and explicitly separated busy-Console DOS. The source
+request stays null until original PIF acquisition publishes the identity.
+run16 clears BINARY_SUBTYPE_MASK after successful new-record CheckVDM;
+configuration, new-Console creation and update then consume DOS, not DOS|PIF.
+No new wire protocol, record policy, mirror algorithm or external intrusion
+is introduced. A new standalone implementation rung is unnecessary.
+
+### Newly reached missing guest-environment input
+
+The first repaired run creates ntvdm.exe -f -i1. Existing RPC trace proves
+PIF and first-command Get requests succeed, but the observer records the
+original Invalid startup directory dialog. Comparing cmdmisc.c with pinned
+OpenNT proves this is a project regression, not an original-source bug:
+the original first call binds cmdVDMEnvBlk.lpszzEnv to the completed guest
+environment at EnvSeg:0; the existing DIV-194 lease conversion replaced it
+with NULL. Original cmdExpandEnvironmentStrings consequently has no variables.
+
+DIV-194 now wraps only the original PIF call with a bounded copy of that
+first-command input. The existing guest-state component acquires a read lease,
+copies EnvSize bytes, releases before any host/UI call, checks double-NUL
+termination, temporarily binds the copy, calls unchanged cmdCheckForPIF, and
+clears/frees it. Existing merged environments and non-first calls stay on the
+original direct path. Unavailable/unterminated input and allocation failure
+return explicit errors. No guest write, replacement expansion algorithm,
+durable alias, new mirror file or overlay is used.
+
+### Real execution and controls
+
+Logs below are under O:/winnt/logs. All PIFs and probes are independently
+authored inputs; default CONFIG/AUTOEXEC copies and original guest binaries
+remain unchanged.
+
+| Observation | Result and interpretation |
+| --- | --- |
+| s37-pif-detached-fixed-r3.txt | Before environment-binding repair: original invalid-startup-directory UI, not silent success. |
+| s37-pif-literal-r1.txt | Correct cwd and S37_PIF_GUEST_OK; no close-on-exit bit intentionally leaves original Inactive worker. Timeout is not a normal-exit pass. |
+| s37-pif-close-r1.txt | Literal startup with original close-on-exit bit: cwd WINNT/TESTS/P37END, success marker, launcher exit 0. |
+| s37-pif-env-fixed-ascii-r1.txt | Malformed test expectation used host SystemRoot for a probe actually under O:/winnt; startup-directory expansion succeeds but program-name error follows. Discarded as a positive test. |
+| s37-pif-env-fixed-ascii-r2.txt | Explicit test-variable expansion, cwd WINNT/TESTS/P37ENV2, guest marker and exit 0. |
+| s37-pif-env-fixed-oem-r2.txt | Same with OEM437 pound-sign directory P37E£: exact cwd, guest marker and exit 0. |
+
+The retained builder uses S37_CONFIGROOT for both startup program and directory;
+the probe is copied into that private directory. This corrects the test, not
+the product environment. Literal mode remains a separate control. The observer
+reports only its job-owned worker's windows and Console output and closes its
+private job on completion/timeout.
+
+All ten native OEMUNI/PIF fixtures pass. The new fixture compiles the actual
+guest-state source, asserts copying rather than aliasing and release before
+the original-consumer call, and injects allocation/acquire/release failures,
+missing double-NUL and undersized input. It checks no residual allocation or
+published pointer and preserves an existing environment. Unrelated same-TU
+functions have fail-fast stubs; they must not execute. Native results live in
+S37/pif-env-r1. An initial overly long fixture cwd correctly failed original
+PIF's 64-character startup-directory limit; only the short-root rerun is the
+positive result. Earlier compile failures (fixture printf import and an
+incorrectly named copy helper) were corrected before runtime publication.
+
+Final formal product build: pif-binding-r1/environment-build-r3.log.
+All 17 established routes pass in s37-pif-binding-product-r2-summary.json;
+r1 is the intermediate broker-only product and is not final-product evidence.
+Final real OEM direct/nested probes also pass under s37-pif-final-oem-r1,
+including the volume record's independent host oracle.
+
+| Deployed artifact | SHA-256 |
+| --- | --- |
+| run16.exe | ce626741201ab987b5e979a838369c898c59797582f2c28ae801d883cbae1b71 |
+| basesrv.exe | 0f25523c5e44cbf2fd464a51227386da05bde5fd9e9905f7c9985eca0afa98c2 |
+| ntvdm.exe | ee095a1f46c1b67b53913d4c0a073c6a80b54456f004be798ed995b8381b8039 |
+| VDMREDIR.dll | 66e3edc583e54e97f35cf487ce811e6d7c85f6ed7f1ec156f2d7f00c11bbc452 |
+
+This delivery adds +5/-3 mirror lines in cmdmisc.c, +40/-0 existing worker
+binding/header lines, and +12/-3 launcher/broker lines (comments included;
+tests/docs excluded). No overlay grows. S37's mirror change since admission
+is now +192/-61 across six files; this is corrective growth, not diff removal.
+Real explicit PIF entry is now evidenced, but the previously recorded WOW/
+debugger workload dependencies still prevent claiming complete S37 acceptance.

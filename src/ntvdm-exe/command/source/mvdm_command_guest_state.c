@@ -4,6 +4,7 @@
 #include <string.h>
 
 #include "ntvdm-exe/session/session.h"
+#include "mvdm/dos/command/cmd.h"
 
 /* DIVERGENCE(ADAPTER-SOFTPC-037): OpenNT retained these COMMAND/DEM/SoftPC
  * DOSDATA scalars as process-address aliases. Preserve one-bound-session use,
@@ -21,6 +22,42 @@ typedef struct mvdm_command_guest_state {
 } mvdm_command_guest_state;
 
 static __declspec(thread) mvdm_command_guest_state current_state;
+
+/* DIV-194: original cmdGetNextCmd exposes COMMAND's completed environment
+ * while cmdCheckForPIF expands startup fields. Copy only that bounded guest
+ * input, release the lease before host/UI calls, then discard the snapshot. */
+void mvdm_command_check_pif(PVDMINFO info, uint16_t segment, uint16_t bytes)
+{
+    mvdm_guest_location location;
+    mvdm_guest_location_lease lease;
+    char *snapshot;
+    uint32_t i;
+    if (cmdVDMEnvBlk.lpszzEnv || !IsFirstVDM) { cmdCheckForPIF(info); return; }
+    if (bytes<2 || !mvdm_guest_location_set_real_mode(&location,segment,0)) {
+        info->ErrorCode=ERROR_INVALID_ADDRESS;
+        return;
+    }
+    snapshot=malloc(bytes);
+    if (!snapshot) { info->ErrorCode=ERROR_NOT_ENOUGH_MEMORY; return; }
+    if (!mvdm_guest_location_acquire(&location,bytes,GUEST_MEMORY_ACCESS_READ,&lease))
+        info->ErrorCode=ERROR_INVALID_ADDRESS;
+    else {
+        memcpy(snapshot,lease.bytes,bytes);
+        if (!mvdm_guest_location_release(&lease,0)) {
+            free(snapshot);
+            info->ErrorCode=ERROR_INVALID_ADDRESS;
+            return;
+        }
+        for (i=0;i+1<bytes;++i) if (!snapshot[i] && !snapshot[i+1]) break;
+        if (i+1==bytes) info->ErrorCode=ERROR_INVALID_ADDRESS;
+        else {
+            cmdVDMEnvBlk.lpszzEnv=snapshot;
+            cmdCheckForPIF(info);
+            cmdVDMEnvBlk.lpszzEnv=NULL;
+        }
+    }
+    free(snapshot);
+}
 
 static int advance_real_mode(const mvdm_guest_location *base,
     uint32_t byte_count, mvdm_guest_location *result)

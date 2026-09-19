@@ -293,10 +293,12 @@ char    AppName[MAX_PATH + 13];
     // pass the pif as it is to scs to execute which we know will fail and
     // will come back to cmdGettNextCmd with proper error code.
 
-    cmdCheckForPIF (&VDMInfo);
-    if (VDMInfo.ErrorCode == ERROR_INVALID_ADDRESS) {
+    /* DIVERGENCE(MVDM-HOST-DIV-194): restore the original guest environment
+     * input for PIF expansion through a call-local copied lease. */
+    mvdm_command_check_pif(&VDMInfo, FETCHWORD(pCMDInfo->EnvSeg), FETCHWORD(pCMDInfo->EnvSize));
+    if (VDMInfo.ErrorCode == ERROR_INVALID_ADDRESS || VDMInfo.ErrorCode == ERROR_NOT_ENOUGH_MEMORY) {
         setCF(1);
-        setAX((USHORT)ERROR_INVALID_ADDRESS);
+        setAX((USHORT)VDMInfo.ErrorCode);
         return;
     }
 
