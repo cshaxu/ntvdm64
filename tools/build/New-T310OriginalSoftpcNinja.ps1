@@ -275,8 +275,7 @@ $openntRtlNames = @('environ.c', 'error.c', 'time.c')
 $openntRtlX86Names = @('largeint-selected.asm', 'movemem-selected.asm')
 $adapterSoftpcNames = @('mvdm_softpc_firmware.c', 'mvdm_xms_memory.c', 'mvdm_a20.c', 'mvdm_softpc_guest_memory.c', 'mvdm_softpc_physical_mapping.c',
                         'mvdm_guest_location.c', 'mvdm_softpc_execution.c', 'mvdm_softpc_termination.c',
-                        'mvdm_standalone_worker.c',
-                        'mvdm_softpc_event_thread.c',
+                         'mvdm_standalone_worker.c',
                         'mvdm_softpc_presentation_font.c',
                         'mvdm_softpc_descriptor_fields.c')
 $productPackageNames = @('package_layout.c')

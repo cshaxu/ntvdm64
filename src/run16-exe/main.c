@@ -161,6 +161,22 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command)
     JOBOBJECT_EXTENDED_LIMIT_INFORMATION job_limits={0};
     SIZE_T attributes_bytes=0;
 
+    /* Original BaseCheckVDM distinguishes an inherited Console from no
+     * Console at all.  Windows gives this Console-subsystem launcher its own
+     * Console for an Explorer invocation even though its caller had none; without
+     * removing that one-member, launcher-only Console, a drag/drop request is
+     * incorrectly treated as an existing-console VDM and a resident worker
+     * holds the launch Console after its task exits.  A Console inherited from
+     * cmd.exe necessarily has another member, so preserve it unchanged. */
+    {
+        DWORD members[2];
+        DWORD count=GetConsoleProcessList(members,ARRAYSIZE(members));
+        if (count==1 && members[0]==GetCurrentProcessId() && !FreeConsole()) {
+            result=GetLastError();
+            goto done;
+        }
+    }
+
     /* This is the original parent-side VDM environment projection.  The
      * ANSI record is captured by BaseCheckVDM; the matching Unicode record
      * is passed unchanged to the newly-created worker. */
