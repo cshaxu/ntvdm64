@@ -4,31 +4,32 @@
 
 ## Active Packet
 
-**Active: M0 T420 S28**
+**Active: M0 T420 S29**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T420 S28 — Ordinary Mode. |
-| Candidate Proposal | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md) S28. |
-| Admission And Approval | Owner authorized automatic sequential S admission; S27 is closed by its indexed whole-package capability evidence. |
-| Objective | Close the complete selected `softpc.new/base/disks` capability unit with real disk read/write, backing-store, media/error and teardown acceptance. |
-| Non-goals | No new guest media, CPU30/kernel monitor revival, guest-media mutation, emulator replacement, WOW work, or unrelated Console redesign. |
-| Reference Baseline | S8 restored the complete disks manifest; S28 must now classify every current real capability and resource lifecycle. |
-| Files And ABI Surface | Freeze the selected `softpc.new/base/disks` manifest and its disk/device, backing-store, error and teardown interfaces after a whole-manifest audit. |
+| Identifier Mode | M0 T420 S29 — Ordinary Mode. |
+| Candidate Proposal | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md) S29. |
+| Admission And Approval | Owner authorized automatic sequential S admission; S28 is closed by its indexed whole-package capability evidence. |
+| Objective | Close the complete selected `softpc.new/base/comms` capability unit through real current-profile communications-device workloads, representative failure and worker teardown acceptance. |
+| Non-goals | No new serial/printer medium or device provider, CPU30/kernel monitor revival, emulator replacement, WOW work, or unrelated Console redesign. |
+| Reference Baseline | S9 restored the complete comms manifest; S29 must now classify every current real capability and resource lifecycle. |
+| Files And ABI Surface | Freeze the selected `softpc.new/base/comms` manifest and its COM/printer/device, error and teardown interfaces after a whole-manifest audit. |
 | Applicable Rules | Project design/rules, source policy, strict mirror rule, CCPU40-only product rule, original-owner recovery and transcript-gated acceptance. |
-| Verification | Build a tracked normal/failure/cleanup matrix for the full selected disks manifest, then fresh formal x86 and direct plus interactive COMMAND/MEM/EDIT regressions. |
-| Expected Markers | Every selected disks family is a real pass, source-proven no selected caller, or explicit original boundary; no duplicate backing-store state or fake success. |
-| Asset Needs | Pinned OpenNT disks union, prior evidence, immutable existing guest media, test-only fixtures under `build/`, and `O:\winnt` runtime/log roots. |
+| Verification | Build a tracked normal/failure/cleanup matrix for the full selected comms manifest, then fresh formal x86 and direct plus interactive COMMAND/MEM/EDIT regressions. |
+| Expected Markers | Every selected communications family is a real pass, source-proven no selected caller, or explicit original profile boundary; no duplicate device state or fake success. |
+| Asset Needs | Pinned OpenNT comms union, prior evidence, immutable existing guest media, test-only fixtures under `build/`, and `O:\winnt` runtime/log roots. |
 | Reporting Requirements | Record source hashes, service-to-owner/provider map, exact guest transcripts, error/cleanup observations, retained finite bindings, mirror/adapter delta and all regression results. |
-| Stop Conditions | A required new firmware/floppy medium, CPU30/kernel dependency, guest-media mutation, duplicate disk owner, or COMMAND/MEM/EDIT regression pauses for renewed owner direction. |
-| Exit Criteria | Every selected disks family has real evidence or a source-proven disposition; original ownership is preserved; fresh x86, package-local matrix and established regressions pass; evidence/index/status updated; reviewed P pushed. |
+| Stop Conditions | A required new serial/printer medium, CPU30/kernel dependency, guest-media mutation, duplicate device owner, or COMMAND/MEM/EDIT regression pauses for renewed owner direction. |
+| Exit Criteria | Every selected comms family has real current-profile evidence or a source-proven disposition; original ownership is preserved; fresh x86, package-local matrix and established regressions pass; evidence/index/status updated; reviewed P pushed. |
 | Original Owner Request | “继续执行。” following the standing automatic sequential S authorization and the corrected S21--S39 T420 sequence. |
-| Similar-Issue Sweep | Audit selected disk, floppy/media, backing-store, BOP and error endpoints for duplicate device state, guest-media substitution, stale handle state and fake success. |
+| Similar-Issue Sweep | Audit selected serial, printer, device, BOP and error endpoints for duplicate device state, autonomous provider substitution, stale handle state and fake success. |
 
-## S28 Progress
+## S29 Progress
 
-Admission complete.  S28 starts with a whole-manifest source/caller and
-existing-evidence audit.  No disks product behavior has changed.
+Admission complete under the standing automatic sequential authorization.
+S29 starts with a whole-manifest source/caller and existing-evidence audit.
+No communications product behavior has changed.
 
 ## S1 Closure Record
 
@@ -269,6 +270,16 @@ ownership and formal deployed COMMAND/MEM/EDIT regression.  The sole product
 change is none; the test harness now uses the declared runtime test directory
 instead of a cross-process `SUBST` assumption.
 
+## S28 Closure Record
+
+[T420 S28 disks capability closure](../etc/evidence/m0-t420-s28-disks-capability-closure.md)
+closes all ten selected original disks bodies under the original
+no-attached-media profile.  It adds no product implementation or virtual
+medium: real original startup, controller reset and worker teardown pass;
+disk transfer and non-selected floppy providers are source-proven profile
+exclusions.  Fresh five-artifact x86 deployment and all 17 COMMAND/MEM/EDIT
+transcript-gated routes pass.
+
 ## Current Technical Baseline
 
 - Product package: Win32/x86 CCPU40 `run16.exe`, `basesrv.exe`, `ntvdm.exe`,
@@ -284,7 +295,9 @@ instead of a cross-process `SUBST` assumption.
   OEMUNI, S18 closes DPMI32, S19 closes guest DPMI/DOSX, S20 closes VDMREDIR,
 and S21 closes CCPU386 capability acceptance. S22 closes C-VID publication
 capability; S23 closes video capability within the public-Console boundary;
-S24 closes system capability within the selected no-floppy-media profile.
+S24 closes system capability within the selected no-floppy-media profile; S28
+closes the selected original disks capability under the corresponding
+no-attached-media profile.
 
 ## Prior Closure
 

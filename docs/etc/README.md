@@ -2,6 +2,7 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T420 S28 disks capability closure](evidence/m0-t420-s28-disks-capability-closure.md) | M0 T420 S28 | Complete no-attached-media disks disposition, real INT 13 reset witness, formal x86 deployment and established package regression. | Retain through T420 package completion. |
 | [T420 S27 support capability closure](evidence/m0-t420-s27-support-capability-closure.md) | M0 T420 S27 | Complete support startup/time/IOS/termination capability matrix, real guest witness and formal package regression proof. | Retain through T420 package completion. |
 | [T420 S26 BIOS capability closure](evidence/m0-t420-s26-bios-capability-baseline.md) | M0 T420 S26 | Whole BIOS manifest, real safe guest services, explicit EMS profile-null and formal/package regression proof. | Retain through T420 package completion. |
 | [T420 S25 keymouse capability closure](evidence/m0-t420-s25-keymouse-capability-baseline.md) | M0 T420 S25 | Real guest keyboard/modifier, PPI, INT 33 callback and teardown evidence on the formal x86 package. | Retain through T420 package completion. |
