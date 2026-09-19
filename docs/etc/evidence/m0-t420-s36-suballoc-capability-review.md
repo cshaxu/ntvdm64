@@ -313,3 +313,30 @@ Lease allocation and slot availability are separate real failure points.
 The outstanding work is a composed allocator/worker-callback failure test
 and disposition of the original bitmap rollback defect; no production code
 or immutable guest media changes are made by this test delivery.
+
+## Composed original allocator and real worker callbacks
+
+The same builder now also compiles unchanged `suballoc.c`; the fixture's
+separate `--allocator-failure-audit` mode binds SAInitialize directly to
+production xmsCommitBlock/xmsDecommitBlock/xmsMoveMemory. The backing is
+128 KiB. Allocate the entire pool, preserve a 4 KiB sentinel at offset 65536,
+reject backing writes, and request SAFree for that page. SAFree returns FALSE
+and the sentinel survives. Nevertheless SAQueryFree reports 4096 free bytes.
+The next 4096-byte SAAllocate returns FALSE: FreeChunk restored FirstFree
+from its fixed-size local structure, but not the trailing bitmap it cleared.
+
+The first test incorrectly expected immediate successful reassignment and
+exited 23. Source inspection plus that result disproved the expectation;
+the corrected assertion checks the observed query/allocation disagreement,
+not a fabricated overwrite. The resulting x86 run in
+`build/M0-T420/S36/callback-composed-r1/x86` exits zero with
+`S36_KNOWN_DEFECT_FAILED_FREE_PHANTOM_CAPACITY_REPRODUCED`. This denotes
+successful defect reproduction, NOT allocator acceptance. Normal callback
+failure/lease reuse and move-cancellation checks also pass in that build.
+
+The experiment injects backing write rejection; it does not claim that the
+production SAS provider normally rejects a valid range. It does prove that
+the original rollback defect survives composition with actual worker
+callbacks. Product behavior is unchanged. Further disposition must preserve
+the original allocation contract and address partial multi-page failure,
+not merely repair this single bitmap example or conceal it with success.

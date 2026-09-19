@@ -2,12 +2,13 @@
 #include "mvdm_softpc_guest_memory.h"
 #include "mvdm_xms_memory.h"
 #include "xms.h"
+#include "suballoc.h"
 
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 
-#define FIXTURE_MEMORY_BYTES 8192u
+#define FIXTURE_MEMORY_BYTES 131072u
 
 typedef struct fixture_memory {
     uint8_t bytes[FIXTURE_MEMORY_BYTES];
@@ -54,7 +55,33 @@ static int fixture_write(void *context, uint32_t address, const uint8_t *bytes,
     return 1;
 }
 
-int main(void)
+static int allocator_failure_audit(session *instance, fixture_memory *memory)
+{
+    PVOID pool = SAInitialize(0u, FIXTURE_MEMORY_BYTES, xmsCommitBlock,
+        xmsDecommitBlock, xmsMoveMemory);
+    ULONG address, available, largest;
+    if (!pool || !SAAllocate(pool, FIXTURE_MEMORY_BYTES, &address) || address)
+        return 20;
+    memset(memory->bytes + 65536u, 0x5a, 4096u);
+    memory->reject_write = 1;
+    if (SAFree(pool, 4096u, 65536u)) return 21;
+    memory->reject_write = 0;
+    /* This is an expected-defect reproduction, never a rollback pass. The
+     * failing real callback leaves the bytes intact but FreeChunk's fixed
+     * struct copy does not restore the trailing allocation bitmap. */
+    if (!SAQueryFree(pool, &available, &largest) || available != 4096u ||
+        largest != 4096u || memory->bytes[65536u] != 0x5a ||
+        instance->state != SESSION_STATE_ACTIVE) return 22;
+    /* FirstFree was restored while the trailing bitmap was not: reported
+     * free capacity is not actually found by the next allocation. */
+    if (SAAllocate(pool, 4096u, &address) ||
+        memory->bytes[65536u] != 0x5a) return 23;
+    free(pool);
+    puts("S36_KNOWN_DEFECT_FAILED_FREE_PHANTOM_CAPACITY_REPRODUCED");
+    return 0;
+}
+
+int main(int argc, char **argv)
 {
     session instance;
     fixture_memory memory;
@@ -69,6 +96,13 @@ int main(void)
     if (!session_activate(&instance) || !session_thread_bind(&instance) ||
         !session_guest_memory_begin(&instance, &memory, fixture_read, fixture_write))
         return 1;
+
+    if (argc == 2 && strcmp(argv[1], "--allocator-failure-audit") == 0) {
+        int result = allocator_failure_audit(&instance, &memory);
+        session_guest_memory_end(&instance);
+        if (!session_thread_unbind(&instance) || !session_dispose(&instance)) return 24;
+        return result;
+    }
 
     if (xmsCommitBlock(64u, 16u) != 0 ||
         memcmp(memory.bytes + 64u, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0", 16u) != 0 ||
