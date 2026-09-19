@@ -143,6 +143,7 @@ fault_resume:
     mov edx, fault_ok
     mov ah, 09h
     int 21h
+%ifndef REFLECT
     mov byte [stage], '4'
     mov ax, 0204h
     mov bl, 8
@@ -187,8 +188,72 @@ fault_resume:
     mov edx, irq_ok
     mov ah, 09h
     int 21h
+%endif
+%ifdef REFLECT
+    mov byte [stage], '5'
+    mov ax, 0204h
+    xor bx, bx
+    int 31h
+    jc failed
+    mov [old_reflect], edx
+    mov [old_reflect+4], cx
+    mov ax, 0205h
+    xor bx, bx
+    mov cx, cs
+    mov edx, reflect_handler
+    int 31h
+    jc failed
+    mov [saved_sp], sp
+    xor dx, dx
+    xor bx, bx
+    mov eax, 24681357h
+    stc
+reflect_instruction:
+    div bx
+reflect_resume:
+    jnc failed
+    cmp eax, 24681357h
+    jne failed
+    cmp sp, [saved_sp]
+    jne failed
+    cmp word [reflect_count], 1
+    jne failed
+    mov ax, 0205h
+    xor bx, bx
+    mov edx, [old_reflect]
+    mov cx, [old_reflect+4]
+    int 31h
+    jc failed
+    mov edx, reflect_ok
+    mov ah, 09h
+    int 21h
+%endif
     mov ax, 4C00h
     int 21h
+%ifdef REFLECT
+reflect_handler:
+%ifdef CODE32
+    push ebp
+    mov ebp, esp
+    add dword [ss:ebp+4], reflect_resume-reflect_instruction
+    pop ebp
+%else
+    push bp
+    mov bp, sp
+%ifdef CLIENT32
+    add dword [ss:bp+2], reflect_resume-reflect_instruction
+%else
+    add word [ss:bp+2], reflect_resume-reflect_instruction
+%endif
+    pop bp
+%endif
+    inc word [reflect_count]
+%ifdef CLIENT32
+    iretd
+%else
+    iret
+%endif
+%endif
 irq_handler:
     inc word [irq_count]
 %ifdef CLIENT32
@@ -265,6 +330,12 @@ old_irq dd 0
     dw 0
 irq_count dw 0
 irq_ok db 'S38_HARDWARE_IRQ_RETURN_OK',13,10,'$'
+%ifdef REFLECT
+old_reflect dd 0
+    dw 0
+reflect_count dw 0
+reflect_ok db 'S38_UNHANDLED_REFLECTION_OK',13,10,'$'
+%endif
 int_count dw 0
 fault_count dw 0
 %ifdef CLIENT32

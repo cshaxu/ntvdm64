@@ -227,7 +227,9 @@ Arguments:
         *(PDWORD16) (VdmNewStackPointer+4) = FrameCS;
 
         FrameFlags = *(PDWORD16) (VdmStackPointer+20);
-        *(PDWORD16) (VdmNewStackPointer+4) = FrameFlags;
+        /* DIVERGENCE(MVDM-HOST-DIV-280): DWORD IRET frame is EIP, CS,
+         * EFLAGS. Offset 4 overwrites CS; flags belong at offset 8. */
+        *(PDWORD16) (VdmNewStackPointer+8) = FrameFlags;
         FrameFlags &= ~(EFLAGS_INTERRUPT_MASK | EFLAGS_TF_MASK);
         *(PDWORD16) (VdmStackPointer+20) = FrameFlags;
 

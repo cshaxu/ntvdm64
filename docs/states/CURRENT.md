@@ -41,6 +41,10 @@ The probe checks full EAX, stack and carry preservation. Three newline-only
 mirror differences are restored byte-exact; the formal x86 product relinks.
 Remaining complete-package coverage is still open. The earlier 17-route
 product baseline passes under `s38-product-baseline-r1`.
+Real timer IRQ and nested-fault routes now pass all three code/frame variants.
+Unhandled 16/32-bit divide reflection passes after correcting the original
+DWORD IRET EFLAGS offset (DIV-280); no replacement provider or guest mutation.
+The evidence distinguishes earlier timeouts from direct source/layout proof.
 
 ## S37 Closure Record
 

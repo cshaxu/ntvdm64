@@ -210,3 +210,49 @@ special fast/debug/VCD service dispositions and complete selected-body/slot
 coverage. A registered exception handler passing does not prove unhandled
 exception behavior; `DpmiUnhandledExceptionHandler` has distinct reflection
 and fatal branches that must not be silently marked passed.
+
+## Unhandled Exception Reflection And Original Frame Correction
+
+An independent `REFLECT` variant restores the default divide fault handler,
+installs a protected-mode interrupt 0 handler and triggers DIV-by-zero. The
+default DOSX fault entry must transfer through the original unhandled-fault
+reflection into that interrupt handler. The handler skips only this probe's
+DIV instruction and returns; EAX, carry, SP and one reflection are asserted.
+Reflection and timer cases are selected separately, avoiding ambiguous
+attribution of a failure in the preceding timer wait.
+
+Both pinned `OpenNT/base/mvdm/dpmi32/dpmiint.c` and
+`OpenNT-4.5/nt/private/mvdm/dpmi32/dpmiint.c` write FrameCS to DWORD-frame
+offset 4 and then overwrite it with FrameFlags at offset 4. The required
+EIP/CS/EFLAGS layout is offsets 0/4/8, as the same file's other IRETD frame
+construction demonstrates. DIV-280 changes only that flags destination to 8.
+
+Recovery ladder: the original translation unit already composes and remains
+the implementation owner. A facade cannot fix a wrong store offset inside
+that owner without changing its algorithm or replacing it; no external-code
+intrusion or autonomous provider is needed. The minimal registered mirror
+correction preserves original ordering, reflected-handler selection and
+failure flow. Product source delta is +3/-1 including two comment lines;
+adapter/overlay delta is zero. This is an upstream layout defect, not a
+newly invented exception policy.
+
+Evidence chronology: `s38-reflect16-r1` and the two r2 16-bit cases emit their
+success markers. The first 32-bit combined attempt times out before an IRQ
+marker, so it cannot identify reflection as the failing operation. The
+isolated `s38-reflect32-r2` also times out with no captured success text;
+that absence is not a per-instruction fault trace. With the single offset
+correction and the same r2 binary, `s38-reflect32-fixed-r1` passes direct and
+nested routes. `s38-reflect16-fixed-r1` and `s38-hardware-fixed-r1` also pass
+both routes. This source/layout plus same-probe contrast supports the fix;
+it does not claim that every earlier timeout has been conclusively attributed.
+
+One 16-bit run additionally exposed test cleanup racing normal broker-loss
+exit after success. The runner now tolerates a process already gone while
+still requiring any looked-up process to finish within five seconds.
+
+Formal x86 compile/link and VdmTib verification passed using the retained
+S36 graph. Deployed worker hash is
+`55214ce4a67d08716432b83b54e061eef37fc238eb2bc8c9ccc9bfe0307f11ec`.
+The full product gate `s38-reflection-product-r1` completed with all 17 routes
+passing, including EDIT return. S38 remains open, including the distinct
+fatal branch and remaining service/coverage dispositions.

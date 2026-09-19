@@ -4,7 +4,8 @@ param(
     [Parameter(Mandatory)][string]$Probe,
     [Parameter(Mandatory)][string]$LogPrefix,
     [string]$PackageRoot = 'O:\winnt',
-    [ValidateSet(16,32)][int]$ClientBits = 16
+    [ValidateSet(16,32)][int]$ClientBits = 16,
+    [switch]$Reflection
 )
 $ErrorActionPreference = 'Stop'
 $Observer = (Resolve-Path -LiteralPath $Observer).Path
@@ -41,15 +42,22 @@ foreach ($route in @('direct','nested')) {
         if ($text -match 'S38_FAIL|Bad command or filename' -or
             $text -notmatch "S38_INT${ClientBits}_RETURN_OK" -or
             $text -notmatch "S38_FAULT${ClientBits}_RETURN_NEGATIVE_OK" -or
-            $text -notmatch 'S38_HARDWARE_IRQ_RETURN_OK') { throw 'Missing guest assertions' }
-        $results += @{Route=$route; ClientBits=$ClientBits; Report=$report; ProbeSha256=(Get-FileHash $Probe).Hash}
+            (!$Reflection -and $text -notmatch 'S38_HARDWARE_IRQ_RETURN_OK')) { throw 'Missing guest assertions' }
+        if ($Reflection -and $text -notmatch 'S38_UNHANDLED_REFLECTION_OK') {
+            throw 'Missing unhandled exception reflection assertion'
+        }
+        $results += @{Route=$route; ClientBits=$ClientBits; Reflection=[bool]$Reflection; Report=$report; ProbeSha256=(Get-FileHash $Probe).Hash}
         Write-Host "PASS S38 interrupt/fault return $route"
     } finally {
         if ($launcher) {
             foreach ($child in (PackageProcesses)) {
                 if ($child.ParentProcessId -eq $launcher) {
                     $process = Get-Process -Id $child.ProcessId -ErrorAction SilentlyContinue
-                    if ($process) { Stop-Process -Id $process.Id -Force; [void]$process.WaitForExit(5000) }
+                    if ($process) {
+                        # Broker-loss teardown may finish between lookup and kill.
+                        Stop-Process -Id $process.Id -Force -ErrorAction SilentlyContinue
+                        if (!$process.WaitForExit(5000)) { throw 'Test-owned process survived cleanup' }
+                    }
                 }
             }
         }

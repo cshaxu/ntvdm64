@@ -1,5 +1,12 @@
 # mvdm
 
+MVDM-HOST-DIV-280: `dpmi32/dpmiint.c::DpmiUnhandledExceptionHandler`
+places EFLAGS at byte 8 of its original DWORD IRET frame, preserving the
+CS at byte 4. Both pinned OpenNT editions write flags over CS; this is
+an original-owner layout correction, not a replacement provider. S38
+records source comparison and runtime verification status in its
+[evidence](../../docs/etc/evidence/m0-t420-s38-dpmi32-capability-review.md).
+
 MVDM-HOST-DIV-279: `dos/dem/demgset.c::GetMediaId` corrects the original
 filesystem padding loop's destination field. Its source comment requires
 NUL-to-space padding in both fixed-width strings; writing VolumeID leaves
