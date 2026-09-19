@@ -25,6 +25,16 @@
 | Original Owner Request | Automatically admit every S and recover/verify each complete selected package with minimal original-source differences. |
 | Similar-Issue Sweep | Both XMS and DPMI callers, page granularity, rounding/overflow, in-place versus moved growth, shrink, allocation failure, callback failure and resource cleanup. |
 
+## S36 Progress
+
+The [S36 evidence](../etc/evidence/m0-t420-s36-suballoc-capability-review.md)
+records direct and doubly nested real XMS forced relocation, plus original-source
+fixtures for preceding/elsewhere moves, byte preservation, fragmentation,
+exhaustion and release. Injected commit/decommit failures expose two upstream
+rollback limitations; current worker reachability is not yet established.
+No production code or guest media changed. Real DPMI and the remaining failure
+and product-regression gates remain open; this is not S36 closure.
+
 ## S35 Closure Record
 
 The [S35 evidence](../etc/evidence/m0-t420-s35-xms-capability-progress.md)

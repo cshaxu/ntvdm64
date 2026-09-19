@@ -38,6 +38,43 @@ start:
     jne fail_alloc
     mov [xms_handle], dx
 
+%ifdef FORCED_RELOCATION
+    ; S36: occupy the following extent and prove it is actually adjacent.
+    mov ah, 0Ch
+    call far [xms_entry]
+    cmp ax, 1
+    jne fail_free
+    mov [original_base], bx
+    mov [original_base + 2], dx
+    mov dx, [xms_handle]
+    mov ah, 0Dh
+    call far [xms_entry]
+    cmp ax, 1
+    jne fail_free
+    mov dx, 64
+    mov ah, 09h
+    call far [xms_entry]
+    cmp ax, 1
+    jne fail_free
+    mov [guard_handle], dx
+    mov ah, 0Ch
+    call far [xms_entry]
+    cmp ax, 1
+    jne fail_free
+    movzx eax, dx
+    shl eax, 16
+    mov ax, bx
+    sub eax, [original_base]
+    cmp eax, 65536
+    jne fail_free
+    mov dx, [guard_handle]
+    mov ah, 0Dh
+    call far [xms_entry]
+    cmp ax, 1
+    jne fail_free
+    mov dx, [xms_handle]
+%endif
+
     ; Move eight bytes from this conventional COM image into the XMS block.
     mov word [move_src_handle], 0
     mov word [move_dst_handle], dx
@@ -59,6 +96,29 @@ start:
     jne fail_free
 
     ; Move the original bytes back to conventional memory and compare.
+%ifdef FORCED_RELOCATION
+    mov dx, [xms_handle]
+    mov ah, 0Ch
+    call far [xms_entry]
+    cmp ax, 1
+    jne fail_free
+    movzx eax, dx
+    shl eax, 16
+    mov ax, bx
+    cmp eax, [original_base]
+    je fail_free                    ; successful resize alone is insufficient
+    mov dx, [xms_handle]
+    mov ah, 0Dh
+    call far [xms_entry]
+    cmp ax, 1
+    jne fail_free
+    mov dx, [guard_handle]
+    mov ah, 0Ah
+    call far [xms_entry]
+    cmp ax, 1
+    jne fail_free
+    mov word [guard_handle], 0
+%endif
     mov dx, [xms_handle]
     mov [move_src_handle], dx
     mov word [move_dst_handle], 0
@@ -351,6 +411,10 @@ print_hex:
     ret
 
 xms_entry       dw 0, 0
+%ifdef FORCED_RELOCATION
+original_base   dd 0
+guard_handle    dw 0
+%endif
 xms_handle      dw 0
 initial_free_kb dw 0
 umb_handle      dw 0
@@ -361,7 +425,11 @@ move_dst_handle dw 0
 move_dst_offset dd 0
 source_bytes    db 'XMSMOVES'
 
+%ifdef FORCED_RELOCATION
+success_text      db 'S36_XMS_FORCED_RELOCATION_DATA_RELEASE_OK',13,10,'$'
+%else
 success_text      db 'S35_XMS_ALLOC_MOVE_REALLOC_FREE_A20_OK',13,10,'$'
+%endif
 umb_ok_text       db 'S35_XMS_UMB_ALLOC_FREE_OK',13,10,'$'
 umb_absent_text   db 'S35_XMS_UMB_NO_FREE_BLOCKS',13,10,'$'
 %ifdef DEFAULT_INT15
