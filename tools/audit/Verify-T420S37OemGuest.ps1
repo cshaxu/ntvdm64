@@ -13,9 +13,6 @@ if ($LogPrefix -notmatch '^[a-z0-9-]+$') { throw 'Invalid prefix' }
 if ((Get-ItemPropertyValue 'HKLM:\SYSTEM\CurrentControlSet\Control\Nls\CodePage' OEMCP) -ne '437') {
     throw 'This fixed-byte probe requires the recorded OEM 437 host profile'
 }
-if ((Get-ItemPropertyValue 'HKLM:\SYSTEM\CurrentControlSet\Control\Nls\CodePage' OEMCP) -ne '437') {
-    throw 'This fixed-byte probe requires the recorded OEM 437 host profile'
-}
 $paths = @('run16.exe','ntvdm.exe','basesrv.exe') | ForEach-Object { Join-Path $PackageRoot $_ }
 function Processes {
     @(Get-CimInstance Win32_Process -Filter "Name='run16.exe' OR Name='ntvdm.exe' OR Name='basesrv.exe'" |
@@ -42,11 +39,10 @@ foreach ($route in @('direct','nested')) {
         if ($record -notmatch 'result=exited' -or $record -notmatch 'exit=0x00000000') { throw 'Guest failed' }
         $screen = Get-Content "$report.console.txt" -Raw
         if ($screen -notmatch 'S37_OEM_GUEST_CREATE_RENAME_ATTR_READ_OK' -or $screen -match 'S37_OEM_GUEST_FAIL|Bad command or filename') { throw 'Guest text failed' }
+        if ($screen -notmatch 'S37_OEM_GUEST_DIRECTORY_DELETE_DISK_OK') { throw 'Directory/disk guest text failed' }
         $dir = Join-Path $root ('D' + [char]0xa3)
         $file = Join-Path $dir ('B' + [char]0xa3 + '.DAT')
         if ([IO.File]::ReadAllText($file) -cne "S37-OEM-GUEST-BYTES`r`n") { throw 'Unicode file/content mismatch' }
-        if (@(Get-ChildItem -LiteralPath $root -Force).Count -ne 1 -or
-            @(Get-ChildItem -LiteralPath $dir -Force).Count -ne 1) { throw 'Unexpected test files; preserve for inspection' }
         if (@(Get-ChildItem -LiteralPath $root -Force).Count -ne 1 -or
             @(Get-ChildItem -LiteralPath $dir -Force).Count -ne 1) { throw 'Unexpected test files; preserve for inspection' }
         $results += @{Route=$route; Report=$report; UnicodePath=$file; ProbeSha256=(Get-FileHash $Probe).Hash; FileSha256=(Get-FileHash $file).Hash}

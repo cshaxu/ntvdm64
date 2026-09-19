@@ -69,6 +69,78 @@ start:
     cld
     repe cmpsb
     jne failed
+    ; Exercise original directory, deletion and disk-info services in guest.
+    mov si, saved_directory+1
+    xor dl, dl
+    mov ah, 47h
+    int 21h
+    jc failed
+    mov dx, directory
+    mov ah, 3Bh
+    int 21h
+    jc failed
+    mov dx, scratch_name
+    xor cx, cx
+    mov ah, 5Bh
+    int 21h
+    jc failed
+    mov bx, ax
+    mov ah, 3Eh
+    int 21h
+    jc failed
+    mov dx, scratch_name
+    mov ah, 41h
+    int 21h
+    jc failed
+    mov ax, 3D00h
+    int 21h
+    jnc failed
+    cmp ax, 2
+    jne failed
+    mov dx, scratch_directory
+    mov ah, 39h
+    int 21h
+    jc failed
+    mov ah, 3Ah
+    int 21h
+    jc failed
+    xor dl, dl
+    mov ah, 36h
+    int 21h
+    cmp ax, 0FFFFh
+    je failed
+    test ax, ax
+    jz failed
+    test cx, cx
+    jz failed
+    test dx, dx
+    jz failed
+    cmp bx, dx
+    ja failed
+    mov ax, 4408h
+    xor bx, bx
+    int 21h
+    jc failed
+    cmp ax, 1
+    ja failed
+    mov dx, saved_directory
+    mov ah, 3Bh
+    int 21h
+    jc failed
+    mov si, restored_directory
+    xor dl, dl
+    mov ah, 47h
+    int 21h
+    jc failed
+    mov si, restored_directory
+    mov di, saved_directory+1
+    mov cx, 64
+    cld
+    repe cmpsb
+    jne failed
+    mov dx, directory_success
+    mov ah, 09h
+    int 21h
     mov dx, success
     mov ah, 09h
     int 21h
@@ -86,5 +158,11 @@ final_name db 'tests\O37G\D',09Ch,'\B',09Ch,'.DAT',0
 payload db 'S37-OEM-GUEST-BYTES',13,10
 payload_end:
 buffer times 32 db 0
+saved_directory db '\'
+    times 64 db 0
+restored_directory times 64 db 0
+scratch_name db 'C',09Ch,'.DAT',0
+scratch_directory db 'E',09Ch,0
+directory_success db 'S37_OEM_GUEST_DIRECTORY_DELETE_DISK_OK',13,10,'$'
 success db 'S37_OEM_GUEST_CREATE_RENAME_ATTR_READ_OK',13,10,'$'
 failure db 'S37_OEM_GUEST_FAIL',13,10,'$'

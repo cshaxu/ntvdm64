@@ -357,18 +357,18 @@ packets remain supporting evidence, not per-interface hits.
 | CreateFileOem | DEM demfile/demfcb/demmisc; WOW wkfileio | G create/open/read/write/close and failed old-name open; H |
 | SetFileAttributesOem | DEM demfile/demfcb; WOW wkfileio/wkman | G set/reset read-only; H |
 | GetFileAttributesOem | DEM demfile/demdir; COMMAND cmdpif; WOW | G attribute query; H |
-| DeleteFileOem | DEM demfile/demfcb; WOW wkman | H success/missing; S37 guest delete witness still needed |
+| DeleteFileOem | DEM demfile/demfcb; WOW wkman | G delete plus reopen error 2; H success/missing |
 | MoveFileOem | DEM demfile/demfcb; WOW wkman | G rename; H |
 | MoveFileExOem | WOW wkman delayed-delete workaround | H; no WOW workload acceptance |
 | FindFirstFileOem | DEM demfcb FCB delete/rename | H enumeration; ordinary DOS handle-find is not proof of this FCB path |
 | FindNextFileOem | DEM demfcb FCB delete/rename | H end-of-enumeration; FCB guest witness pending |
 | GetFullPathNameOem | DEM demmisc; COMMAND cmdpif; WOW wdos/wkman | H/M byte count, prefix, short/exact, zero/oversize result |
 | GetCurrentDirectoryOem | WOW wdos | H/M; no WOW workload acceptance |
-| SetCurrentDirectoryOem | DEM demdir/demgset; COMMAND cmdpif; WOW wdos | H restoration; guest directory-switch witness pending |
+| SetCurrentDirectoryOem | DEM demdir/demgset; COMMAND cmdpif; WOW wdos | G non-ASCII switch and exact restoration; H |
 | CreateDirectoryOem | DEM demdir | G non-ASCII directory create; H |
-| RemoveDirectoryOem | DEM demdir | H; S37 guest removal witness pending |
-| GetDriveTypeOem | DEM demioctl/demgset; COMMAND cmdmisc | H compared to native drive type; targeted guest evidence pending |
-| GetDiskFreeSpaceOem | DEM demgset | H; targeted guest evidence pending |
+| RemoveDirectoryOem | DEM demdir | G private subdirectory removal; H |
+| GetDriveTypeOem | DEM demioctl/demgset; COMMAND cmdmisc | G INT21 4408 removable/fixed result; H native comparison |
+| GetDiskFreeSpaceOem | DEM demgset | G INT21 36 valid sectors/bytes/capacity; H |
 | GetVolumeInformationOem | DEM demfile/demgset/demsrch; WOW wkfileio | H/M both capacities, optional outputs, host failure and cleanup |
 | OutputDebugStringOem | DEM diagnostics including demmisc | H call; debug-only consumers do not establish ordinary guest behavior |
 | GetComputerNameOem | DEM demgset | H; targeted guest evidence pending |
@@ -400,3 +400,27 @@ intermediate-buffer/narrowing cases; add targeted DOS FCB/directory/info
 evidence; prove the font fallback contract with a test-only provider; and
 reconcile each remaining host-only/WOW-owned row without claiming a WOW
 workload. These remain part of active S37, not silent queue deferrals.
+
+## Real DOS directory, deletion and disk information
+
+The independent oem_file_contract.asm probe now also saves its DOS current
+directory (INT21 47), changes into the non-ASCII test directory (3B), creates
+and closes a disposable file (5B/3E), deletes it (41), then requires reopening
+to fail with error 2. It creates/removes another non-ASCII subdirectory
+(39/3A), queries current-drive free space (36: nonzero cluster/sector totals
+and free <= total), and queries removable/fixed drive type (4408: 0 or 1).
+Finally it restores the exact saved directory and compares the 64-byte DOS
+directory result. Existing non-ASCII content/rename/attribute proof remains.
+
+NASM output is `build/M0-T420/S37/guest-family-r1/O37.COM`. Both direct and
+two-level COMMAND /c routes pass on the unchanged 1edae5841 formal product;
+runtime log prefix s37-directory-disk-guest-r1. The harness now requires
+S37_OEM_GUEST_DIRECTORY_DELETE_DISK_OK as well as the original file marker,
+natural successful exit, and the independent Unicode-name/content oracle.
+It confirms that only the intended final file remains before exact cleanup.
+Duplicate code-page and directory-count checks in the harness were removed;
+each required check remains once. No guest medium or product source changed.
+
+These real calls cover the original DEM directory/file/disk-information
+families; they do not prove FCB enumeration, computer-name service, WOW or
+font retry. The coverage table above reflects only these new observations.
