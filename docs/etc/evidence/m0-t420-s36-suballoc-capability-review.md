@@ -368,3 +368,30 @@ RtlMoveMemory / sas_overwrite_memory boundary, and verify the selected pool's
 backing and caller requirements. No no-op has been installed or declared
 correct solely because the original stub returns success. The original unit
 and product callback remain unchanged at this checkpoint.
+
+## Original callback translation-unit compile proof
+
+`Test-T420S36OriginalXmsCompile.ps1` extracts the exact formal xmsblock object
+flags and compiles the unchanged original xmsmemr.c in a fresh build root.
+The x86 attempt at `build/M0-T420/S36/original-xms-compile-r1` exits zero
+without warnings; result.json retains source/graph hashes and flags, and
+compile.log retains the compiler output. This is a compile feasibility gate,
+not a runtime acceptance or product link selection.
+
+dumpbin identifies only memmove, sas_manage_xms, Sim32pGetVDMPointer and
+sas_overwrite_memory as undefined providers. The existing formal
+ntvdm.exe.map already resolves the latter three respectively from stubs.obj,
+sim32.obj and accessfn.obj. There is no demonstrated missing-provider reason
+to reject this original unit. The original CCPU overwrite provider is itself
+an intentional no-op because CCPU has no compiled-code cache to invalidate.
+
+The remaining mover issue is precise: Sim32pGetVDMPointer(0,FALSE) returns
+the SAS pointer for address zero (not an acquired bounce lease). Adding an
+arbitrary source/destination offset to that pointer bypasses subsequent
+physical alias/external-map resolution performed by c_GetPhyAdd. Thus a
+successful compilation does not prove that the unchanged flat-base mover
+honors this product's selected mapped-memory contract. The next recovery
+step must retain bounded mapped movement while composing the original
+commit/decommit owner; it must not recreate all three callbacks solely to
+avoid the mover boundary. No production or guest file changes accompany
+this compile proof.
