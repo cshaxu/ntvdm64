@@ -50,7 +50,13 @@ Routine Description:
         return Unicode.Length>>1;
         }
     OemString.Buffer = lpBuffer;
-    OemString.MaximumLength = (USHORT)(uSize+1);
+    /* DIVERGENCE MVDM-HOST-DIV-275: OEM required bytes include NUL. */
+    OemString.MaximumLength = (USHORT)uSize;
+    if ( RtlUnicodeStringToOemSize(&Unicode) > uSize ) {
+        uSize = RtlUnicodeStringToOemSize(&Unicode);
+        RtlFreeHeap(RtlProcessHeap(), 0,Unicode.Buffer);
+        return uSize;
+        }
     Status = RtlUnicodeStringToOemString(&OemString,&Unicode,FALSE);
     RtlFreeHeap(RtlProcessHeap(), 0,Unicode.Buffer);
     if ( !NT_SUCCESS(Status) ) {
@@ -101,7 +107,13 @@ Routine Description:
         return Unicode.Length>>1;
         }
     OemString.Buffer = lpBuffer;
-    OemString.MaximumLength = (USHORT)(uSize+1);
+    /* DIVERGENCE MVDM-HOST-DIV-275: OEM required bytes include NUL. */
+    OemString.MaximumLength = (USHORT)uSize;
+    if ( RtlUnicodeStringToOemSize(&Unicode) > uSize ) {
+        uSize = RtlUnicodeStringToOemSize(&Unicode);
+        RtlFreeHeap(RtlProcessHeap(), 0,Unicode.Buffer);
+        return uSize;
+        }
     Status = RtlUnicodeStringToOemString(&OemString,&Unicode,FALSE);
     RtlFreeHeap(RtlProcessHeap(), 0,Unicode.Buffer);
     if ( !NT_SUCCESS(Status) ) {
@@ -207,9 +219,16 @@ Routine Description:
                     xlpBuffer,
                     FilePartPtr
                     );
-    if (ReturnValue && ReturnValue <= nBufferLength ) {
+    /* DIVERGENCE MVDM-HOST-DIV-275: equality is a required-size result,
+       not an initialized Unicode path. OEM size may exceed WCHAR count. */
+    if (ReturnValue && ReturnValue < nBufferLength ) {
         RtlInitUnicodeString(&UnicodeString,xlpBuffer);
-        OemString.MaximumLength = (USHORT)(nBufferLength+1);
+        ReturnValue = RtlUnicodeStringToOemSize(&UnicodeString);
+        if ( ReturnValue > nBufferLength ) {
+            RtlFreeHeap(RtlProcessHeap(), 0,xlpBuffer);
+            goto bail0;
+            }
+        OemString.MaximumLength = (USHORT)nBufferLength;
         OemString.Buffer = lpBuffer;
         Status = RtlUnicodeStringToOemString(&OemString,&UnicodeString,FALSE);
         if ( !NT_SUCCESS(Status) ) {
@@ -217,13 +236,16 @@ Routine Description:
             ReturnValue = 0;
             }
         else {
+            /* DIVERGENCE MVDM-HOST-DIV-275: converted byte count. */
+            ReturnValue = OemString.Length;
             if ( ARGUMENT_PRESENT(lpFilePart) ) {
                 if ( FilePart == NULL ) {
                     *lpFilePart = NULL;
                     }
                 else {
-                    *lpFilePart = (LPSTR)(FilePart - xlpBuffer);
-                    *lpFilePart = *lpFilePart + (DWORD)lpBuffer;
+                    /* DIVERGENCE MVDM-HOST-DIV-275: encoded prefix. */
+                    UnicodeString.Length = (USHORT)((FilePart - xlpBuffer)*sizeof(WCHAR));
+                    *lpFilePart = lpBuffer + RtlUnicodeStringToOemSize(&UnicodeString)-1;
                     }
                 }
             }
@@ -280,7 +302,13 @@ Routine Description:
         return UnicodeString.Length>>1;
         }
     OemString.Buffer = lpBuffer;
-    OemString.MaximumLength = (USHORT)(nBufferLength+1);
+    /* DIVERGENCE MVDM-HOST-DIV-275: preserve capacity and required size. */
+    OemString.MaximumLength = (USHORT)nBufferLength;
+    if ( RtlUnicodeStringToOemSize(&UnicodeString) > nBufferLength ) {
+        nBufferLength = RtlUnicodeStringToOemSize(&UnicodeString);
+        RtlFreeHeap(RtlProcessHeap(), 0,UnicodeString.Buffer);
+        return nBufferLength;
+        }
     Status = RtlUnicodeStringToOemString(&OemString,&UnicodeString,FALSE);
     RtlFreeHeap(RtlProcessHeap(), 0,UnicodeString.Buffer);
     if ( !NT_SUCCESS(Status) ) {

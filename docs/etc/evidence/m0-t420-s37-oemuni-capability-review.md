@@ -266,3 +266,39 @@ actual caller capacity and required-size reporting. Remaining volume-name
 output capacities also contain n+1 expressions and still require their own
 boundary proof; no claim is made that the five reproductions exhaust the
 package. S37 remains active and these findings are not deferred out of scope.
+
+## Five-interface capacity correction
+
+DIV-275 repairs the five reproduced conversion-capacity branches together.
+The existing OEM RTL size operation determines required bytes including NUL;
+the existing converter receives actual caller capacity, never n+1. Search
+publishes converted length and prefix bytes and no longer interprets a
+Unicode required-size equality as initialized text. Cleanup remains in the
+original owner, including the short-output branch's Unicode-buffer release.
+
+Original-source rationale: BaseClient curdir.c GetCurrentDirectoryA's DBCS
+section already measures encoded bytes before comparing caller capacity.
+The same original conversion/size contract applies to OEMUNI's directory
+and search thunks. Both original translation units remain composed; existing
+RTL APIs express the correction without full BaseClient import, new adapter,
+overlay, external-code intrusion or a replacement conversion engine.
+
+All five CP932 boundary cases now return required size 12 at capacity 11,
+leave the output and next-byte sentinel untouched, and return length 11 with
+exact expected bytes at capacity 12. Search also returns prefix offset 6.
+All four x86 OEMUNI fixtures pass, including SBCS and failure-injection tests.
+The two mirror bodies change by 40 added / 10 removed lines, including
+registration comments; no opennt-host code or guest medium changes.
+
+Formal x86 rebuild succeeds; deployed worker SHA-256 is
+`520a82de28c1d3b2cf3f7cec9cf7c4c2138ceaf37f29f24cced327a3c61aa879`
+and DLL is `5e20c087716f34404bb17c43d07e46b96c398f73116c4b0786c3787a1eaad3fa`.
+Real OEM guest direct/nested tests pass under s37-capacity-guest-r1.
+All 17 established Console-text-gated product routes also pass under
+s37-capacity-product-r1, including EDIT and direct/nested COMMAND/MEM.
+
+This is not full buffer-family closure: branches where the intermediate
+Unicode query itself reports insufficient space still need encoded required-
+size review, as do volume-name/filesystem-name capacities and wide-to-USHORT
+narrowing. Existing tests do not prove these branches. Keep them in S37;
+CP932 remains test-only boundary evidence rather than real-host acceptance.

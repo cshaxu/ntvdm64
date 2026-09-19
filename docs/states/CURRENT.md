@@ -50,8 +50,9 @@ OEMUNI fixtures and direct/nested real OEM437 file routes pass. CP932 remains
 mocked boundary evidence; remaining family/consumer review keeps S37 open.
 The adjacent CP932 sweep reproduces five original n+1 capacity violations
 (current/search/system/Windows/temp paths), plus SearchPath length/prefix
-errors. These are explicitly failing capability witnesses, pending grouped
-correction in S37; no additional product change has been deployed.
+errors. DIV-275 now corrects those reproduced branches as a group; four x86
+fixtures and real direct/nested OEM file routes pass. Intermediate-Unicode
+short-buffer, volume-output and narrowing review remain open within S37.
 
 ## S36 Closure Record
 

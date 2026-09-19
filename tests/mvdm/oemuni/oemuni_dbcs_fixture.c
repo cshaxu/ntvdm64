@@ -110,26 +110,26 @@ int main(void)
     path_mode = 0;
     memset(output, 0x5a, sizeof(output));
     actual = GetCurrentDirectoryOem(11, output);
-    printf("S37_DBCS_CURRENT_DEFECT length=%lu capacity=11 byte_after=%u\n",
-        actual, (unsigned char)output[11]);
-    /* Diagnostic assertions: original code advertises n+1 to the converter
-       and writes the NUL beyond the caller's declared capacity. */
-    if (actual != 11 || output[11] != 0) return 8;
+    if (actual != 12 || output[0] != 0x5a || output[11] != 0x5a) return 8;
+    if (GetCurrentDirectoryOem(12, output) != 11 || memcmp(output, expected, 12)) return 13;
     memset(output, 0x5a, sizeof(output));
     actual = SearchPathOem(NULL, "x.txt", NULL, 11, output, &part);
-    printf("S37_DBCS_SEARCH_DEFECT length=%lu expected=11 part=%ld expected_part=6 byte_after=%u\n",
-        actual, (long)(part-output), (unsigned char)output[11]);
-    if (actual != 10 || part != output+5 || output[11] != 0) return 9;
-    puts("S37_DBCS_CURRENT_SEARCH_CAPACITY_DEFECTS_REPRODUCED_NOT_ACCEPTED");
+    if (actual != 12 || output[0] != 0x5a || output[11] != 0x5a) return 9;
+    if (SearchPathOem(NULL, "x.txt", NULL, 12, output, &part) != 11 ||
+        part != output+6 || memcmp(output, expected, 12)) return 14;
+    puts("S37_DBCS_CURRENT_SEARCH_CAPACITY_OK");
     memset(output, 0x5a, sizeof(output));
     actual = GetSystemDirectoryOem(output, 11);
-    if (actual != 11 || output[11] != 0) return 10;
+    if (actual != 12 || output[0] != 0x5a || output[11] != 0x5a) return 10;
+    if (GetSystemDirectoryOem(output, 12) != 11 || memcmp(output, expected, 12)) return 15;
     memset(output, 0x5a, sizeof(output));
     actual = GetWindowsDirectoryOem(output, 11);
-    if (actual != 11 || output[11] != 0) return 11;
+    if (actual != 12 || output[0] != 0x5a || output[11] != 0x5a) return 11;
+    if (GetWindowsDirectoryOem(output, 12) != 11 || memcmp(output, expected, 12)) return 16;
     memset(output, 0x5a, sizeof(output));
     actual = GetTempPathOem(11, output);
-    if (actual != 11 || output[11] != 0) return 12;
-    puts("S37_DBCS_SYSTEM_WINDOWS_TEMP_CAPACITY_DEFECTS_REPRODUCED_NOT_ACCEPTED");
+    if (actual != 12 || output[0] != 0x5a || output[11] != 0x5a) return 12;
+    if (GetTempPathOem(12, output) != 11 || memcmp(output, expected, 12)) return 17;
+    puts("S37_DBCS_SYSTEM_WINDOWS_TEMP_CAPACITY_OK");
     return 0;
 }

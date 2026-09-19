@@ -1,5 +1,11 @@
 # mvdm
 
+MVDM-HOST-DIV-275: `oemuni/{file.c,process.c}` bounds current/search/system/
+Windows/temp directory conversion by the actual caller capacity and computes
+required OEM bytes before conversion. Search returns converted byte length
+and prefix offset. Original owner conversion and resource cleanup remain.
+[S37 evidence](../../docs/etc/evidence/m0-t420-s37-oemuni-capability-review.md).
+
 MVDM-HOST-DIV-274: `oemuni/file.c::GetFullPathNameOem` applies the original
 BaseClient curdir.c DBCS byte-count correction using the existing OEM RTL
 size interface, including the file-part prefix. An oversized Unicode result

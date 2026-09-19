@@ -621,9 +621,11 @@ Routine Description:
                                     Unicode->Buffer
                                     );
 
-    if ( nBufferLength > (DWORD)(Unicode->Length>>1) ) {
+    /* DIVERGENCE MVDM-HOST-DIV-275: original BaseClient DBCS sizing,
+       using OEM bytes and the caller's actual capacity. */
+    if ( nBufferLength >= RtlUnicodeStringToOemSize(Unicode) ) {
         OemString.Buffer = lpBuffer;
-        OemString.MaximumLength = (USHORT)(nBufferLength+1);
+        OemString.MaximumLength = (USHORT)nBufferLength;
         Status = RtlUnicodeStringToOemString(&OemString,Unicode,FALSE);
         if ( !NT_SUCCESS(Status) ) {
             BaseSetLastNTError(Status);
@@ -634,7 +636,7 @@ Routine Description:
             }
         }
     else {
-        ReturnValue = ((Unicode->Length)>>1)+1;
+        ReturnValue = RtlUnicodeStringToOemSize(Unicode);
         }
     return ReturnValue;
 }
