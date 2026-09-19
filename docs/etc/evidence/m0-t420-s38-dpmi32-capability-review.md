@@ -256,3 +256,25 @@ S36 graph. Deployed worker hash is
 The full product gate `s38-reflection-product-r1` completed with all 17 routes
 passing, including EDIT return. S38 remains open, including the distinct
 fatal branch and remaining service/coverage dispositions.
+
+## VCD Guest Service And Special-slot Source Attribution
+
+The independent `tests/observation/dpmi_vcd_service.asm` enters DPMI,
+discovers VCD via INT2F/1684 and BX=0Eh, calls the returned original DOSX
+entry and asserts version 030Ah, a nine-bit port array and CF refusal for
+FFFFh. Original `486/dxfunc.asm::VCD_PM_Svc_Call` performs BOP 53:12 into
+the existing `vxd.c` body; no test-specific BOP or provider is introduced.
+
+NASM output `build/M0-T420/S38/vcd-guest-r1/D38V.COM` passes direct and
+twice-nested routes with the S38 runner's `-VcdService` switch and prefix
+`s38-vcd-r1`. Both transcripts contain `S38_VCD_VERSION_PORTS_REFUSAL_OK`.
+This proves discovery, version, bounded response and refusal, not physical
+serial I/O or equality to the exact host port bitmap. Product and guest
+media remain unchanged.
+
+Source attribution: Fast BOP discovery in `486/dxboot.asm` is WOW_x86-only;
+portable `dpmimscr.c` returns a zero fast-entry address. The non-WOW_x86
+debug path in `486/dxint31.asm` uses guest MOV DRx in Store/Load_DBG_Regs,
+not BOP 0E. Zero hits at that slot cannot prove missing debug capability.
+Actual watchpoint behavior remains unverified; these source routes are not
+runtime success claims.

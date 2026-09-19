@@ -5,13 +5,15 @@ param(
     [Parameter(Mandatory)][string]$LogPrefix,
     [string]$PackageRoot = 'O:\winnt',
     [ValidateSet(16,32)][int]$ClientBits = 16,
-    [switch]$Reflection
+    [switch]$Reflection,
+    [switch]$VcdService
 )
 $ErrorActionPreference = 'Stop'
 $Observer = (Resolve-Path -LiteralPath $Observer).Path
 $Probe = (Resolve-Path -LiteralPath $Probe).Path
 $PackageRoot = (Resolve-Path -LiteralPath $PackageRoot).Path
 if ($LogPrefix -notmatch '^[a-z0-9-]+$') { throw 'Invalid log prefix' }
+if ($VcdService -and ($Reflection -or $ClientBits -ne 16)) { throw 'VCD uses its separate 16-bit service probe' }
 $paths = @('run16.exe','ntvdm.exe','basesrv.exe') | ForEach-Object { Join-Path $PackageRoot $_ }
 function PackageProcesses {
     @(Get-CimInstance Win32_Process -Filter "Name='run16.exe' OR Name='ntvdm.exe' OR Name='basesrv.exe'" |
@@ -39,15 +41,18 @@ foreach ($route in @('direct','nested')) {
         $screen = Get-Content -LiteralPath "$report.console.txt" -Raw
         $text = ([regex]::Matches($screen, '(?m)^\[\d+\] (.*)\r?$') |
             ForEach-Object { $_.Groups[1].Value.TrimEnd("`r") }) -join ''
-        if ($text -match 'S38_FAIL|Bad command or filename' -or
+        if ($text -match 'S38_FAIL|Bad command or filename') { throw 'Guest reported failure' }
+        if ($VcdService) {
+            if ($text -notmatch 'S38_VCD_VERSION_PORTS_REFUSAL_OK') { throw 'Missing VCD assertions' }
+        } elseif (
             $text -notmatch "S38_INT${ClientBits}_RETURN_OK" -or
             $text -notmatch "S38_FAULT${ClientBits}_RETURN_NEGATIVE_OK" -or
             (!$Reflection -and $text -notmatch 'S38_HARDWARE_IRQ_RETURN_OK')) { throw 'Missing guest assertions' }
         if ($Reflection -and $text -notmatch 'S38_UNHANDLED_REFLECTION_OK') {
             throw 'Missing unhandled exception reflection assertion'
         }
-        $results += @{Route=$route; ClientBits=$ClientBits; Reflection=[bool]$Reflection; Report=$report; ProbeSha256=(Get-FileHash $Probe).Hash}
-        Write-Host "PASS S38 interrupt/fault return $route"
+        $results += @{Route=$route; ClientBits=$ClientBits; Reflection=[bool]$Reflection; VcdService=[bool]$VcdService; Report=$report; ProbeSha256=(Get-FileHash $Probe).Hash}
+        Write-Host "PASS S38 DPMI capability $route"
     } finally {
         if ($launcher) {
             foreach ($child in (PackageProcesses)) {
