@@ -2,10 +2,34 @@
 
 ## Current Work
 
-**No active M/T/S packet.** [T420 S24's closure record](../etc/evidence/m0-t420-s24-system-capability-baseline.md)
-is the latest completed package; the ordered unadmitted candidates remain in
-[Queue](QUEUE.md). A candidate may become a new numeric T only with owner
-admission.
+## Active Packet
+
+**Active: M0 T420 S25**
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T420 S25 — Ordinary Mode. |
+| Candidate Proposal | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md) S25. |
+| Admission And Approval | Owner corrected the T420 sequence and directed admission of S25 after S24; the standing authorization admits sequential S packets within T420. |
+| Objective | Close the complete selected `softpc.new/base/keymouse` capability unit with real keyboard-controller/modifier and mouse INT 33h callback/teardown evidence. |
+| Non-goals | No Console replacement, cursor/text presentation change, CCPU executor change, new mouse provider, WOW work, or unrelated DLL reorganization. |
+| Reference Baseline | S5 restored the complete five-file original package and recorded Console mouse stages; that source/build recovery is input only, not complete real-capability acceptance. |
+| Files And ABI Surface | Freeze `keyba.c`, `keybd_io.c`, `mouse.c`, `mouse_io.c`, `ppi.c`; original keyboard controller ports, INT 16h/33h, callback frame, PIC and worker teardown interfaces. |
+| Applicable Rules | Project design/rules, source policy, strict mirror rule, CCPU40-only product rule, original-owner recovery and transcript-gated acceptance. |
+| Verification | Build a tracked normal/failure/cleanup matrix: real guest keyboard/modifier paths, mouse INT 33h reset/show/range/position/callback and callback removal/worker teardown; run fresh formal x86 linkage and direct plus interactive COMMAND/MEM/EDIT regressions. |
+| Expected Markers | Every selected capability is real guest pass, source-proven no selected caller, or owner-approved exclusion; no fabricated input success, duplicate mouse state or stale callback remains. |
+| Asset Needs | Pinned OpenNT keymouse union, S5 recovery evidence, existing Console observer, test-only guest fixtures under `build/`, and `O:\winnt` runtime package/log roots. |
+| Reporting Requirements | Record source hashes, controller/callback/provider map, exact guest transcripts and failure/teardown observations, retained finite bindings, mirror/adapter delta and all regression results. |
+| Stop Conditions | A required CPU30/kernel dependency, second keyboard/mouse state owner, guest-media mutation, non-source-shaped input injection, or COMMAND/MEM/EDIT regression pauses for renewed owner direction. |
+| Exit Criteria | Every selected keymouse family has real evidence or a source-proven/approved disposition; original ownership is preserved; fresh x86, package-local positive/negative/teardown matrix and established regressions pass; evidence/index/status updated; reviewed P pushed. |
+| Original Owner Request | “我们应该要准入S25了是吧？” together with the owner’s correction that T420 S21--S39 are sequential capability closures. |
+| Similar-Issue Sweep | Audit all selected controller, modifier, mouse callback and teardown paths for stale callback offsets, duplicate input state, mismatched down/up pairing and fake Console-success handling. |
+
+## S25 Progress
+
+Admission complete. S25 begins by freezing the five-file manifest and auditing
+the existing Console observer against the original INT 16h/33h and teardown
+paths; no source behavior has yet changed.
 
 ## S1 Closure Record
 
