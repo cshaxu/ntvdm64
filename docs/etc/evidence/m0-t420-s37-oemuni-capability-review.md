@@ -763,3 +763,52 @@ below runtime tests. Product source/artifacts are unchanged from 08977bd17
 and its formal x86/six-fixture/17-route verification. This step adds no mirror,
 adapter or overlay diff. PIF-specific path/expansion and remaining capability
 dispositions still require final review before S37 closure.
+
+## PIF consumer encoding investigation (open)
+
+Independent `oem_pif_contract.asm` reports the guest startup directory and
+`S37_PIF_GUEST_OK`. The existing pure-DOS PIF builder now accepts optional
+`--oem-paths`: its NT configuration names use `%S37_CONFIGROOT%`, and its
+start directory uses that variable too. The default builder mode is unchanged.
+MSVC x86 compiles the builder and NASM assembles the probe under
+`build/M0-T420/S37/pif-guest-r1`. These are diagnostic inputs, not a passing
+new capability or replacement guest media.
+
+Observed results and their distinct meanings:
+
+- `s37-pif-guest-r1`: direct PIF execution in an inherited Console returns
+  193. Original BaseClient vdm.c BaseCheckVDM explicitly rejects this case
+  without CREATE_NEW_CONSOLE. No policy bypass is authorized by this test.
+- Associated `O37P.PIF` selects configuration while launching `O37P.COM`.
+  The initial pure-DOS variants timed out; the unchanged-mode baseline later
+  exited zero without the required marker. An independent S30 P30.COM ConPTY
+  rerun also exited zero without its marker (`s37-pif-s30-control.raw`). None
+  passes. The recorded low-DOS guest INIT/environment defect is relevant
+  context, not a proven attribution of these particular executions.
+- With byte-identical copies of the existing default CONFIG/AUTOEXEC media,
+  literal ASCII configuration paths pass (`s37-pif-default-media-r1`), as do
+  environment-expanded ASCII paths (`s37-pif-default-expanded-ascii-r1`).
+  Both show `S37_PIF_CWD=WINNT` and `S37_PIF_GUEST_OK`. Original cmdpif.c
+  skips start-directory/application policy for a non-PIF task with no new
+  Console; this is not proof that the PIF start-directory branch ran.
+- Moving only those identical configuration bytes to `tests/D` plus U+00A3,
+  and changing the process-local S37_CONFIGROOT accordingly, times out
+  (`s37-pif-default-expanded-oem-r1`). This is unresolved failure, not success.
+
+CONFIG source/copy SHA-256 is
+`6ae1e74e78de00c0fa03124e6f947d977c71f253855ad2af979554074aea189a`;
+AUTOEXEC is
+`c2a23a5fb96682c33d99c13a57e6f3c1e10dfd3d263d972775a8c42bfb6a9a9b`.
+No original configuration or guest binary was modified. Copies stay below
+runtime tests, logs below runtime logs; process-local variables are removed
+after each run and only verified test-owned orphan processes are terminated.
+
+Source review finds an inconsistent consumer contract: nt_pif.c's PIF override
+calls ExpandEnvironmentStringsOem, whose repaired result is OEM; both
+nt_msscs.c's LIM configuration reader and cmdconf.c's ExpandConfigFiles call
+ANSI CreateFile on that result. The original default branch used ANSI
+GetSystemDirectory, and the current default uses the existing package-path
+binding. Therefore blindly changing both consumers to OEM is not a complete
+fix. The next S37 step must establish one bounded output encoding for both
+branches, preserve the original owners/cleanup, and rerun this exact A/B.
+No production change or renewed product acceptance is claimed in this step.
