@@ -77,6 +77,50 @@ start:
     cmp dword [source_bytes + 4], 'OVES'
     jne fail_free
 
+    ; Same-size requests are an original HIMEM no-op, before the host BOP.
+    mov dx, [xms_handle]
+    mov bx, 128
+    mov ah, 0Fh
+    call far [xms_entry]
+    cmp ax, 1
+    jne fail_free
+
+    ; Failed growth must preserve the old allocation and its data.
+    mov dx, [xms_handle]
+    mov bx, 0FFFFh
+    mov ah, 0Fh
+    call far [xms_entry]
+    or ax, ax
+    jnz fail_free
+    cmp bl, 0A0h
+    jne fail_free
+    mov dx, [xms_handle]
+    mov ah, 0Eh
+    call far [xms_entry]
+    cmp ax, 1
+    jne fail_free
+    cmp dx, 128
+    jne fail_free
+
+    ; Shrink through the same public owner; retain the leading data.
+    mov dx, [xms_handle]
+    mov bx, 32
+    mov ah, 0Fh
+    call far [xms_entry]
+    cmp ax, 1
+    jne fail_free
+    mov dword [source_bytes], 0
+    mov dword [source_bytes + 4], 0
+    mov si, move_length
+    mov ah, 0Bh
+    call far [xms_entry]
+    cmp ax, 1
+    jne fail_free
+    cmp dword [source_bytes], 'XMSM'
+    jne fail_free
+    cmp dword [source_bytes + 4], 'OVES'
+    jne fail_free
+
     ; Original contract guarantees forward overlap (destination < source).
     mov word [move_src_handle], 0
     mov word [move_dst_handle], 0
@@ -117,7 +161,15 @@ start:
     jne fail_free
     cmp bh, 1
     jne fail_free
-    cmp dx, 128
+    cmp dx, 32
+    jne fail_free
+    mov dx, [xms_handle]
+    mov bx, 64
+    mov ah, 0Fh                    ; Reallocation of a locked block is refused
+    call far [xms_entry]
+    or ax, ax
+    jnz fail_free
+    cmp bl, 0ABh
     jne fail_free
     mov dx, [xms_handle]
     mov ah, 0Dh

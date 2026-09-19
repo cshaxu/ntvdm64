@@ -76,6 +76,38 @@ this four-case gate. This bounded S35 P1 delivery does not close S35.
 
 ## Remaining closure work
 
+### Post-diagnosis read-only acceptance audit
+
+After b3ff23738, deployed ntvdm.exe still matches formal-native-wait-r2
+(`c9004da5...2457cc6f`); deployed COMMAND.COM and HIMEM.SYS still match the
+full original hashes above. The eight-file pinned OpenNT comparison again
+finds exactly six byte-identical files and the two registered xms.h/xmsblock.c
+differences. No diagnostic host binary remains deployed.
+
+The current real guest test verifies growth but not shrink, failed growth
+preserving the old block/data, locked-block reallocation rejection, or the
+same-size no-op. These are S35 public XMS capability obligations, even though
+S36 separately owns the underlying allocator; do not defer them merely because
+the general product regression passes. Original himem4.asm::ReallocExtMemory
+validates the handle and lock count, then returns via REMExit when the requested
+size equals the current size, before XMS_REALLOCBLOCK. Consequently the
+uninitialized NewAddress expression in the host's equal-size branch is not
+shown reachable through this selected original caller, and is not an admitted
+semantic repair. A real public same-size test must verify the guest no-op.
+These remaining tests can proceed independently of owner disposition for the
+immutable low-DOS COMMAND limitation; no S35 closure is claimed.
+
+The subsequent independent test expansion now closes those four public cases.
+`guest-realloc-r1`, built from xms_capability.asm with the existing NASM/MSVC
+fixture builder, passes all four real product routes under `s35-realloc-r1`.
+It requests the same 128KB size, rejects growth to FFFF KB with A0 while
+querying the retained 128KB block, shrinks to 32KB and reads back the original
+eight bytes, then rejects locked-block growth with AB. The existing unlock,
+free/reuse and initial-total-free equality checks also pass. This proves the
+public caller path, not an independent assertion that physical relocation
+occurred or every allocator fragmentation branch ran. No product source or
+original guest media changed; the low-DOS limitation still needs disposition.
+
 ### Direct environment-copy witness
 
 `tests/observation/command_environment_trace.c` includes the unchanged current
