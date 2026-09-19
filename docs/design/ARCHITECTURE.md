@@ -82,6 +82,34 @@ whether an admitted original OpenNT package supersedes it. That record is the
 authority to migrate the implementation back to the original owner and
 prevents permanent parallel providers.
 
+## Capability recovery and host boundaries
+
+Recovering a package means recovering the capabilities that its selected
+original callers own, not merely compiling its translation units or resolving
+their imports. A completed capability follows the original observable chain:
+DOS or Win16 guest, original MVDM caller, original provider or a finite
+same-shaped host boundary, modern host resource, return/error mapping, and
+task/worker cleanup. Normal operation, representative failure, and teardown
+are all parts of that one capability contract.
+
+The recovery order is fixed: restore a directly composable original owner;
+then bind its historical host interface through the smallest source-shaped
+modern boundary; only then consider newly authored behavior. A mirror diff,
+overlay, or executable-local binding remains only when its original owner,
+ABI/layout, lifetime, failure ordering, and exact unavailability rationale
+are recorded. Unclassified, convenience, or duplicate autonomous policy is
+not an architectural boundary and must be removed.
+
+An old service or medium that Windows no longer supplies (such as RAP or DLC),
+or hardware/peer absent from the current machine (such as a CTS-capable serial
+endpoint), does not make an otherwise reachable original caller disappear.
+The product preserves its original failure behavior and never installs a fake
+provider merely to claim success. It first exhausts non-invasive bindings to
+ordinary modern host resources. If the remaining stop is genuinely external,
+the debt ledger records the original caller/provider, attempted bindings,
+missing prerequisite, retained seam, evidence, and exact condition for a
+future real-host retest.
+
 ## Components
 
 ### Original mirrors

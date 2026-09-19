@@ -8,28 +8,99 @@
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T420 S30 — Ordinary Mode. |
+| Identifier Mode | M0 T420 S30 — Ordinary Mode, owner-expanded. |
 | Candidate Proposal | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md) S30. |
-| Admission And Approval | Owner authorized automatic sequential S admission; S29 is closed by its indexed whole-package capability evidence. |
-| Objective | Close the complete selected `softpc.new/base/dos` capability unit through real EMS allocation/map/unmap/release and complete DOS-device/BOP acceptance. |
-| Non-goals | No new guest media, CPU30/kernel monitor revival, emulator replacement, WOW work, or unrelated Console redesign. |
-| Reference Baseline | S10 froze the complete DOS manifest; S30 must now classify every current real capability and resource lifecycle. |
-| Files And ABI Surface | Freeze the selected `softpc.new/base/dos` manifest and its EMS, DOS-device, BOP, error and teardown interfaces after a whole-manifest audit. |
+| Admission And Approval | Owner authorized automatic sequential S admission and expressly expanded S30 to restore real COM/LPT capability and multi-profile acceptance; S31 is not admitted. |
+| Objective | Close selected DOS/EMM capability plus the real original COM/LPT host-medium path: default DOS, HIMEM/DOSX and explicit EMS profiles; actual serial transmit/receive on a CTS-capable host medium, parallel write, original failure behavior and teardown acceptance. |
+| Non-goals | No synthetic serial/printer success, CPU30/kernel-monitor revival, virtual-device driver installation, emulator replacement, WOW work, or unrelated Console redesign. |
+| Reference Baseline | S10 froze the DOS manifest; S29 proved the original COM/LPT no-medium failure path and table dispatch. S30 now closes the missing host-medium binding and profile matrix instead of treating it as a permanent exclusion. |
+| Files And ABI Surface | Freeze the selected `softpc.new/base/dos` manifest together with its original BIOS/host EMM and COM/LPT providers, original PIF/CONFIG/AUTOEXEC selection, device naming, open/read/write and teardown interfaces. |
 | Applicable Rules | Project design/rules, source policy, strict mirror rule, CCPU40-only product rule, original-owner recovery and transcript-gated acceptance. |
-| Verification | Build a tracked normal/failure/cleanup matrix for the full selected comms manifest, then fresh formal x86 and direct plus interactive COMMAND/MEM/EDIT regressions. |
-| Expected Markers | Every selected communications family is a real pass, source-proven no selected caller, or explicit original profile boundary; no duplicate device state or fake success. |
-| Asset Needs | Pinned OpenNT comms union, prior evidence, immutable existing guest media, test-only fixtures under `build/`, and `O:\winnt` runtime/log roots. |
-| Reporting Requirements | Record source hashes, service-to-owner/provider map, exact guest transcripts, error/cleanup observations, retained finite bindings, mirror/adapter delta and all regression results. |
-| Stop Conditions | A required new serial/printer medium, CPU30/kernel dependency, guest-media mutation, duplicate device owner, or COMMAND/MEM/EDIT regression pauses for renewed owner direction. |
-| Exit Criteria | Every selected comms family has real current-profile evidence or a source-proven disposition; original ownership is preserved; fresh x86, package-local matrix and established regressions pass; evidence/index/status updated; reviewed P pushed. |
-| Original Owner Request | “继续执行。” following the standing automatic sequential S authorization and the corrected S21--S39 T420 sequence. |
-| Similar-Issue Sweep | Audit selected serial, printer, device, BOP and error endpoints for duplicate device state, autonomous provider substitution, stale handle state and fake success. |
+| Verification | Build a tracked normal/failure/cleanup matrix for default DOS, HIMEM/DOSX and explicit PIF EMS profiles; test genuine COM/LPT device open and I/O against an actual Windows endpoint when present; then fresh formal x86 and direct plus interactive COMMAND/MEM/EDIT regressions in every applicable profile. |
+| Expected Markers | Each profile has a genuine transcript; COM/LPT either completes actual host I/O or reports the original no-medium failure. No duplicate device state, fake success, or profile-specific regression. |
+| Asset Needs | Pinned OpenNT DOS/comms union, prior evidence, immutable guest media, a locally available Windows serial/printer endpoint if present, test-only fixtures under `build/`, and `O:\winnt` runtime/log roots. |
+| Reporting Requirements | Record profile inputs, source hashes, provider-to-endpoint map, exact guest transcripts, I/O/error/cleanup observations, retained finite bindings, mirror/adapter delta and all regression results. |
+| Stop Conditions | A required new serial/printer medium or driver, CPU30/kernel dependency, guest-media mutation, duplicate device owner, or COMMAND/MEM/EDIT regression pauses only for the missing external medium or renewed scope direction. |
+| Exit Criteria | Default DOS, HIMEM/DOSX and PIF EMS profiles pass their selected real tests; COM/LPT use real host endpoints if available and retain original failure otherwise; ownership is preserved; fresh x86, package-local matrix and established regressions pass; evidence/index/status updated; reviewed P pushed. |
+| Original Owner Request | “本项目暂时没有支持跑通comms 串口并口…在s30里面一并处理！” plus “S30 如果本身应当支持多种profile 那也应该验证，比如dosx himem这些”. |
+| Similar-Issue Sweep | Audit original PIF/config profile parsing, COM/LPT naming/open/reopen, device I/O, error delivery and teardown for duplicate state, autonomous provider substitution, stale callbacks and fake success. |
 
 ## S30 Progress
 
-Admission complete under the standing automatic sequential authorization.
-S30 starts with a whole-manifest source/caller and existing-evidence audit.
-No DOS product behavior has changed.
+The real original PIF-to-EMM path is already witnessed: task inputs enabled
+`EMM=RAM`, and a real DOS guest completed INT 67 allocation, map/remap,
+unmap and free on the formal product. The existing 17-route product matrix
+also passed. This is interim evidence only: the former S30 closure record is
+withdrawn because the owner expanded S30 before commit.
+
+S30 now audits the original COM/LPT configuration and host providers against
+actual Windows endpoints, then adds the default DOS, HIMEM/DOSX and explicit
+EMS profile matrix. No S31/debug work is admitted.
+
+The first real matrix results are: default startup reaches both public XMS
+and DPMI queries (`S30_HIMEM_DOSX_OK`); the task PIF override reaches XMS
+without DOSX and completes original EMS map/remap/unmap/free
+(`S30_HIMEM_ONLY_OK`, `S30_EMS_*`); a task PIF with no DOSX also completes
+normally (`S30_PURE_DOS_OK`); and guest COM3 opens the discovered Windows USB
+serial endpoint through unchanged original `nt_com.c` (`S30_COM3_OPEN_OK`).
+The first pure-DOS probe incorrectly set the original PIF editor's default
+EMS reservation to zero, shrinking the worker address-space allocation and
+causing the initial stall. Its subsequent assumption that XMS absence proves
+HIMEM absence was also false: selected worker XMS handling is a process
+baseline. The corrected profile proves the actual PIF-owned distinction,
+which is absence of DOSX/DPMI.
+
+The original UART controller itself is real-guest proven: after the COM3
+host open, `C31.COM` writes the original COM3 8250 MCR loopback bit and
+round-trips `5A` through direct TX/RX port I/O
+(`S30_COM3_LOOPBACK_TX_RX_OK`). This verifies selected SoftPC serial TX/RX
+without transmitting to an unknown external protocol.
+
+The discovered `COM3` is a Windows `usbser` USB-C Billboard endpoint. Its
+real-open probe passes, but original INT 14h transmit correctly times out:
+the unchanged `rs232_io.c` waits for UART CTS before it calls the original
+host write path, and this endpoint does not assert CTS. This is a real
+medium capability condition, not a missing NTVDM provider or a reason to
+weaken the original CTS rule. Complete COM transmit/receive acceptance needs
+a CTS-capable loopback or paired serial endpoint. The host has no persistent
+physical/network LPT endpoint, but the original LPT `CreateFile("LPT1")` path
+is separately verified below through a temporary Windows device mapping that
+is removed after the test.
+
+The host inventory confirms that this is not an unsearched Windows facility:
+`HKLM\\HARDWARE\\DEVICEMAP\\SERIALCOMM` contains only
+`\\Device\\USBSER000 = COM3`; PnP reports only the started `usbser.inf`
+USB Serial Device (COM3). A native non-writing open reports `cts=False`,
+`dsr=False` and no received bytes. Thus no installed physical or virtual
+paired COM medium can complete the original CTS-gated external transmit or
+host-driven receive acceptance.
+
+The deferred prerequisite is registered in the [debt ledger](TODO.md) with
+its original caller/provider, zero retained product diff and the exact retest
+condition.  The supporting [external COM boundary record](../etc/evidence/m0-t420-s30-external-com-boundary.md)
+retains the full current-host audit; the unavailable medium is not a pass.
+
+To avoid leaving the provider's success route untested merely because this
+host lacks a peer, a test-only direct-source mock now compiles unchanged
+`nt_com.c` and supplies a controlled CTS-capable Win32 serial contract. Its
+`open → write → receive queue → read → close` lifecycle passes with
+`T420_S30_NT_COM_MOCK_OPEN_WRITE_READ_CLOSE_OK`. This fixture is not linked
+into the product and does not close the real external-medium debt.
+
+The original LPT write path is now independently end-to-end proven without a
+product substitute. The test observer temporarily mapped the Windows `LPT1`
+DOS-device name to a private named pipe, then removed that mapping after the
+run. `L30.COM` invoked INT 17h byte output; unchanged `nt_lpt.c` opened
+`LPT1`, buffered it, and flushed during worker close. The pipe received `5A`
+and the guest reported `S30_LPT1_WRITE_OK`; no mapping, pipe, or product
+process remained afterward.
+
+The owner's clarification applies to the entire T420 capability sequence:
+every capability that the selected standalone NTVDM product itself owns must
+be verified through its original guest-to-host path before its owning S can
+close. A missing external medium is recorded as a platform limitation, never
+silently converted into a pass; the remaining S31--S43 rows retain the same
+per-package acceptance rule.
 
 ## S1 Closure Record
 
@@ -288,6 +359,18 @@ medium profile.  It adds no serial/printer provider: real INT 14h failure and
 Ignore recovery plus INT 17h initialization/status pass, all 526 x86 build
 edges and the 17 established COMMAND/MEM/EDIT routes pass, and worker cleanup
 leaves no product process.
+
+## S30 Closure Record
+
+[T420 S30 DOS profile and host-medium closure](../etc/evidence/m0-t420-s30-dos-profile-host-medium-closure.md)
+closes default DOS, HIMEM/DOSX, pure-DOS PIF and EMS PIF acceptance; original
+COM3 controller loopback; and original LPT1 byte output through a removed
+test-only DOS-device mapping.  The unchanged `nt_com.c` success lifecycle is
+also covered by a non-product direct-source mock.  The only deferred result is
+real external COM peer transmit/receive: this host has no CTS-capable peer,
+so its original failure behavior and a concrete retest condition remain in
+the debt ledger.  Formal five-artifact x86 and all 17 established
+COMMAND/MEM/EDIT routes passed.
 
 ## Current Technical Baseline
 

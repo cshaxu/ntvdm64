@@ -82,7 +82,7 @@ mirror/adapter changes, then commits and pushes.
 | S27 | `softpc.new/base/support` capability closure | Real startup/environment/time/IOS/termination resource and failure acceptance. |
 | S28 | `softpc.new/base/disks` capability closure | Real disk read/write, backing-store, media/error and teardown acceptance. |
 | S29 | `softpc.new/base/comms` capability closure | Real COM transmit/receive, printer/Print-Screen and device-error acceptance. |
-| S30 | `softpc.new/base/dos` capability closure | Real EMS allocation/map/unmap/release and complete DOS-device/BOP acceptance. |
+| S30 | `softpc.new/base/dos` capability closure | Real default DOS, HIMEM/DOSX and explicit EMS profile acceptance; EMS allocation/map/unmap/release, complete DOS-device/BOP acceptance, and owner-expanded real original COM/LPT host-medium recovery. |
 | S31 | `softpc.new/base/debug` capability closure | Real original debug initialization, trace/btrace/event dispatch or a complete profile exclusion. |
 | S32 | `softpc.new/host/src` capability closure | Real worker thread, Console, host provider and normal/abnormal resource-lifecycle acceptance. |
 | S33 | `dos/dem` capability closure | Real DOS create/open/share/read/write/seek/find, error mapping and guest-buffer cleanup acceptance. |
@@ -121,6 +121,51 @@ generic COMMAND/MEM/EDIT smoke route is insufficient on its own. Every pass
 also records normal operation, representative failure, task/handle cleanup,
 and the mandatory direct plus interactive COMMAND regressions.
 
+### Required recovery effort and external-boundary record
+
+For S30--S43, an original OpenNT capability remains in scope when the
+standalone NTVDM product is its selected caller, even if the historical NT
+service, network protocol, device class, or local hardware is unavailable on
+the modern host.  The owner requires the following four records before an S
+may close:
+
+1. Remove every proven unnecessary mirror diff and non-mirror autonomous
+   implementation; measure removed versus retained lines separately.
+2. Recover and connect every capability that can compose through the original
+   caller and a source-shaped modern-host boundary, then verify it from a real
+   DOS/Win16 guest through normal operation, representative failure and
+   cleanup.
+3. Audit every retained mirror diff, overlay and adapter seam.  The evidence
+   must name its original owner, required ABI/lifetime behavior, why its
+   structure is necessary, and why restoring the exact original body is not
+   composable; unreviewed or merely convenient code cannot remain.
+4. When an original capability cannot be connected only because the modern OS
+   no longer supplies the required service/protocol (for example RAP or DLC)
+   or the host lacks the necessary hardware/peer (for example a CTS-capable
+   serial endpoint), exhaust non-invasive original-path options first.  Then
+   preserve the original failure behavior, record the attempted paths and
+   observed boundary, and add a concrete follow-up row to
+   `docs/states/TODO.md`.  That row must name the original caller/provider,
+   missing host prerequisite, retained code/diff, evidence location and exact
+   condition that permits a future retest.  An unavailable medium is evidence
+   of a platform boundary, never an implicit pass or a reason to add a fake
+   provider.
+5. If a protocol-accurate mock, fake device endpoint, controlled peer, or
+   fault-injection harness can be made without changing product behavior, it
+   is mandatory test-only work.  It must exercise the original guest caller,
+   selected original provider, request/response or I/O boundary, failure, and
+   teardown so that a later machine with the real prerequisite has the same
+   executable acceptance fixture.  The evidence labels it **mock/unit
+   evidence**, records exactly what host property it does and does not prove,
+   and keeps it outside the deployed product graph; a mock success never
+   substitutes for the required real-host end-to-end result.
+
+These requirements refine, rather than replace, the per-package matrices
+below and the final exit criteria.  A capability can be source-proven absent
+only when no selected caller can reach it; a reachable capability cannot be
+reclassified as a profile exclusion merely because current hardware or a
+historical Windows service is absent.
+
 | Capability-closure S | Revalidated original package | Required real-capability acceptance |
 | --- | --- | --- |
 | S21--S27 | S1 CCPU386 through S7 support | Each listed S proves its own real guest instruction/FPU/exception/event, vector/publication, text/video, timer/PIC/reset, keyboard/mouse, BIOS, startup/environment/termination capability as specified in the ordered table. Profile-null C-VID slots may remain null only with the existing original-profile proof. |
@@ -134,6 +179,9 @@ adapter-owned replacement policy, or change a prior source-recovery result
 without a new source-first audit. A failure identifies its original package
 owner and the exact entry/caller; the repair is then contained within that
 same sequential capability-closure S rather than an unbounded workaround.
+Where a real prerequisite is absent, this permission is also the mandatory
+test-only mock/unit-harness route specified above; it does not authorize a
+product-side fake provider.
 
 ## S40--S43 capability closure requirements
 
@@ -178,7 +226,10 @@ The package remains partial if any manifest member is silently omitted, an
 adapter still owns original policy, a lifecycle/teardown path is unproved, or
 a local or mandatory established-product regression is missing or fails. A
 profile exclusion closes only when the source policy and product profile prove
-the package cannot be a runtime dependency.
+the package cannot be a runtime dependency.  For S30--S43, the closure record
+must additionally contain the four required recovery/external-boundary records
+above, including a linked `TODO.md` row for every reached capability stopped by
+an unavailable modern service, protocol, device, or peer.
 
 ## Boundaries
 

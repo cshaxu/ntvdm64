@@ -175,6 +175,41 @@ README. A proposed new mirror file, material added mechanism, or body that
 would cease to be a small owner-local correction belongs in its named adapter
 or ABI family; it may not be placed in a private overlay.
 
+Every retained mirror diff, overlay, or non-mirror autonomous seam has a
+review record naming the original owner, source/ABI shape, required resource
+lifetime and failure behavior, why the original body cannot directly compose,
+and its removed-versus-retained line accounting. A build warning fix,
+temporary diagnostic, or convenient helper is not a sufficient reason to
+retain behavior. If an original package can now own the logic, remove the
+duplicate implementation rather than keeping parallel paths.
+
+## Capability-test and external-boundary practice
+
+Each selected original capability is tested from its real guest caller through
+its provider boundary, with normal operation, representative failure, and
+task/handle/worker cleanup. Successful compilation, a loaded DLL, a symbol
+map, a host-only call, or the generic COMMAND/MEM/EDIT regression is supporting
+evidence only; none alone proves the capability.
+
+When a required modern service, protocol, device, or peer is absent, first
+test every non-invasive source-shaped binding that the current host can offer
+and retain the original unavailable result. If a protocol-accurate mock,
+controlled peer, fake device endpoint, or fault-injection harness can be
+written without changing product behavior, it is mandatory test-only work.
+It must exercise the original guest caller, original provider, I/O or request
+boundary, failure, and cleanup. It belongs below `tests/` and its emitted
+artifacts follow the normal `build/`/`O:\winnt\tests` rules; it must never be
+linked, copied, or selected as a product provider.
+
+Mock results are labelled as mock/unit evidence and state both the contract
+they prove and the real-host property they cannot prove. They maximize future
+retest coverage but never replace a real device/service end-to-end result.
+Where that result remains impossible, add a concrete row to
+`docs/states/TODO.md` naming the original caller/provider, attempted binding,
+missing prerequisite, retained diff/seam, evidence record, and future retest
+condition. Do not reclassify a reachable capability as a profile exclusion
+solely because this machine lacks its external medium.
+
 
 ## Build layout
 

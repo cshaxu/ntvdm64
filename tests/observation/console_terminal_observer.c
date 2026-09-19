@@ -11,6 +11,9 @@
 static HANDLE read_pipe, write_pipe, raw_log;
 static HANDLE named_pipe_server;
 static volatile LONG named_pipe_connected, named_pipe_sent, named_pipe_received;
+static HANDLE lpt_pipe_server;
+static volatile LONG lpt_pipe_connected, lpt_pipe_received;
+static int lpt_mapping_active;
 static volatile LONG comms_error_dialog_dismissed;
 static int named_pipe_transact, named_pipe_async, named_pipe_async_write;
 static DWORD WINAPI serve_named_pipe(void *unused) {
@@ -48,6 +51,15 @@ static DWORD WINAPI serve_named_pipe(void *unused) {
             InterlockedExchange(&named_pipe_sent,1);
         }
     } return 0;
+}
+static DWORD WINAPI serve_lpt_pipe(void *unused) {
+    char value; DWORD read; (void)unused;
+    if (ConnectNamedPipe(lpt_pipe_server,NULL) || GetLastError()==ERROR_PIPE_CONNECTED) {
+        InterlockedExchange(&lpt_pipe_connected,1);
+        if (ReadFile(lpt_pipe_server,&value,1,&read,NULL) && read==1 && value=='Z')
+            InterlockedExchange(&lpt_pipe_received,1);
+    }
+    return 0;
 }
 static DWORD WINAPI copy_output(void *unused) {
     char data[8193]; DWORD n,w;
@@ -145,7 +157,9 @@ int main(int argc,char **argv) {
         STARTUPINFOA startup={sizeof(startup)};PROCESS_INFORMATION child={0};
         char runtime[MAX_PATH]="O:\\winnt",cmd[MAX_PATH+32];
         GetEnvironmentVariableA("TEST_RUNTIME_ROOT",runtime,sizeof(runtime));
-        snprintf(cmd,sizeof(cmd),"%s\\run16.exe COMMAND.COM",runtime);
+        { char initial[MAX_PATH] = "COMMAND.COM";
+          GetEnvironmentVariableA("MVDM_TEST_INITIAL_COMMAND",initial,sizeof(initial));
+          snprintf(cmd,sizeof(cmd),"%s\\run16.exe %s",runtime,initial); }
         {
             char launch[2 * MAX_PATH + 32];
             snprintf(launch,sizeof(launch),"PTY child runtime=%s command=%s\r\n",runtime,cmd);
@@ -159,8 +173,14 @@ int main(int argc,char **argv) {
     HPCON pty;
     STARTUPINFOEXA si={0};PROCESS_INFORMATION pi={0};SIZE_T bytes=0;
     COORD size;
-    if(argc!=4 && (argc!=5 || (strcmp(argv[4],"--mouse") && strcmp(argv[4],"--resize") && strcmp(argv[4],"--video-int10") && strcmp(argv[4],"--system-capability") && strcmp(argv[4],"--bios-capability") && strcmp(argv[4],"--support-capability") && strcmp(argv[4],"--disks-capability") && strcmp(argv[4],"--comms-capability") && strcmp(argv[4],"--vdmredir-pipe") && strcmp(argv[4],"--vdmredir-transact") && strcmp(argv[4],"--vdmredir-call") && strcmp(argv[4],"--vdmredir-timeout") && strcmp(argv[4],"--vdmredir-async") && strcmp(argv[4],"--vdmredir-async-write") && strcmp(argv[4],"--vdmredir-mailslot") && strcmp(argv[4],"--vdmredir-terminate") && strcmp(argv[4],"--vdmredir-netbios") && strcmp(argv[4],"--vdmredir-netbios-async") && strcmp(argv[4],"--vdmredir-dlc") && strcmp(argv[4],"--vdmredir-netapi") && strcmp(argv[4],"--vdmredir-net-enum") && strcmp(argv[4],"--vdmredir-wksta") && strcmp(argv[4],"--vdmredir-wksta-set") && strcmp(argv[4],"--vdmredir-message") && strcmp(argv[4],"--vdmredir-service") && strcmp(argv[4],"--vdmredir-assign") && strcmp(argv[4],"--vdmredir-use") && strcmp(argv[4],"--vdmredir-use-info") && strcmp(argv[4],"--vdmredir-use-lifecycle"))))return 64;
+    if(argc!=4 && (argc!=5 || (strcmp(argv[4],"--mouse") && strcmp(argv[4],"--resize") && strcmp(argv[4],"--video-int10") && strcmp(argv[4],"--system-capability") && strcmp(argv[4],"--bios-capability") && strcmp(argv[4],"--support-capability") && strcmp(argv[4],"--disks-capability") && strcmp(argv[4],"--comms-capability") && strcmp(argv[4],"--comms-host-medium") && strcmp(argv[4],"--comms-loopback") && strcmp(argv[4],"--lpt-host-medium") && strcmp(argv[4],"--dosx-himem-capability") && strcmp(argv[4],"--pure-dos-capability") && strcmp(argv[4],"--ems-capability") && strcmp(argv[4],"--vdmredir-pipe") && strcmp(argv[4],"--vdmredir-transact") && strcmp(argv[4],"--vdmredir-call") && strcmp(argv[4],"--vdmredir-timeout") && strcmp(argv[4],"--vdmredir-async") && strcmp(argv[4],"--vdmredir-async-write") && strcmp(argv[4],"--vdmredir-mailslot") && strcmp(argv[4],"--vdmredir-terminate") && strcmp(argv[4],"--vdmredir-netbios") && strcmp(argv[4],"--vdmredir-netbios-async") && strcmp(argv[4],"--vdmredir-dlc") && strcmp(argv[4],"--vdmredir-netapi") && strcmp(argv[4],"--vdmredir-net-enum") && strcmp(argv[4],"--vdmredir-wksta") && strcmp(argv[4],"--vdmredir-wksta-set") && strcmp(argv[4],"--vdmredir-message") && strcmp(argv[4],"--vdmredir-service") && strcmp(argv[4],"--vdmredir-assign") && strcmp(argv[4],"--vdmredir-use") && strcmp(argv[4],"--vdmredir-use-info") && strcmp(argv[4],"--vdmredir-use-lifecycle"))))return 64;
     size.X=(SHORT)atoi(argv[1]);size.Y=(SHORT)atoi(argv[2]);
+    if(argc==5 && !strcmp(argv[4],"--lpt-host-medium")) {
+        lpt_pipe_server=CreateNamedPipeA("\\\\.\\pipe\\NTVDMLPTTEST",PIPE_ACCESS_INBOUND,PIPE_TYPE_BYTE|PIPE_WAIT,1,16,16,0,NULL);
+        if(lpt_pipe_server==INVALID_HANDLE_VALUE)return 68;
+        if(!DefineDosDeviceA(DDD_RAW_TARGET_PATH,"LPT1","\\Device\\NamedPipe\\NTVDMLPTTEST")){CloseHandle(lpt_pipe_server);return 69;}
+        lpt_mapping_active=1; CloseHandle(CreateThread(NULL,0,serve_lpt_pipe,NULL,0,NULL));
+    }
     if(argc==5 && (!strcmp(argv[4],"--vdmredir-pipe") || !strcmp(argv[4],"--vdmredir-transact") || !strcmp(argv[4],"--vdmredir-call") || !strcmp(argv[4],"--vdmredir-async") || !strcmp(argv[4],"--vdmredir-async-write"))) {
         char pipe_name[80]; snprintf(pipe_name,sizeof(pipe_name),"\\\\.\\pipe\\NTPTEST");
         named_pipe_transact=!strcmp(argv[4],"--vdmredir-transact") || !strcmp(argv[4],"--vdmredir-call");
@@ -303,6 +323,64 @@ int main(int argc,char **argv) {
             int passed=comms_wait==WAIT_OBJECT_0 && comms_code==1 && dismissed && marker && !failed &&
                 log_contains(argv[3],"bytes total conventional memory");
             printf("comms-capability dialog-ignore=%d marker=%d guest-failure=%d\n",dismissed,marker,failed); fflush(stdout);
+            CloseHandle(job);ClosePseudoConsole(pty);return passed?0:1; }
+        }
+    }
+    if(argc==5 && !strcmp(argv[4],"--comms-host-medium")) {
+        { DWORD comms_wait=WaitForSingleObject(pi.hProcess,12000),comms_code=0;
+          GetExitCodeProcess(pi.hProcess,&comms_code);
+          printf("comms-host-medium wait=%lu exit=%lu\n",comms_wait,comms_code); fflush(stdout);
+          Sleep(300); CloseHandle(write_pipe); WaitForSingleObject(thread,3000);
+          CloseHandle(raw_log);
+          { int marker=log_contains(argv[3],"S30_COM3_OPEN_OK") && log_contains(argv[3],"S30_COM3_TX_OK");
+            int failed=log_contains(argv[3],"S30_COM3_OPEN_OR_TX_FAIL") || guest_command_failed(argv[3]);
+            printf("comms-host-medium marker=%d guest-failure=%d\n",marker,failed); fflush(stdout);
+            CloseHandle(job);ClosePseudoConsole(pty);return comms_wait==WAIT_OBJECT_0 && comms_code==0 && marker && !failed?0:1; }
+        }
+    }
+    if(argc==5 && !strcmp(argv[4],"--comms-loopback")) {
+        { DWORD comms_wait=WaitForSingleObject(pi.hProcess,12000),comms_code=0;
+          GetExitCodeProcess(pi.hProcess,&comms_code);
+          printf("comms-loopback wait=%lu exit=%lu\n",comms_wait,comms_code); fflush(stdout);
+          Sleep(300); CloseHandle(write_pipe); WaitForSingleObject(thread,3000);
+          CloseHandle(raw_log);
+          { int marker=log_contains(argv[3],"S30_COM3_LOOPBACK_TX_RX_OK");
+            int failed=log_contains(argv[3],"S30_COM3_LOOPBACK_TX_RX_FAIL") || guest_command_failed(argv[3]);
+            printf("comms-loopback marker=%d guest-failure=%d\n",marker,failed); fflush(stdout);
+            CloseHandle(job);ClosePseudoConsole(pty);return comms_wait==WAIT_OBJECT_0 && comms_code==0 && marker && !failed?0:1; }
+        }
+    }
+    if(argc==5 && !strcmp(argv[4],"--lpt-host-medium")) {
+        DWORD lpt_wait=WaitForSingleObject(pi.hProcess,12000),lpt_code=0;
+        GetExitCodeProcess(pi.hProcess,&lpt_code); Sleep(300); CloseHandle(write_pipe); WaitForSingleObject(thread,3000); CloseHandle(raw_log);
+        if(lpt_mapping_active) DefineDosDeviceA(DDD_RAW_TARGET_PATH|DDD_REMOVE_DEFINITION|DDD_EXACT_MATCH_ON_REMOVE,"LPT1","\\Device\\NamedPipe\\NTVDMLPTTEST");
+        printf("lpt-host-medium connected=%ld received=%ld wait=%lu exit=%lu\n",lpt_pipe_connected,lpt_pipe_received,lpt_wait,lpt_code); fflush(stdout);
+        CloseHandle(lpt_pipe_server); CloseHandle(job); ClosePseudoConsole(pty);
+        return lpt_wait==WAIT_OBJECT_0 && lpt_code==0 && lpt_pipe_connected && lpt_pipe_received && log_contains(argv[3],"S30_LPT1_WRITE_OK")?0:1;
+    }
+    if(argc==5 && (!strcmp(argv[4],"--dosx-himem-capability") || !strcmp(argv[4],"--pure-dos-capability"))) {
+        const char *marker=!strcmp(argv[4],"--dosx-himem-capability") ? "S30_HIMEM_DOSX_OK" : "S30_PURE_DOS_OK";
+        const char *failure=!strcmp(argv[4],"--dosx-himem-capability") ? "S30_HIMEM_DOSX_FAIL" : "S30_PURE_DOS_FAIL";
+        DWORD profile_wait=WaitForSingleObject(pi.hProcess,12000),profile_code=0;
+        GetExitCodeProcess(pi.hProcess,&profile_code);
+        printf("profile-capability wait=%lu exit=%lu\n",profile_wait,profile_code); fflush(stdout);
+        Sleep(300); CloseHandle(write_pipe); WaitForSingleObject(thread,3000);
+        CloseHandle(raw_log);
+        { int found=log_contains(argv[3],marker),failed=log_contains(argv[3],failure) || guest_command_failed(argv[3]);
+          printf("profile-capability marker=%d guest-failure=%d\n",found,failed); fflush(stdout);
+          CloseHandle(job);ClosePseudoConsole(pty);return profile_wait==WAIT_OBJECT_0 && profile_code==0 && found && !failed?0:1; }
+    }
+    if(argc==5 && !strcmp(argv[4],"--ems-capability")) {
+        { DWORD ems_wait=WaitForSingleObject(pi.hProcess,12000),ems_code=0;
+          GetExitCodeProcess(pi.hProcess,&ems_code);
+          printf("ems-capability wait=%lu exit=%lu\n",ems_wait,ems_code); fflush(stdout);
+          Sleep(300); CloseHandle(write_pipe); WaitForSingleObject(thread,3000);
+          CloseHandle(raw_log);
+          { int marker=log_contains(argv[3],"S30_HIMEM_ONLY_OK") && log_contains(argv[3],"S30_EMS_STATUS_OK") && log_contains(argv[3],"S30_EMS_MAP_OK") &&
+                log_contains(argv[3],"S30_EMS_UNMAP_OK") && log_contains(argv[3],"S30_EMS_FREE_OK");
+            int failed=log_contains(argv[3],"S30_EMS_FAIL");
+            int passed=ems_wait==WAIT_OBJECT_0 && ems_code==0 && marker && !failed;
+            printf("ems-capability marker=%d guest-failure=%d\n",marker,failed); fflush(stdout);
             CloseHandle(job);ClosePseudoConsole(pty);return passed?0:1; }
         }
     }
