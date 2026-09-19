@@ -161,6 +161,25 @@ still needed to prove the exact transition independently of the final
 snapshot. No environment injection, allocator policy change or guest patch
 is justified by this static check alone.
 
+A host-only hardware-breakpoint experiment did not supply the missing write
+timeline. `s35-envwatch-r1` and `s35-envwatch-r2` launched the product under
+Windows DEBUG_PROCESS, without writing guest memory. The second observer
+covered new worker threads as well as the initial thread. It records worker
+29296 exiting with 120, launcher 15848 with 1067, and broker 19360 with zero,
+before any cmdGetInitEnvironment observation. Current
+`ntvdm-exe/debugger/source/dbg_init.c` detects ProcessDebugPort, and
+`dbg_unavailable.c` terminates a debugged session with
+ERROR_CALL_NOT_IMPLEMENTED on reached private VDM notifications. This is
+consistent with an unsupported debugger path, not an environment result;
+the exact terminating notification was not captured. The exploratory
+observer source was removed; binaries/logs remain disposable evidence.
+No debugger-policy bypass or original guest-media change was retained.
+After restoring hash-checked guest-a20-r2 disposable test inputs, the ordinary
+non-debug four-route gate passed with prefix `s35-post-debug-control-r1`:
+direct, profile, nested and repeat all retained their required guest markers.
+This controls for test contamination, not low-DOS repair. Product source and
+deployed host binaries remained unchanged throughout the experiment.
+
 ### Original dispatch/caller ledger
 
 The selected `xmsdisp.c::apfnXMSSvc` contains twelve entries. The following
