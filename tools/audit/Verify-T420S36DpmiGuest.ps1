@@ -56,6 +56,11 @@ foreach ($image in $images) {
             if ($record -notmatch '(?m)^result=exited\r?$' -or
                 $record -notmatch '(?m)^exit=0x00000000\r?$') { throw "Failed $image $route" }
             $screen = Get-Content -LiteralPath "$report.console.txt" -Raw
+            # The observer prefixes physical Console rows. Long guest markers
+            # wrap in narrow terminals; join only those captured rows, retaining
+            # every character (including spaces) rather than changing the guest.
+            $screen = ([regex]::Matches($screen, '(?m)^\[\d+\] (.*)\r?$') |
+                ForEach-Object { $_.Groups[1].Value.TrimEnd("`r") }) -join ''
             if ($screen -match 'S36_DPMI_FAIL|Bad command or filename' -or
                 $screen -notmatch 'S36_DPMI_ALLOC_REALLOC_DATA_FREE_OK') { throw 'Missing successful guest transcript' }
             if ($Stress -and $screen -notmatch 'S36_DPMI_FORCED_MOVE_FAILED_GROW_DATA_FREE_OK') {

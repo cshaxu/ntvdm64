@@ -178,5 +178,6 @@ proves the original `FSTI` continuation reaches BOP `FDh`.
 | [T418 S4 worker ownership reorganization](evidence/m0-t418-s4-worker-ownership-reorganization.md) | M0 T418 S4 | Worker-only implementation relocation, fresh x86 three-program/CCPU/C-VID/memory proof, and BaseSrv lifecycle proof. | Retain through T418 closure. |
 
 | [T420 S37 OEMUNI capability review](evidence/m0-t420-s37-oemuni-capability-review.md) | M0 T420 S37 | Original consumer inventory and non-ASCII conversion/buffer verification. | Retain with T420 capability evidence. |
+| [T420 S38 DPMI32 capability review](evidence/m0-t420-s38-dpmi32-capability-review.md) | M0 T420 S38 | Selected package, BOP dispatch and protected-mode verification obligations. | Retain with T420 capability evidence. |
 
 All other historical supporting material is in the [external documentation archive](../../artifacts/documentation-archive/20260910/strict-topology/).

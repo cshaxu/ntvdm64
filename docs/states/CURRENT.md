@@ -2,12 +2,40 @@
 
 ## Current Work
 
-## Task Intermission
+## Active Packet
 
-**No active M/T/S packet.** T420 remains open; S37 is closed under the
-owner-approved consumer-acceptance handoff below. The next sequential packet
-is S38 DPMI32 capability verification; this documentation delivery does not
-start its implementation.
+**Active: M0 T420 S38**
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T420 S38, Ordinary Mode, single implementer/reviewer. |
+| Candidate Proposal | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md), S38. |
+| Admission And Approval | Owner requests automatic S admission after S37 closure 2e56df9eb; retain sequential package ownership. |
+| Objective | Verify the complete selected DPMI32 host package through real protected-mode selectors, interrupts, memory, return and teardown; remove proven unnecessary differences. |
+| Non-goals | No guest-media mutation, CPU30/kernel monitor revival, replacement DPMI policy or unsupported WOW success claims. S39 owns guest DOSX package acceptance. |
+| Reference Baseline | S18 source recovery, S36 real DPMI/suballocator repairs, S37 product 6b80471d9 and its full passing regressions. |
+| Files And ABI Surface | Fifteen selected dpmi32 bodies and three headers; their original BOP 53 dispatch and existing CPU40/guest-memory boundaries. |
+| Applicable Rules | Execution, source-first recovery, complete-package review, mirror minimal-diff, immutable guest and transcript-gated acceptance. |
+| Verification | Audit every selected body and all 25 BOP slots; real selector/interrupt/fault/memory/return/repeated-task tests with negative and cleanup cases; boundary injection where needed; formal x86 and 17 established product routes. |
+| Expected Markers | Actual guest results and original dispatch attribution, preserved registers/FLAGS/data, rejected invalid requests, released task resources and usable parent DOS. |
+| Asset Needs | Pinned OpenNT; unchanged deployed DOSX; independent probes/builds under build/M0-T420/S38; runtime tests and logs under O:/winnt/tests and O:/winnt/logs. |
+| Reporting Requirements | Source/compiled/reached capability ledger, four-rung recovery and retained-boundary dispositions, exact mirror/adapter counts, raw/normalized comparison and artifact/test identities. |
+| Stop Conditions | Required guest modification, unadmitted original-owner boundary expansion, new policy/provider or unexplained established regression. |
+| Exit Criteria | Complete selected package dispositions, required real and negative/lifecycle evidence, owner-approved external limits if any, formal build/regression success and reviewed committed/pushed delivery. |
+| Original Owner Request | Automatically admit each sequential S and recover/verify the complete selected package with minimal original-source differences. |
+| Similar-Issue Sweep | All descriptor domains, mode/stack/FLAGS transitions, interrupt/fault returns, allocation/free and task teardown, including profile-disabled fast/debug/VCD entries. |
+
+## S38 Progress
+
+The [DPMI32 review](../etc/evidence/m0-t420-s38-dpmi32-capability-review.md)
+starts from the fifteen selected original bodies and 25 BOP slots. S36's
+allocation tests are a baseline, not proof of interrupt/fault/stack coverage.
+No production change or full DPMI32 capability completion is claimed yet.
+Real 16-bit software interrupt and divide-error return probes now pass both
+direct and twice-nested COMMAND routes, including stack/register/carry and
+invalid-vector assertions. Allocation stress and task cleanup baselines also
+pass; a narrow-Console marker parsing defect was corrected in the harness.
+32-bit frames and the remaining complete-package coverage are still open.
 
 ## S37 Closure Record
 
