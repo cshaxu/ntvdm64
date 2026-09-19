@@ -49,7 +49,10 @@ remain recorded; the selected provider no longer introduces those failures.
 Real DPMI forced relocation and failed-growth data preservation now pass
 directly and nested. This exposed an original BOOL/NTSTATUS mismatch in
 DpmiReallocateXmem; its one caller now checks BOOL correctly (DIV-272).
-Resident-worker teardown and the final capability ledger still need closure.
+Same-worker real DOS parent tests now prove four DPMI children exit with live
+allocations and restore the original XMS capacity after every exit, directly
+and nested. Broker-loss tests also prove each resident worker exits without
+an explicit worker kill. Final capability-ledger reconciliation remains.
 
 ## S35 Closure Record
 

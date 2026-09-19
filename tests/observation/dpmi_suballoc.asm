@@ -123,6 +123,7 @@ enter_pm:
     xor ax, ax
 %endif
     mov es, ax
+%ifndef EXIT_LIVE
     mov bx, [selector]
     mov ax, 0001h
     int 31h
@@ -132,6 +133,7 @@ enter_pm:
     mov ax, 0502h
     int 31h
     jc failed
+%endif
 %ifdef STRESS
     mov si, [guard + 2]
     mov di, [guard]
@@ -183,7 +185,11 @@ stress_success db 'S36_DPMI_FORCED_MOVE_FAILED_GROW_DATA_FREE_OK',13,10,'$'
 entering db 'S36_DPMI_ENTERING',13,10,'$'
 entered db 'S36_DPMI_ENTERED',13,10,'$'
 allocated db 'S36_DPMI_ALLOCATED',13,10,'$'
+%ifdef EXIT_LIVE
+success db 'S36_DPMI_EXIT_WITH_LIVE_ALLOCATION',13,10,'$'
+%else
 success db 'S36_DPMI_ALLOC_REALLOC_DATA_FREE_OK',13,10,'$'
+%endif
 failure db 'S36_DPMI_FAIL stage='
 failure_stage db '0',13,10,'$'
 times 4096 db 0

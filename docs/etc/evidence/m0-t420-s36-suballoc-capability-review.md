@@ -479,3 +479,33 @@ exit. Final lifecycle acceptance is still separate.
 All four XMS routes pass in `s36-dpmi-bool-xms-r1-summary.json`, and all
 17 product routes pass in `s36-dpmi-bool-product-r1-summary.json`. The
 allocator body/private header still hash byte-identically to pinned OpenNT.
+
+## Same-worker task cleanup and broker-loss teardown
+
+`dpmi_task_cleanup.asm` is an independent real-mode DOS parent. It warms the
+original DOSX tables using a normal DPMI child, records nonzero XMS largest
+and total free capacity, then invokes four DPMI children with DOS EXEC in
+that same worker. Each child allocates, grows and checks data but deliberately
+omits selector and memory release (`dpmi_suballoc.asm -DEXIT_LIVE`). Each
+returns through original INT 21 termination. The parent requires both XMS
+capacity values to return to the baseline after every child, not just at the
+end. Four distinct `S36_DPMI_EXIT_WITH_LIVE_ALLOCATION` markers are mandatory,
+followed by `S36_DPMI_TASK_EXIT_CAPACITY_RESTORED_OK` and exit zero.
+
+NASM -f bin builds D36N (default), D36L (-DEXIT_LIVE), and D36T (parent) below
+`build/M0-T420/S36/dpmi-lifecycle-r1`. Verify-T420S36DpmiGuest.ps1 -Lifecycle
+copies those independent probes into runtime tests, then runs the parent
+directly and doubly nested. Both routes pass in `s36-dpmi-lifecycle-r3`.
+Original dxstrt.asm cleanup reaches BOP FreeAllXmem when the last DPMI client
+leaves; the source and measured post-child capacity agree. No guest cleanup
+hook or fabricated host capacity response is added.
+
+The same matrix snapshots the resident worker/broker and verifies their exact
+package paths and launcher parent. It terminates only that broker, waits for
+the captured worker process to exit without terminating the worker, and
+records BrokerLossWorkerExit=true in both result rows. This proves abnormal
+broker-loss cleanup, not an invented idle timeout or natural resident exit.
+The normal task-lifetime proof is the four repeated capacity restorations;
+the resident process is allowed to wait according to original semantics.
+Product code is unchanged from 8c081843a. This is additional lifecycle
+evidence, not a replacement for the final complete S36 ledger review.

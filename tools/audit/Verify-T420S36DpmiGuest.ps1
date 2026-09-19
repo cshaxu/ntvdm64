@@ -4,7 +4,8 @@ param(
     [Parameter(Mandatory)][string]$FixtureRoot,
     [string]$PackageRoot = 'O:\winnt',
     [Parameter(Mandatory)][string]$LogPrefix,
-    [switch]$Stress
+    [switch]$Stress,
+    [switch]$Lifecycle
 )
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path "$PSScriptRoot\..\..").Path
@@ -26,8 +27,14 @@ function PackageProcesses {
         Where-Object { $_.ExecutablePath -in $paths })
 }
 if ((PackageProcesses).Count) { throw 'Package already in use' }
+if ($Stress -and $Lifecycle) { throw 'Select one matrix' }
+if ($Lifecycle) {
+    foreach ($dependency in @('D36N.COM','D36L.COM')) {
+        Copy-Item -LiteralPath (Join-Path $FixtureRoot $dependency) -Destination "$PackageRoot\tests\$dependency"
+    }
+}
 $results = @()
-$images = if ($Stress) { @('D36R.COM') } else { @('D36N.COM','D36E.COM') }
+$images = if ($Lifecycle) { @('D36T.COM') } elseif ($Stress) { @('D36R.COM') } else { @('D36N.COM','D36E.COM') }
 foreach ($image in $images) {
     $source = Join-Path $FixtureRoot $image
     $hash = (Get-FileHash -LiteralPath $source).Hash
@@ -54,8 +61,25 @@ foreach ($image in $images) {
             if ($Stress -and $screen -notmatch 'S36_DPMI_FORCED_MOVE_FAILED_GROW_DATA_FREE_OK') {
                 throw 'Missing forced relocation/failure/data marker'
             }
+            if ($Lifecycle -and ($screen -match 'S36_DPMI_TASK_EXIT_FAIL' -or
+                $screen -notmatch 'S36_DPMI_TASK_EXIT_CAPACITY_RESTORED_OK')) { throw 'Task cleanup failed' }
+            if ($Lifecycle -and [regex]::Matches($screen, 'S36_DPMI_EXIT_WITH_LIVE_ALLOCATION').Count -ne 4) {
+                throw 'Expected four independently completed live-allocation children'
+            }
             $survivors = @(PackageProcesses | Select-Object ProcessId,ParentProcessId,ExecutablePath)
-            $results += @{Image=$image; Sha256=$hash; Route=$route; Report=$report; ProcessesBeforeCleanup=$survivors}
+            $brokerLossVerified = $false
+            if ($Lifecycle) {
+                $owned = @($survivors | Where-Object { $_.ParentProcessId -eq $launcher })
+                $brokers = @($owned | Where-Object { $_.ExecutablePath -eq $paths[2] })
+                $workers = @($owned | Where-Object { $_.ExecutablePath -eq $paths[1] })
+                if ($brokers.Count -ne 1 -or $workers.Count -ne 1) { throw 'Missing test-owned resident pair' }
+                $workerProcess = Get-Process -Id $workers[0].ProcessId
+                Stop-Process -Id $brokers[0].ProcessId -Force
+                if (!$workerProcess.WaitForExit(10000)) { throw 'Worker survived broker loss' }
+                $brokerLossVerified = $true
+            }
+            $results += @{Image=$image; Sha256=$hash; Route=$route; Report=$report;
+                ProcessesBeforeCleanup=$survivors; BrokerLossWorkerExit=$brokerLossVerified}
             Write-Host "PASS DPMI $image $route"
         } finally {
             # Case isolation is not evidence of natural worker teardown.
