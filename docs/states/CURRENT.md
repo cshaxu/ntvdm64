@@ -4,41 +4,36 @@
 
 ## Active Packet
 
-**Active: M0 T420 S38**
+**Active: M0 T420 S39**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T420 S38, Ordinary Mode, single implementer/reviewer. |
-| Candidate Proposal | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md), S38. |
-| Admission And Approval | Owner requests automatic S admission after S37 closure 2e56df9eb; retain sequential package ownership. |
-| Objective | Verify the complete selected DPMI32 host package through real protected-mode selectors, interrupts, memory, return and teardown; remove proven unnecessary differences. |
-| Non-goals | No guest-media mutation, CPU30/kernel monitor revival, replacement DPMI policy or unsupported WOW success claims. S39 owns guest DOSX package acceptance. |
-| Reference Baseline | S18 source recovery, S36 real DPMI/suballocator repairs, S37 product 6b80471d9 and its full passing regressions. |
-| Files And ABI Surface | Fifteen baseline dpmi32 bodies and three headers, the original i386/dpmi386.c debug service, and its directly required existing CPU40 debug match/delivery/reset owners. No new CPU profile, guest ABI or external provider. |
-| Applicable Rules | Execution, source-first recovery, complete-package review, mirror minimal-diff, immutable guest and transcript-gated acceptance. |
-| Verification | Audit every selected body and all 25 BOP slots; real selector/interrupt/fault/memory/return/repeated-task tests with negative and cleanup cases; boundary injection where needed; formal x86 and 17 established product routes. |
-| Expected Markers | Actual guest results and original dispatch attribution, preserved registers/FLAGS/data, rejected invalid requests, released task resources and usable parent DOS. |
-| Asset Needs | Pinned OpenNT; unchanged deployed DOSX; independent probes/builds under build/M0-T420/S38; runtime tests and logs under O:/winnt/tests and O:/winnt/logs. |
-| Reporting Requirements | Source/compiled/reached capability ledger, four-rung recovery and retained-boundary dispositions, exact mirror/adapter counts, raw/normalized comparison and artifact/test identities. |
-| Stop Conditions | Required guest modification, unadmitted original-owner boundary expansion, new policy/provider or unexplained established regression. |
-| Exit Criteria | Complete selected package dispositions, required real and negative/lifecycle evidence, owner-approved external limits if any, formal build/regression success and reviewed committed/pushed delivery. |
-| Original Owner Request | Automatically admit each sequential S and recover/verify the complete selected package with minimal original-source differences. |
-| Similar-Issue Sweep | All descriptor domains, mode/stack/FLAGS transitions, interrupt/fault returns, allocation/free and task teardown, including profile-disabled fast/debug/VCD entries. |
-| CPU Compatibility Profile | Existing x86 CPU40 debug-register delivery: separate a new matched event from retained DR6 status; preserve original match tables, register masks and exception frames. Verify scalar, read-modify-write/string, stack and instruction-breakpoint/control groups, repeated hits, stale-status negatives, fault cancellation and reset before accepting this required DPMI dependency. |
+| Identifier Mode | M0 T420 S39, Ordinary Mode, single implementer/reviewer. |
+| Candidate Proposal | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md), S39. |
+| Admission And Approval | Owner authorizes automatic admission of every remaining T420 S until an explicit interruption; T closure remains owner-only after all S complete. |
+| Objective | Verify the complete immutable guest DPMI/DOSX package: BOP 53 activation, protected-to-real return, repeated entry and original resource release. |
+| Non-goals | No guest-media mutation, new DPMI policy, CPU30/kernel monitor revival, WOW acceptance or repair of registered original guest defects. |
+| Reference Baseline | S19 source recovery; S38 delivered at `7b888b1a4` with current candidate `3a4b7d3b...cef21a03`. |
+| Files And ABI Surface | Full selected load-only `src/mvdm/dpmi` guest manifest, original BOP 53 call/return records, DOSX/DPMI selectors, descriptors and teardown. |
+| Applicable Rules | Execution, source-first recovery, complete-package review, immutable guest, transcript-gated acceptance and external-boundary records. |
+| Verification | Freeze guest provenance; trace every selected BOP 53 caller; real direct/nested DOSX entry/return/re-entry/cleanup tests; formal x86 and 17 established product routes. |
+| Expected Markers | Original DOSX reaches/returns through BOP 53, preserves required state, releases ordinary-client resources and leaves a usable parent DOS session. |
+| Asset Needs | Pinned OpenNT and unchanged deployed DOSX; build/M0-T420/S39; runtime tests/logs under O:/winnt/tests and O:/winnt/logs. |
+| Reporting Requirements | Manifest/source/reached ledger, original-guest limitations, exact artifact identities and mirror/adapter diff counts. |
+| Stop Conditions | Required guest change, unadmitted host provider/policy, unexplained established regression or scope beyond guest DPMI/DOSX. |
+| Exit Criteria | All selected guest DPMI/DOSX paths have real pass, source-proven absent caller or recorded owner-approved limitation; formal/regression and committed/pushed S delivery pass. T420 then waits for owner audit. |
+| Original Owner Request | Automatically continue each remaining S; stop after all S for owner acceptance audit before T closure. |
+| Similar-Issue Sweep | All BOP 53 paths, first/repeated DOSX entry, mode/stack/descriptor transitions, normal/error release and direct/nested COMMAND routes. |
 
-## S38 Progress
+## S39 Progress
 
-The [DPMI32 review](../etc/evidence/m0-t420-s38-dpmi32-capability-review.md)
-covers fifteen bodies, recovered debug service and all 25 BOP slots. Current
-formal x86 candidate 3a4b7d3b passes four native fixtures and a split isolated
-17/17 product matrix with guest-text/exit-code gates and no residual worker,
-broker or V: mapping. DIV-280--290 restore only witnessed frame, debug,
-pointer, flags, IOCTL and EXEC boundaries; all residual selected production
-diffs have source-owner dispositions. Real direct/nested IRQ/fault, descriptor,
-VCD, memory, high EDI/CODE32 and 65,561-byte I/O evidence is retained. Original
-DOSX debug, 0500 invalid-span and spool limitations are TODO negatives, never
-passes. O:/winnt is unchanged. S38 remains open only for final formal gates and
-reviewed delivery.
+S39 froze the byte-identical original DOSX identity and recorded all 52 BOP 53
+source sites. Current-main formal x86 build `5720b61c...914ff6a70`, three native
+fixtures, D36 normal/stress/lifecycle (8 direct/nested runs), and 16/32 hardware
+IRQ/interrupt/fault return (4 runs) pass at the supported `O:/winnt` root.
+The in-progress 17-route product matrix, temporary candidate restore hashes and
+the isolated-root limitation are recorded in the S39 evidence file; no guest or
+production source has changed.
 
 ## S37 Closure Record
 

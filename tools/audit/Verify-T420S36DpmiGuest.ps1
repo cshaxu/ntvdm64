@@ -92,7 +92,13 @@ foreach ($image in $images) {
                 foreach ($child in (PackageProcesses)) {
                     if ($child.ParentProcessId -eq $launcher) {
                         $process = Get-Process -Id $child.ProcessId -ErrorAction SilentlyContinue
-                        if ($process) { Stop-Process -Id $process.Id -Force; [void]$process.WaitForExit(5000) }
+                        if ($process) {
+                            # A worker or broker can complete naturally between
+                            # discovery and termination.  That is already the
+                            # desired cleanup state, not an acceptance failure.
+                            Stop-Process -Id $process.Id -Force -ErrorAction SilentlyContinue
+                            [void]$process.WaitForExit(5000)
+                        }
                     }
                 }
             }

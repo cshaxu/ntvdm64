@@ -200,8 +200,22 @@ try {
                 }
                 foreach ($id in ($owned | Sort-Object -Descending)) {
                     $process=Get-PackageProcesses | Where-Object { $_.ProcessId -eq $id }
-                    if ($process -and $id -in $owned) { Stop-Process -Id $id }
+                    if ($process -and $id -in $owned) {
+                        # COMMAND can hand its Console to a nested owner just
+                        # before this observer regains control.  Terminate the
+                        # exact recorded test tree, then tolerate a natural
+                        # exit race; never expand cleanup by image name.
+                        Stop-Process -Id $id -Force -ErrorAction SilentlyContinue
+                    }
                 }
+                $deadline = [Environment]::TickCount64 + 5000
+                do {
+                    $remaining = @(Get-PackageProcesses | Where-Object {
+                        $_.ProcessId -in $owned
+                    })
+                    if (!$remaining.Count) { break }
+                    Start-Sleep -Milliseconds 100
+                } while ([Environment]::TickCount64 -lt $deadline)
             }
         }
         if ((Get-PackageProcesses).Count) { throw 'Unowned package process remains; stopping matrix.' }
