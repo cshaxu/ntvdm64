@@ -12,6 +12,16 @@ inputs, never replacements for original guest components. Diagnose host
 integration against the original contract; record any demonstrated original
 guest limitation without claiming a workaround as restored functionality.
 
+The owner grants standing disposition authority for limitations proved to
+originate in the unchanged original guest: register the source attribution,
+reproducer, affected capability and retained behavior in TODO and indexed
+evidence, then continue the remaining acceptance without requesting another
+case-by-case approval. Do not repair or conceal those limitations through
+guest changes or host workarounds. A recorded limitation is not a passing
+test. An unexplained failure, an original host-code defect, or a project
+host/adapter integration defect does not qualify merely because the guest
+triggers it; establish causality before applying this disposition.
+
 ### Canonical source ownership
 
 The pinned local OpenNT and OpenNT-4.5 MVDM trees are merged into one canonical

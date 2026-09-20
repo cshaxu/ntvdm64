@@ -122,7 +122,7 @@ APIXLATFUNCTION ApiXlatTable[MAX_SUPPORTED_DOS_CALL] = {
     RenameFile                     , // 56h - Rename File
     NoTranslation                  , // 57h - Get/Set Date/Time File
     NoTranslation                  , // 58h - Get/Set Alloc Strategy
-    NoTranslation                  , // 59h - Get Extended Error Info
+    ReturnESBX                     , // 59h - Get Extended Error Info (ES:DI)
     CreateTempFile                 , // 5Ah - Create Temporary File
     MapASCIIZDSDX                  , // 5Bh - Create New File
     NoTranslation                  , // 5Ch - Lock/Unlock File Region
@@ -193,7 +193,11 @@ Return Value:
         return; //bugbug find out what win31 does.
     }
 
-    (*ApiXlatTable[DosMajorCode])();
+    /* DIVERGENCE(MVDM-HOST-DIV-283): the non-DBCS DOS guest also returns
+     * DS:SI for 6300h. Use its original pointer translator, not the
+     * non-DBCS table's segment-restoring NoTranslation fallback. */
+    if (getAX() == 0x6300) ReturnDSSI();
+    else (*ApiXlatTable[DosMajorCode])();
 
     // put this back in after beta 2.5
     DpmiFreeAllBuffers();
@@ -232,13 +236,19 @@ Return Value:
 --*/
 {
     VSAVEDSTATE State;
+    /* DIVERGENCE(MVDM-HOST-DIV-284): DOS raw input returns ZF as well as
+     * CF. The common IRET helper otherwise restores the caller's old ZF. */
+    BOOL ReturnZero = (getAH() == 6 || getAX() == 0x0c06) && getDL() == 0xff;
+    BOOL ZeroFlag;
 
     DpmiSwitchToRealMode();
     DpmiSaveSegmentsAndStack(&State);
     DPMI_EXEC_INT(0x21);
     DpmiSwitchToProtectedMode();
     DpmiRestoreSegmentsAndStack();
+    ZeroFlag = getZF();
     DpmiSimulateIretCF();
+    if (ReturnZero) setZF(ZeroFlag);
 }
 
 VOID
@@ -1077,6 +1087,9 @@ Return Value:
 {
     USHORT Selector;
     VSAVEDSTATE State;
+    /* DIVERGENCE(MVDM-HOST-DIV-290): extended error returns ES:DI;
+     * reuse the original segment conversion without losing error BX. */
+    BOOL ReturnDI = getAH() == 0x59;
 
     DpmiSwitchToRealMode();
     DpmiSaveSegmentsAndStack(&State);
@@ -1087,7 +1100,8 @@ Return Value:
 
     DpmiRestoreSegmentsAndStack();
 
-    (*SetBXRegister)((ULONG)getBX());
+    if (ReturnDI) (*SetDIRegister)((ULONG)getDI());
+    else (*SetBXRegister)((ULONG)getBX());
     setES(Selector);
 
     DpmiSimulateIretCF();
@@ -1587,6 +1601,9 @@ Return Value:
     PUCHAR CommandTail, BufferedString, Environment;
     USHORT ClientDX, ClientBX, Seg, Off, Length, i, EnvironmentSel;
     VSAVEDSTATE State;
+    /* DIVERGENCE(MVDM-HOST-DIV-289): retain the original EXEC1 output
+     * destination for DOSX's eight-byte load-only return contract. */
+    PUCHAR LoadResult = NULL;
 
     DpmiSwitchToRealMode();
     DpmiSaveSegmentsAndStack(&State);
@@ -1638,6 +1655,9 @@ Return Value:
             );
 
         CommandTail += (*GetBXRegister)();
+
+        /* DIVERGENCE(MVDM-HOST-DIV-289): xsssp/xcsip follow EXEC0. */
+        if (getAL() == 1) LoadResult = CommandTail + 14;
 
         if (CurrentAppFlags & DPMI_32BIT) {
             //
@@ -1717,6 +1737,10 @@ Return Value:
             );
 
         *(PWORD16)Environment = EnvironmentSel;
+
+        /* DIVERGENCE(MVDM-HOST-DIV-289): mirror DOSX dosex4's four
+         * movsw operations; failed loads must not publish entry state. */
+        if (LoadResult && !getCF()) CopyMemory(LoadResult, LargeXlatBuffer + 14, 8);
 
         //
         // Free translation buffer
@@ -2612,6 +2636,8 @@ Return Value:
         TRUE
         );
 
+    /* DIVERGENCE(MVDM-HOST-DIV-285): map the client's DS:DX, not DS:0. */
+    Data += (*GetDXRegister)();
     BufferedData = DpmiMapAndCopyBuffer(Data, 2);
 
     DPMI_FLAT_TO_SEGMENTED(BufferedData, &DataSeg, &DataOff);
@@ -2655,9 +2681,13 @@ Return Value:
 
     IoctlSubFunction = getCL();
 
-    if ((IoctlSubFunction < 0x40) || (IoctlSubFunction > 0x42) &&
+    /* DIVERGENCE(MVDM-HOST-DIV-288): original DEM also consumes media-ID
+     * and access-flag packets; protected pointers require this mapping. */
+    if (((IoctlSubFunction < 0x40) || (IoctlSubFunction > 0x42) &&
         (IoctlSubFunction < 0x60) || (IoctlSubFunction > 0x62) &&
-        (IoctlSubFunction != 0x68)
+        (IoctlSubFunction != 0x68)) &&
+        IoctlSubFunction != 0x46 && IoctlSubFunction != 0x66 &&
+        IoctlSubFunction != 0x47 && IoctlSubFunction != 0x67
     ) {
 #if DBG
         OutputDebugString("DPMI: IOCTL DOS CALL NOT SUPPORTED\n");
@@ -2687,6 +2717,13 @@ Return Value:
     Data += (*GetDXRegister)();
 
     switch (IoctlSubFunction) {
+    /* DIVERGENCE(MVDM-HOST-DIV-288): original packed MID / ACCESSCTRL. */
+    case 0x46:
+    case 0x66:
+    case 0x47:
+    case 0x67:
+        Length = (IoctlSubFunction == 0x46 || IoctlSubFunction == 0x66) ? 25 : 2;
+        break;
     case 0x40:
         //
         // Map set device params
@@ -2694,6 +2731,12 @@ Return Value:
         Length = (*(PWORD16)(Data + 0x26));
         Length <<= 2;
         Length += 0x28;
+        break;
+
+    case 0x42:
+        /* DIVERGENCE(MVDM-HOST-DIV-287): original A_FORMATPACKET adds
+         * FP_TRACKCOUNT only when special-functions bit 1 is set. */
+        Length = (Data[0] & 2) ? 7 : 5;
         break;
 
     case 0x60:
@@ -2828,7 +2871,9 @@ Return Value:
     if (CurrentAppFlags & DPMI_32BIT) {
 
         Data = Sim32GetVDMPointer(
-            (*((PWORD16)(BufferedPBlock + 0xd)) << 16),
+            /* DIVERGENCE(MVDM-HOST-DIV-286): the 32-bit selector lies
+             * beyond the 13-byte DOS packet copy; read the client owner. */
+            (*((PWORD16)(ParameterBlock + 0xd)) << 16),
             1,
             TRUE
             );

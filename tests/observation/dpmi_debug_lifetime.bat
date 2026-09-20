@@ -1,0 +1,7 @@
+@echo off
+tests\D38L.COM
+tests\D38L.COM
+tests\D38L.COM
+tests\D38L.COM
+tests\D38L.COM
+echo S38_DEBUG_EXIT_OBSERVATION_END

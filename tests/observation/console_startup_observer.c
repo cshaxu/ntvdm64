@@ -13,6 +13,19 @@
 #include <stdlib.h>
 #include <string.h>
 
+static char control_event_report[MAX_PATH];
+static BOOL WINAPI record_console_control(DWORD event)
+{
+    HANDLE file = CreateFileA(control_event_report, GENERIC_WRITE,
+        FILE_SHARE_READ, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+    DWORD written;
+    if (file != INVALID_HANDLE_VALUE) {
+        WriteFile(file, &event, sizeof(event), &written, NULL);
+        CloseHandle(file);
+    }
+    return FALSE; /* Preserve the default termination action. */
+}
+
 /* The scripted command sequence itself is paced at one original 8042 event
  * every 100 ms.  The original worker's delayed IRQ path is measured in
  * microseconds, so this remains deliberately slower than the source-owned
@@ -186,6 +199,35 @@ static void clear_console(HANDLE output)
     (void)FillConsoleOutputAttribute(output, info.wAttributes, cells,
                                      (COORD){ 0, 0 }, &written);
     (void)SetConsoleCursorPosition(output, (COORD){ 0, 0 });
+}
+
+/* Observe direct children before the harness closes its Console.  A launcher
+ * result alone must not be mistaken for successful worker termination. */
+static void report_direct_children(FILE *report, DWORD parent)
+{
+    HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+    PROCESSENTRY32 entry;
+    if (snapshot == INVALID_HANDLE_VALUE) {
+        fprintf(report, "child-snapshot-error=%lu\n", GetLastError());
+        return;
+    }
+    entry.dwSize = sizeof(entry);
+    if (Process32First(snapshot, &entry)) do {
+        if (entry.th32ParentProcessID == parent) {
+            HANDLE process = OpenProcess(SYNCHRONIZE | PROCESS_QUERY_LIMITED_INFORMATION,
+                                         FALSE, entry.th32ProcessID);
+            DWORD code = 0, length = MAX_PATH;
+            char path[MAX_PATH] = "unavailable";
+            DWORD wait = process ? WaitForSingleObject(process, 0) : WAIT_FAILED;
+            BOOL have_code = process && GetExitCodeProcess(process, &code);
+            if (process) QueryFullProcessImageNameA(process, 0, path, &length);
+            fprintf(report, "direct-child pid=%lu name=%s wait=%lu exit-known=%u exit=%08lx path=%s\n",
+                    entry.th32ProcessID, entry.szExeFile, wait,
+                    (unsigned)have_code, code, path);
+            if (process) CloseHandle(process);
+        }
+    } while (Process32Next(snapshot, &entry));
+    CloseHandle(snapshot);
 }
 
 /* The product's original illegal-opcode path formats a bounded `CS:... OP:`
@@ -580,14 +622,15 @@ static BOOL write_console_mouse_sequence(HANDLE input, const char *report_path)
 
 /* Observe the real COMMAND prompt, not a diagnostic CPU hook. Retiring
  * the INTx observer must not turn source cleanup into a test-only failure. */
-static BOOL wait_for_console_prompt(HANDLE output, DWORD timeout_ms)
+static BOOL wait_for_console_prompt(HANDLE output, DWORD timeout_ms,
+                                    const char *marker)
 {
     DWORD begin=GetTickCount();
     do {
         CONSOLE_SCREEN_BUFFER_INFO info;
-        char row[1024]; DWORD count=0; SHORT y;
+        char row[1025]; DWORD count=0; SHORT y;
         if(GetConsoleScreenBufferInfo(output,&info) && info.dwSize.X>2 &&
-           info.dwSize.X<=(SHORT)sizeof(row)) {
+           info.dwSize.X<(SHORT)sizeof(row)) {
             /* COMMAND can paint its prompt before the public Console cursor
              * settles on that row.  Identify the same drive-qualified prompt
              * in the visible buffer instead of treating cursor timing as a
@@ -595,8 +638,11 @@ static BOOL wait_for_console_prompt(HANDLE output, DWORD timeout_ms)
             for(y=info.srWindow.Top;y<=info.srWindow.Bottom;y++) {
                 COORD pos={0,y};
                 if(ReadConsoleOutputCharacterA(output,row,info.dwSize.X,pos,&count) &&
-                   count==(DWORD)info.dwSize.X && row[1]==':' &&
-                   memchr(row,'>',count)!=NULL) return TRUE;
+                   count==(DWORD)info.dwSize.X) {
+                    row[count]='\0';
+                    if(marker ? strstr(row,marker)!=NULL :
+                       (row[1]==':' && memchr(row,'>',count)!=NULL)) return TRUE;
+                }
             }
         }
         Sleep(25);
@@ -657,6 +703,7 @@ int main(int argc, char **argv)
     BOOL observed_console_mouse_input_delivered = FALSE;
     const char *scripted_console_input_text = "ver\rexit\r";
     const char *scripted_console_input_sequence = "ver+exit";
+    const char *scripted_console_input_marker = NULL;
     DWORD scripted_console_line_delay_ms = 0;
     BOOL scripted_console_input_ready = FALSE;
     BOOL scripted_console_input_delivered = FALSE;
@@ -706,6 +753,11 @@ int main(int argc, char **argv)
      * controller Console or accept its viewport constraints as test geometry. */
     if (GetEnvironmentVariableA("MVDM_OBSERVER_SHORT_HISTORY",NULL,0)) FreeConsole();
     if (!AllocConsole() && GetLastError() != ERROR_ACCESS_DENIED) return 65;
+    if (GetEnvironmentVariableA("MVDM_OBSERVER_RECORD_CONTROL", NULL, 0)) {
+        if (snprintf(control_event_report, sizeof(control_event_report),
+                     "%s.control.bin", argv[3]) < 0 ||
+            !SetConsoleCtrlHandler(record_console_control, TRUE)) return 65;
+    }
     input = CreateFileA("CONIN$", GENERIC_READ | GENERIC_WRITE,
                         FILE_SHARE_READ | FILE_SHARE_WRITE, &inherit,
                         OPEN_EXISTING, 0, NULL);
@@ -784,6 +836,12 @@ int main(int argc, char **argv)
                                               &command_length, "EXIT")) return 68;
         } else {
             for (argument_index = 4; argument_index < argc; ++argument_index) {
+                if (strcmp(argv[argument_index], "--observe-console-input-marker") == 0) {
+                    if (++argument_index >= argc || !argv[argument_index][0] ||
+                        strlen(argv[argument_index]) > 80) return 68;
+                    scripted_console_input_marker = argv[argument_index];
+                    continue;
+                }
                 if (strcmp(argv[argument_index], "--observe-console-input-text") == 0) {
                     if (++argument_index >= argc) return 68;
                     scripted_console_input = TRUE;
@@ -913,7 +971,7 @@ int main(int argc, char **argv)
     if (scripted_console_input) {
         /* Await visible COMMAND readiness, without an execution-core hook. */
         scripted_console_input_ready = wait_for_console_prompt(output,
-            OBSERVATION_INPUT_READY_TIMEOUT_MS);
+            OBSERVATION_INPUT_READY_TIMEOUT_MS, scripted_console_input_marker);
         if (scripted_console_input_ready) {
             /* Snapshot the exact shared CONOUT$ buffer after original guest
              * stream output but before this observer queues any key. */
@@ -1040,6 +1098,7 @@ int main(int argc, char **argv)
         fprintf(report, "pid=%lu\n", (unsigned long)child.dwProcessId);
         fprintf(report, "result=%s\n", wait_status == WAIT_TIMEOUT ? "timeout" : "exited");
         fprintf(report, "exit=0x%08lx\n", (unsigned long)exit_code);
+        report_direct_children(report, child.dwProcessId);
         fprintf(report, "timeout-ms=%lu\n", (unsigned long)observation_timeout_ms);
         fprintf(report, "scripted-console-input=%s\n",
                 scripted_console_input ?
@@ -1057,7 +1116,9 @@ int main(int argc, char **argv)
             fprintf(report, "console-mouse-input-ready=%s\n",
                     observed_console_mouse_input_ready ? "yes" : "no");
         if (scripted_console_input) {
-            fprintf(report, "scripted-console-input-trigger=visible-command-prompt\n");
+            fprintf(report, "scripted-console-input-trigger=%s\n",
+                scripted_console_input_marker ? scripted_console_input_marker :
+                "visible-command-prompt");
             fprintf(report, "scripted-console-input-sequence=%s\n",
                     scripted_console_input_sequence);
             fprintf(report, "scripted-console-input-ready=%s\n",

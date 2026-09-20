@@ -4375,7 +4375,8 @@ TYPEFF_3:
       Now check for interrupts/external events/breakpoints...
     */
 
-   if ( quick_mode && GET_DR(DR_DSR) == 0 )
+   /* DIVERGENCE: MVDM-HOST-DIV-282: only a new match schedules delivery. */
+   if ( quick_mode && !debug_exception_pending )
       goto DO_INST;
 
 #ifdef SYNCH_TIMERS
@@ -4428,9 +4429,7 @@ TYPEFF_3:
       }
 
    /* check for debug traps */
-   if ( GET_DR(DR_DSR) &
-	(DSR_BT_MASK | DSR_B3_MASK | DSR_B2_MASK | DSR_B1_MASK |
-	 DSR_B0_MASK) )
+   if ( debug_exception_pending ) /* MVDM-HOST-DIV-282 */
       {
       Int1_t();   /* at least one breakpoint set from:-
 		     T-bit or DATA Breakpoints */
@@ -4439,7 +4438,7 @@ TYPEFF_3:
    if ( nr_inst_break && GET_RF() == 0 )
       {
       check_for_inst_exception(GET_CS_BASE() + GET_EIP());
-      if ( GET_DR(DR_DSR) )
+      if ( debug_exception_pending ) /* MVDM-HOST-DIV-282 */
 	 {
 	 Int1_f();   /* a CODE Breakpoint triggered */
 	 }
@@ -4850,6 +4849,7 @@ LOCAL VOID
       SET_DR(DR_DAR2, 0);   /* Really Undefined */
       SET_DR(DR_DAR3, 0);   /* Really Undefined */
       SET_DR(DR_DSR, 0);    /* Really Undefined */
+      debug_exception_pending = FALSE; /* MVDM-HOST-DIV-282: reset. */
       MOV_DR((IU32) DR_DCR, (IU32) 0);   /* Disable Breakpoints */
 
       SET_TR(TR_TCR, 0);   /* Really Undefined */
@@ -4922,6 +4922,9 @@ LOCAL VOID
    GLOBAL VOID
    c_cpu_continue IFN0()
       {
+      /* DIVERGENCE: MVDM-HOST-DIV-282: all callers finish exception entry.
+       * Consume/cancel the pending event, retaining architectural DR6. */
+      debug_exception_pending = FALSE;
 #ifdef NTVDM
       ccpu386GotoThrdExptnPt();
 #else

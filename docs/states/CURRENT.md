@@ -14,7 +14,7 @@
 | Objective | Verify the complete selected DPMI32 host package through real protected-mode selectors, interrupts, memory, return and teardown; remove proven unnecessary differences. |
 | Non-goals | No guest-media mutation, CPU30/kernel monitor revival, replacement DPMI policy or unsupported WOW success claims. S39 owns guest DOSX package acceptance. |
 | Reference Baseline | S18 source recovery, S36 real DPMI/suballocator repairs, S37 product 6b80471d9 and its full passing regressions. |
-| Files And ABI Surface | Fifteen selected dpmi32 bodies and three headers; their original BOP 53 dispatch and existing CPU40/guest-memory boundaries. |
+| Files And ABI Surface | Fifteen baseline dpmi32 bodies and three headers, the original i386/dpmi386.c debug service, and its directly required existing CPU40 debug match/delivery/reset owners. No new CPU profile, guest ABI or external provider. |
 | Applicable Rules | Execution, source-first recovery, complete-package review, mirror minimal-diff, immutable guest and transcript-gated acceptance. |
 | Verification | Audit every selected body and all 25 BOP slots; real selector/interrupt/fault/memory/return/repeated-task tests with negative and cleanup cases; boundary injection where needed; formal x86 and 17 established product routes. |
 | Expected Markers | Actual guest results and original dispatch attribution, preserved registers/FLAGS/data, rejected invalid requests, released task resources and usable parent DOS. |
@@ -24,38 +24,21 @@
 | Exit Criteria | Complete selected package dispositions, required real and negative/lifecycle evidence, owner-approved external limits if any, formal build/regression success and reviewed committed/pushed delivery. |
 | Original Owner Request | Automatically admit each sequential S and recover/verify the complete selected package with minimal original-source differences. |
 | Similar-Issue Sweep | All descriptor domains, mode/stack/FLAGS transitions, interrupt/fault returns, allocation/free and task teardown, including profile-disabled fast/debug/VCD entries. |
+| CPU Compatibility Profile | Existing x86 CPU40 debug-register delivery: separate a new matched event from retained DR6 status; preserve original match tables, register masks and exception frames. Verify scalar, read-modify-write/string, stack and instruction-breakpoint/control groups, repeated hits, stale-status negatives, fault cancellation and reset before accepting this required DPMI dependency. |
 
 ## S38 Progress
 
 The [DPMI32 review](../etc/evidence/m0-t420-s38-dpmi32-capability-review.md)
-starts from the fifteen selected original bodies and 25 BOP slots. S36's
-allocation tests are a baseline, not proof of interrupt/fault/stack coverage.
-No production change or full DPMI32 capability completion is claimed yet.
-Real 16-bit software interrupt and divide-error return probes now pass both
-direct and twice-nested COMMAND routes, including stack/register/carry and
-invalid-vector assertions. Allocation stress and task cleanup baselines also
-pass; a narrow-Console marker parsing defect was corrected in the harness.
-16-bit clients, 32-bit client frames in 16-bit code, and true 32-bit code
-segments now pass direct/nested software interrupt and divide-error returns.
-The probe checks full EAX, stack and carry preservation. Three newline-only
-mirror differences are restored byte-exact; the formal x86 product relinks.
-Remaining complete-package coverage is still open. The earlier 17-route
-product baseline passes under `s38-product-baseline-r1`.
-Real timer IRQ and nested-fault routes now pass all three code/frame variants.
-Unhandled 16/32-bit divide reflection passes after correcting the original
-DWORD IRET EFLAGS offset (DIV-280); no replacement provider or guest mutation.
-The evidence distinguishes earlier timeouts from direct source/layout proof.
-VCD discovery/version/port-range/refusal passes real direct/nested probes.
-The new watchpoint probe exposes an open failure: INT31/0B00 registration
-succeeds but its write does not satisfy the required exception-1 delivery.
-Original debug-service-to-CCPU binding is under review; S38 cannot close on
-the earlier generic regression results alone.
-The experimental original-service/MOV_DR binding now proves a first debug
-hit, followed by repeated exception-1 delivery inside the handler while DR6
-remains set; it is not accepted. Independent host-boundary traces record
-the repeated entries and descending stack. O:/winnt retains the prior
-verified worker; the source/build experiment remains WIP pending complete
-debug status/return, checked-read and lifecycle verification.
+covers fifteen bodies, recovered debug service and all 25 BOP slots. Current
+formal x86 candidate 3a4b7d3b passes four native fixtures and a split isolated
+17/17 product matrix with guest-text/exit-code gates and no residual worker,
+broker or V: mapping. DIV-280--290 restore only witnessed frame, debug,
+pointer, flags, IOCTL and EXEC boundaries; all residual selected production
+diffs have source-owner dispositions. Real direct/nested IRQ/fault, descriptor,
+VCD, memory, high EDI/CODE32 and 65,561-byte I/O evidence is retained. Original
+DOSX debug, 0500 invalid-span and spool limitations are TODO negatives, never
+passes. O:/winnt is unchanged. S38 remains open only for final formal gates and
+reviewed delivery.
 
 ## S37 Closure Record
 

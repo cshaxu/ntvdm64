@@ -2,6 +2,7 @@
 param(
     [Parameter(Mandatory)][string]$Observer,
     [string]$PackageRoot = 'O:\winnt',
+    [string]$LogRoot = 'O:\winnt\logs',
     [string]$LogPrefix = 'm0-t412-s8-exit',
     [string[]]$Cases,
     [string]$GuestFixturePath
@@ -9,6 +10,7 @@ param(
 $ErrorActionPreference = 'Stop'
 $Observer = (Resolve-Path -LiteralPath $Observer).Path
 $PackageRoot = (Resolve-Path -LiteralPath $PackageRoot).Path
+$LogRoot = (Resolve-Path -LiteralPath $LogRoot).Path
 if ($LogPrefix -notmatch '^[a-z0-9-]+$') { throw 'Invalid log prefix' }
 $runtimeFixtureRoot = Join-Path $PackageRoot 'tests'
 if (!(Test-Path -LiteralPath $runtimeFixtureRoot)) {
@@ -68,8 +70,11 @@ $matrix = @(
     @{ Name='native-streams'; Args=@('COMMAND.COM','/c','cmd','/c',(Join-Path $shortFixtureRoot 'STREAM.CMD')); Code=0; ConsoleMarkers=@('S10_STDOUT','S10_STDERR') },
     @{ Name='native-eof'; Args=@('COMMAND.COM','/c','cmd','/c',(Join-Path $shortFixtureRoot 'EOF.CMD')); Code=0; ConsoleMarkers=@('S10_EOF') },
     @{ Name='mem'; Text="mem`rexit`r"; Code=1; ConsoleMarkers=@('bytes total conventional memory') },
-    @{ Name='nested-empty'; Text="command`rexit`rexit`r"; Code=1; ConsoleMarkers=@('Microsoft(R) Windows NT DOS'); ConsoleMarkerCount=2 },
-    @{ Name='nested-mem'; Text="command`rcommand`rmem`rexit`rmem`rexit`rmem`rexit`r"; Code=1 },
+    # A nested COMMAND consumes the preceding exit and recreates its input
+    # loop.  Pace complete lines so the next key sequence is not offered while
+    # the original keyboard queue is between those two owners.
+    @{ Name='nested-empty'; Text="command`rexit`rexit`r"; LineDelayMs=1000; Code=1; ConsoleMarkers=@('Microsoft(R) Windows NT DOS'); ConsoleMarkerCount=2 },
+    @{ Name='nested-mem'; Text="command`rcommand`rmem`rexit`rmem`rexit`rmem`rexit`r"; LineDelayMs=1000; Code=1 },
     @{ Name='mem-repeat'; Text="mem`rmem`rexit`r"; Code=1; ConsoleMarkers=@('bytes total conventional memory') },
     @{ Name='direct-mem'; Args=@('MEM.EXE'); Code=0; ConsoleMarkers=@('bytes total conventional memory') },
     @{ Name='command-c'; Args=@('COMMAND.COM','/c','ver'); Code=0; ConsoleMarkers=@('MS-DOS Version') },
@@ -95,21 +100,37 @@ try {
     foreach ($case in $matrix) {
         if ($case.Negative -and !$Cases) { continue }
         if ($Cases -and $case.Name -notin $Cases) { continue }
-        $report=Join-Path $PackageRoot "logs\$LogPrefix-$($case.Name).txt"
+        $report=Join-Path $LogRoot "$LogPrefix-$($case.Name).txt"
         if (Test-Path -LiteralPath $report) { throw "Use a fresh log prefix: $report exists" }
         [Environment]::SetEnvironmentVariable($environmentNames[0],"$report.broker.log")
         $arguments=@((Join-Path $PackageRoot 'run16.exe'),$PackageRoot,$report)
         if ($case.Args) { $arguments += $case.Args } else { $arguments += 'COMMAND.COM' }
-        if ($case.Text) { $arguments += @('--observe-console-input-text',('"'+$case.Text+'"')) }
+        if ($case.Text) {
+            $arguments += @('--observe-console-input-text',('"'+$case.Text+'"'))
+            if ($case.LineDelayMs) {
+                $arguments += @('--observe-console-line-delay-ms',$case.LineDelayMs)
+            }
+        }
         if ($case.Edit) { $arguments += '--observe-console-edit-return' }
         $arguments += @('--observation-timeout-ms','20000')
         $launcherId = 0
+        $reportedChildren = @()
         $observation = Start-Process -FilePath $Observer -ArgumentList $arguments -WorkingDirectory $PackageRoot -WindowStyle Hidden -PassThru
         try {
             if (!$observation.WaitForExit(55000)) { throw "Observer timeout: $($case.Name)" }
             $record=Get-Content -LiteralPath $report -Raw
             $launcherId=[int]([regex]::Match($record,'(?m)^pid=(\d+)').Groups[1].Value)
             if (!$launcherId) { throw 'Missing test launcher identity' }
+            # Once run16 has exited, Windows can reparent its broker/worker
+            # before the finally block queries them.  The observer recorded
+            # only direct children while the launcher still existed; retain
+            # those exact-path identities for isolated cleanup below.
+            $reportedChildren=@([regex]::Matches($record,
+                '(?m)^direct-child pid=(\d+) .* path=(.+)\r?$') |
+                ForEach-Object {
+                    $path=$_.Groups[2].Value.Trim()
+                    if ($path -in $productPaths) { [int]$_.Groups[1].Value }
+                })
             $actual=[Convert]::ToUInt32([regex]::Match($record,'(?m)^exit=0x([0-9a-f]+)').Groups[1].Value,16)
             if ($record -notmatch '(?m)^result=exited' -or $actual -ne $case.Code) {
                 throw "Unexpected $($case.Name) result: $actual; expected $($case.Code)"
@@ -171,7 +192,7 @@ try {
             # Only children of this recorded test launcher, with exact product paths.
             # Unrelated package processes are never killed by image name.
             if ($launcherId) {
-                $owned=@($launcherId)
+                $owned=@($launcherId) + $reportedChildren
                 for ($depth=0; $depth -lt 5; ++$depth) {
                     $children=@(Get-PackageProcesses | Where-Object { $_.ParentProcessId -in $owned -and $_.ProcessId -notin $owned })
                     if (!$children.Count) { break }
@@ -179,7 +200,7 @@ try {
                 }
                 foreach ($id in ($owned | Sort-Object -Descending)) {
                     $process=Get-PackageProcesses | Where-Object { $_.ProcessId -eq $id }
-                    if ($process -and ($id -eq $launcherId -or $process.ParentProcessId -in $owned)) { Stop-Process -Id $id }
+                    if ($process -and $id -in $owned) { Stop-Process -Id $id }
                 }
             }
         }
@@ -187,5 +208,5 @@ try {
     }
 } finally {
     foreach ($name in $environmentNames) { [Environment]::SetEnvironmentVariable($name,$previous[$name]) }
-    $results | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $PackageRoot "logs\$LogPrefix-summary.json") -Encoding utf8
+    $results | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $LogRoot "$LogPrefix-summary.json") -Encoding utf8
 }

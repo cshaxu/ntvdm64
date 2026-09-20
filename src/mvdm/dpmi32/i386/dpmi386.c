@@ -27,6 +27,15 @@ Revision History:
 #include <softpc.h>
 #include <memory.h>
 #include <malloc.h>
+#if defined(CPU_40_STYLE)
+extern BOOL ThreadSetDebugContext(PULONG Registers);
+extern BOOL mvdm_debugger_read_debug_registers(USHORT Selector,
+    USHORT Offset, PULONG Registers);
+#endif
+
+/* DIVERGENCE(MVDM-HOST-DIV-281): CPU40 composes the original debug-register
+ * service below, not the process-LDT/kernel-monitor/fast-BOP providers. */
+#if !defined(CPU_40_STYLE)
 
 
 BOOL
@@ -339,6 +348,8 @@ ExpSim32GetVDMPointer(
 
 
 
+#endif /* MVDM-HOST-DIV-281 */
+
 VOID
 DpmiSetDebugRegisters(
     VOID
@@ -363,15 +374,25 @@ Return Value:
 --*/
 {
     PCHAR RegisterPointer;
+#if defined(CPU_40_STYLE)
+    ULONG DebugRegisters[6];
+#endif
 
     setCF(0);
 
+#if defined(CPU_40_STYLE)
+    /* MVDM-HOST-DIV-281: SIM32 ignores its size argument; use a copied lease. */
+    RegisterPointer = mvdm_debugger_read_debug_registers(getDS(), getSI(),
+        DebugRegisters) ? (PCHAR)DebugRegisters : NULL;
+#else
     RegisterPointer = Sim32GetVDMPointer(((getDS() << 16) | getSI()),
         0,
         (UCHAR) (getMSW() & MSW_PE)
         );
 
-    if (!ThreadSetDebugContext((PULONG) RegisterPointer))
+#endif
+
+    if (RegisterPointer == NULL || !ThreadSetDebugContext((PULONG) RegisterPointer))
         {
         ULONG ClearDebugRegisters[6] = {0, 0, 0, 0, 0, 0};
 

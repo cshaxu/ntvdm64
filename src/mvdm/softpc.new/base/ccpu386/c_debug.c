@@ -71,6 +71,8 @@ typedef struct
  */
 GLOBAL IU32 nr_inst_break = 0;	/* number of inst breakpoints active */
 GLOBAL IU32 nr_data_break = 0;	/* number of data breakpoints active */
+/* DIVERGENCE: MVDM-HOST-DIV-282: preserve DR6 while consuming each new hit. */
+GLOBAL BOOL debug_exception_pending = FALSE;
 
 LOCAL INST_BREAK i_brk[NR_BRKS];
 LOCAL DATA_BREAK d_brk[NR_BRKS];
@@ -267,6 +269,7 @@ IFN3(
 	 {
 	 /* Data breakpoint triggered */
 	 trig = p->id;   /* get Intel identifier */
+	 debug_exception_pending = TRUE; /* MVDM-HOST-DIV-282 */
 	 SET_DR(DR_DSR, GET_DR(DR_DSR) | 1 << trig);   /* set B bit */
 
 	 /*
@@ -340,6 +343,7 @@ IFN1(
 	 {
 	 /* Inst breakpoint triggered */
 	 trig = p->id;   /* get Intel identifier */
+	 debug_exception_pending = TRUE; /* MVDM-HOST-DIV-282 */
 	 SET_DR(DR_DSR, GET_DR(DR_DSR) | 1 << trig);   /* set B bit */
 	 }
       }

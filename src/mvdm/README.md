@@ -1,5 +1,76 @@
 # mvdm
 
+MVDM-HOST-DIV-290: `dpmi32/int21map.c` routes extended error (59h)
+through original `ReturnESBX` segment conversion, selecting DI for this
+documented ES:DI result instead of BX. Original DOS error fields and
+selector allocation remain owned by the original providers. S38 records
+the pre-fix loss of the returned segment during saved-ES restoration.
+
+MVDM-HOST-DIV-289: `dpmi32/int21map.c::LoadExec` returns the eight-byte
+EXEC1 stack/entry result on successful AL=1, following original
+`dpmi/486/dxmain.asm::dosex4`. It does not change loading, failure, PSP or
+environment policy. The [S38 evidence](../../docs/etc/evidence/m0-t420-s38-dpmi32-capability-review.md)
+records the reproduced omission; load-only lifecycle acceptance is pending.
+
+MVDM-HOST-DIV-288: `dpmi32/int21map.c::IOCTLBlockDevs` maps the original
+DEM media-ID (46/66, packed MID=25 bytes) and access-flag (47/67,
+ACCESSCTRL=2 bytes) pairs instead of forwarding protected DS:DX untranslated.
+Original DEM, device policy, buffer and return owners are unchanged. The
+[S38 evidence](../../docs/etc/evidence/m0-t420-s38-dpmi32-capability-review.md)
+separates actual read-only volume queries from controlled write-side tests.
+
+MVDM-HOST-DIV-287: `dpmi32/int21map.c::IOCTLBlockDevs` supplies the
+missing format-track 42h length case: five bytes, or seven with the original
+A_FORMATPACKET track-count bit. The dispatch previously admitted the call
+but used uninitialized Length. Original mapping and device owners remain;
+no physical format is used in the controlled
+[S38 verification](../../docs/etc/evidence/m0-t420-s38-dpmi32-capability-review.md).
+
+MVDM-HOST-DIV-286: `dpmi32/int21map.c::IoctlReadWriteTrack` reads the
+32-bit client's selector from its original ParameterBlock, not beyond the
+13-byte real-mode packet copy. Original transfer offset, DOS packet size,
+chunking and buffer owners remain unchanged. The
+[S38 evidence](../../docs/etc/evidence/m0-t420-s38-dpmi32-capability-review.md)
+distinguishes controlled device-boundary proof from real-medium acceptance.
+
+MVDM-HOST-DIV-285: `dpmi32/int21map.c::IOCTLMap2Bytes` adds the original
+client DX/EDX offset to the selector base, matching adjacent MapDSDXLenCX.
+The original two-byte IOCTL mapping otherwise reads/writes DS:0 instead of
+the requested buffer. Original driver, bounce-buffer and return owners stay
+unchanged; no guest media change. The
+[S38 evidence](../../docs/etc/evidence/m0-t420-s38-dpmi32-capability-review.md)
+records the real PRN query failure and candidate verification.
+
+MVDM-HOST-DIV-284: `dpmi32/int21map.c::NoTranslation` preserves the original
+DOS returned ZF for nonblocking input (06/DL=FF and 0C06/DL=FF). The common
+CF-only return helper discarded that output bit. Other calls retain their
+original flag behavior; original DOS owns polling, input and queue policy.
+The [S38 evidence](../../docs/etc/evidence/m0-t420-s38-dpmi32-capability-review.md)
+records the before/after FLAGS witness and verification state.
+
+MVDM-HOST-DIV-283: `dpmi32/int21map.c::DpmiXlatInt21Call` selects existing
+original `ReturnDSSI` for INT21/6300 in the non-DBCS product as well. Original
+DOS implements that query in both profiles; the non-DBCS dispatch fallback
+restored client DS and corrupted its returned pointer. Other subfunctions
+retain original dispatch. No new provider, DBCS profile or guest mutation.
+Focused and product acceptance are recorded in the
+[S38 evidence](../../docs/etc/evidence/m0-t420-s38-dpmi32-capability-review.md).
+
+MVDM-HOST-DIV-282: existing CCPU `c_debug.c/.h`, `c_main.c` and `c_tsksw.c`
+separate newly matched debug events from sticky DR6 status. Original data,
+instruction and T-bit matching schedules the event; exception continuation
+consumes/cancels it and CPU reset clears it, without clearing guest DR6.
+Original match tables, access conditions and exception-frame owners remain.
+This S38 dependency is experimental until the complete mechanical groups
+and real DPMI/product regressions in the S38 evidence pass.
+
+MVDM-HOST-DIV-281: CPU40 composes only the original debug-register service
+from existing `dpmi32/i386/dpmi386.c`, replacing its no-op BOP mapping in
+`dpmidata.h`. The guest read spans six DWORDs and rejects null before the
+original rollback. Worker `ThreadSetDebugContext` binds to original MOV_DR,
+not host thread debug registers. Kernel LDT/fast-BOP bodies stay excluded.
+[S38 recovery and verification](../../docs/etc/evidence/m0-t420-s38-dpmi32-capability-review.md).
+
 MVDM-HOST-DIV-280: `dpmi32/dpmiint.c::DpmiUnhandledExceptionHandler`
 places EFLAGS at byte 8 of its original DWORD IRET frame, preserving the
 CS at byte 4. Both pinned OpenNT editions write flags over CS; this is
@@ -184,7 +255,7 @@ runtime-discovery inputs.  The complete per-file provenance is in
 | MVDM-HOST-DIV-223 | Bind DOSX's source-delivered LDT to CCPU after `53:0F`. | Historical non-i386 only used the table for host address conversion, while CPU40 executes selectors directly. | Derive the guest-linear table base from the existing `Ldt`/`IntelBase` pair and install it in CCPU with an internal-valid LDTR selector. | `dpmi32/dpmi32.c` |
 | MVDM-HOST-DIV-224 | Route CPU40 DPMI extended-memory allocation through the original shared XMS suballocator. | CPU40 XMS reserves the complete extended linear range, leaving the generic VDM allocator correctly empty when DOSX requests memory. | Use the existing RISC shared-XMS allocation, free, reallocation and query operations consistently for CPU40 only. | `dpmi32/dpmimemr.c` |
 | MVDM-HOST-DIV-225 | Synchronize source `53:00` descriptor writes into CCPU's bound LDT. | x86 uses `NtSetLdtEntries`; the old RISC branch only updates `FlatAddress[]`. | Copy the already supplied DOSX descriptor into the bound CPU40 LDT after original limit normalization and alongside the original conversion cache update. | `dpmi32/dpmiselr.c` |
-| MVDM-HOST-DIV-226 | Publish `InitializePmStackInfo` as a DOSX-readable VDM TIB projection. | x86 returns a kernel-owned `VDM_TIB` address; CCPU executes DOSX and requires a guest-linear base for its `SEL_VDMTIB` descriptor. | Allocate one shared-XMS guest block, mirror the exact `VDM_DPMIINFO` fields delivered by DOSX, and return that linear address through `CX:DX`; no host address crosses the boundary. | `dpmi32/{data.c,dpmi32p.h,dpmiint.c}` |
+| MVDM-HOST-DIV-226 | Publish `InitializePmStackInfo` as a DOSX-readable VDM TIB projection. | x86 returns a kernel-owned `VDM_TIB` address; CCPU executes DOSX and requires a guest-linear base for its `SEL_VDMTIB` descriptor. | Allocate one shared-XMS guest block, mirror the exact `VDM_DPMIINFO` fields delivered by DOSX, and return that linear address through `CX:DX`; no host address crosses the boundary. Required allocation failure follows original `cmdmisc.c` memory-error dialog plus `TerminateVDM`, never a successful zero-base publication; S38 fault injection verifies Terminate and Ignore both end the worker without returning a failed publication. | `dpmi32/{data.c,dpmi32p.h,dpmiint.c}` |
 | MVDM-HOST-DIV-227 | Supply the original WOW/DOSX `SEL_BIOSDATA` cache to CPU40. | CPU40 treated protected selector `0040h` as an ordinary LDT descriptor, but original DOSX reserves it as a fixed BIOS-data carrier. | Select the original `dxboot.asm` base `0x400`, 64-KiB writable ring-3 data cache for selector `0040h`. | `softpc.new/base/ccpu386/c_seg.c` |
 | MVDM-HOST-DIV-228 | Permit the original writable WOW DOSX `DXCODE` carrier. | The source executes its documented self-modifying initialization through selector `00CFh`; CCPU had made every protected code cache read-only. | Retain writability only for the original `SEL_DXCODE|STD_RING` cache while preserving normal protected-code write protection. | `softpc.new/base/ccpu386/c_seg.c` |
 | MVDM-HOST-DIV-229 | Restore the source-defined BOP `FDh` real-mode transition in the CPU40 product topology. | The CCPU graph compiled the BIOS BOP table without its monitor-gated `FDh` entry, so the original WOW DOSX five-word continuation frame fell through `illegal_bop` and later returned through poisoned stack storage. | Select the original BIOS table entry for x86 and restore the identical DOSX frame transfer in the existing CPU40 DPMI mode-switch owner, loading cached real-mode segments only after PE is clear. | `dpmi32/modesw.c`, `tools/build/New-T310OriginalSoftpcNinja.ps1` |

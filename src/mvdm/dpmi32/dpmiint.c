@@ -401,8 +401,10 @@ Notes:
 
             Status = DpmiAllocateVirtualMemory((PVOID)&Address, &Size);
             if (!NT_SUCCESS(Status)) {
-                setCX(0);
-                setDX(0);
+                /* DIV-226: follow cmdmisc.c's required-memory failure path;
+                 * DOSX cannot accept a failed/zero-base TIB publication. */
+                RcErrorDialogBox(EG_MALLOC_FAILURE, NULL, NULL);
+                TerminateVDM();
                 return;
             }
 

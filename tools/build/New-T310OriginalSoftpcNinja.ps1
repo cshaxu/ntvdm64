@@ -209,7 +209,7 @@ $xmsNames += 'xmsmemr.c' # Original SAS callbacks for the selected CCPU40 backin
 # `SOURCES` block preserves the original CCPU-compatible DPMI owner package.
 # The portable original fallback bodies supply the dispatch members that the
 # CCPU40 profile reaches without taking the NT4 i386 kernel-VDM branch.
-$dpmiNames = @((Get-OriginalSources $dpmiManifest) + 'dpmimemr.c' + 'dpmimscr.c' | Select-Object -Unique)
+$dpmiNames = @((Get-OriginalSources $dpmiManifest) + 'dpmimemr.c' + 'dpmimscr.c' + 'i386/dpmi386.c' | Select-Object -Unique)
 # XMS uses the complete original SubAlloc package.  Keeping it out of the
 # machine graph made its allocator algorithms look like a collection of
 # missing adapter symbols, rather than selecting their original owner.
@@ -1242,6 +1242,14 @@ $graph.Add('rule event_test_link')
 $graph.Add('  command = link.exe /nologo /map:$out.map /out:$out $in kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib libcmt.lib libvcruntime.lib libucrt.lib')
 $fixtureHostLibraries = 'worker-shell.lib worker-command-bindings.lib original-softpc-host-fixture-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib original-opennt-rtl-x86.lib softpc-fixture-bindings.lib redirector-bindings.lib vdd-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib original-ccpu386.lib obj/host/softpc-resource.res'
 $graph.Add('build ccpu-halt-reset-test.exe: event_test_link obj/tests/ccpu_halt_reset_test.obj ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
+# Test-only debug boundaries: original matching body and actual checked binding.
+$graph.Add('rule debug_unit_link')
+$graph.Add('  command = link.exe /nologo /machine:x86 /opt:ref /out:$out $in legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib')
+$graph.Add('build obj/tests/ccpu_debug_match_test.obj: cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/ccpu_debug_match_test.c')))
+$graph.Add('build ccpu-debug-match-test.exe: debug_unit_link obj/tests/ccpu_debug_match_test.obj obj/ccpu/c_debug.obj')
+$graph.Add('build obj/tests/debug_register_binding_test.obj: cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/debug_register_binding_test.c')))
+$graph.Add('build debug-register-binding-test.exe: debug_unit_link obj/tests/debug_register_binding_test.obj')
+$graph.Add('build dpmi-debug-tests: phony ccpu-debug-match-test.exe debug-register-binding-test.exe ccpu-halt-reset-test.exe')
 $ccpuThreadLifecycleFixtureObject = 'obj/tests/ccpu_thread_lifecycle_test.obj'
 $graph.Add('build ' + $ccpuThreadLifecycleFixtureObject + ': cc ' + (NinjaPath $ccpuThreadLifecycleFixtureSource))
 $graph.Add('build ccpu-thread-lifecycle-test.exe: event_test_link ' + $ccpuThreadLifecycleFixtureObject + ' ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)

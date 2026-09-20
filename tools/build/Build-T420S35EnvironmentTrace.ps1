@@ -1,9 +1,11 @@
 [CmdletBinding()]
 param([Parameter(Mandatory)][string]$FormalRoot,
       [Parameter(Mandatory)][string]$BuildRoot,
-      [ValidateSet('environment','dpmi','exception')][string]$Boundary = 'environment',
+      [ValidateSet('environment','dpmi','exception','pm-allocation-failure','dpmi-pointer','dpmi-ioctl','dpmi-xmem-failure')][string]$Boundary = 'environment',
+      [switch]$DpmiLifecycleOnly,
       [string]$EnvironmentTraceLog = 'O:\winnt\logs\s35-envtrace-r1.events.txt')
 $ErrorActionPreference = 'Stop'
+if ($DpmiLifecycleOnly -and $Boundary -ne 'dpmi') { throw 'Lifecycle filter requires DPMI boundary' }
 $repo = (Resolve-Path "$PSScriptRoot\..\..").Path
 $formal = (Resolve-Path $FormalRoot).Path
 $build = [IO.Path]::GetFullPath($BuildRoot)
@@ -22,12 +24,28 @@ if ($Boundary -eq 'environment') {
 $memberName = 'obj/command/cmdenv.obj'
 $libraryName = 'original-mvdm-command.lib'
 $traceSource = 'command_environment_trace.c'
-if ($Boundary -eq 'dpmi') {
+if ($Boundary -in @('dpmi','pm-allocation-failure','dpmi-pointer','dpmi-ioctl','dpmi-xmem-failure')) {
     $memberName = 'obj/dpmi/dpmi32.obj'
     $libraryName = 'original-mvdm-dpmi32.lib'
     $traceSource = 'dpmi_dispatch_trace.c'
+    if ($Boundary -eq 'dpmi-xmem-failure') {
+        $memberName = 'obj/dpmi/xmem.obj'
+        $traceSource = 'dpmi_xmem_failure.c'
+    }
+    if ($Boundary -eq 'dpmi-pointer') {
+        $memberName = 'obj/dpmi/int21map.obj'
+        $traceSource = 'dpmi_pointer_trace.c'
+    }
+    if ($Boundary -eq 'dpmi-ioctl') {
+        $memberName = 'obj/dpmi/int21map.obj'
+        $traceSource = 'dpmi_ioctl_boundary.c'
+    }
+    if ($Boundary -eq 'pm-allocation-failure') {
+        $memberName = 'obj/dpmi/dpmiint.obj'
+        $traceSource = 'dpmi_pm_allocation_failure.c'
+    }
     $ownerRow = [Array]::FindIndex($graph, [Predicate[string]]{
-        param($line) $line.StartsWith('build obj/dpmi/dpmi32.obj: ')
+        param($line) $line.StartsWith("build ${memberName}: ")
     })
     if ($ownerRow -lt 0 -or !$graph[$ownerRow + 1].StartsWith('  dpmi_cflags = ')) {
         throw 'Missing original DPMI owner compile flags'
@@ -38,6 +56,7 @@ if ($Boundary -eq 'dpmi') {
         throw 'DPMI trace must name a file directly below O:\winnt\logs'
     }
     $flags += ' /DDPMI_TRACE_LOG=\"' + $traceLog + '\"'
+    if ($DpmiLifecycleOnly) { $flags += ' /DDPMI_TRACE_LIFECYCLE_ONLY' }
 }
 if ($Boundary -eq 'exception') {
     $flags = ($graph | Where-Object { $_.StartsWith('host_cflags = ') }).Substring(14).Replace('$:', ':')
@@ -64,8 +83,21 @@ try {
     $compile = "call `"$vs`" -arch=x86 -host_arch=x86 >nul && cl $flags /Fo`"$object`" `"$repo\tests\observation\$traceSource`""
     cmd.exe /d /s /c $compile *> "$build\compile.log"
     if ($LASTEXITCODE) { throw "Compile failed; see $build\compile.log" }
+    $dispatchObject = Join-Path $build 'observed-dispatch.obj'
+    if ($Boundary -eq 'dpmi-xmem-failure') {
+        $dispatchRow = [Array]::FindIndex($graph, [Predicate[string]]{
+            param($line) $line.StartsWith('build obj/dpmi/dpmi32.obj: ')
+        })
+        if ($dispatchRow -lt 0) { throw 'Missing original dispatch owner' }
+        $dispatchFlags = $graph[$dispatchRow + 1].Substring('  dpmi_cflags = '.Length).Replace('$:', ':')
+        $dispatchFlags += ' /DDPMI_TRACE_XMEM_FAILURE /DDPMI_TRACE_LOG=\"' + $traceLog + '\"'
+        cmd.exe /d /s /c "call `"$vs`" -arch=x86 -host_arch=x86 >nul && cl $dispatchFlags /Fo`"$dispatchObject`" `"$repo\tests\observation\dpmi_dispatch_trace.c`"" *> "$build\dispatch-compile.log"
+        if ($LASTEXITCODE) { throw 'Dispatch trace compile failed' }
+    }
     $members = ($commandObjects | ForEach-Object {
-        if ($_ -eq $memberName) { "`"$object`"" } else { $_ }
+        if ($_ -eq $memberName) { "`"$object`"" }
+        elseif ($Boundary -eq 'dpmi-xmem-failure' -and $_ -eq 'obj/dpmi/dpmi32.obj') { "`"$dispatchObject`"" }
+        else { $_ }
     }) -join ' '
     cmd.exe /d /s /c "call `"$vs`" -arch=x86 -host_arch=x86 >nul && lib /nologo /out:`"$library`" $members" *> "$build\archive.log"
     if ($LASTEXITCODE) { throw 'Archive failed' }

@@ -17,11 +17,76 @@
 #include "ntvdm-exe/debugger/include/dbg_state.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_effective_address.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_guest_memory.h"
+#include <insignia.h>
+#include <host_def.h>
+#include <xt.h>
+#include <c_main.h>
+#include <c_addr.h>
+#include <c_bsic.h>
+#include <c_tlb.h>
 
 /* Original CPU40 C entry forms used by cpu4gen.h's getSS/getSP/setAX macros. */
 extern uint16_t c_getSS(void);
 extern uint16_t c_getSP(void);
 extern void c_setAX(uint16_t value);
+extern void MOV_DR(ULONG index, ULONG value);
+extern IBOOL c_getPG(void);
+extern IBOOL c_getVM(void);
+extern IUH c_getCPL(void);
+extern IU32 c_sas_memory_size(void);
+
+/* Original external translator refuses missing pages without taking #PF.
+ * Only the descriptor and six-DWORD payload use this private preflight. */
+static BOOL debug_readable_span(IU32 address, IU32 count, IUM8 access)
+{
+    IU32 i, physical, size = c_sas_memory_size();
+    if (!count || address > UINT32_MAX - (count - 1)) return FALSE;
+    for (i = 0; i < count; ++i) {
+        physical = address + i;
+        if (c_getPG() && !xtrn2phy(address + i, access, &physical)) return FALSE;
+        if (physical >= size) return FALSE;
+    }
+    return TRUE;
+}
+
+BOOL mvdm_debugger_read_debug_registers(USHORT selector, USHORT offset,
+    PULONG registers)
+{
+    IU32 descriptor_address, last = (IU32)offset + 23;
+    CPU_DESCR descriptor;
+    IUM8 access;
+    if (registers == NULL || (selector & 0xfffc) == 0 ||
+        selector_outside_GDT_LDT(selector, &descriptor_address) ||
+        !debug_readable_span(descriptor_address, 8, 0)) return FALSE;
+    read_descriptor_linear(descriptor_address, &descriptor);
+    /* Original descriptor decoding; this host copy must not raise guest faults. */
+    if ((descriptor.AR & 0x90) != 0x90 ||
+        ((descriptor.AR & 8) && !(descriptor.AR & 2))) return FALSE;
+    if ((descriptor.AR & 0x0c) == 4) { /* Expand-down data segment. */
+        if (offset <= descriptor.limit ||
+            last > ((descriptor.AR & 0x4000) ? UINT32_MAX : 0xffff)) return FALSE;
+    } else if (last > descriptor.limit) return FALSE;
+    if (descriptor.base > UINT32_MAX - last) return FALSE;
+    /* Match original ccpusas4.c::bios_read_byte, used by the copied lease. */
+    access = c_getCPL() != 3 ? PG_U : 0;
+    if (c_getVM()) access |= 4;
+    if (!debug_readable_span(descriptor.base + offset, 24, access)) return FALSE;
+    return mvdm_softpc_guest_memory_copy_from(descriptor.base + offset, (uint8_t *)registers,
+        6 * sizeof(*registers));
+}
+
+/* MVDM-HOST-DIV-281: original ThreadSetDebugContext's six-DWORD order,
+ * bound to the sole guest CPU rather than host monitor threads. MOV_DR owns
+ * reserved-bit masks and rebuilding the original breakpoint tables. */
+BOOL ThreadSetDebugContext(PULONG registers)
+{
+    ULONG index;
+    if (registers == NULL) return FALSE;
+    for (index = 0; index != 4; ++index) MOV_DR(index, registers[index]);
+    MOV_DR(6, registers[4]);
+    MOV_DR(7, registers[5]);
+    return TRUE;
+}
 
 /* The original dbgsvc.h value, retained here so this source remains narrowly
  * coupled to the actual dispatch contract rather than a broader debugger

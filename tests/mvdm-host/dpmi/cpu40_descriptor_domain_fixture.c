@@ -28,6 +28,22 @@ int main(void)
     ULONG base;
     USHORT limit;
 
+    /* DOSX's original 20h-byte VdmPmStackInfo prefix is shared with the
+     * host VDM_DPMIINFO carrier; its extra reflector is outside that prefix.
+     * Test the actual compiled ABI, not a duplicate fixture structure. */
+    if (sizeof(VDM_DPMIINFO) != 36u ||
+        FIELD_OFFSET(VDM_DPMIINFO, LockCount) != 0u ||
+        FIELD_OFFSET(VDM_DPMIINFO, Flags) != 2u ||
+        FIELD_OFFSET(VDM_DPMIINFO, SsSelector) != 4u ||
+        FIELD_OFFSET(VDM_DPMIINFO, SaveSsSelector) != 6u ||
+        FIELD_OFFSET(VDM_DPMIINFO, SaveEsp) != 8u ||
+        FIELD_OFFSET(VDM_DPMIINFO, SaveEip) != 12u ||
+        FIELD_OFFSET(VDM_DPMIINFO, DosxIntIret) != 16u ||
+        FIELD_OFFSET(VDM_DPMIINFO, DosxIntIretD) != 20u ||
+        FIELD_OFFSET(VDM_DPMIINFO, DosxFaultIret) != 24u ||
+        FIELD_OFFSET(VDM_DPMIINFO, DosxFaultIretD) != 28u ||
+        FIELD_OFFSET(VDM_DPMIINFO, DosxRmReflector) != 32u) return 12;
+
     Cpu40GdtShadowAddress = 0x00100000u;
     Cpu40LdtShadowAddress = 0x00200000u;
 
