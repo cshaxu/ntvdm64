@@ -9,7 +9,8 @@ every reached external contract has one finite owner, its original lifecycle
 and failure rules are retained, duplicate project policy is removed or
 explicitly retained, and its local acceptance matrix passes.
 
-One S closes exactly one original package unit.  It may not combine two units
+One implementation S closes one explicitly bounded original package unit or
+the owner-approved WOW32 subpackage below. It may not combine unrelated units
 under one heading, treat a guest activation contract as an unnumbered suffix,
 or claim a selected file is an entire package. A focused runtime trace may
 verify an already-complete package; it may not select a new function, shrink a
@@ -41,11 +42,13 @@ S packets, never by host linkage.
 
 ## Ordered S package units
 
-The exact S order is dependency-first.  This is a **43-S plan**. S1--S20
+The exact S order is dependency-first. This is a **48-S plan**. S1--S20
 recover the original packages; S21--S39 then re-open those same packages one
-at a time for their missing real-capability acceptance. S40--S43 retain the
-subsequent original WOW/debug/VDD package order. Every S therefore has exactly
-one named original package owner. No later S may quietly absorb an earlier
+at a time for their missing real-capability acceptance. By owner direction,
+S40 concludes research and replanning only; S41--S45 implement five consecutive
+WOW32 subpackages. Former S41/S42/S43 become S46/S47/S48 (WOW16/DBG/VDD).
+S40 closure is not WOW32 runtime acceptance. Every implementation S has a
+named original owner and explicit dependency acceptance. No later S may quietly absorb an earlier
 row's residual. Each S freezes its complete original manifest and source
 hashes, proves its outgoing interfaces, composes original bodies before
 adapters, runs its local matrix plus one integrated regression, measures
@@ -89,13 +92,18 @@ mirror/adapter changes, then commits and pushes.
 | S34 | `dos/command` capability closure | Direct/nested COMMAND child, including host-inherited and guest-created standard streams; `>`, `>>`, `<` and `|`; return/error and cleanup acceptance through first, second and third COMMAND depth. |
 | S35 | `xms.486` capability closure | Real DOS XMS allocate/move/overlap/free/A20 and failure/teardown acceptance. |
 | S36 | `suballoc` capability closure | Real XMS/DPMI-backed allocation, relocation, exhaustion/release and teardown acceptance. |
-| S37 | `oemuni` capability closure | OEMUNI interface/buffer/failure contracts and real DOS/PIF non-ASCII workloads; owner-approved Win16/debugger consumer acceptance is explicitly assigned to S40--S42 below, not claimed passed here. |
+| S37 | `oemuni` capability closure | OEMUNI interface/buffer/failure contracts and real DOS/PIF non-ASCII workloads; owner-approved Win16/debugger consumer acceptance is explicitly assigned to S45--S47 below, not claimed passed here. |
 | S38 | `dpmi32` capability closure | Real protected-mode selector/interrupt/memory/return/teardown acceptance. |
 | S39 | `dpmi` capability closure | Real DOSX BOP 53 activation, protected-to-real transition and repeated-entry release acceptance. |
-| S40 | `wow32` | Original provider load, task/callback, font/glyph, icon/cursor, scheduler and hard-error contract. |
-| S41 | `wow16` | Load-only guest WOW16 media, loader/task activation and callback-return contract; attribute and recover the first `WRITE.EXE` blocker through its original owner. |
-| S42 | `dbg` | Original debugger initialization, state, dispatch and event contract, or a source-proven complete product-profile exclusion that deletes every thin substitute. |
-| S43 | `vdd` | Original VDD lifecycle and consumers, or a source-proven complete product-profile exclusion that deletes every thin substitute. |
+| S40 | WOW32 research and replanning | Record original registration/shared-data contracts, observed integration gaps, retained research and explicit receivers; update this plan. No provider-complete or WRITE-success claim. |
+| S41 | WOW32 USER client data and worker domain | Exact guest-visible shared ABI, memory/descriptor/thread binding, clock, initialization and withdrawal; audit inherited mapping assumptions before implementation. |
+| S42 | WOW32 task, window and message lifecycle | Original task/yield/wait, classes/windows/dialogs, callback enter/return, shared object publication and task/module cleanup as one dependent lifecycle. |
+| S43 | WOW32 graphics, resources, clipboard and DDE | Complete GDI/font/glyph/DIB, menus/icons/cursors/bitmaps, default-window processing and clipboard/DDE ownership, failure and release. |
+| S44 | WOW32 remaining services and complete registration | Kernel/DOS/OEM, remaining selected thunk families and hard-error; assemble all 21 input and 20 output callbacks with original W32Init and shared-data publication. |
+| S45 | WOW32 complete-provider acceptance and cleanup | Real Win16 consumers of every selected family, OEM obligations, repeated task/callback/exit, full regression and final mirror/adapter reduction accounting. All missing implementation must be repaired before closure. |
+| S46 | `wow16` (former S41) | Immutable guest loader/task activation, real WRITE.EXE operation and callback-return integration; preserve all former acceptance requirements. |
+| S47 | `dbg` (former S42) | Original debugger initialization/state/events/termination or source-proven complete exclusion; includes OEM-DBG-PATH. |
+| S48 | `vdd` (former S43) | Original VDD provider/load/request/notification/unload lifecycle or source-proven complete exclusion. |
 
 The 19 currently formal-linked library/DLL units are only a starting build
 inventory, not the S structure: their trace-only `base/debug` selection,
@@ -142,7 +150,7 @@ and the mandatory direct plus interactive COMMAND regressions.
 
 ### Required recovery effort and external-boundary record
 
-For S30--S43, an original OpenNT capability remains in scope when the
+For S30--S48, an original OpenNT capability remains in scope when the
 standalone NTVDM product is its selected caller, even if the historical NT
 service, network protocol, device class, or local hardware is unavailable on
 the modern host.  The owner requires the following four records before an S
@@ -202,18 +210,44 @@ Where a real prerequisite is absent, this permission is also the mandatory
 test-only mock/unit-harness route specified above; it does not authorize a
 product-side fake provider.
 
-## S40--S43 capability closure requirements
+## S40 research conclusion and S41--S48 acceptance
 
-S40--S43 retain their one-original-package ownership and must each satisfy its
-own real-workload closure; none may use the earlier generic COMMAND/MEM/EDIT
-matrix as its sole acceptance evidence.
+S40's owner-approved result is a source-backed research conclusion and this
+revised implementation plan. It records the modern registration failure,
+immutable PMODE32 consumers, existing original owners and outstanding binding
+obligations. Existing native fixtures and linked objects are retained research,
+not proof of completed production wiring. Unverified source changes remain
+explicit inherited work, with delivery and acceptance tracked separately.
 
-| S | Additional mandatory closure evidence |
+S41--S45 are five consecutive WOW32 implementation packets. Their dependency
+order is S41 -> S42 -> S43 -> S44 -> S45. Full publication requires all output
+slots and their input callbacks, shared data and cleanup to be valid. Earlier
+packets test the actual production implementation through its bounded entry,
+using controlled test callers where later consumers are not yet available;
+these results cannot be labelled real-Win16 acceptance. S44 performs complete
+registration and S45 proves all real consumer paths. This explicit aggregate
+dependency is the only deferred integration gate, not permission to leave
+unimplemented operations inside a closed subpackage.
+
+| S | Complete scope and evidence required |
 | --- | --- |
-| S40 `wow32` | Load the selected original provider in a real worker; prove task creation, callback enter/return, font/glyph and icon/cursor representations, scheduler/wait behavior, private hard-error delivery and task/worker teardown. A provider export or host-only callback fixture alone is insufficient. |
-| S41 `wow16` | Verify immutable guest-media identity, then identify the first reached original owner that blocks `WRITE.EXE`, and recover it only through the source-first dependency rule. Launch `WRITE.EXE` through its original loader; it must create a task, execute, return to the parent DOS/worker state, and leave a subsequent DOS workload usable. No substitute workload may close S41. |
-| S42 `dbg` | Exercise original debugger initialization, event/breakpoint or exception dispatch and termination through a controlled guest workload; otherwise prove all selected consumers are absent in the product profile and remove every remaining thin binding. Neither option may leave an untested partial provider. |
-| S43 `vdd` | For every selected VDD consumer, prove provider load, request/notification, resource lifetime and unload/worker termination; otherwise prove complete product-profile exclusion and remove every thin substitute and stale consumer edge. |
+| S41 | Original shared ABI provenance, pinned guest offsets and original client-view relocation; one worker domain, backing ownership/protection, flat/TEB descriptors, clock progression, thread binding and complete rollback/withdrawal. First observe real CR0/CR3 and DOSX transitions: VCPI source existence does not prove the selected NTVDM path enables paging. Select the smallest source-supported binding from that evidence. Production boundary tests cover reads, permissions, stale publication, transitions and teardown. Window/menu graph producers are explicitly S42/S43; immutable guest consumption is revalidated by S45. |
+| S42 | Complete W1 task lifecycle and W2 class/window/message/dialog lifecycle together, including synchronous and posted messages, reentrant CallBack16, original scheduler/wait semantics, hung-app registration, object graph publication through S41, and task/module/worker cleanup. No task closure may leave its message receiver or cleanup as an unbound success stub. |
+| S43 | All W3 graphics/resource and W4 clipboard/DDE families; exact image/font representations, original resource algorithms, object identity, menu graph publication, ownership transfer, malformed input, allocation failure and repeated release. Bind to S41/S42 owners without a parallel handle or lifecycle policy. |
+| S44 | All W5 kernel/DOS/OEM and W6 remaining selected thunk families, including COMM/printing/hooks/sound where selected; hard-error responses and termination. Reconcile the entire provider manifest and dispatch tables. Compose the original registrar, 21 inputs, 20 outputs and shared return into the real BOP 51 -> W32Init chain; prove complete initialization or failure rollback. OEM-WOW-DIR/DELETE implementations belong here, with real consumer gate in S45. |
+| S45 | W7 aggregate acceptance of S41--S44 on one artifact set: real immutable Win16 tasks, callbacks, scheduling, graphics/resources, clipboard/DDE, services and hard-error, plus OEM-WOW-DIR/DELETE. Exercise real WRITE startup/use/exit, repeated task/worker failure and cleanup and subsequent DOS usability. Repair failed contracts in their original owners; no selected entry may remain unbound or fixture-only at closure. Report separate mvdm/opennt-host mirror changes and removed/retained non-mirror code. |
+| S46 | Former S41: hash unchanged WOW16 media and prove original loader, WRITE operation, callback return, OEM integration and subsequent DOS usability. Preserve full acceptance even where S45 supplies earlier evidence; no substitute application closes this packet. |
+| S47 | Former S42: controlled real debugger initialization, breakpoint/exception event and termination, including OEM-DBG-PATH, or prove complete selected-profile exclusion and remove thin substitutes. |
+| S48 | Former S43: every selected VDD load/request/notification/resource/unload and worker termination path, or prove complete selected-profile exclusion and remove thin substitutes. |
+
+Every implementation packet requires original-owner inventory, recovered-code
+versus necessary-binding decisions, actual production build selection, failure
+and teardown tests, fresh x86 build, all 17 text-gated direct/nested DOS routes,
+format-only diff restoration, measured mirror/adapter changes, and reviewed
+commit/push. Keep USER.EXE and every original guest binary unchanged. The
+existing source-policy stopping boundaries remain in force; splitting the
+work does not authorize recursive USER/CSRSS import or a replacement server.
+T420 closes only after the owner's final acceptance audit.
 
 ## Package S exit criteria
 
@@ -228,14 +262,14 @@ substitute for the following receiver-owned evidence.
 
 | Acceptance item | Responsible S and original owner | Mandatory result before that S closes |
 | --- | --- | --- |
-| OEM-WOW-DIR | S40; `wow32/wdos.c`, `DIR_NT_TO_DOS` and related directory/environment synchronization | Reach the selected original WOW32 provider from a real Win16 task using a non-ASCII path. Prove OEM current-directory conversion, guest default drive/current directory and environment synchronization in both reached directions; invalid directory or conversion failure must not publish false state. Check subsequent task/parent usability and cleanup. |
-| OEM-WOW-DELETE | S40; `wow32/wkman.c::WK32WowDelFile` | Separately verify ordinary deletion and the retained-file branch: `GetFullPathNameOem`, `GetTempFileNameOem`, `MoveFileExOem`, final delete, rollback and temporary-file cleanup. Prove the branch condition rather than inferring it from ordinary delete success. Exercise the distinct font-removal fallback and its failure/cleanup contract. Real Win16 caller evidence is required; provider fault injection supplements hard-to-trigger branches. An unreachable branch needs source/provider proof and explicit owner-approved disposition, never silent omission. |
-| OEM-WIN16-INTEGRATION | S41; immutable WOW16 loader/task and original WOW32 consumers | Revalidate OEM-WOW-DIR and OEM-WOW-DELETE across actual guest task creation, callback/return and teardown, using S40 evidence as the baseline. Demonstrate non-ASCII names/content, failure mapping, absence of temporary-file/handle leakage, and a usable subsequent DOS workload. Keep the mandatory real `WRITE.EXE` acceptance; a test probe may cover branches WRITE does not exercise but cannot replace WRITE. |
-| OEM-DBG-PATH | S42; `dos/dem/demmisc.c::SignalSegmentNotice`, gated by `IsDebuggee` | A controlled debuggee with a non-ASCII module path must reach original full-path conversion and module notification, with correct path/length/termination, failed-path behavior, and debugger/task cleanup. If choosing the package's complete-profile-exclusion alternative, prove this consumer is absent too and remove its thin substitute; ordinary DOS runs, a map symbol or a host-only OEM call do not suffice. |
+| OEM-WOW-DIR | S44 implementation; S45 real acceptance; `wow32/wdos.c`, `DIR_NT_TO_DOS` and related directory/environment synchronization | Reach the selected original WOW32 provider from a real Win16 task using a non-ASCII path. Prove OEM current-directory conversion, guest default drive/current directory and environment synchronization in both reached directions; invalid directory or conversion failure must not publish false state. Check subsequent task/parent usability and cleanup. |
+| OEM-WOW-DELETE | S44 implementation; S45 real acceptance; `wow32/wkman.c::WK32WowDelFile` | Separately verify ordinary deletion and the retained-file branch: `GetFullPathNameOem`, `GetTempFileNameOem`, `MoveFileExOem`, final delete, rollback and temporary-file cleanup. Prove the branch condition rather than inferring it from ordinary delete success. Exercise the distinct font-removal fallback and its failure/cleanup contract. Real Win16 caller evidence is required; provider fault injection supplements hard-to-trigger branches. An unreachable branch needs source/provider proof and explicit owner-approved disposition, never silent omission. |
+| OEM-WIN16-INTEGRATION | S46; immutable WOW16 loader/task and original WOW32 consumers | Revalidate OEM-WOW-DIR and OEM-WOW-DELETE across actual guest task creation, callback/return and teardown, using S45 evidence as the baseline. Demonstrate non-ASCII names/content, failure mapping, absence of temporary-file/handle leakage, and a usable subsequent DOS workload. Keep the mandatory real `WRITE.EXE` acceptance; a test probe may cover branches WRITE does not exercise but cannot replace WRITE. |
+| OEM-DBG-PATH | S47; `dos/dem/demmisc.c::SignalSegmentNotice`, gated by `IsDebuggee` | A controlled debuggee with a non-ASCII module path must reach original full-path conversion and module notification, with correct path/length/termination, failed-path behavior, and debugger/task cleanup. If choosing the package's complete-profile-exclusion alternative, prove this consumer is absent too and remove its thin substitute; ordinary DOS runs, a map symbol or a host-only OEM call do not suffice. |
 
 Each receiver's admission brief, test matrix and closure evidence must name
 its items above and link concrete logs, artifact identities and outcomes.
-S40 owns implementation; S41 owns integrated guest revalidation, not a second
+S44 owns implementation, S45 real consumer acceptance and S46 integrated guest revalidation, not a second
 conversion provider. A failed item blocks its receiver's closure until repaired
 or explicitly disposed by the owner. Passing COMMAND/MEM/EDIT remains an
 additional requirement for every receiver, not a replacement for these items.
@@ -270,7 +304,7 @@ The package remains partial if any manifest member is silently omitted, an
 adapter still owns original policy, a lifecycle/teardown path is unproved, or
 a local or mandatory established-product regression is missing or fails. A
 profile exclusion closes only when the source policy and product profile prove
-the package cannot be a runtime dependency.  For S30--S43, the closure record
+the package cannot be a runtime dependency.  For S30--S48, the closure record
 must additionally contain the four required recovery/external-boundary records
 above, including a linked `TODO.md` row for every reached capability stopped by
 an unavailable modern service, protocol, device, or peer.

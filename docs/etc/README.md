@@ -2,6 +2,10 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [S40 WOW32 production closure checklist](operations/m0-t420-s40-wow32-closure-checklist.md) | T420 research handoff | Detailed W1--W7 obligations mapped to S41--S45. | Retain through WOW32 acceptance. |
+| [S40 research and replanning conclusion](evidence/m0-t420-s40-wow32-research-replan.md) | M0 T420 S40 | Owner-approved research closure, inherited unaccepted work and complete S41--S48 receiver mapping. | Retain with T420 evidence. |
+| [T420 S39 DOSX capability acceptance](evidence/m0-t420-s39-dpmi-guest-capability-review.md) | M0 T420 S39 | Original guest provenance, BOP attribution and formal product regression evidence. | Retain through T420 completion. |
+| [T420 S40 WOW USER profile](evidence/m0-t420-s40-wow-user-profile.md) | M0 T420 S40 | Pinned USER.EXE instruction evidence, 26 original API mappings and bounded recovery requirements. | Retain through WOW32 runtime acceptance; historical attempts are not passing results. |
 | [T420 S36 suballocator capability review](evidence/m0-t420-s36-suballoc-capability-review.md) | M0 T420 S36 | Original allocator and XMS/DPMI caller audit; relocation, failure and lifecycle acceptance. | Active supporting evidence; no closure claimed. |
 | [T420 S35 XMS capability progress](evidence/m0-t420-s35-xms-capability-progress.md) | M0 T420 S35 | Closed XMS capability review and explicit owner-approved original COMMAND guest bug debt. | Retain closure review, failed observations and provenance. |
 | [T420 S34 COMMAND stream recovery](evidence/m0-t420-s34-command-stream-recovery.md) | M0 T420 S34 | Original COMMAND stream-owner boundary, direct/second/third-depth pipe and redirection witnesses, and full existing product regression. | Retain through T420 package completion. |

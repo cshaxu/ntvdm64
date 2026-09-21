@@ -4,36 +4,62 @@
 
 ## Active Packet
 
-**Active: M0 T420 S39**
+**Active: M0 T420 S41**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T420 S39, Ordinary Mode, single implementer/reviewer. |
-| Candidate Proposal | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md), S39. |
-| Admission And Approval | Owner authorizes automatic admission of every remaining T420 S until an explicit interruption; T closure remains owner-only after all S complete. |
-| Objective | Verify the complete immutable guest DPMI/DOSX package: BOP 53 activation, protected-to-real return, repeated entry and original resource release. |
-| Non-goals | No guest-media mutation, new DPMI policy, CPU30/kernel monitor revival, WOW acceptance or repair of registered original guest defects. |
-| Reference Baseline | S19 source recovery; S38 delivered at `7b888b1a4` with current candidate `3a4b7d3b...cef21a03`. |
-| Files And ABI Surface | Full selected load-only `src/mvdm/dpmi` guest manifest, original BOP 53 call/return records, DOSX/DPMI selectors, descriptors and teardown. |
-| Applicable Rules | Execution, source-first recovery, complete-package review, immutable guest, transcript-gated acceptance and external-boundary records. |
-| Verification | Freeze guest provenance; trace every selected BOP 53 caller; real direct/nested DOSX entry/return/re-entry/cleanup tests; formal x86 and 17 established product routes. |
-| Expected Markers | Original DOSX reaches/returns through BOP 53, preserves required state, releases ordinary-client resources and leaves a usable parent DOS session. |
-| Asset Needs | Pinned OpenNT and unchanged deployed DOSX; build/M0-T420/S39; runtime tests/logs under O:/winnt/tests and O:/winnt/logs. |
-| Reporting Requirements | Manifest/source/reached ledger, original-guest limitations, exact artifact identities and mirror/adapter diff counts. |
-| Stop Conditions | Required guest change, unadmitted host provider/policy, unexplained established regression or scope beyond guest DPMI/DOSX. |
-| Exit Criteria | All selected guest DPMI/DOSX paths have real pass, source-proven absent caller or recorded owner-approved limitation; formal/regression and committed/pushed S delivery pass. T420 then waits for owner audit. |
-| Original Owner Request | Automatically continue each remaining S; stop after all S for owner acceptance audit before T closure. |
-| Similar-Issue Sweep | All BOP 53 paths, first/repeated DOSX entry, mode/stack/descriptor transitions, normal/error release and direct/nested COMMAND routes. |
+| Identifier Mode | M0 T420 S41, Ordinary Mode, single implementer/reviewer. |
+| Candidate Proposal | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md), revised S41--S48 sequence. |
+| Admission And Approval | Owner directs S40 research/planning closure, five consecutive WOW32 implementation packets S41--S45 and former S41--S43 shifted to S46--S48; automatic sequential admission remains authorized. |
+| Objective | Complete the WOW32 USER client-data and worker-domain boundary, with source-supported memory visibility, exact guest ABI, thread/descriptor binding and rollback/withdrawal. |
+| Non-goals | No guest-media changes, partial callback-table publication, private USER server, speculative private CR3, or claim of full WOW32 acceptance. |
+| Reference Baseline | S39 delivery 90c873d44 and [S40 research conclusion](../etc/evidence/m0-t420-s40-wow32-research-replan.md). Existing dirty S40 implementation candidates are retained, unaccepted inputs. |
+| Files And ABI Surface | WOW worker domain/backing, required original USER client ABI, DPMI/CCPU binding only where runtime evidence proves necessary; selected opennt-host source and provenance. |
+| Applicable Rules | Source-first finite boundaries, exact original mirror formatting, immutable guest, one active S, single implementer/reviewer. |
+| Verification | Re-run pinned USER profile; observe actual CR0/CR3 and DOSX transitions; validate production memory/permission/thread/teardown contracts; formal x86 and 17 text-gated direct/nested COMMAND/MEM/EDIT routes. |
+| Expected Markers | Source-backed data visibility and protection, distinct correct thread views, rollback on failure and no retained mapping/domain after teardown; no unverified mapping-state assumption. |
+| Asset Needs | Pinned OpenNT and immutable USER.EXE; build/M0-T420/S41; test artifacts under O:/winnt/tests and observations under O:/winnt/logs. |
+| Reporting Requirements | Original-owner ledger, exact retained seams, source/artifact hashes, focused results and separate mirror/non-mirror diff accounting. |
+| Stop Conditions | Guest mutation, recursive USER/CSRSS runtime import, unsupported architecture expansion or unexplained established regression. |
+| Exit Criteria | S41 production data/domain implementation and its normal/failure/teardown boundary tests pass, formal x86 and all 17 DOS routes pass, reviewed commit/push complete. S42/S43 own object producers; S45 owns aggregate real USER16 acceptance. |
+| Original Owner Request | Close S40 as successful research plus updated WOW32 planning; execute WOW32 S41--S45 consecutively and shift former S41--S43. |
+| Similar-Issue Sweep | Shared structures, clock, CallCsrFlag, all guest-facing pointers, descriptors, thread switches and every cleanup/failure edge. |
 
-## S39 Progress
+## S40 Closure Record
 
-S39 froze the byte-identical original DOSX identity and recorded all 52 BOP 53
-source sites. Current-main formal x86 build `5720b61c...914ff6a70`, three native
-fixtures, D36 normal/stress/lifecycle (8 direct/nested runs), and 16/32 hardware
-IRQ/interrupt/fault return (4 runs) pass at the supported `O:/winnt` root.
-The in-progress 17-route product matrix, temporary candidate restore hashes and
-the isolated-root limitation are recorded in the S39 evidence file; no guest or
-production source has changed.
+S40 reaches its owner-revised research/planning conclusion, not a runtime
+capability pass. The [closure record](../etc/evidence/m0-t420-s40-wow32-research-replan.md)
+assigns every earlier W1--W7 obligation and inherited implementation candidate.
+The [proposal](../proposals/proposal-mvdm-runtime-package-completion-001.md)
+owns the revised 48-S sequence; the [checklist](../etc/operations/m0-t420-s40-wow32-closure-checklist.md)
+retains detailed obligations with the new receivers.
+
+The current source still calls modern UserRegisterWowHandlers. The recorded
+native probe returns C0000022 and zero output slots; compiled recovered USER
+bodies are not a complete registered provider. The pinned USER.EXE consumes
+PMODE32 shared data directly. The exact live paging route remains to be
+established: historical VCPI routines alone do not prove active DOSX paging.
+S41 starts with this check before choosing a mapping implementation.
+
+S40 research documentation passes governance, relative-link and pinned USER
+profile checks; its delivery is the S40 research/replan documentation commit.
+The extensive pre-existing source/test/build
+changes remain preserved in the worktree and are explicitly unaccepted;
+their reviewed adoption/removal belongs to S41--S44. This deferral does not
+constitute a delivered implementation P or a clean-worktree claim.
+
+## S38 Closure Record
+
+Delivery `7b888b1a4` records S38 completion. The
+[DPMI32 evidence](../etc/evidence/m0-t420-s38-dpmi32-capability-review.md)
+retains the selected-package tests and original-guest limitations; its older
+progress entries are chronology, not new S40 acceptance.
+
+## S39 Closure Record
+
+Delivery `90c873d44` records the
+[DOSX capability acceptance](../etc/evidence/m0-t420-s39-dpmi-guest-capability-review.md),
+including the 17-route product regression. Neither delivery proves WOW32.
 
 ## S37 Closure Record
 
@@ -46,8 +72,8 @@ evidence, not a claim of real DBCS-host or full Win16 acceptance.
 
 The owner explicitly transfers remaining real consumer acceptance to the
 [proposal's mandatory receiver matrix](../proposals/proposal-mvdm-runtime-package-completion-001.md#mandatory-oemuni-consumer-acceptance-transferred-from-s37):
-S40 owns OEM-WOW-DIR and OEM-WOW-DELETE, S41 owns OEM-WIN16-INTEGRATION,
-and S42 owns OEM-DBG-PATH. These items are unverified, not excluded or passed;
+S44 implements OEM-WOW-DIR/DELETE and S45 owns their real acceptance;
+S46 owns OEM-WIN16-INTEGRATION and S47 owns OEM-DBG-PATH. These items are unverified, not excluded or passed;
 each receiver must name them in its admission and closure evidence.
 
 Final S37 mirror change versus admission is +192/-61 across six files;
