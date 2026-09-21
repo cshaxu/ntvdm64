@@ -23,6 +23,8 @@ Revision History:
 #include "precomp.h"
 #pragma hdrstop
 #include "softpc.h"
+#include "ntvdm-exe/softpc/include/mvdm_softpc_termination.h"
+#include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
 
 /* CCPU's internal segment-register indices and pseudo-descriptor routine
  * are deliberately kept private to its generated headers.  CPU40's DPMI
@@ -30,6 +32,9 @@ Revision History:
 extern void load_pseudo_descr(int index);
 extern void c_setGDT_BASE_LIMIT(ULONG base, USHORT limit);
 extern void c_setIDT_BASE_LIMIT(ULONG base, USHORT limit);
+extern ULONG c_getCR3(void);
+extern ULONG c_getDS_BASE(void);
+extern ULONG c_getDS_LIMIT(void);
 #define CPU40_ES_REG 0
 #define CPU40_CS_REG 1
 #define CPU40_SS_REG 2
@@ -103,6 +108,9 @@ Routine Description:
     setES(0);
     setGS(0);
     setFS(0);
+    mvdm_softpc_report_dpmi_mode_state("53:01-protected", (unsigned long)getCR0(),
+        (unsigned long)c_getCR3(), getCS(), getIP(),
+        (unsigned long)c_getDS_BASE(), (unsigned long)c_getDS_LIMIT());
 }
 
 VOID
@@ -143,6 +151,7 @@ Routine Description:
     Ip = *(PUSHORT)(StackPointer + 6);
     CsSelector = *(PUSHORT)(StackPointer + 8);
 
+    mvdm_softpc_wow_page_domain_leave_protected();
     setMSW(getMSW() & ~MSW_PE);
     setDS(DsSelector);
     load_pseudo_descr(CPU40_DS_REG);
@@ -152,6 +161,9 @@ Routine Description:
     setIP(Ip);
     setCS(CsSelector);
     load_pseudo_descr(CPU40_CS_REG);
+    mvdm_softpc_report_dpmi_mode_state("bop-fd-real", (unsigned long)getCR0(),
+        (unsigned long)c_getCR3(), getCS(), getIP(),
+        (unsigned long)c_getDS_BASE(), (unsigned long)c_getDS_LIMIT());
 }
 
 VOID
@@ -199,6 +211,7 @@ Return Value:
      * LDT selector rejects the source-defined transition before PE changes.
      * Clear PE first, then load the identical source-supplied CS through the
      * CCPU real-mode cache path. */
+    mvdm_softpc_wow_page_domain_leave_protected();
     setMSW(getMSW() & ~MSW_PE);
     setCS(DosxRmCodeSegment);
 
@@ -216,6 +229,9 @@ Return Value:
     load_pseudo_descr(CPU40_FS_REG);
     load_pseudo_descr(CPU40_GS_REG);
 #endif
+    mvdm_softpc_report_dpmi_mode_state("switch-real", (unsigned long)getCR0(),
+        (unsigned long)c_getCR3(), getCS(), getIP(),
+        (unsigned long)c_getDS_BASE(), (unsigned long)c_getDS_LIMIT());
 }
 
 VOID
@@ -276,4 +292,8 @@ Return Value:
      * than preserving the real-mode stack segment in PE=1 state. */
     setSS(DosxPmDataSelector);
 #endif
+    (void)mvdm_softpc_wow_page_domain_reenter_protected();
+    mvdm_softpc_report_dpmi_mode_state("switch-protected", (unsigned long)getCR0(),
+        (unsigned long)c_getCR3(), getCS(), getIP(),
+        (unsigned long)c_getDS_BASE(), (unsigned long)c_getDS_LIMIT());
 }

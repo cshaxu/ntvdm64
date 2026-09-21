@@ -1,5 +1,92 @@
 # mvdm
 
+MVDM-HOST-DIV-300: establish the finite worker-owned paging and descriptor
+domain required by the immutable PMODE32 USER client after source observation
+proved that the normal DOSX transition reaches WOW with no active CR3.  Original NT paging,
+shared-user-data and per-thread TEB publication were kernel context-switch
+services, not an MVDM algorithm that can be imported into the standalone
+worker.  The binding therefore uses the existing original `VdmAllocateVirtualMemory`
+and `VdmAddVirtualMemory` carriers plus unchanged CPU40 CR0/CR3 mechanics to
+identity-map the active SAS, publish a read-only clock at `7FFE0000h`, and
+withdraw PG at the original DPMI real-mode transition.  It copies the
+source-published DOSX GDT, leaving it untouched, and overlays only `KGDT_R3_DATA`
+and the current worker's one-page guest TEB in the selected WOW descriptor
+view.  The view starts with source-defined empty `SHAREDINFO` pointers and
+`TEB+18h` self only; it publishes no host pointer, USER object, handle, task,
+desktop or callback state.  Original USER producers and the 21/20 registration
+contract remain S42--S44 owners.  See the S41 registration-frontier evidence
+and the worker-domain lifecycle fixture.
+
+MVDM-HOST-DIV-299 is withdrawn.  The former experiment installed a private
+CCPU page directory before original `MS_bop_1`; it was removed because DOSX
+owns the active CR3/page-table lifecycle and the experiment was not a valid
+production carrier.  The subsequent S41 transition observation instead proved
+that normal DOSX transitions never create CR3; DIV-300 supersedes the retired
+assumption by creating a bounded worker-owned domain only at the reached WOW
+boundary, after DOSX/XMS has disabled SAS A20 wrapping.  No USER shared object, host
+pointer publication, handle, callback or task policy is claimed by the retired
+experiment.
+
+MVDM-HOST-DIV-298: the provider precompiled-header binding redirects original
+WU32LoadMenuIndirect's call to ADAPTER-WOW-037, which invokes the recovered
+OpenNT menu parser with explicit Win16 template semantics. ConvertMenu16
+and the entire original thunk remain unchanged. Native LoadMenuIndirectW
+misinterprets packed guest owner-draw pointers as strings; the retained
+negative-before/positive-after test proves the binding error. This is not a
+guest repair. Actual guest menu callback acceptance remains open.
+
+MVDM-HOST-DIV-297: the final provider precompiled-header binding maps the
+four ANSI window/class long APIs to ADAPTER-WOW-033. Only private WW/WC
+indices use scoped native storage; ordinary indices still call USER32. Original
+FindPWW/FindPWC and SETWL/SETWC bodies are unchanged. Private setter branches
+return the previous stored word rather than the original uninitialized dwOld;
+selected SETWL/SETWC uses discard it. This does not restore GWL/GCL_WNDPROC
+conversion or register the full USER output table. Formal x86 and shared-word
+lifetime/read/write fixtures pass; real guest acceptance remains open.
+
+MVDM-HOST-DIV-296: `wow32/wow32.c` routes the two original LPFNW32 calls
+in W32Dispatch/W32TryCall through the ADAPTER-WOW-032 synchronous borrow scope.
+Original function selection, frame handling, return value and outer exception
+policy remain unchanged. The adapter uses the original LPFNW32/PVDMFRAME types
+and releases native USER aliases in finally, including recursive calls. No
+FastWOW assembly path is selected by this CCPU provider. Formal x86 and typed
+nested/exception tests pass; private USER API redirection remains incomplete.
+
+MVDM-HOST-DIV-295: `wow32/wuser.c::WU32LoadBitmap` retains original
+GETMISCPTR demand loading, output-table dispatch and original pointer cleanup.
+The resolved bitmap payload is replaced only for the synchronous USER call
+by the existing explicit-protected read lease with the original DWORD resource
+size, then released without writes. Lease failure returns the original zero
+result without entering USER. No resource decoder or loading policy is added.
+The extracted actual thunk passes success, failed acquisition and null-payload
+ordering tests; real guest consumption and output registration remain open.
+
+MVDM-HOST-DIV-294: the worker import declarations in `inc/softpc.h`,
+`inc/{dbgexp,demexp,memapi,wowmmcb}.h` and `wow32/wkman.h` explicitly retain
+cdecl for existing CPU40 worker exports while WOW32 recovers its original
+stdcall compilation default. Types, bodies and source ownership are unchanged.
+The original x86 monitor did not require these emulated register calls; the
+standalone CPU40 worker does. This is an ABI boundary, not missing function
+implementation. No stdcall-to-cdecl symbol aliases or runtime wrappers are used.
+`wow32/wdos.c` uses `demexp.h` instead of duplicating its error API prototype.
+See S40's package calling-convention and worker import evidence.
+
+MVDM-HOST-DIV-292/293 are retired: restoring the original WOW32 `/Gz` build
+eliminates the window callback bridge and explicit dialog WINAPI edits.
+Original callback assignments and dialog declarations/bodies are restored.
+The earlier `/Gd` negative evidence remains in the
+[S40 evidence](../../docs/etc/evidence/m0-t420-s40-wow-user-profile.md).
+
+MVDM-HOST-DIV-291: retail `wow32/wow32.c::W32Init` uses the original
+absent-value ThunkNLS default without requiring the NT4 machine-global WOW
+registry key. DEBUG source retains its original registry parser and close;
+it is not the selected retail product profile. The retail KnownDLL list is
+currently empty, and its real loader consequences remain S40 acceptance work.
+No host registry or guest file is modified. Original default computation and
+provider initialization order remain. The
+[S40 evidence](../../docs/etc/evidence/m0-t420-s40-wow-user-profile.md)
+records x86 compilation, limits and source-diff minimization.
+
 MVDM-HOST-DIV-290: `dpmi32/int21map.c` routes extended error (59h)
 through original `ReturnESBX` segment conversion, selecting DI for this
 documented ES:DI result instead of BX. Original DOS error fields and

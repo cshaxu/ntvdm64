@@ -68,6 +68,8 @@ DATA OBJECTS      : None
 #include "error.h"
 #include "config.h"
 #include "cntlbop.h"
+#include "ntvdm-exe/softpc/include/mvdm_softpc_termination.h"
+#include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
 #include "host_bop.h"
 #include "demexp.h"
 #include "xmsexp.h"
@@ -171,6 +173,21 @@ static BOOL WowModeInitialized = FALSE;
 
 void MS_bop_1(void) {
 
+    mvdm_softpc_report_wow_bop_state((unsigned long)getCR0(),
+        (unsigned long)getCR3(), getCS(), getIP(),
+        (unsigned long)c_getDS_BASE(), (unsigned long)c_getDS_LIMIT());
+
+    /* The immutable PMODE32 USER client reads NT's fixed shared-data linear
+     * address after this BOP returns.  Standalone CPU40 has no NT page-table
+     * owner, so bind the finite worker view before loading WOW32. */
+    if (!mvdm_softpc_wow_page_domain_enter()) {
+        TerminateVDM();
+        return;
+    }
+    mvdm_softpc_report_wow_bop_state((unsigned long)getCR0(),
+        (unsigned long)getCR3(), getCS(), getIP(),
+        (unsigned long)c_getDS_BASE(), (unsigned long)c_getDS_LIMIT());
+
     if (!WowModeInitialized) {
     //Load the WOW DLL
     if ((hWOWDll = SafeLoadLibrary("WOW32")) == NULL)
@@ -247,6 +264,15 @@ void MS_bop_1(void) {
 #ifndef PROD
         HostDebugBreak();
 #endif
+        TerminateVDM();
+        return;
+    }
+
+    /* `W32Init` itself is native host code. Its successful return is the
+     * first point at which immutable USER16 can safely consume the original
+     * flat selector ABI. Switch only the worker descriptor view, leaving the
+     * DOSX source GDT unchanged for real-mode withdrawal. */
+    if (!mvdm_softpc_wow_page_domain_activate_wow_context()) {
         TerminateVDM();
         return;
     }

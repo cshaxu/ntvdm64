@@ -275,8 +275,9 @@ $openntBaseVdmNames = @('vdm.c')
 $openntRtlNames = @('environ.c', 'error.c', 'time.c')
 $openntRtlX86Names = @('largeint-selected.asm', 'movemem-selected.asm')
 $adapterSoftpcNames = @('mvdm_softpc_firmware.c', 'mvdm_xms_memory.c', 'mvdm_a20.c', 'mvdm_softpc_guest_memory.c', 'mvdm_softpc_physical_mapping.c',
-                        'mvdm_guest_location.c', 'mvdm_softpc_execution.c', 'mvdm_softpc_termination.c',
-                        'mvdm_standalone_worker.c',
+                         'mvdm_guest_location.c', 'mvdm_softpc_execution.c', 'mvdm_softpc_termination.c',
+                         'mvdm_softpc_wow_page_domain.c',
+                         'mvdm_standalone_worker.c',
                         'mvdm_softpc_event_thread.c',
                         'mvdm_softpc_presentation_font.c',
                         'mvdm_softpc_descriptor_fields.c')
@@ -449,11 +450,17 @@ foreach ($entry in @(
     'mvdm_redirector_async_prepare',
     'mvdm_redirector_async_complete',
     'mvdm_redirector_async_release',
+    # WOW32's original task-lifecycle body converts NTSTATUS through the
+    # selected parent RTL implementation.  Export the existing body; this is
+    # an import-surface declaration, not a standalone replacement.
+    'OpenNtRtlNtStatusToDosError=_OpenNtRtlNtStatusToDosError@4',
     'session_thread_current',
     'session_thread_bind_owned_source',
     'session_thread_unbind',
+    'opennt_exit_thread=_opennt_exit_thread@4',
     'opennt_support_current_teb=_opennt_support_current_teb@0',
     'mvdm_softpc_effective_address'
+    'mvdm_softpc_protected_address'
 )) {
     $wow32ProviderExportLines.Add('    ' + $entry)
 }
@@ -552,6 +559,7 @@ $includeRootPaths = @(
     'src/ntvdm-exe/softpc/include',
     'src/ntvdm-exe/command/include',
     'src/ntvdm-exe/monitor/include',
+    'src/ntvdm-exe/wow/include',
     'src/ntvdm-exe/session'
 )
 $includeRoots = $includeRootPaths | ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }
@@ -923,7 +931,8 @@ $graph.Add('build ' + $object + ': cc_host ' + (NinjaPath (Join-Path $hostRoot $
         # selected opennt-host subset after nt.h so the original timer's
         # declarations stay visible on both architectures.
         $ntexapiSubset = NinjaPath (Join-Path $root 'src/opennt-host/public/sdk/inc/ntexapi.h')
-        $graph.Add('  host_cflags = ' + $hostFlags + ' /FI "' + $ntexapiSubset + '" /FI "' + $threadCompat + '"')
+        $threadAbiFlag = if ($name -eq 'nt_thred.c') { ' /DOPENNT_HOST_CREATE_THREAD_ABI' } else { '' }
+        $graph.Add('  host_cflags = ' + $hostFlags + $threadAbiFlag + ' /FI "' + $ntexapiSubset + '" /FI "' + $threadCompat + '"')
     }
     $object
 }
@@ -1237,9 +1246,11 @@ $graph.Add('build product-programs: phony run16.exe basesrv.exe ntvdm.exe dtmgr.
 $graph.Add('build obj/tests/ccpu_halt_reset_test.obj: cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/ccpu_halt_reset_test.c')))
 $hostFixtureSeamsObject = 'obj/tests/ccpu_host_fixture_seams.obj'
 $graph.Add('build ' + $hostFixtureSeamsObject + ': cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/ccpu_host_fixture_seams.c')))
+$boundedExecutionFixtureSeamsObject = 'obj/tests/ccpu_bounded_execution_fixture_seams.obj'
+$graph.Add('build ' + $boundedExecutionFixtureSeamsObject + ': cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/ccpu_bounded_execution_fixture_seams.c')))
 # Same original owner libraries as the product, with a fixture main only.
 $graph.Add('rule event_test_link')
-$graph.Add('  command = link.exe /nologo /map:$out.map /out:$out $in kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib libcmt.lib libvcruntime.lib libucrt.lib')
+$graph.Add('  command = link.exe /nologo /force:multiple /map:$out.map /out:$out $in kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib libcmt.lib libvcruntime.lib libucrt.lib')
 $fixtureHostLibraries = 'worker-shell.lib worker-command-bindings.lib original-softpc-host-fixture-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib original-opennt-rtl-x86.lib softpc-fixture-bindings.lib redirector-bindings.lib vdd-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib original-ccpu386.lib obj/host/softpc-resource.res'
 $graph.Add('build ccpu-halt-reset-test.exe: event_test_link obj/tests/ccpu_halt_reset_test.obj ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
 # Test-only debug boundaries: original matching body and actual checked binding.
@@ -1255,9 +1266,15 @@ $graph.Add('build ' + $ccpuThreadLifecycleFixtureObject + ': cc ' + (NinjaPath $
 $graph.Add('build ccpu-thread-lifecycle-test.exe: event_test_link ' + $ccpuThreadLifecycleFixtureObject + ' ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
 # Same production libraries; only the entry is a source-shaped memory test.
 $graph.Add('rule memory_test_link')
-$graph.Add('  command = link.exe /nologo /map:$out.map /out:$out $in kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib libcmt.lib libvcruntime.lib libucrt.lib')
+$graph.Add('  command = link.exe /nologo /force:multiple /map:$out.map /out:$out $in kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib libcmt.lib libvcruntime.lib libucrt.lib')
 $graph.Add('build obj/tests/original_external_memory_test.obj: cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/original_external_memory_test.c')))
 $graph.Add('build original-external-memory-test.exe: memory_test_link obj/tests/original_external_memory_test.obj ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
+$highLinearPageFixtureObject = 'obj/tests/ccpu_bounded_execution_fixture.obj'
+$graph.Add('build ' + $highLinearPageFixtureObject + ': cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/ccpu_bounded_execution_fixture.c')))
+$graph.Add('build ccpu-high-linear-page-test.exe: memory_test_link ' + $highLinearPageFixtureObject + ' ' + $boundedExecutionFixtureSeamsObject + ' ' + $fixtureHostLibraries)
+$wowPageDomainFixtureObject = 'obj/tests/wow_page_domain_fixture.obj'
+$graph.Add('build ' + $wowPageDomainFixtureObject + ': cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/wow_page_domain_fixture.c')))
+$graph.Add('build wow-page-domain-test.exe: memory_test_link ' + $wowPageDomainFixtureObject + ' ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
 $graph.Add('build cvidc-vector-binding-fixture.exe: memory_test_link ' + $cvidcVectorBindingFixtureObject + ' ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
 $graph.Add('build x87-layout-fixture.exe: rtl_fixture_link ' + $x87LayoutFixtureObject)
 $graph.Add('build VDMREDIR.dll | VDMREDIR.dll.lib: redir_dll_link ' + (($redirObjects + @($redirResourceObject)) -join ' ') + ' ntvdm.lib redirector-bindings.lib original-opennt-netlib.lib original-opennt-netapi-api.lib original-opennt-xactsrv.lib original-opennt-rtl-x86.lib softpc-bindings.lib softpc-win32-bindings.lib')
