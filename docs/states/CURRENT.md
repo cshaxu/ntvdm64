@@ -4,26 +4,26 @@
 
 ## Active Packet
 
-**Active: M0 T420 S41**
+**Active: M0 T420 S42**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T420 S41, Ordinary Mode, single implementer/reviewer. |
+| Identifier Mode | M0 T420 S42, Ordinary Mode, single implementer/reviewer. |
 | Candidate Proposal | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md), revised S41--S48 sequence. |
 | Admission And Approval | Owner directs S40 research/planning closure, five consecutive WOW32 implementation packets S41--S45 and former S41--S43 shifted to S46--S48; automatic sequential admission remains authorized. |
-| Objective | Complete the WOW32 USER client-data and worker-domain boundary, with source-supported memory visibility, exact guest ABI, thread/descriptor binding and rollback/withdrawal. |
-| Non-goals | No guest-media changes, partial callback-table publication, private USER server, speculative private CR3, or claim of full WOW32 acceptance. |
-| Reference Baseline | S39 delivery 90c873d44 and [S40 research conclusion](../etc/evidence/m0-t420-s40-wow32-research-replan.md). Existing dirty S40 implementation candidates are retained, unaccepted inputs. |
-| Files And ABI Surface | WOW worker domain/backing, required original USER client ABI, DPMI/CCPU binding only where runtime evidence proves necessary; selected opennt-host source and provenance. |
+| Objective | Complete W1 task lifecycle together with W2 class/window/message/dialog lifecycle, using the S41 worker domain as the sole guest-visible USER carrier. |
+| Non-goals | No guest-media changes, parallel USER object model, partial callback-table publication, private USER server, or claim of aggregate WOW32 acceptance. |
+| Reference Baseline | S41 delivery 801ec6e39 and [S40 research conclusion](../etc/evidence/m0-t420-s40-wow32-research-replan.md). Existing dirty W1/W2 implementation candidates are retained, unaccepted inputs. |
+| Files And ABI Surface | Original WOW32 task/class/window/message owners, selected OpenNT USER source, S41 published view, callback/worker thread binding and complete teardown. |
 | Applicable Rules | Source-first finite boundaries, exact original mirror formatting, immutable guest, one active S, single implementer/reviewer. |
-| Verification | Re-run pinned USER profile; observe actual CR0/CR3 and DOSX transitions; validate production memory/permission/thread/teardown contracts; formal x86 and 17 text-gated direct/nested COMMAND/MEM/EDIT routes. |
-| Expected Markers | Source-backed data visibility and protection, distinct correct thread views, rollback on failure and no retained mapping/domain after teardown; no unverified mapping-state assumption. |
+| Verification | Source/owner ledger for every W1/W2 entry; task/module/window/class/message/callback lifecycle and failure/cleanup tests; formal x86 and 17 text-gated direct/nested COMMAND/MEM/EDIT routes. |
+| Expected Markers | One original-owned task/object graph, correct callback and scheduler ordering, no stale guest view/receiver/object after task or worker teardown, and no unbound success stub. |
 | Asset Needs | Pinned OpenNT and immutable USER.EXE; build/M0-T420/S41; test artifacts under O:/winnt/tests and observations under O:/winnt/logs. |
 | Reporting Requirements | Original-owner ledger, exact retained seams, source/artifact hashes, focused results and separate mirror/non-mirror diff accounting. |
 | Stop Conditions | Guest mutation, recursive USER/CSRSS runtime import, unsupported architecture expansion or unexplained established regression. |
-| Exit Criteria | S41 production data/domain implementation and its normal/failure/teardown boundary tests pass, formal x86 and all 17 DOS routes pass, reviewed commit/push complete. S42/S43 own object producers; S45 owns aggregate real USER16 acceptance. |
-| Original Owner Request | Close S40 as successful research plus updated WOW32 planning; execute WOW32 S41--S45 consecutively and shift former S41--S43. |
-| Similar-Issue Sweep | Shared structures, clock, CallCsrFlag, all guest-facing pointers, descriptors, thread switches and every cleanup/failure edge. |
+| Exit Criteria | All selected W1/W2 bodies and callback/message/task/class/window lifecycle paths are source-backed, implemented in their original owners, reached or explicitly source-proven unreachable, and pass formal x86 plus all 17 DOS routes. S43 owns graphics/resources/DDE; S45 owns aggregate real USER16 acceptance. |
+| Original Owner Request | Execute WOW32 S41--S45 consecutively and shift former S41--S43. |
+| Similar-Issue Sweep | Task/module/class/window/message receivers, callback entry/return, scheduler/wait state, handle ownership, failure unwinding and every task/worker cleanup edge. |
 
 ## S40 Closure Record
 
