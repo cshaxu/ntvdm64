@@ -216,12 +216,12 @@ run16, BaseCheckVDM or the broker payload.
 
 ### OEM application-path boundary finding
 
-The authorized disposable test copied `O:\\winnt\\MEM.EXE` to the DOS-shaped
-`O:\\winnt\\tests\\D43Eé\\MEM.EXE` and launched that exact path through the
+The authorized disposable test copied `O:\winnt\MEM.EXE` to the DOS-shaped
+`O:\winnt\tests\D43Eé\MEM.EXE` and launched that exact path through the
 deployed `run16`.  `run16` returned zero, but the guest printed `Cannot
-execute O:\\WINNT\\TESTS\\D43E<OEM-byte>\\MEM.EXE`; no `MEM` module loaded.
-In the same session, `run16 COMMAND.COM /c "DIR O:\\winnt\\tests\\D43Eé"`
-printed `Directory of O:\\WINNT\\TESTS` followed by `File not found`.  The
+execute O:\WINNT\TESTS\D43E<OEM-byte>\MEM.EXE`; no `MEM` module loaded.
+In the same session, `run16 COMMAND.COM /c "DIR O:\winnt\tests\D43Eé"`
+printed `Directory of O:\WINNT\TESTS` followed by `File not found`.  The
 test ended its exact worker/broker processes and removed that disposable
 directory.  A previous `SUBST` probe remains non-acceptance evidence because
 the selected product does not support a cross-process `SUBST` drive as a DOS
@@ -239,7 +239,7 @@ admitted.
 
 That audit is now complete for this test character.  The S34 trace proves
 that the worker receives `0x82` in the command tail, `CHCP` reports `437`,
-and `DIR O:\\winnt\\tests` enumerates the directory.  A `£` (CP437) sibling
+and `DIR O:\winnt\tests` enumerates the directory.  A `£` (CP437) sibling
 directory lists and runs `MEM.EXE` successfully, excluding a general OEM or
 DEM conversion loss.  Most decisively, after creating a separate ASCII
 `D43EE` directory, an explicit guest request for `D43Eé` resolved and ran
@@ -256,7 +256,7 @@ standard Windows DebugPort.  Its observer accepted the original
 `STATUS_VDM_EVENT` transport and received module notes in this order:
 `ntio`, `ntdos`, `HIMEM`, `COMMAND`, `MSCDEXNT`, `REDIR`, `DOSX`, then
 `MEM`.  The last note's path was
-`O:\\WINNT\\TESTS\\D<process-id>£\\MEM.EXE`; the observer checked the OEM
+`O:\WINNT\TESTS\D<process-id>£\MEM.EXE`; the observer checked the OEM
 byte for `£`, printed `S43_DEBUGGER_REAL_WORKER_OEM_MODULE_OK`, and exited
 zero.  All test-created processes and the disposable directory had ended by
 the post-run check.  This is the required end-to-end non-ASCII `DBG_MODLOAD`
@@ -288,7 +288,7 @@ an overlong token to prove that the public field is not overwritten into
 
 Fresh root `build/M0-T420/S43/formal-oem-r2` generated 491 x86 graph steps
 and produced `run16.exe`, `basesrv.exe`, and `ntvdm.exe`.  The deployed
-`O:\\winnt` hashes match that root exactly: `run16` is
+`O:\winnt` hashes match that root exactly: `run16` is
 `CE694D83B208139EF64C9F1245C026C275C1873B95B8AF4B80761BFFB0ED0709`,
 `basesrv` is
 `DD005C1763D85C4ACF292840B10A300089E1A1B12AE3248380468DDD58765617`, and
@@ -301,7 +301,7 @@ existing 17-route Console regression with log prefix
 `s43-debugger-regression-r1` passed every route: direct/interactive/nested
 `COMMAND`, repeated and direct `MEM`, native streams/EOF, direct `/c`, guest
 and native exit-status routes, and `EDIT` return.  Its summary is
-`O:\\winnt\\logs\\s43-debugger-regression-r1-summary.json`; its exact test
+`O:\winnt\logs\s43-debugger-regression-r1-summary.json`; its exact test
 processes all exited.
 
 ## Remaining S43 checklist

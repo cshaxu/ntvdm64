@@ -103,7 +103,7 @@ mirror/adapter changes, then commits and pushes.
 | S42 | WOW32 research/code preservation and successor handoff | Preserve all research and partial code, record unresolved production contracts, verify the candidate x86 build and established DOS regressions, review/commit/push a clean workspace. This is owner-revised handoff closure, not W1/W2 or WRITE success. |
 | S43 | `dbg` capability closure (former S47) | Complete selected original debugger initialization, module notification, breakpoint/exception events and termination; OEM-DBG-PATH with non-ASCII names; or source-proven complete selected-profile exclusion with thin substitutes removed. WOW-specific consumers move explicitly to the successor, never implicitly pass. |
 | S44 | `vdd` capability closure (former S48) | Complete selected original VDD load/request/notification/resource/unload and normal/abnormal worker cleanup, or source-proven complete profile exclusion. Test controlled production-path providers and failures; compile-only registration is insufficient. |
-| S45 | Non-WOW32 aggregate acceptance and T closure preparation | Reconcile S1--S44 dispositions, including external-medium and immutable-guest limitations; fresh formal x86 package, all established relevant capability suites and all 17 text-gated DOS routes; source/diff accounting, clean committed/pushed workspace and report for owner final T acceptance. No WOW32/WRITE success claim. |
+| S45 | `NTVDM.REG` shadow-registry completion and final non-WOW32 acceptance | This is T420's final S. Reconcile S1--S44 dispositions, then complete the selected registry-reader recovery: one worker-local, immutable `NTVDM.REG` provider replaces every formal static configuration read without changing original caller order, fallback or failure behavior; hardware-discovery readers receive an explicit finite provider or source-shaped unavailable result. Verify no formal product path reads or writes the Windows registry; run fresh formal x86 package, all established relevant capability suites and all 17 text-gated DOS routes; source/diff accounting, clean committed/pushed workspace and report for owner final T acceptance. No WOW32/WRITE success claim. |
 
 The 19 currently formal-linked library/DLL units are only a starting build
 inventory, not the S structure: their trace-only `base/debug` selection,
@@ -241,12 +241,47 @@ unload and worker loss with selected real guest calls and a controlled native
 test VDD. Test failed load, invalid requests and repeated cleanup. A test DLL
 belongs under tests/build and must not become a product provider.
 
-S45 audits every preceding package disposition and transferred obligation,
-runs the final relevant capability/regression collection on one identified
-artifact set, verifies guest media unchanged, and reports exact retained
-mirror differences and reduced autonomous code. Document hardware-dependent
-tests and approved guest limitations honestly. Preserve the WOW32 successor
-at queue head; final T closure awaits the owner.
+S45 is the final T420 S. It first completes the shadow-registry receiver
+matrix below, then audits every preceding package disposition and transferred
+obligation, runs the final relevant capability/regression collection on one
+identified artifact set, verifies guest media unchanged, and reports exact
+retained mirror differences and reduced autonomous code. Document
+hardware-dependent tests and approved guest limitations honestly. Preserve the
+WOW32 successor at queue head; final T closure awaits the owner.
+
+### S45 static-registry receiver matrix
+
+The product-wide registry rule is a recovery opportunity, not permission to
+replace every registry family with an ad-hoc text parser.  S45 must factor the
+VDD-only reader into one worker-local, immutable `NTVDM.REG` provider with a
+finite same-shaped read ABI (`open`, `query`, enumeration only where an
+original selected reader uses it, and `close`).  The original callers stay in
+their original files and retain their original fallback/error branches.  The
+provider must be initialized once before the first selected caller and torn
+down with the worker; it must never consult HKLM/HKCU as a fallback.
+
+The admission audit has these mandatory receivers.  A row may be marked done
+only after its original reader is on the production path, its missing-value
+fallback and malformed-value failure are tested, and a matching original
+caller observes the configured value.
+
+| Original reader / owner | Original key family | S45 disposition required |
+| --- | --- | --- |
+| `vdd/nt_msscs.c` | `...\\VirtualDeviceDrivers` / `VDD` multi-string | Generalize the completed S44 narrow binding without changing its original load/unload ownership. |
+| `dos/command/cmdexec.c` | `...\\WOW\\Compatibility` program flags | Read-only shadow value; prove original compatibility parsing and its absent-value branch. |
+| `dos/command/cmdkeyb.c` | keyboard layout and DOS ID tables | Read-only shadow value/enumeration only if the selected original path uses it; prove layout/ID fallback. |
+| `dos/dem/demgset.c` | boot-drive configuration | Read-only shadow value; prove configured and original default-drive branches. |
+| `softpc.new/host/src/config.c` | `...\\Control\\WOW` profiles, `size`, `wowsize` | Read-only shadow values; prove original defaults, selected profile and memory-size validation. |
+| `softpc.new/obj.vdm/ntvdm.c` | `...\\Control\\WOW\\CpuEnv` environment-value enumeration through `NtOpenKey` | Read-only shadow enumeration; preserve original value-to-CPUENV list conversion, absent-key behavior and malformed-value failure. |
+| `dpmi32/vxd.c` | `HARDWARE\\DEVICEMAP\\SERIALCOMM` | This is current-host discovery, not static policy.  Either define an explicit package shadow list with original enumeration semantics or retain a finite public device provider and its unavailable result; never synthesize ports or read the Windows registry. |
+| `softpc.new/host/src/nt_umb.c` | ROM hardware description through `NtOpenKey` | Current-host discovery.  Preserve the original no-ROM/error route until a finite public hardware provider can supply equivalent data; record the provider/exclusion and test it separately. |
+
+The Win16 Shell/Registry Editor and OLE `RegCreate`, `RegSet`, `RegDelete`,
+and mutable enumeration families are not in this static-receiver scope.  They
+need a separately admitted shadow handle/tree/writeback implementation with
+cross-worker isolation, close/failure/enumeration tests.  Their receiver is
+the WOW32 successor, not an S45 shortcut.  No current read-only success may be
+used to claim those mutable APIs are connected.
 
 Every implementation packet requires original-owner inventory, actual
 production wiring, failure/teardown tests, fresh x86, all 17 text-gated

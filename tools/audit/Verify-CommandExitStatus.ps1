@@ -17,10 +17,27 @@ if (!(Test-Path -LiteralPath $runtimeFixtureRoot)) {
     New-Item -ItemType Directory -Path $runtimeFixtureRoot -Force | Out-Null
 }
 $runtimeFixtureRoot = (Resolve-Path -LiteralPath $runtimeFixtureRoot).Path
+$generatedFixtures = @(
+    (Join-Path $runtimeFixtureRoot 'G7.COM'),
+    (Join-Path $runtimeFixtureRoot 'STREAM.CMD'),
+    (Join-Path $runtimeFixtureRoot 'EOF.CMD'),
+    (Join-Path $runtimeFixtureRoot 'D7.CMD')
+)
 $productPaths = @('run16.exe','ntvdm.exe','basesrv.exe') | ForEach-Object { Join-Path $PackageRoot $_ }
 function Get-PackageProcesses {
     @(Get-CimInstance Win32_Process -Filter "Name='run16.exe' OR Name='ntvdm.exe' OR Name='basesrv.exe'" |
         Where-Object { $_.ExecutablePath -in $productPaths })
+}
+function Test-ExactFileBytes {
+    param([Parameter(Mandatory)][string]$Left, [Parameter(Mandatory)][string]$Right)
+    if (!(Test-Path -LiteralPath $Left) -or !(Test-Path -LiteralPath $Right)) { return $false }
+    $leftBytes = [IO.File]::ReadAllBytes($Left)
+    $rightBytes = [IO.File]::ReadAllBytes($Right)
+    if ($leftBytes.Length -ne $rightBytes.Length) { return $false }
+    for ($index = 0; $index -lt $leftBytes.Length; ++$index) {
+        if ($leftBytes[$index] -ne $rightBytes[$index]) { return $false }
+    }
+    return $true
 }
 if ((Get-PackageProcesses).Count) { throw 'Package already in use; no existing process will be stopped.' }
 if ((!$Cases -or 'guest-seven' -in $Cases) -and !$GuestFixturePath) {
@@ -43,8 +60,7 @@ if ($GuestFixturePath) {
         0xb8,0x07,0x4c,0xcd,0x21,    # MOV AX,4C07h; INT 21h
         0x53,0x31,0x30,0x5f,0x47,0x55,0x45,0x53,0x54,0x5f,0x53,0x45,0x56,0x45,0x4e,0x24
     ))
-    if (!(Test-Path -LiteralPath $GuestFixturePath) -or
-        (Get-FileHash -LiteralPath $GuestFixturePath).Hash -ne (Get-FileHash -LiteralPath $guest).Hash) {
+    if (!(Test-ExactFileBytes -Left $GuestFixturePath -Right $guest)) {
         throw 'Short-path fixture does not match the build artifact'
     }
     # Guest fixture provenance remains the admitted build-root input.  A
@@ -54,7 +70,7 @@ if ($GuestFixturePath) {
     # only this verified test fixture under the declared runtime test root.
     $runtimeGuest = Join-Path $runtimeFixtureRoot 'G7.COM'
     [IO.File]::Copy($guest, $runtimeGuest, $true)
-    if ((Get-FileHash -LiteralPath $guest).Hash -ne (Get-FileHash -LiteralPath $runtimeGuest).Hash) {
+    if (!(Test-ExactFileBytes -Left $guest -Right $runtimeGuest)) {
         throw 'Runtime test fixture does not match the admitted build artifact'
     }
     $guest = $runtimeGuest
@@ -185,8 +201,11 @@ try {
                 }
             }
             if ($case.Name -eq 'nested-mem') {
-                $screen=Get-Content -LiteralPath "$report.line-07.console.txt" -Raw
-                if ([regex]::Matches($screen,'bytes total conventional memory').Count -ne 3) {
+                # The terminal viewport can wrap "memory" across physical
+                # Console rows.  Count the terminal snapshot after the same
+                # row-normalization used by all other textual assertions;
+                # never assume the seventh injected-line snapshot is stable.
+                if ([regex]::Matches($screenForMarkers,'bytes total conventional memory').Count -ne 3) {
                     throw 'Three distinct-depth MEM reports not observed'
                 }
             }
@@ -226,5 +245,8 @@ try {
     }
 } finally {
     foreach ($name in $environmentNames) { [Environment]::SetEnvironmentVariable($name,$previous[$name]) }
+    # These names were written by this verifier under the declared runtime
+    # test root; never retain test guest input beside the product package.
+    Remove-Item -LiteralPath $generatedFixtures -Force -ErrorAction SilentlyContinue
     $results | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $LogRoot "$LogPrefix-summary.json") -Encoding utf8
 }

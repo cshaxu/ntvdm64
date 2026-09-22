@@ -113,6 +113,19 @@ CCPU-visible backing and finite unavailable host mechanisms. Modern Windows
 continues to own native windows, drawing and queues; no parallel USER server
 or adapter-owned replacement scheduler is admitted.
 
+### Shadow-registry receiver
+
+The product must not read or write the Windows system registry.  Its only
+registry configuration medium is immutable `NTVDM.REG` beside `ntvdm.exe`,
+loaded at worker startup.  The successor's initial audit must enumerate every
+selected WOW registry consumer.  Read-only configuration consumers (including
+PMAP_COMPAT/profile mappings) must retain their original reader and bind it to
+the same-shaped shadow provider.  The Win16 Shell `RegOpen/Create/Set/Enum/
+Delete` family is not a configuration read: if selected consumers require it,
+the owning S packet must deliver a finite shadow handle/tree/writeback
+provider with close, failure, enumeration and concurrent-worker tests.  It
+must not fall back to native HKLM/HKCU or be reduced to unconditional defaults.
+
 The immutable PMODE32 guest also reads objects directly. Audit both this data
 ABI and ordinary thunk calls, including all 26 identified mappings and 47
 pinned consumer checks; expand that inventory if complete-source review finds

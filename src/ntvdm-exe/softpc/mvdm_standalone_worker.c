@@ -8,6 +8,7 @@
 #include "ntvdm-exe/session/session.h"
 #include "ntvdm-exe/monitor/include/monitor_context.h"
 #include "ntvdm-exe/wow/include/wow_user_session_binding.h"
+#include "ntvdm-exe/vdd/include/mvdm_softpc_vdd_configuration.h"
 
 /* Original BaseClient capture storage is private to this worker process. */
 PVOID CsrPortHeap;
@@ -22,6 +23,7 @@ static BOOL worker_session_initialized;
 static wow_user_runtime worker_wow_runtime = WOW_USER_RUNTIME_INITIALIZER;
 static wow_user_session_binding worker_wow_binding;
 static BOOL worker_wow_attached;
+static BOOL worker_shadow_registry;
 
 static int mvdm_standalone_worker_cleanup(int result)
 {
@@ -34,6 +36,10 @@ static int mvdm_standalone_worker_cleanup(int result)
     if (worker_memory) {
         mvdm_softpc_guest_memory_end(&worker_session);
         worker_memory=FALSE;
+    }
+    if (worker_shadow_registry) {
+        ntvdm_shadow_registry_shutdown();
+        worker_shadow_registry=FALSE;
     }
     if (worker_wow_attached) {
         (void)wow_user_session_detach(&worker_wow_binding);
@@ -68,6 +74,10 @@ DWORD mvdm_standalone_worker_begin(void)
         !app_package_layout_validate_command_configuration_root(&worker_session)) {
         error=ERROR_BAD_PATHNAME; goto fail;
     }
+    if (!ntvdm_shadow_registry_initialize()) {
+        error=GetLastError(); goto fail;
+    }
+    worker_shadow_registry=TRUE;
     error=OpenNtBaseClientConnectCurrent();
     if (error!=ERROR_SUCCESS) goto fail;
     error=OpenNtBaseClientWatchBroker();

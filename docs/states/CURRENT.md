@@ -4,30 +4,42 @@
 
 ## Active Packet
 
-**Active: M0 T420 S44**
+**Active: M0 T420 S45**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T420 S44, Ordinary Mode, single implementer/reviewer. |
-| Candidate Proposal | [Runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md), revised non-WOW32 S43--S45 tail. |
-| Admission And Approval | Owner authorizes automatic sequential admission through the remaining non-WOW T420 packets unless manually interrupted. S43 is delivered; S44 begins with audit before implementation. |
-| Objective | Audit and close the complete selected original VDD package and its actual consumers: registration, load, request/notification dispatch, resource ownership, unload, and normal/abnormal worker cleanup. |
-| Non-goals | No WOW32/WRITE implementation, guest mutation, CPU30, private CSR server, or compile-only VDD acceptance. |
-| Reference Baseline | [S43 debugger ledger](../etc/evidence/m0-t420-s43-debugger-capability-ledger.md), [S42 handoff](../etc/evidence/m0-t420-s42-wow32-successor-handoff.md), selected original VDD source and fresh x86 DOS regression. |
-| Files And ABI Surface | src/mvdm/vdd and original callers, ntvdm worker VDD bindings, source manifests, controlled test VDD and production-path tests. |
+| Identifier Mode | M0 T420 S45, Ordinary Mode, single implementer/reviewer. |
+| Candidate Proposal | [Runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md), S45 static-registry receiver matrix and final non-WOW32 acceptance. |
+| Admission And Approval | Owner authorizes automatic sequential admission through the remaining non-WOW T420 packets unless manually interrupted. S44 is delivered; S45 begins with complete receiver audit before implementation. |
+| Objective | Replace each selected original static registry read with one worker-local immutable `NTVDM.REG` same-shaped read provider, then complete final non-WOW32 reconciliation and acceptance. |
+| Non-goals | No Windows registry access, mutable WOW registry emulation, WOW32/WRITE implementation, guest mutation, CPU30, private CSR server, or compile-only acceptance. |
+| Reference Baseline | [S44 VDD ledger](../etc/evidence/m0-t420-s44-vdd-capability-ledger.md), S45 receiver matrix, pinned original callers and fresh x86 DOS regression. |
+| Files And ABI Surface | Selected original static registry callers, worker-local shadow provider, source manifests, controlled configuration files and production-path tests. |
 | Applicable Rules | Source-first complete package, finite public-host boundaries, immutable guest, exact mirror formatting, one active S. |
-| Verification | Freeze all selected entries/callers; test controlled provider registration, load, request/notification, normal/failed unload and worker loss; then fresh x86 and all 17 DOS routes. |
-| Expected Markers | Each selected VDD family has production-path evidence, source-proven exclusion, or explicit unavailable-boundary result; no compile-only registration claim. |
-| Asset Needs | Pinned OpenNT, controlled native test VDD and disposable probes; build/M0-T420/S44, O:/winnt/tests and O:/winnt/logs. |
-| Reporting Requirements | Original-owner/caller and capability matrix, provider/dispatch/cleanup result, exact source/artifact hashes and mirror/non-mirror line accounting. |
-| Stop Conditions | Guest modification, recursive private server import, unexplained DOS regression or unapproved capability exclusion. |
-| Exit Criteria | Full selected VDD disposition and normal/failure/cleanup evidence, x86/regression/source gates, reviewed commit/push. Unavailable capabilities are not passing tests. |
+| Verification | Freeze every static reader; test configured, absent and malformed input through its original caller; distinguish hardware discovery and mutable API families; then fresh x86 and all 17 DOS routes. |
+| Expected Markers | Every selected static caller observes a same-shaped configured read or its original fallback/failure; no formal product import reaches Windows registry APIs. |
+| Asset Needs | Pinned OpenNT, controlled `NTVDM.REG` files and disposable probes; build/M0-T420/S45, O:/winnt/tests and O:/winnt/logs. |
+| Reporting Requirements | Receiver/capability matrix, source/adapter ownership, configured/absent/malformed evidence, registry-import sweep, exact source/artifact hashes and mirror/non-mirror line accounting. |
+| Stop Conditions | Guest modification, Windows registry access, recursive private server import, unexplained DOS regression or treating mutable/discovery behavior as a static file read. |
+| Exit Criteria | Full selected receiver disposition, final non-WOW32 reconciliation, x86/regression/source gates, clean reviewed commit/push. Unavailable capabilities are not passing tests. |
 | Original Owner Request | Finish the remaining non-WOW32 work in S44--S45 after moving WOW32 into the queue-head successor. |
-| Similar-Issue Sweep | VDD registration, request carrier, dynamic load/unload, resources, notifications, process/worker loss, and original cleanup ownership. |
+| Similar-Issue Sweep | Every formal `Reg*`/`Nt*Key` consumer, static versus discovery versus mutable classification, source-shaped errors and worker teardown. |
+
+## S44 Closure Record
+
+The [S44 VDD ledger](../etc/evidence/m0-t420-s44-vdd-capability-ledger.md)
+records complete selected VDD closure. A controlled provider reaches the
+original load path from immutable package-local configuration, BOP 58 dispatch,
+user/I/O hooks, memory/IRQ/DMA cycles, normal callback cleanup and precise
+worker-loss reload. `VDDTerminateVDM` is separately source-proven to retain
+the original non-WOW zero exit. The sole VxD instance-data boundary remains
+explicitly unavailable rather than a false successful no-op. Fresh x86 and
+all 17 established DOS routes pass; guest media remain unchanged.
 
 ## S43 Closure Record
 
-S43 replaces the retired local debugger implementation with the byte-identical
+The [S43 debugger capability ledger](../etc/evidence/m0-t420-s43-debugger-capability-ledger.md)
+records that S43 replaces the retired local debugger implementation with the byte-identical
 original `mvdm/dbg/dbg.c`, retaining only a bounded six-DWORD CCPU40
 debug-register input copy and a dynamic original `DbgPrompt` binding.  Real
 Windows DebugPort evidence proves original DOSX BOP 6 `DBG_SEGLOAD` plus DEM
@@ -52,12 +64,12 @@ and explicitly transferred. No guest media changed.
 The [successor proposal](../proposals/proposal-wow32-complete-runtime-recovery-001.md)
 inherits all unfinished WOW32 and WOW16/WRITE work. Historical receiver numbers
 in evidence remain chronology; the new proposal and current T420 plan own
-the live assignments. T420 S43 is debugger including OEM-DBG-PATH, S44 is VDD,
-and S45 is non-WOW32 aggregate acceptance. T420 remains open for owner review.
+the live assignments. T420 S43 is debugger including OEM-DBG-PATH and S44 is
+VDD; S45 is the admitted final `NTVDM.REG` shadow-registry completion plus
+non-WOW32 acceptance. T420 remains open for owner review.
 S42 handoff checks pass; the USER desktop failure remains unfixed and is
-assigned to successor S1 audit and S2 implementation. S43 remains the sole
-admitted packet; the owner has lifted its execution hold and requested the
-task brief before implementation.
+assigned to successor S1 audit and S2 implementation. S45 is the sole
+admitted packet.
 
 ## S40 Closure Record
 

@@ -675,11 +675,9 @@ PCHAR  pszName,pszValue;
 FILETIME ft;
 PCHAR  pKeyName = "SYSTEM\\CurrentControlSet\\Control\\VirtualDeviceDrivers";
 
-    /* DIVERGENCE(MVDM-HOST-DIV-148): NT4 installed this product-global VDD
-     * registry key. The product retains its original query, enumeration and
-     * SafeLoadLibrary body, but a missing retired key now means that the
-     * current session selects no installable VDDs. Other registry failures
-     * retain the original dialog/error path through the same adapter result. */
+    /* DIVERGENCE(MVDM-HOST-DIV-148): the standalone product never accesses
+     * HKLM.  Its package-local NTVDM.REG binds these same-shaped original
+     * query calls to the immutable VDD MULTI_SZ. */
     if (mvdm_softpc_open_installable_vdd_registry(&VDDKey) ==
         MVDM_SOFTPC_VDD_CONFIGURATION_NONE) {
         return;

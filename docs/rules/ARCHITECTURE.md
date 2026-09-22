@@ -132,8 +132,16 @@ visual comparison.
     `adapter-common` roots. A new specialist adapter requires a complete
     original owner-package and ABI audit plus explicit admission.
 21. Modern host integration may use public Win32 filesystem, device, process,
-    console, IPC and registry APIs under ordinary permissions. The product
-    must not modify/rebuild Windows system components or require installation
+    console and IPC APIs under ordinary permissions. The product must never
+    read, write, create, delete or otherwise depend on the Windows system
+    registry. `NTVDM.REG` beside `ntvdm.exe` is the sole permitted product
+    configuration registry: it is loaded immutably at worker startup and may
+    contain standard `.reg` sections/values for a finite same-shaped adapter.
+    Static original registry reads must bind to that provider rather than to
+    a forced default. Original mutable registry API families require a
+    separately admitted shadow handle/tree/writeback provider; they must not
+    be silently reduced to a text-file read. The product must not
+    modify/rebuild Windows system components or require installation
     mutations to start or sustain itself.
 22. The current host build profile is MSVC Win32/x86 `/MT`, with the original
     SoftPC CCPU40 executor selected by `CPU_40_STYLE`. Native x64 is not a

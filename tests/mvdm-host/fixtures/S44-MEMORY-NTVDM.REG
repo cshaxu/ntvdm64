@@ -1,0 +1,4 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\VirtualDeviceDrivers]
+"VDD"=hex(7):4f,3a,5c,77,69,6e,6e,74,5c,74,65,73,74,73,5c,73,34,34,2d,6d,65,6d,6f,72,79,2d,76,64,64,2e,64,6c,6c,00,00
