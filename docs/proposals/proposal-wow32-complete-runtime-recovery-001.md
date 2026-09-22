@@ -2,7 +2,10 @@
 
 ## Objective and admission
 
-Owner-directed queue-head successor to T420, dated 2026-09-21. This candidate
+Owner-directed WOW32 successor to T420, dated 2026-09-21. The revised queue
+places DLL compilation-boundary reorganization first and this candidate second.
+This changes execution order only; the audit-first and three-application
+acceptance requirements remain unchanged. This candidate
 has no numeric T identifier until admission. Recover the complete selected
 WOW32 provider and its immutable WOW16 consumers, beginning with a complete dependency/contract audit and ending with real
 WRITE.EXE, WINMINE.EXE and SOL.EXE startup, use and exit. Inherit all unfinished WOW32 work and research from
