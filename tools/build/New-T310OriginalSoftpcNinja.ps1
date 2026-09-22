@@ -95,6 +95,7 @@ $dpmiRoot = Join-Path $root 'src/mvdm/dpmi32'
 $suballocRoot = Join-Path $root 'src/mvdm/suballoc'
 $oemuniRoot = Join-Path $root 'src/mvdm/oemuni'
 $sessionRoot = Join-Path $root 'src/ntvdm-exe/session'
+$adapterWowRoot = Join-Path $root 'src/ntvdm-exe/wow'
 $baseReservationTestSource = Join-Path $root 'tests/adapter-basesrv/base_reservation_test.c'
 $baseServiceReservationTestSource = Join-Path $root 'tests/adapter-basesrv/base_service_reservation_test.c'
 $cpu40DescriptorDomainFixtureSource = Join-Path $root 'tests/mvdm-host/dpmi/cpu40_descriptor_domain_fixture.c'
@@ -216,6 +217,10 @@ $dpmiNames = @((Get-OriginalSources $dpmiManifest) + 'dpmimemr.c' + 'dpmimscr.c'
 $suballocNames = @(Get-OriginalSources $suballocManifest)
 $oemuniNames = @(Get-OriginalSources $oemuniManifest)
 $sessionNames = @('guest_memory_lease.c', 'session.c')
+# One `ntvdm.exe` owns the worker-local USER runtime.  WOW32.DLL imports its
+# current-thread operations from that parent; it must not acquire a second TLS
+# copy of the same worker domain.
+$adapterWowWorkerNames = @('wow_user_runtime.c', 'wow_user_session_binding.c')
 # The complete original SoftPC base debug package remains a worker-local
 # provider.  The separate MVDM `dbg` product is a debugger/CSR owner package
 # and is not selected merely to satisfy these original debug edges.
@@ -334,6 +339,9 @@ foreach ($name in $oemuniNames) {
 }
 foreach ($name in $sessionNames) {
     if (!(Test-Path -LiteralPath (Join-Path $sessionRoot $name))) { throw "Required session source missing: $name" }
+}
+foreach ($name in $adapterWowWorkerNames) {
+    if (!(Test-Path -LiteralPath (Join-Path $adapterWowRoot $name))) { throw "Required WOW worker binding source missing: $name" }
 }
 foreach ($name in $baseDebugNames) {
     if (!(Test-Path -LiteralPath (Join-Path $baseDebugRoot $name))) { throw "Original SoftPC base debug source missing: $name" }
@@ -457,6 +465,18 @@ foreach ($entry in @(
     'session_thread_current',
     'session_thread_bind_owned_source',
     'session_thread_unbind',
+    # The late-loaded WOW32 provider borrows this one worker-local domain;
+    # these exports are an ABI bridge only, not a second USER implementation.
+    'wow_user_runtime_current=_wow_user_runtime_current@0',
+    'wow_user_runtime_enter=_wow_user_runtime_enter@4',
+    'wow_user_runtime_leave=_wow_user_runtime_leave@4',
+    'wow_user_runtime_set_context=_wow_user_runtime_set_context@12',
+    'mvdm_softpc_wow_page_domain_guest_shared_info',
+    'mvdm_softpc_wow_page_domain_guest_csr_flag',
+    'mvdm_softpc_wow_page_domain_set_client_desktop',
+    'mvdm_softpc_wow_page_domain_clear_client_desktop',
+    'mvdm_softpc_wow_page_domain_publish_handle',
+    'mvdm_softpc_wow_page_domain_retire_handle',
     'opennt_exit_thread=_opennt_exit_thread@4',
     'opennt_support_current_teb=_opennt_support_current_teb@0',
     'mvdm_softpc_effective_address'
@@ -891,6 +911,11 @@ $sessionObjects = foreach ($name in $sessionNames) {
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $sessionRoot $name)))
     $object
 }
+$adapterWowWorkerObjects = foreach ($name in $adapterWowWorkerNames) {
+    $object = 'obj/adapter-wow-worker/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
+    $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $adapterWowRoot $name)))
+    $object
+}
 $cpu40DescriptorDomainFixtureObject = 'obj/tests/cpu40_descriptor_domain_fixture.obj'
 $graph.Add('build ' + $cpu40DescriptorDomainFixtureObject + ': cc_dpmi ' + (NinjaPath $cpu40DescriptorDomainFixtureSource))
 $graph.Add('  dpmi_cflags = ' + $dpmiFlags + ' /DLINKED_INTO_MONITOR')
@@ -1183,7 +1208,7 @@ if ($Architecture -eq 'x86') {
     # This import library is the one worker parent ABI.  Late-loaded original
     # providers import it rather than a retired second `original-softpc-process`
     # image with its own local BaseVDM queue.
-$graph.Add('build ntvdm.exe | ntvdm.lib: worker_link obj/worker/rpc_client.obj obj/worker/stub.obj ' + ($adapterRedirWorkerObjects -join ' ') + ' worker-shell.lib worker-command-bindings.lib original-softpc-host-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib opennt-base-client.lib opennt-base-bindings.lib original-opennt-rtl-x86.lib softpc-bindings.lib redirector-bindings.lib vdd-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib broker-transport.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib original-ccpu386.lib original-softpc-host-roots.lib obj/host/softpc-resource.res')
+$graph.Add('build ntvdm.exe | ntvdm.lib: worker_link obj/worker/rpc_client.obj obj/worker/stub.obj ' + ($adapterRedirWorkerObjects -join ' ') + ' worker-shell.lib worker-command-bindings.lib original-softpc-host-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib opennt-base-client.lib opennt-base-bindings.lib original-opennt-rtl-x86.lib softpc-bindings.lib redirector-bindings.lib vdd-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib wow-worker-bindings.lib broker-transport.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib original-ccpu386.lib original-softpc-host-roots.lib obj/host/softpc-resource.res')
 }
 $productPackageObjects = foreach ($name in $productPackageNames) {
     $object = 'obj/product-package/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
@@ -1228,6 +1253,7 @@ $graph.Add('build original-opennt-base-vdm.lib: lib ' + ($openntBaseVdmObjects -
 $graph.Add('build original-opennt-rtl-x86.lib: lib ' + ((@($openntRtlObjects) + @($openntRtlX86Objects)) -join ' '))
 $graph.Add('build worker-shell.lib: lib obj/product-package/package_layout.obj')
 $graph.Add('build session.lib: lib ' + ($sessionObjects -join ' '))
+$graph.Add('build wow-worker-bindings.lib: lib ' + ($adapterWowWorkerObjects -join ' '))
 $graph.Add('build cpu40-descriptor-domain-fixture.exe: broker_test_link ' + $cpu40DescriptorDomainFixtureObject + ' original-mvdm-dpmi32.lib')
 $graph.Add('build rtl-x86-fixture.exe: rtl_fixture_link ' + $rtlX86FixtureObject + ' original-opennt-rtl-x86.lib')
 $graph.Add('build environment-projection-fixture.exe: rtl_fixture_link ' + $environmentProjectionFixtureObject + ' original-opennt-base-vdm.lib original-opennt-rtl-x86.lib softpc-win32-bindings.lib')
@@ -1273,8 +1299,13 @@ $highLinearPageFixtureObject = 'obj/tests/ccpu_bounded_execution_fixture.obj'
 $graph.Add('build ' + $highLinearPageFixtureObject + ': cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/ccpu_bounded_execution_fixture.c')))
 $graph.Add('build ccpu-high-linear-page-test.exe: memory_test_link ' + $highLinearPageFixtureObject + ' ' + $boundedExecutionFixtureSeamsObject + ' ' + $fixtureHostLibraries)
 $wowPageDomainFixtureObject = 'obj/tests/wow_page_domain_fixture.obj'
+$wowUserObjectFixtureObject = 'obj/adapter-wow/wow_user_object_bindings.obj'
 $graph.Add('build ' + $wowPageDomainFixtureObject + ': cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/wow_page_domain_fixture.c')))
-$graph.Add('build wow-page-domain-test.exe: memory_test_link ' + $wowPageDomainFixtureObject + ' ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
+$graph.Add('build ' + $wowUserObjectFixtureObject + ': cc ' + (NinjaPath (Join-Path $adapterWowRoot 'wow_user_object_bindings.c')))
+$graph.Add('build wow-page-domain-test.exe: memory_test_link ' + $wowPageDomainFixtureObject + ' ' + $wowUserObjectFixtureObject + ' ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
+$graph.Add('build obj/tests/wow_user_client_view_layout_fixture.obj: cc ' + (NinjaPath (Join-Path $root 'tests/adapter-mvdm-host-out/wow/wow_user_client_view_layout_fixture.c')))
+$graph.Add('  cflags = /nologo /c /MT /W3 /showIncludes /I "' + (NinjaPath (Join-Path $root 'src')) + '" /I "' + (NinjaPath (Join-Path $adapterWowRoot 'include')) + '"')
+$graph.Add('build wow-user-client-view-layout-test.exe: memory_test_link obj/tests/wow_user_client_view_layout_fixture.obj')
 $graph.Add('build cvidc-vector-binding-fixture.exe: memory_test_link ' + $cvidcVectorBindingFixtureObject + ' ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
 $graph.Add('build x87-layout-fixture.exe: rtl_fixture_link ' + $x87LayoutFixtureObject)
 $graph.Add('build VDMREDIR.dll | VDMREDIR.dll.lib: redir_dll_link ' + (($redirObjects + @($redirResourceObject)) -join ' ') + ' ntvdm.lib redirector-bindings.lib original-opennt-netlib.lib original-opennt-netapi-api.lib original-opennt-xactsrv.lib original-opennt-rtl-x86.lib softpc-bindings.lib softpc-win32-bindings.lib')
@@ -1346,6 +1377,7 @@ if ($objectOutputDirectories.Count -gt 0) {
     ntvdmRedirectorSources = @($adapterRedirNames)
     productPackageSources = @($productPackageNames)
     ntvdmSessionSources = @($sessionNames)
+    ntvdmWowWorkerSources = @($adapterWowWorkerNames)
     ntvdmWin32Sources = @($adapterWin32Names)
     openntRtlX86Sources = @($openntRtlX86Names)
     openntRtlSources = @($openntRtlNames)

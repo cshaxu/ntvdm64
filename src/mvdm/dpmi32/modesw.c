@@ -108,6 +108,9 @@ Routine Description:
     setES(0);
     setGS(0);
     setFS(0);
+    /* DIVERGENCE(MVDM-HOST-DIV-222): restore the selected worker WOW view
+     * after DOSX reentry, as the native user GDT survives a V86 excursion. */
+    (void)mvdm_softpc_wow_page_domain_reenter_protected();
     mvdm_softpc_report_dpmi_mode_state("53:01-protected", (unsigned long)getCR0(),
         (unsigned long)c_getCR3(), getCS(), getIP(),
         (unsigned long)c_getDS_BASE(), (unsigned long)c_getDS_LIMIT());

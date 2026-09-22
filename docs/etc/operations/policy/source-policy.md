@@ -24,6 +24,13 @@ triggers it; establish causality before applying this disposition.
 
 ### Canonical source ownership
 
+The mirror-file rule prohibits project-invented files, not recovery of files
+that exist in original OpenNT. An audited original file may be added under
+`mvdm` or `opennt-host` at its original relative path as byte-exact source,
+a registered true subset or a registered minimal same-shaped adaptation.
+The package-boundary, provenance and stopping-boundary requirements below
+still apply; original filename existence alone is not runtime admission.
+
 The pinned local OpenNT and OpenNT-4.5 MVDM trees are merged into one canonical
 component superset: identical target paths collapse with dual provenance,
 one-sided paths are included, and content conflicts are resolved once at

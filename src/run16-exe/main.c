@@ -166,6 +166,7 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command)
     uint64_t reservation = 0;
     HANDLE parent_wait;
     DWORD result = ERROR_GEN_FAILURE;
+    DWORD worker_status;
     BOOL prepared = FALSE;
     BOOL published = FALSE;
     BOOL registered = FALSE;
@@ -347,6 +348,8 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command)
         }
         if (wait==WAIT_OBJECT_0+1 &&
             WaitForSingleObject(parent_wait,2000)!=WAIT_OBJECT_0) {
+            if (GetExitCodeProcess(worker.hProcess,&code))
+                s34_run16_trace("worker-exit",code);
             result=ERROR_PROCESS_ABORTED;
             fputs("run16: ntvdm exited without task completion\n",stderr);
             goto waited;
@@ -371,6 +374,13 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command)
         result = GetLastError();
     }
 waited:
+    /* Diagnostic only: ERROR_PROCESS_ABORTED is the launcher's public
+     * result for an uncompleted worker.  Preserve the actual child status
+     * in the existing opt-in S34 trace so failure attribution does not
+     * mistake the broker-side result for the worker's own exit code. */
+    if (worker.hProcess && WaitForSingleObject(worker.hProcess, 0) == WAIT_OBJECT_0 &&
+        GetExitCodeProcess(worker.hProcess, &worker_status))
+        s34_run16_trace("worker-status", worker_status);
     if (parent_wait && parent_wait != worker.hProcess)
         CloseHandle(parent_wait);
 done:
@@ -566,8 +576,12 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
             goto done;
         }
         result = connect_broker();
+        s34_run16_trace("broker",result);
         if (!result)
+        {
             result = launch_vdm(binary, application, launch_command);
+            s34_run16_trace("worker",result);
+        }
         OpenNtBaseClientDisconnectCurrent();
         if (!HeapDestroy(CsrPortHeap) && !result)
             result = ERROR_BUSY;

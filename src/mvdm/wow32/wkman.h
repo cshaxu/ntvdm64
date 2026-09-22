@@ -1,3 +1,6 @@
+/* DIVERGENCE(MVDM-HOST-DIV-294): explicit cdecl for the existing CPU40
+ * worker exports consumed by the original /Gz WOW32 DLL. Parameter types,
+ * implementation and ownership are unchanged; no stack-incompatible aliases. */
 /*++ BUILD Version: 0001
  *
  *  WOW v1.0
@@ -75,8 +78,8 @@ VOID W32InitWOWSetupNames(VOID);
 BOOL W32IsSetupProgram(PSZ pszModName, PSZ pszFilePath);
 
 // SoftPC Routines
-HANDLE  RegisterWOWIdle(void);
-VOID BlockWOWIdle(BOOL Blocking);
+HANDLE  __cdecl RegisterWOWIdle(void);
+VOID __cdecl BlockWOWIdle(BOOL Blocking);
 
 // User32 Routines
 VOID    ShowStartGlass (DWORD GLASSTIME);

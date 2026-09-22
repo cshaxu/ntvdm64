@@ -32,6 +32,7 @@ Revision History:
 #pragma hdrstop
 #include "softpc.h"
 #include "malloc.h"
+#include "ntvdm-exe/softpc/include/mvdm_softpc_termination.h"
 
 #if DBG
 USHORT CheckValue=0;
@@ -109,6 +110,9 @@ Return Value:
         0,
         (UCHAR) (getMSW() & MSW_PE));
 
+    mvdm_softpc_report_dpmi_set_descriptor(getES(), getBX(), registerAX,
+        getCX(), (ULONG)Descriptors, (ULONG)(getMSW() & MSW_PE));
+
 
     registerCX =  getCX();
     for (i = 0; i < registerCX; i++) {
@@ -175,6 +179,21 @@ Return Value:
             if (!(Selector & 4u) && GdtAddress != 0)
                 ((PLDT_ENTRY)(IntelBase + GdtAddress))[Selector >> 3] =
                     Descriptors[i];
+            /* WOW's original Get-LDT service returns this GDT-resident
+             * alias.  Record only its already-published descriptor triplet
+             * when explicitly requested, so the KRNL386 free-selector scan
+             * can be compared to the descriptor it actually loads. */
+            if (Selector == 0x0130u && Cpu40GdtShadowAddress != 0 &&
+                    Cpu40LdtShadowAddress != 0) {
+                PLDT_ENTRY Source = Descriptors + i;
+                PLDT_ENTRY Gdt = (PLDT_ENTRY)(IntelBase +
+                    Cpu40GdtShadowAddress) + (Selector >> 3);
+                PLDT_ENTRY Ldt = (PLDT_ENTRY)(IntelBase +
+                    Cpu40LdtShadowAddress) + (Selector >> 3);
+                mvdm_softpc_report_dpmi_descriptor((USHORT)Selector,
+                    *(PULONG)Source, *((PULONG)Source + 1), *(PULONG)Gdt,
+                    *((PULONG)Gdt + 1), *(PULONG)Ldt, *((PULONG)Ldt + 1));
+            }
 #endif
         }
     }

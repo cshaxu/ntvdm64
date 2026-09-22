@@ -48,6 +48,8 @@
 #include "nt_uis.h"
 #include "nt_com.h"
 #include "nt_reset.h"
+#include "ntvdm-exe/softpc/include/mvdm_softpc_termination.h"
+#include <intrin.h>
 #include "nt_event.h"
 #include "nt_fulsc.h"
 #include "nt_eoi.h"
@@ -332,6 +334,8 @@ host_applClose(void)
 void host_terminate(void)
 {
 
+    mvdm_softpc_report_termination("host-terminate", _ReturnAddress());
+
 #ifdef HUNTER
     if (TrapperDump != (HANDLE) -1)
 	CloseHandle(TrapperDump);
@@ -354,6 +358,8 @@ void host_terminate(void)
  */
 VOID TerminateVDM(void)
 {
+
+    mvdm_softpc_report_termination("terminate-vdm", _ReturnAddress());
 
     /*
      *  Do base sepcific cleanup thru terminate().

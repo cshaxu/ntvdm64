@@ -19,6 +19,9 @@
 --*/
 
 #include "precomp.h"
+/* DIVERGENCE(MVDM-HOST-DIV-296): native private USER aliases retain their
+ * storage across original thunk calls, including reentry and exception unwind. */
+#include "wow_user_thunk_scope.h"
 #pragma hdrstop
 #include "wktbl.h"
 #include "wutbl.h"
@@ -32,7 +35,6 @@
 #include <stdarg.h>
 #include <ntlpcapi.h>
 #include <ntcsrdll.h>
-#include "ntvdm-exe/wow/include/wow_user_callback_callconv.h"
 #define SHAREWOW_MAIN
 #include <sharewow.h>
 
@@ -461,14 +463,14 @@ BOOL W32EWExecData(DWORD fnid, LPSTR lpData, DWORD cb)
 
 BOOL W32Init(VOID)
 {
-    HKEY  WowKey;
 #ifdef DEBUG
+    HKEY  WowKey;
     CHAR WOWCmdLine[REGISTRY_BUFFER_SIZE];
     PCHAR pWOWCmdLine;
     ULONG WOWCmdLineSize = REGISTRY_BUFFER_SIZE;
-#endif
     DWORD cb;
     DWORD dwType;
+#endif
     PTD ptd;
     PFNWOWHANDLERSIN pfnIn;
     LPVOID lpSharedTaskMemory;
@@ -532,7 +534,7 @@ BOOL W32Init(VOID)
     pfnIn.pfnInitDlgCb = W32InitDlg;
     pfnIn.pfn16GlobalAlloc = W32GlobalAlloc16;
     pfnIn.pfn16GlobalFree = W32GlobalFree16;
-    pfnIn.pfnEmptyCB = mvdm_wow_user_empty_clipboard;
+    pfnIn.pfnEmptyCB = W32EmptyClipboard;
     pfnIn.pfnFindResourceEx = W32FindResource;
     pfnIn.pfnLoadResource = W32LoadResource;
     pfnIn.pfnFreeResource = W32FreeResource;
@@ -541,12 +543,12 @@ BOOL W32Init(VOID)
     pfnIn.pfnSizeofResource = W32SizeofResource;
     pfnIn.pfnWowWndProcEx = (PFNWOWWNDPROCEX)W32Win16WndProcEx;
     pfnIn.pfnWowEditNextWord = W32EditNextWord;
-    pfnIn.pfnWowSetFakeDialogClass = mvdm_wow_user_set_fake_dialog_class;
-    pfnIn.pfnWowCBStoreHandle = mvdm_wow_user_cb_store_handle;
+    pfnIn.pfnWowSetFakeDialogClass = SetFakeDialogClass;
+    pfnIn.pfnWowCBStoreHandle = WU32ICBStoreHandle;
 
     gpsi = UserRegisterWowHandlers(&pfnIn, &pfnOut);
 
-    RegisterWowBaseHandlers(mvdm_wow_user_global_free_hook);
+    RegisterWowBaseHandlers(W32DDEFreeGlobalMem32);
 
     // Prepare us to be in the shared memory process list
 
@@ -575,6 +577,7 @@ BOOL W32Init(VOID)
     }
 
 
+#ifdef DEBUG
     if (RegOpenKeyEx ( HKEY_LOCAL_MACHINE,
                "SYSTEM\\CurrentControlSet\\Control\\WOW",
                0,
@@ -584,11 +587,18 @@ BOOL W32Init(VOID)
         LOGDEBUG(0,("    W32INIT ERROR: Registry Opening failed\n"));
         return FALSE;
     }
+#else
+    /* DIVERGENCE: MVDM-HOST-DIV-291: the retail standalone package has no NT4
+       machine-global WOW registry state.  Preserve original absent-value
+       defaults and omit the optional KnownDLL list; never probe, create or
+       mutate host registry configuration. */
+#endif
 
     //
     // If present (it usually isn't) read ThunkNLS value entry.
     //
 
+#ifdef DEBUG
     cb = sizeof(fThunkStrRtns);
     if (RegQueryValueEx(WowKey,
             "ThunkNLS",
@@ -596,6 +606,9 @@ BOOL W32Init(VOID)
             &dwType,
             (LPBYTE) &fThunkStrRtns,
             &cb) || dwType != REG_DWORD) {
+#else
+    {
+#endif
 
         //
         // Didn't find the registry value or it's the wrong type,
@@ -678,10 +691,11 @@ BOOL W32Init(VOID)
     // from the registry.
     //
 
+#ifdef DEBUG
     WK32InitWowIsKnownDLL(WowKey);
 
     RegCloseKey (WowKey);
-
+#endif
     // 
     // Initialize list of app names known to be setup applications
     //
@@ -1025,7 +1039,7 @@ VOID W32Dispatch()
         // STUFF TO i386/FastWOW.asm.   i386/FastWOW.ASM is used for speedy
         // thunk dispatching on retail builds.
         //
-        ulReturn = (*((LPFNW32)iFun))(pFrame);      // Dispatch to Thunk
+        ulReturn = wow_user_invoke_thunk((LPFNW32)iFun, pFrame); // DIV-296
 
 #ifdef DEBUG_OR_WOWPROFILE
         iFuncId = iFunT;
@@ -1143,7 +1157,7 @@ DWORD FASTCALL W32TryCall(PVDMFRAME pFrame , LPFNW32 lpfnW32 )
             lpfnW32 = W32PatchCodeWithLpfnw32(pFrame, (INT)lpfnW32);
         }
 
-        ulReturn = (*lpfnW32)(pFrame);      // Dispatch to Thunk
+        ulReturn = wow_user_invoke_thunk(lpfnW32, pFrame); // DIV-296
 
     } except (W32Exception(GetExceptionCode(), GetExceptionInformation())) {
     }
@@ -1183,7 +1197,6 @@ INT W32Exception(DWORD dwException, PEXCEPTION_POINTERS pexi)
     CHAR AeAutoDebugString[8];
     BOOL AeAutoDebug;
     WORD wDebugButton;
-
 
     if (!gfDebugExceptions) {
 

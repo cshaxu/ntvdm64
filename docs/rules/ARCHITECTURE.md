@@ -122,9 +122,12 @@ visual comparison.
     registered same-shaped minimal modification. Every changed imported
     expression carries `DIVERGENCE:` and a component README register entry.
 19. A material added body belongs in the named adapter/ABI family that owns
-    its unavailable modern boundary. Neither `mvdm` nor `opennt-host` may gain
-    a file; an existing mirror file may change only when it owns the original
-    logic.
+    its unavailable modern boundary. A new mirror path is permitted only for
+    an actual original OpenNT file, at its original relative path, after the
+    required provenance and package-boundary admission. It may be byte-exact,
+    a registered true subset, or a registered minimal same-shaped adaptation.
+    Project-invented files may not enter `mvdm` or `opennt-host`. A mirror
+    change must belong to that file's original owner.
 20. Do not introduce generic `compat`, `common`, `adapter-host` or
     `adapter-common` roots. A new specialist adapter requires a complete
     original owner-package and ABI audit plus explicit admission.

@@ -505,8 +505,11 @@ GLOBAL VOID config( VOID )
         // dpmi memory. We get this size from the registry.
         //
 
-/* DIVERGENCE(MVDM-HOST-DIV-056): recognize the selected MSVC x86 macro. */
-#if defined(i386) || defined(_M_IX86)
+/* DIVERGENCE(MVDM-HOST-DIV-056): the original i386 arm relies on the NT
+ * kernel VDM allocator outside this selected source package.  CPU40 has no
+ * such allocator: its SAS is the entire standalone machine, so retain the
+ * original non-i386 DPMI-headroom calculation for this one backend. */
+#if (defined(i386) || defined(_M_IX86)) && !defined(CPU_40_STYLE)
 	 // adding 1024 below is for conventional memory
 	 vdmMemorySize = xmsMemorySize + emsMemorySize + 1024;
 #else
@@ -532,8 +535,6 @@ GLOBAL VOID config( VOID )
 #endif
 
 	sas_init(vdmMemorySize*ONEKB);
-
-
 #ifdef CPU_40_STYLE
 
         /* sas_init has initialised Gdp, so now we can set up the pointers */

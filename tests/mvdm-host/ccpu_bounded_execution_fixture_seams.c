@@ -1,13 +1,23 @@
 /*
- * Link seams for the single-instruction CCPU fixture.
+ * Link seams for the bounded CCPU fixture.
  *
  * They are deliberately test-only and never enter an MVDM host library.
- * The exercised guest program is `D6 FE`; it uses c_main's original direct
- * unsimulate branch before BIOS/BOP dispatch, devices, interrupts, ROM media
- * or I/O-table handlers.  Every seam below is therefore an asserted-unreached
- * original external form, not a substitute product implementation.
+ * The bounded instruction programs end in c_main's `D6 FE` direct unsimulate
+ * branch. These seams omit unrelated host/device startup; explicit counters
+ * below check selected call boundaries. This fixture does not establish real
+ * BIOS, device, WOW scheduler or host teardown behavior.
  */
 #include <stdint.h>
+#include <stdlib.h>
+
+/* nt_mem's original source is compiled through the host CRT redirect header.
+ * This focused execution fixture has no product environment policy, so the
+ * original "configuration absent" result is the only admissible seam. */
+char * __cdecl mvdm_host_getenv(const char *name)
+{
+    (void)name;
+    return NULL;
+}
 
 typedef void (*fixture_callback)(void);
 
@@ -18,10 +28,14 @@ void copyROM(void) {}
 void host_timer_event(void) {}
 void LIM_b_write(void) {}
 void LIM_w_write(void) {}
-void c_sas_touch(void) {}
-void c_VirtualiseInstruction(void) {}
 void host_exint_hook(void) {}
 void host_swint_hook(void) {}
+int host_hwint_hook(int32_t interrupt_number)
+{
+    (void)interrupt_number;
+    abort(); /* This fixture does not execute a hardware interrupt handler. */
+    return 0;
+}
 void dispatch_q_event(void) {}
 void host_ica_lock(void) {}
 void host_ica_unlock(void) {}
@@ -32,6 +46,11 @@ void host_ica_unlock(void) {}
  * the fixture instead of turning into an invented controller behavior. */
 unsigned fixture_eoi_hook_calls;
 unsigned fixture_wow_idle_calls;
+/* The execution adapter calls this after its bounded entry returns. Real
+ * host startup/teardown is outside this CPU fixture; assert the call count
+ * instead of presenting an empty test substitute as lifecycle acceptance. */
+unsigned fixture_host_close_calls;
+void host_applClose(void) { ++fixture_host_close_calls; }
 uint32_t DelayIrqLine;
 void host_EOI_hook(int irq_line, int call_count)
 {

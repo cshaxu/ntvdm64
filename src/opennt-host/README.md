@@ -1,5 +1,40 @@
 # opennt-host
 
+OPENNT-HOST-063 selects the unchanged gabObjectCreateFlags table from
+`windows/core/ntuser/kernel/handtabl.c` (SHA-256
+`F0B56314A93423599F06645D17104391F19A0CA07C3944853B065D8866493F7C`),
+original TYPE declarations from `inc/user.h` and OCF declarations from the
+existing `kernel/userk.h` subset. The cleanup owner now links this table instead
+of accepting caller-defined object classification. Source verification is in
+verify-wow-cleanup-bounds.ps1. The selected non-FE_IME profile has 16 types.
+HMAllocObject/HMFreeObject are not selected: they generate their own handle
+identity and own allocation, whereas this profile uses native USER objects.
+This is not evidence that native object enrollment or every resource lifecycle
+has been implemented; the original table defines ownership, not publication.
+
+The same original `inc/user.h` subset now optionally exposes unchanged
+LARGE_UNICODE_STRING, HEAD/SHROBJHEAD/THROBJHEAD, WND and DESKTOPINFO bodies
+for the S42 guest client view (source SHA-256
+`ADCF0AC89C4779D9B7908610976F4A47D2385403EDC37496C8AB004B016CF6C1`).
+`wow_user_client_view_layout.h` supplies only the finite compile boundary and
+x86 offset assertions against the pinned USER.EXE. Its hook count uses the
+original Win4 WH_MIN=-1/WH_MAX=12, not the modern SDK extension. This restores
+the data schema, not a private USER server or a claim of runtime publication.
+
+OPENNT-HOST-062 recovers the complete WOWCleanup owner and its selector/window
+helpers from `windows/core/ntuser/kernel/cleanup.c`, SHA-256
+`DFB0FB8D81AFEB555B3631ADC5456F4CEB13142F2E954A6F2B22631C49142E5C`.
+ClientDied and its kernel exception dependency are not selected. Explicit
+context replaces ambient USER globals; the 13-entry procedure table is indexed
+by element count instead of its original erroneous byte count. The WOW BOOL
+ABI returns FALSE on allocation/probe/native class-release failure, preserving
+the failed node instead of retrying forever, and TRUE on completed branches.
+This adds failure visibility, not transactional rollback: prior cleanup actions
+remain applied. Original module/task/thread selection and resource ownership
+tests are retained. `verify-wow-cleanup-bounds.ps1` checks the complete body.
+Formal compilation and the cleanup fixture do not establish production object
+membership or 20-slot registration; those bindings remain required.
+
 T417 S4 registers OPENNT-HOST-031: the existing standalone
 BaseSrvDOSWorkerWaitPending query in `base/win32/server/srvvdm.c` is not
 original OpenNT source. It is a minimal registered divergence in its existing
@@ -14,6 +49,355 @@ alternate MVDM provider, a compatibility layer, or a general collection of
 host utilities.
 
 ## Package admission and current package
+
+### S40 original read probe
+
+OPENNT-HOST-061 imports unchanged ProbeForRead from base/ntos/ex/probe.c,
+SHA-256 `0D1CAE414B609C624E6BDF04FA28EBD84FF38DBB9687A63D8BC9E840C2F2372B`.
+It checks alignment, arithmetic overflow and user address range only; it does
+not access pages. ADAPTER-WOW-046 supplies the current process address ceiling
+and native RtlRaiseStatus, while retail assertion/page annotations are elided.
+No kernel image or service dependency is introduced. Actual caller reads must
+remain inside original SEH and use the existing guest-memory boundary. This
+core is ready for WOWCleanup but that complete receiver is not installed yet.
+
+### S40 original class registration wrapper
+
+OPENNT-HOST-060 restores _UnregisterClass from the same pinned class.c and
+routes existing unregister through it. Original private/public lookup, window
+association check and menu pointer selection are preserved. Besides explicit
+context, the native DestroyClass binding can fail and its failure is propagated
+instead of reporting false success. ADAPTER-WOW-045 keeps outputs private until
+success and retains native USER's final live-window/ownership check. Original
+class-list selection is removed from the autonomous unregister implementation.
+
+OPENNT-HOST-059 recovers _RegisterClassEx in class.c, separately compiled from
+lookup. Original source SHA-256:
+`82528443BC5F6C227E0E14FE8A9DBC928BA735F98CF3891744C20C8E1604939A`.
+Only an explicit boundary context parameter is added. Original CPD lookup,
+registration failure, worker/menu/WOW-word publication and conditional TDB
+hTaskWow ownership remain intact. ADAPTER-WOW-044 requires actual class
+registration and CPD resolution operations and supplies current thread state;
+neither callback has a default success implementation. The existing owned
+class entry now stores the source fields, replacing duplicate adapter words
+and menu pointer storage. The class-client publish path now uses this core,
+verified through native class registration. Worker callback-table publication,
+production CPD ownership and WOWCleanup remain incomplete.
+
+### S40 original input membership owner
+
+OPENNT-HOST-058 additionally recovers RecalcThreadAttachment from the same
+pinned input.c. Only current-thread parameter plumbing and its Recalc2 call
+change. Original queue reuse, allocation ordering, failure break and reference
+increments remain unchanged. ADAPTER-WOW-043 requires queue allocation for its
+only AllocQueue(NULL,NULL) call; native input publication remains separate.
+
+OPENNT-HOST-057 admits AddAttachment and Recalc2 from original
+`windows/core/ntuser/kernel/input.c`, SHA-256
+`B7656BCA55E892A42BA825BE0324211450AD298C40717E1AE5A889D084467529`.
+AddAttachment is unchanged; Recalc2 adds only an explicit current-thread
+parameter. ADAPTER-WOW-043 binds implicit context, desktop membership and
+required queue release. The original fixed-point traversal owns explicit
+edge and same-process 16-bit grouping. Native queue assignment/publication,
+message redistribution and focus/capture remain unbound; these two compiled
+bodies are not a claim that ReattachThreads or USER registration is complete.
+The original release call may reenter; the owner must retain and serialize
+all views. No invented input.c content substitutes for the omitted owners.
+
+### S40 original WOW priority ordering owner
+
+OPENNT-HOST-047 admits only unchanged InsertTask from
+`windows/core/ntuser/kernel/taskman.c`, SHA-256
+`E37F4D724650D5758EE05C54E181771AA584AEAD15F5A1376B322ECB7016E64E`.
+The entire 744-line source has been reviewed. This selected function contains
+the actual stable-priority remove/reinsert algorithm needed by original
+xxxInitTask, sleep, yield and send/reply scheduling. Its only outward calls
+are the original retail-elided CheckCritIn/UserAssert checks; it allocates
+nothing, waits on nothing and does not access kernel objects. ADAPTER-WOW-039
+provides only a finite list/priority view, not NT4 private structure layouts.
+This is a source-owner recovery, not admission of the USER server or a
+replacement scheduler. The caller must own serialization and task lifetime.
+OPENNT-HOST-048 additionally retains exact WakeWowTask and DirectedScheduleTask
+bodies, and CurrentTaskLock with only an explicit original-process argument
+instead of PpiCurrent. ADAPTER-WOW-039 supplies the same-domain event counter,
+process/thread/message field views and native event signal operation (the
+original call discards KeSetEvent's result). Full event/message/thread/process integration cannot be
+substituted with no-ops.
+Formal compilation and finite ordering tests do not establish runtime use.
+
+OPENNT-HOST-049 additionally recovers unchanged DestroyTask and its exact
+CLOSE_PSEUDO_EVENT/ExitWowCritSect support from original kernel/userk.h
+(SHA-256 `9260E0BA3CC89974E10B3804ED66D18B9864F4AE7D1175CCE6DDE8EE79D66E8C`).
+The original body retains event-count subtraction, waiter/task unlinking,
+execution-owner release and successor/WOWEXEC signaling. Binding macros
+select the explicit process's shared domain, process-heap records and an
+independently retained native idle-event handle. Other kernel objects and
+the USER server are not imported. Destruction does not clear the original
+thread's ptdb after freeing it; full thread teardown must not reuse that
+record or call this destructor twice. Runtime cleanup hookup is still open.
+
+OPENNT-HOST-050 recovers xxxSleepTask and xxxUserYield plus the exact original
+EnterWowCritSect helper. Only the current-thread lookup becomes an explicit
+parameter, and UserYield passes its original thread to SleepTask. ADAPTER-039
+binds the reached non-timeout alertable WaitAny to native multi-event wait,
+retains NT4 queue-mask values and delegates message/death/idle/outer-lock
+operations to a required host contract. These are not optional success stubs.
+The complete production owner must supply them before exposing the callbacks.
+Bounded real-event wait tests do not prove USER messages or WOW task execution.
+
+OPENNT-HOST-051 restores xxxDirectedYield from the same pinned taskman.c.
+Only PtiCurrent becomes an explicit current-thread argument, also passed to
+SleepTask. Original caller/target event posting, transient priority boost,
+missing-target return and OldYield policy remain unchanged. ADAPTER-WOW-039
+requires lookup by existing host thread ID under the shared USER lock, with
+borrowed thread lifetime retained through the call; it creates no ID registry.
+Six host cases include two native threads executing the original wait/yield
+handoff. Actual WOW task registration and USER output-table hookup remain open.
+
+OPENNT-HOST-052 recovers xxxRegisterUserHungAppHandlers as a true subset of
+original kernel/exitwin.c, SHA-256
+`45B92F7236FBA49D58E2C3D912126067C3843EC560C28CDD8A20167C62AAEF65`.
+Only current-process lookup is an explicit parameter. Original zero-init,
+event-reference failure release, callback/client-event recording and process
+list publication remain intact. ADAPTER-WOW-040 retains a same-access native
+event handle after checking EVENT_ALL_ACCESS and event type; no kernel object
+pointer escapes. Full USER shutdown code is not imported. The original caller
+registers once per WOW process; repeat registration is not made idempotent.
+Native failure/reference tests pass, but production registration and ordered
+process teardown remain open. The output ABI still requires a bound wrapper.
+
+OPENNT-HOST-053 restores complete xxxInitTask, SetAppCompatFlags and
+_ShowStartGlass from original kernel/queue.c, SHA-256
+`0400C034BB5A782E81777E9FD805C07DBCD18D60EC9F1A876CFA67444577E0F8`.
+Current thread/process are explicit, InitTask passes its process to the
+start-glass helper, and the native-thread image-name fallback reads the
+captured process view instead of ETHREAD/PEB. Name capture, startup policy,
+TDB insertion, compatibility parsing and publication order remain original.
+ADAPTER-WOW-041 exposes the finite original fields and required profile,
+input attachment/journal and cursor operations with no production defaults.
+USER Unicode literals are retained even in the ANSI provider build; numeric
+compatibility parsing uses native NTDLL RtlUnicodeStringToInteger. No full
+USER queue/server is imported. Six initialization fixtures use real heap/TDB
+and process registration, but controlled profile/input/cursor observers;
+they do not prove those native services or a real Win16 task initialized.
+
+OPENNT-HOST-054 corrects one original host defect in SetAppCompatFlags:
+FastGetProfileStringW consumes a WCHAR count but the caller passed the byte
+size of WCHAR szHex[80]. Pass sizeof(szHex)/sizeof(szHex[0]) instead. Original
+profile.c multiplies this count by sizeof(WCHAR), then copies the resulting
+string, so the previous 160-character promise exceeded the 80-WCHAR array.
+A guarded red test reproduces the wrong requested count without writing out
+of bounds; corrected capacity and long-value tests pass. No guest is changed,
+and this does not establish a cause for any historical WRITE failure.
+
+OPENNT-HOST-055 retains byte-identical FastGetProfileStringW from original
+kernel/profile.c, SHA-256
+`8ECBB58954ECA0FECE4AB180BB56A3953B8B4408400D3C7AA01D50B62CAAA531`.
+Only the unavailable include/registry/pool boundary is bound by ADAPTER-WOW-042.
+The selected PMAP_COMPAT machine key uses read-only native access; other
+sections, impersonation and full profile mapping are not imported. Default,
+query-buffer allocation, truncation and returned-length policy stay original.
+OPENNT-HOST-056 adds only original KEY_VALUE_PARTIAL_INFORMATION and the
+complete KEY_VALUE_INFORMATION_CLASS enum from public/sdk/inc/ntregapi.h,
+SHA-256 `0FB164317335D8B48C51122182922259C902C7F60AFB28111BAFA9FB75735A6A`.
+The unrelated legacy nt.h macro incorrectly said Full=2; it is corrected to
+Full=1 (Partial=2), and this reader uses the original enum. Missing-key paths
+are native-tested without registry writes. Existing-value/truncation tests
+use the actual reader with a test-only opening boundary for existing OS
+metadata, not a changed product registry path. Production task hookup remains
+unaccepted.
+
+### S40 original ANSI class client composition
+
+OPENNT-HOST-046 compiles the retained ntcftxt.h ANSI class operations in a
+second composition of original client.c, alongside its unchanged original
+RegisterClassWOWA wrapper (client.c SHA-256
+`787EDA33785A87CE9E71202C97B5913E2857F7106FED5BB97103049B1D5E3472`).
+ntsend.h now also carries original COPYLPSTRIDW and its three selected ANSI
+aliases. The dispatch-only composition is unchanged; no new mirror path is
+invented. Existing OPENNT-HOST-037 cleanup correction remains registered.
+ADAPTER-WOW-038 provides explicit task/module-version inputs and scoped native
+class publication; original capture, validation, menu ownership and old-version
+return policy remain original. Formal output-table hookup and task/creation
+lifecycle acceptance are still open, not satisfied by host registration tests.
+
+### S40 original class-menu resource client
+
+OPENNT-HOST-043 imports original CommonLoadMenu and LoadMenuA/W from
+`windows/core/ntuser/client/clmenu.c` (SHA-256
+`DEE4BDB0C79E58993B25AB65C37EB71CC4CFC9A551A9A0E07B5A2F67EB8461CD`).
+OPENNT-HOST-044 restores WOWFindResourceExWCover in its existing clres.c owner
+(original SHA-256 `C11265557B8406D60928032F3CAA0C106301B5847930C98E356E8C72372808F5`).
+OPENNT-HOST-045 also restores MenuLoadWinTemplates, MenuLoadChicagoTemplates
+and CreateMenuFromResource from the same source. Only the unavailable
+TIF_16BIT read becomes an explicit invocation parameter carried through
+recursion, and two cast-postincrement expressions become standard pointer
+advancement. CommonLoadMenu's private WOW-only entry supplies TRUE. The
+Chicago parser body is unchanged. Private USER object structures remain
+excluded; ADAPTER-WOW-037 binds creation/insertion/destruction/help IDs to
+native menu objects. No new parser or fake task/TEB state is introduced.
+Original
+W32 resource callbacks own guest/native discrimination and materialization.
+These clients are required by original createw.c/ntcb.h automatic class-menu
+loading; registering a packed WOW module with native USER does not supply
+that callback. Host lifecycle tests do not close that creation integration.
+
+### S40 original class-word query client
+
+OPENNT-HOST-041 retains the unchanged GetClassWOWWords body from original
+`windows/core/ntuser/client/ntstubs.c`, SHA-256
+`7DF814A5496CEB8CEDAEE8B51D9F4D1966629F109F15EBF8622805EB6902EB01`.
+OPENNT-HOST-042 retains only its seven original call/error/capture/cleanup
+macros from `windows/core/ntuser/inc/ntsend.h`, SHA-256
+`B708F1FEE46E93735C4C931D556E16DAA9679E6352D72620904D18AD21396ABF`.
+Unrelated stubs and private USER precompiled/thread-connect dependencies are
+cropped. The direct caller is WOW32 walias.c::FindClass16 through the pending
+USER output table. ADAPTER-WOW-035 binds its captured-name lookup to existing
+scope-retained class words and original GetClassPtr policy. Full private
+kernel CLS/desktop-heap mapping cannot compose; the local view has zero
+server/client address delta and never enters guest state. This recovers the
+original client algorithm, not a USER server or shared guest graph.
+Formal x86 linking and actual capture/TLS/native class lifetime tests pass;
+service registration and real FindClass16 guest execution remain unaccepted.
+
+### S40 original USER ANSI capture dependency
+
+OPENNT-HOST-040 retains the complete unchanged `RtlCaptureAnsiString` body
+from `windows/core/ntuser/client/rtlinit.c`, original SHA-256
+`D8841BD2F13E5825A84F670EC7CC60923977BF80618D737CBAC2208F94C6523C`.
+Original class registration and class query require this capture contract.
+The remaining USER initialization and capture routines are excluded because
+they require the private USER initialization environment, not this bounded
+string operation. The retained body and line endings match the original.
+ADAPTER-WOW-034 supplies its original IN_STRING declaration and finite heap,
+conversion and existing worker TLS bindings; no new TEB or conversion policy
+is introduced. The formal x86 provider links the original body. A fixture
+using that object and the real worker TLS object passes null/empty, forced
+allocation, the original static-buffer threshold, oversized rejection and
+two-thread isolation. This is dependency evidence, not class-service or
+real Win16 acceptance; allocation/conversion failure injection remains open.
+
+### S40 finite original class metadata lookup
+
+OPENNT-HOST-039 retains only `_InnerGetClassPtr` and `GetClassPtr` from
+original `windows/core/ntuser/kernel/class.c`, SHA-256
+`82528443BC5F6C227E0E14FE8A9DBC928BA735F98CF3891744C20C8E1604939A`.
+Both function bodies, including comments and CRLF, are unchanged. Required
+consumers are the pending WC bindings for WOW32 FindPWC/FindClass16 and
+class registration/query/unregistration. Same-module public/private classes,
+module-HIWORD matching, deferred-destroy filtering and system fallback must
+retain this original owner rather than grow a replacement lookup algorithm.
+
+The complete outgoing closure is list traversal and HIWORD comparisons.
+`wow_class_lookup_bindings.h` (ADAPTER-WOW-028) supplies caller-owned native
+metadata links and binds the original system/client-module roots to an
+explicit context. This is not the kernel CLS/PROCESSINFO layout, a guest
+projection or a runtime USER server. Full class.c cannot compose: its other
+functions require desktop heaps, process/thread objects, kernel locks and
+handle destruction. Those are excluded; native USER still owns registration
+and windows. No kernel allocator, scheduler or USER service is imported.
+This finite semantic slice follows the package-interface stopping boundary,
+not directory-wide server recovery. No autonomous lookup implementation is
+superseded because none has been admitted. The formal WOW32 graph selects
+the original slice; metadata population, synchronization, WC lifetime and
+real guest callers remain unconnected and unaccepted.
+
+### S40 original USER window dispatch owner
+
+OPENNT-HOST-038 retains client/client.c::DispatchClientMessage unchanged,
+from original windows/core/ntuser/client/client.c SHA-256
+`787EDA33785A87CE9E71202C97B5913E2857F7106FED5BB97103049B1D5E3472`.
+Other USER client entry points and the private precompiled environment are
+cropped. `wow_window_dispatch_bindings.h` supplies a synchronous HWND/WW/
+callback view in place of kernel PWND and global callback lookup. The original
+retail assertion remains non-evaluating. The original tagged-procedure branch
+and callback arguments/return remain byte-exact; no guest pointer decoding or
+message-thunk algorithm is duplicated. The function enters the formal WOW32
+x86 link and focused nested-call test. Real window lifetime, callback routing
+from the native window gateway and Win16 acceptance remain incomplete.
+
+### S40 USER class client recovery in progress
+
+OPENNT-HOST-036 retains the required class-client subset of original
+`windows/core/ntuser/inc/ntcftxt.h`: StringDuplicate, InitClsMenuName,
+RegisterClassExWOW and UnregisterClass. Source SHA-256 is
+`E7F3D42CE8939BBE0B14EA34BC693107334C19F8B2D7862EC15B75A501D11DAB`.
+Direct MVDM consumers are wuclass.c's RegisterClassWOWA output slot and
+direct UnregisterClass call. The other text API families and private USER
+environment are cropped. The finite outbound contracts are native allocation,
+original string conversion/capture, expected-version/client metadata, GDI
+validation, and NtUserRegisterClassExWOW/NtUserUnregisterClass resource
+bindings. Full USER kernel/desktop/CSR imports are not admitted.
+This recovered source is currently selected by the x86 class lifecycle
+fixture only. Production callback dispatch, class/clone metadata and shared
+graph integration remain open; no partial output table is installed.
+
+OPENNT-HOST-037 adds exactly two LocalFree calls at InitClsMenuName's
+capture-error exit. Original capture may fail after duplicating both client
+menu strings, before a class owns them. The unchanged source retains two
+allocations in the negative control; the corrected mirror retains zero.
+Success, resource-ID and failed-kernel-registration rules remain original.
+The original unregister client is tested on failure followed by successful
+cleanup. See the S40 USER evidence for source/test identities and limitations.
+
+### S40 finite USER bitmap owner
+
+OPENNT-HOST-035 retains original `windows/core/ntuser/client/cldib.c`
+scaling code, replacing only its precompiled-header dependency with the
+consuming bitmap binding. Source SHA-256:
+`E16FB36805F44767B45B597510A6C08D1DBC47271783E5D1F8F09273C0F782FB`.
+It supplies clres.c's SmartStretchDIBits/ScaleDIB closure using public GDI
+and local allocation; it is not a USER server import. Original ChangeDibColors
+is also retained in clres.c, with original usercli.h stretch/color macros
+bound to public GDI/GetSysColor. The bitmap owners and bounded DC environment
+now enter the WOW32 link. Generic stretch/color-flag acceptance is
+not implied by the fixed-argument WOW bitmap regression.
+
+
+OPENNT-HOST-033 selects original `windows/core/ntuser/client/clres.c`
+bitmap conversion functions and constants/old-header structure as a subset.
+OpenNT and OpenNT-4.5 copies have identical SHA-256
+`C11265557B8406D60928032F3CAA0C106301B5847930C98E356E8C72372808F5`.
+Original WU32LoadBitmap reaches this owner through WOWLoadBitmapA.
+The retained chain is CopyDibHdr/HowManyColors/TrulyMonochrome,
+ConvertDIBBitmap/BitmapFromDIB/CreateScreenBitmap/Convert1BppToMonoBitmap.
+Unrelated resource families and the USER precompiled shell are cropped;
+native fixtures and WOW32 select the bounded DC/capability binding.
+Resource-name loading and actual guest/output-table integration remain required.
+
+The original WOWLoadBitmapA body is now retained unchanged as part of
+OPENNT-HOST-033. Its MBToWCS macro reuses the already selected original
+chartran.c MBToWCSEx(0, ...). Only its fixed zero-dimension/zero-flag LoadBmp
+call maps to public LoadBitmapW; this does not supply a general replacement
+for original LoadBmp. The finite binding uses LocalAlloc/LocalFree consistently
+with the existing chartran allocator. Native data, named-resource and
+missing-name/ID fixtures pass; real guest/output-slot acceptance remains open.
+
+OPENNT-HOST-034 fixes the original old-icon/cursor header branch: capture
+`upOldIcoCur->abBitmap` before redirecting `upbih` to local `Fake`, because
+the macro aliases that variable. Previously returned bits pointed into the
+callee's stack. Only the order of two assignments changes. The fixture
+selects unchanged upstream as a failing negative control or this correction
+to assert the input bits and converted header. This is a host correction,
+not a guest change or evidence that current Win16 workloads use old formats.
+
+### S40 finite USER DDE data owner
+
+OPENNT-HOST-032 admits the original `windows/core/ntuser/client/hdata.c`
+`FreeDDEData` body as a true subset. Direct callers are original
+`mvdm/wow32/wumsg.c` through `pfnOut.pfnFreeDDEData`. Source SHA-256:
+`3BEC21C4BB3CAEF0798208693A89012DF6005C6A330F0F670F974A1CE821FCA2`.
+The full translation unit requires excluded USER DDEML instance, transaction
+and handle machinery; those APIs are cropped with registered markers.
+The retained function owns original release-flag and format-dependent nested
+object cleanup, unchanged. Its outgoing closure is GlobalLock/Unlock/Size/Free,
+DeleteObject, DeleteMetaFile and DeleteEnhMetaFile, all public native APIs.
+`ntvdm-exe/wow/include/wow_dde_data_bindings.h` retains the original DDE_DATA
+layout and retail USER memory macros; it owns no replacement DDE algorithm.
+This source is selected in the WOW32 provider build and native fixtures,
+but not registered as a working WOW output slot. Evidence and remaining
+real-Win16 acceptance are in the indexed
+S40 USER profile audit. No full USER package or new server is imported.
 
 This root is not limited to BaseSrv/BaseClient. Every separately admitted
 non-MVDM OpenNT host package belongs below this root with its original
@@ -47,16 +431,6 @@ The selected body has only its three include/declaration seams changed:
 PEB/VM and private-symbol boundary; they provide no environment algorithm.
 The imported file SHA-256 is
 `4c0e0e870d97f351cd8b046c2901ba841b439c83b75fdb8a6e936b0c89cf2b4b`.
-
-`base/ntos/rtl/error.c` and its generated `error.h` table are the selected
-D12 RTL slice.  They are directly reached by Base VDM, COMMAND, DEM,
-Redirector, NetLib and SoftPC error consumers.  They were imported from
-`O:\repos.external\OpenNT\base\ntos\rtl\error.{c,h}` (source SHA-256
-`88bf09ab98778e0ca58d9d232d3b7aba6115223f43eddf981f6e06b786e77e48` and
-`179794837a8610488218e5e48768d4d79f3d160bb952c92b172d12f6807984d2`).
-The imported contents differ only by the repository terminal-newline form.
-The original table and mapping algorithm remain intact; the sole finite
-standalone binding supplies the original per-thread `LastStatusValue` field.
 
 `base/ntos/rtl/error.c` and its generated `error.h` table are the selected
 D12 RTL slice.  They are directly reached by Base VDM, COMMAND, DEM,

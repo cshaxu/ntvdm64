@@ -26,7 +26,11 @@ if ((Get-PackageProcesses).Count) { throw 'Package already in use; no existing p
 if ((!$Cases -or 'guest-seven' -in $Cases) -and !$GuestFixturePath) {
     throw 'Guest cases require -GuestFixturePath with a verified build-root fixture.'
 }
-$fixtureRoot=Split-Path -Parent $Observer
+# Runtime observers belong under PackageRoot/tests; generated guest input
+# remains in its separately supplied build root, not beside the observer.
+$fixtureRoot=if ($GuestFixturePath) {
+    Split-Path -Parent ([IO.Path]::GetFullPath($GuestFixturePath))
+} else { Split-Path -Parent $Observer }
 if ($GuestFixturePath) {
     # Test-only DOS program: write a guest-owned textual witness, then
     # MOV AX,4C07h; INT 21h.  The outer launcher exit alone is not proof that

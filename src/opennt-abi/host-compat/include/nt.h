@@ -76,7 +76,7 @@ typedef struct _KEY_VALUE_FULL_INFORMATION {
 } KEY_VALUE_FULL_INFORMATION, *PKEY_VALUE_FULL_INFORMATION;
 #endif
 #ifndef KeyValueFullInformation
-#define KeyValueFullInformation 2u
+#define KeyValueFullInformation 1u
 #endif
 /* The public SDK omits these registry syscall declarations even though the
  * selected original process-entry flow needs only its ordinary open/enumerate

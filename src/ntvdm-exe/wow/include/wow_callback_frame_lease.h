@@ -25,6 +25,12 @@ typedef struct wow_callback_frame_lease {
 int wow_callback_frame_acquire_vp(uint32_t vp, uint32_t byte_count,
     uint32_t access, wow_callback_frame_lease *view_out);
 
+/* Resource pointers use explicit protected addressing even during a real-mode
+ * WOW entry. The original caller must first resolve/lock the selector and
+ * supply its full resource size; this binding does not fault in segments. */
+int wow_callback_frame_acquire_protected_vp(uint32_t vp, uint32_t byte_count,
+    uint32_t access, wow_callback_frame_lease *view_out);
+
 /* The linear form is reserved for callers that already obtained a checked
  * CCPU/SIM32 linear guest address. */
 int wow_callback_frame_acquire_linear(uint32_t guest_address, uint32_t byte_count,

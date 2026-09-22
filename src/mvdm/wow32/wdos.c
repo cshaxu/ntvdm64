@@ -12,7 +12,8 @@
 
 MODNAME(wdos.c);
 
-ULONG demClientErrorEx (HANDLE hFile, CHAR chDrive, BOOL bSetRegs);
+/* DIVERGENCE(MVDM-HOST-DIV-294): use the shared worker ABI declaration. */
+#include "demexp.h"
 
 extern DOSWOWDATA DosWowData;
 extern PWORD16 pCurTDB, pCurDirOwner;

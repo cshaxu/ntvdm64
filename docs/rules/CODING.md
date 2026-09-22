@@ -95,9 +95,12 @@ monitor-adapter material.
   family and retain only the smallest registered owner-local boundary.
 - If added semantics require more than three executable lines at an imported
   insertion point, place the body in the named adapter/ABI family.
-- A mirror cannot acquire a private overlay or a new file. Preserve the
-  smallest possible `DIVERGENCE:` hook in the existing original source; the
-  corresponding mirror README registers the hook and its adapter boundary.
+- A mirror cannot acquire a private overlay or a project-invented file.
+  Original OpenNT files not yet mirrored may be imported at their original
+  relative paths after provenance and package-boundary admission, including
+  registered true subsets and minimal same-shaped adaptations. Preserve the
+  smallest possible `DIVERGENCE:` hook in its original owner; the mirror
+  README registers the hook and its adapter boundary.
 - Keep upstream names and paths after re-rooting. Reference/example/test code
   stays outside production roots.
 

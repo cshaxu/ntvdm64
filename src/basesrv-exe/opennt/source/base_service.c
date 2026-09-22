@@ -1252,8 +1252,13 @@ DWORD OpenNtBaseServiceExitCode(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWO
         !OpenNtBaseServicePeer(connection,pid,generation)) return ERROR_INVALID_PARAMETER;
     EnterCriticalSection(&connection->service->lock);
     if (connection->worker_failed) { error=ERROR_PROCESS_ABORTED; goto done; }
-    if (!connection->console) { error=ERROR_INVALID_HANDLE; goto done; }
-    message.u.GetVDMExitCode.ConsoleHandle=connection->console;
+    /* Original BaseSrvGetVDMExitCode accepts the shared-WOW sentinel and
+     * returns its source-defined zero result without looking up a DOS
+     * ConsoleRecord.  The standalone connection likewise has no DOS Console
+     * for WOW; preserve that original branch rather than rejecting a normal
+     * WOW worker completion as ERROR_INVALID_HANDLE. */
+    if (!connection->console && !connection->wow) { error=ERROR_INVALID_HANDLE; goto done; }
+    message.u.GetVDMExitCode.ConsoleHandle=connection->wow ? (HANDLE)-1 : connection->console;
     /* srvvdm.c owns this exact receipt-shaped hWaitForParent value. */
     message.u.GetVDMExitCode.hParent=(HANDLE)(ULONG_PTR)parent_receipt;
     thread.Process=&connection->process;

@@ -4,26 +4,46 @@
 
 ## Active Packet
 
-**Active: M0 T420 S42**
+**Active: M0 T420 S43**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T420 S42, Ordinary Mode, single implementer/reviewer. |
-| Candidate Proposal | [MVDM runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md), revised S41--S48 sequence. |
-| Admission And Approval | Owner directs S40 research/planning closure, five consecutive WOW32 implementation packets S41--S45 and former S41--S43 shifted to S46--S48; automatic sequential admission remains authorized. |
-| Objective | Complete W1 task lifecycle together with W2 class/window/message/dialog lifecycle, using the S41 worker domain as the sole guest-visible USER carrier. |
-| Non-goals | No guest-media changes, parallel USER object model, partial callback-table publication, private USER server, or claim of aggregate WOW32 acceptance. |
-| Reference Baseline | S41 delivery 801ec6e39 and [S40 research conclusion](../etc/evidence/m0-t420-s40-wow32-research-replan.md). Existing dirty W1/W2 implementation candidates are retained, unaccepted inputs. |
-| Files And ABI Surface | Original WOW32 task/class/window/message owners, selected OpenNT USER source, S41 published view, callback/worker thread binding and complete teardown. |
-| Applicable Rules | Source-first finite boundaries, exact original mirror formatting, immutable guest, one active S, single implementer/reviewer. |
-| Verification | Source/owner ledger for every W1/W2 entry; task/module/window/class/message/callback lifecycle and failure/cleanup tests; formal x86 and 17 text-gated direct/nested COMMAND/MEM/EDIT routes. |
-| Expected Markers | One original-owned task/object graph, correct callback and scheduler ordering, no stale guest view/receiver/object after task or worker teardown, and no unbound success stub. |
-| Asset Needs | Pinned OpenNT and immutable USER.EXE; build/M0-T420/S41; test artifacts under O:/winnt/tests and observations under O:/winnt/logs. |
-| Reporting Requirements | Original-owner ledger, exact retained seams, source/artifact hashes, focused results and separate mirror/non-mirror diff accounting. |
-| Stop Conditions | Guest mutation, recursive USER/CSRSS runtime import, unsupported architecture expansion or unexplained established regression. |
-| Exit Criteria | All selected W1/W2 bodies and callback/message/task/class/window lifecycle paths are source-backed, implemented in their original owners, reached or explicitly source-proven unreachable, and pass formal x86 plus all 17 DOS routes. S43 owns graphics/resources/DDE; S45 owns aggregate real USER16 acceptance. |
-| Original Owner Request | Execute WOW32 S41--S45 consecutively and shift former S41--S43. |
-| Similar-Issue Sweep | Task/module/class/window/message receivers, callback entry/return, scheduler/wait state, handle ownership, failure unwinding and every task/worker cleanup edge. |
+| Identifier Mode | M0 T420 S43, Ordinary Mode, single implementer/reviewer. |
+| Candidate Proposal | [Runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md), revised non-WOW32 S43--S45 tail. |
+| Admission And Approval | Owner directs S42 handoff closure then remaining non-WOW32 work; standing automatic sequential S admission applies. |
+| Objective | Audit and close the complete selected original debugger package and its actual consumers, including OEM-DBG-PATH, through source-shaped recovery and explicit capability evidence. |
+| Non-goals | No WOW32/WRITE implementation, guest mutation, CPU30, private CSR server, or compile-only debugger acceptance. |
+| Reference Baseline | [S42 handoff](../etc/evidence/m0-t420-s42-wow32-successor-handoff.md) and fresh x86 DOS regression; original dbg source versus current finite debugger bindings. |
+| Files And ABI Surface | src/mvdm/dbg, original DEM notifications, worker debugger/monitor interfaces, source manifests and controlled debugger/guest tests. |
+| Applicable Rules | Source-first complete package, finite public-host boundaries, immutable guest, exact mirror formatting, one active S. |
+| Verification | Inventory all entries/callers; initialization, non-ASCII module notice, breakpoint/exception, return/error and teardown; original-body and retained-binding review; x86 and all 17 DOS routes. |
+| Expected Markers | Each selected debugger family has actual production-path evidence or complete source-proven exclusion; no successful no-op masking a missing event transport. |
+| Asset Needs | Pinned OpenNT, controlled native debugger and disposable guest probes; build/M0-T420/S43, O:/winnt/tests and O:/winnt/logs. |
+| Reporting Requirements | Original-owner/caller and capability matrix, OEM-DBG-PATH result, external-boundary attempts, exact source/artifact hashes and mirror/non-mirror line accounting. |
+| Stop Conditions | Guest modification, recursive private server import, unexplained DOS regression or unapproved capability exclusion. |
+| Exit Criteria | Full selected debugger disposition and normal/failure/cleanup evidence, required OEM consumer, x86/regression/source gates, reviewed commit/push. Unavailable capabilities are not passing tests. |
+| Original Owner Request | Finish the remaining non-WOW32 work in S43--S45 after moving WOW32 into the queue-head successor. |
+| Similar-Issue Sweep | DBGDispatch modes, ModuleLoad/Free/SegmentMove, task/remote-thread notice, IsDebuggee, exception context, task/worker cleanup and OEM path conversion. |
+
+## S42 Closure Record
+
+The [S42 handoff](../etc/evidence/m0-t420-s42-wow32-successor-handoff.md)
+records owner-revised research/code preservation closure: fresh x86 four-EXE
+and two-DLL builds, domain/layout/cleanup/source checks and all 17 text-gated
+DOS routes pass. The same delivery preserves all outstanding code/research
+and the queue-head successor proposal. Its commit/push is the S42 handoff P;
+WOW32 desktop publication, production task teardown and WRITE remain unaccepted
+and explicitly transferred. No guest media changed.
+
+## WOW32 successor transfer
+
+The [successor proposal](../proposals/proposal-wow32-complete-runtime-recovery-001.md)
+inherits all unfinished WOW32 and WOW16/WRITE work. Historical receiver numbers
+in evidence remain chronology; the new proposal and current T420 plan own
+the live assignments. T420 S43 is debugger including OEM-DBG-PATH, S44 is VDD,
+and S45 is non-WOW32 aggregate acceptance. T420 remains open for owner review.
+S42 handoff checks pass; the USER desktop failure remains unfixed and is
+assigned explicitly to successor S1/S2. S43 is now the sole active packet.
 
 ## S40 Closure Record
 
@@ -31,7 +51,7 @@ S40 reaches its owner-revised research/planning conclusion, not a runtime
 capability pass. The [closure record](../etc/evidence/m0-t420-s40-wow32-research-replan.md)
 assigns every earlier W1--W7 obligation and inherited implementation candidate.
 The [proposal](../proposals/proposal-mvdm-runtime-package-completion-001.md)
-owns the revised 48-S sequence; the [checklist](../etc/operations/m0-t420-s40-wow32-closure-checklist.md)
+owns the historical 48-S sequence (now superseded by the WOW32 transfer); the [checklist](../etc/operations/m0-t420-s40-wow32-closure-checklist.md)
 retains detailed obligations with the new receivers.
 
 The current source still calls modern UserRegisterWowHandlers. The recorded
@@ -45,8 +65,16 @@ S40 research documentation passes governance, relative-link and pinned USER
 profile checks; its delivery is the S40 research/replan documentation commit.
 The extensive pre-existing source/test/build
 changes remain preserved in the worktree and are explicitly unaccepted;
-their reviewed adoption/removal belongs to S41--S44. This deferral does not
-constitute a delivered implementation P or a clean-worktree claim.
+S42 now preserves them in its handoff delivery. Their remaining production
+adoption/removal belongs to the WOW32 successor, not to T420's non-WOW32 tail.
+
+## S41 Closure Record
+
+[T420 S41 WOW registration frontier](../etc/evidence/m0-t420-s41-wow-registration-frontier.md)
+records delivery `801ec6e39`: one CCPU worker domain, original DOSX page-table
+entry, map/withdrawal evidence and the established 17-route regression. S42
+inherits that published worker domain; it does not reopen S41's data-plane
+closure.
 
 ## S38 Closure Record
 
@@ -72,8 +100,8 @@ evidence, not a claim of real DBCS-host or full Win16 acceptance.
 
 The owner explicitly transfers remaining real consumer acceptance to the
 [proposal's mandatory receiver matrix](../proposals/proposal-mvdm-runtime-package-completion-001.md#mandatory-oemuni-consumer-acceptance-transferred-from-s37):
-S44 implements OEM-WOW-DIR/DELETE and S45 owns their real acceptance;
-S46 owns OEM-WIN16-INTEGRATION and S47 owns OEM-DBG-PATH. These items are unverified, not excluded or passed;
+the WOW32 successor S4/S5 owns OEM-WOW-DIR/DELETE and
+OEM-WIN16-INTEGRATION; T420 S43 owns OEM-DBG-PATH. These items are unverified, not excluded or passed;
 each receiver must name them in its admission and closure evidence.
 
 Final S37 mirror change versus admission is +192/-61 across six files;
@@ -134,102 +162,12 @@ system-VDM spawn adapter in `ntvdm`.  No raw HANDLE, guest pointer or Console
 pseudo-handle crosses the broker record.  See the
 [S34 stream recovery evidence](../etc/evidence/m0-t420-s34-command-stream-recovery.md).
 
-## S30 Closure Context
+## Retained S30 status context
 
-The S37 comparison supersedes pure-profile acceptance below: the old marker
-proved no DOSX, not the intended CONFIG. See the corrected
-[S30 evidence](../etc/evidence/m0-t420-s30-dos-profile-host-medium-closure.md#post-closure-pure-profile-evidence-correction).
-Current low-DOS failure remains the accepted original guest debt, not a pass.
-
-The owner-expanded S30 scope is delivered at `91a5be61a`: task inputs enabled
-`EMM=RAM`, and a real DOS guest completed INT 67 allocation, map/remap,
-unmap and free on the formal product. The complete 17-route product matrix
-also passed. The closure record below is the current disposition; it was not
-withdrawn.
-
-S30 now audits the original COM/LPT configuration and host providers against
-actual Windows endpoints, then adds the default DOS, HIMEM/DOSX and explicit
-EMS profile matrix. No S31/debug work is admitted.
-
-The first real matrix results are: default startup reaches both public XMS
-and DPMI queries (`S30_HIMEM_DOSX_OK`); the task PIF override reaches XMS
-without DOSX and completes original EMS map/remap/unmap/free
-(`S30_HIMEM_ONLY_OK`, `S30_EMS_*`); a task PIF with no DOSX also completes
-normally (`S30_PURE_DOS_OK`); and guest COM3 opens the discovered Windows USB
-serial endpoint through unchanged original `nt_com.c` (`S30_COM3_OPEN_OK`).
-The first pure-DOS probe incorrectly set the original PIF editor's default
-EMS reservation to zero, shrinking the worker address-space allocation and
-causing the initial stall. Its subsequent assumption that XMS absence proves
-HIMEM absence was also false: selected worker XMS handling is a process
-baseline. The corrected profile proves the actual PIF-owned distinction,
-which is absence of DOSX/DPMI.
-
-The original UART controller itself is real-guest proven: after the COM3
-host open, `C31.COM` writes the original COM3 8250 MCR loopback bit and
-round-trips `5A` through direct TX/RX port I/O
-(`S30_COM3_LOOPBACK_TX_RX_OK`). This verifies selected SoftPC serial TX/RX
-without transmitting to an unknown external protocol.
-
-The discovered `COM3` is a Windows `usbser` USB-C Billboard endpoint. Its
-real-open probe passes, but original INT 14h transmit correctly times out:
-the unchanged `rs232_io.c` waits for UART CTS before it calls the original
-host write path, and this endpoint does not assert CTS. This is a real
-medium capability condition, not a missing NTVDM provider or a reason to
-weaken the original CTS rule. Complete COM transmit/receive acceptance needs
-a CTS-capable loopback or paired serial endpoint. The host has no persistent
-physical/network LPT endpoint, but the original LPT `CreateFile("LPT1")` path
-is separately verified below through a temporary Windows device mapping that
-is removed after the test.
-
-The host inventory confirms that this is not an unsearched Windows facility:
-`HKLM\\HARDWARE\\DEVICEMAP\\SERIALCOMM` contains only
-`\\Device\\USBSER000 = COM3`; PnP reports only the started `usbser.inf`
-USB Serial Device (COM3). A native non-writing open reports `cts=False`,
-`dsr=False` and no received bytes. Thus no installed physical or virtual
-paired COM medium can complete the original CTS-gated external transmit or
-host-driven receive acceptance.
-
-The deferred prerequisite is registered in the [debt ledger](TODO.md) with
-its original caller/provider, zero retained product diff and the exact retest
-condition.  The supporting [external COM boundary record](../etc/evidence/m0-t420-s30-external-com-boundary.md)
-retains the full current-host audit; the unavailable medium is not a pass.
-
-To avoid leaving the provider's success route untested merely because this
-host lacks a peer, a test-only direct-source mock now compiles unchanged
-`nt_com.c` and supplies a controlled CTS-capable Win32 serial contract. Its
-`open → write → receive queue → read → close` lifecycle passes with
-`T420_S30_NT_COM_MOCK_OPEN_WRITE_READ_CLOSE_OK`. This fixture is not linked
-into the product and does not close the real external-medium debt.
-
-The original LPT write path is now independently end-to-end proven without a
-product substitute. The test observer temporarily mapped the Windows `LPT1`
-DOS-device name to a private named pipe, then removed that mapping after the
-run. `L30.COM` invoked INT 17h byte output; unchanged `nt_lpt.c` opened
-`LPT1`, buffered it, and flushed during worker close. The pipe received `5A`
-and the guest reported `S30_LPT1_WRITE_OK`; no mapping, pipe, or product
-process remained afterward.
-
-An independent post-closure `C31.COM` ConPTY rerun also completed normally:
-the launcher returned `exit=0`, emitted `S30_COM3_LOOPBACK_TX_RX_OK`, and
-had no guest command-resolution failure. The earlier aggregate-run timeout
-is therefore not a reproducible worker-exit defect.
-
-The owner's clarification applies to the entire T420 capability sequence:
-every capability that the selected standalone NTVDM product itself owns must
-be verified through its original guest-to-host path before its owning S can
-close. A missing external medium is recorded as a platform limitation, never
-silently converted into a pass; the remaining S31--S43 rows retain the same
-per-package acceptance rule.
-
-## S30 Reopened Closure
-
-The owner returned to S30 and its reopened matrix passed again: DOSX/HIMEM,
-pure-DOS, EMS, COM3 controller
-loopback, LPT1 byte output and the isolated original `nt_com.c` success mock.
-The Windows serial map remains only `\Device\USBSER000 = COM3`, so the
-recorded absence of a CTS-capable external peer is unchanged and may not be
-turned into a product-side substitute. See the S30 closure evidence's
-2026-09-18 reopened-verification record.
+[Historical status excerpts](../etc/evidence/m0-t420-prior-status-records.md)
+preserve the S30 reopen chronology and corrected profile evidence; the
+[S30 capability record](../etc/evidence/m0-t420-s30-dos-profile-host-medium-closure.md)
+remains its evidence reference.
 
 ## S31 Closure Record
 

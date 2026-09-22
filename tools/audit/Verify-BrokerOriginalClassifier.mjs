@@ -8,7 +8,7 @@ const ownerBuild=process.env.OPENNT_BROKER_OWNER_BUILD ? path.resolve(process.en
 fs.mkdirSync(build,{recursive:true});
 for(const suffix of ['COM','pif','exe','bin']) fs.writeFileSync(path.join(build,`suffix.${suffix}`),Buffer.alloc(64,0x41));
 const graph=fs.readFileSync(path.join(ownerBuild || 'build/M0-T412/S1/text-cell-repair/product','build.ninja'),'utf8');
-const flags=graph.match(/^cflags = (.*)$/m)[1].replaceAll('$:',':')+` /I "${root}/src/adapter-opennt-host/basesrv/include"`;
+const flags=graph.match(/^cflags = (.*)$/m)[1].replaceAll('$:',':')+` /I "${root}/src/basesrv-exe/opennt/include"`;
 const rtlFlags=graph.match(/^build obj\/opennt-rtl\/error\.obj:.*\r?\n  rtl_cflags = (.*)$/m)[1].replaceAll('$:',':');
 const source=fs.readFileSync('src/opennt-host/base/win32/client/vdm.c','utf8');
 const upstream=fs.readFileSync('O:/repos.external/OpenNT/base/win32/client/vdm.c','utf8');

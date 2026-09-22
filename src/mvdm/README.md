@@ -17,6 +17,12 @@ desktop or callback state.  Original USER producers and the 21/20 registration
 contract remain S42--S44 owners.  See the S41 registration-frontier evidence
 and the worker-domain lifecycle fixture.
 
+S42 also binds `wuman.c::WU32NotifyWow`'s original `CallCsrFlag` byte to
+that worker domain. USER16's original client macros read, set and clear it;
+no native WOW32 static address may be published into the CCPU address space.
+The byte remains zero-initialized, per-worker and withdrawn at teardown;
+the original client decision logic is unchanged.
+
 MVDM-HOST-DIV-299 is withdrawn.  The former experiment installed a private
 CCPU page directory before original `MS_bop_1`; it was removed because DOSX
 owns the active CR3/page-table lifecycle and the experiment was not a valid
@@ -338,7 +344,7 @@ runtime-discovery inputs.  The complete per-file provenance is in
 
 | ID | Original purpose | Reason | Implementation | Files |
 | --- | --- | --- | --- | --- |
-| MVDM-HOST-DIV-222 | Adapt the original `53:01` register-frame handoff to CCPU segment-cache semantics. | The kernel-VDM x86 owner writes passive CONTEXT selectors before PE; CCPU immediately resolves each setter through its active descriptor cache. | Capture the source frame while real-mode SS is valid, enable PE/CPL-3, then load the same CS:EIP, SS:ESP and DS fields through CCPU. Kernel VDM state bits remain absent. | `dpmi32/modesw.c` |
+| MVDM-HOST-DIV-222 | Adapt the original `53:01` register-frame handoff to CCPU segment-cache semantics. | The kernel-VDM x86 owner writes passive CONTEXT selectors before PE; CCPU immediately resolves each setter through its active descriptor cache. | Capture the source frame while real-mode SS is valid, enable PE/CPL-3, then load the same CS:EIP, SS:ESP and DS fields through CCPU. Restore the already selected worker WOW page/GDT view on this reentry path, matching native user-selector lifetime; kernel VDM state bits remain absent. | `dpmi32/modesw.c` |
 | MVDM-HOST-DIV-223 | Bind DOSX's source-delivered LDT to CCPU after `53:0F`. | Historical non-i386 only used the table for host address conversion, while CPU40 executes selectors directly. | Derive the guest-linear table base from the existing `Ldt`/`IntelBase` pair and install it in CCPU with an internal-valid LDTR selector. | `dpmi32/dpmi32.c` |
 | MVDM-HOST-DIV-224 | Route CPU40 DPMI extended-memory allocation through the original shared XMS suballocator. | CPU40 XMS reserves the complete extended linear range, leaving the generic VDM allocator correctly empty when DOSX requests memory. | Use the existing RISC shared-XMS allocation, free, reallocation and query operations consistently for CPU40 only. | `dpmi32/dpmimemr.c` |
 | MVDM-HOST-DIV-225 | Synchronize source `53:00` descriptor writes into CCPU's bound LDT. | x86 uses `NtSetLdtEntries`; the old RISC branch only updates `FlatAddress[]`. | Copy the already supplied DOSX descriptor into the bound CPU40 LDT after original limit normalization and alongside the original conversion cache update. | `dpmi32/dpmiselr.c` |

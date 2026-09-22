@@ -304,6 +304,10 @@ void MS_bop_1(void) {
 	}
     }
 #endif	/* CPU_40_STYLE */
+    /* S42 observation only: the original dispatcher has returned and CPU
+     * state remains entirely owned by the original BOP/CCPU sequence. */
+    mvdm_softpc_report_wow_dispatch_return_state((unsigned long)getCR0(),
+        (unsigned long)getCR3(), getCS(), getIP());
 }
 
 

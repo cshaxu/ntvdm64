@@ -30,11 +30,13 @@ Consequently, an imported translation unit retains its selected upstream path,
 name, data layout, function shape, original algorithm and failure order.  A
 small changed include, declaration binding or one-line hook stays in the mirror
 with a local `DIVERGENCE:` marker.  A material added mechanism belongs in its
-named adapter/ABI family.  No file may be added below `mvdm` or `opennt-host`:
-if a file would cease to be a byte-exact upstream file, true subset, or
-same-shaped minimal modification in an existing file, it is not admitted as a
-mirror file.  The mirror README is the index of every crop and modified
-expression.
+named adapter/ABI family. New mirror paths must correspond to actual original
+OpenNT files, retain their original relative paths and pass provenance and
+package-boundary admission. They may contain byte-exact source, registered
+true subsets or same-shaped minimal adaptations; project-invented files are
+not admitted as mirrors. The mirror README indexes every crop and modified
+expression. This permits recovering previously absent original files, not
+moving autonomous implementations into newly invented mirror carriers.
 
 ## Package-first recovery boundary
 
@@ -401,10 +403,11 @@ guest-image manifest and loads bytes through the selected backend binding; subse
 communication is only BOP, interrupts, ports and guest-memory contracts.
 
 Every mirror file is exact upstream, a registered true subset, or a registered
-same-shaped minimal modification in an existing upstream-relative file. A
+same-shaped minimal modification in an original upstream-relative file. A
 changed expression carries `DIVERGENCE:` and a README register row. A material
-added implementation belongs in a named adapter/ABI family; neither mirror may
-gain a file.
+added implementation belongs in a named adapter/ABI family. Either mirror may
+gain an audited original OpenNT file at its original relative path, but never
+a project-invented file.
 
 Existing project-owned component code is an audited recovery source, not
 discarded work. Before authoring a replacement, a packet reviews applicable

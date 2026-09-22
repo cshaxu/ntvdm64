@@ -1,6 +1,7 @@
 param(
     [string]$RepositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path,
-    [string]$GuestUser = 'O:\winnt\system32\USER.EXE'
+    [string]$GuestUser = 'O:\winnt\system32\USER.EXE',
+    [string]$BootstrapFaultReport
 )
 $ErrorActionPreference = 'Stop'
 
@@ -74,6 +75,10 @@ Assert-ConsumerBytes '@ValidateHwnd@4' 40 '66-83-C0-44'
 Assert-ConsumerBytes '@ValidateHwnd@4' 40 '67-66-39-48-28'
 Assert-ConsumerBytes '@ValidateHwnd@4' 40 '67-66-8B-40-2C'
 Assert-ConsumerBytes '__GetDesktopWindow@0' 26 '67-66-8B-40-08'
+# Pin the full TEB -> desktop -> window -> HWND chain. A null desktop is not
+# a harmless empty desktop: address 8 is mapped DOS IVT memory in this worker.
+Assert-ConsumerBytes '__GetDesktopWindow@0' 26 '64-66-A1-18-00-67-66-8D-48-44-67-66-8B-40-5C-67-66-8B-40-08-67-66-2B-41-1C-CB'
+Assert-ConsumerBytes '_GetDesktopWindow@0' 20 '67-66-8B-00'
 Assert-ConsumerBytes 'GETTICKCOUNT' 38 '66-BA-00-00-FE-7F'
 Assert-ConsumerBytes 'GETTICKCOUNT' 38 '67-66-8B-02-67-66-F7-62-04-66-0F-AC-D0-18'
 # Window/menu/class offsets used by the original optimized graph walkers.
@@ -138,9 +143,28 @@ $rows = foreach ($entry in $local) {
     if ($dispatch -notmatch ('\b' + $name + '\b')) { throw "No dispatch entry: $name" }
     [pscustomobject]@{ mapping = $name; originalThunk = $function }
 }
+$failureWitness = $null
+if ($BootstrapFaultReport) {
+    $report = Get-Content -Raw -LiteralPath $BootstrapFaultReport
+    $fault = [regex]::Match($report, '(?m)^guest-fault n=0e error=00000004 csip=[0-9a-f]{4}:0000011f cr2=([0-9a-f]{8}) teb=([0-9a-f]{8}) desktop=00000000 delta=00000000 low8=([0-9a-f]{8})\s*$')
+    if (!$fault.Success -or $fault.Groups[1].Value -ne $fault.Groups[3].Value -or
+        $fault.Groups[2].Value -eq '00000000' -or $fault.Groups[1].Value -eq '00000000' -or
+        (Get-CodeOffset '_GetDesktopWindow@0') + 15 -ne 0x11f) {
+        throw 'Report does not prove the null desktop -> DOS IVT -> invalid WND chain'
+    }
+    $failureWitness = @{
+        result = 'CONFIRMED_MISSING_DESKTOP_PUBLICATION'
+        evidenceKind = 'known failing runtime attribution; not a functional pass'
+        faultLinearAddress = $fault.Groups[1].Value
+        guestTeb = $fault.Groups[2].Value
+        desktopInfo = '00000000'
+        clientDelta = '00000000'
+    }
+}
 [pscustomobject]@{
     result = 'WOW_USER_PROFILE_SOURCE_AND_BINARY_OK'
     evidenceKind = 'read-only source and pinned-binary inspection; not runtime acceptance'
+    failureWitness = $failureWitness
     guestHash = $expectedHash
     guestProfile = 'PMODE32'
     consumerChecks = $script:consumerChecks

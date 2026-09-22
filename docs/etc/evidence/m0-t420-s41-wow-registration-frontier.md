@@ -9,7 +9,8 @@ that WOW16 acceptance has completed.
 ## Reproduction
 
 The S41 x86 composition (`build/M0-T420/S41/w1-composition-r1`) was copied
-only to the isolated `O:\w1a420` package.  It was started as:
+only to an isolated short-path test package under the governed build tree.
+It was started as:
 
 ```text
 run16.exe system32\WRITE.EXE
@@ -325,7 +326,8 @@ gates.
 The earlier `87` result from a package under the deep build directory was not
 a product failure: original `BaseCheckVDM` rejects a DOS current directory
 longer than its 64-character contract.  The same formal binaries were copied
-unchanged to the short, isolated `O:\\s41` package.  `run16.exe command.com /c
+unchanged to a short, isolated test package under `build/M0-T420/S41/`.
+`run16.exe command.com /c
 ver` returned `0` and printed `MS-DOS Version 5.00.500`; this proves the
 three-program baseline before the WOW observation.
 
@@ -344,12 +346,12 @@ provide paging; S41 creates its worker-owned domain only at the reached WOW
 boundary, after the original owner has disabled A20 wrapping.  It is neither
 a pre-DOSX private-CR3 experiment nor a guest modification.  The isolated
 processes are test-only and are removed after the remaining S41 regression
-run; `O:\\winnt` and all guest media remain untouched.
+run; `O:/winnt` and all guest media remain untouched.
 
 ## S41 formal regression
 
 The formal `run16.exe`, `basesrv.exe` and `ntvdm.exe` were deployed together
-to `O:\\winnt` only after that package was idle; all three deployed SHA-256
+to `O:/winnt` only after that package was idle; all three deployed SHA-256
 values matched `build/M0-T420/S41/w1-composition-r1`.  The current
 `console-startup-observer.exe` was rebuilt from its selected source before
 the run: the prior deployed observer predated its
@@ -361,7 +363,7 @@ not a guest or product failure.
 `s41-domain-published-r2` then passed every one of its 17 text-gated routes:
 interactive and nested COMMAND, repeated/direct MEM, native streams and EOF,
 direct and nested `/c`, guest exit status 7, and EDIT return.  The summary is
-`O:\\winnt\\logs\\s41-domain-published-r2-summary.json`.  This regression
+`O:/winnt/logs/s41-domain-published-r2-summary.json`.  This regression
 gate does not promote WRITE to a passing application workload; it establishes
 that the S41 worker-domain binding does not regress the previously accepted
 DOS product surface.

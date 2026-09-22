@@ -1,0 +1,3 @@
+/* Synthetic host RT_BITMAP resources, not guest media. */
+101 BITMAP "fixture-bitmap.bmp"
+S40BITMAP BITMAP "fixture-bitmap.bmp"

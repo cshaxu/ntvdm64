@@ -194,7 +194,10 @@ int session_thread_bind_owned(session *instance, uint32_t binding_owner);
 int session_thread_bind_owned_source(session *instance, uint32_t binding_owner,
     const char *source_name);
 int session_thread_unbind(session *instance);
-session *session_thread_current(void);
+/* This worker-private accessor is consumed by the /Gz WOW32 provider, while
+ * session.c deliberately retains the original C ABI.  State it explicitly so
+ * the import remains cdecl rather than inheriting the provider's default. */
+session *__cdecl session_thread_current(void);
 int session_binding_diagnostic_snapshot(const session *instance,
     session_binding_diagnostic *diagnostic_out);
 int session_arm_termination_escape(session *instance);

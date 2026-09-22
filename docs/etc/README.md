@@ -2,8 +2,12 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T420 prior status excerpts](evidence/m0-t420-prior-status-records.md) | T420 evidence | Retained S30 chronology moved from Current to preserve the control-plane size limit. | Retain with T420 evidence. |
+| [S42 WOW32 successor handoff](evidence/m0-t420-s42-wow32-successor-handoff.md) | M0 T420 S42 | Owner-directed preservation, partial-code disposition and transfer to the queue-head WOW32 proposal; final delivery checks. | Retain through successor acceptance. |
 | [S40 WOW32 production closure checklist](operations/m0-t420-s40-wow32-closure-checklist.md) | T420 research handoff | Detailed W1--W7 obligations mapped to S41--S45. | Retain through WOW32 acceptance. |
 | [S40 research and replanning conclusion](evidence/m0-t420-s40-wow32-research-replan.md) | M0 T420 S40 | Owner-approved research closure, inherited unaccepted work and complete S41--S48 receiver mapping. | Retain with T420 evidence. |
+| [S41 WOW registration frontier](evidence/m0-t420-s41-wow-registration-frontier.md) | M0 T420 S41 | One CCPU worker-domain user-data carrier, original DOSX page-table entry and 17-route regression evidence. | Retain through S45 acceptance. |
+| [S42 W1/W2 lifecycle binding ledger](evidence/m0-t420-s42-w1-w2-lifecycle-binding-ledger.md) | M0 T420 S42 | Records original task/window/message owners, the one-runtime parent/DLL ABI closure, and the remaining aggregate-registration gate. | Retain through S45 acceptance. |
 | [T420 S39 DOSX capability acceptance](evidence/m0-t420-s39-dpmi-guest-capability-review.md) | M0 T420 S39 | Original guest provenance, BOP attribution and formal product regression evidence. | Retain through T420 completion. |
 | [T420 S40 WOW USER profile](evidence/m0-t420-s40-wow-user-profile.md) | M0 T420 S40 | Pinned USER.EXE instruction evidence, 26 original API mappings and bounded recovery requirements. | Retain through WOW32 runtime acceptance; historical attempts are not passing results. |
 | [T420 S36 suballocator capability review](evidence/m0-t420-s36-suballoc-capability-review.md) | M0 T420 S36 | Original allocator and XMS/DPMI caller audit; relocation, failure and lifecycle acceptance. | Active supporting evidence; no closure claimed. |

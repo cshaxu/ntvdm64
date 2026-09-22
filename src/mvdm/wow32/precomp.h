@@ -138,4 +138,13 @@
 #include "wole2.h"
 #include "wparam.h"
 #include <limits.h>
+/* DIVERGENCE(MVDM-HOST-DIV-297): private WW/WC indices use scoped native
+ * storage; ordinary USER indices retain their public API calls. */
+#define WOW_USER_PRIVATE_REDIRECT
+#include "wow_user_private_access.h"
+/* DIVERGENCE(MVDM-HOST-DIV-298): original WOW menu thunks consume the
+ * ConvertMenu16 private owner-draw format, not native USER32 templates. */
+#include "wow_menu_parser_bindings.h"
+#undef LoadMenuIndirect
+#define LoadMenuIndirect wow_user_load_menu_indirect
 

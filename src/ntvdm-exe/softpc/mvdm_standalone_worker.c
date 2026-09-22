@@ -7,6 +7,7 @@
 #include "mvdm_softpc_termination.h"
 #include "ntvdm-exe/session/session.h"
 #include "ntvdm-exe/monitor/include/monitor_context.h"
+#include "ntvdm-exe/wow/include/wow_user_session_binding.h"
 
 /* Original BaseClient capture storage is private to this worker process. */
 PVOID CsrPortHeap;
@@ -18,6 +19,9 @@ static BOOL worker_memory;
 static BOOL worker_escape;
 static BOOL worker_started;
 static BOOL worker_session_initialized;
+static wow_user_runtime worker_wow_runtime = WOW_USER_RUNTIME_INITIALIZER;
+static wow_user_session_binding worker_wow_binding;
+static BOOL worker_wow_attached;
 
 static int mvdm_standalone_worker_cleanup(int result)
 {
@@ -30,6 +34,10 @@ static int mvdm_standalone_worker_cleanup(int result)
     if (worker_memory) {
         mvdm_softpc_guest_memory_end(&worker_session);
         worker_memory=FALSE;
+    }
+    if (worker_wow_attached) {
+        (void)wow_user_session_detach(&worker_wow_binding);
+        worker_wow_attached=FALSE;
     }
     if (worker_thread) {
         (void)session_thread_unbind(&worker_session);
@@ -71,6 +79,11 @@ DWORD mvdm_standalone_worker_begin(void)
         error=ERROR_INVALID_STATE; goto fail;
     }
     worker_thread=TRUE;
+    if (!wow_user_session_attach(&worker_wow_binding, &worker_session,
+            &worker_wow_runtime)) {
+        error=ERROR_INVALID_STATE; goto fail;
+    }
+    worker_wow_attached=TRUE;
     if (!mvdm_monitor_bind_current_thread()) {
         error=ERROR_INVALID_STATE; goto fail;
     }

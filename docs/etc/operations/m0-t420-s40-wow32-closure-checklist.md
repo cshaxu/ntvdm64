@@ -1,6 +1,24 @@
 # WOW32 production closure checklist
 
 This retains the detailed obligations discovered during S40 research.
+
+Current owner: [WOW32 successor](../../proposals/proposal-wow32-complete-runtime-recovery-001.md).
+The owner transferred all unfinished gates on 2026-09-21. Historical S40--S48
+references below describe earlier plans, not current task assignments. No
+unchecked item is accepted by the transfer.
+
+| Retained obligation | Current receiver |
+| --- | --- |
+| W1.0/W1.1 shared data, client objects and thread publication | Successor S1, using delivered S41 and partial S42 inputs |
+| W1.2--W1.5 and all W2 | Successor S2; no fixture-only task/exit closure |
+| W3 and W4 | Successor S3 |
+| W5/W6 and full registrar | Successor S4 |
+| W7, OEM-WOW and immutable WOW16/WRITE | Successor S5 |
+
+Every already implemented slot must be wired immediately; typed explicit
+failure placeholders are allowed only for identified unfinished owners.
+Aggregate acceptance requires replacing all selected placeholders. This
+supersedes the older W7-only-publication wording retained below.
 The owner superseded its single-S execution plan with five consecutive WOW32
 packets in the [proposal](../../proposals/proposal-mvdm-runtime-package-completion-001.md).
 Only [Current](../../states/CURRENT.md) admits the active packet.

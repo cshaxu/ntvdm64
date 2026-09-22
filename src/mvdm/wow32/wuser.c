@@ -17,6 +17,9 @@
 #include "precomp.h"
 #pragma hdrstop
 
+/* DIVERGENCE(MVDM-HOST-DIV-295): bounded synchronous bitmap resource alias. */
+#include "wow_callback_frame_lease.h"
+
 
 MODNAME(wuser.c);
 
@@ -2107,16 +2110,24 @@ ULONG FASTCALL WU32LoadBitmap(PVDMFRAME pFrame)
     PSZ psz2;
     register PLOADBITMAP16 parg16;
     LPBYTE pResData = NULL;
+    wow_callback_frame_lease resource = {0};
 
     GETARGPTR(pFrame, sizeof(LOADBITMAP16), parg16);
     GETPSZIDPTR(parg16->f2, psz2);
     GETMISCPTR(parg16->f3, pResData);
 
+    /* Preserve original selector demand loading before acquiring the bytes. */
+    if (pResData && !wow_callback_frame_acquire_protected_vp(
+        FETCHDWORD(parg16->f3), FETCHDWORD(parg16->f4),
+        GUEST_MEMORY_ACCESS_READ, &resource)) goto bitmap_cleanup;
+
     ul = GETHBITMAP16((pfnOut.pfnWOWLoadBitmapA)(HINSTRES32(parg16->f1),
                                      psz2,
-                                     pResData,
+                                     pResData ? resource.bytes : NULL,
                                      parg16->f4));
 
+bitmap_cleanup:
+    if (resource.lease) wow_callback_frame_release(&resource, 0);
     FREEMISCPTR(pResData);
     FREEPSZIDPTR(psz2);
     FREEARGPTR(parg16);

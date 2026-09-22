@@ -29,6 +29,19 @@ HANDLE opennt_create_cdecl_thread_named(
     LPDWORD thread_id,
     const char *source_name);
 
+/* `nt_thred.c::host_CreateThread` already has the public Win32
+ * LPTHREAD_START_ROUTINE contract.  It must not cross the cdecl-only bridge
+ * used by the historical timer and redirector callbacks: on x86 that would
+ * make both caller and callee pop the one callback argument. */
+HANDLE opennt_create_winapi_thread_named(
+    LPSECURITY_ATTRIBUTES attributes,
+    SIZE_T stack_bytes,
+    LPTHREAD_START_ROUTINE start_routine,
+    LPVOID parameter,
+    DWORD flags,
+    LPDWORD thread_id,
+    const char *source_name);
+
 HANDLE opennt_create_void_cdecl_thread(
     LPSECURITY_ATTRIBUTES attributes,
     SIZE_T stack_bytes,
@@ -66,10 +79,17 @@ HANDLE opennt_create_void_cdecl_parameter_thread_named(
  * the host-local binding immediately before the real exit. */
 VOID WINAPI opennt_exit_thread(DWORD exit_code);
 
+#if defined(OPENNT_HOST_CREATE_THREAD_ABI)
+#define CreateThread(attributes, stack_bytes, start_routine, parameter, flags, thread_id) \
+    opennt_create_winapi_thread_named((attributes), (stack_bytes), \
+        (LPTHREAD_START_ROUTINE)(start_routine), (parameter), (flags), (thread_id), \
+        #start_routine)
+#else
 #define CreateThread(attributes, stack_bytes, start_routine, parameter, flags, thread_id) \
     opennt_create_cdecl_thread_named((attributes), (stack_bytes), \
         (OPENNT_CDECL_THREAD_START_ROUTINE)(start_routine), (parameter), (flags), (thread_id), \
         #start_routine)
+#endif
 
 #define ExitThread(exit_code) opennt_exit_thread((exit_code))
 

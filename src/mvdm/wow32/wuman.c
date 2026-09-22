@@ -13,6 +13,7 @@
 
 
 #include "precomp.h"
+#include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
 #pragma hdrstop
 
 MODNAME(wuman.c);
@@ -91,7 +92,6 @@ ULONG FASTCALL WU32NotifyWow(PVDMFRAME pFrame)
 
         case FUN_FINALUSERINIT:
             {
-                static BYTE CallCsrFlag = 0;
                 extern DWORD   gpsi;
                 PUSERCLIENTGLOBALS pfinit16;
                 WORD UNALIGNED *pwMaxDWPMsg;
@@ -119,14 +119,16 @@ ULONG FASTCALL WU32NotifyWow(PVDMFRAME pFrame)
                 if (pfinit16->lpgpsi) {
                     BYTE **lpT;
                     GETVDMPTR(pfinit16->lpgpsi, sizeof(DWORD), lpT);
-                    *lpT = (BYTE *)gpsi;
+                    *lpT = (BYTE *)mvdm_softpc_wow_page_domain_guest_shared_info();
                     FLUSHVDMCODEPTR((ULONG)pfinit16->lpgpsi, sizeof(DWORD), lpT);
                     FREEVDMPTR(lpT);
                 }
                 if (pfinit16->lpCsrFlag) {
                     BYTE **lpT;
                     GETVDMPTR(pfinit16->lpCsrFlag, sizeof(DWORD), lpT);
-                    *lpT = (LPSTR)&CallCsrFlag;
+                    /* DIVERGENCE(MVDM-HOST-DIV-300): USER16 reads/writes
+                     * this original flag through the worker's guest domain. */
+                    *lpT = (LPSTR)mvdm_softpc_wow_page_domain_guest_csr_flag();
                     FLUSHVDMCODEPTR((ULONG)pfinit16->lpCsrFlag, sizeof(DWORD), lpT);
                     FREEVDMPTR(lpT);
                 }

@@ -41,7 +41,21 @@ extern LONG VdmRemoveVirtualMemory(ULONG intel_address);
 /* These are offsets read from the pinned immutable USER.EXE profile, not
  * inferred from a modern host TEB. */
 #define MVDM_SOFTPC_TEB_SELF 0x18u
-#define MVDM_SOFTPC_CLIENT_VIEW_BYTES (5u * MVDM_SOFTPC_PAGE_BYTES)
+#define MVDM_SOFTPC_TEB_DESKTOP_INFO 0x5cu
+#define MVDM_SOFTPC_TEB_CLIENT_DELTA 0x60u
+#define MVDM_SOFTPC_TEB_CACHED_HWND 0x6cu
+#define MVDM_SOFTPC_TEB_CACHED_WND 0x70u
+#define MVDM_SOFTPC_SHAREDINFO_SERVERINFO 0u
+#define MVDM_SOFTPC_SHAREDINFO_HANDLE_TABLE 4u
+#define MVDM_SOFTPC_SERVERINFO_HANDLE_COUNT 4u
+/* USER16's immutable PMODE32 profile consumes the checked/debug HANDLEENTRY
+ * layout: phead, pOwner, bType, bFlags, wUniq, debug tail.  Do not use the
+ * host compiler's HANDLEENTRY size here. */
+#define MVDM_SOFTPC_HANDLE_ENTRY_BYTES 16u
+#define MVDM_SOFTPC_HANDLE_ENTRY_COUNT 0x10000u
+#define MVDM_SOFTPC_HANDLE_TABLE_BYTES \
+    (MVDM_SOFTPC_HANDLE_ENTRY_BYTES * MVDM_SOFTPC_HANDLE_ENTRY_COUNT)
+#define MVDM_SOFTPC_CLIENT_PREFIX_BYTES (2u * MVDM_SOFTPC_PAGE_BYTES)
 
 typedef struct mvdm_softpc_wow_page_domain {
     session *owner;
@@ -57,14 +71,21 @@ typedef struct mvdm_softpc_wow_page_domain {
     ULONG guest_server_info;
     ULONG guest_handle_table;
     ULONG guest_teb;
+    ULONG guest_csr_flag;
     ULONG wow_gdt;
     ULONG dosx_gdt;
     USHORT dosx_gdt_limit;
-    int wow_context_active;
+    int wow_context_selected;
     int active;
 } mvdm_softpc_wow_page_domain;
 
 static mvdm_softpc_wow_page_domain domain;
+
+static ULONG page_domain_round_page(ULONG bytes)
+{
+    return (bytes + MVDM_SOFTPC_PAGE_BYTES - 1u) &
+        ~(MVDM_SOFTPC_PAGE_BYTES - 1u);
+}
 
 /* Default-off lifecycle evidence for the finite S41 binding.  The existing
  * scalar observer performs no I/O unless its report-path environment variable
@@ -129,23 +150,46 @@ static void page_domain_store_descriptor(ULONG gdt, ULONG selector,
 static int page_domain_create_client_view(void)
 {
     ULONG address = 0u;
+    ULONG handle_table;
+    ULONG teb;
+    ULONG client_bytes;
+    ULONG index;
     NTSTATUS status;
 
-    status = VdmAllocateVirtualMemory(&address, MVDM_SOFTPC_CLIENT_VIEW_BYTES,
-        TRUE);
+    handle_table = MVDM_SOFTPC_CLIENT_PREFIX_BYTES;
+    teb = page_domain_round_page(handle_table + MVDM_SOFTPC_HANDLE_TABLE_BYTES);
+    client_bytes = teb + MVDM_SOFTPC_TEB_BYTES + MVDM_SOFTPC_PAGE_BYTES;
+    if (client_bytes < teb) return 0;
+    status = VdmAllocateVirtualMemory(&address, client_bytes, TRUE);
     if (status < 0) return 0;
     domain.client_allocation = address;
     domain.guest_shared_info = address;
     domain.guest_server_info = address + MVDM_SOFTPC_PAGE_BYTES;
-    domain.guest_handle_table = address + 2u * MVDM_SOFTPC_PAGE_BYTES;
-    domain.guest_teb = address + 3u * MVDM_SOFTPC_PAGE_BYTES;
-    c_sas_fills(address, 0u, MVDM_SOFTPC_CLIENT_VIEW_BYTES);
+    domain.guest_handle_table = address + handle_table;
+    domain.guest_teb = address + teb;
+    /* WU32NotifyWow's original zero-initialized CallCsrFlag is shared only
+     * with USER16's TEST/CLEARCALLSERVERCONDITION macros. Its writable byte
+     * needs guest backing, not the WOW32 DLL's native static address. */
+    domain.guest_csr_flag = domain.guest_teb + MVDM_SOFTPC_TEB_BYTES;
+    c_sas_fills(address, 0u, client_bytes);
 
-    /* SHAREDINFO: gpsi->psi and gpsi->aheList. The table's contents and
-     * SERVERINFO count are owned by the later original object producers;
-     * this carrier must not manufacture an initial window/handle graph. */
-    c_sas_storedw(domain.guest_shared_info, domain.guest_server_info);
-    c_sas_storedw(domain.guest_shared_info + 4u, domain.guest_handle_table);
+    /* SHAREDINFO and SERVERINFO use the source-pinned USER16 offsets.  The
+     * initial free-table sentinel follows original handtabl.c; no native
+     * phead/pOwner pointer is ever copied into guest memory. */
+    c_sas_storedw(domain.guest_shared_info + MVDM_SOFTPC_SHAREDINFO_SERVERINFO,
+        domain.guest_server_info);
+    c_sas_storedw(domain.guest_shared_info + MVDM_SOFTPC_SHAREDINFO_HANDLE_TABLE,
+        domain.guest_handle_table);
+    c_sas_storedw(domain.guest_server_info + MVDM_SOFTPC_SERVERINFO_HANDLE_COUNT,
+        MVDM_SOFTPC_HANDLE_ENTRY_COUNT);
+    for (index = 0u; index < MVDM_SOFTPC_HANDLE_ENTRY_COUNT; ++index) {
+        ULONG entry = domain.guest_handle_table +
+            index * MVDM_SOFTPC_HANDLE_ENTRY_BYTES;
+
+        c_sas_storedw(entry, index + 1u);
+        c_sas_storedw(entry + 4u, 0u);
+        c_sas_storedw(entry + 8u, 0x00010000u);
+    }
 
     /* Native NT's context switch makes FS:18h a self pointer. This projection
      * only publishes that source-defined guest-linear value; it never aliases
@@ -281,15 +325,16 @@ int mvdm_softpc_wow_page_domain_enter(void)
     if (domain.owner != owner) return 0;
     c_setCR3(domain.directory);
     c_setCR0(c_getCR0() | MVDM_SOFTPC_CR0_PG);
+    if (domain.wow_context_selected)
+        c_setGDT_BASE_LIMIT(domain.wow_gdt, domain.dosx_gdt_limit);
     page_domain_report("wow-domain-entered");
     return 1;
 }
 
 void mvdm_softpc_wow_page_domain_leave_protected(void)
 {
-    if (domain.wow_context_active) {
+    if (domain.wow_context_selected && c_getGDT_BASE() == domain.wow_gdt) {
         c_setGDT_BASE_LIMIT(domain.dosx_gdt, domain.dosx_gdt_limit);
-        domain.wow_context_active = 0;
     }
     if (domain.active && (c_getCR0() & MVDM_SOFTPC_CR0_PG) != 0u)
         c_setCR0(c_getCR0() & ~MVDM_SOFTPC_CR0_PG);
@@ -302,6 +347,11 @@ int mvdm_softpc_wow_page_domain_reenter_protected(void)
     if ((c_getCR0() & 1u) == 0u) return 0;
     c_setCR3(domain.directory);
     c_setCR0(c_getCR0() | MVDM_SOFTPC_CR0_PG);
+    /* The native NT user GDT survives a DOSX real-mode excursion. Our
+     * temporary DOSX view must likewise not revoke the already selected
+     * WOW flat/TEB selectors when the original protected caller resumes. */
+    if (domain.wow_context_selected)
+        c_setGDT_BASE_LIMIT(domain.wow_gdt, domain.dosx_gdt_limit);
     page_domain_report("wow-domain-reentered");
     return 1;
 }
@@ -316,7 +366,7 @@ int mvdm_softpc_wow_page_domain_activate_wow_context(void)
     if (!domain.active || domain.wow_gdt == 0u ||
         (c_getCR0() & MVDM_SOFTPC_CR0_PG) == 0u) return 0;
     c_setGDT_BASE_LIMIT(domain.wow_gdt, domain.dosx_gdt_limit);
-    domain.wow_context_active = 1;
+    domain.wow_context_selected = 1;
     page_domain_report("wow-domain-wow-gdt-active");
     return 1;
 }
@@ -324,4 +374,71 @@ int mvdm_softpc_wow_page_domain_activate_wow_context(void)
 unsigned long mvdm_softpc_wow_page_domain_guest_shared_info(void)
 {
     return domain.active ? domain.guest_shared_info : 0u;
+}
+
+unsigned long mvdm_softpc_wow_page_domain_guest_teb(void)
+{
+    return domain.active ? domain.guest_teb : 0u;
+}
+
+unsigned long mvdm_softpc_wow_page_domain_guest_csr_flag(void)
+{
+    return domain.active ? domain.guest_csr_flag : 0u;
+}
+
+static int page_domain_client_desktop(ULONG desktop_info, ULONG delta)
+{
+    if (!domain.active || domain.owner != session_thread_current() ||
+        !(c_getCR0() & MVDM_SOFTPC_CR0_PG) || c_getCR3() != domain.directory)
+        return 0;
+    /* Original desktop.c publishes client pDeskInfo and ulClientDelta as
+     * one thread context. CCPU is suspended at this caller-owned boundary.
+     * Invalidate ValidateHwnd's cached pair before changing that context. */
+    c_sas_storedw(domain.guest_teb + MVDM_SOFTPC_TEB_CACHED_HWND, 0u);
+    c_sas_storedw(domain.guest_teb + MVDM_SOFTPC_TEB_CACHED_WND, 0u);
+    c_sas_storedw(domain.guest_teb + MVDM_SOFTPC_TEB_CLIENT_DELTA, delta);
+    c_sas_storedw(domain.guest_teb + MVDM_SOFTPC_TEB_DESKTOP_INFO, desktop_info);
+    return 1;
+}
+
+int mvdm_softpc_wow_page_domain_set_client_desktop(
+    unsigned long desktop_info, unsigned long delta)
+{
+    if (!desktop_info) return 0;
+    return page_domain_client_desktop(desktop_info, delta);
+}
+
+int mvdm_softpc_wow_page_domain_clear_client_desktop(void)
+{
+    return page_domain_client_desktop(0u, 0u);
+}
+
+int mvdm_softpc_wow_page_domain_publish_handle(unsigned short index,
+    unsigned short uniqueness, unsigned char type, unsigned char flags)
+{
+    (void)uniqueness;
+    (void)type;
+    (void)flags;
+    if (!domain.active) return 1;
+    if (index == 0u || index == 0xffffu) return 0;
+    /* Identity alone is not an original HANDLEENTRY publication. phead still
+     * contains the free-list successor, so making this entry typed would let
+     * HMValidateHandle interpret DOS low memory as a WND. Until the source-
+     * owned object producer supplies the complete view, fail without writes.
+     * This is an outstanding S42 binding, never a functional fallback/pass. */
+    return 0;
+}
+
+int mvdm_softpc_wow_page_domain_retire_handle(unsigned short index)
+{
+    ULONG entry;
+
+    if (!domain.active) return 1;
+    if (index == 0u || index == 0xffffu) return 0;
+    entry = domain.guest_handle_table +
+        (ULONG)index * MVDM_SOFTPC_HANDLE_ENTRY_BYTES;
+    c_sas_storedw(entry, (ULONG)index + 1u);
+    c_sas_storedw(entry + 4u, 0u);
+    c_sas_storedw(entry + 8u, 0u);
+    return 1;
 }

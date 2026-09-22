@@ -1,3 +1,6 @@
+/* DIVERGENCE(MVDM-HOST-DIV-294): explicit cdecl for the existing CPU40
+ * worker exports consumed by the original /Gz WOW32 DLL. Parameter types,
+ * implementation and ownership are unchanged; no stack-incompatible aliases. */
 /*++ BUILD Version: 0001
 
 Copyright (c) 1990  Microsoft Corporation
@@ -111,7 +114,7 @@ int RcMessageBox(USHORT wId, CHAR *msg1, CHAR *msg2, ULONG dwOptions);
 
 #define  SEB_DEFBUTTON  0x8000  /* Mask to make this button default */
 
-ULONG WOWSysErrorBox(
+ULONG __cdecl WOWSysErrorBox(
     LPSTR  szTitle,
     LPSTR  szMessage,
     USHORT wBtn1,
@@ -121,7 +124,7 @@ ULONG WOWSysErrorBox(
 
 // Called by WOW to force VdmAllocateVirtualMemory to alloc blocks of
 // memory with ever increasing linear address's.
-VOID SetWOWforceIncrAlloc(
+VOID __cdecl SetWOWforceIncrAlloc(
     BOOL iEnable
     );
 
@@ -187,7 +190,7 @@ host_cpu_init(
 
 EXPORT
 VOID
-host_simulate(
+__cdecl host_simulate(
     VOID
     );
 
@@ -203,7 +206,7 @@ host_CreateThread(
     );
 
 VOID
-cpu_createthread(
+__cdecl cpu_createthread(
     HANDLE  hThread
     );
 
@@ -214,14 +217,14 @@ host_ExitThread(
     );
 
 
-EXPORT VOID host_com_close(int PortId);
-EXPORT int SuspendTimerThread(VOID);
-EXPORT int ResumeTimerThread(VOID);
+EXPORT VOID __cdecl host_com_close(int PortId);
+EXPORT int __cdecl SuspendTimerThread(VOID);
+EXPORT int __cdecl ResumeTimerThread(VOID);
 
 void *ch_malloc(unsigned int NumBytes);
 
 
-UCHAR *Sim32pGetVDMPointer(ULONG addr, UCHAR pm);
+UCHAR *__cdecl Sim32pGetVDMPointer(ULONG addr, UCHAR pm);
 #define Sim32GetVDMPointer(Addr,Size,Mode) Sim32pGetVDMPointer(Addr,Mode)
 
 #ifdef i386
@@ -379,35 +382,35 @@ extern ULONG      VdmFeatureBits;
 #else // not linked into monitor
 
 extern ULONG  getEAX(VOID);
-extern USHORT getAX(VOID);
+extern USHORT __cdecl getAX(VOID);
 extern UCHAR  getAL(VOID);
 extern UCHAR  getAH(VOID);
 extern ULONG  getEBX(VOID);
-extern USHORT getBX(VOID);
+extern USHORT __cdecl getBX(VOID);
 extern UCHAR  getBL(VOID);
 extern UCHAR  getBH(VOID);
 extern ULONG  getECX(VOID);
-extern USHORT getCX(VOID);
+extern USHORT __cdecl getCX(VOID);
 extern UCHAR  getCL(VOID);
 extern UCHAR  getCH(VOID);
 extern ULONG  getEDX(VOID);
-extern USHORT getDX(VOID);
+extern USHORT __cdecl getDX(VOID);
 extern UCHAR  getDL(VOID);
 extern UCHAR  getDH(VOID);
 extern ULONG  getESP(VOID);
-extern USHORT getSP(VOID);
+extern USHORT __cdecl getSP(VOID);
 extern ULONG  getEBP(VOID);
-extern USHORT getBP(VOID);
+extern USHORT __cdecl getBP(VOID);
 extern ULONG  getESI(VOID);
-extern USHORT getSI(VOID);
+extern USHORT __cdecl getSI(VOID);
 extern ULONG  getEDI(VOID);
-extern USHORT getDI(VOID);
+extern USHORT __cdecl getDI(VOID);
 extern ULONG  getEIP(VOID);
-extern USHORT getIP(VOID);
-extern USHORT getCS(VOID);
-extern USHORT getSS(VOID);
-extern USHORT getDS(VOID);
-extern USHORT getES(VOID);
+extern USHORT __cdecl getIP(VOID);
+extern USHORT __cdecl getCS(VOID);
+extern USHORT __cdecl getSS(VOID);
+extern USHORT __cdecl getDS(VOID);
+extern USHORT __cdecl getES(VOID);
 extern USHORT getFS(VOID);
 extern USHORT getGS(VOID);
 extern ULONG  getCF(VOID);
@@ -418,39 +421,39 @@ extern ULONG  getSF(VOID);
 extern ULONG  getIF(VOID);
 extern ULONG  getDF(VOID);
 extern ULONG  getOF(VOID);
-extern USHORT getMSW(VOID);
+extern USHORT __cdecl getMSW(VOID);
 extern USHORT getSTATUS(VOID);
 
 extern VOID setEAX(ULONG);
-extern VOID setAX(USHORT);
+extern VOID __cdecl setAX(USHORT);
 extern VOID setAH(UCHAR);
 extern VOID setAL(UCHAR);
 extern VOID setEBX(ULONG);
-extern VOID setBX(USHORT);
+extern VOID __cdecl setBX(USHORT);
 extern VOID setBH(UCHAR);
 extern VOID setBL(UCHAR);
 extern VOID setECX(ULONG);
-extern VOID setCX(USHORT);
+extern VOID __cdecl setCX(USHORT);
 extern VOID setCH(UCHAR);
 extern VOID setCL(UCHAR);
 extern VOID setEDX(ULONG);
-extern VOID setDX(USHORT);
+extern VOID __cdecl setDX(USHORT);
 extern VOID setDH(UCHAR);
 extern VOID setDL(UCHAR);
 extern VOID setESP(ULONG);
-extern VOID setSP(USHORT);
+extern VOID __cdecl setSP(USHORT);
 extern VOID setEBP(ULONG);
-extern VOID setBP(USHORT);
+extern VOID __cdecl setBP(USHORT);
 extern VOID setESI(ULONG);
-extern VOID setSI(USHORT);
+extern VOID __cdecl setSI(USHORT);
 extern VOID setEDI(ULONG);
-extern VOID setDI(USHORT);
+extern VOID __cdecl setDI(USHORT);
 extern VOID setEIP(ULONG);
-extern VOID setIP(USHORT);
-extern VOID setCS(USHORT);
-extern VOID setSS(USHORT);
-extern VOID setDS(USHORT);
-extern VOID setES(USHORT);
+extern VOID __cdecl setIP(USHORT);
+extern VOID __cdecl setCS(USHORT);
+extern VOID __cdecl setSS(USHORT);
+extern VOID __cdecl setDS(USHORT);
+extern VOID __cdecl setES(USHORT);
 extern VOID setFS(USHORT);
 extern VOID setGS(USHORT);
 extern VOID setCF(ULONG);
@@ -479,7 +482,7 @@ extern VOID setSTATUS(USHORT);
     buffer, Sim32pGetVDMPointer(address, mode), size), TRUE)
 
 #define Sim32SetVDMMemory( address, size, buffer, mode) (memcpy( \
-    Sim32pGetVDMPointer(address, mode), buffer, size), TRUE)
+    __cdecl Sim32pGetVDMPointer(address, mode), buffer, size), TRUE)
 
 // Address conversion macros
 
@@ -558,25 +561,25 @@ extern VOID setCH(UCHAR val);
 extern VOID setDH(UCHAR val);
 extern VOID setBH(UCHAR val);
 
-extern USHORT getAX(VOID);
-extern USHORT getCX(VOID);
-extern USHORT getDX(VOID);
-extern USHORT getBX(VOID);
-extern USHORT getSP(VOID);
-extern USHORT getBP(VOID);
-extern USHORT getSI(VOID);
-extern USHORT getDI(VOID);
-extern USHORT getIP(VOID);
+extern USHORT __cdecl getAX(VOID);
+extern USHORT __cdecl getCX(VOID);
+extern USHORT __cdecl getDX(VOID);
+extern USHORT __cdecl getBX(VOID);
+extern USHORT __cdecl getSP(VOID);
+extern USHORT __cdecl getBP(VOID);
+extern USHORT __cdecl getSI(VOID);
+extern USHORT __cdecl getDI(VOID);
+extern USHORT __cdecl getIP(VOID);
 
-extern VOID setAX(USHORT val);
-extern VOID setCX(USHORT val);
-extern VOID setDX(USHORT val);
-extern VOID setBX(USHORT val);
-extern VOID setSP(USHORT val);
-extern VOID setBP(USHORT val);
-extern VOID setSI(USHORT val);
-extern VOID setDI(USHORT val);
-extern VOID setIP(USHORT val);
+extern VOID __cdecl setAX(USHORT val);
+extern VOID __cdecl setCX(USHORT val);
+extern VOID __cdecl setDX(USHORT val);
+extern VOID __cdecl setBX(USHORT val);
+extern VOID __cdecl setSP(USHORT val);
+extern VOID __cdecl setBP(USHORT val);
+extern VOID __cdecl setSI(USHORT val);
+extern VOID __cdecl setDI(USHORT val);
+extern VOID __cdecl setIP(USHORT val);
 
 extern ULONG getEAX(VOID);
 extern ULONG getECX(VOID);
@@ -598,17 +601,17 @@ extern VOID setESI(ULONG val);
 extern VOID setEDI(ULONG val);
 extern VOID setEIP(ULONG val);
 
-extern USHORT getES(VOID);
-extern USHORT getCS(VOID);
-extern USHORT getSS(VOID);
-extern USHORT getDS(VOID);
+extern USHORT __cdecl getES(VOID);
+extern USHORT __cdecl getCS(VOID);
+extern USHORT __cdecl getSS(VOID);
+extern USHORT __cdecl getDS(VOID);
 extern USHORT getFS(VOID);
 extern USHORT getGS(VOID);
 
-extern VOID setES(USHORT val);
-extern VOID setCS(USHORT val);
-extern VOID setSS(USHORT val);
-extern VOID setDS(USHORT val);
+extern VOID __cdecl setES(USHORT val);
+extern VOID __cdecl setCS(USHORT val);
+extern VOID __cdecl setSS(USHORT val);
+extern VOID __cdecl setDS(USHORT val);
 extern VOID setFS(USHORT val);
 extern VOID setGS(USHORT val);
 
@@ -625,7 +628,7 @@ extern ULONG getIOPL(VOID);
 extern ULONG getNT(VOID);
 extern USHORT getSTATUS(VOID);
 extern ULONG getEFLAGS(VOID);
-extern USHORT getMSW(VOID);
+extern USHORT __cdecl getMSW(VOID);
 
 extern VOID setAF(ULONG val);
 extern VOID setCF(ULONG val);

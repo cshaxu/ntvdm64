@@ -41,7 +41,7 @@ if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
     $RepositoryRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 }
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
-$wow = Join-Path $root 'src/mvdm-host/wow32'
+$wow = Join-Path $root 'src/mvdm/wow32'
 $adapterWow = Join-Path $root 'src/ntvdm-exe/wow'
 $manifest = Join-Path $wow 'sources'
 $definition = Join-Path $wow 'wow32.def'
@@ -64,8 +64,23 @@ if (!(Test-Path -LiteralPath $parentImportLibraryPath -PathType Leaf)) {
 $providerSupportSources = @(
     (Join-Path $adapterWow 'wow_callback_frame_lease.c'),
     (Join-Path $adapterWow 'wow_sim32_pointer_compat.c'),
-    (Join-Path $adapterWow 'wow_user_callback_callconv.c'),
     (Join-Path $adapterWow 'wow_private_user_compat.c'),
+    (Join-Path $adapterWow 'wow_bitmap_bindings.c'),
+    (Join-Path $adapterWow 'wow_window_words_binding.c'),
+    (Join-Path $adapterWow 'wow_user_object_bindings.c'),
+    (Join-Path $adapterWow 'wow_cleanup_bindings.c'),
+    (Join-Path $adapterWow 'wow_user_borrow_scope.c'),
+    (Join-Path $adapterWow 'wow_class_client_bindings.c'),
+    (Join-Path $adapterWow 'wow_task_event_binding.c'),
+    (Join-Path $adapterWow 'wow_task_profile_binding.c'),
+    (Join-Path $adapterWow 'wow_user_message_bridge.c'),
+    (Join-Path $adapterWow 'wow_user_task_lifecycle.c'),
+    (Join-Path $adapterWow 'wow_dialog_creation_binding.c'),
+    (Join-Path $adapterWow 'wow_user_thunk_scope.c'),
+    (Join-Path $adapterWow 'wow_user_private_access.c'),
+    (Join-Path $adapterWow 'wow_window_creation_binding.c'),
+    (Join-Path $adapterWow 'wow_class_words_binding.c'),
+    (Join-Path $adapterWow 'wow_user_registration_bridge.c'),
     (Join-Path $root 'src/opennt-host/windows/core/ntuser/rtl/chartran.c'),
     (Join-Path $root 'src/ntvdm-exe/win32/ntuser_rtl_compat.c'),
     (Join-Path $root 'src/ntvdm-exe/win32/wow_public_user_facade.c'),
@@ -94,7 +109,9 @@ if ([string]::IsNullOrWhiteSpace($BuildRoot)) {
 } else {
     $build = [IO.Path]::GetFullPath($BuildRoot)
 }
-New-Item -ItemType Directory -Force -Path $build, (Join-Path $build 'obj'), (Join-Path $build 'obj\adapter-wow'), (Join-Path $build 'obj\adapter-win32') | Out-Null
+New-Item -ItemType Directory -Force -Path $build, (Join-Path $build 'obj'),
+    (Join-Path $build 'obj\opennt-user'), (Join-Path $build 'obj\adapter-wow'),
+    (Join-Path $build 'obj\adapter-win32') | Out-Null
 
 # The original definition deliberately retains undecorated public aliases for
 # two stdcall COMM exports.  Keep the original file immutable and derive only
@@ -122,6 +139,7 @@ $legacyGdi32Definition = Join-Path $build 'legacy-wow-gdi32.def'
 $legacyKernel32Definition = Join-Path $build 'legacy-wow-kernel32.def'
 $legacyNtdllDefinition = Join-Path $build 'legacy-wow-ntdll.def'
 $systemImportAliases = @(
+    [pscustomobject]@{ Decorated = 'GdiQueryTable@0'; Raw = 'GdiQueryTable' },
     [pscustomobject]@{ Decorated = 'SetCursorContents@8'; Raw = 'SetCursorContents' },
     [pscustomobject]@{ Decorated = 'RegisterWowBaseHandlers@4'; Raw = 'RegisterWowBaseHandlers' },
     [pscustomobject]@{ Decorated = 'RegisterWowExec@4'; Raw = 'RegisterWowExec' },
@@ -137,6 +155,7 @@ $systemImportAliases = @(
     [pscustomobject]@{ Decorated = 'RtlCharToInteger@12'; Raw = 'RtlCharToInteger' },
     [pscustomobject]@{ Decorated = 'RtlDeleteCriticalSection@4'; Raw = 'RtlDeleteCriticalSection' },
     [pscustomobject]@{ Decorated = 'RtlEnterCriticalSection@4'; Raw = 'RtlEnterCriticalSection' },
+    [pscustomobject]@{ Decorated = 'RtlEqualUnicodeString@12'; Raw = 'RtlEqualUnicodeString' },
     [pscustomobject]@{ Decorated = 'RtlFreeAnsiString@4'; Raw = 'RtlFreeAnsiString' },
     [pscustomobject]@{ Decorated = 'RtlImageNtHeader@4'; Raw = 'RtlImageNtHeader' },
     [pscustomobject]@{ Decorated = 'RtlInitUnicodeString@8'; Raw = 'RtlInitUnicodeString' },
@@ -147,8 +166,7 @@ $systemImportAliases = @(
     [pscustomobject]@{ Decorated = 'RtlUnicodeToMultiByteN@20'; Raw = 'RtlUnicodeToMultiByteN' },
     [pscustomobject]@{ Decorated = 'DbgBreakPoint@0'; Raw = 'DbgBreakPoint' }
 )
-@('LIBRARY USER32.DLL', 'EXPORTS', '    UserRegisterWowHandlers',
-  '    SetCursorContents') |
+@('LIBRARY USER32.DLL', 'EXPORTS', '    SetCursorContents') |
     Set-Content -LiteralPath $legacyUser32Definition -Encoding ascii
 @('LIBRARY GDI32.DLL', 'EXPORTS', '    GdiQueryTable') |
     Set-Content -LiteralPath $legacyGdi32Definition -Encoding ascii
@@ -159,16 +177,20 @@ $systemImportAliases = @(
 @('LIBRARY NTDLL.DLL', 'EXPORTS',
   '    CsrIdentifyAlertableThread',
   '    NtClose', '    NtOpenThread',
-  '    NtQueryInformationProcess', '    NtQueryInformationThread',
+  '    NtQueryInformationProcess', '    NtQueryInformationThread', '    NtQueryValueKey',
   '    NtQueryPerformanceCounter', '    NtQuerySystemInformation',
   '    NtWaitForSingleObject', '    RtlAdjustPrivilege', '    RtlCharToInteger',
   '    RtlDeleteCriticalSection', '    RtlEnterCriticalSection',
+  '    RtlEqualUnicodeString',
   '    RtlFreeAnsiString', '    RtlImageNtHeader', '    RtlInitUnicodeString',
   '    RtlInitializeCriticalSection', '    RtlLeaveCriticalSection',
   '    RtlMultiByteToUnicodeN', '    RtlUnicodeStringToAnsiString',
-  '    RtlUnicodeToMultiByteN', '    DbgBreakPoint') |
+  '    RtlUnicodeToMultiByteN', '    RtlUnicodeStringToInteger', '    RtlRaiseStatus', '    DbgBreakPoint') |
     Set-Content -LiteralPath $legacyNtdllDefinition -Encoding ascii
 $systemImportAliasSource = Join-Path $build 'wow32-system-import-abi-aliases.c'
+$systemImportAliases += [pscustomobject]@{ Decorated = 'RtlUnicodeStringToInteger@12'; Raw = 'RtlUnicodeStringToInteger' }
+$systemImportAliases += [pscustomobject]@{ Decorated = 'NtQueryValueKey@24'; Raw = 'NtQueryValueKey' }
+$systemImportAliases += [pscustomobject]@{ Decorated = 'RtlRaiseStatus@4'; Raw = 'RtlRaiseStatus' }
 $systemImportAliasLines = [Collections.Generic.List[string]]::new()
 $systemImportAliasLines.Add('/* Generated build-only COFF aliases; no provider implementation. */')
 foreach ($alias in $systemImportAliases) {
@@ -179,8 +201,10 @@ foreach ($alias in $systemImportAliases) {
     [Text.UTF8Encoding]::new($false))
 
 # Original WOW32 calls its NTVDM/OEMUNI import surface with NT4 COFF names
-# (`_Function@N`).  The standalone parent exports normal loader names; these
-# aliases bind the former to the parent's import thunks without adding bodies.
+# (`_Function@N`).  The standalone parent's import library deliberately
+# exposes the loader names (for example, `ExitVDM` and `__imp_ExitVDM`).
+# Bind both possible original COFF references to those actual import-library
+# names; this supplies no function body or policy.
 $parentImportAliasSource = Join-Path $build 'wow32-parent-import-abi-aliases.c'
 $parentImportAliasLines = [Collections.Generic.List[string]]::new()
 $parentImportAliasLines.Add('/* Generated build-only aliases to the parent NTVDM import surface. */')
@@ -190,6 +214,12 @@ foreach ($alias in @(
     [pscustomobject]@{ Decorated = 'ExitVDM@8'; Raw = 'ExitVDM' },
     [pscustomobject]@{ Decorated = 'host_CreateThread@24'; Raw = 'host_CreateThread' },
     [pscustomobject]@{ Decorated = 'host_ExitThread@4'; Raw = 'host_ExitThread' },
+    [pscustomobject]@{ Decorated = 'opennt_exit_thread@4'; Raw = 'opennt_exit_thread' },
+    [pscustomobject]@{ Decorated = 'wow_user_runtime_current@0'; Raw = 'wow_user_runtime_current' },
+    [pscustomobject]@{ Decorated = 'wow_user_runtime_enter@4'; Raw = 'wow_user_runtime_enter' },
+    [pscustomobject]@{ Decorated = 'wow_user_runtime_leave@4'; Raw = 'wow_user_runtime_leave' },
+    [pscustomobject]@{ Decorated = 'wow_user_runtime_set_context@12'; Raw = 'wow_user_runtime_set_context' },
+    [pscustomobject]@{ Decorated = 'OpenNtRtlNtStatusToDosError@4'; Raw = 'OpenNtRtlNtStatusToDosError' },
     [pscustomobject]@{ Decorated = 'GetNextVDMCommand@4'; Raw = 'GetNextVDMCommand' },
     [pscustomobject]@{ Decorated = 'GetCurrentDirectoryOem@8'; Raw = 'GetCurrentDirectoryOem' },
     [pscustomobject]@{ Decorated = 'SetCurrentDirectoryOem@4'; Raw = 'SetCurrentDirectoryOem' },
@@ -206,7 +236,8 @@ foreach ($alias in @(
     [pscustomobject]@{ Decorated = 'CreateFileOem@28'; Raw = 'CreateFileOem' },
     [pscustomobject]@{ Decorated = 'GetVolumeInformationOem@32'; Raw = 'GetVolumeInformationOem' }
 )) {
-    $parentImportAliasLines.Add('#pragma comment(linker, "/alternatename:_' + $alias.Decorated + '=_' + $alias.Raw + '")')
+    $parentImportAliasLines.Add('#pragma comment(linker, "/alternatename:_' + $alias.Decorated + '=' + $alias.Raw + '")')
+    $parentImportAliasLines.Add('#pragma comment(linker, "/alternatename:__imp__' + $alias.Decorated + '=__imp_' + $alias.Raw + '")')
 }
 [IO.File]::WriteAllLines($parentImportAliasSource, $parentImportAliasLines,
     [Text.UTF8Encoding]::new($false))
@@ -220,10 +251,13 @@ foreach ($alias in @(
 $dllEntryBridgeSource = Join-Path $build 'wow32-dll-entry-bridge.c'
 $dllEntryBridgeLines = @(
     '/* Generated build-only CRT-to-original DLLENTRY bridge. */',
-    'extern int __cdecl W32DllInitialize(void *, unsigned long, void *);',
+    'extern int __stdcall W32DllInitialize(void *, unsigned long, void *);',
+    'extern void __stdcall wow_bitmap_bindings_shutdown(void);',
     'int __stdcall DllMain(void *instance, unsigned long reason, void *reserved)',
     '{',
-    '    return W32DllInitialize(instance, reason, reserved);',
+    '    int result = W32DllInitialize(instance, reason, reserved);',
+    '    if (reason == 0 && reserved == 0) wow_bitmap_bindings_shutdown();',
+    '    return result;',
     '}'
 )
 [IO.File]::WriteAllLines($dllEntryBridgeSource, $dllEntryBridgeLines,
@@ -246,10 +280,10 @@ $includeRoots = @(
     'src',
     'src/opennt-abi/host-compat/include',
     'src/ntvdm-exe/wow/include',
-    'src/mvdm-host/wow32',
-    'src/mvdm-host/inc',
-    'src/mvdm-host/softpc.new/base/inc',
-    'src/mvdm-host/softpc.new/host/inc',
+    'src/mvdm/wow32',
+    'src/mvdm/inc',
+    'src/mvdm/softpc.new/base/inc',
+    'src/mvdm/softpc.new/host/inc',
     'src/opennt-host/public/sdk/inc',
     'src/opennt-abi/source/public/sdk/inc',
     'src/opennt-abi/source/public/internal/base/inc',
@@ -260,11 +294,14 @@ $includeRoots = @(
     'src/ntvdm-exe/command/include',
     'src/ntvdm-exe/monitor/include',
     'src/ntvdm-exe/vdd/include',
-    'src/session'
+    'src/ntvdm-exe/session'
 )
 $includes = ($includeRoots | ForEach-Object { '/I "' + (Join-Path $root $_) + '"' }) -join ' '
 $force = '/FI "' + (Join-Path $root 'src/opennt-abi/host-compat/include/nt.h') + '"'
-$cflags = '/nologo /TC /c /MT /W3 /Gd /showIncludes /DMVDM_WOW32_PROVIDER /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD ' + $force + ' ' + $includes
+# Original NT x86 i386mk.inc defaults to /Gz and STD_CALL. Keep this DLL's
+# internal ABI; worker-owned cdecl imports need explicit declarations, not a
+# package-wide /Gd override or aliases that conceal different stack cleanup.
+$cflags = '/nologo /TC /c /MT /W3 /Gz /DSTD_CALL /showIncludes /DMVDM_WOW32_PROVIDER /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD ' + $force + ' ' + $includes
 
 $ninja = [System.Collections.Generic.List[string]]::new()
 $ninja.Add('ninja_required_version = 1.10')
@@ -292,6 +329,54 @@ foreach ($source in $sources) {
     $ninja.Add('build ' + $object + ': cc ' + (ConvertTo-NinjaPath (Join-Path $wow $source)))
 }
 $supportObjects = [System.Collections.Generic.List[string]]::new()
+# Original USER owner, not an adapter implementation (OPENNT-HOST-032).
+$ddeDataObject = 'obj/opennt-user/hdata.obj'
+$objects.Add($ddeDataObject)
+$ninja.Add('build ' + $ddeDataObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/opennt-host/windows/core/ntuser/client/hdata.c')))
+foreach ($userOwner in @('clres', 'cldib', 'client', 'rtlinit', 'ntstubs', 'clmenu')) {
+    $object = 'obj/opennt-user/' + $userOwner + '.obj'
+    $objects.Add($object)
+    $ninja.Add('build ' + $object + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root ('src/opennt-host/windows/core/ntuser/client/' + $userOwner + '.c'))))
+}
+$classLookupObject = 'obj/opennt-user/class.obj'
+  $probeObject = 'obj/opennt-user/probe.obj'
+  $cleanupObject = 'obj/opennt-user/cleanup.obj'
+  $handleFlagsObject = 'obj/opennt-user/handtabl.obj'
+  $objects.Add($handleFlagsObject)
+  $ninja.Add('build ' + $handleFlagsObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/opennt-host/windows/core/ntuser/kernel/handtabl.c')))
+  $objects.Add($cleanupObject)
+  $ninja.Add('build ' + $cleanupObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/opennt-host/windows/core/ntuser/kernel/cleanup.c')))
+$objects.Add($probeObject)
+$ninja.Add('build ' + $probeObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/opennt-host/base/ntos/ex/probe.c')))
+$classRegisterObject = 'obj/opennt-user/class-register.obj'
+$classRemoveObject = 'obj/opennt-user/class-remove.obj'
+$objects.Add($classRemoveObject)
+$ninja.Add('build ' + $classRemoveObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/opennt-host/windows/core/ntuser/kernel/class.c')))
+$ninja.Add('  cflags = $cflags /DWOW_ORIGINAL_CLASS_REMOVAL')
+$objects.Add($classRegisterObject)
+$ninja.Add('build ' + $classRegisterObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/opennt-host/windows/core/ntuser/kernel/class.c')))
+$ninja.Add('  cflags = $cflags /DWOW_ORIGINAL_CLASS_REGISTRATION')
+$taskOrderObject = 'obj/opennt-user/taskman.obj'
+$objects.Add($taskOrderObject)
+$ninja.Add('build ' + $taskOrderObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/opennt-host/windows/core/ntuser/kernel/taskman.c')))
+$classClientObject = 'obj/opennt-user/class-client.obj'
+$inputGroupObject = 'obj/opennt-user/input.obj'
+$objects.Add($inputGroupObject)
+$ninja.Add('build ' + $inputGroupObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/opennt-host/windows/core/ntuser/kernel/input.c')))
+$taskInitObject = 'obj/opennt-user/queue.obj'
+$profileObject = 'obj/opennt-user/profile.obj'
+$objects.Add($profileObject)
+$ninja.Add('build ' + $profileObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/opennt-host/windows/core/ntuser/kernel/profile.c')))
+$objects.Add($taskInitObject)
+$ninja.Add('build ' + $taskInitObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/opennt-host/windows/core/ntuser/kernel/queue.c')))
+$taskRegisterObject = 'obj/opennt-user/exitwin.obj'
+$objects.Add($taskRegisterObject)
+$ninja.Add('build ' + $taskRegisterObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/opennt-host/windows/core/ntuser/kernel/exitwin.c')))
+$objects.Add($classClientObject)
+$ninja.Add('build ' + $classClientObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/opennt-host/windows/core/ntuser/client/client.c')))
+$ninja.Add('  cflags = $cflags /DWOW_ORIGINAL_CLASS_CLIENT')
+$objects.Add($classLookupObject)
+$ninja.Add('build ' + $classLookupObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/opennt-host/windows/core/ntuser/kernel/class.c')))
 foreach ($source in $providerSupportSources) {
     $owner = if ($source.StartsWith($adapterWow, [StringComparison]::OrdinalIgnoreCase)) { 'adapter-wow' } else { 'adapter-win32' }
     $object = 'obj/' + $owner + '/' + [IO.Path]::GetFileNameWithoutExtension($source) + '.obj'

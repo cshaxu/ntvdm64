@@ -16,7 +16,8 @@ typedef enum _WOW_HANDLE_TYPE {
 
 /* The modern SDK may suppress OpenNT winuserp.h after windows.h.  These are
  * the original private indices consumed by retained WOW32 client code; their
- * storage is implemented by the bounded window-projection adapter. */
+ * storage requires the S40 window/class binding; these constants alone do
+ * not make the modern USER private layouts compatible. */
 #ifndef GWL_WOWWORDS
 #define GWL_WOWWORDS (-1)
 #define GWL_WOWDWORD1 (-30)
@@ -28,6 +29,7 @@ typedef enum _WOW_HANDLE_TYPE {
 #define SCDLG_CLIENT 0x0001
 #define SCDLG_ANSI 0x0002
 #define SCDLG_NOREVALIDATE 0x0004
+#define SCDLG_16BIT 0x0008
 #define CBEC_SETCOMBOFOCUS (CB_MSGMAX + 1)
 #define CBEC_KILLCOMBOFOCUS (CB_MSGMAX + 2)
 #define WM_WINHELP 0x0038

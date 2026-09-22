@@ -18,7 +18,8 @@ src/
 `mvdm/` is the one canonical physical selected-OpenNT `base/mvdm` tree: its
 host, guest, tool and firmware slices retain their upstream-relative paths and
 their manifest-declared build roles. It has no private implementation partner:
-strict mirror policy permits a change only in an existing original owner file.
+strict mirror policy permits source only in its original OpenNT owner file,
+including audited original files newly imported at their upstream paths.
 The remaining
 `opennt-host/base/win32/winnls/fontsup/system/` carries the exact selected
 OpenNT font files, which are not under `base/mvdm`. The extracted printer
@@ -171,9 +172,11 @@ process enumeration. Console handles use a separate local binding.
 An imported production file is exact upstream, a true subset, or a
 same-shaped minimal modification in an existing upstream-relative file. Each
 crop or changed expression is marked `DIVERGENCE:` and indexed in the component
-README. A proposed new mirror file, material added mechanism, or body that
-would cease to be a small owner-local correction belongs in its named adapter
-or ABI family; it may not be placed in a private overlay.
+README. An actual original OpenNT file may be newly imported at its original
+relative path after provenance and package-boundary admission, as byte-exact
+source, a registered true subset or a minimal same-shaped adaptation. A
+project-invented file or material new mechanism belongs in its named adapter
+or ABI family; it may not be placed in a mirror or private overlay.
 
 Every retained mirror diff, overlay, or non-mirror autonomous seam has a
 review record naming the original owner, source/ABI shape, required resource
