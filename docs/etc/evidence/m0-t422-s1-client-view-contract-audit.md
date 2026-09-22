@@ -1,0 +1,90 @@
+# T422 S1 WOW32 client-view contract audit
+
+## Question
+
+What exact original guest-visible USER client view is required before the
+immutable PMODE32 `USER.EXE` can run, and which part is actually missing from
+the current worker?
+
+## Inputs
+
+- Hash-pinned `O:/winnt/system32/USER.EXE` profile and its 47 instruction
+  checks in `verify-wow-user-profile.ps1`.
+- Current `mvdm_softpc_wow_page_domain.c`, the original `wuman.c` caller, and
+  the WOW32 registration/object bindings.
+- Original `windows/core/ntuser/kernel/desktop.c::{GetDesktopView,
+  _MapDesktopObject,MapDesktop}` and `inc/user.h::CLIENTINFO`, inspected as
+  source of layout/order only.
+
+## Observations
+
+The current worker correctly reserves the immutable client ABI prerequisites:
+
+| Required guest-visible item | Current state |
+| --- | --- |
+| `SHAREDINFO` and `SERVERINFO` | guest-linear allocation; `WU32NotifyWow` publishes that guest address |
+| `HANDLEENTRY` | 65,536 entries × 16 bytes, with the original free-list form |
+| TEB client offsets | self `+18h`, desktop `+5Ch`, delta `+60h`, cached HWND/PWND `+6Ch/+70h` |
+| fixed time page | separate mapped source already present |
+| `CallCsrFlag` | separate writable guest byte already present |
+
+However, the required desktop and window-object publication has **zero
+production callers**.  The only `set_client_desktop` and clear operations are
+their page-domain definitions.  `pfnGetFullUserHandle` is deliberately an
+`ERROR_CALL_NOT_IMPLEMENTED` placeholder.  `wow_user_window_publish` rejects
+active guest publication rather than writing a native cleanup pointer into
+guest `HANDLEENTRY.phead`.
+
+That refusal is correct for the present incomplete state.  A native cleanup
+record is not the original 176-byte guest WND layout, and its address is not a
+guest-linear client view.  Calling it a success would cause `HMValidateHandle`
+to interpret an incompatible address as WND state.
+
+The pinned binary's first post-notification `GetDesktopWindow` follows the
+original chain `FS:18 -> TEB+5C -> DESKTOPINFO+8 -> subtract TEB+60 -> WND`.
+With the current zero desktop pair it reads a nonzero word from the mapped DOS
+IVT as if it were a WND pointer; the prior captured page fault is therefore a
+missing publication fault, not a guest or CCPU instruction fault.
+
+## Original boundary and design conclusion
+
+NT4's `MapDesktop` maps the desktop section into a process, records a
+`DESKTOPVIEW`, and publishes the client-relative `pDeskInfo` plus
+`ulClientDelta`; `_MapDesktopObject` derives each client pointer using that
+same delta.  Its actual implementation depends on NT object manager, section
+mapping and the USER server, so it cannot be compiled wholesale into the
+standalone worker without crossing the explicit USER-server stopping boundary.
+
+S2 must therefore retain the original ordering/layout contract but bind it to
+the one existing worker and public USER32 objects:
+
+1. establish one source-shaped guest client allocation containing a real
+   client `DESKTOPINFO` and guest WND representations—not host pointers;
+2. publish the desktop pointer/delta together only after the desktop WND and
+   its typed `HANDLEENTRY` are valid;
+3. use that same publisher for create, mutation, destruction, task switch and
+   worker teardown; invalidate cached HWND/PWND before change and withdraw
+   before releasing backing;
+4. keep native object companions solely for public USER32 operations; never
+   make them the guest object plane or invent a second USER server.
+
+This is a finite S2 implementation boundary, not a reason to bypass the
+optimized USER16 reads, alter guest bytes, or add an independent window
+manager.
+
+## Reproduction
+
+```powershell
+& .\tests\observation\verify-wow32-client-view-gap.ps1 `
+  -RepositoryRoot (Get-Location).Path
+```
+
+Expected output is `WOW32_CLIENT_VIEW_GAP_CONFIRMED`.  This is a passing
+negative audit: it proves the known gap remains explicit rather than falsely
+claiming the current allocation is a functional desktop view.
+
+## Receiver
+
+S2 owns `USER-VIEW-01`, `USER-HANDLE-01`, `USER-DATA-01`, and the directly
+dependent task/window/callback lifecycle.  S4's menu direct-data rows consume
+the resulting handle/publication contract and cannot close before S2 does.

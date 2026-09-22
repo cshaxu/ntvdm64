@@ -41,6 +41,12 @@ adds actual x86 named/ordinal export checks for the selected dynamic DLL
 families. It proves resolution on this host only; S7 owns complete runtime
 resolution, marshalling, callback and teardown acceptance.
 
+[Client-view contract audit](../evidence/m0-t422-s1-client-view-contract-audit.md)
+proves that the full-size current allocation is not yet a desktop/window
+producer, and records the exact S2 source-shaped publication/withdrawal
+contract. Its explicit negative result prevents the current fixture-only view
+from being promoted to WOW16 acceptance.
+
 | ID | State | Required result | Existing starting point / next action |
 | --- | --- | --- | --- |
 | A01 | Complete | Pin admission revision, actual DLL/worker composition, guest and three-application media hashes. | [T422 S1 baseline evidence](../evidence/m0-t422-s1-admission-baseline.md) pins all six immutable guest inputs, separates the old installed WOW32.DLL from the formal candidate, and records the formal local 20-slot composition check. |
