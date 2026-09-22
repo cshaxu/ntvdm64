@@ -54,20 +54,6 @@ static void unsupported_void(void)
     SetLastError(ERROR_CALL_NOT_IMPLEMENTED);
 }
 
-static HWND WINAPI unsupported_create_window(DWORD a, LPCTSTR b, LPCTSTR c,
-    DWORD d, int e, int f, int g, int h, HWND i, HMENU j, HANDLE k, LPVOID l,
-    DWORD m, LPDWORD n)
-{
-    UNREFERENCED_PARAMETER(a); UNREFERENCED_PARAMETER(b);
-    UNREFERENCED_PARAMETER(c); UNREFERENCED_PARAMETER(d);
-    UNREFERENCED_PARAMETER(e); UNREFERENCED_PARAMETER(f);
-    UNREFERENCED_PARAMETER(g); UNREFERENCED_PARAMETER(h);
-    UNREFERENCED_PARAMETER(i); UNREFERENCED_PARAMETER(j);
-    UNREFERENCED_PARAMETER(k); UNREFERENCED_PARAMETER(l);
-    UNREFERENCED_PARAMETER(m); UNREFERENCED_PARAMETER(n);
-    unsupported_void(); return NULL;
-}
-
 static BOOL ensure_lifecycle(void)
 {
     wow_user_runtime_thread *binding = wow_user_runtime_current();
