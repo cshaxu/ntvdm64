@@ -10,7 +10,7 @@
 | --- | --- |
 | Identifier Mode | M0 T420 S43, Ordinary Mode, single implementer/reviewer. |
 | Candidate Proposal | [Runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md), revised non-WOW32 S43--S45 tail. |
-| Admission And Approval | S43 is admitted but execution is held by owner direction during WOW32 proposal discussion. This documentation-only update does not start debugger work. |
+| Admission And Approval | Owner explicitly resumes S43 admission after the WOW32 queue revision and requests the task brief first. The prior execution hold is lifted; this delivery records admission only, without debugger implementation changes. |
 | Objective | Audit and close the complete selected original debugger package and its actual consumers, including OEM-DBG-PATH, through source-shaped recovery and explicit capability evidence. |
 | Non-goals | No WOW32/WRITE implementation, guest mutation, CPU30, private CSR server, or compile-only debugger acceptance. |
 | Reference Baseline | [S42 handoff](../etc/evidence/m0-t420-s42-wow32-successor-handoff.md) and fresh x86 DOS regression; original dbg source versus current finite debugger bindings. |
@@ -44,8 +44,8 @@ the live assignments. T420 S43 is debugger including OEM-DBG-PATH, S44 is VDD,
 and S45 is non-WOW32 aggregate acceptance. T420 remains open for owner review.
 S42 handoff checks pass; the USER desktop failure remains unfixed and is
 assigned to successor S1 audit and S2 implementation. S43 remains the sole
-admitted packet, with execution held by the owner; only successor planning
-is being updated.
+admitted packet; the owner has lifted its execution hold and requested the
+task brief before implementation.
 
 ## S40 Closure Record
 
