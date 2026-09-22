@@ -52,6 +52,11 @@ resolves all 1,786 selected table rows to their original local/unsupported/
 host-thunk disposition and proves that all 668 selected thunks have original
 selected C bodies. S1 still assigns their runtime contracts to S2--S7.
 
+[Registration-surface audit](../evidence/m0-t422-s1-registration-surface-audit.md)
+proves all original 21 input and 20 output slots are explicitly assigned,
+while retaining `pfnGetFullUserHandle` as the one named S2 failure placeholder
+instead of treating a non-null ABI table as callback acceptance.
+
 | ID | State | Required result | Existing starting point / next action |
 | --- | --- | --- | --- |
 | A01 | Complete | Pin admission revision, actual DLL/worker composition, guest and three-application media hashes. | [T422 S1 baseline evidence](../evidence/m0-t422-s1-admission-baseline.md) pins all six immutable guest inputs, separates the old installed WOW32.DLL from the formal candidate, and records the formal local 20-slot composition check. |
