@@ -2,8 +2,28 @@
 
 ## Current Work
 
-**No active M/T/S packet.** T421 is pending this closure delivery; the next
-candidate remains the queue-head WOW32 runtime-recovery package.
+## Active Packet
+
+**Active: M0 T422 S1**
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T422 S1, Ordinary Mode, single implementer/reviewer. |
+| Candidate Proposal | [WOW32 complete runtime recovery](../proposals/proposal-wow32-complete-runtime-recovery-001.md). |
+| Admission And Approval | Owner admitted the queue-head candidate on 2026-09-22. |
+| Objective | Complete the whole WOW32 dependency audit and implementation design: reconcile all selected original source, tables, registrations, dynamic lookups, direct guest data consumers, retained partial code and required non-MVDM owners into a finite S2--S8 closure graph. |
+| Non-goals | Implementing a new provider before the complete audit; claiming WOW16/WRITE success; modifying guest media; importing a recursive USER/CSRSS server; a second worker/TLS/CCPU state; or using a host fixture as guest acceptance. |
+| Reference Baseline | [T422 coverage ledger](../etc/operations/wow32-recovery-coverage-ledger.md), [S1 checklist](../etc/operations/wow32-recovery-s1-checklist.md), [T420 S40 profile](../etc/evidence/m0-t420-s40-wow-user-profile.md), [S42 handoff](../etc/evidence/m0-t420-s42-wow32-successor-handoff.md), and T421's explicit DLL boundary. |
+| Files And ABI Surface | All 77 selected `src/mvdm/wow32` bodies plus RC/DEF/headers, selected `opennt-host` USER slices, `wow32-dll`, worker WOW bindings, original dispatch/registration tables, PMODE32 guest-visible layouts and original callback/direct-data consumers. |
+| Applicable Rules | Source-first four-rung recovery, canonical-mirror preservation, one worker-state owner, bounded guest-memory lease, immutable guest media, no false acceptance and exact upstream formatting. |
+| Verification | Reconcile manifest/hash/build selection; exhaustively assign source/entry/slot/data edges; source/object/import scans; bounded feasibility experiments for desktop/direct-data/callback lifecycle; governance, relative links and diff checks. |
+| Expected Markers | No orphan or “wire later” selected edge; every external edge has original owner, disposition, receiver, removal candidate and test plan; all S2--S8 dependency cycles are resolved or explicitly regrouped. |
+| Asset Needs | Existing source mirrors and evidence, x86 MSVC/Ninja graph, immutable WRITE/WINMINE/SOL media provenance, existing fixtures and package-local test/log roots. |
+| Reporting Requirements | Exact source/import/removal counts and hashes; complete dependency/lifecycle matrix; feasibility conclusions and limitations; per-S ownership/test plan; separate original-mirror and autonomous-code footprints. |
+| Stop Conditions | Any proposal to invent a replacement before completing the source audit; a required recursive USER/CSRSS dependency; guest mutation; unbounded host-object copying; or a required contract with no source-shaped feasible design. |
+| Exit Criteria | All S1 checklist A01--A10 and required delivery rows are evidenced; no required selected edge remains unknown/unassigned; one indexed S1 record, updated coverage ledger and vetted S2--S8 graph are committed and pushed. |
+| Original Owner Request | Admit the next queued T and proceed under the existing component-first, source-minimizing governance. |
+| Similar-Issue Sweep | Every original source manifest, input/output registration slot, dispatch table, dynamic import, worker/DLL boundary, direct guest data reader, source subset, local adapter/fixture and three-application media dependency. |
 
 ## T421 Closure Record
 
