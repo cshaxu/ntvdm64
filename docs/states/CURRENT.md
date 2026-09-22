@@ -4,26 +4,26 @@
 
 ## Active Packet
 
-**Active: M0 T420 S45 (delivered; awaiting owner acceptance audit)**
+**Active: M0 T421 S1**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T420 owner acceptance audit; S45 is delivered, Ordinary Mode, single implementer/reviewer. |
-| Candidate Proposal | [Runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md), S45 static-registry receiver matrix and final non-WOW32 acceptance. |
-| Admission And Approval | Owner authorized automatic sequential admission through the remaining non-WOW T420 packets. S45 is delivered; T420 now awaits the owner audit required before T closure. |
-| Objective | Record S45's selected original Registry-reader recovery: `NTVDM.REG` values override an admitted read-only system Registry baseline. Preserve the later mutable-write contract—writes persist only to `NTVDM.REG`—for the WOW successor, without claiming it is implemented by this static-reader packet. |
-| Non-goals | Windows Registry mutation, unadmitted Registry roots, WOW32/WRITE implementation, guest mutation, CPU30, private CSR server, or compile-only acceptance. |
-| Reference Baseline | [S44 VDD ledger](../etc/evidence/m0-t420-s44-vdd-capability-ledger.md), S45 receiver matrix, pinned original callers and fresh x86 DOS regression. |
-| Files And ABI Surface | Selected original static registry callers, worker-local layered registry provider, source manifests, controlled overlay files and production-path tests. |
-| Applicable Rules | Source-first complete package, finite public-host boundaries, immutable guest, exact mirror formatting, one active S. |
-| Verification | Freeze every static reader; test file override, host baseline, absent and malformed input through its original caller; distinguish hardware discovery and mutable API families; then fresh x86 and all 17 DOS routes. |
-| Expected Markers | Every selected static caller observes a same-shaped layered read or its original fallback/failure; no product operation writes the Windows Registry. |
-| Asset Needs | Pinned OpenNT, controlled `NTVDM.REG` files and read-only host-registry probes; build/M0-T420/S45, O:/winnt/tests and O:/winnt/logs. |
-| Reporting Requirements | Receiver/capability matrix, source/adapter ownership, configured/absent/malformed evidence, registry-import sweep, exact source/artifact hashes and mirror/non-mirror line accounting. |
-| Stop Conditions | Guest modification, Windows registry mutation, unadmitted Registry root, recursive private server import, unexplained DOS regression or treating mutable/discovery behavior as a static file read. |
-| Exit Criteria | S45: full selected receiver disposition, final non-WOW32 reconciliation, x86/regression/source gates, clean reviewed commit/push. T420 closure remains subject to the owner's final audit. Unavailable capabilities are not passing tests. |
-| Original Owner Request | Finish the remaining non-WOW32 work in S44--S45 after moving WOW32 into the queue-head successor. |
-| Similar-Issue Sweep | Every formal `Reg*`/`Nt*Key` consumer, static versus discovery versus mutable classification, source-shaped errors and worker teardown. |
+| Identifier Mode | M0 T421 S1, Ordinary Mode, single implementer/reviewer. |
+| Candidate Proposal | [VDMREDIR/WOW32 DLL compilation-boundary reorganization](../proposals/proposal-vdmredir-wow32-dll-component-boundary-reorganization-001.md). |
+| Admission And Approval | Owner accepted T420 and explicitly approved closure plus admission of the next queue-head T on 2026-09-22. |
+| Objective | Freeze the current VDMREDIR and WOW32 target membership from source through object, archive and DLL; prove the actual loader/import/export/TLS/session boundary before any target-component move. |
+| Non-goals | Moving original MVDM sources, changing DLL or worker behavior, recovering WOW16, adding a generic shared library, modifying guest media, or introducing a second worker/session/TLS state. |
+| Reference Baseline | T420 S20 redirector matrix, T420 S42 WOW handoff, current x86 `VDMREDIR.DLL` linkage and original source paths under `src/mvdm/`. |
+| Files And ABI Surface | Formal Ninja generator/graph, `src/mvdm/vdmredir/`, selected `src/mvdm/wow32/` source paths, existing `ntvdm-exe` DLL bindings, maps/imports/exports and worker-local `session`/TLS ownership. |
+| Applicable Rules | Source-first recovery, canonical mirror topology, one worker-local session/TLS owner, immutable guest, exact mirror formatting and one active S. |
+| Verification | Generate/read the formal x86 graph; trace source-to-object-to-archive-to-DLL membership; inspect DLL imports/exports and maps; search all linked DLL closure inputs for `session`, CCPU executor and duplicate worker state; run governance and diff gates. |
+| Expected Markers | A complete two-DLL ledger with each binding classified retain/move/delete, no DLL link to `session.lib` or a CCPU executor, and no unaccounted original source outside the canonical mirror. |
+| Asset Needs | Current formal x86 graph, current deployed/package artifacts, pinned OpenNT mirror paths and existing S20/S42 evidence. |
+| Reporting Requirements | Per-DLL source/object/library/import/export/TLS ownership table; exact existing target-binding footprint; original-source provenance and S2/S3 move manifest; explicit no-behavior-change boundary. |
+| Stop Conditions | Evidence of a second session/TLS/CCPU executor, an original source outside `src/mvdm/`, a required behavioral change, guest mutation, or a dependency that requires a new boundary design. |
+| Exit Criteria | Reviewed and indexed S1 ledger proves both current closures and every binding disposition, followed by governance/diff checks and a clean committed/pushed admission/audit delivery. |
+| Original Owner Request | Close T420 after acceptance; admit and begin the next queue-head T. |
+| Similar-Issue Sweep | All `VDMREDIR.DLL`/`WOW32.DLL` build inputs, DLL entry adapters, `.def`/resource files, loader calls, imports/exports, TLS/session references and worker-to-DLL access paths. |
 
 ## S45 Delivery Record
 
@@ -37,8 +37,8 @@ There are no Windows Registry mutation imports.  Fresh x86 artifacts and all
 17 direct/interactive/nested COMMAND, MEM and EDIT product routes pass.  The
 future mutable shadow-tree, tombstone and atomic-commit behavior is explicitly
 transferred to the WOW32 successor; it is a product contract, not a false S45
-completion claim.  T420 remains open only for the owner's requested final
-audit.
+completion claim.  The owner accepted T420 on 2026-09-22; its compact closure
+record is in [history](../history/m0-t420-runtime-package-completion-closure.md).
 
 ## S44 Closure Record
 
@@ -80,10 +80,10 @@ The [successor proposal](../proposals/proposal-wow32-complete-runtime-recovery-0
 inherits all unfinished WOW32 and WOW16/WRITE work. Historical receiver numbers
 in evidence remain chronology; the new proposal and current T420 plan own
 the live assignments. T420 S43 is debugger including OEM-DBG-PATH and S44 is
-VDD; S45 is the admitted final layered registry-overlay completion plus
-non-WOW32 acceptance. T420 remains open for owner review.
+VDD; S45 is the final layered registry-read completion plus non-WOW32
+acceptance. T420 is now closed by owner acceptance.
 S42 handoff checks pass; the USER desktop failure remains unfixed and is
-assigned to successor S1 audit and S2 implementation. S45 is the sole
+assigned to successor S1 audit and S2 implementation. T421 S1 is the sole
 admitted packet.
 
 ## S40 Closure Record
@@ -542,6 +542,7 @@ records the accepted task-manager delivery and its evidence boundary.
 
 ## Recent M0 Closures
 
+| T420 | [Runtime package completion](../history/m0-t420-runtime-package-completion-closure.md) | Owner-accepted selected non-WOW32 package recovery, static registry-reader boundary and 17-route product regression. |
 | T419 | [Terminal task manager](../history/m0-t419-terminal-task-manager-closure.md) | Delivered `dtmgr.exe`, authenticated selected-worker management, compact first-option compatibility, and explicit executable component roots. |
 
 ## Recent Governance
