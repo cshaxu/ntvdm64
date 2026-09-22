@@ -10,7 +10,7 @@
 | --- | --- |
 | Identifier Mode | M0 T420 S43, Ordinary Mode, single implementer/reviewer. |
 | Candidate Proposal | [Runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md), revised non-WOW32 S43--S45 tail. |
-| Admission And Approval | Owner directs S42 handoff closure then remaining non-WOW32 work; standing automatic sequential S admission applies. |
+| Admission And Approval | S43 is admitted but execution is held by owner direction during WOW32 proposal discussion. This documentation-only update does not start debugger work. |
 | Objective | Audit and close the complete selected original debugger package and its actual consumers, including OEM-DBG-PATH, through source-shaped recovery and explicit capability evidence. |
 | Non-goals | No WOW32/WRITE implementation, guest mutation, CPU30, private CSR server, or compile-only debugger acceptance. |
 | Reference Baseline | [S42 handoff](../etc/evidence/m0-t420-s42-wow32-successor-handoff.md) and fresh x86 DOS regression; original dbg source versus current finite debugger bindings. |
@@ -43,7 +43,9 @@ in evidence remain chronology; the new proposal and current T420 plan own
 the live assignments. T420 S43 is debugger including OEM-DBG-PATH, S44 is VDD,
 and S45 is non-WOW32 aggregate acceptance. T420 remains open for owner review.
 S42 handoff checks pass; the USER desktop failure remains unfixed and is
-assigned explicitly to successor S1/S2. S43 is now the sole active packet.
+assigned to successor S1 audit and S2 implementation. S43 remains the sole
+admitted packet, with execution held by the owner; only successor planning
+is being updated.
 
 ## S40 Closure Record
 
@@ -100,7 +102,7 @@ evidence, not a claim of real DBCS-host or full Win16 acceptance.
 
 The owner explicitly transfers remaining real consumer acceptance to the
 [proposal's mandatory receiver matrix](../proposals/proposal-mvdm-runtime-package-completion-001.md#mandatory-oemuni-consumer-acceptance-transferred-from-s37):
-the WOW32 successor S4/S5 owns OEM-WOW-DIR/DELETE and
+the WOW32 successor S6/S8 owns OEM-WOW-DIR/DELETE and
 OEM-WIN16-INTEGRATION; T420 S43 owns OEM-DBG-PATH. These items are unverified, not excluded or passed;
 each receiver must name them in its admission and closure evidence.
 

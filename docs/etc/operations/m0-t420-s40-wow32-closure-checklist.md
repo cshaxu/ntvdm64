@@ -9,11 +9,11 @@ unchecked item is accepted by the transfer.
 
 | Retained obligation | Current receiver |
 | --- | --- |
-| W1.0/W1.1 shared data, client objects and thread publication | Successor S1, using delivered S41 and partial S42 inputs |
+| W1.0/W1.1 shared data, client objects and thread publication | Successor S2, after S1 whole-package audit, using delivered S41 and partial S42 inputs |
 | W1.2--W1.5 and all W2 | Successor S2; no fixture-only task/exit closure |
-| W3 and W4 | Successor S3 |
-| W5/W6 and full registrar | Successor S4 |
-| W7, OEM-WOW and immutable WOW16/WRITE | Successor S5 |
+| W3 GDI/resources and W4 clipboard/DDE | Successor S3 GDI, S4 resources/menus and S5 clipboard/DDE |
+| W5/W6 and full registrar | Successor S6 kernel/DOS/OEM and S7 remaining families/registration |
+| W7, OEM-WOW and immutable WOW16 applications | Successor S8; WRITE.EXE, WINMINE.EXE and SOL.EXE are all mandatory |
 
 Every already implemented slot must be wired immediately; typed explicit
 failure placeholders are allowed only for identified unfinished owners.
