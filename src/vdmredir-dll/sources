@@ -1,0 +1,13 @@
+# Target-only VDMREDIR.DLL binding manifest.
+#
+# Original OpenNT VDMREDIR bodies, resources, exports and historical target
+# metadata remain canonical under src/mvdm/vdmredir/.  These three standalone
+# bindings are not OpenNT replacements: they declare only the finite DLL
+# entry, bounded guest-copy and unavailable-RAP seams selected by T421 S1.
+
+TARGET=VDMREDIR.DLL
+
+SOURCES= \
+    mvdm_redirector_guest_copy.c \
+    mvdm_redirector_remote_unavailable.c \
+    mvdm_redirector_dll_entry.c

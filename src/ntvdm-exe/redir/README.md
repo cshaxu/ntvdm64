@@ -1,14 +1,15 @@
-# redir family
+# Redirector worker bindings
 
-Owns the historical VDMREDIR/Redirector external-product boundary. No
-Redirector provider or protocol implementation is admitted.
+This directory owns only bindings that must execute in the one `ntvdm.exe`
+worker address space.  It is not the `VDMREDIR.DLL` target boundary; the
+DLL-local bindings live in `src/vdmredir-dll/`.
 
-## Registered divergences
+## Retained worker-local bindings
 
-| ID | Original purpose | Reason | Implementation | Files |
-| --- | --- | --- | --- | --- |
-| ADAPTER-REDIR-003 | Original NetAPI local-result bodies write strings by converting `ES:DI` into an unbounded host alias. | `VDMREDIR.DLL` has its own module state and must neither retain a guest alias nor instantiate a second worker session/TLS binding. | The helper preserves only the numeric 16:16 address and imports two bounded copy operations from the owning `ntvdm.exe` worker.  The worker resolves the address through its existing CCPU-aware address and guest-memory-lease boundary.  Unicode NetAPI results use the original OEM target encoding before the same bounded copy. | `include/mvdm_redirector_guest_copy.h`, `mvdm_redirector_guest_copy.c`; worker binding `../mvdm_redirector_worker_copy.c` |
-| ADAPTER-REDIR-004 | Original asynchronous named-pipe code retains `GetVDMAddr` aliases and reads/writes them from a worker. | A session guest lease cannot cross the BOP/worker lifetime and native aliases cannot enter durable request state; a late-loaded DLL must not instantiate a second worker session/TLS binding. | Preserve the packed 16:16 request layout; snapshot write bytes or stage read bytes, then acquire a fresh worker-owned lease only for completion copies. The original queue, completion ordering and ICA calls remain in `mvdm/vdmredir/vrnmpipe.c`; this adapter owns only lifetime-safe copy/staging and is exported by `ntvdm.exe`, not linked into the DLL. The DLL's original cdecl thread wrapper imports the same worker session/TLS operations; it does not link `session.lib`. | `include/mvdm_redirector_async.h`, `mvdm_redirector_async.c`; mirror `../../mvdm/vdmredir/vrnmpipe.c` |
-| ADAPTER-REDIR-005 | Original `VrGetCDNames` directly dereferences a packed `I_CDNames` guest record and its three far targets. | The structure and target aliases cannot cross the DLL/worker boundary as native pointers. | Decode the three retained 16:16 numeric targets through the worker's bounded copy binding; clear and write each result through the same binding. The original NetAPI calls, conversion and status contract remain in the mirror. | `include/mvdm_redirector_guest_copy.h`, `mvdm_redirector_guest_copy.c`; mirror `../../mvdm/vdmredir/vrnetapi.c` |
-| ADAPTER-REDIR-006 | Original `vrremote.c`/`vrnetapi.c` call RpcXlate/RxApi for remote transactions, password/session-key operations and browser/server enumeration. | The reached original packages require private Lanman redirector FSCTL/RAP transport that modern public Win32 does not expose. | Preserve each original caller and its error mapping. The exact imported remote signatures return `ERROR_CALL_NOT_IMPLEMENTED`; no SMB/RAP client or synthetic success exists. Local XACTSRV `NetUse*`, workstation, message and service handlers are a separate source-first public-NetAPI cohort and must not be placed here. | `mvdm_redirector_remote_unavailable.c`; mirrors `../../mvdm-host/vdmredir/vrremote.c`, `../../mvdm-host/vdmredir/vrnetapi.c`; evidence `../../../docs/etc/evidence/m0-t420-s20-vdmredir-operation-matrix.md` |
-| ADAPTER-REDIR-007 | Original `sources` selects `DLLENTRY=VrDllInitialize`, which runs redirector process-attach initialization before any BOP request. | The original source relies on the NT4 build's default stdcall ABI; the standalone x86 compiler preserves the source spelling as cdecl. Pointing the Windows loader directly at it corrupts its callback stack. | A one-function stdcall loader adapter invokes the original initializer unchanged. It owns no redirector state or policy. | `mvdm_redirector_dll_entry.c`; mirror `../../mvdm/vdmredir/vrdll.c` |
+| ID | Original purpose | Standalone boundary | Implementation |
+| --- | --- | --- | --- |
+| ADAPTER-REDIR-003 (worker half) | VDMREDIR NetAPI result bodies write through `ES:DI` aliases. | The DLL must not retain a guest alias or create a second worker session/TLS binding. | `mvdm_redirector_worker_copy.c` resolves numeric 16:16 addresses through the worker's CCPU-aware guest-memory lease; `vdmredir-dll` imports its bounded copy operations. |
+| ADAPTER-REDIR-004 | Asynchronous named-pipe work retains and later uses `GetVDMAddr` aliases. | A guest lease cannot cross the BOP/worker lifetime, and durable native aliases are invalid. | `mvdm_redirector_async.c` snapshots write data or stages read data, then obtains a fresh worker lease only for completion copies.  The original queue, completion order and ICA calls remain in `mvdm/vdmredir/vrnmpipe.c`. |
+
+No redirector provider, protocol implementation, DLL loader entry, RAP policy,
+or original VDMREDIR algorithm belongs here.
