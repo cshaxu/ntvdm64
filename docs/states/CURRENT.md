@@ -2,28 +2,17 @@
 
 ## Current Work
 
-## Active Packet
+**No active M/T/S packet.** T421 is pending this closure delivery; the next
+candidate remains the queue-head WOW32 runtime-recovery package.
 
-**Active: M0 T421 S4**
+## T421 Closure Record
 
-| Field | Record |
-| --- | --- |
-| Identifier Mode | M0 T421 S4, Ordinary Mode, single implementer/reviewer. |
-| Candidate Proposal | [VDMREDIR/WOW32 DLL compilation-boundary reorganization](../proposals/proposal-vdmredir-wow32-dll-component-boundary-reorganization-001.md). |
-| Admission And Approval | Owner approved T421 execution and the component-first plan on 2026-09-22. S3 is delivered by this revision; S4 is the next proposal-defined boundary audit under that standing approval. |
-| Objective | Independently remove obsolete worker-tree aliases, duplicate build inputs and dead target wrappers left after the VDMREDIR/WOW32 moves; classify every residual under a target, worker or genuinely shared ABI owner. |
-| Non-goals | WOW16/WRITE functional recovery, guest modification, a second worker session/TLS/CCPU instance, adding a generic shared component, or relocating code merely to reduce a path count. |
-| Reference Baseline | [S1 DLL ledger](../etc/evidence/m0-t421-s1-dll-compilation-boundary-ledger.md), [S2 VDMREDIR result](../etc/evidence/m0-t421-s2-vdmredir-target-component.md), and [S3 WOW32 result](../etc/evidence/m0-t421-s3-wow32-target-component.md). |
-| Files And ABI Surface | All residual `ntvdm-exe/redir`, `ntvdm-exe/wow`, `vdmredir-dll`, `wow32-dll`, their generators, includes and target manifests; `nt_vdd.h` and generic compatibility units only where actual consumer scans require review. |
-| Applicable Rules | Canonical-mirror immutability, target-only component ownership, one worker session/TLS owner, source-first recovery, immutable guest and exact mirror formatting. |
-| Verification | Full source/build-path scan, source/object/DLL ledger reconciliation, fresh formal x86 product and both DLL links, import/export checks, governance verification, `git diff --check`, and the established non-WOW regression. |
-| Expected Markers | No live `ntvdm-exe/redir` target source or obsolete WOW target binding remains; all residual shared surfaces have a finite named owner; mirror code has no path-only modification. |
-| Asset Needs | Existing target evidence, x86 MSVC/Ninja toolchain, and current runtime logs; no new guest, host service or system configuration. |
-| Reporting Requirements | Exact removed/retained file and line footprint, owner/disposition ledger, import direction, build/regression results, and explicit non-goals. |
-| Stop Conditions | A required behavior change, original-source move, unknown cross-component owner, a second worker-state owner, or a test that would require guest mutation. |
-| Exit Criteria | Obsolete aliases and duplicate target inputs are removed or explicitly retained with evidence; source/object/DLL ledgers agree; build/governance/diff/regression checks pass; S4 is committed and pushed. |
-| Original Owner Request | Complete the approved explicit-DLL component organization without inventing an undifferentiated common layer. |
-| Similar-Issue Sweep | All target source manifests, include roots, fixture direct-includes, parent import aliases, VDMREDIR worker bindings, WOW runtime/session declarations and package deployment lists. |
+T421 completes the explicit `vdmredir-dll` and `wow32-dll` target-component
+split.  S4 removes dead build paths, retains only the one worker's real lease
+and TLS/session bindings, and passes a fresh x86 product/DLL build plus worker
+fixtures.  The full source/object/DLL disposition and non-WOW regression scope
+are recorded in the [S4 component-boundary closure](../etc/evidence/m0-t421-s4-component-boundary-closure.md).
+No WOW16 functional acceptance is claimed.
 
 ## S45 Delivery Record
 

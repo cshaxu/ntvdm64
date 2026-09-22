@@ -18,6 +18,7 @@ TLS/session binding.  WOW32 imports only the narrow parent ABI
 raw session API, `session.lib`, a CCPU executor, or a second worker state
 instance.
 
-The adjacent `nt_vdd.h` ABI spelling remains under the worker include root
-for now because it is shared by non-WOW MVDM consumers; it is not a WOW32
-target implementation.  Its broader ABI ownership is an S4 audit item.
+`include/nt_vdd.h` is a WOW32-only declaration wrapper for three cdecl worker
+imports under the original `/Gz` target convention.  The byte-exact original
+ABI carrier remains `src/opennt-abi/source/public/sdk/inc/nt_vdd.h`; ordinary
+MVDM consumers continue to include that original carrier directly.

@@ -26,7 +26,7 @@ $environment = Join-Path $BuildRoot ("msvc-{0}.cmd" -f $Architecture)
   'if errorlevel 1 exit /b %errorlevel%', ':ready', 'cd /d "%MVDM_T324_CALLER_CWD%"', '%*') |
     Set-Content -LiteralPath $environment -Encoding ascii
 $includeRoots = @(
-    'src', 'src/ntvdm-exe/redir/include', 'src/mvdm/inc', 'src/mvdm/vdmredir',
+    'src', 'src/ntvdm-exe/redir/include', 'src/vdmredir-dll/include', 'src/mvdm/inc', 'src/mvdm/vdmredir',
     'src/mvdm/dos/command', 'src/opennt-host/netapi/netlib',
     'src/mvdm/softpc.new/base/inc', 'src/mvdm/softpc.new/host/inc',
     'src/ntvdm-exe/softpc/include',
@@ -65,7 +65,7 @@ build obj/vrmslot.obj: cc `$root/src/mvdm/vdmredir/vrmslot.c
 build obj/cmdredir.obj: cc `$root/src/mvdm/dos/command/cmdredir.c
 build obj/ntstatus.obj: cc `$root/src/opennt-host/netapi/netlib/ntstatus.c
 build obj/async.obj: cc `$root/src/ntvdm-exe/redir/mvdm_redirector_async.c
-build obj/guest-copy.obj: cc `$root/src/ntvdm-exe/redir/mvdm_redirector_guest_copy.c
+build obj/guest-copy.obj: cc `$root/src/vdmredir-dll/source/mvdm_redirector_guest_copy.c
 build obj/location.obj: cc `$root/src/ntvdm-exe/softpc/mvdm_guest_location.c
 build obj/thread.obj: cc `$root/src/ntvdm-exe/win32/thread_start_compat.c
 build obj/session.obj: cc `$root/src/ntvdm-exe/session/session.c
