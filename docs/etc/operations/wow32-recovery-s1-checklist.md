@@ -47,10 +47,15 @@ producer, and records the exact S2 source-shaped publication/withdrawal
 contract. Its explicit negative result prevents the current fixture-only view
 from being promoted to WOW16 acceptance.
 
+[Dispatch-definition audit](../evidence/m0-t422-s1-dispatch-definition-audit.md)
+resolves all 1,786 selected table rows to their original local/unsupported/
+host-thunk disposition and proves that all 668 selected thunks have original
+selected C bodies. S1 still assigns their runtime contracts to S2--S7.
+
 | ID | State | Required result | Existing starting point / next action |
 | --- | --- | --- | --- |
 | A01 | Complete | Pin admission revision, actual DLL/worker composition, guest and three-application media hashes. | [T422 S1 baseline evidence](../evidence/m0-t422-s1-admission-baseline.md) pins all six immutable guest inputs, separates the old installed WOW32.DLL from the formal candidate, and records the formal local 20-slot composition check. |
-| A02 | Pending | Every selected file, function/dispatch entry, export, resource, dynamic lookup and indirect callback assigned and classified. | SRC/dispatch/IN/OUT seed; expand mixed files by function and distinguish original profile exclusions from missing bindings. |
+| A02 | In progress | Every selected file, function/dispatch entry, export, resource, dynamic lookup and indirect callback assigned and classified. | All 1,786 dispatch rows now have source disposition and all 668 selected thunks have bodies; dynamic exports are host-verified. Complete function/resource/callback receiver allocation remains. |
 | A03 | Pending | Exact original owner and four-rung disposition for every external edge; finite import/expansion/removal list with hashes and line counts. | Existing registers and E40 imports; inspect outgoing closure and autonomous duplicates before adding code. |
 | A04 | Pending | Complete producer/consumer/update matrix for all guest-visible fields and object relationships. | DATA rows and E42 fault/layout proof; record authoritative facts, read/write direction, relocation, freshness and lifetime. |
 | A05 | Pending | Demonstrate a feasible full desktop/WND/CLS/handle lifecycle without a second USER server. | E42 transport exists but producer is missing; establish real desktop/native-control/external-object coverage and valid phead identity. |
