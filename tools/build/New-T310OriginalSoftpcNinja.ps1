@@ -264,7 +264,7 @@ $adapterBaseSrvNames = @('mvdm_command_guest_state.c',
 $adapterVddNames = @('mvdm_softpc_vdd_unavailable.c',
                      'mvdm_softpc_vdd_configuration.c')
 $adapterMonitorNames = @('vdm_control.c', '../mvdm_vdm_tib.c')
-$adapterDebuggerNames = @('dbg_init.c', 'dbg_state.c', 'dbg_dispatch.c', 'dbg_unavailable.c')
+$adapterDebuggerNames = @('dbg_registers.c', 'dbg_prompt.c')
 $adapterRedirNames = @('mvdm_redirector_guest_copy.c',
                        'mvdm_redirector_remote_unavailable.c',
                        'mvdm_redirector_dll_entry.c')
@@ -724,6 +724,11 @@ $graph.Add('  command = cl.exe $patch_activity_check_cflags /Fo$out $in')
 $graph.Add('  description = CC-PATCH $in')
 $graph.Add('  deps = msvc')
 $graph.Add('  msvc_deps_prefix = Note: including file: ')
+$graph.Add('rule cc_mvdm_debugger')
+$graph.Add('  command = cl.exe $cflags /D_NTDBG_ /Fo$out $in')
+$graph.Add('  description = CC-MVDM-DEBUGGER $in')
+$graph.Add('  deps = msvc')
+$graph.Add('  msvc_deps_prefix = Note: including file: ')
 $graph.Add('rule rc')
 $graph.Add('  command = rc.exe /nologo $rcflags /fo$out $in')
 $graph.Add('  description = RC $in')
@@ -994,6 +999,9 @@ $adapterDebuggerObjects = foreach ($name in $adapterDebuggerNames) {
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $adapterDebuggerRoot $name)))
     $object
 }
+$originalDebuggerObject = 'obj/mvdm-debugger/dbg.obj'
+$graph.Add('build ' + $originalDebuggerObject + ': cc_mvdm_debugger ' +
+    (NinjaPath (Join-Path $root 'src/mvdm/dbg/dbg.c')))
 $adapterSoftpcObjects = foreach ($name in $adapterSoftpcNames) {
     $object = 'obj/adapter-softpc/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $adapterSoftpcRoot $name)))
@@ -1264,7 +1272,7 @@ $graph.Add('build softpc-win32-bindings.lib: lib ' + ($adapterWin32Objects -join
 $graph.Add('build worker-command-bindings.lib: lib ' + ($adapterBaseSrvObjects -join ' '))
 $graph.Add('build monitor-bindings.lib: lib ' + ($adapterMonitorObjects -join ' '))
 $graph.Add('build kernel-vdm-printer.lib: lib ' + $kernelVdmPrinterObject)
-$graph.Add('build debugger-bindings.lib: lib ' + ($adapterDebuggerObjects -join ' '))
+$graph.Add('build debugger-bindings.lib: lib ' + ((@($adapterDebuggerObjects) + @($originalDebuggerObject)) -join ' '))
 $graph.Add('build softpc-ccpu-vector-defaults.lib: lib ' + $patchVectorDefaultsObject)
 $graph.Add('build softpc-activity-check.lib: lib ' + $patchActivityCheckObject)
 $graph.Add('build original-softpc-candidate: phony original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-redir.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-softpc-host-roots.lib original-opennt-netlib.lib original-opennt-netapi-api.lib original-opennt-xactsrv.lib original-opennt-rtl-x86.lib softpc-bindings.lib redirector-bindings.lib worker-shell.lib worker-command-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib')
@@ -1286,7 +1294,16 @@ $graph.Add('build obj/tests/ccpu_debug_match_test.obj: cc ' + (NinjaPath (Join-P
 $graph.Add('build ccpu-debug-match-test.exe: debug_unit_link obj/tests/ccpu_debug_match_test.obj obj/ccpu/c_debug.obj')
 $graph.Add('build obj/tests/debug_register_binding_test.obj: cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/debug_register_binding_test.c')))
 $graph.Add('build debug-register-binding-test.exe: debug_unit_link obj/tests/debug_register_binding_test.obj')
-$graph.Add('build dpmi-debug-tests: phony ccpu-debug-match-test.exe debug-register-binding-test.exe ccpu-halt-reset-test.exe')
+$graph.Add('build obj/tests/debugger_event_transport_test.obj: cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/debugger_event_transport_test.c')))
+$graph.Add('build debugger-event-transport-test.exe: event_test_link obj/tests/debugger_event_transport_test.obj')
+$graph.Add('build obj/tests/debugger_module_event_test.obj: cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/debugger_module_event_test.c')))
+$graph.Add('build debugger-module-event-test.exe: event_test_link obj/tests/debugger_module_event_test.obj')
+$graph.Add('build obj/tests/oem_command_uppercase_test.obj: cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/oem_command_uppercase_test.c')))
+$graph.Add('build oem-command-uppercase-test.exe: debug_unit_link obj/tests/oem_command_uppercase_test.obj')
+$graph.Add('build obj/tests/debugger_worker_module_observer.obj: cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/debugger_worker_module_observer.c')))
+$graph.Add('build debugger-worker-module-observer.exe: event_test_link obj/tests/debugger_worker_module_observer.obj')
+$graph.Add('build debugger-event-tests: phony debugger-event-transport-test.exe debugger-module-event-test.exe debugger-worker-module-observer.exe')
+$graph.Add('build dpmi-debug-tests: phony ccpu-debug-match-test.exe debug-register-binding-test.exe debugger-event-transport-test.exe debugger-module-event-test.exe ccpu-halt-reset-test.exe')
 $ccpuThreadLifecycleFixtureObject = 'obj/tests/ccpu_thread_lifecycle_test.obj'
 $graph.Add('build ' + $ccpuThreadLifecycleFixtureObject + ': cc ' + (NinjaPath $ccpuThreadLifecycleFixtureSource))
 $graph.Add('build ccpu-thread-lifecycle-test.exe: event_test_link ' + $ccpuThreadLifecycleFixtureObject + ' ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)

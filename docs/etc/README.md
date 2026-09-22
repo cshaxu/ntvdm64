@@ -2,6 +2,9 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [WOW32 recovery coverage ledger](operations/wow32-recovery-coverage-ledger.md) | Queued WOW32 successor | Seeded source/table/callback/direct-data coverage, stable capability IDs and inherited evidence; no runtime acceptance claim. | Retain through successor acceptance. |
+| [WOW32 recovery S1 checklist](operations/wow32-recovery-s1-checklist.md) | Queued WOW32 successor | Reusable audit gates, feasibility experiments and S1 handoff requirements. | Retain with successor design evidence. |
+| [T420 S43 debugger capability ledger](evidence/m0-t420-s43-debugger-capability-ledger.md) | M0 T420 S43 | Selected original `dbg` source/caller inventory, event-transport investigation and required debugger acceptance matrix. | Retain through T420 completion. |
 | [T420 prior status excerpts](evidence/m0-t420-prior-status-records.md) | T420 evidence | Retained S30 chronology moved from Current to preserve the control-plane size limit. | Retain with T420 evidence. |
 | [S42 WOW32 successor handoff](evidence/m0-t420-s42-wow32-successor-handoff.md) | M0 T420 S42 | Owner-directed preservation, partial-code disposition and transfer to the queue-head WOW32 proposal; final delivery checks. | Retain through successor acceptance. |
 | [S40 WOW32 production closure checklist](operations/m0-t420-s40-wow32-closure-checklist.md) | T420 research handoff | Detailed W1--W7 obligations mapped to S41--S45. | Retain through WOW32 acceptance. |

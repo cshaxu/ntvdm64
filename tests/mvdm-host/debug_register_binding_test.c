@@ -1,7 +1,7 @@
 /* Boundary unit evidence, not guest/CPU or descriptor-decoder acceptance.
  * Compile the actual binding; mock only descriptor/memory/register endpoints. */
 #include <stdio.h>
-#include "../../src/ntvdm-exe/debugger/source/dbg_dispatch.c"
+#include "../../src/ntvdm-exe/debugger/source/dbg_registers.c"
 
 static CPU_DESCR supplied;
 static int outside, copy_ok = 1, copies, moves;

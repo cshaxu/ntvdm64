@@ -4,26 +4,38 @@
 
 ## Active Packet
 
-**Active: M0 T420 S43**
+**Active: M0 T420 S44**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T420 S43, Ordinary Mode, single implementer/reviewer. |
+| Identifier Mode | M0 T420 S44, Ordinary Mode, single implementer/reviewer. |
 | Candidate Proposal | [Runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md), revised non-WOW32 S43--S45 tail. |
-| Admission And Approval | Owner explicitly resumes S43 admission after the WOW32 queue revision and requests the task brief first. The prior execution hold is lifted; this delivery records admission only, without debugger implementation changes. |
-| Objective | Audit and close the complete selected original debugger package and its actual consumers, including OEM-DBG-PATH, through source-shaped recovery and explicit capability evidence. |
-| Non-goals | No WOW32/WRITE implementation, guest mutation, CPU30, private CSR server, or compile-only debugger acceptance. |
-| Reference Baseline | [S42 handoff](../etc/evidence/m0-t420-s42-wow32-successor-handoff.md) and fresh x86 DOS regression; original dbg source versus current finite debugger bindings. |
-| Files And ABI Surface | src/mvdm/dbg, original DEM notifications, worker debugger/monitor interfaces, source manifests and controlled debugger/guest tests. |
+| Admission And Approval | Owner authorizes automatic sequential admission through the remaining non-WOW T420 packets unless manually interrupted. S43 is delivered; S44 begins with audit before implementation. |
+| Objective | Audit and close the complete selected original VDD package and its actual consumers: registration, load, request/notification dispatch, resource ownership, unload, and normal/abnormal worker cleanup. |
+| Non-goals | No WOW32/WRITE implementation, guest mutation, CPU30, private CSR server, or compile-only VDD acceptance. |
+| Reference Baseline | [S43 debugger ledger](../etc/evidence/m0-t420-s43-debugger-capability-ledger.md), [S42 handoff](../etc/evidence/m0-t420-s42-wow32-successor-handoff.md), selected original VDD source and fresh x86 DOS regression. |
+| Files And ABI Surface | src/mvdm/vdd and original callers, ntvdm worker VDD bindings, source manifests, controlled test VDD and production-path tests. |
 | Applicable Rules | Source-first complete package, finite public-host boundaries, immutable guest, exact mirror formatting, one active S. |
-| Verification | Inventory all entries/callers; initialization, non-ASCII module notice, breakpoint/exception, return/error and teardown; original-body and retained-binding review; x86 and all 17 DOS routes. |
-| Expected Markers | Each selected debugger family has actual production-path evidence or complete source-proven exclusion; no successful no-op masking a missing event transport. |
-| Asset Needs | Pinned OpenNT, controlled native debugger and disposable guest probes; build/M0-T420/S43, O:/winnt/tests and O:/winnt/logs. |
-| Reporting Requirements | Original-owner/caller and capability matrix, OEM-DBG-PATH result, external-boundary attempts, exact source/artifact hashes and mirror/non-mirror line accounting. |
+| Verification | Freeze all selected entries/callers; test controlled provider registration, load, request/notification, normal/failed unload and worker loss; then fresh x86 and all 17 DOS routes. |
+| Expected Markers | Each selected VDD family has production-path evidence, source-proven exclusion, or explicit unavailable-boundary result; no compile-only registration claim. |
+| Asset Needs | Pinned OpenNT, controlled native test VDD and disposable probes; build/M0-T420/S44, O:/winnt/tests and O:/winnt/logs. |
+| Reporting Requirements | Original-owner/caller and capability matrix, provider/dispatch/cleanup result, exact source/artifact hashes and mirror/non-mirror line accounting. |
 | Stop Conditions | Guest modification, recursive private server import, unexplained DOS regression or unapproved capability exclusion. |
-| Exit Criteria | Full selected debugger disposition and normal/failure/cleanup evidence, required OEM consumer, x86/regression/source gates, reviewed commit/push. Unavailable capabilities are not passing tests. |
-| Original Owner Request | Finish the remaining non-WOW32 work in S43--S45 after moving WOW32 into the queue-head successor. |
-| Similar-Issue Sweep | DBGDispatch modes, ModuleLoad/Free/SegmentMove, task/remote-thread notice, IsDebuggee, exception context, task/worker cleanup and OEM path conversion. |
+| Exit Criteria | Full selected VDD disposition and normal/failure/cleanup evidence, x86/regression/source gates, reviewed commit/push. Unavailable capabilities are not passing tests. |
+| Original Owner Request | Finish the remaining non-WOW32 work in S44--S45 after moving WOW32 into the queue-head successor. |
+| Similar-Issue Sweep | VDD registration, request carrier, dynamic load/unload, resources, notifications, process/worker loss, and original cleanup ownership. |
+
+## S43 Closure Record
+
+S43 replaces the retired local debugger implementation with the byte-identical
+original `mvdm/dbg/dbg.c`, retaining only a bounded six-DWORD CCPU40
+debug-register input copy and a dynamic original `DbgPrompt` binding.  Real
+Windows DebugPort evidence proves original DOSX BOP 6 `DBG_SEGLOAD` plus DEM
+CP437 OEM `MEM` module load/free notifications.  The source matrix transfers
+WOW-only producer families to the WOW32 successor and records all otherwise
+unproduced original no-op/default modes without inventing a replacement path.
+Formal x86 product and focused debugger/DPMI/OEM fixtures pass; the deployed
+package passes all 17 established DOS routes.  Guest media remain unchanged.
 
 ## S42 Closure Record
 

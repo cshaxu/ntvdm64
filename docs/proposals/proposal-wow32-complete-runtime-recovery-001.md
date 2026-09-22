@@ -128,6 +128,61 @@ determine the complete additional file/function ranges and their size.
 Do not promise a final import count before that audit or recursively import
 all USER/GDI/CSR merely to satisfy unresolved symbols.
 
+## Shared-data and execution contract
+
+Recovery preserves the existing Win16 guest algorithms and original WOW32
+conversion code. NTVDM/CCPU executes guest instructions on every route;
+direct USER16 memory reads bypass WOW32 dispatch, not the worker. Original
+NT shared selected USER data with its clients; it did not expose arbitrary
+kernel memory. A modern host pointer is usable only through a proved mapping
+and compatible layout/lifetime, never merely because it fits in 32 bits.
+
+S1 records these three routes separately. A passing route cannot stand in for
+another:
+
+| Route | Required original contract and evidence |
+| --- | --- |
+| Guest to WOW32 to host API | Original thunk conversion, guest-buffer access, handle identity, return/error and release. Reuse existing original bodies and guest-memory bindings. |
+| Host to guest callback | Original CallBack16, CCPU entry/return, task/thread context, nested calls and cancellation/teardown. A substituted native callback is only a fixture. |
+| Guest direct shared-data access | Original consumer instructions, mapped addresses and layout, authoritative data producer, publication/update ordering, permissions and object lifetime. A non-null callback table does not prove this route. |
+
+For each consumed field or coherent field group in SHAREDINFO, SERVERINFO,
+HANDLEENTRY, CLIENTINFO/TEB, DESKTOPINFO, WND, CLS, MENU and shared time data,
+S1's ledger must identify the original consumer and owner; authoritative
+native object/API or WOW-owned state; guest representation and address
+relocation; read/write direction; creation, mutation and invalidation events;
+and the synchronization and storage-lifetime contract. Preserve any original
+guest-writable state explicitly; do not assume the whole view is read-only.
+Public API availability is a candidate mechanism, not proof that its result
+matches the historical field or its update ordering.
+
+The update design must cover host-originated changes and guest execution that
+does not enter a thunk: window movement, resizing, style/parent/owner changes,
+menu mutation, cursor position, system settings and clock progression as
+required by the selected consumers. State exactly when each update becomes
+observable and how consistency is preserved. Refreshing only at BOP/message
+entry or periodically is insufficient unless evidence proves the required
+observable contract. Callbacks must see required creation state before entry;
+reentrant mutation/destruction must not expose partial objects or free storage
+still borrowed by an active caller. Prove handle reuse, cache invalidation,
+thread switching and withdrawal before backing release.
+
+S1 must also settle object coverage: actual desktop, native/system controls,
+other WOW tasks and externally owned windows or menus reachable through the
+original APIs. Neither an own-created-windows-only assumption nor an
+unbounded copy of the host desktop graph is an accepted default. Name each
+required relationship, identity rule and observable failure contract.
+
+Modern Windows remains authoritative for native window/menu operations,
+drawing, input delivery and native queues. Original WOW algorithms own the
+Win16 compatibility policy; guest-visible records represent those same
+objects. Audit reusable original semantic slices by their finite dependencies,
+including slices located under ntuser/kernel; directory naming alone does
+not decide composability or authorize import. Existing source-policy stopping
+boundaries still prohibit recursive USER/CSRSS runtime import. A missing
+contract must not grow into an autonomous window manager, input router,
+drawing engine or replacement NT scheduler.
+
 ## Proposed sequential S packets
 
 Numbers below are proposed local S positions, activated only at T admission.
@@ -146,6 +201,30 @@ before implementation; later findings amend that graph with evidence.
 | S6 | KERNEL/DOS, module/memory/file and OEM services | Complete selected loader-facing services, memory/module/resource aliases, file/directory/environment and related kernel thunks. Own OEM-WOW-DIR and OEM-WOW-DELETE, including all branches and real Win16 consumer tests; test failure, rollback and task/module release. Shared task policy consumes S2, not a second owner. |
 | S7 | Remaining original interface families and registration completeness | Close every S1-assigned remaining Shell, Winsock, ToolHelp, COMM, print/spool, sound/multimedia, hooks, common-dialog/OLE and hard-error family. Use earlier owners for their shared mechanisms. Verify all selected dispatch entries, 21 inputs/20 outputs, startup rollback and family-specific teardown; remove residual selected placeholders. Each family has its own ledger rows and tests, never a blanket link-only pass. |
 | S8 | Whole-provider and three-application acceptance | On one final artifact set run immutable WRITE.EXE, WINMINE.EXE and SOL.EXE through the scenarios below; verify original WOW16 loader, task/callback/exit, integrated OEM behavior, repeated tasks, failure/worker cleanup and subsequent DOS usability. Reconcile every preceding checklist, measured mirror/non-mirror changes and owner final acceptance report. No selected operation remains fixture-only or unbound. |
+
+The following additions are mandatory closure gates for the corresponding
+rows above:
+
+- S1 delivers the complete producer/consumer/update matrix and uses bounded
+  experiments to establish feasibility of the highest-risk shared-object,
+  reentry and host-originated update contracts. Reuse retained experiments
+  where their inputs remain valid. Exact mappings, ordering and test plans
+  must be settled before dependent implementation; "public APIs should supply
+  these fields" is not a design result. A proved unavailable contract names
+  its precise dependency and design conflict; resolve that conflict before
+  implementing the affected scope. Do not silently exclude it or claim full
+  compatibility. Design feasibility is distinct from final runtime acceptance.
+- S2 proves real guest queries during creation callbacks, mutation followed
+  by direct reads, destruction inside a callback, stale/reused handles,
+  thread/task switching and relevant external/native-object interactions.
+  Exercise required changing data during guest execution without a WOW32
+  call, and verify failure/retirement without partially published records.
+- S4 applies the same contract to menu/item/submenu identity, relationships,
+  owner-draw data, dynamic mutation and release. It consumes S2's settled
+  publication/lifetime mechanism and owns menu-specific implementation/tests.
+- S8 repeats the integrated direct-read, ordinary-thunk and real-callback
+  routes on the same final artifacts. Application success supplements the
+  per-family tests; it cannot waive an uncovered shared-data contract.
 
 S2 deliberately combines the client view with its task/window/message owners:
 a separately "finished" snapshot structure without a live producer and teardown
@@ -195,6 +274,13 @@ an autonomous replacement. A discovered omitted dependency triggers an explicit
 ledger/design correction, not another silent one-off implementation.
 
 ## Per-S ledger and checklist governance
+
+Start S1 from the prepared [coverage ledger](../etc/operations/wow32-recovery-coverage-ledger.md)
+and [S1 execution checklist](../etc/operations/wow32-recovery-s1-checklist.md).
+They seed the 77-source, ten-table, 21/20-callback and 26-mapping inventories
+with existing evidence and stable IDs. Reconcile them against the admission
+revision and expand their entry/field dependencies; preparation ticks are not
+audit or runtime acceptance. Preserve IDs and record reasons for regrouping.
 
 Each S maintains one indexed supporting evidence record under docs/etc/evidence
 (or a linked bounded ledger/checklist pair). The T-wide dependency matrix is
