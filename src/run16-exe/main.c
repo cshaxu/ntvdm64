@@ -176,6 +176,8 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command)
     STARTUPINFOEXW guarded_startup={0};
     JOBOBJECT_EXTENDED_LIMIT_INFORMATION job_limits={0};
     SIZE_T attributes_bytes=0;
+    DWORD check_creation_flags=(binary & BINARY_SUBTYPE_MASK)==BINARY_TYPE_DOS_PIF ?
+        CREATE_NEW_CONSOLE : 0;
 
     /* This is the original parent-side VDM environment projection.  The
      * ANSI record is captured by BaseCheckVDM; the matching Unicode record
@@ -197,7 +199,13 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command)
     startup.hStdInput = GetStdHandle(STD_INPUT_HANDLE);
     startup.hStdOutput = GetStdHandle(STD_OUTPUT_HANDLE);
     startup.hStdError = GetStdHandle(STD_ERROR_HANDLE);
-    if (!BaseCheckVDM(binary, application, command, NULL, &environment, &message, &task, 0, &startup))
+    /* Original BaseCheckVDM rejects a PIF submitted from an existing Console
+     * unless CreateProcess declared its required separate Console.  Preserve
+     * that original PIF prerequisite at the public CreateProcess-shaped
+     * boundary; the source-owned CheckDOS record still allocates its session
+     * id and the later worker creation consumes that result. */
+    if (!BaseCheckVDM(binary, application, command, NULL, &environment, &message,
+                      &task, check_creation_flags, &startup))
     {
         result = GetLastError();
         goto done;

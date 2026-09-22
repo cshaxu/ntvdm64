@@ -8,7 +8,7 @@
 #include "ntvdm-exe/session/session.h"
 #include "ntvdm-exe/monitor/include/monitor_context.h"
 #include "ntvdm-exe/wow/include/wow_user_session_binding.h"
-#include "ntvdm-exe/vdd/include/mvdm_softpc_vdd_configuration.h"
+#include "ntvdm-exe/softpc/include/mvdm_shadow_registry.h"
 
 /* Original BaseClient capture storage is private to this worker process. */
 PVOID CsrPortHeap;

@@ -115,16 +115,34 @@ or adapter-owned replacement scheduler is admitted.
 
 ### Shadow-registry receiver
 
-The product must not read or write the Windows system registry.  Its only
-registry configuration medium is immutable `NTVDM.REG` beside `ntvdm.exe`,
-loaded at worker startup.  The successor's initial audit must enumerate every
-selected WOW registry consumer.  Read-only configuration consumers (including
-PMAP_COMPAT/profile mappings) must retain their original reader and bind it to
-the same-shaped shadow provider.  The Win16 Shell `RegOpen/Create/Set/Enum/
-Delete` family is not a configuration read: if selected consumers require it,
-the owning S packet must deliver a finite shadow handle/tree/writeback
-provider with close, failure, enumeration and concurrent-worker tests.  It
-must not fall back to native HKLM/HKCU or be reduced to unconditional defaults.
+The product reads every admitted Windows Registry root only through the
+worker-local layered registry overlay; it never writes the system Registry.
+`NTVDM.REG` is consulted first and overrides the admitted read-only host value.
+The successor reuses that provider rather than adding a WOW-only Registry
+facade. Its initial audit enumerates every selected WOW registry consumer and
+its root. Read-only configuration consumers (including PMAP_COMPAT/profile
+mappings) retain their original reader and bind it to that same-shaped provider.
+A missing key/value in both layers reaches the original caller unchanged, which
+alone determines the original default or failure.
+
+The Win16 Shell `RegOpen/Create/Set/Enum/Delete` family is not a configuration
+read. If selected consumers require it, S7 extends the same provider with a
+finite worker-local mutable shadow tree seeded by the layered read view; every
+read, creation, write, deletion and enumeration uses that tree, never writes
+HKLM/HKCU. Successful creates, sets and deletes atomically commit only the
+product `NTVDM.REG` overlay, including tombstones that hide a deleted host
+key/value. S7 must prove close, failure, enumeration, task cleanup,
+cross-worker serialization and persistence. It must not reduce these APIs to
+unconditional defaults or a read-only parser.
+
+The original `wow32/wshell.c` route is the behavioral reference: its seven
+Win16 SHELL thunks call the historical Win32 Registry, translate errors through
+`ConvertToWin31Error`, apply `Remove_Classes` for the default classes root, and
+implement recursive deletion because Win3.1 permits deleting a non-empty key
+where the Win32 API did not. S7 preserves those original bodies and binds their
+Registry calls to the shared tree. A native pointer/handle must not be written
+into guest memory: the existing DWORD Win16 HKEY slots use a bounded
+worker-local surrogate table with stale-handle rejection and task teardown.
 
 The immutable PMODE32 guest also reads objects directly. Audit both this data
 ABI and ordinary thunk calls, including all 26 identified mappings and 47
@@ -212,7 +230,7 @@ before implementation; later findings amend that graph with evidence.
 | S4 | USER resources and menus | Complete resource lookup/conversion, accelerators, icons/cursors/bitmaps, menu/item/submenu graphs and default-window resource operations. Bind S2 callbacks and S3 bitmap services; test actual guest load/create/query/mutate/use/free, creation-time visibility and failed/partial resource loading. |
 | S5 | Clipboard and DDE | Complete guest/native format conversion, data ownership transfer, message/reply and peer/module/task death. Test real guest exchanges, rejected/abandoned transfers, reentry, cancellation and repeated cleanup; original FreeDDEData alone is insufficient. |
 | S6 | KERNEL/DOS, module/memory/file and OEM services | Complete selected loader-facing services, memory/module/resource aliases, file/directory/environment and related kernel thunks. Own OEM-WOW-DIR and OEM-WOW-DELETE, including all branches and real Win16 consumer tests; test failure, rollback and task/module release. Shared task policy consumes S2, not a second owner. |
-| S7 | Remaining original interface families and registration completeness | Close every S1-assigned remaining Shell, Winsock, ToolHelp, COMM, print/spool, sound/multimedia, hooks, common-dialog/OLE and hard-error family. Use earlier owners for their shared mechanisms. Verify all selected dispatch entries, 21 inputs/20 outputs, startup rollback and family-specific teardown; remove residual selected placeholders. Each family has its own ledger rows and tests, never a blanket link-only pass. |
+| S7 | Remaining original interface families and registration completeness | Close every S1-assigned remaining Shell, Winsock, ToolHelp, COMM, print/spool, sound/multimedia, hooks, common-dialog/OLE and hard-error family. This includes the complete original Shell registry operation family through the shared layered per-worker tree. Use earlier owners for shared mechanisms. Verify all selected dispatch entries, 21 inputs/20 outputs, registry read/create/set/delete/enumerate/close, startup rollback, per-worker isolation, atomic persistence and family-specific teardown; remove residual selected placeholders. Each family has its own ledger rows and tests, never a blanket link-only pass. |
 | S8 | Whole-provider and three-application acceptance | On one final artifact set run immutable WRITE.EXE, WINMINE.EXE and SOL.EXE through the scenarios below; verify original WOW16 loader, task/callback/exit, integrated OEM behavior, repeated tasks, failure/worker cleanup and subsequent DOS usability. Reconcile every preceding checklist, measured mirror/non-mirror changes and owner final acceptance report. No selected operation remains fixture-only or unbound. |
 
 The following additions are mandatory closure gates for the corresponding

@@ -14,6 +14,7 @@
 #include <ctype.h>
 #include <string.H>
 #include "cmdkeyb.h"
+#include "ntvdm-exe/softpc/include/mvdm_shadow_registry.h"
 
 CHAR szPrev[5] = "US";
 INT  iPrevCP = 437;

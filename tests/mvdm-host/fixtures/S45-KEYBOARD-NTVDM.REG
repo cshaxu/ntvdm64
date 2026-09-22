@@ -1,0 +1,7 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Keyboard Layout\DosKeybCodes]
+"00000409"="US"
+
+[HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Keyboard Layout\DosKeybIDs]
+"00000409"=""

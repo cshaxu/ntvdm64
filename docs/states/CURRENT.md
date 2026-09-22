@@ -4,26 +4,41 @@
 
 ## Active Packet
 
-**Active: M0 T420 S45**
+**Active: M0 T420 S45 (delivered; awaiting owner acceptance audit)**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T420 S45, Ordinary Mode, single implementer/reviewer. |
+| Identifier Mode | M0 T420 owner acceptance audit; S45 is delivered, Ordinary Mode, single implementer/reviewer. |
 | Candidate Proposal | [Runtime package completion](../proposals/proposal-mvdm-runtime-package-completion-001.md), S45 static-registry receiver matrix and final non-WOW32 acceptance. |
-| Admission And Approval | Owner authorizes automatic sequential admission through the remaining non-WOW T420 packets unless manually interrupted. S44 is delivered; S45 begins with complete receiver audit before implementation. |
-| Objective | Replace each selected original static registry read with one worker-local immutable `NTVDM.REG` same-shaped read provider, then complete final non-WOW32 reconciliation and acceptance. |
-| Non-goals | No Windows registry access, mutable WOW registry emulation, WOW32/WRITE implementation, guest mutation, CPU30, private CSR server, or compile-only acceptance. |
+| Admission And Approval | Owner authorized automatic sequential admission through the remaining non-WOW T420 packets. S45 is delivered; T420 now awaits the owner audit required before T closure. |
+| Objective | Record S45's selected original Registry-reader recovery: `NTVDM.REG` values override an admitted read-only system Registry baseline. Preserve the later mutable-write contract—writes persist only to `NTVDM.REG`—for the WOW successor, without claiming it is implemented by this static-reader packet. |
+| Non-goals | Windows Registry mutation, unadmitted Registry roots, WOW32/WRITE implementation, guest mutation, CPU30, private CSR server, or compile-only acceptance. |
 | Reference Baseline | [S44 VDD ledger](../etc/evidence/m0-t420-s44-vdd-capability-ledger.md), S45 receiver matrix, pinned original callers and fresh x86 DOS regression. |
-| Files And ABI Surface | Selected original static registry callers, worker-local shadow provider, source manifests, controlled configuration files and production-path tests. |
+| Files And ABI Surface | Selected original static registry callers, worker-local layered registry provider, source manifests, controlled overlay files and production-path tests. |
 | Applicable Rules | Source-first complete package, finite public-host boundaries, immutable guest, exact mirror formatting, one active S. |
-| Verification | Freeze every static reader; test configured, absent and malformed input through its original caller; distinguish hardware discovery and mutable API families; then fresh x86 and all 17 DOS routes. |
-| Expected Markers | Every selected static caller observes a same-shaped configured read or its original fallback/failure; no formal product import reaches Windows registry APIs. |
-| Asset Needs | Pinned OpenNT, controlled `NTVDM.REG` files and disposable probes; build/M0-T420/S45, O:/winnt/tests and O:/winnt/logs. |
+| Verification | Freeze every static reader; test file override, host baseline, absent and malformed input through its original caller; distinguish hardware discovery and mutable API families; then fresh x86 and all 17 DOS routes. |
+| Expected Markers | Every selected static caller observes a same-shaped layered read or its original fallback/failure; no product operation writes the Windows Registry. |
+| Asset Needs | Pinned OpenNT, controlled `NTVDM.REG` files and read-only host-registry probes; build/M0-T420/S45, O:/winnt/tests and O:/winnt/logs. |
 | Reporting Requirements | Receiver/capability matrix, source/adapter ownership, configured/absent/malformed evidence, registry-import sweep, exact source/artifact hashes and mirror/non-mirror line accounting. |
-| Stop Conditions | Guest modification, Windows registry access, recursive private server import, unexplained DOS regression or treating mutable/discovery behavior as a static file read. |
-| Exit Criteria | Full selected receiver disposition, final non-WOW32 reconciliation, x86/regression/source gates, clean reviewed commit/push. Unavailable capabilities are not passing tests. |
+| Stop Conditions | Guest modification, Windows registry mutation, unadmitted Registry root, recursive private server import, unexplained DOS regression or treating mutable/discovery behavior as a static file read. |
+| Exit Criteria | S45: full selected receiver disposition, final non-WOW32 reconciliation, x86/regression/source gates, clean reviewed commit/push. T420 closure remains subject to the owner's final audit. Unavailable capabilities are not passing tests. |
 | Original Owner Request | Finish the remaining non-WOW32 work in S44--S45 after moving WOW32 into the queue-head successor. |
 | Similar-Issue Sweep | Every formal `Reg*`/`Nt*Key` consumer, static versus discovery versus mutable classification, source-shaped errors and worker teardown. |
+
+## S45 Delivery Record
+
+The [S45 layered-registry audit](../etc/evidence/m0-t420-s45-shadow-registry-admission-audit.md)
+delivers the complete selected non-WOW static-reader matrix.  `NTVDM.REG`
+overrides a finite set of read-only host snapshots through private worker
+handles, while the original OpenNT caller bodies retain their own fallback and
+failure behavior.  VCD serial discovery uses the public DOS-device namespace;
+the unselected MONITOR ROM branch remains original unavailable behavior.
+There are no Windows Registry mutation imports.  Fresh x86 artifacts and all
+17 direct/interactive/nested COMMAND, MEM and EDIT product routes pass.  The
+future mutable shadow-tree, tombstone and atomic-commit behavior is explicitly
+transferred to the WOW32 successor; it is a product contract, not a false S45
+completion claim.  T420 remains open only for the owner's requested final
+audit.
 
 ## S44 Closure Record
 
@@ -65,7 +80,7 @@ The [successor proposal](../proposals/proposal-wow32-complete-runtime-recovery-0
 inherits all unfinished WOW32 and WOW16/WRITE work. Historical receiver numbers
 in evidence remain chronology; the new proposal and current T420 plan own
 the live assignments. T420 S43 is debugger including OEM-DBG-PATH and S44 is
-VDD; S45 is the admitted final `NTVDM.REG` shadow-registry completion plus
+VDD; S45 is the admitted final layered registry-overlay completion plus
 non-WOW32 acceptance. T420 remains open for owner review.
 S42 handoff checks pass; the USER desktop failure remains unfixed and is
 assigned to successor S1 audit and S2 implementation. S45 is the sole

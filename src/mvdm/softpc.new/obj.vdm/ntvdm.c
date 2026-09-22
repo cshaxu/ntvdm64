@@ -11,6 +11,7 @@
 #include "host_nls.h"
 #include "nt_timer.h"
 #include "mvdm_standalone_worker.h"
+#include "ntvdm-exe/softpc/include/mvdm_shadow_registry.h"
 #include <setjmp.h>
 
 

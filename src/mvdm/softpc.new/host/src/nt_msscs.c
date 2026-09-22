@@ -40,7 +40,7 @@
 #include <vint.h>
 
 #include "mvdm_softpc_firmware.h"
-#include "mvdm_softpc_vdd_configuration.h"
+#include "ntvdm-exe/softpc/include/mvdm_shadow_registry.h"
 
 /* DIVERGENCE(MVDM-HOST-DIV-084): `emm_mngr.c` is a selected original DOS
  * owner but no selected public header carries its page-frame initializer.
@@ -675,17 +675,11 @@ PCHAR  pszName,pszValue;
 FILETIME ft;
 PCHAR  pKeyName = "SYSTEM\\CurrentControlSet\\Control\\VirtualDeviceDrivers";
 
-    /* DIVERGENCE(MVDM-HOST-DIV-148): the standalone product never accesses
-     * HKLM.  Its package-local NTVDM.REG binds these same-shaped original
-     * query calls to the immutable VDD MULTI_SZ. */
-    if (mvdm_softpc_open_installable_vdd_registry(&VDDKey) ==
-        MVDM_SOFTPC_VDD_CONFIGURATION_NONE) {
-        return;
-    }
-    if (VDDKey == NULL) {
-        RcErrorDialogBox(ED_REGVDD, pKeyName, NULL);
-        return;
-    }
+    /* DIVERGENCE(MVDM-HOST-DIV-148): retain the original open/query/close
+     * sequence. Its local include returns a private layered handle: NTVDM.REG
+     * overrides the admitted read-only HKLM snapshot, never a native handle. */
+    if (RegOpenKeyEx(HKEY_LOCAL_MACHINE, pKeyName, 0, KEY_READ, &VDDKey) !=
+        ERROR_SUCCESS) return;
 
     pszName = "VDD";
 

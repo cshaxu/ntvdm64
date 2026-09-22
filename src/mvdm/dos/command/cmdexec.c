@@ -42,6 +42,7 @@
  * order but bind it to a child-only STARTUPINFO carrier, not this app's
  * process-wide standard streams. */
 #include "opennt-abi/host-compat/include/command_process_compat.h"
+#include "ntvdm-exe/softpc/include/mvdm_shadow_registry.h"
 
 //*****************************************************************************
 // IsWowAppRunnable

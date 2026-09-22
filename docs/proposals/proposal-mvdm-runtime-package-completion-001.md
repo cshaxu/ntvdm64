@@ -103,7 +103,7 @@ mirror/adapter changes, then commits and pushes.
 | S42 | WOW32 research/code preservation and successor handoff | Preserve all research and partial code, record unresolved production contracts, verify the candidate x86 build and established DOS regressions, review/commit/push a clean workspace. This is owner-revised handoff closure, not W1/W2 or WRITE success. |
 | S43 | `dbg` capability closure (former S47) | Complete selected original debugger initialization, module notification, breakpoint/exception events and termination; OEM-DBG-PATH with non-ASCII names; or source-proven complete selected-profile exclusion with thin substitutes removed. WOW-specific consumers move explicitly to the successor, never implicitly pass. |
 | S44 | `vdd` capability closure (former S48) | Complete selected original VDD load/request/notification/resource/unload and normal/abnormal worker cleanup, or source-proven complete profile exclusion. Test controlled production-path providers and failures; compile-only registration is insufficient. |
-| S45 | `NTVDM.REG` shadow-registry completion and final non-WOW32 acceptance | This is T420's final S. Reconcile S1--S44 dispositions, then complete the selected registry-reader recovery: one worker-local, immutable `NTVDM.REG` provider replaces every formal static configuration read without changing original caller order, fallback or failure behavior; hardware-discovery readers receive an explicit finite provider or source-shaped unavailable result. Verify no formal product path reads or writes the Windows registry; run fresh formal x86 package, all established relevant capability suites and all 17 text-gated DOS routes; source/diff accounting, clean committed/pushed workspace and report for owner final T acceptance. No WOW32/WRITE success claim. |
+| S45 | Layered registry-read completion and final non-WOW32 acceptance | This is T420's final S. Reconcile S1--S44 dispositions, then complete the selected registry-reader recovery: one same-shaped worker-local read facade reads `NTVDM.REG` first and its admitted read-only system Registry root second, without changing original caller order, fallback or failure behavior; hardware-discovery readers receive an explicit finite provider or source-shaped unavailable result. Verify no product operation writes the Windows registry; record the required future mutable overlay/tombstone/atomic-commit contract for the WOW successor rather than claiming it here; run fresh formal x86 package, all established relevant capability suites and all 17 text-gated DOS routes; source/diff accounting, clean committed/pushed workspace and report for owner final T acceptance. No WOW32/WRITE success claim. |
 
 The 19 currently formal-linked library/DLL units are only a starting build
 inventory, not the S structure: their trace-only `base/debug` selection,
@@ -252,13 +252,15 @@ WOW32 successor at queue head; final T closure awaits the owner.
 ### S45 static-registry receiver matrix
 
 The product-wide registry rule is a recovery opportunity, not permission to
-replace every registry family with an ad-hoc text parser.  S45 must factor the
-VDD-only reader into one worker-local, immutable `NTVDM.REG` provider with a
-finite same-shaped read ABI (`open`, `query`, enumeration only where an
-original selected reader uses it, and `close`).  The original callers stay in
-their original files and retain their original fallback/error branches.  The
-provider must be initialized once before the first selected caller and torn
-down with the worker; it must never consult HKLM/HKCU as a fallback.
+replace every registry family with an ad-hoc text parser. S45 factors the
+VDD-only reader into one worker-local layered overlay with a finite
+same-shaped read ABI (`open`, `query`, enumeration only where an original
+selected reader uses it, and `close`). The overlay consults `NTVDM.REG` first,
+then the admitted original system Registry root read-only. The original callers
+stay in their original files and retain their original fallback/error branches.
+Future create/set/delete operations update the in-memory overlay and atomically
+commit it to `NTVDM.REG`, with tombstones preventing a deleted host value from
+reappearing through fallback.
 
 The admission audit has these mandatory receivers.  A row may be marked done
 only after its original reader is on the production path, its missing-value
@@ -268,20 +270,41 @@ caller observes the configured value.
 | Original reader / owner | Original key family | S45 disposition required |
 | --- | --- | --- |
 | `vdd/nt_msscs.c` | `...\\VirtualDeviceDrivers` / `VDD` multi-string | Generalize the completed S44 narrow binding without changing its original load/unload ownership. |
-| `dos/command/cmdexec.c` | `...\\WOW\\Compatibility` program flags | Read-only shadow value; prove original compatibility parsing and its absent-value branch. |
+| `dos/command/cmdexec.c` | `...\\WOW\\Compatibility` program flags | Bind its selected ANSI read shape now; the required real WOW-classified consumer proof transfers to the WOW32 successor, because no WOW runtime is accepted in T420. |
 | `dos/command/cmdkeyb.c` | keyboard layout and DOS ID tables | Read-only shadow value/enumeration only if the selected original path uses it; prove layout/ID fallback. |
 | `dos/dem/demgset.c` | boot-drive configuration | Read-only shadow value; prove configured and original default-drive branches. |
 | `softpc.new/host/src/config.c` | `...\\Control\\WOW` profiles, `size`, `wowsize` | Read-only shadow values; prove original defaults, selected profile and memory-size validation. |
 | `softpc.new/obj.vdm/ntvdm.c` | `...\\Control\\WOW\\CpuEnv` environment-value enumeration through `NtOpenKey` | Read-only shadow enumeration; preserve original value-to-CPUENV list conversion, absent-key behavior and malformed-value failure. |
-| `dpmi32/vxd.c` | `HARDWARE\\DEVICEMAP\\SERIALCOMM` | This is current-host discovery, not static policy.  Either define an explicit package shadow list with original enumeration semantics or retain a finite public device provider and its unavailable result; never synthesize ports or read the Windows registry. |
-| `softpc.new/host/src/nt_umb.c` | ROM hardware description through `NtOpenKey` | Current-host discovery.  Preserve the original no-ROM/error route until a finite public hardware provider can supply equivalent data; record the provider/exclusion and test it separately. |
+| `dpmi32/vxd.c` | `HARDWARE\\DEVICEMAP\\SERIALCOMM` | This is current-host discovery, not static policy.  Use the finite public DOS-device provider (`COM1`--`COM9`) through the original enumeration shape; return the original unavailable result when it names none. Never synthesize ports or read this key. |
+| `softpc.new/host/src/nt_umb.c` | ROM hardware description through `NtOpenKey` | Not selected by the CCPU40 product: the Registry walk remains in the original `MONITOR` branch, while the selected `!MONITOR` body uses original fixed EGA/BIOS ranges. No host Registry route or synthetic hardware provider is admitted. |
 
 The Win16 Shell/Registry Editor and OLE `RegCreate`, `RegSet`, `RegDelete`,
 and mutable enumeration families are not in this static-receiver scope.  They
-need a separately admitted shadow handle/tree/writeback implementation with
-cross-worker isolation, close/failure/enumeration tests.  Their receiver is
+need a separately admitted overlay handle/tree implementation with
+cross-worker isolation, close/failure/enumeration, commit and tombstone tests. Their receiver is
 the WOW32 successor, not an S45 shortcut.  No current read-only success may be
 used to claim those mutable APIs are connected.
+
+#### Product registry boundary
+
+The product distinguishes three data classes rather than treating every
+historical NT4 Registry caller as static configuration:
+
+| Data class | Product source | Write/persistence rule |
+| --- | --- | --- |
+| static MVDM policy | read-only startup snapshot of its admitted system Registry keys | worker-local overlay only; no forced default |
+| current-host capability | finite public API, or the original unavailable result | never represented by a Registry key |
+| mutable Win16 registry | private tree seeded from its admitted read-only startup snapshot | worker-local mutation is atomically persisted only to package-local `NTVDM.REG`; tombstones mask the host baseline and Windows Registry is never written |
+
+`ntvdm-exe/wow/wow_task_profile_binding.c` currently contains an
+adapter-owned `RegOpenKeyExW(HKLM, ...Compatibility...)` read.  It is outside
+S45's selected static MVDM readers and therefore cannot be treated as a
+successful overlay result.  It is an original read-only machine compatibility
+profile, not Win16 mutable registry state: the WOW successor must admit its
+root to the worker-startup snapshot and migrate the later profile read to the
+in-memory overlay before accepting any WOW profile outcome. It must never
+write or later re-open HKLM/HKCU. Any later mutation is serialized atomically
+to package-local `NTVDM.REG`, including tombstones, rather than to the host.
 
 Every implementation packet requires original-owner inventory, actual
 production wiring, failure/teardown tests, fresh x86, all 17 text-gated

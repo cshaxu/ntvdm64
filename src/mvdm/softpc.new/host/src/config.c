@@ -23,6 +23,7 @@
 #include "xt.h"
 #include "error.h"
 #include "config.h"
+#include "ntvdm-exe/softpc/include/mvdm_shadow_registry.h"
 #include "sas.h"
 
 #include "spcfile.h"

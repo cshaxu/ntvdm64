@@ -19,6 +19,7 @@ Revision History:
 #include "precomp.h"
 #pragma hdrstop
 #include "softpc.h"
+#include "ntvdm-exe/softpc/include/mvdm_shadow_registry.h"
 
 
 LONG

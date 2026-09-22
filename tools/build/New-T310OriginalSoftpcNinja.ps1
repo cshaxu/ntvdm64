@@ -261,8 +261,7 @@ $adapterWin32Names = @('ntioapi_facade.c', 'thread_start_compat.c',
 # never be rebuilt into an audit or production archive.
 $adapterBaseSrvNames = @('mvdm_command_guest_state.c',
                           'mvdm_command_native_child.c')
-$adapterVddNames = @('mvdm_softpc_vdd_unavailable.c',
-                     'mvdm_softpc_vdd_configuration.c')
+$adapterVddNames = @('mvdm_softpc_vdd_unavailable.c')
 $adapterMonitorNames = @('vdm_control.c', '../mvdm_vdm_tib.c')
 $adapterDebuggerNames = @('dbg_registers.c', 'dbg_prompt.c')
 $adapterRedirNames = @('mvdm_redirector_guest_copy.c',
@@ -279,7 +278,7 @@ $openntXactSrvNames = @('apiwksta.c', 'apiuse.c', 'apimsg.c', 'apisvc.c', 'xssub
 $openntBaseVdmNames = @('vdm.c')
 $openntRtlNames = @('environ.c', 'error.c', 'time.c')
 $openntRtlX86Names = @('largeint-selected.asm', 'movemem-selected.asm')
-$adapterSoftpcNames = @('mvdm_softpc_firmware.c', 'mvdm_xms_memory.c', 'mvdm_a20.c', 'mvdm_softpc_guest_memory.c', 'mvdm_softpc_physical_mapping.c',
+$adapterSoftpcNames = @('mvdm_softpc_firmware.c', 'mvdm_shadow_registry.c', 'mvdm_xms_memory.c', 'mvdm_a20.c', 'mvdm_softpc_guest_memory.c', 'mvdm_softpc_physical_mapping.c',
                          'mvdm_guest_location.c', 'mvdm_softpc_execution.c', 'mvdm_softpc_termination.c',
                          'mvdm_softpc_wow_page_domain.c',
                          'mvdm_standalone_worker.c',

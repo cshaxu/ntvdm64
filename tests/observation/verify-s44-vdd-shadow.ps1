@@ -1,7 +1,8 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory = $true)] [string]$BuildRoot,
-    [string]$RuntimeRoot = 'O:\winnt'
+    [string]$RuntimeRoot = 'O:\winnt',
+    [string]$ShadowFixture = ''
 )
 
 Set-StrictMode -Version Latest
@@ -22,6 +23,9 @@ $testVdd = Join-Path $testRoot 's44-entry-hook-vdd.dll'
 $bopVdd = Join-Path $testRoot 's44-bop-vdd.dll'
 $bopGuest = Join-Path $testRoot 'S44BOP.COM'
 $repository = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..\..')).Path
+$defaultShadowFixture = Join-Path $PSScriptRoot '..\mvdm-host\fixtures\S44-ENTRY-HOOK-NTVDM.REG'
+if (!$ShadowFixture) { $ShadowFixture = $defaultShadowFixture }
+$ShadowFixture = (Resolve-Path -LiteralPath $ShadowFixture).Path
 $bopBuild = Join-Path $build 's44-vdd-bop'
 $processes = @(Get-Process ntvdm,basesrv,run16 -ErrorAction SilentlyContinue)
 
@@ -39,7 +43,7 @@ foreach ($name in @('run16.exe','basesrv.exe','ntvdm.exe','dtmgr.exe')) {
 Copy-Item -LiteralPath (Join-Path $build 's44-entry-hook-vdd.dll') -Destination $testVdd -Force
 Copy-Item -LiteralPath (Join-Path $build 's44-bop-vdd.dll') -Destination $bopVdd -Force
 Copy-Item -LiteralPath (Join-Path $bopBuild 'S44BOP.COM') -Destination $bopGuest -Force
-Copy-Item -LiteralPath (Join-Path $PSScriptRoot '..\mvdm-host\fixtures\S44-ENTRY-HOOK-NTVDM.REG') -Destination $shadow -Force
+Copy-Item -LiteralPath $ShadowFixture -Destination $shadow -Force
 Remove-Item -LiteralPath $trace,$output,$errorOutput,$bopOutput,$bopErrorOutput,$restartOutput,$restartErrorOutput -Force -ErrorAction SilentlyContinue
 
 try {

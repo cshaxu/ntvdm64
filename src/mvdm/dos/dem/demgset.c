@@ -25,6 +25,7 @@
 #include <mvdm.h>
 #include <winbase.h>
 #include "demdasd.h"
+#include "ntvdm-exe/softpc/include/mvdm_shadow_registry.h"
 
 #define BOOTDRIVE_PATH "Software\\Microsoft\\Windows\\CurrentVersion\\Setup"
 #define BOOTDRIVE_VALUE "BootDir"
