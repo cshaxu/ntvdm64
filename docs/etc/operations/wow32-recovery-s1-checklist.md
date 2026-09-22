@@ -31,6 +31,11 @@ original thunk-table dispositions, named dynamic dependencies and the
 source-wide guest-pointer macro surface. Its pass is static evidence only; it
 does not change any later runtime, lifecycle or guest-acceptance gate.
 
+[Normalized mirror-delta audit](../evidence/m0-t422-s1-normalized-wow32-mirror-delta.md)
+separates the 68 newline-only mirror matches from nine real source deltas and
+assigns every real delta to retain or minimum-diff cleanup. Its pending cleanup
+is part of A03/A10, not a substitute for the owning runtime acceptance.
+
 | ID | State | Required result | Existing starting point / next action |
 | --- | --- | --- | --- |
 | A01 | Complete | Pin admission revision, actual DLL/worker composition, guest and three-application media hashes. | [T422 S1 baseline evidence](../evidence/m0-t422-s1-admission-baseline.md) pins all six immutable guest inputs, separates the old installed WOW32.DLL from the formal candidate, and records the formal local 20-slot composition check. |
