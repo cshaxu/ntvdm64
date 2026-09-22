@@ -2,8 +2,8 @@
 
 #include "wow_class_words_binding.h"
 #include "wow_task_profile_bindings.h"
+#include "wow_user_session_binding.h"
 #include "opennt-abi/host-compat/include/thread_start_compat.h"
-#include "ntvdm-exe/session/session.h"
 
 #ifndef STATUS_SUCCESS
 #define STATUS_SUCCESS ((NTSTATUS)0)
@@ -71,8 +71,7 @@ static void WINAPI acquire_lock(wow_task_order_thread *thread)
 
 static void WINAPI check_death(wow_task_order_thread *thread)
 {
-    session *owner = session_thread_current();
-    if (!thread || !owner || owner->state != SESSION_STATE_ACTIVE)
+    if (!thread || !wow_user_worker_active())
         opennt_exit_thread(ERROR_PROCESS_ABORTED);
 }
 

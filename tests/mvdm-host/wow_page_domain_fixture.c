@@ -7,7 +7,7 @@
 #include "ntvdm-exe/softpc/include/mvdm_softpc_guest_memory.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_physical_mapping.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
-#include "ntvdm-exe/wow/include/wow_user_object_bindings.h"
+#include "wow32-dll/include/wow_user_object_bindings.h"
 
 extern void sas_init(uint32_t size);
 extern void sas_term(void);

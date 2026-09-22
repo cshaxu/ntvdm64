@@ -58,7 +58,7 @@ static HLOCAL WINAPI fixture_alloc(UINT flags, SIZE_T size)
 #define AddFontResourceW fixture_add
 #define RemoveFontResourceW fixture_remove
 #define LocalAlloc fixture_alloc
-#include "../../../src/ntvdm-exe/win32/wow_public_user_facade.c"
+#include "../../../src/wow32-dll/source/wow_public_user_facade.c"
 #undef LocalAlloc
 #undef RemoveFontResourceW
 #undef AddFontResourceW

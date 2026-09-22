@@ -392,7 +392,7 @@ and handle machinery; those APIs are cropped with registered markers.
 The retained function owns original release-flag and format-dependent nested
 object cleanup, unchanged. Its outgoing closure is GlobalLock/Unlock/Size/Free,
 DeleteObject, DeleteMetaFile and DeleteEnhMetaFile, all public native APIs.
-`ntvdm-exe/wow/include/wow_dde_data_bindings.h` retains the original DDE_DATA
+`wow32-dll/include/wow_dde_data_bindings.h` retains the original DDE_DATA
 layout and retail USER memory macros; it owns no replacement DDE algorithm.
 This source is selected in the WOW32 provider build and native fixtures,
 but not registered as a working WOW output slot. Evidence and remaining

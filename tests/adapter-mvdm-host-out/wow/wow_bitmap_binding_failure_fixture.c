@@ -37,7 +37,7 @@ static HDC WINAPI test_compatible_dc(HDC dc)
 #define GetDC test_get_dc
 #define ReleaseDC test_release_dc
 #define CreateCompatibleDC test_compatible_dc
-#include "../../../src/ntvdm-exe/wow/wow_bitmap_bindings.c"
+#include "../../../src/wow32-dll/source/wow_bitmap_bindings.c"
 #define CHECK(x) do { if (!(x)) { printf("FAIL line %d\n", __LINE__); return 1; } } while (0)
 int __cdecl main(void)
 {

@@ -42,7 +42,7 @@ if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
 }
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $wow = Join-Path $root 'src/mvdm/wow32'
-$adapterWow = Join-Path $root 'src/ntvdm-exe/wow'
+$adapterWow = Join-Path $root 'src/wow32-dll/source'
 $manifest = Join-Path $wow 'sources'
 $definition = Join-Path $wow 'wow32.def'
 $resource = Join-Path $wow 'wow32.rc'
@@ -82,8 +82,8 @@ $providerSupportSources = @(
     (Join-Path $adapterWow 'wow_class_words_binding.c'),
     (Join-Path $adapterWow 'wow_user_registration_bridge.c'),
     (Join-Path $root 'src/opennt-host/windows/core/ntuser/rtl/chartran.c'),
-    (Join-Path $root 'src/ntvdm-exe/win32/ntuser_rtl_compat.c'),
-    (Join-Path $root 'src/ntvdm-exe/win32/wow_public_user_facade.c'),
+    (Join-Path $adapterWow 'ntuser_rtl_compat.c'),
+    (Join-Path $adapterWow 'wow_public_user_facade.c'),
     # This is the already-admitted narrow historical CRT spelling bridge.  It
     # has no parent-machine state, so the late-loaded DLL may own its copy.
     (Join-Path $root 'src/ntvdm-exe/win32/crt_compat.c')
@@ -110,7 +110,7 @@ if ([string]::IsNullOrWhiteSpace($BuildRoot)) {
     $build = [IO.Path]::GetFullPath($BuildRoot)
 }
 New-Item -ItemType Directory -Force -Path $build, (Join-Path $build 'obj'),
-    (Join-Path $build 'obj\opennt-user'), (Join-Path $build 'obj\adapter-wow'),
+    (Join-Path $build 'obj\opennt-user'), (Join-Path $build 'obj\wow32-dll'),
     (Join-Path $build 'obj\adapter-win32') | Out-Null
 
 # The original definition deliberately retains undecorated public aliases for
@@ -219,6 +219,7 @@ foreach ($alias in @(
     [pscustomobject]@{ Decorated = 'wow_user_runtime_enter@4'; Raw = 'wow_user_runtime_enter' },
     [pscustomobject]@{ Decorated = 'wow_user_runtime_leave@4'; Raw = 'wow_user_runtime_leave' },
     [pscustomobject]@{ Decorated = 'wow_user_runtime_set_context@12'; Raw = 'wow_user_runtime_set_context' },
+    [pscustomobject]@{ Decorated = 'wow_user_worker_active@0'; Raw = 'wow_user_worker_active' },
     [pscustomobject]@{ Decorated = 'OpenNtRtlNtStatusToDosError@4'; Raw = 'OpenNtRtlNtStatusToDosError' },
     [pscustomobject]@{ Decorated = 'GetNextVDMCommand@4'; Raw = 'GetNextVDMCommand' },
     [pscustomobject]@{ Decorated = 'GetCurrentDirectoryOem@8'; Raw = 'GetCurrentDirectoryOem' },
@@ -279,6 +280,7 @@ $environment = Join-Path $build 'msvc-x86.cmd'
 $includeRoots = @(
     'src',
     'src/opennt-abi/host-compat/include',
+    'src/wow32-dll/include',
     'src/ntvdm-exe/wow/include',
     'src/mvdm/wow32',
     'src/mvdm/inc',
@@ -378,7 +380,7 @@ $ninja.Add('  cflags = $cflags /DWOW_ORIGINAL_CLASS_CLIENT')
 $objects.Add($classLookupObject)
 $ninja.Add('build ' + $classLookupObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/opennt-host/windows/core/ntuser/kernel/class.c')))
 foreach ($source in $providerSupportSources) {
-    $owner = if ($source.StartsWith($adapterWow, [StringComparison]::OrdinalIgnoreCase)) { 'adapter-wow' } else { 'adapter-win32' }
+    $owner = if ($source.StartsWith($adapterWow, [StringComparison]::OrdinalIgnoreCase)) { 'wow32-dll' } else { 'adapter-win32' }
     $object = 'obj/' + $owner + '/' + [IO.Path]::GetFileNameWithoutExtension($source) + '.obj'
     $supportObjects.Add($object)
     $ninja.Add('build ' + $object + ': cc ' + (ConvertTo-NinjaPath $source))

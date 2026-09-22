@@ -18,4 +18,8 @@ BOOL WINAPI wow_user_session_attach(wow_user_session_binding *, session *,
     wow_user_runtime *);
 BOOL WINAPI wow_user_session_detach(wow_user_session_binding *);
 
+/* Narrow parent-ABI query for a late-loaded WOW32 target.  It prevents the
+ * DLL from importing or dereferencing the worker's session object. */
+BOOL WINAPI wow_user_worker_active(void);
+
 #endif

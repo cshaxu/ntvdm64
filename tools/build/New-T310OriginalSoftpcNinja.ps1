@@ -96,6 +96,7 @@ $suballocRoot = Join-Path $root 'src/mvdm/suballoc'
 $oemuniRoot = Join-Path $root 'src/mvdm/oemuni'
 $sessionRoot = Join-Path $root 'src/ntvdm-exe/session'
 $adapterWowRoot = Join-Path $root 'src/ntvdm-exe/wow'
+$wow32DllRoot = Join-Path $root 'src/wow32-dll'
 $baseReservationTestSource = Join-Path $root 'tests/adapter-basesrv/base_reservation_test.c'
 $baseServiceReservationTestSource = Join-Path $root 'tests/adapter-basesrv/base_service_reservation_test.c'
 $cpu40DescriptorDomainFixtureSource = Join-Path $root 'tests/mvdm-host/dpmi/cpu40_descriptor_domain_fixture.c'
@@ -462,6 +463,9 @@ foreach ($entry in @(
     # selected parent RTL implementation.  Export the existing body; this is
     # an import-surface declaration, not a standalone replacement.
     'OpenNtRtlNtStatusToDosError=_OpenNtRtlNtStatusToDosError@4',
+    # VDMREDIR's original asynchronous compatibility boundary still imports
+    # these worker-thread helpers.  WOW32 no longer imports them directly;
+    # it uses its narrow wow_user_worker_active query instead.
     'session_thread_current',
     'session_thread_bind_owned_source',
     'session_thread_unbind',
@@ -471,6 +475,7 @@ foreach ($entry in @(
     'wow_user_runtime_enter=_wow_user_runtime_enter@4',
     'wow_user_runtime_leave=_wow_user_runtime_leave@4',
     'wow_user_runtime_set_context=_wow_user_runtime_set_context@12',
+    'wow_user_worker_active=_wow_user_worker_active@0',
     'mvdm_softpc_wow_page_domain_guest_shared_info',
     'mvdm_softpc_wow_page_domain_guest_csr_flag',
     'mvdm_softpc_wow_page_domain_set_client_desktop',
@@ -580,6 +585,7 @@ $includeRootPaths = @(
     'src/ntvdm-exe/softpc/include',
     'src/ntvdm-exe/command/include',
     'src/ntvdm-exe/monitor/include',
+    'src/wow32-dll/include',
     'src/ntvdm-exe/wow/include',
     'src/ntvdm-exe/session'
 )
@@ -1345,10 +1351,10 @@ $graph.Add('build ccpu-high-linear-page-test.exe: memory_test_link ' + $highLine
 $wowPageDomainFixtureObject = 'obj/tests/wow_page_domain_fixture.obj'
 $wowUserObjectFixtureObject = 'obj/adapter-wow/wow_user_object_bindings.obj'
 $graph.Add('build ' + $wowPageDomainFixtureObject + ': cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/wow_page_domain_fixture.c')))
-$graph.Add('build ' + $wowUserObjectFixtureObject + ': cc ' + (NinjaPath (Join-Path $adapterWowRoot 'wow_user_object_bindings.c')))
+$graph.Add('build ' + $wowUserObjectFixtureObject + ': cc ' + (NinjaPath (Join-Path $wow32DllRoot 'source/wow_user_object_bindings.c')))
 $graph.Add('build wow-page-domain-test.exe: memory_test_link ' + $wowPageDomainFixtureObject + ' ' + $wowUserObjectFixtureObject + ' ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
 $graph.Add('build obj/tests/wow_user_client_view_layout_fixture.obj: cc ' + (NinjaPath (Join-Path $root 'tests/adapter-mvdm-host-out/wow/wow_user_client_view_layout_fixture.c')))
-$graph.Add('  cflags = /nologo /c /MT /W3 /showIncludes /I "' + (NinjaPath (Join-Path $root 'src')) + '" /I "' + (NinjaPath (Join-Path $adapterWowRoot 'include')) + '"')
+$graph.Add('  cflags = /nologo /c /MT /W3 /showIncludes /I "' + (NinjaPath (Join-Path $root 'src')) + '" /I "' + (NinjaPath (Join-Path $wow32DllRoot 'include')) + '"')
 $graph.Add('build wow-user-client-view-layout-test.exe: memory_test_link obj/tests/wow_user_client_view_layout_fixture.obj')
 $graph.Add('build cvidc-vector-binding-fixture.exe: memory_test_link ' + $cvidcVectorBindingFixtureObject + ' ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
 $graph.Add('build x87-layout-fixture.exe: rtl_fixture_link ' + $x87LayoutFixtureObject)

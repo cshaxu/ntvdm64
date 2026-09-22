@@ -13,7 +13,7 @@ $vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\To
 New-Item -ItemType Directory -Force -Path $build | Out-Null
 $environment = Join-Path $build ("msvc-{0}.cmd" -f $Architecture)
 @('@echo off', 'set "MVDM_T291_CALLER_CWD=%CD%"', 'if defined VSCMD_VER goto ready', ('call "' + $vs + '" -arch=' + $Architecture + ' -host_arch=x64 >nul'), 'if errorlevel 1 exit /b %errorlevel%', ':ready', 'cd /d "%MVDM_T291_CALLER_CWD%"', '%*') | Set-Content -LiteralPath $environment -Encoding ascii
-$cflags = '/nologo /std:c11 /MT /W4 /WX /showIncludes /I ' + $root + '/src /I ' + $root + '/src/session /I ' + $root + '/src/ntvdm-exe/monitor/include /I ' + $root + '/src/ntvdm-exe/softpc/include /I ' + $root + '/src/ntvdm-exe/wow'
+$cflags = '/nologo /std:c11 /MT /W4 /WX /showIncludes /I ' + $root + '/src /I ' + $root + '/src/session /I ' + $root + '/src/ntvdm-exe/monitor/include /I ' + $root + '/src/ntvdm-exe/softpc/include /I ' + $root + '/src/wow32-dll/include'
 $content = @"
 ninja_required_version = 1.10
 root = $root

@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "ntvdm-exe/wow/include/wow_callback_frame_lease.h"
+#include "wow32-dll/include/wow_callback_frame_lease.h"
 
 /* Native ABI fixture: real /Gz WOW binding, cdecl worker stand-ins. No guest
  * execution or real session/memory publication is claimed by this test. */

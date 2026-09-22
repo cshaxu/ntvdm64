@@ -4,26 +4,26 @@
 
 ## Active Packet
 
-**Active: M0 T421 S2**
+**Active: M0 T421 S4**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T421 S2, Ordinary Mode, single implementer/reviewer. |
+| Identifier Mode | M0 T421 S4, Ordinary Mode, single implementer/reviewer. |
 | Candidate Proposal | [VDMREDIR/WOW32 DLL compilation-boundary reorganization](../proposals/proposal-vdmredir-wow32-dll-component-boundary-reorganization-001.md). |
-| Admission And Approval | Owner approved beginning the next component work after accepting the S1 ledger on 2026-09-22. |
-| Objective | Create `src/vdmredir-dll/` and relocate exactly the three audited DLL-local target bindings there, while retaining every original VDMREDIR source in `src/mvdm/vdmredir/` and both worker-local bindings in `src/ntvdm-exe/redir/`. |
-| Non-goals | Redirector behavior changes, VDMREDIR operation-family expansion, moving original mirror files, moving worker session/TLS/lease code, creating WOW32.DLL, guest modification, or a generic shared component. |
-| Reference Baseline | [T421 S1 DLL ledger](../etc/evidence/m0-t421-s1-dll-compilation-boundary-ledger.md), T420 S20 redirector acceptance matrix and current x86 VDMREDIR linkage. |
-| Files And ABI Surface | `src/vdmredir-dll/{sources,source,include}`, former DLL-local redirector bindings, formal Ninja generator, VDMREDIR entry/export/import table, and the retained worker-copy/async headers. |
-| Applicable Rules | Canonical-mirror immutability, target-only component ownership, one worker session/TLS owner, bounded guest-memory lease boundary, immutable guest and exact mirror formatting. |
-| Verification | Fresh formal x86 graph/link, VDMREDIR export/import comparison, source/object/library ownership scan, existing S20 redirector fixture/matrix and established direct/interactive/nested COMMAND/MEM/EDIT regression. |
-| Expected Markers | `src/vdmredir-dll/` owns exactly three target bindings; `src/ntvdm-exe/redir/` owns exactly the worker-copy/async bindings; no original source moves; no DLL direct link to `session.lib` or CCPU executor. |
-| Asset Needs | Current product/package baseline, source-policy-approved original mirror paths, S20 test matrix and x86 MSVC/Ninja toolchain. |
-| Reporting Requirements | Exact file move map, mirror/target/worker footprint deltas, export/import result, S20 and established-regression results, and any unchanged unavailable boundary. |
-| Stop Conditions | Any changed VDMREDIR behavior/export, a needed worker session/TLS link in the DLL, an original source move, guest mutation, or build evidence of a second executor. |
-| Exit Criteria | Target-only component builds in a fresh x86 graph, all required VDMREDIR and established product tests pass, governance/diff checks pass, and a clean committed/pushed S2 delivery records the move. |
-| Original Owner Request | Approve beginning the next component implementation after the T421 S1 report. |
-| Similar-Issue Sweep | All VDMREDIR include paths, binding manifests, source-manifest provenance, DLL entry/export/import closure, worker lease/TLS imports, package layout and deployment inputs. |
+| Admission And Approval | Owner approved T421 execution and the component-first plan on 2026-09-22. S3 is delivered by this revision; S4 is the next proposal-defined boundary audit under that standing approval. |
+| Objective | Independently remove obsolete worker-tree aliases, duplicate build inputs and dead target wrappers left after the VDMREDIR/WOW32 moves; classify every residual under a target, worker or genuinely shared ABI owner. |
+| Non-goals | WOW16/WRITE functional recovery, guest modification, a second worker session/TLS/CCPU instance, adding a generic shared component, or relocating code merely to reduce a path count. |
+| Reference Baseline | [S1 DLL ledger](../etc/evidence/m0-t421-s1-dll-compilation-boundary-ledger.md), [S2 VDMREDIR result](../etc/evidence/m0-t421-s2-vdmredir-target-component.md), and [S3 WOW32 result](../etc/evidence/m0-t421-s3-wow32-target-component.md). |
+| Files And ABI Surface | All residual `ntvdm-exe/redir`, `ntvdm-exe/wow`, `vdmredir-dll`, `wow32-dll`, their generators, includes and target manifests; `nt_vdd.h` and generic compatibility units only where actual consumer scans require review. |
+| Applicable Rules | Canonical-mirror immutability, target-only component ownership, one worker session/TLS owner, source-first recovery, immutable guest and exact mirror formatting. |
+| Verification | Full source/build-path scan, source/object/DLL ledger reconciliation, fresh formal x86 product and both DLL links, import/export checks, governance verification, `git diff --check`, and the established non-WOW regression. |
+| Expected Markers | No live `ntvdm-exe/redir` target source or obsolete WOW target binding remains; all residual shared surfaces have a finite named owner; mirror code has no path-only modification. |
+| Asset Needs | Existing target evidence, x86 MSVC/Ninja toolchain, and current runtime logs; no new guest, host service or system configuration. |
+| Reporting Requirements | Exact removed/retained file and line footprint, owner/disposition ledger, import direction, build/regression results, and explicit non-goals. |
+| Stop Conditions | A required behavior change, original-source move, unknown cross-component owner, a second worker-state owner, or a test that would require guest mutation. |
+| Exit Criteria | Obsolete aliases and duplicate target inputs are removed or explicitly retained with evidence; source/object/DLL ledgers agree; build/governance/diff/regression checks pass; S4 is committed and pushed. |
+| Original Owner Request | Complete the approved explicit-DLL component organization without inventing an undifferentiated common layer. |
+| Similar-Issue Sweep | All target source manifests, include roots, fixture direct-includes, parent import aliases, VDMREDIR worker bindings, WOW runtime/session declarations and package deployment lists. |
 
 ## S45 Delivery Record
 

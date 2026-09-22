@@ -3,6 +3,7 @@
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
 | [T421 S2 VDMREDIR target component](evidence/m0-t421-s2-vdmredir-target-component.md) | M0 T421 S2 | Moves the finite DLL-only bindings out of the worker, records fresh x86 export/import proof and matching real DOS redirector regression. | Retain through T421 S4 closure. |
+| [T421 S3 WOW32 target component](evidence/m0-t421-s3-wow32-target-component.md) | M0 T421 S3 | Moves the audited late-loaded WOW32 bindings to their target component, proves the narrow parent ABI and records x86 plus non-WOW regression evidence without claiming WOW16 acceptance. | Retain through T421 S4 closure. |
 | [T421 S1 DLL compilation-boundary ledger](evidence/m0-t421-s1-dll-compilation-boundary-ledger.md) | M0 T421 S1 | Freezes current VDMREDIR and WOW32 source/object/archive/DLL boundaries, including the absent current WOW32 target and every target-binding disposition. | Retain through T421 S4 closure. |
 | [WOW32 recovery coverage ledger](operations/wow32-recovery-coverage-ledger.md) | Queued WOW32 successor | Seeded source/table/callback/direct-data coverage, stable capability IDs and inherited evidence; no runtime acceptance claim. | Retain through successor acceptance. |
 | [WOW32 recovery S1 checklist](operations/wow32-recovery-s1-checklist.md) | Queued WOW32 successor | Reusable audit gates, feasibility experiments and S1 handoff requirements. | Retain with successor design evidence. |

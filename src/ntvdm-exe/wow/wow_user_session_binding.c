@@ -62,3 +62,10 @@ BOOL WINAPI wow_user_session_detach(wow_user_session_binding *binding)
     binding->runtime = NULL;
     return TRUE;
 }
+
+BOOL WINAPI wow_user_worker_active(void)
+{
+    session *owner = session_thread_current();
+
+    return owner != NULL && owner->state == SESSION_STATE_ACTIVE;
+}

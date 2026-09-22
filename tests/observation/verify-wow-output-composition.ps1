@@ -27,7 +27,7 @@ $fields = @([regex]::Matches($header.Substring($headerStart, $headerEnd + 'pfnFi
 $names = @($assignments | ForEach-Object { $_.Groups[1].Value })
 if ($assignments.Count -ne 20 -or $fields.Count -ne 20 -or
     @(Compare-Object $names $fields).Count -ne 0) { throw 'Output ABI/source slots do not match.' }
-$bridgePath = Join-Path $root 'src/ntvdm-exe/wow/wow_user_registration_bridge.c'
+$bridgePath = Join-Path $root 'src/wow32-dll/source/wow_user_registration_bridge.c'
 $bridge = [IO.File]::ReadAllText($bridgePath)
 $profile = (& (Join-Path $PSScriptRoot 'verify-wow-user-profile.ps1')) | ConvertFrom-Json
 $buildInfo = [regex]::Match($bridge, 'output->dwBldInfo\s*=\s*0x([0-9a-fA-F]{8})u;')

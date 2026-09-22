@@ -33,7 +33,7 @@ static DWORD WINAPI fixture_kerning(HDC dc, DWORD count, LPKERNINGPAIR pairs)
 #define ExtEscape fixture_ext_escape
 #define GetKerningPairsA fixture_kerning
 #endif
-#include "../../../src/ntvdm-exe/win32/wow_public_user_facade.c"
+#include "../../../src/wow32-dll/source/wow_public_user_facade.c"
 #ifndef WOW_ETM_NATIVE
 #undef GetKerningPairsA
 #undef ExtEscape

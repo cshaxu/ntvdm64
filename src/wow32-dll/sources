@@ -1,0 +1,35 @@
+# Target-only WOW32.DLL binding manifest.
+#
+# The 77 selected original WOW32 bodies, original `wow32.def`, resource and
+# historical source manifest remain canonical under src/mvdm/wow32/.  This
+# manifest owns only the standalone bindings that must reside in the late-
+# loaded DLL and import their worker-local state through ntvdm.exe's narrow
+# ABI.
+
+TARGET=WOW32.DLL
+ORIGINAL_MANIFEST=../../mvdm/wow32/sources
+ORIGINAL_DEF=../../mvdm/wow32/wow32.def
+ORIGINAL_RESOURCE=../../mvdm/wow32/wow32.rc
+
+SOURCES= \
+    wow_bitmap_bindings.c \
+    ntuser_rtl_compat.c \
+    wow_callback_frame_lease.c \
+    wow_class_client_bindings.c \
+    wow_class_words_binding.c \
+    wow_cleanup_bindings.c \
+    wow_dialog_creation_binding.c \
+    wow_private_user_compat.c \
+    wow_sim32_pointer_compat.c \
+    wow_task_event_binding.c \
+    wow_task_profile_binding.c \
+    wow_public_user_facade.c \
+    wow_user_borrow_scope.c \
+    wow_user_message_bridge.c \
+    wow_user_object_bindings.c \
+    wow_user_private_access.c \
+    wow_user_registration_bridge.c \
+    wow_user_task_lifecycle.c \
+    wow_user_thunk_scope.c \
+    wow_window_creation_binding.c \
+    wow_window_words_binding.c
