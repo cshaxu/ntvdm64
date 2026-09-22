@@ -26,7 +26,7 @@ performed when preparing this seed.
 
 | ID | State | Required result | Existing starting point / next action |
 | --- | --- | --- | --- |
-| A01 | Pending | Pin admission revision, actual DLL/worker composition, guest and three-application media hashes. | EH supplies an older matching build; reconcile the preceding DLL-boundary task and locate WRITE/WINMINE/SOL media. |
+| A01 | Complete | Pin admission revision, actual DLL/worker composition, guest and three-application media hashes. | [T422 S1 baseline evidence](../evidence/m0-t422-s1-admission-baseline.md) pins all six immutable guest inputs, separates the old installed WOW32.DLL from the formal candidate, and records the formal local 20-slot composition check. |
 | A02 | Pending | Every selected file, function/dispatch entry, export, resource, dynamic lookup and indirect callback assigned and classified. | SRC/dispatch/IN/OUT seed; expand mixed files by function and distinguish original profile exclusions from missing bindings. |
 | A03 | Pending | Exact original owner and four-rung disposition for every external edge; finite import/expansion/removal list with hashes and line counts. | Existing registers and E40 imports; inspect outgoing closure and autonomous duplicates before adding code. |
 | A04 | Pending | Complete producer/consumer/update matrix for all guest-visible fields and object relationships. | DATA rows and E42 fault/layout proof; record authoritative facts, read/write direction, relocation, freshness and lifetime. |
