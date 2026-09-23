@@ -73,6 +73,13 @@ The current `registered_cleanup` always invokes the module-shaped
 only by native fixtures.  No production caller presently binds either to the
 original W32 task-exit or worker-loss path.
 
+A current-source recheck linked the formally selected provider lifecycle
+object with `wow_user_task_lifecycle_fixture` and produced
+`WOW_USER_TASK_LIFECYCLE errors=0`.  It proves the helper's native
+failure/retry cleanup contract still works, but deliberately does **not** add
+a product caller or establish a guest task-exit route.  It remains evidence
+for B4's required rollback behavior only.
+
 ## Design conclusion
 
 S2 has one finite, source-shaped lifecycle with five ordered phases:
