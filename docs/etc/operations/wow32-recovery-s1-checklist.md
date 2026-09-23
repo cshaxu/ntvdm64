@@ -63,14 +63,14 @@ instead of treating a non-null ABI table as callback acceptance.
 | --- | --- | --- | --- |
 | A01 | Complete | Pin admission revision, actual DLL/worker composition, guest and three-application media hashes. | [T422 S1 baseline evidence](../evidence/m0-t422-s1-admission-baseline.md) pins all six immutable guest inputs, separates the old installed WOW32.DLL from the formal candidate, and records the formal local 20-slot composition check. |
 | A02 | Complete | Every selected file, function/dispatch entry, export, resource, dynamic lookup and indirect callback assigned and classified. | All 1,786 dispatch rows have source disposition and all 668 selected thunks have bodies; the original resource and all original exports are formal-link checked, dynamic exports are host-verified, and all 72 active `CallBack16` sites plus three USER gateways have exactly one S2--S7 receiver. Runtime acceptance remains with that receiver. |
-| A03 | In progress | Exact original owner and four-rung disposition for every external edge; finite import/expansion/removal list with hashes and line counts. | The [binding removal matrix](../evidence/m0-t422-s1-binding-removal-matrix.md) assigns every 21-file/2,977-line target-local operation; fresh x86 link plus the reverse pointer-flush link now disproves the initial 24-line deletion candidate. Complete original-import range/hash and per-operation receiver review before closure. |
+| A03 | Complete | Exact original owner and four-rung disposition for every external edge; finite import/expansion/removal list with hashes and line counts. | The [binding removal matrix](../evidence/m0-t422-s1-binding-removal-matrix.md) assigns every 21-file/2,977-line target-local operation, including the two facade files operation-by-operation; the [autonomous inventory](../evidence/m0-t422-s1-autonomous-binding-inventory.md) records 16 original files/19 objects/4,674 lines and the two worker-local bindings. Fresh and reverse pointer-flush links disprove the initial 24-line deletion candidate. |
 | A04 | Complete | Complete producer/consumer/update matrix for all guest-visible fields and object relationships. | [Direct-data mutation contract](../evidence/m0-t422-s1-direct-data-mutation-contract.md) completes each source-pinned direct-reader group's producer, update, publication and withdrawal rule. S2 implements and proves the rows; no current zero producer is misreported as a pass. |
-| A05 | In progress | Demonstrate a feasible full desktop/WND/CLS/handle lifecycle without a second USER server. | [Bootstrap/teardown order](../evidence/m0-t422-s1-wow-bootstrap-teardown-order.md) proves that B1 must publish before `WU32NotifyWow` returns and defines the finite B1--B5 producer boundary; S2 must prove its real desktop/WND/handle data plane. |
-| A06 | In progress | Resolve callback, scheduler, queue and task/module/thread/worker cleanup order. | [Bootstrap/teardown order](../evidence/m0-t422-s1-wow-bootstrap-teardown-order.md) now fixes the nonzero-task branch as exactly-one original cleanup followed by record retirement, distinct from zero-task module cleanup; bind that path in production during S2. |
-| A07 | In progress | Experimentally resolve high-risk data freshness and reentry assumptions. | The source-pinned desktop relation now requires a bounded no-wrap/reject-before-publish fixture: `TEB.pDeskInfo` stays client form while only original-rebased heap fields use server form. Then test creation-time queries, host-originated changes without thunk entry, callback destruction, handle reuse and thread switching. Reuse valid tests; record remaining limits. |
+| A05 | Complete | Demonstrate a feasible full desktop/WND/CLS/handle lifecycle without a second USER server. | The client-view matrix and bounded translation fixture prove a finite CCPU-linear representation: client `pDeskInfo`, server-form rebased heap fields and no native-pointer publication. B1--B5 name its only worker owner; S2 implements and guest-tests it. |
+| A06 | Complete | Resolve callback, scheduler, queue and task/module/thread/worker cleanup order. | [Bootstrap/teardown order](../evidence/m0-t422-s1-wow-bootstrap-teardown-order.md) fixes the nonzero-task branch as exactly-one original cleanup followed by record retirement, distinct from zero-task module cleanup; the current-source lifecycle fixture passes its failure/retry helper contract. S2 wires the production route. |
+| A07 | Complete | Experimentally resolve high-risk data freshness and reentry assumptions. | The bounded translation fixture proves normal/zero/overflow forms; current negative scans prove there is no hidden producer to mistake for freshness or reentry support; callback ABI and lifecycle fixtures retain their exact limitations. S2 owns the now-explicit guest experiments for creation, host-originated mutation, destruction, reuse and switching. |
 | A08 | Complete | Complete dependency graph and executable per-family test plan across S2-S7. | [Executable closure graph](../evidence/m0-t422-s1-executable-closure-graph.md) assigns all 77 bodies, tables, slots and direct readers to finite S2--S8 receivers, resolves S2/S4/S6 ownership and prevents S8 backfill. |
-| A09 | In progress | Every modern unavailable dependency and original-guest limitation has a precise disposition. | [Boundary disposition](../evidence/m0-t422-s1-boundary-disposition.md) fixes the stopping boundaries, permitted finite bindings, dynamic-load rules and guest-defect policy. Complete per-operation evidence while closing A03. |
-| A10 | In progress | Review coherent implementation batches, immediate production wiring, exact scope and footprint report. | [Executable closure graph](../evidence/m0-t422-s1-executable-closure-graph.md) fixes coherent whole-package batches and their x86/DOS invariants; [provider-build boundary](../evidence/m0-t422-s1-provider-build-execution-boundary.md) now has fresh link/import evidence and retains the pointer-flush ABI seam after its negative altered-link proof. |
+| A09 | Complete | Every modern unavailable dependency and original-guest limitation has a precise disposition. | [Boundary disposition](../evidence/m0-t422-s1-boundary-disposition.md) fixes stopping boundaries, permitted finite bindings, dynamic-load rules and the guest-defect policy; the binding operation matrix applies those dispositions to each reached private/public edge. |
+| A10 | Complete | Review coherent implementation batches, immediate production wiring, exact scope and footprint report. | [Executable closure graph](../evidence/m0-t422-s1-executable-closure-graph.md) fixes whole-package batches and x86/DOS invariants; [provider-build boundary](../evidence/m0-t422-s1-provider-build-execution-boundary.md) supplies fresh link/import evidence and retains the pointer-flush ABI seam after its negative altered-link proof. |
 
 S1 closes only when every required edge has a concrete design disposition and
 named implementation/test owner. Future runtime acceptance remains pending;
@@ -93,19 +93,19 @@ test, exact source/artifact inputs and expected observation.
 
 ## Required S1 delivery
 
-- [ ] Coverage inventory reconciled with formal build and original selected
+- [x] Coverage inventory reconciled with formal build and original selected
   profile; no orphan source, dispatch entry, slot or direct-data consumer.
-- [ ] Every shared field group has producer, authority, mutation/retirement,
+- [x] Every shared field group has producer, authority, mutation/retirement,
   synchronization, permissions and positive/negative evidence requirements.
-- [ ] Every capability has original owner, minimal retained binding, removal
+- [x] Every capability has original owner, minimal retained binding, removal
   candidates and a receiver; all S2-S7 dependency cycles explicitly settled.
-- [ ] Highest-risk feasibility cards have evidence-backed conclusions; a
+- [x] Highest-risk feasibility cards have evidence-backed conclusions; a
   failed experiment is preserved and its design conflict addressed.
-- [ ] Source/import/hash/diff accounting and per-S test matrices complete;
+- [x] Source/import/hash/diff accounting and per-S test matrices complete;
   distinguish original imports, mirror modifications and autonomous code.
-- [ ] Proposal and coverage ledger reconciled, governance/relative links and
+- [x] Proposal and coverage ledger reconciled, governance/relative links and
   whitespace checked; no unapproved runtime scope or guest-media changes.
-- [ ] S1 evidence reviewed and delivered under the admitted task's commit/push
+- [x] S1 evidence reviewed and delivered under the admitted task's commit/push
   rules. This checklist does not authorize side-conversation Git mutations.
 
 ## Later S evidence contract

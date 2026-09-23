@@ -79,14 +79,18 @@ responsibilities as follows:
    by an admitted original owner.  S3--S7 own the narrower bitmap, resource,
    profile and peripheral facade rows.
 
-## Outstanding A03 work
+## A03 disposition
 
-This inventory assigns current file ownership but does not yet close every
-function-level external edge.  S1 still needs to record the exact original
-function range, four-rung result, removal condition and focused test for each
-private/public operation inside the grouped facade files.  The required
-desktop producer/update/withdrawal matrix remains A04--A07 work; no adapter
-is deemed necessary solely from this inventory.
+The earlier per-operation gap is now closed by the
+[binding removal matrix](m0-t422-s1-binding-removal-matrix.md#privatepublic-user-facade-operation-audit): it enumerates every operation in
+`wow_private_user_compat.c` and `wow_public_user_facade.c`, names its original
+caller/owner, finite binding or source-recovery disposition, receiver and
+deletion criterion.  The other 19 files each retain the single responsibility
+listed above and are likewise assigned in that matrix.  This is a complete S1
+design disposition, not a claim that the bindings' runtime routes have passed.
+The required desktop producer/update/withdrawal and guest callback tests are
+S2's already named implementation obligations; no adapter is deemed necessary
+solely from this inventory.
 
 ## Reproduction
 
