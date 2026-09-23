@@ -176,9 +176,12 @@ preceding DLL-boundary task; this list does not freeze old component paths.
 | wmmtbl2.h | Multimedia | S7 |
 | wcmdgtbl.h | Common dialogs | S7 |
 
-All entry-level dispositions are pending S1. Record original LOCALAPI/NOP/
-unimplemented entries by original selected profile; do not count them as
-new defects or silently use them to exclude a reached capability.
+S1 has completed the static disposition of all 1,786 selected rows: 182
+`LOCALAPI`, 936 `UNIMPLEMENTEDAPI`, and 668 host thunks with selected original
+C bodies. Runtime receiver ownership remains the packet split above. Record
+original LOCALAPI/NOP/unimplemented entries by the original selected profile;
+do not count them as new defects or silently use them to exclude a reached
+capability.
 
 ## Registration coverage
 
@@ -308,4 +311,3 @@ Per-row implementation evidence lives with its responsible S. S8 audits this
 index for uncovered inputs and joins matching-artifact results; it does not
 absorb unfinished wiring. Counts measure coverage, never a percentage of
 working Win16 APIs. No completion checkbox is ticked solely by this seed.
-

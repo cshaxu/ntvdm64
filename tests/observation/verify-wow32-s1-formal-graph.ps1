@@ -24,11 +24,36 @@ $wowRoot = Join-Path $root 'src/mvdm/wow32'
 $sources = @(Get-ActiveWowSources (Join-Path $wowRoot 'sources'))
 if ($sources.Count -ne 77) { throw "Expected 77 selected WOW32 sources, found $($sources.Count)." }
 
+$manifest = [IO.File]::ReadAllText((Join-Path $wowRoot 'sources'))
+if ($manifest -notmatch '(?m)^\s*wow32\.rc\s*$') {
+    throw 'The selected original WOW32 manifest omits wow32.rc.'
+}
+
 $ninja = [IO.File]::ReadAllText((Join-Path $build 'build.ninja'))
 $link = [regex]::Match($ninja, '(?m)^build wow32\.dll \|.*$').Value
 if (!$link) { throw 'Formal build graph has no WOW32 link edge.' }
 $missing = @($sources | Where-Object { $link -notmatch ('\bobj/' + [regex]::Escape($_) + '\.obj\b') })
 if ($missing.Count) { throw ('Formal WOW32 link omits: ' + ($missing -join ', ')) }
+if ($link -notmatch '\bobj/wow32\.res\b') {
+    throw 'Formal WOW32 link omits the selected original wow32.rc resource.'
+}
+if ($ninja -notmatch '(?m)^\s*command\s*=\s*link\b[^\r\n]*/def:[^\s]*wow32-x86\.def\b') {
+    throw 'Formal WOW32 link has no generated x86 DEF input.'
+}
+
+$originalDef = [IO.File]::ReadAllText((Join-Path $wowRoot 'wow32.def'))
+$generatedDefPath = Join-Path $build 'wow32-x86.def'
+$generatedDef = [IO.File]::ReadAllText($generatedDefPath)
+$originalExports = @([regex]::Matches($originalDef, '(?m)^\s*([A-Za-z][A-Za-z0-9_]*)\s*(?:=|$)') |
+    ForEach-Object { $_.Groups[1].Value } |
+    Where-Object { $_ -notin @('LIBRARY', 'DESCRIPTION', 'EXPORTS') })
+$generatedExports = @([regex]::Matches($generatedDef, '(?m)^\s*([A-Za-z][A-Za-z0-9_]*)\s*(?:=|$)') |
+    ForEach-Object { $_.Groups[1].Value } |
+    Where-Object { $_ -notin @('LIBRARY', 'DESCRIPTION', 'EXPORTS') })
+$missingExports = @($originalExports | Where-Object { $_ -notin $generatedExports })
+if ($missingExports.Count) {
+    throw ('Generated x86 DEF omits original WOW32 exports: ' + ($missingExports -join ', '))
+}
 
 $expectedUser = @(
     'hdata', 'clres', 'cldib', 'client', 'rtlinit', 'ntstubs', 'clmenu',
@@ -106,6 +131,9 @@ $pointerUse = foreach ($form in $forms) {
     result = 'WOW32_S1_FORMAL_GRAPH_OK'
     evidenceKind = 'source/build composition inventory; not runtime acceptance'
     activeOriginalSources = $sources.Count
+    originalResource = 'wow32.rc'
+    originalExports = $originalExports.Count
+    generatedExports = $generatedExports.Count
     originalOwnerObjects = $actualUser.Count
     targetBindings = $targetSources.Count
     tables = @($tables)

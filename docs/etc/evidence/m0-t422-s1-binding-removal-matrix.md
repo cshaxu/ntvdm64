@@ -24,7 +24,7 @@ runtime lifetime; it does not use a similarly named Win32 API as equivalence.
 | `wow_dialog_creation_binding`: dialog create hooks and callback scope | Original `wudlg.c` and USER registration output; private server create-dialog call unavailable. | Keep original caller/conversion; bind public dialog creation plus temporary callback scope. | S2. Remove only if an admitted original client dialog path composes with the same callback ordering and rollback. |
 | `wow_private_user_compat`: FillWindow, DWP bits, resource ID, cursor/icon, menu index/indirect menu | Separate original USER private operations in `paint`, `server/client`, `clres`, `validate` and menu sources; private server entrypoints are unavailable. | One named public equivalent per operation, retaining original caller policy. | S2/S4/S7 by operation. Delete a function only after its exact original source owner is composable; do not bulk-delete/move the facade. |
 | `wow_public_user_facade`: font, glyph, ETM, network fonts, start glass, DC cache | Original WOW GDI/USER callers; not a single original host unit. | Public API binding with operation-specific source owner. | S3/S7. Split/delete only after each native resource lifetime and original error behavior are passed; no blanket “USER32 available” deletion. |
-| `wow_sim32_pointer_compat`: `Sim32FlushVDMPointer` | CPU40 `softpc.h` makes the original operation a no-op, but a late DLL has an external symbol reference. | Candidate direct original CPU40 macro reuse. | S1/A10. Delete after a fresh x86 provider build proves all selected callers see the macro and link with no external symbol. |
+| `wow_sim32_pointer_compat`: `Sim32FlushVDMPointer` | CPU40 `softpc.h` makes the original operation a no-op, but all selected WOW32 objects were compiled against the historical external declaration. | Retain the exact no-op function shape as the smallest late-DLL ABI seam; it owns no mapping or state. | S1 proof: altered link without its object leaves 38 callers unresolved. It is not a deletion candidate unless caller headers are changed to select the original macro and the whole DLL is rebuilt/retested. |
 | `wow_task_event_binding` and `wow_task_profile_binding` | Original task registration/profile readers use NT objects/Registry handles. | Retained native event; shared layered-registry open-key provider. | S2/S7. Remove only if original source can be selected with the same finite event/key ABI; otherwise minimize to the exact retained handle/key operation. |
 | `wow_user_borrow_scope` and `wow_user_private_access` | Original USER window/class lock and private word access. | Scoped property-backed borrow, not a persistent host alias. | S2. Replace only with source-shaped client access retaining lock duration, stale rejection and callback-safe release. |
 | `wow_user_message_bridge` | Original taskman/queue receive and wake behavior; NT queue internals unavailable. | Original scheduler policy with one public queue wake/receive bridge. | S2. Remove only if an admitted original client queue path can supply the exact wait/receive lifecycle; never replace it with a second scheduler. |
@@ -37,9 +37,10 @@ runtime lifetime; it does not use a similarly named Win32 API as equivalence.
 ## Accounting result
 
 The matrix covers all **21 files / 2,977 lines** named in the autonomous
-inventory.  At admission, exactly one direct deletion candidate is identified:
-`wow_sim32_pointer_compat.c`, **24 lines**, conditional on a fresh provider
-build.  Zero other lines are declared removable by source resemblance alone.
+inventory. The fresh altered-link experiment rejects the sole initial direct
+deletion candidate: without `wow_sim32_pointer_compat.c` the linker reports
+`Sim32FlushVDMPointer@16` unresolved from 38 original WOW32 objects. Thus zero
+lines are currently declared removable by source resemblance alone.
 The largest coupled reduction opportunity is S2's identity/lifecycle group:
 16 files / 2,419 lines (callback, class, cleanup, dialog, event/profile,
 borrow/message/object/private access, registration, lifecycle, thunk, window
@@ -54,9 +55,9 @@ mirror is prohibited.
 
 ## Follow-up
 
-The fresh x86 provider build is currently blocked outside the source graph
-when Ninja/CL stalls before `wow32.obj`; no source conclusion is drawn from
-that host execution failure.  S1 retains the conditional 24-line candidate
-until a fresh build can prove the link result.  All other removal decisions
-are owned by their complete receiving packet and must include production,
-negative, reentry and teardown evidence.
+The full provider has fresh x86 link evidence. S1 therefore no longer carries
+an untested deletion promise for the 24-line pointer-flush shim. Any future
+macro-routing change is a material ABI/build change and must prove both the
+same no-op result and all affected callers' runtime behavior. All other
+removal decisions are owned by their complete receiving packet and must
+include production, negative, reentry and teardown evidence.

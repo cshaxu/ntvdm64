@@ -71,6 +71,7 @@ usable at the point it becomes usable; S8 integrates rather than backfills.
 | Audit deliverable | Result | Remaining implementation receiver |
 | --- | --- | --- |
 | 77 selected bodies | Every body is assigned to exactly one primary packet; shared `wkman` is split by original function/lifecycle role, not duplicated. | S2/S6/S7 as listed. |
+| Original DLL resource and exports | The formal graph links the selected `wow32.rc`; all 27 original `wow32.def` exports appear in the generated x86 DEF. Its two additional entries are only decorated `GetCommHandle`/`GetCommShadowMSR` ABI aliases. | S7 rechecks load/unload behavior; no new WOW API is implied. |
 | Ten tables / 1,786 rows | Static disposition is complete; runtime family receivers are the table families above. | S2-S7, rechecked S8. |
 | 21 inputs / 20 outputs | Each slot has exactly one owner; the S2 `GetFullUserHandle` placeholder remains an explicit non-pass until the guest handle producer exists. | S2-S7, rechecked S8. |
 | Direct readers | Desktop, handles, WND/CLS, time and metrics are S2; menu is S4; all final application readers repeat in S8. | S2/S4/S8. |
