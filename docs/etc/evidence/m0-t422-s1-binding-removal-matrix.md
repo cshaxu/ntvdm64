@@ -53,6 +53,35 @@ OpenNT file, it must be added at its original path with provenance and its
 replaced binding must be measured separately; moving autonomous code into a
 mirror is prohibited.
 
+## Private/public USER facade operation audit
+
+The two facade files are deliberately not accepted as opaque “USER32
+compatibility.”  The following operation-level pass resolves every exported
+operation in them.  A `reuse` row names an original body already selected by
+the caller; a `binding` row has an original server/private edge that cannot
+cross into a standalone worker.  The stated receiving packet must prove the
+normal, failed and cleanup path before retaining the binding.
+
+| Current operation | Original caller / source owner | S1 disposition and receiver |
+| --- | --- | --- |
+| `DialogBoxIndirectParamAorW` | `wudlg.c::WU32DialogBoxIndirect`; `client/clres.c` dialog helper | Binding.  The original converted template/callback order remains in `wudlg`; public A/W dialog creation supplies only the unavailable client/server call.  S2 proves callback order and rollback. |
+| `GetHFONT`, `GetGlyphOutlineWow`, `GetETM`, `GdiCleanCacheDC` | `wgfont.c`, `wgdi31.c`, `wgdi.c`, `wreldc.c`; original GDI/client paths | Binding.  Modern public GDI supplies the named DC operation; no native DC or font pointer is published to guest.  S3 proves resource lifetime and error paths. |
+| `AddFontResourceTracking`, `RemoveFontResourceTracking`, `UnloadNetworkFonts` | `wgfont.c`, `wkman.c`; original remote-font tracking | Binding.  The finite owner-id/refcount list is a standalone substitute for private font tracking, not a new font provider.  S3/S7 prove repeated task release and unavailable-font behavior. |
+| `ShowStartGlass` | `wow32.c`, `wkman.c`; `client/client.c` / `kernel/queue.c` presentation call | Explicit unavailable no-state presentation boundary.  It must remain void and must not synthesize focus, cursor or task success.  S2/S7 prove it cannot change task ordering. |
+| `wow_private_user_fill_window` | registration output consumed by original client paint flow; `kernel/paint.c::xxxFillWindow` | Binding.  Public USER/GDI covers the observable clip/brush work; private PWND/DC locks remain unavailable.  S2/S3 prove callback, invalid DC and release behavior. |
+| `wow_private_user_get_def_window_proc_bits` | `wuman.c::WU32NotifyWow`; `client/client.c::WowGetDefWindowProcBits` | Candidate original-source recovery.  The exact original client algorithm is present but depends on the original client message data/headers.  S2 must either compile that finite original body through its existing client selection or retain the verified static table with byte-for-byte output test. |
+| `wow_private_user_get_id_from_directory` | registration output; `client/clres.c` resource lookup | Binding to public icon-directory selection.  The original resource name/alias policy remains in `wcuricon.c`; S4 proves invalid-resource and replacement behavior. |
+| `wow_private_user_load_create_cursor_icon` | registration output; `client/clres.c::WowServerLoadCreateCursorIcon` | Candidate original-source recovery.  `clres.c` is already present as a restricted original slice, but this server call crosses unavailable private state.  S4 must extend the selected original slice only if its finite resource/DC boundary is fully proved; otherwise retain this narrow public conversion binding. |
+| `wow_private_user_get_menu_index` | registration output; `kernel/ntstubs.c::NtUserGetMenuIndex` | Binding.  Private menu validation/locking is unavailable; public validation and immediate-item enumeration are the finite edge.  S4 proves stale and nested menu behavior. |
+| `wow_user_load_menu_indirect`, `wow_private_user_load_create_menu` | `wcuricon.c` and registration output; `client/clres.c::WowServerLoadCreateMenu` | Binding to the already imported original Win16 menu parser with a public menu allocation carrier.  S4 proves parser conversion, owner-draw aliases and full teardown. |
+
+This pass reduces no binding line today: none of the five candidate original
+sources can be imported wholesale without private USER server/lock state.
+It does establish the only allowed deletion criterion: S2--S4 may delete a
+facade operation only after its exact original source range is selected,
+linked and passes the same guest route and retirement contract; a similarly
+named public API is insufficient.
+
 ## Follow-up
 
 The full provider has fresh x86 link evidence. S1 therefore no longer carries

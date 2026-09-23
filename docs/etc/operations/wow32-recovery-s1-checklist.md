@@ -32,7 +32,7 @@ source-wide guest-pointer macro surface. Its pass is static evidence only; it
 does not change any later runtime, lifecycle or guest-acceptance gate.
 
 [Normalized mirror-delta audit](../evidence/m0-t422-s1-normalized-wow32-mirror-delta.md)
-separates the 68 newline-only mirror matches from nine real source deltas and
+separates the 71 newline-only mirror matches from six real source deltas and
 assigns every real delta to retain or minimum-diff cleanup. Its pending cleanup
 is part of A03/A10, not a substitute for the owning runtime acceptance.
 
