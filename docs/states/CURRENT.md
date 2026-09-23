@@ -2,15 +2,34 @@
 
 ## Current Work
 
-**No active M/T/S packet.**
+## Active Packet
 
-M0 T422 S1 has closed its whole-WOW32 audit/design scope.  The indexed
-[S1 audit closure](../etc/evidence/m0-t422-s1-wow32-audit-closure.md),
-[coverage ledger](../etc/operations/wow32-recovery-coverage-ledger.md), and
-[checklist](../etc/operations/wow32-recovery-s1-checklist.md) establish the
-finite S2--S8 implementation graph.  This is not WOW16 acceptance:
-`WRITE.EXE`, `WINMINE.EXE`, and `SOL.EXE` remain unaccepted.  A future owner
-must admit one S from the existing T422 proposal before implementation resumes.
+**Active: M0 T422 S2**
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T422 S2, Ordinary Mode, single implementer/reviewer. |
+| Candidate Proposal | [WOW32 complete runtime recovery](../proposals/proposal-wow32-complete-runtime-recovery-001.md). |
+| Admission And Approval | Owner authorized automatic ordered admission of every T422 S on 2026-09-22; S2 is now admitted. |
+| Objective | Complete the coupled original USER client-view, task/window/message and callback package: real desktop/WND/CLS/handle backing, publication/update/retirement, task/thread lifecycle and production `CallBack16` routing. |
+| Non-goals | A recursive USER/CSRSS/Win32k import; a second USER server, mapping manager, scheduler, TLS or CCPU owner; raw host pointers in guest data; guest-media changes; or treating a native fixture as guest acceptance. |
+| Reference Baseline | [S1 audit closure](../etc/evidence/m0-t422-s1-wow32-audit-closure.md), [coverage ledger](../etc/operations/wow32-recovery-coverage-ledger.md), [direct-data mutation contract](../etc/evidence/m0-t422-s1-direct-data-mutation-contract.md), and [bootstrap/teardown order](../etc/evidence/m0-t422-s1-wow-bootstrap-teardown-order.md). |
+| Files And ABI Surface | S2-selected `src/mvdm/wow32` USER/task/message/callback owners, original selected `opennt-host` USER client slices, `wow32-dll` bindings, worker-local WOW client view, PMODE32 layouts, IN-07/08/18/19/20 and OUT-01/02/04--08/11/12/15--17. |
+| Applicable Rules | Source-first recovery, original-mirror preservation, one worker-state owner, bounded guest-memory leases, exact original pointer rebasing, immutable guest media and no false runtime acceptance. |
+| Verification | Original-source and binding audit; focused positive/negative lifecycle and callback tests; real immutable USER/WOW16 guest tests; fresh MSVC x86 `/MT` build; all 17 established DOS regressions; governance, link and diff checks. |
+| Expected Markers | Complete typed publication before callback, real guest direct reads after mutation, stale/reused handle rejection, exactly-once nonzero-task cleanup, no partial publication or live-object release on module cleanup, and no remaining S2 placeholder. |
+| Asset Needs | Pinned original OpenNT mirrors, existing CCPU worker domain and x86 graph, immutable WOW16/WRITE media and package-local test/log roots. |
+| Reporting Requirements | Per-capability source/build/wiring/focused/guest/teardown/delivery evidence; mirror versus autonomous footprint; retained boundary justification; exact test artifacts and explicit remaining receiver work. |
+| Stop Conditions | A need for a prohibited server/state owner, unbounded host-object copy, guest mutation, an unverifiable original-data layout, or a lifecycle contract that cannot preserve the source-shaped failure/cleanup behavior. |
+| Exit Criteria | Every S2 coverage row and owned input/output/direct-data edge is production-wired and passed through real guest creation/query/mutation/callback/destruction plus failure/retry/worker cleanup; fresh x86 and all DOS regressions pass; evidence is committed and pushed. |
+| Original Owner Request | Complete WOW32 through all sequential S packets automatically, preserving source-first minimal-diff governance and stopping only after S8 for owner acceptance. |
+| Similar-Issue Sweep | All S2 USER source bodies, direct readers, callback gateways, registration slots, object publication paths, task/module/thread/worker exits, existing local bindings and sibling original source owners. |
+
+## S1 Closure Record
+
+[T422 S1 WOW32 audit closure](../etc/evidence/m0-t422-s1-wow32-audit-closure.md)
+assigns the entire provider graph and S2's coupled contract.  It is a design
+closure only; no WOW16 application acceptance is carried forward as passed.
 
 ## T421 Closure Record
 
