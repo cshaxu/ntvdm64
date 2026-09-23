@@ -40,6 +40,14 @@ authority for the public operation; its guest representation is a separate,
 bounded, source-pinned record with explicit lifetime.  The two must be
 updated in the original observable order, not treated as aliases.
 
+For all desktop-view pointer fields, publication additionally uses the
+source-pinned `S = C + D` / guest `C = S - D` relation from the
+[client-view audit](m0-t422-s1-client-view-contract-audit.md#translation-invariant-required-for-s2).
+`D` is nonzero and range-checked; `S` is a numeric server-view form, never a
+worker-dereferenced native pointer.  This condition applies to `pDeskInfo`,
+`DESKTOPINFO.spwnd`, `HANDLEENTRY.phead`, WND links and every later
+desktop-heap client pointer, not only the initial root WND.
+
 ## Status
 
 This settles the field-level production contract for all direct-reader groups;

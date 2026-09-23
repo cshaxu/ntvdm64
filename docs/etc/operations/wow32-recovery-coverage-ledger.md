@@ -70,9 +70,12 @@ Exact manifest: [sources](../../../src/mvdm/wow32/sources), SHA-256
 D24767FF50C4C7017E6FCF5F550E120DB0F580F7C07C77CBE7E99E4432F52B36.
 The active SOURCES block contains 77 C files plus wow32.rc; disabled !IF 0
 tables are not active inputs. EH reports those 77 compiled, not all accepted.
-The primary reviewers below are planning assignments; shared files require
-function-level ownership in S1. A row cannot exclude a function because its
-primary reviewer differs from its caller's S.
+The primary reviewers below are S1's complete source-family ownership
+assignment; shared files require function-level ownership in the receiver's
+closure ledger. A row cannot exclude a function because its primary reviewer
+differs from its caller's S.  “Inherited build; per-entry audit pending” means
+the receiver must audit runtime behavior before implementation/closure; it is
+not an unassigned S1 edge or permission to defer it to S8.
 
 | ID | File under src/mvdm/wow32 | Primary reviewer | State |
 | --- | --- | --- | --- |

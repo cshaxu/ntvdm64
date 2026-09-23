@@ -85,6 +85,37 @@ This is a finite S2 implementation boundary, not a reason to bypass the
 optimized USER16 reads, alter guest bytes, or add an independent window
 manager.
 
+## Translation invariant required for S2
+
+The original `MapDesktop` source fixes the direction of the relation.  Its
+server mapping is `pdesk->hheapDesktop`; its client mapping is `pClientBase`;
+and it stores `ulClientDelta = serverBase - clientBase`.  Original
+`_MapDesktopObject` returns `serverObject - ulClientDelta` to its client.
+Consequently the standalone binding must use the following *numeric* relation
+for every pointer stored in a USER-facing desktop-view field:
+
+```
+client-linear C  + nonzero delta D  = server-view number S
+guest consumer: S - D = C
+```
+
+`C` is an address in the one CCPU-visible client allocation.  `S` is only the
+server-view number carried in `DESKTOPINFO`, `HANDLEENTRY`, or another
+source-pinned client-view field; it is **not** a native pointer and no worker
+code may dereference it.  The worker reaches `C` only through its bounded
+guest-memory lease.  Any native USER32 companion remains an opaque local
+association keyed by the typed guest handle, never an input to this arithmetic.
+
+S2 must choose one nonzero `D` per active worker view, prove that each chosen
+`C + D` does not wrap 32 bits, and prove `S - D == C` for every published
+desktop, WND, CLS and handle object.  It must also prove that publication
+rejects an out-of-range relation before it changes the TEB or a typed handle.
+The value is deliberately not fixed by S1: `0x84000000` in earlier fixtures
+is a test value, not evidence that it is a safe production mapping.  This
+finite numeric translation preserves the original client/server view contract
+without importing the NT object-manager section mapping or exposing a host
+address to immutable USER.EXE.
+
 ## Reproduction
 
 ```powershell

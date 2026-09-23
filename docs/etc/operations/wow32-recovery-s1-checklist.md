@@ -2,11 +2,13 @@
 
 ## Role
 
-Prepared for the queued [WOW32 proposal](../../proposals/proposal-wow32-complete-runtime-recovery-001.md).
-This is an execution-ready planning seed, not S1 admission or audit completion.
-Only Current admits a numeric packet. The [coverage ledger](wow32-recovery-coverage-ledger.md)
-owns stable IDs, source/table/slot/data inventories and inherited evidence.
-Use its E40/E41/E42/EH records before repeating research.
+This checklist is live for admitted **M0 T422 S1** under the
+[WOW32 proposal](../../proposals/proposal-wow32-complete-runtime-recovery-001.md).
+`docs/states/CURRENT.md` is the sole admission authority; this checklist
+records S1's audit gates and cannot itself claim audit or runtime completion.
+The [coverage ledger](wow32-recovery-coverage-ledger.md) owns stable IDs,
+source/table/slot/data inventories and inherited evidence.  Use its
+E40/E41/E42/EH records before repeating research.
 
 ## Prepared inputs
 
@@ -18,9 +20,9 @@ Use its E40/E41/E42/EH records before repeating research.
 - [x] Separate confirmed desktop/handle/exit gaps from inherited fixture and
   build successes, with links to source/artifact evidence.
 
-These ticks certify document preparation only. The audit gates below remain
-open. No new production build, runtime test or complete dependency audit was
-performed when preparing this seed.
+These ticks certify the inherited preparation only.  The audit gates below
+remain open unless their individual state says otherwise; a prepared inventory
+is never a production build, runtime test or complete dependency audit.
 
 ## Audit gates
 
@@ -65,7 +67,7 @@ instead of treating a non-null ABI table as callback acceptance.
 | A04 | Complete | Complete producer/consumer/update matrix for all guest-visible fields and object relationships. | [Direct-data mutation contract](../evidence/m0-t422-s1-direct-data-mutation-contract.md) completes each source-pinned direct-reader group's producer, update, publication and withdrawal rule. S2 implements and proves the rows; no current zero producer is misreported as a pass. |
 | A05 | In progress | Demonstrate a feasible full desktop/WND/CLS/handle lifecycle without a second USER server. | [Bootstrap/teardown order](../evidence/m0-t422-s1-wow-bootstrap-teardown-order.md) proves that B1 must publish before `WU32NotifyWow` returns and defines the finite B1--B5 producer boundary; S2 must prove its real desktop/WND/handle data plane. |
 | A06 | In progress | Resolve callback, scheduler, queue and task/module/thread/worker cleanup order. | [Bootstrap/teardown order](../evidence/m0-t422-s1-wow-bootstrap-teardown-order.md) separates original module cleanup from task retirement and defines X03/X04; bind those paths in production during S2. |
-| A07 | Pending | Experimentally resolve high-risk data freshness and reentry assumptions. | Test creation-time queries, host-originated changes without thunk entry, callback destruction, handle reuse and thread switching. Reuse valid tests; record remaining limits. |
+| A07 | In progress | Experimentally resolve high-risk data freshness and reentry assumptions. | The source-pinned server/client translation invariant now requires a bounded no-wrap/reject-before-publish fixture; then test creation-time queries, host-originated changes without thunk entry, callback destruction, handle reuse and thread switching. Reuse valid tests; record remaining limits. |
 | A08 | Complete | Complete dependency graph and executable per-family test plan across S2-S7. | [Executable closure graph](../evidence/m0-t422-s1-executable-closure-graph.md) assigns all 77 bodies, tables, slots and direct readers to finite S2--S8 receivers, resolves S2/S4/S6 ownership and prevents S8 backfill. |
 | A09 | In progress | Every modern unavailable dependency and original-guest limitation has a precise disposition. | [Boundary disposition](../evidence/m0-t422-s1-boundary-disposition.md) fixes the stopping boundaries, permitted finite bindings, dynamic-load rules and guest-defect policy. Complete per-operation evidence while closing A03. |
 | A10 | In progress | Review coherent implementation batches, immediate production wiring, exact scope and footprint report. | [Executable closure graph](../evidence/m0-t422-s1-executable-closure-graph.md) fixes coherent whole-package batches and their x86/DOS invariants; [provider-build boundary](../evidence/m0-t422-s1-provider-build-execution-boundary.md) now has fresh link/import evidence and retains the pointer-flush ABI seam after its negative altered-link proof. |
@@ -83,7 +85,7 @@ test, exact source/artifact inputs and expected observation.
 
 | Card | Question and required observation | Owner after S1 |
 | --- | --- | --- |
-| X01 | Can the real desktop and required native controls have source-correct guest identity, pointer relocation and retirement? Observe original guest desktop/handle reads, not a dummy object success. | S2 |
+| X01 | Can the real desktop and required native controls have source-correct guest identity, pointer relocation and retirement? First prove every published `S = C + D` relation is non-wrapping and rejects before mutation; then observe original guest desktop/handle reads, not a dummy object success. | S2 |
 | X02 | Are guest-consumed values updated at the required times while guest code does not call WOW32? Exercise clock/cursor and selected host-driven window changes; record ordering and freshness limits. | S2 |
 | X03 | Does original guest callback entry see complete creation state, and can nested destruction preserve active borrows then invalidate stale identities? | S2 |
 | X04 | Can original module release remain separate from thread/task retirement, including failure/retry and worker shutdown before backing release? | S2 |
