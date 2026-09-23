@@ -101,6 +101,11 @@ Selected original desktop/client source is evidence for layout, publication
 and withdrawal ordering; importing the recursive USER/CSRSS server remains a
 stopping boundary.
 
+`delta` must be nonzero: original `client.c::DispatchClientMessage` asserts
+that condition, and `USER.EXE` treats desktop/handle pointers as server-view
+addresses before subtracting it.  The page-domain setter rejects a zero delta
+and its focused fixture proves that rejection preserves the prior context.
+
 ## Required S2 evidence
 
 - **X01:** first immutable `GetDesktopWindow` after final USER init reads a

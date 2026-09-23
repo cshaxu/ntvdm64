@@ -404,7 +404,11 @@ static int page_domain_client_desktop(ULONG desktop_info, ULONG delta)
 int mvdm_softpc_wow_page_domain_set_client_desktop(
     unsigned long desktop_info, unsigned long delta)
 {
-    if (!desktop_info) return 0;
+    /* Original client/desktop.c uses a separate client view and carries a
+     * nonzero server-to-client delta.  A zero delta would turn server-view
+     * HANDLEENTRY/DESKTOPINFO pointers into an accidental direct alias and
+     * violates the original DispatchClientMessage contract. */
+    if (!desktop_info || !delta) return 0;
     return page_domain_client_desktop(desktop_info, delta);
 }
 

@@ -232,6 +232,10 @@ int main(void)
     stage = "client-desktop-null-rejection";
     if (mvdm_softpc_wow_page_domain_set_client_desktop(0u, 0u) ||
         c_sas_dw_at(teb + 0x5cu) != client_view) goto done;
+    stage = "client-desktop-zero-delta-rejection";
+    if (mvdm_softpc_wow_page_domain_set_client_desktop(client_view, 0u) ||
+        c_sas_dw_at(teb + 0x5cu) != client_view ||
+        c_sas_dw_at(teb + 0x60u) != 0x80000000u) goto done;
     stage = "client-desktop-wrong-address-space";
     saved_cr3 = c_getCR3();
     c_setCR3(dosx_gdt);

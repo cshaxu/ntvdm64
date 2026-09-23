@@ -24,8 +24,8 @@ unsigned long __cdecl mvdm_softpc_wow_page_domain_guest_teb(void);
 /* Original USER16 per-worker call-server flag, initially zero. */
 unsigned long __cdecl mvdm_softpc_wow_page_domain_guest_csr_flag(void);
 /* Publish the current original USER owner's already mapped client desktop.
- * desktop_info is client-linear; delta is the original server-to-client
- * relocation amount. The caller serializes CCPU entry and retains backing
+ * desktop_info is client-linear; delta is the required nonzero original
+ * server-to-client relocation amount. The caller serializes CCPU entry and retains backing
  * until withdrawal. This transport creates no desktop/window or USER policy.
  * Changing the view invalidates the original per-thread HWND/PWND cache. */
 int __cdecl mvdm_softpc_wow_page_domain_set_client_desktop(

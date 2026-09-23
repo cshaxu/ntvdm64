@@ -60,6 +60,14 @@ same delta.  Its actual implementation depends on NT object manager, section
 mapping and the USER server, so it cannot be compiled wholesale into the
 standalone worker without crossing the explicit USER-server stopping boundary.
 
+The delta is not an optional bookkeeping value.  Original
+`client.c::DispatchClientMessage` asserts that it is nonzero, and immutable
+`USER.EXE` subtracts it from desktop and handle-table server-view pointers.
+The worker transport now rejects a zero delta before touching TEB state.  S2
+must therefore allocate one controlled guest client view and publish the
+corresponding nonzero server-view translation; it may not use direct guest
+pointers as disguised server pointers.
+
 S2 must therefore retain the original ordering/layout contract but bind it to
 the one existing worker and public USER32 objects:
 
