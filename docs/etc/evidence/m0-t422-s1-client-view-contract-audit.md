@@ -125,6 +125,37 @@ finite numeric translation preserves the original client/server view contract
 without importing the NT object-manager section mapping or exposing a host
 address to immutable USER.EXE.
 
+### First-view address-form matrix
+
+This is not a guessed uniform-pointer rule.  It follows original
+`desktop.c::{MapDesktop,SetDesktop}`, `rtl/wow.c::DESKTOPVALIDATE`, and
+`rtl/userrtl.h::{REBASE*,REBASEPTR}`:
+
+| Field in the initial guest view | Required numeric form | Original consumer rule | S2 producer obligation |
+| --- | --- | --- | --- |
+| `TEB.CLIENTINFO.pDeskInfo` | client `Cdesk` | `SetDesktop` stores `serverDeskInfo - D`; USER immediately dereferences it. | Publish only the checked CCPU-linear `DESKTOPINFO` address. |
+| `TEB.CLIENTINFO.ulClientDelta` | nonzero `D` | `DispatchClientMessage` asserts nonzero; `DESKTOPVALIDATE` subtracts it. | Publish atomically with `pDeskInfo`; clear both before backing release. |
+| `DESKTOPINFO.pvDesktopBase/Limit` | server numeric bounds `Sbase/Slimit` | `DESKTOPVALIDATE` tests `HANDLEENTRY.phead` against these bounds before subtracting `D`. | Set `Sbase=Cbase+D`, `Slimit=Climit+D`; reject overflow and an empty/inverted range. |
+| `DESKTOPINFO.spwnd` | server form `Sroot` | USER reads `pDeskInfo->spwnd` then subtracts `D`. | Build root WND at `Croot`, set `Sroot=Croot+D`, then publish. |
+| `HANDLEENTRY.phead` for a desktop object | server form `Sobject` | `HMValidateHandle` accepts it only within the server bounds, then `DESKTOPVALIDATE` returns `Sobject-D`. | Store only after complete object bytes and identity fields exist; never use a host pointer. |
+| `WND.head.pSelf` | server self `Sobject` | `REBASE*` derives the object delta from `pSelf - object`. | Set before any WND field that original client code rebases. |
+| WND/CLS/menu links passed through `REBASE*` | server form of their target | `REBASE*` converts by the current object's `pSelf` delta. | Use the same `D` only for an object in this desktop view; S4 extends this rule to MENU data. |
+| `HANDLEENTRY.pOwner` and fields not read by the selected direct path | individually audited opaque/guest form | No selected first-view consumer permits a host pointer. | Do not fill from native `PTHREADINFO`/`PPROCESSINFO`; S2 must prove each newly exposed consumer before assigning an opaque guest association. |
+
+The matrix shows why merely allocating a WND-shaped byte buffer is insufficient:
+the handle validator first compares a server-form `phead` with server-form
+desktop bounds, while the immutable client then expects to receive the client
+form after subtraction.  It also bounds the implementation: one numeric
+translation per CCPU desktop allocation, not a copied NT USER heap or an
+emulated server address space.
+
+The bounded arithmetic fixture
+[`verify-wow-client-view-translation-contract.ps1`](../../../tests/observation/verify-wow-client-view-translation-contract.ps1)
+checks the positive relation, the existing zero-pair rejection and a
+32-bit-overflow negative control.  Its pass is deliberately only design
+evidence: it does not publish a desktop or execute USER.EXE.  S2 must replace
+that fixture's model with the real B1 producer and the X01 guest witness.
+
 ## Reproduction
 
 ```powershell
