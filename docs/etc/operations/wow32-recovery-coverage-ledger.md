@@ -2,11 +2,12 @@
 
 ## Role and baseline
 
-Owner-requested planning seed, 2026-09-22. This ledger supports the queued
-[WOW32 proposal](../../proposals/proposal-wow32-complete-runtime-recovery-001.md);
-it does not admit a T/S or change the active packet. S numbers below refer
-only to that successor proposal, not historical T420 S numbers.
-Use the [S1 execution checklist](wow32-recovery-s1-checklist.md) at admission.
+Live T422 S1 audit ledger for the admitted
+[WOW32 proposal](../../proposals/proposal-wow32-complete-runtime-recovery-001.md),
+updated from the owner-requested 2026-09-22 planning seed. S numbers below
+refer only to that successor proposal, not historical T420 S numbers. The
+[S1 execution checklist](wow32-recovery-s1-checklist.md) is the live gate
+record; this ledger owns stable coverage IDs and downstream handoff rows.
 
 Seed inspection: HEAD a87d6dd9437db6da77bc6db7c356780d8284cca6 plus the
 owner-approved proposal additions. This is a documentation inventory, not
@@ -32,11 +33,11 @@ Historical evidence is labelled inherited, never silently promoted to pass.
 Unavailable host facilities and approved original-guest limitations are
 explicit non-pass dispositions. Record precise scope for every pass.
 
-The compact seed below records inherited facts and remaining work. Before
+The compact register below records inherited facts and remaining work. Before
 closing a row, append its detailed record using the template below; a source
 file, slot assignment or old fixture alone cannot close it. Stable IDs survive
-regrouping. Reopening records counterevidence and invalidated result.
-No successor capability is marked complete by this seed.
+regrouping. Reopening records counterevidence and invalidated result. No
+successor capability is marked complete by this audit ledger.
 
 ## Capability and dependency register
 

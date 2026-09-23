@@ -92,7 +92,7 @@ the live assignments. T420 S43 is debugger including OEM-DBG-PATH and S44 is
 VDD; S45 is the final layered registry-read completion plus non-WOW32
 acceptance. T420 is now closed by owner acceptance.
 S42 handoff checks pass; the USER desktop failure remains unfixed and is
-assigned to successor S1 audit and S2 implementation. T421 S1 is the sole
+assigned to successor S1 audit and S2 implementation. T422 S1 is the sole
 admitted packet.
 
 ## S40 Closure Record
