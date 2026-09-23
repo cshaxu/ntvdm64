@@ -92,7 +92,7 @@ server mapping is `pdesk->hheapDesktop`; its client mapping is `pClientBase`;
 and it stores `ulClientDelta = serverBase - clientBase`.  Original
 `_MapDesktopObject` returns `serverObject - ulClientDelta` to its client.
 Consequently the standalone binding must use the following *numeric* relation
-for every pointer stored in a USER-facing desktop-view field:
+for each desktop-heap object which original client code rebases:
 
 ```
 client-linear C  + nonzero delta D  = server-view number S
@@ -100,16 +100,25 @@ guest consumer: S - D = C
 ```
 
 `C` is an address in the one CCPU-visible client allocation.  `S` is only the
-server-view number carried in `DESKTOPINFO`, `HANDLEENTRY`, or another
-source-pinned client-view field; it is **not** a native pointer and no worker
-code may dereference it.  The worker reaches `C` only through its bounded
-guest-memory lease.  Any native USER32 companion remains an opaque local
-association keyed by the typed guest handle, never an input to this arithmetic.
+server-view number carried by a rebased desktop-heap field such as
+`DESKTOPINFO.spwnd`, `HANDLEENTRY.phead` or a WND cross-reference; it is
+**not** a native pointer and no worker code may dereference it.  The worker
+reaches `C` only through its bounded guest-memory lease.  Any native USER32
+companion remains an opaque local association keyed by the typed guest handle,
+never an input to this arithmetic.
+
+`SetDesktop` makes one important distinction: it publishes
+`CLIENTINFO.pDeskInfo` itself as the client form `C` (`serverDeskInfo - D`) and
+publishes `CLIENTINFO.ulClientDelta = D`.  S2 must retain that distinction:
+the TEB's `pDeskInfo` is a checked client-linear pointer, while only the
+originally rebased fields *within* that desktop view use `S`.  Treating the
+TEB field itself as `S` would make the first `pDeskInfo->spwnd` access start
+from the wrong address.
 
 S2 must choose one nonzero `D` per active worker view, prove that each chosen
-`C + D` does not wrap 32 bits, and prove `S - D == C` for every published
-desktop, WND, CLS and handle object.  It must also prove that publication
-rejects an out-of-range relation before it changes the TEB or a typed handle.
+`C + D` does not wrap 32 bits, and prove `S - D == C` for every field the
+original client consumer rebases.  It must also prove that publication rejects
+an out-of-range relation before it changes the TEB or a typed handle.
 The value is deliberately not fixed by S1: `0x84000000` in earlier fixtures
 is a test value, not evidence that it is a safe production mapping.  This
 finite numeric translation preserves the original client/server view contract
