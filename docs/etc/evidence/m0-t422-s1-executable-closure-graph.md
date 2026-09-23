@@ -78,6 +78,25 @@ usable at the point it becomes usable; S8 integrates rather than backfills.
 | Dynamic imports | 49 WSOCK32, 15 WINSPOOL, 78 WINMM and one OLETHK32 symbol are statically present; atomically safe runtime load/failure/teardown is S7. | S7. |
 | Autonomous footprint | 21 DLL-local files / 2,977 lines plus 2 worker-local files / 180 lines are retained only as named finite bindings.  No binding is promoted to a mirror merely by this graph. | Function-level four-rung/reduction review remains A03/A10. |
 
+## Indirect callback and reentry allocation
+
+The active 77-file manifest has **72** original `CallBack16` call sites in
+24 source bodies, plus the three USER native-to-guest dispatch gateways
+(`W32Win16WndProcEx`/`W32DialogFunc`/`W32EditNextWord`).  This is a
+source-level ownership count, not an assertion that any callback has run.
+It closes the S1 question of which packet owns each callback family; every
+receiver still has to test normal, failed, reentrant and teardown behavior.
+
+| Receiver | Original active callers | `CallBack16` sites | Additional gateway | Required closure condition |
+| --- | --- | ---: | --- | --- |
+| S2 USER/task | `wcall16,wcall32,wkman,wmdisp32,wmsgem,wsubcls,wudlg,wumsg,wuser,wutmr,wuwind` | 34 | all three USER dispatch gateways | One bounded CCPU frame lease; nested return, cancellation, task/module distinction and worker loss. |
+| S3 GDI | `wdib,wgdi,wgfont,wgmeta` | 13 | none | DC/object release after callback, invalid input and task/worker loss. |
+| S4 resource/menu | `wres16,wcuricon` | 11 | none | Resource conversion and callback failure/release after typed guest identity exists. |
+| S5 clipboard/DDE | `wdde` | 2 | none | Peer rejection, abandon and task-loss cleanup. |
+| S6 KERNEL | `walias` | 1 | none | Alias/module release cannot retain a callback frame. |
+| S7 CORE/remaining families | `wow32,wowhooks,wcommdlg,wsext,wshell` | 11 | none | Dynamic-family callback failure/load/unload and final worker teardown. |
+| **Total** | **24 selected bodies** | **72** | **3** | S8 repeats reached application interactions only; it acquires no unowned callback family. |
+
 ## Packet test invariant
 
 Every implementation packet performs a fresh formal x86 build, tests every
