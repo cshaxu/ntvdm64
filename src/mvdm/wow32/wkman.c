@@ -35,7 +35,6 @@
 #undef MVDM_WOW32_RESTORE_X86_FOR_VDMDBG
 #endif
 #include "wowfax.h"
-#include "wow_private_user_compat.h"
 
 extern void UnloadNetworkFonts( UINT id );
 
@@ -819,7 +818,7 @@ ULONG FASTCALL WK32WowSetIdleHook(PVDMFRAME pFrame)
 
 --*/
 
-DWORD WINAPI W32Thread(LPVOID vpInitialSSSP)
+DWORD W32Thread(LPVOID vpInitialSSSP)
 {
     TD td;
     UNICODE_STRING  uImageName;
@@ -2670,7 +2669,7 @@ ULONG FASTCALL WK32WowWaitForMsgAndEvent(PVDMFRAME pFrame)
   VOID
 
 --*/
-DWORD WINAPI WowMsgBoxThread(VOID *pv)
+DWORD WowMsgBoxThread(VOID *pv)
 {
     PWOWMSGBOX16 pWowMsgBox16 = (PWOWMSGBOX16)pv;
     PSZ   pszMsg, pszTitle;
@@ -2780,7 +2779,7 @@ VOID FASTCALL WK32WowMsgBox(PVDMFRAME pFrame)
   NEVER RETURNS - Goes away when WOW is killed
 
 --*/
-DWORD WINAPI W32HungAppNotifyThread(UINT htaskKill)
+DWORD W32HungAppNotifyThread(UINT htaskKill)
 {
     PTD ptd;
     LPWORD pLockTDB;

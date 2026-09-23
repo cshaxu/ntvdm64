@@ -1556,6 +1556,7 @@ ULONG FASTCALL WK32FileOpen(PVDMFRAME pFrame)
         LocalFree(lpFileName);
         pSft->SFT_Flags |= SFT_NAMED_PIPE;
     }
+
     ul = iDosHandle;
 
 Done:
@@ -1729,6 +1730,7 @@ ULONG FASTCALL WK32FileCreate(PVDMFRAME pFrame)
         LocalFree(lpFileName);
         pSft->SFT_Flags |= SFT_NAMED_PIPE;
     }
+
     ul = iDosHandle;
 
 Done:
@@ -1756,8 +1758,7 @@ ULONG FASTCALL WK32FileClose(PVDMFRAME pFrame)
     PFILEIOCLOSE16  parg16;
     PBYTE           pJFT;
     HANDLE          Handle;
-    PDOSSFT         pSFT = NULL;
-    BOOL            fLastReference;
+    PDOSSFT         pSFT;
     ULONG           ul;
 
     GETARGPTR(pFrame, sizeof(FILEIOCLOSE16), parg16);
@@ -1783,11 +1784,10 @@ ULONG FASTCALL WK32FileClose(PVDMFRAME pFrame)
     // Decrement reference count.
 
     pSFT->SFT_Ref_Count--;
-    fLastReference = !pSFT->SFT_Ref_Count;
 
     // Close the handle if the reference count was set to zero.
 
-    if (fLastReference) {
+    if (!pSFT->SFT_Ref_Count) {
 
         FREEMAPFILECACHE(Handle);
         LOGDEBUG(fileoclevel,("WK32FileClose: Close Handle:%X fh32:%X\n", parg16->hFile, Handle));
@@ -1802,7 +1802,7 @@ ULONG FASTCALL WK32FileClose(PVDMFRAME pFrame)
         // delete some info that we keep for the open named pipe
         //
 
-        if (fLastReference && IsVdmRedirLoaded()) {
+        if (!pSFT->SFT_Ref_Count && IsVdmRedirLoaded()) {
             VrRemoveOpenNamedPipeInfo(Handle);
         }
     }

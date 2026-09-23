@@ -49,6 +49,13 @@ from `ntvdm.exe`, `KERNEL32.dll`, `USER32.dll` and `GDI32.dll`. The linker
 emits only its expected ignored `DESCRIPTION` warning and two duplicate-alias
 warnings for the generated stdcall aliases; it emits no unresolved external.
 
+After the S1 minimum-diff cleanup, the four affected original objects
+(`wgdi31`, `wkman`, `wkfileio`, `wucomm`) were recompiled with the same
+generated x86 commands and the DLL was relinked against the unchanged fresh
+object set. That matching-input artifact has SHA-256
+`A8B0A60915C43BECAA2689932AC8A7B8F264AD6CFC65BD0DD9EB42B6611E8549`; the
+same link succeeds with only the previously recorded warnings.
+
 The resulting DLL imports 91 named functions from its one worker parent,
 `ntvdm.exe`; the import table is finite and contains no copied session or CCPU
 archive. Their source-shaped allocation is:
