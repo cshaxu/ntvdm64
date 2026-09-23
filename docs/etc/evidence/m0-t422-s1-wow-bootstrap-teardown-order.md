@@ -73,6 +73,18 @@ The current `registered_cleanup` always invokes the module-shaped
 only by native fixtures.  No production caller presently binds either to the
 original W32 task-exit or worker-loss path.
 
+The current helper shapes also rule out a tempting but incorrect wiring:
+`wow_user_task_lifecycle_cleanup(task_id)` calls `wow_user_cleanup_bound`
+itself before freeing its task record.  Calling it *after*
+`wow_user_task_lifecycle_wow_cleanup` for the same nonzero task would run the
+original cleanup operation twice.  S2 must instead factor one task branch
+which receives the original `(instance, task_id, selectors, count)` arguments,
+calls `wow_user_cleanup_bound` exactly once, then—only on success—removes the
+task record, drops message/queue resources and invalidates its guest objects.
+The zero-task module branch retains only module cleanup and never removes a
+live task.  This is the required `registered_cleanup` dispatch; it is not
+permission to call the current two helpers in sequence.
+
 A current-source recheck linked the formally selected provider lifecycle
 object with `wow_user_task_lifecycle_fixture` and produced
 `WOW_USER_TASK_LIFECYCLE errors=0`.  It proves the helper's native
@@ -127,6 +139,9 @@ not claim that any current WOW16 application has passed.
 
 Confidence is high for the ordering and cleanup distinction because each is
 directly present in selected original caller bodies and the current no-caller
-scan.  The exact minimal initial desktop object set and the safe native-object
-relationship still require S2's bounded feasibility implementation; they are
-not left as an unassigned edge.
+scan.  A current-source native lifecycle fixture linked the selected provider
+object and emitted `WOW_USER_TASK_LIFECYCLE errors=0`; it verifies its
+failure/retry helper behavior but not guest reachability.  The exact minimal
+initial desktop object set and the safe native-object relationship still
+require S2's bounded feasibility implementation; they are not left as an
+unassigned edge.
