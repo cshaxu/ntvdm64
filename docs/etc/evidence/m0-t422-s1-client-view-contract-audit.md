@@ -46,6 +46,11 @@ With the current zero desktop pair it reads a nonzero word from the mapped DOS
 IVT as if it were a WND pointer; the prior captured page fault is therefore a
 missing publication fault, not a guest or CCPU instruction fault.
 
+The current-source S1 recheck again emitted
+`WOW32_CLIENT_VIEW_GAP_CONFIRMED`, `desktop producer calls: 0`, and
+`active incomplete HANDLEENTRY publication: explicit failure`.  This is
+current negative evidence, not merely inherited T420 history.
+
 ## Original boundary and design conclusion
 
 NT4's `MapDesktop` maps the desktop section into a process, records a

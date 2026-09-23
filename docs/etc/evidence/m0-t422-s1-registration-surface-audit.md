@@ -19,6 +19,12 @@ explicit-failure output is `pfnGetFullUserHandle`, assigned to
 `unsupported_full_handle` and returning `ERROR_CALL_NOT_IMPLEMENTED`. It is
 not a null pointer or a success substitute.
 
+The current-source S1 recheck also verified the six selected original owner
+bodies and four guest-client layout spans against their pinned OpenNT source
+identities.  This proves the selected source slices remain selected and
+unchanged outside their registered boundary adaptations; it does not convert
+the slot assignment into guest callback reachability.
+
 ## Disposition
 
 The ABI shape is complete, but this is not a runtime success claim. Inputs
