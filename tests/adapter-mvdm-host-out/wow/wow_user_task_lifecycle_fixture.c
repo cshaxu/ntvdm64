@@ -70,13 +70,24 @@ int __cdecl main(void)
         wow_cleanup_handle *entry = &lifecycle.objects->entries[index];
         struct wow_user_task_lifecycle_thread *task = lifecycle.threads;
         struct wow_task_order_thread *thread = binding.thread;
-        CHECK(DestroyWindow(native_window));
         stale_window.thread = thread;
         entry->phead = &stale_window;
         entry->pOwner = thread;
         entry->bType = TYPE_WINDOW;
         entry->wUniq = HIWORD(native_window);
         lifecycle.objects->last_handle = index;
+        /* A genuinely live owned window must not lose its THREADINFO merely
+         * because native-thread retirement was requested. This is a negative
+         * safety check, not acceptance of exceptional thread cleanup. */
+        CHECK(!wow_user_runtime_unbind(&binding));
+        CHECK(GetLastError() == ERROR_BUSY);
+        CHECK(IsWindow(native_window));
+        CHECK(wow_user_runtime_current() == &binding);
+        CHECK(binding.thread == thread && lifecycle.threads == task);
+        CHECK(entry->pOwner == thread && thread->ptdb != NULL);
+        CHECK(!binding.exclusive_held && lifecycle.cleanup.thread == NULL);
+        CHECK(WaitForSingleObject(thread->pEventQueueServer, 0) != WAIT_FAILED);
+        CHECK(DestroyWindow(native_window));
         CHECK(!wow_user_task_lifecycle_exit(&lifecycle,
             (HANDLE)(ULONG_PTR)0x1234, 0x1234, NULL, 0));
         CHECK(GetLastError() == ERROR_INVALID_WINDOW_HANDLE);

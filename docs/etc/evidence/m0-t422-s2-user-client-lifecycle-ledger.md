@@ -2198,3 +2198,46 @@ This covers direct, interactive and nested COMMAND/MEM/EDIT routes and native
 child stream/exit cases, not remaining WOW feature acceptance. Documentation
 governance and whitespace checks pass. This incremental delivery preserves
 S2 as active; it does not claim the fresh-build/full-scope closure gate.
+
+## E64 exceptional retirement ownership and live-window negative test
+
+Post-f97b7a074 source audit establishes the remaining retirement boundary:
+original windows/core/ntuser/kernel/queue.c::xxxDestroyThreadInfo calls
+createw.c::PatchThreadWindows before handtabl.c::DestroyThreadsObjects.
+PatchThreadWindows skips destroyed/foreign windows, transfers the shared menu
+window to its desktop owner, and selects the safe procedure using WND.fnid,
+explicitly not CLS.fnid because subclassing can make them differ. Object
+destruction first handles cached DCs and thread locks, skips process-owned
+objects (while withdrawing menu notification references), and destroys only
+unmarked objects belonging to this thread. These are not equivalent to
+_WOWCleanup or a blanket DestroyWindow loop.
+
+Current wow_cleanup_window has the procedure and thread owner but no per-WND
+fnid. Class publication does retain CLS.fnid; that cannot substitute for the
+missing field. The native window gateway dispatches the retained procedure
+and detaches backing on WM_NCDESTROY. The current retirement hook refuses any
+remaining window; opennt_exit_thread and all four normal thread-return
+wrappers discard session_thread_unbind failure. Consequently the protection
+against early free is not a complete exceptional-thread-exit contract. No
+claim is made that ordinary WINMINE close currently exercises this failure.
+
+The existing task-lifecycle fixture now additionally enrolls a genuinely live
+native window before its stale-window case. It verifies ERROR_BUSY, retained
+current binding/task/THREADINFO, a valid queue event, no leaked exclusive lock,
+and no native window destruction. It then destroys the window and exercises
+the existing stale-entry rejection and successful retirement retry. Build/run:
+verify-wow-task-lifecycle.ps1, case task-lifecycle, current production objects,
+MSVC x86, build/M0-T422/S2/live-window-retirement-20260924. Terminal result:
+WOW_USER_TASK_LIFECYCLE errors=0; WOW_FIXTURE_OK case=task-lifecycle.
+This is native fixture evidence with its existing test parent bindings, not
+real-guest exceptional cleanup or a production repair.
+
+Required recovery remains within S2: select the original preparation/object
+retirement slice through the existing window/handle owner, preserve per-window
+procedure identity and shared-owner exclusions, then verify native-thread exit
+with live objects and cross-task survival. Full queue.c/createw.c/handtabl.c
+translation units depend on the private USER server and kernel lock/DC owners;
+that prevents direct whole-file composition. Their finite source slices and
+same-shaped bindings must be evaluated before introducing replacement policy.
+Do not bypass the current refusal, release TLS forcibly, use class fnid as a
+guess, or call a naive destruction loop a recovered original lifecycle.
