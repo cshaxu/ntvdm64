@@ -2915,3 +2915,63 @@ nested sends, early reply versus receiver completion, timeout/death cleanup,
 implicit sends and modal callbacks. Public native delivery remains its owner;
 the fixture's explicit message identity must not be misrepresented as an
 available native SMS identity or introduced as a second product message queue.
+
+## E80 Thread-correlated activation evidence and diagnostic error isolation
+
+The original kernel/userk.h EnterWowCritSect/ExitWowCritSect bodies only
+account for execution ownership; they do not swap a complete CPU register
+image. Original softpc.new/base/ccpu386/ntthread.c owns per-thread recursive
+simulation/exception jump buffers, while wow32/wcall16.c::CallBack16 selects
+ptd->vpCBStack, enters host_simulate, restores IP and refreshes vpStack.
+This source check supplies no evidence for adding a CPU-context copier or
+changing CCPU instructions to repair synchronous USER waits.
+
+Read-only comparison of NTVDMx64 minntfix wow32/wtask.c and wsyslevel.c finds
+a different Win16Mutex/ReleaseThunkLock scheme and timed yield behavior,
+including an explicit nested-directed-yield limitation. Those files are not
+original taskman recovery and are not admitted by the project's narrow
+NTVDMx64 SoftPC import exception. No comparison code is copied or linked.
+
+Existing default-off thunk and window traces now append native thread identity;
+normal thunk entry/return also reports its existing trace nesting counter.
+No new state owner, mirror hook or guest mutation is introduced. Run
+t422-s2-20260924T211850250Z-5f47e2c2-window-lifecycle retains the failure with
+worker 12444: second-task thread 496 (task 1747) enters WU32BringWindowToTop
+at RVA 36F50 without returning; first-instance thread 14240 (task 17BF) is
+inside WU32GetMessage at RVA 334D0. WCT names 496 -> SendMessage -> 14240,
+cycle=0. Thread 49856 is separately observable as the WOWEXEC callback path.
+The harness restores the profile and performs scoped cleanup. This is
+incremental reduced-environment evidence, not a sealed acceptance run.
+
+The trace review also found an independent production boundary defect:
+wow_user_invoke_thunk called trace_thunk and trace_return without preserving
+LastError. Environment lookup or failed trace file opening could replace the
+original caller/callee error even though observation should be nonsemantic.
+The wrapper now saves/restores that value around each existing trace call;
+borrow-scope cleanup already preserves it. No scheduling change is included.
+
+The existing thunk-scope fixture is now selectable by the lifecycle runner.
+It checks input error 0x1234 and output error 0x5678 with tracing disabled and
+with an invalid NUL/trace.log destination, plus its original nested borrow,
+window destruction and exceptional cleanup checks. Run
+build/M0-T422/S2/thunk-error-r1-20260924 reports
+WOW_USER_THUNK_SCOPE errors=0 calls=4 exception=1 and WOW_FIXTURE_OK.
+This is a native fixture, not Win16 acceptance or a claim that the original
+send/reply transport is now bound. Fixture SHA-256:
+243120395D58470765A743F431428AFD65BEB374D824399475C29EDADA256E53.
+
+The x86 provider build links successfully. Real diagnostic run
+t422-s2-20260924T212249359Z-b6473e4c-window-lifecycle passes two sequential
+WINMINE launch/close cycles in worker 35540 (launchers 27964 and 31980),
+including T422_S2_WOW_USER_REAL_DESTRUCTION_OK. Synchronous activation remains
+open: subsequent repair must bind the original reply-conditioned scheduling
+edges, not infer a CPU defect or install another unconditional API wrapper.
+
+All 17 established DOS routes pass on that deployed package; summary:
+O:/winnt/logs/t422-s2-thunk-error-20260924212325-43ffa88f-summary.json.
+The rebuilt and deployed WOW32.DLL hashes both equal
+B423B07C81A259B6788D37BF15B4A23B7285EB97566D73BA91B2AD603D2BB9CF.
+Production change is +13/-6 non-mirror lines, zero mirror/overlay/guest changes.
+The trace depth field is diagnostic bookkeeping, not an independent execution
+owner or proof of exception-balanced scheduling. Governance and diff checks
+pass. This is an observation/error-isolation delivery, not S2 closure.

@@ -317,10 +317,11 @@ static VOID window_trace(HWND window, UINT message, LONG result,
     if (file == INVALID_HANDLE_VALUE) return;
     native_procedure = GetWindowLongA(window, GWL_WNDPROC);
     bytes = (DWORD)sprintf_s(line, sizeof(line),
-        "%lu %s hwnd=%08lX message=%04X native=%08lX result=%08lX\r\n",
+        "%lu %s hwnd=%08lX message=%04X native=%08lX result=%08lX tid=%lu\r\n",
         (unsigned long)GetCurrentProcessId(), stage,
         (unsigned long)(ULONG_PTR)window, (unsigned)message,
-        (unsigned long)native_procedure, (unsigned long)result);
+        (unsigned long)native_procedure, (unsigned long)result,
+        (unsigned long)GetCurrentThreadId());
     if (bytes) (void)WriteFile(file, line, bytes, &written, NULL);
     CloseHandle(file);
 }

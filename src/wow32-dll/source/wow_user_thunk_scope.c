@@ -42,10 +42,11 @@ static void trace_thunk(PVDMFRAME frame, LPFNW32 thunk)
     rva = module && (ULONG_PTR)thunk >= (ULONG_PTR)module ?
         (ULONG_PTR)thunk - (ULONG_PTR)module : 0;
     bytes = (DWORD)sprintf_s(line, sizeof(line),
-        "%lu W32Dispatch call=%04X thunk=%08lX rva=%08lX task=%04X return=%08lX ax=%04X args=%u\r\n",
+        "%lu W32Dispatch call=%04X thunk=%08lX rva=%08lX task=%04X return=%08lX ax=%04X args=%u tid=%lu depth=%u\r\n",
         (unsigned long)GetCurrentProcessId(), frame->wCallID,
         (unsigned long)(ULONG_PTR)thunk, (unsigned long)rva, frame->wTDB,
-        (unsigned long)frame->vpCSIP, frame->wAX, (unsigned)frame->cbArgs);
+        (unsigned long)frame->vpCSIP, frame->wAX, (unsigned)frame->cbArgs,
+        (unsigned long)GetCurrentThreadId(), (unsigned)trace_depth);
     if (bytes)
         (void)WriteFile(file, line, bytes, &written, NULL);
     CloseHandle(file);
@@ -73,9 +74,10 @@ static void trace_return(PVDMFRAME frame, ULONG result)
     if (file == INVALID_HANDLE_VALUE)
         return;
     bytes = (DWORD)sprintf_s(line, sizeof(line),
-        "%lu W32Return call=%04X result=%08lX task=%04X\r\n",
+        "%lu W32Return call=%04X result=%08lX task=%04X tid=%lu depth=%u\r\n",
         (unsigned long)GetCurrentProcessId(), frame->wCallID,
-        (unsigned long)result, frame->wTDB);
+        (unsigned long)result, frame->wTDB,
+        (unsigned long)GetCurrentThreadId(), (unsigned)trace_depth + 1);
     if (bytes)
         (void)WriteFile(file, line, bytes, &written, NULL);
     CloseHandle(file);
@@ -123,13 +125,17 @@ ULONG WINAPI wow_user_invoke_thunk(LPFNW32 thunk, PVDMFRAME frame)
 {
     wow_user_borrow_scope scope;
     ULONG result;
+    DWORD trace_error = GetLastError();
     trace_thunk(frame, thunk);
+    SetLastError(trace_error);
     wow_user_borrow_enter(&scope);
     __try {
         result = (*thunk)(frame);
     } __finally {
         wow_user_borrow_leave(&scope);
     }
+    trace_error = GetLastError();
     trace_return(frame, result);
+    SetLastError(trace_error);
     return result;
 }

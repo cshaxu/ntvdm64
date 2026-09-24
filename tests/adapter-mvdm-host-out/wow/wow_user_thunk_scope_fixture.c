@@ -6,6 +6,12 @@ static unsigned errors, calls;
 static HWND window;
 static BOOL raising;
 #define CHECK(x) do { if (!(x)) { ++errors; printf("FAIL line=%d\n", __LINE__); } } while (0)
+static ULONG FASTCALL error_thunk(PVDMFRAME frame)
+{
+    CHECK(GetLastError() == 0x1234);
+    SetLastError(0x5678);
+    return frame->wAX;
+}
 static ULONG FASTCALL nested_thunk(PVDMFRAME frame)
 {
     PWW words = wow_user_borrow_window(window);
@@ -42,6 +48,15 @@ int __cdecl main(void)
     VDMFRAME frame = {0};
     BOOL caught = FALSE;
     frame.wAX = 0x2468;
+    CHECK(SetEnvironmentVariableA("MVDM_WOW_DISPATCH_TRACE_PATH", NULL));
+    SetLastError(0x1234);
+    CHECK(wow_user_invoke_thunk(error_thunk, &frame) == 0x2468);
+    CHECK(GetLastError() == 0x5678);
+    CHECK(SetEnvironmentVariableA("MVDM_WOW_DISPATCH_TRACE_PATH", "NUL\\trace.log"));
+    SetLastError(0x1234);
+    CHECK(wow_user_invoke_thunk(error_thunk, &frame) == 0x2468);
+    CHECK(GetLastError() == 0x5678);
+    CHECK(SetEnvironmentVariableA("MVDM_WOW_DISPATCH_TRACE_PATH", NULL));
     create_window();
     CHECK(wow_user_invoke_thunk(outer_thunk, &frame) == 0x76543210);
     CHECK(frame.wAX == 0x2468);
@@ -54,6 +69,6 @@ int __cdecl main(void)
     CHECK(caught && !IsWindow(window));
     CHECK(wow_user_borrow_window(NULL) == NULL && GetLastError() == ERROR_INVALID_STATE);
     CHECK(calls == 4);
-    printf("WOW_USER_THUNK_SCOPE errors=%u calls=%u exception=%u\n", errors, calls, caught);
+    fprintf(stderr, "WOW_USER_THUNK_SCOPE errors=%u calls=%u exception=%u\n", errors, calls, caught);
     return errors ? 3 : 0;
 }
