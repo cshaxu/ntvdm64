@@ -2833,3 +2833,43 @@ its passing DOS regressions cannot be inherited by this unverified source.
 Next work is to resolve the header composition, rebuild, test the actual
 scope and original scheduler contract, and rerun real guest activation and
 the established regressions. S2 remains active throughout this checkpoint.
+
+## E78 Rejected blanket native-call scope
+
+Removing the redundant wowuserp.h inclusion from window_words_binding fixed
+the E77 C2011 failure; the x86 DLL linked. The new native-scope fixture in
+build/M0-T422/S2/native-scope-r1-20260924 reported
+WOW_USER_TASK_LIFECYCLE errors=0 and WOW_FIXTURE_OK, covering single-task
+nested scopes, task-lock preservation and synthetic exceptional unwinding.
+It did not prove cross-task synchronous delivery.
+
+Real incremental reduced-environment run
+t422-s2-20260924T210529405Z-29d8a709-window-lifecycle failed the second
+single-instance invocation. The first WINMINE window appeared (worker 53896,
+launcher 51608). The captured thread 58568 stack, resolved against this DLL's
+link map, contains WU32SetWindowText -> wow_native_SetWindowTextA ->
+wow_window_native_proc -> wow_window_dispatch_bound -> wow_user_call_enter ->
+xxxDirectedYield -> xxxSleepTask -> wait_for_task_or_message. Thus the blanket
+native-call remove/reentry scope can itself wait during a native callback;
+the prior BringWindowToTop wait has not been demonstrated repaired. WCT
+reports no cycle; this evidence does not identify every logical dependency.
+
+This disproves sufficiency of the candidate and its single-task fixture.
+The six candidate files are restored to the E76 source revision 5909d1359;
+the complete rejected experiment remains recoverable in e977765a3. No mirror
+or guest changes are needed for this withdrawal. E76's receive-data-lock fix
+remains. The harness restored SYSTEM.INI and stopped its scoped processes.
+Further work must prove original send/receive/reply scheduling relationships,
+including callback ownership, rather than apply unconditional native-call
+yielding. S2 and synchronous activation remain unaccepted.
+
+The withdrawal rebuilt all 83 affected x86 graph steps successfully. Comparing
+all provider sources and the lifecycle fixture against 5909d1359 produces no
+diff. Restored diagnostic run
+t422-s2-20260924T210829114Z-5bb97cf0-window-lifecycle passes two sequential
+WINMINE launch/close cycles in worker 26540 (launchers 52824 and 8580), with
+T422_S2_WOW_USER_REAL_DESTRUCTION_OK. The rebuilt and deployed DLLs both have
+SHA-256 E12C1CA584F88F1507FE5AB09AC6C48C2F8586923F510143584C3147B47E2AA9;
+this is a rebuild of E76 sources, not the old binary hash. No new complete
+DOS regression or sealed acceptance run is claimed here. Diff and
+documentation-governance checks pass.

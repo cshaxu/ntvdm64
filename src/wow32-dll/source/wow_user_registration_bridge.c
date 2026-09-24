@@ -26,41 +26,6 @@ VOID WINAPI FreeDDEData(HANDLE, BOOL, BOOL);
 static PFNWOWHANDLERSIN wow_input_handlers;
 static wow_user_task_lifecycle wow_lifecycle;
 
-/* Original Win32 signatures remain at the mirror call sites. The native
- * call owns its exact result/error and transport; the scope owns only the
- * original taskman's native-wait/callback reentry pairing. */
-#define WOW_NATIVE_CALL(type, name, params, args, failed) \
-type WINAPI wow_native_##name params \
-{ \
-    wow_user_call_scope scope; \
-    type result; BOOL restored; DWORD error; \
-    if (!wow_user_call_enter(&scope, FALSE)) return failed; \
-    __try { result = name args; } \
-    __finally { \
-        error = GetLastError(); \
-        restored = wow_user_call_leave(&scope, FALSE); \
-        if (restored) SetLastError(error); \
-    } \
-    return restored ? result : failed; \
-}
-WOW_NATIVE_CALL(BOOL, BringWindowToTop, (HWND w), (w), FALSE)
-WOW_NATIVE_CALL(BOOL, SetWindowPos, (HWND w, HWND after, int x, int y, int cx, int cy, UINT flags), (w, after, x, y, cx, cy, flags), FALSE)
-WOW_NATIVE_CALL(BOOL, MoveWindow, (HWND w, int x, int y, int cx, int cy, BOOL paint), (w, x, y, cx, cy, paint), FALSE)
-WOW_NATIVE_CALL(BOOL, ShowWindow, (HWND w, int show), (w, show), FALSE)
-WOW_NATIVE_CALL(BOOL, EnableWindow, (HWND w, BOOL enable), (w, enable), FALSE)
-WOW_NATIVE_CALL(HWND, SetActiveWindow, (HWND w), (w), NULL)
-WOW_NATIVE_CALL(HWND, SetFocus, (HWND w), (w), NULL)
-WOW_NATIVE_CALL(BOOL, DestroyWindow, (HWND w), (w), FALSE)
-WOW_NATIVE_CALL(HWND, SetParent, (HWND w, HWND parent), (w, parent), NULL)
-WOW_NATIVE_CALL(BOOL, SetWindowPlacement, (HWND w, const WINDOWPLACEMENT *placement), (w, placement), FALSE)
-WOW_NATIVE_CALL(int, GetWindowTextA, (HWND w, LPSTR text, int count), (w, text, count), 0)
-WOW_NATIVE_CALL(int, GetWindowTextLengthA, (HWND w), (w), 0)
-WOW_NATIVE_CALL(BOOL, SetWindowTextA, (HWND w, LPCSTR text), (w, text), FALSE)
-WOW_NATIVE_CALL(LRESULT, SendMessageA, (HWND w, UINT message, WPARAM wp, LPARAM lp), (w, message, wp, lp), 0)
-WOW_NATIVE_CALL(LRESULT, SendMessageTimeoutA, (HWND w, UINT message, WPARAM wp, LPARAM lp, UINT flags, UINT timeout, PDWORD_PTR value), (w, message, wp, lp, flags, timeout, value), 0)
-WOW_NATIVE_CALL(BOOL, ReplyMessage, (LRESULT value), (value), FALSE)
-#undef WOW_NATIVE_CALL
-
 BOOL WINAPI wow_user_get_messageA(LPMSG message, HWND window, UINT first, UINT last)
 {
     return wow_user_task_lifecycle_message(&wow_lifecycle, message, window,
@@ -83,7 +48,6 @@ static LRESULT call_previous_window_proc(WNDPROC procedure, HWND window,
     UINT message, WPARAM wp, LPARAM lp, BOOL unicode)
 {
     wow_user_borrow_scope scope;
-    wow_user_call_scope execution;
     LRESULT result;
     /* Original clmsg.c::CallWindowProcAorW resolves CPD first, then
      * usercli.h::CALLPROC_WOWCHECK forwards tagged WOW targets with NULL WW.
@@ -98,15 +62,11 @@ static LRESULT call_previous_window_proc(WNDPROC procedure, HWND window,
         return 0;
     }
     if (!wow_user_borrow_enter(&scope)) return 0;
-    if (!wow_user_call_enter(&execution, TRUE)) {
-        wow_user_borrow_leave(&scope); return 0;
-    }
     __try {
         result = wow_input_handlers.pfnWowWndProcEx(window, message, wp, lp,
             (DWORD)(ULONG_PTR)procedure, NULL);
     } __finally {
         wow_user_borrow_leave(&scope);
-        if (!wow_user_call_leave(&execution, TRUE)) result = 0;
     }
     return result;
 }

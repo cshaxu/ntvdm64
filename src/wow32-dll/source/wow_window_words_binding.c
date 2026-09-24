@@ -2,7 +2,6 @@
 #include "wow_user_borrow_scope.h"
 #include "wow_user_object_bindings.h"
 #include "wow_task_order_bindings.h"
-#include "wow_user_task_lifecycle.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
 
 #include <stdio.h>
@@ -224,10 +223,8 @@ BOOL WINAPI wow_window_dispatch_bound(HWND window, UINT message, WPARAM wp,
     wow_window_words_binding *binding;
     wow_window_dispatch_view view;
     wow_user_borrow_scope scope;
-    wow_user_call_scope execution;
     ULONG saved_callback[2];
     BOOL callback_published = FALSE;
-    BOOL execution_restored = TRUE;
     if (!result || !procedure || HIWORD(procedure) == WNDPROC_HANDLE ||
             ((procedure & WNDPROC_WOW) && !callback)) {
         SetLastError(ERROR_INVALID_PARAMETER);
@@ -236,10 +233,6 @@ BOOL WINAPI wow_window_dispatch_bound(HWND window, UINT message, WPARAM wp,
     binding = wow_window_words_acquire(window);
     if (!binding) return FALSE;
     if (!wow_user_borrow_enter(&scope)) {
-        wow_window_words_release(binding); return FALSE;
-    }
-    if (!wow_user_call_enter(&execution, TRUE)) {
-        wow_user_borrow_leave(&scope);
         wow_window_words_release(binding); return FALSE;
     }
     view.window = window;
@@ -270,9 +263,8 @@ BOOL WINAPI wow_window_dispatch_bound(HWND window, UINT message, WPARAM wp,
             (void)mvdm_softpc_wow_page_domain_restore_callback(saved_callback);
         wow_user_borrow_leave(&scope);
         wow_window_words_release(binding);
-        execution_restored = wow_user_call_leave(&execution, TRUE);
     }
-    return execution_restored;
+    return TRUE;
 }
 
 BOOL WINAPI wow_window_procedure_read(HWND window, DWORD *procedure)

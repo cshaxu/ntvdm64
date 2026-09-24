@@ -72,46 +72,6 @@ static void verify_receive_callout(wow_user_runtime_thread *binding)
     CHECK(UnregisterClassW(cls.lpszClassName, cls.hInstance));
 }
 
-static void verify_native_scope(wow_user_runtime_thread *binding,
-    wow_user_task_lifecycle *lifecycle)
-{
-    wow_user_call_scope native, callback, nested;
-    BOOL caught = FALSE;
-    CHECK(wow_user_call_enter(&native, FALSE));
-    CHECK(native.suspended && !binding->exclusive_held);
-    CHECK(lifecycle->process.pwpi->CSOwningThread == NULL);
-    CHECK(wow_user_call_enter(&callback, TRUE));
-    CHECK(callback.suspended && !binding->exclusive_held);
-    CHECK(lifecycle->process.pwpi->CSOwningThread == binding->thread);
-    CHECK(wow_user_call_enter(&nested, FALSE));
-    CHECK(wow_user_call_leave(&nested, FALSE));
-    CHECK(lifecycle->process.pwpi->CSOwningThread == binding->thread);
-    CHECK(wow_user_call_leave(&callback, TRUE));
-    CHECK(lifecycle->process.pwpi->CSOwningThread == NULL);
-    CHECK(wow_user_call_leave(&native, FALSE));
-    CHECK(lifecycle->process.pwpi->CSOwningThread == binding->thread);
-    CHECK(!binding->exclusive_held);
-    CHECK(wow_user_runtime_enter(binding));
-    lifecycle->process.pwpi->nTaskLock = 1;
-    CHECK(wow_user_call_enter(&native, FALSE));
-    CHECK(!native.suspended && !binding->exclusive_held);
-    CHECK(lifecycle->process.pwpi->CSOwningThread == binding->thread);
-    CHECK(wow_user_call_leave(&native, FALSE));
-    CHECK(binding->exclusive_held && lifecycle->process.pwpi->nTaskLock == 1);
-    lifecycle->process.pwpi->nTaskLock = 0;
-    CHECK(wow_user_runtime_leave(binding));
-    __try {
-        CHECK(wow_user_call_enter(&native, FALSE));
-        __try { RaiseException(0xe0420077u, 0, 0, NULL); }
-        __finally { CHECK(wow_user_call_leave(&native, FALSE)); }
-    } __except (GetExceptionCode() == 0xe0420077u ?
-            EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH) {
-        caught = TRUE;
-    }
-    CHECK(caught && !binding->exclusive_held);
-    CHECK(lifecycle->process.pwpi->CSOwningThread == binding->thread);
-}
-
 int __cdecl main(void)
 {
     session owner;
@@ -157,7 +117,6 @@ int __cdecl main(void)
     CloseHandle(idle_waiter.pIdleEvent);
     CHECK(wow_user_runtime_leave(&binding));
     verify_receive_callout(&binding);
-    verify_native_scope(&binding, &lifecycle);
     /* Exercise the recovered USER task-order owner after InitTask.  This is
      * deliberately not a synthetic wake: with no pending work, the original
      * yield path must retain its own immediate scheduler semantics. */
