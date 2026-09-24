@@ -59,6 +59,9 @@ static DWORD WINAPI send_reentrant(void *window)
         SMTO_ABORTIFHUNG, 3000, &result) && result == 62 ? 0 : 1;
 }
 
+#ifdef WOW_NATIVE_SEEN_FIXTURE
+static DWORD WINAPI cross_watchdog(void *done);
+#endif
 static void verify_receive_callout(wow_user_runtime_thread *binding)
 {
     WNDCLASSW cls = {0};
@@ -110,6 +113,21 @@ static void verify_receive_callout(wow_user_runtime_thread *binding)
     CHECK(sender != NULL);
     CHECK(MsgWaitForMultipleObjectsEx(0, NULL, 3000, QS_SENDMESSAGE,
         MWMO_INPUTAVAILABLE) == WAIT_OBJECT_0);
+#ifdef WOW_NATIVE_SEEN_FIXTURE
+    {
+        HANDLE done = CreateEventW(NULL, TRUE, FALSE, NULL);
+        HANDLE watchdog = CreateThread(NULL, 0, cross_watchdog, done, 0, NULL);
+        HANDLE event = binding->thread->pEventQueueServer;
+        CHECK(done && watchdog && ResetEvent(event));
+        CHECK(HIWORD(GetQueueStatus(QS_SENDMESSAGE)) & QS_SENDMESSAGE);
+        fprintf(stderr, "WOW_NATIVE_SEEN_READY\n");
+        CHECK(binding->thread->host->wait(binding->thread, 1, &event, FALSE) == 0);
+        fprintf(stderr, "WOW_NATIVE_SEEN_WAIT_RETURN\n");
+        SetEvent(done);
+        CHECK(WaitForSingleObject(watchdog, 3000) == WAIT_OBJECT_0);
+        CloseHandle(watchdog); CloseHandle(done);
+    }
+#endif
     CHECK(wow_user_runtime_enter(binding));
     binding->thread->host->receive(binding->thread);
     CHECK(binding->exclusive_held);
@@ -127,7 +145,7 @@ typedef struct cross_callout {
     wow_user_runtime *runtime;
     wow_user_task_lifecycle *lifecycle;
     HANDLE ready, returned, complete;
-    HWND window;
+    HWND window, sender_window;
     DWORD receiver_id;
     unsigned delivered;
 } cross_callout;
@@ -141,7 +159,7 @@ static DWORD WINAPI cross_watchdog(void *done)
     return 0;
 }
 
-static LRESULT CALLBACK cross_receive(HWND window, UINT message, WPARAM wp, LPARAM lp)
+static LRESULT cross_receive_body(HWND window, UINT message, WPARAM wp, LPARAM lp)
 {
     cross_callout *test = (cross_callout *)GetWindowLongPtrW(window, GWLP_USERDATA);
     if (message == WM_NCCREATE) {
@@ -154,7 +172,17 @@ static LRESULT CALLBACK cross_receive(HWND window, UINT message, WPARAM wp, LPAR
         CHECK(binding->thread->ppi->pwpi->CSOwningThread == binding->thread);
         ++test->delivered;
         fprintf(stderr, "WOW_NATIVE_SEND_RECEIVE early=%lu\n", (DWORD)wp);
-        if (wp) {
+        if (wp == 2) {
+            DWORD_PTR nested_result = 0;
+            wow_task_order_message *previous = binding->thread->psmsSent;
+            CHECK(wow_native_SendMessageTimeoutA(test->sender_window, WM_APP + 66,
+                0, 0, SMTO_ABORTIFHUNG, 3000, &nested_result) != 0);
+            CHECK(nested_result == 113);
+            CHECK(binding->thread->psmsSent == previous);
+            CHECK(binding->thread->ppi->pwpi->CSOwningThread == binding->thread);
+            return nested_result + 1;
+        }
+        if (wp == 1) {
             CHECK(ReplyMessage(114));
             /* Native ReplyMessage returns without performing NT4 WOW's
              * receiver yield. This rendezvous exposes concurrent ownership;
@@ -166,7 +194,30 @@ static LRESULT CALLBACK cross_receive(HWND window, UINT message, WPARAM wp, LPAR
         }
         return 114;
     }
+    if (message == WM_APP + 66) {
+        wow_user_runtime_thread *binding = wow_user_runtime_current();
+        CHECK(InSendMessage() && !binding->exclusive_held);
+        CHECK(binding->thread->psmsSent != NULL);
+        fprintf(stderr, "WOW_NATIVE_NESTED_CALLBACK scheduled=%u owner=%u\n",
+            binding->thread->ppi->pwpi->ptiScheduled == binding->thread,
+            binding->thread->ppi->pwpi->CSOwningThread == binding->thread);
+        CHECK(binding->thread->ppi->pwpi->ptiScheduled == binding->thread);
+        CHECK(binding->thread->ppi->pwpi->CSOwningThread == binding->thread);
+        return 113;
+    }
     return DefWindowProcW(window, message, wp, lp);
+}
+
+static LRESULT CALLBACK cross_receive(HWND window, UINT message, WPARAM wp, LPARAM lp)
+{
+    wow_task_callback_scope scope;
+    LRESULT result;
+    if (message != WM_APP + 65 && message != WM_APP + 66)
+        return cross_receive_body(window, message, wp, lp);
+    CHECK(wow_task_callback_enter(&scope));
+    __try { result = cross_receive_body(window, message, wp, lp); }
+    __finally { CHECK(wow_task_callback_leave(&scope)); }
+    return result;
 }
 
 static DWORD WINAPI cross_receiver(void *parameter)
@@ -206,6 +257,8 @@ static void verify_cross_callout(session *owner, wow_user_runtime_thread *bindin
     cross_callout test = {0};
     WNDCLASSW cls = {0};
     HANDLE helper, watchdog;
+    wow_window_words_binding *sender_borrow = NULL;
+    WW sender_words = {0};
     DWORD code;
     unsigned early;
     cls.lpfnWndProc = cross_receive;
@@ -217,6 +270,15 @@ static void verify_cross_callout(session *owner, wow_user_runtime_thread *bindin
     test.ready = CreateEventW(NULL, TRUE, FALSE, NULL);
     test.returned = CreateEventW(NULL, TRUE, FALSE, NULL);
     test.complete = CreateEventW(NULL, TRUE, FALSE, NULL);
+#ifdef WOW_NATIVE_NESTED_FIXTURE
+    test.sender_window = CreateWindowExW(0, cls.lpszClassName, L"", 0,
+        0, 0, 1, 1, HWND_MESSAGE, NULL, cls.hInstance, &test);
+    CHECK(test.sender_window != NULL);
+    CHECK(wow_window_words_attach(test.sender_window, &sender_words));
+    sender_borrow = wow_window_words_acquire(test.sender_window);
+    if (!sender_borrow) ExitProcess(94);
+    wow_window_words_cleanup_value(sender_borrow)->thread = binding->thread;
+#endif
     watchdog = CreateThread(NULL, 0, cross_watchdog, test.complete, 0, NULL);
     helper = CreateThread(NULL, 0, cross_receiver, &test, 0, &test.receiver_id);
     CHECK(helper && watchdog);
@@ -227,6 +289,9 @@ static void verify_cross_callout(session *owner, wow_user_runtime_thread *bindin
         unsigned reply = 0;
 #ifdef WOW_NATIVE_REPLY_FIXTURE
         reply = early;
+#endif
+#ifdef WOW_NATIVE_NESTED_FIXTURE
+        reply = early ? 2 : 0;
 #endif
         fprintf(stderr, "WOW_NATIVE_SEND_BEGIN early=%u\n", reply);
         CHECK(wow_native_SendMessageTimeoutA(test.window, WM_APP + 65, reply, 0,
@@ -245,6 +310,11 @@ static void verify_cross_callout(session *owner, wow_user_runtime_thread *bindin
     CHECK(WaitForSingleObject(watchdog, 3000) == WAIT_OBJECT_0);
     CloseHandle(helper); CloseHandle(watchdog);
     CloseHandle(test.ready); CloseHandle(test.returned); CloseHandle(test.complete);
+    if (sender_borrow) {
+        wow_window_words_detach(test.sender_window);
+        wow_window_words_release(sender_borrow);
+        CHECK(DestroyWindow(test.sender_window));
+    }
     CHECK(UnregisterClassW(cls.lpszClassName, cls.hInstance));
 }
 #endif

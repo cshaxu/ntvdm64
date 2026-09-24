@@ -223,6 +223,7 @@ BOOL WINAPI wow_window_dispatch_bound(HWND window, UINT message, WPARAM wp,
     wow_window_words_binding *binding;
     wow_window_dispatch_view view;
     wow_user_borrow_scope scope;
+    wow_task_callback_scope task_scope;
     ULONG saved_callback[2];
     BOOL callback_published = FALSE;
     if (!result || !procedure || HIWORD(procedure) == WNDPROC_HANDLE ||
@@ -232,7 +233,11 @@ BOOL WINAPI wow_window_dispatch_bound(HWND window, UINT message, WPARAM wp,
     }
     binding = wow_window_words_acquire(window);
     if (!binding) return FALSE;
+    if (!wow_task_callback_enter(&task_scope)) {
+        wow_window_words_release(binding); return FALSE;
+    }
     if (!wow_user_borrow_enter(&scope)) {
+        (void)wow_task_callback_leave(&task_scope);
         wow_window_words_release(binding); return FALSE;
     }
     view.window = window;
@@ -262,6 +267,7 @@ BOOL WINAPI wow_window_dispatch_bound(HWND window, UINT message, WPARAM wp,
         if (callback_published)
             (void)mvdm_softpc_wow_page_domain_restore_callback(saved_callback);
         wow_user_borrow_leave(&scope);
+        (void)wow_task_callback_leave(&task_scope);
         wow_window_words_release(binding);
     }
     return TRUE;

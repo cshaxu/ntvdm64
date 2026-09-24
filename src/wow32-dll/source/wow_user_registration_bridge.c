@@ -50,6 +50,7 @@ static LRESULT call_previous_window_proc(WNDPROC procedure, HWND window,
     UINT message, WPARAM wp, LPARAM lp, BOOL unicode)
 {
     wow_user_borrow_scope scope;
+    wow_task_callback_scope task_scope;
     LRESULT result;
     /* Original clmsg.c::CallWindowProcAorW resolves CPD first, then
      * usercli.h::CALLPROC_WOWCHECK forwards tagged WOW targets with NULL WW.
@@ -63,12 +64,17 @@ static LRESULT call_previous_window_proc(WNDPROC procedure, HWND window,
         SetLastError(ERROR_INVALID_STATE);
         return 0;
     }
-    if (!wow_user_borrow_enter(&scope)) return 0;
+    if (!wow_task_callback_enter(&task_scope)) return 0;
+    if (!wow_user_borrow_enter(&scope)) {
+        (void)wow_task_callback_leave(&task_scope);
+        return 0;
+    }
     __try {
         result = wow_input_handlers.pfnWowWndProcEx(window, message, wp, lp,
             (DWORD)(ULONG_PTR)procedure, NULL);
     } __finally {
         wow_user_borrow_leave(&scope);
+        (void)wow_task_callback_leave(&task_scope);
     }
     return result;
 }

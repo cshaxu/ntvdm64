@@ -194,8 +194,15 @@ static NTSTATUS WINAPI wait_for_task_or_message(wow_task_order_thread *thread,
      * wait.  MsgWait is the finite public substitute for the unavailable
      * kernel queue wake.  It does not dispatch here: the scheduled original
      * xxxUserYield/xxxReceiveMessages path owns that operation. */
-    result = MsgWaitForMultipleObjectsEx(count, events, INFINITE, QS_ALLINPUT,
-        alertable ? MWMO_ALERTABLE : 0);
+    /* queue.c xxxSleepThread checks fsWakeBits for pending synchronous
+     * sends, not just change bits. GetQueueStatus's high word retains old
+     * unread sends; MsgWait alone would wait for another new message. Keep
+     * posted/filter/WaitMessage new-input behavior unchanged. */
+    if (HIWORD(GetQueueStatus(QS_SENDMESSAGE)) & QS_SENDMESSAGE)
+        result = WAIT_OBJECT_0 + count;
+    else
+        result = MsgWaitForMultipleObjectsEx(count, events, INFINITE, QS_ALLINPUT,
+            alertable ? MWMO_ALERTABLE : 0);
     if (result < WAIT_OBJECT_0 + count) return (NTSTATUS)(result - WAIT_OBJECT_0);
     if (result == WAIT_IO_COMPLETION) return (NTSTATUS)0x000000C0;
     if (result == WAIT_OBJECT_0 + count) {
@@ -568,6 +575,36 @@ BOOL WINAPI wow_user_task_lifecycle_wait_message(wow_user_task_lifecycle *owner)
         if (!sleep_message_task(owner)) return FALSE;
     } while (task->message_wakes == wakes);
     return TRUE;
+}
+
+BOOL WINAPI wow_task_callback_enter(wow_task_callback_scope *scope)
+{
+    wow_user_runtime_thread *binding = wow_user_runtime_current();
+    wow_task_order_thread *thread;
+    ZeroMemory(scope, sizeof(*scope));
+    if (!binding || !(thread = binding->thread) || !thread->ptdb) return TRUE;
+    scope->held = binding->exclusive_held;
+    if (!scope->held && !wow_user_runtime_enter(binding)) return FALSE;
+    scope->binding = binding;
+    /* queue.c xxxSleepThread resumes taskman before receiving callbacks.
+     * Native USER can instead deliver inside its own SendMessage wait. */
+    if (thread->ppi->pwpi->CSOwningThread != thread) {
+        (void)xxxSleepTask(TRUE, NULL, thread);
+        scope->resumed = TRUE;
+    }
+    return wow_user_runtime_leave(binding);
+}
+
+BOOL WINAPI wow_task_callback_leave(wow_task_callback_scope *scope)
+{
+    wow_user_runtime_thread *binding = scope->binding;
+    if (!binding) return TRUE;
+    if (wow_user_runtime_current() != binding || !wow_user_runtime_enter(binding))
+        return FALSE;
+    /* Return to the suspended native wait, not to guest execution. */
+    if (scope->resumed) (void)xxxSleepTask(FALSE, (HANDLE)-1, binding->thread);
+    scope->binding = NULL;
+    return scope->held || wow_user_runtime_leave(binding);
 }
 
 BOOL WINAPI wow_user_native_call_begin(wow_user_native_call *call, HWND window)

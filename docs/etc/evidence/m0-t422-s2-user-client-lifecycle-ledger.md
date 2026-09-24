@@ -3308,3 +3308,87 @@ These are incremental native fixtures with test-only window associations,
 not sealed guest evidence. No new DOS run is claimed for this test-only
 delivery; E85 retains the unchanged product's 17-route result. Documentation
 governance and diff whitespace checks pass.
+
+## E87 Nested callback ownership and already-observed synchronous input
+
+The new `native-nested` fixture adds receiver-to-sender reentry through the
+actual production send wrapper. Before repair,
+`build/M0-T422/S2/native-nested-production-red-20260924` prints
+`WOW_NATIVE_NESTED_CALLBACK scheduled=1 owner=0`, fails the execution-owner
+check and then times out the outer send (exit 1). Its replay also fails,
+but times out before nested delivery: retain that scheduling variability,
+not just the first trace. Replay log:
+`O:/winnt/logs/t422-s2-native-nested-production-red-20260924.log`;
+fixture SHA-256 F87B76F1163CBCA9F425B6563E02034952220D085450334EE679FAB376B23267.
+
+Original queue.c::xxxSleepThread resumes through xxxSleepTask before
+continuing receive processing. Modern native SendMessage can instead call
+the sender's window procedure inside its own wait, outside that original
+loop. The finite callback scope now reacquires execution through the same
+original xxxSleepTask only when the callback thread is not the execution
+owner, and relinquishes that acquired execution before returning to the
+suspended native wait. No direct CPU copy, replacement scheduler, native
+message transport or second message queue is added. Data-lock state is
+tracked separately. The scope is wired before guest window publication/
+dispatch in wow_window_dispatch_bound and the tagged previous-WNDPROC path;
+both unwind it through finally. Other callback families and early reply are
+not certified by these two entry points.
+
+The first repaired nested fixture and its replay pass with owner=1 and
+result=114 (`native-nested-callback-gate-20260924`, SHA-256
+2F97724C550C71F50508CD7AB610A21496FF3DBEEAC5A9A57F5985F985BE6CEC).
+The real CCPU `callback-gate-window-borrow-20260924` fixture also passes
+normal/exceptional borrow cleanup and page-domain lifecycle. However real
+reactivation `t422-s2-20260924T224000211Z-998a6775-window-lifecycle` times
+out: keep it as FAIL. Saved DLL/map: `callback-gate-artifacts-20260924`, DLL
+FD41316750900619343716B941ABEF7DB7DE7F892E67F607187D0A661098F223.
+E85 binary control `t422-s2-20260924T224154967Z-c4f07ecb-window-lifecycle`
+passes. These runs alone do not prove the complete interleaving/cause.
+
+An independent `native-seen` test establishes another actual boundary bug:
+after observing an unconsumed synchronous send with GetQueueStatus, the
+production host wait never returns and its watchdog exits 98. Build
+`native-seen-send-red-20260924`, SHA-256
+0904FA0D65AAD20F0B2E02F81C1AEE7F6FFA4BB2F6E2785EB8A43B536A608D85;
+replay log `O:/winnt/logs/t422-s2-native-seen-send-red-20260924.log`.
+This agrees with original xxxSleepThread's fsWakeBits check and Microsoft's
+[MsgWaitForMultipleObjectsEx contract](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-msgwaitformultipleobjectsex):
+previously observed input no longer wakes an ordinary MsgWait. Check only
+the current QS_SENDMESSAGE high-word bit before that wait. Do not enable
+old posted/filtered input globally or change WaitMessage to an old-input loop.
+
+The repaired `native-seen-send-green-20260924` test and replay return from
+the wait, dispatch the send and pass the full native lifecycle (SHA-256
+FFF979A97B6B2C5098EA3C3BFA2803121936EE72B44158D3BEE172CE05178F2F).
+Final combined nested fixture `native-nested-wake-final-20260924` passes
+with owner=1 and errors=0; SHA-256
+8B9FF1407250E018DBEBF97EFE7A008E7D948ACC4E55C419C1C1DF907B3A6C88.
+Real reactivation passes twice:
+`t422-s2-20260924T224613660Z-82683746-window-lifecycle` and
+`t422-s2-20260924T224654436Z-ef421ea6-window-lifecycle`.
+Two sequential launch/close cycles pass in
+`t422-s2-20260924T224756320Z-bf1b096c-window-lifecycle`.
+SYSTEM.INI restoration and scoped process cleanup are recorded in each run.
+
+Final DLL/map: `build/M0-T422/S2/callback-gate-wake-artifacts-20260924`,
+DLL SHA-256 480E27EF987B375F23ECD8B3D0C67C415D4A76AA32743F2508A08F9EC323CB63.
+All unprefixed build names above are below build/M0-T422/S2. Evidence is
+incremental native-fixture/reduced-environment diagnostic evidence, not
+sealed ordinary-product acceptance. Production adapter footprint +59/-3
+(net +56), no new file, mirror/overlay/guest change. Original taskman remains
+unchanged. S2 stays open: exact received-message identity, early ReplyMessage,
+timeout/target-death lifetime and full callback-family coverage remain required.
+
+All 17 DOS routes pass, with zero expected/actual exit mismatches in
+`O:/winnt/logs/t422-s2-callback-wake-20260924224836-c7151e2a-summary.json`.
+The final `native-reply-callback-wake-20260924` fixture still fails: its first
+run times out before early-reply delivery and exits 1; replay reaches the
+receiver and exits 95 waiting for sender return, logged in
+`O:/winnt/logs/t422-s2-native-reply-callback-wake-20260924.log`.
+Retain both outcomes; neither the complete activation interleaving nor all
+message scheduling is proven fixed. Native transport success, scheduler
+selection and actual execution ownership remain separate required checks.
+After testing, O:/winnt/WOW32.DLL is restored to the E80 baseline hash
+B423B07C81A259B6788D37BF15B4A23B7285EB97566D73BA91B2AD603D2BB9CF.
+The source-selected candidate is retained as incomplete S2 work, not a full
+runtime promotion. No guest media changes or new S/T closure are claimed.

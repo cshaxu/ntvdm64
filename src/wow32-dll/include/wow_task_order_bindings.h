@@ -127,6 +127,13 @@ void WINAPI DestroyTask(wow_task_order_process *, wow_task_order_thread *);
 BOOL WINAPI xxxSleepTask(BOOL, HANDLE, wow_task_order_thread *);
 BOOL WINAPI xxxUserYield(wow_task_order_thread *);
 void WINAPI xxxDirectedYield(DWORD, wow_task_order_thread *);
+/* Borrowed native callback frame; original taskman remains execution owner. */
+typedef struct wow_task_callback_scope {
+    struct wow_user_runtime_thread *binding;
+    BOOL held, resumed;
+} wow_task_callback_scope;
+BOOL WINAPI wow_task_callback_enter(wow_task_callback_scope *);
+BOOL WINAPI wow_task_callback_leave(wow_task_callback_scope *);
 typedef VOID (WINAPI *wow_task_end_callback)(VOID);
 BOOL WINAPI xxxRegisterUserHungAppHandlers(wow_task_end_callback, HANDLE, wow_task_order_process *);
 BOOL WINAPI wow_task_reference_event(HANDLE, HANDLE *);

@@ -2,7 +2,7 @@ param(
     [Parameter(Mandatory=$true)][string]$ProviderBuildRoot,
     [Parameter(Mandatory=$true)][string]$WorkerBuildRoot,
     [string]$BuildRoot,
-    [ValidateSet('task-lifecycle','native-send','native-reply','task-order','class-client','window-borrow','thunk-scope')] [string]$Case = 'task-lifecycle',
+    [ValidateSet('task-lifecycle','native-send','native-reply','native-nested','native-seen','task-order','class-client','window-borrow','thunk-scope')] [string]$Case = 'task-lifecycle',
     [string]$Ninja = 'ninja.exe',
     [string]$VsDevCmd = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 )
@@ -88,8 +88,10 @@ $fixture = $compile -replace '/Fo\S+\s+\S+wow_user_task_lifecycle\.c$', ('/Fo"'+
 if ($fixture -eq $compile) { throw 'Fixture substitution failed' }
 if ($Case -eq 'window-borrow') { $fixture += ' /DWOW_WINDOW_BORROW_FIXTURE' }
 if ($Case -eq 'task-order') { $fixture += ' /we4113 /we4047' }
-if ($Case -in @('native-send','native-reply')) { $fixture += ' /DWOW_NATIVE_SEND_FIXTURE' }
+if ($Case -in @('native-send','native-reply','native-nested','native-seen')) { $fixture += ' /DWOW_NATIVE_SEND_FIXTURE' }
 if ($Case -eq 'native-reply') { $fixture += ' /DWOW_NATIVE_REPLY_FIXTURE' }
+if ($Case -eq 'native-nested') { $fixture += ' /DWOW_NATIVE_NESTED_FIXTURE' }
+if ($Case -eq 'native-seen') { $fixture += ' /DWOW_NATIVE_SEEN_FIXTURE' }
 Invoke-Build ($fixture.Replace('/Gz', '/Gd'))
 $parentObjects = @()
 if ($Case -ne 'window-borrow') {
