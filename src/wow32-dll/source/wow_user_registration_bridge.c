@@ -227,6 +227,22 @@ static DWORD WINAPI registered_full_handle(WORD handle)
     return (DWORD)(ULONG_PTR)window;
 }
 
+VOID WINAPI wow_user_register_wow_exec(HANDLE window)
+{
+    VOID WINAPI RegisterWowExec(HANDLE);
+    DWORD full = registered_full_handle(LOWORD(window));
+    /* WK32RegisterShellWindowHandle supplies HWND32, a sign-extended WORD.
+     * Resolve it through the existing USER handle owner before the original
+     * BaseClient sends it to BaseSrv. Never weaken broker PID validation. */
+    if (!full) return;
+    if ((DWORD)(ULONG_PTR)window != (DWORD)(LONG)(SHORT)LOWORD(window) &&
+            (DWORD)(ULONG_PTR)window != full) {
+        SetLastError(ERROR_INVALID_WINDOW_HANDLE);
+        return;
+    }
+    RegisterWowExec((HANDLE)(ULONG_PTR)full);
+}
+
 static VOID WINAPI registered_directed_yield(DWORD thread_id)
 {
     wow_user_runtime_thread *binding = wow_user_runtime_current();

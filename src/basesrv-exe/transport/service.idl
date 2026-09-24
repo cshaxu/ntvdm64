@@ -193,4 +193,10 @@ interface vdm_service
         [in] byte application_version[32],
         [in] hyper epoch,
         [in] unsigned long sequence);
+    error_status_t RegisterWowExec(
+        [in] handle_t binding,
+        [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [in] unsigned long window);
 }

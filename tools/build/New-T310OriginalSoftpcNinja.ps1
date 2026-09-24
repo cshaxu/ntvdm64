@@ -440,6 +440,7 @@ foreach ($entry in @(
     'VdmAddVirtualMemory', 'VdmRemoveVirtualMemory',
     'VdmAddDescriptorMapping', 'SetWOWforceIncrAlloc',
     'GetNextVDMCommand=_GetNextVDMCommand@4',
+    'RegisterWowExec=_RegisterWowExec@4',
     'GetCurrentDirectoryOem=_GetCurrentDirectoryOem@8',
     'SetCurrentDirectoryOem=_SetCurrentDirectoryOem@4',
     'GetEnvironmentVariableOem=_GetEnvironmentVariableOem@12',

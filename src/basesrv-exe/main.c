@@ -263,6 +263,14 @@ error_status_t Server_First(handle_t binding,VDM_CONNECTION connection,HANDLE pr
     status=OpenNtBaseServiceFirst(connection,pid,generation,first);
     return status;
 }
+error_status_t Server_RegisterWowExec(handle_t binding,VDM_CONNECTION connection,
+    HANDLE process,ULONG generation,ULONG window)
+{
+    DWORD pid;
+    RPC_STATUS status=broker_rpc_peer_process(&scope,binding,process,&pid);
+    if (status) return status;
+    return OpenNtBaseServiceRegisterWowExec(connection,pid,generation,window);
+}
 error_status_t Server_Check(handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,ULONG requestBytes,unsigned char *request,ULONG *parentEventCount,
     HANDLE **parentEvents,ULONG *parentReceipt,ULONG *replyBytes,

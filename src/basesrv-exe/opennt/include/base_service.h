@@ -51,6 +51,7 @@ BOOL OpenNtBaseServicePeer(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation);
  * retaining it does not extend the RPC context or registration lifetime. */
 DWORD OpenNtBaseServiceRetainPeer(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,HANDLE *);
 DWORD OpenNtBaseServiceFirst(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,DWORD *);
+DWORD OpenNtBaseServiceRegisterWowExec(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,DWORD window);
 /* These are authenticated service bindings around the original CheckVDM
  * no-worker result.  They never implement task selection or command payloads. */
 DWORD OpenNtBaseServiceCreateReservation(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,

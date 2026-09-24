@@ -141,7 +141,6 @@ $legacyNtdllDefinition = Join-Path $build 'legacy-wow-ntdll.def'
 $systemImportAliases = @(
     [pscustomobject]@{ Decorated = 'SetCursorContents@8'; Raw = 'SetCursorContents' },
     [pscustomobject]@{ Decorated = 'RegisterWowBaseHandlers@4'; Raw = 'RegisterWowBaseHandlers' },
-    [pscustomobject]@{ Decorated = 'RegisterWowExec@4'; Raw = 'RegisterWowExec' },
     [pscustomobject]@{ Decorated = 'CsrIdentifyAlertableThread@0'; Raw = 'CsrIdentifyAlertableThread' },
     [pscustomobject]@{ Decorated = 'NtClose@4'; Raw = 'NtClose' },
     [pscustomobject]@{ Decorated = 'NtOpenThread@16'; Raw = 'NtOpenThread' },
@@ -168,8 +167,7 @@ $systemImportAliases = @(
 @('LIBRARY USER32.DLL', 'EXPORTS', '    SetCursorContents') |
     Set-Content -LiteralPath $legacyUser32Definition -Encoding ascii
 @('LIBRARY KERNEL32.DLL', 'EXPORTS',
-  '    RegisterWowBaseHandlers',
-  '    RegisterWowExec') |
+  '    RegisterWowBaseHandlers') |
     Set-Content -LiteralPath $legacyKernel32Definition -Encoding ascii
 @('LIBRARY NTDLL.DLL', 'EXPORTS',
   '    CsrIdentifyAlertableThread',
@@ -224,6 +222,7 @@ foreach ($alias in @(
     [pscustomobject]@{ Decorated = 'mvdm_softpc_fast_bop_callback_offset@0'; Raw = '_mvdm_softpc_fast_bop_callback_offset' },
     [pscustomobject]@{ Decorated = 'OpenNtRtlNtStatusToDosError@4'; Raw = 'OpenNtRtlNtStatusToDosError' },
     [pscustomobject]@{ Decorated = 'GetNextVDMCommand@4'; Raw = 'GetNextVDMCommand' },
+    [pscustomobject]@{ Decorated = 'RegisterWowExec@4'; Raw = 'RegisterWowExec' },
     [pscustomobject]@{ Decorated = 'GetCurrentDirectoryOem@8'; Raw = 'GetCurrentDirectoryOem' },
     [pscustomobject]@{ Decorated = 'SetCurrentDirectoryOem@4'; Raw = 'SetCurrentDirectoryOem' },
     [pscustomobject]@{ Decorated = 'GetEnvironmentVariableOem@12'; Raw = 'GetEnvironmentVariableOem' },

@@ -38,6 +38,11 @@ static int detached_reservation(OPENNT_BASE_SERVICE *service,HANDLE self)
     void *wire,*answer;
     char app[]="MEM.EXE",cmd[]="MEM.EXE\r\n",directory[]="C:\\",environment[]="X=Y\0";
     CHECK(OpenNtBaseServiceConnect(service,self,&connection,&generation)==ERROR_SUCCESS);
+    CHECK(OpenNtBaseServiceRegisterWowExec(connection,GetCurrentProcessId(),generation,0)==ERROR_INVALID_PARAMETER);
+    CHECK(OpenNtBaseServiceRegisterWowExec(connection,GetCurrentProcessId(),generation+1,
+        (DWORD)(ULONG_PTR)GetDesktopWindow())==ERROR_ACCESS_DENIED);
+    CHECK(OpenNtBaseServiceRegisterWowExec(connection,GetCurrentProcessId(),generation,
+        (DWORD)(ULONG_PTR)GetDesktopWindow())==ERROR_ACCESS_DENIED);
     request.u.CheckVDM.BinaryType=BINARY_TYPE_DOS;
     request.u.CheckVDM.ConsoleHandle=NULL;
     request.u.CheckVDM.CodePage=437;
@@ -352,6 +357,9 @@ int main(int argc,char **argv)
         updateAnswer,updateAnswerBytes,&updateAnswerBytes,&parentEvent,&parentReceipt)==ERROR_SUCCESS);
     CHECK(ResumeThread(wowChild.hThread)!=(DWORD)-1);
     CHECK(OpenNtBaseServiceConnect(service,wowChild.hProcess,&wowWorker,&wowGeneration)==ERROR_SUCCESS);
+    /* A registered WOW worker still cannot enroll another process's HWND. */
+    CHECK(OpenNtBaseServiceRegisterWowExec(wowWorker,wowChild.dwProcessId,wowGeneration,
+        (DWORD)(ULONG_PTR)GetDesktopWindow())==ERROR_ACCESS_DENIED);
     ZeroMemory(&get,sizeof(get));
     get.u.GetNextVDMCommand.StartupInfo=&getStartup;
     get.u.GetNextVDMCommand.VDMState=ASKING_FOR_WOW_BINARY;

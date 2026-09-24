@@ -3,6 +3,7 @@ param(
     [Parameter(Mandatory = $true)] [string]$RuntimeRoot,
     [Parameter(Mandatory = $true)] [string]$Wow32Provider,
     [ValidateRange(1, 120)] [int]$WindowTimeoutSeconds = 12,
+    [ValidateRange(1, 3)] [int]$LaunchCount = 1,
     [string]$DiagnosticObserver,
     [string]$GitExecutable = 'git.exe'
 )
@@ -12,6 +13,9 @@ $ErrorActionPreference = 'Stop'
 $build = (Resolve-Path -LiteralPath $BuildRoot).Path
 $runtime = (Resolve-Path -LiteralPath $RuntimeRoot).Path
 $provider = (Resolve-Path -LiteralPath $Wow32Provider).Path
+if ($DiagnosticObserver -and $LaunchCount -ne 1) {
+    throw 'Worker-reuse observation requires direct run16 launches, not the debugger wrapper.'
+}
 $artifacts = @('run16.exe','basesrv.exe','ntvdm.exe','dtmgr.exe','VDMREDIR.dll')
 # Reject incomplete historical/build artifacts before touching the runtime.
 foreach ($artifact in @($artifacts | ForEach-Object { Join-Path $build $_ }) + @($provider)) {
@@ -147,6 +151,7 @@ Write-Output "run_id=$runId logs=$logs"
     original_profile_sha256=$originalHash
     command='run16.exe WINMINE.EXE'; cwd=$runtime
     debugger=[bool]$DiagnosticObserver; timeout_seconds=$WindowTimeoutSeconds
+    launch_count=$LaunchCount; require_same_worker=($LaunchCount -gt 1)
     build_identity='INCOMPLETE: incremental build cache, not a frozen input snapshot'
     source_identity='INCOMPLETE: dirty source input set not sealed'
 } | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath (Join-Path $logs 'manifest.json')
@@ -198,6 +203,17 @@ try {
     $env:MVDM_WOW_CLASS_PUBLICATION_TRACE_PATH = $classTrace
     $env:MVDM_S42_VXD_BOP_REPORT_PATH = $vxdTrace
     $env:MVDM_S41_WOW_BOP_REPORT_PATH = $wowBopTrace
+    $expectedWorkerId = 0
+    $expectedWorkerStart = $null
+    for ($launch = 1; $launch -le $LaunchCount; ++$launch) {
+    # Each launch must supply new trace evidence. Prior destruction callbacks
+    # cannot validate a subsequent application, even if HWND values are reused.
+    $windowTraceOffset = if (Test-Path -LiteralPath $windowTrace) {
+        (Get-Content -LiteralPath $windowTrace -Raw).Length
+    } else { 0 }
+    $callbackTraceOffset = if (Test-Path -LiteralPath $callbackTrace) {
+        (Get-Content -LiteralPath $callbackTrace -Raw).Length
+    } else { 0 }
     if ($DiagnosticObserver) {
         $observerLog = Join-Path $logs 't422-s2-wow-destroy-native-exception.log'
         $process = Start-Process -FilePath $DiagnosticObserver -ArgumentList @(
@@ -212,7 +228,7 @@ try {
     $observedClasses = [Collections.Generic.HashSet[string]]::new()
     while ([DateTime]::UtcNow -lt $deadline) {
         if (Test-Path -LiteralPath $windowTrace) {
-            $matches = [regex]::Matches((Get-Content -LiteralPath $windowTrace -Raw),
+            $matches = [regex]::Matches((Get-Content -LiteralPath $windowTrace -Raw).Substring($windowTraceOffset),
                 '(?m)WindowDispatch hwnd=([0-9A-F]+) message=0001')
             foreach ($match in $matches) {
                 $candidate = [IntPtr]::new([Convert]::ToInt64($match.Groups[1].Value, 16))
@@ -268,9 +284,17 @@ try {
     }
     $windowOwner = [uint32]0
     [void][T422NativeWindow]::GetWindowThreadProcessId($window, [ref]$windowOwner)
+    $workerIdentity = Get-Process -Id $windowOwner -ErrorAction Stop
+    if ($launch -eq 1) {
+        $expectedWorkerId = $windowOwner
+        $expectedWorkerStart = $workerIdentity.StartTime
+    } elseif ($windowOwner -ne $expectedWorkerId -or
+            $workerIdentity.StartTime -ne $expectedWorkerStart) {
+        throw 'The next application used a different worker; shared-worker reuse is not proved.'
+    }
     $windowTitle = [Text.StringBuilder]::new(1024)
     [void][T422NativeWindow]::GetWindowText($window, $windowTitle, $windowTitle.Capacity)
-    $closeLog = Join-Path $logs 't422-s2-wow-close-state.log'
+    $closeLog = Join-Path $logs ("t422-s2-wow-close-state-$launch.log")
     $windowClass = [Text.StringBuilder]::new(256)
     [void][T422NativeWindow]::GetClassName($window, $windowClass, $windowClass.Capacity)
     "before hwnd=$window owner=$windowOwner visible=$([T422NativeWindow]::IsWindowVisible($window)) hung=$([T422NativeWindow]::IsHungAppWindow($window)) class=$windowClass title=$windowTitle" | Set-Content -LiteralPath $closeLog
@@ -283,16 +307,18 @@ try {
         Start-Sleep -Milliseconds 100
     }
     if ([T422NativeWindow]::IsWindow($window)) { throw 'WM_CLOSE left the real WOW window live.' }
-    $callbacks = if (Test-Path -LiteralPath $callbackTrace) { Get-Content -LiteralPath $callbackTrace -Raw } else { '' }
+    $callbacks = if (Test-Path -LiteralPath $callbackTrace) {
+        (Get-Content -LiteralPath $callbackTrace -Raw).Substring($callbackTraceOffset)
+    } else { '' }
     $process.Refresh()
     "after exists=$([T422NativeWindow]::IsWindow($window)) launcherExited=$($process.HasExited) workerAlive=$([bool](Get-Process -Id $windowOwner -ErrorAction SilentlyContinue)) result=$result" | Add-Content -LiteralPath $closeLog
     if ($process.HasExited) { "launcherExitCode=$($process.ExitCode)" | Add-Content -LiteralPath $closeLog }
     $completed = $process.WaitForExit(15000)
-    Write-RuntimeState 'processes-after-launcher-grace.json'
+    Write-RuntimeState "processes-after-launcher-grace-$launch.json"
     "afterGrace launcherExited=$completed" | Add-Content -LiteralPath $closeLog
     if ($completed) { "launcherExitCode=$($process.ExitCode)" | Add-Content -LiteralPath $closeLog }
     foreach ($message in '0002','0082') {
-        $nativeDispatch = Get-Content -LiteralPath $windowTrace -Raw
+        $nativeDispatch = (Get-Content -LiteralPath $windowTrace -Raw).Substring($windowTraceOffset)
         $identity = 'WindowDispatch hwnd=' + ('{0:X8}' -f $window.ToInt64()) + ' message=' + $message
         if (!$nativeDispatch.Contains($identity)) {
             throw "The selected WINMINE HWND did not complete destruction message $message."
@@ -316,7 +342,9 @@ try {
         $verdict = 'FAIL: USER task failure observed despite successful launcher completion'
         throw 'A USER task failed during the observation; launcher zero is insufficient.'
     }
-    $verdict = 'PASS: visible-window destruction and launcher completion; full resource cleanup remains separately audited'
+    Write-Output "WOW_LAUNCH_OK launch=$launch worker=$windowOwner launcher=$($process.Id)"
+    }
+    $verdict = "PASS: $LaunchCount visible-window launch/close cycles and launcher completions; full resource cleanup remains separately audited"
     Write-Output 'T422_S2_WOW_USER_REAL_DESTRUCTION_OK'
 }
 finally {

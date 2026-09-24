@@ -683,6 +683,29 @@ NTSTATUS NTAPI OpenNtBaseClientCallServer(PCSR_API_MSG message,
     (void)capture;
     if (!message || !client.connection || !client.binding || !client.process)
         return STATUS_UNSUCCESSFUL;
+    if (number==CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepRegisterWowExec)) {
+        if (length!=sizeof(BASE_REGISTER_WOWEXEC_MSG)) {
+            message->ReturnValue=STATUS_UNSUCCESSFUL;
+            return STATUS_UNSUCCESSFUL;
+        }
+        {
+            DWORD window_pid=0;
+            HWND window=((PBASE_API_MSG)message)->u.RegisterWowExec.hwndWowExec;
+            s34_trace("register-wowexec-window",(ULONG)(ULONG_PTR)window);
+            (void)GetWindowThreadProcessId(window,&window_pid);
+            s34_trace("register-wowexec-window-pid",window_pid);
+        }
+        RpcTryExcept {
+            error=Client_RegisterWowExec(client.binding,client.connection,client.process,
+                client.generation,(ULONG)(ULONG_PTR)
+                    ((PBASE_API_MSG)message)->u.RegisterWowExec.hwndWowExec);
+        }
+        RpcExcept(1) { error=RpcExceptionCode(); }
+        RpcEndExcept
+        s34_trace("register-wowexec-rpc",error);
+        message->ReturnValue=error ? rpc_failure(error) : STATUS_SUCCESS;
+        return (NTSTATUS)message->ReturnValue;
+    }
     if (number==CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepCheckVDM))
         return check_command(message,length);
     if (number==CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepGetNextVDMCommand))

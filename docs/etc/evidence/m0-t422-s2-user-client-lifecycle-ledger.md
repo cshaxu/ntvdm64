@@ -52,7 +52,7 @@ The required source-shaped representation is finite:
 | USER-DATA-01 | USER16 direct SERVERINFO/TEB readers | Cursor, clock, metrics/style/rectangle and host-originated refresh rules without a thunk-only refresh. | Cursor and clock producers are wired. E54 corrects screen-relative client rectangles and wires rectangle/style refresh before bound window callbacks, with real CCPU page-domain tests. General host-originated changes, metrics and guest direct-read acceptance remain open. |
 | USER-CLASS-01 | `wuclass.c`, recovered client class slices | Original class registration/query/remove joins guest CLS publication and module cleanup. | Guest CLS allocation/publication/retirement is wired; original guest registration/query/remove and module-cleanup acceptance remain. |
 | USER-WINDOW-01 | `wuwind.c`, `wmdisp32.c`, `wudlg.c` | Real guest create/query/change/destroy, callback-visible complete state and destruction inside callback. | E45--E50 prove diagnostic creation and normal destroy callbacks. E53 adds owner-confirmed WINMINE gameplay; E54 repeats creation/normal exit after geometry repair. Full query/mutation, reentrant destruction and sealed ordinary-profile acceptance remain pending. |
-| USER-MESSAGE-01 | `wmsg*.c`, `wumsg.c` | Send/post/wait/cancel transport through original routes with receiver/task loss behavior. | Pending |
+| USER-MESSAGE-01 | `wmsg*.c`, `wumsg.c` | Send/post/wait/cancel transport through original routes with receiver/task loss behavior. | E63 connects original WOWExec registration and passes two sequential WINMINE launch/close cycles in one worker under the diagnostic profile. General message/cancel and receiver-loss acceptance remains open. |
 | USER-TASK-01 | `wkman.c`, `wuser.c` | Init/yield/wait/hung registration from a real task context and multiple-task rejection/recovery. | Pending |
 | USER-TASK-EXIT-01 | `W32DestroyTask`, `WU32FreeModule` | Exactly one nonzero task cleanup before retirement; zero-task module cleanup cannot retire a live task. | E47 separates resource cleanup from thread retirement; E49/E50 prove diagnostic normal guest exit. E51 covers explicit detach rejection/retry. Original thread-window patch/destroy ordering and exceptional exit remain open. |
 | USER-CALLBACK-01 | `wcall16.c`, `wcall32.c` | Real guest callback frame/return, reentry/cancellation and task-frame restoration. | E41 corrects procedure encoding; E44 restores scheduler lock entry. E56 wires nested CallbackWnd save/restore and delayed backing release, with CCPU primitive tests and diagnostic WINMINE normal exit. Guest nested destruction, cancellation and exceptional task-frame restoration remain open; the old 83B7 publication explanation is withdrawn. |
@@ -2113,3 +2113,88 @@ of these newly linked artifacts. E60 retains the last deployed runtime and
 17-route regression evidence. No binary or guest medium is included in this
 source checkpoint. The commit carrying this record is the source baseline;
 push success and clean local/remote state must be checked after committing.
+
+## E62 sequential shared-worker acceptance exposes absent registration transport
+
+Checkpoint 806598b9b was pushed to origin/main with an empty worktree and zero
+ahead/behind count. Subsequent work adds LaunchCount=1..3 to the existing real
+WINMINE observer. Each cycle requires newly appended trace evidence, a visible
+application window, original destruction callbacks and launcher zero. Reuse
+additionally requires the same worker PID and creation time. No product or
+guest code changes belong to this test addition.
+
+Diagnostic two-launch run
+`t422-s2-20260924T185830440Z-1c152175-window-lifecycle` fails: first application
+in worker 40288 completes and task 17BF retires; second launcher 40284 remains
+waiting without an application window. The test reaches its terminal failure
+and cleans up only the runtime-path processes. It is not a reuse pass. Traces
+contain no new application creation or WM_WOWEXECSTARTAPP window dispatch.
+
+Source inspection identifies a definite missing transport edge:
+
+- Original wow32/wkman.c::WK32RegisterShellWindowHandle calls RegisterWowExec
+  for shared WOW. The original BaseClient vdm.c implementation submits
+  BasepRegisterWowExec and intentionally has no return value.
+- The local OpenNtBaseClientCallServer switch in base_rpc_client.c has no
+  BasepRegisterWowExec branch; the default returns STATUS_UNSUCCESSFUL.
+- The server-side dispatch table already selects BaseSrvRegisterWowExec.
+  Original srvvdm.c registers HWND/PID/TID/process-sequence identity, then
+  BaseSrvCheckWOW posts WM_WOWEXECSTARTAPP when queuing another application.
+  Compiling both original endpoints did not connect their cross-process edge.
+
+Next repair is the finite authenticated registration RPC, preserving original
+BaseSrv registration/notification policy and worker identity validation, with
+protocol-version and negative-input tests. Do not replace it with polling or
+a second scheduler. This missing edge is established independently of whether
+additional defects remain after it is connected. S2 remains open.
+
+## E63 original WOWExec registration connected through authenticated transport
+
+Recovery ladder: original wkman.c, BaseClient vdm.c and BaseSrv srvvdm.c
+remain compiled and unchanged. Their private CSR transport cannot compose
+on modern Windows; the existing BaseSrv RPC boundary now carries the exact
+RegisterWowExec request. It retains authenticated process/generation binding,
+requires a registered WOW worker and verifies native window ownership before
+dispatching to the original server. No scheduler, polling loop or record
+policy is added. The HWND is untrusted input, not process authority. Protocol
+version advances from 3 to 4 so an old peer cannot enter the appended RPC.
+
+The first registration transport attempt still failed. The provider import
+map showed RegisterWowExec resolving to modern KERNEL32 rather than the
+selected original BaseClient in ntvdm.exe. The formal graphs now export and
+import that original worker function. A further diagnostic run
+`t422-s2-20260924T190834053Z-260d6e49-window-lifecycle` recorded short HWND
+1502, native owner PID zero and registration error 5. Original HWND32 is a
+sign-extended WORD; the current native window API does not resolve that
+identity. The existing WOW32 private-call seam now resolves it with the
+existing typed USER handle table before calling original RegisterWowExec.
+Invalid, absent and mismatched full handles are rejected; broker validation
+is not relaxed. No guest or mirror file changes are required. This is the
+smallest same-shaped binding rung; no external intrusion or new owner is used.
+
+MSVC x86 incremental worker/provider links passed. The reservation fixture
+passes, including null window, wrong generation, nonworker registration and
+foreign-window rejection. Real diagnostic run
+`t422-s2-20260924T191255135Z-ef065e41-window-lifecycle` uses the reduced
+environment and LaunchCount=2. Its manifest SHA-256 is
+`28057E7AB60F904FCB68BAAE3050BD20DD5E0AE44AE75ACA0F2D05DEEBA8EC58`.
+The broker trace records full HWND 5768670, owner PID 34576 and RPC result 0.
+Both launchers (30564 and 29920) complete with zero in worker 34576, whose
+creation time is also checked. Each launch has fresh visible-window and
+original callback/destruction evidence. SYSTEM.INI is restored byte-exactly.
+
+This proves the previously failing sequential registration/reuse edge under
+that diagnostic profile, not all shared-WOW lifecycle semantics. The harness
+force-stops the exact runtime processes after recording their state; it does
+not prove autonomous worker cleanup. There is no sealed source/build snapshot
+or rendered-content verification, so this is explicitly not S2 acceptance.
+Remaining full S2 criteria, including exceptional cleanup and ordinary-profile
+verification, remain open.
+
+Post-change DOS regression completed all 17 cases with matching expected exit
+results and the observer's text checks. Report:
+`O:/winnt/logs/t422-s2-wowexec-20260924191328-dd9efb11-summary.json`.
+This covers direct, interactive and nested COMMAND/MEM/EDIT routes and native
+child stream/exit cases, not remaining WOW feature acceptance. Documentation
+governance and whitespace checks pass. This incremental delivery preserves
+S2 as active; it does not claim the fresh-build/full-scope closure gate.

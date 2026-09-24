@@ -887,6 +887,40 @@ DWORD OpenNtBaseServiceFirst(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD 
     return 0;
 }
 
+DWORD OpenNtBaseServiceRegisterWowExec(OPENNT_BASE_CONNECTION *connection,
+    DWORD pid,DWORD generation,DWORD window)
+{
+    BASE_API_MSG message={0};
+    CSR_THREAD thread={0};
+    PCSR_THREAD previous_thread;
+    OPENNT_BASE_PROCESS_REGISTRY *previous_registry;
+    DWORD window_pid=0;
+    NTSTATUS status;
+    if (!connection || !window) return ERROR_INVALID_PARAMETER;
+    if (!OpenNtBaseServicePeer(connection,pid,generation)) return ERROR_ACCESS_DENIED;
+    EnterCriticalSection(&connection->service->lock);
+    /* A copied HWND is only an untrusted identity, never authority. Only the
+     * reservation-bound WOW worker may register its own native window. The
+     * original server retains the window/thread/process-sequence policy. */
+    if (!connection->process.fVDM || !connection->wow ||
+            !GetWindowThreadProcessId((HWND)(ULONG_PTR)window,&window_pid) ||
+            window_pid!=pid) {
+        LeaveCriticalSection(&connection->service->lock);
+        return ERROR_ACCESS_DENIED;
+    }
+    message.u.RegisterWowExec.hwndWowExec=(HWND)(ULONG_PTR)window;
+    thread.Process=&connection->process;
+    thread.ClientId.UniqueProcess=connection->process.ClientId.UniqueProcess;
+    previous_thread=OpenNtBaseBindServerRequestThread(&thread);
+    previous_registry=OpenNtBaseBindProcessRegistry(&connection->service->registry);
+    status=OpenNtBaseDispatchOperation((PCSR_API_MSG)&message,BROKER_VDM_WOWEXEC,
+        sizeof(message.u.RegisterWowExec));
+    OpenNtBaseBindProcessRegistry(previous_registry);
+    OpenNtBaseBindServerRequestThread(previous_thread);
+    LeaveCriticalSection(&connection->service->lock);
+    return status ? RtlNtStatusToDosError(status) : ERROR_SUCCESS;
+}
+
 DWORD OpenNtBaseServiceCreateReservation(OPENNT_BASE_CONNECTION *connection,DWORD pid,
     DWORD generation,ULONG task,uint64_t *reservation)
 {
