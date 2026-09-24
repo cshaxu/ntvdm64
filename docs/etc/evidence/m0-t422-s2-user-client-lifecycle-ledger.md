@@ -3702,3 +3702,53 @@ current outer-native-call record. Full original sendmsg.c composition and the
 finite boundary replacing, rather than duplicating, native message ownership
 remain unproven. E92's native early-reply failure stays red. No S2 closure,
 whole-product rebuild or new DOS regression is claimed for this test-only P.
+
+## E94 - Whole sendmsg translation-unit probe and receive identity boundary
+
+Baseline a36bd762b. Unlike E93's individual-function test, this probe copies
+the byte-exact canonical sendmsg.c into
+build/M0-T422/S2/original-sendmsg-compose-20260924-r1 and attempts to compile
+the entire file against the currently admitted wow_task_order_bindings.h.
+The build-only precomp.h defines WOW_ORIGINAL_TASK_ORDER and includes that
+header; no production header or source is changed. VsDevCmd uses -arch=x86
+-host_arch=x86; cl uses /TC /MT /c, the wow32-dll/include directory, and
+explicit /Fo under that build root. Canonical/copied source SHA-256 remains
+AF68BADCB022EFCB3947968FC6E3DBF148B697072EBEB2898F97FBCB774039F3.
+
+Result: compile exit 2, no linked provider. build.log SHA-256:
+D6C38196EA1379CA4F505997F43E89050D888185942EFD815E579AE665C2F028.
+The compiler reaches its 100-error limit at the receive-list access at source
+line 1902. Errors expose missing zone allocation declarations, full SMS/lRet,
+callback request types/flags, window locks and psmsReceiveList. Cascading
+errors and the compiler cutoff prevent treating this as an exhaustive list.
+This demonstrates insufficiency of the current facade, NOT impossibility of
+composing a suitable original subset or proof that all errors require a new
+kernel/server. No blanket whole-file import is admitted by a failed compile.
+
+The additional original-source review fixes these ownership obligations:
+
+| Original location (windows/core/ntuser) | Required ownership |
+| --- | --- |
+| kernel/userk.h tagSMS, lines 2594--2615 | One message owns sender/receiver, result, payload, captured data, receive/global links and optional asynchronous reply identity. Current flags/two-peer view is not that structure. |
+| kernel/sendmsg.c xxxInterSendMsgEx, lines 1541--1654 | Initialize and globally link the captured SMS, append that same object to its actual receiver, save/replace sender psmsSent; senderless sends explicitly transfer freeing to the receiver. |
+| kernel/sendmsg.c xxxReceiveMessage, lines 1890--1955 | Remove the exact head of the receive list, mark receive/busy state and publish that exact psmsCurrent. Native callback arrival without this identity does not reproduce it. |
+| kernel/userk.h ScSendMessageSMS, lines 1404--1407 | The dispatch route carries psms explicitly into SfnDWORD or the message-specific server-to-client thunk; it is not inferred from the HWND/message tuple. |
+| kernel/userk.h CWPSTRUCTEX/CWPRETSTRUCTEX, lines 2576--2588 | These private hook carriers include psmsSender beyond the ordinary message fields. Their existence is NOT permission to read an undocumented tail from a modern public CWPSTRUCT. |
+| kernel/sendmsg.c xxxReceiveMessage, lines 2190--2215; UnlinkSendListSms, lines 2689--2767 | Restore the previous receive frame, end busy state, free only after ownership transfer, unlink globally, unlock the WND and release capture before freeing the SMS. |
+
+Accordingly, a prospective source-owned send/receive/reply/death slice must
+replace the current outer-call pseudo-SMS for the messages it owns, not create
+a second record while native USER independently delivers the same message.
+Native-induced sends from SetWindowPos/activation and external native senders
+must be covered by the boundary design too; fixing only explicit WOW-to-WOW
+SendMessage would leave S2 incomplete. Message payload capture and native
+control/default-procedure dispatch cannot be discarded merely to obtain a
+small source subset. The existing original taskman remains the execution
+owner; this finding does not authorize a second scheduler or whole USER server.
+
+Next implementation admission within S2 needs one explicit delivery owner per
+message class, exact identity at dispatch, and original reply/timeout/death
+ordering across that owner. The current native-only facade has not supplied
+those inputs. E92 remains failing and E93 remains mock contract evidence.
+No product behavior, guest media, runtime package or acceptance claim changes
+in this source/build-boundary audit.
