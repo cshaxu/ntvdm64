@@ -4,6 +4,7 @@ param(
     [Parameter(Mandatory = $true)] [string]$Wow32Provider,
     [ValidateRange(1, 120)] [int]$WindowTimeoutSeconds = 12,
     [ValidateRange(1, 3)] [int]$LaunchCount = 1,
+    [switch]$OverlapFirst,
     [string]$DiagnosticObserver,
     [string]$GitExecutable = 'git.exe'
 )
@@ -13,6 +14,9 @@ $ErrorActionPreference = 'Stop'
 $build = (Resolve-Path -LiteralPath $BuildRoot).Path
 $runtime = (Resolve-Path -LiteralPath $RuntimeRoot).Path
 $provider = (Resolve-Path -LiteralPath $Wow32Provider).Path
+if ($OverlapFirst -and ($LaunchCount -ne 2 -or $DiagnosticObserver)) {
+    throw 'OverlapFirst requires exactly two direct run16 launches.'
+}
 if ($DiagnosticObserver -and $LaunchCount -ne 1) {
     throw 'Worker-reuse observation requires direct run16 launches, not the debugger wrapper.'
 }
@@ -152,6 +156,7 @@ Write-Output "run_id=$runId logs=$logs"
     command='run16.exe WINMINE.EXE'; cwd=$runtime
     debugger=[bool]$DiagnosticObserver; timeout_seconds=$WindowTimeoutSeconds
     launch_count=$LaunchCount; require_same_worker=($LaunchCount -gt 1)
+    overlapping_tasks=[bool]$OverlapFirst
     build_identity='INCOMPLETE: incremental build cache, not a frozen input snapshot'
     source_identity='INCOMPLETE: dirty source input set not sealed'
 } | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath (Join-Path $logs 'manifest.json')
@@ -220,7 +225,10 @@ try {
         synthetic_padding_characters=if ($null -eq $paddingValue) { 0 } else { $paddingValue.Length }
         limitation='Aggregate shape only; this does not identify or seal the environment values'
     } | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $logs 'environment-shape.json')
-    for ($launch = 1; $launch -le $LaunchCount; ++$launch) {
+    $heldWindow = [IntPtr]::Zero
+    $heldLauncher = $null
+    $roundCount = if ($OverlapFirst) { 3 } else { $LaunchCount }
+    for ($launch = 1; $launch -le $roundCount; ++$launch) {
     # Each launch must supply new trace evidence. Prior destruction callbacks
     # cannot validate a subsequent application, even if HWND values are reused.
     $windowTraceOffset = if (Test-Path -LiteralPath $windowTrace) {
@@ -229,6 +237,13 @@ try {
     $callbackTraceOffset = if (Test-Path -LiteralPath $callbackTrace) {
         (Get-Content -LiteralPath $callbackTrace -Raw).Length
     } else { 0 }
+    if ($OverlapFirst -and $launch -eq 3) {
+        $window = $heldWindow
+        $process = $heldLauncher
+        if ($process.HasExited -or ![T422NativeWindow]::IsWindow($window)) {
+            throw 'The first task did not survive completion of the second task.'
+        }
+    } else {
     if ($DiagnosticObserver) {
         $observerLog = Join-Path $logs 't422-s2-wow-destroy-native-exception.log'
         $process = Start-Process -FilePath $DiagnosticObserver -ArgumentList @(
@@ -288,6 +303,7 @@ try {
         $failure | Write-Output
         throw 'No live real WOW window became available for controlled destruction.'
     }
+    }
     $result = [IntPtr]::Zero
     $deadline = [DateTime]::UtcNow.AddSeconds(10)
     while ([DateTime]::UtcNow -lt $deadline -and [T422NativeWindow]::IsWindow($window) -and
@@ -313,6 +329,20 @@ try {
     $windowClass = [Text.StringBuilder]::new(256)
     [void][T422NativeWindow]::GetClassName($window, $windowClass, $windowClass.Capacity)
     "before hwnd=$window owner=$windowOwner visible=$([T422NativeWindow]::IsWindowVisible($window)) hung=$([T422NativeWindow]::IsHungAppWindow($window)) class=$windowClass title=$windowTitle" | Set-Content -LiteralPath $closeLog
+    if ($OverlapFirst -and $launch -eq 1) {
+        $heldWindow = $window
+        $heldLauncher = $process
+        Write-Output "WOW_TASK_HELD worker=$windowOwner launcher=$($process.Id) hwnd=$window"
+        continue
+    }
+    if ($OverlapFirst -and $launch -eq 2) {
+        $heldLauncher.Refresh()
+        if ($window -eq $heldWindow -or $heldLauncher.HasExited -or
+                ![T422NativeWindow]::IsWindowVisible($heldWindow)) {
+            throw 'Two distinct live tasks were not present simultaneously.'
+        }
+        Write-RuntimeState 'processes-with-two-live-tasks.json'
+    }
     if ([T422NativeWindow]::SendMessageTimeout($window, 0x0010, [IntPtr]::Zero,
             [IntPtr]::Zero, 0x0002, 5000, [ref]$result) -eq [IntPtr]::Zero) {
         throw "WM_CLOSE delivery failed: $([Runtime.InteropServices.Marshal]::GetLastWin32Error())"

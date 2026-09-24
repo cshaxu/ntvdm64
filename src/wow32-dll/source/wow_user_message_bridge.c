@@ -48,24 +48,11 @@ BOOL WINAPI wow_user_message_bridge_receive(wow_user_message_bridge *bridge,
     MSG message;
 
     if (!verify_owner(bridge, thread)) return FALSE;
-    if (bridge->quit_received) {
-        SetLastError(ERROR_CANCELLED);
-        return FALSE;
-    }
-    /* Public USER32 has one queue/dispatch operation for synchronous sends
-     * and posted messages. Do not invent a second selector/SMS state merely
-     * to retain the NT4 server's internal split. */
-    while (PeekMessageW(&message, NULL, 0, 0, PM_REMOVE)) {
-        if (message.message == WM_QUIT) {
-            bridge->quit_code = (DWORD)message.wParam;
-            bridge->quit_received = TRUE;
-            thread->pcti->fsWakeBits &= (WORD)~QS_SENDMESSAGE;
-            SetLastError(ERROR_CANCELLED);
-            return FALSE;
-        }
-        TranslateMessage(&message);
-        DispatchMessageW(&message);
-    }
+    /* userk.h::xxxReceiveMessages drains QS_SENDMESSAGE only. Public USER
+     * dispatches pending nonqueued sends during PeekMessage; do not remove
+     * posted messages or WM_QUIT from the original guest Get/PeekMessage loop.
+     * In particular, there is no autonomous Translate/DispatchMessage loop. */
+    (void)PeekMessageW(&message, NULL, 0, 0, PM_NOREMOVE | PM_QS_SENDMESSAGE);
     return wow_user_message_bridge_sync(bridge, thread);
 }
 
@@ -73,7 +60,5 @@ void WINAPI wow_user_message_bridge_dispose(wow_user_message_bridge *bridge)
 {
     if (!bridge) return;
     bridge->owner_thread_id = 0;
-    bridge->quit_code = 0;
     bridge->initialized = FALSE;
-    bridge->quit_received = FALSE;
 }

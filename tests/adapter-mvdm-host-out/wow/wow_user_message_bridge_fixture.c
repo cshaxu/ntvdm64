@@ -70,6 +70,8 @@ int __cdecl main(void)
     /* The sender must remain blocked until the receiver processes the real
      * synchronous send.  No synthetic queue bit may make this pass early. */
     CHECK(WaitForSingleObject(sender_thread, 0) == WAIT_TIMEOUT);
+    CHECK(MsgWaitForMultipleObjectsEx(0, NULL, 1000, QS_SENDMESSAGE,
+        MWMO_INPUTAVAILABLE) == WAIT_OBJECT_0);
     CHECK(wow_user_message_bridge_receive(&bridge, &thread));
     CHECK(WaitForSingleObject(sender_thread, 1000) == WAIT_OBJECT_0);
     CHECK(GetExitCodeThread(sender_thread, &code) && code == 0);
@@ -77,14 +79,18 @@ int __cdecl main(void)
     CHECK(!(queue.fsWakeBits & QS_SENDMESSAGE));
     CHECK(wow_user_message_bridge_receive(&bridge, &thread));
     CHECK(!(queue.fsWakeBits & QS_SENDMESSAGE));
-    /* The same real queue owns posted dispatch; no shadow SMS list exists. */
+    /* ReceiveMessages is not the application's posted-message loop. */
     CHECK(PostMessageW(window, WM_APP + 41, 0, 0));
     CHECK(wow_user_message_bridge_receive(&bridge, &thread));
+    CHECK(posts == 0);
+    CHECK(PeekMessageW(&message, window, WM_APP + 41, WM_APP + 41, PM_REMOVE));
+    CHECK(message.message == WM_APP + 41);
+    DispatchMessageW(&message);
     CHECK(posts == 1);
-    CHECK(!PeekMessageW(&message, window, WM_APP + 41, WM_APP + 41, PM_NOREMOVE));
     CHECK(PostThreadMessageW(GetCurrentThreadId(), WM_QUIT, 41, 0));
-    CHECK(!wow_user_message_bridge_receive(&bridge, &thread));
-    CHECK(bridge.quit_received && bridge.quit_code == 41 && GetLastError() == ERROR_CANCELLED);
+    CHECK(wow_user_message_bridge_receive(&bridge, &thread));
+    CHECK(PeekMessageW(&message, NULL, WM_QUIT, WM_QUIT, PM_REMOVE));
+    CHECK(message.message == WM_QUIT && message.wParam == 41);
     wow_user_message_bridge_dispose(&bridge);
     CHECK(!wow_user_message_bridge_sync(&bridge, &thread));
     CHECK(DestroyWindow(window));

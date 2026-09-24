@@ -2375,3 +2375,54 @@ worker and passed the reduced-environment visible-window/close/launcher check
 (worker 17652, launcher 3080). This restores the previous diagnostic runtime
 baseline, not ordinary uninstrumented acceptance. Only this evidence record
 remains changed; no production source or guest change is retained.
+
+## E68 owner-requested S2 checkpoint: sent-message boundary and overlap probe
+
+The owner requests a commit/push and clean worktree before further S2 closure
+work. This is an intermediate delivery, not S2 acceptance.
+
+Original OpenNT windows/core/ntuser/kernel/userk.h::xxxReceiveMessages drains
+only QS_SENDMESSAGE. The existing ADAPTER-WOW-050 bridge instead removed and
+dispatched posted messages and consumed WM_QUIT. The retained smallest public
+USER binding now peeks with PM_NOREMOVE | PM_QS_SENDMESSAGE; guest Get/PeekMessage
+retains posted/quit ownership. The private SMS/PWND implementation remains an
+unavailable USER-server boundary, not a reason to recreate that server.
+No original source file or guest medium changes. The two production bridge
+files change +8/-24 lines, removing the autonomous dispatch loop and quit state.
+
+The x86 fixture in build/M0-T422/S2/message-receive-20260924 passes:
+WOW_USER_MESSAGE_BRIDGE errors=0 sends=1 posts=1 quit=1. It proves synchronous
+send delivery and preservation of a posted message and WM_QUIT for their
+caller. The formal incremental wow32-provider-r10 DLL rebuild passes.
+Real reduced-environment sequential run
+`t422-s2-20260924T194828871Z-beb6d225-window-lifecycle` passes both WINMINE
+launch/close/parent-completion rounds in worker 52084 (launchers 44004, 39436).
+These retain the E67 environment and unsealed-build limitations; they are not
+ordinary-profile or complete S2 acceptance.
+
+The observer adds opt-in OverlapFirst with exactly two launches: keep the
+first window live, launch/close the second, then verify/close the first.
+Before the bridge repair, run
+`t422-s2-20260924T194050471Z-27118538-window-lifecycle` timed out waiting for
+the second window while the first remained live. After repair, run
+`t422-s2-20260924T194440988Z-f7ec1999-window-lifecycle` ended INCOMPLETE with
+a Substring start-index exception in trace slicing. Its first task was live
+(worker 14364, launcher 23740, HWND 329052); cleanup restored the profile and
+stopped scoped runtime processes. Neither run proves overlapping-task success,
+and the latter cannot establish whether this repair changes that behavior.
+The diagnostic observer's trace-offset handling needs repair before reusing
+that evidence gate. Preserve this failed probe in the checkpoint rather than
+silently relabel it as passing or discard the reproducer.
+
+Next S2 work remains original cooperative Get/PeekMessage/wait integration,
+overlapping-task verification, exceptional task/thread teardown and the other
+owned USER mutation/cleanup rows. This checkpoint introduces no new scheduler
+or parallel queue and does not transfer those obligations to a later S.
+
+Checkpoint regression: all 17 established DOS routes pass, recorded at
+O:/winnt/logs/t422-s2-checkpoint-20260924194905-b399f7b0-summary.json.
+A repeat of the native fixture initially exposed a test assumption: an
+unfiltered peek need not return WM_QUIT before unrelated host messages.
+The assertion now explicitly requests WM_QUIT; after recompilation all five
+repetitions pass. No production change was needed for that assertion repair.
+Documentation governance and diff whitespace checks pass.
