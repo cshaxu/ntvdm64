@@ -3649,3 +3649,56 @@ identity mechanism is claimed here. These tests use the existing parent
 stubs/reused object graph and remain incremental native evidence, not sealed
 product acceptance. Product sources, runtime package and immutable guest media
 are unchanged this turn; S2 remains open.
+
+## E93 - Executable original reply-order contract
+
+Baseline 239a11502. The new verify-wow-reply-contract.ps1 checks the pinned
+OpenNT kernel/sendmsg.c SHA-256 from E90, extracts the complete _ReplyMessage
+function verbatim between its original function boundaries into a fresh
+build-only include, and compiles wow_reply_contract_fixture.c with MSVC x86
+/MT. No production mirror, DLL, guest media or package configuration changes.
+Original Microsoft source notice remains in the canonical input; this test
+does not add an external runtime dependency to the product.
+
+This is intentionally a source-control-order test: minimal named test
+structures expose the fields read by that function; wake, scheduling,
+SleepTask, locking and callback delivery are spies. They neither implement a
+scheduler nor prove original structure offsets, native thread scheduling,
+message capture, guest behavior or a product-compatible whole translation
+unit. The source body itself, including all reply branches, is not rewritten.
+
+Command: tests/observation/verify-wow-reply-contract.ps1 with BuildRoot
+build/M0-T422/S2/original-reply-contract-20260924-r1 and LogPath
+O:/winnt/logs/t422-s2-original-reply-contract-20260924-r1.log.
+Build succeeds with no reported compiler warnings; cases=12/errors=0.
+Fixture SHA-256 AE74B3689C3512800E9490340C6F9FD1C630E11B0AA77C7E7367AE25363238C5;
+log SHA-256 FFB2A8A2DEEAE4373834248BE503395250FCF8CFB3672C8E85748B7A3F7A59EF.
+
+Eight cases cross sender/receiver 16-bit flags and exact/nonmatching psmsSent;
+each also checks duplicate reply refusal and unchanged return value. W means
+SetWakeBit after SMF_REPLY/lRet publication, D means DirectedScheduleTask,
+and Y means xxxSleepTask(TRUE,NULL). Observed original orders:
+
+| Sender / receiver | Sender awaits this SMS | Other psmsSent |
+| --- | --- | --- |
+| Win32 / Win32 | W | W |
+| Win32 / WOW | WDY | WD |
+| WOW / Win32 | WD | WD |
+| WOW / WOW | WDY | WD |
+
+The remaining cases cover no current SMS (FALSE, no operations), senderless
+notify (TRUE, no wake/yield), client callback request (reply dispatch with
+balanced window locks), and callback sender death (no dispatch). Callback
+transport and lock lifetime are mocked, not accepted production behavior.
+
+This narrows the restoration requirement: the original reply body is usable
+as a function in a test facade, but a generic yield-after-native-reply cannot
+reproduce its exact-wait predicate or directed sender priority. Production
+recovery must supply real received SMS identity and lifetime first. Original
+xxxInterSendMsgEx allocates/captures per-message data and queues that object;
+xxxReceiveMessage removes that exact object and publishes psmsCurrent before
+dispatch. Those ownership operations are not replaced by this test or by the
+current outer-native-call record. Full original sendmsg.c composition and the
+finite boundary replacing, rather than duplicating, native message ownership
+remain unproven. E92's native early-reply failure stays red. No S2 closure,
+whole-product rebuild or new DOS regression is claimed for this test-only P.
