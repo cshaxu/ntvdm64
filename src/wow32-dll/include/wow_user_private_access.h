@@ -11,6 +11,21 @@ VOID WINAPI wow_user_register_wow_exec(HANDLE);
 BOOL WINAPI wow_user_get_messageA(LPMSG, HWND, UINT, UINT);
 BOOL WINAPI wow_user_peek_messageA(LPMSG, HWND, UINT, UINT, UINT);
 BOOL WINAPI wow_user_wait_message(void);
+BOOL WINAPI wow_native_BringWindowToTop(HWND w);
+BOOL WINAPI wow_native_SetWindowPos(HWND w, HWND after, int x, int y, int cx, int cy, UINT flags);
+BOOL WINAPI wow_native_MoveWindow(HWND w, int x, int y, int cx, int cy, BOOL paint);
+BOOL WINAPI wow_native_ShowWindow(HWND w, int show);
+BOOL WINAPI wow_native_EnableWindow(HWND w, BOOL enable);
+HWND WINAPI wow_native_SetActiveWindow(HWND w);
+HWND WINAPI wow_native_SetFocus(HWND w);
+BOOL WINAPI wow_native_DestroyWindow(HWND w);
+HWND WINAPI wow_native_SetParent(HWND w, HWND parent);
+BOOL WINAPI wow_native_SetWindowPlacement(HWND w, const WINDOWPLACEMENT *placement);
+int WINAPI wow_native_GetWindowTextA(HWND w, LPSTR text, int count);
+int WINAPI wow_native_GetWindowTextLengthA(HWND w);
+BOOL WINAPI wow_native_SetWindowTextA(HWND w, LPCSTR text);
+LRESULT WINAPI wow_native_SendMessageA(HWND w, UINT message, WPARAM wp, LPARAM lp);
+LRESULT WINAPI wow_native_SendMessageTimeoutA(HWND w, UINT message, WPARAM wp, LPARAM lp, UINT flags, UINT timeout, PDWORD_PTR value);
 /* Include only after SDK declarations in the selected original provider.
  * The implementation itself must call native USER without these mappings. */
 #ifdef WOW_USER_PRIVATE_REDIRECT
@@ -24,5 +39,20 @@ BOOL WINAPI wow_user_wait_message(void);
 #define GetMessageA wow_user_get_messageA
 #define PeekMessageA wow_user_peek_messageA
 #define WaitMessage wow_user_wait_message
+#define BringWindowToTop wow_native_BringWindowToTop
+#define SetWindowPos wow_native_SetWindowPos
+#define MoveWindow wow_native_MoveWindow
+#define ShowWindow wow_native_ShowWindow
+#define EnableWindow wow_native_EnableWindow
+#define SetActiveWindow wow_native_SetActiveWindow
+#define SetFocus wow_native_SetFocus
+#define DestroyWindow wow_native_DestroyWindow
+#define SetParent wow_native_SetParent
+#define SetWindowPlacement wow_native_SetWindowPlacement
+#define GetWindowTextA wow_native_GetWindowTextA
+#define GetWindowTextLengthA wow_native_GetWindowTextLengthA
+#define SetWindowTextA wow_native_SetWindowTextA
+#define SendMessageA wow_native_SendMessageA
+#define SendMessageTimeoutA wow_native_SendMessageTimeoutA
 #endif
 #endif

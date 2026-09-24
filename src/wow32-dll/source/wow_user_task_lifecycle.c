@@ -1,6 +1,7 @@
 #include "wow_user_task_lifecycle.h"
 
 #include "wow_class_words_binding.h"
+#include "wow_window_words_binding.h"
 #include "wow_task_profile_bindings.h"
 #include "wow_user_session_binding.h"
 #include "opennt-abi/host-compat/include/thread_start_compat.h"
@@ -567,6 +568,63 @@ BOOL WINAPI wow_user_task_lifecycle_wait_message(wow_user_task_lifecycle *owner)
         if (!sleep_message_task(owner)) return FALSE;
     } while (task->message_wakes == wakes);
     return TRUE;
+}
+
+BOOL WINAPI wow_user_native_call_begin(wow_user_native_call *call, HWND window)
+{
+    wow_user_runtime_thread *binding = wow_user_runtime_current();
+    wow_task_order_thread *sender, *receiver;
+    wow_window_words_binding *words;
+    wow_user_task_lifecycle_thread *target;
+    wow_cleanup_window *view;
+    ZeroMemory(call, sizeof(*call));
+    /* sendmsg.c keeps its same-thread direct branch outside inter-send.
+     * Use the already-published WND owner, including original short HWNDs;
+     * GetWindowThreadProcessId does not accept that historical carrier. */
+    if (!binding || !(sender = binding->thread) || !sender->ptdb) return TRUE;
+    call->held = binding->exclusive_held;
+    if (!call->held && !wow_user_runtime_enter(binding)) return FALSE;
+    words = wow_window_words_acquire(window);
+    view = words ? wow_window_words_cleanup_value(words) : NULL;
+    receiver = view ? view->thread : NULL;
+    for (target = ((wow_user_task_lifecycle *)binding->runtime->lifecycle)->threads;
+            target && &target->thread != receiver; target = target->next) {}
+    if (words) wow_window_words_release(words);
+    if (!target || receiver == sender || !receiver->ptdb || sender->ppi->pwpi->nTaskLock) {
+        if (!call->held) (void)wow_user_runtime_leave(binding);
+        return TRUE;
+    }
+    call->binding = binding;
+    call->receiver_id = target->thread_id;
+    call->message.ptiSender = sender;
+    call->message.ptiReceiver = receiver;
+    call->previous = sender->psmsSent;
+    sender->psmsSent = &call->message;
+    DirectedScheduleTask(sender, receiver, TRUE, &call->message);
+    (void)xxxSleepTask(FALSE, (HANDLE)-1, sender);
+    return wow_user_runtime_leave(binding);
+}
+
+BOOL WINAPI wow_user_native_call_end(wow_user_native_call *call)
+{
+    wow_user_runtime_thread *binding = call->binding;
+    wow_task_order_thread *sender, *receiver;
+    if (!binding) return TRUE;
+    if (wow_user_runtime_current() != binding || !wow_user_runtime_enter(binding))
+        return FALSE;
+    sender = binding->thread;
+    /* Resolve again under the owner lock: the native operation may have
+     * destroyed its target. Never dereference a retained receiver pointer. */
+    receiver = find_thread(sender, call->receiver_id);
+    if (receiver && receiver->ptdb) {
+        DirectedScheduleTask(receiver, sender, FALSE, &call->message);
+        (void)xxxSleepTask(TRUE, NULL, sender);
+    } else {
+        (void)xxxDirectedYield((DWORD)-1, sender);
+    }
+    sender->psmsSent = call->previous;
+    call->binding = NULL;
+    return call->held || wow_user_runtime_leave(binding);
 }
 
 static BOOL retire_task(wow_user_task_lifecycle *owner, DWORD task_id,

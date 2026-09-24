@@ -56,6 +56,17 @@ BOOL WINAPI wow_user_task_lifecycle_wait(wow_user_task_lifecycle *, HANDLE);
 BOOL WINAPI wow_user_task_lifecycle_message(wow_user_task_lifecycle *, LPMSG,
     HWND, UINT, UINT, UINT, BOOL);
 BOOL WINAPI wow_user_task_lifecycle_wait_message(wow_user_task_lifecycle *);
+/* Borrowed call edge only. Native USER owns the operation and its result;
+ * original taskman owns the two registered tasks. No pending-message queue. */
+typedef struct wow_user_native_call {
+    wow_user_runtime_thread *binding;
+    wow_task_order_message message;
+    wow_task_order_message *previous;
+    DWORD receiver_id;
+    BOOL held;
+} wow_user_native_call;
+BOOL WINAPI wow_user_native_call_begin(wow_user_native_call *, HWND);
+BOOL WINAPI wow_user_native_call_end(wow_user_native_call *);
 /* Original pfnWOWCleanup resource operation, including task==0 module calls.
  * The task carrier survives until the runtime's native-thread unbind edge. */
 BOOL WINAPI wow_user_task_lifecycle_exit(wow_user_task_lifecycle *, HANDLE,

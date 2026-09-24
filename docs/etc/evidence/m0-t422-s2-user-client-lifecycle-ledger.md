@@ -2975,3 +2975,50 @@ Production change is +13/-6 non-mirror lines, zero mirror/overlay/guest changes.
 The trace depth field is diagnostic bookkeeping, not an independent execution
 owner or proof of exception-balanced scheduling. Governance and diff checks
 pass. This is an observation/error-isolation delivery, not S2 closure.
+
+## E81 Target-aware native-call candidate (unaccepted)
+
+The next candidate keeps same-thread native calls direct, as required by
+sendmsg.c's GETPTI comparison. For two live registered WOW tasks only, it
+borrows the existing sender psmsSent slot for a stack-local call edge and
+delegates directional priority/event changes to original DirectedScheduleTask.
+The caller leaves execution before native transport and resumes through
+original SleepTask afterward. Receiver lookup is repeated under the runtime
+lock after transport; no receiver pointer is dereferenced across task death.
+The task registry and scheduler remain their existing owners; no message
+queue, CPU-context copier, guest patch or mirror modification is added.
+
+This is an implementation candidate under E74's native-boundary investigation,
+not an exact native SMS implementation or accepted semantic replacement.
+The unavailable original kernel transport cannot be directly composed (E74);
+the candidate attempts only the same-shaped binding rung around its already
+composed scheduler. Its native-call edge can span implicit messages and must
+not be confused with the exact per-message identity required for nested or
+early replies. Fifteen HWND-targeted APIs are wired together, not just
+BringWindowToTop. External/native-only targets and locked tasks retain the
+existing native route, which is not a new passing coverage claim.
+
+Mandatory rejection/acceptance checks remain real single-instance activation,
+same-thread non-yield, nested delivery, early ReplyMessage, timeout, target
+death and exceptional cleanup. Original callback ownership must be proved;
+a passing ordinary activation alone cannot close this boundary or S2.
+
+### E81 checkpoint outcome
+
+The x86 provider compiles and links, but real reduced-environment run
+`t422-s2-20260924T213244951Z-4fb6cc8d-window-lifecycle` fails the
+second-invocation completion gate. Worker 22208, sender thread 15928 records
+BringWindowToTop returning 1, then reaches WU32SysErrorBox (RVA 31A10).
+This proves only that the earlier native-send wait was crossed; it does not
+prove correct callback/guest-state restoration or successful activation.
+The error text and post-handoff task state remain to be investigated.
+The harness restored SYSTEM.INI and cleaned its test processes.
+
+At the owner's clean-worktree checkpoint, all four candidate source files
+and this ledger are preserved together as explicitly unaccepted research.
+No passing E80 regression is attributed to this candidate, and S2 remains
+active. The runtime WOW32.DLL is restored from the retained E80 tested copy,
+with SHA-256 B423B07C81A259B6788D37BF15B4A23B7285EB97566D73BA91B2AD603D2BB9CF.
+Thus the checkpoint source and deployed tested DLL deliberately differ;
+rebuilding this research checkpoint is not a validated product release.
+No original mirror or guest file changes in this checkpoint.
