@@ -589,7 +589,10 @@ BOOL WINAPI wow_task_callback_enter(wow_task_callback_scope *scope)
     /* queue.c xxxSleepThread resumes taskman before receiving callbacks.
      * Native USER can instead deliver inside its own SendMessage wait. */
     if (thread->ppi->pwpi->CSOwningThread != thread) {
-        (void)xxxSleepTask(TRUE, NULL, thread);
+        /* The callback has actually arrived, even when native SendMessage's
+         * wait dispatched it without our queue-wait observer. Original
+         * OldYield records runnable work before entering SleepTask. */
+        xxxDirectedYield((DWORD)-1, thread);
         scope->resumed = TRUE;
     }
     return wow_user_runtime_leave(binding);
@@ -639,7 +642,9 @@ BOOL WINAPI wow_user_native_call_begin(wow_user_native_call *call, HWND window)
     call->message.ptiReceiver = receiver;
     call->previous = sender->psmsSent;
     sender->psmsSent = &call->message;
-    DirectedScheduleTask(sender, receiver, TRUE, &call->message);
+    /* This is an outer native call, not an already-enqueued NT4 SMS.
+     * queue.c's external-wait path only deschedules here. Scheduling a send
+     * before native USER publishes it makes the still-waiting sender ready. */
     (void)xxxSleepTask(FALSE, (HANDLE)-1, sender);
     return wow_user_runtime_leave(binding);
 }

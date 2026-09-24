@@ -53,7 +53,9 @@ one-to-one original SMS identity; do not publish it as psmsCurrent by guessing.
 E90's widened pre-send interval reproduces a separate incomplete handoff:
 the receiver is initially selected, then the sender is selected again while
 outside WOW execution; a foreign synchronous send remains undelivered.
-This test does not reach or prove the originally intended tuple-alias check.
+That E90 run does not reach the tuple-alias check. E91's coupled binding now
+passes that native check and nested send; early reply remains red and real
+guest regression is incomplete. No S2 closure or runtime promotion is claimed.
 
 | ID | Original owner / production edge | Required S2 closure | Initial state |
 | --- | --- | --- | --- |
@@ -3523,3 +3525,77 @@ death together. The two-task alias test remains an unachieved check until
 entry actually occurs. No general host API impossibility is established.
 S2 remains open; O:/winnt/WOW32.DLL still has the E80 baseline hash
 B423B07C81A259B6788D37BF15B4A23B7285EB97566D73BA91B2AD603D2BB9CF.
+
+## E91 - Native arrival handoff checkpoint, not S2 closure
+
+At owner request, preserve the reviewed partial implementation after da5e7ce60
+before continuing S2. Only wow32-dll/source/wow_user_task_lifecycle.c changes
+in production (+7/-2 lines including comments). Both original mirrors,
+overlays and guest media have zero changes in this checkpoint.
+
+Original-owner review: queue.c::xxxMsgWaitForMultipleObjects deschedules the
+task before an external wait; it does not treat that wait as a published SMS.
+taskman.c::xxxDirectedYield(DY_OLDYIELD) registers runnable work and enters the
+original SleepTask. The binding now removes premature DirectedScheduleTask
+from outer native-call entry and uses that original OldYield when a callback
+actually arrives without execution ownership. Original taskman remains the
+only scheduler; no replacement event counter, queue or message matching is
+introduced. This is the smallest binding to already composed original bodies,
+not import of sendmsg.c or a complete recovery of its SMS lifetime contract.
+E89's unproven original-sendmsg composition route remains open. No external
+implementation is imported, and no new scheduling algorithm is authored.
+
+Incremental MSVC x86 native tests use verify-wow-task-lifecycle.ps1, provider
+wow32-provider-r10 and worker formal-x86-r9 below build/M0-T422/S2. Their
+existing parent stubs and /force:multiple composition are native boundary
+evidence only. Build-root suffixes and observations:
+
+| Root under build/M0-T422/S2 | Result |
+| --- | --- |
+| native-foreign-no-presend-20260924-r1 | Removing only premature scheduling passes the widened foreign-send check. |
+| native-nested-no-presend-20260924-r1 | That intermediate version fails nested send (1460, watchdog 98); it is not selected. |
+| native-foreign-arrival-ready-20260924-r1 | Combined change passes, errors=0/native_direct=4. An external identical-tuple send arrives while an internal outer-call record is pending, with psmsCurrent still null. No guessed association is made. |
+| native-nested-arrival-ready-20260924-r1 | Combined change passes and replay confirms scheduled=1/owner=1, result=114, errors=0. |
+| native-reply-arrival-ready-20260924-r1 | FAIL: receiver reaches early reply, but sender does not return; exit 95. This is not repaired. |
+
+Final foreign fixture SHA-256:
+65C06340BBDDED472E3E26E569AFC62920E4A7C364AF50BD4D296915F1995616.
+Final nested fixture SHA-256:
+1263B87AC97BD3B60719B923BB1614F2BAA59899272330F5E47E1388DCEE1EDB.
+Final early-reply fixture SHA-256:
+D67C4A74589B565C9EB00EB6D4C2F670FF7EF4DC406011E6477FA768DE3CA72C.
+Nested replay: O:/winnt/logs/t422-s2-native-nested-arrival-ready-20260924-replay.log.
+
+The selected wow32-provider-r10 wow32.dll Ninja target links successfully
+under VsDevCmd -arch=x86 -host_arch=x86. Frozen source, DLL and map are in
+build/M0-T422/S2/arrival-ready-artifacts-20260924; DLL SHA-256 is
+D276C7E31D662DF6FD242A1B4A2520724A33CFA86F973E6ABC9B6BDF251C2F9A.
+This reused graph is not a fresh sealed whole-product build. All 17 DOS rows
+have matching expected/actual exit results in
+O:/winnt/logs/t422-s2-arrival-ready-20260924232810-bee2e348-summary.json.
+That run used the unchanged E83 worker/E80 DLL baseline; it does not prove
+the new WOW callback behavior.
+
+Real-window regression remains INCOMPLETE. Reduced-environment, redirected
+manual diagnostics using both candidate and E87 control displayed only the
+WOWExec helper, not a verified WINMINE board. Logs are respectively in
+O:/winnt/logs/t422-s2-arrival-ready-ui-20260924 and
+O:/winnt/logs/t422-s2-arrival-ready-uc-20260924. A full-trace, non-redirected
+E87 control, t422-s2-20260924T233540452Z-f96c29bb-window-lifecycle, was stopped
+for this checkpoint before final UI acceptance. These different conditions
+cannot establish candidate regression or success. Earlier owner gameplay
+is not reassigned to this candidate.
+
+Checkpoint cleanup verifies the last control's exact process paths, start
+times and parent relation before stopping worker 24044 and broker 2476;
+launcher 11488 exits as a consequence. No user guest state is claimed saved.
+SYSTEM.INI is restored bytewise from the saved original, SHA-256
+6F533CCC79227E38F18BFC63BFC961EF4D3EE0E2BF33DD097CCF3548A12B743B.
+O:/winnt/WOW32.DLL is restored to E80, SHA-256
+B423B07C81A259B6788D37BF15B4A23B7285EB97566D73BA91B2AD603D2BB9CF.
+Raw evidence and candidate artifacts are retained, not deleted as cleanup.
+
+Next: finish exact received-message identity, early reply/timeout/peer-loss
+lifetime and controlled real guest regression, then all remaining S2 ledger
+rows and fresh product acceptance. This commit is a partial source/evidence
+checkpoint, not permission to mark those obligations passed or close S2.
