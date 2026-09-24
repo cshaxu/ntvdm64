@@ -2241,3 +2241,41 @@ that prevents direct whole-file composition. Their finite source slices and
 same-shaped bindings must be evaluated before introducing replacement policy.
 Do not bypass the current refusal, release TLS forcibly, use class fnid as a
 guess, or call a naive destruction loop a recovered original lifecycle.
+
+## E65 native thread death does not notify the window binding gateway
+
+Original ntstubs.c::NtUserSetWindowFNID records the first actual control
+procedure identity (or adds FNID_CLEANEDUP_BIT), confirming why CLS.fnid is
+not an authoritative substitute. This does not yet require duplicating that
+private native state: modern USER remains responsible for its own controls.
+Before importing another cleanup slice, a host-only probe now tests that
+public boundary independently of guest execution and project task state.
+
+Source: tests/adapter-mvdm-host-out/wow/native_window_thread_exit_probe.c.
+MSVC x86 /MT /W4 build under
+build/M0-T422/S2/native-thread-exit-20260924; executable invoked with a 15-second
+outer process timeout. Output:
+O:/winnt/logs/t422-s2-native-thread-exit-20260924.stdout.log.
+All six cases exit zero and leave no live HWND. For custom windows and
+subclassed native BUTTON windows, both normal thread return and ExitThread
+produce zero WM_DESTROY and zero WM_NCDESTROY callbacks. The two explicit
+DestroyWindow controls each produce exactly one of each callback. This is
+actual host behavior, not mocked USER or evidence of a WOW guest exit.
+
+Consequences: native USER already destroys its native windows on thread death,
+but wow_window_native_proc's WM_NCDESTROY detach cannot be relied on in that
+case. Combined with the ignored unbind failure in E64, waiting for a callback
+after exiting is not a valid private-binding cleanup design. The current
+wow_user_session_binding also uses native TLS storage for current_binding,
+so a post-death path cannot dereference the departed thread's TLS as though
+it were retained owner state. No production workaround is introduced here.
+
+Refinement of E64's next step: first preserve the native USER-owned cleanup
+boundary and determine the finite original-shaped rundown of project WW,
+guest backing and task/queue references around it. Do not import per-window
+fnid or native control cleanup merely because the historical source used it;
+those native mechanics may already be supplied by the host. A successful
+binding must prove no calls into departed guest code, no surviving owner/TLS
+reference, no loss of another task's objects, and exactly-once release. The
+probe provides a regression baseline for selecting that boundary; S2 remains
+open and no exceptional cleanup acceptance is claimed.
