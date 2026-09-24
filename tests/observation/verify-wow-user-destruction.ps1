@@ -11,6 +11,23 @@ param(
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
+function Read-TraceSuffix([string]$Path, [int]$Offset = 0) {
+    if (!(Test-Path -LiteralPath $Path)) {
+        if ($Offset -ne 0) { throw "Trace disappeared after checkpoint: $Path" }
+        return ''
+    }
+    # Keep one shared read handle: the producer appends while observation runs.
+    # A short/replaced trace must fail acceptance, never replay an earlier task.
+    $stream = [IO.File]::Open($Path, [IO.FileMode]::Open,
+        [IO.FileAccess]::Read, [IO.FileShare]::ReadWrite)
+    $reader = [IO.StreamReader]::new($stream)
+    try { $text = $reader.ReadToEnd() }
+    finally { $reader.Dispose() }
+    if ($Offset -lt 0 -or $Offset -gt $text.Length) {
+        throw "Trace checkpoint invalid: offset=$Offset length=$($text.Length) path=$Path"
+    }
+    return $text.Substring($Offset)
+}
 $build = (Resolve-Path -LiteralPath $BuildRoot).Path
 $runtime = (Resolve-Path -LiteralPath $RuntimeRoot).Path
 $provider = (Resolve-Path -LiteralPath $Wow32Provider).Path
@@ -231,12 +248,8 @@ try {
     for ($launch = 1; $launch -le $roundCount; ++$launch) {
     # Each launch must supply new trace evidence. Prior destruction callbacks
     # cannot validate a subsequent application, even if HWND values are reused.
-    $windowTraceOffset = if (Test-Path -LiteralPath $windowTrace) {
-        (Get-Content -LiteralPath $windowTrace -Raw).Length
-    } else { 0 }
-    $callbackTraceOffset = if (Test-Path -LiteralPath $callbackTrace) {
-        (Get-Content -LiteralPath $callbackTrace -Raw).Length
-    } else { 0 }
+    $windowTraceOffset = (Read-TraceSuffix $windowTrace).Length
+    $callbackTraceOffset = (Read-TraceSuffix $callbackTrace).Length
     if ($OverlapFirst -and $launch -eq 3) {
         $window = $heldWindow
         $process = $heldLauncher
@@ -258,7 +271,7 @@ try {
     $observedClasses = [Collections.Generic.HashSet[string]]::new()
     while ([DateTime]::UtcNow -lt $deadline) {
         if (Test-Path -LiteralPath $windowTrace) {
-            $matches = [regex]::Matches((Get-Content -LiteralPath $windowTrace -Raw).Substring($windowTraceOffset),
+            $matches = [regex]::Matches((Read-TraceSuffix $windowTrace $windowTraceOffset),
                 '(?m)WindowDispatch hwnd=([0-9A-F]+) message=0001')
             foreach ($match in $matches) {
                 $candidate = [IntPtr]::new([Convert]::ToInt64($match.Groups[1].Value, 16))
@@ -353,7 +366,7 @@ try {
     }
     if ([T422NativeWindow]::IsWindow($window)) { throw 'WM_CLOSE left the real WOW window live.' }
     $callbacks = if (Test-Path -LiteralPath $callbackTrace) {
-        (Get-Content -LiteralPath $callbackTrace -Raw).Substring($callbackTraceOffset)
+        Read-TraceSuffix $callbackTrace $callbackTraceOffset
     } else { '' }
     $process.Refresh()
     "after exists=$([T422NativeWindow]::IsWindow($window)) launcherExited=$($process.HasExited) workerAlive=$([bool](Get-Process -Id $windowOwner -ErrorAction SilentlyContinue)) result=$result" | Add-Content -LiteralPath $closeLog
@@ -363,7 +376,7 @@ try {
     "afterGrace launcherExited=$completed" | Add-Content -LiteralPath $closeLog
     if ($completed) { "launcherExitCode=$($process.ExitCode)" | Add-Content -LiteralPath $closeLog }
     foreach ($message in '0002','0082') {
-        $nativeDispatch = (Get-Content -LiteralPath $windowTrace -Raw).Substring($windowTraceOffset)
+        $nativeDispatch = Read-TraceSuffix $windowTrace $windowTraceOffset
         $identity = 'WindowDispatch hwnd=' + ('{0:X8}' -f $window.ToInt64()) + ' message=' + $message
         if (!$nativeDispatch.Contains($identity)) {
             throw "The selected WINMINE HWND did not complete destruction message $message."
@@ -391,6 +404,10 @@ try {
     }
     $verdict = "PASS: $LaunchCount visible-window launch/close cycles and launcher completions; full resource cleanup remains separately audited"
     Write-Output 'T422_S2_WOW_USER_REAL_DESTRUCTION_OK'
+}
+catch {
+    $verdict = 'FAIL: ' + $_.Exception.Message
+    throw
 }
 finally {
     if ($DiagnosticObserver -and $process -and !$process.HasExited) {

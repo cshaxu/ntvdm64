@@ -2426,3 +2426,54 @@ unfiltered peek need not return WM_QUIT before unrelated host messages.
 The assertion now explicitly requests WM_QUIT; after recompilation all five
 repetitions pass. No production change was needed for that assertion repair.
 Documentation governance and diff whitespace checks pass.
+
+## E69 concurrent workload isolates the USER message-loop scheduling boundary
+
+After checkpoint ee883d9ff, the observer reads each live trace through one
+FileStream opened with ReadWrite sharing and one StreamReader snapshot.
+It validates character offsets before slicing; a disappeared or shortened
+trace fails rather than replaying previous-task evidence. Focused checks on
+the retained trace pass full/suffix/EOF reads and reject an out-of-range
+checkpoint. This avoids the earlier Get-Content slicing exception without
+claiming its underlying transient cause proved. The observer now also writes
+an explicit FAIL verdict when an assertion throws, instead of leaving the
+initial INCOMPLETE verdict as the only result.
+
+Reduced-environment real overlap run
+`t422-s2-20260924T195306882Z-8dac6626-window-lifecycle` reaches a visible first
+WINMINE (worker 12848, launcher 43900, HWND 005C084E). The second launcher
+7540 reaches the broker, but no second application window appears within
+35 seconds. The first worker continues running (43.4375 CPU seconds at the
+failure snapshot). The harness reaches its normal no-window failure, not a
+trace slicing exception; scoped cleanup restores SYSTEM.INI and stops the
+test processes. This run predates the explicit catch/verdict improvement;
+its terminal exception, not its initial INCOMPLETE result field, proves failure.
+
+The exact formal DLL map resolves the repeated dispatch RVAs 00033410 and
+000334D0 to WU32DispatchMessage and WU32GetMessage respectively. Registration
+records only WOWEXEC and the first WINMINE InitTask. Broker evidence records
+the second request without a subsequent worker GetNextVDMCommand request.
+This narrows the live failure to service progress while the first task owns
+the ordinary message loop; it does not yet prove a complete scheduling fix.
+
+Source/build comparison establishes a concrete missing integration edge:
+
+- Original mvdm/wow32/wumsg.c::WU32GetMessage, WU32PeekMessage and
+  WU32WaitMessage call their original USER APIs and explicitly rely on them
+  permitting a WOW task switch.
+- The current formal DLL imports GetMessageA, PeekMessageA and WaitMessage
+  directly from modern USER32. Its recovered taskman.c::xxxUserYield is
+  reached by the registered YieldTask callback, not by those native imports.
+- Original windows/core/ntuser/kernel/input.c::xxxInternalGetMessage yields
+  before timer generation and at a no-message Peek exit unless PM_NOYIELD;
+  a blocking Get goes through xxxSleepThread. Original queue.c::xxxSleepThread
+  calls xxxSleepTask for a 16-bit thread rather than just a native wait.
+
+Implementation must preserve that complete Get/Peek/Wait contract through
+the existing source-owned scheduler: filter/remove/PM_NOYIELD, sent versus
+posted/quit ownership, timer fairness, queue wake, idle transition, callback
+reentry and guest-pointer invalidation. An unconditional yield at API entry
+or a new scheduler is not an equivalent recovery. Native USER remains owner
+of its queue and message classification. The precise finite facade and its
+source-reuse boundary are the next S2 implementation step; no production
+scheduler change or multi-task pass is claimed by this evidence delivery.
