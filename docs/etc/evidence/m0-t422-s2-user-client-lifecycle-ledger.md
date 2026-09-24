@@ -45,6 +45,10 @@ The required source-shaped representation is finite:
 
 ## Closure register
 
+Current checkpoint E88 preserves a failing native received-message identity
+test: ordinary native sends return, but the receiver's psmsCurrent is null.
+Early reply and message lifetime remain unaccepted S2 work, not a new closure.
+
 | ID | Original owner / production edge | Required S2 closure | Initial state |
 | --- | --- | --- | --- |
 | USER-VIEW-01 | `desktop.c`, `client.c`, direct USER16 reads | B1 desktop/client allocation, exact rebasing, atomic publish/withdraw and bounded address validation. | B1 implemented and x86 page-domain fixture passed; real USER16 direct-read acceptance remains. |
@@ -3392,3 +3396,29 @@ After testing, O:/winnt/WOW32.DLL is restored to the E80 baseline hash
 B423B07C81A259B6788D37BF15B4A23B7285EB97566D73BA91B2AD603D2BB9CF.
 The source-selected candidate is retained as incomplete S2 work, not a full
 runtime promotion. No guest media changes or new S/T closure are claimed.
+
+## E88 - Owner-requested test checkpoint, not S2 closure
+
+At owner request, preserve the current work before further implementation.
+Baseline is b724ff45c. Only the lifecycle fixture and its runner change:
+native-identity checks the production sender/receiver message identity under
+the runtime data lock, without manufacturing a receiver psmsCurrent.
+No product source, mirror, overlay or guest media changes in this checkpoint.
+
+The completed MSVC x86 native-fixture run uses Case native-identity,
+ProviderBuildRoot build/M0-T422/S2/wow32-provider-r10,
+WorkerBuildRoot build/M0-T422/S2/formal-x86-r9 and
+BuildRoot build/M0-T422/S2/native-sms-identity-red-20260924 through
+tests/observation/verify-wow-task-lifecycle.ps1. Fixture SHA-256:
+6D71A3817D7C42391D518F9D9F87B6AA96372F39C1505F68DFE97C997DAE3355.
+Both sends report sent=005AEB0C, current=00000000 and return result=114;
+the final result is errors=2, native_direct=4, exit=1. Thus transport return
+passes this bounded observation, while received-message identity FAILS.
+This diagnostic is not a sealed reproducible product-acceptance run.
+
+The explicit case remains failing until production identity and lifetime are
+repaired; the default test selection is unchanged. No product rebuild or DOS
+rerun is claimed for this test-only checkpoint; E87 retains those prior
+results. S2 stays active. Next work must preserve the original received SMS
+identity and lifetime across early reply, timeout and receiver/sender loss;
+ordinary return alone cannot certify those contracts.

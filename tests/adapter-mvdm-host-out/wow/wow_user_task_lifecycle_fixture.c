@@ -144,6 +144,7 @@ typedef struct cross_callout {
     session *session_owner;
     wow_user_runtime *runtime;
     wow_user_task_lifecycle *lifecycle;
+    wow_task_order_thread *sender_thread;
     HANDLE ready, returned, complete;
     HWND window, sender_window;
     DWORD receiver_id;
@@ -171,6 +172,20 @@ static LRESULT cross_receive_body(HWND window, UINT message, WPARAM wp, LPARAM l
         CHECK(InSendMessage() && !binding->exclusive_held);
         CHECK(binding->thread->ppi->pwpi->CSOwningThread == binding->thread);
         ++test->delivered;
+#ifdef WOW_NATIVE_IDENTITY_FIXTURE
+        {
+            wow_task_order_message *sent;
+            CHECK(wow_user_runtime_enter(binding));
+            sent = test->sender_thread->psmsSent;
+            CHECK(sent != NULL);
+            CHECK(sent && sent->ptiSender == test->sender_thread &&
+                sent->ptiReceiver == binding->thread);
+            fprintf(stderr, "WOW_NATIVE_SMS_IDENTITY sent=%p current=%p\n",
+                sent, binding->thread->psmsCurrent);
+            CHECK(binding->thread->psmsCurrent == sent);
+            CHECK(wow_user_runtime_leave(binding));
+        }
+#endif
         fprintf(stderr, "WOW_NATIVE_SEND_RECEIVE early=%lu\n", (DWORD)wp);
         if (wp == 2) {
             DWORD_PTR nested_result = 0;
@@ -267,6 +282,7 @@ static void verify_cross_callout(session *owner, wow_user_runtime_thread *bindin
     CHECK(RegisterClassW(&cls) != 0);
     test.session_owner = owner; test.runtime = binding->runtime;
     test.lifecycle = lifecycle;
+    test.sender_thread = binding->thread;
     test.ready = CreateEventW(NULL, TRUE, FALSE, NULL);
     test.returned = CreateEventW(NULL, TRUE, FALSE, NULL);
     test.complete = CreateEventW(NULL, TRUE, FALSE, NULL);
