@@ -149,7 +149,25 @@ typedef struct cross_callout {
     HWND window, sender_window;
     DWORD receiver_id;
     unsigned delivered;
+#ifdef WOW_NATIVE_FOREIGN_FIXTURE
+    HANDLE foreign_entered;
+    BOOL foreign_first;
+#endif
 } cross_callout;
+
+#ifdef WOW_NATIVE_FOREIGN_FIXTURE
+static DWORD WINAPI cross_foreign_sender(void *parameter)
+{
+    cross_callout *test = parameter;
+    DWORD_PTR result = 0;
+    /* No runtime/task registration: genuinely external to the WOW scheduler.
+     * Its message tuple is identical to the later production-wrapper send. */
+    if (!SendMessageTimeoutA(test->window, WM_APP + 65, 0, 0,
+            SMTO_ABORTIFHUNG, 10000, &result) || result != 114)
+        return 1;
+    return 0;
+}
+#endif
 
 static DWORD WINAPI cross_watchdog(void *done)
 {
@@ -172,6 +190,18 @@ static LRESULT cross_receive_body(HWND window, UINT message, WPARAM wp, LPARAM l
         CHECK(InSendMessage() && !binding->exclusive_held);
         CHECK(binding->thread->ppi->pwpi->CSOwningThread == binding->thread);
         ++test->delivered;
+#ifdef WOW_NATIVE_FOREIGN_FIXTURE
+        if (test->delivered == 1) {
+            wow_task_order_message *pending;
+            CHECK(wow_user_runtime_enter(binding));
+            pending = test->sender_thread->psmsSent;
+            CHECK(pending && pending->ptiReceiver == binding->thread);
+            CHECK(wp == 0 && lp == 0);
+            fprintf(stderr, "WOW_NATIVE_FOREIGN_ALIAS pending=%p current=%p flags=%lu\n",
+                pending, binding->thread->psmsCurrent, InSendMessageEx(NULL));
+            CHECK(wow_user_runtime_leave(binding));
+        }
+#endif
 #ifdef WOW_NATIVE_IDENTITY_FIXTURE
         {
             wow_task_order_message *sent;
@@ -229,6 +259,17 @@ static LRESULT CALLBACK cross_receive(HWND window, UINT message, WPARAM wp, LPAR
     LRESULT result;
     if (message != WM_APP + 65 && message != WM_APP + 66)
         return cross_receive_body(window, message, wp, lp);
+#ifdef WOW_NATIVE_FOREIGN_FIXTURE
+    if (message == WM_APP + 65) {
+        cross_callout *test = (cross_callout *)GetWindowLongPtrW(window, GWLP_USERDATA);
+        if (test->foreign_first) {
+            /* The parent has not sent yet. This is unambiguously the external
+             * sender; signal before the production callback execution gate. */
+            test->foreign_first = FALSE;
+            SetEvent(test->foreign_entered);
+        }
+    }
+#endif
     CHECK(wow_task_callback_enter(&scope));
     __try { result = cross_receive_body(window, message, wp, lp); }
     __finally { CHECK(wow_task_callback_leave(&scope)); }
@@ -272,6 +313,11 @@ static void verify_cross_callout(session *owner, wow_user_runtime_thread *bindin
     cross_callout test = {0};
     WNDCLASSW cls = {0};
     HANDLE helper, watchdog;
+#ifdef WOW_NATIVE_FOREIGN_FIXTURE
+    HANDLE foreign;
+    wow_user_native_call pending_call;
+    DWORD_PTR pending_result = 0;
+#endif
     wow_window_words_binding *sender_borrow = NULL;
     WW sender_words = {0};
     DWORD code;
@@ -300,6 +346,35 @@ static void verify_cross_callout(session *owner, wow_user_runtime_thread *bindin
     CHECK(helper && watchdog);
     if (WaitForSingleObject(test.ready, 3000) != WAIT_OBJECT_0) ExitProcess(96);
     CHECK(wow_user_task_lifecycle_yield(lifecycle));
+#ifdef WOW_NATIVE_FOREIGN_FIXTURE
+    test.foreign_entered = CreateEventW(NULL, TRUE, FALSE, NULL);
+    test.foreign_first = TRUE;
+    /* Exercise the exposed production begin/end boundary, inserting a real
+     * external send between begin and the native syscall. No test-written
+     * task fields, scheduling record, or psmsCurrent assignment is used. */
+    CHECK(wow_user_native_call_begin(&pending_call, test.window));
+    CHECK(wow_user_runtime_enter(binding));
+    fprintf(stderr, "WOW_NATIVE_FOREIGN_BEGIN sender=%p receiver=%p scheduled=%p owner=%p held=%u\n",
+        binding->thread, pending_call.message.ptiReceiver,
+        binding->thread->ppi->pwpi->ptiScheduled,
+        binding->thread->ppi->pwpi->CSOwningThread, pending_call.held);
+    CHECK(wow_user_runtime_leave(binding));
+    foreign = CreateThread(NULL, 0, cross_foreign_sender, &test, 0, NULL);
+    CHECK(foreign != NULL);
+    if (WaitForSingleObject(test.foreign_entered, 3000) != WAIT_OBJECT_0) {
+        CHECK(wow_user_runtime_enter(binding));
+        fprintf(stderr, "WOW_NATIVE_FOREIGN_STALLED scheduled=%p owner=%p sender_events=%d receiver_events=%d\n",
+            binding->thread->ppi->pwpi->ptiScheduled,
+            binding->thread->ppi->pwpi->CSOwningThread,
+            binding->thread->ptdb->nEvents,
+            pending_call.message.ptiReceiver->ptdb->nEvents);
+        CHECK(wow_user_runtime_leave(binding));
+        ExitProcess(97);
+    }
+    CHECK(SendMessageTimeoutA(test.window, WM_APP + 65, 0, 0,
+        SMTO_ABORTIFHUNG, 3000, &pending_result) != 0 && pending_result == 114);
+    CHECK(wow_user_native_call_end(&pending_call));
+#endif
     for (early = 0; early < 2; ++early) {
         DWORD_PTR result = 0;
         unsigned reply = 0;
@@ -321,7 +396,15 @@ static void verify_cross_callout(session *owner, wow_user_runtime_thread *bindin
     wow_user_task_lifecycle_directed_yield(lifecycle, test.receiver_id);
     CHECK(WaitForSingleObject(helper, 3000) == WAIT_OBJECT_0);
     CHECK(GetExitCodeThread(helper, &code) && !code);
+#ifdef WOW_NATIVE_FOREIGN_FIXTURE
+    CHECK(WaitForSingleObject(foreign, 3000) == WAIT_OBJECT_0);
+    CHECK(GetExitCodeThread(foreign, &code) && !code);
+    CHECK(test.delivered == 4);
+    CloseHandle(foreign);
+    CloseHandle(test.foreign_entered);
+#else
     CHECK(test.delivered == 2);
+#endif
     SetEvent(test.complete);
     CHECK(WaitForSingleObject(watchdog, 3000) == WAIT_OBJECT_0);
     CloseHandle(helper); CloseHandle(watchdog);

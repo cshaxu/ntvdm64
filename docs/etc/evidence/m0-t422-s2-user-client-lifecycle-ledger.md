@@ -50,6 +50,10 @@ test: ordinary native sends return, but the receiver's psmsCurrent is null.
 Early reply and message lifetime remain unaccepted S2 work, not a new closure.
 E89 additionally establishes that an outer native-API call record is not a
 one-to-one original SMS identity; do not publish it as psmsCurrent by guessing.
+E90's widened pre-send interval reproduces a separate incomplete handoff:
+the receiver is initially selected, then the sender is selected again while
+outside WOW execution; a foreign synchronous send remains undelivered.
+This test does not reach or prove the originally intended tuple-alias check.
 
 | ID | Original owner / production edge | Required S2 closure | Initial state |
 | --- | --- | --- | --- |
@@ -3456,3 +3460,66 @@ native senders. Keep E88 red until the real contract is restored; making only
 that test pass by assigning its known sender is not a production repair.
 This audit narrows the implementation choice but does not prove modern-host
 impossibility, complete native transport behavior, or S2 acceptance.
+
+## E90 - Pre-send handoff gap, foreign-message test remains red
+
+Baseline c1c366649; test-only changes add the explicit native-foreign case.
+No production source, mirror, guest media or deployed package is changed.
+The case uses the same two real registered tasks and native windows as the
+production-boundary send fixture. A third unregistered native thread sends
+WM_APP+65 with zero wParam/lParam. It is not a fake WOW sender. The parent
+inserts that send between the exposed production native_call_begin/end edges
+and waits for its receiver entry before issuing an identical native send.
+No test code assigns psmsCurrent, rewrites scheduler fields, or creates an SMS.
+The interval is deliberately widened; it is not ordinary guest acceptance.
+
+All roots below are build/M0-T422/S2/native-foreign-alias-20260924-rN.
+Invoke tests/observation/verify-wow-task-lifecycle.ps1 with Case native-foreign,
+ProviderBuildRoot build/M0-T422/S2/wow32-provider-r10 and
+WorkerBuildRoot build/M0-T422/S2/formal-x86-r9. The runner's existing MSVC x86
+native-fixture composition retains its parent stubs and /force:multiple link;
+none of these results certifies the product DLL/guest boundary.
+
+- r1 attempted the external send before native_call_begin. It exits 97
+  without reaching the raw receiver entry; it does not test aliasing.
+- r2 moves the external send after the production begin operation. It also
+  exits 97. A separate replay captures threads under
+  O:/winnt/logs/t422-s2-foreign-r2-snapshot-20260924.*. The external sender
+  waits in native USER; the receiver is in xxxUserYield/xxxSleepTask and the
+  host wait binding. These stacks alone do not identify the scheduling cause.
+- r3 observes begin selecting the receiver with CSOwningThread null, then
+  exits 97; it does not observe the terminal scheduler selection.
+- r4 additionally samples terminal state under the real runtime data lock.
+  Both the initial run and replay select the receiver at begin, then show
+  ptiScheduled equal to the sender, CSOwningThread null, and both nEvents=1
+  at the receiver-entry timeout. Exit is 97, not a pass. The alias assertion
+  and subsequent native sends/normal cleanup are not reached; process exit
+  bounds this deliberately failing native fixture.
+
+r4 fixture SHA-256:
+D97F6BEB666F2ED518C835D0FCD8A7B337812A8A7B7787A5F4C1C6F9DD238CC1.
+Replay log O:/winnt/logs/t422-s2-native-foreign-r4-replay-20260924.log,
+SHA-256 557F98B146BCC8B46DB5574394B8EFDD5F34FCC1BDA25152833B03F1A75B22E3.
+Exact replay markers: BEGIN sender=01725878 receiver=017333B0
+scheduled=017333B0 owner=00000000; STALLED scheduled=01725878
+owner=00000000 sender_events=1 receiver_events=1. These incremental
+diagnostics lack a sealed complete input manifest and remain partial evidence.
+
+The original contract is broader than setting a receiver pointer.
+O:/repos.external/OpenNT/windows/core/ntuser/kernel/sendmsg.c (SHA-256
+AF68BADCB022EFCB3947968FC6E3DBF148B697072EBEB2898F97FBCB774039F3)
+enqueues the actual SMS before SetWakeBit/DirectedScheduleTask, then waits for
+that SMS's reply through queue.c::xxxSleepThread. Its timeout and death paths
+retain the same object's ownership. Current native_call_begin schedules
+before the native syscall has published any message, while the native wait
+cannot execute the original reply-wait loop. E90 demonstrates an incomplete
+handoff in this widened interval, not a proved cause of every historical
+native-send/early-reply timeout. Do not repair it by guessing which external
+send corresponds to the pending outer-call record.
+
+Next recovery design must cover publication before handoff, reply-wait task
+eligibility, exact received-message identity, early reply, timeout and peer
+death together. The two-task alias test remains an unachieved check until
+entry actually occurs. No general host API impossibility is established.
+S2 remains open; O:/winnt/WOW32.DLL still has the E80 baseline hash
+B423B07C81A259B6788D37BF15B4A23B7285EB97566D73BA91B2AD603D2BB9CF.
