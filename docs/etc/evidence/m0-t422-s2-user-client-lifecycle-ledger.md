@@ -2647,3 +2647,63 @@ error gates pass. This proves the fixture's original task-order assertions,
 including the separately modeled nested handoffs, not native send/reply
 delivery or real guest concurrent activation. The E71 product defect remains
 open. No production or guest file changes and no new deployment occur.
+
+## E74 synchronous USER boundary: original ownership and selected callers
+
+The checked product is wow32-provider-r10/wow32.dll, SHA-256
+D946A531F870F7913FCF323FA8E21C1E4D4E48D5F4D1173FCE5E9D13B8377735.
+MSVC dumpbin /imports reports 290 named USER32 imports. This is an import
+count, not 290 missing bindings or 290 validated capabilities. In particular,
+existing facade implementations themselves legitimately import native USER.
+
+Review of pinned OpenNT windows/core/ntuser/kernel/sendmsg.c confirms:
+send at lines 1660--1742 sets the receiver wake bit, calls DirectedScheduleTask,
+then waits through xxxSleepThread for reply. Reply at 2245--2249 calls the
+reverse DirectedScheduleTask and can sleep the receiver. The earlier explicit
+ReplyMessage path at 311--313 has the same scheduling obligation. Kernel SMS
+ownership also covers sender/receiver death, timeout and nested replies; its
+cleanup must not be replaced with a successful local no-op.
+
+Current original wumsg.c::WU32ReplyMessage explicitly warns that guest flat
+pointers cannot be reused after ReplyMessage because another task may have run.
+This is direct source evidence that merely forwarding native ReplyMessage
+without restoring cooperative scheduling is insufficient. Likewise current
+wow_window_dispatch_bound publishes callback state and calls the original
+DispatchClientMessage, but has no scheduler-reentry boundary. Its borrow scope
+and the runtime SRW lock are not substitutes for taskman's ptiScheduled.
+
+The checked caller families requiring one coherent synchronous-call contract
+are below; they are a concrete implementation worklist, not passed coverage.
+
+| Family | Selected source/callers | Required distinction |
+| --- | --- | --- |
+| Explicit send/reply | wumsg.c SendMessage, SendDlgItemMessage via SendMessage, ReplyMessage; wcntl32.c and wmsgem.c nested control sends | Same-thread direct callback versus same-worker cross-thread transfer; nested send and early reply. |
+| Activation/position | wuwind.c BringWindowToTop, SetWindowPos, MoveWindow, ShowWindow, SetActiveWindow; wuser.c SetFocus; wuser31.c SetWindowPlacement | Native operations can synchronously notify other windows; not an asynchronous activation replacement. |
+| Text/control state | wuwind.c GetWindowText, GetWindowTextLength, SetWindowText, EnableWindow; native dialog-item APIs in the import table | Reads as well as writes can send messages; a setters-only wrapper list is incomplete. |
+| Creation/destruction/modal | Existing create-window/dialog bindings, DestroyWindow, DialogBoxIndirectParamA/W, TrackPopupMenu, MessageBoxA imports | Reentrant callbacks and internal native message loops; one HWND target cannot describe every recipient. |
+| Callback entry | wow_window_dispatch_bound and original wcall16.c::CallBack16 | Scheduler ownership must precede callback TEB/frame mutation and recursive CCPU entry; restore it on nested return. |
+| Timed/external send | wkman.c::SendMessageTimeout heartbeat with SMTO_BLOCK and 1000 ms | Preserve timeout, blocking flags and external native ownership; do not turn it into an infinite cooperative wait. |
+
+Recovery ladder: the original taskman bodies are already directly composed
+and remain the task-order owner. Full sendmsg.c cannot be directly composed
+as a native USER32 transport: it owns private kernel SMS, Q/THREADINFO, wake
+bits, kernel waits and USER server objects at the prohibited server boundary.
+The next usable rung is a finite same-shaped native-call/callback binding
+around those original scheduling bodies, with native USER retaining message
+delivery and reply/timeout/death ownership. No external-code intrusion or new
+message queue/scheduler is justified. This records the rejected translation
+unit's dependencies; it is not a claim that it was experimentally compiled.
+
+Two tempting implementations are explicitly rejected by source review:
+an unconditional yield before the API cannot deschedule the sender throughout
+the native blocking call; and an unconditional HEVENT_REMOVEME bracket is not
+equivalent to original sends. queue.c uses that sentinel for native multiwait,
+whereas taskman.c retains ptiScheduled when nTaskLock is nonzero and its
+return alone does not reacquire callback ownership. A correct binding must
+account for that lock, same-thread callbacks, nested/early replies, timeout,
+receiver death and task teardown before replacing the current production path.
+The E73 ordering fixture proves none of those native integration cases.
+
+This audit narrows the next implementation to the complete synchronous USER
+boundary rather than a BringWindowToTop-only patch. The real E71 failure is
+still open; there are zero production, mirror or guest changes in this entry.
