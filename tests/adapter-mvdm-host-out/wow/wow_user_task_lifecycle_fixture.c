@@ -12,6 +12,13 @@ static VOID WINAPI end_task(void)
     ++errors; /* Registration retains, but does not invoke, this callback. */
 }
 
+static DWORD WINAPI delayed_input(void *parameter)
+{
+    Sleep(50);
+    return PostThreadMessageA((DWORD)(ULONG_PTR)parameter, WM_APP + 52, 19, 0)
+        ? 0 : 1;
+}
+
 int __cdecl main(void)
 {
     session owner;
@@ -22,6 +29,7 @@ int __cdecl main(void)
     wow_cleanup_window stale_window = {0};
     wow_task_order_waiter idle_waiter = {0};
     HWND native_window;
+    MSG message;
     HANDLE wowexec = CreateEventW(NULL, FALSE, FALSE, NULL);
 
     CHECK(wowexec != NULL);
@@ -59,6 +67,56 @@ int __cdecl main(void)
      * deliberately not a synthetic wake: with no pending work, the original
      * yield path must retain its own immediate scheduler semantics. */
     CHECK(wow_user_task_lifecycle_yield(&lifecycle));
+    CHECK(PostThreadMessageA(GetCurrentThreadId(), WM_APP + 51, 73, 0));
+    CHECK(wow_user_task_lifecycle_message(&lifecycle, &message, NULL,
+        WM_APP + 51, WM_APP + 51, PM_NOREMOVE | PM_NOYIELD, FALSE));
+    CHECK(message.message == WM_APP + 51 && message.wParam == 73);
+    CHECK(wow_user_task_lifecycle_message(&lifecycle, &message, NULL,
+        WM_APP + 51, WM_APP + 51, PM_REMOVE, TRUE));
+    CHECK(message.message == WM_APP + 51 && message.wParam == 73);
+    CHECK(!wow_user_task_lifecycle_message(&lifecycle, &message, NULL,
+        WM_APP + 51, WM_APP + 51, PM_NOREMOVE | PM_NOYIELD, FALSE));
+    CHECK(PostThreadMessageA(GetCurrentThreadId(), WM_QUIT, 41, 0));
+    CHECK(!wow_user_task_lifecycle_message(&lifecycle, &message, NULL,
+        0, 0, PM_REMOVE, TRUE));
+    CHECK(message.message == WM_QUIT && message.wParam == 41);
+    CHECK(wow_user_task_lifecycle_message(&lifecycle, NULL, NULL,
+        0, 0, PM_REMOVE, TRUE) == -1);
+    CHECK(GetLastError() == ERROR_INVALID_PARAMETER);
+    CHECK(!binding.exclusive_held);
+    {
+        HANDLE input;
+        DWORD result;
+        /* Empty/examined queue must wait for actual native input, not merely
+         * the original scheduler's own wake event. */
+        (void)GetQueueStatus(QS_ALLINPUT);
+        input = CreateThread(NULL, 0, delayed_input,
+            (void *)(ULONG_PTR)GetCurrentThreadId(), 0, NULL);
+        CHECK(input != NULL);
+        CHECK(wow_user_task_lifecycle_wait_message(&lifecycle));
+        CHECK(wow_user_task_lifecycle_message(&lifecycle, &message, NULL,
+            WM_APP + 52, WM_APP + 52, PM_REMOVE, TRUE));
+        CHECK(message.message == WM_APP + 52 && message.wParam == 19);
+        CHECK(WaitForSingleObject(input, 1000) == WAIT_OBJECT_0);
+        CHECK(GetExitCodeThread(input, &result) && result == 0);
+        CHECK(CloseHandle(input));
+    }
+    CHECK(PostThreadMessageA(GetCurrentThreadId(), WM_APP + 54, 54, 0));
+    CHECK(PostThreadMessageA(GetCurrentThreadId(), WM_APP + 53, 53, 0));
+    CHECK(wow_user_task_lifecycle_message(&lifecycle, &message, NULL,
+        WM_APP + 53, WM_APP + 53, PM_REMOVE, TRUE));
+    CHECK(message.message == WM_APP + 53);
+    CHECK(wow_user_task_lifecycle_message(&lifecycle, &message, NULL,
+        WM_APP + 54, WM_APP + 54, PM_REMOVE, TRUE));
+    CHECK(message.message == WM_APP + 54);
+    {
+        UINT_PTR timer = SetTimer(NULL, 0, 10, NULL);
+        CHECK(timer != 0);
+        CHECK(wow_user_task_lifecycle_message(&lifecycle, &message, NULL,
+            WM_TIMER, WM_TIMER, PM_REMOVE, TRUE));
+        CHECK(message.message == WM_TIMER && message.wParam == timer);
+        CHECK(KillTimer(NULL, timer));
+    }
     /* A native object disappeared before its enrollment was retired. The one
      * registered cleanup/retirement edge must leave the task carrier intact
      * on failure, then run original cleanup exactly once when it succeeds. */

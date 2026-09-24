@@ -26,6 +26,24 @@ VOID WINAPI FreeDDEData(HANDLE, BOOL, BOOL);
 static PFNWOWHANDLERSIN wow_input_handlers;
 static wow_user_task_lifecycle wow_lifecycle;
 
+BOOL WINAPI wow_user_get_messageA(LPMSG message, HWND window, UINT first, UINT last)
+{
+    return wow_user_task_lifecycle_message(&wow_lifecycle, message, window,
+        first, last, PM_REMOVE, TRUE);
+}
+
+BOOL WINAPI wow_user_peek_messageA(LPMSG message, HWND window, UINT first,
+    UINT last, UINT flags)
+{
+    return wow_user_task_lifecycle_message(&wow_lifecycle, message, window,
+        first, last, flags, FALSE);
+}
+
+BOOL WINAPI wow_user_wait_message(void)
+{
+    return wow_user_task_lifecycle_wait_message(&wow_lifecycle);
+}
+
 static LRESULT call_previous_window_proc(WNDPROC procedure, HWND window,
     UINT message, WPARAM wp, LPARAM lp, BOOL unicode)
 {

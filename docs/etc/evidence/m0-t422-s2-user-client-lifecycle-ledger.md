@@ -2477,3 +2477,70 @@ or a new scheduler is not an equivalent recovery. Native USER remains owner
 of its queue and message classification. The precise finite facade and its
 source-reuse boundary are the next S2 implementation step; no production
 scheduler change or multi-task pass is claimed by this evidence delivery.
+
+## E70 message API facade candidate (not acceptance)
+
+E69 selects the existing ADAPTER-WOW-051 lifecycle owner for a same-signature
+GetMessageA/PeekMessageA/WaitMessage facade, reached through the already
+selected WOW private-access header. No mirror or guest bytes change.
+Recovery ladder: input.c::xxxInternalGetMessage and queue.c::xxxSleepThread
+cannot directly compose because their raw-input/post/paint/timer queues,
+hooks, SMS and kernel thread state belong to the unavailable USER server.
+The finite facade retains their pre-timer/no-message yield and task-sleep
+ordering while native USER owns message filtering and queue storage; original
+taskman.c still owns task selection, event accounting and context handoff.
+No external-code intrusion or new scheduling algorithm is selected. The
+facade is a candidate until queue filtering, PM_NOYIELD, WM_QUIT, new-input
+waiting, timers, multiple tasks and teardown have all been verified.
+
+The candidate separates the native early posted/input/paint scan from timer
+generation, invokes original xxxUserYield before the latter, and blocks via
+original xxxSleepTask rather than a native GetMessage wait. WaitMessage uses
+native queue change bits and the same original task-sleep owner. Risks still
+requiring proof include scheduler-only wakes, callback reentry and observation
+of input that arrived before versus during a yield. No native message or
+borrowed guest pointer is intentionally carried across that yield.
+
+The formal x86 provider rebuild passes. Production-object lifecycle fixtures
+pass in message-lifecycle-20260924, message-wait-20260924 and
+message-filter-timer-20260924 below build/M0-T422/S2: posted-message filtering,
+non-removing PM_NOYIELD peek, removal, WM_QUIT result/code, invalid output
+parameter, delayed native input for WaitMessage, timer delivery and the prior
+live-window retirement safety checks. A per-task native-message wake sequence
+preserves the wait result across taskman's sent-message reception, which can
+otherwise examine and clear the native change bits before WaitMessage returns.
+It does not select tasks or store queued messages. Multi-task fairness and
+nested sent-message behavior are not proved by these single-task fixtures.
+
+Real reduced-environment run
+`t422-s2-20260924T195955781Z-7ec76a60-window-lifecycle` reaches the second
+application InitTask, unlike E69: worker 56116 now requests and receives the
+second launch from BaseSrv. The two-window assertion still fails. Crucially,
+the second application calls FindWindow, GetLastActivePopup and then
+BringWindowToTop on the existing window. The recorded final dispatch RVA
+00036F50 resolves to WU32BringWindowToTop in that build. Thus two WINMINE
+instances are not a sound unconditional two-window acceptance assumption;
+the observed path is consistent with single-instance activation. The second
+launcher nevertheless remains waiting, and that activation path still needs
+completion/return proof. Do not count the changed failure depth as a pass.
+
+Original sendmsg.c explicitly couples cross-thread sends involving a 16-bit
+participant to DirectedScheduleTask before reply waiting and on return. That
+is the next bounded source owner to reconcile with native window activation;
+the last dispatch alone is not a native-stack proof of a particular deadlock.
+The concurrent test must distinguish second-instance activation/completion
+from two independent live applications instead of requiring another WINMINE
+HWND. No SendMessage reimplementation or asynchronous activation workaround
+is admitted by this observation.
+
+Real sequential run `t422-s2-20260924T200313140Z-73696d2c-window-lifecycle`
+passes both WINMINE launch/close cycles in worker 58948 (launchers 52240 and
+63124), after the new-input wake correction. All 17 DOS routes pass in
+O:/winnt/logs/t422-s2-message-api-20260924200402-1cc791f8-summary.json.
+These are incremental/reduced-environment diagnostic runs, not sealed S2
+acceptance. Original WOW source call-site review also finds PeekMessage in
+wkman's native-child wait, the Winsock blocking hook and the logoff loop;
+they share the mapping, but their enclosing blocking APIs are not thereby
+proved. S2's message/synchronous-call audit remains open. This delivery adds
+97 non-mirror production/header lines and zero mirror diff or overlay lines;
+it is necessary candidate wiring, not a claimed footprint reduction.

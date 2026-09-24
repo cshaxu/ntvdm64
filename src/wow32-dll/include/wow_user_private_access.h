@@ -8,6 +8,9 @@ DWORD WINAPI wow_user_set_class_longA(HWND, int, LONG);
 LRESULT WINAPI wow_user_call_window_procA(WNDPROC, HWND, UINT, WPARAM, LPARAM);
 LRESULT WINAPI wow_user_call_window_procW(WNDPROC, HWND, UINT, WPARAM, LPARAM);
 VOID WINAPI wow_user_register_wow_exec(HANDLE);
+BOOL WINAPI wow_user_get_messageA(LPMSG, HWND, UINT, UINT);
+BOOL WINAPI wow_user_peek_messageA(LPMSG, HWND, UINT, UINT, UINT);
+BOOL WINAPI wow_user_wait_message(void);
 /* Include only after SDK declarations in the selected original provider.
  * The implementation itself must call native USER without these mappings. */
 #ifdef WOW_USER_PRIVATE_REDIRECT
@@ -18,5 +21,8 @@ VOID WINAPI wow_user_register_wow_exec(HANDLE);
 #define CallWindowProcA wow_user_call_window_procA
 #define CallWindowProcW wow_user_call_window_procW
 #define RegisterWowExec wow_user_register_wow_exec
+#define GetMessageA wow_user_get_messageA
+#define PeekMessageA wow_user_peek_messageA
+#define WaitMessage wow_user_wait_message
 #endif
 #endif

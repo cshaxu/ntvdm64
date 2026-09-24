@@ -53,6 +53,9 @@ VOID WINAPI wow_user_task_lifecycle_directed_yield(wow_user_task_lifecycle *,
  * path; callers must not reinterpret the return value as a generic success
  * flag.  Invalid carrier entry remains a FALSE return with ERROR_INVALID_STATE. */
 BOOL WINAPI wow_user_task_lifecycle_wait(wow_user_task_lifecycle *, HANDLE);
+BOOL WINAPI wow_user_task_lifecycle_message(wow_user_task_lifecycle *, LPMSG,
+    HWND, UINT, UINT, UINT, BOOL);
+BOOL WINAPI wow_user_task_lifecycle_wait_message(wow_user_task_lifecycle *);
 /* Original pfnWOWCleanup resource operation, including task==0 module calls.
  * The task carrier survives until the runtime's native-thread unbind edge. */
 BOOL WINAPI wow_user_task_lifecycle_exit(wow_user_task_lifecycle *, HANDLE,

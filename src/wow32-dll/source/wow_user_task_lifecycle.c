@@ -43,6 +43,7 @@ typedef struct wow_user_task_lifecycle_thread {
     wow_user_message_bridge messages;
     HANDLE queue_event;
     DWORD thread_id;
+    DWORD message_wakes;
 } wow_user_task_lifecycle_thread;
 
 static wow_user_task_lifecycle_thread *current_task(
@@ -198,6 +199,7 @@ static NTSTATUS WINAPI wait_for_task_or_message(wow_task_order_thread *thread,
     if (result == WAIT_IO_COMPLETION) return (NTSTATUS)0x000000C0;
     if (result == WAIT_OBJECT_0 + count) {
         if (!wow_user_runtime_enter(binding)) return (NTSTATUS)0xC0000001;
+        ++task->message_wakes;
         /* A native queue wake is real work for this original task.  Retain
          * taskman's existing event-count/list scheduling; do not construct a
          * private SMS list or assert QS_SENDMESSAGE without an NT4 SMS. */
@@ -497,6 +499,74 @@ BOOL WINAPI wow_user_task_lifecycle_wait(wow_user_task_lifecycle *owner,
     __try { result = xxxSleepTask(FALSE, wowexec_event, &task->thread); }
     __finally { (void)wow_user_runtime_leave(wow_user_runtime_current()); }
     return result;
+}
+
+/* ADAPTER-WOW-051: input.c::xxxInternalGetMessage orders posted/input/paint
+ * before the WOW yield and timer scan; queue.c::xxxSleepThread blocks through
+ * the original task scheduler. Native USER retains queue/filter ownership.
+ * No guest pointer or native message is held across a cooperative switch. */
+static BOOL sleep_message_task(wow_user_task_lifecycle *owner)
+{
+    wow_user_task_lifecycle_thread *task = current_task(owner);
+    wow_user_runtime_thread *binding = wow_user_runtime_current();
+    if (!task || !wow_user_runtime_enter(binding)) {
+        SetLastError(ERROR_INVALID_STATE);
+        return FALSE;
+    }
+    __try {
+        wake_input_idle(&task->thread);
+        (void)xxxSleepTask(TRUE, NULL, &task->thread);
+    } __finally { (void)wow_user_runtime_leave(binding); }
+    return TRUE;
+}
+
+BOOL WINAPI wow_user_task_lifecycle_message(wow_user_task_lifecycle *owner,
+    LPMSG message, HWND window, UINT first, UINT last, UINT flags, BOOL get)
+{
+    UINT early = (QS_POSTMESSAGE | QS_HOTKEY | QS_INPUT | QS_PAINT |
+        QS_SENDMESSAGE) << 16;
+    if (!current_task(owner)) {
+        SetLastError(ERROR_INVALID_STATE);
+        return get ? -1 : FALSE;
+    }
+    if (!message || (window && window != (HWND)-1 && !IsWindow(window))) {
+        SetLastError(message ? ERROR_INVALID_WINDOW_HANDLE : ERROR_INVALID_PARAMETER);
+        return get ? -1 : FALSE;
+    }
+    for (;;) {
+        /* Suppress native WOW yielding: this process owns the admitted
+         * original taskman state, not modern USER's historical WOW state. */
+        if (PeekMessageA(message, window, first, last,
+                (flags & PM_REMOVE) | PM_NOYIELD | early))
+            return get ? message->message != WM_QUIT : TRUE;
+        if (!(flags & PM_NOYIELD) && !wow_user_task_lifecycle_yield(owner))
+            return get ? -1 : FALSE;
+        if (PeekMessageA(message, window, first, last, flags | PM_NOYIELD))
+            return get ? message->message != WM_QUIT : TRUE;
+        if (!get) return FALSE;
+        if (!sleep_message_task(owner)) return -1;
+    }
+}
+
+BOOL WINAPI wow_user_task_lifecycle_wait_message(wow_user_task_lifecycle *owner)
+{
+    wow_user_task_lifecycle_thread *task = current_task(owner);
+    DWORD wakes;
+    if (!task) {
+        SetLastError(ERROR_INVALID_STATE);
+        return FALSE;
+    }
+    /* WaitMessage waits for new input, including already queued but not yet
+     * examined input. GetQueueStatus supplies that native change-bit contract;
+     * scheduler-only wakes must not become spurious successful message wakes. */
+    if (LOWORD(GetQueueStatus(QS_ALLINPUT))) return TRUE;
+    wakes = task->message_wakes;
+    /* ReceiveMessages can examine the queue before taskman returns. Retain
+     * the native wait's wake observation, not a second queue or event count. */
+    do {
+        if (!sleep_message_task(owner)) return FALSE;
+    } while (task->message_wakes == wakes);
+    return TRUE;
 }
 
 static BOOL retire_task(wow_user_task_lifecycle *owner, DWORD task_id,

@@ -22,3 +22,15 @@ instance.
 imports under the original `/Gz` target convention.  The byte-exact original
 ABI carrier remains `src/opennt-abi/source/public/sdk/inc/nt_vdd.h`; ordinary
 MVDM consumers continue to include that original carrier directly.
+
+## USER message and task boundary
+
+`wow_user_private_access.h` binds the selected original WOW32 ANSI
+GetMessage/PeekMessage/WaitMessage calls to `wow_user_task_lifecycle.c`.
+ADAPTER-WOW-051 retains the native USER queue and the recovered original
+`taskman.c` scheduler; it does not create a second message queue or scheduler.
+The native queue wake observation is retained only across the original task
+wait so WaitMessage does not confuse a scheduler wake with new input.
+The source-recovery rationale, tests and remaining cross-task send/activation
+verification are in the [S2 ledger](../../docs/etc/evidence/m0-t422-s2-user-client-lifecycle-ledger.md#e70-message-api-facade-candidate-not-acceptance).
+These bindings are production-wired but do not establish complete S2 acceptance.
