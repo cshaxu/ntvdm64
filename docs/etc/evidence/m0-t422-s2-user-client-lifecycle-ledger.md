@@ -2873,3 +2873,45 @@ SHA-256 E12C1CA584F88F1507FE5AB09AC6C48C2F8586923F510143584C3147B47E2AA9;
 this is a rebuild of E76 sources, not the old binary hash. No new complete
 DOS regression or sealed acceptance run is claimed here. Diff and
 documentation-governance checks pass.
+
+## E79 Native same-thread and early-reply contract witnesses
+
+The E78 candidate is not resumed. Pinned OpenNT
+windows/core/ntuser/kernel/sendmsg.c::xxxSendMessageTimeout tests
+pti != GETPTI(pwnd) before entering xxxInterSendMsgEx. Its same-thread branch
+calls the window procedure without inter-thread SMS scheduling. In contrast,
+the cross-thread path records psmsSent, calls DirectedScheduleTask and waits
+for QS_SMSREPLY. _ReplyMessage (lines 227--318) marks the reply, wakes the
+sender and performs reverse scheduling; receiver completion (lines 2218--2253)
+does not repeat that reply when SMF_REPLY is already set. queue.c::xxxSleepThread
+also distinguishes exclusive sends, pending replies and incoming sends.
+The former unconditional remove/reentry wrapper erased these distinctions.
+
+The task-order fixture adds a real native early ReplyMessage case. Using the
+already linked original taskman and test-owned sender/receiver identities,
+the callback replies with 114, waits for a test rendezvous proving the sender
+resumed under its original execution ownership, then resumes the receiver
+and finally returns 999. The sender must observe 114 while the receiver's
+completion counter is still zero. This tests native transport plus explicit
+test-owned scheduling edges, not production ReplyMessage wiring or a recovered
+sendmsg.c body. The new rendezvous event never enters the product.
+
+The first run, build/M0-T422/S2/native-early-reply-r1-20260924, passes the
+x86 task-order fixture with errors=0, native_send=3 and WOW_FIXTURE_OK.
+The same-thread extension calls native SendMessage on a locally owned window,
+asserts InSendMessage and ReplyMessage are false, and verifies original
+ptiScheduled, CSOwningThread and event counts are unchanged. This is the
+required direct-call counterexample to blanket descheduling.
+
+The combined run build/M0-T422/S2/native-send-contract-r1-20260924 passes
+MSVC x86 compilation/linking and reports WOW_ORIGINAL_TASK_ORDER errors=0,
+native_send=3, native_same_thread=1, followed by WOW_FIXTURE_OK. Fixture
+SHA-256 is 5FE97FEFFC766FD2C55606C0A601537B72C340D0B09228D5A3ED43B40B711C8E.
+Only test code and this evidence change; the E78-restored runtime package
+is unchanged. No real guest improvement or S2 closure is claimed.
+
+Remaining production obligations are unchanged: exact cross-task binding,
+nested sends, early reply versus receiver completion, timeout/death cleanup,
+implicit sends and modal callbacks. Public native delivery remains its owner;
+the fixture's explicit message identity must not be misrepresented as an
+available native SMS identity or introduced as a second product message queue.

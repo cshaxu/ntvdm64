@@ -316,6 +316,9 @@ typedef struct native_send_test {
     HWND window;
     unsigned delivered;
     BOOL handoff;
+    BOOL early_reply;
+    HANDLE sender_resumed;
+    unsigned finished;
 } native_send_test;
 
 static LRESULT CALLBACK native_send_window(HWND window, UINT message,
@@ -326,6 +329,15 @@ static LRESULT CALLBACK native_send_window(HWND window, UINT message,
         test = ((CREATESTRUCTW *)lp)->lpCreateParams;
         SetWindowLongPtrW(window, GWLP_USERDATA, (LONG_PTR)test);
     }
+    if (message == WM_APP + 62) {
+        /* sendmsg.c::xxxSendMessageTimeout takes its direct branch when
+         * GETPTI(window) equals the caller; there is no inter-thread SMS. */
+        CHECK(!InSendMessage() && !ReplyMessage(999));
+        CHECK(test->sender->ppi->pwpi->ptiScheduled == test->sender);
+        CHECK(test->sender->ppi->pwpi->CSOwningThread == test->sender);
+        CHECK(test->sender->ptdb->nEvents == 0);
+        return wp + lp;
+    }
     if (message == WM_APP + 61) {
         EnterCriticalSection(&test->wait.lock);
         CHECK(test->receiver->ppi->pwpi->ptiScheduled == test->receiver);
@@ -335,6 +347,20 @@ static LRESULT CALLBACK native_send_window(HWND window, UINT message,
         DirectedScheduleTask(test->receiver, test->sender, FALSE, &test->message);
         CHECK(!xxxSleepTask(FALSE, (HANDLE)-1, test->receiver));
         LeaveCriticalSection(&test->wait.lock);
+        if (test->early_reply) {
+            CHECK(ReplyMessage(114));
+            /* The sender must be able to return before this callback ends.
+             * The event is a test rendezvous, not a product reply provider. */
+            if (WaitForSingleObject(test->sender_resumed, 3000) != WAIT_OBJECT_0)
+                ExitProcess(95);
+            EnterCriticalSection(&test->wait.lock);
+            CHECK(!xxxSleepTask(TRUE, NULL, test->receiver));
+            CHECK(test->receiver->ppi->pwpi->CSOwningThread == test->receiver);
+            ++test->finished;
+            CHECK(!xxxSleepTask(FALSE, (HANDLE)-1, test->receiver));
+            LeaveCriticalSection(&test->wait.lock);
+            return 999; /* Early reply, not this return, belongs to sender. */
+        }
         return 114;
     }
     return DefWindowProcW(window, message, wp, lp);
@@ -369,7 +395,7 @@ static DWORD WINAPI native_send_receiver(void *parameter)
     return 0;
 }
 
-static void native_synchronous_send(BOOL handoff)
+static void native_synchronous_send(BOOL handoff, BOOL early_reply)
 {
     native_send_test test = {0};
     wow_task_order_shared shared = {0};
@@ -385,6 +411,7 @@ static void native_synchronous_send(BOOL handoff)
     DWORD_PTR result = 0;
     InitializeCriticalSection(&test.wait.lock);
     test.ready = CreateEventW(NULL, TRUE, FALSE, NULL);
+    test.sender_resumed = CreateEventW(NULL, TRUE, FALSE, NULL);
     state.hEventWowExecClient = state.pEventWowExec = test.ready;
     ta.pEventQueueServer = CreateEventW(NULL, FALSE, FALSE, NULL);
     tb.pEventQueueServer = CreateEventW(NULL, FALSE, FALSE, NULL);
@@ -393,6 +420,7 @@ static void native_synchronous_send(BOOL handoff)
     a.pti = &ta; b.pti = &tb;
     test.sender = &ta; test.receiver = &tb;
     test.handoff = handoff;
+    test.early_reply = early_reply;
     test.message.ptiSender = &ta; test.message.ptiReceiver = &tb;
     ta.psmsSent = &test.message;
     cls.lpfnWndProc = native_send_window;
@@ -401,6 +429,15 @@ static void native_synchronous_send(BOOL handoff)
     CHECK(RegisterClassW(&cls) != 0);
     InsertTask(&process, &a); InsertTask(&process, &b);
     state.ptiScheduled = state.CSOwningThread = &ta;
+    if (!handoff) {
+        HWND local = CreateWindowExW(0, cls.lpszClassName, L"", 0,
+            0, 0, 1, 1, HWND_MESSAGE, NULL, cls.hInstance, &test);
+        CHECK(local != NULL);
+        CHECK(SendMessageW(local, WM_APP + 62, 41, 73) == 114);
+        CHECK(state.ptiScheduled == &ta && state.CSOwningThread == &ta);
+        CHECK(!shared.nEvents && !a.nEvents && !b.nEvents);
+        CHECK(DestroyWindow(local));
+    }
     helper = CreateThread(NULL, 0, native_send_receiver, &test, 0, NULL);
     CHECK(helper != NULL);
     if (!helper || WaitForSingleObject(test.ready, 3000) != WAIT_OBJECT_0)
@@ -422,11 +459,18 @@ static void native_synchronous_send(BOOL handoff)
     if (handoff) CHECK(!xxxSleepTask(TRUE, NULL, &ta));
     CHECK(state.ptiScheduled == &ta && state.CSOwningThread == &ta);
     CHECK(!state.nSendLock && !state.nRecvLock && !test.message.flags);
+    if (early_reply) {
+        CHECK(test.delivered == 1 && test.finished == 0);
+        CHECK(!xxxSleepTask(FALSE, (HANDLE)-1, &ta));
+        CHECK(SetEvent(test.sender_resumed));
+    }
     LeaveCriticalSection(&test.wait.lock);
     CHECK(WaitForSingleObject(helper, 3000) == WAIT_OBJECT_0);
     CHECK(GetExitCodeThread(helper, &code) && code == 0);
     CHECK(test.delivered == (handoff ? 1u : 0u));
+    CHECK(test.finished == (early_reply ? 1u : 0u));
     CHECK(CloseHandle(helper)); CHECK(CloseHandle(test.ready));
+    CHECK(CloseHandle(test.sender_resumed));
     CHECK(CloseHandle(ta.pEventQueueServer)); CHECK(CloseHandle(tb.pEventQueueServer));
     if (ta.apEvent) CHECK(HeapFree(GetProcessHeap(), 0, ta.apEvent));
     if (tb.apEvent) CHECK(HeapFree(GetProcessHeap(), 0, tb.apEvent));
@@ -667,10 +711,11 @@ int __cdecl main(void)
     destruction();
     sleeping();
     directed();
-    native_synchronous_send(FALSE);
-    native_synchronous_send(TRUE);
+    native_synchronous_send(FALSE, FALSE);
+    native_synchronous_send(TRUE, FALSE);
+    native_synchronous_send(TRUE, TRUE);
     registration();
     initialization();
-    printf("WOW_ORIGINAL_TASK_ORDER errors=%u sequences=5 send_reply=4 same_worker_nested=4 native_send=2 locks=6 destruction=7 waits=4 directed=6 registration=6 init=8\n",errors);
+    printf("WOW_ORIGINAL_TASK_ORDER errors=%u sequences=5 send_reply=4 same_worker_nested=4 native_send=3 native_same_thread=1 locks=6 destruction=7 waits=4 directed=6 registration=6 init=8\n",errors);
     return errors!=0;
 }
