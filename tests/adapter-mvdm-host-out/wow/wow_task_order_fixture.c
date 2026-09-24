@@ -305,6 +305,134 @@ static DWORD WINAPI directed_target(void *arg)
     LeaveCriticalSection(&v->lock);
     return 0;
 }
+
+/* Native transport witness, not a WOW16 callback or production binding.
+ * Task ordering is the linked original taskman; USER32 owns delivery. */
+typedef struct native_send_test {
+    wait_test wait;
+    wow_task_order_thread *sender, *receiver;
+    wow_task_order_message message;
+    HANDLE ready;
+    HWND window;
+    unsigned delivered;
+    BOOL handoff;
+} native_send_test;
+
+static LRESULT CALLBACK native_send_window(HWND window, UINT message,
+    WPARAM wp, LPARAM lp)
+{
+    native_send_test *test = (native_send_test *)GetWindowLongPtrW(window, GWLP_USERDATA);
+    if (message == WM_NCCREATE) {
+        test = ((CREATESTRUCTW *)lp)->lpCreateParams;
+        SetWindowLongPtrW(window, GWLP_USERDATA, (LONG_PTR)test);
+    }
+    if (message == WM_APP + 61) {
+        EnterCriticalSection(&test->wait.lock);
+        CHECK(test->receiver->ppi->pwpi->ptiScheduled == test->receiver);
+        CHECK(test->receiver->ppi->pwpi->CSOwningThread == test->receiver);
+        CHECK(InSendMessage() && wp == 41 && lp == 73);
+        ++test->delivered;
+        DirectedScheduleTask(test->receiver, test->sender, FALSE, &test->message);
+        CHECK(!xxxSleepTask(FALSE, (HANDLE)-1, test->receiver));
+        LeaveCriticalSection(&test->wait.lock);
+        return 114;
+    }
+    return DefWindowProcW(window, message, wp, lp);
+}
+
+static DWORD WINAPI native_send_receiver(void *parameter)
+{
+    native_send_test *test = parameter;
+    MSG message;
+    DWORD wake;
+    test->window = CreateWindowExW(0, L"WOW_TASK_NATIVE_SEND", L"", 0,
+        0, 0, 1, 1, HWND_MESSAGE, NULL, GetModuleHandleW(NULL), test);
+    CHECK(test->window != NULL);
+    SetEvent(test->ready);
+    if (!test->window) return 1;
+    wake = WaitForSingleObject(test->receiver->pEventQueueServer, 3000);
+    if (!test->handoff) {
+        CHECK(wake == WAIT_TIMEOUT && !test->delivered);
+        CHECK(DestroyWindow(test->window));
+        return 0;
+    }
+    if (wake != WAIT_OBJECT_0) return 2;
+    EnterCriticalSection(&test->wait.lock);
+    CHECK(!xxxSleepTask(TRUE, NULL, test->receiver));
+    CHECK(test->receiver->ppi->pwpi->CSOwningThread == test->receiver);
+    LeaveCriticalSection(&test->wait.lock);
+    wake = MsgWaitForMultipleObjectsEx(0, NULL, 3000, QS_SENDMESSAGE, MWMO_INPUTAVAILABLE);
+    CHECK(wake == WAIT_OBJECT_0);
+    (void)PeekMessageW(&message, NULL, 0, 0, PM_NOREMOVE | PM_QS_SENDMESSAGE);
+    CHECK(test->delivered == 1);
+    CHECK(DestroyWindow(test->window));
+    return 0;
+}
+
+static void native_synchronous_send(BOOL handoff)
+{
+    native_send_test test = {0};
+    wow_task_order_shared shared = {0};
+    wow_task_order_state state = {0};
+    wow_task_order_process process = {&state, &shared};
+    wow_task_order_entry a = {NULL, 10}, b = {NULL, 10};
+    wow_task_order_thread ta = {&process, &a, WOW_TASK_TIF_16BIT};
+    wow_task_order_thread tb = {&process, &b, WOW_TASK_TIF_16BIT};
+    WNDCLASSW cls = {0};
+    HANDLE helper;
+    DWORD code, send_error;
+    LRESULT sent;
+    DWORD_PTR result = 0;
+    InitializeCriticalSection(&test.wait.lock);
+    test.ready = CreateEventW(NULL, TRUE, FALSE, NULL);
+    state.hEventWowExecClient = state.pEventWowExec = test.ready;
+    ta.pEventQueueServer = CreateEventW(NULL, FALSE, FALSE, NULL);
+    tb.pEventQueueServer = CreateEventW(NULL, FALSE, FALSE, NULL);
+    ta.host = tb.host = &test_ops;
+    ta.host_context = tb.host_context = &test.wait;
+    a.pti = &ta; b.pti = &tb;
+    test.sender = &ta; test.receiver = &tb;
+    test.handoff = handoff;
+    test.message.ptiSender = &ta; test.message.ptiReceiver = &tb;
+    ta.psmsSent = &test.message;
+    cls.lpfnWndProc = native_send_window;
+    cls.hInstance = GetModuleHandleW(NULL);
+    cls.lpszClassName = L"WOW_TASK_NATIVE_SEND";
+    CHECK(RegisterClassW(&cls) != 0);
+    InsertTask(&process, &a); InsertTask(&process, &b);
+    state.ptiScheduled = state.CSOwningThread = &ta;
+    helper = CreateThread(NULL, 0, native_send_receiver, &test, 0, NULL);
+    CHECK(helper != NULL);
+    if (!helper || WaitForSingleObject(test.ready, 3000) != WAIT_OBJECT_0)
+        ExitProcess(96);
+    if (handoff) {
+        EnterCriticalSection(&test.wait.lock);
+        DirectedScheduleTask(&ta, &tb, TRUE, &test.message);
+        CHECK(!xxxSleepTask(FALSE, (HANDLE)-1, &ta));
+        CHECK(state.ptiScheduled == &tb && state.CSOwningThread == NULL);
+        LeaveCriticalSection(&test.wait.lock);
+    }
+    SetLastError(ERROR_SUCCESS);
+    sent = SendMessageTimeoutW(test.window, WM_APP + 61, 41, 73,
+        SMTO_ABORTIFHUNG, handoff ? 3000 : 500, &result);
+    send_error = GetLastError();
+    CHECK(handoff ? (sent != 0 && result == 114) :
+        (sent == 0 && send_error == ERROR_TIMEOUT));
+    EnterCriticalSection(&test.wait.lock);
+    if (handoff) CHECK(!xxxSleepTask(TRUE, NULL, &ta));
+    CHECK(state.ptiScheduled == &ta && state.CSOwningThread == &ta);
+    CHECK(!state.nSendLock && !state.nRecvLock && !test.message.flags);
+    LeaveCriticalSection(&test.wait.lock);
+    CHECK(WaitForSingleObject(helper, 3000) == WAIT_OBJECT_0);
+    CHECK(GetExitCodeThread(helper, &code) && code == 0);
+    CHECK(test.delivered == (handoff ? 1u : 0u));
+    CHECK(CloseHandle(helper)); CHECK(CloseHandle(test.ready));
+    CHECK(CloseHandle(ta.pEventQueueServer)); CHECK(CloseHandle(tb.pEventQueueServer));
+    if (ta.apEvent) CHECK(HeapFree(GetProcessHeap(), 0, ta.apEvent));
+    if (tb.apEvent) CHECK(HeapFree(GetProcessHeap(), 0, tb.apEvent));
+    CHECK(UnregisterClassW(cls.lpszClassName, cls.hInstance));
+    DeleteCriticalSection(&test.wait.lock);
+}
 static void directed(void)
 {
     wait_test test={0};
@@ -539,8 +667,10 @@ int __cdecl main(void)
     destruction();
     sleeping();
     directed();
+    native_synchronous_send(FALSE);
+    native_synchronous_send(TRUE);
     registration();
     initialization();
-    printf("WOW_ORIGINAL_TASK_ORDER errors=%u sequences=5 send_reply=4 same_worker_nested=4 locks=6 destruction=7 waits=4 directed=6 registration=6 init=8\n",errors);
+    printf("WOW_ORIGINAL_TASK_ORDER errors=%u sequences=5 send_reply=4 same_worker_nested=4 native_send=2 locks=6 destruction=7 waits=4 directed=6 registration=6 init=8\n",errors);
     return errors!=0;
 }

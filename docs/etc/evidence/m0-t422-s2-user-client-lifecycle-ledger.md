@@ -2707,3 +2707,42 @@ The E73 ordering fixture proves none of those native integration cases.
 This audit narrows the next implementation to the complete synchronous USER
 boundary rather than a BringWindowToTop-only patch. The real E71 failure is
 still open; there are zero production, mirror or guest changes in this entry.
+
+## E75 real native synchronous-send positive and negative transport witness
+
+The task-order fixture now combines the linked original taskman with two
+native threads and a message-only USER32 window. There is no guest callback,
+window publication or replacement queue in this witness. The test supplies
+explicit source-shaped sender/receiver views and a stack-local message view;
+the native message and its return value remain owned by USER32.
+
+The positive case performs original DirectedScheduleTask, uses SleepTask's
+remove sentinel to leave the native blocking caller, and resumes the receiver
+through original SleepTask. During the real native window callback it asserts
+both ptiScheduled and CSOwningThread identify the receiver. Reverse original
+scheduling precedes native return, and sender resumption verifies ownership
+and untouched interprocess send/receive lock counts. The exact result is 114
+from input values 41 and 73, with one callback.
+
+The negative control omits the sender handoff. Native SendMessageTimeoutW
+returns zero with ERROR_TIMEOUT, the receiver receives no scheduler event,
+and no callback executes. Both threads then close their test-only handles and
+the message-only window/class. This is an expected negative, not a product
+timeout being counted as functional success. The positive callback deliberately
+uses the test-owned reverse handoff; production does not yet supply that edge.
+
+Run: verify-wow-task-lifecycle.ps1 with Case task-order, provider
+wow32-provider-r10, worker formal-x86-r9 and fresh run root
+`build/M0-T422/S2/native-send-r2-20260924`. MSVC x86 /MT compilation and the
+completion-marker gate pass: `WOW_ORIGINAL_TASK_ORDER errors=0`,
+`same_worker_nested=4`, `native_send=2`, followed by WOW_FIXTURE_OK.
+Fixture source SHA-256 at this run:
+F728A3935CF124D202F906A5CFCAE68FD7C18E98AECF9ECB052D9DC6191B458F.
+This is incremental native-fixture evidence, not a sealed product-guest run.
+
+The witness makes the ordinary send handoff executable rather than only a
+source inference. It does not validate early ReplyMessage, native nested
+callbacks, timeout-after-delivery, receiver death, task locks, modal loops or
+CCPU reentry. E74's complete boundary remains the implementation scope; E71
+is still unfixed in production. No product, mirror, overlay or guest changes
+and no runtime-package deployment are part of this test delivery.
