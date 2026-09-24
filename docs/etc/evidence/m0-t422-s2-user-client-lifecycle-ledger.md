@@ -2319,3 +2319,59 @@ entry 270, no padding. This includes observer trace-path variables. The
 ordinary parent environment measurement (76 entries, 4,979 characters) did
 not include those subsequently installed variables and must not be treated
 as that failed child's exact block size. No production source changed in E66.
+
+## E67 capacity witness identifies the already registered COMMAND INIT lifetime bug
+
+Temporary default-off size/MCB probes were built in the existing command
+binding with minimal hooks at initial environment negotiation and WOW copy.
+Run `t422-s2-20260924T193059763Z-6f24d93b-window-lifecycle` fails before the
+WOW copy hook is reached, excluding that later copy as the first cause.
+Run `t422-s2-20260924T193238428Z-cd66bcb2-window-lifecycle` shows initial
+negotiation growing EnvSeg 0683 from 256 to 7,072 bytes for a 7,061-byte copy.
+Both the guest-reported capacity and actual DOS MCB agree. This is not a
+host copy outside the allocated environment block.
+
+Final direct witness run
+`t422-s2-20260924T193517316Z-2e249406-window-lifecycle` records:
+
+- PSP/MCB owner 05D8; environment segment 0683; MCB type 4D.
+- Before negotiation, INIT EnvSiz at PSP:203C is 0010.
+- After allocation, before copy: capacity/MCB 7,072, copy 7,061, EnvSiz 01BA.
+- After the in-bounds copy: EnvSiz is 7767; the guest later faults at
+  05D8:200F with environment bytes 63 61 6C 5C 4D.
+
+The allocation occupies linear 06830--083CF. Both EnvSiz at 07DBC and the
+observed instruction address 07D8F are within it. Original rdata.asm::EndInit
+shrinks away INIT before allocating the environment, but subsequently reads
+EnvSiz and can branch into INIT Alloc_error. Source/deployed COMMAND SHA-256
+is 908A77AC617C2D741F0AA1B73F73973DCF29ADC91F092E5BCB02173C8C732C43,
+identical to the previously approved
+[S35 direct-copy evidence](m0-t420-s35-xms-capability-progress.md#direct-environment-copy-witness).
+This identifies the same original guest lifetime defect, not a new WOW host
+overflow. It remains the existing TODO, not a passing ordinary-startup row.
+
+Important refinement to E66: the failing inherited-environment runs also add
+the observer's trace-path variables (85 entries / 7,542 characters in the
+capacity run). They are instrumented inherited-environment tests, not proof
+that every uninstrumented normal user launch fails. The observer itself can
+push the environment into the original defect. No production environment
+truncation, forced DOS=HIGH, injected /E: or guest patch is authorized or used.
+
+All temporary production/mirror hooks and the temporary observer trace switch
+were removed after diagnosis. Replay patch and exact diagnostic EXE/MAP are
+retained under build/M0-T422/S2/environment-witness-20260924. Patch SHA-256:
+070CE5649BC797765227470F2271E768ABFAD9FEFE55E2240D8A2390EC5891F7;
+diagnostic EXE SHA-256:
+D7E084B4EE7CACDEFD2DD59FD80E1818B6E0436B1BBD42B0149054A331B8271C.
+The patch applies to de9dd435b and includes the read-only pinned-map scalar
+witness. Guest values are observed, never patched. MSVC x86 recompilation
+after removal passed; production source returns to its pre-investigation
+shape. These diagnostic runs lack a complete sealed build input snapshot and
+do not close S2. Exceptional teardown and remaining USER acceptance continue.
+
+After diagnostic removal, run
+`t422-s2-20260924T193759394Z-0dd98e55-window-lifecycle` redeployed the rebuilt
+worker and passed the reduced-environment visible-window/close/launcher check
+(worker 17652, launcher 3080). This restores the previous diagnostic runtime
+baseline, not ordinary uninstrumented acceptance. Only this evidence record
+remains changed; no production source or guest change is retained.
