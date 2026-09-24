@@ -1,9 +1,12 @@
 #include "wow_user_task_lifecycle.h"
+#include "wow_user_private_access.h"
+#include "wow_window_words_binding.h"
 #include "ntvdm-exe/session/session.h"
 
 #include <stdio.h>
 
 static unsigned errors;
+static unsigned native_direct_calls;
 #define CHECK(value) do { if (!(value)) { ++errors; \
     fprintf(stderr, "FAIL line=%d error=%lu\n", __LINE__, GetLastError()); } } while (0)
 
@@ -34,6 +37,18 @@ static LRESULT CALLBACK reentrant_receive(HWND window, UINT message,
         CHECK(lifecycle->process.pwpi->CSOwningThread == binding->thread);
         return 62;
     }
+    if (message == WM_APP + 63) {
+        wow_user_runtime_thread *binding = wow_user_runtime_current();
+        wow_task_order_state *state = binding->thread->ppi->pwpi;
+        CHECK(!InSendMessage());
+        CHECK(!binding->exclusive_held);
+        CHECK(state->CSOwningThread == binding->thread);
+        CHECK(state->ptiScheduled == binding->thread);
+        ++native_direct_calls;
+        if (wp) return wow_native_SendMessageA(window, message, 0, lp) + 1;
+        SetLastError(0x5678);
+        return lp;
+    }
     return DefWindowProcW(window, message, wp, lp);
 }
 
@@ -57,6 +72,40 @@ static void verify_receive_callout(wow_user_runtime_thread *binding)
     window = CreateWindowExW(0, cls.lpszClassName, L"", 0, 0, 0, 1, 1,
         HWND_MESSAGE, NULL, cls.hInstance, NULL);
     CHECK(window != NULL);
+    {
+        WW words = {0};
+        wow_window_words_binding *borrow;
+        wow_task_order_state *state = binding->thread->ppi->pwpi;
+        DWORD events = binding->thread->ptdb->nEvents;
+        DWORD shared_events = binding->thread->ppi->shared->nEvents;
+        wow_task_order_message *previous = binding->thread->psmsSent;
+        DWORD_PTR returned = 0;
+        /* Real production wrapper and native SendMessage, with a test-only
+         * WND owner association. No guest projection/CCPU claim is made. */
+        CHECK(wow_window_words_attach(window, &words));
+        borrow = wow_window_words_acquire(window);
+        CHECK(borrow != NULL);
+        if (borrow) {
+            wow_window_words_cleanup_value(borrow)->thread = binding->thread;
+            CHECK(wow_native_SendMessageA(window, WM_APP + 63, 1, 113) == 114);
+            CHECK(GetLastError() == 0x5678);
+            CHECK(wow_native_SendMessageTimeoutA(window, WM_APP + 63, 0, 114,
+                SMTO_ABORTIFHUNG, 1000, &returned) != 0 && returned == 114);
+            CHECK(native_direct_calls == 3);
+            CHECK(wow_user_runtime_enter(binding));
+            CHECK(wow_native_SendMessageA(window, WM_APP + 63, 0, 114) == 114);
+            CHECK(binding->exclusive_held);
+            CHECK(wow_user_runtime_leave(binding));
+            CHECK(native_direct_calls == 4);
+            CHECK(state->ptiScheduled == binding->thread &&
+                state->CSOwningThread == binding->thread);
+            CHECK(binding->thread->ptdb->nEvents == events &&
+                binding->thread->ppi->shared->nEvents == shared_events);
+            CHECK(binding->thread->psmsSent == previous && !binding->exclusive_held);
+            wow_window_words_detach(window);
+            wow_window_words_release(borrow);
+        }
+    }
     sender = CreateThread(NULL, 0, send_reentrant, window, 0, NULL);
     CHECK(sender != NULL);
     CHECK(MsgWaitForMultipleObjectsEx(0, NULL, 3000, QS_SENDMESSAGE,
@@ -228,6 +277,6 @@ int __cdecl main(void)
     CHECK(session_thread_unbind(&owner));
     CHECK(session_dispose(&owner));
     if (wowexec) CloseHandle(wowexec);
-    fprintf(stderr, "WOW_USER_TASK_LIFECYCLE errors=%u\n", errors);
+    fprintf(stderr, "WOW_USER_TASK_LIFECYCLE errors=%u native_direct=%u\n", errors, native_direct_calls);
     return errors ? 1 : 0;
 }

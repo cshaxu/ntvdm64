@@ -3155,3 +3155,28 @@ This delivery adds 29/removes 3 production adapter lines (net +26), with zero
 mirror/overlay/guest delta. Source and runtime are deliberately not identical
 in provider selection: main retains E81 research, while the deployed provider
 is the tested E80 baseline. S2 remains open for full USER/task/message closure.
+
+## E84 Owner-requested native-wrapper test checkpoint (not passed)
+
+The owner requested commit/push and a clean worktree before further S2 work.
+This checkpoint preserves the pending production-wrapper fixture only; it
+does not change product code, guest media or the deployed E80 provider.
+The added native same-thread SendMessage/SendMessageTimeout cases check
+recursive return values, LastError, unchanged task/event ownership and
+release/restoration of the USER data lock across a native callback. The WND
+owner association is test-only; this is not a guest/CCPU acceptance test.
+
+Run `build/M0-T422/S2/native-direct-lock-red-20260924` failed at link time
+with 25 unresolved externals after pulling further provider objects, including
+the fast-BOP callback calling-convention symbol, ExpLdt and USER/shell/dialog
+dependencies. The fixture never executed. Consequently neither its positive
+checks nor the suspected held-data-lock failure are proven by this run.
+The earlier duplicate-header compilation issue was removed before this run.
+
+Next S2 work must repair the fixture composition without fake product stubs,
+obtain an actual failing/passing runtime result, and then address the
+source-shaped data-lock boundary separately from WOW execution ownership.
+Nested cross-thread sends, early ReplyMessage, target teardown and final
+clean-build/ordinary-profile acceptance remain open. E83's bounded results
+remain unchanged; this checkpoint is not S2 closure or a tested replacement
+for the runtime DLL.
