@@ -569,6 +569,54 @@ BOOL WINAPI wow_user_task_lifecycle_wait_message(wow_user_task_lifecycle *owner)
     return TRUE;
 }
 
+/* ADAPTER-WOW-051: queue.c's native-wait remove/reentry pair, using the
+ * original taskman owner. A callback must regain execution before touching
+ * CCPU state; a native call may wait without retaining that execution right.
+ * Native USER, not this scope, owns SMS/reply/timeout and window identity. */
+BOOL WINAPI wow_user_call_enter(wow_user_call_scope *scope, BOOL callback)
+{
+    wow_user_runtime_thread *binding = wow_user_runtime_current();
+    wow_user_task_lifecycle *owner;
+    wow_task_order_thread *thread;
+    if (!scope) { SetLastError(ERROR_INVALID_PARAMETER); return FALSE; }
+    ZeroMemory(scope, sizeof(*scope));
+    if (!binding || !(owner = binding->runtime->lifecycle) ||
+            !(thread = binding->thread) || !thread->ptdb) return TRUE;
+    scope->binding = binding;
+    scope->held = binding->exclusive_held;
+    if (!scope->held && !wow_user_runtime_enter(binding)) return FALSE;
+    scope->suspended = owner->process.pwpi->CSOwningThread != thread;
+    if (scope->suspended) xxxDirectedYield((DWORD)-1, thread);
+    if (!callback) {
+        /* Preserve original LockCurrentTask behavior; never force-unlock it. */
+        scope->suspended = owner->process.pwpi->nTaskLock == 0;
+        if (scope->suspended) (void)xxxSleepTask(FALSE, (HANDLE)-1, thread);
+    }
+    return wow_user_runtime_leave(binding);
+}
+
+BOOL WINAPI wow_user_call_leave(wow_user_call_scope *scope, BOOL callback)
+{
+    wow_user_runtime_thread *binding;
+    wow_user_task_lifecycle *owner;
+    if (!scope) { SetLastError(ERROR_INVALID_PARAMETER); return FALSE; }
+    if (!(binding = scope->binding)) return TRUE;
+    if (wow_user_runtime_current() != binding || !binding->thread ||
+            !(owner = binding->runtime->lifecycle) ||
+            !wow_user_runtime_enter(binding)) {
+        SetLastError(ERROR_INVALID_STATE); return FALSE;
+    }
+    if (scope->suspended) {
+        if (callback)
+            (void)xxxSleepTask(FALSE, (HANDLE)-1, binding->thread);
+        else if (owner->process.pwpi->CSOwningThread != binding->thread)
+            xxxDirectedYield((DWORD)-1, binding->thread);
+    }
+    if (!scope->held && !wow_user_runtime_leave(binding)) return FALSE;
+    scope->binding = NULL;
+    return TRUE;
+}
+
 static BOOL retire_task(wow_user_task_lifecycle *owner, DWORD task_id,
     HANDLE instance, PNEMODULESEG selectors, DWORD count)
 {

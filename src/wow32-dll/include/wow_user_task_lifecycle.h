@@ -56,6 +56,15 @@ BOOL WINAPI wow_user_task_lifecycle_wait(wow_user_task_lifecycle *, HANDLE);
 BOOL WINAPI wow_user_task_lifecycle_message(wow_user_task_lifecycle *, LPMSG,
     HWND, UINT, UINT, UINT, BOOL);
 BOOL WINAPI wow_user_task_lifecycle_wait_message(wow_user_task_lifecycle *);
+/* Stack-local native call boundary. No message, task or resource is owned
+ * here; original taskman retains scheduling and native USER retains sends. */
+typedef struct wow_user_call_scope {
+    wow_user_runtime_thread *binding;
+    BOOL held;
+    BOOL suspended;
+} wow_user_call_scope;
+BOOL WINAPI wow_user_call_enter(wow_user_call_scope *, BOOL);
+BOOL WINAPI wow_user_call_leave(wow_user_call_scope *, BOOL);
 /* Original pfnWOWCleanup resource operation, including task==0 module calls.
  * The task carrier survives until the runtime's native-thread unbind edge. */
 BOOL WINAPI wow_user_task_lifecycle_exit(wow_user_task_lifecycle *, HANDLE,

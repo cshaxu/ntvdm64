@@ -2810,3 +2810,26 @@ guest exit codes and EDIT return. Deployed O:/winnt/WOW32.DLL matches the
 formal DLL hash above. Diff and documentation-governance checks pass.
 S2 remains active; this delivery is the production receive-lock repair only,
 not closure of synchronous scheduling or the complete WOW32 capability.
+
+## E77 Owner-requested unaccepted implementation checkpoint
+
+On 2026-09-24 the owner requested a commit/push and clean worktree before
+continuing S2. This checkpoint preserves the six pending provider/header/test
+files: a stack-local native-call/callback scope, sixteen native USER call
+bindings, two callback entry bindings and a focused scope fixture. The source
+delta is +179/-1 lines, entirely outside the original mirrors and guest media.
+It is saved work, not an accepted P or S2 closure.
+
+The latest attempted x86 WOW32.DLL build in
+build/M0-T422/S2/wow32-provider-r10 failed with C2011 duplicate definitions
+from wowuserp.h in wow_window_words_binding.c after adding the lifecycle
+header. No successful link, new fixture pass or runtime validation is claimed
+for this candidate. The sixteen bindings are not evidence that all synchronous
+USER families are covered. Scheduling order, nested and early replies,
+timeouts, task locking, callback failure and cleanup remain to be verified.
+
+No candidate binary is deployed. E76 remains the last tested deployed DLL;
+its passing DOS regressions cannot be inherited by this unverified source.
+Next work is to resolve the header composition, rebuild, test the actual
+scope and original scheduler contract, and rerun real guest activation and
+the established regressions. S2 remains active throughout this checkpoint.
