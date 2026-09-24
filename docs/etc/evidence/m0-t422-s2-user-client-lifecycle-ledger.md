@@ -48,6 +48,8 @@ The required source-shaped representation is finite:
 Current checkpoint E88 preserves a failing native received-message identity
 test: ordinary native sends return, but the receiver's psmsCurrent is null.
 Early reply and message lifetime remain unaccepted S2 work, not a new closure.
+E89 additionally establishes that an outer native-API call record is not a
+one-to-one original SMS identity; do not publish it as psmsCurrent by guessing.
 
 | ID | Original owner / production edge | Required S2 closure | Initial state |
 | --- | --- | --- | --- |
@@ -3422,3 +3424,35 @@ rerun is claimed for this test-only checkpoint; E87 retains those prior
 results. S2 stays active. Next work must preserve the original received SMS
 identity and lifetime across early reply, timeout and receiver/sender loss;
 ordinary return alone cannot certify those contracts.
+
+## E89 - Original SMS granularity and query-boundary audit
+
+Read-only source review after b8c77b7b7; no product or guest change. Canonical
+paths below are relative to O:/repos.external/OpenNT/windows/core/ntuser/.
+
+| Contract | Exact original owner | Current consequence |
+| --- | --- | --- |
+| Allocate per cross-thread message | kernel/sendmsg.c:1269, xxxInterSendMsgEx calls AllocSMS for the message being sent. | wow_user_native_call_begin allocates one stack record per outer native API invocation, without a message number or payload. These units are not interchangeable. |
+| One window operation can send different messages | kernel/swp.c:677 sends WM_WINDOWPOSCHANGING; :1383 sends WM_WINDOWPOSCHANGED. | A single SetWindowPos wrapper must not be assumed to identify one native receive operation. This is original-source evidence, not a new native runtime observation. |
+| Receive identity comes from the actual receive list | kernel/sendmsg.c:1876--1956 dequeues psmsReceiveList and saves/publishes psmsCurrent; :2194 restores the previous receive frame. | Existing callback execution ownership alone does not establish the received SMS identity. Matching only the WND owner cannot replace dequeue identity, especially for nested or unrelated sends. |
+| Early reply retains the received object | kernel/sendmsg.c:227--318 updates that exact SMS, wakes its sender and performs the directed task handoff; :1817--1860 restores psmsSent and defers freeing a busy receive. | Publishing the existing stack record and allowing early sender return would introduce a lifetime hazard. Stable allocation alone would still not solve receive correlation. |
+| Historical QuerySendMessage is not an identity API | kernel/sendmsg.c:2783 fills MSG hwnd/message/wParam/lParam/time/pt and returns BOOL; inc/ntuser.h:1212 declares the syscall. | Despite old comments mentioning a sender, the actual function returns neither a sender thread nor an SMS token. It cannot justify exact correlation; identical message tuples are not a unique identity. |
+| Guest thunk already expects scheduling at reply | src/mvdm/wow32/wumsg.c:1627 in this repository calls ReplyMessage and explicitly warns that other tasks may run and invalidate flat pointers. | Repair belongs below this original thunk; changing guest media or making reply a success-only stub is not acceptable. |
+
+Recovery ordering: the complete original sendmsg.c translation unit has not
+been composition-tested in this audit, and must not be declared impossible.
+Its directly inspected receive/reply paths depend on original SMS lists,
+THREADINFO wake state, window locking and client callback dispatch. Current
+typed task bindings expose only SMS flags and two peers, not that ownership
+contract. A same-shaped facade must first establish an exact native receive
+association and lifetime, or demonstrate how the original owner can replace
+the relevant mechanism without introducing a second competing queue. Neither
+route is yet proven. No external-source intrusion or newly authored message
+matching protocol is authorized by these findings, and none is implemented.
+
+Next design check is the complete send/receive/reply/timeout/death dependency
+boundary, including messages induced by non-SendMessage APIs and external
+native senders. Keep E88 red until the real contract is restored; making only
+that test pass by assigning its known sender is not a production repair.
+This audit narrows the implementation choice but does not prove modern-host
+impossibility, complete native transport behavior, or S2 acceptance.
