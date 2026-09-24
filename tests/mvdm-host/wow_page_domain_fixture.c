@@ -347,6 +347,17 @@ int main(void)
             76u) != guest_class) {
         goto guest_window_failure;
     }
+    /* Original HMValidateHandle rebases only pointers inside pDeskInfo's
+     * server interval. Unconditionally subtracting delta above hid a broken
+     * general (non-callback-cache) USER16 lookup. */
+    stage = "guest-window-desktop-membership";
+    {
+        uint32_t desktop = c_sas_dw_at(teb + 0x5cu);
+        uint32_t server_window = c_sas_dw_at(handles + 32u);
+        if (server_window < c_sas_dw_at(desktop) ||
+                server_window >= c_sas_dw_at(desktop + 4u))
+            goto guest_window_failure;
+    }
     stage = "guest-window-retirement";
     if (!mvdm_softpc_wow_page_domain_retire_handle(2u, NULL) ||
         !mvdm_softpc_wow_page_domain_retire_class(guest_class) ||

@@ -3022,3 +3022,68 @@ with SHA-256 B423B07C81A259B6788D37BF15B4A23B7285EB97566D73BA91B2AD603D2BB9CF.
 Thus the checkpoint source and deployed tested DLL deliberately differ;
 rebuilding this research checkpoint is not a validated product release.
 No original mirror or guest file changes in this checkpoint.
+
+## E82 General USER handle lookup: desktop interval excludes live windows
+
+Failure-only observation now captures native windows and child text belonging
+to the exact runtime worker before scoped cleanup, using bounded WM_GETTEXT.
+Run `t422-s2-20260924T214048837Z-08435376-window-lifecycle` records
+Application Error: WINMINE caused a Page Fault in USER.EXE at 0001:055F.
+The immutable USER profile passes all 49 source/binary checks (SHA-256
+6746088F2A87CD366E4FF5DA424B39B5BD91586D5F7570AFBF3C05BCA94E935C).
+Its original map and wowasmk.asm identify this address as IsIconic's
+`mov al, BYTE PTR [eax+171]`, following ValidateHwnd.
+
+A temporary, default-off extension to the existing fault observer recorded
+run `t422-s2-20260924T214358219Z-4c5883aa-window-lifecycle`:
+worker 32548, thread 49784, vector 0E/error 0004, CS:IP 0337:055F,
+EAX=70AA4000, CR2=70AA40AB, DS=0023/base=0, FS=003B.
+Thus the immediate failing address is an unre-based server-form WND, not a
+missing instruction. The temporary register logging was removed after this
+evidence was captured; it adds no lasting product or mirror footprint.
+
+Original wow16/user/k/daytona/wowkr.asm::HMValidateHandle compares phead with
+pDeskInfo's base/limit before subtracting ulClientDelta. Original OpenNT
+windows/core/ntuser/kernel/desktop.c publishes those limits from the actual
+desktop heap. Our page-domain adapter instead publishes only the initial
+one-page client-object range, then allocates WND and CLS records separately
+through VdmAllocateVirtualMemory. These later server-form addresses fall
+outside the published range, so original validation correctly leaves them
+unchanged. The callback-cache fast path returns a client pointer directly
+and can mask this defect. This is a project publication defect, not evidence
+of a guest or CCPU instruction bug.
+
+The existing page-domain fixture had unconditionally subtracted the delta,
+bypassing the original range condition. It now checks that condition before
+retirement. MSVC x86 run
+`build/M0-T422/S2/desktop-membership-red-20260924` builds and then fails with
+`WOW_PAGE_DOMAIN_LIFECYCLE_FAILED stage=guest-window-desktop-membership`.
+Its WND client address is 00225000; its separately allocated CLS is 00224000.
+This is a deliberate red regression, not a passing package check.
+
+The second diagnostic run also exposed an acceptance defect: its old harness
+eventually reported success despite recording the page fault. Why the dialog
+completed is not established; launcher zero is insufficient either way.
+That run's old PASS is explicitly invalidated. The harness now rejects any
+page fault in this controlled WINMINE case, independently of launcher status,
+in addition to its existing fatal-0A check. Rechecking that saved trace matches
+the new rejection condition. This conservative test gate is not a product
+exception policy or a claim that every DPMI page fault is always fatal.
+
+Repair remains S2-owned: provide a source-shaped desktop allocation interval
+that actually contains all published objects, preserve original rebasing and
+cached/noncached lookup, and cover failure, retirement, reuse and teardown.
+Do not fix this by patching USER.EXE, special-casing IsIconic, mapping the
+server-form address as an alias, or weakening the original range condition.
+The original source-first allocation review includes existing selected
+SubAlloc (explicitly supports Intel addresses), not a new general allocator.
+The E81 scheduling candidate still needs its separate nested/early-reply and
+callback ownership proof; this finding does not certify that candidate.
+
+With the E80 tested provider restored, strengthened observer run
+`t422-s2-20260924T214746431Z-22277cc9-window-lifecycle` passes both sequential
+WINMINE launch/close cycles (worker 2112; launchers 22512/49432). The worker
+was rebuilt after removing the temporary register observer. Runtime WOW32.DLL
+again has the E80 B423B07C...2BB9CF hash. This delivery changes only tests and
+evidence, preserves the known red membership test, and does not claim a new
+17-route DOS run or S2 closure.

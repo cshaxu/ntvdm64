@@ -107,6 +107,9 @@ public static class T422NativeWindow {
   [DllImport("user32.dll", SetLastError=true)] public static extern IntPtr SendMessageTimeout(
     IntPtr window, uint message, IntPtr wparam, IntPtr lparam, uint flags,
     uint timeout, out IntPtr result);
+  [DllImport("user32.dll", EntryPoint="SendMessageTimeoutW", CharSet=CharSet.Unicode, SetLastError=true)]
+  public static extern IntPtr ReadWindowText(IntPtr window, uint message,
+    IntPtr capacity, System.Text.StringBuilder text, uint flags, uint timeout, out IntPtr result);
 }
 '@
 
@@ -161,6 +164,46 @@ function Write-RuntimeState([string]$name) {
     })
     ConvertTo-Json -InputObject $state -Depth 4 |
         Set-Content -LiteralPath (Join-Path $logs $name)
+}
+
+# Failure-only observation, scoped to this runtime's workers. Never dismiss
+# an error or infer successful completion from a window merely existing.
+function Write-FailureWindows {
+    $workerIds = @(Get-RuntimeProcesses | Where-Object ProcessName -eq 'ntvdm' |
+        ForEach-Object { [uint32]$_.Id })
+    $rows = [Collections.Generic.List[object]]::new()
+    $readWindow = {
+        param([IntPtr]$window)
+        $ownerId = [uint32]0
+        $threadId = [T422NativeWindow]::GetWindowThreadProcessId($window, [ref]$ownerId)
+        if ($ownerId -notin $workerIds) { return }
+        $caption = [Text.StringBuilder]::new(4096)
+        $class = [Text.StringBuilder]::new(256)
+        [void][T422NativeWindow]::GetClassName($window, $class, $class.Capacity)
+        $result = [IntPtr]::Zero
+        $read = [T422NativeWindow]::ReadWindowText($window, 0x000D,
+            [IntPtr]$caption.Capacity, $caption, 0x0002, 250, [ref]$result)
+        $rows.Add([ordered]@{hwnd=$window.ToInt64(); pid=$ownerId; tid=$threadId;
+            class=$class.ToString(); text=$caption.ToString();
+            text_read=($read -ne [IntPtr]::Zero);
+            visible=[T422NativeWindow]::IsWindowVisible($window)})
+    }
+    $top = [T422NativeWindow+EnumChild]{ param($window, $parameter)
+        $ownerId = [uint32]0
+        [void][T422NativeWindow]::GetWindowThreadProcessId($window, [ref]$ownerId)
+        if ($ownerId -in $workerIds) {
+            & $readWindow $window
+            $child = [T422NativeWindow+EnumChild]{ param($control, $unused)
+                & $readWindow $control
+                return $true
+            }
+            [void][T422NativeWindow]::EnumChildWindows($window, $child, [IntPtr]::Zero)
+        }
+        return $true
+    }
+    [void][T422NativeWindow]::EnumChildWindows([IntPtr]::Zero, $top, [IntPtr]::Zero)
+    ConvertTo-Json -InputObject @($rows.ToArray()) -Depth 4 |
+        Set-Content -LiteralPath (Join-Path $logs 'failure-windows.json')
 }
 
 New-Item -ItemType Directory -Force -Path $logs | Out-Null
@@ -411,9 +454,10 @@ try {
     }
     $faultLog = if (Test-Path -LiteralPath $cpuTrace) { Get-Content -LiteralPath $cpuTrace -Raw } else { '' }
     $bopLog = if (Test-Path -LiteralPath $dpmiTrace) { Get-Content -LiteralPath $dpmiTrace -Raw } else { '' }
-    if ($faultLog -match 'dpmi-fault vector=0a\b' -and $bopLog -match 'dpmi-bop index=18\b') {
-        $verdict = 'FAIL: window destruction completed but guest reached fatal DPMI exception 0A'
-        throw 'Guest reached fatal DPMI exception 0A; window destruction is not normal task exit.'
+    if ($faultLog -match 'dpmi-fault vector=0e\b' -or
+            ($faultLog -match 'dpmi-fault vector=0a\b' -and $bopLog -match 'dpmi-bop index=18\b')) {
+        $verdict = 'FAIL: guest page fault or fatal DPMI exception despite launcher completion'
+        throw 'Guest fault observed; closing an error dialog is not normal task completion.'
     }
     if (!$completed -or $process.ExitCode -ne 0) {
         $verdict = 'FAIL: visible-window destruction did not produce successful launcher completion'
@@ -435,6 +479,8 @@ try {
 }
 catch {
     $verdict = 'FAIL: ' + $_.Exception.Message
+    try { Write-FailureWindows }
+    catch { Write-Warning "Failure-window observation failed: $_" }
     if ($ThreadSnapshotObserver) {
         foreach ($worker in @(Get-Process ntvdm -ErrorAction SilentlyContinue)) {
             if ($worker.Path -eq (Join-Path $runtime 'ntvdm.exe')) {
