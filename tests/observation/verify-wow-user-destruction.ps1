@@ -5,6 +5,8 @@ param(
     [ValidateRange(1, 120)] [int]$WindowTimeoutSeconds = 12,
     [ValidateRange(1, 3)] [int]$LaunchCount = 1,
     [switch]$OverlapFirst,
+    [switch]$ReactivateFirst,
+    [string]$ThreadSnapshotObserver,
     [string]$DiagnosticObserver,
     [string]$GitExecutable = 'git.exe'
 )
@@ -31,9 +33,13 @@ function Read-TraceSuffix([string]$Path, [int]$Offset = 0) {
 $build = (Resolve-Path -LiteralPath $BuildRoot).Path
 $runtime = (Resolve-Path -LiteralPath $RuntimeRoot).Path
 $provider = (Resolve-Path -LiteralPath $Wow32Provider).Path
-if ($OverlapFirst -and ($LaunchCount -ne 2 -or $DiagnosticObserver)) {
-    throw 'OverlapFirst requires exactly two direct run16 launches.'
+if ($ThreadSnapshotObserver) {
+    $ThreadSnapshotObserver = (Resolve-Path -LiteralPath $ThreadSnapshotObserver).Path
 }
+if (($OverlapFirst -or $ReactivateFirst) -and ($LaunchCount -ne 2 -or $DiagnosticObserver)) {
+    throw 'Concurrent observation requires exactly two direct run16 launches.'
+}
+if ($OverlapFirst -and $ReactivateFirst) { throw 'Select two-window or single-instance observation, not both.' }
 if ($DiagnosticObserver -and $LaunchCount -ne 1) {
     throw 'Worker-reuse observation requires direct run16 launches, not the debugger wrapper.'
 }
@@ -174,6 +180,11 @@ Write-Output "run_id=$runId logs=$logs"
     debugger=[bool]$DiagnosticObserver; timeout_seconds=$WindowTimeoutSeconds
     launch_count=$LaunchCount; require_same_worker=($LaunchCount -gt 1)
     overlapping_tasks=[bool]$OverlapFirst
+    single_instance_reactivation=[bool]$ReactivateFirst
+    thread_snapshot_observer=$ThreadSnapshotObserver
+    thread_snapshot_sha256=if ($ThreadSnapshotObserver) {
+        (Get-FileHash -LiteralPath $ThreadSnapshotObserver -Algorithm SHA256).Hash
+    } else { $null }
     build_identity='INCOMPLETE: incremental build cache, not a frozen input snapshot'
     source_identity='INCOMPLETE: dirty source input set not sealed'
 } | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath (Join-Path $logs 'manifest.json')
@@ -244,13 +255,14 @@ try {
     } | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $logs 'environment-shape.json')
     $heldWindow = [IntPtr]::Zero
     $heldLauncher = $null
-    $roundCount = if ($OverlapFirst) { 3 } else { $LaunchCount }
+    $holdFirst = $OverlapFirst -or $ReactivateFirst
+    $roundCount = if ($holdFirst) { 3 } else { $LaunchCount }
     for ($launch = 1; $launch -le $roundCount; ++$launch) {
     # Each launch must supply new trace evidence. Prior destruction callbacks
     # cannot validate a subsequent application, even if HWND values are reused.
     $windowTraceOffset = (Read-TraceSuffix $windowTrace).Length
     $callbackTraceOffset = (Read-TraceSuffix $callbackTrace).Length
-    if ($OverlapFirst -and $launch -eq 3) {
+    if ($holdFirst -and $launch -eq 3) {
         $window = $heldWindow
         $process = $heldLauncher
         if ($process.HasExited -or ![T422NativeWindow]::IsWindow($window)) {
@@ -265,6 +277,18 @@ try {
     } else {
         $process = Start-Process -FilePath (Join-Path $runtime 'run16.exe') -ArgumentList 'WINMINE.EXE' `
             -WorkingDirectory $runtime -WindowStyle Normal -PassThru
+    }
+    if ($ReactivateFirst -and $launch -eq 2) {
+        if (!$process.WaitForExit(20000) -or $process.ExitCode -ne 0) {
+            throw 'The second single-instance invocation did not complete successfully.'
+        }
+        $heldLauncher.Refresh()
+        if ($heldLauncher.HasExited -or ![T422NativeWindow]::IsWindowVisible($heldWindow)) {
+            throw 'The original application did not survive single-instance reactivation.'
+        }
+        Write-RuntimeState 'processes-after-reactivation.json'
+        Write-Output "WOW_REACTIVATION_RETURN_OK launcher=$($process.Id) held=$heldWindow"
+        continue
     }
     $deadline = [DateTime]::UtcNow.AddSeconds($WindowTimeoutSeconds)
     $window = [IntPtr]::Zero
@@ -342,7 +366,7 @@ try {
     $windowClass = [Text.StringBuilder]::new(256)
     [void][T422NativeWindow]::GetClassName($window, $windowClass, $windowClass.Capacity)
     "before hwnd=$window owner=$windowOwner visible=$([T422NativeWindow]::IsWindowVisible($window)) hung=$([T422NativeWindow]::IsHungAppWindow($window)) class=$windowClass title=$windowTitle" | Set-Content -LiteralPath $closeLog
-    if ($OverlapFirst -and $launch -eq 1) {
+    if ($holdFirst -and $launch -eq 1) {
         $heldWindow = $window
         $heldLauncher = $process
         Write-Output "WOW_TASK_HELD worker=$windowOwner launcher=$($process.Id) hwnd=$window"
@@ -402,11 +426,23 @@ try {
     }
     Write-Output "WOW_LAUNCH_OK launch=$launch worker=$windowOwner launcher=$($process.Id)"
     }
-    $verdict = "PASS: $LaunchCount visible-window launch/close cycles and launcher completions; full resource cleanup remains separately audited"
+    $verdict = if ($ReactivateFirst) {
+        'PASS: first window survives second-invocation completion and subsequently closes; full activation/cleanup remains separately audited'
+    } else {
+        "PASS: $LaunchCount visible-window launch/close cycles and launcher completions; full resource cleanup remains separately audited"
+    }
     Write-Output 'T422_S2_WOW_USER_REAL_DESTRUCTION_OK'
 }
 catch {
     $verdict = 'FAIL: ' + $_.Exception.Message
+    if ($ThreadSnapshotObserver) {
+        foreach ($worker in @(Get-Process ntvdm -ErrorAction SilentlyContinue)) {
+            if ($worker.Path -eq (Join-Path $runtime 'ntvdm.exe')) {
+                & $ThreadSnapshotObserver $worker.Id > (Join-Path $logs ("worker-$($worker.Id)-threads.txt"))
+                if ($LASTEXITCODE) { Write-Warning "Thread snapshot failed: $LASTEXITCODE" }
+            }
+        }
+    }
     throw
 }
 finally {

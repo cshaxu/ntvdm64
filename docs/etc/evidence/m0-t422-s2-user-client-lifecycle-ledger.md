@@ -2544,3 +2544,62 @@ they share the mapping, but their enclosing blocking APIs are not thereby
 proved. S2's message/synchronous-call audit remains open. This delivery adds
 97 non-mirror production/header lines and zero mirror diff or overlay lines;
 it is necessary candidate wiring, not a claimed footprint reduction.
+
+## E71 native wait-chain proof of cross-task synchronous activation blockage
+
+The production baseline remains e5c0de5b3. Only observation code changes:
+the lifecycle observer accepts an optional existing thread snapshot tool,
+captures the exact runtime-path worker on failure, and distinguishes
+ReactivateFirst from the older two-window OverlapFirst assertion. ReactivateFirst
+requires the second launcher to finish successfully while the first window
+and its launcher survive, followed by normal first-window destruction.
+It does not require a second HWND or claim full visual activation from process
+completion alone. The manifest records the optional tool path/hash.
+
+Original two-window run
+`t422-s2-20260924T200836316Z-913628cf-window-lifecycle` captures worker 8472:
+thread 58472 is in WU32BringWindowToTop and native win32u offset 13AC;
+thread 60880 is in WU32GetMessage -> wow_user_task_lifecycle_message ->
+sleep_message_task -> xxxSleepTask -> wait_for_task_or_message; thread 12424
+is in the WOWEXEC yield/sleep path. The formal map resolves those project
+frames. The installed x86 win32u export table places NtUserSetWindowPos at
+13A0 and NtUserMsgWaitForMultipleObjectsEx at 5FA0, identifying the native
+frames without guessing from the last guest trace entry.
+
+The corrected single-instance run
+`t422-s2-20260924T201110264Z-fc5fd7b0-window-lifecycle` also fails: the second
+invocation does not complete within 20 seconds. This excludes the former
+requirement for a second window as the sole cause of the observed failure.
+
+The existing x86 worker_thread_snapshot observer now also uses public WCT
+to record copied thread IDs, object type/status and cycle result. It installs
+no hooks, changes no product state or guest media, and does not log object
+names. Build command uses MSVC x86 /MT /W4 with user32, dbghelp and advapi32;
+artifact: build/M0-T422/S2/activation-snapshot-20260924/worker-thread-snapshot.exe,
+SHA-256 51247DA896C642585BF97317DF3E1049BD40450497635F70A806E6C49398EF3D.
+Its inherited stack capture briefly suspends/resumes each target thread;
+the WCT step itself is read-only. Build passes with the SDK wct.h anonymous
+union warning, not a product source warning repair.
+
+Run `t422-s2-20260924T201316071Z-816865f4-window-lifecycle` fails the same
+second-invocation completion assertion. Worker 20628's snapshot reports:
+
+- Sender thread 36604: NtUserSetWindowPos -> WU32BringWindowToTop.
+- WCT: thread 36604 (blocked) -> object type 2 (WctSendMessageType,
+  owned) -> thread 6320 in the same worker.
+- Receiver 6320: WU32GetMessage -> the message facade -> sleep_message_task
+  -> original xxxSleepTask -> native MsgWaitForMultipleObjectsEx.
+- WCT cycle=0: Windows sees the native send dependency, not a complete cycle
+  involving the project-owned logical scheduler. Do not label this a WCT-
+  reported kernel deadlock.
+
+The wait dependency is now direct evidence, not just a hypothesized final
+API. Original sendmsg.c's DirectedScheduleTask send/reply pair supplies the
+missing kind of coordination; current Get/Peek/Wait wiring alone is insufficient.
+Next implementation must cover the synchronous USER call family, receiver
+ownership, nested replies, failure and task retirement with the original
+scheduler, not make BringWindowToTop asynchronous or blindly dispatch a
+guest callback on an unscheduled thread. The source-audited finite boundary
+and focused multi-thread proof remain required before claiming repair.
+All runs complete scoped cleanup and restore SYSTEM.INI; no successful
+concurrent activation is claimed. Observer syntax and diff checks pass.
