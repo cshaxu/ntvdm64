@@ -3087,3 +3087,71 @@ was rebuilt after removing the temporary register observer. Runtime WOW32.DLL
 again has the E80 B423B07C...2BB9CF hash. This delivery changes only tests and
 evidence, preserves the known red membership test, and does not claim a new
 17-route DOS run or S2 closure.
+
+## E83 Publish the complete desktop projection interval
+
+Source-first disposition for E82: original client HMValidateHandle and
+IsIconic remain unchanged. Original kernel desktop.c's complete desktop-heap
+creation depends on NT section/desktop objects, kernel security and mapped
+USER heaps; importing that server shell is outside the admitted boundary.
+The already admitted same-shaped client-view facade is sufficient: WND/CLS
+allocations already belong to original nt_mem.c and use one synthetic server
+delta. Include their complete spans in DESKTOPINFO before exposing each
+handle/class. An interval hole does not create a mapped server-form alias,
+and no native pointer is introduced. Original handle type/uniqueness checks
+still precede rebasing. The interval remains until domain teardown rather
+than shrinking under a borrowed retired object.
+
+Existing SubAlloc was reviewed but is not added: a second allocator is
+unnecessary to repair this publication contract, and its 1-KiB granularity
+would change the present allocation footprint. No external intrusion or new
+allocation policy is needed. The only added mechanic is the private interval
+publication helper; existing nt_mem allocation/free, WW borrows and worker
+cleanup retain ownership. Both WND and CLS publication check full-span
+overflow and free the allocation if the server-form span cannot be represented.
+No mirror, guest, scheduler, callback body or mapping table changes here.
+
+The former red CCPU page-domain test now verifies range-conditioned rebasing
+of the complete WND and CLS, then original-lifetime geometry, invalid native
+window rejection, stale identity, callback cache save/restore, retained
+backing, nested destruction and exceptional borrow cleanup. Run
+`build/M0-T422/S2/desktop-membership-green-20260924` reports
+WOW_WINDOW_BORROW_CCPU errors=0 normal=1 exception=1,
+WOW_PAGE_DOMAIN_LIFECYCLE_OK and WOW_FIXTURE_OK. Its fixture hash is
+2E92E42DF5805131A797027382560E5C410902EA5C57B503AE0C620AA7FD6B1F.
+
+Real reduced-environment run
+`t422-s2-20260924T215309039Z-797e0d5b-window-lifecycle` uses the E81 provider
+with the repaired worker. Worker 33504 retains the first WINMINE window while
+the second launcher 32344 returns, then the first launcher 52664 completes
+after window destruction. The strengthened page-fault gate passes. This is
+the first observed passing E81 single-instance sequence, not acceptance of
+all implicit/nested/early-reply scheduling behavior or complete S2.
+
+Independent sequential regression with the previously tested E80 provider is
+`t422-s2-20260924T215410639Z-5efcdc88-window-lifecycle`: both launch/close
+cycles pass in worker 62340 (launchers 55744 and 36700). SYSTEM.INI is restored
+byte-identically and test processes are cleaned. The latter provider remains
+deployed; the E81 candidate is not silently promoted as fully tested.
+
+Retained runtime binaries/maps are under
+`build/M0-T422/S2/desktop-range-artifacts-20260924`. Worker SHA-256 is
+728554A0B245344F1DCBB8530AA826161E08C1E795DCD81938B4ED2E254FDD13;
+candidate provider is 18CEFE501BC6ECF461E824A56E073B4324CDF228F357212E29E5E5C926A6143E;
+deployed E80 provider remains B423B07C81A259B6788D37BF15B4A23B7285EB97566D73BA91B2AD603D2BB9CF.
+These are incremental diagnostic builds, not a sealed full-input acceptance
+set; a final clean build and ordinary-profile acceptance remain required.
+
+The extended final fixture run
+`build/M0-T422/S2/desktop-membership-final-20260924` also passes all three
+completion markers, including unchanged bounds after rejected dead-window
+publication and the retired free-list sentinel remaining outside the object
+interval. Final fixture SHA-256 is
+20765A7238D6787A1C224BD2174B426396B4234C60C0616D9CB5722C75351948.
+All 17 established DOS routes pass on the repaired worker plus E80
+provider, with summary
+`O:/winnt/logs/t422-s2-desktop-range-20260924215505-a30efbad-summary.json`.
+This delivery adds 29/removes 3 production adapter lines (net +26), with zero
+mirror/overlay/guest delta. Source and runtime are deliberately not identical
+in provider selection: main retains E81 research, while the deployed provider
+is the tested E80 baseline. S2 remains open for full USER/task/message closure.

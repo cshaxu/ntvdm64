@@ -4,6 +4,14 @@ This family supplies only source-shaped, non-machine bindings required by
 selected OpenNT MVDM host code. Original SoftPC/CCPU40/SAS code remains the
 machine owner. This component neither owns a CPU nor substitutes execution.
 
+The S2 WOW client-view publisher in `mvdm_softpc_wow_page_domain.c` keeps
+the original `HMValidateHandle` desktop-range/rebase contract. Every published
+WND/CLS server-form span is included in DESKTOPINFO before exposure; object
+memory remains owned by original `nt_mem.c` allocation and existing borrow
+retirement. No server-pointer alias or second allocator is introduced.
+Source-recovery rationale and red/green evidence are recorded in the
+[S2 ledger](../../../docs/etc/evidence/m0-t422-s2-user-client-lifecycle-ledger.md).
+
 ## Registered divergences
 
 S36 corrects ADAPTER-SOFTPC-029: current-mode address resolution retains its

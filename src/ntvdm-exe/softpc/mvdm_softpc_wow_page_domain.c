@@ -761,6 +761,23 @@ int mvdm_softpc_wow_page_domain_restore_callback(const unsigned long saved[2])
     return 1;
 }
 
+/* HMValidateHandle rebases only desktop-owned server pointers. All projected
+ * WND/CLS allocations use this worker's one client delta, but nt_mem may put
+ * them outside the initial desktop-root page. Publish the containing interval
+ * before exposing each object. No server-form alias is mapped; this changes
+ * no lease, allocator or HANDLEENTRY validation. Like a heap reservation, the
+ * interval survives individual frees until worker teardown. */
+static void page_domain_include_object(ULONG server, ULONG size)
+{
+    ULONG desktop = domain.guest_desktop_info;
+    ULONG base = c_sas_dw_at(desktop + MVDM_SOFTPC_DESKTOP_BASE);
+    ULONG limit = c_sas_dw_at(desktop + MVDM_SOFTPC_DESKTOP_LIMIT);
+    if (server < base)
+        c_sas_storedw(desktop + MVDM_SOFTPC_DESKTOP_BASE, server);
+    if (server + size > limit)
+        c_sas_storedw(desktop + MVDM_SOFTPC_DESKTOP_LIMIT, server + size);
+}
+
 int mvdm_softpc_wow_page_domain_publish_handle(unsigned short index,
     unsigned short uniqueness, unsigned char type, unsigned char flags,
     unsigned long window, unsigned long class_server)
@@ -783,7 +800,11 @@ int mvdm_softpc_wow_page_domain_publish_handle(unsigned short index,
     guest_window = 0u;
     status = VdmAllocateVirtualMemory(&guest_window, MVDM_SOFTPC_WND_BYTES,
         TRUE);
-    if (status < 0 || guest_window > 0xffffffffu - domain.client_delta) return 0;
+    if (status < 0) return 0;
+    if (guest_window > 0xffffffffu - domain.client_delta - MVDM_SOFTPC_WND_BYTES) {
+        (void)VdmFreeVirtualMemory(guest_window);
+        return 0;
+    }
     server_window = guest_window + domain.client_delta;
     entry = domain.guest_handle_table + (ULONG)index *
         MVDM_SOFTPC_HANDLE_ENTRY_BYTES;
@@ -795,6 +816,7 @@ int mvdm_softpc_wow_page_domain_publish_handle(unsigned short index,
     c_sas_storedw(guest_window + MVDM_SOFTPC_WND_HEAD_SELF, server_window);
     c_sas_storedw(guest_window + MVDM_SOFTPC_WND_CLASS, class_server);
     page_domain_window_info(guest_window, &info);
+    page_domain_include_object(server_window, MVDM_SOFTPC_WND_BYTES);
     c_sas_storedw(entry, server_window);
     c_sas_storedw(entry + 4u, 0u);
     c_sas_storedw(entry + 8u, ((ULONG)uniqueness << 16) |
@@ -844,9 +866,12 @@ unsigned long mvdm_softpc_wow_page_domain_publish_class(unsigned short atom,
         return 0u;
     allocation = HeapAlloc(GetProcessHeap(), 0u, sizeof(*allocation));
     if (allocation == NULL) return 0u;
-    if (VdmAllocateVirtualMemory(&client, MVDM_SOFTPC_CLS_BYTES, TRUE) < 0 ||
-            client > 0xffffffffu - domain.client_delta)
+    if (VdmAllocateVirtualMemory(&client, MVDM_SOFTPC_CLS_BYTES, TRUE) < 0)
         goto fail;
+    if (client > 0xffffffffu - domain.client_delta - MVDM_SOFTPC_CLS_BYTES) {
+        (void)VdmFreeVirtualMemory(client);
+        goto fail;
+    }
     server = client + domain.client_delta;
     c_sas_fills(client, 0u, MVDM_SOFTPC_CLS_BYTES);
     /* This selected original server CLS shape carries numeric source fields.
@@ -866,6 +891,7 @@ unsigned long mvdm_softpc_wow_page_domain_publish_class(unsigned short atom,
      * this provider has no source-proven 16-bit module conversion yet. */
     (void)module;
     c_sas_storedw(client + MVDM_SOFTPC_CLS_MODULE, 0u);
+    page_domain_include_object(server, MVDM_SOFTPC_CLS_BYTES);
     allocation->client = client;
     allocation->next = class_allocations;
     class_allocations = allocation;

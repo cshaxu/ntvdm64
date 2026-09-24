@@ -355,7 +355,16 @@ int main(void)
         uint32_t desktop = c_sas_dw_at(teb + 0x5cu);
         uint32_t server_window = c_sas_dw_at(handles + 32u);
         if (server_window < c_sas_dw_at(desktop) ||
-                server_window >= c_sas_dw_at(desktop + 4u))
+                server_window + 176u > c_sas_dw_at(desktop + 4u) ||
+                guest_class < c_sas_dw_at(desktop) ||
+                guest_class + 108u > c_sas_dw_at(desktop + 4u))
+            goto guest_window_failure;
+        /* Execute the original range-conditioned rebase, with no callback
+         * cache. The returned WND must be readable by the CCPU SAS path. */
+        if (server_window >= c_sas_dw_at(desktop) &&
+                server_window < c_sas_dw_at(desktop + 4u))
+            server_window -= c_sas_dw_at(teb + 0x60u);
+        if (c_sas_dw_at(server_window) != 0x23450002u)
             goto guest_window_failure;
     }
     stage = "guest-window-retirement";
@@ -428,6 +437,8 @@ guest_window_failure:
     ULONG entry = handles + index * 16u;
     ULONG retained_backing = 0u;
     ULONG outer_callback[2], inner_callback[2];
+    ULONG desktop = c_sas_dw_at(teb + 0x5cu);
+    ULONG desktop_base, desktop_limit;
     if (!wow_user_window_publish(&object_table,
             geometry_window,
             &object_storage,
@@ -466,6 +477,10 @@ guest_window_failure:
         c_sas_dw_at(teb + 0x6cu) != 0u || c_sas_dw_at(teb + 0x70u) != 0u ||
         VdmFreeVirtualMemory(retained_backing) < 0) goto done;
     stage = "dead-window-publication-rejection";
+    desktop_base = c_sas_dw_at(desktop);
+    desktop_limit = c_sas_dw_at(desktop + 4u);
+    if (c_sas_dw_at(teb + 0x5cu) != desktop ||
+        c_sas_dw_at(entry) >= desktop_base) goto done;
     if (!DestroyWindow(geometry_window)) goto done;
     if (wow_user_window_publish(&object_table, geometry_window,
             &object_storage, (struct wow_task_order_thread *)&thread_storage) ||
@@ -473,7 +488,9 @@ guest_window_failure:
         object_table.entries[index].phead != NULL ||
         object_table.windows[index] != NULL ||
         c_sas_dw_at(entry) != (ULONG)index + 1u ||
-        c_sas_dw_at(entry + 8u) != 0x00010000u) goto done;
+        c_sas_dw_at(entry + 8u) != 0x00010000u ||
+        c_sas_dw_at(desktop) != desktop_base ||
+        c_sas_dw_at(desktop + 4u) != desktop_limit) goto done;
     geometry_window = NULL;
     }
 #ifdef WOW_WINDOW_BORROW_FIXTURE
