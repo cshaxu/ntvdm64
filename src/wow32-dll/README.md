@@ -34,3 +34,15 @@ wait so WaitMessage does not confuse a scheduler wake with new input.
 The source-recovery rationale, tests and remaining cross-task send/activation
 verification are in the [S2 ledger](../../docs/etc/evidence/m0-t422-s2-user-client-lifecycle-ledger.md#e70-message-api-facade-candidate-not-acceptance).
 These bindings are production-wired but do not establish complete S2 acceptance.
+
+The native queue bridge preserves original `ssend.c` MAKECALL ordering: release
+the worker USER data lock while native PeekMessage may invoke client code,
+then restore it before updating the queue view, including on unwind. This
+does not release or replace taskman's separate WOW execution ownership.
+The red/green reentrant receive witness is recorded in the S2 ledger (E76).
+
+The native queue bridge preserves original `ssend.c` MAKECALL ordering: release
+the worker USER data lock while native PeekMessage may invoke client code,
+then restore it before updating the queue view, including on unwind. This
+does not release or replace taskman's separate WOW execution ownership.
+The red/green reentrant receive witness is recorded in the S2 ledger (E76).

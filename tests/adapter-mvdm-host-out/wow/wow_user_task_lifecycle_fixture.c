@@ -19,6 +19,59 @@ static DWORD WINAPI delayed_input(void *parameter)
         ? 0 : 1;
 }
 
+static LRESULT CALLBACK reentrant_receive(HWND window, UINT message,
+    WPARAM wp, LPARAM lp)
+{
+    if (message == WM_APP + 62) {
+        wow_user_runtime_thread *binding = wow_user_runtime_current();
+        wow_user_task_lifecycle *lifecycle = binding->runtime->lifecycle;
+        CHECK(!binding->exclusive_held);
+        CHECK(lifecycle->process.pwpi->CSOwningThread == binding->thread);
+        /* Do not enter a known-held nonrecursive lock in the red test. */
+        if (!binding->exclusive_held)
+            CHECK(wow_user_task_lifecycle_yield(lifecycle));
+        CHECK(!binding->exclusive_held);
+        CHECK(lifecycle->process.pwpi->CSOwningThread == binding->thread);
+        return 62;
+    }
+    return DefWindowProcW(window, message, wp, lp);
+}
+
+static DWORD WINAPI send_reentrant(void *window)
+{
+    DWORD_PTR result = 0;
+    return SendMessageTimeoutW(window, WM_APP + 62, 0, 0,
+        SMTO_ABORTIFHUNG, 3000, &result) && result == 62 ? 0 : 1;
+}
+
+static void verify_receive_callout(wow_user_runtime_thread *binding)
+{
+    WNDCLASSW cls = {0};
+    HWND window;
+    HANDLE sender;
+    DWORD code;
+    cls.lpfnWndProc = reentrant_receive;
+    cls.hInstance = GetModuleHandleW(NULL);
+    cls.lpszClassName = L"WOW_RECEIVE_REENTRY";
+    CHECK(RegisterClassW(&cls) != 0);
+    window = CreateWindowExW(0, cls.lpszClassName, L"", 0, 0, 0, 1, 1,
+        HWND_MESSAGE, NULL, cls.hInstance, NULL);
+    CHECK(window != NULL);
+    sender = CreateThread(NULL, 0, send_reentrant, window, 0, NULL);
+    CHECK(sender != NULL);
+    CHECK(MsgWaitForMultipleObjectsEx(0, NULL, 3000, QS_SENDMESSAGE,
+        MWMO_INPUTAVAILABLE) == WAIT_OBJECT_0);
+    CHECK(wow_user_runtime_enter(binding));
+    binding->thread->host->receive(binding->thread);
+    CHECK(binding->exclusive_held);
+    CHECK(wow_user_runtime_leave(binding));
+    CHECK(WaitForSingleObject(sender, 3000) == WAIT_OBJECT_0);
+    CHECK(GetExitCodeThread(sender, &code) && code == 0);
+    CHECK(CloseHandle(sender));
+    CHECK(DestroyWindow(window));
+    CHECK(UnregisterClassW(cls.lpszClassName, cls.hInstance));
+}
+
 int __cdecl main(void)
 {
     session owner;
@@ -63,6 +116,7 @@ int __cdecl main(void)
     binding.thread->ptdb->pwti = NULL;
     CloseHandle(idle_waiter.pIdleEvent);
     CHECK(wow_user_runtime_leave(&binding));
+    verify_receive_callout(&binding);
     /* Exercise the recovered USER task-order owner after InitTask.  This is
      * deliberately not a synthetic wake: with no pending work, the original
      * yield path must retain its own immediate scheduler semantics. */

@@ -52,7 +52,7 @@ The required source-shaped representation is finite:
 | USER-DATA-01 | USER16 direct SERVERINFO/TEB readers | Cursor, clock, metrics/style/rectangle and host-originated refresh rules without a thunk-only refresh. | Cursor and clock producers are wired. E54 corrects screen-relative client rectangles and wires rectangle/style refresh before bound window callbacks, with real CCPU page-domain tests. General host-originated changes, metrics and guest direct-read acceptance remain open. |
 | USER-CLASS-01 | `wuclass.c`, recovered client class slices | Original class registration/query/remove joins guest CLS publication and module cleanup. | Guest CLS allocation/publication/retirement is wired; original guest registration/query/remove and module-cleanup acceptance remain. |
 | USER-WINDOW-01 | `wuwind.c`, `wmdisp32.c`, `wudlg.c` | Real guest create/query/change/destroy, callback-visible complete state and destruction inside callback. | E45--E50 prove diagnostic creation and normal destroy callbacks. E53 adds owner-confirmed WINMINE gameplay; E54 repeats creation/normal exit after geometry repair. Full query/mutation, reentrant destruction and sealed ordinary-profile acceptance remain pending. |
-| USER-MESSAGE-01 | `wmsg*.c`, `wumsg.c` | Send/post/wait/cancel transport through original routes with receiver/task loss behavior. | E63 connects original WOWExec registration and passes two sequential WINMINE launch/close cycles in one worker under the diagnostic profile. General message/cancel and receiver-loss acceptance remains open. |
+| USER-MESSAGE-01 | `wmsg*.c`, `wumsg.c` | Send/post/wait/cancel transport through original routes with receiver/task loss behavior. | E70 wires Get/Peek/Wait to original taskman; E71 proves cross-task native activation still waits without its needed handoff. E76 repairs the production receive callback data-lock boundary with red/green reentry and repeated diagnostic WINMINE lifecycle evidence. General synchronous-call, cancel and receiver-loss acceptance remains open. |
 | USER-TASK-01 | `wkman.c`, `wuser.c` | Init/yield/wait/hung registration from a real task context and multiple-task rejection/recovery. | Pending |
 | USER-TASK-EXIT-01 | `W32DestroyTask`, `WU32FreeModule` | Exactly one nonzero task cleanup before retirement; zero-task module cleanup cannot retire a live task. | E47 separates resource cleanup from thread retirement; E49/E50 prove diagnostic normal guest exit. E51 covers explicit detach rejection/retry. Original thread-window patch/destroy ordering and exceptional exit remain open. |
 | USER-CALLBACK-01 | `wcall16.c`, `wcall32.c` | Real guest callback frame/return, reentry/cancellation and task-frame restoration. | E41 corrects procedure encoding; E44 restores scheduler lock entry. E56 wires nested CallbackWnd save/restore and delayed backing release, with CCPU primitive tests and diagnostic WINMINE normal exit. Guest nested destruction, cancellation and exceptional task-frame restoration remain open; the old 83B7 publication explanation is withdrawn. |
@@ -2746,3 +2746,67 @@ callbacks, timeout-after-delivery, receiver death, task locks, modal loops or
 CCPU reentry. E74's complete boundary remains the implementation scope; E71
 is still unfixed in production. No product, mirror, overlay or guest changes
 and no runtime-package deployment are part of this test delivery.
+
+## E76 USER-domain lock across native receive callbacks
+
+The synchronous-call review found a separate prerequisite in the production
+receive boundary. Original taskman.c calls its receive operation while inside
+the USER domain. Current native PeekMessage can invoke the window callback
+before returning, while the standalone runtime's nonrecursive SRW lock is
+still held. A nested USER operation cannot enter that same domain.
+
+Original owner evidence is windows/core/ntuser/kernel/ssend.c MAKECALL and
+MAKECALLCAPTURE (lines 137--155): LeaveCrit, KeUserModeCallback, EnterCrit.
+This releases the USER data lock, not the separate WOW execution ownership.
+The full kernel callback transport is unavailable; its finite lock ordering
+can be retained using the existing parent runtime enter/leave ABI around
+native queue delivery. No new scheduler, TLS, callback queue, import or guest
+change is needed. Mirror bodies remain unchanged. This is the same-shaped
+adapter rung, not permission to recreate KeUserModeCallback.
+
+The focused task-lifecycle test queues a real cross-thread native send,
+explicitly invokes the production receive operation under its normal USER
+lock, and checks that the callback has released that lock but retains the
+original CSOwningThread. It reenters the actual lifecycle yield operation,
+then verifies receive returns with the data lock restored. The red test skips
+recursive entry when the lock is known held, reporting failure instead of
+deliberately deadlocking the test process. This remains a native boundary
+fixture, not real WOW16/CCPU acceptance.
+
+The baseline run in build/M0-T422/S2/receive-callout-red-20260924 reports
+FAIL at both callback lock-state checks and WOW_USER_TASK_LIFECYCLE errors=2.
+After the production bridge change, receive-callout-green-20260924 reports
+WOW_USER_TASK_LIFECYCLE errors=0 and WOW_FIXTURE_OK. The nested callback now
+executes original xxxUserYield without losing task execution ownership; the
+outer receive returns with its USER data lock held. Native Peek is bracketed
+at each of the bridge's initialization/sync/receive sites, so queue-view
+mutation occurs after reacquisition. SEH uses a finally clause for the same
+reacquisition, but this test does not claim an injected exceptional callback.
+
+MSVC x86 /MT rebuilds and links WOW32.DLL with only the already-known DEF
+DESCRIPTION/duplicate-export warnings. DLL SHA-256:
+514136B864C6F9BCB55B47637601C3A08E9224CDCF68E0807B7A6ED3262EFAC3.
+Real diagnostic run t422-s2-20260924T204802502Z-6f783d35-window-lifecycle
+passes two sequential WINMINE launch/close cycles in worker 55524 (launchers
+33320 and 59812), with normal configuration restoration and scoped cleanup.
+This incremental reduced-environment run is not sealed ordinary-profile S2
+acceptance. Production delta is +22/-3 non-mirror lines (net +19), zero mirror/overlay
+or guest changes; it restores missing callback lock ordering, not a scheduler.
+
+Concurrent diagnostic retest
+t422-s2-20260924T204849930Z-f48ac934-window-lifecycle still fails the second
+invocation's completion criterion. Worker 16332's WCT again identifies
+sender 36552 -> SendMessage object -> receiver 47540. Native frames remain
+NtUserSetWindowPos (win32u +13AC) and MsgWaitForMultipleObjectsEx (+5FAC),
+respectively; the final guest dispatch remains WU32BringWindowToTop (+36F50).
+Thus this repair addresses callback data-lock reentry, not the missing
+synchronous sender/receiver task handoff. The harness restores SYSTEM.INI
+and performs scoped cleanup; no concurrent activation pass is claimed.
+
+All 17 established DOS routes pass on the matching deployed package in
+O:/winnt/logs/t422-s2-receive-lock-20260924204951-d36912d5-summary.json,
+including direct/interactive/nested COMMAND and MEM, native streams/EOF,
+guest exit codes and EDIT return. Deployed O:/winnt/WOW32.DLL matches the
+formal DLL hash above. Diff and documentation-governance checks pass.
+S2 remains active; this delivery is the production receive-lock repair only,
+not closure of synchronous scheduling or the complete WOW32 capability.
