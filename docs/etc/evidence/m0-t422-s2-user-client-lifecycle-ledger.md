@@ -2627,3 +2627,23 @@ S2 work. S2 remains active with the E71 synchronous-call boundary, callback
 ownership and failure/retirement verification still outstanding. This is
 preservation of reviewed research/test work, not S2 closure or a new product
 deployment; preceding production and DOS regression evidence is unchanged.
+
+## E73 task-order evidence output restored and assertions verified
+
+E72's missing output was not proof of early termination. The r2 link map
+resolves `_printf` to original-softpc-host-fixture-roots:fprt.obj, not CRT
+output. Original mvdm/softpc.new/host/src/fprt.c returns zero without writing
+under PROD. This source and link evidence explains the missing marker without
+changing the original diagnostic implementation. The task-order fixture now
+formats bounded text and writes its native stdout handle directly, failing
+with exit 97 if evidence cannot be emitted.
+
+The current x86 /MT task-order rebuild in
+`build/M0-T422/S2/same-worker-send-reply-r3-20260924`, using the existing
+wow32-provider-r10 and formal-x86-r9 graph objects, completes with:
+`WOW_ORIGINAL_TASK_ORDER errors=0 sequences=5 send_reply=4 same_worker_nested=4 locks=6 destruction=7 waits=4 directed=6 registration=6 init=8`.
+The runner verifies both this marker and exit zero; its selected C4113/C4047
+error gates pass. This proves the fixture's original task-order assertions,
+including the separately modeled nested handoffs, not native send/reply
+delivery or real guest concurrent activation. The E71 product defect remains
+open. No production or guest file changes and no new deployment occur.

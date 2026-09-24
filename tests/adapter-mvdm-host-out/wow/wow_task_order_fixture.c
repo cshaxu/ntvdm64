@@ -2,6 +2,25 @@
 #include "wow_task_init_bindings.h"
 #include "wow_task_profile_bindings.h"
 #include <stdio.h>
+#include <stdarg.h>
+
+/* The linked SoftPC host owns a silent production printf. Emit fixture
+ * evidence through the native output handle, not that product diagnostic. */
+static void fixture_print(const char *format, ...)
+{
+    char text[512];
+    int length;
+    DWORD written;
+    va_list args;
+    va_start(args, format);
+    length = vsnprintf(text, sizeof(text), format, args);
+    va_end(args);
+    if (length < 0 || length >= sizeof(text) ||
+        !WriteFile(GetStdHandle(STD_OUTPUT_HANDLE), text, (DWORD)length,
+            &written, NULL) || written != (DWORD)length)
+        ExitProcess(97);
+}
+#define printf fixture_print
 
 static unsigned errors;
 #define CHECK(x) do { if (!(x)) { ++errors; printf("FAIL line=%d\n",__LINE__); } } while (0)
