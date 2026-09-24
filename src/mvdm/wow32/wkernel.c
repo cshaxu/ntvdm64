@@ -17,6 +17,21 @@
 
 MODNAME(wkernel.c);
 
+/* DIVERGENCE(MVDM-HOST-DIV-297): the original USER16 call uses the bare
+ * SYSTEM.INI name.  Modern profile APIs map that name to host configuration
+ * even when passed an absolute package path.  The worker adapter gives this
+ * one original call a dynamically-created, session-owned copy of the selected
+ * immutable profile; it is deleted at worker teardown.  Arbitrary caller
+ * paths retain the original API. */
+static PSZ W32PrivateProfileFileName(PSZ filename, CHAR path[MAX_PATH])
+{
+    if (filename != NULL && !_stricmp(filename, "system.ini") &&
+        mvdm_softpc_profile_shadow_system_ini(path, MAX_PATH)) {
+        return path;
+    }
+    return filename;
+}
+
 ULONG FASTCALL WK32RegOpenKey32(PVDMFRAME pFrame)
 {
     HKEY  hKey, hKeyTmp;
@@ -126,9 +141,11 @@ ULONG FASTCALL WK32WritePrivateProfileString(PVDMFRAME pFrame)
     PSZ pszKey;
     PSZ pszValue;
     PSZ pszFilename;
+    PSZ pszProfileFilename;
     register PWRITEPRIVATEPROFILESTRING16 parg16;
     BOOL fIsWinIni;
     CHAR szLowercase[MAX_PATH];
+    CHAR szPackageProfile[MAX_PATH];
 
     GETARGPTR(pFrame, sizeof(WRITEPRIVATEPROFILESTRING16), parg16);
     GETPSZPTR(parg16->f1, pszSection);
@@ -136,9 +153,12 @@ ULONG FASTCALL WK32WritePrivateProfileString(PVDMFRAME pFrame)
     GETPSZPTR(parg16->f3, pszValue);
     GETPSZPTR(parg16->f4, pszFilename);
 
+    pszProfileFilename = W32PrivateProfileFileName(pszFilename,
+        szPackageProfile);
+
     UpdateDosCurrentDirectory(DIR_DOS_TO_NT);
 
-    strcpy(szLowercase, pszFilename);
+    strcpy(szLowercase, pszProfileFilename);
     _strlwr(szLowercase);
 
     fIsWinIni = IS_WIN_INI(szLowercase);
@@ -159,7 +179,7 @@ ULONG FASTCALL WK32WritePrivateProfileString(PVDMFRAME pFrame)
              pszSection,
              pszKey,
              pszValue,
-             pszFilename
+             pszProfileFilename
              ));
 
     if( ul != 0 &&
@@ -390,10 +410,12 @@ ULONG FASTCALL WK32GetPrivateProfileString(PVDMFRAME pFrame)
     PSZ pszDefault;
     PSZ pszReturnBuffer;
     PSZ pszFilename;
+    PSZ pszProfileFilename;
     DWORD cFlagsEx;
     UINT cchMax;
     register PGETPRIVATEPROFILESTRING16 parg16;
     CHAR szLowercase[MAX_PATH];
+    CHAR szPackageProfile[MAX_PATH];
 
     GETARGPTR(pFrame, sizeof(GETPRIVATEPROFILESTRING16), parg16);
     GETPSZPTR(parg16->f1, pszSection);
@@ -401,6 +423,9 @@ ULONG FASTCALL WK32GetPrivateProfileString(PVDMFRAME pFrame)
     GETPSZPTR(parg16->f3, pszDefault);
     ALLOCVDMPTR(parg16->f4, parg16->f5, pszReturnBuffer);
     GETPSZPTR(parg16->f6, pszFilename);
+
+    pszProfileFilename = W32PrivateProfileFileName(pszFilename,
+        szPackageProfile);
 
     // PC3270 (Personal communications): while installing this app it calls
     // GetPrivateProfileString (sectionname, NULL, defaultbuffer, returnbuffer,
@@ -428,7 +453,7 @@ ULONG FASTCALL WK32GetPrivateProfileString(PVDMFRAME pFrame)
 
     UpdateDosCurrentDirectory(DIR_DOS_TO_NT);
 
-    strcpy(szLowercase, pszFilename);
+    strcpy(szLowercase, pszProfileFilename);
     _strlwr(szLowercase);
 
     if (IS_WIN_INI( szLowercase )) {
@@ -458,7 +483,7 @@ ULONG FASTCALL WK32GetPrivateProfileString(PVDMFRAME pFrame)
         pszDefault,
         pszReturnBuffer,
         cchMax,
-        pszFilename));
+        pszProfileFilename));
 
     
     // start comaptibility hacks
@@ -520,7 +545,7 @@ ULONG FASTCALL WK32GetPrivateProfileString(PVDMFRAME pFrame)
                     // being used.
                     //
 
-                    if (0 == GetPrivateProfileString(pszSection, pszKey, "", szBuf, sizeof szBuf, pszFilename)) {
+                    if (0 == GetPrivateProfileString(pszSection, pszKey, "", szBuf, sizeof szBuf, pszProfileFilename)) {
 
                         //
                         // Zap first trailing blank in pszDefault with null.
@@ -714,6 +739,8 @@ ULONG FASTCALL WK32GetPrivateProfileInt(PVDMFRAME pFrame)
     PSZ psz1;
     PSZ psz2;
     PSZ psz4;
+    PSZ pszProfileFilename;
+    CHAR szPackageProfile[MAX_PATH];
     register PGETPRIVATEPROFILEINT16 parg16;
 
     GETARGPTR(pFrame, sizeof(GETPRIVATEPROFILEINT16), parg16);
@@ -721,13 +748,16 @@ ULONG FASTCALL WK32GetPrivateProfileInt(PVDMFRAME pFrame)
     GETPSZPTR(parg16->f2, psz2);
     GETPSZPTR(parg16->f4, psz4);
 
+    pszProfileFilename = W32PrivateProfileFileName(psz4,
+        szPackageProfile);
+
     UpdateDosCurrentDirectory(DIR_DOS_TO_NT);
 
     ul = GETWORD16(GetPrivateProfileInt(
     psz1,
     psz2,
     INT32(parg16->f3),
-    psz4
+    pszProfileFilename
     ));
 
     FREEPSZPTR(psz1);

@@ -3,7 +3,7 @@ import path from 'node:path';
 import {spawn,spawnSync} from 'node:child_process';
 const root=process.cwd(),product=path.resolve(process.env.OPENNT_BROKER_PRODUCT_BUILD || 'build/M0-T412/S3/product');
 const build=path.resolve(process.env.OPENNT_BROKER_TEST_BUILD || 'build/M0-T412/S3/basesrv-product');
-const logs=path.resolve(process.env.OPENNT_BROKER_TEST_LOGS || 'O:/winnt/logs/basesrv-product');
+const logs=path.resolve(process.env.OPENNT_BROKER_TEST_LOGS || path.join(build,'logs'));
 fs.mkdirSync(logs,{recursive:true});
 fs.mkdirSync(build,{recursive:true});
 const env=path.join(build,'msvc.cmd');

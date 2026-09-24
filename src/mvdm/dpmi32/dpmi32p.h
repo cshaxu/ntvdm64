@@ -132,6 +132,7 @@ DpmiCpu40GetDosxIdtDescriptor(
     PULONG Base,
     PUSHORT Limit
     );
+
 #endif
 #endif
 extern ULONG DosxIret;
@@ -149,6 +150,13 @@ DpmiInitApp(
 VOID
 DpmiSetDescriptorEntry(
     VOID
+    );
+
+NTSTATUS
+DpmiSetWowLdtEntry(
+    ULONG Selector,
+    ULONG EntryLow,
+    ULONG EntryHigh
     );
 
 VOID

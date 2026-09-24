@@ -12,6 +12,7 @@
 #include <softpc.h>
 #include <mvdm.h>
 #include <ctype.h>
+#include "mvdm_softpc_firmware.h"
 
 /* DIVERGENCE(MVDM-HOST-DIV-120): the two original pipe workers are cdecl
  * void(LPVOID) forms.  Bind their original calls to the same session-aware
@@ -146,7 +147,7 @@ SECURITY_ATTRIBUTES sa;
     if (!GetTempFileName(pszTempPath, "scs", 0, pszTempFileName))
        {
           // lets get something else, which should succeed
-         TempPathSize = GetWindowsDirectory(pszTempPath, MAX_PATH);
+         TempPathSize = GetNtvdmWindowsDirectoryA(pszTempPath, MAX_PATH);
          if (!TempPathSize || TempPathSize >= MAX_PATH)
              strcpy(pszTempPath, "\\");
 

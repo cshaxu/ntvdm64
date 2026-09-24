@@ -2931,6 +2931,14 @@ ULONG FASTCALL WU32SetScrollRange(PVDMFRAME pFrame)
 
 #define SSC_BUF_SIZE	    256
 
+/* DIVERGENCE(MVDM-HOST-DIV-275): NT4 USER's sysmet.c::SetSysColor publishes
+ * every accepted colour into gpsi->argbSystem. The standalone worker has no
+ * writable NT USER shared section, so retain the original WU32SetSysColors
+ * call and, only after it succeeds, mirror the same accepted slots through
+ * the bounded worker page-domain carrier. */
+extern int __cdecl mvdm_softpc_wow_page_domain_publish_system_color(
+    unsigned long, unsigned long);
+
 ULONG FASTCALL WU32SetSysColors(PVDMFRAME pFrame)
 {
     PINT p2;
@@ -2947,7 +2955,14 @@ ULONG FASTCALL WU32SetSysColors(PVDMFRAME pFrame)
         INT32(parg16->f1),
         p2,
         p3
-        ) == FALSE) {
+        ) != FALSE) {
+        INT index;
+
+        for (index = 0; index < INT32(parg16->f1); ++index) {
+            (void)mvdm_softpc_wow_page_domain_publish_system_color(
+                (unsigned long)p2[index], (unsigned long)p3[index]);
+        }
+    } else {
 #ifndef i386
     PDWORD p4;
     ULONG   BufRGB [SSC_BUF_SIZE];

@@ -25,6 +25,9 @@ Revision History:
 #include "softpc.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_termination.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
+/* DIVERGENCE(MVDM-HOST-DIV-310): publish the original RM_BIT mode gate
+ * through guest SAS after each CCPU PE transition, not host address 0714h. */
+#include "ntvdm-exe/softpc/include/mvdm_softpc_fast_bop.h"
 
 /* CCPU's internal segment-register indices and pseudo-descriptor routine
  * are deliberately kept private to its generated headers.  CPU40's DPMI
@@ -96,7 +99,11 @@ Routine Description:
         return;
     c_setIDT_BASE_LIMIT(IdtBase, IdtLimit);
 
+    /* DIV-222: vdmmisc.asm::VdmSwapContexts clears NT with
+     * EFLAGS_USER_SANITIZE on PM entry. CCPU retains its own IF/IOPL policy. */
+    setEFLAGS(getEFLAGS() & ~EFLAGS_NT_MASK);
     setMSW(getMSW() | MSW_PE);
+    mvdm_softpc_fast_bop_sync_mode();
     setCPL(3);
     setCS(CsSelector);
     setEIP(Eip);
@@ -156,6 +163,7 @@ Routine Description:
 
     mvdm_softpc_wow_page_domain_leave_protected();
     setMSW(getMSW() & ~MSW_PE);
+    mvdm_softpc_fast_bop_sync_mode();
     setDS(DsSelector);
     load_pseudo_descr(CPU40_DS_REG);
     setSP(Sp);
@@ -216,6 +224,7 @@ Return Value:
      * CCPU real-mode cache path. */
     mvdm_softpc_wow_page_domain_leave_protected();
     setMSW(getMSW() & ~MSW_PE);
+    mvdm_softpc_fast_bop_sync_mode();
     setCS(DosxRmCodeSegment);
 
 #ifndef i386
@@ -274,6 +283,7 @@ Return Value:
 #endif
 
     setMSW(getMSW() | MSW_PE);
+    mvdm_softpc_fast_bop_sync_mode();
 
 #ifndef i386
     //BUGBUG This is a workaround to make sure the emulator goes back

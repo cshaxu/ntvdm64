@@ -131,6 +131,7 @@ typedef VOID (WINAPI *wow_task_end_callback)(VOID);
 BOOL WINAPI xxxRegisterUserHungAppHandlers(wow_task_end_callback, HANDLE, wow_task_order_process *);
 BOOL WINAPI wow_task_reference_event(HANDLE, HANDLE *);
 #define WOW_TASK_TIF_16BIT 0x00000002u
+#define WOW_TASK_TIF_FIRSTIDLE 0x00002000u
 #define WOW_TASK_SMF_RECEIVE 0x1000u
 #define WOW_TASK_SMF_SEND 0x2000u
 

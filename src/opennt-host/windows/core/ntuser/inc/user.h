@@ -124,4 +124,43 @@ typedef struct tagDESKTOPINFO {
     struct tagWND         **papwndShellHook;      //
 
 } DESKTOPINFO, *PDESKTOPINFO;
+
+/* Original server-form CLS body selected by WOW client consumers.  The
+ * surrounding build supplies its historical forward declarations; this is
+ * deliberately opt-in so the type-only cleanup imports keep their existing
+ * narrow declaration surface. */
+typedef struct tagCOMMON_WNDCLASS
+{
+    UINT        style;
+    WNDPROC_PWND lpfnWndProc;
+    int         cbclsExtra;
+    int         cbwndExtra;
+    HANDLE      hModule;
+    struct tagCURSOR *spicn;
+    struct tagCURSOR *spcur;
+    HBRUSH      hbrBackground;
+    LPWSTR      lpszMenuName;
+    LPSTR       lpszAnsiClassName;
+    struct tagCURSOR *spicnSm;
+} COMMON_WNDCLASS;
+
+typedef struct tagCLS {
+    struct tagCLS *pclsNext;
+    ATOM        atomClassName;
+    WORD        fnid;
+    PVOID       hheapDesktop;
+    struct tagDESKTOP *rpdeskParent;
+    struct tagDCE *pdce;
+    int         cWndReferenceCount;
+    DWORD       flags;
+    LPSTR       lpszClientAnsiMenuName;
+    LPWSTR      lpszClientUnicodeMenuName;
+    DWORD       adwWOW[2];
+    DWORD       hTaskWow;
+    struct tagCALLPROCDATA *spcpdFirst;
+    struct tagCLS *pclsBase;
+    struct tagCLS *pclsClone;
+    PROC        lpfnWorker;
+    COMMON_WNDCLASS;
+} CLS, *LPCLS, **PPCLS;
 #endif

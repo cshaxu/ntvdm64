@@ -3,7 +3,7 @@ param([Parameter(Mandatory)][string]$FormalRoot,
       [Parameter(Mandatory)][string]$BuildRoot,
       [ValidateSet('environment','dpmi','exception','pm-allocation-failure','dpmi-pointer','dpmi-ioctl','dpmi-xmem-failure')][string]$Boundary = 'environment',
       [switch]$DpmiLifecycleOnly,
-      [string]$EnvironmentTraceLog = 'O:\winnt\logs\s35-envtrace-r1.events.txt')
+      [Parameter(Mandatory)][string]$EnvironmentTraceLog)
 $ErrorActionPreference = 'Stop'
 if ($DpmiLifecycleOnly -and $Boundary -ne 'dpmi') { throw 'Lifecycle filter requires DPMI boundary' }
 $repo = (Resolve-Path "$PSScriptRoot\..\..").Path
@@ -16,8 +16,9 @@ $graph = Get-Content (Join-Path $formal 'build.ninja')
 $flags = ($graph | Where-Object { $_.StartsWith('cflags = ') }).Substring(9).Replace('$:', ':')
 if ($Boundary -eq 'environment') {
     $traceLog = [IO.Path]::GetFullPath($EnvironmentTraceLog).Replace('\', '/')
-    if ($traceLog -notmatch '^O:/winnt/logs/[A-Za-z0-9_.-]+$') {
-        throw 'Environment trace must name a file directly below O:\winnt\logs'
+    if ([IO.Path]::GetDirectoryName($traceLog) -eq '' -or
+        [IO.Path]::GetFileName($traceLog) -notmatch '^[A-Za-z0-9_.-]+$') {
+        throw 'Environment trace must name a simple file below an explicit log directory'
     }
     $flags += ' /DS35_ENVIRONMENT_TRACE_LOG=\"' + $traceLog + '\"'
 }
@@ -52,8 +53,9 @@ if ($Boundary -in @('dpmi','pm-allocation-failure','dpmi-pointer','dpmi-ioctl','
     }
     $flags = $graph[$ownerRow + 1].Substring('  dpmi_cflags = '.Length).Replace('$:', ':')
     $traceLog = [IO.Path]::GetFullPath($EnvironmentTraceLog).Replace('\', '/')
-    if ($traceLog -notmatch '^O:/winnt/logs/[A-Za-z0-9_.-]+$') {
-        throw 'DPMI trace must name a file directly below O:\winnt\logs'
+    if ([IO.Path]::GetDirectoryName($traceLog) -eq '' -or
+        [IO.Path]::GetFileName($traceLog) -notmatch '^[A-Za-z0-9_.-]+$') {
+        throw 'DPMI trace must name a simple file below an explicit log directory'
     }
     $flags += ' /DDPMI_TRACE_LOG=\"' + $traceLog + '\"'
     if ($DpmiLifecycleOnly) { $flags += ' /DDPMI_TRACE_LIFECYCLE_ONLY' }
@@ -64,8 +66,9 @@ if ($Boundary -eq 'exception') {
     $libraryName = 'original-softpc-host-roots.lib'
     $traceSource = 'dpmi_exception_trace.c'
     $traceLog = [IO.Path]::GetFullPath($EnvironmentTraceLog).Replace('\', '/')
-    if ($traceLog -notmatch '^O:/winnt/logs/[A-Za-z0-9_.-]+$') {
-        throw 'Exception trace must name a file directly below O:\winnt\logs'
+    if ([IO.Path]::GetDirectoryName($traceLog) -eq '' -or
+        [IO.Path]::GetFileName($traceLog) -notmatch '^[A-Za-z0-9_.-]+$') {
+        throw 'Exception trace must name a simple file below an explicit log directory'
     }
     $flags += ' /DDPMI_TRACE_LOG=\"' + $traceLog + '\"'
 }

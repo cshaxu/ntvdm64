@@ -181,20 +181,28 @@ void MS_bop_1(void) {
      * address after this BOP returns.  Standalone CPU40 has no NT page-table
      * owner, so bind the finite worker view before loading WOW32. */
     if (!mvdm_softpc_wow_page_domain_enter()) {
+        mvdm_softpc_report_wow_stage("page-domain-enter-failed",
+            (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());
         TerminateVDM();
         return;
     }
+    mvdm_softpc_report_wow_stage("page-domain-entered",
+        (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());
     mvdm_softpc_report_wow_bop_state((unsigned long)getCR0(),
         (unsigned long)getCR3(), getCS(), getIP(),
         (unsigned long)c_getDS_BASE(), (unsigned long)c_getDS_LIMIT());
 
     if (!WowModeInitialized) {
     //Load the WOW DLL
+    mvdm_softpc_report_wow_stage("load-begin",
+        (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());
     if ((hWOWDll = SafeLoadLibrary("WOW32")) == NULL)
     {
 #ifndef PROD
         HostDebugBreak();
 #endif
+        mvdm_softpc_report_wow_stage("load-failed",
+            (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());
         TerminateVDM();
         return;
     }
@@ -205,6 +213,8 @@ void MS_bop_1(void) {
 #ifndef PROD
         HostDebugBreak();
 #endif
+        mvdm_softpc_report_wow_stage("init-export-missing",
+            (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());
         FreeLibrary(hWOWDll);
         TerminateVDM();
         return;
@@ -218,6 +228,8 @@ void MS_bop_1(void) {
 #ifndef PROD
         HostDebugBreak();
 #endif
+        mvdm_softpc_report_wow_stage("dispatch-export-missing",
+            (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());
         FreeLibrary(hWOWDll);
         TerminateVDM();
         return;
@@ -259,28 +271,40 @@ void MS_bop_1(void) {
 
 
     // Call the init routine
+    mvdm_softpc_report_wow_stage("init-begin",
+        (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());
     if ((*WOWInitEntry)() == FALSE)
     {
 #ifndef PROD
         HostDebugBreak();
 #endif
+        mvdm_softpc_report_wow_stage("init-failed",
+            (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());
         TerminateVDM();
         return;
     }
+    mvdm_softpc_report_wow_stage("init-succeeded",
+        (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());
 
     /* `W32Init` itself is native host code. Its successful return is the
      * first point at which immutable USER16 can safely consume the original
      * flat selector ABI. Switch only the worker descriptor view, leaving the
      * DOSX source GDT unchanged for real-mode withdrawal. */
     if (!mvdm_softpc_wow_page_domain_activate_wow_context()) {
+        mvdm_softpc_report_wow_stage("activate-failed",
+            (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());
         TerminateVDM();
         return;
     }
+    mvdm_softpc_report_wow_stage("activated",
+        (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());
 
     WowModeInitialized = TRUE;
     }
 
 #if !defined(CPU_40_STYLE) || defined(CCPU)
+    mvdm_softpc_report_wow_stage("dispatch-begin",
+        (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());
     (*WOWDispatchEntry)();
 #else
     // Dispatch to WOW dispatcher

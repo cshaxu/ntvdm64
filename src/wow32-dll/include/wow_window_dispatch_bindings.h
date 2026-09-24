@@ -9,6 +9,14 @@ typedef struct wow_window_dispatch_target {
     wow_window_callback callback;
 } wow_window_dispatch_target;
 
+/* OpenNT represents a 16-bit WNDPROC in a 32-bit USER word by setting bit
+ * 31.  A selector whose own high bit is set is made unambiguous by clearing
+ * its LDT bit in the encoded value; the WOW dispatcher restores it before
+ * entering the guest.  These are protocol values from wuclass.c, not native
+ * procedure addresses. */
+#define WOW_WINDOW_PROC_TAG 0x80000000u
+#define WOW_WINDOW_SELECTOR_VIRTUAL_BIT 0x00040000u
+
 /* Live original WND fields consumed by cleanup. Stored with the window's WW
  * and callback binding, never as an independent cleanup snapshot. The USER
  * owner supplies serialized thread membership; tree links are derived only
@@ -37,7 +45,6 @@ LONG WINAPI DispatchClientMessage(wow_window_dispatch_view *, UINT, WPARAM, LPAR
 typedef wow_window_dispatch_view *PWND;
 #define HW(pwnd) ((pwnd)->window)
 #define pfnWowWndProcEx (pwnd->callback)
-#define WNDPROC_WOW 0x80000000
 /* Original retail UserAssert does not evaluate its expression. The NT4
  * desktop delta is not meaningful in this finite synchronous native view. */
 #define UserAssert(condition) ((void)0)

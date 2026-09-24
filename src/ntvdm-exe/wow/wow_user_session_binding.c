@@ -12,11 +12,12 @@ static int bind_current(void *context)
     return wow_user_runtime_bind(&current_binding, binding->runtime, NULL, NULL);
 }
 
-static void unbind_current(void *context)
+static int unbind_current(void *context)
 {
     wow_user_session_binding *binding = context;
     if (binding && wow_user_runtime_current() == &current_binding)
-        (void)wow_user_runtime_unbind(&current_binding);
+        return wow_user_runtime_unbind(&current_binding);
+    return 1;
 }
 
 BOOL WINAPI wow_user_session_attach(wow_user_session_binding *binding,
@@ -51,7 +52,11 @@ BOOL WINAPI wow_user_session_detach(wow_user_session_binding *binding)
         SetLastError(ERROR_INVALID_STATE);
         return FALSE;
     }
-    unbind_current(binding);
+    /* Explicit detach is fallible: retain the registration when USER still
+     * owns live task/window state, so the caller can complete cleanup/retry. */
+    if (wow_user_runtime_current() == &current_binding &&
+            !wow_user_runtime_unbind(&current_binding))
+        return FALSE;
     if (!session_unregister_thread_hook(binding->session, bind_current,
             unbind_current, binding)) {
         SetLastError(ERROR_INVALID_STATE);

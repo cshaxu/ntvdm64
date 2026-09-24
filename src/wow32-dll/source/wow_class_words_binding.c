@@ -1,5 +1,8 @@
 #include "wow_class_words_binding.h"
 #include "wow_class_remove_bindings.h"
+#include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
+
+#include <stdio.h>
 
 #ifndef OPENNT_HOST_NTRTL_SUBSET_H
 NTSYSAPI BOOLEAN NTAPI RtlEqualUnicodeString(const UNICODE_STRING *,
@@ -195,6 +198,29 @@ ATOM WINAPI wow_class_words_find_atom(wow_class_lookup_context *context,
     for (i = 0; i < 3; ++i) {
         for (entry = lists[i]; entry; entry = entry->next) {
             wow_class_words_binding *binding = (wow_class_words_binding *)entry;
+            char path[MAX_PATH];
+            if (GetEnvironmentVariableA("MVDM_WOW_CLASS_TRACE_PATH", path,
+                    sizeof(path))) {
+                char line[192], query[64] = "", stored[64] = "";
+                HANDLE file;
+                DWORD bytes, written, saved = GetLastError();
+                (void)WideCharToMultiByte(CP_ACP, 0, name->Buffer,
+                    name->Length / sizeof(WCHAR), query, sizeof(query) - 1, NULL, NULL);
+                (void)WideCharToMultiByte(CP_ACP, 0, binding->name.Buffer,
+                    binding->name.Length / sizeof(WCHAR), stored, sizeof(stored) - 1, NULL, NULL);
+                file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ | FILE_SHARE_WRITE,
+                    NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+                if (file != INVALID_HANDLE_VALUE) {
+                    bytes = (DWORD)sprintf_s(line, sizeof(line),
+                        "%lu ClassCompare query=%s/%u stored=%s/%u atom=%04X equal=%u\r\n",
+                        (unsigned long)GetCurrentProcessId(), query, (unsigned)name->Length,
+                        stored, (unsigned)binding->name.Length, (unsigned)entry->atomClassName,
+                        (unsigned)RtlEqualUnicodeString(&binding->name, name, TRUE));
+                    if (bytes) (void)WriteFile(file, line, bytes, &written, NULL);
+                    CloseHandle(file);
+                }
+                SetLastError(saved);
+            }
             if (RtlEqualUnicodeString(&binding->name, name, TRUE))
                 return entry->atomClassName;
         }
@@ -213,6 +239,12 @@ BOOL WINAPI wow_class_words_destroy_native(wow_class_lookup_entry **link,
     }
     if (!UnregisterClassA(MAKEINTATOM(binding->entry.atomClassName), module)) return FALSE;
     error = GetLastError();
+    if (binding->entry.guest_server &&
+            !mvdm_softpc_wow_page_domain_retire_class(binding->entry.guest_server)) {
+        SetLastError(ERROR_INVALID_STATE);
+        return FALSE;
+    }
+    binding->entry.guest_server = 0u;
     binding->entry.lpszClientAnsiMenuName = NULL;
     binding->entry.lpszClientUnicodeMenuName = NULL;
     detach(link);

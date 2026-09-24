@@ -37,6 +37,16 @@
 #include <ntcsrdll.h>
 #define SHAREWOW_MAIN
 #include <sharewow.h>
+#include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
+#include "ntvdm-exe/softpc/include/mvdm_softpc_fast_bop.h"
+/* This selected original read path retains its query/fallback body while
+ * using the worker-local NTVDM.REG/system snapshot facade. */
+#include <mvdm_shadow_registry.h>
+/* This TU needs only the Win32 registry-reader redirection. */
+#undef NtOpenKey
+#undef NtEnumerateValueKey
+#undef NtQueryValueKey
+#undef NtClose
 
 
 /* Function Prototypes */
@@ -160,9 +170,6 @@ extern BOOL GdiReserveHandles(VOID);
 extern CRITICAL_SECTION VdmLoadCritSec;
 extern LIST_ENTRY TimerList;
 
-extern PVOID GdiQueryTable();
-extern PVOID gpGdiHandleInfo;
-
 #if defined (_X86_)
 
 extern PVOID WowpLockPrefixTable;
@@ -250,12 +257,6 @@ Return Value:
             MessageBox(NULL, "The Win16 subsystem could not load critical string resources from wow32.dll, terminating.",
                        "Win16 subsystem load failure", MB_ICONEXCLAMATION | MB_OK);
         }
-
-        //
-        // setup the GDI table for handle conversion
-        //
-
-        gpGdiHandleInfo = GdiQueryTable();
 
         W32EWExecer();
 
@@ -463,8 +464,8 @@ BOOL W32EWExecData(DWORD fnid, LPSTR lpData, DWORD cb)
 
 BOOL W32Init(VOID)
 {
+    HKEY  WowKey = NULL;
 #ifdef DEBUG
-    HKEY  WowKey;
     CHAR WOWCmdLine[REGISTRY_BUFFER_SIZE];
     PCHAR pWOWCmdLine;
     ULONG WOWCmdLineSize = REGISTRY_BUFFER_SIZE;
@@ -504,13 +505,22 @@ BOOL W32Init(VOID)
         char szBuf[ MAX_PATH ];
         int cb;
 
-        GetSystemDirectory(szBuf, sizeof szBuf);
+        /* DIVERGENCE(MVDM-HOST-DIV-259): preserve the original directory
+         * publication and short-name normalization, but source only its
+         * directory spelling from the current worker's selected MVDM media.
+         * Modern GetSystemDirectory/GetWindowsDirectory identify the host OS,
+         * not this standalone product package. */
+        if (!GetNtvdmSystemDirectoryA(szBuf, sizeof szBuf)) {
+            return FALSE;
+        }
         GetShortPathName(szBuf, szBuf, sizeof szBuf);
         cb = strlen(szBuf) + 1;
         pszSystemDirectory = malloc_w_or_die(cb);
         RtlCopyMemory(pszSystemDirectory, szBuf, cb);
 
-        GetWindowsDirectory(szBuf, sizeof szBuf);
+        if (!GetNtvdmWindowsDirectoryA(szBuf, sizeof szBuf)) {
+            return FALSE;
+        }
         GetShortPathName(szBuf, szBuf, sizeof szBuf);
         cb = strlen(szBuf) + 1;
         pszWindowsDirectory = malloc_w_or_die(cb);
@@ -577,22 +587,21 @@ BOOL W32Init(VOID)
     }
 
 
-#ifdef DEBUG
     if (RegOpenKeyEx ( HKEY_LOCAL_MACHINE,
                "SYSTEM\\CurrentControlSet\\Control\\WOW",
                0,
                KEY_QUERY_VALUE,
                &WowKey
-             ) != 0){
+             ) != 0) {
+#ifdef DEBUG
         LOGDEBUG(0,("    W32INIT ERROR: Registry Opening failed\n"));
         return FALSE;
-    }
 #else
-    /* DIVERGENCE: MVDM-HOST-DIV-291: the retail standalone package has no NT4
-       machine-global WOW registry state.  Preserve original absent-value
-       defaults and omit the optional KnownDLL list; never probe, create or
-       mutate host registry configuration. */
+        /* An absent section denotes the original empty-KnownDLL configuration.
+         * The worker-local facade never creates or mutates host state. */
+        WowKey = NULL;
 #endif
+    }
 
     //
     // If present (it usually isn't) read ThunkNLS value entry.
@@ -691,11 +700,11 @@ BOOL W32Init(VOID)
     // from the registry.
     //
 
-#ifdef DEBUG
     WK32InitWowIsKnownDLL(WowKey);
 
-    RegCloseKey (WowKey);
-#endif
+    if (WowKey != NULL) {
+        RegCloseKey (WowKey);
+    }
     // 
     // Initialize list of app names known to be setup applications
     //
@@ -1882,7 +1891,10 @@ Return Value:
 
 ULONG FASTCALL W32GetFastAddress( PVDMFRAME pFrame )
 {
-#if FASTBOPPING
+#if defined(CPU_40_STYLE)
+    UNREFERENCED_PARAMETER(pFrame);
+    return mvdm_softpc_fast_bop_dispatch_offset();
+#elif FASTBOPPING
     return (ULONG)WOWBopEntry;
 #else
     return 0;
@@ -1891,7 +1903,10 @@ ULONG FASTCALL W32GetFastAddress( PVDMFRAME pFrame )
 
 ULONG FASTCALL W32GetFastCbRetAddress( PVDMFRAME pFrame )
 {
-#if FASTBOPPING
+#if defined(CPU_40_STYLE)
+    UNREFERENCED_PARAMETER(pFrame);
+    return mvdm_softpc_fast_bop_callback_offset();
+#elif FASTBOPPING
     return (ULONG)FastWOWCallbackRet;
 #else
     return( 0L );
@@ -1922,7 +1937,12 @@ ULONG FASTCALL W32GetTableOffsets( PVDMFRAME pFrame )
 
 ULONG FASTCALL W32GetFlatAddressArray( PVDMFRAME pFrame )
 {
-#if FASTBOPPING
+#if defined(CPU_40_STYLE)
+    /* Original PMODE32 KRNL386 asks for this table before taking its
+     * WOW-specific selector publication path.  Return the same table shape,
+     * but in worker guest memory rather than leaking a host array address. */
+    return mvdm_softpc_wow_page_domain_flat_address_array(FlatAddress);
+#elif FASTBOPPING
     return (ULONG)FlatAddress;
 #else
     return 0;

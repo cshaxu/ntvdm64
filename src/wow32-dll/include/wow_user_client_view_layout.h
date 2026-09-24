@@ -29,6 +29,14 @@ typedef VOID (APIENTRY *PFNW32ET)(VOID);
 
 #define WOW_VIEW_ASSERT(name, condition) typedef char name[(condition) ? 1 : -1]
 WOW_VIEW_ASSERT(wow_view_x86, sizeof(void *) == 4);
+WOW_VIEW_ASSERT(wow_view_wnd_size, sizeof(WND) == 176);
+WOW_VIEW_ASSERT(wow_view_desktop_info_size, sizeof(DESKTOPINFO) == 100);
+WOW_VIEW_ASSERT(wow_view_cls_size, sizeof(CLS) == 108);
+WOW_VIEW_ASSERT(wow_view_cls_atom, offsetof(CLS, atomClassName) == 4);
+WOW_VIEW_ASSERT(wow_view_cls_window_count,
+    offsetof(CLS, cWndReferenceCount) == 20);
+WOW_VIEW_ASSERT(wow_view_cls_wow_words, offsetof(CLS, adwWOW) == 36);
+WOW_VIEW_ASSERT(wow_view_cls_module, offsetof(CLS, hModule) == 80);
 WOW_VIEW_ASSERT(wow_view_head_handle, offsetof(HEAD, h) == 0);
 WOW_VIEW_ASSERT(wow_view_self, offsetof(WND, head.pSelf) == 12);
 WOW_VIEW_ASSERT(wow_view_next, offsetof(WND, spwndNext) == 20);

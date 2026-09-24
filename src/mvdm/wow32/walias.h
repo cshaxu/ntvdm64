@@ -17,6 +17,7 @@ typedef HANDLE HAND32;
 #define _WALIAS_
 #include "wspool.h"
 #include "wowuserp.h"
+#include "ntvdm-exe/wow/include/wow_gdi_alias.h"
 
 
 /* WOW class/handle type identifiers (see WARNING below)
@@ -186,18 +187,18 @@ typedef struct _HDW {
 
 #define SERVERHANDLE(h)            (HIWORD(h))
 
-#define GDI32(h16)                 (HANDLE) hConvert16to32(h16)
-#define GDI16(h32)                 (HAND16) (((DWORD) (h32)) << 2)
+#define GDI32(h16)                 mvdm_wow_gdi_handle_to_native((HAND16)(h16))
+#define GDI16(h32)                 ((HAND16)mvdm_wow_gdi_handle_from_native((HANDLE)(h32)))
 
 #define HGDI16(hobj32)             GDI16((HAND32)(hobj32))
 
 #define HDC32(hdc16)               GDI32((HAND16)(hdc16))
 #define GETHDC16(hdc32)            GDI16((HAND32)(hdc32))
-#define FREEHDC16(hdc16)
+#define FREEHDC16(hdc16)           mvdm_wow_gdi_handle_retire((HAND16)(hdc16))
 
 #define HFONT32(hobj16)            GDI32((HAND16)(hobj16))
 #define GETHFONT16(hobj32)         GDI16((HAND32)(hobj32))
-#define FREEHFONT16(hobj16)
+#define FREEHFONT16(hobj16)        mvdm_wow_gdi_handle_retire((HAND16)(hobj16))
 
 #define HMETA32(hobj16)            ((HANDLE)HMFFromWinMetaFile((HAND16)(hobj16),FALSE))
 #define GETHMETA16(hobj32)         ((HAND16)WinMetaFileFromHMF((HMETAFILE)(hobj32),FALSE))
@@ -205,27 +206,27 @@ typedef struct _HDW {
 
 #define HRGN32(hobj16)             GDI32((HAND16)(hobj16))
 #define GETHRGN16(hobj32)          GDI16((HAND32)(hobj32))
-#define FREEHRGN16(hobj16)
+#define FREEHRGN16(hobj16)         mvdm_wow_gdi_handle_retire((HAND16)(hobj16))
 
 #define HBITMAP32(hobj16)          GDI32((HAND16)(hobj16))
 #define GETHBITMAP16(hobj32)       GDI16((HAND32)(hobj32))
-#define FREEHBITMAP16(hobj16)
+#define FREEHBITMAP16(hobj16)      mvdm_wow_gdi_handle_retire((HAND16)(hobj16))
 
 #define HBRUSH32(hobj16)           GDI32((HAND16)(hobj16))
 #define GETHBRUSH16(hobj32)        GDI16((HAND32)(hobj32))
-#define FREEHBRUSH16(hobj16)
+#define FREEHBRUSH16(hobj16)       mvdm_wow_gdi_handle_retire((HAND16)(hobj16))
 
 #define HPALETTE32(hobj16)         GDI32((HAND16)(hobj16))
 #define GETHPALETTE16(hobj32)      GDI16((HAND32)(hobj32))
-#define FREEHPALETTE16(hobj16)
+#define FREEHPALETTE16(hobj16)     mvdm_wow_gdi_handle_retire((HAND16)(hobj16))
 
 #define HPEN32(hobj16)             GDI32((HAND16)(hobj16))
 #define GETHPEN16(hobj32)          GDI16((HAND32)(hobj32))
-#define FREEHPEN16(hobj16)
+#define FREEHPEN16(hobj16)         mvdm_wow_gdi_handle_retire((HAND16)(hobj16))
 
 #define HOBJ32(hobj16)             GDI32((HAND16)(hobj16))
 #define GETHOBJ16(hobj32)          GDI16((HAND32)(hobj32))
-#define FREEHOBJ16(hobj16)
+#define FREEHOBJ16(hobj16)         mvdm_wow_gdi_handle_retire((HAND16)(hobj16))
 
 #define HDROP32(hobj16)            (HDROP)DropFilesHandler((HAND16)(hobj16), 0, HDROP_H16 | HDROP_ALLOCALIAS)
 #define GETHDROP16(hobj32)         (HAND16)DropFilesHandler(0, (HAND32)(hobj32), HDROP_H32 | HDROP_ALLOCALIAS)

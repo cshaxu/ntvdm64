@@ -25,6 +25,7 @@ Segment Register Support.
 #include <c_reg.h>
 #include <c_page.h>
 #include <fault.h>
+#include "mvdm_softpc_termination.h"
 
 
 /*
@@ -94,6 +95,12 @@ IFN3(
 
       SET_CS_AR_E(0);   /* expand up */
       SET_CS_AR_W(0);   /* deny write */
+
+      /* DIVERGENCE(MVDM-HOST-DIV-303): default-off observation of the
+       * original post-load cache. The binding never changes selector,
+       * descriptor, cache, execution order or fault handling. */
+      mvdm_softpc_report_wow_code_segment_load(selector, entry->base,
+                                                entry->limit, entry->AR);
       }
    }
 

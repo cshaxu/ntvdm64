@@ -36,6 +36,7 @@ LONG W32Win16WndProcEx(HWND hwnd, UINT uMsg, UINT uParam, LONG lParam,
     BOOL fSuccess;
     PWC  pwc;
     LONG ulReturn;
+    DWORD vpWndProc16Raw;
     register PTD ptd;
     WM32MSGPARAMEX wm32mpex;
     BOOL   fMessageNeedsThunking;
@@ -49,6 +50,7 @@ LONG W32Win16WndProcEx(HWND hwnd, UINT uMsg, UINT uParam, LONG lParam,
 
     ptd = CURRENTPTD();
 
+    vpWndProc16Raw = (DWORD)vpWndProc16;
     vpWndProc16 &= WNDPROC_MASK;
 
     //
@@ -194,7 +196,65 @@ LONG W32Win16WndProcEx(HWND hwnd, UINT uMsg, UINT uParam, LONG lParam,
 
     BlockWOWIdle(FALSE);
 
+    /* Default-off S2 entry witness.  A process-fatal guest callback cannot
+     * reach the existing post-return witness, so persist its selected original
+     * procedure/message before entering CallBack16. */
+    {
+        CHAR szTracePath[MAX_PATH];
+        CHAR szTraceLine[184];
+        HANDLE hTrace;
+        DWORD cbTrace;
+        DWORD cbWritten;
+        DWORD dwTraceError = GetLastError();
+        if (GetEnvironmentVariableA("MVDM_WOW_CALLBACK_TRACE_PATH",
+                szTracePath, sizeof(szTracePath))) {
+            hTrace = CreateFileA(szTracePath, FILE_APPEND_DATA,
+                FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_ALWAYS,
+                FILE_ATTRIBUTE_NORMAL, NULL);
+            if (hTrace != INVALID_HANDLE_VALUE) {
+                cbTrace = (DWORD)sprintf_s(szTraceLine, sizeof(szTraceLine),
+                    "%lu W32WndProc-enter message=%04X raw=%08lX proc=%08lX\r\n",
+                    (unsigned long)GetCurrentProcessId(), (unsigned)uMsg,
+                    (unsigned long)vpWndProc16Raw,
+                    (unsigned long)vpWndProc16);
+                if (cbTrace) (void)WriteFile(hTrace, szTraceLine, cbTrace,
+                    &cbWritten, NULL);
+                CloseHandle(hTrace);
+            }
+        }
+        SetLastError(dwTraceError);
+    }
+
     fSuccess = CallBack16(RET_WNDPROC, &wm32mpex.Parm16, vpWndProc16, (PVPVOID)&wm32mpex.lReturn);
+
+    /* Default-off S2 witness.  Preserve the original callback and error
+     * policy; record only its already-determined result before this original
+     * body selects return versus DefWindowProc fallback. */
+    {
+        CHAR szTracePath[MAX_PATH];
+        CHAR szTraceLine[160];
+        HANDLE hTrace;
+        DWORD cbTrace;
+        DWORD cbWritten;
+        DWORD dwTraceError = GetLastError();
+        if (GetEnvironmentVariableA("MVDM_WOW_CALLBACK_TRACE_PATH",
+                szTracePath, sizeof(szTracePath))) {
+            hTrace = CreateFileA(szTracePath, FILE_APPEND_DATA,
+                FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_ALWAYS,
+                FILE_ATTRIBUTE_NORMAL, NULL);
+            if (hTrace != INVALID_HANDLE_VALUE) {
+                cbTrace = (DWORD)sprintf_s(szTraceLine, sizeof(szTraceLine),
+                    "%lu W32WndProc message=%04X proc=%08lX success=%u result=%08lX\r\n",
+                    (unsigned long)GetCurrentProcessId(), (unsigned)uMsg,
+                    (unsigned long)vpWndProc16, (unsigned)fSuccess,
+                    (unsigned long)wm32mpex.lReturn);
+                if (cbTrace) (void)WriteFile(hTrace, szTraceLine, cbTrace,
+                    &cbWritten, NULL);
+                CloseHandle(hTrace);
+            }
+        }
+        SetLastError(dwTraceError);
+    }
 
     BlockWOWIdle(TRUE);
 

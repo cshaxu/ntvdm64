@@ -46,6 +46,11 @@ BOOL WINAPI wow_user_runtime_unbind(wow_user_runtime_thread *binding)
         SetLastError(ERROR_INVALID_STATE);
         return FALSE;
     }
+    /* USER resource cleanup may precede the end of guest execution. Retire
+     * the provider task only at this existing native-thread unbind edge. */
+    if (binding->thread && binding->runtime->retire_thread &&
+            !binding->runtime->retire_thread(binding->runtime->lifecycle))
+        return FALSE;
     current_thread = NULL;
     binding->runtime = NULL;
     binding->thread = NULL;

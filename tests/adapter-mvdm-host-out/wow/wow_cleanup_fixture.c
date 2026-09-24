@@ -25,15 +25,15 @@ static void verify_native_identity_binding(void)
     CHECK(wow_user_window_publish(&table,old_handle,&first,&thread));
     CHECK(!wow_user_window_publish(&table,new_handle,&second,&thread));
     CHECK(GetLastError()==ERROR_ALREADY_EXISTS);
-    CHECK(!wow_user_window_retire(&table,new_handle,&first));
-    CHECK(!wow_user_window_retire(&table,old_handle,&second));
+    CHECK(!wow_user_window_retire(&table,new_handle,&first,NULL));
+    CHECK(!wow_user_window_retire(&table,old_handle,&second,NULL));
     CHECK(table.entries[0x1234].phead==&first);
-    CHECK(wow_user_window_retire(&table,old_handle,&first));
+    CHECK(wow_user_window_retire(&table,old_handle,&first,NULL));
     CHECK(wow_user_window_publish(&table,new_handle,&second,&thread));
-    CHECK(!wow_user_window_retire(&table,old_handle,&first));
+    CHECK(!wow_user_window_retire(&table,old_handle,&first,NULL));
     CHECK(table.entries[0x1234].phead==&second &&
         table.entries[0x1234].wUniq==HIWORD(new_handle));
-    CHECK(wow_user_window_retire(&table,new_handle,&second));
+    CHECK(wow_user_window_retire(&table,new_handle,&second,NULL));
     CHECK(table.entries[0x1234].bType==TYPE_FREE && table.last_handle==0x1234);
 }
 static PVOID WINAPI allocate(SIZE_T size)

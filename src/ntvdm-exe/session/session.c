@@ -314,8 +314,9 @@ int session_thread_bind_owned_source(session *instance, uint32_t binding_owner,
         if (!hook->bind(hook->context)) {
             while (index != 0u) {
                 --index;
-                instance->thread_hooks[index].unbind(
-                    instance->thread_hooks[index].context);
+                if (!instance->thread_hooks[index].unbind(
+                        instance->thread_hooks[index].context))
+                    return 0;
             }
             thread_instance = NULL;
             thread_binding_owner = SESSION_THREAD_BINDING_UNSPECIFIED;
@@ -347,7 +348,7 @@ int session_thread_unbind(session *instance)
     if (owner_counter == NULL) return 0;
     for (index = instance->thread_hook_count; index != 0u; --index) {
         session_thread_hook *hook = &instance->thread_hooks[index - 1u];
-        hook->unbind(hook->context);
+        if (!hook->unbind(hook->context)) return 0;
     }
     thread_instance = NULL;
     thread_binding_owner = SESSION_THREAD_BINDING_UNSPECIFIED;

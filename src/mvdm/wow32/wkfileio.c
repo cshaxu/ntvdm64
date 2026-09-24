@@ -14,6 +14,7 @@
 --*/
 
 #include "precomp.h"
+#include "wow_user_thunk_scope.h"
 #pragma hdrstop
 #include "dossvc.h"
 #include "demexp.h"
@@ -1508,6 +1509,8 @@ ULONG FASTCALL WK32FileOpen(PVDMFRAME pFrame)
 
     if (hFile == INVALID_HANDLE_VALUE) {
         ul = GetLastError() | 0xFFFF0000;
+        wow_user_trace_file_open_failure(pszPath, lpFileName, wAccess,
+            GetLastError());
         LOGDEBUG(fileoclevel,("WK32FileOpen: %s  mode:%02X failed error %d\n",pszPath, wAccess, GetLastError()));
         FREEARGPTR(parg16);
         if (ItsANamedPipe) {

@@ -5,7 +5,9 @@ import assert from 'node:assert/strict';
 import {spawn, spawnSync} from 'node:child_process';
 const root=process.cwd(), product=path.resolve(process.env.OPENNT_BROKER_PRODUCT_BUILD || 'build/M0-T418/S7/formal-x86-001');
 const build=path.resolve(process.env.OPENNT_VERSION_TEST_BUILD || 'build/M0-T412/S9/version-negative');
-const logs=path.resolve(process.env.OPENNT_VERSION_TEST_LOGS || 'O:/winnt/logs/m0-t412-s9-version-negative');
+const logs=path.resolve(process.env.OPENNT_VERSION_TEST_LOGS || path.join(build,'logs'));
+const runtime=process.env.OPENNT_VERSION_TEST_RUNTIME;
+if(!runtime)throw Error('OPENNT_VERSION_TEST_RUNTIME must name the deployed runtime directory');
 fs.mkdirSync(build,{recursive:true});fs.mkdirSync(logs,{recursive:true});
 const source=fs.readFileSync('src/basesrv-exe/main.c','utf8');
 const header=fs.readFileSync('src/product-abi/version.h','utf8');
@@ -67,7 +69,7 @@ for (const [name] of variants) {
         clearTimeout(timer);
         for(const [exe,args] of [['run16.exe',['MEM.EXE']],['ntvdm.exe',[]]]) {
             const start=Date.now();
-            const r=spawnSync(`O:/winnt/${exe}`,args,{cwd:'O:/winnt',windowsHide:true,encoding:'utf8',timeout:4000});
+            const r=spawnSync(path.join(runtime,exe),args,{cwd:runtime,windowsHide:true,encoding:'utf8',timeout:4000});
             fs.writeFileSync(path.join(logs,`${name}-${exe}.json`),JSON.stringify({status:r.status,error:r.error?.message,ms:Date.now()-start,stdout:r.stdout,stderr:r.stderr},null,2));
             assert.equal(r.status,1306,`${name} ${exe}: expected ERROR_REVISION_MISMATCH, not retry/timeout`);
             assert.match(r.stderr,/version mismatch/);

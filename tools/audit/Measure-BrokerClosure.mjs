@@ -38,5 +38,5 @@ for(const row of rows){
 }
 const report={baseline,endpoint:git(['rev-parse','HEAD']).trim(),workingChanges:true,
     method:'git diff --numstat baseline vs working tree, plus untracked source. Physical text lines; excludes Markdown in grouped totals. Paired cohort contains only changed mirror paths present at both endpoints, against pinned OpenNT. Cropped original lines are omissions, not autonomous code.',groups,paired,rows};
-fs.writeFileSync(process.env.OPENNT_ACCOUNTING_REPORT || 'O:/winnt/logs/m0-t412-s10-accounting.json',JSON.stringify(report,null,2));
+fs.writeFileSync(process.env.OPENNT_ACCOUNTING_REPORT || path.join(build,'accounting.json'),JSON.stringify(report,null,2));
 console.log(JSON.stringify({groups,paired},null,2));

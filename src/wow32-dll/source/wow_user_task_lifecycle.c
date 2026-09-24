@@ -4,6 +4,8 @@
 #include "wow_task_profile_bindings.h"
 #include "wow_user_session_binding.h"
 #include "opennt-abi/host-compat/include/thread_start_compat.h"
+#include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
+#include <stdio.h>
 
 #ifndef STATUS_SUCCESS
 #define STATUS_SUCCESS ((NTSTATUS)0)
@@ -55,24 +57,82 @@ static wow_user_task_lifecycle_thread *current_task(
     return task && task->owner == owner ? task : NULL;
 }
 
+/* Observe the existing retirement edge independently of ModuleUnload and
+ * launcher completion. Default-off; preserve the caller's error status. */
+static void retirement_trace(const char *stage, DWORD task, DWORD status)
+{
+    char path[MAX_PATH], line[160];
+    DWORD error = GetLastError(), size, written, path_length;
+    HANDLE file;
+    path_length = GetEnvironmentVariableA("MVDM_WOW_WINDOW_TRACE_PATH", path, sizeof(path));
+    if (path_length && path_length < sizeof(path)) {
+        file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ | FILE_SHARE_WRITE,
+            NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+        if (file != INVALID_HANDLE_VALUE) {
+            size = (DWORD)sprintf_s(line, sizeof(line),
+                "%lu TaskRetirement tid=%lu task=%08lX stage=%s status=%lu\r\n",
+                GetCurrentProcessId(), GetCurrentThreadId(), task, stage, status);
+            if (size) (void)WriteFile(file, line, size, &written, NULL);
+            CloseHandle(file);
+        }
+    }
+    SetLastError(error);
+}
+
+/* Default-off witness for an existing terminal boundary; retain its code. */
+static void lifecycle_failure(const char *stage, DWORD code)
+{
+    char path[MAX_PATH], line[192];
+    DWORD error = GetLastError(), size, written;
+    wow_user_runtime_thread *binding = wow_user_runtime_current();
+    PVOID frames[12];
+    USHORT count, index;
+    HANDLE file;
+    if (GetEnvironmentVariableA("MVDM_WOW_WINDOW_TRACE_PATH", path, sizeof(path))) {
+        file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ | FILE_SHARE_WRITE,
+            NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+        if (file != INVALID_HANDLE_VALUE) {
+            size = (DWORD)sprintf_s(line, sizeof(line),
+                "%lu TaskFailure tid=%lu stage=%s code=%lu error=%lu binding=%p held=%d owner=%lu\r\n",
+                GetCurrentProcessId(), GetCurrentThreadId(), stage, code, error,
+                binding, binding ? binding->exclusive_held : 0,
+                binding && binding->runtime ? binding->runtime->owner_thread_id : 0);
+            if (size) (void)WriteFile(file, line, size, &written, NULL);
+            count = CaptureStackBackTrace(0, 12, frames, NULL);
+            for (index = 0; index < count; ++index) {
+                HMODULE module = NULL;
+                (void)GetModuleHandleExA(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS |
+                    GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT, (LPCSTR)frames[index], &module);
+                size = (DWORD)sprintf_s(line, sizeof(line),
+                    " TaskFailureFrame address=%p module=%p rva=%08lX\r\n",
+                    frames[index], module, (DWORD)((ULONG_PTR)frames[index] - (ULONG_PTR)module));
+                if (size) (void)WriteFile(file, line, size, &written, NULL);
+            }
+            CloseHandle(file);
+        }
+    }
+    SetLastError(error);
+    opennt_exit_thread(code);
+}
+
 static void WINAPI release_lock(wow_task_order_thread *thread)
 {
     wow_user_task_lifecycle_thread *task = thread ? thread->host_context : NULL;
     if (!task || !wow_user_runtime_leave(wow_user_runtime_current()))
-        opennt_exit_thread(ERROR_INVALID_STATE);
+        lifecycle_failure("release-lock", ERROR_INVALID_STATE);
 }
 
 static void WINAPI acquire_lock(wow_task_order_thread *thread)
 {
     wow_user_task_lifecycle_thread *task = thread ? thread->host_context : NULL;
     if (!task || !wow_user_runtime_enter(wow_user_runtime_current()))
-        opennt_exit_thread(ERROR_INVALID_STATE);
+        lifecycle_failure("acquire-lock", ERROR_INVALID_STATE);
 }
 
 static void WINAPI check_death(wow_task_order_thread *thread)
 {
     if (!thread || !wow_user_worker_active())
-        opennt_exit_thread(ERROR_PROCESS_ABORTED);
+        lifecycle_failure("check-death", ERROR_PROCESS_ABORTED);
 }
 
 static void WINAPI deliver_apc(wow_task_order_thread *thread)
@@ -81,7 +141,7 @@ static void WINAPI deliver_apc(wow_task_order_thread *thread)
     /* Original taskman reaches this only after an alertable termination APC.
      * The standalone thread boundary has no kernel APC carrier, so a genuine
      * alert completion is terminal rather than a successful scheduler wake. */
-    opennt_exit_thread(ERROR_OPERATION_ABORTED);
+    lifecycle_failure("deliver-apc", ERROR_OPERATION_ABORTED);
 }
 
 static BOOL WINAPI idle_hooked(wow_task_order_thread *thread)
@@ -95,22 +155,28 @@ static BOOL WINAPI idle_hooked(wow_task_order_thread *thread)
 static void WINAPI idle_hook(wow_task_order_thread *thread)
 {
     (void)thread;
-    opennt_exit_thread(ERROR_INVALID_STATE);
+    lifecycle_failure("idle-hook", ERROR_INVALID_STATE);
 }
 
 static void WINAPI wake_input_idle(wow_task_order_thread *thread)
 {
-    if (!thread || !thread->ptdb || !thread->ptdb->pwti ||
-            !thread->ptdb->pwti->pIdleEvent ||
-            !SetEvent(thread->ptdb->pwti->pIdleEvent))
-        opennt_exit_thread(ERROR_INVALID_STATE);
+    if (!thread || !thread->ptdb)
+        lifecycle_failure("wake-input-idle", ERROR_INVALID_STATE);
+    /* input.c::WakeInputIdle: the selected taskman shared-WOW caller clears
+     * FIRSTIDLE even when no WaitForInputIdle record exists (WOWEXEC). The
+     * absence of a waiter is normal, not a reason to terminate the thread.
+     * A present record retains this binding's existing native-event owner. */
+    thread->TIF_flags &= ~WOW_TASK_TIF_FIRSTIDLE;
+    if (thread->ptdb->pwti && (!thread->ptdb->pwti->pIdleEvent ||
+            !SetEvent(thread->ptdb->pwti->pIdleEvent)))
+        lifecycle_failure("wake-input-idle", ERROR_INVALID_STATE);
 }
 
 static void WINAPI receive(wow_task_order_thread *thread)
 {
     wow_user_task_lifecycle_thread *task = thread ? thread->host_context : NULL;
     if (!task || !wow_user_message_bridge_receive(&task->messages, thread))
-        opennt_exit_thread(ERROR_CANCELLED);
+        lifecycle_failure("receive", ERROR_CANCELLED);
 }
 
 static NTSTATUS WINAPI wait_for_task_or_message(wow_task_order_thread *thread,
@@ -223,6 +289,8 @@ static BOOL WINAPI cleanup_destroy_class(wow_cleanup_context *context,
     return wow_class_words_destroy_native(link, (*link)->hModule, TRUE);
 }
 
+static BOOL WINAPI retire_current_thread(PVOID context);
+
 static void WINAPI cleanup_destroy_object(wow_cleanup_context *context,
     wow_cleanup_handle *entry)
 {
@@ -283,6 +351,7 @@ BOOL WINAPI wow_user_task_lifecycle_initialize(wow_user_task_lifecycle *owner,
     owner->cleanup.allocate = cleanup_allocate;
     owner->cleanup.release = cleanup_release;
     runtime->lifecycle = owner;
+    runtime->retire_thread = retire_current_thread;
     owner->initialized = TRUE;
     return TRUE;
 }
@@ -364,6 +433,10 @@ BOOL WINAPI wow_user_task_lifecycle_init(wow_user_task_lifecycle *owner,
     task->next = owner->threads;
     owner->threads = task;
     if (!wow_user_runtime_set_context(binding, &task->thread, &task->classes)) goto done;
+    /* USER16 directly reads this counterpart of queue.c's THREADINFO and
+     * CLIENTINFO value. Publish it before the original init can return to
+     * guest code; undo it if that initialization rejects the task. */
+    if (!mvdm_softpc_wow_page_domain_set_expected_windows_version(version)) goto done;
     RtlInitUnicodeString(&name, wide);
     status = xxxInitTask(version, &name, task_id, hotkey, shared_id, x, y,
         width, height, show, &task->thread);
@@ -372,6 +445,8 @@ BOOL WINAPI wow_user_task_lifecycle_init(wow_user_task_lifecycle *owner,
         task = NULL;
     } else SetLastError(RtlNtStatusToDosError(status));
 done:
+    if (!result)
+        (void)mvdm_softpc_wow_page_domain_set_expected_windows_version(0u);
     if (wide) HeapFree(GetProcessHeap(), 0, wide);
     if (task) {
         wow_user_task_lifecycle_thread **link = &owner->threads;
@@ -424,29 +499,8 @@ BOOL WINAPI wow_user_task_lifecycle_wait(wow_user_task_lifecycle *owner,
     return result;
 }
 
-BOOL WINAPI wow_user_task_lifecycle_wow_cleanup(wow_user_task_lifecycle *owner,
-    HANDLE instance, DWORD task_id, PNEMODULESEG selectors, DWORD count)
-{
-    wow_user_task_lifecycle_thread *task = current_task(owner);
-    BOOL result = FALSE;
-
-    if (!task || !wow_user_runtime_enter(wow_user_runtime_current())) {
-        SetLastError(ERROR_INVALID_STATE);
-        return FALSE;
-    }
-    owner->cleanup.thread = &task->thread;
-    __try {
-        result = wow_user_cleanup_bound(instance, task_id, selectors, count,
-            &owner->cleanup);
-    } __finally {
-        owner->cleanup.thread = NULL;
-        (void)wow_user_runtime_leave(wow_user_runtime_current());
-    }
-    return result;
-}
-
-BOOL WINAPI wow_user_task_lifecycle_cleanup(wow_user_task_lifecycle *owner,
-    DWORD task_id)
+static BOOL retire_task(wow_user_task_lifecycle *owner, DWORD task_id,
+    HANDLE instance, PNEMODULESEG selectors, DWORD count)
 {
     wow_user_task_lifecycle_thread **link;
     wow_user_task_lifecycle_thread *task;
@@ -463,14 +517,16 @@ BOOL WINAPI wow_user_task_lifecycle_cleanup(wow_user_task_lifecycle *owner,
         (void)wow_user_runtime_leave(binding);
         SetLastError(ERROR_NOT_FOUND); return FALSE;
     }
-    /* W32DestroyTask invokes this same original cleanup output before it
-     * releases the task.  The carrier retains that order for direct worker
-     * teardown; a task record has no usable module handle here, and the
-     * original task-cleanup branch only requires a non-NULL instance. */
+    /* Native-thread retirement is distinct from pfnWOWCleanup. Keep the
+     * carrier alive if the finite original cleanup binding rejects release. */
     __try {
         owner->cleanup.thread = &task->thread;
-        if (!wow_user_cleanup_bound((HANDLE)(ULONG_PTR)task_id, task_id,
-                NULL, 0, &owner->cleanup)) __leave;
+        if (!wow_user_cleanup_bound(instance, task_id, selectors, count,
+                &owner->cleanup)) __leave;
+        /* The original USER cleanup has now completed.  Its page-domain
+         * counterpart may already have been withdrawn during worker teardown;
+         * that cannot retain a dead provider task/queue record. */
+        (void)mvdm_softpc_wow_page_domain_set_expected_windows_version(0u);
         /* Keep the task and its window-owner references alive if the finite
          * native boundary cannot complete original object cleanup. */
         *link = task->next;
@@ -489,6 +545,55 @@ BOOL WINAPI wow_user_task_lifecycle_cleanup(wow_user_task_lifecycle *owner,
     return result;
 }
 
+BOOL WINAPI wow_user_task_lifecycle_exit(wow_user_task_lifecycle *owner,
+    HANDLE instance, DWORD task_id, PNEMODULESEG selectors, DWORD count)
+{
+    wow_user_task_lifecycle_thread *task = current_task(owner);
+    wow_user_runtime_thread *binding = wow_user_runtime_current();
+    BOOL result = FALSE;
+    if (!task || (task_id && (!task->thread.ptdb ||
+            task->thread.ptdb->hTaskWow != task_id)) ||
+            !wow_user_runtime_enter(binding)) {
+        SetLastError(ERROR_INVALID_STATE); return FALSE;
+    }
+    /* wuser.c::ModuleUnload calls the task branch and then task==0 module
+     * cleanup while guest code still runs. Neither call destroys THREADINFO. */
+    __try {
+        owner->cleanup.thread = &task->thread;
+        result = wow_user_cleanup_bound(instance, task_id, selectors, count,
+            &owner->cleanup);
+    } __finally {
+        owner->cleanup.thread = NULL;
+        (void)wow_user_runtime_leave(binding);
+    }
+    return result;
+}
+
+static BOOL WINAPI retire_current_thread(PVOID context)
+{
+    wow_user_task_lifecycle *owner = context;
+    wow_user_task_lifecycle_thread *task = current_task(owner);
+    ULONG index;
+    if (!task) { SetLastError(ERROR_INVALID_STATE); return FALSE; }
+    retirement_trace("enter", task->thread.ptdb->hTaskWow, 0);
+    /* Do not free a THREADINFO carrier still referenced by an enrolled
+     * window. Abnormal native-window teardown needs its own retirement edge. */
+    for (index = 0; index <= owner->objects->last_handle; ++index) {
+        wow_cleanup_handle *entry = &owner->objects->entries[index];
+        if (entry->bType == TYPE_WINDOW && entry->pOwner == &task->thread) {
+            retirement_trace("live-window", task->thread.ptdb->hTaskWow, ERROR_BUSY);
+            SetLastError(ERROR_BUSY); return FALSE;
+        }
+    }
+    {
+        DWORD task_id = task->thread.ptdb->hTaskWow;
+        BOOL result = retire_task(owner, task_id, NULL, NULL, 0);
+        retirement_trace(result ? "complete" : "failed", task_id,
+            result ? ERROR_SUCCESS : GetLastError());
+        return result;
+    }
+}
+
 void WINAPI wow_user_task_lifecycle_dispose(wow_user_task_lifecycle *owner)
 {
     if (!owner || !owner->initialized || owner->threads) return;
@@ -498,7 +603,9 @@ void WINAPI wow_user_task_lifecycle_dispose(wow_user_task_lifecycle *owner)
         HeapFree(GetProcessHeap(), 0, owner->process.pwpi);
     }
     if (owner->objects) HeapFree(GetProcessHeap(), 0, owner->objects);
-    if (owner->runtime && owner->runtime->lifecycle == owner)
+    if (owner->runtime && owner->runtime->lifecycle == owner) {
+        owner->runtime->retire_thread = NULL;
         owner->runtime->lifecycle = NULL;
+    }
     ZeroMemory(owner, sizeof(*owner));
 }

@@ -772,6 +772,10 @@ BOOL CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVOID pvpReturn)
 
     /* Commit and release both aliases before the original recursive CPU call:
      * no host pointer may survive `host_simulate`. */
+    wow_callback_frame_trace("before", (DWORD)iRetID, ptd->vpStack,
+        ptd->vpCBStack, callback_frame_lease.guest_address, pFrame->wTDB,
+        (DWORD)vpfnProc, pParm16 ? pParm16->WndProc.wMsg : 0,
+        pParm16 ? pParm16->WndProc.lParam : 0);
     if (!wow_callback_frame_release(&caller_frame_lease, 0) ||
         !wow_callback_frame_release(&callback_frame_lease, 1)) return FALSE;
 
@@ -794,12 +798,24 @@ BOOL CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVOID pvpReturn)
 #else
     // Time to get the IEU running task-time code again
     SaveIp = getIP();
+    /* DIVERGENCE(MVDM-HOST-DIV-304): default-off witness after the original
+     * stack selection and before the original CCPU reentry.  It copies no
+     * guest state and does not alter the callback protocol. */
+    wow_callback_frame_trace("simulate", (DWORD)iRetID, ptd->vpStack,
+        ptd->vpCBStack, 0, ptd->htask16, (DWORD)vpfnProc,
+        pParm16 ? pParm16->WndProc.wMsg : 0,
+        pParm16 ? pParm16->WndProc.lParam : 0);
     host_simulate();
     setIP(SaveIp);
     ptd->vpStack = VDMSTACK();
 #endif
 
     // after return from callback ptd->vpStack will point to PCBVDMFRAME
+
+    wow_callback_frame_trace("after", (DWORD)iRetID, ptd->vpStack,
+        ptd->vpCBStack, 0, ptd->htask16, (DWORD)vpfnProc,
+        pParm16 ? pParm16->WndProc.wMsg : 0,
+        pParm16 ? pParm16->WndProc.lParam : 0);
 
     // consistency check
     WOW32ASSERT(ptd->vpStack == vpCBStackT);

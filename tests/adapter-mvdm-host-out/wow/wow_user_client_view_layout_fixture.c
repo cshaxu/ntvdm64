@@ -7,7 +7,9 @@ int main(void)
 {
     /* The header asserts the pinned USER.EXE's WND consumer offsets.
      * This is layout verification, not a fabricated runtime desktop. */
-    fprintf(stderr, "WOW_ORIGINAL_USER_CLIENT_LAYOUT_OK wnd=%lu desktop=%lu\n",
-        (unsigned long)sizeof(WND), (unsigned long)sizeof(DESKTOPINFO));
+    fprintf(stderr,
+        "WOW_ORIGINAL_USER_CLIENT_LAYOUT_OK wnd=%lu desktop=%lu cls=%lu\n",
+        (unsigned long)sizeof(WND), (unsigned long)sizeof(DESKTOPINFO),
+        (unsigned long)sizeof(CLS));
     return 0;
 }

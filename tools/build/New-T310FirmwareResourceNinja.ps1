@@ -1,7 +1,8 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory = $true)] [ValidateSet('x86', 'x64')] [string]$Architecture,
-    [string]$RepositoryRoot = ''
+    [string]$RepositoryRoot = '',
+    [Parameter(Mandatory = $true)] [string]$RuntimeRoot
 )
 
 Set-StrictMode -Version Latest
@@ -19,6 +20,7 @@ if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
     $RepositoryRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 }
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
+$runtime = (Resolve-Path -LiteralPath $RuntimeRoot).Path
 $build = Join-Path $root ("build/M0-T310/S8/p1-firmware-resource/{0}" -f $Architecture)
 $vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 if (!(Test-Path -LiteralPath $vs -PathType Leaf)) { throw 'MSVC Build Tools are required.' }
@@ -37,8 +39,8 @@ $sources = @(
     'src/ntvdm-exe/session/guest_memory_lease.c',
     'src/ntvdm-exe/session/session.c',
     'src/ntvdm-exe/softpc/mvdm_softpc_firmware.c',
-    'tests/ntvdm/session/softpc_firmware_resource_fixture.c',
-    'tests/ntvdm/session/softpc_media_resource_fixture.c'
+    'tests/session/softpc_firmware_resource_fixture.c',
+    'tests/session/softpc_media_resource_fixture.c'
 )
 $graph = [Collections.Generic.List[string]]::new()
 $graph.Add('ninja_required_version = 1.10')
@@ -52,9 +54,9 @@ $graph.Add('  msvc_deps_prefix = Note: including file:')
 $graph.Add('rule link')
 $graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' link.exe /nologo /out:$out $in kernel32.lib')
 $graph.Add('rule run')
-$graph.Add('  command = $in "' + (NinjaPath (Join-Path $root 'src/mvdm-softpc-firmware/softpc.new/roms')) + '"')
+$graph.Add('  command = $in "' + (NinjaPath (Join-Path $root 'src/mvdm/softpc.new/roms')) + '"')
 $graph.Add('rule run_dos')
-$graph.Add('  command = $in "' + (NinjaPath (Join-Path $root 'src/mvdm-guest/dos/v86/doskrnl/bios')) + '"')
+$graph.Add('  command = $in "' + (NinjaPath $runtime) + '"')
 $objects = @()
 for ($index = 0; $index -lt $sources.Count; ++$index) {
     $object = 'obj/' + $index + '-' + ([IO.Path]::GetFileNameWithoutExtension($sources[$index])) + '.obj'

@@ -12,6 +12,15 @@
 BOOL fWowMode = FALSE;
 HMODCACHE ghModCache[CHMODCACHE] = { 0 };
 
+/* The original body reaches the worker's private WOW32Reserved slot.  This
+ * focused fixture supplies only that per-thread storage; it is not a product
+ * TEB provider and cannot stand in for a guest callback. */
+POPENNT_SUPPORT_TEB NTAPI opennt_support_current_teb(VOID)
+{
+    static OPENNT_SUPPORT_TEB teb;
+    return &teb;
+}
+
 PVOID FASTCALL
 GetPModeVDMPointerAssert(DWORD Address
 #ifdef DEBUG

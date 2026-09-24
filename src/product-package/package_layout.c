@@ -101,7 +101,8 @@ int app_package_layout_validate_command_configuration_root(
     return app_package_layout_command_value_fits(short_root) &&
         app_package_layout_command_file_fits(root, "config.nt") &&
         app_package_layout_command_file_fits(root, "autoexec.nt") &&
-        app_package_layout_command_file_fits(root, "ntio.sys");
+        app_package_layout_command_file_fits(root, "ntio.sys") &&
+        app_package_layout_command_file_fits(root, "system.ini");
 }
 
 int app_package_layout_set_process_firmware_root(session *owner)

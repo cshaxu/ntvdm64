@@ -28,6 +28,7 @@
 #include <vdm.h>
 #include <stdlib.h>
 #include <string.h>
+#include "mvdm_softpc_firmware.h"
 #include "conapi.h"
 
 #include "xt.h"
@@ -382,7 +383,7 @@ BOOL LoadCPIFont(UINT CodePageID, WORD FontWidth, WORD FontHeight)
     /* max font height is 16 pixels and font width must be 8 pixels */
     if (FontHeight > 16 || FontWidth != 8)
 	return FALSE;
-    dw = GetSystemDirectoryA((CHAR *)Buffer, sizeof(Buffer));
+    dw = GetNtvdmSystemDirectoryA((CHAR *)Buffer, sizeof(Buffer));
     if (dw == 0 || dw + CPI_FILENAME_LENGTH > sizeof(Buffer))
 	return FALSE;
     RtlMoveMemory(&Buffer[dw], CPI_FILENAME, CPI_FILENAME_LENGTH);

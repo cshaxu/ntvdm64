@@ -21,13 +21,44 @@ long mvdm_softpc_firmware_read_embedded_rom(const char *name, void *bytes_out,
 
 /* Same-shaped media-location binding for original MVDM system files.
  * It returns a caller-owned path only when the selected image exists. */
-int mvdm_softpc_system_find_file(const char *name, char *path_out,
+int __cdecl mvdm_softpc_system_find_file(const char *name, char *path_out,
+    uint32_t path_out_bytes);
+
+/* Modern profile APIs redirect every file named SYSTEM.INI through the host
+ * mapping layer, even for an absolute package pathname.  Copy the selected
+ * immutable system profile to a worker-local temporary name and return that
+ * caller-owned path.  The session teardown deletes the copy; neither guest
+ * media nor the host profile is written. */
+int __cdecl mvdm_softpc_profile_shadow_system_ini(char *path_out,
     uint32_t path_out_bytes);
 
 /* Copy the configured immutable MVDM system directory into the original
  * caller-owned buffer.  This is the directory-shaped counterpart of the
  * existing file lookup; it neither opens media nor changes host state. */
-int mvdm_softpc_system_copy_root(char *path_out, uint32_t path_out_bytes);
+int __cdecl mvdm_softpc_system_copy_root(char *path_out,
+    uint32_t path_out_bytes);
+
+/* Copy the existing `system32` child of the selected MVDM system root into
+ * an original caller-owned buffer.  This is the directory counterpart of the
+ * established root/file adapters; it neither probes the host system directory
+ * nor creates package media. */
+int __cdecl mvdm_softpc_system_copy_system_directory(char *path_out,
+    uint32_t path_out_bytes);
+
+/* Directory-shaped standalone equivalents of the original host-directory
+ * queries.  They expose the selected worker package, not the host Windows
+ * installation.  Return values follow GetWindowsDirectoryA/W and
+ * GetSystemDirectoryA/W: zero is failure, a too-small caller buffer receives
+ * the required character count including NUL, otherwise the copied length
+ * excludes NUL. */
+uint32_t __cdecl GetNtvdmWindowsDirectoryA(char *path_out,
+    uint32_t path_out_chars);
+uint32_t __cdecl GetNtvdmSystemDirectoryA(char *path_out,
+    uint32_t path_out_chars);
+uint32_t __cdecl GetNtvdmWindowsDirectoryW(wchar_t *path_out,
+    uint32_t path_out_chars);
+uint32_t __cdecl GetNtvdmSystemDirectoryW(wchar_t *path_out,
+    uint32_t path_out_chars);
 
 /* In-place, bounded OEM-to-ANSI boundary for original PIF configuration
  * file consumers. Returns zero if conversion cannot fit; opens no file. */

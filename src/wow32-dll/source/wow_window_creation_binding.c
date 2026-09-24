@@ -1,5 +1,6 @@
 #include "wow_window_creation_binding.h"
 #include "wow_user_runtime.h"
+#include <stdio.h>
 typedef VOID (APIENTRY *PFNW32ET)(VOID);
 #pragma warning(push)
 #pragma warning(disable:4201)
@@ -26,6 +27,27 @@ typedef struct creation_scope {
     wow_task_order_thread *thread;
 } creation_scope;
 static __declspec(thread) creation_scope *current_scope;
+
+/* Default-off creation-boundary witness. Do not replace USER's failure or
+ * change the callback sequence merely to make creation succeed. */
+static void trace_creation(const creation_scope *scope, HWND result, DWORD error)
+{
+    char path[MAX_PATH], line[256];
+    HANDLE file;
+    DWORD size, written;
+    if (!GetEnvironmentVariableA("MVDM_WOW_WINDOW_TRACE_PATH", path,
+            sizeof(path))) return;
+    file=CreateFileA(path,FILE_APPEND_DATA,FILE_SHARE_READ|FILE_SHARE_WRITE,
+        NULL,OPEN_ALWAYS,FILE_ATTRIBUTE_NORMAL,NULL);
+    if (file==INVALID_HANDLE_VALUE) return;
+    size=(DWORD)sprintf_s(line,sizeof(line),
+        "%lu WindowCreate atom=%04X result=%p error=%lu bindingError=%lu claimed=%d menu=%p instance=%p style=%08lX tid=%lu\r\n",
+        GetCurrentProcessId(),scope->atom,result,error,scope->failure,
+        scope->claimed,scope->request->hMenu,scope->request->hInstance,
+        scope->request->style,GetCurrentThreadId());
+    if (size) (void)WriteFile(file,line,size,&written,NULL);
+    CloseHandle(file);
+}
 
 static LPVOID application_parameter(const creation_scope *scope,
     const CREATESTRUCTA *creation)
@@ -128,6 +150,7 @@ static HWND create_bound(wow_task_order_thread *thread,
         wow_window_words_release(scope.borrow);
         wow_class_words_release(scope.class_words);
     }
+    trace_creation(&scope, result, error);
     SetLastError(error);
     return result;
 }

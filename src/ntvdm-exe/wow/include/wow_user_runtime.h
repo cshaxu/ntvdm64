@@ -19,6 +19,7 @@ typedef struct wow_user_runtime {
      * domain.  It is opaque here: the runtime neither allocates tasks nor
      * chooses scheduling policy. */
     PVOID lifecycle;
+    BOOL (WINAPI *retire_thread)(PVOID lifecycle);
 } wow_user_runtime;
 
 typedef struct wow_user_runtime_thread {
@@ -28,7 +29,7 @@ typedef struct wow_user_runtime_thread {
     BOOL exclusive_held;
 } wow_user_runtime_thread;
 
-#define WOW_USER_RUNTIME_INITIALIZER { INIT_ONCE_STATIC_INIT, SRWLOCK_INIT, 0, 0, NULL }
+#define WOW_USER_RUNTIME_INITIALIZER { INIT_ONCE_STATIC_INIT, SRWLOCK_INIT, 0, 0, NULL, NULL }
 
 BOOL WINAPI wow_user_runtime_initialize(wow_user_runtime *);
 BOOL WINAPI wow_user_runtime_bind(wow_user_runtime_thread *, wow_user_runtime *,

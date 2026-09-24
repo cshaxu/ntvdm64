@@ -2,10 +2,13 @@
 #include "wow_window_creation_binding.h"
 #include "wow_dialog_creation_binding.h"
 #include "wow_class_query_bindings.h"
+#include "wow_class_lookup_bindings.h"
 #include "wow_private_user_compat.h"
 #include "wow_bitmap_bindings.h"
 #include "wow_task_order_bindings.h"
 #include "wow_user_task_lifecycle.h"
+#include "wow_user_object_bindings.h"
+#include "wow_user_borrow_scope.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
 
 #include <stdio.h>
@@ -22,6 +25,45 @@ VOID WINAPI FreeDDEData(HANDLE, BOOL, BOOL);
  * reports successful work or invents USER policy. */
 static PFNWOWHANDLERSIN wow_input_handlers;
 static wow_user_task_lifecycle wow_lifecycle;
+
+static LRESULT call_previous_window_proc(WNDPROC procedure, HWND window,
+    UINT message, WPARAM wp, LPARAM lp, BOOL unicode)
+{
+    wow_user_borrow_scope scope;
+    LRESULT result;
+    /* Original clmsg.c::CallWindowProcAorW resolves CPD first, then
+     * usercli.h::CALLPROC_WOWCHECK forwards tagged WOW targets with NULL WW.
+     * Modern USER owns native/CPD translation but cannot interpret this
+     * worker's WOW target. Keep the original registered callback as owner. */
+    if (HIWORD(procedure) == WNDPROC_HANDLE ||
+            !((DWORD)(ULONG_PTR)procedure & WNDPROC_WOW))
+        return unicode ? CallWindowProcW(procedure, window, message, wp, lp) :
+            CallWindowProcA(procedure, window, message, wp, lp);
+    if (!wow_input_handlers.pfnWowWndProcEx) {
+        SetLastError(ERROR_INVALID_STATE);
+        return 0;
+    }
+    if (!wow_user_borrow_enter(&scope)) return 0;
+    __try {
+        result = wow_input_handlers.pfnWowWndProcEx(window, message, wp, lp,
+            (DWORD)(ULONG_PTR)procedure, NULL);
+    } __finally {
+        wow_user_borrow_leave(&scope);
+    }
+    return result;
+}
+
+LRESULT WINAPI wow_user_call_window_procA(WNDPROC procedure, HWND window,
+    UINT message, WPARAM wp, LPARAM lp)
+{
+    return call_previous_window_proc(procedure, window, message, wp, lp, FALSE);
+}
+
+LRESULT WINAPI wow_user_call_window_procW(WNDPROC procedure, HWND window,
+    UINT message, WPARAM wp, LPARAM lp)
+{
+    return call_previous_window_proc(procedure, window, message, wp, lp, TRUE);
+}
 
 /* The registration seam is normally silent.  An opt-in host-only witness is
  * retained because the immutable USER16 workload has no textual way to show
@@ -46,6 +88,48 @@ static void registration_trace(const char *stage, DWORD result)
         stage, (unsigned long)result);
     if (bytes)
         (void)WriteFile(file, line, bytes, &written, NULL);
+    CloseHandle(file);
+}
+
+static void registration_trace_class(LPCSTR name, ATOM result)
+{
+    char path[MAX_PATH];
+    char line[192];
+    HANDLE file;
+    DWORD bytes;
+    DWORD written;
+
+    if (!GetEnvironmentVariableA("MVDM_WOW_REGISTRATION_TRACE_PATH", path,
+            sizeof(path))) return;
+    file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ |
+        FILE_SHARE_WRITE, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+    if (file == INVALID_HANDLE_VALUE) return;
+    bytes = (DWORD)sprintf_s(line, sizeof(line),
+        "%lu RegisterClassName name=%s atom=%04X\r\n",
+        (unsigned long)GetCurrentProcessId(), name ? name : "<null>",
+        (unsigned)result);
+    if (bytes) (void)WriteFile(file, line, bytes, &written, NULL);
+    CloseHandle(file);
+}
+
+static void registration_trace_context(const wow_class_lookup_context *classes)
+{
+    char path[MAX_PATH];
+    char line[96];
+    HANDLE file;
+    DWORD bytes;
+    DWORD written;
+    if (!GetEnvironmentVariableA("MVDM_WOW_REGISTRATION_TRACE_PATH", path,
+            sizeof(path))) return;
+    file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ |
+        FILE_SHARE_WRITE, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+    if (file == INVALID_HANDLE_VALUE) return;
+    bytes = (DWORD)sprintf_s(line, sizeof(line),
+        "%lu RegisterClassContext value=%08lX private=%08lX public=%08lX\r\n",
+        (unsigned long)GetCurrentProcessId(), (unsigned long)(ULONG_PTR)classes,
+        (unsigned long)(ULONG_PTR)(classes ? classes->pclsPrivateList : NULL),
+        (unsigned long)(ULONG_PTR)(classes ? classes->pclsPublicList : NULL));
+    if (bytes) (void)WriteFile(file, line, bytes, &written, NULL);
     CloseHandle(file);
 }
 
@@ -82,13 +166,33 @@ static BOOL WINAPI registered_init_task(UINT version, LPCSTR app_name,
     return result;
 }
 
+static HWND WINAPI registered_create_window_ex(DWORD ex_style,
+    LPCTSTR class_name, LPCTSTR window_name, DWORD style, int x, int y,
+    int width, int height, HWND parent, HMENU menu, HANDLE instance,
+    LPVOID param, DWORD flags, LPDWORD wow_words)
+{
+    HWND result = wow_user_create_window_ex(ex_style, class_name, window_name,
+        style, x, y, width, height, parent, menu, instance, param, flags,
+        wow_words);
+    registration_trace("CreateWindowEx", (DWORD)(ULONG_PTR)result);
+    return result;
+}
+
 static ATOM WINAPI registered_register_class(PVOID a, LPDWORD b)
 {
     wow_user_runtime_thread *binding = wow_user_runtime_current();
     if (!binding || !binding->classes) {
         unsupported_void(); return 0;
     }
-    return wow_class_client_register(binding->classes, (WNDCLASSA *)a, b);
+    {
+        ATOM result;
+        registration_trace_context(binding->classes->classes);
+        result = wow_class_client_register(binding->classes, (WNDCLASSA *)a, b);
+        registration_trace_context(binding->classes->classes);
+        registration_trace("RegisterClass", result);
+        registration_trace_class(((WNDCLASSA *)a)->lpszClassName, result);
+        return result;
+    }
 }
 
 static BOOL WINAPI registered_hung_handlers(PFNW32ET callback, HANDLE event)
@@ -102,37 +206,53 @@ static BOOL WINAPI registered_hung_handlers(PFNW32ET callback, HANDLE event)
 static BOOL WINAPI registered_cleanup(HANDLE instance, DWORD task,
     PNEMODULESEG selectors, DWORD count)
 {
-    BOOL result = ensure_lifecycle() && wow_user_task_lifecycle_wow_cleanup(
+    BOOL result = ensure_lifecycle() && wow_user_task_lifecycle_exit(
         &wow_lifecycle, instance, task, selectors, count);
     registration_trace("WOWCleanup", result);
     return result;
 }
 
-static DWORD WINAPI unsupported_full_handle(WORD handle)
+static DWORD WINAPI registered_full_handle(WORD handle)
 {
-    UNREFERENCED_PARAMETER(handle);
-    unsupported_void(); return 0;
+    wow_user_runtime_thread *binding = wow_user_runtime_current();
+    HWND window;
+
+    if (!binding || !binding->thread || !binding->thread->ppi ||
+            !binding->thread->ppi->objects) {
+        unsupported_void();
+        return 0;
+    }
+    window = wow_user_window_full_handle(binding->thread->ppi->objects, handle);
+    registration_trace("GetFullUserHandle", (DWORD)(ULONG_PTR)window);
+    return (DWORD)(ULONG_PTR)window;
 }
 
 static VOID WINAPI registered_directed_yield(DWORD thread_id)
 {
     wow_user_runtime_thread *binding = wow_user_runtime_current();
     if (!binding || !binding->thread) { unsupported_void(); return; }
-    xxxDirectedYield(thread_id, binding->thread);
+    wow_user_task_lifecycle_directed_yield(&wow_lifecycle, thread_id);
+    registration_trace("DirectedYield", thread_id);
 }
 
 static BOOL WINAPI registered_yield_task(void)
 {
     wow_user_runtime_thread *binding = wow_user_runtime_current();
+    BOOL result;
     if (!binding || !binding->thread) { unsupported_void(); return FALSE; }
-    return xxxUserYield(binding->thread);
+    result = wow_user_task_lifecycle_yield(&wow_lifecycle);
+    registration_trace("YieldTask", result);
+    return result;
 }
 
 static BOOL WINAPI registered_wait_for_message(HANDLE event)
 {
     wow_user_runtime_thread *binding = wow_user_runtime_current();
+    BOOL result;
     if (!binding || !binding->thread) { unsupported_void(); return FALSE; }
-    return xxxSleepTask(FALSE, event, binding->thread);
+    result = wow_user_task_lifecycle_wait(&wow_lifecycle, event);
+    registration_trace("WaitForMessage", result);
+    return result;
 }
 
 static HBITMAP WINAPI registered_load_bitmap(HINSTANCE module, LPCSTR name,
@@ -156,8 +276,16 @@ static VOID WINAPI registered_fill_window(HWND parent, HWND window, HDC dc,
 DWORD WINAPI UserRegisterWowHandlers(APFNWOWHANDLERSIN input,
     APFNWOWHANDLERSOUT output)
 {
+    DWORD shared;
     if (!input || !output) {
         SetLastError(ERROR_INVALID_PARAMETER);
+        registration_trace("UserRegisterWowHandlers", 0);
+        return 0;
+    }
+
+    shared = (DWORD)mvdm_softpc_wow_page_domain_guest_shared_info();
+    if (!shared || !mvdm_softpc_wow_page_domain_client_desktop_ready()) {
+        SetLastError(ERROR_INVALID_STATE);
         registration_trace("UserRegisterWowHandlers", 0);
         return 0;
     }
@@ -167,7 +295,7 @@ DWORD WINAPI UserRegisterWowHandlers(APFNWOWHANDLERSIN input,
     /* Pinned USER.EXE publishes WOW 0400 with WOWDBG layout (init.c).
      * The shared view uses that checked layout, including 16-byte handles. */
     output->dwBldInfo = 0x84000000u;
-    output->pfnCsCreateWindowEx = wow_user_create_window_ex;
+    output->pfnCsCreateWindowEx = registered_create_window_ex;
     output->pfnDirectedYield = registered_directed_yield;
     output->pfnFreeDDEData = FreeDDEData;
     output->pfnGetClassWOWWords = GetClassWOWWords;
@@ -184,14 +312,11 @@ DWORD WINAPI UserRegisterWowHandlers(APFNWOWHANDLERSIN input,
     output->pfnWOWLoadBitmapA = registered_load_bitmap;
     output->pfnWowWaitForMsgAndEvent = registered_wait_for_message;
     output->pfnYieldTask = registered_yield_task;
-    output->pfnGetFullUserHandle = unsupported_full_handle;
+    output->pfnGetFullUserHandle = registered_full_handle;
     output->pfnGetMenuIndex = wow_private_user_get_menu_index;
     output->pfnWowGetDefWindowProcBits =
         wow_private_user_get_def_window_proc_bits;
     output->pfnFillWindow = registered_fill_window;
-    {
-        DWORD shared = (DWORD)mvdm_softpc_wow_page_domain_guest_shared_info();
-        registration_trace("UserRegisterWowHandlers", shared);
-        return shared;
-    }
+    registration_trace("UserRegisterWowHandlers", shared);
+    return shared;
 }

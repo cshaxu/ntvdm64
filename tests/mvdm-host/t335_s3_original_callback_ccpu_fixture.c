@@ -4,9 +4,10 @@
  * The test deliberately enters the selected original wcall16.c body.  The
  * temporary VDMFRAME/CBVDMFRAME aliases are the production bounded leases,
  * and the recursive execution spelling is the original nt_cpu.c
- * host_simulate() wrapper selected by CCPU40.  The guest instruction stream
- * is only the original CCPU unsimulate return opcode (D6 FE); it proves the
- * host-side callback order without claiming a completed WOW16 trampoline.
+ * host_simulate() wrapper selected by CCPU40.  The outer guest stream enters
+ * the existing BIOS BOP table and its inner stream uses CCPU's original
+ * unsimulate return opcode (D6 FE); it proves the host-side callback order
+ * without claiming a completed WOW16 trampoline.
  */
 #include <stdio.h>
 #include <string.h>
@@ -24,8 +25,9 @@
 extern void sas_init(PHY_ADDR size);
 extern void sas_term(void);
 extern void c_cpu_init(void);
+extern void c_cpu_simulate(void);
+extern void c_cpu_unsimulate(void);
 extern void load_sw_cpu_access_functions(void);
-extern void host_simulate(void);
 extern void c_sas_store(IU32 address, IU8 value);
 extern void c_sas_stores(IU32 address, IU8 *bytes, IU32 length);
 extern void c_sas_loads(IU32 address, IU8 *bytes, IU32 length);
@@ -34,6 +36,36 @@ extern void c_setSP(IU16 value);
 extern void c_setDX(IU16 value);
 extern IU16 c_getIP(void);
 extern IUH c_setSS(IU16 value);
+extern ISM32 c_setCS(IU16 value);
+
+typedef void (*fixture_bop)(void);
+extern fixture_bop BIOS[];
+
+static VPVOID callback_return;
+static int callback_result;
+static int callback_bop_entered;
+static const IU16 callback_program_ip = UINT16_C(0x8000);
+
+/*
+ * This is a fixture-only occupant of CCPU's existing BIOS BOP table.  The
+ * guest executes D6 05, so CallBack16 is reached while the outer simulator
+ * owns a genuine CCPU setjmp frame.  The callback itself enters the nested
+ * original host_simulate() body and returns through D6 FE.  Nothing here is
+ * linked into the product BOP table or defines a new guest ABI.
+ */
+static void callback_bop(void)
+{
+    callback_bop_entered = 1;
+    callback_result = CallBack16(RET_TASKSTARTED, NULL, 0u,
+        &callback_return);
+
+    /* The controlled outer guest program has no next instruction.  Use the
+     * original direct-return BOP mechanism to leave its CCPU invocation. */
+    c_sas_store(UINT32_C(0x00008004), UINT8_C(0xd6));
+    c_sas_store(UINT32_C(0x00008005), UINT8_C(0xfe));
+    c_setIP((IU16)(callback_program_ip + 4u));
+    c_cpu_unsimulate();
+}
 
 static void write_guest(IU32 address, const void *value, size_t count)
 {
@@ -87,22 +119,41 @@ int main(void)
     NtCurrentTeb()->WOW32Reserved = &task;
     write_guest(caller_address, &caller, sizeof(caller));
 
-    /* The original CCPU D6 FE direct-return instruction is sufficient for
-     * this narrow recursive host_simulate() proof.  It intentionally does
-     * not stand in for WOW16_From_CallBack16. */
-    c_sas_store(UINT32_C(0x0000fff0), UINT8_C(0xd6));
-    c_sas_store(UINT32_C(0x0000fff1), UINT8_C(0xfe));
-    c_setIP(UINT16_C(0xfff0));
+    /* The outer guest program reaches the fixture BOP; after CCPU advances
+     * EIP past D6 05, the nested CallBack16 simulation begins at 8002 and
+     * takes the original D6 FE direct-return branch. */
+    c_sas_store(UINT32_C(0x00008000), UINT8_C(0xd6));
+    c_sas_store(UINT32_C(0x00008001), UINT8_C(0x05));
+    c_sas_store(UINT32_C(0x00008002), UINT8_C(0xd6));
+    c_sas_store(UINT32_C(0x00008003), UINT8_C(0xfe));
+    /* The program is at a real-mode physical address.  Set the matching
+     * original CS explicitly: CCPU initialization has no test contract for
+     * an implicit code selector. */
+    (void)c_setCS(0u);
+    c_setIP(callback_program_ip);
     c_setSS(0u);
     c_setSP((IU16)caller_address);
     c_setDX(UINT16_C(0xbeef));
 
-    if (!CallBack16(RET_TASKSTARTED, NULL, 0u, &returned) ||
-        returned != UINT32_C(0xbeef0000) ||
-        c_getIP() != UINT16_C(0xfff2) ||
+    BIOS[5] = callback_bop;
+    c_cpu_simulate();
+    BIOS[5] = NULL;
+    returned = callback_return;
+
+    /* D6 FE exits the nested CCPU level directly; unlike the immutable
+     * WOW16_From_CallBack16 trampoline it deliberately does not write AX/DX
+     * back into CBVDMFRAME.  A zero return is therefore the exact expected
+     * result for this bounded ordering proof, not a fabricated callback
+     * result. */
+    if (!callback_bop_entered || !callback_result || returned != 0u ||
+        c_getIP() != (IU16)(callback_program_ip + 4u) ||
         task.vpStack != (VPVOID)caller_address ||
-        task.vpCBStack != (VPVOID)caller_address) {
-        fputs("original CallBack16/CCPU40 return ordering failed\n", stderr);
+        task.vpCBStack != (VPVOID)callback_address) {
+        fprintf(stderr, "original CallBack16/CCPU40 ordering failed "
+            "entered=%d result=%d return=%08lx ip=%04x stack=%08lx callback=%08lx\n",
+            callback_bop_entered, callback_result,
+            (unsigned long)returned, (unsigned)c_getIP(),
+            (unsigned long)task.vpStack, (unsigned long)task.vpCBStack);
         NtCurrentTeb()->WOW32Reserved = NULL;
         mvdm_softpc_guest_memory_end(&owner);
         (void)session_thread_unbind(&owner);
@@ -119,7 +170,10 @@ int main(void)
         callback.wTDB != caller.wTDB ||
         callback.wLocalBP != caller.wLocalBP ||
         callback.wAX != 0u) {
-        fputs("original CallBack16 frame contents failed\n", stderr);
+        fprintf(stderr, "original CallBack16 frame contents failed "
+            "stack=%08lx ret=%04x tdb=%04x bp=%04x ax=%04x\n",
+            (unsigned long)callback.vpStack, callback.wRetID,
+            callback.wTDB, callback.wLocalBP, callback.wAX);
         NtCurrentTeb()->WOW32Reserved = NULL;
         mvdm_softpc_guest_memory_end(&owner);
         (void)session_thread_unbind(&owner);
@@ -135,5 +189,6 @@ int main(void)
         return 4;
     }
     sas_term();
+    puts("ORIGINAL_CALLBACK16_ACTIVE_CCPU_BOP_ORDER_OK");
     return 0;
 }

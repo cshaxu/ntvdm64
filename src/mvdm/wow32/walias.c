@@ -655,32 +655,7 @@ WORD WOWHandle16 (HANDLE h32, WOW_HANDLE_TYPE htype)
     }
 }
 
-PVOID gpGdiHandleInfo = (PVOID)-1;
-
-//WARNING: This structure must match ENTRY in ntgdi\inc\hmgshare.h
-
-typedef struct _ENTRYWOW
-{
-    LONG   l1;
-    LONG   l2;
-    USHORT FullUnique;
-    USHORT us1;
-    LONG   l3;
-} ENTRYWOW, *PENTRYWOW;
-
-//
-// this routine converts a 16bit GDI handle to a 32bit handle.  There
-// is no need to do any validation on the handle since the 14bit space
-// for handles ignoring the low two bits is completely contained in the
-// valid 32bit handle space.
-//
-
 HANDLE hConvert16to32(int h16)
 {
-    ULONG h32;
-    int i = h16 >> 2;
-
-    h32 = i | (ULONG)(((PENTRYWOW)gpGdiHandleInfo)[i].FullUnique) << 16;
-
-    return((HANDLE)h32);
+    return mvdm_wow_gdi_handle_to_native((HAND16)h16);
 }

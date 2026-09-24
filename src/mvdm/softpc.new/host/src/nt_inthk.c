@@ -30,10 +30,12 @@
 
 #include "insignia.h"
 #include "host_def.h"
+#include CpuH
 
 #include "gdpvar.h"
 #include "nt_inthk.h"
 #include "debug.h"
+#include "ntvdm-exe/softpc/include/mvdm_softpc_termination.h"
 
 /* Make local symbols visible if debugging. */
 #ifndef PROD
@@ -141,6 +143,26 @@ GLOBAL BOOL host_swint_hook IFN1(IS32, int_no)
 {
     BOOL returnStatus = FALSE;
 
+    /* DIVERGENCE(MVDM-HOST-DIV-307): observation only for the original
+     * WOW_x86 INT 2Ah fast LDT publication protocol.  NT4's kernel trap
+     * recognizes EAX==EBP==F0F0F0F1 and calls NtSetLdtEntries with EBX,
+     * ECX and EDX.  CPU40 deliberately retains the normal software-
+     * interrupt dispatch here; this witness records the existing protocol
+     * before any standalone carrier is selected. */
+    if (int_no == 0x2a && getEAX() == 0xf0f0f0f1UL &&
+            getEBP() == 0xf0f0f0f1UL) {
+        mvdm_softpc_report_wow_int2a_ldt((unsigned short)getEBX(),
+            (unsigned long)getECX(), (unsigned long)getEDX());
+    }
+    if (int_no == 0x2a) {
+        /* DIVERGENCE(MVDM-HOST-DIV-309): default-off scalar witness for the
+         * original WOW_x86 kernel-LDT carrier.  It precedes no decision and
+         * cannot alter the existing software-interrupt dispatch. */
+        mvdm_softpc_report_wow_int2a((unsigned long)getEAX(),
+            (unsigned long)getEBX(), (unsigned long)getECX(),
+            (unsigned long)getEDX(), (unsigned long)getEBP());
+    }
+
     /* software interrupt handler defined ? */
     if(SWIntHandler)
     {
@@ -204,6 +226,7 @@ OUTPUT:
 GLOBAL BOOL host_exint_hook IFN2(IS32, exp_no, IS32, error_code)
 {
     BOOL returnStatus = FALSE;
+    BOOL handlerInstalled = EXIntHandler != NULL;
 
     /* exception interrupt handler defined ? */
     if(EXIntHandler)
@@ -217,6 +240,12 @@ GLOBAL BOOL host_exint_hook IFN2(IS32, exp_no, IS32, error_code)
 
 #endif /* PROD */
     }
+
+    /* DIVERGENCE(MVDM-HOST-DIV-308): default-off observation of the
+     * source-defined CCPU exception-hook result.  This locates a missing
+     * DOSX fault-vector publication without changing the hook contract. */
+    mvdm_softpc_report_wow_exception_hook((ULONG)exp_no, (ULONG)error_code,
+        (ULONG)handlerInstalled, (ULONG)returnStatus);
 
     return( returnStatus );
 }

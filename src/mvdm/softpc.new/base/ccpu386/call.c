@@ -26,6 +26,14 @@ CALL CPU Functions.
 #include <c_xfer.h>
 #include <c_tsksw.h>
 #include <fault.h>
+#include <bios.h>
+#include <c_page.h>
+#include <ccpusas4.h>
+#include <sas.h>
+#include "mvdm_softpc_termination.h"
+#include "mvdm_softpc_fast_bop.h"
+
+IMPORT ISM32 in_C;
 
 /*
    =====================================================================
@@ -73,10 +81,54 @@ CALLF
    IU32 old_sp;
    IU32 params[31];
    ISM32 i;
+   ISM32 fast_bop_kind;
 
    /* get destination (correctly typed) */
    new_cs = op1[1];
    new_ip = op1[0];
+
+   /* DIVERGENCE(MVDM-HOST-DIV-310): the native x86 monitor's FastLeavePm is
+    * a host CS:IP, not a guest descriptor.  Its CALLF return address names
+    * the following BOP-number byte; FastLeavePm consumes that return frame
+    * and raises the corresponding BOP event.  CCPU has no monitor context or
+    * frame to exchange, so consume the same byte through its normal paged
+    * instruction-read path, advance past it, and use the original dispatcher.
+    * In particular, this is not a synthetic C4 C4 guest instruction. */
+   fast_bop_kind = mvdm_softpc_fast_bop_redirect((unsigned short)new_cs,
+                                               (unsigned long)new_ip);
+   if (GET_PE() && !GET_VM() && fast_bop_kind)
+      {
+      IU8 fast_bop_number;
+
+      /* WOWBopEntry and FastWOWCallbackRet have no inline BOP byte.
+       * Their saved return IP already points at the original continuation. */
+      if (fast_bop_kind == MVDM_FAST_BOP_INLINE)
+         {
+         fast_bop_number = *Sas.SasPtrToPhysAddrByte(
+             usr_chk_byte(GET_CS_BASE() + GET_EIP(), PG_R) & SasWrapMask);
+         SET_EIP((GET_EIP() + 1u) &
+             (GET_CS_AR_X() ? 0xffffffffu : 0xffffu));
+         }
+      else
+         fast_bop_number = fast_bop_kind == MVDM_FAST_BOP_WOW ? 0x51 : 0xfe;
+      if (fast_bop_number == 0xfe)
+         c_cpu_unsimulate();
+      in_C = 1;
+      bop(fast_bop_number);
+      in_C = 0;
+      return;
+      }
+
+   /* DIVERGENCE(MVDM-HOST-DIV-305): default-off frontier witness for the
+    * original indirect WndProc call.  The adapter sees only the decoded
+    * target and cannot affect validation, stack handling or execution. */
+   mvdm_softpc_report_wow_far_call_attempt((unsigned short)new_cs,
+                                           (unsigned long)new_ip,
+                                           (unsigned short)GET_CS_SELECTOR(),
+                                           (unsigned long)GET_EIP(),
+                                           (unsigned short)GET_LDT_SELECTOR(),
+                                           (unsigned long)GET_LDT_BASE(),
+                                           (unsigned long)GET_LDT_LIMIT());
 
    if ( GET_PE() == 0 || GET_VM() == 1 )
       {

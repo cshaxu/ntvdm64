@@ -33,6 +33,7 @@ static char SccsID[]="@(#)virtual.c	1.9 07/05/95 Copyright Insignia Solutions Lt
 #include "sas.h"
 #include "bios.h"
 #include "virtual.h"
+#include "mvdm_softpc_termination.h"
 #include "error.h"
 #include "debug.h"
 
@@ -698,6 +699,9 @@ GLOBAL void
 virtual_device_trap IFN0()
    {
    int new_vb;
+
+   mvdm_softpc_report_virtual_device_control((unsigned long)getEAX(),
+       getBX(), getCX(), getDX());
 
    switch ( getEAX() )
       {

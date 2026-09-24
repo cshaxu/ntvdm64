@@ -236,7 +236,7 @@ listed capability owner must implement and wire its slots as soon as usable.
 | OUT-14 | pfnWOWLoadBitmapA | S4 | registered_load_bitmap; depends on S3 | Assignment present; full guest/cleanup acceptance pending |
 | OUT-15 | pfnWowWaitForMsgAndEvent | S2 | registered_wait_for_message | Assignment present; full guest/cleanup acceptance pending |
 | OUT-16 | pfnYieldTask | S2 | registered_yield_task | Assignment present; full guest/cleanup acceptance pending |
-| OUT-17 | pfnGetFullUserHandle | S2 | unsupported_full_handle: explicit failure placeholder | Explicit placeholder; incomplete |
+| OUT-17 | pfnGetFullUserHandle | S2 | registered_full_handle -> worker-local HANDLEENTRY/native HWND association | Publish/retire/reuse fixture passes; real guest message-path invocation remains pending |
 | OUT-18 | pfnGetMenuIndex | S4 | wow_private_user_get_menu_index | Assignment present; full guest/cleanup acceptance pending |
 | OUT-19 | pfnWowGetDefWindowProcBits | S4 | wow_private_user_get_def_window_proc_bits | Assignment present; full guest/cleanup acceptance pending |
 | OUT-20 | pfnFillWindow | S4 | registered_fill_window; depends on S3 | Assignment present; full guest/cleanup acceptance pending |

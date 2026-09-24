@@ -5,8 +5,11 @@ extern ULONG Cpu40LdtShadowAddress;
 extern ULONG IntelBase;
 extern ULONG DpmiCpu40DescriptorShadowAddress(USHORT Selector);
 extern BOOL DpmiCpu40GetDosxIdtDescriptor(PULONG Base, PUSHORT Limit);
+extern NTSTATUS DpmiSetWowLdtEntry(ULONG Selector, ULONG EntryLow,
+    ULONG EntryHigh);
 
 static LDT_ENTRY gdt[32];
+static LDT_ENTRY ldt[LDT_SIZE];
 
 static void set_dosx_idt(ULONG base, ULONG limit)
 {
@@ -27,6 +30,10 @@ int main(void)
 {
     ULONG base;
     USHORT limit;
+    ULONG ldt_base = 0x00123000u;
+    ULONG ldt_low = (ldt_base << 16) | 0x0000ffffu;
+    ULONG ldt_high = 0x0000f212u;
+    ULONG ldt_index = 0x83b0u >> 3;
 
     /* DOSX's original 20h-byte VdmPmStackInfo prefix is shared with the
      * host VDM_DPMIINFO carrier; its extra reflector is outside that prefix.
@@ -77,5 +84,45 @@ int main(void)
 
     set_dosx_idt(0x00456000u, 0x7feu);
     if (DpmiCpu40GetDosxIdtDescriptor(&base, &limit)) return 11;
+
+    /* WOW_x86 KRNL386 bypasses BOP 53:00 for one LDT entry: it supplies
+     * selector 83B7h and two descriptor words to the kernel's INT 2Ah
+     * NtSetLdtEntries service.  Exercise the standalone finite carrier with
+     * that exact selector form, including its TI/RPL normalization. */
+    RtlZeroMemory(ldt, sizeof(ldt));
+    Cpu40LdtShadowAddress = 0x3000u;
+    IntelBase = (ULONG)ldt - Cpu40LdtShadowAddress;
+    if (!NT_SUCCESS(DpmiSetWowLdtEntry(0x83b7u, ldt_low, ldt_high)))
+        return 13;
+    if (*(PULONG)&ldt[ldt_index] != ldt_low ||
+            *(((PULONG)&ldt[ldt_index]) + 1) != ldt_high)
+        return 14;
+    if (FlatAddress[ldt_index] != (ULONG)IntelBase + ldt_base)
+        return 18;
+
+    /* Selector zero means that the optional entry was not supplied. */
+    ldt[0].LimitLow = 0x55aau;
+    if (!NT_SUCCESS(DpmiSetWowLdtEntry(0u, 0u, 0u)) ||
+            ldt[0].LimitLow != 0x55aau)
+        return 15;
+
+    /* Preserve the source NT kernel's precise invalid-descriptor outcome. */
+    if (DpmiSetWowLdtEntry(0x00010000u, ldt_low, ldt_high) !=
+            STATUS_INVALID_LDT_DESCRIPTOR)
+        return 16;
+    if (DpmiSetWowLdtEntry(0x83b7u, ldt_low, 0x0000e002u) !=
+            STATUS_INVALID_LDT_DESCRIPTOR)
+        return 17;
+    if (FlatAddress[ldt_index] != (ULONG)IntelBase + ldt_base)
+        return 19;
+    /* Original DIB aliases must survive the fast publication path; changing
+     * the descriptor base must retire that alias through the original owner. */
+    if (!VdmAddDescriptorMapping(0x83b7u, 1u, ldt_base, 0xdead0000u) ||
+            !NT_SUCCESS(DpmiSetWowLdtEntry(0x83b7u, ldt_low, ldt_high)) ||
+            FlatAddress[ldt_index] != 0xdead0000u)
+        return 20;
+    if (!NT_SUCCESS(DpmiSetWowLdtEntry(0x83b7u, ldt_low, ldt_high + 1u)) ||
+            FlatAddress[ldt_index] != (ULONG)IntelBase + ldt_base + 0x10000u)
+        return 21;
     return 0;
 }

@@ -35,6 +35,14 @@
 #undef MVDM_WOW32_RESTORE_X86_FOR_VDMDBG
 #endif
 #include "wowfax.h"
+/* Keep this completed registry-reader family isolated from the uncompleted
+ * original registry writer families selected for their later owner packets. */
+#include <mvdm_shadow_registry.h>
+/* Keep thread-handle teardown on the original NT close call. */
+#undef NtOpenKey
+#undef NtEnumerateValueKey
+#undef NtQueryValueKey
+#undef NtClose
 
 extern void UnloadNetworkFonts( UINT id );
 
@@ -3585,14 +3593,14 @@ VOID WK32InitWowIsKnownDLL(HANDLE hKeyWow)
     // Get the list of known DLLs from the registry.
     //
 
-    lRegError = RegQueryValueEx(
+    lRegError = hKeyWow ? RegQueryValueEx(
                     hKeyWow,
                     "KnownDLLs",
                     NULL,
                     &dwRegValueType,
                     sz,
                     &ulSize
-                    );
+                    ) : ERROR_FILE_NOT_FOUND;
 
     if (ERROR_SUCCESS == lRegError && REG_SZ == dwRegValueType) {
 

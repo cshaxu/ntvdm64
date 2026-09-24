@@ -9,6 +9,7 @@
 typedef struct wow_class_lookup_entry {
     struct wow_class_lookup_entry *next; /* Original ppcls = (PPCLS)*ppcls. */
     ATOM atomClassName;
+    WORD fnid;
     HANDLE hModule;
     DWORD flags;
     LONG cWndReferenceCount; /* Enrolled WND associations, not alias borrows. */
@@ -18,6 +19,9 @@ typedef struct wow_class_lookup_entry {
     LPSTR lpszClientAnsiMenuName;
     LPWSTR lpszClientUnicodeMenuName;
     DWORD adwWOW[2];
+    /* Server-form address of the worker's fixed-width original CLS
+     * projection. This is a guest numeric value, never a native CLS alias. */
+    ULONG guest_server;
 } wow_class_lookup_entry;
 
 typedef struct wow_class_lookup_context {

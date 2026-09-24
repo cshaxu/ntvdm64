@@ -20,6 +20,7 @@ int __cdecl main(void)
     wow_user_task_lifecycle lifecycle = {0};
     wow_user_task_lifecycle_callbacks callbacks = {0};
     wow_cleanup_window stale_window = {0};
+    wow_task_order_waiter idle_waiter = {0};
     HWND native_window;
     HANDLE wowexec = CreateEventW(NULL, FALSE, FALSE, NULL);
 
@@ -37,17 +38,30 @@ int __cdecl main(void)
         0x1234, 0, 0, (DWORD)CW_USEDEFAULT, (DWORD)CW_USEDEFAULT,
         (DWORD)CW_USEDEFAULT, (DWORD)CW_USEDEFAULT, SW_SHOW));
     CHECK(wow_user_runtime_current() == &binding && binding.thread != NULL);
+    /* Original shared WOWEXEC has no per-task WaitForInputIdle record.
+     * It must survive idle notification and lose FIRSTIDLE. A real waiter
+     * uses the same callback and must receive its event. */
+    CHECK(binding.thread->ptdb->pwti == NULL);
+    CHECK(wow_user_runtime_enter(&binding));
+    binding.thread->host->wake_input_idle(binding.thread);
+    CHECK(!(binding.thread->TIF_flags & WOW_TASK_TIF_FIRSTIDLE));
+    idle_waiter.pIdleEvent = CreateEventW(NULL, TRUE, FALSE, NULL);
+    CHECK(idle_waiter.pIdleEvent != NULL);
+    binding.thread->ptdb->pwti = &idle_waiter;
+    binding.thread->TIF_flags |= WOW_TASK_TIF_FIRSTIDLE;
+    binding.thread->host->wake_input_idle(binding.thread);
+    CHECK(WaitForSingleObject(idle_waiter.pIdleEvent, 0) == WAIT_OBJECT_0);
+    CHECK(!(binding.thread->TIF_flags & WOW_TASK_TIF_FIRSTIDLE));
+    binding.thread->ptdb->pwti = NULL;
+    CloseHandle(idle_waiter.pIdleEvent);
+    CHECK(wow_user_runtime_leave(&binding));
     /* Exercise the recovered USER task-order owner after InitTask.  This is
      * deliberately not a synthetic wake: with no pending work, the original
      * yield path must retain its own immediate scheduler semantics. */
     CHECK(wow_user_task_lifecycle_yield(&lifecycle));
-    /* The same task context enters the recovered original cleanup owner;
-     * the empty enrolled-object case is a real lifecycle state, not a
-     * substitute success callback. */
-    CHECK(wow_user_task_lifecycle_wow_cleanup(&lifecycle,
-        (HANDLE)(ULONG_PTR)0x1234, 0x1234, NULL, 0));
-    /* A native object disappeared before its enrollment was retired. Do not
-     * free the task underneath the still-enrolled cleanup owner on failure. */
+    /* A native object disappeared before its enrollment was retired. The one
+     * registered cleanup/retirement edge must leave the task carrier intact
+     * on failure, then run original cleanup exactly once when it succeeds. */
     native_window = CreateWindowExA(0, "STATIC", "", WS_POPUP, 0, 0, 1, 1,
         NULL, NULL, GetModuleHandleW(NULL), NULL);
     CHECK(native_window != NULL);
@@ -63,10 +77,14 @@ int __cdecl main(void)
         entry->bType = TYPE_WINDOW;
         entry->wUniq = HIWORD(native_window);
         lifecycle.objects->last_handle = index;
-        CHECK(!wow_user_task_lifecycle_cleanup(&lifecycle, 0x1234));
+        CHECK(!wow_user_task_lifecycle_exit(&lifecycle,
+            (HANDLE)(ULONG_PTR)0x1234, 0x1234, NULL, 0));
         CHECK(GetLastError() == ERROR_INVALID_WINDOW_HANDLE);
         CHECK(lifecycle.threads == task && binding.thread == thread);
         CHECK(!binding.exclusive_held && lifecycle.cleanup.thread == NULL);
+        CHECK(!wow_user_runtime_unbind(&binding));
+        CHECK(GetLastError() == ERROR_BUSY);
+        CHECK(wow_user_runtime_current() == &binding && binding.thread == thread);
         if (lifecycle.threads == task && binding.thread == thread) {
             CHECK(thread->ptdb != NULL && entry->pOwner == thread);
             CHECK(WaitForSingleObject(thread->pEventQueueServer, 0) != WAIT_FAILED);
@@ -74,10 +92,16 @@ int __cdecl main(void)
         ZeroMemory(entry, sizeof(*entry));
         lifecycle.objects->last_handle = 0;
     }
-    CHECK(wow_user_task_lifecycle_cleanup(&lifecycle, 0x1234));
+    CHECK(wow_user_task_lifecycle_exit(&lifecycle, (HANDLE)(ULONG_PTR)0x1234,
+        0x1234, NULL, 0));
+    CHECK(binding.thread != NULL && lifecycle.threads != NULL);
+    CHECK(wow_user_task_lifecycle_exit(&lifecycle, (HANDLE)(ULONG_PTR)0x1234,
+        0, NULL, 0));
+    CHECK(binding.thread != NULL && binding.classes != NULL);
+    CHECK(!binding.exclusive_held);
+    CHECK(wow_user_runtime_unbind(&binding));
     CHECK(binding.thread == NULL && lifecycle.threads == NULL);
     wow_user_task_lifecycle_dispose(&lifecycle);
-    CHECK(wow_user_runtime_unbind(&binding));
     CHECK(session_thread_unbind(&owner));
     CHECK(session_dispose(&owner));
     if (wowexec) CloseHandle(wowexec);

@@ -2,6 +2,11 @@
 #include "wow_user_borrow_scope.h"
 #include "wow_user_object_bindings.h"
 #include "wow_task_order_bindings.h"
+#include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
+
+#include <stdio.h>
+
+extern LONG __cdecl VdmFreeVirtualMemory(ULONG address);
 
 typedef VOID (APIENTRY *PFNW32ET)(VOID);
 #pragma warning(push)
@@ -21,6 +26,7 @@ struct wow_window_words_binding {
     wow_cleanup_window cleanup;
     wow_window_callback callback;
     wow_user_object_table *objects;
+    ULONG retired_guest_backing;
 };
 static SRWLOCK publication_lock = SRWLOCK_INIT;
 static const WCHAR property_name[] = L"NTVDM.WOW.WindowWords";
@@ -68,6 +74,7 @@ BOOL WINAPI wow_window_words_attach_target(HWND window, const WW *words,
     binding->cleanup.lpfnWndProc = target ? (WNDPROC)target->procedure : NULL;
     binding->callback = target ? target->callback : NULL;
     binding->objects = NULL;
+    binding->retired_guest_backing = 0u;
     AcquireSRWLockExclusive(&publication_lock);
     if (GetPropW(window, property_name)) SetLastError(ERROR_ALREADY_EXISTS);
     else attached = SetPropW(window, property_name, binding);
@@ -123,6 +130,12 @@ BOOL WINAPI wow_window_words_publish_owner(HWND window, wow_window_words_binding
 void WINAPI wow_window_words_release(wow_window_words_binding *binding)
 {
     if (binding && InterlockedDecrement(&binding->references) == 0) {
+        /* Like HMMarkObjectDestroy/ThreadUnlock, the final existing native
+         * borrow owns physical WND release. A terminated worker has already
+         * discarded its entire guest address space. */
+        if (binding->retired_guest_backing &&
+                mvdm_softpc_wow_page_domain_active())
+            (void)VdmFreeVirtualMemory(binding->retired_guest_backing);
         wow_class_words_release(binding->class_words);
         HeapFree(GetProcessHeap(), 0, binding);
     }
@@ -171,12 +184,18 @@ static BOOL detach_matching(HWND window, wow_window_words_binding *expected)
     if (!own_window(window)) return FALSE;
     AcquireSRWLockExclusive(&publication_lock);
     binding = (wow_window_words_binding *)GetPropW(window, property_name);
-    if (binding && (!expected || binding == expected))
-        binding = (wow_window_words_binding *)RemovePropW(window, property_name);
-    else binding = NULL;
+    if (!binding || (expected && binding != expected)) {
+        ReleaseSRWLockExclusive(&publication_lock);
+        return FALSE;
+    }
+    if (binding->objects && !wow_user_window_retire(binding->objects, window,
+            &binding->cleanup, &binding->retired_guest_backing)) {
+        ReleaseSRWLockExclusive(&publication_lock);
+        return FALSE;
+    }
+    binding = (wow_window_words_binding *)RemovePropW(window, property_name);
     if (binding) {
         if (binding->objects) {
-            wow_user_window_retire(binding->objects,window,&binding->cleanup);
             binding->objects=NULL;
         }
         wow_class_words_window_association(binding->class_words, FALSE);
@@ -204,6 +223,8 @@ BOOL WINAPI wow_window_dispatch_bound(HWND window, UINT message, WPARAM wp,
     wow_window_words_binding *binding;
     wow_window_dispatch_view view;
     wow_user_borrow_scope scope;
+    ULONG saved_callback[2];
+    BOOL callback_published = FALSE;
     if (!result || !procedure || HIWORD(procedure) == WNDPROC_HANDLE ||
             ((procedure & WNDPROC_WOW) && !callback)) {
         SetLastError(ERROR_INVALID_PARAMETER);
@@ -231,8 +252,15 @@ BOOL WINAPI wow_window_dispatch_bound(HWND window, UINT message, WPARAM wp,
         binding->words.dwStyle = info.dwStyle;
         binding->words.dwExStyle = info.dwExStyle;
         binding->words.hInstance = (HANDLE)(ULONG_PTR)(DWORD)instance;
+        if (binding->objects) {
+            if (!mvdm_softpc_wow_page_domain_callback_window(
+                    (unsigned long)(ULONG_PTR)window, saved_callback)) return FALSE;
+            callback_published = TRUE;
+        }
         *result = DispatchClientMessage(&view, message, wp, lp, procedure);
     } __finally {
+        if (callback_published)
+            (void)mvdm_softpc_wow_page_domain_restore_callback(saved_callback);
         wow_user_borrow_leave(&scope);
         wow_window_words_release(binding);
     }
@@ -270,12 +298,43 @@ BOOL WINAPI wow_window_procedure_exchange(HWND window, DWORD procedure, DWORD *p
     return TRUE;
 }
 
+/* The product witness is deliberately off by default.  It observes the
+ * native entrance and the already-completed original dispatch separately so
+ * an integration test can distinguish USER delivery from WOW callback work.
+ * It neither retains the HWND nor affects message ownership. */
+static VOID window_trace(HWND window, UINT message, LONG result,
+    const char *stage)
+{
+    char path[MAX_PATH], line[176];
+    DWORD bytes, written;
+    HANDLE file;
+    LONG native_procedure;
+
+    if (!GetEnvironmentVariableA("MVDM_WOW_WINDOW_TRACE_PATH", path,
+            sizeof(path))) return;
+    file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ |
+        FILE_SHARE_WRITE, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+    if (file == INVALID_HANDLE_VALUE) return;
+    native_procedure = GetWindowLongA(window, GWL_WNDPROC);
+    bytes = (DWORD)sprintf_s(line, sizeof(line),
+        "%lu %s hwnd=%08lX message=%04X native=%08lX result=%08lX\r\n",
+        (unsigned long)GetCurrentProcessId(), stage,
+        (unsigned long)(ULONG_PTR)window, (unsigned)message,
+        (unsigned long)native_procedure, (unsigned long)result);
+    if (bytes) (void)WriteFile(file, line, bytes, &written, NULL);
+    CloseHandle(file);
+}
+
 /* Native ABI entrance only: original DispatchClientMessage owns selection,
  * and original W32Win16WndProcEx owns decoding/thunking/CallBack16. */
 LRESULT CALLBACK wow_window_native_proc(HWND window, UINT message, WPARAM wp, LPARAM lp)
 {
     wow_window_words_binding *binding = wow_window_words_acquire(window);
     LONG result = message == WM_CREATE ? -1 : 0;
+    DWORD saved = GetLastError();
+
+    window_trace(window, message, 0, "WindowEntry");
+    SetLastError(saved);
     if (!binding) {
         if (message == WM_NCDESTROY) return DefWindowProcA(window, message, wp, lp);
         SetLastError(ERROR_INVALID_DATA);
@@ -289,5 +348,11 @@ LRESULT CALLBACK wow_window_native_proc(HWND window, UINT message, WPARAM wp, LP
         if (message == WM_NCDESTROY) wow_window_words_detach_if(window, binding);
         wow_window_words_release(binding);
     }
+    /* Default-off production witness: observe the original dispatch result
+     * after the call has already completed, without changing its callback or
+     * destruction ordering. */
+    saved = GetLastError();
+    window_trace(window, message, result, "WindowDispatch");
+    SetLastError(saved);
     return result;
 }

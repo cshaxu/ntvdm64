@@ -234,6 +234,7 @@ typedef union
 
 LOCAL IU16 cpu_hw_interrupt_number;
 #ifdef NTVDM
+#include "ntvdm-exe/softpc/include/mvdm_softpc_termination.h"
 /* This is a default-off attribution latch only.  `NEXT_INST` observes the
  * post-instruction CPU position, while `DECODE` is the last source-owned
  * point at which the preceding instruction address is known. */
@@ -875,6 +876,29 @@ DO_INST:
       Decode and Action instruction.
     */
 DECODE:
+
+#ifdef NTVDM
+   mvdm_softpc_report_nt_transition(getCS(), getEIP(), getEFLAGS(),
+      getSS(), getESP());
+   if (getCS() == 0x00c7u && getEIP() >= 0x4f6au &&
+       getEIP() < 0x4f88u)
+      mvdm_softpc_report_wow_allocsel_instruction(getCS(), getEIP(),
+         getAX(), getBX(), getCX(), getDX(), getBP(), getEFLAGS());
+   if ((getCS() == 0x00c7u && getEIP() >= 0x4f88u &&
+       getEIP() < 0x4fa4u) ||
+       (getCS() == 0x01c7u && getEIP() >= 0x3947u &&
+       getEIP() < 0x3a60u))
+      mvdm_softpc_report_wow_setdescriptor_instruction(getCS(), getEIP(),
+         getAX(), getBX(), getCX(), getDX(), getBP(), getEFLAGS());
+   if (getCS() == 0x021fu && (getEIP() == 0x2c26u ||
+       getEIP() == 0x2d3du))
+      mvdm_softpc_report_wow_getsel_instruction(getCS(), getEIP(), getAX(),
+         getCX(), getSI(), getDS(), getEFLAGS());
+   if (getCS() == 0x021fu && getEIP() >= 0x3482u &&
+       getEIP() < 0x3492u)
+      mvdm_softpc_report_wow_longptradd_instruction(getCS(), getEIP(),
+         getAX(), getBX(), getCX(), getDX(), getSS(), getESP());
+#endif
 
    opcode = GET_INST_BYTE(p);	/* get next byte */
    /*

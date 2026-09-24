@@ -35,6 +35,7 @@ RegisterClassWOWA(
 #else
 #define WOW_ORIGINAL_CLIENT_DISPATCH
 #include "wow_window_dispatch_bindings.h"
+#define WNDPROC_WOW WOW_WINDOW_PROC_TAG
 
 LONG DispatchClientMessage(
     PWND pwnd,

@@ -23,6 +23,7 @@ Revision History:
 #include "precomp.h"
 #pragma hdrstop
 #include "softpc.h"
+#include "ntvdm-exe/softpc/include/mvdm_softpc_termination.h"
 /* CPU40 exposes these generated CCPU accessors through cpu4gen.h, which is
  * intentionally not part of the DPMI provider's public include surface. */
 extern void setLDT_SELECTOR(USHORT val);
@@ -102,6 +103,7 @@ Return Value:
     setIP((getIP() + 1));           // take care of subfn.
 
     DBGTRACE(DPMI_DISPATCH_ENTRY, Index, 0, 0);
+    mvdm_softpc_report_dpmi_bop(Index, getAX(), getBX(), getCX());
 
     if (Index >= MAX_DPMI_BOP_FUNC) {
 #if DBG
@@ -298,6 +300,11 @@ Return Value:
     IntelBase = (ULONG) Sim32GetVDMPointer((ULONG)0, 1, FALSE);
 
 #if defined(CPU_40_STYLE)
+    /* Observation only: DOSX calls this once for its bootstrap table and
+     * again after moving descriptor storage.  Record those original handoff
+     * boundaries before deciding whether either source owns WOW selectors. */
+    mvdm_softpc_report_dpmi_table_address("before", (ULONG)Ldt - IntelBase,
+        Cpu40GdtShadowAddress, Cpu40LdtShadowAddress);
     /* The source-published DOSX GDT and the process LDT are distinct
      * descriptor domains.  Keep immutable published images for CCPU rather
      * than using the mutable DOSX source table as either live table. */
@@ -314,7 +321,15 @@ Return Value:
         Cpu40LdtShadowAddress = Address + LDT_SIZE * sizeof(LDT_ENTRY);
         RtlCopyMemory((PVOID)(IntelBase + Cpu40GdtShadowAddress), Ldt,
             LDT_SIZE * sizeof(LDT_ENTRY));
-        RtlCopyMemory((PVOID)(IntelBase + Cpu40LdtShadowAddress), Ldt,
+        /* `Ldt` is DOSX/KRNL386's selector-management table, not the
+         * process LDT which the x86 kernel publishes for protected selector
+         * loads.  Its unused entries form a next-free-selector chain (for
+         * example 83B7 contains 83B8); copying it into CCPU makes those
+         * bookkeeping words look like malformed descriptors and turns the
+         * original not-present fault into #GP.  A new process LDT starts
+         * with not-present descriptors.  The existing source-shaped 53:00
+         * and WOW x86 NtSetLdtEntries carriers publish real entries later. */
+        RtlZeroMemory((PVOID)(IntelBase + Cpu40LdtShadowAddress),
             LDT_SIZE * sizeof(LDT_ENTRY));
     }
     /* The LDTR selector is an internal-validity token; DOSX neither sees nor
@@ -322,5 +337,7 @@ Return Value:
     setLDT_SELECTOR(4);
     setLDT_BASE_LIMIT(Cpu40LdtShadowAddress,
         (ULONG)(LDT_SIZE * sizeof(LDT_ENTRY) - 1));
+    mvdm_softpc_report_dpmi_table_address("after", (ULONG)Ldt - IntelBase,
+        Cpu40GdtShadowAddress, Cpu40LdtShadowAddress);
 #endif
 }

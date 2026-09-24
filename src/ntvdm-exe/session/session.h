@@ -86,7 +86,9 @@ typedef int (*session_video_event_fn)(void *context,
 
 typedef void (*session_teardown_fn)(void *context);
 typedef int (*session_thread_bind_fn)(void *context);
-typedef void (*session_thread_unbind_fn)(void *context);
+/* A failed unbind retains the thread/session binding for cleanup and retry.
+ * Hooks must accept repeated unbind after their own successful retirement. */
+typedef int (*session_thread_unbind_fn)(void *context);
 
 typedef struct session_teardown {
     session_teardown_fn function;

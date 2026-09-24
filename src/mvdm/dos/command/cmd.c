@@ -6,6 +6,7 @@
 
 #include "cmd.h"
 #include "cmdsvc.h"
+#include "mvdm_softpc_firmware.h"
 
 
 /* CmdInit - COmmand Initialiazation routine.
@@ -27,7 +28,7 @@ PSZ	*argv;
 CHAR  RootDir [MAX_PATH];
 UINT  Len;
 
-    Len = GetSystemDirectory (RootDir,MAX_PATH);
+    Len = GetNtvdmSystemDirectoryA(RootDir,MAX_PATH);
     if (Len <= MAX_PATH && Len > 0)
 	cmdHomeDirectory[0] = RootDir[0];
     return TRUE;

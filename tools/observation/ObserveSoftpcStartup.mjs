@@ -11,9 +11,7 @@ function sha256(path) {
   return createHash('sha256').update(readFileSync(path)).digest('hex');
 }
 
-const runtimeLogsRoot = resolve('O:/winnt/logs');
-
-function isRuntimeLogPath(value) {
+function isRuntimeLogPath(runtimeLogsRoot, value) {
   const candidate = resolve(value);
   const relation = relative(runtimeLogsRoot, candidate);
   return relation !== '' && !isAbsolute(relation) && relation !== '..' && !relation.startsWith('..\\') && !relation.startsWith('../');
@@ -80,7 +78,8 @@ for (const key of ['launcher', 'product', 'stage', 'report']) {
   if (!options[key]) usage();
   options[key] = resolve(options[key]);
 }
-if (!isRuntimeLogPath(options.report)) {
+const runtimeLogsRoot = resolve(options.stage, 'logs');
+if (!isRuntimeLogPath(runtimeLogsRoot, options.report)) {
   throw new Error(`observation report must be below ${runtimeLogsRoot}`);
 }
 mkdirSync(runtimeLogsRoot, { recursive: true });

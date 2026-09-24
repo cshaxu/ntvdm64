@@ -37,4 +37,12 @@ int wow_callback_frame_acquire_linear(uint32_t guest_address, uint32_t byte_coun
     uint32_t access, wow_callback_frame_lease *view_out);
 int wow_callback_frame_release(wow_callback_frame_lease *view, int commit);
 
+/* Default-off observation only.  The original CallBack16 owner supplies its
+ * already-computed frame values immediately before/after the recursive CPU
+ * transition; this binding neither maps memory nor changes callback state. */
+void wow_callback_frame_trace(const char *phase, uint32_t ret_id,
+    uint32_t vp_stack, uint32_t vp_callback_stack,
+    uint32_t callback_linear, uint16_t task, uint32_t procedure,
+    uint16_t message, uint32_t parameter);
+
 #endif

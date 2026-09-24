@@ -139,7 +139,6 @@ $legacyGdi32Definition = Join-Path $build 'legacy-wow-gdi32.def'
 $legacyKernel32Definition = Join-Path $build 'legacy-wow-kernel32.def'
 $legacyNtdllDefinition = Join-Path $build 'legacy-wow-ntdll.def'
 $systemImportAliases = @(
-    [pscustomobject]@{ Decorated = 'GdiQueryTable@0'; Raw = 'GdiQueryTable' },
     [pscustomobject]@{ Decorated = 'SetCursorContents@8'; Raw = 'SetCursorContents' },
     [pscustomobject]@{ Decorated = 'RegisterWowBaseHandlers@4'; Raw = 'RegisterWowBaseHandlers' },
     [pscustomobject]@{ Decorated = 'RegisterWowExec@4'; Raw = 'RegisterWowExec' },
@@ -168,8 +167,6 @@ $systemImportAliases = @(
 )
 @('LIBRARY USER32.DLL', 'EXPORTS', '    SetCursorContents') |
     Set-Content -LiteralPath $legacyUser32Definition -Encoding ascii
-@('LIBRARY GDI32.DLL', 'EXPORTS', '    GdiQueryTable') |
-    Set-Content -LiteralPath $legacyGdi32Definition -Encoding ascii
 @('LIBRARY KERNEL32.DLL', 'EXPORTS',
   '    RegisterWowBaseHandlers',
   '    RegisterWowExec') |
@@ -220,6 +217,11 @@ foreach ($alias in @(
     [pscustomobject]@{ Decorated = 'wow_user_runtime_leave@4'; Raw = 'wow_user_runtime_leave' },
     [pscustomobject]@{ Decorated = 'wow_user_runtime_set_context@12'; Raw = 'wow_user_runtime_set_context' },
     [pscustomobject]@{ Decorated = 'wow_user_worker_active@0'; Raw = 'wow_user_worker_active' },
+    # These parent exports are cdecl worker bodies. The original WOW32 DLL
+    # references them under /Gz, so its @0 names must weak-alias to the
+    # cdecl import-library spelling (including its leading underscore).
+    [pscustomobject]@{ Decorated = 'mvdm_softpc_fast_bop_dispatch_offset@0'; Raw = '_mvdm_softpc_fast_bop_dispatch_offset' },
+    [pscustomobject]@{ Decorated = 'mvdm_softpc_fast_bop_callback_offset@0'; Raw = '_mvdm_softpc_fast_bop_callback_offset' },
     [pscustomobject]@{ Decorated = 'OpenNtRtlNtStatusToDosError@4'; Raw = 'OpenNtRtlNtStatusToDosError' },
     [pscustomobject]@{ Decorated = 'GetNextVDMCommand@4'; Raw = 'GetNextVDMCommand' },
     [pscustomobject]@{ Decorated = 'GetCurrentDirectoryOem@8'; Raw = 'GetCurrentDirectoryOem' },
@@ -239,6 +241,27 @@ foreach ($alias in @(
 )) {
     $parentImportAliasLines.Add('#pragma comment(linker, "/alternatename:_' + $alias.Decorated + '=' + $alias.Raw + '")')
     $parentImportAliasLines.Add('#pragma comment(linker, "/alternatename:__imp__' + $alias.Decorated + '=__imp_' + $alias.Raw + '")')
+}
+# These three worker-local GDI aliases are cdecl rather than the original
+# WOW32 stdcall import family above.  The parent .def deliberately exports
+# their loader-visible names while binding them to x86 C bodies.  Supply the
+# matching COFF aliases here; this is ABI glue only, not a provider body.
+foreach ($raw in @(
+    'mvdm_wow_gdi_handle_from_native',
+    'mvdm_wow_gdi_handle_to_native',
+    'mvdm_wow_gdi_handle_retire',
+    'mvdm_softpc_system_find_file',
+    'mvdm_softpc_profile_shadow_system_ini',
+    'mvdm_softpc_system_copy_root',
+    'mvdm_softpc_system_copy_system_directory',
+    'GetNtvdmWindowsDirectoryA',
+    'GetNtvdmSystemDirectoryA',
+    'GetNtvdmWindowsDirectoryW',
+    'GetNtvdmSystemDirectoryW',
+    'mvdm_softpc_wow_page_domain_publish_system_color'
+)) {
+    $parentImportAliasLines.Add('#pragma comment(linker, "/alternatename:_' + $raw + '=' + $raw + '")')
+    $parentImportAliasLines.Add('#pragma comment(linker, "/alternatename:__imp__' + $raw + '=__imp_' + $raw + '")')
 }
 [IO.File]::WriteAllLines($parentImportAliasSource, $parentImportAliasLines,
     [Text.UTF8Encoding]::new($false))
@@ -393,10 +416,9 @@ $dllEntryBridgeObject = 'obj/wow32-dll-entry-bridge.obj'
 $ninja.Add('build ' + $dllEntryBridgeObject + ': cc ' + (ConvertTo-NinjaPath $dllEntryBridgeSource))
 $ninja.Add('build obj/wow32.res: rc ' + (ConvertTo-NinjaPath $resource))
 $ninja.Add('build legacy-wow-user32.lib: legacy_import_lib ' + (ConvertTo-NinjaPath $legacyUser32Definition))
-$ninja.Add('build legacy-wow-gdi32.lib: legacy_import_lib ' + (ConvertTo-NinjaPath $legacyGdi32Definition))
 $ninja.Add('build legacy-wow-kernel32.lib: legacy_import_lib ' + (ConvertTo-NinjaPath $legacyKernel32Definition))
 $ninja.Add('build legacy-wow-ntdll.lib: legacy_import_lib ' + (ConvertTo-NinjaPath $legacyNtdllDefinition))
-$ninja.Add('build wow32.dll | wow32.dll.lib: wow_dll_link ' + (($objects + $supportObjects + @($systemImportAliasObject, $parentImportAliasObject, $dllEntryBridgeObject, 'obj/wow32.res', 'legacy-wow-user32.lib', 'legacy-wow-gdi32.lib', 'legacy-wow-kernel32.lib', 'legacy-wow-ntdll.lib')) -join ' '))
+$ninja.Add('build wow32.dll | wow32.dll.lib: wow_dll_link ' + (($objects + $supportObjects + @($systemImportAliasObject, $parentImportAliasObject, $dllEntryBridgeObject, 'obj/wow32.res', 'legacy-wow-user32.lib', 'legacy-wow-kernel32.lib', 'legacy-wow-ntdll.lib')) -join ' '))
 $ninja.Add('default wow32.dll')
 
 [IO.File]::WriteAllLines((Join-Path $build 'build.ninja'), $ninja, [Text.UTF8Encoding]::new($false))

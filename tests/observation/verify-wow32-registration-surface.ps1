@@ -38,8 +38,20 @@ if ($missingInput.Count -ne 0) { throw "Original input slots not assigned by W32
 if ($missingOutput.Count -ne 0) { throw "Provider output slots not assigned: $($missingOutput -join ', ')" }
 if (-not $bridgeText.Contains('wow_input_handlers = *input;')) { throw 'Provider does not retain the original input callback record.' }
 if (-not $bridgeText.Contains('output->dwBldInfo = 0x84000000u;')) { throw 'Provider does not declare the pinned USER build layout.' }
-if (-not $bridgeText.Contains('output->pfnGetFullUserHandle = unsupported_full_handle;')) {
-    throw 'The one known incomplete output slot is no longer explicit.'
+if (-not $bridgeText.Contains('output->pfnGetFullUserHandle = registered_full_handle;')) {
+    throw 'The full-handle output is not bound to the worker-local window association.'
+}
+foreach ($entry in @(
+    @('registered_directed_yield', 'wow_user_task_lifecycle_directed_yield'),
+    @('registered_yield_task', 'wow_user_task_lifecycle_yield'),
+    @('registered_wait_for_message', 'wow_user_task_lifecycle_wait')
+)) {
+    $body = [regex]::Match($bridgeText, '(?s)static\s+\w+\s+WINAPI\s+' +
+        $entry[0] + '\([^)]*\)\s*\{(.*?)\n\}')
+    if (!$body.Success -or !$body.Groups[1].Value.Contains($entry[1] + '(') -or
+        $body.Groups[1].Value -match '\bxxx(?:DirectedYield|UserYield|SleepTask)\s*\(') {
+        throw "Scheduler registration bypasses the USER lock owner: $($entry[0])"
+    }
 }
 
 [ordered]@{
@@ -47,6 +59,6 @@ if (-not $bridgeText.Contains('output->pfnGetFullUserHandle = unsupported_full_h
     evidenceKind = 'ABI slot assignment audit; not callback/runtime acceptance'
     inputSlots = $inputFields.Count
     outputSlots = $outputFields.Count
-    explicitFailureOutputSlots = @('pfnGetFullUserHandle')
+    explicitFailureOutputSlots = @()
     pinnedBuildInfo = '84000000'
 } | ConvertTo-Json

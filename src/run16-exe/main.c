@@ -19,6 +19,79 @@ BOOL BaseCreateVDMEnvironment(PWCHAR environment, ANSI_STRING *ansi,
                               UNICODE_STRING *unicode);
 BOOL BaseDestroyVDMEnvironment(ANSI_STRING *ansi, UNICODE_STRING *unicode);
 
+typedef struct _WORKER_WIN16DIR_SCOPE {
+    PWSTR environment;
+} WORKER_WIN16DIR_SCOPE;
+
+/* Original BaseCheckVDM creates the ANSI DOS record and matching Unicode
+ * child block through BaseCreateVDMEnvironment. KRNL386 consumes WIN16DIR
+ * from the former, so changing only CreateProcess's Unicode block is not
+ * sufficient. Build an independent child MULTI_SZ so the original projector
+ * receives the derived value without modifying run16's own environment.
+ * SYSTEMROOT remains the real host loader identity throughout. */
+static BOOL begin_worker_win16_directory(WORKER_WIN16DIR_SCOPE *scope)
+{
+    WCHAR root[MAX_PATH];
+    WCHAR *slash;
+    LPWCH current;
+    LPWCH cursor;
+    PWSTR destination;
+    size_t chars = 1u;
+    size_t root_chars;
+    static const WCHAR name[] = L"WIN16DIR=";
+
+    if (scope == NULL) {
+        SetLastError(ERROR_INVALID_PARAMETER);
+        return FALSE;
+    }
+    ZeroMemory(scope, sizeof(*scope));
+    if (!GetModuleFileNameW(NULL, root, ARRAYSIZE(root))) return FALSE;
+    slash = wcsrchr(root, L'\\');
+    if (slash == NULL || slash == root) {
+        SetLastError(ERROR_BAD_PATHNAME);
+        return FALSE;
+    }
+    *slash = L'\0';
+    root_chars = wcslen(root);
+    current = GetEnvironmentStringsW();
+    if (current == NULL) return FALSE;
+    for (cursor = current; *cursor != L'\0'; cursor += wcslen(cursor) + 1u) {
+        if (_wcsnicmp(cursor, name, ARRAYSIZE(name) - 1u) != 0)
+            chars += wcslen(cursor) + 1u;
+    }
+    chars += (ARRAYSIZE(name) - 1u) + root_chars + 1u;
+    scope->environment = (PWSTR)HeapAlloc(GetProcessHeap(), 0,
+        chars * sizeof(*scope->environment));
+    if (scope->environment == NULL) {
+        FreeEnvironmentStringsW(current);
+        SetLastError(ERROR_NOT_ENOUGH_MEMORY);
+        return FALSE;
+    }
+    destination = scope->environment;
+    for (cursor = current; *cursor != L'\0'; cursor += wcslen(cursor) + 1u) {
+        size_t entry_chars;
+        if (_wcsnicmp(cursor, name, ARRAYSIZE(name) - 1u) == 0) continue;
+        entry_chars = wcslen(cursor) + 1u;
+        memcpy(destination, cursor, entry_chars * sizeof(*destination));
+        destination += entry_chars;
+    }
+    memcpy(destination, name, (ARRAYSIZE(name) - 1u) * sizeof(*destination));
+    destination += ARRAYSIZE(name) - 1u;
+    memcpy(destination, root, (root_chars + 1u) * sizeof(*destination));
+    destination += root_chars + 1u;
+    *destination = L'\0';
+    FreeEnvironmentStringsW(current);
+    return TRUE;
+}
+
+static void end_worker_win16_directory(WORKER_WIN16DIR_SCOPE *scope)
+{
+    if (scope == NULL) return;
+    if (scope->environment != NULL) HeapFree(GetProcessHeap(), 0,
+        scope->environment);
+    ZeroMemory(scope, sizeof(*scope));
+}
+
 static void s34_run16_trace(const char *stage, DWORD value)
 {
     char path[MAX_PATH],line[96];
@@ -152,6 +225,7 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command)
     BASE_API_MSG message = {0};
     ANSI_STRING environment = {0};
     UNICODE_STRING unicode_environment = {0};
+    WORKER_WIN16DIR_SCOPE win16_directory = {0};
     UNICODE_STRING worker_command = {0};
     OPENNT_BASE_VDM_CONFIG configuration;
     const OPENNT_BASE_VDM_CONFIG *previous_configuration;
@@ -182,11 +256,19 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command)
     /* This is the original parent-side VDM environment projection.  The
      * ANSI record is captured by BaseCheckVDM; the matching Unicode record
      * is passed unchanged to the newly-created worker. */
-    if (!BaseCreateVDMEnvironment(NULL, &environment, &unicode_environment))
+    if (!begin_worker_win16_directory(&win16_directory))
     {
         result = GetLastError();
         goto done;
     }
+    if (!BaseCreateVDMEnvironment(win16_directory.environment, &environment,
+            &unicode_environment))
+    {
+        result = GetLastError();
+        end_worker_win16_directory(&win16_directory);
+        goto done;
+    }
+    end_worker_win16_directory(&win16_directory);
     GetStartupInfoW(&startup);
     /* The original BaseCheckVDM accepts either caller-supplied STARTF
      * standard handles or the process-parameter equivalents.  The public
@@ -392,6 +474,7 @@ waited:
     if (parent_wait && parent_wait != worker.hProcess)
         CloseHandle(parent_wait);
 done:
+    end_worker_win16_directory(&win16_directory);
     if (guarded_startup.lpAttributeList) {
         DeleteProcThreadAttributeList(guarded_startup.lpAttributeList);
         HeapFree(GetProcessHeap(),0,guarded_startup.lpAttributeList);

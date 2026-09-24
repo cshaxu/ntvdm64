@@ -18,10 +18,15 @@ typedef struct wow_cleanup_handle {
  * This is not an NT4 binary layout or a guest-published shared handle table. */
 typedef struct wow_user_object_table {
     wow_cleanup_handle entries[0x10000];
+    /* Native identity is worker-local lookup state only. The paired guest
+     * HANDLEENTRY carries a separately allocated original-layout WND, never
+     * this value or any other host pointer. */
+    HWND windows[0x10000];
     ULONG last_handle;
 } wow_user_object_table;
 BOOL WINAPI wow_user_window_publish(wow_user_object_table *, HWND,
     struct wow_cleanup_window *, struct wow_task_order_thread *);
 BOOL WINAPI wow_user_window_retire(wow_user_object_table *, HWND,
-    struct wow_cleanup_window *);
+    struct wow_cleanup_window *, ULONG *retained_backing);
+HWND WINAPI wow_user_window_full_handle(wow_user_object_table *, WORD);
 #endif

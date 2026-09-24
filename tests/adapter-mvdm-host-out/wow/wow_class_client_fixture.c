@@ -66,6 +66,44 @@ static void version_domains(void)
     CHECK(GetLastError()==ERROR_INVALID_PARAMETER && calls==version_calls);
     CHECK(classes.pclsPrivateList==NULL && wow_class_client_current()==NULL);
 }
+static void procedure_encoding(void)
+{
+    static const DWORD guest[] = {0x03b70b98u, 0x83b70b98u};
+    unsigned i;
+    for (i=0; i<2; ++i) {
+        wow_class_lookup_context classes={0};
+        wow_task_order_thread thread={0};
+        wow_class_client_context context={&classes,0x030a,get_version,callback,&thread,NULL};
+        WNDCLASSA wc={0};
+        DWORD words[2]={guest[i],0};
+        DWORD encoded=guest[i] | WOW_WINDOW_PROC_TAG;
+        DWORD decoded;
+        ATOM atom;
+        wow_class_words_binding *binding;
+        wow_window_dispatch_target target;
+        /* Exactly WU32RegisterClass's producer contract, followed by the
+         * original W32Win16WndProcEx decoding contract. */
+        if (guest[i] & WOW_WINDOW_PROC_TAG)
+            encoded &= ~WOW_WINDOW_SELECTOR_VIRTUAL_BIT;
+        wc.lpfnWndProc=(WNDPROC)encoded;wc.hInstance=module;
+        wc.lpszClassName="S2_WOW_PROC_ENCODING";
+        atom=wow_class_client_register(&context,&wc,words);
+        CHECK(atom!=0);
+        if (!atom) continue;
+        binding=wow_class_words_acquire(&classes,atom,module);
+        CHECK(binding && wow_class_words_target(binding,&target));
+        if (binding) {
+            CHECK(target.procedure==encoded);
+            decoded=target.procedure & ~WOW_WINDOW_PROC_TAG;
+            if (!(decoded & WOW_WINDOW_SELECTOR_VIRTUAL_BIT))
+                decoded |= WOW_WINDOW_PROC_TAG | WOW_WINDOW_SELECTOR_VIRTUAL_BIT;
+            CHECK(decoded==guest[i]);
+            wow_class_words_release(binding);
+        }
+        CHECK(wow_class_client_unregister(&context,wc.lpszClassName,module));
+    }
+}
+
 int __cdecl main(void)
 {
     wow_class_lookup_context classes = {0};
@@ -131,6 +169,7 @@ int __cdecl main(void)
         wow_class_words_release(binding);
         CHECK(wow_class_client_unregister(&context,wc.lpszClassName,module));
     }
+    procedure_encoding();
     printf("WOW_CLASS_CLIENT errors=%u version_calls=%u version_domains=5 server_owner=1 cpd=%u\n",errors,version_calls,cpd_calls);
     return errors != 0;
 }

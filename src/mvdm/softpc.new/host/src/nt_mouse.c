@@ -31,6 +31,13 @@
 #include <ntddvdeo.h>
 #include "nt_fulsc.h"
 
+/* DIVERGENCE(MVDM-HOST-DIV-274): original NT USER's cursor producer publishes
+ * the already bounded virtual position before dispatching guest mouse work.
+ * The standalone worker retains that one shared-data update at SoftPC's
+ * existing post-transform boundary; it does not introduce another mouse
+ * queue, coordinate conversion or USER input owner. */
+extern int mvdm_softpc_wow_page_domain_publish_cursor(long, long);
+
 
 #define TEXT_MODE          1
 #define GRAPHICS_MODE      2
@@ -559,6 +566,10 @@ else
    {
    ScaleToWindowedVirtualCoordinates(&mcs->position.x,&mcs->position.y,counter);
    }
+
+// Publish the same final virtual coordinates consumed by the guest mouse path.
+(void)mvdm_softpc_wow_page_domain_publish_cursor((long)mcs->position.x,
+                                                 (long)mcs->position.y);
 
 //
 // Create a condition mask for use by any call back installed
