@@ -205,6 +205,21 @@ try {
     $env:MVDM_S41_WOW_BOP_REPORT_PATH = $wowBopTrace
     $expectedWorkerId = 0
     $expectedWorkerStart = $null
+    # Record only aggregate shape, never environment values or secrets. A
+    # caller-supplied synthetic padding variable makes size experiments
+    # distinguishable from ordinary inherited-environment runs.
+    $environmentItems = @(Get-ChildItem Env:)
+    $environmentLengths = @($environmentItems | ForEach-Object {
+        $_.Name.Length + $_.Value.Length + 2
+    })
+    $paddingValue = [Environment]::GetEnvironmentVariable('NTVDM_ENV_SIZE_PROBE')
+    [ordered]@{
+        entry_count=$environmentItems.Count
+        utf16_character_count=(1 + ($environmentLengths | Measure-Object -Sum).Sum)
+        largest_entry_characters=($environmentLengths | Measure-Object -Maximum).Maximum
+        synthetic_padding_characters=if ($null -eq $paddingValue) { 0 } else { $paddingValue.Length }
+        limitation='Aggregate shape only; this does not identify or seal the environment values'
+    } | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $logs 'environment-shape.json')
     for ($launch = 1; $launch -le $LaunchCount; ++$launch) {
     # Each launch must supply new trace evidence. Prior destruction callbacks
     # cannot validate a subsequent application, even if HWND values are reused.

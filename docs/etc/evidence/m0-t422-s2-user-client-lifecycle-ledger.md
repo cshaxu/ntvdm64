@@ -2279,3 +2279,43 @@ binding must prove no calls into departed guest code, no surviving owner/TLS
 reference, no loss of another task's objects, and exactly-once release. The
 probe provides a regression baseline for selecting that boundary; S2 remains
 open and no exceptional cleanup acceptance is claimed.
+
+## E66 ordinary environment is still a real startup blocker
+
+Revalidated unchanged f97b7a074 production artifacts using the existing real
+WINMINE observer without removing inherited environment variables. Run
+`t422-s2-20260924T192353798Z-4a7f307e-window-lifecycle` terminates as FAIL:
+worker 15000 displays illegal instruction CS:05D8 IP:1F8E, bytes
+63 61 6C 5C 4D, before a visible WINMINE window. No registration log exists.
+The launcher remains waiting until scoped harness cleanup. This is not a
+successful ordinary-profile launch, nor evidence that the later registration
+repair regressed: those passing runs used a different environment.
+
+Controlled diagnostic run
+`t422-s2-20260924T192519856Z-a5066a80-window-lifecycle` uses the prior reduced
+environment plus only NTVDM_ENV_SIZE_PROBE containing 4,500 ASCII Z bytes.
+It also fails to create a window within 35 seconds (worker 46852 CPU 33.453s),
+but does not show the same exception. This supports an environment-shape/size
+investigation; it does not prove identical causality or a byte-count threshold.
+Both failed harness sessions reached terminal status and restored SYSTEM.INI.
+
+Source review finds a concrete boundary for the next witness:
+cmdmisc.c::GetWowKernelCmdLine copies cmdVDMEnvBlk.cchEnv bytes to EnvSeg:0
+without comparing CMDINFO.EnvSize, unlike cmdGetNextCmd's DOS branch.
+COMMAND tcode.asm has the original carry/AX capacity retry protocol;
+cmdenv.c::cmdGetInitEnvironment separately negotiates paragraphs in BX.
+These source facts do not yet prove actual guest-buffer overflow or identify
+why the initial and later environment contracts differ. Do not modify guest,
+truncate production environment, or register an original-guest bug without
+the allocation/copy evidence. The WOW host path remains S2-owned work.
+
+The observer now records aggregate environment entry count, total UTF-16
+character count, maximum entry length and synthetic-padding length immediately
+before launching. No environment values/secrets are logged; aggregates are
+not a sealed environment identity. Parser validation passes. Reduced baseline
+run `t422-s2-20260924T192756835Z-4191d39c-window-lifecycle` passes again with
+worker 53568 and launcher 13468: 39 entries, 3,511 total characters, maximum
+entry 270, no padding. This includes observer trace-path variables. The
+ordinary parent environment measurement (76 entries, 4,979 characters) did
+not include those subsequently installed variables and must not be treated
+as that failed child's exact block size. No production source changed in E66.
