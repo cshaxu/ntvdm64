@@ -591,8 +591,10 @@ BOOL WINAPI wow_user_native_call_begin(wow_user_native_call *call, HWND window)
             target && &target->thread != receiver; target = target->next) {}
     if (words) wow_window_words_release(words);
     if (!target || receiver == sender || !receiver->ptdb || sender->ppi->pwpi->nTaskLock) {
-        if (!call->held) (void)wow_user_runtime_leave(binding);
-        return TRUE;
+        /* ssend.c MAKECALL drops USER data protection, not WOW execution
+         * ownership. Only a caller-held lock needs restoring after callout. */
+        if (call->held) call->binding = binding;
+        return wow_user_runtime_leave(binding);
     }
     call->binding = binding;
     call->receiver_id = target->thread_id;
@@ -612,6 +614,10 @@ BOOL WINAPI wow_user_native_call_end(wow_user_native_call *call)
     if (!binding) return TRUE;
     if (wow_user_runtime_current() != binding || !wow_user_runtime_enter(binding))
         return FALSE;
+    if (!call->receiver_id) {
+        call->binding = NULL;
+        return TRUE; /* Restored the caller-held data lock; no task handoff. */
+    }
     sender = binding->thread;
     /* Resolve again under the owner lock: the native operation may have
      * destroyed its target. Never dereference a retained receiver pointer. */
@@ -626,6 +632,40 @@ BOOL WINAPI wow_user_native_call_end(wow_user_native_call *call)
     call->binding = NULL;
     return call->held || wow_user_runtime_leave(binding);
 }
+
+/* ADAPTER-WOW-051: candidate target-aware native call edge. Same-thread
+ * calls retain their direct execution. Native transport/result is unchanged. */
+#define WOW_NATIVE_CALL(type, name, params, args, failed) \
+type WINAPI wow_native_##name params \
+{ \
+    wow_user_native_call call; \
+    type result; BOOL restored; DWORD error = GetLastError(); \
+    if (!wow_user_native_call_begin(&call, w)) return failed; \
+    SetLastError(error); \
+    __try { result = name args; } \
+    __finally { \
+        error = GetLastError(); \
+        restored = wow_user_native_call_end(&call); \
+        if (restored) SetLastError(error); \
+    } \
+    return restored ? result : failed; \
+}
+WOW_NATIVE_CALL(BOOL, BringWindowToTop, (HWND w), (w), FALSE)
+WOW_NATIVE_CALL(BOOL, SetWindowPos, (HWND w, HWND after, int x, int y, int cx, int cy, UINT flags), (w, after, x, y, cx, cy, flags), FALSE)
+WOW_NATIVE_CALL(BOOL, MoveWindow, (HWND w, int x, int y, int cx, int cy, BOOL paint), (w, x, y, cx, cy, paint), FALSE)
+WOW_NATIVE_CALL(BOOL, ShowWindow, (HWND w, int show), (w, show), FALSE)
+WOW_NATIVE_CALL(BOOL, EnableWindow, (HWND w, BOOL enable), (w, enable), FALSE)
+WOW_NATIVE_CALL(HWND, SetActiveWindow, (HWND w), (w), NULL)
+WOW_NATIVE_CALL(HWND, SetFocus, (HWND w), (w), NULL)
+WOW_NATIVE_CALL(BOOL, DestroyWindow, (HWND w), (w), FALSE)
+WOW_NATIVE_CALL(HWND, SetParent, (HWND w, HWND parent), (w, parent), NULL)
+WOW_NATIVE_CALL(BOOL, SetWindowPlacement, (HWND w, const WINDOWPLACEMENT *placement), (w, placement), FALSE)
+WOW_NATIVE_CALL(int, GetWindowTextA, (HWND w, LPSTR text, int count), (w, text, count), 0)
+WOW_NATIVE_CALL(int, GetWindowTextLengthA, (HWND w), (w), 0)
+WOW_NATIVE_CALL(BOOL, SetWindowTextA, (HWND w, LPCSTR text), (w, text), FALSE)
+WOW_NATIVE_CALL(LRESULT, SendMessageA, (HWND w, UINT message, WPARAM wp, LPARAM lp), (w, message, wp, lp), 0)
+WOW_NATIVE_CALL(LRESULT, SendMessageTimeoutA, (HWND w, UINT message, WPARAM wp, LPARAM lp, UINT flags, UINT timeout, PDWORD_PTR value), (w, message, wp, lp, flags, timeout, value), 0)
+#undef WOW_NATIVE_CALL
 
 static BOOL retire_task(wow_user_task_lifecycle *owner, DWORD task_id,
     HANDLE instance, PNEMODULESEG selectors, DWORD count)

@@ -3180,3 +3180,69 @@ Nested cross-thread sends, early ReplyMessage, target teardown and final
 clean-build/ordinary-profile acceptance remain open. E83's bounded results
 remain unchanged; this checkpoint is not S2 closure or a tested replacement
 for the runtime DLL.
+
+## E85 Production native-call fixture and caller-held data-lock repair
+
+E84's link failure came from selecting the registration bridge object with
+its complete registration/thunk dependency graph. Function packaging alone
+(`native-direct-packaged-red-20260924`) still failed to link. That attempted
+harness change was removed. Move the existing 15 native-call wrappers,
+verbatim, to their existing lifecycle state owner instead; no new source,
+mock implementation or product export is introduced. The original test
+runner now links the actual production functions without registration roots.
+
+Actual red run `build/M0-T422/S2/native-direct-owner-red-20260924` executes
+all four native calls and reports `FAIL line=44 error=22136` and
+`WOW_USER_TASK_LIFECYCLE errors=1 native_direct=4`: the callback sees the
+caller-held USER data lock. Fixture SHA-256:
+820025240F1470030487354810DE87A084F72F3691EDB056DB359F9FF72E59C3.
+Original ntuser/kernel/ssend.c MAKECALL releases/reacquires USER protection
+around the user callback independently of task execution ownership. Restore
+only that caller-held lock in the non-handoff branch; leave taskman, event
+counts, psmsSent and same-thread execution ownership untouched.
+
+An initial broader variant reacquired even a previously unheld data lock on
+return. Its native fixture passed, but real reactivation runs
+`t422-s2-20260924T221257571Z-6cf0bb6e-window-lifecycle` and
+`t422-s2-20260924T221510837Z-5f725499-window-lifecycle` timed out. The first
+thread snapshot resolves to native BringWindowToTop waiting on a task inside
+GetMessage/xxxUserYield/xxxSleepTask. Saved DLL/map:
+`build/M0-T422/S2/native-call-lock-artifacts-20260924`, DLL SHA-256
+1915FB6A26278D7C3CD9C2CBAC82CFE2703265DF91C8C50091373623C459F4E6.
+That variant is rejected, not counted as a guest pass. The exact scheduling
+interleaving is not proven by these snapshots alone.
+
+Saved E81 DLL control passes in
+`t422-s2-20260924T221435683Z-86a5ebe6-window-lifecycle`; a rebuilt move-only
+control also passes in `t422-s2-20260924T221646653Z-1fa1d27a-window-lifecycle`.
+The final minimal caller-held-only variant passes its production fixture
+`build/M0-T422/S2/native-direct-held-only-20260924` with
+`WOW_USER_TASK_LIFECYCLE errors=0 native_direct=4` and WOW_FIXTURE_OK.
+Fixture SHA-256:
+7531FBC09FD1629DA202A14488C9802FDD55BB7EB133A7FB8C50A7C76A9CA2CE.
+It passes real single-instance reactivation twice:
+`t422-s2-20260924T221759687Z-018819ca-window-lifecycle` and
+`t422-s2-20260924T221849502Z-874f24f0-window-lifecycle`, followed by two
+sequential launch/close cycles in
+`t422-s2-20260924T221937418Z-89a26043-window-lifecycle`.
+All use the E83 worker; profile restoration and scoped cleanup are recorded.
+
+Final candidate DLL/map are retained under
+`build/M0-T422/S2/native-call-held-only-artifacts-20260924`; DLL SHA-256 is
+08321F398D8846147BF1DB0CDDF6DF639A410352822E1DA762C2FAB742B57BEF.
+These remain incremental, reduced-environment diagnostic runs, not sealed
+ordinary-product acceptance. This repairs the demonstrated data-lock case;
+it does not certify target-aware scheduling, early ReplyMessage, nested
+cross-task callbacks, target death or all S2 cleanup contracts. No mirror,
+overlay or guest changes; the adapter change is relocation plus the small
+caller-held lock restoration branch. S2 remains open.
+
+All 17 existing DOS regression cases pass on this candidate package; summary:
+`O:/winnt/logs/t422-s2-native-call-lock-20260924222016-4f8d5032-summary.json`.
+After diagnostics the runtime provider is restored to the E80 tested baseline
+(B423B07C81A259B6788D37BF15B4A23B7285EB97566D73BA91B2AD603D2BB9CF),
+while the E83 worker remains deployed. The new candidate is retained, not
+silently promoted to full S2 acceptance. Production adapter footprint for
+this delivery is +42/-35 lines including relocation (net +7), zero new files
+and zero mirror/overlay/guest changes. Documentation governance and diff
+whitespace checks pass.
