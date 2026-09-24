@@ -121,6 +121,134 @@ static void verify_receive_callout(wow_user_runtime_thread *binding)
     CHECK(UnregisterClassW(cls.lpszClassName, cls.hInstance));
 }
 
+#ifdef WOW_NATIVE_SEND_FIXTURE
+typedef struct cross_callout {
+    session *session_owner;
+    wow_user_runtime *runtime;
+    wow_user_task_lifecycle *lifecycle;
+    HANDLE ready, returned, complete;
+    HWND window;
+    DWORD receiver_id;
+    unsigned delivered;
+} cross_callout;
+
+static DWORD WINAPI cross_watchdog(void *done)
+{
+    if (WaitForSingleObject(done, 15000) != WAIT_OBJECT_0) {
+        fprintf(stderr, "WOW_NATIVE_SEND_TIMEOUT\n");
+        ExitProcess(98);
+    }
+    return 0;
+}
+
+static LRESULT CALLBACK cross_receive(HWND window, UINT message, WPARAM wp, LPARAM lp)
+{
+    cross_callout *test = (cross_callout *)GetWindowLongPtrW(window, GWLP_USERDATA);
+    if (message == WM_NCCREATE) {
+        test = ((CREATESTRUCTW *)lp)->lpCreateParams;
+        SetWindowLongPtrW(window, GWLP_USERDATA, (LONG_PTR)test);
+    }
+    if (message == WM_APP + 65) {
+        wow_user_runtime_thread *binding = wow_user_runtime_current();
+        CHECK(InSendMessage() && !binding->exclusive_held);
+        CHECK(binding->thread->ppi->pwpi->CSOwningThread == binding->thread);
+        ++test->delivered;
+        fprintf(stderr, "WOW_NATIVE_SEND_RECEIVE early=%lu\n", (DWORD)wp);
+        if (wp) {
+            CHECK(ReplyMessage(114));
+            /* Native ReplyMessage returns without performing NT4 WOW's
+             * receiver yield. This rendezvous exposes concurrent ownership;
+             * it does not substitute a product scheduling operation. */
+            if (WaitForSingleObject(test->returned, 3000) != WAIT_OBJECT_0)
+                ExitProcess(95);
+            CHECK(binding->thread->ppi->pwpi->CSOwningThread == binding->thread);
+            return 999;
+        }
+        return 114;
+    }
+    return DefWindowProcW(window, message, wp, lp);
+}
+
+static DWORD WINAPI cross_receiver(void *parameter)
+{
+    cross_callout *test = parameter;
+    wow_user_runtime_thread binding = {0};
+    wow_window_words_binding *borrow;
+    WW words = {0};
+    MSG message;
+    CHECK(session_thread_bind(test->session_owner));
+    CHECK(wow_user_runtime_bind(&binding, test->runtime, NULL, NULL));
+    CHECK(wow_user_task_lifecycle_init(test->lifecycle, 0x0400, "RECEIVER.EXE",
+        0x1235, 0, 0, 0, 0, 1, 1, SW_HIDE));
+    test->window = CreateWindowExW(0, L"WOW_NATIVE_CROSS", L"", 0, 0, 0, 1, 1,
+        HWND_MESSAGE, NULL, GetModuleHandleW(NULL), test);
+    CHECK(test->window != NULL);
+    CHECK(wow_window_words_attach(test->window, &words));
+    borrow = wow_window_words_acquire(test->window);
+    if (!borrow) ExitProcess(94);
+    /* Native-only owner association, as in the same-thread production test. */
+    wow_window_words_cleanup_value(borrow)->thread = binding.thread;
+    SetEvent(test->ready);
+    while (wow_user_task_lifecycle_message(test->lifecycle, &message, NULL,
+            0, 0, PM_REMOVE, TRUE) > 0)
+        DispatchMessageW(&message);
+    wow_window_words_detach(test->window);
+    wow_window_words_release(borrow);
+    CHECK(DestroyWindow(test->window));
+    CHECK(wow_user_runtime_unbind(&binding));
+    CHECK(session_thread_unbind(test->session_owner));
+    return 0;
+}
+
+static void verify_cross_callout(session *owner, wow_user_runtime_thread *binding,
+    wow_user_task_lifecycle *lifecycle)
+{
+    cross_callout test = {0};
+    WNDCLASSW cls = {0};
+    HANDLE helper, watchdog;
+    DWORD code;
+    unsigned early;
+    cls.lpfnWndProc = cross_receive;
+    cls.hInstance = GetModuleHandleW(NULL);
+    cls.lpszClassName = L"WOW_NATIVE_CROSS";
+    CHECK(RegisterClassW(&cls) != 0);
+    test.session_owner = owner; test.runtime = binding->runtime;
+    test.lifecycle = lifecycle;
+    test.ready = CreateEventW(NULL, TRUE, FALSE, NULL);
+    test.returned = CreateEventW(NULL, TRUE, FALSE, NULL);
+    test.complete = CreateEventW(NULL, TRUE, FALSE, NULL);
+    watchdog = CreateThread(NULL, 0, cross_watchdog, test.complete, 0, NULL);
+    helper = CreateThread(NULL, 0, cross_receiver, &test, 0, &test.receiver_id);
+    CHECK(helper && watchdog);
+    if (WaitForSingleObject(test.ready, 3000) != WAIT_OBJECT_0) ExitProcess(96);
+    CHECK(wow_user_task_lifecycle_yield(lifecycle));
+    for (early = 0; early < 2; ++early) {
+        DWORD_PTR result = 0;
+        unsigned reply = 0;
+#ifdef WOW_NATIVE_REPLY_FIXTURE
+        reply = early;
+#endif
+        fprintf(stderr, "WOW_NATIVE_SEND_BEGIN early=%u\n", reply);
+        CHECK(wow_native_SendMessageTimeoutA(test.window, WM_APP + 65, reply, 0,
+            SMTO_ABORTIFHUNG, 3000, &result) != 0 && result == 114);
+        CHECK(binding->thread->ppi->pwpi->CSOwningThread == binding->thread);
+        CHECK(!binding->thread->psmsSent && !binding->exclusive_held);
+        fprintf(stderr, "WOW_NATIVE_SEND_RETURN early=%u result=%lu\n", reply, result);
+        if (reply) SetEvent(test.returned);
+    }
+    CHECK(PostThreadMessageW(test.receiver_id, WM_QUIT, 0, 0));
+    wow_user_task_lifecycle_directed_yield(lifecycle, test.receiver_id);
+    CHECK(WaitForSingleObject(helper, 3000) == WAIT_OBJECT_0);
+    CHECK(GetExitCodeThread(helper, &code) && !code);
+    CHECK(test.delivered == 2);
+    SetEvent(test.complete);
+    CHECK(WaitForSingleObject(watchdog, 3000) == WAIT_OBJECT_0);
+    CloseHandle(helper); CloseHandle(watchdog);
+    CloseHandle(test.ready); CloseHandle(test.returned); CloseHandle(test.complete);
+    CHECK(UnregisterClassW(cls.lpszClassName, cls.hInstance));
+}
+#endif
+
 int __cdecl main(void)
 {
     session owner;
@@ -166,6 +294,9 @@ int __cdecl main(void)
     CloseHandle(idle_waiter.pIdleEvent);
     CHECK(wow_user_runtime_leave(&binding));
     verify_receive_callout(&binding);
+#ifdef WOW_NATIVE_SEND_FIXTURE
+    verify_cross_callout(&owner, &binding, &lifecycle);
+#endif
     /* Exercise the recovered USER task-order owner after InitTask.  This is
      * deliberately not a synthetic wake: with no pending work, the original
      * yield path must retain its own immediate scheduler semantics. */

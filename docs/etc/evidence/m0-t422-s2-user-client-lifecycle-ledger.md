@@ -3246,3 +3246,65 @@ silently promoted to full S2 acceptance. Production adapter footprint for
 this delivery is +42/-35 lines including relocation (net +7), zero new files
 and zero mirror/overlay/guest changes. Documentation governance and diff
 whitespace checks pass.
+
+## E86 Production cross-task send and early-reply counterexample
+
+Add independent `native-send` and `native-reply` modes to the existing
+lifecycle runner. Both create two native threads through the real session,
+runtime and original InitTask/taskman bindings, associate a native window
+with the existing WW owner, and call production
+wow_native_SendMessageTimeoutA. The native window procedure is a fixture,
+not USER16/CallBack16: this verifies the host scheduling boundary, not guest
+acceptance. A 15-second in-process watchdog bounds scheduler hangs; native
+send timeout and the reply rendezvous each have separate 3-second bounds.
+The runner now reports the fixture exit code explicitly.
+
+Positive control `build/M0-T422/S2/native-cross-production-control-20260924`
+passes two ordinary cross-task sends with result 114, receiver and sender
+execution-owner checks, then window destruction, thread retirement and all
+existing lifecycle checks. Replaying the same fixture also exits zero:
+`O:/winnt/logs/t422-s2-native-cross-production-control-20260924.log`.
+Fixture SHA-256:
+EFED18C5EBA1194C24068F165CE771A65DBD2F214543D346811D951B2E1B06BE.
+
+The initial mixed ordinary/early-reply run
+`build/M0-T422/S2/native-cross-production-red-20260924` passes the ordinary
+send, enters the early-reply receiver, successfully calls native ReplyMessage,
+but never reaches the sender-return marker. The receiver's sender-return
+rendezvous expires with exit 95. Exact replay repeats that outcome:
+`O:/winnt/logs/t422-s2-native-cross-production-red-20260924.log`;
+fixture SHA-256:
+8FA06EBBABA3E52233CD93BBAF647B0A19A114BF05AB50992EEA9238990D20E6.
+This is a failing product-boundary test, not an expected-failure success.
+
+Source explanation: WU32ReplyMessage still calls native ReplyMessage.
+Original ntuser/kernel/sendmsg.c::_ReplyMessage uses the actual received SMS,
+performs DirectedScheduleTask(receiver,sender,FALSE,psms), and has the WOW
+receiver sleep when sender->psmsSent matches that exact SMS. Ordinary receive
+completion has the same handoff. The original receive path saves/restores
+psmsCurrent around dispatch. Current native-call end instead runs reverse
+scheduling from the sender after native transport returns; no production
+receiver psmsCurrent publication or ReplyMessage handoff exists. A successful
+native reply therefore does not prove that the WOW sender can regain
+execution while the receiver callback remains pending.
+
+The next correction must preserve exact nested message identity, sender and
+receiver lifetime, no double reply/handoff, and unwind/timeout cleanup. Do
+not guess an incoming sender from HWND/TID alone, add a second message queue,
+or treat a generic yield as the original directed-reply operation. Keep the
+original scheduler owner; prove the receive/callback/early-reply edges with
+production tests before promoting the target-aware candidate. This delivery
+changes tests/evidence only and does not change the deployed E80 provider,
+the E83 worker, mirrors or immutable guest media. S2 remains open.
+
+The final separately selected `native-reply` case builds successfully at
+`build/M0-T422/S2/native-reply-production-red-20260924` and reports
+`Task cleanup fixture failed: exit=95 case=native-reply`. Its replay again
+exits 95 with the same five stage markers, retained in
+`O:/winnt/logs/t422-s2-native-reply-production-red-20260924.log`.
+Fixture SHA-256:
+7C25674DA1A11F3F3D01FF90211CC91924141E21C13A26CE939195C139E9CDD3.
+These are incremental native fixtures with test-only window associations,
+not sealed guest evidence. No new DOS run is claimed for this test-only
+delivery; E85 retains the unchanged product's 17-route result. Documentation
+governance and diff whitespace checks pass.
