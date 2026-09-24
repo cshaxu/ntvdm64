@@ -149,6 +149,9 @@ typedef struct cross_callout {
     HWND window, sender_window;
     DWORD receiver_id;
     unsigned delivered;
+#ifdef WOW_NATIVE_REPLY_FIXTURE
+    volatile LONG native_returned;
+#endif
 #ifdef WOW_NATIVE_FOREIGN_FIXTURE
     HANDLE foreign_entered;
     BOOL foreign_first;
@@ -232,8 +235,19 @@ static LRESULT cross_receive_body(HWND window, UINT message, WPARAM wp, LPARAM l
             /* Native ReplyMessage returns without performing NT4 WOW's
              * receiver yield. This rendezvous exposes concurrent ownership;
              * it does not substitute a product scheduling operation. */
-            if (WaitForSingleObject(test->returned, 3000) != WAIT_OBJECT_0)
+            if (WaitForSingleObject(test->returned, 3000) != WAIT_OBJECT_0) {
+#ifdef WOW_NATIVE_REPLY_FIXTURE
+                CHECK(wow_user_runtime_enter(binding));
+                fprintf(stderr, "WOW_NATIVE_REPLY_STALLED native_returned=%ld sender=%p receiver=%p scheduled=%p owner=%p current=%p\n",
+                    InterlockedCompareExchange(&test->native_returned, 0, 0),
+                    test->sender_thread, binding->thread,
+                    binding->thread->ppi->pwpi->ptiScheduled,
+                    binding->thread->ppi->pwpi->CSOwningThread,
+                    binding->thread->psmsCurrent);
+                CHECK(wow_user_runtime_leave(binding));
+#endif
                 ExitProcess(95);
+            }
             CHECK(binding->thread->ppi->pwpi->CSOwningThread == binding->thread);
             return 999;
         }
@@ -385,8 +399,23 @@ static void verify_cross_callout(session *owner, wow_user_runtime_thread *bindin
         reply = early ? 2 : 0;
 #endif
         fprintf(stderr, "WOW_NATIVE_SEND_BEGIN early=%u\n", reply);
+#ifdef WOW_NATIVE_REPLY_FIXTURE
+        {
+            wow_user_native_call call;
+            /* Observe the same production begin/native/end sequence without
+             * changing scheduler state or inventing received SMS identity. */
+            InterlockedExchange(&test.native_returned, 0);
+            CHECK(wow_user_native_call_begin(&call, test.window));
+            CHECK(SendMessageTimeoutA(test.window, WM_APP + 65, reply, 0,
+                SMTO_ABORTIFHUNG, 3000, &result) != 0 && result == 114);
+            InterlockedExchange(&test.native_returned, 1);
+            fprintf(stderr, "WOW_NATIVE_TRANSPORT_RETURN early=%u result=%lu\n", reply, result);
+            CHECK(wow_user_native_call_end(&call));
+        }
+#else
         CHECK(wow_native_SendMessageTimeoutA(test.window, WM_APP + 65, reply, 0,
             SMTO_ABORTIFHUNG, 3000, &result) != 0 && result == 114);
+#endif
         CHECK(binding->thread->ppi->pwpi->CSOwningThread == binding->thread);
         CHECK(!binding->thread->psmsSent && !binding->exclusive_held);
         fprintf(stderr, "WOW_NATIVE_SEND_RETURN early=%u result=%lu\n", reply, result);

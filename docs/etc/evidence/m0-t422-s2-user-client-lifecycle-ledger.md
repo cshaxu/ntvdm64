@@ -3599,3 +3599,53 @@ Next: finish exact received-message identity, early reply/timeout/peer-loss
 lifetime and controlled real guest regression, then all remaining S2 ledger
 rows and fresh product acceptance. This commit is a partial source/evidence
 checkpoint, not permission to mark those obligations passed or close S2.
+
+## E92 - Early reply transport succeeds; WOW execution remains with receiver
+
+Baseline 0368d8be2. Test-only instrumentation separates the existing
+native_call_begin / SendMessageTimeoutA / native_call_end sequence in the
+explicit native-reply case. An interlocked test flag records native transport
+return before reentry; on the existing three-second failure rendezvous, the
+receiver samples scheduler state under the production data lock. It does not
+change task eligibility, assign psmsCurrent or supply a fake sender identity.
+Other fixture cases retain the production wrapper call unchanged.
+
+MSVC x86 build/run through tests/observation/verify-wow-task-lifecycle.ps1:
+Case native-reply, ProviderBuildRoot build/M0-T422/S2/wow32-provider-r10,
+WorkerBuildRoot build/M0-T422/S2/formal-x86-r9,
+BuildRoot build/M0-T422/S2/native-reply-phase-20260924-r1.
+Fixture SHA-256:
+A451FB8780AAA978F81F89173F327F43055BD3B72FA1E0E53E47CB70FD59F194.
+Initial execution and direct replay both fail with exit 95. Replay evidence:
+O:/winnt/logs/t422-s2-native-reply-phase-20260924-r1-replay.log,
+SHA-256 D300502C019992042656CFA94FB09D40ADF84B834D1CA1D1216639CD4F264D71.
+
+Observed replay: ordinary send returns 114 and restores the sender. Early
+reply also makes the native syscall return 114, but the production end gate
+does not return before receiver timeout. At that timeout native_returned=1,
+sender=00BC6AF0, receiver=00BC60D0, scheduled=00BC60D0,
+owner=00BC60D0, current=00000000. Thus this bounded failure is AFTER native
+reply transport, with the receiver still owning WOW execution. This is not
+proof that every earlier timeout has the same cause.
+
+Original OpenNT kernel/sendmsg.c::_ReplyMessage (lines 227--318) obtains the
+actual psmsCurrent, marks the reply, wakes its actual sender, invokes
+DirectedScheduleTask, then yields the 16-bit receiver when that sender awaits
+this same SMS. The unchanged mvdm/wow32/wumsg.c::WU32ReplyMessage warns that
+other tasks may have run after this call. The selected wow32.dll.map instead
+resolves __imp__ReplyMessage@4 to user32:USER32.dll; wow_user_private_access.h
+has no ReplyMessage binding. Modern native reply therefore supplies the
+transport result but not the original WOW scheduler operation. The test's
+blocking receiver rendezvous intentionally exposes that missing operation;
+it is not a normal guest workload or proof of guest-wide failure.
+
+Recovery implication: an actual reply boundary needs the original receiver
+yield ordering and a valid message/sender lifetime. Merely removing sender
+execution protection would permit concurrent guest execution and is rejected.
+Guessing psmsCurrent from the outer-call record is also rejected by E89/E91.
+The exact receive identity and finite original SMS ownership boundary remain
+implementation work; no complete original sendmsg.c composition or native
+identity mechanism is claimed here. These tests use the existing parent
+stubs/reused object graph and remain incremental native evidence, not sealed
+product acceptance. Product sources, runtime package and immutable guest media
+are unchanged this turn; S2 remains open.
