@@ -2603,3 +2603,27 @@ guest callback on an unscheduled thread. The source-audited finite boundary
 and focused multi-thread proof remain required before claiming repair.
 All runs complete scoped cleanup and restore SYSTEM.INI; no successful
 concurrent activation is claimed. Observer syntax and diff checks pass.
+
+## E72 owner-requested checkpoint before continuing S2 closure
+
+This checkpoint preserves test-only changes; it changes no production,
+mirror, overlay or guest file. The original-task-order fixture now models
+same-worker nested send/reply ordering, explicitly distinguishing manual
+scheduler handoff from actual native send/wait acceptance. Its host-operations
+table was stale: the added wait slot displaced the find-thread callback.
+A typed event-wait mock restores the table shape; the task-order runner
+enables C4113/C4047 as errors for its compilation.
+
+The existing x86 run root
+`build/M0-T422/S2/same-worker-send-reply-r2-20260924` produced an executable
+that returned zero without the final WOW_ORIGINAL_TASK_ORDER marker.
+Therefore the former runner's WOW_FIXTURE_OK output is not a pass. The runner
+now requires that case's successful completion marker as well as exit zero.
+The early exit remains under investigation; neither these new assertions nor
+the real synchronous activation path are accepted as passing here.
+
+The owner requested a committed, pushed clean-worktree checkpoint before more
+S2 work. S2 remains active with the E71 synchronous-call boundary, callback
+ownership and failure/retirement verification still outstanding. This is
+preservation of reviewed research/test work, not S2 closure or a new product
+deployment; preceding production and DOS regression evidence is unchanged.

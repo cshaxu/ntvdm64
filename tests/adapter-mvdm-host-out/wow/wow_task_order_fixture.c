@@ -57,6 +57,57 @@ static void transitions(void)
     CHECK(CurrentTaskLock(0,&none)==0);
     CHECK(CloseHandle(ta.pEventQueueServer));CHECK(CloseHandle(tb.pEventQueueServer));
 }
+static void same_worker_messages(void)
+{
+    wow_task_order_shared shared = {0};
+    wow_task_order_state state = {0};
+    wow_task_order_process process = {&state, &shared};
+    wow_task_order_entry a = {NULL, 10}, b = {NULL, 10};
+    wow_task_order_thread ta = {&process, &a, WOW_TASK_TIF_16BIT};
+    wow_task_order_thread tb = {&process, &b, WOW_TASK_TIF_16BIT};
+    wow_task_order_message outer = {0}, nested = {0};
+    wow_task_order_entry *expected[2];
+    a.pti = &ta; b.pti = &tb;
+    ta.pEventQueueServer = CreateEventW(NULL, FALSE, FALSE, NULL);
+    tb.pEventQueueServer = CreateEventW(NULL, FALSE, FALSE, NULL);
+    CHECK(ta.pEventQueueServer && tb.pEventQueueServer);
+    InsertTask(&process, &a); InsertTask(&process, &b);
+    state.ptiScheduled = &ta;
+    state.CSOwningThread = &ta;
+    ta.psmsSent = &outer;
+    DirectedScheduleTask(&ta, &tb, TRUE, &outer);
+    expected[0] = &b; expected[1] = &a; order(&state, expected, 2);
+    CHECK(a.nEvents == 1 && b.nEvents == 1 && shared.nEvents == 2);
+    CHECK(state.nSendLock == 0 && state.nRecvLock == 0 && outer.flags == 0);
+    /* Same-worker send does not itself deschedule the sender or wake the
+     * receiver. The original caller must subsequently enter its wait path. */
+    CHECK(state.ptiScheduled == &ta && state.CSOwningThread == &ta);
+    CHECK(WaitForSingleObject(tb.pEventQueueServer, 0) == WAIT_TIMEOUT);
+    CHECK(b.nPriority == 10);
+
+    /* Model the receiver after that separate scheduler handoff. This is a
+     * state-transition test, not a native SendMessage or wait acceptance. */
+    state.ptiScheduled = &tb;
+    tb.psmsSent = &nested;
+    DirectedScheduleTask(&tb, &ta, TRUE, &nested);
+    expected[0] = &a; expected[1] = &b; order(&state, expected, 2);
+    CHECK(a.nEvents == 2 && b.nEvents == 2 && shared.nEvents == 4);
+    CHECK(nested.flags == 0 && state.nSendLock == 0 && state.nRecvLock == 0);
+    state.ptiScheduled = &ta;
+    DirectedScheduleTask(&ta, &tb, FALSE, &nested);
+    expected[0] = &b; expected[1] = &a; order(&state, expected, 2);
+    CHECK(a.nEvents == 3 && b.nEvents == 3 && shared.nEvents == 6);
+    CHECK(ta.psmsSent == &outer && tb.psmsSent == &nested);
+    state.ptiScheduled = &tb;
+    DirectedScheduleTask(&tb, &ta, FALSE, &outer);
+    expected[0] = &a; expected[1] = &b; order(&state, expected, 2);
+    CHECK(a.nEvents == 4 && b.nEvents == 4 && shared.nEvents == 8);
+    CHECK(a.nPriority == 10 && b.nPriority == 10);
+    CHECK(!outer.flags && !nested.flags && !state.nSendLock && !state.nRecvLock);
+    CHECK(CloseHandle(ta.pEventQueueServer));
+    CHECK(CloseHandle(tb.pEventQueueServer));
+}
+
 static void destruction(void)
 {
     unsigned mode;
@@ -155,8 +206,21 @@ static wow_task_order_thread *WINAPI find_thread(wow_task_order_thread *t, DWORD
     ++v->lookups;
     return id==v->target_id ? v->target : NULL;
 }
+static NTSTATUS WINAPI wait_events(wow_task_order_thread *thread, DWORD count,
+    const HANDLE *events, BOOL alertable)
+{
+    DWORD result;
+    (void)thread;
+    /* Event-only mock for original scheduler mechanics, not the production
+     * native message-queue bridge or a guest acceptance provider. */
+    result = WaitForMultipleObjectsEx(count, events, FALSE, 3000, alertable);
+    if (result < WAIT_OBJECT_0 + count) return (NTSTATUS)(result - WAIT_OBJECT_0);
+    if (result == WAIT_IO_COMPLETION) return (NTSTATUS)0xC0;
+    CHECK(FALSE);
+    ExitProcess(98);
+}
 static const wow_task_host_ops test_ops={release_lock,acquire_lock,check_death,unexpected,
-    no_hook,unexpected,unexpected,receive,find_thread};
+    no_hook,unexpected,unexpected,receive,wait_events,find_thread};
 static DWORD WINAPI interrupt_thread(void *arg)
 {
     wait_test *v=arg;
@@ -452,11 +516,12 @@ int __cdecl main(void)
     expected[0]=&c;expected[1]=&b;expected[2]=&a;expected[3]=&d;order(&state,expected,4);
     InsertTask(&process,&d);order(&state,expected,4);
     transitions();
+    same_worker_messages();
     destruction();
     sleeping();
     directed();
     registration();
     initialization();
-    printf("WOW_ORIGINAL_TASK_ORDER errors=%u sequences=5 send_reply=4 locks=6 destruction=7 waits=4 directed=6 registration=6 init=8\n",errors);
+    printf("WOW_ORIGINAL_TASK_ORDER errors=%u sequences=5 send_reply=4 same_worker_nested=4 locks=6 destruction=7 waits=4 directed=6 registration=6 init=8\n",errors);
     return errors!=0;
 }

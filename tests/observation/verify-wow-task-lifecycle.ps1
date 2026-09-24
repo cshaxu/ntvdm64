@@ -2,7 +2,7 @@ param(
     [Parameter(Mandatory=$true)][string]$ProviderBuildRoot,
     [Parameter(Mandatory=$true)][string]$WorkerBuildRoot,
     [string]$BuildRoot,
-    [ValidateSet('task-lifecycle','class-client','window-borrow')] [string]$Case = 'task-lifecycle',
+    [ValidateSet('task-lifecycle','task-order','class-client','window-borrow')] [string]$Case = 'task-lifecycle',
     [string]$Ninja = 'ninja.exe',
     [string]$VsDevCmd = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 )
@@ -80,11 +80,13 @@ $compile = $commands | Where-Object { $_ -match 'wow_user_task_lifecycle\.c$' } 
 if (!$compile) { throw 'Missing production compile command' }
 Invoke-Build $compile
 $fixtureName = if ($Case -eq 'class-client') { 'wow_class_client_fixture.c' } else { 'wow_user_task_lifecycle_fixture.c' }
+if ($Case -eq 'task-order') { $fixtureName = 'wow_task_order_fixture.c' }
 $fixturePath = Join-Path $repo ('tests/adapter-mvdm-host-out/wow/' + $fixtureName)
 if ($Case -eq 'window-borrow') { $fixturePath = Join-Path $repo 'tests/mvdm-host/wow_page_domain_fixture.c' }
 $fixture = $compile -replace '/Fo\S+\s+\S+wow_user_task_lifecycle\.c$', ('/Fo"'+$out+'\fixture.obj" "'+$fixturePath+'"')
 if ($fixture -eq $compile) { throw 'Fixture substitution failed' }
 if ($Case -eq 'window-borrow') { $fixture += ' /DWOW_WINDOW_BORROW_FIXTURE' }
+if ($Case -eq 'task-order') { $fixture += ' /we4113 /we4047' }
 Invoke-Build ($fixture.Replace('/Gz', '/Gd'))
 $parentObjects = @()
 if ($Case -ne 'window-borrow') {
@@ -108,6 +110,12 @@ Invoke-Build ('link /nologo /force:multiple /NODEFAULTLIB:ntvdm.lib /out:"'+$out
 if (!(Test-Path -LiteralPath "$out\fixture.exe" -PathType Leaf)) {
     throw "Task cleanup fixture link produced no executable: $out\fixture.exe"
 }
-& "$out\fixture.exe"
-if ($LASTEXITCODE) { throw 'Task cleanup fixture failed' }
+$fixtureOutput = @(& "$out\fixture.exe")
+$fixtureExitCode = $LASTEXITCODE
+$fixtureOutput | Write-Output
+if ($fixtureExitCode) { throw 'Task cleanup fixture failed' }
+if ($Case -eq 'task-order' -and
+    !($fixtureOutput -match '^WOW_ORIGINAL_TASK_ORDER errors=0(?:\s|$)')) {
+    throw 'Task order fixture exited without its successful completion marker'
+}
 Write-Output ("WOW_FIXTURE_OK case=" + $Case)
