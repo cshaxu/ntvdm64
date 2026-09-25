@@ -4,26 +4,33 @@
 
 ## Active Packet
 
-**Active: M0 T422 S2**
+**Active: M0 T422 S3**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T422 S2 reopened for additional planning P, Ordinary Mode. |
+| Identifier Mode | M0 T422 S3, Ordinary Mode, single implementer/reviewer. |
 | Candidate Proposal | [WOW32 recovery](../proposals/proposal-wow32-complete-runtime-recovery-001.md). |
-| Admission And Approval | Owner requests dependency regrouping as another S2 P; S3 admission 4b2fd0d1f is preserved but not concurrently active. |
-| Objective | Reorder remaining owners by dependencies, settle shared responsibility and deliver planning under the every-P test/publication gate. |
-| Non-goals | Functional S2 completion, new runtime repair, guest mutation or a test exemption for documentation. |
-| Reference Baseline | [S2 handoff](../etc/evidence/m0-t422-s2-planning-handoff.md), [coverage](../etc/operations/wow32-recovery-coverage-ledger.md), [preserved S3 checklist](../etc/evidence/m0-t422-s3-message-task-checklist.md). |
-| Files And ABI Surface | Proposal, coverage, execution rules, S2 handoff and S3 checklist; no runtime ABI change. |
-| Applicable Rules | Single active S; source-first; production-code P runtime gate; documentation-only governance/link/diff checks. |
-| Verification | Documentation governance/link/diff review; no production changes, runtime test or deployment claim. |
-| Expected Markers | Unique resource/alias/bitmap/callback owner, dependency-first order and correct P gate applicability. |
-| Asset Needs | Existing x86 build/guest evidence and six-component package; no guest patch or invented media. |
-| Reporting Requirements | Explicit pending/passed test rows, source/artifact identity, changed owner mapping and delivery identity. |
-| Stop Conditions | Lost obligation or conflicting owner mapping; no occupied-desktop interference. |
-| Exit Criteria | Planning reconciled, documentation gate passed, committed/pushed, clean repository; resume S3 afterward. |
-| Original Owner Request | Govern proposal as discussed and submit again as an S2 P. |
-| Similar-Issue Sweep | Resource loading versus alias ownership, callback versus object behavior, shared clipboard/DDE conversions and cleanup deferred to error/final tasks. |
+| Admission And Approval | S3 resumes after owner-requested S2 additional planning delivery 8ed124dbe was pushed; original admission 4b2fd0d1f remains valid. |
+| Objective | Complete message/reply, callback and original task execution handoff, including cancellation and execution-owned cleanup. |
+| Non-goals | Local SMS transport, second USER server/scheduler, guest mutation, whole GDI/USER object implementation or fixture-only acceptance. |
+| Reference Baseline | [S2 handoff](../etc/evidence/m0-t422-s2-planning-handoff.md), [coverage](../etc/operations/wow32-recovery-coverage-ledger.md), [S3 checklist](../etc/evidence/m0-t422-s3-message-task-checklist.md). |
+| Files And ABI Surface | Original mvdm/wow32 message/callback/task owners, opennt-host taskman, wow32-dll native-call/runtime bindings, bounded worker CCPU/lease edges and their tests. |
+| Applicable Rules | Source-first minimal diff, modern USER sole transport, immutable guest, separate data-lock/execution ownership, exact lease lifetime. |
+| Verification | Original-source review, focused positive/negative/reentry/loss tests, real guest/native peers, fresh MSVC x86 /MT and DOS17, governance/link/diff checks. |
+| Expected Markers | Early reply permits correct sender continuation without concurrent CCPU entry; callback and wait restoration, task loss and exactly-once execution cleanup pass. |
+| Asset Needs | Existing immutable WOW16 and controlled native peers; build/M0-T422/S3; runtime logs below O:/winnt/logs. |
+| Reporting Requirements | Stable C01--C03/C09 and execution C10 checks, exact run/hash evidence, removed/retained mirror and autonomous code; reuse S2 run protocol. |
+| Stop Conditions | Need for prohibited transport/state owner, guest mutation or unpreservable original contract; occupied desktop forbids GUI interference, not safe background work. |
+| Exit Criteria | All S3-owned edges wired and positive/negative/real guest/lifecycle accepted; x86 and DOS17 pass on final artifacts; reviewed commit/push and clean synchronized worktree. |
+| Original Owner Request | Preserve/close S2, govern T plan, push, then admit S3 messages/callbacks/task execution and continue. |
+| Similar-Issue Sweep | All selected native call/return, callback families, waits, modal loops, sender/receiver loss, frame restoration and execution cleanup; name prerequisites by receiver. |
+
+## S2 Additional Planning Delivery
+
+Delivery 8ed124dbe completes the dependency-first S2 planning P. Documentation
+checks passed; no production code changed and no runtime/deployment pass is
+claimed. Runtime gates apply to production-code P commits; valid incremental
+build caches are permitted. Current sequence ends at S22. S3 is again active.
 
 ## T422 S2 Closure Record
 
