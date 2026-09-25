@@ -126,12 +126,12 @@ A missing key/value in both layers reaches the original caller unchanged, which
 alone determines the original default or failure.
 
 The Win16 Shell `RegOpen/Create/Set/Enum/Delete` family is not a configuration
-read. If selected consumers require it, S7 extends the same provider with a
+read. If selected consumers require it, S13 extends the same provider with a
 finite worker-local mutable shadow tree seeded by the layered read view; every
 read, creation, write, deletion and enumeration uses that tree, never writes
 HKLM/HKCU. Successful creates, sets and deletes atomically commit only the
 product `NTVDM.REG` overlay, including tombstones that hide a deleted host
-key/value. S7 must prove close, failure, enumeration, task cleanup,
+key/value. S13 must prove close, failure, enumeration, task cleanup,
 cross-worker serialization and persistence. It must not reduce these APIs to
 unconditional defaults or a read-only parser.
 
@@ -139,7 +139,7 @@ The original `wow32/wshell.c` route is the behavioral reference: its seven
 Win16 SHELL thunks call the historical Win32 Registry, translate errors through
 `ConvertToWin31Error`, apply `Remove_Classes` for the default classes root, and
 implement recursive deletion because Win3.1 permits deleting a non-empty key
-where the Win32 API did not. S7 preserves those original bodies and binds their
+where the Win32 API did not. S13 preserves those original bodies and binds their
 Registry calls to the shared tree. A native pointer/handle must not be written
 into guest memory: the existing DWORD Win16 HKEY slots use a bounded
 worker-local surrogate table with stale-handle rejection and task teardown.
@@ -214,143 +214,88 @@ boundaries still prohibit recursive USER/CSRSS runtime import. A missing
 contract must not grow into an autonomous window manager, input router,
 drawing engine or replacement NT scheduler.
 
-## Proposed sequential S packets
+## Revised sequential S packets
 
-Numbers below are proposed local S positions, activated only at T admission.
-S1 audits the entire package before implementation batching. The following
-seven packets define coherent ownership boundaries, not trace-derived repairs.
-S1 must resolve their dependency graph and record any necessary regrouping
-before implementation; later findings amend that graph with evidence.
+Owner-directed regrouping on 2026-09-24 supersedes the former S2--S8
+allocation. S1 remains closed. S2 closes only as preserved implementation/
+research and planning handoff, not complete USER acceptance. Status alone
+admits the active S; the sequence below does not create concurrent packets.
 
-| S | Complete scope | Required closure evidence |
+| S | Complete scope | Acceptance and inherited owner |
 | --- | --- | --- |
-| S1 | Whole WOW32 dependency audit and implementation design | Reconcile all 77 units, ten dispatch tables, exports, dynamic lookups, callbacks, 21/20 registration and guest direct-data consumers. Inventory every required non-MVDM owner, imported subset, missing body and autonomous substitute. Produce exact import/binding/deletion lists, counts, source hashes, complete lifecycle/dependency graph and per-S tests. Classify every boundary; no unassigned or unexplored required edge may be deferred as "investigate later". This is design closure, not runtime acceptance. |
-| S2 | USER client view plus W1/W2 task/window/message lifecycle | Treat backing, descriptors/TEB/desktop/WND/CLS/handles, publication/update/retirement, thread context, task scheduling, hung-app registration, classes/windows/dialogs, send/post and real CallBack16 as one coupled closure. Connect module/task/thread/worker teardown before backing release. Pass bootstrap and real guest create/query/change/callback/destroy, invalid/stale identity, failure rollback and repeated cleanup. Native-only fixtures cannot close this lifecycle. The selected final-app runs share an original `SYSTEM.INI` `[boot] network.drv` / driver prerequisite. The first bare `SYSTEM.INI` read is original KRNL386 bootstrap logic, so `run16` must add `WIN16DIR` derived from its installed package sibling directory only to the original `BaseCreateVDMEnvironment` child block; it must not alter host `SYSTEMROOT`, host profile files, or embed a runtime drive/path. The controlled A/B backs up and restores the selected package profile, uses semicolon explanations, and never invents a driver or suppresses the original default/failure. |
-| S3 | GDI drawing, DC, fonts, bitmaps and DIB | Complete selected GDI transforms, text/font/glyph, palette, bitmap/DIB/mapping and metafile families; real guest drawing/content, native resource ownership, invalid input, allocation failure and repeated release. `verify-wow-gdi-handle-contract.ps1` establishes the current negative baseline: the modern export may remain present but does not provide the original readable `ENTRYWOW` table. Replace only that unavailable table boundary with a bounded worker-local original-handle carrier; no raw modern GDI handle may be truncated into a Win16 handle. Use settled S2 identities; no deferred resource cleanup. |
-| S4 | USER resources and menus | Complete resource lookup/conversion, accelerators, icons/cursors/bitmaps, menu/item/submenu graphs and default-window resource operations. Bind S2 callbacks and S3 bitmap services; test actual guest load/create/query/mutate/use/free, creation-time visibility and failed/partial resource loading. |
-| S5 | Clipboard and DDE | Complete guest/native format conversion, data ownership transfer, message/reply and peer/module/task death. Test real guest exchanges, rejected/abandoned transfers, reentry, cancellation and repeated cleanup; original FreeDDEData alone is insufficient. |
-| S6 | KERNEL/DOS, module/memory/file and OEM services | Complete selected loader-facing services, memory/module/resource aliases, file/directory/environment and related kernel thunks. Own OEM-WOW-DIR and OEM-WOW-DELETE, including all branches and real Win16 consumer tests; test failure, rollback and task/module release. Shared task policy consumes S2, not a second owner. |
-| S7 | Remaining original interface families and registration completeness | Close every S1-assigned remaining Shell, Winsock, ToolHelp, COMM, print/spool, sound/multimedia, hooks, common-dialog/OLE and hard-error family. This includes the complete original Shell registry operation family through the shared layered per-worker tree. Use earlier owners for shared mechanisms. Verify all selected dispatch entries, 21 inputs/20 outputs, registry read/create/set/delete/enumerate/close, startup rollback, per-worker isolation, atomic persistence and family-specific teardown; remove residual selected placeholders. Each family has its own ledger rows and tests, never a blanket link-only pass. |
-| S8 | Whole-provider and three-application acceptance | On one final artifact set run immutable WRITE.EXE, WINMINE.EXE and SOL.EXE through the scenarios below; verify original WOW16 loader, task/callback/exit, integrated OEM behavior, repeated tasks, failure/worker cleanup and subsequent DOS usability. Reconcile every preceding checklist, measured mirror/non-mirror changes and owner final acceptance report. No selected operation remains fixture-only or unbound. |
+| S1 | Completed whole-package audit | Preserve its 77-source, ten-table, 21/20 registration and direct-data inventory; no audit restart. |
+| S2 | Preservation and planning handoff | Preserve committed code/tests and E1--E95 evidence, reconcile worktree, transfer every C01--C12 obligation, verify documentation, commit/push. No new product or guest pass is claimed. |
+| S3 | Messages, callbacks and task execution | C01--C03 plus C09 and execution-related C10: native send/post/reply, early/duplicate reply, waits, cancellation, reentry, original task init/yield/hung registration, task loss and callback frame/lease cleanup. Modern USER alone owns transport. Prove real guest and native-peer interactions, not only the E92/E93 fixtures. |
+| S4 | USER objects and shared view | C04--C07 plus object-related C10: desktop/WND/CLS/handles, registration, publication/update/direct reads, stale reuse, geometry, mutation, nested destruction and rollback. Own-created, system/native and other-task object contracts are explicit. Objects do not close without their cleanup. |
+| S5 | Dialogs, input, hooks and timers | C08 and former S7 USER families: real dialog init/control/procedure/cancel/release; selected input, caret, keyboard, hook and timer operation families, callbacks and task-loss cleanup. Reuse S3/S4, never a second input router or scheduler. |
+| S6 | GDI identity, DC and drawing | Former S3 foundation: bounded original-shape handle carrier, stock/select/delete/release, transforms, drawing, bitmap/DIB and palette. Verify original current-slot reuse semantics, positive/negative content and resource cleanup; no invented generation/type policy. |
+| S7 | Fonts, text and metafiles | Former S3 remaining families: font/text conversion and drawing, font lifetime, metafile creation/playback/release and failure paths; consume S6 identities. |
+| S8 | Resources, menus and accelerators | Former S4: lookup/conversion, icon/cursor/bitmap loading, menu graph/owner-draw mutation, accelerators, partial-load rollback and release. Consume S4 publication and S6 bitmap services, not duplicate providers. |
+| S9 | Clipboard | Former S5 clipboard slice: format conversion, delayed rendering, ownership transfer, rejected/abandoned data and task loss with real guest/native peers. |
+| S10 | DDE | Former S5 DDE slice: conversation, data/reply, reentry, cancellation, peer/module/task death and release. Original FreeDDEData alone is not acceptance. |
+| S11 | Modules, memory and resource aliases | Former S6 loader/memory slice: original module/loader-facing services, allocation/rollback and alias lifetimes, module release without live-task destruction. Consume S3 execution and S4 identities. |
+| S12 | Files, directories, environment and OEM | Former S6 file/OEM slice: original operations, both OEM-WOW-DIR directions and OEM-WOW-DELETE branches, rename/delete rollback, retained-file/font fallback and real non-ASCII guest consumers. |
+| S13 | Shell and layered Registry | Former S7 Shell family: all selected Shell thunks; shared NTVDM.REG read/create/set/enum/delete/close, original error conversion/recursive delete, tombstones, atomic persistence, cross-worker serialization and cleanup; never write system Registry. |
+| S14 | Winsock | Former S7 network family: selected socket operation/conversion, async notification, failure/cancel/peer loss and task cleanup, real guest/local controlled peer tests. |
+| S15 | COMM | Former S7 serial family: selected open/config/read/write/status/events/close, cancellation and task cleanup. Hardware absence requires exact retained unavailable result, TODO and protocol-accurate mock, not a success stub. |
+| S16 | Printing and spool | Former S7 print family: selected guest print/spool operations, conversions, job/DC lifecycle, failure/cancel/cleanup using S6/S7; document any unavailable external device with mock evidence. |
+| S17 | Sound and multimedia | Former S7 multimedia family: selected operation families, callbacks, buffers, async completion/cancel and device/task cleanup. Track family-specific tests rather than link-only acceptance. |
+| S18 | ToolHelp and WOW debugger interfaces | Former S7 ToolHelp/debugger slice: enumerate/query and selected callbacks/notifications, OEM-DBG-PATH WOW receiver, stale identity, task loss and release; preserve completed non-WOW debugger evidence. |
+| S19 | Common dialogs and related OLE interfaces | Former S7 related UI/OLE slice: selected conversion, callback, cancel/error and ownership contracts. Use S5 dialogs and completed resource/service owners; enumerate both families separately and close every selected edge. |
+| S20 | WOW hard-error responses | Former S7 ERROR-01: original response mapping, cancellation, fatal task/worker tail and cleanup. Reconcile the queued general error-dialog proposal without duplicating its provider or silently excluding WOW callers. |
+| S21 | Whole-provider and three-application acceptance | Former S8: final same-artifact WRITE/WINMINE/SOL scenarios, repeated/concurrent tasks, abnormal cleanup, integrated OEM and subsequent DOS usability. Reconcile C11/C12 and all registration/dispatch/direct-data edges; no implementation backlog is deferred here. |
 
-The following additions are mandatory closure gates for the corresponding
-rows above:
+C11 (edge/slot/minimal-diff review) and C12 (build, guest tests, DOS17,
+commit/push) apply to every implementation S for its own slice. S21 aggregates
+their evidence and repeats integrated acceptance; it cannot accept unimplemented
+predecessor edges. CORE-INIT-01 is distributed: each new owner immediately
+wires its initialized slots and rollback/teardown, with S21 reconciling the
+complete table. C10 cleanup follows each resource owner, not a late cleanup S.
+Each complete owner keeps positive, negative and lifetime tests; a prerequisite
+in a later row is promoted explicitly and integrated before the consumer closes.
 
-- S1 delivers the complete producer/consumer/update matrix and uses bounded
-  experiments to establish feasibility of the highest-risk shared-object,
-  reentry and host-originated update contracts. Reuse retained experiments
-  where their inputs remain valid. Exact mappings, ordering and test plans
-  must be settled before dependent implementation; "public APIs should supply
-  these fields" is not a design result. A proved unavailable contract names
-  its precise dependency and design conflict; resolve that conflict before
-  implementing the affected scope. Do not silently exclude it or claim full
-  compatibility. Design feasibility is distinct from final runtime acceptance.
-- S2 proves real guest queries during creation callbacks, mutation followed
-  by direct reads, destruction inside a callback, stale/reused handles,
-  thread/task switching and relevant external/native-object interactions.
-  Exercise required changing data during guest execution without a WOW32
-  call, and verify failure/retirement without partially published records.
-- S3 owns the single process-local replacement for the retired NT GDI shared
-  handle table.  Its ledger enumerates every selected producer, consumer and
-  retirement site for HDC, HBITMAP, HBRUSH, HFONT, HMETAFILE, HRGN, HPALETTE,
-  HPEN and generic HGDIOBJ, including `GetStockObject`, `SelectObject`,
-  `DeleteObject`, `DeleteDC` and `ReleaseDC`.  The carrier has bounded
-  14-bit guest slots and retains the original table's **current-slot** rule:
-  a zero slot yields `NULL`, a successful native delete/release retires its
-  slot, and later allocation may reuse that index.  It does not invent a
-  generation, type rejection or task-exit destruction rule that the original
-  16-bit handle cannot express.  Native GDI remains the type validator and
-  worker-process exit remains the OS cleanup boundary.  No native handle is
-  ever put in guest memory.  The package closes only after its source matrix,
-  allocation/reuse/deletion tests, real immutable guest drawing and the
-  `GdiQueryTable` negative probe all pass.
-- S4 applies the same contract to menu/item/submenu identity, relationships,
-  owner-draw data, dynamic mutation and release. It consumes S2's settled
-  publication/lifetime mechanism and owns menu-specific implementation/tests.
-- S8 repeats the integrated direct-read, ordinary-thunk and real-callback
-  routes on the same final artifacts. Application success supplements the
-  per-family tests; it cannot waive an uncovered shared-data contract.
+The [coverage ledger](../etc/operations/wow32-recovery-coverage-ledger.md)
+preserves stable source/edge IDs and maps old assignments to these receivers.
+The [S2 handoff](../etc/evidence/m0-t422-s2-planning-handoff.md) preserves the
+C checklist and known failures. Do not restart valid research or count an
+old native fixture as real guest acceptance.
 
-### WINMINE visual findings received from S2
+### Mandatory inherited gates
 
-The owner played immutable WINMINE successfully on 2026-09-24; this proves
-basic user-observed rendering and interaction, not complete application or
-provider acceptance. Preserve the S2 ledger E53 evidence and these explicit
-receiver requirements:
-
-- S3 owns the reported monochrome display investigation: record guest-visible
-  DC BITSPIXEL/PLANES/NUMCOLORS, selected bitmap format, converted native bitmap
-  format and actual displayed pixels. Prove the original color path without
-  forced coloring, fabricated capabilities or guest changes. Include monochrome
-  resources as a legitimate separate case, resource release and DOS regression.
-- S4 owns resource-selection/load causes within that investigation. WINMINE
-  contains paired color IDs 410/420/430 (4 bpp) and monochrome IDs 411/421/431
-  (1 bpp). Prove the actual production registration/LoadBitmap path, not an
-  unused wrapper; record which IDs the unchanged guest requests, conversion
-  failures and original fallback behavior. S3 and S4 share one evidence chain,
-  not two replacement bitmap implementations.
-- S2 retains window/client rectangle, metrics, coordinate publication and
-  resize/callback correctness. Determine whether the reported small/cropped
-  window has incorrect client geometry before assigning any residual pixel,
-  font or bitmap scaling defect to S3. Small historical dimensions alone are
-  not a defect. Window/task/thread/worker teardown remains S2 work.
-- The owner explicitly accepts the observed Chinese mojibake as a host-system
-  encoding condition, not a blocker for this run. Do not modify guest media or
-  host locale/Registry to conceal it. This is not a waiver for unrelated OEM
-  conversion contracts owned by later packets.
-
-These are concrete tests under existing S ownership, not removal of any
-required capability. S8 repeats integrated display/input/exit acceptance for
-WRITE, WINMINE and SOL on the final artifact set.
+- S4 tests direct guest reads after host-originated changes without a WOW32
+  thunk, creation callback visibility, external/native objects and withdrawal.
+- S6 owns the retired NT GDI shared handle-table boundary and every selected
+  HDC/HBITMAP/HBRUSH/HFONT/HMETAFILE/HRGN/HPALETTE/HPEN/HGDIOBJ producer,
+  consumer and retirement site. Retain bounded 14-bit current-slot behavior:
+  zero maps to NULL; successful native release retires; later allocation may
+  reuse. Native GDI remains the type validator, not an invented guest policy.
+- S8 owns menu/item/submenu relationships and creation-time visibility.
+- Package-path/bootstrap work inherited from S2 remains preserved: WIN16DIR
+  derives from the executable's installed sibling directory and enters only
+  the original BaseCreateVDMEnvironment child block. Never hardcode O:/winnt,
+  change host SYSTEMROOT or silently suppress original network.drv failure.
+  Any still-needed bootstrap prerequisite belongs to S3, not an orphan.
+- Every S immediately wires completed inputs/outputs; typed failure placeholders
+  can represent only named later owners, never a completed owner's capability.
+- Modern USER is the sole message transport for all Win16/Win32 directions.
+  Local SMS delivery was rejected; historical private identity assertions are
+  not product gates. Original task algorithms remain behind finite bindings.
 
 ### WINMINE visual findings received from S2
 
-The owner played immutable WINMINE successfully on 2026-09-24; this proves
-basic user-observed rendering and interaction, not complete application or
-provider acceptance. Preserve the S2 ledger E53 evidence and these explicit
-receiver requirements:
+E53 preserves owner-confirmed gameplay, not whole-provider acceptance.
 
-- S3 owns the reported monochrome display investigation: record guest-visible
-  DC BITSPIXEL/PLANES/NUMCOLORS, selected bitmap format, converted native bitmap
-  format and actual displayed pixels. Prove the original color path without
-  forced coloring, fabricated capabilities or guest changes. Include monochrome
-  resources as a legitimate separate case, resource release and DOS regression.
-- S4 owns resource-selection/load causes within that investigation. WINMINE
-  contains paired color IDs 410/420/430 (4 bpp) and monochrome IDs 411/421/431
-  (1 bpp). Prove the actual production registration/LoadBitmap path, not an
-  unused wrapper; record which IDs the unchanged guest requests, conversion
-  failures and original fallback behavior. S3 and S4 share one evidence chain,
-  not two replacement bitmap implementations.
-- S2 retains window/client rectangle, metrics, coordinate publication and
-  resize/callback correctness. Determine whether the reported small/cropped
-  window has incorrect client geometry before assigning any residual pixel,
-  font or bitmap scaling defect to S3. Small historical dimensions alone are
-  not a defect. Window/task/thread/worker teardown remains S2 work.
-- The owner explicitly accepts the observed Chinese mojibake as a host-system
-  encoding condition, not a blocker for this run. Do not modify guest media or
-  host locale/Registry to conceal it. This is not a waiver for unrelated OEM
-  conversion contracts owned by later packets.
-
-These are concrete tests under existing S ownership, not removal of any
-required capability. S8 repeats integrated display/input/exit acceptance for
-WRITE, WINMINE and SOL on the final artifact set.
-
-S2 deliberately combines the client view with its task/window/message owners:
-a separately "finished" snapshot structure without a live producer and teardown
-is prohibited. S3--S7 consume completed predecessor contracts. A required
-dependency must be completed in its owner before the consumer closes, or the
-coupled work must be explicitly regrouped; changing the label is not closure.
-All deployable slots and entrypoints implemented by an S are wired immediately.
-Typed explicit-failure placeholders may represent only identified later owners
-and cannot satisfy a completed S's own contract.
-
-OEM-WOW-DIR includes non-ASCII directory/environment synchronization in both
-reached directions and rejected updates without false state. OEM-WOW-DELETE
-includes ordinary and retained-file branches, rename/delete rollback, temporary
-file cleanup and font-removal fallback with branch witnesses. S6 owns their
-implementation and real consumer tests; S8 repeats integrated guest task/
-callback/exit acceptance. OEM-DBG-PATH stays with T420 S43; any specifically
-WOW-dependent integration found there is assigned to successor S7/S8 explicitly.
+- S6 investigates monochrome rendering: guest DC BITSPIXEL/PLANES/NUMCOLORS,
+  requested/native bitmap formats and actual pixels, including valid monochrome
+  resources. No fabricated capabilities or forced coloring.
+- S8 owns resource-selection/load: paired color IDs 410/420/430 (4 bpp) and
+  monochrome IDs 411/421/431 (1 bpp), actual production LoadBitmap/registration,
+  conversion failures and original fallback. S6/S8 share one bitmap pipeline.
+- S4 owns small/cropped-window geometry, metrics, client coordinates and
+  resize/callback correctness. Historical small dimensions alone are no bug.
+- Owner-accepted Chinese mojibake in that observation is not permission to
+  mutate guest or host locale/Registry, nor waiver of S12 OEM contracts.
+- S21 repeats final integrated display/input/exit tests for all three apps.
 
 ## Audit deliverables and finite import plan
 
@@ -447,9 +392,9 @@ on the same artifact set. Test guest task/message/resource release as well
 as worker/broker survival and exit semantics. The selected-family suites must
 also cover capabilities these applications do not exercise.
 
-S8 owns the integrated OEM-WIN16-INTEGRATION retest and final consolidated
+S21 owns the integrated OEM-WIN16-INTEGRATION retest and final consolidated
 report. Failed implementation contracts reopen their source-owner ledger and
-receive regression tests; S8 must not become a backlog of wiring left by
+receive regression tests; S21 must not become a backlog of wiring left by
 earlier S packets. T closure requires the owner's final acceptance audit.
 
 ## Mandatory gates and limits

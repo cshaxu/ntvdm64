@@ -1,5 +1,12 @@
 # T422 S2 USER client-view and lifecycle ledger
 
+## Owner-directed handoff
+
+S2 now closes as preservation/planning only under the owner's revised scope.
+The [handoff](m0-t422-s2-planning-handoff.md) assigns every unchecked C item
+to S3/S4/S5 or per-owner gates. The checklist and E records below are retained
+S2 evidence, not an active S2 implementation queue or functional closure.
+
 ## Run traceability
 
 Owner-directed prospective recording follows the

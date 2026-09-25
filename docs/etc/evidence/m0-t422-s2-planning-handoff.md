@@ -1,0 +1,54 @@
+# T422 S2 preservation and planning handoff
+
+## Question and owner decision
+
+On 2026-09-24 the owner changes S2's remaining objective to preserve and
+reconcile unfinished work, govern the complete T plan, commit/push, then
+admit S3 for messages, callbacks and task execution. This is an explicit
+bounded handoff closure, not completion of the former whole USER contract.
+
+## Inputs and preservation
+
+At intake HEAD is 4c978a7f6 and git status --short is empty. There is no
+uncommitted code to discard, stash or invent a new research worktree for.
+Production fixes, test sources and E1--E95 research are already committed;
+the [S2 ledger](m0-t422-s2-user-client-lifecycle-ledger.md) retains their
+identities, limitations and the C01--C12 checklist. Ignored build artifacts
+are not deleted or made source dependencies by this handoff.
+
+Known frontier: owner played WINMINE (E53); native foreign/nested cases pass
+in E91, while E92 early ReplyMessage execution handoff fails. E93 is a mock
+of original ordering, not a product fix. E95's proposed local SMS transport
+was rejected: modern USER remains the sole transport/reply owner. Neither
+missing local psmsCurrent nor private SMS identity is a product requirement.
+
+Runtime remains the restored E80 WOW32.DLL baseline, not a promoted candidate:
+B423B07C81A259B6788D37BF15B4A23B7285EB97566D73BA91B2AD603D2BB9CF.
+The retained E91 candidate and all exact run records remain in the S2 ledger.
+This documentation-only handoff does not redeploy, run GUI tests or certify
+new runtime hashes. Prior DOS17 evidence does not accept the candidate DLL.
+
+## Complete receiver mapping
+
+- S3 receives C01--C03, C09 and execution/callback cancellation in C10.
+- S4 receives C04--C07 and object/backing teardown in C10.
+- S5 receives C08 and dialog/input/hook/timer lifecycle obligations.
+- C11/C12 apply to each new S's own implementation, tests and delivery;
+  S21 owns final table reconciliation and three-application acceptance.
+- Original S3--S7 families are explicitly redistributed across S6--S20 in
+  the [proposal](../../proposals/proposal-wow32-complete-runtime-recovery-001.md)
+  and [coverage ledger](../operations/wow32-recovery-coverage-ledger.md).
+- No C item becomes functionally passed by transfer. Original guest limits
+  retain their approved register-only policy, not host-repair exemptions.
+
+## Verification and delivery scope
+
+Review the actual documentation diff, relative links and documentation gate;
+git diff --check must pass. Commit/push this handoff before S3 admission.
+No production/build/test source changes occur in this delivery, so no new
+compile or guest run is claimed or needed for the owner-revised documentation
+closure. Fresh x86, real guest and DOS17 remain mandatory for S3's functional
+closure. T422 stays open for final owner acceptance after S21.
+
+Future tests must respect the owner's occupied desktop: safe background
+source/build/headless checks may proceed; visible acceptance is coordinated.
