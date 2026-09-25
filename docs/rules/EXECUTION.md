@@ -94,6 +94,77 @@ never a passing result.
 
 ## Build And Debug Output Hygiene
 
+### Every-P regression and side-test publication gate
+
+Owner clarification dated 2026-09-24: before **every P that modifies
+production code**, not only S closure, pass this runtime gate. Pure
+documentation/planning P commits require documentation governance, link and
+diff review/checks only; no build, runtime tests or redeployment. Mixed P
+commits containing production changes remain subject to the runtime gate.
+
+1. Record the previous P's source, artifact/guest/configuration hashes,
+   ordinary launch conditions and deepest verified runtime milestone. Preserve
+   cumulative accepted capabilities too. Recover incomplete baseline evidence
+   from retained artifacts and observations; do not silently lower the bar.
+2. Build/verify the MSVC Win32/x86 /MT CCPU40 package and pass affected
+   capability positive, negative and lifecycle tests. Unchanged artifacts may
+   be reused only with proven source/build-input identity; changed inputs
+   require rebuilding the affected closure.
+   Prefer dependency-driven incremental builds and retain valid object/library
+   caches under build/. Record compiler/SDK/CRT/architecture, flags, generated
+   graph, source/header and generated-input identity. Invalidate affected
+   dependents when these change; use a clean build when dependency integrity
+   is uncertain or a required clean-build milestone applies, not for every
+   edit by default. New run evidence IDs may reference a validated cache;
+   never overwrite sealed artifact/evidence snapshots. Incremental compilation
+   does not waive runtime tests or publication of the complete six-binary set.
+3. Pass all 17 established text-gated DOS routes: COMMAND, MEM and EDIT,
+   direct, interactive and supported nested COMMAND execution, including EDIT
+   exit followed by MEM at the same prompt. Read guest output and verify
+   interaction/cleanup; an exit code alone is insufficient.
+4. Reproduce at least the previous P's deepest verified behavior under
+   comparable conditions and retain previously accepted behavior. Playable
+   WINMINE may not regress to a merely created window. Diagnostic bypasses or
+   reduced profiles cannot prove ordinary-product non-regression. Record
+   expected/actual results and fix regressions before submission. In WOW32
+   recovery, run WINMINE.EXE, SOL.EXE and WRITE.EXE separately for every P;
+   maintain three independent frontiers against both the preceding P and
+   each application's historical best verified behavior. Improvement in one
+   cannot offset regression in another. Preserve demonstrated capabilities,
+   not merely a numeric depth or a later crash. Existing failures may remain
+   explicitly open within the admitted scope, never counted as functional
+   passes. Unknown or unexecuted comparisons do not pass this gate.
+5. Update O:/winnt with the verified coherent set: dtmgr.exe, run16.exe,
+   basesrv.exe, ntvdm.exe, WOW32.DLL and VDMREDIR.DLL, plus required original
+   guest binaries and approved configuration at proper package-relative paths.
+   Validate all six, including unchanged hashes, against the tested manifest
+   and verify the published set. Do not test one component combination and
+   deploy another. This is the owner's latest usable side-test package, not
+   a scratch candidate folder or a hard-coded production path.
+6. Record source/diff identity, build/run evidence, deployed hashes,
+   configuration changes and the non-regression verdict. Only then review,
+   commit, push and verify a clean synchronized worktree. Further changes to
+   tested inputs invalidate their affected evidence before commit.
+
+Preserve a recoverable coherent last-known-good package and configuration
+before replacement. Never leave locked-file mixtures or a partial six-file
+update. If deployment/validation fails, restore the coherent usable baseline
+and report it; do not publish an unverified or regressed candidate. Respect
+active owner sessions and desktop restrictions. Unavailable GUI access means
+pending verification, not a waived gate; continue safe background work.
+
+Guest binaries remain immutable original media: verified copies are allowed,
+rebuilding or patching them is not. Preserve user data and NTVDM.REG state;
+review configuration changes and retain recovery copies rather than blanket
+overwrites. Restore temporary diagnostic profiles before ordinary publication.
+Tests belong below O:/winnt/tests and logs below O:/winnt/logs.
+
+This forward rule neither retroactively certifies prior commits nor claims
+automation already enforces it. A saved research checkpoint, compile or local
+fixture cannot be called a delivered P until this gate passes.
+
+### Output placement
+
 An admitted build records its `build/<task-id>/<run-id>/` working root before
 execution. All compiler, linker, generated, intermediate, fixture, and build
 result files, including every locally built `.exe`, remain below that root (or

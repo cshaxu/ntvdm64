@@ -126,12 +126,12 @@ A missing key/value in both layers reaches the original caller unchanged, which
 alone determines the original default or failure.
 
 The Win16 Shell `RegOpen/Create/Set/Enum/Delete` family is not a configuration
-read. If selected consumers require it, S13 extends the same provider with a
+read. If selected consumers require it, S14 extends the same provider with a
 finite worker-local mutable shadow tree seeded by the layered read view; every
 read, creation, write, deletion and enumeration uses that tree, never writes
 HKLM/HKCU. Successful creates, sets and deletes atomically commit only the
 product `NTVDM.REG` overlay, including tombstones that hide a deleted host
-key/value. S13 must prove close, failure, enumeration, task cleanup,
+key/value. S14 must prove close, failure, enumeration, task cleanup,
 cross-worker serialization and persistence. It must not reduce these APIs to
 unconditional defaults or a read-only parser.
 
@@ -139,7 +139,7 @@ The original `wow32/wshell.c` route is the behavioral reference: its seven
 Win16 SHELL thunks call the historical Win32 Registry, translate errors through
 `ConvertToWin31Error`, apply `Remove_Classes` for the default classes root, and
 implement recursive deletion because Win3.1 permits deleting a non-empty key
-where the Win32 API did not. S13 preserves those original bodies and binds their
+where the Win32 API did not. S14 preserves those original bodies and binds their
 Registry calls to the shared tree. A native pointer/handle must not be written
 into guest memory: the existing DWORD Win16 HKEY slots use a bounded
 worker-local surrogate table with stale-handle rejection and task teardown.
@@ -227,29 +227,30 @@ admits the active S; the sequence below does not create concurrent packets.
 | S2 | Preservation and planning handoff | Preserve committed code/tests and E1--E95 evidence, reconcile worktree, transfer every C01--C12 obligation, verify documentation, commit/push. No new product or guest pass is claimed. |
 | S3 | Messages, callbacks and task execution | C01--C03 plus C09 and execution-related C10: native send/post/reply, early/duplicate reply, waits, cancellation, reentry, original task init/yield/hung registration, task loss and callback frame/lease cleanup. Modern USER alone owns transport. Prove real guest and native-peer interactions, not only the E92/E93 fixtures. |
 | S4 | USER objects and shared view | C04--C07 plus object-related C10: desktop/WND/CLS/handles, registration, publication/update/direct reads, stale reuse, geometry, mutation, nested destruction and rollback. Own-created, system/native and other-task object contracts are explicit. Objects do not close without their cleanup. |
-| S5 | Dialogs, input, hooks and timers | C08 and former S7 USER families: real dialog init/control/procedure/cancel/release; selected input, caret, keyboard, hook and timer operation families, callbacks and task-loss cleanup. Reuse S3/S4, never a second input router or scheduler. |
-| S6 | GDI identity, DC and drawing | Former S3 foundation: bounded original-shape handle carrier, stock/select/delete/release, transforms, drawing, bitmap/DIB and palette. Verify original current-slot reuse semantics, positive/negative content and resource cleanup; no invented generation/type policy. |
-| S7 | Fonts, text and metafiles | Former S3 remaining families: font/text conversion and drawing, font lifetime, metafile creation/playback/release and failure paths; consume S6 identities. |
-| S8 | Resources, menus and accelerators | Former S4: lookup/conversion, icon/cursor/bitmap loading, menu graph/owner-draw mutation, accelerators, partial-load rollback and release. Consume S4 publication and S6 bitmap services, not duplicate providers. |
-| S9 | Clipboard | Former S5 clipboard slice: format conversion, delayed rendering, ownership transfer, rejected/abandoned data and task loss with real guest/native peers. |
-| S10 | DDE | Former S5 DDE slice: conversation, data/reply, reentry, cancellation, peer/module/task death and release. Original FreeDDEData alone is not acceptance. |
-| S11 | Modules, memory and resource aliases | Former S6 loader/memory slice: original module/loader-facing services, allocation/rollback and alias lifetimes, module release without live-task destruction. Consume S3 execution and S4 identities. |
-| S12 | Files, directories, environment and OEM | Former S6 file/OEM slice: original operations, both OEM-WOW-DIR directions and OEM-WOW-DELETE branches, rename/delete rollback, retained-file/font fallback and real non-ASCII guest consumers. |
-| S13 | Shell and layered Registry | Former S7 Shell family: all selected Shell thunks; shared NTVDM.REG read/create/set/enum/delete/close, original error conversion/recursive delete, tombstones, atomic persistence, cross-worker serialization and cleanup; never write system Registry. |
-| S14 | Winsock | Former S7 network family: selected socket operation/conversion, async notification, failure/cancel/peer loss and task cleanup, real guest/local controlled peer tests. |
-| S15 | COMM | Former S7 serial family: selected open/config/read/write/status/events/close, cancellation and task cleanup. Hardware absence requires exact retained unavailable result, TODO and protocol-accurate mock, not a success stub. |
-| S16 | Printing and spool | Former S7 print family: selected guest print/spool operations, conversions, job/DC lifecycle, failure/cancel/cleanup using S6/S7; document any unavailable external device with mock evidence. |
-| S17 | Sound and multimedia | Former S7 multimedia family: selected operation families, callbacks, buffers, async completion/cancel and device/task cleanup. Track family-specific tests rather than link-only acceptance. |
-| S18 | ToolHelp and WOW debugger interfaces | Former S7 ToolHelp/debugger slice: enumerate/query and selected callbacks/notifications, OEM-DBG-PATH WOW receiver, stale identity, task loss and release; preserve completed non-WOW debugger evidence. |
-| S19 | Common dialogs and related OLE interfaces | Former S7 related UI/OLE slice: selected conversion, callback, cancel/error and ownership contracts. Use S5 dialogs and completed resource/service owners; enumerate both families separately and close every selected edge. |
-| S20 | WOW hard-error responses | Former S7 ERROR-01: original response mapping, cancellation, fatal task/worker tail and cleanup. Reconcile the queued general error-dialog proposal without duplicating its provider or silently excluding WOW callers. |
-| S21 | Whole-provider and three-application acceptance | Former S8: final same-artifact WRITE/WINMINE/SOL scenarios, repeated/concurrent tasks, abnormal cleanup, integrated OEM and subsequent DOS usability. Reconcile C11/C12 and all registration/dispatch/direct-data edges; no implementation backlog is deferred here. |
+| S5 | Modules, memory and resource aliases | Former S6 loader/memory slice: original module/loader-facing services, allocation/rollback and alias lifetimes, module release without live-task destruction. Consume S3 execution and S4 identities. |
+| S6 | Files, directories, environment and OEM | Former S6 file/OEM slice: original operations, both OEM-WOW-DIR directions and OEM-WOW-DELETE branches, rename/delete rollback, retained-file/font fallback and real non-ASCII guest consumers. |
+| S7 | Resource discovery and loading foundation | Original lookup/load/lock/unlock/free and module association; finite aliases owned by S5. Prove original guest names/IDs, bounds, missing/partial loads and lifetime before GDI/menu consumers. No resource-specific drawing or duplicate memory manager. |
+| S8 | Dialogs, input, hooks and timers | C08 and former S7 USER families: real dialog init/control/procedure/cancel/release; selected input, caret, keyboard, hook and timer operation families, callbacks and task-loss cleanup. Reuse S3/S4, never a second input router or scheduler. |
+| S9 | GDI identity, DC and drawing | Former S3 foundation: bounded original-shape handle carrier, stock/select/delete/release, transforms, drawing, bitmap/DIB and palette. Verify original current-slot reuse semantics, positive/negative content and resource cleanup; no invented generation/type policy. |
+| S10 | Fonts, text and metafiles | Former S3 remaining families: font/text conversion and drawing, font lifetime, metafile creation/playback/release and failure paths; consume S9 identities. |
+| S11 | Resource conversion, menus and accelerators | Former S4 consumer slice: conversion, icon/cursor/bitmap loading, menu graph/owner-draw mutation, accelerators, partial-load rollback and release. Consume S4 publication and S9 bitmap services, not duplicate providers. |
+| S12 | Clipboard | Former S5 clipboard slice: format conversion, delayed rendering, ownership transfer, rejected/abandoned data and task loss with real guest/native peers. |
+| S13 | DDE | Former S5 DDE slice: conversation, data/reply, reentry, cancellation, peer/module/task death and release. Original FreeDDEData alone is not acceptance. |
+| S14 | Shell and layered Registry | Former S7 Shell family: all selected Shell thunks; shared NTVDM.REG read/create/set/enum/delete/close, original error conversion/recursive delete, tombstones, atomic persistence, cross-worker serialization and cleanup; never write system Registry. |
+| S15 | Winsock | Former S7 network family: selected socket operation/conversion, async notification, failure/cancel/peer loss and task cleanup, real guest/local controlled peer tests. |
+| S16 | COMM | Former S7 serial family: selected open/config/read/write/status/events/close, cancellation and task cleanup. Hardware absence requires exact retained unavailable result, TODO and protocol-accurate mock, not a success stub. |
+| S17 | Printing and spool | Former S7 print family: selected guest print/spool operations, conversions, job/DC lifecycle, failure/cancel/cleanup using S9/S10; document any unavailable external device with mock evidence. |
+| S18 | Sound and multimedia | Former S7 multimedia family: selected operation families, callbacks, buffers, async completion/cancel and device/task cleanup. Track family-specific tests rather than link-only acceptance. |
+| S19 | ToolHelp and WOW debugger interfaces | Former S7 ToolHelp/debugger slice: enumerate/query and selected callbacks/notifications, OEM-DBG-PATH WOW receiver, stale identity, task loss and release; preserve completed non-WOW debugger evidence. |
+| S20 | Common dialogs and related OLE interfaces | Former S7 related UI/OLE slice: selected conversion, callback, cancel/error and ownership contracts. Use S8 dialogs and completed resource/service owners; enumerate both families separately and close every selected edge. |
+| S21 | WOW hard-error responses | Former S7 ERROR-01: original response mapping, cancellation, fatal task/worker tail and cleanup. Reconcile the queued general error-dialog proposal without duplicating its provider or silently excluding WOW callers. |
+| S22 | Whole-provider and three-application acceptance | Former S8: final same-artifact WRITE/WINMINE/SOL scenarios, repeated/concurrent tasks, abnormal cleanup, integrated OEM and subsequent DOS usability. Reconcile C11/C12 and all registration/dispatch/direct-data edges; no implementation backlog is deferred here. |
 
 C11 (edge/slot/minimal-diff review) and C12 (build, guest tests, DOS17,
-commit/push) apply to every implementation S for its own slice. S21 aggregates
+commit/push) apply to every implementation S for its own slice. S22 aggregates
 their evidence and repeats integrated acceptance; it cannot accept unimplemented
 predecessor edges. CORE-INIT-01 is distributed: each new owner immediately
-wires its initialized slots and rollback/teardown, with S21 reconciling the
+wires its initialized slots and rollback/teardown, with S22 reconciling the
 complete table. C10 cleanup follows each resource owner, not a late cleanup S.
 Each complete owner keeps positive, negative and lifetime tests; a prerequisite
 in a later row is promoted explicitly and integrated before the consumer closes.
@@ -264,12 +265,12 @@ old native fixture as real guest acceptance.
 
 - S4 tests direct guest reads after host-originated changes without a WOW32
   thunk, creation callback visibility, external/native objects and withdrawal.
-- S6 owns the retired NT GDI shared handle-table boundary and every selected
+- S9 owns the retired NT GDI shared handle-table boundary and every selected
   HDC/HBITMAP/HBRUSH/HFONT/HMETAFILE/HRGN/HPALETTE/HPEN/HGDIOBJ producer,
   consumer and retirement site. Retain bounded 14-bit current-slot behavior:
   zero maps to NULL; successful native release retires; later allocation may
   reuse. Native GDI remains the type validator, not an invented guest policy.
-- S8 owns menu/item/submenu relationships and creation-time visibility.
+- S11 owns menu/item/submenu relationships and creation-time visibility.
 - Package-path/bootstrap work inherited from S2 remains preserved: WIN16DIR
   derives from the executable's installed sibling directory and enters only
   the original BaseCreateVDMEnvironment child block. Never hardcode O:/winnt,
@@ -285,17 +286,52 @@ old native fixture as real guest acceptance.
 
 E53 preserves owner-confirmed gameplay, not whole-provider acceptance.
 
-- S6 investigates monochrome rendering: guest DC BITSPIXEL/PLANES/NUMCOLORS,
+- S9 investigates monochrome rendering: guest DC BITSPIXEL/PLANES/NUMCOLORS,
   requested/native bitmap formats and actual pixels, including valid monochrome
   resources. No fabricated capabilities or forced coloring.
-- S8 owns resource-selection/load: paired color IDs 410/420/430 (4 bpp) and
+- S11 owns resource-selection/load: paired color IDs 410/420/430 (4 bpp) and
   monochrome IDs 411/421/431 (1 bpp), actual production LoadBitmap/registration,
-  conversion failures and original fallback. S6/S8 share one bitmap pipeline.
+  conversion failures and original fallback. S9/S11 share one bitmap pipeline.
 - S4 owns small/cropped-window geometry, metrics, client coordinates and
   resize/callback correctness. Historical small dimensions alone are no bug.
 - Owner-accepted Chinese mojibake in that observation is not permission to
-  mutate guest or host locale/Registry, nor waiver of S12 OEM contracts.
-- S21 repeats final integrated display/input/exit tests for all three apps.
+  mutate guest or host locale/Registry, nor waiver of S6 OEM contracts.
+- S22 repeats final integrated display/input/exit tests for all three apps.
+
+### Dependency and single-owner rules
+
+This dependency-first revision is the owner's additional S2 planning P;
+S3 admission is preserved but implementation resumes only after this S2 P.
+S3/S4 initially use S2's retained working foundations, not assumed complete
+objects. Before their tests, verify the exact prerequisite paths. Promote
+a demonstrated missing prerequisite by named capability/edge; do not build
+a temporary substitute or absorb the whole later package.
+
+| Consumer | Required completed contract | Unique implementation owner |
+| --- | --- | --- |
+| S3 message/callback execution | Existing window/task identity and CCPU lease paths used by its tests | S3 owns execution/frame mechanics; S4 owns object publication. S3 proves callback round-trip, not every object's behavior. |
+| S4 USER objects | S3 callback/execution contract and retained module/lease foundation | S4 owns WND/CLS/handle graph including destruction; module/alias mechanics remain S5. |
+| S7 resource foundation | S5 module/memory/aliases and S6 file access | S7 owns lookup/load/lock/free policy; S5 owns shared alias allocation/lifetime; no second resource handle table. |
+| S8 dialog/input | S3 execution, S4 objects, S7 template loading | S8 owns dialog/hook/timer semantics and cancellation, consuming S3 callbacks. |
+| S9/S10 GDI/text | S5--S7 foundational services, S4 required identities | S9 owns native GDI handle carrier and bitmap conversion; S10 consumes it for fonts/text/metafiles. |
+| S11 menus/resources | S7 loading, S9 bitmap services, S4 object publication | S11 owns menu/icon/cursor/accelerator behavior; no duplicate loader or bitmap implementation. |
+| S12/S13 clipboard/DDE | S3 message/reply and completed data/handle services | S12 owns shared clipboard format/data transfer primitives where source ownership proves sharing; S13 owns DDE conversation/reply and consumes them. |
+| S14--S21 services | Their specific previously completed callback/resource/service contracts | Each family owns its normal/failure cleanup; S21 does not defer another family's error or cleanup behavior. |
+| S22 aggregate | All owner-specific accepted contracts | Integration only, not unfinished wiring or repair collection. |
+
+The existing S1 source/edge ledger supplies function-level ownership;
+physical source-file sharing does not authorize duplicate implementation.
+Named prerequisites are planning contracts, not a claim every runtime edge
+has been reverified in this documentation pass. Record counterevidence and
+update the bounded edge, not a new whole-project audit.
+
+Each prior S implements the original error/rollback/termination behavior
+needed by its own calls immediately. S21 covers remaining WOW hard-error
+entrypoints and aggregate response semantics, never an excuse for an earlier
+false success or unsafe cleanup. Winsock/COMM/printing/multimedia remain
+required selected-family scope, but are not assumed startup prerequisites of
+WRITE/SOL/WINMINE without a demonstrated call edge. The per-P three-app
+matrix continues throughout, not only after these service packages.
 
 ## Audit deliverables and finite import plan
 
@@ -392,12 +428,64 @@ on the same artifact set. Test guest task/message/resource release as well
 as worker/broker survival and exit semantics. The selected-family suites must
 also cover capabilities these applications do not exercise.
 
-S21 owns the integrated OEM-WIN16-INTEGRATION retest and final consolidated
+S22 owns the integrated OEM-WIN16-INTEGRATION retest and final consolidated
 report. Failed implementation contracts reopen their source-owner ledger and
-receive regression tests; S21 must not become a backlog of wiring left by
+receive regression tests; S22 must not become a backlog of wiring left by
 earlier S packets. T closure requires the owner's final acceptance audit.
 
 ## Mandatory gates and limits
+
+The [every-P gate](../rules/EXECUTION.md#every-p-regression-and-side-test-publication-gate)
+applies before every production-code P, not just S closure: capability tests, DOS17, previous
+P's deepest verified behavior and retained capabilities, followed by coherent
+publication of four EXEs and two DLLs plus required original guest/configuration
+to O:/winnt before commit/push. Pure documentation P commits require only
+documentation governance, link and diff review/checks; no runtime tests or
+redeployment. These six files are delivery artifacts, not new components.
+
+For production changes, republish all six tested binaries for owner side
+testing, including valid unchanged artifacts. Prefer dependency-driven
+incremental compilation with recorded build-input identity and cached
+intermediates; rebuild affected dependents rather than blindly rebuilding the
+whole tree. Preserve sealed evidence separately from mutable build caches.
+
+### Mandatory three-application frontier matrix for every P
+
+Every production-code P executes WINMINE.EXE, SOL.EXE and WRITE.EXE on the same
+identified four-EXE/two-DLL set, through the ordinary run16 entry. This is not
+deferred to S22 and is not a demand that all three become fully functional
+in S3. Before full recovery, an existing failure remains a recorded failure;
+the gate requires no loss of previously verified behavior in any application.
+
+Keep one row per application per P in that S's evidence ledger, linking raw
+run records below O:/winnt/logs. Use this fixed record schema:
+
+| Field | Required evidence |
+| --- | --- |
+| Identity | P candidate source revision plus exact uncommitted input diff/hash, run ID, all six EXE/DLL hashes, guest/dependency and configuration hashes. Bind the final commit to those tested inputs after commit. |
+| Conditions | Ordinary command, cwd, package paths, relevant environment/profile and observer actions; separate diagnostic controls from product acceptance. |
+| Verified behavior | Initialization milestones; window creation and actual visible content; interaction outcomes; normal exit/restart and cleanup. Each has its own observed status, not an inferred success from the next stage. |
+| Stop or failure | Exact error text, first established failing call/result or last verified boundary, exit versus live wait, trace/log references and timeout. A cause not yet established is stated explicitly; neither "did not start" nor a zero exit is sufficient evidence. |
+| Comparison | Previous P row and historical best reproducible row for this application; advanced, unchanged, regressed or unverified, with specific preserved/lost behaviors and comparable input differences. |
+| Disposition | Responsible capability/S, next concrete diagnostic or repair for retained failures, and gate verdict. No new regression or unverified required comparison can be accepted. |
+
+Maintain independent WINMINE, SOL and WRITE baselines. A window appearing is
+not equivalent to playable WINMINE or editable WRITE. A deeper startup trace
+does not compensate for lost interaction or exit cleanup. Never reset the
+baseline downward after a bad P. Historical evidence with unknown artifacts
+is retained as an observation until reconciled by a controlled replay, not
+discarded or falsely called reproducible. Trace a failure's cause before
+assigning it to a component; errors such as "Not enough memory" do not by
+themselves prove host memory exhaustion.
+
+The final published O:/winnt package must match the tested matrix, with
+ordinary configuration restored and required original guest files available.
+If GUI access is unavailable, record the pending rows and continue safe
+background work; do not claim a delivered P or overwrite the side-test
+baseline with an unverified candidate. S22 still requires full functionality
+of all three applications, not simply stable historical failures.
+
+### Build, ownership and final acceptance
 
 Every implementation S rebuilds formal MSVC x86 `/MT` CCPU40 targets, tests
 its actual production owners, and passes all 17 text-gated direct/nested

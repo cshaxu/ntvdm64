@@ -30,6 +30,13 @@ new runtime hashes. Prior DOS17 evidence does not accept the candidate DLL.
 
 ## Complete receiver mapping
 
+The following initial mapping records delivery 532f7fa16. The additional
+owner-requested S2 dependency-planning P supersedes receiver numbering using
+the current proposal/coverage map: module/memory S5, files/OEM S6, resource
+loading S7, dialogs S8, GDI S9, fonts S10, menu/resource consumers S11,
+clipboard S12, DDE S13, services S14--S21, final acceptance S22. S3/S4 retain
+their roles. The old numbers below are historical, not current allocation.
+
 - S3 receives C01--C03, C09 and execution/callback cancellation in C10.
 - S4 receives C04--C07 and object/backing teardown in C10.
 - S5 receives C08 and dialog/input/hook/timer lifecycle obligations.
@@ -52,3 +59,18 @@ closure. T422 stays open for final owner acceptance after S21.
 
 Future tests must respect the owner's occupied desktop: safe background
 source/build/headless checks may proceed; visible acceptance is coordinated.
+
+## Additional S2 P - dependency-first planning
+
+Owner reopens S2 for this documentation delivery after S3 admission. S3's
+admission/checklist is preserved but only S2 is active until this P passes
+the owner-clarified documentation gate. The pending execution-rule/proposal/S3
+checklist edits are included, not discarded. No new functional pass is claimed.
+Resource lookup/load/lock/free now has S7 ownership; module/alias storage is
+S5, native bitmap conversion S9, resource-specific menu/icon behavior S11.
+Callbacks belong to S3 and object semantics to S4/S8. Each package cleans up
+its own operations; S21 error handling and S22 integration cannot absorb tails.
+
+The owner clarified that runtime regression/deployment applies only to
+production-code P commits. This S2 planning P changes documentation only;
+governance/link/diff review applies, with no runtime test or deployment claim.

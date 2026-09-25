@@ -1,5 +1,11 @@
 # T422 S3 message, callback and task execution checklist
 
+S3 admission is preserved; execution is temporarily suspended while the
+owner-requested additional S2 planning P is active. Resume after that delivery.
+Under the dependency-first revision, dialog-specific consumers are S8 (formerly
+S5); object ownership stays S4. Historical S5 references below mean that
+original assignment, not the newly assigned module/memory S5.
+
 ## Admission and baseline
 
 S2 preservation delivery 532f7fa16 is pushed. Status admits only S3 under
@@ -13,6 +19,22 @@ with new build roots below build/M0-T422/S3 and logs below O:/winnt/logs.
 No desktop activation or input while the owner is using the computer.
 
 ## Completion checklist
+
+Every production-code P first passes the [execution gate](../../rules/EXECUTION.md#every-p-regression-and-side-test-publication-gate):
+capability tests, DOS17 and predecessor-depth non-regression, then verified
+publication of dtmgr/run16/basesrv/ntvdm/WOW32/VDMREDIR and required original
+media/configuration to O:/winnt. Pure documentation P commits require only
+documentation governance/link/diff checks, not runtime testing. Reconcile
+S2 E53 gameplay with retained artifact/profile evidence; do not adopt E92's
+known failure as the acceptable frontier. Documentation checks alone are not
+a new P delivery or runtime acceptance.
+
+- [ ] Before each production-code P: execute and record all three independent WINMINE/SOL/
+  WRITE frontier rows using the [proposal matrix](../../proposals/proposal-wow32-complete-runtime-recovery-001.md#mandatory-three-application-frontier-matrix-for-every-p).
+  Compare against the previous P and historical best verified behavior;
+  retain exact errors/waits, configuration and six-component identities.
+  Known failures stay open; new regressions or unverified comparisons block
+  delivery. No new runtime result is asserted by adding this checklist item.
 
 - [ ] C01: native normal/early/duplicate reply, same/cross-task nested sends,
   foreign peers and Win16/Win32 directions; single USER transport and no

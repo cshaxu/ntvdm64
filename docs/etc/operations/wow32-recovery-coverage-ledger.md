@@ -26,18 +26,18 @@ current ownership: resolve them through this map and the current proposal.
 | --- | --- |
 | Old S2 message/callback/task execution, C01--C03/C09 | S3 |
 | Old S2 view/handle/data/class/window, C04--C07 | S4 |
-| Old S2 dialog C08; old S7 input/hooks/timers | S5 |
-| Old S3 GDI handles/DC/drawing/bitmap/DIB/palette | S6 |
-| Old S3 fonts/text/metafiles | S7 |
-| Old S4 resources/menus/accelerators | S8 |
-| Old S5 clipboard; DDE | S9; S10 respectively |
-| Old S6 modules/memory/aliases; files/environment/OEM | S11; S12 respectively |
-| Old S7 Shell/Registry; Winsock; COMM; print; multimedia | S13; S14; S15; S16; S17 respectively |
-| Old S7 ToolHelp/WOW debugger; common-dialog/OLE; hard errors | S18; S19; S20 respectively |
-| Old S7 CORE/registration | Every implementing owner wires/cleans its slice; S21 reconciles the whole |
-| Old S8 final acceptance | S21 |
-| C10 teardown | S3 execution, S4 objects, S5 dialogs, and each later resource owner |
-| C11/C12 | Every implementation S; S21 final aggregate |
+| Old S2 dialog C08; old S7 input/hooks/timers | S8 |
+| Old S3 GDI handles/DC/drawing/bitmap/DIB/palette | S9 |
+| Old S3 fonts/text/metafiles | S10 |
+| Old S4 resource lookup/load/lock/free; conversion/menus/accelerators | S7 foundation; S11 consumers |
+| Old S5 clipboard; DDE | S12; S13 respectively |
+| Old S6 modules/memory/aliases; files/environment/OEM | S5; S6 respectively |
+| Old S7 Shell/Registry; Winsock; COMM; print; multimedia | S14; S15; S16; S17; S18 respectively |
+| Old S7 ToolHelp/WOW debugger; common-dialog/OLE; hard errors | S19; S20; S21 respectively |
+| Old S7 CORE/registration | Every implementing owner wires/cleans its slice; S22 reconciles the whole |
+| Old S8 final acceptance | S22 |
+| C10 teardown | S3 execution, S4 objects, S8 dialogs, and each later resource owner |
+| C11/C12 | Every implementation S; S22 final aggregate |
 
 No receiver can defer its own normal/failure teardown or available production
 wiring. Split stable parent rows retain named slices, not a blanket pass.
@@ -73,26 +73,26 @@ successor capability is marked complete by this audit ledger.
 
 | Stable ID | Owner | Original entry/owner and inherited evidence | Open contract and required test |
 | --- | --- | --- | --- |
-| CORE-INIT-01 | per-owner / S21 | wow32.c W32Init/W32Dispatch, wowtbl.c; EH build and E42 reached registrar | Initialization/rollback, dispatch coverage and DLL/worker teardown; dependencies on S2-S6 are explicit. |
+| CORE-INIT-01 | per-owner / S22 | wow32.c W32Init/W32Dispatch, wowtbl.c; EH build and E42 reached registrar | Initialization/rollback, dispatch coverage and DLL/worker teardown; dependencies on S2-S6 are explicit. |
 | USER-VIEW-01 | S4 | USER GetDesktopWindow; original desktop/client layouts; E42 confirmed fault | Real desktop producer before USER bootstrap, pointer relocation, callback visibility and withdrawal; reproduce then eliminate the recorded fault. |
 | USER-HANDLE-01 | S4 | Original handle validator, WND/CLS; E40/E42 | Full object/phead before typed publication, reuse/uniqueness/cache invalidation; stale/invalid identity and callback destruction tests. |
 | USER-DATA-01 | S4 | SERVERINFO/CLIENTINFO/shared clock; E40/E41 | Field authority and update timing, host-originated changes without thunk entry, per-thread view and failure withdrawal. |
 | USER-CLASS-01 | S4 | wuclass.c and recovered class/client owners; E40 native fixtures | Real guest register/query/change/unregister, private/public/system class scope, failed registration and module cleanup. |
 | USER-WINDOW-01 | S4 | wuwind.c, wmdisp32.c and native creation bindings; E40 | Real guest create/query/mutate/destroy, first-callback state, subclass/reentrant destruction and external-object coverage. |
 | USER-MESSAGE-01 | S3 | wumsg.c/wmsg16.c/message families; E40/E42 native tests | Actual guest synchronous/post/nested callback, reply/wait/cancel, destroyed receiver and task loss. |
-| USER-DIALOG-01 | S5 | wudlg.c/W32InitDlg; E40 native initialization evidence | Real guest controls, initialization/procedure replacement, creation veto, cancellation and release. |
+| USER-DIALOG-01 | S8 | wudlg.c/W32InitDlg; E40 native initialization evidence | Real guest controls, initialization/procedure replacement, creation veto, cancellation and release. |
 | USER-TASK-01 | S3 | wkman.c; recovered queue/taskman/exitwin slices; E42 | Registration/init/yield/wait through real task context and CCPU callback; multiple tasks and failure recovery. |
-| USER-TASK-EXIT-01 | S3/S4/S5 by resource | W32DestroyTask, WU32FreeModule; E42 helper failure/retry pass | Connect thread/worker cleanup/dispose; module release must not destroy a live thread; prove teardown ordering. |
+| USER-TASK-EXIT-01 | S3/S4/S8 by resource | W32DestroyTask, WU32FreeModule; E42 helper failure/retry pass | Connect thread/worker cleanup/dispose; module release must not destroy a live thread; prove teardown ordering. |
 | USER-CALLBACK-01 | S3 | wcall16.c CallBack16 and wmdisp32.c; E40/E42 | Real frame lease, recursive CCPU entry/return, exception/reentry, task frame restoration and cancelled callback. |
-| GDI-01 | S6/S7 by family | wgdi/wgfont/wgtext/wgmeta/wgpal/wdib families; E40 partial experiments | Drawing/DC/text/font/palette/metafile/DIB content, alias ownership, invalid input and native/guest release. |
-| RESOURCE-01 | S8 | wres16/wres32/wcuricon/waccel and recovered clres/cldib; E40 | Real names/IDs/old formats, resource lease, conversion, callback timing and failed load cleanup; bitmap depends on GDI-01. |
-| MENU-01 | S8 | wumenu.c and recovered original menu parser; E40 owner-draw counterexample/recovery | Original-layout menu graph and mutations, owner-draw data, callbacks, invalid handles and release; consumes S2 publication. |
-| DDE-01 | S9 clipboard / S10 DDE | wdde.c/wuclip.c and original FreeDDEData; E40 | Real clipboard/DDE transfer, formats, ownership/reply, rejected/abandoned exchange and peer/task death. |
-| KERNEL-01 | S11/S12 by family | wkman/wkmem/wkernel/wkfileio/wdos and alias/resource dependencies | Loader/memory/file/environment services, allocation and rollback, aliases and module/task release; uses S2 task owner. |
-| OEM-01 | S12 | wdos.c/wkman.c; proposal OEM-WOW-DIR/DELETE obligations | Real non-ASCII paths, both deletion branches, font fallback and cleanup; S8 repeats integrated consumer acceptance. |
-| OTHER-01 | S5/S13--S19 by family | Shell/Winsock/ToolHelp/keyboard/sound/multimedia/COMM/hooks/printing/commdlg/OLE families | S1 splits complete families into stable child rows with callers, dependency dispositions and real/negative/cleanup tests; no blanket pass. |
-| ERROR-01 | S20 | Original hard-error callers and response/termination owners | Response/cancel/fatal exit; reconcile queued error-dialog owner, avoid duplicate implementation. |
-| ACCEPT-01 | S21 | Immutable WRITE, WINMINE and SOL; EH DOS baseline only | Pin media then prove all proposal interaction scenarios, repeated/multiple tasks, abnormal exit and subsequent DOS usability. |
+| GDI-01 | S9/S10 by family | wgdi/wgfont/wgtext/wgmeta/wgpal/wdib families; E40 partial experiments | Drawing/DC/text/font/palette/metafile/DIB content, alias ownership, invalid input and native/guest release. |
+| RESOURCE-01 | S7 foundation / S11 consumers | wres16/wres32/wcuricon/waccel and recovered clres/cldib; E40 | Real names/IDs/old formats, resource lease, conversion, callback timing and failed load cleanup; bitmap depends on GDI-01. |
+| MENU-01 | S11 | wumenu.c and recovered original menu parser; E40 owner-draw counterexample/recovery | Original-layout menu graph and mutations, owner-draw data, callbacks, invalid handles and release; consumes S2 publication. |
+| DDE-01 | S12 clipboard / S13 DDE | wdde.c/wuclip.c and original FreeDDEData; E40 | Real clipboard/DDE transfer, formats, ownership/reply, rejected/abandoned exchange and peer/task death. |
+| KERNEL-01 | S5/S6 by family | wkman/wkmem/wkernel/wkfileio/wdos and alias/resource dependencies | Loader/memory/file/environment services, allocation and rollback, aliases and module/task release; uses S2 task owner. |
+| OEM-01 | S6 | wdos.c/wkman.c; proposal OEM-WOW-DIR/DELETE obligations | Real non-ASCII paths, both deletion branches, font fallback and cleanup; S8 repeats integrated consumer acceptance. |
+| OTHER-01 | S8/S14--S20 by family | Shell/Winsock/ToolHelp/keyboard/sound/multimedia/COMM/hooks/printing/commdlg/OLE families | S1 splits complete families into stable child rows with callers, dependency dispositions and real/negative/cleanup tests; no blanket pass. |
+| ERROR-01 | S21 | Original hard-error callers and response/termination owners | Response/cancel/fatal exit; reconcile queued error-dialog owner, avoid duplicate implementation. |
+| ACCEPT-01 | S22 | Immutable WRITE, WINMINE and SOL; EH DOS baseline only | Pin media then prove all proposal interaction scenarios, repeated/multiple tasks, abnormal exit and subsequent DOS usability. |
 
 ## Source coverage seed
 
