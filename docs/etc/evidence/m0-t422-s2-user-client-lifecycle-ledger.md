@@ -3752,3 +3752,40 @@ ordering across that owner. The current native-only facade has not supplied
 those inputs. E92 remains failing and E93 remains mock contract evidence.
 No product behavior, guest media, runtime package or acceptance claim changes
 in this source/build-boundary audit.
+
+## E95 - Client callback boundary and pending delivery-owner decision
+
+Read-only source follow-up after 3d4c4fe5c, not a new production provider.
+Original windows/core/ntuser/kernel/srvhook.c SHA-256 is
+F3248579A81D191FA97562E2E98988DED91D6CD63FF9B0B5C1A9B2336BF67E0C;
+inc/ntcb.h SHA-256 is
+EB09B59F4AB36BFBDDA4F579A91F255CE8B011D533BB197E3E9C5AE95111ADAD.
+srvhook.c:77/80 consumes the private CWPSTRUCTEX/CWPRETSTRUCTEX psmsSender
+on the server side and passes it into ScSendMessageSMS at :126/137.
+ntcb.h:618--665 defines and sends/receives FNDWORDMSG with window, message,
+wParam, lParam, xParam and callback procedure, but no SMS pointer. Thus the
+inspected original scalar client-callback route does not export the private
+SMS identity. This does not establish impossibility of every modern native
+interface; it rejects reinterpreting an ordinary client hook structure as
+that private server extension.
+
+The owner was asked whether to admit a bounded original SMS delivery slice
+that replaces the native forwarding for the messages it owns. This is a
+pending architecture decision, not an implementation approval or a proven
+complete transport design. Any such design must cover explicit sends,
+native-window-operation-induced messages and external senders, retain one
+delivery owner per message, and keep the no-second-USER-server/scheduler and
+immutable-guest constraints. Approval alone would not prove those properties.
+No transport change is made while this decision is outstanding. The owner's
+request to keep working without desktop interference remains in force.
+
+Separate visual diagnostic t422-s2-20260924T235725669Z-d88d510e-visual used
+the E80 provider. Computer Use enumerated a WINMINE-titled window and its
+Game/Help menu, but capture did not establish a rendered board. The owner
+interrupted computer input while using the desktop; no further UI input was
+issued. The observer timed out, cleaned its test processes and reports
+profile_restored=true in its result.json. This is INCOMPLETE visual/exit
+acceptance, not a new success or a proven E91 regression. No candidate A/B
+run followed. Runtime SYSTEM.INI and E80 DLL retain the restored E91 hashes.
+Future visible tests require coordination with the owner; source and headless
+build work do not acquire permission to steal focus or inject input.
