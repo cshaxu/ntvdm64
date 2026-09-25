@@ -246,6 +246,19 @@ It may not contain broker policy, worker/session state, guest pointers or a
 general-purpose helper collection. Shared records are copied, versioned data,
 never session, Console or native-resource policy.
 
+## WOW message transport boundary
+
+Modern Windows USER is the sole native message delivery and reply owner for
+Win16-to-Win16 and both directions of Win16/Win32 interaction. Do not introduce
+a parallel local SMS delivery queue or infer a private received SMS identity
+from an outer native API call. Original MVDM message thunks and composable
+OpenNT WOW task algorithms remain source owners; `wow32-dll` binds native
+call/return and callback boundaries to WOW execution handoff, bounded guest
+memory lifetime and failure cleanup. `ntvdm-exe` supplies worker-local CCPU
+and thread bindings, not a second message transport or scheduler. Observable
+reply/reentry/lifecycle behavior is the acceptance contract, not equality with
+an inaccessible native USER SMS pointer.
+
 ## Interactive failure policy
 
 All user-facing error-dialog interaction uses one app-owned custom Win32

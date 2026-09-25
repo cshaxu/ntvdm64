@@ -45,17 +45,152 @@ The required source-shaped representation is finite:
 
 ## Closure register
 
-Current checkpoint E88 preserves a failing native received-message identity
-test: ordinary native sends return, but the receiver's psmsCurrent is null.
-Early reply and message lifetime remain unaccepted S2 work, not a new closure.
-E89 additionally establishes that an outer native-API call record is not a
-one-to-one original SMS identity; do not publish it as psmsCurrent by guessing.
-E90's widened pre-send interval reproduces a separate incomplete handoff:
-the receiver is initially selected, then the sender is selected again while
-outside WOW execution; a foreign synchronous send remains undelivered.
-That E90 run does not reach the tuple-alias check. E91's coupled binding now
-passes that native check and nested send; early reply remains red and real
-guest regression is incomplete. No S2 closure or runtime promotion is claimed.
+The owner decision following E95 retains modern Windows USER as the sole
+message transport/reply owner, including Win16-to-Win16 and both directions
+of Win16/Win32 interaction. The proposed local SMS delivery slice is rejected.
+E88's local psmsCurrent identity assertion is not a product acceptance gate
+under that decision; retain it as historical diagnostic evidence, not as a
+reason to invent a receive queue or correlate private SMS objects. E89's
+warning against treating an outer API invocation as one received message
+still applies. E91 passes bounded native foreign/nested-send cases; E92
+still demonstrates failed early-reply WOW execution handoff. The checklist
+below governs remaining acceptance, not superseded implementation proposals
+in E88--E95. No product repair or new runtime pass is claimed by this update.
+
+## S2 completion checklist
+
+Owner-requested on 2026-09-24. This is the completion view of the existing
+coverage rows, not a second task or a scope expansion. The active packet in
+Status remains authoritative. IDs C01--C12 are stable checklist IDs, not S/P
+allocations. The implementer owns each item and its evidence update.
+
+### Check-off rule and execution order
+
+- A checked historical milestone below means only the stated bounded result.
+  An unchecked completion item may already have substantial production code.
+- Check a C item only after its source/binding review, production wiring,
+  positive, negative and lifecycle acceptance are recorded. Required guest
+  evidence cannot be replaced by a native fixture, compile, DLL load or hit.
+- For each completed item append its evidence section/run IDs, source commit,
+  exact tested artifact hashes, expected/actual outcomes and remaining limits.
+  A limit that violates that item's acceptance keeps it unchecked. Explicit
+  original-guest limitations follow the owner's existing register-only rule;
+  they are never counted as functional passes or host-binding exemptions.
+- Work in order C01--C03, C04--C05, C06--C08, C09--C10, C11--C12. Finish a
+  group's implementable edges and acceptance before moving on. A prerequisite
+  found in another group is named by ID, implemented and integrated immediately;
+  it is not a reason to scatter another untracked partial implementation.
+- If desktop access is unavailable, record the exact pending guest test and
+  continue safe background work. Do not claim a pass, inject input, activate
+  windows or repeatedly ask the owner to run exploratory tests.
+- Each progress report states newly checked IDs, the current failing case,
+  next IDs and any actual blocker. Reopen a checked item only with a concrete
+  regression or affected-contract change and the required retest recorded.
+
+### Preserved bounded milestones (not whole-capability closure)
+
+- [x] Client backing/rebasing and real CCPU page-domain fixture: B1/B2 evidence.
+- [x] WINMINE launch and owner-confirmed gameplay: E53; this is not all USER APIs.
+- [x] Native nested destruction/SEH/detach retry with CCPU memory: E56/E57.
+- [x] Bounded native foreign/nested-send checks: E91; early reply still fails.
+- [x] Original ReplyMessage ordering contract: E93, explicitly mock evidence.
+
+### Completion items
+
+- [ ] **C01 - Native send/reply handoff** (`USER-MESSAGE-01`). Owner:
+  `wow32-dll` API/task bindings, with original MVDM thunks and original
+  `opennt-host` task algorithms retained. Repair the E92 early-reply failure;
+  verify normal, early and duplicate reply, same-task and cross-task nested
+  sends, foreign sender and external target, Win16-to-Win16 and both Win16/
+  Win32 directions. Native USER owns delivery/result; returning a result must
+  neither strand the receiver as WOW owner nor permit concurrent CCPU entry.
+  Existing evidence: E91 partial native passes, E92 red, E93 mock ordering.
+- [ ] **C02 - Blocking calls, waits and task loss** (`USER-MESSAGE-01`,
+  `USER-TASK-01`). Owner: `wow32-dll` task/native-call bindings. Audit every
+  selected blocking native-call entry/return, Get/Peek/Wait and modal/nested
+  loop, including targets with no local WOW binding. Verify wake/reentry,
+  timeout where supported, cancellation, destroyed target and sender/receiver
+  task loss, restoring data-lock and execution ownership separately. No
+  fabricated success, deadlock or stale thread association. E70/E76/E91 are
+  partial evidence, not this complete matrix.
+- [ ] **C03 - Callback frames and memory lifetime** (`USER-CALLBACK-01`).
+  Owners: original `wcall16/wcall32/wmdisp32` and `wow32-dll`, with
+  `ntvdm-exe` providing the existing CCPU/lease boundary. Cover selected WND,
+  dialog, hook and enumeration callback gateways; real recursive guest
+  entry/return, destruction during callback, cancellation and exception.
+  Assert task-frame/CallbackWnd restoration and no guest pointer surviving
+  its valid lease or backing freed while borrowed. Reuse E41/E44/E56/E57;
+  missing real guest cases remain open.
+- [ ] **C04 - Published view and object identity** (`USER-VIEW-01`,
+  `USER-HANDLE-01`). Owners: original client validators, worker client-view
+  backing and `wow32-dll` publication bindings. Real USER16 must read the
+  original layouts through the active CCPU domain; test complete publication
+  before first callback, nonzero rebasing, invalid/stale/reused handles,
+  partial-allocation rollback, withdrawal and retry. Reuse B1/B2/E56/E57;
+  native page-domain assertions alone do not close this item.
+- [ ] **C05 - Shared data updates and geometry** (`USER-DATA-01`). Owners:
+  worker client view and USER bindings. Verify cursor/clock, relevant metrics,
+  styles and window/client rectangles against their original field authority.
+  Include host-originated changes while guest runs without a WOW32 thunk,
+  per-thread visibility and failure withdrawal. E54 callback-time rectangle
+  refresh is partial evidence; window/client geometry remains S2-owned.
+- [ ] **C06 - Class lifecycle** (`USER-CLASS-01`). Owners: original `wuclass`
+  and class-publication bindings. Real guest register/query/change/unregister;
+  private/public/system scope, failed registration, class reuse and module
+  cleanup. Prove no live class/object retired prematurely. Existing guest CLS
+  allocation/publication is implementation evidence, not full acceptance.
+- [ ] **C07 - Window lifecycle** (`USER-WINDOW-01`). Owners: original
+  `wuwind/wmdisp32` and window bindings. Real create/query/change/subclass/
+  destroy, creation veto, first-callback data, nested destruction and native
+  external-object interaction. Reuse E45--E54 ordinary lifecycle diagnostics;
+  repeat on the sealed ordinary package profile and cover missing cases.
+- [ ] **C08 - Dialog lifecycle** (`USER-DIALOG-01`). Owners: original
+  `wudlg/W32InitDlg` and dialog bindings. Real guest controls, initialization,
+  procedure replacement, modal reentry, creation veto, cancellation and
+  release, including a failing initialization. Inherited native initialization
+  evidence does not close guest dialog behavior. This row is explicitly
+  retained from the coverage ledger, not hidden inside window acceptance.
+- [ ] **C09 - Task registration and scheduling** (`USER-TASK-01`). Owners:
+  original `wkman/wuser/taskman` and their bounded task bindings. Verify real
+  task init/register/yield/wait, hung-app registration, multiple tasks and
+  failure recovery through CCPU callbacks. Reuse earlier scheduling evidence;
+  do not reclassify existing bindings as wholly absent or build a new scheduler.
+- [ ] **C10 - Module/task/thread/worker teardown** (`USER-TASK-EXIT-01`,
+  shared C03/C04 lifetime assertions). Owners: original `W32DestroyTask` /
+  `WU32FreeModule` and DLL/worker-local cleanup bindings. Verify zero-task
+  module cleanup leaves live tasks intact; nonzero task cleanup occurs once;
+  callbacks/windows/classes retire before their backing; abnormal task/thread
+  and broker/worker loss cancels outstanding work safely. Check failure/retry,
+  repeated cleanup and absence of retained handles/leases. E47/E49--E51/E57
+  cover subsets only. C01--C03 loss cases share evidence, not duplicate policy.
+- [ ] **C11 - S2 edge and minimal-diff reconciliation**. Map every S2
+  source/consumer and IN-07/08/18/19/20 plus OUT-01/02/04--08/11/12/15--17
+  to C01--C10 and its production build/import/call path and guest evidence.
+  No completed S2 edge may remain unwired or placeholder. Explain source-
+  proven inapplicability explicitly rather than silently omit a case. Remove
+  obsolete pseudo-SMS assumptions/tests as appropriate to native ownership;
+  retain useful historical evidence with supersession notes. Review mirror
+  formatting, registered necessary diffs and removed/retained autonomous LOC.
+- [ ] **C12 - Final same-artifact delivery**. Fresh MSVC x86 `/MT` product
+  and DLL build; final S2 guest positive/negative/lifecycle suite; all 17
+  established text-gated DOS routes, including direct/interactive/nested
+  COMMAND/MEM/EDIT, on the identified final runtime set. Record package profile,
+  guest/config identities, logs, artifact hashes and exact restores. Run
+  governance/link/diff gates, review, commit and push; verify clean worktree
+  and remote synchronization. Prior DOS17 on E80 cannot accept a newer DLL.
+
+### Scope boundary and current count
+
+At this documentation checkpoint: **0/12 completion items checked**. This is
+not zero implementation progress: the bounded milestones above are preserved.
+No new runtime tests ran for this checklist. C01 is the first confirmed repair;
+other open cases are missing acceptance, not automatically confirmed defects.
+S3 owns GDI/bitmap/DC/color; S4 owns resources/menus; S5--S7 own their declared
+service packages; S8 owns full WRITE/WINMINE/SOL aggregate acceptance. Their
+implementation is not silently added to S2. Conversely S2 geometry, dialogs,
+task and callback defects cannot be deferred to those receivers without an
+explicit owner-approved change. Keep this checklist current rather than
+creating another broad audit each time a diagnostic discovers a new symptom.
 
 | ID | Original owner / production edge | Required S2 closure | Initial state |
 | --- | --- | --- | --- |
@@ -70,7 +205,10 @@ guest regression is incomplete. No S2 closure or runtime promotion is claimed.
 | USER-CALLBACK-01 | `wcall16.c`, `wcall32.c` | Real guest callback frame/return, reentry/cancellation and task-frame restoration. | E41 corrects procedure encoding; E44 restores scheduler lock entry. E56 wires nested CallbackWnd save/restore and delayed backing release, with CCPU primitive tests and diagnostic WINMINE normal exit. Guest nested destruction, cancellation and exceptional task-frame restoration remain open; the old 83B7 publication explanation is withdrawn. |
 | IN-07/08/18/19/20; OUT-01/02/04--08/11/12/15--17 | `W32Init` / registration output | Wire every selected S2 slot at the owner boundary; prove each reached slot through its real guest owner. | OUT-17 is worker-local identity wired with publish/retire/reuse fixture; its real message-path invocation and the remaining slot acceptance are pending. |
 
-## Implementation order
+## Initial implementation order (historical)
+
+The completion checklist above now supplies the remaining execution order;
+the initial sequence below records how the existing foundation was built.
 
 1. Add a bounded worker-local client-view object allocator/publisher and its
    withdrawal contract to the existing WOW page domain; it owns no native
@@ -3754,6 +3892,10 @@ No product behavior, guest media, runtime package or acceptance claim changes
 in this source/build-boundary audit.
 
 ## E95 - Client callback boundary and pending delivery-owner decision
+
+Historical decision request: superseded by the owner rejection recorded in
+the closure register and C01--C12 checklist above. No local SMS transport is
+admitted; the observations below remain evidence, not a pending permission.
 
 Read-only source follow-up after 3d4c4fe5c, not a new production provider.
 Original windows/core/ntuser/kernel/srvhook.c SHA-256 is
