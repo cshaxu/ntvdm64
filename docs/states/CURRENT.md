@@ -4,26 +4,34 @@
 
 ## Active Packet
 
-**Active: M0 T422 S2**
+**Active: M0 T422 S3**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T422 S2, Ordinary Mode, single implementer/reviewer. |
+| Identifier Mode | M0 T422 S3, Ordinary Mode, single implementer/reviewer. |
 | Candidate Proposal | [WOW32 recovery](../proposals/proposal-wow32-complete-runtime-recovery-001.md). |
-| Admission And Approval | Owner revised S2 on 2026-09-24 to preservation/planning closure, followed by S3 admission after push. |
-| Objective | Preserve S2 implementation/research, reconcile worktree and redistribute unfinished contracts into the revised T plan. |
-| Non-goals | Functional USER closure, runtime promotion, guest mutation or a local SMS transport. |
-| Reference Baseline | HEAD 4c978a7f6; clean intake; [handoff](../etc/evidence/m0-t422-s2-planning-handoff.md). |
-| Files And ABI Surface | Proposal, coverage, S2 evidence and current packet only; no production ABI change. |
-| Applicable Rules | Source-first, immutable guest, evidence-level separation, single active S and owner-approved scope change. |
-| Verification | Documentation governance/link checks, diff review/check, commit/push and clean synchronized worktree. |
-| Expected Markers | Every C01--C12 obligation has a receiver; E92 remains red; no partial result promoted to functional pass. |
-| Asset Needs | Existing tracked S2 evidence and code; no desktop or new guest media. |
-| Reporting Requirements | Explicit bounded closure, retained results and failures, revised sequence and delivery identity. |
-| Stop Conditions | Lost uncommitted work, unassigned obligation or invented acceptance. |
-| Exit Criteria | Preservation/planning handoff reviewed, governance passed, committed and pushed. |
-| Original Owner Request | Close S2 remaining work as preservation/planning, then admit S3 messages/callbacks/task execution. |
-| Similar-Issue Sweep | All old S2--S8 assignments, C checklist, registration and cleanup obligations. |
+| Admission And Approval | Owner explicitly admits S3 after S2 preservation/planning push; S2 delivery 532f7fa16 is on origin/main. |
+| Objective | Complete message/reply, callback and original task execution handoff, including cancellation and execution-owned cleanup. |
+| Non-goals | Local SMS transport, second USER server/scheduler, guest mutation, whole GDI/USER object implementation or fixture-only acceptance. |
+| Reference Baseline | [S2 handoff](../etc/evidence/m0-t422-s2-planning-handoff.md), [coverage](../etc/operations/wow32-recovery-coverage-ledger.md), [S3 checklist](../etc/evidence/m0-t422-s3-message-task-checklist.md). |
+| Files And ABI Surface | Original mvdm/wow32 message/callback/task owners, opennt-host taskman, wow32-dll native-call/runtime bindings, bounded worker CCPU/lease edges and their tests. |
+| Applicable Rules | Source-first minimal diff, modern USER sole transport, immutable guest, separate data-lock/execution ownership, exact lease lifetime. |
+| Verification | Original-source review, focused positive/negative/reentry/loss tests, real guest/native peers, fresh MSVC x86 /MT and DOS17, governance/link/diff checks. |
+| Expected Markers | Early reply permits correct sender continuation without concurrent CCPU entry; callback and wait restoration, task loss and exactly-once execution cleanup pass. |
+| Asset Needs | Existing immutable WOW16 and controlled native peers; build/M0-T422/S3; runtime logs below O:/winnt/logs. |
+| Reporting Requirements | Stable C01--C03/C09 and execution C10 checks, exact run/hash evidence, removed/retained mirror and autonomous code; reuse S2 run protocol. |
+| Stop Conditions | Need for prohibited transport/state owner, guest mutation or unpreservable original contract; occupied desktop forbids GUI interference, not safe background work. |
+| Exit Criteria | All S3-owned edges wired and positive/negative/real guest/lifecycle accepted; x86 and DOS17 pass on final artifacts; reviewed commit/push and clean synchronized worktree. |
+| Original Owner Request | Preserve/close S2, govern T plan, push, then admit S3 messages/callbacks/task execution and continue. |
+| Similar-Issue Sweep | All selected native call/return, callback families, waits, modal loops, sender/receiver loss, frame restoration and execution cleanup; name prerequisites by receiver. |
+
+## T422 S2 Closure Record
+
+Delivery 532f7fa16 is the owner-revised preservation/planning closure, not
+functional USER acceptance. [Handoff](../etc/evidence/m0-t422-s2-planning-handoff.md)
+preserves E1--E95 and transfers every open C item. No code was uncommitted at
+intake. E92 early-reply failure remains S3 work; runtime is not promoted.
+T422 remains open through S21 and owner final acceptance.
 
 ## S1 Closure Record
 
