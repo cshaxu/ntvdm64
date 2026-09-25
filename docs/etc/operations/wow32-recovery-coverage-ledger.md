@@ -1,5 +1,18 @@
 # WOW32 recovery coverage ledger
 
+## Successor numbering and continuing obligations
+
+T422 closes by owner direction as initial WINMINE/research/planning results.
+The [successor proposal](../../proposals/proposal-wow32-production-completion-002.md)
+owns the live unadmitted plan. Former T422 S3--S22 in the post-S2 map below
+transfer to successor S1--S20 (subtract two). Earlier S1 source/table seeds
+remain historical: resolve through the post-S2 map before this translation.
+Stable IDs, code, tests and failures are preserved, not marked passed.
+C01--C03/C09 and execution C10 go to successor S1; C04--C07/object C10 to
+S2; C08 to S6; C11/C12 to every implementation owner and aggregate S20.
+Every required untested row stays open and requires tracked test entrypoints
+and assertions, not merely research evidence.
+
 ## Role and baseline
 
 T422 coverage ledger for the admitted

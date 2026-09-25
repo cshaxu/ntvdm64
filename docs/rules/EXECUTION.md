@@ -87,6 +87,18 @@ log as a substitute for this review.
 
 ## Evidence, Verification, And Closure
 
+Each implementation S delivers reproducible test source/scripts in the
+repository under tests/, alongside the implementation they verify. Each
+capability checklist row links an exact test entrypoint/case/arguments,
+expected assertions, prerequisites and source/artifact/run evidence. Exercise
+the selected production caller/provider and real guest boundary where
+applicable, including normal, negative and lifecycle behavior. Research notes,
+symbols, trace hits, unused wrappers and test-only provider substitutes do not
+prove production closure. Native fixtures/mocks supplement guest acceptance;
+approved external or immutable-guest limits remain explicit non-pass outcomes.
+Missing tests/assertions keep the row open. Documentation/research-only S
+deliveries are labelled as such and never claim runtime capability completion.
+
 Every investigation records exact inputs, procedure/commands, observed output,
 interpretation, confidence, and follow-up in etc/ or an appropriate history/
 record. A failed or unavailable check is evidence with a limitation; it is

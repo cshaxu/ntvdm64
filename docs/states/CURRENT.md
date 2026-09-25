@@ -2,43 +2,36 @@
 
 ## Current Work
 
-## Active Packet
+**No active M/T/S packet.**
 
-**Active: M0 T422 S3**
+Owner closes T422 as initial WINMINE capability and WOW32 research/planning
+results, not complete WOW32 or WRITE/SOL acceptance. The final S2 documentation
+P transfers all unfinished work, including admitted incomplete S3, to the
+queue-head [production completion candidate](../proposals/proposal-wow32-production-completion-002.md).
+That candidate is not admitted and has no allocated numeric T identifier.
 
-| Field | Record |
-| --- | --- |
-| Identifier Mode | M0 T422 S3, Ordinary Mode, single implementer/reviewer. |
-| Candidate Proposal | [WOW32 recovery](../proposals/proposal-wow32-complete-runtime-recovery-001.md). |
-| Admission And Approval | S3 resumes after owner-requested S2 additional planning delivery 8ed124dbe was pushed; original admission 4b2fd0d1f remains valid. |
-| Objective | Complete message/reply, callback and original task execution handoff, including cancellation and execution-owned cleanup. |
-| Non-goals | Local SMS transport, second USER server/scheduler, guest mutation, whole GDI/USER object implementation or fixture-only acceptance. |
-| Reference Baseline | [S2 handoff](../etc/evidence/m0-t422-s2-planning-handoff.md), [coverage](../etc/operations/wow32-recovery-coverage-ledger.md), [S3 checklist](../etc/evidence/m0-t422-s3-message-task-checklist.md). |
-| Files And ABI Surface | Original mvdm/wow32 message/callback/task owners, opennt-host taskman, wow32-dll native-call/runtime bindings, bounded worker CCPU/lease edges and their tests. |
-| Applicable Rules | Source-first minimal diff, modern USER sole transport, immutable guest, separate data-lock/execution ownership, exact lease lifetime. |
-| Verification | Original-source review, focused positive/negative/reentry/loss tests, real guest/native peers, fresh MSVC x86 /MT and DOS17, governance/link/diff checks. |
-| Expected Markers | Early reply permits correct sender continuation without concurrent CCPU entry; callback and wait restoration, task loss and exactly-once execution cleanup pass. |
-| Asset Needs | Existing immutable WOW16 and controlled native peers; build/M0-T422/S3; runtime logs below O:/winnt/logs. |
-| Reporting Requirements | Stable C01--C03/C09 and execution C10 checks, exact run/hash evidence, removed/retained mirror and autonomous code; reuse S2 run protocol. |
-| Stop Conditions | Need for prohibited transport/state owner, guest mutation or unpreservable original contract; occupied desktop forbids GUI interference, not safe background work. |
-| Exit Criteria | All S3-owned edges wired and positive/negative/real guest/lifecycle accepted; x86 and DOS17 pass on final artifacts; reviewed commit/push and clean synchronized worktree. |
-| Original Owner Request | Preserve/close S2, govern T plan, push, then admit S3 messages/callbacks/task execution and continue. |
-| Similar-Issue Sweep | All selected native call/return, callback families, waits, modal loops, sender/receiver loss, frame restoration and execution cleanup; name prerequisites by receiver. |
+[Bounded T422 closure](../history/m0-t422-initial-wow32-closure.md) preserves
+evidence and known failures. Original S3--S22 map to successor S1--S20.
+Pure documentation checks apply; no new runtime/deployment pass is claimed.
+The historical records below do not reopen an active packet.
 
 ## S2 Additional Planning Delivery
 
 Delivery 8ed124dbe completes the dependency-first S2 planning P. Documentation
 checks passed; no production code changed and no runtime/deployment pass is
 claimed. Runtime gates apply to production-code P commits; valid incremental
-build caches are permitted. Current sequence ends at S22. S3 is again active.
+build caches are permitted. That intermediate sequence is now transferred to successor S1--S20;
+S3 is no longer active after the owner-directed T422 closure.
 
 ## T422 S2 Closure Record
 
 Delivery 532f7fa16 is the owner-revised preservation/planning closure, not
 functional USER acceptance. [Handoff](../etc/evidence/m0-t422-s2-planning-handoff.md)
 preserves E1--E95 and transfers every open C item. No code was uncommitted at
-intake. E92 early-reply failure remains S3 work; runtime is not promoted.
-T422 remains open through S22 and owner final acceptance.
+intake. E92 early-reply failure transfers from former S3 to successor S1;
+runtime is not promoted.
+T422 is now closed under the later owner-revised initial-stage boundary;
+full functional acceptance belongs to the queue-head successor.
 
 ## S1 Closure Record
 
@@ -113,8 +106,8 @@ the live assignments. T420 S43 is debugger including OEM-DBG-PATH and S44 is
 VDD; S45 is the final layered registry-read completion plus non-WOW32
 acceptance. T420 is now closed by owner acceptance.
 S42 handoff checks pass; the USER desktop failure remains unfixed and is
-assigned to successor S1 audit and S2 implementation. T422 S1 is the sole
-admitted packet.
+assigned to successor S1 audit and S2 implementation. That historical admission is superseded by T422 closure and the unadmitted
+queue-head successor.
 
 ## S40 Closure Record
 
@@ -572,6 +565,7 @@ records the accepted task-manager delivery and its evidence boundary.
 
 ## Recent M0 Closures
 
+| T422 | [Initial WOW32 and planning closure](../history/m0-t422-initial-wow32-closure.md) | Owner-accepted WINMINE initial milestone and complete successor handoff; not full WOW32 or WRITE/SOL acceptance. |
 | T420 | [Runtime package completion](../history/m0-t420-runtime-package-completion-closure.md) | Owner-accepted selected non-WOW32 package recovery, static registry-reader boundary and 17-route product regression. |
 | T419 | [Terminal task manager](../history/m0-t419-terminal-task-manager-closure.md) | Delivered `dtmgr.exe`, authenticated selected-worker management, compact first-option compatibility, and explicit executable component roots. |
 

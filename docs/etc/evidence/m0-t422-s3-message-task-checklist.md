@@ -1,5 +1,12 @@
 # T422 S3 message, callback and task execution checklist
 
+## Successor transfer
+
+Owner closes T422 as an initial-stage milestone. This incomplete S3 record
+transfers intact to S1 of the [successor candidate](../../proposals/proposal-wow32-production-completion-002.md).
+No S3 functional completion is claimed. Earlier resume/suspension wording
+below is historical; E92 and every unchecked obligation remain open.
+
 S3 resumes after additional S2 planning delivery 8ed124dbe was pushed.
 Its original admission remains valid; S2 is no longer active.
 Under the dependency-first revision, dialog-specific consumers are S8 (formerly

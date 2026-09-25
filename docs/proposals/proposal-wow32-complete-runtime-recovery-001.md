@@ -1,5 +1,14 @@
 # WOW32 complete runtime recovery
 
+## Superseded execution plan
+
+Owner closes T422 on 2026-09-24 as initial WINMINE capability and planning
+preservation, not complete WOW32 acceptance. This document is retained design
+and research provenance. All unfinished S3--S22 execution moves to S1--S20
+of the [new successor candidate](proposal-wow32-production-completion-002.md),
+which owns the live plan and final acceptance. Old admission/frontier/numbering
+statements below are historical; no T422 S remains active after this handoff.
+
 ## Objective and admission
 
 Owner-directed WOW32 successor to T420, dated 2026-09-21. The revised queue
@@ -379,6 +388,14 @@ logs or introducing a competing status/queue. Create the S inventory at
 admission, update it during work and review every row before closure.
 
 Each stable row records:
+
+- Checked-in test source/script under tests/, exact entrypoint/case/arguments,
+  prerequisites and expected assertions. Disposable experiments alone do not
+  satisfy this deliverable. Tests accompany implementation in the repository.
+- Proof that the tested caller/provider is the selected production path,
+  including real guest calls, callbacks/direct reads as applicable, failure
+  and cleanup. Substituted providers, trace hits and unused wrappers are not
+  production acceptance; missing tests keep the capability checkbox open.
 
 - Capability/entry and original source/hash, including guest data consumers.
 - Required dependency, responsible owner/S and current production caller.

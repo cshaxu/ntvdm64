@@ -1,5 +1,16 @@
 # T422 S2 preservation and planning handoff
 
+## Final owner-directed S2 P and T transfer
+
+Owner requests a final S2 documentation P making checked-in executable tests
+and capability assertions mandatory, closing T422 as initial WINMINE/planning
+results and placing the [successor candidate](../../proposals/proposal-wow32-production-completion-002.md)
+first in Queue. Former T422 S3--S22 map to successor S1--S20. S3 was admitted
+but incomplete. This supersedes earlier instructions below to resume S3 or
+keep T422 open. The [closure](../../history/m0-t422-initial-wow32-closure.md)
+records the limited conclusion and preserved failures. Runtime/guest files
+are unchanged; this documentation-only P claims no new runtime pass.
+
 ## Question and owner decision
 
 On 2026-09-24 the owner changes S2's remaining objective to preserve and
