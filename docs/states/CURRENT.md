@@ -96,6 +96,12 @@ non-pass outcomes. S2 remains open until its complete source/runtime and
 physical-input disposition is resolved; do not re-admit S3 yet. Hidden native
 Console is S3, display/Window S4, Window mouse S5 and final owner audit S6.
 
+A new real-guest test proves DOS exits 7 and 99 preserve ERRORLEVEL and allow
+the same COMMAND /c batch to run MEM afterward. Its interactive-BAT counterpart
+instead stalled in a native inner run16; the cause remains under S2 investigation.
+See the ledger's nonzero-completion contrast. This is an additional open
+integration check, not a physical-desktop blocker or an accepted guest limit.
+
 ## Current Technical Baseline
 
 S1 production revision c39b9ca0c contains launcher standalone-Console retirement

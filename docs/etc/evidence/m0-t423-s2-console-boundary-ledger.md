@@ -4655,3 +4655,40 @@ Physical focus movement and pointer clipping/release are still unproved.
 Injected records are not a substitute. No desktop switch, physical input,
 foreground activation or new clipping operation was performed. S2 remains
 active; this evidence-only P neither admits S3 nor changes its exit standard.
+
+### Nonzero DOS completion and batch-entry contrast
+
+Added tests/observation/verify-dos-nonzero-continue.ps1 and its
+dos-nonzero-continue.bat. The runner assembles the existing independently
+authored dpmi_exec_child.asm without defines: tail " OK" prints its success
+marker and exits 7; absent tail prints its negative marker and exits 99.
+The DOS batch checks both exact ERRORLEVEL values before executing MEM and a
+final marker. It runs through the published run16 COMMAND.COM /c path on an
+unswitched private desktop. No original guest media or production code changes.
+
+Reproduce with -Observer build/M0-T423/S2/control-observer/console-startup-observer.exe,
+-Nasm pointing to the installed WinLibs nasm.exe,
+-BuildRoot build/M0-T423/S2/nonzero-continue, -PackageRoot O:/winnt and a fresh
+-Prefix. Resolve Observer and BuildRoot to absolute Windows paths. The runner
+refuses overwriting reports or different runtime probe contents. Its COM and
+BAT copies reside only in O:/winnt/tests; logs remain in O:/winnt/logs.
+
+Prefix m0-t423-s2-nonzero-continue-final passes: actual output contains both
+child markers, S2-DOS-EXIT-7-RETAINED, S2-DOS-EXIT-99-RETAINED, MEM's conventional
+memory report and S2-DOS-AFTER-NONZERO; COMMAND /c finishes 0. This establishes
+continued execution after guest nonzero completion. It does not substitute
+for BaseSrv-record receipt tests or imply physical focus acceptance.
+
+Two preceding non-pass observations are retained. Prefix
+m0-t423-s2-nonzero-continue-batch had all the same output and exit 0, but the
+first runner incorrectly expected interactive COMMAND's exit 1 for /c; the
+corrected runner was rerun rather than declaring that failed invocation green.
+Earlier m0-t423-s2-nonzero-continue typed tests\S2NZ.BAT into interactive
+COMMAND and timed out without batch markers. A native inner run16 with
+TESTS\S2NZ.BAT remained after observer timeout. Its exact process identity and
+the test broker were checked before cleanup. The startup path differs from
+COMMAND /c: run16 main.c's non-image branch delegates the copied command to
+COMSPEC. The cause of this interactive batch stall is not yet established;
+it is an open S2 integration investigation, not an original-guest limitation
+or an accepted exclusion. Keep the combined completion/interaction checklist
+open until that contrast and remaining gates have their proper disposition.
