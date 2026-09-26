@@ -44,7 +44,15 @@ function StartObserved([string]$name,[string]$target,[string]$inputText=''){
     $report=Join-Path $PackageRoot "logs\$LogPrefix-$name.txt"
     $args=@((Join-Path $PackageRoot 'run16.exe'),$PackageRoot,$report,$target,'--observation-timeout-ms','20000')
     if($inputText){$args+=@('--observe-console-input-text',('"'+$inputText+'"'))}
-    $p=Start-Process -FilePath $Observer -ArgumentList $args -WorkingDirectory $PackageRoot -WindowStyle Hidden -PassThru
+    $start=[Diagnostics.ProcessStartInfo]::new($Observer,($args -join ' '))
+    $start.UseShellExecute=$false
+    $start.WindowStyle=[Diagnostics.ProcessWindowStyle]::Hidden
+    $start.WorkingDirectory=$PackageRoot
+    foreach($key in @('MVDM_OBSERVER_PRIVATE_DESKTOP','MVDM_OBSERVER_INPUT_GATE','MVDM_BASESRV_TRACE_PATH')){
+        $value=[Environment]::GetEnvironmentVariable($key)
+        if($value){$start.EnvironmentVariables[$key]=$value}
+    }
+    $p=[Diagnostics.Process]::Start($start)
     [void]$owned.Add($p.Id)
     $o=[pscustomobject]@{Process=$p;Report=$report;Name=$name}
     $observers.Add($o)
@@ -75,14 +83,29 @@ try {
         $other=if($TwoWorkers){StartObserved 'unrelated-worker' 'COMMAND.COM' "exit`r"}else{$null}
         $requiredTasks=if($TwoWorkers){2}else{1}
         $deadline=[DateTime]::UtcNow.AddSeconds(15)
-        while([regex]::Matches((TraceText),'phase=get-dispatched state=00000200').Count -lt $requiredTasks -and [DateTime]::UtcNow -lt $deadline){Start-Sleep -Milliseconds 50}
-        if([regex]::Matches((TraceText),'phase=get-dispatched state=00000200').Count -lt $requiredTasks){throw 'No admitted DOS task before loss test'}
+        # Production trace hooks have been retired. The observer captures the
+        # real COMMAND prompt before blocking input; require that evidence.
+        $ready=@($loss); if($other){$ready+=@($other)}
+        do {
+            $readyCount=@($ready | Where-Object {
+                $screen=$_.Report+'.pre-input-console.txt.console.txt'
+                (Test-Path -LiteralPath $screen) -and
+                    ((Get-Content -LiteralPath $screen -Raw) -match '(?i)[a-z]:\\[^\r\n]*>')
+            }).Count
+            if($readyCount -eq $requiredTasks){break}
+            Start-Sleep -Milliseconds 50
+        } while([DateTime]::UtcNow -lt $deadline)
+        if($readyCount -ne $requiredTasks){throw 'No real COMMAND prompt before loss test'}
         CollectOwned
         $servers=@(PackageProcesses | Where-Object {$_.Name -eq 'basesrv.exe' -and $owned.Contains([int]$_.ProcessId)})
         if($servers.Count -ne 1){throw 'Cannot identify owned broker'}
         $workers=@(PackageProcesses | Where-Object {$_.Name -eq 'ntvdm.exe' -and $owned.Contains([int]$_.ProcessId)})
         $launchers=@(PackageProcesses | Where-Object {$_.Name -eq 'run16.exe' -and $owned.Contains([int]$_.ProcessId)})
-        $launcher=@($launchers | Where-Object {$_.ParentProcessId -eq $loss.Process.Id})
+        # The private-desktop observer may have a relay parent. Its report
+        # identifies the actual launched product process in either mode.
+        $launchMatch=[regex]::Match((Get-Content -LiteralPath $loss.Report -Raw),'(?m)^pid=(\d+)')
+        if(!$launchMatch.Success){throw 'Observer has not recorded its launcher'}
+        $launcher=@($launchers | Where-Object {$_.ProcessId -eq [int]$launchMatch.Groups[1].Value})
         if($launcher.Count -ne 1){throw 'Cannot identify observer-owned launcher'}
         $launcherId=[int]$launcher[0].ProcessId
         $worker=@($workers | Where-Object {$_.ParentProcessId -eq $launcherId})
@@ -101,6 +124,11 @@ try {
         if($record -notmatch '(?m)^result=exited' -or $record -match '(?m)^exit=0x00000000'){
             throw 'Process loss did not produce a bounded explicit failure'
         }
+        $lossExit=[regex]::Match($record,'(?m)^exit=0x([0-9a-f]+)')
+        if(!$lossExit.Success){throw 'Missing explicit failure code'}
+        $actualLoss=[Convert]::ToUInt32($lossExit.Groups[1].Value,16)
+        if($BrokerLoss -and $actualLoss -ne 1722){throw 'Broker loss must return 1722'}
+        if($WorkerLoss -and $actualLoss -ne 1067){throw 'Worker loss must return 1067'}
         if($other){FinishObserved $other $(if($BrokerLoss){1722}else{0})}
         if($BrokerLoss){
             $deadline=[DateTime]::UtcNow.AddSeconds(5)
@@ -114,6 +142,8 @@ try {
         }
         Start-Sleep -Seconds 2
         $after=StartObserved 'after-loss' 'MEM.EXE'; FinishObserved $after 0
+        $memText=(Get-Content -LiteralPath ($after.Report+'.console.txt') -Raw) -replace '\s',''
+        if($memText -notmatch 'bytesavailableXMSmemory'){throw 'MEM did not print its real memory report after loss'}
     } elseif($BarrierBroker){
         $BarrierBroker=(Resolve-Path -LiteralPath $BarrierBroker).Path
         if($BarrierBroker -notmatch '\\build\\M0-T412\\S10\\'){throw 'Barrier binary must remain in S10 build'}

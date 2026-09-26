@@ -94,7 +94,7 @@ $matrix = @(
     # loop.  Pace complete lines so the next key sequence is not offered while
     # the original keyboard queue is between those two owners.
     @{ Name='nested-empty'; Text="command`rexit`rexit`r"; LineDelayMs=1000; Code=1; ConsoleMarkers=@('Microsoft(R) Windows NT DOS'); ConsoleMarkerCount=2 },
-    @{ Name='nested-mem'; Text="command`rcommand`rmem`rexit`rmem`rexit`rmem`rexit`r"; LineDelayMs=1000; Code=1 },
+    @{ Name='nested-mem'; Text="command`rcommand`rmem`rexit`rmem`rexit`rmem`rexit`r"; LineDelayMs=1000; Code=1; ConsoleMarkers=@('bytes total conventional memory'); ConsoleMarkerCount=3 },
     @{ Name='mem-repeat'; Text="mem`rmem`rexit`r"; Code=1; ConsoleMarkers=@('bytes total conventional memory') },
     @{ Name='direct-mem'; Args=@('MEM.EXE'); Code=0; ConsoleMarkers=@('bytes total conventional memory') },
     @{ Name='command-c'; Args=@('COMMAND.COM','/c','ver'); Code=0; ConsoleMarkers=@('MS-DOS Version') },
@@ -107,6 +107,8 @@ $matrix = @(
     @{ Name='command-c-mem'; Args=@('COMMAND.COM','/c','MEM.EXE'); Code=0; ConsoleMarkers=@('bytes total conventional memory') },
     @{ Name='direct-seven'; Args=@('cmd.exe','/c',(Join-Path $shortFixtureRoot 'D7.CMD')); Code=7; ConsoleMarkers=@('S10_DIRECT_SEVEN') },
     @{ Name='edit'; Edit=$true; Code=1; ConsoleMarkers=@('bytes total conventional memory') }
+    @{ Name='native-cmd-dos'; Supplemental=$true; Args=@('cmd.exe','/d','/c',('"'+(Join-Path $PackageRoot 'run16.exe')+' MEM.EXE"')); Code=0; ConsoleMarkers=@('bytes total conventional memory') },
+    @{ Name='dos-native-dos'; Supplemental=$true; Text="cmd.exe /d`rrun16 mem`rexit`rmem`rexit`r"; LineDelayMs=1000; Code=1; ConsoleMarkers=@('bytes total conventional memory','Microsoft Windows [Version'); ConsoleMarkerCount=2 },
     @{ Name='worker-version-rejection'; Args=@('MEM.EXE'); Code=1306; Negative=$true }
 )
 foreach ($selected in $Cases) {
@@ -118,7 +120,7 @@ foreach ($name in $environmentNames) { $previous[$name]=[Environment]::GetEnviro
 $results = @()
 try {
     foreach ($case in $matrix) {
-        if ($case.Negative -and !$Cases) { continue }
+        if (($case.Negative -or $case.Supplemental) -and !$Cases) { continue }
         if ($Cases -and $case.Name -notin $Cases) { continue }
         $report=Join-Path $LogRoot "$LogPrefix-$($case.Name).txt"
         if (Test-Path -LiteralPath $report) { throw "Use a fresh log prefix: $report exists" }
@@ -135,8 +137,28 @@ try {
         $arguments += @('--observation-timeout-ms','20000')
         $launcherId = 0
         $reportedChildren = @()
+        $observedDescendants = [Collections.Generic.HashSet[int]]::new()
         $observation = Start-Process -FilePath $Observer -ArgumentList $arguments -WorkingDirectory $PackageRoot -WindowStyle Hidden -PassThru
         try {
+            if($case.Supplemental){
+                [void]$observedDescendants.Add($observation.Id)
+                $treeDeadline=[DateTime]::UtcNow.AddSeconds(50)
+                do {
+                    # Include the native CMD relay while it is alive; after
+                    # exit, a product-only snapshot cannot reconstruct it.
+                    $tree=@(Get-CimInstance Win32_Process | Select-Object ProcessId,ParentProcessId)
+                    for($depth=0;$depth -lt 8;++$depth){
+                        $added=$false
+                        foreach($node in $tree){
+                            if($observedDescendants.Contains([int]$node.ParentProcessId)){
+                                if($observedDescendants.Add([int]$node.ProcessId)){$added=$true}
+                            }
+                        }
+                        if(!$added){break}
+                    }
+                    if($observation.WaitForExit(100)){break}
+                } while([DateTime]::UtcNow -lt $treeDeadline)
+            }
             if (!$observation.WaitForExit(55000)) { throw "Observer timeout: $($case.Name)" }
             $record=Get-Content -LiteralPath $report -Raw
             $launcherId=[int]([regex]::Match($record,'(?m)^pid=(\d+)').Groups[1].Value)
@@ -166,18 +188,22 @@ try {
             # The Console observer preserves physical rows.  A narrow remote
             # viewport may split one guest sentence across rows, so assertions
             # must consume the same display text with row separators removed.
-            $screenForMarkers=($screen -replace '(?m)^\[\d+\]\s?','') -replace '\r?\n',''
-            if ($screenForMarkers -match '(?im)(bad command or filename|is not recognized as an internal or external command)' -and
+            # A renderer can either hard-wrap a word or word-wrap at a space;
+            # the snapshot also trims row-end spaces. Normalize whitespace on
+            # BOTH sides so a 55-column Console does not turn "external
+            # command" into a false missing-marker failure.
+            $screenForMarkers=($screen -replace '(?m)^\[\d+\]\s?','') -replace '\s',''
+            if ($screenForMarkers -match '(?im)(badcommandorfilename|isnotrecognizedasaninternalorexternalcommand)' -and
                 !$case.ExpectedGuestError) {
                 throw "Guest Console reported an unexpected command-resolution failure: $($case.Name)"
             }
             foreach($marker in $case.ConsoleMarkers) {
-                if ($screenForMarkers -notmatch [regex]::Escape($marker)) {
+                if ($screenForMarkers -notmatch [regex]::Escape(($marker -replace '\s',''))) {
                     throw "Missing guest Console marker for $($case.Name): $marker"
                 }
             }
             if ($case.ConsoleMarkerCount -and
-                [regex]::Matches($screen,[regex]::Escape($case.ConsoleMarkers[0])).Count -ne $case.ConsoleMarkerCount) {
+                [regex]::Matches($screenForMarkers,[regex]::Escape(($case.ConsoleMarkers[0] -replace '\s',''))).Count -ne $case.ConsoleMarkerCount) {
                 throw "Unexpected guest Console marker count for $($case.Name): $($case.ConsoleMarkers[0])"
             }
             # The product deliberately has no native-child report hook.  A
@@ -200,22 +226,13 @@ try {
                     throw 'Version-rejected worker did not release the prepared launch back to an empty broker'
                 }
             }
-            if ($case.Name -eq 'nested-mem') {
-                # The terminal viewport can wrap "memory" across physical
-                # Console rows.  Count the terminal snapshot after the same
-                # row-normalization used by all other textual assertions;
-                # never assume the seventh injected-line snapshot is stable.
-                if ([regex]::Matches($screenForMarkers,'bytes total conventional memory').Count -ne 3) {
-                    throw 'Three distinct-depth MEM reports not observed'
-                }
-            }
             $results += [pscustomobject]@{ Case=$case.Name; Expected=$case.Code; Actual=$actual; Report=$report }
             Write-Output "PASS $($case.Name): $actual"
         } finally {
             # Only children of this recorded test launcher, with exact product paths.
             # Unrelated package processes are never killed by image name.
             if ($launcherId) {
-                $owned=@($launcherId) + $reportedChildren
+                $owned=@($launcherId) + $reportedChildren + @($observedDescendants)
                 for ($depth=0; $depth -lt 5; ++$depth) {
                     $children=@(Get-PackageProcesses | Where-Object { $_.ParentProcessId -in $owned -and $_.ProcessId -notin $owned })
                     if (!$children.Count) { break }

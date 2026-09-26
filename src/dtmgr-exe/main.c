@@ -13,6 +13,11 @@
 #define DTMGR_ROWS 25
 #define DTMGR_INTERIOR (DTMGR_COLUMNS-2)
 #define DTMGR_STATUS_COLUMN 55
+#define DTMGR_BODY_TOP 4
+#define DTMGR_BODY_ROWS 19
+#define DTMGR_SCROLL_ROW 23
+#define DTMGR_SCROLL_ATTRIBUTE (BACKGROUND_RED|BACKGROUND_GREEN|BACKGROUND_BLUE)
+#define DTMGR_THUMB_ATTRIBUTE 0
 /* QBasic's isaEditWindow: CaMake(coWhite, coBlue), or VGA 17h. */
 #define DTMGR_NORMAL_ATTRIBUTE (BACKGROUND_BLUE|FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE)
 #define DTMGR_ACCENT_ATTRIBUTE DTMGR_NORMAL_ATTRIBUTE
@@ -36,6 +41,9 @@ typedef struct DTASKMGR_STATE {
     DWORD status;
     DWORD action_error;
     ULONG rendered_rows;
+    ULONG first_visible;
+    DWORD horizontal_offset;
+    DWORD horizontal_limit;
     CONSOLE_CURSOR_INFO cursor;
     BOOL cursor_saved;
     CONSOLE_SCREEN_BUFFER_INFO console;
@@ -144,36 +152,58 @@ static void render_framed_line(HANDLE output,SHORT row,PCWSTR text,WORD interior
     }
     (void)WriteConsoleOutputW(output,cells,(COORD){DTMGR_COLUMNS,1},(COORD){0,0},&target);
 }
-static void render_titled_line(HANDLE output,PCWSTR text,SHORT tab_column,DWORD tab_width)
+/* EDIT's open-bottom border style has vertical lower ends, not a bottom
+ * rule. See docs/etc/evidence/dtmgr-edit-style.md for the byte-table audit. */
+static void render_cell(HANDLE output,SHORT column,SHORT row,WCHAR character,WORD attribute)
 {
-    CHAR_INFO cells[DTMGR_COLUMNS];
-    CONSOLE_SCREEN_BUFFER_INFO info;
-    SMALL_RECT target={0,0,DTMGR_COLUMNS-1,0};
-    DWORD index;
-    if (!GetConsoleScreenBufferInfo(output,&info) || info.dwSize.X<DTMGR_COLUMNS) {
-        render_line(output,0,text,DTMGR_ACCENT_ATTRIBUTE);
-        render_attributes(output,0,tab_column,tab_width,DTMGR_TAB_ATTRIBUTE);
-        return;
-    }
-    for (index=0;index<DTMGR_COLUMNS;++index) {
-        cells[index].Char.UnicodeChar=text[index];
-        cells[index].Attributes=(index>=tab_column && index<tab_column+tab_width) ?
-            DTMGR_TAB_ATTRIBUTE : DTMGR_ACCENT_ATTRIBUTE;
-    }
-    (void)WriteConsoleOutputW(output,cells,(COORD){DTMGR_COLUMNS,1},(COORD){0,0},&target);
+    DWORD written;
+    COORD origin={column,row};
+    (void)WriteConsoleOutputCharacterW(output,&character,1,origin,&written);
+    render_attributes(output,row,column,1,attribute);
 }
-static void titled_rule(WCHAR output[DTMGR_COLUMNS+1],PCWSTR title,SHORT *tab_column,DWORD *tab_width)
+static DWORD thumb_position(DWORD position,DWORD limit,DWORD track_cells)
 {
-    DWORD index,title_length=(DWORD)lstrlenW(title),column;
-    framed_rule(output,L'\x250C',L'\x2500',L'\x2510');
-    if (title_length+2>DTMGR_INTERIOR) title_length=DTMGR_INTERIOR-2;
-    column=(DTMGR_COLUMNS-(title_length+2))/2;
-    output[column++]=L' ';
-    CopyMemory(output+column,title,title_length*sizeof(*output));
-    column+=title_length;output[column++]=L' ';
-    *tab_column=(SHORT)(column-title_length-2);*tab_width=title_length+2;
-    for (index=*tab_column;index<*tab_column+*tab_width;++index)
-        if (output[index]==L'\x2500') output[index]=L' ';
+    return limit ? (DWORD)((ULONGLONG)position*(track_cells-1)/limit) : 0;
+}
+static void render_scrollbars(HANDLE output,const DTASKMGR_STATE *state,ULONG selected_index)
+{
+    WCHAR frame[DTMGR_COLUMNS+1];
+    DWORD index,vertical_thumb=selected_index>=state->first_visible ?
+        selected_index-state->first_visible : 0;
+    DWORD horizontal_thumb=thumb_position(state->horizontal_offset,state->horizontal_limit,DTMGR_INTERIOR-2);
+    /* Follow the selected visible row even before the viewport scrolls.
+     * Reserve the final cell for the down arrow. */
+    if (vertical_thumb>DTMGR_BODY_ROWS-2) vertical_thumb=DTMGR_BODY_ROWS-2;
+    /* The up arrow occupies the header separator, leaving the first body
+     * row available for the thumb at the start of the scroll range. */
+    render_cell(output,DTMGR_COLUMNS-1,DTMGR_BODY_TOP-1,L'\x2191',DTMGR_SCROLL_ATTRIBUTE);
+    for (index=0;index<DTMGR_BODY_ROWS;++index) {
+        WCHAR character=index==DTMGR_BODY_ROWS-1 ? L'\x2193' : L'\x2591';
+        WORD attribute=DTMGR_SCROLL_ATTRIBUTE;
+        if (index==vertical_thumb) { character=L' '; attribute=DTMGR_THUMB_ATTRIBUTE; }
+        render_cell(output,DTMGR_COLUMNS-1,(SHORT)(DTMGR_BODY_TOP+index),character,attribute);
+    }
+    framed_rule(frame,L'\x2502',L'\x2591',L'\x2502');
+    frame[1]=L'\x2190';frame[DTMGR_COLUMNS-2]=L'\x2192';
+    render_framed_line(output,DTMGR_SCROLL_ROW,frame,DTMGR_SCROLL_ATTRIBUTE);
+    render_cell(output,(SHORT)(2+horizontal_thumb),DTMGR_SCROLL_ROW,L' ',DTMGR_THUMB_ATTRIBUTE);
+}
+static void task_line(WCHAR *line,DWORD capacity,const DTASKMGR_STATE *state,
+    const DTASKMGR_WORKER *item,const FILETIME *now)
+{
+    FILETIME started; WCHAR elapsed[16];
+    started.dwLowDateTime=(DWORD)item->started_filetime;
+    started.dwHighDateTime=(DWORD)(item->started_filetime>>32);
+    elapsed_text(&started,now,elapsed);
+    swprintf_s(line,capacity,L"%c  %-8lu %-7s %-10s %-5lu %s",
+        item->sequence==state->selected_sequence ? L'>' : L' ',(unsigned long)item->sequence,
+        kind_name(item->kind),elapsed,(unsigned long)item->stack_depth,
+        item->image[0] ? item->image : L"Unknown");
+}
+static PCWSTR scrolled_text(PCWSTR text,DWORD offset)
+{
+    DWORD length=(DWORD)lstrlenW(text);
+    return text+(offset<length ? offset : length);
 }
 static void footer_text(WCHAR output[DTMGR_COLUMNS+1],DWORD status,DWORD action_error,
     PCWSTR left_text)
@@ -226,41 +256,52 @@ static void restore_presentation(HANDLE output,const DTASKMGR_STATE *state)
 }
 static void render(HANDLE output,DTASKMGR_STATE *state,DTASKMGR_WORKER *items,ULONG count)
 {
-    ULONG index,row=0,visible=count<17u?count:17u;
+    ULONG index,row=0,visible,selected_index=0;
+    static const WCHAR title[]=L"NTVDM Task Manager";
     FILETIME now;
-    SHORT tab_column;DWORD tab_width;
     WCHAR line[512],frame[DTMGR_COLUMNS+1];
-    titled_rule(frame,L"NTVDM Task Manager",&tab_column,&tab_width);
-    render_titled_line(output,frame,tab_column,tab_width); ++row;
+    GetSystemTimeAsFileTime(&now);
+    state->horizontal_limit=0;
+    for (index=0;index<count;++index) {
+        DWORD length;
+        task_line(line,ARRAYSIZE(line),state,&items[index],&now);
+        length=(DWORD)lstrlenW(line);
+        if (length>DTMGR_INTERIOR && length-DTMGR_INTERIOR>state->horizontal_limit)
+            state->horizontal_limit=length-DTMGR_INTERIOR;
+        if (items[index].sequence==state->selected_sequence) {
+            selected_index=index;
+            if (index<state->first_visible) state->first_visible=index;
+            else if (index-state->first_visible>=DTMGR_BODY_ROWS)
+                state->first_visible=index-DTMGR_BODY_ROWS+1;
+        }
+    }
+    if (state->horizontal_offset>state->horizontal_limit) state->horizontal_offset=state->horizontal_limit;
+    if (count<=DTMGR_BODY_ROWS) state->first_visible=0;
+    else if (state->first_visible>count-DTMGR_BODY_ROWS) state->first_visible=count-DTMGR_BODY_ROWS;
+    visible=count-state->first_visible;
+    if (visible>DTMGR_BODY_ROWS) visible=DTMGR_BODY_ROWS;
+    framed_rule(frame,L' ',L' ',L' ');
+    CopyMemory(frame+(DTMGR_COLUMNS-(ARRAYSIZE(title)-1))/2,title,sizeof(title)-sizeof(WCHAR));
+    render_line(output,(SHORT)row++,frame,DTMGR_TAB_ATTRIBUTE);
+    framed_rule(frame,L'\x250C',L'\x2500',L'\x2510');
+    render_framed_line(output,(SHORT)row++,frame,DTMGR_ACCENT_ATTRIBUTE);
     swprintf_s(line,ARRAYSIZE(line),L"   %-8s %-7s %-10s %-5s %s",
         L"WORKER",L"KIND",L"ELAPSED",L"STACK",L"TASK");
-    framed_text(frame,L'\x2502',line,L'\x2502');render_framed_line(output,(SHORT)row++,frame,DTMGR_ACCENT_ATTRIBUTE);
+    framed_text(frame,L'\x2502',scrolled_text(line,state->horizontal_offset),L'\x2502');render_framed_line(output,(SHORT)row++,frame,DTMGR_ACCENT_ATTRIBUTE);
     framed_rule(frame,L'\x251C',L'\x2500',L'\x2524');render_framed_line(output,(SHORT)row++,frame,DTMGR_ACCENT_ATTRIBUTE);
-    GetSystemTimeAsFileTime(&now);
     for (index=0;index<visible;++index) {
-        FILETIME started; WCHAR elapsed[16];
-        started.dwLowDateTime=(DWORD)items[index].started_filetime;
-        started.dwHighDateTime=(DWORD)(items[index].started_filetime>>32);
-        elapsed_text(&started,&now,elapsed);
-        swprintf_s(line,ARRAYSIZE(line),L"%c  %-8lu %-7s %-10s %-5lu %s",
-            items[index].sequence==state->selected_sequence ? L'>' : L' ',(unsigned long)items[index].sequence,
-            kind_name(items[index].kind),elapsed,(unsigned long)items[index].stack_depth,
-            items[index].image[0] ? items[index].image : L"Unknown");
-        framed_text(frame,L'\x2502',line,L'\x2502');render_framed_line(output,(SHORT)row++,frame,
-            items[index].sequence==state->selected_sequence ? DTMGR_SELECTED_ATTRIBUTE : DTMGR_NORMAL_ATTRIBUTE);
+        const DTASKMGR_WORKER *item=&items[state->first_visible+index];
+        task_line(line,ARRAYSIZE(line),state,item,&now);
+        framed_text(frame,L'\x2502',scrolled_text(line,state->horizontal_offset),L'\x2502');
+        render_framed_line(output,(SHORT)row++,frame,
+            item->sequence==state->selected_sequence ? DTMGR_SELECTED_ATTRIBUTE : DTMGR_NORMAL_ATTRIBUTE);
     }
     if (!count) {
         framed_text(frame,L'\x2502',state->status==ERROR_SUCCESS ? L"  No active tasks." : L"",L'\x2502');
         render_framed_line(output,(SHORT)row++,frame,DTMGR_NORMAL_ATTRIBUTE);
     }
-    if (count>visible) {
-        swprintf_s(line,ARRAYSIZE(line),L"  ... %lu more task(s)",(unsigned long)(count-visible));
-        framed_text(frame,L'\x2502',line,L'\x2502');render_framed_line(output,(SHORT)row++,frame,DTMGR_NORMAL_ATTRIBUTE);
-    }
-    while (row<21u) { framed_text(frame,L'\x2502',L"",L'\x2502');render_framed_line(output,(SHORT)row++,frame,DTMGR_NORMAL_ATTRIBUTE); }
-    framed_text(frame,L'\x2502',L"",L'\x2502');render_framed_line(output,(SHORT)row++,frame,DTMGR_NORMAL_ATTRIBUTE);
-    framed_rule(frame,L'\x2514',L'\x2500',L'\x2518');render_framed_line(output,(SHORT)row++,frame,DTMGR_ACCENT_ATTRIBUTE);
-    render_line(output,(SHORT)row++,L"",DTMGR_NORMAL_ATTRIBUTE);
+    while (row<DTMGR_SCROLL_ROW) { framed_text(frame,L'\x2502',L"",L'\x2502');render_framed_line(output,(SHORT)row++,frame,DTMGR_NORMAL_ATTRIBUTE); }
+    render_scrollbars(output,state,selected_index);++row;
     if (state->confirm_sequence) {
         swprintf_s(line,ARRAYSIZE(line),L"End worker %lu and all its %lu tasks [Y/N]?",
             (unsigned long)state->confirm_sequence,(unsigned long)state->confirm_task_count);
@@ -364,6 +405,8 @@ int wmain(void)
                 for (index=0;index<count;++index) if (items[index].sequence==state.selected_sequence) break;
                 if (key==VK_UP && count) state.selected_sequence=items[index ? index-1 : 0].sequence;
                 if (key==VK_DOWN && count) state.selected_sequence=items[index+1<count ? index+1 : count-1].sequence;
+                if (key==VK_LEFT && state.horizontal_offset) --state.horizontal_offset;
+                if (key==VK_RIGHT && state.horizontal_offset<state.horizontal_limit) ++state.horizontal_offset;
                 if (key==VK_DELETE) {
                     state.action_error=ERROR_SUCCESS;
                     state.confirm_sequence=state.selected_sequence;

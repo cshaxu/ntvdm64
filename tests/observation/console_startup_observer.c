@@ -14,6 +14,10 @@
 #include <string.h>
 
 static char control_event_report[MAX_PATH];
+static BOOL WINAPI keep_control_observer(DWORD event)
+{
+    return event == CTRL_C_EVENT || event == CTRL_BREAK_EVENT;
+}
 static BOOL WINAPI record_console_control(DWORD event)
 {
     HANDLE file = CreateFileA(control_event_report, GENERIC_WRITE,
@@ -675,6 +679,47 @@ static BOOL wait_for_console_mouse_mode(HANDLE input, DWORD *mode_out,
     return FALSE;
 }
 
+/* Run the same observer on a private desktop when requested. No desktop
+ * switch, global input injection or foreground manipulation is performed.
+ * Clearing the opt-in in the child's environment prevents recursive launch.
+ * This container does not put the product in a kill-on-close Job: lifecycle
+ * evidence must describe the product's own completion, not Job teardown. */
+static int private_desktop_observer(void)
+{
+    char name[64];
+    char *command;
+    HDESK desktop;
+    STARTUPINFOA startup = { sizeof(startup) };
+    PROCESS_INFORMATION child = { 0 };
+    DWORD result = 69;
+    DWORD wait;
+
+    sprintf_s(name, sizeof(name), "NTVDMConsoleTest-%lu", GetCurrentProcessId());
+    desktop = CreateDesktopA(name, NULL, NULL, 0, GENERIC_ALL, NULL);
+    if (!desktop) return 69;
+    command = _strdup(GetCommandLineA());
+    if (!command) { CloseDesktop(desktop); return 69; }
+    startup.lpDesktop = name;
+    startup.dwFlags = STARTF_USESHOWWINDOW;
+    startup.wShowWindow = SW_HIDE;
+    SetEnvironmentVariableA("MVDM_OBSERVER_PRIVATE_DESKTOP", NULL);
+    if (CreateProcessA(NULL, command, NULL, NULL, FALSE, CREATE_NEW_CONSOLE,
+                       NULL, NULL, &startup, &child)) {
+        CloseHandle(child.hThread);
+        wait = WaitForSingleObject(child.hProcess, 120000);
+        if (wait == WAIT_OBJECT_0) GetExitCodeProcess(child.hProcess, &result);
+        else {
+            /* Test timeout is a failure, never a successful task completion. */
+            TerminateProcess(child.hProcess, 69);
+            WaitForSingleObject(child.hProcess, 1000);
+        }
+        CloseHandle(child.hProcess);
+    }
+    free(command);
+    CloseDesktop(desktop);
+    return (int)result;
+}
+
 int main(int argc, char **argv)
 {
     STARTUPINFOA startup = { sizeof(startup) };
@@ -716,6 +761,7 @@ int main(int argc, char **argv)
     DWORD observation_elapsed_ms;
     DWORD observation_wait_ms;
     DWORD observation_timeout_ms = OBSERVATION_TIMEOUT_MS;
+    DWORD post_exit_observation_ms = 0;
     unsigned long parsed_timeout_ms;
     char *timeout_parse_end;
     char command_line[MAX_PATH * 2];
@@ -738,6 +784,19 @@ int main(int argc, char **argv)
     FILE *report = NULL;
 
     if (argc < 4) return 64;
+    if (GetEnvironmentVariableA("MVDM_OBSERVER_PRIVATE_DESKTOP", NULL, 0))
+        return private_desktop_observer();
+    {
+        char delay[16];
+        DWORD length = GetEnvironmentVariableA("MVDM_OBSERVER_POST_EXIT_MS", delay, sizeof(delay));
+        if (length >= sizeof(delay)) return 64;
+        if (length) {
+            char *end;
+            unsigned long value = strtoul(delay, &end, 10);
+            if (!delay[0] || *end || value > 5000) return 64;
+            post_exit_observation_ms = (DWORD)value;
+        }
+    }
     report_base_path_length = GetFullPathNameA(argv[3],
         (DWORD)sizeof(report_base_path), report_base_path, NULL);
     if (report_base_path_length == 0 ||
@@ -958,6 +1017,15 @@ int main(int argc, char **argv)
         return 67;
     }
     observation_started_at = GetTickCount();
+    /* Publish identity before the optional input gate, so a lifecycle test
+     * can select this exact child without assuming a relay process layout. */
+    {
+        FILE *identity = fopen(argv[3], "w");
+        if (identity) {
+            fprintf(identity, "pid=%lu\nresult=running\n", child.dwProcessId);
+            fclose(identity);
+        }
+    }
     if (had_previous_exception_report)
         SetEnvironmentVariableA("MVDM_EXCEPTION_REPORT_PATH",
                                 previous_exception_report_path);
@@ -991,6 +1059,31 @@ int main(int argc, char **argv)
                         return 91;
                     }
                     CloseHandle(gate);
+                }
+            }
+            {
+                char control[16];
+                DWORD length = GetEnvironmentVariableA("MVDM_OBSERVER_SEND_CONTROL",
+                    control, sizeof(control));
+                if (length) {
+                    DWORD event;
+                    FILE *witness;
+                    char path[MAX_PATH];
+                    if (length >= sizeof(control)) return 92;
+                    if (!strcmp(control, "c")) event = CTRL_C_EVENT;
+                    else if (!strcmp(control, "break")) event = CTRL_BREAK_EVENT;
+                    else return 92;
+                    if (!SetConsoleCtrlHandler(keep_control_observer, TRUE) ||
+                        !GenerateConsoleCtrlEvent(event, 0)) return 92;
+                    /* Record successful real-event generation; subsequent
+                     * guest text/exit assertions prove the session survived. */
+                    if (snprintf(path, sizeof(path), "%s.generated-control.txt", argv[3]) < 0)
+                        return 92;
+                    witness = fopen(path, "w");
+                    if (!witness) return 92;
+                    fprintf(witness, "generated-control=%lu\n", event);
+                    fclose(witness);
+                    Sleep(200);
                 }
             }
             scripted_console_input_delivered = write_console_input_text(input,
@@ -1087,6 +1180,10 @@ int main(int argc, char **argv)
         WaitForSingleObject(child.hProcess, 1000);
     }
     GetExitCodeProcess(child.hProcess, &exit_code);
+    /* Let normal worker teardown complete before measuring residual Console
+     * attachments. Do not kill a worker to manufacture an empty Console. */
+    if (wait_status == WAIT_OBJECT_0 && post_exit_observation_ms)
+        Sleep(post_exit_observation_ms);
     if (scripted_console_input) {
         scripted_console_input_remaining_known =
             GetNumberOfConsoleInputEvents(input,
@@ -1098,6 +1195,16 @@ int main(int argc, char **argv)
         fprintf(report, "pid=%lu\n", (unsigned long)child.dwProcessId);
         fprintf(report, "result=%s\n", wait_status == WAIT_TIMEOUT ? "timeout" : "exited");
         fprintf(report, "exit=0x%08lx\n", (unsigned long)exit_code);
+        fprintf(report, "post-exit-observation-ms=%lu\n", post_exit_observation_ms);
+        {
+            DWORD members[64];
+            DWORD count = GetConsoleProcessList(members, ARRAYSIZE(members));
+            DWORD index;
+            fprintf(report, "console-owner-observer=%lu\n", GetCurrentProcessId());
+            fprintf(report, "console-members-after-wait=%lu\n", count);
+            for (index = 0; index < count && index < ARRAYSIZE(members); ++index)
+                fprintf(report, "console-member=%lu\n", members[index]);
+        }
         report_direct_children(report, child.dwProcessId);
         fprintf(report, "timeout-ms=%lu\n", (unsigned long)observation_timeout_ms);
         fprintf(report, "scripted-console-input=%s\n",

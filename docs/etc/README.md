@@ -220,5 +220,11 @@ proves the original `FSTI` continuation reaches BOP `FDh`.
 All other historical supporting material is in the [external documentation archive](../../artifacts/documentation-archive/20260910/strict-topology/).
 ## T423 restart reference
 
+[Restarted lifecycle evidence](evidence/m0-t423-s1-restart-lifecycle.md) records
+the clean build, Console ownership diagnosis and current S1 verification gaps.
+
+[Dtmgr EDIT-style presentation](evidence/dtmgr-edit-style.md) records the
+owner-requested title, frame and scrollbar reference audit and focused checks.
+
 [Retained prior status](evidence/m0-t423-restart-prior-status.md) preserves the
 pre-restart chronology; current admission remains in states/CURRENT.md.

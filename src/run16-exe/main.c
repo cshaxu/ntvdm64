@@ -250,8 +250,18 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command)
     STARTUPINFOEXW guarded_startup={0};
     JOBOBJECT_EXTENDED_LIMIT_INFORMATION job_limits={0};
     SIZE_T attributes_bytes=0;
+    DWORD console_member;
+    /* A Console-subsystem launcher started by Explorer already has a new
+     * Console. Original CreateProcess classified this as a new DOS session
+     * before that Console existed. Preserve its session/CloseOnExit path,
+     * while letting the worker use the Console already allocated for us.
+     * A CMD or nested caller is another attached process and keeps the
+     * original shared-Console resident-worker path. */
+    BOOL launcher_console_only=(binary & ~BINARY_SUBTYPE_MASK)==BINARY_TYPE_DOS &&
+        GetConsoleProcessList(&console_member,1)==1 && console_member==GetCurrentProcessId();
     DWORD check_creation_flags=(binary & BINARY_SUBTYPE_MASK)==BINARY_TYPE_DOS_PIF ?
         CREATE_NEW_CONSOLE : 0;
+    if (launcher_console_only) check_creation_flags |= CREATE_NEW_CONSOLE;
 
     /* This is the original parent-side VDM environment projection.  The
      * ANSI record is captured by BaseCheckVDM; the matching Unicode record
@@ -390,7 +400,7 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command)
     guarded_startup.StartupInfo.hStdError=NULL;
     if (!CreateProcessW(worker_path, worker_command.Buffer, NULL, NULL, FALSE,
                         CREATE_SUSPENDED | CREATE_UNICODE_ENVIRONMENT | EXTENDED_STARTUPINFO_PRESENT |
-                        (binary == BINARY_TYPE_DOS && task ? CREATE_NEW_CONSOLE : 0),
+                        (binary == BINARY_TYPE_DOS && task && !launcher_console_only ? CREATE_NEW_CONSOLE : 0),
                         unicode_environment.Buffer, NULL, &guarded_startup.StartupInfo, &worker))
     {
         result = GetLastError();
@@ -509,6 +519,14 @@ done:
     return result;
 }
 
+static BOOL WINAPI launcher_control(DWORD event)
+{
+    /* The child/VDM receives the same Console event and owns its response.
+     * Keep the parent wait alive to return that task's actual completion.
+     * A handler (unlike the NULL ignore attribute) is not inherited. */
+    return event == CTRL_C_EVENT || event == CTRL_BREAK_EVENT;
+}
+
 int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int show)
 {
     LPWSTR *arguments;
@@ -539,6 +557,11 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
     arguments = CommandLineToArgvW(command, &count);
     if (!arguments)
         return (int)GetLastError();
+    if (!SetConsoleCtrlHandler(launcher_control, TRUE))
+    {
+        result = GetLastError();
+        goto done;
+    }
     s34_run16_trace("args",(DWORD)count);
     if (count == 1 && !wcscmp(arguments[0], L"--internal-console-probe"))
     {
