@@ -53,6 +53,20 @@ static DWORD WINAPI frontend_wait(void *context)
     return 0;
 }
 
+typedef struct RUNDOWN_RACE_TEST {
+    OPENNT_BASE_CONNECTION *connection;
+    HANDLE ready,go;
+    DWORD error;
+} RUNDOWN_RACE_TEST;
+static DWORD WINAPI competing_rundown(void *context)
+{
+    RUNDOWN_RACE_TEST *test=context;
+    if (!SetEvent(test->ready) || WaitForSingleObject(test->go,5000)!=WAIT_OBJECT_0)
+        return ERROR_TIMEOUT;
+    test->error=OpenNtBaseServiceDisconnect(test->connection);
+    return 0;
+}
+
 static int detached_reservation(OPENNT_BASE_SERVICE *service,HANDLE self)
 {
     OPENNT_BASE_CONNECTION *connection=NULL;
@@ -133,7 +147,9 @@ int main(int argc,char **argv)
             "--reenter-before-return","--reenter-after-return","--reenter-nested-return",
             "--reenter-pending-command","--reenter-before-increment",
             "--launcher-completed-rundown","--launcher-completed-uncollected",
-            "--management-terminate","--launcher-exit-survival","--launcher-disconnect-survival"
+            "--completed-worker-loss",
+            "--management-terminate","--launcher-exit-survival","--launcher-disconnect-survival",
+            "--completion-rundown-race"
         };
         size_t index;
         if (argc!=2) return 64;
@@ -739,9 +755,12 @@ int main(int argc,char **argv)
         return 0;
     }
     if (argc==2 && (!strcmp(argv[1],"--launcher-completed-rundown") ||
-        !strcmp(argv[1],"--launcher-completed-uncollected"))) {
+        !strcmp(argv[1],"--launcher-completed-uncollected") ||
+        !strcmp(argv[1],"--completed-worker-loss"))) {
         DWORD exitCode=STILL_ACTIVE;
+        DWORD collectedError=ERROR_IO_PENDING;
         BOOL collected=!strcmp(argv[1],"--launcher-completed-rundown");
+        BOOL workerLoss=!strcmp(argv[1],"--completed-worker-loss");
         BOOL recordExists=FALSE;
         /* Complete the second command through original GetNext before its
          * launcher dies. A late process notification/rundown must not treat
@@ -757,7 +776,28 @@ int main(int argc,char **argv)
         CHECK(getAnswer && getWait && !standardCount);
         OpenNtBaseServiceReleaseCommandReply(getAnswer);getAnswer=NULL;
         CHECK(WaitForSingleObject(laterParentEvent,0)==WAIT_OBJECT_0);
-        if (collected) {
+        if (workerLoss) {
+            ULONGLONG deadline=GetTickCount64()+5000;
+            CHECK(TerminateProcess(child.hProcess,91));
+            CHECK(WaitForSingleObject(child.hProcess,5000)==WAIT_OBJECT_0);
+            do {
+                (void)BaseSrvDOSWorkerWaitPending(console,&recordExists);
+                if (!recordExists) break;
+                Sleep(1);
+            } while (GetTickCount64()<deadline);
+            CHECK(!recordExists);
+            /* A different receipt must not consume the completed reply. */
+            CHECK(OpenNtBaseServiceExitCode(later,laterChild.dwProcessId,laterGeneration,
+                laterParentReceipt+2,&exitCode)==ERROR_SUCCESS && exitCode==0);
+            collectedError=OpenNtBaseServiceExitCode(later,laterChild.dwProcessId,laterGeneration,
+                laterParentReceipt,&exitCode);
+            fprintf(stdout,"completed-before-worker-loss: query=%lu exit=%lu expected=29\n",collectedError,exitCode);
+            {
+                DWORD repeated=STILL_ACTIVE;
+                CHECK(OpenNtBaseServiceExitCode(later,laterChild.dwProcessId,laterGeneration,
+                    laterParentReceipt,&repeated)==ERROR_SUCCESS && repeated==0);
+            }
+        } else if (collected) {
             CHECK(OpenNtBaseServiceExitCode(later,laterChild.dwProcessId,laterGeneration,
                 laterParentReceipt,&exitCode)==ERROR_SUCCESS && exitCode==29);
         }
@@ -765,15 +805,17 @@ int main(int argc,char **argv)
         CHECK(TerminateProcess(laterChild.hProcess,71));
         CHECK(WaitForSingleObject(laterChild.hProcess,5000)==WAIT_OBJECT_0);
         CHECK(OpenNtBaseServiceDisconnect(later)==ERROR_SUCCESS);later=NULL;
-        /* Disconnect drains its process watch: this is not a sleep-based
-         * observation hoping that the callback has already happened. */
-        CHECK(WaitForSingleObject(child.hProcess,0)==WAIT_TIMEOUT);
-        CHECK(WaitForSingleObject(getWait,0)==WAIT_TIMEOUT);
-        CHECK(BaseSrvDOSWorkerWaitPending(console,&recordExists) && recordExists);
-        puts(collected ?
+        /* Disconnect is synchronous: observe its result, not a sleep-based
+         * guess that the connection rundown has happened. */
+        if (!workerLoss) {
+            CHECK(WaitForSingleObject(child.hProcess,0)==WAIT_TIMEOUT);
+            CHECK(WaitForSingleObject(getWait,0)==WAIT_TIMEOUT);
+            CHECK(BaseSrvDOSWorkerWaitPending(console,&recordExists) && recordExists);
+            puts(collected ?
             "PASS: completed command=29 collected=1; late launcher death/rundown preserves idle worker and original GetNext wait" :
             "PASS: completed command=29 collected=0; late launcher death/rundown preserves idle worker and original GetNext wait");
-        CHECK(TerminateProcess(child.hProcess,0));
+            CHECK(TerminateProcess(child.hProcess,0));
+        }
         CHECK(WaitForSingleObject(child.hProcess,5000)==WAIT_OBJECT_0);
         CHECK(OpenNtBaseServiceDisconnect(worker)==ERROR_SUCCESS);worker=NULL;
         CHECK(OpenNtBaseServiceDisconnect(launcher)==ERROR_SUCCESS);launcher=NULL;
@@ -784,12 +826,20 @@ int main(int argc,char **argv)
           while (!OpenNtBaseServiceIsEmpty(service) && GetTickCount64()<deadline) Sleep(1); }
         CHECK(OpenNtBaseServiceIsEmpty(service));
         CHECK(OpenNtBaseServiceStop(service));
+        if (workerLoss) {
+            CHECK(collectedError==ERROR_SUCCESS && exitCode==29);
+            puts("PASS: completed DOS exit code survives subsequent worker death before parent collection");
+        }
         return 0;
     }
     if (argc==2 && (!strcmp(argv[1],"--management-terminate") ||
         !strcmp(argv[1],"--launcher-exit-survival") ||
-        !strcmp(argv[1],"--launcher-disconnect-survival"))) {
+        !strcmp(argv[1],"--launcher-disconnect-survival") ||
+        !strcmp(argv[1],"--completion-rundown-race"))) {
         DWORD exitCode=STILL_ACTIVE;
+        BOOL race=!strcmp(argv[1],"--completion-rundown-race");
+        RUNDOWN_RACE_TEST competing={0};
+        HANDLE rundownThread=NULL;
         /* The manager's positive path receives only the selected snapshot
          * identity.  The service resolves its retained watch and the normal
          * worker-exit callback must wake the waiting parent and remove the
@@ -805,7 +855,15 @@ int main(int argc,char **argv)
                 CHECK(TerminateProcess(laterChild.hProcess,71));
                 CHECK(WaitForSingleObject(laterChild.hProcess,5000)==WAIT_OBJECT_0);
             }
-            CHECK(OpenNtBaseServiceDisconnect(later)==ERROR_SUCCESS);later=NULL;
+            if (race) {
+                competing.connection=later;competing.error=ERROR_IO_PENDING;
+                competing.ready=CreateEventW(NULL,TRUE,FALSE,NULL);
+                competing.go=CreateEventW(NULL,TRUE,FALSE,NULL);
+                CHECK(competing.ready && competing.go);
+                rundownThread=CreateThread(NULL,0,competing_rundown,&competing,0,NULL);
+                CHECK(rundownThread && WaitForSingleObject(competing.ready,5000)==WAIT_OBJECT_0);
+            } else CHECK(OpenNtBaseServiceDisconnect(later)==ERROR_SUCCESS);
+            later=NULL;
             CHECK(WaitForSingleObject(child.hProcess,0)==WAIT_TIMEOUT);
             CHECK(WaitForSingleObject(laterParentEvent,0)==WAIT_TIMEOUT);
             /* Complete the original DOS record after its submitter vanished:
@@ -814,11 +872,18 @@ int main(int argc,char **argv)
             get.u.GetNextVDMCommand.ExitCode=29;
             CHECK(OpenNtBaseEncodeGetCommand(&get,8,workerGeneration,
                 getWire,getWireBytes,&getWireBytes));
+            if (race) CHECK(SetEvent(competing.go));
             CHECK(OpenNtBaseServiceGet(worker,child.dwProcessId,workerGeneration,
                 getWire,getWireBytes,&getAnswer,&wireBytes,&getWait,standard,
                 &standardCount)==ERROR_SUCCESS);
             CHECK(getAnswer && getWait && !standardCount);
             OpenNtBaseServiceReleaseCommandReply(getAnswer);getAnswer=NULL;
+            if (race) {
+                DWORD threadCode;
+                CHECK(WaitForSingleObject(rundownThread,5000)==WAIT_OBJECT_0);
+                CHECK(GetExitCodeThread(rundownThread,&threadCode) && !threadCode && !competing.error);
+                CloseHandle(rundownThread);CloseHandle(competing.go);CloseHandle(competing.ready);
+            }
             CHECK(WaitForSingleObject(laterParentEvent,0)==WAIT_OBJECT_0);
             CHECK(WaitForSingleObject(child.hProcess,0)==WAIT_TIMEOUT);
             CHECK(TerminateProcess(child.hProcess,0)); /* fixture cleanup */
@@ -849,6 +914,7 @@ int main(int argc,char **argv)
           while (!OpenNtBaseServiceIsEmpty(service) && GetTickCount64()<deadline) Sleep(1); }
         CHECK(OpenNtBaseServiceIsEmpty(service));
         CHECK(OpenNtBaseServiceStop(service));
+        if (race) puts("PASS: competing original task completion and launcher rundown preserve completion event and live worker");
         puts(!strcmp(argv[1],"--management-terminate") ?
             "PASS: explicit management shutdown performs original worker-exit cleanup" :
             "PASS: launcher loss preserves worker; later nonzero DOS completion signals parent without worker failure");

@@ -56,6 +56,8 @@ struct OPENNT_BASE_CONNECTION {
      * it must release them afterwards so a pipe reader can observe EOF. */
     uint32_t pending_standard_streams[3];
     HANDLE parent_wait; /* Borrowed from this connection's receipt table. */
+    uint32_t parent_receipt,completed_receipt;
+    DWORD completed_exit_code;
     BOOL worker_failed;
     HANDLE frontend_capability; /* Root lease, independent of command lifetime. */
     DWORD frontend_request_root; /* Original pending command asks this root for I/O. */
@@ -172,9 +174,23 @@ static VOID CALLBACK service_worker_terminated(PVOID context,BOOLEAN fired)
          entry!=&watch->service->connections;entry=entry->Flink) {
         OPENNT_BASE_CONNECTION *parent=CONTAINING_RECORD(entry,OPENNT_BASE_CONNECTION,service_link);
         if (!parent->process.fVDM && parent->wow==watch->wow &&
-            parent->console==watch->console && parent->parent_wait &&
-            WaitForSingleObject(parent->parent_wait,0)==WAIT_TIMEOUT)
-            parent->worker_failed=TRUE;
+            parent->console==watch->console && parent->parent_wait) {
+            DWORD wait=WaitForSingleObject(parent->parent_wait,0);
+            if (wait==WAIT_TIMEOUT) parent->worker_failed=TRUE;
+            else if (wait==WAIT_OBJECT_0 && parent->parent_receipt) {
+                DWORD code;
+                uint32_t receipt=parent->parent_receipt;
+                /* Original cleanup frees DOS records. Collect a completed
+                 * original result before that cleanup, retaining only its
+                 * authenticated reply until the direct parent receives it. */
+                if (!OpenNtBaseServiceExitCode(parent,
+                        (DWORD)(ULONG_PTR)parent->process.ClientId.UniqueProcess,
+                        parent->process.SequenceNumber,receipt,&code) && code!=STILL_ACTIVE) {
+                    parent->completed_receipt=receipt;
+                    parent->completed_exit_code=code;
+                }
+            }
+        }
     }
     /* Equivalent to the selected BaseClientDisconnectRoutine: a one-shot
      * authenticated process-exit signal, never queue polling or a reaper. */
@@ -1416,6 +1432,7 @@ DWORD OpenNtBaseServiceReleaseReservation(OPENNT_BASE_CONNECTION *connection,DWO
     if (!error) {
         connection->reservation=0; connection->pending_creation=FALSE;
         connection->parent_wait=NULL; connection->worker_failed=FALSE;
+        connection->parent_receipt=connection->completed_receipt=0;
     }
     LeaveCriticalSection(&connection->service->lock);
     return error;
@@ -1615,6 +1632,7 @@ DWORD OpenNtBaseServiceCheck(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD 
         connection->registered_worker=FALSE;
         connection->worker_failed=FALSE;
         connection->parent_wait=NULL;
+        connection->parent_receipt=connection->completed_receipt=0;
     }
     /* Once source has published the no-console record, the launcher and its
      * reservation must use the new identity.  The worker's first PIF request
@@ -1630,6 +1648,8 @@ DWORD OpenNtBaseServiceCheck(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD 
         if (!service_wait_resolve(connection,generation,message.u.CheckVDM.WaitObjectForParent,
                 BROKER_VDM_PARENT_WAIT,&event)) {
             connection->parent_wait=event;
+            connection->parent_receipt=(uint32_t)(ULONG_PTR)message.u.CheckVDM.WaitObjectForParent;
+            connection->completed_receipt=0;
             connection->worker_failed=FALSE;
         }
     }
@@ -1730,6 +1750,7 @@ DWORD OpenNtBaseServiceUpdate(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD
         BROKER_VDM_PARENT_WAIT,parent_event);
     if (error) goto done;
     connection->parent_wait=*parent_event;
+    connection->parent_receipt=*parent_receipt;connection->completed_receipt=0;
     error=ERROR_SUCCESS;
 done:
     LeaveCriticalSection(&connection->service->lock);
@@ -1749,6 +1770,11 @@ DWORD OpenNtBaseServiceExitCode(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWO
         !OpenNtBaseServicePeer(connection,pid,generation)) return ERROR_INVALID_PARAMETER;
     EnterCriticalSection(&connection->service->lock);
     if (connection->worker_failed) { error=ERROR_PROCESS_ABORTED; goto done; }
+    if (connection->completed_receipt==parent_receipt) {
+        *exit_code=connection->completed_exit_code;
+        connection->completed_receipt=0;
+        error=ERROR_SUCCESS;goto done;
+    }
     /* Original BaseSrvGetVDMExitCode accepts the shared-WOW sentinel and
      * returns its source-defined zero result without looking up a DOS
      * ConsoleRecord.  The standalone connection likewise has no DOS Console
@@ -1769,6 +1795,8 @@ DWORD OpenNtBaseServiceExitCode(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWO
     if (status && !message.ReturnValue) message.ReturnValue=status;
     if (!NT_SUCCESS((NTSTATUS)message.ReturnValue)) { error=RtlNtStatusToDosError((NTSTATUS)message.ReturnValue); goto done; }
     *exit_code=(DWORD)message.u.GetVDMExitCode.ExitCode;
+    if (parent_receipt==connection->parent_receipt && *exit_code!=STILL_ACTIVE)
+        connection->parent_receipt=0;
     error=ERROR_SUCCESS;
 done:
     LeaveCriticalSection(&connection->service->lock);

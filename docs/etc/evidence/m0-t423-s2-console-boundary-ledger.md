@@ -4288,3 +4288,83 @@ under build/M0-T423/S2/unpaired-* and test-unpaired-*.ps1. No original guest,
 SYSTEM.INI or Registry change was made. The original execution/handoff source
 order guard passes. This is a production P, not S2/T423 closure: the full S2
 fault/completion-race and physical focus/pointer checklist remains open.
+
+### Completed task result versus later worker cleanup
+
+The follow-on S2 audit found a deterministic delivery defect, not a guest or
+CCPU fault. The original DOS record had completed with exit 29 and its parent
+event was signalled. Killing its worker before the launcher collected that
+result let BaseSrvCleanupVDMResources/BaseSrvExitVDMWorker free the record;
+the subsequent original BaseSrvGetVDMExitCode returned 0 for the missing record.
+O:/winnt/logs/m0-t423-s2-completed-worker-loss-red.txt records fixture exit 1;
+its Console log records query=0, exit=0, expected=29. Test-owned children are
+cleaned before the final failing assertion. The production package was not
+changed for this reproducer.
+
+Source-first audit uses O:/repos.external/OpenNT/base/win32/server/srvvdm.c,
+SHA-256 C1E2177C6C00679D85CFA475F620841F6736B0E56D8DBF790B71AFE33E1ED80B:
+BaseSrvGetVDMExitCode at 1803 and BaseSrvCleanupVDMResources/ExitVDMWorker at
+2635/2694. The already-selected mirror retains those policies. This establishes
+the standalone cleanup/query ordering failure; it does not claim that the
+entire original NT4 kernel/client integration had this observed failure.
+
+Recovery ladder and boundary:
+
+1. Keep the already-composed original result owner and record cleanup; no new
+   original files or mirror edits are required.
+2. Before worker cleanup, the service invokes that original result query for
+   a signalled parent wait. The existing authenticated connection retains only
+   the resulting reply and exact wait receipt until the direct parent reads it.
+3. Receipt mismatch cannot consume that reply. Successful delivery consumes it;
+   subsequent queries retain the original missing-record zero behavior. New
+   command admission or reservation release clears the retained reply.
+4. An unsignalled parent wait still becomes actual worker failure (1067).
+   Launcher/root-I/O loss remains non-terminating. No DOS record algorithm,
+   scheduler, guest callback or CPU behavior is recreated in the adapter.
+
+This is a +31/-3-line change in base_service.c (net +28); no mirror diff,
+wire-layout change, new component or original guest modification. The component
+README also removes stale pre-6d28dfac2 pair-kill wording.
+
+New fixture modes are --completion-rundown-race and --completed-worker-loss.
+The first starts a real competing thread behind a ready/go barrier while the
+worker submits original completion. Thirty pre-repair stress repetitions
+(m0-t423-s2-completion-rundown-1 through -30) passed: parent completion remains
+observable and the worker survives. This stress does not claim every scheduling
+interleaving was exercised. Existing ordered before/after cases remain controls.
+The second forces worker cleanup after completion but before collection and
+proves the specific lost-result sequence. It now also checks wrong-receipt and
+one-shot result consumption. All 22 service modes pass on fixture SHA-256
+671124649075A0461443BDCE8FC9B37BD76292774B648686FCA5494ABB5FB7C1,
+under prefix m0-t423-s2-result-final-. The earlier green proof is under
+m0-t423-s2-completed-result-green-; later modes add the receipt assertions.
+
+Full x86 six-file build passes using the existing formal/WOW caches. Production
+regression is run by build/M0-T423/S2/test-completed-result.ps1; it backs up the
+published 6d28dfac2 package to completed-result-pre-change-package, temporarily
+stages the candidate, and restores that baseline on completion or failure.
+The candidate identity is recorded in completed-result-production-publication.json.
+Final regression/publication disposition is recorded below after completion;
+neither this source fix nor fixture success closes the entire S2 checklist.
+
+Final production regression completed successfully and restored the previous
+package before publication. Log prefix m0-t423-s2-result- records DOS17 (17/17),
+nesting (4/4), graphics-to-text (2/2), guest keymouse, actual worker loss with
+unrelated-worker isolation, root frontend loss, and inner-launcher loss with
+surviving native/nested DOS targets. Fresh MEM and actual text are asserted.
+Headless WINMINE/SOL/WRITE remain alive at the known NETWORK.DRV modal;
+observation timeout is not gameplay or full application acceptance.
+
+The exact tested six files are published together to O:/winnt:
+
+| File | SHA-256 |
+| --- | --- |
+| run16.exe | 56013C6477CE2E40221A164B1A6FB5AD52D90958835D852F0A221A5C1AB0FD74 |
+| basesrv.exe | 87DAC2335446431F127170B79EE00870E990A4A026E0006AB6E6C9A080FA0E93 |
+| ntvdm.exe | A3F27ED9C97D82088CE51D2776C106DF8348A9CA7A1AF6F2D5688C0855667FB8 |
+| dtmgr.exe | 7349D5C89384A00080D31ECD3D1B1AF9D543E72A58F125DFC37328FF9F02487C |
+| WOW32.DLL | D22C407AE8F769A556492F6AF83A06AD5DCEFC7E1F0877F0B933DBA18D151326 |
+| VDMREDIR.DLL | C1670FE36E9E9E40141689ED98CCD1B49B2AE1312BF7EA722BE2EC98E11DC094 |
+
+No original guest, Registry, SYSTEM.INI, shared library or foreground desktop
+interaction changed. S2 remains open for its explicitly remaining gates.

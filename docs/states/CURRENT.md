@@ -69,6 +69,26 @@ it is the detailed record of superseded attempts, not an additional status.
 
 ## S2 Verified Scope And Remaining Gates
 
+Follow-on P preserves an already-completed DOS result across later worker
+cleanup: the deterministic red test returned 0 instead of 29; the service now
+collects the original result before cleanup and retains its authenticated reply
+until the direct parent consumes it. No mirror, guest or wire-layout change.
+All 22 service modes, DOS17, four nesting cases, graphics/text, keymouse and
+worker/root/inner-launcher failure regressions pass. WOW3 retains its known
+headless NETWORK.DRV frontier. The tested six-file candidate is published at
+O:/winnt; exact identities are in the boundary ledger's completed-result section.
+This closes the named result-loss sequence, not the entire S2 race checklist.
+
+Follow-on P preserves an already-completed DOS result across later worker
+cleanup: the deterministic red test returned 0 instead of 29; the service now
+collects the original result before cleanup and retains its authenticated reply
+until the direct parent consumes it. No mirror, guest or wire-layout change.
+All 22 service modes, DOS17, four nesting cases, graphics/text, keymouse and
+worker/root/inner-launcher failure regressions pass. WOW3 retains its known
+headless NETWORK.DRV frontier. The tested six-file candidate is published at
+O:/winnt; exact identities are in the boundary ledger's completed-result section.
+This closes the named result-loss sequence, not the entire S2 race checklist.
+
 Detailed runs, failed attempts and artifact identities remain in the linked
 boundary ledger; this status records only the current disposition.
 

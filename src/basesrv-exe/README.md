@@ -20,13 +20,14 @@ handle is signalled; live cancellation markers remain until worker exit.
 Service stop also drains the final idle residue. This is resource cleanup,
 not an idle-worker timer or a new task scheduler.
 
-S2 also applies the owner-approved launcher/target failure pair at this finite
-binding: an unfinished DOS command abandoned by its launcher is contained by
-terminating its exact worker with ERROR_PROCESS_ABORTED. Original DOS records,
-parent completion receipts and reservation/worker sequence select that target;
-Console membership alone never authorizes termination. Original normal
-completion, empty workers and WOW records remain excluded. RPC teardown may
-precede process signalling, so pending-command disconnect and the exact
-launcher's process-exit notification both enter the same guarded binding.
-Callbacks are joined before context destruction. This is the standalone
-failure contract, not a claim that OpenNT supplied recursive process-tree kill.
+Launcher rundown never terminates handed-off DOS tasks or workers. Root
+frontend loss revokes only I/O capability (ERROR_PIPE_NOT_CONNECTED), not
+execution ownership. Actual worker death fails only its unfinished requests
+with ERROR_PROCESS_ABORTED; pre-handoff startup rollback remains separate.
+
+Original worker cleanup frees DOS records, including completed results not yet
+collected by their parent. Before that cleanup, this binding calls the original
+exit-code owner for each completed parent wait and retains only the resulting
+reply, keyed by its authenticated connection and exact receipt. Delivery
+consumes this one pending reply; a newly admitted command clears it. This is
+response-lifetime protection, not a second DOS record or completion policy.
