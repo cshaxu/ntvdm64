@@ -116,8 +116,13 @@ boundary ledger; this status records only the current disposition.
   Only broker attachment is substituted. This closes the channel-lifetime
   subcase, not broker task-completion races or physical pointer acceptance.
 
-S2 still requires the complete Console-owner and per-layer failure checklist,
-and remaining physical pointer/layout dispositions. The first production P
+The compiled Console-owner ledger is reconciled with receiver/test and
+explicit unavailable/local-owner dispositions. Its object guard passes 366
+mirror entries without direct Console/pointer imports except the original
+process-local control handler. This is not whole-program runtime proof.
+S2 still requires the complete per-layer failure checklist and physical
+pointer/focus disposition. Console layout now preserves the original failure
+contract; modern native availability is not claimed. The first production P
 delivers the verified subset, not S2 closure. Hidden native Console remains S3;
 display/Window remains S4, Window mouse S5, and final owner audit S6.
 

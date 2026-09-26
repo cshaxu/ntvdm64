@@ -3,10 +3,12 @@ param(
     [string]$RepositoryRoot = (Split-Path -Parent (Split-Path -Parent $PSScriptRoot)),
     [string]$NinjaGraph = 'build/M0-T423/S1/restart-formal-x86/build.ninja',
     [switch]$Callsites,
-    [string]$Dumpbin = ''
+    [string]$Dumpbin = '',
+    [switch]$VerifyFrontendBoundary
 )
 
 $ErrorActionPreference = 'Stop'
+if ($VerifyFrontendBoundary -and !$Dumpbin) { throw 'Frontend boundary verification requires compiled objects and Dumpbin.' }
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path.Replace('\','/').TrimEnd('/')
 $graph = if ([IO.Path]::IsPathRooted($NinjaGraph)) { $NinjaGraph } else { Join-Path $root $NinjaGraph }
 $sources = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
@@ -66,12 +68,28 @@ if ($Callsites) {
 if ($Dumpbin) {
     if (-not (Test-Path -LiteralPath $Dumpbin -PathType Leaf)) { throw 'Dumpbin not found.' }
     'Compiled Console function references (object selection, not runtime reachability):'
+    $mirrorObjects = 0
+    $bypasses = [Collections.Generic.List[string]]::new()
     foreach ($item in $objects) {
+        $isMirror = $item.Source.StartsWith($root + '/src/mvdm/', [StringComparison]::OrdinalIgnoreCase)
+        if ($isMirror) { ++$mirrorObjects }
         $objectPath = if ([IO.Path]::IsPathRooted($item.Object)) { $item.Object } else { Join-Path (Split-Path $graph) $item.Object }
         if (-not (Test-Path -LiteralPath $objectPath -PathType Leaf)) { throw "Missing compiled object: $objectPath" }
         $symbols = & $Dumpbin /nologo /symbols $objectPath
         if ($LASTEXITCODE -ne 0) { throw "Dumpbin failed: $objectPath" }
         foreach ($symbol in $symbols) {
+            # Only imported host presentation/input calls in original mirror
+            # objects are guarded. Worker adapters legitimately contain native
+            # no-channel fallbacks; process-local control handlers stay local.
+            if ($VerifyFrontendBoundary -and $isMirror -and
+                $symbol -match 'UNDEF.*External\s+\|\s+__imp__(?<api>\w+)@\d+') {
+                $api = $Matches.api
+                if ($api -match 'Console|^(GetCursorPos|SetCursorPos|GetClipCursor|ClipCursor)$') {
+                    $control = $api -eq 'SetConsoleCtrlHandler' -and
+                        $item.Source.EndsWith('/softpc.new/host/src/nt_event.c', [StringComparison]::OrdinalIgnoreCase)
+                    if (!$control) { $bypasses.Add("$($item.Source): $api") }
+                }
+            }
             # Direct function type or x86 stdcall import decoration. Exclude
             # ordinary globals such as hWndConsole/ConsoleNoUpdates.
             if ($symbol -match 'UNDEF.*\(\).*External\s+\|\s+(?<name>\S*Console\S*)' -or
@@ -79,5 +97,11 @@ if ($Dumpbin) {
                 '{0}: {1}' -f $item.Source.Substring($root.Length + 1), $Matches.name
             }
         }
+    }
+    if ($VerifyFrontendBoundary) {
+        if (!$mirrorObjects) { throw 'No compiled mirror objects checked.' }
+        if ($bypasses.Count) { throw ('Direct mirror frontend bypasses: ' + ($bypasses -join '; ')) }
+        "PASS compiled frontend boundary: $mirrorObjects mirror objects; only nt_event process-local control registration is exempt."
+        'This does not certify ReadFile/WriteFile handle routing, adapter fallback reachability, or runtime behavior.'
     }
 }

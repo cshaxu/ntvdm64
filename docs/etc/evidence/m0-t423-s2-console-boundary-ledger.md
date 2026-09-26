@@ -3852,3 +3852,69 @@ The source-only verify-dos-frontend-handoff-source.ps1 guard also passes all
 six original suspend/drain/re-entry/resume ordering checks. It is not runtime
 proof. These results close the channel cancellation/join subcase, not the
 entire broker/guest completion-race matrix or the physical pointer/focus gate.
+
+### Current compiled Console owner reconciliation
+
+At production revision 94762fa70, reran
+tests/observation/audit-dos-console-build-surface.ps1 against
+build/M0-T423/S1/restart-formal-x86/build.ninja with the installed MSVC x86
+dumpbin. The graph selects 411 distinct worker C units; the lexical inventory
+has 248 occurrences in 17 files and 88 spellings, including definitions and
+inactive branches. These counts are not runtime call counts.
+
+The new -VerifyFrontendBoundary switch checks every selected mirror object
+for direct imported Console/pointer APIs. It requires Dumpbin and at least one
+mirror object, fails on a missing object/tool failure, and permits only the
+original nt_event.c process-local SetConsoleCtrlHandler registration. Current
+run passes across 366 compiled mirror-object entries; raw output is
+build/M0-T423/S2/compiled-owner-audit.txt. The check is intentionally not a
+proof of generic ReadFile/WriteFile routing or adapter fallback reachability.
+
+Below, original paths are under src/mvdm; client/compat/graphics denote the
+corresponding src/ntvdm-exe/win32 files. The receiver is
+src/run16-exe/console_frontend.c. The listed tests are checked-in under
+tests/app unless otherwise qualified. This reconciles the selected Console
+surface without claiming the still-open physical/lifecycle acceptance rows.
+
+| Original caller / operation | Current owner and wire route | Assertion evidence / disposition |
+| --- | --- | --- |
+| nt_event: ReadConsoleInputExW, GetConsoleInputWaitHandle | compat peek/read -> client READ_INPUT/PEEK_INPUT; root owns native input and readiness | console_client_test actual queue/peek/read; keymouse guest and focus-record runs; channel lifetime cancellation |
+| nt_event/cmdmisc: WriteConsoleInputVDMW | compat -> client PREPEND_KEYS -> native prepend in root | returned-key exact-body red/green, native prepend/client fixtures, real nested typeahead |
+| nt_hosts/nt_event/nt_fulsc: Get/SetConsoleMode | client GET_MODE/SET_MODE -> root | client/native comparisons, real DOS/native return, source handoff ordering guard |
+| nt_graph: WriteConsoleA, fill-character/attribute, scroll | client WRITE/FILL_CHARACTER/FILL_ATTRIBUTE/SCROLL -> root buffer | console_frontend_test exact characters/attributes/scroll and DOS17 actual output |
+| nt_graph/nt_hosts/nt_event/nt_fulsc: screen and cursor queries/updates | client SCREEN_INFO/CURSOR_POSITION/CURSOR_INFO/GET_CURSOR_INFO | console_client_test and console_frontend_test native state comparison, EDIT then MEM |
+| nt_fulsc: ReadConsoleOutputA; text invalidation: WriteConsoleOutputA | client READ_CELLS_A/WRITE_CELLS_A; generic A/W bindings retain copied cell layout | console_client_test rectangular/tiled reads and writes, console_frontend_test; real text return |
+| nt_graph/nt_fulsc: buffer/window dimensions | client BUFFER_SIZE/WINDOW_RECT -> root shared grid provider | native/client resize and failure checks; no new worker presentation algorithm |
+| nt_graph: GetCurrentConsoleFont/GetConsoleFontSize | client font queries -> root | client fixture compares native dimensions and errors; not a font rendering implementation |
+| cmdkeyb/nt_event: Console input/output code page | client code-page query -> root | client native comparison; original keyboard reader cases |
+| cmdkeyb: GetConsoleKeyboardLayoutNameA | client KEYBOARD_LAYOUT -> exact root Console query; source owns NoInstallkb16 | layout native/error/mock and original-reader tests; host layout availability is not claimed |
+| config/cmdmisc/cmdpif: Get/SetConsoleTitle | client title query/set -> root | client exact capacity, empty, error and no-channel comparisons |
+| nt_event: SetConsoleDisplayMode | client SET_DISPLAY_MODE -> root public API | display-owner fixture/native results; not hardware fullscreen or product display flag |
+| nt_mouse/nt_event: VDMConsoleOperation | compat -> client WINDOW_QUERY -> root window | client rectangle/iconic/coordinate assertions; unavailable native operation remains failure |
+| nt_mouse pointer query/warp/clip | conapi aliases -> client GET/SET_POINTER and GET/SET_POINTER_CLIP -> root USER API | pointer dispatcher signed-coordinate/null-release/error fixture; physical clip/focus cleanup still pending |
+| nt_cga/nt_ega/nt_vga: InvalidateConsoleDIBits; nt_graph: palette and graphics buffer | compat/graphics keep painter backing/mutex local; copied VIDEO_BEGIN/DATA/TEXT to root | exact guest pixels/palette and text-return tests; Window renderer remains S4 |
+| nt_det/nt_fulsc: RegisterConsoleVDM | worker-owned bounded text backing; no native hardware state mapping | retained registration/bitmap/client tests and guest text output; pointer cannot cross process |
+| nt_mouse/nt_event: ShowConsoleCursor | local source-visible display count per text/graphics backing | cursor count red/green/recreation; does not pretend to change modern native pointer visibility |
+| config: SetConsoleKeyShortcuts; nt_mouse: ConsoleMenuControl | explicit ERROR_CALL_NOT_IMPLEMENTED at compat | private NT4 menu/reservation unavailable; no fabricated menu/global hook; S4 product hotkeys are separate |
+| nt_event: SetConsoleCtrlHandler | worker-local original guest control handler | real Ctrl+C/Break and Console close tests; callback address is not an IPC payload |
+
+The compiled nt_fulsc/config/nt_det paths do not import the lexical
+Get/SetConsoleHardwareState candidates. Those MONITOR-era branches are not
+claimed as CCPU40 capabilities. nt_event's GetKeyboardLayout queries belong
+to key normalization, not a Console reader or renderer; they are distinct from
+the repaired Console-layout-name contract. The latter's tests must not be
+used to claim every keyboard layout is supported.
+
+Native Console imports remain in client/graphics for their explicit no-channel
+or non-owned-handle routes. Inspected MvdmWriteConsoleA never falls back after
+an admitted channel fails. nt_hosts still obtains/opens local CONIN$/CONOUT$
+handles for original handle classification and source-facing state; selected
+presentation APIs using those handles are bound as above. The inspected
+nt_graph, nt_event, nt_hosts, cmdexec and cmdmisc contain no direct ReadFile or
+WriteFile calls. This bounded observation does not exempt DEM/redirected file
+I/O from its original file/pipe ownership or certify all source files globally.
+
+Remaining closure work is now explicit: reconcile the complete per-layer
+broker/guest normal-completion versus failure matrix and physical pointer/focus
+disposition. S4 owns display/CAF/AE/X and Window focus; no S2 hotkey pass is
+inferred. No production source or deployed artifact changed in this audit.
