@@ -290,7 +290,10 @@ KILL_ON_JOB_CLOSE。启动尚未交接的资源仍允许原有回滚。
 - [ ] DOS 非零/错误完成只完成该 record；根仍在则 worker 不因结果非零
       关闭。完成先于 worker 关闭时保留原始结果，反向顺序明确失败。
 - [x] 普通传输错误不能冒充根进程死亡；身份、代次、会话隔离不改变。
-- [ ] 真实 Console close 与显示切换严格区分；关闭回调与有界收尾均验证。
+- [x] 真实 Console close、原始关闭回调投递与阻塞回调的有界收尾已验证；
+      见[关闭验收复核](../etc/evidence/m0-t423-s2-console-boundary-ledger.md#published-close-package-focus-record-recheck)。
+      CAF/AE/X 显示切换尚未实现，其不触发关闭的运行验证仍由 S4 承担，
+      不计为本项已通过的能力。
 - [ ] DOS→native→DOS 与 native→DOS→native，直接/嵌套退出及取消竞争；
       读取实际 guest 文本，保留现有 DOS17、键鼠、图形返回和 WOW3 门槛。
 

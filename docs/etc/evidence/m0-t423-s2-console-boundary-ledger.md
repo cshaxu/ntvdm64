@@ -4619,3 +4619,39 @@ final gates passed. Five disposable NIO handshake files were removed after
 test-owned process cleanup; no original media or user data was removed.
 S2 remains open for its residual physical-input disposition; this delivery does
 not admit hidden Console/Window work or claim owner desktop verification.
+
+### Published close-package focus-record recheck
+
+Question: does the d0f856a50 root-session-close change preserve the previously
+verified focus-record/keymouse/COMMAND return path? All six published hashes
+match the session-close-tested.json manifest above. No production input,
+original guest or configuration was changed and no rebuild was needed.
+
+Reused observers: build/M0-T423/S2/control-observer/console-startup-observer.exe
+and build/M0-T423/S2/keymouse-focus-transition/keymouse-capability-observer.exe.
+The procedure is the earlier Focus-record transition section: private desktop,
+TEST_RUNTIME_ROOT=O:/winnt, MVDM_TEST_KEYMOUSE_SHARED_CONSOLE=1,
+MVDM_TEST_KEYMOUSE_FOCUS_TRANSITION=1, and
+MVDM_TEST_KEYMOUSE_COMMAND=O:/winnt/tests/KMTST.COM. Pass the keymouse observer
+as the startup observer's target, O:/winnt as its working directory,
+--observation-timeout-ms 60000 and the guest-report filename as target argument.
+Reports are O:/winnt/logs/m0-t423-s2-close-focus-recheck.txt and
+m0-t423-s2-close-focus-recheck-guest.txt. The target exits 0; actual guest
+markers confirm keyboard, modifiers/release, PPI, mouse reset/position/callback
+and teardown. The observer then reads MEM output and the returned prompt;
+its final diagnostic is keymouse passed=yes stage=command-exit error=0 exit=1
+focus-record-transition=injected. This is a fresh pass on the published close
+package, not an inference from the older package.
+
+Checklist reconciliation: the actual Console-close case in
+m0-t423-s2-close-final-console and callback/hung-callback cases in
+m0-t423-s2-close-contract-final establish close delivery and bounded completion.
+The callback fixture substitutes CntrlHandler; the real Console-close lifecycle
+case complements it. Neither demonstrates future display switching. The
+proposal now checks only this proved close portion and explicitly retains
+CAF/AE/X non-close verification in S4, where those controls are implemented.
+
+Physical focus movement and pointer clipping/release are still unproved.
+Injected records are not a substitute. No desktop switch, physical input,
+foreground activation or new clipping operation was performed. S2 remains
+active; this evidence-only P neither admits S3 nor changes its exit standard.
