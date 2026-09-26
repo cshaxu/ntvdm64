@@ -4,9 +4,13 @@
 
 Repair user-visible launch, Console ownership and completion behavior while
 preserving original DOS/WOW execution semantics and verified capabilities.
-The owner places this candidate immediately before the project-wide
-original-source implementation minimization review. It is unnumbered and
-queued; it does not change the active T420/S40 packet.
+This unnumbered candidate follows error-response recovery and precedes
+[whole-closure recovery](proposal-mvdm-whole-closure-recovery-001.md), then
+implementation minimization. It does not change the active packet. Ordinary
+UX issues retain this priority; a proven data-loss, resource-leak or blocking
+lifetime defect needed by earlier work receives an explicit owner/scope
+promotion through task governance. Reuse that completed fix and evidence here
+rather than maintaining a second implementation or postponing a safety fix.
 
 ## Initial defect and scope
 

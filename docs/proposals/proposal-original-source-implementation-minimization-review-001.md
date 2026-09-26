@@ -18,6 +18,22 @@ only at admission through CURRENT.md. It does not interrupt or replace the
 active package. The owner's queue request authorizes this proposal, not its
 implementation before admission.
 
+This is the final queued review, after
+[whole-closure recovery](proposal-mvdm-whole-closure-recovery-001.md). Consume its
+shared inventory, stable finding/source-owner IDs, source/build identities and
+tests rather than commissioning another fresh global discovery pass. S1
+reconciles full coverage but researches changed, unclassified or contradicted
+rows; S5 independently checks dispositions and post-change selections, reusing
+valid unchanged evidence. No owner is exempt from coverage.
+
+The distinction is missing capability versus unnecessary implementation:
+whole-closure recovery owns missing/cropped/unconnected originals and the
+duplicates displaced by recovery; this review owns remaining duplication and
+unnecessary local code across working capabilities. Newly discovered capability
+gaps receive an explicit original-owner repair disposition through governance,
+not a silent expansion or an unowned deferral. Earlier packages must already
+minimize their own changes; this final review does not license temporary copies.
+
 ## Project-wide scope and baseline
 
 Freeze the current repository revision and formal build selections at task
@@ -39,8 +55,9 @@ failure behavior and lifetime, not merely matching names or lines. Existing
 but unselected or conditionally excluded original functions are first-class
 recovery candidates. Original code not yet mirrored must receive a source-
 policy reuse/admission disposition, not be silently classified as absent.
-This task does not override the prohibition on new mirror files or private
-kernel/CSR runtime imports; evidence of a needed new admission must be raised
+This task does not permit project-invented mirror files or private kernel/CSR
+runtime imports. Original OpenNT files may be imported at original paths under
+the current source policy; evidence of a needed new admission must be raised
 explicitly rather than disguised as justification for autonomous duplication.
 
 Separate actual original-source bugs, local adaptation bugs, necessary modern
@@ -116,7 +133,7 @@ No numeric reduction target can justify losing a proven capability.
 
 ## Non-goals and stop conditions
 
-No new files in either mirror, guest-media edits, second CPU profile, blanket
+No project-invented files in either mirror, guest-media edits, second CPU profile, blanket
 A3CPU activation, speculative CCPU instruction changes, new generic helper
 framework, formatting-only churn or claim that WRITE is now accepted.
 Do not reintroduce the wrong segment numbering, null SetSTATUS slot, false

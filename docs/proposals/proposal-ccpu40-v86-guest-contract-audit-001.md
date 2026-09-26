@@ -2,12 +2,29 @@
 
 ## 候选包
 
-本候选包在当前 M0 T420 完整收口后首先准入。它不是新的 host
+本候选包列于待办队首，在当前已准入的图形呈现包收口后按治理准入，
+不打断当前任务。它不是新的 host
 实现、WOW16 修复或 guest 介质修改；它产出一份可关闭的、以原始
 OpenNT V86 monitor 语义为基准的 CCPU40 host/guest 契约账本。其目的
 是判定当前 Win32/x86 CCPU40 worker 是否向原始 DOS、DOSX/DPMI 与
 WOW16 guest 提供了它们实际依赖的服务形状，并将 `WRITE.EXE` 无法
-启动的已证实边界交给唯一的原始 owner 包恢复。
+启动的已证实边界交给唯一的原始 owner 包恢复；历史症状不预设为
+当前构建必然存在的故障。
+
+## 有限范围与证据复用
+
+继承既有 T420、T422 的契约、源码与运行账本，以及准入时已完成的
+图形呈现证据；WOW 证据入口见
+[后续 WOW32 提案](proposal-wow32-production-completion-002.md#inherited-research-code-and-evidence)。
+S1 冻结选定边界、源/构建/介质身份和待证项清单。已有结论只在输入
+变化或出现反证时重开；不得重新进行全仓 BFS、完整 CPU 指令正确性
+证明或重复已经关闭的全局源码研究。新增审计项必须说明其与选定
+guest 契约的直接关联，不能无限扩张范围。
+
+每个缺口沿用稳定 ID，交付原始 owner、当前 provider、证据、最小修复
+范围及可执行验收条件。WOW 缺口落实到后续提案具体 S 的 checklist，
+非 WOW 缺口指定实际接收包；不另建无主的泛化审计队列。证据不足项
+保持未完成并指定下一步有限取证，不能包装成等价或成功收口。
 
 ## 问题与判据
 
@@ -37,7 +54,7 @@ memory/A20/EMS/XMS/DIB、异步事件以及 worker 退出清理。它不把 CPU3
 | --- | --- | --- |
 | S1 | 冻结实际 x86 构建图与原始 V86 contract 面。枚举所有可达 BOP、模式转换、fault/interrupt、I/O、memory 与 lifecycle 边界，并为每项登记原始 guest caller、原始 owner、当前 provider、结构/寄存器 ABI 与 source/profile disposition。 | 账本双向闭合：每个 reached guest edge 有当前接收方；每个 reached CCPU40/adapter handler 有 guest 可达性或明确 profile 排除。 |
 | S2 | 对 S1 的可疑或有限 binding 项逐项做原始源代码与当前路径对照；设计最小、默认关闭的边界 trace，验证 IP 推进、栈/寄存器、失败码、descriptor/table 与内存 lease 生命周期，不向指令执行循环增加常驻日志。 | 每项归为已等价、有限且有证据的适配、缺失/不等价，或不可达；没有“凭运行成功推断”的未分类项。 |
-| S3 | 在不改变 guest 介质和功能语义的前提下，执行分层证据矩阵：`COMMAND`、`MEM`、`EDIT`、DOSX/DPMI 激活以及已选 `WRITE.EXE` 启动路径。记录实际命中边界、未命中能力与首个确定阻断点。 | 每个工作负载有可复现的命中集合；WRITE 失败若仍存在，归因到一个具体 owner/interface，而非笼统称为 CCPU 或 guest 问题。 |
+| S3 | 在不改变 guest 介质和功能语义的前提下，核对 `COMMAND`、`MEM`、`EDIT`、DOSX/DPMI 及 WRITE/WINMINE/SOL 当前最深运行基线；只对缺证或变化的契约补充定向取证。 | 每个工作负载保留精确产物和观察；可复现失败的首个确定阻断点归到具体 owner/interface，历史故障消失则记录消失，不强行推定 CCPU 或 guest 有错。 |
 | S4 | 复核账本与实现差异：找出由当前 CCPU40/adapter 自主实现、空桩、默认值或重复策略造成的疑点；为每一项指定唯一后续 owner、原始恢复梯级、最小修复边界与回归矩阵。 | 无无主缺口；可立即恢复的原始代码与必须保留的有限 adapter 明确分开；不在本审计包内实施跨包修复。 |
 
 ## 交付物与验收
@@ -50,7 +67,7 @@ memory/A20/EMS/XMS/DIB、异步事件以及 worker 退出清理。它不把 CPU3
   它必须默认关闭、位于既有边界 owner，且在该 S 结束时移除或转为
   已登记的测试工具，不能进入镜像逻辑。
 - 固定 x86 build、直接与交互式 `COMMAND`/`MEM`/`EDIT` 回归，以及
-  DOSX/DPMI 和 `WRITE.EXE` 的真实运行观测。未能自动化的 Console
+  DOSX/DPMI 和 WRITE/WINMINE/SOL 的真实运行观测。未能自动化的 Console
   观察明确标为限制，不能伪称通过。
 
 本包关闭时只声称“契约已审计并有唯一修复归属”，不声称 `WRITE.EXE`
@@ -63,4 +80,5 @@ memory/A20/EMS/XMS/DIB、异步事件以及 worker 退出清理。它不把 CPU3
 不改变 guest 二进制、不引入 CPU30、kernel VDM、CSRSS/CSR transport 或
 私人 GUI 替代层；不以 NTVDMx64 补丁批量替换源代码。发现需要新 guest
 介质、内核专有状态、跨包行为修复、既有 `COMMAND`/`MEM`/`EDIT`
-回归，或当前 T420 尚未收口时，停止并将结果记录为明确 handoff。
+回归时，停止相关验证并将结果记录为明确 handoff，不把修复扩大到
+本审计包。当前活动包未收口时不提前实施本候选包。

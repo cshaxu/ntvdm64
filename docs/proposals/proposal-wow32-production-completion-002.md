@@ -2,12 +2,22 @@
 
 ## Objective and admission
 
-Owner-requested successor candidate dated 2026-09-24. It is queue head,
+Owner-requested successor candidate dated 2026-09-24. It follows the bounded
+[CCPU40/V86 contract audit](proposal-ccpu40-v86-guest-contract-audit-001.md), remains
 unadmitted and has no numeric T identifier. T422 closes only as the initial
 WINMINE milestone plus research/planning preservation; it does not certify
 complete USER/WOW32, WRITE or SOL. The owner must admit this candidate before
 implementation. All outstanding former T422 S3--S22 work transfers below.
 No test, partial implementation or known failure is discarded or reset to zero.
+
+Consume that audit's stable finding IDs, exact evidence and owner mappings;
+attach each WOW repair to the corresponding S checklist below without restarting
+the inherited research or renumbering this sequence. Audit closure is not a
+claim that a missing runtime contract has been repaired. Necessary error-response
+or fatal-cleanup dependencies are handled by the earliest consuming S with one
+named implementation owner, not delayed until S19 or the later general
+[error-response package](proposal-error-dialog-termination-semantics-restoration-001.md).
+Share its evidence and leave only residual callers to that package.
 
 Finish the selected original WOW32 capabilities through their production
 paths and end with immutable WRITE.EXE, WINMINE.EXE and SOL.EXE startup, use,

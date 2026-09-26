@@ -9,7 +9,14 @@ to the caller's documented recovery path.  In particular, a user selecting
 **Terminate** must not leave a flashing Console, a live task record, or a
 worker blocked before it notifies BaseSrv.
 
-This package begins only after the active T420 S34 packet closes.  It is a
+This queued package follows
+[WOW32 production completion](proposal-wow32-production-completion-002.md)
+and precedes product experience repair; it does not alter the active packet.
+Error-response or termination edges necessary for earlier WOW execution must
+be explicitly assigned to its earliest consuming S and verified there, not
+postponed to this candidate. Reuse those stable caller IDs and tests here;
+S1 reconciles changed/uncovered callers, and S4 verifies residual WOW edges
+without rebuilding an already completed provider. It is a
 behavioral recovery/verification package, not a reason to redesign COMMAND,
 BaseSrv records, CCPU execution, guest media, or the global broker lifecycle.
 

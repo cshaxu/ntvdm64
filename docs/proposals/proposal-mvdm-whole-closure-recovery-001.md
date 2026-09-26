@@ -99,7 +99,7 @@ they must not be replaced with fake-success behavior.
 | S1 | Freeze upstream/repository/build baselines and perform full source-to-runtime reconciliation. | Complete package/path ledger, three connection categories, missing/unused/cropped worklist, duplication map and dependency-ordered repair design; every exclusion has evidence. |
 | S2 | Restore missing or unjustifiably cropped original source and required source/build carriers. | Provenance-correct imports at original paths, resolved edition choices and role-correct manifests; importing files alone does not close runtime gaps. |
 | S3 | Reconnect all unjustifiably unused or partially selected runtime owners, including lifecycle and dependent original slices. | Complete package-level behavior verification and removal of temporary bindings displaced by original code. At admission split this phase into sequential S packets, one complete owner package per packet, as the S1 findings require. |
-| S4 | Consolidate remaining mirror diffs, autonomous bodies and obsolete build/overlay selections after recovery. | Each redundant implementation removed; every necessary retained boundary explained and tested; no hidden alternate provider. |
+| S4 | Consolidate mirror diffs, autonomous bodies and obsolete build/overlay selections displaced by this package's recovery. | Each displaced duplicate removed; retained recovered boundaries explained and tested; unrelated working-code minimization findings handed to the subsequent review with stable IDs. |
 | S5 | Independently re-audit the entire source/build/runtime closure and run final integrated acceptance. | No unclassified source or unjustified runtime omission; reproducible artifact identities, footprint report and reviewed delivery. |
 
 These are planned phases, not an allocation of active S identifiers. Any
@@ -151,3 +151,14 @@ Reuse and verify prior recovery results; repair residual gaps rather than
 duplicate completed work. This candidate precedes implementation minimization
 so that the latter can consolidate against the recovered original closure.
 It does not divert the active runtime-completion task.
+
+The queue places this package after contract auditing, WOW completion,
+error-response recovery and product experience repair. Its repair ownership
+is missing/cropped/unconnected original capability, including removal of local
+providers displaced by that restoration; unrelated working-code minimization
+belongs to the subsequent review. Maintain shared stable finding/source-owner
+IDs, source/build hashes, dispositions and executable evidence. Pass that
+reconciled inventory forward, including changed and unresolved rows; unchanged
+accepted evidence is reopened only for changed inputs or counterevidence.
+Full coverage reconciliation is required, but repeating all prior source
+research is not. Neither package defers cleanup necessary for its own repairs.

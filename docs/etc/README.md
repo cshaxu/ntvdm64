@@ -218,3 +218,7 @@ proves the original `FSTI` continuation reaches BOP `FDh`.
 | [T420 S38 DPMI32 capability review](evidence/m0-t420-s38-dpmi32-capability-review.md) | M0 T420 S38 | Selected package, BOP dispatch and protected-mode verification obligations. | Retain with T420 capability evidence. |
 
 All other historical supporting material is in the [external documentation archive](../../artifacts/documentation-archive/20260910/strict-topology/).
+## T423 restart reference
+
+[Retained prior status](evidence/m0-t423-restart-prior-status.md) preserves the
+pre-restart chronology; current admission remains in states/CURRENT.md.

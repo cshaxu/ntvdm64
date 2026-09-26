@@ -177,6 +177,15 @@ fixture cannot be called a delivered P until this gate passes.
 
 ### Output placement
 
+Owner clarification dated 2026-09-25: agents may create new directories only
+under the repository-root `build/` directory. Do not create runtime candidate
+directories such as `O:/winnt/P423`. Use the existing `O:/winnt/tests` and
+`O:/winnt/logs` for their established purposes. Backups and new staging trees
+belong under repository `build/`. Every production-code P still publishes its
+verified coherent six-binary package to `O:/winnt` itself; a candidate
+subdirectory is not delivery. Preserve active owner sessions and recoverable
+baseline files during replacement.
+
 An admitted build records its `build/<task-id>/<run-id>/` working root before
 execution. All compiler, linker, generated, intermediate, fixture, and build
 result files, including every locally built `.exe`, remain below that root (or
