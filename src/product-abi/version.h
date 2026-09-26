@@ -4,7 +4,7 @@
  * This header supplies metadata only, never application policy to adapters. */
 #ifndef NTVDM_APP_VERSION_H
 #define NTVDM_APP_VERSION_H
-#define APP_VERSION "0.0.420"
-#define APP_PROTOCOL_VERSION 4u
+#define APP_VERSION "0.0.423"
+#define APP_PROTOCOL_VERSION 5u
 #define APP_VERSION_BYTES 32u
 #endif

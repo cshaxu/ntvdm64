@@ -10,108 +10,9 @@
 #include <stdlib.h>
 #include "conapi.h"
 #include "ntvdm-exe/session/session.h"
+#include "console_client.h"
+#include "product-abi/console_io.h"
 
-#undef SetConsoleScreenBufferSize
-#undef SetConsoleWindowInfo
-
-/* DIVERGENCE(ADAPTER-WIN32-052): OpenNT ntcon/server/output.c's
- * ResizeScreenBuffer copies rows; it never reflows paragraphs. ConPTY also
- * resizes/reflows storage through SetConsoleWindowInfo. Keep the original
- * cell-grid rule at both reached calls. Private SCREEN_INFORMATION/ROW and
- * CSR/GDI prevent whole-unit composition; no guest or persistent screen
- * state is added. The public handle must support the reached read/write
- * operations. Native failures and incomplete transfers remain failures. */
-static BOOL console_grid_transfer(BOOL write, HANDLE output, CHAR_INFO *cells,
-    COORD size, SMALL_RECT rect)
-{
-    COORD origin = {0, 0};
-    SMALL_RECT actual = rect;
-    BOOL ok = write ? WriteConsoleOutputW(output, cells, size, origin, &actual)
-                    : ReadConsoleOutputW(output, cells, size, origin, &actual);
-    if (ok && (actual.Left != rect.Left || actual.Top != rect.Top ||
-        actual.Right != rect.Right || actual.Bottom != rect.Bottom)) {
-        SetLastError(write ? ERROR_WRITE_FAULT : ERROR_READ_FAULT);
-        return FALSE;
-    }
-    return ok;
-}
-
-static BOOL console_resize_grid(HANDLE output, const COORD *size,
-    BOOL absolute, const SMALL_RECT *window)
-{
-    CONSOLE_SCREEN_BUFFER_INFO before, after;
-    CHAR_INFO *saved, *resized = NULL;
-    SMALL_RECT rect;
-    COORD cursor;
-    int top, rows, columns, x, y;
-    BOOL ok;
-    DWORD error;
-
-    if (!GetConsoleScreenBufferInfo(output, &before) ||
-        (size && (size->X <= 0 || size->Y <= 0 ||
-         (size->X == before.dwSize.X && size->Y == before.dwSize.Y))))
-        return size ? SetConsoleScreenBufferSize(output, *size)
-                    : SetConsoleWindowInfo(output, absolute, window);
-    saved = (CHAR_INFO *)calloc((size_t)before.dwSize.X * before.dwSize.Y,
-        sizeof(*saved));
-    if (!saved) { SetLastError(ERROR_NOT_ENOUGH_MEMORY); return FALSE; }
-    rect.Left = rect.Top = 0;
-    rect.Right = before.dwSize.X - 1; rect.Bottom = before.dwSize.Y - 1;
-    ok = console_grid_transfer(FALSE, output, saved, before.dwSize, rect);
-    if (ok) ok = size ? SetConsoleScreenBufferSize(output, *size)
-                      : SetConsoleWindowInfo(output, absolute, window);
-    if (ok) ok = GetConsoleScreenBufferInfo(output, &after);
-    if (ok && (before.dwSize.X != after.dwSize.X ||
-               before.dwSize.Y != after.dwSize.Y)) {
-        resized = (CHAR_INFO *)calloc((size_t)after.dwSize.X * after.dwSize.Y,
-            sizeof(*resized));
-        if (!resized) { SetLastError(ERROR_NOT_ENOUGH_MEMORY); ok = FALSE; }
-        if (ok) {
-            /* Original ResizeScreenBuffer: retain the cursor-containing rows,
-             * clip columns, extend each row's final attribute, blank new rows. */
-            top = before.dwCursorPosition.Y >= after.dwSize.Y
-                ? before.dwCursorPosition.Y - after.dwSize.Y + 1 : 0;
-            rows = before.dwSize.Y - top;
-            if (rows > after.dwSize.Y) rows = after.dwSize.Y;
-            columns = before.dwSize.X < after.dwSize.X
-                ? before.dwSize.X : after.dwSize.X;
-            for (y = 0; y < after.dwSize.Y; ++y) {
-                for (x = 0; x < after.dwSize.X; ++x) {
-                    CHAR_INFO *cell = &resized[y * after.dwSize.X + x];
-                    if (y < rows && x < columns)
-                        *cell = saved[(y + top) * before.dwSize.X + x];
-                    else {
-                        cell->Char.UnicodeChar = L' ';
-                        cell->Attributes = y < rows
-                            ? saved[(y + top + 1) * before.dwSize.X - 1].Attributes
-                            : before.wAttributes;
-                    }
-                }
-            }
-            rect.Right = after.dwSize.X - 1; rect.Bottom = after.dwSize.Y - 1;
-            ok = console_grid_transfer(TRUE, output, resized, after.dwSize, rect);
-            cursor = before.dwCursorPosition;
-            if (cursor.X >= after.dwSize.X) cursor.X = 0;
-            if (cursor.Y >= after.dwSize.Y) cursor.Y = after.dwSize.Y - 1;
-            if (ok) ok = SetConsoleCursorPosition(output, cursor);
-        }
-    }
-    error = GetLastError();
-    free(resized); free(saved);
-    SetLastError(error);
-    return ok;
-}
-
-BOOL WINAPI MvdmSetConsoleScreenBufferSize(HANDLE output, COORD size)
-{
-    return console_resize_grid(output, &size, FALSE, NULL);
-}
-
-BOOL WINAPI MvdmSetConsoleWindowInfo(HANDLE output, BOOL absolute,
-    const SMALL_RECT *window)
-{
-    return console_resize_grid(output, NULL, absolute, window);
-}
 
 /*
  * The historical Console Server owned the allocation and lifetime of the VDM
@@ -125,11 +26,11 @@ BOOL WINAPI GetConsoleKeyboardLayoutNameA(LPSTR layout_name)
 {
     /* DIVERGENCE(ADAPTER-WIN32-034): the NT4 Console Server returned the
      * active console keyboard-layout name through this source-facing BOOL
-     * API. Modern public Win32 no longer exposes that Console Server entry,
-     * but GetKeyboardLayoutNameA has the same fixed-layout-name result and
-     * failure contract for the process input locale. Keep the original name
-     * and buffer ownership at the MVDM boundary; do not add a console broker
-     * or a separate keyboard-layout cache. */
+     * API. The modern kernel32 exports exist but fail on the tested Console;
+     * the retained fallback queries this thread's input locale. Its buffer
+     * shape matches, but that does not prove active Console-layout identity.
+     * Keep this existing fallback until the input-owner layout contract is
+     * verified; do not silently substitute a frontend thread or cache. */
     return GetKeyboardLayoutNameA(layout_name);
 }
 
@@ -244,11 +145,14 @@ static int present_text_invalidation(HANDLE output, const SMALL_RECT *rect)
 BOOL WINAPI InvalidateConsoleDIBits(HANDLE output, PSMALL_RECT rect)
 {
     int text_result;
+    int graphics_result;
 
     if (rect == NULL) {
         SetLastError(ERROR_INVALID_PARAMETER);
         return FALSE;
     }
+    graphics_result=ntvdm_console_graphics_invalidate(output,rect);
+    if (graphics_result) return graphics_result>0;
     /* DIVERGENCE(ADAPTER-WIN32-048): public Console lacks the NT4 shared VDM
      * text-buffer presentation server.  Re-present the exact original text
      * buffer rectangle at the same invalidation boundary.  This does not
@@ -270,6 +174,8 @@ BOOL WINAPI InvalidateConsoleDIBits(HANDLE output, PSMALL_RECT rect)
 
 BOOL WINAPI SetConsolePalette(HANDLE output, HPALETTE palette, DWORD flags)
 {
+    int result=ntvdm_console_graphics_palette(output,palette,flags);
+    if (result) return result>0;
     /* DIVERGENCE(ADAPTER-WIN32-043): this is an NT4 Console Server operation
      * over a graphics screen buffer, not a public Console palette API.  Do
      * not report success for an unpresented copied palette. */
@@ -372,87 +278,12 @@ BOOL WINAPI SetConsoleKeyShortcuts(BOOL set, BYTE reserve_keys,
 
 HANDLE GetConsoleInputWaitHandle(VOID)
 {
-    /* DIVERGENCE(ADAPTER-WIN32-030): NT4 supplied a Console Server wait
-     * object through this source-facing call.  A modern console input handle
-     * is itself waitable, so preserve the call shape and return the process
-     * console input endpoint without manufacturing an event or MVDM token. */
-    return GetStdHandle(STD_INPUT_HANDLE);
+    /* The DOS frontend supplies a typed synchronize-only readiness event.
+     * No-channel callers retain the existing process Console wait handle. */
+    return ntvdm_console_input_wait_handle();
 }
 
-/* DIVERGENCE(ADAPTER-WIN32-051): OpenNT's Console Server serializes
- * `PrependInputBuffer` and `ReadInputBuffer` under its Console lock. Public
- * Win32 exposes only append-style WriteConsoleInputW. Preserve the reached
- * VDM-only prepend operation in a process-local FIFO ahead of public CONIN$;
- * original nt_event remains the only consumer and waits on this event beside
- * the existing public input and suspend handles. */
-typedef struct mvdm_console_prepend_node {
-    struct mvdm_console_prepend_node *next;
-    HANDLE input;
-    DWORD first;
-    DWORD count;
-    INPUT_RECORD records[1];
-} mvdm_console_prepend_node;
-
-static INIT_ONCE mvdm_console_prepend_once = INIT_ONCE_STATIC_INIT;
-static CRITICAL_SECTION mvdm_console_prepend_lock;
-static HANDLE mvdm_console_prepend_event;
-static mvdm_console_prepend_node *mvdm_console_prepend_head;
 static volatile LONG mvdm_console_alt_enter_pending;
-
-static BOOL CALLBACK initialize_console_prepend_queue(PINIT_ONCE once,
-    PVOID parameter, PVOID *context)
-{
-    (void)once;
-    (void)parameter;
-    (void)context;
-    InitializeCriticalSection(&mvdm_console_prepend_lock);
-    mvdm_console_prepend_event = CreateEventW(NULL, TRUE, FALSE, NULL);
-    return mvdm_console_prepend_event != NULL;
-}
-
-static BOOL ensure_console_prepend_queue(VOID)
-{
-    return InitOnceExecuteOnce(&mvdm_console_prepend_once,
-        initialize_console_prepend_queue, NULL, NULL);
-}
-
-HANDLE WINAPI MvdmConsoleInputPrependWaitHandle(VOID)
-{
-    if (!ensure_console_prepend_queue()) return NULL;
-    return mvdm_console_prepend_event;
-}
-
-static DWORD read_console_prepend(HANDLE input, PINPUT_RECORD records,
-    DWORD count, LPDWORD read, BOOL remove)
-{
-    mvdm_console_prepend_node *node;
-    DWORD available;
-
-    if (!ensure_console_prepend_queue()) return (DWORD)-1;
-    EnterCriticalSection(&mvdm_console_prepend_lock);
-    node = mvdm_console_prepend_head;
-    if (node == NULL || node->input != input) {
-        LeaveCriticalSection(&mvdm_console_prepend_lock);
-        return 0u;
-    }
-    available = node->count < count ? node->count : count;
-    if (available != 0u && records != NULL)
-        CopyMemory(records, &node->records[node->first],
-            (SIZE_T)available * sizeof(*records));
-    if (remove && available != 0u) {
-        node->first += available;
-        node->count -= available;
-        if (node->count == 0u) {
-            mvdm_console_prepend_head = node->next;
-            free(node);
-        }
-        if (mvdm_console_prepend_head == NULL)
-            ResetEvent(mvdm_console_prepend_event);
-    }
-    LeaveCriticalSection(&mvdm_console_prepend_lock);
-    if (read != NULL) *read = available;
-    return 1u;
-}
 
 /* DIVERGENCE(ADAPTER-WIN32-047): the NT4 Console Server handled WM_SYSKEY
  * Alt+Enter before it reached the VDM input buffer.  Modern public Console
@@ -484,13 +315,8 @@ BOOL WINAPI ReadConsoleInputExW(HANDLE input, PINPUT_RECORD records, DWORD count
                                 LPDWORD read, USHORT flags)
 {
     DWORD available;
-    DWORD local_result;
     INPUT_RECORD raw_record;
     if ((flags & ~CONSOLE_READ_VALID) != 0u) { SetLastError(ERROR_INVALID_PARAMETER); return FALSE; }
-    local_result = read_console_prepend(input, records, count, read,
-        (flags & CONSOLE_READ_NOREMOVE) == 0u);
-    if (local_result == (DWORD)-1) return FALSE;
-    if (local_result != 0u) return TRUE;
     if (count == 0u)
         return (flags & CONSOLE_READ_NOREMOVE) != 0u ?
             PeekConsoleInputW(input, records, count, read) :
@@ -526,44 +352,9 @@ BOOL WINAPI ReadConsoleInputExW(HANDLE input, PINPUT_RECORD records, DWORD count
 BOOL WINAPI WriteConsoleInputVDMW(HANDLE input, PINPUT_RECORD records, DWORD count,
                                   LPDWORD written)
 {
-    mvdm_console_prepend_node *node;
-    DWORD mode;
-    size_t bytes;
-
-    if (written != NULL) *written = 0u;
-    if (!GetConsoleMode(input, &mode) || (count != 0u && records == NULL))
-        return FALSE;
-    if (count == 0u) return TRUE;
-    if ((size_t)count > (SIZE_MAX - offsetof(mvdm_console_prepend_node,
-                                              records)) / sizeof(*records)) {
-        SetLastError(ERROR_NOT_ENOUGH_MEMORY);
-        return FALSE;
-    }
-    bytes = offsetof(mvdm_console_prepend_node, records) +
-        (size_t)count * sizeof(*records);
-    node = (mvdm_console_prepend_node *)malloc(bytes);
-    if (node == NULL) {
-        SetLastError(ERROR_NOT_ENOUGH_MEMORY);
-        return FALSE;
-    }
-    if (!ensure_console_prepend_queue()) {
-        free(node);
-        return FALSE;
-    }
-    node->next = NULL;
-    node->input = input;
-    node->first = 0u;
-    node->count = count;
-    CopyMemory(node->records, records, (SIZE_T)count * sizeof(*records));
-    EnterCriticalSection(&mvdm_console_prepend_lock);
-    /* Every VDM write is a prepend. A newer return must be consumed before
-     * an older returned batch, matching repeated PrependInputBuffer calls. */
-    node->next = mvdm_console_prepend_head;
-    mvdm_console_prepend_head = node;
-    SetEvent(mvdm_console_prepend_event);
-    LeaveCriticalSection(&mvdm_console_prepend_lock);
-    if (written != NULL) *written = count;
-    return TRUE;
+    /* ADAPTER-WIN32-051: original atomic Console prepend, executed by the
+     * authenticated frontend; no worker-only returned-key queue. */
+    return ntvdm_console_prepend_keys(input,records,count,written);
 }
 
 /* DIVERGENCE(ADAPTER-WIN32-050): OpenNT Console Server maintained this
@@ -588,7 +379,31 @@ int WINAPI ShowConsoleCursor(HANDLE output, BOOL show)
 
 BOOL WINAPI VDMConsoleOperation(DWORD operation, LPVOID data)
 {
-    HWND window = GetConsoleWindow();
+    HWND window;
+    DWORD query;
+    LONG values[4]={0};
+    int remote;
+    if (!data) { SetLastError(ERROR_CALL_NOT_IMPLEMENTED);return FALSE; }
+    switch (operation) {
+    case VDM_IS_ICONIC: query=CONSOLE_WINDOW_ICONIC;break;
+    case VDM_CLIENT_RECT: query=CONSOLE_WINDOW_CLIENT_RECT;break;
+    case VDM_CLIENT_TO_SCREEN:
+        query=CONSOLE_WINDOW_CLIENT_TO_SCREEN;
+        values[0]=((POINT *)data)->x;values[1]=((POINT *)data)->y;break;
+    default: SetLastError(ERROR_CALL_NOT_IMPLEMENTED);return FALSE;
+    }
+    remote=ntvdm_console_window_query(query,values);
+    if (remote>=0) {
+        if (!remote) return FALSE;
+        if (operation==VDM_IS_ICONIC) *(BOOL *)data=values[0];
+        else if (operation==VDM_CLIENT_RECT) {
+            RECT *rect=data;
+            rect->left=values[0];rect->top=values[1];
+            rect->right=values[2];rect->bottom=values[3];
+        } else { ((POINT *)data)->x=values[0];((POINT *)data)->y=values[1]; }
+        return TRUE;
+    }
+    window = GetConsoleWindow();
     if (window == NULL || data == NULL) { SetLastError(ERROR_CALL_NOT_IMPLEMENTED); return FALSE; }
     switch (operation) {
     case VDM_IS_ICONIC: *(BOOL *)data = IsIconic(window); return TRUE;

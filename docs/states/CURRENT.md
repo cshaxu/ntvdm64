@@ -27,7 +27,68 @@
 
 S2 begins with a bounded source/owner audit, then protocol implementation and
 production wiring; declaration-only tests cannot close this packet.
-No new user-facing frontend capability is claimed at admission.
+Owner's final approval: each launcher and its target are one lifetime pair;
+neither may be orphaned when its counterpart exits. Between nesting levels,
+retain original OpenNT waiting/re-entry/exit, not a new recursive process-tree
+kill policy. Add matching launcher cleanup, not a guest task-kill mechanism.
+An unrecoverable guest fault may end its worker and
+all tasks inside it, including a DOS ancestor; recoverable interactive parents
+outside that worker survive. Normal completion must not be escalated into worker
+failure. This supersedes the earlier unconditional same-worker parent-survival
+requirement and resolves that decision. Frontend identity, execution ancestry
+and worker membership remain distinct; unrelated workers/broker are preserved.
+The proposal's revised fault matrix remains an S2 exit gate; /c chain exits alone
+do not prove interactive-parent recovery. An empty live worker remains permitted.
+Current S2 evidence is retained in the
+[boundary ledger](../etc/evidence/m0-t423-s2-console-boundary-ledger.md);
+it is the detailed record of superseded attempts, not an additional status.
+
+## S2 Verified Scope And Remaining Gates
+
+Detailed runs, failed attempts and artifact identities remain in the linked
+boundary ledger; this status records only the current disposition.
+
+- The first S2 production delivery implements authenticated root-frontend association, copied
+  Console operations, original-command rebinding and per-layer launcher/target
+  cleanup. Nested run16 instances do not acquire a second frontend. BaseSrv
+  carries association/capabilities, never input records or video frames.
+- Protocol 9 covers input, text/stream/cell operations, code pages, title,
+  font, display-mode and pointer boundaries. Original graphics painters retain
+  worker-local bitmap/mutex backing and send copied indexed frames/palettes.
+  Real guest pixel/palette and immediate graphics-to-text final-output tests
+  pass. This does not implement kvm-window rendering or the display flag.
+- Native identity, malformed-request, cancellation, route/channel retirement
+  and pair-lifetime fixtures pass. Selected real worker/broker/frontend/inner-
+  launcher and middle-native-pair failures pass, including actual interactive
+  parent recovery and unrelated-worker output. Middle-pair recovery is tested
+  with the descendant DOS task alive, without a second injected fault.
+- DOS17, four native/DOS nesting and typeahead routes, and real guest
+  keyboard/mouse callback tests pass on the recorded candidates. Actual
+  Ctrl+C/Break and direct/nested Console close also pass. These checks do not
+  certify physical focus/clipping cleanup, logoff, or Window hotkeys.
+- The existing worker-thread keyboard-layout fallback is not equivalent to
+  original Console-selected layout. Native historical Console queries fail on
+  this host; a disposable thread-local experiment proves the distinction.
+  Its ownership decision remains open; no speculative replacement was added.
+- Owner waives manual/foreground/playability acceptance for WINMINE, SOL and
+  WRITE in T423 only. Separate headless launch/liveness/fault comparisons remain
+  required. Their known NETWORK.DRV modals are recorded baseline frontiers,
+  not full WOW functionality passes. DOS and native lifecycle gates remain.
+- The latest incremental x86 build succeeds. The refreshed DOS17 run uses
+  m0-t423-s2-delivery-reconcile-dos17 and passes all 17 actual-output cases.
+  Win32-to-DOS-to-Win32 inner-target and inner-launcher loss both pass:
+  DOS runs MEM and finishes, outer interactive CMD accepts new input, and the
+  root returns 23. Other unexecuted fault cases are not counted as passes.
+
+S2 still requires the complete Console-owner and per-layer failure checklist,
+and remaining physical pointer/layout dispositions. The first production P
+delivers the verified subset, not S2 closure. Hidden native Console remains S3;
+display/Window remains S4, Window mouse S5, and final owner audit S6.
+
+O:/winnt now contains the tested coherent six-file S2 package. Its exact hashes,
+test prefixes and bounded delivery scope are in the boundary ledger's first
+production delivery record. The recoverable S1 set and incremental caches stay
+under build. Remaining work continues in S2; do not re-admit S3 yet.
 
 ## Current Technical Baseline
 
@@ -36,8 +97,10 @@ and non-inherited Ctrl+C/Break completion handling, plus the authorized dtmgr
 layout correction. Its [evidence](../etc/evidence/m0-t423-s1-restart-lifecycle.md)
 records DOS17 and lifecycle passes and the specific owner build-only exception
 for incomplete current verification. That exception is not a WOW runtime pass.
-O:/winnt contains the final six-file S1 build; temporary SYSTEM.INI changes were
-restored. S2 has not yet changed production or deployed files.
+Temporary SYSTEM.INI changes were restored. The first S2 production delivery
+supersedes S1 at O:/winnt with protocol-5 BaseSrv and protocol-9 direct Console
+transport; ordinary configuration and guest media remain unchanged. S1 is
+retained as the recoverable pre-migration package, not the current deployment.
 
 ## S1 Closure Record
 

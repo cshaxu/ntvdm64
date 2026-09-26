@@ -849,7 +849,7 @@ int main(int argc, char **argv)
         snprintf(geometry_path,sizeof(geometry_path),"%s.geometry.txt",argv[3]);
         if(!ok) {
             DWORD error=GetLastError(); GetConsoleScreenBufferInfo(output,&info);
-            geometry=fopen(geometry_path,"w");
+            if(fopen_s(&geometry,geometry_path,"w")!=0)geometry=NULL;
             if(geometry){fprintf(geometry,"FAILED step=%u error=%lu buffer=%d,%d view=%d,%d,%d,%d\n",step,error,info.dwSize.X,info.dwSize.Y,info.srWindow.Left,info.srWindow.Top,info.srWindow.Right,info.srWindow.Bottom);fclose(geometry);}
             return 93;
         }
@@ -859,7 +859,7 @@ int main(int argc, char **argv)
            info.srWindow.Bottom-info.srWindow.Top+1!=5 ||
            info.dwCursorPosition.Y!=40) return 94;
         snprintf(geometry_path,sizeof(geometry_path),"%s.geometry.txt",argv[3]);
-        geometry=fopen(geometry_path,"w"); if(!geometry)return 95;
+        if(fopen_s(&geometry,geometry_path,"w")!=0 || !geometry)return 95;
         fprintf(geometry,"buffer=%d,%d view=%d,%d,%d,%d cursor=%d,%d prefill=40\n",
             info.dwSize.X,info.dwSize.Y,info.srWindow.Left,info.srWindow.Top,
             info.srWindow.Right,info.srWindow.Bottom,info.dwCursorPosition.X,info.dwCursorPosition.Y);
@@ -1063,6 +1063,21 @@ int main(int argc, char **argv)
             }
             {
                 char control[16];
+                if (GetEnvironmentVariableA("MVDM_OBSERVER_CLOSE_CONSOLE",NULL,0)) {
+                    HWND window=GetConsoleWindow();
+                    char desktop_name[128];
+                    DWORD name_bytes;
+                    if (!GetUserObjectInformationA(GetThreadDesktop(GetCurrentThreadId()),
+                        UOI_NAME,desktop_name,sizeof(desktop_name),&name_bytes) ||
+                        strncmp(desktop_name,"NTVDMConsoleTest-",sizeof("NTVDMConsoleTest-")-1))
+                        return 96; /* Never close a Console on the user's desktop. */
+                    /* This observer owns the isolated test Console. The
+                     * external controller retains process handles and checks
+                     * cleanup; the native close also ends this observer. */
+                    if (!window || !PostMessageW(window,WM_CLOSE,0,0)) return 96;
+                    Sleep(10000);
+                    return 97; /* Native close did not end the container. */
+                }
                 DWORD length = GetEnvironmentVariableA("MVDM_OBSERVER_SEND_CONTROL",
                     control, sizeof(control));
                 if (length) {
@@ -1079,7 +1094,7 @@ int main(int argc, char **argv)
                      * guest text/exit assertions prove the session survived. */
                     if (snprintf(path, sizeof(path), "%s.generated-control.txt", argv[3]) < 0)
                         return 92;
-                    witness = fopen(path, "w");
+                    if (fopen_s(&witness, path, "w") != 0) return 92;
                     if (!witness) return 92;
                     fprintf(witness, "generated-control=%lu\n", event);
                     fclose(witness);

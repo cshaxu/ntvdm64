@@ -1,5 +1,16 @@
 # mvdm
 
+MVDM-HOST-DIV-311: `softpc.new/host/src/nt_event.c::nt_block_event_thread`
+finishes pending original video-mode selection before its existing final
+`update_alg.calc_update` at the stopped-guest handoff. `nt_graph.c` defers
+selection by `nt_ega.h::EGA_TICK_DELAY`; a task can complete with that work
+pending and otherwise paint through the previous graphics painter. The bounded
+loop calls the unchanged original video tick, not a guest timer/interrupt,
+and adds no scheduler, sleep, replacement painter or frontend policy.
+Source/caller evidence and current verification are recorded in the
+[S2 ledger](../../docs/etc/evidence/m0-t423-s2-console-boundary-ledger.md).
+This change remains under validation, not a claimed delivery.
+
 MVDM-HOST-DIV-310 (T422 S2, unaccepted): the CPU40 FastBOP carrier binds the
 three original native-monitor far-call shapes (inline service, WOW dispatch,
 callback return). `dpmi32/modesw.c` also publishes the original `RM_BIT_MASK`

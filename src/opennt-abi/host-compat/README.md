@@ -6,6 +6,106 @@ product composition no longer exists.
 
 ## Registered divergences
 
+| ID | Original boundary | Unavailable dependency | Retained binding and verification |
+| --- | --- | --- | --- |
+| ADAPTER-WIN32-059 | config/nt_det/nt_event GetConsoleDisplayMode and SetConsoleDisplayMode; OpenNT ntcon/client/private.c | Original client needs private CSR/Console server. | Same-shaped conapi names bind to console_client; protocol 9 copies flags/dimensions to run16's native APIs. No-channel calls stay native; no fullscreen emulation or mirror body changes. Native-result and malformed-payload tests accompany the binding. |
+| ADAPTER-WIN32-058 | nt_graph CreateConsoleScreenBuffer/SetConsoleActiveScreenBuffer/CloseHandle and palette/invalidation; ntcon/server/bitmap.c provides shared bitmap/mutex. | Native graphics allocation fails 87; CSR section/client/server ownership cannot compose. | `ntvdm-exe/win32/console_bitmap.c` retains local packed backing and independent painter mutex; `console_graphics.c` binds original calls and copies frames introduced in protocol 8. Context follows the existing console-client teardown, no worker Window/library. Real-channel tests cover creation, palette, pixels, invalid rectangle and text/close; `tests/observation/verify-video-frame-delivery.ps1` proves real guest pixels/palette and subsequent text retirement. Window rendering remains S4 work. |
+
+T423 S2 routes the original COMMAND input-code-page query and SoftPC output-
+code-page queries through the same authenticated frontend channel.
+`conapi.h` and `winconp.h` retain their caller signatures via MvdmGetConsoleCP /
+MvdmGetConsoleOutputCP; run16 calls the native APIs. No-channel callers remain
+native. The transport fixture checks both results and sequence advancement;
+the original keyboard and conversion algorithms are not modified.
+
+Protocol 4 additionally carries the three already-supported VDMConsoleOperation
+queries (iconic state, client rectangle and client-to-screen coordinates).
+The facade retains its original call shape, copies LONG scalars to run16 and
+keeps the native fallback only when no frontend is bound. No HWND is transported;
+unsupported operations remain unsupported. Guest mouse policy is unchanged.
+
+Protocol 5 binds selected original ANSI title reads/writes through
+`include/console_title.h` (conapi include plus scoped COMMAND build include).
+Original title construction remains in the mirror; run16 calls native title
+APIs. The current 256/MAX_PATH/PIF callers fit the existing bounded payload;
+oversize input is explicitly rejected, not silently truncated. Zero return,
+native error and untouched output are tested against native calls. No private
+title lifecycle/cache or guest modification is introduced.
+
+Protocol 6 forwards the selected original mouse caller's GetCursorPos,
+SetCursorPos, GetClipCursor and ClipCursor through conapi.h to the existing
+DOS frontend channel. The native USER operations run in run16; original
+nt_mouse.c scaling, warp and focus policy remain unchanged. Copied signed
+LONG coordinates and null clipping release retain the native API shapes.
+No-channel callers remain native. This is a presentation-owner move, not a
+replacement USER cursor implementation. Real query/transport tests and a
+mock-USER production-dispatch test distinguish native availability from wire
+correctness; neither alone certifies interactive clipping or Window mouse.
+
+Protocol 7 additionally carries GetCurrentConsoleFont and GetConsoleFontSize
+from the unchanged original nt_graph.c cursor algorithm. Native queries run
+against the frontend output buffer; copied font index and pixel dimensions
+retain the original public API shapes and failure results. No font selection,
+cursor policy, CSR provider or mirror change is introduced. Unbound callers
+remain native; real-channel fixtures cover both maximum-window modes, font
+size, native invalid-index behavior and local fallback.
+
+Protocol 8 adds copied video-frame transport (not an additional original API
+replacement algorithm). The worker sender releases its painter lock before
+transport; run16 assembles validated packed rows and copied RGB palette.
+`conapi.h` now binds the original graphics create/activate/close names;
+console_compat routes palette/invalidation to the same worker-local backing.
+This transport changes no mirror body or KVM library. Real pipe API fixtures
+and actual guest frame delivery pass; the separately registered DIV-311 final
+paint repair preserves the last text after graphics exit. Window rendering
+remains a separate S4 acceptance gate.
+
+T423 S2 additionally redirects unchanged stream, screen-info, cursor,
+fill, scroll, attribute and A/W rectangle read/write call shapes in `include/conapi.h` to the corresponding
+`Mvdm*` bindings in `ntvdm-exe/win32/console_client.c`.
+Original `mvdm/softpc.new/host/src/nt_graph.c::host_stream_io_update` retains
+its stream algorithm. The owner-approved frontend split requires presentation
+in run16 rather than the caller process; importing Console Server/CSR is not
+an admitted alternative. The bounded direct channel returns native result,
+error and byte count and never retries through local presentation on transport
+failure. WOW/no-channel and non-Console handles retain the existing native API
+route. See the T423 S2 boundary ledger for partial-wiring and test limitations;
+this seam does not claim complete input or screen-operation migration. The
+native `tests/app/console_client_test.c` uses different caller/frontend screen
+buffers to prove remote effects, returned geometry, native errors and no local
+fallback after EOF; only session/broker attachment is stubbed in that fixture.
+Rectangle marshalling follows `OpenNT/windows/core/ntcon/client/iostubs.c`
+ReadConsoleOutputInternal/WriteConsoleOutputInternal buffer clipping and copied
+cells, replacing unavailable CSR capture with bounded authenticated tiles.
+Native frontend APIs still own character conversion and screen clipping; no
+Console Server implementation is imported. The fixed-width cell layout is
+compile-time checked against CHAR_INFO. Whole-screen-outside requests use the
+real API error/rectangle result, not a fabricated common read/write outcome.
+
+T423 S2 moves the existing ADAPTER-WIN32-052 row-preserving resize body from
+worker console_compat.c to this family's `console_grid.c`, declared by
+`include/console_grid.h`. This is one stateless implementation, linked to both
+native owners: DOS calls execute through the run16 dispatcher, while the
+existing no-channel native route retains the same binding. It is not a new
+generic helper or a second renderer. Worker-facing MvdmSetConsoleScreenBufferSize
+and MvdmSetConsoleWindowInfo remain in console_client.c as marshaling only.
+The original algorithm is unchanged apart from its exported function name;
+private CSR/SCREEN_INFORMATION/ROW dependencies remain excluded. The real-pipe
+fixture proves shrink row selection, cursor clamp, expansion and unchanged
+caller-buffer geometry on a normal Console in the private desktop observer.
+
+The same T423 S2 channel now binds ReadConsoleInputW/PeekConsoleInputW to run16.
+Only explicit scalar key/mouse/window/menu/focus fields are copied; native
+union padding and handles are not serialized. The original worker-side
+ReadConsoleInputExW Alt+Enter stage, RDP normalization and guest dispatch
+remain selected. No reader prefetch queue is added. The original event loop
+uses its original two waits; a stable worker-local input notification represents
+the authenticated frontend's readiness. Returned BIOS/history keys go through
+the same channel to native WriteConsoleInputVDMW in run16, not a private queue.
+The source callers return at most 100 keys, within one bounded atomic message.
+Other native-handoff/remaining API checks are still required for S2 closure.
+Frontend teardown cancels synchronous reads and drains outstanding pipe I/O.
+
 | ID | Original purpose | Reason | Implementation | Files |
 | --- | --- | --- | --- | --- |
 | ADAPTER-WIN32-052 | NT4 Console Server resizes by copying/clipping fixed cells, without paragraph reflow. | Modern ConPTY may reflow text and move its cursor through buffer and window changes; original SoftPC subsequently restores those altered cells with its original cursor position. | Same-shaped bindings retain the reached `ResizeScreenBuffer` row-copy, attribute-extension and cursor-clamp rules around native geometry operations. Native failures and partial-transfer failures remain explicit; no persistent screen model or CPU/mirror edit. Original owner: OpenNT `windows/core/ntcon/server/{output,getset}.c`; private CSR/GDI and `SCREEN_INFORMATION/ROW` prevent whole-unit composition. | `include/conapi.h`, `source/console_compat.c`; `tests/observation/console_resize_contract.c` |
@@ -16,11 +116,11 @@ product composition no longer exists.
 | ADAPTER-WIN32-026 | Bind the reached original `RtlCreateEnvironment`, `RtlDestroyEnvironment` and `RtlSetEnvironmentVariable` APIs. | NT4 supplied mutable, ordered environment blocks through its private RTL/PEB composition; modern NTDLL exports the historical names, but cannot safely be mixed with the selected original body. | The original algorithm is now `../../opennt-host/base/ntos/rtl/environ.c`. The adapter owns only a page-backed private PEB snapshot, finite VM declarations, the selected-consumer private symbol domain, and default-off phase/status observation; it neither parses nor mutates a MULTI_SZ block. | `source/{opennt_support_rtl,mvdm_base_vdm_environment}.c`; `../../opennt-host/base/ntos/rtl/{environ.c,environapi.h,ntrtlp.h,zwapi.h}`; consumers `../../mvdm-host/dos/command/cmdenv.c`, `../../opennt-host/base/win32/client/vdm.c` |
 | ADAPTER-WIN32-046 | Original Base `BaseCheckVDM` gives `BaseCreateVDMEnvironment` output to a newly created `ntvdm.exe` child. | The selected CLI directly calls original SoftPC in its own process, so there is no child creation boundary at which the original block is inherited. | Invoke the retained original Base function unchanged, install its full projected block only around the original MVDM entry, then restore the app block. No variable is filtered, capped, or synthesized. | `include/mvdm_base_vdm_environment.h`; `source/mvdm_base_vdm_environment.c`; `../../opennt-host/base/win32/client/vdm.c`; `../../../app/entry.c` |
 | ADAPTER-WIN32-027 | Original SoftPC keyboard conversion calls the fixed-buffer `RtlOemToUnicodeN` form. | The selected OpenNT declaration subset now exposes the original contract, but the modern public SDK does not provide its complete historical source binding. | Preserve `NTSTATUS`, byte-count, fixed-buffer and OEM code-page semantics with public `MultiByteToWideChar`; the caller retains ownership of both host-local buffers. | `source/opennt_support_rtl.c`; declaration mirror `../../opennt-host/public/sdk/inc/ntrtl.h`; caller `../../mvdm-host/softpc.new/host/src/nt_keycd.c` |
-| ADAPTER-WIN32-030 | Original SoftPC host input calls NT4 Console Server `GetConsoleInputWaitHandle`, `ReadConsoleInputExW`, `WriteConsoleInputVDMW` and reached VDM input/mouse coordinate operations. | Modern public console APIs expose input records and window coordinates but not the private server exports. | Retain exact caller names/parameters; use the waitable `STD_INPUT_HANDLE`, `Read/PeekConsoleInputW`, `VDM_IS_ICONIC`, `VDM_CLIENT_RECT` and `VDM_CLIENT_TO_SCREEN`. ADAPTER-WIN32-051 supplies the sole missing prepend queue operation. Every other selector fails with `ERROR_CALL_NOT_IMPLEMENTED` and remains display/fullscreen work. | `source/console_compat.c`; declaration carriers `include/conapi.h`, `../../opennt-abi/source/public/internal/base/inc/conroute.h`; callers `../../mvdm-host/softpc.new/host/src/{nt_event.c,nt_mouse.c}` |
+| ADAPTER-WIN32-030 | Original SoftPC host input calls NT4 Console Server input and mouse operations. | Public record/coordinate APIs compose; historical VDM prepend availability is checked separately. | Retain caller shapes; DOS read/peek and readiness use the authenticated run16 channel, no-channel callers retain native input. ADAPTER-WIN32-051 binds native prepend. Unsupported display selectors fail explicitly. | `../../ntvdm-exe/win32/console_compat.c`, `include/conapi.h`; original `nt_event.c`, `nt_mouse.c` |
 | ADAPTER-WIN32-031 | Original host-video callers use the NT4 Console Server DIB invalidation, output-palette and event-active call shapes. | Modern public Console APIs expose neither the DIB/palette operation nor the paired Console Server event protocol. | Retain the original names and parameter forms.  A bound session forwards typed dirty-rectangle/palette/activity events to an app-owned presenter; no presenter returns `ERROR_CALL_NOT_IMPLEMENTED` for BOOL operations, while the original void activity form only records session-local activity.  This adapter creates no controller, window or GUI. | `include/conapi.h`, `source/console_compat.c`, `../../../session/{session.c,session.h}` |
 | ADAPTER-WIN32-032 | Original SoftPC fullscreen/detach paths register a VDM with the private NT4 Console Server using `RegisterConsoleVDM`. | The original operation duplicates hardware events and maps VDM state/text sections inside Console Server; modern public Console APIs expose neither that registration protocol nor an equivalent state mapping. | Preserve the complete function name and pointer-bearing ABI. For the selected windowed CPU40 path, acquire only the original caller's required host-local text buffer from the session-owned bounded text-plane contract; return a zero-length/null hardware-state mapping, which the original source accepts when fullscreen hardware is unavailable. `CONSOLE_UNREGISTER_VDM` detaches presentation but deliberately retains that caller-visible buffer until session disposal or safe replacement, matching the original pointer lifetime across `doNullRegister()`. App presentation can obtain only a copy through session, never this adapter-facing pointer. Fullscreen/controller event and shared Console-Server mappings remain unavailable. | `include/conapi.h`, `source/console_compat.c`; callers `../../../mvdm-host/softpc.new/host/src/{nt_det.c,nt_fulsc.c}`; `../../../session/session.[ch]` |
 | ADAPTER-WIN32-033 | Original SoftPC configuration and host-input paths call the private Console Server `SetConsoleKeyShortcuts` and `ConsoleMenuControl` APIs. | Modern public Console APIs cannot reserve global shortcut combinations or attach a command-range event route to a console menu. | Preserve both source-facing names and parameter forms. `SetConsoleKeyShortcuts` returns `FALSE` and `ConsoleMenuControl` returns `NULL`, each with `ERROR_CALL_NOT_IMPLEMENTED`; no keyboard hook, system menu or partial event route is invented. | `include/conapi.h`, `source/console_compat.c`; callers `../../../mvdm-host/softpc.new/host/src/{config,nt_mouse,nt_hosts}.c` |
-| ADAPTER-WIN32-034 | Original COMMAND `cmdkeyb.c` calls private Console Server `GetConsoleKeyboardLayoutNameA` for the active keyboard-layout name. | Modern public Win32 does not export the historical console-specific API. | Retain the original name, `LPSTR` parameter and `BOOL` result, forwarding only to public `GetKeyboardLayoutNameA`, whose fixed layout-name result and failure direction match the reached caller contract. No console broker or keyboard-layout cache is introduced. | `source/console_compat.c`; caller `../../../mvdm-host/dos/command/cmdkeyb.c` |
+| ADAPTER-WIN32-034 | Original COMMAND `cmdkeyb.c` calls private Console Server `GetConsoleKeyboardLayoutNameA` for the active keyboard-layout name. | Modern kernel32 exports both Console spellings, but the native fixture records failure 16385 while attached and 6 while detached. | Retain the existing thread-local `GetKeyboardLayoutNameA` fallback and original caller signature. Matching buffer shape does not prove active Console-layout identity. `tests/app/console_keyboard_layout_native_test.c` records this distinction; frontend/input-locale equivalence remains unproved, not a completed owner migration. No new locale cache or keyboard algorithm is introduced. | `../../ntvdm-exe/win32/console_compat.c`; caller `../../mvdm/dos/command/cmdkeyb.c` |
 | ADAPTER-WIN32-004 | Original DEM `dem.h` uses the historical `devioctl.h` storage declaration layout and declares a local `GetDiskSpaceInformation` helper. | The modern SDK exposes an unrelated macro alias with that name and does not automatically select the source-mirrored storage carrier. | Expose the original storage carrier, then remove only the conflicting modern convenience macro. | `include/nt.h`, `include/ntioapi.h` |
 | ADAPTER-WIN32-005 | Original DEM directory, volume and symbolic-link branches use selected `ntioapi.h` layouts and NT call shapes. | Modern public headers omit a complete compatible declaration set, while the byte-exact historical carrier cannot be included wholesale beside `winternl.h`. | Retain the reached source spellings and resolve matching `ntdll` exports at call time; missing exports return `STATUS_NOT_IMPLEMENTED`. | `include/ntioapi.h`, `source/ntioapi_facade.c`, `include/nt.h` |
 | ADAPTER-WIN32-006 | Original DEM bodies require selected historical NT status/object/device constants, RTL list macros, and NT/RTL function declarations. | Modern headers omit a coherent NT4 source form and direct full historical header inclusion conflicts with the current SDK. | The adapter retains only its implementation binding; original NT/RTL declaration subsets are in `opennt-host`. | `include/ntioapi.h`; `../../opennt-host/public/sdk/inc/{ntrtl,nturtl}.h` |
@@ -54,9 +154,9 @@ product composition no longer exists.
 | ADAPTER-WIN32-017 | Original SoftPC timer/heartbeat source calls NT4 RTL integer arithmetic, critical-section and process-control forms. | The selected modern SDK headers do not expose a coherent compatible declaration subset. | Their original declaration subset is restored in `opennt-host`; NTDLL remains implementation owner and no timer/controller substitute is added. | `include/nt.h`, `../../opennt-host/public/sdk/inc/ntrtl.h` |
 | ADAPTER-WIN32-019 | Original SoftPC and COMMAND worker sources pass cdecl callbacks to `CreateThread`. | Modern x86 requires a WINAPI thread start routine; direct use is ABI-unsafe, although x64 happens to share the calling convention. `nt_timer.c` returns `DWORD (LPVOID)` while `cmdexec.c` uses a no-argument `void` worker and `cmdredir.c` uses `void(LPVOID)` pipe workers; the original calls omit a session parameter. | Translation-unit-local bridges preserve the source callback forms, arguments and creation flags, capture the creator's process-local session binding, bind it only while the worker executes, then unbind it. The void forms return `DWORD 0` only at the public Win32 boundary. No guest pointer, fixed-width MVDM field or callback ABI changes. | `include/thread_start_compat.h`, `source/thread_start_compat.c`, `../../../mvdm-host/{softpc.new/host/src/nt_timer.c,dos/command/{cmdexec.c,cmdredir.c}}`, `../../../tools/build/New-T310OriginalSoftpcNinja.ps1` |
 | ADAPTER-WIN32-037 | Original COMMAND changes `ntvdm.exe` standard handles before creating a non-DOS child. | The app's stdin/stdout/stderr are not session-owned and must remain unaffected by a child launch. | Preserve the source call sequence with a translation-unit-local interception: each worker records the selected handles and applies them only to a copied `STARTUPINFOA` at `CreateProcessA`; the parent process handles are never changed. | `include/command_process_compat.h`, `source/command_process_compat.c`, `../../../mvdm-host/dos/command/cmdexec.c`, `../../../tools/build/New-T310OriginalSoftpcNinja.ps1` |
-| ADAPTER-WIN32-049 | NT4's original `COMSPEC /c` worker could cause a DOS or Win16 image to receive the system VDM disposition. | Modern Windows no longer creates a VDM for DOS/Win16 images, and falling through presents a host incompatibility dialog. | After unchanged original `cmdExec` builds a `COMSPEC /c` tail, the adapter replaces only the system VDM spawn with sibling `run16.exe`, forwarding that copied tail without classifying it. `run16` is the sole resolver/classifier: resolved DOS/Win16 enters VDM (Win16 is bootstrap-gated), another resolved image uses public `CreateProcessA`, and an unresolved token retains `COMSPEC /c`. The adapter carries only copied host text, never a guest pointer, mapping token or HANDLE. | `source/command_process_compat.c`, `../../../app/run16_entry.c`, `../../basesrv/include/mvdm_image_classification.h`, `../../basesrv/source/mvdm_image_classification.c` |
+| ADAPTER-WIN32-049 | Original cmdCreateProcess creates either a direct native image or a `COMSPEC /c` command; NT4 could supply the system VDM disposition. | Modern Windows no longer creates a VDM for DOS/Win16 images; the approved frontend split also requires authenticated root continuity and a launcher/target lifetime pair for direct native children. | Keep original copied command/environment, standard streams, suspended creation and wait/re-entry ordering. Launch sibling run16 for the COMSPEC tail or the unchanged direct command; run16 alone classifies it. In a native-only child environment copy, replace the internal frontend locator with an inheritable synchronize-only duplicate of the broker-proven root event. The locator is not authorization, guest data or an IPC HANDLE field. Close the local duplicate after CreateProcess; run16 removes the locator before the original DOS environment projection. Real DOS/native target-loss and launcher-loss tests assert pair completion and subsequent DOS MEM execution. | `../../ntvdm-exe/win32/{command_process_compat.c,console_client.c}`, `../../run16-exe/{main.c,frontend_scope.c}`; original `base/mvdm/dos/command/cmdexec.c::cmdCreateProcess` |
 | ADAPTER-WIN32-050 | Original `ShowConsoleCursor` increments/decrements the NT Console Server's mouse-pointer display counter for the active screen buffer. | Modern public Console exposes only the unrelated text insertion-cursor visibility and no pointer counter. | Validate the Console output handle, retain a worker-local logical count for reached caller loops, and leave physical pointer visibility to conhost/Terminal. It never calls `GetConsoleCursorInfo` or `SetConsoleCursorInfo`, so it cannot alter the guest text cursor. The selected profile has one active worker output surface; multi-buffer pointer ownership remains unaccepted. | `source/console_compat.c`; original `windows/core/ntcon/{client,server}/private.c`; callers `../../../mvdm-host/softpc.new/host/src/{nt_event,nt_mouse}.c` |
-| ADAPTER-WIN32-051 | Original `WriteConsoleInputVDMW` calls the NT Console client with `Append == FALSE`; the Console Server holds its Console lock and prepends records before later `CONIN$` arrivals. | Public `WriteConsoleInputW` appends only; it cannot create the source ordering or wake the original event loop for private returned records. | A process-local, lock-protected returned-record deque and manual-reset wait handle are confined to `console_compat.c`. `nt_event` remains the only consumer and waits on the existing public input/suspend handles plus this one returned-record handle; `ReadConsoleInputExW` reads that deque before public input and preserves NOWAIT/NOREMOVE. No reader thread, GUI, guest-memory record or new product queue is introduced. The selected one-worker profile has one stable `sc.InputHandle`; multi-worker/session ownership is outside this adapter. | `source/console_compat.c`, `include/conapi.h`, `../../../mvdm-host/softpc.new/host/src/nt_event.c`; original `windows/core/ntcon/{client/iostubs.c,server/directio.c}` |
+| ADAPTER-WIN32-051 | Original VDM input return atomically prepends records to shared Console input, before later arrivals. | The modern host's historical `kernel32!WriteConsoleInputVDMW` export is proven available on the tested host; public append is not equivalent. | DOS copies bounded scalar key records to run16, which invokes that exact native ABI. No-channel callers use the same native export locally. Absence returns `ERROR_CALL_NOT_IMPLEMENTED`; no private queue or drain/append fallback. Removed the old deque and third event-loop wait. | `../../ntvdm-exe/win32/{console_compat.c,console_client.c}`, `../../run16-exe/console_frontend.c`; original `windows/core/ntcon/{client/private.c,server/directio.c,server/input.c}` |
 | ADAPTER-WIN32-020 | Original SoftPC heartbeat shutdown calls private `NtAlertThread(HANDLE)` to interrupt an alertable NT wait. | The historical native declaration is absent from the selected public headers; substituting only `QueueUserAPC` changes the durable pending-alert contract and did not release the reached original heartbeat. | Keep the original name, handle parameter and `NTSTATUS` direction. Resolve the still-exported NTDLL `NtAlertThread` at runtime and call it when available; retain a no-op `QueueUserAPC` wake-up only as a public-API fallback when that entry is absent. The original source separately recognizes `STATUS_USER_APC` as a termination event. | `include/nt_thread_alert_compat.h`, `source/nt_thread_alert_compat.c`, `../../../mvdm-host/softpc.new/host/src/nt_timer.c` |
 | ADAPTER-WIN32-029 | Original SoftPC event, heartbeat and communications NT multiple-object waits. | SDK declaration availability only; the NTDLL provider is available. Win32 waits consume STATUS_ALERTED and are not equivalent. | Retain only the NTSTATUS-shaped declaration and link the original API from ntdll.lib. Remove the autonomous timeout/result translation. S35 native Console and pending-alert probes pass; full product validation remains pending. | `include/nt.h`; `../../mvdm/softpc.new/host/src/{nt_event,nt_timer,nt_ntfun}.c` |
 | ADAPTER-WIN32-REDIR-001 | Original Redirector async-pipe worker calls `CreateThread` with a cdecl callback form. | Modern public `CreateThread` requires a `WINAPI` callback; calling the original form directly is ABI-unsafe on x86. | A forced source binding retains the original call text and fails with `ERROR_CALL_NOT_IMPLEMENTED` until S4 supplies the separately admitted session-worker thunk. | `include/mvdm_redirector_thread.h`, `source/mvdm_redirector_thread.c` |

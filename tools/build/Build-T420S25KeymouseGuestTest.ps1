@@ -25,7 +25,8 @@ $vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\To
 if (!(Test-Path -LiteralPath $vs)) { throw "VS x86 build environment is unavailable: $vs" }
 $observerSource = Join-Path $repository 'tests\observation\keymouse_capability_observer.c'
 $observerOutput = Join-Path $build 'keymouse-capability-observer.exe'
-& cmd.exe /d /s /c ('call "' + $vs + '" -arch=x86 -host_arch=x86 >nul && cl.exe /nologo /TC /W4 /MT /Fe:"' + $observerOutput + '" "' + $observerSource + '" /link kernel32.lib user32.lib')
+$observerObject = Join-Path $build 'keymouse-capability-observer.obj'
+& cmd.exe /d /s /c ('call "' + $vs + '" -arch=x86 -host_arch=x86 >nul && cl.exe /nologo /TC /W4 /MT /Fo:"' + $observerObject + '" /Fe:"' + $observerOutput + '" "' + $observerSource + '" /link kernel32.lib user32.lib')
 if ($LASTEXITCODE -ne 0) { throw "MSVC failed for S25 keymouse observer: $LASTEXITCODE" }
 [ordered]@{
     schema = 'm0.t420.s25.keymouse-guest.v1'

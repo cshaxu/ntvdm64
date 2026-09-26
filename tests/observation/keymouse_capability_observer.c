@@ -136,6 +136,30 @@ static BOOL wait_screen(HANDLE output, const char *needle, DWORD timeout_ms)
     return FALSE;
 }
 
+/* A probe's success text precedes its INT 21h exit.  For this sequential
+ * capability test, require the current input line, not an old prompt in
+ * scrollback. Nested/typeahead behavior has its own regression cases. */
+static BOOL wait_prompt(HANDLE output, DWORD timeout_ms)
+{
+    DWORD started = GetTickCount();
+    do {
+        CONSOLE_SCREEN_BUFFER_INFO info;
+        const char prompt[] = "O:\\WINNT>";
+        char line[sizeof(prompt)] = { 0 };
+        DWORD read = 0;
+        if (GetConsoleScreenBufferInfo(output, &info) &&
+            info.dwCursorPosition.X == sizeof(prompt) - 1) {
+            COORD origin = { 0, info.dwCursorPosition.Y };
+            if (ReadConsoleOutputCharacterA(output, line, sizeof(prompt) - 1,
+                    origin, &read) && read == sizeof(prompt) - 1 &&
+                memcmp(line, prompt, sizeof(prompt) - 1) == 0) return TRUE;
+        }
+        Sleep(25u);
+    } while ((DWORD)(GetTickCount() - started) < timeout_ms);
+    SetLastError(ERROR_TIMEOUT);
+    return FALSE;
+}
+
 /*
  * INT 33h function 1 reaches the original host-side transition asynchronously.
  * Do not infer readiness from the guest's prior text alone: wait until that
@@ -184,7 +208,7 @@ static BOOL append_confirmed_guest_markers(const char *path)
     FILE *file;
     if (fopen_s(&file, path, "ab") != 0 || file == NULL) return FALSE;
     fputs("\nobserver-confirmed-guest=S25_KEYBOARD_OK S25_MODIFIER_OK "
-          "S25_PPI_OK S25_MOUSE_RESET_OK S25_MOUSE_POSITION_OK S25_MOUSE_CALLBACK_OK "
+          "S25_MODIFIER_RELEASE_OK S25_PPI_OK S25_MOUSE_RESET_OK S25_MOUSE_POSITION_OK S25_MOUSE_CALLBACK_OK "
           "S25_MOUSE_TEARDOWN_OK S25_KEYMOUSE_OK\n", file);
     fclose(file);
     return TRUE;
@@ -253,6 +277,9 @@ int main(int argc, char **argv)
     BOOL passed = FALSE;
     BOOL captured_capability = FALSE;
     DWORD wait, exit_code = 0u;
+    const char *stage = "create";
+    DWORD failure_error = 0u;
+    BOOL shared_console = GetEnvironmentVariableA("MVDM_TEST_KEYMOUSE_SHARED_CONSOLE",NULL,0)!=0;
 
     if (argc != 2) return 64;
     GetEnvironmentVariableA("TEST_RUNTIME_ROOT", runtime, sizeof(runtime));
@@ -262,30 +289,45 @@ int main(int argc, char **argv)
     startup.wShowWindow = SW_HIDE;
     job = CreateJobObjectA(NULL, NULL);
     if (job == NULL || !CreateProcessA(NULL, command, NULL, NULL, FALSE,
-            CREATE_NEW_CONSOLE | CREATE_SUSPENDED, NULL, runtime, &startup, &child)) goto done;
+            (shared_console ? 0 : CREATE_NEW_CONSOLE) | CREATE_SUSPENDED,
+            NULL, runtime, &startup, &child)) goto done;
     limits.BasicLimitInformation.LimitFlags = JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE;
+    stage = "job";
     if (!SetInformationJobObject(job, JobObjectExtendedLimitInformation, &limits,
             sizeof(limits)) || !AssignProcessToJobObject(job, child.hProcess)) goto done;
     ResumeThread(child.hThread);
     CloseHandle(child.hThread);
     child.hThread = NULL;
     Sleep(2500u);
-    FreeConsole();
-    if (!AttachConsole(child.dwProcessId)) goto done;
+    if (!shared_console) {
+        stage = "detach";
+        if (!FreeConsole()) goto done;
+        stage = "attach";
+        if (!AttachConsole(child.dwProcessId)) goto done;
+    }
     input_handle = CreateFileA("CONIN$", GENERIC_READ | GENERIC_WRITE,
         FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, 0u, NULL);
     output = CreateFileA("CONOUT$", GENERIC_READ,
         FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, 0u, NULL);
+    stage = "guest-ready";
     if (input_handle == INVALID_HANDLE_VALUE || output == INVALID_HANDLE_VALUE ||
         !wait_screen(output, "O:\\WINNT>", 6000u) || !send_text(guest) ||
         !send_text("\r") || !wait_screen(output, "S25_READY", 6000u) ||
         !wait_for_mouse_mode(6000u)) goto done;
+    stage = "callback";
+    /* Original ConsoleEventThread calls DelayMouseEvents(2), discarding
+     * startup mouse input for 110*(2+1) ms. CONIN$ mouse mode becomes visible
+     * before that guard expires. Test steady-state delivery after the guard,
+     * not an unsupported inference that ENABLE_MOUSE_INPUT means ready. */
+    Sleep(400u);
     if (!send_mouse(26, 11) || !send_ctrl_k_down() ||
         !wait_screen(output, "S25_DISABLE_READY", 6000u)) goto done;
+    stage = "teardown";
     if (!send_ctrl_up() || !send_mouse(54, 21) ||
         !wait_screen(output, "S25_KEYMOUSE_OK", 8000u)) goto done;
     if (!screen_contains(output, "S25_KEYBOARD_OK") ||
         !screen_contains(output, "S25_MODIFIER_OK") ||
+        !screen_contains(output, "S25_MODIFIER_RELEASE_OK") ||
         !screen_contains(output, "S25_PPI_OK") ||
         !screen_contains(output, "S25_MOUSE_RESET_OK") ||
         !screen_contains(output, "S25_MOUSE_POSITION_OK") ||
@@ -294,18 +336,40 @@ int main(int argc, char **argv)
         !snapshot(output, argv[1])) goto done;
     if (!append_confirmed_guest_markers(argv[1])) goto done;
     captured_capability = TRUE;
-    if (!send_text("mem\r") || !wait_screen(output,
-        "bytes total conventional memory", 6000u) || !send_text("exit\r")) goto done;
+    stage = "probe-return-prompt";
+    if (!wait_prompt(output, 6000u)) goto done;
+    stage = "mem-return";
+    if (!send_text("mem\r")) goto done;
+    stage = "mem-output";
+    if (!wait_screen(output, "bytes total conventional memory", 6000u)) goto done;
+    stage = "mem-return-prompt";
+    if (!wait_prompt(output, 6000u)) goto done;
+    stage = "command-exit";
+    if (!send_text("exit\r")) goto done;
     wait = WaitForSingleObject(child.hProcess, 6000u);
     if (wait != WAIT_OBJECT_0) goto done;
     GetExitCodeProcess(child.hProcess, &exit_code);
     passed = exit_code == 1u;
 
 done:
+    failure_error = passed ? ERROR_SUCCESS : GetLastError();
     if (output != INVALID_HANDLE_VALUE && !captured_capability)
         (void)snapshot(output, argv[1]);
+    if (!passed && output != INVALID_HANDLE_VALUE && captured_capability) {
+        char failure_path[MAX_PATH];
+        if (snprintf(failure_path, sizeof(failure_path), "%s.failure.txt",
+                argv[1]) < (int)sizeof(failure_path))
+            (void)snapshot(output, failure_path);
+    }
     printf("keymouse passed=%s exit=%lu\n", passed ? "yes" : "no",
         (unsigned long)exit_code);
+    { FILE *diagnostic = NULL;
+      if (fopen_s(&diagnostic, argv[1], "ab") == 0 && diagnostic) {
+          fprintf(diagnostic,"\nkeymouse passed=%s stage=%s error=%lu exit=%lu\n",
+              passed ? "yes" : "no",stage,failure_error,exit_code);
+          fclose(diagnostic);
+      }
+    }
     if (child.hThread != NULL) CloseHandle(child.hThread);
     if (child.hProcess != NULL) CloseHandle(child.hProcess);
     if (input_handle != INVALID_HANDLE_VALUE) CloseHandle(input_handle);

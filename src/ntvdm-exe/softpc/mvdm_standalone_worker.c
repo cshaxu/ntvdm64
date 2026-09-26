@@ -9,6 +9,7 @@
 #include "ntvdm-exe/monitor/include/monitor_context.h"
 #include "ntvdm-exe/wow/include/wow_user_session_binding.h"
 #include "ntvdm-exe/softpc/include/mvdm_shadow_registry.h"
+#include "ntvdm-exe/win32/console_client.h"
 
 /* Original BaseClient capture storage is private to this worker process. */
 PVOID CsrPortHeap;
@@ -89,6 +90,9 @@ DWORD mvdm_standalone_worker_begin(void)
         error=ERROR_INVALID_STATE; goto fail;
     }
     worker_thread=TRUE;
+    error=ntvdm_console_client_begin(&worker_session);
+    /* The DOS frontend split does not replace WOW's native window route. */
+    if (error && error!=ERROR_NOT_SUPPORTED) goto fail;
     if (!wow_user_session_attach(&worker_wow_binding, &worker_session,
             &worker_wow_runtime)) {
         error=ERROR_INVALID_STATE; goto fail;

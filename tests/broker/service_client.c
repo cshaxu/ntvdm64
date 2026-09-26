@@ -87,6 +87,11 @@ int main(int argc,char **argv)
         }
         REQUIRE(Client_Connect(binding,process,APP_PROTOCOL_VERSION,app_version,
             &server_protocol,server_version,&duplicate,&next)==ERROR_ALREADY_EXISTS && !duplicate && !next);
+        {
+            HANDLE worker=NULL;
+            REQUIRE(Client_CommandWorker(binding,connection,process,0,&worker)==ERROR_ACCESS_DENIED && !worker);
+            REQUIRE(Client_CommandWorker(binding,connection,process,generation,&worker)==ERROR_NOT_READY && !worker);
+        }
         REQUIRE(Client_First(binding,connection,process,0,&first)==ERROR_ACCESS_DENIED && first==0);
         REQUIRE(!Client_First(binding,connection,process,generation,&first) && first==expectedFirst);
         REQUIRE(!Client_First(binding,connection,process,generation,&first) && first==0);

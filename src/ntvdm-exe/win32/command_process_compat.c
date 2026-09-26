@@ -1,8 +1,10 @@
 #include "command_process_compat.h"
 #include "vdmapi.h"
+#include "console_client.h"
 
 #include <stdio.h>
 #include <string.h>
+#include <wchar.h>
 
 #undef SetStdHandle
 #undef CreateProcess
@@ -15,8 +17,8 @@ typedef struct opennt_command_standard_handles {
 
 static __declspec(thread) opennt_command_standard_handles current_handles;
 
-/* This adapter is reached only after the unchanged COMMAND source selected
- * its historical COMSPEC /c path.  NT4's cmd.exe could create a separate
+/* This adapter is reached after the unchanged COMMAND source selected
+ * its native executable or historical COMSPEC /c path. NT4 could create a separate
  * NTVDM for a DOS/NE image.  Current x64 Windows cannot.  Keep that product
  * boundary out of cmdexec.c: its worker still creates, waits for and returns
  * the child outcome through the original control flow. */
@@ -129,8 +131,66 @@ static int opennt_command_simple_shell_tail(const char *tail)
         !opennt_command_nested_comspec_tail(tail);
 }
 
+/* The locator is added only to the native child block, never guest memory.
+ * The inherited handle is a restricted duplicate of the broker-proven root. */
+static BOOL create_frontend_child(LPCSTR application,LPSTR command,
+    LPSECURITY_ATTRIBUTES process_attributes,LPSECURITY_ATTRIBUTES thread_attributes,
+    BOOL inherit,DWORD flags,LPVOID environment,LPCSTR directory,
+    LPSTARTUPINFOA startup,LPPROCESS_INFORMATION process)
+{
+    static const char name[]="NTVDM_FRONTEND_CAPABILITY=";
+    HANDLE capability=NULL;
+    BOOL wide=(flags&CREATE_UNICODE_ENVIRONMENT)!=0,result;
+    void *inherited=NULL,*copy=NULL;
+    const BYTE *cursor;
+    BYTE *destination;
+    size_t unit=wide ? sizeof(WCHAR) : 1,bytes=unit,length,entry_bytes,index;
+    char value[80];
+    WCHAR wide_value[80];
+    DWORD error;
+    if (!ntvdm_console_inherit_frontend_capability(&capability)) return FALSE;
+    if (!capability) return CreateProcessA(application,command,process_attributes,
+        thread_attributes,inherit,flags,environment,directory,startup,process);
+    if (!inherit) { CloseHandle(capability);SetLastError(ERROR_INVALID_PARAMETER);return FALSE; }
+    sprintf_s(value,sizeof(value),"%s%lx",name,(unsigned long)(ULONG_PTR)capability);
+    for (index=0;index<=strlen(value);++index) wide_value[index]=(WCHAR)value[index];
+    if (!environment) {
+        inherited=wide ? (void *)GetEnvironmentStringsW() : (void *)GetEnvironmentStringsA();
+        if (!inherited) { error=GetLastError();CloseHandle(capability);SetLastError(error);return FALSE; }
+        environment=inherited;
+    }
+    for (cursor=environment;(length=wide ? wcslen((const WCHAR *)cursor) : strlen((const char *)cursor))!=0;
+         cursor+=(length+1)*unit) bytes+=(length+1)*unit;
+    bytes+=(strlen(value)+1)*unit;
+    copy=HeapAlloc(GetProcessHeap(),0,bytes);
+    if (!copy) { error=ERROR_NOT_ENOUGH_MEMORY;result=FALSE;goto done; }
+    destination=copy;
+    for (cursor=environment;(length=wide ? wcslen((const WCHAR *)cursor) : strlen((const char *)cursor))!=0;
+         cursor+=(length+1)*unit) {
+        if (wide ? !_wcsnicmp((const WCHAR *)cursor,L"NTVDM_FRONTEND_CAPABILITY=",sizeof(name)-1) :
+                   !_strnicmp((const char *)cursor,name,sizeof(name)-1)) continue;
+        entry_bytes=(length+1)*unit;
+        memcpy(destination,cursor,entry_bytes);destination+=entry_bytes;
+    }
+    entry_bytes=(strlen(value)+1)*unit;
+    memcpy(destination,wide ? (const void *)wide_value : (const void *)value,entry_bytes);
+    destination+=entry_bytes;
+    ZeroMemory(destination,unit);
+    result=CreateProcessA(application,command,process_attributes,thread_attributes,
+        inherit,flags,copy,directory,startup,process);
+    error=GetLastError();
+done:
+    if (copy) HeapFree(GetProcessHeap(),0,copy);
+    if (inherited) {
+        if (wide) FreeEnvironmentStringsW(inherited);else FreeEnvironmentStringsA(inherited);
+    }
+    CloseHandle(capability);SetLastError(error);
+    return result;
+}
+
 static BOOL opennt_command_launch_vdm_child(
     const char *tail,
+    BOOL direct_command,
     LPSECURITY_ATTRIBUTES process_attributes,
     LPSECURITY_ATTRIBUTES thread_attributes,
     BOOL inherit_handles,
@@ -147,10 +207,10 @@ static BOOL opennt_command_launch_vdm_child(
     int formatted;
     char *tail_cursor;
 
-    /* The original worker has already chosen COMMAND's COMSPEC /c route.
-     * Standalone composition replaces only the historical system VDM spawn:
-     * use the sibling public launcher, whose original BaseClient path owns
-     * type classification, broker startup and new worker registration. */
+    /* COMMAND has selected either a direct native command or a COMSPEC tail.
+     * Use the sibling public launcher for both: it owns native target lifetime
+     * and the original BaseClient admission of DOS/NE targets. Original
+     * cmdCreateProcess still owns suspension, waiting and guest re-entry. */
     launcher_bytes = GetModuleFileNameA(NULL, launcher, (DWORD)sizeof(launcher));
     if (launcher_bytes == 0u || launcher_bytes >= sizeof(launcher) ||
         (leaf = strrchr(launcher, '\\')) == NULL ||
@@ -159,14 +219,14 @@ static BOOL opennt_command_launch_vdm_child(
         return FALSE;
     }
     memcpy(leaf + 1, "run16.exe", sizeof("run16.exe"));
-    if (opennt_command_simple_shell_tail(tail)) {
+    if (direct_command || opennt_command_simple_shell_tail(tail)) {
         formatted = snprintf(child_command, sizeof(child_command),
             "\"%s\" %s", launcher, tail);
         if (formatted < 0 || (size_t)formatted >= sizeof(child_command)) {
             SetLastError(ERROR_FILENAME_EXCED_RANGE);
             return FALSE;
         }
-        return CreateProcessA(NULL, child_command, process_attributes,
+        return create_frontend_child(NULL, child_command, process_attributes,
             thread_attributes, inherit_handles, creation_flags, environment,
             current_directory, startup_info, process_information);
     }
@@ -182,7 +242,7 @@ static BOOL opennt_command_launch_vdm_child(
         SetLastError(ERROR_FILENAME_EXCED_RANGE);
         return FALSE;
     }
-    return CreateProcessA(NULL, child_command, process_attributes,
+    return create_frontend_child(NULL, child_command, process_attributes,
         thread_attributes, inherit_handles, creation_flags, environment,
         current_directory, startup_info, process_information);
 }
@@ -259,12 +319,22 @@ BOOL opennt_command_create_process_a(
          * execution boundary.  It must not classify the child: relaunch this
          * product and let its single app-entry disposition resolve DOS/Win16,
          * native PE, and an unresolved shell token in one place. */
-        return opennt_command_launch_vdm_child(comspec_tail,
+        return opennt_command_launch_vdm_child(comspec_tail, FALSE,
             process_attributes, thread_attributes, inherit_handles,
             creation_flags, environment, current_directory, effective_startup,
             process_information);
     }
-    return CreateProcessA(application_name, command_line,
+    /* cmdCreateProcess also receives resolved native images without COMSPEC.
+     * Keep its original suspended-create/wait/re-entry contract, but let the
+     * same launcher own this native target and its frontend lifetime pair.
+     * The already selected command line is not shell syntax to reinterpret. */
+    if (application_name == NULL && command_line != NULL && *command_line) {
+        return opennt_command_launch_vdm_child(command_line, TRUE,
+            process_attributes, thread_attributes, inherit_handles,
+            creation_flags, environment, current_directory, effective_startup,
+            process_information);
+    }
+    return create_frontend_child(application_name, command_line,
         process_attributes, thread_attributes, inherit_handles,
         creation_flags, environment, current_directory, effective_startup,
         process_information);

@@ -253,6 +253,84 @@ error_status_t Server_BrokerProcess(handle_t binding,VDM_CONNECTION connection,H
             server,SYNCHRONIZE,FALSE,0)) return GetLastError();
     return ERROR_SUCCESS;
 }
+error_status_t Server_WorkerFrontendCapability(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+    ULONG generation,HANDLE *capability)
+{
+    DWORD pid,error;
+    *capability=NULL;
+    error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    return error ? error : OpenNtBaseServiceWorkerFrontendCapability(connection,pid,generation,capability);
+}
+error_status_t Server_RegisterFrontendRoot(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+    ULONG generation,HANDLE capability)
+{
+    DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    return error ? error : OpenNtBaseServiceRegisterFrontendRoot(connection,pid,generation,capability);
+}
+error_status_t Server_RetainFrontendRoot(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+    ULONG generation,HANDLE capability,HANDLE *root,ULONG *root_generation)
+{
+    DWORD pid,error;
+    *root=NULL;*root_generation=0;
+    error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    return error ? error : OpenNtBaseServiceRetainFrontendRoot(connection,pid,generation,
+        capability,root,root_generation);
+}
+error_status_t Server_RequestFrontend(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+    ULONG generation,HANDLE capability)
+{
+    DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    return error ? error : OpenNtBaseServiceRequestFrontend(connection,pid,generation,capability);
+}
+error_status_t Server_FrontendRequest(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+    ULONG generation,ULONG *request,HANDLE *worker)
+{
+    DWORD pid,error;
+    *request=0;*worker=NULL;
+    error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    return error ? error : OpenNtBaseServiceFrontendRequest(connection,pid,generation,request,worker);
+}
+error_status_t Server_AttachFrontendRequest(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+    ULONG generation,ULONG request,HANDLE channel,HANDLE ready)
+{
+    DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    return error ? error : OpenNtBaseServiceAttachFrontendRequest(connection,pid,generation,
+        request,channel,ready);
+}
+error_status_t Server_CommandWorker(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+    ULONG generation,HANDLE *worker)
+{
+    DWORD pid,error;
+    *worker=NULL;
+    error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    if (error) return error;
+    /* The typed RPC attachment consumes the restricted service duplicate. */
+    return OpenNtBaseServiceRetainCommandWorker(connection,pid,generation,worker);
+}
+error_status_t Server_AttachFrontend(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+    ULONG generation,HANDLE pipe,HANDLE ready)
+{
+    DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    return error ? error : OpenNtBaseServiceAttachFrontend(connection,pid,generation,pipe,ready);
+}
+error_status_t Server_TakeFrontend(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+    ULONG generation,HANDLE *pipe,HANDLE *frontend,ULONG *frontend_generation,HANDLE *ready)
+{
+    DWORD pid,error;
+    *pipe=NULL; *frontend=NULL; *frontend_generation=0;*ready=NULL;
+    error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    return error ? error : OpenNtBaseServiceTakeFrontend(connection,pid,generation,
+        pipe,frontend,frontend_generation,ready);
+}
+error_status_t Server_WaitFrontend(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+    ULONG generation,HANDLE *pipe,HANDLE *frontend,ULONG *frontend_generation,HANDLE *ready)
+{
+    DWORD pid,error;
+    *pipe=NULL;*frontend=NULL;*frontend_generation=0;*ready=NULL;
+    error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    return error ? error : OpenNtBaseServiceWaitFrontend(connection,pid,generation,
+        pipe,frontend,frontend_generation,ready);
+}
 error_status_t Server_First(handle_t binding,VDM_CONNECTION connection,HANDLE process,ULONG generation,ULONG *first)
 {
     DWORD pid;
@@ -516,7 +594,7 @@ int main(void)
         (void)OpenNtBaseServiceStop(service);
         return (int)error;
     }
-    result=RpcServerRegisterIf3(Server_vdm_service_v3_0_s_ifspec,NULL,NULL,
+    result=RpcServerRegisterIf3(Server_vdm_service_v5_0_s_ifspec,NULL,NULL,
         RPC_IF_ALLOW_SECURE_ONLY | RPC_IF_ALLOW_LOCAL_ONLY,RPC_C_LISTEN_MAX_CALLS_DEFAULT,
         (unsigned)-1,authorize,NULL);
     if (!result) {
@@ -527,7 +605,7 @@ int main(void)
          * normal worker/launcher teardown. */
         basesrv_schedule_empty_stop();
         result=RpcServerListen(1,RPC_C_LISTEN_MAX_CALLS_DEFAULT,FALSE);
-        RpcServerUnregisterIf(Server_vdm_service_v3_0_s_ifspec,NULL,TRUE);
+        RpcServerUnregisterIf(Server_vdm_service_v5_0_s_ifspec,NULL,TRUE);
     }
     basesrv_cancel_empty_timer();
     if (!OpenNtBaseServiceStop(service)) return ERROR_BUSY;

@@ -17,7 +17,7 @@ try {
     for (const command of [
         `cl.exe ${flags} "${root}/tests/broker/service_client.c" /Foclient.obj`,
         `cl.exe ${baseClientFlags} "${root}/tests/app/base_client_rpc_first_test.c" /Fobase-client-rpc-first.obj`,
-        `cl.exe ${baseClientFlags} "${root}/src/adapter-opennt-host/basesrv/source/base_rpc_client.c" /Forpc-client.obj`,
+        `cl.exe ${baseClientFlags} "${root}/src/basesrv-exe/opennt/source/base_rpc_client.c" /Forpc-client.obj`,
         `cl.exe ${flags} "${product}/obj/basesrv/service_c.c" /Fostub.obj`,
         `cl.exe ${sourceFlags} "${root}/tests/broker/service_stream_source.c" /Fostream-source.obj`,
         `link.exe /nologo /opt:ref /map:client.map /out:client.exe client.obj stub.obj stream-source.obj "${product}/obj/run16/support.obj" "${product}/broker-transport.lib" "${product}/opennt-base-server.lib" "${product}/opennt-base-bindings.lib" "${product}/original-opennt-rtl-x86.lib" rpcrt4.lib ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib`,
@@ -77,6 +77,33 @@ try {
     fs.writeFileSync(path.join(logs,'reservation.log'),(reservation.stdout||'')+(reservation.stderr||''));
     if(reservation.status!==0) throw Error(`Launcher/worker reservation route failed ${reservation.status}`);
     console.log(reservation.stdout.trim());
+    const frontendWait=spawnSync(path.join(build,'base-client-rpc-first.exe'),['--frontend-wait-parent'],{cwd:build,windowsHide:true,encoding:'utf8',timeout:20000});
+    fs.writeFileSync(path.join(logs,'frontend-wait.log'),(frontendWait.stdout||'')+(frontendWait.stderr||''));
+    if(frontendWait.status!==0) throw Error(`Delayed frontend RPC delivery failed ${frontendWait.status}`);
+    console.log(frontendWait.stdout.trim());
+    const frontendCancel=spawnSync(path.join(build,'base-client-rpc-first.exe'),['--frontend-cancel-parent'],{cwd:build,windowsHide:true,encoding:'utf8',timeout:20000});
+    fs.writeFileSync(path.join(logs,'frontend-cancel.log'),(frontendCancel.stdout||'')+(frontendCancel.stderr||''));
+    if(frontendCancel.status!==0) throw Error(`Pending frontend RPC cancellation failed ${frontendCancel.status}`);
+    console.log(frontendCancel.stdout.trim());
+    const cancellationReport=path.join(build,`frontend-killed-${process.pid}-${Date.now()}.result`);
+    const frontendKilled=spawnSync(path.join(build,'base-client-rpc-first.exe'),['--frontend-cancel-killed-parent'],{cwd:build,windowsHide:true,encoding:'utf8',timeout:20000,env:{...process.env,NTVDM_RPC_CANCEL_REPORT:cancellationReport}});
+    fs.writeFileSync(path.join(logs,'frontend-killed.log'),(frontendKilled.stdout||'')+(frontendKilled.stderr||''));
+    if(frontendKilled.status!==92) throw Error(`Root fault injection failed ${frontendKilled.status}`);
+    const cancellationDeadline=Date.now()+12000;
+    let cancellationResult;
+    while(Date.now()<cancellationDeadline) {
+        try { cancellationResult=fs.readFileSync(cancellationReport,'utf8'); }
+        catch(error) { if(!['ENOENT','EBUSY','EACCES','EPERM'].includes(error.code)) throw error; }
+        if(cancellationResult==='P' || cancellationResult==='F') break;
+        await new Promise(resolve=>setTimeout(resolve,50));
+    }
+    if(cancellationResult!=='P')
+        throw Error('Abrupt root death did not cancel pending worker through RPC rundown');
+    console.log('PASS: killed root RPC rundown cancels pending worker without explicit Disconnect');
+    const frontendRoot=spawnSync(path.join(build,'base-client-rpc-first.exe'),['--frontend-root-parent'],{cwd:build,windowsHide:true,encoding:'utf8',timeout:30000});
+    fs.writeFileSync(path.join(logs,'frontend-root.log'),(frontendRoot.stdout||'')+(frontendRoot.stderr||''));
+    if(frontendRoot.status!==0) throw Error(`Root frontend RPC capability failed ${frontendRoot.status}`);
+    console.log(frontendRoot.stdout.trim());
     const abandoned=spawnSync(path.join(build,'client.exe'),['--abandon'],{cwd:build,windowsHide:true,encoding:'utf8',timeout:15000});
     fs.writeFileSync(path.join(logs,'abandoned.log'),(abandoned.stdout||'')+(abandoned.stderr||''));
     if(abandoned.status!==0) throw Error(`Abandon client failed ${abandoned.status}`);

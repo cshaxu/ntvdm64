@@ -80,10 +80,14 @@ start:
     mov ah, 9
     int 21h
 
-    mov bx, 36                 ; wait about two seconds for original callback
+    mov bx, 36                 ; same bounded wait for the complete event set
 .wait_callback:
-    cmp byte [callback_count], 0
-    jne .callback_seen
+    ; Mouse interrupts are delivered asynchronously, one event at a time.
+    ; A first movement callback is not proof that down/up already arrived.
+    mov al, [callback_mask]
+    and al, 7
+    cmp al, 7
+    je .callback_seen
     mov ah, 0
     int 1ah
     mov [tick], dx
@@ -128,6 +132,14 @@ start:
     cmp al, [callback_before_disable]
     jne fail_teardown
 
+    mov ah, 2                 ; observer released Ctrl during disabled wait
+    int 16h
+    test al, 4
+    jnz fail_modifier
+    mov dx, modifier_release_success
+    mov ah, 9
+    int 21h
+
     mov dx, teardown_success
     mov ah, 9
     int 21h
@@ -171,6 +183,14 @@ fail_modifier:
     mov dx, modifier_failure
     jmp short failure
 fail_callback:
+    mov dx, callback_diagnostic
+    mov ah, 9
+    int 21h
+    mov dl, [callback_mask]
+    and dl, 7
+    add dl, '0'                ; exact move/down/up bitmap, 0..7
+    mov ah, 2
+    int 21h
     mov dx, callback_failure
     jmp short failure
 fail_teardown:
@@ -192,6 +212,7 @@ ppi_success db 'S25_PPI_OK',13,10,'$'
 position_success db 'S25_MOUSE_POSITION_OK',13,10,'$'
 keyboard_success db 'S25_KEYBOARD_OK',13,10,'$'
 modifier_success db 'S25_MODIFIER_OK',13,10,'$'
+modifier_release_success db 'S25_MODIFIER_RELEASE_OK',13,10,'$'
 callback_success db 'S25_MOUSE_CALLBACK_OK',13,10,'$'
 teardown_success db 'S25_MOUSE_TEARDOWN_OK',13,10,'$'
 success db 'S25_KEYMOUSE_OK',13,10,'$'
@@ -201,4 +222,5 @@ position_failure db 'S25_MOUSE_POSITION_FAIL$'
 keyboard_failure db 'S25_KEYBOARD_FAIL$'
 modifier_failure db 'S25_MODIFIER_FAIL$'
 callback_failure db 'S25_MOUSE_CALLBACK_FAIL$'
+callback_diagnostic db 'S25_CALLBACK_MASK=$'
 teardown_failure db 'S25_MOUSE_TEARDOWN_FAIL$'

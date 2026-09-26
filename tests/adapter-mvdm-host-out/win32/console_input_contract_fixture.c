@@ -7,6 +7,18 @@
 
 HANDLE GetConsoleInputWaitHandle(VOID);
 
+/* This fixture deliberately selects no frontend. Link the real Console
+ * client so its existing no-channel native path, not a test substitute,
+ * supplies the historical operations. Remote ownership has its own fixture. */
+void OpenNtBaseClientSetCommandBinding(DWORD (*ready)(void *),void *context)
+{ (void)ready;(void)context; }
+DWORD OpenNtBaseClientTakeFrontend(HANDLE *pipe,HANDLE *process,DWORD *generation,HANDLE *ready)
+{ (void)pipe;(void)process;(void)generation;(void)ready;return ERROR_NOT_SUPPORTED; }
+DWORD OpenNtBaseClientWaitFrontend(HANDLE *pipe,HANDLE *process,DWORD *generation,HANDLE *ready)
+{ (void)pipe;(void)process;(void)generation;(void)ready;return ERROR_NOT_SUPPORTED; }
+DWORD OpenNtBaseClientWorkerFrontendCapability(HANDLE *capability)
+{ *capability=NULL;return ERROR_NOT_SUPPORTED; }
+
 static session_video_event observed_event;
 static uint32_t observed_count;
 
@@ -129,6 +141,41 @@ int main(void)
     (void)FreeConsole();
     if (!AllocConsole()) return 18;
 
+    {
+        HWND window=GetConsoleWindow();
+        BOOL iconic=FALSE;
+        RECT actual,before,after;
+        DWORD attempt;
+        DWORD native_error;
+        BOOL native_result,facade_result;
+        POINT point={40000,-40000},expected=point;
+        if (!window || !VDMConsoleOperation(VDM_IS_ICONIC,&iconic) ||
+            iconic!=IsIconic(window)) return 41;
+        for (attempt=0;attempt<10;++attempt) {
+            SetLastError(0);
+            native_result=GetClientRect(window,&before);native_error=GetLastError();
+            facade_result=VDMConsoleOperation(VDM_CLIENT_RECT,&actual);
+            if (facade_result!=native_result) return 42;
+            if (!native_result) {
+                if (GetLastError()!=native_error) return 47;
+                break;
+            }
+            if (!GetClientRect(window,&after)) continue;
+            if (memcmp(&before,&after,sizeof(before))) continue;
+            if (memcmp(&actual,&before,sizeof(before))) return 45;
+            break;
+        }
+        if (attempt==10) return 46;
+        SetLastError(0);
+        native_result=ClientToScreen(window,&expected);native_error=GetLastError();
+        facade_result=VDMConsoleOperation(VDM_CLIENT_TO_SCREEN,&point);
+        if (facade_result!=native_result ||
+            (native_result && (point.x!=expected.x || point.y!=expected.y)) ||
+            (!native_result && GetLastError()!=native_error)) return 43;
+        if (VDMConsoleOperation(VDM_CLIENT_RECT,NULL) ||
+            GetLastError()!=ERROR_CALL_NOT_IMPLEMENTED) return 44;
+    }
+
     if (ReadConsoleInputExW(INVALID_HANDLE_VALUE, NULL, 0u, &count, 0x8000u) ||
         GetLastError() != ERROR_INVALID_PARAMETER) return 1;
     if (VDMConsoleOperation(0xffffffffu, &state) ||
@@ -166,21 +213,22 @@ int main(void)
     front.Event.KeyEvent.uChar.UnicodeChar = L'F';
     if (!WriteConsoleInputW(input, &tail, 1u, &count) || count != 1u ||
         !WriteConsoleInputVDMW(input, &front, 1u, &count) || count != 1u ||
-        WaitForSingleObject(MvdmConsoleInputPrependWaitHandle(), 0u) !=
+        WaitForSingleObject(GetConsoleInputWaitHandle(), 0u) !=
             WAIT_OBJECT_0 ||
         !ReadConsoleInputExW(input, queued, 1u, &count,
             CONSOLE_READ_NOWAIT | CONSOLE_READ_NOREMOVE) || count != 1u ||
         queued[0].Event.KeyEvent.uChar.UnicodeChar != L'F' ||
-        WaitForSingleObject(MvdmConsoleInputPrependWaitHandle(), 0u) !=
+        WaitForSingleObject(GetConsoleInputWaitHandle(), 0u) !=
             WAIT_OBJECT_0 ||
         !ReadConsoleInputExW(input, queued, 1u, &count,
             CONSOLE_READ_NOWAIT) || count != 1u ||
         queued[0].Event.KeyEvent.uChar.UnicodeChar != L'F' ||
-        WaitForSingleObject(MvdmConsoleInputPrependWaitHandle(), 0u) !=
-            WAIT_TIMEOUT ||
+        WaitForSingleObject(GetConsoleInputWaitHandle(), 0u) !=
+            WAIT_OBJECT_0 ||
         !ReadConsoleInputExW(input, queued, 1u, &count,
             CONSOLE_READ_NOWAIT) || count != 1u ||
-        queued[0].Event.KeyEvent.uChar.UnicodeChar != L'T') return 19;
+        queued[0].Event.KeyEvent.uChar.UnicodeChar != L'T' ||
+        WaitForSingleObject(GetConsoleInputWaitHandle(), 0u) != WAIT_TIMEOUT) return 19;
     alt_down.EventType = KEY_EVENT;
     alt_down.Event.KeyEvent.bKeyDown = TRUE;
     alt_down.Event.KeyEvent.wVirtualKeyCode = VK_RETURN;

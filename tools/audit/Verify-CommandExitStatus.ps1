@@ -5,7 +5,8 @@ param(
     [string]$LogRoot = 'O:\winnt\logs',
     [string]$LogPrefix = 'm0-t412-s8-exit',
     [string[]]$Cases,
-    [string]$GuestFixturePath
+    [string]$GuestFixturePath,
+    [string]$VideoGuestFixturePath
 )
 $ErrorActionPreference = 'Stop'
 $Observer = (Resolve-Path -LiteralPath $Observer).Path
@@ -17,6 +18,15 @@ if (!(Test-Path -LiteralPath $runtimeFixtureRoot)) {
     New-Item -ItemType Directory -Path $runtimeFixtureRoot -Force | Out-Null
 }
 $runtimeFixtureRoot = (Resolve-Path -LiteralPath $runtimeFixtureRoot).Path
+if($Cases -contains 'graphics-return' -or $Cases -contains 'direct-graphics-return') {
+    if(!$VideoGuestFixturePath){throw 'Graphics return requires an authored video fixture'}
+    $video=(Resolve-Path -LiteralPath $VideoGuestFixturePath).Path
+    $videoBuild=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../../build'))+'\'
+    if(!$video.StartsWith($videoBuild,[StringComparison]::OrdinalIgnoreCase)){throw 'Video fixture must be under repository build'}
+    $manifest=Get-Content -LiteralPath (Join-Path (Split-Path $video) 'manifest.json') -Raw | ConvertFrom-Json
+    if($manifest.route -ne 'graphics-vram' -or (Get-FileHash -LiteralPath $video).Hash -ne $manifest.sha256){throw 'Wrong video probe or hash'}
+    Copy-Item -LiteralPath $video -Destination (Join-Path $runtimeFixtureRoot 'VTGRAPH.COM') -Force
+}
 $generatedFixtures = @(
     (Join-Path $runtimeFixtureRoot 'G7.COM'),
     (Join-Path $runtimeFixtureRoot 'STREAM.CMD'),
@@ -108,13 +118,26 @@ $matrix = @(
     @{ Name='direct-seven'; Args=@('cmd.exe','/c',(Join-Path $shortFixtureRoot 'D7.CMD')); Code=7; ConsoleMarkers=@('S10_DIRECT_SEVEN') },
     @{ Name='edit'; Edit=$true; Code=1; ConsoleMarkers=@('bytes total conventional memory') }
     @{ Name='native-cmd-dos'; Supplemental=$true; Args=@('cmd.exe','/d','/c',('"'+(Join-Path $PackageRoot 'run16.exe')+' MEM.EXE"')); Code=0; ConsoleMarkers=@('bytes total conventional memory') },
+    @{ Name='native-root-frontend'; Supplemental=$true; RootFrontend=$true; Args=@('cmd.exe','/d','/c',('"'+(Join-Path $PackageRoot 'run16.exe')+' MEM.EXE"')); Code=0; ConsoleMarkers=@('bytes total conventional memory') },
+    @{ Name='direct-graphics-return'; Supplemental=$true; Args=@((Join-Path $runtimeFixtureRoot 'VTGRAPH.COM')); Code=0; ConsoleMarkers=@('S23_GRAPHICS_VRAM_OK') },
+    @{ Name='graphics-return'; Supplemental=$true; Text=((Join-Path $runtimeFixtureRoot 'VTGRAPH.COM')+"`rmem`rexit`r"); LineDelayMs=1000; Code=1; ConsoleMarkers=@('S23_GRAPHICS_VRAM_OK','bytes total conventional memory') },
+    # Keep one root frontend alive across two sequential DOS submissions.
+    @{ Name='native-cmd-dos-repeat'; Supplemental=$true; Args=@('cmd.exe','/d','/c',('""'+(Join-Path $PackageRoot 'run16.exe')+'" MEM.EXE & "'+(Join-Path $PackageRoot 'run16.exe')+'" MEM.EXE"')); Code=0; ConsoleMarkers=@('bytes total conventional memory'); ConsoleMarkerCount=2 },
     @{ Name='dos-native-dos'; Supplemental=$true; Text="cmd.exe /d`rrun16 mem`rexit`rmem`rexit`r"; LineDelayMs=1000; Code=1; ConsoleMarkers=@('bytes total conventional memory','Microsoft Windows [Version'); ConsoleMarkerCount=2 },
+    # No line-level wait for an owner change: keep typing through DOS/native
+    # handoff. The observer still emits ordinary paired key records.
+    @{ Name='dos-native-typeahead'; Supplemental=$true; Text="cmd.exe /d`rrun16 mem`rexit`rmem`rexit`r"; LineDelayMs=0; Code=1; ConsoleMarkers=@('bytes total conventional memory','Microsoft Windows [Version'); ConsoleMarkerCount=2 },
     @{ Name='worker-version-rejection'; Args=@('MEM.EXE'); Code=1306; Negative=$true }
 )
+foreach ($case in $matrix) {
+    if ($case.Name -in @('native-cmd-dos-repeat','dos-native-dos','dos-native-typeahead')) {
+        $case.RootFrontend=$true
+    }
+}
 foreach ($selected in $Cases) {
     if ($selected -notin $matrix.Name) { throw "Unknown case: $selected" }
 }
-$environmentNames = @('MVDM_BASESRV_TRACE_PATH')
+$environmentNames = @('MVDM_BASESRV_TRACE_PATH','MVDM_S34_TRACE_PATH')
 $previous = @{}
 foreach ($name in $environmentNames) { $previous[$name]=[Environment]::GetEnvironmentVariable($name) }
 $results = @()
@@ -125,11 +148,13 @@ try {
         $report=Join-Path $LogRoot "$LogPrefix-$($case.Name).txt"
         if (Test-Path -LiteralPath $report) { throw "Use a fresh log prefix: $report exists" }
         [Environment]::SetEnvironmentVariable($environmentNames[0],"$report.broker.log")
+        if($case.RootFrontend){[Environment]::SetEnvironmentVariable('MVDM_S34_TRACE_PATH',"$report.frontend.log")}
+        else{[Environment]::SetEnvironmentVariable('MVDM_S34_TRACE_PATH',$previous['MVDM_S34_TRACE_PATH'])}
         $arguments=@((Join-Path $PackageRoot 'run16.exe'),$PackageRoot,$report)
         if ($case.Args) { $arguments += $case.Args } else { $arguments += 'COMMAND.COM' }
         if ($case.Text) {
             $arguments += @('--observe-console-input-text',('"'+$case.Text+'"'))
-            if ($case.LineDelayMs) {
+            if ($case.ContainsKey('LineDelayMs')) {
                 $arguments += @('--observe-console-line-delay-ms',$case.LineDelayMs)
             }
         }
@@ -205,6 +230,17 @@ try {
             if ($case.ConsoleMarkerCount -and
                 [regex]::Matches($screenForMarkers,[regex]::Escape(($case.ConsoleMarkers[0] -replace '\s',''))).Count -ne $case.ConsoleMarkerCount) {
                 throw "Unexpected guest Console marker count for $($case.Name): $($case.ConsoleMarkers[0])"
+            }
+            if($case.RootFrontend){
+                $identity=Get-Content -LiteralPath "$report.frontend.log" -Raw
+                $owners=@([regex]::Matches($identity,'(?m)^(\d+) run16-frontend-owner (\d+)\r?$'))
+                if(!$owners.Count){throw 'No production frontend owner observed'}
+                foreach($owner in $owners){
+                    if([int]$owner.Groups[1].Value -ne $launcherId -or
+                       [int]$owner.Groups[2].Value -ne $launcherId){
+                        throw "Frontend ownership mismatch: root=$launcherId actual=$($owner.Groups[1].Value)"
+                    }
+                }
             }
             # The product deliberately has no native-child report hook.  A
             # successful observed COMMAND session is the regression contract:

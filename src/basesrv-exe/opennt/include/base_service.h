@@ -50,6 +50,41 @@ BOOL OpenNtBaseServicePeer(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation);
 /* For authenticated in-flight calls only. Caller closes the returned handle;
  * retaining it does not extend the RPC context or registration lifetime. */
 DWORD OpenNtBaseServiceRetainPeer(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,HANDLE *);
+/* Independent of DOS command receipts: a root registers an unnamed event
+ * received through an authenticated typed attachment. Descendants present
+ * a restricted duplicate of that same object, never a trusted handle number.
+ * Retain returns a query/synchronize-only root process and its generation;
+ * caller closes the process. No task or worker selection occurs here. */
+DWORD OpenNtBaseServiceRegisterFrontendRoot(OPENNT_BASE_CONNECTION *,DWORD pid,
+    DWORD generation,HANDLE capability);
+DWORD OpenNtBaseServiceRetainFrontendRoot(OPENNT_BASE_CONNECTION *,DWORD pid,
+    DWORD generation,HANDLE capability,HANDLE *root,DWORD *root_generation);
+DWORD OpenNtBaseServiceWorkerFrontendCapability(OPENNT_BASE_CONNECTION *,DWORD pid,
+    DWORD generation,HANDLE *capability);
+/* Request identifies an authenticated connection's still-pending original
+ * DOS command, not a caller-nominated worker. The root's event wakes it to
+ * acquire that selected worker and publish a direct route. No I/O payloads. */
+DWORD OpenNtBaseServiceRequestFrontend(OPENNT_BASE_CONNECTION *,DWORD pid,
+    DWORD generation,HANDLE capability);
+DWORD OpenNtBaseServiceFrontendRequest(OPENNT_BASE_CONNECTION *,DWORD pid,
+    DWORD generation,DWORD *request,HANDLE *worker);
+DWORD OpenNtBaseServiceAttachFrontendRequest(OPENNT_BASE_CONNECTION *,DWORD pid,
+    DWORD generation,DWORD request,HANDLE pipe,HANDLE ready);
+/* Frontend transport authentication only: the original command's waiting
+ * launcher may retain its selected DOS worker with query/synchronize rights.
+ * No caller-selected PID, task selection, Console handle or channel payload. */
+DWORD OpenNtBaseServiceRetainCommandWorker(OPENNT_BASE_CONNECTION *,DWORD pid,
+    DWORD generation,HANDLE *worker);
+/* One root frontend per selected DOS worker. Attach carries a pipe and a
+ * manual-reset readiness event, never input/frame payloads. Take transfers
+ * pipe, frontend process and synchronize-only event once; caller owns all
+ * three returned handles. */
+DWORD OpenNtBaseServiceAttachFrontend(OPENNT_BASE_CONNECTION *,DWORD pid,
+    DWORD generation,HANDLE pipe,HANDLE ready);
+DWORD OpenNtBaseServiceTakeFrontend(OPENNT_BASE_CONNECTION *,DWORD pid,
+    DWORD generation,HANDLE *pipe,HANDLE *frontend,DWORD *frontend_generation,HANDLE *ready);
+DWORD OpenNtBaseServiceWaitFrontend(OPENNT_BASE_CONNECTION *,DWORD pid,
+    DWORD generation,HANDLE *pipe,HANDLE *frontend,DWORD *frontend_generation,HANDLE *ready);
 DWORD OpenNtBaseServiceFirst(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,DWORD *);
 DWORD OpenNtBaseServiceRegisterWowExec(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,DWORD window);
 /* These are authenticated service bindings around the original CheckVDM

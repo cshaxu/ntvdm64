@@ -44,9 +44,11 @@ rule run
 
 build obj/fixture.obj: cc `$root/tests/adapter-mvdm-host-out/win32/console_input_contract_fixture.c
 build obj/console_compat.obj: cc `$root/src/ntvdm-exe/win32/console_compat.c
+build obj/console_client.obj: cc `$root/src/ntvdm-exe/win32/console_client.c
+build obj/console_grid.obj: cc `$root/src/opennt-abi/host-compat/console_grid.c
 build obj/session.obj: cc `$root/src/ntvdm-exe/session/session.c
 build obj/guest_memory_lease.obj: cc `$root/src/ntvdm-exe/session/guest_memory_lease.c
-build console_input_contract_fixture.exe: link obj/fixture.obj obj/console_compat.obj obj/session.obj obj/guest_memory_lease.obj
+build console_input_contract_fixture.exe: link obj/fixture.obj obj/console_compat.obj obj/console_client.obj obj/console_grid.obj obj/session.obj obj/guest_memory_lease.obj
 build test: run console_input_contract_fixture.exe
 default console_input_contract_fixture.exe
 "@

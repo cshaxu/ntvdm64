@@ -9,4 +9,7 @@
 #undef GetConsoleKeyboardLayoutNameA
 
 BOOL WINAPI GetConsoleKeyboardLayoutNameA(LPSTR layout_name);
+/* The original COMMAND keyboard caller queries the frontend's Console. */
+UINT WINAPI MvdmGetConsoleCP(void);
+#define GetConsoleCP MvdmGetConsoleCP
 #endif

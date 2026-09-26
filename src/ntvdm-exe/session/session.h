@@ -7,7 +7,7 @@
 #include "guest_memory_lease.h"
 
 #define SESSION_MAGIC UINT32_C(0x53455353)
-#define SESSION_ABI_VERSION UINT32_C(8)
+#define SESSION_ABI_VERSION UINT32_C(9)
 #define SESSION_MAX_TEARDOWNS 8u
 #define SESSION_MAX_THREAD_HOOKS 8u
 #define SESSION_PRESENTATION_PALETTE_ENTRIES 256u
@@ -127,6 +127,8 @@ typedef struct session {
      * adapter.  It never holds guest data or a cross-component ABI value;
      * the adapter registers teardown and clears it before session disposal. */
     void *mvdm_command_native_child;
+    /* Worker-local endpoint of the authenticated run16 I/O channel. */
+    void *console_client;
     guest_memory_lease_context guest_memory_lease;
     char firmware_root[SESSION_FIRMWARE_ROOT_BYTES];
     char mvdm_system_root[SESSION_FIRMWARE_ROOT_BYTES];

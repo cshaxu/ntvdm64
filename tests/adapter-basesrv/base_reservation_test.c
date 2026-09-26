@@ -14,12 +14,25 @@ int main(void)
     CHECK(OpenNtBaseReservationPrepareWorker(state,first,102,7,self)==ERROR_ACCESS_DENIED);
     CHECK(OpenNtBaseReservationPrepareWorker(state,first,101,7,self)==ERROR_SUCCESS);
     CHECK(OpenNtBaseReservationPrepareWorker(state,first,101,7,self)==ERROR_ALREADY_EXISTS);
-    CHECK(!OpenNtBaseReservationIsWorkerLocalStream(state,first,(HANDLE)0x51));
-    CHECK(OpenNtBaseReservationMarkWorkerLocalStream(state,first,(HANDLE)0x51)==ERROR_SUCCESS);
-    CHECK(OpenNtBaseReservationMarkWorkerLocalStream(state,first,(HANDLE)0x52)==ERROR_SUCCESS);
-    CHECK(OpenNtBaseReservationMarkWorkerLocalStream(state,first,(HANDLE)0x51)==ERROR_SUCCESS);
-    CHECK(OpenNtBaseReservationIsWorkerLocalStream(state,first,(HANDLE)0x51));
-    CHECK(!OpenNtBaseReservationIsWorkerLocalStream(state,first,(HANDLE)0x53));
+    /* Exercise the current one-way typed-resource delivery, not the removed
+     * worker-local numeric handle marking API. Broker copies must disappear
+     * after transfer so a receiver can observe EOF. */
+    {
+        HANDLE input=NULL,output=NULL,delivered=NULL;
+        uint32_t receipt=0;
+        DWORD bytes=0;
+        char byte=0;
+        CHECK(CreatePipe(&input,&output,NULL,0));
+        CHECK(OpenNtBaseReservationAcceptStream(state,first,output,&receipt)==ERROR_SUCCESS);
+        CHECK(receipt!=0);CloseHandle(output);output=NULL;
+        CHECK(OpenNtBaseReservationResolveStream(state,first,receipt,&delivered)==ERROR_SUCCESS);
+        CHECK(delivered!=NULL && WriteFile(delivered,"F",1,&bytes,NULL) && bytes==1);
+        CHECK(ReadFile(input,&byte,1,&bytes,NULL) && bytes==1 && byte=='F');
+        CloseHandle(delivered);delivered=NULL;
+        CHECK(OpenNtBaseReservationResolveStream(state,first,receipt,&delivered)!=ERROR_SUCCESS);
+        CHECK(!ReadFile(input,&byte,1,&bytes,NULL) && GetLastError()==ERROR_BROKEN_PIPE);
+        CloseHandle(input);
+    }
     CHECK(OpenNtBaseReservationClaimWorker(state,GetCurrentProcessId(),9,&claimed,&task,&console,&shared_wow,&worker)==ERROR_SUCCESS);
     CHECK(claimed==first && task==41 && console==(HANDLE)0x1234 && !shared_wow);
     CHECK(worker!=NULL); CloseHandle(worker); worker=NULL;

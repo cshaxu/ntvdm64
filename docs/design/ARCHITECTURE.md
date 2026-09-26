@@ -246,6 +246,30 @@ It may not contain broker policy, worker/session state, guest pointers or a
 general-purpose helper collection. Shared records are copied, versioned data,
 never session, Console or native-resource policy.
 
+## T423 DOS frontend ownership transition
+
+The admitted frontend split supersedes worker-owned DOS presentation above.
+The root run16 owns visible Console input and presentation. Nested launchers
+join its broker-authenticated capability association while retaining their own
+target-completion waits. A copied, versioned direct run16/ntvdm channel carries
+Console operations and indexed video frames; BaseSrv only authorizes and binds
+the endpoints. Neither frames nor input are relayed through BaseSrv.
+
+ntvdm retains the original guest keyboard/mouse devices, video mode selection,
+painters, worker-local bitmap/mutex backing, command re-entry and execution.
+Its local adapter translates the original Console API shapes into the direct
+channel. Host pointers, painter storage and mutexes never cross that channel.
+Root association, execution ancestry and worker membership are distinct.
+Each launcher/native-target pair cleans up its direct counterpart; this is
+not recursive native descendant termination or a new DOS scheduler.
+
+S2 delivers this boundary incrementally: native CUI programs still use the
+existing visible Console, and native GUI/WOW windows retain their own route.
+Hidden native Console belongs to S3; run16's display flag and kvm-window
+presentation belong to S4. They are required future stages, not capabilities
+claimed by copied-frame or Console transport tests. Status and the active
+proposal own the finite verification gates and remaining limitations.
+
 ## WOW message transport boundary
 
 Modern Windows USER is the sole native message delivery and reply owner for

@@ -27,6 +27,32 @@ static DWORD WINAPI same_console_query(void *context,HANDLE caller,const HANDLE 
     return ERROR_SUCCESS;
 }
 
+static int frontend_pair(HANDLE *server,HANDLE *client)
+{
+    char name[96];
+    sprintf_s(name,sizeof(name),"\\\\.\\pipe\\ntvdm-frontend-test-%lu",GetCurrentProcessId());
+    *server=CreateNamedPipeA(name,PIPE_ACCESS_DUPLEX|FILE_FLAG_FIRST_PIPE_INSTANCE,
+        PIPE_TYPE_BYTE|PIPE_WAIT|PIPE_REJECT_REMOTE_CLIENTS,1,1024,1024,0,NULL);
+    CHECK(*server!=INVALID_HANDLE_VALUE);
+    *client=CreateFileA(name,GENERIC_READ|GENERIC_WRITE,0,NULL,OPEN_EXISTING,0,NULL);
+    CHECK(*client!=INVALID_HANDLE_VALUE);
+    CHECK(ConnectNamedPipe(*server,NULL) || GetLastError()==ERROR_PIPE_CONNECTED);
+    return 0;
+}
+
+typedef struct FRONTEND_WAIT_TEST {
+    OPENNT_BASE_CONNECTION *connection;
+    DWORD pid,generation,error,frontend_generation;
+    HANDLE pipe,frontend,ready;
+} FRONTEND_WAIT_TEST;
+static DWORD WINAPI frontend_wait(void *context)
+{
+    FRONTEND_WAIT_TEST *test=context;
+    test->error=OpenNtBaseServiceWaitFrontend(test->connection,test->pid,test->generation,
+        &test->pipe,&test->frontend,&test->frontend_generation,&test->ready);
+    return 0;
+}
+
 static int detached_reservation(OPENNT_BASE_SERVICE *service,HANDLE self)
 {
     OPENNT_BASE_CONNECTION *connection=NULL;
@@ -104,11 +130,79 @@ int main(int argc,char **argv)
     CHECK(self && service!=NULL);
     CHECK(OpenNtBaseServiceConfigureConsoleQuery(service,same_console_query,&queryCalls));
     CHECK(OpenNtBaseServiceIsEmpty(service));
+    if (argc==2 && !strcmp(argv[1],"--frontend-root")) {
+        HANDLE capability=CreateEventW(NULL,TRUE,FALSE,NULL),restricted=NULL;
+        HANDLE different=CreateEventW(NULL,TRUE,FALSE,NULL),automatic=CreateEventW(NULL,FALSE,FALSE,NULL);
+        HANDLE named,root=NULL;
+        DWORD rootGeneration=0,flags=0;
+        char name[96];
+        CHECK(capability && different && automatic);
+        sprintf_s(name,96,"Local\\ntvdm-frontend-fixture-%lu",GetCurrentProcessId());
+        named=CreateEventA(NULL,TRUE,FALSE,name);CHECK(named);
+        CHECK(DuplicateHandle(GetCurrentProcess(),capability,GetCurrentProcess(),
+            &restricted,SYNCHRONIZE,FALSE,0));
+        CHECK(GetModuleFileNameA(NULL,command,MAX_PATH));
+        { char executable[MAX_PATH];strcpy_s(executable,MAX_PATH,command);
+          sprintf_s(command,sizeof(command),"\"%s\" --reservation-child",executable); }
+        CHECK(CreateProcessA(NULL,command,NULL,NULL,FALSE,CREATE_NO_WINDOW,NULL,NULL,&startup,&child));
+        CloseHandle(child.hThread);child.hThread=NULL;
+        CHECK(OpenNtBaseServiceConnect(service,self,&launcher,&launcherGeneration)==ERROR_SUCCESS);
+        CHECK(OpenNtBaseServiceConnect(service,child.hProcess,&later,&laterGeneration)==ERROR_SUCCESS);
+        CHECK(OpenNtBaseServiceRegisterFrontendRoot(launcher,GetCurrentProcessId(),
+            launcherGeneration+1,capability)==ERROR_ACCESS_DENIED);
+        CHECK(OpenNtBaseServiceRegisterFrontendRoot(launcher,GetCurrentProcessId(),
+            launcherGeneration,self)==ERROR_INVALID_PARAMETER);
+        CHECK(OpenNtBaseServiceRegisterFrontendRoot(launcher,GetCurrentProcessId(),
+            launcherGeneration,automatic)==ERROR_INVALID_PARAMETER);
+        CHECK(OpenNtBaseServiceRegisterFrontendRoot(launcher,GetCurrentProcessId(),
+            launcherGeneration,named)==ERROR_INVALID_PARAMETER);
+        CHECK(OpenNtBaseServiceRegisterFrontendRoot(launcher,GetCurrentProcessId(),
+            launcherGeneration,capability)==ERROR_SUCCESS);
+        CHECK(OpenNtBaseServiceRegisterFrontendRoot(launcher,GetCurrentProcessId(),
+            launcherGeneration,capability)==ERROR_ALREADY_EXISTS);
+        CHECK(OpenNtBaseServiceRegisterFrontendRoot(later,child.dwProcessId,
+            laterGeneration,capability)==ERROR_ALREADY_EXISTS);
+        CHECK(OpenNtBaseServiceRetainFrontendRoot(later,child.dwProcessId,laterGeneration+1,
+            restricted,&root,&rootGeneration)==ERROR_ACCESS_DENIED && !root && !rootGeneration);
+        CHECK(OpenNtBaseServiceRetainFrontendRoot(later,child.dwProcessId,laterGeneration,
+            different,&root,&rootGeneration)==ERROR_ACCESS_DENIED && !root && !rootGeneration);
+        CHECK(OpenNtBaseServiceRetainFrontendRoot(later,child.dwProcessId,laterGeneration,
+            restricted,&root,&rootGeneration)==ERROR_SUCCESS);
+        CHECK(GetProcessId(root)==GetCurrentProcessId() && rootGeneration==launcherGeneration);
+        CHECK(GetHandleInformation(root,&flags) && !(flags&HANDLE_FLAG_INHERIT));
+        CloseHandle(root);root=NULL;
+        CHECK(OpenNtBaseServiceDisconnect(launcher)==ERROR_SUCCESS);launcher=NULL;
+        CHECK(OpenNtBaseServiceRetainFrontendRoot(later,child.dwProcessId,laterGeneration,
+            restricted,&root,&rootGeneration)==ERROR_ACCESS_DENIED && !root && !rootGeneration);
+        CHECK(OpenNtBaseServiceConnect(service,self,&launcher,&launcherGeneration)==ERROR_SUCCESS);
+        CHECK(OpenNtBaseServiceRegisterFrontendRoot(later,child.dwProcessId,
+            laterGeneration,different)==ERROR_SUCCESS);
+        CHECK(TerminateProcess(child.hProcess,23));
+        CHECK(WaitForSingleObject(child.hProcess,5000)==WAIT_OBJECT_0);
+        CHECK(OpenNtBaseServiceRetainFrontendRoot(launcher,GetCurrentProcessId(),launcherGeneration,
+            different,&root,&rootGeneration)==ERROR_PROCESS_ABORTED && !root && !rootGeneration);
+        CHECK(OpenNtBaseServiceDisconnect(later)==ERROR_SUCCESS);
+        CHECK(OpenNtBaseServiceDisconnect(launcher)==ERROR_SUCCESS);
+        CHECK(OpenNtBaseServiceIsEmpty(service));
+        CHECK(OpenNtBaseServiceStop(service));
+        CloseHandle(child.hProcess);CloseHandle(self);
+        CloseHandle(capability);CloseHandle(restricted);CloseHandle(different);
+        CloseHandle(automatic);CloseHandle(named);
+        puts("PASS frontend root: object identity, type, generation, duplicate, rundown, death");
+        return 0;
+    }
     /* Repeating after rundown proves the failed-start record is not reused. */
     CHECK(detached_reservation(service,self)==0);
     CHECK(detached_reservation(service,self)==0);
     CHECK(OpenNtBaseServiceConnect(service,self,&launcher,&launcherGeneration)==ERROR_SUCCESS);
     CHECK(!OpenNtBaseServiceIsEmpty(service));
+    {
+        HANDLE peer=(HANDLE)1;
+        CHECK(OpenNtBaseServiceRetainCommandWorker(launcher,GetCurrentProcessId(),
+            launcherGeneration+1,&peer)==ERROR_ACCESS_DENIED && peer==NULL);
+        CHECK(OpenNtBaseServiceRetainCommandWorker(launcher,GetCurrentProcessId(),
+            launcherGeneration,&peer)==ERROR_NOT_READY && peer==NULL);
+    }
     /* Standard streams cross the standalone service as receipts.  Keep the
      * opposite pipe ends in this fixture so that the first worker delivery
      * can prove it got usable stream attachments rather than local HANDLE
@@ -163,9 +257,246 @@ int main(int argc,char **argv)
     check.u.CheckVDM.StdIn=NULL;
     check.u.CheckVDM.StdOut=NULL;
     check.u.CheckVDM.StdErr=NULL;
+    if (argc==2 && (!strcmp(argv[1],"--frontend-unclaimed-stop") ||
+        !strcmp(argv[1],"--frontend-unclaimed-reconnect"))) {
+        HANDLE capability=CreateEventW(NULL,TRUE,FALSE,NULL);
+        DWORD beforeStop=0,afterStop=0;
+        CHECK(capability);
+        CHECK(OpenNtBaseServiceRegisterFrontendRoot(launcher,GetCurrentProcessId(),
+            launcherGeneration,capability)==ERROR_SUCCESS);
+        CHECK(OpenNtBaseServiceRequestFrontend(launcher,GetCurrentProcessId(),
+            launcherGeneration,capability)==ERROR_SUCCESS);
+        /* Never connect/resume this prepared worker: no process-exit watch
+         * exists to collect the cancelled frontend route. Rundown owns only
+         * this unclaimed startup, not a running guest task. */
+        CHECK(OpenNtBaseServiceDisconnect(launcher)==ERROR_SUCCESS);launcher=NULL;
+        CHECK(WaitForSingleObject(child.hProcess,5000)==WAIT_OBJECT_0);
+        CHECK(OpenNtBaseServiceIsEmpty(service));
+        CHECK(GetProcessHandleCount(GetCurrentProcess(),&beforeStop));
+        if (!strcmp(argv[1],"--frontend-unclaimed-reconnect")) {
+            OPENNT_BASE_CONNECTION *next=NULL;
+            DWORD nextGeneration=0,afterReconnect=0;
+            CHECK(OpenNtBaseServiceConnect(service,self,&next,&nextGeneration)==ERROR_SUCCESS);
+            CHECK(OpenNtBaseServiceDisconnect(next)==ERROR_SUCCESS);
+            CHECK(GetProcessHandleCount(GetCurrentProcess(),&afterReconnect));
+            fprintf(stdout,"unclaimed frontend reconnect: handles before=%lu after=%lu\n",
+                beforeStop,afterReconnect);
+            CHECK(beforeStop==afterReconnect+1);
+            beforeStop=afterReconnect;
+        }
+        CHECK(OpenNtBaseServiceStop(service));service=NULL;
+        CHECK(GetProcessHandleCount(GetCurrentProcess(),&afterStop));
+        fprintf(stdout,"unclaimed frontend stop: handles before=%lu after=%lu\n",beforeStop,afterStop);
+        CloseHandle(capability);CloseHandle(child.hThread);CloseHandle(child.hProcess);
+        CloseHandle(stdinRead);CloseHandle(stdinWrite);CloseHandle(stdoutRead);CloseHandle(stdoutWrite);
+        CloseHandle(self);free(updateAnswer);free(updateWire);free(answer);free(wire);
+        CHECK(beforeStop==afterStop+(!strcmp(argv[1],"--frontend-unclaimed-stop") ? 1 : 0));
+        puts(!strcmp(argv[1],"--frontend-unclaimed-stop") ?
+            "PASS: service stop releases the unclaimed cancelled frontend worker handle" :
+            "PASS: new admission releases dead cancelled route before service stop");
+        return 0;
+    }
     CHECK(ResumeThread(child.hThread)!=(DWORD)-1);
     CHECK(OpenNtBaseServiceConnect(service,child.hProcess,&worker,&workerGeneration)==ERROR_SUCCESS);
+    {
+        HANDLE peer=NULL;
+        DWORD flags=0;
+        CHECK(OpenNtBaseServiceRetainCommandWorker(launcher,GetCurrentProcessId(),
+            launcherGeneration,&peer)==ERROR_SUCCESS);
+        CHECK(peer && GetProcessId(peer)==child.dwProcessId);
+        CHECK(GetHandleInformation(peer,&flags) && !(flags&HANDLE_FLAG_INHERIT));
+        CHECK(!TerminateProcess(peer,99) && GetLastError()==ERROR_ACCESS_DENIED);
+        CloseHandle(peer);peer=NULL;
+        CHECK(OpenNtBaseServiceRetainCommandWorker(worker,child.dwProcessId,
+            workerGeneration,&peer)==ERROR_NOT_READY && peer==NULL);
+    }
     CHECK(OpenNtBaseServiceWorkerReservation(worker,&claimed,&task,&console));
+    if (argc==2 && (!strcmp(argv[1],"--frontend-delegated") ||
+        !strcmp(argv[1],"--frontend-wait-root-loss") ||
+        !strcmp(argv[1],"--frontend-wait-request-loss"))) {
+        OPENNT_BASE_CONNECTION *rootConnection=NULL;
+        PROCESS_INFORMATION rootProcess={0};
+        HANDLE capability=CreateEventW(NULL,TRUE,FALSE,NULL),other=CreateEventW(NULL,TRUE,FALSE,NULL);
+        HANDLE pending=NULL,ui=NULL,ready=CreateEventW(NULL,TRUE,FALSE,NULL);
+        HANDLE selected=NULL,delivered=NULL,peer=NULL,deliveredReady=NULL;
+        DWORD rootGeneration=0,request=0,deliveredGeneration=0,count;
+        char payload;
+        CHECK(capability && other && ready);
+        CHECK(GetModuleFileNameA(NULL,command,MAX_PATH));
+        { char executable[MAX_PATH];strcpy_s(executable,MAX_PATH,command);
+          sprintf_s(command,sizeof(command),"\"%s\" --reservation-child",executable); }
+        CHECK(CreateProcessA(NULL,command,NULL,NULL,FALSE,CREATE_NO_WINDOW,NULL,NULL,&startup,&rootProcess));
+        CHECK(OpenNtBaseServiceConnect(service,rootProcess.hProcess,&rootConnection,&rootGeneration)==ERROR_SUCCESS);
+        CHECK(OpenNtBaseServiceRegisterFrontendRoot(rootConnection,rootProcess.dwProcessId,
+            rootGeneration,capability)==ERROR_SUCCESS);
+        CHECK(OpenNtBaseServiceFrontendRequest(rootConnection,rootProcess.dwProcessId,
+            rootGeneration,&request,&selected)==ERROR_NOT_FOUND && !request && !selected);
+        CHECK(WaitForSingleObject(capability,0)==WAIT_TIMEOUT);
+        CHECK(OpenNtBaseServiceRequestFrontend(launcher,GetCurrentProcessId(),
+            launcherGeneration,other)==ERROR_ACCESS_DENIED);
+        CHECK(OpenNtBaseServiceRequestFrontend(launcher,GetCurrentProcessId(),
+            launcherGeneration,capability)==ERROR_SUCCESS);
+        CHECK(WaitForSingleObject(capability,0)==WAIT_OBJECT_0);
+        if (strcmp(argv[1],"--frontend-delegated")) {
+            FRONTEND_WAIT_TEST waiting={0};
+            HANDLE waitingThread;
+            DWORD outcome;
+            waiting.connection=worker;waiting.pid=child.dwProcessId;waiting.generation=workerGeneration;
+            waitingThread=CreateThread(NULL,0,frontend_wait,&waiting,0,NULL);CHECK(waitingThread);
+            CHECK(WaitForSingleObject(waitingThread,100)==WAIT_TIMEOUT);
+            if (!strcmp(argv[1],"--frontend-wait-root-loss")) {
+                CHECK(OpenNtBaseServiceDisconnect(rootConnection)==ERROR_SUCCESS);rootConnection=NULL;
+            } else {
+                CHECK(OpenNtBaseServiceDisconnect(launcher)==ERROR_SUCCESS);launcher=NULL;
+            }
+            outcome=WaitForSingleObject(waitingThread,5000);
+            fprintf(stdout,"pending frontend cancellation: wait=%lu error=%lu\n",outcome,waiting.error);
+            /* Request-owner rundown ends its unfinished DOS pair. Root-only
+             * capability cancellation here has no submitted command pair. */
+            if (!launcher) {
+                DWORD workerExit=0;
+                CHECK(WaitForSingleObject(child.hProcess,5000)==WAIT_OBJECT_0);
+                CHECK(GetExitCodeProcess(child.hProcess,&workerExit) &&
+                    workerExit==ERROR_PROCESS_ABORTED);
+            } else CHECK(TerminateProcess(child.hProcess,0));
+            CHECK(TerminateProcess(rootProcess.hProcess,0));
+            CHECK(WaitForSingleObject(child.hProcess,5000)==WAIT_OBJECT_0);
+            CHECK(WaitForSingleObject(rootProcess.hProcess,5000)==WAIT_OBJECT_0);
+            CHECK(WaitForSingleObject(waitingThread,5000)==WAIT_OBJECT_0);
+            CHECK(outcome==WAIT_OBJECT_0 && waiting.error==ERROR_PROCESS_ABORTED &&
+                !waiting.pipe && !waiting.frontend && !waiting.ready && !waiting.frontend_generation);
+            CloseHandle(waitingThread);
+            CHECK(OpenNtBaseServiceDisconnect(worker)==ERROR_SUCCESS);
+            if (launcher) CHECK(OpenNtBaseServiceDisconnect(launcher)==ERROR_SUCCESS);
+            if (rootConnection) CHECK(OpenNtBaseServiceDisconnect(rootConnection)==ERROR_SUCCESS);
+            CloseHandle(rootProcess.hThread);CloseHandle(rootProcess.hProcess);
+            CloseHandle(child.hThread);CloseHandle(child.hProcess);CloseHandle(self);
+            CloseHandle(capability);CloseHandle(other);CloseHandle(ready);
+            puts("PASS: pending root/request rundown cancels worker wait without publishing handles");
+            return 0;
+        }
+        CHECK(OpenNtBaseServiceFrontendRequest(rootConnection,rootProcess.dwProcessId,
+            rootGeneration,&request,&selected)==ERROR_SUCCESS);
+        CHECK(request==launcherGeneration && GetProcessId(selected)==child.dwProcessId);
+        CloseHandle(selected);
+        CHECK(frontend_pair(&pending,&ui)==0);
+        CHECK(OpenNtBaseServiceAttachFrontendRequest(rootConnection,rootProcess.dwProcessId,
+            rootGeneration,request+1,pending,ready)==ERROR_ACCESS_DENIED);
+        CHECK(OpenNtBaseServiceAttachFrontendRequest(rootConnection,rootProcess.dwProcessId,
+            rootGeneration,request,pending,ready)==ERROR_SUCCESS);
+        CloseHandle(pending);
+        CHECK(OpenNtBaseServiceRequestFrontend(launcher,GetCurrentProcessId(),
+            launcherGeneration,capability)==ERROR_ALREADY_EXISTS);
+        CHECK(OpenNtBaseServiceFrontendRequest(rootConnection,rootProcess.dwProcessId,
+            rootGeneration,&request,&selected)==ERROR_NOT_FOUND && !request && !selected);
+        CHECK(WaitForSingleObject(capability,0)==WAIT_TIMEOUT);
+        /* The root owns the route; the live submitting launcher still owns
+         * the unfinished DOS lifetime pair. */
+        CHECK(OpenNtBaseServiceTakeFrontend(worker,child.dwProcessId,workerGeneration,
+            &delivered,&peer,&deliveredGeneration,&deliveredReady)==ERROR_SUCCESS);
+        CHECK(GetProcessId(peer)==rootProcess.dwProcessId && deliveredGeneration==rootGeneration);
+        CHECK(WriteFile(ui,"R",1,&count,NULL) && count==1);
+        CHECK(ReadFile(delivered,&payload,1,&count,NULL) && count==1 && payload=='R');
+        CloseHandle(delivered);CloseHandle(peer);CloseHandle(deliveredReady);CloseHandle(ui);
+        CHECK(OpenNtBaseServiceDisconnect(launcher)==ERROR_SUCCESS);launcher=NULL;
+        CHECK(WaitForSingleObject(child.hProcess,5000)==WAIT_OBJECT_0);
+        { DWORD workerExit=0;
+          CHECK(GetExitCodeProcess(child.hProcess,&workerExit) && workerExit==ERROR_PROCESS_ABORTED); }
+        CHECK(WaitForSingleObject(rootProcess.hProcess,0)==WAIT_TIMEOUT);
+        CHECK(OpenNtBaseServiceDisconnect(rootConnection)==ERROR_SUCCESS);
+        CHECK(TerminateProcess(rootProcess.hProcess,0));
+        CHECK(WaitForSingleObject(child.hProcess,5000)==WAIT_OBJECT_0);
+        CHECK(WaitForSingleObject(rootProcess.hProcess,5000)==WAIT_OBJECT_0);
+        CHECK(OpenNtBaseServiceDisconnect(worker)==ERROR_SUCCESS);
+        CloseHandle(rootProcess.hThread);CloseHandle(rootProcess.hProcess);
+        CloseHandle(child.hThread);CloseHandle(child.hProcess);CloseHandle(self);
+        CloseHandle(capability);CloseHandle(other);CloseHandle(ready);
+        puts("PASS: original command authorizes root channel; owner loss ends DOS pair, not root");
+        return 0;
+    }
+    {
+        HANDLE pending=NULL,ui=NULL,delivered=NULL,peer=NULL,ready,deliveredReady=NULL;
+        DWORD rootGeneration=0,count=0,flags=HANDLE_FLAG_INHERIT;
+        char payload=0;
+        FRONTEND_WAIT_TEST waiting={0};
+        HANDLE waitingThread=NULL;
+        ready=CreateEventW(NULL,TRUE,FALSE,NULL);CHECK(ready);
+        CHECK(frontend_pair(&pending,&ui)==0);
+        CHECK(OpenNtBaseServiceAttachFrontend(launcher,GetCurrentProcessId(),
+            launcherGeneration+1,pending,ready)==ERROR_ACCESS_DENIED);
+        CHECK(OpenNtBaseServiceAttachFrontend(launcher,GetCurrentProcessId(),
+            launcherGeneration,self,ready)==ERROR_INVALID_PARAMETER);
+        CHECK(OpenNtBaseServiceAttachFrontend(launcher,GetCurrentProcessId(),
+            launcherGeneration,pending,self)==ERROR_INVALID_PARAMETER);
+        if(argc==2 && (!strcmp(argv[1],"--frontend-wait") ||
+            !strcmp(argv[1],"--frontend-wait-worker-loss"))) {
+            waiting.connection=worker;waiting.pid=child.dwProcessId;waiting.generation=workerGeneration;
+            waitingThread=CreateThread(NULL,0,frontend_wait,&waiting,0,NULL);CHECK(waitingThread);
+            CHECK(WaitForSingleObject(waitingThread,100)==WAIT_TIMEOUT);
+            if(!strcmp(argv[1],"--frontend-wait-worker-loss")) {
+                CHECK(TerminateProcess(child.hProcess,23));
+                CHECK(WaitForSingleObject(child.hProcess,5000)==WAIT_OBJECT_0);
+                CHECK(WaitForSingleObject(waitingThread,5000)==WAIT_OBJECT_0);
+                CHECK(waiting.error==ERROR_ACCESS_DENIED && !waiting.pipe &&
+                    !waiting.frontend && !waiting.ready && !waiting.frontend_generation);
+                CloseHandle(waitingThread);CloseHandle(pending);CloseHandle(ui);CloseHandle(ready);
+                CHECK(OpenNtBaseServiceDisconnect(worker)==ERROR_SUCCESS);worker=NULL;
+                CHECK(OpenNtBaseServiceDisconnect(launcher)==ERROR_SUCCESS);launcher=NULL;
+                CloseHandle(child.hThread);CloseHandle(child.hProcess);CloseHandle(self);
+                puts("PASS: waiting frontend delivery cancels on worker death without publishing handles");
+                return 0;
+            }
+        }
+        CHECK(OpenNtBaseServiceAttachFrontend(launcher,GetCurrentProcessId(),
+            launcherGeneration,pending,ready)==ERROR_SUCCESS);
+        CHECK(OpenNtBaseServiceAttachFrontend(launcher,GetCurrentProcessId(),
+            launcherGeneration,pending,ready)==ERROR_ALREADY_EXISTS);
+        CloseHandle(pending);
+        if (argc==2 && !strcmp(argv[1],"--frontend-rundown")) {
+            CHECK(OpenNtBaseServiceDisconnect(launcher)==ERROR_SUCCESS);launcher=NULL;
+            CHECK(!ReadFile(ui,&payload,1,&count,NULL) && GetLastError()==ERROR_BROKEN_PIPE);
+            CHECK(OpenNtBaseServiceTakeFrontend(worker,child.dwProcessId,workerGeneration,
+                &delivered,&peer,&rootGeneration,&deliveredReady)==ERROR_PROCESS_ABORTED && !delivered && !peer && !deliveredReady);
+            CloseHandle(ui);CloseHandle(ready);
+            CHECK(WaitForSingleObject(child.hProcess,5000)==WAIT_OBJECT_0);
+            { DWORD code=STILL_ACTIVE;
+              CHECK(GetExitCodeProcess(child.hProcess,&code) && code==ERROR_PROCESS_ABORTED); }
+            CHECK(OpenNtBaseServiceDisconnect(worker)==ERROR_SUCCESS);worker=NULL;
+            CloseHandle(child.hThread);CloseHandle(child.hProcess);CloseHandle(self);
+            puts("PASS: unfinished launcher rundown closes channel and terminates its exact worker");
+            return 0;
+        }
+        CHECK(OpenNtBaseServiceTakeFrontend(launcher,GetCurrentProcessId(),launcherGeneration,
+            &delivered,&peer,&rootGeneration,&deliveredReady)==ERROR_ACCESS_DENIED && !delivered && !peer && !deliveredReady);
+        CHECK(OpenNtBaseServiceTakeFrontend(worker,child.dwProcessId,workerGeneration+1,
+            &delivered,&peer,&rootGeneration,&deliveredReady)==ERROR_ACCESS_DENIED);
+        if(waitingThread) {
+            CHECK(WaitForSingleObject(waitingThread,5000)==WAIT_OBJECT_0 && !waiting.error);
+            CloseHandle(waitingThread);
+            delivered=waiting.pipe;peer=waiting.frontend;rootGeneration=waiting.frontend_generation;
+            deliveredReady=waiting.ready;
+        } else {
+            CHECK(OpenNtBaseServiceTakeFrontend(worker,child.dwProcessId,workerGeneration,
+                &delivered,&peer,&rootGeneration,&deliveredReady)==ERROR_SUCCESS);
+        }
+        CHECK(WaitForSingleObject(deliveredReady,0)==WAIT_TIMEOUT);
+        CHECK(!SetEvent(deliveredReady) && GetLastError()==ERROR_ACCESS_DENIED);
+        CHECK(SetEvent(ready) && WaitForSingleObject(deliveredReady,0)==WAIT_OBJECT_0);
+        CHECK(ResetEvent(ready) && WaitForSingleObject(deliveredReady,0)==WAIT_TIMEOUT);
+        CHECK(GetHandleInformation(deliveredReady,&flags) && !(flags&HANDLE_FLAG_INHERIT));
+        CHECK(GetProcessId(peer)==GetCurrentProcessId() && rootGeneration==launcherGeneration);
+        CHECK(!TerminateProcess(peer,99) && GetLastError()==ERROR_ACCESS_DENIED);
+        CHECK(GetHandleInformation(delivered,&flags) && !(flags&HANDLE_FLAG_INHERIT));
+        CHECK(WriteFile(ui,"F",1,&count,NULL) && count==1);
+        CHECK(ReadFile(delivered,&payload,1,&count,NULL) && count==1 && payload=='F');
+        CHECK(WriteFile(delivered,"W",1,&count,NULL) && count==1);
+        CHECK(ReadFile(ui,&payload,1,&count,NULL) && count==1 && payload=='W');
+        CloseHandle(peer);CloseHandle(delivered);CloseHandle(deliveredReady);CloseHandle(ready);
+        CHECK(OpenNtBaseServiceTakeFrontend(worker,child.dwProcessId,workerGeneration,
+            &delivered,&peer,&rootGeneration,&deliveredReady)==ERROR_ALREADY_EXISTS && !delivered && !peer && !deliveredReady);
+        CHECK(!ReadFile(ui,&payload,1,&count,NULL) && GetLastError()==ERROR_BROKEN_PIPE);
+        CloseHandle(ui);
+    }
     CHECK(claimed==reservation && task==reply.u.CheckVDM.iTask && console!=NULL);
     /* The management plane copies a server-owned worker projection.  First
      * probe the count, then require the same broker generation/sequence
@@ -228,10 +559,16 @@ int main(int argc,char **argv)
     { BOOL recordExists=FALSE;
       CHECK(BaseSrvDOSWorkerWaitPending(console,&recordExists) && recordExists); }
     CHECK(WaitForSingleObject(parentEvent,0)==WAIT_OBJECT_0);
+    { HANDLE peer=NULL;
+      CHECK(OpenNtBaseServiceRetainCommandWorker(launcher,GetCurrentProcessId(),
+          launcherGeneration,&peer)==ERROR_NOT_READY && peer==NULL); }
     { DWORD exitCode=STILL_ACTIVE;
       CHECK(OpenNtBaseServiceExitCode(launcher,GetCurrentProcessId(),launcherGeneration,
           parentReceipt,&exitCode)==ERROR_SUCCESS && exitCode==7); }
-    CloseHandle(parentEvent);parentEvent=NULL;
+    /* Service API handles are borrowed receipt references; the RPC boundary
+     * duplicates them for a remote caller. This in-process fixture must not
+     * close them and later let receipt teardown close a reused handle value. */
+    parentEvent=NULL;
 
     /* A same-Console launch may now use the original ready record: CheckDOS
      * signals the actual worker wait and the second-time Get consumes it. */
@@ -250,8 +587,21 @@ int main(int argc,char **argv)
     CHECK(reply.ReturnValue==STATUS_SUCCESS && reply.u.CheckVDM.VDMState==VDM_PRESENT_AND_READY &&
         laterParentEvent!=NULL && laterParentReceipt!=0);
     CHECK(laterParentReceipt!=parentReceipt);
+    {
+        HANDLE pending=NULL,ui=NULL,ready=CreateEventW(NULL,TRUE,FALSE,NULL);
+        CHECK(ready);
+        CHECK(frontend_pair(&pending,&ui)==0);
+        CHECK(OpenNtBaseServiceAttachFrontend(later,laterChild.dwProcessId,
+            laterGeneration,pending,ready)==ERROR_ALREADY_EXISTS);
+        CloseHandle(pending);CloseHandle(ui);CloseHandle(ready);
+    }
     CHECK(WaitForSingleObject(getWait,0)==WAIT_OBJECT_0);
-    CloseHandle(getWait);getWait=NULL;
+    { HANDLE peer=NULL;
+      CHECK(OpenNtBaseServiceRetainCommandWorker(later,laterChild.dwProcessId,
+          laterGeneration,&peer)==ERROR_SUCCESS);
+      CHECK(peer && GetProcessId(peer)==child.dwProcessId);
+      CloseHandle(peer); }
+    getWait=NULL;
 
     ZeroMemory(&get,sizeof(get));
     get.u.GetNextVDMCommand.StartupInfo=&getStartup;
@@ -269,21 +619,42 @@ int main(int argc,char **argv)
         &getAnswer,&wireBytes,&getWait,standard,&standardCount)==ERROR_SUCCESS);
     CHECK(getAnswer!=NULL && getWait==NULL && standardCount==0);
     OpenNtBaseServiceReleaseCommandReply(getAnswer);getAnswer=NULL;
-    if (argc==2 && !strcmp(argv[1],"--management-terminate")) {
+    if (argc==2 && (!strcmp(argv[1],"--management-terminate") ||
+        !strcmp(argv[1],"--launcher-pair-loss") ||
+        !strcmp(argv[1],"--launcher-pair-exit-watch"))) {
         DWORD exitCode=STILL_ACTIVE;
         /* The manager's positive path receives only the selected snapshot
          * identity.  The service resolves its retained watch and the normal
          * worker-exit callback must wake the waiting parent and remove the
          * original record before this fixture tears down its own processes. */
-        CHECK(OpenNtBaseServiceTerminateWorker(service,managementEpoch,workerGeneration)==ERROR_SUCCESS);
-        CHECK(WaitForSingleObject(laterParentEvent,5000)==WAIT_OBJECT_0);
-        CHECK(OpenNtBaseServiceExitCode(later,laterChild.dwProcessId,laterGeneration,
+        if (strcmp(argv[1],"--management-terminate")) {
+            HANDLE retainedEvent=NULL;
+            CHECK(DuplicateHandle(GetCurrentProcess(),laterParentEvent,GetCurrentProcess(),
+                &retainedEvent,SYNCHRONIZE,FALSE,0));
+            /* ServiceDisconnect drains its borrowed receipt handle. Keep
+             * a fixture-owned reference to observe the original completion. */
+            laterParentEvent=retainedEvent;
+            CHECK(TerminateProcess(laterChild.hProcess,71));
+            CHECK(WaitForSingleObject(laterChild.hProcess,5000)==WAIT_OBJECT_0);
+            if (!strcmp(argv[1],"--launcher-pair-exit-watch")) {
+                /* Prove the process notification works before RPC rundown. */
+                CHECK(WaitForSingleObject(child.hProcess,5000)==WAIT_OBJECT_0);
+            }
+            CHECK(OpenNtBaseServiceDisconnect(later)==ERROR_SUCCESS);later=NULL;
+        } else CHECK(OpenNtBaseServiceTerminateWorker(service,managementEpoch,workerGeneration)==ERROR_SUCCESS);
+        { DWORD wait=WaitForSingleObject(laterParentEvent,5000);
+          if (wait!=WAIT_OBJECT_0) fprintf(stderr,"pair completion wait=%lu error=%lu handle=%p\n",wait,GetLastError(),laterParentEvent);
+          CHECK(wait==WAIT_OBJECT_0); }
+        if (later) CHECK(OpenNtBaseServiceExitCode(later,laterChild.dwProcessId,laterGeneration,
             laterParentReceipt,&exitCode)==ERROR_PROCESS_ABORTED);
-        CloseHandle(laterParentEvent);laterParentEvent=NULL;
+        if (strcmp(argv[1],"--management-terminate")) CloseHandle(laterParentEvent);
+        laterParentEvent=NULL;
         CHECK(OpenNtBaseServiceDisconnect(worker)==ERROR_SUCCESS);worker=NULL;
-        CHECK(OpenNtBaseServiceReleaseReservation(launcher,GetCurrentProcessId(),launcherGeneration,
-            reservation)==ERROR_SUCCESS);
-        CHECK(OpenNtBaseServiceDisconnect(later)==ERROR_SUCCESS);later=NULL;
+        { DWORD release=OpenNtBaseServiceReleaseReservation(launcher,GetCurrentProcessId(),
+              launcherGeneration,reservation);
+          /* Process-exit cleanup may already have released the reservation. */
+          CHECK(release==ERROR_SUCCESS || release==ERROR_NOT_FOUND); }
+        if (later) { CHECK(OpenNtBaseServiceDisconnect(later)==ERROR_SUCCESS);later=NULL; }
         CHECK(OpenNtBaseServiceDisconnect(launcher)==ERROR_SUCCESS);launcher=NULL;
         CHECK(WaitForSingleObject(child.hProcess,5000)==WAIT_OBJECT_0);
         TerminateProcess(laterChild.hProcess,0);WaitForSingleObject(laterChild.hProcess,5000);
@@ -292,7 +663,7 @@ int main(int argc,char **argv)
         free(getWire);free(updateAnswer);free(updateWire);free(answer);free(wire);
         CHECK(OpenNtBaseServiceIsEmpty(service));
         CHECK(OpenNtBaseServiceStop(service));
-        puts("PASS: management epoch/worker termination performs original worker-exit cleanup");
+        puts("PASS: selected termination performs original worker-exit cleanup");
         return 0;
     }
     /* The authenticated worker disappears before ExitVDM.  The retained OS
@@ -307,8 +678,8 @@ int main(int argc,char **argv)
     { DWORD exitCode=STILL_ACTIVE;
       CHECK(OpenNtBaseServiceExitCode(later,laterChild.dwProcessId,laterGeneration,
           laterParentReceipt,&exitCode)==ERROR_PROCESS_ABORTED); }
-    CloseHandle(laterParentEvent);laterParentEvent=NULL;
-    CloseHandle(parentEvent);parentEvent=NULL;
+    laterParentEvent=NULL;
+    parentEvent=NULL;
     CHECK(OpenNtBaseServiceDisconnect(worker)==ERROR_SUCCESS);worker=NULL;
     CHECK(OpenNtBaseServicePrepareWorker(launcher,GetCurrentProcessId(),launcherGeneration,
         reservation,child.hProcess)==ERROR_PROCESS_ABORTED);

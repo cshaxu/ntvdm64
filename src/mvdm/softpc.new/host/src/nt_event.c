@@ -43,6 +43,7 @@
 #include "gmi.h"
 #include "gfx_upd.h"
 #include "nt_graph.h"
+#include "nt_ega.h" /* MVDM-HOST-DIV-311: original mode-settle bound. */
 #include "nt_uis.h"
 #include <stdio.h>
 #include "trace.h"
@@ -469,7 +470,7 @@ DWORD nt_event_loop(void)
     DWORD RecordsRead;
     DWORD loop;
     NTSTATUS status;
-    HANDLE Events[3];
+    HANDLE Events[2];
 
     /*
      * The con server is optimized to avoid extra CaptureBuffer allocations
@@ -489,8 +490,6 @@ DWORD nt_event_loop(void)
     */
     Events[0] = GetConsoleInputWaitHandle(); ////sc.InputHandle
     Events[1] = hConsoleSuspend;
-    Events[2] = MvdmConsoleInputPrependWaitHandle();
-    if (Events[2] == NULL) return 0;
     /*:::::::::::::::::::::::::::::::::::::::::::::: Get and process events */
 
     while (TRUE) {
@@ -498,7 +497,7 @@ DWORD nt_event_loop(void)
         //
         // Wait for the InputHandle to be signalled, or a suspend event.
         //
-        status = NtWaitForMultipleObjects(3,
+        status = NtWaitForMultipleObjects(2,
                                           Events,
                                           WaitAny,
                                           TRUE,
@@ -510,7 +509,7 @@ DWORD nt_event_loop(void)
             // waiting (otherwise we may get blocked and be unable to
             // handle the suspend event).
             //
-        if (!status || status == 2) {
+        if (!status) {
             if (ReadConsoleInputExW(sc.InputHandle,
                                     &InputRecord[0],
                                     1u,
@@ -1565,8 +1564,15 @@ BOOL CntrlHandler(ULONG CtrlType)
 	    stream_io_update();
 	    }
 	else {
-	    if (sc.ScreenState != FULLSCREEN)
+	    if (sc.ScreenState != FULLSCREEN) {
+                /* DIVERGENCE(MVDM-HOST-DIV-311): this stopped-guest
+                 * handoff must finish the original pending mode selection
+                 * before its final paint. Advance only the bounded video
+                 * settle path, never guest time or CPU interrupts. */
+                for (dw = 0; dw < EGA_TICK_DELAY && get_mode_change_required(); ++dw)
+                    host_graphics_tick();
 		(*update_alg.calc_update)();
+            }
 	    // Put Console back the way it was when we started up
 	    ResetConsoleState();
 

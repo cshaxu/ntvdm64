@@ -6,6 +6,79 @@
 #define MVDM_ADAPTER_CONAPI_H
 
 #include <windows.h>
+#include "console_title.h"
+
+/* Standalone Console graphics backing remains worker-local; presentation
+ * is copied to the authenticated frontend. Non-owned handles remain native. */
+HANDLE WINAPI MvdmCreateConsoleScreenBuffer(DWORD,DWORD,const SECURITY_ATTRIBUTES *,DWORD,void *);
+BOOL WINAPI MvdmSetConsoleActiveScreenBuffer(HANDLE);
+BOOL WINAPI MvdmCloseConsoleHandle(HANDLE);
+#define CreateConsoleScreenBuffer MvdmCreateConsoleScreenBuffer
+#define SetConsoleActiveScreenBuffer MvdmSetConsoleActiveScreenBuffer
+#define CloseHandle MvdmCloseConsoleHandle
+
+/* Native desktop pointer operations belong to the admitted DOS frontend.
+ * Original mouse scaling/warp policy remains in nt_mouse.c. */
+BOOL WINAPI MvdmGetCursorPos(LPPOINT);
+BOOL WINAPI MvdmSetCursorPos(int,int);
+BOOL WINAPI MvdmGetClipCursor(LPRECT);
+BOOL WINAPI MvdmClipCursor(const RECT *);
+#define GetCursorPos MvdmGetCursorPos
+#define SetCursorPos MvdmSetCursorPos
+#define GetClipCursor MvdmGetClipCursor
+#define ClipCursor MvdmClipCursor
+
+UINT WINAPI MvdmGetConsoleCP(void);
+UINT WINAPI MvdmGetConsoleOutputCP(void);
+#define GetConsoleCP MvdmGetConsoleCP
+#define GetConsoleOutputCP MvdmGetConsoleOutputCP
+
+BOOL WINAPI MvdmGetCurrentConsoleFont(HANDLE,BOOL,PCONSOLE_FONT_INFO);
+COORD WINAPI MvdmGetConsoleFontSize(HANDLE,DWORD);
+#define GetCurrentConsoleFont MvdmGetCurrentConsoleFont
+#define GetConsoleFontSize MvdmGetConsoleFontSize
+
+BOOL WINAPI MvdmGetConsoleDisplayMode(LPDWORD);
+BOOL WINAPI MvdmSetConsoleDisplayMode(HANDLE,DWORD,PCOORD);
+#define GetConsoleDisplayMode MvdmGetConsoleDisplayMode
+#define SetConsoleDisplayMode MvdmSetConsoleDisplayMode
+
+/* T423-S2: original stream/screen callers retain their call shapes; the admitted
+ * DOS frontend channel owns user presentation in run16, not the worker. */
+BOOL WINAPI MvdmWriteConsoleA(HANDLE,const VOID *,DWORD,LPDWORD,LPVOID);
+#define WriteConsoleA MvdmWriteConsoleA
+BOOL WINAPI MvdmGetConsoleScreenBufferInfo(HANDLE,PCONSOLE_SCREEN_BUFFER_INFO);
+BOOL WINAPI MvdmSetConsoleCursorPosition(HANDLE,COORD);
+BOOL WINAPI MvdmSetConsoleCursorInfo(HANDLE,const CONSOLE_CURSOR_INFO *);
+BOOL WINAPI MvdmFillConsoleOutputCharacterA(HANDLE,CHAR,DWORD,COORD,LPDWORD);
+BOOL WINAPI MvdmFillConsoleOutputAttribute(HANDLE,WORD,DWORD,COORD,LPDWORD);
+BOOL WINAPI MvdmScrollConsoleScreenBufferA(HANDLE,const SMALL_RECT *,const SMALL_RECT *,COORD,const CHAR_INFO *);
+BOOL WINAPI MvdmSetConsoleTextAttribute(HANDLE,WORD);
+#define GetConsoleScreenBufferInfo MvdmGetConsoleScreenBufferInfo
+#define SetConsoleCursorPosition MvdmSetConsoleCursorPosition
+#define SetConsoleCursorInfo MvdmSetConsoleCursorInfo
+BOOL WINAPI MvdmGetConsoleCursorInfo(HANDLE,PCONSOLE_CURSOR_INFO);
+BOOL WINAPI MvdmGetConsoleMode(HANDLE,LPDWORD);
+BOOL WINAPI MvdmSetConsoleMode(HANDLE,DWORD);
+#define GetConsoleCursorInfo MvdmGetConsoleCursorInfo
+#define GetConsoleMode MvdmGetConsoleMode
+#define SetConsoleMode MvdmSetConsoleMode
+#define FillConsoleOutputCharacterA MvdmFillConsoleOutputCharacterA
+#define FillConsoleOutputAttribute MvdmFillConsoleOutputAttribute
+#define ScrollConsoleScreenBufferA MvdmScrollConsoleScreenBufferA
+#define SetConsoleTextAttribute MvdmSetConsoleTextAttribute
+BOOL WINAPI MvdmWriteConsoleOutputA(HANDLE,const CHAR_INFO *,COORD,COORD,PSMALL_RECT);
+BOOL WINAPI MvdmWriteConsoleOutputW(HANDLE,const CHAR_INFO *,COORD,COORD,PSMALL_RECT);
+BOOL WINAPI MvdmReadConsoleOutputA(HANDLE,PCHAR_INFO,COORD,COORD,PSMALL_RECT);
+BOOL WINAPI MvdmReadConsoleOutputW(HANDLE,PCHAR_INFO,COORD,COORD,PSMALL_RECT);
+#define WriteConsoleOutputA MvdmWriteConsoleOutputA
+#define WriteConsoleOutputW MvdmWriteConsoleOutputW
+#define ReadConsoleOutputA MvdmReadConsoleOutputA
+#define ReadConsoleOutputW MvdmReadConsoleOutputW
+BOOL WINAPI MvdmReadConsoleInputW(HANDLE,PINPUT_RECORD,DWORD,LPDWORD);
+BOOL WINAPI MvdmPeekConsoleInputW(HANDLE,PINPUT_RECORD,DWORD,LPDWORD);
+#define ReadConsoleInputW MvdmReadConsoleInputW
+#define PeekConsoleInputW MvdmPeekConsoleInputW
 
 /* ADAPTER-WIN32-052: retain NT4 cell-grid resize semantics at the modern
  * Console boundary. Original callers and argument shapes are unchanged. */
@@ -111,11 +184,6 @@ BOOL WINAPI WriteConsoleInputVDMW(
     PINPUT_RECORD lpBuffer,
     DWORD nLength,
     LPDWORD lpNumberOfEventsWritten);
-
-/* This is an adapter-private wait extension, not an OpenNT Console export.
- * It becomes signalled only when `WriteConsoleInputVDMW` has source-owned
- * records to return before later public-CONIN$ arrivals. */
-HANDLE WINAPI MvdmConsoleInputPrependWaitHandle(VOID);
 
 BOOL WINAPI SetConsoleKeyShortcuts(
     BOOL bSet,

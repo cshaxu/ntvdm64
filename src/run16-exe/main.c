@@ -8,6 +8,7 @@
 #include "basesrv-exe/opennt/include/base_client.h"
 #include "basesrv-exe/opennt/include/base_config.h"
 #include "basesrv-exe/opennt/include/base_rpc_client.h"
+#include "frontend_scope.h"
 #include <shellapi.h>
 #include <stdio.h>
 #include <wchar.h>
@@ -22,6 +23,47 @@ BOOL BaseDestroyVDMEnvironment(ANSI_STRING *ansi, UNICODE_STRING *unicode);
 typedef struct _WORKER_WIN16DIR_SCOPE {
     PWSTR environment;
 } WORKER_WIN16DIR_SCOPE;
+
+/* A native target is paired only with this launcher, not with its descendants.
+ * Atomic job assignment closes the create/assign orphan window. The job handle
+ * is non-inheritable; original native wait/exit-code behavior stays below. */
+static BOOL create_native_target(PCWSTR image,PWSTR command,STARTUPINFOW *startup,
+    PROCESS_INFORMATION *child,HANDLE *lifetime)
+{
+    STARTUPINFOEXW extended={0};
+    JOBOBJECT_EXTENDED_LIMIT_INFORMATION limits={0};
+    SIZE_T bytes=0;
+    DWORD error=ERROR_SUCCESS;
+    BOOL created=FALSE;
+    *lifetime=CreateJobObjectW(NULL,NULL);
+    if (!*lifetime) return FALSE;
+    limits.BasicLimitInformation.LimitFlags=JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE |
+        JOB_OBJECT_LIMIT_SILENT_BREAKAWAY_OK;
+    if (!SetInformationJobObject(*lifetime,JobObjectExtendedLimitInformation,
+            &limits,sizeof(limits))) goto done;
+    InitializeProcThreadAttributeList(NULL,1,0,&bytes);
+    extended.lpAttributeList=HeapAlloc(GetProcessHeap(),0,bytes);
+    if (!extended.lpAttributeList) { SetLastError(ERROR_NOT_ENOUGH_MEMORY);goto done; }
+    if (!InitializeProcThreadAttributeList(extended.lpAttributeList,1,0,&bytes)) {
+        error=GetLastError();
+        HeapFree(GetProcessHeap(),0,extended.lpAttributeList);
+        extended.lpAttributeList=NULL;SetLastError(error);goto done;
+    }
+    if (!UpdateProcThreadAttribute(extended.lpAttributeList,0,
+            PROC_THREAD_ATTRIBUTE_JOB_LIST,lifetime,sizeof(*lifetime),NULL,NULL)) goto done;
+    extended.StartupInfo=*startup;
+    extended.StartupInfo.cb=sizeof(extended);
+    created=CreateProcessW(image,command,NULL,NULL,TRUE,EXTENDED_STARTUPINFO_PRESENT,
+        NULL,NULL,&extended.StartupInfo,child);
+done:
+    if (!created) error=GetLastError();
+    if (extended.lpAttributeList) {
+        DeleteProcThreadAttributeList(extended.lpAttributeList);
+        HeapFree(GetProcessHeap(),0,extended.lpAttributeList);
+    }
+    if (!created) { CloseHandle(*lifetime);*lifetime=NULL;SetLastError(error); }
+    return created;
+}
 
 /* Original BaseCheckVDM creates the ANSI DOS record and matching Unicode
  * child block through BaseCreateVDMEnvironment. KRNL386 consumes WIN16DIR
@@ -56,7 +98,8 @@ static BOOL begin_worker_win16_directory(WORKER_WIN16DIR_SCOPE *scope)
     current = GetEnvironmentStringsW();
     if (current == NULL) return FALSE;
     for (cursor = current; *cursor != L'\0'; cursor += wcslen(cursor) + 1u) {
-        if (_wcsnicmp(cursor, name, ARRAYSIZE(name) - 1u) != 0)
+        if (_wcsnicmp(cursor, name, ARRAYSIZE(name) - 1u) != 0 &&
+            _wcsnicmp(cursor,L"NTVDM_FRONTEND_CAPABILITY=",26)!=0)
             chars += wcslen(cursor) + 1u;
     }
     chars += (ARRAYSIZE(name) - 1u) + root_chars + 1u;
@@ -71,6 +114,7 @@ static BOOL begin_worker_win16_directory(WORKER_WIN16DIR_SCOPE *scope)
     for (cursor = current; *cursor != L'\0'; cursor += wcslen(cursor) + 1u) {
         size_t entry_chars;
         if (_wcsnicmp(cursor, name, ARRAYSIZE(name) - 1u) == 0) continue;
+        if (_wcsnicmp(cursor,L"NTVDM_FRONTEND_CAPABILITY=",26)==0) continue;
         entry_chars = wcslen(cursor) + 1u;
         memcpy(destination, cursor, entry_chars * sizeof(*destination));
         destination += entry_chars;
@@ -105,6 +149,11 @@ static void s34_run16_trace(const char *stage, DWORD value)
         (unsigned long)GetCurrentProcessId(),stage,(unsigned long)value);
     if (bytes) (void)WriteFile(file,line,bytes,&written,NULL);
     CloseHandle(file);
+}
+
+static void frontend_channel_ready(void)
+{
+    s34_run16_trace("frontend-owner",GetCurrentProcessId());
 }
 
 static BOOL sibling_path(PCWSTR name, PWSTR output, DWORD capacity)
@@ -220,7 +269,7 @@ static DWORD connect_broker(void)
     return error;
 }
 
-static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command)
+static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command,run16_frontend_scope *frontend_scope)
 {
     BASE_API_MSG message = {0};
     ANSI_STRING environment = {0};
@@ -231,6 +280,8 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command)
     const OPENNT_BASE_VDM_CONFIG *previous_configuration;
     STARTUPINFOW startup = {sizeof(startup)};
     PROCESS_INFORMATION worker = {0};
+    HANDLE frontend_capability=run16_frontend_scope_capability(frontend_scope);
+    HANDLE frontend_failure=run16_frontend_scope_failure_handle(frontend_scope);
     WCHAR worker_path[MAX_PATH];
     CHAR worker_image[MAX_PATH];
     CHAR kernel_stem[MAX_PATH];
@@ -241,6 +292,7 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command)
     HANDLE parent_wait;
     DWORD result = ERROR_GEN_FAILURE;
     DWORD worker_status;
+    DWORD worker_creation_flags;
     BOOL prepared = FALSE;
     BOOL published = FALSE;
     BOOL registered = FALSE;
@@ -308,11 +360,20 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command)
     if (message.u.CheckVDM.VDMState == VDM_PRESENT_AND_READY)
     {
         parent_wait = message.u.CheckVDM.WaitObjectForParent;
+        if ((binary & ~BINARY_SUBTYPE_MASK)==BINARY_TYPE_DOS) {
+            result=frontend_capability ? OpenNtBaseClientRequestFrontend(frontend_capability) : ERROR_INVALID_STATE;
+            if (result && result!=ERROR_ALREADY_EXISTS) { CloseHandle(parent_wait);goto done; }
+        }
         result=OpenNtBaseClientWatchBroker();
         if (result) { CloseHandle(parent_wait); goto done; }
-        if (!parent_wait || WaitForSingleObject(parent_wait, INFINITE) != WAIT_OBJECT_0 ||
-            !BaseCheckForVDM(parent_wait, &result))
-            result = GetLastError();
+        {
+            HANDLE waits[2]={parent_wait,frontend_failure};
+            DWORD wait=WaitForMultipleObjects(frontend_failure ? 2 : 1,waits,FALSE,INFINITE);
+            if (wait==WAIT_OBJECT_0+1) {
+                result=run16_frontend_scope_failure(frontend_scope);
+            } else if (wait!=WAIT_OBJECT_0 || !BaseCheckForVDM(parent_wait,&result))
+                result=GetLastError();
+        }
         CloseHandle(parent_wait);
         goto done;
     }
@@ -398,9 +459,17 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command)
     guarded_startup.StartupInfo.hStdInput=NULL;
     guarded_startup.StartupInfo.hStdOutput=NULL;
     guarded_startup.StartupInfo.hStdError=NULL;
+    worker_creation_flags=CREATE_SUSPENDED | CREATE_UNICODE_ENVIRONMENT | EXTENDED_STARTUPINFO_PRESENT;
+    if (binary==BINARY_TYPE_WIN16 || binary==BINARY_TYPE_SEPWOW) {
+        /* Original OpenNT base/win32/client/process.c starts WOW with
+         * CREATE_NO_WINDOW, not an inherited or newly visible Console.
+         * Leave the guest command's startup/show state unchanged. */
+        worker_creation_flags |= CREATE_NO_WINDOW;
+    } else if (binary==BINARY_TYPE_DOS && task && !launcher_console_only) {
+        worker_creation_flags |= CREATE_NEW_CONSOLE;
+    }
     if (!CreateProcessW(worker_path, worker_command.Buffer, NULL, NULL, FALSE,
-                        CREATE_SUSPENDED | CREATE_UNICODE_ENVIRONMENT | EXTENDED_STARTUPINFO_PRESENT |
-                        (binary == BINARY_TYPE_DOS && task && !launcher_console_only ? CREATE_NEW_CONSOLE : 0),
+                        worker_creation_flags,
                         unicode_environment.Buffer, NULL, &guarded_startup.StartupInfo, &worker))
     {
         result = GetLastError();
@@ -424,6 +493,10 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command)
         goto done;
     }
     registered = TRUE;
+    if (binary==BINARY_TYPE_DOS) {
+        result=frontend_capability ? OpenNtBaseClientRequestFrontend(frontend_capability) : ERROR_INVALID_STATE;
+        if (result && result!=ERROR_ALREADY_EXISTS) goto done;
+    }
     if (ResumeThread(worker.hThread) == (DWORD)-1)
     {
         result = GetLastError();
@@ -439,14 +512,24 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command)
     /* A dead worker cannot deliver another completion. Keep original task
      * results, but never return to an infinite event wait after process exit. */
     {
-        HANDLE completion[2]={parent_wait ? parent_wait : worker.hProcess,worker.hProcess};
-        DWORD code,wait=WaitForMultipleObjects(completion[0]==completion[1] ? 1 : 2,
-            completion,FALSE,INFINITE);
+        HANDLE completion[3]={parent_wait ? parent_wait : worker.hProcess,NULL,NULL};
+        DWORD code,count=1,worker_index=0,frontend_index=MAXDWORD,wait;
+        if (completion[0]!=worker.hProcess) {
+            worker_index=count;completion[count++]=worker.hProcess;
+        }
+        if (frontend_failure) { frontend_index=count;completion[count++]=frontend_failure; }
+        wait=WaitForMultipleObjects(count,completion,FALSE,INFINITE);
+        if (frontend_index!=MAXDWORD && wait==WAIT_OBJECT_0+frontend_index) {
+            result=run16_frontend_scope_failure(frontend_scope);
+            TerminateProcess(worker.hProcess,result);
+            startup_failed=TRUE;
+            goto waited;
+        }
         if (wait==WAIT_FAILED) {
             result=GetLastError();
             goto waited;
         }
-        if (wait==WAIT_OBJECT_0+1 &&
+        if (worker_index && wait==WAIT_OBJECT_0+worker_index &&
             WaitForSingleObject(parent_wait,2000)!=WAIT_OBJECT_0) {
             if (GetExitCodeProcess(worker.hProcess,&code))
                 s34_run16_trace("worker-exit",code);
@@ -536,6 +619,8 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
     PCWSTR option, tail;
     STARTUPINFOW startup = {sizeof(startup)};
     PROCESS_INFORMATION child = {0};
+    HANDLE native_lifetime=NULL;
+    run16_frontend_scope *frontend_scope=NULL;
     WCHAR application[MAX_PATH];
     WCHAR split_image[MAX_PATH];
     WCHAR normalized_command[MAX_PATH + MAXIMUM_VDM_COMMAND_LENGTH + 8u];
@@ -633,15 +718,21 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
         startup.hStdInput = GetStdHandle(STD_INPUT_HANDLE);
         startup.hStdOutput = GetStdHandle(STD_OUTPUT_HANDLE);
         startup.hStdError = GetStdHandle(STD_ERROR_HANDLE);
-        if (!CreateProcessW(application, shell_command, NULL, NULL, TRUE, 0, NULL, NULL,
-                            &startup, &child))
+        result=connect_broker();
+        if (!result) result=run16_frontend_scope_begin(&frontend_scope,frontend_channel_ready);
+        if (!result) result=OpenNtBaseClientWatchBroker();
+        if (result) goto done;
+        if (!create_native_target(application,shell_command,&startup,&child,&native_lifetime))
             result = GetLastError();
         else
         {
             CloseHandle(child.hThread);
-            if (WaitForSingleObject(child.hProcess, INFINITE) != WAIT_OBJECT_0 ||
-                !GetExitCodeProcess(child.hProcess, &result))
-                result = GetLastError();
+            DWORD wait_error=run16_frontend_scope_wait(frontend_scope,child.hProcess,&result);
+            if (wait_error) {
+                result=wait_error;
+                TerminateProcess(child.hProcess,result);
+                WaitForSingleObject(child.hProcess,INFINITE);
+            }
             CloseHandle(child.hProcess);
         }
         goto done;
@@ -693,9 +784,12 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
         s34_run16_trace("broker",result);
         if (!result)
         {
-            result = launch_vdm(binary, application, launch_command);
+            if ((binary & ~BINARY_SUBTYPE_MASK)==BINARY_TYPE_DOS)
+                result=run16_frontend_scope_begin(&frontend_scope,frontend_channel_ready);
+            if (!result) result = launch_vdm(binary, application, launch_command,frontend_scope);
             s34_run16_trace("worker",result);
         }
+        run16_frontend_scope_end(frontend_scope);frontend_scope=NULL;
         OpenNtBaseClientDisconnectCurrent();
         if (!HeapDestroy(CsrPortHeap) && !result)
             result = ERROR_BUSY;
@@ -706,6 +800,28 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
     {
         result = ERROR_NOT_SUPPORTED;
         goto done;
+    }
+    /* Original vdm.c obtains the subsystem from an image section. Reuse that
+     * OS metadata contract for frontend selection; do not parse PE headers. */
+    {
+        HANDLE file=CreateFileW(image_resolved ? application : image_argument,GENERIC_READ,FILE_SHARE_READ|FILE_SHARE_DELETE,
+            NULL,OPEN_EXISTING,0,NULL),section=NULL;
+        SECTION_IMAGE_INFORMATION information={0};
+        NTSTATUS status;
+        if (file==INVALID_HANDLE_VALUE) { result=GetLastError();goto done; }
+        status=NtCreateSection(&section,SECTION_QUERY,NULL,NULL,PAGE_READONLY,SEC_IMAGE,file);
+        CloseHandle(file);
+        if (NT_SUCCESS(status)) {
+            status=NtQuerySection(section,SectionImageInformation,&information,sizeof(information),NULL);
+            CloseHandle(section);
+        }
+        if (!NT_SUCCESS(status)) { result=RtlNtStatusToDosError(status);goto done; }
+        if (information.SubSystemType==IMAGE_SUBSYSTEM_WINDOWS_CUI) {
+            result=connect_broker();
+            if (!result) result=run16_frontend_scope_begin(&frontend_scope,frontend_channel_ready);
+            if (!result) result=OpenNtBaseClientWatchBroker();
+            if (result) goto done;
+        }
     }
     bytes = (wcslen(launch_command) + 1) * sizeof(WCHAR);
     childCommand = HeapAlloc(GetProcessHeap(), 0, bytes);
@@ -719,19 +835,25 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
     startup.hStdInput = GetStdHandle(STD_INPUT_HANDLE);
     startup.hStdOutput = GetStdHandle(STD_OUTPUT_HANDLE);
     startup.hStdError = GetStdHandle(STD_ERROR_HANDLE);
-    if (!CreateProcessW(image_resolved ? application : image_argument, childCommand,
-                        NULL, NULL, TRUE, 0, NULL, NULL, &startup, &child))
+    if (!create_native_target(image_resolved ? application : image_argument,childCommand,
+                             &startup,&child,&native_lifetime))
         result = GetLastError();
     else
     {
         CloseHandle(child.hThread);
-        if (WaitForSingleObject(child.hProcess, INFINITE) != WAIT_OBJECT_0 ||
-            !GetExitCodeProcess(child.hProcess, &result))
-            result = GetLastError();
+        DWORD wait_error=run16_frontend_scope_wait(frontend_scope,child.hProcess,&result);
+        if (wait_error) {
+            result=wait_error;
+            TerminateProcess(child.hProcess,result);
+            WaitForSingleObject(child.hProcess,INFINITE);
+        }
         CloseHandle(child.hProcess);
     }
     HeapFree(GetProcessHeap(), 0, childCommand);
 done:
+    if (native_lifetime) CloseHandle(native_lifetime);
+    run16_frontend_scope_end(frontend_scope);
+    OpenNtBaseClientDisconnectCurrent();
     s34_run16_trace("exit",result);
     LocalFree(arguments);
     return (int)result;

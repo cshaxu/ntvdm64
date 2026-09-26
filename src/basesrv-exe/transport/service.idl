@@ -1,12 +1,84 @@
 import "wtypes.idl";
 [
     uuid(7d3e78bd-0472-4736-8797-e64e966d692e),
-    version(3.0),
+    version(5.0),
     pointer_default(unique)
 ]
 interface vdm_service
 {
     typedef [context_handle] void *VDM_CONNECTION;
+    error_status_t WorkerFrontendCapability(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [out, system_handle(sh_event)] HANDLE *capability);
+    error_status_t RegisterFrontendRoot(
+        [in] handle_t binding,
+        [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [in, system_handle(sh_event)] HANDLE capability);
+    error_status_t RetainFrontendRoot(
+        [in] handle_t binding,
+        [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [in, system_handle(sh_event)] HANDLE capability,
+        [out, system_handle(sh_process)] HANDLE *root,
+        [out] unsigned long *root_generation);
+    error_status_t RequestFrontend(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [in, system_handle(sh_event)] HANDLE capability);
+    error_status_t FrontendRequest(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [out] unsigned long *request,
+        [out, system_handle(sh_process)] HANDLE *worker);
+    error_status_t AttachFrontendRequest(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation, [in] unsigned long request,
+        [in, system_handle(sh_pipe)] HANDLE channel,
+        [in, system_handle(sh_event)] HANDLE ready);
+    /* Original Check/Update chooses the worker. This grants only a pinned
+     * query/synchronize capability to its waiting launcher, not a caller-
+     * nominated process or a frame transport through BaseSrv. */
+    error_status_t CommandWorker(
+        [in] handle_t binding,
+        [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [out, system_handle(sh_process)] HANDLE *worker);
+    /* Direct frontend channel attachments only. No input/frame payloads or
+     * caller-selected worker identity pass through these methods. */
+    error_status_t AttachFrontend(
+        [in] handle_t binding,
+        [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [in, system_handle(sh_pipe)] HANDLE channel,
+        [in, system_handle(sh_event)] HANDLE ready);
+    error_status_t TakeFrontend(
+        [in] handle_t binding,
+        [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [out, system_handle(sh_pipe)] HANDLE *channel,
+        [out, system_handle(sh_process)] HANDLE *frontend,
+        [out] unsigned long *frontend_generation,
+        [out, system_handle(sh_event)] HANDLE *ready);
+    error_status_t WaitFrontend(
+        [in] handle_t binding,
+        [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [out, system_handle(sh_pipe)] HANDLE *channel,
+        [out, system_handle(sh_process)] HANDLE *frontend,
+        [out] unsigned long *frontend_generation,
+        [out, system_handle(sh_event)] HANDLE *ready);
     /* Management data is a copied broker projection.  It never serializes a
      * HANDLE, PID, guest pointer or original record pointer. */
     typedef struct _DTASKMGR_WORKER {
