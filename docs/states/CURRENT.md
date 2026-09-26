@@ -91,6 +91,10 @@ boundary ledger; this status records only the current disposition.
   the broker survives and a fresh MEM request produces real output and exits 0.
   The checked-in harness rejects conflicting fault switches before execution.
   This adds test evidence only; the published six-file package is unchanged.
+- Injected focus loss/Ctrl release/focus regain now passes twice through the
+  real guest keymouse path, with an unchanged-mode control run. BIOS modifier
+  release, callback teardown, MEM output and COMMAND exit are asserted.
+  Physical desktop focus and hidden-pointer clipping are not inferred from it.
 
 S2 still requires the complete Console-owner and per-layer failure checklist,
 and remaining physical pointer/layout dispositions. The first production P

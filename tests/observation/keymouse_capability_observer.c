@@ -265,6 +265,14 @@ static BOOL send_ctrl_up(void)
     return write_record(&record);
 }
 
+static BOOL send_focus(BOOL focused)
+{
+    INPUT_RECORD record = { 0 };
+    record.EventType = FOCUS_EVENT;
+    record.Event.FocusEvent.bSetFocus = focused;
+    return write_record(&record);
+}
+
 int main(int argc, char **argv)
 {
     STARTUPINFOA startup = { sizeof(startup) };
@@ -280,6 +288,7 @@ int main(int argc, char **argv)
     const char *stage = "create";
     DWORD failure_error = 0u;
     BOOL shared_console = GetEnvironmentVariableA("MVDM_TEST_KEYMOUSE_SHARED_CONSOLE",NULL,0)!=0;
+    BOOL focus_transition = GetEnvironmentVariableA("MVDM_TEST_KEYMOUSE_FOCUS_TRANSITION",NULL,0)!=0;
 
     if (argc != 2) return 64;
     GetEnvironmentVariableA("TEST_RUNTIME_ROOT", runtime, sizeof(runtime));
@@ -323,7 +332,13 @@ int main(int argc, char **argv)
     if (!send_mouse(26, 11) || !send_ctrl_k_down() ||
         !wait_screen(output, "S25_DISABLE_READY", 6000u)) goto done;
     stage = "teardown";
-    if (!send_ctrl_up() || !send_mouse(54, 21) ||
+    /* Exercise the production input route across loss/reacquisition while
+     * Ctrl is held. This injects records, not physical desktop focus. The
+     * guest must still observe Ctrl released and no callback after disable. */
+    if (focus_transition && !send_focus(FALSE)) goto done;
+    if (!send_ctrl_up()) goto done;
+    if (focus_transition && !send_focus(TRUE)) goto done;
+    if (!send_mouse(54, 21) ||
         !wait_screen(output, "S25_KEYMOUSE_OK", 8000u)) goto done;
     if (!screen_contains(output, "S25_KEYBOARD_OK") ||
         !screen_contains(output, "S25_MODIFIER_OK") ||
@@ -365,8 +380,9 @@ done:
         (unsigned long)exit_code);
     { FILE *diagnostic = NULL;
       if (fopen_s(&diagnostic, argv[1], "ab") == 0 && diagnostic) {
-          fprintf(diagnostic,"\nkeymouse passed=%s stage=%s error=%lu exit=%lu\n",
-              passed ? "yes" : "no",stage,failure_error,exit_code);
+          fprintf(diagnostic,"\nkeymouse passed=%s stage=%s error=%lu exit=%lu focus-record-transition=%s\n",
+              passed ? "yes" : "no",stage,failure_error,exit_code,
+              focus_transition ? "injected" : "not-requested");
           fclose(diagnostic);
       }
     }

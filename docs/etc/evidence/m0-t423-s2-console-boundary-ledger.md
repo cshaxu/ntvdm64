@@ -3596,3 +3596,52 @@ Keyboard-layout source ownership, physical focus/pointer release, and the
 remaining per-call Console-owner assertions likewise remain explicit S2 gates.
 The display/CAF/AE/X implementation and tests remain assigned to S4 as originally
 planned; their absence in S2 is not a hotkey pass. This record does not close S2.
+
+### Focus-record transition through the real guest input path
+
+Source: original nt_event.c dispatches FOCUS_EVENT to nt_process_focus,
+which calls MouseOutOfFocus on loss and AltUpDownUp/MouseInFocus on gain.
+It does not specify that losing focus synthesizes every held key's release.
+Therefore the test sends a real Ctrl key-up record between focus loss and
+gain, rather than inventing a new guest release policy.
+
+The existing checked-in keymouse_capability_observer.c gains one opt-in test
+mode, MVDM_TEST_KEYMOUSE_FOCUS_TRANSITION=1. With Ctrl still held after the
+guest's S25_DISABLE_READY handshake, it injects FOCUS_EVENT(FALSE), Ctrl-up,
+FOCUS_EVENT(TRUE), then the existing late mouse sequence. It reads actual
+guest markers proving BIOS Ctrl release, all prior move/down/up callbacks,
+and no callbacks after driver disable. It then requires the current COMMAND
+prompt, actual MEM output, the next prompt and original COMMAND exit 1.
+
+Build with tools/build/Build-T420S25KeymouseGuestTest.ps1, RepositoryRoot set
+to this repository and BuildRoot to build/M0-T423/S2/keymouse-focus-transition.
+MSVC x86 /MT compilation passes. The independent test-only KMTST.COM remains
+byte-identical (92C642D5F92EC4EA8C255D956977B5075C068B26423287CA4BDB66F81A8F6629);
+the rebuilt observer hash is
+E6F13CAC17DACD8B98E79B63842821302BCEA082E2D1748D3C12B54908E848E5.
+No original guest binary is modified.
+
+Run through the private-desktop console-startup-observer.exe from
+build/M0-T423/S2/control-observer with a 60000-ms timeout, target the rebuilt
+keymouse-capability-observer.exe and pass its guest-log path as its only
+argument. Set TEST_RUNTIME_ROOT=O:/winnt,
+MVDM_TEST_KEYMOUSE_SHARED_CONSOLE=1 and
+MVDM_TEST_KEYMOUSE_COMMAND=O:/winnt/tests/KMTST.COM. Copy only the independent
+probe into the existing tests directory. The focus switch is absent (not an
+empty environment value) for the baseline comparison.
+
+All three private-desktop runs pass against the unchanged 8e60ded8a package:
+
+| O:/winnt/logs prefix | Mode and result |
+| --- | --- |
+| m0-t423-s2-keymouse-focus | Injected focus transition, observer 0, guest markers pass, COMMAND 1 |
+| m0-t423-s2-keymouse-focus-baseline | Switch absent, same complete keymouse/MEM/exit assertions pass |
+| m0-t423-s2-keymouse-focus-repeat | Repeated transition, same assertions pass |
+
+This is real guest processing of injected Console records through the
+production frontend and original worker consumers, not physical focus movement.
+No SetForegroundWindow, desktop switch or pointer clipping was introduced.
+The probe does not select the original hidden-pointer/int33-motion path;
+physical clip release and focus ownership remain separate unproved items.
+Product hashes and configuration remain unchanged. This test-only delivery
+does not close the combined focus/pointer checklist row or S2.
