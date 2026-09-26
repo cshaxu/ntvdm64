@@ -100,3 +100,54 @@ and lifecycle need a separately reviewed finite addition, not task-record policy
 Remaining before production implementation: complete API/handle inventory,
 exact association/transport contract, and queued-key/native handoff proof.
 No S2 runtime pass is claimed by the source guard.
+
+## Build-selected Console surface inventory
+
+Run tests/observation/audit-dos-console-build-surface.ps1 against the S1 formal
+build.ninja; add -Callsites for reproducible file/line candidates. The script
+removes comments/string literals, reads only graph-selected worker C files,
+and does not generate output outside build. It is not a preprocessor or call
+graph: definitions and inactive branches remain candidates. It reports 408
+selected C units, 199 lexical occurrences, 56 spellings and these 15 files:
+
+| Original-relative file under src/mvdm, unless noted | Occurrences | Initial owner disposition |
+| --- | --- | --- |
+| dos/command/cmdconf.c | 1 | Title/configuration presentation boundary; original policy stays. |
+| dos/command/cmdkeyb.c | 3 | Layout/codepage queries versus guest keyboard work must be distinguished. |
+| dos/command/cmdmisc.c | 4 | Task title/input-return boundary; original completion/re-entry stays. |
+| dos/command/cmdpif.c | 1 | Original PIF Console operation, not a second display policy. |
+| softpc.new/host/src/config.c | 9 | Initial Console geometry/mode setup and queries. |
+| softpc.new/host/src/nt_cga.c | 9 | Graphics invalidation/producer boundary; no move of guest renderer. |
+| softpc.new/host/src/nt_det.c | 4 | Display detection/state queries. |
+| softpc.new/host/src/nt_ega.c | 12 | Graphics invalidation/producer boundary. |
+| softpc.new/host/src/nt_event.c | 17 | Input acquisition, yield/resume and native mode restoration. |
+| softpc.new/host/src/nt_fulsc.c | 44 | Text buffer/readback, cursor/geometry, transition and graphics buffer binding. |
+| softpc.new/host/src/nt_graph.c | 25 | Stream, text, scrolling, palette and host display binding. |
+| softpc.new/host/src/nt_hosts.c | 10 | Host startup/control/mode ownership. |
+| softpc.new/host/src/nt_mouse.c | 11 | Host pointer/menu/display operations versus guest mouse semantics. |
+| softpc.new/host/src/nt_vga.c | 16 | Graphics invalidation/producer boundary. |
+| src/ntvdm-exe/win32/console_compat.c | 33 | Existing public Console boundary implementations; select/move mechanics, do not duplicate them. |
+
+This inventory is deliberately not called complete I/O reachability: aliases,
+headers/macros, ReadFile/WriteFile and standard-handle operations need separate
+review. Formal preprocessing must distinguish selected CCPU code from dormant
+MONITOR branches. S2 establishes frame/mode contracts; S4 owns actual graphics
+Window rendering, so selected graphics producers are retained, not rewritten.
+
+## Existing association mechanism reuse
+
+base_reservation.c already records launcher PID/generation, task, Console
+identity and a retained worker process. PrepareWorker checks launcher identity
+and live worker, forbids replacement, and pins the handle; ClaimWorker checks
+live process plus connection generation. base_service.c separately retains
+authenticated connections, reservation, Console and registered-worker state.
+These are the candidates for the minimal frontend capability binding, not a
+reason to add another task registry or change srvvdm scheduling.
+
+A launch reservation alone does not resolve resident-worker reattachment or
+nested run16. Those paths must use the worker selected by original Check/Get
+and authenticated Console association. No environment variable or numerical
+worker identifier supplies authority. Before implementation, specify root
+frontend lifetime separately from per-command wait lifetime, including root
+exit while original worker remains resident. Broker conveys capabilities only;
+it never transports input/frame payloads.
