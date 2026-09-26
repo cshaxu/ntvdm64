@@ -22,18 +22,6 @@
  * state.  The buffer is owned by session so a later app presentation consumer
  * can receive only a bounded copy, not an adapter-private pointer.
  */
-BOOL WINAPI GetConsoleKeyboardLayoutNameA(LPSTR layout_name)
-{
-    /* DIVERGENCE(ADAPTER-WIN32-034): the NT4 Console Server returned the
-     * active console keyboard-layout name through this source-facing BOOL
-     * API. The modern kernel32 exports exist but fail on the tested Console;
-     * the retained fallback queries this thread's input locale. Its buffer
-     * shape matches, but that does not prove active Console-layout identity.
-     * Keep this existing fallback until the input-owner layout contract is
-     * verified; do not silently substitute a frontend thread or cache. */
-    return GetKeyboardLayoutNameA(layout_name);
-}
-
 static BOOL console_video_event(uint32_t kind, HANDLE output, HPALETTE palette,
                                 const SMALL_RECT *rect, DWORD flags)
 {

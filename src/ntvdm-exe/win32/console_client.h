@@ -9,6 +9,7 @@ ntvdm_console_graphics *ntvdm_console_graphics_context(void);
  * releasing the painter mutex; transport serializes the complete frame. */
 BOOL ntvdm_console_publish_video(const console_video_description *,const void *,size_t);
 DWORD ntvdm_console_client_begin(session *);
+BOOL WINAPI GetConsoleKeyboardLayoutNameA(LPSTR);
 HANDLE ntvdm_console_input_wait_handle(void);
 BOOL ntvdm_console_inherit_frontend_capability(HANDLE *);
 BOOL WINAPI MvdmWriteConsoleA(HANDLE,const VOID *,DWORD,LPDWORD,LPVOID);

@@ -11,6 +11,23 @@ BOOL bPifFastPaste;
 static CHAR layout_name[KL_NAMELENGTH];
 static USHORT result_dx;
 static CHAR guest_bytes[512];
+static BOOL layout_unavailable;
+static unsigned console_initializations;
+static unsigned environment_queries;
+
+/* This original-reader fixture does not test package-directory composition.
+ * Keep its historical native directory/code-page inputs; neither boundary
+ * may be reached after the layout query reports unavailable. */
+UINT WINAPI MvdmGetConsoleCP(VOID)
+{
+    ++environment_queries;
+    return GetConsoleCP();
+}
+unsigned int __cdecl GetNtvdmSystemDirectoryA(char *path,unsigned int capacity)
+{
+    ++environment_queries;
+    return GetSystemDirectoryA(path,capacity);
+}
 
 VOID cmdGetKbdLayout(VOID);
 BOOL ntvdm_shadow_registry_initialize(VOID);
@@ -33,9 +50,10 @@ UCHAR *__cdecl Sim32pGetVDMPointer(ULONG address, UCHAR protected_mode)
     (void)protected_mode;
     return (UCHAR *)guest_bytes;
 }
-VOID cmdInitConsole(VOID) {}
+VOID cmdInitConsole(VOID) { ++console_initializations; }
 BOOL WINAPI GetConsoleKeyboardLayoutNameA(LPSTR name)
 {
+    if (layout_unavailable) { SetLastError(ERROR_INVALID_HANDLE);return FALSE; }
     return strcpy_s(name,KL_NAMELENGTH,layout_name)==0;
 }
 
@@ -95,6 +113,18 @@ int main(VOID)
         "[HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Keyboard Layout\\DosKeybCodes]\r\n"
         "\"00000409\"=\"US\"\r\n";
 
+    layout_unavailable=TRUE;
+    result_dx=0xffffu;
+    memset(guest_bytes,0x55,sizeof(guest_bytes));
+    cmdGetKbdLayout();
+    if (result_dx!=0 || console_initializations!=1 || environment_queries!=0) return 4;
+    {
+        size_t index;
+        for (index=0;index<sizeof(guest_bytes);++index)
+            if (guest_bytes[index]!=0x55) return 5;
+    }
+    puts("S45_CMDKEYB_UNAVAILABLE_NO_INSTALL_OK");
+    layout_unavailable=FALSE;
     if (run_case("CONFIGURED","00000409",configured,0)) return 1;
     if (run_case("MALFORMED","00000409",malformed,0)) return 2;
     if (run_case("ABSENT","0000F00D",absent,0)) return 3;

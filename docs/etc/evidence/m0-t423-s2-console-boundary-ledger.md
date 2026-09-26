@@ -3645,3 +3645,166 @@ The probe does not select the original hidden-pointer/int33-motion path;
 physical clip release and focus ownership remain separate unproved items.
 Product hashes and configuration remain unchanged. This test-only delivery
 does not close the combined focus/pointer checklist row or S2.
+
+### Console layout contract candidate and retained typeahead failure
+
+Original ownership is explicit in OpenNT windows/core/ntcon/server/getset.c:
+SrvGetConsoleKeyboardLayoutName activates Console->hklActive before obtaining
+the name. Its private Console/CSR state is not available for direct composition.
+The native exact-name export is the smallest existing host binding; inventing
+an HKL from the worker/frontend thread or a pseudoconsole HWND is not equivalent.
+The candidate therefore removes the proven-wrong thread-local success fallback
+and routes the original API through the frontend using direct protocol 10.
+Only a successful, terminated nine-byte KLID is copied to the caller. Native
+failures are preserved, missing exports fail explicitly, and without a bound
+frontend the exact native API is queried locally. No new keyboard algorithm,
+locale cache, original mirror diff, registry setting or guest change is added.
+
+This does not restore native layout availability on this Windows host. Instead
+it restores the original caller's failure decision: cmdkeyb.c immediately takes
+NoInstallkb16, sets DX=0 and calls cmdInitConsole. The checked-in original-reader
+fixture now proves that outcome without later code-page/directory queries or
+guest-output writes. Its configured/malformed/absent cases still pass. Two
+existing environment boundaries in that fixture needed same-shaped native
+test bindings because the old fixture no longer linked the current cmdkeyb
+object; they are explicitly not package-directory composition evidence.
+
+MSVC x86 /MT formal six-file build passes. The first native fixture build failed
+for a missing private API declaration, fixed in the client header. The first
+original-reader link exposed the two old fixture dependencies, then passed
+after the test-only bindings. Neither failed attempt counts as a pass.
+The final native client, frontend and mock host dispatcher fixtures pass under
+m0-t423-s2-layout-candidate-* prefixes. They prove actual native error propagation,
+null rejection without a request, output canary preservation, and mocked success
+and error payloads. Mock success does not claim native availability.
+
+The preceding six-file package was hash-verified and preserved at
+build/M0-T423/S2/layout-pre-fix-package before candidate staging. The complete
+DOS17 run m0-t423-s2-layout-dos17 passes and restores that published baseline.
+The nesting run passes native-root-frontend, native-cmd-dos-repeat and
+dos-native-dos, but dos-native-typeahead FAILS: both MEM outputs are present,
+the final intended exit is displayed as eit, and observation ends with timeout
+53504354. This is an unresolved lost-key result, not successful completion.
+The observer's native child is terminal and the harness restored the baseline
+before any further run. Identical isolated baseline and candidate repetitions
+both pass (layout-typeahead-baseline and layout-typeahead-candidate-r2).
+Those passes do not erase the failure or prove its cause; publication remains
+withheld pending attribution and resolution. The unchanged 100-ms key interval
+and zero line delay are retained, not relaxed to hide the problem.
+
+Tests here use build/M0-T423/S2/test-frontend-loss.ps1 as temporary staging glue
+around the checked-in Verify-CommandExitStatus.ps1 and native fixtures. Its
+backup now points to layout-pre-fix-package, not the older cursor repair backup.
+The formal cache has a protocol-10 candidate; O:/winnt is restored to the
+protocol-9 published set after each test. Never copy the candidate cache as
+a release until all gates pass. S2 and the overall Window goal remain open.
+
+Follow-up: layout-keymouse passes real guest callbacks, modifier release, MEM
+and COMMAND return. layout-wow independently observes all three workers live
+at 16 seconds at the known NETWORK.DRV modal, matching the approved headless
+baseline, not gameplay. Four additional unchanged-baseline runs
+layout-typeahead-control-1 through -4 and four candidate runs
+layout-typeahead-candidate-control-1 through -4 all pass with unchanged input
+timing. This bounds reproducibility, not causality or resolution of the failure.
+
+The test-only console_video_observed.c receiver now also records copied READ
+and PREPEND input batches (PID, generation, sequence, status and key fields).
+Its product dispatcher is unchanged, and this object never enters run16.exe's
+formal product link. layout-typeahead-input-diagnostic passes with the observed
+launcher only; it is diagnostic, not product acceptance. The corresponding
+layout-typeahead-input-boundary.txt shows final e/x returned as one original
+PREPEND batch, then read back as down/up records (control=0), while later i/t
+arrive with NUMLOCK_ON (control=32). All are visible in that successful run.
+This identifies the original returned-key/toggle-state transition as a concrete
+next inspection point; it does not establish that it lost x in the earlier run.
+No pacing change, resend or original keyboard modification was made.
+
+Every staging run has terminated and restored the hash-verified protocol-9
+six-file baseline. Candidate source/build/test changes remain uncommitted while
+the failed gate is investigated; do not represent this work-in-progress as a P.
+
+### Original returned-key count repair candidate (DIV-312)
+
+Source inspection found a deterministic defect in the selected original
+nt_event.c::ReturnUnusedKeyEvents, also present in the pinned OpenNT original:
+the loop copies N history records but passes N+1 to WriteConsoleInputVDMW.
+The extra uninitialized input record can make the checked transport reject
+the entire batch before the original function clears its history. A short
+history also occupies the array tail, not the submitted prefix. This is host
+source, not an immutable guest limitation.
+
+The original translation unit remains compiled. The minimal registered
+mirror repair bounds the copy by its existing array capacity, assigns the
+record type at the copied index, and submits only the initialized tail in
+oldest-first order. No alternative queue, retry policy, guest change or input
+pacing change is introduced. Direct unchanged reuse cannot preserve valid
+record/count semantics because the defect is in this owner; a facade cannot
+infer the missing initialized count from the already incorrect request.
+The selected rung is a registered local correction to the retained original
+owner, not an independent reimplementation.
+
+Reproducer: tests/observation/verify-unused-key-return.ps1 extracts the exact
+production function and compiles tests/app/unused_key_return_test.c with MSVC
+x86 /MT. Its external history/write/cleanup functions are controlled fixtures,
+not a claim that the whole Console implementation is tested. The red run at
+build/M0-T423/S2/key-return-red fails requested=2 present=2 sent=3. The green
+run covers full, single, empty, short, absent, capacity and over-capacity history
+with exact count, type, order and once-only cleanup assertions (seven cases).
+The final CRLF source is byte-hashed in key-return-green-final-authorized:
+E1D8B63D2FE0B9AC18E2E7324FC815956DDE16FD15A3B45E124FFA545F5A108C;
+extracted body B212F925157448BB29794F0C20CDF6C707E139BE76C33DC36D389CA8849AEA43.
+An earlier final-source fixture attempt could not resolve cl.exe in the
+sandbox; the authorized installed-toolchain run passed, not the failed attempt.
+
+Incremental formal and WOW builds pass (key-return-formal-build.log and
+key-return-wow-build.log under the S2 build root). Real production-candidate
+native-root-frontend, native-cmd-dos-repeat, dos-native-dos and
+dos-native-typeahead all pass under m0-t423-s2-key-return-nesting, retaining
+100-ms key spacing and zero line delay. The six-file published baseline was
+restored and hash-checked afterward. This proves the concrete count defect
+and passing affected integration routes; it does not prove that this was the
+sole cause of the earlier intermittent missing x. Full candidate delivery
+gates and the broader S2 checklist remain open.
+
+#### Returned-key repair delivery gates and publication
+
+The subsequent complete DOS17 run m0-t423-s2-key-return-dos17 passes all
+17 actual-output/exit cases, including EDIT then MEM. key-return-keymouse
+passes the real guest keyboard/mouse callback and MEM return assertions.
+key-return-graphics proves copied guest pixels/palette and later text;
+key-return-graphics-formal proves uninstrumented product graphics-to-text
+return, final marker and exit. Neither claims Window rendering. Two additional
+unchanged-timing runs key-return-typeahead-repeat-1 and -2 pass. All these
+prefixes begin with m0-t423-s2- and their raw evidence is under O:/winnt/logs.
+
+key-return-wow independently observes WINMINE, SOL and WRITE alive at
+4/8/12/16 seconds at their known NETWORK.DRV modal. Observer timeout is
+intentional sampling termination, not application success; no crash or earlier
+frontier was seen versus the retained headless baseline. This meets the owner's
+bounded T423 headless comparison waiver, not general WOW functionality.
+
+The package also contains the already-tested layout source-contract repair;
+its unchanged native/client/mock/original-reader fixture evidence is recorded
+above. The final host-source red/green fixture and the new full product runs
+cover the additional key-return change. The proved initialized-count correction
+is delivered without claiming that repeat greens establish the earlier lost
+x's unique cause. The original failed observation remains part of this record.
+
+After the final test restored the prior package, publication verified all six
+prior hashes, PE x86 machine fields, and all six deployed candidate hashes.
+The recoverable prior set remains build/M0-T423/S2/layout-pre-fix-package.
+Manifest: build/M0-T423/S2/key-return-production-publication.json.
+
+| Published file | SHA-256 |
+| --- | --- |
+| run16.exe | 30CAB9861213103781F4FA7AFA796E1F724758F86061898C4C3B1BF532CB40C9 |
+| basesrv.exe | 0724DE60737E2F071414500BCB01A75CD0A0AD4B3B1CB9DA9D2151806C058CFC |
+| ntvdm.exe | 34413C6AD4AC8085993A63C82D77E136BAE75A33A570F69D73C432D01AEF8F82 |
+| dtmgr.exe | 7349D5C89384A00080D31ECD3D1B1AF9D543E72A58F125DFC37328FF9F02487C |
+| WOW32.DLL | 0D04702943D96E69D6CE84CAB7309418079FB9539BFA21902056787CD706076E |
+| VDMREDIR.DLL | 0FECA788E63DAFB44E9EEAB70E08BC86D10A90E188DDD93CE60AB91ADA6169E7 |
+
+Do not reuse the old temporary staging helper without refreshing its baseline:
+its hash preflight now correctly rejects this newly published set. S2 still
+requires its remaining owner/lifetime checklist reconciliation; S3-S6 and the
+full Window goal are not completed by this bounded delivery.

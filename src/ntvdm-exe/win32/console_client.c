@@ -384,6 +384,35 @@ BOOL WINAPI MvdmSetConsoleDisplayMode(HANDLE output,DWORD flags,PCOORD size)
     return TRUE;
 }
 
+/* DIVERGENCE(ADAPTER-WIN32-034): retain the historical BOOL/name contract
+ * through the actual Console owner. No thread-HKL fallback or locale cache. */
+BOOL WINAPI GetConsoleKeyboardLayoutNameA(LPSTR name)
+{
+    session *owner=session_thread_current();
+    console_client *client=owner ? owner->console_client : NULL;
+    console_io_reply reply;
+    DWORD error;
+    if (!name) { SetLastError(ERROR_INVALID_PARAMETER);return FALSE; }
+    if (!client) {
+        typedef BOOL (WINAPI *query_layout)(LPSTR);
+        query_layout query=(query_layout)GetProcAddress(GetModuleHandleW(L"kernel32.dll"),
+            "GetConsoleKeyboardLayoutNameA");
+        if (!query) { SetLastError(ERROR_CALL_NOT_IMPLEMENTED);return FALSE; }
+        return query(name);
+    }
+    EnterCriticalSection(&client->lock);
+    ZeroMemory(&client->request,offsetof(console_io_request,data));
+    client->request.operation=CONSOLE_IO_KEYBOARD_LAYOUT;
+    error=exchange(client,&reply);
+    if (!error && !reply.result) error=reply.error ? reply.error : ERROR_GEN_FAILURE;
+    if (!error && (reply.bytes!=KL_NAMELENGTH ||
+        reply.data[KL_NAMELENGTH-1]!=0)) error=ERROR_INVALID_DATA;
+    if (!error) memcpy(name,reply.data,KL_NAMELENGTH);
+    LeaveCriticalSection(&client->lock);
+    SetLastError(error);
+    return error==ERROR_SUCCESS;
+}
+
 DWORD WINAPI MvdmGetConsoleTitleA(LPSTR title,DWORD capacity)
 {
     session *owner=session_thread_current();

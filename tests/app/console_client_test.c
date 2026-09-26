@@ -145,6 +145,24 @@ int main(int argc,char **argv)
     thread=CreateThread(NULL,0,serve,NULL,0,NULL);CHECK(thread);
     CHECK(!ntvdm_console_client_begin(&owner));bound=&owner;
     {
+        typedef BOOL (WINAPI *query_layout)(LPSTR);
+        query_layout query=(query_layout)GetProcAddress(GetModuleHandleW(L"kernel32.dll"),
+            "GetConsoleKeyboardLayoutNameA");
+        char expected[KL_NAMELENGTH]={0},layout[KL_NAMELENGTH+1];
+        DWORD sequence=frontend.sequence,error;
+        BOOL result;
+        CHECK(query!=NULL);
+        memset(layout,0x55,sizeof(layout));
+        SetLastError(0);result=query(expected);error=GetLastError();
+        CHECK(GetConsoleKeyboardLayoutNameA(layout)==result && frontend.sequence==sequence+1);
+        if (result) CHECK(!memcmp(layout,expected,KL_NAMELENGTH));
+        else CHECK(GetLastError()==error && layout[0]==0x55);
+        CHECK(layout[KL_NAMELENGTH]==0x55);
+        sequence=frontend.sequence;
+        CHECK(!GetConsoleKeyboardLayoutNameA(NULL) && GetLastError()==ERROR_INVALID_PARAMETER &&
+            frontend.sequence==sequence);
+    }
+    {
         POINT expected={123,456},actual={123,456};
         RECT expected_clip={1,2,3,4},actual_clip={1,2,3,4};
         DWORD sequence=frontend.sequence,error;

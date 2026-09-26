@@ -66,10 +66,25 @@ boundary ledger; this status records only the current disposition.
   keyboard/mouse callback tests pass on the recorded candidates. Actual
   Ctrl+C/Break and direct/nested Console close also pass. These checks do not
   certify physical focus/clipping cleanup, logoff, or Window hotkeys.
-- The existing worker-thread keyboard-layout fallback is not equivalent to
-  original Console-selected layout. Native historical Console queries fail on
-  this host; a disposable thread-local experiment proves the distinction.
-  Its ownership decision remains open; no speculative replacement was added.
+- The worker-thread keyboard-layout fallback was proved non-equivalent to
+  the original Console-selected layout. The latest tested package removes
+  it, queries the exact native Console API through the frontend (protocol 10),
+  and preserves the original NoInstallkb16 branch on failure. Native transport,
+  mock success/error and original-reader tests pass. Formal build, DOS17,
+  nesting, keymouse, graphics/text return and headless WOW comparison pass;
+  the coherent six-file protocol-10 set is now published at O:/winnt.
+- The layout candidate passes DOS17 and native API/reader fixtures, but the
+  first no-line-delay nested typeahead test lost the x in exit and timed out.
+  Separate baseline and candidate repeats pass; the initial failure remains
+  not yet uniquely attributed. The count-defect repair below passes the complete
+  nesting run and two further unchanged-timing typeahead repetitions. The
+  prior failure remains recorded, not retroactively reclassified as a pass.
+- A deterministic original host key-return defect is now repaired as DIV-312:
+  N copied records were submitted as N+1, with incorrect short-history indexing.
+  Exact-function red/green tests prove the repair; formal x86 builds and four
+  real nesting/typeahead routes pass. This is not yet proof that it was the
+  sole cause of the intermittent lost key. The affected production delivery
+  gates pass; no guest or input pacing changes were made. S2 remains open.
 - Follow-up fixes a proved graphics-output cursor-counter rejection: the old
   GetConsoleMode validation returned error 6 for locally backed graphics,
   preventing the original show loop from reaching a nonnegative count. Native
@@ -101,9 +116,9 @@ and remaining physical pointer/layout dispositions. The first production P
 delivers the verified subset, not S2 closure. Hidden native Console remains S3;
 display/Window remains S4, Window mouse S5, and final owner audit S6.
 
-O:/winnt now contains the tested coherent six-file S2 package. Its exact hashes,
-test prefixes and bounded delivery scope are in the boundary ledger's first
-production delivery record. The recoverable S1 set and incremental caches stay
+O:/winnt now contains the tested coherent six-file protocol-10 S2 package. Its
+exact hashes, test prefixes and bounded scope are in the boundary ledger's
+returned-key repair delivery record. The preceding protocol-9 set, S1 set and incremental caches stay
 under build. Remaining work continues in S2; do not re-admit S3 yet.
 
 ## Current Technical Baseline
@@ -114,7 +129,7 @@ layout correction. Its [evidence](../etc/evidence/m0-t423-s1-restart-lifecycle.m
 records DOS17 and lifecycle passes and the specific owner build-only exception
 for incomplete current verification. That exception is not a WOW runtime pass.
 Temporary SYSTEM.INI changes were restored. The first S2 production delivery
-supersedes S1 at O:/winnt with protocol-5 BaseSrv and protocol-9 direct Console
+supersedes S1 at O:/winnt; the latest set uses protocol-5 BaseSrv and protocol-10 direct Console
 transport; ordinary configuration and guest media remain unchanged. S1 is
 retained as the recoverable pre-migration package, not the current deployment.
 

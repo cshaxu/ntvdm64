@@ -1,5 +1,18 @@
 # mvdm
 
+MVDM-HOST-DIV-312: `softpc.new/host/src/nt_event.c::ReturnUnusedKeyEvents`
+returns the initialized history slice with its actual count and original
+oldest-first ordering, bounded by the existing MAX_KEY_EVENTS array. OpenNT's
+loop counter is one beyond the number copied; passing it exposes an extra
+uninitialized record. Short history also occupies the array tail rather than
+the prefix. The original history lookup, Console prepend and cleanup remain
+the owners; no guest change, new queue or adapter-side filtering is introduced.
+The source-body test in tests/app/unused_key_return_test.c covers full, partial,
+empty and capacity-limited batches; see the
+[S2 ledger](../../docs/etc/evidence/m0-t423-s2-console-boundary-ledger.md).
+Real nested typeahead and DOS17 regressions pass; the ledger preserves the
+earlier intermittent failure and the limits of causal attribution.
+
 MVDM-HOST-DIV-311: `softpc.new/host/src/nt_event.c::nt_block_event_thread`
 finishes pending original video-mode selection before its existing final
 `update_alg.calc_update` at the stopped-guest handoff. `nt_graph.c` defers

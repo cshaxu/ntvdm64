@@ -2016,15 +2016,19 @@ void ReturnUnusedKeyEvents(int UnusedKeyEvents)
 
     if(UnusedKeyEvents)
     {
-    for(KeyToRtn = 1, KeyInx = UnusedKeyEvents-1;
-        KeyToRtn <= UnusedKeyEvents &&
+    /* DIVERGENCE(MVDM-HOST-DIV-312): return only initialized history
+     * records, oldest first. The original loop counter is one past the
+     * copied count; a short history occupies the tail, not the prefix. */
+    for(KeyToRtn = 1, KeyInx = min(UnusedKeyEvents,MAX_KEY_EVENTS)-1;
+        KeyToRtn <= min(UnusedKeyEvents,MAX_KEY_EVENTS) &&
         GetHistoryKeyEvent(&InputRecords[KeyInx].Event.KeyEvent,KeyToRtn);
         KeyToRtn++,KeyInx--)
     {
-        InputRecords[KeyToRtn - 1].EventType = KEY_EVENT;
+        InputRecords[KeyInx].EventType = KEY_EVENT;
     }
 
-    if(!WriteConsoleInputVDMW(sc.InputHandle,InputRecords,KeyToRtn,&RecsWrt))
+    if(KeyToRtn > 1 && !WriteConsoleInputVDMW(sc.InputHandle,
+        &InputRecords[KeyInx+1],KeyToRtn-1,&RecsWrt))
         always_trace0("Console write failed\n");
     }
 

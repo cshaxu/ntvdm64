@@ -1,5 +1,6 @@
 /* Test-only link substitution: all operations still execute the production
- * receiver; record only completed copied frames. Never a product input. */
+ * receiver; record completed frames and copied input for boundary diagnosis.
+ * Never a product input. */
 #define run16_console_video_data production_video_data
 #define run16_console_video_text production_video_text
 #include "../../src/run16-exe/console_video.c"
@@ -56,6 +57,24 @@ DWORD run16_console_dispatch(run16_console_frontend *owner,
     const console_io_request *request,console_io_reply *reply)
 {
     DWORD result=production_console_dispatch(owner,request,reply);
+    if (request->operation==CONSOLE_IO_READ_INPUT ||
+        request->operation==CONSOLE_IO_PREPEND_KEYS) {
+        FILE *file=report();
+        if(file) {
+            uint32_t i,bytes=request->operation==CONSOLE_IO_READ_INPUT ? reply->bytes : request->bytes;
+            const BYTE *data=request->operation==CONSOLE_IO_READ_INPUT ? reply->data : request->data;
+            fprintf(file,"INPUT pid=%lu generation=%u op=%u seq=%u status=%lu result=%u error=%u bytes=%u\n",
+                GetCurrentProcessId(),owner->generation,request->operation,request->sequence,
+                result,reply->result,reply->error,bytes);
+            for(i=0;i+sizeof(console_io_input)<=bytes;i+=sizeof(console_io_input)) {
+                console_io_input wire;
+                memcpy(&wire,data+i,sizeof(wire));
+                fprintf(file,"RECORD type=%u down=%u repeat=%u vk=%u scan=%u char=%u control=%u\n",
+                    wire.type,wire.key_down,wire.repeat,wire.virtual_key,wire.scan,wire.character,wire.control);
+            }
+            fclose(file);
+        }
+    }
     if(request->operation==CONSOLE_IO_WRITE ||
        request->operation==CONSOLE_IO_WRITE_CELLS_A ||
        request->operation==CONSOLE_IO_WRITE_CELLS_W) {

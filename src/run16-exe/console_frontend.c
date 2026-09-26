@@ -54,7 +54,7 @@ DWORD run16_console_dispatch(run16_console_frontend *owner,const console_io_requ
     if (!owner->generation || request->generation!=owner->generation) return ERROR_ACCESS_DENIED;
     if (!request->sequence || owner->sequence==UINT32_MAX ||
         request->sequence!=owner->sequence+1 || request->bytes>CONSOLE_IO_DATA_BYTES ||
-        request->operation<CONSOLE_IO_WRITE || request->operation>CONSOLE_IO_SET_DISPLAY_MODE)
+        request->operation<CONSOLE_IO_WRITE || request->operation>CONSOLE_IO_KEYBOARD_LAYOUT)
         return ERROR_INVALID_DATA;
     cells=request->operation>=CONSOLE_IO_READ_CELLS_A && request->operation<=CONSOLE_IO_WRITE_CELLS_W;
     write_cells=request->operation>=CONSOLE_IO_WRITE_CELLS_A && request->operation<=CONSOLE_IO_WRITE_CELLS_W;
@@ -101,6 +101,17 @@ DWORD run16_console_dispatch(run16_console_frontend *owner,const console_io_requ
     position.X=(SHORT)s->x; position.Y=(SHORT)s->y;
     SetLastError(ERROR_SUCCESS);
     switch (request->operation) {
+    case CONSOLE_IO_KEYBOARD_LAYOUT: {
+        typedef BOOL (WINAPI *query_layout)(LPSTR);
+        query_layout query=(query_layout)GetProcAddress(GetModuleHandleW(L"kernel32.dll"),
+            "GetConsoleKeyboardLayoutNameA");
+        /* Preserve the Console owner's result, not this thread's HKL.
+         * Original cmdkeyb owns NoInstallkb16 when the query fails. */
+        if (!query) { SetLastError(ERROR_CALL_NOT_IMPLEMENTED);break; }
+        ok=query((LPSTR)reply->data);
+        if (ok) reply->bytes=KL_NAMELENGTH;
+        break;
+    }
     case CONSOLE_IO_VIDEO_BEGIN: {
         console_video_description description;
         memcpy(&description,request->data,sizeof(description));
