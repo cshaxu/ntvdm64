@@ -131,6 +131,15 @@ contract; modern native availability is not claimed. The first production P
 delivers the verified subset, not S2 closure. Hidden native Console remains S3;
 display/Window remains S4, Window mouse S5, and final owner audit S6.
 
+The newly covered DOS-root -> native CMD -> nested DOS middle-pair failure
+does not pass: after either middle target or launcher loss, the nested DOS
+exits normally but outer DOS never resumes MEM and root run16 times out.
+The identical no-fault control passes. Trace narrows the next investigation
+to early re-entry decrement followed by the original BaseSrv wait reset;
+that causal candidate needs a deterministic service test before any repair.
+No production or guest changes were made and no S2 closure is authorized by
+the other passing topology cases.
+
 O:/winnt now contains the tested coherent six-file protocol-10 S2 package. Its
 exact hashes, test prefixes and bounded scope are in the boundary ledger's
 returned-key repair delivery record. The preceding protocol-9 set, S1 set and incremental caches stay

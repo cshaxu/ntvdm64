@@ -3960,3 +3960,58 @@ collection orderings; they do not claim every simultaneous scheduler
 interleaving is exhausted. No production code, original guest, registry or
 published six-binary package changed. This closes this service completion-
 before-late-exit subcase, not untested topology combinations or S2 as a whole.
+
+### DOS/native/DOS middle-loss failure, with a passing no-fault control
+
+Added -NestedDosChild to Verify-BrokerFinalLifecycle.ps1, requiring
+-DosNativeLoss and optionally -LauncherLoss. The authored
+tests/observation/dos-native-dos-loss.bat starts CMD /c run16 COMMAND, then
+checks the native result, prints recovery markers and runs MEM. No original
+guest media is modified. The private observer holds input behind a gate until
+the nested COMMAND prompt and its exact launcher process are established.
+
+The fault run ends only the middle native target or its paired launcher. It
+requires that pair to finish while the nested DOS launcher remains alive,
+then sends a normal exit command to the nested guest (not another kill).
+Outer DOS must subsequently execute MEM and finish. -NestedDosChildControl
+uses the same batch/observer/input sequence without either injected fault.
+This specifically covers a DOS-rooted nested topology, not the earlier
+native-root/middle-native/live-DOS combination.
+
+Current published 94762fa70 package results under O:/winnt/logs:
+
+| Prefix (m0-t423-s2-) | Actual result |
+| --- | --- |
+| dos-native-dos-middle-target | FAIL: middle native/launcher -1/-1, inner DOS launcher remains live until exit input then returns 0; outer root times out, no recovery/MEM markers |
+| dos-native-dos-middle-launcher | FAIL: Job-cleaned native 0, killed launcher -1; inner launcher returns 0 after exit input; same outer timeout |
+| dos-native-dos-control | PASS: no fault, native and its launcher return 0, inner DOS returns 0, original parent executes MEM/recovery markers and root returns 0 |
+
+Both failed observers are terminal (53504354 timeout), and the harness performs
+its test-owned cleanup. No unresolved live job or automatic restart is being
+treated as a test result. The published package was not replaced. The control
+checks actual guest text; an exited inner launcher alone does not pass the
+fault case. These are newly exposed failures, not retroactive passes or a
+claim of regression caused by the current test-only changes.
+
+Existing MVDM_S34_TRACE_PATH was enabled for the launcher-fault and control
+runs. In the failure, reenter 32 (DECREMENT_REENTER_COUNT) precedes get-state
+128 (RETURN_ON_NO_COMMAND), which returns a wait and never completes. In the
+control, the initial get-state 128 wait precedes the decrement; then the
+second-time get-state 136 returns without waiting and the parent progresses.
+Raw logs have matching -s34.txt suffixes.
+
+Source inspection: BaseSrvSetReenterCount signals hWaitForVDMDup on decrement;
+BaseSrvGetNextVDMCommand's no-command first request resets that existing event,
+whereas RETURN_ON_NO_COMMAND plus ASKING_FOR_SECOND_TIME returns immediately.
+Whitespace-normalized comparisons of both reached source regions against
+O:/repos.external/OpenNT/base/win32/server/srvvdm.c are equal. Thus an early
+decrement followed by event reset is a concrete lost-wakeup candidate, not
+proof of an invented adapter policy or a guest defect. Next required evidence:
+a deterministic original-service test forcing both orderings before selecting
+any repair. Do not patch guest, add a second scheduler or declare this an
+approved immutable-guest limitation. S2 remains open for this real failure.
+
+Pointer audit also confirms that nt_mouse.c MouseHide/MovePointerToWindowCentre
+and MouseInFocus/MouseOutOfFocus can clip/warp outside MONITOR-only branches.
+The physical pointer acceptance item cannot be discarded as dormant hardware
+fullscreen. No desktop focus or pointer mutation was performed in this work.

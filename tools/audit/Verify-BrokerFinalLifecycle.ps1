@@ -13,6 +13,8 @@ param(
     [switch]$MiddleLayerLoss,
     [switch]$MiddleLayerInputProbe,
     [switch]$DosNativeLoss,
+    [switch]$NestedDosChild,
+    [switch]$NestedDosChildControl,
     [switch]$NativeRoot,
     [switch]$RootTargetLoss,
     [string]$WorkerWindowObserver,
@@ -20,6 +22,10 @@ param(
     [switch]$ConsoleClose
 )
 $ErrorActionPreference='Stop'
+if($NestedDosChildControl -and (!$NestedDosChild -or $LauncherLoss)){throw 'NestedDosChildControl requires NestedDosChild without LauncherLoss'}
+if($NestedDosChild -and (!$DosNativeLoss -or $NativeRoot -or $NestedWorkerLoss -or $BrokerLoss -or $FrontendLoss -or $WorkerLoss -or $TwoWorkers -or $ConsoleClose -or $RootTargetLoss -or $BarrierBroker)){
+    throw 'NestedDosChild requires only DosNativeLoss and optional LauncherLoss'
+}
 if($NativeRoot -and !$DosNativeLoss){throw 'NativeRoot requires DosNativeLoss'}
 if($RootTargetLoss -and (!$NestedWorkerLoss -or $NestedInteractive -or $MiddleLayerLoss -or
     $MiddleLayerInputProbe -or $BrokerLoss -or $WorkerLoss -or $FrontendLoss -or
@@ -146,7 +152,8 @@ try {
         # Original DOS COMMAND requires CRLF command boundaries. Repository
         # checkout line-ending policy must not turn this authored test into
         # one multiline ECHO argument. No original guest media is changed.
-        $batch=Get-Content -LiteralPath (Join-Path $PSScriptRoot '../../tests/observation/dos-native-loss.bat') -Raw
+        $batchName=if($NestedDosChild){'dos-native-dos-loss.bat'}else{'dos-native-loss.bat'}
+        $batch=Get-Content -LiteralPath (Join-Path $PSScriptRoot "../../tests/observation/$batchName") -Raw
         [IO.File]::WriteAllText($fixture,($batch -replace '\r?\n',"`r`n"),[Text.Encoding]::ASCII)
         $target='COMMAND.COM /c '+$fixture
         if($NativeRoot){
@@ -154,14 +161,19 @@ try {
             $env:MVDM_OBSERVER_INPUT_GATE='Local\MvdmNativeDosNative-'+$PID
             $target='cmd.exe /d /k run16.exe '+$target
         }
-        $loss=StartObserved 'dos-native-loss' $target $(if($NativeRoot){"echo OUTER-NATIVE-RECOVERED`rexit /b 23`r"}else{''})
+        if($NestedDosChild){
+            $inputGate=[Threading.EventWaitHandle]::new($false,[Threading.EventResetMode]::ManualReset,('Local\MvdmDosNativeDos-'+$PID))
+            $env:MVDM_OBSERVER_INPUT_GATE='Local\MvdmDosNativeDos-'+$PID
+        }
+        $nativePattern=if($NestedDosChild){'/c run16.exe COMMAND.COM'}else{'/k echo S2-NATIVE-WAIT'}
+        $loss=StartObserved 'dos-native-loss' $target $(if($NativeRoot){"echo OUTER-NATIVE-RECOVERED`rexit /b 23`r"}elseif($NestedDosChild){"exit`r"}else{''})
         $deadline=[DateTime]::UtcNow.AddSeconds(15)
         $native=$null
         do {
             CollectOwned
             $native=@(ObservedProcesses | Where-Object {
                 $owned.Contains([int]$_.ProcessId) -and $_.Name -eq 'cmd.exe' -and
-                $_.CommandLine -match '/k echo S2-NATIVE-WAIT'
+                $_.CommandLine -match [regex]::Escape($nativePattern)
             }) | Select-Object -First 1
             if($native -or $loss.Process.HasExited){break}
             Start-Sleep -Milliseconds 100
@@ -177,7 +189,21 @@ try {
         [void]$targetProcess.Handle;[void]$pairProcess.Handle
         $dosParent=$null
         $outerParent=$null
+        $nestedLauncher=$null
         try {
+        if($NestedDosChild){
+            $screen=$loss.Report+'.pre-input-console.txt.console.txt'
+            $deadline=[DateTime]::UtcNow.AddSeconds(12)
+            do {
+                CollectOwned
+                $inner=@(PackageProcesses | Where-Object {$_.Name -eq 'run16.exe' -and $_.ParentProcessId -eq $native.ProcessId -and $owned.Contains([int]$_.ProcessId)})
+                if($inner.Count -eq 1 -and (Test-Path $screen) -and (Get-Content $screen -Raw) -match '(?i)[a-z]:\\[^\r\n]*>'){break}
+                Start-Sleep -Milliseconds 50
+            } while([DateTime]::UtcNow -lt $deadline)
+            if($inner.Count -ne 1 -or !(Test-Path $screen) -or (Get-Content $screen -Raw) -notmatch '(?i)[a-z]:\\[^\r\n]*>'){throw 'Nested DOS child did not reach prompt'}
+            $nestedLauncher=Get-Process -Id $inner[0].ProcessId;[void]$nestedLauncher.Handle
+            if($nestedLauncher.HasExited){throw 'Nested DOS launcher already exited'}
+        }
         if($NativeRoot){
             $workers=@(PackageProcesses | Where-Object {$owned.Contains([int]$_.ProcessId) -and $_.Name -eq 'ntvdm.exe'})
             if($workers.Count -ne 1){throw 'Expected one DOS worker in native/DOS/native chain'}
@@ -189,14 +215,26 @@ try {
             $outerParent=Get-Process -Id $outerShells[0].ProcessId
             [void]$dosParent.Handle;[void]$outerParent.Handle
         }
-            if($LauncherLoss){$pairProcess.Kill()}else{$targetProcess.Kill()}
+            if($NestedDosChildControl){[void]$inputGate.Set()}
+            elseif($LauncherLoss){$pairProcess.Kill()}else{$targetProcess.Kill()}
             if(!$targetProcess.WaitForExit(5000) -or !$pairProcess.WaitForExit(5000)){throw 'Native lifetime pair did not finish'}
             # With a live launcher, target status must propagate exactly.
             # Killing the launcher instead invokes OS Job kill-on-close;
             # that cleanup status is not the launcher's externally set code.
             $results.Add("OBSERVED native=$($targetProcess.ExitCode) launcher=$($pairProcess.ExitCode) launcher-loss=$([bool]$LauncherLoss)")
-            if($pairProcess.ExitCode -ne -1 -or (!$LauncherLoss -and $targetProcess.ExitCode -ne -1)){throw 'Native termination code was not propagated to its launcher'}
+            if($NestedDosChildControl){
+                if($pairProcess.ExitCode -ne $targetProcess.ExitCode){throw 'Normal native completion did not propagate'}
+            } elseif($pairProcess.ExitCode -ne -1 -or (!$LauncherLoss -and $targetProcess.ExitCode -ne -1)){throw 'Native termination code was not propagated to its launcher'}
             $results.Add('PASS native target and inner run16 both finish; live launcher propagates target status')
+            if($NestedDosChild){
+                if(!$NestedDosChildControl){
+                    if($nestedLauncher.HasExited){throw 'Middle native pair loss recursively terminated nested DOS launcher'}
+                    $results.Add('PASS middle native pair ended while nested DOS launcher remains alive; no recursive kill')
+                }
+                [void]$inputGate.Set()
+                if(!$nestedLauncher.WaitForExit(10000)){throw 'Nested DOS exit input did not complete its launcher'}
+                $results.Add("OBSERVED nested DOS launcher exit=$($nestedLauncher.ExitCode) after normal exit input")
+            }
             if($NativeRoot){
                 if(!$dosParent.WaitForExit(10000) -or $dosParent.ExitCode -ne 0){throw 'DOS parent command did not recover and complete normally'}
                 if($outerParent.HasExited){throw 'Outer interactive native CMD died with inner pair'}
@@ -207,13 +245,16 @@ try {
             $targetProcess.Dispose();$pairProcess.Dispose()
             if($dosParent){$dosParent.Dispose()}
             if($outerParent){$outerParent.Dispose()}
+            if($nestedLauncher){$nestedLauncher.Dispose()}
         }
         FinishObserved $loss $(if($NativeRoot){23}else{0})
         $screen=Get-Content -LiteralPath ($loss.Report+'.console.txt') -Raw
-        foreach($marker in @('S2-NATIVE-EXIT-255','S2-DOS-RECOVERED','bytes total conventional memory','S2-DOS-END')){
+        $markers=@('S2-DOS-RECOVERED','bytes total conventional memory','S2-DOS-END')
+        if(!$NestedDosChildControl){$markers+= 'S2-NATIVE-EXIT-255'}
+        foreach($marker in $markers){
             if($screen -notmatch [regex]::Escape($marker)){throw "DOS parent recovery missing: $marker"}
         }
-        $results.Add('PASS original DOS parent observes low-byte 255, executes MEM, and completes its script')
+        $results.Add($(if($NestedDosChildControl){'PASS original DOS parent executes MEM and completes its script after normal nested return'}else{'PASS original DOS parent observes low-byte 255, executes MEM, and completes its script'}))
         if($NativeRoot){
             if($screen -notmatch 'OUTER-NATIVE-RECOVERED'){throw 'Outer native CMD recovery output missing'}
             $results.Add('PASS outer native CMD executes recovery input and root run16 returns 23')
