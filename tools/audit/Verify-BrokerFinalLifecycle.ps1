@@ -27,6 +27,7 @@ if($NestedDosChild -and (!$DosNativeLoss -or $NativeRoot -or $NestedWorkerLoss -
     throw 'NestedDosChild requires only DosNativeLoss and optional LauncherLoss'
 }
 if($NativeRoot -and !$DosNativeLoss){throw 'NativeRoot requires DosNativeLoss'}
+if($DosNativeLoss -and $LauncherLoss -and !$NestedDosChild){throw 'Launcher-loss survival requires NestedDosChild so the surviving native target can finish normally'}
 if($RootTargetLoss -and (!$NestedWorkerLoss -or $NestedInteractive -or $MiddleLayerLoss -or
     $MiddleLayerInputProbe -or $BrokerLoss -or $WorkerLoss -or $FrontendLoss -or
     $LauncherLoss -or $DosNativeLoss -or $NativeRoot -or $TwoWorkers -or $ConsoleClose -or $BarrierBroker)){
@@ -58,6 +59,7 @@ $previous=[Environment]::GetEnvironmentVariable('MVDM_BASESRV_TRACE_PATH')
 $previousGate=[Environment]::GetEnvironmentVariable('MVDM_OBSERVER_INPUT_GATE')
 $previousClose=[Environment]::GetEnvironmentVariable('MVDM_OBSERVER_CLOSE_CONSOLE')
 $previousControlRecord=[Environment]::GetEnvironmentVariable('MVDM_OBSERVER_RECORD_CONTROL')
+$previousPostExit=[Environment]::GetEnvironmentVariable('MVDM_OBSERVER_POST_EXIT_MS')
 $inputGate=$null
 $postFrontend=@()
 function TraceText {if(Test-Path -LiteralPath $trace){Get-Content -LiteralPath $trace -Raw}else{''}}
@@ -110,6 +112,9 @@ function StopOwnedWorkers {
     }
 }
 try {
+    # Retain the native Console after root death: observer teardown must not
+    # deliver CTRL_CLOSE_EVENT and masquerade as launcher-driven termination.
+    if($FrontendLoss -or $LauncherLoss -or $RootTargetLoss -or $MiddleLayerInputProbe){$env:MVDM_OBSERVER_POST_EXIT_MS='5000'}
     [Environment]::SetEnvironmentVariable('MVDM_BASESRV_TRACE_PATH',$trace)
     if($ConsoleClose){
         if($env:MVDM_OBSERVER_PRIVATE_DESKTOP -ne '1'){throw 'ConsoleClose requires a private desktop'}
@@ -183,7 +188,7 @@ try {
             Select-Object ProcessId,ParentProcessId,Name,ExecutablePath,CommandLine |
             ConvertTo-Json -Depth 3 | Set-Content -LiteralPath (Join-Path $PackageRoot "logs\$LogPrefix-chain.json") -Encoding utf8
         $pair=@(PackageProcesses | Where-Object {$_.ProcessId -eq $native.ParentProcessId -and $_.Name -eq 'run16.exe'})
-        if($pair.Count -ne 1){throw 'Native target has no exact run16 lifetime pair'}
+        if($pair.Count -ne 1){throw 'Native target has no exact direct run16 parent'}
         $targetProcess=Get-Process -Id $native.ProcessId
         $pairProcess=Get-Process -Id $pair[0].ProcessId
         [void]$targetProcess.Handle;[void]$pairProcess.Handle
@@ -217,23 +222,28 @@ try {
         }
             if($NestedDosChildControl){[void]$inputGate.Set()}
             elseif($LauncherLoss){$pairProcess.Kill()}else{$targetProcess.Kill()}
-            if(!$targetProcess.WaitForExit(5000) -or !$pairProcess.WaitForExit(5000)){throw 'Native lifetime pair did not finish'}
-            # With a live launcher, target status must propagate exactly.
-            # Killing the launcher instead invokes OS Job kill-on-close;
-            # that cleanup status is not the launcher's externally set code.
-            $results.Add("OBSERVED native=$($targetProcess.ExitCode) launcher=$($pairProcess.ExitCode) launcher-loss=$([bool]$LauncherLoss)")
+            if(!$pairProcess.WaitForExit(5000)){throw 'Direct run16 did not finish'}
+            if($LauncherLoss){
+                if($targetProcess.WaitForExit(500)){throw 'Launcher death terminated its handed-off native target'}
+                $results.Add('PASS inner launcher ended; its native target survives')
+            } elseif(!$targetProcess.WaitForExit(5000)){throw 'Native target did not finish'}
+            $results.Add("OBSERVED launcher=$($pairProcess.ExitCode) launcher-loss=$([bool]$LauncherLoss)")
             if($NestedDosChildControl){
                 if($pairProcess.ExitCode -ne $targetProcess.ExitCode){throw 'Normal native completion did not propagate'}
             } elseif($pairProcess.ExitCode -ne -1 -or (!$LauncherLoss -and $targetProcess.ExitCode -ne -1)){throw 'Native termination code was not propagated to its launcher'}
-            $results.Add('PASS native target and inner run16 both finish; live launcher propagates target status')
+            if(!$LauncherLoss){$results.Add('PASS live launcher propagates its direct native target status')}
             if($NestedDosChild){
                 if(!$NestedDosChildControl){
                     if($nestedLauncher.HasExited){throw 'Middle native pair loss recursively terminated nested DOS launcher'}
-                    $results.Add('PASS middle native pair ended while nested DOS launcher remains alive; no recursive kill')
+                    $results.Add('PASS nested DOS launcher remains alive after direct ancestor loss; no recursive kill')
                 }
                 [void]$inputGate.Set()
                 if(!$nestedLauncher.WaitForExit(10000)){throw 'Nested DOS exit input did not complete its launcher'}
                 $results.Add("OBSERVED nested DOS launcher exit=$($nestedLauncher.ExitCode) after normal exit input")
+                if($LauncherLoss){
+                    if(!$targetProcess.WaitForExit(5000) -or $targetProcess.ExitCode -ne $nestedLauncher.ExitCode){throw 'Surviving native CMD did not collect its own direct nested run16 result'}
+                    $results.Add("PASS native target continued after launcher death and returned nested result=$($targetProcess.ExitCode)")
+                }
             }
             if($NativeRoot){
                 if(!$dosParent.WaitForExit(10000) -or $dosParent.ExitCode -ne 0){throw 'DOS parent command did not recover and complete normally'}
@@ -304,6 +314,11 @@ try {
                 Stop-Process -Id $victimId
                 foreach($id in @($middle[0].ProcessId,$middleTarget[0].ProcessId)){
                     $item=@($retained | Where-Object {$_.Id -eq $id})[0]
+                    if($LauncherLoss -and $id -eq $middleTarget[0].ProcessId){
+                        if($item.Process.WaitForExit(500)){throw 'Inner launcher death terminated its native target'}
+                        $results.Add("PASS handed-off native target survives launcher loss: PID=$id")
+                        continue
+                    }
                     if(!$item.Process.WaitForExit(5000)){throw "Middle pair remains alive: $id"}
                     if((!$LauncherLoss -or $id -eq $victimId) -and $item.Process.ExitCode -ne -1){throw 'Middle pair did not preserve native target termination status'}
                     $results.Add("PASS middle pair exit: $($item.Name) PID=$id code=$($item.Process.ExitCode)")
@@ -331,6 +346,14 @@ try {
             $victimId=if($RootTargetLoss){$outerShell[0].ProcessId}elseif($BrokerLoss){$servers[0].ProcessId}elseif($FrontendLoss){$root[0].ProcessId}elseif($LauncherLoss){$inner[0].ProcessId}else{$workers[0].ProcessId}
             Stop-Process -Id $victimId
             foreach($item in @($retained | Where-Object {$_.Id -notin $survivors})){
+                $mustSurvive=($FrontendLoss -and $item.Id -ne $victimId) -or
+                    ($RootTargetLoss -and $item.Id -notin @($root[0].ProcessId,$victimId)) -or
+                    ($LauncherLoss -and $item.Name -eq 'ntvdm.exe')
+                if($mustSurvive){
+                    if($item.Process.WaitForExit(300)){throw "Execution was ended by ancestor/root-I/O loss: $($item.Name) PID=$($item.Id) code=$($item.Process.ExitCode)"}
+                    $results.Add("PASS survives ancestor/root-I/O loss: $($item.Name) PID=$($item.Id)")
+                    continue
+                }
                 if(!$item.Process.WaitForExit(5000)){
                     if($item.Name -eq 'ntvdm.exe' -and $WorkerWindowObserver){
                         & $WorkerWindowObserver $item.Id "NTVDMConsoleTest-$($loss.Process.Id)" |
@@ -354,9 +377,8 @@ try {
         FinishObserved $loss $(if($NestedInteractive){23}elseif($FrontendLoss -or $LauncherLoss -or $RootTargetLoss){[uint32]::MaxValue}else{$failureCode})
         if($MiddleLayerInputProbe){
             foreach($p in $postFrontend){
-                if(!$p.WaitForExit(5000)){throw "Descendant outlived completed root frontend: $($p.Id)"}
-                if($p.ExitCode -eq 0){throw "Unfinished descendant reported success: $($p.Id)"}
-                $results.Add("PASS root frontend completion contains unfinished descendant: PID=$($p.Id) exit=$($p.ExitCode)")
+                if($p.WaitForExit(300)){throw "Descendant exited after root completion; original caller outcome requires attribution: PID=$($p.Id) exit=$($p.ExitCode)"}
+                $results.Add("PASS completed root frontend does not terminate unfinished descendant: PID=$($p.Id)")
             }
         }
         if($NestedInteractive -and ((Get-Content -LiteralPath ($loss.Report+'.console.txt') -Raw) -notmatch '(?m)^\[\d+\]\s*NESTED-RECOVERED\s*$')){throw 'Interactive CMD did not execute the recovery command'}
@@ -414,9 +436,8 @@ try {
         $worker=@($workers | Where-Object {$_.ParentProcessId -eq $launcherId})
         if($workers.Count -ne $requiredTasks -or $worker.Count -ne 1){throw 'Cannot identify owned pairs'}
         $victim=if($WorkerLoss){$worker[0]}elseif($LauncherLoss -or $FrontendLoss){$launcher[0]}else{$servers[0]}
-        # Unlike the pre-frontend launcher, the S2 root owns active DOS input
-        # and presentation. Observe worker failure while the observer still
-        # holds the Console and input gate; Console teardown must not fake it.
+        # Root loss revokes I/O, not execution. Retain the process handle and
+        # Console independently; test cleanup is not a product completion.
         $frontendWorker=if($FrontendLoss -or $LauncherLoss){Get-Process -Id $worker[0].ProcessId}else{$null}
         if($frontendWorker){[void]$frontendWorker.Handle} # retain before process exit
         Stop-Process -Id $victim.ProcessId
@@ -426,17 +447,14 @@ try {
             if(!(PackageProcesses | Where-Object {$_.ProcessId -eq $otherWorker.ProcessId})){throw 'Unrelated worker was terminated'}
         }
         if($FrontendLoss -or $LauncherLoss){
-            if(!$frontendWorker.WaitForExit(5000)){
+            if($frontendWorker.WaitForExit(1000)){
                 if($WorkerWindowObserver){
                     & $WorkerWindowObserver $worker[0].ProcessId "NTVDMConsoleTest-$($loss.Process.Id)" |
                         Set-Content -LiteralPath (Join-Path $PackageRoot "logs\$LogPrefix-worker-windows.txt") -Encoding utf8
                 }
-                throw 'Active worker still waiting after frontend loss'
+                throw "Worker exited after root loss; attribute original caller handling before accepting: $($frontendWorker.ExitCode)"
             }
-            if($null -eq $frontendWorker.ExitCode -or $frontendWorker.ExitCode -ne 1067){
-                throw "Frontend loss must return worker error 1067; observed $($frontendWorker.ExitCode)"
-            }
-            $results.Add("PASS active frontend loss: worker failed before Console observer teardown ($($frontendWorker.ExitCode))")
+            $results.Add('PASS root frontend loss: worker survives while Console remains held; no launcher-driven kill')
             $frontendWorker.Dispose()
         }
         [void]$inputGate.Set()
@@ -549,6 +567,7 @@ try {
         MVDM_OBSERVER_INPUT_GATE=$previousGate
         MVDM_OBSERVER_CLOSE_CONSOLE=$previousClose
         MVDM_OBSERVER_RECORD_CONTROL=$previousControlRecord
+        MVDM_OBSERVER_POST_EXIT_MS=$previousPostExit
     }.GetEnumerator()){
         # Preserve absence, not an empty variable (which Win32 size queries
         # distinguish and presence-triggered observer switches would enable).

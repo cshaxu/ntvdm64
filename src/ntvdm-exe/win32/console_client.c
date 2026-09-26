@@ -51,7 +51,7 @@ static DWORD WINAPI console_input_watch(void *context)
         DWORD result=WaitForMultipleObjects(3,waits,FALSE,INFINITE);
         if (result==WAIT_OBJECT_0) return 0;
         if (result!=WAIT_OBJECT_0+2) {
-            SetEvent(client->wake);return result==WAIT_FAILED ? GetLastError() : ERROR_PROCESS_ABORTED;
+            SetEvent(client->wake);return result==WAIT_FAILED ? GetLastError() : ERROR_PIPE_NOT_CONNECTED;
         }
         if (!pending) SetEvent(client->wake);
         pending=!pending;
@@ -169,7 +169,7 @@ static DWORD client_transfer(console_client *client,BOOL write,void *buffer,DWOR
         HANDLE waits[2]={client->frontend,client->event};
         DWORD done=0,error,wait;
         BOOL ok;
-        if (WaitForSingleObject(client->frontend,0)!=WAIT_TIMEOUT) return ERROR_PROCESS_ABORTED;
+        if (WaitForSingleObject(client->frontend,0)!=WAIT_TIMEOUT) return ERROR_PIPE_NOT_CONNECTED;
         ResetEvent(client->event);io.hEvent=client->event;
         ok=write ? WriteFile(client->pipe,cursor,bytes,&done,&io) :
             ReadFile(client->pipe,cursor,bytes,&done,&io);
@@ -178,7 +178,7 @@ static DWORD client_transfer(console_client *client,BOOL write,void *buffer,DWOR
             if (error!=ERROR_IO_PENDING) return error;
             wait=WaitForMultipleObjects(2,waits,FALSE,INFINITE);
             if (wait!=WAIT_OBJECT_0+1) {
-                error=wait==WAIT_FAILED ? GetLastError() : ERROR_PROCESS_ABORTED;
+                error=wait==WAIT_FAILED ? GetLastError() : ERROR_PIPE_NOT_CONNECTED;
                 CancelIoEx(client->pipe,&io);
                 (void)GetOverlappedResult(client->pipe,&io,&done,TRUE);
                 return error;
@@ -240,17 +240,11 @@ static DWORD exchange(console_client *client,console_io_reply *reply)
              client->request.operation>CONSOLE_IO_READ_CELLS_W))))
         error=ERROR_INVALID_DATA;
     if (!error) error=client_transfer(client,FALSE,reply->data,reply->bytes);
-    /* A closed authenticated channel is the same unavailable presenter as
-     * process death. This applies only to active I/O, not idle residence. */
+    /* Root loss revokes I/O only. Keep a stable explicit transport failure;
+     * the original caller, not this adapter, decides whether to continue. */
     if (error==ERROR_BROKEN_PIPE || error==ERROR_NO_DATA || error==ERROR_PIPE_NOT_CONNECTED)
-        error=ERROR_PROCESS_ABORTED;
+        error=ERROR_PIPE_NOT_CONNECTED;
     if (error) client->failure=error;
-    /* A live I/O request has lost its authenticated presenter. Original
-     * DisplayErrorTerm opens an interactive dialog, which cannot complete
-     * this headless failure. Match standalone broker-loss containment here,
-     * not in the lifetime watcher: an idle resident may outlive its parent. */
-    if (error==ERROR_PROCESS_ABORTED)
-        TerminateProcess(GetCurrentProcess(),error);
     return error;
 }
 

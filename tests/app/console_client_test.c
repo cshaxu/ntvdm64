@@ -113,7 +113,7 @@ int main(int argc,char **argv)
     if (argc==2 && !strcmp(argv[1],"--readiness-peer")) { Sleep(INFINITE);return 0; }
     if (broken_pipe) {
         /* Keep the authenticated presenter process alive while its channel
-         * closes. No helper can be orphaned when the client exits fatally. */
+         * closes. Channel loss must not kill this client or its presenter. */
         CHECK(DuplicateHandle(GetCurrentProcess(),GetCurrentProcess(),GetCurrentProcess(),
             &frontend_process,SYNCHRONIZE,FALSE,0));
     } else {
@@ -554,10 +554,7 @@ int main(int argc,char **argv)
     }
     if (broken_pipe) {
         SetEvent(stop);
-        /* The real transport must terminate this fixture with 1067. A false
-         * API return, fallback or popup is a failure, verified by the observer. */
-        (void)WriteConsoleA(local,"!",1,&count,NULL);
-        CHECK(FALSE);
+        goto disconnected;
     }
     CHECK(ReadConsoleOutputCharacterA(local,&untouched,1,p,&count) && untouched==' ');
     CHECK(ResetEvent(stable_wait) && WaitForSingleObject(stable_wait,0)==WAIT_TIMEOUT);
@@ -644,6 +641,19 @@ int main(int argc,char **argv)
     CHECK(WaitForSingleObject(frontend_process,5000)==WAIT_OBJECT_0);
     CHECK(ntvdm_console_input_wait_handle()==stable_wait &&
         WaitForSingleObject(stable_wait,5000)==WAIT_OBJECT_0);
+disconnected:
+    /* An I/O failure is not execution termination. Repeated calls must return
+     * the same explicit error, without falling back to the local Console. */
+    for (i=0;i<3;++i) {
+        CHECK(!WriteConsoleA(local,"!",1,&count,NULL) && GetLastError()==ERROR_PIPE_NOT_CONNECTED);
+        CHECK(owner.console_client);
+    }
+    {
+        INPUT_RECORD record;
+        CHECK(!ReadConsoleInputW(frontend.input,&record,1,&count) && GetLastError()==ERROR_PIPE_NOT_CONNECTED);
+        CHECK(!GetConsoleScreenBufferInfo(local,&info) && GetLastError()==ERROR_PIPE_NOT_CONNECTED);
+        CHECK(!SetConsoleMode(frontend.input,ENABLE_MOUSE_INPUT) && GetLastError()==ERROR_PIPE_NOT_CONNECTED);
+    }
     cleanup(cleanup_context);bound=NULL;
     CHECK(!owner.console_client);
     CHECK(WaitForSingleObject(thread,5000)==WAIT_OBJECT_0);

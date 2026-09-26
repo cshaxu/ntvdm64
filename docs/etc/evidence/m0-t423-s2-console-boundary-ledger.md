@@ -4161,3 +4161,130 @@ divergences; they are not byte-identical or newline-normalized-identical to
 upstream CRLF. No whole-file formatting rewrite is bundled into this repair.
 The remaining full per-layer/focus S2 checklist stays open; this delivery is
 not S2 closure or admission of hidden Console/Window work.
+
+### Owner-directed unpaired lifecycle transition (new P, in progress)
+
+The owner explicitly supersedes the lifetime-pair contract. First committed
+and pushed the complete preceding notification repair as 9f9b49346; the worktree
+was clean and HEAD/origin/main were 0/0. Its tested six-file publication remains
+at O:/winnt. Then began a separate P under the revised Status, architecture
+and proposal: launcher/target execution and root-I/O ownership are independent.
+Prior kill-on-launcher-loss passes above are retained historical evidence only.
+
+Current changes remove the run16 native kill-on-close Job and its allocation
+wrapper; native waits observe their actual target only. DOS waits no longer use
+frontend process/pump loss as task completion or as a reason to terminate the
+worker. The pre-handoff suspended-worker Job and rollback remain. BaseSrv's
+service_end_abandoned_dos_pair and its launcher-exit watch are deleted; root
+route cleanup and original worker-exit cleanup remain. console_client exchange
+returns/stores a disconnect error instead of terminating its own worker.
+The change uses ordinary existing process waits and original DOS completion;
+it does not create a scheduler, task-kill facility or new mirror/provider.
+
+Incremental MSVC Win32/x86 /MT run16, basesrv and ntvdm links pass. The revised
+base_service_reservation_test has nine passing private-desktop cases under
+O:/winnt/logs prefix m0-t423-s2-unpaired-r3-:
+launcher-exit-survival, launcher-disconnect-survival, frontend-rundown,
+frontend-delegated, frontend-wait-root-loss, frontend-wait-request-loss,
+launcher-completed-rundown, launcher-completed-uncollected, management-terminate.
+Final fixture SHA-256:
+263B11200ACED6F941DD23DCD2AC11CA3DC9F6EB1DC9A96DD750B3C04E32B28A.
+Worker survival is checked after synchronous service rundown; the fixture then
+completes the original DOS record with 29 and verifies the parent's event while
+the worker remains alive. Explicit fixture process termination occurs only
+after the survival/completion assertions. Root/request acquisition cancellation
+still reports legacy 1067, now without worker termination; its error-category
+reconciliation remains pending, not claimed as the final I/O error contract.
+
+Earlier m0-t423-s2-unpaired-launcher-exit-survival and r2 completed-rundown
+attempts failed their final service-empty assertion after the survival/result
+checks. With the launcher exit watch removed, process signalling no longer
+incidentally waits for the independent worker-exit callback. The fixture now
+boundedly observes IsEmpty for up to 5 seconds after its explicit cleanup;
+it still fails if cleanup never completes. These failures remain recorded,
+not reclassified as passes. All observers are terminal and children cleaned.
+
+No new-P product publication or commit yet. Required continuation: root/inner
+real native and DOS survival, later I/O-error behavior, direct result propagation,
+startup rollback, worker's own failure, unchanged notification regressions,
+full DOS17/WOW headless and affected device/nesting checks. Existing real-chain
+harnesses still expect obsolete pair termination and must be revised before
+they can qualify as acceptance. No user desktop interaction was performed.
+
+### Unpaired-lifecycle production verification and delivery
+
+The new P completes the implementation described above. Authenticated root
+process/channel loss now returns ERROR_PIPE_NOT_CONNECTED (233) through the
+worker's original callers. Process-wait and task-result routes still use 1067
+only for actual worker failure. Input, output, geometry query and mode-setting
+return the stable disconnect error; the transport does not kill its process
+or fall back to local native presentation. No guest or mirror file changed.
+The five production files total +22/-187 lines, a net reduction of 165 lines.
+Startup containment remains limited to unclaimed/pre-handoff work; original
+VDM completion, explicit management termination and worker-exit cleanup remain.
+
+All runs below use the unswitched private desktop. Prefixes are beneath
+O:/winnt/logs; tests clean up retained survivors only after their assertions.
+
+| Gate | Prefix after m0-t423-s2-unpaired- | Evidence |
+| --- | --- | --- |
+| Original-service fixture, 18 selected modes | final- | Default reservation/worker failure, frontend identity, unclaimed cleanup/reconnect, launcher/root/request rundown survival, task result 29 while worker lives, collected/uncollected completion, explicit management termination, five re-entry notification orders pass. |
+| Real client/frontend Console transport | io-r6-live / io-r6-broken-pipe | Root-process loss and channel-only loss return 233 on repeated output, input, geometry and mode calls; client remains alive and teardown joins. |
+| Root pump resource fixture | r4-scope | Completed channels reclaimed, live channel retained, final join succeeds. |
+| Native CUI and GUI | native-r3-cui / native-r3-gui | Actual target 37 propagates; killed launcher 91 does not terminate target, which subsequently completes 37; direct target/root normal completion leaves its descendant able to finish 37. |
+| Root loss with unrelated worker | root | A real COMMAND worker survives root death while observer retains Console; unrelated worker executes ISOLATION-ALIVE and exits; fresh MEM succeeds. |
+| DOS -> native -> nested DOS launcher loss | inner | Native CMD and nested DOS survive inner launcher death; normal nested DOS exit completes CMD; outer DOS receives its direct run16 low-byte 255, executes MEM and completes. |
+| Native nested execution faults | nested-root / root-target / inner-dos / middle-launcher / middle-target / nested-worker / middle-input | Root/target/inner/middle losses do not recursively kill survivors. Interactive outer CMD recovers and returns 23. Actual worker death propagates 1067. Middle-input case recovers without a second injected fault; later root completion preserves unfinished descendants. |
+| Worker failure with isolation control | worker | Dead worker fails its launcher with 1067; unrelated worker executes and finishes normally; fresh MEM works. |
+| Full DOS17 | dos17 | All 17 expected results and real guest output checks pass, including direct/nested COMMAND, MEM, EDIT, authored exit 7, streams and EOF. |
+| Nested and typeahead regression | nesting | native-cmd-dos, native-cmd-dos-repeat, dos-native-dos and dos-native-typeahead pass. |
+| Video return | graphics | Direct and interactive original guest graphics-to-text return pass. |
+| Guest keyboard/mouse | keymouse-observer / keymouse-guest | Existing authored KMTST and production observer return 0 after keyboard, modifier-release, mouse callback and normal return checks. No physical desktop interaction is certified. |
+| Headless WOW3 | wow-winmine / wow-sol / wow-write | All remain alive through the 16-second samples at the existing NETWORK.DRV modal. Observer timeout is an observation bound, not app completion or gameplay acceptance. |
+
+The native fixture source is tests/observation/run16_unpaired_native_test.c;
+build-run16-unpaired-native.ps1 builds x86 /MT CUI and GUI variants below build.
+Run each through console-startup-observer with MVDM_OBSERVER_PRIVATE_DESKTOP=1,
+TEST_RUNTIME_ROOT set to the package and UNPAIRED_NATIVE_REPORT to its assertion
+log. The fixture's ready/release events prove post-launcher-death work, not
+merely the presence of a PID. The GUI report is a file because a GUI-subsystem
+test cannot rely on Console stdout. Both variants assert rounds 0, 1 and 2.
+Real nested faults use the updated Verify-BrokerFinalLifecycle.ps1 switches;
+the observer holds Console for 5 seconds after root exit to avoid confusing
+observer teardown/CTRL_CLOSE_EVENT with a product-initiated kill.
+
+Fixture identities (SHA-256):
+
+- service: EFD5C05EDF6240ACED6F6B6DB82110493B444BC6BCDFA3F092BA04FE2C044B8F.
+- Console client: 9C9A5BC8AD605504D7C7DF77577B65402F83D0580B0FF478380DAF3B78515837.
+- native CUI: CBBA95CC2F80867394F1BAE4441DD491D1EE5B1FC7C842731542361099FD3B54.
+- native GUI: 9ECF65AFFE0ADA5FBB7370C8D11123780C42BB390DF5C5196BD195F9D9CC46B2.
+
+Retained non-pass evidence: native-r1 GUI completed with 0 but its harness
+wrongly demanded Console stdout; r2 uses the file witness and r3 adds descendant
+survival. io-r5-live failed an assertion against native FlushConsoleInputBuffer,
+which is not a selected worker adapter call; r6 tests the actual SetConsoleMode
+control route instead. r4-frontend-capability was a misspelled mode and ran the
+default fixture, so it is not frontend identity evidence. The fixture now
+rejects all unknown modes, including obsolete launcher-pair-loss, with 64;
+modecheck logs prove rejection and the real frontend-root mode passes.
+
+The formal and WOW x86 caches were incrementally built; no full rebuild or new
+runtime directory was introduced. Temporary candidate tests always restored
+the six-file 9f9b49346 baseline. After all above gates, the exact tested set was
+published coherently to O:/winnt and each destination hash verified:
+
+| File | SHA-256 |
+| --- | --- |
+| run16.exe | 08479BFC56190AC2F67867894A733D63FCB169501F5A052E32CAFA57650D3745 |
+| basesrv.exe | 12199170D3E663B12C1C552EBBC6A9C79BAED6B28C6AE82DD1CC306E43C47663 |
+| ntvdm.exe | 94ADF896F3354F27106E0177667DBC9770B5016E7FC653A129D77A99A76C8B33 |
+| dtmgr.exe | 7349D5C89384A00080D31ECD3D1B1AF9D543E72A58F125DFC37328FF9F02487C |
+| WOW32.DLL | F2B6353836E8B4019E3079C9F96F927484049207F3C9CB7D7735F0363ABB9076 |
+| VDMREDIR.DLL | AC601B4E27FCA4BA078F209C0BF5CCEF49197C337CA8BE25240CBD9735A67A1F |
+
+Reproduction scripts, publication manifest and the prior package backup remain
+under build/M0-T423/S2/unpaired-* and test-unpaired-*.ps1. No original guest,
+SYSTEM.INI or Registry change was made. The original execution/handoff source
+order guard passes. This is a production P, not S2/T423 closure: the full S2
+fault/completion-race and physical focus/pointer checklist remains open.

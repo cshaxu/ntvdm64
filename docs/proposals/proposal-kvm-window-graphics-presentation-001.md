@@ -263,26 +263,52 @@ Owner 澄清：同一嵌套执行链的前端始终由最外层根 run16 持有�
 归属分离；S2 证明唯一根前端和原生返回，不能以共享可见 Console 的
 继承证明 S3 跨隐藏 Console 的关联已经成立。
 
-Owner 最终确认：每层 run16 与其对应目标程序作为一个整体，一方退出，
-另一方不得遗留；目标正常完成由 run16 收取并返回原始退出码，launcher
-异常死亡则清理其对应目标。不同嵌套层之间严格按原始 OpenNT 的嵌套、
-重入、等待及退出语义处理，不再另加“父层死亡就强杀所有后代”的进程树
-策略。此条取代此前通用执行子树级联要求。共享 broker、无关 worker
-不属于某一对 launcher/目标的私有资源。
+Owner 最新执行与生命周期规则，全面取代此前“同层成对终止”及其测试预期：
 
-前端关联、执行父子关系、guest 任务所在 worker 是三种不同关系。
-worker 死亡使其承载的全部 guest 任务失败；worker 活着但没有任务可按
-原始生命周期留驻。不可恢复的 guest 故障允许以 worker 为故障边界，
-同 worker 的父 DOS 任务不保证保留；worker 外仍可恢复的交互父层应继续
-运行。此条取代此前“任意强制取消都必须保留同 worker 父 COMMAND”的
-要求，不授权把普通子任务退出升级成 worker 故障。不得只删除 broker
-record 就声称 guest 已退出，不新增 guest 强制 unwind、修改原始 guest、
-为每层另建 worker 或引入第二套 DOS 调度器。原生进程收尾和原始 guest
-返回须分别验证，不能宣称 OpenNT 已有通用的父进程死亡级联终止功能。
+- 执行关系仅为父程序/run16 与其直接启动的 run16 或 target；I/O 关系仅为
+  根 run16 与使用该 root frontend 的 DOS Console/Window I/O 使用者。
+  两种关系不互相推导终止权限，均不产生递归终止。
+- 非根 run16 异常退出时，不主动结束其 Win32 target、DOS task、worker
+  或后代，不影响祖父、孙子和同 worker 其他任务。直接父程序只按普通
+  Win32 语义观察该 run16 结果，自行决定后续动作。
+- target 结束而 run16 存活：Win32 使用实际 process exit code；DOS 使用
+  对应 DOS record 的 completion/exit code。非零 DOS 结果或 DOS 错误
+  返回不升级为 worker failure，不清理目标的后代，不越级传递孙子结果。
+- 根 run16 异常退出同样不主动结束任何已交接 target、DOS task、worker
+  或后代。只撤销根所拥有的 frontend/Console/Window I/O capability。
+  不依赖该 I/O 的执行继续；后续使用它的调用必须得到明确 frontend
+  unavailable/断开错误，由原始调用者决定退出或继续。host/broker 不得
+  为此强杀整个 worker。
+- 根的直接 target 结束时，根报告直接结果后正常退出；剩余 I/O 使用者
+  按上述撤销规则处理，不能因根正常退出而递归终止。
+- DOS task 完成只唤醒直接 parent wait 并传递任务结果。VDM 自身不可恢复
+  死亡独立使其未完成 task 失败（例如 1067）。launcher 死亡不是 VDM
+  failure，不能转换为 TerminateProcess(ntvdm)。仅原始不可恢复 VDM
+  故障或显式 VDM shutdown 可以结束 VDM；空 worker 可正常留驻。
+- 删除 native target 长期 KILL_ON_JOB_CLOSE Job；删除 launcher exit/
+  disconnect 调用 service_end_abandoned_dos_pair 的 worker 强杀行为。
+  保留尚未完成交接的启动失败回滚，但已交接执行不属于 launcher 的可
+  强杀资源。不引入 process-tree kill、每层独立 VDM、DOS task-kill 注入、
+  guest 修改或新 scheduler。broker 自身死亡规则不借此扩张为执行树强杀。
 
-- [ ] 对根/中间/最内层的 launcher 和目标分别注入异常；覆盖 DOS→Win32→DOS
-      与 Win32→DOS→Win32，验证同层双方收尾、原始跨层返回、可恢复父层实际回显/执行新命令、
-      每层完成结果、输入 owner 和无残留等待；不能只检查进程消失。
+此修订在前一已测试通知修复提交后作为 S2 新 P 实施，既有成对强杀测试
+保留为历史证据但不再是应保持的功能；正式测试必须改成以下验收：
+
+本次生产 P 已删除三类强杀路径并发布准确测试过的六文件；真实根/内层/
+中间层故障、Win32 CUI/GUI 后代存活、DOS17 与嵌套回归的结果见
+[新生命周期交付证据](../etc/evidence/m0-t423-s2-console-boundary-ledger.md#unpaired-lifecycle-production-verification-and-delivery)。
+前端断开错误为 233，实际 worker 故障为 1067；二者不得混用。下列复合
+检查项仍作为完整 S2 收口门槛，不能用本 P 的有限组合测试替代竞态和物理输入验收。
+
+- [ ] 对根/中间/最内层的 launcher 和 target 分别注入异常；覆盖 DOS→Win32→DOS
+      与 Win32→DOS→Win32。launcher 死亡后已交接 target、其他任务和后代
+      存活；target 完成只使直接 launcher 返回其实际结果，祖父只观察直接子。
+- [ ] 根异常和正常退出均只撤销 I/O：无 I/O 的 native/DOS 工作继续；
+      后续输入、输出、控制请求得到明确断开错误，worker 不被 host/broker 强杀。
+- [ ] DOS 非零完成、DOS 错误返回但 VDM 存活、VDM 自身死亡分别验证；
+      前两者只完成对应 record，后者才使该 worker 内未完成等待者失败。
+- [ ] 启动未交接失败仍回滚资源；已交接的目标不受晚到 rundown/进程退出
+      通知强杀。测试显式清理存活进程，不能将测试清理误记为产品行为。
 - [ ] 区分 `/c` 父层因子命令结束而自然返回和被强制终止；用可交互父层
       证明恢复，并保留无关 worker/任务作为不受影响的对照。
 - [ ] 检查 worker 死亡、broker 死亡、前端断连和任务已正常结束的竞争；

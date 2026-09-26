@@ -129,25 +129,3 @@ HANDLE run16_frontend_scope_capability(run16_frontend_scope *scope)
 {
     return scope ? scope->capability : NULL;
 }
-
-HANDLE run16_frontend_scope_failure_handle(run16_frontend_scope *scope)
-{
-    return scope ? (scope->thread ? scope->thread : scope->root) : NULL;
-}
-
-DWORD run16_frontend_scope_failure(run16_frontend_scope *scope)
-{
-    DWORD error;
-    if (scope && scope->thread && GetExitCodeThread(scope->thread,&error) &&
-        error && error!=STILL_ACTIVE) return error;
-    return ERROR_PROCESS_ABORTED;
-}
-
-DWORD run16_frontend_scope_wait(run16_frontend_scope *scope,HANDLE child,DWORD *exit_code)
-{
-    HANDLE waits[2]={child,run16_frontend_scope_failure_handle(scope)};
-    DWORD wait=WaitForMultipleObjects(scope ? 2 : 1,waits,FALSE,INFINITE);
-    if (wait==WAIT_OBJECT_0) return GetExitCodeProcess(child,exit_code) ? ERROR_SUCCESS : GetLastError();
-    if (wait==WAIT_FAILED) return GetLastError();
-    return run16_frontend_scope_failure(scope);
-}

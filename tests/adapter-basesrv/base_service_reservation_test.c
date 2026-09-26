@@ -124,6 +124,25 @@ int main(int argc,char **argv)
     uint32_t workerInfoCount=0;
     ULONG standardCount=0;
     STARTUPINFOA getStartup={sizeof(getStartup)};
+    if (argc!=1) {
+        static const char *modes[]={
+            "--reservation-child","--frontend-root","--frontend-unclaimed-stop",
+            "--frontend-unclaimed-reconnect","--frontend-delegated",
+            "--frontend-wait-root-loss","--frontend-wait-request-loss",
+            "--frontend-wait","--frontend-wait-worker-loss","--frontend-rundown",
+            "--reenter-before-return","--reenter-after-return","--reenter-nested-return",
+            "--reenter-pending-command","--reenter-before-increment",
+            "--launcher-completed-rundown","--launcher-completed-uncollected",
+            "--management-terminate","--launcher-exit-survival","--launcher-disconnect-survival"
+        };
+        size_t index;
+        if (argc!=2) return 64;
+        for (index=0;index<sizeof(modes)/sizeof(modes[0]);++index)
+            if (!strcmp(argv[1],modes[index])) break;
+        if (index==sizeof(modes)/sizeof(modes[0])) {
+            fprintf(stderr,"Unknown fixture mode: %s\n",argv[1]);return 64;
+        }
+    }
     if (argc==2 && !strcmp(argv[1],"--reservation-child")) { Sleep(15000);return 0; }
     self=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION|SYNCHRONIZE,FALSE,GetCurrentProcessId());
     service=OpenNtBaseServiceStart();
@@ -180,7 +199,7 @@ int main(int argc,char **argv)
         CHECK(TerminateProcess(child.hProcess,23));
         CHECK(WaitForSingleObject(child.hProcess,5000)==WAIT_OBJECT_0);
         CHECK(OpenNtBaseServiceRetainFrontendRoot(launcher,GetCurrentProcessId(),launcherGeneration,
-            different,&root,&rootGeneration)==ERROR_PROCESS_ABORTED && !root && !rootGeneration);
+            different,&root,&rootGeneration)==ERROR_PIPE_NOT_CONNECTED && !root && !rootGeneration);
         CHECK(OpenNtBaseServiceDisconnect(later)==ERROR_SUCCESS);
         CHECK(OpenNtBaseServiceDisconnect(launcher)==ERROR_SUCCESS);
         CHECK(OpenNtBaseServiceIsEmpty(service));
@@ -351,19 +370,15 @@ int main(int argc,char **argv)
             }
             outcome=WaitForSingleObject(waitingThread,5000);
             fprintf(stdout,"pending frontend cancellation: wait=%lu error=%lu\n",outcome,waiting.error);
-            /* Request-owner rundown ends its unfinished DOS pair. Root-only
-             * capability cancellation here has no submitted command pair. */
-            if (!launcher) {
-                DWORD workerExit=0;
-                CHECK(WaitForSingleObject(child.hProcess,5000)==WAIT_OBJECT_0);
-                CHECK(GetExitCodeProcess(child.hProcess,&workerExit) &&
-                    workerExit==ERROR_PROCESS_ABORTED);
-            } else CHECK(TerminateProcess(child.hProcess,0));
+            /* Both kinds of rundown revoke only the I/O route. Cleanup below
+             * is a fixture action, never a product worker-termination result. */
+            CHECK(WaitForSingleObject(child.hProcess,0)==WAIT_TIMEOUT);
+            CHECK(TerminateProcess(child.hProcess,0));
             CHECK(TerminateProcess(rootProcess.hProcess,0));
             CHECK(WaitForSingleObject(child.hProcess,5000)==WAIT_OBJECT_0);
             CHECK(WaitForSingleObject(rootProcess.hProcess,5000)==WAIT_OBJECT_0);
             CHECK(WaitForSingleObject(waitingThread,5000)==WAIT_OBJECT_0);
-            CHECK(outcome==WAIT_OBJECT_0 && waiting.error==ERROR_PROCESS_ABORTED &&
+            CHECK(outcome==WAIT_OBJECT_0 && waiting.error==ERROR_PIPE_NOT_CONNECTED &&
                 !waiting.pipe && !waiting.frontend && !waiting.ready && !waiting.frontend_generation);
             CloseHandle(waitingThread);
             CHECK(OpenNtBaseServiceDisconnect(worker)==ERROR_SUCCESS);
@@ -390,8 +405,7 @@ int main(int argc,char **argv)
         CHECK(OpenNtBaseServiceFrontendRequest(rootConnection,rootProcess.dwProcessId,
             rootGeneration,&request,&selected)==ERROR_NOT_FOUND && !request && !selected);
         CHECK(WaitForSingleObject(capability,0)==WAIT_TIMEOUT);
-        /* The root owns the route; the live submitting launcher still owns
-         * the unfinished DOS lifetime pair. */
+        /* The root owns I/O, independently of the submitting launcher. */
         CHECK(OpenNtBaseServiceTakeFrontend(worker,child.dwProcessId,workerGeneration,
             &delivered,&peer,&deliveredGeneration,&deliveredReady)==ERROR_SUCCESS);
         CHECK(GetProcessId(peer)==rootProcess.dwProcessId && deliveredGeneration==rootGeneration);
@@ -399,11 +413,11 @@ int main(int argc,char **argv)
         CHECK(ReadFile(delivered,&payload,1,&count,NULL) && count==1 && payload=='R');
         CloseHandle(delivered);CloseHandle(peer);CloseHandle(deliveredReady);CloseHandle(ui);
         CHECK(OpenNtBaseServiceDisconnect(launcher)==ERROR_SUCCESS);launcher=NULL;
-        CHECK(WaitForSingleObject(child.hProcess,5000)==WAIT_OBJECT_0);
-        { DWORD workerExit=0;
-          CHECK(GetExitCodeProcess(child.hProcess,&workerExit) && workerExit==ERROR_PROCESS_ABORTED); }
+        CHECK(WaitForSingleObject(child.hProcess,0)==WAIT_TIMEOUT);
         CHECK(WaitForSingleObject(rootProcess.hProcess,0)==WAIT_TIMEOUT);
         CHECK(OpenNtBaseServiceDisconnect(rootConnection)==ERROR_SUCCESS);
+        CHECK(WaitForSingleObject(child.hProcess,0)==WAIT_TIMEOUT);
+        CHECK(TerminateProcess(child.hProcess,0));
         CHECK(TerminateProcess(rootProcess.hProcess,0));
         CHECK(WaitForSingleObject(child.hProcess,5000)==WAIT_OBJECT_0);
         CHECK(WaitForSingleObject(rootProcess.hProcess,5000)==WAIT_OBJECT_0);
@@ -411,7 +425,7 @@ int main(int argc,char **argv)
         CloseHandle(rootProcess.hThread);CloseHandle(rootProcess.hProcess);
         CloseHandle(child.hThread);CloseHandle(child.hProcess);CloseHandle(self);
         CloseHandle(capability);CloseHandle(other);CloseHandle(ready);
-        puts("PASS: original command authorizes root channel; owner loss ends DOS pair, not root");
+        puts("PASS: original command authorizes root channel; launcher/root rundown preserves worker");
         return 0;
     }
     {
@@ -456,14 +470,14 @@ int main(int argc,char **argv)
             CHECK(OpenNtBaseServiceDisconnect(launcher)==ERROR_SUCCESS);launcher=NULL;
             CHECK(!ReadFile(ui,&payload,1,&count,NULL) && GetLastError()==ERROR_BROKEN_PIPE);
             CHECK(OpenNtBaseServiceTakeFrontend(worker,child.dwProcessId,workerGeneration,
-                &delivered,&peer,&rootGeneration,&deliveredReady)==ERROR_PROCESS_ABORTED && !delivered && !peer && !deliveredReady);
+                &delivered,&peer,&rootGeneration,&deliveredReady)==ERROR_PIPE_NOT_CONNECTED && !delivered && !peer && !deliveredReady);
             CloseHandle(ui);CloseHandle(ready);
+            CHECK(WaitForSingleObject(child.hProcess,0)==WAIT_TIMEOUT);
+            CHECK(TerminateProcess(child.hProcess,0));
             CHECK(WaitForSingleObject(child.hProcess,5000)==WAIT_OBJECT_0);
-            { DWORD code=STILL_ACTIVE;
-              CHECK(GetExitCodeProcess(child.hProcess,&code) && code==ERROR_PROCESS_ABORTED); }
             CHECK(OpenNtBaseServiceDisconnect(worker)==ERROR_SUCCESS);worker=NULL;
             CloseHandle(child.hThread);CloseHandle(child.hProcess);CloseHandle(self);
-            puts("PASS: unfinished launcher rundown closes channel and terminates its exact worker");
+            puts("PASS: launcher rundown closes I/O channel without terminating worker");
             return 0;
         }
         CHECK(OpenNtBaseServiceTakeFrontend(launcher,GetCurrentProcessId(),launcherGeneration,
@@ -766,13 +780,15 @@ int main(int argc,char **argv)
         CloseHandle(laterChild.hThread);CloseHandle(laterChild.hProcess);
         CloseHandle(child.hThread);CloseHandle(child.hProcess);CloseHandle(self);
         free(getWire);free(updateAnswer);free(updateWire);free(answer);free(wire);
+        { ULONGLONG deadline=GetTickCount64()+5000;
+          while (!OpenNtBaseServiceIsEmpty(service) && GetTickCount64()<deadline) Sleep(1); }
         CHECK(OpenNtBaseServiceIsEmpty(service));
         CHECK(OpenNtBaseServiceStop(service));
         return 0;
     }
     if (argc==2 && (!strcmp(argv[1],"--management-terminate") ||
-        !strcmp(argv[1],"--launcher-pair-loss") ||
-        !strcmp(argv[1],"--launcher-pair-exit-watch"))) {
+        !strcmp(argv[1],"--launcher-exit-survival") ||
+        !strcmp(argv[1],"--launcher-disconnect-survival"))) {
         DWORD exitCode=STILL_ACTIVE;
         /* The manager's positive path receives only the selected snapshot
          * identity.  The service resolves its retained watch and the normal
@@ -785,13 +801,28 @@ int main(int argc,char **argv)
             /* ServiceDisconnect drains its borrowed receipt handle. Keep
              * a fixture-owned reference to observe the original completion. */
             laterParentEvent=retainedEvent;
-            CHECK(TerminateProcess(laterChild.hProcess,71));
-            CHECK(WaitForSingleObject(laterChild.hProcess,5000)==WAIT_OBJECT_0);
-            if (!strcmp(argv[1],"--launcher-pair-exit-watch")) {
-                /* Prove the process notification works before RPC rundown. */
-                CHECK(WaitForSingleObject(child.hProcess,5000)==WAIT_OBJECT_0);
+            if (!strcmp(argv[1],"--launcher-exit-survival")) {
+                CHECK(TerminateProcess(laterChild.hProcess,71));
+                CHECK(WaitForSingleObject(laterChild.hProcess,5000)==WAIT_OBJECT_0);
             }
             CHECK(OpenNtBaseServiceDisconnect(later)==ERROR_SUCCESS);later=NULL;
+            CHECK(WaitForSingleObject(child.hProcess,0)==WAIT_TIMEOUT);
+            CHECK(WaitForSingleObject(laterParentEvent,0)==WAIT_TIMEOUT);
+            /* Complete the original DOS record after its submitter vanished:
+             * nonzero task exit is not a worker failure. */
+            get.u.GetNextVDMCommand.VDMState=ASKING_FOR_DOS_BINARY;
+            get.u.GetNextVDMCommand.ExitCode=29;
+            CHECK(OpenNtBaseEncodeGetCommand(&get,8,workerGeneration,
+                getWire,getWireBytes,&getWireBytes));
+            CHECK(OpenNtBaseServiceGet(worker,child.dwProcessId,workerGeneration,
+                getWire,getWireBytes,&getAnswer,&wireBytes,&getWait,standard,
+                &standardCount)==ERROR_SUCCESS);
+            CHECK(getAnswer && getWait && !standardCount);
+            OpenNtBaseServiceReleaseCommandReply(getAnswer);getAnswer=NULL;
+            CHECK(WaitForSingleObject(laterParentEvent,0)==WAIT_OBJECT_0);
+            CHECK(WaitForSingleObject(child.hProcess,0)==WAIT_TIMEOUT);
+            CHECK(TerminateProcess(child.hProcess,0)); /* fixture cleanup */
+            CHECK(WaitForSingleObject(child.hProcess,5000)==WAIT_OBJECT_0);
         } else CHECK(OpenNtBaseServiceTerminateWorker(service,managementEpoch,workerGeneration)==ERROR_SUCCESS);
         { DWORD wait=WaitForSingleObject(laterParentEvent,5000);
           if (wait!=WAIT_OBJECT_0) fprintf(stderr,"pair completion wait=%lu error=%lu handle=%p\n",wait,GetLastError(),laterParentEvent);
@@ -812,9 +843,15 @@ int main(int argc,char **argv)
         CloseHandle(laterChild.hThread);CloseHandle(laterChild.hProcess);
         CloseHandle(child.hThread);CloseHandle(child.hProcess);CloseHandle(self);
         free(getWire);free(updateAnswer);free(updateWire);free(answer);free(wire);
+        /* Task completion now precedes fixture-induced worker termination.
+         * Process signalling alone does not join the broker exit callback. */
+        { ULONGLONG deadline=GetTickCount64()+5000;
+          while (!OpenNtBaseServiceIsEmpty(service) && GetTickCount64()<deadline) Sleep(1); }
         CHECK(OpenNtBaseServiceIsEmpty(service));
         CHECK(OpenNtBaseServiceStop(service));
-        puts("PASS: selected termination performs original worker-exit cleanup");
+        puts(!strcmp(argv[1],"--management-terminate") ?
+            "PASS: explicit management shutdown performs original worker-exit cleanup" :
+            "PASS: launcher loss preserves worker; later nonzero DOS completion signals parent without worker failure");
         return 0;
     }
     /* The authenticated worker disappears before ExitVDM.  The retained OS

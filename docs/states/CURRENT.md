@@ -27,18 +27,42 @@
 
 S2 begins with a bounded source/owner audit, then protocol implementation and
 production wiring; declaration-only tests cannot close this packet.
-Owner's final approval: each launcher and its target are one lifetime pair;
-neither may be orphaned when its counterpart exits. Between nesting levels,
-retain original OpenNT waiting/re-entry/exit, not a new recursive process-tree
-kill policy. Add matching launcher cleanup, not a guest task-kill mechanism.
-An unrecoverable guest fault may end its worker and
-all tasks inside it, including a DOS ancestor; recoverable interactive parents
-outside that worker survive. Normal completion must not be escalated into worker
-failure. This supersedes the earlier unconditional same-worker parent-survival
-requirement and resolves that decision. Frontend identity, execution ancestry
-and worker membership remain distinct; unrelated workers/broker are preserved.
-The proposal's revised fault matrix remains an S2 exit gate; /c chain exits alone
-do not prove interactive-parent recovery. An empty live worker remains permitted.
+Owner's latest lifecycle revision supersedes launcher/target lifetime pairing.
+Execution ancestry and root-frontend I/O association are independent. A root or
+inner launcher exit must not actively kill its native target, DOS task, worker
+or descendants. Target completion still returns only to its direct launcher:
+the native process result or that DOS record's completion/exit code. Worker
+failure independently fails its unfinished tasks; launcher loss is not worker
+failure. Root exit revokes its I/O capability; a later I/O user receives explicit
+frontend-unavailable/disconnect failure through its own original handling, not
+host/broker termination of the worker. Retain only pre-handoff startup rollback.
+No recursive kill, per-layer worker, injected DOS task termination or new
+scheduler is admitted. The proposal's replacement fault matrix is an S2 gate.
+
+On explicit owner request, the prior tested notification repair was committed
+and pushed first as 9f9b49346 with a clean synchronized worktree. The next S2 P
+implements this new contract: remove long-lived native kill-on-close Jobs,
+service_end_abandoned_dos_pair termination and frontend-loss execution kills;
+revise their old positive-kill tests into survival/I/O-error/completion tests.
+The new six-file package now implements the revised contract. Historical passing
+pair-termination tests below are superseded evidence, not new-rule exit gates.
+
+New P: native long-lived Job creation, launcher-driven abandoned-DOS
+termination and frontend-failure execution waits/kills have been removed;
+authenticated frontend loss returns ERROR_PIPE_NOT_CONNECTED (233), while
+actual worker failure remains 1067. Repeated input/output/control failures do
+not kill the client or fall back to native Console presentation. Existing
+pre-handoff startup rollback and explicit worker termination remain.
+MSVC x86 six-file build, 18 service modes, real native CUI/GUI direct-result,
+launcher-loss and descendant-survival cases, root/inner/middle nested faults,
+DOS17, four native/DOS nesting cases, graphics/text return and guest keymouse
+tests pass. WOW3 retains the recorded live NETWORK.DRV modal frontier; this is
+headless non-regression evidence, not full application acceptance.
+The exact tested six-file set is published to O:/winnt; hashes and reproduction
+are in the boundary ledger's unpaired-lifecycle production section. Product
+sources change by +22/-187 lines, with no new mirror diff or wire layout.
+This P does not close S2: the remaining source-to-runtime checklist, physical
+focus/pointer evidence and fault/completion race audit remain explicit gates.
 Current S2 evidence is retained in the
 [boundary ledger](../etc/evidence/m0-t423-s2-console-boundary-ledger.md);
 it is the detailed record of superseded attempts, not an additional status.
@@ -57,11 +81,10 @@ boundary ledger; this status records only the current disposition.
   worker-local bitmap/mutex backing and send copied indexed frames/palettes.
   Real guest pixel/palette and immediate graphics-to-text final-output tests
   pass. This does not implement kvm-window rendering or the display flag.
-- Native identity, malformed-request, cancellation, route/channel retirement
-  and pair-lifetime fixtures pass. Selected real worker/broker/frontend/inner-
-  launcher and middle-native-pair failures pass, including actual interactive
-  parent recovery and unrelated-worker output. Middle-pair recovery is tested
-  with the descendant DOS task alive, without a second injected fault.
+- Native identity, malformed-request, cancellation and route/channel retirement
+  fixtures pass. The latest unpaired-lifecycle tests supersede earlier
+  pair-kill expectations. Middle-target recovery is tested with the descendant
+  DOS task alive, without a second injected fault.
 - DOS17, four native/DOS nesting and typeahead routes, and real guest
   keyboard/mouse callback tests pass on the recorded candidates. Actual
   Ctrl+C/Break and direct/nested Console close also pass. These checks do not
@@ -101,11 +124,10 @@ boundary ledger; this status records only the current disposition.
   Win32-to-DOS-to-Win32 inner-target and inner-launcher loss both pass:
   DOS runs MEM and finishes, outer interactive CMD accepts new input, and the
   root returns 23. Other unexecuted fault cases are not counted as passes.
-- Root native-target loss with a live nested DOS task now passes twice:
-  root CMD/run16 return FFFFFFFF; middle and inner pairs fail with 1067;
-  the broker survives and a fresh MEM request produces real output and exits 0.
-  The checked-in harness rejects conflicting fault switches before execution.
-  This adds test evidence only; the published six-file package is unchanged.
+- Root native-target loss under the revised contract now returns FFFFFFFF
+  through its direct root run16 while middle/inner launchers, native CMD and
+  the DOS worker survive. Fresh MEM produces real output and exits 0.
+  Earlier forced-1067 descendant results are superseded, not current behavior.
 - Injected focus loss/Ctrl release/focus regain now passes twice through the
   real guest keymouse path, with an unchanged-mode control run. BIOS modifier
   release, callback teardown, MEM output and COMMAND exit are asserted.
@@ -118,8 +140,9 @@ boundary ledger; this status records only the current disposition.
 - The original service now has passing normal-completion-before-launcher-loss
   tests both before and after exit-code collection. A completed task returns
   29 and its idle worker/GetNext wait survives late launcher rundown; the two
-  existing unfinished-pair failure controls still pass. These are compiled
-  service/native-process tests, not additional guest topology passes.
+  revised unfinished-task tests preserve the worker after launcher loss and
+  complete its original record with 29. These are service/native-process tests,
+  distinct from the real guest topology tests above.
 
 The compiled Console-owner ledger is reconciled with receiver/test and
 explicit unavailable/local-owner dispositions. Its object guard passes 366
@@ -135,8 +158,8 @@ The DOS-root -> native CMD -> nested DOS middle-pair hang is now repaired:
 OPENNT-HOST-064 preserves one coalesced native-return notification in the
 original Console record until an eligible no-command Get consumes it. The
 deterministic early/late, startup-before-increment, nested-count, command-priority
-and one-shot checks pass, as do four existing pair-lifetime controls. Both real
-middle-target and middle-launcher loss now return from inner DOS, run outer MEM
+and one-shot checks pass under the revised lifecycle contract. Both real
+middle-target and middle-launcher loss return from inner DOS, run outer MEM
 and finish; the identical no-fault control also passes. Original queue priority,
 event reset, count and task results remain; no guest or new scheduler is added.
 Formal x86 builds, DOS17, four nesting/typeahead routes, real keymouse and
@@ -145,7 +168,7 @@ This repairs the named failure, not the remaining full S2 exit checklist.
 
 O:/winnt now contains the tested coherent six-file protocol-10 S2 package. Its
 exact hashes, test prefixes and bounded scope are in the boundary ledger's
-native-return notification delivery record. The preceding protocol-10 set,
+unpaired-lifecycle production delivery record. The preceding protocol-10 set,
 protocol-9 set, S1 set and incremental caches stay
 under build. Remaining work continues in S2; do not re-admit S3 yet.
 
