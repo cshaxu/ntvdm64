@@ -14,12 +14,18 @@ param(
     [switch]$MiddleLayerInputProbe,
     [switch]$DosNativeLoss,
     [switch]$NativeRoot,
+    [switch]$RootTargetLoss,
     [string]$WorkerWindowObserver,
     [switch]$TwoWorkers,
     [switch]$ConsoleClose
 )
 $ErrorActionPreference='Stop'
 if($NativeRoot -and !$DosNativeLoss){throw 'NativeRoot requires DosNativeLoss'}
+if($RootTargetLoss -and (!$NestedWorkerLoss -or $NestedInteractive -or $MiddleLayerLoss -or
+    $MiddleLayerInputProbe -or $BrokerLoss -or $WorkerLoss -or $FrontendLoss -or
+    $LauncherLoss -or $DosNativeLoss -or $NativeRoot -or $TwoWorkers -or $ConsoleClose -or $BarrierBroker)){
+    throw 'RootTargetLoss requires only NestedWorkerLoss'
+}
 if($MiddleLayerInputProbe -and !$MiddleLayerLoss){throw 'MiddleLayerInputProbe requires MiddleLayerLoss'}
 if($MiddleLayerLoss -and (!$NestedWorkerLoss -or !$NestedInteractive -or $BrokerLoss -or $FrontendLoss)){
     throw 'Middle-layer test requires NestedWorkerLoss/NestedInteractive and no broker/frontend loss'
@@ -243,7 +249,7 @@ try {
         $inner=@($launchers | Where-Object {$_.ProcessId -eq $workers[0].ParentProcessId})
         if($inner.Count -ne 1){throw 'Cannot identify inner DOS launcher'}
         $survivors=if($NestedInteractive){@($root[0].ProcessId,$outerShell[0].ProcessId)}else{@()}
-        $retained=@($chain | Where-Object {$_.Name -in @('run16.exe','cmd.exe') -or (($BrokerLoss -or $FrontendLoss -or $LauncherLoss -or $MiddleLayerLoss) -and $_.Name -eq 'ntvdm.exe')} | ForEach-Object {
+        $retained=@($chain | Where-Object {$_.Name -in @('run16.exe','cmd.exe') -or (($BrokerLoss -or $FrontendLoss -or $LauncherLoss -or $MiddleLayerLoss -or $RootTargetLoss) -and $_.Name -eq 'ntvdm.exe')} | ForEach-Object {
             $process=Get-Process -Id $_.ProcessId; [void]$process.Handle
             [pscustomobject]@{Process=$process;Name=$_.Name;Id=$_.ProcessId}
         })
@@ -281,7 +287,7 @@ try {
                 $results.Add('PASS separate descendant worker fault returns 1067; parent input recovery follows this release')
                 }
             } else {
-            $victimId=if($BrokerLoss){$servers[0].ProcessId}elseif($FrontendLoss){$root[0].ProcessId}elseif($LauncherLoss){$inner[0].ProcessId}else{$workers[0].ProcessId}
+            $victimId=if($RootTargetLoss){$outerShell[0].ProcessId}elseif($BrokerLoss){$servers[0].ProcessId}elseif($FrontendLoss){$root[0].ProcessId}elseif($LauncherLoss){$inner[0].ProcessId}else{$workers[0].ProcessId}
             Stop-Process -Id $victimId
             foreach($item in @($retained | Where-Object {$_.Id -notin $survivors})){
                 if(!$item.Process.WaitForExit(5000)){
@@ -292,6 +298,7 @@ try {
                     throw "Nested process still alive: $($item.Name) PID=$($item.Id)"
                 }
                 $expectedCode=if(($FrontendLoss -and $item.Id -eq $victimId) -or ($LauncherLoss -and $item.Name -ne 'ntvdm.exe')){-1}else{$failureCode}
+                if($RootTargetLoss -and $item.Id -in @($root[0].ProcessId,$victimId)){$expectedCode=-1}
                 if($item.Process.ExitCode -ne $expectedCode){throw "Wrong propagated code: $($item.Name) PID=$($item.Id) code=$($item.Process.ExitCode) expected=$expectedCode"}
                 $results.Add("PASS chain exit: $($item.Name) PID=$($item.Id) code=$expectedCode")
             }
@@ -303,7 +310,7 @@ try {
             if(!$BrokerLoss -and !(PackageProcesses | Where-Object {$_.ProcessId -eq $servers[0].ProcessId})){throw 'Broker died with nested worker'}
         } finally {foreach($item in $retained){$item.Process.Dispose()}}
         [void]$inputGate.Set()
-        FinishObserved $loss $(if($NestedInteractive){23}elseif($FrontendLoss -or $LauncherLoss){[uint32]::MaxValue}else{$failureCode})
+        FinishObserved $loss $(if($NestedInteractive){23}elseif($FrontendLoss -or $LauncherLoss -or $RootTargetLoss){[uint32]::MaxValue}else{$failureCode})
         if($MiddleLayerInputProbe){
             foreach($p in $postFrontend){
                 if(!$p.WaitForExit(5000)){throw "Descendant outlived completed root frontend: $($p.Id)"}

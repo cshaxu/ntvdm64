@@ -3541,3 +3541,58 @@ hashes match the previous table. Updated hashes:
 This is a bounded S2 repair delivery; no mirror, guest, protocol version or
 configuration changes, and no S2/T closure. Remaining owner/failure gates stay
 explicit in Status. Governance and diff checks pass before commit.
+
+### Root native target loss with a live nested DOS task
+
+Question: when the root launcher's direct native target dies while a nested
+DOS task is still active, does the root return that target's result, contain
+the disconnected frontend chain, and leave the broker usable?
+
+The checked-in Verify-BrokerFinalLifecycle.ps1 now exposes RootTargetLoss,
+accepted only with NestedWorkerLoss and no other fault scenario. Invalid
+combinations fail before resolving paths or opening process resources; tested
+missing NestedWorkerLoss, conflicting DosNativeLoss, and ConsoleClose.
+The positive command is:
+
+```powershell
+$env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
+& tools/audit/Verify-BrokerFinalLifecycle.ps1 `
+  -Observer build/M0-T423/S2/control-observer/console-startup-observer.exe `
+  -PackageRoot O:/winnt -LogPrefix m0-t423-s2-root-native-target-loss-r2 `
+  -NestedWorkerLoss -RootTargetLoss `
+  -WorkerWindowObserver build/M0-T423/S2/worker-window-snapshot.exe
+```
+
+Both m0-t423-s2-root-native-target-loss and its -r2 repetition pass on the
+unchanged 8e60ded8a production package, x86 /MT CCPU40. The unswitched private
+desktop isolates the test; only its identified root CMD is explicitly killed.
+Retained process handles prove termination before the harness's finally cleanup:
+
+| Layer | Observed exit |
+| --- | --- |
+| Root CMD (injected victim) and root run16 | Both -1 / FFFFFFFF |
+| Middle run16 and its CMD | Both 1067 |
+| Inner run16 and DOS worker | Both 1067 |
+
+The same broker remains alive. A subsequent fresh MEM request exits 0 and its
+captured Console contains the actual available-XMS-memory output. Results,
+process-chain identity, observer output and captured text are retained under
+O:/winnt/logs with those prefixes. This verifies root-target loss, not a new
+recursive kill policy or independent-worker isolation (covered separately).
+No production, guest, configuration or publication inputs change in this P;
+the existing six-file cursor-production-publication manifest remains selected.
+
+### S2 exit-checklist reconciliation
+
+The proposal's graphics-contract row is now checked: production sender and
+receiver tests plus cursor-video prove exact indexed pixels/palette and
+graphics-to-text retirement; cursor-video-standard proves the final text with
+the standard frontend. Window rendering remains S4, not an inferred pass.
+
+Root-target failure is now evidenced alongside the existing middle-pair and
+inner-pair failures. The combined fault-matrix checkbox stays open until its
+entire root/middle/inner and normal-completion-race matrix is reconciled.
+Keyboard-layout source ownership, physical focus/pointer release, and the
+remaining per-call Console-owner assertions likewise remain explicit S2 gates.
+The display/CAF/AE/X implementation and tests remain assigned to S4 as originally
+planned; their absence in S2 is not a hotkey pass. This record does not close S2.

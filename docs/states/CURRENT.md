@@ -86,6 +86,11 @@ boundary ledger; this status records only the current disposition.
   Win32-to-DOS-to-Win32 inner-target and inner-launcher loss both pass:
   DOS runs MEM and finishes, outer interactive CMD accepts new input, and the
   root returns 23. Other unexecuted fault cases are not counted as passes.
+- Root native-target loss with a live nested DOS task now passes twice:
+  root CMD/run16 return FFFFFFFF; middle and inner pairs fail with 1067;
+  the broker survives and a fresh MEM request produces real output and exits 0.
+  The checked-in harness rejects conflicting fault switches before execution.
+  This adds test evidence only; the published six-file package is unchanged.
 
 S2 still requires the complete Console-owner and per-layer failure checklist,
 and remaining physical pointer/layout dispositions. The first production P
