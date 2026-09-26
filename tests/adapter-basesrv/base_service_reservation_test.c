@@ -612,25 +612,43 @@ int main(int argc,char **argv)
     get.u.GetNextVDMCommand.PifFile=getPif;get.u.GetNextVDMCommand.PifLen=sizeof(getPif);
     get.u.GetNextVDMCommand.CurDirectory=getDirectory;
     get.u.GetNextVDMCommand.CurDirectoryLen=sizeof(getDirectory);
+    if (argc==2 && !strcmp(argv[1],"--reenter-pending-command")) {
+        CHECK(OpenNtBaseServiceReenter(worker,child.dwProcessId,workerGeneration,
+            INCREMENT_REENTER_COUNT)==ERROR_SUCCESS);
+        CHECK(OpenNtBaseServiceReenter(worker,child.dwProcessId,workerGeneration,
+            DECREMENT_REENTER_COUNT)==ERROR_SUCCESS);
+    }
     CHECK(OpenNtBaseEncodeGetCommand(&get,7,workerGeneration,NULL,0,&getWireBytes));
     free(getWire);getWire=malloc(getWireBytes);CHECK(getWire && OpenNtBaseEncodeGetCommand(
         &get,7,workerGeneration,getWire,getWireBytes,&getWireBytes));
     CHECK(OpenNtBaseServiceGet(worker,child.dwProcessId,workerGeneration,getWire,getWireBytes,
         &getAnswer,&wireBytes,&getWait,standard,&standardCount)==ERROR_SUCCESS);
     CHECK(getAnswer!=NULL && getWait==NULL && standardCount==0);
+    CHECK(OpenNtBaseApplyGetCommand(getAnswer,wireBytes,workerGeneration,7,&get));
+    CHECK(get.ReturnValue==STATUS_SUCCESS &&
+        get.u.GetNextVDMCommand.CmdLen==sizeof(cmd) && !memcmp(getCmd,cmd,sizeof(cmd)));
     OpenNtBaseServiceReleaseCommandReply(getAnswer);getAnswer=NULL;
     if (argc==2 && (!strcmp(argv[1],"--reenter-before-return") ||
-        !strcmp(argv[1],"--reenter-after-return"))) {
-        BOOL early=!strcmp(argv[1],"--reenter-before-return");
+        !strcmp(argv[1],"--reenter-after-return") ||
+        !strcmp(argv[1],"--reenter-nested-return") ||
+        !strcmp(argv[1],"--reenter-pending-command") ||
+        !strcmp(argv[1],"--reenter-before-increment"))) {
+        BOOL startupOrder=!strcmp(argv[1],"--reenter-before-increment");
+        BOOL queued=!strcmp(argv[1],"--reenter-pending-command");
+        BOOL nested=!strcmp(argv[1],"--reenter-nested-return");
+        BOOL early=strcmp(argv[1],"--reenter-after-return") && !startupOrder;
         DWORD wake,exitCode=STILL_ACTIVE;
         /* Same completed nested command, with the native parent finishing
          * either before or after cmdReturnExitCode requests its next command.
          * No sleeps: calls fix the ordering at the real service boundary. */
-        CHECK(OpenNtBaseServiceReenter(worker,child.dwProcessId,workerGeneration,
-            INCREMENT_REENTER_COUNT)==ERROR_SUCCESS);
-        if (early) CHECK(OpenNtBaseServiceReenter(worker,child.dwProcessId,
+        if (nested) CHECK(OpenNtBaseServiceReenter(worker,child.dwProcessId,
+            workerGeneration,INCREMENT_REENTER_COUNT)==ERROR_SUCCESS);
+        if (!queued && !startupOrder) CHECK(OpenNtBaseServiceReenter(worker,
+            child.dwProcessId,workerGeneration,INCREMENT_REENTER_COUNT)==ERROR_SUCCESS);
+        if (early && !queued) CHECK(OpenNtBaseServiceReenter(worker,child.dwProcessId,
             workerGeneration,DECREMENT_REENTER_COUNT)==ERROR_SUCCESS);
-        get.u.GetNextVDMCommand.VDMState=RETURN_ON_NO_COMMAND;
+        get.u.GetNextVDMCommand.VDMState=RETURN_ON_NO_COMMAND |
+            (startupOrder ? NO_PARENT_TO_WAKE : 0);
         get.u.GetNextVDMCommand.ExitCode=29;
         CHECK(OpenNtBaseEncodeGetCommand(&get,8,workerGeneration,NULL,0,&getWireBytes));
         free(getWire);getWire=malloc(getWireBytes);
@@ -639,19 +657,55 @@ int main(int argc,char **argv)
         CHECK(OpenNtBaseServiceGet(worker,child.dwProcessId,workerGeneration,
             getWire,getWireBytes,&getAnswer,&wireBytes,&getWait,standard,
             &standardCount)==ERROR_SUCCESS);
-        CHECK(getAnswer && getWait && !standardCount);
+        CHECK(getAnswer && !standardCount);
+        CHECK(OpenNtBaseApplyGetCommand(getAnswer,wireBytes,workerGeneration,8,&get));
         OpenNtBaseServiceReleaseCommandReply(getAnswer);getAnswer=NULL;
-        CHECK(WaitForSingleObject(laterParentEvent,0)==WAIT_OBJECT_0);
-        CHECK(OpenNtBaseServiceExitCode(later,laterChild.dwProcessId,laterGeneration,
-            laterParentReceipt,&exitCode)==ERROR_SUCCESS && exitCode==29);
+        if (!startupOrder) {
+            CHECK(WaitForSingleObject(laterParentEvent,0)==WAIT_OBJECT_0);
+            CHECK(OpenNtBaseServiceExitCode(later,laterChild.dwProcessId,laterGeneration,
+                laterParentReceipt,&exitCode)==ERROR_SUCCESS && exitCode==29);
+        }
         if (!early) {
+            CHECK(getWait);
             CHECK(WaitForSingleObject(getWait,0)==WAIT_TIMEOUT);
+            if (startupOrder) {
+                CHECK(OpenNtBaseServiceReenter(worker,child.dwProcessId,
+                    workerGeneration,INCREMENT_REENTER_COUNT)==ERROR_SUCCESS);
+                CHECK(WaitForSingleObject(getWait,0)==WAIT_TIMEOUT);
+            }
             CHECK(OpenNtBaseServiceReenter(worker,child.dwProcessId,
                 workerGeneration,DECREMENT_REENTER_COUNT)==ERROR_SUCCESS);
         }
-        wake=WaitForSingleObject(getWait,0);
-        fprintf(stdout,"reenter order=%s completed=29 wait=%lu expected=0\n",
-            early ? "before-return" : "after-return",wake);
+        wake=getWait ? WaitForSingleObject(getWait,0) :
+            (get.ReturnValue==STATUS_NO_MEMORY ? WAIT_OBJECT_0 : WAIT_FAILED);
+        fprintf(stdout,"reenter mode=%s wait=%lu expected=0\n",argv[1],wake);
+        if (wake==WAIT_OBJECT_0) {
+            if (getWait) {
+                get.u.GetNextVDMCommand.VDMState=RETURN_ON_NO_COMMAND|ASKING_FOR_SECOND_TIME;
+                get.u.GetNextVDMCommand.ExitCode=0;
+                CHECK(OpenNtBaseEncodeGetCommand(&get,9,workerGeneration,
+                    getWire,getWireBytes,&getWireBytes));
+                CHECK(OpenNtBaseServiceGet(worker,child.dwProcessId,workerGeneration,
+                    getWire,getWireBytes,&getAnswer,&wireBytes,&getWait,standard,
+                    &standardCount)==ERROR_SUCCESS);
+                CHECK(!getWait && getAnswer && !standardCount);
+                CHECK(OpenNtBaseApplyGetCommand(getAnswer,wireBytes,workerGeneration,9,&get));
+                CHECK(get.ReturnValue==STATUS_NO_MEMORY);
+                OpenNtBaseServiceReleaseCommandReply(getAnswer);getAnswer=NULL;
+            }
+            /* The consumed completion cannot wake a later shell-out; nor
+             * may a stale command-delivery event bypass its native wait. */
+            get.u.GetNextVDMCommand.VDMState=RETURN_ON_NO_COMMAND|NO_PARENT_TO_WAKE;
+            get.u.GetNextVDMCommand.ExitCode=0;
+            CHECK(OpenNtBaseEncodeGetCommand(&get,10,workerGeneration,
+                getWire,getWireBytes,&getWireBytes));
+            CHECK(OpenNtBaseServiceGet(worker,child.dwProcessId,workerGeneration,
+                getWire,getWireBytes,&getAnswer,&wireBytes,&getWait,standard,
+                &standardCount)==ERROR_SUCCESS);
+            CHECK(getAnswer && getWait && !standardCount);
+            CHECK(WaitForSingleObject(getWait,0)==WAIT_TIMEOUT);
+            OpenNtBaseServiceReleaseCommandReply(getAnswer);getAnswer=NULL;
+        }
         /* Clean the fixture-owned suspended children even on the expected
          * red result; a missing wake must not strand test processes. */
         CHECK(TerminateProcess(child.hProcess,0));

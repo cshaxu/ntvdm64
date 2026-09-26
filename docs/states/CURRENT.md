@@ -131,22 +131,22 @@ contract; modern native availability is not claimed. The first production P
 delivers the verified subset, not S2 closure. Hidden native Console remains S3;
 display/Window remains S4, Window mouse S5, and final owner audit S6.
 
-The newly covered DOS-root -> native CMD -> nested DOS middle-pair failure
-does not pass: after either middle target or launcher loss, the nested DOS
-exits normally but outer DOS never resumes MEM and root run16 times out.
-The identical no-fault control passes. Deterministic compiled-service tests
-now reproduce the ordering defect: decrement before RETURN_ON_NO_COMMAND
-leaves an unsignalled wait (258); decrement after that request signals it (0).
-Both complete the same nested task with 29, without sleeps. The existing four
-completed/unfinished-pair controls still pass. Repair remains pending: preserve
-the original shell-out startup and nested wait contract, not a blanket removal
-of event reset or a re-entry-count-only shortcut.
-No production or guest changes were made and no S2 closure is authorized by
-the other passing topology cases.
+The DOS-root -> native CMD -> nested DOS middle-pair hang is now repaired:
+OPENNT-HOST-064 preserves one coalesced native-return notification in the
+original Console record until an eligible no-command Get consumes it. The
+deterministic early/late, startup-before-increment, nested-count, command-priority
+and one-shot checks pass, as do four existing pair-lifetime controls. Both real
+middle-target and middle-launcher loss now return from inner DOS, run outer MEM
+and finish; the identical no-fault control also passes. Original queue priority,
+event reset, count and task results remain; no guest or new scheduler is added.
+Formal x86 builds, DOS17, four nesting/typeahead routes, real keymouse and
+graphics/text return pass. WOW3 headless retains its known modal/live baseline.
+This repairs the named failure, not the remaining full S2 exit checklist.
 
 O:/winnt now contains the tested coherent six-file protocol-10 S2 package. Its
 exact hashes, test prefixes and bounded scope are in the boundary ledger's
-returned-key repair delivery record. The preceding protocol-9 set, S1 set and incremental caches stay
+native-return notification delivery record. The preceding protocol-10 set,
+protocol-9 set, S1 set and incremental caches stay
 under build. Remaining work continues in S2; do not re-admit S3 yet.
 
 ## Current Technical Baseline

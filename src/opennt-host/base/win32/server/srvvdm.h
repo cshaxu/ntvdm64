@@ -34,6 +34,7 @@ typedef struct _CONSOLERECORD {
     HANDLE  hWaitForVDM;	    // Handle on which VDM will wait
     HANDLE  hWaitForVDMDup;	    // Handle on which server will wake up the VDM (Its a dup of previous one)
     ULONG   nReEntrancy;	    // Re-entrancy count
+    BOOL    ReenterCompletionPending; // DIVERGENCE(OPENNT-HOST-064): coalesced native return, independent of command-event reset.
     ULONG   SequenceNumber;         // Sequencenumber from PCSR_PROCESS
     ULONG   DosSesId;               // Temp Session ID for no-console
     ULONG   cchCurDirs;		    // Length of NTVDM current directory in bytes

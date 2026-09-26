@@ -269,8 +269,11 @@ BaseSrvGetNextVDMCommand(
         if (pDOSRecord == NULL) {
 
             if ((b->VDMState & ASKING_FOR_SEPWOW_BINARY) ||
-                (b->VDMState & RETURN_ON_NO_COMMAND && b->VDMState & ASKING_FOR_SECOND_TIME))
+                /* DIVERGENCE(OPENNT-HOST-064): retain early native completion across the command wait reset. */
+                (b->VDMState & RETURN_ON_NO_COMMAND &&
+                 (b->VDMState & ASKING_FOR_SECOND_TIME || pConsoleRecord->ReenterCompletionPending)))
               {
+                pConsoleRecord->ReenterCompletionPending = FALSE;
                 b->WaitObjectForVDM = 0;
                 RtlLeaveCriticalSection( &BaseSrvDOSCriticalSection );
                 return ((ULONG)STATUS_NO_MEMORY);
@@ -2213,6 +2216,7 @@ PCONSOLERECORD BaseSrvAllocateConsoleRecord (
     pConsoleRecord->hWaitForVDM = 0;
     pConsoleRecord->hWaitForVDMDup = 0;
     pConsoleRecord->nReEntrancy = 0;
+    pConsoleRecord->ReenterCompletionPending = FALSE; // DIVERGENCE(OPENNT-HOST-064): record-local notification lifetime.
     pConsoleRecord->Next = NULL;
     pConsoleRecord->cchCurDirs = 0;
     pConsoleRecord->lpszzCurDirs = NULL;
@@ -2585,6 +2589,7 @@ BaseSrvSetReenterCount (
         pConsoleRecord->nReEntrancy++;
     else {
         pConsoleRecord->nReEntrancy--;
+        pConsoleRecord->ReenterCompletionPending = TRUE; // DIVERGENCE(OPENNT-HOST-064): the next eligible Get consumes this notification.
         if(pConsoleRecord->hWaitForVDMDup)
            NtSetEvent (pConsoleRecord->hWaitForVDMDup,NULL);
         }

@@ -4068,3 +4068,96 @@ verify early/late completion plus startup/pending-command/nested controls, then
 repeat the real failing guest topology and every production P gate before
 publication. The owner-approved T423 headless-only WOW3 acceptance remains in
 effect and does not waive DOS/native lifecycle correctness.
+
+### Selected repair boundary: coalesced native-return notification
+
+OPENNT-HOST-064 is admitted within the existing S2 nested-return repair.
+Original owner inputs are OpenNT/base/win32/server/srvvdm.c (SHA-256
+C1E2177C6C00679D85CFA475F620841F6736B0E56D8DBF790B71AFE33E1ED80B)
+and srvvdm.h (F590EF866F87CE80671C4B6F4E3BBE94347342E6B723BC062ED6F044FBB3820F).
+The compiled original service is already composed directly: that first recovery
+rung produces the deterministic red test. The same-shaped modern event facade
+cannot distinguish native-return SetEvent from queued-command SetEvent or a
+stale manual-event signal; changing it would alter unrelated event semantics.
+Therefore the selected third rung is a minimal existing-owner correction, not
+a new adapter policy or fourth-rung replacement scheduler.
+
+Retain a single coalesced native-return pending bit under the original DOS
+critical section. Set it with the original decrement notification; consume it
+only when Get has no queued command and RETURN_ON_NO_COMMAND permits returning.
+Preserve the original second-time exit, queued-command priority, native count,
+parent result and event reset. Multiple notifications coalesce just as the
+original NotificationEvent does. The bit is Console-record-local, never wire
+or guest state, initialized with that record and released with it. There is no
+new endpoint, queue, ABI operation, timer, thread or task scheduling decision.
+This remains provisional until early/late, one-shot, startup, nested-count,
+queued-command and real guest regression gates pass; registration alone is not
+proof of a production repair.
+
+### Native-return notification repair delivery
+
+The selected OPENNT-HOST-064 correction passes the original red case and its
+controls. Five service modes now assert the no-command reply or original
+wait/retry completion, followed by a fresh NO_PARENT_TO_WAKE request that must
+wait: a consumed notification cannot incorrectly finish a later shell-out.
+The queued-command case additionally decodes and compares the original command
+payload before testing its subsequent completion. Nested-count mode retains
+one other native activity while consuming the completed activity's notification;
+startup mode issues Get before the increment and must not return early.
+
+Final test executable SHA-256 is
+46B91E29B5C1C7563B3561D013284977A7E20447934683955E6D6B56E8A46F25.
+All nine private-desktop tests exit 0 under O:/winnt/logs prefixes
+m0-t423-s2-notification-final- followed by reenter-before-return,
+reenter-after-return, reenter-nested-return, reenter-pending-command,
+reenter-before-increment, launcher-completed-rundown,
+launcher-completed-uncollected, launcher-pair-loss or launcher-pair-exit-watch.
+The first five exercise the notification contract; the last four retain
+normal-completion versus unfinished-task cleanup. Earlier failed baseline
+evidence remains unchanged.
+
+Production verification used the retained MSVC x86 /MT S1 formal and WOW
+incremental graphs. Six formal targets link successfully; source/header
+dependencies rebuild the affected original server and bindings libraries.
+The prior published package is preserved under
+build/M0-T423/S2/notification-pre-fix-package, checked against the preceding
+key-return publication manifest before each run. The temporary staging helper
+build/M0-T423/S2/test-reentry-notification.ps1 restores that complete baseline
+after each test phase. Checked-in test entrypoints and actual outcomes:
+
+| Entry / arguments | O:/winnt/logs prefix (m0-t423-s2-notification-) | Result |
+| --- | --- | --- |
+| Verify-BrokerFinalLifecycle.ps1 -DosNativeLoss -NestedDosChild | dos-native-dos-target | PASS: middle pair dies, inner DOS remains then exits 0, outer DOS prints 255/MEM/recovery and exits 0 |
+| Same plus -LauncherLoss | dos-native-dos-launcher | PASS: paired native cleanup, inner DOS exit and outer MEM/recovery, no permanent wait |
+| Same plus -NestedDosChildControl, without LauncherLoss | dos-native-dos-control | PASS: normal identical topology, actual MEM/recovery and root 0 |
+| Verify-CommandExitStatus.ps1 with G7.COM | dos17 | PASS all 17 actual-output/exit checks, including EDIT return then MEM |
+| Same -Cases native-cmd-dos,native-cmd-dos-repeat,dos-native-dos,dos-native-typeahead | nesting | PASS all four, including zero line-delay handoff |
+| keymouse-capability-observer.exe with immutable authored KMTST.COM | keymouse-observer / keymouse-guest | PASS real keyboard/modifier-release/mouse callback/teardown and COMMAND completion |
+| Verify-CommandExitStatus.ps1 -Cases direct-graphics-return,graphics-return with VIDTST.COM | graphics | PASS copied graphics witness and return to text/MEM |
+| observe-wow-frontiers.ps1, separate WINMINE/SOL/WRITE | wow-winmine / wow-sol / wow-write | Headless non-regression: all remain alive through 16-second samples at original NETWORK.DRV modal; no gameplay/full-function claim |
+
+All observers and harnesses are terminal and test-owned cleanup completed.
+No user desktop switching, guest/configuration mutation or system-registry
+write was performed. Headless WOW observation timeouts describe the bounded
+live-modal baseline, not a successful application exit.
+
+Published and hash-verified at O:/winnt as one tested set, using
+build/M0-T423/S2/notification-production-publication.json:
+
+| File | SHA-256 |
+| --- | --- |
+| run16.exe | D402CAFD10C9C8AFD8244EDD980B6C7DAA149C559DFAF31091314757AAB965B5 |
+| basesrv.exe | 06E6EBFA490D38C730BBF12EBD1BD120A89F722F49ACD3CC1BA1843DACC0C97D |
+| ntvdm.exe | 287769E1E8E5532AD21EB5522868658C93A785251CF1C6898A6C13BFB76DFFE0 |
+| dtmgr.exe | 7349D5C89384A00080D31ECD3D1B1AF9D543E72A58F125DFC37328FF9F02487C |
+| WOW32.DLL | 51E1CAF83D248289EE546A5C134E663EBA6F930B672318F5C25BA08665FE507F |
+| VDMREDIR.DLL | E54302CAB3A027CEF5FC57AFDF932B51AC7710D1F046086735E8D9F2E8A12829 |
+
+Scope accounting against preceding P: srvvdm.c +6/-1 and srvvdm.h +1/-0;
+no MVDM, frontend, guest or wire-protocol production edits. The added state is
+internal original-owner notification persistence, not new adapter code.
+Both changed mirrors retain their existing LF encoding and existing semantic
+divergences; they are not byte-identical or newline-normalized-identical to
+upstream CRLF. No whole-file formatting rewrite is bundled into this repair.
+The remaining full per-layer/focus S2 checklist stays open; this delivery is
+not S2 closure or admission of hidden Console/Window work.
