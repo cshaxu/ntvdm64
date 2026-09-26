@@ -87,13 +87,16 @@ Retained earlier S2 capabilities and source findings:
   modal baseline is not a full WOW functionality pass.
 - Channel cancellation, peer EOF, malformed requests, worker loss and receipt/
   completion ordering have focused tests. Physical foreground activation and
-  pointer clipping/release remain unverified. Owner forbids desktop interaction;
-  continue safe background checks and do not claim these gates passed.
+  pointer clipping/release physical observation is owner-waived as of
+  2026-09-26: source review and relevant unit tests replace that physical gate.
+  Do not manipulate the desktop or label waived observation as a runtime pass.
 
 The [boundary ledger](../etc/evidence/m0-t423-s2-console-boundary-ledger.md)
 retains detailed superseded attempts, exact source/artifact identities and
-non-pass outcomes. S2 remains open until its complete source/runtime and
-physical-input disposition is resolved; do not re-admit S3 yet. Hidden native
+non-pass outcomes. Physical-input disposition is now resolved by the owner's
+explicit waiver, not by a physical test. Reconcile the remaining source/runtime
+checklist, then automatically close S2 and admit S3; do not block on desktop
+availability. Hidden native
 Console is S3, display/Window S4, Window mouse S5 and final owner audit S6.
 
 A real-guest test proves DOS exits 7 and 99 preserve ERRORLEVEL and allow

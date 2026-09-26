@@ -165,6 +165,16 @@ and report it; do not publish an unverified or regressed candidate. Respect
 active owner sessions and desktop restrictions. Unavailable GUI access means
 pending verification, not a waived gate; continue safe background work.
 
+Owner exception dated 2026-09-26 for the active T423 frontend work and its
+subsequent S stages: physical desktop interaction, foreground activation and
+pointer clipping/release observation may be skipped when source-logic review
+and relevant unit tests cover the contract. Lack of permission to manipulate
+the owner's desktop is not a stop condition under this exception. Record the
+review and tests, and label physical observation as owner-waived, never passed.
+Continue automatically through sequential S admission after other exit gates
+are met. This does not waive implementation, known defects, safe background
+integration tests, production-P build/publication, or final owner T acceptance.
+
 Guest binaries remain immutable original media: verified copies are allowed,
 rebuilding or patching them is not. Preserve user data and NTVDM.REG state;
 review configuration changes and retain recovery copies rather than blanket

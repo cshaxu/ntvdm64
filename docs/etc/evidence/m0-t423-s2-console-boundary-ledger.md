@@ -4732,3 +4732,29 @@ Together with close-contract-final's completed-worker-exit and
 unfinished-worker-exit cases (retained 29 versus failure 1067), they cover the
 proposal's nonzero/ordered-close row, now checked. Broader topology, I/O and
 physical-input rows are not implicitly closed.
+
+### Owner-authorized desktop verification disposition
+
+On 2026-09-26 the owner explicitly permits skipping physical desktop
+verification, accepting correct reviewed logic and unit tests, and requires
+automatic continuation without blocking again for this class of restriction.
+This supersedes earlier physical-focus/clip stop conditions in this ledger.
+It is a waiver of observation, not a claim that foreground/clip behavior was
+physically demonstrated, and does not waive known defects or implementation.
+
+Rechecked tests/app/console_pointer_dispatch_test.c: it compiles the actual
+production console_frontend.c dispatcher with test-only USER substitutions;
+signed coordinates, rectangle transport, NULL clip release and native error
+propagation are asserted without moving or clipping a pointer. Ninja -n for
+console-pointer-contract-test.exe in build/M0-T423/S1/restart-formal-x86 reports
+no work to do; executing that target again passes all assertions. The original
+MouseInFocus/MouseOutOfFocus owner and the compiled call ownership audit remain
+the source review; the published close-package focus-record test establishes
+real guest processing of focus loss/gain and modifier release. Do not add a
+blanket ClipCursor(NULL) on arbitrary channel failure: clipping is a shared
+host resource, and that would change the reviewed ownership contract.
+
+The source/unit acceptance plus explicit waiver resolves the physical-input
+blocker. Other S2 checklist entries still require truthful reconciliation;
+S3 admission is automatic once those entries have their evidence. No product
+or guest change, rebuild or six-binary replacement is made by this record.
