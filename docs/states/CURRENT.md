@@ -28,6 +28,12 @@
 S3 starts with a finite native launch/backend ownership audit and testable
 contract, then production composition. Do not copy the discarded prototype
 wholesale or certify only fixture behavior. S2 closure evidence is below.
+The [S3 ledger](../etc/evidence/m0-t423-s3-hidden-console-ledger.md) records
+the completed initial source audit, rejected prototype policies and finite
+implementation checklist. Existing root capability crosses Console ownership;
+execution Console membership does not, and needs a separately authenticated
+binding without changing original worker selection. No hidden backend is yet
+selected in production.
 Owner's latest admission maps the authenticated root run16 lifetime to the
 interactive Console session lifetime. Root normal/abnormal exit or real Console
 closure closes only the DOS workers associated with that frontend, through the
