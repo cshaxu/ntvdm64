@@ -11,7 +11,7 @@
 | Identifier Mode | M0 T423 S3, Ordinary Mode. |
 | Candidate Proposal | [Console/Window frontend](../proposals/proposal-kvm-window-graphics-presentation-001.md). |
 | Admission And Approval | Owner automatic sequential S admission after S2 closure; physical desktop observation waived in favor of reviewed logic and relevant unit tests. |
-| Objective | Run native CUI through stable hidden Console backends owned by run16, routing input/output through the unique root frontend and preserving DOS/native nested execution and completion. |
+| Objective | Run native CUI through stable hidden Console backends and helpers owned only by root run16; inner launchers authenticate, submit and wait, without frontend ownership. Preserve DOS/native nested execution and direct-target completion. |
 | Non-goals | No display flag, Window/library import (S4), guest changes, new scheduler, native GUI capture or broker frame transport. DOS remains on its S2 direct channel. |
 | Reference Baseline | S2 production d0f856a50 and its exact published six-file manifest; source/test baseline afb18fe5f plus linked S2 closure evidence. Prior prototype remains read-only reference on codex/t423-original-reference-20260925. |
 | Files And ABI Surface | run16-exe native launch/backend/frontend; finite authenticated frontend association in basesrv if required; copied product-abi records, build graph and tests. No new directories outside build. |
@@ -40,6 +40,18 @@ Console while preserving restricted frontend capability and exact result 37.
 The root is absent from the hidden membership and no helper window is visible.
 This narrows the execution-binding design but does not yet implement its broker
 registration or claim hidden backend production wiring.
+The subsequent helper-loss fixture passed three private-desktop runs: helper
+exit 99 leaves the native child and hidden Console input/output usable, followed
+by independent child result 37. Thus a cached helper connection alone cannot
+own the execution association. S3 now requires independent authenticated
+association retention across helper loss; frontend capability alone remains
+insufficient. See the S3 ledger for exact tests and the still-open RPC binding.
+Owner clarified and approved sole root ownership of hidden as well as visible
+Console resources. Inner run16 never creates/reclaims a frontend/backend on
+its own behalf; an invalid inherited association fails rather than becoming a
+new root. Helper-delegated native creation must return the actual target process
+capability/result to the requesting launcher. This contract is now explicit in
+the proposal and architecture; production hidden routing remains open.
 Owner's latest admission maps the authenticated root run16 lifetime to the
 interactive Console session lifetime. Root normal/abnormal exit or real Console
 closure closes only the DOS workers associated with that frontend, through the

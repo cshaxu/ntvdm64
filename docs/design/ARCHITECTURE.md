@@ -282,6 +282,20 @@ presentation belong to S4. They are required future stages, not capabilities
 claimed by copied-frame or Console transport tests. Status and the active
 proposal own the finite verification gates and remaining limitations.
 
+For the admitted S3 extension, the root run16 alone owns visible and hidden
+Console presentation resources, its internal Console helper processes and
+later Window presentation. Inner launchers authenticate their existing root
+association; Console attachment is not frontend ownership. An invalid inherited
+association fails rather than silently creating a second root. Inner launchers
+submit launches and wait for their own target completion, never operate a
+competing frontend or reclaim root-owned backends on exit. A root-managed
+helper may physically create a native CUI target on its hidden Console; the
+requesting launcher's result is nevertheless obtained from that actual target
+process, not the helper's exit. Ordinary native descendants share their actual
+Console through Windows inheritance. Backend failure, target completion and
+root-session closure remain separate events. This is the approved ownership
+contract, not a claim that the hidden backend is already production-wired.
+
 ## WOW message transport boundary
 
 Modern Windows USER is the sole native message delivery and reply owner for

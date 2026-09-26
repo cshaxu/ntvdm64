@@ -120,3 +120,69 @@ obtain that key. A finite authenticated setup operation and its lifetime rules
 are still required, including helper loss while native descendants survive.
 Frontend object possession alone still cannot select a worker. The next
 production change must prove that binding/rundown through service and RPC tests.
+
+## Helper loss does not end the native Console: measured lifetime boundary
+
+The same checked-in inheritance test now has --survivor-helper and
+--survivor-child roles. The helper first proves inherited root Console
+membership, separates its own attachment and starts a native child on the
+hidden Console. After the child publishes readiness, the root retains the
+child's process HANDLE while that child is blocked on the inherited event.
+The test terminates only its exact created helper with result 99. It asserts
+that the native child is still running, that it is not on the root Console,
+and then releases it. The child verifies helper absence from its own Console,
+reopens CONIN$/CONOUT$, round-trips a Unicode key input record and a green
+character cell, and exits with its own result 37. No Job or recursive kill is
+used; failure cleanup is limited to retained handles for these fixture
+processes. The shared PID cell is test-only readiness bookkeeping, not a
+proposed product authorization protocol.
+
+Three consecutive private-desktop runs passed all five cases, including the
+four earlier inheritance cases. Each observer reported exit 0 and only its
+own visible Console membership after the test ended. Evidence files are
+O:/winnt/logs/m0-t423-s3-console-helper-loss.txt and the -2/-3 variants,
+including their .console.txt captures. No foreground switch or user input
+was performed. No production/guest changes or package replacement occurred.
+
+Reproduction uses MSVC Win32/x86 /MT /W4 with user32.lib, placing /Fo and /Fe
+under build/M0-T423/S3/console-helper-loss. Then set
+MVDM_OBSERVER_PRIVATE_DESKTOP=1 and invoke
+build/M0-T423/S2/control-observer/console-startup-observer.exe with absolute
+test.exe path, O:/winnt working directory, the above report path and
+--observation-timeout-ms 45000. Actual captured PASS lines and the test result
+are required; observer completion alone is insufficient. Executable SHA-256:
+3DC6B2D950F302635B8F470D6556340542C53505070456FCDA1F18F8CC3513D8.
+
+This falsifies the proposed *sufficient* lifetime of a cached helper connection:
+OpenNtBaseServiceDisconnect removes that connection, while the measured native
+Console and target remain alive. Capturing the genuine original Console key
+before detachment is still useful, but cannot be the whole association.
+The execution-context binding must survive helper loss through an independently
+retained, authenticated association available to later nested launchers; it
+must remain distinct from the root frontend's I/O capability. A lost binding
+must not silently allocate an unrelated worker. Original srvvdm.c remains
+the task/READY/BUSY/reentry owner. The next production step is this finite
+binding and its service/RPC identity/rundown tests, not a second scheduler.
+This native fixture proves Console lifetime and I/O only; it does not prove
+broker binding or mark either mandatory S3 DOS/native chain complete.
+
+## Approved root-only backend ownership clarification
+
+Owner review following the helper-loss experiment clarified that hidden
+Console and helper ownership belongs exclusively to the root run16, just like
+the visible Console and future Window. Earlier references to an inner
+launcher's process-local backend binding do not authorize it to create or
+reclaim frontend resources. The proposal and architecture now supersede that
+ambiguous wording. Inner launchers authenticate an inherited root, submit a
+launch and wait for their corresponding real target; invalid inheritance
+must fail, not silently create another root. Existing native Console attachment
+alone neither identifies a root nor grants frontend ownership.
+
+Hidden Console creation/native launch may be delegated to the root-managed
+internal helper. This makes the helper the physical Windows creator; the
+requesting run16 remains the completion/result owner and needs a retained
+actual target process capability. Ordinary native children share the Console;
+there is no per-EXE or per-run16-level backend allocation rule. Helper failure
+is an I/O failure, never synthetic target completion or execution-tree kill.
+This is a product-boundary design approval; it does not waive service identity,
+target-capability handoff, direct result, final output or orphan cleanup tests.
