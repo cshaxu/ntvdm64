@@ -34,6 +34,12 @@ implementation checklist. Existing root capability crosses Console ownership;
 execution Console membership does not, and needs a separately authenticated
 binding without changing original worker selection. No hidden backend is yet
 selected in production.
+The real hidden-attachment prerequisite now passes: an inherited visible-Console
+helper can separate only its own attachment and launch CMD/child on the hidden
+Console while preserving restricted frontend capability and exact result 37.
+The root is absent from the hidden membership and no helper window is visible.
+This narrows the execution-binding design but does not yet implement its broker
+registration or claim hidden backend production wiring.
 Owner's latest admission maps the authenticated root run16 lifetime to the
 interactive Console session lifetime. Root normal/abnormal exit or real Console
 closure closes only the DOS workers associated with that frontend, through the

@@ -84,3 +84,39 @@ backend without typed endpoint admission.
 
 Physical desktop observation follows the owner waiver; unit/logic evidence is
 required instead. No S3 functionality is marked complete by this initial audit.
+
+## Hidden attachment preserves inherited capability: measured prerequisite
+
+Extended the existing tests/app/frontend_capability_inheritance_test.c rather
+than adding another transport. The child now asserts that the root PID is not
+in its Console process list and that its Console window is not visible. The
+existing direct/CMD/nested-CMD paths still prove inherited SYNCHRONIZE-only
+event rights (SetEvent denied) and completion 37.
+
+The new --rebind-helper path starts on the root's Console, asserts that actual
+membership, then calls FreeConsole/AllocConsole only in the helper, whose
+startup specifies SW_HIDE. After separation it asserts root absence and an
+invisible window. It creates CMD with ordinary Console inheritance; the final
+child asserts that helper is a member of its hidden Console, while root is not,
+and uses the same inherited restricted event. Root signals that event after
+the child readiness handshake and receives completion 37 through CMD/helper.
+This is real Windows Console membership/inheritance, not a mocked membership
+answer, but it does not yet register an execution association with BaseSrv.
+
+Build: MSVC Win32/x86 /MT /W4, frontend_capability_inheritance_test.c linked
+with user32.lib; object and executable reside under
+build/M0-T423/S3/console-inheritance. The S2 control observer runs test.exe on
+an unswitched private desktop with a 45000-ms deadline. Evidence prefix
+O:/winnt/logs/m0-t423-s3-console-inheritance: exit 0 and all four actual PASS
+lines, including inherited visible membership -> hidden helper -> CMD child.
+No user desktop manipulation, product/guest change or publication replacement.
+
+This supports a smaller binding candidate: authenticate and capture the
+helper's genuine original Console membership before detaching, then preserve
+that logical execution context across the backend's physical attachment.
+Current service_bind_existing_console already caches a connection's original
+key. It must not be invoked via a fake CheckVDM/placeholder DOS task merely to
+obtain that key. A finite authenticated setup operation and its lifetime rules
+are still required, including helper loss while native descendants survive.
+Frontend object possession alone still cannot select a worker. The next
+production change must prove that binding/rundown through service and RPC tests.
