@@ -4424,3 +4424,67 @@ documents a shared resource and release responsibility:
 An unconditional channel-stop release could affect another current user;
 these source observations do not prove physical focus/clip cleanup on modern
 Terminal. That gate stays open. This fixture never clips or moves the pointer.
+
+### Guest progress after frontend loss: retained completion failure
+
+tests/observation/frontend_loss_noio.asm is an independently authored COM probe,
+not modified original media. It creates logs/NIOREADY, polls for logs/NIOGO,
+then creates logs/NIODONE and invokes DOS exit 7. It makes no Console input or
+output request. The native controller frontend_loss_noio_test.c creates GO
+only after its root run16 has actually exited. Therefore DONE proves guest
+work after root loss, rather than mere worker process survival.
+
+The initial direct abnormal-root case passes: controller terminates root with
+91, observes its exit, releases guest and sees DONE. Evidence is
+O:/winnt/logs/m0-t423-s2-frontend-noio.txt and its Console sidecar.
+The --normal case instead runs a native target through root run16; that target
+starts the inner DOS launcher, waits for guest READY, publishes its PID and
+returns 37. Root propagates 37; the controller verifies inner launcher is live
+before allowing guest to finish. This case additionally requires inner exit 7.
+
+The initial normal case omitted handle inheritance in its authored native
+target, preventing the nested launcher from retaining the frontend capability;
+r2 reports child 1727 before guest READY. The corrected test uses inheritance
+for that nested launch, as CMD does, without changing production authentication.
+It reaches READY and DONE, but r3 and r4 fail at nested-result. These failures
+are retained, not reclassified as success. No promise is made for an arbitrary
+native application that deliberately suppresses capability inheritance.
+
+r4 uses existing MVDM_S34_TRACE_PATH at
+O:/winnt/logs/m0-t423-s2-noio-normal-run16.txt. Root returns 37. There is no later
+GetNextVDMCommand completion RPC in that trace. A temporarily compiled wrapper
+around the existing native_console_observer.c thread sampler captured and
+resumed the test-owned worker; raw evidence is
+O:/winnt/logs/m0-t423-s2-noio-worker-stack.txt. With actual image base 003E0000
+and the tested formal-cache map's preferred base 00400000, frames resolve to:
+
+- CPU thread: nt_block_event_thread+53 -> cmdGetNextCmd+26C -> CmdDispatch ->
+  MS_bop_4 -> ccpu. It waits for the original event-thread stall acknowledgement.
+- Event thread: ErrorDialogBox+186 -> host_error+72 -> DisplayErrorTerm+A0 ->
+  nt_event_loop+135 -> ConsoleEventThread. It has entered original fatal-input
+  error presentation instead of acknowledging that stall.
+
+Selected nt_event.c handles ReadConsoleInputExW failure by DisplayErrorTerm;
+nt_error.c passes ERR_QUIT to host_error. The original source has that error
+branch too. The new frontend-disconnect error reaches it; this is not evidence
+of a guest defect, completed broker record loss, or a license to kill a worker
+on launcher death. The requested original error-handling contract and bounded
+task-completion expectation need reconciliation at this boundary. The complete
+--normal assertion remains failing; only continued no-Console file work passed.
+
+Build with NASM -f bin and MSVC x86 /MT /W4 /WX, all outputs under
+build/M0-T423/S2/frontend-loss-noio. Stage the authored NOIO.COM only into the
+existing package tests directory. Run the native controller through the existing
+private-desktop console-startup-observer, with working directory O:/winnt,
+optional --normal after observer options. The four fixed NIOREADY/NIOGO/NIODONE/
+NIOPID files under logs must be absent; the test refuses existing markers.
+After recording evidence, stop only the identified test-owned processes before
+removing these handshake files. Production binaries and original media remain
+unchanged. Physical desktop input remains prohibited by the owner's new reply.
+
+Final fixture identities: NOIO.COM
+C5686BF3619BA5020DA62181AA74D4097669C43873C6D334C7F939E4DB1F721D;
+controller test.exe
+21465604DCA33596879832A317F4B3BF96598DEAFAF3B410FCA05C9B4553A028.
+The final-direct repetition also exits 0 and proves DONE after root death.
+The same controller's normal-r4 remains the failing completion reproducer.

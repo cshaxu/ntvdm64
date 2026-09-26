@@ -92,6 +92,26 @@ stable handle count pass twice across 85 cases each. Broker attachment alone
 is substituted. This test-only update does not change the published binaries
 or certify physical pointer/focus behavior.
 
+New root-loss no-Console-I/O probe proves guest file progress after launcher
+death. The normal-root-completion variant also creates its post-root marker,
+but its nested run16 does not finish with guest exit 7: a captured worker stack
+shows cmdGetNextCmd waiting in nt_block_event_thread while the original input
+thread waits in DisplayErrorTerm/host_error/ErrorDialogBox after frontend loss.
+This is a retained failing completion probe, not an accepted lifecycle pass or
+a proven broker lost-result defect. Resolve/attribute this original-error versus
+handoff boundary before S2 closure; do not add launcher-death worker termination.
+Owner reaffirmed no foreground desktop interaction; continue background work.
+
+New root-loss no-Console-I/O probe proves guest file progress after launcher
+death. The normal-root-completion variant also creates its post-root marker,
+but its nested run16 does not finish with guest exit 7: a captured worker stack
+shows cmdGetNextCmd waiting in nt_block_event_thread while the original input
+thread waits in DisplayErrorTerm/host_error/ErrorDialogBox after frontend loss.
+This is a retained failing completion probe, not an accepted lifecycle pass or
+a proven broker lost-result defect. Resolve/attribute this original-error versus
+handoff boundary before S2 closure; do not add launcher-death worker termination.
+Owner reaffirmed no foreground desktop interaction; continue background work.
+
 Detailed runs, failed attempts and artifact identities remain in the linked
 boundary ledger; this status records only the current disposition.
 
