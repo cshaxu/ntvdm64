@@ -110,6 +110,11 @@ boundary ledger; this status records only the current disposition.
   real guest keymouse path, with an unchanged-mode control run. BIOS modifier
   release, callback teardown, MEM output and COMMAND exit are asserted.
   Physical desktop focus and hidden-pointer clipping are not inferred from it.
+- Production channel cancellation now passes two 51-case native test runs:
+  pending pipe read, empty Console read, and acknowledged barrier/EOF/stop
+  competition all join, signal EOF readiness and leave no handle growth.
+  Only broker attachment is substituted. This closes the channel-lifetime
+  subcase, not broker task-completion races or physical pointer acceptance.
 
 S2 still requires the complete Console-owner and per-layer failure checklist,
 and remaining physical pointer/layout dispositions. The first production P

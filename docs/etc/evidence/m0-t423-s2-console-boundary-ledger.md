@@ -3808,3 +3808,47 @@ Do not reuse the old temporary staging helper without refreshing its baseline:
 its hash preflight now correctly rejects this newly published set. S2 still
 requires its remaining owner/lifetime checklist reconciliation; S3-S6 and the
 full Window goal are not completed by this bounded delivery.
+
+### Production channel cancellation and acknowledged-EOF lifetime proof
+
+Question: can root-frontend channel shutdown join both pending pipe I/O and a
+native Console read, including peer EOF concurrent with owner cancellation,
+without leaked channel handles or leaving the input waiter asleep?
+
+tests/app/console_channel_lifetime_test.c compiles the production channel,
+dispatcher, video backing and grid provider. Only the BaseSrv attach call is
+substituted to retain the peer pipe and assign the test generation; this does
+not prove authentication, broker task completion or real guest behavior.
+The test uses real named pipes, OVERLAPPED transfers, Console handles and
+threads. A wrapper signals entry to the READ_INPUT dispatch and then executes
+the unchanged production dispatcher. No key is injected to unblock that read.
+
+Each case first receives and validates a normal barrier acknowledgment. It
+then exercises (1) cancellation during idle pipe receive, (2) cancellation of
+an empty native Console read, or (3) peer EOF racing owner stop after that
+acknowledgment. Every stop must join within five seconds, the retained thread
+handle must be signalled with a non-success terminal result, and the retained
+input-ready event must be signalled so its waiter can observe EOF. Sixteen
+rounds after one warmup round cover 51 channel lifetimes with fresh generations;
+the process handle count must match before and after the measured rounds.
+This does not claim that arbitrary scheduling interleavings are exhausted.
+
+Build: tests/observation/build-console-channel-lifetime.ps1 -BuildRoot
+build/M0-T423/S2/channel-lifetime-r2, MSVC x86 /MT. The first link attempt
+omitted the existing grid implementation and failed; the reproducible builder
+now compiles that actual provider too, not a stub. Existing production compiler
+warnings remain visible; no production edits were made for this fixture.
+Executable SHA-256: D8949559CB31F1070333451196769A235AB5AF541B8E198D607EE4C0AD59045F.
+
+Run via build/M0-T423/S2/control-observer/console-startup-observer.exe with
+MVDM_OBSERVER_PRIVATE_DESKTOP=1, fixture test.exe as target, O:/winnt as working
+directory, and --observation-timeout-ms 20000. The reports and captured text
+under O:/winnt/logs/m0-t423-s2-channel-lifetime.txt and the -repeat variant
+both show fixture exit 0 and the full 51-case pass message. No user desktop
+switch, package replacement or guest modification occurred. The current
+six-file publication remains 94762fa70's tested set.
+
+The source-only verify-dos-frontend-handoff-source.ps1 guard also passes all
+six original suspend/drain/re-entry/resume ordering checks. It is not runtime
+proof. These results close the channel cancellation/join subcase, not the
+entire broker/guest completion-race matrix or the physical pointer/focus gate.
