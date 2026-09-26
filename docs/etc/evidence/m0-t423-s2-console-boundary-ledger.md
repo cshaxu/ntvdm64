@@ -4368,3 +4368,29 @@ The exact tested six files are published together to O:/winnt:
 
 No original guest, Registry, SYSTEM.INI, shared library or foreground desktop
 interaction changed. S2 remains open for its explicitly remaining gates.
+
+### Post-result-fix failure matrix verification
+
+The published fab033613 package (six hashes above) was exercised unchanged
+with Verify-BrokerFinalLifecycle.ps1 and the private-desktop control-observer.
+No desktop switch, production edit or guest-media change was made. Evidence
+under O:/winnt/logs uses the prefix m0-t423-s2-post-result-:
+
+| Suffix and switches | Observed assertions |
+| --- | --- |
+| broker: BrokerLoss, TwoWorkers | Both direct waits fail with 1722; workers end on broker loss; a fresh broker/worker runs MEM with actual memory output and returns 0. This is not root-frontend loss. |
+| native-target: DosNativeLoss, NativeRoot | Inner native target and its launcher return -1; DOS observes low-byte 255, runs MEM and finishes; outer interactive CMD remains live, executes recovery input and returns 23 through root run16. |
+| inner-launcher: NestedWorkerLoss, NestedInteractive, LauncherLoss | Innermost launcher exits -1; its native ancestors naturally observe their direct child result, DOS worker survives; outer interactive CMD executes recovery input and root returns 23; fresh MEM passes. |
+| middle-launcher: NestedWorkerLoss, NestedInteractive, MiddleLayerLoss, MiddleLayerInputProbe, LauncherLoss | Middle launcher exits -1; its native target, nested DOS launcher/worker and ancestors survive. Recovery input is sent without a second fault; outer CMD/root complete with 23 while the unfinished DOS descendant remains alive. Fresh MEM passes. |
+
+Each script asserts process states before its finally block explicitly cleans
+test-owned survivors. Cleanup is not counted as product termination. These
+checks strengthen current-candidate evidence, but do not prove all completion
+interleavings, physical pointer/focus behavior or future Window input routing.
+
+A production-source termination sweep finds no service_end_abandoned_dos_pair
+or long-lived native-target kill Job. Remaining calls are scoped: run16's
+suspended-startup Job and pre-resume rollback; unclaimed reservation rollback;
+explicit management termination; the private Console-query helper's cleanup;
+and the worker's own broker-death failure. They are not a newly authorized
+launcher-death or frontend-loss execution-tree policy.
