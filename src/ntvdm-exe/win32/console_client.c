@@ -39,6 +39,20 @@ ntvdm_console_graphics *ntvdm_console_graphics_context(void)
     return client ? client->graphics : NULL;
 }
 
+/* Original nt_event.c owns the VDM close decision/cleanup. The NT4 Console
+ * Server used a callback thread and bounded wait before forced close. Our
+ * authenticated root process is the session lifetime capability; no native
+ * Console, PID ancestry, or guest/task policy is acquired here. */
+extern BOOL CntrlHandler(ULONG type);
+static DWORD WINAPI console_close_callback(void *context)
+{
+    console_client *client=context;
+    if (!session_thread_bind(client->owner)) return ERROR_INVALID_STATE;
+    (void)CntrlHandler(CTRL_CLOSE_EVENT);
+    (void)session_thread_unbind(client->owner);
+    return 0;
+}
+
 /* nt_event caches its wait handle once. Keep that local event stable; the
  * authenticated frontend event and process are notification sources only.
  * A signalled source is armed again after read/peek, avoiding a hot wait loop. */
@@ -50,6 +64,16 @@ static DWORD WINAPI console_input_watch(void *context)
         HANDLE waits[3]={client->stop,client->frontend,pending ? client->rearm : client->ready};
         DWORD result=WaitForMultipleObjects(3,waits,FALSE,INFINITE);
         if (result==WAIT_OBJECT_0) return 0;
+        if (result==WAIT_OBJECT_0+1) {
+            HANDLE close=CreateThread(NULL,0,console_close_callback,client,0,NULL);
+            /* The frontend is gone: there is no remaining UI in which to
+             * cancel closing this session. Bound a blocked original handler,
+             * then close this worker only, as Console Server forced close did.
+             * This timeout is a close grace, never a guest idle timeout. */
+            if (close) { WaitForSingleObject(close,5000);CloseHandle(close); }
+            TerminateProcess(GetCurrentProcess(),CONTROL_C_EXIT);
+            return ERROR_PROCESS_ABORTED;
+        }
         if (result!=WAIT_OBJECT_0+2) {
             SetEvent(client->wake);return result==WAIT_FAILED ? GetLastError() : ERROR_PIPE_NOT_CONNECTED;
         }
@@ -81,29 +105,9 @@ static void console_client_end(void *context)
 static DWORD console_command_ready(void *context)
 {
     console_client *client=context;
-    DWORD error=ERROR_SUCCESS;
     if (WaitForSingleObject(client->frontend,0)==WAIT_TIMEOUT) return ERROR_SUCCESS;
-    /* Original COMMAND has suspended its input thread before next-command
-     * delivery. Keep the cached wake event but replace only the old route.
-     * A live nested root never enters this replacement path. */
-    EnterCriticalSection(&client->lock);
-    SetEvent(client->stop);
-    WaitForSingleObject(client->watcher,INFINITE);CloseHandle(client->watcher);
-    client->watcher=NULL;
-    CloseHandle(client->pipe);CloseHandle(client->frontend);CloseHandle(client->ready);
-    client->pipe=NULL;client->frontend=NULL;client->ready=NULL;
-    if (client->capability) CloseHandle(client->capability);
-    client->capability=NULL;
-    error=OpenNtBaseClientWaitFrontend(&client->pipe,&client->frontend,&client->generation,&client->ready);
-    if (!error) error=OpenNtBaseClientWorkerFrontendCapability(&client->capability);
-    if (!error) {
-        client->sequence=0;client->failure=0;
-        ResetEvent(client->wake);ResetEvent(client->stop);ResetEvent(client->rearm);
-        client->watcher=CreateThread(NULL,0,console_input_watch,client,0,NULL);
-        if (!client->watcher) error=GetLastError();
-    }
-    LeaveCriticalSection(&client->lock);
-    return error;
+    /* A dead root closes this session; it cannot be rebound to a new root. */
+    return ERROR_PIPE_NOT_CONNECTED;
 }
 
 DWORD ntvdm_console_client_begin(session *owner)

@@ -148,6 +148,8 @@ int main(int argc,char **argv)
             "--reenter-pending-command","--reenter-before-increment",
             "--launcher-completed-rundown","--launcher-completed-uncollected",
             "--completed-worker-loss",
+            "--completed-worker-exit",
+            "--unfinished-worker-exit",
             "--management-terminate","--launcher-exit-survival","--launcher-disconnect-survival",
             "--completion-rundown-race"
         };
@@ -748,6 +750,9 @@ int main(int argc,char **argv)
         CloseHandle(laterChild.hThread);CloseHandle(laterChild.hProcess);
         CloseHandle(child.hThread);CloseHandle(child.hProcess);CloseHandle(self);
         free(getWire);free(updateAnswer);free(updateWire);free(answer);free(wire);
+        /* Process signalling precedes completion of its registered rundown. */
+        { ULONGLONG deadline=GetTickCount64()+5000;
+          while (!OpenNtBaseServiceIsEmpty(service) && GetTickCount64()<deadline) Sleep(1); }
         CHECK(OpenNtBaseServiceIsEmpty(service));
         CHECK(OpenNtBaseServiceStop(service));
         CHECK(wake==WAIT_OBJECT_0);
@@ -756,11 +761,13 @@ int main(int argc,char **argv)
     }
     if (argc==2 && (!strcmp(argv[1],"--launcher-completed-rundown") ||
         !strcmp(argv[1],"--launcher-completed-uncollected") ||
-        !strcmp(argv[1],"--completed-worker-loss"))) {
+        !strcmp(argv[1],"--completed-worker-loss") ||
+        !strcmp(argv[1],"--completed-worker-exit"))) {
         DWORD exitCode=STILL_ACTIVE;
         DWORD collectedError=ERROR_IO_PENDING;
         BOOL collected=!strcmp(argv[1],"--launcher-completed-rundown");
-        BOOL workerLoss=!strcmp(argv[1],"--completed-worker-loss");
+        BOOL workerExit=!strcmp(argv[1],"--completed-worker-exit");
+        BOOL workerLoss=!strcmp(argv[1],"--completed-worker-loss") || workerExit;
         BOOL recordExists=FALSE;
         /* Complete the second command through original GetNext before its
          * launcher dies. A late process notification/rundown must not treat
@@ -778,6 +785,10 @@ int main(int argc,char **argv)
         CHECK(WaitForSingleObject(laterParentEvent,0)==WAIT_OBJECT_0);
         if (workerLoss) {
             ULONGLONG deadline=GetTickCount64()+5000;
+            if (workerExit) {
+                BOOL closeWait=FALSE;
+                CHECK(!OpenNtBaseServiceExit(worker,child.dwProcessId,workerGeneration,FALSE,0,&closeWait));
+            }
             CHECK(TerminateProcess(child.hProcess,91));
             CHECK(WaitForSingleObject(child.hProcess,5000)==WAIT_OBJECT_0);
             do {
@@ -835,7 +846,8 @@ int main(int argc,char **argv)
     if (argc==2 && (!strcmp(argv[1],"--management-terminate") ||
         !strcmp(argv[1],"--launcher-exit-survival") ||
         !strcmp(argv[1],"--launcher-disconnect-survival") ||
-        !strcmp(argv[1],"--completion-rundown-race"))) {
+        !strcmp(argv[1],"--completion-rundown-race") ||
+        !strcmp(argv[1],"--unfinished-worker-exit"))) {
         DWORD exitCode=STILL_ACTIVE;
         BOOL race=!strcmp(argv[1],"--completion-rundown-race");
         RUNDOWN_RACE_TEST competing={0};
@@ -844,7 +856,11 @@ int main(int argc,char **argv)
          * identity.  The service resolves its retained watch and the normal
          * worker-exit callback must wake the waiting parent and remove the
          * original record before this fixture tears down its own processes. */
-        if (strcmp(argv[1],"--management-terminate")) {
+        if (!strcmp(argv[1],"--unfinished-worker-exit")) {
+            BOOL closeWait=FALSE;
+            CHECK(!OpenNtBaseServiceExit(worker,child.dwProcessId,workerGeneration,FALSE,0,&closeWait));
+            CHECK(TerminateProcess(child.hProcess,91));
+        } else if (strcmp(argv[1],"--management-terminate")) {
             HANDLE retainedEvent=NULL;
             CHECK(DuplicateHandle(GetCurrentProcess(),laterParentEvent,GetCurrentProcess(),
                 &retainedEvent,SYNCHRONIZE,FALSE,0));
@@ -894,7 +910,7 @@ int main(int argc,char **argv)
           CHECK(wait==WAIT_OBJECT_0); }
         if (later) CHECK(OpenNtBaseServiceExitCode(later,laterChild.dwProcessId,laterGeneration,
             laterParentReceipt,&exitCode)==ERROR_PROCESS_ABORTED);
-        if (strcmp(argv[1],"--management-terminate")) CloseHandle(laterParentEvent);
+        if (strcmp(argv[1],"--management-terminate") && strcmp(argv[1],"--unfinished-worker-exit")) CloseHandle(laterParentEvent);
         laterParentEvent=NULL;
         CHECK(OpenNtBaseServiceDisconnect(worker)==ERROR_SUCCESS);worker=NULL;
         { DWORD release=OpenNtBaseServiceReleaseReservation(launcher,GetCurrentProcessId(),
@@ -915,7 +931,9 @@ int main(int argc,char **argv)
         CHECK(OpenNtBaseServiceIsEmpty(service));
         CHECK(OpenNtBaseServiceStop(service));
         if (race) puts("PASS: competing original task completion and launcher rundown preserve completion event and live worker");
-        puts(!strcmp(argv[1],"--management-terminate") ?
+        puts(!strcmp(argv[1],"--unfinished-worker-exit") ?
+            "PASS: original ExitVDM fails unfinished parent before deleting its record" :
+            !strcmp(argv[1],"--management-terminate") ?
             "PASS: explicit management shutdown performs original worker-exit cleanup" :
             "PASS: launcher loss preserves worker; later nonzero DOS completion signals parent without worker failure");
         return 0;

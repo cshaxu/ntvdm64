@@ -156,25 +156,21 @@ static void service_prune_cancelled_frontends(OPENNT_BASE_SERVICE *service)
 static void service_capture_initial_management_labels(OPENNT_BASE_WORKER_WATCH *watch);
 static void service_capture_checked_management_label(OPENNT_BASE_SERVICE *service,
     HANDLE console,const BASE_CHECKVDM_MSG *command);
-static VOID CALLBACK service_worker_terminated(PVOID context,BOOLEAN fired)
+/* Called under the service lock before either original ExitVDM or process
+ * rundown destroys records. Both paths must preserve the same parent result. */
+static void service_preserve_parent_results(OPENNT_BASE_SERVICE *service,
+    HANDLE console,BOOL wow)
 {
-    OPENNT_BASE_WORKER_WATCH *watch=context;
-    OPENNT_BASE_CONNECTION *connection=NULL;
     LIST_ENTRY *entry;
-    OPENNT_BASE_EMPTY_NOTIFY notify=NULL;
-    void *notify_context=NULL;
-    (void)fired;
-    if (!watch || !watch->service) return;
-    EnterCriticalSection(&watch->service->lock);
     /* Original cleanup wakes waiters and removes records; a later original
      * exit-code query then returns zero for a missing record. Preserve that
      * body, but classify an unsignalled task as failed BEFORE removing it.
      * These are original notification events (non-consuming zero wait). */
-    for (entry=watch->service->connections.Flink;
-         entry!=&watch->service->connections;entry=entry->Flink) {
+    for (entry=service->connections.Flink;
+         entry!=&service->connections;entry=entry->Flink) {
         OPENNT_BASE_CONNECTION *parent=CONTAINING_RECORD(entry,OPENNT_BASE_CONNECTION,service_link);
-        if (!parent->process.fVDM && parent->wow==watch->wow &&
-            parent->console==watch->console && parent->parent_wait) {
+        if (!parent->process.fVDM && parent->wow==wow &&
+            parent->console==console && parent->parent_wait) {
             DWORD wait=WaitForSingleObject(parent->parent_wait,0);
             if (wait==WAIT_TIMEOUT) parent->worker_failed=TRUE;
             else if (wait==WAIT_OBJECT_0 && parent->parent_receipt) {
@@ -192,6 +188,18 @@ static VOID CALLBACK service_worker_terminated(PVOID context,BOOLEAN fired)
             }
         }
     }
+}
+static VOID CALLBACK service_worker_terminated(PVOID context,BOOLEAN fired)
+{
+    OPENNT_BASE_WORKER_WATCH *watch=context;
+    OPENNT_BASE_CONNECTION *connection=NULL;
+    LIST_ENTRY *entry;
+    OPENNT_BASE_EMPTY_NOTIFY notify=NULL;
+    void *notify_context=NULL;
+    (void)fired;
+    if (!watch || !watch->service) return;
+    EnterCriticalSection(&watch->service->lock);
+    service_preserve_parent_results(watch->service,watch->console,watch->wow);
     /* Equivalent to the selected BaseClientDisconnectRoutine: a one-shot
      * authenticated process-exit signal, never queue polling or a reaper. */
     entry=watch->service->frontend_routes.Flink;
@@ -1962,6 +1970,8 @@ DWORD OpenNtBaseServiceExit(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD g
         if (!connection->console) { error=ERROR_INVALID_HANDLE; goto done; }
         message.u.ExitVDM.ConsoleHandle=connection->console;
         message.u.ExitVDM.iWowTask=0;
+        if (connection->process.fVDM)
+            service_preserve_parent_results(connection->service,connection->console,FALSE);
     }
     thread.Process=&connection->process;
     thread.ClientId.UniqueProcess=connection->process.ClientId.UniqueProcess;

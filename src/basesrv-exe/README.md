@@ -20,13 +20,16 @@ handle is signalled; live cancellation markers remain until worker exit.
 Service stop also drains the final idle residue. This is resource cleanup,
 not an idle-worker timer or a new task scheduler.
 
-Launcher rundown never terminates handed-off DOS tasks or workers. Root
-frontend loss revokes only I/O capability (ERROR_PIPE_NOT_CONNECTED), not
-execution ownership. Actual worker death fails only its unfinished requests
-with ERROR_PROCESS_ABORTED; pre-handoff startup rollback remains separate.
+Non-root launcher rundown never terminates handed-off DOS tasks or workers.
+The authenticated root process defines interactive session lifetime: its death
+is observed by the associated DOS worker and dispatched to original VDM close,
+not to a broker process-tree kill. Pipe failure alone remains I/O failure.
+Actual worker death fails unfinished requests with ERROR_PROCESS_ABORTED;
+pre-handoff startup rollback remains separate.
 
 Original worker cleanup frees DOS records, including completed results not yet
-collected by their parent. Before that cleanup, this binding calls the original
+collected by their parent. Before either orderly ExitVDM or process rundown
+cleanup, this binding calls the original
 exit-code owner for each completed parent wait and retains only the resulting
 reply, keyed by its authenticated connection and exact receipt. Delivery
 consumes this one pending reply; a newly admitted command clears it. This is

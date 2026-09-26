@@ -263,72 +263,36 @@ Owner 澄清：同一嵌套执行链的前端始终由最外层根 run16 持有�
 归属分离；S2 证明唯一根前端和原生返回，不能以共享可见 Console 的
 继承证明 S3 跨隐藏 Console 的关联已经成立。
 
-Owner 最新执行与生命周期规则，全面取代此前“同层成对终止”及其测试预期：
+Owner 最新准入：根 run16 的寿命就是该交互会话的寿命。根正常/异常退出、
+真实 Console 关闭，均关闭其已认证关联的 DOS worker；优先调用原始
+CntrlHandler(CTRL_CLOSE_EVENT)，对未完成关闭作有界收尾。这里是产品
+会话到原始 Console-close 的映射，不是假称原版 launcher 死亡就强杀。
+不操作无关 worker，不递归杀 Win32 后代。非根 launcher 死亡仍不杀
+已交接 target。CAF/AE/X 显示切换不是会话结束。已完成任务的原始退出码
+保留，worker 关闭时未完成 DOS record 明确失败。所有 Windows Console
+交互只归 run16；ntvdm 只承接关闭通知和原始 VDM 清理。
 
-- 执行关系仅为父程序/run16 与其直接启动的 run16 或 target；I/O 关系仅为
-  根 run16 与使用该 root frontend 的 DOS Console/Window I/O 使用者。
-  两种关系不互相推导终止权限，均不产生递归终止。
-- 非根 run16 异常退出时，不主动结束其 Win32 target、DOS task、worker
-  或后代，不影响祖父、孙子和同 worker 其他任务。直接父程序只按普通
-  Win32 语义观察该 run16 结果，自行决定后续动作。
-- target 结束而 run16 存活：Win32 使用实际 process exit code；DOS 使用
-  对应 DOS record 的 completion/exit code。非零 DOS 结果或 DOS 错误
-  返回不升级为 worker failure，不清理目标的后代，不越级传递孙子结果。
-- 根 run16 异常退出同样不主动结束任何已交接 target、DOS task、worker
-  或后代。只撤销根所拥有的 frontend/Console/Window I/O capability。
-  不依赖该 I/O 的执行继续；后续使用它的调用必须得到明确 frontend
-  unavailable/断开错误，由原始调用者决定退出或继续。host/broker 不得
-  为此强杀整个 worker。
-- 根的直接 target 结束时，根报告直接结果后正常退出；剩余 I/O 使用者
-  按上述撤销规则处理，不能因根正常退出而递归终止。
-- DOS task 完成只唤醒直接 parent wait 并传递任务结果。VDM 自身不可恢复
-  死亡独立使其未完成 task 失败（例如 1067）。launcher 死亡不是 VDM
-  failure，不能转换为 TerminateProcess(ntvdm)。仅原始不可恢复 VDM
-  故障或显式 VDM shutdown 可以结束 VDM；空 worker 可正常留驻。
-- 删除 native target 长期 KILL_ON_JOB_CLOSE Job；删除 launcher exit/
-  disconnect 调用 service_end_abandoned_dos_pair 的 worker 强杀行为。
-  保留尚未完成交接的启动失败回滚，但已交接执行不属于 launcher 的可
-  强杀资源。不引入 process-tree kill、每层独立 VDM、DOS task-kill 注入、
-  guest 修改或新 scheduler。broker 自身死亡规则不借此扩张为执行树强杀。
+本轮替换验收：根正常/异常退出均关闭关联 worker；非根退出和普通通道
+错误不触发该关闭；无关会话及 native target 存活；实际 Console 关闭、
+完成先于关闭/关闭先于完成、嵌套返回、DOS17 和 headless WOW 均须验证。
+不新增镜像状态机、调度器或 guest 改动。以下上一版根存活预期及输入
+pump 例外均已被本次准入替代，保留为先前实验的解释而非现行验收标准。
 
-此修订在前一已测试通知修复提交后作为 S2 新 P 实施，既有成对强杀测试
-保留为历史证据但不再是应保持的功能；正式测试必须改成以下验收：
+先前 no-root-termination 和输入 pump 退休方案已撤销；实验与失败堆栈保留在
+[边界账本](../etc/evidence/m0-t423-s2-console-boundary-ledger.md#guest-progress-after-frontend-loss-retained-completion-failure)。
+非根 run16 仍保留不连带终止规则；已交接 native target 不使用长期
+KILL_ON_JOB_CLOSE。启动尚未交接的资源仍允许原有回滚。
 
-本次生产 P 已删除三类强杀路径并发布准确测试过的六文件；真实根/内层/
-中间层故障、Win32 CUI/GUI 后代存活、DOS17 与嵌套回归的结果见
-[新生命周期交付证据](../etc/evidence/m0-t423-s2-console-boundary-ledger.md#unpaired-lifecycle-production-verification-and-delivery)。
-前端断开错误为 233，实际 worker 故障为 1067；二者不得混用。下列复合
-检查项仍作为完整 S2 收口门槛，不能用本 P 的有限组合测试替代竞态和物理输入验收。
-
-追加 P 已验证并修复“DOS record 已完成、worker 随后死亡、父方尚未取结果”
-时退出码从 29 丢成 0 的交付缺陷：清理前调用原始查询，只保留经过认证的
-单次回复；不修改原始 record 策略。错误 receipt、重复取结果及并发 rundown
-均有测试；完整竞态矩阵仍按下列清单执行，不因该单点通过而整体勾选。
-
-- [ ] 对根/中间/最内层的 launcher 和 target 分别注入异常；覆盖 DOS→Win32→DOS
-      与 Win32→DOS→Win32。launcher 死亡后已交接 target、其他任务和后代
-      存活；target 完成只使直接 launcher 返回其实际结果，祖父只观察直接子。
-- [ ] 根异常和正常退出均只撤销 I/O：无 I/O 的 native/DOS 工作继续；
-      后续输入、输出、控制请求得到明确断开错误，worker 不被 host/broker 强杀。
-- [ ] DOS 非零完成、DOS 错误返回但 VDM 存活、VDM 自身死亡分别验证；
-      前两者只完成对应 record，后者才使该 worker 内未完成等待者失败。
-- [ ] 启动未交接失败仍回滚资源；已交接的目标不受晚到 rundown/进程退出
-      通知强杀。测试显式清理存活进程，不能将测试清理误记为产品行为。
-- [ ] 区分 `/c` 父层因子命令结束而自然返回和被强制终止；用可交互父层
-      证明恢复，并保留无关 worker/任务作为不受影响的对照。
-- [ ] 检查 worker 死亡、broker 死亡、前端断连和任务已正常结束的竞争；
-      完成/取消只能收尾一次，不能把断流当成功或错误清理已复用的任务。
-
-待 owner 确认的最小语义例外（尚未准入实施）：已认证 root frontend 消失时，
-输入 pump 停止接收，但保留原始 suspend/resume 握手，使无前端 I/O 的任务
-可继续完成；实际 I/O 请求仍明确失败。不能将此写成已获批准的规则，也不能
-以自动 goal 续跑代替批准。原版输入读取失败进入 fatal modal；新前后端独立
-生命周期需要明确区分这两种条件。即使批准，仍须检查握手之后的最终绘制、
-ResetConsoleState、模式和标题调用，不能只绕过第一个 wait 就声称修复完成。
-验收必须保留 NOIO 的正常根退出后 inner exit=7 断言，并覆盖异常根退出、
-实际后续 I/O 失败、原始非断连错误、嵌套/无关 worker 与现有生产 P 回归。
-不新增 scheduler，不修改 guest，不抢先发布 DOS completion，不替换退出码，
-不通过强杀、自动确认错误对话框或伪造成功消除停滞。
+- [x] 根正常/异常结束：关联 DOS worker 关闭，无关 worker 和 native
+      target 不被主动终止；未完成内层任务明确失败，不能无限等待。
+- [x] 非根 launcher 异常结束：已交接 native/DOS 继续，父方仅观察直接
+      子进程结果；不存在递归 process-tree kill。
+- [ ] DOS 非零/错误完成只完成该 record；根仍在则 worker 不因结果非零
+      关闭。完成先于 worker 关闭时保留原始结果，反向顺序明确失败。
+- [x] 普通传输错误不能冒充根进程死亡；身份、代次、会话隔离不改变。
+- [ ] 真实 Console close 与显示切换严格区分；关闭回调与有界收尾均验证。
+- [ ] DOS→native→DOS 与 native→DOS→native，直接/嵌套退出及取消竞争；
+      读取实际 guest 文本，保留现有 DOS17、键鼠、图形返回和 WOW3 门槛。
 
 - [ ] DOS 根与原生 CMD 根的嵌套均保持唯一根 run16；记录前端进程身份、
       可见窗口和输入 owner，断言所有内层 run16 无可见 UI、不抢前端，

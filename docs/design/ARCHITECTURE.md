@@ -261,12 +261,17 @@ Its local adapter translates the original Console API shapes into the direct
 channel. Host pointers, painter storage and mutexes never cross that channel.
 Root association, execution ancestry and worker membership are distinct.
 Launcher lifetime does not own a handed-off target's execution lifetime.
-Root and inner launcher exits do not actively terminate native targets, DOS
-tasks, workers or descendants. A live launcher returns only its direct target's
-completion/result. Root exit revokes frontend I/O capabilities; dependent I/O
-calls fail explicitly and original caller error handling decides continuation.
-Host/broker must not turn frontend loss into worker termination. Worker failure
-remains an independent failure of its unfinished DOS records. Only pre-handoff
+Inner launcher exits do not actively terminate native targets, DOS tasks,
+workers or descendants. A live launcher returns only its direct target's
+completion/result. The root frontend defines the interactive session lifetime:
+its normal/abnormal exit or true Console closure closes its associated DOS
+workers using the original VDM close handler and bounded close completion.
+This is a product mapping to Console-session close, not original OpenNT
+launcher-death policy. A transient I/O failure is not proof of session closure.
+Display switching is not closure. Native descendants and unrelated sessions
+are not tree-killed. Already completed task results remain intact; unfinished
+records fail on worker closure. Windows Console ownership stays in run16,
+not ntvdm. Only pre-handoff
 startup rollback may terminate an uncommitted created target; no long-lived
 kill-on-close Job, execution-tree cascade or new DOS scheduler is permitted.
 
@@ -332,9 +337,10 @@ contract, not a recovered kernel/CSRSS behavior.
 Launcher death rolls back an unclaimed startup through original UndoCreation.
 A temporary non-inherited Job installed atomically at worker creation protects
 the interval before broker registration; its kill-on-close policy is disarmed
-after Prepare. A claimed worker keeps its original lifetime and retains needed
-reservation resources until exit, independent of its launcher's lifetime.
-Other workers are not killed when one launcher or worker exits. No worker idle
+after Prepare. A claimed worker retains reservation resources until exit.
+Non-root launcher loss does not own that lifetime; root frontend session close
+above is the explicit standalone exception. Unrelated workers are unaffected.
+No worker idle
 timer is introduced; the broker retains its existing empty-only grace.
 
 The current runtime binds exactly one active imported MVDM host context to each

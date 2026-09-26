@@ -346,15 +346,13 @@ try {
             $victimId=if($RootTargetLoss){$outerShell[0].ProcessId}elseif($BrokerLoss){$servers[0].ProcessId}elseif($FrontendLoss){$root[0].ProcessId}elseif($LauncherLoss){$inner[0].ProcessId}else{$workers[0].ProcessId}
             Stop-Process -Id $victimId
             foreach($item in @($retained | Where-Object {$_.Id -notin $survivors})){
-                $mustSurvive=($FrontendLoss -and $item.Id -ne $victimId) -or
-                    ($RootTargetLoss -and $item.Id -notin @($root[0].ProcessId,$victimId)) -or
-                    ($LauncherLoss -and $item.Name -eq 'ntvdm.exe')
+                $mustSurvive=($LauncherLoss -and $item.Name -eq 'ntvdm.exe')
                 if($mustSurvive){
                     if($item.Process.WaitForExit(300)){throw "Execution was ended by ancestor/root-I/O loss: $($item.Name) PID=$($item.Id) code=$($item.Process.ExitCode)"}
                     $results.Add("PASS survives ancestor/root-I/O loss: $($item.Name) PID=$($item.Id)")
                     continue
                 }
-                if(!$item.Process.WaitForExit(5000)){
+                if(!$item.Process.WaitForExit(8000)){
                     if($item.Name -eq 'ntvdm.exe' -and $WorkerWindowObserver){
                         & $WorkerWindowObserver $item.Id "NTVDMConsoleTest-$($loss.Process.Id)" |
                             Set-Content -LiteralPath (Join-Path $PackageRoot "logs\$LogPrefix-worker-windows.txt") -Encoding utf8
@@ -363,6 +361,10 @@ try {
                 }
                 $expectedCode=if(($FrontendLoss -and $item.Id -eq $victimId) -or ($LauncherLoss -and $item.Name -ne 'ntvdm.exe')){-1}else{$failureCode}
                 if($RootTargetLoss -and $item.Id -in @($root[0].ProcessId,$victimId)){$expectedCode=-1}
+                if(($FrontendLoss -or $RootTargetLoss) -and $item.Name -eq 'ntvdm.exe'){
+                    $results.Add("PASS root session closes worker: PID=$($item.Id) code=$($item.Process.ExitCode)")
+                    continue
+                }
                 if($item.Process.ExitCode -ne $expectedCode){throw "Wrong propagated code: $($item.Name) PID=$($item.Id) code=$($item.Process.ExitCode) expected=$expectedCode"}
                 $results.Add("PASS chain exit: $($item.Name) PID=$($item.Id) code=$expectedCode")
             }
@@ -377,8 +379,8 @@ try {
         FinishObserved $loss $(if($NestedInteractive){23}elseif($FrontendLoss -or $LauncherLoss -or $RootTargetLoss){[uint32]::MaxValue}else{$failureCode})
         if($MiddleLayerInputProbe){
             foreach($p in $postFrontend){
-                if($p.WaitForExit(300)){throw "Descendant exited after root completion; original caller outcome requires attribution: PID=$($p.Id) exit=$($p.ExitCode)"}
-                $results.Add("PASS completed root frontend does not terminate unfinished descendant: PID=$($p.Id)")
+                if(!$p.WaitForExit(8000)){throw "Associated DOS endpoint survives completed root session: PID=$($p.Id)"}
+                $results.Add("PASS root completion closes associated DOS endpoint: PID=$($p.Id) code=$($p.ExitCode)")
             }
         }
         if($NestedInteractive -and ((Get-Content -LiteralPath ($loss.Report+'.console.txt') -Raw) -notmatch '(?m)^\[\d+\]\s*NESTED-RECOVERED\s*$')){throw 'Interactive CMD did not execute the recovery command'}
@@ -436,8 +438,8 @@ try {
         $worker=@($workers | Where-Object {$_.ParentProcessId -eq $launcherId})
         if($workers.Count -ne $requiredTasks -or $worker.Count -ne 1){throw 'Cannot identify owned pairs'}
         $victim=if($WorkerLoss){$worker[0]}elseif($LauncherLoss -or $FrontendLoss){$launcher[0]}else{$servers[0]}
-        # Root loss revokes I/O, not execution. Retain the process handle and
-        # Console independently; test cleanup is not a product completion.
+        # Authenticated root loss closes its DOS session, not unrelated workers.
+        # Retain handles before exit; test cleanup is not product completion.
         $frontendWorker=if($FrontendLoss -or $LauncherLoss){Get-Process -Id $worker[0].ProcessId}else{$null}
         if($frontendWorker){[void]$frontendWorker.Handle} # retain before process exit
         Stop-Process -Id $victim.ProcessId
@@ -447,14 +449,8 @@ try {
             if(!(PackageProcesses | Where-Object {$_.ProcessId -eq $otherWorker.ProcessId})){throw 'Unrelated worker was terminated'}
         }
         if($FrontendLoss -or $LauncherLoss){
-            if($frontendWorker.WaitForExit(1000)){
-                if($WorkerWindowObserver){
-                    & $WorkerWindowObserver $worker[0].ProcessId "NTVDMConsoleTest-$($loss.Process.Id)" |
-                        Set-Content -LiteralPath (Join-Path $PackageRoot "logs\$LogPrefix-worker-windows.txt") -Encoding utf8
-                }
-                throw "Worker exited after root loss; attribute original caller handling before accepting: $($frontendWorker.ExitCode)"
-            }
-            $results.Add('PASS root frontend loss: worker survives while Console remains held; no launcher-driven kill')
+            if(!$frontendWorker.WaitForExit(8000)){throw 'Associated worker did not close after root session ended'}
+            $results.Add('PASS root session loss closes associated worker while unrelated Console remains held')
             $frontendWorker.Dispose()
         }
         [void]$inputGate.Set()

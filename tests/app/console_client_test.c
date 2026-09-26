@@ -41,6 +41,17 @@ static HANDLE delivery,peer,stop,readiness,frontend_process;
 static session_teardown_fn cleanup;
 static void *cleanup_context;
 static run16_console_frontend frontend;
+static BOOL hang_close;
+int session_thread_bind(session *instance) { bound=instance;return 1; }
+int session_thread_unbind(session *instance) { CHECK(bound==instance);bound=NULL;return 1; }
+BOOL CntrlHandler(ULONG type)
+{
+    CHECK(type==CTRL_CLOSE_EVENT && bound==&owner);
+    puts("PASS authenticated root death dispatches original-shape close callback");
+    fflush(stdout);
+    if (hang_close) Sleep(INFINITE);
+    ExitProcess(73); /* Test substitute for original VDM close, not guest proof. */
+}
 void OpenNtBaseClientSetCommandBinding(DWORD (*ready)(void *),void *context)
 { (void)ready;(void)context; }
 DWORD OpenNtBaseClientWorkerFrontendCapability(HANDLE *capability)
@@ -110,6 +121,7 @@ int main(int argc,char **argv)
     int i;
     HANDLE stable_wait;
     BOOL broken_pipe=argc==2 && !strcmp(argv[1],"--broken-pipe");
+    hang_close=argc==2 && !strcmp(argv[1],"--close-hang");
     if (argc==2 && !strcmp(argv[1],"--readiness-peer")) { Sleep(INFINITE);return 0; }
     if (broken_pipe) {
         /* Keep the authenticated presenter process alive while its channel
@@ -639,8 +651,8 @@ int main(int argc,char **argv)
     SetEvent(stop);
     CHECK(TerminateProcess(frontend_process,23));
     CHECK(WaitForSingleObject(frontend_process,5000)==WAIT_OBJECT_0);
-    CHECK(ntvdm_console_input_wait_handle()==stable_wait &&
-        WaitForSingleObject(stable_wait,5000)==WAIT_OBJECT_0);
+    Sleep(10000);
+    CHECK(!"root close did not terminate fixture");
 disconnected:
     /* An I/O failure is not execution termination. Repeated calls must return
      * the same explicit error, without falling back to the local Console. */

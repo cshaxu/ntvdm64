@@ -4488,3 +4488,134 @@ controller test.exe
 21465604DCA33596879832A317F4B3BF96598DEAFAF3B410FCA05C9B4553A028.
 The final-direct repetition also exits 0 and proves DONE after root death.
 The same controller's normal-r4 remains the failing completion reproducer.
+
+## Root frontend session close, original VDM callback and result preservation
+
+Owner admission on 2026-09-26 supersedes the preceding root-loss survival
+contract: root run16 defines the interactive session lifetime. Its normal or
+abnormal end closes associated DOS workers; non-root launcher loss still does
+not terminate handed-off execution. Display switching is not session close.
+Native descendants and unrelated workers are not recursively killed. The old
+NOIO result remains valid historical evidence under the former contract, not
+the acceptance expectation for this revision. No input-pump retirement bypass
+was implemented.
+
+Source-first recovery and stopping boundary:
+
+- Original OpenNT base/mvdm/softpc.new/host/src/nt_event.c::CntrlHandler,
+  SHA-256 7F555A87BA029627D6811C0F7B96964BB8A96AF90C60C89012975A4AC5442076,
+  already composes in the worker. Its CTRL_CLOSE_EVENT branch and original
+  termination chain remain unchanged; invoke it rather than recreate its state.
+- OpenNT windows/core/ntcon/server/input.c::CreateCtrlThread/KillProcess,
+  SHA-256 84D7D4C5A422208D14900C8F3A86B0F9648A3755F03D6D49765B35266617252A,
+  owns remote control callback, hung-close handling and eventual termination.
+  The translation unit requires private CSRSS/USER process lists, callback
+  injection and close/retry/cancel UI. It is a stopping boundary, not an
+  import. The already authenticated root process capability replaces only
+  session identity/delivery. The existing worker watcher invokes a bound local
+  callback and bounds unresolved closure to five seconds before terminating
+  only its own process. This forced-close choice is an explicit standalone
+  product mapping: the vanished frontend cannot present a cancel dialog.
+  Five seconds is a close grace, not a worker idle timer or a claim about
+  every original NT4 registry-selected timeout. No task enumeration/kill,
+  new IPC field, broker frame route, mirror file or guest change is needed.
+- Ordinary pipe failure remains 233 and does not initiate closure. Only the
+  retained root process object's signalled state triggers this path. Remove
+  dead-root command rebinding instead of adding an orphan-input state machine.
+- Original BaseSrvExitDOSTask frees the Console/DOS records before process
+  rundown. srvvdm.c SHA-256 remains
+  C1E2177C6C00679D85CFA475F620841F6736B0E56D8DBF790B71AFE33E1ED80B.
+  The existing completed-reply protection must run before BOTH orderly DOS
+  ExitVDM and process cleanup. Extract/share that binding, retaining original
+  result queries, authenticated receipts and one-shot delivery; do not alter
+  original records or WOW per-task ExitVDM behavior.
+
+Two new service fixture modes demonstrate the prior gap. Under prefixes
+m0-t423-s2-close-completed-red and m0-t423-s2-close-unfinished-red, the first
+prints query=0 exit=0 expected=29 and fails; the second fails its required
+ERROR_PROCESS_ABORTED assertion. After repair, completed-worker-exit and
+unfinished-worker-exit pass along with all existing modes. The failed second
+fixture left a suspended test child (8532); its exact image/command line was
+verified and it was terminated before relinking. No product process was
+mistaken for this build lock.
+
+Reproducible checked-in tests:
+
+- tests/observation/verify-console-close-contract.ps1 takes Observer,
+  BuildRoot and Prefix. It forces an unswitched private desktop, runs three
+  native Console-client cases and the complete service fixture mode catalogue
+  (24 including default, excluding reservation-child), checking actual PASS
+  output and exact exit code. Prefix m0-t423-s2-close-contract-final passes:
+  callback exits 73 by test substitute, hung callback reaches C000013A within
+  the bounded close, broken pipe survives and exits 0; all 24 service cases
+  exit 0. The callback substitute proves binding/delivery/bounded failure,
+  not guest cleanup. An existing re-entry fixture's IsEmpty assertion raced
+  the asynchronous process watch; it now waits for that actual cleanup with
+  the same bounded deadline already used by sibling tests, without weakening
+  the re-entry/wakeup assertions.
+- tests/observation/frontend_loss_noio_test.c plus the unchanged authored
+  frontend_loss_noio.asm: the native controller captures the exact worker
+  before ending the root. Abnormal root=91 closes the worker without any guest
+  Console request. --normal holds the native target until the controller has
+  its nested identity, returns 37, and asserts worker closure plus unfinished
+  inner run16=1067. NIODONE must remain absent. Prefix
+  m0-t423-s2-session-close-final passes both. The added NIOROOT file is a test
+  handshake, not a product mechanism. A sharing-violation race while publishing
+  NIOPID was fixed by waiting for its writer to close; this failure and the
+  earlier fixture-argument/VS-environment runs are not product passes.
+- tools/audit/Verify-BrokerFinalLifecycle.ps1 replaces only the superseded
+  root-survival expectations. Non-root/handed-off native survival and unrelated
+  worker post-fault command output remain required. Test cleanup is separate
+  from asserted product shutdown.
+
+Build uses the existing MSVC Win32/x86 /MT Ninja caches under
+build/M0-T423/S1/restart-formal-x86 and restart-wow-x86. Changed closure is
+rebuilt, including VDMREDIR's regenerated worker import library dependency.
+Original media/configuration and the WOW binary remain unchanged. No object
+or new directory is emitted outside repository build. Runtime reports stay
+under O:/winnt/logs; NOIO.COM stays under its existing tests directory.
+
+The final six-file candidate passes the production gate under
+m0-t423-s2-close-final-: DOS17, four native/DOS nesting/typeahead routes, two
+graphics-to-text returns, guest keymouse, root loss with independent worker
+output, inner launcher loss with native/nested DOS survival, and actual native
+Console close. WINMINE/SOL/WRITE individually retain their live NETWORK.DRV
+modal through headless samples; observation timeout is not application success.
+No physical foreground/pointer test is claimed. Extra failure-matrix results
+and the exact published manifest are recorded below after final verification.
+
+Production line accounting against ad1db0a86: console_client.c +26/-22;
+base_service.c +22/-12; total +48/-34, net +14, including comments. The two
+original mirrors have zero changed files/lines. No overlay, new component,
+wire-layout or guest-media change. Documentation and tests are separate.
+
+Final extra matrix, prefix m0-t423-s2-close-final-:
+
+| Suffix / entrypoint switches | Asserted result |
+| --- | --- |
+| middle / NestedWorkerLoss, NestedInteractive, MiddleLayerLoss, MiddleLayerInputProbe, LauncherLoss | Middle native target and nested DOS survive non-root launcher death; outer CMD accepts recovery input and returns 23. Its later root completion closes the unfinished associated DOS endpoint. No second injected worker fault. |
+| nested-root / NestedWorkerLoss, FrontendLoss | Root ends -1; associated worker closes; nested wait returns 1067 and native /c parents return that direct result naturally. |
+| root-target / NestedWorkerLoss, RootTargetLoss | Root's direct native target and root return -1; associated worker closes and unfinished nested task returns 1067. |
+| worker / WorkerLoss, TwoWorkers | Failed task returns 1067; independent worker executes its post-fault marker and exits normally; fresh MEM prints its report. |
+| broker / BrokerLoss, TwoWorkers | Both waits report 1722, workers close, no replay; a new startup runs MEM normally. |
+| native-cui / native-gui | Each checked-in unpaired-native fixture passes all three rounds: target/root=37; killed launcher=91 with target continuing to 37; normally completed root leaves native descendant able to finish 37. |
+
+Production package has been published and all six destination hashes verified
+against the actually tested files in build/M0-T423/S2/session-close-tested.json:
+
+| O:/winnt file | SHA-256 |
+| --- | --- |
+| run16.exe | 0AF0457B0B256D93CD9BA019B7BCD8AD0ED9263C7385DA9758850CFEB594B20C |
+| basesrv.exe | 187365292FEA3D46D9E1F67E13573B9879A93AAAEA16323793D620B41BC1114C |
+| ntvdm.exe | 66C268B73696EEFDADD41AEC52660BB13E4A515F040B2C66199E89C42C0F0A84 |
+| dtmgr.exe | 7349D5C89384A00080D31ECD3D1B1AF9D543E72A58F125DFC37328FF9F02487C |
+| WOW32.DLL | D22C407AE8F769A556492F6AF83A06AD5DCEFC7E1F0877F0B933DBA18D151326 |
+| VDMREDIR.DLL | 947D28F85E5BE1E3C1AA279E3979B8238A48119CF2227B2C131C9F43E5DCBAB5 |
+
+The preceding fab033613 package is retained intact at
+build/M0-T423/S2/session-close-pre-change-package. Each temporary candidate
+test restored it in finally; permanent publication happened only after all
+final gates passed. Five disposable NIO handshake files were removed after
+test-owned process cleanup; no original media or user data was removed.
+S2 remains open for its residual physical-input disposition; this delivery does
+not admit hidden Console/Window work or claim owner desktop verification.
