@@ -115,6 +115,11 @@ boundary ledger; this status records only the current disposition.
   competition all join, signal EOF readiness and leave no handle growth.
   Only broker attachment is substituted. This closes the channel-lifetime
   subcase, not broker task-completion races or physical pointer acceptance.
+- The original service now has passing normal-completion-before-launcher-loss
+  tests both before and after exit-code collection. A completed task returns
+  29 and its idle worker/GetNext wait survives late launcher rundown; the two
+  existing unfinished-pair failure controls still pass. These are compiled
+  service/native-process tests, not additional guest topology passes.
 
 The compiled Console-owner ledger is reconciled with receiver/test and
 explicit unavailable/local-owner dispositions. Its object guard passes 366

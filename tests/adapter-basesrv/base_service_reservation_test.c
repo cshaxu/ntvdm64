@@ -619,6 +619,52 @@ int main(int argc,char **argv)
         &getAnswer,&wireBytes,&getWait,standard,&standardCount)==ERROR_SUCCESS);
     CHECK(getAnswer!=NULL && getWait==NULL && standardCount==0);
     OpenNtBaseServiceReleaseCommandReply(getAnswer);getAnswer=NULL;
+    if (argc==2 && (!strcmp(argv[1],"--launcher-completed-rundown") ||
+        !strcmp(argv[1],"--launcher-completed-uncollected"))) {
+        DWORD exitCode=STILL_ACTIVE;
+        BOOL collected=!strcmp(argv[1],"--launcher-completed-rundown");
+        BOOL recordExists=FALSE;
+        /* Complete the second command through original GetNext before its
+         * launcher dies. A late process notification/rundown must not treat
+         * this retired pair as an unfinished task and kill the idle worker. */
+        get.u.GetNextVDMCommand.VDMState=ASKING_FOR_DOS_BINARY;
+        get.u.GetNextVDMCommand.ExitCode=29;
+        CHECK(OpenNtBaseEncodeGetCommand(&get,8,workerGeneration,NULL,0,&getWireBytes));
+        free(getWire);getWire=malloc(getWireBytes);
+        CHECK(getWire && OpenNtBaseEncodeGetCommand(&get,8,workerGeneration,
+            getWire,getWireBytes,&getWireBytes));
+        CHECK(OpenNtBaseServiceGet(worker,child.dwProcessId,workerGeneration,getWire,getWireBytes,
+            &getAnswer,&wireBytes,&getWait,standard,&standardCount)==ERROR_SUCCESS);
+        CHECK(getAnswer && getWait && !standardCount);
+        OpenNtBaseServiceReleaseCommandReply(getAnswer);getAnswer=NULL;
+        CHECK(WaitForSingleObject(laterParentEvent,0)==WAIT_OBJECT_0);
+        if (collected) {
+            CHECK(OpenNtBaseServiceExitCode(later,laterChild.dwProcessId,laterGeneration,
+                laterParentReceipt,&exitCode)==ERROR_SUCCESS && exitCode==29);
+        }
+        laterParentEvent=NULL; /* borrowed receipt, not ours to close */
+        CHECK(TerminateProcess(laterChild.hProcess,71));
+        CHECK(WaitForSingleObject(laterChild.hProcess,5000)==WAIT_OBJECT_0);
+        CHECK(OpenNtBaseServiceDisconnect(later)==ERROR_SUCCESS);later=NULL;
+        /* Disconnect drains its process watch: this is not a sleep-based
+         * observation hoping that the callback has already happened. */
+        CHECK(WaitForSingleObject(child.hProcess,0)==WAIT_TIMEOUT);
+        CHECK(WaitForSingleObject(getWait,0)==WAIT_TIMEOUT);
+        CHECK(BaseSrvDOSWorkerWaitPending(console,&recordExists) && recordExists);
+        puts(collected ?
+            "PASS: completed command=29 collected=1; late launcher death/rundown preserves idle worker and original GetNext wait" :
+            "PASS: completed command=29 collected=0; late launcher death/rundown preserves idle worker and original GetNext wait");
+        CHECK(TerminateProcess(child.hProcess,0));
+        CHECK(WaitForSingleObject(child.hProcess,5000)==WAIT_OBJECT_0);
+        CHECK(OpenNtBaseServiceDisconnect(worker)==ERROR_SUCCESS);worker=NULL;
+        CHECK(OpenNtBaseServiceDisconnect(launcher)==ERROR_SUCCESS);launcher=NULL;
+        CloseHandle(laterChild.hThread);CloseHandle(laterChild.hProcess);
+        CloseHandle(child.hThread);CloseHandle(child.hProcess);CloseHandle(self);
+        free(getWire);free(updateAnswer);free(updateWire);free(answer);free(wire);
+        CHECK(OpenNtBaseServiceIsEmpty(service));
+        CHECK(OpenNtBaseServiceStop(service));
+        return 0;
+    }
     if (argc==2 && (!strcmp(argv[1],"--management-terminate") ||
         !strcmp(argv[1],"--launcher-pair-loss") ||
         !strcmp(argv[1],"--launcher-pair-exit-watch"))) {

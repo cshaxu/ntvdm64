@@ -3918,3 +3918,45 @@ Remaining closure work is now explicit: reconcile the complete per-layer
 broker/guest normal-completion versus failure matrix and physical pointer/focus
 disposition. S4 owns display/CAF/AE/X and Window focus; no S2 hotkey pass is
 inferred. No production source or deployed artifact changed in this audit.
+
+### Normal DOS completion precedes launcher death/rundown
+
+Added two modes to tests/adapter-basesrv/base_service_reservation_test.c:
+--launcher-completed-rundown and --launcher-completed-uncollected. Both use
+the existing original Check/Update/Get path, complete the second command with
+exit code 29 through GetNext, and require the original parent event signalled.
+The first collects and verifies 29; the second deliberately leaves the result
+uncollected. Then the test kills only that fixture-owned launcher process and
+disconnects its service connection. Disconnect drains the registered process
+watch, so no sleep is used to guess whether cleanup has occurred.
+
+In both cases the existing worker must remain alive, its original GetNext wait
+must remain unsignalled, and BaseSrvDOSWorkerWaitPending must still find that
+same Console record. Only after these assertions does fixture cleanup end the
+worker and require the service to become empty. These are real native process
+and compiled original service assertions, with the fixture's existing Console
+membership substitute; they do not execute a DOS guest or test transport RPC.
+
+Build: Ninja basesrv-service-reservation-test.exe under the S1 formal x86 /MT
+cache. The first collected-only run passed. Adding a printf diagnostic exposed
+the fixture's no-inline-stdio link restriction; changing only that diagnostic
+to its existing puts facility restored the link. The final executable is
+E9501CA33804F32E531DF9DD733E0E1122493AB6D2D0F9C8D3A28F236C812351.
+
+Final private-desktop runs use control-observer/console-startup-observer.exe,
+MVDM_OBSERVER_PRIVATE_DESKTOP=1, a 20000-ms limit, the test executable and its
+single mode argument. All four reports/captured outputs under O:/winnt/logs
+exit 0 and carry their expected assertions:
+
+| Prefix (all start m0-t423-s2-final-) | Required outcome |
+| --- | --- |
+| launcher-completed-rundown | Collected 29, late launcher exit leaves worker/GetNext wait alive |
+| launcher-completed-uncollected | Completion event alone excludes the task from abandoned-pair termination |
+| launcher-pair-loss | Existing unfinished task still invokes original worker-exit cleanup |
+| launcher-pair-exit-watch | Existing process watch works before RPC rundown and completes the unfinished task |
+
+Together these distinguish completed versus unfinished records and both
+collection orderings; they do not claim every simultaneous scheduler
+interleaving is exhausted. No production code, original guest, registry or
+published six-binary package changed. This closes this service completion-
+before-late-exit subcase, not untested topology combinations or S2 as a whole.
