@@ -4,29 +4,30 @@
 
 ## Active Packet
 
-**Active: M0 T423 S2**
+**Active: M0 T423 S3**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T423 S2, Ordinary Mode. |
+| Identifier Mode | M0 T423 S3, Ordinary Mode. |
 | Candidate Proposal | [Console/Window frontend](../proposals/proposal-kvm-window-graphics-presentation-001.md). |
-| Admission And Approval | Owner-approved six-stage restart and automatic sequential S admission; owner says continue after S1 delivery. |
-| Objective | Move DOS visible-Console input/presentation to run16 through a bounded authenticated worker I/O protocol; preserve original guest devices, frames, execution and native re-entry in ntvdm. |
-| Non-goals | No hidden Console (S3), Window/display/library import (S4), guest mutation, second scheduler, or broker frame transport. Native children still use the visible Console directly. |
-| Reference Baseline | S1 c39b9ca0c, pushed to main with the owner's one-time exact force-with-lease authorization; prior prototype preserved on codex/t423-original-reference-20260925 at 286d54a30. |
-| Files And ABI Surface | run16 frontend/channel; ntvdm worker I/O bindings; minimal registered original Console hooks; basesrv authenticated association only if necessary; build graph and tests. No new directories outside build. |
+| Admission And Approval | Owner automatic sequential S admission after S2 closure; physical desktop observation waived in favor of reviewed logic and relevant unit tests. |
+| Objective | Run native CUI through stable hidden Console backends owned by run16, routing input/output through the unique root frontend and preserving DOS/native nested execution and completion. |
+| Non-goals | No display flag, Window/library import (S4), guest changes, new scheduler, native GUI capture or broker frame transport. DOS remains on its S2 direct channel. |
+| Reference Baseline | S2 production d0f856a50 and its exact published six-file manifest; source/test baseline afb18fe5f plus linked S2 closure evidence. Prior prototype remains read-only reference on codex/t423-original-reference-20260925. |
+| Files And ABI Surface | run16-exe native launch/backend/frontend; finite authenticated frontend association in basesrv if required; copied product-abi records, build graph and tests. No new directories outside build. |
 | Applicable Rules | EXECUTION, source policy, original mirror/ABI and output-hygiene rules; the owner-approved frontend split is the product-boundary exception. |
-| Verification | Original-call-to-owner/protocol/assertion ledger; identity/version/range/ordering/disconnect tests; real DOS17, keyboard/mouse/scroll/cursor, nested native return and S1 lifecycle; x86 build and six-file publication plus independent WOW frontier checks for production P. |
-| Expected Markers | Only run16 reads/presents user DOS Console I/O; original guest input/video consumers remain selected; input releases/output drain survive native handoff and teardown; actual COMMAND/MEM/EDIT output and behavior pass. |
-| Asset Needs | Existing source and immutable media; no imported library in S2. Build/cache/fixtures below build/M0-T423/S2; runtime tests/logs in existing O:/winnt/tests and logs. |
+| Verification | Proposal S3 chains A/B with actual per-layer text/input/exit; hidden Console cooked/raw, mouse, Unicode, resize, scroll, control events, stream/EOF, identity and cleanup tests; cumulative DOS17/lifecycle/WOW headless gates and six-file production publication. |
+| Expected Markers | One root frontend, stable authenticated hidden native backends; no competing input readers, duplicate echo or leaked helpers; both nested topologies return through each original parent and retain results. |
+| Asset Needs | Existing immutable media and original/native Console contracts; prototype used only for selective reviewed mechanics. New build/test directories only below build/M0-T423/S3; runtime tests/logs in existing O:/winnt/tests and logs. |
 | Reporting Requirements | Finite callsite ledger, source-first recovery exceptions, protocol ownership and failure rules, exact tested artifacts and non-pass outcomes; no research-only capability claims. |
 | Stop Conditions | Guest changes, new scheduling policy, unauthenticated endpoint ownership, broadened scope or proven regression. |
-| Exit Criteria | Production DOS Console I/O through run16 and original execution/re-entry preserved; full S2 checklist and production P gates met, coherent publication, commit/push and clean worktree. S1 build-only exception does not apply. |
+| Exit Criteria | Both mandatory S3 topologies and native backend contracts verified in production composition, cumulative gates met, coherent publication and clean pushed worktree. Physical desktop observation follows owner waiver; implementation is not waived. |
 | Original Owner Request | run16 owns all user KVM; ntvdm manages input queues/output events like machine, run16 like UI; first migrate DOS I/O, then hidden native Console, then Window. |
-| Similar-Issue Sweep | Original event pump and peek/flush, raw/cooked restoration, text-stream versus video writes, screen buffer/cursor/resize, native handoff, nested frontends, multi-worker isolation, disconnect and final-output drain. |
+| Similar-Issue Sweep | Direct/native-shell launch, inherited Console groups versus explicit new/detached Console, redirected/aliased streams, reentry from native CMD, root loss versus non-root loss, final output and canceled backend I/O. |
 
-S2 begins with a bounded source/owner audit, then protocol implementation and
-production wiring; declaration-only tests cannot close this packet.
+S3 starts with a finite native launch/backend ownership audit and testable
+contract, then production composition. Do not copy the discarded prototype
+wholesale or certify only fixture behavior. S2 closure evidence is below.
 Owner's latest admission maps the authenticated root run16 lifetime to the
 interactive Console session lifetime. Root normal/abnormal exit or real Console
 closure closes only the DOS workers associated with that frontend, through the
@@ -37,9 +38,9 @@ Completed direct-target results must survive later worker cleanup; unfinished
 DOS records fail explicitly when their worker closes. No guest changes or new
 scheduler. This supersedes the no-root-termination contract and the proposed
 input-pump retirement exception below; their observations remain historical.
-Implementation and the replacement lifecycle regression are now admitted in S2.
+This completed S2 lifecycle contract remains binding throughout S3.
 
-## S2 Verified Scope And Remaining Gates
+## S2 Closure Record
 
 The preceding unpaired-lifecycle package remains historical evidence, not the
 current root-session policy. It removed native kill-on-close Jobs and non-root
@@ -93,11 +94,11 @@ Retained earlier S2 capabilities and source findings:
 
 The [boundary ledger](../etc/evidence/m0-t423-s2-console-boundary-ledger.md)
 retains detailed superseded attempts, exact source/artifact identities and
-non-pass outcomes. Physical-input disposition is now resolved by the owner's
-explicit waiver, not by a physical test. Reconcile the remaining source/runtime
-checklist, then automatically close S2 and admit S3; do not block on desktop
-availability. Hidden native
-Console is S3, display/Window S4, Window mouse S5 and final owner audit S6.
+non-pass outcomes. Its final S2 closure reconciliation maps every remaining
+obligation to source, tests, runtime evidence or the explicit desktop waiver.
+S2 is closed and S3 automatically admitted; no hidden Console or Window
+capability is claimed by S2. Display/Window remains S4, Window mouse S5 and
+final owner audit S6.
 
 A real-guest test proves DOS exits 7 and 99 preserve ERRORLEVEL and allow
 subsequent MEM in both DOS COMMAND /c and interactive COMMAND -> native CMD

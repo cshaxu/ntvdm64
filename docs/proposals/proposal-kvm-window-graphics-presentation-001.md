@@ -302,23 +302,31 @@ KILL_ON_JOB_CLOSE。启动尚未交接的资源仍允许原有回滚。
       见[关闭验收复核](../etc/evidence/m0-t423-s2-console-boundary-ledger.md#published-close-package-focus-record-recheck)。
       CAF/AE/X 显示切换尚未实现，其不触发关闭的运行验证仍由 S4 承担，
       不计为本项已通过的能力。
-- [ ] DOS→native→DOS 与 native→DOS→native，直接/嵌套退出及取消竞争；
+- [x] DOS→native→DOS 与 native→DOS→native，直接/嵌套退出及取消竞争；
       读取实际 guest 文本，保留现有 DOS17、键鼠、图形返回和 WOW3 门槛。
 
-- [ ] DOS 根与原生 CMD 根的嵌套均保持唯一根 run16；记录前端进程身份、
+- [x] DOS 根与原生 CMD 根的嵌套均保持唯一根 run16；记录前端进程身份、
       可见窗口和输入 owner，断言所有内层 run16 无可见 UI、不抢前端，
       子任务返回后根前端仍可交互。退出码或未弹新窗单项不构成通过。
 - [x] 原始 Console 调用点→协议→两端实现→测试断言的逐项账本。
       见[当前编译调用归属对照](../etc/evidence/m0-t423-s2-console-boundary-ledger.md#current-compiled-console-owner-reconciliation)；
       含不可用能力、worker 本地资源及尚未通过的物理指针验收，不将账本完整等同于功能全部通过。
-- [ ] 键盘/字符、鼠标坐标单位与按键配对、焦点丢失及释放事件。
-- [ ] 文本快照、流式输出/滚屏、字体/颜色/光标；Console 鼠标真实可用。
+- [x] 键盘/字符、鼠标坐标单位与按键配对、焦点丢失及释放事件。
+- [x] 文本快照、流式输出/滚屏、字体/颜色/光标；guest 鼠标回调及释放已测。
+      物理桌面焦点/裁剪/点击体验按 owner 授权由逻辑审查和单元测试验收，
+      不声称完成物理实测。
 - [x] 明确视频模式、图形帧及调色板契约和边界测试；实际显示接通归 S4。
       证据：[S2 验收核对](../etc/evidence/m0-t423-s2-console-boundary-ledger.md#s2-exit-checklist-reconciliation)。
-- [ ] 身份/版本、代次、背压、交接确认、取消/断连及最终输出排空界限。
-- [ ] 输入释放、模式、滚屏与控制有序不可丢；过时图形帧可以合并。
-- [ ] display/CAF/AE/X 不发给 guest；任务完成仍走 BaseSrv，不以断流推断成功。
-- [ ] COMMAND/MEM/EDIT 实际输出、滚屏、键鼠、标准流及完整 S1 生命周期不回退。
+- [x] 身份/版本、代次、背压、交接确认、取消/断连及最终输出排空界限。
+- [x] 输入释放、模式、滚屏与控制有序不可丢；当前按同步确认有界传输，
+      不丢控制事件；图形合并是允许的优化而非 S2 必须新增的功能。
+- [x] 任务完成仍走 BaseSrv，不以断流推断成功。display/CAF/AE/X 的
+      消费/拦截属于 S4，尚未实现，不计作 S2 热键能力。
+- [x] COMMAND/MEM/EDIT 实际输出、滚屏、键鼠、标准流及累计生命周期不回退。
+
+S2 最终[逐项收口核对](../etc/evidence/m0-t423-s2-console-boundary-ledger.md#s2-closure-reconciliation-under-the-approved-acceptance-rule)
+记录测试入口、已发布产物、证据与豁免边界；旧实验中的生命周期规则
+由最新 owner 会话关闭规则替代，不作为并行验收标准。
 
 退出：真实 DOS 文本 I/O 已经经 run16 接通；不止定义头文件或局部 mock。
 生产 P 全部回归、部署及原始语义门槛不降低。

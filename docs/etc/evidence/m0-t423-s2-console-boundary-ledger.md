@@ -4758,3 +4758,36 @@ The source/unit acceptance plus explicit waiver resolves the physical-input
 blocker. Other S2 checklist entries still require truthful reconciliation;
 S3 admission is automatic once those entries have their evidence. No product
 or guest change, rebuild or six-binary replacement is made by this record.
+
+### S2 closure reconciliation under the approved acceptance rule
+
+S2 closes against production d0f856a50 and subsequent test/document commits,
+including the explicit desktop-observation waiver afb18fe5f. No implementation
+or known failure is waived. The six-file session-close-tested.json identities
+remain the deployed baseline for S3. Historical candidate failures and replaced
+lifecycle policies above are not current acceptance rules.
+
+| Remaining S2 obligation | Evidence and bounded disposition |
+| --- | --- |
+| DOS and native roots retain one frontend through nesting | Verify-CommandExitStatus.ps1 RootFrontend cases compare every emitted frontend-owner against outer launcher PID, plus actual MEM/typeahead/return output; close-final-nesting repeats all four routes on the published package. frontend_scope lifetime test checks channels and owner teardown; physical foreground/UI observation is owner-waived. |
+| Keyboard, mouse, focus records | keymouse guest markers and close-focus-recheck prove coordinates/callbacks/modifier release/disable and MEM return. Pointer contract fixture compiles production dispatcher, checks signed coordinates/null release/native errors. Physical clipping/focus observation is waived, not passed. |
+| Text, scrolling, cells, colors, cursor, font and mode | console_frontend_test and console_client_test compare actual Console state/errors; close-final-dos17 covers COMMAND/MEM/EDIT including EDIT-to-MEM. Font queries preserve native dimensions/failure, not a new rasterizer. |
+| Protocol and bounded transfer | Dispatcher tests reject version/generation/sequence/bounds errors. Production client lock permits one synchronous acknowledged request; channel transfer bounds each payload and joins canceled OVERLAPPED I/O before releasing storage. Channel terminal tests cover 85 lifetimes, cancellation, peer EOF, malformed input and worker death. Real RPC identity/capability tests complement substituted local fixtures. |
+| Handoff, input ordering and final output | verify-dos-frontend-handoff-source.ps1 checks six original suspend/drain/reentry/resume orderings; returned-key red/green and real nested typeahead cover actual input. Barrier acknowledgments and real graphics/text-return tests establish drain boundaries; arbitrary untested interleavings are not claimed. |
+| Completion, root/non-root death and isolation | close-contract-final, close-final lifecycle matrix, NOIO root-end probes and native/DOS nonzero batches establish current policy. Completed 29 is retained; unfinished worker loss is 1067; broker loss is 1722. Independent workers and handed-off native targets are not tree-killed. |
+| Display keys and Window rendering | Remain S4 implementation/acceptance, as already assigned; no S2 hotkey or rendered Window success is claimed. Task completion remains BaseSrv-owned and never inferred from I/O EOF. |
+| Production package gates | Final MSVC x86 build, close-final-dos17, nesting, keymouse, video-return and independent WOW3 modal-frontier records; exact six published hashes and clean synchronized main. WOW playability is not claimed. |
+
+Final safe recheck: Ninja -n for console-frontend-test.exe,
+frontend-scope-lifetime-test.exe and console-video-test.exe reports no work.
+All three targets run through the S2 control observer on private desktops with
+20000-ms deadlines; prefix m0-t423-s2-closure- plus target name records exit 0
+and actual PASS output. The six source handoff guards pass again. The pointer
+fixture was rechecked with the waiver record. These are supporting contract
+tests, not substitutes for the already recorded real DOS gates.
+
+S2's bounded conclusion is DOS Console I/O migration with its tested original
+execution/reentry and approved root-session policy. Hidden native Console,
+Window and Window mouse are not delivered here. Automatic sequential admission
+may now proceed to S3 without further owner prompting; T423 remains open for
+the whole objective and final owner acceptance.
