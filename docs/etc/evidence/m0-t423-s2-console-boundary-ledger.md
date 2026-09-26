@@ -45,3 +45,58 @@ composition wholesale. No library import in S2; S4 uses latest nxvm libraries.
 
 No production file, binary, guest or runtime configuration changed in this
 audit. S1 build-only waiver does not apply to S2.
+
+## Original yield/resume contract established
+
+Read cmdexec.c::cmdExec32/cmdCreateProcess, cmdmisc.c::cmdGetNextCmd and
+nt_event.c::nt_block_event_thread/nt_resume_event_thread/nt_process_suspend_event.
+The source order is now guarded by
+tests/observation/verify-dos-frontend-handoff-source.ps1; six assertions passed
+on c39b9ca0c production source. This is a source-order test, not runtime proof.
+
+1. cmdExec32 calls nt_block_event_thread(0) before starting cmdCreateProcess.
+2. Block signals hConsoleSuspend and waits for hConsoleWaitStall. The input
+   thread acknowledges and waits on hConsoleWait; it is not terminated.
+3. Block flushes stream/video output, returns unused hardware and BIOS keys,
+   flushes mouse events and restores original input/output Console modes.
+   Only after this returns may the native thread start its child.
+4. cmdCreateProcess increments original re-entry, creates suspended, releases
+   guest capture, resumes/waits the child, obtains its exit code and decrements
+   original re-entry. No frontend scheduler should replace this ordering.
+5. Meanwhile cmdExec32 calls GetNextVDMCommand with
+   NO_PARENT_TO_WAKE | RETURN_ON_NO_COMMAND. A command sets IsRepeatCall;
+   cmdGetNextCmd later resumes the blocked event path after receiving it.
+   With no command, cmdExec32 returns native completion and resumes DOS itself.
+6. Resume sets DOS Console mode and restores device/timer state before waking
+   the event thread. A native parent can still be alive when nested DOS resumes.
+
+Therefore a frontend lease follows original block/resume, not child process
+exit or a new READY/BUSY classifier. The protocol needs an acknowledged input
+stop plus output/returned-input drain before native execution, and an acquired
+DOS input route before worker input wakeup. It must permit these transitions
+while an outer native child remains alive. Existing task completion continues
+through BaseSrv, never through a frame-channel EOF.
+
+## Input queue and identity review
+
+Current console_compat.c implements VDM prepend in a worker-local list because
+public WriteConsoleInput only appends. Original nt_event consumes that list
+through a separate wait event. Moving public reads alone is insufficient:
+frontend-prefetched records, worker-returned keys and native Console input
+must have a single explicit order at yield. In particular, copying returned
+keys into a worker-only list does not prove a native consumer can read them.
+This is an S2 migration obligation, not a newly proven baseline defect.
+Do not silently flush/discard pending keys to simplify transition.
+
+Existing basesrv transport/service.idl authenticates the process with typed
+process attachments and connection generation; Prepare binds the registered
+worker. Console membership helper accepts pinned authenticated process IDs
+and supplies membership observation only, not identity or reuse authority.
+Reuse this authentication boundary to authorize a frontend/worker association;
+do not trust an inherited environment PID or duplicate Console HANDLE numbers.
+Current IDL has no frontend channel registration: the final association API
+and lifecycle need a separately reviewed finite addition, not task-record policy.
+
+Remaining before production implementation: complete API/handle inventory,
+exact association/transport contract, and queued-key/native handoff proof.
+No S2 runtime pass is claimed by the source guard.
