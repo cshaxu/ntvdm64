@@ -86,6 +86,12 @@ CMD returns 23; unfinished descendants survive root completion; fresh MEM
 prints its actual report. Detailed switches and limits are in the boundary
 ledger's post-result-fix matrix. Physical pointer/focus remains unverified.
 
+Channel terminal-path coverage now adds malformed-request shutdown and a real
+process-death wait: exact error, readiness, actual peer EOF, safe stop/join and
+stable handle count pass twice across 85 cases each. Broker attachment alone
+is substituted. This test-only update does not change the published binaries
+or certify physical pointer/focus behavior.
+
 Detailed runs, failed attempts and artifact identities remain in the linked
 boundary ledger; this status records only the current disposition.
 

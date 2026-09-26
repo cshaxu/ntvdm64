@@ -4394,3 +4394,33 @@ suspended-startup Job and pre-resume rollback; unclaimed reservation rollback;
 explicit management termination; the private Console-query helper's cleanup;
 and the worker's own broker-death failure. They are not a newly authorized
 launcher-death or frontend-loss execution-tree policy.
+
+### Channel terminal paths beyond explicit cancellation
+
+The production channel/dispatcher fixture now adds oversized-request rejection
+and death of a real disposable suspended process to the existing three modes.
+The latter uses a real process wait handle, not a signalled-event substitute.
+The oversized case must return ERROR_INVALID_DATA; process death must return
+ERROR_PROCESS_ABORTED. Both must signal readiness and expose ERROR_BROKEN_PIPE
+with zero bytes to the peer before owner stop. Each channel is subsequently
+stopped/joined normally. Across 85 cases, no owned-handle growth is allowed.
+Only broker attachment is substituted; no original guest or production file
+changes. The suspended child never executes guest or other application code.
+
+x86 /MT compilation succeeds via tests/observation/build-console-channel-lifetime.ps1
+under build/M0-T423/S2/channel-terminal-eof. Fixture SHA-256:
+2B800CC4203D08D43699CE6924A1FCACAD59C871B416364148BE882997816949.
+Two unswitched private-desktop runs, O:/winnt/logs/m0-t423-s2-channel-terminal-eof-a
+and -b (.txt reports and .txt.console.txt actual output), both exit 0 and print
+the 85-case PASS marker. Earlier channel-terminal-paths lacked the explicit
+peer EOF assertion and is not used to claim it. Compiler warnings in included
+production code remain recorded; this is successful compilation, not /WX.
+
+Pointer audit does not introduce speculative cleanup: original nt_mouse.c
+MouseOutOfFocus releases clipping, while original USER kernel focusact.c and
+queue.c clear global clipping during activation. Modern ClipCursor likewise
+documents a shared resource and release responsibility:
+[Microsoft ClipCursor contract](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-clipcursor).
+An unconditional channel-stop release could affect another current user;
+these source observations do not prove physical focus/clip cleanup on modern
+Terminal. That gate stays open. This fixture never clips or moves the pointer.
