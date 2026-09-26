@@ -151,3 +151,60 @@ worker identifier supplies authority. Before implementation, specify root
 frontend lifetime separately from per-command wait lifetime, including root
 exit while original worker remains resident. Broker conveys capabilities only;
 it never transports input/frame payloads.
+
+## Resident worker selection and frontend handoff design
+
+base_service.c::OpenNtBaseServiceCheck first binds authenticated Console
+membership. If the original Console record exists but has no pending original
+GetNextVDMCommand wait, the current binding supplies null Console and original
+CheckDOS chooses a separate session. Otherwise the original Check reply selects
+the resident worker and parent wait. run16::launch_vdm currently only waits
+that parent event in the VDM_PRESENT_AND_READY branch. New frontend registration
+must therefore cover both new-worker Update and this resident-worker Check
+result; startup reservation alone is insufficient.
+
+Required association rules for implementation:
+
+- Existing live root frontend: nested run16 remains a submitting/waiting
+  client. It must not read Console input or replace the root endpoint.
+- Resident worker without live frontend: the newly selected command's launcher
+  may acquire frontend ownership only through the authenticated service result.
+  Worker input/output waits for the new route before consuming the command;
+  no timed polling or replay of the guest command is introduced.
+- Separate original worker/session: it gets its own frontend association;
+  Console membership cannot silently graft it onto an unrelated worker.
+- Root/worker disconnect: revoke route generation and cancel channel waits.
+  Preserve original task/lifetime failure handling; no artificial successful
+  completion on EOF, no reconnect/replay during a live task.
+- Native handoff: stop user input reads, drain acknowledged output, return
+  pending keys with defined ordering, restore modes, then acknowledge release.
+  Original resume reacquires the DOS route before waking the guest input loop.
+
+The registration conveys only verified process/endpoint capabilities; the
+payload channel is direct run16/worker. A copied packet contains version,
+generation, operation, sequence and bounded payload sizes, never Console HANDLEs
+or pointers. Input, stream output, cursor/resize and barriers retain order;
+frame coalescing may not discard any of those operations. Define op-specific
+payload validation and negative tests before connecting an untrusted decoder.
+
+## Compiled-edge audit
+
+The inventory script accepts -Dumpbin with the selected MSVC x86 dumpbin.
+It inspects every selected worker object, including files without lexical
+Console calls (function tables/macros can still create references). It reports
+undefined function symbols and decorated Console imports, excluding ordinary
+data globals. Missing selected objects fail instead of silently reducing scope.
+This distinguishes compiled references from dormant source branches; it still
+does not prove link reachability or runtime execution. Objects come from the
+recorded S1 formal graph, not a fresh S2 production build.
+
+Direct object inspection confirms nt_graph's WriteConsoleA, scroll/fill/cursor
+imports. The complete script run with MSVC 14.43.34808 Hostx64/x86 dumpbin
+passed and reported 73 compiled Console function references, including
+function-table references in cmddisp.c and nt_reset.c missed by the lexical
+call pattern. Assertions confirmed both __imp__WriteConsoleA@20 and
+_ReadConsoleInputExW@20 were present. Direct inspection also confirms
+nt_fulsc's ReadConsoleOutputA. nt_fulsc's lexical WriteConsoleOutput
+occurrences are not corresponding imports in this selected object. Original
+shared-text invalidation is handled by console_compat instead. Do not implement
+all lexical occurrences as separate protocol operations merely to check boxes.
