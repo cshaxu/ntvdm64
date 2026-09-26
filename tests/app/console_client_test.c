@@ -576,6 +576,17 @@ int main(int argc,char **argv)
         surface=CreateConsoleScreenBuffer(GENERIC_READ|GENERIC_WRITE,FILE_SHARE_READ|FILE_SHARE_WRITE,
             NULL,CONSOLE_GRAPHICS_BUFFER,&graphics);
         CHECK(surface!=INVALID_HANDLE_VALUE && graphics.hMutex && graphics.lpBitMap);
+        /* Original SrvShowConsoleCursor accepts graphics output too. Keep
+         * this bounded: the original show-until-nonnegative loop would hang. */
+        CHECK(ShowConsoleCursor(surface,FALSE)==-1);
+        CHECK(ShowConsoleCursor(surface,TRUE)==0);
+        CHECK(ShowConsoleCursor(surface,FALSE)==-1);
+        CHECK(ShowConsoleCursor(local,TRUE)==1); /* independent text counter */
+        CHECK(ShowConsoleCursor(frontend.input,TRUE)==-1);
+        CHECK(ShowConsoleCursor(local,FALSE)==0); /* rejected input changed nothing */
+        CHECK(ShowConsoleCursor(surface,FALSE)==-2);
+        CHECK(ShowConsoleCursor(surface,TRUE)==-1);
+        CHECK(ShowConsoleCursor(surface,TRUE)==0);
         CHECK(SetConsoleActiveScreenBuffer(surface));
         palette=CreatePalette((LOGPALETTE *)&logical);CHECK(palette);
         CHECK(ntvdm_console_graphics_palette(surface,palette,SYSPAL_STATIC)==1);
@@ -597,10 +608,18 @@ int main(int argc,char **argv)
         CHECK(SetConsoleActiveScreenBuffer(surface));
         CHECK(frontend.video.pixels && frontend.video.pixels[15]==17);
         CHECK(SetConsoleActiveScreenBuffer(GetStdHandle(STD_OUTPUT_HANDLE)));
+        CHECK(ShowConsoleCursor(surface,FALSE)==-1);
         CHECK(CloseHandle(surface));
+        CHECK(ShowConsoleCursor(surface,TRUE)==-1); /* retired output */
         CHECK(WaitForSingleObject(graphics.hMutex,0)==WAIT_OBJECT_0);
         CHECK(ReleaseMutex(graphics.hMutex));CHECK(CloseHandle(graphics.hMutex));
         CHECK(GetPaletteEntries(replacement,0,1,logical.entries)==0);
+        surface=CreateConsoleScreenBuffer(GENERIC_READ|GENERIC_WRITE,FILE_SHARE_READ|FILE_SHARE_WRITE,
+            NULL,CONSOLE_GRAPHICS_BUFFER,&graphics);
+        CHECK(surface!=INVALID_HANDLE_VALUE);
+        CHECK(ShowConsoleCursor(surface,FALSE)==-1); /* fresh surface reset */
+        CHECK(ShowConsoleCursor(surface,TRUE)==0);
+        CHECK(CloseHandle(surface));CHECK(CloseHandle(graphics.hMutex));
     }
     SetEvent(stop);
     CHECK(TerminateProcess(frontend_process,23));

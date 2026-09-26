@@ -16,6 +16,7 @@ struct ntvdm_console_graphics {
     BYTE *snapshot;
     DWORD bytes,width,height;
     BOOL active;
+    int cursor_count;
 };
 
 ntvdm_console_graphics *ntvdm_console_graphics_create(void)
@@ -35,6 +36,23 @@ static void close_bitmap(ntvdm_console_graphics *state)
     if (state->identity) CloseHandle(state->identity);
     if (state->snapshot) HeapFree(GetProcessHeap(),0,state->snapshot);
     state->identity=NULL;state->snapshot=NULL;state->bytes=0;state->active=FALSE;
+    state->cursor_count=0;
+}
+
+BOOL ntvdm_console_graphics_cursor(HANDLE output,BOOL show,int *count)
+{
+    ntvdm_console_graphics *state=ntvdm_console_graphics_context();
+    BOOL owned=FALSE;
+    if (!state) return FALSE;
+    AcquireSRWLockExclusive(&state->lock);
+    if (output && output==state->identity) {
+        /* Original ntcon/private.c SrvShowConsoleCursor keeps this counter
+         * on the screen buffer, separate from its text insertion cursor. */
+        *count=show ? ++state->cursor_count : --state->cursor_count;
+        owned=TRUE;
+    }
+    ReleaseSRWLockExclusive(&state->lock);
+    return owned;
 }
 
 void ntvdm_console_graphics_destroy(ntvdm_console_graphics *state)

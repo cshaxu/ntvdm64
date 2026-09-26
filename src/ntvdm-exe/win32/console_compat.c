@@ -357,26 +357,6 @@ BOOL WINAPI WriteConsoleInputVDMW(HANDLE input, PINPUT_RECORD records, DWORD cou
     return ntvdm_console_prepend_keys(input,records,count,written);
 }
 
-/* DIVERGENCE(ADAPTER-WIN32-050): OpenNT Console Server maintained this
- * count for the mouse pointer on the active screen buffer.  The public
- * Console API exposes only the *text insertion cursor*, so mapping this call
- * to SetConsoleCursorInfo corrupts the guest-visible text cursor.  The
- * selected standalone worker owns one active Console output surface; retain
- * the source-facing counter locally and deliberately leave the host pointer
- * under conhost/Terminal ownership. */
-static volatile LONG mvdm_pointer_display_count;
-
-int WINAPI ShowConsoleCursor(HANDLE output, BOOL show)
-{
-    DWORD mode;
-
-    /* Preserve the original output-handle validation rather than treating a
-     * pointer-visibility request as unconditional success. */
-    if (!GetConsoleMode(output, &mode)) return -1;
-    return (int)(show ? InterlockedIncrement(&mvdm_pointer_display_count) :
-        InterlockedDecrement(&mvdm_pointer_display_count));
-}
-
 BOOL WINAPI VDMConsoleOperation(DWORD operation, LPVOID data)
 {
     HWND window;

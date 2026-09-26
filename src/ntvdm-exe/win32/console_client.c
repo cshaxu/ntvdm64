@@ -17,6 +17,21 @@ typedef struct console_client {
     ntvdm_console_graphics *graphics;
 } console_client;
 
+/* DIVERGENCE(ADAPTER-WIN32-050): local mouse visibility bookkeeping only;
+ * conhost/Terminal still owns the native pointer, not the text caret. */
+static volatile LONG mvdm_pointer_display_count;
+int WINAPI ShowConsoleCursor(HANDLE output, BOOL show)
+{
+    CONSOLE_SCREEN_BUFFER_INFO info;
+    int count;
+    if (ntvdm_console_graphics_cursor(output,show,&count)) return count;
+    /* GetConsoleMode also accepts CONIN$, and rejects our graphics backing.
+     * Original SrvShowConsoleCursor accepts output handles, never input. */
+    if (!GetConsoleScreenBufferInfo(output, &info)) return -1;
+    return (int)(show ? InterlockedIncrement(&mvdm_pointer_display_count) :
+        InterlockedDecrement(&mvdm_pointer_display_count));
+}
+
 ntvdm_console_graphics *ntvdm_console_graphics_context(void)
 {
     session *owner=session_thread_current();

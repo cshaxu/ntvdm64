@@ -3476,3 +3476,68 @@ build/M0-T423/S2/final-production-publication.json supersedes the first
 publication manifest without overwriting it. The prior tested S2 set is also
 retained under build/M0-T423/S2/pre-final-format-package. Governance and
 staged-diff checks pass; no binary/test artifact is included in the Git diff.
+
+### Graphics output mouse-counter contract repair
+
+Source boundary: OpenNT windows/core/ntcon/server/private.c
+SrvShowConsoleCursor explicitly accepts CONSOLE_OUTPUT_HANDLE or
+CONSOLE_GRAPHICS_OUTPUT_HANDLE, not input handles. Its counter is on the
+screen buffer. Original nt_mouse.c MouseDisplay loops until the returned
+count is nonnegative. The existing local wrapper instead validated with
+GetConsoleMode: that accepts input handles and rejects S2's local graphics
+backing. It therefore returned -1 indefinitely for a valid graphics surface.
+This is a binding defect, not an original guest or CCPU defect. The loop risk
+is source-proven; no claim is made that a real DOS program hung on that path.
+
+The existing body was first relocated without behavioral changes from
+console_compat.c into console_client.c so the production client fixture could
+call the actual exported binding. A bounded assertion (no unbounded loop)
+using production CreateConsoleScreenBuffer fails at ShowConsoleCursor(TRUE):
+m0-t423-s2-graphics-cursor-red.txt exits 1, console line FAIL 582 error=6.
+The fixture's surviving readiness peer was explicitly cleaned up.
+
+The same-shaped function now accepts its session's live graphics backing and
+updates that backing's separate counter under its existing lock. Retirement
+resets the count. Native text-output validation uses screen-buffer info rather
+than GetConsoleMode, rejecting CONIN$ without altering either counter. The
+single-text-surface count remains unchanged. This is the already registered
+ADAPTER-WIN32-050 facade: private ntcon/CSR cannot be composed; original caller,
+counter ordering and failure remain, no new mirror hook or guest mutation.
+Physical pointer ownership stays with conhost/Terminal and is not certified.
+
+Three private-desktop runs m0-t423-s2-graphics-cursor-green-1/2/3 pass graphics
+hide/show balance, independent text count, input rejection without count
+mutation, repeated negative counts and closed-surface rejection. No native
+cursor movement, clipping, hiding or user-desktop switch occurs. Formal x86
+ntvdm and dependent DLL rebuild succeeds. Production regression remains a
+separate gate, not replaced by these focused checks.
+
+The final fixture additionally closes a graphics surface with a negative
+count, recreates it and proves a fresh zero-based count. This passes under
+m0-t423-s2-graphics-cursor-reset. The formal ntvdm map selects
+softpc-win32-bindings:console_client.obj for ShowConsoleCursor and
+console_graphics.obj for its graphics counter; no test substitute is linked.
+The old host-input fixture generator omitted console_graphics/console_bitmap
+after adding console_client. Its graph now links those production objects;
+the rebuilt no-frontend contract passes on the private desktop under
+m0-t423-s2-cursor-host-input, including text-caret visibility preservation.
+
+Production gates pass with m0-t423-s2-cursor-dos17 (17 cases), cursor-nesting
+(four routes), cursor-keymouse, cursor-video (copied pixels/palette and text
+retirement), cursor-video-standard (uninstrumented final text), and cursor-wow
+(three independent approved headless live-worker/known-modal comparisons).
+No physical mouse visibility or gameplay acceptance is inferred.
+
+The coherent six-file publication uses
+build/M0-T423/S2/cursor-production-publication.json; every destination hash
+matches its tested source. The preceding production package remains under
+build/M0-T423/S2/cursor-pre-fix-package. Unchanged run16, basesrv and dtmgr
+hashes match the previous table. Updated hashes:
+
+- ntvdm.exe: C1255C30870FE9BD319FED8DBFD2744972221B5F9098825816CBD01E0C94100B
+- WOW32.DLL: B0D5F1C8791F3683FD06B5118DD2203E1526900F2AD7FC3104508D947A92E74D
+- VDMREDIR.DLL: 51DFFA2B1CDB60C578B610F7F6C4D439C8490A52B990C7F83D89E0E4EE7A38F8
+
+This is a bounded S2 repair delivery; no mirror, guest, protocol version or
+configuration changes, and no S2/T closure. Remaining owner/failure gates stay
+explicit in Status. Governance and diff checks pass before commit.

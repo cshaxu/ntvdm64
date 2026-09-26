@@ -70,6 +70,13 @@ boundary ledger; this status records only the current disposition.
   original Console-selected layout. Native historical Console queries fail on
   this host; a disposable thread-local experiment proves the distinction.
   Its ownership decision remains open; no speculative replacement was added.
+- Follow-up fixes a proved graphics-output cursor-counter rejection: the old
+  GetConsoleMode validation returned error 6 for locally backed graphics,
+  preventing the original show loop from reaching a nonnegative count. Native
+  red/green and recreation coverage pass. The formal x86 build, DOS17,
+  nesting, keymouse, real graphics/text-return and headless WOW regressions
+  pass. The coherent six-file repair is published at O:/winnt; the preceding
+  production package remains recoverable under build.
 - Owner waives manual/foreground/playability acceptance for WINMINE, SOL and
   WRITE in T423 only. Separate headless launch/liveness/fault comparisons remain
   required. Their known NETWORK.DRV modals are recorded baseline frontiers,
