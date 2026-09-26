@@ -4692,3 +4692,43 @@ COMSPEC. The cause of this interactive batch stall is not yet established;
 it is an open S2 integration investigation, not an original-guest limitation
 or an accepted exclusion. Keep the combined completion/interaction checklist
 open until that contrast and remaining gates have their proper disposition.
+
+### Resolved batch-entry contrast and nested nonzero return
+
+The preceding timeout is now attributed without production changes. Prefix
+m0-t423-s2-batch-stall-dialog reproduces the same typed tests\S2NZ.BAT.
+Live CIM identities show root run16 -> ntvdm -> inner run16 TESTS\S2NZ.BAT
+-> native cmd.exe /c TESTS\S2NZ.BAT. The existing read-only
+build/M0-T423/S2/worker-window-snapshot.exe was called with exact CMD PID 14576
+and desktop NTVDMConsoleTest-2436, named for the outer observer PID. It found
+a visible #32770 "Unsupported 16-Bit Application" dialog naming
+O:\winnt\tests\S2EXIT7.COM and stating incompatibility with 64-bit Windows.
+Captured text: O:/winnt/logs/m0-t423-s2-batch-stall-dialog-windows.txt.
+No foreground activation, desktop switch or dialog interaction occurred.
+After timeout, only identified test-owned CMD/launcher/broker processes were
+ended. The first experiment's surviving native CMD was also identified and
+cleaned, correcting that experiment's incomplete test cleanup. Retained native
+target lifetime itself is not a product leak claim.
+
+Source agrees: cmdexec.c cmdExec's AH-selected COMSPEC path delegates to the
+native command processor; command_process_compat.c routes the simple tail
+through run16; run16 main.c's non-image branch preserves COMSPEC /c. Native
+CMD cannot directly CreateProcess this DOS COM on modern Win64. The proposal
+already requires explicit run16 when entering DOS from native CMD. This is a
+test-route error against that contract, not worker completion deadlock, an
+original-guest bug or a newly waived requirement. No shell parser, process
+hook or mirror change is added to hide that unavailable OS facility.
+
+Added dos-nonzero-native.bat and -NativeBatch to the existing runner. Typed
+into interactive DOS COMMAND, the variant executes under native CMD and uses
+explicit run16 for both test COM invocations and MEM. CMD checks exact 7/99;
+actual guest markers and MEM output are mandatory, then outer COMMAND exits 1.
+Prefix m0-t423-s2-nonzero-native-final passes. Default DOS COMMAND /c mode is
+rerun as m0-t423-s2-nonzero-dos-recheck and passes with batch completion 0.
+Both use the unchanged six-file d0f856a50 production manifest. These prove
+nonzero DOS completion and continued execution through native/DOS re-entry.
+
+Together with close-contract-final's completed-worker-exit and
+unfinished-worker-exit cases (retained 29 versus failure 1067), they cover the
+proposal's nonzero/ordered-close row, now checked. Broader topology, I/O and
+physical-input rows are not implicitly closed.

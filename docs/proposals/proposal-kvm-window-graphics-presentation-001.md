@@ -287,8 +287,10 @@ KILL_ON_JOB_CLOSE。启动尚未交接的资源仍允许原有回滚。
       target 不被主动终止；未完成内层任务明确失败，不能无限等待。
 - [x] 非根 launcher 异常结束：已交接 native/DOS 继续，父方仅观察直接
       子进程结果；不存在递归 process-tree kill。
-- [ ] DOS 非零/错误完成只完成该 record；根仍在则 worker 不因结果非零
+- [x] DOS 非零/错误完成只完成该 record；根仍在则 worker 不因结果非零
       关闭。完成先于 worker 关闭时保留原始结果，反向顺序明确失败。
+      见[非零退出与嵌套验收](../etc/evidence/m0-t423-s2-console-boundary-ledger.md#resolved-batch-entry-contrast-and-nested-nonzero-return)
+      及前述原始 ExitVDM/进程清理的完成顺序测试。
 - [x] 普通传输错误不能冒充根进程死亡；身份、代次、会话隔离不改变。
 - [x] 真实 Console close、原始关闭回调投递与阻塞回调的有界收尾已验证；
       见[关闭验收复核](../etc/evidence/m0-t423-s2-console-boundary-ledger.md#published-close-package-focus-record-recheck)。

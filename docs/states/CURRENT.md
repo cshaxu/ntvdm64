@@ -96,11 +96,14 @@ non-pass outcomes. S2 remains open until its complete source/runtime and
 physical-input disposition is resolved; do not re-admit S3 yet. Hidden native
 Console is S3, display/Window S4, Window mouse S5 and final owner audit S6.
 
-A new real-guest test proves DOS exits 7 and 99 preserve ERRORLEVEL and allow
-the same COMMAND /c batch to run MEM afterward. Its interactive-BAT counterpart
-instead stalled in a native inner run16; the cause remains under S2 investigation.
-See the ledger's nonzero-completion contrast. This is an additional open
-integration check, not a physical-desktop blocker or an accepted guest limit.
+A real-guest test proves DOS exits 7 and 99 preserve ERRORLEVEL and allow
+subsequent MEM in both DOS COMMAND /c and interactive COMMAND -> native CMD
+batch -> explicit run16 routes. The earlier native-BAT timeout was an actual
+Windows Unsupported 16-Bit Application modal: that test invoked a COM directly
+from modern CMD, bypassing run16. Read-only private-desktop evidence identifies
+the refused image; the corrected nested route passes without production changes.
+See the ledger's resolved batch-entry contrast; no host or guest workaround
+and no implicit native-CMD DOS interception is claimed.
 
 ## Current Technical Baseline
 
