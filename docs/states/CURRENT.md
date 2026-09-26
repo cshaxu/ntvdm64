@@ -134,9 +134,13 @@ display/Window remains S4, Window mouse S5, and final owner audit S6.
 The newly covered DOS-root -> native CMD -> nested DOS middle-pair failure
 does not pass: after either middle target or launcher loss, the nested DOS
 exits normally but outer DOS never resumes MEM and root run16 times out.
-The identical no-fault control passes. Trace narrows the next investigation
-to early re-entry decrement followed by the original BaseSrv wait reset;
-that causal candidate needs a deterministic service test before any repair.
+The identical no-fault control passes. Deterministic compiled-service tests
+now reproduce the ordering defect: decrement before RETURN_ON_NO_COMMAND
+leaves an unsignalled wait (258); decrement after that request signals it (0).
+Both complete the same nested task with 29, without sleeps. The existing four
+completed/unfinished-pair controls still pass. Repair remains pending: preserve
+the original shell-out startup and nested wait contract, not a blanket removal
+of event reset or a re-entry-count-only shortcut.
 No production or guest changes were made and no S2 closure is authorized by
 the other passing topology cases.
 

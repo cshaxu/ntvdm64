@@ -4015,3 +4015,56 @@ Pointer audit also confirms that nt_mouse.c MouseHide/MovePointerToWindowCentre
 and MouseInFocus/MouseOutOfFocus can clip/warp outside MONITOR-only branches.
 The physical pointer acceptance item cannot be discarded as dormant hardware
 fullscreen. No desktop focus or pointer mutation was performed in this work.
+
+### Deterministic re-entry notification ordering reproducer
+
+The preceding causal candidate is now reproduced without scheduler timing or
+guest changes. tests/adapter-basesrv/base_service_reservation_test.c adds
+--reenter-before-return and --reenter-after-return. Both consume the same
+second DOS command through original Check/Update/Get, increment the native
+re-entry count, complete that command with 29 using RETURN_ON_NO_COMMAND,
+and assert the parent completion event and collected result. The only changed
+ordering is whether DECREMENT_REENTER_COUNT occurs before or after that Get.
+The test uses compiled original BaseSrv through its production service adapter;
+Console membership is the existing fixture substitute. It is not a guest or
+RPC-transport acceptance test.
+
+Build: MSVC Win32/x86 /MT, Ninja basesrv-service-reservation-test.exe in
+build/M0-T423/S1/restart-formal-x86. Executable SHA-256:
+8E57052F78039486CB873D128A6C396B477EAE844A74F704EE8BA7E639F19467.
+Run with the S2 control-observer, MVDM_OBSERVER_PRIVATE_DESKTOP=1,
+O:/winnt package root and --observation-timeout-ms 20000, followed by the
+mode. Reports and captured Console text are in O:/winnt/logs:
+
+| Prefix | Observed assertion |
+| --- | --- |
+| m0-t423-s2-reenter-before-return | RED: completed=29, wait=258 (WAIT_TIMEOUT), fixture exits 1 |
+| m0-t423-s2-reenter-after-return | GREEN: completed=29, wait=0 (WAIT_OBJECT_0), fixture exits 0 |
+| m0-t423-s2-reenter-control-launcher-completed-rundown | PASS: collected normal completion survives late launcher loss |
+| m0-t423-s2-reenter-control-launcher-completed-uncollected | PASS: uncollected normal completion survives late launcher loss |
+| m0-t423-s2-reenter-control-launcher-pair-loss | PASS: unfinished pair cleanup |
+| m0-t423-s2-reenter-control-launcher-pair-exit-watch | PASS: unfinished pair cleanup before RPC rundown |
+
+Both ordering modes explicitly terminate/join their fixture-owned children,
+drain connections and require an empty service before checking the wake result.
+All observers exited; the red test is not a stranded process or observation
+timeout. No physical desktop focus was changed. This is a checked-in known
+failing regression test, not a functionality pass or repaired production P.
+
+Interpretation: early native completion followed by first Get clears the only
+notification needed for the original client wait/retry. This matches the real
+DOS/native/DOS failure trace. The relevant original wait is a NotificationEvent,
+not an auto-reset event: simply deleting NtResetEvent would retain stale signals
+and is not a justified repair. Also cmdExec32 creates its native worker thread
+before that thread increments nReEntrancy, then makes a
+NO_PARENT_TO_WAKE|RETURN_ON_NO_COMMAND request. Treating zero re-entry count
+alone as immediate completion could race that startup. A repair must account
+for these original caller distinctions and the nested-count case; the test does
+not authorize a second scheduler, timeout-as-success, or guest alteration.
+
+No production source, guest/configuration or O:/winnt six-binary package changed.
+S2 remains open. Next: select the smallest source-owned completion binding,
+verify early/late completion plus startup/pending-command/nested controls, then
+repeat the real failing guest topology and every production P gate before
+publication. The owner-approved T423 headless-only WOW3 acceptance remains in
+effect and does not waive DOS/native lifecycle correctness.
