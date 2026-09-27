@@ -4,28 +4,28 @@
 
 ## Active Packet
 
-**Active: M0 T423 S7**
+**Active: M0 T423 S8**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T423 S7, Ordinary Mode. |
+| Identifier Mode | M0 T423 S8, Ordinary Mode. |
 | Candidate Proposal | [Console/Window frontend](../proposals/proposal-kvm-window-graphics-presentation-001.md). |
-| Admission And Approval | Owner authorized automatic sequential S admission. S6 P1 f0f671e5e is pushed, published and clean/synchronized. Admit the approved Window mouse stage; shared libraries remain unchanged. |
-| Objective | Complete frontend-owned Window mouse delivery to original DOS text/graphics input and native hidden-Console input, preserving display policy and execution ownership; include owner-approved product/component rename to ntkvm.exe/ntkvm-exe and ntsrv.exe/ntsrv-exe. |
-| Non-goals | No guest/library changes, new driver/scheduler, pause/resume, launcher UI, speculative capacity extension or automatic T closure. |
-| Reference Baseline | S6 P1 f0f671e5e and its verified seven-file O:/winnt publication; Console/Window DOS17, nested chains, fault matrices, graphics return and inherited WOW frontiers. |
-| Files And ABI Surface | ntkvm-exe mouse conversion and existing copied input queues; focused tests and formal x86 graph, ntkvm/ntsrv component and executable references. Preserve original guest input and existing authenticated execution protocols. |
+| Admission And Approval | Owner approved S8 GUI launch/wait in the candidate and automatic sequential admission. S7 P1 99276d68d is pushed, published, clean and synchronized; admit S8 after S7 closure review. |
+| Objective | Complete Win16/Win32 GUI asynchronous launch and explicit synchronous wait, with reliable launch handoff/failure results and retained text/nested execution semantics. |
+| Non-goals | No guest/library changes, ConPTY migration, path-search repair, background waiter, new scheduler, frontend execution policy or automatic T closure. |
+| Reference Baseline | S7 P1 99276d68d and its verified seven-file O:/winnt publication; component17, Console/Window DOS17, two twelve-target chains, both fault matrices, mouse, graphics return and separate WOW frontiers. |
+| Files And ABI Surface | run16-exe launch/wait and existing BaseClient/BaseSrv/WOW notification boundaries; focused native/guest callers and acceptance tests. Audit original ownership before selecting any new binding. |
 | Applicable Rules | EXECUTION, source policy, original mirror/ABI, output hygiene and the owner-approved independent frontend boundary. |
-| Verification | Source-first mouse contract audit; coordinate/delta/button/wheel/negative/release tests, real Window -> frontend -> DOS/native consumers, switching/nesting and Console mouse non-regression. Every production P retains full build/regression/publication gates. |
-| Expected Markers | Movement never fabricates a press. Delivered button releases survive focus loss, source retirement and display/consumer handoff. Mouse coordinates follow the displayed frame and target contract; inactive Console input stays isolated. |
-| Asset Needs | Read-only original MVDM and approved imported library; immutable guest plus authored probes. New directories only under build/M0-T423/S7. No owner-desktop manipulation; physical clipping observation owner-waived with source/unit proof. |
+| Verification | Source audit of interactive/batch/single-command contracts, actual Win16 loading acknowledgement and rundown; real sync/async GUI callers, error/fault/target survival and nested result tests. Preserve all production-P build/runtime/publication gates. |
+| Expected Markers | Async returns a proven launch result while the target remains alive; explicit wait returns its original completion result. Prompt resumes, failed startup is reported, accepted targets survive launcher exit, text I/O ownership and nested completion remain unchanged. |
+| Asset Needs | Read-only original OpenNT shell/Base/WOW source, immutable WINMINE/SOL/WRITE and authored GUI probes. New directories only under build/M0-T423/S8. No owner-desktop manipulation. |
 | Reporting Requirements | Exact tested source/package/configuration, retained failure evidence and source-first ownership disposition; no compile-only or research-only runtime claims. |
-| Stop Conditions | Guest mutation, unauthenticated ownership, unapproved scheduling or proven product regression. |
-| Exit Criteria | DOS text/graphics and native Window mouse paths implemented and verified, including release and handoff; existing Console behavior retained; coherent seven-file publication and clean pushed P. |
-| Original Owner Request | Preserve old work; move visible/hidden Console/helper and future Window/display to frontend.exe; run16 classifies, submits/starts and waits. Complete S4, publish at O:/winnt, then automatically admit S5 and later S tasks. |
-| Similar-Issue Sweep | Scaling, nonzero viewport origin, 43/50 rows, button-only events, relative motion, wheels, lost focus/capture, retirement, switches, independent sessions and nested DOS/native handoff. |
+| Stop Conditions | Guest mutation, guessed shell context/Win16 completion, unauthenticated ownership, unapproved scheduling or proven product regression. |
+| Exit Criteria | All S8 proposal checklist rows evidenced: specified sync/async contract, reliable handoff/failure, accepted-target lifetime, native/WOW real tests, retained regression, coherent publication and clean pushed delivery. |
+| Original Owner Request | Automatically admit stages in order; implement the approved GUI async/explicit-wait stage after S7 while preserving original COMMAND/BaseSrv/WOW policy and independent ntkvm frontend ownership. |
+| Similar-Issue Sweep | Direct/nested, interactive/batch/CMD-c, GUI/text classification, WOW creation/reuse, pending reservations, launch failure, caller/broker/worker death, task versus worker completion and immediate target exit. |
 
-## S7 Verification Progress
+## S7 Closure Record
 
 Owner addition dated 2026-09-27: rename frontend.exe/frontend-exe to
 ntkvm.exe/ntkvm-exe and basesrv.exe/basesrv-exe to ntsrv.exe/ntsrv-exe within
@@ -35,9 +35,8 @@ library bytes and guest. The old-name seven-file mouse checkpoint has been
 published and its formal-path tests retained; it is not renamed-package
 acceptance. Build/startup/process-identity/test/package references have been
 updated and the verified new-name package is now coherently published with a
-recoverable old-name backup. Publication verification is complete; S7 P1
-is being finalized through reviewed commit/push, before sequential closure
-and admission of the next stage.
+recoverable old-name backup. S7 P1 99276d68d is committed and pushed to main;
+closure review confirmed clean synchronization and all seven live hashes.
 
 The [S7 ledger](../etc/evidence/m0-t423-s7-window-mouse.md) records real guest
 mouse count, text/graphics painting, relative input/callback and retirement
@@ -49,9 +48,14 @@ backup and unchanged configuration. It passed component17, Console/Window
 DOS17, both twelve-target chains, both five-case fault matrices, real DOS
 mouse positive/negative cases, graphics return and inherited WOW frontiers.
 Published Console17, Window MEM/nested MEM/EDIT and separate WOW frontiers
-also passed; all seven live hashes match. S7 P1 delivery is ready for reviewed
-commit/push. S7 remains active for its final closure/admission governance.
-Shared libraries and guest media are unchanged.
+also passed. S7 is closed at its admitted mouse/naming scope. Shared libraries
+and guest media are unchanged. Physical focus/capture remains owner-waived,
+and SOL/WRITE retain their known OOM frontier, not usability acceptance.
+
+## S8 Verification Progress
+
+Admitted for source-first GUI launch/wait audit. No S8 production changes or
+acceptance results yet; the fully tested S7 package remains the live baseline.
 
 ## Current Technical Baseline
 
@@ -68,9 +72,8 @@ is preserved in [the status archive](../etc/evidence/m0-t423-restart-prior-statu
 
 ## Remaining admitted sequence
 
-S7 mouse and naming remains the only active packet. After its verified,
-published and pushed closure: S8 GUI launch/wait semantics, S9 ConPTY
-migration, then S10 minimization and full closure audit. Automatic sequential
+S8 GUI launch/wait is the only active packet, followed by S9 ConPTY migration
+and S10 minimization/full closure audit. Automatic sequential
 admission is authorized; final T closure requires owner acceptance.
 
 Physical focus/clipping observation is owner-waived with source/unit evidence;
@@ -104,8 +107,8 @@ Delivered Console/Window display; [S6 ledger](../etc/evidence/m0-t423-s6-window-
 
 ## Recent M0 Closures
 
-T422 remains owner-closed. T423 S6 P1 f0f671e5e is the last closed
-subtask; S7 mouse and naming delivery remains open. Prior closure records
+T422 remains owner-closed. T423 S7 P1 99276d68d is the last closed
+subtask; S8 GUI launch/wait is admitted. Prior closure records
 are preserved in the indexed status archive above.
 
 ## Recent Governance

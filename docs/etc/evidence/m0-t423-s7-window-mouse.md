@@ -1178,3 +1178,13 @@ included without implementing those later stages. P1 is the production delivery
 of S7 mouse plus naming; S7 remains the active packet until sequential closure
 and next-stage admission governance is recorded. T423 and the full goal remain
 open; physical focus/capture observation remains explicitly owner-waived.
+
+### S7 closure registration
+
+P1 99276d68d is pushed to main. Closure review on 2026-09-27 confirmed
+an empty git status, HEAD/origin-main distance 0/0 and the same seven live
+hashes in O:/winnt. The admitted mouse/naming exit criteria are met by the
+specific evidence above; owner-waived physical focus/capture is not counted
+as observed. S7 closes and S8 GUI launch/wait is admitted under the owner's
+standing sequential authority. T423 remains open for S8, S9 and S10 plus
+owner final acceptance. This registration changes documentation only.
