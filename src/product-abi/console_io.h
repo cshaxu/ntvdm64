@@ -5,7 +5,7 @@
 
 /* Direct worker/frontend protocol; no pointers or native resource identities.
  * Local x86 peers are authenticated by the BaseSrv channel attachment. */
-#define CONSOLE_IO_VERSION 11u
+#define CONSOLE_IO_VERSION 12u
 /* One-hop worker -> launcher stream routing, not an authorization token.
  * Versioned name; three low bits designate worker-local interactive endpoints.
  * File/pipe handles remain actual inherited resources. Consume before launch. */
@@ -65,7 +65,8 @@ enum console_io_operation {
 enum console_io_window_query {
     CONSOLE_WINDOW_ICONIC=1,
     CONSOLE_WINDOW_CLIENT_RECT,
-    CONSOLE_WINDOW_CLIENT_TO_SCREEN
+    CONSOLE_WINDOW_CLIENT_TO_SCREEN,
+    CONSOLE_WINDOW_TEXT_FRAME_REQUIRED
 };
 typedef struct console_io_state {
     int32_t x,y,width,height,left,top,right,bottom,max_width,max_height;

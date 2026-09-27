@@ -225,3 +225,20 @@ DWORD run16_native_backend_members(run16_native_backend *backend,DWORD *members)
     if(!error)*members=reply.count;
     return error;
 }
+
+DWORD run16_native_backend_input(run16_native_backend *backend,const INPUT_RECORD *records,DWORD count)
+{
+    DWORD offset=0;
+    if(!backend || (!records && count))return ERROR_INVALID_PARAMETER;
+    while(offset<count) {
+        DWORD batch=min(count-offset,RUN16_NATIVE_HOST_INPUTS),error;
+        run16_native_host_request request={RUN16_NATIVE_HOST_VERSION,RUN16_NATIVE_INPUT,0,0,0};
+        run16_native_host_reply reply;
+        request.bytes=batch*sizeof(*records);
+        error=run16_native_backend_call(backend,&request,records+offset,&reply,NULL,0);
+        if(error || reply.status)return error ? error : reply.status;
+        if(!reply.count || reply.count>batch)return ERROR_INVALID_DATA;
+        offset+=reply.count;
+    }
+    return ERROR_SUCCESS;
+}

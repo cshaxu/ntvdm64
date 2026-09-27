@@ -9,6 +9,7 @@ DWORD run16_native_backend_open_cancel(PCWSTR image,HANDLE stop,run16_native_bac
 DWORD run16_native_backend_call(run16_native_backend *,const run16_native_host_request *,
     const void *,run16_native_host_reply *,void *,DWORD);
 DWORD run16_native_backend_launch(run16_native_backend *,const run16_native_start *,HANDLE *);
+DWORD run16_native_backend_input(run16_native_backend *,const INPUT_RECORD *,DWORD);
 /* Snapshot of attached users, not execution descendants or a completion code.
  * On failure leave the output untouched; never infer an empty session. */
 DWORD run16_native_backend_members(run16_native_backend *,DWORD *);

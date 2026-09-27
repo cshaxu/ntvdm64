@@ -14,6 +14,33 @@ Source-recovery rationale and red/green evidence are recorded in the
 
 ## Registered divergences
 
+ADAPTER-SOFTPC-KEYBOARD-ORIGIN (`mvdm_keyboard_history.c` and its header)
+is the S6 pending keyboard metadata carrier. It assigns nonzero raw-record
+origins and maps selected pending origins back to the original 100-record
+history's ages; it never stores a second KEY_EVENT_RECORD ring, creates input,
+or changes device translation. State and locking belong to the original
+keyboard owner. The source-first exception and metadata transition obligations
+are in the [S6 ledger](../../../docs/etc/evidence/m0-t423-s6-window-display.md#bounded-keyboard-origin-carrier-selection).
+The formal x86 worker candidate now selects this carrier through DIV-317,
+alongside `keyboard-origin-test.exe`. Original metadata lifecycle, negative
+and real-program verification are still open; linkage and unit success are
+not keyboard handoff restoration or a delivered capability.
+
+The S6 copied text-state reader (`mvdm_softpc_text_video.c` and its header)
+is recovered from project reference 286d54a306bcb8e991891fae849b79db540e897a.
+It reads the original EGA plane-2 font banks and PCDisplay cursor/extent
+fields using their original headers. Original `ega_vide.c::load_ega_fonts`
+owns bank order and 32-byte glyph slots; this reader selects no font and
+modifies no machine state. The standalone frontend cannot dereference those
+worker-local globals, so only a bounded copy may leave the update owner.
+The reader itself changes no original algorithm or shared library. The
+registered nt_graph.c DIV-314 update hook now calls the worker-local copied
+publisher, with original resolved palette and STREAM_IO transition binding.
+Integration and the late-paint handoff regression are tracked in the
+[S6 ledger](../../../docs/etc/evidence/m0-t423-s6-window-display.md).
+`softpc-text-video-test.exe` verifies this production reader against synthetic
+original-layout state, not a guest execution or completed Window capability.
+
 S36 corrects ADAPTER-SOFTPC-029: current-mode address resolution retains its
 PE/VM rule, while SIM32's explicit protected request uses the same original
 descriptor walker regardless of PE/VM. No CPU cache is selected by register

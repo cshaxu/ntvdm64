@@ -12,6 +12,8 @@ typedef struct run16_native_capture {
 } run16_native_capture;
 
 DWORD run16_native_capture_begin(run16_native_capture *);
+/* Frontend seeding uses its retained buffer, not the currently active surface. */
+DWORD run16_native_capture_begin_output(run16_native_capture *,HANDLE);
 DWORD run16_native_capture_read(run16_native_capture *,DWORD offset,
     CHAR_INFO *,DWORD capacity,SMALL_RECT *,DWORD *count);
 void run16_native_capture_end(run16_native_capture *);

@@ -58,6 +58,10 @@
 #include "nt_event.h"
 #include "mvdm_softpc_termination.h"
 #include "mvdm_softpc_event_thread.h"
+/* DIVERGENCE(MVDM-HOST-DIV-317): pending scan data retains its raw origin. */
+#include "mvdm_keyboard_history.h"
+mvdm_keyboard_history nt_keyboard_history;
+extern unsigned PendingKeyboardHistory(void);
 #include "nt_vdd.h"
 #include "nt_timer.h"
 
@@ -114,6 +118,9 @@ IMPORT void RestoreKbdLed(void);
 static PKEY_EVENT_RECORD key_history_head, key_history_tail;
 static PKEY_EVENT_RECORD key_history;
 static key_history_count;
+/* DIVERGENCE(MVDM-HOST-DIV-316): join BIOS reconstruction to the first
+ * successfully returned hardware event without duplicating its release. */
+static INPUT_RECORD first_returned_key;
 
 int GetHistoryKeyEvent(PKEY_EVENT_RECORD LastKeyEvent, int KeyNumber);
 void update_key_history(INPUT_RECORD *InputRecords, DWORD RecordsRead);
@@ -589,7 +596,11 @@ DWORD nt_event_loop(void)
                                return (0);
                            }
 
+                       /* DIV-317: internal synthetic actions share this origin. */
+                       if (!mvdm_keyboard_history_begin(&nt_keyboard_history))
+                           DisplayErrorTerm(EHS_FUNC_FAILED,ERROR_INVALID_DATA,__FILE__,__LINE__);
                        nt_process_keys(&InputRecord[loop].Event.KeyEvent);
+                       mvdm_keyboard_history_end(&nt_keyboard_history);
 
                   } while (++loop < RecordsRead &&
                            InputRecord[loop].EventType == KEY_EVENT);
@@ -640,6 +651,9 @@ void update_key_history(register INPUT_RECORD *InputRecords,
         {
 
             //Transfer key event to history buffer
+        /* DIV-317: preserve identity even when this record makes no scan data. */
+        if (!mvdm_keyboard_history_record(&nt_keyboard_history))
+            DisplayErrorTerm(EHS_FUNC_FAILED,ERROR_ARITHMETIC_OVERFLOW,__FILE__,__LINE__);
         *key_history_tail = InputRecords->Event.KeyEvent;
 
         //Update ptrs to history buffer
@@ -673,6 +687,10 @@ int GetHistoryKeyEvent(PKEY_EVENT_RECORD LastKeyEvent, int KeyNumber)
     int KeyReturned = FALSE;
     int KeysBeforeWrap = key_history_tail-key_history;
 
+    /* DIV-317: pending-origin ordinal, not a raw-history suffix count. */
+    KeyNumber = mvdm_keyboard_history_age(&nt_keyboard_history,KeyNumber);
+    if (!KeyNumber) return FALSE;
+
     if(key_history_count >= KeyNumber)
     {
     if(KeysBeforeWrap < KeyNumber)
@@ -700,6 +718,8 @@ void InitKeyHistory()
 {
     key_history_head = key_history_tail = key_history;
     key_history_count = 0;
+    /* DIV-317: called initially or after the original hardware reset/return. */
+    memset(&nt_keyboard_history,0,sizeof(nt_keyboard_history));
 }
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
@@ -1901,9 +1921,16 @@ VOID ReturnBiosBufferKeys(VOID)
 
                   // normal case
          else if (InputRecord[i].Event.KeyEvent.wVirtualScanCode)  {
+             /* DIV-316: reuse only the adjacent, same physical key release. */
+             if (first_returned_key.EventType != KEY_EVENT ||
+                 first_returned_key.Event.KeyEvent.bKeyDown ||
+                 first_returned_key.Event.KeyEvent.wVirtualScanCode != InputRecord[i].Event.KeyEvent.wVirtualScanCode ||
+                 first_returned_key.Event.KeyEvent.wVirtualKeyCode != InputRecord[i].Event.KeyEvent.wVirtualKeyCode ||
+                 ((first_returned_key.Event.KeyEvent.dwControlKeyState ^ InputRecord[i].Event.KeyEvent.dwControlKeyState) & ENHANCED_KEY)) {
              InputRecord[i].Event.KeyEvent.bKeyDown = FALSE;
              InputRecord[i-1] = InputRecord[i];
              i--;
+             }
              InputRecord[i--].Event.KeyEvent.bKeyDown = TRUE;
              }
 
@@ -1991,11 +2018,15 @@ VOID ReturnBiosBufferKeys(VOID)
 
 
 
+        /* DIV-316: only the newest BIOS entry adjoins the hardware suffix. */
+        first_returned_key.EventType = 0;
+
              /*  If buffer is full or
               *     bios buffer is empty and got stuff in buffer
               *     Write it out
               */
-        if ((BufferHead == BufferTail && i != NUMBBIRECS - 1) || i < 0)
+        /* DIV-316: an odd-sized joined batch still needs two slots per pair. */
+        if ((BufferHead == BufferTail && i != NUMBBIRECS - 1) || i < 1)
             {
              WriteConsoleInputVDMW(sc.InputHandle,
                                    &InputRecord[i+1],
@@ -2024,6 +2055,8 @@ void ReturnUnusedKeyEvents(int UnusedKeyEvents)
     DWORD RecsWrt;
     int KeyToRtn, KeyInx;
 
+    first_returned_key.EventType = 0; /* DIV-316: no prior handoff identity. */
+
     /* Return keys to console input buffer */
 
     if(UnusedKeyEvents)
@@ -2039,9 +2072,12 @@ void ReturnUnusedKeyEvents(int UnusedKeyEvents)
         InputRecords[KeyInx].EventType = KEY_EVENT;
     }
 
-    if(KeyToRtn > 1 && !WriteConsoleInputVDMW(sc.InputHandle,
+    if(KeyToRtn > 1) {
+    if(!WriteConsoleInputVDMW(sc.InputHandle,
         &InputRecords[KeyInx+1],KeyToRtn-1,&RecsWrt))
         always_trace0("Console write failed\n");
+    else if(RecsWrt) first_returned_key = InputRecords[KeyInx+1]; /* DIV-316 */
+    }
     }
 
     /* Clear down key history buffer and event queue */
@@ -2089,7 +2125,9 @@ extern int keys_in_6805_buff(int *part_key_transferred);
 int CalcNumberOfUnusedKeyEvents()
 {
     int part_key_transferred;
+    unsigned pending = PendingKeyboardHistory(); /* DIV-317: snapshot before reset. */
 
     //Get the number of keys in the 6805 buffer
-    return (keys_in_6805_buff(&part_key_transferred) + KeyQueue.KeyCount);
+    (void)keys_in_6805_buff(&part_key_transferred);
+    return (pending + KeyQueue.KeyCount); /* DIV-317: original queue is empty in this profile. */
 }

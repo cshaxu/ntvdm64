@@ -196,6 +196,11 @@ DWORD run16_console_dispatch(run16_console_frontend *owner,const console_io_requ
         ok=SetConsoleTitleA((LPCSTR)request->data);
         break;
     case CONSOLE_IO_WINDOW_QUERY: {
+        if (s->mode==CONSOLE_WINDOW_TEXT_FRAME_REQUIRED) {
+            reply->state.left=owner->text_frame_required &&
+                owner->text_frame_required(owner->io_context);
+            ok=TRUE;break;
+        }
         HWND window=GetConsoleWindow();
         if (!window) { SetLastError(ERROR_CALL_NOT_IMPLEMENTED);break; }
         switch (s->mode) {
@@ -296,7 +301,7 @@ DWORD run16_console_dispatch(run16_console_frontend *owner,const console_io_requ
             "WriteConsoleInputVDMW");
         INPUT_RECORD records[CONSOLE_IO_INPUT_CAPACITY];
         DWORD i;
-        if (!prepend) { SetLastError(ERROR_CALL_NOT_IMPLEMENTED);break; }
+        if (!prepend && !owner->prepend_input) { SetLastError(ERROR_CALL_NOT_IMPLEMENTED);break; }
         ZeroMemory(records,sizeof(records));
         for (i=0;i<s->count;i++) {
             console_io_input wire;
@@ -313,9 +318,14 @@ DWORD run16_console_dispatch(run16_console_frontend *owner,const console_io_requ
             records[i].Event.KeyEvent.uChar.UnicodeChar=(WCHAR)wire.character;
             records[i].Event.KeyEvent.dwControlKeyState=wire.control;
         }
-        /* Validate the whole original return batch before mutating CONIN$.
-         * The native Console owner performs the atomic front insertion. */
-        if (i==s->count) ok=prepend(owner->input,records,s->count,&count);
+        /* Validate the whole original return batch before front insertion.
+         * The selected frontend queue or native Console owns the mutation. */
+        if (i==s->count) {
+            if(owner->prepend_input) {
+                DWORD error=owner->prepend_input(owner->io_context,records,s->count);
+                ok=!error;SetLastError(error);if(ok)count=s->count;
+            } else ok=prepend(owner->input,records,s->count,&count);
+        }
         reply->state.count=count;
         break;
     }
@@ -323,7 +333,11 @@ DWORD run16_console_dispatch(run16_console_frontend *owner,const console_io_requ
     case CONSOLE_IO_PEEK_INPUT: {
         INPUT_RECORD records[CONSOLE_IO_INPUT_CAPACITY];
         DWORD i;
-        if(request->operation==CONSOLE_IO_PEEK_INPUT)
+        if(owner->read_input) {
+            DWORD error=owner->read_input(owner->io_context,request->operation==CONSOLE_IO_PEEK_INPUT,
+                records,s->count,&count);
+            ok=!error;SetLastError(error);
+        } else if(request->operation==CONSOLE_IO_PEEK_INPUT)
             ok=PeekConsoleInputW(owner->input,records,s->count,&count);
         else if(owner->enter) {
             typedef BOOL (WINAPI *read_input_ex)(HANDLE,PINPUT_RECORD,DWORD,LPDWORD,USHORT);

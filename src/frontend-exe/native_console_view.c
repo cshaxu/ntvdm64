@@ -32,14 +32,32 @@ void run16_native_view_end(run16_native_console_view *view)
 
 DWORD run16_native_view_begin(run16_native_backend *backend,run16_native_console_view *view)
 {
+    HANDLE input,output;
     DWORD error;
     if(!backend || !view)return ERROR_INVALID_PARAMETER;
     ZeroMemory(view,sizeof(*view));
-    view->input=CreateFileW(L"CONIN$",GENERIC_READ|GENERIC_WRITE,
+    input=CreateFileW(L"CONIN$",GENERIC_READ|GENERIC_WRITE,
         FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,OPEN_EXISTING,0,NULL);
-    view->output=CreateFileW(L"CONOUT$",GENERIC_READ|GENERIC_WRITE,
+    if(input==INVALID_HANDLE_VALUE)return GetLastError();
+    output=CreateFileW(L"CONOUT$",GENERIC_READ|GENERIC_WRITE,
         FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,OPEN_EXISTING,0,NULL);
-    if(view->input==INVALID_HANDLE_VALUE || view->output==INVALID_HANDLE_VALUE ||
+    error=output==INVALID_HANDLE_VALUE ? GetLastError() :
+        run16_native_view_begin_on(backend,view,input,output);
+    if(output!=INVALID_HANDLE_VALUE)CloseHandle(output);
+    CloseHandle(input);
+    return error;
+}
+
+DWORD run16_native_view_begin_on(run16_native_backend *backend,
+    run16_native_console_view *view,HANDLE input,HANDLE output)
+{
+    DWORD error;
+    if(!backend || !view)return ERROR_INVALID_PARAMETER;
+    ZeroMemory(view,sizeof(*view));
+    if(!input || input==INVALID_HANDLE_VALUE || !output || output==INVALID_HANDLE_VALUE)
+        return ERROR_INVALID_HANDLE;
+    if(!DuplicateHandle(GetCurrentProcess(),input,GetCurrentProcess(),&view->input,0,FALSE,DUPLICATE_SAME_ACCESS) ||
+        !DuplicateHandle(GetCurrentProcess(),output,GetCurrentProcess(),&view->output,0,FALSE,DUPLICATE_SAME_ACCESS) ||
         !GetConsoleMode(view->input,&view->input_mode))error=GetLastError();
     else error=run16_native_view_seed(backend,view);
     if(error)run16_native_view_end(view);
@@ -55,7 +73,7 @@ DWORD run16_native_view_seed(run16_native_backend *backend,run16_native_console_
     DWORD error,offset=0,count,total;
     SMALL_RECT region;
     if(!backend || !view)return ERROR_INVALID_PARAMETER;
-    error=run16_native_capture_begin(&capture);
+    error=run16_native_capture_begin_output(&capture,view->output);
     if(error)goto done;
     seed.frame.screen=capture.info;seed.frame.cursor=capture.cursor;
     seed.frame.output_mode=capture.output_mode;seed.frame.input_codepage=capture.input_codepage;
@@ -86,7 +104,7 @@ done:
     return error;
 }
 
-DWORD run16_native_view_present(run16_native_backend *backend,run16_native_console_view *view)
+static DWORD present_snapshot(run16_native_backend *backend,run16_native_console_view *view,BOOL window)
 {
     run16_native_frame_info frame;
     run16_native_host_reply reply;
@@ -135,11 +153,19 @@ DWORD run16_native_view_present(run16_native_backend *backend,run16_native_conso
      * buffer storage, scrollback, Unicode cells and attributes on both sides. */
     if(!error)error=visible_geometry(view->output,&after);
     if(!error && memcmp(&before,&after,sizeof(before)))error=ERROR_RETRY;
-    if(!error)error=run16_native_screen_apply(view->output,&frame.screen,&frame.cursor);
-    if(!error)error=run16_native_cells_write(view->output,0,cells,total);
+    if(!error && window && view->window_frame)
+        error=view->window_frame(view->window_context,&frame,cells,total);
+    else if(!error) {
+        error=run16_native_screen_apply(view->output,&frame.screen,&frame.cursor);
+        if(!error)error=run16_native_cells_write(view->output,0,cells,total);
+    }
     if(!error) {
-        view->geometry=before;view->geometry.size=frame.screen.dwSize;
-        view->geometry.window=frame.screen.srWindow;view->geometry_saved=TRUE;
+        view->geometry=before;
+        if(!window || !view->window_frame) {
+            view->geometry.size=frame.screen.dwSize;
+            view->geometry.window=frame.screen.srWindow;
+        }
+        view->geometry_saved=TRUE;
     }
 done:
     ending=exchange(backend,RUN16_NATIVE_FRAME_END,NULL,0,0,0,&reply,NULL,0);
@@ -147,8 +173,25 @@ done:
     return error ? error : ending;
 }
 
+DWORD run16_native_view_present(run16_native_backend *backend,run16_native_console_view *view)
+{
+    return present_snapshot(backend,view,TRUE);
+}
+
+DWORD run16_native_view_sync_console(run16_native_backend *backend,run16_native_console_view *view)
+{
+    return present_snapshot(backend,view,FALSE);
+}
+
 DWORD run16_native_view_reclaim_input(run16_native_backend *backend,
     run16_native_console_view *view,DWORD *returned)
+{
+    return run16_native_view_reclaim_input_to(backend,view,returned,NULL,NULL);
+}
+
+DWORD run16_native_view_reclaim_input_to(run16_native_backend *backend,
+    run16_native_console_view *view,DWORD *returned,
+    DWORD (*sink)(void *,const INPUT_RECORD *,DWORD),void *context)
 {
     typedef BOOL (WINAPI *prepend_input)(HANDLE,PINPUT_RECORD,DWORD,LPDWORD);
     prepend_input prepend=(prepend_input)GetProcAddress(GetModuleHandleW(L"kernel32.dll"),
@@ -158,7 +201,7 @@ DWORD run16_native_view_reclaim_input(run16_native_backend *backend,
     DWORD error=ERROR_SUCCESS,total=0,written=0;
     if(!backend || !view || !returned)return ERROR_INVALID_PARAMETER;
     *returned=0;
-    if(!prepend)return ERROR_CALL_NOT_IMPLEMENTED;
+    if(!sink && !prepend)return ERROR_CALL_NOT_IMPLEMENTED;
     for(;;) {
         INPUT_RECORD *grown;
         SIZE_T bytes;
@@ -182,7 +225,8 @@ DWORD run16_native_view_reclaim_input(run16_native_backend *backend,
      * typeahead. Original Console Server owns the insertion, not a local
      * keyboard parser or a second guest input queue. */
     if(!error && total) {
-        if(!prepend(view->input,records,total,&written))error=GetLastError();
+        if(sink)error=sink(context,records,total);
+        else if(!prepend(view->input,records,total,&written))error=GetLastError();
         else if(written!=total)error=ERROR_WRITE_FAULT;
     }
     if(!error)*returned=total;
@@ -193,23 +237,23 @@ DWORD run16_native_view_reclaim_input(run16_native_backend *backend,
 DWORD run16_native_view_forward_input(run16_native_backend *backend,run16_native_console_view *view)
 {
     INPUT_RECORD records[64];
-    run16_native_host_reply reply;
-    DWORD available=0,count=0,offset=0,error,i,kept=0;
+    DWORD available=0,count=0,i,kept=0;
     if(!PeekConsoleInputW(view->input,records,ARRAYSIZE(records),&available))return GetLastError();
     if(!available)return ERROR_SUCCESS;
     if(!ReadConsoleInputW(view->input,records,available,&count))return GetLastError();
     /* The geometry exchange invokes the real native resize, which generates
      * its own mode-dependent notification. Do not inject a duplicate/stale
      * visible-buffer WINDOW_BUFFER_SIZE_EVENT into the hidden input queue. */
-    for(i=0;i<count;++i)if(records[i].EventType!=WINDOW_BUFFER_SIZE_EVENT)records[kept++]=records[i];
-    count=kept;
-    while(offset<count) {
-        error=exchange(backend,RUN16_NATIVE_INPUT,records+offset,(count-offset)*sizeof(*records),0,0,&reply,NULL,0);
-        if(error)return error;
-        if(!reply.count || reply.count>count-offset)return ERROR_INVALID_DATA;
-        offset+=reply.count;
+    for(i=0;i<count;++i) {
+        BOOL keep=TRUE;DWORD error;
+        if(view->console_input) {
+            error=view->console_input(view->window_context,&records[i],&keep);
+            if(error)return error;
+        }
+        if(keep && records[i].EventType!=WINDOW_BUFFER_SIZE_EVENT)records[kept++]=records[i];
     }
-    return ERROR_SUCCESS;
+    count=kept;
+    return run16_native_backend_input(backend,records,count);
 }
 
 DWORD run16_native_view_wait(run16_native_backend *backend,run16_native_console_view *view,

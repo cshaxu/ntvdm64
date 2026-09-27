@@ -7,6 +7,7 @@ param(
     [Parameter(Mandatory)][string]$LogPrefix,
     [string]$LogRoot='O:\winnt\logs',
     [switch]$ExpandedFaults,
+    [switch]$Window,
     [ValidateSet('normal','frontend','launcher','worker','helper')][string[]]$Cases
 )
 $ErrorActionPreference='Stop'
@@ -33,12 +34,21 @@ if(@(Get-CimInstance Win32_Process -Filter "Name='basesrv.exe'").Count){throw 'B
 foreach($name in @('NOIOLIFE.EXE','NOIO.COM')){
     if(!(Test-Path (Join-Path $PackageRoot "tests\$name"))){throw "Missing authored fixture $name"}
 }
+# The authored guest exchanges gate files here; a fresh build-only candidate
+# need not already contain this fixture prerequisite. Runtime reports still
+# use LogRoot. Never create this directory outside the validated build root.
+$gateRoot=Join-Path $ProcessPackageRoot 'logs'
+if(!(Test-Path -LiteralPath $gateRoot)){
+    $null=New-Item -ItemType Directory -Path $gateRoot
+}
 $markers=@('NIOREADY','NIOGO','NIODONE','NIOPID','NIOROOT','NIOMEM')
 foreach($name in $markers){if(Test-Path (Join-Path $PackageRoot "logs\$name")){throw 'Existing fixture markers'}}
 $null=New-Item -ItemType Directory -Path $EvidenceRoot
 $oldPrivate=$env:MVDM_OBSERVER_PRIVATE_DESKTOP
+$oldWindow=$env:MVDM_LIFETIME_WINDOW
 try {
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
+    if($Window){$env:MVDM_LIFETIME_WINDOW='1'}else{Remove-Item Env:MVDM_LIFETIME_WINDOW -ErrorAction SilentlyContinue}
     $selected=@('normal','frontend','launcher','worker')
     if($ExpandedFaults){$selected+='helper'}
     if($Cases){$selected=@($selected | Where-Object {$_ -in $Cases})}
@@ -61,6 +71,9 @@ try {
                 throw "Lifetime assertion failed for $case; inspect $report"
             }
             $cells=($screen -replace '(?m)^\[\d+\] ','') -replace '\s',''
+            if($Window -and !$cells.Contains('testedfrontendhasactualvisibleWindowbeforelifecycletransition')){
+                throw "Missing actual Window before fault: $case"
+            }
             if($ExpandedFaults -and !$cells.Contains('distinctunrelatedcharacterfrontendandnativetargetsurvive')){
                 throw "Missing unrelated-session survival assertion: $case"
             }
@@ -86,4 +99,4 @@ try {
             }
         }
     }
-} finally {$env:MVDM_OBSERVER_PRIVATE_DESKTOP=$oldPrivate}
+} finally {$env:MVDM_OBSERVER_PRIVATE_DESKTOP=$oldPrivate;$env:MVDM_LIFETIME_WINDOW=$oldWindow}

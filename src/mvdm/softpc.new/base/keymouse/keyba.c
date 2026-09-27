@@ -86,6 +86,12 @@ static char SccsID[]="@(#)keyba.c	1.57 06/22/95 Copyright Insignia Solutions Ltd
 
 #include "debug.h"
 
+#ifdef NTVDM
+/* DIVERGENCE(MVDM-HOST-DIV-317): metadata only; original scan bytes unchanged. */
+#include "mvdm_keyboard_history.h"
+extern mvdm_keyboard_history nt_keyboard_history;
+#endif
+
 
 /* <tur 12-Jul-93> BCN 2040
 ** KBD_CONT_DELAY is the delay time for continuing keyboard interrupts
@@ -949,11 +955,17 @@ LOCAL VOID add_to_6805_buff IFN2(half_word,code,int, immediate)
 	 {
 	 /* queue at start */
 	 buff_6805_out_ptr = (buff_6805_out_ptr - 1) & BUFF_6805_PMASK;
+#ifdef NTVDM
+         nt_keyboard_history.device[buff_6805_out_ptr]=0; /* DIV-317: response, not user input. */
+#endif
 	 buff_6805[buff_6805_out_ptr]=code;
 	 }
       else
 	 {
 	 /* queue at end */
+#ifdef NTVDM
+        nt_keyboard_history.device[buff_6805_in_ptr]=nt_keyboard_history.active; /* DIV-317 */
+#endif
 	buff_6805[buff_6805_in_ptr]=code;
 	buff_6805_in_ptr = (buff_6805_in_ptr + 1) & BUFF_6805_PMASK;
 	}
@@ -973,6 +985,8 @@ half_word ch;
 ch=buff_6805[buff_6805_out_ptr];
 
 #ifdef NTVDM
+	nt_keyboard_history.translated=nt_keyboard_history.device[buff_6805_out_ptr]; /* DIV-317 */
+	nt_keyboard_history.device[buff_6805_out_ptr]=0;
 	key_marker_buffer[buff_6805_out_ptr]=0;
 #endif
 
@@ -1008,6 +1022,7 @@ LOCAL VOID clear_buff_6805 IFN0()
     KbdHdwFull = BUFF_6805_VMAX - free_6805_buff_size;
 
     /* Clear key marker buffer */
+    mvdm_keyboard_history_clear_ring(&nt_keyboard_history); /* DIV-317 */
     {
 	register int loop = sizeof(key_marker_buffer) / sizeof(unsigned char);
 	while(--loop >= 0) key_marker_buffer[loop] = 0;
@@ -1078,11 +1093,16 @@ GLOBAL int keys_in_6805_buff(int *part_key_transferred)
     {
 	if(key_marker_buffer[tmp_6805_out_ptr] != 0)
 	{
-	    if(last_marker == 0)
+	    /* DIVERGENCE: MVDM-HOST-DIV-315: a complete single-byte key
+	     * counts independently of any preceding partial multibyte key. */
+	    if(last_marker == 0 || (key_marker_buffer[tmp_6805_out_ptr] & ONECHARCODEMASK))
 	    {
+		if(last_marker) *part_key_transferred = TRUE;
+		last_marker = 0;
 		/* start of key seq found */
 		if(key_marker_buffer[tmp_6805_out_ptr] & ONECHARCODEMASK)
-		    keys_in_buffer++; /* one byte seq	    else */
+		    keys_in_buffer++; /* one byte seq */
+		else
 		    last_marker = key_marker_buffer[tmp_6805_out_ptr];
 	    }
 	    else
@@ -1117,9 +1137,18 @@ GLOBAL int keys_in_6805_buff(int *part_key_transferred)
     return(keys_in_buffer);
 }
 
+/* DIV-317: snapshot original live slots before keys_in_6805_buff resets them. */
+GLOBAL unsigned PendingKeyboardHistory(void)
+{
+    return mvdm_keyboard_history_pending(&nt_keyboard_history,buff_6805_out_ptr,
+        buff_6805_in_ptr,BUFF_6805_PMAX,scanning_discontinued ? held_event_count : 0,
+        output_full,pending_8042,waiting_for_upcode);
+}
+
 void Reset6805and8042(void)
 {
     int key;
+    mvdm_keyboard_history_clear_device(&nt_keyboard_history); /* DIV-317 */
 
     /* Reset 6805 */
 
@@ -1354,6 +1383,9 @@ LOCAL VOID filtered_host_key_down IFN1(int,key)
 if (scanning_discontinued)
 	{
 	held_event_type[held_event_count]=KEY_DOWN_EVENT;
+#ifdef NTVDM
+        nt_keyboard_history.held[held_event_count]=nt_keyboard_history.active; /* DIV-317 */
+#endif
 	held_event_key[held_event_count++]=key;
 
 	/* check for held event buffer overflow (SHOULD never happen) */
@@ -1409,6 +1441,9 @@ LOCAL VOID filtered_host_key_up IFN1(int,key)
 if (scanning_discontinued)
 	{
 	held_event_type[held_event_count]=KEY_UP_EVENT;
+#ifdef NTVDM
+        nt_keyboard_history.held[held_event_count]=nt_keyboard_history.active; /* DIV-317 */
+#endif
 	held_event_key[held_event_count++]=key;
 
 	/* check for held event buffer overflow (SHOULD never happen) */
@@ -1893,6 +1928,7 @@ LOCAL VOID AddTo6805BuffImm IFN1(half_word,code)
 {
   add_to_6805_buff(code,IMMEDIATE_OUTPUT);
   output_full = FALSE;
+  nt_keyboard_history.output=0; /* DIV-317: original port replacement. */
   KbdData = -1;
 }
 #else
@@ -2156,6 +2192,9 @@ if (scanning_discontinued && !waiting_for_next_code)
 		{
 		for (i=0;i<held_event_count;i++)
 			{
+#ifdef NTVDM
+                        nt_keyboard_history.active=nt_keyboard_history.held[i]; /* DIV-317 */
+#endif
 			switch (held_event_type[i])
 				{
 				case KEY_DOWN_EVENT:
@@ -2167,6 +2206,9 @@ if (scanning_discontinued && !waiting_for_next_code)
 				}
 			}
 		}
+#ifdef NTVDM
+        nt_keyboard_history.active=0; /* DIV-317: later internal actions have no raw origin. */
+#endif
 	scanning_discontinued=FALSE;
 	}
 #endif
@@ -2262,6 +2304,7 @@ void KbdEOIHook(int IrqLine, int CallCount)
                       (bios_buffer_size() < (bPifFastPaste ? 8 : 2));
 
    output_full = FALSE;
+   nt_keyboard_history.output=0; /* DIV-317: original EOI retires this port value. */
    bKbdEoiPending = FALSE;
 
    bForceDelayInts = TRUE;
@@ -2277,6 +2320,8 @@ void KbdEOIHook(int IrqLine, int CallCount)
 
 LOCAL VOID do_q_int(char scancode)
 {
+   nt_keyboard_history.output=nt_keyboard_history.translated; /* DIV-317 */
+   nt_keyboard_history.translated=0;
    output_full = TRUE;
    output_contents = scancode;
 
@@ -2607,6 +2652,7 @@ if (code_to_send_valid)
          */
         output_full = FALSE;
         KbdData = -1;
+        nt_keyboard_history.output=0; /* DIV-317: direct controller response replaces scan output. */
 #else /* NTVDM else */
 
 	/* Transfer 8042 command output to output buffer, overwriting value
@@ -2652,6 +2698,9 @@ if (translating)
 			}
 		else {
 			waiting_for_upcode=TRUE;
+#ifdef NTVDM
+                        nt_keyboard_history.prefix=nt_keyboard_history.translated; /* DIV-317 */
+#endif
 			}
 		}
 	else
@@ -2761,6 +2810,10 @@ if(!output_full)
 	if (pending_8042)
 		{
                 pending_8042=FALSE;
+#ifdef NTVDM
+                nt_keyboard_history.translated=nt_keyboard_history.pending; /* DIV-317 */
+                nt_keyboard_history.pending=0;
+#endif
                 do_q_int(pending_8042_value);
 		}
 	else

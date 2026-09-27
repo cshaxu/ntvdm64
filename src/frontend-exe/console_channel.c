@@ -13,7 +13,9 @@ struct run16_console_channel {
 static DWORD activate(void *context,BOOL active)
 {
     run16_console_channel *channel=context;
-    return run16_native_frontend_dos_bind(channel->root,channel,active);
+    DWORD error=run16_native_frontend_dos_bind(channel->root,channel,active);
+    if(!error && active)error=run16_native_frontend_dos_video(channel->root,channel,&channel->console.video);
+    return error;
 }
 static DWORD enter(void *context)
 {
@@ -25,10 +27,25 @@ static void leave(void *context)
     run16_console_channel *channel=context;
     run16_native_frontend_dos_leave(channel->root);
 }
+static BOOL text_frame_required(void *context)
+{
+    run16_console_channel *channel=context;
+    return run16_native_frontend_text_frame_required(channel->root);
+}
 static BOOL active(run16_console_channel *channel)
 {
     if(enter(channel))return FALSE;
     leave(channel);return TRUE;
+}
+static DWORD read_input(void *context,BOOL peek,INPUT_RECORD *records,DWORD count,DWORD *read)
+{
+    run16_console_channel *channel=context;
+    return run16_native_frontend_dos_read(channel->root,peek,records,count,read);
+}
+static DWORD prepend_input(void *context,const INPUT_RECORD *records,DWORD count)
+{
+    run16_console_channel *channel=context;
+    return run16_native_frontend_dos_prepend(channel->root,records,count);
 }
 
 /* Explicit cancellation plus peer death. Never close an OVERLAPPED event or
@@ -39,7 +56,7 @@ static DWORD transfer(run16_console_channel *channel,BOOL write,void *buffer,DWO
     while (bytes) {
         OVERLAPPED io={0};
         DWORD done=0,error,wait;
-        HANDLE waits[4]={channel->stop,channel->worker,channel->io_event,channel->console.input};
+        HANDLE waits[4]={channel->stop,channel->worker,channel->io_event,run16_native_frontend_dos_ready(channel->root)};
         BOOL ok;
         if (WaitForSingleObject(channel->stop,0)==WAIT_OBJECT_0) return ERROR_OPERATION_ABORTED;
         ResetEvent(channel->io_event);io.hEvent=channel->io_event;
@@ -81,14 +98,20 @@ static DWORD WINAPI console_channel_main(void *context)
         if (request->bytes>CONSOLE_IO_DATA_BYTES) { error=ERROR_INVALID_DATA;break; }
         error=transfer(channel,FALSE,request->data,request->bytes);
         if (!error) error=run16_console_dispatch(&channel->console,request,&reply);
+        if(!error && reply.result && (request->operation==CONSOLE_IO_VIDEO_BEGIN ||
+            request->operation==CONSOLE_IO_VIDEO_DATA || request->operation==CONSOLE_IO_VIDEO_TEXT))
+            error=run16_native_frontend_dos_video(channel->root,channel,&channel->console.video);
         if (!error && (request->operation==CONSOLE_IO_READ_INPUT ||
             request->operation==CONSOLE_IO_PEEK_INPUT || request->operation==CONSOLE_IO_DOS_ACTIVE)) {
             INPUT_RECORD record;
             DWORD count=0;
-            /* Reset before checking the queue. A later arrival wakes the next
-             * pipe wait through CONIN$; it cannot be lost between peek/reset. */
+            /* Reset before checking the frontend queue. Its stable readiness
+             * event covers arrivals after this peek, including Window input. */
             if (!ResetEvent(channel->ready))error=GetLastError();
-            if(!error && active(channel) && !PeekConsoleInputW(channel->console.input,&record,1,&count))error=GetLastError();
+            if(!error && !enter(channel)) {
+                error=read_input(channel,TRUE,&record,1,&count);
+                leave(channel);
+            }
             channel->input_pending=count!=0;
             if (!error && count && !SetEvent(channel->ready)) error=GetLastError();
         }
@@ -120,8 +143,8 @@ void run16_console_channel_stop(run16_console_channel *channel)
         } while (WaitForSingleObject(channel->thread,50)==WAIT_TIMEOUT);
         CloseHandle(channel->thread);
     } else if (channel->pipe && channel->pipe!=INVALID_HANDLE_VALUE) CloseHandle(channel->pipe);
-    run16_console_video_dispose(&channel->console.video);
     run16_native_frontend_dos_forget(channel->root,channel);
+    run16_console_video_dispose(&channel->console.video);
     if (channel->io_event) CloseHandle(channel->io_event);
     if (channel->ready) CloseHandle(channel->ready);
     if (channel->stop) CloseHandle(channel->stop);
@@ -151,17 +174,14 @@ DWORD run16_console_channel_start_request(DWORD request,HANDLE worker,run16_nati
     channel->root=root;
     channel->console.io_context=channel;
     channel->console.activate=activate;channel->console.enter=enter;channel->console.leave=leave;
+    channel->console.text_frame_required=text_frame_required;
+    channel->console.read_input=read_input;channel->console.prepend_input=prepend_input;
     channel->stop=CreateEventW(NULL,TRUE,FALSE,NULL);
     channel->io_event=CreateEventW(NULL,TRUE,FALSE,NULL);
     channel->ready=CreateEventW(NULL,TRUE,FALSE,NULL);
     if (!channel->stop || !channel->io_event || !channel->ready) { error=GetLastError();goto fail; }
-    channel->console.input=CreateFileW(L"CONIN$",GENERIC_READ|GENERIC_WRITE,
-        FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,OPEN_EXISTING,0,NULL);
-    channel->console.output=CreateFileW(L"CONOUT$",GENERIC_READ|GENERIC_WRITE,
-        FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,OPEN_EXISTING,0,NULL);
-    if (channel->console.input==INVALID_HANDLE_VALUE || channel->console.output==INVALID_HANDLE_VALUE) {
-        error=GetLastError();goto fail;
-    }
+    error=run16_native_frontend_console(root,&channel->console.input,&channel->console.output);
+    if (error) goto fail;
     swprintf_s(name,96,L"\\\\.\\pipe\\ntvdm-console-%lu-%lu",GetCurrentProcessId(),
         (DWORD)InterlockedIncrement(&serial));
     server=CreateNamedPipeW(name,PIPE_ACCESS_DUPLEX|FILE_FLAG_OVERLAPPED|FILE_FLAG_FIRST_PIPE_INSTANCE,

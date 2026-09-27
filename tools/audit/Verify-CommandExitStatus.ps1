@@ -9,9 +9,14 @@ param(
     [string]$GuestFixturePath,
     [string]$VideoGuestFixturePath,
     [string]$FrontendObserver,
+    [ValidateRange(1000,60000)][int]$ObservationTimeoutMs = 20000,
     [switch]$OrdinaryFrontend
 )
 $ErrorActionPreference = 'Stop'
+if ($env:MVDM_OBSERVER_WINDOW_INPUT -and $env:MVDM_OBSERVER_PRIVATE_DESKTOP -ne '1') {
+    throw 'Window input tests require MVDM_OBSERVER_PRIVATE_DESKTOP=1; no product process was started.'
+}
+. (Join-Path $PSScriptRoot 'Merge-ConsoleTextSnapshots.ps1')
 $Observer = (Resolve-Path -LiteralPath $Observer).Path
 $PackageRoot = (Resolve-Path -LiteralPath $PackageRoot).Path
 $LogRoot = (Resolve-Path -LiteralPath $LogRoot).Path
@@ -28,6 +33,10 @@ if($Cases -contains 'graphics-return' -or $Cases -contains 'direct-graphics-retu
     if(!$video.StartsWith($videoBuild,[StringComparison]::OrdinalIgnoreCase)){throw 'Video fixture must be under repository build'}
     $manifest=Get-Content -LiteralPath (Join-Path (Split-Path $video) 'manifest.json') -Raw | ConvertFrom-Json
     if($manifest.route -ne 'graphics-vram' -or (Get-FileHash -LiteralPath $video).Hash -ne $manifest.sha256){throw 'Wrong video probe or hash'}
+    if($env:MVDM_OBSERVER_GRAPHICS_RETURN -eq '1' -and
+        (!$manifest.windowHandshake -or $Cases.Count -ne 1 -or $Cases[0] -ne 'direct-graphics-return')){
+        throw 'Graphics Window handshake requires its held probe and only direct-graphics-return'
+    }
     Copy-Item -LiteralPath $video -Destination (Join-Path $runtimeFixtureRoot 'VTGRAPH.COM') -Force
 }
 $generatedFixtures = @(
@@ -118,6 +127,8 @@ $matrix = @(
     # the original keyboard queue is between those two owners.
     @{ Name='nested-empty'; Text="command`rexit`rexit`r"; LineDelayMs=1000; Code=1; ConsoleMarkers=@('Microsoft(R) Windows NT DOS'); ConsoleMarkerCount=2 },
     @{ Name='nested-mem'; Text="command`rcommand`rmem`rexit`rmem`rexit`rmem`rexit`r"; LineDelayMs=1000; Code=1; ConsoleMarkers=@('bytes total conventional memory'); ConsoleMarkerCount=3 },
+    @{ Name='nested-mem-typeahead'; Supplemental=$true; Text="command`rcommand`rmem`rexit`rmem`rexit`rmem`rexit`r"; LineDelayMs=0; Code=1; ConsoleMarkers=@('bytes total conventional memory'); ConsoleMarkerCount=3 },
+    @{ Name='interactive-native-dos-return'; Supplemental=$true; Text="cmd`rrun16 command`rmem`rexit`recho window-native-return`rexit`rmem`rexit`r"; LineDelayMs=1000; Code=1; ConsoleMarkers=@('bytes total conventional memory'); ConsoleMarkerCount=2; ExactConsoleLines=@('window-native-return') },
     @{ Name='mem-repeat'; Text="mem`rmem`rexit`r"; Code=1; ConsoleMarkers=@('bytes total conventional memory') },
     @{ Name='direct-mem'; Args=@('MEM.EXE'); Code=0; ConsoleMarkers=@('bytes total conventional memory') },
     @{ Name='command-c'; Args=@('COMMAND.COM','/c','ver'); Code=0; ConsoleMarkers=@('MS-DOS Version') },
@@ -183,7 +194,10 @@ try {
             }
         }
         if ($case.Edit) { $arguments += '--observe-console-edit-return' }
-        $arguments += @('--observation-timeout-ms',$(if($case.TimeoutMs){$case.TimeoutMs}else{20000}))
+        # A case can require a larger minimum, but must not silently shorten
+        # the caller's explicit observation budget (Window typing takes longer).
+        $caseTimeout=if($case.TimeoutMs){[Math]::Max($case.TimeoutMs,$ObservationTimeoutMs)}else{$ObservationTimeoutMs}
+        $arguments += @('--observation-timeout-ms',$caseTimeout)
         $launcherId = 0
         $reportedChildren = @()
         $observedDescendants = [Collections.Generic.HashSet[int]]::new()
@@ -242,7 +256,7 @@ try {
                     if($observation.WaitForExit(100)){break}
                 } while([DateTime]::UtcNow -lt $treeDeadline)
             }
-            if (!$observation.WaitForExit(55000)) { throw "Observer timeout: $($case.Name)" }
+            if (!$observation.WaitForExit([Math]::Max(55000,$caseTimeout+15000))) { throw "Observer timeout: $($case.Name)" }
             $record=Get-Content -LiteralPath $report -Raw
             $launcherId=[int]([regex]::Match($record,'(?m)^pid=(\d+)').Groups[1].Value)
             if (!$launcherId) { throw 'Missing test launcher identity' }
@@ -263,11 +277,25 @@ try {
             if (($case.Text -or $case.Edit) -and $record -notmatch '(?m)^scripted-console-input=delivered') {
                 throw "Input not delivered: $($case.Name)"
             }
+            if($env:MVDM_OBSERVER_GRAPHICS_RETURN -eq '1' -and
+                $record -notmatch '(?m)^graphics-handshake=pass'){
+                throw "Graphics Window/text handoff failed: $($case.Name)"
+            }
             $consolePath="$report.console.txt"
             if (!(Test-Path -LiteralPath $consolePath)) {
                 throw "Missing captured guest Console text: $($case.Name)"
             }
             $screen=Get-Content -LiteralPath $consolePath -Raw
+            if($env:MVDM_OBSERVER_WINDOW_INPUT -eq '1' -and $case.Text) {
+                # Window text snapshots reflect a finite guest screen, not
+                # native Console scrollback. Require contiguous overlap; never
+                # count the same MEM result once per captured frame.
+                $snapshots=@(Get-ChildItem -LiteralPath (Split-Path $report) -Filter ((Split-Path $report -Leaf)+'.line-*.console.txt') |
+                    Sort-Object Name | ForEach-Object { Get-Content -LiteralPath $_.FullName -Raw })
+                if(!$snapshots.Count){throw "Missing Window command snapshots: $($case.Name)"}
+                $screen=Merge-ConsoleTextSnapshots ($snapshots+@($screen))
+                $screen | Set-Content -LiteralPath "$report.transcript.txt" -Encoding UTF8
+            }
             if($case.NativeExitCodes){
                 $nativeResults=@(foreach($pair in $nativeWaiters.GetEnumerator()){
                     [pscustomobject]@{ProcessId=$pair.Key;Ended=$pair.Value.HasExited;Code=$(if($pair.Value.HasExited){$pair.Value.ExitCode}else{$null})}
@@ -344,6 +372,14 @@ try {
         } finally {
             foreach($probe in $nativeWaiters.Values){$probe.Dispose()}
             foreach($probe in $frontendWaiters.Values){$probe.Dispose()}
+            # A runner timeout can precede normal result parsing. Recover only
+            # this run's recorded launcher identity so its path-checked children
+            # (including the declared drive alias) do not escape test cleanup.
+            if(!$launcherId -and (Test-Path -LiteralPath $report)) {
+                $partial=Get-Content -LiteralPath $report -Raw
+                $match=[regex]::Match($partial,'(?m)^pid=(\d+)\r?$')
+                if($match.Success){$launcherId=[int]$match.Groups[1].Value}
+            }
             # Only children of this recorded test launcher, with exact product paths.
             # Unrelated package processes are never killed by image name.
             if ($launcherId) {

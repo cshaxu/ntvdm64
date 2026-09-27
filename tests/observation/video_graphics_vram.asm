@@ -17,8 +17,24 @@ start:
     cmp al, 05ah                   ; selected graphics C-VID read path
     jne failed
 
+%ifdef WINDOW_HANDSHAKE
+    xor ah, ah
+    int 16h                       ; observer must enter G through actual Window
+    cmp al, 'g'
+    jne failed
+%endif
+
     mov ax, 0003h                  ; restore the public text Console mode
     int 10h
+%ifdef WINDOW_HANDSHAKE
+    mov dx, text_ready
+    mov ah, 09h
+    int 21h
+    xor ah, ah
+    int 16h                       ; mode 3 must restore Console input
+    cmp al, 't'
+    jne failed
+%endif
     mov dx, completion
     mov ah, 09h
     int 21h
@@ -36,3 +52,6 @@ failed:
 
 completion db 'S23_GRAPHICS_VRAM_OK$'
 failure    db 'S23_GRAPHICS_VRAM_FAIL$'
+%ifdef WINDOW_HANDSHAKE
+text_ready db 'S6_GRAPHICS_TEXT_READY$'
+%endif

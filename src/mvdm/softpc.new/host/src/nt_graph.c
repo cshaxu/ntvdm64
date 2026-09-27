@@ -52,6 +52,8 @@
 #include "video.h"
 #include "ckmalloc.h"
 #include "conapi.h"
+/* DIVERGENCE(MVDM-HOST-DIV-314): copied text for the independent frontend. */
+#include "ntvdm-exe/win32/console_text.h"
 
 #include "nt_graph.h"
 #include "nt_cga.h"
@@ -823,7 +825,17 @@ void nt_mark_screen_refresh(void)
 
 void nt_graphics_tick(void)
 {
+    /* DIVERGENCE(MVDM-HOST-DIV-314): publish only after an original refresh. */
+    BOOL presentation_updated = FALSE;
 
+    /* DIVERGENCE(MVDM-HOST-DIV-314): retain the original stream-to-video
+       transition; a separate frontend cannot render stream-only VGA state. */
+    if (sc.ScreenState == STREAM_IO) {
+        BOOL requested;
+        if (!NtvdmConsoleTextRequested(&requested))
+            DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);
+        if (requested) disable_stream_io();
+    }
     if (sc.ScreenState == STREAM_IO) {
 	if (++flush_count == TICKS_PER_FLUSH){
 	    stream_io_update();
@@ -875,7 +887,11 @@ void nt_graphics_tick(void)
 #ifdef X86GFX
                     if (sc.ScreenState == WINDOWED)
 #endif
+                    {
                         (void)(*update_alg.calc_update)();
+                        /* DIVERGENCE(MVDM-HOST-DIV-314): completed frame. */
+                        presentation_updated = TRUE;
+                    }
 
                 ega_tick_delay = EGA_TICK_DELAY;
 
@@ -902,11 +918,20 @@ void nt_graphics_tick(void)
 #ifdef X86GFX
                 if (sc.ScreenState == WINDOWED)
 #endif
+                {
                     (void)(*update_alg.calc_update)();
+                    /* DIVERGENCE(MVDM-HOST-DIV-314): completed frame. */
+                    presentation_updated = TRUE;
+                }
 
             flush_count = 0;
         }
     }
+    /* DIVERGENCE(MVDM-HOST-DIV-314): Window consumers receive a completed
+       copy, never the mutable original painter or EGA storage. */
+    if (sc.ModeType == TEXT && presentation_updated)
+        if (!NtvdmConsoleUpdateText(sc.ColPalette))
+            DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);
 }
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
@@ -1715,6 +1740,9 @@ void set_the_vlt(void)
             SetPaletteEntries(sc.ColPalette, 0, VGA_DAC_SIZE, &vga_color[0]);
         }
 
+        /* DIVERGENCE(MVDM-HOST-DIV-314): retain resolved text colours even
+           when the original graphics palette handle is later retired. */
+        if (sc.ModeType == TEXT) NtvdmConsoleTextColours(vga_color);
         set_palette_change_required(FALSE);
     }
 

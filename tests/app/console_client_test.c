@@ -3,6 +3,7 @@
  * even through the native API. Only broker delivery and session binding are
  * stubbed; both I/O implementations and Console operations are real. */
 #include "ntvdm-exe/win32/console_client.h"
+#include "ntvdm-exe/win32/console_text.h"
 #include "frontend-exe/console_frontend.h"
 static BOOL native_write_cells(HANDLE output,const CHAR_INFO *buffer,COORD size,
     COORD origin,PSMALL_RECT region) { return WriteConsoleOutputW(output,buffer,size,origin,region); }
@@ -42,6 +43,8 @@ static session_teardown_fn cleanup;
 static void *cleanup_context;
 static run16_console_frontend frontend;
 static BOOL dos_active;
+static BOOL text_required;
+static BOOL require_text(void *context) { (void)context;return text_required; }
 static DWORD bind_dos(void *context,BOOL active)
 {
     (void)context;dos_active=active;return ERROR_SUCCESS;
@@ -704,6 +707,51 @@ int main(int argc,char **argv)
         CHECK(ShowConsoleCursor(surface,FALSE)==-1); /* fresh surface reset */
         CHECK(ShowConsoleCursor(surface,TRUE)==0);
         CHECK(CloseHandle(surface));CHECK(CloseHandle(graphics.hMutex));
+    }
+    {
+        LONG values[4]={0};
+        PALETTEENTRY palette[16]={0},copied[16];
+        frontend.text_frame_required=require_text;
+        CHECK(ntvdm_console_window_query(CONSOLE_WINDOW_TEXT_FRAME_REQUIRED,values)==1 && !values[0]);
+        text_required=TRUE;
+        CHECK(ntvdm_console_window_query(CONSOLE_WINDOW_TEXT_FRAME_REQUIRED,values)==1 && values[0]==1);
+        text_required=FALSE;
+        CHECK(ntvdm_console_window_query(CONSOLE_WINDOW_TEXT_FRAME_REQUIRED,values)==1 && !values[0]);
+        CHECK(!ntvdm_console_text_palette(copied) && GetLastError()==ERROR_NO_DATA);
+        palette[9].peRed=0x12;palette[9].peGreen=0x34;palette[9].peBlue=0x56;
+        NtvdmConsoleTextColours(palette);
+        CHECK(ntvdm_console_text_palette(copied) && !memcmp(palette,copied,sizeof(palette)));
+        puts("PASS frontend policy query and worker-local resolved palette copy");
+    }
+    {
+        console_video_description description={80,50,160,0,0,{0},CONSOLE_VIDEO_TEXT_FRAME};
+        console_text_style *style;
+        BYTE *payload;
+        DWORD serial=frontend.video.serial;
+        description.bytes=sizeof(*style)+description.stride*description.height;
+        payload=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,description.bytes);CHECK(payload);
+        style=(console_text_style *)payload;style->font_height=8;style->attribute_font_select=1;
+        style->fonts[1][65][7]=0xa5;description.palette[9]=0x123456;
+        payload[description.bytes-2]=65;payload[description.bytes-1]=9;
+        CHECK(ntvdm_console_publish_video(&description,payload,description.bytes));
+        CHECK(frontend.video.published_serial==serial+1 &&
+            frontend.video.description.kind==CONSOLE_VIDEO_TEXT_FRAME);
+        CHECK(!memcmp(frontend.video.pixels,payload,description.bytes));
+        CHECK(frontend.video.description.palette[9]==0x123456);
+        style->font_height=33;
+        CHECK(!ntvdm_console_publish_video(&description,payload,description.bytes) &&
+            GetLastError()==ERROR_INVALID_DATA);
+        CHECK(frontend.video.published_serial==serial+1 && !frontend.video.pending);
+        CHECK(((console_text_style *)frontend.video.pixels)->font_height==8);
+        style->font_height=14;description.height=43;
+        description.bytes=sizeof(*style)+description.stride*description.height;
+        CHECK(ntvdm_console_publish_video(&description,payload,description.bytes));
+        CHECK(frontend.video.published_serial==serial+3 && frontend.video.description.height==43);
+        CHECK(ntvdm_console_publish_video(NULL,NULL,0));
+        CHECK(!frontend.video.pixels && !frontend.video.pending);
+        HeapFree(GetProcessHeap(),0,payload);
+        puts("PASS copied text over worker/frontend IPC: 80x50 dual font, malformed retention, 43-row replacement and retirement");
+        fflush(stdout);
     }
     SetEvent(stop);
     CHECK(TerminateProcess(frontend_process,23));

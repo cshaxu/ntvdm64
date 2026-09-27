@@ -4,6 +4,8 @@ param(
     [Parameter(Mandatory)][string]$BuildRoot,
     [Parameter(Mandatory)][string]$PackageRoot,
     [Parameter(Mandatory)][string]$EvidenceRoot,
+    [string]$LogRoot='O:\winnt\logs',
+    [string]$LogPrefix,
     [ValidateSet('WDW-DWD','DDW-WWD')][string[]]$Cases = @('WDW-DWD','DDW-WWD')
 )
 $ErrorActionPreference='Stop'
@@ -15,6 +17,9 @@ if(!$EvidenceRoot.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::O
     throw 'Evidence must be under repository build'
 }
 if(Test-Path $EvidenceRoot){throw 'Use a new evidence directory'}
+$LogRoot=(Resolve-Path -LiteralPath $LogRoot).Path
+if(!$LogPrefix){$LogPrefix=(Split-Path $EvidenceRoot -Leaf).ToLowerInvariant()}
+if($LogPrefix -notmatch '^[a-z0-9-]+$'){throw 'Invalid log prefix'}
 if($PackageRoot -notmatch '^[A-Za-z]:\\?$'){throw 'Use the isolated package short-drive mapping'}
 $PackageRoot=$PackageRoot.TrimEnd('\')+'\'
 if(!(Test-Path (Join-Path $PackageRoot 'tests'))){throw 'Existing candidate tests directory required'}
@@ -32,8 +37,9 @@ try {
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
     foreach($case in $Cases){
         $parts=$case.Split('-'); $kinds='GGG'+$parts[0]+'GGG'+$parts[1]
-        $events=Join-Path $EvidenceRoot "$case.events.txt"
-        $observation=Join-Path $EvidenceRoot "$case.observer.txt"
+        $events=Join-Path $LogRoot "$LogPrefix-$case.events.txt"
+        $observation=Join-Path $LogRoot "$LogPrefix-$case.observer.txt"
+        if((Test-Path $events) -or (Test-Path $observation)){throw 'Use fresh log names'}
         $plan=Join-Path $PackageRoot 'tests\CHAIN.INI'
         $launcher=Join-Path $PackageRoot 'run16.exe'
         $cui=Join-Path $PackageRoot 'tests\CTEST.EXE'
@@ -136,7 +142,7 @@ try {
                 if(!$process.WaitForExit(10000)){throw "Frontend/helper $processId did not retire naturally"}
             } finally {$process.Dispose()}
         }
-        $summary.Add([pscustomobject]@{Case=$case;Nesting='pass';Identity='pass';Results='pass';
+        $summary.Add([pscustomobject]@{Case=$case;EventsPath=$events;Nesting='pass';Identity='pass';Results='pass';
             Frontend1=$owners[1];Frontend2=$owners[2];LiveTopology='pass';InteractiveIO='pass';Retirement='pass'})
         $summary | ConvertTo-Json -Depth 4 | Set-Content (Join-Path $EvidenceRoot 'summary.json')
         & "$PSScriptRoot/verify-twelve-chain-records.ps1" -EvidenceRoot $EvidenceRoot

@@ -5,6 +5,7 @@ param(
     [Parameter(Mandatory)][string]$PackageRoot,
     [string]$ProcessPackageRoot,
     [Parameter(Mandatory)][string]$LogPrefix,
+    [string]$LogRoot='O:\winnt\logs',
     [switch]$PackageNetworkProfile
 )
 $ErrorActionPreference='Stop'
@@ -12,6 +13,7 @@ if($LogPrefix -notmatch '^[a-z0-9-]+$'){throw 'Invalid log prefix'}
 $Observer=(Resolve-Path -LiteralPath $Observer).Path
 $WindowReader=(Resolve-Path -LiteralPath $WindowReader).Path
 $PackageRoot=(Resolve-Path -LiteralPath $PackageRoot).Path
+$LogRoot=(Resolve-Path -LiteralPath $LogRoot).Path
 $launcher=Join-Path $PackageRoot 'run16.exe'
 if(!$ProcessPackageRoot){$ProcessPackageRoot=$PackageRoot}
 $ProcessPackageRoot=(Resolve-Path -LiteralPath $ProcessPackageRoot).Path
@@ -40,7 +42,7 @@ try {
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
     foreach($app in @('WINMINE','SOL','WRITE')){
         $controller=$null
-        $report=Join-Path $PackageRoot "logs\$LogPrefix-$($app.ToLowerInvariant()).txt"
+        $report=Join-Path $LogRoot "$LogPrefix-$($app.ToLowerInvariant()).txt"
         if(Test-Path -LiteralPath $report){throw 'Use a fresh log prefix'}
         try {
             $arguments=@(('"'+$launcher+'"'),('"'+(Join-Path $PackageRoot '.')+'"'),('"'+$report+'"'),

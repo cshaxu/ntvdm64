@@ -12,8 +12,27 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "console_snapshot.h"
 
 static char control_event_report[MAX_PATH];
+static BOOL CALLBACK report_timeout_control(HWND window, LPARAM context)
+{
+    FILE *report=(FILE *)context;
+    WCHAR text[1024]={0};
+    char kind[96]={0};
+    DWORD_PTR copied=0;
+    unsigned i;
+    GetClassNameA(window,kind,sizeof(kind));
+    /* Only read static labels on our private test desktop. Bound an
+     * unresponsive dialog; never click it or alter the failure outcome. */
+    if (_stricmp(kind,"Static")) return TRUE;
+    if (!SendMessageTimeoutW(window,WM_GETTEXT,1024,(LPARAM)text,
+            SMTO_ABORTIFHUNG|SMTO_BLOCK,100,&copied)) return TRUE;
+    fputs("dialog-static-utf16=",report);
+    for(i=0;text[i];++i) fprintf(report,"%04X",(unsigned)text[i]);
+    fputc('\n',report);
+    return TRUE;
+}
 static BOOL CALLBACK report_timeout_window(HWND window, LPARAM context)
 {
     FILE *report = (FILE *)context;
@@ -29,6 +48,8 @@ static BOOL CALLBACK report_timeout_window(HWND window, LPARAM context)
         if ((unsigned char)title[i] < 32) title[i] = ' ';
     fprintf(report, "window pid=%lu visible=%d class=%s title=%s\n",
         pid, IsWindowVisible(window), kind, title);
+    if (!strcmp(kind,"#32770"))
+        EnumChildWindows(window,report_timeout_control,context);
     return TRUE;
 }
 static void report_private_timeout_windows(FILE *report)
@@ -73,8 +94,8 @@ static BOOL WINAPI record_console_control(DWORD event)
 #define OBSERVATION_KEY_DRAIN_TIMEOUT_MS 1500u
 #define OBSERVATION_TIMEOUT_EXIT 0x53504354u
 #define OBSERVATION_STACK_WORDS 16u
-#define OBSERVATION_THREAD_LIMIT 16u
-#define OBSERVATION_FRAME_LIMIT 16u
+#define OBSERVATION_THREAD_LIMIT 128u
+#define OBSERVATION_FRAME_LIMIT 64u
 
 typedef struct observation_thread_context {
     DWORD thread_id;
@@ -178,22 +199,76 @@ static DWORD capture_process_threads(HANDLE process, DWORD process_id,
     return record_count;
 }
 
+/* Timeout-only identity for system frames too. The image map alone cannot
+ * distinguish a Window startup wait from USER/IME or loader work. */
+static void report_process_modules(FILE *report, DWORD process_id)
+{
+    HANDLE snapshot=CreateToolhelp32Snapshot(TH32CS_SNAPMODULE,process_id);
+    MODULEENTRY32 entry={0};
+    if(snapshot==INVALID_HANDLE_VALUE) {
+        fprintf(report,"child-modules pid=%lu error=%lu\n",process_id,GetLastError());
+        return;
+    }
+    entry.dwSize=sizeof(entry);
+    if(Module32First(snapshot,&entry))do {
+        fprintf(report,"child-module pid=%lu base=%08lx size=%08lx path=%s\n",
+            process_id,(DWORD)(ULONG_PTR)entry.modBaseAddr,entry.modBaseSize,entry.szExePath);
+    }while(Module32Next(snapshot,&entry));
+    CloseHandle(snapshot);
+}
+
+#ifdef OBSERVER_COMPARE_CAPTURE
+static void compare_console_capture(HANDLE output,const char *report_path)
+{
+    CONSOLE_SCREEN_BUFFER_INFO before,after;
+    char *data=NULL,path[MAX_PATH];DWORD cells,counts[4]={0},i;
+    BOOL ok=FALSE,stable=FALSE,equal=FALSE;FILE *file=NULL;
+    if(!GetConsoleScreenBufferInfo(output,&before))return;
+    cells=(DWORD)before.dwSize.X*before.dwSize.Y;
+    if(!cells || cells>4u*1024u*1024u)return;
+    data=malloc((size_t)cells*4);if(!data)return;
+    ok=ReadConsoleOutputCharacterA(output,data,cells,(COORD){0,0},&counts[0]) &&
+        observer_read_cells(output,data+cells,before.dwSize,&counts[1]) &&
+        ReadConsoleOutputCharacterA(output,data+2*cells,cells,(COORD){0,0},&counts[2]) &&
+        observer_read_cells(output,data+3*cells,before.dwSize,&counts[3]) &&
+        GetConsoleScreenBufferInfo(output,&after);
+    for(i=0;i<4;++i)if(counts[i]!=cells)ok=FALSE;
+    if(ok)stable=before.dwSize.X==after.dwSize.X && before.dwSize.Y==after.dwSize.Y &&
+        !memcmp(&before.srWindow,&after.srWindow,sizeof(before.srWindow)) &&
+        !memcmp(data,data+2*cells,cells) && !memcmp(data+cells,data+3*cells,cells);
+    if(stable)equal=!memcmp(data,data+cells,cells);
+    snprintf(path,sizeof(path),"%s.capture-compare.txt",report_path);
+    if(!fopen_s(&file,path,"wb")) {
+        fprintf(file,"complete=%d stable=%d equal=%d buffer=%d,%d viewport=%d,%d,%d,%d\n",
+            ok,stable,equal,before.dwSize.X,before.dwSize.Y,before.srWindow.Left,
+            before.srWindow.Top,before.srWindow.Right,before.srWindow.Bottom);
+        if(stable && !equal)for(i=0;i<cells;++i)if(data[i]!=data[cells+i]) {
+            fprintf(file,"first-mismatch=%lu linear=%u rectangle=%u\n",i,
+                (unsigned char)data[i],(unsigned char)data[cells+i]);break;
+        }
+        fclose(file);
+    }
+    free(data);
+}
+#endif
 static void write_console_snapshot(HANDLE output, const char *report_path)
 {
     char *screen;
     char path[MAX_PATH];
-    DWORD count = 0, cells, row, column;
+    DWORD count = 0, row, column, error;
     CONSOLE_SCREEN_BUFFER_INFO info;
     FILE *file = NULL;
 
-    if (!GetConsoleScreenBufferInfo(output,&info)) return;
-    cells=(DWORD)info.dwSize.X*(DWORD)info.dwSize.Y;
-    if (!cells || cells>4u*1024u*1024u) return;
-    screen=(char*)malloc(cells); if(!screen)return;
-    if (!ReadConsoleOutputCharacterA(output, screen, cells,
-                                     (COORD){ 0, 0 }, &count)) { free(screen); return; }
+#ifdef OBSERVER_COMPARE_CAPTURE
+    compare_console_capture(output,report_path);
+#endif
+    error=observer_console_snapshot(output,&info,&screen,&count);
     snprintf(path, sizeof(path), "%s.console.txt", report_path);
     if (fopen_s(&file, path, "wb") == 0 && file != NULL) {
+        if(error) {
+            fprintf(file,"# capture-error=%lu\r\n",error);
+            fclose(file);return;
+        }
         /* A modern Console commonly allocates thousands of scrollback rows.
          * Persisting its full character plane makes an ordinary one-line DOS
          * result into a megabyte of spaces, which obscures rather than proves
@@ -270,6 +345,7 @@ static void report_direct_children(FILE *report, DWORD parent, BOOL contexts)
                 DWORD count,index,frame;
                 BOOL symbols=SymInitialize(process,NULL,TRUE);
                 capture_process_image(entry.th32ProcessID,&image);
+                report_process_modules(report,entry.th32ProcessID);
                 fprintf(report,"child-image pid=%lu base=%08lx size=%08lx\n",
                         entry.th32ProcessID,image.base_address,image.image_size);
                 count=capture_process_threads(process,entry.th32ProcessID,threads,
@@ -518,6 +594,82 @@ static BOOL wait_for_report_marker_after(const char *path, const char *marker,
     }
 }
 
+/* End-to-end test only: public Console CAF, actual frontend Window, X return.
+ * Refuse the user's desktop. No guest state or private product API is used. */
+static DWORD scripted_window_frontend;
+static BOOL console_caf_return(HANDLE input,const char *report_path)
+{
+    char desktop[96],path[MAX_PATH];DWORD needed,written,pid=0;
+    INPUT_RECORD keys[2]={0};HWND window=NULL;HANDLE process=NULL;
+    WCHAR image[MAX_PATH];DWORD image_length=MAX_PATH;
+    ULONGLONG deadline;FILE *report;BOOL ok=FALSE;
+    if(!GetUserObjectInformationA(GetThreadDesktop(GetCurrentThreadId()),UOI_NAME,
+        desktop,sizeof(desktop),&needed) || strncmp(desktop,"NTVDMConsoleTest-",17))return FALSE;
+    snprintf(path,sizeof(path),"%s.caf.txt",report_path);
+    report=fopen(path,"w");if(!report)return FALSE;
+    keys[0].EventType=KEY_EVENT;keys[0].Event.KeyEvent.bKeyDown=TRUE;
+    keys[0].Event.KeyEvent.wRepeatCount=1;keys[0].Event.KeyEvent.wVirtualKeyCode='F';
+    keys[0].Event.KeyEvent.wVirtualScanCode=0x21;
+    keys[0].Event.KeyEvent.dwControlKeyState=NUMLOCK_ON|LEFT_CTRL_PRESSED|LEFT_ALT_PRESSED;
+    keys[1]=keys[0];keys[1].Event.KeyEvent.bKeyDown=FALSE;
+    if(!WriteConsoleInputW(input,keys,2,&written) || written!=2)goto done;
+    deadline=GetTickCount64()+10000;
+    do {
+        window=FindWindowW(L"LibKvmWindow",L"NTVDM");
+        if(window && IsWindowVisible(window))break;
+        Sleep(25);
+    } while(GetTickCount64()<deadline);
+    if(!window || !IsWindowVisible(window))goto done;
+    GetWindowThreadProcessId(window,&pid);
+    process=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION|SYNCHRONIZE,FALSE,pid);
+    if(!process || !QueryFullProcessImageNameW(process,0,image,&image_length))goto done;
+    { const WCHAR *name=wcsrchr(image,L'\\');
+      if(!name || _wcsicmp(name+1,L"frontend.exe"))goto done; }
+    fprintf(report,"caf-visible-window=1 frontend=%lu\n",pid);
+    if(GetEnvironmentVariableA("MVDM_OBSERVER_WINDOW_INPUT",NULL,0)) {
+        scripted_window_frontend=pid;ok=TRUE;
+        fprintf(report,"window-input-owner=%lu\n",pid);goto done;
+    }
+    if(!PostMessageW(window,WM_CLOSE,0,0))goto done;
+    deadline=GetTickCount64()+5000;
+    while(IsWindow(window) && GetTickCount64()<deadline)Sleep(25);
+    ok=!IsWindow(window) && WaitForSingleObject(process,0)==WAIT_TIMEOUT;
+    fprintf(report,"x-closed-window=%d frontend-alive=%d\n",!IsWindow(window),
+        WaitForSingleObject(process,0)==WAIT_TIMEOUT);
+done:
+    fprintf(report,"result=%s error=%lu\n",ok ? "pass" : "fail",GetLastError());
+    if(process)CloseHandle(process);fclose(report);return ok;
+}
+static HWND scripted_input_window(void)
+{
+    HWND window=NULL;DWORD pid=0;
+    ULONGLONG deadline=GetTickCount64()+5000;
+    /* Each handoff may recreate the Window, but not its frontend owner.
+     * This is private-desktop observation only, never global input. */
+    if(!scripted_window_frontend)return NULL;
+    do {
+        window=FindWindowW(L"LibKvmWindow",L"NTVDM");
+        if(window && IsWindowVisible(window))break;
+        Sleep(10);
+    } while(GetTickCount64()<deadline);
+    if(!window || !IsWindowVisible(window))return NULL;
+    GetWindowThreadProcessId(window,&pid);
+    return pid==scripted_window_frontend ? window : NULL;
+}
+static BOOL write_window_key_records(const INPUT_RECORD *records,DWORD count)
+{
+    HWND window=scripted_input_window();DWORD index;DWORD_PTR result;
+    if(!window)return FALSE;
+    for(index=0;index<count;++index) {
+        const KEY_EVENT_RECORD *key=&records[index].Event.KeyEvent;
+        LPARAM bits=1|((LPARAM)key->wVirtualScanCode<<16);
+        if(records[index].EventType!=KEY_EVENT)return FALSE;
+        if(!key->bKeyDown)bits|=(LPARAM)0xc0000000;
+        if(!SendMessageTimeoutW(window,key->bKeyDown ? WM_KEYDOWN : WM_KEYUP,
+            key->wVirtualKeyCode,bits,SMTO_ABORTIFHUNG,3000,&result))return FALSE;
+    }
+    return TRUE;
+}
 static BOOL write_console_input_text(HANDLE input, const char *text, DWORD line_delay_ms,
                                      HANDLE output, const char *report)
 {
@@ -575,7 +727,16 @@ static BOOL write_console_input_text(HANDLE input, const char *text, DWORD line_
             records[1] = records[0];
             records[1].Event.KeyEvent.bKeyDown = FALSE;
         }
-        if (!WriteConsoleInputA(input, records, record_count, &written) ||
+        if(scripted_window_frontend) {
+            if(shifted) {
+                HWND window=scripted_input_window();DWORD_PTR result;
+                /* Exercise the public character-input route for shifted ASCII.
+                 * The library owns its synthesized physical chord. This is
+                 * not proof of real UI-thread Shift state or physical focus. */
+                if(!window || !SendMessageTimeoutW(window,WM_CHAR,
+                    (unsigned char)character,1,SMTO_ABORTIFHUNG,3000,&result))return FALSE;
+            } else if(!write_window_key_records(records,record_count))return FALSE;
+        } else if (!WriteConsoleInputA(input, records, record_count, &written) ||
             written != record_count) return FALSE;
         Sleep(OBSERVATION_KEY_EVENT_INTERVAL_MS);
         if (character == '\r' && line_delay_ms) Sleep(line_delay_ms);
@@ -777,6 +938,50 @@ static int private_desktop_observer(void)
     return (int)result;
 }
 
+static BOOL graphics_window_return(HANDLE input,HANDLE output,const char *report_path)
+{
+    char desktop[96],path[MAX_PATH];DWORD needed,pid=0,written;
+    WCHAR image[MAX_PATH];DWORD image_length=MAX_PATH;
+    HWND window=NULL;HANDLE process=NULL;FILE *report;BOOL ok=FALSE;
+    ULONGLONG deadline;INPUT_RECORD keys[2]={0};DWORD_PTR result;
+    if(!GetUserObjectInformationA(GetThreadDesktop(GetCurrentThreadId()),UOI_NAME,
+        desktop,sizeof(desktop),&needed) || strncmp(desktop,"NTVDMConsoleTest-",17))return FALSE;
+    snprintf(path,sizeof(path),"%s.graphics.txt",report_path);
+    report=fopen(path,"w");if(!report)return FALSE;
+    deadline=GetTickCount64()+15000;
+    do {
+        window=FindWindowW(L"LibKvmWindow",L"NTVDM");
+        if(window && IsWindowVisible(window))break;
+        Sleep(25);
+    } while(GetTickCount64()<deadline);
+    if(!window || !IsWindowVisible(window))goto done;
+    GetWindowThreadProcessId(window,&pid);
+    process=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION|SYNCHRONIZE,FALSE,pid);
+    if(!process || !QueryFullProcessImageNameW(process,0,image,&image_length))goto done;
+    { const WCHAR *name=wcsrchr(image,L'\\');
+      if(!name || _wcsicmp(name+1,L"frontend.exe"))goto done; }
+    fprintf(report,"automatic-graphics-window=1 frontend=%lu\n",pid);
+    if(!SendMessageTimeoutW(window,WM_CLOSE,0,0,SMTO_ABORTIFHUNG,3000,&result))goto done;
+    Sleep(500);
+    if(!IsWindowVisible(window) || WaitForSingleObject(process,0)!=WAIT_TIMEOUT)goto done;
+    fprintf(report,"graphics-x-keeps-window-and-frontend=1\n");
+    if(!SendMessageTimeoutW(window,WM_KEYDOWN,'G',1|(0x22<<16),SMTO_ABORTIFHUNG,3000,&result) ||
+       !SendMessageTimeoutW(window,WM_KEYUP,'G',(LPARAM)0xc0220001,SMTO_ABORTIFHUNG,3000,&result))goto done;
+    if(!wait_for_console_prompt(output,10000,"S6_GRAPHICS_TEXT_READY"))goto done;
+    deadline=GetTickCount64()+5000;
+    while(IsWindow(window) && GetTickCount64()<deadline)Sleep(25);
+    if(IsWindow(window) || WaitForSingleObject(process,0)!=WAIT_TIMEOUT)goto done;
+    fprintf(report,"text-closes-window-frontend-alive=1\n");
+    keys[0].EventType=KEY_EVENT;keys[0].Event.KeyEvent.bKeyDown=TRUE;
+    keys[0].Event.KeyEvent.wRepeatCount=1;keys[0].Event.KeyEvent.wVirtualKeyCode='T';
+    keys[0].Event.KeyEvent.wVirtualScanCode=0x14;keys[0].Event.KeyEvent.uChar.UnicodeChar=L't';
+    keys[1]=keys[0];keys[1].Event.KeyEvent.bKeyDown=FALSE;
+    ok=WriteConsoleInputW(input,keys,2,&written) && written==2;
+done:
+    fprintf(report,"result=%s error=%lu\n",ok ? "pass" : "fail",GetLastError());
+    if(process)CloseHandle(process);fclose(report);return ok;
+}
+
 int main(int argc, char **argv)
 {
     STARTUPINFOA startup = { sizeof(startup) };
@@ -809,6 +1014,7 @@ int main(int argc, char **argv)
     DWORD scripted_console_line_delay_ms = 0;
     BOOL scripted_console_input_ready = FALSE;
     BOOL scripted_console_input_delivered = FALSE;
+    BOOL graphics_handshake=FALSE,graphics_handshake_ok=FALSE;
     DWORD scripted_console_input_remaining = 0;
     BOOL scripted_console_input_remaining_known = FALSE;
     observation_image_identity image_identity = { 0 };
@@ -1093,6 +1299,9 @@ int main(int argc, char **argv)
                                 previous_main_return_report_path);
     else
         SetEnvironmentVariableA("MVDM_MAIN_RETURN_REPORT_PATH", NULL);
+    graphics_handshake=GetEnvironmentVariableA("MVDM_OBSERVER_GRAPHICS_RETURN",NULL,0)!=0;
+    if(graphics_handshake)
+        graphics_handshake_ok=graphics_window_return(input,output,argv[3]);
     if (scripted_console_input) {
         /* Await visible COMMAND readiness, without an execution-core hook. */
         scripted_console_input_ready = wait_for_console_prompt(output,
@@ -1158,8 +1367,11 @@ int main(int argc, char **argv)
                     Sleep(200);
                 }
             }
-            scripted_console_input_delivered = write_console_input_text(input,
-                scripted_console_input_text, scripted_console_line_delay_ms, output, argv[3]);
+            scripted_console_input_delivered =
+                ((!GetEnvironmentVariableA("MVDM_OBSERVER_CAF_RETURN",NULL,0) &&
+                  !GetEnvironmentVariableA("MVDM_OBSERVER_WINDOW_INPUT",NULL,0)) || console_caf_return(input,argv[3])) &&
+                write_console_input_text(input,scripted_console_input_text,
+                    scripted_console_line_delay_ms,output,argv[3]);
         }
     }
     if (observe_console_mouse_mode) {
@@ -1192,7 +1404,23 @@ int main(int argc, char **argv)
             menu[3] = menu[0];
             menu[3].Event.KeyEvent.bKeyDown = FALSE;
             menu[3].Event.KeyEvent.dwControlKeyState = NUMLOCK_ON;
-            for (key_index = 0; key_index < ARRAYSIZE(menu); ++key_index) {
+            if(scripted_window_frontend) {
+                /* EDIT advertises bare ALT to activate menus. Tap it, then
+                 * choose File, without fabricating UI-thread chord state.
+                 * Keep the separate Console Alt-F path below. */
+                INPUT_RECORD alt[2]={0};
+                alt[0].EventType=KEY_EVENT;
+                alt[0].Event.KeyEvent.bKeyDown=TRUE;
+                alt[0].Event.KeyEvent.wRepeatCount=1;
+                alt[0].Event.KeyEvent.wVirtualKeyCode=VK_MENU;
+                alt[0].Event.KeyEvent.wVirtualScanCode=0x38;
+                alt[1]=alt[0];alt[1].Event.KeyEvent.bKeyDown=FALSE;
+                scripted_console_input_delivered=scripted_console_input_delivered &&
+                    write_window_key_records(alt,ARRAYSIZE(alt));
+                Sleep(500);
+                scripted_console_input_delivered=scripted_console_input_delivered &&
+                    write_console_input_text(input,"f",0,output,NULL);
+            } else for (key_index = 0; key_index < ARRAYSIZE(menu); ++key_index) {
                 scripted_console_input_delivered = scripted_console_input_delivered &&
                     WriteConsoleInputA(input, &menu[key_index], 1, &written) && written == 1;
                 Sleep(OBSERVATION_KEY_EVENT_INTERVAL_MS);
@@ -1218,6 +1446,13 @@ int main(int argc, char **argv)
             write_console_snapshot(output, console_mouse_postinput_snapshot_path);
     }
     observation_elapsed_ms = (DWORD)(GetTickCount() - observation_started_at);
+    if(scripted_window_frontend) {
+        char timing_path[MAX_PATH];FILE *timing;
+        snprintf(timing_path,sizeof(timing_path),"%s.window-input.txt",argv[3]);
+        timing=fopen(timing_path,"w");
+        if(timing) { fprintf(timing,"frontend=%lu input-delivered=%d elapsed-before-exit-wait-ms=%lu timeout-ms=%lu\n",
+            scripted_window_frontend,scripted_console_input_delivered,observation_elapsed_ms,observation_timeout_ms);fclose(timing); }
+    }
     observation_wait_ms = observation_elapsed_ms >= observation_timeout_ms ? 0u :
         observation_timeout_ms - observation_elapsed_ms;
     wait_status = WaitForSingleObject(child.hProcess, observation_wait_ms);
@@ -1281,6 +1516,8 @@ int main(int argc, char **argv)
         fprintf(report, "pid=%lu\n", (unsigned long)child.dwProcessId);
         fprintf(report, "result=%s\n", wait_status == WAIT_TIMEOUT ? "timeout" : "exited");
         fprintf(report, "exit=0x%08lx\n", (unsigned long)exit_code);
+        fprintf(report,"graphics-handshake=%s\n",graphics_handshake ?
+            (graphics_handshake_ok ? "pass" : "fail") : "none");
         fprintf(report, "post-exit-observation-ms=%lu\n", post_exit_observation_ms);
         {
             DWORD members[64];

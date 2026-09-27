@@ -10,5 +10,17 @@
 typedef struct console_video_description {
     uint32_t width, height, stride, depth, bytes;
     uint32_t palette[256];
+    uint32_t kind;
 } console_video_description;
+enum { CONSOLE_VIDEO_DIB=0, CONSOLE_VIDEO_TEXT_FRAME=1 };
+/* TEXT_FRAME payload: this fixed header, followed by height tightly packed
+ * rows of width original glyph/attribute byte pairs. No library/native types.
+ * description.depth is zero; stride is width*2. Complete publication only. */
+typedef struct console_text_style {
+    uint32_t font_height,attribute_font_select;
+    int32_t cursor_column,cursor_row,cursor_start,cursor_height;
+    int32_t cursor_start1,cursor_height1;
+    uint32_t cursor_visible;
+    uint8_t fonts[2][256][32];
+} console_text_style;
 #endif

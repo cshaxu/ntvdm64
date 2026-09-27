@@ -21,6 +21,8 @@ src/bochs-core/README.md text
 src/opennt-bop/inc/** -text -whitespace
 src/mvdm/** -text -whitespace
 src/opennt-host/** -text -whitespace
+# Pinned nxvm presentation inputs retain their upstream byte identity.
+src/frontend-exe/lib/** -text
 src/opennt-softpc/bios/** -text -whitespace
 src/opennt-guest/wow16/fonts/** -text -whitespace
 docs/etc/legacy_code/opennt-bop/original/** -text -whitespace

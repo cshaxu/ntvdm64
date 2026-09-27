@@ -27,11 +27,18 @@ DWORD run16_console_video_begin(run16_console_video *video, uint32_t serial,
     if (!video || !description) return ERROR_INVALID_PARAMETER;
     if (!serial || serial <= video->serial) return ERROR_INVALID_DATA;
     if (!description->width || !description->height ||
-        description->width > SHRT_MAX || description->height > SHRT_MAX ||
-        (description->depth != 1 && description->depth != 8))
+        description->width > SHRT_MAX || description->height > SHRT_MAX)
         return ERROR_INVALID_DATA;
-    stride = (((uint64_t)description->width * description->depth + 31) / 32) * 4;
-    bytes = stride * description->height;
+    if(description->kind==CONSOLE_VIDEO_TEXT_FRAME) {
+        if(description->depth || description->width>160 || description->height>96)
+            return ERROR_INVALID_DATA;
+        stride=(uint64_t)description->width*2;
+        bytes=sizeof(console_text_style)+stride*description->height;
+    } else if(description->kind==CONSOLE_VIDEO_DIB) {
+        if(description->depth!=1 && description->depth!=8)return ERROR_INVALID_DATA;
+        stride = (((uint64_t)description->width * description->depth + 31) / 32) * 4;
+        bytes = stride * description->height;
+    } else return ERROR_INVALID_DATA;
     if (stride != description->stride || bytes != description->bytes || bytes > SIZE_MAX)
         return ERROR_INVALID_DATA;
     for (i = 0; i < 256; ++i)
@@ -58,6 +65,18 @@ DWORD run16_console_video_data(run16_console_video *video, uint32_t serial,
     memcpy(video->pending + offset, data, bytes);
     video->received += bytes;
     if (video->received == video->pending_description.bytes) {
+        if(video->pending_description.kind==CONSOLE_VIDEO_TEXT_FRAME) {
+            const console_text_style *style=(const console_text_style *)video->pending;
+            if(!style->font_height || style->font_height>32 ||
+                style->attribute_font_select>1 || style->cursor_visible>1 ||
+                style->cursor_height<0 || style->cursor_height>32 ||
+                style->cursor_height1<0 || style->cursor_height1>32 ||
+                style->cursor_start < -32 || style->cursor_start>31 ||
+                style->cursor_start1 < -32 || style->cursor_start1>31 ||
+                video->pending_description.height>768/style->font_height) {
+                discard_pending(video);return ERROR_INVALID_DATA;
+            }
+        }
         /* Publish only after the complete payload. The last complete frame
          * survives a partial transfer until TEXT, disposal or replacement. */
         if (video->pixels) HeapFree(GetProcessHeap(), 0, video->pixels);

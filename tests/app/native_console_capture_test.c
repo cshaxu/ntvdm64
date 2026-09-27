@@ -64,6 +64,7 @@ static int child(void)
     SMALL_RECT window={10,220,49,244},region;
     run16_native_capture capture;
     CHAR_INFO cell;
+    CONSOLE_FONT_INFOEX original_font={sizeof(original_font)},after_font={sizeof(after_font)};
     DWORD count,flags,members[16],i;
     count=GetConsoleProcessList(members,16);
     CHECK(count>=2 && count<=16);
@@ -76,6 +77,7 @@ static int child(void)
     second=CreateConsoleScreenBuffer(GENERIC_READ|GENERIC_WRITE,FILE_SHARE_READ|FILE_SHARE_WRITE,
         NULL,CONSOLE_TEXTMODE_BUFFER,NULL);
     CHECK(first!=INVALID_HANDLE_VALUE && second!=INVALID_HANDLE_VALUE);
+    CHECK(GetCurrentConsoleFontEx(second,FALSE,&original_font));
     CHECK(SetConsoleActiveScreenBuffer(first));
     seed(first,80,300,0x4e00);
     CHECK(SetConsoleCursorPosition(first,position) && SetConsoleCursorInfo(first,&cursor));
@@ -125,6 +127,21 @@ static int child(void)
     CHECK(SetConsoleActiveScreenBuffer(second));
     seed(second,5001,2,L'A'); /* Wider than one tile, not capped at DOS columns. */
     verify(5001,2,L'A'); /* Must capture active CONOUT$, not stale STDOUT. */
+    /* nxvm's native Console policy: the viewport is not the backing store.
+     * Navigate to the far edge without shrinking the font or losing cells. */
+    window=(SMALL_RECT){4981,0,5000,1};
+    CHECK(SetConsoleWindowInfo(second,TRUE,&window));
+    OK(run16_native_capture_begin(&capture));
+    CHECK(!memcmp(&capture.info.srWindow,&window,sizeof(window)));
+    OK(run16_native_capture_read(&capture,10001,&cell,1,&region,&count));
+    CHECK(count==1 && cell.Char.UnicodeChar==(WCHAR)(L'A'+10001%26));
+    CHECK(GetCurrentConsoleFontEx(second,FALSE,&after_font));
+    CHECK(original_font.dwFontSize.X==after_font.dwFontSize.X &&
+        original_font.dwFontSize.Y==after_font.dwFontSize.Y &&
+        original_font.FontFamily==after_font.FontFamily &&
+        original_font.FontWeight==after_font.FontWeight &&
+        !wcscmp(original_font.FaceName,after_font.FaceName));
+    run16_native_capture_end(&capture);
     for(i=0;i<3;++i){CHECK(!run16_native_capture_begin(&capture));run16_native_capture_end(&capture);}
     CloseHandle(first);CloseHandle(second);
     {

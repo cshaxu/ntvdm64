@@ -2,6 +2,7 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T423 S6 Window display](evidence/m0-t423-s6-window-display.md) | M0 T423 S6 | Pinned nxvm import, source recovery, display integration checklist and bounded tests. | Retain through T423 acceptance. |
 | [T423 S5 hidden backend acceptance](evidence/m0-t423-s5-hidden-backend-acceptance.md) | M0 T423 S5 | Expanded native backend contracts, mixed integration and fault evidence. | Retain through T423 acceptance. |
 | [T423 S3 hidden Console ledger](evidence/m0-t423-s3-hidden-console-ledger.md) | M0 T423 S3 | Native backend recovery, frontend/execution boundaries and implementation checklist. | Retain through T423 acceptance. |
 | [T423 S2 Console boundary ledger](evidence/m0-t423-s2-console-boundary-ledger.md) | M0 T423 S2 | Original callers, frontend ownership and protocol verification ledger. | Retain through T423 acceptance. |

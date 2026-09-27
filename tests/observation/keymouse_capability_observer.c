@@ -9,6 +9,7 @@
 #include <string.h>
 
 static HANDLE input_handle;
+static char expected_prompt[MAX_PATH + 2];
 
 static BOOL write_record(INPUT_RECORD *record)
 {
@@ -144,15 +145,16 @@ static BOOL wait_prompt(HANDLE output, DWORD timeout_ms)
     DWORD started = GetTickCount();
     do {
         CONSOLE_SCREEN_BUFFER_INFO info;
-        const char prompt[] = "O:\\WINNT>";
-        char line[sizeof(prompt)] = { 0 };
+        size_t prompt_length = strlen(expected_prompt);
+        char line[sizeof(expected_prompt)] = { 0 };
         DWORD read = 0;
         if (GetConsoleScreenBufferInfo(output, &info) &&
-            info.dwCursorPosition.X == sizeof(prompt) - 1) {
+            info.dwCursorPosition.X >= 0 &&
+            (size_t)info.dwCursorPosition.X == prompt_length) {
             COORD origin = { 0, info.dwCursorPosition.Y };
-            if (ReadConsoleOutputCharacterA(output, line, sizeof(prompt) - 1,
-                    origin, &read) && read == sizeof(prompt) - 1 &&
-                memcmp(line, prompt, sizeof(prompt) - 1) == 0) return TRUE;
+            if (ReadConsoleOutputCharacterA(output, line, (DWORD)prompt_length,
+                    origin, &read) && read == prompt_length &&
+                _strnicmp(line, expected_prompt, prompt_length) == 0) return TRUE;
         }
         Sleep(25u);
     } while ((DWORD)(GetTickCount() - started) < timeout_ms);
@@ -293,6 +295,12 @@ int main(int argc, char **argv)
     if (argc != 2) return 64;
     GetEnvironmentVariableA("TEST_RUNTIME_ROOT", runtime, sizeof(runtime));
     GetEnvironmentVariableA("MVDM_TEST_KEYMOUSE_COMMAND", guest, sizeof(guest));
+    {
+        DWORD length=GetFullPathNameA(runtime,MAX_PATH,expected_prompt,NULL);
+        if(!length || length>=MAX_PATH)return 64;
+        while(length>3 && expected_prompt[length-1]=='\\')expected_prompt[--length]=0;
+        expected_prompt[length]='>';expected_prompt[length+1]=0;
+    }
     snprintf(command, sizeof(command), "%s\\run16.exe COMMAND.COM", runtime);
     startup.dwFlags = STARTF_USESHOWWINDOW;
     startup.wShowWindow = SW_HIDE;
@@ -320,7 +328,7 @@ int main(int argc, char **argv)
         FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, 0u, NULL);
     stage = "guest-ready";
     if (input_handle == INVALID_HANDLE_VALUE || output == INVALID_HANDLE_VALUE ||
-        !wait_screen(output, "O:\\WINNT>", 6000u) || !send_text(guest) ||
+        !wait_prompt(output, 6000u) || !send_text(guest) ||
         !send_text("\r") || !wait_screen(output, "S25_READY", 6000u) ||
         !wait_for_mouse_mode(6000u)) goto done;
     stage = "callback";

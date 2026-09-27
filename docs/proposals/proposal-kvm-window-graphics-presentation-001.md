@@ -18,6 +18,12 @@ Owner 最新要求取代下文旧方案。保留 main、当前工作区、已验
 
 ### 最终所有权
 
+Owner 显示范围澄清：Console 保持字体及完整缓冲区，通过原生滚动访问；
+Window 保持共享库的按帧尺寸显示及超屏适配，不新增 Window 滚动条。
+200 列等额外 Win32 视口压力测试不是已证明的 OpenNT 要求，不得据此
+扩展共享库或新增收口门槛。保留超容量拒绝的边界证据，不算功能通过；
+真实已支持路径的回归仍须修复。四组件仅按批准的上游版本导入。
+
 - `src/frontend-exe/ → frontend.exe`：一个字符交互会话的唯一前端。
   独立持有可见 Console、Window、隐藏 Console/helper、输入/呈现线程、
   display 和 I/O 端点交接。helper 是 frontend.exe 的私有角色，不再借用

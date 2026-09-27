@@ -1,5 +1,6 @@
 /* Worker-local transport only. No native Console presentation or guest policy. */
 #include "console_client.h"
+#include "console_text.h"
 #include "product-abi/console_io.h"
 #include "opennt-abi/host-compat/include/console_grid.h"
 #include "basesrv-exe/opennt/include/base_rpc_client.h"
@@ -15,6 +16,8 @@ typedef struct console_client {
     DWORD generation,sequence,failure,video_serial;
     console_io_request request;
     ntvdm_console_graphics *graphics;
+    PALETTEENTRY text_palette[16];
+    BOOL text_palette_valid;
 } console_client;
 static DWORD console_activate(console_client *,BOOL);
 static console_client *output_client(HANDLE);
@@ -86,6 +89,31 @@ ntvdm_console_graphics *ntvdm_console_graphics_context(void)
     session *owner=session_thread_current();
     console_client *client=owner ? owner->console_client : NULL;
     return client ? client->graphics : NULL;
+}
+
+void NtvdmConsoleTextColours(const PALETTEENTRY *colours)
+{
+    session *owner=session_thread_current();
+    console_client *client=owner ? owner->console_client : NULL;
+    if (!client || !colours) return;
+    EnterCriticalSection(&client->lock);
+    memcpy(client->text_palette,colours,sizeof(client->text_palette));
+    client->text_palette_valid=TRUE;
+    LeaveCriticalSection(&client->lock);
+}
+
+BOOL ntvdm_console_text_palette(PALETTEENTRY colours[16])
+{
+    session *owner=session_thread_current();
+    console_client *client=owner ? owner->console_client : NULL;
+    BOOL valid;
+    if (!client) { SetLastError(ERROR_NOT_READY);return FALSE; }
+    EnterCriticalSection(&client->lock);
+    valid=client->text_palette_valid;
+    if (valid) memcpy(colours,client->text_palette,sizeof(client->text_palette));
+    LeaveCriticalSection(&client->lock);
+    SetLastError(valid ? ERROR_SUCCESS : ERROR_NO_DATA);
+    return valid;
 }
 
 /* Original nt_event.c owns the VDM close decision/cleanup. The NT4 Console

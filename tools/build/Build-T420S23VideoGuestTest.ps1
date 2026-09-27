@@ -3,11 +3,15 @@ param(
     [Parameter(Mandatory = $true)][string]$RepositoryRoot,
     [Parameter(Mandatory = $true)][string]$BuildRoot,
     [ValidateSet('int10', 'direct-vram', 'graphics-vram')][string]$GuestRoute = 'int10',
-    [string]$NasmExecutable = 'nasm.exe'
+    [string]$NasmExecutable = 'nasm.exe',
+    [switch]$WindowHandshake
 )
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
+if ($WindowHandshake -and $GuestRoute -ne 'graphics-vram') {
+    throw 'Window handshake requires the graphics-vram test route'
+}
 
 $repository = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $build = [IO.Path]::GetFullPath($BuildRoot)
@@ -29,7 +33,9 @@ $sourceName = switch ($GuestRoute) {
 }
 $source = Join-Path $repository ('tests\observation\' + $sourceName)
 $output = Join-Path $build 'VIDTST.COM'
-& $nasm.Source -f bin -o $output $source
+$defines = @()
+if ($WindowHandshake) { $defines += '-DWINDOW_HANDSHAKE=1' }
+& $nasm.Source -f bin @defines -o $output $source
 if ($LASTEXITCODE -ne 0) {
     throw "NASM failed for video guest fixture: $LASTEXITCODE"
 }
@@ -37,6 +43,7 @@ if ($LASTEXITCODE -ne 0) {
 [ordered]@{
     schema = 'm0.t420.s23.video-guest.v2'
     route = $GuestRoute
+    windowHandshake = [bool]$WindowHandshake
     source = 'tests/observation/' + $sourceName
     output = 'VIDTST.COM'
     sha256 = (Get-FileHash -LiteralPath $output -Algorithm SHA256).Hash.ToLowerInvariant()

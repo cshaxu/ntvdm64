@@ -16,6 +16,7 @@ static BOOL WINAPI target_control(DWORD event)
     SetEvent(control_received);return TRUE;
 }
 static run16_native_backend *backend;
+typedef struct window_sink_check { DWORD calls,error; WCHAR expected; } window_sink_check;
 #define CHECK(x) do { if(!(x)) { fprintf(stderr,"FAIL line=%u error=%lu: %s\n",(unsigned)__LINE__,GetLastError(),#x); \
     if(target)TerminateProcess(target,1);if(helper)TerminateProcess(helper,1);ExitProcess(1); } } while(0)
 static DWORD WINAPI watchdog(void *unused)
@@ -27,6 +28,15 @@ static DWORD WINAPI watchdog(void *unused)
         ExitProcess(ERROR_TIMEOUT);
     }
     return 0;
+}
+static DWORD window_snapshot(void *context,const run16_native_frame_info *frame,
+    const CHAR_INFO *cells,SIZE_T count)
+{
+    window_sink_check *check=context;
+    CHECK(count==(SIZE_T)frame->screen.dwSize.X*frame->screen.dwSize.Y && count>5);
+    CHECK(cells[5].Char.UnicodeChar==check->expected);
+    ++check->calls;
+    return check->error;
 }
 static run16_native_host_reply request(DWORD operation,void *payload,DWORD bytes,
     DWORD offset,DWORD count,void *response,DWORD capacity)
@@ -194,6 +204,25 @@ static void resize_roundtrip(void)
     CHECK(GetConsoleScreenBufferInfo(view.output,&info) && info.dwSize.X==90 && info.dwSize.Y==300 &&
         !memcmp(&info.srWindow,&window,sizeof(window)));
     CHECK(ReadConsoleOutputCharacterW(view.output,&value,1,point,&count) && count==1 && value==L'H');
+    {
+        window_sink_check sink={0,0,L'W'};
+        HANDLE same_helper=run16_native_backend_process(backend);
+        cell.Char.UnicodeChar=L'W';
+        reply=request(RUN16_NATIVE_CELLS_WRITE,&cell,sizeof(cell),5,1,NULL,0);CHECK(!reply.status);
+        view.window_context=&sink;view.window_frame=window_snapshot;
+        CHECK(!run16_native_view_present(backend,&view) && sink.calls==1);
+        CHECK(ReadConsoleOutputCharacterW(view.output,&value,1,point,&count) && value==L'H');
+        sink.error=ERROR_GEN_FAILURE;
+        CHECK(run16_native_view_present(backend,&view)==ERROR_GEN_FAILURE && sink.calls==2);
+        CHECK(ReadConsoleOutputCharacterW(view.output,&value,1,point,&count) && value==L'H');
+        CHECK(!run16_native_view_sync_console(backend,&view));
+        CHECK(sink.calls==2 && view.window_frame==window_snapshot && view.window_context==&sink);
+        CHECK(ReadConsoleOutputCharacterW(view.output,&value,1,point,&count) && value==L'W');
+        sink.error=0;
+        CHECK(!run16_native_view_present(backend,&view) && sink.calls==3);
+        view.window_frame=NULL;view.window_context=NULL;
+        CHECK(run16_native_backend_process(backend)==same_helper);
+    }
     reply=request(RUN16_NATIVE_INPUT_READ,NULL,0,0,256,events,sizeof(events));
     if(reply.count!=expected_count) {
         printf("resize reply status=%lu records=%lu native-expected=%lu\n",reply.status,reply.count,expected_count);
@@ -223,8 +252,33 @@ static void resize_roundtrip(void)
     CHECK(!run16_native_view_present(backend,&view));
     CHECK(GetConsoleScreenBufferInfo(view.output,&info) && info.dwSize.X==100 && info.dwSize.Y==350 &&
         !memcmp(&info.srWindow,&seed.frame.screen.srWindow,sizeof(SMALL_RECT)));
+    {
+        HANDLE alternate=CreateConsoleScreenBuffer(GENERIC_READ|GENERIC_WRITE,
+            FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,CONSOLE_TEXTMODE_BUFFER,NULL);
+        run16_native_capture active={0};
+        CHECK(alternate!=INVALID_HANDLE_VALUE);
+        CHECK(WriteConsoleOutputCharacterW(view.output,L"K",1,point,&count) && count==1);
+        CHECK(WriteConsoleOutputCharacterW(alternate,L"A",1,point,&count) && count==1);
+        CHECK(SetConsoleActiveScreenBuffer(alternate));
+        /* Native capture must follow the target's active buffer, whereas
+         * frontend reseeding must keep its own retained canonical buffer. */
+        CHECK(!run16_native_capture_begin(&active));
+        CHECK(ReadConsoleOutputCharacterW(active.buffer,&value,1,point,&count) && value==L'A');
+        run16_native_capture_end(&active);
+        CHECK(!run16_native_view_seed(backend,&view));
+        reply=request(RUN16_NATIVE_FRAME_BEGIN,NULL,0,0,0,&frame,sizeof(frame));CHECK(!reply.status);
+        reply=request(RUN16_NATIVE_FRAME_READ,NULL,0,5,1,&cell,sizeof(cell));
+        CHECK(!reply.status && reply.count==1 && cell.Char.UnicodeChar==L'K');
+        reply=request(RUN16_NATIVE_FRAME_END,NULL,0,0,0,NULL,0);CHECK(!reply.status);
+        CHECK(ReadConsoleOutputCharacterW(alternate,&value,1,point,&count) && value==L'A');
+        CHECK(SetConsoleActiveScreenBuffer(view.output));
+        CloseHandle(alternate);
+    }
     CHECK(!run16_native_screen_apply(view.output,&saved.info,&saved.cursor));
     run16_native_capture_end(&saved);run16_native_view_end(&view);
+    puts("PASS Window snapshot sink freezes visible output, propagates failure and restores same hidden backend");
+    puts("PASS handoff sync updates canonical Console without calling or replacing the Window sink");
+    puts("PASS frontend seed retains canonical buffer while native capture follows active buffer");
     puts("PASS bidirectional native resize/scroll without snap-back, stale-cell reseed or duplicate resize notifications");
 }
 static void close_host(BOOL stop)
@@ -520,6 +574,11 @@ int main(int argc,char **argv)
     }
     finished=CreateEventW(NULL,TRUE,FALSE,NULL);CHECK(finished);
     guard=CreateThread(NULL,0,watchdog,NULL,0,NULL);CHECK(guard);
+    if(argc==2 && !strcmp(argv[1],"--window-sink")) {
+        start();seed_geometry();resize_roundtrip();close_host(TRUE);
+        SetEvent(finished);CHECK(WaitForSingleObject(guard,5000)==WAIT_OBJECT_0);
+        CloseHandle(guard);CloseHandle(finished);return 0;
+    }
     if(argc==2 && !strcmp(argv[1],"--control-input")) {
         control_input();
         SetEvent(finished);CHECK(WaitForSingleObject(guard,5000)==WAIT_OBJECT_0);
@@ -580,9 +639,11 @@ int main(int argc,char **argv)
             CHECK(reply.status && !reply.process && !reply.thread);
         }
     }
+    /* Exact synthetic ordering precedes real resize/active-buffer changes,
+     * which can asynchronously append host-generated notifications. */
+    reclaim_input();
     seed_geometry();
     resize_roundtrip();
-    reclaim_input();
     swprintf_s(command,1024,L"\"%ls\" /d /c \"echo NATIVE-HIDDEN-OK & exit /b 37\"",comspec);
     launch(command);result(37);frame_contains(L"NATIVE-HIDDEN-OK");
     swprintf_s(command,1024,L"\"%ls\" /d /c \"set /p native_line=ENTER: & echo INPUT-ACCEPTED & exit /b 23\"",comspec);

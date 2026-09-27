@@ -50,7 +50,9 @@ DWORD frontend_bootstrap_start(PCWSTR image,frontend_connection *output)
         }
     }
     startup.StartupInfo.cb=sizeof(startup);
-    startup.StartupInfo.dwFlags=STARTF_USESHOWWINDOW;startup.StartupInfo.wShowWindow=SW_HIDE;
+    /* DETACHED_PROCESS avoids a transient Console. Do not pass SW_HIDE:
+     * it overrides the first ShowWindow of this process, including its
+     * later user-requested KVM Window. Hidden backends have their own role. */
     InitializeProcThreadAttributeList(NULL,1,0,&size);
     startup.lpAttributeList=HeapAlloc(GetProcessHeap(),0,size);
     if(!startup.lpAttributeList){error=ERROR_NOT_ENOUGH_MEMORY;goto done;}

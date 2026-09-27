@@ -34,3 +34,27 @@ client archive and transitive executable link inputs, excluding order-only
 build prerequisites. The current delivery and verification status belongs to
 docs/states/CURRENT.md; component placement alone is not S4 acceptance or
 permission to replace the published runtime package.
+
+## Window library import
+
+`nxvm-import.json` pins the exact Win32 dependency closure of the shared types,
+base, kvm-base and kvm-window from SoftPC revision
+3186afcd7b743e9797364c6a762eccd3b5576ca1, refreshed with owner approval on
+2026-09-27 from the earlier nxvm pin. The selected files under `lib/` and
+their MIT notice are unmodified. Only frontend presentation may consume this
+library; launcher clients and worker objects must not acquire a link edge.
+The upstream repository is not a build or runtime dependency. Its test library,
+Console broker, application and Linux implementations are not imported.
+
+The manifest's compile rows select fifteen translation units; the remaining
+files are their recursive header closure and four component READMEs. Base
+clock/process implementations are unnecessary for this selected closure.
+`tests/component-integration/verify-frontend-window-library.ps1` checks pinned
+bytes and builds the real Win32 leaf with a non-interactive contract fixture.
+This initial library verification does not claim product Window wiring; the
+S6 ledger tracks that remaining work.
+
+INPUT_RESET releases only successfully delivered keys belonging to that source,
+discards frontend-local dead-key composition, and retains the live source identity.
+SOURCE_RETIRED alone permanently retires that identity. Native mouse capture
+release remains owned by kvm-window, not by the NTVDM worker.

@@ -8,6 +8,7 @@ static KEY_EVENT_RECORD history[MAX_KEY_EVENTS];
 static int available,cleared_history,cleared_queue;
 static DWORD sent,calls;
 static INPUT_RECORD captured[MAX_KEY_EVENTS];
+static INPUT_RECORD first_returned_key;
 static struct { HANDLE InputHandle; } sc;
 static int GetHistoryKeyEvent(PKEY_EVENT_RECORD record,int number)
 {

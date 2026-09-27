@@ -28,6 +28,7 @@ foreach($negative in @(
 }
 $cases=@(Get-Content (Join-Path $EvidenceRoot 'summary.json') -Raw | ConvertFrom-Json)
 foreach($case in $cases){
+    $events=if($case.EventsPath){$case.EventsPath}else{Join-Path $EvidenceRoot "$($case.Case).events.txt"}
     $parts=$case.Case.Split('-'); $kinds='GGG'+$parts[0]+'GGG'+$parts[1]
     $sequences=@{}; $epoch=$null; $identities=@{}
     foreach($stage in 4..12){
@@ -36,7 +37,7 @@ foreach($case in $cases){
         $start=if($group -eq 1){4}else{10}
         $depth=@($start..$stage | Where-Object {$kinds[$_-1] -eq 'D'}).Count
         foreach($phase in @('ENTER','RETURN')){
-            $path=Join-Path $EvidenceRoot "$($case.Case).events.txt.records-$stage-$phase"
+            $path="$events.records-$stage-$phase"
             $lines=Get-Content $path
             if($lines[0] -notmatch '^EPOCH ([0-9]+)$'){throw "Missing service epoch: $path"}
             if($null -eq $epoch){$epoch=$Matches[1]}elseif($epoch -ne $Matches[1]){throw 'Broker restarted during chain'}
@@ -69,7 +70,7 @@ foreach($case in $cases){
         }
     }
     if($sequences.Count -ne 2 -or $sequences[1] -eq $sequences[2]){throw 'Missing separate original DOS worker identities'}
-    $final=@(Get-Content (Join-Path $EvidenceRoot "$($case.Case).events.txt.records-1-RETURN"))
+    $final=@(Get-Content "$events.records-1-RETURN")
     Assert-FinalSnapshot $final $epoch
     Write-Output "PASS $($case.Case) original DOS identities, nested return, retained first-group stack and no unfinished final DOS task"
 }

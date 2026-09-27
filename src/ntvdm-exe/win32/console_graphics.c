@@ -65,7 +65,7 @@ void ntvdm_console_graphics_destroy(ntvdm_console_graphics *state)
 static BOOL publish(ntvdm_console_graphics *state)
 {
     ntvdm_bitmap_description local;
-    console_video_description copied;
+    console_video_description copied={0};
     unsigned int i;
     if (!state->active) return TRUE;
     if (!ntvdm_console_bitmap_copy(state->bitmap,state->snapshot,state->bytes,&local,INFINITE)) return FALSE;

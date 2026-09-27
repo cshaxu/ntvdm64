@@ -22,4 +22,6 @@ BOOL WINAPI MvdmWriteConsoleA(HANDLE,const VOID *,DWORD,LPDWORD,LPVOID);
 BOOL ntvdm_console_prepend_keys(HANDLE,PINPUT_RECORD,DWORD,LPDWORD);
 /* -1: no frontend bound; 0: remote failure; 1: copied result available. */
 int ntvdm_console_window_query(DWORD query,LONG values[4]);
+/* Latest original resolved text palette, owned by this worker endpoint. */
+BOOL ntvdm_console_text_palette(PALETTEENTRY colours[16]);
 #endif

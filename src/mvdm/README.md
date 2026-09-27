@@ -1,5 +1,50 @@
 # mvdm
 
+MVDM-HOST-DIV-317: `softpc.new/host/src/nt_event.c` retains raw-record
+identity through keyboard dispatch and selects pending original history ages
+instead of interpreting device-packet count as raw-record count.
+`softpc.new/base/keymouse/keyba.c` carries those origins beside existing
+6805, held, translation and 8042 slots, with source-shaped reset/EOI retirement.
+Internal responses carry no raw origin. The existing KEY_EVENT_RECORD ring,
+device bytes, scan translation, locking, BIOS join and Console return remain
+owners; bounded metadata arithmetic lives in ntvdm-exe/softpc. No guest,
+frontend, broker or CCPU instruction logic changes. This candidate is not yet
+accepted: actual metadata lifecycle and negative/real regression gates are
+recorded in the [S6 ledger](../../docs/etc/evidence/m0-t423-s6-window-display.md).
+
+MVDM-HOST-DIV-316: `softpc.new/host/src/nt_event.c` joins its original
+hardware-history and BIOS returns without synthesizing an additional release
+when the first successfully returned hardware event is already the release of
+the newest BIOS key. Scan, VK and extended identity must match. Failed/empty
+returns, different keys and scanless BIOS sequences keep the original pair.
+The one-record boundary identity resets at every handoff and after the newest
+BIOS entry; no frontend filter, device policy or guest change is introduced.
+Both original return algorithms remain in their original owner. This bounded
+host correction is under verification, not delivered; see the
+[S6 ledger](../../docs/etc/evidence/m0-t423-s6-window-display.md).
+
+MVDM-HOST-DIV-315: `softpc.new/base/keymouse/keyba.c::keys_in_6805_buff`
+restores the `else` accidentally embedded in the original single-byte comment.
+Complete single-byte scan sequences must not leave a pending multi-byte marker:
+otherwise four unread events count as one and history return drops records.
+It also counts complete single-byte events after a partially consumed
+multi-byte sequence while preserving the partial-transfer flag; an unmatched
+earlier marker must not swallow those independent complete events.
+The original ring, history, reset and guest keyboard semantics remain owners;
+no new keyboard provider or CPU change is introduced. The extracted-original
+x86 test and real integration status are in the
+[S6 ledger](../../docs/etc/evidence/m0-t423-s6-window-display.md).
+
+MVDM-HOST-DIV-314: `softpc.new/host/src/nt_graph.c` copies resolved text
+colours and completed original refreshes to the independent frontend's
+authenticated channel. STREAM_IO asks only whether frontend policy requires
+text frames, then uses original `disable_stream_io`; no new mode transition,
+guest decoder, font loader or worker UI is introduced. Original update,
+palette resolution, cursor batching and error reporting retain their owner.
+The bounded copy/packing is in `ntvdm-exe/{softpc,win32}`; frontend owns all
+rendering. Source recovery, tests and pending real-guest gates are recorded
+in the [S6 ledger](../../docs/etc/evidence/m0-t423-s6-window-display.md).
+
 MVDM-HOST-DIV-313: `softpc.new/host/src/nt_event.c` acknowledges its original
 block/resume boundaries to the independent frontend. The block notification
 follows original final painting, unused-key return, mode restoration and timer

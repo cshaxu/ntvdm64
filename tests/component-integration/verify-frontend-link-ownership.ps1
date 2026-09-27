@@ -25,7 +25,7 @@ function Assert-FrontendOwnership([string[]]$Lines) {
             $node = $pending.Pop()
             if (!$seen.Add($node)) { continue }
             foreach ($input in $edges[$node]) {
-                if ($input -match '/src/frontend-exe/([^/]+\.c)$') {
+                if ($input -match '/src/frontend-exe/(.+\.c)$') {
                     [void]$sources.Add($Matches[1])
                 } elseif ($input -match '\.(obj|lib)$' -and $edges.ContainsKey($input)) {
                     $pending.Push($input)
@@ -49,7 +49,9 @@ function Assert-FrontendOwnership([string[]]$Lines) {
             'console_frontend.c', 'console_video.c', 'native_console_host.c',
             'native_console_backend.c', 'native_console_view.c',
             'native_console_capture.c', 'native_console_frontend.c',
-            'native_console_request.c') + $client) {
+            'native_console_request.c', 'window_controller.c', 'window_frame.c',
+            'window_keyboard.c', 'window_input_queue.c',
+            'lib/kvm-window/win32/component.c') + $client) {
         if ($required -notin $service) { throw "frontend.exe omits $required" }
     }
 }
@@ -66,4 +68,17 @@ foreach ($target in @('run16.exe', 'frontend-client.lib', 'ntvdm.exe')) {
     try { Assert-FrontendOwnership $mutated } catch { $rejected = $true }
     if (!$rejected) { throw "Ownership negative control did not reject $target" }
 }
-Write-Output 'PASS frontend service ownership, client-only launcher, no worker frontend; three leakage controls rejected'
+# Window libraries contain nested source paths, not only owner-root C files.
+# Reject both full-archive leakage and a library-only leaf object leakage.
+foreach ($leakInput in @('frontend-window.lib', 'obj/ownership-leak.obj')) {
+    $mutated = @($graph | ForEach-Object {
+        if ($_ -match '^build ntvdm\.exe(?: |:)') {
+            $_ -replace ': (\S+) ', (': $1 ' + $leakInput + ' ')
+        } else { $_ }
+    })
+    $mutated += 'build obj/ownership-leak.obj: cc O$:/repo/src/frontend-exe/lib/kvm-window/win32/component.c'
+    $rejected = $false
+    try { Assert-FrontendOwnership $mutated } catch { $rejected = $true }
+    if (!$rejected) { throw "Window ownership negative control did not reject $leakInput" }
+}
+Write-Output 'PASS frontend service and Window/library ownership, client-only launcher, no worker frontend; five leakage controls rejected'

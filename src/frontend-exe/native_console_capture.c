@@ -92,15 +92,27 @@ void run16_native_capture_end(run16_native_capture *capture)
 
 DWORD run16_native_capture_begin(run16_native_capture *capture)
 {
+    HANDLE output;
+    DWORD error;
+    if (!capture) return ERROR_INVALID_PARAMETER;
+    ZeroMemory(capture,sizeof(*capture));
+    output=CreateFileW(L"CONOUT$",GENERIC_READ|GENERIC_WRITE,
+        FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,OPEN_EXISTING,0,NULL);
+    if (output==INVALID_HANDLE_VALUE) return GetLastError();
+    error=run16_native_capture_begin_output(capture,output);
+    CloseHandle(output);
+    return error;
+}
+
+DWORD run16_native_capture_begin_output(run16_native_capture *capture,HANDLE output)
+{
     CONSOLE_SCREEN_BUFFER_INFOEX after={sizeof(after)};
     DWORD error;
     if (!capture) return ERROR_INVALID_PARAMETER;
     ZeroMemory(capture,sizeof(*capture));
-    /* Keep the prototype's read/write open: this host rejects cursor-info
-     * queries through a read-only CONOUT$ handle (captured by the fixture). */
-    capture->buffer=CreateFileW(L"CONOUT$",GENERIC_READ|GENERIC_WRITE,
-        FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,OPEN_EXISTING,0,NULL);
-    if (capture->buffer==INVALID_HANDLE_VALUE) { error=GetLastError();goto fail; }
+    if (!output || output==INVALID_HANDLE_VALUE) return ERROR_INVALID_HANDLE;
+    if (!DuplicateHandle(GetCurrentProcess(),output,GetCurrentProcess(),
+        &capture->buffer,0,FALSE,DUPLICATE_SAME_ACCESS)) return GetLastError();
     capture->info.cbSize=sizeof(capture->info);
     if (!GetConsoleScreenBufferInfoEx(capture->buffer,&capture->info) ||
         !GetConsoleCursorInfo(capture->buffer,&capture->cursor) ||

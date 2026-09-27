@@ -30,6 +30,8 @@ int main(void)
     operation(&owner,CONSOLE_IO_SCREEN_INFO);
     request.version++;
     CHECK(run16_console_dispatch(&owner,&request,&reply)==ERROR_REVISION_MISMATCH && !owner.sequence);
+    request.version=CONSOLE_IO_VERSION-1;
+    CHECK(run16_console_dispatch(&owner,&request,&reply)==ERROR_REVISION_MISMATCH && !owner.sequence);
     request.version=CONSOLE_IO_VERSION;request.generation++;
     CHECK(run16_console_dispatch(&owner,&request,&reply)==ERROR_ACCESS_DENIED && !owner.sequence);
     request.generation=owner.generation;request.sequence=2;

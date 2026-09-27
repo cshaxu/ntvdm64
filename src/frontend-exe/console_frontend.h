@@ -13,6 +13,11 @@ typedef struct run16_console_frontend {
     DWORD (*activate)(void *,BOOL);
     DWORD (*enter)(void *);
     void (*leave)(void *);
+    /* Called while enter's I/O lock is held; policy only, no UI mutation. */
+    BOOL (*text_frame_required)(void *);
+    /* Copied input owned by frontend; callbacks hold the enter lock. */
+    DWORD (*read_input)(void *,BOOL,INPUT_RECORD *,DWORD,DWORD *);
+    DWORD (*prepend_input)(void *,const INPUT_RECORD *,DWORD);
 } run16_console_frontend;
 DWORD run16_console_dispatch(run16_console_frontend *,const console_io_request *,
     console_io_reply *);

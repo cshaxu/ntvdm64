@@ -49,6 +49,37 @@ static HANDLE find_child(DWORD parent,PCWSTR name)
     } while(Process32NextW(snapshot,&entry));
     CloseHandle(snapshot);return worker;
 }
+typedef struct test_window { DWORD pid;HWND window; } test_window;
+static BOOL CALLBACK find_test_window(HWND window,LPARAM context)
+{
+    test_window *state=(test_window *)context;DWORD pid;WCHAR kind[64];
+    GetWindowThreadProcessId(window,&pid);
+    if(pid==state->pid && IsWindowVisible(window) &&
+        GetClassNameW(window,kind,64) && !wcscmp(kind,L"LibKvmWindow")){
+        state->window=window;return FALSE;
+    }
+    return TRUE;
+}
+static BOOL select_test_window(HANDLE frontend)
+{
+    char desktop[96];DWORD needed,written;INPUT_RECORD keys[2]={0};
+    test_window state={0};ULONGLONG deadline;
+    if(!GetUserObjectInformationA(GetThreadDesktop(GetCurrentThreadId()),UOI_NAME,
+        desktop,sizeof(desktop),&needed) || strncmp(desktop,"NTVDMConsoleTest-",17))return FALSE;
+    keys[0].EventType=KEY_EVENT;keys[0].Event.KeyEvent.bKeyDown=TRUE;
+    keys[0].Event.KeyEvent.wRepeatCount=1;keys[0].Event.KeyEvent.wVirtualKeyCode='F';
+    keys[0].Event.KeyEvent.wVirtualScanCode=0x21;
+    keys[0].Event.KeyEvent.dwControlKeyState=LEFT_CTRL_PRESSED|LEFT_ALT_PRESSED;
+    keys[1]=keys[0];keys[1].Event.KeyEvent.bKeyDown=FALSE;
+    if(!WriteConsoleInputW(GetStdHandle(STD_INPUT_HANDLE),keys,2,&written) || written!=2)return FALSE;
+    state.pid=GetProcessId(frontend);deadline=GetTickCount64()+8000;
+    do {
+        EnumWindows(find_test_window,(LPARAM)&state);
+        if(state.window)return TRUE;
+        Sleep(20);
+    } while(GetTickCount64()<deadline && WaitForSingleObject(frontend,0)==WAIT_TIMEOUT);
+    return FALSE;
+}
 int main(int argc,char **argv)
 {
     STARTUPINFOW startup={sizeof(startup)};
@@ -65,6 +96,9 @@ int main(int argc,char **argv)
     BOOL launcher_loss=argc>=2 && !strcmp(argv[1],"--launcher-loss");
     BOOL worker_loss=argc>=2 && !strcmp(argv[1],"--worker-loss");
     BOOL frontend_loss=argc>=2 && !strcmp(argv[1],"--frontend-loss");
+    BOOL window_verified=FALSE;
+    DWORD report_mode=0;BOOL have_report_mode=GetConsoleMode(GetStdHandle(STD_OUTPUT_HANDLE),&report_mode);
+    const char *verdict=NULL;
     const char *phase="guest-ready";
     ULONGLONG deadline;
     if(argc==4 && !strcmp(argv[1],"--bystander")) {
@@ -153,6 +187,11 @@ int main(int argc,char **argv)
     frontend=find_child(child.dwProcessId,L"frontend.exe");
     if(!worker || !frontend) goto cleanup;
     if(peer_frontend && GetProcessId(peer_frontend)==GetProcessId(frontend))goto cleanup;
+    if(GetEnvironmentVariableA("MVDM_LIFETIME_WINDOW",NULL,0)) {
+        phase="actual-window-before-fault";
+        if(!select_test_window(frontend))goto cleanup;
+        window_verified=TRUE;
+    }
     if(normal){
         DWORD members[64];
         phase="worker-native-console-isolation";
@@ -198,29 +237,39 @@ int main(int argc,char **argv)
         if(GetFileAttributesW(markers[2])==INVALID_FILE_ATTRIBUTES)goto cleanup;
         phase="nested-dos-result";
         if(helper_loss) {
-            fault_dialog dialog={0};size_t length;
+            fault_dialog dialog={0};size_t length;DWORD error_index,observed_error=0;
+            const DWORD pipe_errors[]={ERROR_NO_DATA,ERROR_BROKEN_PIPE};
             dialog.pid=GetProcessId(worker);
-            if(!FormatMessageW(FORMAT_MESSAGE_FROM_SYSTEM,NULL,ERROR_NO_DATA,0,dialog.expected,256,NULL))goto cleanup;
-            length=wcslen(dialog.expected);
-            while(length && (dialog.expected[length-1]==L'\r' || dialog.expected[length-1]==L'\n'))dialog.expected[--length]=0;
             deadline=GetTickCount64()+5000;
-            do {EnumWindows(error_dialog,(LPARAM)&dialog);if(dialog.window)break;Sleep(20);}while(GetTickCount64()<deadline);
+            do {
+                /* Helper death is observed either by pipe I/O (NO_DATA) or
+                 * the process/read wait (BROKEN_PIPE). Require exact OS text,
+                 * not an arbitrary dialog or broad error-code acceptance. */
+                for(error_index=0;error_index<2 && !dialog.window;++error_index) {
+                    if(!FormatMessageW(FORMAT_MESSAGE_FROM_SYSTEM,NULL,pipe_errors[error_index],0,dialog.expected,256,NULL))goto cleanup;
+                    length=wcslen(dialog.expected);
+                    while(length && (dialog.expected[length-1]==L'\r' || dialog.expected[length-1]==L'\n'))dialog.expected[--length]=0;
+                    EnumWindows(error_dialog,(LPARAM)&dialog);
+                    if(dialog.window)observed_error=pipe_errors[error_index];
+                }
+                if(dialog.window)break;Sleep(20);
+            }while(GetTickCount64()<deadline);
             phase="original-pipe-error-response";
             if(!dialog.window || WaitForSingleObject(nested,0)!=WAIT_TIMEOUT ||
                 WaitForSingleObject(worker,0)!=WAIT_TIMEOUT ||
                 !PostMessageW(dialog.window,WM_COMMAND,MAKEWPARAM(100,BN_CLICKED),(LPARAM)GetDlgItem(dialog.window,100)))goto cleanup;
             if(WaitForSingleObject(worker,8000)!=WAIT_OBJECT_0 || WaitForSingleObject(nested,5000)!=WAIT_OBJECT_0 ||
                 !GetExitCodeProcess(nested,&result))goto cleanup;
-            printf("original pipe-error Terminate response: DOS launcher result=%lu\n",result);
+            printf("original pipe-error=%lu Terminate response: DOS launcher result=%lu\n",observed_error,result);
             if(result!=ERROR_PROCESS_ABORTED)goto cleanup;
         }
         if(normal && !helper_loss && (WaitForSingleObject(nested,5000)!=WAIT_OBJECT_0 ||
             !GetExitCodeProcess(nested,&result) || result!=7))goto cleanup;
         phase="last-user-retirement";
         if(WaitForSingleObject(frontend,8000)!=WAIT_OBJECT_0)goto cleanup;
-        if(helper_loss)puts("PASS helper loss preserves native target result 37 and guest file work; original pipe error awaits explicit Terminate, DOS result 1067, frontend retires");
-        else puts(normal ? "PASS direct native result 37; orphan nested DOS survives and returns 7; frontend retires after last task" :
-            "PASS killed launcher preserves frontend and guest file work; frontend retires after last task");
+        if(helper_loss)verdict="PASS helper loss preserves native target result 37 and guest file work; original pipe error awaits explicit Terminate, DOS result 1067, frontend retires";
+        else verdict=normal ? "PASS direct native result 37; orphan nested DOS survives and returns 7; frontend retires after last task" :
+            "PASS killed launcher preserves frontend and guest file work; frontend retires after last task";
     }else{
         DWORD result;
         phase="frontend-closes-worker";
@@ -229,8 +278,8 @@ int main(int argc,char **argv)
             !GetExitCodeProcess(child.hProcess,&result) || result!=ERROR_PROCESS_ABORTED)goto cleanup;
         if(GetFileAttributesW(markers[2])!=INVALID_FILE_ATTRIBUTES)goto cleanup;
         if(worker_loss && WaitForSingleObject(frontend,8000)!=WAIT_OBJECT_0)goto cleanup;
-        puts(worker_loss ? "PASS worker failure completes direct task with 1067 and releases frontend" :
-            "PASS independent frontend death closes associated worker without guest Console I/O; task fails 1067");
+        verdict=worker_loss ? "PASS worker failure completes direct task with 1067 and releases frontend" :
+            "PASS independent frontend death closes associated worker without guest Console I/O; task fails 1067";
     }
     phase="worker-retirement-before-test-cleanup";
     if(WaitForSingleObject(worker,8000)!=WAIT_OBJECT_0)goto cleanup;
@@ -242,8 +291,19 @@ int main(int argc,char **argv)
             WaitForSingleObject(bystander.hProcess,8000)!=WAIT_OBJECT_0 ||
             !GetExitCodeProcess(bystander.hProcess,&peer_code) || peer_code!=53 ||
             WaitForSingleObject(peer_frontend,8000)!=WAIT_OBJECT_0)goto cleanup;
-        puts("PASS distinct unrelated character frontend and native target survive tested fault, return 53 and retire naturally");
     }
+    /* All lifecycle assertions are complete. Restore only this test observer's
+     * diagnostic output: killing a frontend can leave its former raw Console
+     * mode behind. This is not evidence of product Console-mode restoration. */
+    if(have_report_mode) {
+        COORD origin={0,0};
+        if(!SetConsoleMode(GetStdHandle(STD_OUTPUT_HANDLE),report_mode) ||
+           !SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),origin))goto cleanup;
+    }
+    puts(verdict);
+    if(isolated)puts("PASS distinct unrelated character frontend and native target survive tested fault, return 53 and retire naturally");
+    if(window_verified)
+        puts("PASS tested frontend has actual visible Window before lifecycle transition");
     code=0;
 cleanup:
     if(code) {
