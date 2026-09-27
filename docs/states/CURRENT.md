@@ -4,26 +4,36 @@
 
 ## Active Packet
 
-**Active: M0 T423 S6**
+**Active: M0 T423 S7**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T423 S6, Ordinary Mode. |
+| Identifier Mode | M0 T423 S7, Ordinary Mode. |
 | Candidate Proposal | [Console/Window frontend](../proposals/proposal-kvm-window-graphics-presentation-001.md). |
-| Admission And Approval | Owner authorized automatic sequential S admission. S5 P2 1fb291a8f was pushed to main and clean synchronization verified. Admit the approved independent-frontend Window/display stage. On 2026-09-27 owner approves refreshed four-component code from audited SoftPC and rejects viewport/font shrinking in favor of scrollable full content. |
-| Objective | frontend.exe owns one persistent console/window display policy per character session, renders DOS text/graphics and native hidden-Console frames through the latest nxvm four-component library set, and routes keyboard/hotkeys without changing execution or completion. |
-| Non-goals | No guest changes, scheduler, native tree-kill, pause/resume, root-run16 UI revival, Window mouse implementation, unverified publication or automatic T closure. Console mouse remains working; Window mouse is S7. |
-| Reference Baseline | S5 P2 1fb291a8f and S4 seven-file O:/winnt publication. S5 native seventeen, actual four-level pair and isolated mixed-fault five passed. Preserve all historical S3 evidence without reviving its owner. |
-| Files And ABI Surface | frontend-exe presentation/controller and necessary copied-frame binding, approved nxvm types/base/kvm-base/kvm-window imports after exact provenance/closure review, formal x86 graph and tests. Existing execution and broker protocols remain unchanged unless an evidenced finite need is recorded. |
+| Admission And Approval | Owner authorized automatic sequential S admission. S6 P1 f0f671e5e is pushed, published and clean/synchronized. Admit the approved Window mouse stage; shared libraries remain unchanged. |
+| Objective | Complete frontend-owned Window mouse delivery to original DOS text/graphics input and native hidden-Console input, preserving display policy and execution ownership. |
+| Non-goals | No guest/library changes, new driver/scheduler, pause/resume, launcher UI, speculative capacity extension or automatic T closure. |
+| Reference Baseline | S6 P1 f0f671e5e and its verified seven-file O:/winnt publication; Console/Window DOS17, nested chains, fault matrices, graphics return and inherited WOW frontiers. |
+| Files And ABI Surface | frontend-exe mouse conversion and existing copied input queues; focused tests and formal x86 graph. Preserve original guest input and existing authenticated execution protocols. |
 | Applicable Rules | EXECUTION, source policy, original mirror/ABI, output hygiene and the owner-approved independent frontend boundary. |
-| Verification | Pin current nxvm library sources and build closure; state-machine and hotkey tests; real DOS text/graphics/native frames, nested handoff and two independent sessions on private desktops; inherited S4/S5 regressions, DOS17, separate WOW frontiers and seven-file publication for production P. |
-| Expected Markers | Initially console; Console CAF selects window; Window CAF/Alt+Enter/X selects console without exit/pause. Console policy still uses Window for actual DOS graphics, returning only on valid text mode. Nested execution and repaint do not reset policy or recreate hidden backends. |
-| Asset Needs | Read-only latest nxvm selected four components and existing immutable media. New intermediate/staging directories only under build/M0-T423/S6. No owner-desktop manipulation; physical focus/clipping observation remains owner-waived with logic/unit proof. |
+| Verification | Source-first mouse contract audit; coordinate/delta/button/wheel/negative/release tests, real Window -> frontend -> DOS/native consumers, switching/nesting and Console mouse non-regression. Every production P retains full build/regression/publication gates. |
+| Expected Markers | Movement never fabricates a press. Delivered button releases survive focus loss, source retirement and display/consumer handoff. Mouse coordinates follow the displayed frame and target contract; inactive Console input stays isolated. |
+| Asset Needs | Read-only original MVDM and approved imported library; immutable guest plus authored probes. New directories only under build/M0-T423/S7. No owner-desktop manipulation; physical clipping observation owner-waived with source/unit proof. |
 | Reporting Requirements | Exact tested source/package/configuration, retained failure evidence and source-first ownership disposition; no compile-only or research-only runtime claims. |
 | Stop Conditions | Guest mutation, unauthenticated ownership, unapproved scheduling or proven product regression. |
-| Exit Criteria | All admitted display/frame/keyboard/switch/session contracts implemented and verified in the real frontend; exact reusable library provenance, no alternate renderer/scheduler; non-regression, coherent seven-file deployment, governance and commit/push. No research-only or frame-hit closure. |
+| Exit Criteria | DOS text/graphics and native Window mouse paths implemented and verified, including release and handoff; existing Console behavior retained; coherent seven-file publication and clean pushed P. |
 | Original Owner Request | Preserve old work; move visible/hidden Console/helper and future Window/display to frontend.exe; run16 classifies, submits/starts and waits. Complete S4, publish at O:/winnt, then automatically admit S5 and later S tasks. |
-| Similar-Issue Sweep | Text/graphics mode transitions, static frames, DOS/native nested returns, hidden Console geometry, streams versus presentation, repeat/key-up hotkeys, independent sessions, X versus actual frontend/Console shutdown, queued callbacks and teardown. |
+| Similar-Issue Sweep | Scaling, nonzero viewport origin, 43/50 rows, button-only events, relative motion, wheels, lost focus/capture, retirement, switches, independent sessions and nested DOS/native handoff. |
+
+## S6 Closure Record
+
+S6 P1 f0f671e5e is pushed to main; clean synchronization verified. The
+[S6 ledger](../etc/evidence/m0-t423-s6-window-display.md) records exact build,
+regression, failed observation/recovery and successful seven-file publication.
+Display/keyboard scope closes; Window mouse is S7. Physical observation remains
+owner-waived, wide-viewport capacity expansion is not admitted, and SOL/WRITE
+retain their original OOM frontiers. T423 remains open for S7/S8 and owner review.
+The detailed earlier progress below is retained chronology, not another active S.
 
 ## S4 Final Review
 
