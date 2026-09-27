@@ -4,24 +4,24 @@
 
 ## Active Packet
 
-**Active: M0 T423 S4**
+**Active: M0 T423 S5**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T423 S4, Ordinary Mode. |
+| Identifier Mode | M0 T423 S5, Ordinary Mode. |
 | Candidate Proposal | [Console/Window frontend](../proposals/proposal-kvm-window-graphics-presentation-001.md). |
-| Admission And Approval | Owner approved independent frontend migration, then requested S4 closure, verified publication/commit/push and automatic sequential S admission. S3 ended as preservation/replanning, not hidden-backend functional completion. |
-| Objective | Independent frontend.exe owns character-session Console presentation and hidden backend/helper; every run16 is a direct-target launcher/client. Verify session identity, lifetime and DOS/native interaction. |
+| Admission And Approval | Owner authorized automatic sequential admission after S4 delivery. S4 P1 9c27b5fd2 was committed and pushed to main; clean synchronized state was verified before this S5 admission. |
+| Objective | Complete expanded hidden Console acceptance through the existing independent frontend: mixed DOS/native nesting and failure, input return, controls, viewport/scrolling, Unicode/raw/cooked, streams, completion and cancellation. Repair proved defects in their existing owner only. |
 | Non-goals | No guest changes, scheduler, native process-tree kill, Window/display or mouse implementation, unverified publication, or automatic T closure. |
-| Reference Baseline | S2 production d0f856a50; source/test checkpoint afb18fe5f; HEAD cebe14bb7. The reviewed S3 reference and exact-byte snapshot remain preserved. |
+| Reference Baseline | S4 P1 9c27b5fd2d21bdf71a730c8d8fcfae10c613bf29; seven-file O:/winnt publication and unchanged configuration, exact hashes and raw evidence in the S3/S4 ledger. Preserved S3 branch/snapshot remain reference only. |
 | Files And ABI Surface | frontend-exe, launcher client, BaseSrv authenticated attachments, worker copied endpoint binding, formal graph and tests. Broker protocol 8, direct DOS 11, private helper 8; product 0.0.423. |
 | Applicable Rules | EXECUTION, source policy, original mirror/ABI, output hygiene and the owner-approved independent frontend boundary. |
-| Verification | x86 /MT CCPU40, ownership/transport and broker negatives; DOS17, two actual twelve-target chains, native eight, four lifetime cases, CMD/Explorer cleanup, streams, graphics return and separate WOW headless frontiers. Verify all seven published hashes and preserve recovery. |
-| Expected Markers | Independent frontend owner, no launcher input pump; GGGWDWGGGDWD and GGGDDWGGGWWD each have two distinct character frontends, correct actual I/O, results, DOS records and natural retirement. |
-| Asset Needs | Existing immutable media and native Console contracts. Reuse formal x86 caches; new temporary directories only under build/M0-T423/S4. No owner-desktop interaction. |
+| Verification | Reuse and review native backend/capture/frontend fixtures with all relevant modes; ordinary A/B four-level DOS/native chains, mixed lifecycle faults and cleanup. Production changes require DOS17, separate headless WOW baseline checks, seven-file build/publication and non-regression against S4. |
+| Expected Markers | Actual hidden native target I/O/results, ordered typeahead return, raw/cooked and control behavior, preserved Unicode/cursor/scroll/resize, EOF/aliasing, completed result not overwritten by I/O failure, bounded helper cancellation without native tree-kill. |
+| Asset Needs | Existing immutable media and checked-in fixtures. Reuse formal x86 caches; new temporary directories only under build/M0-T423/S5. No owner-desktop interaction. |
 | Reporting Requirements | Exact tested source/package/configuration, retained failure evidence and source-first ownership disposition; no compile-only or research-only runtime claims. |
 | Stop Conditions | Guest mutation, unauthenticated ownership, unapproved scheduling or proven product regression. |
-| Exit Criteria | Core independent frontend migration and its real normal/failure paths verified; final review, coherent seven-file publication, governance, reviewed commit/push. S5 receives expanded backend acceptance, not broken core migration. |
+| Exit Criteria | Every S5 capability row has inspected test coverage and passing applicable real/component evidence; gaps repaired without duplicate policy; affected production regression/publication plus governance and commit/push complete. No compile-only closure. |
 | Original Owner Request | Preserve old work; move visible/hidden Console/helper and future Window/display to frontend.exe; run16 classifies, submits/starts and waits. Complete S4, publish at O:/winnt, then automatically admit S5 and later S tasks. |
 | Similar-Issue Sweep | Direct/native-shell/GUI launches, separate C groups, inherited versus new Console, streams/aliases, nested reentry, launcher/frontend/helper/worker failure, final output and cancellation. |
 
@@ -65,10 +65,11 @@ Historical pending/deployment statements there are not current authority.
 - Two formal graph regenerations preserve generated ROM/DEF contents and
   timestamps without rebuilding production targets.
 
-Final governance and commit/push remain pending; coherent publication and
-published-path regression are complete.
-S4 is still active; S5 has standing
-admission authority but is not yet active. No T closure is claimed.
+S4 P1 was committed and pushed as 9c27b5fd2. Governance, coherent publication
+and published-path regression are complete; Git reported clean and 0/0 with
+origin/main. S5 is now automatically admitted under standing owner authority.
+Its [acceptance ledger](../etc/evidence/m0-t423-s5-hidden-backend-acceptance.md)
+owns the remaining expanded matrix. No T closure is claimed.
 
 ## Current Technical Baseline
 
@@ -112,6 +113,14 @@ completion. The [S3 snapshot and handoff](../etc/evidence/m0-t423-s3-hidden-cons
 preserves exact WIP, tests and remaining S4/S5 obligations. No reset or loss.
 
 ## Previous Task Closures
+
+## S4 Closure Record
+
+S4 P1 9c27b5fd2d21bdf71a730c8d8fcfae10c613bf29 is pushed to main.
+The [S4 delivery evidence](../etc/evidence/m0-t423-s3-hidden-console-ledger.md)
+records independent frontend ownership, original record lifecycle, actual
+twelve-target chains, seven-file publication and retained limitations.
+Window/display and expanded S5 acceptance are not claimed by this closure.
 
 T422 remains owner-closed. Earlier task facts and the pre-restart baseline are
 retained in [prior status](../etc/evidence/m0-t423-restart-prior-status.md).

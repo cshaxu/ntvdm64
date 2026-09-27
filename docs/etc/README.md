@@ -2,6 +2,7 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T423 S5 hidden backend acceptance](evidence/m0-t423-s5-hidden-backend-acceptance.md) | M0 T423 S5 | Expanded native backend contracts, mixed integration and fault evidence. | Retain through T423 acceptance. |
 | [T423 S3 hidden Console ledger](evidence/m0-t423-s3-hidden-console-ledger.md) | M0 T423 S3 | Native backend recovery, frontend/execution boundaries and implementation checklist. | Retain through T423 acceptance. |
 | [T423 S2 Console boundary ledger](evidence/m0-t423-s2-console-boundary-ledger.md) | M0 T423 S2 | Original callers, frontend ownership and protocol verification ledger. | Retain through T423 acceptance. |
 | [T421 S2 VDMREDIR target component](evidence/m0-t421-s2-vdmredir-target-component.md) | M0 T421 S2 | Moves the finite DLL-only bindings out of the worker, records fresh x86 export/import proof and matching real DOS redirector regression. | Retain through T421 S4 closure. |
