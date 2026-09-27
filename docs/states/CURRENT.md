@@ -4,26 +4,26 @@
 
 ## Active Packet
 
-**Active: M0 T423 S5**
+**Active: M0 T423 S6**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T423 S5, Ordinary Mode. |
+| Identifier Mode | M0 T423 S6, Ordinary Mode. |
 | Candidate Proposal | [Console/Window frontend](../proposals/proposal-kvm-window-graphics-presentation-001.md). |
-| Admission And Approval | Owner authorized automatic sequential admission after S4 delivery. S4 P1 9c27b5fd2 was committed and pushed to main; clean synchronized state was verified before this S5 admission. |
-| Objective | Complete expanded hidden Console acceptance through the existing independent frontend: mixed DOS/native nesting and failure, input return, controls, viewport/scrolling, Unicode/raw/cooked, streams, completion and cancellation. Repair proved defects in their existing owner only. |
-| Non-goals | No guest changes, scheduler, native process-tree kill, Window/display or mouse implementation, unverified publication, or automatic T closure. |
-| Reference Baseline | S4 P1 9c27b5fd2d21bdf71a730c8d8fcfae10c613bf29; seven-file O:/winnt publication and unchanged configuration, exact hashes and raw evidence in the S3/S4 ledger. Preserved S3 branch/snapshot remain reference only. |
-| Files And ABI Surface | frontend-exe, launcher client, BaseSrv authenticated attachments, worker copied endpoint binding, formal graph and tests. Broker protocol 8, direct DOS 11, private helper 8; product 0.0.423. |
+| Admission And Approval | Owner authorized automatic sequential S admission. S5 P2 1fb291a8f was pushed to main and clean synchronization verified. Admit the approved independent-frontend Window/display stage. |
+| Objective | frontend.exe owns one persistent console/window display policy per character session, renders DOS text/graphics and native hidden-Console frames through the latest nxvm four-component library set, and routes keyboard/hotkeys without changing execution or completion. |
+| Non-goals | No guest changes, scheduler, native tree-kill, pause/resume, root-run16 UI revival, Window mouse implementation, unverified publication or automatic T closure. Console mouse remains working; Window mouse is S7. |
+| Reference Baseline | S5 P2 1fb291a8f and S4 seven-file O:/winnt publication. S5 native seventeen, actual four-level pair and isolated mixed-fault five passed. Preserve all historical S3 evidence without reviving its owner. |
+| Files And ABI Surface | frontend-exe presentation/controller and necessary copied-frame binding, approved nxvm types/base/kvm-base/kvm-window imports after exact provenance/closure review, formal x86 graph and tests. Existing execution and broker protocols remain unchanged unless an evidenced finite need is recorded. |
 | Applicable Rules | EXECUTION, source policy, original mirror/ABI, output hygiene and the owner-approved independent frontend boundary. |
-| Verification | Reuse and review native backend/capture/frontend fixtures with all relevant modes; ordinary A/B four-level DOS/native chains, mixed lifecycle faults and cleanup. Production changes require DOS17, separate headless WOW baseline checks, seven-file build/publication and non-regression against S4. |
-| Expected Markers | Actual hidden native target I/O/results, ordered typeahead return, raw/cooked and control behavior, preserved Unicode/cursor/scroll/resize, EOF/aliasing, completed result not overwritten by I/O failure, bounded helper cancellation without native tree-kill. |
-| Asset Needs | Existing immutable media and checked-in fixtures. Reuse formal x86 caches; new temporary directories only under build/M0-T423/S5. No owner-desktop interaction. |
+| Verification | Pin current nxvm library sources and build closure; state-machine and hotkey tests; real DOS text/graphics/native frames, nested handoff and two independent sessions on private desktops; inherited S4/S5 regressions, DOS17, separate WOW frontiers and seven-file publication for production P. |
+| Expected Markers | Initially console; Console CAF selects window; Window CAF/Alt+Enter/X selects console without exit/pause. Console policy still uses Window for actual DOS graphics, returning only on valid text mode. Nested execution and repaint do not reset policy or recreate hidden backends. |
+| Asset Needs | Read-only latest nxvm selected four components and existing immutable media. New intermediate/staging directories only under build/M0-T423/S6. No owner-desktop manipulation; physical focus/clipping observation remains owner-waived with logic/unit proof. |
 | Reporting Requirements | Exact tested source/package/configuration, retained failure evidence and source-first ownership disposition; no compile-only or research-only runtime claims. |
 | Stop Conditions | Guest mutation, unauthenticated ownership, unapproved scheduling or proven product regression. |
-| Exit Criteria | Every S5 capability row has inspected test coverage and passing applicable real/component evidence; gaps repaired without duplicate policy; affected production regression/publication plus governance and commit/push complete. No compile-only closure. |
+| Exit Criteria | All admitted display/frame/keyboard/switch/session contracts implemented and verified in the real frontend; exact reusable library provenance, no alternate renderer/scheduler; non-regression, coherent seven-file deployment, governance and commit/push. No research-only or frame-hit closure. |
 | Original Owner Request | Preserve old work; move visible/hidden Console/helper and future Window/display to frontend.exe; run16 classifies, submits/starts and waits. Complete S4, publish at O:/winnt, then automatically admit S5 and later S tasks. |
-| Similar-Issue Sweep | Direct/native-shell/GUI launches, separate C groups, inherited versus new Console, streams/aliases, nested reentry, launcher/frontend/helper/worker failure, final output and cancellation. |
+| Similar-Issue Sweep | Text/graphics mode transitions, static frames, DOS/native nested returns, hidden Console geometry, streams versus presentation, repeat/key-up hotkeys, independent sessions, X versus actual frontend/Console shutdown, queued callbacks and teardown. |
 
 ## S4 Final Review
 
@@ -67,9 +67,9 @@ Historical pending/deployment statements there are not current authority.
 
 S4 P1 was committed and pushed as 9c27b5fd2. Governance, coherent publication
 and published-path regression are complete; Git reported clean and 0/0 with
-origin/main. S5 is now automatically admitted under standing owner authority.
-Its [acceptance ledger](../etc/evidence/m0-t423-s5-hidden-backend-acceptance.md)
-owns the remaining expanded matrix. No T closure is claimed.
+origin/main. S5 subsequently completed its expanded matrix in the
+[acceptance ledger](../etc/evidence/m0-t423-s5-hidden-backend-acceptance.md).
+S6 is now active. No T closure is claimed.
 
 ## Current Technical Baseline
 
@@ -81,7 +81,7 @@ all passing with unrelated-session survival and worker retirement before test
 cleanup. Helper loss preserves native execution and exposes the original DOS
 pipe-error dialog; explicit Terminate yields 1067, not fabricated DOS success.
 No production binary changed. The S5 ledger records the complete bounded
-conclusion; final governance/commit/push precede S6 admission.
+conclusion. Governance/commit/push completed before the present S6 admission.
 
 - S1 delivered the launcher lifecycle boundary under its recorded owner
   verification exception; [S1 evidence](../etc/evidence/m0-t423-s1-restart-lifecycle.md).
@@ -121,6 +121,18 @@ Independent frontend replaces its UI owner, not its accepted task semantics.
 S3 concluded as preservation/replanning only, not functional hidden-backend
 completion. The [S3 snapshot and handoff](../etc/evidence/m0-t423-s3-hidden-console-ledger.md)
 preserves exact WIP, tests and remaining S4/S5 obligations. No reset or loss.
+
+## S5 Closure Record
+
+S5 P1 3e425046d and P2 1fb291a8f are committed and pushed to main.
+The [S5 acceptance ledger](../etc/evidence/m0-t423-s5-hidden-backend-acceptance.md)
+records all seventeen component cases, both ordinary four-level chains and
+five mixed lifecycle/isolation cases. Only tests/docs changed; deployed S4
+runtime hashes remain unchanged. Original DOS pipe-error interaction remains
+explicit, not a promise of error-free I/O after a killed helper.
+
+S6 is now active under automatic admission, starting with current nxvm source
+and library-boundary verification. No Window implementation is yet claimed.
 
 ## Previous Task Closures
 

@@ -105,6 +105,15 @@ run16 仅传递经认证的启动上下文，不成为 Console 资源 owner。
 
 ### 新 S 序列与退出标准
 
+独立 frontend 方案下，下方历史显示表的 root-run16 owner 全部由
+frontend.exe 接替；不把 UI 迁回 launcher。S6 的 display 是字符会话
+持久状态，初值 console，嵌套目标切换不重置。Console CAF 设 window；
+Window CAF/Alt+Enter/X 设 console，不结束任务、不暂停。console 策略下
+实际 DOS 图形仍使用 Window，只有明确文本模式/文本帧才回到 Console；
+静态图形没产生新帧不算文本模式。DOS 输入仍进原始 guest 设备，native
+字符输入仍进稳定隐藏 Console，文件/管道重定向不被呈现切换改写。
+S5 扩展验收已交付至 `1fb291a8f`；S6 从最新 nxvm 四组件核验开始。
+
 | S | 工作与独立验收 |
 | --- | --- |
 | S1、S2 | 保留已交付历史结论；旧 root 生命周期实现需迁移，不能直接视作新架构通过。 |
