@@ -6,10 +6,10 @@
 #include <stdio.h>
 #include <string.h>
 #include "run16-exe/frontend_scope.h"
-#include "frontend-exe/console_channel.h"
-#include "frontend-exe/native_console_request.h"
-#include "frontend-exe/session_service.h"
-#include "frontend-exe/bootstrap.h"
+#include "ntkvm-exe/console_channel.h"
+#include "ntkvm-exe/native_console_request.h"
+#include "ntkvm-exe/session_service.h"
+#include "ntkvm-exe/bootstrap.h"
 #include "product-abi/console_io.h"
 
 #define CHECK(x) do { if (!(x)) { fprintf(stderr,"line %u error %lu: %s\n", \
@@ -28,7 +28,7 @@ static void attached(void);
 DWORD frontend_bootstrap_start(PCWSTR image,frontend_connection *connection)
 {
     DWORD error;
-    CHECK(wcsstr(image,L"frontend.exe")!=NULL);
+    CHECK(wcsstr(image,L"ntkvm.exe")!=NULL);
     ZeroMemory(connection,sizeof(*connection));
     notification=CreateEventW(NULL,TRUE,FALSE,NULL);CHECK(notification);++registrations;
     CHECK(DuplicateHandle(GetCurrentProcess(),notification,GetCurrentProcess(),&connection->capability,SYNCHRONIZE,TRUE,0));

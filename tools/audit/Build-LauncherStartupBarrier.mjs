@@ -37,7 +37,7 @@ try {
         const objects=['obj/run16/console_probe.obj','obj/run16/support.obj','obj/run16/rpc_client.obj','obj/run16/stub.obj','opennt-base-client.lib','opennt-base-bindings.lib','broker-transport.lib','original-opennt-rtl-x86.lib'].map(p=>`"${product}/${p}"`).join(' ');
         compile(`link.exe /nologo /subsystem:console /entry:wWinMainCRTStartup /opt:ref /out:${name}.exe ${name}.obj ${objects} rpcrt4.lib ntdll.lib kernel32.lib shell32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib`);
     }
-    for(const name of ['run16.exe','basesrv.exe','ntvdm.exe'])fs.copyFileSync(path.join(product,name),path.join(build,name));
+    for(const name of ['run16.exe','ntsrv.exe','ntvdm.exe'])fs.copyFileSync(path.join(product,name),path.join(build,name));
 } finally {fs.closeSync(log);}
 assert.equal(fs.readFileSync('src/app/run16_entry.c','utf8'),original);
 console.log('PASS: two build-only launcher cut points; production source unchanged');

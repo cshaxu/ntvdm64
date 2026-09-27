@@ -54,6 +54,8 @@
 #include "conapi.h"
 /* DIVERGENCE(MVDM-HOST-DIV-314): copied text for the independent frontend. */
 #include "ntvdm-exe/win32/console_text.h"
+/* DIVERGENCE(MVDM-HOST-DIV-318): original CCPU cursor refresh owner. */
+extern void mouse_refresh_pointer(void);
 
 #include "nt_graph.h"
 #include "nt_cga.h"
@@ -827,6 +829,9 @@ void nt_graphics_tick(void)
 {
     /* DIVERGENCE(MVDM-HOST-DIV-314): publish only after an original refresh. */
     BOOL presentation_updated = FALSE;
+
+    /* DIVERGENCE(MVDM-HOST-DIV-318): restore background after route changes. */
+    mouse_refresh_pointer();
 
     /* DIVERGENCE(MVDM-HOST-DIV-314): retain the original stream-to-video
        transition; a separate frontend cannot render stream-only VGA state. */

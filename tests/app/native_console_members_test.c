@@ -1,7 +1,7 @@
 /* Real frontend helper and Windows Console membership. Private desktop only. */
 #include <windows.h>
 #include <stdio.h>
-#include "frontend-exe/native_console_backend.h"
+#include "ntkvm-exe/native_console_backend.h"
 
 int wmain(int argc,WCHAR **argv)
 {
@@ -29,7 +29,7 @@ int wmain(int argc,WCHAR **argv)
     }
     if(!GetModuleFileNameW(NULL,image,MAX_PATH) || !GetCurrentDirectoryW(MAX_PATH,cwd))goto done;
     wcscpy_s(frontend,MAX_PATH,image);slash=wcsrchr(frontend,L'\\');if(!slash)goto done;
-    wcscpy_s(slash+1,MAX_PATH-(size_t)(slash+1-frontend),L"frontend.exe");
+    wcscpy_s(slash+1,MAX_PATH-(size_t)(slash+1-frontend),L"ntkvm.exe");
     swprintf_s(ready_name,96,L"Local\\ntvdm-members-%lu-ready",GetCurrentProcessId());
     swprintf_s(parent_name,96,L"Local\\ntvdm-members-%lu-parent",GetCurrentProcessId());
     swprintf_s(child_name,96,L"Local\\ntvdm-members-%lu-child",GetCurrentProcessId());

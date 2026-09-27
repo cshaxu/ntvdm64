@@ -1,7 +1,7 @@
 #include "frontend_scope.h"
-#include "frontend-exe/bootstrap.h"
-#include "frontend-exe/native_request_client.h"
-#include "basesrv-exe/opennt/include/base_rpc_client.h"
+#include "ntkvm-exe/bootstrap.h"
+#include "ntkvm-exe/native_request_client.h"
+#include "ntsrv-exe/opennt/include/base_rpc_client.h"
 #include "product-abi/console_io.h"
 #include <stdint.h>
 #include <stdlib.h>
@@ -70,7 +70,7 @@ DWORD run16_frontend_scope_begin(run16_frontend_scope **output)
         DWORD length=GetModuleFileNameW(NULL,image,ARRAYSIZE(image));
         frontend_connection connection={0};
         if(!length || length>=ARRAYSIZE(image) || !(slash=wcsrchr(image,L'\\'))){error=ERROR_BAD_PATHNAME;goto fail;}
-        if(wcscpy_s(slash+1,ARRAYSIZE(image)-(size_t)(slash+1-image),L"frontend.exe")){error=ERROR_FILENAME_EXCED_RANGE;goto fail;}
+        if(wcscpy_s(slash+1,ARRAYSIZE(image)-(size_t)(slash+1-image),L"ntkvm.exe")){error=ERROR_FILENAME_EXCED_RANGE;goto fail;}
         error=frontend_bootstrap_start(image,&connection);if(error)goto fail;
         scope->capability=connection.capability;connection.capability=NULL;
         scope->root=connection.process;connection.process=NULL;

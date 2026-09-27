@@ -2,8 +2,8 @@
  * Broker admission is mocked here; real RPC identity tests remain mandatory. */
 #include <windows.h>
 #include <stdio.h>
-#include "frontend-exe/native_request_client.h"
-#include "frontend-exe/native_request_protocol.h"
+#include "ntkvm-exe/native_request_client.h"
+#include "ntkvm-exe/native_request_protocol.h"
 
 static HANDLE peer_thread;
 static HANDLE peer_process;

@@ -24,13 +24,13 @@ if(!$ProcessPackageRoot.StartsWith($build,[StringComparison]::OrdinalIgnoreCase)
 }
 if(Test-Path $EvidenceRoot){throw 'Use fresh evidence'}
 $paths=@()
-foreach($name in @('run16.exe','frontend.exe','ntvdm.exe','basesrv.exe')){
+foreach($name in @('run16.exe','ntkvm.exe','ntvdm.exe','ntsrv.exe')){
     $launch=Join-Path $PackageRoot $name
     $physical=Join-Path $ProcessPackageRoot $name
     if((Get-FileHash $launch).Hash -ne (Get-FileHash $physical).Hash){throw 'Candidate identity mismatch'}
     $paths+=@($launch,$physical)
 }
-if(@(Get-CimInstance Win32_Process -Filter "Name='basesrv.exe'").Count){throw 'Broker already running'}
+if(@(Get-CimInstance Win32_Process -Filter "Name='ntsrv.exe'").Count){throw 'Broker already running'}
 foreach($name in @('NOIOLIFE.EXE','NOIO.COM')){
     if(!(Test-Path (Join-Path $PackageRoot "tests\$name"))){throw "Missing authored fixture $name"}
 }

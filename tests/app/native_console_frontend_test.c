@@ -1,7 +1,8 @@
 /* Production frontend/backend/view/host composition on a private desktop.
  * Only this executable's private helper is suspended or terminated for faults;
  * no production injection switch and no guest or broker substitute. */
-#include "frontend-exe/native_console_frontend.h"
+#include "ntkvm-exe/native_console_frontend.h"
+#include "product-abi/console_mouse.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <wchar.h>
@@ -29,6 +30,31 @@ static DWORD WINAPI watchdog(void *context)
     (void)context;
     CHECK(WaitForSingleObject(finished,45000)==WAIT_OBJECT_0);
     return 0;
+}
+static DWORD WINAPI check_native_mouse(void *context)
+{
+    INPUT_RECORD records[64];DWORD count,i,mouse_count;CONSOLE_SCREEN_BUFFER_INFO screen;
+    HANDLE input=GetStdHandle(STD_INPUT_HANDLE),received=named_event(L"mouse",FALSE);
+    ULONGLONG deadline=GetTickCount64()+10000;
+    const DWORD buttons[]={FROM_LEFT_1ST_BUTTON_PRESSED,0,RIGHTMOST_BUTTON_PRESSED,0};
+    (void)context;
+    do {
+        CHECK(PeekConsoleInputW(input,records,64,&count));
+        mouse_count=0;
+        for(i=0;i<count;++i)if(records[i].EventType==MOUSE_EVENT)++mouse_count;
+        if(mouse_count>=4)break;
+        Sleep(10);
+    }while(GetTickCount64()<deadline);
+    CHECK(mouse_count==4 && GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE),&screen));
+    CHECK(ReadConsoleInputW(input,records,count,&count));
+    mouse_count=0;
+    for(i=0;i<count;++i)if(records[i].EventType==MOUSE_EVENT) {
+        MOUSE_EVENT_RECORD *mouse=&records[i].Event.MouseEvent;
+        CHECK(mouse->dwButtonState==buttons[mouse_count++] && !mouse->dwEventFlags);
+        CHECK(mouse->dwMousePosition.X==screen.srWindow.Left+(screen.srWindow.Right-screen.srWindow.Left+1)/2);
+        CHECK(mouse->dwMousePosition.Y==screen.srWindow.Top+(screen.srWindow.Bottom-screen.srWindow.Top+1)/2);
+    }
+    CHECK(SetEvent(received));CloseHandle(received);return 0;
 }
 static DWORD WINAPI stop_helper_thread(void *context)
 {
@@ -65,7 +91,7 @@ static void exercise(DWORD expected,BOOL stalled,BOOL cancel)
     run16_native_start start={0};
     run16_console_video lazy_video={0};
     WCHAR image[MAX_PATH],command[1024],directory[MAX_PATH],name[128],helper_image[MAX_PATH];
-    HANDLE mapping,done,stall,ack,release,ready=NULL;
+    HANDLE mapping,done,stall,ack,release,ready=NULL,mouse_ready=NULL;
     DWORD *pid,error,result=0xdeadbeef,actual,image_chars=MAX_PATH;
     ULONGLONG began,elapsed;
     CHECK(swprintf_s(prefix,96,L"Local\\NTVDMFrontend-%lu-%lu-%u-%u",
@@ -74,6 +100,7 @@ static void exercise(DWORD expected,BOOL stalled,BOOL cancel)
     done=named_event(L"done",TRUE);stall=named_event(L"stall",TRUE);
     ack=named_event(L"stalled",TRUE);release=named_event(L"release",TRUE);
     if(expected==39)ready=named_event(L"ready",TRUE);
+    if(expected==37)mouse_ready=named_event(L"mouse",TRUE);
     CHECK(swprintf_s(name,128,L"%ls-pid",prefix)>0);
     mapping=CreateFileMappingW(INVALID_HANDLE_VALUE,NULL,PAGE_READWRITE,0,sizeof(DWORD),name);
     CHECK(mapping);pid=MapViewOfFile(mapping,FILE_MAP_READ|FILE_MAP_WRITE,0,0,sizeof(*pid));CHECK(pid);
@@ -87,7 +114,7 @@ static void exercise(DWORD expected,BOOL stalled,BOOL cancel)
         console_video_description description={4,2,4,8,8};BYTE pixels[8]={1};
         HWND window=NULL;DWORD window_pid;DWORD_PTR reply;
         ULONGLONG deadline=GetTickCount64()+5000;
-        INPUT_RECORD records[8];DWORD count,index,keys=0;
+        INPUT_RECORD records[16];DWORD count,index,keys=0,mouse=0;
         description.palette[1]=0xffffff;
         CHECK(!run16_console_video_begin(&lazy_video,1,&description));
         CHECK(!run16_console_video_data(&lazy_video,1,0,pixels,sizeof(pixels)));
@@ -101,11 +128,17 @@ static void exercise(DWORD expected,BOOL stalled,BOOL cancel)
             Sleep(10);
         }while(GetTickCount64()<deadline);
         CHECK(window && IsWindowVisible(window) && !*pid);
+        /* Capture gesture is not a guest click; the second pair reaches the
+         * actual frontend DOS queue, then must be excluded from native I/O. */
+        CHECK(SendMessageTimeoutW(window,WM_LBUTTONDOWN,MK_LBUTTON,0,SMTO_ABORTIFHUNG,3000,&reply));
+        CHECK(SendMessageTimeoutW(window,WM_LBUTTONUP,0,0,SMTO_ABORTIFHUNG,3000,&reply));
+        CHECK(SendMessageTimeoutW(window,WM_LBUTTONDOWN,MK_LBUTTON,0,SMTO_ABORTIFHUNG,3000,&reply));
+        CHECK(SendMessageTimeoutW(window,WM_LBUTTONUP,0,0,SMTO_ABORTIFHUNG,3000,&reply));
         CHECK(SendMessageTimeoutW(window,WM_KEYDOWN,'L',0x00260001,SMTO_ABORTIFHUNG,3000,&reply));
         CHECK(SendMessageTimeoutW(window,WM_KEYUP,'L',(LPARAM)0xc0260001,SMTO_ABORTIFHUNG,3000,&reply));
         CHECK(!run16_native_frontend_dos_bind(frontend,&frontend,TRUE));
         CHECK(!run16_native_frontend_dos_enter(frontend,&frontend));
-        CHECK(!run16_native_frontend_dos_read(frontend,FALSE,records,8,&count));
+        CHECK(!run16_native_frontend_dos_read(frontend,FALSE,records,ARRAYSIZE(records),&count));
         /* Console setup may also publish WINDOW_BUFFER_SIZE_EVENT. Preserve
          * that record; only the two keyboard records are the L contract. */
         for(index=0;index<count;++index)if(records[index].EventType==KEY_EVENT) {
@@ -114,6 +147,15 @@ static void exercise(DWORD expected,BOOL stalled,BOOL cancel)
             ++keys;
         }
         CHECK(keys==2);
+        for(index=0;index<count;++index)if(records[index].EventType==CONSOLE_INPUT_RELATIVE_MOUSE) {
+            console_mouse_input event;
+            memcpy(&event,&records[index].Event,sizeof(event));
+            CHECK(console_mouse_input_valid(&event) && mouse<3);
+            CHECK(event.action==(mouse ? CONSOLE_MOUSE_MOVE : CONSOLE_MOUSE_ENTER));
+            CHECK(event.width==4 && event.height==2 && !event.dx && !event.dy);
+            CHECK(event.buttons==(mouse==1 ? 1 : 0));++mouse;
+        }
+        CHECK(mouse==3);
         CHECK(!run16_native_frontend_dos_prepend(frontend,records,count));
         run16_native_frontend_dos_leave(frontend);
         CHECK(!run16_native_frontend_dos_bind(frontend,&frontend,FALSE));
@@ -168,6 +210,17 @@ static void exercise(DWORD expected,BOOL stalled,BOOL cancel)
         CHECK(ReadConsoleOutputCharacterW(visible,&cell,1,origin,&read) && read==1 && cell==L' ');
         CHECK(ReadConsoleOutputCharacterW(canonical,&cell,1,origin,&read) && read==1 && cell==L'~');
         CloseHandle(visible);
+        /* Real library button messages -> copied frontend queue -> native
+         * converter -> hidden Console -> separate native target's reader.
+         * This does not simulate physical raw-input motion or desktop focus. */
+        CHECK(SendMessageTimeoutW(window,WM_LBUTTONDOWN,MK_LBUTTON,0,SMTO_ABORTIFHUNG,3000,&reply));
+        CHECK(SendMessageTimeoutW(window,WM_LBUTTONUP,0,0,SMTO_ABORTIFHUNG,3000,&reply));
+        CHECK(SendMessageTimeoutW(window,WM_LBUTTONDOWN,MK_LBUTTON,0,SMTO_ABORTIFHUNG,3000,&reply));
+        CHECK(SendMessageTimeoutW(window,WM_LBUTTONUP,0,0,SMTO_ABORTIFHUNG,3000,&reply));
+        CHECK(SendMessageTimeoutW(window,WM_RBUTTONDOWN,MK_RBUTTON,0,SMTO_ABORTIFHUNG,3000,&reply));
+        CHECK(SendMessageTimeoutW(window,WM_KILLFOCUS,0,0,SMTO_ABORTIFHUNG,3000,&reply));
+        CHECK(WaitForSingleObject(mouse_ready,5000)==WAIT_OBJECT_0);
+        puts("PASS real Window capture click excluded; native reader receives left/right press/release and focus release at viewport center");
         /* Only Window A may reach the hidden native Console. Physical Z on
          * the inactive visible Console must not leak during X return. */
         hotkey[0].Event.KeyEvent.wVirtualKeyCode='Z';
@@ -241,6 +294,7 @@ static void exercise(DWORD expected,BOOL stalled,BOOL cancel)
     CloseHandle(target);target=NULL;CloseHandle(helper);helper=NULL;
     UnmapViewOfFile(pid);CloseHandle(mapping);
     CloseHandle(done);CloseHandle(stall);CloseHandle(ack);CloseHandle(release);
+    if(mouse_ready)CloseHandle(mouse_ready);
     CHECK(SetEnvironmentVariableW(L"NTVDM_TEST_FRONTEND",NULL));
 }
 static BOOL WINAPI signal_handler(DWORD event)
@@ -320,6 +374,10 @@ int wmain(int argc,WCHAR **argv)
     if(argc==3 && !wcscmp(argv[1],L"--target")) {
         HANDLE done;DWORD wait;
         CHECK(GetEnvironmentVariableW(L"NTVDM_TEST_FRONTEND",prefix,96));
+        if(wcstoul(argv[2],NULL,10)==37) {
+            HANDLE thread=CreateThread(NULL,0,check_native_mouse,NULL,0,NULL);
+            CHECK(thread);CloseHandle(thread);
+        }
         if(wcstoul(argv[2],NULL,10)==39) {
             INPUT_RECORD records[16];DWORD count,index,keys;
             HANDLE ready=named_event(L"ready",FALSE);
@@ -375,6 +433,7 @@ int wmain(int argc,WCHAR **argv)
     puts("PASS helper loss/cancellation is I/O failure, not live target completion or termination");
     exercise(47,TRUE,TRUE);
     puts("PASS production teardown cancels outstanding presentation and bounds permanently stalled helper cleanup");
+    puts("PASS Window mouse through production frontend/helper to native ReadConsoleInput: capture gesture excluded, left/right pairs and focus release");
     SetEvent(finished);CHECK(WaitForSingleObject(guard,5000)==WAIT_OBJECT_0);
     CloseHandle(guard);CloseHandle(finished);return 0;
 }

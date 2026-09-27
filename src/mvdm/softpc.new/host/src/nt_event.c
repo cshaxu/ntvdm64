@@ -55,6 +55,9 @@
 #include "ica.h"
 
 #include "nt_mouse.h"
+/* DIVERGENCE(MVDM-HOST-DIV-318): copied Window-relative input joins the
+ * original mouse IRQ owner, never the native Console event queue. */
+#include "ntvdm-exe/softpc/mvdm_softpc_mouse_guest.h"
 #include "nt_event.h"
 #include "mvdm_softpc_termination.h"
 #include "mvdm_softpc_event_thread.h"
@@ -572,6 +575,10 @@ DWORD nt_event_loop(void)
         //
         for (loop = 0; loop < RecordsRead; loop++) {
            switch(InputRecord[loop].EventType) {
+
+              case CONSOLE_INPUT_RELATIVE_MOUSE:
+                  mvdm_softpc_mouse_receive(&InputRecord[loop]);
+                  break;
 
               case MOUSE_EVENT:
                   nt_process_mouse(&InputRecord[loop].Event.MouseEvent);
@@ -1274,7 +1281,9 @@ void nt_process_mouse(PMOUSE_EVENT_RECORD MouseEvent)
  */
 BOOL MoreMouseEvents(void)
 {
- return MouseEBufNxtEvtInx != MouseEBufNxtFreeInx;
+ /* DIVERGENCE(MVDM-HOST-DIV-318): original EOI also observes relative input. */
+ return MouseEBufNxtEvtInx != MouseEBufNxtFreeInx ||
+        mvdm_softpc_mouse_pending(mvdm_softpc_mouse_current());
 }
 
 
@@ -1311,6 +1320,8 @@ void FlushMouseEvents(void)
 {
      host_ica_lock();
      MouseEBufNxtEvtInx = MouseEBufNxtFreeInx = 0;
+     /* DIVERGENCE(MVDM-HOST-DIV-318): same explicit cancellation boundary. */
+     mvdm_softpc_mouse_cancel(mvdm_softpc_mouse_current());
      host_ica_unlock();
 }
 

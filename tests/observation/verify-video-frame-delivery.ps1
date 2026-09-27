@@ -25,7 +25,7 @@ foreach($mapping in @(& subst.exe)){
 if(!$physicalPackage.StartsWith($buildRoot,[StringComparison]::OrdinalIgnoreCase)){
     throw 'Observed candidates may only run in a repository build test package; never publish them'
 }
-$names=@('run16.exe','basesrv.exe','ntvdm.exe','monitor.exe','WOW32.DLL','VDMREDIR.DLL','frontend.exe')
+$names=@('run16.exe','ntsrv.exe','ntvdm.exe','monitor.exe','WOW32.DLL','VDMREDIR.DLL','ntkvm.exe')
 $paths=@($names | ForEach-Object {Join-Path $PackageRoot $_})
 $paths+=@($names | ForEach-Object {Join-Path $physicalPackage $_})
 function Copy-PackageFile([string]$Source,[string]$Destination) {
@@ -45,7 +45,7 @@ function Copy-PackageFile([string]$Source,[string]$Destination) {
     }
 }
 function Stop-Package {
-    Get-CimInstance Win32_Process -Filter "Name='run16.exe' OR Name='ntvdm.exe' OR Name='basesrv.exe' OR Name='monitor.exe' OR Name='frontend.exe'" |
+    Get-CimInstance Win32_Process -Filter "Name='run16.exe' OR Name='ntvdm.exe' OR Name='ntsrv.exe' OR Name='monitor.exe' OR Name='ntkvm.exe'" |
         Where-Object {$_.ExecutablePath -in $paths} | ForEach-Object {
             $p=Get-Process -Id $_.ProcessId -ErrorAction SilentlyContinue
             if($p){$p.Kill();if(!$p.WaitForExit(10000)){throw 'Package cleanup timeout'}}
@@ -65,7 +65,7 @@ try {
     foreach($name in $names){
         $source=Join-Path $(if($name -eq 'WOW32.DLL'){$WowBuild}else{$FormalBuild}) $name
         if($name -eq 'ntvdm.exe' -and $DiagnosticWorker){$source=$DiagnosticWorker}
-        if($name -eq 'frontend.exe' -and !$StandardFrontend){$source=Join-Path $FormalBuild 'frontend-video-observer.exe'}
+        if($name -eq 'ntkvm.exe' -and !$StandardFrontend){$source=Join-Path $FormalBuild 'frontend-video-observer.exe'}
         Copy-PackageFile $source (Join-Path $PackageRoot $name)
     }
     $probe=Join-Path $PackageRoot 'tests\VFRAME.COM'

@@ -174,7 +174,7 @@ UINT BaseGetEnvNameType_U(WCHAR *Name, DWORD NameLength)
 #endif
 
 #if defined(OPENNT_BASE_CLIENT_VDM_COMMANDS)
-#include "basesrv-exe/opennt/include/base_client.h"
+#include "ntsrv-exe/opennt/include/base_client.h"
 
 BOOL
 APIENTRY

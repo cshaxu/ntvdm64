@@ -624,7 +624,7 @@ static BOOL console_caf_return(HANDLE input,const char *report_path)
     process=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION|SYNCHRONIZE,FALSE,pid);
     if(!process || !QueryFullProcessImageNameW(process,0,image,&image_length))goto done;
     { const WCHAR *name=wcsrchr(image,L'\\');
-      if(!name || _wcsicmp(name+1,L"frontend.exe"))goto done; }
+      if(!name || _wcsicmp(name+1,L"ntkvm.exe"))goto done; }
     fprintf(report,"caf-visible-window=1 frontend=%lu\n",pid);
     if(GetEnvironmentVariableA("MVDM_OBSERVER_WINDOW_INPUT",NULL,0)) {
         scripted_window_frontend=pid;ok=TRUE;
@@ -959,7 +959,7 @@ static BOOL graphics_window_return(HANDLE input,HANDLE output,const char *report
     process=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION|SYNCHRONIZE,FALSE,pid);
     if(!process || !QueryFullProcessImageNameW(process,0,image,&image_length))goto done;
     { const WCHAR *name=wcsrchr(image,L'\\');
-      if(!name || _wcsicmp(name+1,L"frontend.exe"))goto done; }
+      if(!name || _wcsicmp(name+1,L"ntkvm.exe"))goto done; }
     fprintf(report,"automatic-graphics-window=1 frontend=%lu\n",pid);
     if(!SendMessageTimeoutW(window,WM_CLOSE,0,0,SMTO_ABORTIFHUNG,3000,&result))goto done;
     Sleep(500);
@@ -980,6 +980,60 @@ static BOOL graphics_window_return(HANDLE input,HANDLE output,const char *report
 done:
     fprintf(report,"result=%s error=%lu\n",ok ? "pass" : "fail",GetLastError());
     if(process)CloseHandle(process);fclose(report);return ok;
+}
+
+/* Test-only KVM output injection. The pinned hook runs on frontend's Window
+ * thread; protocol, IRQ and guest callback delivery remain production code. */
+static BOOL window_mouse_probe(const char *package,const char *report_path)
+{
+    char desktop[96],dll[MAX_PATH],path[MAX_PATH],image[MAX_PATH],expected[MAX_PATH];
+    DWORD needed,pid=0,thread=0,length=MAX_PATH,mode;
+    HWND window=NULL;HANDLE process=NULL;HMODULE module=NULL;HHOOK hook=NULL;
+    HOOKPROC procedure;FILE *report=NULL;BOOL ok=FALSE;ULONGLONG deadline;
+    if(!GetEnvironmentVariableA("MVDM_OBSERVER_MOUSE_HOOK",dll,sizeof(dll)))return FALSE;
+    if(!GetUserObjectInformationA(GetThreadDesktop(GetCurrentThreadId()),UOI_NAME,
+        desktop,sizeof(desktop),&needed) || strncmp(desktop,"NTVDMConsoleTest-",17))return FALSE;
+    snprintf(path,sizeof(path),"%s.mouse-window.txt",report_path);
+    report=fopen(path,"w");if(!report)return FALSE;
+    snprintf(expected,sizeof(expected),"%s%sntkvm.exe",package,
+        package[strlen(package)-1]=='\\' ? "" : "\\");
+    deadline=GetTickCount64()+15000;
+    do {
+        window=FindWindowW(L"LibKvmWindow",L"NTVDM");
+        if(window && IsWindowVisible(window))break;
+        Sleep(25);
+    } while(GetTickCount64()<deadline);
+    if(!window || !IsWindowVisible(window))goto done;
+    thread=GetWindowThreadProcessId(window,&pid);
+    process=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION|SYNCHRONIZE,FALSE,pid);
+    if(!process || !QueryFullProcessImageNameA(process,0,image,&length))goto done;
+    /* Compare file identity too, since a SUBST launch can resolve physically. */
+    {
+        HANDLE a=CreateFileA(expected,0,FILE_SHARE_READ|FILE_SHARE_WRITE|FILE_SHARE_DELETE,NULL,OPEN_EXISTING,0,NULL);
+        HANDLE b=CreateFileA(image,0,FILE_SHARE_READ|FILE_SHARE_WRITE|FILE_SHARE_DELETE,NULL,OPEN_EXISTING,0,NULL);
+        BY_HANDLE_FILE_INFORMATION x,y;BOOL same=FALSE;
+        if(a!=INVALID_HANDLE_VALUE && b!=INVALID_HANDLE_VALUE && GetFileInformationByHandle(a,&x) &&
+            GetFileInformationByHandle(b,&y))same=x.dwVolumeSerialNumber==y.dwVolumeSerialNumber &&
+                x.nFileIndexHigh==y.nFileIndexHigh && x.nFileIndexLow==y.nFileIndexLow;
+        if(a!=INVALID_HANDLE_VALUE)CloseHandle(a);if(b!=INVALID_HANDLE_VALUE)CloseHandle(b);
+        if(!same)goto done;
+    }
+    module=LoadLibraryA(dll);if(!module)goto done;
+    procedure=(HOOKPROC)GetProcAddress(module,"MouseInputHook");if(!procedure)goto done;
+    hook=SetWindowsHookExW(WH_GETMESSAGE,procedure,module,thread);if(!hook)goto done;
+    /* Probe settles for 40 BIOS ticks before installing its callback. */
+    Sleep(3500);
+    mode=GetEnvironmentVariableA("MVDM_OBSERVER_MOUSE_RETIRE",NULL,0) ? 0x80000000u : 0;
+    if(!PostMessageW(window,WM_APP+0x5f0,0,MAKELPARAM(16,8)))goto done;
+    Sleep(250);
+    if(!PostMessageW(window,WM_APP+0x5f0,1,0))goto done;
+    Sleep(250);
+    if(!PostMessageW(window,WM_APP+0x5f0,mode,0))goto done;
+    Sleep(300);ok=TRUE;
+done:
+    fprintf(report,"frontend=%lu thread=%lu posted=%s error=%lu\n",pid,thread,ok ? "pass" : "fail",GetLastError());
+    if(hook)UnhookWindowsHookEx(hook);if(module)FreeLibrary(module);if(process)CloseHandle(process);
+    if(fclose(report)!=0)ok=FALSE;return ok;
 }
 
 int main(int argc, char **argv)
@@ -1045,10 +1099,9 @@ int main(int argc, char **argv)
     char fixed_system_root_short[MAX_PATH];
     DWORD fixed_system_root_short_length = 0;
     FILE *report = NULL;
+    int report_failed = 0;
 
     if (argc < 4) return 64;
-    if (GetEnvironmentVariableA("MVDM_OBSERVER_PRIVATE_DESKTOP", NULL, 0))
-        return private_desktop_observer();
     {
         char delay[16];
         DWORD length = GetEnvironmentVariableA("MVDM_OBSERVER_POST_EXIT_MS", delay, sizeof(delay));
@@ -1064,6 +1117,23 @@ int main(int argc, char **argv)
         (DWORD)sizeof(report_base_path), report_base_path, NULL);
     if (report_base_path_length == 0 ||
         report_base_path_length >= sizeof(report_base_path)) return 68;
+    /* Missing evidence must not look like a successful observation. Check
+     * the destination before starting a target, then check the final write
+     * independently: the destination may fail during the run. */
+    {
+        errno_t report_error = fopen_s(&report, argv[3], "wb");
+        if (report_error || !report) {
+            fprintf(stderr, "observer: cannot create report %s (errno=%d)\n",
+                    argv[3], (int)report_error);
+            return 70;
+        }
+        if (fputs("result=not-started\n", report) == EOF) report_failed = 1;
+        if (fclose(report) != 0) report_failed = 1;
+        report = NULL;
+        if (report_failed) return 70;
+    }
+    if (GetEnvironmentVariableA("MVDM_OBSERVER_PRIVATE_DESKTOP", NULL, 0))
+        return private_desktop_observer();
     /* App derives SystemRoot from the image directory itself.  Keep this
      * observer report aligned with that original-layout package contract;
      * argv[2] is the stage and product working directory. */
@@ -1300,6 +1370,16 @@ int main(int argc, char **argv)
     else
         SetEnvironmentVariableA("MVDM_MAIN_RETURN_REPORT_PATH", NULL);
     graphics_handshake=GetEnvironmentVariableA("MVDM_OBSERVER_GRAPHICS_RETURN",NULL,0)!=0;
+    if(GetEnvironmentVariableA("MVDM_OBSERVER_TEXT_CURSOR",NULL,0)) {
+        HWND window;DWORD_PTR result;
+        if(!GetEnvironmentVariableA("MVDM_OBSERVER_WINDOW_INPUT",NULL,0) ||
+           !wait_for_console_prompt(output,15000,"S7_TEXT_CURSOR_READY") ||
+           !console_caf_return(input,argv[3]) || !(window=scripted_input_window()) ||
+           !SendMessageTimeoutW(window,WM_KEYDOWN,'T',1|(0x14<<16),SMTO_ABORTIFHUNG,3000,&result) ||
+           !SendMessageTimeoutW(window,WM_KEYUP,'T',(LPARAM)0xc0140001,SMTO_ABORTIFHUNG,3000,&result))report_failed=1;
+    }
+    if(GetEnvironmentVariableA("MVDM_OBSERVER_MOUSE_HOOK",NULL,0) &&
+        !window_mouse_probe(argv[2],argv[3]))report_failed=1;
     if(graphics_handshake)
         graphics_handshake_ok=graphics_window_return(input,output,argv[3]);
     if (scripted_console_input) {
@@ -1630,12 +1710,16 @@ int main(int argc, char **argv)
         } else if (wait_status == WAIT_TIMEOUT) {
             fprintf(report, "stop-context=unavailable\n");
         }
-        fclose(report);
+        if (ferror(report)) report_failed = 1;
+        if (fclose(report) != 0) report_failed = 1;
+    } else {
+        fprintf(stderr, "observer: cannot write final report %s\n", argv[3]);
+        report_failed = 1;
     }
     if (symbols_initialized) SymCleanup(child.hProcess);
     CloseHandle(child.hThread);
     CloseHandle(child.hProcess);
     CloseHandle(input);
     CloseHandle(output);
-    return 0;
+    return report_failed ? 70 : 0;
 }

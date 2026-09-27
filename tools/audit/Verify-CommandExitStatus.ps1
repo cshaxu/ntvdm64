@@ -45,10 +45,10 @@ $generatedFixtures = @(
     (Join-Path $runtimeFixtureRoot 'EOF.CMD'),
     (Join-Path $runtimeFixtureRoot 'D7.CMD')
 )
-$productPaths = @('run16.exe','ntvdm.exe','basesrv.exe','frontend.exe') | ForEach-Object { Join-Path $PackageRoot $_ }
+$productPaths = @('run16.exe','ntvdm.exe','ntsrv.exe','ntkvm.exe') | ForEach-Object { Join-Path $PackageRoot $_ }
 if($ProcessPackageRoot){
     $ProcessPackageRoot=(Resolve-Path -LiteralPath $ProcessPackageRoot).Path
-    foreach($name in @('run16.exe','ntvdm.exe','basesrv.exe','frontend.exe')){
+    foreach($name in @('run16.exe','ntvdm.exe','ntsrv.exe','ntkvm.exe')){
         $physical=Join-Path $ProcessPackageRoot $name
         if((Get-FileHash $physical).Hash -ne (Get-FileHash (Join-Path $PackageRoot $name)).Hash){
             throw "Process package differs from launch package: $name"
@@ -57,7 +57,7 @@ if($ProcessPackageRoot){
     }
 }
 function Get-PackageProcesses {
-    @(Get-CimInstance Win32_Process -Filter "Name='run16.exe' OR Name='ntvdm.exe' OR Name='basesrv.exe' OR Name='frontend.exe'" |
+    @(Get-CimInstance Win32_Process -Filter "Name='run16.exe' OR Name='ntvdm.exe' OR Name='ntsrv.exe' OR Name='ntkvm.exe'" |
         Where-Object { $_.ExecutablePath -in $productPaths })
 }
 function Test-ExactFileBytes {
@@ -167,7 +167,7 @@ if($OrdinaryFrontend -and $FrontendObserver){throw 'Select ordinary or instrumen
 if(!$OrdinaryFrontend -and @($matrix | Where-Object {$_.RootFrontend -and $_.Name -in $Cases}).Count){
     if(!$FrontendObserver -or
        (Get-FileHash -LiteralPath $FrontendObserver).Hash -ne
-       (Get-FileHash -LiteralPath (Join-Path $PackageRoot 'frontend.exe')).Hash){
+       (Get-FileHash -LiteralPath (Join-Path $PackageRoot 'ntkvm.exe')).Hash){
         throw 'Owner cases require the test-only frontend observer in the isolated test package'
     }
 }
@@ -240,7 +240,7 @@ try {
                     if($OrdinaryFrontend -and $case.RootFrontend){
                         foreach($node in $tree){
                             $frontendId=[int]$node.ProcessId
-                            if($node.ExecutablePath -eq (Join-Path $PackageRoot 'frontend.exe') -and
+                            if($node.ExecutablePath -eq (Join-Path $PackageRoot 'ntkvm.exe') -and
                                 $node.CommandLine -match '--session\s' -and
                                 $observedDescendants.Contains($frontendId) -and !$frontendWaiters.ContainsKey($frontendId)){
                                 $probe=$null

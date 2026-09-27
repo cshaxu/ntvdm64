@@ -30,6 +30,9 @@
 #include "nt_event.h"
 #include <ntddvdeo.h>
 #include "nt_fulsc.h"
+/* DIVERGENCE(MVDM-HOST-DIV-318): Window-relative input uses original
+ * coordinates and callback masks, not Console warping. */
+#include "ntvdm-exe/softpc/mvdm_softpc_mouse_guest.h"
 
 /* DIVERGENCE(MVDM-HOST-DIV-274): original NT USER's cursor producer publishes
  * the already bounded virtual position before dispatching guest mouse work.
@@ -333,6 +336,13 @@ return(mouse_state == INSTALLED && in_text_mode() == FALSE);
 
 GLOBAL void mouse_reset()
 {
+/* DIVERGENCE(MVDM-HOST-DIV-318): CCPU Window uses the original counter
+ * reset contract without the MONITOR guest fast-track storage. */
+if(mvdm_softpc_mouse_route_active())
+   {
+   confine.bF7 = confine.bF8 = FALSE;
+   bFunctionZeroReset = TRUE;
+   }
 #ifdef X86GFX
 
 half_word vm;
@@ -419,8 +429,13 @@ half_word internalCF;
 // reset does this too.
 //
 
-if(sc.ScreenState == WINDOWED && bPointerOff)
+/* DIVERGENCE(MVDM-HOST-DIV-318): Window relative input shares the original
+ * counter-position update; it does not warp a host Console pointer. */
+if((sc.ScreenState == WINDOWED && bPointerOff) || mvdm_softpc_mouse_route_active())
    {
+   /* DIVERGENCE(MVDM-HOST-DIV-318): INT33/4 supersedes an unconsumed
+      Window reset; otherwise the first movement is spent consuming both. */
+   if(mvdm_softpc_mouse_route_active()) bFunctionZeroReset = FALSE;
    newF4x = (IS16)newx;
    newF4y = (IS16)newy;
    bFunctionFour = TRUE;
@@ -553,6 +568,10 @@ sys_addr int33f3addr;
 
 host_ica_lock(); // synch with the event thread
 
+/* DIVERGENCE(MVDM-HOST-DIV-318): preserve original absolute route otherwise. */
+if(!mvdm_softpc_mouse_apply(mcs,counter,&old_x,&old_y,&bPointerInSamePlace,
+                          bFunctionZeroReset,&bFunctionFour,&newF4x,&newF4y))
+{
 GetNextMouseEvent();
 
 #ifdef X86GFX
@@ -567,6 +586,7 @@ else
    ScaleToWindowedVirtualCoordinates(&mcs->position.x,&mcs->position.y,counter);
    }
 
+}
 // Publish the same final virtual coordinates consumed by the guest mouse path.
 (void)mvdm_softpc_wow_page_domain_publish_cursor((long)mcs->position.x,
                                                  (long)mcs->position.y);

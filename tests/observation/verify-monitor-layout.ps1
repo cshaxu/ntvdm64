@@ -11,9 +11,9 @@ $commands=@"
 @echo off
 call "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat" -arch=x86 -host_arch=x64 >nul
 if errorlevel 1 exit /b 1
-midl.exe /nologo /env win32 /target NT100 /prefix client Client_ /prefix server Server_ /out . /h service.h /cstub service_c.c /sstub service_s.c "$repo\src\basesrv-exe\transport\service.idl"
+midl.exe /nologo /env win32 /target NT100 /prefix client Client_ /prefix server Server_ /out . /h service.h /cstub service_c.c /sstub service_s.c "$repo\src\ntsrv-exe\transport\service.idl"
 if errorlevel 1 exit /b 1
-cl.exe /nologo /c /MT /W4 /we4013 /I . /I "$repo\src" "$repo\src\monitor-exe\main.c" service_c.c "$repo\src\basesrv-exe\transport\rpc_security.c" "$repo\tests\observation\monitor_layout_test.c"
+cl.exe /nologo /c /MT /W4 /we4013 /I . /I "$repo\src" "$repo\src\monitor-exe\main.c" service_c.c "$repo\src\ntsrv-exe\transport\rpc_security.c" "$repo\tests\observation\monitor_layout_test.c"
 if errorlevel 1 exit /b 1
 link.exe /nologo /subsystem:console /out:monitor.exe main.obj service_c.obj rpc_security.obj rpcrt4.lib kernel32.lib user32.lib advapi32.lib
 if errorlevel 1 exit /b 1

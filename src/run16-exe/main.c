@@ -4,10 +4,10 @@
  * suspended-worker rollback around the admitted standalone boundary. */
 #include <nt.h>
 #include <base_classifier.h>
-#include "basesrv-exe/opennt/include/base_capture.h"
-#include "basesrv-exe/opennt/include/base_client.h"
-#include "basesrv-exe/opennt/include/base_config.h"
-#include "basesrv-exe/opennt/include/base_rpc_client.h"
+#include "ntsrv-exe/opennt/include/base_capture.h"
+#include "ntsrv-exe/opennt/include/base_client.h"
+#include "ntsrv-exe/opennt/include/base_config.h"
+#include "ntsrv-exe/opennt/include/base_rpc_client.h"
 #include "frontend_scope.h"
 #include "product-abi/console_io.h"
 #include <shellapi.h>
@@ -196,7 +196,7 @@ static DWORD connect_broker(void)
     STARTUPINFOW startup = {sizeof(startup)};
     PROCESS_INFORMATION child = {0};
     DWORD error=ERROR_GEN_FAILURE, attempt;
-    if (!sibling_path(L"basesrv.exe", broker, MAX_PATH))
+    if (!sibling_path(L"ntsrv.exe", broker, MAX_PATH))
         return GetLastError();
     /* A concurrent launcher may own a healthy endpoint, or may be in the
      * broker-only empty-stop window.  Candidate creation is never readiness:

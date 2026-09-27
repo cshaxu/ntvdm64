@@ -21,9 +21,9 @@ $Observer = (Resolve-Path -LiteralPath $Observer).Path
 $FixtureRoot = (Resolve-Path -LiteralPath $FixtureRoot).Path
 $PackageRoot = (Resolve-Path -LiteralPath $PackageRoot).Path
 if ($LogPrefix -notmatch '^[a-z0-9-]+$') { throw 'Invalid log prefix' }
-$paths = @('run16.exe','ntvdm.exe','basesrv.exe') | ForEach-Object { Join-Path $PackageRoot $_ }
+$paths = @('run16.exe','ntvdm.exe','ntsrv.exe') | ForEach-Object { Join-Path $PackageRoot $_ }
 function PackageProcesses {
-    @(Get-CimInstance Win32_Process -Filter "Name='run16.exe' OR Name='ntvdm.exe' OR Name='basesrv.exe'" |
+    @(Get-CimInstance Win32_Process -Filter "Name='run16.exe' OR Name='ntvdm.exe' OR Name='ntsrv.exe'" |
         Where-Object { $_.ExecutablePath -in $paths })
 }
 if ((PackageProcesses).Count) { throw 'Package already in use' }

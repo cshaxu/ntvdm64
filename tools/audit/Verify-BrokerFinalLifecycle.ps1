@@ -42,13 +42,13 @@ $PackageRoot=(Resolve-Path -LiteralPath $PackageRoot).Path
 if($LogPrefix -notmatch '^[a-z0-9-]+$'){throw 'Invalid log prefix'}
 $trace=Join-Path $PackageRoot "logs\$LogPrefix.trace"
 if(Test-Path -LiteralPath $trace){throw 'Use a fresh log prefix'}
-$paths=@('run16.exe','basesrv.exe','ntvdm.exe') | ForEach-Object {Join-Path $PackageRoot $_}
+$paths=@('run16.exe','ntsrv.exe','ntvdm.exe') | ForEach-Object {Join-Path $PackageRoot $_}
 function PackageProcesses {
-    @(Get-CimInstance Win32_Process -Filter "Name='run16.exe' OR Name='basesrv.exe' OR Name='ntvdm.exe'" | Where-Object {$_.ExecutablePath -in $paths})
+    @(Get-CimInstance Win32_Process -Filter "Name='run16.exe' OR Name='ntsrv.exe' OR Name='ntvdm.exe'" | Where-Object {$_.ExecutablePath -in $paths})
 }
 function ObservedProcesses {
     $shells=@((Join-Path $env:SystemRoot 'System32\cmd.exe'),(Join-Path $env:SystemRoot 'SysWOW64\cmd.exe'))
-    @(Get-CimInstance Win32_Process -Filter "Name='run16.exe' OR Name='basesrv.exe' OR Name='ntvdm.exe' OR Name='cmd.exe' OR Name='console-startup-observer.exe'" |
+    @(Get-CimInstance Win32_Process -Filter "Name='run16.exe' OR Name='ntsrv.exe' OR Name='ntvdm.exe' OR Name='cmd.exe' OR Name='console-startup-observer.exe'" |
         Where-Object {$_.ExecutablePath -in $paths -or $_.ExecutablePath -eq $Observer -or $_.ExecutablePath -in $shells})
 }
 if((PackageProcesses).Count){throw 'Package already in use'}
@@ -289,7 +289,7 @@ try {
         $launchers=@($chain | Where-Object {$_.Name -eq 'run16.exe'})
         $shells=@($chain | Where-Object {$_.Name -eq 'cmd.exe'})
         $workers=@($chain | Where-Object {$_.Name -eq 'ntvdm.exe'})
-        $servers=@($chain | Where-Object {$_.Name -eq 'basesrv.exe'})
+        $servers=@($chain | Where-Object {$_.Name -eq 'ntsrv.exe'})
         $chain | Select-Object ProcessId,ParentProcessId,Name,ExecutablePath,CommandLine |
             ConvertTo-Json -Depth 3 | Set-Content -LiteralPath (Join-Path $PackageRoot "logs\$LogPrefix-chain.json") -Encoding utf8
         if($launchers.Count -ne 3 -or $shells.Count -ne 2 -or $workers.Count -ne 1 -or $servers.Count -ne 1){throw 'Expected three run16, two CMD, one worker and one broker'}
@@ -407,7 +407,7 @@ try {
         } while([DateTime]::UtcNow -lt $deadline)
         if($readyCount -ne $requiredTasks){throw 'No real COMMAND prompt before loss test'}
         CollectOwned
-        $servers=@(PackageProcesses | Where-Object {$_.Name -eq 'basesrv.exe' -and $owned.Contains([int]$_.ProcessId)})
+        $servers=@(PackageProcesses | Where-Object {$_.Name -eq 'ntsrv.exe' -and $owned.Contains([int]$_.ProcessId)})
         if($servers.Count -ne 1){
             [pscustomobject]@{Owned=@($owned);Processes=@(PackageProcesses |
                 Select-Object ProcessId,ParentProcessId,Name,ExecutablePath,CreationDate);
@@ -510,12 +510,12 @@ try {
         $first=StartObserved 'concurrent-a' 'MEM.EXE'
         $second=StartObserved 'concurrent-b' 'MEM.EXE'
         FinishObserved $first 0; FinishObserved $second 0
-        $servers=@(PackageProcesses | Where-Object {$_.Name -eq 'basesrv.exe'})
+        $servers=@(PackageProcesses | Where-Object {$_.Name -eq 'ntsrv.exe'})
         if($servers.Count -ne 1 -or !$owned.Contains([int]$servers[0].ProcessId)){throw 'Not exactly one owned broker'}
         $serverId=[int]$servers[0].ProcessId
         $text=TraceText
         if([regex]::Matches($text,'phase=prepare ').Count -ne 2 -or [regex]::Matches($text,'phase=first-yes ').Count -ne 1){throw 'Concurrent command/first identity mismatch'}
-        $duplicate=Start-Process -FilePath (Join-Path $PackageRoot 'basesrv.exe') -WindowStyle Hidden -PassThru
+        $duplicate=Start-Process -FilePath (Join-Path $PackageRoot 'ntsrv.exe') -WindowStyle Hidden -PassThru
         [void]$owned.Add($duplicate.Id)
         if(!$duplicate.WaitForExit(5000) -or $duplicate.ExitCode -ne 1740){throw 'Duplicate broker did not reject endpoint'}
         $results.Add('PASS concurrent startup and singleton: two commands, one broker, one first-VDM')

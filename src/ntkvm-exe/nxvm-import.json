@@ -1,0 +1,230 @@
+{
+  "source": "softpc (shared nxvm four-component library)",
+  "revision": "3186afcd7b743e9797364c6a762eccd3b5576ca1",
+  "license": "MIT; Copyright (c) 2026 Neko; see lib/LICENSE.nxvm",
+  "licenseSha256": "BF37952D329B48CEE37B42D90B96D30DC049940902E42D69338A19CF72003543",
+  "destination": "src/ntkvm-exe",
+  "profile": "MSVC Win32/x86 /MT /std:c11; frontend-only",
+  "files": [
+    {
+      "path": "lib/base/README.md",
+      "sha256": "92AA516A5B8E29050E6321FDB57E921A868208232F37E73022A7CE94DD852876",
+      "compile": false
+    },
+    {
+      "path": "lib/base/sync_interface.h",
+      "sha256": "C867B4E6AE002570773D08F1FEC9A9C30CC46C5F5863BD7E7F06501F01653D37",
+      "compile": false
+    },
+    {
+      "path": "lib/base/sync.c",
+      "sha256": "1F4B176855A47F46F4850FAAE2FB4BB75367C210A7A1BCCCEE7571D9FF7170C6",
+      "compile": true
+    },
+    {
+      "path": "lib/base/sync.h",
+      "sha256": "6BD490041EED0A423D9A0835BFE4B89847DE0CF14ECFE73735A7CD715E54B4C8",
+      "compile": false
+    },
+    {
+      "path": "lib/base/win32/sync.c",
+      "sha256": "DA9C7497DE92EF08610980D4F2D4D6A827070D0C26E601A5A560B7E4C8497D18",
+      "compile": true
+    },
+    {
+      "path": "lib/kvm-base/component_interface.h",
+      "sha256": "FC49ADCAAC5E65AB8683A583BA19DD5A5456F35C129BA0AC59F053F80BD2E50A",
+      "compile": false
+    },
+    {
+      "path": "lib/kvm-base/component.c",
+      "sha256": "A7FC25378781010F823F3CF53EA098372BAC34F58061F34E2DF215116FC93C9C",
+      "compile": true
+    },
+    {
+      "path": "lib/kvm-base/event_interface.h",
+      "sha256": "E083A99BCBC0525A3BD8753CAA67888461E91ED0AEF3F509972CA464946D3B5B",
+      "compile": false
+    },
+    {
+      "path": "lib/kvm-base/frame_interface.h",
+      "sha256": "530BE63EE4501EEF5EB45EF629175EB55BA5B5CD4015A3C34DAE7C41DE281D8C",
+      "compile": false
+    },
+    {
+      "path": "lib/kvm-base/hotkey_interface.h",
+      "sha256": "A5D4A9EBC2517A4AE1EABEF04FBF787CAD6FB1F8CACE21435821AFE21DA20368",
+      "compile": false
+    },
+    {
+      "path": "lib/kvm-base/hotkey.c",
+      "sha256": "A141263F28FDFB1324F6A03B66414AF14B51A00523B9BE25E5C9674C7038639C",
+      "compile": true
+    },
+    {
+      "path": "lib/kvm-base/input_interface.h",
+      "sha256": "845C7DF1EB5A700AFCEB7BA06C0447342AFC337AE6AB200409DDF283D065E8D6",
+      "compile": false
+    },
+    {
+      "path": "lib/kvm-base/input.c",
+      "sha256": "DFB195F657B70053C1B9EF1F4E037135A6334D237A872E18190D8AB31F7810D7",
+      "compile": true
+    },
+    {
+      "path": "lib/kvm-base/input.h",
+      "sha256": "4D58C97EB04EAB393379FEFA3091D0F77CA1EDF24B4E1608C2EDD1847143A29B",
+      "compile": false
+    },
+    {
+      "path": "lib/kvm-base/mailbox_interface.h",
+      "sha256": "52ACCB5BBD7992629A5FF5356FA857D9925A43FE77026B016B16B529D89601E5",
+      "compile": false
+    },
+    {
+      "path": "lib/kvm-base/mailbox.c",
+      "sha256": "E2E05E9D5A0A6FD0D5654D7FEB53ED664034F072510FEE3B703B160F474D3C2D",
+      "compile": true
+    },
+    {
+      "path": "lib/kvm-base/README.md",
+      "sha256": "557AEF9A82149E7E436277743B3FB518E030BA284BE617A0FC4BA1D35F4B1B49",
+      "compile": false
+    },
+    {
+      "path": "lib/kvm-base/win32/input.c",
+      "sha256": "F4BF5554F516BC19AFAAE295B5780E99AD805B83CEBCF6954C05D8A05C122AC0",
+      "compile": true
+    },
+    {
+      "path": "lib/kvm-base/worker_interface.h",
+      "sha256": "BDF89DA7CFBCE826D92ED57917229ECAD927B10464D944AE2CC4016287A86840",
+      "compile": false
+    },
+    {
+      "path": "lib/kvm-window/frame_interface.h",
+      "sha256": "9D11907F1420248F888D1EE0BE699B4528E986483D7463ECCB6692833139AD44",
+      "compile": false
+    },
+    {
+      "path": "lib/kvm-window/geometry.c",
+      "sha256": "EEBA846FF5AA38CCDA485880C2586271511945D51016511E4EE23531A4CCF2A5",
+      "compile": true
+    },
+    {
+      "path": "lib/kvm-window/geometry.h",
+      "sha256": "E8C6253365EF4354A7567E946BE7C3562E6FE050D326BB8FDCD9963ABDDBD765",
+      "compile": false
+    },
+    {
+      "path": "lib/kvm-window/motion.c",
+      "sha256": "273D61B00FFBB59FC06F65FF37E0C9321646BE18364D3558FF2822348B51E480",
+      "compile": true
+    },
+    {
+      "path": "lib/kvm-window/motion.h",
+      "sha256": "975B3102C90892F7D7044163FA648FBBED1CE7FEDCE9FEC2BCB68F0591606B82",
+      "compile": false
+    },
+    {
+      "path": "lib/kvm-window/README.md",
+      "sha256": "C8B8298B8F43AB8195B9F88C289663270DB22B16E34C86E425E5643634393443",
+      "compile": false
+    },
+    {
+      "path": "lib/kvm-window/render.c",
+      "sha256": "C55D4E45CB76FAA982F43B5BED9A80F5E5A0BD4F943CCDE9D2880DBFF7A39769",
+      "compile": true
+    },
+    {
+      "path": "lib/kvm-window/render.h",
+      "sha256": "83ECAF45B016CBE80FC7201B53F09660FD5F528E18A0FCD483C0592AA8FA4CC2",
+      "compile": false
+    },
+    {
+      "path": "lib/kvm-window/win32/component.c",
+      "sha256": "84B761EF9DDEE7C172A1716632BB96271062BCD2035B878D0B1ACF1DA0B7C1CE",
+      "compile": true
+    },
+    {
+      "path": "lib/kvm-window/win32/geometry.c",
+      "sha256": "CF8137F979AF592F568AB3C82431D850329B7CAF08F2C2E24ADFA03E527AB305",
+      "compile": true
+    },
+    {
+      "path": "lib/kvm-window/win32/geometry.h",
+      "sha256": "82741E1AA27686458DCDA4A88D5F241B7DEEE0081C79B292BB7200334F2E652B",
+      "compile": false
+    },
+    {
+      "path": "lib/kvm-window/win32/input.c",
+      "sha256": "43F71C7B2B8A1D6DC1F599A89AFA81D060BC2DEC43A2E67CF6EA410FD15CBBDF",
+      "compile": true
+    },
+    {
+      "path": "lib/kvm-window/win32/input.h",
+      "sha256": "44A2DAEDB409C21740D558CD319618702E53420286FBB16DB2F116ECAD950E65",
+      "compile": false
+    },
+    {
+      "path": "lib/kvm-window/win32/mouse.c",
+      "sha256": "961563EACBF88EF29C693A204FFA2AAD0262194482A11CDDA7566490D4BC00F7",
+      "compile": true
+    },
+    {
+      "path": "lib/kvm-window/win32/mouse.h",
+      "sha256": "1C4BBDE9FE60F9DE2DBF43B12F6EB509C18A3C9F38EF526D1E1DEB477B68B4B9",
+      "compile": false
+    },
+    {
+      "path": "lib/kvm-window/window_interface.h",
+      "sha256": "9FC21794A8C1E5DC875B4D3CD60D4D5A5287FBF22AEA18C181E7D10979FAD92F",
+      "compile": false
+    },
+    {
+      "path": "lib/kvm-window/window.c",
+      "sha256": "88903A621E9E673C0310B3A6D76385729C491E5A77CDA3E8EABA3078F835A3EE",
+      "compile": true
+    },
+    {
+      "path": "lib/kvm-window/window.h",
+      "sha256": "C3A63F145500FFDD33133C1CE6039865C0C0DE5D0F47CD5495D730A88FCC7B1F",
+      "compile": false
+    },
+    {
+      "path": "lib/types/atomic.h",
+      "sha256": "616285A73F5DDE8B8792EA345AC996A7F877D8549B3B618C527D4AEFF4975A2F",
+      "compile": false
+    },
+    {
+      "path": "lib/types/README.md",
+      "sha256": "138AAF9B13063423720FFED821A2C8B8FC40EA262FC640111CD94B408D15F584",
+      "compile": false
+    },
+    {
+      "path": "lib/types/types_interface.h",
+      "sha256": "63E15EB5CC78AD55F4FCF8F4C7F8C6AC020D92278BEFB4DAEF35C84A6DA19AFB",
+      "compile": false
+    },
+    {
+      "path": "lib/types/win32/input.h",
+      "sha256": "8D7B5C8B14B2A2C03FD8FD996D8B710D8CE946A700168584A5F262210E0D302C",
+      "compile": false
+    },
+    {
+      "path": "lib/types/win32/scalar.h",
+      "sha256": "28E8FCB83D1B853EFA591B02E07DB747637789B20032EA86266EB744CE109E87",
+      "compile": false
+    },
+    {
+      "path": "lib/types/win32/sync.h",
+      "sha256": "27799532853C6FC00256659365255114EE8C54D38B1AA32D079785AE53BD4E97",
+      "compile": false
+    },
+    {
+      "path": "lib/types/win32/window.h",
+      "sha256": "F7EBD44EAB3B208D81BD388A63D9CABF19B6F16BECC67F470BFEB2790EACA8DF",
+      "compile": false
+    }
+  ]
+}

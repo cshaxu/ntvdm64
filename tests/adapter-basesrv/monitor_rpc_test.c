@@ -8,7 +8,7 @@
 #include <string.h>
 #include <wchar.h>
 #include "service.h"
-#include "basesrv-exe/transport/rpc_security.h"
+#include "ntsrv-exe/transport/rpc_security.h"
 #include "product-abi/version.h"
 
 #define CHECK(value) do { if (!(value)) { fprintf(stderr,"FAIL %d: %lu\n",__LINE__,(unsigned long)GetLastError()); return 1; } } while (0)
@@ -169,7 +169,7 @@ int main(int argc,char **argv)
     CHECK(broker_rpc_capture_scope(&scope));
     if (!existing) {
         CHECK(GetModuleFileNameW(NULL,path,MAX_PATH));
-        slash=wcsrchr(path,L'\\'); CHECK(slash!=NULL); lstrcpyW(slash+1,L"basesrv.exe");
+        slash=wcsrchr(path,L'\\'); CHECK(slash!=NULL); lstrcpyW(slash+1,L"ntsrv.exe");
         CHECK(CreateProcessW(path,NULL,NULL,NULL,FALSE,CREATE_NO_WINDOW,NULL,NULL,&startup,&broker));
     }
     self=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION|SYNCHRONIZE|PROCESS_DUP_HANDLE,FALSE,GetCurrentProcessId());

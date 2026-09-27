@@ -19,12 +19,12 @@ $testVdd = Join-Path $testRoot 's44-entry-hook-vdd.dll'
 $trace = Join-Path $logRoot 's44-vdd-worker-loss-vdd.log'
 $report = Join-Path $logRoot 's44-vdd-worker-loss-observer.txt'
 $gateName = 'Local\MvdmS44VddWorkerLoss'
-$paths = @('run16.exe', 'basesrv.exe', 'ntvdm.exe') |
+$paths = @('run16.exe', 'ntsrv.exe', 'ntvdm.exe') |
     ForEach-Object { Join-Path $runtime $_ }
 
 function PackageProcesses {
     @(
-        Get-CimInstance Win32_Process -Filter "Name='run16.exe' OR Name='basesrv.exe' OR Name='ntvdm.exe'" |
+        Get-CimInstance Win32_Process -Filter "Name='run16.exe' OR Name='ntsrv.exe' OR Name='ntvdm.exe'" |
             Where-Object { $_.ExecutablePath -in $paths }
     )
 }
@@ -41,7 +41,7 @@ if (@(PackageProcesses).Count -ne 0) {
 }
 
 New-Item -ItemType Directory -Force -Path $testRoot, $logRoot | Out-Null
-foreach ($name in @('run16.exe', 'basesrv.exe', 'ntvdm.exe', 'monitor.exe')) {
+foreach ($name in @('run16.exe', 'ntsrv.exe', 'ntvdm.exe', 'monitor.exe')) {
     Copy-Item -LiteralPath (Join-Path $build $name) -Destination (Join-Path $runtime $name) -Force
 }
 Copy-Item -LiteralPath (Join-Path $build 's44-entry-hook-vdd.dll') -Destination $testVdd -Force
@@ -76,7 +76,7 @@ try {
     $package = PackageProcesses
     foreach ($process in $package) { [void]$owned.Add([int]$process.ProcessId) }
     $worker = @($package | Where-Object { $_.Name -eq 'ntvdm.exe' })
-    $broker = @($package | Where-Object { $_.Name -eq 'basesrv.exe' })
+    $broker = @($package | Where-Object { $_.Name -eq 'ntsrv.exe' })
     if ($worker.Count -ne 1 -or $broker.Count -ne 1) {
         throw "Expected one owned worker and broker; found workers=$($worker.Count) brokers=$($broker.Count)."
     }

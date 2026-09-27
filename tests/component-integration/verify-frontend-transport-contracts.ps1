@@ -3,12 +3,14 @@ param(
     [Parameter(Mandatory)][string]$BuildRoot,
     [Parameter(Mandatory)][string]$Observer,
     [Parameter(Mandatory)][string]$LogPrefix,
+    [string]$LogRoot='O:/winnt/logs',
     [switch]$ExpandedBackend
 )
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
 $BuildRoot=(Resolve-Path -LiteralPath $BuildRoot).Path
 $Observer=(Resolve-Path -LiteralPath $Observer).Path
+$LogRoot=(Resolve-Path -LiteralPath $LogRoot).Path
 if(!$BuildRoot.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::OrdinalIgnoreCase)){
     throw 'Use the repository build cache, not a published package'
 }
@@ -48,7 +50,7 @@ try {
     foreach($case in $cases){
         $name=$case.Name
         if($case.Suffix){$name+='-'+$case.Suffix}
-        $report=Join-Path 'O:/winnt/logs' ($LogPrefix+'-'+$name+'.txt')
+        $report=Join-Path $LogRoot ($LogPrefix+'-'+$name+'.txt')
         if(Test-Path -LiteralPath $report){throw ('Refusing to overwrite run evidence: '+$report)}
         $arguments=@((Join-Path $BuildRoot ($case.Name+'.exe')),$BuildRoot,$report,
             '--observation-timeout-ms','30000')

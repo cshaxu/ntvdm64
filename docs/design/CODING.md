@@ -10,9 +10,9 @@ src/
   product-abi/
   product-package/
   run16-exe/
-  basesrv-exe/
+  ntsrv-exe/
   ntvdm-exe/
-  frontend-exe/
+  ntkvm-exe/
   monitor-exe/
   wow32-dll/
   vdmredir-dll/
@@ -36,15 +36,15 @@ or runtime input.
 
 ## Executable-owned transition
 
-`src/frontend-exe/ -> frontend.exe` owns the migrated visible/hidden Console,
+`src/ntkvm-exe/ -> ntkvm.exe` owns the migrated visible/hidden Console,
 helper and I/O service. Its future Window/display implementation also belongs
 there. run16 links only the finite frontend client, never the renderer or
-input pump. The private helper uses frontend.exe itself. Do not duplicate
+input pump. The private helper uses ntkvm.exe itself. Do not duplicate
 renderers or introduce a common library. Status owns current delivery state;
 the source layout does not claim the later Window/display capabilities.
 
 T418 has moved the original three-program runtime to `src/run16-exe/`,
-`src/basesrv-exe/` and `src/ntvdm-exe/`; T419 adds the product-owned native Console
+`src/ntsrv-exe/` and `src/ntvdm-exe/`; T419 adds the product-owned native Console
 manager at `src/monitor-exe/`, producing `monitor.exe`. Retained
 `app`/adapter directory READMEs are archival move markers, never production
 source roots or destinations. `session` is worker-local implementation inside
@@ -135,7 +135,7 @@ identity, never by a bare same-spelled function name.
 ## Host-width coding model
 
 The current recovery build has one MSVC `/MT` Win32/x86 compilation and
-acceptance row, producing `run16.exe`, `basesrv.exe` and `ntvdm.exe`, with
+acceptance row, producing `run16.exe`, `ntsrv.exe` and `ntvdm.exe`, with
 the original CCPU40 executor in the worker.
 Native x64 compile/link output is outside the product target and must not
 drive a source change. `CPU_30_STYLE` is an NT4 kernel-VDM

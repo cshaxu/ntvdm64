@@ -1,7 +1,7 @@
 param([string]$RuntimeRoot='O:/winnt', [ValidateRange(30,600)][int]$TimeoutSeconds=180)
 $ErrorActionPreference='Stop'
 $runtime=(Resolve-Path $RuntimeRoot).Path
-$paths=@('run16.exe','ntvdm.exe','basesrv.exe') | ForEach-Object {Join-Path $runtime $_}
+$paths=@('run16.exe','ntvdm.exe','ntsrv.exe') | ForEach-Object {Join-Path $runtime $_}
 if (@(Get-CimInstance Win32_Process | Where-Object {$_.ExecutablePath -in $paths}).Count) {
     throw 'Package is in use; refusing to share the observation worker'
 }
@@ -32,7 +32,7 @@ try {
         environment='reduced allowlist; diagnostic only';profile_before=$profileHash;
         profile_test=(Get-FileHash $profile).Hash;evidence_complete=$false;
         limitation='No frozen source/toolchain inputs; UI observations collected separately through computer-use';
-        artifacts=@(@('run16.exe','ntvdm.exe','basesrv.exe','WOW32.DLL','VDMREDIR.DLL','WINMINE.EXE') | ForEach-Object {Get-FileHash (Join-Path $runtime $_)})
+        artifacts=@(@('run16.exe','ntvdm.exe','ntsrv.exe','WOW32.DLL','VDMREDIR.DLL','WINMINE.EXE') | ForEach-Object {Get-FileHash (Join-Path $runtime $_)})
     } | ConvertTo-Json -Depth 5 | Set-Content (Join-Path $logs 'manifest.json')
     # This is the interactive app whose GUI must be visible to the observer.
     $launcher=Start-Process (Join-Path $runtime 'run16.exe') -ArgumentList 'WINMINE.EXE' -WorkingDirectory $runtime -WindowStyle Normal -PassThru

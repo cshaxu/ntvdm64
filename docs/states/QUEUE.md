@@ -83,6 +83,11 @@ later package merely because an earlier linked component has no runtime proof.
 | 4 | Product experience repair — fix evidenced launch/use/exit defects, starting with retained drag-and-drop Consoles; preserve inherited shells, interactive tasks and independent workers. | [Proposal](../proposals/proposal-product-experience-repair-001.md) |
 | 5 | MVDM whole-closure completeness audit and recovery — repair missing/cropped/unconnected originals and remove the local providers displaced by those recoveries; hand off the reconciled inventory to minimization. | [Proposal](../proposals/proposal-mvdm-whole-closure-recovery-001.md) |
 | 6 | Project-wide original-source implementation minimization review — reuse the closure inventory to consolidate remaining duplicate or unnecessary implementations, mirror diffs, overlays and bindings without losing verified capabilities. | [Proposal](../proposals/proposal-original-source-implementation-minimization-review-001.md) |
+| 7 | NtvdmSystemRoot and application search isolation — derive the internal package root from run16.exe, bind internal components/media to that root, and remove implicit package-first priority from user application PATH lookup. | [Proposal](../proposals/proposal-ntvdm-system-root-path-isolation-001.md) |
+
+Owner direction dated 2026-09-27 appends the root/search repair at the tail.
+It does not admit implementation or change the current active packet. The
+preceding six candidates retain their relative order.
 
 The owner promoted the former tail graphics/full-screen presentation candidate
 and admitted it in Status for source/architecture confirmation before coding.

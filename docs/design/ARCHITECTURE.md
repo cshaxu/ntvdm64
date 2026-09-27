@@ -212,10 +212,10 @@ owned:
 
 ```text
 src/run16-exe/   -> run16.exe
-src/basesrv-exe/ -> basesrv.exe
+src/ntsrv-exe/ -> ntsrv.exe
 src/ntvdm-exe/   -> ntvdm.exe
 src/monitor-exe/ -> monitor.exe
-src/frontend-exe/ -> frontend.exe
+src/ntkvm-exe/ -> ntkvm.exe
 ```
 
 The former `app`, `session`, `broker` and adapter roots are README-only move
@@ -252,7 +252,7 @@ never session, Console or native-resource policy.
 
 ### Current owner-approved replacement
 
-The independent `src/frontend-exe/` product replaces root-run16 UI ownership.
+The independent `src/ntkvm-exe/` product replaces root-run16 UI ownership.
 It owns visible Console, Window, hidden Console/helper and display for one
 character session. run16 is exclusively a classification/start/submission and
 direct-target wait client; no launcher owns an input pump or presentation.
@@ -271,7 +271,7 @@ target completion. No native process-tree termination is introduced.
 
 The Console ownership split is now implemented and verified by S4's linked
 source, graph and real runtime evidence. Its complete runtime set is seven
-files, including frontend.exe; the helper is a role of that same executable.
+files, including ntkvm.exe; the helper is a role of that same executable.
 Window/display and Window mouse remain later stages, not capabilities proved
 by the Console migration. Status owns publication and delivery state; the
 proposal assigns remaining validation and final owner acceptance.

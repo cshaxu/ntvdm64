@@ -15,9 +15,9 @@ if(Test-Path -LiteralPath $witnessPath){
 }
 $ExpectedTimeoutCases=@('HLTWAIT')
 if($LogPrefix -notmatch '^[a-z0-9-]+$'){throw 'Invalid log prefix'}
-$products=@('O:\winnt\run16.exe','O:\winnt\ntvdm.exe','O:\winnt\basesrv.exe')
+$products=@('O:\winnt\run16.exe','O:\winnt\ntvdm.exe','O:\winnt\ntsrv.exe')
 function PackageProcesses {
-    @(Get-CimInstance Win32_Process -Filter "Name='run16.exe' OR Name='ntvdm.exe' OR Name='basesrv.exe'" |
+    @(Get-CimInstance Win32_Process -Filter "Name='run16.exe' OR Name='ntvdm.exe' OR Name='ntsrv.exe'" |
         Where-Object {$_.ExecutablePath -in $products})
 }
 if((PackageProcesses).Count){throw 'Package in use; will not terminate an existing session'}

@@ -5,11 +5,11 @@
 #include <stdio.h>
 #include <stddef.h>
 #include <tlhelp32.h>
-#include "frontend-exe/native_console_frontend.h"
+#include "ntkvm-exe/native_console_frontend.h"
 #define run16_console_dispatch actual_dispatch
-#include "../../src/frontend-exe/console_frontend.c"
+#include "../../src/ntkvm-exe/console_frontend.c"
 #undef run16_console_dispatch
-#include "../../src/frontend-exe/console_video.c"
+#include "../../src/ntkvm-exe/console_video.c"
 static HANDLE read_entered,peer;
 static run16_native_frontend *test_frontend;
 static DWORD expected_generation;
@@ -19,7 +19,7 @@ DWORD run16_console_dispatch(run16_console_frontend *owner,
     if(request->operation==CONSOLE_IO_READ_INPUT) SetEvent(read_entered);
     return actual_dispatch(owner,request,reply);
 }
-#include "../../src/frontend-exe/console_channel.c"
+#include "../../src/ntkvm-exe/console_channel.c"
 #define CHECK(x) do { if(!(x)) { fprintf(stderr,"FAIL line=%u error=%lu\n", \
     (unsigned)__LINE__,GetLastError());ExitProcess(1); } } while(0)
 /* Diagnostic-only self-process snapshot; never enters a product binary. */

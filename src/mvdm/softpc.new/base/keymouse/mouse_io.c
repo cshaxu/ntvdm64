@@ -106,6 +106,7 @@
 #ifdef NTVDM
 #include "nt_event.h"
 #include "nt_mouse.h"
+#include "ntvdm-exe/softpc/mvdm_softpc_mouse_bridge.h" /* DIVERGENCE(MVDM-HOST-DIV-318) */
 
 #ifdef MONITOR
 /*
@@ -2382,6 +2383,9 @@ condition_mask = 0;
 //
 
 host_os_mouse_pointer(&cursor_status,&condition_mask,&mouse_counter);
+/* DIVERGENCE(MVDM-HOST-DIV-318): keep the original drawing position in
+   step with the NT IRQ owner's already-confined position. */
+point_copy(&cursor_status.position, &cursor_position);
 
 //
 // If movement during the last mouse hardware interrupt has been recorded,
@@ -2640,7 +2644,8 @@ outb(ICA0_PORT_0, END_INTERRUPT);
  */
 /*@ACW*/
 
-#ifndef NTVDM
+/* DIVERGENCE(MVDM-HOST-DIV-318): non-MONITOR cursor_display is route-gated. */
+#if !defined(NTVDM) || !defined(MONITOR)
 	/*
 	 *	If the cursor is currently displayed, move it to the new
 	 *	position
@@ -2949,7 +2954,9 @@ LOCAL void mouse_show_cursor IFN4(word *,junk1,word *,junk2,word *,junk3,word *,
 	
 	note_trace0(MOUSE_VERBOSE, "mouse_io:show_cursor()");
 
-#ifndef NTVDM
+/* DIVERGENCE(MVDM-HOST-DIV-318): CCPU ROM BOP BD does not maintain a
+   guest show count; retain the original C owner without MONITOR. */
+#if !defined(NTVDM) || !defined(MONITOR)
 	/*
 	 *	Disable conditional off area
 	 */
@@ -2995,7 +3002,8 @@ LOCAL void mouse_hide_cursor IFN4(word *,junk1,word *,junk2,word *,junk3,word *,
 	UNUSED(junk4);
 	
 	note_trace0(MOUSE_VERBOSE, "mouse_io:hide_cursor()");
-#ifndef NTVDM
+/* DIVERGENCE(MVDM-HOST-DIV-318): pair the non-MONITOR C-owned show count. */
+#if !defined(NTVDM) || !defined(MONITOR)
 	if (cursor_flag-- == MOUSE_CURSOR_DISPLAYED)
 #ifdef	MOUSE_16_BIT
 		if (is_graphics_mode)
@@ -3052,6 +3060,9 @@ LOCAL void mouse_set_position IFN4(word *,junk1,word *,junk2,MOUSE_SCALAR *,curs
 
 
 #if defined(NTVDM)
+/* DIVERGENCE(MVDM-HOST-DIV-318): Window uses original guest positioning,
+   not the Console host-pointer warp. */
+    if (!mvdm_softpc_mouse_route_active()) {
 
 #ifndef X86GFX
 	/*
@@ -3076,6 +3087,11 @@ LOCAL void mouse_set_position IFN4(word *,junk1,word *,junk2,MOUSE_SCALAR *,curs
 
          host_mouse_set_position((USHORT)*cursor_x_ptr,(USHORT)*cursor_y_ptr);
          return;  /* let's get out of this mess - FAST! */
+    }
+
+    /* DIVERGENCE(MVDM-HOST-DIV-318): synchronize the NT relative counter
+       before the original base owner updates and paints the guest position. */
+    host_mouse_set_position((USHORT)*cursor_x_ptr,(USHORT)*cursor_y_ptr);
 
 #endif /* NTVDM */
 
@@ -3309,17 +3325,20 @@ LOCAL void mouse_set_graphics IFN4(word *,junk1,MOUSE_SCALAR *,hot_spot_x_ptr,MO
 
 	UNUSED(junk1);
 
-#ifndef NTVDM
+/* DIVERGENCE(MVDM-HOST-DIV-318): retain shape even before Window selection. */
+#if !defined(NTVDM) || !defined(MONITOR)
 	
 #ifdef MOUSE_16_BIT
 	mouse16bSetBitmap( hot_spot_x_ptr , hot_spot_y_ptr , bitmap_address );
 #else		/* MOUSE_16_BIT */
 
+#ifndef NTVDM /* DIVERGENCE(MVDM-HOST-DIV-318): no host-arrow shape provider. */
 	if (host_mouse_installed())
 	{
 		host_mouse_set_graphics(hot_spot_x_ptr, hot_spot_y_ptr, bitmap_address);
 	}
 	else
+#endif
 	{
 		MOUSE_SCREEN_DATA *mask_address;
 		int line;
@@ -5226,7 +5245,11 @@ LOCAL MOUSE_BIT_ADDRESS ega_point_as_graphics_cell_address IFN1(MOUSE_POINT *,po
 
 LOCAL void cursor_update IFN0()
 {
-#ifndef NTVDM
+/* DIVERGENCE(MVDM-HOST-DIV-318): restore original geometry only for Window. */
+#if !defined(NTVDM) || !defined(MONITOR)
+#ifdef NTVDM
+    if (!mvdm_softpc_mouse_route_active()) return;
+#endif
 	/*
 	 *	This function is used to update the displayed cursor
 	 *	position on the screen following a change to the 
@@ -5237,9 +5260,11 @@ LOCAL void cursor_update IFN0()
 	point_copy(&cursor_position, &cursor_status.position);
 	point_coerce_to_grid(&cursor_status.position, &cursor_grid);
 
+#ifndef NTVDM /* DIVERGENCE(MVDM-HOST-DIV-318): Window never warps host pointer. */
 	if (host_mouse_in_use())
 		host_mouse_set_position(cursor_status.position.x * mouse_gear.x * mouse_sens.x / 800,
 								cursor_status.position.y * mouse_gear.y * mouse_sens.y / 800);
+#endif
 
 #endif
 }
@@ -5249,8 +5274,12 @@ LOCAL void cursor_update IFN0()
 
 LOCAL void cursor_display IFN0()
 {
-#ifndef NTVDM
+/* DIVERGENCE(MVDM-HOST-DIV-318): original software painter for Window only. */
+#if !defined(NTVDM) || !defined(MONITOR)
 	UTINY v_mode;
+#ifdef NTVDM
+    if (!mvdm_softpc_mouse_route_active()) return;
+#endif
 
 	/* Check if Enhanced Mode wants to "see" cursor */
 	if ( cursor_EM_disabled )
@@ -5300,6 +5329,7 @@ LOCAL void cursor_display IFN0()
 #ifdef MOUSE_16_BIT
 	mouse16bShowPointer( );
 #else /* MOUSE_16_BIT */
+#ifndef NTVDM /* DIVERGENCE(MVDM-HOST-DIV-318): bypass the Console host arrow. */
 		if (host_mouse_installed())
 		{
 			if ( cursor_position.x >= black_hole.top_left.x &&
@@ -5311,6 +5341,7 @@ LOCAL void cursor_display IFN0()
 				host_mouse_cursor_display();
 		}
 		else
+#endif
 		{
 #ifdef EGG
 			if ((video_adapter == EGA  || video_adapter == VGA) && (v_mode > 6))
@@ -5350,7 +5381,9 @@ LOCAL void cursor_display IFN0()
 
 LOCAL void cursor_undisplay IFN0()
 {
-#ifndef NTVDM
+/* DIVERGENCE(MVDM-HOST-DIV-318): erase saved guest pixels even after route
+   retirement; Console has no save area unless Window drew one. */
+#if !defined(NTVDM) || !defined(MONITOR)
 	UTINY v_mode;
 
 	/* Check if Enhanced Mode wants to "see" cursor */
@@ -5369,11 +5402,13 @@ LOCAL void cursor_undisplay IFN0()
 	 *	the screen. This routine tolerates being called when the 
 	 *	cursor isn't actually being displayed
 	 */
+#ifndef NTVDM /* DIVERGENCE(MVDM-HOST-DIV-318): undo only our original painter. */
 	if (host_mouse_in_use())
 	{
 		host_mouse_cursor_undisplay();
 	}
 	else
+#endif
 	{
 		if (save_area_in_use)
 		{
@@ -5433,6 +5468,14 @@ LOCAL void cursor_undisplay IFN0()
 
 
 
+
+/* DIVERGENCE(MVDM-HOST-DIV-318): execution-owner refresh pairs draw/undraw
+   across route changes, including stationary pointers without an IRQ. */
+GLOBAL void mouse_refresh_pointer IFN0()
+{
+    cursor_undisplay();
+    if (cursor_flag == MOUSE_CURSOR_DISPLAYED) cursor_display();
+}
 
 LOCAL void cursor_mode_change IFN1(int,new_mode)
 {

@@ -1,11 +1,18 @@
 /* Run with CREATE_NO_WINDOW: real Windows Console operations, no user desktop. */
-#include "frontend-exe/console_frontend.h"
+#include "ntkvm-exe/console_frontend.h"
 #include <stdio.h>
 #include <stddef.h>
 #include <string.h>
 #define CHECK(x) do { if (!(x)) { fprintf(stderr,"FAIL %d error=%lu\n",__LINE__,GetLastError()); return 1; } } while (0)
 static console_io_request request;
 static console_io_reply reply;
+static DWORD relative_input(void *context,BOOL peek,INPUT_RECORD *records,DWORD capacity,DWORD *count)
+{
+    (void)peek;
+    if(!capacity)return ERROR_INSUFFICIENT_BUFFER;
+    ZeroMemory(records,sizeof(*records));records->EventType=CONSOLE_INPUT_RELATIVE_MOUSE;
+    memcpy(&records->Event,context,sizeof(console_mouse_input));*count=1;return ERROR_SUCCESS;
+}
 static void operation(run16_console_frontend *owner,uint32_t op)
 {
     ZeroMemory(&request,sizeof(request));
@@ -132,6 +139,25 @@ int main(void)
     memset(request.data,0,request.bytes); /* Not a KEY_EVENT: no partial write. */
     CHECK(!run16_console_dispatch(&owner,&request,&reply) && !reply.result &&
         reply.error==ERROR_INVALID_DATA && reply.state.count==0);
+    {
+        console_mouse_input mouse={INT32_MIN,INT32_MAX,640,400,3,CONSOLE_MOUSE_MOVE};
+        console_io_input wire;
+        CHECK(sizeof(mouse)<=sizeof(((INPUT_RECORD *)0)->Event));
+        owner.read_input=relative_input;owner.io_context=&mouse;
+        operation(&owner,CONSOLE_IO_READ_INPUT);request.state.count=1;
+        CHECK(!run16_console_dispatch(&owner,&request,&reply) && reply.result && reply.state.count==1);
+        memcpy(&wire,reply.data,sizeof(wire));
+        CHECK(wire.type==CONSOLE_INPUT_RELATIVE_MOUSE && wire.x==INT32_MIN && wire.y==INT32_MAX &&
+            wire.buttons==3 && wire.flags==CONSOLE_MOUSE_MOVE && wire.control==(640u|(400u<<16)));
+        mouse.buttons=4;
+        operation(&owner,CONSOLE_IO_PEEK_INPUT);request.state.count=1;
+        CHECK(!run16_console_dispatch(&owner,&request,&reply) && !reply.result && reply.error==ERROR_INVALID_DATA);
+        mouse.buttons=0;mouse.dx=mouse.dy=0;mouse.action=CONSOLE_MOUSE_LEAVE;
+        CHECK(!console_mouse_input_valid(&mouse));
+        mouse.width=mouse.height=0;CHECK(console_mouse_input_valid(&mouse));
+        owner.read_input=NULL;owner.io_context=NULL;
+        puts("PASS private DOS relative input retains 32-bit motion/geometry; malformed buttons and leave rejected; old protocol rejected");
+    }
     CloseHandle(owner.output);owner.output=INVALID_HANDLE_VALUE;
     operation(&owner,CONSOLE_IO_CURRENT_FONT);
     CHECK(!run16_console_dispatch(&owner,&request,&reply) && !reply.result &&

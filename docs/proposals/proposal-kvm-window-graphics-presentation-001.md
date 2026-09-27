@@ -18,6 +18,12 @@ Owner 最新要求取代下文旧方案。保留 main、当前工作区、已验
 
 ### 最终所有权
 
+Owner 于 2026-09-27 追加 S9 ConPTY 迁移：下述隐藏 Console/helper 是
+已由 S4 实现、在 S9 前继续使用的过渡后端，不表示 S8 已完成，也不是
+最终保留方案。S9 由 frontend 内 ConPTY
+适配器替换并删除自建隐藏 Console/helper 路径；frontend 的可见前端、
+display 所有权和 run16/ntvdm 执行边界保持不变。详细契约以下方 S9 为准。
+
 Owner 显示范围澄清：Console 保持字体及完整缓冲区，通过原生滚动访问；
 Window 保持共享库的按帧尺寸显示及超屏适配，不新增 Window 滚动条。
 200 列等额外 Win32 视口压力测试不是已证明的 OpenNT 要求，不得据此
@@ -128,11 +134,138 @@ S5 扩展验收已交付至 `1fb291a8f`；S6 从最新 nxvm 四组件核验开�
 | S5 | 继承旧 S3 隐藏后端剩余整包验收：A/B 四层链、mixed fault、输入归还、控制通知、尺寸/滚屏、Unicode、raw/cooked、键鼠、流别名/EOF、最终输出和 helper 取消；复用已有测试，不重做已证实算法。 |
 | S6 | frontend 内 display 和最新 nxvm 四组件：DOS 文本/图形、native 快照，CAF/AE/X、图文往返、会话隔离。Console 鼠标保留，Window 鼠标由 S7 完成。 |
 | S7 | Window DOS 文本/图形与 native 文本鼠标闭环，缩放/坐标/捕获/释放和切换回归。 |
-| S8 | 删除已替代的旧 root owner/重复分支，核算镜像 diff 与自主代码，完整回归/一致发布，等待 owner 验收，不自行关闭 T。 |
+| S8 | GUI 启动与等待语义：统一 Win16/Win32 GUI 的异步启动与显式等待契约，修复交互命令被 launcher 的全生命周期等待占住的问题；验证可靠启动交接、失败反馈、同步结果及嵌套返回。不修改原始 COMMAND 等待或 BaseSrv/WOW 调度来绕过问题。 |
+| S9 | frontend 迁移到 ConPTY，移除自建隐藏 Console/helper 后端；Console 模式在 conhost/Terminal 保持原有交互，Window 模式让 DOS/native 文本共用字体位图呈现，完成输入、嵌套、切换与生命周期闭环。 |
+| S10 | 删除已替代的旧 root owner/重复分支，核算镜像 diff 与自主代码，完整回归/一致发布，等待 owner 验收，不自行关闭 T。 |
+
+### S7 增补：产品命名
+
+S7 增补（owner 2026-09-27）：产品与组件命名统一为 run16.exe / run16-exe、
+ntkvm.exe / ntkvm-exe（原 frontend）、ntsrv.exe / ntsrv-exe（原 basesrv）、
+ntvdm.exe / ntvdm-exe。本项在 S7 内完成，不另开 S、不改变原始 BaseSrv
+函数/记录策略或 frontend 角色。原名称的历史证据保留；生产启动、构建、
+身份核验、当前测试与七文件发布全部使用新名称，不保留重复旧 EXE 充当别名。
+重新验证后以可恢复的整包替换发布，不能把旧名称的通过结果称为改名验收。
+
+### S8：GUI 启动与等待语义
+
+Owner 于 2026-09-27 批准将此项插入为 S8；追加 ConPTY 阶段后，收口审计为 S10。
+当前 S7 不被中断或重新编号；本次只更新规划，不宣称 S8 已实施或验收。
+最终顺序为 S7 鼠标闭环 → S8 GUI 启动/等待 → S9 ConPTY → S10 收口审计。
+
+已核实的现状：`run16` 是 Console 子系统程序，Win16 走
+`launch_vdm` 的任务完成等待，Win32 GUI 走 `launch_gui` 的进程退出等待。
+因此宿主 CMD 等待 run16；DOS COMMAND 的原始 `cmdCreateProcess` 也等待
+其直接子 run16。独立 WOW worker 或共享 WOW task 不会自动解除这些等待。
+原 OpenNT-4.5 `nt/private/windows/cmd/cext.c` 的交互分支在启用扩展、
+非批处理且非单命令执行等条件下，将 WOW 或 Win32 GUI 同步执行改为异步；
+不能把原始 BaseSrv 提供完成事件误读成 shell 必须等待。
+
+实施与独立退出标准：
+
+- [ ] 在 run16 启动/等待层落实 GUI 异步启动与显式同步等待两种契约。
+      先固定默认行为、等待选项或调用接口，以及交互、批处理、CMD /c、
+      DOS COMMAND 转交的适用规则；不得仅凭 Console 存在、父进程名或
+      程序窗口存在来猜测 shell 上下文。普通 GUI 启动应可恢复提示符；
+      明确要求同步的调用仍等待并返回其原有完成结果。
+- [ ] Win32 GUI 使用实际创建结果；Win16 核实新建/复用 WOW 的可靠启动
+      交接点、加载失败及任务归属。请求入队、worker 存活和首个任意窗口
+      均不能冒充目标加载成功。异步返回的是启动结果，不是最终退出码；
+      保留同步调用的原始结果契约，不虚构 Win16 最终退出码能力。
+- [ ] 核对 launcher 返回后 BaseSrv 的 pending-creation、reservation、
+      rundown、等待句柄和 WOW record 生命周期，确保已交接任务继续运行，
+      未成功交接的资源正确回滚；不引入后台等待代理、新 scheduler 或
+      frontend 执行策略，不强制每个 Win16 应用新建 worker。
+- [ ] 原始 COMMAND 仍等待它直接创建的进程；异步 GUI 的 launcher 完成
+      后应正常恢复原提示符。DOS/Win32 文本同步行为、重定向、独立会话及
+      frontend 所有权不变。不得一律删掉 GUI 等待来破坏批处理和嵌套结果。
+- [ ] 增加真实调用测试：宿主交互 CMD、DOS COMMAND、批处理、CMD /c、
+      显式等待及多层嵌套；覆盖 Win16/Win32 GUI 的成功、缺失/坏镜像、
+      启动中 worker/broker 故障、launcher 返回后的目标存活和正常结束。
+      断言提示符可继续执行、实际目标身份和结果，不仅断言进程创建。
+- [ ] 保留现有 GUI 返回 37 的批处理证明，以及两条十二目标链的逐层
+      等待/返回验证；需要时改为明确的同步调用，不删除断言或降低门槛。
+      加入独立异步案例，证明先恢复提示符、目标后退出。Win16 使用既有
+      可用 WINMINE 前沿，SOL/WRITE 原有失败仍如实记录。
+- [ ] 完成相应生产代码的 x86 构建、DOS17、既有 frontend/嵌套/故障及
+      WOW 非回退门槛、一致七文件发布和提交推送；S9 保留其契约，S10 总体审计。
+
+本 S 不承接路径搜索修复或 ConPTY 迁移。先复用原始 shell/VDM 契约及
+已有通知机制；新增绑定须给出原始 owner、缺失边界和最小 diff 依据。
+
+### S9：frontend ConPTY 后端与统一文本呈现
+
+Owner 于 2026-09-27 批准追加本阶段，原 S9 收口审计顺延为 S10。
+这是后续实施规划，不是当前 S7 的后端切换，不改变既有可用包。
+
+目标是以 Windows ConPTY 替代自建隐藏 Console 和 helper 子进程方案。
+frontend.exe 独立管理 ConPTY 句柄、输入/输出流、终端屏幕状态、可见
+Console、Window 和 display。删除项目自建 helper 启动入口、私有后端
+RPC/快照轮询及已被替代的资源生命周期代码；不新增 helper EXE，也不
+以隐藏 Console fallback 永久保留两套后端。Windows 自己的 Console
+宿主进程不属于被禁止的项目 helper；ConPTY 并非没有系统 Console 会话。
+
+| 内容 | display=console | display=window |
+| --- | --- | --- |
+| DOS 文本 | ntvdm 原始文本/输入契约经 frontend 接到可见 Console | ntvdm 原始文本帧经统一字体位图呈现到 kvm-window |
+| Win32 文本 | 同一 ConPTY 后端经 frontend 接到可见 Console，conhost 与 Terminal 均保持现有交互 | ConPTY 流经 frontend 终端适配器形成文本屏幕状态，使用与 DOS 相同的字体位图方案到 kvm-window |
+| DOS 图形 | 保留实际图形模式自动使用 Window 的既有策略 | 保留 ntvdm 原始图形帧到 kvm-window |
+
+Win32 文本在两种 display 下都使用稳定的 ConPTY 后端，切换不重启
+程序、不更换执行会话、不重新解析用户命令。DOS 不绕入 ConPTY，仍由
+ntvdm 处理原始 guest 执行和设备。Win16/Win32 GUI 保留自身窗口及 S8
+启动/等待规则，不被纳入终端画面或文字流。
+
+实施与独立退出标准：
+
+- [ ] 先审计可复用的 ConPTY/VT 解析、输入编码和屏幕状态组件，登记
+      来源、许可、x86 构建和边界；kvm-window 不是 VT 解析器。优先复用
+      成熟组件及现有字体/帧/认证代码，避免从头实现通用终端或增加重复
+      屏幕模型。共享 lib 改动仍须另获批准，不修改其他项目文件。
+- [ ] frontend 的 ConPTY 适配器在 Console 模式也持续维护必要的终端
+      状态，确保切到 Window 后立即显示完整当前画面，不等下一次重绘。
+      处理分段 UTF-8/VT、光标/属性、宽字符/组合字符、备用屏幕、滚动、
+      尺寸变更和终端查询回复；明确唯一回复 owner，避免可见终端和本地
+      解析器重复回复。不能把原始字节流直接当成文本帧。
+- [ ] Window 的 DOS 与 native 文本使用同一字体位图选择、字形/单元格
+      几何及栅格化规则，不为 native 单独使用另一套系统字体 renderer。
+      保留 guest 字体银行、代码页及 43/50 行语义；相同字符/属性/字体
+      输入给出一致显示，Unicode 扩展映射需明确测试。该统一不把 native
+      输出降格为仅 DOS 字符集，也不改变 DOS 图形帧。
+- [ ] Console 模式保留固定字体、原生滚动和完整可访问内容，不用缩字
+      替代滚动；验证 conhost 和 Windows Terminal 的真实输入、输出、
+      光标、尺寸/滚屏、Unicode、raw/cooked、键鼠与 Ctrl+C/Break。
+      不以纯 stdout 文本或退出码替代交互验收，不虚构无来源的视口上限。
+- [ ] Window 输入统一由 frontend 接收，再按活动消费者分别送原始 DOS
+      设备或 ConPTY 输入编码器。保留 S7 的移动/点击、失焦/捕获释放及
+      输入归还能力；不得假设 VT 鼠标已等价覆盖所有 native Console
+      输入记录，须以实际目标读入与行为证明，无粘键、假点击或重复输入。
+- [ ] 保留会话认证和两段字符链隔离。ConPTY 中 native 启动 DOS、DOS
+      再启动 native 时恢复正确端点、画面和输入；保持任务结果与 I/O
+      生命周期分离。复验两条十二目标链和 S8 同步/异步 GUI 场景，
+      不以新建每层 frontend/ConPTY 或树杀进程回避嵌套。
+- [ ] 覆盖创建失败、管道断开、背压、取消、目标提前退出、最终输出
+      排空、EOF、重定向文件/管道和句柄别名、frontend/broker/worker
+      故障。已有 helper 故障测试迁移为对应后端故障断言，不因删除 helper
+      就删除它保护的语义。关闭 ConPTY 的目标影响须实测并遵守现有
+      session-close 契约，不能将普通 launcher 退出变成执行树终止。
+- [ ] 在真实 CMD、MONITOR、COMMAND、MEM、EDIT 下完成 Console/Window
+      两路交互、CAF/AE/X、图文转换及嵌套回归。通过正式 x86 构建、DOS17、
+      既有故障与 WOW 前沿验证后才一致发布七文件到 O:/winnt；未通过的
+      迁移候选不能替换当前可用包。测试留在仓库，证据记录准确产物身份。
+- [ ] 验收通过后从正式源码/构建图删除已替代 helper、隐藏 Console
+      后端及重复 renderer，不留默认关闭的第二实现。分别汇报删除、
+      新增自主代码及导入库规模，不把外部库计为零成本。提交推送后进入
+      S10 全局收口审计，不自行关闭 T。
+
+本 S 不实现新的 DOS/WOW scheduler、不修改 guest、不变更路径搜索
+proposal，也不扩大成通用终端产品。能力缺口不能以旧 helper 常驻兜底
+冒充迁移完成；必须在本 S 完成相应绑定/验证或向 owner 明确报告限制。
 
 每个生产 P 仍执行 DOS17、逐层文本/结果、适用故障与 headless WOW
 非回退验证。加入 frontend 后正式包为原六文件加 frontend.exe 共七文件；
-helper 不增加第八个产品文件。首次七文件发布必须整包通过且可恢复到
+S9 前 helper 不增加第八个产品文件，S9 后由 ConPTY 取代且不增加产品 EXE。
+首次七文件发布必须整包通过且可恢复到
 原六文件基线；纯文档/工作快照不触发候选发布。当前禁止创建新源码目录，
 直到实施迁移时按本次明确命名的 frontend-exe 组件准入；其他临时目录
 仍只能在 build 下。迁移账本见 [S3 记录](../etc/evidence/m0-t423-s3-hidden-console-ledger.md#frontend-exe-replanning-snapshot)。

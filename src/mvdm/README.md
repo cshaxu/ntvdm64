@@ -1,5 +1,23 @@
 # mvdm
 
+MVDM-HOST-DIV-318 (S7 candidate, not delivered): original `nt_event.c`
+dispatches copied Window-relative mouse records through the worker-owned
+bridge; its existing EOI/pending and cancellation boundaries include that
+queue. `nt_mouse.c` retains original absolute input as fallback and delegates
+only relative ingress conversion to `ntvdm-exe/softpc/mvdm_softpc_mouse_guest.c`.
+Original EmulateCoordinates, limits and callback masks remain owners.
+The attempted MONITOR/X86GFX cursor hooks were removed after final-link and
+source review disproved their availability in this CCPU40 composition.
+The reviewed 286d54a3 reference's non-MONITOR `mouse_io.c` software cursor
+count, shape/hotspot, geometry, draw/erase and saved-background paths are now
+selected in the candidate. `nt_graph.c` refreshes that original cursor owner;
+an ICA-protected worker route snapshot replaces the old presentation binding.
+Real guest cursor count, text/graphics draw/erase and reset/position/input
+integration pass in the S7 candidate; publication and P delivery remain open.
+No hardware FULLSCREEN state is fabricated and no shared library changes.
+Frontend/native handoff, real guest callbacks and Console mouse regression pass;
+see the [S7 ledger](../../docs/etc/evidence/m0-t423-s7-window-mouse.md).
+
 MVDM-HOST-DIV-317: `softpc.new/host/src/nt_event.c` retains raw-record
 identity through keyboard dispatch and selects pending original history ages
 instead of interpreting device-packet count as raw-record count.
@@ -50,7 +68,7 @@ block/resume boundaries to the independent frontend. The block notification
 follows original final painting, unused-key return, mode restoration and timer
 stop; resume acquires presentation/input before original Console queries and
 event-thread release. `ntvdm-exe/win32/console_client.c` carries that finite
-notification; `frontend-exe` serializes native and DOS I/O and returns unread hidden
+notification; `ntkvm-exe` serializes native and DOS I/O and returns unread hidden
 Console records through the original-shaped native prepend operation. The NT4
 shared visible Console did not require a cross-process presentation binding;
 the owner-admitted independent frontend split does. No guest, original scheduler,

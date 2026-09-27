@@ -3,6 +3,8 @@ param(
     [Parameter(Mandatory)][string]$WindowObserver,
     [Parameter(Mandatory)][string]$Prefix,
     [string]$PackageRoot='O:\winnt',
+    [string]$ProcessPackageRoot,
+    [string]$LogRoot,
     [ValidateSet('WINMINE.EXE','SOL.EXE','WRITE.EXE')]
     [string[]]$Guests=@('WINMINE.EXE','SOL.EXE','WRITE.EXE')
 )
@@ -13,21 +15,35 @@ if($Prefix -notmatch '^[a-z0-9-]+$'){throw 'Invalid prefix'}
 $Observer=(Resolve-Path $Observer).Path
 $WindowObserver=(Resolve-Path $WindowObserver).Path
 $PackageRoot=(Resolve-Path $PackageRoot).Path
-$paths=@('run16.exe','ntvdm.exe','basesrv.exe') | ForEach-Object {Join-Path $PackageRoot $_}
+$paths=@('run16.exe','ntvdm.exe','ntsrv.exe') | ForEach-Object {Join-Path $PackageRoot $_}
+if($ProcessPackageRoot){
+    $ProcessPackageRoot=(Resolve-Path -LiteralPath $ProcessPackageRoot).Path
+    foreach($name in @('run16.exe','ntvdm.exe','ntsrv.exe')){
+        $physical=Join-Path $ProcessPackageRoot $name
+        if((Get-FileHash $physical).Hash -ne (Get-FileHash (Join-Path $PackageRoot $name)).Hash){
+            throw "Process package differs from launch package: $name"
+        }
+        $paths+=$physical
+    }
+}
+if(!$LogRoot){$LogRoot=Join-Path $PackageRoot 'logs'}
+$LogRoot=(Resolve-Path -LiteralPath $LogRoot).Path
 function PackageProcesses {
-    @(Get-CimInstance Win32_Process -Filter "Name='run16.exe' OR Name='ntvdm.exe' OR Name='basesrv.exe'" |
+    @(Get-CimInstance Win32_Process -Filter "Name='run16.exe' OR Name='ntvdm.exe' OR Name='ntsrv.exe'" |
         Where-Object {$_.ExecutablePath -in $paths})
 }
 if((PackageProcesses).Count){throw 'Package already in use'}
 $profile=Get-FileHash (Join-Path $PackageRoot 'SYSTEM.INI')
 foreach($guest in $Guests){
-    $stem=Join-Path $PackageRoot ('logs\'+$Prefix+'-'+$guest.Split('.')[0].ToLowerInvariant())
+    $stem=Join-Path $LogRoot ($Prefix+'-'+$guest.Split('.')[0].ToLowerInvariant())
     if(Test-Path ($stem+'.txt')){throw 'Use a fresh evidence prefix'}
     $launcher=$null
     try {
-        $args='"{0}" "{1}" "{2}" {3} --observation-timeout-ms 20000' -f
-            (Join-Path $PackageRoot 'run16.exe'),$PackageRoot,($stem+'.txt'),$guest
-        $start=[Diagnostics.ProcessStartInfo]::new($Observer,$args)
+        $start=[Diagnostics.ProcessStartInfo]::new($Observer)
+        foreach($argument in @((Join-Path $PackageRoot 'run16.exe'),$PackageRoot,
+            ($stem+'.txt'),$guest,'--observation-timeout-ms','20000')){
+            $start.ArgumentList.Add($argument)
+        }
         $start.UseShellExecute=$false
         $start.WindowStyle=[Diagnostics.ProcessWindowStyle]::Hidden
         $start.EnvironmentVariables['MVDM_OBSERVER_PRIVATE_DESKTOP']='1'

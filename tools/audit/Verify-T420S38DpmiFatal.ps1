@@ -27,9 +27,9 @@ $PackageRoot = (Resolve-Path -LiteralPath $PackageRoot).Path
 if ($LogPrefix -notmatch '^[a-z0-9-]+$') { throw 'Invalid log prefix' }
 $report = Join-Path $LogRoot "$LogPrefix.txt"
 if (Test-Path -LiteralPath $report) { throw 'Use a fresh log prefix' }
-$packagePaths = @('run16.exe','ntvdm.exe','basesrv.exe') | ForEach-Object { Join-Path $PackageRoot $_ }
+$packagePaths = @('run16.exe','ntvdm.exe','ntsrv.exe') | ForEach-Object { Join-Path $PackageRoot $_ }
 function PackageProcesses {
-    @(Get-CimInstance Win32_Process -Filter "Name='run16.exe' OR Name='ntvdm.exe' OR Name='basesrv.exe'" |
+    @(Get-CimInstance Win32_Process -Filter "Name='run16.exe' OR Name='ntvdm.exe' OR Name='ntsrv.exe'" |
         Where-Object { $_.ExecutablePath -in $packagePaths })
 }
 if ((PackageProcesses).Count) { throw 'Isolated package already in use' }

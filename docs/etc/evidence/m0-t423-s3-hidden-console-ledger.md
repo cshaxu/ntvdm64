@@ -1,5 +1,11 @@
 # T423 S3 Hidden Console Ledger
 
+Planning cross-reference correction (2026-09-27): S3–S8 references in this
+retained chronology describe the earlier sequence. The current
+[proposal](../../proposals/proposal-kvm-window-graphics-presentation-001.md)
+adds S8 GUI launch/wait and S9 ConPTY, moving final audit to S10. Historical
+results are unchanged; this ledger does not admit the later stages.
+
 ## S4 final reconciliation and publication review
 
 The owner requested completion/publication of S4 and automatic sequential S5

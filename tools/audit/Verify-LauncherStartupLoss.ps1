@@ -12,7 +12,7 @@ foreach($case in @(@{Stage='before';Victim='launcher'},@{Stage='after';Victim='l
     if(Test-Path $env:MVDM_BASESRV_TRACE_PATH){throw 'Fresh prefix required'}
     $launcher=$null;$children=@();$waiter=$null
     try {
-        $existing=@(Get-CimInstance Win32_Process | Where-Object {$_.Name -in @('basesrv.exe','ntvdm.exe','run16.exe') -and ($_.ExecutablePath -like "$root\*" -or $_.ExecutablePath -like 'O:\winnt\*')})
+        $existing=@(Get-CimInstance Win32_Process | Where-Object {$_.Name -in @('ntsrv.exe','ntvdm.exe','run16.exe') -and ($_.ExecutablePath -like "$root\*" -or $_.ExecutablePath -like 'O:\winnt\*')})
         if($existing.Count){throw 'Package or fixture already running'}
         $launcher=Start-Process (Join-Path $root "$($case.Stage).exe") -ArgumentList 'O:\winnt\COMMAND.COM' -WorkingDirectory O:\winnt -WindowStyle Hidden -PassThru
         if(!$ready.WaitOne(15000)){throw 'Launch cut point not reached'}
@@ -20,7 +20,7 @@ foreach($case in @(@{Stage='before';Victim='launcher'},@{Stage='after';Victim='l
             ($_.ExecutablePath -like "$root\*" -or (!$_.ExecutablePath -and $_.Name -eq 'ntvdm.exe'))})
         $children | Select-Object ProcessId,ParentProcessId,Name,ExecutablePath | ConvertTo-Json | Set-Content "O:\winnt\logs\$LogPrefix-$($case.Stage)-$($case.Victim)-children.json"
         $worker=@($children | Where-Object {$_.Name -eq 'ntvdm.exe'})
-        $broker=@($children | Where-Object {$_.Name -eq 'basesrv.exe'})
+        $broker=@($children | Where-Object {$_.Name -eq 'ntsrv.exe'})
         if($worker.Count -ne 1 -or $broker.Count -ne 1){throw 'Cannot identify owned startup children'}
         $waiter=Get-Process -Id $worker[0].ProcessId
         if($case.Victim -eq 'launcher'){Stop-Process -Id $launcher.Id}

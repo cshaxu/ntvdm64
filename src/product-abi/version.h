@@ -1,4 +1,4 @@
-/* Shared product identity for run16.exe, basesrv.exe and ntvdm.exe.
+/* Shared product identity for run16.exe, ntsrv.exe and ntvdm.exe.
  * Advance the application version with the admitted T task, not each S/P.
  * Protocol changes also require the matching major version in service.idl.
  * This header supplies metadata only, never application policy to adapters. */

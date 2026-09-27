@@ -13,7 +13,7 @@ $runtime = (Resolve-Path -LiteralPath $RuntimeRoot).Path
 $source = Join-Path $PSScriptRoot 'dpmi_vcd_serial_ports.asm'
 $probe = Join-Path $build 'S45VCD.COM'
 $trace = Join-Path $runtime 'logs\s45-vcd-serial-discovery.log'
-$paths = @('run16.exe', 'basesrv.exe', 'ntvdm.exe') | ForEach-Object {
+$paths = @('run16.exe', 'ntsrv.exe', 'ntvdm.exe') | ForEach-Object {
     Join-Path $runtime $_
 }
 
@@ -61,7 +61,7 @@ $nasmArguments = @('-f', 'bin', ('-DEXPECT_PORT_MASK=' + $mask), $source, '-o', 
 & $Nasm @nasmArguments
 if ($LASTEXITCODE -ne 0) { throw 'NASM could not build the S45 VCD probe.' }
 New-Item -ItemType Directory -Force -Path (Join-Path $runtime 'tests'),(Join-Path $runtime 'logs') | Out-Null
-foreach ($name in @('run16.exe','basesrv.exe','ntvdm.exe','monitor.exe')) {
+foreach ($name in @('run16.exe','ntsrv.exe','ntvdm.exe','monitor.exe')) {
     Copy-Item -LiteralPath (Join-Path $build $name) -Destination (Join-Path $runtime $name) -Force
 }
 Copy-Item -LiteralPath $probe -Destination (Join-Path $runtime 'tests\S45VCD.COM') -Force

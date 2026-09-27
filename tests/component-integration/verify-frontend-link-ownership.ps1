@@ -25,7 +25,7 @@ function Assert-FrontendOwnership([string[]]$Lines) {
             $node = $pending.Pop()
             if (!$seen.Add($node)) { continue }
             foreach ($input in $edges[$node]) {
-                if ($input -match '/src/frontend-exe/(.+\.c)$') {
+                if ($input -match '/src/ntkvm-exe/(.+\.c)$') {
                     [void]$sources.Add($Matches[1])
                 } elseif ($input -match '\.(obj|lib)$' -and $edges.ContainsKey($input)) {
                     $pending.Push($input)
@@ -44,7 +44,7 @@ function Assert-FrontendOwnership([string[]]$Lines) {
     }
     $worker = @(Get-FrontendSources 'ntvdm.exe')
     if ($worker.Count) { throw "ntvdm links frontend implementation: $worker" }
-    $service = @(Get-FrontendSources 'frontend.exe')
+    $service = @(Get-FrontendSources 'ntkvm.exe')
     foreach ($required in @('main.c', 'session_service.c', 'console_channel.c',
             'console_frontend.c', 'console_video.c', 'native_console_host.c',
             'native_console_backend.c', 'native_console_view.c',
@@ -52,7 +52,7 @@ function Assert-FrontendOwnership([string[]]$Lines) {
             'native_console_request.c', 'window_controller.c', 'window_frame.c',
             'window_keyboard.c', 'window_input_queue.c',
             'lib/kvm-window/win32/component.c') + $client) {
-        if ($required -notin $service) { throw "frontend.exe omits $required" }
+        if ($required -notin $service) { throw "ntkvm.exe omits $required" }
     }
 }
 
@@ -76,7 +76,7 @@ foreach ($leakInput in @('frontend-window.lib', 'obj/ownership-leak.obj')) {
             $_ -replace ': (\S+) ', (': $1 ' + $leakInput + ' ')
         } else { $_ }
     })
-    $mutated += 'build obj/ownership-leak.obj: cc O$:/repo/src/frontend-exe/lib/kvm-window/win32/component.c'
+    $mutated += 'build obj/ownership-leak.obj: cc O$:/repo/src/ntkvm-exe/lib/kvm-window/win32/component.c'
     $rejected = $false
     try { Assert-FrontendOwnership $mutated } catch { $rejected = $true }
     if (!$rejected) { throw "Window ownership negative control did not reject $leakInput" }

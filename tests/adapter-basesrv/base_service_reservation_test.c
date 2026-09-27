@@ -1,7 +1,7 @@
 #include <base_service.h>
 #include "basesrv.h"
 #include <base_command.h>
-#include "basesrv-exe/transport/vdm_receipt.h"
+#include "ntsrv-exe/transport/vdm_receipt.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>

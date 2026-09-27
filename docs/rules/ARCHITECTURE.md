@@ -10,7 +10,7 @@ visual comparison.
    manifest-declared host, guest, tool and firmware slices), `opennt-host`,
    `opennt-abi/host-compat`, `product-abi`, `product-package`, and the
    executable-owned `run16`, `basesrv`, `ntvdm`, `monitor` and admitted
-   `frontend-exe` roots. frontend owns character-session presentation; run16
+   `ntkvm-exe` roots. frontend owns character-session presentation; run16
    retains only launcher/direct-target completion duties. T418 has retired
    generic `app`, `session`, `broker` and `adapter-*` production roots;
    retained README-only directories are historical move markers. No generic

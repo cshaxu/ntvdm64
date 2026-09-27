@@ -112,8 +112,8 @@ T423's S3 ownership-replanning snapshot remains evidence, not a production P.
 The owner subsequently approved the migration report, S4 implementation and
 automatic sequential admission after S4 delivery. This supersedes the earlier
 planning-only pause, never the verification gates. The independent frontend
-runtime package is the six files below plus frontend.exe (seven total); the
-helper is a private frontend.exe role, not an eighth binary. All regression,
+runtime package is the six files below plus ntkvm.exe (seven total); the
+helper is a private ntkvm.exe role, not an eighth binary. All regression,
 coherent publication and recovery gates apply to that complete seven-file set.
 Do not publish unverified candidates or claim S3 functional closure.
 
@@ -156,7 +156,7 @@ commits containing production changes remain subject to the runtime gate.
    explicitly open within the admitted scope, never counted as functional
    passes. Unknown or unexecuted comparisons do not pass this gate.
 5. Update O:/winnt with the verified coherent set: monitor.exe, run16.exe,
-   basesrv.exe, ntvdm.exe, frontend.exe, WOW32.DLL and VDMREDIR.DLL, plus required original
+   ntsrv.exe, ntvdm.exe, ntkvm.exe, WOW32.DLL and VDMREDIR.DLL, plus required original
    guest binaries and approved configuration at proper package-relative paths.
    Validate all seven, including unchanged hashes, against the tested manifest
    and verify the published set. Do not test one component combination and
@@ -189,6 +189,10 @@ rebuilding or patching them is not. Preserve user data and NTVDM.REG state;
 review configuration changes and retain recovery copies rather than blanket
 overwrites. Restore temporary diagnostic profiles before ordinary publication.
 Tests belong below O:/winnt/tests and logs below O:/winnt/logs.
+Owner exception dated 2026-09-27: if O:/winnt/logs is unavailable, the agent
+may create and use O:/winnt/Logs2 for runtime observation and test logs. This
+specific fallback is exempt from the build-only new-directory restriction;
+it does not authorize other runtime directories or permission/ACL changes.
 
 This forward rule neither retroactively certifies prior commits nor claims
 automation already enforces it. A saved research checkpoint, compile or local
@@ -216,7 +220,7 @@ and reuse is intentional. Do not emit build products into the repository root,
 
 The only permitted deployment exception is a deliberate copy of the selected
 runtime package to `O:\winnt`: original guest media/configuration, the three
-runtime executables (`run16.exe`, `basesrv.exe`, `ntvdm.exe`), and the two
+runtime executables (`run16.exe`, `ntsrv.exe`, `ntvdm.exe`), and the two
 selected runtime DLLs. `O:\winnt` is not a build root: no object, library,
 generated source, intermediate, fixture executable, test manifest, or other
 test/build result may be written at its root. Every executable test harness,

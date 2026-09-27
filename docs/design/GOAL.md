@@ -1,7 +1,7 @@
 # Project Goal
 
 Deliver a self-contained, non-invasive NTVDM CLI for modern Windows hosts.
-The current product package is x86 `run16.exe`, `basesrv.exe` and `ntvdm.exe`;
+The current product package is x86 `run16.exe`, `ntsrv.exe` and `ntvdm.exe`;
 native x64 compilation is not a product or acceptance target. The run16 CLI
 launches admitted DOS `.com`, `.exe`, `.bat`
 and `.pif` targets and later bounded WOW16 workloads. It may use public Win32

@@ -176,6 +176,21 @@ int main(void)
     native.cursor.bVisible = TRUE;
     CHECK(frontend_window_native_frame(&native, native_cells, 5001u * 300u, frame) == ERROR_SUCCESS);
     CHECK(frame->image.palette[frame->image.pixels[13 * 8]] == (0x151617 ^ 0xffffff));
+    {
+        POINT pointer={0,0};unsigned arrow_pixels=0,index;
+        CHAR_INFO original=native_cells[5001 * 299 + 5000];
+        DWORD pointer_error=frontend_window_native_frame_pointer(&native,native_cells,5001u*300u,&pointer,frame);
+        if(pointer_error)fprintf(stderr,"pointer conversion error=%lu last=%lu\n",pointer_error,GetLastError());
+        CHECK(!pointer_error);
+        for(index=0;index<8u*14u;++index) {
+            DWORD color=frame->image.palette[frame->image.pixels[index]];
+            if(color==0 || color==0xffffff)++arrow_pixels;
+        }
+        CHECK(arrow_pixels && !memcmp(&original,&native_cells[5001 * 299 + 5000],sizeof(original)));
+        CHECK(!frontend_window_native_frame(&native,native_cells,5001u*300u,frame));
+        CHECK(frame->image.palette[frame->image.pixels[0]]==0x050a0f);
+        puts("PASS native pointer is a clipped OS arrow on copied raster; Console cells and text caret remain independent");
+    }
     CHECK(frontend_window_native_frame(&native, native_cells, 1, frame) == ERROR_INVALID_DATA && !frame->valid);
     /* Large backing buffers and large visible viewports are distinct. */
     native.cursor.bVisible = FALSE;

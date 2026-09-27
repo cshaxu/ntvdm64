@@ -1,6 +1,6 @@
 /* Real native Console storage on an unswitched observer desktop. The child
  * separates its attachment; no guest or alternate terminal emulator is used. */
-#include "frontend-exe/native_console_capture.h"
+#include "ntkvm-exe/native_console_capture.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -80,6 +80,15 @@ static int child(void)
     CHECK(GetCurrentConsoleFontEx(second,FALSE,&original_font));
     CHECK(SetConsoleActiveScreenBuffer(first));
     seed(first,80,300,0x4e00);
+    /* A private desktop still inherits the physical display/font limits.
+     * Keep the full backing buffer and scrolled origin; only the fixture's
+     * visible viewport must fit the host (including a small RDP desktop). */
+    {
+        COORD maximum=GetLargestConsoleWindowSize(first);
+        CHECK(maximum.X>=20 && maximum.Y>=2);
+        if(maximum.X<40)window.Right=(SHORT)(window.Left+maximum.X-1);
+        if(maximum.Y<25)window.Bottom=(SHORT)(window.Top+maximum.Y-1);
+    }
     CHECK(SetConsoleCursorPosition(first,position) && SetConsoleCursorInfo(first,&cursor));
     CHECK(SetConsoleWindowInfo(first,TRUE,&window));
     CHECK(SetConsoleCP(65001) && SetConsoleOutputCP(65001));

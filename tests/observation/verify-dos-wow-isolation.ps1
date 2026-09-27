@@ -13,16 +13,16 @@ $WindowReader=(Resolve-Path -LiteralPath $WindowReader).Path
 $PackageRoot=(Resolve-Path -LiteralPath $PackageRoot).Path
 if(!$ProcessPackageRoot){$ProcessPackageRoot=$PackageRoot}
 $ProcessPackageRoot=(Resolve-Path -LiteralPath $ProcessPackageRoot).Path
-foreach($name in @('run16.exe','ntvdm.exe','frontend.exe','basesrv.exe')){
+foreach($name in @('run16.exe','ntvdm.exe','ntkvm.exe','ntsrv.exe')){
     if((Get-FileHash (Join-Path $PackageRoot $name)).Hash -ne
         (Get-FileHash (Join-Path $ProcessPackageRoot $name)).Hash){throw 'Process package differs from launch package'}
 }
 $run=Join-Path $PackageRoot 'run16.exe'
 $worker=@((Join-Path $PackageRoot 'ntvdm.exe'),(Join-Path $ProcessPackageRoot 'ntvdm.exe'))
-$frontend=@((Join-Path $PackageRoot 'frontend.exe'),(Join-Path $ProcessPackageRoot 'frontend.exe'))
+$frontend=@((Join-Path $PackageRoot 'ntkvm.exe'),(Join-Path $ProcessPackageRoot 'ntkvm.exe'))
 $report=Join-Path $PackageRoot "logs\$LogPrefix.txt"
 if(Test-Path -LiteralPath $report){throw 'Use a fresh log prefix'}
-if(@(Get-CimInstance Win32_Process -Filter "Name='basesrv.exe'").Count){throw 'Broker must be stopped before isolated test'}
+if(@(Get-CimInstance Win32_Process -Filter "Name='ntsrv.exe'").Count){throw 'Broker must be stopped before isolated test'}
 $oldPrivate=$env:MVDM_OBSERVER_PRIVATE_DESKTOP
 $controller=$null
 $pinned=@()
@@ -55,7 +55,7 @@ try {
     } while([DateTime]::UtcNow -lt $deadline)
     if(!$wow){throw 'No actual WOW NETWORK.DRV frontier observed'}
     $others=@($workers | Where-Object {$_.ProcessId -ne $wow.Id})
-    $fronts=@(Get-CimInstance Win32_Process -Filter "Name='frontend.exe'" |
+    $fronts=@(Get-CimInstance Win32_Process -Filter "Name='ntkvm.exe'" |
         Where-Object {$_.ExecutablePath -in $frontend -and $_.CommandLine -match '--session'})
     if($others.Count -ne 1 -or $fronts.Count -ne 1){throw 'Expected separate DOS/WOW workers and one character frontend'}
     foreach($entry in @($others[0],$fronts[0])){
@@ -75,7 +75,7 @@ try {
     Write-Output 'PASS separate WOW worker failure returns to DOS MEM/COMMAND without a GUI-owned frontend'
 } finally {
     # Exact candidate image paths only; never kill by ancestry or basename.
-    $paths=@('run16.exe','frontend.exe','ntvdm.exe','basesrv.exe') |
+    $paths=@('run16.exe','ntkvm.exe','ntvdm.exe','ntsrv.exe') |
         ForEach-Object {(Join-Path $PackageRoot $_);(Join-Path $ProcessPackageRoot $_)}
     Get-CimInstance Win32_Process | Where-Object {$_.ExecutablePath -in $paths} |
         ForEach-Object {Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue}

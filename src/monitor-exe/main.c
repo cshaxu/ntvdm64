@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include "service.h"
-#include "basesrv-exe/transport/rpc_security.h"
+#include "ntsrv-exe/transport/rpc_security.h"
 #include "product-abi/version.h"
 
 #define MONITOR_COLUMNS 80

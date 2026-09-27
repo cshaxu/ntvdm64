@@ -13,9 +13,9 @@ if ($LogPrefix -notmatch '^[a-z0-9-]+$') { throw 'Invalid prefix' }
 if ((Get-ItemPropertyValue 'HKLM:\SYSTEM\CurrentControlSet\Control\Nls\CodePage' OEMCP) -ne '437') {
     throw 'This fixed-byte probe requires the recorded OEM 437 host profile'
 }
-$paths = @('run16.exe','ntvdm.exe','basesrv.exe') | ForEach-Object { Join-Path $PackageRoot $_ }
+$paths = @('run16.exe','ntvdm.exe','ntsrv.exe') | ForEach-Object { Join-Path $PackageRoot $_ }
 function Processes {
-    @(Get-CimInstance Win32_Process -Filter "Name='run16.exe' OR Name='ntvdm.exe' OR Name='basesrv.exe'" |
+    @(Get-CimInstance Win32_Process -Filter "Name='run16.exe' OR Name='ntvdm.exe' OR Name='ntsrv.exe'" |
         Where-Object { $_.ExecutablePath -in $paths })
 }
 if ((Processes).Count) { throw 'Package in use' }

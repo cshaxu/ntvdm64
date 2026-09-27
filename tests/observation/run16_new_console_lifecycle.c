@@ -24,8 +24,8 @@ static void collect_children(DWORD parent, child_watch watches[8], unsigned *cou
         unsigned index;
         if (entry.th32ParentProcessID != parent ||
             (_wcsicmp(entry.szExeFile, L"ntvdm.exe") &&
-             _wcsicmp(entry.szExeFile, L"basesrv.exe") &&
-             _wcsicmp(entry.szExeFile, L"frontend.exe"))) continue;
+             _wcsicmp(entry.szExeFile, L"ntsrv.exe") &&
+             _wcsicmp(entry.szExeFile, L"ntkvm.exe"))) continue;
         for (index = 0; index < *count; ++index)
             if (watches[index].pid == entry.th32ProcessID) break;
         if (index < *count || *count == 8) continue;
@@ -232,7 +232,7 @@ int wmain(int argc, WCHAR **argv)
             if (state != WAIT_OBJECT_0) ++live_workers;
             if (wait == WAIT_TIMEOUT && !frontier.found) timeout_threads(report, &watches[index]);
         }
-        if (!_wcsicmp(watches[index].name, L"frontend.exe")) {
+        if (!_wcsicmp(watches[index].name, L"ntkvm.exe")) {
             ++frontends;
             if (state != WAIT_OBJECT_0) ++live_frontends;
             if (state != WAIT_OBJECT_0) timeout_threads(report, &watches[index]);

@@ -131,7 +131,7 @@ int main(int argc,char **argv)
         if(!CreateProcessW(L"run16.exe",peer_command,NULL,NULL,FALSE,CREATE_NEW_CONSOLE,
             NULL,NULL,&peer_startup,&bystander) ||
             WaitForSingleObject(peer_ready,10000)!=WAIT_OBJECT_0)goto cleanup;
-        peer_frontend=find_child(bystander.dwProcessId,L"frontend.exe");
+        peer_frontend=find_child(bystander.dwProcessId,L"ntkvm.exe");
         if(!peer_frontend)goto cleanup;
     }
     if(normal) {
@@ -184,7 +184,7 @@ int main(int argc,char **argv)
         if(!nested || WaitForSingleObject(nested,0)!=WAIT_TIMEOUT) goto cleanup;
     }
     worker=find_child(normal ? pid : child.dwProcessId,L"ntvdm.exe");
-    frontend=find_child(child.dwProcessId,L"frontend.exe");
+    frontend=find_child(child.dwProcessId,L"ntkvm.exe");
     if(!worker || !frontend) goto cleanup;
     if(peer_frontend && GetProcessId(peer_frontend)==GetProcessId(frontend))goto cleanup;
     if(GetEnvironmentVariableA("MVDM_LIFETIME_WINDOW",NULL,0)) {
@@ -207,7 +207,7 @@ int main(int argc,char **argv)
     if(normal) {
         if(helper_loss) {
             phase="helper-failure-not-execution-completion";
-            helper=find_child(GetProcessId(frontend),L"frontend.exe");
+            helper=find_child(GetProcessId(frontend),L"ntkvm.exe");
             if(!helper)goto cleanup;
             native=find_child(GetProcessId(helper),L"NOIOLIFE.EXE");
             if(!native || !TerminateProcess(helper,92) ||

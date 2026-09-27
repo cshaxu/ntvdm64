@@ -4,8 +4,8 @@
 #include <windows.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "basesrv-exe/opennt/include/base_client.h"
-#include "basesrv-exe/opennt/include/base_rpc_client.h"
+#include "ntsrv-exe/opennt/include/base_client.h"
+#include "ntsrv-exe/opennt/include/base_rpc_client.h"
 
 /* BaseCheckForVDM shares its original client translation unit with
  * BaseCheckVDM, whose retained capture helpers require this local carrier. */

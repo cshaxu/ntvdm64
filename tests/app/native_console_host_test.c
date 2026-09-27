@@ -1,7 +1,7 @@
 /* Actual sibling run16 private helper and native CMD, not a substitute host.
  * Run only through the unswitched private-desktop observation harness. */
-#include "frontend-exe/native_console_backend.h"
-#include "frontend-exe/native_console_view.h"
+#include "ntkvm-exe/native_console_backend.h"
+#include "ntkvm-exe/native_console_view.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -51,7 +51,7 @@ static void start(void)
 {
     WCHAR image[MAX_PATH],*slash;
     CHECK(GetModuleFileNameW(NULL,image,MAX_PATH));slash=wcsrchr(image,L'\\');CHECK(slash);
-    CHECK(wcscpy_s(slash+1,MAX_PATH-(size_t)(slash+1-image),L"frontend.exe")==0);
+    CHECK(wcscpy_s(slash+1,MAX_PATH-(size_t)(slash+1-image),L"ntkvm.exe")==0);
     CHECK(!run16_native_backend_open(image,&backend));
     helper=run16_native_backend_process(backend);CHECK(helper);
 }

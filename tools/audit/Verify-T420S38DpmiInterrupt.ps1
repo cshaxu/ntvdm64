@@ -115,9 +115,9 @@ if ($LogPrefix -notmatch '^[a-z0-9-]+$') { throw 'Invalid log prefix' }
 if ($VcdService -and ($Reflection -or $ClientBits -ne 16)) { throw 'VCD uses its separate 16-bit service probe' }
 if ($DebugGroups -and ($Reflection -or $VcdService -or $ClientBits -ne 16)) { throw 'Debug groups use their separate 16-bit probe' }
 if ($DebugRollback -and ($Reflection -or $VcdService -or $DebugGroups -or $ClientBits -ne 16)) { throw 'Debug rollback uses its separate 16-bit probe' }
-$paths = @('run16.exe','ntvdm.exe','basesrv.exe') | ForEach-Object { Join-Path $PackageRoot $_ }
+$paths = @('run16.exe','ntvdm.exe','ntsrv.exe') | ForEach-Object { Join-Path $PackageRoot $_ }
 function PackageProcesses {
-    @(Get-CimInstance Win32_Process -Filter "Name='run16.exe' OR Name='ntvdm.exe' OR Name='basesrv.exe'" |
+    @(Get-CimInstance Win32_Process -Filter "Name='run16.exe' OR Name='ntvdm.exe' OR Name='ntsrv.exe'" |
         Where-Object { $_.ExecutablePath -in $paths })
 }
 if ((PackageProcesses).Count) { throw 'Package already in use' }

@@ -2,10 +2,10 @@
  * This tests the real RPC path; it does not select the ordinary CLI route. */
 #include <windows.h>
 #include <stdio.h>
-#include "frontend-exe/bootstrap.h"
-#include "frontend-exe/native_request_client.h"
-#include "frontend-exe/native_request_protocol.h"
-#include "basesrv-exe/opennt/include/base_rpc_client.h"
+#include "ntkvm-exe/bootstrap.h"
+#include "ntkvm-exe/native_request_client.h"
+#include "ntkvm-exe/native_request_protocol.h"
+#include "ntsrv-exe/opennt/include/base_rpc_client.h"
 
 PVOID CsrPortHeap;
 static int rejected_peer(HANDLE pipe,HANDLE caller)
@@ -57,7 +57,7 @@ static int creator_role(HANDLE output,PCWSTR gate_name,PCWSTR ready_name)
     error=OpenNtBaseClientConnectCurrent();if(error)return 21;
     if(!GetModuleFileNameW(NULL,self,MAX_PATH) || !GetCurrentDirectoryW(MAX_PATH,cwd))return 22;
     wcscpy_s(frontend,MAX_PATH,self);slash=wcsrchr(frontend,L'\\');if(!slash)return 23;
-    wcscpy_s(slash+1,MAX_PATH-(size_t)(slash+1-frontend),L"frontend.exe");
+    wcscpy_s(slash+1,MAX_PATH-(size_t)(slash+1-frontend),L"ntkvm.exe");
     error=frontend_bootstrap_start(frontend,&connection);if(error)return 24;
     environment=GetEnvironmentStringsW();if(!environment)return 25;
     swprintf_s(command,1024,L"\"%ls\" --linger %ls %ls",self,gate_name,ready_name);
@@ -167,8 +167,8 @@ int wmain(int argc,WCHAR **argv)
     if(error!=RPC_S_SERVER_UNAVAILABLE){printf("FAIL precondition broker error=%lu\n",error);goto done;}
     if(!GetModuleFileNameW(NULL,image,MAX_PATH))goto done;
     slash=wcsrchr(image,L'\\');if(!slash)goto done;slash[1]=0;
-    wcscpy_s(broker_image,MAX_PATH,image);wcscat_s(broker_image,MAX_PATH,L"basesrv.exe");
-    wcscat_s(image,MAX_PATH,L"frontend.exe");
+    wcscpy_s(broker_image,MAX_PATH,image);wcscat_s(broker_image,MAX_PATH,L"ntsrv.exe");
+    wcscat_s(image,MAX_PATH,L"ntkvm.exe");
     swprintf_s(command,2*MAX_PATH,L"\"%ls\"",broker_image);
     if(!CreateProcessW(broker_image,command,NULL,NULL,FALSE,CREATE_NO_WINDOW,NULL,NULL,&startup,&broker))goto done;
     CloseHandle(broker.hThread);broker.hThread=NULL;

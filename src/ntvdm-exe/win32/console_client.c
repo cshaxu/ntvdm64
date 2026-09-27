@@ -3,7 +3,8 @@
 #include "console_text.h"
 #include "product-abi/console_io.h"
 #include "opennt-abi/host-compat/include/console_grid.h"
-#include "basesrv-exe/opennt/include/base_rpc_client.h"
+#include "ntsrv-exe/opennt/include/base_rpc_client.h"
+#include "ntvdm-exe/softpc/mvdm_softpc_mouse_bridge.h"
 #include <stddef.h>
 #include <limits.h>
 #include <string.h>
@@ -18,9 +19,19 @@ typedef struct console_client {
     ntvdm_console_graphics *graphics;
     PALETTEENTRY text_palette[16];
     BOOL text_palette_valid;
+    mvdm_mouse_bridge mouse;
 } console_client;
 static DWORD console_activate(console_client *,BOOL);
 static console_client *output_client(HANDLE);
+
+/* Same bound worker endpoint as copied keyboard input. Its existing teardown
+ * runs after bound threads have joined, so no separate mouse lifetime exists. */
+mvdm_mouse_bridge *mvdm_softpc_mouse_current(void)
+{
+    session *owner=session_thread_current();
+    console_client *client=owner ? owner->console_client : NULL;
+    return client ? &client->mouse : NULL;
+}
 
 /* Worker-local identities only. DuplicateHandle aliases retain their role;
  * closed/reused handle values cannot impersonate a Console endpoint. Neither
@@ -953,6 +964,16 @@ BOOL WINAPI MvdmReadConsoleOutputW(HANDLE output,PCHAR_INFO buffer,COORD size,
 
 static BOOL decode_input(const console_io_input *wire,INPUT_RECORD *record)
 {
+    if(wire->type==CONSOLE_INPUT_RELATIVE_MOUSE) {
+        console_mouse_input mouse;
+        if(wire->buttons>3 || wire->flags>UINT16_MAX)return FALSE;
+        mouse.dx=wire->x;mouse.dy=wire->y;mouse.buttons=(uint16_t)wire->buttons;
+        mouse.action=(uint16_t)wire->flags;mouse.width=(uint16_t)wire->control;
+        mouse.height=(uint16_t)(wire->control>>16);
+        if(!console_mouse_input_valid(&mouse))return FALSE;
+        ZeroMemory(record,sizeof(*record));record->EventType=CONSOLE_INPUT_RELATIVE_MOUSE;
+        memcpy(&record->Event,&mouse,sizeof(mouse));return TRUE;
+    }
     if (wire->type>UINT16_MAX || wire->repeat>UINT16_MAX || wire->virtual_key>UINT16_MAX ||
         wire->scan>UINT16_MAX || wire->character>UINT16_MAX || wire->key_down>1 || wire->focus>1 ||
         wire->x<SHRT_MIN || wire->x>SHRT_MAX || wire->y<SHRT_MIN || wire->y>SHRT_MAX) return FALSE;

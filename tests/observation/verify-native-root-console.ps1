@@ -12,7 +12,7 @@ $Observer=(Resolve-Path -LiteralPath $Observer).Path
 $BuildRoot=(Resolve-Path -LiteralPath $BuildRoot).Path
 $PackageRoot=(Resolve-Path -LiteralPath $PackageRoot).Path
 $launcher=Join-Path $BuildRoot 'run16.exe'
-$broker=Join-Path $BuildRoot 'basesrv.exe'
+$broker=Join-Path $BuildRoot 'ntsrv.exe'
 $nested=(Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..\app\native-console-nested.cmd')).Path
 $guiBatch=(Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..\app\frontend-gui-boundary.cmd')).Path
 $gui=(Resolve-Path -LiteralPath (Join-Path $BuildRoot 'frontend-gui-boundary-test.exe')).Path
@@ -22,7 +22,7 @@ $identity=(Resolve-Path -LiteralPath (Join-Path $BuildRoot 'frontend-bootstrap-t
 if(Test-Path -LiteralPath $guiOutput){throw 'Use a fresh GUI output prefix'}
 # No candidate deployment and no desktop switch. An incompatible shared broker
 # must not be mistaken for evidence about the new native presentation path.
-if(@(Get-CimInstance Win32_Process -Filter "Name='basesrv.exe'" |
+if(@(Get-CimInstance Win32_Process -Filter "Name='ntsrv.exe'" |
     Where-Object {$_.ExecutablePath -ne $broker}).Count){throw 'Another broker is in use'}
 $oldPrivate=$env:MVDM_OBSERVER_PRIVATE_DESKTOP
 $oldHistory=$env:MVDM_OBSERVER_SHORT_HISTORY

@@ -12,7 +12,7 @@ $Observer=(Resolve-Path $Observer).Path
 $Builder=(Resolve-Path $Builder).Path
 $Probe=(Resolve-Path $Probe).Path
 $PackageRoot=(Resolve-Path $PackageRoot).Path
-$programs=@('run16.exe','ntvdm.exe','basesrv.exe') | ForEach-Object {Join-Path $PackageRoot $_}
+$programs=@('run16.exe','ntvdm.exe','ntsrv.exe') | ForEach-Object {Join-Path $PackageRoot $_}
 function Processes {
     @(Get-CimInstance Win32_Process | Where-Object {$_.ExecutablePath -in $programs})
 }

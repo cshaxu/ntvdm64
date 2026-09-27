@@ -9,9 +9,9 @@
 #include <tlhelp32.h>
 #include <rpc.h>
 #include "service.h"
-#include "basesrv-exe/transport/rpc_security.h"
+#include "ntsrv-exe/transport/rpc_security.h"
 #include "product-abi/version.h"
-#include "basesrv-exe/opennt/include/base_rpc_client.h"
+#include "ntsrv-exe/opennt/include/base_rpc_client.h"
 
 PVOID CsrPortHeap;
 
@@ -114,7 +114,7 @@ static BOOL topology(PCWSTR report, unsigned stage)
     if (!GetModuleFileNameW(NULL, image, ARRAYSIZE(image))) return FALSE;
     slash = wcsrchr(image, L'\\'); if (!slash) return FALSE; *slash = 0;
     slash = wcsrchr(image, L'\\'); if (!slash) return FALSE;
-    wcscpy_s(slash+1, ARRAYSIZE(image)-(size_t)(slash+1-image), L"frontend.exe");
+    wcscpy_s(slash+1, ARRAYSIZE(image)-(size_t)(slash+1-image), L"ntkvm.exe");
     file = CreateFileW(image, 0, FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
         NULL, OPEN_EXISTING, 0, NULL);
     if (file == INVALID_HANDLE_VALUE) return FALSE;
@@ -123,7 +123,7 @@ static BOOL topology(PCWSTR report, unsigned stage)
     snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
     if (snapshot == INVALID_HANDLE_VALUE) return FALSE;
     if (Process32FirstW(snapshot, &entry)) do {
-        if (!_wcsicmp(entry.szExeFile, L"frontend.exe")) {
+        if (!_wcsicmp(entry.szExeFile, L"ntkvm.exe")) {
             HANDLE process = OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION | SYNCHRONIZE,
                 FALSE, entry.th32ProcessID);
             if (process) {

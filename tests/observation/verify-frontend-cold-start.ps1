@@ -10,11 +10,11 @@ $ErrorActionPreference='Stop'
 if($LogPrefix -notmatch '^[a-z0-9-]+$'){throw 'Invalid log prefix'}
 $PackageRoot=(Resolve-Path -LiteralPath $PackageRoot).Path
 $Observer=(Resolve-Path -LiteralPath $Observer).Path
-$paths=@('run16.exe','frontend.exe','ntvdm.exe','basesrv.exe') |
+$paths=@('run16.exe','ntkvm.exe','ntvdm.exe','ntsrv.exe') |
     ForEach-Object {Join-Path $PackageRoot $_}
 if($ProcessPackageRoot){
     $ProcessPackageRoot=(Resolve-Path -LiteralPath $ProcessPackageRoot).Path
-    foreach($name in @('run16.exe','frontend.exe','ntvdm.exe','basesrv.exe')){
+    foreach($name in @('run16.exe','ntkvm.exe','ntvdm.exe','ntsrv.exe')){
         $physical=Join-Path $ProcessPackageRoot $name
         if((Get-FileHash $physical).Hash -ne (Get-FileHash (Join-Path $PackageRoot $name)).Hash){
             throw "Process package differs from launch package: $name"
@@ -26,7 +26,7 @@ function Get-TestProcesses {
     @(Get-CimInstance Win32_Process | Where-Object {$_.ExecutablePath -in $paths})
 }
 if((Get-TestProcesses).Count){throw 'Candidate package already in use'}
-if(@(Get-CimInstance Win32_Process -Filter "Name='basesrv.exe'").Count){throw 'Another broker is running'}
+if(@(Get-CimInstance Win32_Process -Filter "Name='ntsrv.exe'").Count){throw 'Another broker is running'}
 $oldPrivate=$env:MVDM_OBSERVER_PRIVATE_DESKTOP
 try {
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'

@@ -12,9 +12,9 @@ $PackageRoot = (Resolve-Path -LiteralPath $PackageRoot).Path
 if ($LogPrefix -notmatch '^[a-z0-9-]+$') { throw 'Invalid log prefix' }
 $manifest = Get-Content -LiteralPath (Join-Path $FixtureRoot 'manifest.json') -Raw | ConvertFrom-Json
 if ($manifest.int15ReservedKb -ne 0) { throw 'Reserved INT15 remains an investigative reproducer, not a passing gate' }
-$productPaths = @('run16.exe','ntvdm.exe','basesrv.exe') | ForEach-Object { Join-Path $PackageRoot $_ }
+$productPaths = @('run16.exe','ntvdm.exe','ntsrv.exe') | ForEach-Object { Join-Path $PackageRoot $_ }
 function Get-TestPackageProcesses {
-    @(Get-CimInstance Win32_Process -Filter "Name='run16.exe' OR Name='ntvdm.exe' OR Name='basesrv.exe'" |
+    @(Get-CimInstance Win32_Process -Filter "Name='run16.exe' OR Name='ntvdm.exe' OR Name='ntsrv.exe'" |
         Where-Object { $_.ExecutablePath -in $productPaths })
 }
 if ((Get-TestPackageProcesses).Count) { throw 'Package already in use' }

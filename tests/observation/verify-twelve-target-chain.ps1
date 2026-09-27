@@ -23,7 +23,7 @@ if($LogPrefix -notmatch '^[a-z0-9-]+$'){throw 'Invalid log prefix'}
 if($PackageRoot -notmatch '^[A-Za-z]:\\?$'){throw 'Use the isolated package short-drive mapping'}
 $PackageRoot=$PackageRoot.TrimEnd('\')+'\'
 if(!(Test-Path (Join-Path $PackageRoot 'tests'))){throw 'Existing candidate tests directory required'}
-if(@(Get-CimInstance Win32_Process -Filter "Name='basesrv.exe'").Count){
+if(@(Get-CimInstance Win32_Process -Filter "Name='ntsrv.exe'").Count){
     throw 'A broker is already active; preserve its session and run this isolated suite when the endpoint is free'
 }
 foreach($case in $Cases){if($case -notmatch '^[DW]{3}-[DW]{3}$'){throw "Invalid case $case"}}
@@ -132,7 +132,7 @@ try {
         # Observe natural retirement before the caller's failure-cleanup step.
         # These PIDs are fixture observations, never production authorization.
         $frontendIds=@($rows | Where-Object Owner | Select-Object -ExpandProperty Owner -Unique)
-        $helperIds=@(Get-CimInstance Win32_Process -Filter "Name='frontend.exe'" |
+        $helperIds=@(Get-CimInstance Win32_Process -Filter "Name='ntkvm.exe'" |
             Where-Object {$_.ParentProcessId -in $frontendIds} | Select-Object -ExpandProperty ProcessId)
         foreach($processId in @($frontendIds)+@($helperIds)){
             $process=Get-Process -Id $processId -ErrorAction SilentlyContinue
