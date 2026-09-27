@@ -2,7 +2,8 @@
 param(
     [Parameter(Mandatory)][string]$BuildRoot,
     [Parameter(Mandatory)][string]$Observer,
-    [Parameter(Mandatory)][string]$LogPrefix
+    [Parameter(Mandatory)][string]$LogPrefix,
+    [switch]$ExpandedBackend
 )
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
@@ -27,6 +28,20 @@ $cases=@(
     @{Name='console-client-test';Suffix='broken';Arg='--broken-pipe';Witness='native error and idle frontend loss'},
     @{Name='console-client-test';Suffix='close-hang';Arg='--close-hang';Exit='c000013a';Witness='original-shape close callback'}
 )
+$backendCases=@(
+    @{Name='native-console-host-test';Witness='actual result 41'},
+    @{Name='native-console-host-test';Suffix='control-input';Arg='--control-input';Witness='helper retained'},
+    @{Name='native-console-host-test';Suffix='completion';Arg='--completion';Witness='does not terminate a live native target'},
+    @{Name='native-console-host-test';Suffix='close-timeout';Arg='--close-timeout';Witness='peer observes EOF and exits without forced termination'},
+    @{Name='native-console-frontend-test';Suffix='controls';Arg='--controls';Witness='default exit and paused-DOS I/O state'},
+    @{Name='native-console-members-test';Witness='helper failure is not empty membership'}
+)
+if($ExpandedBackend){
+    # The host fixture deliberately starts its stream child in a different
+    # cwd. Supply that empty build-only directory, not a product dependency.
+    $null=New-Item -ItemType Directory -Path (Join-Path $BuildRoot 'tests') -Force
+    $cases+=$backendCases
+}
 $previous=$env:MVDM_OBSERVER_PRIVATE_DESKTOP
 try {
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'

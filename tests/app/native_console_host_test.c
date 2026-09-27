@@ -423,6 +423,7 @@ static void completed_target_with_lost_view(void)
     CHECK(GetEnvironmentVariableW(L"COMSPEC",comspec,MAX_PATH));
     for(index=0;index<ARRAYSIZE(expected);++index) {
         start();
+        CHECK(!run16_native_view_begin(backend,&view));
         swprintf_s(command,1024,L"\"%ls\" /d /c exit %lu",comspec,expected[index]);
         launch(command);
         CHECK(WaitForSingleObject(target,5000)==WAIT_OBJECT_0);
@@ -432,10 +433,12 @@ static void completed_target_with_lost_view(void)
         printf("completed target, canceled final frame: error=%lu result=%lu\n",error,code);
         CHECK(!error && code==expected[index] && view.presentation_error==ERROR_OPERATION_ABORTED);
         result(expected[index]);
+        run16_native_view_end(&view);
         run16_native_backend_close(backend);backend=NULL;helper=NULL;
     }
     puts("PASS completed native result survives final-frame failure");
     start();CHECK(GetModuleFileNameW(NULL,image,MAX_PATH));
+    CHECK(!run16_native_view_begin(backend,&view));
     swprintf_s(command,1024,L"\"%ls\" --survivor",image);
     launch(command);CHECK(WaitForSingleObject(target,0)==WAIT_TIMEOUT);
     run16_native_backend_cancel(backend);code=0xdeadbeef;
@@ -444,6 +447,7 @@ static void completed_target_with_lost_view(void)
         view.presentation_error==ERROR_OPERATION_ABORTED);
     CHECK(WaitForSingleObject(target,0)==WAIT_TIMEOUT);
     result(41);
+    run16_native_view_end(&view);
     run16_native_backend_close(backend);backend=NULL;helper=NULL;
     puts("PASS I/O failure is not completion and does not terminate a live native target");
 }
