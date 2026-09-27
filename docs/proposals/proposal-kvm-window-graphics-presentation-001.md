@@ -1,6 +1,124 @@
 # Console／Window 统一呈现与原生字符执行
 
-## Owner 最新重启方案
+## 当前方案：独立 frontend.exe（取代根 run16 前端）
+
+迁移报告后 owner 已批准按此方案开始。S3 以成果保全/重规划结论结束，
+不宣称隐藏 Console 功能验收通过；S4 正式准入，复用现有实现和测试。
+下文“先报告再编码”的前置步骤已完成，不再阻止本次批准的迁移。
+
+Owner 最新要求取代下文旧方案。保留 main、当前工作区、已验证代码和测试，
+不回退、不丢弃，不为保存快照而将未完成验证的候选发布到 O:/winnt。
+当前 S3 停止扩展旧所有权，改做快照、迁移审计和规划；旧隐藏 Console
+整包目标明确为重规划，未功能收口。先报告此方案，再继续生产编码。
+下文“Owner 旧重启方案”及其 S3–S6 仅为历史设计和验收来源，不再准入执行。
+
+### 最终所有权
+
+- `src/frontend-exe/ → frontend.exe`：一个字符交互会话的唯一前端。
+  独立持有可见 Console、Window、隐藏 Console/helper、输入/呈现线程、
+  display 和 I/O 端点交接。helper 是 frontend.exe 的私有角色，不再借用
+  run16.exe 的入口。不得拥有 DOS/WOW 调度或替 launcher 推导退出码。
+- `src/run16-exe/ → run16.exe`：分类、发现/启动并认证加入 frontend，
+  启动/提交目标，等待直接目标，返回实际结果。没有根/内层 UI owner
+  分支；所有 launcher 都是客户端。不持有画面、输入泵或 helper。
+- `ntvdm-exe`：原始 guest 执行、设备、帧生成、命令交接和 re-entry；
+  通过原有直接协议与 frontend 通信，不访问 Windows Console 前端。
+- `basesrv-exe`：保留原始 DOS/WOW records 和认证/资源转交；前端登记的
+  存活对象改为 frontend.exe，执行 Console capability 仍与前端能力分开。
+  不传输帧/输入，不引入新 scheduler。
+- `product-abi` 只保留复制式版本/记录；共享协议客户端按命名 owner
+  静态链接，不新增 common/compat 框架。前端公共客户端归 frontend-exe，
+  run16 与 worker 可链接所需有限子集，不链接呈现实现。
+
+### 字符段与图形段
+
+普通链条 `GGG → CCC → GGG → CCC` 有两个 frontend：每个连续 C 段一个，
+G 段没有 frontend 所有权/成员资格。G 指 Win16/Win32 窗口应用，C 指
+DOS 或 Win32 字符应用；**DOS 图形模式仍属于其原字符会话**，不是 G。
+同一 C 段的 DOS/native 嵌套共享 frontend 和 display，不因每次 EXEC
+重置。C→G 不把 frontend/execution 加入能力传给 G；G→C 建立新会话。
+旧 C 段等待 G 时仍可保留自己的 frontend；不能合并两个 C 段或连带关闭。
+纯 G 链不启动 frontend，也不为它创建隐藏 Console。
+
+原版依据：OpenNT `base/win32/client/support.c:975–991` 根据创建 flags
+选择 Console 继承；`windows/core/ntcon/client/dllinit.c:326–353` 对非
+Console 应用清空 ConsoleHandle，无 Console 的字符应用请求创建。
+这是普通启动基线，不涵盖应用显式 AllocConsole/新 Console/脱离 Console，
+也不授权 hook 任意 Windows 进程。项目可控启动点负责能力传递；无法
+观察的任意第三方创建，不得用猜测的进程树或裸 PID 补认证。
+Win16 共享 WOW worker 不等于共享字符前端，成员资格须按任务/请求而非
+整个 WOW 进程传播；这条边界有专门负向测试，不能靠全局环境变量处理。
+
+#### S4 完整 12 层启动链验收（owner 澄清）
+
+`GGGCCCGGGCCC` 是十二个实际目标程序逐层启动并等待的链，不是四个
+抽象类型节点，也不是单个 GUI 跳转测试。该矩阵中每个 G 都是 Win32
+GUI 子系统窗口程序；D 是 DOS 字符程序，W 是 Win32 字符程序。
+run16/helper/frontend 和测试观测器是基础设施，不计入十二个目标层。
+DOS 采用实际 guest 执行，不以 native fixture 冒充；GUI fixture 必须
+执行 GUI 生命周期，不能仅以一个 Console 程序改标签代替。
+
+Owner 随后将范围明确缩减为两组典型正常路径，不执行 64 组穷举：
+`GGGWDWGGGDWD` 与 `GGGDDWGGGWWD`。这两组覆盖 owner 指定的
+`DWD/WDW/DDW/WWD` 组内及跨组组合。保持十二个主目标的实际父子启动、
+等待和返回顺序；辅助观测不得被计作目标层或改变其前端关联。
+
+每例的 checked-in test 和结果账本须断言：
+
+- 十二个目标的进入、直接子层完成和返回证据完整；记录实际 PID、
+  目标类型及对应 launcher/DOS record，不能把命令回显当执行成功。
+- 第一组 C1/C2/C3 的认证 frontend 身份相同；第二组 C4/C5/C6 的身份
+  相同；两组身份不同。在第二组执行时，仍等待的第一组前端保持存活。
+- 六个 G 都不加入或转交 character frontend/execution capability，
+  纯 G 前缀不创建前端；两段之间三个 G 不把第一组身份带给第二组。
+- 返回时恢复各自 C 段的 I/O 和身份；执行可区分的真实文本/输入见证，
+  逐层传播直接目标实际结果，遵循原始 DOS COMMAND 的退出码语义，
+  不强制把 native 退出码规则套给 DOS。
+- 最后使用者结束后，两组 frontend/helper 各自正常退休，相关 DOS
+  record/worker 按既有规则清理；不是测试控制器强杀后才判成功。
+- 失败、超时、缺见证或未执行的案例单列，不计通过。旧 native
+  GUI-segments 与 A/B 测试继续保留，但不能抵扣这两个十二层案例。
+
+使用不切换的隔离桌面，仍不操作 owner 桌面、不修改 guest 介质、不为
+测试引入产品 scheduler。该正常路径矩阵归 S4 所有权迁移验收；S5 的
+expanded hidden-backend/fault 矩阵仍独立承担故障与设备交互组合。
+
+### 生命周期和交接
+
+run16 的完成对象始终独立：native 取实际进程结果，DOS 取对应 record。
+成功交接后的 run16 死亡不等于 frontend 死亡，不结束 frontend、target
+或 worker；已完成结果不被最后一帧/断流覆盖。frontend 正常会话结束或
+真实 Console close 才进入现有原始 VDM close 路径；worker 监测对象从
+run16 改为认证 frontend。helper 故障仍仅是 I/O 故障，不是 target 完成。
+不得递归杀 native 后代或另一字符段；启动未交接的回滚照旧保留。
+
+前端退休依据真实 I/O 使用者/已交接端点的结束，不以某个 launcher
+退出作为条件。迁移验收必须覆盖 launcher 已死而 target/子层仍使用
+前端，以及最后使用者退出时 helper/frontend 能解除阻塞并退场。
+可见 Console 的初次接管保留 CMD 既有窗口，Explorer 路径不留下空壳；
+run16 仅传递经认证的启动上下文，不成为 Console 资源 owner。
+这需要验证 Console 附着、模式恢复和 shell 返回顺序，不是单纯改名。
+
+### 新 S 序列与退出标准
+
+| S | 工作与独立验收 |
+| --- | --- |
+| S1、S2 | 保留已交付历史结论；旧 root 生命周期实现需迁移，不能直接视作新架构通过。 |
+| S3（已完成保全/重规划） | 已保存 WIP 和测试、登记未通过项、完成逐文件迁移账本并报告；不宣称隐藏 Console 功能收口。Owner 已另行批准 S4。 |
+| S4 | 独立 frontend 所有权闭环：迁移现有 Console/输入/呈现和 helper，统一 run16 客户端，认证身份/关闭对象切换；实际 DOS/native 直接与嵌套可用，两个 C 段隔离、纯 G 无前端；原生退出码、launcher/frontend/worker 各自故障、CMD/Explorer 清理通过。不发布仅能编译的空壳。 |
+| S5 | 继承旧 S3 隐藏后端剩余整包验收：A/B 四层链、mixed fault、输入归还、控制通知、尺寸/滚屏、Unicode、raw/cooked、键鼠、流别名/EOF、最终输出和 helper 取消；复用已有测试，不重做已证实算法。 |
+| S6 | frontend 内 display 和最新 nxvm 四组件：DOS 文本/图形、native 快照，CAF/AE/X、图文往返、会话隔离。Console 鼠标保留，Window 鼠标由 S7 完成。 |
+| S7 | Window DOS 文本/图形与 native 文本鼠标闭环，缩放/坐标/捕获/释放和切换回归。 |
+| S8 | 删除已替代的旧 root owner/重复分支，核算镜像 diff 与自主代码，完整回归/一致发布，等待 owner 验收，不自行关闭 T。 |
+
+每个生产 P 仍执行 DOS17、逐层文本/结果、适用故障与 headless WOW
+非回退验证。加入 frontend 后正式包为原六文件加 frontend.exe 共七文件；
+helper 不增加第八个产品文件。首次七文件发布必须整包通过且可恢复到
+原六文件基线；纯文档/工作快照不触发候选发布。当前禁止创建新源码目录，
+直到实施迁移时按本次明确命名的 frontend-exe 组件准入；其他临时目录
+仍只能在 build 下。迁移账本见 [S3 记录](../etc/evidence/m0-t423-s3-hidden-console-ledger.md#frontend-exe-replanning-snapshot)。
+
+## Owner 旧重启方案（历史，已被上述方案取代）
 
 本 proposal 是 T423 的最新目标与新 S1–S6 规划，替代此前重启方案的
 S1–S4 切分及 native 子程序强制退回 Console 方案。旧实现已保存到本地
@@ -332,6 +450,9 @@ S2 最终[逐项收口核对](../etc/evidence/m0-t423-s2-console-boundary-ledger
 生产 P 全部回归、部署及原始语义门槛不降低。
 
 ### S3：隐藏 Console 后端与可见 Console 转接
+
+最新 owner 指令：完成 S3 的验证、发布、提交推送后停下等待用户检查；
+不得自动进入 S4。此要求覆盖此前连续自动准入授权。
 
 以 S2 为基线，原生 CUI 无论直接或 DOS 内启动，都改用 run16 管理的
 隐藏 Console。DOS 通道及原始执行交接不迁移；仍不引入 display/Window。

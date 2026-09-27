@@ -1,122 +1,99 @@
 #include "frontend_scope.h"
-#include "console_channel.h"
+#include "frontend-exe/bootstrap.h"
+#include "frontend-exe/native_request_client.h"
 #include "basesrv-exe/opennt/include/base_rpc_client.h"
+#include "product-abi/console_io.h"
 #include <stdint.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <wchar.h>
 
 /* A local handle locator, never a broker identity or authorization token. */
 #define FRONTEND_ENV "NTVDM_FRONTEND_CAPABILITY"
-typedef struct frontend_channel {
-    struct frontend_channel *next;
-    run16_console_channel *channel;
-} frontend_channel;
-struct run16_frontend_scope {
-    HANDLE capability,notification,root,stop,thread;
-    frontend_channel *channels;
-    BOOL owns_environment;
-    void (*channel_ready)(void);
-};
-
-static DWORD WINAPI frontend_pump(void *context)
+#define EXECUTION_ENV "NTVDM_EXECUTION_CONSOLE"
+static DWORD inherited_capability(const char *name,HANDLE *capability)
 {
-    run16_frontend_scope *scope=context;
-    HANDLE waits[2]={scope->stop,scope->notification};
-    DWORD error=ERROR_SUCCESS;
-    for (;;) {
-        DWORD wait=WaitForMultipleObjects(2,waits,FALSE,INFINITE);
-        if (wait==WAIT_OBJECT_0) break;
-        if (wait!=WAIT_OBJECT_0+1) return GetLastError();
-        for (;;) {
-            HANDLE worker=NULL;
-            DWORD request=0;
-            frontend_channel *entry;
-            frontend_channel **link=&scope->channels;
-            if (WaitForSingleObject(scope->stop,0)==WAIT_OBJECT_0) return ERROR_SUCCESS;
-            /* This pump alone owns the list. Retire only joined channels;
-             * live workers and their task lifetimes are not affected. */
-            while ((entry=*link)!=NULL) {
-                if (WaitForSingleObject(run16_console_channel_thread(entry->channel),0)==WAIT_OBJECT_0) {
-                    *link=entry->next;
-                    run16_console_channel_stop(entry->channel);
-                    HeapFree(GetProcessHeap(),0,entry);
-                } else link=&entry->next;
-            }
-            error=OpenNtBaseClientFrontendRequest(&request,&worker);
-            if (error==ERROR_NOT_FOUND) break;
-            if (error) return error;
-            entry=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*entry));
-            if (!entry) { CloseHandle(worker);return ERROR_NOT_ENOUGH_MEMORY; }
-            error=run16_console_channel_start_request(request,worker,&entry->channel);
-            if (error) {
-                HeapFree(GetProcessHeap(),0,entry);
-                if (error==ERROR_ALREADY_EXISTS) continue;
-                return error;
-            }
-            entry->next=scope->channels;scope->channels=entry;
-            if (scope->channel_ready) scope->channel_ready();
-        }
-    }
+    char text[32],*end;
+    DWORD count;
+    ULONG_PTR value;
+    *capability=NULL;
+    count=GetEnvironmentVariableA(name,text,sizeof(text));
+    if (!count) return GetLastError()==ERROR_ENVVAR_NOT_FOUND ? ERROR_SUCCESS : ERROR_INVALID_DATA;
+    if (count>=sizeof(text)) return ERROR_INVALID_DATA;
+    value=(ULONG_PTR)strtoul(text,&end,16);
+    if (!value || end==text || *end) return ERROR_INVALID_DATA;
+    *capability=(HANDLE)value;
     return ERROR_SUCCESS;
 }
-
+struct run16_frontend_scope {
+    HANDLE capability,root,receipt;
+    BOOL owns_environment,has_execution;
+    DWORD console_mask;
+};
 void run16_frontend_scope_end(run16_frontend_scope *scope)
 {
-    frontend_channel *entry;
-    if (!scope) return;
-    if (scope->stop) SetEvent(scope->stop);
-    if (scope->thread) {
-        WaitForSingleObject(scope->thread,INFINITE);
-        CloseHandle(scope->thread);
-    }
-    while ((entry=scope->channels)!=NULL) {
-        scope->channels=entry->next;
-        run16_console_channel_stop(entry->channel);
-        HeapFree(GetProcessHeap(),0,entry);
-    }
-    if (scope->owns_environment) SetEnvironmentVariableA(FRONTEND_ENV,NULL);
-    if (scope->capability) CloseHandle(scope->capability);
-    if (scope->notification) CloseHandle(scope->notification);
-    if (scope->root) CloseHandle(scope->root);
-    if (scope->stop) CloseHandle(scope->stop);
+    if(!scope)return;
+    if(scope->owns_environment)SetEnvironmentVariableA(FRONTEND_ENV,NULL);
+    if(scope->capability)CloseHandle(scope->capability);
+    if(scope->root)CloseHandle(scope->root);
+    if(scope->receipt)CloseHandle(scope->receipt);
     HeapFree(GetProcessHeap(),0,scope);
 }
-
-DWORD run16_frontend_scope_begin(run16_frontend_scope **output,void (*channel_ready)(void))
+DWORD run16_frontend_scope_begin(run16_frontend_scope **output)
 {
     run16_frontend_scope *scope;
-    char text[32],*end;
-    DWORD count,error=ERROR_SUCCESS,generation;
-    ULONG_PTR value;
+    char text[32];
+    DWORD error=ERROR_SUCCESS,generation;
+    HANDLE inherited_frontend=NULL,inherited_execution=NULL;
     if (!output) return ERROR_INVALID_PARAMETER;
     *output=NULL;
+    error=inherited_capability(FRONTEND_ENV,&inherited_frontend);
+    if (!error) error=inherited_capability(EXECUTION_ENV,&inherited_execution);
+    if (error) return error;
+    /* An orphan execution locator cannot promote this launcher to root. */
+    if (inherited_execution && !inherited_frontend) return ERROR_INVALID_DATA;
     scope=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*scope));
     if (!scope) return ERROR_NOT_ENOUGH_MEMORY;
-    scope->channel_ready=channel_ready;
-    count=GetEnvironmentVariableA(FRONTEND_ENV,text,sizeof(text));
-    if (count) {
-        if (count>=sizeof(text)) { error=ERROR_INVALID_DATA;goto fail; }
-        value=(ULONG_PTR)strtoul(text,&end,16);
-        if (!value || end==text || *end) { error=ERROR_INVALID_DATA;goto fail; }
+    if (inherited_frontend) {
         /* Inherited locator is untrusted until the broker matches the object. */
-        error=OpenNtBaseClientRetainFrontendRoot((HANDLE)value,&scope->root,&generation);
+        error=OpenNtBaseClientRetainFrontendRoot(inherited_frontend,&scope->root,&generation);
         if (error) goto fail;
-        if (!DuplicateHandle(GetCurrentProcess(),(HANDLE)value,GetCurrentProcess(),
+        if (inherited_execution) {
+            error=OpenNtBaseClientBindConsoleContext(inherited_execution);
+            if (error) goto fail;
+            scope->has_execution=TRUE;
+        }
+        if (!DuplicateHandle(GetCurrentProcess(),inherited_frontend,GetCurrentProcess(),
             &scope->capability,SYNCHRONIZE,FALSE,0)) { error=GetLastError();goto fail; }
     } else {
-        if (GetLastError()!=ERROR_ENVVAR_NOT_FOUND) { error=ERROR_INVALID_DATA;goto fail; }
-        scope->notification=CreateEventW(NULL,TRUE,FALSE,NULL);
-        scope->stop=CreateEventW(NULL,TRUE,FALSE,NULL);
-        if (!scope->notification || !scope->stop) { error=GetLastError();goto fail; }
-        error=OpenNtBaseClientRegisterFrontendRoot(scope->notification);
-        if (error) goto fail;
-        if (!DuplicateHandle(GetCurrentProcess(),scope->notification,GetCurrentProcess(),
-            &scope->capability,SYNCHRONIZE,TRUE,0)) { error=GetLastError();goto fail; }
+        WCHAR image[MAX_PATH],*slash;
+        DWORD length=GetModuleFileNameW(NULL,image,ARRAYSIZE(image));
+        frontend_connection connection={0};
+        if(!length || length>=ARRAYSIZE(image) || !(slash=wcsrchr(image,L'\\'))){error=ERROR_BAD_PATHNAME;goto fail;}
+        if(wcscpy_s(slash+1,ARRAYSIZE(image)-(size_t)(slash+1-image),L"frontend.exe")){error=ERROR_FILENAME_EXCED_RANGE;goto fail;}
+        error=frontend_bootstrap_start(image,&connection);if(error)goto fail;
+        scope->capability=connection.capability;connection.capability=NULL;
+        scope->root=connection.process;connection.process=NULL;
+        frontend_bootstrap_release(&connection);
         sprintf_s(text,sizeof(text),"%lx",(unsigned long)(uintptr_t)scope->capability);
         if (!SetEnvironmentVariableA(FRONTEND_ENV,text)) { error=GetLastError();goto fail; }
         scope->owns_environment=TRUE;
-        scope->thread=CreateThread(NULL,0,frontend_pump,scope,0,NULL);
-        if (!scope->thread) { error=GetLastError();goto fail; }
+    }
+    /* This describes streams, never grants membership. Only an authenticated
+     * execution context can supply worker-local endpoints. Do not turn an
+     * actual redirected file/pipe into Console I/O, and consume the one-hop
+     * metadata before constructing any target environment. */
+    {
+        DWORD count=GetEnvironmentVariableA(CONSOLE_COMMAND_STREAMS_ENV,text,sizeof(text)),i,flags;
+        if(count) {
+            if(!SetEnvironmentVariableA(CONSOLE_COMMAND_STREAMS_ENV,NULL)){error=GetLastError();goto fail;}
+            if(count!=1 || text[0]<'0' || text[0]>'7' || !scope->has_execution){error=ERROR_INVALID_DATA;goto fail;}
+            scope->console_mask=(DWORD)(text[0]-'0');
+            for(i=0;i<3;++i)if(scope->console_mask&(1u<<i)) {
+                HANDLE stream=GetStdHandle(i==0 ? STD_INPUT_HANDLE : i==1 ? STD_OUTPUT_HANDLE : STD_ERROR_HANDLE);
+                if(!GetHandleInformation(stream,&flags) || GetFileType(stream)!=FILE_TYPE_UNKNOWN){error=ERROR_INVALID_HANDLE;goto fail;}
+            }
+        }else if(GetLastError()!=ERROR_ENVVAR_NOT_FOUND){error=ERROR_INVALID_DATA;goto fail;}
     }
     *output=scope;
     return ERROR_SUCCESS;
@@ -128,4 +105,33 @@ fail:
 HANDLE run16_frontend_scope_capability(run16_frontend_scope *scope)
 {
     return scope ? scope->capability : NULL;
+}
+
+BOOL run16_frontend_scope_has_execution(run16_frontend_scope *scope)
+{
+    return scope && scope->has_execution;
+}
+
+DWORD run16_frontend_scope_console_mask(run16_frontend_scope *scope)
+{
+    return scope ? scope->console_mask : 0;
+}
+
+DWORD run16_frontend_scope_launch_native(run16_frontend_scope *scope,const run16_native_start *start,HANDLE *target)
+{
+    if(!scope)return ERROR_INVALID_PARAMETER;
+    if(scope->receipt)return ERROR_BUSY;
+    return run16_native_request_submit_receipt(scope->root,scope->capability,start,target,&scope->receipt);
+}
+DWORD run16_frontend_scope_wait_native(run16_frontend_scope *scope,HANDLE target,DWORD *result)
+{
+    if(!scope || !target || !result)return ERROR_INVALID_PARAMETER;
+    if(WaitForSingleObject(target,INFINITE)!=WAIT_OBJECT_0 || !GetExitCodeProcess(target,result))return GetLastError();
+    if(scope->receipt){
+        HANDLE waits[2]={scope->receipt,scope->root};
+        /* Presentation acknowledgment, not session retirement or target status. */
+        WaitForMultipleObjects(2,waits,FALSE,2000);
+        CloseHandle(scope->receipt);scope->receipt=NULL;
+    }
+    return ERROR_SUCCESS;
 }

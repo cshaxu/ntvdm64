@@ -1,6 +1,7 @@
 #include "command_process_compat.h"
 #include "vdmapi.h"
 #include "console_client.h"
+#include "product-abi/console_io.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -138,53 +139,86 @@ static BOOL create_frontend_child(LPCSTR application,LPSTR command,
     BOOL inherit,DWORD flags,LPVOID environment,LPCSTR directory,
     LPSTARTUPINFOA startup,LPPROCESS_INFORMATION process)
 {
-    static const char name[]="NTVDM_FRONTEND_CAPABILITY=";
-    HANDLE capability=NULL;
+    static const char *names[3]={"NTVDM_FRONTEND_CAPABILITY=","NTVDM_EXECUTION_CONSOLE=",CONSOLE_COMMAND_STREAMS_ENTRY};
+    static const WCHAR *wide_names[3]={L"NTVDM_FRONTEND_CAPABILITY=",L"NTVDM_EXECUTION_CONSOLE=",CONSOLE_COMMAND_STREAMS_WENTRY};
+    HANDLE capabilities[2]={NULL,NULL};
+    HANDLE endpoint_streams[3]={NULL,NULL,NULL};
+    STARTUPINFOA child_startup=*startup;
     BOOL wide=(flags&CREATE_UNICODE_ENVIRONMENT)!=0,result;
     void *inherited=NULL,*copy=NULL;
     const BYTE *cursor;
     BYTE *destination;
-    size_t unit=wide ? sizeof(WCHAR) : 1,bytes=unit,length,entry_bytes,index;
-    char value[80];
-    WCHAR wide_value[80];
-    DWORD error;
-    if (!ntvdm_console_inherit_frontend_capability(&capability)) return FALSE;
-    if (!capability) return CreateProcessA(application,command,process_attributes,
+    size_t unit=wide ? sizeof(WCHAR) : 1,bytes=unit,length,entry_bytes,index,slot;
+    char value[3][80];
+    WCHAR wide_value[3][80];
+    DWORD error,console_mask=0;
+    if (!ntvdm_console_inherit_launch_capabilities(&capabilities[0],&capabilities[1])) return FALSE;
+    if (!capabilities[0]) return CreateProcessA(application,command,process_attributes,
         thread_attributes,inherit,flags,environment,directory,startup,process);
-    if (!inherit) { CloseHandle(capability);SetLastError(ERROR_INVALID_PARAMETER);return FALSE; }
-    sprintf_s(value,sizeof(value),"%s%lx",name,(unsigned long)(ULONG_PTR)capability);
-    for (index=0;index<=strlen(value);++index) wide_value[index]=(WCHAR)value[index];
+    if (!inherit) { error=ERROR_INVALID_PARAMETER;result=FALSE;goto done; }
+    for (slot=0;slot<2;++slot) {
+        sprintf_s(value[slot],sizeof(value[slot]),"%s%lx",names[slot],(unsigned long)(ULONG_PTR)capabilities[slot]);
+    }
+    for(slot=0;slot<3;++slot) {
+        HANDLE stream=(startup->dwFlags&STARTF_USESTDHANDLES) ?
+            (slot==0 ? startup->hStdInput : slot==1 ? startup->hStdOutput : startup->hStdError) :
+            GetStdHandle(slot==0 ? STD_INPUT_HANDLE : slot==1 ? STD_OUTPUT_HANDLE : STD_ERROR_HANDLE);
+        DWORD kind=ntvdm_console_handle_kind(stream);
+        if(kind) {
+            if(kind!=(slot==0 ? 1u : 2u)){error=ERROR_INVALID_HANDLE;result=FALSE;goto done;}
+            if(!DuplicateHandle(GetCurrentProcess(),stream,GetCurrentProcess(),
+                &endpoint_streams[slot],SYNCHRONIZE,TRUE,0)){error=GetLastError();result=FALSE;goto done;}
+            stream=endpoint_streams[slot];
+            console_mask|=1u<<slot;
+        }
+        if(slot==0)child_startup.hStdInput=stream;
+        else if(slot==1)child_startup.hStdOutput=stream;
+        else child_startup.hStdError=stream;
+    }
+    child_startup.dwFlags|=STARTF_USESTDHANDLES;
+    sprintf_s(value[2],sizeof(value[2]),"%s%lu",names[2],console_mask);
+    for(slot=0;slot<3;++slot)
+        for(index=0;index<=strlen(value[slot]);++index)wide_value[slot][index]=(WCHAR)value[slot][index];
     if (!environment) {
         inherited=wide ? (void *)GetEnvironmentStringsW() : (void *)GetEnvironmentStringsA();
-        if (!inherited) { error=GetLastError();CloseHandle(capability);SetLastError(error);return FALSE; }
+        if (!inherited) { error=GetLastError();result=FALSE;goto done; }
         environment=inherited;
     }
     for (cursor=environment;(length=wide ? wcslen((const WCHAR *)cursor) : strlen((const char *)cursor))!=0;
          cursor+=(length+1)*unit) bytes+=(length+1)*unit;
-    bytes+=(strlen(value)+1)*unit;
+    for (slot=0;slot<3;++slot) bytes+=(strlen(value[slot])+1)*unit;
     copy=HeapAlloc(GetProcessHeap(),0,bytes);
     if (!copy) { error=ERROR_NOT_ENOUGH_MEMORY;result=FALSE;goto done; }
     destination=copy;
     for (cursor=environment;(length=wide ? wcslen((const WCHAR *)cursor) : strlen((const char *)cursor))!=0;
          cursor+=(length+1)*unit) {
-        if (wide ? !_wcsnicmp((const WCHAR *)cursor,L"NTVDM_FRONTEND_CAPABILITY=",sizeof(name)-1) :
-                   !_strnicmp((const char *)cursor,name,sizeof(name)-1)) continue;
+        for (slot=0;slot<3;++slot)
+            if (wide ? !_wcsnicmp((const WCHAR *)cursor,wide_names[slot],strlen(names[slot])) :
+                       !_strnicmp((const char *)cursor,names[slot],strlen(names[slot]))) break;
+        if (slot<3) continue;
         entry_bytes=(length+1)*unit;
         memcpy(destination,cursor,entry_bytes);destination+=entry_bytes;
     }
-    entry_bytes=(strlen(value)+1)*unit;
-    memcpy(destination,wide ? (const void *)wide_value : (const void *)value,entry_bytes);
-    destination+=entry_bytes;
+    for (slot=0;slot<3;++slot) {
+        entry_bytes=(strlen(value[slot])+1)*unit;
+        memcpy(destination,wide ? (const void *)wide_value[slot] : (const void *)value[slot],entry_bytes);
+        destination+=entry_bytes;
+    }
     ZeroMemory(destination,unit);
+    /* This is the authenticated inner launcher, not a Console frontend.
+     * A detached worker must not cause Windows to allocate a new Console
+     * merely because the launcher is a Console-subsystem executable. */
+    if (!(flags&(CREATE_NEW_CONSOLE|CREATE_NO_WINDOW))) flags|=DETACHED_PROCESS;
     result=CreateProcessA(application,command,process_attributes,thread_attributes,
-        inherit,flags,copy,directory,startup,process);
+        inherit,flags,copy,directory,&child_startup,process);
     error=GetLastError();
 done:
+    for(slot=0;slot<3;++slot)if(endpoint_streams[slot])CloseHandle(endpoint_streams[slot]);
     if (copy) HeapFree(GetProcessHeap(),0,copy);
     if (inherited) {
         if (wide) FreeEnvironmentStringsW(inherited);else FreeEnvironmentStringsA(inherited);
     }
-    CloseHandle(capability);SetLastError(error);
+    CloseHandle(capabilities[0]);CloseHandle(capabilities[1]);SetLastError(error);
     return result;
 }
 

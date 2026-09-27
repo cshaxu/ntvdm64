@@ -16,6 +16,16 @@ static BOOL CALLBACK control(HWND window,LPARAM unused)
         SMTO_ABORTIFHUNG|SMTO_BLOCK,200,&copied);
     wprintf(L"window=%p class=%s visible=%d text=%s\n",window,kind,
         IsWindowVisible(window),text);
+    /* ASCII witnesses preserve localized class/text identity through any
+     * observer pipe code page; the readable line above remains unchanged. */
+    {
+        const WCHAR *cursor;
+        wprintf(L"window-utf16=%p visible=%d class=",window,IsWindowVisible(window));
+        for(cursor=kind;*cursor;++cursor)wprintf(L"%04X",(unsigned)*cursor);
+        wprintf(L" text=");
+        for(cursor=text;*cursor;++cursor)wprintf(L"%04X",(unsigned)*cursor);
+        wprintf(L"\n");
+    }
     return TRUE;
 }
 static BOOL CALLBACK window(HWND handle,LPARAM unused)

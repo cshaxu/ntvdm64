@@ -1,5 +1,18 @@
 # mvdm
 
+MVDM-HOST-DIV-313: `softpc.new/host/src/nt_event.c` acknowledges its original
+block/resume boundaries to the independent frontend. The block notification
+follows original final painting, unused-key return, mode restoration and timer
+stop; resume acquires presentation/input before original Console queries and
+event-thread release. `ntvdm-exe/win32/console_client.c` carries that finite
+notification; `frontend-exe` serializes native and DOS I/O and returns unread hidden
+Console records through the original-shaped native prepend operation. The NT4
+shared visible Console did not require a cross-process presentation binding;
+the owner-admitted independent frontend split does. No guest, original scheduler,
+reentry count or task completion policy changes. S4's actual mixed-chain and
+lifecycle verification, and its publication state, are recorded in the
+[S3/S4 ledger](../../docs/etc/evidence/m0-t423-s3-hidden-console-ledger.md).
+
 MVDM-HOST-DIV-312: `softpc.new/host/src/nt_event.c::ReturnUnusedKeyEvents`
 returns the initialized history slice with its actual count and original
 oldest-first ordering, bounded by the existing MAX_KEY_EVENTS array. OpenNT's

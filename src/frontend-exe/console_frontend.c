@@ -54,7 +54,7 @@ DWORD run16_console_dispatch(run16_console_frontend *owner,const console_io_requ
     if (!owner->generation || request->generation!=owner->generation) return ERROR_ACCESS_DENIED;
     if (!request->sequence || owner->sequence==UINT32_MAX ||
         request->sequence!=owner->sequence+1 || request->bytes>CONSOLE_IO_DATA_BYTES ||
-        request->operation<CONSOLE_IO_WRITE || request->operation>CONSOLE_IO_KEYBOARD_LAYOUT)
+        request->operation<CONSOLE_IO_WRITE || request->operation>CONSOLE_IO_DOS_ACTIVE)
         return ERROR_INVALID_DATA;
     cells=request->operation>=CONSOLE_IO_READ_CELLS_A && request->operation<=CONSOLE_IO_WRITE_CELLS_W;
     write_cells=request->operation>=CONSOLE_IO_WRITE_CELLS_A && request->operation<=CONSOLE_IO_WRITE_CELLS_W;
@@ -98,6 +98,15 @@ DWORD run16_console_dispatch(run16_console_frontend *owner,const console_io_requ
     reply->version=CONSOLE_IO_VERSION;
     reply->generation=owner->generation;
     reply->sequence=request->sequence;
+    if(request->operation==CONSOLE_IO_DOS_ACTIVE) {
+        reply->error=owner->activate ? owner->activate(owner->io_context,s->input!=0) : ERROR_INVALID_FUNCTION;
+        reply->result=reply->error==ERROR_SUCCESS;
+        return ERROR_SUCCESS;
+    }
+    if(owner->enter) {
+        reply->error=owner->enter(owner->io_context);
+        if(reply->error)return ERROR_SUCCESS;
+    }
     position.X=(SHORT)s->x; position.Y=(SHORT)s->y;
     SetLastError(ERROR_SUCCESS);
     switch (request->operation) {
@@ -314,9 +323,14 @@ DWORD run16_console_dispatch(run16_console_frontend *owner,const console_io_requ
     case CONSOLE_IO_PEEK_INPUT: {
         INPUT_RECORD records[CONSOLE_IO_INPUT_CAPACITY];
         DWORD i;
-        ok=request->operation==CONSOLE_IO_PEEK_INPUT ?
-            PeekConsoleInputW(owner->input,records,s->count,&count) :
-            ReadConsoleInputW(owner->input,records,s->count,&count);
+        if(request->operation==CONSOLE_IO_PEEK_INPUT)
+            ok=PeekConsoleInputW(owner->input,records,s->count,&count);
+        else if(owner->enter) {
+            typedef BOOL (WINAPI *read_input_ex)(HANDLE,PINPUT_RECORD,DWORD,LPDWORD,USHORT);
+            read_input_ex read_nowait=(read_input_ex)GetProcAddress(GetModuleHandleW(L"kernel32.dll"),"ReadConsoleInputExW");
+            if(read_nowait)ok=read_nowait(owner->input,records,s->count,&count,2);
+            else SetLastError(ERROR_CALL_NOT_IMPLEMENTED);
+        } else ok=ReadConsoleInputW(owner->input,records,s->count,&count);
         if (ok) {
             for (i=0;i<count;i++) {
                   console_io_input wire;
@@ -362,5 +376,6 @@ DWORD run16_console_dispatch(run16_console_frontend *owner,const console_io_requ
     }
     reply->result=ok!=FALSE;
     reply->error=ok ? ERROR_SUCCESS : GetLastError();
+    if(owner->leave)owner->leave(owner->io_context);
     return ERROR_SUCCESS;
 }

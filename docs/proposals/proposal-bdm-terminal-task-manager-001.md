@@ -2,13 +2,13 @@
 
 ## Objective
 
-Deliver `dtmgr.exe`: a native Windows Console character-mode task manager for
+Deliver `monitor.exe`: a native Windows Console character-mode task manager for
 this product's brokered DOS and Win16/WOW16 work only.  It presents a compact,
 continuously refreshable Terminal/conhost TUI with a graphical character
 layout, lets the user select a listed task with Up/Down, and asks BaseSrv to
 terminate the selected product task after an explicit confirmation.
 
-`dtmgr.exe` is not a guest DOS program and does not emulate a DOS screen.  It is
+`monitor.exe` is not a guest DOS program and does not emulate a DOS screen.  It is
 a product-owned Console executable that may run in Windows Terminal, conhost,
 or another supported Console host.  It observes only tasks registered with
 this product's `basesrv.exe`; it never enumerates or controls unrelated
@@ -40,7 +40,7 @@ Windows processes.
 
 ## Architecture and ownership
 
-`src/dtmgr-exe/` will own the executable, Console rendering, keyboard navigation and
+`src/monitor-exe/` will own the executable, Console rendering, keyboard navigation and
 presentation-only selection state. `src/basesrv-exe/` will own a small versioned,
 authenticated management endpoint and the authoritative worker snapshot and
 termination state transitions. `src/product-abi/` may carry only fixed-width
@@ -63,7 +63,7 @@ broker state, not a best-effort decode.
    how DOS, Win16 and WOW16 task kinds are represented without inventing a
    second registry. Identify original BaseSrv owner calls to retain and every
    required product-owned binding.
-2. **Read-only dtmgr TUI.** Implement and test `dtmgr.exe` Console rendering,
+2. **Read-only dtmgr TUI.** Implement and test `monitor.exe` Console rendering,
    refresh, absent/incompatible broker state, empty state, selection stability,
    resize behavior and keyboard navigation. It must make no terminating call.
 3. **Broker-authorized termination and end-to-end closure.** Implement the

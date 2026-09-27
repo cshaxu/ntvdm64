@@ -9,10 +9,13 @@ src/
   opennt-abi/host-compat/
   product-abi/
   product-package/
-  run16/
-  basesrv/
-  ntvdm/
-  dtaskmgr/
+  run16-exe/
+  basesrv-exe/
+  ntvdm-exe/
+  frontend-exe/
+  monitor-exe/
+  wow32-dll/
+  vdmredir-dll/
 ```
 
 `mvdm/` is the one canonical physical selected-OpenNT `base/mvdm` tree: its
@@ -33,9 +36,16 @@ or runtime input.
 
 ## Executable-owned transition
 
+`src/frontend-exe/ -> frontend.exe` owns the migrated visible/hidden Console,
+helper and I/O service. Its future Window/display implementation also belongs
+there. run16 links only the finite frontend client, never the renderer or
+input pump. The private helper uses frontend.exe itself. Do not duplicate
+renderers or introduce a common library. Status owns current delivery state;
+the source layout does not claim the later Window/display capabilities.
+
 T418 has moved the original three-program runtime to `src/run16-exe/`,
 `src/basesrv-exe/` and `src/ntvdm-exe/`; T419 adds the product-owned native Console
-manager at `src/dtmgr-exe/`, producing `dtmgr.exe`. Retained
+manager at `src/monitor-exe/`, producing `monitor.exe`. Retained
 `app`/adapter directory READMEs are archival move markers, never production
 source roots or destinations. `session` is worker-local implementation inside
 `ntvdm`; broker service transport is inside `basesrv`.
@@ -97,8 +107,8 @@ historical record is evidence, not a selectable configuration.
   carry. None implies an unselected external source-universe import.
 - `run16` owns discovery, CreateProcess-style admission and parent waiting.
   `basesrv` owns authenticated endpoint/transport and the original-record
-  assembly. `ntvdm` owns its worker-local session, machine bindings, Console,
-  redirector, VDD, WOW and debugger bindings. `dtaskmgr` owns only its native
+  assembly. `ntvdm` owns its worker-local session, machine bindings, copied Console endpoint,
+  redirector, VDD, WOW and debugger bindings. `monitor` owns only its native
   Console presentation and client selection state; task records and task
   termination remain BaseSrv-owned. Their code is not made shared by naming it
   Win32 compatibility.

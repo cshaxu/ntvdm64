@@ -24,7 +24,8 @@ static void collect_children(DWORD parent, child_watch watches[8], unsigned *cou
         unsigned index;
         if (entry.th32ParentProcessID != parent ||
             (_wcsicmp(entry.szExeFile, L"ntvdm.exe") &&
-             _wcsicmp(entry.szExeFile, L"basesrv.exe"))) continue;
+             _wcsicmp(entry.szExeFile, L"basesrv.exe") &&
+             _wcsicmp(entry.szExeFile, L"frontend.exe"))) continue;
         for (index = 0; index < *count; ++index)
             if (watches[index].pid == entry.th32ProcessID) break;
         if (index < *count || *count == 8) continue;
@@ -43,6 +44,32 @@ static BOOL CALLBACK count_consoles(HWND window, LPARAM parameter)
     WCHAR name[80];
     if (GetClassNameW(window, name, ARRAYSIZE(name)) &&
         !wcscmp(name, L"ConsoleWindowClass")) ++*(unsigned *)parameter;
+    return TRUE;
+}
+
+typedef struct wow_frontier {
+    DWORD worker;
+    BOOL found;
+} wow_frontier;
+
+static BOOL CALLBACK find_wow_text(HWND window, LPARAM parameter)
+{
+    wow_frontier *frontier = (wow_frontier *)parameter;
+    WCHAR text[256] = {0};
+    DWORD process;
+    DWORD_PTR copied;
+    GetWindowThreadProcessId(window, &process);
+    if (process == frontier->worker && IsWindowVisible(window) &&
+        SendMessageTimeoutW(window, WM_GETTEXT, ARRAYSIZE(text), (LPARAM)text,
+            SMTO_ABORTIFHUNG | SMTO_BLOCK, 100, &copied) &&
+        wcsstr(text, L"NETWORK.DRV")) frontier->found = TRUE;
+    return TRUE;
+}
+
+static BOOL CALLBACK find_wow_window(HWND window, LPARAM parameter)
+{
+    find_wow_text(window, parameter);
+    EnumChildWindows(window, find_wow_text, parameter);
     return TRUE;
 }
 
@@ -124,14 +151,19 @@ int wmain(int argc, WCHAR **argv)
     PROCESS_INFORMATION child = { 0 };
     child_watch watches[8] = { 0 };
     unsigned count = 0, index, windows = 0, workers = 0, live_workers = 0;
+    unsigned frontends = 0, live_frontends = 0;
     DWORD started, wait = WAIT_TIMEOUT, code = STILL_ACTIVE, enumeration_error;
     DWORD expected_code = 0;
     unsigned expected_workers = 1;
+    unsigned minimum_frontends = 0;
     HDESK desktop;
     FILE *report;
     BOOL enumeration, passed;
-    if (argc != 4 && argc != 6) return 64; /* root, command, report, [exit, workers] */
-    if (argc == 6) {
+    BOOL wow_mode = argc == 5 && !wcscmp(argv[4], L"--wow");
+    wow_frontier frontier = {0};
+    DWORD console_attach_error = ERROR_SUCCESS;
+    if (argc != 4 && !wow_mode && argc != 6 && argc != 7) return 64; /* root, command, report, [--wow | exit, workers, [frontend]] */
+    if (argc >= 6) {
         WCHAR *end;
         unsigned __int64 value = _wcstoui64(argv[4], &end, 10);
         if (!argv[4][0] || *end || value > MAXDWORD) return 64;
@@ -139,7 +171,14 @@ int wmain(int argc, WCHAR **argv)
         if (wcscmp(argv[5], L"0") && wcscmp(argv[5], L"1")) return 64;
         expected_workers = argv[5][0] - L'0';
     }
+    if (argc == 7) {
+        if (wcscmp(argv[6], L"0") && wcscmp(argv[6], L"1")) return 64;
+        minimum_frontends = argv[6][0] - L'0';
+    }
     if (_wfopen_s(&report, argv[3], L"w")) return 65;
+    /* The observer must be unattached before the final membership probe.
+     * It only attaches after the target has reached its modal frontier. */
+    if (wow_mode) FreeConsole();
     swprintf_s(desktop_name, ARRAYSIZE(desktop_name), L"NTVDMLifecycle-%lu", GetCurrentProcessId());
     desktop = CreateDesktopW(desktop_name, NULL, NULL, 0, GENERIC_ALL, NULL);
     if (!desktop) { fclose(report); return 66; }
@@ -160,7 +199,22 @@ int wmain(int argc, WCHAR **argv)
     started = GetTickCount();
     do {
         collect_children(child.dwProcessId, watches, &count);
+        /* The independent frontend's helper is not a launcher child. Pin
+         * observed test-created processes before PID reuse; never use this
+         * traversal as product execution-lifetime policy. */
+        for (index = 0; index < count; ++index)
+            if (WaitForSingleObject(watches[index].process, 0) == WAIT_TIMEOUT)
+                collect_children(watches[index].pid, watches, &count);
         wait = WaitForSingleObject(child.hProcess, 20);
+        if (wow_mode) {
+            for (index = 0; index < count; ++index)
+                if (!_wcsicmp(watches[index].name, L"ntvdm.exe") &&
+                    WaitForSingleObject(watches[index].process, 0) == WAIT_TIMEOUT) {
+                    frontier.worker = watches[index].pid;
+                    EnumDesktopWindows(desktop, find_wow_window, (LPARAM)&frontier);
+                }
+            if (frontier.found) break;
+        }
     } while (wait == WAIT_TIMEOUT && GetTickCount() - started < 20000);
     GetExitCodeProcess(child.hProcess, &code);
     fprintf(report, "launcher=%lu wait=%lu exit=%lu elapsed-ms=%lu\n",
@@ -176,7 +230,12 @@ int wmain(int argc, WCHAR **argv)
         if (!_wcsicmp(watches[index].name, L"ntvdm.exe")) {
             ++workers;
             if (state != WAIT_OBJECT_0) ++live_workers;
-            if (wait == WAIT_TIMEOUT) timeout_threads(report, &watches[index]);
+            if (wait == WAIT_TIMEOUT && !frontier.found) timeout_threads(report, &watches[index]);
+        }
+        if (!_wcsicmp(watches[index].name, L"frontend.exe")) {
+            ++frontends;
+            if (state != WAIT_OBJECT_0) ++live_frontends;
+            if (state != WAIT_OBJECT_0) timeout_threads(report, &watches[index]);
         }
     }
     {
@@ -199,7 +258,23 @@ int wmain(int argc, WCHAR **argv)
         if (!SetThreadDesktop(previous)) { enumeration = FALSE; enumeration_error = GetLastError(); }
     }
     passed = wait == WAIT_OBJECT_0 && code == expected_code && workers == expected_workers &&
-        live_workers == 0 && enumeration && windows == 0;
+        live_workers == 0 && frontends >= minimum_frontends && live_frontends == 0 && enumeration && windows == 0;
+    if (wow_mode) {
+        if (AttachConsole(child.dwProcessId)) {
+            DWORD members[8], member_count = GetConsoleProcessList(members, ARRAYSIZE(members));
+            fprintf(report, "launcher-console-still-attached members=%lu\n", member_count);
+            FreeConsole();
+        } else console_attach_error = GetLastError();
+        /* Retained modal is a live WOW baseline, not successful app completion.
+         * No pre-frontier attachment may mask the sole-owner branch. A hidden
+         * native Console also fails, even if no ConsoleWindowClass was found. */
+        passed = frontier.found && wait == WAIT_TIMEOUT && code == STILL_ACTIVE &&
+            workers == 1 && live_workers == 1 && frontends == 0 && enumeration && windows == 0 &&
+            console_attach_error == ERROR_INVALID_HANDLE;
+        fprintf(report, "wow-modal=%u worker=%lu console-attach-error=%lu exclusive-console-release=%u\n",
+            frontier.found, frontier.worker, console_attach_error, passed);
+    }
+    fprintf(report, "frontends=%u live-frontends=%u\n", frontends, live_frontends);
     fprintf(report, "workers=%u live-workers=%u console-windows=%u enumerated=%u error=%lu pass=%u\n",
         workers, live_workers, windows, enumeration, enumeration_error, passed);
     fclose(report);

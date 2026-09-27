@@ -33,7 +33,7 @@ a worker-local static library as shared DLL state.
   second copy of a worker-local static library.
 - `basesrv.exe` stays out of DLL-local state.  Its broker transport remains
   reachable only through the existing worker/client boundary.
-- Existing `run16.exe`, `basesrv.exe`, `ntvdm.exe` and `dtmgr.exe` behavior,
+- Existing `run16.exe`, `basesrv.exe`, `ntvdm.exe` and `monitor.exe` behavior,
   protocol/version checks and package layout do not change.
 
 ## Why this is needed

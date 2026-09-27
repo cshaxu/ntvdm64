@@ -10,12 +10,61 @@
 typedef struct console_client {
     session *owner;
     HANDLE pipe,frontend,event,ready,wake,stop,rearm,watcher;
-    HANDLE capability;
+    HANDLE capability,input_identity,output_identity;
     CRITICAL_SECTION lock;
     DWORD generation,sequence,failure,video_serial;
     console_io_request request;
     ntvdm_console_graphics *graphics;
 } console_client;
+static DWORD console_activate(console_client *,BOOL);
+static console_client *output_client(HANDLE);
+
+/* Worker-local identities only. DuplicateHandle aliases retain their role;
+ * closed/reused handle values cannot impersonate a Console endpoint. Neither
+ * object owns a Windows Console, input queue or screen buffer. */
+DWORD ntvdm_console_handle_kind(HANDLE handle)
+{
+    typedef BOOL (WINAPI *COMPARE)(HANDLE,HANDLE);
+    session *owner=session_thread_current();
+    console_client *client=owner ? owner->console_client : NULL;
+    COMPARE compare;
+    if(!client || !handle || handle==INVALID_HANDLE_VALUE)return 0;
+    compare=(COMPARE)GetProcAddress(GetModuleHandleW(L"kernelbase.dll"),"CompareObjectHandles");
+    if(!compare)return 0;
+    if(client->input_identity && compare(handle,client->input_identity))return 1;
+    if(client->output_identity && compare(handle,client->output_identity))return 2;
+    return 0;
+}
+static HANDLE open_endpoint(BOOL input,DWORD access,LPSECURITY_ATTRIBUTES security,DWORD disposition,DWORD flags,HANDLE template_file)
+{
+    session *owner=session_thread_current();
+    console_client *client=owner ? owner->console_client : NULL;
+    HANDLE result=NULL;
+    if(!client || access!=(GENERIC_READ|GENERIC_WRITE) || disposition!=OPEN_EXISTING || flags || template_file){
+        SetLastError(ERROR_INVALID_PARAMETER);return INVALID_HANDLE_VALUE;
+    }
+    if(!DuplicateHandle(GetCurrentProcess(),input ? client->input_identity : client->output_identity,
+        GetCurrentProcess(),&result,0,security && security->bInheritHandle,DUPLICATE_SAME_ACCESS))return INVALID_HANDLE_VALUE;
+    return result;
+}
+HANDLE WINAPI MvdmCreateFileA(LPCSTR name,DWORD access,DWORD share,LPSECURITY_ATTRIBUTES security,DWORD disposition,DWORD flags,HANDLE template_file)
+{
+    session *owner=session_thread_current();
+    if(owner && owner->console_client && name && (!_stricmp(name,"CONIN$") || !_stricmp(name,"CONOUT$")))
+        return open_endpoint(!_stricmp(name,"CONIN$"),access,security,disposition,flags,template_file);
+    return CreateFileA(name,access,share,security,disposition,flags,template_file);
+}
+HANDLE WINAPI MvdmCreateFileW(LPCWSTR name,DWORD access,DWORD share,LPSECURITY_ATTRIBUTES security,DWORD disposition,DWORD flags,HANDLE template_file)
+{
+    session *owner=session_thread_current();
+    if(owner && owner->console_client && name && (!_wcsicmp(name,L"CONIN$") || !_wcsicmp(name,L"CONOUT$")))
+        return open_endpoint(!_wcsicmp(name,L"CONIN$"),access,security,disposition,flags,template_file);
+    return CreateFileW(name,access,share,security,disposition,flags,template_file);
+}
+DWORD WINAPI MvdmGetFileType(HANDLE handle)
+{
+    return ntvdm_console_handle_kind(handle) ? FILE_TYPE_CHAR : GetFileType(handle);
+}
 
 /* DIVERGENCE(ADAPTER-WIN32-050): local mouse visibility bookkeeping only;
  * conhost/Terminal still owns the native pointer, not the text caret. */
@@ -27,7 +76,7 @@ int WINAPI ShowConsoleCursor(HANDLE output, BOOL show)
     if (ntvdm_console_graphics_cursor(output,show,&count)) return count;
     /* GetConsoleMode also accepts CONIN$, and rejects our graphics backing.
      * Original SrvShowConsoleCursor accepts output handles, never input. */
-    if (!GetConsoleScreenBufferInfo(output, &info)) return -1;
+    if (!output_client(output) && !GetConsoleScreenBufferInfo(output, &info)) return -1;
     return (int)(show ? InterlockedIncrement(&mvdm_pointer_display_count) :
         InterlockedDecrement(&mvdm_pointer_display_count));
 }
@@ -97,6 +146,8 @@ static void console_client_end(void *context)
     if (client->wake) CloseHandle(client->wake);
     if (client->stop) CloseHandle(client->stop);
     if (client->rearm) CloseHandle(client->rearm);
+    if (client->input_identity) CloseHandle(client->input_identity);
+    if (client->output_identity) CloseHandle(client->output_identity);
     DeleteCriticalSection(&client->lock);
     ntvdm_console_graphics_destroy(client->graphics);
     HeapFree(GetProcessHeap(),0,client);
@@ -105,7 +156,7 @@ static void console_client_end(void *context)
 static DWORD console_command_ready(void *context)
 {
     console_client *client=context;
-    if (WaitForSingleObject(client->frontend,0)==WAIT_TIMEOUT) return ERROR_SUCCESS;
+    if (WaitForSingleObject(client->frontend,0)==WAIT_TIMEOUT) return console_activate(client,TRUE);
     /* A dead root closes this session; it cannot be rebound to a new root. */
     return ERROR_PIPE_NOT_CONNECTED;
 }
@@ -129,12 +180,16 @@ DWORD ntvdm_console_client_begin(session *owner)
     client->wake=CreateEventW(NULL,TRUE,FALSE,NULL);
     client->stop=CreateEventW(NULL,TRUE,FALSE,NULL);
     client->rearm=CreateEventW(NULL,FALSE,FALSE,NULL);
-    if (!client->event || !client->wake || !client->stop || !client->rearm) {
+    client->input_identity=CreateEventW(NULL,TRUE,FALSE,NULL);
+    client->output_identity=CreateEventW(NULL,TRUE,FALSE,NULL);
+    if (!client->event || !client->wake || !client->stop || !client->rearm ||
+        !client->input_identity || !client->output_identity) {
         error=GetLastError();console_client_end(client);return error;
     }
     client->watcher=CreateThread(NULL,0,console_input_watch,client,0,NULL);
-    if (!client->watcher || !session_register_teardown(owner,console_client_end,client)) {
-        error=client->watcher ? ERROR_NOT_ENOUGH_MEMORY : GetLastError();
+    error=client->watcher ? console_activate(client,TRUE) : GetLastError();
+    if (!error && !session_register_teardown(owner,console_client_end,client))error=ERROR_NOT_ENOUGH_MEMORY;
+    if (error) {
         console_client_end(client);return error;
     }
     owner->console_client=client;
@@ -142,19 +197,32 @@ DWORD ntvdm_console_client_begin(session *owner)
     return ERROR_SUCCESS;
 }
 
-BOOL ntvdm_console_inherit_frontend_capability(HANDLE *capability)
+BOOL ntvdm_console_inherit_launch_capabilities(HANDLE *capability,HANDLE *execution)
 {
     session *owner=session_thread_current();
     console_client *client=owner ? owner->console_client : NULL;
     BOOL result=TRUE;
-    if (!capability) { SetLastError(ERROR_INVALID_PARAMETER);return FALSE; }
-    *capability=NULL;
+    HANDLE retained=NULL;
+    DWORD error;
+    if (!capability || !execution) { SetLastError(ERROR_INVALID_PARAMETER);return FALSE; }
+    *capability=NULL;*execution=NULL;
     if (!client) return TRUE;
     EnterCriticalSection(&client->lock);
     if (!client->capability) { SetLastError(ERROR_INVALID_STATE);result=FALSE; }
     else result=DuplicateHandle(GetCurrentProcess(),client->capability,
         GetCurrentProcess(),capability,SYNCHRONIZE,TRUE,0);
     LeaveCriticalSection(&client->lock);
+    if (!result) return FALSE;
+    /* A worker-created native child must receive this worker's verified
+     * execution Console, never an old launcher-local handle from guest env. */
+    error=OpenNtBaseClientAcquireConsoleContext(*capability,&retained);
+    if (!error && !DuplicateHandle(GetCurrentProcess(),retained,GetCurrentProcess(),
+        execution,SYNCHRONIZE,TRUE,0)) error=GetLastError();
+    if (retained) CloseHandle(retained);
+    if (error) {
+        CloseHandle(*capability);*capability=NULL;
+        SetLastError(error);return FALSE;
+    }
     return result;
 }
 
@@ -201,7 +269,7 @@ static console_client *mode_client(HANDLE handle)
     DWORD mode;
     /* NUL is FILE_TYPE_CHAR too, but is not a Console. Preserve the native
      * error for non-Console handles instead of displaying their data remotely. */
-    return owner && owner->console_client && GetConsoleMode(handle,&mode) ?
+    return owner && owner->console_client && (ntvdm_console_handle_kind(handle) || GetConsoleMode(handle,&mode)) ?
         owner->console_client : NULL;
 }
 
@@ -211,14 +279,16 @@ static console_client *output_client(HANDLE output)
     console_client *client=mode_client(output);
     /* A CONIN$ handle also supports GetConsoleMode. It cannot authorize an
      * output operation on the frontend's unrelated CONOUT$ handle. */
-    return client && GetConsoleScreenBufferInfo(output,&info) ? client : NULL;
+    return client && (ntvdm_console_handle_kind(output)==2 ||
+        (!ntvdm_console_handle_kind(output) && GetConsoleScreenBufferInfo(output,&info))) ? client : NULL;
 }
 
 static console_client *input_client(HANDLE input)
 {
     DWORD count;
     console_client *client=mode_client(input);
-    return client && GetNumberOfConsoleInputEvents(input,&count) ? client : NULL;
+    return client && (ntvdm_console_handle_kind(input)==1 ||
+        (!ntvdm_console_handle_kind(input) && GetNumberOfConsoleInputEvents(input,&count))) ? client : NULL;
 }
 
 /* Called with the per-session lock held; all operations share one ordered
@@ -250,6 +320,27 @@ static DWORD exchange(console_client *client,console_io_reply *reply)
         error=ERROR_PIPE_NOT_CONNECTED;
     if (error) client->failure=error;
     return error;
+}
+
+static DWORD console_activate(console_client *client,BOOL active)
+{
+    console_io_reply reply;
+    DWORD error;
+    EnterCriticalSection(&client->lock);
+    ZeroMemory(&client->request,offsetof(console_io_request,data));
+    client->request.operation=CONSOLE_IO_DOS_ACTIVE;
+    client->request.state.input=active!=FALSE;
+    error=exchange(client,&reply);
+    if(!error && !reply.result)error=reply.error ? reply.error : ERROR_GEN_FAILURE;
+    LeaveCriticalSection(&client->lock);
+    return error;
+}
+BOOL ntvdm_console_set_active(BOOL active)
+{
+    session *owner=session_thread_current();
+    console_client *client=owner ? owner->console_client : NULL;
+    DWORD error=client ? console_activate(client,active) : ERROR_SUCCESS;
+    SetLastError(error);return error==ERROR_SUCCESS;
 }
 
 BOOL ntvdm_console_publish_video(const console_video_description *description,
@@ -622,7 +713,7 @@ BOOL WINAPI MvdmGetConsoleMode(HANDLE handle,LPDWORD mode)
     console_io_state request={0},result={0};
     if (!client) return GetConsoleMode(handle,mode);
     if (!mode) { SetLastError(ERROR_INVALID_PARAMETER);return FALSE; }
-    request.input=!GetConsoleScreenBufferInfo(handle,&screen);
+    request.input=ntvdm_console_handle_kind(handle) ? ntvdm_console_handle_kind(handle)==1 : !GetConsoleScreenBufferInfo(handle,&screen);
     if (!state_operation(client,CONSOLE_IO_GET_MODE,&request,&result)) return FALSE;
     *mode=result.mode;return TRUE;
 }
@@ -633,7 +724,7 @@ BOOL WINAPI MvdmSetConsoleMode(HANDLE handle,DWORD mode)
     CONSOLE_SCREEN_BUFFER_INFO screen;
     console_io_state request={0};
     if (!client) return SetConsoleMode(handle,mode);
-    request.input=!GetConsoleScreenBufferInfo(handle,&screen);request.mode=mode;
+    request.input=ntvdm_console_handle_kind(handle) ? ntvdm_console_handle_kind(handle)==1 : !GetConsoleScreenBufferInfo(handle,&screen);request.mode=mode;
     return state_operation(client,CONSOLE_IO_SET_MODE,&request,NULL);
 }
 

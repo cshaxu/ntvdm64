@@ -115,6 +115,7 @@ $hostCompatSource = Join-Path $root 'src/opennt-abi/host-compat/opennt_support_r
 $hostCrtRedirect = Join-Path $root 'src/opennt-abi/host-compat/include/mvdm_crt_redirect.h'
 $softpcSymbolCompat = Join-Path $root 'src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h'
 $run16Root = Join-Path $root 'src/run16-exe'
+$frontendRoot = Join-Path $root 'src/frontend-exe'
 $productPackageRoot = Join-Path $root 'src/product-package'
 $adapterBaseSrvRoot = Join-Path $root 'src/ntvdm-exe/command/source'
 $adapterMonitorRoot = Join-Path $root 'src/ntvdm-exe/monitor/source'
@@ -522,8 +523,12 @@ foreach ($entry in @(
 )) {
     $wow32ProviderExportLines.Add('    ' + $entry)
 }
-[IO.File]::WriteAllLines($wow32ProviderExportDefinition,
-    $wow32ProviderExportLines, [Text.UTF8Encoding]::new($false))
+$wow32ProviderExportText = ($wow32ProviderExportLines -join [Environment]::NewLine) + [Environment]::NewLine
+if (!(Test-Path -LiteralPath $wow32ProviderExportDefinition) -or
+    [IO.File]::ReadAllText($wow32ProviderExportDefinition) -cne $wow32ProviderExportText) {
+    [IO.File]::WriteAllText($wow32ProviderExportDefinition,
+        $wow32ProviderExportText, [Text.UTF8Encoding]::new($false))
+}
 $embeddedRomResource = Get-Content -LiteralPath $hostEntryResourceSource -Raw
 foreach ($romSource in $embeddedRomSources) {
     if (!(Test-Path -LiteralPath $romSource -PathType Leaf)) {
@@ -542,8 +547,12 @@ foreach ($romSource in $embeddedRomSources) {
     # profile.spc, cmos.ram and bios2.rom do not belong to the EXE contract.
     $embeddedRomResource += "`r`n$romResourceName RCDATA `"$romPath`"`r`n"
 }
-[IO.File]::WriteAllText($embeddedRomResourceSource, $embeddedRomResource,
-    [Text.Encoding]::ASCII)
+# Generating a test target must not invalidate an unchanged production ROM.
+if (!(Test-Path -LiteralPath $embeddedRomResourceSource) -or
+    [IO.File]::ReadAllText($embeddedRomResourceSource, [Text.Encoding]::ASCII) -cne $embeddedRomResource) {
+    [IO.File]::WriteAllText($embeddedRomResourceSource, $embeddedRomResource,
+        [Text.Encoding]::ASCII)
+}
 if ([string]::IsNullOrWhiteSpace($NodeExecutable)) { $NodeExecutable = $env:MVDM_NODE22 }
 if ([string]::IsNullOrWhiteSpace($NodeExecutable) -or !(Test-Path -LiteralPath $NodeExecutable -PathType Leaf)) {
     throw 'Node 22 is required for the GDP slot generator; pass -NodeExecutable or set MVDM_NODE22.'
@@ -781,6 +790,7 @@ $graph.Add('rule forced_link_audit')
 # unresolved physical forms in the adjacent log for source-first ownership.
     $graph.Add('  command = link.exe /nologo /dll /noentry /force:unresolved /force:multiple /out:$out /implib:$out.lib /wholearchive:original-ccpu386.lib /wholearchive:original-softpc-bios.lib /wholearchive:original-softpc-keymouse.lib /wholearchive:original-softpc-system.lib /wholearchive:original-softpc-disks.lib /wholearchive:original-softpc-support.lib /wholearchive:original-softpc-video.lib /wholearchive:original-softpc-cvidc.lib /wholearchive:original-softpc-comms.lib /wholearchive:original-softpc-dos.lib /wholearchive:original-mvdm-dem.lib /wholearchive:original-mvdm-command.lib /wholearchive:original-mvdm-xms.lib /wholearchive:original-mvdm-dpmi32.lib /wholearchive:original-mvdm-host-suballoc.lib /wholearchive:original-mvdm-host-oemuni.lib /wholearchive:original-softpc-base-trace.lib /wholearchive:original-softpc-host-roots.lib /wholearchive:softpc-bindings.lib /wholearchive:softpc-win32-bindings.lib /wholearchive:monitor-bindings.lib /wholearchive:debugger-bindings.lib /wholearchive:session.lib /wholearchive:mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib')
 $graph.Add('rule redir_dll_link')
+$graph.Add('  restat = 1')
 # Keep the original VDMREDIR DLL boundary and entry contract.  The OpenNT
 # `sources` manifest selects DLLENTRY=VrDllInitialize; without that entry the
 # redirector's process-attach initialization (including named-pipe queues and
@@ -1211,6 +1221,11 @@ if ($Architecture -eq 'x86') {
     $graph.Add('rule basesrv_service_test_link')
     $graph.Add('  command = link.exe /nologo /out:$out $in ntdll.lib kernel32.lib user32.lib advapi32.lib libcmt.lib libvcruntime.lib libucrt.lib')
     $graph.Add('build basesrv-service-reservation-test.exe: basesrv_service_test_link ' + $baseServiceReservationTestObject + ' obj/run16/support.obj opennt-base-server.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib')
+    $graph.Add('build obj/tests/base_client_rpc_first.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/base_client_rpc_first_test.c')))
+    $graph.Add('  cflags = ' + $baseOwnerFlags)
+    $graph.Add('rule base_rpc_test_link')
+    $graph.Add('  command = link.exe /nologo /subsystem:console /out:$out $in rpcrt4.lib ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib')
+    $graph.Add('build base-client-rpc-first-test.exe: base_rpc_test_link obj/tests/base_client_rpc_first.obj obj/run16/support.obj obj/run16/rpc_client.obj obj/run16/stub.obj opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib | basesrv.exe')
     $nativeServiceFlags = '/nologo /c /MT /W4 /we4013 /showIncludes /I obj/basesrv /I "' + (NinjaPath (Join-Path $root 'src')) + '"'
     $graph.Add('build obj/tests/console_title_native.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/console_title_native_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
@@ -1232,7 +1247,7 @@ if ($Architecture -eq 'x86') {
     $graph.Add('  cflags = ' + $nativeServiceFlags + ' /I"' + (NinjaPath (Join-Path $root 'src/opennt-abi/host-compat/include')) + '"')
     $graph.Add('build obj/tests/frontend_scope_lifetime.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/frontend_scope_lifetime_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build frontend-scope-lifetime-test.exe: broker_test_link obj/tests/frontend_scope_lifetime.obj obj/run16/frontend_scope.obj')
+    $graph.Add('build frontend-scope-lifetime-test.exe: broker_test_link obj/tests/frontend_scope_lifetime.obj obj/run16/frontend_scope.obj obj/frontend/session_service.obj')
     $graph.Add('build obj/tests/native_lifetime_pair.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/native_lifetime_pair_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build native-lifetime-pair-test.exe: broker_test_link obj/tests/native_lifetime_pair.obj')
@@ -1251,13 +1266,15 @@ if ($Architecture -eq 'x86') {
     $graph.Add('  command = link.exe /nologo /subsystem:console /entry:wWinMainCRTStartup /opt:ref /out:$out /map:$out.map $in rpcrt4.lib ntdll.lib kernel32.lib shell32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib')
     $graph.Add('build obj/run16/console_probe.obj: cc ' + (NinjaPath (Join-Path $run16Root 'console_probe.c')))
     $graph.Add('  cflags = /nologo /c /MT /W4 /we4013 /showIncludes /I "' + (NinjaPath (Join-Path $root 'src')) + '"')
-    $graph.Add('build obj/run16/console_frontend.obj: cc ' + (NinjaPath (Join-Path $run16Root 'console_frontend.c')))
+    $graph.Add('build obj/run16/console_frontend.obj: cc ' + (NinjaPath (Join-Path $frontendRoot 'console_frontend.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build obj/run16/console_video.obj: cc ' + (NinjaPath (Join-Path $run16Root 'console_video.c')))
+    $graph.Add('build obj/run16/console_video.obj: cc ' + (NinjaPath (Join-Path $frontendRoot 'console_video.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build obj/run16/console_channel.obj: cc ' + (NinjaPath (Join-Path $run16Root 'console_channel.c')))
+    $graph.Add('build obj/run16/console_channel.obj: cc ' + (NinjaPath (Join-Path $frontendRoot 'console_channel.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build obj/run16/frontend_scope.obj: cc ' + (NinjaPath (Join-Path $run16Root 'frontend_scope.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build obj/frontend/session_service.obj: cc ' + (NinjaPath (Join-Path $frontendRoot 'session_service.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build obj/tests/console_frontend_test.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/console_frontend_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
@@ -1267,6 +1284,68 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build obj/tests/console_video.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/console_video_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build console-video-test.exe: console_test_link obj/tests/console_video.obj obj/run16/console_frontend.obj obj/run16/console_video.obj ' + $consoleGridObject)
+    $graph.Add('build obj/run16/native_console_capture.obj: cc ' + (NinjaPath (Join-Path $frontendRoot 'native_console_capture.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build obj/run16/native_console_host.obj: cc ' + (NinjaPath (Join-Path $frontendRoot 'native_console_host.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build obj/run16/native_console_launch.obj: cc ' + (NinjaPath (Join-Path $frontendRoot 'native_console_launch.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build obj/run16/native_console_backend.obj: cc ' + (NinjaPath (Join-Path $frontendRoot 'native_console_backend.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build obj/run16/native_console_view.obj: cc ' + (NinjaPath (Join-Path $frontendRoot 'native_console_view.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build obj/run16/native_console_frontend.obj: cc ' + (NinjaPath (Join-Path $frontendRoot 'native_console_frontend.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build obj/run16/native_console_request.obj: cc ' + (NinjaPath (Join-Path $frontendRoot 'native_console_request.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build obj/frontend/native_request_client.obj: cc ' + (NinjaPath (Join-Path $frontendRoot 'native_request_client.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build obj/frontend/native_request_io.obj: cc ' + (NinjaPath (Join-Path $frontendRoot 'native_request_io.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build obj/frontend/bootstrap_client.obj: cc ' + (NinjaPath (Join-Path $frontendRoot 'bootstrap_client.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build obj/frontend/main.obj: cc ' + (NinjaPath (Join-Path $frontendRoot 'main.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build frontend-client.lib: lib obj/frontend/native_request_client.obj obj/frontend/native_request_io.obj obj/frontend/bootstrap_client.obj obj/run16/native_console_launch.obj')
+    $graph.Add('rule frontend_link')
+    $graph.Add('  command = link.exe /nologo /subsystem:console /entry:wmainCRTStartup /opt:ref /out:$out /map:$out.map $in rpcrt4.lib ntdll.lib kernel32.lib shell32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib')
+    $graph.Add('build frontend.exe: frontend_link obj/frontend/main.obj obj/frontend/session_service.obj obj/run16/native_console_host.obj obj/run16/native_console_capture.obj obj/run16/native_console_backend.obj obj/run16/native_console_view.obj obj/run16/native_console_frontend.obj obj/run16/native_console_request.obj frontend-client.lib obj/run16/console_frontend.obj obj/run16/console_video.obj obj/run16/console_channel.obj obj/run16/support.obj obj/run16/rpc_client.obj obj/run16/stub.obj ' + $consoleGridObject + ' opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib')
+    $graph.Add('build obj/tests/frontend_request_client.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/frontend_request_client_test.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build frontend-request-client-test.exe: console_test_link obj/tests/frontend_request_client.obj frontend-client.lib')
+    $graph.Add('build obj/tests/frontend_gui_boundary.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/frontend_gui_boundary_test.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('rule gui_boundary_link')
+    $graph.Add('  command = link.exe /nologo /subsystem:windows /out:$out $in libcmt.lib libvcruntime.lib libucrt.lib kernel32.lib')
+    $graph.Add('build frontend-gui-boundary-test.exe: gui_boundary_link obj/tests/frontend_gui_boundary.obj')
+    $graph.Add('build obj/tests/frontend_chain_target.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/frontend_chain_target.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $chainInputs = 'obj/tests/frontend_chain_target.obj obj/run16/support.obj obj/run16/rpc_client.obj obj/run16/stub.obj opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib'
+    $graph.Add('build frontend-chain-cui.exe: frontend_link ' + $chainInputs)
+    $graph.Add('build obj/tests/frontend_chain_input.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/frontend_chain_input.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build frontend-chain-input.exe: frontend_link obj/tests/frontend_chain_input.obj')
+    $graph.Add('rule frontend_chain_gui_link')
+    $graph.Add('  command = link.exe /nologo /subsystem:windows /entry:wmainCRTStartup /opt:ref /out:$out $in rpcrt4.lib ntdll.lib kernel32.lib shell32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib')
+    $graph.Add('build frontend-chain-gui.exe: frontend_chain_gui_link ' + $chainInputs)
+    $graph.Add('build obj/tests/frontend_bootstrap.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/frontend_bootstrap_test.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build frontend-bootstrap-test.exe: frontend_link obj/tests/frontend_bootstrap.obj frontend-client.lib obj/run16/support.obj obj/run16/rpc_client.obj obj/run16/stub.obj opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib | frontend.exe basesrv.exe')
+    $graph.Add('build obj/tests/native_console_capture.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/native_console_capture_test.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build native-console-capture-test.exe: console_test_link obj/tests/native_console_capture.obj obj/run16/native_console_capture.obj')
+    $graph.Add('build obj/tests/native_console_members.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/native_console_members_test.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build native-console-members-test.exe: frontend_link obj/tests/native_console_members.obj obj/run16/native_console_backend.obj obj/run16/native_console_launch.obj | frontend.exe')
+    $graph.Add('build obj/tests/native_console_host.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/native_console_host_test.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build native-console-host-test.exe: console_test_link obj/tests/native_console_host.obj obj/run16/native_console_backend.obj obj/run16/native_console_launch.obj obj/run16/native_console_view.obj obj/run16/native_console_capture.obj | frontend.exe')
+    $graph.Add('build obj/tests/native_console_frontend.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/native_console_frontend_test.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build native-console-frontend-test.exe: console_test_link obj/tests/native_console_frontend.obj obj/run16/native_console_frontend.obj obj/run16/native_console_backend.obj obj/run16/native_console_host.obj obj/run16/native_console_launch.obj obj/run16/native_console_view.obj obj/run16/native_console_capture.obj')
+    $graph.Add('build obj/tests/console_channel_lifetime.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/console_channel_lifetime_test.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build console-channel-lifetime-test.exe: console_test_link obj/tests/console_channel_lifetime.obj obj/run16/native_console_frontend.obj obj/run16/native_console_backend.obj obj/run16/native_console_launch.obj obj/run16/native_console_view.obj obj/run16/native_console_capture.obj ' + $consoleGridObject)
     $graph.Add('build obj/tests/console_pointer_dispatch_test.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/console_pointer_dispatch_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('rule pointer_test_link')
@@ -1277,12 +1356,12 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build obj/tests/console_client.obj: cc ' + (NinjaPath (Join-Path $root 'src/ntvdm-exe/win32/console_client.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build console-client-test.exe: console_test_link obj/tests/console_client_test.obj obj/tests/console_client.obj obj/tests/console_graphics_provider.obj obj/tests/console_bitmap_provider.obj obj/run16/console_frontend.obj obj/run16/console_video.obj ' + $consoleGridObject)
-    $graph.Add('build run16.exe: run16_link obj/run16/entry.obj obj/run16/console_probe.obj obj/run16/console_frontend.obj obj/run16/console_video.obj obj/run16/console_channel.obj obj/run16/frontend_scope.obj obj/run16/support.obj obj/run16/rpc_client.obj obj/run16/stub.obj ' + $consoleGridObject + ' opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib')
+    $graph.Add('build run16.exe: run16_link obj/run16/entry.obj obj/run16/console_probe.obj obj/run16/frontend_scope.obj frontend-client.lib obj/run16/support.obj obj/run16/rpc_client.obj obj/run16/stub.obj opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib | frontend.exe')
     $graph.Add('build obj/tests/console_video_observed.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/console_video_observed.c')))
     $graph.Add('  cflags = /nologo /c /MT /W4 /we4013 /showIncludes /I obj/basesrv /I "' + (NinjaPath (Join-Path $root 'src')) + '"')
     $graph.Add('build obj/tests/run16_package_observed.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/run16_package_observed.c')) + ' | obj/basesrv/service.h')
     $graph.Add('  cflags = ' + $baseOwnerFlags)
-    $graph.Add('build run16-video-observer.exe: run16_link obj/tests/run16_package_observed.obj obj/run16/console_probe.obj obj/tests/console_video_observed.obj obj/run16/console_channel.obj obj/run16/frontend_scope.obj obj/run16/support.obj obj/run16/rpc_client.obj obj/run16/stub.obj ' + $consoleGridObject + ' opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib')
+    $graph.Add('build frontend-video-observer.exe: frontend_link obj/frontend/main.obj obj/frontend/session_service.obj obj/run16/native_console_host.obj obj/run16/native_console_capture.obj obj/run16/native_console_backend.obj obj/run16/native_console_view.obj obj/run16/native_console_frontend.obj obj/run16/native_console_request.obj frontend-client.lib obj/tests/console_video_observed.obj obj/run16/console_channel.obj obj/run16/support.obj obj/run16/rpc_client.obj obj/run16/stub.obj ' + $consoleGridObject + ' opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib')
     $graph.Add('rule basesrv_idl')
     $graph.Add('  command = midl.exe /nologo /env win32 /target NT100 /prefix client Client_ /prefix server Server_ /out obj/basesrv /h service.h /cstub service_c.c /sstub service_s.c $in')
     $graph.Add('build obj/basesrv/service_s.c | obj/basesrv/service_c.c obj/basesrv/service.h: basesrv_idl ' + (NinjaPath (Join-Path $root 'src/basesrv-exe/transport/service.idl')))
@@ -1300,21 +1379,24 @@ if ($Architecture -eq 'x86') {
     $graph.Add('rule basesrv_link')
     $graph.Add('  command = link.exe /nologo /subsystem:console /opt:ref /out:$out /map:$out.map $in rpcrt4.lib ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib')
     $graph.Add('build basesrv.exe: basesrv_link obj/basesrv/entry.obj obj/basesrv/stub.obj obj/basesrv/console_query.obj obj/run16/support.obj opennt-base-server.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib')
-    $graph.Add('build obj/dtmgr/main.obj: cc ' + (NinjaPath (Join-Path $root 'src/dtmgr-exe/main.c')) + ' | obj/basesrv/service.h')
+    $graph.Add('build obj/monitor/main.obj: cc ' + (NinjaPath (Join-Path $root 'src/monitor-exe/main.c')) + ' | obj/basesrv/service.h')
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build obj/dtmgr/stub.obj: cc obj/basesrv/service_c.c | obj/basesrv/service.h')
+    $graph.Add('build obj/monitor/stub.obj: cc obj/basesrv/service_c.c | obj/basesrv/service.h')
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('rule dtaskmgr_link')
+    $graph.Add('rule monitor_link')
     $graph.Add('  command = link.exe /nologo /subsystem:console /opt:ref /out:$out /map:$out.map $in rpcrt4.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib')
-    # dtmgr is a client of the authenticated local BaseSrv endpoint.  It
+    # monitor is a client of the authenticated local BaseSrv endpoint.  It
     # shares only the native transport scope helper, never a BaseClient
     # registration or worker lifecycle library.
-    $graph.Add('build dtmgr.exe: dtaskmgr_link obj/dtmgr/main.obj obj/dtmgr/stub.obj broker-transport.lib')
-    $dtaskmgrRpcTestObject = 'obj/tests/dtaskmgr_rpc_test.obj'
-    $graph.Add('build ' + $dtaskmgrRpcTestObject + ': cc ' + (NinjaPath (Join-Path $root 'tests/adapter-basesrv/dtaskmgr_rpc_test.c')) + ' | obj/basesrv/service.h')
+    $graph.Add('build monitor.exe: monitor_link obj/monitor/main.obj obj/monitor/stub.obj broker-transport.lib')
+    $monitorRpcTestObject = 'obj/tests/monitor_rpc_test.obj'
+    $graph.Add('build ' + $monitorRpcTestObject + ': cc ' + (NinjaPath (Join-Path $root 'tests/adapter-basesrv/monitor_rpc_test.c')) + ' | obj/basesrv/service.h')
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build dtaskmgr-rpc-test.exe: dtaskmgr_link ' + $dtaskmgrRpcTestObject + ' obj/dtmgr/stub.obj broker-transport.lib')
+    $graph.Add('build monitor-rpc-test.exe: monitor_link ' + $monitorRpcTestObject + ' obj/monitor/stub.obj broker-transport.lib')
     $graph.Add('rule worker_link')
+    # MSVC leaves an unchanged import library's timestamp intact. Without
+    # restat that implicit output makes the whole link dirty on every build.
+    $graph.Add('  restat = 1')
     $graph.Add('  command = cmd.exe /d /s /c "link.exe /nologo /subsystem:console /opt:ref /out:$out /map:$out.map /def:generated/ntvdm-wow32-provider.def $in rpcrt4.lib kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib libcmt.lib libvcruntime.lib libucrt.lib && "' + (NinjaPath $NodeExecutable) + '" "' + (NinjaPath (Join-Path $root 'tools/audit/Verify-VdmTibStorage.mjs')) + '" $out.map obj/adapter-monitor/mvdm_vdm_tib.obj"')
     # CCPU40 and DPMI discover the original nt_inthk providers only after their
     # archives have been scanned. Retain the normal source-order occurrence,
@@ -1381,7 +1463,7 @@ $graph.Add('build debugger-bindings.lib: lib ' + ((@($adapterDebuggerObjects) + 
 $graph.Add('build softpc-ccpu-vector-defaults.lib: lib ' + $patchVectorDefaultsObject)
 $graph.Add('build softpc-activity-check.lib: lib ' + $patchActivityCheckObject)
 $graph.Add('build original-softpc-candidate: phony original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-redir.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-softpc-host-roots.lib original-opennt-netlib.lib original-opennt-netapi-api.lib original-opennt-xactsrv.lib original-opennt-rtl-x86.lib softpc-bindings.lib vdmredir-dll-bindings.lib worker-shell.lib worker-command-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib')
-$graph.Add('build product-programs: phony run16.exe basesrv.exe ntvdm.exe dtmgr.exe VDMREDIR.dll')
+$graph.Add('build product-programs: phony run16.exe basesrv.exe ntvdm.exe monitor.exe VDMREDIR.dll')
 $graph.Add('build obj/tests/ccpu_halt_reset_test.obj: cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/ccpu_halt_reset_test.c')))
 $hostFixtureSeamsObject = 'obj/tests/ccpu_host_fixture_seams.obj'
 $graph.Add('build ' + $hostFixtureSeamsObject + ': cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/ccpu_host_fixture_seams.c')))
@@ -1549,11 +1631,35 @@ if ($objectOutputDirectories.Count -gt 0) {
     launcherComposition = [ordered]@{
         target = 'run16.exe'
         selected = ($Architecture -eq 'x86')
-        disposition = 'selected x86 product launcher; broker startup, worker registration and parent completion verified'
-        sources = @('src/run16-exe/main.c', 'src/run16-exe/console_probe.c', 'src/run16-exe/console_frontend.c', 'src/run16-exe/console_video.c', 'src/run16-exe/console_video.h', 'src/product-abi/console_video.h', 'src/run16-exe/console_channel.c', 'src/run16-exe/frontend_scope.c', 'src/product-abi/console_io.h', 'src/opennt-abi/host-compat/opennt_support_rtl.c' | ForEach-Object {
+        disposition = 'client-only x86 launcher; native independent-frontend paths tested; migrated DOS/GUI grouping gates pending'
+        sources = @('src/run16-exe/main.c', 'src/run16-exe/console_probe.c', 'src/run16-exe/frontend_scope.c', 'src/run16-exe/frontend_scope.h', 'src/opennt-abi/host-compat/opennt_support_rtl.c' | ForEach-Object {
             [ordered]@{ path = $_; sha256 = Get-NodeSha256 (Join-Path $root $_) }
         })
-        libraries = @('opennt-base-client.lib', 'opennt-base-bindings.lib', 'original-opennt-rtl-x86.lib')
+        libraries = @('frontend-client.lib', 'opennt-base-client.lib', 'opennt-base-bindings.lib', 'broker-transport.lib', 'original-opennt-rtl-x86.lib')
+    }
+    frontendClientComposition = [ordered]@{
+        target = 'frontend-client.lib'
+        selected = ($Architecture -eq 'x86')
+        disposition = 'finite bootstrap/native request client and bounded presentation receipt; no renderer/input-pump dependency'
+        sources = @('src/frontend-exe/bootstrap_client.c', 'src/frontend-exe/bootstrap.h', 'src/frontend-exe/native_request_client.c', 'src/frontend-exe/native_request_client.h', 'src/frontend-exe/native_request_io.c', 'src/frontend-exe/native_request_protocol.h', 'src/frontend-exe/native_console_launch.c', 'src/frontend-exe/native_launch.h' | ForEach-Object {
+            [ordered]@{ path = $_; sha256 = Get-NodeSha256 (Join-Path $root $_) }
+        })
+    }
+    frontendServiceComposition = [ordered]@{
+        target = 'obj/frontend/session_service.obj'
+        selected = ($Architecture -eq 'x86')
+        disposition = 'independent frontend channel/request pump, membership retirement and teardown; test-only in-process fixture retained'
+        sources = @('src/frontend-exe/session_service.c', 'src/frontend-exe/session_service.h' | ForEach-Object {
+            [ordered]@{ path = $_; sha256 = Get-NodeSha256 (Join-Path $root $_) }
+        })
+    }
+    frontendBootstrapComposition = [ordered]@{
+        target = 'frontend.exe'
+        selected = ($Architecture -eq 'x86')
+        disposition = 'independent authenticated presentation/helper owner; native CLI and retirement selected and tested; full DOS/GUI gates pending'
+        sources = @('src/frontend-exe/main.c', 'src/frontend-exe/bootstrap.h', 'src/frontend-exe/native_console_frontend.c', 'src/frontend-exe/native_console_frontend.h', 'src/frontend-exe/native_console_request.c', 'src/frontend-exe/native_console_request.h', 'src/frontend-exe/native_console_host.c', 'src/frontend-exe/native_console_host.h', 'src/frontend-exe/native_console_capture.c', 'src/frontend-exe/native_console_capture.h', 'src/frontend-exe/native_console_backend.c', 'src/frontend-exe/native_console_backend.h', 'src/frontend-exe/native_console_view.c', 'src/frontend-exe/native_console_view.h', 'src/frontend-exe/console_frontend.c', 'src/frontend-exe/console_frontend.h', 'src/frontend-exe/console_video.c', 'src/frontend-exe/console_video.h', 'src/frontend-exe/console_channel.c', 'src/frontend-exe/console_channel.h', 'src/product-abi/console_video.h', 'src/product-abi/console_io.h' | ForEach-Object {
+            [ordered]@{ path = $_; sha256 = Get-NodeSha256 (Join-Path $root $_) }
+        })
     }
     selectedX86GeneratedInputs = @('PigReg_c.h', 'sas4gen.h', 'gdpvar.h' | ForEach-Object {
         [ordered]@{

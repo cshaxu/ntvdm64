@@ -8,7 +8,28 @@ struct run16_console_channel {
     run16_console_frontend console;
     HANDLE pipe,worker,stop,thread,io_event,ready;
     BOOL input_pending;
+    run16_native_frontend *root;
 };
+static DWORD activate(void *context,BOOL active)
+{
+    run16_console_channel *channel=context;
+    return run16_native_frontend_dos_bind(channel->root,channel,active);
+}
+static DWORD enter(void *context)
+{
+    run16_console_channel *channel=context;
+    return run16_native_frontend_dos_enter(channel->root,channel);
+}
+static void leave(void *context)
+{
+    run16_console_channel *channel=context;
+    run16_native_frontend_dos_leave(channel->root);
+}
+static BOOL active(run16_console_channel *channel)
+{
+    if(enter(channel))return FALSE;
+    leave(channel);return TRUE;
+}
 
 /* Explicit cancellation plus peer death. Never close an OVERLAPPED event or
  * buffer while the kernel may still complete its outstanding operation. */
@@ -28,7 +49,7 @@ static DWORD transfer(run16_console_channel *channel,BOOL write,void *buffer,DWO
             error=GetLastError();
             if (error!=ERROR_IO_PENDING) return error;
             for (;;) {
-                wait=WaitForMultipleObjects(!write && !channel->input_pending ? 4 : 3,waits,FALSE,INFINITE);
+                wait=WaitForMultipleObjects(!write && !channel->input_pending && active(channel) ? 4 : 3,waits,FALSE,INFINITE);
                 if (wait!=WAIT_OBJECT_0+3) break;
                 if (!SetEvent(channel->ready)) { wait=WAIT_FAILED;break; }
                 channel->input_pending=TRUE;
@@ -52,7 +73,7 @@ static DWORD WINAPI console_channel_main(void *context)
 {
     run16_console_channel *channel=context;
     console_io_request *request=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*request));
-    console_io_reply reply;
+    console_io_reply reply={0};
     DWORD error=request ? ERROR_SUCCESS : ERROR_NOT_ENOUGH_MEMORY;
     while (!error) {
         error=transfer(channel,FALSE,request,(DWORD)offsetof(console_io_request,data));
@@ -61,13 +82,13 @@ static DWORD WINAPI console_channel_main(void *context)
         error=transfer(channel,FALSE,request->data,request->bytes);
         if (!error) error=run16_console_dispatch(&channel->console,request,&reply);
         if (!error && (request->operation==CONSOLE_IO_READ_INPUT ||
-            request->operation==CONSOLE_IO_PEEK_INPUT)) {
+            request->operation==CONSOLE_IO_PEEK_INPUT || request->operation==CONSOLE_IO_DOS_ACTIVE)) {
             INPUT_RECORD record;
             DWORD count=0;
             /* Reset before checking the queue. A later arrival wakes the next
              * pipe wait through CONIN$; it cannot be lost between peek/reset. */
-            if (!ResetEvent(channel->ready) ||
-                !PeekConsoleInputW(channel->console.input,&record,1,&count)) error=GetLastError();
+            if (!ResetEvent(channel->ready))error=GetLastError();
+            if(!error && active(channel) && !PeekConsoleInputW(channel->console.input,&record,1,&count))error=GetLastError();
             channel->input_pending=count!=0;
             if (!error && count && !SetEvent(channel->ready)) error=GetLastError();
         }
@@ -100,6 +121,7 @@ void run16_console_channel_stop(run16_console_channel *channel)
         CloseHandle(channel->thread);
     } else if (channel->pipe && channel->pipe!=INVALID_HANDLE_VALUE) CloseHandle(channel->pipe);
     run16_console_video_dispose(&channel->console.video);
+    run16_native_frontend_dos_forget(channel->root,channel);
     if (channel->io_event) CloseHandle(channel->io_event);
     if (channel->ready) CloseHandle(channel->ready);
     if (channel->stop) CloseHandle(channel->stop);
@@ -109,15 +131,15 @@ void run16_console_channel_stop(run16_console_channel *channel)
     HeapFree(GetProcessHeap(),0,channel);
 }
 
-DWORD run16_console_channel_start_request(DWORD request,HANDLE worker,run16_console_channel **output)
+DWORD run16_console_channel_start_request(DWORD request,HANDLE worker,run16_native_frontend *root,run16_console_channel **output)
 {
     run16_console_channel *channel;
     HANDLE server=INVALID_HANDLE_VALUE;
     WCHAR name[96];
     OVERLAPPED connect={0};
-    DWORD error,client_pid=0;
+    DWORD error,client_pid=0,generation=0;
     static LONG serial;
-    if (!output || !request || !worker || worker==INVALID_HANDLE_VALUE) {
+    if (!output || !request || !root || !worker || worker==INVALID_HANDLE_VALUE) {
         if (worker && worker!=INVALID_HANDLE_VALUE) CloseHandle(worker);
         if (output) *output=NULL;
         return ERROR_INVALID_PARAMETER;
@@ -126,6 +148,9 @@ DWORD run16_console_channel_start_request(DWORD request,HANDLE worker,run16_cons
     channel=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*channel));
     if (!channel) { if (worker) CloseHandle(worker);return ERROR_NOT_ENOUGH_MEMORY; }
     channel->worker=worker;
+    channel->root=root;
+    channel->console.io_context=channel;
+    channel->console.activate=activate;channel->console.enter=enter;channel->console.leave=leave;
     channel->stop=CreateEventW(NULL,TRUE,FALSE,NULL);
     channel->io_event=CreateEventW(NULL,TRUE,FALSE,NULL);
     channel->ready=CreateEventW(NULL,TRUE,FALSE,NULL);
@@ -159,8 +184,9 @@ DWORD run16_console_channel_start_request(DWORD request,HANDLE worker,run16_cons
         error=ERROR_ACCESS_DENIED;goto fail;
     }
     error=OpenNtBaseClientAttachFrontendRequest(request,server,channel->ready,
-        &channel->console.generation);
+        &generation);
     if (error) goto fail;
+    channel->console.generation=generation;
     CloseHandle(server);server=INVALID_HANDLE_VALUE;
     channel->thread=CreateThread(NULL,0,console_channel_main,channel,0,NULL);
     if (!channel->thread) { error=GetLastError();goto fail; }

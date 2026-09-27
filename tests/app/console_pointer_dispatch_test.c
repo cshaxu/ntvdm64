@@ -35,7 +35,7 @@ static BOOL WINAPI test_set_clip(const RECT *rect)
 #define GetClipCursor test_get_clip
 #define ClipCursor test_set_clip
 #define GetProcAddress test_proc
-#include "../../src/run16-exe/console_frontend.c"
+#include "../../src/frontend-exe/console_frontend.c"
 #define CHECK(x) do { if (!(x)) { fprintf(stderr,"FAIL %d\n",__LINE__);return 1; } } while (0)
 int main(void)
 {

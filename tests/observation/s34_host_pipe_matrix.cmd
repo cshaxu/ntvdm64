@@ -1,7 +1,9 @@
 @echo off
 setlocal EnableExtensions
-cd /d O:\winnt || exit /b 64
-set "RUN=O:\winnt\run16.exe COMMAND.COM /c"
+set "PACKAGE=%~1"
+if not defined PACKAGE set "PACKAGE=O:\winnt"
+cd /d "%PACKAGE%" || exit /b 64
+set RUN="%CD%\run16.exe" COMMAND.COM /c
 set "MARK=S34_NATIVE_CHILD_STDIN=S34_NATIVE_CHILD_STDOUT_OK"
 
 rem Host-provided stdout and stdin stay outside the guest parser.

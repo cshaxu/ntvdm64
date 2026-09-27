@@ -8,6 +8,15 @@
 #include <windows.h>
 #include "console_title.h"
 
+/* Detached DOS workers bind CONIN$/CONOUT$ to local endpoint identities.
+ * Other names and handles keep their native file/device behavior. */
+HANDLE WINAPI MvdmCreateFileA(LPCSTR,DWORD,DWORD,LPSECURITY_ATTRIBUTES,DWORD,DWORD,HANDLE);
+HANDLE WINAPI MvdmCreateFileW(LPCWSTR,DWORD,DWORD,LPSECURITY_ATTRIBUTES,DWORD,DWORD,HANDLE);
+DWORD WINAPI MvdmGetFileType(HANDLE);
+#define CreateFileA MvdmCreateFileA
+#define CreateFileW MvdmCreateFileW
+#define GetFileType MvdmGetFileType
+
 /* Standalone Console graphics backing remains worker-local; presentation
  * is copied to the authenticated frontend. Non-owned handles remain native. */
 HANDLE WINAPI MvdmCreateConsoleScreenBuffer(DWORD,DWORD,const SECURITY_ATTRIBUTES *,DWORD,void *);

@@ -5,7 +5,13 @@
 
 /* Direct worker/frontend protocol; no pointers or native resource identities.
  * Local x86 peers are authenticated by the BaseSrv channel attachment. */
-#define CONSOLE_IO_VERSION 10u
+#define CONSOLE_IO_VERSION 11u
+/* One-hop worker -> launcher stream routing, not an authorization token.
+ * Versioned name; three low bits designate worker-local interactive endpoints.
+ * File/pipe handles remain actual inherited resources. Consume before launch. */
+#define CONSOLE_COMMAND_STREAMS_ENV "NTVDM_COMMAND_STREAMS_V1"
+#define CONSOLE_COMMAND_STREAMS_ENTRY "NTVDM_COMMAND_STREAMS_V1="
+#define CONSOLE_COMMAND_STREAMS_WENTRY L"NTVDM_COMMAND_STREAMS_V1="
 #define CONSOLE_IO_DATA_BYTES 16384u
 typedef struct console_io_cell {
     uint16_t character,attribute;
@@ -53,7 +59,8 @@ enum console_io_operation {
     CONSOLE_IO_VIDEO_TEXT,
     CONSOLE_IO_GET_DISPLAY_MODE,
     CONSOLE_IO_SET_DISPLAY_MODE,
-    CONSOLE_IO_KEYBOARD_LAYOUT
+    CONSOLE_IO_KEYBOARD_LAYOUT,
+    CONSOLE_IO_DOS_ACTIVE
 };
 enum console_io_window_query {
     CONSOLE_WINDOW_ICONIC=1,

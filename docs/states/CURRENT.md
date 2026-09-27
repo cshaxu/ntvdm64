@@ -4,165 +4,119 @@
 
 ## Active Packet
 
-**Active: M0 T423 S3**
+**Active: M0 T423 S4**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T423 S3, Ordinary Mode. |
+| Identifier Mode | M0 T423 S4, Ordinary Mode. |
 | Candidate Proposal | [Console/Window frontend](../proposals/proposal-kvm-window-graphics-presentation-001.md). |
-| Admission And Approval | Owner automatic sequential S admission after S2 closure; physical desktop observation waived in favor of reviewed logic and relevant unit tests. |
-| Objective | Run native CUI through stable hidden Console backends and helpers owned only by root run16; inner launchers authenticate, submit and wait, without frontend ownership. Preserve DOS/native nested execution and direct-target completion. |
-| Non-goals | No display flag, Window/library import (S4), guest changes, new scheduler, native GUI capture or broker frame transport. DOS remains on its S2 direct channel. |
-| Reference Baseline | S2 production d0f856a50 and its exact published six-file manifest; source/test baseline afb18fe5f plus linked S2 closure evidence. Prior prototype remains read-only reference on codex/t423-original-reference-20260925. |
-| Files And ABI Surface | run16-exe native launch/backend/frontend; finite authenticated frontend association in basesrv if required; copied product-abi records, build graph and tests. No new directories outside build. |
-| Applicable Rules | EXECUTION, source policy, original mirror/ABI and output-hygiene rules; the owner-approved frontend split is the product-boundary exception. |
-| Verification | Proposal S3 chains A/B with actual per-layer text/input/exit; hidden Console cooked/raw, mouse, Unicode, resize, scroll, control events, stream/EOF, identity and cleanup tests; cumulative DOS17/lifecycle/WOW headless gates and six-file production publication. |
-| Expected Markers | One root frontend, stable authenticated hidden native backends; no competing input readers, duplicate echo or leaked helpers; both nested topologies return through each original parent and retain results. |
-| Asset Needs | Existing immutable media and original/native Console contracts; prototype used only for selective reviewed mechanics. New build/test directories only below build/M0-T423/S3; runtime tests/logs in existing O:/winnt/tests and logs. |
-| Reporting Requirements | Finite callsite ledger, source-first recovery exceptions, protocol ownership and failure rules, exact tested artifacts and non-pass outcomes; no research-only capability claims. |
-| Stop Conditions | Guest changes, new scheduling policy, unauthenticated endpoint ownership, broadened scope or proven regression. |
-| Exit Criteria | Both mandatory S3 topologies and native backend contracts verified in production composition, cumulative gates met, coherent publication and clean pushed worktree. Physical desktop observation follows owner waiver; implementation is not waived. |
-| Original Owner Request | run16 owns all user KVM; ntvdm manages input queues/output events like machine, run16 like UI; first migrate DOS I/O, then hidden native Console, then Window. |
-| Similar-Issue Sweep | Direct/native-shell launch, inherited Console groups versus explicit new/detached Console, redirected/aliased streams, reentry from native CMD, root loss versus non-root loss, final output and canceled backend I/O. |
+| Admission And Approval | Owner approved independent frontend migration, then requested S4 closure, verified publication/commit/push and automatic sequential S admission. S3 ended as preservation/replanning, not hidden-backend functional completion. |
+| Objective | Independent frontend.exe owns character-session Console presentation and hidden backend/helper; every run16 is a direct-target launcher/client. Verify session identity, lifetime and DOS/native interaction. |
+| Non-goals | No guest changes, scheduler, native process-tree kill, Window/display or mouse implementation, unverified publication, or automatic T closure. |
+| Reference Baseline | S2 production d0f856a50; source/test checkpoint afb18fe5f; HEAD cebe14bb7. The reviewed S3 reference and exact-byte snapshot remain preserved. |
+| Files And ABI Surface | frontend-exe, launcher client, BaseSrv authenticated attachments, worker copied endpoint binding, formal graph and tests. Broker protocol 8, direct DOS 11, private helper 8; product 0.0.423. |
+| Applicable Rules | EXECUTION, source policy, original mirror/ABI, output hygiene and the owner-approved independent frontend boundary. |
+| Verification | x86 /MT CCPU40, ownership/transport and broker negatives; DOS17, two actual twelve-target chains, native eight, four lifetime cases, CMD/Explorer cleanup, streams, graphics return and separate WOW headless frontiers. Verify all seven published hashes and preserve recovery. |
+| Expected Markers | Independent frontend owner, no launcher input pump; GGGWDWGGGDWD and GGGDDWGGGWWD each have two distinct character frontends, correct actual I/O, results, DOS records and natural retirement. |
+| Asset Needs | Existing immutable media and native Console contracts. Reuse formal x86 caches; new temporary directories only under build/M0-T423/S4. No owner-desktop interaction. |
+| Reporting Requirements | Exact tested source/package/configuration, retained failure evidence and source-first ownership disposition; no compile-only or research-only runtime claims. |
+| Stop Conditions | Guest mutation, unauthenticated ownership, unapproved scheduling or proven product regression. |
+| Exit Criteria | Core independent frontend migration and its real normal/failure paths verified; final review, coherent seven-file publication, governance, reviewed commit/push. S5 receives expanded backend acceptance, not broken core migration. |
+| Original Owner Request | Preserve old work; move visible/hidden Console/helper and future Window/display to frontend.exe; run16 classifies, submits/starts and waits. Complete S4, publish at O:/winnt, then automatically admit S5 and later S tasks. |
+| Similar-Issue Sweep | Direct/native-shell/GUI launches, separate C groups, inherited versus new Console, streams/aliases, nested reentry, launcher/frontend/helper/worker failure, final output and cancellation. |
 
-S3 starts with a finite native launch/backend ownership audit and testable
-contract, then production composition. Do not copy the discarded prototype
-wholesale or certify only fixture behavior. S2 closure evidence is below.
-The [S3 ledger](../etc/evidence/m0-t423-s3-hidden-console-ledger.md) records
-the completed initial source audit, rejected prototype policies and finite
-implementation checklist. Existing root capability crosses Console ownership;
-execution Console membership does not, and needs a separately authenticated
-binding without changing original worker selection. No hidden backend is yet
-selected in production.
-The real hidden-attachment prerequisite now passes: an inherited visible-Console
-helper can separate only its own attachment and launch CMD/child on the hidden
-Console while preserving restricted frontend capability and exact result 37.
-The root is absent from the hidden membership and no helper window is visible.
-This narrows the execution-binding design but does not yet implement its broker
-registration or claim hidden backend production wiring.
-The subsequent helper-loss fixture passed three private-desktop runs: helper
-exit 99 leaves the native child and hidden Console input/output usable, followed
-by independent child result 37. Thus a cached helper connection alone cannot
-own the execution association. S3 now requires independent authenticated
-association retention across helper loss; frontend capability alone remains
-insufficient. See the S3 ledger for exact tests and the still-open RPC binding.
-Owner clarified and approved sole root ownership of hidden as well as visible
-Console resources. Inner run16 never creates/reclaims a frontend/backend on
-its own behalf; an invalid inherited association fails rather than becoming a
-new root. Helper-delegated native creation must return the actual target process
-capability/result to the requesting launcher. This contract is now explicit in
-the proposal and architecture; production hidden routing remains open.
-Owner's latest admission maps the authenticated root run16 lifetime to the
-interactive Console session lifetime. Root normal/abnormal exit or real Console
-closure closes only the DOS workers associated with that frontend, through the
-original VDM close path and a bounded close fallback. Non-root launcher loss
-does not terminate handed-off targets or workers. Display switching is not
-session closure. Native descendants and unrelated workers are not tree-killed.
-Completed direct-target results must survive later worker cleanup; unfinished
-DOS records fail explicitly when their worker closes. No guest changes or new
-scheduler. This supersedes the no-root-termination contract and the proposed
-input-pump retirement exception below; their observations remain historical.
-This completed S2 lifecycle contract remains binding throughout S3.
+## S4 Final Review
 
-## S2 Closure Record
+The [S3/S4 ledger](../etc/evidence/m0-t423-s3-hidden-console-ledger.md)
+contains exact source, test commands, artifacts and chronological non-pass
+attempts. The former long CURRENT has been retained verbatim, with adjusted
+relative links, in [prior status](../etc/evidence/m0-t423-restart-prior-status.md#archived-s4-pre-publication-status).
+Historical pending/deployment statements there are not current authority.
 
-The preceding unpaired-lifecycle package remains historical evidence, not the
-current root-session policy. It removed native kill-on-close Jobs and non-root
-launcher-driven worker termination; those removals remain. Root loss now means
-interactive session close, as admitted above. The proposed input-pump retirement
-exception is withdrawn rather than implemented.
+- Formal current x86 build is settled. run16, basesrv, frontend, ntvdm,
+  VDMREDIR and WOW32 match the current-source r checkpoint byte-for-byte.
+- The owner renamed dtmgr-exe/dtmgr.exe to monitor-exe/monitor.exe, including
+  the visible title NTVDM Task Monitor. Formal compilation and exact
+  private-buffer title/layout tests pass. The RPC wire type is unchanged.
+- Current r passed DOS17, both actual twelve-target chains, native eight,
+  lifetime four, new-Console three, ordinary/observed graphics return,
+  streams and DOS/WOW isolation. Source-only naming/layout changes to monitor
+  do not alter those execution binaries.
+- The final candidate retains the live SYSTEM.INI including WFWNET.DRV;
+  no live configuration or immutable guest file is overwritten. Its separate
+  WOW checks pass WINMINE main-window, SOL out-of-memory and WRITE out-of-memory
+  frontiers, without a character frontend; only WINMINE has a main window.
+- Historical pre-prompt timeouts have not reproduced with the corrected
+  strict process-isolation checks. Their missing exact failed-artifact and
+  live-worker evidence prevent causal attribution; passing repeats are not
+  called their repair. The evidence ledger and TODO retain the unattributed
+  historical observation and next live-capture action; no current reproduced
+  core migration defect is deferred to S5.
+- A read-only live-package audit found that O:/winnt already contains the
+  same six execution-file hashes as r plus the filename-renamed old manager.
+  This supersedes the older statement that O:/winnt remained at S2. No
+  attribution to another actor or verified publication is inferred from
+  file presence alone. The subsequent verified publication installed the new
+  manager title and checked all seven runtime hashes against the final manifest.
 
-Current implementation calls the unchanged original CntrlHandler on a bound
-worker thread when the authenticated root process ends. Unresolved close is
-bounded; pipe errors alone do not invoke it. Dead-root command rebinding is
-removed. All native Console presentation remains run16-owned.
+- Publication recovery is retained under build/M0-T423/S4/pre-publication.
+  All three configuration hashes were preserved. Published-path DOS17 passed
+  all 17 cases; the three separate WOW headless frontiers were also preserved.
+- Two formal graph regenerations preserve generated ROM/DEF contents and
+  timestamps without rebuilding production targets.
 
-The original BaseSrv ExitVDM cleanup was also proved to discard results before
-the process-death observer could preserve them: two new red fixtures expose
-completed 29 becoming zero and unfinished work not returning failure. The
-existing parent-result preservation is now shared by orderly DOS-worker ExitVDM
-and process rundown, without changing mirror record policy. The final x86
-build, 24 service modes, three client-close cases, DOS17, native/DOS nesting,
-keymouse, graphics/text return, root/non-root and broker/worker faults pass.
-Native CUI/GUI targets and descendants survive launcher loss; associated DOS
-workers close on root end, with correct completed/interrupted outcomes.
-WOW3 retains its recorded headless modal frontier. The exact tested six-file
-set is published at O:/winnt; the prior package remains recoverable in build.
-See the boundary ledger's root-session-close section for hashes and commands.
-
-Retained earlier S2 capabilities and source findings:
-
-- Protocol 10 and authenticated single-root channels carry DOS Console input,
-  text/cursor/geometry/layout and copied graphics/palette operations. BaseSrv
-  authorizes endpoints but never transports frames or input.
-- Original guest keyboard/mouse/video and command re-entry remain selected.
-  OPENNT-HOST-064 retains a coalesced original native-return notification;
-  DIV-312 fixes the original returned-key count/history index defect.
-- Native Console-selected keyboard-layout failure is preserved; the incorrect
-  thread-HKL fallback is gone. Text and local-graphics pointer counts are
-  independent and do not mutate the host text caret.
-- DOS17, native/DOS nesting, guest keymouse and graphics/text-return have
-  preceding production evidence. Every new production P must rerun affected
-  gates and publish the exact tested coherent six-file set.
-- The old NOIO test demonstrated an input-thread fatal-modal versus completion
-  handshake stall after root loss. Its replacement gate now asserts session
-  closure, retained root result and explicit unfinished inner-task failure.
-- WINMINE/SOL/WRITE manual foreground/playability is waived for this T only.
-  Separate headless frontier comparisons remain required; the NETWORK.DRV
-  modal baseline is not a full WOW functionality pass.
-- Channel cancellation, peer EOF, malformed requests, worker loss and receipt/
-  completion ordering have focused tests. Physical foreground activation and
-  pointer clipping/release physical observation is owner-waived as of
-  2026-09-26: source review and relevant unit tests replace that physical gate.
-  Do not manipulate the desktop or label waived observation as a runtime pass.
-
-The [boundary ledger](../etc/evidence/m0-t423-s2-console-boundary-ledger.md)
-retains detailed superseded attempts, exact source/artifact identities and
-non-pass outcomes. Its final S2 closure reconciliation maps every remaining
-obligation to source, tests, runtime evidence or the explicit desktop waiver.
-S2 is closed and S3 automatically admitted; no hidden Console or Window
-capability is claimed by S2. Display/Window remains S4, Window mouse S5 and
-final owner audit S6.
-
-A real-guest test proves DOS exits 7 and 99 preserve ERRORLEVEL and allow
-subsequent MEM in both DOS COMMAND /c and interactive COMMAND -> native CMD
-batch -> explicit run16 routes. The earlier native-BAT timeout was an actual
-Windows Unsupported 16-Bit Application modal: that test invoked a COM directly
-from modern CMD, bypassing run16. Read-only private-desktop evidence identifies
-the refused image; the corrected nested route passes without production changes.
-See the ledger's resolved batch-entry contrast; no host or guest workaround
-and no implicit native-CMD DOS interception is claimed.
+Final governance and commit/push remain pending; coherent publication and
+published-path regression are complete.
+S4 is still active; S5 has standing
+admission authority but is not yet active. No T closure is claimed.
 
 ## Current Technical Baseline
 
-S1 production revision c39b9ca0c contains launcher standalone-Console retirement
-and non-inherited Ctrl+C/Break completion handling, plus the authorized dtmgr
-layout correction. Its [evidence](../etc/evidence/m0-t423-s1-restart-lifecycle.md)
-records DOS17 and lifecycle passes and the specific owner build-only exception
-for incomplete current verification. That exception is not a WOW runtime pass.
-Temporary SYSTEM.INI changes were restored. The first S2 production delivery
-supersedes S1 at O:/winnt; the latest set uses protocol-5 BaseSrv and protocol-10 direct Console
-transport; ordinary configuration and guest media remain unchanged. S1 is
-retained as the recoverable pre-migration package, not the current deployment.
-
-## S1 Closure Record
-
-S1 bounded implementation/verification and P delivery are complete. On owner
-one-time authorization, remote main 7e581d8ea was replaced by c39b9ca0c using
-an explicit expected-tip lease; local/remote comparison was 0/0 and the
-worktree was clean. The reference branch retains the old remote history.
-The force-push authorization is consumed; ordinary pushes remain authorized.
-T423 remains open and requires final owner acceptance.
-Detailed outcomes and the bounded exception remain in the
-[S1 closure evidence](../etc/evidence/m0-t423-s1-restart-lifecycle.md).
+- S1 delivered the launcher lifecycle boundary under its recorded owner
+  verification exception; [S1 evidence](../etc/evidence/m0-t423-s1-restart-lifecycle.md).
+  The one-time force-push authorization was consumed. Ordinary push remains
+  permanently authorized.
+- S2 delivered copied DOS I/O and the original session-close contract;
+  [S2 ledger](../etc/evidence/m0-t423-s2-console-boundary-ledger.md). Its
+  root-run16 owner has been superseded by independent frontend, not by
+  launcher-driven target termination.
+- S3 is preserved/replanned, not hidden-Console functional acceptance.
+  Reference codex/t423-s3-frontend-handoff and its exact snapshot remain
+  available; no work was reset or discarded.
+- After S4: S5 expanded hidden-backend matrix; S6 display/Window and current
+  nxvm libraries; S7 Window mouse; S8 minimization, full regression and owner
+  T acceptance. Later work cannot retroactively excuse missing core S4 gates.
+- Physical focus and pointer-clipping observation are owner-waived for this
+  T when source review/unit evidence covers the contract. Private-desktop
+  integration remains required. Win16 interactive playability is owner-waived;
+  separate headless frontiers remain required, never full WOW acceptance.
 
 ## Recent M0 Closures
 
-Prior status chronology is retained in
-[restart evidence](../etc/evidence/m0-t423-restart-prior-status.md).
-T422 remains closed; historical packets are not reopened.
+## S1 Closure Record
+
+S1 was delivered and pushed under the recorded owner verification exception;
+see [S1 closure evidence](../etc/evidence/m0-t423-s1-restart-lifecycle.md).
+The one-time force push was completed with an explicit expected-tip lease.
+
+## S2 Closure Record
+
+S2 was built, tested, published and pushed; its original close/result contracts
+are retained in the [S2 closure ledger](../etc/evidence/m0-t423-s2-console-boundary-ledger.md).
+Independent frontend replaces its UI owner, not its accepted task semantics.
+
+## S3 Closure Record
+
+S3 concluded as preservation/replanning only, not functional hidden-backend
+completion. The [S3 snapshot and handoff](../etc/evidence/m0-t423-s3-hidden-console-ledger.md)
+preserves exact WIP, tests and remaining S4/S5 obligations. No reset or loss.
+
+## Previous Task Closures
+
+T422 remains owner-closed. Earlier task facts and the pre-restart baseline are
+retained in [prior status](../etc/evidence/m0-t423-restart-prior-status.md).
 
 ## Recent Governance
 
-The six-stage plan remains S1 lifecycle, S2 DOS I/O, S3 hidden Console,
-S4 display/Window, S5 Window mouse, S6 final audit.
+One active packet only. Queue order is unchanged. The complete goal and T423
+remain open until all admitted stages and final owner acceptance are complete.

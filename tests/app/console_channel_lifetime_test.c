@@ -4,11 +4,13 @@
 #include <windows.h>
 #include <stdio.h>
 #include <stddef.h>
+#include "frontend-exe/native_console_frontend.h"
 #define run16_console_dispatch actual_dispatch
-#include "../../src/run16-exe/console_frontend.c"
+#include "../../src/frontend-exe/console_frontend.c"
 #undef run16_console_dispatch
-#include "../../src/run16-exe/console_video.c"
+#include "../../src/frontend-exe/console_video.c"
 static HANDLE read_entered,peer;
+static run16_native_frontend *test_frontend;
 static DWORD expected_generation;
 DWORD run16_console_dispatch(run16_console_frontend *owner,
     const console_io_request *request,console_io_reply *reply)
@@ -16,7 +18,7 @@ DWORD run16_console_dispatch(run16_console_frontend *owner,
     if(request->operation==CONSOLE_IO_READ_INPUT) SetEvent(read_entered);
     return actual_dispatch(owner,request,reply);
 }
-#include "../../src/run16-exe/console_channel.c"
+#include "../../src/frontend-exe/console_channel.c"
 #define CHECK(x) do { if(!(x)) { fprintf(stderr,"FAIL line=%u error=%lu\n", \
     (unsigned)__LINE__,GetLastError());ExitProcess(1); } } while(0)
 DWORD OpenNtBaseClientAttachFrontendRequest(DWORD request,HANDLE pipe,
@@ -64,7 +66,8 @@ static void run_case(unsigned mode,unsigned round)
             &worker,SYNCHRONIZE,FALSE,0));
     } else CHECK(DuplicateHandle(GetCurrentProcess(),GetCurrentProcess(),GetCurrentProcess(),
         &worker,SYNCHRONIZE,FALSE,0));
-    CHECK(!run16_console_channel_start_request(expected_generation,worker,&channel));
+    CHECK(!run16_console_channel_start_request(expected_generation,worker,test_frontend,&channel));
+    CHECK(!run16_native_frontend_dos_bind(test_frontend,channel,TRUE));
     CHECK(DuplicateHandle(GetCurrentProcess(),channel->thread,GetCurrentProcess(),
         &thread,0,FALSE,DUPLICATE_SAME_ACCESS));
     CHECK(DuplicateHandle(GetCurrentProcess(),channel->ready,GetCurrentProcess(),
@@ -80,8 +83,10 @@ static void run_case(unsigned mode,unsigned round)
         request.state.input=1;request.state.count=1;
         peer_io(TRUE,&request,(DWORD)offsetof(console_io_request,data));
         CHECK(WaitForSingleObject(read_entered,5000)==WAIT_OBJECT_0);
-        /* No producer exists: the empty native Console read cannot complete
-         * normally. Cancellation must join it without injecting a key. */
+        /* Production binding holds the I/O lock: an empty read must return
+         * immediately, otherwise native handoff/teardown would deadlock. */
+        peer_io(FALSE,&reply,(DWORD)offsetof(console_io_reply,data));
+        CHECK(reply.result && !reply.state.count && !reply.bytes && reply.sequence==2);
         CHECK(WaitForSingleObject(thread,0)==WAIT_TIMEOUT);
     } else if(mode==2) {
         /* Acknowledged normal output followed by peer EOF races owner stop. */
@@ -125,13 +130,15 @@ int main(int argc,char **argv)
     unsigned round,mode;DWORD before,after;
     if(argc==2 && !strcmp(argv[1],"--worker-wait")) {Sleep(INFINITE);return 0;}
     read_entered=CreateEventW(NULL,TRUE,FALSE,NULL);CHECK(read_entered);
+    CHECK(!run16_native_frontend_create(&test_frontend));
     /* Warm up lazy runtime/Console resources before counting owned handles. */
     for(mode=0;mode<5;++mode) run_case(mode,0);
     CHECK(GetProcessHandleCount(GetCurrentProcess(),&before));
     for(round=1;round<=16;++round)
         for(mode=0;mode<5;++mode) run_case(mode,round);
     CHECK(GetProcessHandleCount(GetCurrentProcess(),&after) && after==before);
+    run16_native_frontend_destroy(test_frontend);
     CloseHandle(read_entered);
-    puts("PASS 85 real channel lifetimes: pipe/read cancel, barrier/EOF/stop race, oversized request, real process death; joined threads, EOF readiness, no handle growth");
+    puts("PASS 85 real channel lifetimes: pipe cancel, nonblocking empty input, barrier/EOF/stop race, oversized request, real process death; joined threads, EOF readiness, no handle growth");
     return 0;
 }

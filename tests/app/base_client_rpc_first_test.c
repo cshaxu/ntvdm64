@@ -109,6 +109,9 @@ static int reservation_child(int wait_frontend)
         CloseHandle(pipe);CloseHandle(frontend);CloseHandle(ready);
         REQUIRE(OpenNtBaseClientTakeFrontend(&pipe,&frontend,&generation,&ready)==ERROR_ALREADY_EXISTS);
         REQUIRE(!pipe && !frontend && !generation && !ready);
+        REQUIRE(OpenNtBaseClientWaitFrontend(&pipe,&frontend,&generation,&ready)==ERROR_ALREADY_EXISTS);
+        REQUIRE(!pipe && !frontend && !generation && !ready);
+        puts("PASS: duplicate frontend wait returns terminal status through real RPC");
     }
     REQUIRE(get_first_command(command,sizeof(command))==STATUS_SUCCESS);
     REQUIRE(!lstrcmpA(command,"MEM\\r\\n"));

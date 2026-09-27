@@ -9,9 +9,16 @@ DWORD OpenNtBaseClientConnectCurrent(void);
 /* Arm only after launcher creation rollback is no longer required. Workers
  * arm immediately after Connect, before entering guest code. */
 DWORD OpenNtBaseClientWatchBroker(void);
+DWORD OpenNtBaseClientFrontendUsage(DWORD *pending,DWORD *tasks);
+DWORD OpenNtBaseClientRetireFrontend(void);
 DWORD OpenNtBaseClientRegisterFrontendRoot(HANDLE capability);
 DWORD OpenNtBaseClientWorkerFrontendCapability(HANDLE *capability);
 DWORD OpenNtBaseClientRetainFrontendRoot(HANDLE capability,HANDLE *root,DWORD *generation);
+/* Separate execution association; caller owns/closes the wait-only event. */
+DWORD OpenNtBaseClientAcquireConsoleContext(HANDLE frontend,HANDLE *capability);
+DWORD OpenNtBaseClientBindConsoleContext(HANDLE capability);
+DWORD OpenNtBaseClientSubmitFrontendChannel(HANDLE capability,HANDLE channel);
+DWORD OpenNtBaseClientTakeFrontendChannel(HANDLE *channel,HANDLE *caller_process,HANDLE *execution);
 DWORD OpenNtBaseClientRequestFrontend(HANDLE capability);
 DWORD OpenNtBaseClientFrontendRequest(DWORD *request,HANDLE *worker);
 DWORD OpenNtBaseClientAttachFrontendRequest(DWORD request,HANDLE pipe,HANDLE ready,DWORD *generation);

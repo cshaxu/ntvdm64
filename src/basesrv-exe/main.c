@@ -253,6 +253,21 @@ error_status_t Server_BrokerProcess(handle_t binding,VDM_CONNECTION connection,H
             server,SYNCHRONIZE,FALSE,0)) return GetLastError();
     return ERROR_SUCCESS;
 }
+error_status_t Server_SubmitFrontendChannel(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+    ULONG generation,HANDLE capability,HANDLE channel)
+{
+    DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    return error ? error : OpenNtBaseServiceSubmitFrontendChannel(connection,pid,generation,capability,channel);
+}
+error_status_t Server_TakeFrontendChannel(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+    ULONG generation,HANDLE *channel,HANDLE *caller_process,HANDLE *execution)
+{
+    DWORD pid,error;
+    *channel=NULL;*caller_process=NULL;*execution=NULL;
+    error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    return error ? error : OpenNtBaseServiceTakeFrontendChannel(connection,pid,generation,
+        channel,caller_process,execution);
+}
 error_status_t Server_WorkerFrontendCapability(handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,HANDLE *capability)
 {
@@ -260,6 +275,21 @@ error_status_t Server_WorkerFrontendCapability(handle_t binding,VDM_CONNECTION c
     *capability=NULL;
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
     return error ? error : OpenNtBaseServiceWorkerFrontendCapability(connection,pid,generation,capability);
+}
+error_status_t Server_AcquireConsoleContext(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+    ULONG generation,HANDLE frontend,HANDLE *capability)
+{
+    DWORD pid,error;
+    *capability=NULL;
+    error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    return error ? error : OpenNtBaseServiceAcquireConsoleContext(connection,pid,generation,
+        frontend,capability);
+}
+error_status_t Server_BindConsoleContext(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+    ULONG generation,HANDLE capability)
+{
+    DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    return error ? error : OpenNtBaseServiceBindConsoleContext(connection,pid,generation,capability);
 }
 error_status_t Server_RegisterFrontendRoot(handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,HANDLE capability)
@@ -275,6 +305,20 @@ error_status_t Server_RetainFrontendRoot(handle_t binding,VDM_CONNECTION connect
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
     return error ? error : OpenNtBaseServiceRetainFrontendRoot(connection,pid,generation,
         capability,root,root_generation);
+}
+error_status_t Server_FrontendUsage(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+    ULONG generation,ULONG *pending,ULONG *tasks)
+{
+    DWORD pid,error;
+    if(!pending || !tasks)return ERROR_INVALID_PARAMETER;
+    *pending=*tasks=0;
+    error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    return error ? error : OpenNtBaseServiceFrontendUsage(connection,pid,generation,pending,tasks);
+}
+error_status_t Server_RetireFrontend(handle_t binding,VDM_CONNECTION connection,HANDLE process,ULONG generation)
+{
+    DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    return error ? error : OpenNtBaseServiceRetireFrontend(connection,pid,generation);
 }
 error_status_t Server_RequestFrontend(handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,HANDLE capability)
@@ -594,7 +638,7 @@ int main(void)
         (void)OpenNtBaseServiceStop(service);
         return (int)error;
     }
-    result=RpcServerRegisterIf3(Server_vdm_service_v5_0_s_ifspec,NULL,NULL,
+    result=RpcServerRegisterIf3(Server_vdm_service_v8_0_s_ifspec,NULL,NULL,
         RPC_IF_ALLOW_SECURE_ONLY | RPC_IF_ALLOW_LOCAL_ONLY,RPC_C_LISTEN_MAX_CALLS_DEFAULT,
         (unsigned)-1,authorize,NULL);
     if (!result) {
@@ -605,7 +649,7 @@ int main(void)
          * normal worker/launcher teardown. */
         basesrv_schedule_empty_stop();
         result=RpcServerListen(1,RPC_C_LISTEN_MAX_CALLS_DEFAULT,FALSE);
-        RpcServerUnregisterIf(Server_vdm_service_v5_0_s_ifspec,NULL,TRUE);
+        RpcServerUnregisterIf(Server_vdm_service_v8_0_s_ifspec,NULL,TRUE);
     }
     basesrv_cancel_empty_timer();
     if (!OpenNtBaseServiceStop(service)) return ERROR_BUSY;

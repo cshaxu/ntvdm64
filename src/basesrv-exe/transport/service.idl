@@ -1,12 +1,38 @@
 import "wtypes.idl";
 [
     uuid(7d3e78bd-0472-4736-8797-e64e966d692e),
-    version(5.0),
+    version(8.0),
     pointer_default(unique)
 ]
 interface vdm_service
 {
     typedef [context_handle] void *VDM_CONNECTION;
+    /* Authentication/attachment only. Launch and I/O data bypass BaseSrv. */
+    error_status_t SubmitFrontendChannel(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [in, system_handle(sh_event)] HANDLE capability,
+        [in, system_handle(sh_pipe)] HANDLE channel);
+    error_status_t TakeFrontendChannel(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [out, system_handle(sh_pipe)] HANDLE *channel,
+        [out, system_handle(sh_process)] HANDLE *caller_process,
+        [out, system_handle(sh_event)] HANDLE *execution);
+    /* Execution Console association only; not frontend ownership or task selection. */
+    error_status_t AcquireConsoleContext(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [in, system_handle(sh_event)] HANDLE frontend,
+        [out, system_handle(sh_event)] HANDLE *capability);
+    error_status_t BindConsoleContext(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [in, system_handle(sh_event)] HANDLE capability);
     error_status_t WorkerFrontendCapability(
         [in] handle_t binding, [in] VDM_CONNECTION connection,
         [in, system_handle(sh_process)] HANDLE process,
@@ -271,4 +297,14 @@ interface vdm_service
         [in, system_handle(sh_process)] HANDLE process,
         [in] unsigned long generation,
         [in] unsigned long window);
+    error_status_t FrontendUsage(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [out] unsigned long *pending,
+        [out] unsigned long *tasks);
+    error_status_t RetireFrontend(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation);
 }

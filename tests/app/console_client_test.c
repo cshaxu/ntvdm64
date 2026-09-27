@@ -3,7 +3,7 @@
  * even through the native API. Only broker delivery and session binding are
  * stubbed; both I/O implementations and Console operations are real. */
 #include "ntvdm-exe/win32/console_client.h"
-#include "run16-exe/console_frontend.h"
+#include "frontend-exe/console_frontend.h"
 static BOOL native_write_cells(HANDLE output,const CHAR_INFO *buffer,COORD size,
     COORD origin,PSMALL_RECT region) { return WriteConsoleOutputW(output,buffer,size,origin,region); }
 static BOOL native_read_cells(HANDLE output,PCHAR_INFO buffer,COORD size,
@@ -41,7 +41,13 @@ static HANDLE delivery,peer,stop,readiness,frontend_process;
 static session_teardown_fn cleanup;
 static void *cleanup_context;
 static run16_console_frontend frontend;
+static BOOL dos_active;
+static DWORD bind_dos(void *context,BOOL active)
+{
+    (void)context;dos_active=active;return ERROR_SUCCESS;
+}
 static BOOL hang_close;
+static DWORD execution_error;
 int session_thread_bind(session *instance) { bound=instance;return 1; }
 int session_thread_unbind(session *instance) { CHECK(bound==instance);bound=NULL;return 1; }
 BOOL CntrlHandler(ULONG type)
@@ -57,6 +63,14 @@ void OpenNtBaseClientSetCommandBinding(DWORD (*ready)(void *),void *context)
 DWORD OpenNtBaseClientWorkerFrontendCapability(HANDLE *capability)
 {
     /* Broker identity is exercised in the service/RPC tests, not this I/O fixture. */
+    *capability=CreateEventW(NULL,TRUE,FALSE,NULL);
+    return *capability ? ERROR_SUCCESS : GetLastError();
+}
+DWORD OpenNtBaseClientAcquireConsoleContext(HANDLE root_capability,HANDLE *capability)
+{
+    CHECK(root_capability!=NULL);
+    *capability=NULL;
+    if (execution_error) return execution_error;
     *capability=CreateEventW(NULL,TRUE,FALSE,NULL);
     return *capability ? ERROR_SUCCESS : GetLastError();
 }
@@ -144,6 +158,7 @@ int main(int argc,char **argv)
     frontend.input=CreateFileW(L"CONIN$",GENERIC_READ|GENERIC_WRITE,FILE_SHARE_READ|FILE_SHARE_WRITE,
         NULL,OPEN_EXISTING,0,NULL);
     frontend.generation=17;
+    frontend.activate=bind_dos;
     CHECK(local!=INVALID_HANDLE_VALUE && frontend.output!=INVALID_HANDLE_VALUE &&
         frontend.input!=INVALID_HANDLE_VALUE);
     CHECK(SetConsoleActiveScreenBuffer(frontend.output));
@@ -156,6 +171,48 @@ int main(int argc,char **argv)
     stop=CreateEventW(NULL,TRUE,FALSE,NULL);CHECK(stop);
     thread=CreateThread(NULL,0,serve,NULL,0,NULL);CHECK(thread);
     CHECK(!ntvdm_console_client_begin(&owner));bound=&owner;
+    CHECK(dos_active && ntvdm_console_set_active(FALSE) && !dos_active &&
+        ntvdm_console_set_active(TRUE) && dos_active);
+    {
+        HANDLE input=CreateFileA("CONIN$",GENERIC_READ|GENERIC_WRITE,
+            FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,OPEN_EXISTING,0,NULL);
+        HANDLE output=CreateFileW(L"CONOUT$",GENERIC_READ|GENERIC_WRITE,
+            FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,OPEN_EXISTING,0,NULL),alias=NULL;
+        HANDLE unrelated=CreateEventW(NULL,TRUE,FALSE,NULL);
+        CONSOLE_SCREEN_BUFFER_INFO info;
+        DWORD mode,expected;
+        CHECK(input!=INVALID_HANDLE_VALUE && output!=INVALID_HANDLE_VALUE && unrelated);
+        CHECK(ntvdm_console_handle_kind(input)==1 && ntvdm_console_handle_kind(output)==2);
+        CHECK(!ntvdm_console_handle_kind(unrelated) && GetFileType(input)==FILE_TYPE_CHAR);
+        CHECK(!native_get_mode(input,&mode)); /* Event identity, not a local Console. */
+        CHECK(native_get_mode(frontend.input,&expected) && GetConsoleMode(input,&mode) && mode==expected);
+        CHECK(GetConsoleScreenBufferInfo(output,&info));
+        CHECK(!GetConsoleScreenBufferInfo(input,&info));
+        CHECK(DuplicateHandle(GetCurrentProcess(),output,GetCurrentProcess(),&alias,0,FALSE,DUPLICATE_SAME_ACCESS));
+        CHECK(CloseHandle(output) && ntvdm_console_handle_kind(alias)==2);
+        CHECK(GetConsoleMode(alias,&mode));
+        CHECK(!GetConsoleMode(unrelated,&mode));
+        CHECK(CloseHandle(alias) && CloseHandle(input) && CloseHandle(unrelated));
+        puts("PASS local Console identities, direction, duplicate/close and unrelated-handle rejection");
+    }
+    {
+        HANDLE root_capability=NULL,execution=NULL;
+        DWORD handle_flags,before,after;
+        CHECK(ntvdm_console_inherit_launch_capabilities(&root_capability,&execution));
+        CHECK(root_capability && execution);
+        CHECK(GetHandleInformation(root_capability,&handle_flags) && (handle_flags&HANDLE_FLAG_INHERIT));
+        CHECK(GetHandleInformation(execution,&handle_flags) && (handle_flags&HANDLE_FLAG_INHERIT));
+        CHECK(WaitForSingleObject(execution,0)==WAIT_TIMEOUT);
+        CHECK(!SetEvent(execution) && GetLastError()==ERROR_ACCESS_DENIED);
+        CloseHandle(root_capability);CloseHandle(execution);
+        CHECK(GetProcessHandleCount(GetCurrentProcess(),&before));
+        execution_error=ERROR_PIPE_NOT_CONNECTED;
+        CHECK(!ntvdm_console_inherit_launch_capabilities(&root_capability,&execution));
+        CHECK(GetLastError()==execution_error && !root_capability && !execution);
+        execution_error=0;
+        CHECK(GetProcessHandleCount(GetCurrentProcess(),&after) && before==after);
+        puts("PASS worker exports separate inheritable wait-only capabilities; failed export rolls back");
+    }
     {
         typedef BOOL (WINAPI *query_layout)(LPSTR);
         query_layout query=(query_layout)GetProcAddress(GetModuleHandleW(L"kernel32.dll"),

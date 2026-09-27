@@ -2,11 +2,14 @@
 param(
     [Parameter(Mandatory)][string]$Observer,
     [string]$PackageRoot = 'O:\winnt',
+    [string]$ProcessPackageRoot,
     [string]$LogRoot = 'O:\winnt\logs',
     [string]$LogPrefix = 'm0-t412-s8-exit',
     [string[]]$Cases,
     [string]$GuestFixturePath,
-    [string]$VideoGuestFixturePath
+    [string]$VideoGuestFixturePath,
+    [string]$FrontendObserver,
+    [switch]$OrdinaryFrontend
 )
 $ErrorActionPreference = 'Stop'
 $Observer = (Resolve-Path -LiteralPath $Observer).Path
@@ -33,9 +36,19 @@ $generatedFixtures = @(
     (Join-Path $runtimeFixtureRoot 'EOF.CMD'),
     (Join-Path $runtimeFixtureRoot 'D7.CMD')
 )
-$productPaths = @('run16.exe','ntvdm.exe','basesrv.exe') | ForEach-Object { Join-Path $PackageRoot $_ }
+$productPaths = @('run16.exe','ntvdm.exe','basesrv.exe','frontend.exe') | ForEach-Object { Join-Path $PackageRoot $_ }
+if($ProcessPackageRoot){
+    $ProcessPackageRoot=(Resolve-Path -LiteralPath $ProcessPackageRoot).Path
+    foreach($name in @('run16.exe','ntvdm.exe','basesrv.exe','frontend.exe')){
+        $physical=Join-Path $ProcessPackageRoot $name
+        if((Get-FileHash $physical).Hash -ne (Get-FileHash (Join-Path $PackageRoot $name)).Hash){
+            throw "Process package differs from launch package: $name"
+        }
+        $productPaths+= $physical
+    }
+}
 function Get-PackageProcesses {
-    @(Get-CimInstance Win32_Process -Filter "Name='run16.exe' OR Name='ntvdm.exe' OR Name='basesrv.exe'" |
+    @(Get-CimInstance Win32_Process -Filter "Name='run16.exe' OR Name='ntvdm.exe' OR Name='basesrv.exe' OR Name='frontend.exe'" |
         Where-Object { $_.ExecutablePath -in $productPaths })
 }
 function Test-ExactFileBytes {
@@ -127,17 +140,27 @@ $matrix = @(
     # No line-level wait for an owner change: keep typing through DOS/native
     # handoff. The observer still emits ordinary paired key records.
     @{ Name='dos-native-typeahead'; Supplemental=$true; Text="cmd.exe /d`rrun16 mem`rexit`rmem`rexit`r"; LineDelayMs=0; Code=1; ConsoleMarkers=@('bytes total conventional memory','Microsoft Windows [Version'); ConsoleMarkerCount=2 },
+    @{ Name='frontend-chain-a'; Supplemental=$true; Text="cmd.exe /d`rrun16 command.com`rcmd.exe /d`recho S3-A-NATIVE-INNER`rexit /b 37`rmem`rexit`recho S3-A-PARENT-RETURN-%errorlevel%`rexit /b 23`rmem`rexit`r"; LineDelayMs=1000; TimeoutMs=45000; Code=1; ConsoleMarkers=@('bytes total conventional memory','Microsoft Windows [Version'); ConsoleMarkerCount=2; ExactConsoleLines=@('S3-A-NATIVE-INNER','S3-A-PARENT-RETURN-1'); NativeExitCodes=@(37,23) },
+    @{ Name='frontend-chain-b'; Supplemental=$true; Args=@('cmd.exe','/d'); Text="run16 command.com`rcmd.exe /d`rrun16 command.com`rmem`rexit`recho S3-B-INNER-RETURN-%errorlevel%`rexit /b 37`rmem`rexit`recho S3-B-ROOT-RETURN-%errorlevel%`rexit /b 23`r"; LineDelayMs=1000; TimeoutMs=45000; Code=23; ConsoleMarkers=@('bytes total conventional memory','Microsoft Windows [Version'); ConsoleMarkerCount=2; ExactConsoleLines=@('S3-B-INNER-RETURN-1','S3-B-ROOT-RETURN-1'); NativeExitCodes=@(37,23) },
     @{ Name='worker-version-rejection'; Args=@('MEM.EXE'); Code=1306; Negative=$true }
 )
 foreach ($case in $matrix) {
-    if ($case.Name -in @('native-cmd-dos-repeat','dos-native-dos','dos-native-typeahead')) {
+    if ($case.Name -in @('native-cmd-dos-repeat','dos-native-dos','dos-native-typeahead','frontend-chain-a','frontend-chain-b')) {
         $case.RootFrontend=$true
     }
 }
 foreach ($selected in $Cases) {
     if ($selected -notin $matrix.Name) { throw "Unknown case: $selected" }
 }
-$environmentNames = @('MVDM_BASESRV_TRACE_PATH','MVDM_S34_TRACE_PATH')
+if($OrdinaryFrontend -and $FrontendObserver){throw 'Select ordinary or instrumented frontend, not both'}
+if(!$OrdinaryFrontend -and @($matrix | Where-Object {$_.RootFrontend -and $_.Name -in $Cases}).Count){
+    if(!$FrontendObserver -or
+       (Get-FileHash -LiteralPath $FrontendObserver).Hash -ne
+       (Get-FileHash -LiteralPath (Join-Path $PackageRoot 'frontend.exe')).Hash){
+        throw 'Owner cases require the test-only frontend observer in the isolated test package'
+    }
+}
+$environmentNames = @('MVDM_BASESRV_TRACE_PATH','MVDM_S34_TRACE_PATH','MVDM_TEST_FRAME_REPORT')
 $previous = @{}
 foreach ($name in $environmentNames) { $previous[$name]=[Environment]::GetEnvironmentVariable($name) }
 $results = @()
@@ -148,8 +171,9 @@ try {
         $report=Join-Path $LogRoot "$LogPrefix-$($case.Name).txt"
         if (Test-Path -LiteralPath $report) { throw "Use a fresh log prefix: $report exists" }
         [Environment]::SetEnvironmentVariable($environmentNames[0],"$report.broker.log")
-        if($case.RootFrontend){[Environment]::SetEnvironmentVariable('MVDM_S34_TRACE_PATH',"$report.frontend.log")}
-        else{[Environment]::SetEnvironmentVariable('MVDM_S34_TRACE_PATH',$previous['MVDM_S34_TRACE_PATH'])}
+        if($OrdinaryFrontend){[Environment]::SetEnvironmentVariable('MVDM_TEST_FRAME_REPORT',$null)}
+        elseif($case.RootFrontend){[Environment]::SetEnvironmentVariable('MVDM_TEST_FRAME_REPORT',"$report.frontend.log")}
+        else{[Environment]::SetEnvironmentVariable('MVDM_TEST_FRAME_REPORT',$previous['MVDM_TEST_FRAME_REPORT'])}
         $arguments=@((Join-Path $PackageRoot 'run16.exe'),$PackageRoot,$report)
         if ($case.Args) { $arguments += $case.Args } else { $arguments += 'COMMAND.COM' }
         if ($case.Text) {
@@ -159,10 +183,12 @@ try {
             }
         }
         if ($case.Edit) { $arguments += '--observe-console-edit-return' }
-        $arguments += @('--observation-timeout-ms','20000')
+        $arguments += @('--observation-timeout-ms',$(if($case.TimeoutMs){$case.TimeoutMs}else{20000}))
         $launcherId = 0
         $reportedChildren = @()
         $observedDescendants = [Collections.Generic.HashSet[int]]::new()
+        $nativeWaiters=@{}
+        $frontendWaiters=@{}
         $observation = Start-Process -FilePath $Observer -ArgumentList $arguments -WorkingDirectory $PackageRoot -WindowStyle Hidden -PassThru
         try {
             if($case.Supplemental){
@@ -171,7 +197,7 @@ try {
                 do {
                     # Include the native CMD relay while it is alive; after
                     # exit, a product-only snapshot cannot reconstruct it.
-                    $tree=@(Get-CimInstance Win32_Process | Select-Object ProcessId,ParentProcessId)
+                    $tree=@(Get-CimInstance Win32_Process | Select-Object ProcessId,ParentProcessId,Name,ExecutablePath,CommandLine)
                     for($depth=0;$depth -lt 8;++$depth){
                         $added=$false
                         foreach($node in $tree){
@@ -180,6 +206,38 @@ try {
                             }
                         }
                         if(!$added){break}
+                    }
+                    if($case.NativeExitCodes){
+                        foreach($node in $tree){
+                            $nativeId=[int]$node.ProcessId
+                            if($node.Name -eq 'cmd.exe' -and $observedDescendants.Contains($nativeId) -and !$nativeWaiters.ContainsKey($nativeId)){
+                                $probe=$null
+                                try {
+                                    $probe=Get-Process -Id $nativeId -ErrorAction Stop
+                                    if($probe.ProcessName -ne 'cmd'){throw 'Process identity changed'}
+                                    # Pin the actual process object while it is alive;
+                                    # its exit code remains observable after PID reuse.
+                                    $null=$probe.Handle
+                                    $nativeWaiters[$nativeId]=$probe
+                                } catch {if($probe){$probe.Dispose()}}
+                            }
+                        }
+                    }
+                    if($OrdinaryFrontend -and $case.RootFrontend){
+                        foreach($node in $tree){
+                            $frontendId=[int]$node.ProcessId
+                            if($node.ExecutablePath -eq (Join-Path $PackageRoot 'frontend.exe') -and
+                                $node.CommandLine -match '--session\s' -and
+                                $observedDescendants.Contains($frontendId) -and !$frontendWaiters.ContainsKey($frontendId)){
+                                $probe=$null
+                                try {
+                                    $probe=Get-Process -Id $frontendId -ErrorAction Stop
+                                    $null=$probe.Handle
+                                    if($probe.Path -ne $node.ExecutablePath){throw 'Frontend identity changed'}
+                                    $frontendWaiters[$frontendId]=$probe
+                                } catch {if($probe){$probe.Dispose()}}
+                            }
+                        }
                     }
                     if($observation.WaitForExit(100)){break}
                 } while([DateTime]::UtcNow -lt $treeDeadline)
@@ -210,6 +268,24 @@ try {
                 throw "Missing captured guest Console text: $($case.Name)"
             }
             $screen=Get-Content -LiteralPath $consolePath -Raw
+            if($case.NativeExitCodes){
+                $nativeResults=@(foreach($pair in $nativeWaiters.GetEnumerator()){
+                    [pscustomobject]@{ProcessId=$pair.Key;Ended=$pair.Value.HasExited;Code=$(if($pair.Value.HasExited){$pair.Value.ExitCode}else{$null})}
+                })
+                $nativeResults | ConvertTo-Json | Set-Content -LiteralPath "$report.native-results.json" -Encoding UTF8
+                foreach($code in $case.NativeExitCodes){
+                    if(!@($nativeResults | Where-Object {$_.Ended -and $_.Code -eq $code}).Count){
+                        throw "Missing actual native completion $code in $($case.Name)"
+                    }
+                }
+            }
+            foreach($line in $case.ExactConsoleLines) {
+                # An echoed command is not evidence that the inner shell ran
+                # it or observed its direct target's actual completion code.
+                if($screen -notmatch ('(?m)^\[\d+\]\s*'+[regex]::Escape($line)+'\s*$')) {
+                    throw "Missing executed output line for $($case.Name): $line"
+                }
+            }
             # The Console observer preserves physical rows.  A narrow remote
             # viewport may split one guest sentence across rows, so assertions
             # must consume the same display text with row separators removed.
@@ -231,15 +307,16 @@ try {
                 [regex]::Matches($screenForMarkers,[regex]::Escape(($case.ConsoleMarkers[0] -replace '\s',''))).Count -ne $case.ConsoleMarkerCount) {
                 throw "Unexpected guest Console marker count for $($case.Name): $($case.ConsoleMarkers[0])"
             }
-            if($case.RootFrontend){
+            if($case.RootFrontend -and $OrdinaryFrontend){
+                @($frontendWaiters.Keys) | ConvertTo-Json | Set-Content -LiteralPath "$report.frontend-pids.json" -Encoding UTF8
+                if($frontendWaiters.Count -ne 1 -or $frontendWaiters.ContainsKey($launcherId)){
+                    throw 'Expected one observed independent frontend session in the ordinary package'
+                }
+            }elseif($case.RootFrontend){
                 $identity=Get-Content -LiteralPath "$report.frontend.log" -Raw
-                $owners=@([regex]::Matches($identity,'(?m)^(\d+) run16-frontend-owner (\d+)\r?$'))
-                if(!$owners.Count){throw 'No production frontend owner observed'}
-                foreach($owner in $owners){
-                    if([int]$owner.Groups[1].Value -ne $launcherId -or
-                       [int]$owner.Groups[2].Value -ne $launcherId){
-                        throw "Frontend ownership mismatch: root=$launcherId actual=$($owner.Groups[1].Value)"
-                    }
+                $owners=@([regex]::Matches($identity,'(?m)^RECEIVER pid=(\d+)\r?$'))
+                if($owners.Count -ne 1 -or [int]$owners[0].Groups[1].Value -eq $launcherId){
+                    throw 'Expected one independent frontend receiver across nested DOS/native work'
                 }
             }
             # The product deliberately has no native-child report hook.  A
@@ -265,6 +342,8 @@ try {
             $results += [pscustomobject]@{ Case=$case.Name; Expected=$case.Code; Actual=$actual; Report=$report }
             Write-Output "PASS $($case.Name): $actual"
         } finally {
+            foreach($probe in $nativeWaiters.Values){$probe.Dispose()}
+            foreach($probe in $frontendWaiters.Values){$probe.Dispose()}
             # Only children of this recorded test launcher, with exact product paths.
             # Unrelated package processes are never killed by image name.
             if ($launcherId) {

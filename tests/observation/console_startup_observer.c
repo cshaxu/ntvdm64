@@ -14,6 +14,37 @@
 #include <string.h>
 
 static char control_event_report[MAX_PATH];
+static BOOL CALLBACK report_timeout_window(HWND window, LPARAM context)
+{
+    FILE *report = (FILE *)context;
+    DWORD pid = 0;
+    char title[256] = {0}, kind[96] = {0};
+    size_t i;
+    GetWindowThreadProcessId(window, &pid);
+    GetClassNameA(window, kind, sizeof(kind));
+    /* Window-manager caption only: do not send WM_GETTEXT to another
+     * process's possibly hung controls while diagnosing a timeout. */
+    GetWindowTextA(window, title, sizeof(title));
+    for (i = 0; title[i]; ++i)
+        if ((unsigned char)title[i] < 32) title[i] = ' ';
+    fprintf(report, "window pid=%lu visible=%d class=%s title=%s\n",
+        pid, IsWindowVisible(window), kind, title);
+    return TRUE;
+}
+static void report_private_timeout_windows(FILE *report)
+{
+    char name[96] = {0};
+    DWORD needed = 0;
+    HDESK desktop = GetThreadDesktop(GetCurrentThreadId());
+    if (!GetUserObjectInformationA(desktop, UOI_NAME, name, sizeof(name), &needed) ||
+        strncmp(name, "NTVDMConsoleTest-", 17) != 0) {
+        fputs("windows=skipped-not-private-test-desktop\n", report);
+        return;
+    }
+    fprintf(report, "windows-desktop=%s\n", name);
+    if (!EnumDesktopWindows(desktop, report_timeout_window, (LPARAM)report))
+        fprintf(report, "windows-enumeration-error=%lu\n", GetLastError());
+}
 static BOOL WINAPI keep_control_observer(DWORD event)
 {
     return event == CTRL_C_EVENT || event == CTRL_BREAK_EVENT;
@@ -85,7 +116,7 @@ static void capture_process_image(DWORD process_id,
 
 static DWORD capture_process_threads(HANDLE process, DWORD process_id,
                                      observation_thread_context *records,
-                                     DWORD record_capacity)
+                                     DWORD record_capacity, BOOL resume)
 {
     HANDLE snapshot;
     THREADENTRY32 entry;
@@ -134,6 +165,10 @@ static DWORD capture_process_threads(HANDLE process, DWORD process_id,
                         }
                     }
                 }
+                /* Direct timeout children remain live for diagnosis. Restore
+                 * only the suspend increment acquired by this observer. */
+                if (resume && records[record_count].context.ContextFlags)
+                    ResumeThread(thread);
                 CloseHandle(thread);
             }
             ++record_count;
@@ -207,7 +242,7 @@ static void clear_console(HANDLE output)
 
 /* Observe direct children before the harness closes its Console.  A launcher
  * result alone must not be mistaken for successful worker termination. */
-static void report_direct_children(FILE *report, DWORD parent)
+static void report_direct_children(FILE *report, DWORD parent, BOOL contexts)
 {
     HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
     PROCESSENTRY32 entry;
@@ -218,7 +253,8 @@ static void report_direct_children(FILE *report, DWORD parent)
     entry.dwSize = sizeof(entry);
     if (Process32First(snapshot, &entry)) do {
         if (entry.th32ParentProcessID == parent) {
-            HANDLE process = OpenProcess(SYNCHRONIZE | PROCESS_QUERY_LIMITED_INFORMATION,
+            HANDLE process = OpenProcess(SYNCHRONIZE | PROCESS_QUERY_LIMITED_INFORMATION |
+                                         (contexts ? PROCESS_QUERY_INFORMATION | PROCESS_VM_READ : 0),
                                          FALSE, entry.th32ProcessID);
             DWORD code = 0, length = MAX_PATH;
             char path[MAX_PATH] = "unavailable";
@@ -228,6 +264,27 @@ static void report_direct_children(FILE *report, DWORD parent)
             fprintf(report, "direct-child pid=%lu name=%s wait=%lu exit-known=%u exit=%08lx path=%s\n",
                     entry.th32ProcessID, entry.szExeFile, wait,
                     (unsigned)have_code, code, path);
+            if (process && contexts && wait==WAIT_TIMEOUT) {
+                observation_thread_context threads[OBSERVATION_THREAD_LIMIT]={0};
+                observation_image_identity image;
+                DWORD count,index,frame;
+                BOOL symbols=SymInitialize(process,NULL,TRUE);
+                capture_process_image(entry.th32ProcessID,&image);
+                fprintf(report,"child-image pid=%lu base=%08lx size=%08lx\n",
+                        entry.th32ProcessID,image.base_address,image.image_size);
+                count=capture_process_threads(process,entry.th32ProcessID,threads,
+                                              OBSERVATION_THREAD_LIMIT,TRUE);
+                for(index=0;index<count;++index) {
+                    fprintf(report,"child-thread pid=%lu tid=%lu available=%u eip=%08lx\n",
+                            entry.th32ProcessID,threads[index].thread_id,
+                            threads[index].context_available,threads[index].context.Eip);
+                    for(frame=0;frame<threads[index].frame_count;++frame)
+                        fprintf(report,"child-frame pid=%lu tid=%lu index=%lu pc=%08llx\n",
+                                entry.th32ProcessID,threads[index].thread_id,frame,
+                                threads[index].frames[frame]);
+                }
+                if(symbols)SymCleanup(process);
+            }
             if (process) CloseHandle(process);
         }
     } while (Process32Next(snapshot, &entry));
@@ -1166,6 +1223,20 @@ int main(int argc, char **argv)
     wait_status = WaitForSingleObject(child.hProcess, observation_wait_ms);
     capture_process_image(child.dwProcessId, &image_identity);
     if (wait_status == WAIT_TIMEOUT) {
+        /* Preserve peer state before terminating the launcher: its death can
+         * cancel bootstrap/request I/O and erase the original wait relation.
+         * Child snapshots restore their own suspend increments. */
+        char live_path[MAX_PATH];
+        FILE *live = NULL;
+        if (snprintf(live_path, sizeof(live_path), "%s.timeout-live.txt", argv[3]) > 0 &&
+            strlen(argv[3]) + sizeof(".timeout-live.txt") <= sizeof(live_path) &&
+            fopen_s(&live, live_path, "wb") == 0 && live) {
+            fprintf(live, "phase=before-launcher-termination\nlauncher=%lu\nwait=%lu\n",
+                child.dwProcessId, WaitForSingleObject(child.hProcess, 0));
+            report_private_timeout_windows(live);
+            report_direct_children(live, child.dwProcessId, TRUE);
+            fclose(live);
+        }
         /* The fixed container observes the product without a debugger.  A
          * bounded suspension gives the evidence record one architectural
          * stop state before the existing watchdog terminates the process.
@@ -1189,7 +1260,7 @@ int main(int argc, char **argv)
             timed_thread_count = capture_process_threads(child.hProcess,
                                                          child.dwProcessId,
                                                          timed_threads,
-                                                         OBSERVATION_THREAD_LIMIT);
+                                                         OBSERVATION_THREAD_LIMIT,FALSE);
         }
         TerminateProcess(child.hProcess, OBSERVATION_TIMEOUT_EXIT);
         WaitForSingleObject(child.hProcess, 1000);
@@ -1220,7 +1291,7 @@ int main(int argc, char **argv)
             for (index = 0; index < count && index < ARRAYSIZE(members); ++index)
                 fprintf(report, "console-member=%lu\n", members[index]);
         }
-        report_direct_children(report, child.dwProcessId);
+        report_direct_children(report, child.dwProcessId,wait_status==WAIT_TIMEOUT);
         fprintf(report, "timeout-ms=%lu\n", (unsigned long)observation_timeout_ms);
         fprintf(report, "scripted-console-input=%s\n",
                 scripted_console_input ?

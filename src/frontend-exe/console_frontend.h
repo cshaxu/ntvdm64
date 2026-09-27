@@ -9,6 +9,10 @@ typedef struct run16_console_frontend {
     HANDLE input,output;
     uint32_t generation,sequence;
     run16_console_video video;
+    void *io_context;
+    DWORD (*activate)(void *,BOOL);
+    DWORD (*enter)(void *);
+    void (*leave)(void *);
 } run16_console_frontend;
 DWORD run16_console_dispatch(run16_console_frontend *,const console_io_request *,
     console_io_reply *);

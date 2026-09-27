@@ -520,7 +520,7 @@ static DWORD classify_missing_interface(RPC_BINDING_HANDLE binding)
     RPC_STATUS status,uuid_status;
     unsigned int index;
     DWORD result=RPC_S_SERVER_UNAVAILABLE;
-    status=RpcIfInqId(Client_vdm_service_v5_0_c_ifspec,&expected);
+    status=RpcIfInqId(Client_vdm_service_v8_0_c_ifspec,&expected);
     if (status) return status;
     status=RpcMgmtInqIfIds(binding,&interfaces);
     if (status) return status;
@@ -660,6 +660,67 @@ DWORD OpenNtBaseClientWorkerFrontendCapability(HANDLE *capability)
     return error;
 }
 
+DWORD OpenNtBaseClientAcquireConsoleContext(HANDLE frontend,HANDLE *capability)
+{
+    DWORD error=ERROR_INVALID_STATE;
+    if (!capability) return ERROR_INVALID_PARAMETER;
+    *capability=NULL;
+    if (!client.connection || !client.binding || !client.process) return error;
+    RpcTryExcept {
+        error=Client_AcquireConsoleContext(client.binding,client.connection,client.process,
+            client.generation,frontend,capability);
+    }
+    RpcExcept(1) { error=RpcExceptionCode(); }
+    RpcEndExcept
+    if (error && *capability) { CloseHandle(*capability);*capability=NULL; }
+    return error;
+}
+DWORD OpenNtBaseClientBindConsoleContext(HANDLE capability)
+{
+    DWORD error=ERROR_INVALID_STATE;
+    if (!client.connection || !client.binding || !client.process) return error;
+    RpcTryExcept {
+        error=Client_BindConsoleContext(client.binding,client.connection,client.process,
+            client.generation,capability);
+    }
+    RpcExcept(1) { error=RpcExceptionCode(); }
+    RpcEndExcept
+    return error;
+}
+
+DWORD OpenNtBaseClientSubmitFrontendChannel(HANDLE capability,HANDLE channel)
+{
+    DWORD error=ERROR_INVALID_STATE;
+    if (!client.connection || !client.binding || !client.process) return error;
+    RpcTryExcept {
+        error=Client_SubmitFrontendChannel(client.binding,client.connection,client.process,
+            client.generation,capability,channel);
+    }
+    RpcExcept(1) { error=RpcExceptionCode(); }
+    RpcEndExcept
+    return error;
+}
+DWORD OpenNtBaseClientTakeFrontendChannel(HANDLE *channel,HANDLE *caller_process,HANDLE *execution)
+{
+    DWORD error=ERROR_INVALID_STATE;
+    if (!channel || !caller_process || !execution) return ERROR_INVALID_PARAMETER;
+    *channel=NULL;*caller_process=NULL;*execution=NULL;
+    if (!client.connection || !client.binding || !client.process) return error;
+    RpcTryExcept {
+        error=Client_TakeFrontendChannel(client.binding,client.connection,client.process,
+            client.generation,channel,caller_process,execution);
+    }
+    RpcExcept(1) { error=RpcExceptionCode(); }
+    RpcEndExcept
+    if (error) {
+        if (*channel) CloseHandle(*channel);
+        if (*caller_process) CloseHandle(*caller_process);
+        if (*execution) CloseHandle(*execution);
+        *channel=NULL;*caller_process=NULL;*execution=NULL;
+    }
+    return error;
+}
+
 DWORD OpenNtBaseClientRegisterFrontendRoot(HANDLE capability)
 {
     DWORD error=ERROR_INVALID_STATE;
@@ -667,6 +728,33 @@ DWORD OpenNtBaseClientRegisterFrontendRoot(HANDLE capability)
     RpcTryExcept {
         error=Client_RegisterFrontendRoot(client.binding,client.connection,client.process,
             client.generation,capability);
+    }
+    RpcExcept(1) { error=RpcExceptionCode(); }
+    RpcEndExcept
+    return error;
+}
+
+DWORD OpenNtBaseClientFrontendUsage(DWORD *pending,DWORD *tasks)
+{
+    DWORD error=ERROR_INVALID_STATE,local_pending=0,local_tasks=0;
+    if(!pending || !tasks)return ERROR_INVALID_PARAMETER;
+    if(!client.connection || !client.binding || !client.process)return error;
+    RpcTryExcept {
+        error=Client_FrontendUsage(client.binding,client.connection,client.process,
+            client.generation,&local_pending,&local_tasks);
+    }
+    RpcExcept(1) { error=RpcExceptionCode(); }
+    RpcEndExcept
+    if(!error){*pending=local_pending;*tasks=local_tasks;}
+    return error;
+}
+
+DWORD OpenNtBaseClientRetireFrontend(void)
+{
+    DWORD error=ERROR_INVALID_STATE;
+    if(!client.connection || !client.binding || !client.process)return error;
+    RpcTryExcept {
+        error=Client_RetireFrontend(client.binding,client.connection,client.process,client.generation);
     }
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept

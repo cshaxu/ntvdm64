@@ -9,7 +9,7 @@ mutation. Public Win32 APIs and ordinary host resources remain valid integration
 mechanisms.
 
 Each production source file has one final owner. Original mirrors preserve
-upstream package identity; the three executable roots own their process-local
+upstream package identity; executable-owned roots own their process-local
 mechanics; and the two small product roots own only stateless shared contracts.
 
 T414 uses `src/mvdm/` as the physical canonical selected-OpenNT
@@ -214,18 +214,20 @@ owned:
 src/run16-exe/   -> run16.exe
 src/basesrv-exe/ -> basesrv.exe
 src/ntvdm-exe/   -> ntvdm.exe
-src/dtmgr-exe/   -> dtmgr.exe
+src/monitor-exe/ -> monitor.exe
+src/frontend-exe/ -> frontend.exe
 ```
 
 The former `app`, `session`, `broker` and adapter roots are README-only move
 markers, not compatibility locations or destinations. `run16` owns the public CreateProcess-style CLI path; `basesrv`
 owns its service endpoint, authentication, liveness and transport assembly
 around mirrored `srvvdm.c`; and `ntvdm` owns worker-local setup, guest-memory
-leases, thread binding, teardown and process-local presentation. The broker
+leases, thread binding, teardown and guest-side I/O bindings. frontend owns
+character presentation and hidden Console resources. The broker
 does not acquire DOS/WOW record policy, and the worker does not acquire broker
 policy.
 
-`dtaskmgr` owns only native Console task-management presentation and its
+`monitor` owns only native Console task-management presentation and its
 client-side selection state. It queries BaseSrv's copied, authenticated task
 snapshot and asks BaseSrv to terminate one selected registered task; it neither
 owns a second registry nor enumerates or controls arbitrary Windows processes.
@@ -247,6 +249,34 @@ general-purpose helper collection. Shared records are copied, versioned data,
 never session, Console or native-resource policy.
 
 ## T423 DOS frontend ownership transition
+
+### Current owner-approved replacement
+
+The independent `src/frontend-exe/` product replaces root-run16 UI ownership.
+It owns visible Console, Window, hidden Console/helper and display for one
+character session. run16 is exclusively a classification/start/submission and
+direct-target wait client; no launcher owns an input pump or presentation.
+ntvdm retains guest execution and uses the existing direct I/O contract with
+frontend. BaseSrv authenticates the frontend process and separate execution
+Console identity, never transports frames or becomes a new scheduler.
+
+Ordinary GGG-CCC-GGG-CCC launch chains have two separate frontend sessions:
+GUI segments do not join or propagate character-frontend authority; each
+contiguous DOS/native-character segment shares its own frontend. DOS graphics
+mode remains part of its character session. Explicit native Console creation
+and attachment remain distinct contracts, not deductions from PID ancestry.
+Launcher death is no longer frontend death. Actual frontend/session closure
+retains the original VDM-close binding; helper/pipe failure is not closure or
+target completion. No native process-tree termination is introduced.
+
+The Console ownership split is now implemented and verified by S4's linked
+source, graph and real runtime evidence. Its complete runtime set is seven
+files, including frontend.exe; the helper is a role of that same executable.
+Window/display and Window mouse remain later stages, not capabilities proved
+by the Console migration. Status owns publication and delivery state; the
+proposal assigns remaining validation and final owner acceptance.
+
+### Superseded root-run16 implementation record
 
 The admitted frontend split supersedes worker-owned DOS presentation above.
 The root run16 owns visible Console input and presentation. Nested launchers
@@ -391,7 +421,7 @@ component ABI.
 
 ```text
 run16 -> basesrv protocol client
-dtaskmgr -> basesrv management protocol client
+monitor -> basesrv management protocol client
 run16 -> opennt-host Base client + opennt-abi/host-compat
 basesrv -> basesrv transport + opennt-host BaseSrv owner
 ntvdm -> worker-local session, command, monitor, SoftPC, Redirector, VDD, WOW and debugger bindings

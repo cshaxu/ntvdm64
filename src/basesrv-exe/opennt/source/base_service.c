@@ -33,6 +33,7 @@ struct OPENNT_BASE_SERVICE {
     LIST_ENTRY retired_connections;
     LIST_ENTRY worker_watches;
     LIST_ENTRY frontend_routes;
+    LIST_ENTRY console_contexts;
     OPENNT_BASE_CONSOLE_QUERY console_query;
     void *console_query_context;
     OPENNT_BASE_EMPTY_NOTIFY empty_notify;
@@ -60,7 +61,10 @@ struct OPENNT_BASE_CONNECTION {
     DWORD completed_exit_code;
     BOOL worker_failed;
     HANDLE frontend_capability; /* Root lease, independent of command lifetime. */
+    BOOL frontend_closing; /* Admission barrier, never execution/task state. */
     DWORD frontend_request_root; /* Original pending command asks this root for I/O. */
+    DWORD frontend_channel_root; /* One pending direct launcher-to-root attachment. */
+    HANDLE frontend_channel,frontend_execution;
     LIST_ENTRY service_link;
     LIST_ENTRY retired_link;
 };
@@ -101,6 +105,18 @@ typedef struct OPENNT_BASE_CONSOLE_CANDIDATE {
     ULONG generation;
     HANDLE console;
 } OPENNT_BASE_CONSOLE_CANDIDATE;
+typedef struct OPENNT_BASE_CONSOLE_CONTEXT {
+    LIST_ENTRY link;
+    OPENNT_BASE_CONNECTION *root; /* Removed under service lock before root free. */
+    HANDLE capability,console;
+} OPENNT_BASE_CONSOLE_CONTEXT;
+static DWORD service_bind_existing_console(OPENNT_BASE_CONNECTION *connection);
+static void service_delete_console_context(OPENNT_BASE_CONSOLE_CONTEXT *context)
+{
+    RemoveEntryList(&context->link);
+    CloseHandle(context->capability);
+    HeapFree(GetProcessHeap(),0,context);
+}
 typedef struct OPENNT_BASE_SERVICE_RESOURCES {
     OPENNT_BASE_CONNECTION *connection;
     DWORD role;
@@ -119,9 +135,31 @@ static void service_delete_frontend(OPENNT_FRONTEND_ROUTE *route)
     CloseHandle(route->worker);
     HeapFree(GetProcessHeap(),0,route);
 }
+static void service_clear_frontend_channel(OPENNT_BASE_CONNECTION *connection)
+{
+    if (connection->frontend_channel) CloseHandle(connection->frontend_channel);
+    if (connection->frontend_execution) CloseHandle(connection->frontend_execution);
+    connection->frontend_channel=NULL;connection->frontend_execution=NULL;
+    connection->frontend_channel_root=0;
+}
 static void service_clear_frontend(OPENNT_BASE_CONNECTION *connection)
 {
     LIST_ENTRY *link=connection->service->frontend_routes.Flink;
+    LIST_ENTRY *context_link=connection->service->console_contexts.Flink;
+    LIST_ENTRY *caller_link;
+    service_clear_frontend_channel(connection);
+    for (caller_link=connection->service->connections.Flink;
+         caller_link!=&connection->service->connections;caller_link=caller_link->Flink) {
+        OPENNT_BASE_CONNECTION *caller=CONTAINING_RECORD(caller_link,OPENNT_BASE_CONNECTION,service_link);
+        if (caller->frontend_channel_root==connection->process.SequenceNumber)
+            service_clear_frontend_channel(caller);
+    }
+    while (context_link!=&connection->service->console_contexts) {
+        OPENNT_BASE_CONSOLE_CONTEXT *context=CONTAINING_RECORD(context_link,
+            OPENNT_BASE_CONSOLE_CONTEXT,link);
+        context_link=context_link->Flink;
+        if (context->root==connection) service_delete_console_context(context);
+    }
     while (link!=&connection->service->frontend_routes) {
         OPENNT_FRONTEND_ROUTE *route=CONTAINING_RECORD(link,OPENNT_FRONTEND_ROUTE,link);
         link=link->Flink;
@@ -447,6 +485,7 @@ OPENNT_BASE_SERVICE *OpenNtBaseServiceStart(void)
     InitializeListHead(&service->retired_connections);
     InitializeListHead(&service->worker_watches);
     InitializeListHead(&service->frontend_routes);
+    InitializeListHead(&service->console_contexts);
     GetSystemTimeAsFileTime(&now);
     service->management_epoch=((uint64_t)now.dwHighDateTime<<32)|now.dwLowDateTime;
     service->management_epoch^=(uint64_t)GetCurrentProcessId()<<17;
@@ -512,6 +551,9 @@ BOOL OpenNtBaseServiceStop(OPENNT_BASE_SERVICE *service)
     while (!IsListEmpty(&service->frontend_routes))
         service_delete_frontend(CONTAINING_RECORD(service->frontend_routes.Flink,
             OPENNT_FRONTEND_ROUTE,link));
+    while (!IsListEmpty(&service->console_contexts))
+        service_delete_console_context(CONTAINING_RECORD(service->console_contexts.Flink,
+            OPENNT_BASE_CONSOLE_CONTEXT,link));
     while (!IsListEmpty(&service->retired_connections)) {
         entry=RemoveHeadList(&service->retired_connections);
         HeapFree(GetProcessHeap(),0,CONTAINING_RECORD(entry,OPENNT_BASE_CONNECTION,retired_link));
@@ -840,7 +882,9 @@ DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *service,HANDLE process,
              * The standalone learns that fact only when the reservation-bound
              * worker connects; it does not invent another worker state. */
             connection->process.fVDM=TRUE;
-            BaseSrvUpdateVDMSequenceNumber(shared_wow ? OPENNT_BASE_CONSOLE_WOW : console,
+            /* Before first PIF binding a new DOS ConsoleRecord is keyed by
+             * DosSesId, not the reserved transport Console identity. */
+            BaseSrvUpdateVDMSequenceNumber(shared_wow ? OPENNT_BASE_CONSOLE_WOW : task ? NULL : console,
                 connection->process.SequenceNumber,task);
             watch=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*watch));
             if (!watch || !reserved_worker) {
@@ -1026,7 +1070,7 @@ DWORD OpenNtBaseServiceRetainFrontendRoot(OPENNT_BASE_CONNECTION *connection,
          link!=&connection->service->connections;link=link->Flink) {
         OPENNT_BASE_CONNECTION *root=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
         if (!root->frontend_capability || !compare(root->frontend_capability,capability)) continue;
-        if (WaitForSingleObject(root->process.ProcessHandle,0)!=WAIT_TIMEOUT) {
+        if (root->frontend_closing || WaitForSingleObject(root->process.ProcessHandle,0)!=WAIT_TIMEOUT) {
             error=ERROR_PIPE_NOT_CONNECTED;goto done;
         }
         if (!DuplicateHandle(GetCurrentProcess(),root->process.ProcessHandle,
@@ -1036,6 +1080,94 @@ DWORD OpenNtBaseServiceRetainFrontendRoot(OPENNT_BASE_CONNECTION *connection,
         *root_generation=root->process.SequenceNumber;
         error=ERROR_SUCCESS;
         break;
+    }
+done:
+    LeaveCriticalSection(&connection->service->lock);
+    return error;
+}
+
+DWORD OpenNtBaseServiceAcquireConsoleContext(OPENNT_BASE_CONNECTION *connection,
+    DWORD pid,DWORD generation,HANDLE frontend,HANDLE *capability)
+{
+    OPENNT_BASE_SERVICE *service;
+    OPENNT_BASE_CONNECTION *root=NULL;
+    OPENNT_BASE_CONSOLE_CONTEXT *context=NULL;
+    HANDLE root_process=NULL;
+    DWORD root_generation=0,error;
+    LIST_ENTRY *link;
+    BOOL created=FALSE;
+    if (!capability) return ERROR_INVALID_PARAMETER;
+    *capability=NULL;
+    if (!connection) return ERROR_ACCESS_DENIED;
+    service=connection->service;
+    error=OpenNtBaseServiceRetainFrontendRoot(connection,pid,generation,frontend,
+        &root_process,&root_generation);
+    if (error) return error;
+    /* Capture real execution membership separately from frontend identity.
+     * This runs before the helper changes its physical Console attachment. */
+    if (connection->wow) error=ERROR_ACCESS_DENIED;
+    else if (connection->process.fVDM && !connection->console) error=ERROR_NOT_READY;
+    else error=service_bind_existing_console(connection);
+    EnterCriticalSection(&service->lock);
+    if (error) goto done;
+    if (!OpenNtBaseServicePeer(connection,pid,generation)) { error=ERROR_ACCESS_DENIED;goto done; }
+    for (link=service->connections.Flink;link!=&service->connections;link=link->Flink) {
+        OPENNT_BASE_CONNECTION *candidate=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
+        if (candidate->process.SequenceNumber==root_generation &&
+            (DWORD)candidate->process.ClientId.UniqueProcess==GetProcessId(root_process) &&
+            candidate->frontend_capability) { root=candidate;break; }
+    }
+    if (!root || root->frontend_closing || WaitForSingleObject(root_process,0)!=WAIT_TIMEOUT) {
+        error=ERROR_PIPE_NOT_CONNECTED;goto done;
+    }
+    for (link=service->console_contexts.Flink;link!=&service->console_contexts;link=link->Flink) {
+        OPENNT_BASE_CONSOLE_CONTEXT *candidate=CONTAINING_RECORD(link,OPENNT_BASE_CONSOLE_CONTEXT,link);
+        if (candidate->root==root && candidate->console==connection->console) { context=candidate;break; }
+    }
+    if (!context) {
+        context=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*context));
+        if (!context) { error=ERROR_NOT_ENOUGH_MEMORY;goto done; }
+        context->capability=CreateEventW(NULL,TRUE,FALSE,NULL);
+        if (!context->capability) { error=GetLastError();HeapFree(GetProcessHeap(),0,context);goto done; }
+        context->root=root;context->console=connection->console;
+        InsertTailList(&service->console_contexts,&context->link);
+        created=TRUE;
+    }
+    if (!DuplicateHandle(GetCurrentProcess(),context->capability,GetCurrentProcess(),
+        capability,SYNCHRONIZE,FALSE,0)) {
+        error=GetLastError();
+        if (created) service_delete_console_context(context);
+    }
+done:
+    LeaveCriticalSection(&service->lock);
+    CloseHandle(root_process);
+    return error;
+}
+
+DWORD OpenNtBaseServiceBindConsoleContext(OPENNT_BASE_CONNECTION *connection,
+    DWORD pid,DWORD generation,HANDLE capability)
+{
+    SERVICE_COMPARE_HANDLES compare;
+    LIST_ENTRY *link;
+    DWORD error=ERROR_ACCESS_DENIED;
+    if (!connection) return error;
+    compare=(SERVICE_COMPARE_HANDLES)GetProcAddress(GetModuleHandleW(L"kernelbase.dll"),"CompareObjectHandles");
+    if (!compare) return ERROR_CALL_NOT_IMPLEMENTED;
+    EnterCriticalSection(&connection->service->lock);
+    if (!OpenNtBaseServicePeer(connection,pid,generation) || connection->process.fVDM ||
+        connection->wow || connection->task || connection->reservation ||
+        connection->pending_creation || connection->parent_wait) goto done;
+    for (link=connection->service->console_contexts.Flink;
+         link!=&connection->service->console_contexts;link=link->Flink) {
+        OPENNT_BASE_CONSOLE_CONTEXT *context=CONTAINING_RECORD(link,OPENNT_BASE_CONSOLE_CONTEXT,link);
+        if (!compare(context->capability,capability)) continue;
+        if (context->root->frontend_closing ||
+            WaitForSingleObject(context->root->process.ProcessHandle,0)!=WAIT_TIMEOUT) {
+            error=ERROR_PIPE_NOT_CONNECTED;break;
+        }
+        if (connection->console && connection->console!=context->console) break;
+        connection->console=context->console;
+        error=ERROR_SUCCESS;break;
     }
 done:
     LeaveCriticalSection(&connection->service->lock);
@@ -1057,10 +1189,15 @@ DWORD OpenNtBaseServiceRetainCommandWorker(OPENNT_BASE_CONNECTION *connection,
     if (!OpenNtBaseServicePeer(connection,pid,generation)) {
         error=ERROR_ACCESS_DENIED; goto done;
     }
-    /* Membership alone is not a grant. Only Check/Update's still-pending
-     * original parent completion associates this launcher with execution. */
-    if (connection->wow || connection->process.fVDM || connection->worker_failed || !connection->parent_wait ||
-        WaitForSingleObject(connection->parent_wait,0)!=WAIT_TIMEOUT) goto done;
+    /* Membership alone is not a grant. Original UpdateDOS deliberately omits
+     * the pair event for a nonzero DosSesId: that caller waits on its worker
+     * process. Require completed Check/Update plus its authenticated reservation
+     * in that case; never fabricate a parent event or accept an unprepared peer. */
+    if (connection->wow || connection->process.fVDM || connection->worker_failed) goto done;
+    if (connection->parent_wait) {
+        if (WaitForSingleObject(connection->parent_wait,0)!=WAIT_TIMEOUT) goto done;
+    } else if (!connection->task || !connection->registered_worker || !connection->reservation)
+        goto done;
     if (connection->reservation) {
         error=OpenNtBaseReservationRetainWorker(service->reservations,
             connection->reservation,pid,generation,&retained);
@@ -1097,6 +1234,7 @@ static DWORD service_attach_frontend(OPENNT_BASE_CONNECTION *connection,
     EVENT_BASIC_INFORMATION event_info;
     LIST_ENTRY *link;
     DWORD error,flags;
+    if(connection->frontend_closing)return ERROR_PIPE_NOT_CONNECTED;
     if (NtQueryEvent(ready,EventBasicInformation,&event_info,sizeof(event_info),NULL)<0 ||
         event_info.EventType!=NotificationEvent) { error=ERROR_INVALID_PARAMETER;goto done; }
     if (GetFileType(pipe)!=FILE_TYPE_PIPE ||
@@ -1211,6 +1349,160 @@ done:
     return error;
 }
 
+DWORD OpenNtBaseServiceFrontendUsage(OPENNT_BASE_CONNECTION *root,DWORD pid,
+    DWORD generation,DWORD *pending,DWORD *tasks)
+{
+    LIST_ENTRY *link,*watch_link;
+    DWORD error=ERROR_ACCESS_DENIED,pending_count=0,task_count=0;
+    if(!root || !pending || !tasks)return ERROR_INVALID_PARAMETER;
+    EnterCriticalSection(&root->service->lock);
+    if(!OpenNtBaseServicePeer(root,pid,generation) || !root->frontend_capability)goto done;
+    for(link=root->service->connections.Flink;link!=&root->service->connections;link=link->Flink){
+        OPENNT_BASE_CONNECTION *caller=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
+        if(caller->frontend_request_root==generation || caller->frontend_channel_root==generation)
+            pending_count=1;
+    }
+    /* A route pins the actual selected worker, not the submitting launcher.
+     * The original DOSRecord chain survives launcher disconnection. Read it
+     * under its original lock; do not synthesize an execution registry. */
+    (void)RtlEnterCriticalSection(&BaseSrvDOSCriticalSection);
+    for(link=root->service->frontend_routes.Flink;link!=&root->service->frontend_routes;link=link->Flink){
+        OPENNT_FRONTEND_ROUTE *route=CONTAINING_RECORD(link,OPENNT_FRONTEND_ROUTE,link);
+        if(route->root!=root || WaitForSingleObject(route->worker,0)!=WAIT_TIMEOUT)continue;
+        if(!route->delivered)pending_count=1;
+        for(watch_link=root->service->worker_watches.Flink;watch_link!=&root->service->worker_watches;watch_link=watch_link->Flink){
+            OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(watch_link,OPENNT_BASE_WORKER_WATCH,link);
+            PCONSOLERECORD console;
+            if(watch->wow || GetProcessId(watch->process.ProcessHandle)!=GetProcessId(route->worker))continue;
+            for(console=DOSHead;console;console=console->Next){
+                PDOSRECORD record;
+                if(console->SequenceNumber!=watch->process.SequenceNumber)continue;
+                for(record=console->DOSRecord;record;record=record->DOSRecordNext)
+                    if(record->VDMState==VDM_BUSY || record->VDMState==VDM_TO_TAKE_A_COMMAND)++task_count;
+                break;
+            }
+            break;
+        }
+    }
+    RtlLeaveCriticalSection(&BaseSrvDOSCriticalSection);
+    *pending=pending_count;*tasks=task_count;error=ERROR_SUCCESS;
+done:
+    LeaveCriticalSection(&root->service->lock);
+    return error;
+}
+
+DWORD OpenNtBaseServiceRetireFrontend(OPENNT_BASE_CONNECTION *root,DWORD pid,DWORD generation)
+{
+    DWORD pending=0,tasks=0,error;
+    if(!root)return ERROR_ACCESS_DENIED;
+    EnterCriticalSection(&root->service->lock);
+    error=OpenNtBaseServiceFrontendUsage(root,pid,generation,&pending,&tasks);
+    if(!error){
+        if(pending || tasks)error=ERROR_BUSY;
+        else root->frontend_closing=TRUE;
+    }
+    LeaveCriticalSection(&root->service->lock);
+    return error;
+}
+
+/* The event is shared by DOS-worker attachment and launcher direct-channel
+ * admission. An empty queue of one kind must not erase the other's wakeup. */
+static DWORD service_frontend_idle(OPENNT_BASE_CONNECTION *root)
+{
+    LIST_ENTRY *link;
+    for (link=root->service->connections.Flink;link!=&root->service->connections;link=link->Flink) {
+        OPENNT_BASE_CONNECTION *caller=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
+        if (caller->frontend_request_root==root->process.SequenceNumber ||
+            caller->frontend_channel_root==root->process.SequenceNumber)
+            return ERROR_NOT_FOUND;
+    }
+    return ResetEvent(root->frontend_capability) ? ERROR_NOT_FOUND : GetLastError();
+}
+
+DWORD OpenNtBaseServiceSubmitFrontendChannel(OPENNT_BASE_CONNECTION *connection,DWORD pid,
+    DWORD generation,HANDLE capability,HANDLE channel)
+{
+    HANDLE root_process=NULL,execution=NULL,owned=NULL;
+    DWORD root_generation=0,flags,server_pid,client_pid,error;
+    LIST_ENTRY *link;
+    if (!connection) return ERROR_ACCESS_DENIED;
+    EnterCriticalSection(&connection->service->lock);
+    error=ERROR_ACCESS_DENIED;
+    if (!OpenNtBaseServicePeer(connection,pid,generation) || connection->process.fVDM) goto done;
+    if (connection->frontend_channel) { error=ERROR_BUSY;goto done; }
+    /* Only a connected, caller-created byte-pipe pair. No public listener,
+     * caller-selected peer process or serialized HANDLE is accepted. */
+    if (GetFileType(channel)!=FILE_TYPE_PIPE ||
+        !GetNamedPipeInfo(channel,&flags,NULL,NULL,NULL) ||
+        !(flags&PIPE_SERVER_END) || (flags&PIPE_TYPE_MESSAGE) ||
+        !GetNamedPipeServerProcessId(channel,&server_pid) || server_pid!=pid ||
+        !GetNamedPipeClientProcessId(channel,&client_pid) || client_pid!=pid) {
+        error=ERROR_INVALID_PARAMETER;goto done;
+    }
+    error=OpenNtBaseServiceRetainFrontendRoot(connection,pid,generation,capability,
+        &root_process,&root_generation);
+    if (error) goto done;
+    error=OpenNtBaseServiceAcquireConsoleContext(connection,pid,generation,capability,&execution);
+    if (error) goto done;
+    if (!DuplicateHandle(GetCurrentProcess(),channel,GetCurrentProcess(),&owned,
+        0,FALSE,DUPLICATE_SAME_ACCESS)) { error=GetLastError();goto done; }
+    error=ERROR_ACCESS_DENIED;
+    for (link=connection->service->connections.Flink;link!=&connection->service->connections;link=link->Flink) {
+        OPENNT_BASE_CONNECTION *root=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
+        if (root->process.SequenceNumber!=root_generation) continue;
+        if (!SetEvent(root->frontend_capability)) { error=GetLastError();break; }
+        connection->frontend_channel=owned;owned=NULL;
+        connection->frontend_execution=execution;execution=NULL;
+        connection->frontend_channel_root=root_generation;
+        error=ERROR_SUCCESS;break;
+    }
+done:
+    if (root_process) CloseHandle(root_process);
+    if (execution) CloseHandle(execution);
+    if (owned) CloseHandle(owned);
+    LeaveCriticalSection(&connection->service->lock);
+    return error;
+}
+
+DWORD OpenNtBaseServiceTakeFrontendChannel(OPENNT_BASE_CONNECTION *root,DWORD pid,
+    DWORD generation,HANDLE *channel,HANDLE *caller_process,HANDLE *execution)
+{
+    LIST_ENTRY *link;
+    DWORD error=ERROR_ACCESS_DENIED;
+    if (!channel || !caller_process || !execution) return ERROR_INVALID_PARAMETER;
+    *channel=NULL;*caller_process=NULL;*execution=NULL;
+    if (!root) return error;
+    EnterCriticalSection(&root->service->lock);
+    if (!OpenNtBaseServicePeer(root,pid,generation) || !root->frontend_capability) goto done;
+    for (link=root->service->connections.Flink;link!=&root->service->connections;link=link->Flink) {
+        OPENNT_BASE_CONNECTION *caller=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
+        if (caller->frontend_channel_root!=generation) continue;
+        if (WaitForSingleObject(caller->process.ProcessHandle,0)!=WAIT_TIMEOUT) {
+            service_clear_frontend_channel(caller);continue;
+        }
+        /* The pinned sender process permits only this direct channel's finite
+         * stream/capability exchange, never an arbitrary broker duplication API. */
+        if (!DuplicateHandle(GetCurrentProcess(),caller->process.ProcessHandle,GetCurrentProcess(),
+                caller_process,SYNCHRONIZE|PROCESS_QUERY_LIMITED_INFORMATION|PROCESS_DUP_HANDLE,FALSE,0) ||
+            !DuplicateHandle(GetCurrentProcess(),caller->frontend_channel,GetCurrentProcess(),
+                channel,0,FALSE,DUPLICATE_SAME_ACCESS) ||
+            !DuplicateHandle(GetCurrentProcess(),caller->frontend_execution,GetCurrentProcess(),
+                execution,SYNCHRONIZE,FALSE,0)) { error=GetLastError();goto done; }
+        service_clear_frontend_channel(caller);
+        error=ERROR_SUCCESS;goto done;
+    }
+    error=service_frontend_idle(root);
+done:
+    if (error) {
+        if (*channel) CloseHandle(*channel);
+        if (*caller_process) CloseHandle(*caller_process);
+        if (*execution) CloseHandle(*execution);
+        *channel=NULL;*caller_process=NULL;*execution=NULL;
+    }
+    LeaveCriticalSection(&root->service->lock);
+    return error;
+}
+
 DWORD OpenNtBaseServiceFrontendRequest(OPENNT_BASE_CONNECTION *root,DWORD pid,
     DWORD generation,DWORD *request,HANDLE *worker)
 {
@@ -1231,7 +1523,7 @@ DWORD OpenNtBaseServiceFrontendRequest(OPENNT_BASE_CONNECTION *root,DWORD pid,
         if (!error) { *request=caller->process.SequenceNumber;goto done; }
         caller->frontend_request_root=0; /* Completed/departed original caller, not a new task. */
     }
-    error=ResetEvent(root->frontend_capability) ? ERROR_NOT_FOUND : GetLastError();
+    error=service_frontend_idle(root);
 done:
     LeaveCriticalSection(&root->service->lock);
     return error;
@@ -1340,9 +1632,10 @@ DWORD OpenNtBaseServiceWaitFrontend(OPENNT_BASE_CONNECTION *connection,DWORD pid
     for (;;) {
         error=OpenNtBaseServiceTakeFrontend(connection,pid,generation,
             pipe,frontend,frontend_generation,ready);
-        if (error!=ERROR_NOT_READY && error!=ERROR_ALREADY_EXISTS) break;
+        if (error!=ERROR_NOT_READY) break;
         /* Only capability arrival is awaited. Original Get already selected
-         * the command; no guest command is queued, replayed or selected here. */
+         * the command; no guest command is queued, replayed or selected here.
+         * Already delivered is terminal: a route cannot be consumed twice. */
         if (!SleepConditionVariableCS(&connection->service->frontend_changed,
                 &connection->service->lock,INFINITE)) { error=GetLastError();break; }
     }

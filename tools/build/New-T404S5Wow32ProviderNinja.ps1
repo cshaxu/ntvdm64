@@ -345,6 +345,7 @@ $ninja.Add('  description = IMPORTLIB $out')
 $ninja.Add('rule wow_dll_link')
 $ninja.Add('  command = link /nologo /machine:x86 /dll /map:$out.map /def:' + (ConvertTo-NinjaPath $x86Definition) + ' /out:$out $in ' + (ConvertTo-NinjaPath $parentImportLibraryPath) + ' kernel32.lib user32.lib gdi32.lib advapi32.lib shell32.lib comdlg32.lib version.lib winmm.lib wsock32.lib oldnames.lib')
 $ninja.Add('  description = LINK $out')
+$ninja.Add('  restat = 1')
 
 $objects = [System.Collections.Generic.List[string]]::new()
 foreach ($source in $sources) {
@@ -417,7 +418,7 @@ $ninja.Add('build obj/wow32.res: rc ' + (ConvertTo-NinjaPath $resource))
 $ninja.Add('build legacy-wow-user32.lib: legacy_import_lib ' + (ConvertTo-NinjaPath $legacyUser32Definition))
 $ninja.Add('build legacy-wow-kernel32.lib: legacy_import_lib ' + (ConvertTo-NinjaPath $legacyKernel32Definition))
 $ninja.Add('build legacy-wow-ntdll.lib: legacy_import_lib ' + (ConvertTo-NinjaPath $legacyNtdllDefinition))
-$ninja.Add('build wow32.dll | wow32.dll.lib: wow_dll_link ' + (($objects + $supportObjects + @($systemImportAliasObject, $parentImportAliasObject, $dllEntryBridgeObject, 'obj/wow32.res', 'legacy-wow-user32.lib', 'legacy-wow-kernel32.lib', 'legacy-wow-ntdll.lib')) -join ' '))
+$ninja.Add('build wow32.dll | wow32.lib: wow_dll_link ' + (($objects + $supportObjects + @($systemImportAliasObject, $parentImportAliasObject, $dllEntryBridgeObject, 'obj/wow32.res', 'legacy-wow-user32.lib', 'legacy-wow-kernel32.lib', 'legacy-wow-ntdll.lib')) -join ' ') + ' | ' + (ConvertTo-NinjaPath $parentImportLibraryPath))
 $ninja.Add('default wow32.dll')
 
 [IO.File]::WriteAllLines((Join-Path $build 'build.ninja'), $ninja, [Text.UTF8Encoding]::new($false))

@@ -9,6 +9,7 @@
 #include "basesrv-exe/opennt/include/base_config.h"
 #include "basesrv-exe/opennt/include/base_rpc_client.h"
 #include "frontend_scope.h"
+#include "product-abi/console_io.h"
 #include <shellapi.h>
 #include <stdio.h>
 #include <wchar.h>
@@ -58,7 +59,9 @@ static BOOL begin_worker_win16_directory(WORKER_WIN16DIR_SCOPE *scope)
     if (current == NULL) return FALSE;
     for (cursor = current; *cursor != L'\0'; cursor += wcslen(cursor) + 1u) {
         if (_wcsnicmp(cursor, name, ARRAYSIZE(name) - 1u) != 0 &&
-            _wcsnicmp(cursor,L"NTVDM_FRONTEND_CAPABILITY=",26)!=0)
+            _wcsnicmp(cursor,L"NTVDM_FRONTEND_CAPABILITY=",26)!=0 &&
+            _wcsnicmp(cursor,L"NTVDM_EXECUTION_CONSOLE=",24)!=0 &&
+            _wcsnicmp(cursor,CONSOLE_COMMAND_STREAMS_WENTRY,wcslen(CONSOLE_COMMAND_STREAMS_WENTRY))!=0)
             chars += wcslen(cursor) + 1u;
     }
     chars += (ARRAYSIZE(name) - 1u) + root_chars + 1u;
@@ -74,6 +77,8 @@ static BOOL begin_worker_win16_directory(WORKER_WIN16DIR_SCOPE *scope)
         size_t entry_chars;
         if (_wcsnicmp(cursor, name, ARRAYSIZE(name) - 1u) == 0) continue;
         if (_wcsnicmp(cursor,L"NTVDM_FRONTEND_CAPABILITY=",26)==0) continue;
+        if (_wcsnicmp(cursor,L"NTVDM_EXECUTION_CONSOLE=",24)==0) continue;
+        if (_wcsnicmp(cursor,CONSOLE_COMMAND_STREAMS_WENTRY,wcslen(CONSOLE_COMMAND_STREAMS_WENTRY))==0) continue;
         entry_chars = wcslen(cursor) + 1u;
         memcpy(destination, cursor, entry_chars * sizeof(*destination));
         destination += entry_chars;
@@ -108,11 +113,6 @@ static void s34_run16_trace(const char *stage, DWORD value)
         (unsigned long)GetCurrentProcessId(),stage,(unsigned long)value);
     if (bytes) (void)WriteFile(file,line,bytes,&written,NULL);
     CloseHandle(file);
-}
-
-static void frontend_channel_ready(void)
-{
-    s34_run16_trace("frontend-owner",GetCurrentProcessId());
 }
 
 static BOOL sibling_path(PCWSTR name, PWSTR output, DWORD capacity)
@@ -228,7 +228,7 @@ static DWORD connect_broker(void)
     return error;
 }
 
-static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command,run16_frontend_scope *frontend_scope)
+static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command,run16_frontend_scope *frontend_scope,BOOL initial_console_only)
 {
     BASE_API_MSG message = {0};
     ANSI_STRING environment = {0};
@@ -260,7 +260,6 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command,run16_f
     STARTUPINFOEXW guarded_startup={0};
     JOBOBJECT_EXTENDED_LIMIT_INFORMATION job_limits={0};
     SIZE_T attributes_bytes=0;
-    DWORD console_member;
     /* A Console-subsystem launcher started by Explorer already has a new
      * Console. Original CreateProcess classified this as a new DOS session
      * before that Console existed. Preserve its session/CloseOnExit path,
@@ -268,10 +267,16 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command,run16_f
      * A CMD or nested caller is another attached process and keeps the
      * original shared-Console resident-worker path. */
     BOOL launcher_console_only=(binary & ~BINARY_SUBTYPE_MASK)==BINARY_TYPE_DOS &&
-        GetConsoleProcessList(&console_member,1)==1 && console_member==GetCurrentProcessId();
+        initial_console_only && !run16_frontend_scope_has_execution(frontend_scope);
     DWORD check_creation_flags=(binary & BINARY_SUBTYPE_MASK)==BINARY_TYPE_DOS_PIF ?
         CREATE_NEW_CONSOLE : 0;
+    HANDLE saved_console=NtCurrentPeb()->ProcessParameters->ConsoleHandle;
     if (launcher_console_only) check_creation_flags |= CREATE_NEW_CONSOLE;
+    /* Original BaseCheckVDM reads the private NT4 PEB projection, not the
+     * broker connection. An authenticated execution context is an existing
+     * Console identity even when this launcher has no native Console. */
+    if (run16_frontend_scope_has_execution(frontend_scope))
+        NtCurrentPeb()->ProcessParameters->ConsoleHandle=(HANDLE)1;
 
     /* This is the original parent-side VDM environment projection.  The
      * ANSI record is captured by BaseCheckVDM; the matching Unicode record
@@ -310,8 +315,12 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command,run16_f
                       &task, check_creation_flags, &startup))
     {
         result = GetLastError();
+        s34_run16_trace("check-failed",result);
         goto done;
     }
+    s34_run16_trace("check-flags",check_creation_flags);
+    s34_run16_trace("vdm-state",message.u.CheckVDM.VDMState);
+    s34_run16_trace("vdm-task",task);
     /* srvvdm.c has already selected and queued a same-Console resident DOS
      * record.  Its original Check reply carries the parent completion event;
      * wait and query the original exit-code route, never create another VDM. */
@@ -320,6 +329,7 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command,run16_f
         parent_wait = message.u.CheckVDM.WaitObjectForParent;
         if ((binary & ~BINARY_SUBTYPE_MASK)==BINARY_TYPE_DOS) {
             result=frontend_capability ? OpenNtBaseClientRequestFrontend(frontend_capability) : ERROR_INVALID_STATE;
+            s34_run16_trace("reuse-frontend",result);
             if (result && result!=ERROR_ALREADY_EXISTS) { CloseHandle(parent_wait);goto done; }
         }
         result=OpenNtBaseClientWatchBroker();
@@ -420,8 +430,13 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command,run16_f
          * CREATE_NO_WINDOW, not an inherited or newly visible Console.
          * Leave the guest command's startup/show state unchanged. */
         worker_creation_flags |= CREATE_NO_WINDOW;
-    } else if (binary==BINARY_TYPE_DOS && task && !launcher_console_only) {
-        worker_creation_flags |= CREATE_NEW_CONSOLE;
+    } else {
+        /* DOS I/O belongs to the authenticated frontend, not this worker's
+         * Windows Console membership. The original execution Console/task
+         * identity was already captured by CheckVDM and the reservation.
+         * Inheriting a native hidden Console would count an idle DOS worker
+         * as a native user and prevent that frontend from retiring. */
+        worker_creation_flags |= DETACHED_PROCESS;
     }
     if (!CreateProcessW(worker_path, worker_command.Buffer, NULL, NULL, FALSE,
                         worker_creation_flags,
@@ -450,6 +465,7 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command,run16_f
     registered = TRUE;
     if (binary==BINARY_TYPE_DOS) {
         result=frontend_capability ? OpenNtBaseClientRequestFrontend(frontend_capability) : ERROR_INVALID_STATE;
+        s34_run16_trace("new-frontend",result);
         if (result && result!=ERROR_ALREADY_EXISTS) goto done;
     }
     if (ResumeThread(worker.hThread) == (DWORD)-1)
@@ -514,6 +530,7 @@ waited:
         CloseHandle(parent_wait);
 done:
     end_worker_win16_directory(&win16_directory);
+    NtCurrentPeb()->ProcessParameters->ConsoleHandle=saved_console;
     if (guarded_startup.lpAttributeList) {
         DeleteProcThreadAttributeList(guarded_startup.lpAttributeList);
         HeapFree(GetProcessHeap(),0,guarded_startup.lpAttributeList);
@@ -556,24 +573,79 @@ static BOOL WINAPI launcher_control(DWORD event)
     return event == CTRL_C_EVENT || event == CTRL_BREAK_EVENT;
 }
 
+static DWORD launch_gui(PCWSTR application,PCWSTR command)
+{
+    WCHAR directory[MAX_PATH];
+    LPWCH environment=NULL;
+    run16_native_start start={0};
+    PROCESS_INFORMATION child={0};
+    BYTE *packet=NULL;
+    DWORD bytes,error,result;
+    if(!GetCurrentDirectoryW(ARRAYSIZE(directory),directory))return GetLastError();
+    environment=GetEnvironmentStringsW();if(!environment)return GetLastError();
+    start.application=application;start.command=command;
+    start.directory=directory;start.environment=environment;
+    start.standard[0]=GetStdHandle(STD_INPUT_HANDLE);
+    start.standard[1]=GetStdHandle(STD_OUTPUT_HANDLE);
+    start.standard[2]=GetStdHandle(STD_ERROR_HANDLE);
+    /* Reuse restricted handle/environment materialization, but no frontend
+     * or execution capability: a GUI segment ends character-session routing. */
+    error=run16_native_launch_pack(&start,&packet,&bytes);
+    if(!error)error=run16_native_launch_start(packet,bytes,&child);
+    if(!error){
+        CloseHandle(child.hThread);
+        if(WaitForSingleObject(child.hProcess,INFINITE)!=WAIT_OBJECT_0 ||
+            !GetExitCodeProcess(child.hProcess,&result))error=GetLastError();
+        else error=result;
+        CloseHandle(child.hProcess);
+    }
+    if(packet)HeapFree(GetProcessHeap(),0,packet);
+    FreeEnvironmentStringsW(environment);
+    return error;
+}
+static DWORD launch_native(run16_frontend_scope *scope,PCWSTR application,PCWSTR command)
+{
+    run16_native_start start={0};
+    HANDLE target=NULL;
+    WCHAR directory[32768];
+    PWSTR environment=NULL;
+    DWORD error,result=ERROR_PROCESS_ABORTED,mode,i,length;
+    if(!scope)return ERROR_INVALID_PARAMETER;
+    length=GetCurrentDirectoryW(ARRAYSIZE(directory),directory);
+    if(!length || length>=ARRAYSIZE(directory))return ERROR_PATH_NOT_FOUND;
+    environment=GetEnvironmentStringsW();
+    if(!environment) { error=GetLastError();goto done; }
+    start.application=application;start.command=command;
+    start.directory=directory;start.environment=environment;
+    start.standard[0]=GetStdHandle(STD_INPUT_HANDLE);
+    start.standard[1]=GetStdHandle(STD_OUTPUT_HANDLE);
+    start.standard[2]=GetStdHandle(STD_ERROR_HANDLE);
+    start.console_mask=run16_frontend_scope_console_mask(scope);
+    for(i=0;i<3;++i)if(GetConsoleMode(start.standard[i],&mode))start.console_mask|=1u<<i;
+    error=run16_frontend_scope_launch_native(scope,&start,&target);
+    s34_run16_trace("native-submit",error);
+    if(!error)error=run16_frontend_scope_wait_native(scope,target,&result);
+done:
+    if(target)CloseHandle(target);
+    if(environment)FreeEnvironmentStringsW(environment);
+    return error ? error : result;
+}
+
 int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int show)
 {
     LPWSTR *arguments;
-    PWSTR childCommand;
     PCWSTR image_argument;
     PCWSTR launch_command;
     PCWSTR option, tail;
-    STARTUPINFOW startup = {sizeof(startup)};
-    PROCESS_INFORMATION child = {0};
     run16_frontend_scope *frontend_scope=NULL;
     WCHAR application[MAX_PATH];
     WCHAR split_image[MAX_PATH];
     WCHAR normalized_command[MAX_PATH + MAXIMUM_VDM_COMMAND_LENGTH + 8u];
     WCHAR shell_command[MAX_PATH + MAXIMUM_VDM_COMMAND_LENGTH + 8u];
     DWORD type, result = ERROR_INVALID_PARAMETER, binary = 0, comspec_bytes;
-    BOOL image_resolved;
+    BOOL image_resolved,initial_console_only;
+    DWORD console_member;
     int count;
-    size_t bytes;
     (void)instance;
     (void)previous;
     (void)show;
@@ -598,6 +670,7 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
         LocalFree(arguments);
         return (int)app_console_probe();
     }
+    initial_console_only=GetConsoleProcessList(&console_member,1)==1 && console_member==GetCurrentProcessId();
     RtlInitUnicodeString(&BaseDotComSuffixName, L".com");
     RtlInitUnicodeString(&BaseDotPifSuffixName, L".pif");
     RtlInitUnicodeString(&BaseDotExeSuffixName, L".exe");
@@ -659,23 +732,11 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
             result = ERROR_FILENAME_EXCED_RANGE;
             goto done;
         }
-        startup.dwFlags = STARTF_USESTDHANDLES;
-        startup.hStdInput = GetStdHandle(STD_INPUT_HANDLE);
-        startup.hStdOutput = GetStdHandle(STD_OUTPUT_HANDLE);
-        startup.hStdError = GetStdHandle(STD_ERROR_HANDLE);
         result=connect_broker();
-        if (!result) result=run16_frontend_scope_begin(&frontend_scope,frontend_channel_ready);
+        if (!result) result=run16_frontend_scope_begin(&frontend_scope);
         if (!result) result=OpenNtBaseClientWatchBroker();
         if (result) goto done;
-        if (!CreateProcessW(application,shell_command,NULL,NULL,TRUE,0,NULL,NULL,&startup,&child))
-            result = GetLastError();
-        else
-        {
-            CloseHandle(child.hThread);
-            if (WaitForSingleObject(child.hProcess,INFINITE)!=WAIT_OBJECT_0 ||
-                !GetExitCodeProcess(child.hProcess,&result)) result=GetLastError();
-            CloseHandle(child.hProcess);
-        }
+        result=launch_native(frontend_scope,application,shell_command);
         goto done;
     }
     if (type == SCS_DOS_BINARY)
@@ -715,6 +776,21 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
             }
             launch_command=normalized_command;
         }
+        /* WOW windows need no character Console. Release only our initially
+         * exclusive launcher Console, never an inherited CMD/frontend one.
+         * Capture Console stream identities before detaching: FreeConsole
+         * invalidates those handles, but redirected files/pipes must survive. */
+        if (binary==BINARY_TYPE_WIN16 && initial_console_only &&
+            GetConsoleProcessList(&console_member,1)==1 && console_member==GetCurrentProcessId())
+        {
+            const DWORD streams[3]={STD_INPUT_HANDLE,STD_OUTPUT_HANDLE,STD_ERROR_HANDLE};
+            BOOL console_stream[3]; DWORD i,mode;
+            for(i=0;i<3;++i)console_stream[i]=GetConsoleMode(GetStdHandle(streams[i]),&mode);
+            if(!FreeConsole()) { result=GetLastError();goto done; }
+            for(i=0;i<3;++i)if(console_stream[i] && !SetStdHandle(streams[i],NULL)) {
+                result=GetLastError();goto done;
+            }
+        }
         CsrPortHeap = HeapCreate(0, 0, 0);
         if (!CsrPortHeap)
         {
@@ -726,8 +802,8 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
         if (!result)
         {
             if ((binary & ~BINARY_SUBTYPE_MASK)==BINARY_TYPE_DOS)
-                result=run16_frontend_scope_begin(&frontend_scope,frontend_channel_ready);
-            if (!result) result = launch_vdm(binary, application, launch_command,frontend_scope);
+                result=run16_frontend_scope_begin(&frontend_scope);
+            if (!result) result = launch_vdm(binary, application, launch_command,frontend_scope,initial_console_only);
             s34_run16_trace("worker",result);
         }
         run16_frontend_scope_end(frontend_scope);frontend_scope=NULL;
@@ -759,34 +835,18 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
         if (!NT_SUCCESS(status)) { result=RtlNtStatusToDosError(status);goto done; }
         if (information.SubSystemType==IMAGE_SUBSYSTEM_WINDOWS_CUI) {
             result=connect_broker();
-            if (!result) result=run16_frontend_scope_begin(&frontend_scope,frontend_channel_ready);
+            s34_run16_trace("native-broker",result);
+            if (!result) result=run16_frontend_scope_begin(&frontend_scope);
+            s34_run16_trace("native-frontend",result);
             if (!result) result=OpenNtBaseClientWatchBroker();
             if (result) goto done;
         }
     }
-    bytes = (wcslen(launch_command) + 1) * sizeof(WCHAR);
-    childCommand = HeapAlloc(GetProcessHeap(), 0, bytes);
-    if (!childCommand)
-    {
-        result = ERROR_NOT_ENOUGH_MEMORY;
+    if(frontend_scope) {
+        result=launch_native(frontend_scope,image_resolved ? application : image_argument,launch_command);
         goto done;
     }
-    memcpy(childCommand, launch_command, bytes);
-    startup.dwFlags = STARTF_USESTDHANDLES;
-    startup.hStdInput = GetStdHandle(STD_INPUT_HANDLE);
-    startup.hStdOutput = GetStdHandle(STD_OUTPUT_HANDLE);
-    startup.hStdError = GetStdHandle(STD_ERROR_HANDLE);
-    if (!CreateProcessW(image_resolved ? application : image_argument,childCommand,
-                        NULL,NULL,TRUE,0,NULL,NULL,&startup,&child))
-        result = GetLastError();
-    else
-    {
-        CloseHandle(child.hThread);
-        if (WaitForSingleObject(child.hProcess,INFINITE)!=WAIT_OBJECT_0 ||
-            !GetExitCodeProcess(child.hProcess,&result)) result=GetLastError();
-        CloseHandle(child.hProcess);
-    }
-    HeapFree(GetProcessHeap(), 0, childCommand);
+    result=launch_gui(image_resolved ? application : image_argument,launch_command);
 done:
     run16_frontend_scope_end(frontend_scope);
     OpenNtBaseClientDisconnectCurrent();

@@ -78,6 +78,9 @@
 #include "nt_com.h"
 #include "nt_pif.h"
 #include "yoda.h"
+/* DIVERGENCE(MVDM-HOST-DIV-313): acknowledge the original input handoff at
+ * the root-owned Console, without moving its block/resume policy here. */
+extern BOOL ntvdm_console_set_active(BOOL active);
 /*================================================================
 External references.
 ================================================================*/
@@ -1651,6 +1654,10 @@ BOOL CntrlHandler(ULONG CtrlType)
     fEventThreadBlock = TRUE;
 
     CntrlHandlerState |= CNTRL_VDMBLOCKED;
+    /* DIVERGENCE(MVDM-HOST-DIV-313): final paint, returned typeahead and
+     * original mode restoration must precede native frontend activation. */
+    if (!VDMForWOW && !ntvdm_console_set_active(FALSE))
+        DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(), __FILE__,__LINE__);
 #ifndef PROD
     fprintf(trace_file,"Blocked event thread\n");
 #endif
@@ -1671,6 +1678,11 @@ void nt_resume_event_thread(void)
         TerminateVDM();
         return;
         }
+
+    /* DIVERGENCE(MVDM-HOST-DIV-313): reclaim input/presentation before the
+     * original Console queries, mode setup and event-thread release. */
+    if (!ntvdm_console_set_active(TRUE))
+        DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(), __FILE__,__LINE__);
 
     /* re-enable stream io if the application is terminating */
 

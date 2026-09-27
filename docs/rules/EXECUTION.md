@@ -108,6 +108,15 @@ never a passing result.
 
 ### Every-P regression and side-test publication gate
 
+T423's S3 ownership-replanning snapshot remains evidence, not a production P.
+The owner subsequently approved the migration report, S4 implementation and
+automatic sequential admission after S4 delivery. This supersedes the earlier
+planning-only pause, never the verification gates. The independent frontend
+runtime package is the six files below plus frontend.exe (seven total); the
+helper is a private frontend.exe role, not an eighth binary. All regression,
+coherent publication and recovery gates apply to that complete seven-file set.
+Do not publish unverified candidates or claim S3 functional closure.
+
 Owner clarification dated 2026-09-24: before **every P that modifies
 production code**, not only S closure, pass this runtime gate. Pure
 documentation/planning P commits require documentation governance, link and
@@ -146,10 +155,10 @@ commits containing production changes remain subject to the runtime gate.
    not merely a numeric depth or a later crash. Existing failures may remain
    explicitly open within the admitted scope, never counted as functional
    passes. Unknown or unexecuted comparisons do not pass this gate.
-5. Update O:/winnt with the verified coherent set: dtmgr.exe, run16.exe,
-   basesrv.exe, ntvdm.exe, WOW32.DLL and VDMREDIR.DLL, plus required original
+5. Update O:/winnt with the verified coherent set: monitor.exe, run16.exe,
+   basesrv.exe, ntvdm.exe, frontend.exe, WOW32.DLL and VDMREDIR.DLL, plus required original
    guest binaries and approved configuration at proper package-relative paths.
-   Validate all six, including unchanged hashes, against the tested manifest
+   Validate all seven, including unchanged hashes, against the tested manifest
    and verify the published set. Do not test one component combination and
    deploy another. This is the owner's latest usable side-test package, not
    a scratch candidate folder or a hard-coded production path.

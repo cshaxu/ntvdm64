@@ -3,17 +3,20 @@
  * Never a product input. */
 #define run16_console_video_data production_video_data
 #define run16_console_video_text production_video_text
-#include "../../src/run16-exe/console_video.c"
+#include "../../src/frontend-exe/console_video.c"
 #undef run16_console_video_data
 #undef run16_console_video_text
 #include <stdio.h>
 
 static FILE *report(void)
 {
+    static LONG announced;
     char path[MAX_PATH];
     DWORD length=GetEnvironmentVariableA("MVDM_TEST_FRAME_REPORT",path,sizeof(path));
     FILE *file=NULL;
     if (length && length<sizeof(path)) fopen_s(&file,path,"a");
+    if(file && !InterlockedCompareExchange(&announced,1,0))
+        fprintf(file,"RECEIVER pid=%lu\n",GetCurrentProcessId());
     return file;
 }
 
@@ -32,10 +35,10 @@ DWORD run16_console_video_data(run16_console_video *video,uint32_t serial,
                         (BYTE)((video->pixels[y*video->description.stride+x/8]>>(7-x%8))&1);
                     if(pixel==0x12) ++a; else if(pixel==0x2a) ++b; else ++other;
                 }
-            fprintf(file,"FRAME serial=%u width=%u height=%u depth=%u a=%u b=%u other=%u paletteA=%06x paletteB=%06x\n",
+            fprintf(file,"FRAME serial=%u width=%u height=%u depth=%u a=%u b=%u other=%u paletteA=%06x paletteB=%06x pid=%lu\n",
                 serial,video->description.width,video->description.height,
                 video->description.depth,a,b,other,
-                video->description.palette[0x12],video->description.palette[0x2a]);
+                video->description.palette[0x12],video->description.palette[0x2a],GetCurrentProcessId());
             fclose(file);
         }
     }
@@ -51,7 +54,7 @@ DWORD run16_console_video_text(run16_console_video *video,uint32_t serial)
 }
 
 #define run16_console_dispatch production_console_dispatch
-#include "../../src/run16-exe/console_frontend.c"
+#include "../../src/frontend-exe/console_frontend.c"
 #undef run16_console_dispatch
 DWORD run16_console_dispatch(run16_console_frontend *owner,
     const console_io_request *request,console_io_reply *reply)

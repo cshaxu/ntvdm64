@@ -59,8 +59,24 @@ DWORD OpenNtBaseServiceRegisterFrontendRoot(OPENNT_BASE_CONNECTION *,DWORD pid,
     DWORD generation,HANDLE capability);
 DWORD OpenNtBaseServiceRetainFrontendRoot(OPENNT_BASE_CONNECTION *,DWORD pid,
     DWORD generation,HANDLE capability,HANDLE *root,DWORD *root_generation);
+/* Preserve the caller's verified execution Console across a hidden backend.
+ * The returned unnamed event is a separate, wait-only capability, not the
+ * frontend event or a caller-selected Console/worker identity. The root owns
+ * the association even when the acquiring helper disconnects. Bind is allowed
+ * only before task/reservation admission and never mutates original DOS records. */
+DWORD OpenNtBaseServiceAcquireConsoleContext(OPENNT_BASE_CONNECTION *,DWORD pid,
+    DWORD generation,HANDLE frontend,HANDLE *capability);
+DWORD OpenNtBaseServiceBindConsoleContext(OPENNT_BASE_CONNECTION *,DWORD pid,
+    DWORD generation,HANDLE capability);
 DWORD OpenNtBaseServiceWorkerFrontendCapability(OPENNT_BASE_CONNECTION *,DWORD pid,
     DWORD generation,HANDLE *capability);
+/* One pending private launcher channel per authenticated connection. Broker
+ * carries only typed attachments, never launch/input/frame payloads. Root
+ * owns all three returned references; sender rundown only drops pending ones. */
+DWORD OpenNtBaseServiceSubmitFrontendChannel(OPENNT_BASE_CONNECTION *,DWORD pid,
+    DWORD generation,HANDLE capability,HANDLE channel);
+DWORD OpenNtBaseServiceTakeFrontendChannel(OPENNT_BASE_CONNECTION *,DWORD pid,
+    DWORD generation,HANDLE *channel,HANDLE *caller_process,HANDLE *execution);
 /* Request identifies an authenticated connection's still-pending original
  * DOS command, not a caller-nominated worker. The root's event wakes it to
  * acquire that selected worker and publish a direct route. No I/O payloads. */
@@ -68,6 +84,13 @@ DWORD OpenNtBaseServiceRequestFrontend(OPENNT_BASE_CONNECTION *,DWORD pid,
     DWORD generation,HANDLE capability);
 DWORD OpenNtBaseServiceFrontendRequest(OPENNT_BASE_CONNECTION *,DWORD pid,
     DWORD generation,DWORD *request,HANDLE *worker);
+/* Read-only original DOS occupancy for this authenticated frontend only.
+ * Pending attachment is distinct from active original DOS records. */
+DWORD OpenNtBaseServiceFrontendUsage(OPENNT_BASE_CONNECTION *,DWORD pid,
+    DWORD generation,DWORD *pending,DWORD *tasks);
+/* Atomically reject retirement while original work/admission remains, else
+ * revoke future joins. Frontend first drains its own native/local requests. */
+DWORD OpenNtBaseServiceRetireFrontend(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation);
 DWORD OpenNtBaseServiceAttachFrontendRequest(OPENNT_BASE_CONNECTION *,DWORD pid,
     DWORD generation,DWORD request,HANDLE pipe,HANDLE ready);
 /* Frontend transport authentication only: the original command's waiting

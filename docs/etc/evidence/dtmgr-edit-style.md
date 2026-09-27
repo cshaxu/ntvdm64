@@ -1,5 +1,10 @@
 # Dtmgr EDIT-style presentation
 
+Current naming: the owner renamed the component to `src/monitor-exe` and
+the product to `monitor.exe`. The current test entry is
+`tests/observation/verify-monitor-layout.ps1`; retained names/hashes below
+identify historical dtmgr artifacts, not the renamed candidate.
+
 ## Request and boundary
 
 The owner requests an independent white-background blue-text title, table top

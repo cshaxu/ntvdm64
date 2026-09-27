@@ -3,14 +3,31 @@ param(
     [Parameter(Mandatory)][string]$WowBuild,
     [Parameter(Mandatory)][string]$Backup,
     [Parameter(Mandatory)][string]$GuestProbe,
+    [Parameter(Mandatory)][string]$Observer,
     [Parameter(Mandatory)][string]$Prefix,
     [string]$DiagnosticWorker,
     [switch]$StandardFrontend,
-    [string]$PackageRoot='O:\winnt'
+    [Parameter(Mandatory)][string]$PackageRoot,
+    [string]$LogRoot='O:\winnt\logs'
 )
 $ErrorActionPreference='Stop'
-$names=@('run16.exe','basesrv.exe','ntvdm.exe','dtmgr.exe','WOW32.DLL','VDMREDIR.DLL')
+$buildRoot=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../../build')).TrimEnd('\')+'\'
+$physicalPackage=(Resolve-Path -LiteralPath $PackageRoot).Path.TrimEnd('\')
+# A short test drive may be needed for the original COMMAND path limit.
+# Resolve only an actual SUBST mapping, never trust a caller's claimed target.
+foreach($mapping in @(& subst.exe)){
+    if($mapping -match '^([A-Za-z]):\\: => (.+)$' -and
+       $physicalPackage.StartsWith($Matches[1]+':',[StringComparison]::OrdinalIgnoreCase)){
+        $physicalPackage=$Matches[2].TrimEnd('\')+$physicalPackage.Substring(2)
+        break
+    }
+}
+if(!$physicalPackage.StartsWith($buildRoot,[StringComparison]::OrdinalIgnoreCase)){
+    throw 'Observed candidates may only run in a repository build test package; never publish them'
+}
+$names=@('run16.exe','basesrv.exe','ntvdm.exe','monitor.exe','WOW32.DLL','VDMREDIR.DLL','frontend.exe')
 $paths=@($names | ForEach-Object {Join-Path $PackageRoot $_})
+$paths+=@($names | ForEach-Object {Join-Path $physicalPackage $_})
 function Copy-PackageFile([string]$Source,[string]$Destination) {
     # Process signalling can precede release of its image section. Retry only
     # sharing/lock violations, bounded to five seconds; other errors stay fatal.
@@ -28,14 +45,14 @@ function Copy-PackageFile([string]$Source,[string]$Destination) {
     }
 }
 function Stop-Package {
-    Get-CimInstance Win32_Process -Filter "Name='run16.exe' OR Name='ntvdm.exe' OR Name='basesrv.exe' OR Name='dtmgr.exe'" |
+    Get-CimInstance Win32_Process -Filter "Name='run16.exe' OR Name='ntvdm.exe' OR Name='basesrv.exe' OR Name='monitor.exe' OR Name='frontend.exe'" |
         Where-Object {$_.ExecutablePath -in $paths} | ForEach-Object {
             $p=Get-Process -Id $_.ProcessId -ErrorAction SilentlyContinue
             if($p){$p.Kill();if(!$p.WaitForExit(10000)){throw 'Package cleanup timeout'}}
         }
 }
-$report=Join-Path $PackageRoot ('logs\'+$Prefix+'-frames.txt')
-$observation=Join-Path $PackageRoot ('logs\'+$Prefix+'-observer.txt')
+$report=Join-Path $LogRoot ($Prefix+'-frames.txt')
+$observation=Join-Path $LogRoot ($Prefix+'-observer.txt')
 if(Test-Path $report){throw 'Use a fresh evidence prefix'}
 foreach($name in $names){
     if((Get-FileHash (Join-Path $Backup $name)).Hash -ne (Get-FileHash (Join-Path $PackageRoot $name)).Hash){throw "Backup differs: $name"}
@@ -48,6 +65,7 @@ try {
     foreach($name in $names){
         $source=Join-Path $(if($name -eq 'WOW32.DLL'){$WowBuild}else{$FormalBuild}) $name
         if($name -eq 'ntvdm.exe' -and $DiagnosticWorker){$source=$DiagnosticWorker}
+        if($name -eq 'frontend.exe' -and !$StandardFrontend){$source=Join-Path $FormalBuild 'frontend-video-observer.exe'}
         Copy-PackageFile $source (Join-Path $PackageRoot $name)
     }
     $probe=Join-Path $PackageRoot 'tests\VFRAME.COM'
@@ -55,8 +73,8 @@ try {
     $env:MVDM_TEST_FRAME_REPORT=$report
     $env:MVDM_TEST_PACKAGE_ROOT=$PackageRoot
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
-    $launcher=if($StandardFrontend){Join-Path $PackageRoot 'run16.exe'}else{Join-Path $FormalBuild 'run16-video-observer.exe'}
-    & (Join-Path $FormalBuild 'console-startup-observer.exe') $launcher $PackageRoot $observation --observation-timeout-ms 20000 $probe
+    $launcher=Join-Path $PackageRoot 'run16.exe'
+    & $Observer $launcher $PackageRoot $observation --observation-timeout-ms 20000 $probe
     if($LASTEXITCODE -or !(Select-String -LiteralPath $observation -Pattern '^exit=0x00000000$' -Quiet)){throw 'Guest did not complete'}
     if(!(Select-String -LiteralPath ($observation+'.console.txt') -SimpleMatch 'GRAPHICS_FRAME_RETURN_OK' -Quiet)){throw 'Guest return marker missing'}
     if($StandardFrontend){
@@ -65,15 +83,18 @@ try {
     }
     $lines=Get-Content -LiteralPath $report
     $frame=$false;$text=$false
+    $launcherId=[regex]::Match((Get-Content -LiteralPath $observation -Raw),'(?m)^pid=(\d+)').Groups[1].Value
+    if(!$launcherId){throw 'Missing observed launcher identity'}
     foreach($line in $lines){
-        if($line -match '^FRAME serial=\d+ width=(\d+) height=(\d+) depth=8 a=(\d+) b=(\d+) other=0 paletteA=([0-9a-f]+) paletteB=([0-9a-f]+)$'){
+        if($line -match '^FRAME serial=\d+ width=(\d+) height=(\d+) depth=8 a=(\d+) b=(\d+) other=0 paletteA=([0-9a-f]+) paletteB=([0-9a-f]+) pid=(\d+)$'){
+            if($Matches[7] -eq $launcherId){throw 'Launcher still owns frame reception'}
             $half=([long]$Matches[1]*[long]$Matches[2])/2
             if([long]$Matches[3] -eq $half -and [long]$Matches[4] -eq $half -and $Matches[5] -ne $Matches[6]){$frame=$true}
         }
         if($frame -and $line -match '^TEXT serial=\d+ result=0$'){$text=$true}
     }
     if(!$frame -or !$text){throw 'Known guest pixels/palette or subsequent TEXT not received'}
-    'PASS real guest pixels/palette through original painter and production frame receiver; later text retirement. Test-only logging/launcher package discovery, no Window rendering claim.'
+    'PASS real guest pixels/palette through original painter and independent frontend receiver; later text retirement. Test-only frontend logging, no Window rendering claim.'
 } finally {
     Stop-Package
     foreach($name in $names){Copy-PackageFile (Join-Path $Backup $name) (Join-Path $PackageRoot $name)}

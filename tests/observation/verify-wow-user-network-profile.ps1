@@ -26,7 +26,7 @@ $output = Join-Path $logs 't422-s2-wow-network-console.log'
 $errorOutput = Join-Path $logs 't422-s2-wow-network-console.stderr.log'
 
 if ($ObservationSeconds -lt 3) { throw 'ObservationSeconds must be at least 3.' }
-foreach ($name in @('run16.exe','basesrv.exe','ntvdm.exe','dtmgr.exe')) {
+foreach ($name in @('run16.exe','basesrv.exe','ntvdm.exe','monitor.exe')) {
     if (!(Test-Path -LiteralPath (Join-Path $build $name) -PathType Leaf)) {
         throw "Required selected build artifact is absent: $name"
     }
@@ -123,7 +123,7 @@ function Invoke-NetworkProfileBranch([string]$name, [string]$driver) {
 }
 
 try {
-    foreach ($name in @('run16.exe','basesrv.exe','ntvdm.exe','dtmgr.exe')) {
+    foreach ($name in @('run16.exe','basesrv.exe','ntvdm.exe','monitor.exe')) {
         Copy-Item -LiteralPath (Join-Path $build $name) -Destination (Join-Path $runtime $name) -Force
     }
     # WOW32 is loaded beside the worker by the package loader.  Keep this

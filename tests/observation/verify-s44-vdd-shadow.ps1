@@ -37,7 +37,7 @@ New-Item -ItemType Directory -Force -Path (Join-Path $runtime 'logs') | Out-Null
 & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $repository 'tools\build\Build-T420S44VddGuestTest.ps1') `
     -RepositoryRoot $repository -BuildRoot $bopBuild
 if ($LASTEXITCODE -ne 0) { throw 'Failed to build S44BOP.COM.' }
-foreach ($name in @('run16.exe','basesrv.exe','ntvdm.exe','dtmgr.exe')) {
+foreach ($name in @('run16.exe','basesrv.exe','ntvdm.exe','monitor.exe')) {
     Copy-Item -LiteralPath (Join-Path $build $name) -Destination (Join-Path $runtime $name) -Force
 }
 Copy-Item -LiteralPath (Join-Path $build 's44-entry-hook-vdd.dll') -Destination $testVdd -Force
