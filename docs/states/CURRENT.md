@@ -54,8 +54,11 @@ and SOL/WRITE retain their known OOM frontier, not usability acceptance.
 
 ## S8 Verification Progress
 
-Admitted for source-first GUI launch/wait audit. No S8 production changes or
-acceptance results yet; the fully tested S7 package remains the live baseline.
+The [S8 ledger](../etc/evidence/m0-t423-s8-gui-launch-wait.md) identifies shell-owned
+wait policy, shared-WOW completion/result limitations and the missing standalone
+USER startup notification binding. Exact authenticated loader acknowledgement
+and cleanup remain design gates. No S8 production changes or runtime acceptance
+yet; the fully tested S7 package remains the live baseline.
 
 ## Current Technical Baseline
 
