@@ -5,7 +5,9 @@ param(
     [Parameter(Mandatory)][string]$ProcessPackageRoot,
     [Parameter(Mandatory)][string]$EvidenceRoot,
     [Parameter(Mandatory)][string]$LogPrefix,
-    [string]$LogRoot='O:\winnt\logs'
+    [string]$LogRoot='O:\winnt\logs',
+    [switch]$ExpandedFaults,
+    [ValidateSet('normal','frontend','launcher','worker','helper')][string[]]$Cases
 )
 $ErrorActionPreference='Stop'
 if($LogPrefix -notmatch '^[a-z0-9-]+$'){throw 'Invalid log prefix'}
@@ -37,13 +39,18 @@ $null=New-Item -ItemType Directory -Path $EvidenceRoot
 $oldPrivate=$env:MVDM_OBSERVER_PRIVATE_DESKTOP
 try {
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
-    foreach($case in @('normal','frontend','launcher','worker')){
+    $selected=@('normal','frontend','launcher','worker')
+    if($ExpandedFaults){$selected+='helper'}
+    if($Cases){$selected=@($selected | Where-Object {$_ -in $Cases})}
+    if(!$selected.Count){throw 'No selected cases; helper requires ExpandedFaults'}
+    foreach($case in $selected){
         $report=Join-Path $LogRoot "$LogPrefix-$case.txt"
         if(Test-Path $report){throw 'Use a fresh log prefix'}
         try {
             $arguments=@((Join-Path $PackageRoot 'tests\NOIOLIFE.EXE'),$PackageRoot,$report,
-                '--observation-timeout-ms','30000')
-            if($case -ne 'frontend'){$arguments+= $(if($case -eq 'normal'){'--normal'}else{"--$case-loss"})}
+                '--observation-timeout-ms',$(if($ExpandedFaults){'45000'}else{'30000'}))
+            if($case -ne 'frontend' -or $ExpandedFaults){$arguments+= $(if($case -eq 'normal'){'--normal'}else{"--$case-loss"})}
+            if($ExpandedFaults){$arguments+='--isolation'}
             & $Observer @arguments
             if($LASTEXITCODE){throw "Observer failed for $case"}
             $record=Get-Content $report -Raw
@@ -52,6 +59,13 @@ try {
                $record -notmatch '(?m)^exit=0x00000000\r?$' -or
                $screen -notmatch 'PASS ' -or $screen -match 'FAIL |Existing marker'){
                 throw "Lifetime assertion failed for $case; inspect $report"
+            }
+            $cells=($screen -replace '(?m)^\[\d+\] ','') -replace '\s',''
+            if($ExpandedFaults -and !$cells.Contains('distinctunrelatedcharacterfrontendandnativetargetsurvive')){
+                throw "Missing unrelated-session survival assertion: $case"
+            }
+            if($case -eq 'helper' -and !$cells.Contains('originalpipeerrorawaitsexplicitTerminate,DOSresult1067')){
+                throw 'Missing mixed helper-loss assertion'
             }
             Write-Output "PASS frontend lifetime $case (real fixture assertions and output)"
         } finally {

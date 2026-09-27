@@ -7,6 +7,35 @@
 #include <stdio.h>
 #include <string.h>
 static const WCHAR *markers[]={L"logs\\NIOREADY",L"logs\\NIOGO",L"logs\\NIODONE",L"logs\\NIOPID",L"logs\\NIOROOT",L"logs\\NIOMEM"};
+typedef struct fault_dialog { DWORD pid;HWND window;BOOL message;WCHAR expected[256]; } fault_dialog;
+static BOOL CALLBACK error_text(HWND child,LPARAM context)
+{
+    fault_dialog *state=(fault_dialog *)context;WCHAR text[1024]={0};DWORD_PTR copied;
+    SendMessageTimeoutW(child,WM_GETTEXT,1024,(LPARAM)text,SMTO_ABORTIFHUNG|SMTO_BLOCK,200,&copied);
+    if(wcsstr(text,state->expected))state->message=TRUE;
+    return TRUE;
+}
+static BOOL CALLBACK error_dialog(HWND window,LPARAM context)
+{
+    fault_dialog *state=(fault_dialog *)context;DWORD pid;WCHAR kind[32];
+    GetWindowThreadProcessId(window,&pid);
+    if(pid!=state->pid || !IsWindowVisible(window) || !GetClassNameW(window,kind,32) || wcscmp(kind,L"#32770"))return TRUE;
+    state->message=FALSE;EnumChildWindows(window,error_text,context);
+    if(state->message && IsWindowVisible(GetDlgItem(window,100))){state->window=window;return FALSE;}
+    return TRUE;
+}
+static BOOL CALLBACK fault_window(HWND window,LPARAM context)
+{
+    DWORD pid;WCHAR title[512]={0},kind[96]={0};DWORD_PTR copied=0;
+    GetWindowThreadProcessId(window,&pid);
+    if(pid!=(DWORD)context)return TRUE;
+    GetClassNameW(window,kind,96);
+    SendMessageTimeoutW(window,WM_GETTEXT,512,(LPARAM)title,
+        SMTO_ABORTIFHUNG|SMTO_BLOCK,200,&copied);
+    fwprintf(stderr,L"fault-window class=%ls visible=%d text=%ls\n",kind,IsWindowVisible(window),title);
+    if(!wcscmp(kind,L"#32770"))EnumChildWindows(window,fault_window,context);
+    return TRUE;
+}
 static HANDLE find_child(DWORD parent,PCWSTR name)
 {
     PROCESSENTRY32W entry={sizeof(entry)};
@@ -23,22 +52,53 @@ static HANDLE find_child(DWORD parent,PCWSTR name)
 int main(int argc,char **argv)
 {
     STARTUPINFOW startup={sizeof(startup)};
-    PROCESS_INFORMATION child={0};
+    PROCESS_INFORMATION child={0},bystander={0};
     WCHAR command[1024]=L"run16.exe tests\\NOIO.COM",image[MAX_PATH];
-    HANDLE file,nested=NULL,worker=NULL,frontend=NULL;
+    HANDLE file,nested=NULL,worker=NULL,frontend=NULL,helper=NULL,native=NULL;
+    HANDLE peer_ready=NULL,peer_go=NULL,peer_frontend=NULL;
+    WCHAR ready_name[96],go_name[96],peer_command[1536];
     DWORD i,code=1,bytes,pid=0;
-    BOOL normal=argc==2 && !strcmp(argv[1],"--normal");
+    BOOL helper_loss=argc>=2 && !strcmp(argv[1],"--helper-loss");
+    BOOL isolated=argc==3 && !strcmp(argv[2],"--isolation");
+    BOOL normal=(argc>=2 && !strcmp(argv[1],"--normal")) || helper_loss;
     BOOL spawn=argc==2 && !strcmp(argv[1],"--spawn");
-    BOOL launcher_loss=argc==2 && !strcmp(argv[1],"--launcher-loss");
-    BOOL worker_loss=argc==2 && !strcmp(argv[1],"--worker-loss");
+    BOOL launcher_loss=argc>=2 && !strcmp(argv[1],"--launcher-loss");
+    BOOL worker_loss=argc>=2 && !strcmp(argv[1],"--worker-loss");
+    BOOL frontend_loss=argc>=2 && !strcmp(argv[1],"--frontend-loss");
     const char *phase="guest-ready";
     ULONGLONG deadline;
-    if(argc!=1 && !normal && !spawn && !launcher_loss && !worker_loss) {
+    if(argc==4 && !strcmp(argv[1],"--bystander")) {
+        HANDLE ready=OpenEventA(EVENT_MODIFY_STATE,FALSE,argv[2]);
+        HANDLE go=OpenEventA(SYNCHRONIZE,FALSE,argv[3]);
+        DWORD result;
+        if(!ready || !go || !SetEvent(ready))return 65;
+        result=WaitForSingleObject(go,45000)==WAIT_OBJECT_0 ? 53 : 66;
+        if(result==53)puts("UNRELATED-NATIVE-SESSION-SURVIVED");
+        CloseHandle(ready);CloseHandle(go);return (int)result;
+    }
+    if(argc!=1 && !normal && !spawn && !launcher_loss && !worker_loss && !frontend_loss) {
         for(i=0;i<(DWORD)argc;++i) fprintf(stderr,"argument[%lu]=%s\n",i,argv[i]);
         return 64;
     }
     for(i=0;i<sizeof(markers)/sizeof(markers[0]);++i) if(GetFileAttributesW(markers[i])!=INVALID_FILE_ATTRIBUTES) {
         fprintf(stderr,"Existing marker; refusing test\n");return 2;
+    }
+    if(isolated) {
+        STARTUPINFOW peer_startup={sizeof(peer_startup)};
+        phase="independent-session-start";
+        if(!GetModuleFileNameW(NULL,image,MAX_PATH))goto cleanup;
+        swprintf_s(ready_name,96,L"Local\\NTVDM-S5-%lu-ready",GetCurrentProcessId());
+        swprintf_s(go_name,96,L"Local\\NTVDM-S5-%lu-go",GetCurrentProcessId());
+        peer_ready=CreateEventW(NULL,TRUE,FALSE,ready_name);
+        peer_go=CreateEventW(NULL,TRUE,FALSE,go_name);
+        if(!peer_ready || !peer_go)goto cleanup;
+        swprintf_s(peer_command,1536,L"run16.exe \"%ls\" --bystander %ls %ls",image,ready_name,go_name);
+        peer_startup.dwFlags=STARTF_USESHOWWINDOW;peer_startup.wShowWindow=SW_HIDE;
+        if(!CreateProcessW(L"run16.exe",peer_command,NULL,NULL,FALSE,CREATE_NEW_CONSOLE,
+            NULL,NULL,&peer_startup,&bystander) ||
+            WaitForSingleObject(peer_ready,10000)!=WAIT_OBJECT_0)goto cleanup;
+        peer_frontend=find_child(bystander.dwProcessId,L"frontend.exe");
+        if(!peer_frontend)goto cleanup;
     }
     if(normal) {
         if(!GetModuleFileNameW(NULL,image,MAX_PATH) ||
@@ -92,6 +152,7 @@ int main(int argc,char **argv)
     worker=find_child(normal ? pid : child.dwProcessId,L"ntvdm.exe");
     frontend=find_child(child.dwProcessId,L"frontend.exe");
     if(!worker || !frontend) goto cleanup;
+    if(peer_frontend && GetProcessId(peer_frontend)==GetProcessId(frontend))goto cleanup;
     if(normal){
         DWORD members[64];
         phase="worker-native-console-isolation";
@@ -105,6 +166,17 @@ int main(int argc,char **argv)
     }
     phase="root-close";
     if(normal) {
+        if(helper_loss) {
+            phase="helper-failure-not-execution-completion";
+            helper=find_child(GetProcessId(frontend),L"frontend.exe");
+            if(!helper)goto cleanup;
+            native=find_child(GetProcessId(helper),L"NOIOLIFE.EXE");
+            if(!native || !TerminateProcess(helper,92) ||
+                WaitForSingleObject(helper,5000)!=WAIT_OBJECT_0 ||
+                WaitForSingleObject(native,250)!=WAIT_TIMEOUT ||
+                WaitForSingleObject(child.hProcess,0)!=WAIT_TIMEOUT ||
+                WaitForSingleObject(worker,0)!=WAIT_TIMEOUT)goto cleanup;
+        }
         file=CreateFileW(markers[4],GENERIC_WRITE,FILE_SHARE_READ,NULL,CREATE_NEW,0,NULL);
         if(file==INVALID_HANDLE_VALUE) goto cleanup;
         CloseHandle(file);
@@ -124,11 +196,30 @@ int main(int argc,char **argv)
         deadline=GetTickCount64()+8000;
         while(GetFileAttributesW(markers[2])==INVALID_FILE_ATTRIBUTES && GetTickCount64()<deadline)Sleep(20);
         if(GetFileAttributesW(markers[2])==INVALID_FILE_ATTRIBUTES)goto cleanup;
-        if(normal && (WaitForSingleObject(nested,5000)!=WAIT_OBJECT_0 ||
+        phase="nested-dos-result";
+        if(helper_loss) {
+            fault_dialog dialog={0};size_t length;
+            dialog.pid=GetProcessId(worker);
+            if(!FormatMessageW(FORMAT_MESSAGE_FROM_SYSTEM,NULL,ERROR_NO_DATA,0,dialog.expected,256,NULL))goto cleanup;
+            length=wcslen(dialog.expected);
+            while(length && (dialog.expected[length-1]==L'\r' || dialog.expected[length-1]==L'\n'))dialog.expected[--length]=0;
+            deadline=GetTickCount64()+5000;
+            do {EnumWindows(error_dialog,(LPARAM)&dialog);if(dialog.window)break;Sleep(20);}while(GetTickCount64()<deadline);
+            phase="original-pipe-error-response";
+            if(!dialog.window || WaitForSingleObject(nested,0)!=WAIT_TIMEOUT ||
+                WaitForSingleObject(worker,0)!=WAIT_TIMEOUT ||
+                !PostMessageW(dialog.window,WM_COMMAND,MAKEWPARAM(100,BN_CLICKED),(LPARAM)GetDlgItem(dialog.window,100)))goto cleanup;
+            if(WaitForSingleObject(worker,8000)!=WAIT_OBJECT_0 || WaitForSingleObject(nested,5000)!=WAIT_OBJECT_0 ||
+                !GetExitCodeProcess(nested,&result))goto cleanup;
+            printf("original pipe-error Terminate response: DOS launcher result=%lu\n",result);
+            if(result!=ERROR_PROCESS_ABORTED)goto cleanup;
+        }
+        if(normal && !helper_loss && (WaitForSingleObject(nested,5000)!=WAIT_OBJECT_0 ||
             !GetExitCodeProcess(nested,&result) || result!=7))goto cleanup;
         phase="last-user-retirement";
         if(WaitForSingleObject(frontend,8000)!=WAIT_OBJECT_0)goto cleanup;
-        puts(normal ? "PASS direct native result 37; orphan nested DOS survives and returns 7; frontend retires after last task" :
+        if(helper_loss)puts("PASS helper loss preserves native target result 37 and guest file work; original pipe error awaits explicit Terminate, DOS result 1067, frontend retires");
+        else puts(normal ? "PASS direct native result 37; orphan nested DOS survives and returns 7; frontend retires after last task" :
             "PASS killed launcher preserves frontend and guest file work; frontend retires after last task");
     }else{
         DWORD result;
@@ -141,6 +232,18 @@ int main(int argc,char **argv)
         puts(worker_loss ? "PASS worker failure completes direct task with 1067 and releases frontend" :
             "PASS independent frontend death closes associated worker without guest Console I/O; task fails 1067");
     }
+    phase="worker-retirement-before-test-cleanup";
+    if(WaitForSingleObject(worker,8000)!=WAIT_OBJECT_0)goto cleanup;
+    if(isolated) {
+        DWORD peer_code;
+        phase="unrelated-session-survival";
+        if(WaitForSingleObject(bystander.hProcess,0)!=WAIT_TIMEOUT ||
+            WaitForSingleObject(peer_frontend,0)!=WAIT_TIMEOUT || !SetEvent(peer_go) ||
+            WaitForSingleObject(bystander.hProcess,8000)!=WAIT_OBJECT_0 ||
+            !GetExitCodeProcess(bystander.hProcess,&peer_code) || peer_code!=53 ||
+            WaitForSingleObject(peer_frontend,8000)!=WAIT_OBJECT_0)goto cleanup;
+        puts("PASS distinct unrelated character frontend and native target survive tested fault, return 53 and retire naturally");
+    }
     code=0;
 cleanup:
     if(code) {
@@ -148,6 +251,16 @@ cleanup:
         GetExitCodeProcess(child.hProcess,&child_code);
         fprintf(stderr,"FAIL phase=%s spawn=%d normal=%d child=%lu error=%lu\n",
             phase,spawn,normal,child_code,GetLastError());
+        {
+            HANDLE observed[]={nested,worker,frontend,helper,native,peer_frontend};
+            const char *names[]={"nested","worker","frontend","helper","native","peer-frontend"};
+            for(i=0;i<sizeof(observed)/sizeof(observed[0]);++i)if(observed[i]) {
+                DWORD status=0;
+                if(GetExitCodeProcess(observed[i],&status))
+                    fprintf(stderr,"fault-observation %s pid=%lu exit=%lu\n",names[i],GetProcessId(observed[i]),status);
+                EnumWindows(fault_window,(LPARAM)GetProcessId(observed[i]));
+            }
+        }
     }
     if(WaitForSingleObject(child.hProcess,0)==WAIT_TIMEOUT) {
         TerminateProcess(child.hProcess,99);WaitForSingleObject(child.hProcess,5000);
@@ -156,6 +269,12 @@ cleanup:
     if(nested) CloseHandle(nested);
     if(worker){if(WaitForSingleObject(worker,0)==WAIT_TIMEOUT)TerminateProcess(worker,99);CloseHandle(worker);}
     if(frontend){if(WaitForSingleObject(frontend,0)==WAIT_TIMEOUT)TerminateProcess(frontend,99);CloseHandle(frontend);}
+    if(helper)CloseHandle(helper);
+    if(native){if(WaitForSingleObject(native,0)==WAIT_TIMEOUT)TerminateProcess(native,99);CloseHandle(native);}
+    if(peer_go)SetEvent(peer_go);
+    if(bystander.hProcess){WaitForSingleObject(bystander.hProcess,5000);CloseHandle(bystander.hThread);CloseHandle(bystander.hProcess);}
+    if(peer_frontend){if(WaitForSingleObject(peer_frontend,0)==WAIT_TIMEOUT)TerminateProcess(peer_frontend,99);CloseHandle(peer_frontend);}
+    if(peer_ready)CloseHandle(peer_ready);if(peer_go)CloseHandle(peer_go);
     /* Controller retains markers until external test-owned worker cleanup,
      * so a late guest cannot be accidentally released by the next test. */
     return (int)code;

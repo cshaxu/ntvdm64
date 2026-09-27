@@ -76,8 +76,12 @@ owns the remaining expanded matrix. No T closure is claimed.
 S5 P1 verification: ExpandedBackend runs seventeen native transport/component
 cases successfully after two test-only prerequisite/lifecycle corrections.
 Published O:/winnt ordinary A/B four-level chains pass with results 1/23 and
-actual I/O/return/retirement witnesses. No production binary changed. Expanded
-mixed-fault integration remains pending; see the S5 ledger. S5 is not closed.
+actual I/O/return/retirement witnesses. S5 P2 adds five mixed lifecycle cases,
+all passing with unrelated-session survival and worker retirement before test
+cleanup. Helper loss preserves native execution and exposes the original DOS
+pipe-error dialog; explicit Terminate yields 1067, not fabricated DOS success.
+No production binary changed. The S5 ledger records the complete bounded
+conclusion; final governance/commit/push precede S6 admission.
 
 - S1 delivered the launcher lifecycle boundary under its recorded owner
   verification exception; [S1 evidence](../etc/evidence/m0-t423-s1-restart-lifecycle.md).

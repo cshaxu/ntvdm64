@@ -21,8 +21,8 @@ Review existing owners and tests before authoring more implementation.
 | Unicode, palette/cursor, scrolling, viewport and resize | native_console_capture_test.c; native_console_host_test.c default | r3 real Console pass: 300 rows, 5001 columns, tiled data, resize retry and no duplicate notification |
 | Actual users outlive direct parent, helper failure is not empty | native_console_members_test.c | r3 real helper membership 0/2/1/0 pass, failure leaves count untouched |
 | Four-level DOS/native chains and I/O restoration | tools/audit/Verify-CommandExitStatus.ps1 frontend-chain-a/frontend-chain-b with OrdinaryFrontend | Published O:/winnt pass, final results 1/23, actual output/return markers and one independent frontend per chain |
-| Mixed launcher/helper/frontend/worker faults and unrelated-session survival | verify-frontend-lifetime.ps1 and request/scope tests; extend uncovered combinations only | Pending coverage review and live tests |
-| Regression and release | DOS17, separate WOW frontiers, graph ownership, seven-file hashes, governance | Mandatory for production changes; tests/docs alone do not redeploy unchanged binaries |
+| Mixed launcher/helper/frontend/worker faults and unrelated-session survival | verify-frontend-lifetime.ps1 -ExpandedFaults, frontend_loss_noio_test.c | Final five-case pass including actual native/DOS work and independent session; worker retirement asserted before cleanup |
+| Regression and release | S4 DOS17/WOW/ownership baseline; S5 native seventeen, four-level pair, lifetime five; seven-file hashes | No production change: exact published and candidate seven hashes remain S4; tests rebuilt and run, governance/diff gates required before P2 |
 
 ## Boundaries and procedure
 
@@ -91,3 +91,65 @@ normal/launcher/frontend/worker cases. Specifically prove helper I/O failure
 with live mixed execution and unrelated character-session survival; local
 stalled-peer tests or the two normal twelve-target chains do not replace
 those integration assertions. Do not begin Window work or close S5 early.
+
+## Expanded mixed-fault investigation
+
+Extend the existing frontend_loss_noio_test.c rather than invent a second
+product mechanism. ExpandedFaults adds an independent native character session
+to each normal/frontend/launcher/worker case and a fifth helper-loss case.
+The second session has a distinct frontend and a real gated native target;
+it must remain alive across the tested failure, return actual result 53, and
+retire naturally. Helper loss occurs while a real native parent and its nested
+DOS NOIO.COM task are live. The native target must survive and return 37;
+guest file work must reach NIODONE. Helpers are not counted as target programs.
+
+The first four cases passed in mixed-fault-r1. The helper assertion initially
+expected DOS result 7 unconditionally and failed. Further observations r2-r4
+showed NIODONE existed, native result was 37, and the guest/worker/launcher
+remained alive. Crucially, worker-owned visible dialog #32770 reported the
+system ERROR_NO_DATA text, "The pipe is being closed", with Terminate/Ignore.
+This was not a silent wait or evidence that helper death had killed the DOS
+task. It was original error interaction, which the initial test had not handled.
+
+Source contract: mvdm/softpc.new/host/src/nt_error.c::DisplayErrorTerm formats
+the OS error and calls host_error; host_error opens ErrorDialogBox with
+RMB_ABORT|RMB_IGNORE. Its WM_COMMAND IDB_QUIT (nt_uis.h value 100) returns
+RMB_ABORT; ErrorDialogBox then invokes original TerminateVDM for DOS. No new
+automatic execution termination, retry, error suppression or success policy
+is introduced. The test asserts the exact FormatMessage(ERROR_NO_DATA) text,
+visible original button and still-live worker/launcher, then posts that
+original Terminate action only to the exact test worker on its unswitched
+private desktop. The resulting unfinished DOS task returns 1067, frontend
+retires, and the independent session still returns 53. r5 proves this helper
+negative contract. It is not a successful DOS exit-7 case.
+
+All failed transcripts and diagnostic process/window snapshots remain under
+O:/winnt/logs/m0-t423-s5-mixed-fault-r1 through r4. The final all-five run is
+separately recorded below after completion. Production bytes are unchanged;
+only the test fixture is compiled x86 /MT with user32.lib, under build/M0-T423/S5.
+
+## P2 bounded conclusion
+
+The final strengthened all-five run passed with an explicit worker-exit check
+before any test cleanup, not just launcher/frontend retirement. Reproducer:
+map the fresh build/M0-T423/S5/p candidate to R: temporarily, then run
+tests/observation/verify-frontend-lifetime.ps1 with Observer
+build/M0-T423/S4/observer-modal.exe, PackageRoot R:/, ProcessPackageRoot the
+physical candidate, EvidenceRoot build/M0-T423/S5/mixed-fault-retirement,
+LogPrefix m0-t423-s5-mixed-fault-retirement and ExpandedFaults. Remove the
+temporary mapping afterward. Reports are O:/winnt/logs/<prefix>-{normal,
+frontend,launcher,worker,helper}.txt and their actual Console transcripts.
+The earlier mixed-fault-final run also passed all five; the retirement run is
+the stronger final evidence. Test source SHA256 is
+C5C47EEB1A3F0BB6CEBBF6232ED708C5DCE1700B4BD52D6483FA5BA46FF0FB4C;
+NOIOLIFE.EXE SHA256 is
+A6079D2B94B9BA6A88D07495180DEBC3890BD52E2FB675BA5B09A23B84300FF4.
+
+All S5 checklist rows have the applicable inspected evidence. Component mocks
+remain labelled; physical focus/clipping are owner-waived. Original fault
+interaction is preserved rather than suppressed. No src/, original mirror,
+guest, configuration or runtime binary changed in S5; O:/winnt retains the
+verified S4 seven-file package, rechecked against the pinned manifest. The
+historical startup-timeout debt remains explicitly unattributed, not repaired.
+S5 can conclude after governance/commit/push; S6 owns the independent frontend's
+display/window implementation, not an unresolved S5 product implementation.
