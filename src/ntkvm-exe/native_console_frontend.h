@@ -21,6 +21,8 @@ DWORD run16_native_frontend_dos_video(run16_native_frontend *,const void *,const
 /* Successful enter retains the shared I/O lock until leave. */
 DWORD run16_native_frontend_dos_enter(run16_native_frontend *,const void *);
 void run16_native_frontend_dos_leave(run16_native_frontend *);
+DWORD run16_native_frontend_screen_begin(run16_native_frontend *);
+DWORD run16_native_frontend_screen_end(run16_native_frontend *,BOOL);
 /* Caller holds the successful dos_enter lock. */
 BOOL run16_native_frontend_text_frame_required(run16_native_frontend *);
 /* Borrowed readiness; data operations require the successful dos_enter lock. */

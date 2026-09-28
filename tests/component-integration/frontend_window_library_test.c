@@ -23,13 +23,19 @@ static lib_bool count_input(void *context, const kvm_input_event *event)
  * terminal-cell adapter must retain that richer input instead of truncating it. */
 static int native_unicode_bounds(kvm_window_frame *frame)
 {
-    static const WCHAR units[][2] = {{L'A', 0}, {0x4e2d, 0}, {0xd83d, 0xde00}};
-    static const char *names[] = {"ASCII", "CJK wide cell", "surrogate pair"};
+    static const WCHAR units[][2] = {{L'A', 0}, {0x4e2d, 0}, {0xd83d, 0xde00}, {0x2500, 0}};
+    static const char *names[] = {"ASCII", "CJK replacement", "surrogate replacement", "PC line glyph"};
+    /* Independent bytes from the pinned original V7VGA ROM: A, ?, and 196.
+     * Assert exact pixels, not merely nonempty GDI output. */
+    static const BYTE expected[][14]={
+        {0,0,0x10,0x38,0x6c,0xc6,0xc6,0xfe,0xc6,0xc6,0xc6,0,0,0},
+        {0,0,0x7c,0xc6,0xc6,0x0c,0x18,0x18,0,0x18,0x18,0,0,0},
+        {0,0,0,0,0,0,0,0xff,0,0,0,0,0,0}};
     unsigned test;
-    for (test = 0; test < 3; ++test) {
+    for (test = 0; test < 4; ++test) {
         run16_native_frame_info info = {0};
         CHAR_INFO cells[4], original[4];
-        unsigned column, x, y, ink = 0, span = test ? 2 : 1;
+        unsigned column, x, y, ink = 0, span = (test==1 || test==2) ? 2 : 1;
         info.screen.dwSize.X = 4; info.screen.dwSize.Y = 1;
         info.screen.srWindow.Right = 3;
         info.screen.ColorTable[7] = RGB(255, 255, 255);
@@ -50,6 +56,9 @@ static int native_unicode_bounds(kvm_window_frame *frame)
             frame->image.height == FRONTEND_NATIVE_CELL_HEIGHT);
         for (y = 0; y < frame->image.height; ++y) for (x = 0; x < 32; ++x) {
             DWORD rgb = frame->image.palette[frame->image.pixels[y * 32 + x]];
+            unsigned glyph=test==0 ? 0 : test==3 ? 2 : 1;
+            BOOL set=x>=8 && x<16 && (expected[glyph][y]&(0x80>>(x-8)));
+            CHECK(rgb==(set ? 0xffffffu : 0));
             CHECK(rgb == 0 || rgb == 0xffffff);
             if (x >= 8 && x < (1 + span) * 8) ink += rgb != 0;
             else CHECK(rgb == 0);
@@ -58,7 +67,7 @@ static int native_unicode_bounds(kvm_window_frame *frame)
         printf("PASS native Unicode carrier: %s has ink within %u cells; source unchanged\n",
             names[test], span);
     }
-    puts("LIMITATION: nonblank Unicode raster does not prove correct glyph/fallback or combining-mark shaping");
+    puts("PASS exact original V7VGA bitmap pixels, PC line mapping and explicit '?' fallback; wide trailing cell blank, Unicode input unchanged");
     return 0;
 }
 

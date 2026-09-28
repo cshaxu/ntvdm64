@@ -3,6 +3,7 @@ param(
     [Parameter(Mandatory)][string]$Observer,
     [Parameter(Mandatory)][string]$BuildRoot,
     [string]$PackageRoot='O:\winnt',
+    [string]$LogRoot='O:\winnt\Logs2',
     [Parameter(Mandatory)][string]$LogPrefix,
     [string[]]$SelectedCases
 )
@@ -10,13 +11,18 @@ $ErrorActionPreference='Stop'
 if($LogPrefix -notmatch '^[a-z0-9-]+$'){throw 'Invalid log prefix'}
 $Observer=(Resolve-Path -LiteralPath $Observer).Path
 $BuildRoot=(Resolve-Path -LiteralPath $BuildRoot).Path
+$repo=(Resolve-Path "$PSScriptRoot/../..").Path
+if(!$BuildRoot.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::OrdinalIgnoreCase)){
+    throw 'Use an isolated build root'
+}
+$LogRoot=(Resolve-Path -LiteralPath $LogRoot).Path
 $PackageRoot=(Resolve-Path -LiteralPath $PackageRoot).Path
 $launcher=Join-Path $BuildRoot 'run16.exe'
 $broker=Join-Path $BuildRoot 'ntsrv.exe'
 $nested=(Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..\app\native-console-nested.cmd')).Path
 $guiBatch=(Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..\app\frontend-gui-boundary.cmd')).Path
 $gui=(Resolve-Path -LiteralPath (Join-Path $BuildRoot 'frontend-gui-boundary-test.exe')).Path
-$guiOutput=Join-Path $PackageRoot "logs\$LogPrefix-gui-output.txt"
+$guiOutput=Join-Path $LogRoot "$LogPrefix-gui-output.txt"
 $segments=(Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..\app\frontend-segments.cmd')).Path
 $identity=(Resolve-Path -LiteralPath (Join-Path $BuildRoot 'frontend-bootstrap-test.exe')).Path
 if(Test-Path -LiteralPath $guiOutput){throw 'Use a fresh GUI output prefix'}
@@ -26,6 +32,7 @@ if(@(Get-CimInstance Win32_Process -Filter "Name='ntsrv.exe'" |
     Where-Object {$_.ExecutablePath -ne $broker}).Count){throw 'Another broker is in use'}
 $oldPrivate=$env:MVDM_OBSERVER_PRIVATE_DESKTOP
 $oldHistory=$env:MVDM_OBSERVER_SHORT_HISTORY
+$ownedPaths=@('run16.exe','ntsrv.exe','ntkvm.exe') | ForEach-Object {Join-Path $BuildRoot $_}
 $cases=@(
     @{Name='output';Args=@('cmd.exe','/d','/c','echo ROOT-NATIVE-VISIBLE & exit /b 37');Code='00000025';Text='ROOT-NATIVE-VISIBLE'},
     @{Name='input';Args=@('cmd.exe','/d');Input="echo ROOT-INPUT-OK`rexit /b 23`r";Code='00000017';Text='ROOT-INPUT-OK'},
@@ -41,8 +48,9 @@ try {
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
     foreach($case in $cases){
         if($SelectedCases -and $case.Name -notin $SelectedCases){continue}
-        $report=Join-Path $PackageRoot "logs\$LogPrefix-$($case.Name).txt"
+        $report=Join-Path $LogRoot "$LogPrefix-$($case.Name).txt"
         if(Test-Path -LiteralPath $report){throw 'Use a fresh log prefix'}
+        try {
         $env:MVDM_OBSERVER_SHORT_HISTORY=if($case.History){'1'}else{$null}
         $parameters=@($launcher,$PackageRoot,$report,'--observation-timeout-ms','20000')
         if($case.Input){$parameters+=@('--observe-console-input-text',$case.Input)}
@@ -72,6 +80,12 @@ try {
         }
         if($screen -match 'not recognized as an internal|Bad command or filename'){throw 'Command failed despite exit status'}
         Write-Output "PASS ordinary root CLI $($case.Name): visible text and actual exit $($case.Code)"
+        } finally {
+            Get-CimInstance Win32_Process | Where-Object {$_.ExecutablePath -in $ownedPaths} | ForEach-Object {
+                $process=Get-Process -Id $_.ProcessId -ErrorAction SilentlyContinue
+                if($process){try{$null=$process.Handle;$process.Kill();$null=$process.WaitForExit(5000)}finally{$process.Dispose()}}
+            }
+        }
     }
 } finally {
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP=$oldPrivate

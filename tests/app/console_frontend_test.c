@@ -6,6 +6,20 @@
 #define CHECK(x) do { if (!(x)) { fprintf(stderr,"FAIL %d error=%lu\n",__LINE__,GetLastError()); return 1; } } while (0)
 static console_io_request request;
 static console_io_reply reply;
+static DWORD begin_error,end_error,screen_begins,screen_ends,screen_leaves;
+static BOOL screen_written;
+static DWORD begin_screen(void *context)
+{
+    (void)context;++screen_begins;return begin_error;
+}
+static DWORD end_screen(void *context,BOOL written)
+{
+    (void)context;++screen_ends;screen_written=written;return end_error;
+}
+static void leave_screen(void *context)
+{
+    (void)context;++screen_leaves;
+}
 static DWORD relative_input(void *context,BOOL peek,INPUT_RECORD *records,DWORD capacity,DWORD *count)
 {
     (void)peek;
@@ -158,6 +172,30 @@ int main(void)
         owner.read_input=NULL;owner.io_context=NULL;
         puts("PASS private DOS relative input retains 32-bit motion/geometry; malformed buttons and leave rejected; old protocol rejected");
     }
+    owner.screen_begin=begin_screen;owner.screen_end=end_screen;owner.leave=leave_screen;
+    begin_error=ERROR_BUSY;
+    operation(&owner,CONSOLE_IO_SCREEN_INFO);
+    CHECK(!run16_console_dispatch(&owner,&request,&reply) && !reply.result && reply.error==ERROR_BUSY);
+    CHECK(screen_begins==1 && !screen_ends && screen_leaves==1);
+    begin_error=0;
+    operation(&owner,CONSOLE_IO_CURSOR_POSITION);
+    CHECK(!run16_console_dispatch(&owner,&request,&reply) && reply.result);
+    CHECK(screen_begins==2 && screen_ends==1 && screen_leaves==2 && screen_written);
+    operation(&owner,CONSOLE_IO_SCREEN_INFO);
+    CHECK(!run16_console_dispatch(&owner,&request,&reply) && reply.result);
+    CHECK(screen_begins==3 && screen_ends==2 && screen_leaves==3 && !screen_written);
+    end_error=ERROR_WRITE_FAULT;
+    operation(&owner,CONSOLE_IO_SCREEN_INFO);
+    CHECK(!run16_console_dispatch(&owner,&request,&reply) && !reply.result && reply.error==ERROR_WRITE_FAULT);
+    CHECK(screen_ends==3 && screen_leaves==4);
+    operation(&owner,CONSOLE_IO_GET_MODE);
+    CHECK(!run16_console_dispatch(&owner,&request,&reply) && reply.result);
+    CHECK(screen_begins==4 && screen_ends==3 && screen_leaves==5);
+    owner.screen_end=NULL;
+    operation(&owner,CONSOLE_IO_SCREEN_INFO);
+    CHECK(run16_console_dispatch(&owner,&request,&reply)==ERROR_INVALID_PARAMETER);
+    owner.screen_begin=NULL;owner.leave=NULL;end_error=0;
+    puts("PASS screen transaction dispatch: write/read classification, begin/end failure, cleanup and non-screen exclusion");
     CloseHandle(owner.output);owner.output=INVALID_HANDLE_VALUE;
     operation(&owner,CONSOLE_IO_CURRENT_FONT);
     CHECK(!run16_console_dispatch(&owner,&request,&reply) && !reply.result &&

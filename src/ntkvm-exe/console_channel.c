@@ -27,6 +27,14 @@ static void leave(void *context)
     run16_console_channel *channel=context;
     run16_native_frontend_dos_leave(channel->root);
 }
+static DWORD screen_begin(void *context)
+{
+    return run16_native_frontend_screen_begin(((run16_console_channel *)context)->root);
+}
+static DWORD screen_end(void *context,BOOL write)
+{
+    return run16_native_frontend_screen_end(((run16_console_channel *)context)->root,write);
+}
 static BOOL text_frame_required(void *context)
 {
     run16_console_channel *channel=context;
@@ -174,6 +182,7 @@ DWORD run16_console_channel_start_request(DWORD request,HANDLE worker,run16_nati
     channel->root=root;
     channel->console.io_context=channel;
     channel->console.activate=activate;channel->console.enter=enter;channel->console.leave=leave;
+    channel->console.screen_begin=screen_begin;channel->console.screen_end=screen_end;
     channel->console.text_frame_required=text_frame_required;
     channel->console.read_input=read_input;channel->console.prepend_input=prepend_input;
     channel->stop=CreateEventW(NULL,TRUE,FALSE,NULL);

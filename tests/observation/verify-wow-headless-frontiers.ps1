@@ -42,11 +42,15 @@ try {
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
     foreach($app in @('WINMINE','SOL','WRITE')){
         $controller=$null
+        $verified=$false
         $report=Join-Path $LogRoot "$LogPrefix-$($app.ToLowerInvariant()).txt"
         if(Test-Path -LiteralPath $report){throw 'Use a fresh log prefix'}
         try {
             $arguments=@(('"'+$launcher+'"'),('"'+(Join-Path $PackageRoot '.')+'"'),('"'+$report+'"'),
-                '--observation-timeout-ms','16000',"$app.EXE")
+                '--observation-timeout-ms','16000','--wait',"$app.EXE")
+            # S8 makes default GUI launch asynchronous. This frontier gate
+            # deliberately observes a live target, so request explicit waiting
+            # rather than treating successful launcher exit as guest failure.
             $controller=Start-Process -FilePath $Observer -ArgumentList $arguments -WindowStyle Hidden -PassThru
             $desktop="NTVDMConsoleTest-$($controller.Id)"
             $deadline=[DateTime]::UtcNow.AddSeconds(14)
@@ -56,7 +60,11 @@ try {
                     Where-Object {$_.ExecutablePath -in $worker})
                 foreach($entry in $workers){
                     $windows=(& $WindowReader $entry.ProcessId $desktop 2>&1 | Out-String)
+                    $readerExit=$LASTEXITCODE
                     $windows | Set-Content -LiteralPath ($report+'.last-windows.txt')
+                    if($readerExit -ne 0 -or $windows -notmatch ('(?m)^pid='+$entry.ProcessId+' image=')){
+                        throw "Worker window reader failed or has incompatible output (exit $readerExit); inspect $report.last-windows.txt"
+                    }
                     $reached=if(!$PackageNetworkProfile){$windows -match 'NETWORK\.DRV'}
                         # Retain the owner-accepted non-Chinese ACP rendering:
                         # original GBK bytes may appear as Latin-1 code units.
@@ -89,10 +97,19 @@ try {
                 elseif($app -eq 'WINMINE'){'localized WINMINE main window; interaction not tested'}
                 elseif($app -eq 'SOL'){'original out-of-memory modal; application still incomplete'}
                 else{'original Write out-of-memory modal; application still incomplete'}
+            $verified=$true
             Write-Output "BASELINE PRESERVED $app : $description, no character frontend; not full application acceptance"
         } finally {
             # Exact isolated package only; not descendant-tree termination.
-            Get-CimInstance Win32_Process | Where-Object {$_.ExecutablePath -in $paths} |
+            # Record the intervention boundary before stopping any target.
+            # RPC/launcher failures produced by cleanup are not guest failures.
+            $owned=@(Get-CimInstance Win32_Process | Where-Object {$_.ExecutablePath -in $paths})
+            @("cleanup-start-utc=$([DateTime]::UtcNow.ToString('o'))","verification-complete=$verified",
+                "observer-running=$($controller -and !$controller.HasExited)") |
+                Set-Content -LiteralPath ($report+'.cleanup.txt')
+            $owned | ForEach-Object {"pid=$($_.ProcessId) image=$($_.ExecutablePath)"} |
+                Add-Content -LiteralPath ($report+'.cleanup.txt')
+            $owned |
                 ForEach-Object {
                     $process=Get-Process -Id $_.ProcessId -ErrorAction SilentlyContinue
                     if($process){try {$null=$process.Handle;$process.Kill();$null=$process.WaitForExit(5000)}finally{$process.Dispose()}}

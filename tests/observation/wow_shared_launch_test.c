@@ -204,7 +204,7 @@ int wmain(int argc,WCHAR **argv)
     WCHAR desktop_name[80],expected[MAX_PATH],actual[MAX_PATH];
     HDESK desktop=NULL;
     PROCESS_INFORMATION broker={0},first={0},second={0};
-    HANDLE worker=NULL,suspended_thread=NULL;
+    HANDLE worker=NULL,suspended_thread=NULL,input_gate=NULL;
     mine_windows found;
     HWND first_window=NULL;
     DWORD worker_pid=0,code=0,length=MAX_PATH;
@@ -224,6 +224,17 @@ int wmain(int argc,WCHAR **argv)
     desktop=CreateDesktopW(desktop_name,NULL,NULL,0,DESKTOP_CREATEWINDOW |
         DESKTOP_ENUMERATE | DESKTOP_READOBJECTS | DESKTOP_WRITEOBJECTS,NULL);
     REQUIRE(desktop);
+    if(argc==5 && !wcscmp(argv[4],L"--dos-input") &&
+        !GetEnvironmentVariableW(L"WOW_TEST_UNGATED_INPUT",NULL,0)) {
+        REQUIRE(SetEnvironmentVariableW(L"MVDM_OBSERVER_WAIT_PROMPT_AFTER_FIRST_LINE",L"1"));
+        if(wait_first) {
+            WCHAR gate_name[120];
+            swprintf_s(gate_name,120,L"Local\\WowPromptInput-%lu",GetCurrentProcessId());
+            input_gate=CreateEventW(NULL,TRUE,FALSE,gate_name);
+            REQUIRE(input_gate && GetLastError()!=ERROR_ALREADY_EXISTS);
+            REQUIRE(SetEnvironmentVariableW(L"MVDM_OBSERVER_AFTER_FIRST_LINE_EVENT",gate_name));
+        }
+    }
     REQUIRE(launch(argv[1],L"ntsrv.exe",L"",desktop_name,&broker));
     if(argc==5) {
         REQUIRE(launch_first(argv[1],wait_first,argv[4],desktop_name,&first));
@@ -309,6 +320,7 @@ int wmain(int argc,WCHAR **argv)
     puts("PASS original redundant WOWEXEC completes without closing WINMINE");
     REQUIRE(PostMessageW(first_window,WM_CLOSE,0,0));
     REQUIRE(find_windows(desktop,0,&found));
+    if(input_gate) REQUIRE(SetEvent(input_gate));
     if (wait_first) {
         REQUIRE(WaitForSingleObject(first.hProcess,caller_report[0] ? 60000 : 10000)==WAIT_OBJECT_0);
         REQUIRE(GetExitCodeProcess(first.hProcess,&code) && code==0);
@@ -322,6 +334,9 @@ int wmain(int argc,WCHAR **argv)
     puts("WOW-SHARED-LAUNCH-PASS");
     result=0;
 done:
+    if(input_gate) { SetEvent(input_gate);CloseHandle(input_gate); }
+    SetEnvironmentVariableW(L"MVDM_OBSERVER_AFTER_FIRST_LINE_EVENT",NULL);
+    SetEnvironmentVariableW(L"MVDM_OBSERVER_WAIT_PROMPT_AFTER_FIRST_LINE",NULL);
     dispose(&second); dispose(&first);
     if(caller_batch[0] && !DeleteFileW(caller_batch)) result=1;
     if (worker) {

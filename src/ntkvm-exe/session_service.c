@@ -91,7 +91,7 @@ static DWORD WINAPI frontend_pump(void *context)
             if(error==ERROR_BUSY)continue;
             if(error)return error;
             /* No new admissions after the broker barrier. End idle DOS I/O
-             * channels before reclaiming the hidden input queue; never stop
+             * channels before draining presentation; never stop
              * execution based on the creator's process or direct target. */
             while(scope->channels){
                 frontend_channel *entry=scope->channels;

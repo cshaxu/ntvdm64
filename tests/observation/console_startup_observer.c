@@ -744,6 +744,36 @@ static BOOL write_console_input_text(HANDLE input, const char *text, DWORD line_
             char path[MAX_PATH];
             snprintf(path, sizeof(path), "%s.line-%02u", report, ++line);
             write_console_snapshot(output, path);
+            if(line==1) {
+                char event_name[160];
+                DWORD named=GetEnvironmentVariableA("MVDM_OBSERVER_AFTER_FIRST_LINE_EVENT",
+                    event_name,sizeof(event_name));
+                if(named || GetEnvironmentVariableA("MVDM_OBSERVER_WAIT_PROMPT_AFTER_FIRST_LINE",NULL,0)) {
+                    if(named) {
+                        if(named>=sizeof(event_name))return FALSE;
+                        HANDLE gate=OpenEventA(SYNCHRONIZE,FALSE,event_name);
+                        DWORD waited=gate ? WaitForSingleObject(gate,30000) : WAIT_FAILED;
+                        if(gate)CloseHandle(gate);
+                        if(waited!=WAIT_OBJECT_0)return FALSE;
+                    }
+                    /* Send the remaining commands only after a fresh empty
+                     * prompt, not into a native target's retained input. */
+                    DWORD began=GetTickCount(); BOOL prompt=FALSE;
+                    do {
+                        CONSOLE_SCREEN_BUFFER_INFO info; char row[1025]; DWORD got;
+                        if(GetConsoleScreenBufferInfo(output,&info) && info.dwSize.X<1025) {
+                            COORD pos={0,info.dwCursorPosition.Y};
+                            if(ReadConsoleOutputCharacterA(output,row,info.dwSize.X,pos,&got)) {
+                                char *end; row[got]=0; end=strchr(row,'>');
+                                if(got>2 && row[1]==':' && end &&
+                                    strspn(end+1," ")==strlen(end+1))prompt=TRUE;
+                            }
+                        }
+                        if(!prompt)Sleep(25);
+                    } while(!prompt && GetTickCount()-began<30000);
+                    if(!prompt)return FALSE;
+                }
+            }
         }
         /* A Console input queue is asynchronous.  Once the original DOS line
          * input boundary has been observed, this deliberately tiny two-line
@@ -1066,6 +1096,7 @@ int main(int argc, char **argv)
     const char *scripted_console_input_sequence = "ver+exit";
     const char *scripted_console_input_marker = NULL;
     DWORD scripted_console_line_delay_ms = 0;
+    unsigned scripted_console_function_key = 0;
     BOOL scripted_console_input_ready = FALSE;
     BOOL scripted_console_input_delivered = FALSE;
     BOOL graphics_handshake=FALSE,graphics_handshake_ok=FALSE;
@@ -1228,6 +1259,17 @@ int main(int argc, char **argv)
                                               &command_length, "EXIT")) return 68;
         } else {
             for (argument_index = 4; argument_index < argc; ++argument_index) {
+                if (strcmp(argv[argument_index], "--observe-console-function-key") == 0) {
+                    unsigned long key;
+                    if (++argument_index >= argc) return 68;
+                    key=strtoul(argv[argument_index],&timeout_parse_end,10);
+                    if(timeout_parse_end==argv[argument_index] || *timeout_parse_end || key<1 || key>12)return 68;
+                    scripted_console_function_key=(unsigned)key;
+                    scripted_console_input=TRUE;
+                    scripted_console_input_text="";
+                    scripted_console_input_sequence="explicit-observer-function-key";
+                    continue;
+                }
                 if (strcmp(argv[argument_index], "--observe-console-input-marker") == 0) {
                     if (++argument_index >= argc || !argv[argument_index][0] ||
                         strlen(argv[argument_index]) > 80) return 68;
@@ -1452,6 +1494,18 @@ int main(int argc, char **argv)
                   !GetEnvironmentVariableA("MVDM_OBSERVER_WINDOW_INPUT",NULL,0)) || console_caf_return(input,argv[3])) &&
                 write_console_input_text(input,scripted_console_input_text,
                     scripted_console_line_delay_ms,output,argv[3]);
+            if(scripted_console_input_delivered && scripted_console_function_key) {
+                INPUT_RECORD keys[2]={0};DWORD written=0;
+                unsigned key=scripted_console_function_key;
+                keys[0].EventType=KEY_EVENT;keys[0].Event.KeyEvent.bKeyDown=TRUE;
+                keys[0].Event.KeyEvent.wRepeatCount=1;
+                keys[0].Event.KeyEvent.wVirtualKeyCode=(WORD)(VK_F1+key-1);
+                keys[0].Event.KeyEvent.wVirtualScanCode=(WORD)(key<=10 ? 0x3a+key : 0x57+key-11);
+                keys[1]=keys[0];keys[1].Event.KeyEvent.bKeyDown=FALSE;
+                scripted_console_input_delivered=scripted_window_frontend ?
+                    write_window_key_records(keys,2) :
+                    WriteConsoleInputW(input,keys,2,&written) && written==2;
+            }
         }
     }
     if (observe_console_mouse_mode) {

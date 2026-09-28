@@ -1,13 +1,6 @@
 #include "native_console_view.h"
+#include "native_terminal.h"
 #include <string.h>
-
-static DWORD exchange(run16_native_backend *backend,DWORD operation,void *payload,DWORD bytes,
-    DWORD offset,DWORD count,run16_native_host_reply *reply,void *data,DWORD capacity)
-{
-    run16_native_host_request request={RUN16_NATIVE_HOST_VERSION,operation,bytes,offset,count};
-    DWORD error=run16_native_backend_call(backend,&request,payload,reply,data,capacity);
-    return error ? error : reply->status;
-}
 
 static DWORD visible_geometry(HANDLE output,run16_native_geometry *geometry)
 {
@@ -64,94 +57,147 @@ DWORD run16_native_view_begin_on(run16_native_backend *backend,
     return error;
 }
 
+static DWORD configure(run16_native_backend *backend,const run16_native_geometry *geometry)
+{
+    COORD size={geometry->size.X,(SHORT)(geometry->window.Bottom-geometry->window.Top+1)};
+    unsigned history=geometry->size.Y>size.Y ? geometry->size.Y-size.Y : 0;
+    return run16_native_backend_configure(backend,size,history);
+}
+
+static DWORD import_console(run16_native_backend *backend,run16_native_console_view *view,BOOL update)
+{
+    CONSOLE_SCREEN_BUFFER_INFOEX info={sizeof(info)};
+    CHAR_INFO *cells=NULL;DWORD error,members=0;int rows,top,row;
+    COORD size,origin={0,0};SMALL_RECT rectangle;
+    if(!backend || !view)return ERROR_INVALID_PARAMETER;
+    error=update ? 0 : run16_native_backend_members(backend,&members);
+    if(error)return error;
+    if(members && !update) {view->retired=FALSE;return 0;}
+    if(!GetConsoleScreenBufferInfoEx(view->output,&info))return GetLastError();
+    rows=info.srWindow.Bottom-info.srWindow.Top+1;
+    top=min(info.srWindow.Top,info.dwCursorPosition.Y);
+    top=max(top,info.dwCursorPosition.Y-rows+1);
+    size.X=info.dwSize.X;size.Y=(SHORT)rows;
+    error=update ? 0 : run16_native_backend_configure(backend,size,info.dwSize.Y-rows);
+    if(error)return error;
+    cells=HeapAlloc(GetProcessHeap(),0,(SIZE_T)(top+rows)*size.X*sizeof(*cells));
+    if(!cells)return ERROR_NOT_ENOUGH_MEMORY;
+    /* Read bounded rows: ReadConsoleOutput has transfer-size limits. Keep
+     * scrollback and the cursor's active viewport, not the unused tail. */
+    size.Y=1;
+    for(row=0;row<top+rows;++row) {
+        rectangle.Left=0;rectangle.Top=(SHORT)row;
+        rectangle.Right=size.X-1;rectangle.Bottom=(SHORT)row;
+        if(!ReadConsoleOutputW(view->output,cells+(SIZE_T)row*size.X,size,origin,&rectangle)) {
+            error=GetLastError();break;
+        }
+        if(rectangle.Left!=0 || rectangle.Right!=size.X-1 || rectangle.Top!=row || rectangle.Bottom!=row) {
+            error=ERROR_RETRY;break;
+        }
+    }
+    if(!error)error=run16_native_backend_seed(backend,&info,cells,(unsigned)top,&view->revision);
+    if(!error)view->retired=update; /* These cells already exist in Console. */
+    HeapFree(GetProcessHeap(),0,cells);return error;
+}
+
+DWORD run16_native_view_prepare_launch(run16_native_backend *backend,run16_native_console_view *view)
+{
+    return import_console(backend,view,FALSE);
+}
+
+DWORD run16_native_view_import_console(run16_native_backend *backend,run16_native_console_view *view)
+{
+    return import_console(backend,view,TRUE);
+}
+
 DWORD run16_native_view_seed(run16_native_backend *backend,run16_native_console_view *view)
 {
-    run16_native_capture capture={0};
-    run16_native_screen_seed seed={0};
-    run16_native_host_reply reply;
-    CHAR_INFO cells[RUN16_NATIVE_HOST_CELLS];
-    DWORD error,offset=0,count,total;
-    SMALL_RECT region;
+    DWORD error,mode;
     if(!backend || !view)return ERROR_INVALID_PARAMETER;
-    error=run16_native_capture_begin_output(&capture,view->output);
-    if(error)goto done;
-    seed.frame.screen=capture.info;seed.frame.cursor=capture.cursor;
-    seed.frame.output_mode=capture.output_mode;seed.frame.input_codepage=capture.input_codepage;
-    seed.frame.output_codepage=capture.output_codepage;
-    seed.font.cbSize=sizeof(seed.font);
-    if(!GetCurrentConsoleFontEx(capture.buffer,FALSE,&seed.font)) { error=GetLastError();goto done; }
-    error=exchange(backend,RUN16_NATIVE_SCREEN_APPLY,&seed,sizeof(seed),0,0,&reply,NULL,0);
-    total=(DWORD)capture.info.dwSize.X*capture.info.dwSize.Y;
-    while(!error && offset<total) {
-        error=run16_native_capture_read(&capture,offset,cells,ARRAYSIZE(cells),&region,&count);
-        if(!error)error=exchange(backend,RUN16_NATIVE_CELLS_WRITE,cells,count*sizeof(*cells),offset,count,&reply,NULL,0);
-        if(!error)offset+=count;
-    }
-    if(!error) {
-        /* Cooked editing belongs to the hidden Windows Console. The visible
-         * side forwards records once, without echoing or interpreting them. */
-        DWORD mode=(view->input_mode|ENABLE_EXTENDED_FLAGS|ENABLE_WINDOW_INPUT|ENABLE_MOUSE_INPUT)&
-            ~(ENABLE_LINE_INPUT|ENABLE_ECHO_INPUT|ENABLE_PROCESSED_INPUT|ENABLE_QUICK_EDIT_MODE|ENABLE_VIRTUAL_TERMINAL_INPUT);
-        if(!SetConsoleMode(view->input,mode))error=GetLastError();
-        else view->mode_saved=TRUE;
-    }
-    if(!error) {
-        view->geometry.size=seed.frame.screen.dwSize;view->geometry.window=seed.frame.screen.srWindow;
-        view->geometry.font=seed.font;view->geometry_saved=TRUE;
-    }
-done:
-    run16_native_capture_end(&capture);
+    error=visible_geometry(view->output,&view->geometry);
+    if(!error)error=configure(backend,&view->geometry);
+    if(error)return error;
+    /* Geometry belongs to this view; remote native screen state belongs to
+     * ConPTY. Never pretend that painting a local parser seeds its Windows
+     * Console buffer or overwrite target output during DOS/native handoff. */
+    mode=(view->input_mode|ENABLE_EXTENDED_FLAGS|ENABLE_WINDOW_INPUT|ENABLE_MOUSE_INPUT)&
+        ~(ENABLE_LINE_INPUT|ENABLE_ECHO_INPUT|ENABLE_PROCESSED_INPUT|ENABLE_QUICK_EDIT_MODE|ENABLE_VIRTUAL_TERMINAL_INPUT);
+    if(!SetConsoleMode(view->input,mode))return GetLastError();
+    view->mode_saved=TRUE;view->geometry_saved=TRUE;
+    return 0;
+}
+
+DWORD run16_native_view_prepare_screen(run16_native_backend *backend,run16_native_console_view *view)
+{
+    run16_native_geometry geometry;DWORD error=visible_geometry(view->output,&geometry);
+    if(!error)error=configure(backend,&geometry);
+    if(!error)error=run16_native_backend_pump(backend);
     return error;
 }
 
-static DWORD present_snapshot(run16_native_backend *backend,run16_native_console_view *view,BOOL window)
+static DWORD present_snapshot(run16_native_backend *backend,run16_native_console_view *view,BOOL window,BOOL locked)
 {
-    run16_native_frame_info frame;
-    run16_native_host_reply reply;
-    CHAR_INFO *cells=NULL;
-    DWORD error,ending,total,offset=0;
-    SIZE_T bytes;
+    ntkvm_terminal_frame snapshot={0};
+    run16_native_frame_info frame={0};
     run16_native_geometry before,after;
+    CHAR_INFO *cells=NULL;DWORD error,total,i;
     if(!backend || !view)return ERROR_INVALID_PARAMETER;
     error=visible_geometry(view->output,&before);
     if(error)return error;
-    /* A change since our last paint belongs to the user-facing Console, not
-     * the older hidden snapshot. Resize native storage before capturing it;
-     * never reseed cells/cursor over output written meanwhile by the target. */
-    if(view->geometry_saved && memcmp(&before,&view->geometry,sizeof(before))) {
-        error=exchange(backend,RUN16_NATIVE_GEOMETRY,&before,sizeof(before),0,0,&reply,NULL,0);
+    if(!locked && (!view->geometry_saved || memcmp(&before,&view->geometry,sizeof(before)))) {
+        error=configure(backend,&before);
         if(error)return error;
-        view->geometry=before;
     }
-    error=exchange(backend,RUN16_NATIVE_FRAME_BEGIN,NULL,0,0,0,&reply,&frame,sizeof(frame));
+    error=locked ? 0 : run16_native_backend_pump(backend);
+    if(!error)error=run16_native_backend_capture(backend,&snapshot);
+    if(error==ERROR_NO_DATA)return 0; /* Backend is lazy until first launch. */
     if(error)return error;
-    if(reply.bytes!=sizeof(frame) || frame.screen.dwSize.X<=0 || frame.screen.dwSize.Y<=0) {
+    /* DOS already received this native frame. A retained ConPTY is not
+     * permission to repaint old output over the resumed DOS prompt. */
+    if(view->retired && snapshot.revision==view->revision)goto done;
+    frame.screen.cbSize=sizeof(frame.screen);
+    if(!GetConsoleScreenBufferInfoEx(view->output,&frame.screen)) {error=GetLastError();goto done;}
+    if(snapshot.rows<=0 || snapshot.rows>32767 || snapshot.columns<=0 || snapshot.columns>32767) {
         error=ERROR_INVALID_DATA;goto done;
     }
-    total=(DWORD)frame.screen.dwSize.X*frame.screen.dwSize.Y;
-    if((uint64_t)total*sizeof(*cells)>(SIZE_T)-1) { error=ERROR_NOT_ENOUGH_MEMORY;goto done; }
-    bytes=(SIZE_T)total*sizeof(*cells);
-    cells=HeapAlloc(GetProcessHeap(),0,bytes);
-    if(!cells) { error=ERROR_NOT_ENOUGH_MEMORY;goto done; }
-    while(offset<total) {
-        DWORD capacity=min(total-offset,RUN16_NATIVE_HOST_CELLS);
-        DWORD x=offset%(DWORD)frame.screen.dwSize.X,y=offset/(DWORD)frame.screen.dwSize.X;
-        error=exchange(backend,RUN16_NATIVE_FRAME_READ,NULL,0,offset,capacity,&reply,cells+offset,capacity*sizeof(*cells));
-        if(error)break;
-        if(!reply.count || reply.count>capacity || reply.bytes!=reply.count*sizeof(*cells) ||
-            reply.region.Left!=(SHORT)x || reply.region.Top!=(SHORT)y || reply.region.Right<reply.region.Left ||
-            reply.region.Bottom<reply.region.Top || reply.region.Right>=frame.screen.dwSize.X ||
-            reply.region.Bottom>=frame.screen.dwSize.Y ||
-            (reply.region.Bottom>reply.region.Top &&
-                (reply.region.Left || reply.region.Right!=frame.screen.dwSize.X-1)) ||
-            (DWORD)(reply.region.Right-reply.region.Left+1)*(DWORD)(reply.region.Bottom-reply.region.Top+1)!=reply.count) {
-            error=ERROR_INVALID_DATA;break;
-        }
-        offset+=reply.count;
+    frame.screen.dwSize.X=(SHORT)snapshot.columns;
+    /* Retain the user's scrollback capacity even when the terminal has not
+     * produced that many lines yet; a first paint must not collapse it. */
+    frame.screen.dwSize.Y=(SHORT)max(snapshot.rows,before.size.Y);
+    frame.screen.dwCursorPosition.X=(SHORT)snapshot.cursor.col;
+    frame.screen.dwCursorPosition.Y=(SHORT)snapshot.cursor.row;
+    frame.screen.srWindow.Left=0;frame.screen.srWindow.Top=(SHORT)snapshot.history_rows;
+    frame.screen.srWindow.Right=(SHORT)(min(snapshot.columns,before.window.Right-before.window.Left+1)-1);
+    frame.screen.srWindow.Bottom=(SHORT)(snapshot.rows-1);
+    frame.cursor.bVisible=snapshot.cursor_visible;frame.cursor.dwSize=25;
+    total=(DWORD)frame.screen.dwSize.Y*snapshot.columns;
+    if((uint64_t)total*sizeof(*cells)>(SIZE_T)-1) {error=ERROR_NOT_ENOUGH_MEMORY;goto done;}
+    cells=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,(SIZE_T)total*sizeof(*cells));
+    if(!cells) {error=ERROR_NOT_ENOUGH_MEMORY;goto done;}
+    for(i=0;i<total;++i) {
+        cells[i].Char.UnicodeChar=L' ';cells[i].Attributes=frame.screen.wAttributes;
     }
-    /* Do not publish half a resized snapshot. Windows remains the owner of
-     * buffer storage, scrollback, Unicode cells and attributes on both sides. */
-    if(!error)error=visible_geometry(view->output,&after);
+    for(i=0;i<(DWORD)snapshot.rows*snapshot.columns;++i) {
+        const VTermScreenCell *cell=snapshot.cells+i;
+        uint32_t ch=cell->chars[0];
+        WORD foreground=ntkvm_terminal_console_colour(&cell->fg,frame.screen.ColorTable);
+        WORD background=ntkvm_terminal_console_colour(&cell->bg,frame.screen.ColorTable);
+        if(cell->attrs.reverse) {WORD swap=foreground;foreground=background;background=swap;}
+        cells[i].Attributes=foreground|(background<<4);
+        if(cell->attrs.underline)cells[i].Attributes|=COMMON_LVB_UNDERSCORE;
+        cells[i].Char.UnicodeChar=ch && ch<=0xffff ? (WCHAR)ch : ch ? L'?' : L' ';
+        if(cell->width==2 && i+1<total) {
+            cells[i].Attributes|=COMMON_LVB_LEADING_BYTE;
+            cells[i+1].Attributes=cells[i].Attributes&~COMMON_LVB_LEADING_BYTE;
+            cells[i+1].Attributes|=COMMON_LVB_TRAILING_BYTE;
+            if(ch>0xffff && ch<=0x10ffff) {
+                ch-=0x10000;cells[i].Char.UnicodeChar=(WCHAR)(0xd800+(ch>>10));
+                cells[i+1].Char.UnicodeChar=(WCHAR)(0xdc00+(ch&0x3ff));
+            } else cells[i+1].Char.UnicodeChar=cells[i].Char.UnicodeChar;
+            ++i;
+        }
+    }
+    error=visible_geometry(view->output,&after);
     if(!error && memcmp(&before,&after,sizeof(before)))error=ERROR_RETRY;
     if(!error && window && view->window_frame)
         error=view->window_frame(view->window_context,&frame,cells,total);
@@ -160,92 +206,50 @@ static DWORD present_snapshot(run16_native_backend *backend,run16_native_console
         if(!error)error=run16_native_cells_write(view->output,0,cells,total);
     }
     if(!error) {
+        view->revision=snapshot.revision;view->retired=FALSE;
         view->geometry=before;
         if(!window || !view->window_frame) {
-            view->geometry.size=frame.screen.dwSize;
-            view->geometry.window=frame.screen.srWindow;
+            view->geometry.size=frame.screen.dwSize;view->geometry.window=frame.screen.srWindow;
         }
         view->geometry_saved=TRUE;
     }
 done:
-    ending=exchange(backend,RUN16_NATIVE_FRAME_END,NULL,0,0,0,&reply,NULL,0);
     if(cells)HeapFree(GetProcessHeap(),0,cells);
-    return error ? error : ending;
+    ntkvm_terminal_frame_free(&snapshot);
+    return error;
 }
 
 DWORD run16_native_view_present(run16_native_backend *backend,run16_native_console_view *view)
 {
-    return present_snapshot(backend,view,TRUE);
+    return present_snapshot(backend,view,TRUE,FALSE);
 }
 
 DWORD run16_native_view_sync_console(run16_native_backend *backend,run16_native_console_view *view)
 {
-    return present_snapshot(backend,view,FALSE);
+    DWORD error=present_snapshot(backend,view,FALSE,FALSE);
+    if(!error)view->retired=TRUE;
+    return error;
 }
 
-DWORD run16_native_view_reclaim_input(run16_native_backend *backend,
-    run16_native_console_view *view,DWORD *returned)
+DWORD run16_native_view_sync_locked(run16_native_backend *backend,run16_native_console_view *view)
 {
-    return run16_native_view_reclaim_input_to(backend,view,returned,NULL,NULL);
-}
-
-DWORD run16_native_view_reclaim_input_to(run16_native_backend *backend,
-    run16_native_console_view *view,DWORD *returned,
-    DWORD (*sink)(void *,const INPUT_RECORD *,DWORD),void *context)
-{
-    typedef BOOL (WINAPI *prepend_input)(HANDLE,PINPUT_RECORD,DWORD,LPDWORD);
-    prepend_input prepend=(prepend_input)GetProcAddress(GetModuleHandleW(L"kernel32.dll"),
-        "WriteConsoleInputVDMW");
-    INPUT_RECORD batch[RUN16_NATIVE_HOST_INPUTS],*records=NULL;
-    run16_native_host_reply reply;
-    DWORD error=ERROR_SUCCESS,total=0,written=0;
-    if(!backend || !view || !returned)return ERROR_INVALID_PARAMETER;
-    *returned=0;
-    if(!sink && !prepend)return ERROR_CALL_NOT_IMPLEMENTED;
-    for(;;) {
-        INPUT_RECORD *grown;
-        SIZE_T bytes;
-        error=exchange(backend,RUN16_NATIVE_INPUT_READ,NULL,0,0,ARRAYSIZE(batch),&reply,batch,sizeof(batch));
-        if(error)break;
-        if(reply.count>ARRAYSIZE(batch) || reply.bytes!=reply.count*sizeof(INPUT_RECORD)) {
-            error=ERROR_INVALID_DATA;break;
-        }
-        if(!reply.count)break;
-        if((uint64_t)total+reply.count>((SIZE_T)-1)/sizeof(INPUT_RECORD)) {
-            error=ERROR_NOT_ENOUGH_MEMORY;break;
-        }
-        bytes=((SIZE_T)total+reply.count)*sizeof(INPUT_RECORD);
-        grown=records ? HeapReAlloc(GetProcessHeap(),0,records,bytes) : HeapAlloc(GetProcessHeap(),0,bytes);
-        if(!grown) { error=ERROR_NOT_ENOUGH_MEMORY;break; }
-        records=grown;
-        memcpy(records+total,batch,reply.bytes);total+=reply.count;
-    }
-    /* A single native prepend retains cross-tile order and stays ahead of
-     * newer host arrivals. Appending or prepending each tile would reorder
-     * typeahead. Original Console Server owns the insertion, not a local
-     * keyboard parser or a second guest input queue. */
-    if(!error && total) {
-        if(sink)error=sink(context,records,total);
-        else if(!prepend(view->input,records,total,&written))error=GetLastError();
-        else if(written!=total)error=ERROR_WRITE_FAULT;
-    }
-    if(!error)*returned=total;
-    if(records)HeapFree(GetProcessHeap(),0,records);
+    DWORD error=present_snapshot(backend,view,FALSE,TRUE);
+    if(!error)view->retired=TRUE;
     return error;
 }
 
 DWORD run16_native_view_forward_input(run16_native_backend *backend,run16_native_console_view *view)
 {
     INPUT_RECORD records[64];
-    DWORD available=0,count=0,i,kept=0;
+    DWORD available=0,count=0,i,kept=0,consumed=0,error;
     if(!PeekConsoleInputW(view->input,records,ARRAYSIZE(records),&available))return GetLastError();
     if(!available)return ERROR_SUCCESS;
     if(!ReadConsoleInputW(view->input,records,available,&count))return GetLastError();
     /* The geometry exchange invokes the real native resize, which generates
      * its own mode-dependent notification. Do not inject a duplicate/stale
-     * visible-buffer WINDOW_BUFFER_SIZE_EVENT into the hidden input queue. */
+     * visible-buffer WINDOW_BUFFER_SIZE_EVENT into the ConPTY input stream. */
     for(i=0;i<count;++i) {
-        BOOL keep=TRUE;DWORD error;
+        BOOL keep=TRUE;
         if(view->console_input) {
             error=view->console_input(view->window_context,&records[i],&keep);
             if(error)return error;
@@ -253,26 +257,40 @@ DWORD run16_native_view_forward_input(run16_native_backend *backend,run16_native
         if(keep && records[i].EventType!=WINDOW_BUFFER_SIZE_EVENT)records[kept++]=records[i];
     }
     count=kept;
-    return run16_native_backend_input(backend,records,count);
+    error=run16_native_backend_input_some(backend,records,count,&consumed);
+    if(error==ERROR_NO_MORE_ITEMS) {
+        typedef BOOL (WINAPI *prepend_input)(HANDLE,PINPUT_RECORD,DWORD,LPDWORD);
+        prepend_input prepend=(prepend_input)GetProcAddress(GetModuleHandleW(L"kernel32.dll"),"WriteConsoleInputVDMW");
+        DWORD restored=0;
+        /* These records never entered ConPTY. Restore only that suffix ahead
+         * of newer physical input; never reclaim a delivered native prefix. */
+        if(consumed<count) {
+            if(!prepend)return ERROR_CALL_NOT_IMPLEMENTED;
+            if(!prepend(view->input,records+consumed,count-consumed,&restored))return GetLastError();
+            if(restored!=count-consumed)return ERROR_WRITE_FAULT;
+        }
+        return 0;
+    }
+    return error;
 }
 
 DWORD run16_native_view_wait(run16_native_backend *backend,run16_native_console_view *view,
     HANDLE target,DWORD *result)
 {
     DWORD error=ERROR_SUCCESS,wait;
-    HANDLE waits[3];
+    HANDLE waits[2];
     if(!backend || !view || !target || !result)return ERROR_INVALID_PARAMETER;
     view->presentation_error=ERROR_SUCCESS;
-    waits[0]=target;waits[1]=run16_native_backend_process(backend);waits[2]=view->input;
+    waits[0]=target;waits[1]=view->input;
     for(;;) {
         BOOL ended=WaitForSingleObject(target,0)==WAIT_OBJECT_0;
         error=run16_native_view_present(backend,view);
         if(error && error!=ERROR_RETRY)break;
         if(ended)break;
-        wait=WaitForMultipleObjects(3,waits,FALSE,30);
+        wait=WaitForMultipleObjects(2,waits,FALSE,30);
         if(wait==WAIT_OBJECT_0 || wait==WAIT_TIMEOUT)continue;
-        if(wait!=WAIT_OBJECT_0+2) {
-            error=wait==WAIT_OBJECT_0+1 ? ERROR_BROKEN_PIPE : GetLastError();
+        if(wait!=WAIT_OBJECT_0+1) {
+            error=GetLastError();
             break;
         }
         error=run16_native_view_forward_input(backend,view);

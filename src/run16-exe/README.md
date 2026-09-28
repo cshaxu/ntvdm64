@@ -35,7 +35,9 @@ that path returns the shell result, not a fabricated GUI creation result.
 resolves or requests an authenticated character-session association, submits
 native Console execution, and waits for its direct target. It owns no renderer
 or frontend notification pump. `ntkvm-exe` owns visible Console, Window,
-display state, hidden Console/helper, direct worker I/O and input routing.
+display state, one retained ConPTY for native text targets, direct worker I/O
+and input routing. DOS intervals and native target completion do not create
+another ConPTY or destroy the existing one. There is no product helper.
 Original guest devices, painters and execution remain in ntvdm/MVDM.
 GUI segments do not inherit character-frontend authority; character segments
 can share their authenticated frontend without sharing completion ownership.

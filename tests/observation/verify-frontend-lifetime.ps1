@@ -8,7 +8,7 @@ param(
     [string]$LogRoot='O:\winnt\logs',
     [switch]$ExpandedFaults,
     [switch]$Window,
-    [ValidateSet('normal','frontend','launcher','worker','helper')][string[]]$Cases
+    [ValidateSet('normal','frontend','launcher','worker','conpty')][string[]]$Cases
 )
 $ErrorActionPreference='Stop'
 if($LogPrefix -notmatch '^[a-z0-9-]+$'){throw 'Invalid log prefix'}
@@ -50,9 +50,9 @@ try {
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
     if($Window){$env:MVDM_LIFETIME_WINDOW='1'}else{Remove-Item Env:MVDM_LIFETIME_WINDOW -ErrorAction SilentlyContinue}
     $selected=@('normal','frontend','launcher','worker')
-    if($ExpandedFaults){$selected+='helper'}
+    if($ExpandedFaults){$selected+='conpty'}
     if($Cases){$selected=@($selected | Where-Object {$_ -in $Cases})}
-    if(!$selected.Count){throw 'No selected cases; helper requires ExpandedFaults'}
+    if(!$selected.Count){throw 'No selected cases; conpty requires ExpandedFaults'}
     foreach($case in $selected){
         $report=Join-Path $LogRoot "$LogPrefix-$case.txt"
         if(Test-Path $report){throw 'Use a fresh log prefix'}
@@ -77,8 +77,8 @@ try {
             if($ExpandedFaults -and !$cells.Contains('distinctunrelatedcharacterfrontendandnativetargetsurvive')){
                 throw "Missing unrelated-session survival assertion: $case"
             }
-            if($case -eq 'helper' -and !$cells.Contains('originalpipeerrorawaitsexplicitTerminate,DOSresult1067')){
-                throw 'Missing mixed helper-loss assertion'
+            if($case -eq 'conpty' -and !$cells.Contains('ConPTYhostlosspreservesrealnativeresult37andDOSfilecompletion/result7')){
+                throw 'Missing real ConPTY host-loss assertion'
             }
             Write-Output "PASS frontend lifetime $case (real fixture assertions and output)"
         } finally {

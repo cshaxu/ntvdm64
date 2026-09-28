@@ -1,10 +1,14 @@
-/* S9 capability probe, not a product backend. No desktop windows or guest.
+/* S9 production ConPTY transport tests. No desktop windows or guest.
  * Each case owns only its exact authored processes and one ConPTY session. */
+#if !defined(_WIN32_WINNT) || _WIN32_WINNT < 0x0A00
+#undef _WIN32_WINNT
 #define _WIN32_WINNT 0x0A00
+#endif
 #include <windows.h>
 #include <stdio.h>
 #include <wchar.h>
 #include <string.h>
+#include "ntkvm-exe/native_conpty.h"
 
 typedef struct shared_state {
     DWORD leaf_pid,count,reclaimed;
@@ -14,7 +18,6 @@ typedef struct shared_state {
     INPUT_RECORD records[8];
 } shared_state;
 typedef struct capture {
-    HANDLE pipe;
     DWORD error, used;
     BOOL overflow;
     char bytes[65536];
@@ -32,18 +35,13 @@ static BOOL WINAPI close_handler(DWORD event)
     SetEvent(close_seen);
     ExitProcess(91);
 }
-static DWORD WINAPI drain(void *context)
+static DWORD drain(void *context,const BYTE *data,DWORD count)
 {
     capture *output = context;
-    char data[2048];
-    DWORD count;
-    while(ReadFile(output->pipe,data,sizeof(data),&count,NULL) && count) {
-        if(count > sizeof(output->bytes)-1-output->used) output->overflow=TRUE;
-        else { memcpy(output->bytes+output->used,data,count);output->used+=count; }
-    }
-    output->error=GetLastError();
+    if(count > sizeof(output->bytes)-1-output->used)output->overflow=TRUE;
+    else {memcpy(output->bytes+output->used,data,count);output->used+=count;}
     output->bytes[output->used]=0;
-    return 0;
+    return output->overflow ? ERROR_BUFFER_OVERFLOW : 0;
 }
 static void name(WCHAR *buffer,size_t capacity,PCWSTR prefix,PCWSTR suffix)
 {
@@ -130,21 +128,17 @@ static int run_case(unsigned mode)
     static const char *key_sequence="\x1b[17;29;0;1;8;1_\x1b[112;59;0;1;8;1_\x1b[112;59;0;0;8;1_\x1b[17;29;0;0;0;1_";
     static const char *mouse_sequence="\x1b[<0;11;7M\x1b[<32;12;8M\x1b[<0;12;8m";
     static const char *unread_sequence="\x1b[65;30;97;1;0;1_\x1b[65;30;97;0;0;1_\x1b[66;48;98;1;0;1_\x1b[66;48;98;0;0;1_";
-    typedef HRESULT (WINAPI *release_console_fn)(HPCON);
-    release_console_fn release_console=(release_console_fn)GetProcAddress(
-        GetModuleHandleW(L"kernel32.dll"),"ReleasePseudoConsole");
     BOOL explicit_close=mode==1;
     WCHAR prefix[96],key[128],self[MAX_PATH],command[1024];
     HANDLE mapping=NULL,ready=NULL,release=NULL,closed=NULL,leaf=NULL;
-    HANDLE input_read=NULL,input_write=NULL,output_write=NULL,reader=NULL;
+    HANDLE reader=NULL;
     shared_state *state=NULL;
     capture output={0};
-    HPCON console=NULL;
-    STARTUPINFOEXW startup={0};
+    ntkvm_conpty *console=NULL;
+    run16_native_start start={0};
+    WCHAR directory[MAX_PATH];LPWCH environment=NULL;
     PROCESS_INFORMATION leader={0};
-    SIZE_T attribute_bytes=0;
     DWORD code=0,leaf_code=0,preclose=WAIT_FAILED;
-    BOOL attributes_ready=FALSE;
     int result=1;
     const char *stage="setup";
     swprintf_s(prefix,96,L"ntvdm-conpty-%lu-%u",GetCurrentProcessId(),mode);
@@ -156,25 +150,17 @@ static int run_case(unsigned mode)
     name(key,128,prefix,L"release");release=CreateEventW(NULL,TRUE,FALSE,key);
     name(key,128,prefix,L"close");closed=CreateEventW(NULL,TRUE,FALSE,key);
     if(!state || !ready || !release || !closed)goto done;
-    if(!CreatePipe(&input_read,&input_write,NULL,0) ||
-       !CreatePipe(&output.pipe,&output_write,NULL,0))goto done;
-    stage="CreatePseudoConsole";
-    if(FAILED(CreatePseudoConsole((COORD){80,25},input_read,output_write,0,&console)))goto done;
-    CloseHandle(input_read);input_read=NULL;CloseHandle(output_write);output_write=NULL;
-    reader=CreateThread(NULL,0,drain,&output,0,NULL);
-    if(!reader)goto done;
-    InitializeProcThreadAttributeList(NULL,1,0,&attribute_bytes);
-    startup.lpAttributeList=HeapAlloc(GetProcessHeap(),0,attribute_bytes);
-    if(!startup.lpAttributeList || !InitializeProcThreadAttributeList(startup.lpAttributeList,1,0,&attribute_bytes))goto done;
-    attributes_ready=TRUE;
-    if(!UpdateProcThreadAttribute(startup.lpAttributeList,0,PROC_THREAD_ATTRIBUTE_PSEUDOCONSOLE,
-        console,sizeof(console),NULL,NULL))goto done;
+    stage="production ConPTY open";
+    if(ntkvm_conpty_open((COORD){80,25},drain,&output,&console))goto done;
+    if(!DuplicateHandle(GetCurrentProcess(),ntkvm_conpty_ended(console),GetCurrentProcess(),
+        &reader,SYNCHRONIZE,FALSE,0))goto done;
     if(!GetModuleFileNameW(NULL,self,MAX_PATH))goto done;
     swprintf_s(command,1024,L"\"%ls\" leader %ls",self,prefix);
-    startup.StartupInfo.cb=sizeof(startup);
+    if(!GetCurrentDirectoryW(MAX_PATH,directory) || !(environment=GetEnvironmentStringsW()))goto done;
+    start.application=self;start.command=command;start.directory=directory;
+    start.environment=environment;start.console_mask=7;
     stage="launch";
-    if(!CreateProcessW(self,command,NULL,NULL,FALSE,EXTENDED_STARTUPINFO_PRESENT,
-        NULL,NULL,&startup.StartupInfo,&leader))goto done;
+    if(ntkvm_conpty_launch(console,&start,&leader))goto done;
     stage="leader exit and leaf ready";
     if(WaitForSingleObject(ready,10000)!=WAIT_OBJECT_0 ||
        WaitForSingleObject(leader.hProcess,10000)!=WAIT_OBJECT_0 ||
@@ -185,7 +171,7 @@ static int run_case(unsigned mode)
        WaitForSingleObject(reader,0)!=WAIT_TIMEOUT)goto done;
     if(mode==2) {
         stage="release Console ownership without closing clients";
-        if(!release_console || FAILED(release_console(console)) ||
+        if(ntkvm_conpty_release(console) ||
            WaitForSingleObject(leaf,300)!=WAIT_TIMEOUT ||
            WaitForSingleObject(reader,0)!=WAIT_TIMEOUT)goto done;
     }
@@ -197,11 +183,11 @@ static int run_case(unsigned mode)
             "\x1b[3;70;0;1;264;1_\x1b[3;70;0;0;264;1_";
         DWORD sent;
         stage="send native input sequence";
-        if(!WriteFile(input_write,sequence,(DWORD)strlen(sequence),&sent,NULL) || sent!=strlen(sequence))goto done;
+        if(ntkvm_conpty_write(console,sequence,(DWORD)strlen(sequence),&sent) || sent!=strlen(sequence))goto done;
     }
     if(explicit_close) {
         stage="explicit close notification";
-        ClosePseudoConsole(console);console=NULL;
+        ntkvm_conpty_close(console);console=NULL;
         if(WaitForSingleObject(closed,10000)!=WAIT_OBJECT_0)goto done;
     } else {
         stage="release descendant";
@@ -264,7 +250,7 @@ static int run_case(unsigned mode)
     preclose=WaitForSingleObject(reader,mode==2 ? 5000 : 500);
     stage="natural EOF after final attached client";
     if(mode==2 && preclose!=WAIT_OBJECT_0)goto done;
-    if(console) { ClosePseudoConsole(console);console=NULL; }
+    if(console) { ntkvm_conpty_close(console);console=NULL; }
     stage="final output drain";
     if(WaitForSingleObject(reader,10000)!=WAIT_OBJECT_0 || output.overflow ||
        (output.error!=ERROR_BROKEN_PIPE && output.error!=ERROR_SUCCESS) ||
@@ -282,20 +268,9 @@ done:
     if(leaf && WaitForSingleObject(leaf,1000)==WAIT_TIMEOUT) {
         TerminateProcess(leaf,99);WaitForSingleObject(leaf,5000);
     }
-    if(console)ClosePseudoConsole(console);
-    if(input_write)CloseHandle(input_write);
-    if(reader) {
-        if(WaitForSingleObject(reader,10000)!=WAIT_OBJECT_0) {
-            CancelSynchronousIo(reader);
-            if(WaitForSingleObject(reader,5000)!=WAIT_OBJECT_0)ExitProcess(98);
-        }
-        CloseHandle(reader);
-    }
-    if(output.pipe)CloseHandle(output.pipe);
-    if(input_read)CloseHandle(input_read);
-    if(output_write)CloseHandle(output_write);
-    if(attributes_ready)DeleteProcThreadAttributeList(startup.lpAttributeList);
-    if(startup.lpAttributeList)HeapFree(GetProcessHeap(),0,startup.lpAttributeList);
+    if(console)ntkvm_conpty_close(console);
+    if(reader)CloseHandle(reader);
+    if(environment)FreeEnvironmentStringsW(environment);
     if(leader.hThread)CloseHandle(leader.hThread);
     if(leader.hProcess)CloseHandle(leader.hProcess);
     if(leaf)CloseHandle(leaf);

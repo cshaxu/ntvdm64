@@ -1,6 +1,5 @@
 #include "bootstrap.h"
 #include "session_service.h"
-#include "native_console_host.h"
 #include "native_request_protocol.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
 #include <shellapi.h>
@@ -50,7 +49,6 @@ int wmain(int argc,WCHAR **argv)
     WCHAR *end;
     UINT_PTR pipe,caller,notification;
     DWORD result;
-    if(argc==2 && !wcscmp(argv[1],L"--internal-native-console"))return (int)run16_native_console_host();
     if(argc!=5 || wcscmp(argv[1],L"--session"))return ERROR_INVALID_PARAMETER;
     pipe=(UINT_PTR)wcstoul(argv[2],&end,16);if(!pipe || *end)return ERROR_INVALID_PARAMETER;
     caller=(UINT_PTR)wcstoul(argv[3],&end,16);if(!caller || *end)return ERROR_INVALID_PARAMETER;

@@ -1,13 +1,12 @@
-/* Production frontend/backend/view/host composition on a private desktop.
- * Only this executable's private helper is suspended or terminated for faults;
- * no production injection switch and no guest or broker substitute. */
+/* Production frontend/ConPTY/view composition on a private desktop.
+ * Native completion and frontend cancellation are independently observed. */
 #include "ntkvm-exe/native_console_frontend.h"
 #include "product-abi/console_mouse.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <wchar.h>
 
-static HANDLE target,helper,finished;
+static HANDLE target,finished;
 static HANDLE signal_received;
 static volatile LONG signal_type;
 static WCHAR prefix[96];
@@ -15,7 +14,7 @@ static WCHAR prefix[96];
     fprintf(stderr,"FAIL line=%u error=%lu: %s\n",(unsigned)__LINE__,GetLastError(),#x); \
     if(target) { HANDLE p=OpenProcess(PROCESS_TERMINATE,FALSE,GetProcessId(target)); \
         if(p) { TerminateProcess(p,1);CloseHandle(p); } } \
-    if(helper)TerminateProcess(helper,1);ExitProcess(1); } } while(0)
+    ExitProcess(1); } } while(0)
 
 static HANDLE named_event(const WCHAR *suffix,BOOL create)
 {
@@ -56,55 +55,21 @@ static DWORD WINAPI check_native_mouse(void *context)
     }
     CHECK(SetEvent(received));CloseHandle(received);return 0;
 }
-static DWORD WINAPI stop_helper_thread(void *context)
-{
-    HANDLE main_thread=context;
-    HANDLE stop=named_event(L"stall",FALSE),stalled=named_event(L"stalled",FALSE);
-    HANDLE release=named_event(L"release",FALSE);
-    CHECK(WaitForSingleObject(stop,30000)==WAIT_OBJECT_0);
-    CHECK(SuspendThread(main_thread)!=(DWORD)-1);
-    CHECK(SetEvent(stalled));
-    CHECK(WaitForSingleObject(release,30000)==WAIT_OBJECT_0);
-    CHECK(ResumeThread(main_thread)!=(DWORD)-1);
-    CloseHandle(main_thread);CloseHandle(stop);CloseHandle(stalled);CloseHandle(release);
-    return 0;
-}
-static int helper_main(void)
-{
-    WCHAR name[128];HANDLE mapping,thread,main_thread;
-    DWORD *pid;
-    if(GetEnvironmentVariableW(L"NTVDM_TEST_CONTROL",NULL,0))return (int)run16_native_console_host();
-    CHECK(GetEnvironmentVariableW(L"NTVDM_TEST_FRONTEND",prefix,96));
-    CHECK(swprintf_s(name,128,L"%ls-pid",prefix)>0);
-    mapping=OpenFileMappingW(FILE_MAP_WRITE,FALSE,name);CHECK(mapping);
-    pid=MapViewOfFile(mapping,FILE_MAP_WRITE,0,0,sizeof(*pid));CHECK(pid);
-    *pid=GetCurrentProcessId();UnmapViewOfFile(pid);CloseHandle(mapping);
-    CHECK(DuplicateHandle(GetCurrentProcess(),GetCurrentThread(),GetCurrentProcess(),
-        &main_thread,THREAD_SUSPEND_RESUME,FALSE,0));
-    thread=CreateThread(NULL,0,stop_helper_thread,main_thread,0,NULL);CHECK(thread);
-    CloseHandle(thread);
-    return (int)run16_native_console_host();
-}
-static void exercise(DWORD expected,BOOL stalled,BOOL cancel)
+static void exercise(DWORD expected,BOOL completed,BOOL cancel)
 {
     run16_native_frontend *frontend=NULL;
     run16_native_start start={0};
     run16_console_video lazy_video={0};
-    WCHAR image[MAX_PATH],command[1024],directory[MAX_PATH],name[128],helper_image[MAX_PATH];
-    HANDLE mapping,done,stall,ack,release,ready=NULL,mouse_ready=NULL;
-    DWORD *pid,error,result=0xdeadbeef,actual,image_chars=MAX_PATH;
+    WCHAR image[MAX_PATH],command[1024],directory[MAX_PATH];
+    HANDLE done,ready=NULL,mouse_ready=NULL;
+    DWORD error,result=0xdeadbeef,actual;
     ULONGLONG began,elapsed;
     CHECK(swprintf_s(prefix,96,L"Local\\NTVDMFrontend-%lu-%lu-%u-%u",
-        GetCurrentProcessId(),expected,stalled,cancel)>0);
+        GetCurrentProcessId(),expected,completed,cancel)>0);
     CHECK(SetEnvironmentVariableW(L"NTVDM_TEST_FRONTEND",prefix));
-    done=named_event(L"done",TRUE);stall=named_event(L"stall",TRUE);
-    ack=named_event(L"stalled",TRUE);release=named_event(L"release",TRUE);
+    done=named_event(L"done",TRUE);
     if(expected==39)ready=named_event(L"ready",TRUE);
     if(expected==37)mouse_ready=named_event(L"mouse",TRUE);
-    CHECK(swprintf_s(name,128,L"%ls-pid",prefix)>0);
-    mapping=CreateFileMappingW(INVALID_HANDLE_VALUE,NULL,PAGE_READWRITE,0,sizeof(DWORD),name);
-    CHECK(mapping);pid=MapViewOfFile(mapping,FILE_MAP_READ|FILE_MAP_WRITE,0,0,sizeof(*pid));CHECK(pid);
-    *pid=0;
     CHECK(GetModuleFileNameW(NULL,image,MAX_PATH) && GetCurrentDirectoryW(MAX_PATH,directory));
     CHECK(swprintf_s(command,1024,L"\"%ls\" --target %lu",image,expected)>0);
     start.application=image;start.command=command;start.directory=directory;
@@ -127,7 +92,7 @@ static void exercise(DWORD expected,BOOL stalled,BOOL cancel)
                 window_pid==GetCurrentProcessId() && IsWindowVisible(window))break;
             Sleep(10);
         }while(GetTickCount64()<deadline);
-        CHECK(window && IsWindowVisible(window) && !*pid);
+        CHECK(window && IsWindowVisible(window));
         /* Capture gesture is not a guest click; the second pair reaches the
          * actual frontend DOS queue, then must be excluded from native I/O. */
         CHECK(SendMessageTimeoutW(window,WM_LBUTTONDOWN,MK_LBUTTON,0,SMTO_ABORTIFHUNG,3000,&reply));
@@ -159,22 +124,17 @@ static void exercise(DWORD expected,BOOL stalled,BOOL cancel)
         CHECK(!run16_native_frontend_dos_prepend(frontend,records,count));
         run16_native_frontend_dos_leave(frontend);
         CHECK(!run16_native_frontend_dos_bind(frontend,&frontend,FALSE));
-        CHECK(IsWindow(window) && !*pid); /* Still no native helper. */
+        CHECK(IsWindow(window)); /* No native backend has been launched yet. */
         CHECK(SendMessageTimeoutW(window,WM_KEYDOWN,'M',0x00320001,SMTO_ABORTIFHUNG,3000,&reply));
         CHECK(SendMessageTimeoutW(window,WM_KEYUP,'M',(LPARAM)0xc0320001,SMTO_ABORTIFHUNG,3000,&reply));
         CHECK(!run16_native_frontend_dos_bind(frontend,&frontend,FALSE));
-        CHECK(IsWindow(window) && !*pid);
+        CHECK(IsWindow(window));
     }
     CHECK(!run16_native_frontend_launch(frontend,&start,&target));
     FreeEnvironmentStringsW((WCHAR *)start.environment);
-    CHECK(*pid && *pid!=GetCurrentProcessId());
-    helper=OpenProcess(PROCESS_TERMINATE|SYNCHRONIZE|PROCESS_QUERY_LIMITED_INFORMATION,FALSE,*pid);CHECK(helper);
-    CHECK(QueryFullProcessImageNameW(helper,0,helper_image,&image_chars) && !_wcsicmp(image,helper_image));
     CHECK(WaitForSingleObject(target,0)==WAIT_TIMEOUT);
-    /* Do not stall the helper until the target has observed the forwarded
-     * batch: launch completion does not mean presentation input is drained. */
     if(ready) { CHECK(WaitForSingleObject(ready,5000)==WAIT_OBJECT_0);CloseHandle(ready); }
-    if(expected==37 && stalled && !cancel) {
+    if(expected==37 && completed && !cancel) {
         HWND window=NULL;DWORD pid;DWORD_PTR reply;ULONGLONG deadline=GetTickCount64()+5000;
         HANDLE input,canonical,visible;CONSOLE_CURSOR_INFO cursor;WCHAR cell;DWORD read;
         COORD origin={0,0};
@@ -211,7 +171,7 @@ static void exercise(DWORD expected,BOOL stalled,BOOL cancel)
         CHECK(ReadConsoleOutputCharacterW(canonical,&cell,1,origin,&read) && read==1 && cell==L'~');
         CloseHandle(visible);
         /* Real library button messages -> copied frontend queue -> native
-         * converter -> hidden Console -> separate native target's reader.
+         * converter -> ConPTY -> separate native target's reader.
          * This does not simulate physical raw-input motion or desktop focus. */
         CHECK(SendMessageTimeoutW(window,WM_LBUTTONDOWN,MK_LBUTTON,0,SMTO_ABORTIFHUNG,3000,&reply));
         CHECK(SendMessageTimeoutW(window,WM_LBUTTONUP,0,0,SMTO_ABORTIFHUNG,3000,&reply));
@@ -262,38 +222,32 @@ static void exercise(DWORD expected,BOOL stalled,BOOL cancel)
         CHECK(!run16_native_frontend_dos_bind(frontend,&frontend,FALSE));
         CHECK(IsWindow(window) && IsWindowVisible(window));
         /* A second no-op owner request is a presentation-thread barrier.
-         * Final drain is not a barrier: it reclaims input and stops the pump. */
+         * Final drain is not a barrier: it stops the pump. */
         CHECK(!run16_native_frontend_dos_bind(frontend,&frontend,FALSE));
         CloseHandle(input);CloseHandle(canonical);
         puts("PASS Console CAF make/repeat/break opens production Window; X returns without ending native target");
     }
-    if(stalled) {
-        CHECK(SetEvent(stall) && WaitForSingleObject(ack,5000)==WAIT_OBJECT_0);
-        CHECK(SetEvent(done) && WaitForSingleObject(target,5000)==WAIT_OBJECT_0);
-    } else if(cancel)run16_native_frontend_cancel(frontend);
-    else CHECK(TerminateProcess(helper,99) && WaitForSingleObject(helper,5000)==WAIT_OBJECT_0);
+    if(completed)CHECK(SetEvent(done) && WaitForSingleObject(target,5000)==WAIT_OBJECT_0);
+    if(cancel || !completed)run16_native_frontend_cancel(frontend);
     began=GetTickCount64();
     error=run16_native_frontend_wait(frontend,target,&result);
     elapsed=GetTickCount64()-began;
-    printf("frontend wait expected=%lu stalled=%u cancel=%u error=%lu result=%lu elapsed=%llu ms\n",
-        expected,stalled,cancel,error,result,elapsed);
-    if(stalled)CHECK(!error && result==expected && elapsed<3000);
+    printf("frontend wait expected=%lu completed=%u cancel=%u error=%lu result=%lu elapsed=%llu ms\n",
+        expected,completed,cancel,error,result,elapsed);
+    if(completed)CHECK(!error && result==expected && elapsed<3000);
     else {
         CHECK(error && result==0xdeadbeef && WaitForSingleObject(target,0)==WAIT_TIMEOUT);
         CHECK(SetEvent(done) && WaitForSingleObject(target,5000)==WAIT_OBJECT_0);
     }
     CHECK(GetExitCodeProcess(target,&actual) && actual==expected);
-    if(!(stalled && cancel))CHECK(SetEvent(release));
     began=GetTickCount64();
     run16_native_frontend_destroy(frontend);
     run16_console_video_dispose(&lazy_video);
     elapsed=GetTickCount64()-began;
-    printf("frontend destroy stalled=%u retained-stall=%u elapsed=%llu ms\n",stalled,stalled && cancel,elapsed);
+    printf("frontend destroy completed=%u retained-stall=%u elapsed=%llu ms\n",completed,completed && cancel,elapsed);
     CHECK(elapsed<10000);
-    CHECK(WaitForSingleObject(helper,5000)==WAIT_OBJECT_0);
-    CloseHandle(target);target=NULL;CloseHandle(helper);helper=NULL;
-    UnmapViewOfFile(pid);CloseHandle(mapping);
-    CloseHandle(done);CloseHandle(stall);CloseHandle(ack);CloseHandle(release);
+    CloseHandle(target);target=NULL;
+    CloseHandle(done);
     if(mouse_ready)CloseHandle(mouse_ready);
     CHECK(SetEnvironmentVariableW(L"NTVDM_TEST_FRONTEND",NULL));
 }
@@ -324,7 +278,7 @@ static int control_root(DWORD kind)
     FreeEnvironmentStringsW((WCHAR *)start.environment);
     CHECK(WaitForSingleObject(ready,5000)==WAIT_OBJECT_0);
     /* Never broadcast into the observer/user Console. The parent creates this
-     * root on its own hidden Console, and the helper/target use a second one. */
+     * root on its own hidden Console, and the target uses ConPTY. */
     CHECK(GetConsoleProcessList(members,4)==1 && members[0]==GetCurrentProcessId());
     if(kind==3)CHECK(!run16_native_frontend_dos_bind(frontend,&ready,TRUE));
     CHECK(GenerateConsoleCtrlEvent(event,0));
@@ -355,10 +309,84 @@ static void controls(void)
     }
     puts("PASS actual root Console Ctrl+C/Break forwards to hidden targets, default exit and paused-DOS I/O state");
 }
+static BOOL console_contains(HANDLE output,PCWSTR expected)
+{
+    WCHAR text[4097];DWORD count=0;COORD origin={0,0};
+    CHECK(ReadConsoleOutputCharacterW(output,text,4096,origin,&count));
+    text[count]=0;return wcsstr(text,expected)!=NULL;
+}
+static int concurrent_target(void)
+{
+    HANDLE ready,release;DWORD count;
+    CHECK(GetEnvironmentVariableW(L"NTVDM_TEST_FRONTEND",prefix,96));
+    ready=named_event(L"ready",FALSE);release=named_event(L"release",FALSE);
+    CHECK(WriteConsoleW(GetStdHandle(STD_OUTPUT_HANDLE),L"NATIVE-BASE\r\n",13,&count,NULL) && count==13);
+    CHECK(SetEvent(ready));CHECK(WaitForSingleObject(release,10000)==WAIT_OBJECT_0);
+    CHECK(WriteConsoleW(GetStdHandle(STD_OUTPUT_HANDLE),L"NATIVE-LATE\r\n",13,&count,NULL) && count==13);
+    CloseHandle(ready);CloseHandle(release);return 37;
+}
+static int concurrent_frontend(void)
+{
+    run16_native_frontend *frontend=NULL;run16_native_start start={0};
+    WCHAR image[MAX_PATH],command[1024],directory[MAX_PATH];
+    HANDLE ready,release,input,output;DWORD count,result;ULONGLONG deadline;
+    CHECK(swprintf_s(prefix,96,L"Local\\NTVDMConcurrent-%lu",GetCurrentProcessId())>0);
+    CHECK(SetEnvironmentVariableW(L"NTVDM_TEST_FRONTEND",prefix));
+    ready=named_event(L"ready",TRUE);release=named_event(L"release",TRUE);
+    CHECK(GetModuleFileNameW(NULL,image,MAX_PATH) && GetCurrentDirectoryW(MAX_PATH,directory));
+    CHECK(swprintf_s(command,1024,L"\"%ls\" --concurrent-target",image)>0);
+    start.application=image;start.command=command;start.directory=directory;
+    start.environment=GetEnvironmentStringsW();start.console_mask=7;CHECK(start.environment);
+    CHECK(!run16_native_frontend_create(&frontend));
+    CHECK(!run16_native_frontend_launch(frontend,&start,&target));
+    CHECK(WaitForSingleObject(ready,10000)==WAIT_OBJECT_0);
+    CHECK(!run16_native_frontend_console(frontend,&input,&output));
+    CHECK(!run16_native_frontend_dos_bind(frontend,&frontend,TRUE));
+    deadline=GetTickCount64()+5000;
+    do {
+        BOOL found;
+        CHECK(!run16_native_frontend_dos_enter(frontend,&frontend));
+        CHECK(!run16_native_frontend_screen_begin(frontend));
+        found=console_contains(output,L"NATIVE-BASE");
+        CHECK(!run16_native_frontend_screen_end(frontend,FALSE));
+        run16_native_frontend_dos_leave(frontend);
+        if(found)break;
+        CHECK(GetTickCount64()<deadline);Sleep(1);
+    }while(TRUE);
+    CHECK(!run16_native_frontend_dos_enter(frontend,&frontend));
+    CHECK(!run16_native_frontend_screen_begin(frontend));
+    CHECK(WriteConsoleW(output,L"DOS-INTERVAL\r\n",14,&count,NULL) && count==14);
+    CHECK(SetEvent(release)); /* Actual ConPTY child writes while screen is locked. */
+    CHECK(!run16_native_frontend_screen_end(frontend,TRUE));
+    run16_native_frontend_dos_leave(frontend);
+    CHECK(WaitForSingleObject(target,10000)==WAIT_OBJECT_0);
+    CHECK(GetExitCodeProcess(target,&result) && result==37);
+    deadline=GetTickCount64()+5000;
+    do {
+        BOOL found;
+        CHECK(!run16_native_frontend_dos_enter(frontend,&frontend));
+        CHECK(!run16_native_frontend_screen_begin(frontend));
+        found=console_contains(output,L"NATIVE-LATE");
+        CHECK(!run16_native_frontend_screen_end(frontend,FALSE));
+        run16_native_frontend_dos_leave(frontend);
+        if(found)break;
+        CHECK(GetTickCount64()<deadline);Sleep(1);
+    }while(TRUE);
+    CHECK(console_contains(output,L"NATIVE-BASE") && console_contains(output,L"DOS-INTERVAL"));
+    CHECK(!run16_native_frontend_dos_bind(frontend,&frontend,FALSE));
+    CHECK(!run16_native_frontend_wait(frontend,target,&result) && result==37);
+    CloseHandle(target);target=NULL;CloseHandle(input);CloseHandle(output);
+    run16_native_frontend_destroy(frontend);FreeEnvironmentStringsW((LPWCH)start.environment);
+    CloseHandle(ready);CloseHandle(release);
+    puts("PASS real ConPTY child output survives frontend DOS screen transaction; native direct result=37");
+    return 0;
+}
+
 int wmain(int argc,WCHAR **argv)
 {
+    if(argc==2 && !wcscmp(argv[1],L"--concurrent-target"))return concurrent_target();
+    if(argc==2 && !wcscmp(argv[1],L"--concurrent"))return concurrent_frontend();
     HANDLE guard;
-    if(argc==2 && !wcscmp(argv[1],L"--internal-native-console"))return helper_main();
     if(argc==3 && !wcscmp(argv[1],L"--control-root"))return control_root(wcstoul(argv[2],NULL,10));
     if(argc==3 && !wcscmp(argv[1],L"--signal-target")) {
         HANDLE ready;DWORD kind=wcstoul(argv[2],NULL,10);
@@ -427,13 +455,13 @@ int wmain(int argc,WCHAR **argv)
     guard=CreateThread(NULL,0,watchdog,NULL,0,NULL);CHECK(guard);
     exercise(37,TRUE,FALSE);exercise(0,TRUE,FALSE);exercise(STILL_ACTIVE,TRUE,FALSE);
     exercise(39,TRUE,FALSE);
-    puts("PASS stable Window retains DOS-returned L and gap-typed M before first helper, ordered exactly once with native characters");
-    puts("PASS production async frontend preserves completed 37/0/259 while actual helper is stalled");
+    puts("PASS stable Window retains DOS-returned L and gap-typed M before first native launch, ordered exactly once with native characters");
+    puts("PASS production async frontend preserves completed 37/0/259 after direct target completion");
     exercise(41,FALSE,FALSE);exercise(43,FALSE,TRUE);
-    puts("PASS helper loss/cancellation is I/O failure, not live target completion or termination");
+    puts("PASS frontend cancellation is I/O failure, not live target completion or termination");
     exercise(47,TRUE,TRUE);
-    puts("PASS production teardown cancels outstanding presentation and bounds permanently stalled helper cleanup");
-    puts("PASS Window mouse through production frontend/helper to native ReadConsoleInput: capture gesture excluded, left/right pairs and focus release");
+    puts("PASS production teardown cancels outstanding presentation and bounds ConPTY cleanup");
+    puts("PASS Window mouse through production frontend/ConPTY to native ReadConsoleInput: capture gesture excluded, left/right pairs and focus release");
     SetEvent(finished);CHECK(WaitForSingleObject(guard,5000)==WAIT_OBJECT_0);
     CloseHandle(guard);CloseHandle(finished);return 0;
 }

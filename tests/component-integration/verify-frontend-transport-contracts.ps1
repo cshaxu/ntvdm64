@@ -24,27 +24,30 @@ $cases=@(
     @{Name='frontend-scope-lifetime-test';Witness='final join complete'},
     @{Name='frontend-request-client-test';Witness='without UI ownership'},
     @{Name='native-console-capture-test';Witness='native capture/presentation'},
-    @{Name='native-console-frontend-test';Witness='bounds permanently stalled helper cleanup'},
+    @{Name='native-console-frontend-test';Witness='bounds ConPTY cleanup'},
     @{Name='console-channel-lifetime-test';Witness='85 real channel lifetimes'},
     @{Name='console-client-test';Suffix='normal';Exit='00000049';Witness='original-shape close callback'},
     @{Name='console-client-test';Suffix='broken';Arg='--broken-pipe';Witness='native error and idle frontend loss'},
     @{Name='console-client-test';Suffix='close-hang';Arg='--close-hang';Exit='c000013a';Witness='original-shape close callback'}
 )
 $backendCases=@(
-    @{Name='native-console-host-test';Witness='actual result 41'},
-    @{Name='native-console-host-test';Suffix='control-input';Arg='--control-input';Witness='helper retained'},
-    @{Name='native-console-host-test';Suffix='completion';Arg='--completion';Witness='does not terminate a live native target'},
-    @{Name='native-console-host-test';Suffix='close-timeout';Arg='--close-timeout';Witness='peer observes EOF and exits without forced termination'},
+    @{Name='native-console-backend-test';Witness='NATIVE-BACKEND PASS'},
+    @{Name='native-console-frontend-test';Suffix='concurrent';Arg='--concurrent';Witness='real ConPTY child output survives frontend DOS screen transaction'},
     @{Name='native-console-frontend-test';Suffix='controls';Arg='--controls';Witness='default exit and paused-DOS I/O state'},
-    @{Name='native-console-members-test';Witness='helper failure is not empty membership'}
+    @{Name='native-console-members-test';Witness='cancellation is not empty membership'}
 )
 if($ExpandedBackend){
-    # The host fixture deliberately starts its stream child in a different
-    # cwd. Supply that empty build-only directory, not a product dependency.
-    $null=New-Item -ItemType Directory -Path (Join-Path $BuildRoot 'tests') -Force
+    # Replaces retired helper protocol/EOF/control tests with their actual
+    # ConPTY resource contracts: stream masks/aliases/failures, child/descendant
+    # completion, explicit close, raw/cooked/control input and retained reuse.
+    # Build from current production sources; never accept an old passing log.
+    $resourceRoot=Join-Path $BuildRoot ($LogPrefix+'-conpty-resource')
+    & (Join-Path $repo 'tests/observation/verify-conpty-launch.ps1') `
+        -BuildRoot $resourceRoot.Substring($repo.Length+1) -LogPath (Join-Path $LogRoot ($LogPrefix+'-conpty-resource.log'))
     $cases+=$backendCases
 }
 $previous=$env:MVDM_OBSERVER_PRIVATE_DESKTOP
+$failures=[Collections.Generic.List[string]]::new()
 try {
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
     foreach($case in $cases){
@@ -52,6 +55,7 @@ try {
         if($case.Suffix){$name+='-'+$case.Suffix}
         $report=Join-Path $LogRoot ($LogPrefix+'-'+$name+'.txt')
         if(Test-Path -LiteralPath $report){throw ('Refusing to overwrite run evidence: '+$report)}
+        try {
         $arguments=@((Join-Path $BuildRoot ($case.Name+'.exe')),$BuildRoot,$report,
             '--observation-timeout-ms','30000')
         if($case.Arg){$arguments+=$case.Arg}
@@ -71,5 +75,10 @@ try {
             throw ('Missing capability witness: '+$name)
         }
         Write-Output ('PASS '+$name+' expected exit '+$expected)
+        } catch {
+            $failures.Add($name+': '+$_.Exception.Message)
+            Write-Warning ('FAIL '+$name+': '+$_.Exception.Message)
+        }
     }
+    if($failures.Count){throw ('Frontend contract failures: '+($failures -join '; '))}
 } finally {$env:MVDM_OBSERVER_PRIVATE_DESKTOP=$previous}

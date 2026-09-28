@@ -1,247 +1,324 @@
 #include "native_console_backend.h"
+#include "native_conpty.h"
+#include "native_terminal.h"
 #include "product-abi/console_mouse.h"
 #include <stdio.h>
 
+/* Frontend-local ConPTY and terminal ownership; never target completion. */
 struct run16_native_backend {
-    HANDLE pipe,helper,stop,event;
-    ULONGLONG close_deadline;
+    ntkvm_conpty *pty;
+    ntkvm_terminal *terminal;
+    HANDLE stop,ended;
+    COORD size;
+    unsigned history;
+    DWORD buttons;
+    int wheel_vertical,wheel_horizontal;
+    BOOL launched,inherited;
     CRITICAL_SECTION lock;
 };
-static DWORD transfer(run16_native_backend *backend,void *data,DWORD bytes,BOOL write)
+static DWORD create_console(run16_native_backend *backend)
 {
-    BYTE *cursor=data;
-    while(bytes) {
-        OVERLAPPED io={0};
-        HANDLE waits[3]={backend->stop,backend->event,backend->helper};
-        DWORD count=0,error,wait,timeout=INFINITE;
-        BOOL ok;
-        if(WaitForSingleObject(backend->stop,0)==WAIT_OBJECT_0) return ERROR_OPERATION_ABORTED;
-        if(backend->close_deadline) {
-            ULONGLONG now=GetTickCount64();
-            if(now>=backend->close_deadline) return ERROR_TIMEOUT;
-            timeout=(DWORD)(backend->close_deadline-now);
-        }
-        ResetEvent(backend->event);io.hEvent=backend->event;
-        ok=write ? WriteFile(backend->pipe,cursor,bytes,&count,&io) : ReadFile(backend->pipe,cursor,bytes,&count,&io);
-        if(!ok) {
-            error=GetLastError();
-            if(error!=ERROR_IO_PENDING) return error;
-            /* A completed final reply takes precedence over helper exit. */
-            wait=WaitForMultipleObjects(3,waits,FALSE,timeout);
-            if(wait!=WAIT_OBJECT_0+1) {
-                error=wait==WAIT_OBJECT_0 ? ERROR_OPERATION_ABORTED : wait==WAIT_OBJECT_0+2 ? ERROR_BROKEN_PIPE :
-                    wait==WAIT_TIMEOUT ? ERROR_TIMEOUT : GetLastError();
-                CancelIoEx(backend->pipe,&io);GetOverlappedResult(backend->pipe,&io,&count,TRUE);
-                return error;
-            }
-            if(!GetOverlappedResult(backend->pipe,&io,&count,FALSE)) return GetLastError();
-        }
-        if(!count || count>bytes) return ERROR_BROKEN_PIPE;
-        cursor+=count;bytes-=count;
+    DWORD error=0;
+    if(!backend->terminal)error=ntkvm_terminal_open(backend->size.Y,backend->size.X,&backend->terminal);
+    if(!error)error=ntkvm_terminal_history_limit(backend->terminal,backend->history);
+    if(!error) {
+        ResetEvent(backend->ended);
+        error=ntkvm_conpty_open_events(backend->size,ntkvm_terminal_feed,backend->terminal,
+            backend->stop,backend->ended,backend->inherited,&backend->pty);
     }
-    return ERROR_SUCCESS;
-}
-static DWORD call(run16_native_backend *backend,const run16_native_host_request *request,
-    const void *payload,run16_native_host_reply *reply,void *data,DWORD capacity)
-{
-    DWORD error;
-    ZeroMemory(reply,sizeof(*reply));
-    error=transfer(backend,(void *)request,sizeof(*request),TRUE);
-    if(!error && request->bytes) error=transfer(backend,(void *)payload,request->bytes,TRUE);
-    if(!error) error=transfer(backend,reply,sizeof(*reply),FALSE);
-    if(!error && (reply->version!=RUN16_NATIVE_HOST_VERSION || reply->bytes>capacity)) error=ERROR_INVALID_DATA;
-    if(!error && reply->bytes) error=transfer(backend,data,reply->bytes,FALSE);
-    if(error) SetEvent(backend->stop); /* A partial packet cannot be replayed. */
+    if(error) {
+        ntkvm_terminal_close(backend->terminal);backend->terminal=NULL;
+        SetEvent(backend->ended);
+    }
     return error;
 }
-DWORD run16_native_backend_call(run16_native_backend *backend,const run16_native_host_request *request,
-    const void *payload,run16_native_host_reply *reply,void *data,DWORD capacity)
+DWORD run16_native_backend_open(run16_native_backend **output)
 {
-    DWORD error;
-    if(!backend || !request || !reply || (request->bytes && !payload) || (capacity && !data)) return ERROR_INVALID_PARAMETER;
-    EnterCriticalSection(&backend->lock);
-    error=call(backend,request,payload,reply,data,capacity);
-    LeaveCriticalSection(&backend->lock);
-    return error;
+    return run16_native_backend_open_cancel(NULL,output);
 }
-void run16_native_backend_cancel(run16_native_backend *backend)
+DWORD run16_native_backend_open_cancel(HANDLE stop,run16_native_backend **output)
 {
-    if(backend) SetEvent(backend->stop);
-}
-HANDLE run16_native_backend_process(run16_native_backend *backend)
-{
-    return backend ? backend->helper : NULL;
-}
-DWORD run16_native_backend_close(run16_native_backend *backend)
-{
-    DWORD error=ERROR_SUCCESS;
-    if(!backend) return error;
-    EnterCriticalSection(&backend->lock);
-    if(backend->helper && WaitForSingleObject(backend->stop,0)!=WAIT_OBJECT_0) {
-        run16_native_host_request request={RUN16_NATIVE_HOST_VERSION,RUN16_NATIVE_STOP,0,0,0};
-        run16_native_host_reply reply;
-        /* Bound the whole STOP exchange, including partial replies, before
-         * the separate helper-exit wait. Normal target I/O has no time limit. */
-        backend->close_deadline=GetTickCount64()+5000;
-        error=call(backend,&request,NULL,&reply,NULL,0);
-        if(!error)error=reply.status;
-    }
-    if(backend->pipe && backend->pipe!=INVALID_HANDLE_VALUE) CloseHandle(backend->pipe);
-    if(backend->helper) {
-        if(WaitForSingleObject(backend->helper,5000)!=WAIT_OBJECT_0) {
-            /* Only the exact root-owned I/O helper, never its native targets. */
-            TerminateProcess(backend->helper,ERROR_OPERATION_ABORTED);
-            WaitForSingleObject(backend->helper,5000);
-            if(!error)error=ERROR_TIMEOUT;
-        }
-        CloseHandle(backend->helper);
-    }
-    if(backend->stop) CloseHandle(backend->stop);
-    if(backend->event) CloseHandle(backend->event);
-    LeaveCriticalSection(&backend->lock);DeleteCriticalSection(&backend->lock);
-    HeapFree(GetProcessHeap(),0,backend);
-    return error;
-}
-DWORD run16_native_backend_open(PCWSTR image,run16_native_backend **output)
-{
-    return run16_native_backend_open_cancel(image,NULL,output);
-}
-DWORD run16_native_backend_open_cancel(PCWSTR image,HANDLE stop,run16_native_backend **output)
-{
-    run16_native_backend *backend;
-    HANDLE client=INVALID_HANDLE_VALUE;
-    STARTUPINFOEXW startup={0};
-    SECURITY_ATTRIBUTES security={sizeof(security),NULL,TRUE};
-    PROCESS_INFORMATION process={0};
-    WCHAR name[96],command[32768];
-    SIZE_T attributes=0;
-    BOOL initialized=FALSE;
-    DWORD error=ERROR_SUCCESS,pid;
-    static LONG serial;
-    if(!output || !image || !*image) return ERROR_INVALID_PARAMETER;
+    run16_native_backend *backend;DWORD error=0;
+    if(!output)return ERROR_INVALID_PARAMETER;
     *output=NULL;
     backend=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*backend));
     if(!backend)return ERROR_NOT_ENOUGH_MEMORY;
     InitializeCriticalSection(&backend->lock);
+    backend->size.X=80;backend->size.Y=25;
     if(stop)DuplicateHandle(GetCurrentProcess(),stop,GetCurrentProcess(),&backend->stop,
         SYNCHRONIZE|EVENT_MODIFY_STATE,FALSE,0);
     else backend->stop=CreateEventW(NULL,TRUE,FALSE,NULL);
-    backend->event=CreateEventW(NULL,TRUE,FALSE,NULL);
-    if(!backend->stop || !backend->event) { error=GetLastError();goto done; }
-    swprintf_s(name,96,L"\\\\.\\pipe\\run16-native-%lu-%lu",GetCurrentProcessId(),(DWORD)InterlockedIncrement(&serial));
-    backend->pipe=CreateNamedPipeW(name,PIPE_ACCESS_DUPLEX|FILE_FLAG_OVERLAPPED|FILE_FLAG_FIRST_PIPE_INSTANCE,
-        PIPE_TYPE_BYTE|PIPE_WAIT|PIPE_REJECT_REMOTE_CLIENTS,1,65536,65536,0,NULL);
-    if(backend->pipe==INVALID_HANDLE_VALUE) { error=GetLastError();goto done; }
-    client=CreateFileW(name,GENERIC_READ|GENERIC_WRITE,0,&security,OPEN_EXISTING,
-        SECURITY_SQOS_PRESENT|SECURITY_IDENTIFICATION,NULL);
-    if(client==INVALID_HANDLE_VALUE) { error=GetLastError();goto done; }
-    {
-        OVERLAPPED io={0};io.hEvent=backend->event;
-        if(!ConnectNamedPipe(backend->pipe,&io) && GetLastError()!=ERROR_PIPE_CONNECTED) {
-            DWORD ignored;error=GetLastError();CancelIoEx(backend->pipe,&io);
-            GetOverlappedResult(backend->pipe,&io,&ignored,TRUE);goto done;
-        }
-    }
-    if(!GetNamedPipeClientProcessId(backend->pipe,&pid) || pid!=GetCurrentProcessId()) { error=ERROR_ACCESS_DENIED;goto done; }
-    startup.StartupInfo.cb=sizeof(startup);
-    startup.StartupInfo.dwFlags=STARTF_USESTDHANDLES|STARTF_USESHOWWINDOW;startup.StartupInfo.wShowWindow=SW_HIDE;
-    startup.StartupInfo.hStdInput=startup.StartupInfo.hStdOutput=startup.StartupInfo.hStdError=client;
-    InitializeProcThreadAttributeList(NULL,1,0,&attributes);
-    startup.lpAttributeList=HeapAlloc(GetProcessHeap(),0,attributes);
-    if(!startup.lpAttributeList) { error=ERROR_NOT_ENOUGH_MEMORY;goto done; }
-    if(!InitializeProcThreadAttributeList(startup.lpAttributeList,1,0,&attributes)) { error=GetLastError();goto done; }
-    initialized=TRUE;
-    if(!UpdateProcThreadAttribute(startup.lpAttributeList,0,PROC_THREAD_ATTRIBUTE_HANDLE_LIST,&client,sizeof(client),NULL,NULL)) { error=GetLastError();goto done; }
-    if(swprintf_s(command,32768,L"\"%ls\" --internal-native-console",image)<0) { error=ERROR_FILENAME_EXCED_RANGE;goto done; }
-    if(!CreateProcessW(image,command,NULL,NULL,TRUE,EXTENDED_STARTUPINFO_PRESENT,NULL,NULL,&startup.StartupInfo,&process)) { error=GetLastError();goto done; }
-    backend->helper=process.hProcess;CloseHandle(process.hThread);
-done:
-    if(initialized) DeleteProcThreadAttributeList(startup.lpAttributeList);
-    if(startup.lpAttributeList) HeapFree(GetProcessHeap(),0,startup.lpAttributeList);
-    if(client!=INVALID_HANDLE_VALUE) CloseHandle(client);
+    backend->ended=CreateEventW(NULL,TRUE,FALSE,NULL);
+    if(!backend->stop || !backend->ended)error=GetLastError();
     if(error)run16_native_backend_close(backend);else *output=backend;
     return error;
 }
-
 DWORD run16_native_backend_launch(run16_native_backend *backend,const run16_native_start *start,HANDLE *target)
 {
-    run16_native_start local;
-    HANDLE originals[5],remote[5]={0};
-    DWORD i,j,error,bytes=0;
-    BYTE *payload=NULL;
-    run16_native_host_request request={RUN16_NATIVE_HOST_VERSION,RUN16_NATIVE_LAUNCH,0,0,0};
-    run16_native_host_reply reply;
-    if(!backend || !start || !target) return ERROR_INVALID_PARAMETER;
+    PROCESS_INFORMATION process={0};DWORD error=0;
+    run16_native_start local;HANDLE capabilities[2]={0};unsigned i;
+    if(!backend || !start || !target)return ERROR_INVALID_PARAMETER;
     *target=NULL;local=*start;
-    for(i=0;i<5;++i) originals[i]=i<3 ? start->standard[i] : start->capabilities[i-3];
     EnterCriticalSection(&backend->lock);
-    for(i=0;i<5;++i) {
-        if(i<3 && (start->console_mask&(1u<<i))) { local.standard[i]=NULL;continue; }
-        if(!originals[i] || originals[i]==INVALID_HANDLE_VALUE) remote[i]=originals[i];
-        else {
-            for(j=0;j<i;++j) if((j<3)==(i<3) && originals[j]==originals[i] && remote[j]) break;
-            if(j<i) remote[i]=remote[j];
-            else if(!DuplicateHandle(GetCurrentProcess(),originals[i],backend->helper,&remote[i],
-                i<3 ? 0 : SYNCHRONIZE,FALSE,i<3 ? DUPLICATE_SAME_ACCESS : 0)) { error=GetLastError();goto done; }
-        }
-        if(i<3)local.standard[i]=remote[i];else local.capabilities[i-3]=remote[i];
+    if(WaitForSingleObject(backend->stop,0)==WAIT_OBJECT_0)error=ERROR_OPERATION_ABORTED;
+    if(!error && backend->pty && WaitForSingleObject(backend->ended,0)==WAIT_OBJECT_0) {
+        error=ntkvm_conpty_error(backend->pty);
+        if(!error)error=ERROR_BROKEN_PIPE;
     }
-    error=run16_native_launch_pack(&local,&payload,&bytes);
-    if(error)goto done;
-    request.bytes=bytes;
-    error=call(backend,&request,payload,&reply,NULL,0);
-    if(!error)error=reply.status;
+    if(!error && !backend->pty)error=create_console(backend);
+    for(i=0;!error && i<2;++i)if(start->capabilities[i]) {
+        if(!DuplicateHandle(GetCurrentProcess(),start->capabilities[i],GetCurrentProcess(),
+            capabilities+i,SYNCHRONIZE,FALSE,0))error=GetLastError();
+        else local.capabilities[i]=capabilities[i];
+    }
+    if(!error)error=ntkvm_conpty_launch(backend->pty,&local,&process);
     if(!error) {
-        DWORD release_error;
-        if(reply.process>(uint64_t)(ULONG_PTR)-1 || !reply.process) error=ERROR_INVALID_DATA;
-        else if(!DuplicateHandle(backend->helper,(HANDLE)(ULONG_PTR)reply.process,GetCurrentProcess(),
-            target,SYNCHRONIZE|PROCESS_QUERY_LIMITED_INFORMATION,FALSE,0)) error=GetLastError();
-        request.operation=RUN16_NATIVE_RELEASE;request.bytes=0;
-        /* Releasing an export copy is not target completion. If this reply is
-         * lost, keep the actual target capability already obtained above.
-         * A failed local duplication still releases the helper's export. */
-        release_error=call(backend,&request,NULL,&reply,NULL,0);
-        if(release_error || reply.status) SetEvent(backend->stop);
+        backend->launched=TRUE;
+        *target=process.hProcess;CloseHandle(process.hThread);
+        if(backend->inherited) {
+            ULONGLONG deadline=GetTickCount64()+5000;
+            DWORD startup_error=0;
+            /* The first native client may still be in Console startup when
+             * CreateProcess returns. Finish its cursor reply before the caller
+             * can cancel presentation and strand that client before main.
+             * This caller owns the same recursive backend lock; no extra
+             * thread/helper and no synchronous write from the output reader. */
+            do {
+                startup_error=run16_native_backend_pump(backend);
+                if(startup_error || ntkvm_terminal_startup_replied(backend->terminal) ||
+                   WaitForSingleObject(process.hProcess,0)==WAIT_OBJECT_0)break;
+                Sleep(1);
+            }while(GetTickCount64()<deadline);
+            if(startup_error || (!ntkvm_terminal_startup_replied(backend->terminal) &&
+               WaitForSingleObject(process.hProcess,0)!=WAIT_OBJECT_0))SetEvent(backend->stop);
+        }
+        /* One frontend keeps one ConPTY, including across an empty interval
+         * or DOS handoff. Direct target completion never releases admission. */
+    }
+    for(i=0;i<2;++i)if(capabilities[i])CloseHandle(capabilities[i]);
+    LeaveCriticalSection(&backend->lock);
+    return error;
+}
+DWORD run16_native_backend_configure(run16_native_backend *backend,COORD size,unsigned history)
+{
+    DWORD error=0;
+    if(!backend || size.X<=0 || size.Y<=0)return ERROR_INVALID_PARAMETER;
+    EnterCriticalSection(&backend->lock);
+    if(backend->pty && WaitForSingleObject(backend->ended,0)!=WAIT_OBJECT_0) {
+        if(size.X!=backend->size.X || size.Y!=backend->size.Y) {
+            error=ntkvm_terminal_resize(backend->terminal,size.Y,size.X);
+            if(!error)error=ntkvm_conpty_resize(backend->pty,size);
+        }
+        if(!error)error=ntkvm_terminal_history_limit(backend->terminal,history);
+    }
+    if(!error) {backend->size=size;backend->history=history;}
+    LeaveCriticalSection(&backend->lock);
+    return error;
+}
+DWORD run16_native_backend_capture(run16_native_backend *backend,ntkvm_terminal_frame *frame)
+{
+    DWORD error;
+    if(!backend || !frame)return ERROR_INVALID_PARAMETER;
+    EnterCriticalSection(&backend->lock);
+    error=backend->terminal ? ntkvm_terminal_capture(backend->terminal,frame) : ERROR_NO_DATA;
+    LeaveCriticalSection(&backend->lock);
+    return error;
+}
+DWORD run16_native_backend_screen_enter(run16_native_backend *backend)
+{
+    if(!backend)return ERROR_INVALID_PARAMETER;
+    EnterCriticalSection(&backend->lock);
+    if(!backend->terminal || !backend->pty ||
+       WaitForSingleObject(backend->ended,0)==WAIT_OBJECT_0 || ntkvm_conpty_error(backend->pty)) {
+        LeaveCriticalSection(&backend->lock);return ERROR_NO_DATA;
+    }
+    ntkvm_terminal_screen_enter(backend->terminal);
+    return 0;
+}
+void run16_native_backend_screen_leave(run16_native_backend *backend)
+{
+    ntkvm_terminal_screen_leave(backend->terminal);
+    LeaveCriticalSection(&backend->lock);
+}
+DWORD run16_native_backend_seed(run16_native_backend *backend,
+    const CONSOLE_SCREEN_BUFFER_INFOEX *info,const CHAR_INFO *cells,unsigned top,ULONGLONG *revision)
+{
+    ntkvm_terminal *terminal=NULL;DWORD error=0;
+    if(!backend || !info || !cells)return ERROR_INVALID_PARAMETER;
+    EnterCriticalSection(&backend->lock);
+    if(backend->pty) {
+        /* Only local state changes under a screen transaction. A later
+         * configure, outside its parser lock, resizes the native ConPTY.
+         * Backend death during this transaction cannot invalidate a completed
+         * DOS screen write; importing cells performs no native pipe I/O. */
+        if(!error)error=ntkvm_terminal_resize(backend->terminal,
+            info->srWindow.Bottom-info->srWindow.Top+1,info->dwSize.X);
+        if(!error)error=ntkvm_terminal_import_console(backend->terminal,info,cells,top);
+        goto done; /* Never replace the terminal/ConPTY of this frontend. */
+    }
+    if(!error)error=ntkvm_terminal_open(backend->size.Y,backend->size.X,&terminal);
+    if(!error)error=ntkvm_terminal_history_limit(terminal,backend->history);
+    if(!error)error=ntkvm_terminal_seed_console(terminal,info,cells,top);
+    if(!error) {
+        ntkvm_terminal_close(backend->terminal);backend->terminal=terminal;terminal=NULL;
+        backend->buttons=0;backend->launched=FALSE;backend->inherited=TRUE;
     }
 done:
-    if(payload)HeapFree(GetProcessHeap(),0,payload);
-    for(i=0;i<5;++i) if(remote[i] && remote[i]!=INVALID_HANDLE_VALUE) {
-        HANDLE copy=NULL;
-        for(j=0;j<i;++j)if(remote[j]==remote[i])break;
-        if(j==i && DuplicateHandle(backend->helper,remote[i],GetCurrentProcess(),&copy,
-            0,FALSE,DUPLICATE_SAME_ACCESS|DUPLICATE_CLOSE_SOURCE)) CloseHandle(copy);
+    if(!error && revision)*revision=ntkvm_terminal_revision(backend->terminal);
+    ntkvm_terminal_close(terminal);LeaveCriticalSection(&backend->lock);
+    return error;
+}
+/* Presentation drains replies even while DOS owns user input. Never write
+ * replies synchronously from the ConPTY output-reader callback. */
+DWORD run16_native_backend_pump(run16_native_backend *backend)
+{
+    BYTE *bytes=NULL;DWORD size=0,delivered=0,error=0;
+    if(!backend)return ERROR_INVALID_PARAMETER;
+    EnterCriticalSection(&backend->lock);
+    if(backend->pty) {
+        error=ntkvm_conpty_error(backend->pty);
+        if(!error && WaitForSingleObject(backend->ended,0)!=WAIT_OBJECT_0) {
+            error=ntkvm_terminal_take_replies(backend->terminal,&bytes,&size);
+            if(!error && size)error=ntkvm_conpty_write(backend->pty,bytes,size,&delivered);
+            if(error==ERROR_NO_MORE_ITEMS)error=0; /* Clean EOF: no requester remains. */
+        }
+    }
+    if(bytes)HeapFree(GetProcessHeap(),0,bytes);
+    LeaveCriticalSection(&backend->lock);
+    return error;
+}
+DWORD run16_native_backend_members(run16_native_backend *backend,DWORD *members)
+{
+    DWORD error=0;
+    if(!backend || !members)return ERROR_INVALID_PARAMETER;
+    EnterCriticalSection(&backend->lock);
+    if(WaitForSingleObject(backend->stop,0)==WAIT_OBJECT_0)error=ERROR_OPERATION_ABORTED;
+    else if(backend->pty)error=ntkvm_conpty_error(backend->pty);
+    /* Conservative retention, NOT an attached-client count. Keeping HPCON
+     * permits future admissions; only explicit frontend close retires it. */
+    if(!error)*members=backend->launched && WaitForSingleObject(backend->ended,0)!=WAIT_OBJECT_0;
+    LeaveCriticalSection(&backend->lock);
+    return error;
+}
+DWORD run16_native_backend_input(run16_native_backend *backend,const INPUT_RECORD *records,DWORD count)
+{
+    DWORD consumed;
+    return run16_native_backend_input_some(backend,records,count,&consumed);
+}
+DWORD run16_native_backend_input_some(run16_native_backend *backend,const INPUT_RECORD *records,DWORD count,DWORD *consumed)
+{
+    DWORD i,error=0,delivered;
+    if(!consumed)return ERROR_INVALID_PARAMETER;
+    *consumed=0;
+    if(!backend || (!records && count))return ERROR_INVALID_PARAMETER;
+    for(i=0;i<count;++i)if(records[i].EventType==CONSOLE_INPUT_RELATIVE_MOUSE)return ERROR_INVALID_DATA;
+    EnterCriticalSection(&backend->lock);
+    if(count && !backend->pty)error=ERROR_NO_DATA;
+    for(i=0;!error && i<count;++i) {
+        const INPUT_RECORD *record=records+i;char bytes[128];int size=0;
+        if(record->EventType==KEY_EVENT) {
+            const KEY_EVENT_RECORD *key=&record->Event.KeyEvent;
+            size=sprintf_s(bytes,sizeof(bytes),"\033[%u;%u;%u;%u;%lu;%u_",
+                key->wVirtualKeyCode,key->wVirtualScanCode,key->uChar.UnicodeChar,
+                key->bKeyDown!=FALSE,key->dwControlKeyState,key->wRepeatCount);
+        } else if(record->EventType==FOCUS_EVENT) {
+            size=sprintf_s(bytes,sizeof(bytes),"\033[%c",record->Event.FocusEvent.bSetFocus ? 'I' : 'O');
+        } else if(record->EventType==MOUSE_EVENT) {
+            const MOUSE_EVENT_RECORD *mouse=&record->Event.MouseEvent;
+            DWORD buttons=mouse->dwButtonState&0x1f,changed=buttons^backend->buttons;
+            unsigned code=3,modifiers=0;char final='M';
+            if(mouse->dwControlKeyState&SHIFT_PRESSED)modifiers|=4;
+            if(mouse->dwControlKeyState&(LEFT_ALT_PRESSED|RIGHT_ALT_PRESSED))modifiers|=8;
+            if(mouse->dwControlKeyState&(LEFT_CTRL_PRESSED|RIGHT_CTRL_PRESSED))modifiers|=16;
+            if(mouse->dwEventFlags&(MOUSE_WHEELED|MOUSE_HWHEELED)) {
+                int *remainder=(mouse->dwEventFlags&MOUSE_HWHEELED) ?
+                    &backend->wheel_horizontal : &backend->wheel_vertical;
+                int pending=*remainder+(SHORT)HIWORD(mouse->dwButtonState);
+                DWORD sent=0;
+                code=(mouse->dwEventFlags&MOUSE_HWHEELED) ? 66 : 64;
+                /* SGR has whole wheel steps, whereas Console records may
+                 * combine steps or contain a fraction of WHEEL_DELTA. Keep
+                 * independent axis remainders; never multiply small events. */
+                while(!error && (pending>=WHEEL_DELTA || pending<=-WHEEL_DELTA)) {
+                    int step=pending<0 ? -WHEEL_DELTA : WHEEL_DELTA;
+                    size=sprintf_s(bytes,sizeof(bytes),"\033[<%u;%u;%uM",
+                        (code+((mouse->dwEventFlags&MOUSE_HWHEELED) ? step>0 : step<0))|modifiers,
+                        (unsigned)max(0,mouse->dwMousePosition.X)+1,
+                        (unsigned)max(0,mouse->dwMousePosition.Y)+1);
+                    delivered=0;
+                    if(size<0)error=ERROR_INVALID_DATA;
+                    else error=ntkvm_conpty_write(backend->pty,bytes,(DWORD)size,&delivered);
+                    sent+=delivered;
+                    if(!error)pending-=step;
+                }
+                if(!error) {*remainder=pending;backend->buttons=buttons;}
+                if(!error || sent)*consumed=i+1;
+                continue;
+            } else if(changed) {
+                static const DWORD masks[]={FROM_LEFT_1ST_BUTTON_PRESSED,
+                    FROM_LEFT_2ND_BUTTON_PRESSED,RIGHTMOST_BUTTON_PRESSED};
+                unsigned button;
+                /* Console reports a button bitmap; SGR reports one edge.
+                 * Serialize every changed primary button, not just the first. */
+                for(button=0;button<3;++button)if(changed&masks[button]) {
+                    int part=sprintf_s(bytes+size,sizeof(bytes)-(size_t)size,
+                        "\033[<%u;%u;%u%c",button|modifiers,
+                        (unsigned)max(0,mouse->dwMousePosition.X)+1,
+                        (unsigned)max(0,mouse->dwMousePosition.Y)+1,
+                        (buttons&masks[button]) ? 'M' : 'm');
+                    if(part<0) {size=-1;break;}
+                    size+=part;
+                }
+            } else {
+                if(buttons&FROM_LEFT_1ST_BUTTON_PRESSED)code=0;
+                else if(buttons&FROM_LEFT_2ND_BUTTON_PRESSED)code=1;
+                else if(buttons&RIGHTMOST_BUTTON_PRESSED)code=2;
+                if(mouse->dwEventFlags&MOUSE_MOVED)code|=32;
+            }
+            if(!size)size=sprintf_s(bytes,sizeof(bytes),"\033[<%u;%u;%u%c",code|modifiers,
+                (unsigned)max(0,mouse->dwMousePosition.X)+1,
+                (unsigned)max(0,mouse->dwMousePosition.Y)+1,final);
+            backend->buttons=buttons;
+        }
+        delivered=0;
+        if(size<0)error=ERROR_INVALID_DATA;
+        else if(size)error=ntkvm_conpty_write(backend->pty,bytes,(DWORD)size,&delivered);
+        if(!error || delivered)*consumed=i+1;
     }
     LeaveCriticalSection(&backend->lock);
     return error;
 }
-
-DWORD run16_native_backend_members(run16_native_backend *backend,DWORD *members)
+DWORD run16_native_backend_control(run16_native_backend *backend,DWORD control)
 {
-    run16_native_host_request request={RUN16_NATIVE_HOST_VERSION,RUN16_NATIVE_MEMBERS,0,0,0};
-    run16_native_host_reply reply;
-    DWORD error;
-    if(!backend || !members)return ERROR_INVALID_PARAMETER;
-    error=run16_native_backend_call(backend,&request,NULL,&reply,NULL,0);
-    if(!error)error=reply.status;
-    if(!error)*members=reply.count;
-    return error;
+    INPUT_RECORD records[2]={0};
+    if(control!=CTRL_C_EVENT && control!=CTRL_BREAK_EVENT)return ERROR_INVALID_PARAMETER;
+    records[0].EventType=KEY_EVENT;
+    records[0].Event.KeyEvent.bKeyDown=TRUE;
+    records[0].Event.KeyEvent.wRepeatCount=1;
+    records[0].Event.KeyEvent.wVirtualKeyCode=control==CTRL_C_EVENT ? 'C' : VK_CANCEL;
+    records[0].Event.KeyEvent.wVirtualScanCode=control==CTRL_C_EVENT ? 0x2e : 0x46;
+    records[0].Event.KeyEvent.uChar.UnicodeChar=3;
+    records[0].Event.KeyEvent.dwControlKeyState=LEFT_CTRL_PRESSED;
+    records[1]=records[0];records[1].Event.KeyEvent.bKeyDown=FALSE;
+    return run16_native_backend_input(backend,records,2);
 }
-
-DWORD run16_native_backend_input(run16_native_backend *backend,const INPUT_RECORD *records,DWORD count)
+void run16_native_backend_cancel(run16_native_backend *backend)
 {
-    DWORD offset=0,i;
-    if(!backend || (!records && count))return ERROR_INVALID_PARAMETER;
-    /* Validate the whole batch before any native input is delivered. */
-    for(i=0;i<count;++i)if(records[i].EventType==CONSOLE_INPUT_RELATIVE_MOUSE)return ERROR_INVALID_DATA;
-    while(offset<count) {
-        DWORD batch=min(count-offset,RUN16_NATIVE_HOST_INPUTS),error;
-        run16_native_host_request request={RUN16_NATIVE_HOST_VERSION,RUN16_NATIVE_INPUT,0,0,0};
-        run16_native_host_reply reply;
-        request.bytes=batch*sizeof(*records);
-        error=run16_native_backend_call(backend,&request,records+offset,&reply,NULL,0);
-        if(error || reply.status)return error ? error : reply.status;
-        if(!reply.count || reply.count>batch)return ERROR_INVALID_DATA;
-        offset+=reply.count;
-    }
-    return ERROR_SUCCESS;
+    if(backend)SetEvent(backend->stop);
+}
+HANDLE run16_native_backend_process(run16_native_backend *backend)
+{
+    return backend ? backend->ended : NULL;
+}
+DWORD run16_native_backend_close(run16_native_backend *backend)
+{
+    if(!backend)return 0;
+    run16_native_backend_cancel(backend);
+    ntkvm_conpty_close(backend->pty);
+    ntkvm_terminal_close(backend->terminal);
+    if(backend->stop)CloseHandle(backend->stop);
+    if(backend->ended)CloseHandle(backend->ended);
+    DeleteCriticalSection(&backend->lock);
+    HeapFree(GetProcessHeap(),0,backend);
+    return 0;
 }

@@ -3,8 +3,8 @@
 #include <windows.h>
 #include <stdint.h>
 /* Strings in the packet follow this header in application/command/directory/
- * environment order. Handles are borrowed helper-local duplicates retained by
- * the root until LAUNCH replies; the helper never closes a caller's duplicate.
+ * environment order. The request receiver validates sender-local values and
+ * duplicates allowed resources before calling the frontend-local launch binding.
  * console_mask replaces only actual Console streams, not files/pipes/NULL. */
 typedef struct run16_native_launch_packet {
     uint32_t characters[4],console_mask;
@@ -19,5 +19,8 @@ DWORD run16_native_launch_pack(const run16_native_start *,BYTE **,DWORD *);
 /* Validated borrowed string views; caller keeps payload alive. */
 DWORD run16_native_launch_unpack(BYTE *,DWORD,run16_native_launch_packet *,WCHAR **);
 DWORD run16_native_launch_start(BYTE *,DWORD,PROCESS_INFORMATION *);
+/* Frontend-local creation: no helper process or Console attachment.
+ * The returned process is the actual target; caller owns both result handles. */
+DWORD run16_native_launch_conpty(const run16_native_start *,HPCON,PROCESS_INFORMATION *);
 
 #endif

@@ -98,7 +98,7 @@ static int check_case(const wchar_t *launcher, const wchar_t *image,
     wchar_t *arguments=command;
     BOOL batch_created=FALSE;
     HANDLE mapping = NULL, ready = NULL, release = NULL, child = NULL;
-    HANDLE input_read=NULL,input_write=NULL,null_output=INVALID_HANDLE_VALUE;
+    HANDLE input_read=NULL,input_write=NULL,null_output=INVALID_HANDLE_VALUE,input_gate=NULL;
     DWORD *pid = NULL, launcher_result = 0, target_result = 0;
     PROCESS_INFORMATION process = {0};
     STARTUPINFOW startup = {sizeof(startup)};
@@ -118,6 +118,14 @@ static int check_case(const wchar_t *launcher, const wchar_t *image,
     if (swprintf_s(command, _countof(command), L"\"%ls\" %ls \"%ls\" --target %ls",
         launcher, prefix_options, image, prefix) < 0) goto done;
     if(caller==4) {
+        /* The normal contract sends a new DOS command after GUI completion.
+         * Retain the old ahead-of-time input reproducer explicitly; it tests
+         * ConPTY-owned unread input, not direct GUI wait completion. */
+        if(wait && !GetEnvironmentVariableW(L"GUI_TEST_UNGATED_INPUT",NULL,0)) {
+            input_gate=named_event(prefix,L"input",TRUE);
+            swprintf_s(name,_countof(name),L"%ls.input",prefix);
+            if(!input_gate || !SetEnvironmentVariableW(L"MVDM_OBSERVER_AFTER_FIRST_LINE_EVENT",name))goto done;
+        }
         DWORD n=GetEnvironmentVariableW(L"GUI_TEST_OBSERVER",shell,MAX_PATH);
         DWORD r=GetEnvironmentVariableW(L"GUI_TEST_REPORT",report,MAX_PATH);
         wchar_t *slash;
@@ -193,14 +201,17 @@ static int check_case(const wchar_t *launcher, const wchar_t *image,
         WaitForSingleObject(process.hProcess, caller==4 ? 60000 : 5000) != WAIT_OBJECT_0 ||
         WaitForSingleObject(child, 0) != WAIT_TIMEOUT)) goto done;
     if (!SetEvent(release) || WaitForSingleObject(child, 5000) != WAIT_OBJECT_0 ||
-        !GetExitCodeProcess(child, &target_result) || target_result != 37 ||
-        WaitForSingleObject(process.hProcess, caller==4 ? 60000 : 5000) != WAIT_OBJECT_0 ||
+        !GetExitCodeProcess(child, &target_result) || target_result != 37) goto done;
+    if(input_gate && !SetEvent(input_gate))goto done;
+    if (WaitForSingleObject(process.hProcess, caller==4 ? 60000 : 5000) != WAIT_OBJECT_0 ||
         !GetExitCodeProcess(process.hProcess, &launcher_result) ||
         launcher_result != (caller==4 ? 0u : (kill_launcher ? 96u : (wait ? 37u : 0u)))) goto done;
     if(caller==4 && (!contains_text(report,L"","scripted-console-input=delivered") ||
         !contains_text(report,L".console.txt","bytes total conventional memory"))) goto done;
     failed = 0;
 done:
+    if(input_gate) { SetEvent(input_gate);CloseHandle(input_gate);
+        SetEnvironmentVariableW(L"MVDM_OBSERVER_AFTER_FIRST_LINE_EVENT",NULL); }
     if(input_read) CloseHandle(input_read);
     if(input_write) CloseHandle(input_write);
     if(null_output!=INVALID_HANDLE_VALUE) CloseHandle(null_output);

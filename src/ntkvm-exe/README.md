@@ -1,13 +1,13 @@
 # ntkvm frontend executable owner
 
 This owner contains character-session presentation: the copied DOS Console
-dispatcher, screen/input channels and native hidden Console backend/helper.
-The source was relocated from run16-exe without algorithm changes during S4.
+dispatcher, screen/input channels and the frontend-owned native ConPTY backend.
+S4 originally relocated the owner from run16-exe; S9 replaces its helper backend.
 
-The formal graph links the service, presentation and private helper into
+The formal graph links the service, presentation and ConPTY terminal state into
 ntkvm.exe, not run16.exe. The ordinary launcher selects the independent
-frontend through its authenticated client. The helper is a private role of
-ntkvm.exe, not another product executable. Object-cache paths retaining
+frontend through its authenticated client. There is no private helper role.
+Object-cache paths retaining
 the old run16 name do not identify their source or final executable owner.
 
 `frontend-client.lib` now isolates native launch requests and copied launch
@@ -23,10 +23,21 @@ Do not create a parallel scheduler or duplicate these presentation providers.
 
 `session_service.c` now owns the existing DOS-channel/native-request pump,
 resource lists and joined teardown. It borrows the registered capability and
-notification until close. The frontend process uses actual native Console
-membership and original DOS record usage to retire, not launcher lifetime.
-Launcher completion, helper failure and frontend-session closure remain
+notification until close. The frontend process retains its single ConPTY
+across native completion and intervening DOS tasks, not by launcher lifetime.
+The backend retention predicate is not actual native Console occupancy.
+Launcher completion, I/O failure and frontend-session closure remain
 different events; native descendants are not recursively terminated.
+
+S9 lifetime decision: keep HPCON until explicit frontend closure. Early
+ReleasePseudoConsole and backend recreation have been removed from the
+production backend; no observer process or Job supplies last-client detection.
+Uncertain last-client retirement may conservatively retain the frontend.
+The resource test API can still release admission to verify that later
+attachment is refused; it is not a production target-completion operation.
+Shared DOS/native screen composition has real guest/native output coverage;
+the complete exact-candidate gates and publication remain governed by the S9
+ledger. Source placement alone is not a delivered migration claim.
 
 The generated-link ownership check is
 tests/component-integration/verify-frontend-link-ownership.ps1. It checks the
@@ -58,3 +69,35 @@ INPUT_RESET releases only successfully delivered keys belonging to that source,
 discards frontend-local dead-key composition, and retains the live source identity.
 SOURCE_RETIRED alone permanently retires that identity. Native mouse capture
 release remains owned by kvm-window, not by the NTVDM worker.
+
+## S9 ConPTY replacement in progress
+
+native_conpty owns the public pseudoconsole and byte-stream resource boundary;
+native_terminal binds its output to the pinned libvterm UTF-8/VT state. These
+are selected by the formal ntkvm graph and have passed the first linked
+frontend/control tests on a private desktop. The old helper implementation,
+protocol and dispatch have been removed, not retained as a fallback. Status
+and the S9 ledger distinguish this candidate from the deployed pre-ConPTY
+frontend; the live package's exact hashes require their own verification.
+Full guest/display regressions remain. Native Window text now uses
+the same bitmap rasterizer as DOS, with default glyph data from the pinned
+V7VGA ROM. Generate-FrontendFont.ps1 emits only its 256-by-14 bitmap slice
+under build; DOS still supplies its actual current guest font banks. No GDI
+font or general Unicode font subsystem is selected; missing glyphs become '?'.
+
+libvterm-import.json pins the official MIT-licensed 0.3.3 archive and its nine
+runtime C units plus header closure. lib/libvterm-0.3.3.tar.gz is the unchanged
+source distribution, not a binary provider. The build materializes only the
+selected closure under build in the formal Ninja generator (the focused
+Build-FrontendTerminalLibrary.ps1 uses the same pinned source selection); no
+download, external checkout, upstream test script or runtime dependency is
+required. The source archive retains upstream notices; LICENSE.libvterm is
+also visible beside it. None of the four existing shared library imports is
+modified. Launcher and worker must not link terminal state or rendering.
+
+native_terminal_screen.c compiles the original screen.c once and appends the
+registered, frontend-local cell/cursor import. This private-layout build seam
+does not modify upstream files but extends the compiled runtime; its source
+and removal condition are recorded in the S9 ledger and import manifest.
+It preserves the live parser, saved state and inactive screen. The focused
+screen-import tests do not themselves prove DOS/native handoff wiring.

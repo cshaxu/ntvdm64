@@ -13,6 +13,9 @@ typedef struct run16_console_frontend {
     DWORD (*activate)(void *,BOOL);
     DWORD (*enter)(void *);
     void (*leave)(void *);
+    /* Frontend-local shared-screen transaction; not a worker/IPC callback. */
+    DWORD (*screen_begin)(void *);
+    DWORD (*screen_end)(void *,BOOL);
     /* Called while enter's I/O lock is held; policy only, no UI mutation. */
     BOOL (*text_frame_required)(void *);
     /* Copied input owned by frontend; callbacks hold the enter lock. */

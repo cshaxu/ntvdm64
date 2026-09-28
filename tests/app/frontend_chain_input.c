@@ -25,6 +25,23 @@ static BOOL await_text(HANDLE output, PCWSTR marker)
     return FALSE;
 }
 
+static void dump_screen(HANDLE output,FILE *report)
+{
+    CONSOLE_SCREEN_BUFFER_INFO info;WCHAR row[1025];SHORT y;DWORD read;
+    if(!GetConsoleScreenBufferInfo(output,&info) || info.dwSize.X>1024) {
+        fprintf(report,"capture-error=%lu\n",GetLastError());return;
+    }
+    fprintf(report,"buffer=%d,%d viewport=%d,%d,%d,%d cursor=%d,%d\n",
+        info.dwSize.X,info.dwSize.Y,info.srWindow.Left,info.srWindow.Top,
+        info.srWindow.Right,info.srWindow.Bottom,info.dwCursorPosition.X,info.dwCursorPosition.Y);
+    for(y=info.srWindow.Top;y<=info.srWindow.Bottom;++y) {
+        COORD origin={0,y};
+        if(!ReadConsoleOutputCharacterW(output,row,info.dwSize.X,origin,&read))break;
+        while(read && row[read-1]==L' ')--read;
+        row[read]=0;if(read)fprintf(report,"[%d] %ls\n",y,row);
+    }
+}
+
 static BOOL send_text(HANDLE input, PCWSTR text)
 {
     for (; *text; ++text) {
@@ -73,6 +90,15 @@ int wmain(int argc, WCHAR **argv)
 {
     WCHAR desktop[128]; DWORD needed; HANDLE input, output; FILE *report = NULL;
     int result = 1; BOOL dos;
+    /* Read-only failure observation of an explicitly named test Console;
+     * no input, activation, window manipulation or production helper role. */
+    if(argc==4 && !wcscmp(argv[1],L"--snapshot")) {
+        FreeConsole();
+        if(!AttachConsole(wcstoul(argv[2],NULL,10)))return 81;
+        output=CreateFileW(L"CONOUT$",GENERIC_READ,FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,OPEN_EXISTING,0,NULL);
+        if(output==INVALID_HANDLE_VALUE || _wfopen_s(&report,argv[3],L"wx"))return 82;
+        dump_screen(output,report);fclose(report);CloseHandle(output);FreeConsole();return 0;
+    }
     if (!GetUserObjectInformationW(GetThreadDesktop(GetCurrentThreadId()),
         UOI_NAME, desktop, sizeof(desktop), &needed) ||
         wcsncmp(desktop, L"NTVDMConsoleTest-", 17)) return 80;
@@ -87,10 +113,19 @@ int wmain(int argc, WCHAR **argv)
     output = CreateFileW(L"CONOUT$", GENERIC_READ | GENERIC_WRITE,
         FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, 0, NULL);
     if (_wfopen_s(&report, argv[5], L"w")) goto done;
-    if (!await_text(output, argv[2])) { fputs("FAIL no visible ready marker\n", report); goto done; }
+    fprintf(report, "DESKTOP %ls\n", desktop); fflush(report);
+    {
+        HWND console_window=GetConsoleWindow(); WCHAR window_class[128]={0};
+        DWORD window_pid=0,window_thread=GetWindowThreadProcessId(console_window,&window_pid);
+        GetClassNameW(console_window,window_class,ARRAYSIZE(window_class));
+        fprintf(report,"CONSOLE window=%p valid=%d class=%ls thread=%lu process=%lu\n",
+            console_window,IsWindow(console_window),window_class,window_thread,window_pid);
+        fflush(report);
+    }
+    if (!await_text(output, argv[2])) { fputs("FAIL no visible ready marker\n", report); dump_screen(output,report); goto done; }
     fprintf(report, "READY %ls\n", argv[2]); fflush(report);
     if (!send_text(input, dos ? L"z" : argv[6])) { fputs("FAIL input delivery\n", report); goto done; }
-    if (!await_text(output, argv[3])) { fputs("FAIL no visible acknowledgement\n", report); goto done; }
+    if (!await_text(output, argv[3])) { fputs("FAIL no visible acknowledgement\n", report); dump_screen(output,report); goto done; }
     fprintf(report, "ACK %ls\nPASS visible-output-and-input\n", argv[3]); fflush(report);
     /* Second DOS PAUSE keeps the acknowledgement on-screen until observed. */
     if (dos && !send_text(input, L"z")) { fputs("FAIL final DOS release\n", report); goto done; }

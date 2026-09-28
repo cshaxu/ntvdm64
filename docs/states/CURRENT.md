@@ -2,6 +2,31 @@
 
 ## Current Work
 
+S9 published ntkvm 27106497 retains one ConPTY across all native-text targets
+and DOS intervals. No project helper or hidden-Console fallback remains in
+the selected graph. DOS continues using the original worker I/O route.
+
+Passing evidence includes Console17/Window17, both twelve-target chains,
+both lifecycle matrices, shared output, NTMon, graphics/text return, DOS mouse,
+native GUI16 and Win16 shared startup/wait/faults. Post-return DOS prompt
+checks pass; ungated ahead-of-time input failures remain explicit. The owner
+approved leaving delivered native input in ConPTY, not reclaiming it to DOS.
+
+Resources pass 26 cases and terminal assertions pass 288 checks. Overall
+component acceptance is still 14/15: horizontal wheel fails on this host.
+The owner explicitly accepted its registration as a host limitation and
+approved publication/commit/push with the strict failure retained in TODO.
+Physical focus/clipping is owner-waived, not
+physically tested. The coherent seven-file package is now published at
+O:/winnt with a recoverable backup under build/M0-T423/S9/publication-backup-r1.
+
+Published Console17, Window MEM/nested MEM/EDIT and all three WOW frontiers
+pass. Final source/checklist review and governance checks pass. S9 P5 is
+ready for commit/push; S10 admission follows synchronized delivery, not T
+closure. Detailed identities and superseded
+status chronology are preserved in the
+[S9 ledger](../etc/evidence/m0-t423-s9-conpty-migration.md).
+
 ## Active Packet
 
 **Active: M0 T423 S9**
@@ -90,57 +115,20 @@ the approved side-chat ntsrv repair. P3 6ef96410d records delivery; clean
 HEAD/origin identity and the requirement-by-requirement ledger support bounded
 S8 closure. This does not close T423 or claim SOL/WRITE usability.
 
-## S9 Progress
-
-The [S9 ledger](../etc/evidence/m0-t423-s9-conpty-migration.md) records the
-source/boundary audit. Existing ConPTY observer fixtures are reusable
-test infrastructure, not a production terminal parser. The current backend
-also exposes Console membership and unread INPUT_RECORD reclamation; replacing
-only its launch and output paths would lose accepted nesting/lifetime behavior.
-These contracts must be proved against ConPTY before a production migration.
-The checked-in x86 lifetime probe now passes three real ConPTY cases:
-descendant survives its direct parent, explicit close delivers CTRL_CLOSE,
-and ReleasePseudoConsole permits natural EOF after the last client exits.
-Retained-HPCON is a negative control: it does not naturally reach EOF.
-This was verified on kernel32 10.0.26100.9549; it does not establish a new
-product OS minimum or solve unread input return. The ledger retains the
-initial misdirected-stdout failure and corrected screen-output assertions.
-The probe now passes seven cases including real key/release/modifier, mouse,
-focus and attached-client unread-record assertions. Frontend reclamation is
-still unproved. Unmodified libvterm 0.3.3 compiles x86 and passes 20 parser/
-screen assertions, but does not expose DECSET 9001 through its fallback or
-encode Win32 keys; it remains a build-only candidate, not an imported backend.
-The verified S8 package remains published; no S9 candidate is deployed.
-The complete capability probe now passes eleven cases, including cooked/VT
-reads and actual Ctrl+C/Break handlers. A fixed Win32-key encoder for the
-known ConPTY endpoint avoids patching libvterm for keyboard semantics.
-Owner resolved the input-return decision: no helper/probe and no launcher I/O.
-Successfully delivered ConPTY input remains backend-owned; native -> DOS does
-not reclaim it, and a later native consumer may read it. This accepted
-deviation does not waive unsent-input ordering or original DOS key return.
-Window uses SoftPC-range PC glyph mapping with a question-mark replacement,
-not a full Unicode font library; terminal Unicode/width state is retained.
-The proposal and ledger record these acceptance changes. Migration is still
-pending; the S8 package remains the only published implementation.
-S9 P4 adds real native-converter Unicode bounds tests; ASCII, CJK and surrogate
-pair cases pass alongside the bitmap/keyboard baseline with all 44 library
-files unchanged. Shared DOS/native bitmap selection and the approved PC-map
-replacement rules remain open; general Unicode shaping is no longer a Window
-acceptance requirement. The ledger records the duplicate-renderer boundary.
-
 ## Current Technical Baseline
 
-S6 P1 f0f671e5e delivered independent frontend Console/Window display;
-[S6 ledger](../etc/evidence/m0-t423-s6-window-display.md). S7's accepted
-ntkvm/ntsrv seven-file mouse checkpoint is recoverable under
-build/M0-T423/S8/pre-publication; the reviewed S8 set is now at O:/winnt,
-with published-path verification complete and S8 P2 d253e55af pushed.
+S9's selected formal graph uses frontend-owned ConPTY and the shared DOS/native
+bitmap renderer. The four imported KVM libraries and guest media are unchanged.
+The owner's host_cpu.h endian correction and ntmon-exe source move are included
+in the candidate scope. Retained release/resource probes are test callers,
+not production target-completion policy.
 
-Earlier S1/S2 lifecycle and copied-I/O delivery, S3 preservation/replanning,
-S4 independent frontend delivery (9c27b5fd2), and S5 hidden-backend acceptance
-(3e425046d / 1fb291a8f) remain retained in the indexed evidence. S3 is not
-retroactively labelled functional closure. Full previous CURRENT chronology
-is preserved in [the status archive](../etc/evidence/m0-t423-restart-prior-status.md#archived-s7-pre-rename-status-chronology-2026-09-27).
+O:/winnt has not received this candidate. Its last inspected frontend remains
+S8 A41AC299; its worker hash differed from the original S8 publication manifest.
+Preserve the live package and verify all seven hashes before any replacement.
+Do not call it a coherent unchanged S8 set without an exact current audit.
+The [S8 ledger](../etc/evidence/m0-t423-s8-gui-launch-wait.md) and S9 ledger
+retain delivery and later live-package identities.
 
 ## Remaining admitted sequence
 

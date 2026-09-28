@@ -1,0 +1,17 @@
+{
+  "name": "libvterm",
+  "version": "0.3.3",
+  "origin": "https://www.leonerd.org.uk/code/libvterm/libvterm-0.3.3.tar.gz",
+  "archive": "lib/libvterm-0.3.3.tar.gz",
+  "sha256": "09156F43DD2128BD347CBEEBE50D9A571D32C64E0CF18D211197946AFF7226E0",
+  "license": "MIT",
+  "notice": "lib/LICENSE.libvterm",
+  "owner": "ntkvm-exe",
+  "purpose": "ConPTY UTF-8/VT terminal state and replies; no launcher or worker dependency",
+  "modifications": ["Original files remain unchanged; screen.c is compiled through native_terminal_screen.c, which appends the registered frontend-local cell/cursor import using the pinned private layout"],
+  "screenBinding": "native_terminal_screen.c",
+  "compile": ["encoding.c", "keyboard.c", "mouse.c", "parser.c", "pen.c", "screen.c", "state.c", "unicode.c", "vterm.c"],
+  "headers": ["include/vterm.h", "include/vterm_keycodes.h", "src/vterm_internal.h", "src/utf8.h", "src/rect.h", "src/fullwidth.inc", "src/encoding/DECdrawing.inc", "src/encoding/uk.inc"],
+  "excluded": "Upstream tests, programs, examples, Makefile and scripts do not compile or execute in product builds",
+  "materialization": "Extract the pinned source only under repository build; no upstream worktree or runtime dependency"
+}

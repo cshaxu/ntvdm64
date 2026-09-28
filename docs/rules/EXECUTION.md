@@ -113,7 +113,9 @@ The owner subsequently approved the migration report, S4 implementation and
 automatic sequential admission after S4 delivery. This supersedes the earlier
 planning-only pause, never the verification gates. The independent frontend
 runtime package is the six files below plus ntkvm.exe (seven total); the
-helper is a private ntkvm.exe role, not an eighth binary. All regression,
+pre-S9 helper was a private ntkvm.exe role, not an eighth binary. S9 removes
+that project helper in favor of ntkvm-owned ConPTY, without adding a product
+executable. Status distinguishes the candidate from the published set. All regression,
 coherent publication and recovery gates apply to that complete seven-file set.
 Do not publish unverified candidates or claim S3 functional closure.
 
@@ -183,6 +185,12 @@ review and tests, and label physical observation as owner-waived, never passed.
 Continue automatically through sequential S admission after other exit gates
 are met. This does not waive implementation, known defects, safe background
 integration tests, production-P build/publication, or final owner T acceptance.
+
+Owner exception for T423 S9: the reproduced horizontal-wheel failure on
+host conhost 10.0.26100.1 may be registered in TODO while publishing and
+committing the otherwise verified migration. Preserve the raw reproducer
+and strict failing test; do not report horizontal wheel passed, add a helper,
+modify Windows, or generalize this exception to other regressions.
 
 Guest binaries remain immutable original media: verified copies are allowed,
 rebuilding or patching them is not. Preserve user data and NTVDM.REG state;

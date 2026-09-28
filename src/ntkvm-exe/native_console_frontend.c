@@ -18,6 +18,7 @@ struct run16_native_frontend {
     HANDLE handoff,handoff_done;
     const void *handoff_owner;
     BOOL handoff_active;
+    BOOL screen_locked;
     DWORD handoff_error;
     const void *dos_owner;
     const run16_console_video *dos_video;
@@ -72,8 +73,22 @@ static DWORD window_records(void *context,const INPUT_RECORD *records,DWORD coun
 {
     run16_native_frontend *frontend=context;
     /* Also retain native typeahead during the gap between DOS yielding and
-     * lazy helper creation. The presentation owner drains it once available. */
+     * lazy ConPTY creation. The presentation owner drains it once available. */
     return dos_input_write(frontend,records,count,FALSE);
+}
+static DWORD deliver_native_pending(run16_native_frontend *frontend)
+{
+    DWORD consumed=0,error;
+    if(!frontend->dos_input_count)return 0;
+    error=run16_native_backend_input_some(frontend->backend,frontend->dos_input,
+        frontend->dos_input_count,&consumed);
+    if(consumed) {
+        frontend->dos_input_count-=consumed;
+        memmove(frontend->dos_input,frontend->dos_input+consumed,
+            frontend->dos_input_count*sizeof(*frontend->dos_input));
+    }
+    if(!frontend->dos_input_count && !ResetEvent(frontend->dos_input_ready))return GetLastError();
+    return error==ERROR_NO_MORE_ITEMS ? 0 : error;
 }
 static lib_bool window_input(void *context,const frontend_window_input *input)
 {
@@ -221,7 +236,7 @@ static DWORD present_loop(run16_native_frontend *frontend)
     for(;;) {
         HANDLE waits[10]={frontend->stop,frontend->changed,frontend->refresh,
             frontend->control[0],frontend->control[1],frontend->handoff,frontend_window_wake(frontend->window)};
-        DWORD error=ERROR_SUCCESS,wait,count=7,helper_index=MAXDWORD;
+        DWORD error=ERROR_SUCCESS,wait,count=7,native_live=0;
         BOOL paused,has_backend,requested=WaitForSingleObject(frontend->refresh,0)==WAIT_OBJECT_0;
         if(WaitForSingleObject(frontend->stop,0)==WAIT_OBJECT_0)return ERROR_OPERATION_ABORTED;
         if(requested)ResetEvent(frontend->refresh);
@@ -230,7 +245,7 @@ static DWORD present_loop(run16_native_frontend *frontend)
             LeaveCriticalSection(&frontend->io_lock);return ERROR_OPERATION_ABORTED;
         }
         /* A newly selected native reader needs its actual viewport before
-         * dequeuing Window mouse input. Keep input queued during lazy helper
+         * dequeuing Window mouse input. Keep input queued during lazy backend
          * creation; neither invent geometry nor discard early button events. */
         if(!frontend->dos_owner && frontend->backend && !frontend->native_mouse.ready)
             error=run16_native_view_present(frontend->backend,&frontend->view);
@@ -249,25 +264,23 @@ static DWORD present_loop(run16_native_frontend *frontend)
             SetEvent(frontend->handoff_done);
         }
         has_backend=frontend->backend!=NULL;
-        paused=frontend->dos_owner!=NULL || !has_backend;
+        if(has_backend)error=run16_native_backend_members(frontend->backend,&native_live);
+        if(error){LeaveCriticalSection(&frontend->io_lock);return error;}
+        paused=frontend->dos_owner!=NULL || !native_live;
         if(frontend->dos_owner || frontend->window_active) {
             error=collect_dos_console(frontend);
             if(error){LeaveCriticalSection(&frontend->io_lock);return error;}
             waits[count++]=frontend->console_input;
         }
         if(has_backend) {
-            helper_index=count;
-            waits[count++]=run16_native_backend_process(frontend->backend);
+            error=run16_native_backend_pump(frontend->backend);
+            if(error){LeaveCriticalSection(&frontend->io_lock);return error;}
             if(!paused && !frontend->window_active)waits[count++]=frontend->view.input;
         }
         if(!paused) {
             if(frontend->dos_input_count) {
-                error=run16_native_backend_input(frontend->backend,frontend->dos_input,frontend->dos_input_count);
+                error=deliver_native_pending(frontend);
                 if(error){LeaveCriticalSection(&frontend->io_lock);return error;}
-                frontend->dos_input_count=0;
-                if(!ResetEvent(frontend->dos_input_ready)) {
-                    error=GetLastError();LeaveCriticalSection(&frontend->io_lock);return error;
-                }
             }
             error=run16_native_view_present(frontend->backend,&frontend->view);
             if(!error && !frontend->window_active && WaitForSingleObject(frontend->view.input,0)==WAIT_OBJECT_0)
@@ -298,18 +311,17 @@ static DWORD present_loop(run16_native_frontend *frontend)
             if(error==ERROR_RETRY)SetEvent(frontend->refresh);
             else SetEvent(frontend->refreshed); /* No native redraw over active DOS. */
         }
-        wait=WaitForMultipleObjects(count,waits,FALSE,paused ? INFINITE : 30);
+        /* Terminal replies must be drained even while a DOS task owns input.
+         * Normal ConPTY EOF is not frontend/session failure. */
+        wait=WaitForMultipleObjects(count,waits,FALSE,has_backend ? 30 : INFINITE);
         if(wait==WAIT_OBJECT_0)return ERROR_OPERATION_ABORTED;
-        if(helper_index!=MAXDWORD && wait==WAIT_OBJECT_0+helper_index)return ERROR_BROKEN_PIPE;
         if(wait==WAIT_FAILED)return GetLastError();
-        if(has_backend && (wait==WAIT_OBJECT_0+3 || wait==WAIT_OBJECT_0+4)) {
-            run16_native_host_request request={RUN16_NATIVE_HOST_VERSION,RUN16_NATIVE_CONTROL,0,0,wait-(WAIT_OBJECT_0+3)};
-            run16_native_host_reply reply;
+        if(native_live && (wait==WAIT_OBJECT_0+3 || wait==WAIT_OBJECT_0+4)) {
             /* Both Consoles implement one logical user Console. DOS workers
              * physically attached here already receive the original event;
              * forward once to the other Console, even while DOS owns I/O. */
-            error=run16_native_backend_call(frontend->backend,&request,NULL,&reply,NULL,0);
-            if(error || reply.status)return error ? error : reply.status;
+            error=run16_native_backend_control(frontend->backend,wait-(WAIT_OBJECT_0+3));
+            if(error && error!=ERROR_NO_MORE_ITEMS)return error;
         }
     }
 }
@@ -395,8 +407,7 @@ DWORD run16_native_frontend_display(run16_native_frontend *frontend,BOOL window)
 DWORD run16_native_frontend_launch(run16_native_frontend *frontend,
     const run16_native_start *start,HANDLE *target)
 {
-    WCHAR image[MAX_PATH];
-    DWORD error=ERROR_SUCCESS,length;
+    DWORD error=ERROR_SUCCESS;
     if(!frontend || !start || !target)return ERROR_INVALID_PARAMETER;
     *target=NULL;
     EnterCriticalSection(&frontend->lock);
@@ -411,9 +422,7 @@ DWORD run16_native_frontend_launch(run16_native_frontend *frontend,
         if(frontend->dos_owner) {
             LeaveCriticalSection(&frontend->io_lock);error=ERROR_BUSY;goto done;
         }
-        length=GetModuleFileNameW(NULL,image,ARRAYSIZE(image));
-        if(!length || length>=ARRAYSIZE(image))error=ERROR_FILENAME_EXCED_RANGE;
-        else error=run16_native_backend_open_cancel(image,frontend->stop,&frontend->backend);
+        error=run16_native_backend_open_cancel(frontend->stop,&frontend->backend);
         if(!error)error=run16_native_view_begin_on(frontend->backend,&frontend->view,
             frontend->console_input,frontend->console_output);
         if(!error) {
@@ -431,7 +440,10 @@ DWORD run16_native_frontend_launch(run16_native_frontend *frontend,
         ReleaseSRWLockExclusive(&control_lock);
         SetEvent(frontend->changed);
     }
-    error=run16_native_backend_launch(frontend->backend,start,target);
+    EnterCriticalSection(&frontend->io_lock);
+    error=run16_native_view_prepare_launch(frontend->backend,&frontend->view);
+    LeaveCriticalSection(&frontend->io_lock);
+    if(!error)error=run16_native_backend_launch(frontend->backend,start,target);
 done:
     LeaveCriticalSection(&frontend->lock);
     return error;
@@ -445,7 +457,7 @@ DWORD run16_native_frontend_wait(run16_native_frontend *frontend,HANDLE target,D
     if(WaitForSingleObject(target,0)==WAIT_OBJECT_0) {
         if(!GetExitCodeProcess(target,result))return GetLastError();
         /* Best-effort final display, independently bounded from completion.
-         * A broken/stalled helper cannot replace an obtained target result. */
+         * A broken/stalled backend cannot replace an obtained target result. */
         ResetEvent(frontend->refreshed);SetEvent(frontend->refresh);
         waits[0]=frontend->refreshed;
         WaitForMultipleObjects(2,waits,FALSE,1000);
@@ -471,7 +483,7 @@ DWORD run16_native_frontend_members(run16_native_frontend *frontend,DWORD *membe
 }
 DWORD run16_native_frontend_drain(run16_native_frontend *frontend)
 {
-    DWORD error=ERROR_SUCCESS,returned;
+    DWORD error=ERROR_SUCCESS;
     if(!frontend)return ERROR_INVALID_PARAMETER;
     EnterCriticalSection(&frontend->lock);
     EnterCriticalSection(&frontend->io_lock);
@@ -479,10 +491,9 @@ DWORD run16_native_frontend_drain(run16_native_frontend *frontend)
     else {
         if(frontend->backend){
             error=run16_native_view_sync_console(frontend->backend,&frontend->view);
-            if(!error)error=run16_native_view_reclaim_input(frontend->backend,&frontend->view,&returned);
         }
-        /* No input forwarding after the final reclaim. Only after the above
-         * exchanges may stop cancel the helper transport. */
+        /* Delivered native input remains backend-owned; final presentation
+         * must not reclaim or replay it into another execution consumer. */
         SetEvent(frontend->stop);
     }
     LeaveCriticalSection(&frontend->io_lock);
@@ -491,18 +502,6 @@ DWORD run16_native_frontend_drain(run16_native_frontend *frontend)
 }
 /* Only the original worker's block/resume edges select this binding. The
  * owner is a root-local channel address, never a process/task scheduler ID. */
-static DWORD reclaim_dos_input(void *context,const INPUT_RECORD *records,DWORD count)
-{
-    INPUT_RECORD *keys;DWORD i,kept=0,error;
-    /* A native reader's unconsumed mouse positions belong to its viewport,
-     * not the resumed guest. Preserve all non-mouse typeahead in order. */
-    if(!count)return ERROR_SUCCESS;
-    keys=HeapAlloc(GetProcessHeap(),0,(SIZE_T)count*sizeof(*keys));
-    if(!keys)return ERROR_NOT_ENOUGH_MEMORY;
-    for(i=0;i<count;++i)if(records[i].EventType!=MOUSE_EVENT)keys[kept++]=records[i];
-    error=dos_input_write(context,keys,kept,TRUE);
-    HeapFree(GetProcessHeap(),0,keys);return error;
-}
 static DWORD apply_dos_binding(run16_native_frontend *frontend,const void *owner,BOOL active)
 {
     DWORD error=ERROR_SUCCESS,returned;
@@ -533,17 +532,22 @@ static DWORD apply_dos_binding(run16_native_frontend *frontend,const void *owner
         if(!kept && !ResetEvent(frontend->dos_input_ready)) { error=GetLastError();goto done; }
     }
     if(active && frontend->backend) {
+        DWORD i,kept=0;
         /* Queue the release after old native input, then deliver that batch
          * before changing owner. Do not feed native positions to DOS. */
         error=frontend_native_mouse_release(&frontend->native_mouse,TRUE,window_records,frontend);
         if(!error && frontend->dos_input_count) {
-            error=run16_native_backend_input(frontend->backend,frontend->dos_input,frontend->dos_input_count);
-            if(!error) {
-                frontend->dos_input_count=0;
-                if(!ResetEvent(frontend->dos_input_ready))error=GetLastError();
-            }
+            error=deliver_native_pending(frontend);
         }
         if(error)goto done;
+        /* A cleanly closed native backend cannot consume pending mouse
+         * releases/positions. They are not valid guest coordinates. Retain
+         * only unsent keyboard/focus records for the resumed DOS owner. */
+        for(i=0;i<frontend->dos_input_count;++i)
+            if(frontend->dos_input[i].EventType!=MOUSE_EVENT)
+                frontend->dos_input[kept++]=frontend->dos_input[i];
+        frontend->dos_input_count=kept;
+        if(!kept && !ResetEvent(frontend->dos_input_ready)) {error=GetLastError();goto done;}
     }
     if(!active && !frontend->window_active && frontend->dos_input_count) {
         typedef BOOL (WINAPI *prepend_input)(HANDLE,PINPUT_RECORD,DWORD,LPDWORD);
@@ -559,14 +563,17 @@ static DWORD apply_dos_binding(run16_native_frontend *frontend,const void *owner
     if(frontend->backend) {
         if(active) {
             error=run16_native_view_sync_console(frontend->backend,&frontend->view);
-            if(!error)error=run16_native_view_reclaim_input_to(frontend->backend,&frontend->view,&returned,
-                reclaim_dos_input,frontend);
             if(!error && !SetConsoleMode(frontend->view.input,frontend->view.input_mode))error=GetLastError();
-        } else error=run16_native_view_seed(frontend->backend,&frontend->view);
+        } else {
+            error=run16_native_view_seed(frontend->backend,&frontend->view);
+            if(!error)error=run16_native_view_prepare_launch(frontend->backend,&frontend->view);
+        }
     }
     if(!error) {
         frontend->dos_owner=active ? owner : NULL;
-        frontend->native_mouse.ready=FALSE;
+        /* Retained ConPTY keeps its last native input geometry across DOS;
+         * refreshed native frames update it without repainting stale output. */
+        if(!frontend->backend)frontend->native_mouse.ready=FALSE;
         frontend->dos_video=NULL;frontend->dos_video_serial=0;
     }
 done:
@@ -613,6 +620,41 @@ DWORD run16_native_frontend_dos_video(run16_native_frontend *frontend,const void
 void run16_native_frontend_dos_leave(run16_native_frontend *frontend)
 {
     LeaveCriticalSection(&frontend->io_lock);
+}
+DWORD run16_native_frontend_screen_begin(run16_native_frontend *frontend)
+{
+    DWORD error,members=0;
+    if(!frontend->backend)return 0;
+    /* A failed native backend is not a failed DOS Console. Synchronize only
+     * while native output can arrive; native admissions retain their error. */
+    if(run16_native_backend_members(frontend->backend,&members) || !members)return 0;
+    /* ConPTY resize/replies may wait for its reader. Complete them before
+     * taking the parser lock, never while that reader is excluded. */
+    error=run16_native_view_prepare_screen(frontend->backend,&frontend->view);
+    if(error) {
+        if(run16_native_backend_members(frontend->backend,&members) || !members)return 0;
+        return error;
+    }
+    error=run16_native_backend_screen_enter(frontend->backend);
+    if(error==ERROR_NO_DATA)return 0;
+    if(error)return error;
+    frontend->screen_locked=TRUE;
+    error=run16_native_view_sync_locked(frontend->backend,&frontend->view);
+    if(error) {
+        frontend->screen_locked=FALSE;
+        run16_native_backend_screen_leave(frontend->backend);
+    }
+    return error;
+}
+DWORD run16_native_frontend_screen_end(run16_native_frontend *frontend,BOOL write)
+{
+    DWORD error=0;
+    if(frontend->screen_locked) {
+        if(write)error=run16_native_view_import_console(frontend->backend,&frontend->view);
+        frontend->screen_locked=FALSE;
+        run16_native_backend_screen_leave(frontend->backend);
+    }
+    return error;
 }
 BOOL run16_native_frontend_text_frame_required(run16_native_frontend *frontend)
 {

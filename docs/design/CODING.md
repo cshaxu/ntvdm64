@@ -13,7 +13,7 @@ src/
   ntsrv-exe/
   ntvdm-exe/
   ntkvm-exe/
-  monitor-exe/
+  ntmon-exe/
   wow32-dll/
   vdmredir-dll/
 ```
@@ -36,16 +36,17 @@ or runtime input.
 
 ## Executable-owned transition
 
-`src/ntkvm-exe/ -> ntkvm.exe` owns the migrated visible/hidden Console,
-helper and I/O service. Its future Window/display implementation also belongs
-there. run16 links only the finite frontend client, never the renderer or
-input pump. The private helper uses ntkvm.exe itself. Do not duplicate
-renderers or introduce a common library. Status owns current delivery state;
-the source layout does not claim the later Window/display capabilities.
+`src/ntkvm-exe/ -> ntkvm.exe` owns visible Console, Window/display and the
+I/O service. S9 replaces its earlier hidden-Console/helper implementation
+with one frontend-owned ConPTY retained across native targets and DOS
+intervals. run16 links only the finite frontend client, never the renderer or
+input pump. No project helper or second backend is retained in the S9 graph.
+Do not duplicate renderers or introduce a common library. Status distinguishes
+the source candidate from the published package; layout is not acceptance.
 
 T418 has moved the original three-program runtime to `src/run16-exe/`,
 `src/ntsrv-exe/` and `src/ntvdm-exe/`; T419 adds the product-owned native Console
-manager at `src/monitor-exe/`, producing `ntmon.exe`. Retained
+manager, now located at `src/ntmon-exe/` and producing `ntmon.exe`. Retained
 `app`/adapter directory READMEs are archival move markers, never production
 source roots or destinations. `session` is worker-local implementation inside
 `ntvdm`; broker service transport is inside `basesrv`.

@@ -214,7 +214,7 @@ owned:
 src/run16-exe/   -> run16.exe
 src/ntsrv-exe/ -> ntsrv.exe
 src/ntvdm-exe/   -> ntvdm.exe
-src/monitor-exe/ -> ntmon.exe
+src/ntmon-exe/ -> ntmon.exe
 src/ntkvm-exe/ -> ntkvm.exe
 ```
 
@@ -223,7 +223,7 @@ markers, not compatibility locations or destinations. `run16` owns the public Cr
 owns its service endpoint, authentication, liveness and transport assembly
 around mirrored `srvvdm.c`; and `ntvdm` owns worker-local setup, guest-memory
 leases, thread binding, teardown and guest-side I/O bindings. frontend owns
-character presentation and hidden Console resources. The broker
+character presentation and its native text backend resources. The broker
 does not acquire DOS/WOW record policy, and the worker does not acquire broker
 policy.
 
@@ -253,7 +253,7 @@ never session, Console or native-resource policy.
 ### Current owner-approved replacement
 
 The independent `src/ntkvm-exe/` product replaces root-run16 UI ownership.
-It owns visible Console, Window, hidden Console/helper and display for one
+It owns visible Console, Window, the native text backend and display for one
 character session. run16 is exclusively a classification/start/submission and
 direct-target wait client; no launcher owns an input pump or presentation.
 ntvdm retains guest execution and uses the existing direct I/O contract with
@@ -266,12 +266,13 @@ contiguous DOS/native-character segment shares its own frontend. DOS graphics
 mode remains part of its character session. Explicit native Console creation
 and attachment remain distinct contracts, not deductions from PID ancestry.
 Launcher death is no longer frontend death. Actual frontend/session closure
-retains the original VDM-close binding; helper/pipe failure is not closure or
+retains the original VDM-close binding; backend/pipe failure is not closure or
 target completion. No native process-tree termination is introduced.
 
 The Console ownership split is now implemented and verified by S4's linked
 source, graph and real runtime evidence. Its complete runtime set is seven
-files, including ntkvm.exe; the helper is a role of that same executable.
+files, including ntkvm.exe. S4 used a helper role of that same executable;
+the admitted S9 replacement below removes that role.
 Window/display and Window mouse remain later stages, not capabilities proved
 by the Console migration. Status owns publication and delivery state; the
 proposal assigns remaining validation and final owner acceptance.
@@ -291,6 +292,15 @@ later native consumer; the owner accepts this difference from the original
 shared Console. Preserve original DOS unused-key/BIOS-buffer return and do not
 close a live native session merely to discard its input. Display changes do
 not change the execution session or create another pseudoconsole.
+
+One ntkvm retains one pseudoconsole across every native-text launch in that
+frontend, including DOS intervals and intervals with no known native target.
+Direct-target completion never releases admission or recreates that backend.
+No observer process or Job is introduced to infer last-client retirement;
+the owner permits conservative retention until explicit frontend close.
+The retention predicate is not a count of attached processes. Launcher results
+remain independent of this resource lifetime. GUI-only segments do not acquire
+character-frontend ownership merely by execution ancestry.
 
 Window native text uses the approved SoftPC-range PC character-to-bitmap
 mapping and explicit missing-glyph replacement, while the terminal model

@@ -55,8 +55,9 @@ DWORD run16_console_dispatch(run16_console_frontend *owner,const console_io_requ
     COORD position;
     DWORD count=0,mode=0;
     BOOL ok=FALSE;
-    BOOL cells,write_cells;
+    BOOL cells,write_cells,screen_operation,screen_write;
     if (!owner || !request || !reply) return ERROR_INVALID_PARAMETER;
+    if (!!owner->screen_begin != !!owner->screen_end) return ERROR_INVALID_PARAMETER;
     ZeroMemory(reply,sizeof(*reply));
     if (request->version!=CONSOLE_IO_VERSION) return ERROR_REVISION_MISMATCH;
     if (!owner->generation || request->generation!=owner->generation) return ERROR_ACCESS_DENIED;
@@ -114,6 +115,18 @@ DWORD run16_console_dispatch(run16_console_frontend *owner,const console_io_requ
     if(owner->enter) {
         reply->error=owner->enter(owner->io_context);
         if(reply->error)return ERROR_SUCCESS;
+    }
+    screen_operation=(request->operation>=CONSOLE_IO_WRITE && request->operation<=CONSOLE_IO_ATTRIBUTE) ||
+        cells || request->operation==CONSOLE_IO_BUFFER_SIZE || request->operation==CONSOLE_IO_WINDOW_RECT ||
+        request->operation==CONSOLE_IO_GET_CURSOR_INFO;
+    screen_write=screen_operation && request->operation!=CONSOLE_IO_SCREEN_INFO &&
+        request->operation!=CONSOLE_IO_GET_CURSOR_INFO && (!cells || write_cells);
+    if(screen_operation && owner->screen_begin) {
+        reply->error=owner->screen_begin(owner->io_context);
+        if(reply->error) {
+            if(owner->leave)owner->leave(owner->io_context);
+            return ERROR_SUCCESS;
+        }
     }
     position.X=(SHORT)s->x; position.Y=(SHORT)s->y;
     SetLastError(ERROR_SUCCESS);
@@ -398,6 +411,10 @@ DWORD run16_console_dispatch(run16_console_frontend *owner,const console_io_requ
     }
     reply->result=ok!=FALSE;
     reply->error=ok ? ERROR_SUCCESS : GetLastError();
+    if(screen_operation && owner->screen_end) {
+        DWORD error=owner->screen_end(owner->io_context,screen_write);
+        if(error && ok) {reply->result=FALSE;reply->error=error;}
+    }
     if(owner->leave)owner->leave(owner->io_context);
     return ERROR_SUCCESS;
 }

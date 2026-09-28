@@ -1,3 +1,9 @@
+/* This frontend binding uses the public ConPTY process attribute. Keep the
+ * modern declaration requirement local, not in original OpenNT build units. */
+#if !defined(_WIN32_WINNT) || _WIN32_WINNT < 0x0A00
+#undef _WIN32_WINNT
+#define _WIN32_WINNT 0x0A00
+#endif
 #include "native_launch.h"
 #include "product-abi/console_io.h"
 #include <stdio.h>
@@ -112,12 +118,12 @@ static DWORD environment_copy(PCWSTR source,HANDLE *capabilities,PWSTR *output)
     return ERROR_SUCCESS;
 }
 
-DWORD run16_native_launch_start(BYTE *payload,DWORD bytes,PROCESS_INFORMATION *process)
+static DWORD launch_start(BYTE *payload,DWORD bytes,HPCON console,PROCESS_INFORMATION *process)
 {
     run16_native_launch_packet header;
     WCHAR *strings[4],*environment=NULL;
     HANDLE source[5],inherited[5]={0},unique[5];
-    DWORD error,i,j,used=0;
+    DWORD error,i,j,used=0,attribute_count=console ? 2 : 1;
     STARTUPINFOEXW startup={0};
     SIZE_T attributes=0;
     BOOL initialized=FALSE;
@@ -130,7 +136,8 @@ DWORD run16_native_launch_start(BYTE *payload,DWORD bytes,PROCESS_INFORMATION *p
         if(raw>(uint64_t)(ULONG_PTR)-1) return ERROR_INVALID_HANDLE;
         source[i]=(HANDLE)(ULONG_PTR)raw;
         if(i>=3 && source[i]==INVALID_HANDLE_VALUE) return ERROR_INVALID_HANDLE;
-        if(i<3 && (header.console_mask&(1u<<i))) source[i]=GetStdHandle(i==0 ? STD_INPUT_HANDLE : i==1 ? STD_OUTPUT_HANDLE : STD_ERROR_HANDLE);
+        if(i<3 && (header.console_mask&(1u<<i))) source[i]=console ? NULL :
+            GetStdHandle(i==0 ? STD_INPUT_HANDLE : i==1 ? STD_OUTPUT_HANDLE : STD_ERROR_HANDLE);
     }
     for(i=0;i<5;++i) {
         if(!source[i] || source[i]==INVALID_HANDLE_VALUE) { inherited[i]=source[i];continue; }
@@ -143,17 +150,22 @@ DWORD run16_native_launch_start(BYTE *payload,DWORD bytes,PROCESS_INFORMATION *p
     error=environment_copy(strings[3],inherited+3,&environment);
     if(error) goto done;
     startup.StartupInfo.cb=sizeof(startup);
+    /* NULL Console slots are filled by the attached pseudoconsole. Omitting
+     * STARTF_USESTDHANDLES instead inherits the frontend's own standard pipes
+     * when capability handles require bInheritHandles. */
     startup.StartupInfo.dwFlags=STARTF_USESTDHANDLES;
     startup.StartupInfo.hStdInput=inherited[0];startup.StartupInfo.hStdOutput=inherited[1];startup.StartupInfo.hStdError=inherited[2];
     /* Only requested standard streams and the two authenticated capabilities
      * cross this creation. No protocol pipe or earlier target handle escapes. */
-    InitializeProcThreadAttributeList(NULL,1,0,&attributes);
+    InitializeProcThreadAttributeList(NULL,attribute_count,0,&attributes);
     startup.lpAttributeList=HeapAlloc(GetProcessHeap(),0,attributes);
     if(!startup.lpAttributeList) { error=ERROR_NOT_ENOUGH_MEMORY;goto done; }
-    if(!InitializeProcThreadAttributeList(startup.lpAttributeList,1,0,&attributes)) { error=GetLastError();goto done; }
+    if(!InitializeProcThreadAttributeList(startup.lpAttributeList,attribute_count,0,&attributes)) { error=GetLastError();goto done; }
     initialized=TRUE;
     if(used && !UpdateProcThreadAttribute(startup.lpAttributeList,0,PROC_THREAD_ATTRIBUTE_HANDLE_LIST,
         unique,used*sizeof(HANDLE),NULL,NULL)) { error=GetLastError();goto done; }
+    if(console && !UpdateProcThreadAttribute(startup.lpAttributeList,0,PROC_THREAD_ATTRIBUTE_PSEUDOCONSOLE,
+        console,sizeof(console),NULL,NULL)) { error=GetLastError();goto done; }
     if(!CreateProcessW(*strings[0] ? strings[0] : NULL,strings[1],NULL,NULL,used!=0,
         CREATE_UNICODE_ENVIRONMENT|EXTENDED_STARTUPINFO_PRESENT,
         environment,strings[2],&startup.StartupInfo,process)) error=GetLastError();
@@ -162,5 +174,23 @@ done:
     if(startup.lpAttributeList) HeapFree(GetProcessHeap(),0,startup.lpAttributeList);
     if(environment) HeapFree(GetProcessHeap(),0,environment);
     for(i=0;i<used;++i) CloseHandle(unique[i]);
+    return error;
+}
+
+DWORD run16_native_launch_start(BYTE *payload,DWORD bytes,PROCESS_INFORMATION *process)
+{
+    return launch_start(payload,bytes,NULL,process);
+}
+
+DWORD run16_native_launch_conpty(const run16_native_start *start,HPCON console,
+    PROCESS_INFORMATION *process)
+{
+    BYTE *payload=NULL;
+    DWORD bytes=0,error;
+    if(!console || !process)return ERROR_INVALID_PARAMETER;
+    ZeroMemory(process,sizeof(*process));
+    error=run16_native_launch_pack(start,&payload,&bytes);
+    if(!error)error=launch_start(payload,bytes,console,process);
+    if(payload)HeapFree(GetProcessHeap(),0,payload);
     return error;
 }

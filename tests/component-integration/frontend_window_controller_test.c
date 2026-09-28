@@ -4,6 +4,7 @@
 #include "window_controller.h"
 #include "window_keyboard.h"
 #include "native_console_backend.h"
+#include "native_terminal.h"
 
 #define CHECK(x) do { if(!(x)) { fprintf(stderr,"FAIL line %d error %lu: %s\n",__LINE__,GetLastError(),#x); return 1; } } while(0)
 typedef struct observations {
@@ -116,12 +117,12 @@ int main(int argc,char **argv)
         desktop,sizeof(desktop),&size));
     CHECK(!strncmp(desktop,"NTVDMConsoleTest-",17));
     if(argc==2) {
-        WCHAR helper[MAX_PATH],comspec[MAX_PATH],command[1024],directory[MAX_PATH];
+        WCHAR comspec[MAX_PATH],command[1024],directory[MAX_PATH];
         PWSTR environment=GetEnvironmentStringsW();run16_native_start start={0};
-        CHECK(environment && MultiByteToWideChar(CP_UTF8,0,argv[1],-1,helper,MAX_PATH));
+        CHECK(environment);
         CHECK(GetEnvironmentVariableW(L"COMSPEC",comspec,MAX_PATH) && GetCurrentDirectoryW(MAX_PATH,directory));
         CHECK(swprintf_s(command,1024,L"\"%ls\" /d /v:on /c \"set /p typed=WINDOW-INPUT: & echo WINDOW-NATIVE-OK:!typed! & if \"!typed!\"==\"ab\" (exit /b 37) else (exit /b 9)\"",comspec)>0);
-        CHECK(!run16_native_backend_open(helper,&first.backend));
+        CHECK(!run16_native_backend_open(&first.backend));
         start.application=comspec;start.command=command;start.directory=directory;
         start.environment=environment;start.console_mask=7;
         CHECK(!run16_native_backend_launch(first.backend,&start,&target));
@@ -187,26 +188,27 @@ int main(int argc,char **argv)
         CHECK(first.keyboard.physical.held_count==0);
         puts("PASS real Window key messages -> copied FIFO -> native conversion -> cooked Console exact ab CR LF");
     } else {
-        run16_native_host_request request={RUN16_NATIVE_HOST_VERSION,RUN16_NATIVE_FRAME_BEGIN,0,0,0};
-        run16_native_host_reply reply;run16_native_frame_info info;
-        CHAR_INFO cells[RUN16_NATIVE_HOST_CELLS];WCHAR *text;DWORD code,total,offset=0,i;
+        ntkvm_terminal_frame snapshot={0};
+        WCHAR *text;DWORD code,total,i;BOOL witnessed=FALSE;
+        ULONGLONG deadline;
         CHECK(WaitForSingleObject(target,5000)==WAIT_OBJECT_0 && GetExitCodeProcess(target,&code) && code==37);
         CloseHandle(target);target=NULL;
-        CHECK(!run16_native_backend_call(first.backend,&request,NULL,&reply,&info,sizeof(info)) && !reply.status);
-        total=(DWORD)info.screen.dwSize.X*info.screen.dwSize.Y;
-        text=calloc((SIZE_T)total+1,sizeof(WCHAR));CHECK(text);
-        while(offset<total) {
-            request.operation=RUN16_NATIVE_FRAME_READ;request.offset=offset;
-            request.count=min(total-offset,RUN16_NATIVE_HOST_CELLS);
-            CHECK(!run16_native_backend_call(first.backend,&request,NULL,&reply,cells,sizeof(cells)) && !reply.status);
-            CHECK(reply.count && reply.count<=request.count);
-            for(i=0;i<reply.count;++i)text[offset+i]=cells[i].Char.UnicodeChar;
-            offset+=reply.count;
-        }
-        CHECK(wcsstr(text,L"WINDOW-NATIVE-OK:ab"));free(text);
-        request.operation=RUN16_NATIVE_FRAME_END;request.offset=request.count=0;
-        CHECK(!run16_native_backend_call(first.backend,&request,NULL,&reply,NULL,0) && !reply.status);
-        puts("PASS real Window -> FIFO -> keyboard -> production helper IPC -> native CMD typed ab, output witness, exit 37");
+        /* A direct target finishing does not end the shared ConPTY. Wait for
+         * its asynchronous output witness, never for backend EOF. */
+        CHECK(WaitForSingleObject(run16_native_backend_process(first.backend),0)==WAIT_TIMEOUT);
+        deadline=GetTickCount64()+5000;
+        do {
+            CHECK(!run16_native_backend_pump(first.backend));
+            CHECK(!run16_native_backend_capture(first.backend,&snapshot));
+            total=(DWORD)snapshot.rows*snapshot.columns;
+            text=calloc((SIZE_T)total+1,sizeof(WCHAR));CHECK(text);
+            for(i=0;i<total;++i)text[i]=snapshot.cells[i].chars[0] ? (WCHAR)snapshot.cells[i].chars[0] : L' ';
+            witnessed=wcsstr(text,L"WINDOW-NATIVE-OK:ab")!=NULL;free(text);
+            ntkvm_terminal_frame_free(&snapshot);
+            if(!witnessed)Sleep(10);
+        }while(!witnessed && GetTickCount64()<deadline);
+        CHECK(witnessed);
+        puts("PASS real Window -> FIFO -> keyboard -> production ConPTY -> native CMD typed ab, output witness, exit 37");
     }
     CHECK(!frontend_window_present(b,frame,FALSE));
     CHECK(!frontend_window_select(b,FRONTEND_DISPLAY_WINDOW));

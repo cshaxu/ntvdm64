@@ -126,8 +126,14 @@ typedef union
         word    X;
     struct
         {                               /* as two bytes */
+        /* DIVERGENCE: word port I/O overlays X with these host-order bytes. */
+#ifdef LITTLEND
+        half_word low;
+        half_word high;
+#else
         half_word high;
         half_word low;
+#endif
         word pad;
         } byte;
     struct

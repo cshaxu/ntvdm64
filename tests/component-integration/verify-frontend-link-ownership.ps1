@@ -6,6 +6,12 @@ $ErrorActionPreference = 'Stop'
 $graph = Get-Content -LiteralPath (Join-Path $BuildRoot 'build.ninja')
 
 function Assert-FrontendOwnership([string[]]$Lines) {
+    $launcherEdge = @($Lines | Where-Object { $_ -match '^build run16\.exe:' })
+    if ($launcherEdge.Count -ne 1 -or
+        $launcherEdge[0] -notmatch '\|\|\s+ntkvm\.exe\s*$' -or
+        ($launcherEdge[0] -split '\s+\|\|\s+')[0] -match '\bntkvm\.exe\b') {
+        throw 'ntkvm.exe must be only an order-only launcher runtime prerequisite'
+    }
     $edges = @{}
     foreach ($line in $Lines) {
         if ($line -notmatch '^build (.+?): (\S+)\s*(.*)$') { continue }
@@ -45,8 +51,9 @@ function Assert-FrontendOwnership([string[]]$Lines) {
     $worker = @(Get-FrontendSources 'ntvdm.exe')
     if ($worker.Count) { throw "ntvdm links frontend implementation: $worker" }
     $service = @(Get-FrontendSources 'ntkvm.exe')
+    if ('native_console_host.c' -in $service) { throw 'Retired helper entered ntkvm.exe' }
     foreach ($required in @('main.c', 'session_service.c', 'console_channel.c',
-            'console_frontend.c', 'console_video.c', 'native_console_host.c',
+            'console_frontend.c', 'console_video.c', 'native_conpty.c', 'native_terminal.c',
             'native_console_backend.c', 'native_console_view.c',
             'native_console_capture.c', 'native_console_frontend.c',
             'native_console_request.c', 'window_controller.c', 'window_frame.c',
@@ -57,6 +64,13 @@ function Assert-FrontendOwnership([string[]]$Lines) {
 }
 
 Assert-FrontendOwnership $graph
+# Replacing the runtime-order edge with a rebuild dependency wastes relinks.
+$mutated = @($graph | ForEach-Object {
+    if ($_ -match '^build run16\.exe:') { $_ -replace '\|\|', '|' } else { $_ }
+})
+$rejected = $false
+try { Assert-FrontendOwnership $mutated } catch { $rejected = $true }
+if (!$rejected) { throw 'Launcher rebuild dependency negative control was accepted' }
 # Red controls prove both direct and archive-hidden leakage are rejected.
 foreach ($target in @('run16.exe', 'frontend-client.lib', 'ntvdm.exe')) {
     $mutated = @($graph | ForEach-Object {
@@ -70,7 +84,7 @@ foreach ($target in @('run16.exe', 'frontend-client.lib', 'ntvdm.exe')) {
 }
 # Window libraries contain nested source paths, not only owner-root C files.
 # Reject both full-archive leakage and a library-only leaf object leakage.
-foreach ($leakInput in @('frontend-window.lib', 'obj/ownership-leak.obj')) {
+foreach ($leakInput in @('frontend-window.lib', 'frontend-terminal.lib', 'obj/ownership-leak.obj')) {
     $mutated = @($graph | ForEach-Object {
         if ($_ -match '^build ntvdm\.exe(?: |:)') {
             $_ -replace ': (\S+) ', (': $1 ' + $leakInput + ' ')
@@ -81,4 +95,13 @@ foreach ($leakInput in @('frontend-window.lib', 'obj/ownership-leak.obj')) {
     try { Assert-FrontendOwnership $mutated } catch { $rejected = $true }
     if (!$rejected) { throw "Window ownership negative control did not reject $leakInput" }
 }
-Write-Output 'PASS frontend service and Window/library ownership, client-only launcher, no worker frontend; five leakage controls rejected'
+$mutated = @($graph | ForEach-Object {
+    if ($_ -match '^build ntkvm\.exe(?: |:)') {
+        $_ -replace ': (\S+) ', ': $1 obj/retired-helper.obj '
+    } else { $_ }
+})
+$mutated += 'build obj/retired-helper.obj: cc O$:/repo/src/ntkvm-exe/native_console_host.c'
+$rejected = $false
+try { Assert-FrontendOwnership $mutated } catch { $rejected = $true }
+if (!$rejected) { throw 'Retired helper negative control was accepted' }
+Write-Output 'PASS frontend ConPTY/Window ownership, client-only launcher, no worker frontend; seven leakage controls and launcher rebuild control rejected'

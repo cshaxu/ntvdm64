@@ -1,6 +1,6 @@
 #ifndef FRONTEND_WINDOW_FRAME_H
 #define FRONTEND_WINDOW_FRAME_H
-#include "native_console_host.h"
+#include "native_console_frame.h"
 #include "console_video.h"
 #include "lib/kvm-window/frame_interface.h"
 

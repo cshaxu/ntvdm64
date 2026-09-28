@@ -1,7 +1,7 @@
 /* Native Console fixture: exercises the product renderer in a private buffer.
  * No broker, guest session or visible screen-buffer switch is needed. */
 #define wmain monitor_product_main
-#include "../../src/monitor-exe/main.c"
+#include "../../src/ntmon-exe/main.c"
 #undef wmain
 #include <assert.h>
 

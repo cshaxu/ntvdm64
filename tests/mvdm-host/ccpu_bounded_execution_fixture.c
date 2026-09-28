@@ -20,6 +20,48 @@
 #include "c_page.h"
 #include "c_tlb.h"
 
+static half_word port_bytes[4];
+static unsigned port_writes;
+static void fixture_port_outb(io_addr port, half_word value)
+{
+    port_bytes[port & 3] = value;
+    ++port_writes;
+}
+static void fixture_port_inb(io_addr port, half_word *value)
+{
+    *value = port_bytes[port & 3];
+}
+static int fixture_word_port_layout(void)
+{
+    const half_word adapter = IO_MAX_NUMBER_ADAPTORS - 1;
+    unsigned value, i;
+    word observed, words[2] = {0x1234, 0xa5c7}, reads[2] = {0, 0};
+    io_define_inb(adapter, fixture_port_inb);
+    io_define_outb(adapter, fixture_port_outb);
+    for (i = 0; i < 4; ++i)
+        io_connect_port((io_addr)(0x2200 + i), adapter, IO_READ | IO_WRITE);
+    /* Real ios.c scalar and repeated-word dispatch, mocked byte device only.
+     * The original reg union must not reverse low/high on the x86 host. */
+    for (value = 0; value <= 0xffff; ++value) {
+        port_writes = 0;
+        outw(0x2200, (word)value);
+        inw(0x2200, &observed);
+        if (port_writes != 2 || port_bytes[0] != (half_word)value ||
+            port_bytes[1] != (half_word)(value >> 8) || observed != value)
+            return 0;
+    }
+    port_writes = 0;
+    Ios_outsw_function[adapter](0x2200, words, 2);
+    Ios_insw_function[adapter](0x2200, reads, 2);
+    if (port_writes != 4 || port_bytes[0] != 0xc7 || port_bytes[1] != 0xa5 ||
+        reads[0] != 0xa5c7 || reads[1] != 0xa5c7)
+        return 0;
+    for (i = 0; i < 4; ++i)
+        io_disconnect_port((io_addr)(0x2200 + i), adapter);
+    fputs("SOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\n", stderr);
+    return 1;
+}
+
 static LONG WINAPI fixture_unhandled_exception(EXCEPTION_POINTERS *exception)
 {
     uintptr_t address = (uintptr_t)exception->ExceptionRecord->ExceptionAddress;
@@ -660,6 +702,11 @@ int main(void)
      * original source files.  This is only an initialization and port-dispatch
      * proof: it does not manufacture a device DMA request or memory backend. */
     io_init();
+    if (!fixture_word_port_layout()) {
+        fputs("original word port byte layout failed\n", stderr);
+        sas_term();
+        return 1;
+    }
     dma_init();
     dma_post();
     if (Ios_in_adapter_table[DMA_CH1_ADDRESS] != DMA_ADAPTOR ||

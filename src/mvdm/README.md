@@ -448,6 +448,7 @@ runtime-discovery inputs.  The complete per-file provenance is in
 
 | ID | Original purpose | Reason | Implementation | Files |
 | --- | --- | --- | --- | --- |
+| MVDM-HOST-DIV-320 | Overlay a word with named low/high bytes for original port I/O and device registers. | The original non-CPU30 union always orders high then low; selected x86 CCPU40 needs host-little-endian layout when original ios.c assigns X then reads byte.low/high. An external facade cannot change this C union layout. | Owner-supplied LITTLEND conditional selects low then high, retaining the other layout and original algorithms. Scalar and repeated-word original I/O dispatch is covered by ccpu_bounded_execution_fixture; no CPU30 profile is enabled. | `softpc.new/host/inc/host_cpu.h`; [S9 evidence](../../docs/etc/evidence/m0-t423-s9-conpty-migration.md) |
 | MVDM-HOST-DIV-319 | Complete redundant shared WOWEXEC without starting another task. | Standalone asynchronous launch needs to distinguish this original successful no-op from failed initialization; ExitVDM alone carries no reason. | One call before the unchanged original ExitVDM publishes the authenticated startup acknowledgement through the DLL binding; original classification, completion and error cleanup remain owned here. | `wow32/wkman.c`; `../wow32-dll/source/wow_user_registration_bridge.c`; [S8 evidence](../../docs/etc/evidence/m0-t423-s8-gui-launch-wait.md) |
 
 ### Re-rooted MVDM support declarations

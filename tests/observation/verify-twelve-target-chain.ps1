@@ -134,23 +134,43 @@ try {
                 }
             }
         }
-        # Observe natural retirement before the caller's failure-cleanup step.
+        # One persistent ConPTY belongs to each frontend, not to each target.
+        # All direct results above return while the shared backend is retained.
+        # Explicit resource close/fault cleanup has separate lifecycle tests.
         # These PIDs are fixture observations, never production authorization.
         $frontendIds=@($rows | Where-Object Owner | Select-Object -ExpandProperty Owner -Unique)
         $helperIds=@(Get-CimInstance Win32_Process -Filter "Name='ntkvm.exe'" |
             Where-Object {$_.ParentProcessId -in $frontendIds} | Select-Object -ExpandProperty ProcessId)
-        foreach($processId in @($frontendIds)+@($helperIds)){
+        if($helperIds.Count){throw 'Unexpected native backend helper process'}
+        foreach($processId in $frontendIds){
             $process=Get-Process -Id $processId -ErrorAction SilentlyContinue
-            if(!$process){continue}
+            if(!$process){throw "Shared frontend $processId ended before explicit close"}
             try {
                 $null=$process.Handle
-                if(!$process.WaitForExit(10000)){throw "Frontend/helper $processId did not retire naturally"}
+                if($process.HasExited){throw 'Frontend ended before retention assertion'}
             } finally {$process.Dispose()}
         }
         $summary.Add([pscustomobject]@{Case=$case;EventsPath=$events;Nesting='pass';Identity='pass';Results='pass';
-            Frontend1=$owners[1];Frontend2=$owners[2];LiveTopology='pass';InteractiveIO='pass';Retirement='pass'})
+            Frontend1=$owners[1];Frontend2=$owners[2];LiveTopology='pass';InteractiveIO='pass';Retention='pass';Retirement='separate-lifecycle-gate'})
         $summary | ConvertTo-Json -Depth 4 | Set-Content (Join-Path $EvidenceRoot 'summary.json')
         & "$PSScriptRoot/verify-twelve-chain-records.ps1" -EvidenceRoot $EvidenceRoot
-        Write-Output "PASS twelve-target nesting/identity/results/topology/visible-input-output/retirement $case"
+        Write-Output "PASS twelve-target nesting/identity/results/topology/visible-input-output/retention $case"
+        # Test housekeeping only, NOT normal product retirement evidence.
+        # Pin and verify each observed process before terminating this fixture.
+        foreach($processId in $frontendIds){
+            $process=Get-Process -Id $processId -ErrorAction Stop
+            try {
+                $null=$process.Handle
+                if((Get-FileHash $process.Path).Hash -ne (Get-FileHash (Join-Path $PackageRoot 'ntkvm.exe')).Hash){throw 'Fixture frontend image changed'}
+                $process.Kill();$null=$process.WaitForExit(10000)
+            } finally {$process.Dispose()}
+        }
+        $deadline=[DateTime]::UtcNow.AddSeconds(20)
+        do {
+            $broker=@(Get-CimInstance Win32_Process -Filter "Name='ntsrv.exe'")
+            if(!$broker.Count){break}
+            Start-Sleep -Milliseconds 100
+        } while([DateTime]::UtcNow -lt $deadline)
+        if($broker.Count){throw 'Broker remained after fixture frontend cleanup'}
     }
 } finally {$env:MVDM_OBSERVER_PRIVATE_DESKTOP=$oldPrivate}
