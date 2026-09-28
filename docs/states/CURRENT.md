@@ -98,6 +98,13 @@ test infrastructure, not a production terminal parser. The current backend
 also exposes Console membership and unread INPUT_RECORD reclamation; replacing
 only its launch and output paths would lose accepted nesting/lifetime behavior.
 These contracts must be proved against ConPTY before a production migration.
+The checked-in x86 lifetime probe now passes three real ConPTY cases:
+descendant survives its direct parent, explicit close delivers CTRL_CLOSE,
+and ReleasePseudoConsole permits natural EOF after the last client exits.
+Retained-HPCON is a negative control: it does not naturally reach EOF.
+This was verified on kernel32 10.0.26100.9549; it does not establish a new
+product OS minimum or solve unread input return. The ledger retains the
+initial misdirected-stdout failure and corrected screen-output assertions.
 The verified S8 package remains published; no S9 candidate is deployed.
 
 ## Current Technical Baseline

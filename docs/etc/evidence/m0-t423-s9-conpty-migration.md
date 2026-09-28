@@ -58,7 +58,7 @@ frontend transport binding, not a second hand-written general terminal.
 
 - [ ] Pin and inspect a reusable terminal source/license/build closure before
   import; compare against the Microsoft terminal implementation boundary.
-- [ ] Build a checked-in x86 ConPTY contract probe: direct target versus
+- [x] Build a checked-in x86 ConPTY contract probe: direct target versus
   attached descendant lifetime, output drain/EOF and explicit session close.
 - [ ] Prove raw/cooked keys, releases, mouse/control events and unconsumed
   input return, including native-to-DOS handoff. Do not replay a shadow input
@@ -73,3 +73,48 @@ frontend transport binding, not a second hand-written general terminal.
 Confidence: the old ownership and lifetime/input-return dependencies are
 directly source-proven. ConPTY replacement equivalence is not yet proven.
 The immediate action is capability tests, not speculative product deletion.
+
+## Real x86 lifetime probe
+
+Checked-in test: `tests/observation/conpty_lifecycle_test.c`. This authored
+probe starts one leader and an inherited-Console leaf inside ConPTY; named
+events gate leaf completion. It never launches the product, guest, UI window
+or owner desktop. Cleanup owns only the exact probe processes/session.
+
+Reproduction from the repo root: initialize VS2022 BuildTools VsDevCmd.bat
+with `-arch=x86 -host_arch=x64`, then run
+`cl /nologo /MT /W4 /Fo:build/M0-T423/S9/conpty-lifecycle.obj
+/Fe:build/M0-T423/S9/conpty-lifecycle.exe
+tests/observation/conpty_lifecycle_test.c`. All outputs remain below build.
+Run the resulting executable without arguments, redirecting its report to a
+fresh O:/winnt/Logs2 path. Nonzero return fails the fixture. It requires the
+ReleasePseudoConsole export; absence is a failed capability, not a skip/pass.
+
+Inputs: host kernel32 file version 10.0.26100.9549; MSVC Win32/x86 /MT /W4.
+Final build log `build/M0-T423/S9/conpty-lifecycle-build-r3.log` has no warning.
+Source SHA256 6A5A2B447C471AFC3B4F58B9175F83B56EE5B128482A8A5474084F6C3EC2C891;
+EXE SHA256 73EEC3F69B05B4D3C274C4AF903441934DFFB55E8291669C2F04AC51A1C41F1D.
+
+`O:/winnt/Logs2/t423-s9-conpty-lifecycle-r3.log` passes three cases:
+
+| Case | Actual assertion/result |
+| --- | --- |
+| descendant-lifetime | Leader exits 37 while leaf stays alive; release leaf yields 23 and final screen marker; retaining HPCON prevents natural EOF (WAIT_TIMEOUT 258 before close). |
+| explicit-session-close | Leader already exited; closing ConPTY delivers actual CTRL_CLOSE_EVENT to leaf, whose handler exits 91; capture drains and reaches EOF. |
+| released-natural-retirement | ReleasePseudoConsole does not kill the live leaf; after leaf exits 23, output reaches EOF before ClosePseudoConsole; final marker remains captured. |
+
+This is more precise than equating direct process completion with session
+completion. The first case is the retained-HPCON negative control. Microsoft
+documents exactly this ownership loop and its Windows 11 24H2 solution in
+[ReleasePseudoConsole](https://learn.microsoft.com/en-us/windows/console/releasepseudoconsole).
+The API remains dynamically discovered in this test, not a newly imposed
+product minimum or a production import. Still prove backend recreation across
+empty native intervals, outstanding authenticated admissions and input return
+before using this mechanism in the frontend.
+
+Retained failures: r1 correctly failed both capture assertions although
+leader/leaf statuses were right. Probe stdout followed the supervisor's file
+redirection instead of the attached Console. r2 made the selected screen
+output explicit through CONOUT$ and passed the initial two cases. r3 adds
+release/natural-EOF and reruns all three. Thus actual ConPTY output, not the
+outer log or process exit alone, is required. No product behavior was changed.
