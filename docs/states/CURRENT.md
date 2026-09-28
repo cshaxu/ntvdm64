@@ -21,34 +21,44 @@ physically tested. The coherent seven-file package is now published at
 O:/winnt with a recoverable backup under build/M0-T423/S9/publication-backup-r1.
 
 Published Console17, Window MEM/nested MEM/EDIT and all three WOW frontiers
-pass. Final source/checklist review and governance checks pass. S9 P5 is
-ready for commit/push; S10 admission follows synchronized delivery, not T
+pass. Final source/checklist review and governance checks pass. S9 P5
+3b40345f8 is committed and pushed; S9 is closed with its explicit limitations.
+S10 is automatically admitted for overall minimization/closure review, not T
 closure. Detailed identities and superseded
 status chronology are preserved in the
 [S9 ledger](../etc/evidence/m0-t423-s9-conpty-migration.md).
 
 ## Active Packet
 
-**Active: M0 T423 S9**
+**Active: M0 T423 S10**
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T423 S9, Ordinary Mode. |
+| Identifier Mode | M0 T423 S10, Ordinary Mode. |
 | Candidate Proposal | [Console/Window frontend](../proposals/proposal-kvm-window-graphics-presentation-001.md). |
-| Admission And Approval | Owner approved ConPTY migration and automatic sequential admission; subsequently accepted backend ownership of delivered input, possible delayed native consumption, and SoftPC-range Window glyph coverage. No helper/probe or launcher I/O is admitted. |
-| Objective | Replace the project hidden-Console/helper backend with frontend-owned ConPTY; retain Console/Window interaction, authenticated nesting, mouse and lifecycle semantics with one shared bitmap text presentation. |
+| Admission And Approval | Automatic sequential admission after pushed S9 P5 3b40345f8; owner retains final T acceptance. Inherit the explicitly accepted delivered-input, glyph and host-wheel limitations; no helper/probe or launcher I/O is admitted. |
+| Objective | Audit the complete T423 frontend architecture and remove proven obsolete root-owner/duplicate branches; account mirror and authored code footprint, verify retained runtime contracts and prepare final owner acceptance. |
 | Non-goals | No guest/shared-library mutation, DOS/WOW scheduler, path-search repair, persistent/transient helper role, launcher/worker host Console I/O, permanent legacy backend fallback, full Unicode font library or automatic T closure. |
-| Reference Baseline | S8 P2 d253e55af, P3 6ef96410d and the verified seven-file O:/winnt package; S8 ledger includes retained S7 capabilities and new GUI launch/wait evidence. |
-| Files And ABI Surface | ntkvm-exe native backend, input/output view and bitmap presentation; existing authenticated native launch binding and graph/tests. Audit transport-dependent membership/input-return contracts before replacement. |
+| Reference Baseline | S9 P5 3b40345f8 and the hash-verified seven-file O:/winnt publication; earlier S ledgers retain their accepted contracts and explicit limitations. |
+| Files And ABI Surface | Current run16/ntkvm/ntsrv/ntvdm boundaries, private frontend dependencies, build/test selections and current authorities; no new protocol or scheduling scope. |
 | Applicable Rules | EXECUTION, source policy, original mirror/ABI, output hygiene and the owner-approved independent frontend boundary. |
-| Verification | Audit reusable terminal sources/license/x86 closure first; test split UTF-8/VT, state/replies, Unicode, raw/cooked keyboard/mouse, control events, geometry/scrolling, backend faults/drain and authenticated nested return. Retain DOS17 in both displays, both twelve-target chains, fault matrices, GUI wait and separate WOW frontiers. |
-| Expected Markers | A stable ConPTY survives display switching; current complete screen is immediately available; one query-reply owner; original DOS remains outside ConPTY; real target input/output and results match the baseline without helper fallback. |
-| Asset Needs | Pinned reusable terminal component source and license audit, Windows ConPTY API evidence, existing immutable guests and checked-in fixtures. New directories only under build/M0-T423/S9; no physical owner-desktop manipulation. |
+| Verification | Review each prior S disposition against current production ownership and graph; identify removable dead/duplicate runtime code with source evidence. Any production P repeats affected unit tests, x86 build, DOS17, nesting/fault/GUI and WOW non-regression gates plus coherent publication. Documentation-only admission does not require rebuilding. |
+| Expected Markers | No selected helper or launcher/worker host-frontend implementation; one frontend-owned persistent ConPTY; authenticated segment isolation and independent completion retained; exact footprint and explicit outstanding limits. |
+| Asset Needs | Existing S ledgers, current formal build caches, pinned library and immutable guests. New directories only under build/M0-T423/S10; no physical owner-desktop manipulation. |
 | Reporting Requirements | Exact tested source/package/configuration, retained failure evidence and source-first ownership disposition; no compile-only or research-only runtime claims. |
 | Stop Conditions | Guest/library mutation, unauthenticated ownership, unapproved scheduling, input loss/replay outside the owner-approved delivered-input boundary, or product regression outside the explicit Window glyph coverage exception. Do not publish a migration candidate before the complete production gate. |
-| Exit Criteria | All S9 proposal rows evidenced, superseded helper/duplicate renderer removed, retained runtime contracts pass, code/import footprint reported, seven-file coherent publication and clean pushed delivery. |
+| Exit Criteria | Overall closure checklist and source accounting complete; justified obsolete code removed with required regression, latest coherent package published, clean pushed delivery, then wait for owner T acceptance. Do not report approved limitations as passed features. |
 | Original Owner Request | Automatically admit S stages; replace the hidden Console/helper with ConPTY, preserve both displays and use the same text bitmap scheme for DOS/native output. |
 | Similar-Issue Sweep | Backend creation/EOF/cancellation/backpressure, final drain, session membership, target descendants, redirected/aliased handles, unconsumed input at DOS/native handoff, mouse/control events, terminal replies, resize and wide characters. |
+
+## S9 Closure Record
+
+S9 P5 3b40345f8 is committed and pushed. The [S9 ledger](../etc/evidence/m0-t423-s9-conpty-migration.md)
+records helper removal, the shared ConPTY/bitmap implementation, x86 build,
+candidate and published-path regression, seven-file hashes and backup.
+Horizontal wheel remains an owner-accepted host limitation with strict failed
+tests preserved; physical desktop checks remain owner-waived, not passed.
+S10 owns the overall T audit; T423 remains open for final owner acceptance.
 
 ## S7 Closure Record
 
@@ -132,8 +142,8 @@ retain delivery and later live-package identities.
 
 ## Remaining admitted sequence
 
-S9 ConPTY migration is the only active packet, followed by S10
-minimization/full closure audit. Automatic sequential
+S9 ConPTY migration closed at pushed P5 3b40345f8. S10 is the only active
+minimization/full closure audit packet. Automatic sequential
 admission is authorized; final T closure requires owner acceptance.
 
 Physical focus/clipping observation is owner-waived with source/unit evidence;
@@ -167,8 +177,8 @@ Delivered Console/Window display; [S6 ledger](../etc/evidence/m0-t423-s6-window-
 
 ## Recent M0 Closures
 
-T422 remains owner-closed. T423 S8 P2 d253e55af / P3 6ef96410d is the last closed
-subtask; S9 ConPTY is admitted. Prior closure records
+T422 remains owner-closed. T423 S9 P5 3b40345f8 is the last closed
+subtask; S10 overall review is admitted. Prior closure records
 are preserved in the indexed status archive above.
 
 ## Recent Governance

@@ -2,6 +2,9 @@
 
 ## S9 P5 coherent publication
 
+Production delivery: 3b40345f8, pushed to main. S9 bounded closure retains
+the documented limitations; S10 is separately admitted for overall T audit.
+
 After explicit owner acceptance of the host horizontal-wheel limitation,
 the tested seven-file set was published to O:/winnt. Before replacement,
 every live file was copied and hash-verified under
