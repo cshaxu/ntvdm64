@@ -44,14 +44,14 @@ status chronology are preserved in the
 | Reference Baseline | Published S9 seven-file package, pushed audit 142c619fe, and preserved uncommitted S10 P4 candidate. Identify the owner's actual tested hashes on resume; do not conflate candidate and publication. The component audit ledger records S10 evidence and its open Window text-continuity gate. |
 | Files And ABI Surface | Original event consumer and worker input adapter; ntkvm ConPTY membership, admission and teardown; affected tests and evidence. No new scheduler or frontend owner. |
 | Applicable Rules | EXECUTION, source policy, original mirror/ABI, output hygiene and the owner-approved independent frontend boundary. |
-| Verification | Review exact cleanup diff and source identities; x86 builds, affected tests, preserved Console17/twelve-chain/fault/NTMon/WOW evidence; documentation governance and diff checks. Window text-continuity failure and owner interaction reports remain failures, not passes, with S11/S12 receivers. |
-| Expected Markers | Obsolete symbols absent, retained providers present, worker-only declarations/package binding owned by ntvdm, no NTMon USER32 import; mirror delta and authored-code counts explicit. |
+| Verification | Mouse burst latency/order and key/button pairing; ordinary final exit, attached descendant retention/departure, detached survivor and admission races; x86 build, Console/Window, nested chains, fault, NTMon and inherited WOW gates. Window text-continuity failures remain failures until fixed. |
+| Expected Markers | Bounded input delivery without one-record throttling; exact task results; no live attached client killed on retirement; no idle retained-ConPTY hang; no request lost at admission barrier. |
 | Asset Needs | Preserved S10 cache/candidate/evidence under build/M0-T423/S10, original source and published identities. Logs remain under authorized Logs2; no physical desktop manipulation. |
 | Reporting Requirements | Separate owner-observed symptoms, supplied preliminary source findings, hypotheses and independently measured causes. Do not assert ConPTY deadlock or an RDP limitation without evidence. Retain S10 accounting and unresolved gates. |
-| Stop Conditions | No guest/shared-library mutation, ownership/scheduler expansion, fabricated test passes or unverified publication. Regressions introduced by cleanup must be resolved before its delivery. |
+| Stop Conditions | No guest/shared-library mutation, ownership/scheduler expansion, fabricated passes or unverified publication. A membership solution requiring a new helper/Job or changed admission semantics needs explicit owner direction. |
 | Exit Criteria | Both repairs proved with production-path tests, ordinary and retained-descendant retirement plus admission races, mouse ordering/latency and existing regression gates; coherent verified publication, governance, commit/push. T remains open; RDP capture belongs to S12. |
 | Original Owner Request | First close S10 and commit/push; then admit S11 for EDIT mouse latency and genuine ConPTY-member retirement; RDP pointer issue goes to S12. |
-| Similar-Issue Sweep | All audited obsolete frontend wrappers, production diagnostic dependencies, shared/private declaration consumers and actual PE dependencies; interaction repairs are assigned to the next stages. |
+| Similar-Issue Sweep | All single-record clamps between frontend and original consumer; actual-client versus resource-liveness predicates, post-return input and presentation continuity. Findings and checklist: [S11 ledger](../etc/evidence/m0-t423-s11-interaction-retirement.md). |
 
 ## S10 Closure Record
 
