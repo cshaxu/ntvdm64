@@ -2,6 +2,7 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T423 S9 ConPTY migration](evidence/m0-t423-s9-conpty-migration.md) | M0 T423 S9 | Reuse audit, input/lifetime boundary proof and complete backend migration checklist. | Retain through T423 acceptance. |
 | [T423 S6 Window display](evidence/m0-t423-s6-window-display.md) | M0 T423 S6 | Pinned nxvm import, source recovery, display integration checklist and bounded tests. | Retain through T423 acceptance. |
 | [T423 S7 Window mouse](evidence/m0-t423-s7-window-mouse.md) | M0 T423 S7 | Original mouse boundary, frontend conversion and consumer verification checklist. | Retain through T423 acceptance. |
 | [T423 S8 GUI launch and wait](evidence/m0-t423-s8-gui-launch-wait.md) | M0 T423 S8 | Original shell/WOW wait boundaries, startup acknowledgement audit and implementation checklist. | Retain through T423 acceptance. |

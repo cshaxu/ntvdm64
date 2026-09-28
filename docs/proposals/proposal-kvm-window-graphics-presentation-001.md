@@ -163,35 +163,37 @@ Owner 于 2026-09-27 批准将此项插入为 S8；追加 ConPTY 阶段后，收
 
 实施与独立退出标准：
 
-- [ ] 在 run16 启动/等待层落实 GUI 异步启动与显式同步等待两种契约。
+- [x] 在 run16 启动/等待层落实 GUI 异步启动与显式同步等待两种契约。
       先固定默认行为、等待选项或调用接口，以及交互、批处理、CMD /c、
       DOS COMMAND 转交的适用规则；不得仅凭 Console 存在、父进程名或
       程序窗口存在来猜测 shell 上下文。普通 GUI 启动应可恢复提示符；
       明确要求同步的调用仍等待并返回其原有完成结果。
-- [ ] Win32 GUI 使用实际创建结果；Win16 核实新建/复用 WOW 的可靠启动
+- [x] Win32 GUI 使用实际创建结果；Win16 核实新建/复用 WOW 的可靠启动
       交接点、加载失败及任务归属。请求入队、worker 存活和首个任意窗口
       均不能冒充目标加载成功。异步返回的是启动结果，不是最终退出码；
       保留同步调用的原始结果契约，不虚构 Win16 最终退出码能力。
-- [ ] 核对 launcher 返回后 BaseSrv 的 pending-creation、reservation、
+- [x] 核对 launcher 返回后 BaseSrv 的 pending-creation、reservation、
       rundown、等待句柄和 WOW record 生命周期，确保已交接任务继续运行，
       未成功交接的资源正确回滚；不引入后台等待代理、新 scheduler 或
       frontend 执行策略，不强制每个 Win16 应用新建 worker。
-- [ ] 原始 COMMAND 仍等待它直接创建的进程；异步 GUI 的 launcher 完成
+- [x] 原始 COMMAND 仍等待它直接创建的进程；异步 GUI 的 launcher 完成
       后应正常恢复原提示符。DOS/Win32 文本同步行为、重定向、独立会话及
       frontend 所有权不变。不得一律删掉 GUI 等待来破坏批处理和嵌套结果。
-- [ ] 增加真实调用测试：宿主交互 CMD、DOS COMMAND、批处理、CMD /c、
+- [x] 增加真实调用测试：宿主交互 CMD、DOS COMMAND、批处理、CMD /c、
       显式等待及多层嵌套；覆盖 Win16/Win32 GUI 的成功、缺失/坏镜像、
       启动中 worker/broker 故障、launcher 返回后的目标存活和正常结束。
       断言提示符可继续执行、实际目标身份和结果，不仅断言进程创建。
-- [ ] 保留现有 GUI 返回 37 的批处理证明，以及两条十二目标链的逐层
+- [x] 保留现有 GUI 返回 37 的批处理证明，以及两条十二目标链的逐层
       等待/返回验证；需要时改为明确的同步调用，不删除断言或降低门槛。
       加入独立异步案例，证明先恢复提示符、目标后退出。Win16 使用既有
       可用 WINMINE 前沿，SOL/WRITE 原有失败仍如实记录。
-- [ ] 完成相应生产代码的 x86 构建、DOS17、既有 frontend/嵌套/故障及
+- [x] 完成相应生产代码的 x86 构建、DOS17、既有 frontend/嵌套/故障及
       WOW 非回退门槛、一致七文件发布和提交推送；S9 保留其契约，S10 总体审计。
 
 本 S 不承接路径搜索修复或 ConPTY 迁移。先复用原始 shell/VDM 契约及
 已有通知机制；新增绑定须给出原始 owner、缺失边界和最小 diff 依据。
+
+逐项验证、原始限制与发布身份见 [GUI 启动证据](../etc/evidence/m0-t423-s8-gui-launch-wait.md)。
 
 ### S9：frontend ConPTY 后端与统一文本呈现
 

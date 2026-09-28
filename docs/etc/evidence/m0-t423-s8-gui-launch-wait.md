@@ -1377,12 +1377,13 @@ this checkpoint does not itself claim committed delivery or T closure.
   survival, prompt availability, batch/CMD-c and nested result tests.
 - [x] Retain component, DOS17, mouse/display, both chain/fault matrices and
   three separate WOW frontiers; publish a coherent verified seven-file set.
-- [ ] Review, governance, commit/push and clean-state closure.
+- [x] Review, governance, commit/push and clean-state closure.
 
 Research findings alone are not runtime acceptance. The checked rows above
 refer to the subsequent real runtime evidence, including explicit limitations.
 S8 P2 d253e55af is committed and pushed to main. Documentation governance,
 diff checks and all seven published hashes passed before submission. This
-includes ntmon naming and the approved side-chat ntsrv changes. S8 remains
-active for closure review; the T is not closed. The reviewed S8 package is at
+includes ntmon naming and the approved side-chat ntsrv changes. P3 6ef96410d
+records delivery; clean HEAD/origin synchronization was verified before S9
+admission. S8 closes at its bounded scope; the T is not closed. The S8 package is at
 O:/winnt; its preceding S7 package is recoverably backed up.
