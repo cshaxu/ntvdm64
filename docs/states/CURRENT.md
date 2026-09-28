@@ -10,9 +10,9 @@
 | --- | --- |
 | Identifier Mode | M0 T423 S9, Ordinary Mode. |
 | Candidate Proposal | [Console/Window frontend](../proposals/proposal-kvm-window-graphics-presentation-001.md). |
-| Admission And Approval | Owner approved the proposal's ConPTY stage and automatic sequential admission. S8 P2 d253e55af and P3 6ef96410d are pushed; bounded closure review admits S9. |
+| Admission And Approval | Owner approved ConPTY migration and automatic sequential admission; subsequently accepted backend ownership of delivered input, possible delayed native consumption, and SoftPC-range Window glyph coverage. No helper/probe or launcher I/O is admitted. |
 | Objective | Replace the project hidden-Console/helper backend with frontend-owned ConPTY; retain Console/Window interaction, authenticated nesting, mouse and lifecycle semantics with one shared bitmap text presentation. |
-| Non-goals | No guest/shared-library mutation, DOS/WOW scheduler, path-search repair, extra helper executable, permanent legacy backend fallback or automatic T closure. |
+| Non-goals | No guest/shared-library mutation, DOS/WOW scheduler, path-search repair, persistent/transient helper role, launcher/worker host Console I/O, permanent legacy backend fallback, full Unicode font library or automatic T closure. |
 | Reference Baseline | S8 P2 d253e55af, P3 6ef96410d and the verified seven-file O:/winnt package; S8 ledger includes retained S7 capabilities and new GUI launch/wait evidence. |
 | Files And ABI Surface | ntkvm-exe native backend, input/output view and bitmap presentation; existing authenticated native launch binding and graph/tests. Audit transport-dependent membership/input-return contracts before replacement. |
 | Applicable Rules | EXECUTION, source policy, original mirror/ABI, output hygiene and the owner-approved independent frontend boundary. |
@@ -20,7 +20,7 @@
 | Expected Markers | A stable ConPTY survives display switching; current complete screen is immediately available; one query-reply owner; original DOS remains outside ConPTY; real target input/output and results match the baseline without helper fallback. |
 | Asset Needs | Pinned reusable terminal component source and license audit, Windows ConPTY API evidence, existing immutable guests and checked-in fixtures. New directories only under build/M0-T423/S9; no physical owner-desktop manipulation. |
 | Reporting Requirements | Exact tested source/package/configuration, retained failure evidence and source-first ownership disposition; no compile-only or research-only runtime claims. |
-| Stop Conditions | Guest/library mutation, unauthenticated ownership, unapproved scheduling, unproved input-record equivalence, or product regression. Do not publish a migration candidate before the complete production gate. |
+| Stop Conditions | Guest/library mutation, unauthenticated ownership, unapproved scheduling, input loss/replay outside the owner-approved delivered-input boundary, or product regression outside the explicit Window glyph coverage exception. Do not publish a migration candidate before the complete production gate. |
 | Exit Criteria | All S9 proposal rows evidenced, superseded helper/duplicate renderer removed, retained runtime contracts pass, code/import footprint reported, seven-file coherent publication and clean pushed delivery. |
 | Original Owner Request | Automatically admit S stages; replace the hidden Console/helper with ConPTY, preserve both displays and use the same text bitmap scheme for DOS/native output. |
 | Similar-Issue Sweep | Backend creation/EOF/cancellation/backpressure, final drain, session membership, target descendants, redirected/aliased handles, unconsumed input at DOS/native handoff, mouse/control events, terminal replies, resize and wide characters. |
@@ -114,11 +114,19 @@ The verified S8 package remains published; no S9 candidate is deployed.
 The complete capability probe now passes eleven cases, including cooked/VT
 reads and actual Ctrl+C/Break handlers. A fixed Win32-key encoder for the
 known ConPTY endpoint avoids patching libvterm for keyboard semantics.
-Production migration still needs an input-return ownership decision: an
-on-demand authenticated queue-transfer probe could replace the persistent
-helper's last required input operation, but exceeds the strict no-helper
-interpretation. The ledger records the exact source paths and uncovered
-DOS -> native -> DOS case. No probe extension or contract weakening is applied.
+Owner resolved the input-return decision: no helper/probe and no launcher I/O.
+Successfully delivered ConPTY input remains backend-owned; native -> DOS does
+not reclaim it, and a later native consumer may read it. This accepted
+deviation does not waive unsent-input ordering or original DOS key return.
+Window uses SoftPC-range PC glyph mapping with a question-mark replacement,
+not a full Unicode font library; terminal Unicode/width state is retained.
+The proposal and ledger record these acceptance changes. Migration is still
+pending; the S8 package remains the only published implementation.
+S9 P4 adds real native-converter Unicode bounds tests; ASCII, CJK and surrogate
+pair cases pass alongside the bitmap/keyboard baseline with all 44 library
+files unchanged. Shared DOS/native bitmap selection and the approved PC-map
+replacement rules remain open; general Unicode shaping is no longer a Window
+acceptance requirement. The ledger records the duplicate-renderer boundary.
 
 ## Current Technical Baseline
 

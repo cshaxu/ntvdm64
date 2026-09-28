@@ -276,6 +276,27 @@ Window/display and Window mouse remain later stages, not capabilities proved
 by the Console migration. Status owns publication and delivery state; the
 proposal assigns remaining validation and final owner acceptance.
 
+### Admitted S9 backend replacement target
+
+S9 replaces the private hidden-Console/helper backend with ntkvm-owned ConPTY.
+Only ntkvm owns the pseudoconsole, streams, terminal state and display/input
+routing. No persistent/transient helper role or launcher/worker Console-I/O
+substitute is admitted. The current packet and evidence distinguish this
+target from the still-published pre-migration implementation.
+
+Successful input delivery to ConPTY transfers ownership to that backend.
+Frontend handoff orders unsent input but does not recover, shadow or replay
+already delivered records. Native-to-DOS return may leave unread input for a
+later native consumer; the owner accepts this difference from the original
+shared Console. Preserve original DOS unused-key/BIOS-buffer return and do not
+close a live native session merely to discard its input. Display changes do
+not change the execution session or create another pseudoconsole.
+
+Window native text uses the approved SoftPC-range PC character-to-bitmap
+mapping and explicit missing-glyph replacement, while the terminal model
+retains Unicode and cell width. DOS keeps its actual guest font banks. This
+does not require a general Unicode font subsystem or a second native renderer.
+
 ### Superseded root-run16 implementation record
 
 The admitted frontend split supersedes worker-owned DOS presentation above.

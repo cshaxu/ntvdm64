@@ -17,6 +17,51 @@ static lib_bool count_input(void *context, const kvm_input_event *event)
     return LIB_TRUE;
 }
 
+/* Exercise the real native converter, not only the VT parser. These checks
+ * prove occupied-cell bounds and retained input, not font fallback quality.
+ * CHAR_INFO cannot represent a base plus combining marks in one cell; S9's
+ * terminal-cell adapter must retain that richer input instead of truncating it. */
+static int native_unicode_bounds(kvm_window_frame *frame)
+{
+    static const WCHAR units[][2] = {{L'A', 0}, {0x4e2d, 0}, {0xd83d, 0xde00}};
+    static const char *names[] = {"ASCII", "CJK wide cell", "surrogate pair"};
+    unsigned test;
+    for (test = 0; test < 3; ++test) {
+        run16_native_frame_info info = {0};
+        CHAR_INFO cells[4], original[4];
+        unsigned column, x, y, ink = 0, span = test ? 2 : 1;
+        info.screen.dwSize.X = 4; info.screen.dwSize.Y = 1;
+        info.screen.srWindow.Right = 3;
+        info.screen.ColorTable[7] = RGB(255, 255, 255);
+        info.cursor.dwSize = 25;
+        for (column = 0; column < 4; ++column) {
+            cells[column].Char.UnicodeChar = L' ';
+            cells[column].Attributes = 7;
+        }
+        cells[1].Char.UnicodeChar = units[test][0];
+        if (test == 1) {
+            cells[1].Attributes |= COMMON_LVB_LEADING_BYTE;
+            cells[2].Attributes |= COMMON_LVB_TRAILING_BYTE;
+        } else if (test == 2) cells[2].Char.UnicodeChar = units[test][1];
+        memcpy(original, cells, sizeof(cells));
+        CHECK(frontend_window_native_frame(&info, cells, 4, frame) == ERROR_SUCCESS);
+        CHECK(!memcmp(cells, original, sizeof(cells)));
+        CHECK(frame->valid && frame->graphics && frame->image.width == 32 &&
+            frame->image.height == FRONTEND_NATIVE_CELL_HEIGHT);
+        for (y = 0; y < frame->image.height; ++y) for (x = 0; x < 32; ++x) {
+            DWORD rgb = frame->image.palette[frame->image.pixels[y * 32 + x]];
+            CHECK(rgb == 0 || rgb == 0xffffff);
+            if (x >= 8 && x < (1 + span) * 8) ink += rgb != 0;
+            else CHECK(rgb == 0);
+        }
+        CHECK(ink != 0);
+        printf("PASS native Unicode carrier: %s has ink within %u cells; source unchanged\n",
+            names[test], span);
+    }
+    puts("LIMITATION: nonblank Unicode raster does not prove correct glyph/fallback or combining-mark shaping");
+    return 0;
+}
+
 int main(void)
 {
     kvm_window_frame *frame = calloc(1, sizeof(*frame));
@@ -44,6 +89,7 @@ int main(void)
     run16_native_frame_info native = {0};
     CHAR_INFO *native_cells;
     CHECK(frame && pixels);
+    CHECK(native_unicode_bounds(frame) == 0);
     frame->valid=frame->graphics=LIB_TRUE;
     frame->image.width=frame->image.stride=1600;frame->image.height=350;
     CHECK(kvm_window_frame_validate(frame)==LIB_STATUS_UNSUPPORTED);

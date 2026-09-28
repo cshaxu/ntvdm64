@@ -198,10 +198,10 @@ Owner 于 2026-09-27 批准将此项插入为 S8；追加 ConPTY 阶段后，收
 ### S9：frontend ConPTY 后端与统一文本呈现
 
 Owner 于 2026-09-27 批准追加本阶段，原 S9 收口审计顺延为 S10。
-这是后续实施规划，不是当前 S7 的后端切换，不改变既有可用包。
+S9 已准入；以下是待实现和验证的目标，不代表当前可用包已切换后端。
 
 目标是以 Windows ConPTY 替代自建隐藏 Console 和 helper 子进程方案。
-frontend.exe 独立管理 ConPTY 句柄、输入/输出流、终端屏幕状态、可见
+ntkvm.exe 独立管理 ConPTY 句柄、输入/输出流、终端屏幕状态、可见
 Console、Window 和 display。删除项目自建 helper 启动入口、私有后端
 RPC/快照轮询及已被替代的资源生命周期代码；不新增 helper EXE，也不
 以隐藏 Console fallback 永久保留两套后端。Windows 自己的 Console
@@ -218,6 +218,28 @@ Win32 文本在两种 display 下都使用稳定的 ConPTY 后端，切换不重
 ntvdm 处理原始 guest 执行和设备。Win16/Win32 GUI 保留自身窗口及 S8
 启动/等待规则，不被纳入终端画面或文字流。
 
+Owner 后续明确确认以下实施边界，取代先前未获批准的临时输入探针和
+强求跨后端输入追回的建议：
+
+- ConPTY 和全部前端 I/O 只归 ntkvm；run16 不附着后端、不搬运输入，
+  ntvdm 不承接宿主 Console 操作。不新增常驻或短命 helper，不把其角色
+  转嫁给 launcher/worker。Windows 自己的 ConPTY Console 服务不受此禁令影响。
+- ntkvm 管理尚未投递的输入，按既有执行交接通知切换接收端。成功写入
+  ConPTY 的输入归该后端，不查询消费进度、不建立影子副本、不自动重放。
+  Win32 -> DOS 不保证追回已投递但未消费的输入；这些输入可留在同一
+  ConPTY 中，后续返回原生消费者时被延后消费。Owner 明确接受这一相对
+  原版共享 Console 的差异。不得为了清空它而关闭仍有客户端的 ConPTY、
+  杀目标或重建会话；错误/部分写入不得伪装成完整成功或盲目重试。
+- DOS 原始 ReturnUnusedKeyEvents / ReturnBiosBufferKeys 及尚未投递输入的
+  有序归还继续保留；验证 DOS -> native 的顺序和无重复。鼠标坐标、
+  捕获和按键释放按原有消费者边界处理，不跨端重放旧坐标。
+- Window 字符覆盖以 SoftPC 的 PC 字符映射表为界：Unicode 反查已登记
+  的字形编号，再使用位图字体；未映射字符显示问号，不额外建设完整
+  Unicode 字库或 native-only 系统字体 renderer。终端状态仍保留原始
+  Unicode 与宽度，替代显示不得挤坏后续单元格。DOS 原始字体不改变。
+  此项明确取代下文先前要求完整 Unicode 扩展字形显示的目标；Console
+  模式的宿主 Unicode 呈现不因 Window 的 ROM 字形覆盖而主动降格。
+
 实施与独立退出标准：
 
 - [ ] 先审计可复用的 ConPTY/VT 解析、输入编码和屏幕状态组件，登记
@@ -232,15 +254,17 @@ ntvdm 处理原始 guest 执行和设备。Win16/Win32 GUI 保留自身窗口及
 - [ ] Window 的 DOS 与 native 文本使用同一字体位图选择、字形/单元格
       几何及栅格化规则，不为 native 单独使用另一套系统字体 renderer。
       保留 guest 字体银行、代码页及 43/50 行语义；相同字符/属性/字体
-      输入给出一致显示，Unicode 扩展映射需明确测试。该统一不把 native
-      输出降格为仅 DOS 字符集，也不改变 DOS 图形帧。
+      输入给出一致显示；按上述批准范围验证 PC 字符反向映射、重复映射
+      的确定选择、缺字替代和宽字符占位，不声称完整 Unicode 字形覆盖，
+      也不改变 DOS 图形帧。
 - [ ] Console 模式保留固定字体、原生滚动和完整可访问内容，不用缩字
       替代滚动；验证 conhost 和 Windows Terminal 的真实输入、输出、
       光标、尺寸/滚屏、Unicode、raw/cooked、键鼠与 Ctrl+C/Break。
       不以纯 stdout 文本或退出码替代交互验收，不虚构无来源的视口上限。
 - [ ] Window 输入统一由 frontend 接收，再按活动消费者分别送原始 DOS
       设备或 ConPTY 输入编码器。保留 S7 的移动/点击、失焦/捕获释放及
-      输入归还能力；不得假设 VT 鼠标已等价覆盖所有 native Console
+      DOS 原始输入归还能力；ConPTY 已投递输入按上述批准边界处理。
+      不得假设 VT 鼠标已等价覆盖所有 native Console
       输入记录，须以实际目标读入与行为证明，无粘键、假点击或重复输入。
 - [ ] 保留会话认证和两段字符链隔离。ConPTY 中 native 启动 DOS、DOS
       再启动 native 时恢复正确端点、画面和输入；保持任务结果与 I/O

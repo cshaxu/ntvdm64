@@ -239,3 +239,90 @@ Proposed decision: permit a finite, on-demand transfer probe only at handoff/
 retirement, while keeping ConPTY as the sole native rendering/input backend
 and deleting the old long-lived helper/RPC/snapshot renderer. No such probe
 extension or production migration has been implemented pending that decision.
+
+## Text renderer boundary and retained baseline
+
+S9 P4 is test/audit only. Source review of ntkvm-exe/window_frame.c,
+text_frame.c, window_frame.h and lib/kvm-window/render.c confirms two current
+paths: DOS copies the guest's actual two font banks into the imported bitmap
+renderer; native text uses an independent 8x14 GDI/Consolas raster. The latter
+is the duplicate path to replace, not evidence of S9 font unification.
+The unchanged library consumes supplied glyph bitmaps; it does not supply a
+default Unicode font. Replacing DOS's supplied glyphs with a system font would
+lose custom guest fonts and is not an acceptable shortcut.
+
+Reuse text_frame's tiled bitmap rendering, two-bank/tall-font handling and
+copied-frame validation. Native Unicode-to-glyph preparation must precede
+that common raster boundary and retain wide cells and combining sequences;
+do not narrow the terminal model to CHAR_INFO or an OEM byte. Native-first
+startup must not depend on a DOS worker having already supplied a font.
+Font selection/Unicode extension and terminal RGB-to-frame representation
+remain unimplemented gates, not permission to discard characters or colours.
+The native mouse geometry currently uses the same fixed 8x14 constants as
+its renderer; migration must update geometry and hit testing together.
+
+Existing test frontend_window_library_test.c previously checked palette,
+underline, cursor and viewport with space characters. The added
+native_unicode_bounds cases call the real production converter with ASCII A,
+CJK U+4E2D in a leading/trailing cell pair, and U+1F600 as a surrogate pair.
+They assert nonblank output confined to the one/two occupied cells, exact
+frame dimensions, binary foreground/background colours and unchanged source
+records. These are carrier/bounds assertions, not proof of the intended glyph
+instead of a missing-font box. The test explicitly reports that limitation;
+combining-mark shaping and full Unicode visual fidelity remain open.
+
+Reproduce in the MSVC x86 developer environment with bundled pwsh:
+`tests/component-integration/verify-frontend-window-library.ps1 -BuildRoot build/M0-T423/S9/render-unicode-r1`.
+Output is retained at O:/winnt/Logs2/t423-s9-render-unicode-r1.log. It passes
+the three added cases and the existing bitmap/frame and keyboard assertions,
+including DOS 43/50 rows, dual font and tall-glyph fallback. All 44 pinned
+library files match; 15 library C units compile. Upstream C4996 warnings remain.
+The Window-controller executable is built only, not executed by this script;
+this run does not claim physical focus/capture or end-to-end ConPTY display.
+
+The preceding unchanged baseline passed in t423-s9-render-baseline-r2.log;
+retain r1's pre-build failure because Windows PowerShell could not resolve
+Get-FileHash. Using the installed bundled pwsh resolved the tool environment,
+without product or shared-library changes.
+
+Test source SHA256 2BEFDE9730D6ABD0E115D3677385BF07AB2D7B1B425A9F8EDC93B25BB2D38377.
+Frame test EXE SHA256 6906051F8AE4D099EE30F4FA00E66A40C191AD7C1E34625BBDE51D137709A0EF.
+Keyboard test EXE SHA256 5CB6D76E0988F75595C01001CE8635246A0CF2E3B1A2BFB4F8B4816DE85DCED2.
+No production source, guest, library or published package changed. The input
+transfer probe remains unapproved; this independent audit does not admit it.
+
+## Owner resolution: no helper and bounded glyph coverage
+
+The subsequent owner discussion rejects adding a transient helper or moving
+ConPTY/Console I/O into run16. The owner explicitly accepts delivered input
+remaining in the original native backend, including later consumption after
+DOS resumes and subsequently yields again. This supersedes the pending-probe
+decision above; no probe is to be implemented. Unsent frontend input and the
+original DOS ReturnUnusedKeyEvents/ReturnBiosBufferKeys remain ordered and
+must be tested. Partial/failed pipe writes are not full delivery; do not
+retry an already written prefix or silently report success. No session reset,
+target termination or forced queue flush is authorized to conceal leftovers.
+
+The source audit found no queue-export operation in the public HPCON contract
+or the reviewed Microsoft winconpty/PtySignalInputThread control surface.
+Console handles cannot be passed as ordinary cross-process file handles;
+AttachConsole is process-wide and one-console-only. These are bounded API
+findings, not proof that every possible private mechanism is impossible.
+The Microsoft In-process ConPTY design labels its API as a rough draft, not
+an available product dependency. No private ConDrv mechanism is adopted.
+
+The owner also accepts SoftPC's character coverage for Window rendering.
+Read-only comparison found src/app-softpc/machine/driver.c's 256-entry PC
+glyph-to-Unicode table, src/lib/kvm-console/console.c's forward lookup, and
+src/lib/kvm-window/render.c's direct bitmap lookup. Reverse mapping of the
+selected PC table can serve native text without a general Unicode font
+library. Missing glyphs use a question mark; preserve terminal width and
+unmapped Unicode in screen state so Window substitution cannot corrupt later
+cell positions or reduce Console-mode output. Duplicate Unicode entries need
+a deterministic choice (in particular space); no source import is claimed by
+this comparison. Original DOS custom fonts and 43/50-row behavior remain.
+
+This is an owner-approved acceptance revision, not evidence of completed
+ConPTY wiring. S9's remaining production work is create/launch/lifetime,
+stream/parser/input binding, shared bitmap rendering and helper removal,
+followed by the full seven-file runtime gate. The S8 package remains deployed.
