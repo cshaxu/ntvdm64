@@ -1,8 +1,10 @@
 # opennt-abi
 
-This mirror component holds only byte-identical, declaration-only OpenNT
-headers required outside the canonical MVDM source union. It owns no behavior,
-provider body, compatibility implementation, or machine access.
+This component currently combines original declaration imports and selected
+declaration subsets under `source/` with standalone compatibility declarations
+and runtime bindings under `host-compat/`. It is not wholly byte-identical or
+declaration-only. S10 audits these distinct owners before any consolidation with
+opennt-host; compatibility implementations must not become invented mirror files.
 
 ## Layout and provenance
 

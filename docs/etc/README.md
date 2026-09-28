@@ -2,6 +2,7 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T423 S10 component minimization audit](evidence/m0-t423-s10-component-minimization-audit.md) | M0 T423 S10 | Source ownership, shared ABI/package consolidation, obsolete frontend code and actual link dependencies. | Retain through T423 acceptance. |
 | [T423 S9 ConPTY migration](evidence/m0-t423-s9-conpty-migration.md) | M0 T423 S9 | Reuse audit, input/lifetime boundary proof and complete backend migration checklist. | Retain through T423 acceptance. |
 | [T423 S6 Window display](evidence/m0-t423-s6-window-display.md) | M0 T423 S6 | Pinned nxvm import, source recovery, display integration checklist and bounded tests. | Retain through T423 acceptance. |
 | [T423 S7 Window mouse](evidence/m0-t423-s7-window-mouse.md) | M0 T423 S7 | Original mouse boundary, frontend conversion and consumer verification checklist. | Retain through T423 acceptance. |

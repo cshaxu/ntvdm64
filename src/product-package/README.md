@@ -1,5 +1,6 @@
 # product-package
 
-This root contains the stateless package/media layout calculation shared by the
-worker's startup binding and its fixture. It does not own worker lifecycle,
-filesystem policy or a generic utility surface.
+This root contains worker startup package/media configuration and its fixture.
+Its API depends on ntvdm-exe/session and updates worker-owned media roots; it is
+not a cross-executable shared package service. S10 proposes moving this binding
+into ntvdm-exe without changing package/search policy.

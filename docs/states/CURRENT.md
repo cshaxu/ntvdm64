@@ -133,12 +133,16 @@ The owner's host_cpu.h endian correction and ntmon-exe source move are included
 in the candidate scope. Retained release/resource probes are test callers,
 not production target-completion policy.
 
-O:/winnt has not received this candidate. Its last inspected frontend remains
-S8 A41AC299; its worker hash differed from the original S8 publication manifest.
-Preserve the live package and verify all seven hashes before any replacement.
-Do not call it a coherent unchanged S8 set without an exact current audit.
-The [S8 ledger](../etc/evidence/m0-t423-s8-gui-launch-wait.md) and S9 ledger
-retain delivery and later live-package identities.
+O:/winnt received the coherent S9 seven-file package, including ntkvm 27106497,
+with all hashes and publication regression recorded in the S9 ledger. S10's
+audit has not changed or republished production binaries.
+
+Owner added authored-architecture minimization, per-EXE/DLL dependency review
+and opennt-abi/product-abi/product-package consolidation to S10. The
+[component audit](../etc/evidence/m0-t423-s10-component-minimization-audit.md)
+records recommended ownership, 132 lines of obsolete C candidates and the
+original-header collision constraints. Recommendations are not implemented
+cleanup; S10 remains active.
 
 ## Remaining admitted sequence
 

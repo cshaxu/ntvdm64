@@ -272,18 +272,19 @@ target completion. No native process-tree termination is introduced.
 The Console ownership split is now implemented and verified by S4's linked
 source, graph and real runtime evidence. Its complete runtime set is seven
 files, including ntkvm.exe. S4 used a helper role of that same executable;
-the admitted S9 replacement below removes that role.
-Window/display and Window mouse remain later stages, not capabilities proved
-by the Console migration. Status owns publication and delivery state; the
+the published S9 replacement below removed that native I/O helper role.
+Window/display and Window mouse have subsequent S6/S7 evidence; they were not
+proved by the earlier Console migration alone. Status owns publication and delivery state; the
 proposal assigns remaining validation and final owner acceptance.
 
-### Admitted S9 backend replacement target
+### Published S9 backend replacement
 
 S9 replaces the private hidden-Console/helper backend with ntkvm-owned ConPTY.
 Only ntkvm owns the pseudoconsole, streams, terminal state and display/input
 routing. No persistent/transient helper role or launcher/worker Console-I/O
-substitute is admitted. The current packet and evidence distinguish this
-target from the still-published pre-migration implementation.
+substitute is admitted. The S9 ledger records the published implementation and
+its explicitly accepted limitations. This excludes native I/O helpers, not the
+separate bounded authenticated Console-membership query subprocess.
 
 Successful input delivery to ConPTY transfers ownership to that backend.
 Frontend handoff orders unsent input but does not recover, shadow or replay
