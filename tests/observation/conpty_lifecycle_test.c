@@ -6,7 +6,10 @@
 #include <wchar.h>
 #include <string.h>
 
-typedef struct shared_state { DWORD leaf_pid; } shared_state;
+typedef struct shared_state {
+    DWORD leaf_pid,count,reclaimed;
+    INPUT_RECORD records[8];
+} shared_state;
 typedef struct capture {
     HANDLE pipe;
     DWORD error, used;
@@ -41,8 +44,8 @@ static void name(WCHAR *buffer,size_t capacity,PCWSTR prefix,PCWSTR suffix)
 static int child(PCWSTR role,PCWSTR prefix)
 {
     WCHAR key[128],self[MAX_PATH],command[1024];
-    HANDLE mapping,ready,release,screen;
-    DWORD written;
+    HANDLE mapping,ready,release,screen,input=NULL;
+    DWORD written,mode=wcstoul(wcsrchr(prefix,L'-')+1,NULL,10);
     shared_state *state;
     STARTUPINFOW startup={sizeof(startup)};
     PROCESS_INFORMATION process={0};
@@ -64,9 +67,35 @@ static int child(PCWSTR role,PCWSTR prefix)
     screen=CreateFileW(L"CONOUT$",GENERIC_WRITE,FILE_SHARE_READ|FILE_SHARE_WRITE,
         NULL,OPEN_EXISTING,0,NULL);
     if(screen==INVALID_HANDLE_VALUE)return 65;
+    if(mode>=3) {
+        input=CreateFileW(L"CONIN$",GENERIC_READ|GENERIC_WRITE,FILE_SHARE_READ|FILE_SHARE_WRITE,
+            NULL,OPEN_EXISTING,0,NULL);
+        if(input==INVALID_HANDLE_VALUE || !SetConsoleMode(input,
+            ENABLE_EXTENDED_FLAGS|ENABLE_MOUSE_INPUT|ENABLE_WINDOW_INPUT) ||
+            !FlushConsoleInputBuffer(input))return 68;
+    }
     state->leaf_pid=GetCurrentProcessId();
     if(!WriteFile(screen,"CONPTY-LEAF-READY\r\n",19,&written,NULL) || written!=19)return 66;
     SetEvent(ready);
+    if(mode>=3) {
+        DWORD expected=mode==4 ? 3 : mode==5 ? 2 : 4;
+        while(state->count<expected) {
+            DWORD count=0;
+            if(WaitForSingleObject(input,5000)!=WAIT_OBJECT_0)return 69;
+            if(!ReadConsoleInputW(input,state->records+state->count,1,&count) || count!=1)return 70;
+            ++state->count;
+            if(mode==6 && state->count==2) {
+                INPUT_RECORD peek[8];
+                /* The first key pair was consumed. Reclaim only records
+                 * demonstrably still in the native Console queue. */
+                if(WaitForSingleObject(input,5000)!=WAIT_OBJECT_0 ||
+                   !PeekConsoleInputW(input,peek,8,&count) || count<2)return 71;
+                if(!ReadConsoleInputW(input,state->records+2,2,&count) || count!=2)return 72;
+                state->reclaimed=count;state->count+=count;
+            }
+        }
+        CloseHandle(input);
+    }
     if(WaitForSingleObject(release,30000)!=WAIT_OBJECT_0)return 64;
     if(!WriteFile(screen,"CONPTY-LEAF-FINAL\r\n",19,&written,NULL) || written!=19)return 67;
     CloseHandle(screen);
@@ -76,6 +105,12 @@ static int child(PCWSTR role,PCWSTR prefix)
 }
 static int run_case(unsigned mode)
 {
+    static const char *case_names[]={"descendant-lifetime","explicit-session-close",
+        "released-natural-retirement","win32-key-records","sgr-mouse-records",
+        "focus-records","unread-input-records"};
+    static const char *key_sequence="\x1b[17;29;0;1;8;1_\x1b[112;59;0;1;8;1_\x1b[112;59;0;0;8;1_\x1b[17;29;0;0;0;1_";
+    static const char *mouse_sequence="\x1b[<0;11;7M\x1b[<32;12;8M\x1b[<0;12;8m";
+    static const char *unread_sequence="\x1b[65;30;97;1;0;1_\x1b[65;30;97;0;0;1_\x1b[66;48;98;1;0;1_\x1b[66;48;98;0;0;1_";
     typedef HRESULT (WINAPI *release_console_fn)(HPCON);
     release_console_fn release_console=(release_console_fn)GetProcAddress(
         GetModuleHandleW(L"kernel32.dll"),"ReleasePseudoConsole");
@@ -135,6 +170,13 @@ static int run_case(unsigned mode)
            WaitForSingleObject(leaf,300)!=WAIT_TIMEOUT ||
            WaitForSingleObject(reader,0)!=WAIT_TIMEOUT)goto done;
     }
+    if(mode>=3) {
+        const char *sequence=mode==3 ? key_sequence : mode==4 ? mouse_sequence :
+            mode==5 ? "\x1b[I\x1b[O" : unread_sequence;
+        DWORD sent;
+        stage="send native input sequence";
+        if(!WriteFile(input_write,sequence,(DWORD)strlen(sequence),&sent,NULL) || sent!=strlen(sequence))goto done;
+    }
     if(explicit_close) {
         stage="explicit close notification";
         ClosePseudoConsole(console);console=NULL;
@@ -145,6 +187,49 @@ static int run_case(unsigned mode)
     }
     if(WaitForSingleObject(leaf,10000)!=WAIT_OBJECT_0 || !GetExitCodeProcess(leaf,&leaf_code) ||
        leaf_code!=(explicit_close ? 91u : 23u))goto done;
+    if(mode>=3) {
+        INPUT_RECORD *r=state->records;
+        DWORD i;
+        stage="exact target input records";
+        for(i=0;i<state->count;++i) {
+            if(r[i].EventType==MOUSE_EVENT)printf("input case=%s index=%lu mouse=%d,%d buttons=%lu flags=%lu\n",
+                case_names[mode],i,r[i].Event.MouseEvent.dwMousePosition.X,
+                r[i].Event.MouseEvent.dwMousePosition.Y,r[i].Event.MouseEvent.dwButtonState,
+                r[i].Event.MouseEvent.dwEventFlags);
+            else if(r[i].EventType==FOCUS_EVENT)printf("input case=%s index=%lu focus=%d\n",
+                case_names[mode],i,r[i].Event.FocusEvent.bSetFocus);
+            else printf("input case=%s index=%lu type=%u vk=%u scan=%u down=%u unicode=%u flags=%lu\n",
+                case_names[mode],i,r[i].EventType,r[i].Event.KeyEvent.wVirtualKeyCode,
+                r[i].Event.KeyEvent.wVirtualScanCode,r[i].Event.KeyEvent.bKeyDown,
+                r[i].Event.KeyEvent.uChar.UnicodeChar,r[i].Event.KeyEvent.dwControlKeyState);
+        }
+        if(mode==3) {
+            const WORD vk[4]={VK_CONTROL,VK_F1,VK_F1,VK_CONTROL};
+            const WORD scan[4]={29,59,59,29};
+            if(state->count!=4)goto done;
+            for(i=0;i<4;++i)if(r[i].EventType!=KEY_EVENT ||
+                r[i].Event.KeyEvent.wVirtualKeyCode!=vk[i] ||
+                r[i].Event.KeyEvent.wVirtualScanCode!=scan[i] ||
+                r[i].Event.KeyEvent.bKeyDown!=(i<2) ||
+                r[i].Event.KeyEvent.dwControlKeyState!=(i<3 ? (DWORD)LEFT_CTRL_PRESSED : 0u) ||
+                r[i].Event.KeyEvent.wRepeatCount!=1 || r[i].Event.KeyEvent.uChar.UnicodeChar)goto done;
+        } else if(mode==4) {
+            if(state->count!=3)goto done;
+            for(i=0;i<3;++i)if(r[i].EventType!=MOUSE_EVENT ||
+                r[i].Event.MouseEvent.dwMousePosition.X!=(i ? 11 : 10) ||
+                r[i].Event.MouseEvent.dwMousePosition.Y!=(i ? 7 : 6) ||
+                r[i].Event.MouseEvent.dwButtonState!=(i==2 ? 0u : (DWORD)FROM_LEFT_1ST_BUTTON_PRESSED) ||
+                r[i].Event.MouseEvent.dwEventFlags!=(i==1 ? (DWORD)MOUSE_MOVED : 0u))goto done;
+        } else if(mode==5) {
+            if(state->count!=2 || r[0].EventType!=FOCUS_EVENT || r[1].EventType!=FOCUS_EVENT ||
+                !r[0].Event.FocusEvent.bSetFocus || r[1].Event.FocusEvent.bSetFocus)goto done;
+        } else {
+            if(state->count!=4 || state->reclaimed!=2)goto done;
+            for(i=0;i<4;++i)if(r[i].EventType!=KEY_EVENT ||
+                r[i].Event.KeyEvent.wVirtualKeyCode!=(i<2 ? 'A' : 'B') ||
+                r[i].Event.KeyEvent.bKeyDown!=(i%2==0))goto done;
+        }
+    }
     preclose=WaitForSingleObject(reader,mode==2 ? 5000 : 500);
     stage="natural EOF after final attached client";
     if(mode==2 && preclose!=WAIT_OBJECT_0)goto done;
@@ -157,7 +242,7 @@ static int run_case(unsigned mode)
     result=0;
 done:
     printf("conpty case=%s pass=%s stage=%s leader=%lu leaf=%lu eof-before-close=%lu error=%lu\n",
-        mode==2 ? "released-natural-retirement" : explicit_close ? "explicit-session-close" : "descendant-lifetime",result ? "no" : "yes",
+        case_names[mode],result ? "no" : "yes",
         stage,code,leaf_code,preclose,GetLastError());
     if(leader.hProcess && WaitForSingleObject(leader.hProcess,0)==WAIT_TIMEOUT) {
         TerminateProcess(leader.hProcess,99);WaitForSingleObject(leader.hProcess,5000);
@@ -194,5 +279,5 @@ int wmain(int argc,WCHAR **argv)
 {
     if(argc==3 && (!wcscmp(argv[1],L"leader") || !wcscmp(argv[1],L"leaf")))return child(argv[1],argv[2]);
     if(argc!=1)return 2;
-    return run_case(0) | run_case(1) | run_case(2);
+    { int result=0;for(unsigned mode=0;mode<7;++mode)result|=run_case(mode);return result; }
 }

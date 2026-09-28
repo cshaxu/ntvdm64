@@ -105,6 +105,11 @@ Retained-HPCON is a negative control: it does not naturally reach EOF.
 This was verified on kernel32 10.0.26100.9549; it does not establish a new
 product OS minimum or solve unread input return. The ledger retains the
 initial misdirected-stdout failure and corrected screen-output assertions.
+The probe now passes seven cases including real key/release/modifier, mouse,
+focus and attached-client unread-record assertions. Frontend reclamation is
+still unproved. Unmodified libvterm 0.3.3 compiles x86 and passes 20 parser/
+screen assertions, but does not expose DECSET 9001 through its fallback or
+encode Win32 keys; it remains a build-only candidate, not an imported backend.
 The verified S8 package remains published; no S9 candidate is deployed.
 
 ## Current Technical Baseline
