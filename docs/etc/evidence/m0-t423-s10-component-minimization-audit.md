@@ -91,6 +91,61 @@ PID. S9's helper-removal claim is scoped to the native I/O backend.
 
 ## Implementation order and acceptance
 
+### Seven-image import disposition (follow-up audit)
+
+`dumpbin /imports` against the published O:/winnt package confirms:
+
+| Image | Static imported modules | Disposition |
+| --- | --- | --- |
+| run16.exe | RPCRT4, ntdll, KERNEL32, SHELL32, USER32, ADVAPI32 | RPC/security/process APIs; SHELL32 supplies CommandLineToArgvW; USER32 supplies wsprintfW and GetWindowThreadProcessId. Replacing formatting alone will not remove USER32 because window-PID validation remains. No renderer/VT implementation is linked. |
+| ntsrv.exe | RPCRT4, ntdll, KERNEL32, USER32, ADVAPI32 | USER32 imports are GetUserObjectInformationW, GetProcessWindowStation and GetWindowThreadProcessId: interactive admission and window ownership validation, not a frontend pump. Retain. |
+| ntkvm.exe | RPCRT4, KERNEL32, USER32, GDI32, ADVAPI32, ntdll | Frontend/security/Window drawing dependencies are consistent with ownership. No external helper or libvterm DLL import. |
+| ntmon.exe | RPCRT4, KERNEL32, USER32, ADVAPI32 | USER32's only imported symbol is wsprintfW in main.c; concrete removable module dependency after bounded formatting replacement and link verification. |
+| ntvdm.exe | RPCRT4, KERNEL32, USER32, ADVAPI32, GDI32, ntdll | Worker still supports original keyboard conversion, WOW native windows and palette/resource bindings. Do not remove USER32/GDI32 wholesale to enforce DOS frontend isolation. |
+| wow32.dll | ntvdm.exe, KERNEL32, USER32, GDI32, ADVAPI32, SHELL32, COMDLG32, VERSION, NTDLL | Original WOW API families and finite parent-provider ABI; these module families match the DLL purpose, not redundant frontend composition. |
+| VDMREDIR.dll | ntvdm.exe, KERNEL32, NETAPI32, ntdll | Guest address/provider boundary and redirector network APIs; NETAPI32 does not mean excluded downlevel RAP/DLC were restored. |
+
+This is a direct import audit, not a promise that every function is reachable
+under every program. Optional original WOW providers remain workload-dependent;
+absence from static imports does not prove absence of dynamic loading.
+
+The worker's cursor APIs illustrate why deletion cannot be based solely on PE
+imports: conapi.h redirects original calls to MvdmGetCursorPos/MvdmClipCursor;
+console_client.c routes bound DOS sessions to ntkvm but retains native fallback
+without a client. mvdm_standalone_worker.c explicitly permits the separate WOW
+route without DOS frontend binding, and mvdm_softpc_wow_page_domain.c itself uses
+GetCursorPos. Thus the import alone is not proof of an active duplicate DOS
+frontend. Cleanup must preserve this separate WOW consumer; native fallback
+reachability needs call-site/profile proof before removal, not an assumption.
+
+### Minimal architecture decision
+
+Keep the seven product files and their existing responsibilities. Do not add
+another shared manager, scheduler, input-recovery service or compatibility
+framework to reduce small wrappers. One owner holds each resource: ntkvm holds
+presentation/ConPTY, worker holds guest machine state, ntsrv holds authenticated
+original service records, launcher holds only its direct target wait. Public
+client code may be linked into several images without duplicating server state.
+
+Within that boundary, delete obsolete alternative loops and test-only runtime
+requirements first; merge private implementation into its actual executable
+owner second. Consolidating original declaration storage is last because it
+affects include resolution rather than runtime architectural complexity.
+
+### Goal requirement coverage
+
+| Requested audit | Evidence and result |
+| --- | --- |
+| Simplify authored architecture and duplicate code | Minimal owner model above; three caller-checked obsolete code cohorts, release API requirement, and the retained authentication/lifecycle distinctions. These are recommendations, not an exhaustive proof that no other bug exists. |
+| Component and per-image unnecessary dependencies | Reproducible seven-target graph, selected map review, frontend leakage negative controls and seven-image imports; ntmon USER32 is a confirmed removal candidate, archive-wide false positives rejected. |
+| Merge product-abi/product-package | Actual four-header shared contract versus worker-only session-dependent implementation; recommend removing product-package as a root, not combining them into a coupled common library. |
+
+This completes the requested architecture/dependency audit at the current
+baseline. It does not close S10's separately admitted cleanup, regression and
+publication obligations or owner-controlled T acceptance.
+
+### Production follow-up order
+
 1. Delete proven unused frontend branches and production-only diagnostic API
    requirements; keep focused regression tests on the retained real paths.
 2. Move worker package binding without semantic changes; update graph and tests.
