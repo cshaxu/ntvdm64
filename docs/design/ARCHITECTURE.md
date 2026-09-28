@@ -251,6 +251,26 @@ never session, Console or native-resource policy.
 
 ## T423 DOS frontend ownership transition
 
+### Latest admitted NTCON replacement
+
+The owner admits src/ntcon-exe producing ntcon.exe as the native text backend.
+This supersedes the historical S9/S11 no-helper and per-native-branch rules
+below, not their publication history. One character frontend session reuses
+one NTCON/real Console across DOS intervals. NTKVM owns visible presentation,
+display and direct I/O routing; NTCON owns attached native Console operations.
+ConPTY remains the preferred native stream transport, not an API for modifying
+remote screen state. Screen/cursor transfer must reach the real Console.
+Run16 keeps classification, submission and existing GUI startup-only/--wait
+and DOS/native-text direct-completion behavior; it never owns an I/O pump.
+NTSRV owns authenticated backend instances and frontend associations outside
+original DOS/WOW records. NTMON manages those registered instances, not arbitrary
+process trees. Native backend shutdown must address its Console session and
+report failure if that session is not closed; killing NTCON alone is not success.
+Actual attached users, pending admission and DOS/native requests determine
+retirement; the NTCON carrier itself is not a business user. Cross-session GUI
+boundaries, original DOS execution policy and guest/shared-library immutability
+remain unchanged. Status and the S12 ledger own implementation evidence.
+
 ### Current owner-approved replacement
 
 The independent `src/ntkvm-exe/` product replaces root-run16 UI ownership.
@@ -284,8 +304,8 @@ S9 replaces the private hidden-Console/helper backend with ntkvm-owned ConPTY.
 Only ntkvm owns the pseudoconsole, streams, terminal state and display/input
 routing. No persistent/transient helper role or launcher/worker Console-I/O
 substitute is admitted. The S9 ledger records the published implementation and
-its explicitly accepted limitations. This excludes native I/O helpers, not the
-separate bounded authenticated Console-membership query subprocess.
+its explicitly accepted limitations. The S11 replacement below uses released
+per-branch ConPTY lifetime, not a Console-membership query subprocess.
 
 Successful input delivery to ConPTY transfers ownership to that backend.
 Frontend handoff orders unsent input but does not recover, shadow or replay
@@ -308,6 +328,34 @@ Window native text uses the approved SoftPC-range PC character-to-bitmap
 mapping and explicit missing-glyph replacement, while the terminal model
 retains Unicode and cell width. DOS keeps its actual guest font banks. This
 does not require a general Unicode font subsystem or a second native renderer.
+
+### Superseded S11 native branch lifetime prototype
+
+This earlier owner-approved prototype is superseded by the NTCON plan above;
+it is retained as research context, not the current implementation directive.
+S9 above remains the published baseline until verified migration. ntkvm still
+owns the sole visible Console/Window and display state. Each independently
+launched native text branch receives a ConPTY; ordinary native descendants
+inherit their real Console without interception. Win32 -> DOS -> Win32 may
+therefore retain multiple backends, but selects only one interactive backend.
+Suspended outer targets and their PTYs survive the nested DOS/native interval.
+DOS itself retains its existing worker input/output route, not a PTY.
+
+The owner requires one continuous visible screen across DOS/native branch
+handoffs. Returning to an outer branch must not restore its old screen or
+overwrite the intervening output. Independent backend lifetime does not imply
+independent user-visible pages. Copying cells into a local terminal parser is
+not synchronization of the remote Windows Console cursor; both subsequent
+positioned output and scrolling must pass the same continuity tests.
+
+After successful initial attachment, relinquish that backend's keepalive with
+ReleasePseudoConsole. It is not reused for independent launches. Windows owns
+attached-client lifetime and output EOF; ntkvm drains output before disposal.
+Direct-target completion still supplies only that requester's result and never
+proves all Console clients have exited. No membership query helper, observer,
+Job, process-tree kill or new execution scheduler is added. Missing API support
+is an explicit unsupported result. Frontend admission and final teardown retain
+the broker barrier, separately from each backend's EOF and task completion.
 
 ### Superseded root-run16 implementation record
 

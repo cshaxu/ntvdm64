@@ -18,6 +18,9 @@ mvdm_mouse_bridge *mvdm_softpc_mouse_current(void);
 /* Zero-initialized, worker-owned state. Producer acquires original ICA lock;
  * consumer/EOI calls already hold it. No new task or interrupt scheduler. */
 DWORD mvdm_softpc_mouse_submit(mvdm_mouse_bridge *,const console_mouse_input *);
+/* Single event producer reserves at most this many raw input records before
+ * removal from the frontend. Consumer can only increase available space. */
+DWORD mvdm_softpc_mouse_capacity(mvdm_mouse_bridge *);
 BOOL mvdm_softpc_mouse_pending(const mvdm_mouse_bridge *);
 BOOL mvdm_softpc_mouse_active(const mvdm_mouse_bridge *);
 /* Original CCPU painter reads a synchronized route snapshot, never UI state. */

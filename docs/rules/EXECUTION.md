@@ -108,6 +108,12 @@ never a passing result.
 
 ### Every-P regression and side-test publication gate
 
+Owner-admitted T423 S12 will add ntcon.exe to the seven-file package described
+below. Starting with S12 NTCON production delivery, require one coherent eight-file set;
+all prior regression, recovery and publication gates remain binding. The new
+src/ntcon-exe source directory is expressly authorized; build/ remains the
+only location for new intermediate, staging and test-result directories.
+
 T423's S3 ownership-replanning snapshot remains evidence, not a production P.
 The owner subsequently approved the migration report, S4 implementation and
 automatic sequential admission after S4 delivery. This supersedes the earlier

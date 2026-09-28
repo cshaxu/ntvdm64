@@ -73,8 +73,11 @@ int main(void)
     assert(mvdm_softpc_mouse_active(&s) && !mvdm_softpc_mouse_pending(&s));
     assert(!mvdm_softpc_mouse_active(&other) && !mvdm_softpc_mouse_pending(&other));
     /* Full-queue failure cannot change producer ownership or remainder. */
-    for(i=0;i<MVDM_MOUSE_INPUT_CAPACITY;++i)
+    for(i=0;i<MVDM_MOUSE_INPUT_CAPACITY;++i) {
+        assert(mvdm_softpc_mouse_capacity(&s)==MVDM_MOUSE_INPUT_CAPACITY-i && !locked);
         submit(&s,CONSOLE_MOUSE_MOVE,0,1,0,640,400,ERROR_SUCCESS);
+    }
+    assert(!mvdm_softpc_mouse_capacity(&s) && !locked);
     submit(&s,CONSOLE_MOUSE_LEAVE,0,0,0,0,0,ERROR_BUFFER_OVERFLOW);
     for(i=0;i<MVDM_MOUSE_INPUT_CAPACITY;++i)
         take(&s,CONSOLE_MOUSE_MOVE,0,(int)(i&1),0);
@@ -82,6 +85,11 @@ int main(void)
     take(&s,CONSOLE_MOUSE_LEAVE,0,0,0);mvdm_softpc_mouse_leave(&s);
     assert(!mvdm_softpc_mouse_next(&s,&out));
     submit(&s,CONSOLE_MOUSE_ENTER,0,0,0,640,400,ERROR_SUCCESS);
+    mvdm_softpc_mouse_cancel(&s);
+    assert(s.submitted && s.active && !s.queue.count);
+    submit(&s,CONSOLE_MOUSE_MOVE,2,0,0,640,400,ERROR_SUCCESS);
+    take(&s,CONSOLE_MOUSE_MOVE,2,0,0);
+    submit(&s,CONSOLE_MOUSE_LEAVE,0,0,0,0,0,ERROR_SUCCESS);
     mvdm_softpc_mouse_cancel(&s);
     assert(!memcmp(&s,&other,sizeof(s)));
     puts("PASS relative bridge: scale/remainders, buttons, rapid re-entry, atomic rejection, independent state, cancellation; mocked ICA/IRQ only");

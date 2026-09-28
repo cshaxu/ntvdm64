@@ -1,5 +1,17 @@
 # mvdm
 
+MVDM-HOST-DIV-211 (S11 candidate): the event loop again consumes batches of
+five host records. Scan-less keyboard expansion is moved unchanged into the
+worker's win32/console_compat.c boundary, with a forty-record stack result
+for five worst-case eight-transition keys. Original dispatch, key history,
+mouse IRQ/EOI and guest callbacks remain owners. The owner-added scheduling
+repair removes the per-batch Sleep(10) packing delay and gives the original
+auto-reset suspension event priority over queued input. The alertable wait
+still blocks when idle; the original suspend/resume handshake is unchanged.
+The companion
+ReadConsoleInputExW binding no longer clamps consuming reads to one record.
+See the [S11 ledger](../../docs/etc/evidence/m0-t423-s11-interaction-retirement.md).
+
 MVDM-HOST-DIV-318 (S7 candidate, not delivered): original `nt_event.c`
 dispatches copied Window-relative mouse records through the worker-owned
 bridge; its existing EOI/pending and cancellation boundaries include that

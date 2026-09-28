@@ -22,8 +22,12 @@ foreach($name in @('run16.exe','ntkvm.exe','ntsrv.exe','ntmon.exe')){
 if(@(Get-CimInstance Win32_Process -Filter "Name='ntsrv.exe'").Count){throw 'Broker already active'}
 $oldPrivate=$env:MVDM_OBSERVER_PRIVATE_DESKTOP
 $oldWindow=$env:MVDM_OBSERVER_WINDOW_INPUT
+$oldColumns=$env:MVDM_OBSERVER_BUFFER_COLUMNS
 try {
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
+    # Match the original 120-column native-TUI acceptance buffer. Keep the
+    # physical viewport/font unchanged, including narrow RDP scrollbars.
+    $env:MVDM_OBSERVER_BUFFER_COLUMNS='120'
     foreach($mode in @('console','window')){
         $report=Join-Path $LogRoot "$LogPrefix-$mode.txt"
         if(Test-Path $report){throw 'Use fresh evidence'}
@@ -60,4 +64,5 @@ try {
 } finally {
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP=$oldPrivate
     $env:MVDM_OBSERVER_WINDOW_INPUT=$oldWindow
+    $env:MVDM_OBSERVER_BUFFER_COLUMNS=$oldColumns
 }

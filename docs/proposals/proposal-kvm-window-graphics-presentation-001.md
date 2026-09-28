@@ -1,5 +1,58 @@
 # Console／Window 统一呈现与原生字符执行
 
+## 最新批准：NTCON 独立原生文本后端
+
+S11 鼠标范围已完成编译、生产路径回归及 O:/winnt 七文件发布；详见
+[S11 收口证据](../etc/evidence/m0-t423-s11-interaction-retirement.md)。
+当前停下等待 owner 验证，不自动开始 S12，T423 保持打开。
+
+本节取代下文 S9/S11 的无 helper、每分支 PTY 约束，不改变已发布事实。
+S11 必须先完成鼠标修复及压力验收，不能把鼠标尾项转给 S12。保全研究、
+候选和测试，仅将屏幕交接/退场重组移交新增 S12 NTCON，不宣称这些缺陷
+通过。原保留的 RDP 工作顺延 S13。CURRENT 是唯一 active packet。
+
+- `src/ntcon-exe/ -> ntcon.exe`：一个字符前端会话共用一个原生文本后端，
+  附着真实 Console，提供屏幕/光标/输入/模式及实际成员操作。优先保留
+  ConPTY 传输，不能仅包装管道后声称可读写远端 Console 状态。
+- `ntkvm`：可见 Console、Window、display、输入路由与连续呈现的唯一 owner。
+  后端控制/屏幕交接参照现有 NTVDM 认证连接及复制式协议，不经 NTSRV
+  转发画面。DOS 图形仍走 NTVDM 原始帧路径。
+- `run16`：分类、启动/提交和直接目标结果，不承担终端泵。DOS/native
+  文本同步等待；Win32 GUI 默认创建后返回，Win16 默认 InitTask 通知后
+  返回，保留 --wait。NTCON 的存活不延长 launcher 的直接目标等待。
+- `ntsrv`：认证 NTCON 实例、前端归属、版本、端点和生命周期；复用现有
+  资源转交模式。原生后端记录不能进入原始 DOS/WOW records，不新增调度器。
+- `ntmon`：列出已登记 NTCON 的类型、实例/PID、时间、状态及成员；结束
+  操作关闭该原生 Console 会话，必须确认结果，不能只杀 NTCON 外壳。
+  不递归杀进程树，不影响脱离 Console 的 GUI、其他会话或 DOS worker。
+
+`DDWWDDWW` 同步嵌套链共享一个 NTKVM、一个 NTCON 及原始执行关联下的
+一个 NTVDM；跨 DOS 段不拆 NTCON。GUI 分隔的两段字符链仍建立两个前端。
+普通 native 子进程依 Windows 规则继承 Console；显式新建/脱离仍保留。
+直接目标退出不代表所有 Console 成员退出；后端自身不能计为业务使用者。
+
+### S12 实施与验收清单
+
+- [ ] 审计复用 S8 真实 Console 操作、S9 ConPTY、S11 反例与鼠标候选，
+      逐项登记保留/迁移/删除；不重建已验证算法或恢复旧 frontend owner。
+- [ ] NTCON x86 /MT 正式组件/构建目标；共享 APP_VERSION 和版本拒绝。
+- [ ] 认证登记、原子复用/并发启动、rundown、跨会话拒绝与失效实例拒绝。
+- [ ] run16 原生提交与实际直接目标结果，launcher 提前死亡不杀 target。
+- [ ] NTKVM/NTCON 真实字符、属性、光标和模式交接；固定位置写入、继续
+      当前光标、清屏、滚屏、背景输出、输入边沿不重复及重定向不受影响。
+- [ ] NTMON 列表、正常/异常消失、整个 Console 会话结束、独立会话隔离。
+- [ ] 真实成员保留/退休、启动与关闭竞争、broker/frontend/backend 故障；
+      不以 ConPTY 或 carrier 存活冒充业务成员，也不把 I/O 失败当任务成功。
+- [ ] 回归 S11 已验收鼠标能力；鼠标压力失败必须由 S11 先修复，RDP 留 S13。
+- [ ] DDWWDDWW 和既有两条十二目标链、Console17/Window17、fault、monitor、
+      三个独立 WOW headless 前沿；生产调用者证明，不以 fixture 代替。
+- [ ] 一致八文件构建/验收/备份/发布至 O:/winnt：run16、ntsrv、ntvdm、
+      ntkvm、ntcon、ntmon、WOW32.DLL、VDMREDIR.DLL；文档治理、提交推送。
+
+完成后等待 owner 实测；不自行收口 T。未验证候选不发布；guest/lib 不改。
+新组件目录是 owner 本次显式授权的源码目录例外；中间产物仍仅进 build。
+具体迁移与证据见 [S12 ledger](../etc/evidence/m0-t423-s12-ntcon-backend.md)。
+
 ## 当前方案：独立 frontend.exe（取代根 run16 前端）
 
 迁移报告后 owner 已批准按此方案开始。S3 以成果保全/重规划结论结束，
@@ -137,29 +190,51 @@ S5 扩展验收已交付至 `1fb291a8f`；S6 从最新 nxvm 四组件核验开�
 | S8 | GUI 启动与等待语义：统一 Win16/Win32 GUI 的异步启动与显式等待契约，修复交互命令被 launcher 的全生命周期等待占住的问题；验证可靠启动交接、失败反馈、同步结果及嵌套返回。不修改原始 COMMAND 等待或 BaseSrv/WOW 调度来绕过问题。 |
 | S9 | frontend 迁移到 ConPTY，移除自建隐藏 Console/helper 后端；Console 模式在 conhost/Terminal 保持原有交互，Window 模式让 DOS/native 文本共用字体位图呈现，完成输入、嵌套、切换与生命周期闭环。 |
 | S10 | 删除已替代的旧 root owner/重复分支，核算镜像 diff 与自主代码，完整回归/一致发布，等待 owner 验收，不自行关闭 T。 |
-| S11 | 修复 Window EDIT 鼠标迟缓和真实 ConPTY 使用者退出后的前端自动退场；保留 DOS/native 复用，不将 ConPTY 存活当作仍有成员。 |
-| S12 | 调查和修复 RDP 下捕获后宿主指针可移出 Window 的问题；区分逻辑捕获、物理裁剪和远程输入，不由先前物理验证豁免抵扣。 |
+| S11 | 完成 Window EDIT 鼠标输入批处理、压力与取消/交接修复；编译、回归、发布、提交推送后停下等 owner 验证。 |
+| S12 | 实施开头已批准的 NTCON 独立原生文本后端；承接原生屏幕连续性、真实成员及退场，保持 S11 鼠标回归。等待 owner 通知，不自动开始。 |
+| S13 | 调查和修复 RDP 下捕获后宿主指针可移出 Window 的问题；区分逻辑捕获、物理裁剪和远程输入，不由先前物理验证豁免抵扣。 |
 
 ### Owner 增补：清理交付与实测修复分离
 
-Owner 最新指令：先完成 S10 清理收口及提交推送，再准入 S11 实施两项
+以下是此前准入记录，已由开头 NTCON 规划及上表取代，不是当前 S11 退出标准。
+当时 owner 指令：先完成 S10 清理收口及提交推送，再准入 S11 实施两项
 修复；RDP 指针问题留给 S12。取代此前“先准入 S11 然后等待”的指令。
 S10 的已完成清理与已通过证据保留；未通过的 Window 文本连续性检查、
 实测缺陷不得写成通过。未完整验证的候选不为收口而覆盖 O:/winnt。
 本 T 保持打开，不能以 S10 清理收口代替产品验收。
 
-S11 checklist：
+历史 S11 checklist（保留未通过项；原生部分重规划至 S12，不勾选为通过）：
+
+- 已准入 ntkvm 独占连续屏幕的有界原型：各 ConPTY 保留自身解析状态，
+  DOS/native 更新统一可见屏幕。不改 run16、不加 helper；验证嵌套返回、
+  滚屏、长行/退格/历史重绘、清屏、定位绘制与鼠标反向坐标。
+  不依靠程序名、提示符或猜测应用意图修补。原生后台屏幕读取差异单列；
+  不能把原型通过当成正式包通过。若完整交接必须靠应用特判，停止该路线。
+  原型结果：普通流式合成有通过证据，但真实 ConPTY 对照证明“继续当前光标”
+  与“固定位置写入”可产生完全相同的输出流，在原始共享屏幕下却需不同位置。
+  因而通用原语义目标未通过；保留反例，不扩大程序特判、不发布该原型。
+
+- 返回外层时保留同一屏幕的连续输出；禁止恢复各 PTY 的旧屏幕。后端资源独立不代表用户页面独立。必须验证光标、绝对定位输出、滚屏与嵌套返回，不得仅复制前端缓存后宣称完成。
 
 - [ ] EDIT 鼠标迟缓：核对原始 OpenNT、备份分支与当前输入链。owner 提供
       nt_event.c 单条读取、Sleep(10) 和 IPC 额外开销的初步证据；先测量
       队列积压、投递和 guest 消费延迟，不将它直接认定为唯一根因。
       最小修复不得丢失按键边沿、制造假点击或饿死键盘；不恢复 worker UI。
-- [ ] 区分 ConPTY 存活、直接请求完成、真实附着进程。保留一个 ntkvm
-      一个 ConPTY，CMD 返回 DOS 不关闭、不重建它；不能只删 members guard。
-      选定可验证的真实成员查询方案，不把后代枚举当 Console 成员。
+- [ ] Owner 最新批准取代整个 frontend 永久复用一个 ConPTY：每个独立
+      Win32 文本启动分支创建自己的 ConPTY；普通 CMD 直接启动 CMD 等子进程
+      通过 Windows 继承原 Console。Win32-A -> DOS -> Win32-B 同时保留 A/B
+      两个后端，但 ntkvm 唯一可见前端只选择一个当前交互对象。DOS 仍走
+      worker 原始 I/O；不得销毁仍等待 DOS 返回的外层 PTY。
+- [ ] 首个客户端成功附着后释放对应 HPCON 保活引用；不再通过已释放的
+      HPCON 启动独立分支。Windows 在最后一个附着客户端离开后产生 EOF；
+      保留输出读取直到排空，最后 ClosePseudoConsole。API 缺失明确失败，
+      不回退为直接子进程计数、不加查询进程或 Job、不使用私有 Console 协议。
 - [ ] 退场条件同时满足：无待处理启动、无活动 DOS task、无未结束的
       直接 Win32 请求、无其他仍附着 ConPTY 的程序；与新启动同步地停止
-      接收请求，再关闭 ConPTY 和 Window。查询失败不能冒充零成员。
+      接收请求，再关闭已结束的后端和 Window。I/O 故障不能冒充正常 EOF。
+- [ ] 验证 W-A -> DOS -> W-B -> W-C：A/B 为独立 PTY、C 继承 B；逐层
+      返回、退出码、后台输出隔离及输入归属正确。外层存活期间不强杀 A。
+      分支有仍附着后代时保留，脱离 Console 的独立程序不阻止 EOF。
 - [ ] 实测 COMMAND → CMD → exit → DOS → exit 正常关窗；CMD 留下仍
       使用终端的子程序时保留窗口，子程序真正退出后自动关窗。覆盖并发
       新启动、断连和独立会话不受影响。继续核对 S10 的退出画面连续性问题，

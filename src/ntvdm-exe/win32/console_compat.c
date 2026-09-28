@@ -11,6 +11,8 @@
 #include "conapi.h"
 #include "ntvdm-exe/session/session.h"
 #include "console_client.h"
+#include "console_input.h"
+#include "ntvdm-exe/softpc/mvdm_softpc_mouse_bridge.h"
 #include "product-abi/console_io.h"
 
 
@@ -302,39 +304,195 @@ static BOOL consume_console_alt_enter(PINPUT_RECORD record)
 BOOL WINAPI ReadConsoleInputExW(HANDLE input, PINPUT_RECORD records, DWORD count,
                                 LPDWORD read, USHORT flags)
 {
-    DWORD available;
+    DWORD available, index, kept;
     INPUT_RECORD raw_record;
     if ((flags & ~CONSOLE_READ_VALID) != 0u) { SetLastError(ERROR_INVALID_PARAMETER); return FALSE; }
     if (count == 0u)
         return (flags & CONSOLE_READ_NOREMOVE) != 0u ?
             PeekConsoleInputW(input, records, count, read) :
             ReadConsoleInputW(input, records, count, read);
+    if (!records || !read) { SetLastError(ERROR_INVALID_PARAMETER); return FALSE; }
+    *read = 0u;
     for (;;) {
-        /* Peek tests the same public queue as Read.  Do not use the old
-         * GetNumberOfConsoleInputEvents/Read pair: it races a queue change. */
         if ((flags & (CONSOLE_READ_NOWAIT | CONSOLE_READ_NOREMOVE)) != 0u) {
             if (!PeekConsoleInputW(input, &raw_record, 1u, &available)) return FALSE;
-            if (available == 0u) { if (read != NULL) *read = 0u; return TRUE; }
-            if (!consume_console_alt_enter(&raw_record)) {
-                if ((flags & CONSOLE_READ_NOREMOVE) != 0u) {
+            if (available == 0u) return TRUE;
+            /* Preserve the existing non-removing shortcut contract. Normal
+             * consuming reads below pass the full caller capacity through. */
+            if ((flags & CONSOLE_READ_NOREMOVE) != 0u) {
+                if (!consume_console_alt_enter(&raw_record)) {
                     records[0] = raw_record;
-                    if (read != NULL) *read = 1u;
+                    *read = 1u;
                     return TRUE;
                 }
-                if (!ReadConsoleInputW(input, records, 1u, read)) return FALSE;
-                return TRUE;
+                if (!ReadConsoleInputW(input, &raw_record, 1u, &available)) return FALSE;
+                continue;
             }
-            /* The reserved host shortcut must be removed even for NOREMOVE:
-             * the original server had already consumed it before this API. */
-            if (!ReadConsoleInputW(input, &raw_record, 1u, &available)) return FALSE;
-            continue;
         }
-        if (!ReadConsoleInputW(input, &raw_record, 1u, &available)) return FALSE;
-        if (available == 0u || consume_console_alt_enter(&raw_record)) continue;
-        records[0] = raw_record;
-        if (read != NULL) *read = 1u;
-        return TRUE;
+        if (!ReadConsoleInputW(input, records, count, &available)) return FALSE;
+        for (index = kept = 0u; index < available; ++index)
+            if (!consume_console_alt_enter(&records[index]))
+                records[kept++] = records[index];
+        if (kept) { *read = kept; return TRUE; }
     }
+}
+
+/* DIVERGENCE(MVDM-HOST-DIV-211): current Console/RDP may report a virtual
+ * key or UTF-16 character without the PC Scan-1 byte that the original
+ * SoftPC input worker passes to KeyMsgToKeyCode. Normalize only at that
+ * host boundary: the original table still selects the SoftPC key number and
+ * keyba.c remains the only guest keyboard-controller owner. */
+static WORD nt_rdp_decode_scan(WORD raw_scan)
+{
+    return (raw_scan & 0xff00u) == 0xe000u ?
+        (WORD)(0x0100u | (raw_scan & 0x00ffu)) :
+        (WORD)(raw_scan & 0x00ffu);
+}
+
+static WORD nt_rdp_resolve_scan(WORD virtual_key)
+{
+    return nt_rdp_decode_scan((WORD)MapVirtualKeyExW(virtual_key,
+        MAPVK_VK_TO_VSC_EX, GetKeyboardLayout(0u)));
+}
+
+static DWORD nt_rdp_emit_transition(PINPUT_RECORD records, DWORD capacity,
+    DWORD count, WCHAR character, WORD scan, WORD virtual_key,
+    DWORD control_state, BOOL down)
+{
+    KEY_EVENT_RECORD *key;
+    if (count >= capacity || scan == 0u || virtual_key == 0u) return 0u;
+    records[count].EventType = KEY_EVENT;
+    key = &records[count].Event.KeyEvent;
+    ZeroMemory(key, sizeof(*key));
+    key->bKeyDown = down;
+    key->wRepeatCount = 1u;
+    key->wVirtualKeyCode = virtual_key;
+    key->wVirtualScanCode = (WORD)(scan & 0xffu);
+    key->uChar.UnicodeChar = character;
+    key->dwControlKeyState = control_state;
+    if ((scan & 0x0100u) != 0u) key->dwControlKeyState |= ENHANCED_KEY;
+    return count + 1u;
+}
+
+static DWORD nt_rdp_normalize_key(const KEY_EVENT_RECORD *input,
+    PINPUT_RECORD output, DWORD capacity)
+{
+    KEY_EVENT_RECORD key;
+    WORD scan;
+    WORD virtual_key;
+    SHORT mapped;
+    BYTE key_flags;
+    CHAR oem_character;
+    CHAR digit_text[4];
+    CHAR *digit;
+    DWORD control_state;
+    DWORD count = 0u;
+
+    if (input == NULL || output == NULL || capacity == 0u) return 0u;
+    key = *input;
+    if (key.wVirtualScanCode != 0u) {
+        output[0].EventType = KEY_EVENT;
+        output[0].Event.KeyEvent = key;
+        return 1u;
+    }
+    if (key.wVirtualKeyCode != 0u && key.wVirtualKeyCode != VK_PACKET) {
+        scan = nt_rdp_resolve_scan(key.wVirtualKeyCode);
+        if (scan == 0u) return 0u;
+        key.wVirtualScanCode = (WORD)(scan & 0xffu);
+        if ((scan & 0x0100u) != 0u) key.dwControlKeyState |= ENHANCED_KEY;
+        output[0].EventType = KEY_EVENT;
+        output[0].Event.KeyEvent = key;
+        return 1u;
+    }
+    if (!key.bKeyDown || key.uChar.UnicodeChar == 0u) return 0u;
+    /* DoStringPaste is UTF-16 too.  A surrogate is not an independently
+     * representable PC key, so retain the original worker's one-WCHAR input
+     * boundary rather than inventing a Unicode code-point keyboard. */
+    if (key.uChar.UnicodeChar >= 0xd800u && key.uChar.UnicodeChar <= 0xdfffu)
+        return 0u;
+    mapped = VkKeyScanExW(key.uChar.UnicodeChar, GetKeyboardLayout(0u));
+    if (mapped == -1) {
+        /* Source owner: ntcon/server/clipbrd.c::DoStringPaste.  Its OEM
+         * numeric-keypad fallback is the only representable route for a
+         * character outside the active keyboard layout. */
+        if (WideCharToMultiByte(GetConsoleOutputCP(), 0,
+                &key.uChar.UnicodeChar, 1, &oem_character, 1, NULL, NULL) != 1)
+            return 0u;
+        _itoa((unsigned char)oem_character, digit_text, 10);
+        if ((count = nt_rdp_emit_transition(output, capacity, count, 0,
+                0x38u, VK_MENU, LEFT_ALT_PRESSED, TRUE)) == 0u) return 0u;
+        for (digit = digit_text; *digit != '\0'; ++digit) {
+            virtual_key = (WORD)(*digit - '0' + VK_NUMPAD0);
+            scan = nt_rdp_resolve_scan(virtual_key);
+            if ((count = nt_rdp_emit_transition(output, capacity, count, 0,
+                    scan, virtual_key, LEFT_ALT_PRESSED, TRUE)) == 0u ||
+                (count = nt_rdp_emit_transition(output, capacity, count, 0,
+                    scan, virtual_key, LEFT_ALT_PRESSED, FALSE)) == 0u)
+                return 0u;
+        }
+        return nt_rdp_emit_transition(output, capacity, count,
+            key.uChar.UnicodeChar, 0x38u, VK_MENU, 0u, FALSE);
+    }
+    virtual_key = (WORD)(mapped & 0xffu);
+    scan = nt_rdp_resolve_scan(virtual_key);
+    if (scan == 0u) return 0u;
+    key_flags = (BYTE)((mapped >> 8u) & 0xffu);
+    if ((key_flags & 6u) == 6u) {
+        if ((count = nt_rdp_emit_transition(output, capacity, count,
+            0, 0x38u, VK_MENU,
+            ENHANCED_KEY | LEFT_CTRL_PRESSED | RIGHT_ALT_PRESSED, TRUE)) == 0u)
+            return 0u;
+    } else if ((key_flags & 1u) != 0u &&
+        (count = nt_rdp_emit_transition(output, capacity, count,
+            0, 0x2au, VK_SHIFT, SHIFT_PRESSED, TRUE)) == 0u) return 0u;
+    control_state = 0u;
+    if ((key_flags & 1u) != 0u) control_state |= SHIFT_PRESSED;
+    if ((key_flags & 2u) != 0u) control_state |= LEFT_CTRL_PRESSED;
+    if ((key_flags & 4u) != 0u) control_state |= RIGHT_ALT_PRESSED;
+    if ((count = nt_rdp_emit_transition(output, capacity, count,
+            key.uChar.UnicodeChar, scan, virtual_key, control_state, TRUE)) == 0u ||
+        (count = nt_rdp_emit_transition(output, capacity, count,
+            key.uChar.UnicodeChar, scan, virtual_key, control_state, FALSE)) == 0u)
+        return 0u;
+    if ((key_flags & 6u) == 6u)
+        return nt_rdp_emit_transition(output, capacity, count,
+            0, 0x38u, VK_MENU, ENHANCED_KEY, FALSE);
+    if ((key_flags & 1u) != 0u &&
+        (count = nt_rdp_emit_transition(output, capacity, count,
+            0, 0x2au, VK_SHIFT, 0u, FALSE)) == 0u) return 0u;
+    return count;
+}
+
+BOOL ntvdm_console_read_pc_input(HANDLE input, PINPUT_RECORD records,
+    DWORD capacity, LPDWORD read, USHORT flags)
+{
+    INPUT_RECORD raw[5];
+    DWORD available, index, used = 0u, limit;
+    /* Validate before consuming: every raw record can expand to eight keys.
+     * One bounded batch, no hidden carry queue across DOS/native handoff. */
+    if (!records || !read || capacity < NTVDM_PC_INPUT_RECORDS ||
+        (flags & CONSOLE_READ_NOREMOVE) != 0u) {
+        SetLastError(ERROR_INVALID_PARAMETER);
+        return FALSE;
+    }
+    *read = 0u;
+    /* Bound removal by downstream capacity, not by a fixed per-event delay.
+     * At most one relative sample is produced per raw record. On pressure,
+     * leave ALL input in its original queue and return to nt_event_loop so
+     * its original suspend/APC handling remains reachable. Never wait while
+     * holding ICA or drop/merge motion across a button or direction change. */
+    limit=min((DWORD)ARRAYSIZE(raw),mvdm_softpc_mouse_capacity(mvdm_softpc_mouse_current()));
+    if (!limit) { Sleep(1); return TRUE; }
+    if (!ReadConsoleInputExW(input, raw, limit, &available, flags))
+        return FALSE;
+    for (index = 0u; index < available; ++index) {
+        if (raw[index].EventType == KEY_EVENT)
+            used += nt_rdp_normalize_key(&raw[index].Event.KeyEvent,
+                records + used, capacity - used);
+        else records[used++] = raw[index];
+    }
+    *read = used;
+    return TRUE;
 }
 
 BOOL WINAPI WriteConsoleInputVDMW(HANDLE input, PINPUT_RECORD records, DWORD count,

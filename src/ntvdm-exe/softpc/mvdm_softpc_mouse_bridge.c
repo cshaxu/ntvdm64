@@ -8,6 +8,17 @@ extern void host_ica_unlock(void);
 extern void DoMouseInterrupt(void);
 extern unsigned short VirtualX,VirtualY;
 
+DWORD mvdm_softpc_mouse_capacity(mvdm_mouse_bridge *state)
+{
+    DWORD capacity=MVDM_MOUSE_INPUT_CAPACITY;
+    if(state) {
+        host_ica_lock();
+        capacity-=state->queue.count;
+        host_ica_unlock();
+    }
+    return capacity;
+}
+
 DWORD mvdm_softpc_mouse_submit(mvdm_mouse_bridge *state,const console_mouse_input *input)
 {
     mvdm_mouse_input_sample sample={0};DWORD error=ERROR_SUCCESS;
@@ -62,5 +73,13 @@ void mvdm_softpc_mouse_leave(mvdm_mouse_bridge *state)
 { if(state)state->active=FALSE; }
 void mvdm_softpc_mouse_cancel(mvdm_mouse_bridge *state)
 {
-    if(state)ZeroMemory(state,sizeof(*state));
+    if(state) {
+        BOOL submitted=state->submitted;
+        /* Original IRQ cancellation discards pending input, not the frontend
+         * connection. Its already accepted ENTER/LEAVE still determines the
+         * route of records that remain upstream. Clear deltas/buttons without
+         * requiring the frontend to send a second ENTER after a guest reset. */
+        ZeroMemory(state,sizeof(*state));
+        state->submitted=state->active=submitted;
+    }
 }

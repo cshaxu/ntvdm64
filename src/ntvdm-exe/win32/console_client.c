@@ -371,6 +371,12 @@ static DWORD console_activate(console_client *client,BOOL active)
     client->request.state.input=active!=FALSE;
     error=exchange(client,&reply);
     if(!error && !reply.result)error=reply.error ? reply.error : ERROR_GEN_FAILURE;
+    /* Unlike IRQ cancellation, successful DOS ownership handoff retires the
+     * frontend's DOS mouse route and discards its copied relative records.
+     * Original nt_block_event_thread has quiesced the event/timer producers
+     * before this call. Match that acknowledged retirement locally; the next
+     * DOS activation will receive a fresh ENTER. Never reset on failed RPC. */
+    if(!error && !active)ZeroMemory(&client->mouse,sizeof(client->mouse));
     LeaveCriticalSection(&client->lock);
     return error;
 }

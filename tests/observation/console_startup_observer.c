@@ -15,6 +15,8 @@
 #include "console_snapshot.h"
 
 static char control_event_report[MAX_PATH];
+static ULONGLONG mouse_burst_started;
+static DWORD mouse_burst_elapsed;
 static BOOL CALLBACK report_timeout_control(HWND window, LPARAM context)
 {
     FILE *report=(FILE *)context;
@@ -1017,7 +1019,8 @@ done:
 static BOOL window_mouse_probe(const char *package,const char *report_path)
 {
     char desktop[96],dll[MAX_PATH],path[MAX_PATH],image[MAX_PATH],expected[MAX_PATH];
-    DWORD needed,pid=0,thread=0,length=MAX_PATH,mode;
+    DWORD needed,pid=0,thread=0,length=MAX_PATH,mode,burst=0,index;
+    char burst_text[16];
     HWND window=NULL;HANDLE process=NULL;HMODULE module=NULL;HHOOK hook=NULL;
     HOOKPROC procedure;FILE *report=NULL;BOOL ok=FALSE;ULONGLONG deadline;
     if(!GetEnvironmentVariableA("MVDM_OBSERVER_MOUSE_HOOK",dll,sizeof(dll)))return FALSE;
@@ -1054,6 +1057,16 @@ static BOOL window_mouse_probe(const char *package,const char *report_path)
     /* Probe settles for 40 BIOS ticks before installing its callback. */
     Sleep(3500);
     mode=GetEnvironmentVariableA("MVDM_OBSERVER_MOUSE_RETIRE",NULL,0) ? 0x80000000u : 0;
+    if(GetEnvironmentVariableA("MVDM_OBSERVER_MOUSE_BURST",burst_text,sizeof(burst_text))) {
+        burst=strtoul(burst_text,NULL,10);
+        if(!burst || burst>1000 || (burst&1))goto done;
+        mouse_burst_started=GetTickCount64();
+        /* Alternating motion has zero net displacement but cannot be treated
+         * as a single click. Larger runs deliberately stress the worker FIFO;
+         * overflow/fault is a failure, never a reason to lower the assertion. */
+        for(index=0;index<burst;++index)
+            if(!PostMessageW(window,WM_APP+0x5f0,0,MAKELPARAM((index&1) ? -1 : 1,0)))goto done;
+    }
     if(!PostMessageW(window,WM_APP+0x5f0,0,MAKELPARAM(16,8)))goto done;
     Sleep(250);
     if(!PostMessageW(window,WM_APP+0x5f0,1,0))goto done;
@@ -1061,6 +1074,7 @@ static BOOL window_mouse_probe(const char *package,const char *report_path)
     if(!PostMessageW(window,WM_APP+0x5f0,mode,0))goto done;
     Sleep(300);ok=TRUE;
 done:
+    fprintf(report,"burst-records=%lu\n",burst);
     fprintf(report,"frontend=%lu thread=%lu posted=%s error=%lu\n",pid,thread,ok ? "pass" : "fail",GetLastError());
     if(hook)UnhookWindowsHookEx(hook);if(module)FreeLibrary(module);if(process)CloseHandle(process);
     if(fclose(report)!=0)ok=FALSE;return ok;
@@ -1190,6 +1204,21 @@ int main(int argc, char **argv)
     if (input == INVALID_HANDLE_VALUE || output == INVALID_HANDLE_VALUE) return 66;
 
     clear_console(output);
+    /* Explicit native-TUI baseline geometry on a disposable private Console.
+     * Keep the real viewport/font: a narrow RDP desktop uses its scrollbar.
+     * Never confuse a wrapped readiness marker with product completion. */
+    {
+        char columns[16],*end;DWORD length;
+        length=GetEnvironmentVariableA("MVDM_OBSERVER_BUFFER_COLUMNS",columns,sizeof(columns));
+        if(length) {
+            unsigned long width;CONSOLE_SCREEN_BUFFER_INFO info;
+            if(length>=sizeof(columns))return 93;
+            width=strtoul(columns,&end,10);
+            if(!width || *end || width>32767 || !GetConsoleScreenBufferInfo(output,&info))return 93;
+            info.dwSize.X=(SHORT)width;
+            if(!SetConsoleScreenBufferSize(output,info.dwSize))return 93;
+        }
+    }
     /* Reproduce the previously failing short-window/history profile with
      * observed native geometry, never silently accept a failed resize. */
     if (GetEnvironmentVariableA("MVDM_OBSERVER_SHORT_HISTORY", NULL, 0)) {
@@ -1590,6 +1619,7 @@ int main(int argc, char **argv)
     observation_wait_ms = observation_elapsed_ms >= observation_timeout_ms ? 0u :
         observation_timeout_ms - observation_elapsed_ms;
     wait_status = WaitForSingleObject(child.hProcess, observation_wait_ms);
+    if(mouse_burst_started)mouse_burst_elapsed=(DWORD)(GetTickCount64()-mouse_burst_started);
     capture_process_image(child.dwProcessId, &image_identity);
     if (wait_status == WAIT_TIMEOUT) {
         /* Preserve peer state before terminating the launcher: its death can
@@ -1650,6 +1680,7 @@ int main(int argc, char **argv)
         fprintf(report, "pid=%lu\n", (unsigned long)child.dwProcessId);
         fprintf(report, "result=%s\n", wait_status == WAIT_TIMEOUT ? "timeout" : "exited");
         fprintf(report, "exit=0x%08lx\n", (unsigned long)exit_code);
+        if(mouse_burst_started)fprintf(report,"mouse-burst-to-target-exit-ms=%lu\n",mouse_burst_elapsed);
         fprintf(report,"graphics-handshake=%s\n",graphics_handshake ?
             (graphics_handshake_ok ? "pass" : "fail") : "none");
         fprintf(report, "post-exit-observation-ms=%lu\n", post_exit_observation_ms);

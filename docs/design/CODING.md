@@ -12,6 +12,7 @@ src/
   ntsrv-exe/
   ntvdm-exe/
   ntkvm-exe/
+  ntcon-exe/
   ntmon-exe/
   wow32-dll/
   vdmredir-dll/
@@ -35,10 +36,21 @@ or runtime input.
 
 ## Executable-owned transition
 
+The latest admitted NTCON replacement supersedes the historical S9/S11 owner
+description below. src/ntcon-exe owns the attached native Console backend and
+produces ntcon.exe. NTKVM keeps visible UI, ConPTY transport/terminal parsing
+and route selection; run16 keeps launcher duties. NTSRV owns authenticated
+backend registration/client protocol and NTMON consumes that management view.
+No original DOS/WOW record or generic compatibility root is introduced.
+
 `src/ntkvm-exe/ -> ntkvm.exe` owns visible Console, Window/display and the
 I/O service. S9 replaces its earlier hidden-Console/helper implementation
 with one frontend-owned ConPTY retained across native targets and DOS
-intervals. run16 links only the finite frontend client, never the renderer or
+intervals in the published baseline. The superseded S11 prototype keeps a
+backend per independent native branch, with ordinary children inheriting that
+branch's Console and Windows-owned last-client EOF. All such resources remain
+ntkvm-owned; one frontend still selects the interactive endpoint.
+run16 links only the finite frontend client, never the renderer or
 input pump. No project helper or second backend is retained in the S9 graph.
 Do not duplicate renderers or introduce a common library. Status distinguishes
 the source candidate from the published package; layout is not acceptance.

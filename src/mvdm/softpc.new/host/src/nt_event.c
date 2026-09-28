@@ -145,131 +145,9 @@ void nt_process_menu(PMENU_EVENT_RECORD MenuEvent);
 void nt_process_suspend_event();
 void nt_process_screen_scale(void);
 
-/* DIVERGENCE(MVDM-HOST-DIV-211): current Console/RDP may report a virtual
- * key or UTF-16 character without the PC Scan-1 byte that the original
- * SoftPC input worker passes to KeyMsgToKeyCode. Normalize only at that
- * host boundary: the original table still selects the SoftPC key number and
- * keyba.c remains the only guest keyboard-controller owner. */
-static WORD nt_rdp_decode_scan(WORD raw_scan)
-{
-    return (raw_scan & 0xff00u) == 0xe000u ?
-        (WORD)(0x0100u | (raw_scan & 0x00ffu)) :
-        (WORD)(raw_scan & 0x00ffu);
-}
-
-static WORD nt_rdp_resolve_scan(WORD virtual_key)
-{
-    return nt_rdp_decode_scan((WORD)MapVirtualKeyExW(virtual_key,
-        MAPVK_VK_TO_VSC_EX, GetKeyboardLayout(0u)));
-}
-
-static DWORD nt_rdp_emit_transition(PINPUT_RECORD records, DWORD capacity,
-    DWORD count, WCHAR character, WORD scan, WORD virtual_key,
-    DWORD control_state, BOOL down)
-{
-    KEY_EVENT_RECORD *key;
-    if (count >= capacity || scan == 0u || virtual_key == 0u) return 0u;
-    records[count].EventType = KEY_EVENT;
-    key = &records[count].Event.KeyEvent;
-    ZeroMemory(key, sizeof(*key));
-    key->bKeyDown = down;
-    key->wRepeatCount = 1u;
-    key->wVirtualKeyCode = virtual_key;
-    key->wVirtualScanCode = (WORD)(scan & 0xffu);
-    key->uChar.UnicodeChar = character;
-    key->dwControlKeyState = control_state;
-    if ((scan & 0x0100u) != 0u) key->dwControlKeyState |= ENHANCED_KEY;
-    return count + 1u;
-}
-
-static DWORD nt_rdp_normalize_key(const KEY_EVENT_RECORD *input,
-    PINPUT_RECORD output, DWORD capacity)
-{
-    KEY_EVENT_RECORD key;
-    WORD scan;
-    WORD virtual_key;
-    SHORT mapped;
-    BYTE key_flags;
-    CHAR oem_character;
-    CHAR digit_text[4];
-    CHAR *digit;
-    DWORD control_state;
-    DWORD count = 0u;
-
-    if (input == NULL || output == NULL || capacity == 0u) return 0u;
-    key = *input;
-    if (key.wVirtualScanCode != 0u) {
-        output[0].EventType = KEY_EVENT;
-        output[0].Event.KeyEvent = key;
-        return 1u;
-    }
-    if (key.wVirtualKeyCode != 0u && key.wVirtualKeyCode != VK_PACKET) {
-        scan = nt_rdp_resolve_scan(key.wVirtualKeyCode);
-        if (scan == 0u) return 0u;
-        key.wVirtualScanCode = (WORD)(scan & 0xffu);
-        if ((scan & 0x0100u) != 0u) key.dwControlKeyState |= ENHANCED_KEY;
-        output[0].EventType = KEY_EVENT;
-        output[0].Event.KeyEvent = key;
-        return 1u;
-    }
-    if (!key.bKeyDown || key.uChar.UnicodeChar == 0u) return 0u;
-    /* DoStringPaste is UTF-16 too.  A surrogate is not an independently
-     * representable PC key, so retain the original worker's one-WCHAR input
-     * boundary rather than inventing a Unicode code-point keyboard. */
-    if (key.uChar.UnicodeChar >= 0xd800u && key.uChar.UnicodeChar <= 0xdfffu)
-        return 0u;
-    mapped = VkKeyScanExW(key.uChar.UnicodeChar, GetKeyboardLayout(0u));
-    if (mapped == -1) {
-        /* Source owner: ntcon/server/clipbrd.c::DoStringPaste.  Its OEM
-         * numeric-keypad fallback is the only representable route for a
-         * character outside the active keyboard layout. */
-        if (WideCharToMultiByte(GetConsoleOutputCP(), 0,
-                &key.uChar.UnicodeChar, 1, &oem_character, 1, NULL, NULL) != 1)
-            return 0u;
-        _itoa((unsigned char)oem_character, digit_text, 10);
-        if ((count = nt_rdp_emit_transition(output, capacity, count, 0,
-                0x38u, VK_MENU, LEFT_ALT_PRESSED, TRUE)) == 0u) return 0u;
-        for (digit = digit_text; *digit != '\0'; ++digit) {
-            virtual_key = (WORD)(*digit - '0' + VK_NUMPAD0);
-            scan = nt_rdp_resolve_scan(virtual_key);
-            if ((count = nt_rdp_emit_transition(output, capacity, count, 0,
-                    scan, virtual_key, LEFT_ALT_PRESSED, TRUE)) == 0u ||
-                (count = nt_rdp_emit_transition(output, capacity, count, 0,
-                    scan, virtual_key, LEFT_ALT_PRESSED, FALSE)) == 0u)
-                return 0u;
-        }
-        return nt_rdp_emit_transition(output, capacity, count,
-            key.uChar.UnicodeChar, 0x38u, VK_MENU, 0u, FALSE);
-    }
-    virtual_key = (WORD)(mapped & 0xffu);
-    scan = nt_rdp_resolve_scan(virtual_key);
-    if (scan == 0u) return 0u;
-    key_flags = (BYTE)((mapped >> 8u) & 0xffu);
-    if ((key_flags & 6u) == 6u) {
-        if ((count = nt_rdp_emit_transition(output, capacity, count,
-            0, 0x38u, VK_MENU,
-            ENHANCED_KEY | LEFT_CTRL_PRESSED | RIGHT_ALT_PRESSED, TRUE)) == 0u)
-            return 0u;
-    } else if ((key_flags & 1u) != 0u &&
-        (count = nt_rdp_emit_transition(output, capacity, count,
-            0, 0x2au, VK_SHIFT, SHIFT_PRESSED, TRUE)) == 0u) return 0u;
-    control_state = 0u;
-    if ((key_flags & 1u) != 0u) control_state |= SHIFT_PRESSED;
-    if ((key_flags & 2u) != 0u) control_state |= LEFT_CTRL_PRESSED;
-    if ((key_flags & 4u) != 0u) control_state |= RIGHT_ALT_PRESSED;
-    if ((count = nt_rdp_emit_transition(output, capacity, count,
-            key.uChar.UnicodeChar, scan, virtual_key, control_state, TRUE)) == 0u ||
-        (count = nt_rdp_emit_transition(output, capacity, count,
-            key.uChar.UnicodeChar, scan, virtual_key, control_state, FALSE)) == 0u)
-        return 0u;
-    if ((key_flags & 6u) == 6u)
-        return nt_rdp_emit_transition(output, capacity, count,
-            0, 0x38u, VK_MENU, ENHANCED_KEY, FALSE);
-    if ((key_flags & 1u) != 0u &&
-        (count = nt_rdp_emit_transition(output, capacity, count,
-            0, 0x2au, VK_SHIFT, 0u, FALSE)) == 0u) return 0u;
-    return count;
-}
+/* DIVERGENCE(MVDM-HOST-DIV-211): bounded host-key normalization retains
+ * original batching; its modern Console boundary is worker-owned. */
+#include "ntvdm-exe/win32/console_input.h"
 
 //
 // keyboard control state syncronization
@@ -492,17 +370,16 @@ DWORD nt_event_loop(void)
      * con server as Five records. See ntcon\client\iostubs.c.
      */
 
-    /* A scan-less UTF-16 packet can become Ctrl/Alt/Shift plus a key
-     * make/break sequence. Read one raw record so that this fixed local
-     * expansion preserves console ordering without a second queue. */
-    INPUT_RECORD InputRecord[8];
+    INPUT_RECORD InputRecord[NTVDM_PC_INPUT_RECORDS];
 
 
     /* the console input handle shouldn't get changed during the lifetime
        of the ntvdm
     */
-    Events[0] = GetConsoleInputWaitHandle(); ////sc.InputHandle
-    Events[1] = hConsoleSuspend;
+    /* DIVERGENCE(MVDM-HOST-DIV-211): service suspension before queued
+     * input when both are ready, including under continuous mouse traffic. */
+    Events[0] = hConsoleSuspend;
+    Events[1] = GetConsoleInputWaitHandle(); ////sc.InputHandle
     /*:::::::::::::::::::::::::::::::::::::::::::::: Get and process events */
 
     while (TRUE) {
@@ -522,22 +399,14 @@ DWORD nt_event_loop(void)
             // waiting (otherwise we may get blocked and be unable to
             // handle the suspend event).
             //
-        if (!status) {
-            if (ReadConsoleInputExW(sc.InputHandle,
+        if (status == 1) {
+            if (ntvdm_console_read_pc_input(sc.InputHandle,
                                     &InputRecord[0],
-                                    1u,
+                                    sizeof(InputRecord)/sizeof(INPUT_RECORD),
                                     &RecordsRead,
                                     CONSOLE_READ_NOWAIT
                                     ))
               {
-                if (!RecordsRead) {
-                    continue;
-                    }
-
-                if (InputRecord[0].EventType == KEY_EVENT)
-                    RecordsRead = nt_rdp_normalize_key(
-                        &InputRecord[0].Event.KeyEvent, &InputRecord[0],
-                        sizeof(InputRecord)/sizeof(INPUT_RECORD));
                 if (!RecordsRead) {
                     continue;
                     }
@@ -553,7 +422,7 @@ DWORD nt_event_loop(void)
            //
            // Console Suspend event was signaled
            //
-        else if (status == 1) {
+        else if (!status) {
             nt_process_suspend_event();
             continue;
             }
@@ -635,11 +504,9 @@ DWORD nt_event_loop(void)
               }
            }
 
-        //
-        // encourage the console to pack events together
-        //
-
-        Sleep(10);
+        /* DIVERGENCE(MVDM-HOST-DIV-211): consume queued batches without
+         * the original Console packing delay. The alertable wait above
+         * blocks when idle and checks suspension before the next batch. */
 
         }
 

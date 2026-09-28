@@ -4,6 +4,7 @@
  * stubbed; both I/O implementations and Console operations are real. */
 #include "ntvdm-exe/win32/console_client.h"
 #include "ntvdm-exe/win32/console_text.h"
+#include "ntvdm-exe/softpc/mvdm_softpc_mouse_bridge.h"
 #include "ntkvm-exe/console_frontend.h"
 static BOOL native_write_cells(HANDLE output,const CHAR_INFO *buffer,COORD size,
     COORD origin,PSMALL_RECT region) { return WriteConsoleOutputW(output,buffer,size,origin,region); }
@@ -43,11 +44,13 @@ static session_teardown_fn cleanup;
 static void *cleanup_context;
 static run16_console_frontend frontend;
 static BOOL dos_active;
+static DWORD bind_error;
 static BOOL text_required;
 static BOOL require_text(void *context) { (void)context;return text_required; }
 static DWORD bind_dos(void *context,BOOL active)
 {
-    (void)context;dos_active=active;return ERROR_SUCCESS;
+    (void)context;if(bind_error)return bind_error;
+    dos_active=active;return ERROR_SUCCESS;
 }
 static BOOL hang_close;
 static DWORD execution_error;
@@ -174,8 +177,19 @@ int main(int argc,char **argv)
     stop=CreateEventW(NULL,TRUE,FALSE,NULL);CHECK(stop);
     thread=CreateThread(NULL,0,serve,NULL,0,NULL);CHECK(thread);
     CHECK(!ntvdm_console_client_begin(&owner));bound=&owner;
-    CHECK(dos_active && ntvdm_console_set_active(FALSE) && !dos_active &&
-        ntvdm_console_set_active(TRUE) && dos_active);
+    {
+        mvdm_mouse_bridge *mouse=mvdm_softpc_mouse_current();
+        CHECK(mouse && dos_active);
+        mouse->submitted=mouse->active=TRUE;
+        mouse->queue.count=1;
+        bind_error=ERROR_BUSY;
+        CHECK(!ntvdm_console_set_active(FALSE) && GetLastError()==ERROR_BUSY);
+        CHECK(dos_active && mouse->submitted && mouse->active && mouse->queue.count==1);
+        bind_error=ERROR_SUCCESS;
+        CHECK(ntvdm_console_set_active(FALSE) && !dos_active);
+        CHECK(!mouse->submitted && !mouse->active && !mouse->queue.count);
+        CHECK(ntvdm_console_set_active(TRUE) && dos_active && !mouse->submitted);
+    }
     {
         HANDLE input=CreateFileA("CONIN$",GENERIC_READ|GENERIC_WRITE,
             FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,OPEN_EXISTING,0,NULL);
