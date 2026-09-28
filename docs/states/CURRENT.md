@@ -85,7 +85,8 @@ preserved. The complete previous package and before/after hash manifest are
 under build/M0-T423/S8/pre-publication. Both formal graphs have no pending
 work, and candidate/published hashes match. Published-path Console DOS17,
 Window MEM/nested MEM/EDIT and the three separate WOW frontiers passed.
-S8 P2 is prepared for committed delivery; closure registration follows push.
+S8 P2 d253e55af is committed and pushed to main, including ntmon naming and
+the approved side-chat ntsrv repair. S8 closure review remains next.
 
 ## Current Technical Baseline
 
@@ -93,7 +94,7 @@ S6 P1 f0f671e5e delivered independent frontend Console/Window display;
 [S6 ledger](../etc/evidence/m0-t423-s6-window-display.md). S7's accepted
 ntkvm/ntsrv seven-file mouse checkpoint is recoverable under
 build/M0-T423/S8/pre-publication; the reviewed S8 set is now at O:/winnt,
-with published-path verification complete and committed delivery pending.
+with published-path verification complete and S8 P2 d253e55af pushed.
 
 Earlier S1/S2 lifecycle and copied-I/O delivery, S3 preservation/replanning,
 S4 independent frontend delivery (9c27b5fd2), and S5 hidden-backend acceptance

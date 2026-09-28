@@ -1381,5 +1381,8 @@ this checkpoint does not itself claim committed delivery or T closure.
 
 Research findings alone are not runtime acceptance. The checked rows above
 refer to the subsequent real runtime evidence, including explicit limitations.
-S8 remains active pending committed delivery and closure registration. The reviewed S8
-package is at O:/winnt; its preceding S7 package is recoverably backed up.
+S8 P2 d253e55af is committed and pushed to main. Documentation governance,
+diff checks and all seven published hashes passed before submission. This
+includes ntmon naming and the approved side-chat ntsrv changes. S8 remains
+active for closure review; the T is not closed. The reviewed S8 package is at
+O:/winnt; its preceding S7 package is recoverably backed up.
