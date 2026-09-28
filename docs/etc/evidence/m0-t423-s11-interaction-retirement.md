@@ -2,6 +2,10 @@
 
 ## Latest scope and mouse repair, 2026-09-28
 
+Owner accepted the published repair on 2026-09-28 and authorized S11 closure
+and S12 admission. Delivered and pushed revision: 965083eec. This acceptance
+supersedes the wait-for-owner instruction below, not the recorded limitations.
+
 Owner requires mouse completion in S11, followed by commit/push and a stop
 for owner validation. Only native continuity/retirement restructuring moves
 to the approved S12 NTCON plan; RDP capture moves to S13. Neither transfer
