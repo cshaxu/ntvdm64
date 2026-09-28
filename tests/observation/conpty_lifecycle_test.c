@@ -8,6 +8,9 @@
 
 typedef struct shared_state {
     DWORD leaf_pid,count,reclaimed;
+    LONG control;
+    WCHAR cooked[32];
+    char vt[32];
     INPUT_RECORD records[8];
 } shared_state;
 typedef struct capture {
@@ -17,9 +20,14 @@ typedef struct capture {
     char bytes[65536];
 } capture;
 static HANDLE close_seen;
+static shared_state *control_state;
 
 static BOOL WINAPI close_handler(DWORD event)
 {
+    if(event==CTRL_C_EVENT || event==CTRL_BREAK_EVENT) {
+        if(control_state)InterlockedExchange(&control_state->control,(LONG)event);
+        SetEvent(close_seen);return TRUE;
+    }
     if(event != CTRL_CLOSE_EVENT) return FALSE;
     SetEvent(close_seen);
     ExitProcess(91);
@@ -62,22 +70,33 @@ static int child(PCWSTR role,PCWSTR prefix)
     state=MapViewOfFile(mapping,FILE_MAP_WRITE,0,0,sizeof(*state));
     name(key,128,prefix,L"ready");ready=OpenEventW(EVENT_MODIFY_STATE,FALSE,key);
     name(key,128,prefix,L"release");release=OpenEventW(SYNCHRONIZE,FALSE,key);
-    name(key,128,prefix,L"close");close_seen=OpenEventW(EVENT_MODIFY_STATE,FALSE,key);
+    name(key,128,prefix,L"close");close_seen=OpenEventW(EVENT_MODIFY_STATE|SYNCHRONIZE,FALSE,key);
     if(!state || !ready || !release || !close_seen || !SetConsoleCtrlHandler(close_handler,TRUE))return 63;
     screen=CreateFileW(L"CONOUT$",GENERIC_WRITE,FILE_SHARE_READ|FILE_SHARE_WRITE,
         NULL,OPEN_EXISTING,0,NULL);
     if(screen==INVALID_HANDLE_VALUE)return 65;
     if(mode>=3) {
+        DWORD flags=ENABLE_EXTENDED_FLAGS|ENABLE_MOUSE_INPUT|ENABLE_WINDOW_INPUT;
+        if(mode==7)flags|=ENABLE_PROCESSED_INPUT|ENABLE_LINE_INPUT|ENABLE_ECHO_INPUT;
+        if(mode==8)flags|=ENABLE_VIRTUAL_TERMINAL_INPUT;
+        if(mode==9 || mode==10)flags|=ENABLE_PROCESSED_INPUT;
         input=CreateFileW(L"CONIN$",GENERIC_READ|GENERIC_WRITE,FILE_SHARE_READ|FILE_SHARE_WRITE,
             NULL,OPEN_EXISTING,0,NULL);
-        if(input==INVALID_HANDLE_VALUE || !SetConsoleMode(input,
-            ENABLE_EXTENDED_FLAGS|ENABLE_MOUSE_INPUT|ENABLE_WINDOW_INPUT) ||
+        if(input==INVALID_HANDLE_VALUE || !SetConsoleMode(input,flags) ||
             !FlushConsoleInputBuffer(input))return 68;
     }
+    control_state=state;state->control=-1;
+    if(mode>=9 && !SetConsoleCtrlHandler(NULL,FALSE))return 73;
     state->leaf_pid=GetCurrentProcessId();
     if(!WriteFile(screen,"CONPTY-LEAF-READY\r\n",19,&written,NULL) || written!=19)return 66;
     SetEvent(ready);
-    if(mode>=3) {
+    if(mode>=9) {
+        if(WaitForSingleObject(close_seen,5000)!=WAIT_OBJECT_0)return 74;
+    } else if(mode==7) {
+        if(!ReadConsoleW(input,state->cooked,31,&state->count,NULL))return 75;
+    } else if(mode==8) {
+        if(!ReadFile(input,state->vt,31,&state->count,NULL))return 76;
+    } else if(mode>=3) {
         DWORD expected=mode==4 ? 3 : mode==5 ? 2 : 4;
         while(state->count<expected) {
             DWORD count=0;
@@ -94,8 +113,8 @@ static int child(PCWSTR role,PCWSTR prefix)
                 state->reclaimed=count;state->count+=count;
             }
         }
-        CloseHandle(input);
     }
+    if(input)CloseHandle(input);
     if(WaitForSingleObject(release,30000)!=WAIT_OBJECT_0)return 64;
     if(!WriteFile(screen,"CONPTY-LEAF-FINAL\r\n",19,&written,NULL) || written!=19)return 67;
     CloseHandle(screen);
@@ -107,7 +126,7 @@ static int run_case(unsigned mode)
 {
     static const char *case_names[]={"descendant-lifetime","explicit-session-close",
         "released-natural-retirement","win32-key-records","sgr-mouse-records",
-        "focus-records","unread-input-records"};
+        "focus-records","unread-input-records","cooked-line","vt-input","ctrl-c","ctrl-break"};
     static const char *key_sequence="\x1b[17;29;0;1;8;1_\x1b[112;59;0;1;8;1_\x1b[112;59;0;0;8;1_\x1b[17;29;0;0;0;1_";
     static const char *mouse_sequence="\x1b[<0;11;7M\x1b[<32;12;8M\x1b[<0;12;8m";
     static const char *unread_sequence="\x1b[65;30;97;1;0;1_\x1b[65;30;97;0;0;1_\x1b[66;48;98;1;0;1_\x1b[66;48;98;0;0;1_";
@@ -171,8 +190,11 @@ static int run_case(unsigned mode)
            WaitForSingleObject(reader,0)!=WAIT_TIMEOUT)goto done;
     }
     if(mode>=3) {
-        const char *sequence=mode==3 ? key_sequence : mode==4 ? mouse_sequence :
-            mode==5 ? "\x1b[I\x1b[O" : unread_sequence;
+        const char *sequence=(mode==3 || mode==8) ? key_sequence : mode==4 ? mouse_sequence :
+            mode==5 ? "\x1b[I\x1b[O" : mode==6 ? unread_sequence :
+            mode==7 ? "\x1b[65;30;97;1;0;1_\x1b[65;30;97;0;0;1_\x1b[13;28;13;1;0;1_\x1b[13;28;13;0;0;1_" :
+            mode==9 ? "\x1b[67;46;3;1;8;1_\x1b[67;46;3;0;8;1_" :
+            "\x1b[3;70;0;1;264;1_\x1b[3;70;0;0;264;1_";
         DWORD sent;
         stage="send native input sequence";
         if(!WriteFile(input_write,sequence,(DWORD)strlen(sequence),&sent,NULL) || sent!=strlen(sequence))goto done;
@@ -187,7 +209,16 @@ static int run_case(unsigned mode)
     }
     if(WaitForSingleObject(leaf,10000)!=WAIT_OBJECT_0 || !GetExitCodeProcess(leaf,&leaf_code) ||
        leaf_code!=(explicit_close ? 91u : 23u))goto done;
-    if(mode>=3) {
+    if(mode>=7) {
+        stage="cooked VT and control input";
+        printf("input case=%s count=%lu control=%ld vt=",case_names[mode],state->count,state->control);
+        if(mode==8)for(DWORD i=0;i<state->count;++i)printf("%02x",(unsigned char)state->vt[i]);
+        printf("\n");
+        if(mode==7 && (state->count!=3 || wmemcmp(state->cooked,L"a\r\n",3)))goto done;
+        if(mode==8 && (state->count!=6 || memcmp(state->vt,"\x1b[1;5P",6)))goto done;
+        if(mode==9 && state->control!=CTRL_C_EVENT)goto done;
+        if(mode==10 && state->control!=CTRL_BREAK_EVENT)goto done;
+    } else if(mode>=3) {
         INPUT_RECORD *r=state->records;
         DWORD i;
         stage="exact target input records";
@@ -279,5 +310,5 @@ int wmain(int argc,WCHAR **argv)
 {
     if(argc==3 && (!wcscmp(argv[1],L"leader") || !wcscmp(argv[1],L"leaf")))return child(argv[1],argv[2]);
     if(argc!=1)return 2;
-    { int result=0;for(unsigned mode=0;mode<7;++mode)result|=run_case(mode);return result; }
+    { int result=0;for(unsigned mode=0;mode<11;++mode)result|=run_case(mode);return result; }
 }

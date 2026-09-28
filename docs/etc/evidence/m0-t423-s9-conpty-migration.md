@@ -188,3 +188,54 @@ handles are not generic cross-process transferable handles; see
 Thus attached-caller unread-record capture is a candidate finite handshake,
 not permission to make the worker own a Console, add another helper, or claim
 that a disconnected byte-stream reader knows which keys were consumed.
+
+## Input encoder selection and remaining ownership decision
+
+Final `t423-s9-conpty-contract-r7.log` passes eleven real cases. Added cases
+send the same Win32 keyboard packet shape to the actual OS backend and prove:
+cooked ReadConsoleW returns `a\r\n`; VT ReadFile returns Ctrl+F1 as bytes
+1b5b313b3550, not the serialized Win32 packet; registered handlers receive
+actual CTRL_C_EVENT (0) and CTRL_BREAK_EVENT (1). The target is not artificially
+terminated to simulate those two control signals. This justifies selecting a
+small frontend Win32-key encoder for the known ConPTY backend; the terminal
+screen parser need not implement keyboard semantics or be patched for 9001.
+This is not a claim about arbitrary non-Windows PTY endpoints.
+
+Microsoft's current
+[InputStateMachineEngine](https://raw.githubusercontent.com/microsoft/terminal/main/src/terminal/parser/InputStateMachineEngine.cpp)
+also explicitly handles Win32-key sequences before VT passthrough. It is
+comparison evidence; no Windows Terminal implementation was imported.
+Mouse and focus still use the independently verified encodings. Terminal
+query-reply ownership and full UI mapping remain implementation gates.
+
+Source SHA256 7D1EB69ED9BD0AE7F0CAB6BFE54986A3466DE6828D75DD792A0CBB98D2D98F8E;
+EXE SHA256 88FAB361674B1D70A3B9D7FDFDB7961B84154AFA83E53E8197D68F6881A07801.
+Build log `conpty-lifecycle-build-r7.log` is warning-free. Retain r6 failure:
+the probe opened its handler-notification event with modify rights only,
+then attempted to wait; adding SYNCHRONIZE fixed the probe's premature exit.
+All eleven cases were rerun, not just the two repaired control tests.
+
+The remaining input-reclamation issue cannot be hidden by that success:
+
+1. ntkvm/main.c attaches to the visible Console, and native_console_frontend
+   retains its input/output handles. FreeConsole would invalidate that state.
+2. The current helper owns the other Console and native_console_view obtains
+   its actual unread records through INPUT_READ. A local shadow of all sent
+   keys would also include consumed keys and cannot replace that operation.
+3. An inner run16 already attached to the backend could perform a bounded
+   queue transfer, but this alone does not cover DOS -> native -> DOS when
+   the native child exits and its launcher remains outside that backend.
+4. The repo already contains an isolated, short-lived Console membership
+   probe (`run16 --internal-console-probe`, ntsrv/console_query.c and
+   transport/console_membership.c). It is not the persistent rendering helper.
+   Extending an on-demand probe to authenticated unread-input transfer may
+   preserve the semantics without snapshot polling or persistent helper state,
+   but changes the strict helper-removal boundary and needs owner confirmation.
+
+No public ConPTY input-stream operation used here returns the server's unread
+INPUT_RECORD queue. Do not infer global impossibility from this limited audit,
+but do not silently treat unknown consumption as empty or replay every key.
+Proposed decision: permit a finite, on-demand transfer probe only at handoff/
+retirement, while keeping ConPTY as the sole native rendering/input backend
+and deleting the old long-lived helper/RPC/snapshot renderer. No such probe
+extension or production migration has been implemented pending that decision.

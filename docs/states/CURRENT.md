@@ -111,6 +111,14 @@ still unproved. Unmodified libvterm 0.3.3 compiles x86 and passes 20 parser/
 screen assertions, but does not expose DECSET 9001 through its fallback or
 encode Win32 keys; it remains a build-only candidate, not an imported backend.
 The verified S8 package remains published; no S9 candidate is deployed.
+The complete capability probe now passes eleven cases, including cooked/VT
+reads and actual Ctrl+C/Break handlers. A fixed Win32-key encoder for the
+known ConPTY endpoint avoids patching libvterm for keyboard semantics.
+Production migration still needs an input-return ownership decision: an
+on-demand authenticated queue-transfer probe could replace the persistent
+helper's last required input operation, but exceeds the strict no-helper
+interpretation. The ledger records the exact source paths and uncovered
+DOS -> native -> DOS case. No probe extension or contract weakening is applied.
 
 ## Current Technical Baseline
 
