@@ -273,38 +273,3 @@ DWORD run16_native_view_forward_input(run16_native_backend *backend,run16_native
     }
     return error;
 }
-
-DWORD run16_native_view_wait(run16_native_backend *backend,run16_native_console_view *view,
-    HANDLE target,DWORD *result)
-{
-    DWORD error=ERROR_SUCCESS,wait;
-    HANDLE waits[2];
-    if(!backend || !view || !target || !result)return ERROR_INVALID_PARAMETER;
-    view->presentation_error=ERROR_SUCCESS;
-    waits[0]=target;waits[1]=view->input;
-    for(;;) {
-        BOOL ended=WaitForSingleObject(target,0)==WAIT_OBJECT_0;
-        error=run16_native_view_present(backend,view);
-        if(error && error!=ERROR_RETRY)break;
-        if(ended)break;
-        wait=WaitForMultipleObjects(2,waits,FALSE,30);
-        if(wait==WAIT_OBJECT_0 || wait==WAIT_TIMEOUT)continue;
-        if(wait!=WAIT_OBJECT_0+1) {
-            error=GetLastError();
-            break;
-        }
-        error=run16_native_view_forward_input(backend,view);
-        if(error)break;
-    }
-    view->presentation_error=error;
-    /* Completion is authoritative even if the last frame/input exchange lost
-     * its peer. Recheck here to cover completion during a failed exchange.
-     * A still-running target is neither success nor forcibly terminated. */
-    wait=WaitForSingleObject(target,0);
-    if(wait==WAIT_OBJECT_0) {
-        if(!GetExitCodeProcess(target,result))return GetLastError();
-        return ERROR_SUCCESS;
-    }
-    if(wait==WAIT_FAILED)return GetLastError();
-    return error;
-}

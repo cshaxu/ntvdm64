@@ -23,7 +23,7 @@ $cases=@(
     @{Name='console-pointer-contract-test';Witness='mock host only'},
     @{Name='frontend-scope-lifetime-test';Witness='final join complete'},
     @{Name='frontend-request-client-test';Witness='without UI ownership'},
-    @{Name='native-console-capture-test';Witness='native capture/presentation'},
+    @{Name='native-console-capture-test';Witness='native Console presentation'},
     @{Name='native-console-frontend-test';Witness='bounds ConPTY cleanup'},
     @{Name='console-channel-lifetime-test';Witness='85 real channel lifetimes'},
     @{Name='console-client-test';Suffix='normal';Exit='00000049';Witness='original-shape close callback'},

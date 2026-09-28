@@ -112,12 +112,12 @@ $hostEntryRoot = Join-Path $root 'src/mvdm/softpc.new/obj.vdm'
 $adapterSoftpcRoot = Join-Path $root 'src/ntvdm-exe/softpc'
 $adapterWin32Root = Join-Path $root 'src/ntvdm-exe/win32'
 $hostCompatSource = Join-Path $root 'src/opennt-abi/host-compat/opennt_support_rtl.c'
-$hostCrtRedirect = Join-Path $root 'src/opennt-abi/host-compat/include/mvdm_crt_redirect.h'
+$hostCrtRedirect = Join-Path $root 'src/ntvdm-exe/win32/mvdm_crt_redirect.h'
 $softpcSymbolCompat = Join-Path $root 'src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h'
 $run16Root = Join-Path $root 'src/run16-exe'
 $frontendRoot = Join-Path $root 'src/ntkvm-exe'
 $frontendWindowSources = @()
-$productPackageRoot = Join-Path $root 'src/product-package'
+$workerPackageRoot = Join-Path $root 'src/ntvdm-exe'
 $adapterBaseSrvRoot = Join-Path $root 'src/ntvdm-exe/command/source'
 $adapterMonitorRoot = Join-Path $root 'src/ntvdm-exe/monitor/source'
 $kernelVdmPrinterSource = Join-Path $adapterMonitorRoot 'monitor_printer.c'
@@ -294,7 +294,7 @@ $adapterSoftpcNames = @('mvdm_softpc_firmware.c', 'mvdm_shadow_registry.c', 'mvd
                         'mvdm_softpc_mouse_input.c', 'mvdm_softpc_mouse_bridge.c',
                         'mvdm_softpc_mouse_guest.c',
                         'mvdm_softpc_descriptor_fields.c')
-$productPackageNames = @('package_layout.c')
+$workerPackageNames = @('package_layout.c')
 $effectiveAddressSource = Join-Path $adapterSoftpcRoot 'mvdm_softpc_effective_address.c'
 $effectiveAddressObject = 'obj/adapter-softpc/mvdm_softpc_effective_address.obj'
 foreach ($name in $ccpuNames) {
@@ -405,8 +405,8 @@ foreach ($name in $openntXactSrvNames) {
 foreach ($name in $openntBaseVdmNames) {
     if (!(Test-Path -LiteralPath (Join-Path $openntBaseVdmRoot $name))) { throw "Original OpenNT Base VDM source missing: $name" }
 }
-foreach ($name in $productPackageNames) {
-    if (!(Test-Path -LiteralPath (Join-Path $productPackageRoot $name))) { throw "Required package source missing: $name" }
+foreach ($name in $workerPackageNames) {
+    if (!(Test-Path -LiteralPath (Join-Path $workerPackageRoot $name))) { throw "Required package source missing: $name" }
 }
 foreach ($name in $adapterMonitorNames) {
     if (!(Test-Path -LiteralPath (Join-Path $adapterMonitorRoot $name))) { throw "Required monitor adapter source missing: $name" }
@@ -1489,7 +1489,7 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build obj/monitor/stub.obj: cc obj/basesrv/service_c.c | obj/basesrv/service.h')
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('rule monitor_link')
-    $graph.Add('  command = link.exe /nologo /subsystem:console /opt:ref /out:$out /map:$out.map $in rpcrt4.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib')
+    $graph.Add('  command = link.exe /nologo /subsystem:console /opt:ref /out:$out /map:$out.map $in rpcrt4.lib kernel32.lib advapi32.lib legacy_stdio_definitions.lib')
     # monitor is a client of the authenticated local BaseSrv endpoint.  It
     # shares only the native transport scope helper, never a BaseClient
     # registration or worker lifecycle library.
@@ -1533,9 +1533,9 @@ if ($Architecture -eq 'x86') {
     if(@($frontendEdge).Count -ne 1){throw 'Expected one frontend edge'}
     $graph.Add($frontendEdge.Replace('build ntkvm.exe:', 'build frontend-console-wire-observer.exe:').Replace('obj/run16/console_channel.obj','obj/tests/console_channel_observed.obj'))
 }
-$productPackageObjects = foreach ($name in $productPackageNames) {
-    $object = 'obj/product-package/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
-    $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $productPackageRoot $name)))
+$workerPackageObjects = foreach ($name in $workerPackageNames) {
+    $object = 'obj/worker/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
+    $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $workerPackageRoot $name)))
     $object
 }
 $graph.Add('build ' + $effectiveAddressObject + ': cc ' + (NinjaPath $effectiveAddressSource))
@@ -1574,7 +1574,7 @@ $graph.Add('build original-opennt-netapi-api.lib: lib ' + ($openntNetapiObjects 
 $graph.Add('build original-opennt-xactsrv.lib: lib ' + ($openntXactSrvObjects -join ' '))
 $graph.Add('build original-opennt-base-vdm.lib: lib ' + ($openntBaseVdmObjects -join ' '))
 $graph.Add('build original-opennt-rtl-x86.lib: lib ' + ((@($openntRtlObjects) + @($openntRtlX86Objects)) -join ' '))
-$graph.Add('build worker-shell.lib: lib obj/product-package/package_layout.obj')
+$graph.Add('build worker-shell.lib: lib obj/worker/package_layout.obj')
 $graph.Add('build session.lib: lib ' + ($sessionObjects -join ' '))
 $graph.Add('build wow-worker-bindings.lib: lib ' + ($adapterWowWorkerObjects -join ' '))
 $graph.Add('build rtl-x86-fixture.exe: rtl_fixture_link ' + $rtlX86FixtureObject + ' original-opennt-rtl-x86.lib')
@@ -1736,7 +1736,7 @@ if ($objectOutputDirectories.Count -gt 0) {
     ntvdmSoftpcSources = @($adapterSoftpcNames)
     vdmRedirDllBindingSources = @($adapterRedirNames)
     ntvdmRedirectorWorkerSources = @($adapterRedirWorkerNames)
-    productPackageSources = @($productPackageNames)
+    workerPackageSources = @($workerPackageNames)
     ntvdmSessionSources = @($sessionNames)
     ntvdmWowWorkerSources = @($adapterWowWorkerNames)
     ntvdmWin32Sources = @($adapterWin32Names)

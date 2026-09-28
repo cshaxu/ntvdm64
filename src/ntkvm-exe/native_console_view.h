@@ -34,6 +34,5 @@ DWORD run16_native_view_present(run16_native_backend *,run16_native_console_view
 /* Handoff/final drain synchronizes canonical storage without invoking the
  * Window owner's callbacks. Caller still holds the shared frontend I/O lock. */
 DWORD run16_native_view_sync_console(run16_native_backend *,run16_native_console_view *);
-DWORD run16_native_view_wait(run16_native_backend *,run16_native_console_view *,HANDLE,DWORD *);
 void run16_native_view_end(run16_native_console_view *);
 #endif

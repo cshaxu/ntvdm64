@@ -8,7 +8,6 @@ src/
   opennt-host/
   opennt-abi/host-compat/
   product-abi/
-  product-package/
   run16-exe/
   ntsrv-exe/
   ntvdm-exe/
@@ -57,7 +56,8 @@ mirror even when several EXEs link it; BaseSrv protocol/client code remains
 `basesrv`-owned even when both clients link it. Only a named, same-shaped
 historical host ABI whose finite public-Win32/NTDLL binding is recorded may
 live in `opennt-abi/host-compat`. The stateless shared product surface is
-limited to `product-abi`/`product-package`; `basesrv` owns the service IDL and
+limited to header-only `product-abi`; worker package/media configuration lives
+in `ntvdm-exe/package_layout.[ch]`. `basesrv` owns the service IDL and
 copied, versioned broker protocol. There is no `common` or `win32api` root.
 
 ## Machine-profile selection

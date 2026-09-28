@@ -23,7 +23,7 @@ $executable = Join-Path $output 'conpty-launch.exe'
 Push-Location $repository
 try {
     # Match the current frontend graph's target/CRT and declaration baseline.
-    & cl.exe /nologo /W4 /MT /D_WIN32_WINNT=0x0601 /Isrc `
+    & cl.exe /nologo /W4 /MT /DNTKVM_CONPTY_TEST_RELEASE /D_WIN32_WINNT=0x0601 /Isrc `
         tests/observation/conpty_launch_test.c src/ntkvm-exe/native_console_launch.c src/ntkvm-exe/native_conpty.c `
         "/Fo$output\" "/Fe$executable" /link /incremental:no *> (Join-Path $output 'build.log')
     if ($LASTEXITCODE) { throw "Build failed; see $output/build.log" }
@@ -35,7 +35,7 @@ try {
         throw 'Missing positive completion marker'
     }
     $lifecycle = Join-Path $output 'conpty-lifecycle.exe'
-    & cl.exe /nologo /W4 /MT /std:c11 /D_WIN32_WINNT=0x0601 /Isrc `
+    & cl.exe /nologo /W4 /MT /DNTKVM_CONPTY_TEST_RELEASE /std:c11 /D_WIN32_WINNT=0x0601 /Isrc `
         tests/observation/conpty_lifecycle_test.c `
         (Join-Path $output 'native_console_launch.obj') (Join-Path $output 'native_conpty.obj') `
         "/Fo$output\" "/Fe$lifecycle" /link /incremental:no *> (Join-Path $output 'lifecycle-build.log')
@@ -46,7 +46,7 @@ try {
     if ($passed.Count -ne 11) { throw 'Incomplete production lifecycle cases' }
     Write-Output 'PASS production ConPTY lifecycle/input 11 cases'
     $admission = Join-Path $output 'conpty-admission.exe'
-    & cl.exe /nologo /W4 /MT /Isrc tests/observation/conpty_admission_test.c `
+    & cl.exe /nologo /W4 /MT /DNTKVM_CONPTY_TEST_RELEASE /Isrc tests/observation/conpty_admission_test.c `
         (Join-Path $output 'native_console_launch.obj') (Join-Path $output 'native_conpty.obj') `
         "/Fo$output\" "/Fe$admission" /link /incremental:no *> (Join-Path $output 'admission-build.log')
     if ($LASTEXITCODE) { throw "Admission build failed; see $output/admission-build.log" }

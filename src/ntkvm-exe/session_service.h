@@ -10,6 +10,4 @@ DWORD frontend_service_start(HANDLE,HANDLE,void (*)(void),frontend_session_servi
 DWORD frontend_service_start_process(HANDLE,HANDLE,HANDLE,frontend_session_service **);
 void frontend_service_close(frontend_session_service *);
 HANDLE frontend_service_thread(frontend_session_service *);
-DWORD frontend_service_launch(frontend_session_service *,const run16_native_start *,HANDLE *);
-DWORD frontend_service_wait(frontend_session_service *,HANDLE,DWORD *);
 #endif

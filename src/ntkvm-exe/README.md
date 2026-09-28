@@ -33,8 +33,10 @@ S9 lifetime decision: keep HPCON until explicit frontend closure. Early
 ReleasePseudoConsole and backend recreation have been removed from the
 production backend; no observer process or Job supplies last-client detection.
 Uncertain last-client retirement may conservatively retain the frontend.
-The resource test API can still release admission to verify that later
-attachment is refused; it is not a production target-completion operation.
+Resource experiments opt into NTKVM_CONPTY_TEST_RELEASE to release admission
+and verify that later attachment is refused. Release code/state/API lookup are
+absent from the production build; startup does not require ReleasePseudoConsole.
+Production target completion never releases the backend.
 Shared DOS/native screen composition has real guest/native output coverage;
 the complete exact-candidate gates and publication remain governed by the S9
 ledger. Source placement alone is not a delivered migration claim.
@@ -70,16 +72,15 @@ discards frontend-local dead-key composition, and retains the live source identi
 SOURCE_RETIRED alone permanently retires that identity. Native mouse capture
 release remains owned by kvm-window, not by the NTVDM worker.
 
-## S9 ConPTY replacement in progress
+## S9 ConPTY replacement
 
 native_conpty owns the public pseudoconsole and byte-stream resource boundary;
 native_terminal binds its output to the pinned libvterm UTF-8/VT state. These
-are selected by the formal ntkvm graph and have passed the first linked
-frontend/control tests on a private desktop. The old helper implementation,
-protocol and dispatch have been removed, not retained as a fallback. Status
-and the S9 ledger distinguish this candidate from the deployed pre-ConPTY
-frontend; the live package's exact hashes require their own verification.
-Full guest/display regressions remain. Native Window text now uses
+are selected by the formal ntkvm graph. S9 published the verified replacement;
+Status and its ledger retain exact hashes and explicit limitations. The old
+helper implementation, protocol and dispatch have been removed, not retained as
+a fallback. S10 removes its unused snapshot reader and second wait loop while
+retaining visible Console presentation bindings. Native Window text uses
 the same bitmap rasterizer as DOS, with default glyph data from the pinned
 V7VGA ROM. Generate-FrontendFont.ps1 emits only its 256-by-14 bitmap slice
 under build; DOS still supplies its actual current guest font banks. No GDI

@@ -57,7 +57,7 @@ static BOOL bind_basesrv(MONITOR_STATE *state)
     RPC_WSTR text=NULL;
     RPC_STATUS rpc;
     if (!broker_rpc_capture_scope(&state->scope)) return FALSE;
-    wsprintfW(endpoint,L"ntvdm-basesrv-%lu-%08lx-%08lx",state->scope.session,
+    swprintf_s(endpoint,_countof(endpoint),L"ntvdm-basesrv-%lu-%08lx-%08lx",state->scope.session,
         (ULONG)state->scope.logon.HighPart,(ULONG)state->scope.logon.LowPart);
     rpc=RpcStringBindingComposeW(NULL,(RPC_WSTR)L"ncalrpc",NULL,(RPC_WSTR)endpoint,NULL,&text);
     if (rpc!=RPC_S_OK) { SetLastError(rpc); return FALSE; }

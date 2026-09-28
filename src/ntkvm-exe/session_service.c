@@ -161,11 +161,3 @@ DWORD frontend_service_start_process(HANDLE capability,HANDLE notification,
     return service_start(capability,notification,creator,NULL,output);
 }
 HANDLE frontend_service_thread(frontend_session_service *scope){return scope ? scope->thread : NULL;}
-DWORD frontend_service_launch(frontend_session_service *scope,const run16_native_start *start,HANDLE *target)
-{
-    return scope ? run16_native_frontend_launch(scope->native,start,target) : ERROR_INVALID_PARAMETER;
-}
-DWORD frontend_service_wait(frontend_session_service *scope,HANDLE target,DWORD *result)
-{
-    return scope ? run16_native_frontend_wait(scope->native,target,result) : ERROR_INVALID_PARAMETER;
-}

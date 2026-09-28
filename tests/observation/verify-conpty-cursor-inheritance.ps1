@@ -20,7 +20,7 @@ $executable = Join-Path $output 'cursor-inheritance.exe'
 Push-Location $repository
 try {
     # Startup and retained-resource cases use the production resource/parser.
-    & cl.exe /nologo /W4 /MT /std:c11 /Isrc "/I$include" `
+    & cl.exe /nologo /W4 /MT /DNTKVM_CONPTY_TEST_RELEASE /std:c11 /Isrc "/I$include" `
         tests/observation/conpty_cursor_inheritance_test.c src/ntkvm-exe/native_terminal.c `
         src/ntkvm-exe/native_conpty.c src/ntkvm-exe/native_console_launch.c (Join-Path $library 'libvterm.lib') `
         "/Fo$output\" "/Fe$executable" /link /incremental:no *> (Join-Path $output 'build.log')

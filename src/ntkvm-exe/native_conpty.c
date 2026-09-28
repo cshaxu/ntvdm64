@@ -5,15 +5,15 @@
 #include "native_conpty.h"
 #include <stdio.h>
 
-typedef HRESULT (WINAPI *release_console)(HPCON);
 struct ntkvm_conpty {
     HPCON console;
     HANDLE input,output,reader,stop,ended,written,cancel;
     CRITICAL_SECTION write_lock,lifecycle_lock;
     ntkvm_conpty_output consume;
     void *context;
-    release_console release;
+#ifdef NTKVM_CONPTY_TEST_RELEASE
     BOOL released;
+#endif
     volatile LONG error;
 };
 
@@ -79,8 +79,6 @@ DWORD ntkvm_conpty_open_events(COORD size,ntkvm_conpty_output consume,void *cont
     if(!pty)return ERROR_NOT_ENOUGH_MEMORY;
     InitializeCriticalSection(&pty->write_lock);InitializeCriticalSection(&pty->lifecycle_lock);
     pty->consume=consume;pty->context=context;
-    pty->release=(release_console)GetProcAddress(GetModuleHandleW(L"kernel32.dll"),"ReleasePseudoConsole");
-    if(!pty->release) {error=ERROR_NOT_SUPPORTED;goto done;}
     pty->stop=CreateEventW(NULL,TRUE,FALSE,NULL);
     if(stop && !DuplicateHandle(GetCurrentProcess(),stop,GetCurrentProcess(),&pty->cancel,
         SYNCHRONIZE,FALSE,0)) {error=GetLastError();goto done;}
@@ -120,7 +118,9 @@ DWORD ntkvm_conpty_launch(ntkvm_conpty *pty,const run16_native_start *start,PROC
      * CreateProcess may still succeed afterward, but in the wrong Console.
      * Retirement is one-way; never report that as a successful ConPTY launch. */
     if(WaitForSingleObject(pty->ended,0)==WAIT_OBJECT_0)error=ERROR_BROKEN_PIPE;
+#ifdef NTKVM_CONPTY_TEST_RELEASE
     else if(pty->released)error=ERROR_SHUTDOWN_IN_PROGRESS;
+#endif
     else error=run16_native_launch_conpty(start,pty->console,process);
     LeaveCriticalSection(&pty->lifecycle_lock);
     return error;
@@ -174,18 +174,25 @@ DWORD ntkvm_conpty_resize(ntkvm_conpty *pty,COORD size)
     return FAILED(status) ? hresult_error(status) : 0;
 }
 
+#ifdef NTKVM_CONPTY_TEST_RELEASE
+/* Resource experiments only; production retains HPCON until explicit close. */
 DWORD ntkvm_conpty_release(ntkvm_conpty *pty)
 {
+    typedef HRESULT (WINAPI *release_console)(HPCON);
+    release_console release;
     HRESULT status=S_OK;
     if(!pty)return ERROR_INVALID_PARAMETER;
+    release=(release_console)GetProcAddress(GetModuleHandleW(L"kernel32.dll"),"ReleasePseudoConsole");
+    if(!release)return ERROR_NOT_SUPPORTED;
     EnterCriticalSection(&pty->lifecycle_lock);
     if(!pty->released) {
-        status=pty->release(pty->console);
+        status=release(pty->console);
         if(SUCCEEDED(status))pty->released=TRUE;
     }
     LeaveCriticalSection(&pty->lifecycle_lock);
     return FAILED(status) ? hresult_error(status) : 0;
 }
+#endif
 
 HANDLE ntkvm_conpty_ended(ntkvm_conpty *pty) { return pty ? pty->ended : NULL; }
 DWORD ntkvm_conpty_error(ntkvm_conpty *pty) { return pty ? (DWORD)InterlockedCompareExchange(&pty->error,0,0) : ERROR_INVALID_PARAMETER; }

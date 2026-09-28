@@ -6,6 +6,12 @@ product composition no longer exists.
 
 ## Registered divergences
 
+S10 owner consolidation: the declarations for mvdm_base_vdm_environment,
+nt_thread_alert_compat, wow_hard_error_dialog and the scoped mvdm_crt_redirect
+now live beside their worker owner under `src/ntvdm-exe/win32/`. Their contents
+and contracts are unchanged. Historical register paths below retain provenance;
+they do not authorize a second copy under this shared ABI root.
+
 | ID | Original boundary | Unavailable dependency | Retained binding and verification |
 | --- | --- | --- | --- |
 | ADAPTER-WIN32-060 | OpenNT nt_event.c::CntrlHandler and ntcon/server/input.c::CreateCtrlThread close a Console-associated VDM. | Private Console Server remote callbacks, process-list ownership and hung-close UI cannot be imported; root run16 is the owner-approved standalone session lifetime. | console_client waits the existing broker-authenticated root process capability, invokes unchanged CntrlHandler(CTRL_CLOSE_EVENT) on a session-bound callback thread, then bounds unresolved close at five seconds and terminates only itself. A vanished frontend cannot present a close-cancel dialog; this forced-close choice and grace are product policy, not an assertion of exact NT4 timeout configuration. Ordinary pipe errors/non-root death do not close the session. No new mirror diff, transport or process tree. Native callback/hung-callback/broken-pipe fixtures and the real NOIO root-normal/abnormal tests cover it. |

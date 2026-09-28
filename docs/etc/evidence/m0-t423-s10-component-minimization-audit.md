@@ -167,3 +167,104 @@ The generator was rerun to `build/M0-T423/S10/dependency-r3` with the same count
 seven leakage negative controls and the launcher rebuild control. Documentation
 governance and `git diff --check` passed. This P contains audit tooling and
 documentation only: no production compilation, new runtime claim or publication.
+
+## P4 implementation candidate (not delivered)
+
+The owner approved both consolidation and the audited cleanup. Against pushed
+142c619fe, the candidate removes product-package as a root: its 165 C/H lines
+move to ntvdm-exe/package_layout, with the sole production include, formal graph
+and package fixture updated. Four worker-private compatibility headers (58
+lines) move from opennt-abi/host-compat to ntvdm-exe/win32. These 223 lines are
+relocation, not implementation deletion. product-abi remains a small shared
+contract; original declaration collisions remain subject to the audit above.
+
+The three obsolete frontend cohorts remove 133 C lines including their separator
+line (the earlier 132-line audit excluded it), plus 19 header lines with one
+replacement line. Test-only ConPTY release is compiled only under
+NTKVM_CONPTY_TEST_RELEASE and resolves its optional API at the diagnostic call,
+not production startup. Its guarded source remains for the strict lifecycle
+fixture; it is not claimed deleted. Including these guards, production authored
+C/H net reduction is 144 lines, excluding unchanged relocations and tests.
+Neither mvdm nor opennt-host changes in this candidate: mirror diff delta is zero.
+
+NTMon now uses bounded CRT formatting. Its actual PE imports no USER32, and its
+link rule no longer lists user32.lib. The new component-minimization verifier
+checks the selected package owner, private-header placement, absent obsolete
+map symbols, retained presentation providers and actual NTMon imports.
+
+### Candidate verification
+
+Builds reuse the formal x86 /MT caches under build/M0-T423/S1. Logs are under
+build/M0-T423/S10/cleanup-r1. An initial missing compiler environment and an
+unwrapped test-only released field failed before the successful build-r2;
+neither failed attempt is a pass. monitor-link subsequently verifies the reduced
+link rule. WOW's unchanged graph reports no pending work. Package-layout,
+link-ownership and component-minimization checks pass.
+
+The isolated candidate is build/M0-T423/S10/p, mapped to S:/. Runtime evidence
+is under O:/winnt/Logs2; the published O:/winnt binaries have NOT been replaced.
+
+| Gate | Result and evidence prefix |
+| --- | --- |
+| ConPTY resource/lifecycle | 26 pass; t423-s10-transport-r1-conpty-resource |
+| Frontend components | 14/15; t423-s10-transport-r1. Only the already accepted host horizontal-wheel case fails; retain its strict test. |
+| Terminal | 288 assertions pass; t423-s10-terminal-r1. Wrapper still fails the separate host horizontal-wheel backend case, not an overall pass. |
+| Console DOS/native routes | All 17 pass; t423-s10-console17-r1-summary.json |
+| Twelve-target nesting | Both GGGWDWGGGDWD and GGGDDWGGGWWD pass; build/M0-T423/S10/chain-r1/summary.json and t423-s10-chain-r1 |
+| Lifecycle/faults | Five cases each in Console and Window pass; t423-s10-fault-console-r1 and t423-s10-fault-window-r1. An initial missing NOIOLIFE fixture stopped before testing; the unchanged S9 authored fixture was then reused. |
+| Actual NTMon | Console and Window title, F3 input and direct result 0 pass; t423-s10-monitor-r1 |
+| WOW frontier | t423-s10-wow-r1 preserves WINMINE main-window reachability and separate SOL/WRITE original OOM modals. No new application usability or physical interaction claim. |
+| Window DOS/native routes | NOT passed: native-zero exits 0 but the strict text continuity check fails; t423-s10-window17-r1. Remaining routes are not inferred passed. |
+
+### Open Window gate: baseline reproduces the failure
+
+t423-s10-baseline-window-r1 repeats native-zero against the unchanged S9 R:/
+package, including published frontend 27106497. It fails the same strict merger.
+Earlier successful serialized-window17-r2 used a 53-column Console; the current
+reproducer starts at 120 columns. After VER the current line-01 snapshot has an
+80-column buffer and the DOS prompt; after EXIT the 120-column snapshot retains
+VER output but loses the prompt. Both candidate and old baseline show this.
+
+This proves a pre-existing failure under the current observation conditions,
+not its exact cause. Geometry restoration and stale native presentation are
+investigation leads, not an established diagnosis. No merger assertion has been
+weakened and no speculative production repair is included. Source review must
+distinguish canonical-buffer restoration, actual Window frames and observation
+timing before fixing it. The existing horizontal-wheel exception does not waive
+this failure. Full Window regression, remaining final gates, coherent publication
+and commit/push remain pending; P4 and S10 are not closed.
+
+### Owner-directed bounded S10 closure and receivers
+
+After these results, the owner explicitly requested S10 closure and commit/push
+before S11 implementation. S10 concludes as component cleanup and source
+handoff, not complete product acceptance or a new runtime publication. Preserve
+the failed gates rather than turn this direction into a pass. The published
+O:/winnt package remains S9; candidate publication is deferred to the repaired,
+coherently verified successor. T423 remains open for owner acceptance.
+
+S11 owns the reported EDIT mouse latency and frontend retirement. ConPTY
+existence is not an attached-client count; direct native request completion and
+BaseSrv DOS records do not account for every attached descendant. Preserve the
+same ConPTY across DOS/native intervals. Admission must be sealed atomically
+only after pending starts, DOS tasks, direct native requests and actual attached
+users have all ended. Never remove a guard using a process-tree approximation.
+S11 also investigates the retained Window continuity failure, without assuming
+it has the same cause. S12 owns the RDP host-pointer capture/clipping report.
+
+The latest formal build (final-build.log) passes after the comment-only helper
+wording correction. Its ntkvm hash is B2D335F740C4D22CDE58BC454EF900F3D9BC89756115ACA9D7586DDFE3349179;
+the runtime candidate tested above is 100E8C9FF16395ACD717453CCB8C6F9047DA56157E7677D715F577880B5FBE39.
+Those identities are distinct; neither is published or asserted to have passed
+all production gates. NTMon's reduced-link candidate is
+92AFA5FA2E7AB5435A440469FDB9525C794005B8C1EDA1AB24FAAE057266B85C.
+Original ABI declarations remain in their current source selection intentionally:
+the audit proves no safe wholesale collision merge, and no original implementation
+is deleted to reduce directory count. Future consolidation must preserve each
+selected declaration and include-resolution contract.
+
+The independent final Window matrix retained all results rather than stopping
+at its first failure: t423-s10-window-all-r2-results.json has 15 passes and two
+strict text-overlap failures (native-zero and missing). This is not Window17
+acceptance. Both failures remain S11 handoff items. No observer assertion was
+changed to obtain the fifteen passes.

@@ -8,7 +8,7 @@ visual comparison.
 
 1. The production source owners are the canonical physical `mvdm` tree (with
    manifest-declared host, guest, tool and firmware slices), `opennt-host`,
-   `opennt-abi/host-compat`, `product-abi`, `product-package`, and the
+   `opennt-abi/host-compat`, header-only `product-abi`, and the
    executable-owned `run16`, `basesrv`, `ntvdm`, `monitor` and admitted
    `ntkvm-exe` roots. frontend owns character-session presentation; run16
    retains only launcher/direct-target completion duties. T418 has retired

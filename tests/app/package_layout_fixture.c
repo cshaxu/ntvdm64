@@ -1,4 +1,4 @@
-#include "product-package/package_layout.h"
+#include "ntvdm-exe/package_layout.h"
 
 #include <string.h>
 

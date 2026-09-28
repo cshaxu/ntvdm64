@@ -23,8 +23,10 @@ O:/winnt with a recoverable backup under build/M0-T423/S9/publication-backup-r1.
 Published Console17, Window MEM/nested MEM/EDIT and all three WOW frontiers
 pass. Final source/checklist review and governance checks pass. S9 P5
 3b40345f8 is committed and pushed; S9 is closed with its explicit limitations.
-S10 is automatically admitted for overall minimization/closure review, not T
-closure. Detailed identities and superseded
+Owner now directs S10 cleanup closure and commit/push first, then S11 repair
+of mouse latency and frontend retirement. RDP pointer escape belongs to the
+subsequent S12. This supersedes the initial S11 admission-and-wait direction.
+T423 remains open. Detailed identities and superseded
 status chronology are preserved in the
 [S9 ledger](../etc/evidence/m0-t423-s9-conpty-migration.md).
 
@@ -34,22 +36,22 @@ status chronology are preserved in the
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T423 S10, Ordinary Mode. |
+| Identifier Mode | M0 T423 S10, Ordinary Mode; owner-directed bounded cleanup delivery before S11. |
 | Candidate Proposal | [Console/Window frontend](../proposals/proposal-kvm-window-graphics-presentation-001.md). |
-| Admission And Approval | Automatic sequential admission after pushed S9 P5 3b40345f8; owner retains final T acceptance. Inherit the explicitly accepted delivered-input, glyph and host-wheel limitations; no helper/probe or launcher I/O is admitted. |
-| Objective | Audit the complete T423 frontend architecture and remove proven obsolete root-owner/duplicate branches; account mirror and authored code footprint, verify retained runtime contracts and prepare final owner acceptance. |
+| Admission And Approval | Latest owner direction: close and commit/push S10, then admit S11 for the two interaction/lifecycle repairs; reserve RDP capture for S12. Preserve all existing work and evidence. T423 must not close. |
+| Objective | Finish reviewed component consolidation and obsolete-code cleanup delivery, with truthful test results and explicit handoff of known interaction defects. Do not claim those defects resolved or publish an unverified candidate to satisfy closure. |
 | Non-goals | No guest/shared-library mutation, DOS/WOW scheduler, path-search repair, persistent/transient helper role, launcher/worker host Console I/O, permanent legacy backend fallback, full Unicode font library or automatic T closure. |
-| Reference Baseline | S9 P5 3b40345f8 and the hash-verified seven-file O:/winnt publication; earlier S ledgers retain their accepted contracts and explicit limitations. |
-| Files And ABI Surface | Current run16/ntkvm/ntsrv/ntvdm boundaries, private frontend dependencies, build/test selections and current authorities; no new protocol or scheduling scope. |
+| Reference Baseline | Published S9 seven-file package, pushed audit 142c619fe, and preserved uncommitted S10 P4 candidate. Identify the owner's actual tested hashes on resume; do not conflate candidate and publication. The component audit ledger records S10 evidence and its open Window text-continuity gate. |
+| Files And ABI Surface | S10 component moves, obsolete ntkvm interfaces, test-only ConPTY release separation, NTMon formatting/import reduction, build/test and governance updates; no new scheduler or frontend owner. |
 | Applicable Rules | EXECUTION, source policy, original mirror/ABI, output hygiene and the owner-approved independent frontend boundary. |
-| Verification | Review each prior S disposition against current production ownership and graph; identify removable dead/duplicate runtime code with source evidence. Any production P repeats affected unit tests, x86 build, DOS17, nesting/fault/GUI and WOW non-regression gates plus coherent publication. Documentation-only admission does not require rebuilding. |
-| Expected Markers | No selected helper or launcher/worker host-frontend implementation; one frontend-owned persistent ConPTY; authenticated segment isolation and independent completion retained; exact footprint and explicit outstanding limits. |
-| Asset Needs | Existing S ledgers, current formal build caches, pinned library and immutable guests. New directories only under build/M0-T423/S10; no physical owner-desktop manipulation. |
-| Reporting Requirements | Exact tested source/package/configuration, retained failure evidence and source-first ownership disposition; no compile-only or research-only runtime claims. |
-| Stop Conditions | Guest/library mutation, unauthenticated ownership, unapproved scheduling, input loss/replay outside the owner-approved delivered-input boundary, or product regression outside the explicit Window glyph coverage exception. Do not publish a migration candidate before the complete production gate. |
-| Exit Criteria | Overall closure checklist and source accounting complete; justified obsolete code removed with required regression, latest coherent package published, clean pushed delivery, then wait for owner T acceptance. Do not report approved limitations as passed features. |
-| Original Owner Request | Automatically admit S stages; replace the hidden Console/helper with ConPTY, preserve both displays and use the same text bitmap scheme for DOS/native output. |
-| Similar-Issue Sweep | Backend creation/EOF/cancellation/backpressure, final drain, session membership, target descendants, redirected/aliased handles, unconsumed input at DOS/native handoff, mouse/control events, terminal replies, resize and wide characters. |
+| Verification | Review exact cleanup diff and source identities; x86 builds, affected tests, preserved Console17/twelve-chain/fault/NTMon/WOW evidence; documentation governance and diff checks. Window text-continuity failure and owner interaction reports remain failures, not passes, with S11/S12 receivers. |
+| Expected Markers | Obsolete symbols absent, retained providers present, worker-only declarations/package binding owned by ntvdm, no NTMon USER32 import; mirror delta and authored-code counts explicit. |
+| Asset Needs | Preserved S10 cache/candidate/evidence under build/M0-T423/S10, original source and published identities. Logs remain under authorized Logs2; no physical desktop manipulation. |
+| Reporting Requirements | Separate owner-observed symptoms, supplied preliminary source findings, hypotheses and independently measured causes. Do not assert ConPTY deadlock or an RDP limitation without evidence. Retain S10 accounting and unresolved gates. |
+| Stop Conditions | No guest/shared-library mutation, ownership/scheduler expansion, fabricated test passes or unverified publication. Regressions introduced by cleanup must be resolved before its delivery. |
+| Exit Criteria | Owner-directed bounded cleanup disposition recorded, reviewed source committed/pushed and known failures transferred without claiming whole-product acceptance. Keep O:/winnt's published baseline until a coherent repaired candidate passes the outstanding gates. Then admit S11; T remains open. |
+| Original Owner Request | First close S10 and commit/push; then admit S11 for EDIT mouse latency and genuine ConPTY-member retirement; RDP pointer issue goes to S12. |
+| Similar-Issue Sweep | All audited obsolete frontend wrappers, production diagnostic dependencies, shared/private declaration consumers and actual PE dependencies; interaction repairs are assigned to the next stages. |
 
 ## S9 Closure Record
 
@@ -58,7 +60,8 @@ records helper removal, the shared ConPTY/bitmap implementation, x86 build,
 candidate and published-path regression, seven-file hashes and backup.
 Horizontal wheel remains an owner-accepted host limitation with strict failed
 tests preserved; physical desktop checks remain owner-waived, not passed.
-S10 owns the overall T audit; T423 remains open for final owner acceptance.
+S10 is completing bounded cleanup delivery by owner direction; S11 and S12
+own the subsequent reported defects. T423 remains open for owner acceptance.
 
 ## S7 Closure Record
 
@@ -141,14 +144,55 @@ Owner added authored-architecture minimization, per-EXE/DLL dependency review
 and opennt-abi/product-abi/product-package consolidation to S10. The
 [component audit](../etc/evidence/m0-t423-s10-component-minimization-audit.md)
 records recommended ownership, 132 lines of obsolete C candidates and the
-original-header collision constraints. Recommendations are not implemented
-cleanup; S10 remains active.
+original-header collision constraints. Owner now authorizes component
+consolidation: move product-package into its worker owner, retain product-abi,
+and migrate proved private compatibility declarations without changing ABI or
+runtime behavior. Reconcile original-header collisions before any mirror move.
+Owner also authorizes the audited obsolete-code cleanup, not just relocation.
+S10 P4 cleanup is prepared for owner-directed source/handoff delivery; no
+candidate has been published. This bounded closure is not a production release.
+The component audit ledger now records the candidate's consolidation and
+144-line net authored C/H cleanup, x86 build, Console17, both twelve-target
+chains, both five-case fault matrices, NTMon and preserved WOW frontiers.
+Window native-zero fails strict text continuity under the current 120-column
+conditions; the unchanged S9 package reproduces it too. Cause is not yet
+proved. Do not weaken the check or publish the candidate while this gate is
+open. S11 receives its investigation alongside the owner's exit report; S12
+receives RDP pointer capture. S10 source commit/push is pending below.
+
+## S11 Owner-Reported Issues
+
+1. Window EDIT.COM has a moving block cursor but unusually slow mouse response.
+   Owner supplied a preliminary comparison: nt_event.c around lines 526/642
+   reads one event per iteration and sleeps 10 ms, with IPC overhead; the older
+   worker-owned Window drained mouse events in one read. Queue accumulation and
+   sole causality are not measured here. Reuse the backup as evidence, not as
+   authority to restore worker-owned host UI or change original IRQ timing.
+2. run16 COMMAND.COM, CAF into Window, start cmd.exe, exit CMD, then outer
+   COMMAND cannot exit again. ConPTY blocking is an owner hypothesis, not a
+   diagnosis. Distinguish newly typed post-return input from previously delivered
+   native input, target completion from backend retention, and outer guest exit.
+3. Under RDP, the host pointer can leave kvm-window after capture. Logical
+   capture and physical clipping must be distinguished. Prior physical testing
+   was waived, not passed; it does not dismiss this concrete user report.
+
+Latest owner direction narrows S11 to issues 1 and 2, and assigns issue 3 to
+S12. Preserve the side-chat findings as supplied evidence, not as independently
+verified conclusions. S11 implementation follows S10 commit/push.
+
+For issue 2, the required retirement predicate is: no pending admission, no
+active DOS task, no unfinished direct native request, and no other processes
+actually attached to this ConPTY. Close admission atomically before teardown.
+ConPTY existence, direct-target exit and process ancestry are not member counts.
+Keep the same ConPTY during CMD-to-DOS return. Removing the members guard alone
+is prohibited. Verify ordinary final exit, retained attached descendants, and
+automatic retirement after their actual departure, including admission races.
 
 ## Remaining admitted sequence
 
-S9 ConPTY migration closed at pushed P5 3b40345f8. S10 is the only active
-minimization/full closure audit packet. Automatic sequential
-admission is authorized; final T closure requires owner acceptance.
+S9 ConPTY migration closed at pushed P5 3b40345f8. Complete S10 cleanup delivery
+first, then admit S11 mouse/retirement repair. S12 owns RDP pointer capture.
+Neither successor is an active packet before S10 delivery. T423 stays open.
 
 Physical focus/clipping observation is owner-waived with source/unit evidence;
 private-desktop integration remains required. Separate WINMINE, SOL and WRITE
@@ -182,7 +226,7 @@ Delivered Console/Window display; [S6 ledger](../etc/evidence/m0-t423-s6-window-
 ## Recent M0 Closures
 
 T422 remains owner-closed. T423 S9 P5 3b40345f8 is the last closed
-subtask; S10 overall review is admitted. Prior closure records
+subtask; S10 bounded cleanup delivery precedes S11 admission. Prior closure records
 are preserved in the indexed status archive above.
 
 ## Recent Governance

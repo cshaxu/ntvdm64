@@ -31,130 +31,72 @@ static void seed(HANDLE buffer,SHORT width,SHORT height,WCHAR base)
     }
 }
 
-static void verify(SHORT width,SHORT height,WCHAR base)
-{
-    run16_native_capture capture;
-    CHAR_INFO cells[4096];
-    SMALL_RECT rect;
-    DWORD offset=0,count,total=(DWORD)width*height,i;
-    OK(run16_native_capture_begin(&capture));
-    CHECK(capture.info.dwSize.X==width && capture.info.dwSize.Y==height);
-    CHECK(capture.input_codepage==GetConsoleCP() && capture.output_codepage==GetConsoleOutputCP());
-    CHECK(run16_native_capture_read(&capture,0,cells,0,&rect,&count)==ERROR_INVALID_PARAMETER && !count);
-    while(offset<total) {
-        OK(run16_native_capture_read(&capture,offset,cells,4096,&rect,&count));
-        CHECK(count && count<=4096 && (DWORD)rect.Left==offset%width && (DWORD)rect.Top==offset/width);
-        CHECK(count==(DWORD)(rect.Right-rect.Left+1)*(rect.Bottom-rect.Top+1));
-        for(i=0;i<count;++i) {
-            CHECK(cells[i].Char.UnicodeChar==(WCHAR)(base+(offset+i)%26));
-            CHECK(cells[i].Attributes==(WORD)(1+(offset+i)%15));
-        }
-        offset+=count;
-    }
-    CHECK(run16_native_capture_read(&capture,total,cells,4096,&rect,&count)==ERROR_NO_MORE_ITEMS && !count);
-    run16_native_capture_end(&capture);
-    run16_native_capture_end(&capture);
-}
-
 static int child(void)
 {
-    HANDLE first,second;
-    CONSOLE_CURSOR_INFO cursor={37,FALSE};
-    COORD position={77,237},resize={81,300};
-    SMALL_RECT window={10,220,49,244},region;
-    run16_native_capture capture;
-    CHAR_INFO cell;
-    CONSOLE_FONT_INFOEX original_font={sizeof(original_font)},after_font={sizeof(after_font)};
-    DWORD count,flags,members[16],i;
-    count=GetConsoleProcessList(members,16);
-    CHECK(count>=2 && count<=16);
+    HANDLE output;
+    CONSOLE_SCREEN_BUFFER_INFOEX info={sizeof(info)},actual={sizeof(actual)},invalid;
+    CONSOLE_CURSOR_INFO cursor={37,FALSE},actual_cursor;
+    CONSOLE_FONT_INFOEX font={sizeof(font)},after={sizeof(after)};
+    CHAR_INFO cells[80],readback[80];
+    COORD origin={0,0},size={80,1};
+    SMALL_RECT row={0,0,79,0};
+    DWORD i,count;
     CHECK(FreeConsole() && AllocConsole());
-    if(GetConsoleWindow()) ShowWindow(GetConsoleWindow(),SW_HIDE);
-    count=GetConsoleProcessList(members,16);
-    CHECK(count==1 && members[0]==GetCurrentProcessId());
-    first=CreateConsoleScreenBuffer(GENERIC_READ|GENERIC_WRITE,FILE_SHARE_READ|FILE_SHARE_WRITE,
-        NULL,CONSOLE_TEXTMODE_BUFFER,NULL);
-    second=CreateConsoleScreenBuffer(GENERIC_READ|GENERIC_WRITE,FILE_SHARE_READ|FILE_SHARE_WRITE,
-        NULL,CONSOLE_TEXTMODE_BUFFER,NULL);
-    CHECK(first!=INVALID_HANDLE_VALUE && second!=INVALID_HANDLE_VALUE);
-    CHECK(GetCurrentConsoleFontEx(second,FALSE,&original_font));
-    CHECK(SetConsoleActiveScreenBuffer(first));
-    seed(first,80,300,0x4e00);
-    /* A private desktop still inherits the physical display/font limits.
-     * Keep the full backing buffer and scrolled origin; only the fixture's
-     * visible viewport must fit the host (including a small RDP desktop). */
+    if(GetConsoleWindow())ShowWindow(GetConsoleWindow(),SW_HIDE);
+    output=CreateConsoleScreenBuffer(GENERIC_READ|GENERIC_WRITE,
+        FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,CONSOLE_TEXTMODE_BUFFER,NULL);
+    CHECK(output!=INVALID_HANDLE_VALUE);
+    seed(output,80,300,L'A');
+    CHECK(GetCurrentConsoleFontEx(output,FALSE,&font));
+    CHECK(GetConsoleScreenBufferInfoEx(output,&info));
+    info.srWindow=(SMALL_RECT){10,220,29,221};
+    info.dwCursorPosition=(COORD){77,237};
+    info.ColorTable[1]=RGB(17,34,51);
+    OK(run16_native_screen_apply(output,&info,&cursor));
+    CHECK(GetConsoleScreenBufferInfoEx(output,&actual));
+    CHECK(actual.dwSize.X==80 && actual.dwSize.Y==300 &&
+        !memcmp(&actual.srWindow,&info.srWindow,sizeof(info.srWindow)) &&
+        actual.dwCursorPosition.X==77 && actual.dwCursorPosition.Y==237 &&
+        actual.ColorTable[1]==RGB(17,34,51));
+    CHECK(GetConsoleCursorInfo(output,&actual_cursor) &&
+        actual_cursor.dwSize==37 && !actual_cursor.bVisible);
+    invalid=info;invalid.srWindow.Left=-1;
+    CHECK(run16_native_screen_apply(output,&invalid,&cursor)==ERROR_INVALID_DATA);
+    for(i=0;i<80;++i) {cells[i].Char.UnicodeChar=(WCHAR)(0x4e00+i);cells[i].Attributes=(WORD)(1+i%15);}
+    OK(run16_native_cells_write(output,0,cells,80));
+    CHECK(ReadConsoleOutputW(output,readback,size,origin,&row));
+    CHECK(!memcmp(cells,readback,sizeof(cells)));
+    CHECK(run16_native_cells_write(output,24000,cells,1)==ERROR_INVALID_PARAMETER);
+    CHECK(run16_native_cells_write(output,23999,cells,2)==ERROR_INVALID_PARAMETER);
+    CHECK(run16_native_cells_write(output,79,cells,2)==ERROR_INVALID_PARAMETER);
+    CHECK(run16_native_cells_write(output,0,NULL,1)==ERROR_INVALID_PARAMETER);
     {
-        COORD maximum=GetLargestConsoleWindowSize(first);
-        CHECK(maximum.X>=20 && maximum.Y>=2);
-        if(maximum.X<40)window.Right=(SHORT)(window.Left+maximum.X-1);
-        if(maximum.Y<25)window.Bottom=(SHORT)(window.Top+maximum.Y-1);
-    }
-    CHECK(SetConsoleCursorPosition(first,position) && SetConsoleCursorInfo(first,&cursor));
-    CHECK(SetConsoleWindowInfo(first,TRUE,&window));
-    CHECK(SetConsoleCP(65001) && SetConsoleOutputCP(65001));
-    OK(run16_native_capture_begin(&capture));
-    CHECK(!memcmp(&capture.info.srWindow,&window,sizeof(window)));
-    CHECK(capture.info.dwCursorPosition.X==77 && capture.info.dwCursorPosition.Y==237);
-    CHECK(capture.cursor.dwSize==37 && !capture.cursor.bVisible);
-    CHECK(GetConsoleMode(first,&flags) && capture.output_mode==flags);
-    {
-        CONSOLE_SCREEN_BUFFER_INFOEX copied={sizeof(copied)};
-        CONSOLE_CURSOR_INFO copied_cursor;
-        CONSOLE_SCREEN_BUFFER_INFOEX invalid=capture.info;
-        CHAR_INFO sample={{0x4e2d},0x1e};
-        COORD read_origin={0,0};
-        WCHAR readback;
-        DWORD input_mode;
-        capture.info.ColorTable[1]=RGB(17,34,51);
-        OK(run16_native_screen_apply(second,&capture.info,&capture.cursor));
-        CHECK(GetConsoleScreenBufferInfoEx(second,&copied));
-        CHECK(copied.dwSize.X==80 && copied.dwSize.Y==300 &&
-            !memcmp(&copied.srWindow,&window,sizeof(window)) &&
-            copied.dwCursorPosition.X==77 && copied.dwCursorPosition.Y==237 &&
-            copied.ColorTable[1]==RGB(17,34,51));
-        CHECK(GetConsoleCursorInfo(second,&copied_cursor) &&
-            copied_cursor.dwSize==37 && !copied_cursor.bVisible);
-        OK(run16_native_cells_write(second,0,&sample,1));
-        CHECK(ReadConsoleOutputCharacterW(second,&readback,1,read_origin,&count) && count==1 && readback==0x4e2d);
-        invalid.srWindow.Left=-1;
-        CHECK(run16_native_screen_apply(second,&invalid,&capture.cursor)==ERROR_INVALID_DATA);
-        CHECK(run16_native_cells_write(second,80*300,&sample,1)==ERROR_INVALID_PARAMETER);
-        CHECK(GetConsoleMode(GetStdHandle(STD_INPUT_HANDLE),&input_mode));
-        CHECK(SetConsoleMode(GetStdHandle(STD_INPUT_HANDLE),input_mode|ENABLE_WINDOW_INPUT));
+        DWORD mode;
+        CHECK(GetConsoleMode(GetStdHandle(STD_INPUT_HANDLE),&mode));
+        CHECK(SetConsoleMode(GetStdHandle(STD_INPUT_HANDLE),mode|ENABLE_WINDOW_INPUT));
         CHECK(FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE)));
-        for(i=0;i<4;++i)OK(run16_native_screen_apply(second,&capture.info,&capture.cursor));
+        for(i=0;i<4;++i)OK(run16_native_screen_apply(output,&info,&cursor));
         CHECK(GetNumberOfConsoleInputEvents(GetStdHandle(STD_INPUT_HANDLE),&count) && !count);
-        CHECK(SetConsoleMode(GetStdHandle(STD_INPUT_HANDLE),input_mode));
+        CHECK(SetConsoleMode(GetStdHandle(STD_INPUT_HANDLE),mode));
     }
-    run16_native_capture_end(&capture);
-    verify(80,300,0x4e00); /* Includes scrollback and rows outside the viewport. */
-    CHECK(!run16_native_capture_begin(&capture));
-    CHECK(SetConsoleScreenBufferSize(first,resize));
-    CHECK(run16_native_capture_read(&capture,0,&cell,1,&region,&count)==ERROR_RETRY && !count);
-    run16_native_capture_end(&capture);
-    CHECK(SetStdHandle(STD_OUTPUT_HANDLE,first));
-    CHECK(SetConsoleActiveScreenBuffer(second));
-    seed(second,5001,2,L'A'); /* Wider than one tile, not capped at DOS columns. */
-    verify(5001,2,L'A'); /* Must capture active CONOUT$, not stale STDOUT. */
-    /* nxvm's native Console policy: the viewport is not the backing store.
-     * Navigate to the far edge without shrinking the font or losing cells. */
-    window=(SMALL_RECT){4981,0,5000,1};
-    CHECK(SetConsoleWindowInfo(second,TRUE,&window));
-    OK(run16_native_capture_begin(&capture));
-    CHECK(!memcmp(&capture.info.srWindow,&window,sizeof(window)));
-    OK(run16_native_capture_read(&capture,10001,&cell,1,&region,&count));
-    CHECK(count==1 && cell.Char.UnicodeChar==(WCHAR)(L'A'+10001%26));
-    CHECK(GetCurrentConsoleFontEx(second,FALSE,&after_font));
-    CHECK(original_font.dwFontSize.X==after_font.dwFontSize.X &&
-        original_font.dwFontSize.Y==after_font.dwFontSize.Y &&
-        original_font.FontFamily==after_font.FontFamily &&
-        original_font.FontWeight==after_font.FontWeight &&
-        !wcscmp(original_font.FaceName,after_font.FaceName));
-    run16_native_capture_end(&capture);
-    for(i=0;i<3;++i){CHECK(!run16_native_capture_begin(&capture));run16_native_capture_end(&capture);}
-    CloseHandle(first);CloseHandle(second);
+    seed(output,5001,2,L'A');
+    CHECK(GetConsoleScreenBufferInfoEx(output,&info));
+    info.srWindow=(SMALL_RECT){4981,0,5000,1};
+    info.dwCursorPosition=(COORD){4990,1};
+    OK(run16_native_screen_apply(output,&info,&cursor));
+    OK(run16_native_cells_write(output,10001,cells,1));
     {
-        const char text[]="PASS native capture/presentation: Unicode, palette, cursor, exact scrolled viewport, no resize feedback, 300-row history, 5001 columns, bounded tiles, resize retry\n";
+        WCHAR value;
+        CHECK(ReadConsoleOutputCharacterW(output,&value,1,(COORD){5000,1},&count) &&
+            count==1 && value==0x4e00);
+    }
+    CHECK(GetCurrentConsoleFontEx(output,FALSE,&after));
+    CHECK(font.dwFontSize.X==after.dwFontSize.X && font.dwFontSize.Y==after.dwFontSize.Y &&
+        font.FontFamily==after.FontFamily && font.FontWeight==after.FontWeight &&
+        !wcscmp(font.FaceName,after.FaceName));
+    CloseHandle(output);
+    {
+        const char text[]="PASS native Console presentation: scrollback, Unicode, palette, cursor, 5001 columns, invalid spans, no font scaling\n";
         CHECK(WriteFile(report,text,sizeof(text)-1,&count,NULL));
     }
     return 0;

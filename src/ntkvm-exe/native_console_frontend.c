@@ -380,7 +380,7 @@ DWORD run16_native_frontend_create(run16_native_frontend **output)
     ReleaseSRWLockExclusive(&control_lock);
     if(error) { run16_native_frontend_destroy(frontend);return error; }
     /* One I/O owner exists for the whole character session, including DOS-only
-     * time before the first native child. Helper creation remains lazy. */
+     * time before the first native child. ConPTY creation remains lazy. */
     frontend->thread=CreateThread(NULL,0,present,frontend,0,NULL);
     if(!frontend->thread) { error=GetLastError();run16_native_frontend_destroy(frontend);return error; }
     *output=frontend;return ERROR_SUCCESS;

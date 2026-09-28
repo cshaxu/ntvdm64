@@ -19,7 +19,7 @@ $include = Join-Path $library 'libvterm-0.3.3/include'
 $executable = Join-Path $output 'terminal-test.exe'
 Push-Location $repository
 try {
-    & cl.exe /nologo /W4 /MT /std:c11 /Isrc "/I$include" `
+    & cl.exe /nologo /W4 /MT /DNTKVM_CONPTY_TEST_RELEASE /std:c11 /Isrc "/I$include" `
         tests/observation/native_terminal_test.c src/ntkvm-exe/native_terminal.c `
         src/ntkvm-exe/native_conpty.c src/ntkvm-exe/native_console_launch.c `
         (Join-Path $library 'libvterm.lib') "/Fo$output\" "/Fe$executable" `
@@ -52,7 +52,7 @@ try {
         throw 'Incomplete concurrent output assertions'
     }
     $backendExecutable = Join-Path $output 'backend-test.exe'
-    & cl.exe /nologo /W4 /MT /std:c11 /Isrc "/I$include" `
+    & cl.exe /nologo /W4 /MT /DNTKVM_CONPTY_TEST_RELEASE /std:c11 /Isrc "/I$include" `
         tests/observation/native_backend_test.c src/ntkvm-exe/native_console_backend.c `
         src/ntkvm-exe/native_terminal.c src/ntkvm-exe/native_conpty.c `
         src/ntkvm-exe/native_console_launch.c (Join-Path $library 'libvterm.lib') `

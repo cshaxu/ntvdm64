@@ -10,7 +10,7 @@ mechanisms.
 
 Each production source file has one final owner. Original mirrors preserve
 upstream package identity; executable-owned roots own their process-local
-mechanics; and the two small product roots own only stateless shared contracts.
+mechanics; and product-abi holds only shared identity and I/O declarations.
 
 T414 uses `src/mvdm/` as the physical canonical selected-OpenNT
 `base/mvdm` tree. In this document, **MVDM host slice** (and retained shorthand
@@ -239,7 +239,8 @@ stays in its original mirror even when several executables link it. The
 BaseSrv service IDL, protocol implementation and client library are
 `basesrv`-owned; `run16` and `ntvdm` may link that library but do not own a
 parallel protocol. The only shared product data is the small, stateless
-`product-abi`/`package` surface for version identity and package layout.
+`product-abi` surface for version identity and copied I/O contracts. Package
+layout updates worker session state and belongs to ntvdm-exe, not a shared root.
 
 `opennt-abi/host-compat` is the sole exception for a same-shaped historical
 host ABI needed by multiple executable owners. Its README must name the
@@ -461,7 +462,7 @@ ntvdm -> original mvdm + opennt-host + opennt-abi/host-compat
 
 opennt-abi/host-compat -> public modern Win32/NTDLL only
 product-abi -> versioned fixed-width protocol declarations only
-product-package -> package layout/media declarations only
+ntvdm-exe/package_layout -> worker-local media/session configuration
 mvdm-tools -> original mvdm/opennt declarations only (independent tool builds)
 ```
 

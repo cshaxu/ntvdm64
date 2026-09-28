@@ -1,4 +1,4 @@
-#include "nt_thread_alert_compat.h"
+#include "ntvdm-exe/win32/nt_thread_alert_compat.h"
 
 #include <windows.h>
 

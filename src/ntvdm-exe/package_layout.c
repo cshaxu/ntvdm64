@@ -1,4 +1,4 @@
-#include "product-package/package_layout.h"
+#include "package_layout.h"
 
 #include <string.h>
 #include <windows.h>

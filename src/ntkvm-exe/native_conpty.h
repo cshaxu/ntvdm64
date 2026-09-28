@@ -17,10 +17,11 @@ DWORD ntkvm_conpty_launch(ntkvm_conpty *,const run16_native_start *,PROCESS_INFO
  * not a failed write or permission to replay input already in the backend. */
 DWORD ntkvm_conpty_write(ntkvm_conpty *,const void *,DWORD,DWORD *);
 DWORD ntkvm_conpty_resize(ntkvm_conpty *,COORD);
-/* End new process admission and drop the frontend's keepalive reference.
- * Existing clients continue, but new launches through this HPCON are refused.
- * Natural EOF after the last client, not direct-target exit, ends the backend. */
+#ifdef NTKVM_CONPTY_TEST_RELEASE
+/* Test-only keepalive release for natural EOF/resource experiments.
+ * Not a production lifetime operation or an admission-rejection guarantee. */
 DWORD ntkvm_conpty_release(ntkvm_conpty *);
+#endif
 HANDLE ntkvm_conpty_ended(ntkvm_conpty *); /* Borrowed event, not target completion. */
 DWORD ntkvm_conpty_error(ntkvm_conpty *);
 void ntkvm_conpty_cancel(ntkvm_conpty *);
