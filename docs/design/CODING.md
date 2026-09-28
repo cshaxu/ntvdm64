@@ -45,7 +45,7 @@ the source layout does not claim the later Window/display capabilities.
 
 T418 has moved the original three-program runtime to `src/run16-exe/`,
 `src/ntsrv-exe/` and `src/ntvdm-exe/`; T419 adds the product-owned native Console
-manager at `src/monitor-exe/`, producing `monitor.exe`. Retained
+manager at `src/monitor-exe/`, producing `ntmon.exe`. Retained
 `app`/adapter directory READMEs are archival move markers, never production
 source roots or destinations. `session` is worker-local implementation inside
 `ntvdm`; broker service transport is inside `basesrv`.

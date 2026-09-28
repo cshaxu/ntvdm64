@@ -155,7 +155,7 @@ commits containing production changes remain subject to the runtime gate.
    not merely a numeric depth or a later crash. Existing failures may remain
    explicitly open within the admitted scope, never counted as functional
    passes. Unknown or unexecuted comparisons do not pass this gate.
-5. Update O:/winnt with the verified coherent set: monitor.exe, run16.exe,
+5. Update O:/winnt with the verified coherent set: ntmon.exe, run16.exe,
    ntsrv.exe, ntvdm.exe, ntkvm.exe, WOW32.DLL and VDMREDIR.DLL, plus required original
    guest binaries and approved configuration at proper package-relative paths.
    Validate all seven, including unchanged hashes, against the tested manifest

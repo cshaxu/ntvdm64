@@ -50,7 +50,12 @@ try {
             $expected[$stage]=if($kind -eq 'D'){0}elseif($stage -eq 12){37}else{$expected[$stage+1]}
             $commands[$stage]=if($kind -eq 'D'){
                 "$launcher $($PackageRoot)COMMAND.COM /c $($PackageRoot)tests\C$('{0:00}' -f $stage).BAT"
-            }else{"$launcher $(if($kind -eq 'G'){$gui}else{$cui}) $plan $stage"}
+            }elseif($kind -eq 'G'){
+                # This matrix asserts nested completion/exit propagation,
+                # so request GUI waiting explicitly rather than relying on
+                # the launcher's old unconditional GUI wait behavior.
+                "$launcher --wait $gui $plan $stage"
+            }else{"$launcher $cui $plan $stage"}
         }
         $ini=@('[chain]',"kinds=$kinds","report=$events")
         for($stage=1;$stage -le 12;$stage++){
@@ -73,7 +78,7 @@ try {
         [IO.File]::WriteAllText($plan,($ini -join "`r`n")+"`r`n",[Text.Encoding]::ASCII)
         # Seal the generated caller inputs beside the evidence for each case.
         Copy-Item $plan (Join-Path $EvidenceRoot "$case.ini")
-        & $Observer $launcher $PackageRoot $observation --observation-timeout-ms 60000 $gui $plan 1
+        & $Observer $launcher $PackageRoot $observation --observation-timeout-ms 60000 --wait $gui $plan 1
         if($LASTEXITCODE){throw "Observer failed for $case"}
         $observed=Get-Content $observation -Raw
         if($observed -notmatch '(?m)^result=exited' -or

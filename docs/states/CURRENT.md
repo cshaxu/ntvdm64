@@ -14,7 +14,7 @@
 | Objective | Complete Win16/Win32 GUI asynchronous launch and explicit synchronous wait, with reliable launch handoff/failure results and retained text/nested execution semantics. |
 | Non-goals | No guest/library changes, ConPTY migration, path-search repair, background waiter, new scheduler, frontend execution policy or automatic T closure. |
 | Reference Baseline | S7 P1 99276d68d and its verified seven-file O:/winnt publication; component17, Console/Window DOS17, two twelve-target chains, both fault matrices, mouse, graphics return and separate WOW frontiers. |
-| Files And ABI Surface | run16-exe launch/wait and existing BaseClient/BaseSrv/WOW notification boundaries; focused native/guest callers and acceptance tests. Audit original ownership before selecting any new binding. |
+| Files And ABI Surface | run16-exe launch/wait and existing BaseClient/BaseSrv/WOW notification boundaries; owner-approved side-chat ntsrv-exe empty-retention repair and its tests. Audit original ownership before selecting any new binding. |
 | Applicable Rules | EXECUTION, source policy, original mirror/ABI, output hygiene and the owner-approved independent frontend boundary. |
 | Verification | Source audit of interactive/batch/single-command contracts, actual Win16 loading acknowledgement and rundown; real sync/async GUI callers, error/fault/target survival and nested result tests. Preserve all production-P build/runtime/publication gates. |
 | Expected Markers | Async returns a proven launch result while the target remains alive; explicit wait returns its original completion result. Prompt resumes, failed startup is reported, accepted targets survive launcher exit, text I/O ownership and nested completion remain unchanged. |
@@ -54,18 +54,46 @@ and SOL/WRITE retain their known OOM frontier, not usability acceptance.
 
 ## S8 Verification Progress
 
-The [S8 ledger](../etc/evidence/m0-t423-s8-gui-launch-wait.md) identifies shell-owned
-wait policy, shared-WOW completion/result limitations and the missing standalone
-USER startup notification binding. Exact authenticated loader acknowledgement
-and cleanup remain design gates. No S8 production changes or runtime acceptance
-yet; the fully tested S7 package remains the live baseline.
+Owner addition: rename the product executable monitor.exe to ntmon.exe in
+this S8 delivery. Keep src/monitor-exe and the NTVDM Task Monitor UI title;
+only the executable name and its live build/test/package references change.
+The verified seven-file publication must contain ntmon.exe and retire the old
+monitor.exe with a recoverable backup, never leave two product names active.
+
+The [S8 ledger](../etc/evidence/m0-t423-s8-gui-launch-wait.md) retains detailed
+source analysis, every failed attempt, exact hashes and reproducible evidence.
+Implemented: default GUI asynchronous startup, explicit --wait, authenticated
+WOW startup receipt distinct from task completion, original WOWEXEC no-op
+acknowledgement and bounded unfiltered WOWEXEC pending-post binding. Protocol
+9 is selected consistently; original DOS/WOW record policy remains unchanged.
+The approved side-chat repair retains the ten-second empty-broker grace and
+passes seven real RPC cases; it introduces no idle-worker eviction.
+
+Candidate verification passed option19, native GUI16, CMD/batch/input-loop
+Win16 callers, original COMMAND /c and persistent interactive GUI callers,
+new/reused WOW startup faults, real loader failure/recovery, component17,
+Console/Window DOS17, both twelve-target chains and both lifecycle matrices.
+Interactive tests require actual MEM output; explicit waits also require no
+MEM execution before target release. Five real guest mouse cases, a no-input
+negative, Console keymouse and graphics return pass. Separate headless WOW
+observations retain WINMINE and the inherited SOL/WRITE OOM frontiers, not
+new SOL/WRITE usability. Physical desktop focus remains owner-waived.
+
+Final source review is complete. The coherent tested seven-file S8 set is now
+at O:/winnt, including ntmon.exe; guest/configuration and NTVDM.REG were
+preserved. The complete previous package and before/after hash manifest are
+under build/M0-T423/S8/pre-publication. Both formal graphs have no pending
+work, and candidate/published hashes match. Published-path Console DOS17,
+Window MEM/nested MEM/EDIT and the three separate WOW frontiers passed.
+S8 P2 is prepared for committed delivery; closure registration follows push.
 
 ## Current Technical Baseline
 
 S6 P1 f0f671e5e delivered independent frontend Console/Window display;
-[S6 ledger](../etc/evidence/m0-t423-s6-window-display.md). S7's tested
-new-name ntkvm/ntsrv seven-file mouse checkpoint is now at O:/winnt; the
-previous old-name package is retained under build/M0-T423/S7/pre-rename-publication.
+[S6 ledger](../etc/evidence/m0-t423-s6-window-display.md). S7's accepted
+ntkvm/ntsrv seven-file mouse checkpoint is recoverable under
+build/M0-T423/S8/pre-publication; the reviewed S8 set is now at O:/winnt,
+with published-path verification complete and committed delivery pending.
 
 Earlier S1/S2 lifecycle and copied-I/O delivery, S3 preservation/replanning,
 S4 independent frontend delivery (9c27b5fd2), and S5 hidden-backend acceptance

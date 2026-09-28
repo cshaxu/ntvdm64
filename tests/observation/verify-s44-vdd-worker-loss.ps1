@@ -41,7 +41,7 @@ if (@(PackageProcesses).Count -ne 0) {
 }
 
 New-Item -ItemType Directory -Force -Path $testRoot, $logRoot | Out-Null
-foreach ($name in @('run16.exe', 'ntsrv.exe', 'ntvdm.exe', 'monitor.exe')) {
+foreach ($name in @('run16.exe', 'ntsrv.exe', 'ntvdm.exe', 'ntmon.exe')) {
     Copy-Item -LiteralPath (Join-Path $build $name) -Destination (Join-Path $runtime $name) -Force
 }
 Copy-Item -LiteralPath (Join-Path $build 's44-entry-hook-vdd.dll') -Destination $testVdd -Force

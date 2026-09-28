@@ -9,6 +9,10 @@ DWORD OpenNtBaseClientConnectCurrent(void);
 /* Arm only after launcher creation rollback is no longer required. Workers
  * arm immediately after Connect, before entering guest code. */
 DWORD OpenNtBaseClientWatchBroker(void);
+DWORD WINAPI OpenNtBaseClientWowStarted(ULONG task);
+/* Resolve only this client's original parent completion handle; no caller
+ * guesses transport receipts. Returned startup event is owned/wait-only. */
+DWORD OpenNtBaseClientWowStartup(HANDLE parent,HANDLE *event,BOOL *started);
 DWORD OpenNtBaseClientFrontendUsage(DWORD *pending,DWORD *tasks);
 DWORD OpenNtBaseClientRetireFrontend(void);
 DWORD OpenNtBaseClientRegisterFrontendRoot(HANDLE capability);

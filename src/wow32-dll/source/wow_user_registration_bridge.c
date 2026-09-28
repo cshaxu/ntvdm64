@@ -14,6 +14,8 @@
 #include <stdio.h>
 
 VOID WINAPI FreeDDEData(HANDLE, BOOL, BOOL);
+/* Uses ntvdm's existing authenticated BaseClient, never a DLL-private peer. */
+DWORD WINAPI OpenNtBaseClientWowStarted(ULONG task);
 
 /* ADAPTER-WOW-056: UserRegisterWowHandlers is one original all-or-nothing
  * ABI transaction.  Modern USER32 exposes its historical name but rejects
@@ -117,6 +119,13 @@ static void registration_trace(const char *stage, DWORD result)
     CloseHandle(file);
 }
 
+VOID WINAPI wow_user_notify_startup_noop(ULONG task)
+{
+    DWORD error = OpenNtBaseClientWowStarted(task);
+    registration_trace("StartupNoOpNotification", error);
+    if (error) SetLastError(error);
+}
+
 static void registration_trace_class(LPCSTR name, ATOM result)
 {
     char path[MAX_PATH];
@@ -189,6 +198,16 @@ static BOOL WINAPI registered_init_task(UINT version, LPCSTR app_name,
         version, app_name, task_id, hotkey, shared_id, x, y, width, height,
         show);
     registration_trace("InitTask", result);
+    if (result && shared_id && shared_id!=(DWORD)-1) {
+        DWORD error=OpenNtBaseClientWowStarted(shared_id);
+        registration_trace("InitTaskNotification",error);
+        if (error) {
+            /* Original W32Thread owns bounded retry and W32DestroyTask.
+             * The lifecycle rejects reinitializing an already-bound task. */
+            SetLastError(error);
+            return FALSE;
+        }
+    }
     return result;
 }
 

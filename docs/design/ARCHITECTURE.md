@@ -214,7 +214,7 @@ owned:
 src/run16-exe/   -> run16.exe
 src/ntsrv-exe/ -> ntsrv.exe
 src/ntvdm-exe/   -> ntvdm.exe
-src/monitor-exe/ -> monitor.exe
+src/monitor-exe/ -> ntmon.exe
 src/ntkvm-exe/ -> ntkvm.exe
 ```
 

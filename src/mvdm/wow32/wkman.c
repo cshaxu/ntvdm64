@@ -342,6 +342,9 @@ SkipWowExec:
         // commands.
         //
         if ((! fSeparateWow) && strstr(VDMInfo.AppName, "wowexec.exe")) {
+            /* DIVERGENCE(MVDM-HOST-DIV-319): acknowledge the original no-op,
+             * distinct from a failed task which never reached InitTask. */
+            wow_user_notify_startup_noop(VDMInfo.iTask);
             ExitVDM(WOWVDM, VDMInfo.iTask);
             goto SkipWowExec;
         }

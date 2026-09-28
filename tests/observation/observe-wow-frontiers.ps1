@@ -5,6 +5,8 @@ param(
     [string]$PackageRoot='O:\winnt',
     [string]$ProcessPackageRoot,
     [string]$LogRoot,
+    [ValidateRange(0,5000)][int]$PostExitObservationMs=0,
+    [switch]$WaitTarget,
     [ValidateSet('WINMINE.EXE','SOL.EXE','WRITE.EXE')]
     [string[]]$Guests=@('WINMINE.EXE','SOL.EXE','WRITE.EXE')
 )
@@ -40,9 +42,14 @@ foreach($guest in $Guests){
     $launcher=$null
     try {
         $start=[Diagnostics.ProcessStartInfo]::new($Observer)
-        foreach($argument in @((Join-Path $PackageRoot 'run16.exe'),$PackageRoot,
-            ($stem+'.txt'),$guest,'--observation-timeout-ms','20000')){
+        $observerArguments=@((Join-Path $PackageRoot 'run16.exe'),$PackageRoot,($stem+'.txt'))
+        if($WaitTarget){$observerArguments+='--wait'}
+        $observerArguments+=@($guest,'--observation-timeout-ms','20000')
+        foreach($argument in $observerArguments){
             $start.ArgumentList.Add($argument)
+        }
+        if($PostExitObservationMs){
+            $start.EnvironmentVariables['MVDM_OBSERVER_POST_EXIT_MS']=[string]$PostExitObservationMs
         }
         $start.UseShellExecute=$false
         $start.WindowStyle=[Diagnostics.ProcessWindowStyle]::Hidden

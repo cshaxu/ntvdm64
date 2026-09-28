@@ -446,6 +446,10 @@ runtime-discovery inputs.  The complete per-file provenance is in
 
 ## Divergence register
 
+| ID | Original purpose | Reason | Implementation | Files |
+| --- | --- | --- | --- | --- |
+| MVDM-HOST-DIV-319 | Complete redundant shared WOWEXEC without starting another task. | Standalone asynchronous launch needs to distinguish this original successful no-op from failed initialization; ExitVDM alone carries no reason. | One call before the unchanged original ExitVDM publishes the authenticated startup acknowledgement through the DLL binding; original classification, completion and error cleanup remain owned here. | `wow32/wkman.c`; `../wow32-dll/source/wow_user_registration_bridge.c`; [S8 evidence](../../docs/etc/evidence/m0-t423-s8-gui-launch-wait.md) |
+
 ### Re-rooted MVDM support declarations
 
 | ID | Original purpose | Reason | Implementation | Files |

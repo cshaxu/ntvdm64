@@ -15,7 +15,7 @@ midl.exe /nologo /env win32 /target NT100 /prefix client Client_ /prefix server 
 if errorlevel 1 exit /b 1
 cl.exe /nologo /c /MT /W4 /we4013 /I . /I "$repo\src" "$repo\src\monitor-exe\main.c" service_c.c "$repo\src\ntsrv-exe\transport\rpc_security.c" "$repo\tests\observation\monitor_layout_test.c"
 if errorlevel 1 exit /b 1
-link.exe /nologo /subsystem:console /out:monitor.exe main.obj service_c.obj rpc_security.obj rpcrt4.lib kernel32.lib user32.lib advapi32.lib
+link.exe /nologo /subsystem:console /out:ntmon.exe main.obj service_c.obj rpc_security.obj rpcrt4.lib kernel32.lib user32.lib advapi32.lib
 if errorlevel 1 exit /b 1
 link.exe /nologo /subsystem:console /out:monitor_layout_test.exe monitor_layout_test.obj service_c.obj rpc_security.obj rpcrt4.lib kernel32.lib user32.lib advapi32.lib
 exit /b %errorlevel%

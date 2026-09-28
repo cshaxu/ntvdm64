@@ -10,7 +10,7 @@ $BuildRoot=(Resolve-Path -LiteralPath $BuildRoot).Path
 if(!$BuildRoot.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::OrdinalIgnoreCase)){
     throw 'Use a prebuilt repository build cache'
 }
-$targets=@('run16.exe','ntkvm.exe','ntsrv.exe','ntvdm.exe','monitor.exe','VDMREDIR.dll')
+$targets=@('run16.exe','ntkvm.exe','ntsrv.exe','ntvdm.exe','ntmon.exe','VDMREDIR.dll')
 $files=@('generated/softpc-embedded-roms.rc','generated/ntvdm-wow32-provider.def')
 $before=@($files | ForEach-Object {
     $path=Join-Path $BuildRoot $_

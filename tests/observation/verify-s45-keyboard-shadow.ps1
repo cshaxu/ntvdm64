@@ -66,7 +66,7 @@ foreach ($name in $originalEnvironment.Keys) {
 }
 
 New-Item -ItemType Directory -Force -Path $logs,$tests | Out-Null
-foreach ($name in @('run16.exe','ntsrv.exe','ntvdm.exe','monitor.exe')) {
+foreach ($name in @('run16.exe','ntsrv.exe','ntvdm.exe','ntmon.exe')) {
     Copy-Item -LiteralPath (Join-Path $build $name) -Destination (Join-Path $runtime $name) -Force
 }
 

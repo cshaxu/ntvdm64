@@ -27,16 +27,17 @@ function Invoke-NinjaTarget([string]$directory, [string]$target) {
 # T422 owns these worker-local objects. Build exactly those selected objects;
 # do not rely on a provider-only build or on an incidental aggregate archive.
 $workerObjects = @(
+    (Join-Path $worker 'obj/worker/rpc_client.obj'),
+    (Join-Path $worker 'obj/worker/stub.obj'),
     (Join-Path $worker 'obj/adapter-wow-worker/wow_gdi_alias.obj'),
     (Join-Path $worker 'obj/adapter-wow-worker/wow_user_runtime.obj'),
     (Join-Path $worker 'obj/adapter-wow-worker/wow_user_session_binding.obj'),
     (Join-Path $worker 'obj/ntvdm/session/guest_memory_lease.obj'),
     (Join-Path $worker 'obj/ntvdm/session/session.obj')
 )
-foreach ($object in $workerObjects) {
-    $target = $object.Substring($worker.Length + 1).Replace('\', '/')
-    Invoke-NinjaTarget $worker $target
-}
+Invoke-NinjaTarget $worker (($workerObjects | ForEach-Object {
+    $_.Substring($worker.Length + 1).Replace('\', '/')
+}) -join ' ')
 foreach ($object in $workerObjects) {
     if (!(Test-Path -LiteralPath $object -PathType Leaf)) {
         throw "Missing selected worker object: $object"
@@ -46,12 +47,16 @@ $fixtureSupportObjects = @(
     (Join-Path $worker 'obj/tests/ccpu_host_fixture_seams.obj'),
     (Join-Path $worker 'obj/host/softpc-resource.res')
 )
+Invoke-NinjaTarget $worker (($fixtureSupportObjects | ForEach-Object {
+    $_.Substring($worker.Length + 1).Replace('\', '/')
+}) -join ' ')
 foreach ($object in $fixtureSupportObjects) {
     if (!(Test-Path -LiteralPath $object -PathType Leaf)) {
         throw "Missing selected fixture support object: $object"
     }
 }
 $fixtureLibraries = @(
+    'opennt-base-client.lib', 'opennt-base-bindings.lib', 'broker-transport.lib',
     'worker-shell.lib', 'worker-command-bindings.lib',
     'original-softpc-host-fixture-roots.lib', 'original-softpc-support.lib',
     'original-softpc-bios.lib', 'original-softpc-keymouse.lib',
@@ -69,6 +74,7 @@ $fixtureLibraries = @(
     'softpc-ccpu-vector-defaults.lib', 'softpc-activity-check.lib',
     'original-ccpu386.lib'
 )
+Invoke-NinjaTarget $worker ($fixtureLibraries -join ' ')
 $fixtureLibraries = @($fixtureLibraries | ForEach-Object { Join-Path $worker $_ })
 foreach ($library in $fixtureLibraries) {
     if (!(Test-Path -LiteralPath $library -PathType Leaf)) {
@@ -113,7 +119,7 @@ $objects = @([regex]::Matches($link, '(?<!\S)obj/[^\s"]+\.obj') |
 if ($objects.Count -lt 77) { throw 'Incomplete production provider object selection' }
 & $lib /nologo "/out:$out\provider.lib" @objects >> "$out\build.log" 2>&1
 if ($LASTEXITCODE) { throw 'Provider archive failed' }
-Invoke-Build ('link /nologo /force:multiple /NODEFAULTLIB:ntvdm.lib /out:"'+$out+'\fixture.exe" /map:"'+$out+'\fixture.map" "'+$out+'\fixture.obj" '+(($parentObjects | ForEach-Object { '"'+$_+'"' }) -join ' ')+' "'+$out+'\provider.lib" '+((@($workerObjects)+@($fixtureSupportObjects)+@($fixtureLibraries) | ForEach-Object { '"'+$_+'"' }) -join ' ')+' kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib')
+Invoke-Build ('link /nologo /force:multiple /NODEFAULTLIB:ntvdm.lib /out:"'+$out+'\fixture.exe" /map:"'+$out+'\fixture.map" "'+$out+'\fixture.obj" '+(($parentObjects | ForEach-Object { '"'+$_+'"' }) -join ' ')+' "'+$out+'\provider.lib" '+((@($workerObjects)+@($fixtureSupportObjects)+@($fixtureLibraries) | ForEach-Object { '"'+$_+'"' }) -join ' ')+' rpcrt4.lib kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib')
 if (!(Test-Path -LiteralPath "$out\fixture.exe" -PathType Leaf)) {
     throw "Task cleanup fixture link produced no executable: $out\fixture.exe"
 }

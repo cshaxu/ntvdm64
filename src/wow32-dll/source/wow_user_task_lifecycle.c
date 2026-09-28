@@ -501,10 +501,22 @@ BOOL WINAPI wow_user_task_lifecycle_wait(wow_user_task_lifecycle *owner,
 {
     wow_user_task_lifecycle_thread *task = current_task(owner);
     BOOL result = FALSE;
+    DWORD queue_status;
     if (!task || !wow_user_runtime_enter(wow_user_runtime_current())) {
         SetLastError(ERROR_INVALID_STATE); return FALSE;
     }
-    __try { result = xxxSleepTask(FALSE, wowexec_event, &task->thread); }
+    __try {
+        /* taskman.c checks WOWEXEC's queue bits before a hardware-only wake.
+         * Native queue observers can clear change bits without removing a
+         * posted command. Preserve that pending input for WOWEXEC's unfiltered
+         * PeekMessage, as queue.c restores examined but unconsumed wake bits.
+         * Refresh, not accumulate: removed posts must not keep it runnable.
+         * Ordinary WaitMessage/filter semantics remain in their own binding. */
+        queue_status = GetQueueStatus(QS_ALLINPUT);
+        task->thread.pcti->fsChangeBits = LOWORD(queue_status) |
+            (HIWORD(queue_status) & QS_POSTMESSAGE);
+        result = xxxSleepTask(FALSE, wowexec_event, &task->thread);
+    }
     __finally { (void)wow_user_runtime_leave(wow_user_runtime_current()); }
     return result;
 }

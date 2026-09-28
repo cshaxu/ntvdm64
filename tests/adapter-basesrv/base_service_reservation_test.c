@@ -7,6 +7,7 @@
 #include <stdlib.h>
 
 extern PCONSOLERECORD DOSHead;
+extern PWOWHEAD WOWHead;
 
 #define CHECK(value) do { if (!(value)) { fprintf(stderr,"FAIL %d\\n",__LINE__);return 1; } } while (0)
 
@@ -166,6 +167,8 @@ int main(int argc,char **argv)
     DWORD launcherGeneration=0,workerGeneration=0,laterGeneration=0,wowGeneration=0,queryCalls=0;
     uint64_t reservation=0,claimed=0,wowReservation=0;
     ULONG task=0,wowTask=0;
+    HANDLE wowStartup=NULL;
+    BOOL wowStarted=FALSE;
     HANDLE console=NULL;
     char command[MAX_PATH+32];
     BASE_API_MSG check={0},reply={0},update={0},get={0};
@@ -196,7 +199,7 @@ int main(int argc,char **argv)
             "--completed-worker-exit",
             "--unfinished-worker-exit",
             "--management-terminate","--launcher-exit-survival","--launcher-disconnect-survival",
-            "--completion-rundown-race"
+            "--completion-rundown-race","--wow-start-late-query"
         };
         size_t index;
         if (argc!=2) return 64;
@@ -1212,6 +1215,22 @@ int main(int argc,char **argv)
         updateAnswer,updateAnswerBytes,&updateAnswerBytes,&parentEvent,&parentReceipt)==ERROR_SUCCESS);
     CHECK(ResumeThread(wowChild.hThread)!=(DWORD)-1);
     CHECK(OpenNtBaseServiceConnect(service,wowChild.hProcess,&wowWorker,&wowGeneration)==ERROR_SUCCESS);
+    CHECK(OpenNtBaseServiceWowStarted(launcher,GetCurrentProcessId(),launcherGeneration,
+        wowTask)==ERROR_ACCESS_DENIED);
+    CHECK(OpenNtBaseServiceWowStarted(wowWorker,wowChild.dwProcessId,wowGeneration+1,
+        wowTask)==ERROR_ACCESS_DENIED);
+    CHECK(OpenNtBaseServiceWowStarted(wowWorker,wowChild.dwProcessId,wowGeneration,
+        wowTask)==ERROR_INVALID_STATE);
+    CHECK(OpenNtBaseServiceWowStartup(launcher,GetCurrentProcessId(),launcherGeneration,
+        parentReceipt+2,&wowStartup,&wowStarted)==ERROR_ACCESS_DENIED && !wowStartup && !wowStarted);
+    CHECK(OpenNtBaseServiceWowStartup(wowWorker,wowChild.dwProcessId,wowGeneration,
+        parentReceipt,&wowStartup,&wowStarted)==ERROR_ACCESS_DENIED && !wowStartup);
+    if (argc==1) {
+        CHECK(OpenNtBaseServiceWowStartup(launcher,GetCurrentProcessId(),launcherGeneration,
+            parentReceipt,&wowStartup,&wowStarted)==ERROR_SUCCESS && wowStartup && !wowStarted);
+        CHECK(WaitForSingleObject(wowStartup,0)==WAIT_TIMEOUT);
+        CHECK(!SetEvent(wowStartup) && GetLastError()==ERROR_ACCESS_DENIED);
+    }
     {
         HANDLE denied=NULL;
         /* Even a valid C-segment capability cannot turn a registered WOW
@@ -1247,9 +1266,96 @@ int main(int argc,char **argv)
         &getAnswer,&wireBytes,&getWait,standard,&standardCount)==ERROR_SUCCESS);
     CHECK(getAnswer!=NULL && getWait==NULL && standardCount==0);
     OpenNtBaseServiceReleaseCommandReply(getAnswer);getAnswer=NULL;
+    if (wowStartup) {
+        /* Test-only identity fault: same task number, different original
+         * parent receipt must not notify this launcher. No product mutation. */
+        HANDLE original;
+        CHECK(WOWHead && WOWHead->WOWRecord && WOWHead->WOWRecord->iTask==wowTask);
+        original=WOWHead->WOWRecord->hWaitForParentServer;
+        WOWHead->WOWRecord->hWaitForParentServer=(HANDLE)(ULONG_PTR)(parentReceipt+2);
+        CHECK(OpenNtBaseServiceWowStarted(wowWorker,wowChild.dwProcessId,wowGeneration,
+            wowTask)==ERROR_SUCCESS);
+        CHECK(WaitForSingleObject(wowStartup,0)==WAIT_TIMEOUT);
+        WOWHead->WOWRecord->hWaitForParentServer=original;
+    }
+    CHECK(OpenNtBaseServiceWowStarted(wowWorker,wowChild.dwProcessId,wowGeneration,
+        wowTask)==ERROR_SUCCESS);
+    if (wowStartup) CHECK(WaitForSingleObject(wowStartup,0)==WAIT_OBJECT_0);
+    CHECK(WaitForSingleObject(parentEvent,0)==WAIT_TIMEOUT);
+    if (wowStartup) CloseHandle(wowStartup);
+    wowStartup=NULL;
     { BOOL closeWowWait=FALSE;
       CHECK(OpenNtBaseServiceExit(wowWorker,wowChild.dwProcessId,wowGeneration,TRUE,wowTask,
           &closeWowWait)==ERROR_SUCCESS && !closeWowWait); }
+    CHECK(OpenNtBaseServiceWowStartup(launcher,GetCurrentProcessId(),launcherGeneration,
+        parentReceipt,&wowStartup,&wowStarted)==ERROR_SUCCESS && wowStarted);
+    CHECK(WaitForSingleObject(wowStartup,0)==WAIT_OBJECT_0);
+    CHECK(WaitForSingleObject(parentEvent,0)==WAIT_OBJECT_0);
+    CloseHandle(wowStartup);wowStartup=NULL;
+    CHECK(OpenNtBaseServiceWowStarted(wowWorker,wowChild.dwProcessId,wowGeneration,
+        wowTask)==ERROR_INVALID_STATE);
+    puts("PASS WOW startup authentication, wait-only notification and immediate-completion latch");
+    {
+        DWORD oldReceipt=parentReceipt;
+        ULONG oldTask=wowTask;
+        BOOL closeWowWait=FALSE;
+        /* Reuse the original WOWHead with another Check, not a second
+         * worker or a fixture-authored task record. */
+        CHECK(OpenNtBaseEncodeCheckCommand(&check,11,launcherGeneration,NULL,0,&wireBytes));
+        free(wire);wire=malloc(wireBytes);
+        CHECK(wire && OpenNtBaseEncodeCheckCommand(&check,11,launcherGeneration,
+            wire,wireBytes,&wireBytes));
+        CHECK(OpenNtBaseServiceCheck(launcher,GetCurrentProcessId(),launcherGeneration,
+            wire,wireBytes,answer,answerBytes,&answerBytes,&parentEvent,&parentReceipt)==ERROR_SUCCESS);
+        CHECK(OpenNtBaseApplyCheckReply(answer,answerBytes,launcherGeneration,11,&reply));
+        CHECK(reply.ReturnValue==STATUS_SUCCESS && reply.u.CheckVDM.VDMState==VDM_PRESENT_AND_READY);
+        wowTask=reply.u.CheckVDM.iTask;
+        CHECK(wowTask!=oldTask && parentReceipt!=oldReceipt);
+        CHECK(OpenNtBaseServiceWowStartup(launcher,GetCurrentProcessId(),launcherGeneration,
+            oldReceipt,&wowStartup,&wowStarted)==ERROR_ACCESS_DENIED && !wowStartup);
+        CHECK(OpenNtBaseServiceWowStartup(launcher,GetCurrentProcessId(),launcherGeneration,
+            parentReceipt,&wowStartup,&wowStarted)==ERROR_SUCCESS && !wowStarted);
+        CHECK(WaitForSingleObject(wowStartup,0)==WAIT_TIMEOUT);
+        CHECK(OpenNtBaseServiceGet(wowWorker,wowChild.dwProcessId,wowGeneration,getWire,getWireBytes,
+            &getAnswer,&wireBytes,&getWait,standard,&standardCount)==ERROR_SUCCESS);
+        CHECK(getAnswer && !getWait && !standardCount);
+        OpenNtBaseServiceReleaseCommandReply(getAnswer);getAnswer=NULL;
+        CHECK(OpenNtBaseServiceWowStarted(wowWorker,wowChild.dwProcessId,wowGeneration,
+            wowTask)==ERROR_SUCCESS);
+        CHECK(WaitForSingleObject(wowStartup,0)==WAIT_OBJECT_0);
+        CHECK(WaitForSingleObject(parentEvent,0)==WAIT_TIMEOUT);
+        CloseHandle(wowStartup);wowStartup=NULL;
+        CHECK(OpenNtBaseServiceExit(wowWorker,wowChild.dwProcessId,wowGeneration,TRUE,wowTask,
+            &closeWowWait)==ERROR_SUCCESS && !closeWowWait);
+        CHECK(WaitForSingleObject(parentEvent,0)==WAIT_OBJECT_0);
+        puts("PASS reused WOW gets a fresh receipt/latch; stale startup identity rejected");
+    }
+    /* Original failed-exec removes a dispatched task without InitTask. Its
+     * zero WOW completion must not become a positive startup receipt. */
+    { BOOL closeWowWait=FALSE;
+    CHECK(OpenNtBaseEncodeCheckCommand(&check,12,launcherGeneration,NULL,0,&wireBytes));
+    free(wire);wire=malloc(wireBytes);
+    CHECK(wire && OpenNtBaseEncodeCheckCommand(&check,12,launcherGeneration,wire,wireBytes,&wireBytes));
+    CHECK(OpenNtBaseServiceCheck(launcher,GetCurrentProcessId(),launcherGeneration,
+        wire,wireBytes,answer,answerBytes,&answerBytes,&parentEvent,&parentReceipt)==ERROR_SUCCESS);
+    CHECK(OpenNtBaseApplyCheckReply(answer,answerBytes,launcherGeneration,12,&reply));
+    CHECK(reply.ReturnValue==STATUS_SUCCESS && reply.u.CheckVDM.VDMState==VDM_PRESENT_AND_READY);
+    wowTask=reply.u.CheckVDM.iTask;
+    CHECK(OpenNtBaseServiceGet(wowWorker,wowChild.dwProcessId,wowGeneration,getWire,getWireBytes,
+        &getAnswer,&wireBytes,&getWait,standard,&standardCount)==ERROR_SUCCESS);
+    CHECK(getAnswer && !getWait && !standardCount);
+    OpenNtBaseServiceReleaseCommandReply(getAnswer);getAnswer=NULL;
+    CHECK(OpenNtBaseServiceExit(wowWorker,wowChild.dwProcessId,wowGeneration,TRUE,wowTask,
+        &closeWowWait)==ERROR_SUCCESS && !closeWowWait);
+    CHECK(WaitForSingleObject(parentEvent,0)==WAIT_OBJECT_0);
+    CHECK(OpenNtBaseServiceWowStartup(launcher,GetCurrentProcessId(),launcherGeneration,
+        parentReceipt,&wowStartup,&wowStarted)==ERROR_SUCCESS && !wowStarted);
+    CHECK(WaitForSingleObject(wowStartup,0)==WAIT_TIMEOUT);
+    CHECK(OpenNtBaseServiceWowStarted(wowWorker,wowChild.dwProcessId,wowGeneration,
+        wowTask)==ERROR_INVALID_STATE);
+    CloseHandle(wowStartup);wowStartup=NULL;
+    puts("PASS failed WOW completion has no startup acknowledgement; late report rejected");
+    }
     CHECK(OpenNtBaseServiceDisconnect(wowWorker)==ERROR_SUCCESS);wowWorker=NULL;
     CloseHandle(wowContext);CloseHandle(wowFrontend);wowContext=wowFrontend=NULL;
     CHECK(OpenNtBaseServiceReleaseReservation(launcher,GetCurrentProcessId(),launcherGeneration,wowReservation)==ERROR_SUCCESS);

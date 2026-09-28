@@ -9,6 +9,7 @@
 #include "ntsrv-exe/opennt/include/base_config.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
 #include "frontend_scope.h"
+#include "launch_options.h"
 #include "product-abi/console_io.h"
 #include <shellapi.h>
 #include <stdio.h>
@@ -228,7 +229,35 @@ static DWORD connect_broker(void)
     return error;
 }
 
-static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command,run16_frontend_scope *frontend_scope,BOOL initial_console_only)
+static DWORD wait_wow_startup(HANDLE parent,HANDLE worker)
+{
+    HANDLE ready=NULL,events[3];
+    BOOL started=FALSE;
+    DWORD error,wait,result=0,count=2;
+    error=OpenNtBaseClientWowStartup(parent,&ready,&started);
+    if (error) return error;
+    events[0]=ready; events[1]=parent;
+    if (worker) events[count++]=worker;
+    wait=started ? WAIT_OBJECT_0 : WaitForMultipleObjects(count,events,FALSE,INFINITE);
+    if (wait==WAIT_FAILED) error=GetLastError();
+    CloseHandle(ready); ready=NULL;
+    if (error) return error;
+    /* Completion can race the first query/wait. Re-read the latched result
+     * before consuming the original parent result or declaring load failure. */
+    error=OpenNtBaseClientWowStartup(parent,&ready,&started);
+    if (ready) CloseHandle(ready);
+    if (error) return error;
+    if (started) return ERROR_SUCCESS;
+    if (worker && WaitForSingleObject(worker,0)==WAIT_OBJECT_0)
+        return ERROR_PROCESS_ABORTED;
+    if (WaitForSingleObject(parent,0)!=WAIT_OBJECT_0) return ERROR_INVALID_STATE;
+    if (!BaseCheckForVDM(parent,&result)) return GetLastError();
+    /* Shared WOW's original zero completion is not a successful InitTask.
+     * No exact guest LoadModule error is available at this interface. */
+    return result ? result : ERROR_DLL_INIT_FAILED;
+}
+
+static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command,run16_frontend_scope *frontend_scope,BOOL initial_console_only,BOOL wait_target)
 {
     BASE_API_MSG message = {0};
     ANSI_STRING environment = {0};
@@ -334,6 +363,11 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command,run16_f
         }
         result=OpenNtBaseClientWatchBroker();
         if (result) { CloseHandle(parent_wait); goto done; }
+        if (binary==BINARY_TYPE_WIN16 && !wait_target) {
+            result=wait_wow_startup(parent_wait,NULL);
+            CloseHandle(parent_wait);
+            goto done;
+        }
         {
             DWORD wait=WaitForSingleObject(parent_wait,INFINITE);
             if (wait!=WAIT_OBJECT_0 || !BaseCheckForVDM(parent_wait,&result))
@@ -478,6 +512,10 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command,run16_f
     if (result) {
         goto waited;
     }
+    if (binary==BINARY_TYPE_WIN16 && !wait_target) {
+        result=wait_wow_startup(parent_wait,worker.hProcess);
+        goto waited;
+    }
     /* A dead worker cannot deliver another completion. Keep original task
      * results, but never return to an infinite event wait after process exit. */
     {
@@ -573,7 +611,7 @@ static BOOL WINAPI launcher_control(DWORD event)
     return event == CTRL_C_EVENT || event == CTRL_BREAK_EVENT;
 }
 
-static DWORD launch_gui(PCWSTR application,PCWSTR command)
+static DWORD launch_gui(PCWSTR application,PCWSTR command,BOOL wait)
 {
     WCHAR directory[MAX_PATH];
     LPWCH environment=NULL;
@@ -594,9 +632,11 @@ static DWORD launch_gui(PCWSTR application,PCWSTR command)
     if(!error)error=run16_native_launch_start(packet,bytes,&child);
     if(!error){
         CloseHandle(child.hThread);
-        if(WaitForSingleObject(child.hProcess,INFINITE)!=WAIT_OBJECT_0 ||
-            !GetExitCodeProcess(child.hProcess,&result))error=GetLastError();
-        else error=result;
+        if(wait) {
+            if(WaitForSingleObject(child.hProcess,INFINITE)!=WAIT_OBJECT_0 ||
+                !GetExitCodeProcess(child.hProcess,&result))error=GetLastError();
+            else error=result;
+        }
         CloseHandle(child.hProcess);
     }
     if(packet)HeapFree(GetProcessHeap(),0,packet);
@@ -638,6 +678,7 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
     PCWSTR launch_command;
     PCWSTR option, tail;
     run16_frontend_scope *frontend_scope=NULL;
+    run16_launch_options options;
     WCHAR application[MAX_PATH];
     WCHAR split_image[MAX_PATH];
     WCHAR normalized_command[MAX_PATH + MAXIMUM_VDM_COMMAND_LENGTH + 8u];
@@ -649,11 +690,12 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
     (void)instance;
     (void)previous;
     (void)show;
-    if (!command || !*command)
+    if (!run16_parse_launch_options(command,&options))
     {
-        fputs("Usage: run16.exe <binary> [arguments]\n", stderr);
+        fputs("Usage: run16.exe [--wait] [--] <binary> [arguments]\n", stderr);
         return ERROR_INVALID_PARAMETER;
     }
+    command=(PWSTR)options.command;
     /* Decode only to identify the target; original BaseCheckVDM receives the
      * untouched tail and supplies its original OEM command representation. */
     arguments = CommandLineToArgvW(command, &count);
@@ -803,7 +845,7 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
         {
             if ((binary & ~BINARY_SUBTYPE_MASK)==BINARY_TYPE_DOS)
                 result=run16_frontend_scope_begin(&frontend_scope);
-            if (!result) result = launch_vdm(binary, application, launch_command,frontend_scope,initial_console_only);
+            if (!result) result = launch_vdm(binary, application, launch_command,frontend_scope,initial_console_only,options.wait);
             s34_run16_trace("worker",result);
         }
         run16_frontend_scope_end(frontend_scope);frontend_scope=NULL;
@@ -846,7 +888,7 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
         result=launch_native(frontend_scope,image_resolved ? application : image_argument,launch_command);
         goto done;
     }
-    result=launch_gui(image_resolved ? application : image_argument,launch_command);
+    result=launch_gui(image_resolved ? application : image_argument,launch_command,options.wait);
 done:
     run16_frontend_scope_end(frontend_scope);
     OpenNtBaseClientDisconnectCurrent();

@@ -43,7 +43,7 @@ if ($OverlapFirst -and $ReactivateFirst) { throw 'Select two-window or single-in
 if ($DiagnosticObserver -and $LaunchCount -ne 1) {
     throw 'Worker-reuse observation requires direct run16 launches, not the debugger wrapper.'
 }
-$artifacts = @('run16.exe','ntsrv.exe','ntvdm.exe','monitor.exe','VDMREDIR.dll')
+$artifacts = @('run16.exe','ntsrv.exe','ntvdm.exe','ntmon.exe','VDMREDIR.dll')
 # Reject incomplete historical/build artifacts before touching the runtime.
 foreach ($artifact in @($artifacts | ForEach-Object { Join-Path $build $_ }) + @($provider)) {
     $stream = [IO.File]::OpenRead($artifact)

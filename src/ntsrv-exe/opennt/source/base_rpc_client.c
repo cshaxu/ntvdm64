@@ -520,7 +520,7 @@ static DWORD classify_missing_interface(RPC_BINDING_HANDLE binding)
     RPC_STATUS status,uuid_status;
     unsigned int index;
     DWORD result=RPC_S_SERVER_UNAVAILABLE;
-    status=RpcIfInqId(Client_vdm_service_v8_0_c_ifspec,&expected);
+    status=RpcIfInqId(Client_vdm_service_v9_0_c_ifspec,&expected);
     if (status) return status;
     status=RpcMgmtInqIfIds(binding,&interfaces);
     if (status) return status;
@@ -600,6 +600,40 @@ DWORD OpenNtBaseClientConnectCurrent(void)
 done:
     if (text) RpcStringFreeW(&text);
     if (error) OpenNtBaseClientDisconnectCurrent();
+    return error;
+}
+
+DWORD WINAPI OpenNtBaseClientWowStarted(ULONG task)
+{
+    DWORD error=ERROR_INVALID_STATE;
+    if (!client.connection) return error;
+    RpcTryExcept {
+        error=Client_WowStarted(client.binding,client.connection,client.process,
+            client.generation,task);
+    }
+    RpcExcept(1) { error=RpcExceptionCode(); }
+    RpcEndExcept
+    return error;
+}
+
+DWORD OpenNtBaseClientWowStartup(HANDLE parent,HANDLE *event,BOOL *started)
+{
+    DWORD error=ERROR_INVALID_STATE;
+    ULONG value=0;
+    if (!event || !started) return ERROR_INVALID_PARAMETER;
+    *event=NULL; *started=FALSE;
+    if (!client.connection) return error;
+    if (!parent || parent!=parent_event_handle || !parent_receipt)
+        return ERROR_INVALID_HANDLE;
+    RpcTryExcept {
+        error=Client_WowStartup(client.binding,client.connection,client.process,
+            client.generation,parent_receipt,event,&value);
+    }
+    RpcExcept(1) { error=RpcExceptionCode(); }
+    RpcEndExcept
+    if (!error && (!*event || value>1)) error=ERROR_INVALID_DATA;
+    if (error && *event) { CloseHandle(*event); *event=NULL; }
+    if (!error) *started=value!=0;
     return error;
 }
 

@@ -499,6 +499,28 @@ int __cdecl main(void)
      * deliberately not a synthetic wake: with no pending work, the original
      * yield path must retain its own immediate scheduler semantics. */
     CHECK(wow_user_task_lifecycle_yield(&lifecycle));
+    /* WOWEXEC must process a native posted command even when a hardware
+     * wake is pending. TRUE skips guest PeekMessage; FALSE admits it. */
+    CHECK(PostThreadMessageA(GetCurrentThreadId(), WM_APP + 55, 55, 0));
+    /* Host queue observers can clear change bits without removing the
+     * command. WOWEXEC's unfiltered message loop must still receive it. */
+    (void)GetQueueStatus(QS_ALLINPUT);
+    CHECK((GetQueueStatus(QS_ALLINPUT) & ((DWORD)QS_POSTMESSAGE << 16)) != 0);
+    CHECK(wow_user_runtime_enter(&binding));
+    lifecycle.process.W32PF_Flags |= 0x00010000; /* original W32PF_WAKEWOWEXEC */
+    binding.thread->ptdb->nEvents = 0;
+    lifecycle.process.shared->nEvents = 0;
+    CHECK(wow_user_runtime_leave(&binding));
+    CHECK(!wow_user_task_lifecycle_wait(&lifecycle, wowexec));
+    CHECK(wow_user_task_lifecycle_message(&lifecycle, &message, NULL,
+        WM_APP + 55, WM_APP + 55, PM_REMOVE | PM_NOYIELD, FALSE));
+    CHECK(message.message == WM_APP + 55 && message.wParam == 55);
+    CHECK(wow_user_runtime_enter(&binding));
+    lifecycle.process.W32PF_Flags |= 0x00010000; /* hardware wake only */
+    binding.thread->ptdb->nEvents = 0;
+    lifecycle.process.shared->nEvents = 0;
+    CHECK(wow_user_runtime_leave(&binding));
+    CHECK(wow_user_task_lifecycle_wait(&lifecycle, wowexec));
     CHECK(PostThreadMessageA(GetCurrentThreadId(), WM_APP + 51, 73, 0));
     CHECK(wow_user_task_lifecycle_message(&lifecycle, &message, NULL,
         WM_APP + 51, WM_APP + 51, PM_NOREMOVE | PM_NOYIELD, FALSE));

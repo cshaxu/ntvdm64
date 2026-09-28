@@ -16,7 +16,9 @@ static OPENNT_BASE_SERVICE *service;
 static WCHAR console_helper[MAX_PATH];
 static SRWLOCK idle_lock=SRWLOCK_INIT;
 static HANDLE idle_timer;
-static ULONG idle_epoch;
+static ULONGLONG idle_deadline;
+static ULONG pending_connects;
+static BOOL idle_stopping;
 #define BASESRV_EMPTY_GRACE_MS 10000u
 #define BASE_CHECK_REPLY_BYTES 40u
 #define BASE_UPDATE_REPLY_BYTES 32u
@@ -39,48 +41,76 @@ static DWORD WINAPI basesrv_console_query(void *context,HANDLE caller,
     return app_console_query((const WCHAR *)context,caller,candidates,count,cancel,timeout,members);
 }
 
-/* This is product retention, not BaseSrv task policy.  An interactive
- * COMMAND/EDIT worker remains registered, so it never reaches this path just
- * because its command queue has no new entry.  The one-minute grace starts
- * only after every authenticated connection and finite launch reservation
- * has already gone away. */
-static VOID CALLBACK basesrv_empty_timer(PVOID context,BOOLEAN fired)
+static __declspec(noreturn) void basesrv_idle_fatal(PCSTR operation,DWORD error)
 {
-    ULONG epoch=(ULONG)(ULONG_PTR)context;
-    (void)fired;
-    AcquireSRWLockExclusive(&idle_lock);
-    /* Cancellation and every replacement advance the epoch before releasing
-     * the lock.  A stale timer may run, but can never stop a broker that a
-     * new authenticated Connect has kept alive. */
-    if (epoch!=idle_epoch || !idle_timer) {
-        ReleaseSRWLockExclusive(&idle_lock);
-        return;
-    }
-    idle_timer=NULL;
-    if (service && OpenNtBaseServiceIsEmpty(service)) {
-        (void)RpcMgmtStopServerListening(NULL);
-    }
-    ReleaseSRWLockExclusive(&idle_lock);
+    if (!error) error=ERROR_GEN_FAILURE;
+    fprintf(stderr,"ntsrv: fatal %s: %lu\n",operation,error); fflush(stderr);
+    /* Broken retention/stop machinery cannot leave a silently resident broker.
+     * Do not run DLL teardown while another RPC thread may hold its locks. */
+    TerminateProcess(GetCurrentProcess(),error);
+    abort();
 }
-static void basesrv_cancel_empty_timer(void)
+/* idle_lock serializes Connect admission with the final empty decision.
+ * Management observations never cancel or restart this ten-second grace. */
+static void basesrv_schedule_empty_locked(void)
 {
-    HANDLE timer;
-    AcquireSRWLockExclusive(&idle_lock);
-    timer=idle_timer;idle_timer=NULL;++idle_epoch;
-    ReleaseSRWLockExclusive(&idle_lock);
-    /* Do not wait for a callback while holding idle_lock: the callback takes
-     * the same lock to test its epoch. */
-    if (timer) (void)DeleteTimerQueueTimer(NULL,timer,INVALID_HANDLE_VALUE);
+    LARGE_INTEGER due;
+    if (!idle_stopping && !idle_deadline && !pending_connects &&
+        service && OpenNtBaseServiceIsEmpty(service)) {
+        due.QuadPart=-(LONGLONG)BASESRV_EMPTY_GRACE_MS*10000;
+        idle_deadline=GetTickCount64()+BASESRV_EMPTY_GRACE_MS;
+        if (!SetWaitableTimer(idle_timer,&due,0,NULL,NULL,FALSE))
+            basesrv_idle_fatal("SetWaitableTimer",GetLastError());
+    }
 }
 static void basesrv_schedule_empty_stop(void)
 {
     AcquireSRWLockExclusive(&idle_lock);
-    if (!idle_timer && service && OpenNtBaseServiceIsEmpty(service)) {
-        if (!++idle_epoch) ++idle_epoch;
-        (void)CreateTimerQueueTimer(&idle_timer,NULL,basesrv_empty_timer,
-                (PVOID)(ULONG_PTR)idle_epoch,BASESRV_EMPTY_GRACE_MS,0,WT_EXECUTEDEFAULT);
+    basesrv_schedule_empty_locked();
+    ReleaseSRWLockExclusive(&idle_lock);
+}
+static DWORD basesrv_begin_connect(void)
+{
+    DWORD error=ERROR_SUCCESS;
+    AcquireSRWLockExclusive(&idle_lock);
+    if (idle_stopping) error=RPC_S_SERVER_UNAVAILABLE;
+    else {
+        if (pending_connects==MAXDWORD) basesrv_idle_fatal("Connect count",ERROR_ARITHMETIC_OVERFLOW);
+        ++pending_connects;
+        idle_deadline=0;
+        if (!CancelWaitableTimer(idle_timer))
+            basesrv_idle_fatal("CancelWaitableTimer",GetLastError());
     }
     ReleaseSRWLockExclusive(&idle_lock);
+    return error;
+}
+static void basesrv_end_connect(void)
+{
+    AcquireSRWLockExclusive(&idle_lock);
+    --pending_connects;
+    basesrv_schedule_empty_locked();
+    ReleaseSRWLockExclusive(&idle_lock);
+}
+static BOOL basesrv_claim_empty_stop(void)
+{
+    BOOL stop=FALSE;
+    ULONGLONG now;
+    LARGE_INTEGER due;
+    AcquireSRWLockExclusive(&idle_lock);
+    now=GetTickCount64();
+    if (!pending_connects && idle_deadline) {
+        if (now<idle_deadline) {
+            /* A wake consumed just before Connect rearmed the same timer. */
+            due.QuadPart=-(LONGLONG)(idle_deadline-now)*10000;
+            if (!SetWaitableTimer(idle_timer,&due,0,NULL,NULL,FALSE))
+                basesrv_idle_fatal("SetWaitableTimer",GetLastError());
+        } else if (OpenNtBaseServiceIsEmpty(service)) {
+            idle_stopping=TRUE;
+            stop=TRUE;
+        } else idle_deadline=0;
+    }
+    ReleaseSRWLockExclusive(&idle_lock);
+    return stop;
 }
 static DWORD basesrv_management_version(ULONG protocol,const unsigned char application_version[32])
 {
@@ -155,7 +185,6 @@ done:
     if (local) HeapFree(GetProcessHeap(),0,local);
     if (error && *entries) { MIDL_user_free(*entries); *entries=NULL; }
     if (error) { *epoch=0; *count=0; }
-    basesrv_schedule_empty_stop();
     return error;
 }
 error_status_t Server_TerminateWorker(handle_t binding,HANDLE process,ULONG protocol,
@@ -180,15 +209,8 @@ void __RPC_USER VDM_CONNECTION_rundown(VDM_CONNECTION connection)
 }
 static RPC_STATUS RPC_ENTRY authorize(RPC_IF_HANDLE interfaceId,void *binding)
 {
-    RPC_STATUS status;
     (void)interfaceId;
-    status=broker_rpc_authorize(&scope,binding);
-    /* An RPC call that has passed endpoint authentication is already an
-     * accepted arrival, even before Server_Connect can register its context.
-     * Cancel here so an empty-grace callback cannot stop listening between
-     * RPC acceptance and the later connection registration. */
-    if (!status) basesrv_cancel_empty_timer();
-    return status;
+    return broker_rpc_authorize(&scope,binding);
 }
 /* RPC [out, system_handle] consumes its server-side handle.  Service
  * receipts remain owned by BaseSrv; export only independent duplicates. */
@@ -223,20 +245,23 @@ error_status_t Server_Connect(handle_t binding,HANDLE process,ULONG protocol,
     *connection=NULL; *generation=0;
     *server_protocol=APP_PROTOCOL_VERSION;
     memcpy(server_version,expected,sizeof(expected));
-    status=broker_rpc_peer_process(&scope,binding,process,&pid);
+    status=basesrv_begin_connect();
     if (status) return status;
-    if (protocol!=APP_PROTOCOL_VERSION || memcmp(application_version,expected,sizeof(expected))) {
-        fprintf(stderr,"basesrv: version mismatch: local protocol=%u app=%s; peer protocol=%lu app=%.32s\n",
-            APP_PROTOCOL_VERSION,APP_VERSION,protocol,(const char *)application_version);
-        basesrv_schedule_empty_stop();
-        return ERROR_REVISION_MISMATCH;
+    /* Every admitted attempt, including identity/version failure or an RPC
+     * exception, releases its transient hold and rechecks empty retention. */
+    __try {
+        status=broker_rpc_peer_process(&scope,binding,process,&pid);
+        if (status) __leave;
+        if (protocol!=APP_PROTOCOL_VERSION || memcmp(application_version,expected,sizeof(expected))) {
+            fprintf(stderr,"basesrv: version mismatch: local protocol=%u app=%s; peer protocol=%lu app=%.32s\n",
+                APP_PROTOCOL_VERSION,APP_VERSION,protocol,(const char *)application_version);
+            status=ERROR_REVISION_MISMATCH;
+            __leave;
+        }
+        status=OpenNtBaseServiceConnect(service,process,(OPENNT_BASE_CONNECTION **)connection,generation);
+    } __finally {
+        basesrv_end_connect();
     }
-    /* Cancel before registering the new peer.  The callback and this
-     * registration are serialized by idle_lock, so an arrival cannot be
-     * mistaken for an empty broker between its health check and stop call. */
-    basesrv_cancel_empty_timer();
-    status=OpenNtBaseServiceConnect(service,process,(OPENNT_BASE_CONNECTION **)connection,generation);
-    if (status) basesrv_schedule_empty_stop();
     return status;
 }
 error_status_t Server_BrokerProcess(handle_t binding,VDM_CONNECTION connection,HANDLE process,
@@ -392,6 +417,28 @@ error_status_t Server_RegisterWowExec(handle_t binding,VDM_CONNECTION connection
     RPC_STATUS status=broker_rpc_peer_process(&scope,binding,process,&pid);
     if (status) return status;
     return OpenNtBaseServiceRegisterWowExec(connection,pid,generation,window);
+}
+error_status_t Server_WowStarted(handle_t binding,VDM_CONNECTION connection,
+    HANDLE process,ULONG generation,ULONG task)
+{
+    DWORD pid;
+    RPC_STATUS status=broker_rpc_peer_process(&scope,binding,process,&pid);
+    if (status) return status;
+    return OpenNtBaseServiceWowStarted(connection,pid,generation,task);
+}
+error_status_t Server_WowStartup(handle_t binding,VDM_CONNECTION connection,
+    HANDLE process,ULONG generation,ULONG parent_receipt,HANDLE *event,ULONG *started)
+{
+    DWORD pid;
+    BOOL value=FALSE;
+    RPC_STATUS status;
+    *event=NULL; *started=0;
+    status=broker_rpc_peer_process(&scope,binding,process,&pid);
+    if (status) return status;
+    /* Service returns an owned wait-only duplicate; RPC consumes that copy. */
+    status=OpenNtBaseServiceWowStartup(connection,pid,generation,parent_receipt,event,&value);
+    if (!status) *started=value ? 1u : 0u;
+    return status;
 }
 error_status_t Server_Check(handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,ULONG requestBytes,unsigned char *request,ULONG *parentEventCount,
@@ -638,20 +685,34 @@ int main(void)
         (void)OpenNtBaseServiceStop(service);
         return (int)error;
     }
-    result=RpcServerRegisterIf3(Server_vdm_service_v8_0_s_ifspec,NULL,NULL,
+    result=RpcServerRegisterIf3(Server_vdm_service_v9_0_s_ifspec,NULL,NULL,
         RPC_IF_ALLOW_SECURE_ONLY | RPC_IF_ALLOW_LOCAL_ONLY,RPC_C_LISTEN_MAX_CALLS_DEFAULT,
         (unsigned)-1,authorize,NULL);
     if (!result) {
+        idle_timer=CreateWaitableTimerW(NULL,FALSE,NULL);
+        if (!idle_timer) basesrv_idle_fatal("CreateWaitableTimer",GetLastError());
+        /* Arm only after listening succeeds, never race stop against startup. */
+        result=RpcServerListen(1,RPC_C_LISTEN_MAX_CALLS_DEFAULT,TRUE);
+    }
+    if (!result) {
         /* Readiness is a successful client RPC, never this diagnostic line. */
         fwprintf(stdout,L"basesrv: listening on %ls\n",endpoint); fflush(stdout);
-        /* A manually started broker with no client/worker is also empty.
-         * It receives the same one-minute grace as a broker drained after a
-         * normal worker/launcher teardown. */
+        /* Manual and launcher starts have the same ten-second empty grace. */
         basesrv_schedule_empty_stop();
-        result=RpcServerListen(1,RPC_C_LISTEN_MAX_CALLS_DEFAULT,FALSE);
-        RpcServerUnregisterIf(Server_vdm_service_v8_0_s_ifspec,NULL,TRUE);
+        do {
+            if (WaitForSingleObject(idle_timer,INFINITE)!=WAIT_OBJECT_0)
+                basesrv_idle_fatal("idle wait",GetLastError());
+        } while (!basesrv_claim_empty_stop());
+        result=RpcMgmtStopServerListening(NULL);
+        if (result) basesrv_idle_fatal("RpcMgmtStopServerListening",result);
+        result=RpcMgmtWaitServerListen();
+        if (result) basesrv_idle_fatal("RpcMgmtWaitServerListen",result);
     }
-    basesrv_cancel_empty_timer();
+    {
+        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v9_0_s_ifspec,NULL,TRUE);
+        if (!result && cleanup) result=cleanup;
+    }
+    if (idle_timer) CloseHandle(idle_timer);
     if (!OpenNtBaseServiceStop(service)) return ERROR_BUSY;
     return (int)result;
 }

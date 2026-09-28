@@ -26,7 +26,9 @@ foreach($negative in @(
     try { Assert-FinalSnapshot $negative.Lines '123' } catch {$rejected=$true}
     if(!$rejected){throw 'Final snapshot negative control was accepted'}
 }
-$cases=@(Get-Content (Join-Path $EvidenceRoot 'summary.json') -Raw | ConvertFrom-Json)
+# Windows PowerShell emits the decoded JSON array as one pipeline object.
+# Assign it directly so foreach enumerates records rather than a nested array.
+$cases=Get-Content (Join-Path $EvidenceRoot 'summary.json') -Raw | ConvertFrom-Json
 foreach($case in $cases){
     $events=if($case.EventsPath){$case.EventsPath}else{Join-Path $EvidenceRoot "$($case.Case).events.txt"}
     $parts=$case.Case.Split('-'); $kinds='GGG'+$parts[0]+'GGG'+$parts[1]

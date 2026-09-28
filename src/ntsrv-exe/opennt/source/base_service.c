@@ -60,6 +60,8 @@ struct OPENNT_BASE_CONNECTION {
     uint32_t parent_receipt,completed_receipt;
     DWORD completed_exit_code;
     BOOL worker_failed;
+    HANDLE wow_start_event;
+    BOOL wow_started;
     HANDLE frontend_capability; /* Root lease, independent of command lifetime. */
     BOOL frontend_closing; /* Admission barrier, never execution/task state. */
     DWORD frontend_request_root; /* Original pending command asks this root for I/O. */
@@ -956,6 +958,7 @@ DWORD OpenNtBaseServiceDisconnect(OPENNT_BASE_CONNECTION *connection)
     LeaveCriticalSection(&service->lock);
     if (!error) {
         if (connection->frontend_capability) CloseHandle(connection->frontend_capability);
+        if (connection->wow_start_event) CloseHandle(connection->wow_start_event);
         HeapFree(GetProcessHeap(),0,connection);
     }
     return error;
@@ -1849,6 +1852,65 @@ static DWORD service_allocate_console(OPENNT_BASE_SERVICE *service,HANDLE *conso
     return error;
 }
 
+DWORD OpenNtBaseServiceWowStarted(OPENNT_BASE_CONNECTION *connection,DWORD pid,
+    DWORD generation,ULONG task)
+{
+    OPENNT_BASE_SERVICE *service;
+    PWOWRECORD record;
+    LIST_ENTRY *entry;
+    DWORD error=ERROR_ACCESS_DENIED;
+    if (!connection) return error;
+    service=connection->service;
+    EnterCriticalSection(&service->lock);
+    if (!OpenNtBaseServicePeer(connection,pid,generation) || !connection->wow ||
+        !connection->process.fVDM || !WOWHead || WOWHead->SequenceNumber!=generation)
+        goto done;
+    for (record=WOWHead->WOWRecord;record;record=record->WOWRecordNext)
+        if (record->iTask==task) break;
+    if (!record || !record->fDispatched) { error=ERROR_INVALID_STATE; goto done; }
+    /* Task IDs wrap. Match the original parent receipt too, never a stale
+     * launcher with the same numeric task or a freed record address. */
+    error=ERROR_SUCCESS;
+    for (entry=service->connections.Flink;entry!=&service->connections;entry=entry->Flink) {
+        OPENNT_BASE_CONNECTION *parent=CONTAINING_RECORD(entry,OPENNT_BASE_CONNECTION,service_link);
+        if (!parent->process.fVDM && parent->wow && parent->task==task &&
+            parent->parent_receipt && parent->parent_receipt==(ULONG_PTR)record->hWaitForParentServer) {
+            if (parent->wow_start_event && !SetEvent(parent->wow_start_event)) {
+                error=GetLastError(); break;
+            }
+            parent->wow_started=TRUE;
+            break;
+        }
+    }
+done:
+    LeaveCriticalSection(&service->lock);
+    return error;
+}
+
+DWORD OpenNtBaseServiceWowStartup(OPENNT_BASE_CONNECTION *connection,DWORD pid,
+    DWORD generation,DWORD parent_receipt,HANDLE *event,BOOL *started)
+{
+    DWORD error=ERROR_ACCESS_DENIED;
+    if (!event || !started) return ERROR_INVALID_PARAMETER;
+    *event=NULL; *started=FALSE;
+    if (!connection) return error;
+    EnterCriticalSection(&connection->service->lock);
+    if (!OpenNtBaseServicePeer(connection,pid,generation) || connection->process.fVDM ||
+        !connection->wow || !parent_receipt || parent_receipt!=connection->parent_receipt)
+        goto done;
+    if (!connection->wow_start_event)
+        connection->wow_start_event=CreateEventW(NULL,TRUE,connection->wow_started,NULL);
+    if (!connection->wow_start_event || !DuplicateHandle(GetCurrentProcess(),
+        connection->wow_start_event,GetCurrentProcess(),event,SYNCHRONIZE,FALSE,0)) {
+        error=GetLastError(); goto done;
+    }
+    *started=connection->wow_started;
+    error=ERROR_SUCCESS;
+done:
+    LeaveCriticalSection(&connection->service->lock);
+    return error;
+}
+
 DWORD OpenNtBaseServiceCheck(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD generation,
     void *input,uint32_t bytes,void *output,uint32_t capacity,uint32_t *required,
     HANDLE *parent_event,uint32_t *parent_receipt)
@@ -1918,8 +1980,13 @@ DWORD OpenNtBaseServiceCheck(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD 
     OpenNtBaseBindProcessRegistry(previousRegistry);
     OpenNtBaseBindServerRequestThread(previousThread);
     service_resources_release(&resources);
-    if (!status && NT_SUCCESS((NTSTATUS)message.ReturnValue))
+    if (!status && NT_SUCCESS((NTSTATUS)message.ReturnValue)) {
         connection->wow=message.u.CheckVDM.BinaryType==BINARY_TYPE_WIN16;
+        if (connection->wow) connection->task=message.u.CheckVDM.iTask;
+        connection->wow_started=FALSE;
+        if (connection->wow_start_event) CloseHandle(connection->wow_start_event);
+        connection->wow_start_event=NULL;
+    }
     if (!status && NT_SUCCESS((NTSTATUS)message.ReturnValue) &&
         message.u.CheckVDM.VDMState==VDM_NOT_PRESENT) {
         connection->pending_creation=TRUE;

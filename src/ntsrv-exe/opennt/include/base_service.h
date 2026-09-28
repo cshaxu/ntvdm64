@@ -110,6 +110,13 @@ DWORD OpenNtBaseServiceWaitFrontend(OPENNT_BASE_CONNECTION *,DWORD pid,
     DWORD generation,HANDLE *pipe,HANDLE *frontend,DWORD *frontend_generation,HANDLE *ready);
 DWORD OpenNtBaseServiceFirst(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,DWORD *);
 DWORD OpenNtBaseServiceRegisterWowExec(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,DWORD window);
+/* Successful original InitTask notification, distinct from task completion.
+ * The registered WOW worker may report only a dispatched original record.
+ * Query is confined to the submitting connection's parent receipt and returns
+ * an owned, synchronize-only event duplicate plus a latched success flag. */
+DWORD OpenNtBaseServiceWowStarted(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,ULONG task);
+DWORD OpenNtBaseServiceWowStartup(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,
+    DWORD parent_receipt,HANDLE *event,BOOL *started);
 /* These are authenticated service bindings around the original CheckVDM
  * no-worker result.  They never implement task selection or command payloads. */
 DWORD OpenNtBaseServiceCreateReservation(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,

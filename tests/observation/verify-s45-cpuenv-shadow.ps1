@@ -28,7 +28,7 @@ if ($processes.Count -ne 0) {
     throw 'S45 shadow-registry test requires no existing run16/basesrv/ntvdm session.'
 }
 New-Item -ItemType Directory -Force -Path $logs | Out-Null
-foreach ($name in @('run16.exe','ntsrv.exe','ntvdm.exe','monitor.exe')) {
+foreach ($name in @('run16.exe','ntsrv.exe','ntvdm.exe','ntmon.exe')) {
     Copy-Item -LiteralPath (Join-Path $build $name) -Destination (Join-Path $runtime $name) -Force
 }
 if ($fixture) { Copy-Item -LiteralPath $fixture -Destination $shadow -Force }
