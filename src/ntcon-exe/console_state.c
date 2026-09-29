@@ -3,6 +3,44 @@
 #include <string.h>
 #include <stdio.h>
 
+/* A VT-input native client consumes character records, not MOUSE_EVENTs.
+ * Keep the ordinary Console path unchanged for classic clients. */
+static DWORD write_vt_mouse(HANDLE input,const MOUSE_EVENT_RECORD *mouse)
+{
+    CONSOLE_SCREEN_BUFFER_INFO screen;
+    INPUT_RECORD keys[48]={0};
+    char sequence[48];
+    DWORD code,button=mouse->dwButtonState,flags=mouse->dwEventFlags;
+    DWORD count,index,done;
+    int length;
+    if(!GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE),&screen))
+        return GetLastError();
+    if(flags&MOUSE_WHEELED)code=64+((SHORT)HIWORD(button)<0 ? 1 : 0);
+    else if(flags&MOUSE_HWHEELED)code=64+((SHORT)HIWORD(button)<0 ? 7 : 6);
+    else if(button&FROM_LEFT_1ST_BUTTON_PRESSED)code=0;
+    else if(button&RIGHTMOST_BUTTON_PRESSED)code=2;
+    else code=3;
+    if(flags&MOUSE_MOVED)code|=32;
+    if(mouse->dwControlKeyState&SHIFT_PRESSED)code|=4;
+    if(mouse->dwControlKeyState&(LEFT_ALT_PRESSED|RIGHT_ALT_PRESSED))code|=8;
+    if(mouse->dwControlKeyState&(LEFT_CTRL_PRESSED|RIGHT_CTRL_PRESSED))code|=16;
+    length=sprintf_s(sequence,sizeof(sequence),"\x1b[<%lu;%u;%u%c",code,
+        (unsigned)(mouse->dwMousePosition.X-screen.srWindow.Left+1),
+        (unsigned)(mouse->dwMousePosition.Y-screen.srWindow.Top+1),
+        !(flags&(MOUSE_MOVED|MOUSE_WHEELED|MOUSE_HWHEELED)) && !
+            (button&(FROM_LEFT_1ST_BUTTON_PRESSED|RIGHTMOST_BUTTON_PRESSED)) ? 'm' : 'M');
+    if(length<=0 || length>(int)(sizeof(keys)/sizeof(keys[0])))return ERROR_INVALID_DATA;
+    count=(DWORD)length;
+    for(index=0;index<count;++index) {
+        keys[index].EventType=KEY_EVENT;
+        keys[index].Event.KeyEvent.bKeyDown=TRUE;
+        keys[index].Event.KeyEvent.wRepeatCount=1;
+        keys[index].Event.KeyEvent.uChar.UnicodeChar=(WCHAR)(unsigned char)sequence[index];
+    }
+    if(!WriteConsoleInputW(input,keys,count,&done))return GetLastError();
+    return done==count ? ERROR_SUCCESS : ERROR_WRITE_FAULT;
+}
+
 /* Optional failure evidence, never a geometry selector or recovery policy. */
 void ntcon_trace_error(const char *stage,DWORD operation,DWORD error)
 {
@@ -48,6 +86,10 @@ DWORD ntcon_input_write(HANDLE input,const INPUT_RECORD *records,DWORD count,DWO
             DWORD event=key->wVirtualKeyCode==VK_CANCEL ? CTRL_BREAK_EVENT : CTRL_C_EVENT;
             if(event==CTRL_BREAK_EVENT && !FlushConsoleInputBuffer(input))return GetLastError();
             if(!GenerateConsoleCtrlEvent(event,0))return GetLastError();
+        } else if(record->EventType==MOUSE_EVENT &&
+            (mode&ENABLE_VIRTUAL_TERMINAL_INPUT) && !(mode&ENABLE_MOUSE_INPUT)) {
+            DWORD error=write_vt_mouse(input,&record->Event.MouseEvent);
+            if(error)return error;
         } else {
             if(!WriteConsoleInputW(input,record,1,&done))return GetLastError();
             if(done!=1)return ERROR_WRITE_FAULT;

@@ -13,7 +13,7 @@ struct frontend_window_controller {
     kvm_window *window;
     kvm_window_frame *frame;
     HANDLE wake;
-    volatile LONG failure,requested_console;
+    volatile LONG failure,requested_console,requested_mouse_release;
     LONG epoch;
     frontend_display_mode display;
     BOOL graphics,frame_dirty,route_known,route_window,route_graphics;
@@ -41,6 +41,12 @@ static void window_failure(void *context,lib_u64 source,lib_status status)
 static lib_bool window_input(void *context,const kvm_input_event *event)
 {
     frontend_window_controller *owner=context;
+    if(event->type==KVM_EVENT_HOTKEY &&
+        !strcmp((const char *)event->data.hotkey.identifier,"release-mouse")) {
+        InterlockedExchange(&owner->requested_mouse_release,owner->epoch);
+        if(!SetEvent(owner->wake)) { fail(owner,GetLastError());return LIB_FALSE; }
+        return LIB_TRUE;
+    }
     if(event->type==KVM_EVENT_WINDOW_CLOSE ||
         (event->type==KVM_EVENT_HOTKEY &&
          !strcmp((const char *)event->data.hotkey.identifier,"console"))) {
@@ -104,6 +110,8 @@ static DWORD apply(frontend_window_controller *owner)
             'F',KVM_KEY_MODIFIER_CONTROL|KVM_KEY_MODIFIER_ALT,"console"));
         if(!error)error=status_error(kvm_hotkey_registry_register(&options.component.hotkeys,
             KVM_KEY_ENTER,KVM_KEY_MODIFIER_ALT,"console"));
+        if(!error)error=status_error(kvm_hotkey_registry_register(&options.component.hotkeys,
+            'M',KVM_KEY_MODIFIER_CONTROL|KVM_KEY_MODIFIER_ALT,"release-mouse"));
         if(error)return error;
         error=status_error(kvm_window_create(&owner->window,&options));
         if(error)return error;
@@ -148,15 +156,20 @@ HANDLE frontend_window_wake(frontend_window_controller *owner)
 }
 DWORD frontend_window_poll(frontend_window_controller *owner)
 {
-    LONG requested,failure;
+    LONG requested,release,failure;
     DWORD error;
     if(!owner)return ERROR_INVALID_PARAMETER;
     if(!ResetEvent(owner->wake))return GetLastError();
     requested=InterlockedExchange(&owner->requested_console,0);
+    release=InterlockedExchange(&owner->requested_mouse_release,0);
     failure=InterlockedCompareExchange(&owner->failure,0,0);
     if(failure)return (DWORD)failure;
     error=drain_input(owner);
     if(error)return error;
+    if(release && release==owner->epoch && owner->window) {
+        error=status_error(kvm_window_release_mouse(owner->window));
+        if(error)return error;
+    }
     if(requested && requested==owner->epoch)owner->display=FRONTEND_DISPLAY_CONSOLE;
     return apply(owner);
 }

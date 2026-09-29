@@ -52,6 +52,12 @@ static BOOL close_request(HWND window)
     DWORD_PTR result;
     return SendMessageTimeoutW(window,WM_CLOSE,0,0,SMTO_ABORTIFHUNG,3000,&result)!=0;
 }
+static HWND captured_window(HWND window)
+{
+    GUITHREADINFO info={sizeof(info)};
+    DWORD thread=GetWindowThreadProcessId(window,NULL);
+    return GetGUIThreadInfo(thread,&info) ? info.hwndCapture : NULL;
+}
 /* Test-only keyboard state injection on this process's private Window thread.
  * No SendInput, focus switch, production injection option or owner input. */
 static HHOOK keyboard_hook;
@@ -143,6 +149,26 @@ int main(int argc,char **argv)
     CHECK(!frontend_window_present(a,frame,FALSE) && !frontend_window_visible(a));
     CHECK(!frontend_window_select(a,FRONTEND_DISPLAY_WINDOW));
     wa=lookup("Frontend controller A");CHECK(wa && IsWindowVisible(wa) && first.window);
+    {
+        DWORD_PTR result;unsigned attempt;
+        chord_control=chord_alt=0;
+        CHECK(SendMessageTimeoutW(wa,WM_LBUTTONDOWN,MK_LBUTTON,
+            MAKELPARAM(16,16),SMTO_ABORTIFHUNG,3000,&result));
+        CHECK(captured_window(wa)==wa);
+        chord_control=chord_alt=1;
+        keyboard_hook=SetWindowsHookExW(WH_CALLWNDPROC,set_chord_state,NULL,
+            GetWindowThreadProcessId(wa,NULL));
+        CHECK(keyboard_hook);
+        CHECK(SendMessageTimeoutW(wa,WM_SYSKEYDOWN,'M',
+            1|(0x32L<<16)|(1L<<29),SMTO_ABORTIFHUNG,3000,&result));
+        CHECK(UnhookWindowsHookEx(keyboard_hook));keyboard_hook=NULL;
+        CHECK(WaitForSingleObject(frontend_window_wake(a),3000)==WAIT_OBJECT_0);
+        CHECK(!frontend_window_poll(a));
+        for(attempt=0;attempt<100 && captured_window(wa)==wa;++attempt)Sleep(10);
+        CHECK(captured_window(wa)!=wa && frontend_window_visible(a) &&
+            frontend_window_mode(a)==FRONTEND_DISPLAY_WINDOW);
+        puts("PASS Ctrl+Alt+M releases Window pointer without changing display or closing Window");
+    }
     first.native_input=CreateFileW(L"CONIN$",GENERIC_READ|GENERIC_WRITE,
         FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,OPEN_EXISTING,0,NULL);
     CHECK(first.native_input!=INVALID_HANDLE_VALUE && GetConsoleMode(first.native_input,&input_mode));

@@ -9,8 +9,8 @@ and its scope is transferred to the final planned S14 of the
 [Console/Window frontend package](proposal-kvm-window-graphics-presentation-001.md).
 It shares that package's component-lifecycle ownership and is not a separate T.
 The previous queue-position-2 instruction is superseded. Owner inserted text
-geometry repair as S13 on 2026-09-29; this former S13 is now S14 and still
-requires separate admission. CURRENT is the sole active-packet authority.
+geometry repair as S13 on 2026-09-29; this former S13 is now S14, admitted
+by the owner on 2026-09-29. CURRENT is the sole active-packet authority.
 The former RDP S13 plan was cancelled because the owner confirmed it resolved;
 this product-experience scope does not reopen RDP work.
 
@@ -26,6 +26,16 @@ Audit and repair the surrounding launch/use/exit experience: quoted paths,
 arguments, working directory, missing/unsupported-image errors, inherited
 versus product-owned Console lifetime, normal exit, startup failure and user
 cancellation/window closure. Record each adjacent confirmed defect separately.
+
+The owner also reported that Window-mode DOS COMMAND → native CMD → modern
+Microsoft Edit shows NTCON's square pointer but does not activate the Edit
+menu on click. Test the actual input representation at the NTCON hidden
+Console boundary: a native `MOUSE_EVENT` consumer and a VT-input consumer may
+require different input records while receiving the same pointer position.
+Keep NTVDM's original mouse contract and the shared text frame unchanged.
+In Window, Ctrl+Alt+M releases the captured pointer to the host without
+changing display mode, closing the Window or delivering the hotkey to the
+target. The next deliberate capture gesture may recapture it.
 
 run16 owns external launch and parent completion; NTVDM and NTCON own their
 respective workers; NTKVM owns visible presentation; NTSRV owns registered
@@ -47,6 +57,15 @@ assumed complete.
 | 2 | Repair launch/completion and owned-Console lifecycle, including one-shot success and startup failure. | Completed runs release unintended product-owned windows/tasks; inherited shells remain usable; interactive COMMAND/EDIT remain active until legitimately finished. |
 | 3 | Verify interactive exit, cancellation/window closure, nested COMMAND and concurrent workers; repair adjacent evidenced experience defects. | No stale task/window remains; one run cannot damage another; original guest exit semantics are preserved. |
 | 4 | Formal x86 build, deployment, full regression and minimal-diff review. | Existing direct/nested COMMAND, MEM and EDIT tests and real Explorer scenarios pass; governance passes; reviewed changes are committed/pushed for owner testing. |
+
+S14's focused exit cases are direct `run16 winmine` (Win16 GUI) and
+`run16 notepad.exe` (Win32 GUI) with no lingering product-owned Console,
+plus interactive `run16 command` and `run16 cmd` followed by `exit`, with no
+launcher/frontend wait left stuck. The actual host Edit location is discovered
+from Windows system directories; no fixed drive letter is a product input.
+The modern Edit test must show the negative control (raw `MOUSE_EVENT` leaves
+the menu closed) and positive control (the production NTCON translation opens
+the menu). A mouse-square movement alone is not a passing click test.
 
 ## Acceptance
 

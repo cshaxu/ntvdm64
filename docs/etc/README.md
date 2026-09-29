@@ -2,6 +2,7 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T423 S14 product experience](evidence/m0-t423-s14-product-experience.md) | M0 T423 S14 | Native Edit mouse-input root cause, pointer-release hotkey, exit probes, formal package regression and remaining owner-side gates. | Retain through T423 acceptance. |
 | [T423 S13 text geometry](evidence/m0-t423-s13-text-geometry.md) | M0 T423 S13 | Logical geometry source audit, real handoff observations, candidate tests and remaining acceptance gates. | Retain through owner T423 acceptance. |
 | [T423 S12 NTCON backend](evidence/m0-t423-s12-ntcon-backend.md) | M0 T423 S12 | Native backend migration, real screen handoff, registration/monitor and inherited S11 gates. | Retain through owner T423 acceptance. |
 | [T423 S11 interaction and retirement](evidence/m0-t423-s11-interaction-retirement.md) | M0 T423 S11 | Mouse batching, actual ConPTY use, retirement boundaries and inherited failure checklist. | Retain through T423 acceptance. |

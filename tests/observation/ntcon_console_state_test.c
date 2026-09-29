@@ -30,7 +30,7 @@ static BOOL WINAPI input_control(DWORD event)
 static int input_contract(void)
 {
     HANDLE input=INVALID_HANDLE_VALUE;DWORD saved=0,count=0,queued=0,error=0;
-    BOOL have_mode=FALSE,handler=FALSE;INPUT_RECORD records[4]={0},readback[4]={0};
+    BOOL have_mode=FALSE,handler=FALSE;INPUT_RECORD records[4]={0},readback[48]={0};
     WCHAR line[8]={0};
 #define VERIFY_INPUT(expression) do {if(!(expression)){error=__LINE__;goto done;}} while(0)
     input=CreateFileW(L"CONIN$",GENERIC_READ|GENERIC_WRITE,
@@ -57,6 +57,28 @@ static int input_contract(void)
         readback[2].Event.MouseEvent.dwMousePosition.X==7 &&
         readback[2].Event.MouseEvent.dwButtonState==FROM_LEFT_1ST_BUTTON_PRESSED &&
         !readback[3].Event.MouseEvent.dwButtonState);
+    {
+        CONSOLE_SCREEN_BUFFER_INFO screen;char expected[48];int length;unsigned index;
+        VERIFY_INPUT(GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE),&screen));
+        VERIFY_INPUT(SetConsoleMode(input,ENABLE_VIRTUAL_TERMINAL_INPUT|ENABLE_EXTENDED_FLAGS));
+        records[2].Event.MouseEvent.dwButtonState=FROM_LEFT_1ST_BUTTON_PRESSED;
+        records[2].Event.MouseEvent.dwEventFlags=0;
+        length=sprintf_s(expected,sizeof(expected),"\x1b[<0;%u;%uM",
+            (unsigned)(8-screen.srWindow.Left),(unsigned)(4-screen.srWindow.Top));
+        VERIFY_INPUT(length>0 && FlushConsoleInputBuffer(input));
+        /* The VT client sees characters, while classic clients above saw
+         * unchanged native records. No target-specific executable check. */
+        VERIFY_INPUT(!ntcon_input_write(input,records+2,1,&count) && count==1);
+        VERIFY_INPUT(ReadConsoleInputW(input,readback,ARRAYSIZE(readback),&count) &&
+            count==(DWORD)length);
+        for(index=0;index<count;++index)VERIFY_INPUT(readback[index].EventType==KEY_EVENT &&
+            readback[index].Event.KeyEvent.bKeyDown &&
+            readback[index].Event.KeyEvent.uChar.UnicodeChar==(WCHAR)expected[index]);
+        records[2].Event.MouseEvent.dwButtonState=0;
+        VERIFY_INPUT(!ntcon_input_write(input,records+2,1,&count) && count==1);
+        VERIFY_INPUT(ReadConsoleInputW(input,readback,ARRAYSIZE(readback),&count) &&
+            count==(DWORD)length && readback[count-1].Event.KeyEvent.uChar.UnicodeChar==L'm');
+    }
     /* The actual Console, not a frontend parser, performs cooked line editing. */
     VERIFY_INPUT(SetConsoleMode(input,ENABLE_LINE_INPUT|ENABLE_PROCESSED_INPUT));
     records[1]=records[0];records[1].Event.KeyEvent.wVirtualKeyCode=VK_RETURN;
