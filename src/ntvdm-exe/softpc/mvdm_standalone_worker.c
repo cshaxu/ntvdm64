@@ -1,4 +1,5 @@
 #include "mvdm_standalone_worker.h"
+#include "worker-base/connection.h"
 
 #include "ntvdm-exe/package_layout.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
@@ -50,7 +51,7 @@ static int mvdm_standalone_worker_cleanup(int result)
         (void)session_thread_unbind(&worker_session);
         worker_thread=FALSE;
     }
-    OpenNtBaseClientDisconnectCurrent();
+    worker_base_disconnect();
     if (worker_session_initialized && !session_dispose_with_reason(&worker_session,
             &dispose_reason)) result=ERROR_BUSY;
     if (worker_heap && !HeapDestroy(CsrPortHeap)) result=ERROR_BUSY;
@@ -79,9 +80,7 @@ DWORD mvdm_standalone_worker_begin(void)
         error=GetLastError(); goto fail;
     }
     worker_shadow_registry=TRUE;
-    error=OpenNtBaseClientConnectCurrent();
-    if (error!=ERROR_SUCCESS) goto fail;
-    error=OpenNtBaseClientWatchBroker();
+    error=worker_base_connect();
     if (error!=ERROR_SUCCESS) goto fail;
     if (!session_select_machine_backend(&worker_session,
             SESSION_MACHINE_BACKEND_SOFTPC) || !session_activate(&worker_session) ||

@@ -4,8 +4,14 @@
 #include <windows.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <wchar.h>
 #include "ntsrv-exe/opennt/include/base_client.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
+#include "run16-exe/worker_launch.h"
+#include "worker-base/connection.h"
+#include "ntkvm-exe/native_request_client.h"
+#include "interface/console_io.h"
+#include <stddef.h>
 
 /* BaseCheckForVDM shares its original client translation unit with
  * BaseCheckVDM, whose retained capture helpers require this local carrier. */
@@ -420,6 +426,329 @@ static int frontend_root_parent(void)
     return 0;
 }
 
+static int native_reservation_rpc(void)
+{
+    uint64_t reservation=0,duplicate=0;
+    REQUIRE(OpenNtBaseClientConnectCurrent()==ERROR_SUCCESS);
+    REQUIRE(OpenNtBaseClientReserveNativeWorker(NULL)==ERROR_INVALID_PARAMETER);
+    REQUIRE(OpenNtBaseClientReserveNativeWorker(&reservation)==ERROR_SUCCESS && reservation);
+    REQUIRE(OpenNtBaseClientReserveNativeWorker(&duplicate)==ERROR_INVALID_STATE && !duplicate);
+    REQUIRE(OpenNtBaseClientReleaseWorker(reservation)==ERROR_SUCCESS);
+    REQUIRE(OpenNtBaseClientReserveNativeWorker(&duplicate)==ERROR_SUCCESS && duplicate);
+    REQUIRE(duplicate!=reservation);
+    REQUIRE(OpenNtBaseClientReleaseWorker(reservation)!=ERROR_SUCCESS);
+    REQUIRE(OpenNtBaseClientReleaseWorker(duplicate)==ERROR_SUCCESS);
+    OpenNtBaseClientDisconnectCurrent();
+    puts("PASS native reservation RPC: no frontend/guest command, duplicate rejection, release/reuse, stale identity rejection");
+    return 0;
+}
+
+static int native_worker_startup(void)
+{
+    WCHAR image[MAX_PATH],command[MAX_PATH+64],pipe_name[128];uint64_t reservation=0;
+    HANDLE capability=NULL,ready=NULL,server=NULL,pipe=NULL;DWORD generation=0,read=0;char marker=0;
+    HANDLE launch_server=NULL,launch_client=NULL;
+    STARTUPINFOW startup={sizeof(startup)};PROCESS_INFORMATION worker={0};DWORD code=0,error;
+    REQUIRE(OpenNtBaseClientConnectCurrent()==ERROR_SUCCESS);
+    REQUIRE(OpenNtBaseClientReserveNativeWorker(&reservation)==ERROR_SUCCESS);
+    REQUIRE(GetModuleFileNameW(NULL,image,MAX_PATH));
+    startup.dwFlags=STARTF_USESHOWWINDOW;startup.wShowWindow=SW_HIDE;
+    REQUIRE(swprintf_s(command,ARRAYSIZE(command),L"\"%ls\" --native-worker-child",image)>0);
+    error=run16_worker_prepare(0,image,command,NULL,CREATE_NEW_CONSOLE,&startup,&worker);
+    REQUIRE(error==ERROR_INVALID_PARAMETER && !worker.hProcess && !worker.hThread);
+    /* A rejected Prepare must reclaim the never-resumed process and return
+     * no live handles; it must not consume the legitimate reservation. */
+    error=run16_worker_prepare(UINT64_MAX,image,command,NULL,CREATE_NEW_CONSOLE,&startup,&worker);
+    REQUIRE(error!=ERROR_SUCCESS && !worker.hProcess && !worker.hThread);
+    /* Both kinds use the launcher's actual suspended-create/Prepare transaction. */
+    error=run16_worker_prepare(reservation,image,command,NULL,CREATE_NEW_CONSOLE,&startup,&worker);
+    REQUIRE(error==ERROR_SUCCESS && worker.hProcess && worker.hThread);
+    REQUIRE(WaitForSingleObject(worker.hProcess,0)==WAIT_TIMEOUT);
+    capability=CreateEventW(NULL,TRUE,FALSE,NULL);ready=CreateEventW(NULL,TRUE,FALSE,NULL);
+    REQUIRE(capability && ready && !OpenNtBaseClientRegisterFrontendRoot(capability));
+    REQUIRE(swprintf_s(pipe_name,ARRAYSIZE(pipe_name),L"\\\\.\\pipe\\worker-base-native-%lu",GetCurrentProcessId())>0);
+    server=CreateNamedPipeW(pipe_name,PIPE_ACCESS_DUPLEX|FILE_FLAG_FIRST_PIPE_INSTANCE,
+        PIPE_TYPE_BYTE|PIPE_WAIT|PIPE_REJECT_REMOTE_CLIENTS,1,1024,1024,0,NULL);
+    REQUIRE(server!=INVALID_HANDLE_VALUE);
+    pipe=CreateFileW(pipe_name,GENERIC_READ|GENERIC_WRITE,0,NULL,OPEN_EXISTING,0,NULL);
+    REQUIRE(pipe!=INVALID_HANDLE_VALUE);
+    REQUIRE(ConnectNamedPipe(server,NULL) || GetLastError()==ERROR_PIPE_CONNECTED);
+    REQUIRE(!OpenNtBaseClientAttachFrontend(pipe,&generation,ready) && generation);
+    CloseHandle(pipe);pipe=NULL;
+    REQUIRE(ResumeThread(worker.hThread)==1);
+    REQUIRE(ReadFile(server,&marker,1,&read,NULL) && read==1 && marker=='N');
+    REQUIRE(swprintf_s(pipe_name,ARRAYSIZE(pipe_name),L"\\\\.\\pipe\\worker-native-launch-%lu",GetCurrentProcessId())>0);
+    launch_server=CreateNamedPipeW(pipe_name,PIPE_ACCESS_DUPLEX|FILE_FLAG_FIRST_PIPE_INSTANCE,
+        PIPE_TYPE_BYTE|PIPE_WAIT|PIPE_REJECT_REMOTE_CLIENTS,1,1024,1024,0,NULL);
+    REQUIRE(launch_server!=INVALID_HANDLE_VALUE);
+    launch_client=CreateFileW(pipe_name,GENERIC_READ|GENERIC_WRITE,0,NULL,OPEN_EXISTING,0,NULL);
+    REQUIRE(launch_client!=INVALID_HANDLE_VALUE);
+    REQUIRE(ConnectNamedPipe(launch_server,NULL) || GetLastError()==ERROR_PIPE_CONNECTED);
+    REQUIRE(!OpenNtBaseClientSubmitWorkerChannel(capability,launch_server));
+    CloseHandle(launch_server);launch_server=NULL;
+    REQUIRE(WriteFile(launch_client,"L",1,&read,NULL) && read==1);
+    REQUIRE(ReadFile(launch_client,&marker,1,&read,NULL) && read==1 && marker=='R');
+    CloseHandle(launch_client);
+    if(WaitForSingleObject(worker.hProcess,10000)!=WAIT_OBJECT_0) {
+        TerminateProcess(worker.hProcess,99);WaitForSingleObject(worker.hProcess,5000);
+        CloseHandle(worker.hThread);CloseHandle(worker.hProcess);return 1;
+    }
+    REQUIRE(GetExitCodeProcess(worker.hProcess,&code) && code==73);
+    CloseHandle(server);CloseHandle(ready);CloseHandle(capability);
+    CloseHandle(worker.hThread);CloseHandle(worker.hProcess);
+    error=OpenNtBaseClientReleaseWorker(reservation);
+    REQUIRE(!error || error==ERROR_NOT_FOUND);
+    OpenNtBaseClientDisconnectCurrent();
+    puts("PASS shared launcher native worker: rollback, suspended creation, Prepare, hidden Console, authenticated frontend and direct worker channel, completion");
+    return 0;
+}
+
+static int ntcon_reuse_child(char **argv)
+{
+    HANDLE frontend=(HANDLE)(ULONG_PTR)strtoul(argv[2],NULL,16);
+    HANDLE execution=(HANDLE)(ULONG_PTR)strtoul(argv[3],NULL,16);
+    DWORD expected=(DWORD)strtoul(argv[4],NULL,10),code;
+    HANDLE worker=NULL,target=NULL,receipt=NULL,foreign=CreateEventW(NULL,TRUE,FALSE,NULL);
+    WCHAR native[MAX_PATH],directory[MAX_PATH],command[MAX_PATH+64],*environment;
+    run16_native_start start={0};uint64_t reservation=0;
+    REQUIRE(frontend && execution && foreign && !OpenNtBaseClientConnectCurrent());
+    REQUIRE(OpenNtBaseClientBindConsoleContext(foreign)==ERROR_ACCESS_DENIED);
+    CloseHandle(foreign);
+    REQUIRE(!OpenNtBaseClientBindConsoleContext(execution));
+    REQUIRE(OpenNtBaseClientCommandWorker(&worker)==ERROR_NOT_READY && !worker);
+    REQUIRE(!OpenNtBaseClientSelectNativeWorker(&worker) && GetProcessId(worker)==expected);
+    REQUIRE(OpenNtBaseClientReserveNativeWorker(&reservation)==ERROR_INVALID_STATE && !reservation);
+    REQUIRE(GetSystemDirectoryW(native,MAX_PATH) && !wcscat_s(native,MAX_PATH,L"\\cmd.exe"));
+    REQUIRE(GetCurrentDirectoryW(MAX_PATH,directory));
+    REQUIRE(swprintf_s(command,ARRAYSIZE(command),L"\"%ls\" /d /c exit /b 73",native)>0);
+    environment=GetEnvironmentStringsW();REQUIRE(environment);
+    start.application=native;start.command=command;start.directory=directory;
+    start.environment=environment;start.console_mask=7;
+    REQUIRE(!run16_native_worker_request_submit(worker,frontend,&start,&target,&receipt));
+    REQUIRE(WaitForSingleObject(target,5000)==WAIT_OBJECT_0);
+    REQUIRE(GetExitCodeProcess(target,&code) && code==73);
+    REQUIRE(WaitForSingleObject(receipt,5000)==WAIT_OBJECT_0);
+    REQUIRE(WaitForSingleObject(worker,0)==WAIT_TIMEOUT);
+    CloseHandle(target);CloseHandle(receipt);CloseHandle(worker);
+    {
+        WCHAR launcher[MAX_PATH],line[MAX_PATH*2+80],value[32],*slash;
+        STARTUPINFOW startup={sizeof(startup)};PROCESS_INFORMATION process={0};DWORD wait;
+        REQUIRE(GetModuleFileNameW(NULL,launcher,MAX_PATH));
+        slash=wcsrchr(launcher,L'\\');REQUIRE(slash);
+        REQUIRE(!wcscpy_s(slash+1,MAX_PATH-(size_t)(slash+1-launcher),L"run16.exe"));
+        swprintf_s(value,32,L"%lx",(ULONG)(ULONG_PTR)frontend);
+        REQUIRE(SetEnvironmentVariableW(L"NTVDM_FRONTEND_CAPABILITY",value));
+        swprintf_s(value,32,L"%lx",(ULONG)(ULONG_PTR)execution);
+        REQUIRE(SetEnvironmentVariableW(L"NTVDM_EXECUTION_CONSOLE",value));
+        REQUIRE(swprintf_s(line,ARRAYSIZE(line),L"\"%ls\" \"%ls\" /d /c exit /b 61",launcher,native)>0);
+        REQUIRE(CreateProcessW(launcher,line,NULL,NULL,TRUE,CREATE_NO_WINDOW,NULL,NULL,&startup,&process));
+        CloseHandle(process.hThread);
+        wait=WaitForSingleObject(process.hProcess,10000);
+        if(wait!=WAIT_OBJECT_0){TerminateProcess(process.hProcess,99);WaitForSingleObject(process.hProcess,5000);}
+        REQUIRE(GetExitCodeProcess(process.hProcess,&code));CloseHandle(process.hProcess);
+        REQUIRE(wait==WAIT_OBJECT_0 && code==61);
+        REQUIRE(SetEnvironmentVariableW(L"NTVDM_FRONTEND_CAPABILITY",NULL));
+        REQUIRE(SetEnvironmentVariableW(L"NTVDM_EXECUTION_CONSOLE",NULL));
+    }
+    FreeEnvironmentStringsW(environment);OpenNtBaseClientDisconnectCurrent();
+    CloseHandle(frontend);CloseHandle(execution);return 73;
+}
+
+static int ntcon_reuse_launcher(HANDLE frontend,DWORD expected)
+{
+    HANDLE execution=NULL,inherited[2]={0};WCHAR image[MAX_PATH],command[MAX_PATH+120];
+    STARTUPINFOW startup={sizeof(startup)};PROCESS_INFORMATION process={0};DWORD result,wait;
+    REQUIRE(!OpenNtBaseClientAcquireConsoleContext(frontend,&execution));
+    REQUIRE(DuplicateHandle(GetCurrentProcess(),frontend,GetCurrentProcess(),&inherited[0],SYNCHRONIZE,TRUE,0));
+    REQUIRE(DuplicateHandle(GetCurrentProcess(),execution,GetCurrentProcess(),&inherited[1],SYNCHRONIZE,TRUE,0));
+    REQUIRE(GetModuleFileNameW(NULL,image,MAX_PATH));
+    REQUIRE(swprintf_s(command,ARRAYSIZE(command),L"\"%ls\" --ntcon-reuse-child %lx %lx %lu",
+        image,(ULONG)(ULONG_PTR)inherited[0],(ULONG)(ULONG_PTR)inherited[1],expected)>0);
+    REQUIRE(CreateProcessW(image,command,NULL,NULL,TRUE,CREATE_NO_WINDOW,NULL,NULL,&startup,&process));
+    CloseHandle(process.hThread);CloseHandle(inherited[0]);CloseHandle(inherited[1]);CloseHandle(execution);
+    wait=WaitForSingleObject(process.hProcess,10000);
+    if(wait!=WAIT_OBJECT_0){TerminateProcess(process.hProcess,99);WaitForSingleObject(process.hProcess,5000);}
+    REQUIRE(GetExitCodeProcess(process.hProcess,&result));CloseHandle(process.hProcess);
+    REQUIRE(wait==WAIT_OBJECT_0 && result==73);return 0;
+}
+
+static int ntcon_public_startup(void)
+{
+    HANDLE frontend=NULL,execution=NULL,inherited[2]={0},worker=NULL,shutdown=NULL;
+    PROCESS_INFORMATION children[2]={{0}};
+    STARTUPINFOW startup={sizeof(startup)};
+    WCHAR image[MAX_PATH],native[MAX_PATH],line[MAX_PATH*2+80],value[32],*slash;
+    DWORD index,wait,code;
+    REQUIRE(!OpenNtBaseClientConnectCurrent());
+    frontend=CreateEventW(NULL,TRUE,FALSE,NULL);
+    REQUIRE(frontend && !OpenNtBaseClientRegisterFrontendRoot(frontend));
+    REQUIRE(!OpenNtBaseClientAcquireConsoleContext(frontend,&execution));
+    REQUIRE(OpenNtBaseClientSelectNativeWorker(&worker)==ERROR_NOT_FOUND && !worker);
+    REQUIRE(DuplicateHandle(GetCurrentProcess(),frontend,GetCurrentProcess(),&inherited[0],SYNCHRONIZE,TRUE,0));
+    REQUIRE(DuplicateHandle(GetCurrentProcess(),execution,GetCurrentProcess(),&inherited[1],SYNCHRONIZE,TRUE,0));
+    REQUIRE(GetModuleFileNameW(NULL,image,MAX_PATH));
+    slash=wcsrchr(image,L'\\');REQUIRE(slash);
+    REQUIRE(!wcscpy_s(slash+1,MAX_PATH-(size_t)(slash+1-image),L"run16.exe"));
+    REQUIRE(GetSystemDirectoryW(native,MAX_PATH) && !wcscat_s(native,MAX_PATH,L"\\cmd.exe"));
+    swprintf_s(value,32,L"%lx",(ULONG)(ULONG_PTR)inherited[0]);
+    REQUIRE(SetEnvironmentVariableW(L"NTVDM_FRONTEND_CAPABILITY",value));
+    swprintf_s(value,32,L"%lx",(ULONG)(ULONG_PTR)inherited[1]);
+    REQUIRE(SetEnvironmentVariableW(L"NTVDM_EXECUTION_CONSOLE",value));
+    /* Both public launchers start without a worker. The production reservation
+     * lock, not fixture serialization, must prevent duplicate NTCON creation. */
+    for(index=0;index<2;++index) {
+        REQUIRE(swprintf_s(line,ARRAYSIZE(line),L"\"%ls\" \"%ls\" /d /c exit /b %lu",image,native,61ul+index)>0);
+        REQUIRE(CreateProcessW(image,line,NULL,NULL,TRUE,CREATE_NO_WINDOW|CREATE_SUSPENDED,
+            NULL,NULL,&startup,&children[index]));
+    }
+    REQUIRE(SetEnvironmentVariableW(L"NTVDM_FRONTEND_CAPABILITY",NULL));
+    REQUIRE(SetEnvironmentVariableW(L"NTVDM_EXECUTION_CONSOLE",NULL));
+    for(index=0;index<2;++index) {
+        REQUIRE(ResumeThread(children[index].hThread)==1);
+        CloseHandle(children[index].hThread);
+    }
+    for(index=0;index<2;++index) {
+        wait=WaitForSingleObject(children[index].hProcess,10000);
+        if(wait!=WAIT_OBJECT_0) {
+            TerminateProcess(children[index].hProcess,99);
+            WaitForSingleObject(children[index].hProcess,5000);
+        }
+        REQUIRE(GetExitCodeProcess(children[index].hProcess,&code));
+        CloseHandle(children[index].hProcess);
+        REQUIRE(wait==WAIT_OBJECT_0 && code==61+index);
+    }
+    /* Selection rejects ambiguous workers. Successful selection after both
+     * launchers exit proves one registered survivor for this execution context. */
+    REQUIRE(!OpenNtBaseClientSelectNativeWorker(&worker));
+    REQUIRE(WaitForSingleObject(worker,0)==WAIT_TIMEOUT);
+    shutdown=OpenProcess(PROCESS_TERMINATE|SYNCHRONIZE,FALSE,GetProcessId(worker));
+    REQUIRE(shutdown && TerminateProcess(shutdown,0));
+    REQUIRE(WaitForSingleObject(shutdown,5000)==WAIT_OBJECT_0);
+    CloseHandle(shutdown);CloseHandle(worker);
+    CloseHandle(inherited[0]);CloseHandle(inherited[1]);CloseHandle(execution);CloseHandle(frontend);
+    OpenNtBaseClientDisconnectCurrent();
+    puts("PASS public run16 concurrent first startup: exact 61/62 results, unique resident NTCON after launcher exit; fixture frontend only, presentation not tested");
+    return 0;
+}
+
+static int ntcon_execution_rpc(void)
+{
+    WCHAR image[MAX_PATH],command[MAX_PATH+64],directory[MAX_PATH],native[MAX_PATH];
+    WCHAR *slash,*environment;
+    STARTUPINFOW startup={sizeof(startup)};PROCESS_INFORMATION worker={0};
+    uint64_t reservation=0;DWORD error=0,code=0,deadline,index;
+    HANDLE capability=NULL;
+    REQUIRE(!OpenNtBaseClientConnectCurrent());
+    {
+        HANDLE selected=NULL;
+        REQUIRE(OpenNtBaseClientSelectNativeWorker(&selected)==ERROR_NOT_FOUND && !selected);
+    }
+    REQUIRE(!OpenNtBaseClientReserveNativeWorker(&reservation));
+    REQUIRE(GetModuleFileNameW(NULL,image,MAX_PATH));
+    slash=wcsrchr(image,L'\\');REQUIRE(slash);
+    REQUIRE(!wcscpy_s(slash+1,MAX_PATH-(size_t)(slash+1-image),L"ntcon.exe"));
+    REQUIRE(swprintf_s(command,ARRAYSIZE(command),L"\"%ls\"",image)>0);
+    startup.dwFlags=STARTF_USESHOWWINDOW;startup.wShowWindow=SW_HIDE;
+    REQUIRE(!run16_worker_prepare(reservation,image,command,NULL,CREATE_NEW_CONSOLE,&startup,&worker));
+    capability=CreateEventW(NULL,TRUE,FALSE,NULL);
+    REQUIRE(capability && !OpenNtBaseClientRegisterFrontendRoot(capability));
+    REQUIRE(GetCurrentDirectoryW(MAX_PATH,directory));
+    REQUIRE(GetSystemDirectoryW(native,MAX_PATH));
+    REQUIRE(!wcscat_s(native,MAX_PATH,L"\\cmd.exe"));
+    environment=GetEnvironmentStringsW();REQUIRE(environment);
+    REQUIRE(ResumeThread(worker.hThread)==1);
+    for(index=0;index<2;++index) {
+        run16_native_start start={0};
+        HANDLE output=NULL,writer=NULL,target=NULL,receipt=NULL;
+        DWORD bytes=0;char text[128]={0},expected[32];
+        REQUIRE(CreatePipe(&output,&writer,NULL,0));
+        REQUIRE(swprintf_s(command,ARRAYSIZE(command),L"\"%ls\" /d /c \"echo NTCON-EXEC-%lu&exit /b %lu\"",
+            native,index,index ? 19ul : 37ul)>0);
+        start.application=native;start.command=command;start.directory=directory;
+        start.environment=environment;start.console_mask=1;
+        start.standard[1]=start.standard[2]=writer;
+        deadline=GetTickCount()+5000;
+        do {
+            error=run16_native_worker_request_submit(worker.hProcess,capability,&start,&target,&receipt);
+            if(error==ERROR_NOT_READY)Sleep(10);
+        }while(error==ERROR_NOT_READY && (LONG)(deadline-GetTickCount())>0);
+        REQUIRE(!error && target && receipt);
+        REQUIRE(GetProcessId(target)!=worker.dwProcessId);
+        CloseHandle(writer);
+        REQUIRE(WaitForSingleObject(target,5000)==WAIT_OBJECT_0);
+        REQUIRE(GetExitCodeProcess(target,&code) && code==(index ? 19u : 37u));
+        REQUIRE(WaitForSingleObject(receipt,5000)==WAIT_OBJECT_0);
+        sprintf_s(expected,sizeof(expected),"NTCON-EXEC-%lu",index);
+        REQUIRE(ReadFile(output,text,sizeof(text)-1,&bytes,NULL) && bytes && strstr(text,expected));
+        REQUIRE(!ReadFile(output,text,sizeof(text)-1,&bytes,NULL) && GetLastError()==ERROR_BROKEN_PIPE);
+        REQUIRE(WaitForSingleObject(worker.hProcess,0)==WAIT_TIMEOUT);
+        CloseHandle(output);CloseHandle(target);CloseHandle(receipt);
+        if(!index) {
+            WCHAR missing[MAX_PATH];HANDLE failed=NULL,failed_receipt=NULL;
+            REQUIRE(!wcscpy_s(missing,MAX_PATH,image));
+            slash=wcsrchr(missing,L'\\');REQUIRE(slash);
+            REQUIRE(!wcscpy_s(slash+1,MAX_PATH-(size_t)(slash+1-missing),L"ntcon-missing-target.exe"));
+            REQUIRE(GetFileAttributesW(missing)==INVALID_FILE_ATTRIBUTES && GetLastError()==ERROR_FILE_NOT_FOUND);
+            start.application=missing;start.console_mask=7;
+            start.standard[0]=start.standard[1]=start.standard[2]=NULL;
+            error=run16_native_worker_request_submit(worker.hProcess,capability,&start,&failed,&failed_receipt);
+            REQUIRE(error==ERROR_FILE_NOT_FOUND && !failed && !failed_receipt);
+            REQUIRE(WaitForSingleObject(worker.hProcess,0)==WAIT_TIMEOUT);
+        }
+    }
+    FreeEnvironmentStringsW(environment);
+    REQUIRE(!ntcon_reuse_launcher(capability,worker.dwProcessId));
+    REQUIRE(WaitForSingleObject(worker.hProcess,0)==WAIT_TIMEOUT);
+    {
+        WCHAR name[128];HANDLE server,client,ready,selected=NULL;
+        DWORD request_id=0,generation=0,bytes=0;
+        console_io_request request;console_io_reply reply={0};
+        /* Public run16 already requested this route before returning. Do not
+         * mask a lost request by recreating it from the fixture connection. */
+        REQUIRE(!OpenNtBaseClientFrontendRequest(&request_id,&selected));
+        REQUIRE(GetProcessId(selected)==worker.dwProcessId);CloseHandle(selected);
+        swprintf_s(name,ARRAYSIZE(name),L"\\\\.\\pipe\\ntcon-runtime-presentation-%lu",GetCurrentProcessId());
+        server=CreateNamedPipeW(name,PIPE_ACCESS_DUPLEX|FILE_FLAG_OVERLAPPED|FILE_FLAG_FIRST_PIPE_INSTANCE,
+            PIPE_TYPE_BYTE|PIPE_WAIT|PIPE_REJECT_REMOTE_CLIENTS,1,32768,32768,0,NULL);
+        REQUIRE(server!=INVALID_HANDLE_VALUE);
+        client=CreateFileW(name,GENERIC_READ|GENERIC_WRITE,0,NULL,OPEN_EXISTING,0,NULL);
+        REQUIRE(client!=INVALID_HANDLE_VALUE);
+        REQUIRE(ConnectNamedPipe(server,NULL) || GetLastError()==ERROR_PIPE_CONNECTED);
+        ready=CreateEventW(NULL,TRUE,FALSE,NULL);REQUIRE(ready);
+        REQUIRE(!OpenNtBaseClientAttachFrontendRequest(request_id,server,ready,&generation));
+        REQUIRE(ReadFile(client,&request,offsetof(console_io_request,data),&bytes,NULL) &&
+            bytes==offsetof(console_io_request,data));
+        REQUIRE(request.version==CONSOLE_IO_VERSION && request.generation==generation &&
+            request.sequence==1 && request.operation==CONSOLE_IO_BARRIER && !request.bytes);
+        reply.version=CONSOLE_IO_VERSION;reply.generation=generation;reply.sequence=1;
+        /* Attached but inactive is legitimate. Receiving this reply must not
+         * activate the frontend or terminate the resident worker. */
+        reply.error=ERROR_NOT_READY;
+        REQUIRE(WriteFile(client,&reply,offsetof(console_io_reply,data),&bytes,NULL) &&
+            bytes==offsetof(console_io_reply,data));
+        Sleep(200);REQUIRE(WaitForSingleObject(worker.hProcess,0)==WAIT_TIMEOUT);
+        CloseHandle(client);CloseHandle(server);CloseHandle(ready);
+    }
+    {
+        DWORD pending=1,tasks=0;
+        deadline=GetTickCount()+5000;
+        do {
+            REQUIRE(!OpenNtBaseClientFrontendUsage(&pending,&tasks));
+            REQUIRE(!tasks);
+            if(pending)Sleep(10);
+        }while(pending && (LONG)(deadline-GetTickCount())>0);
+        REQUIRE(!pending);
+    }
+    /* Fixture shutdown is explicit, not launcher-death or target completion. */
+    REQUIRE(TerminateProcess(worker.hProcess,0) && WaitForSingleObject(worker.hProcess,5000)==WAIT_OBJECT_0);
+    CloseHandle(worker.hThread);CloseHandle(worker.hProcess);CloseHandle(capability);
+    error=OpenNtBaseClientReleaseWorker(reservation);
+    REQUIRE(!error || error==ERROR_NOT_FOUND);
+    OpenNtBaseClientDisconnectCurrent();
+    puts("PASS actual NTCON: independent entry, authenticated requests, exact 37/19 results, alias/EOF, failed launch/reuse; second launcher returns 73 and public run16 returns 61 through existing worker; forged context rejected; worker survives launcher");
+    return 0;
+}
+
 int main(int argc,char **argv)
 {
     BASE_API_MSG message={0};
@@ -430,6 +759,40 @@ int main(int argc,char **argv)
     HANDLE parent_event=NULL;
     NTSTATUS status;
     ULONG expected=argc==2 && !lstrcmpA(argv[1],"--existing")?0:1;
+    if (argc==5 && !lstrcmpA(argv[1],"--ntcon-reuse-child")) return ntcon_reuse_child(argv);
+    if (argc==2 && !lstrcmpA(argv[1],"--native-reservation")) return native_reservation_rpc();
+    if (argc==2 && !lstrcmpA(argv[1],"--native-worker-startup")) return native_worker_startup();
+    if (argc==2 && !lstrcmpA(argv[1],"--ntcon-execution")) return ntcon_execution_rpc();
+    if (argc==2 && !lstrcmpA(argv[1],"--ntcon-public-startup")) return ntcon_public_startup();
+    if (argc==2 && !lstrcmpA(argv[1],"--native-worker-child")) {
+        DWORD ids[4],generation=0,written=0;CONSOLE_SCREEN_BUFFER_INFO info;HANDLE output;
+        HANDLE pipe=NULL,frontend=NULL,ready=NULL,capability=NULL;
+        REQUIRE(GetConsoleProcessList(ids,4)==1 && ids[0]==GetCurrentProcessId());
+        output=CreateFileW(L"CONOUT$",GENERIC_READ|GENERIC_WRITE,
+            FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,OPEN_EXISTING,0,NULL);
+        REQUIRE(output!=INVALID_HANDLE_VALUE && GetConsoleScreenBufferInfo(output,&info));
+        CloseHandle(output);
+        REQUIRE(worker_base_connect()==ERROR_SUCCESS);
+        REQUIRE(!OpenNtBaseClientTakeFrontend(&pipe,&frontend,&generation,&ready));
+        REQUIRE(pipe && frontend && ready && generation);
+        REQUIRE(!OpenNtBaseClientWorkerFrontendCapability(&capability) && capability);
+        REQUIRE(WriteFile(pipe,"N",1,&written,NULL) && written==1);
+        {
+            HANDLE request=NULL,sender=NULL,execution=NULL,io_capability=NULL;
+            HANDLE root=NULL;DWORD root_generation=0,error;
+            char marker=0;
+            error=OpenNtBaseClientWaitWorkerChannel(&request,&sender,&execution,&io_capability);
+            REQUIRE(!error && request && sender && execution && io_capability);
+            REQUIRE(GetProcessId(sender)==GetProcessId(frontend));
+            REQUIRE(!OpenNtBaseClientRetainFrontendRoot(io_capability,&root,&root_generation));
+            REQUIRE(GetProcessId(root)==GetProcessId(frontend) && root_generation==generation);
+            REQUIRE(ReadFile(request,&marker,1,&written,NULL) && written==1 && marker=='L');
+            REQUIRE(WriteFile(request,"R",1,&written,NULL) && written==1);
+            CloseHandle(root);CloseHandle(io_capability);CloseHandle(execution);CloseHandle(sender);CloseHandle(request);
+        }
+        CloseHandle(capability);CloseHandle(ready);CloseHandle(frontend);CloseHandle(pipe);
+        worker_base_disconnect();return 73;
+    }
     if (argc==2 && !lstrcmpA(argv[1],"--reservation-child")) return reservation_child(FALSE);
     if (argc==2 && !lstrcmpA(argv[1],"--reservation-parent")) return reservation_parent(FALSE);
     if (argc==2 && !lstrcmpA(argv[1],"--frontend-cancel-child")) return reservation_child(2);

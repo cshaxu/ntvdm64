@@ -4,6 +4,54 @@
 #include "lib/kvm-window/window_interface.h"
 #include "lib/kvm-window/render.h"
 #include "window_frame.h"
+#include "text_frame.h"
+#include "ntcon-exe/text_frame.h"
+#include "native_pc_font.h"
+
+/* Test-local capture input, not a second production frame contract. */
+typedef struct run16_native_frame_info {
+    CONSOLE_SCREEN_BUFFER_INFOEX screen;
+    CONSOLE_CURSOR_INFO cursor;
+} run16_native_frame_info;
+
+/* Test adapter only: production NTCON packing -> common frontend decoder.
+ * Keep the established pixel assertions, with no native renderer in NTKVM. */
+static DWORD frontend_window_native_frame_pointer(const run16_native_frame_info *info,
+    const CHAR_INFO *cells,SIZE_T count,const POINT *pointer,kvm_window_frame *frame)
+{
+    console_text_style font={0};run16_console_video video={0};
+    BYTE *payload=NULL;DWORD error;unsigned bank,glyph;
+    frame->valid=0;font.font_height=14;
+    for(bank=0;bank<2;++bank)for(glyph=0;glyph<256;++glyph)
+        memcpy(font.fonts[bank][glyph],frontend_native_font[glyph],14);
+    error=ntcon_text_frame_pack(&info->screen,&info->cursor,cells,count,&font,
+        &video.description,&payload);
+    if(error)return error;
+    video.pixels=payload;video.published_serial=1;
+    error=frontend_window_dos_frame(&video,frame);
+    if(!error && !frame->graphics) {
+        kvm_window_text_frame *fonts=HeapAlloc(GetProcessHeap(),0,sizeof(*fonts));
+        frontend_text_raster *scratch=HeapAlloc(GetProcessHeap(),0,sizeof(*scratch));
+        if(!fonts || !scratch)error=ERROR_NOT_ENOUGH_MEMORY;
+        else {
+            unsigned row,columns=frame->text.base.text_columns,rows=frame->text.base.text_rows;
+            *fonts=frame->text;
+            for(row=0;row<rows;++row)memmove(fonts->base.cells+row*columns,
+                frame->text.base.cells+row*KVM_TEXT_COLUMNS,columns*sizeof(kvm_text_cell));
+            if(!frontend_text_frame_rasterize(scratch,fonts,fonts->base.cells,
+                columns*rows,NULL,TRUE,frame))error=GetLastError();
+        }
+        if(scratch)HeapFree(GetProcessHeap(),0,scratch);
+        if(fonts)HeapFree(GetProcessHeap(),0,fonts);
+    }
+    if(!error)error=frontend_window_pointer(frame,pointer);
+    HeapFree(GetProcessHeap(),0,payload);
+    if(error)frame->valid=0;
+    return error;
+}
+static DWORD frontend_window_native_frame(const run16_native_frame_info *info,
+    const CHAR_INFO *cells,SIZE_T count,kvm_window_frame *frame)
+{ return frontend_window_native_frame_pointer(info,cells,count,NULL,frame); }
 
 #define CHECK(x) do { if (!(x)) { fprintf(stderr, "line %d: %s\n", __LINE__, #x); return 1; } } while (0)
 
@@ -71,6 +119,25 @@ static int native_unicode_bounds(kvm_window_frame *frame)
     return 0;
 }
 
+static int native_style_colors(kvm_window_frame *frame)
+{
+    run16_native_frame_info info={0};CHAR_INFO cells[4]={0};unsigned i;
+    info.screen.dwSize=(COORD){4,1};info.screen.srWindow.Right=3;
+    info.screen.ColorTable[7]=RGB(10,20,30);info.screen.ColorTable[15]=RGB(40,50,60);
+    info.cursor.dwSize=25;
+    for(i=0;i<4;++i) {
+        cells[i].Char.UnicodeChar=L' ';
+        cells[i].Attributes=(i<2 ? 7 : 15)|((i&1) ? COMMON_LVB_UNDERSCORE : 0);
+    }
+    CHECK(!frontend_window_native_frame(&info,cells,4,frame));
+    for(i=0;i<4;++i) {
+        DWORD rgb=frame->image.palette[frame->image.pixels[13*32+i*8]];
+        CHECK(rgb==(!(i&1) ? 0 : i<2 ? 0x0a141e : 0x28323c));
+    }
+    puts("PASS shared style byte: underline is independent of foreground intensity");
+    return 0;
+}
+
 int main(void)
 {
     kvm_window_frame *frame = calloc(1, sizeof(*frame));
@@ -99,6 +166,7 @@ int main(void)
     CHAR_INFO *native_cells;
     CHECK(frame && pixels);
     CHECK(native_unicode_bounds(frame) == 0);
+    CHECK(native_style_colors(frame) == 0);
     frame->valid=frame->graphics=LIB_TRUE;
     frame->image.width=frame->image.stride=1600;frame->image.height=350;
     CHECK(kvm_window_frame_validate(frame)==LIB_STATUS_UNSUPPORTED);

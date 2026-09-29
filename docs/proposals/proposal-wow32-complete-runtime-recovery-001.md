@@ -4,9 +4,11 @@
 
 Owner closes T422 on 2026-09-24 as initial WINMINE capability and planning
 preservation, not complete WOW32 acceptance. This document is retained design
-and research provenance. All unfinished S3--S22 execution moves to S1--S20
-of the [new successor candidate](proposal-wow32-production-completion-002.md),
-which owns the live plan and final acceptance. Old admission/frontier/numbering
+and research provenance. All unfinished S3--S22 execution initially moved to successor S1--S20.
+On 2026-09-28 the owner split those into twenty candidate T packages; the
+[shared successor program](proposal-wow32-production-completion-002.md)
+preserves that exact transfer and links each current proposal and its local
+S plan, including the final integrated-acceptance candidate. Old admission/frontier/numbering
 statements below are historical; no T422 S remains active after this handoff.
 
 ## Objective and admission

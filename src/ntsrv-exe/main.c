@@ -10,7 +10,7 @@
 #include "opennt-abi/source/public/internal/base/inc/vdmapi.h"
 #include "ntsrv-exe/opennt/include/base_service.h"
 #include "ntsrv-exe/console_query.h"
-#include "product-abi/version.h"
+#include "interface/version.h"
 static broker_rpc_scope scope;
 static OPENNT_BASE_SERVICE *service;
 static WCHAR console_helper[MAX_PATH];
@@ -176,6 +176,7 @@ error_status_t Server_TaskSnapshot(handle_t binding,HANDLE process,ULONG protoco
             (*entries)[index].started_filetime=(hyper)local[index].started_filetime;
             (*entries)[index].task=local[index].task;
             (*entries)[index].stack_depth=local[index].stack_depth;
+            (*entries)[index].process_id=local[index].process_id;
             memcpy((*entries)[index].image,local[index].image,sizeof(local[index].image));
         }
     }
@@ -278,20 +279,29 @@ error_status_t Server_BrokerProcess(handle_t binding,VDM_CONNECTION connection,H
             server,SYNCHRONIZE,FALSE,0)) return GetLastError();
     return ERROR_SUCCESS;
 }
-error_status_t Server_SubmitFrontendChannel(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+error_status_t Server_SubmitWorkerChannel(handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,HANDLE capability,HANDLE channel)
 {
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    return error ? error : OpenNtBaseServiceSubmitFrontendChannel(connection,pid,generation,capability,channel);
+    return error ? error : OpenNtBaseServiceSubmitWorkerChannel(connection,pid,generation,capability,channel);
 }
-error_status_t Server_TakeFrontendChannel(handle_t binding,VDM_CONNECTION connection,HANDLE process,
-    ULONG generation,HANDLE *channel,HANDLE *caller_process,HANDLE *execution)
+error_status_t Server_TakeWorkerChannel(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+    ULONG generation,HANDLE *channel,HANDLE *caller_process,HANDLE *execution,HANDLE *frontend)
 {
     DWORD pid,error;
-    *channel=NULL;*caller_process=NULL;*execution=NULL;
+    *channel=NULL;*caller_process=NULL;*execution=NULL;*frontend=NULL;
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    return error ? error : OpenNtBaseServiceTakeFrontendChannel(connection,pid,generation,
-        channel,caller_process,execution);
+    return error ? error : OpenNtBaseServiceTakeWorkerChannel(connection,pid,generation,
+        channel,caller_process,execution,frontend);
+}
+error_status_t Server_WaitWorkerChannel(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+    ULONG generation,HANDLE *channel,HANDLE *caller_process,HANDLE *execution,HANDLE *frontend)
+{
+    DWORD pid,error;
+    *channel=NULL;*caller_process=NULL;*execution=NULL;*frontend=NULL;
+    error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    return error ? error : OpenNtBaseServiceWaitWorkerChannel(connection,pid,generation,
+        channel,caller_process,execution,frontend);
 }
 error_status_t Server_WorkerFrontendCapability(handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,HANDLE *capability)
@@ -315,6 +325,33 @@ error_status_t Server_BindConsoleContext(handle_t binding,VDM_CONNECTION connect
 {
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
     return error ? error : OpenNtBaseServiceBindConsoleContext(connection,pid,generation,capability);
+}
+error_status_t Server_RegisterNativeBackend(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+    ULONG generation,HANDLE frontend,HANDLE stop,HANDLE closed)
+{
+    DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    return error ? error : OpenNtBaseServiceRegisterNativeBackend(connection,pid,generation,frontend,stop,closed);
+}
+error_status_t Server_CompleteWorkerChannel(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+    ULONG generation)
+{
+    DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    return error ? error : OpenNtBaseServiceCompleteWorkerChannel(connection,pid,generation);
+}
+error_status_t Server_NativeSampleEpoch(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+    ULONG generation,hyper *epoch)
+{
+    uint64_t value=0;DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    *epoch=0;
+    if(!error)error=OpenNtBaseServiceNativeSampleEpoch(connection,pid,generation,&value);
+    if(!error)*epoch=(hyper)value;
+    return error;
+}
+error_status_t Server_ReportNativeBackend(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+    ULONG generation,hyper epoch,ULONG members)
+{
+    DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    return error ? error : OpenNtBaseServiceReportNativeBackend(connection,pid,generation,(uint64_t)epoch,members);
 }
 error_status_t Server_RegisterFrontendRoot(handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,HANDLE capability)
@@ -365,6 +402,14 @@ error_status_t Server_AttachFrontendRequest(handle_t binding,VDM_CONNECTION conn
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
     return error ? error : OpenNtBaseServiceAttachFrontendRequest(connection,pid,generation,
         request,channel,ready);
+}
+error_status_t Server_SelectNativeWorker(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+    ULONG generation,HANDLE *worker)
+{
+    DWORD pid,error;
+    *worker=NULL;
+    error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    return error ? error : OpenNtBaseServiceSelectNativeWorker(connection,pid,generation,worker);
 }
 error_status_t Server_CommandWorker(handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,HANDLE *worker)
@@ -620,7 +665,7 @@ error_status_t Server_Reenter(handle_t binding,VDM_CONNECTION connection,HANDLE 
     return error;
 }
 error_status_t Server_Reserve(handle_t binding,VDM_CONNECTION connection,HANDLE process,
-    ULONG generation,ULONG task,hyper *reservation)
+    ULONG generation,ULONG task,ULONG native_worker,hyper *reservation)
 {
     DWORD pid,error;
     uint64_t id=0;
@@ -628,7 +673,9 @@ error_status_t Server_Reserve(handle_t binding,VDM_CONNECTION connection,HANDLE 
     *reservation=0;
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
     if (error) return error;
-    error=OpenNtBaseServiceCreateReservation(connection,pid,generation,task,&id);
+    if(native_worker>1 || (native_worker && task))return ERROR_INVALID_PARAMETER;
+    error=native_worker ? OpenNtBaseServiceCreateNativeReservation(connection,pid,generation,&id) :
+        OpenNtBaseServiceCreateReservation(connection,pid,generation,task,&id);
     if (!error) *reservation=(hyper)id;
     return error;
 }
@@ -685,7 +732,7 @@ int main(void)
         (void)OpenNtBaseServiceStop(service);
         return (int)error;
     }
-    result=RpcServerRegisterIf3(Server_vdm_service_v9_0_s_ifspec,NULL,NULL,
+    result=RpcServerRegisterIf3(Server_vdm_service_v16_0_s_ifspec,NULL,NULL,
         RPC_IF_ALLOW_SECURE_ONLY | RPC_IF_ALLOW_LOCAL_ONLY,RPC_C_LISTEN_MAX_CALLS_DEFAULT,
         (unsigned)-1,authorize,NULL);
     if (!result) {
@@ -709,7 +756,7 @@ int main(void)
         if (result) basesrv_idle_fatal("RpcMgmtWaitServerListen",result);
     }
     {
-        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v9_0_s_ifspec,NULL,TRUE);
+        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v16_0_s_ifspec,NULL,TRUE);
         if (!result && cleanup) result=cleanup;
     }
     if (idle_timer) CloseHandle(idle_timer);

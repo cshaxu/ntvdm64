@@ -59,7 +59,47 @@ int main(void)
     }
     CHECK(OpenNtBaseReservationRelease(state,second,102,8)==ERROR_SUCCESS);
     CHECK(OpenNtBaseReservationRelease(state,third,103,9)==ERROR_SUCCESS);
+    {
+        OPENNT_BASE_WORKER_KIND kind=OPENNT_BASE_WORKER_DOS;
+        uint64_t native=0,other=0;
+        CHECK(OpenNtBaseReservationsIsEmpty(state));
+        CHECK(OpenNtBaseReservationCreateKind(state,104,12,0,(HANDLE)0x4567,
+            (OPENNT_BASE_WORKER_KIND)3,&native)==ERROR_INVALID_PARAMETER);
+        CHECK(OpenNtBaseReservationCreateKind(state,104,12,0,NULL,
+            OPENNT_BASE_WORKER_NATIVE,&native)==ERROR_INVALID_PARAMETER);
+        CHECK(OpenNtBaseReservationCreateKind(state,104,12,0,(HANDLE)0x4567,
+            OPENNT_BASE_WORKER_NATIVE,&native)==ERROR_SUCCESS);
+        CHECK(OpenNtBaseReservationCreateKind(state,105,16,0,(HANDLE)0x4567,
+            OPENNT_BASE_WORKER_NATIVE,&other)==ERROR_ALREADY_EXISTS && !other);
+        CHECK(OpenNtBaseReservationCreateKind(state,105,16,0,(HANDLE)0x4568,
+            OPENNT_BASE_WORKER_NATIVE,&other)==ERROR_SUCCESS && other);
+        CHECK(OpenNtBaseReservationRelease(state,other,105,16)==ERROR_SUCCESS);
+        CHECK(OpenNtBaseReservationPrepareWorker(state,native,104,13,self)==ERROR_ACCESS_DENIED);
+        CHECK(OpenNtBaseReservationPrepareWorker(state,native,104,12,self)==ERROR_SUCCESS);
+        /* A VDM-only caller must fail before claim; no fake DOS/WOW record. */
+        CHECK(OpenNtBaseReservationClaimWorker(state,GetCurrentProcessId(),13,&claimed,
+            &task,&console,&shared_wow,&worker)==ERROR_NOT_SUPPORTED);
+        CHECK(!worker && !claimed);
+        CHECK(OpenNtBaseReservationClaimWorkerKind(state,GetCurrentProcessId(),14,&claimed,
+            &task,&console,&kind,&worker)==ERROR_SUCCESS);
+        CHECK(claimed==native && task==0 && console==(HANDLE)0x4567 && kind==OPENNT_BASE_WORKER_NATIVE);
+        CHECK(worker!=NULL && WaitForSingleObject(worker,0)==WAIT_TIMEOUT);
+        CHECK(OpenNtBaseReservationCreateKind(state,105,16,0,(HANDLE)0x4567,
+            OPENNT_BASE_WORKER_NATIVE,&other)==ERROR_ALREADY_EXISTS && !other);
+        CloseHandle(worker);worker=NULL;
+        CHECK(OpenNtBaseReservationAbandon(state,native));
+        CHECK(OpenNtBaseReservationRetainWorker(state,native,104,12,&worker)==ERROR_SUCCESS);
+        CHECK(WaitForSingleObject(worker,0)==WAIT_TIMEOUT);CloseHandle(worker);worker=NULL;
+        CHECK(OpenNtBaseReservationClaimWorkerKind(state,GetCurrentProcessId(),15,&claimed,
+            &task,&console,&kind,&worker)==ERROR_ALREADY_EXISTS);
+        CHECK(OpenNtBaseReservationReleaseWorker(state,native,GetCurrentProcessId(),15)==ERROR_ACCESS_DENIED);
+        CHECK(OpenNtBaseReservationReleaseWorker(state,native,GetCurrentProcessId(),14)==ERROR_SUCCESS);
+        CHECK(OpenNtBaseReservationsIsEmpty(state));
+        CHECK(OpenNtBaseReservationCreateKind(state,105,16,0,(HANDLE)0x4567,
+            OPENNT_BASE_WORKER_NATIVE,&other)==ERROR_SUCCESS);
+        CHECK(OpenNtBaseReservationRelease(state,other,105,16)==ERROR_SUCCESS);
+    }
     CHECK(OpenNtBaseReservationsDestroy(state));CloseHandle(self);
-    puts("PASS: launcher-owned worker reservation, authenticated claim, generation and release");
+    puts("PASS: DOS/WOW/native worker reservation, authenticated claim, generation, native/VDM isolation, abandonment and release");
     return 0;
 }

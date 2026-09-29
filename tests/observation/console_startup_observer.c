@@ -3,7 +3,8 @@
  * SoftPC product.  It owns a real CONIN$/CONOUT$ console, launches exactly
  * one product command line, waits a bounded interval, and records only the
  * observable process result.  It never attaches a debugger, searches guest
- * memory, installs breakpoints, or changes product inputs.
+ * memory by default, installs breakpoints, or changes product inputs. An
+ * explicit diagnostic RVA can copy low guest RAM on timeout, read-only.
  */
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
@@ -319,7 +320,39 @@ static void clear_console(HANDLE output)
 
 /* Observe direct children before the harness closes its Console.  A launcher
  * result alone must not be mistaken for successful worker termination. */
-static void report_direct_children(FILE *report, DWORD parent, BOOL contexts)
+/* Test-only opt-in: the caller supplies Start_of_M_area's RVA from the exact
+ * candidate map. Copy only its first MiB, before launcher cleanup destroys
+ * evidence. No guest writes, injection, or production recovery behavior. */
+static void capture_timeout_guest(FILE *report,HANDLE process,DWORD pid,
+    const observation_image_identity *image,const char *prefix)
+{
+    char value[32],path[MAX_PATH],*end;DWORD rva,base=0,offset;
+    unsigned __int64 parsed;SIZE_T copied;HANDLE output;BYTE page[4096];
+    DWORD written;
+    if(!prefix || !GetEnvironmentVariableA("MVDM_OBSERVER_GUEST_BASE_RVA",value,sizeof(value)))return;
+    value[sizeof(value)-1]=0;parsed=_strtoui64(value,&end,16);
+    if(end==value || *end || parsed>MAXDWORD || image->image_size<sizeof(base) ||
+        parsed>image->image_size-sizeof(base)) {
+        fputs("guest-dump-error=invalid-rva\n",report);return;
+    }
+    rva=(DWORD)parsed;
+    if(!ReadProcessMemory(process,(LPCVOID)(ULONG_PTR)(image->base_address+rva),
+        &base,sizeof(base),&copied) || copied!=sizeof(base) || !base || base>MAXDWORD-0x100000u) {
+        fprintf(report,"guest-dump-error=base-read-%lu\n",GetLastError());return;
+    }
+    if(_snprintf_s(path,sizeof(path),_TRUNCATE,"%s.guest-%lu.bin",prefix,pid)<0)return;
+    output=CreateFileA(path,GENERIC_WRITE,0,NULL,CREATE_NEW,FILE_ATTRIBUTE_NORMAL,NULL);
+    if(output==INVALID_HANDLE_VALUE){fprintf(report,"guest-dump-error=create-%lu\n",GetLastError());return;}
+    for(offset=0;offset<0x100000u;offset+=sizeof(page)) {
+        if(!ReadProcessMemory(process,(LPCVOID)(ULONG_PTR)(base+offset),page,sizeof(page),&copied) ||
+            copied!=sizeof(page) || !WriteFile(output,page,sizeof(page),&written,NULL) ||
+            written!=sizeof(page))break;
+    }
+    fprintf(report,"guest-dump pid=%lu rva=%08lx base=%08lx bytes=%lu path=%s\n",
+        pid,rva,base,offset,path);
+    CloseHandle(output);
+}
+static void report_direct_children(FILE *report, DWORD parent, BOOL contexts,const char *guest_prefix)
 {
     HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
     PROCESSENTRY32 entry;
@@ -347,6 +380,8 @@ static void report_direct_children(FILE *report, DWORD parent, BOOL contexts)
                 DWORD count,index,frame;
                 BOOL symbols=SymInitialize(process,NULL,TRUE);
                 capture_process_image(entry.th32ProcessID,&image);
+                if(!_stricmp(entry.szExeFile,"ntvdm.exe"))
+                    capture_timeout_guest(report,process,entry.th32ProcessID,&image,guest_prefix);
                 report_process_modules(report,entry.th32ProcessID);
                 fprintf(report,"child-image pid=%lu base=%08lx size=%08lx\n",
                         entry.th32ProcessID,image.base_address,image.image_size);
@@ -1020,7 +1055,7 @@ static BOOL window_mouse_probe(const char *package,const char *report_path)
 {
     char desktop[96],dll[MAX_PATH],path[MAX_PATH],image[MAX_PATH],expected[MAX_PATH];
     DWORD needed,pid=0,thread=0,length=MAX_PATH,mode,burst=0,index;
-    char burst_text[16];
+    char burst_text[16];WCHAR acknowledgment_name[96];HANDLE acknowledgment=NULL;
     HWND window=NULL;HANDLE process=NULL;HMODULE module=NULL;HHOOK hook=NULL;
     HOOKPROC procedure;FILE *report=NULL;BOOL ok=FALSE;ULONGLONG deadline;
     if(!GetEnvironmentVariableA("MVDM_OBSERVER_MOUSE_HOOK",dll,sizeof(dll)))return FALSE;
@@ -1054,6 +1089,9 @@ static BOOL window_mouse_probe(const char *package,const char *report_path)
     module=LoadLibraryA(dll);if(!module)goto done;
     procedure=(HOOKPROC)GetProcAddress(module,"MouseInputHook");if(!procedure)goto done;
     hook=SetWindowsHookExW(WH_GETMESSAGE,procedure,module,thread);if(!hook)goto done;
+    swprintf_s(acknowledgment_name,96,L"Local\\NTVDM-Mouse-Probe-%lu-%lu",pid,thread);
+    acknowledgment=CreateEventW(NULL,TRUE,FALSE,acknowledgment_name);
+    if(!acknowledgment || GetLastError()==ERROR_ALREADY_EXISTS)goto done;
     /* Probe settles for 40 BIOS ticks before installing its callback. */
     Sleep(3500);
     mode=GetEnvironmentVariableA("MVDM_OBSERVER_MOUSE_RETIRE",NULL,0) ? 0x80000000u : 0;
@@ -1072,10 +1110,15 @@ static BOOL window_mouse_probe(const char *package,const char *report_path)
     if(!PostMessageW(window,WM_APP+0x5f0,1,0))goto done;
     Sleep(250);
     if(!PostMessageW(window,WM_APP+0x5f0,mode,0))goto done;
-    Sleep(300);ok=TRUE;
+    /* Posting is not consumption. Keep the hook installed until the Window
+     * thread accepts every sample and processes this FIFO tail marker. */
+    if(!PostMessageW(window,WM_APP+0x5f1,burst+3,0))goto done;
+    ok=WaitForSingleObject(acknowledgment,20000)==WAIT_OBJECT_0;
 done:
     fprintf(report,"burst-records=%lu\n",burst);
     fprintf(report,"frontend=%lu thread=%lu posted=%s error=%lu\n",pid,thread,ok ? "pass" : "fail",GetLastError());
+    fprintf(report,"input-sink-acknowledged=%s\n",ok ? "yes" : "no");
+    if(acknowledgment)CloseHandle(acknowledgment);
     if(hook)UnhookWindowsHookEx(hook);if(module)FreeLibrary(module);if(process)CloseHandle(process);
     if(fclose(report)!=0)ok=FALSE;return ok;
 }
@@ -1633,7 +1676,7 @@ int main(int argc, char **argv)
             fprintf(live, "phase=before-launcher-termination\nlauncher=%lu\nwait=%lu\n",
                 child.dwProcessId, WaitForSingleObject(child.hProcess, 0));
             report_private_timeout_windows(live);
-            report_direct_children(live, child.dwProcessId, TRUE);
+            report_direct_children(live, child.dwProcessId, TRUE,argv[3]);
             fclose(live);
         }
         /* The fixed container observes the product without a debugger.  A
@@ -1693,7 +1736,7 @@ int main(int argc, char **argv)
             for (index = 0; index < count && index < ARRAYSIZE(members); ++index)
                 fprintf(report, "console-member=%lu\n", members[index]);
         }
-        report_direct_children(report, child.dwProcessId,wait_status==WAIT_TIMEOUT);
+        report_direct_children(report, child.dwProcessId,wait_status==WAIT_TIMEOUT,NULL);
         fprintf(report, "timeout-ms=%lu\n", (unsigned long)observation_timeout_ms);
         fprintf(report, "scripted-console-input=%s\n",
                 scripted_console_input ?

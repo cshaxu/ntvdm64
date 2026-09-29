@@ -4,13 +4,14 @@
 
 Repair user-visible launch, Console ownership and completion behavior while
 preserving original DOS/WOW execution semantics and verified capabilities.
-This unnumbered candidate follows error-response recovery and precedes
-[whole-closure recovery](proposal-mvdm-whole-closure-recovery-001.md), then
-implementation minimization. It does not change the active packet. Ordinary
-UX issues retain this priority; a proven data-loss, resource-leak or blocking
-lifetime defect needed by earlier work receives an explicit owner/scope
-promotion through task governance. Reuse that completed fix and evidence here
-rather than maintaining a second implementation or postponing a safety fix.
+By latest owner direction, this former candidate is removed from the T queue
+and its scope is transferred to the final planned S13 of the
+[Console/Window frontend package](proposal-kvm-window-graphics-presentation-001.md).
+It shares that package's component-lifecycle ownership and is not a separate T.
+The previous queue-position-2 instruction is superseded. CURRENT retains S12
+as the sole active packet; S13 requires separate admission after S12 completes.
+The former RDP S13 plan was cancelled because the owner confirmed it resolved;
+this product-experience scope does not reopen RDP work.
 
 ## Initial defect and scope
 
@@ -25,23 +26,26 @@ arguments, working directory, missing/unsupported-image errors, inherited
 versus product-owned Console lifetime, normal exit, startup failure and user
 cancellation/window closure. Record each adjacent confirmed defect separately.
 
-run16 owns external launch and parent completion; ntvdm owns execution and
-worker-local cleanup; basesrv owns registered coordination. Preserve original
+run16 owns external launch and parent completion; NTVDM and NTCON own their
+respective workers; NTKVM owns visible presentation; NTSRV owns registered
+coordination. Reuse the completed S12 lifecycle implementation. Preserve original
 owners and use minimal bindings. Do not conceal a lifetime defect with an
 arbitrary timeout or unconditional termination.
 
-The preceding [error-response proposal](proposal-error-dialog-termination-semantics-restoration-001.md)
-owns original Abort/Retry/Ignore and WOW hard-error behavior. This candidate
-verifies its results in product launch flows rather than duplicating that work.
+The later [error-response proposal](proposal-error-dialog-termination-semantics-restoration-001.md)
+owns original Abort/Retry/Ignore and WOW hard-error behavior. This scope
+reuses any completed error-response results in product launch flows. Any proven
+blocking dependency must be explicitly promoted rather than duplicated or
+assumed complete.
 
-## Proposed S tasks
+## Work items within the final S
 
-| S | Scope | Exit condition |
+| Work item | Scope | Exit condition |
 | --- | --- | --- |
-| S1 | Reproduce drag-and-drop retention; trace arguments, Console ownership and launcher/worker/broker states for Explorer and existing-shell entry. | Identify the first incorrect transition for each defect; separate legitimate interactive residency from leaks. |
-| S2 | Repair launch/completion and owned-Console lifecycle, including one-shot success and startup failure. | Completed runs release unintended product-owned windows/tasks; inherited shells remain usable; interactive COMMAND/EDIT remain active until legitimately finished. |
-| S3 | Verify interactive exit, cancellation/window closure, nested COMMAND and concurrent workers; repair adjacent evidenced experience defects. | No stale task/window remains; one run cannot damage another; original guest exit semantics are preserved. |
-| S4 | Formal x86 build, deployment, full regression and minimal-diff review. | Existing direct/nested COMMAND, MEM and EDIT tests and real Explorer scenarios pass; governance passes; reviewed changes are committed/pushed for owner testing. |
+| 1 | Reproduce drag-and-drop retention; trace arguments, Console ownership and launcher/worker/broker states for Explorer and existing-shell entry. | Identify the first incorrect transition for each defect; separate legitimate interactive residency from leaks. |
+| 2 | Repair launch/completion and owned-Console lifecycle, including one-shot success and startup failure. | Completed runs release unintended product-owned windows/tasks; inherited shells remain usable; interactive COMMAND/EDIT remain active until legitimately finished. |
+| 3 | Verify interactive exit, cancellation/window closure, nested COMMAND and concurrent workers; repair adjacent evidenced experience defects. | No stale task/window remains; one run cannot damage another; original guest exit semantics are preserved. |
+| 4 | Formal x86 build, deployment, full regression and minimal-diff review. | Existing direct/nested COMMAND, MEM and EDIT tests and real Explorer scenarios pass; governance passes; reviewed changes are committed/pushed for owner testing. |
 
 ## Acceptance
 
@@ -66,4 +70,4 @@ minimization task receives completed boundaries, not unfinished UX repairs.
 
 No guest-media changes, new idle-worker timer, replacement COMMAND parser,
 arbitrary process killing, host installation changes, generic UX framework or
-unrelated refactoring. Retain the three-program architecture.
+unrelated refactoring. Preserve the approved executable ownership boundaries.

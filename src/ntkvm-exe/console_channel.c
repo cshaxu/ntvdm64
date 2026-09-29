@@ -8,13 +8,18 @@ struct run16_console_channel {
     run16_console_frontend console;
     HANDLE pipe,worker,stop,thread,io_event,ready;
     BOOL input_pending;
+    BOOL kind_selected,native;
     run16_native_frontend *root;
 };
-static DWORD activate(void *context,BOOL active)
+static DWORD activate(void *context,BOOL active,DWORD kind)
 {
     run16_console_channel *channel=context;
-    DWORD error=run16_native_frontend_dos_bind(channel->root,channel,active);
-    if(!error && active)error=run16_native_frontend_dos_video(channel->root,channel,&channel->console.video);
+    DWORD error;
+    if(channel->kind_selected && channel->native!=(kind==CONSOLE_IO_WORKER_NATIVE))return ERROR_INVALID_DATA;
+    channel->kind_selected=TRUE;channel->native=kind==CONSOLE_IO_WORKER_NATIVE;
+    error=channel->native ? run16_native_frontend_native_bind(channel->root,channel,active) :
+        run16_native_frontend_dos_bind(channel->root,channel,active);
+    if(!error && active && !channel->native)error=run16_native_frontend_dos_video(channel->root,channel,&channel->console.video);
     return error;
 }
 static DWORD enter(void *context)
@@ -39,6 +44,11 @@ static BOOL text_frame_required(void *context)
 {
     run16_console_channel *channel=context;
     return run16_native_frontend_text_frame_required(channel->root);
+}
+static DWORD read_text_configuration(void *context,DWORD offset,DWORD revision,console_io_reply *reply)
+{
+    return run16_native_frontend_read_text_configuration(
+        ((run16_console_channel *)context)->root,offset,revision,reply);
 }
 static BOOL active(run16_console_channel *channel)
 {
@@ -105,8 +115,12 @@ static DWORD WINAPI console_channel_main(void *context)
         if (error) break;
         if (request->bytes>CONSOLE_IO_DATA_BYTES) { error=ERROR_INVALID_DATA;break; }
         error=transfer(channel,FALSE,request->data,request->bytes);
+        if(!error && channel->native && request->operation==CONSOLE_IO_VIDEO_BEGIN &&
+            (request->bytes!=sizeof(console_video_description) ||
+             ((const console_video_description *)request->data)->kind!=CONSOLE_VIDEO_TEXT_FRAME))
+            error=ERROR_INVALID_DATA;
         if (!error) error=run16_console_dispatch(&channel->console,request,&reply);
-        if(!error && reply.result && (request->operation==CONSOLE_IO_VIDEO_BEGIN ||
+        if(!error && reply.result && (!channel->native || !channel->console.video.pending) && (request->operation==CONSOLE_IO_VIDEO_BEGIN ||
             request->operation==CONSOLE_IO_VIDEO_DATA || request->operation==CONSOLE_IO_VIDEO_TEXT))
             error=run16_native_frontend_dos_video(channel->root,channel,&channel->console.video);
         if (!error && (request->operation==CONSOLE_IO_READ_INPUT ||
@@ -184,6 +198,7 @@ DWORD run16_console_channel_start_request(DWORD request,HANDLE worker,run16_nati
     channel->console.activate=activate;channel->console.enter=enter;channel->console.leave=leave;
     channel->console.screen_begin=screen_begin;channel->console.screen_end=screen_end;
     channel->console.text_frame_required=text_frame_required;
+    channel->console.read_text_configuration=read_text_configuration;
     channel->console.read_input=read_input;channel->console.prepend_input=prepend_input;
     channel->stop=CreateEventW(NULL,TRUE,FALSE,NULL);
     channel->io_event=CreateEventW(NULL,TRUE,FALSE,NULL);

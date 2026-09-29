@@ -1,18 +1,9 @@
 /* Presentation only: original SoftPC produces the operations; public Console
  * owns host cells/scrollback. No guest state, command selection or scheduler. */
 #include "console_frontend.h"
-#include "opennt-abi/host-compat/include/console_grid.h"
+#include "interface/console_io.h"
 #include <limits.h>
-#include <stddef.h>
 #include <string.h>
-typedef char console_cell_layout_check[(sizeof(CHAR_INFO)==sizeof(console_io_cell) &&
-    offsetof(CHAR_INFO,Attributes)==offsetof(console_io_cell,attribute)) ? 1 : -1];
-
-static BOOL coordinate(int32_t value)
-{
-    return value>=SHRT_MIN && value<=SHRT_MAX;
-}
-
 static BOOL encode_input(const INPUT_RECORD *record,console_io_input *wire)
 {
     ZeroMemory(wire,sizeof(*wire));wire->type=record->EventType;
@@ -48,6 +39,20 @@ static BOOL encode_input(const INPUT_RECORD *record,console_io_input *wire)
     return TRUE;
 }
 
+
+#include "opennt-abi/host-compat/include/console_grid.h"
+#include <limits.h>
+#include <stddef.h>
+#include <string.h>
+typedef char console_cell_layout_check[(sizeof(CHAR_INFO)==sizeof(console_io_cell) &&
+    offsetof(CHAR_INFO,Attributes)==offsetof(console_io_cell,attribute)) ? 1 : -1];
+
+static BOOL coordinate(int32_t value)
+{
+    return value>=SHRT_MIN && value<=SHRT_MAX;
+}
+
+
 DWORD run16_console_dispatch(run16_console_frontend *owner,const console_io_request *request,
     console_io_reply *reply)
 {
@@ -63,7 +68,7 @@ DWORD run16_console_dispatch(run16_console_frontend *owner,const console_io_requ
     if (!owner->generation || request->generation!=owner->generation) return ERROR_ACCESS_DENIED;
     if (!request->sequence || owner->sequence==UINT32_MAX ||
         request->sequence!=owner->sequence+1 || request->bytes>CONSOLE_IO_DATA_BYTES ||
-        request->operation<CONSOLE_IO_WRITE || request->operation>CONSOLE_IO_DOS_ACTIVE)
+        request->operation<CONSOLE_IO_WRITE || request->operation>CONSOLE_IO_READ_TEXT_CONFIGURATION)
         return ERROR_INVALID_DATA;
     cells=request->operation>=CONSOLE_IO_READ_CELLS_A && request->operation<=CONSOLE_IO_WRITE_CELLS_W;
     write_cells=request->operation>=CONSOLE_IO_WRITE_CELLS_A && request->operation<=CONSOLE_IO_WRITE_CELLS_W;
@@ -89,6 +94,7 @@ DWORD run16_console_dispatch(run16_console_frontend *owner,const console_io_requ
         s->count>CONSOLE_IO_INPUT_CAPACITY)
         return ERROR_INVALID_DATA;
     if (request->operation==CONSOLE_IO_WINDOW_RECT && s->mode>1) return ERROR_INVALID_DATA;
+    if (request->operation==CONSOLE_IO_DOS_ACTIVE && s->mode>CONSOLE_IO_WORKER_NATIVE) return ERROR_INVALID_DATA;
     if (request->operation==CONSOLE_IO_CURRENT_FONT && s->mode>1) return ERROR_INVALID_DATA;
     if (cells && (s->width<=0 || s->height<=0 || s->width>SHRT_MAX || s->height>SHRT_MAX ||
         (uint64_t)s->width*s->height>CONSOLE_IO_DATA_BYTES/sizeof(CHAR_INFO) ||
@@ -108,7 +114,7 @@ DWORD run16_console_dispatch(run16_console_frontend *owner,const console_io_requ
     reply->generation=owner->generation;
     reply->sequence=request->sequence;
     if(request->operation==CONSOLE_IO_DOS_ACTIVE) {
-        reply->error=owner->activate ? owner->activate(owner->io_context,s->input!=0) : ERROR_INVALID_FUNCTION;
+        reply->error=owner->activate ? owner->activate(owner->io_context,s->input!=0,s->mode) : ERROR_INVALID_FUNCTION;
         reply->result=reply->error==ERROR_SUCCESS;
         return ERROR_SUCCESS;
     }
@@ -131,6 +137,10 @@ DWORD run16_console_dispatch(run16_console_frontend *owner,const console_io_requ
     position.X=(SHORT)s->x; position.Y=(SHORT)s->y;
     SetLastError(ERROR_SUCCESS);
     switch (request->operation) {
+    case CONSOLE_IO_READ_TEXT_CONFIGURATION:
+        mode=owner->read_text_configuration ?
+            owner->read_text_configuration(owner->io_context,s->count,s->mode,reply) : ERROR_NOT_FOUND;
+        ok=mode==ERROR_SUCCESS;SetLastError(mode);break;
     case CONSOLE_IO_KEYBOARD_LAYOUT: {
         typedef BOOL (WINAPI *query_layout)(LPSTR);
         query_layout query=(query_layout)GetProcAddress(GetModuleHandleW(L"kernel32.dll"),

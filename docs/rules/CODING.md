@@ -58,9 +58,14 @@ monitor-adapter material.
   `run16` owns the parent-side CLI path, `basesrv` owns service transport and
   `ntvdm` owns worker-local session state. Do not add a generic shared Win32
   helper. Process-local Win32 bindings stay with that executable or with its
-  named historical adapter; only stateless version/package declarations may
-  be shared through `product-abi`/`package`, while the service IDL and broker
-  protocol remain `basesrv` owned.
+  named historical adapter. Cross-component copied records, version identity
+  and service IDL belong to declaration-only `interface`; broker transport
+  and validation implementations remain NTSRV-owned. The admitted
+  `worker-base` library contains shared project-added worker mechanisms used
+  by NTVDM/NTCON, including their common protocol client, not their consumers'
+  worker-management, frontend server or rendering. Preserve original mirror
+  execution and cleanup in place; shared mechanisms use explicit instance
+  state, owned/borrowed resource contracts and caller-owned lock boundaries.
 - Do not add a generic compatibility/common component. Use the declared owner
   or obtain explicit architecture admission for a source-proven specialist
   interface family.

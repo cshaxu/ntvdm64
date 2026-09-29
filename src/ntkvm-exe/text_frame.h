@@ -9,6 +9,9 @@
 typedef struct frontend_text_extension {
     lib_u8 upper_font[2][256 * 16];
     lib_u8 cursor_top, cursor_bottom, cursor_visible;
+    /* Local copied-frame view only; never serialized. Null means no styles. */
+    const lib_u8 *cell_styles;
+    size_t cell_style_stride;
 } frontend_text_extension;
 
 typedef struct frontend_text_snapshot {

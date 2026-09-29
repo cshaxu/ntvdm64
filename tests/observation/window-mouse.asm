@@ -1,6 +1,11 @@
 ; Authored guest probe: real ROM, CCPU, original mouse IRQ and INT33 callback.
 bits 16
 org 100h
+; Keep the acceptance deadline unchanged. A separately named diagnostic build
+; may extend it to distinguish queued IRQ latency from lost button edges.
+%ifndef MOUSE_WAIT_TICKS
+%define MOUSE_WAIT_TICKS 180
+%endif
     mov ax, 13h
     int 10h
     call settle
@@ -32,7 +37,7 @@ poll:
     xor ah, ah
     int 1ah
     sub dx, bp
-    cmp dx, 180
+    cmp dx, MOUSE_WAIT_TICKS
     jb poll
     jmp fail
 check:
@@ -77,6 +82,18 @@ finish:
     mov dx, bp
     mov ah, 9
     int 21h
+%ifdef MOUSE_DIAGNOSTICS
+    ; Diagnostic-only callback mask, after restoring text mode. No extra
+    ; callback work or product instrumentation changes event consumption.
+    mov dx, mask_text
+    mov ah, 9
+    int 21h
+    mov bx, [events]
+    and bx, 0fh
+    mov dl, [hex_digits+bx]
+    mov ah, 2
+    int 21h
+%endif
     pop ax
     mov ah, 4ch
     int 21h
@@ -104,3 +121,7 @@ events dw 0
 stage db 1
 passed db 'WINDOW-MOUSE-PASS',13,10,'$'
 failed db 'WINDOW-MOUSE-FAIL',13,10,'$'
+%ifdef MOUSE_DIAGNOSTICS
+mask_text db 'callback-mask=$'
+hex_digits db '0123456789ABCDEF'
+%endif

@@ -2,7 +2,7 @@
 #define NTVDM_CONSOLE_CLIENT_H
 #include <windows.h>
 #include "ntvdm-exe/session/session.h"
-#include "product-abi/console_video.h"
+#include "interface/console_video.h"
 #include "console_graphics.h"
 ntvdm_console_graphics *ntvdm_console_graphics_context(void);
 /* NULL description retires graphics for a text transition. Called only after

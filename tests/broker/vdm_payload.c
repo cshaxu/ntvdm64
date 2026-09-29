@@ -1,7 +1,20 @@
+#include "interface/vdm_protocol.h"
+#include "vdm_values.h"
+#include "vdm_startup.h"
 #include "vdm_payload.h"
 #include "vdm_message.h"
 #include <stdio.h>
 #include <string.h>
+#include <stddef.h>
+/* Declaration relocation must preserve the established x86 wire layout.
+ * Include both the sole owner and old function headers to catch redefinition. */
+typedef char check_values_size[(sizeof(broker_vdm_check_values)==36)?1:-1];
+typedef char check_stream_offset[(offsetof(broker_vdm_check_values,std_in)==24)?1:-1];
+typedef char update_values_size[(sizeof(broker_vdm_update_values)==16)?1:-1];
+typedef char get_values_size[(sizeof(broker_vdm_get_values)==32)?1:-1];
+typedef char startup_size[(sizeof(broker_vdm_startup)==40)?1:-1];
+typedef char envelope_size[(sizeof(broker_vdm_message_header)==32)?1:-1];
+typedef char payload_span_size[(sizeof(broker_vdm_payload_span)==16)?1:-1];
 #define CHECK(x) do { if (!(x)) { printf("FAIL line %d: %s\n",__LINE__,#x); return 1; } } while (0)
 int main(void)
 {

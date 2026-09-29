@@ -2,17 +2,21 @@
 #include "native_request_protocol.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
 #include <stdio.h>
-DWORD run16_native_request_submit_receipt(HANDLE root,HANDLE root_capability,const run16_native_start *start,HANDLE *target,HANDLE *receipt)
+static DWORD submit_receipt(HANDLE root,HANDLE root_capability,const run16_native_start *start,HANDLE *target,HANDLE *receipt,HANDLE *completion)
 {
     static LONG serial;
     WCHAR name[96];HANDLE server=INVALID_HANDLE_VALUE,client=INVALID_HANDLE_VALUE,event=NULL;
     native_request_header header={NATIVE_REQUEST_VERSION,0};
     native_request_reply reply={0};
-    run16_native_start local=*start;
+    run16_native_start local={0};
     BYTE *payload=NULL;DWORD error,bytes;
     *target=NULL;*receipt=NULL;local.capabilities[0]=local.capabilities[1]=NULL;
-    error=run16_native_launch_pack(&local,&payload,&bytes);if(error)return error;
-    header.bytes=bytes;
+    if(completion)*completion=NULL;
+    if(start) {
+        local=*start;local.capabilities[0]=local.capabilities[1]=NULL;
+        error=run16_native_launch_pack(&local,&payload,&bytes);if(error)return error;
+        header.bytes=bytes;
+    }
     event=CreateEventW(NULL,TRUE,FALSE,NULL);
     if(!event) { error=GetLastError();goto done; }
     swprintf_s(name,96,L"\\\\.\\pipe\\run16-request-%lu-%lu",GetCurrentProcessId(),(DWORD)InterlockedIncrement(&serial));
@@ -28,18 +32,22 @@ DWORD run16_native_request_submit_receipt(HANDLE root,HANDLE root_capability,con
             error=GetLastError();CancelIoEx(server,&io);GetOverlappedResult(server,&io,&ignored,TRUE);goto done;
         }
     }
-    error=OpenNtBaseClientSubmitFrontendChannel(root_capability,server);
+    error=OpenNtBaseClientSubmitWorkerChannel(root_capability,server);
     CloseHandle(server);server=INVALID_HANDLE_VALUE;
     if(!error)error=frontend_request_transfer(client,root,NULL,event,TRUE,&header,sizeof(header));
-    if(!error)error=frontend_request_transfer(client,root,NULL,event,TRUE,payload,header.bytes);
+    if(!error && header.bytes)error=frontend_request_transfer(client,root,NULL,event,TRUE,payload,header.bytes);
     if(!error)error=frontend_request_transfer(client,root,NULL,event,FALSE,&reply,sizeof(reply));
     if(!error) {
         if(reply.version!=NATIVE_REQUEST_VERSION || reply.target>(uint64_t)(ULONG_PTR)-1 ||
             reply.receipt>(uint64_t)(ULONG_PTR)-1 ||
-            (!reply.error && (!reply.target || !reply.receipt)) ||
+            (!reply.error && start && (!reply.target || !reply.receipt)) ||
+            (!start && (reply.target || reply.receipt)) ||
             (reply.error && (reply.target || reply.receipt)))error=ERROR_INVALID_DATA;
         else if(reply.error)error=reply.error;
-        else { *target=(HANDLE)(ULONG_PTR)reply.target;*receipt=(HANDLE)(ULONG_PTR)reply.receipt; }
+        else {
+            *target=(HANDLE)(ULONG_PTR)reply.target;*receipt=(HANDLE)(ULONG_PTR)reply.receipt;
+            if(completion){*completion=client;client=INVALID_HANDLE_VALUE;}
+        }
     }
 done:
     if(server!=INVALID_HANDLE_VALUE)CloseHandle(server);
@@ -48,10 +56,23 @@ done:
     HeapFree(GetProcessHeap(),0,payload);
     return error;
 }
-DWORD run16_native_request_submit(HANDLE root,HANDLE capability,const run16_native_start *start,HANDLE *target)
+DWORD run16_native_worker_request_submit(HANDLE worker,HANDLE capability,const run16_native_start *start,HANDLE *target,HANDLE *receipt)
+{ return submit_receipt(worker,capability,start,target,receipt,NULL); }
+DWORD run16_native_worker_request_begin(HANDLE worker,HANDLE capability,const run16_native_start *start,
+    HANDLE *target,HANDLE *receipt,HANDLE *completion)
+{ return submit_receipt(worker,capability,start,target,receipt,completion); }
+DWORD run16_native_worker_request_finish(HANDLE pipe,HANDLE worker,HANDLE frontend)
 {
-    HANDLE receipt=NULL;
-    DWORD error=run16_native_request_submit_receipt(root,capability,start,target,&receipt);
-    if(receipt)CloseHandle(receipt);
+    native_request_completion reply={0};DWORD error;
+    HANDLE event=CreateEventW(NULL,TRUE,FALSE,NULL);
+    if(!event)return GetLastError();
+    error=frontend_request_transfer(pipe,worker,frontend,event,FALSE,&reply,sizeof(reply));
+    CloseHandle(event);
+    if(!error)error=reply.version==NATIVE_REQUEST_VERSION ? reply.error : ERROR_INVALID_DATA;
     return error;
+}
+DWORD run16_native_worker_request_resume(HANDLE worker,HANDLE capability)
+{
+    HANDLE target=NULL,receipt=NULL;
+    return submit_receipt(worker,capability,NULL,&target,&receipt,NULL);
 }

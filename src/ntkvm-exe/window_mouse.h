@@ -1,7 +1,7 @@
 #ifndef FRONTEND_WINDOW_MOUSE_H
 #define FRONTEND_WINDOW_MOUSE_H
 #include "window_input_queue.h"
-#include "product-abi/console_mouse.h"
+#include "interface/console_mouse.h"
 
 /* Native Console only. DOS virtual coordinates and guest mouse state remain
  * owned by original nt_mouse.c, not this presentation converter. */

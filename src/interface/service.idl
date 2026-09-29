@@ -1,0 +1,357 @@
+import "wtypes.idl";
+[
+    uuid(7d3e78bd-0472-4736-8797-e64e966d692e),
+    version(16.0),
+    pointer_default(unique)
+]
+interface vdm_service
+{
+    typedef [context_handle] void *VDM_CONNECTION;
+    error_status_t CompleteWorkerChannel(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation);
+    /* Explicit native-worker grant in the authenticated execution Console. */
+    error_status_t SelectNativeWorker(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [out, system_handle(sh_process)] HANDLE *worker);
+    /* Same authenticated attachment transaction, to the admitted worker.
+     * Launch payloads and target results remain on the direct pipe. */
+    error_status_t SubmitWorkerChannel(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [in, system_handle(sh_event)] HANDLE capability,
+        [in, system_handle(sh_pipe)] HANDLE channel);
+    error_status_t TakeWorkerChannel(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [out, system_handle(sh_pipe)] HANDLE *channel,
+        [out, system_handle(sh_process)] HANDLE *caller_process,
+        [out, system_handle(sh_event)] HANDLE *execution,
+        [out, system_handle(sh_event)] HANDLE *frontend);
+    error_status_t WaitWorkerChannel(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [out, system_handle(sh_pipe)] HANDLE *channel,
+        [out, system_handle(sh_process)] HANDLE *caller_process,
+        [out, system_handle(sh_event)] HANDLE *execution,
+        [out, system_handle(sh_event)] HANDLE *frontend);
+    error_status_t RegisterNativeBackend(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [in, system_handle(sh_event)] HANDLE frontend,
+        [in, system_handle(sh_event)] HANDLE stop,
+        [in, system_handle(sh_event)] HANDLE closed);
+    error_status_t NativeSampleEpoch(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation, [out] hyper *epoch);
+    error_status_t ReportNativeBackend(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation, [in] hyper epoch, [in] unsigned long members);
+    /* Execution Console association only; not frontend ownership or task selection. */
+    error_status_t AcquireConsoleContext(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [in, system_handle(sh_event)] HANDLE frontend,
+        [out, system_handle(sh_event)] HANDLE *capability);
+    error_status_t BindConsoleContext(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [in, system_handle(sh_event)] HANDLE capability);
+    error_status_t WorkerFrontendCapability(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [out, system_handle(sh_event)] HANDLE *capability);
+    error_status_t RegisterFrontendRoot(
+        [in] handle_t binding,
+        [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [in, system_handle(sh_event)] HANDLE capability);
+    error_status_t RetainFrontendRoot(
+        [in] handle_t binding,
+        [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [in, system_handle(sh_event)] HANDLE capability,
+        [out, system_handle(sh_process)] HANDLE *root,
+        [out] unsigned long *root_generation);
+    error_status_t RequestFrontend(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [in, system_handle(sh_event)] HANDLE capability);
+    error_status_t FrontendRequest(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [out] unsigned long *request,
+        [out, system_handle(sh_process)] HANDLE *worker);
+    error_status_t AttachFrontendRequest(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation, [in] unsigned long request,
+        [in, system_handle(sh_pipe)] HANDLE channel,
+        [in, system_handle(sh_event)] HANDLE ready);
+    /* Original Check/Update chooses the worker. This grants only a pinned
+     * query/synchronize capability to its waiting launcher, not a caller-
+     * nominated process or a frame transport through BaseSrv. */
+    error_status_t CommandWorker(
+        [in] handle_t binding,
+        [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [out, system_handle(sh_process)] HANDLE *worker);
+    /* Direct frontend channel attachments only. No input/frame payloads or
+     * caller-selected worker identity pass through these methods. */
+    error_status_t AttachFrontend(
+        [in] handle_t binding,
+        [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [in, system_handle(sh_pipe)] HANDLE channel,
+        [in, system_handle(sh_event)] HANDLE ready);
+    error_status_t TakeFrontend(
+        [in] handle_t binding,
+        [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [out, system_handle(sh_pipe)] HANDLE *channel,
+        [out, system_handle(sh_process)] HANDLE *frontend,
+        [out] unsigned long *frontend_generation,
+        [out, system_handle(sh_event)] HANDLE *ready);
+    error_status_t WaitFrontend(
+        [in] handle_t binding,
+        [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [out, system_handle(sh_pipe)] HANDLE *channel,
+        [out, system_handle(sh_process)] HANDLE *frontend,
+        [out] unsigned long *frontend_generation,
+        [out, system_handle(sh_event)] HANDLE *ready);
+    /* PID is display-only; epoch/sequence remain the only management selector.
+     * No HANDLE, guest pointer or original record pointer is serialized. */
+    typedef struct _DTASKMGR_WORKER {
+        unsigned long sequence;
+        unsigned long kind;
+        unsigned long state;
+        /* Count of the worker's original DOS/WOW task records. */
+        unsigned long reserved;
+        hyper started_filetime;
+        unsigned long task;
+        unsigned long stack_depth;
+        unsigned long process_id;
+        wchar_t image[260];
+    } DTASKMGR_WORKER;
+    /* Authenticated lifetime capability, not a PID or restart authority. */
+    error_status_t BrokerProcess(
+        [in] handle_t binding,
+        [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [out, system_handle(sh_process)] HANDLE *server);
+    error_status_t Connect(
+        [in] handle_t binding,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long protocol,
+        [in] byte application_version[32],
+        [out] unsigned long *server_protocol,
+        [out] byte server_version[32],
+        [out] VDM_CONNECTION *connection,
+        [out] unsigned long *generation);
+    error_status_t First(
+        [in] handle_t binding,
+        [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [out] unsigned long *first);
+    /* The fixed-size reply is the copied BasepCheckVDM scalar envelope.
+     * A resident VDM's source-shaped parent completion event crosses only as
+     * a typed attachment; the companion receipt remains broker-local for
+     * the original BasepGetVDMExitCode lookup. */
+    error_status_t Check(
+        [in] handle_t binding,
+        [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [in] unsigned long request_bytes,
+        [in, size_is(request_bytes)] byte *request,
+        [out] unsigned long *parent_event_count,
+        [out, system_handle(sh_event), size_is(,*parent_event_count)] HANDLE **parent_events,
+        [out] unsigned long *parent_receipt,
+        [out] unsigned long *reply_bytes,
+        [out] byte reply[40]);
+    error_status_t Get(
+        [in] handle_t binding,
+        [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [in] unsigned long request_bytes,
+        [in, size_is(request_bytes)] byte *request,
+        [out] unsigned long *wait_event_count,
+        [out, system_handle(sh_event), size_is(,*wait_event_count)] HANDLE **wait_events,
+        /* Standard streams are returned only through authenticated typed
+         * attachments.  The copied reply retains receipt IDs, not HANDLEs. */
+        /* A standard stream can be either a file or a pipe.  MIDL validates
+         * system_handle object types, so do not mislabel a ConPTY pipe as a
+         * file.  Each packed array is mapped back to stdin/stdout/stderr by
+         * its position mask; the two masks must partition the scalar stream
+         * presence bits in the copied reply. */
+        [out] unsigned long *pipe_stream_mask,
+        [out] unsigned long *pipe_stream_count,
+        [out, system_handle(sh_pipe), size_is(,*pipe_stream_count)] HANDLE **pipe_streams,
+        [out] unsigned long *file_stream_mask,
+        [out] unsigned long *file_stream_count,
+        [out, system_handle(sh_file), size_is(,*file_stream_count)] HANDLE **file_streams,
+        [out] unsigned long *reply_bytes,
+        [out, size_is(,*reply_bytes)] byte **reply);
+    /* ExitVDM has no caller-owned command payload.  The worker states only
+     * which original branch it is executing and, for WOW, the original task
+     * identifier.  Console identity remains bound to its authenticated
+     * connection.  The reply is deliberately a Boolean: a worker-local wait
+     * event was already delivered by Get and must now be closed locally. */
+    error_status_t Exit(
+        [in] handle_t binding,
+        [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [in] unsigned long is_wow,
+        [in] unsigned long wow_task,
+        [out] unsigned long *close_worker_wait);
+    error_status_t Update(
+        [in] handle_t binding,
+        [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [in] unsigned long request_bytes,
+        [in, size_is(request_bytes)] byte *request,
+        [out] unsigned long *parent_event_count,
+        [out, system_handle(sh_event), size_is(,*parent_event_count)] HANDLE **parent_events,
+        [out] unsigned long *parent_receipt,
+        [out] unsigned long *reply_bytes,
+        [out] byte reply[32]);
+    /* A receipt identifies the broker-local parent wait object already
+     * created by original BaseSrv.  It is not a handle and is valid only for
+     * this authenticated connection/generation. */
+    error_status_t ExitCode(
+        [in] handle_t binding,
+        [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [in] unsigned long parent_receipt,
+        [out] unsigned long *exit_code);
+    /* This carries only the original INCREMENT_REENTER_COUNT or
+     * DECREMENT_REENTER_COUNT selector.  Console identity stays bound to
+     * the authenticated connection at BaseSrv, just as it is for GetNext. */
+    error_status_t Reenter(
+        [in] handle_t binding,
+        [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [in] unsigned long increment);
+    /* Reservation identifiers correlate a launch rollback only.  Worker
+     * authority is the authenticated system process attachment in Prepare,
+     * and Console identity remains local to the broker connection. */
+    error_status_t Reserve(
+        [in] handle_t binding,
+        [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [in] unsigned long task,
+        [in] unsigned long native_worker,
+        [out] hyper *reservation);
+    error_status_t Prepare(
+        [in] handle_t binding,
+        [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [in] hyper reservation,
+        [in, system_handle(sh_process)] HANDLE worker);
+    error_status_t Release(
+        [in] handle_t binding,
+        [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [in] hyper reservation);
+    error_status_t Disconnect(
+        [in] handle_t binding,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [in,out] VDM_CONNECTION *connection);
+    error_status_t AttachFile(
+        [in] handle_t binding,
+        [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [in] unsigned long role,
+        [in, system_handle(sh_file)] HANDLE stream,
+        [out] unsigned long *receipt);
+    error_status_t AttachPipe(
+        [in] handle_t binding,
+        [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [in] unsigned long role,
+        [in, system_handle(sh_pipe)] HANDLE stream,
+        [out] unsigned long *receipt);
+    error_status_t RevokeStream(
+        [in] handle_t binding,
+        [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [in] unsigned long receipt);
+    /* These calls deliberately have no VDM_CONNECTION.  A viewer must not
+     * become a registered worker/client merely by polling management state. */
+    error_status_t TaskSnapshot(
+        [in] handle_t binding,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long protocol,
+        [in] byte application_version[32],
+        [out] hyper *epoch,
+        [out] unsigned long *count,
+        [out, size_is(,*count)] DTASKMGR_WORKER **entries);
+    error_status_t TerminateWorker(
+        [in] handle_t binding,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long protocol,
+        [in] byte application_version[32],
+        [in] hyper epoch,
+        [in] unsigned long sequence);
+    error_status_t RegisterWowExec(
+        [in] handle_t binding,
+        [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [in] unsigned long window);
+    error_status_t FrontendUsage(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [out] unsigned long *pending,
+        [out] unsigned long *tasks);
+    error_status_t RetireFrontend(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation);
+    error_status_t WowStarted(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation, [in] unsigned long task);
+    error_status_t WowStartup(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation, [in] unsigned long parent_receipt,
+        [out, system_handle(sh_event)] HANDLE *event,
+        [out] unsigned long *started);
+}

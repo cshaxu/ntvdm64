@@ -3,12 +3,27 @@
  * original ICA/IRQ and guest INT33 remain production code. */
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
+#include <stdio.h>
 #include "lib/kvm-window/window.h"
+
+static unsigned accepted;
 
 LRESULT CALLBACK MouseInputHook(int code, WPARAM removed, LPARAM value)
 {
     if (code == HC_ACTION && removed == PM_REMOVE) {
         MSG *message = (MSG *)value;
+        if (message->message == WM_APP + 0x5f1) {
+            WCHAR name[96];
+            HANDLE acknowledgment;
+            swprintf_s(name,96,L"Local\\NTVDM-Mouse-Probe-%lu-%lu",
+                GetCurrentProcessId(),GetCurrentThreadId());
+            acknowledgment=OpenEventW(EVENT_MODIFY_STATE,FALSE,name);
+            if(acknowledgment) {
+                if(accepted==(unsigned)message->wParam)SetEvent(acknowledgment);
+                CloseHandle(acknowledgment);
+            }
+            accepted=0;message->message=WM_NULL;
+        }
         if (message->message == WM_APP + 0x5f0) {
             /* Pinned win32/component.c context starts with kvm_window*. */
             kvm_window **context = (kvm_window **)GetWindowLongPtrW(message->hwnd, GWLP_USERDATA);
@@ -24,8 +39,8 @@ LRESULT CALLBACK MouseInputHook(int code, WPARAM removed, LPARAM value)
                 event.data.mouse.buttons = (lib_u32)message->wParam;
                 if (message->wParam == 0x80000000u)
                     event.type = KVM_EVENT_SOURCE_RETIRED;
-                if (component->input_sink)
-                    component->input_sink(component->input_context, &event);
+                if (component->input_sink &&
+                    component->input_sink(component->input_context, &event))++accepted;
             }
             message->message = WM_NULL;
         }

@@ -2,132 +2,84 @@
 
 ## Current Work
 
-T423 remains open. The owner accepted S11 on 2026-09-28 and admitted S12.
-S11 commit 965083eec is pushed and its seven-file package remains published
-at O:/winnt. S12 begins from that verified baseline, preserving native research.
+**No active M/T/S packet.**
 
-**Active: M0 T423 S12**
+M0 T423 S12 implementation and verification are complete. Its P2 delivery
+contains the independent NTCON worker, common worker mechanisms, production
+integration, obsolete-backend removal and the accumulated reviewed tests.
+The coherent eight-file package is published at O:/winnt and post-publication
+checks pass. Await owner side-test acceptance; do not close T423 automatically.
 
-The [T423 proposal](../proposals/proposal-kvm-window-graphics-presentation-001.md)
-defines subsequent S12 NTCON native-text backend work and S13 RDP pointer
-capture. Native screen continuity and actual-member retirement are transferred
-to S12, not claimed as fixed by S11.
+T423 remains open. S13 product-experience/component-lifetime work is planned
+but not admitted by this closure. It is not the cancelled RDP packet. Do not
+start it while waiting for the owner's next instruction.
 
-## Active Packet
-
-| Field | Record |
-| --- | --- |
-| Identifier Mode | M0 T423 S12, Ordinary Mode. |
-| Candidate Proposal | [Console/Window frontend](../proposals/proposal-kvm-window-graphics-presentation-001.md). |
-| Admission And Approval | Owner: 验收通过，可以收口S11, 准入S12. S11 owner acceptance is recorded; the approved NTCON replacement is now active. |
-| Objective | Deliver one registered NTCON native-text backend per character frontend, reused across DOS intervals, with real screen/cursor transfer, actual member lifetime and monitor management. |
-| Non-goals | No guest/shared-lib modification, scheduler, recursive process-tree kill, Job/observer lifetime surrogate, private CSR server, RDP repair or automatic T closure. |
-| Reference Baseline | Pushed S11 965083eec and its sealed seven-file O:/winnt publication; retained S8 Console mechanics, S9 ConPTY and S11 counterexamples/WIP. |
-| Files And ABI Surface | New src/ntcon-exe; ntkvm native backend and copied direct control protocol; ntsrv authenticated registration/management; ntmon display/control; bounded run16 submission binding; build manifests and tests. No DOS/WOW record policy migration. |
-| Applicable Rules | EXECUTION, architecture/coding/document rules, source policy and source-first reuse; outputs under build/M0-T423/S12, runtime logs O:/winnt/Logs2. |
-| Verification | x86 /MT build; real Console readback and bidirectional handoff; auth/version/instance negatives; actual-member retirement and admission races; redirected streams, exact target results and fault isolation; Console17/Window17, DDWWDDWW, both twelve-target chains, mouse pressure, NTMon and three separate WOW headless frontiers. |
-| Expected Markers | One frontend/NTCON across DOS intervals; no stale cells/cursor or duplicate input; no premature session close while attached users remain; idle session retires; registered-session stop confirmed; unrelated sessions survive. |
-| Asset Needs | Existing source and retained tests/caches; no new guest, firmware or external import. Source/provenance review before selectively reusing historical mechanics. |
-| Reporting Requirements | Maintain [S12 checklist](../etc/evidence/m0-t423-s12-ntcon-backend.md), exact source/build/run/publication identities and true limitations; separate fixture evidence from production acceptance. |
-| Stop Conditions | Boundary expansion, required private API/guest mutation, unverified publication, shared-library change, fabricated member count or unexplained regression. Preserve the last verified O:/winnt package. |
-| Exit Criteria | All S12 production checklist rows pass normal/negative/lifecycle tests; retained regressions pass; coherent eight-file backup/publication and published-path verification; governance, review, commit/push, then owner verification. |
-| Original Owner Request | Create NTCON and integrate with NTKVM, run16, NTSRV and NTMON following existing authenticated backend patterns; owner now accepts S11 and admits S12. |
-| Similar-Issue Sweep | Console ownership versus execution ancestry, resource versus attached-client lifetime, direct result versus session completion, stale/PID-reused identities, cancellation/rollback, screen transfer and input ordering. |
-
-## S11 Closure Record
-
-Owner acceptance received 2026-09-28; delivered commit 965083eec is on main
-and origin/main. Mouse usability is accepted; S12 is not an S11 mouse deferral.
-
-[S11 evidence](../etc/evidence/m0-t423-s11-interaction-retirement.md) records the
-x86 build, restored five-record input batching, bounded mouse FIFO pressure,
-IRQ cancellation versus source retirement, and successful DOS handoff reset.
-The original mouse IRQ/EOI timing and guest semantics remain unchanged.
-The mirror change against the preceding main is +15/-148 lines; key translation
-was relocated to the worker adapter rather than counted as deleted functionality.
-
-Verified: Console17/Window17, three real-guest pressure cases (1000/1000/200
-records), five mouse cases, ten lifecycle cases, both twelve-target chains,
-NTMon in both modes and three inherited WOW frontiers. Published-path DOS,
-mouse/pressure and WOW checks also pass; all seven published hashes match.
-WINMINE reaches its main window; SOL and WRITE retain original OOM frontiers,
-not full application acceptance. Physical desktop focus/capture remains waived,
-not tested. No guest or shared-library changes were made.
-
-Publication backup and hash manifest:
-build/M0-T423/S11/publication-backup-r1.
-Build selection used sealed committed NTKVM source to exclude unfinished
-native research. The working tree intentionally retains S12 research and
-side-chat Queue/WOW proposal edits; these are not part of S11 production
-acceptance and must not be erased or described as a clean working tree.
+Authorities: [T423 proposal](../proposals/proposal-kvm-window-graphics-presentation-001.md),
+[S12 source/test ledger](../etc/evidence/m0-t423-s12-ntcon-backend.md), and
+[Queue](QUEUE.md). The detailed S12 chronology, failed attempts and owner
+boundary changes remain in the ledger; they are not current open gates.
 
 ## Current Technical Baseline
 
-The published product contains run16.exe, ntsrv.exe, ntvdm.exe, ntkvm.exe,
-ntmon.exe, WOW32.DLL and VDMREDIR.DLL. The S11 ledger identifies exact hashes
-and the sealed committed frontend source selection. NTKVM owns presentation;
-NTVDM retains original guest input/video semantics. Deferred NTCON changes
-must not be confused with the current executable graph.
+- MSVC Win32/x86 /MT CCPU40; no guest or shared-library modifications.
+- Runtime: run16.exe, ntsrv.exe, ntvdm.exe, ntkvm.exe, ntcon.exe, ntmon.exe,
+  WOW32.DLL and VDMREDIR.DLL. Application 0.0.423; service protocol 16,
+  copied Console protocol 17, native request protocol 4.
+- NTVDM owns original DOS/WOW execution. NTCON owns native text execution
+  and its ordinary hidden Console, without ConPTY or a private helper.
+  NTSRV handles authenticated registration and management; NTKVM owns visible
+  Console/Window and the common frame renderer. run16 waits for direct results.
+- worker-base owns matching project-added worker connection/client mechanisms:
+  ordered transfer, validation/cancellation, frame chunks, input codec,
+  activation/key return and client event lifecycle. Original mirror execution,
+  scheduling, task completion, blocking/resume and cleanup remain in place.
+- Native actual Console members are independent of worker residency. Returning
+  to DOS does not destroy NTCON; direct target completion does not kill its
+  surviving descendants. Parent output waits for the final presentation fence.
+- Cross-component declarations are under interface. The displaced frontend
+  executor, ConPTY parser/carrier and duplicate native renderer are removed.
 
-## Current S12 Work
+Formal caches remain under build/M0-T423/S1/restart-formal-x86 and
+restart-wow-x86; selected source/build inputs, provenance and run evidence are
+recorded by S12. Candidate tests use build/M0-T423/S12/p. Formal publication
+backup and exact old/new SHA-256 manifest are under
+build/M0-T423/S12/publication-backup-r131. O:/winnt is the usable package,
+not the build directory. Existing original guest/configuration hashes were
+checked unchanged before publication; NTVDM.REG/user state was not replaced.
 
-[S12 migration ledger](../etc/evidence/m0-t423-s12-ntcon-backend.md):
-one authenticated NTCON backend per character frontend, real Console state,
-native creation/completion, screen handoff, actual membership and retirement,
-NTSRV registration and NTMON management. Preserve and reuse current research.
-Begin selective reuse and backend contract implementation under the active
-packet above. S13 remains subsequent and owns RDP capture.
+## S12 Closure Evidence
 
-## S10 Closure Record
+| Requirement | Verified evidence |
+| --- | --- |
+| Native execution, registration/reuse, version/auth and failure cleanup | Actual NTCON RPC/public-launch tests; concurrent creation, forged/stale context, stream/EOF, direct results and failed export/launch cases in S12 ledger. |
+| Common mechanisms and owner boundaries | r106-r120 provenance audit, both production worker links, strict frontend leakage negative controls; transport fixture 336/0 and execution lifecycle 333/0 with zero remaining handles. |
+| DOS/native I/O, completion barrier, key return | Real production round trips, copied input FIFO/negative tests, real unread Console return, final-ack failure/EOF and resume failure fixtures; original DOS block/resume remains the caller. |
+| Nesting and isolation | r130 DDWWDDWW: sixteen input/output checkpoints, same worker identities and restored original DOS depths/tasks. Both twelve-target chains pass separate frontend groups and final retirement. |
+| Members, management and failures | Surviving attached client in both display modes; expanded lifecycle faults and two-session management/frontend/worker-loss tests; unrelated session survives and direct worker failure returns 1067. |
+| Published DOS regression | r131 Console17 and Window17 each 17/17, guest text and interaction checked. r132 CMD return and surviving-client checks pass in both modes. |
+| Mouse | r128 candidate and r132 published burst/retire/latency: 1000/1000/200 records, guest PASS and input-sink acknowledgment. Physical desktop focus/clipping remains owner-waived, not passed. |
+| WOW non-regression | r127 candidate and r132 published: WINMINE main window; SOL and WRITE original OOM frontiers. Separate headless observations, not full SOL/WRITE acceptance or interactive play. |
+| Publication | All eight published hashes match the tested formal candidate; final process query empty. Old coherent seven-file set retained for recovery. |
 
-S10 f98825653 delivered bounded component cleanup, not the unresolved native
-screen continuity capability; [S10 audit](../etc/evidence/m0-t423-s10-component-minimization-audit.md).
-
-## S9 Closure Record
-
-S9 3b40345f8 delivered the ConPTY baseline;
-[S9 ledger](../etc/evidence/m0-t423-s9-conpty-migration.md).
-Horizontal wheel is an owner-accepted host limitation, not a passing test.
-
-## S8 Closure Record
-
-S8 d253e55af and subsequent 6ef96410d delivered GUI launch/wait policy;
-[S8 evidence](../etc/evidence/m0-t423-s8-gui-launch-wait.md).
-
-## S7 Closure Record
-
-S7 99276d68d delivered Window mouse and product renames;
-[S7 evidence](../etc/evidence/m0-t423-s7-window-mouse.md).
-
-## S6 Closure Record
-
-Delivered Console/Window display; [S6 ledger](../etc/evidence/m0-t423-s6-window-display.md).
-
-## S5 Closure Record
-
-Delivered hidden backend; [S5 acceptance](../etc/evidence/m0-t423-s5-hidden-backend-acceptance.md).
-
-## S4 Closure Record
-
-Delivered independent frontend; [S4 evidence](../etc/evidence/m0-t423-s3-hidden-console-ledger.md).
-
-## S3 Closure Record
-
-Preserved and replanned, not functional closure; [S3 handoff](../etc/evidence/m0-t423-s3-hidden-console-ledger.md).
-
-## S2 Closure Record
-
-Delivered copied I/O boundary; [S2 ledger](../etc/evidence/m0-t423-s2-console-boundary-ledger.md).
-
-## S1 Closure Record
-
-Delivered lifecycle baseline; [S1 evidence](../etc/evidence/m0-t423-s1-restart-lifecycle.md).
+Known immutable-guest limitation: sufficiently large inherited environments can
+overwrite COMMAND's discarded INIT references. r126 matches the original
+S35 binary/source defect, including with DOS=HIGH. It is registered in
+[TODO](TODO.md), not fixed or counted as a passing capability. No environment
+truncation, guest patch or allocator workaround is introduced. Historical r70
+lacks the same memory witness and is not independently attributed by resemblance.
 
 ## Recent M0 Closures
 
-S11 is the latest bounded subtask closure; T423 stays open for owner acceptance.
+S12 is the latest implementation closure; owner side-test acceptance is pending.
+S11 965083eec remains the recoverable owner-accepted baseline;
+[S11 evidence](../etc/evidence/m0-t423-s11-interaction-retirement.md).
+Earlier T423 stage records are linked by the proposal and S12 ledger.
+T422 remains owner-closed; T423 itself is not closed.
 
 ## Recent Governance
 
-T422 remains owner-closed. T423 cannot close before owner acceptance.
-Source/test delivery must preserve unrelated and deferred work.
+This delivery preserves and includes the owner's authorized side-chat Queue/WOW
+proposal changes. It does not admit those candidates or S13. No forced push,
+guest/lib change, new scheduler, recursive kill or helper is part of S12.
+Commit/push and repository synchronization are verified as the final delivery
+step; source/test evidence cannot substitute for that check.

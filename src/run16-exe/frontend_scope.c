@@ -1,8 +1,9 @@
 #include "frontend_scope.h"
+#include "worker_launch.h"
 #include "ntkvm-exe/bootstrap.h"
 #include "ntkvm-exe/native_request_client.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
-#include "product-abi/console_io.h"
+#include "interface/console_io.h"
 #include <stdint.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -26,7 +27,7 @@ static DWORD inherited_capability(const char *name,HANDLE *capability)
     return ERROR_SUCCESS;
 }
 struct run16_frontend_scope {
-    HANDLE capability,root,receipt;
+    HANDLE capability,root,receipt,completion,worker;
     BOOL owns_environment,has_execution;
     DWORD console_mask;
 };
@@ -37,6 +38,8 @@ void run16_frontend_scope_end(run16_frontend_scope *scope)
     if(scope->capability)CloseHandle(scope->capability);
     if(scope->root)CloseHandle(scope->root);
     if(scope->receipt)CloseHandle(scope->receipt);
+    if(scope->completion)CloseHandle(scope->completion);
+    if(scope->worker)CloseHandle(scope->worker);
     HeapFree(GetProcessHeap(),0,scope);
 }
 DWORD run16_frontend_scope_begin(run16_frontend_scope **output)
@@ -119,19 +122,121 @@ DWORD run16_frontend_scope_console_mask(run16_frontend_scope *scope)
 
 DWORD run16_frontend_scope_launch_native(run16_frontend_scope *scope,const run16_native_start *start,HANDLE *target)
 {
-    if(!scope)return ERROR_INVALID_PARAMETER;
+    HANDLE worker=NULL;DWORD error;
+    if(!scope || !start || !target)return ERROR_INVALID_PARAMETER;
     if(scope->receipt)return ERROR_BUSY;
-    return run16_native_request_submit_receipt(scope->root,scope->capability,start,target,&scope->receipt);
+    *target=NULL;
+    for(;;) {
+        uint64_t reservation=0;
+        error=OpenNtBaseClientSelectNativeWorker(&worker);
+        if(error!=ERROR_NOT_FOUND)break;
+        error=OpenNtBaseClientReserveNativeWorker(&reservation);
+        if(error==ERROR_ALREADY_EXISTS) {
+            /* Another launcher owns the finite create/register interval. It
+             * must release or authenticate before this caller can select it.
+             * Broker loss is covered by the launcher's existing process watch. */
+            DWORD wait=WaitForSingleObject(scope->root,10);
+            if(wait==WAIT_TIMEOUT)continue;
+            error=wait==WAIT_FAILED ? GetLastError() : ERROR_PIPE_NOT_CONNECTED;break;
+        }
+        if(!error) {
+            WCHAR image[MAX_PATH],command[MAX_PATH+3],*slash;
+            STARTUPINFOW startup={sizeof(startup)};PROCESS_INFORMATION process={0};
+            DWORD length=GetModuleFileNameW(NULL,image,ARRAYSIZE(image));
+            if(!length || length>=ARRAYSIZE(image) || !(slash=wcsrchr(image,L'\\')))error=ERROR_BAD_PATHNAME;
+            else if(wcscpy_s(slash+1,ARRAYSIZE(image)-(size_t)(slash+1-image),L"ntcon.exe"))error=ERROR_FILENAME_EXCED_RANGE;
+            else if(swprintf_s(command,ARRAYSIZE(command),L"\"%ls\"",image)<0)error=ERROR_FILENAME_EXCED_RANGE;
+            else {
+                startup.dwFlags=STARTF_USESHOWWINDOW;startup.wShowWindow=SW_HIDE;
+                error=run16_worker_prepare(reservation,image,command,NULL,CREATE_NEW_CONSOLE,&startup,&process);
+                if(!error && ResumeThread(process.hThread)==(DWORD)-1) {
+                    error=GetLastError();TerminateProcess(process.hProcess,error);
+                    WaitForSingleObject(process.hProcess,INFINITE);
+                }
+            }
+            if(process.hThread)CloseHandle(process.hThread);
+            if(!error){worker=process.hProcess;process.hProcess=NULL;}
+            if(process.hProcess)CloseHandle(process.hProcess);
+            if(error)(void)OpenNtBaseClientReleaseWorker(reservation);
+        }
+        break;
+    }
+    if(error)return error;
+    for(;;) {
+        /* Both worker kinds acquire the same authenticated presentation route.
+         * A reused route is not a new frontend or an input activation. */
+        error=OpenNtBaseClientRequestFrontend(scope->capability);
+        if(error==ERROR_ALREADY_EXISTS)error=ERROR_SUCCESS;
+        if(!error)error=run16_native_worker_request_begin(worker,scope->capability,start,target,&scope->receipt,&scope->completion);
+        if(error!=ERROR_NOT_READY)break;
+        /* No request was accepted. Wait only for initial registration; never
+         * replay a submitted request or restart a failed worker. */
+        {
+            HANDLE waits[2]={worker,scope->root};
+            DWORD wait=WaitForMultipleObjects(2,waits,FALSE,10);
+            if(wait==WAIT_TIMEOUT)continue;
+            error=wait==WAIT_OBJECT_0 ? ERROR_PROCESS_ABORTED :
+                wait==WAIT_OBJECT_0+1 ? ERROR_PIPE_NOT_CONNECTED : GetLastError();break;
+        }
+    }
+    if(!error)scope->worker=worker;
+    else CloseHandle(worker);
+    return error;
 }
 DWORD run16_frontend_scope_wait_native(run16_frontend_scope *scope,HANDLE target,DWORD *result)
 {
+    DWORD error=0,wait;
     if(!scope || !target || !result)return ERROR_INVALID_PARAMETER;
-    if(WaitForSingleObject(target,INFINITE)!=WAIT_OBJECT_0 || !GetExitCodeProcess(target,result))return GetLastError();
     if(scope->receipt){
-        HANDLE waits[2]={scope->receipt,scope->root};
-        /* Presentation acknowledgment, not session retirement or target status. */
-        WaitForMultipleObjects(2,waits,FALSE,2000);
+        HANDLE waits[3]={target,scope->worker,scope->root};
+        /* A live target does not prove that its worker can still complete the
+         * request. Observe the authenticated endpoints without owning or
+         * terminating the handed-off target's execution lifetime. */
+        wait=WaitForMultipleObjects(3,waits,FALSE,INFINITE);
+        if(wait!=WAIT_OBJECT_0)return wait==WAIT_OBJECT_0+1 ? ERROR_PROCESS_ABORTED :
+            wait==WAIT_OBJECT_0+2 ? ERROR_PIPE_NOT_CONNECTED : GetLastError();
+    }else if(WaitForSingleObject(target,INFINITE)!=WAIT_OBJECT_0)return GetLastError();
+    if(!GetExitCodeProcess(target,result))return GetLastError();
+    if(scope->receipt){
+        /* Reuse the authenticated request stream: the worker reports final
+         * presentation status before DOS can resume. Peer/root death cancels
+         * the read; a timeout must never silently authorize handoff. */
+        error=run16_native_worker_request_finish(scope->completion,scope->worker,scope->root);
         CloseHandle(scope->receipt);scope->receipt=NULL;
+        CloseHandle(scope->completion);scope->completion=NULL;
+        CloseHandle(scope->worker);scope->worker=NULL;
     }
-    return ERROR_SUCCESS;
+    return error;
+}
+DWORD run16_frontend_scope_resume_parent(run16_frontend_scope *scope)
+{
+    DWORD capacity=16,count,index,error=0,*members=NULL;
+    HANDLE worker=NULL;
+    if(!scope || !scope->has_execution)return 0;
+    /* Actual attachment distinguishes a native caller from a DOS-side
+     * launcher. This is a routing check only; broker selection and the
+     * authenticated completion receipt still grant endpoint authority. */
+    for(;;) {
+        members=HeapAlloc(GetProcessHeap(),0,capacity*sizeof(*members));
+        if(!members)return ERROR_NOT_ENOUGH_MEMORY;
+        count=GetConsoleProcessList(members,capacity);
+        if(!count) {
+            error=GetLastError();
+            if(error==ERROR_INVALID_HANDLE)error=0;
+            goto done;
+        }
+        if(count<=capacity)break;
+        HeapFree(GetProcessHeap(),0,members);members=NULL;
+        if(count>65536)return ERROR_BUFFER_OVERFLOW;
+        capacity=count;
+    }
+    error=OpenNtBaseClientSelectNativeWorker(&worker);
+    if(error==ERROR_NOT_FOUND){error=0;goto done;}
+    if(error)goto done;
+    for(index=0;index<count;++index)if(members[index]==GetProcessId(worker))break;
+    if(index<count)error=run16_native_worker_request_resume(worker,scope->capability);
+done:
+    if(worker)CloseHandle(worker);
+    if(members)HeapFree(GetProcessHeap(),0,members);
+    return error;
 }

@@ -32,7 +32,8 @@ if(@(Get-CimInstance Win32_Process -Filter "Name='ntsrv.exe'" |
     Where-Object {$_.ExecutablePath -ne $broker}).Count){throw 'Another broker is in use'}
 $oldPrivate=$env:MVDM_OBSERVER_PRIVATE_DESKTOP
 $oldHistory=$env:MVDM_OBSERVER_SHORT_HISTORY
-$ownedPaths=@('run16.exe','ntsrv.exe','ntkvm.exe') | ForEach-Object {Join-Path $BuildRoot $_}
+$ownedPaths=@('run16.exe','ntsrv.exe','ntkvm.exe','ntcon.exe') | ForEach-Object {Join-Path $BuildRoot $_}
+$sessionPaths=@('ntkvm.exe','ntcon.exe') | ForEach-Object {Join-Path $BuildRoot $_}
 $cases=@(
     @{Name='output';Args=@('cmd.exe','/d','/c','echo ROOT-NATIVE-VISIBLE & exit /b 37');Code='00000025';Text='ROOT-NATIVE-VISIBLE'},
     @{Name='input';Args=@('cmd.exe','/d');Input="echo ROOT-INPUT-OK`rexit /b 23`r";Code='00000017';Text='ROOT-INPUT-OK'},
@@ -79,7 +80,16 @@ try {
                 $owners.BEFORE -eq $owners.INNER){throw 'GUI-separated character sessions share/lost frontend identity'}
         }
         if($screen -match 'not recognized as an internal|Bad command or filename'){throw 'Command failed despite exit status'}
-        Write-Output "PASS ordinary root CLI $($case.Name): visible text and actual exit $($case.Code)"
+        # These finite cases leave no attached descendants. Observe retirement
+        # before fixture cleanup, or cleanup would conceal a stuck frontend.
+        $deadline=[DateTime]::UtcNow.AddSeconds(10)
+        do {
+            $remaining=@(Get-CimInstance Win32_Process | Where-Object {$_.ExecutablePath -in $sessionPaths})
+            if(!$remaining.Count){break}
+            Start-Sleep -Milliseconds 100
+        } while([DateTime]::UtcNow -lt $deadline)
+        if($remaining.Count){throw "Native session failed to retire: $($remaining.ProcessId -join ',')"}
+        Write-Output "PASS ordinary root CLI $($case.Name): visible text, actual exit $($case.Code), session retired"
         } finally {
             Get-CimInstance Win32_Process | Where-Object {$_.ExecutablePath -in $ownedPaths} | ForEach-Object {
                 $process=Get-Process -Id $_.ProcessId -ErrorAction SilentlyContinue

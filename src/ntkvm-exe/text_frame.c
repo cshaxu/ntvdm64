@@ -1,5 +1,6 @@
 #include "text_frame.h"
 #include "lib/kvm-window/render.h"
+#include "interface/console_video.h"
 
 BOOL frontend_text_frame_prepare(frontend_text_raster *scratch,
     const kvm_window_text_frame *fonts, const kvm_text_cell *cells,
@@ -15,7 +16,7 @@ BOOL frontend_text_frame_prepare(frontend_text_raster *scratch,
     rows = fonts->base.text_rows;
     if (columns > KVM_TEXT_COLUMNS || rows > KVM_TEXT_ROWS ||
         fonts->base.font_height > KVM_WINDOW_FONT_HEIGHT ||
-        (extension && extension->cursor_visible))
+        (extension && (extension->cursor_visible || extension->cell_styles)))
         return frontend_text_frame_rasterize(scratch, fonts, cells, cell_count,
             extension, cursor_phase, output);
     if (cell_count < (size_t)columns * rows) {
@@ -119,6 +120,12 @@ BOOL frontend_text_frame_rasterize(frontend_text_raster *scratch,
             offset, slice_height, &cursor2);
         for (y = 0; y < slice_height; ++y) for (x = 0; x < count * 8u; ++x) {
             lib_u8 colour = (lib_u8)scratch->pixels[y * count * 8u + x];
+            if(extension && extension->cell_styles) {
+                size_t cell=(size_t)row*columns+first+x/8;
+                lib_u8 flags=extension->cell_styles[cell*extension->cell_style_stride];
+                if((flags&CONSOLE_TEXT_UNDERLINE) && offset+y==height-1)
+                    colour=cells[cell].foreground;
+            }
             if ((draw_cursor && (lib_i32)x >= cursor.left && (lib_i32)x < cursor.right &&
                 (lib_i32)y >= cursor.top && (lib_i32)y < cursor.bottom) ||
                 (draw_cursor2 && (lib_i32)x >= cursor2.left && (lib_i32)x < cursor2.right &&

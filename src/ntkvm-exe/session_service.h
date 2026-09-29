@@ -1,6 +1,6 @@
 #ifndef FRONTEND_SESSION_SERVICE_H
 #define FRONTEND_SESSION_SERVICE_H
-#include "native_launch.h"
+#include <windows.h>
 typedef struct frontend_session_service frontend_session_service;
 /* Called by the process already registered as the authenticated frontend.
  * Borrowed capability/notification remain valid until service_close joins. */

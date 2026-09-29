@@ -100,19 +100,23 @@ static void verify_dos_input_queue(run16_console_channel *channel)
     CHECK(FlushConsoleInputBuffer(channel->console.input));
     CHECK(!run16_native_frontend_dos_prepend(test_frontend,first,3));
     run16_native_frontend_dos_leave(test_frontend);
-    /* No native backend exists here: inspect the actual handoff destination,
-     * not a substitute queue. Prepend must survive DOS owner relinquishment. */
+    /* Both backend channels consume the same frontend-owned unsent queue.
+     * Handoff must not inject these records into the visible Console. */
     CHECK(!run16_native_frontend_dos_bind(test_frontend,channel,FALSE));
-    CHECK(WaitForSingleObject(ready,0)==WAIT_TIMEOUT);
-    CHECK(GetNumberOfConsoleInputEvents(channel->console.input,&pending) && pending>=3);
-    CHECK(ReadConsoleInputW(channel->console.input,received,3,&count) && count==3);
+    CHECK(WaitForSingleObject(ready,0)==WAIT_OBJECT_0);
+    CHECK(GetNumberOfConsoleInputEvents(channel->console.input,&pending) && pending==0);
+    CHECK(!run16_native_frontend_native_bind(test_frontend,channel,TRUE));
+    CHECK(!run16_native_frontend_dos_enter(test_frontend,channel));
+    CHECK(!run16_native_frontend_dos_read(test_frontend,FALSE,received,3,&count) && count==3);
     CHECK(!memcmp(received,first,3*sizeof(*first)));
+    run16_native_frontend_dos_leave(test_frontend);
+    CHECK(!run16_native_frontend_native_bind(test_frontend,channel,FALSE));
     CHECK(!run16_native_frontend_dos_bind(test_frontend,channel,TRUE));
     CHECK(!run16_native_frontend_dos_enter(test_frontend,channel));
     CHECK(FlushConsoleInputBuffer(channel->console.input));
     do { CHECK(!run16_native_frontend_dos_read(test_frontend,FALSE,received,260,&count)); } while(count);
     run16_native_frontend_dos_leave(test_frontend);
-    puts("PASS DOS input growth, atomic prepend/order, peek, partial drain/readiness, overflow preservation and real Console handoff");
+    puts("PASS DOS input growth, atomic prepend/order, peek, partial drain/readiness, overflow preservation and shared native-channel handoff");
 }
 static void run_case(unsigned mode,unsigned round)
 {
@@ -306,7 +310,9 @@ static void run_case(unsigned mode,unsigned round)
                 if(reply.state.left==wanted)break;
                 Sleep(10);
             } while(GetTickCount64()<deadline);
-            CHECK(reply.state.left==wanted && !FindWindowW(NULL,L"NTVDM"));
+             /* A frame request disables the guest's original stream output.
+              * Console must retain that path and its scrollback. */
+             CHECK(reply.state.left==wanted && !FindWindowW(NULL,L"NTVDM"));
         }
         /* Acknowledged normal output followed by peer EOF races owner stop. */
         CHECK(CloseHandle(peer));peer=NULL;

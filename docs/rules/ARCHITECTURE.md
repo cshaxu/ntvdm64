@@ -1,5 +1,34 @@
 # Architecture Rules
 
+Owner-approved S12 text extension supersedes the byte-pair-only wording below:
+both workers use one text ABI with original glyph/attribute pairs or optional
+glyph/attribute/style triples. DOS pairs remain unchanged. Style flags are
+backend-neutral; NTKVM keeps one renderer and no native character mapper.
+No guest or shared-library change is authorized by this extension.
+
+Owner admits src/interface as the single owner of cross-component protocol
+declarations: worker/frontend frames and input events, service registration,
+submission/completion, management/control, version identity and RPC IDL.
+It contains no transport, authentication, scheduling or lifecycle implementation.
+Generated RPC files remain under build/. This replaces product-abi and the
+service-owned IDL placement; implementations remain with their executable owner.
+
+Latest NTCON backend selection: an ordinary hidden Console, owned and attached
+by NTCON itself. All private helper/bootstrap processes are prohibited. NTSRV
+may not own Console/ConPTY resources; NTKVM is presentation-only. This overrides
+ConPTY ownership references below without changing independent worker identity,
+original DOS/WOW ownership, text-frame ABI or verification requirements.
+
+Owner admits src/worker-base for project-added worker mechanisms reused by
+ntvdm-exe and ntcon-exe. run16-exe, ntsrv-exe, ntkvm-exe and ntmon-exe retain
+their own worker-handling code, with one common path and explicit kind branches
+where necessary. They do not link worker-base as a generic shared library.
+It owns no scheduler, original DOS/WOW policy or frontend presentation. Shared
+worker clients, transport, validation, cancellation, frame/input codecs and
+handoff/completion mechanisms belong here when their full contracts agree.
+Audit provenance, including project additions inside mirror files. Original
+execution, completion, blocking/resume and cleanup stay in their original owners.
+
 For these rules, `mvdm-host` names the manifest-selected executable host slice
 of the canonical physical `src/mvdm/` OpenNT `base/mvdm` tree. It is not a
 separate filesystem root; explicit paths use `mvdm/`. This preserves existing
@@ -8,10 +37,14 @@ visual comparison.
 
 1. The production source owners are the canonical physical `mvdm` tree (with
    manifest-declared host, guest, tool and firmware slices), `opennt-host`,
-   `opennt-abi/host-compat`, header-only `product-abi`, and the
+   `opennt-abi/host-compat`, declaration-only `interface`, `worker-base`, and the
    executable-owned `run16`, `basesrv`, `ntvdm`, `monitor` and admitted
    `ntkvm-exe` and `ntcon-exe` roots. NTCON owns its admitted native Console
-   backend, not DOS/WOW policy. frontend owns character-session presentation; run16
+   backend, using its own ordinary hidden Console, not ConPTY or DOS/WOW policy. NTKVM
+   owns only visible Console/Window, display and input/frame routing. NTCON
+   publishes only text frames in the existing NTVDM text-frame ABI, with the
+   same bitmap glyph mapping; no backend-specific NTKVM terminal renderer.
+   frontend owns character-session presentation; run16
    retains only launcher/direct-target completion duties. T418 has retired
    generic `app`, `session`, `broker` and `adapter-*` production roots;
    retained README-only directories are historical move markers. No generic

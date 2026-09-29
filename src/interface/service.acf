@@ -1,0 +1,11 @@
+interface vdm_service
+{
+    /* These calls retain the same context identity. Service locks protect
+     * mutable fields; RPC still excludes Close/rundown until calls finish.
+     * A blocking receive must not exclude its worker's completion/sampling. */
+    WaitWorkerChannel([context_handle_noserialize] connection);
+    CompleteWorkerChannel([context_handle_noserialize] connection);
+    NativeSampleEpoch([context_handle_noserialize] connection);
+    ReportNativeBackend([context_handle_noserialize] connection);
+    TakeFrontend([context_handle_noserialize] connection);
+}

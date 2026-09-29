@@ -1,7 +1,7 @@
 #include "command_process_compat.h"
 #include "vdmapi.h"
 #include "console_client.h"
-#include "product-abi/console_io.h"
+#include "interface/console_io.h"
 
 #include <stdio.h>
 #include <string.h>

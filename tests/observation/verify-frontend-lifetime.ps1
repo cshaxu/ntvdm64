@@ -8,7 +8,7 @@ param(
     [string]$LogRoot='O:\winnt\logs',
     [switch]$ExpandedFaults,
     [switch]$Window,
-    [ValidateSet('normal','frontend','launcher','worker','conpty')][string[]]$Cases
+    [ValidateSet('normal','frontend','launcher','worker')][string[]]$Cases
 )
 $ErrorActionPreference='Stop'
 if($LogPrefix -notmatch '^[a-z0-9-]+$'){throw 'Invalid log prefix'}
@@ -24,7 +24,7 @@ if(!$ProcessPackageRoot.StartsWith($build,[StringComparison]::OrdinalIgnoreCase)
 }
 if(Test-Path $EvidenceRoot){throw 'Use fresh evidence'}
 $paths=@()
-foreach($name in @('run16.exe','ntkvm.exe','ntvdm.exe','ntsrv.exe')){
+foreach($name in @('run16.exe','ntkvm.exe','ntvdm.exe','ntcon.exe','ntsrv.exe')){
     $launch=Join-Path $PackageRoot $name
     $physical=Join-Path $ProcessPackageRoot $name
     if((Get-FileHash $launch).Hash -ne (Get-FileHash $physical).Hash){throw 'Candidate identity mismatch'}
@@ -50,9 +50,10 @@ try {
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
     if($Window){$env:MVDM_LIFETIME_WINDOW='1'}else{Remove-Item Env:MVDM_LIFETIME_WINDOW -ErrorAction SilentlyContinue}
     $selected=@('normal','frontend','launcher','worker')
-    if($ExpandedFaults){$selected+='conpty'}
+    # Expanded coverage adds an independent session to every case. The retired
+    # ConPTY-host fault is not an NTCON-worker fault and is not counted as passed.
     if($Cases){$selected=@($selected | Where-Object {$_ -in $Cases})}
-    if(!$selected.Count){throw 'No selected cases; conpty requires ExpandedFaults'}
+    if(!$selected.Count){throw 'No selected cases'}
     foreach($case in $selected){
         $report=Join-Path $LogRoot "$LogPrefix-$case.txt"
         if(Test-Path $report){throw 'Use a fresh log prefix'}
@@ -76,9 +77,6 @@ try {
             }
             if($ExpandedFaults -and !$cells.Contains('distinctunrelatedcharacterfrontendandnativetargetsurvive')){
                 throw "Missing unrelated-session survival assertion: $case"
-            }
-            if($case -eq 'conpty' -and !$cells.Contains('ConPTYhostlosspreservesrealnativeresult37andDOSfilecompletion/result7')){
-                throw 'Missing real ConPTY host-loss assertion'
             }
             Write-Output "PASS frontend lifetime $case (real fixture assertions and output)"
         } finally {

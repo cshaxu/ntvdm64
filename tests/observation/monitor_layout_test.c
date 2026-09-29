@@ -22,6 +22,25 @@ int wmain(void)
     MONITOR_STATE state={0};
     DTASKMGR_WORKER items[24]={0};
     ULONG i;
+    {
+        DTASKMGR_WORKER native={0};FILETIME now;WCHAR line[512];
+        GetSystemTimeAsFileTime(&now);
+        native.kind=4;native.sequence=73;native.process_id=1234;
+        native.state=8;native.reserved=2;
+        native.started_filetime=((uint64_t)now.dwHighDateTime<<32)|now.dwLowDateTime;
+        lstrcpyW(native.image,L"ntcon.exe");
+        task_line(line,ARRAYSIZE(line),&state,&native,&now);
+        assert(wcsstr(line,L"NTCON") && wcsstr(line,L"PID=1234") &&
+            wcsstr(line,L"Active") && wcsstr(line,L"MEMBERS=2") && wcsstr(line,L"START="));
+        native.reserved=0;task_line(line,ARRAYSIZE(line),&state,&native,&now);
+        assert(wcsstr(line,L"Idle"));
+        native.state|=0x80000000u;task_line(line,ARRAYSIZE(line),&state,&native,&now);
+        assert(wcsstr(line,L"Closing"));
+        state.confirm_kind=4;state.confirm_sequence=73;state.confirm_task_count=2;
+        confirmation_text(line,ARRAYSIZE(line),&state);
+        assert(wcsstr(line,L"Close NTCON 73 Console (2 members)") && !wcsstr(line,L"tasks"));
+        ZeroMemory(&state,sizeof(state));
+    }
     BOOL allocated=AllocConsole();
     output=CreateConsoleScreenBuffer(GENERIC_READ|GENERIC_WRITE,
         FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,CONSOLE_TEXTMODE_BUFFER,NULL);

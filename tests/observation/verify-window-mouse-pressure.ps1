@@ -34,7 +34,8 @@ try {
            $record -notmatch '(?m)^exit=0x00000000\r?$' -or
            $screen -notmatch 'WINDOW-MOUSE-PASS' -or
            $hook -notmatch ('(?m)^burst-records='+$case.Count+'\r?$') -or
-           $hook -notmatch 'posted=pass'){throw ('Mouse pressure failed: '+$case.Name)}
+           $hook -notmatch 'posted=pass' -or
+           $hook -notmatch '(?m)^input-sink-acknowledged=yes\r?$'){throw ('Mouse pressure failed: '+$case.Name)}
         Write-Output ('PASS real guest mouse pressure '+$case.Name+' count='+$case.Count)
     }
 } finally {

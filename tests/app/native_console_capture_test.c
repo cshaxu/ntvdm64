@@ -1,6 +1,6 @@
 /* Real native Console storage on an unswitched observer desktop. The child
  * separates its attachment; no guest or alternate terminal emulator is used. */
-#include "ntkvm-exe/native_console_capture.h"
+#include "ntcon-exe/console_state.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -52,7 +52,7 @@ static int child(void)
     info.srWindow=(SMALL_RECT){10,220,29,221};
     info.dwCursorPosition=(COORD){77,237};
     info.ColorTable[1]=RGB(17,34,51);
-    OK(run16_native_screen_apply(output,&info,&cursor));
+    OK(ntcon_screen_apply(output,&info,&cursor));
     CHECK(GetConsoleScreenBufferInfoEx(output,&actual));
     CHECK(actual.dwSize.X==80 && actual.dwSize.Y==300 &&
         !memcmp(&actual.srWindow,&info.srWindow,sizeof(info.srWindow)) &&
@@ -61,21 +61,21 @@ static int child(void)
     CHECK(GetConsoleCursorInfo(output,&actual_cursor) &&
         actual_cursor.dwSize==37 && !actual_cursor.bVisible);
     invalid=info;invalid.srWindow.Left=-1;
-    CHECK(run16_native_screen_apply(output,&invalid,&cursor)==ERROR_INVALID_DATA);
+    CHECK(ntcon_screen_apply(output,&invalid,&cursor)==ERROR_INVALID_DATA);
     for(i=0;i<80;++i) {cells[i].Char.UnicodeChar=(WCHAR)(0x4e00+i);cells[i].Attributes=(WORD)(1+i%15);}
-    OK(run16_native_cells_write(output,0,cells,80));
+    OK(ntcon_cells_write(output,0,cells,80));
     CHECK(ReadConsoleOutputW(output,readback,size,origin,&row));
     CHECK(!memcmp(cells,readback,sizeof(cells)));
-    CHECK(run16_native_cells_write(output,24000,cells,1)==ERROR_INVALID_PARAMETER);
-    CHECK(run16_native_cells_write(output,23999,cells,2)==ERROR_INVALID_PARAMETER);
-    CHECK(run16_native_cells_write(output,79,cells,2)==ERROR_INVALID_PARAMETER);
-    CHECK(run16_native_cells_write(output,0,NULL,1)==ERROR_INVALID_PARAMETER);
+    CHECK(ntcon_cells_write(output,24000,cells,1)==ERROR_INVALID_PARAMETER);
+    CHECK(ntcon_cells_write(output,23999,cells,2)==ERROR_INVALID_PARAMETER);
+    CHECK(ntcon_cells_write(output,79,cells,2)==ERROR_INVALID_PARAMETER);
+    CHECK(ntcon_cells_write(output,0,NULL,1)==ERROR_INVALID_PARAMETER);
     {
         DWORD mode;
         CHECK(GetConsoleMode(GetStdHandle(STD_INPUT_HANDLE),&mode));
         CHECK(SetConsoleMode(GetStdHandle(STD_INPUT_HANDLE),mode|ENABLE_WINDOW_INPUT));
         CHECK(FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE)));
-        for(i=0;i<4;++i)OK(run16_native_screen_apply(output,&info,&cursor));
+        for(i=0;i<4;++i)OK(ntcon_screen_apply(output,&info,&cursor));
         CHECK(GetNumberOfConsoleInputEvents(GetStdHandle(STD_INPUT_HANDLE),&count) && !count);
         CHECK(SetConsoleMode(GetStdHandle(STD_INPUT_HANDLE),mode));
     }
@@ -83,8 +83,8 @@ static int child(void)
     CHECK(GetConsoleScreenBufferInfoEx(output,&info));
     info.srWindow=(SMALL_RECT){4981,0,5000,1};
     info.dwCursorPosition=(COORD){4990,1};
-    OK(run16_native_screen_apply(output,&info,&cursor));
-    OK(run16_native_cells_write(output,10001,cells,1));
+    OK(ntcon_screen_apply(output,&info,&cursor));
+    OK(ntcon_cells_write(output,10001,cells,1));
     {
         WCHAR value;
         CHECK(ReadConsoleOutputCharacterW(output,&value,1,(COORD){5000,1},&count) &&

@@ -9,8 +9,8 @@
 typedef struct OPENNT_BASE_SERVICE OPENNT_BASE_SERVICE;
 typedef struct OPENNT_BASE_CONNECTION OPENNT_BASE_CONNECTION;
 typedef void (WINAPI *OPENNT_BASE_EMPTY_NOTIFY)(void *);
-/* Copied management projection.  It deliberately contains no process ID,
- * HANDLE, original record pointer, or guest address. */
+/* Copied management projection. PID is display-only; epoch/sequence select
+ * control operations. No HANDLE, original record pointer or guest address. */
 #define OPENNT_BASE_WORKER_IMAGE_CHARS 260u
 typedef struct OPENNT_BASE_WORKER_INFO {
     uint32_t sequence;
@@ -24,6 +24,7 @@ typedef struct OPENNT_BASE_WORKER_INFO {
     /* Management-only depth: 0 is the resident PermCom, 1 its COMMAND,
      * and each child command increases the visible call depth. */
     uint32_t stack_depth;
+    uint32_t process_id; /* Display only; never a termination selector. */
     WCHAR image[OPENNT_BASE_WORKER_IMAGE_CHARS];
 } OPENNT_BASE_WORKER_INFO;
 /* The original service owns ConsoleRecord selection.  This callback only
@@ -45,6 +46,15 @@ DWORD OpenNtBaseServiceSnapshot(OPENNT_BASE_SERVICE *,uint64_t *epoch,
     OPENNT_BASE_WORKER_INFO *entries,uint32_t capacity,uint32_t *count);
 DWORD OpenNtBaseServiceTerminateWorker(OPENNT_BASE_SERVICE *,uint64_t epoch,uint32_t sequence);
 DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *,HANDLE,OPENNT_BASE_CONNECTION **,DWORD *);
+/* Independent native-worker admission through the existing reservation path.
+ * Execution Console binding is authenticated separately from frontend I/O. */
+DWORD OpenNtBaseServiceCreateNativeReservation(OPENNT_BASE_CONNECTION *,DWORD pid,
+    DWORD generation,uint64_t *reservation);
+/* Explicit launcher selection within its authenticated execution Console.
+ * Returns a query/synchronize-only reference and pins that registered worker
+ * generation for subsequent command/frontend attachments. No DOS record. */
+DWORD OpenNtBaseServiceSelectNativeWorker(OPENNT_BASE_CONNECTION *,DWORD pid,
+    DWORD generation,HANDLE *worker);
 DWORD OpenNtBaseServiceDisconnect(OPENNT_BASE_CONNECTION *);
 BOOL OpenNtBaseServicePeer(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation);
 /* For authenticated in-flight calls only. Caller closes the returned handle;
@@ -59,6 +69,15 @@ DWORD OpenNtBaseServiceRegisterFrontendRoot(OPENNT_BASE_CONNECTION *,DWORD pid,
     DWORD generation,HANDLE capability);
 DWORD OpenNtBaseServiceRetainFrontendRoot(OPENNT_BASE_CONNECTION *,DWORD pid,
     DWORD generation,HANDLE capability,HANDLE *root,DWORD *root_generation);
+/* Native backend registration is separate from original DOS/WOW records.
+ * The backend registers itself using its authenticated connection and root
+ * capability. Stop/closed are typed session-control attachments, not task IDs. */
+DWORD OpenNtBaseServiceRegisterNativeBackend(OPENNT_BASE_CONNECTION *,DWORD pid,
+    DWORD generation,HANDLE frontend,HANDLE stop,HANDLE closed);
+DWORD OpenNtBaseServiceCompleteWorkerChannel(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation);
+DWORD OpenNtBaseServiceNativeSampleEpoch(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,uint64_t *epoch);
+DWORD OpenNtBaseServiceReportNativeBackend(OPENNT_BASE_CONNECTION *,DWORD pid,
+    DWORD generation,uint64_t epoch,DWORD members);
 /* Preserve the caller's verified execution Console across a hidden backend.
  * The returned unnamed event is a separate, wait-only capability, not the
  * frontend event or a caller-selected Console/worker identity. The root owns
@@ -70,13 +89,15 @@ DWORD OpenNtBaseServiceBindConsoleContext(OPENNT_BASE_CONNECTION *,DWORD pid,
     DWORD generation,HANDLE capability);
 DWORD OpenNtBaseServiceWorkerFrontendCapability(OPENNT_BASE_CONNECTION *,DWORD pid,
     DWORD generation,HANDLE *capability);
-/* One pending private launcher channel per authenticated connection. Broker
- * carries only typed attachments, never launch/input/frame payloads. Root
- * owns all three returned references; sender rundown only drops pending ones. */
-DWORD OpenNtBaseServiceSubmitFrontendChannel(OPENNT_BASE_CONNECTION *,DWORD pid,
+/* One pending launcher channel per authenticated connection, delivered only
+ * to its admitted native worker. No launch payload or target-result policy here.
+ * Receiver owns all four references; sender rundown drops pending ones only. */
+DWORD OpenNtBaseServiceSubmitWorkerChannel(OPENNT_BASE_CONNECTION *,DWORD pid,
     DWORD generation,HANDLE capability,HANDLE channel);
-DWORD OpenNtBaseServiceTakeFrontendChannel(OPENNT_BASE_CONNECTION *,DWORD pid,
-    DWORD generation,HANDLE *channel,HANDLE *caller_process,HANDLE *execution);
+DWORD OpenNtBaseServiceTakeWorkerChannel(OPENNT_BASE_CONNECTION *,DWORD pid,
+    DWORD generation,HANDLE *channel,HANDLE *caller_process,HANDLE *execution,HANDLE *frontend);
+DWORD OpenNtBaseServiceWaitWorkerChannel(OPENNT_BASE_CONNECTION *,DWORD pid,
+    DWORD generation,HANDLE *channel,HANDLE *caller_process,HANDLE *execution,HANDLE *frontend);
 /* Request identifies an authenticated connection's still-pending original
  * DOS command, not a caller-nominated worker. The root's event wakes it to
  * acquire that selected worker and publish a direct route. No I/O payloads. */

@@ -5,4 +5,5 @@
 BOOL NtvdmConsoleTextRequested(BOOL *);
 void NtvdmConsoleTextColours(const PALETTEENTRY *);
 BOOL NtvdmConsoleUpdateText(HPALETTE);
+BOOL NtvdmConsoleUpdateTextConfiguration(HPALETTE);
 #endif

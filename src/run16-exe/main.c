@@ -10,7 +10,8 @@
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
 #include "frontend_scope.h"
 #include "launch_options.h"
-#include "product-abi/console_io.h"
+#include "run16-exe/worker_launch.h"
+#include "interface/console_io.h"
 #include <shellapi.h>
 #include <stdio.h>
 #include <wchar.h>
@@ -285,10 +286,7 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command,run16_f
     BOOL registered = FALSE;
     BOOL resumed = FALSE;
     BOOL startup_failed = FALSE;
-    HANDLE startup_job=NULL;
-    STARTUPINFOEXW guarded_startup={0};
-    JOBOBJECT_EXTENDED_LIMIT_INFORMATION job_limits={0};
-    SIZE_T attributes_bytes=0;
+    BOOL task_completed = FALSE;
     /* A Console-subsystem launcher started by Explorer already has a new
      * Console. Original CreateProcess classified this as a new DOS session
      * before that Console existed. Preserve its session/CloseOnExit path,
@@ -372,6 +370,7 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command,run16_f
             DWORD wait=WaitForSingleObject(parent_wait,INFINITE);
             if (wait!=WAIT_OBJECT_0 || !BaseCheckForVDM(parent_wait,&result))
                 result=GetLastError();
+            else task_completed=TRUE;
         }
         CloseHandle(parent_wait);
         goto done;
@@ -427,38 +426,7 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command,run16_f
      * Create the matching physical Console rather than letting that worker
      * inherit the resident COMMAND Console it was deliberately separated
      * from. */
-    /* Atomic startup containment. If this launcher dies before Prepare, the
-     * broker cannot know this child yet. A non-inherited kill-on-close job,
-     * installed as part of CreateProcess, closes that otherwise orphaned
-     * suspended-child window. Disarm only after broker ownership is bound. */
-    startup_job=CreateJobObjectW(NULL,NULL);
-    if (!startup_job) { result=GetLastError(); goto done; }
-    job_limits.BasicLimitInformation.LimitFlags=JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE;
-    if (!SetInformationJobObject(startup_job,JobObjectExtendedLimitInformation,
-            &job_limits,sizeof(job_limits))) { result=GetLastError(); goto done; }
-    InitializeProcThreadAttributeList(NULL,1,0,&attributes_bytes);
-    guarded_startup.lpAttributeList=HeapAlloc(GetProcessHeap(),0,attributes_bytes);
-    if (!guarded_startup.lpAttributeList) { result=ERROR_NOT_ENOUGH_MEMORY; goto done; }
-    if (!InitializeProcThreadAttributeList(guarded_startup.lpAttributeList,1,0,&attributes_bytes)) {
-        result=GetLastError(); HeapFree(GetProcessHeap(),0,guarded_startup.lpAttributeList);
-        guarded_startup.lpAttributeList=NULL; goto done;
-    }
-    if (!UpdateProcThreadAttribute(guarded_startup.lpAttributeList,0,
-            PROC_THREAD_ATTRIBUTE_JOB_LIST,&startup_job,sizeof(startup_job),NULL,NULL)) {
-        result=GetLastError(); goto done;
-    }
-    guarded_startup.StartupInfo=startup;
-    guarded_startup.StartupInfo.cb=sizeof(guarded_startup);
-    /* The command record owns the stream triple.  Do not also inherit it at
-     * process creation: a persistent worker retaining that duplicate pipe
-     * writer prevents the caller's downstream pipe from observing EOF after
-     * COMMAND exits.  GetNextVDMCommand receives the worker-local, typed
-     * attachments before it starts the guest command. */
-    guarded_startup.StartupInfo.dwFlags &= ~STARTF_USESTDHANDLES;
-    guarded_startup.StartupInfo.hStdInput=NULL;
-    guarded_startup.StartupInfo.hStdOutput=NULL;
-    guarded_startup.StartupInfo.hStdError=NULL;
-    worker_creation_flags=CREATE_SUSPENDED | CREATE_UNICODE_ENVIRONMENT | EXTENDED_STARTUPINFO_PRESENT;
+    worker_creation_flags=CREATE_UNICODE_ENVIRONMENT;
     if (binary==BINARY_TYPE_WIN16 || binary==BINARY_TYPE_SEPWOW) {
         /* Original OpenNT base/win32/client/process.c starts WOW with
          * CREATE_NO_WINDOW, not an inherited or newly visible Console.
@@ -472,21 +440,11 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command,run16_f
          * as a native user and prevent that frontend from retiring. */
         worker_creation_flags |= DETACHED_PROCESS;
     }
-    if (!CreateProcessW(worker_path, worker_command.Buffer, NULL, NULL, FALSE,
-                        worker_creation_flags,
-                        unicode_environment.Buffer, NULL, &guarded_startup.StartupInfo, &worker))
-    {
-        result = GetLastError();
-        goto done;
-    }
-    result = OpenNtBaseClientPrepareWorker(reservation, worker.hProcess);
+    result = run16_worker_prepare(reservation, worker_path, worker_command.Buffer,
+        unicode_environment.Buffer, worker_creation_flags, &startup, &worker);
     if (result)
         goto done;
     prepared = TRUE;
-    job_limits.BasicLimitInformation.LimitFlags=0;
-    if (!SetInformationJobObject(startup_job,JobObjectExtendedLimitInformation,
-            &job_limits,sizeof(job_limits))) { result=GetLastError(); goto done; }
-    CloseHandle(startup_job);startup_job=NULL;
     /* Preserve the original post-CreateProcess registration shape.  The
      * broker resolves the worker from the authenticated reservation; it does
      * not receive this raw handle in its command wire. */
@@ -551,6 +509,7 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command,run16_f
     {
         if (!BaseCheckForVDM(parent_wait, &result))
             result = GetLastError();
+        else task_completed=TRUE;
     }
     else if (!GetExitCodeProcess(worker.hProcess, &result))
     {
@@ -569,11 +528,6 @@ waited:
 done:
     end_worker_win16_directory(&win16_directory);
     NtCurrentPeb()->ProcessParameters->ConsoleHandle=saved_console;
-    if (guarded_startup.lpAttributeList) {
-        DeleteProcThreadAttributeList(guarded_startup.lpAttributeList);
-        HeapFree(GetProcessHeap(),0,guarded_startup.lpAttributeList);
-    }
-    if (startup_job) CloseHandle(startup_job);
     if (published && (!resumed || startup_failed) && result)
     {
         HANDLE undo_task = (HANDLE)(ULONG_PTR)task;
@@ -600,6 +554,15 @@ done:
     if (worker_command.Buffer)
         RtlFreeUnicodeString(&worker_command);
     (void)BaseDestroyVDMEnvironment(&environment, &unicode_environment);
+    s34_run16_trace("task-completed",task_completed);
+    /* Only an acknowledged DOS completion can resume its native parent's
+     * presentation. Startup/fault results must not select another worker or
+     * be replaced by an unrelated resume error. */
+    if (task_completed && (binary & ~BINARY_SUBTYPE_MASK)==BINARY_TYPE_DOS) {
+        DWORD handoff=run16_frontend_scope_resume_parent(frontend_scope);
+        s34_run16_trace("native-resume",handoff);
+        if(handoff)result=handoff;
+    }
     return result;
 }
 
@@ -611,6 +574,7 @@ static BOOL WINAPI launcher_control(DWORD event)
     return event == CTRL_C_EVENT || event == CTRL_BREAK_EVENT;
 }
 
+/* Native resource materialization is shared with NTCON, not its execution loop. */
 static DWORD launch_gui(PCWSTR application,PCWSTR command,BOOL wait)
 {
     WCHAR directory[MAX_PATH];

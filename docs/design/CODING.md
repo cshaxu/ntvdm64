@@ -1,5 +1,10 @@
 # Source Layout
 
+S12 owner-approved common text ABI extension adds an optional per-cell style
+byte to the original glyph/attribute pair. Both workers use the same interface
+definition and frontend decoder; DOS keeps pairs. This supersedes the exact
+pair-only wording below, not the ban on native-specific frontend renderers.
+
 ## Production roots
 
 ```text
@@ -7,7 +12,8 @@ src/
   mvdm/
   opennt-host/
   opennt-abi/host-compat/
-  product-abi/
+  interface/
+  worker-base/
   run16-exe/
   ntsrv-exe/
   ntvdm-exe/
@@ -36,12 +42,42 @@ or runtime input.
 
 ## Executable-owned transition
 
-The latest admitted NTCON replacement supersedes the historical S9/S11 owner
-description below. src/ntcon-exe owns the attached native Console backend and
-produces ntcon.exe. NTKVM keeps visible UI, ConPTY transport/terminal parsing
-and route selection; run16 keeps launcher duties. NTSRV owns authenticated
-backend registration/client protocol and NTMON consumes that management view.
+Cross-component wire declarations and service IDL have one owner: interface.
+Frame/input formats and service/monitor/launcher/worker contracts migrate there
+without layout changes. Endpoint implementations and process-private types
+stay in their executable components. Earlier product-abi and service-owned IDL
+placement below is superseded; generated RPC outputs remain below build/.
+
+The owner-admitted worker-base static library holds project-added mechanisms
+shared by NTVDM and NTCON with matching full contracts: lifecycle, worker
+clients, ordered transport, validation/cancellation, frame/input codecs and
+handoff acknowledgments. Audit source provenance, not only file placement.
+Original mirror execution, scheduling, completion, blocking/resume and cleanup
+remain in place; no reverse-call extraction or new scheduler is permitted.
+Launcher creation belongs to run16; broker management to NTSRV; presentation
+to NTKVM; monitoring to NTMON. These consumers retain their common kind-aware
+handling internally. Backend state operations remain explicit in each worker.
+BaseSrv client implementation remains NTSRV-owned; IDL belongs to interface.
+
+Latest owner directive selects an ordinary hidden Console owned/attached by
+ntcon-exe, replacing the ConPTY/VT plan below. No private helper is permitted.
+Console state, input and membership operations stay in NTCON; NTSRV only
+coordinates authenticated lifecycle and NTKVM only presents copied frames.
+
+The admitted NTCON replacement supersedes the historical S9/S11 owner
+description below. src/ntcon-exe owns its ordinary hidden Console, native Console
+state, input binding, member observation and text-frame production, and produces
+ntcon.exe. NTKVM keeps only visible Console/Window, display and input/frame
+routing; run16 keeps launcher duties. NTSRV implements authenticated
+backend registration/client transport and NTMON consumes that management view.
 No original DOS/WOW record or generic compatibility root is introduced.
+
+NTCON text frames use the existing NTVDM console_video.h layout exactly,
+including font banks, glyph/attribute pairs, palette and cursor. NTCON never
+publishes graphics frames. Its bitmap glyph mapping must agree with NTVDM;
+NTKVM has one backend-neutral text-frame renderer, not a native VT/font engine.
+This is the admitted S12 target, not a claim that the retained candidate has
+already completed ownership migration.
 
 `src/ntkvm-exe/ -> ntkvm.exe` owns visible Console, Window/display and the
 I/O service. S9 replaces its earlier hidden-Console/helper implementation
@@ -52,7 +88,9 @@ branch's Console and Windows-owned last-client EOF. All such resources remain
 ntkvm-owned; one frontend still selects the interactive endpoint.
 run16 links only the finite frontend client, never the renderer or
 input pump. No project helper or second backend is retained in the S9 graph.
-Do not duplicate renderers or introduce a common library. Status distinguishes
+These are historical implementation facts, not permission to retain ConPTY
+ownership in the S12 target. Do not duplicate renderers or introduce a common
+library. Status distinguishes
 the source candidate from the published package; layout is not acceptance.
 
 T418 has moved the original three-program runtime to `src/run16-exe/`,
@@ -68,9 +106,10 @@ mirror even when several EXEs link it; BaseSrv protocol/client code remains
 `basesrv`-owned even when both clients link it. Only a named, same-shaped
 historical host ABI whose finite public-Win32/NTDLL binding is recorded may
 live in `opennt-abi/host-compat`. The stateless shared product surface is
-limited to header-only `product-abi`; worker package/media configuration lives
-in `ntvdm-exe/package_layout.[ch]`. `basesrv` owns the service IDL and
-copied, versioned broker protocol. There is no `common` or `win32api` root.
+limited to declaration-only `interface`; worker package/media configuration
+lives in `ntvdm-exe/package_layout.[ch]`. `interface` owns service IDL and
+copied, versioned broker records; NTSRV owns their transport and validation.
+`product-abi` is a retired move marker. There is no `common` or `win32api` root.
 
 ## Machine-profile selection
 

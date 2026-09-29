@@ -9,7 +9,7 @@
 #include <wchar.h>
 #include "service.h"
 #include "ntsrv-exe/transport/rpc_security.h"
-#include "product-abi/version.h"
+#include "interface/version.h"
 
 #define CHECK(value) do { if (!(value)) { fprintf(stderr,"FAIL %d: %lu\n",__LINE__,(unsigned long)GetLastError()); return 1; } } while (0)
 
@@ -24,7 +24,7 @@ static RPC_BINDING_HANDLE bind_server(const broker_rpc_scope *scope)
     RPC_WSTR text=NULL;
     RPC_BINDING_HANDLE binding=NULL;
     RPC_STATUS status;
-    wsprintfW(endpoint,L"ntvdm-basesrv-%lu-%08lx-%08lx",scope->session,
+    swprintf_s(endpoint,ARRAYSIZE(endpoint),L"ntvdm-basesrv-%lu-%08lx-%08lx",scope->session,
         (ULONG)scope->logon.HighPart,(ULONG)scope->logon.LowPart);
     status=RpcStringBindingComposeW(NULL,(RPC_WSTR)L"ncalrpc",NULL,(RPC_WSTR)endpoint,NULL,&text);
     if (status==RPC_S_OK) status=RpcBindingFromStringBindingW(text,&binding);
@@ -100,36 +100,25 @@ static int console_context_rpc(RPC_BINDING_HANDLE binding,HANDLE self)
     CHECK(!SetEvent(execution) && GetLastError()==ERROR_ACCESS_DENIED);
     {
         WCHAR name[96];
-        HANDLE server,client,received=NULL,sender=NULL,context=NULL,probe=NULL;
-        ULONG request=0;DWORD count;char byte=0;
-        swprintf_s(name,96,L"\\\\.\\pipe\\ntvdm-root-channel-rpc-%lu",GetCurrentProcessId());
+        HANDLE server,client,received=NULL,sender=NULL,context=NULL,io=NULL,probe=NULL;
+        ULONG request=0;
+        swprintf_s(name,96,L"\\\\.\\pipe\\ntvdm-worker-channel-rpc-%lu",GetCurrentProcessId());
         server=CreateNamedPipeW(name,PIPE_ACCESS_DUPLEX|FILE_FLAG_FIRST_PIPE_INSTANCE,
             PIPE_TYPE_BYTE|PIPE_WAIT|PIPE_REJECT_REMOTE_CLIENTS,1,1024,1024,0,NULL);
         CHECK(server!=INVALID_HANDLE_VALUE);
         client=CreateFileW(name,GENERIC_READ|GENERIC_WRITE,0,NULL,OPEN_EXISTING,0,NULL);
         CHECK(client!=INVALID_HANDLE_VALUE && (ConnectNamedPipe(server,NULL) || GetLastError()==ERROR_PIPE_CONNECTED));
-        RPC_CHECK(Client_SubmitFrontendChannel(binding,connection,self,generation+1,frontend,server),ERROR_ACCESS_DENIED);
-        RPC_CHECK(Client_SubmitFrontendChannel(binding,connection,self,generation,execution,server),ERROR_ACCESS_DENIED);
-        RPC_CHECK(Client_SubmitFrontendChannel(binding,connection,self,generation,frontend,client),ERROR_INVALID_PARAMETER);
-        RPC_CHECK(Client_SubmitFrontendChannel(binding,connection,self,generation,frontend,server),ERROR_SUCCESS);
-        CloseHandle(server);
+        RPC_CHECK(Client_SubmitWorkerChannel(binding,connection,self,generation+1,frontend,server),ERROR_ACCESS_DENIED);
+        RPC_CHECK(Client_SubmitWorkerChannel(binding,connection,self,generation,execution,server),ERROR_ACCESS_DENIED);
+        RPC_CHECK(Client_SubmitWorkerChannel(binding,connection,self,generation,frontend,client),ERROR_INVALID_PARAMETER);
+        /* Frontend identity alone cannot nominate an execution recipient. */
+        RPC_CHECK(Client_SubmitWorkerChannel(binding,connection,self,generation,frontend,server),ERROR_NOT_READY);
+        RPC_CHECK(Client_TakeWorkerChannel(binding,connection,self,generation,&received,&sender,&context,&io),ERROR_ACCESS_DENIED);
+        CHECK(!received && !sender && !context && !io);
         RPC_CHECK(Client_FrontendRequest(binding,connection,self,generation,&request,&probe),ERROR_NOT_FOUND);
-        CHECK(!probe && !request && WaitForSingleObject(frontend,0)==WAIT_OBJECT_0);
-        RPC_CHECK(Client_TakeFrontendChannel(binding,connection,self,generation+1,&received,&sender,&context),ERROR_ACCESS_DENIED);
-        CHECK(!received && !sender && !context);
-        RPC_CHECK(Client_TakeFrontendChannel(binding,connection,self,generation,&received,&sender,&context),ERROR_SUCCESS);
-        CHECK(received && GetProcessId(sender)==GetCurrentProcessId() && context);
-        CHECK(!SetEvent(context) && GetLastError()==ERROR_ACCESS_DENIED);
-        CHECK(DuplicateHandle(sender,frontend,GetCurrentProcess(),&probe,SYNCHRONIZE,FALSE,0));
-        CloseHandle(probe);probe=NULL;
-        CHECK(WriteFile(client,"R",1,&count,NULL) && count==1);
-        CHECK(ReadFile(received,&byte,1,&count,NULL) && count==1 && byte=='R');
-        CHECK(WriteFile(received,"P",1,&count,NULL) && count==1);
-        CHECK(ReadFile(client,&byte,1,&count,NULL) && count==1 && byte=='P');
-        CloseHandle(received);CloseHandle(sender);CloseHandle(context);CloseHandle(client);
-        RPC_CHECK(Client_TakeFrontendChannel(binding,connection,self,generation,&received,&sender,&context),ERROR_NOT_FOUND);
-        CHECK(!received && !sender && !context && WaitForSingleObject(frontend,0)==WAIT_TIMEOUT);
-        puts("PASS actual RPC direct root channel: typed pipe/process/context transfer, identity rejection, request wake and bidirectional bytes");
+        CHECK(!probe && !request && WaitForSingleObject(frontend,0)==WAIT_TIMEOUT);
+        CloseHandle(client);CloseHandle(server);
+        puts("PASS actual RPC worker-only execution: frontend identity cannot submit/take without worker admission; typed pipe and generation rejection");
     }
     RPC_CHECK(Client_BindConsoleContext(binding,connection,self,generation,frontend),ERROR_ACCESS_DENIED);
     RPC_CHECK(Client_BindConsoleContext(binding,connection,self,generation+1,execution),ERROR_ACCESS_DENIED);
@@ -163,7 +152,8 @@ int main(int argc,char **argv)
     ULONG count=0;
     DTASKMGR_WORKER *entries=NULL;
     BOOL existing=argc>=2 && (!_stricmp(argv[1],"--existing") || !_stricmp(argv[1],"--terminate"));
-    BOOL terminate=argc==2 && !_stricmp(argv[1],"--terminate");
+    BOOL terminate=(argc==2 || argc==3) && !_stricmp(argv[1],"--terminate");
+    DWORD selected_pid=terminate && argc==3 ? strtoul(argv[2],NULL,10) : 0;
     ULONG index;
     if (argc!=1 && !existing) { fputs("usage: monitor-rpc-test [--existing]\n",stderr); return 2; }
     CHECK(broker_rpc_capture_scope(&scope));
@@ -193,9 +183,16 @@ int main(int argc,char **argv)
                 (unsigned long)entries[index].kind,(unsigned long)entries[index].state,
                 entries[index].image);
         if (terminate) {
+            ULONG selected=0;
+            if(argc==3) {
+                CHECK(selected_pid!=0);
+                for(selected=0;selected<count;++selected)
+                    if(entries[selected].process_id==selected_pid)break;
+                CHECK(selected<count);
+            } else CHECK(count==1);
             RpcTryExcept {
                 error=Client_TerminateWorker(binding,self,APP_PROTOCOL_VERSION,(unsigned char *)version,
-                    epoch,entries[0].sequence);
+                    epoch,entries[selected].sequence);
             }
             RpcExcept(1) { error=RpcExceptionCode(); }
             RpcEndExcept

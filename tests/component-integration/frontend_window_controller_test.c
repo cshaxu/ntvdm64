@@ -3,19 +3,15 @@
 #include <string.h>
 #include "window_controller.h"
 #include "window_keyboard.h"
-#include "native_console_backend.h"
-#include "native_terminal.h"
 
 #define CHECK(x) do { if(!(x)) { fprintf(stderr,"FAIL line %d error %lu: %s\n",__LINE__,GetLastError(),#x); return 1; } } while(0)
 typedef struct observations {
     LONG retired; DWORD routes; BOOL window,graphics; DWORD consumer_thread;
     HANDLE native_input;frontend_keyboard_delivery keyboard;
-    run16_native_backend *backend;
 } observations;
 static DWORD deliver_console(void *context,const INPUT_RECORD *records,DWORD count)
 {
     observations *seen=context;DWORD written;
-    if(seen->backend)return run16_native_backend_input(seen->backend,records,count);
     if(!WriteConsoleInputW(seen->native_input,records,count,&written))return GetLastError();
     return written==count ? ERROR_SUCCESS : ERROR_WRITE_FAULT;
 }
@@ -27,7 +23,7 @@ static lib_bool input(void *context,const frontend_window_input *copied)
     if(!seen->consumer_thread)seen->consumer_thread=GetCurrentThreadId();
     if(seen->consumer_thread!=GetCurrentThreadId() || event->source)return LIB_FALSE;
     if(event->type==KVM_EVENT_SOURCE_RETIRED)InterlockedIncrement(&seen->retired);
-    if((seen->native_input || seen->backend) && frontend_keyboard_dispatch(&seen->keyboard,copied,TRUE,deliver_console,seen))
+    if(seen->native_input && frontend_keyboard_dispatch(&seen->keyboard,copied,TRUE,deliver_console,seen))
         return LIB_FALSE;
     return LIB_TRUE;
 }
@@ -111,23 +107,11 @@ int main(int argc,char **argv)
     frontend_window_callbacks ca={&first,input,route},cb={&second,input,route};
     kvm_window_frame *frame=calloc(1,sizeof(*frame));
     HWND wa,wb;DWORD routes,input_mode=0;
-    HANDLE target=NULL;
+    (void)argv;CHECK(argc==1);
     /* Fail closed if someone accidentally invokes this test on their desktop. */
     CHECK(GetUserObjectInformationA(GetThreadDesktop(GetCurrentThreadId()),UOI_NAME,
         desktop,sizeof(desktop),&size));
     CHECK(!strncmp(desktop,"NTVDMConsoleTest-",17));
-    if(argc==2) {
-        WCHAR comspec[MAX_PATH],command[1024],directory[MAX_PATH];
-        PWSTR environment=GetEnvironmentStringsW();run16_native_start start={0};
-        CHECK(environment);
-        CHECK(GetEnvironmentVariableW(L"COMSPEC",comspec,MAX_PATH) && GetCurrentDirectoryW(MAX_PATH,directory));
-        CHECK(swprintf_s(command,1024,L"\"%ls\" /d /v:on /c \"set /p typed=WINDOW-INPUT: & echo WINDOW-NATIVE-OK:!typed! & if \"!typed!\"==\"ab\" (exit /b 37) else (exit /b 9)\"",comspec)>0);
-        CHECK(!run16_native_backend_open(&first.backend));
-        start.application=comspec;start.command=command;start.directory=directory;
-        start.environment=environment;start.console_mask=7;
-        CHECK(!run16_native_backend_launch(first.backend,&start,&target));
-        FreeEnvironmentStringsW(environment);
-    }
     {
         frontend_window_input_queue queue;
         frontend_window_input copy;kvm_input_event event={0};unsigned i;
@@ -164,7 +148,7 @@ int main(int argc,char **argv)
     CHECK(first.native_input!=INVALID_HANDLE_VALUE && GetConsoleMode(first.native_input,&input_mode));
     CHECK(SetConsoleMode(first.native_input,ENABLE_LINE_INPUT|ENABLE_PROCESSED_INPUT));
     CHECK(FlushConsoleInputBuffer(first.native_input));
-    if(!first.backend) {
+    {
         DWORD_PTR result;DWORD count;INPUT_RECORD records[8];lib_u64 identity;
         CHECK(SendMessageTimeoutW(wa,WM_KEYDOWN,'A',1|(0x1eL<<16),SMTO_ABORTIFHUNG,3000,&result));
         CHECK(!frontend_window_poll(a) && first.keyboard.physical.held_count==1);
@@ -181,34 +165,12 @@ int main(int argc,char **argv)
     }
     CHECK(text_key(wa,'A',0x1e) && text_key(wa,'B',0x30) && text_key(wa,VK_RETURN,0x1c));
     CHECK(!frontend_window_poll(a));
-    if(!first.backend) {
+    {
         WCHAR line[16];DWORD count;
         CHECK(ReadConsoleW(first.native_input,line,16,&count,NULL));
         CHECK(count==4 && !memcmp(line,L"ab\r\n",4*sizeof(WCHAR)));
         CHECK(first.keyboard.physical.held_count==0);
         puts("PASS real Window key messages -> copied FIFO -> native conversion -> cooked Console exact ab CR LF");
-    } else {
-        ntkvm_terminal_frame snapshot={0};
-        WCHAR *text;DWORD code,total,i;BOOL witnessed=FALSE;
-        ULONGLONG deadline;
-        CHECK(WaitForSingleObject(target,5000)==WAIT_OBJECT_0 && GetExitCodeProcess(target,&code) && code==37);
-        CloseHandle(target);target=NULL;
-        /* A direct target finishing does not end the shared ConPTY. Wait for
-         * its asynchronous output witness, never for backend EOF. */
-        CHECK(WaitForSingleObject(run16_native_backend_process(first.backend),0)==WAIT_TIMEOUT);
-        deadline=GetTickCount64()+5000;
-        do {
-            CHECK(!run16_native_backend_pump(first.backend));
-            CHECK(!run16_native_backend_capture(first.backend,&snapshot));
-            total=(DWORD)snapshot.rows*snapshot.columns;
-            text=calloc((SIZE_T)total+1,sizeof(WCHAR));CHECK(text);
-            for(i=0;i<total;++i)text[i]=snapshot.cells[i].chars[0] ? (WCHAR)snapshot.cells[i].chars[0] : L' ';
-            witnessed=wcsstr(text,L"WINDOW-NATIVE-OK:ab")!=NULL;free(text);
-            ntkvm_terminal_frame_free(&snapshot);
-            if(!witnessed)Sleep(10);
-        }while(!witnessed && GetTickCount64()<deadline);
-        CHECK(witnessed);
-        puts("PASS real Window -> FIFO -> keyboard -> production ConPTY -> native CMD typed ab, output witness, exit 37");
     }
     CHECK(!frontend_window_present(b,frame,FALSE));
     CHECK(!frontend_window_select(b,FRONTEND_DISPLAY_WINDOW));
@@ -220,7 +182,6 @@ int main(int argc,char **argv)
     CHECK(frontend_window_visible(b) && IsWindow(wb));
     CHECK(frontend_window_mode(a)==FRONTEND_DISPLAY_CONSOLE && first.retired==1);
     CHECK(first.keyboard.physical.source_identity==0 && !first.keyboard.native.layout);
-    if(first.backend) { CHECK(!run16_native_backend_close(first.backend));first.backend=NULL; }
     CHECK(SetConsoleMode(first.native_input,input_mode));CloseHandle(first.native_input);first.native_input=NULL;
     {
         unsigned chord;

@@ -3,6 +3,7 @@ param(
     [Parameter(Mandatory)][string]$Observer,
     [Parameter(Mandatory)][string]$BuildRoot,
     [Parameter(Mandatory)][string]$PackageRoot,
+    [Parameter(Mandatory)][string]$ProcessPackageRoot,
     [Parameter(Mandatory)][string]$EvidenceRoot,
     [string]$LogRoot='O:\winnt\logs',
     [string]$LogPrefix,
@@ -11,6 +12,10 @@ param(
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path "$PSScriptRoot/../..").Path
 $BuildRoot=(Resolve-Path $BuildRoot).Path
+$ProcessPackageRoot=(Resolve-Path $ProcessPackageRoot).Path
+if(!$ProcessPackageRoot.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::OrdinalIgnoreCase)){
+    throw 'Use an isolated physical build candidate'
+}
 $Observer=(Resolve-Path $Observer).Path
 $EvidenceRoot=[IO.Path]::GetFullPath($EvidenceRoot)
 if(!$EvidenceRoot.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::OrdinalIgnoreCase)){
@@ -134,9 +139,9 @@ try {
                 }
             }
         }
-        # One persistent ConPTY belongs to each frontend, not to each target.
-        # All direct results above return while the shared backend is retained.
-        # Explicit resource close/fault cleanup has separate lifecycle tests.
+        # S12 replaces the retained ConPTY with independent NTCON workers.
+        # Live topology above proves retention while targets exist; after all
+        # targets return, empty frontends must retire without explicit kill.
         # These PIDs are fixture observations, never production authorization.
         $frontendIds=@($rows | Where-Object Owner | Select-Object -ExpandProperty Owner -Unique)
         $helperIds=@(Get-CimInstance Win32_Process -Filter "Name='ntkvm.exe'" |
@@ -144,24 +149,32 @@ try {
         if($helperIds.Count){throw 'Unexpected native backend helper process'}
         foreach($processId in $frontendIds){
             $process=Get-Process -Id $processId -ErrorAction SilentlyContinue
-            if(!$process){throw "Shared frontend $processId ended before explicit close"}
+            if(!$process){continue}
             try {
                 $null=$process.Handle
-                if($process.HasExited){throw 'Frontend ended before retention assertion'}
+                if(!$process.HasExited -and
+                    (Get-FileHash $process.Path).Hash -ne (Get-FileHash (Join-Path $PackageRoot 'ntkvm.exe')).Hash){
+                    throw 'Observed frontend identity changed'
+                }
+                if(!$process.WaitForExit(15000)){throw "Empty frontend $processId did not retire"}
             } finally {$process.Dispose()}
         }
         $summary.Add([pscustomobject]@{Case=$case;EventsPath=$events;Nesting='pass';Identity='pass';Results='pass';
-            Frontend1=$owners[1];Frontend2=$owners[2];LiveTopology='pass';InteractiveIO='pass';Retention='pass';Retirement='separate-lifecycle-gate'})
+            Frontend1=$owners[1];Frontend2=$owners[2];LiveTopology='pass';InteractiveIO='pass';Retention='live-chain-pass';Retirement='empty-frontends-pass'})
         $summary | ConvertTo-Json -Depth 4 | Set-Content (Join-Path $EvidenceRoot 'summary.json')
         & "$PSScriptRoot/verify-twelve-chain-records.ps1" -EvidenceRoot $EvidenceRoot
-        Write-Output "PASS twelve-target nesting/identity/results/topology/visible-input-output/retention $case"
-        # Test housekeeping only, NOT normal product retirement evidence.
-        # Pin and verify each observed process before terminating this fixture.
-        foreach($processId in $frontendIds){
-            $process=Get-Process -Id $processId -ErrorAction Stop
+        Write-Output "PASS twelve-target nesting/identity/results/topology/visible-input-output/retirement $case"
+        # Independent idle workers may outlive their frontend. Candidate-only
+        # test housekeeping, NOT a normal worker-retirement assertion.
+        $candidateNtcon=Join-Path $ProcessPackageRoot 'ntcon.exe'
+        $launchNtcon=Join-Path $PackageRoot 'ntcon.exe'
+        if((Get-FileHash $candidateNtcon).Hash -ne (Get-FileHash $launchNtcon).Hash){throw 'Candidate identity mismatch'}
+        foreach($entry in @(Get-CimInstance Win32_Process -Filter "Name='ntcon.exe'")){
+            $process=Get-Process -Id $entry.ProcessId -ErrorAction Stop
             try {
                 $null=$process.Handle
-                if((Get-FileHash $process.Path).Hash -ne (Get-FileHash (Join-Path $PackageRoot 'ntkvm.exe')).Hash){throw 'Fixture frontend image changed'}
+                if($process.Path -notin @($candidateNtcon,$launchNtcon) -or
+                    (Get-FileHash $process.Path).Hash -ne (Get-FileHash $candidateNtcon).Hash){throw 'Unrelated native worker; do not clean'}
                 $process.Kill();$null=$process.WaitForExit(10000)
             } finally {$process.Dispose()}
         }
@@ -171,6 +184,6 @@ try {
             if(!$broker.Count){break}
             Start-Sleep -Milliseconds 100
         } while([DateTime]::UtcNow -lt $deadline)
-        if($broker.Count){throw 'Broker remained after fixture frontend cleanup'}
+        if($broker.Count){throw 'Broker remained after fixture worker cleanup'}
     }
 } finally {$env:MVDM_OBSERVER_PRIVATE_DESKTOP=$oldPrivate}

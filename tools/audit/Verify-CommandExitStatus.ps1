@@ -9,6 +9,7 @@ param(
     [string]$GuestFixturePath,
     [string]$VideoGuestFixturePath,
     [string]$FrontendObserver,
+    [string]$NativeSurvivorFixture,
     [ValidateRange(1000,60000)][int]$ObservationTimeoutMs = 20000,
     [switch]$OrdinaryFrontend
 )
@@ -26,6 +27,13 @@ if (!(Test-Path -LiteralPath $runtimeFixtureRoot)) {
     New-Item -ItemType Directory -Path $runtimeFixtureRoot -Force | Out-Null
 }
 $runtimeFixtureRoot = (Resolve-Path -LiteralPath $runtimeFixtureRoot).Path
+if($Cases -contains 'native-surviving-client') {
+    if(!$NativeSurvivorFixture){throw 'Surviving-client case requires its authored native fixture'}
+    $survivor=(Resolve-Path -LiteralPath $NativeSurvivorFixture).Path
+    $buildRoot=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../../build'))+'\'
+    if(!$survivor.StartsWith($buildRoot,[StringComparison]::OrdinalIgnoreCase)){throw 'Native fixture must be under build'}
+    Copy-Item -LiteralPath $survivor -Destination (Join-Path $runtimeFixtureRoot 'SURVIVE.EXE') -Force
+}
 if($Cases -contains 'graphics-return' -or $Cases -contains 'direct-graphics-return') {
     if(!$VideoGuestFixturePath){throw 'Graphics return requires an authored video fixture'}
     $video=(Resolve-Path -LiteralPath $VideoGuestFixturePath).Path
@@ -45,10 +53,16 @@ $generatedFixtures = @(
     (Join-Path $runtimeFixtureRoot 'EOF.CMD'),
     (Join-Path $runtimeFixtureRoot 'D7.CMD')
 )
-$productPaths = @('run16.exe','ntvdm.exe','ntsrv.exe','ntkvm.exe') | ForEach-Object { Join-Path $PackageRoot $_ }
+$productNames = @('run16.exe','ntvdm.exe','ntsrv.exe','ntkvm.exe')
+# Retain compatibility with sealed pre-NTCON evidence packages.
+if(Test-Path -LiteralPath (Join-Path $PackageRoot 'ntcon.exe')){$productNames+='ntcon.exe'}
+$productPaths = $productNames | ForEach-Object { Join-Path $PackageRoot $_ }
+if($Cases -contains 'native-surviving-client'){
+    $productPaths+=Join-Path $runtimeFixtureRoot 'SURVIVE.EXE'
+}
 if($ProcessPackageRoot){
     $ProcessPackageRoot=(Resolve-Path -LiteralPath $ProcessPackageRoot).Path
-    foreach($name in @('run16.exe','ntvdm.exe','ntsrv.exe','ntkvm.exe')){
+    foreach($name in $productNames){
         $physical=Join-Path $ProcessPackageRoot $name
         if((Get-FileHash $physical).Hash -ne (Get-FileHash (Join-Path $PackageRoot $name)).Hash){
             throw "Process package differs from launch package: $name"
@@ -57,7 +71,7 @@ if($ProcessPackageRoot){
     }
 }
 function Get-PackageProcesses {
-    @(Get-CimInstance Win32_Process -Filter "Name='run16.exe' OR Name='ntvdm.exe' OR Name='ntsrv.exe' OR Name='ntkvm.exe'" |
+    @(Get-CimInstance Win32_Process -Filter "Name='run16.exe' OR Name='ntvdm.exe' OR Name='ntsrv.exe' OR Name='ntkvm.exe' OR Name='ntcon.exe' OR Name='SURVIVE.EXE'" |
         Where-Object { $_.ExecutablePath -in $productPaths })
 }
 function Test-ExactFileBytes {
@@ -117,6 +131,8 @@ $matrix = @(
     # Console witness.  Direct COMMAND /c remains a DOS COMMAND witness.
     @{ Name='empty'; Text="exit`r"; Code=0; ConsoleMarkers=@('Microsoft(R) Windows NT DOS'); ConsoleMarkerCount=1 },
     @{ Name='native-zero'; Text="ver`rexit`r"; Code=0; ConsoleMarkers=@('Microsoft Windows [Version') },
+    @{ Name='native-interactive-return'; Supplemental=$true; Text="cmd.exe /d`recho NATIVE-INTERACTIVE-OK`rexit`rmem`rexit`r"; LineDelayMs=1000; Code=1; ConsoleMarkers=@('Microsoft Windows [Version','bytes total conventional memory'); ExactConsoleLines=@('NATIVE-INTERACTIVE-OK') },
+    @{ Name='native-surviving-client'; Supplemental=$true; RootFrontend=$true; Args=@((Join-Path $runtimeFixtureRoot 'SURVIVE.EXE')); Text="survivor`r"; LineDelayMs=1000; Code=37; ConsoleMarkers=@('NATIVE-PARENT-EXIT-37','NATIVE-SURVIVOR-INPUT-OK') },
     @{ Name='missing'; Text="missing`rver`rexit`r"; Code=0; ConsoleMarkers=@('is not recognized as an internal or external command','Microsoft Windows [Version'); ExpectedGuestError=$true },
     @{ Name='native-seven'; Args=@('COMMAND.COM','/c','cmd','/c',(Join-Path $shortFixtureRoot 'D7.CMD')); Code=0; ConsoleMarkers=@('S10_DIRECT_SEVEN') },
     @{ Name='native-streams'; Args=@('COMMAND.COM','/c','cmd','/c',(Join-Path $shortFixtureRoot 'STREAM.CMD')); Code=0; ConsoleMarkers=@('S10_STDOUT','S10_STDERR') },
@@ -339,6 +355,13 @@ try {
                 @($frontendWaiters.Keys) | ConvertTo-Json | Set-Content -LiteralPath "$report.frontend-pids.json" -Encoding UTF8
                 if($frontendWaiters.Count -ne 1 -or $frontendWaiters.ContainsKey($launcherId)){
                     throw 'Expected one observed independent frontend session in the ordinary package'
+                }
+                if($case.Name -eq 'native-surviving-client') {
+                    foreach($frontend in $frontendWaiters.Values) {
+                        if(!$frontend.WaitForExit(10000)){
+                            throw 'Frontend did not retire after the surviving Console client completed'
+                        }
+                    }
                 }
             }elseif($case.RootFrontend){
                 $identity=Get-Content -LiteralPath "$report.frontend.log" -Raw

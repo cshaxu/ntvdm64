@@ -2,7 +2,9 @@
 
 ## 候选包
 
-本候选包列于待办队首，在当前已准入的图形呈现包收口后按治理准入，
+依照 2026-09-28 的所有者要求，本候选包排在
+[NtvdmSystemRoot 与应用搜索隔离](proposal-ntvdm-system-root-path-isolation-001.md)
+之后、各 WOW32 候选包之前，在当前已准入任务收口后按队列治理准入，
 不打断当前任务。它不是新的 host
 实现、WOW16 修复或 guest 介质修改；它产出一份可关闭的、以原始
 OpenNT V86 monitor 语义为基准的 CCPU40 host/guest 契约账本。其目的
@@ -22,7 +24,8 @@ S1 冻结选定边界、源/构建/介质身份和待证项清单。已有结论
 guest 契约的直接关联，不能无限扩张范围。
 
 每个缺口沿用稳定 ID，交付原始 owner、当前 provider、证据、最小修复
-范围及可执行验收条件。WOW 缺口落实到后续提案具体 S 的 checklist，
+范围及可执行验收条件。WOW 缺口通过[共享迁移表](proposal-wow32-production-completion-002.md#complete-proposed-s-sequence-and-transfer)
+落实到唯一的 WOW32 候选 T 及其本地 S checklist，
 非 WOW 缺口指定实际接收包；不另建无主的泛化审计队列。证据不足项
 保持未完成并指定下一步有限取证，不能包装成等价或成功收口。
 

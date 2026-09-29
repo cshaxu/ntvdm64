@@ -13,7 +13,7 @@
 #include "console_client.h"
 #include "console_input.h"
 #include "ntvdm-exe/softpc/mvdm_softpc_mouse_bridge.h"
-#include "product-abi/console_io.h"
+#include "interface/console_io.h"
 
 
 /*

@@ -47,8 +47,9 @@ static BOOL dos_active;
 static DWORD bind_error;
 static BOOL text_required;
 static BOOL require_text(void *context) { (void)context;return text_required; }
-static DWORD bind_dos(void *context,BOOL active)
+static DWORD bind_dos(void *context,BOOL active,DWORD kind)
 {
+    CHECK(kind==CONSOLE_IO_WORKER_DOS);
     (void)context;if(bind_error)return bind_error;
     dos_active=active;return ERROR_SUCCESS;
 }

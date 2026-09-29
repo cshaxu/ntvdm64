@@ -7,7 +7,7 @@
 #include <stdint.h>
 #include "service.h"
 #include "ntsrv-exe/transport/rpc_security.h"
-#include "product-abi/version.h"
+#include "interface/version.h"
 
 #define MONITOR_COLUMNS 80
 #define MONITOR_ROWS 25
@@ -38,6 +38,7 @@ typedef struct MONITOR_STATE {
     ULONG selected_sequence;
     ULONG confirm_sequence;
     ULONG confirm_task_count;
+    ULONG confirm_kind;
     DWORD status;
     DWORD action_error;
     ULONG rendered_rows;
@@ -78,7 +79,7 @@ static BOOL bind_basesrv(MONITOR_STATE *state)
 }
 static const WCHAR *kind_name(ULONG kind)
 {
-    return kind==3u ? L"WOW16" : kind==2u ? L"Win16" : L"DOS";
+    return kind==4u ? L"NTCON" : kind==3u ? L"WOW16" : kind==2u ? L"Win16" : L"DOS";
 }
 static void elapsed_text(const FILETIME *started,const FILETIME *now,WCHAR output[16])
 {
@@ -195,10 +196,30 @@ static void task_line(WCHAR *line,DWORD capacity,const MONITOR_STATE *state,
     started.dwLowDateTime=(DWORD)item->started_filetime;
     started.dwHighDateTime=(DWORD)(item->started_filetime>>32);
     elapsed_text(&started,now,elapsed);
+    if(item->kind==4u) {
+        FILETIME local;SYSTEMTIME time={0};WCHAR began[16]=L"Unknown";
+        PCWSTR status=(item->state&0x80000000u) ? L"Closing" :
+            !item->state ? L"Unknown" : item->reserved ? L"Active" : L"Idle";
+        if(item->started_filetime && FileTimeToLocalFileTime(&started,&local) && FileTimeToSystemTime(&local,&time))
+            swprintf_s(began,ARRAYSIZE(began),L"%02u:%02u:%02u",time.wHour,time.wMinute,time.wSecond);
+        swprintf_s(line,capacity,L"%c  %-8lu %-7s %-10s %-5s %s  PID=%lu  %s  MEMBERS=%lu  START=%s",
+            item->sequence==state->selected_sequence ? L'>' : L' ',(unsigned long)item->sequence,
+            kind_name(item->kind),elapsed,L"-",item->image[0] ? item->image : L"Unknown",
+            (unsigned long)item->process_id,status,(unsigned long)item->reserved,began);
+        return;
+    }
     swprintf_s(line,capacity,L"%c  %-8lu %-7s %-10s %-5lu %s",
         item->sequence==state->selected_sequence ? L'>' : L' ',(unsigned long)item->sequence,
         kind_name(item->kind),elapsed,(unsigned long)item->stack_depth,
         item->image[0] ? item->image : L"Unknown");
+}
+static void confirmation_text(WCHAR *line,DWORD capacity,const MONITOR_STATE *state)
+{
+    if(state->confirm_kind==4u)
+        swprintf_s(line,capacity,L"Close NTCON %lu Console (%lu members) [Y/N]?",
+            (unsigned long)state->confirm_sequence,(unsigned long)state->confirm_task_count);
+    else swprintf_s(line,capacity,L"End worker %lu and all its %lu tasks [Y/N]?",
+        (unsigned long)state->confirm_sequence,(unsigned long)state->confirm_task_count);
 }
 static PCWSTR scrolled_text(PCWSTR text,DWORD offset)
 {
@@ -286,7 +307,7 @@ static void render(HANDLE output,MONITOR_STATE *state,DTASKMGR_WORKER *items,ULO
     framed_rule(frame,L'\x250C',L'\x2500',L'\x2510');
     render_framed_line(output,(SHORT)row++,frame,MONITOR_ACCENT_ATTRIBUTE);
     swprintf_s(line,ARRAYSIZE(line),L"   %-8s %-7s %-10s %-5s %s",
-        L"WORKER",L"KIND",L"ELAPSED",L"STACK",L"TASK");
+        L"WORKER",L"KIND",L"ELAPSED",L"STACK",L"TASK / DETAILS");
     framed_text(frame,L'\x2502',scrolled_text(line,state->horizontal_offset),L'\x2502');render_framed_line(output,(SHORT)row++,frame,MONITOR_ACCENT_ATTRIBUTE);
     framed_rule(frame,L'\x251C',L'\x2500',L'\x2524');render_framed_line(output,(SHORT)row++,frame,MONITOR_ACCENT_ATTRIBUTE);
     for (index=0;index<visible;++index) {
@@ -303,8 +324,7 @@ static void render(HANDLE output,MONITOR_STATE *state,DTASKMGR_WORKER *items,ULO
     while (row<MONITOR_SCROLL_ROW) { framed_text(frame,L'\x2502',L"",L'\x2502');render_framed_line(output,(SHORT)row++,frame,MONITOR_NORMAL_ATTRIBUTE); }
     render_scrollbars(output,state,selected_index);++row;
     if (state->confirm_sequence) {
-        swprintf_s(line,ARRAYSIZE(line),L"End worker %lu and all its %lu tasks [Y/N]?",
-            (unsigned long)state->confirm_sequence,(unsigned long)state->confirm_task_count);
+        confirmation_text(line,ARRAYSIZE(line),state);
         footer_text(frame,state->status,state->action_error,line);
     } else footer_text(frame,state->status,state->action_error,L"UP/DOWN=Select   DEL=Kill   F3=Exit");
     render_line(output,(SHORT)row++,frame,MONITOR_STATUS_ATTRIBUTE);
@@ -348,6 +368,7 @@ static DWORD refresh(MONITOR_STATE *state,DTASKMGR_WORKER **items,ULONG *count)
             if (result[index].sequence==state->confirm_sequence) {
                 live=TRUE;
                 state->confirm_task_count=result[index].reserved;
+                state->confirm_kind=result[index].kind;
                 break;
             }
         if (!live) { state->confirm_sequence=0; state->confirm_task_count=0; }
@@ -411,6 +432,7 @@ int wmain(void)
                     state.action_error=ERROR_SUCCESS;
                     state.confirm_sequence=state.selected_sequence;
                     state.confirm_task_count=index<count ? items[index].reserved : 0;
+                    state.confirm_kind=index<count ? items[index].kind : 0;
                 }
             }
         }

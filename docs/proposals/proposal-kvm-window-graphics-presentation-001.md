@@ -2,6 +2,115 @@
 
 ## 最新批准：NTCON 独立原生文本后端
 
+Owner 追加批准统一文本协议最小扩展：原有 glyph/attribute 两字节 cell
+保持有效；需要逐字符样式时，两种 worker 共用可选第三字节 style。
+DOS 默认不设置，NTCON 用它保留下划线；不得借用颜色亮度位表示样式。
+NTKVM 仅有一个公共文本解码/渲染入口，不保留 native 字形映射或专用
+渲染器，不修改 guest 或共享 lib。协议版本检查及未知样式拒绝均须验证。
+
+### 最新后端选择：普通隐藏 Console，撤销 ConPTY 和 helper
+
+Owner 批准保留独立 NTCON worker 架构，后端由 ConPTY 改为 NTCON 自有、
+自附着的普通隐藏 Console。本节优先于下方所有 ConPTY 迁移计划。
+不增加私有 helper（包括短期 bootstrap），NTSRV 不持有或管理 Console/
+ConPTY，NTKVM 不承担后端职责。通过启动属性或 NTCON 本地初始化建立
+隐藏 Console；不得依赖事后寻找用户程序 PID 附着。worker 从创建开始就能
+使用原生 Console API 读写屏幕、输入队列和查询真实附着成员。
+
+S12 仍完整承接独立登记、接单/嵌套重入、直接目标结果、生命周期、管理、
+统一 NTVDM 文本帧/字形、连续屏幕及输入交接和既有全部回归。复用现有
+Console state/launch/control 测试；ConPTY/VT 泵及前端关闭代理在生产切换
+后删除，保留研究证据不代表保留双后端。禁止把新 Console 抢占前台或
+仅链接成功算作验收。公开 API 的 Console 会话关闭及后代存活必须实测。
+
+下面 S12 清单中的 ConPTY 所有权/解析项改验普通隐藏 Console 的实际拥有、
+状态读取、输入投递、成员识别和会话关闭；其他退出标准不减少。
+
+### 最新优先契约：NTCON 与 NTVDM 并列 worker
+
+Owner 追加 `src/interface`：统一拥有所有跨组件协议声明，包括 KVM 文本/
+图形帧、键盘鼠标事件、NTSRV 与 launcher/worker/monitor 的消息、控制和
+对应 IDL。只放契约，不放认证、收发、生命周期或调度实现。迁移旧定义而非
+复制，所有消费者引用唯一声明；生成的 RPC 文件仍在 build。
+
+共享组件采用 owner 指定名称 `worker-base`：`src/worker-base/` 和
+`worker-base.lib`。Owner 最新澄清：承载双方语义一致的项目新增 worker 机制，供
+`ntvdm-exe`、`ntcon-exe` 复用。`run16-exe`、`ntsrv-exe`、`ntkvm-exe`、
+`ntmon-exe` 各自内部共用处理两类 worker 的主路径，仅在必要处按类型分支，
+不将这些调用者的职责搬入 worker-base。不增加进程或通用 scheduler。
+
+共享审计覆盖连接、传输/校验、取消/断连、帧与通用输入、交接确认、完成通知、
+释放/回滚和生命周期，包括镜像文件内的项目新增内容。原始 OpenNT/MVDM
+执行、调度、任务完成、阻塞/恢复和清理不得搬出再反向调用。公共 worker 客户端
+归 worker-base，协议声明归 interface，NTKVM 服务/渲染/前端所有权不迁移。
+按完整正常、失败、嵌套、断连与退出契约判断；保留真实后端差异，不搭通用框架。
+
+同形生命周期必须尽量共用实际代码，不准复制成两套相似流程。run16 内共用
+挂起创建/Prepare/启动期回滚，NTSRV 共用认证、reservation、worker watch，
+NTMON 共用管理入口，NTKVM 共用帧/输入连接；后端差异只留在真实执行边界。
+原始 DOS/WOW record、GetNextVDMCommand/BOP 重入不得改成自主通用调度器；
+Win32 的进程完成也不得伪装成 DOS record。S12 退出须审计重复路径并删除
+旧 frontend-owned NTCON 启动/登记/关闭实现。提取出的函数必须被真实调用，
+不能仅增加一个未使用的“公共”实现。
+
+Owner 明确 NTCON 是 Win32 文本程序的 worker，不是 NTKVM 的附属服务，
+存活期不限定为一个 NTKVM 的存活期。此节取代下文按 frontend 生命周期
+创建、唯一登记、关闭 NTCON 的假设；既有候选不因此自动成为正确实现。
+
+- run16 对两类 worker 采用同形的发现/启动、认证登记、提交、直接任务等待
+  和结果返回流程；不得把 native 启动请求绕到 NTKVM 去执行。
+- NTSRV 管理独立的 worker 身份、就绪/占用/等待重入/退出、任务请求与完成、
+  故障及 rundown；前端关联是单独的 I/O 绑定，不是 worker 的主身份或租期。
+- NTCON 常驻接单，在外层任务等待期间仍能接收嵌套请求。启动、挂起/交接、
+  重入、正常退出、异常退出均须对照 NTVDM 现有原始语义逐项实现和测试。
+  挂起不得擅自解释为 SuspendProcess，也不得引入新 scheduler。
+- NTKVM 对两类 worker 采用统一的认证连接、输入投递、文本帧接收和断开
+  处理；它只拥有可见 Console/Window 和 display，不拥有 worker 或 ConPTY。
+- NTMON 统一枚举、状态呈现和结束操作；后端类型区分执行实现，而不是两套
+  管理生命周期。结束一项任务与结束 worker 必须保留相同的明确区分。
+- 同形指外部接口和可观察生命周期，不把 Win32 task 塞入原始 DOS/WOW
+  guest record，也不复制模拟器内部状态。必须先复用已选原始 worker 管理
+  路径，再保留最小的原生执行差异。前端断开、Console 显式关闭和 worker
+  故障分别对照 NTVDM 处理，不能只因 frontend 连接结束就自行回收 NTCON。
+
+新增验收：两种 worker 的管理操作对照矩阵、前端与 worker 独立存活、前端
+失效/重连、嵌套重入、每层独立结果、显式关闭及异常故障。先审计 NTVDM 的
+实际调用链与退出规则，再迁移 NTCON；不以“永久不退出”冒充同等生命周期。
+先前提出的一次性初始化副本仍未获批准；本次生命周期变更不是该机制授权。
+
+### Owner 澄清：NTKVM 仅拥有可见前端
+
+Owner 明确：ConPTY 由 NTCON 创建、管理和关闭；NTKVM 只管可见 Console、
+Window 及其切换。这取代本候选及历史章节中“NTKVM 持有 ConPTY／终端解析器”
+的所有权安排。S12 仍然 active，已有代码与测试保留为迁移输入，不算收口。
+
+- NTCON 拥有 ConPTY、原生输入编码/投递、VT 解析、原生屏幕/历史/模式、
+  实际成员、原生启动及会话关闭。它输出完整且有一致版本的画面，不让前端
+  拼合 VT 状态和另一份 Console 快照。
+- NTVDM 继续拥有 DOS 执行、设备、输入处理及文本/图形帧生成；不迁入
+  原生 Console 职责，不改 guest 或原始 DOS/WOW 调度。
+- NTKVM 仅采集可见界面输入、选择活动后端、接收完整帧，进行可见 Console/
+  Window 呈现和 display 切换。它不创建、附着、读取或关闭后端 ConPTY/
+  隐藏 Console，不维护 VT 解析器或原生后端执行/成员状态机。
+- NTCON 与 NTVDM 的文本帧使用严格相同的现行 `product-abi/console_video.h`
+  契约：`console_video_description`、`console_text_style`、字符/属性字节对；
+  字段布局、字体银行、调色板、光标、分块提交和完整帧可见规则均一致。
+  NTCON 只发布 `CONSOLE_VIDEO_TEXT_FRAME`，不得把文本转换成图形帧发送。
+  NTCON 后端负责 Unicode 到已批准 PC 字形范围的转换；NTKVM 不保留另一套
+  native 字形映射或 VT 解析/绘制路径。默认点阵来源与 NTVDM 一致，并验证
+  DOS 下载字体及双字体银行在交接中的状态，不能只核对一份默认 ROM 表。
+  现行字节字符帧不承诺任意 Unicode 字形；后端可保留原始 Unicode 状态，
+  不得暗自扩充 native 专用帧格式。原有 Console Unicode 回归另行明确核对，
+  不把窄字形帧测试冒充该能力的证明。
+- NTSRV 继续认证登记和实例管理；NTMON 的结束请求由 NTCON 执行真实会话
+  关闭并确认，不由 NTKVM 持有 HPCON 代办；run16 不承担终端泵。
+
+迁移依次完成：登记并保全当前证据 → 验证 NTCON 单进程资源建立/附着机制
+及失败清理 → 迁移已有 ConPTY/解析/状态和输入代码 → 统一画面/输入交接 →
+清除 NTKVM 越界链接及管理代理 → 原有完整 S12 验收和八文件交付。
+不得因一种附着调用失败而把资源放回 NTKVM，也不得默默增加 helper、观察
+进程、Job 或另一个 scheduler；需要扩大边界时带证据报告。
+
 S11 鼠标范围已完成编译、生产路径回归及 O:/winnt 七文件发布；详见
 [S11 收口证据](../etc/evidence/m0-t423-s11-interaction-retirement.md)。
 Owner 已于 2026-09-28 验收通过并准入 S12；CURRENT 登记唯一 active packet。
@@ -10,7 +119,7 @@ S11 已推送提交为 965083eec，T423 保持打开，S12 完成后另行交付
 本节取代下文 S9/S11 的无 helper、每分支 PTY 约束，不改变已发布事实。
 S11 必须先完成鼠标修复及压力验收，不能把鼠标尾项转给 S12。保全研究、
 候选和测试，仅将屏幕交接/退场重组移交新增 S12 NTCON，不宣称这些缺陷
-通过。原保留的 RDP 工作顺延 S13。CURRENT 是唯一 active packet。
+通过。Owner 确认 RDP 鼠标问题已经解决，取消原 RDP S13 计划。最新指令将产品体验修复从候选 T 队列移入本 T 的最后一个 S13，范围是组件生命周期及启动/使用/退出体验，不恢复 RDP 待办。S12 仍是唯一 active packet，S13 待 S12 完成后单独准入；CURRENT 是唯一状态权威。
 
 - `src/ntcon-exe/ -> ntcon.exe`：一个字符前端会话共用一个原生文本后端，
   附着真实 Console，提供屏幕/光标/输入/模式及实际成员操作。优先保留
@@ -34,20 +143,24 @@ S11 必须先完成鼠标修复及压力验收，不能把鼠标尾项转给 S12
 
 ### S12 实施与验收清单
 
-- [ ] 审计复用 S8 真实 Console 操作、S9 ConPTY、S11 反例与鼠标候选，
+- [x] 审计复用 S8 真实 Console 操作、S9 ConPTY、S11 反例与鼠标候选，
       逐项登记保留/迁移/删除；不重建已验证算法或恢复旧 frontend owner。
-- [ ] NTCON x86 /MT 正式组件/构建目标；共享 APP_VERSION 和版本拒绝。
-- [ ] 认证登记、原子复用/并发启动、rundown、跨会话拒绝与失效实例拒绝。
-- [ ] run16 原生提交与实际直接目标结果，launcher 提前死亡不杀 target。
-- [ ] NTKVM/NTCON 真实字符、属性、光标和模式交接；固定位置写入、继续
+- [x] NTCON x86 /MT 正式组件/构建目标；共享 APP_VERSION 和版本拒绝。
+- [x] NTCON 实际拥有普通隐藏 Console/状态/输入/关闭；NTKVM 源码与链接图无
+      后端 ConPTY API、VT 状态或原生会话终止实现，不能以移动文件名代替。
+- [x] 两后端文本帧逐字段/逐字节契约一致，NTCON 无图形帧发布；默认点阵、
+      DOS 字体交接和缺字行为有测试，NTKVM 使用同一文本帧接收/呈现路径。
+- [x] 认证登记、原子复用/并发启动、rundown、跨会话拒绝与失效实例拒绝。
+- [x] run16 原生提交与实际直接目标结果，launcher 提前死亡不杀 target。
+- [x] NTKVM/NTCON 真实字符、属性、光标和模式交接；固定位置写入、继续
       当前光标、清屏、滚屏、背景输出、输入边沿不重复及重定向不受影响。
-- [ ] NTMON 列表、正常/异常消失、整个 Console 会话结束、独立会话隔离。
-- [ ] 真实成员保留/退休、启动与关闭竞争、broker/frontend/backend 故障；
+- [x] NTMON 列表、正常/异常消失、整个 Console 会话结束、独立会话隔离。
+- [x] 真实成员保留/退休、启动与关闭竞争、broker/frontend/backend 故障；
       不以 ConPTY 或 carrier 存活冒充业务成员，也不把 I/O 失败当任务成功。
-- [ ] 回归 S11 已验收鼠标能力；鼠标压力失败必须由 S11 先修复，RDP 留 S13。
-- [ ] DDWWDDWW 和既有两条十二目标链、Console17/Window17、fault、monitor、
+- [x] 回归 S11 已验收鼠标能力；鼠标压力失败必须由 S11 先修复；RDP 鼠标问题已由 owner 确认解决。
+- [x] DDWWDDWW 和既有两条十二目标链、Console17/Window17、fault、monitor、
       三个独立 WOW headless 前沿；生产调用者证明，不以 fixture 代替。
-- [ ] 一致八文件构建/验收/备份/发布至 O:/winnt：run16、ntsrv、ntvdm、
+- [x] 一致八文件构建/验收/备份/发布至 O:/winnt：run16、ntsrv、ntvdm、
       ntkvm、ntcon、ntmon、WOW32.DLL、VDMREDIR.DLL；文档治理、提交推送。
 
 完成后等待 owner 实测；不自行收口 T。未验证候选不发布；guest/lib 不改。
@@ -193,7 +306,7 @@ S5 扩展验收已交付至 `1fb291a8f`；S6 从最新 nxvm 四组件核验开�
 | S10 | 删除已替代的旧 root owner/重复分支，核算镜像 diff 与自主代码，完整回归/一致发布，等待 owner 验收，不自行关闭 T。 |
 | S11 | 完成 Window EDIT 鼠标输入批处理、压力与取消/交接修复；编译、回归、发布、提交推送后停下等 owner 验证。 |
 | S12 | 实施开头已批准的 NTCON 独立原生文本后端；承接原生屏幕连续性、真实成员及退场，保持 S11 鼠标回归。Owner 已验收 S11 并批准准入，实施状态见 CURRENT。 |
-| S13 | 调查和修复 RDP 下捕获后宿主指针可移出 Window 的问题；区分逻辑捕获、物理裁剪和远程输入，不由先前物理验证豁免抵扣。 |
+| S13（最后一个 S，待准入） | 产品体验与组件生命周期修复：复用 S12 的 NTCON/NTKVM 生命周期实现，追踪并修复 Explorer 拖放后 Console 残留、路径/参数/工作目录、启动失败、正常退出、取消和窗口关闭；验证继承 shell、交互任务、嵌套返回及独立会话不受损。真实 Explorer 与 Console/Window 场景、x86 编译及回归通过后交付 owner 验收。范围承接[产品体验方案](proposal-product-experience-repair-001.md)，不另开 T、不恢复 RDP 工作。 |
 
 ### Owner 增补：清理交付与实测修复分离
 

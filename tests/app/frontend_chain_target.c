@@ -10,7 +10,7 @@
 #include <rpc.h>
 #include "service.h"
 #include "ntsrv-exe/transport/rpc_security.h"
-#include "product-abi/version.h"
+#include "interface/version.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
 
 PVOID CsrPortHeap;
@@ -104,7 +104,7 @@ static BOOL same_image(HANDLE process, const BY_HANDLE_FILE_INFORMATION *wanted)
     CloseHandle(file); return same;
 }
 
-static BOOL topology(PCWSTR report, unsigned stage)
+static BOOL topology(PCWSTR report, unsigned stage, BOOL continuous)
 {
     WCHAR image[MAX_PATH], output[MAX_PATH], *slash;
     BY_HANDLE_FILE_INFORMATION wanted; HANDLE file, snapshot, first = NULL;
@@ -133,8 +133,9 @@ static BOOL topology(PCWSTR report, unsigned stage)
         }
     } while (Process32NextW(snapshot, &entry));
     CloseHandle(snapshot);
-    if (stage <= 3 && count) return FALSE;
-    if (stage >= 7) {
+    if (continuous && count != 1) return FALSE;
+    if (!continuous && stage <= 3 && count) return FALSE;
+    if (!continuous && stage >= 7) {
         if (_wfopen_s(&events, report, L"r")) return FALSE;
         while (fscanf_s(events, "%31s %u %c %lu %lu %lu %lu %lu", phase, (unsigned)sizeof(phase),
                 &index, &kind, 1u, &pid, &owner, &gen, &child, &result) == 8) {
@@ -208,21 +209,24 @@ static BOOL record(PCWSTR path, PCWSTR phase, unsigned stage, WCHAR kind,
 int wmain(int argc, WCHAR **argv)
 {
     WCHAR kinds[20], report[MAX_PATH], section[16], command[2048];
-    WCHAR title[80]; unsigned stage; DWORD owner, generation, error, result = 37;
+    WCHAR title[80]; unsigned stage, stages; DWORD owner, generation, error, result = 37;
     DWORD child_pid = 0, returned_owner, returned_generation;
     STARTUPINFOW startup = {sizeof(startup)};
     PROCESS_INFORMATION child = {0}; HWND window = NULL;
     BOOL probe;
+    if (argc == 3 && !wcscmp(argv[1], L"--snapshot"))
+        return dos_records(argv[2], 1, L"RETURN") ? 0 : 99;
     if (argc != 3 && argc != 4) return 80;
     stage = (unsigned)_wtoi(argv[2]);
     if (stage < 1 || stage > 12) return 81;
-    if (GetPrivateProfileStringW(L"chain", L"kinds", L"", kinds, ARRAYSIZE(kinds), argv[1]) != 12 ||
+    stages = GetPrivateProfileStringW(L"chain", L"kinds", L"", kinds, ARRAYSIZE(kinds), argv[1]);
+    if ((stages != 12 && wcscmp(kinds, L"DDWWDDWW")) || stage > stages ||
         !GetPrivateProfileStringW(L"chain", L"report", L"", report, ARRAYSIZE(report), argv[1])) return 82;
     probe = kinds[stage-1] == L'D';
     if (probe != (argc == 4) || (probe && wcscmp(argv[3], L"ENTER") && wcscmp(argv[3], L"RETURN"))) return 83;
     error = identity(kinds[stage-1], &owner, &generation);
     if (error) { record(report, L"IDENTITY-FAIL", stage, kinds[stage-1], 0, 0, 0, error); return 84; }
-    if (!topology(report, stage)) return 95;
+    if (!topology(report, stage, stages == 8)) return 95;
     if (probe) {
         if (!dos_records(report, stage, argv[3])) return 99;
         HANDLE driver = start_input(report, stage, argv[3], L'D', owner);
@@ -243,7 +247,7 @@ int wmain(int argc, WCHAR **argv)
         printf("NATIVE-STAGE-%02u-ENTER\n", stage); fflush(stdout);
     }
     if (!record(report, L"ENTER", stage, kinds[stage-1], owner, generation, 0, 0)) return 88;
-    if (stage < 12) {
+    if (stage < stages) {
         swprintf_s(section, ARRAYSIZE(section), L"%u", stage + 1);
         if (!GetPrivateProfileStringW(section, L"command", L"", command, ARRAYSIZE(command), argv[1])) return 89;
         if (!CreateProcessW(NULL, command, NULL, NULL, TRUE, 0, NULL, NULL, &startup, &child)) {

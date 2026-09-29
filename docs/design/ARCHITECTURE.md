@@ -1,5 +1,11 @@
 # System Architecture
 
+Owner-approved S12 text extension: the common text ABI accepts original
+glyph/attribute pairs or optional glyph/attribute/style triples. Both workers
+share the decoder; DOS continues to publish pairs. This supersedes the exact
+byte-pair-only restriction below, preserving native underline without a second
+NTKVM renderer or modifying guest/shared-library code.
+
 ## Product boundary
 
 `ntvdm.exe` is a non-invasive Windows CLI that hosts NT4-era DOS and bounded
@@ -10,7 +16,15 @@ mechanisms.
 
 Each production source file has one final owner. Original mirrors preserve
 upstream package identity; executable-owned roots own their process-local
-mechanics; and product-abi holds only shared identity and I/O declarations.
+mechanics; interface holds shared identity, copied protocol declarations and
+service IDL. worker-base holds project-added worker mechanisms shared by
+NTVDM/NTCON when their normal, failure, nested and teardown contracts match.
+This includes the finite presentation client, ordered transport, protocol
+validation, frame/input codec and local client resource lifecycle, declared
+by interface/worker_console_client.h. NTKVM retains server/rendering/ownership.
+Original OpenNT/MVDM execution, scheduling, task completion, block/resume and
+cleanup stay in their mirrors; never extract original logic and reverse-call it.
+Backend-specific guest and native Console operations remain explicit locally.
 
 T414 uses `src/mvdm/` as the physical canonical selected-OpenNT
 `base/mvdm` tree. In this document, **MVDM host slice** (and retained shorthand
@@ -223,7 +237,7 @@ markers, not compatibility locations or destinations. `run16` owns the public Cr
 owns its service endpoint, authentication, liveness and transport assembly
 around mirrored `srvvdm.c`; and `ntvdm` owns worker-local setup, guest-memory
 leases, thread binding, teardown and guest-side I/O bindings. frontend owns
-character presentation and its native text backend resources. The broker
+character presentation; NTCON owns native text backend resources. The broker
 does not acquire DOS/WOW record policy, and the worker does not acquire broker
 policy.
 
@@ -236,10 +250,10 @@ There is no generic shared Win32/compatibility component. A process-local
 Win32 binding belongs to the executable that owns the relevant HANDLE,
 Console, thread or teardown: `run16`, `basesrv` or `ntvdm`. Original code
 stays in its original mirror even when several executables link it. The
-BaseSrv service IDL, protocol implementation and client library are
-`basesrv`-owned; `run16` and `ntvdm` may link that library but do not own a
-parallel protocol. The only shared product data is the small, stateless
-`product-abi` surface for version identity and copied I/O contracts. Package
+BaseSrv protocol implementation and client library are
+NTSRV-owned; clients may link that library but do not own a
+parallel protocol. Service IDL and shared product data belong to the stateless
+`interface` surface for version identity and copied I/O/management contracts. Package
 layout updates worker session state and belongs to ntvdm-exe, not a shared root.
 
 `opennt-abi/host-compat` is the sole exception for a same-shaped historical
@@ -253,13 +267,34 @@ never session, Console or native-resource policy.
 
 ### Latest admitted NTCON replacement
 
+Latest owner approval replaces ConPTY with NTCON's own ordinary hidden Console.
+NTCON is its attached resident worker and uses public Console APIs directly;
+there is no private helper/bootstrap or NTSRV-owned pseudoconsole. NTKVM remains
+presentation only. The ConPTY descriptions below are superseded design history,
+not selectable alternative production backends. Independent-worker lifecycle,
+native direct results, same text-frame ABI and screen/input continuity remain.
+
+Latest owner clarification: NTCON is a Win32-text worker peer of NTVDM,
+not an NTKVM-owned backend with a frontend-bounded lifetime. Both expose the
+same external worker discovery/start/registration, request/completion,
+handoff/re-entry, exit/fault and monitor management model. I/O association is
+separate from worker identity. NTKVM connects as presentation client only.
+Audit and reuse the actual selected NTVDM lifecycle instead of introducing a
+second scheduler or encoding native tasks as guest DOS/WOW records. The older
+per-frontend candidate description below is superseded wherever it conflicts.
+
 The owner admits src/ntcon-exe producing ntcon.exe as the native text backend.
 This supersedes the historical S9/S11 no-helper and per-native-branch rules
 below, not their publication history. One character frontend session reuses
 one NTCON/real Console across DOS intervals. NTKVM owns visible presentation,
-display and direct I/O routing; NTCON owns attached native Console operations.
-ConPTY remains the preferred native stream transport, not an API for modifying
-remote screen state. Screen/cursor transfer must reach the real Console.
+display and direct I/O routing only. NTCON owns its ordinary hidden Console,
+native input/state/member operations, text-frame production and Console closure.
+Screen/cursor transfer must reach the real Console, not just a parser cache.
+Both backends publish text in the exact existing console_video.h ABI: copied
+console_video_description, console_text_style and glyph/attribute byte pairs.
+NTCON publishes text only, with the same bitmap glyph mapping as NTVDM; no
+native-specific terminal parser or font mapper remains in NTKVM. Default fonts
+and active guest font-bank handoff require explicit equivalence tests.
 Run16 keeps classification, submission and existing GUI startup-only/--wait
 and DOS/native-text direct-completion behavior; it never owns an I/O pump.
 NTSRV owns authenticated backend instances and frontend associations outside
@@ -509,7 +544,8 @@ ntvdm -> worker-local session, command, monitor, SoftPC, Redirector, VDD, WOW an
 ntvdm -> original mvdm + opennt-host + opennt-abi/host-compat
 
 opennt-abi/host-compat -> public modern Win32/NTDLL only
-product-abi -> versioned fixed-width protocol declarations only
+interface -> versioned fixed-width protocol declarations and service IDL only
+ntvdm/ntcon -> worker-base -> shared project-owned worker mechanisms
 ntvdm-exe/package_layout -> worker-local media/session configuration
 mvdm-tools -> original mvdm/opennt declarations only (independent tool builds)
 ```

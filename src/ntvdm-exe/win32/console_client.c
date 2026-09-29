@@ -1,7 +1,7 @@
 /* Worker-local transport only. No native Console presentation or guest policy. */
 #include "console_client.h"
 #include "console_text.h"
-#include "product-abi/console_io.h"
+#include "interface/worker_console_client.h"
 #include "opennt-abi/host-compat/include/console_grid.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
 #include "ntvdm-exe/softpc/mvdm_softpc_mouse_bridge.h"
@@ -9,16 +9,33 @@
 #include <limits.h>
 #include <string.h>
 
+static BOOL decode_input(const console_io_input *wire,INPUT_RECORD *record)
+{
+    if(wire->type==CONSOLE_INPUT_RELATIVE_MOUSE) {
+        console_mouse_input mouse;
+        if(wire->buttons>3 || wire->flags>UINT16_MAX)return FALSE;
+        mouse.dx=wire->x;mouse.dy=wire->y;mouse.buttons=(uint16_t)wire->buttons;
+        mouse.action=(uint16_t)wire->flags;mouse.width=(uint16_t)wire->control;
+        mouse.height=(uint16_t)(wire->control>>16);
+        if(!console_mouse_input_valid(&mouse))return FALSE;
+        ZeroMemory(record,sizeof(*record));record->EventType=CONSOLE_INPUT_RELATIVE_MOUSE;
+        memcpy(&record->Event,&mouse,sizeof(mouse));return TRUE;
+    }
+    return ntkvm_worker_decode_input(wire,record);
+}
+
 typedef struct console_client {
     session *owner;
-    HANDLE pipe,frontend,event,ready,wake,stop,rearm,watcher;
+    ntkvm_worker_client channel;
+    HANDLE ready,wake,stop,rearm,watcher;
     HANDLE capability,input_identity,output_identity;
     CRITICAL_SECTION lock;
-    DWORD generation,sequence,failure,video_serial;
     console_io_request request;
     ntvdm_console_graphics *graphics;
     PALETTEENTRY text_palette[16];
     BOOL text_palette_valid;
+    console_text_configuration sent_configuration;
+    BOOL configuration_sent;
     mvdm_mouse_bridge mouse;
 } console_client;
 static DWORD console_activate(console_client *,BOOL);
@@ -149,7 +166,7 @@ static DWORD WINAPI console_input_watch(void *context)
     console_client *client=context;
     BOOL pending=FALSE;
     for (;;) {
-        HANDLE waits[3]={client->stop,client->frontend,pending ? client->rearm : client->ready};
+        HANDLE waits[3]={client->stop,client->channel.peer,pending ? client->rearm : client->ready};
         DWORD result=WaitForMultipleObjects(3,waits,FALSE,INFINITE);
         if (result==WAIT_OBJECT_0) return 0;
         if (result==WAIT_OBJECT_0+1) {
@@ -179,7 +196,8 @@ static void console_client_end(void *context)
     if (client->watcher) {
         WaitForSingleObject(client->watcher,INFINITE);CloseHandle(client->watcher);
     }
-    CloseHandle(client->pipe);CloseHandle(client->frontend);CloseHandle(client->event);
+    CloseHandle(client->channel.pipe);CloseHandle(client->channel.peer);
+    ntkvm_worker_client_dispose(&client->channel);
     CloseHandle(client->ready);
     if (client->capability) CloseHandle(client->capability);
     if (client->wake) CloseHandle(client->wake);
@@ -195,7 +213,7 @@ static void console_client_end(void *context)
 static DWORD console_command_ready(void *context)
 {
     console_client *client=context;
-    if (WaitForSingleObject(client->frontend,0)==WAIT_TIMEOUT) return console_activate(client,TRUE);
+    if (WaitForSingleObject(client->channel.peer,0)==WAIT_TIMEOUT) return console_activate(client,TRUE);
     /* A dead root closes this session; it cannot be rebound to a new root. */
     return ERROR_PIPE_NOT_CONNECTED;
 }
@@ -207,7 +225,7 @@ DWORD ntvdm_console_client_begin(session *owner)
     if (!owner || owner->console_client) return ERROR_INVALID_STATE;
     client=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*client));
     if (!client) return ERROR_NOT_ENOUGH_MEMORY;
-    error=OpenNtBaseClientWaitFrontend(&client->pipe,&client->frontend,&client->generation,&client->ready);
+    error=OpenNtBaseClientWaitFrontend(&client->channel.pipe,&client->channel.peer,&client->channel.generation,&client->ready);
     if (error) { HeapFree(GetProcessHeap(),0,client);return error; }
     client->owner=owner;
     InitializeCriticalSection(&client->lock);
@@ -215,13 +233,15 @@ DWORD ntvdm_console_client_begin(session *owner)
     if (!client->graphics) { error=GetLastError();console_client_end(client);return error; }
     error=OpenNtBaseClientWorkerFrontendCapability(&client->capability);
     if (error) { console_client_end(client);return error; }
-    client->event=CreateEventW(NULL,TRUE,FALSE,NULL);
+    error=ntkvm_worker_client_init(&client->channel,client->channel.pipe,
+        client->channel.peer,NULL,client->channel.generation);
+    if(error){console_client_end(client);return error;}
     client->wake=CreateEventW(NULL,TRUE,FALSE,NULL);
     client->stop=CreateEventW(NULL,TRUE,FALSE,NULL);
     client->rearm=CreateEventW(NULL,FALSE,FALSE,NULL);
     client->input_identity=CreateEventW(NULL,TRUE,FALSE,NULL);
     client->output_identity=CreateEventW(NULL,TRUE,FALSE,NULL);
-    if (!client->event || !client->wake || !client->stop || !client->rearm ||
+    if (!client->channel.event || !client->wake || !client->stop || !client->rearm ||
         !client->input_identity || !client->output_identity) {
         error=GetLastError();console_client_end(client);return error;
     }
@@ -272,36 +292,6 @@ HANDLE ntvdm_console_input_wait_handle(void)
     return client ? client->wake : GetStdHandle(STD_INPUT_HANDLE);
 }
 
-static DWORD client_transfer(console_client *client,BOOL write,void *buffer,DWORD bytes)
-{
-    BYTE *cursor=buffer;
-    while (bytes) {
-        OVERLAPPED io={0};
-        HANDLE waits[2]={client->frontend,client->event};
-        DWORD done=0,error,wait;
-        BOOL ok;
-        if (WaitForSingleObject(client->frontend,0)!=WAIT_TIMEOUT) return ERROR_PIPE_NOT_CONNECTED;
-        ResetEvent(client->event);io.hEvent=client->event;
-        ok=write ? WriteFile(client->pipe,cursor,bytes,&done,&io) :
-            ReadFile(client->pipe,cursor,bytes,&done,&io);
-        if (!ok) {
-            error=GetLastError();
-            if (error!=ERROR_IO_PENDING) return error;
-            wait=WaitForMultipleObjects(2,waits,FALSE,INFINITE);
-            if (wait!=WAIT_OBJECT_0+1) {
-                error=wait==WAIT_FAILED ? GetLastError() : ERROR_PIPE_NOT_CONNECTED;
-                CancelIoEx(client->pipe,&io);
-                (void)GetOverlappedResult(client->pipe,&io,&done,TRUE);
-                return error;
-            }
-            if (!GetOverlappedResult(client->pipe,&io,&done,FALSE)) return GetLastError();
-        }
-        if (!done || done>bytes) return ERROR_BROKEN_PIPE;
-        cursor+=done;bytes-=done;
-    }
-    return ERROR_SUCCESS;
-}
-
 static console_client *mode_client(HANDLE handle)
 {
     session *owner=session_thread_current();
@@ -334,43 +324,17 @@ static console_client *input_client(HANDLE input)
  * request sequence, including stream chunks and geometry queries. */
 static DWORD exchange(console_client *client,console_io_reply *reply)
 {
-    DWORD error;
-    if (client->failure) return client->failure;
-    if (client->sequence==UINT32_MAX) return ERROR_ARITHMETIC_OVERFLOW;
-    client->request.version=CONSOLE_IO_VERSION;
-    client->request.generation=client->generation;
-    client->request.sequence=++client->sequence;
-    error=client_transfer(client,TRUE,&client->request,
-        (DWORD)offsetof(console_io_request,data)+client->request.bytes);
-    if (!error) error=client_transfer(client,FALSE,reply,(DWORD)offsetof(console_io_reply,data));
-    if (!error && (reply->version!=CONSOLE_IO_VERSION || reply->generation!=client->generation ||
-        reply->sequence!=client->sequence || reply->result>1 || (reply->result && reply->error) ||
-        reply->bytes>CONSOLE_IO_DATA_BYTES ||
-        (reply->bytes && client->request.operation!=CONSOLE_IO_GET_TITLE_A &&
-            client->request.operation!=CONSOLE_IO_READ_INPUT &&
-            client->request.operation!=CONSOLE_IO_PEEK_INPUT &&
-            (client->request.operation<CONSOLE_IO_READ_CELLS_A ||
-             client->request.operation>CONSOLE_IO_READ_CELLS_W))))
-        error=ERROR_INVALID_DATA;
-    if (!error) error=client_transfer(client,FALSE,reply->data,reply->bytes);
-    /* Root loss revokes I/O only. Keep a stable explicit transport failure;
-     * the original caller, not this adapter, decides whether to continue. */
-    if (error==ERROR_BROKEN_PIPE || error==ERROR_NO_DATA || error==ERROR_PIPE_NOT_CONNECTED)
-        error=ERROR_PIPE_NOT_CONNECTED;
-    if (error) client->failure=error;
-    return error;
+    return ntkvm_worker_exchange(&client->channel,&client->request,reply);
 }
 
 static DWORD console_activate(console_client *client,BOOL active)
 {
-    console_io_reply reply;
     DWORD error;
     EnterCriticalSection(&client->lock);
-    ZeroMemory(&client->request,offsetof(console_io_request,data));
-    client->request.operation=CONSOLE_IO_DOS_ACTIVE;
-    client->request.state.input=active!=FALSE;
-    error=exchange(client,&reply);
-    if(!error && !reply.result)error=reply.error ? reply.error : ERROR_GEN_FAILURE;
+    do {
+        error=ntkvm_worker_activate(&client->channel,0,active);
+        if(active && error==ERROR_BUSY)Sleep(10);
+    } while(active && error==ERROR_BUSY);
     /* Unlike IRQ cancellation, successful DOS ownership handoff retires the
      * frontend's DOS mouse route and discards its copied relative records.
      * Original nt_block_event_thread has quiesced the event/timer producers
@@ -393,33 +357,24 @@ BOOL ntvdm_console_publish_video(const console_video_description *description,
 {
     session *owner=session_thread_current();
     console_client *client=owner ? owner->console_client : NULL;
-    console_io_reply reply;
-    DWORD error=ERROR_SUCCESS,offset=0,count;
+    DWORD error=ERROR_SUCCESS;
     if (!client) { SetLastError(ERROR_NOT_READY);return FALSE; }
     if ((description && (!pixels || capacity<description->bytes || !description->bytes)) ||
         (!description && (pixels || capacity))) { SetLastError(ERROR_INVALID_PARAMETER);return FALSE; }
     EnterCriticalSection(&client->lock);
-    if (client->video_serial==UINT32_MAX) { error=ERROR_ARITHMETIC_OVERFLOW;goto done; }
-    ZeroMemory(&client->request,offsetof(console_io_request,data));
-    client->request.state.mode=++client->video_serial;
-    client->request.operation=description ? CONSOLE_IO_VIDEO_BEGIN : CONSOLE_IO_VIDEO_TEXT;
-    if (description) {
-        client->request.bytes=sizeof(*description);
-        memcpy(client->request.data,description,sizeof(*description));
-    }
-    error=exchange(client,&reply);
-    if (!error && !reply.result) error=reply.error;
-    while (!error && description && offset<description->bytes) {
-        count=description->bytes-offset;
-        if (count>CONSOLE_IO_DATA_BYTES) count=CONSOLE_IO_DATA_BYTES;
-        client->request.operation=CONSOLE_IO_VIDEO_DATA;
-        client->request.state.count=offset;
-        client->request.bytes=count;
-        memcpy(client->request.data,(const BYTE *)pixels+offset,count);
-        error=exchange(client,&reply);
-        if (!error && !reply.result) error=reply.error;
-        offset+=count;
-    }
+    if(description && description->kind==CONSOLE_VIDEO_TEXT_CONFIGURATION &&
+        description->bytes==sizeof(console_text_style) && client->configuration_sent &&
+        !memcmp(pixels,&client->sent_configuration.style,sizeof(console_text_style)) &&
+        !memcmp(description->palette,client->sent_configuration.palette,
+            sizeof(client->sent_configuration.palette)))goto done;
+    error=ntkvm_worker_video(&client->channel,description,pixels);
+    if(!error && description && description->kind==CONSOLE_VIDEO_TEXT_CONFIGURATION &&
+        description->bytes==sizeof(console_text_style)) {
+        memcpy(&client->sent_configuration.style,pixels,sizeof(console_text_style));
+        memcpy(client->sent_configuration.palette,description->palette,
+            sizeof(client->sent_configuration.palette));
+        client->configuration_sent=TRUE;
+    } else if(!error)client->configuration_sent=FALSE;
 done:
     LeaveCriticalSection(&client->lock);
     SetLastError(error);
@@ -668,7 +623,7 @@ BOOL WINAPI MvdmWriteConsoleA(HANDLE output,const VOID *buffer,DWORD length,
     if (written) *written=0;
     if (reserved || (!buffer && length)) { SetLastError(ERROR_INVALID_PARAMETER);return FALSE; }
     EnterCriticalSection(&client->lock);
-    if (client->failure) { error=client->failure;goto done; }
+    if (client->channel.failure) { error=client->channel.failure;goto done; }
     do {
         chunk=length-total;
         if (chunk>CONSOLE_IO_DATA_BYTES) chunk=CONSOLE_IO_DATA_BYTES;
@@ -679,7 +634,7 @@ BOOL WINAPI MvdmWriteConsoleA(HANDLE output,const VOID *buffer,DWORD length,
         error=exchange(client,&reply);
         if (!error && reply.state.count>chunk)
             error=ERROR_INVALID_DATA;
-        if (error) { client->failure=error;break; }
+        if (error) { client->channel.failure=error;break; }
         total+=reply.state.count;
         if (!reply.result) { result=FALSE;error=reply.error;break; }
         if (reply.state.count!=chunk) break;
@@ -909,7 +864,7 @@ static BOOL cells_operation(console_client *client,BOOL write,BOOL wide,CHAR_INF
                 (reply.state.right>=reply.state.left && reply.state.bottom>=reply.state.top &&
                  (reply.state.left<s->left || reply.state.right>s->right ||
                   reply.state.top<s->top || reply.state.bottom>s->bottom))) {
-                error=client->failure=ERROR_INVALID_DATA;ok=FALSE;break;
+                error=client->channel.failure=ERROR_INVALID_DATA;ok=FALSE;break;
             }
             if (reply.state.right<reply.state.left || reply.state.bottom<reply.state.top) continue;
             if (first) {
@@ -968,45 +923,6 @@ BOOL WINAPI MvdmReadConsoleOutputW(HANDLE output,PCHAR_INFO buffer,COORD size,
     return cells_operation(client,FALSE,TRUE,buffer,size,origin,region);
 }
 
-static BOOL decode_input(const console_io_input *wire,INPUT_RECORD *record)
-{
-    if(wire->type==CONSOLE_INPUT_RELATIVE_MOUSE) {
-        console_mouse_input mouse;
-        if(wire->buttons>3 || wire->flags>UINT16_MAX)return FALSE;
-        mouse.dx=wire->x;mouse.dy=wire->y;mouse.buttons=(uint16_t)wire->buttons;
-        mouse.action=(uint16_t)wire->flags;mouse.width=(uint16_t)wire->control;
-        mouse.height=(uint16_t)(wire->control>>16);
-        if(!console_mouse_input_valid(&mouse))return FALSE;
-        ZeroMemory(record,sizeof(*record));record->EventType=CONSOLE_INPUT_RELATIVE_MOUSE;
-        memcpy(&record->Event,&mouse,sizeof(mouse));return TRUE;
-    }
-    if (wire->type>UINT16_MAX || wire->repeat>UINT16_MAX || wire->virtual_key>UINT16_MAX ||
-        wire->scan>UINT16_MAX || wire->character>UINT16_MAX || wire->key_down>1 || wire->focus>1 ||
-        wire->x<SHRT_MIN || wire->x>SHRT_MAX || wire->y<SHRT_MIN || wire->y>SHRT_MAX) return FALSE;
-    ZeroMemory(record,sizeof(*record));record->EventType=(WORD)wire->type;
-    switch (wire->type) {
-    case KEY_EVENT:
-        record->Event.KeyEvent.bKeyDown=wire->key_down;
-        record->Event.KeyEvent.wRepeatCount=(WORD)wire->repeat;
-        record->Event.KeyEvent.wVirtualKeyCode=(WORD)wire->virtual_key;
-        record->Event.KeyEvent.wVirtualScanCode=(WORD)wire->scan;
-        record->Event.KeyEvent.uChar.UnicodeChar=(WCHAR)wire->character;
-        record->Event.KeyEvent.dwControlKeyState=wire->control;break;
-    case MOUSE_EVENT:
-        record->Event.MouseEvent.dwMousePosition.X=(SHORT)wire->x;
-        record->Event.MouseEvent.dwMousePosition.Y=(SHORT)wire->y;
-        record->Event.MouseEvent.dwButtonState=wire->buttons;
-        record->Event.MouseEvent.dwControlKeyState=wire->control;
-        record->Event.MouseEvent.dwEventFlags=wire->flags;break;
-    case WINDOW_BUFFER_SIZE_EVENT:
-        record->Event.WindowBufferSizeEvent.dwSize.X=(SHORT)wire->x;
-        record->Event.WindowBufferSizeEvent.dwSize.Y=(SHORT)wire->y;break;
-    case MENU_EVENT:record->Event.MenuEvent.dwCommandId=wire->menu;break;
-    case FOCUS_EVENT:record->Event.FocusEvent.bSetFocus=wire->focus;break;
-    default:return FALSE;
-    }
-    return TRUE;
-}
 
 static BOOL input_operation(HANDLE input,INPUT_RECORD *records,DWORD length,LPDWORD read,BOOL peek)
 {
@@ -1026,12 +942,12 @@ static BOOL input_operation(HANDLE input,INPUT_RECORD *records,DWORD length,LPDW
     if (!error && !ok) error=reply.error;
     if (ok && (reply.state.count>client->request.state.count ||
         reply.bytes!=reply.state.count*sizeof(console_io_input))) {
-        error=client->failure=ERROR_INVALID_DATA;ok=FALSE;
+        error=client->channel.failure=ERROR_INVALID_DATA;ok=FALSE;
     }
     for (i=0;ok && i<reply.state.count;i++) {
         console_io_input wire;
         memcpy(&wire,reply.data+i*sizeof(wire),sizeof(wire));
-        if (!decode_input(&wire,&records[i])) { error=client->failure=ERROR_INVALID_DATA;ok=FALSE; }
+        if (!decode_input(&wire,&records[i])) { error=client->channel.failure=ERROR_INVALID_DATA;ok=FALSE; }
     }
     if (ok) *read=reply.state.count;
     if (ok) {
@@ -1055,7 +971,7 @@ BOOL ntvdm_console_prepend_keys(HANDLE input,PINPUT_RECORD records,DWORD length,
 {
     console_client *client=input_client(input);
     console_io_reply reply;
-    DWORD i,error=ERROR_SUCCESS;
+    DWORD error=ERROR_SUCCESS;
     BOOL ok=FALSE;
     if (!client) {
         typedef BOOL (WINAPI *write_vdm_input)(HANDLE,PINPUT_RECORD,DWORD,LPDWORD);
@@ -1071,26 +987,10 @@ BOOL ntvdm_console_prepend_keys(HANDLE input,PINPUT_RECORD records,DWORD length,
         SetLastError(ERROR_INVALID_PARAMETER);return FALSE;
     }
     EnterCriticalSection(&client->lock);
-    ZeroMemory(&client->request,offsetof(console_io_request,data));
-    client->request.operation=CONSOLE_IO_PREPEND_KEYS;
-    client->request.state.count=length;
-    client->request.bytes=length*sizeof(console_io_input);
-    for (i=0;i<length;i++) {
-        console_io_input wire={0};
-        const KEY_EVENT_RECORD *key=&records[i].Event.KeyEvent;
-        if (records[i].EventType!=KEY_EVENT) { error=ERROR_INVALID_DATA;goto done_prepend; }
-        wire.type=KEY_EVENT;wire.key_down=key->bKeyDown!=FALSE;
-        wire.repeat=key->wRepeatCount;wire.virtual_key=key->wVirtualKeyCode;
-        wire.scan=key->wVirtualScanCode;wire.character=key->uChar.UnicodeChar;
-        wire.control=key->dwControlKeyState;
-        memcpy(client->request.data+i*sizeof(wire),&wire,sizeof(wire));
-    }
-    error=exchange(client,&reply);
+    error=ntkvm_worker_prepend_keys(&client->channel,records,length,&reply);
     if (!error) {
-        if (reply.state.count>length) error=client->failure=ERROR_INVALID_DATA;
-        else { *written=reply.state.count;ok=reply.result;if (!ok) error=reply.error; }
+        *written=reply.state.count;ok=reply.result;if (!ok) error=reply.error;
     }
-done_prepend:
     LeaveCriticalSection(&client->lock);
     if (error) SetLastError(error);
     return ok;

@@ -10,17 +10,25 @@ function Assert-FinalSnapshot([string[]]$Lines,[string]$Epoch){
         if([int]$Matches[3] -eq 1 -and ([int]$Matches[5] -ne 0 -or [int]$Matches[4] -in @(1,2))){
             throw 'Unfinished DOS record remains after the twelve targets returned'
         }
+        if([int]$Matches[3] -eq 4 -and ([int]$Matches[2] -ne 0 -or
+            [int]$Matches[4] -ne 8 -or [int]$Matches[5] -ne 0 -or $Matches[6] -ne '<EMPTY>')){
+            throw 'Native worker is not empty/ready after the twelve targets returned'
+        }
     }
 }
 # Parser controls distinguish a legitimate empty/READY snapshot from missing
 # evidence, changed broker identity and pending or busy original DOS records.
 Assert-FinalSnapshot @('EPOCH 123') '123'
 Assert-FinalSnapshot @('EPOCH 123','RECORD 5 0 1 8 0 <EMPTY>') '123'
+Assert-FinalSnapshot @('EPOCH 123','RECORD 6 0 4 8 0 <EMPTY>') '123'
 foreach($negative in @(
     @{Lines=@()}, @{Lines=@('EPOCH 124')},
     @{Lines=@('EPOCH 123','RECORD 5 0 1 1 0 COMMAND.COM')},
     @{Lines=@('EPOCH 123','RECORD 5 0 1 2 1 COMMAND.COM')},
     @{Lines=@('EPOCH 123','RECORD 5 0 1 8 1 COMMAND.COM')},
+    @{Lines=@('EPOCH 123','RECORD 6 0 4 2 1 cmd.exe')},
+    @{Lines=@('EPOCH 123','RECORD 6 0 4 8 1 <EMPTY>')},
+    @{Lines=@('EPOCH 123','RECORD 6 1 4 8 0 <EMPTY>')},
     @{Lines=@('EPOCH 123','INVALID')})){
     $rejected=$false
     try { Assert-FinalSnapshot $negative.Lines '123' } catch {$rejected=$true}
@@ -74,5 +82,5 @@ foreach($case in $cases){
     if($sequences.Count -ne 2 -or $sequences[1] -eq $sequences[2]){throw 'Missing separate original DOS worker identities'}
     $final=@(Get-Content "$events.records-1-RETURN")
     Assert-FinalSnapshot $final $epoch
-    Write-Output "PASS $($case.Case) original DOS identities, nested return, retained first-group stack and no unfinished final DOS task"
+    Write-Output "PASS $($case.Case) original DOS identities, nested return, retained first-group stack and empty final DOS/native records"
 }

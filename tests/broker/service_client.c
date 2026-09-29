@@ -7,7 +7,7 @@
 #include <stdint.h>
 #include "service.h"
 #include "ntsrv-exe/transport/rpc_security.h"
-#include "product-abi/version.h"
+#include "interface/version.h"
 void *__RPC_USER midl_user_allocate(size_t bytes) { return malloc(bytes); }
 void __RPC_USER midl_user_free(void *value) { free(value); }
 static int phase;

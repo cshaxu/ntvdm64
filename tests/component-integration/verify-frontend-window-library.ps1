@@ -24,40 +24,27 @@ foreach ($row in $manifest.files) {
 }
 New-Item -ItemType Directory -Force -Path $output | Out-Null
 & (Join-Path $repo 'tools/build/Generate-FrontendFont.ps1') -OutputFile (Join-Path $output 'native_pc_font.h')
-& (Join-Path $repo 'tools/build/Build-FrontendTerminalLibrary.ps1') -BuildRoot (Join-Path $BuildRoot 'terminal')
-$terminalLibrary = Join-Path $output 'terminal/libvterm.lib'
-$terminalInclude = Join-Path $output 'terminal/libvterm-0.3.3/include'
 $objects = @()
 $sources += Join-Path $owner 'window_frame.c'
 $sources += Join-Path $owner 'text_frame.c'
 $sources += Join-Path $owner 'window_controller.c'
 $sources += Join-Path $owner 'window_input_queue.c'
 $sources += Join-Path $owner 'window_keyboard.c'
-$sources += Join-Path $owner 'native_console_backend.c'
-$sources += Join-Path $owner 'native_conpty.c'
-$sources += Join-Path $owner 'native_terminal.c'
-$sources += Join-Path $owner 'native_console_launch.c'
+$sources += Join-Path $repo 'src/ntcon-exe/text_frame.c'
 $sources += Join-Path $owner 'console_video.c'
 $sources += Join-Path $PSScriptRoot 'frontend_window_library_test.c'
 for ($index = 0; $index -lt $sources.Count; ++$index) {
     $object = Join-Path $output "$index.obj"
-    & cl.exe /nologo /c /MT /std:c11 /W4 /DWIN32_LEAN_AND_MEAN /D_WIN32_WINNT=0x0601 "/I$owner" "/I$repo/src" "/I$output" "/I$terminalInclude" "/Fo$object" $sources[$index]
+    & cl.exe /nologo /c /MT /std:c11 /W4 /DWIN32_LEAN_AND_MEAN /D_WIN32_WINNT=0x0601 "/I$owner" "/I$repo/src" "/I$output" "/Fo$object" $sources[$index]
     if ($LASTEXITCODE) { throw "Compilation failed: $($sources[$index])" }
     $objects += $object
 }
 $exe = Join-Path $output 'frontend-window-library-test.exe'
-& link.exe /nologo /machine:x86 "/out:$exe" @objects $terminalLibrary user32.lib gdi32.lib
+& link.exe /nologo /machine:x86 "/out:$exe" @objects user32.lib gdi32.lib
 if ($LASTEXITCODE) { throw 'Window library link failed' }
 & $exe
 if ($LASTEXITCODE) { throw 'Window library assertions failed' }
-$controllerObject = Join-Path $output 'controller-test.obj'
-& cl.exe /nologo /c /MT /std:c11 /W4 /DWIN32_LEAN_AND_MEAN /D_WIN32_WINNT=0x0601 "/I$owner" "/I$repo/src" "/I$terminalInclude" "/Fo$controllerObject" (Join-Path $PSScriptRoot 'frontend_window_controller_test.c')
-if ($LASTEXITCODE) { throw 'Window controller fixture compilation failed' }
-$controllerExe = Join-Path $output 'frontend-window-controller-test.exe'
-$controllerObjects = @($objects[0..($objects.Count-2)]) + $controllerObject
-& link.exe /nologo /machine:x86 "/out:$controllerExe" @controllerObjects $terminalLibrary user32.lib gdi32.lib
-if ($LASTEXITCODE) { throw 'Window controller fixture link failed' }
-Write-Output 'Controller fixture built; requires unswitched private-desktop observer to execute.'
+Write-Output 'Retired ConPTY controller fixture is not built here; actual Window input/return is gated by Verify-CommandExitStatus Window17.'
 $keyboardObject = Join-Path $output 'window-keyboard.obj'
 $keyboardTestObject = Join-Path $output 'keyboard-test.obj'
 & cl.exe /nologo /c /MT /std:c11 /W4 /D_WIN32_WINNT=0x0601 "/I$owner" "/Fo$keyboardObject" (Join-Path $owner 'window_keyboard.c')

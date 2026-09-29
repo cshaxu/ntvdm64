@@ -1,22 +1,16 @@
 #include "session_service.h"
 #include "console_channel.h"
-#include "native_console_request.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
 typedef struct frontend_channel {
     struct frontend_channel *next;
     run16_console_channel *channel;
 } frontend_channel;
-typedef struct frontend_native_request {
-    struct frontend_native_request *next;
-    run16_native_request *request;
-} frontend_native_request;
 struct frontend_session_service {
     HANDLE capability,notification,stop,thread;
     HANDLE creator;
     BOOL admitted;
     frontend_channel *channels;
     run16_native_frontend *native;
-    frontend_native_request *requests;
     void (*channel_ready)(void);
 };
 static DWORD WINAPI frontend_pump(void *context)
@@ -33,7 +27,6 @@ static DWORD WINAPI frontend_pump(void *context)
             DWORD request=0;
             frontend_channel *entry;
             frontend_channel **link=&scope->channels;
-            frontend_native_request **native_link=&scope->requests,*native_entry;
             if (WaitForSingleObject(scope->stop,0)==WAIT_OBJECT_0) return ERROR_SUCCESS;
             /* This pump alone owns the list. Retire only joined channels;
              * live workers and their task lifetimes are not affected. */
@@ -43,27 +36,6 @@ static DWORD WINAPI frontend_pump(void *context)
                     run16_console_channel_stop(entry->channel);
                     HeapFree(GetProcessHeap(),0,entry);
                 } else link=&entry->next;
-            }
-            while ((native_entry=*native_link)!=NULL) {
-                if(WaitForSingleObject(run16_native_request_thread(native_entry->request),0)==WAIT_OBJECT_0) {
-                    *native_link=native_entry->next;
-                    run16_native_request_close(native_entry->request);HeapFree(GetProcessHeap(),0,native_entry);
-                } else native_link=&native_entry->next;
-            }
-            {
-                HANDLE pipe=NULL,sender=NULL,execution=NULL;
-                error=OpenNtBaseClientTakeFrontendChannel(&pipe,&sender,&execution);
-                if(!error) {
-                    native_entry=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*native_entry));
-                    if(!native_entry) { CloseHandle(pipe);CloseHandle(sender);CloseHandle(execution);return ERROR_NOT_ENOUGH_MEMORY; }
-                    error=run16_native_request_start(scope->native,scope->capability,scope->stop,
-                        pipe,sender,execution,&native_entry->request);
-                    if(error) { HeapFree(GetProcessHeap(),0,native_entry);return error; }
-                    native_entry->next=scope->requests;scope->requests=native_entry;
-                    scope->admitted=TRUE;
-                    continue;
-                }
-                if(error!=ERROR_NOT_FOUND)return error;
             }
             error=OpenNtBaseClientFrontendRequest(&request,&worker);
             if (error==ERROR_NOT_FOUND) break;
@@ -80,13 +52,13 @@ static DWORD WINAPI frontend_pump(void *context)
             scope->admitted=TRUE;
             if (scope->channel_ready) scope->channel_ready();
         }
-        if(scope->creator && !scope->requests &&
+        if(scope->creator &&
             (scope->admitted || WaitForSingleObject(scope->creator,0)==WAIT_OBJECT_0)){
-            DWORD pending=0,tasks=0,members=0;
+            DWORD pending=0,tasks=0;
             error=OpenNtBaseClientFrontendUsage(&pending,&tasks);if(error)return error;
+            /* NTSRV includes native admissions and reported Console members.
+             * The frontend owns neither targets nor a second backend census. */
             if(pending || tasks)continue;
-            error=run16_native_frontend_members(scope->native,&members);if(error)return error;
-            if(members)continue;
             error=OpenNtBaseClientRetireFrontend();
             if(error==ERROR_BUSY)continue;
             if(error)return error;
@@ -108,17 +80,12 @@ static DWORD WINAPI frontend_pump(void *context)
 void frontend_service_close(frontend_session_service *scope)
 {
     frontend_channel *entry;
-    frontend_native_request *native_entry;
     if (!scope) return;
     if (scope->stop) SetEvent(scope->stop);
     run16_native_frontend_cancel(scope->native);
     if (scope->thread) {
         WaitForSingleObject(scope->thread,INFINITE);
         CloseHandle(scope->thread);
-    }
-    while((native_entry=scope->requests)!=NULL) {
-        scope->requests=native_entry->next;run16_native_request_close(native_entry->request);
-        HeapFree(GetProcessHeap(),0,native_entry);
     }
     while ((entry=scope->channels)!=NULL) {
         scope->channels=entry->next;

@@ -3,6 +3,24 @@
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include <stdio.h>
+#include "console_snapshot.h"
+
+static BOOL record_console(FILE *trace,const char *phase)
+{
+    CONSOLE_SCREEN_BUFFER_INFO info;char *cells=NULL;DWORD count=0,row,column,error;
+    error=observer_console_snapshot(GetStdHandle(STD_OUTPUT_HANDLE),&info,&cells,&count);
+    fprintf(trace,"native-screen phase=%s error=%lu\n",phase,error);
+    if(error){fflush(trace);return FALSE;}
+    fprintf(trace,"size=%d,%d cursor=%d,%d viewport=%d,%d,%d,%d\n",
+        info.dwSize.X,info.dwSize.Y,info.dwCursorPosition.X,info.dwCursorPosition.Y,
+        info.srWindow.Left,info.srWindow.Top,info.srWindow.Right,info.srWindow.Bottom);
+    for(row=0;row<(DWORD)info.dwSize.Y;++row) {
+        const char *line=cells+row*info.dwSize.X;
+        for(column=info.dwSize.X;column && (line[column-1]==' ' || !line[column-1]);--column){}
+        if(column)fprintf(trace,"[%lu] %.*s\n",row,(int)column,line);
+    }
+    free(cells);fflush(trace);return TRUE;
+}
 
 static BOOL CALLBACK observe_window(HWND window,LPARAM context)
 {
@@ -42,7 +60,9 @@ int main(int argc,char **argv)
     /* COMMAND has printed DOS-INTERVAL and is waiting on CGDONE. Native output
      * therefore arrives while the actual DOS task is still active. */
     phase="native-output";
+    if(!record_console(trace,"before-native-during"))goto done;
     if(!output(L"NATIVE-DURING-DOS\r\n"))goto done;
+    if(!record_console(trace,"after-native-during"))goto done;
     file=CreateFileW(L"tests\\CGDONE",GENERIC_WRITE,FILE_SHARE_READ,NULL,CREATE_NEW,0,NULL);
     if(file==INVALID_HANDLE_VALUE)goto done;
     CloseHandle(file);
@@ -50,6 +70,7 @@ int main(int argc,char **argv)
     if(WaitForSingleObject(child.hProcess,15000)!=WAIT_OBJECT_0 ||
        !GetExitCodeProcess(child.hProcess,&result) || result) {result=1;goto done;}
     if(!output(L"NATIVE-AFTER-DOS\r\nPASS REAL-GUEST-CONCURRENT result=0\r\n"))result=1;
+    if(!record_console(trace,"after-native-final"))result=1;
 done:
     if(result) {
         DWORD code=0;GetExitCodeProcess(child.hProcess,&code);

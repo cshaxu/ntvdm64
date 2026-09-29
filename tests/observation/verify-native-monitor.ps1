@@ -14,7 +14,7 @@ if(!$physical.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::Ordin
 }
 if($LogPrefix -notmatch '^[a-z0-9-]+$'){throw 'Invalid log prefix'}
 $paths=@()
-foreach($name in @('run16.exe','ntkvm.exe','ntsrv.exe','ntmon.exe')){
+foreach($name in @('run16.exe','ntkvm.exe','ntsrv.exe','ntmon.exe','ntcon.exe')){
     $launch=Join-Path $PackageRoot $name;$actual=Join-Path $physical $name
     if((Get-FileHash $launch).Hash -ne (Get-FileHash $actual).Hash){throw 'Candidate identity mismatch'}
     $paths+=@($launch,$actual)
@@ -39,6 +39,9 @@ try {
                 --observe-console-function-key 3 (Join-Path $PackageRoot 'ntmon.exe')
             if($LASTEXITCODE){throw 'Observer failed'}
             $record=Get-Content $report -Raw
+            if(!(Test-Path ($report+'.pre-input-console.txt.console.txt'))){
+                throw "NTMon never reached the title/input gate in $mode; see $report"
+            }
             $screen=Get-Content ($report+'.pre-input-console.txt.console.txt') -Raw
             if($record -notmatch '(?m)^result=exited\r?$' -or
                $record -notmatch '(?m)^exit=0x00000000\r?$' -or
@@ -53,7 +56,7 @@ try {
                 $inputRecord=Get-Content ($report+'.window-input.txt') -Raw
                 if($inputRecord -notmatch 'frontend=\d+ input-delivered=1 '){throw 'Window did not receive the function key'}
             }
-            Write-Output "PASS actual NTMon $mode title, F3 input and direct exit 0 through ConPTY"
+            Write-Output "PASS actual NTMon $mode title, F3 input and direct exit 0 through NTCON"
         } finally {
             Get-CimInstance Win32_Process | Where-Object {$_.ExecutablePath -in $paths} | ForEach-Object {
                 $process=Get-Process -Id $_.ProcessId -ErrorAction SilentlyContinue

@@ -2,7 +2,7 @@
 "%~1" "%~3" --identity BEFORE
 if not errorlevel 37 exit /b 80
 if errorlevel 38 exit /b 81
-"%~1" "%~2" "%~1" "%~2" "%~1" "%~2" "%~1" "%~3" --identity INNER > "%~4"
+"%~1" --wait "%~2" "%~1" --wait "%~2" "%~1" --wait "%~2" "%~1" "%~3" --identity INNER > "%~4"
 set "GUI_RESULT=%errorlevel%"
 type "%~4"
 echo GUI-SEGMENT-RETURN-%GUI_RESULT%

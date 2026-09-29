@@ -10,10 +10,11 @@ to the caller's documented recovery path.  In particular, a user selecting
 worker blocked before it notifies BaseSrv.
 
 This queued package follows
-[WOW32 production completion](proposal-wow32-production-completion-002.md)
-and precedes product experience repair; it does not alter the active packet.
+[WOW32 integrated acceptance](proposal-wow32-integrated-acceptance-001.md)
+and the preceding split WOW32 owner packages
+and precedes whole-closure recovery; it does not alter the active packet.
 Error-response or termination edges necessary for earlier WOW execution must
-be explicitly assigned to its earliest consuming S and verified there, not
+be explicitly assigned to its earliest consuming WOW32 candidate and local S and verified there, not
 postponed to this candidate. Reuse those stable caller IDs and tests here;
 S1 reconciles changed/uncovered callers, and S4 verifies residual WOW edges
 without rebuilding an already completed provider. It is a

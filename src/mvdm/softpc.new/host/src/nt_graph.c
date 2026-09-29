@@ -844,6 +844,10 @@ void nt_graphics_tick(void)
     if (sc.ScreenState == STREAM_IO) {
 	if (++flush_count == TICKS_PER_FLUSH){
 	    stream_io_update();
+            /* DIVERGENCE(MVDM-HOST-DIV-314): copy configuration without
+               forcing the original stream-to-video transition. */
+            if (!NtvdmConsoleUpdateTextConfiguration(sc.ColPalette))
+                DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);
 	    flush_count = 0;
 	}
 	return;

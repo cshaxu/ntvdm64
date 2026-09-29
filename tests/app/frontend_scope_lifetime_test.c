@@ -7,10 +7,9 @@
 #include <string.h>
 #include "run16-exe/frontend_scope.h"
 #include "ntkvm-exe/console_channel.h"
-#include "ntkvm-exe/native_console_request.h"
 #include "ntkvm-exe/session_service.h"
 #include "ntkvm-exe/bootstrap.h"
-#include "product-abi/console_io.h"
+#include "interface/console_io.h"
 
 #define CHECK(x) do { if (!(x)) { fprintf(stderr,"line %u error %lu: %s\n", \
     (unsigned)__LINE__,GetLastError(),#x); ExitProcess(1); } } while (0)
@@ -24,6 +23,9 @@ static LONG stopped;
 static DWORD registrations,retains,bindings,retain_error=ERROR_ACCESS_DENIED;
 static HANDLE expected_execution;
 static frontend_session_service *fixture_service;
+static BOOL retirement_mode;
+static volatile LONG usage_pending,retire_calls,drain_calls;
+static HANDLE usage_seen;
 static void attached(void);
 DWORD frontend_bootstrap_start(PCWSTR image,frontend_connection *connection)
 {
@@ -48,27 +50,41 @@ struct run16_native_frontend { DWORD unused; };
 DWORD run16_native_frontend_create(run16_native_frontend **out)
 { *out=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(**out));return *out ? 0 : ERROR_NOT_ENOUGH_MEMORY; }
 void run16_native_frontend_cancel(run16_native_frontend *value) { (void)value; }
-DWORD run16_native_frontend_members(run16_native_frontend *value,DWORD *count)
-{ (void)value;(void)count;return ERROR_INVALID_FUNCTION; }
 DWORD run16_native_frontend_drain(run16_native_frontend *value)
-{ (void)value;return ERROR_INVALID_FUNCTION; }
+{ (void)value;CHECK(retirement_mode);InterlockedIncrement(&drain_calls);return 0; }
 DWORD OpenNtBaseClientFrontendUsage(DWORD *pending_count,DWORD *tasks)
-{ (void)pending_count;(void)tasks;return ERROR_INVALID_FUNCTION; }
-DWORD OpenNtBaseClientRetireFrontend(void) { return ERROR_INVALID_FUNCTION; }
+{
+    CHECK(retirement_mode);
+    *pending_count=(DWORD)InterlockedCompareExchange(&usage_pending,0,0);*tasks=0;
+    CHECK(SetEvent(usage_seen));return 0;
+}
+DWORD OpenNtBaseClientRetireFrontend(void)
+{
+    CHECK(retirement_mode);
+    /* Admission can race the idle snapshot; the service barrier wins. */
+    return InterlockedIncrement(&retire_calls)==1 ? ERROR_BUSY : ERROR_SUCCESS;
+}
 void run16_native_frontend_destroy(run16_native_frontend *value) { if(value)HeapFree(GetProcessHeap(),0,value); }
-DWORD run16_native_frontend_launch(run16_native_frontend *value,const run16_native_start *start,HANDLE *out)
-{ (void)value;(void)start;*out=NULL;return ERROR_NOT_SUPPORTED; }
-DWORD run16_native_frontend_wait(run16_native_frontend *value,HANDLE target,DWORD *result)
-{ (void)value;(void)target;(void)result;return ERROR_NOT_SUPPORTED; }
-DWORD OpenNtBaseClientTakeFrontendChannel(HANDLE *channel,HANDLE *caller,HANDLE *execution)
-{ *channel=*caller=*execution=NULL;return ERROR_NOT_FOUND; }
-DWORD run16_native_request_start(run16_native_frontend *value,HANDLE root,HANDLE stop,
-    HANDLE channel,HANDLE sender,HANDLE execution,run16_native_request **out)
-{ (void)value;(void)root;(void)stop;(void)channel;(void)sender;(void)execution;*out=NULL;return ERROR_NOT_SUPPORTED; }
-HANDLE run16_native_request_thread(run16_native_request *value) { (void)value;return NULL; }
-void run16_native_request_close(run16_native_request *value) { (void)value; }
-DWORD run16_native_request_submit_receipt(HANDLE root,HANDLE capability,const run16_native_start *start,HANDLE *out,HANDLE *receipt)
-{ (void)root;(void)capability;(void)start;*out=*receipt=NULL;return ERROR_NOT_SUPPORTED; }
+DWORD run16_native_worker_request_submit(HANDLE worker,HANDLE capability,const run16_native_start *start,HANDLE *out,HANDLE *receipt)
+{ (void)worker;(void)capability;(void)start;*out=*receipt=NULL;return ERROR_NOT_SUPPORTED; }
+DWORD run16_native_worker_request_begin(HANDLE worker,HANDLE capability,const run16_native_start *start,HANDLE *out,HANDLE *receipt,HANDLE *completion)
+{ *completion=NULL;return run16_native_worker_request_submit(worker,capability,start,out,receipt); }
+DWORD run16_native_worker_request_finish(HANDLE completion,HANDLE worker,HANDLE frontend)
+{ (void)completion;(void)worker;(void)frontend;CHECK(FALSE);return ERROR_NOT_SUPPORTED; }
+DWORD run16_native_worker_request_resume(HANDLE worker,HANDLE capability)
+{ (void)worker;(void)capability;CHECK(FALSE);return ERROR_NOT_SUPPORTED; }
+DWORD OpenNtBaseClientSelectNativeWorker(HANDLE *worker)
+{ *worker=NULL;return ERROR_NOT_SUPPORTED; }
+DWORD OpenNtBaseClientRequestFrontend(HANDLE capability)
+{ (void)capability;CHECK(FALSE);return ERROR_NOT_SUPPORTED; }
+DWORD OpenNtBaseClientReserveNativeWorker(uint64_t *reservation)
+{ *reservation=0;return ERROR_NOT_SUPPORTED; }
+DWORD OpenNtBaseClientReleaseWorker(uint64_t reservation)
+{ (void)reservation;return ERROR_NOT_SUPPORTED; }
+DWORD run16_worker_prepare(uint64_t reservation,PCWSTR image,PWSTR command,void *environment,
+    DWORD flags,const STARTUPINFOW *startup,PROCESS_INFORMATION *worker)
+{ (void)reservation;(void)image;(void)command;(void)environment;(void)flags;(void)startup;
+  ZeroMemory(worker,sizeof(*worker));return ERROR_NOT_SUPPORTED; }
 
 DWORD OpenNtBaseClientRegisterFrontendRoot(HANDLE value)
 {
@@ -147,6 +163,23 @@ static void submit(DWORD id)
     CHECK(SetEvent(notification));
     LeaveCriticalSection(&lock);
     CHECK(WaitForSingleObject(ready,5000)==WAIT_OBJECT_0);
+}
+static void service_controls_retirement(void)
+{
+    frontend_session_service *service=NULL;
+    HANDLE creator=CreateEventW(NULL,TRUE,TRUE,NULL);
+    usage_seen=CreateEventW(NULL,TRUE,FALSE,NULL);CHECK(creator && usage_seen);
+    retirement_mode=TRUE;usage_pending=1;
+    CHECK(!frontend_service_start_process(notification,notification,creator,&service));
+    CHECK(WaitForSingleObject(usage_seen,5000)==WAIT_OBJECT_0);
+    CHECK(WaitForSingleObject(frontend_service_thread(service),0)==WAIT_TIMEOUT);
+    CHECK(!retire_calls && !drain_calls);
+    InterlockedExchange(&usage_pending,0);CHECK(SetEvent(notification));
+    CHECK(WaitForSingleObject(frontend_service_thread(service),5000)==WAIT_OBJECT_0);
+    CHECK(retire_calls==2 && drain_calls==1);
+    frontend_service_close(service);
+    retirement_mode=FALSE;CloseHandle(usage_seen);CloseHandle(creator);
+    puts("PASS service-reported native usage pins frontend; raced admission retries retirement; no local backend census");
 }
 int main(void)
 {
@@ -232,6 +265,7 @@ int main(void)
     frontend_service_close(fixture_service);
     CHECK(stopped==COUNT);
     for (i=0;i<COUNT;++i) CHECK(!channels[i]);
+    service_controls_retirement();
     CloseHandle(notification);CloseHandle(ready);DeleteCriticalSection(&lock);
     puts("PASS completed channels reclaimed; live channel preserved; final join complete");
     return 0;

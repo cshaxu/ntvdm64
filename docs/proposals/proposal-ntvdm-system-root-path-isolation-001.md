@@ -2,8 +2,10 @@
 
 ## Objective and admission
 
-Owner-requested candidate dated 2026-09-27, appended to the end of the
-[queue](../states/QUEUE.md). This is planning only: no numeric T allocation,
+Owner-requested candidate dated 2026-09-27, promoted to the head of the
+[queue](../states/QUEUE.md) by owner direction on 2026-09-28. It precedes the
+CCPU40/V86 contract audit and the split WOW32 packages. This is planning only:
+no numeric T allocation,
 active-packet change, production repair or runtime acceptance is claimed.
 
 Introduce the product-scoped environment variable `NtvdmSystemRoot`, derived
@@ -74,7 +76,7 @@ Classification is by invocation role, not filename extension or package presence
 
 | Role | Selected examples | Policy |
 | --- | --- | --- |
-| Internal executable | frontend.exe, ntvdm.exe, basesrv.exe; internally invoked run16.exe; frontend's self-helper | Accurate package-relative path from the established root; helper remains a role, not a new EXE. |
+| Internal executable | ntkvm.exe, ntvdm.exe, ntsrv.exe; internally invoked run16.exe | Accurate package-relative path from the established root; use the actual selected package at admission, without reviving a retired helper. |
 | Internal DOS interpreter | Product-generated COMMAND.COM /c and startup interpreter selection | Explicit package interpreter path; distinguish from a user's command request. |
 | Host product modules | WOW32.DLL, VDMREDIR.DLL | Root-derived module identity through their existing loader boundaries. |
 | Guest system media/config | NTIO.SYS, NTDOS.SYS, KRNL386.EXE, DOSX, HIMEM, REDIR, MSCDEXNT, CONFIG.NT, AUTOEXEC.NT, SYSTEM.INI and configured guest dependencies | Declared package-relative layout and original configuration/loader semantics, not generic application PATH injection. |
@@ -120,6 +122,6 @@ links and diff checks, not a build or redeployment.
 
 No ConPTY migration, helper executable split, guest patch, global environment
 or system registry mutation, new scheduler, broad DLL-loader replacement or
-unrelated frontend work. The earlier product-experience/minimization candidates
-may supply reusable evidence; this candidate owns this specific root/search
+unrelated frontend work. Existing product-experience/minimization evidence may be reused; those
+candidates now follow this package in Queue; this candidate owns this specific root/search
 repair and must not duplicate a repair already delivered before admission.

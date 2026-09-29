@@ -3,7 +3,7 @@
  * assembly with the admitted copied worker/frontend wire record. */
 #include "console_text.h"
 #include "console_client.h"
-#include "product-abi/console_io.h"
+#include "interface/console_io.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_text_video.h"
 #include <string.h>
 
@@ -84,4 +84,33 @@ done:
     if (text) HeapFree(GetProcessHeap(),0,text);
     if (payload) HeapFree(GetProcessHeap(),0,payload);
     SetLastError(error);return result;
+}
+
+BOOL NtvdmConsoleUpdateTextConfiguration(HPALETTE palette)
+{
+    mvdm_softpc_text_video video;
+    console_video_description description={0};
+    console_text_style style={0};
+    PALETTEENTRY colours[16];
+    session *owner=session_thread_current();
+    unsigned index;
+    if(!owner || !owner->console_client)return TRUE;
+    /* Snapshot on the original video owner. Do not initialize a Console,
+     * resize a screen, or disable STREAM_IO just to obtain its font. */
+    if(!mvdm_softpc_text_video_copy(&video))return TRUE;
+    if(!ntvdm_console_text_palette(colours)) {
+        if(GetLastError()!=ERROR_NO_DATA)return FALSE;
+        if(!palette)return TRUE; /* Original palette not initialized yet. */
+        if(GetPaletteEntries(palette,0,16,colours)!=16)return FALSE;
+    }
+    style.font_height=video.font_height;
+    style.attribute_font_select=video.attribute_font_select!=0;
+    memcpy(style.fonts,video.fonts,sizeof(style.fonts));
+    description.kind=CONSOLE_VIDEO_TEXT_CONFIGURATION;
+    description.bytes=sizeof(style);
+    for(index=0;index<16;++index)
+        description.palette[index]=((uint32_t)colours[index].peRed<<16) |
+            ((uint32_t)colours[index].peGreen<<8)|colours[index].peBlue;
+    return ntvdm_console_publish_video(&description,&style,sizeof(style)) ||
+        GetLastError()==ERROR_NOT_READY;
 }

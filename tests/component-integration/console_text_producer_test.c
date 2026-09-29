@@ -3,7 +3,7 @@
 #include "ntvdm-exe/win32/console_text.h"
 #include "ntvdm-exe/win32/console_client.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_text_video.h"
-#include "product-abi/console_io.h"
+#include "interface/console_io.h"
 #include <stdio.h>
 #include <string.h>
 #define CHECK(x) do { if (!(x)) { fprintf(stderr,"FAIL %d error=%lu\n",__LINE__,GetLastError()); return 1; } } while(0)
@@ -88,6 +88,16 @@ int main(void)
     query_result=0;query_error=ERROR_NOT_READY;CHECK(NtvdmConsoleTextRequested(&requested) && !requested);
     query_error=ERROR_BROKEN_PIPE;CHECK(!NtvdmConsoleTextRequested(&requested) && GetLastError()==ERROR_BROKEN_PIPE);
     CHECK(!NtvdmConsoleTextRequested(NULL) && GetLastError()==ERROR_INVALID_PARAMETER);
+    palette_error=0;snapshot_ok=FALSE;
+    CHECK(NtvdmConsoleUpdateTextConfiguration(NULL));
+    CHECK(description.kind==CONSOLE_VIDEO_TEXT_CONFIGURATION &&
+        !description.width && !description.height && !description.stride &&
+        description.bytes==sizeof(*style) && style->fonts[0][66][19]==0x5a &&
+        !style->cursor_visible && description.palette[9]==0x123456);
+    send_error=ERROR_NOT_READY;CHECK(NtvdmConsoleUpdateTextConfiguration(NULL));
+    send_error=ERROR_BROKEN_PIPE;CHECK(!NtvdmConsoleUpdateTextConfiguration(NULL));send_error=0;
+    palette_error=ERROR_NO_DATA;CHECK(NtvdmConsoleUpdateTextConfiguration(NULL));
+    palette_error=ERROR_ACCESS_DENIED;CHECK(!NtvdmConsoleUpdateTextConfiguration(NULL));
     puts("PASS production text packer: original backing stride, visible extent, dual/tall fonts, split cursor, resolved/startup palette, refusal, transport errors and frontend demand");
     return 0;
 }
