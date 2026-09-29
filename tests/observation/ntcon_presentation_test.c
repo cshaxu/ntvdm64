@@ -1,4 +1,5 @@
 #include "ntcon-exe/presentation.h"
+#include "ntcon-exe/console_state.h"
 #include "ntkvm-exe/console_video.h"
 #include "interface/worker_console_client.h"
 #include <stdio.h>
@@ -11,6 +12,7 @@ typedef struct peer_state {
     HANDLE pipe;
     unsigned mode,calls;
     unsigned activations,releases;
+    unsigned snapshot_begins,snapshot_ends,screen_reads;
     console_io_state screen;
     run16_console_video video;
     console_io_input returned[2*CONSOLE_IO_INPUT_CAPACITY+3];
@@ -52,7 +54,7 @@ static DWORD WINAPI peer(void *context)
         }
         reply.version=CONSOLE_IO_VERSION;reply.generation=17;reply.sequence=sequence;
         reply.result=error==0;reply.error=error;
-        if(state->mode==7 || state->mode==8) {
+        if(state->mode==7 || state->mode==8 || state->mode==19) {
             console_io_input events[3]={0};
             if(request.operation!=CONSOLE_IO_READ_INPUT)return ERROR_INVALID_FUNCTION;
             events[0].type=KEY_EVENT;events[0].key_down=1;events[0].repeat=1;
@@ -61,15 +63,30 @@ static DWORD WINAPI peer(void *context)
             events[2].type=MOUSE_EVENT;events[2].x=3;events[2].y=2;
             events[2].flags=MOUSE_MOVED;
             if(state->mode==8)events[2].type=0xffffffffu;
+            if(state->mode==19) {
+                ZeroMemory(events,sizeof(events));
+                events[0].type=events[1].type=events[2].type=CONSOLE_INPUT_POINTER;
+                events[0].flags=CONSOLE_MOUSE_ENTER;
+                events[1].flags=CONSOLE_MOUSE_MOVE;events[1].x=INT_MAX;events[1].y=INT_MAX;
+                events[1].buttons=1;events[1].control=SHIFT_PRESSED;
+                events[2].flags=CONSOLE_MOUSE_LEAVE;
+            }
             reply.state.count=3;reply.bytes=sizeof(events);
             memcpy(reply.data,events,sizeof(events));
         }
         if((state->mode>=9 && state->mode<=16) || (state->mode==6 && sequence>5)) {
-            if(request.operation==CONSOLE_IO_DOS_ACTIVE) {
+            if(request.operation==CONSOLE_IO_SNAPSHOT_BEGIN) {
+                if(state->snapshot_begins!=state->snapshot_ends)error=ERROR_BUSY;
+                else ++state->snapshot_begins;
+            } else if(request.operation==CONSOLE_IO_SNAPSHOT_END) {
+                if(state->snapshot_begins!=state->snapshot_ends+1)error=ERROR_INVALID_STATE;
+                else ++state->snapshot_ends;
+            } else if(request.operation==CONSOLE_IO_DOS_ACTIVE) {
                 if(request.state.input)++state->activations;else ++state->releases;
             } else if(request.operation==CONSOLE_IO_SCREEN_INFO) {
+                ++state->screen_reads;
                 reply.state=state->screen;
-                if(state->mode==10 && sequence>1)reply.state.x=5;
+                if(state->mode==10 && state->screen_reads>1)reply.state.x=5;
             } else if(request.operation==CONSOLE_IO_BUFFER_SIZE) {
                 /* Reject the exact regression: shrink before the previous
                  * viewport fits. This peer models only copied geometry;
@@ -130,7 +147,7 @@ static DWORD WINAPI peer(void *context)
                 return ERROR_INVALID_FUNCTION;
             reply.result=error==0;reply.error=error;
         }
-        if(state->mode>=17) {
+        if(state->mode==17 || state->mode==18) {
             reply.bytes=KL_NAMELENGTH;
             memcpy(reply.data,"00000409",KL_NAMELENGTH);
         }
@@ -169,7 +186,7 @@ static void run_case(unsigned mode)
         &process,SYNCHRONIZE,FALSE,0));
     CHECK(ntcon_presentation_open(client,process,stop,17,&endpoint)==0);
     if(!endpoint)goto done;
-    if(mode>=17) {
+    if(mode==17 || mode==18) {
         request.operation=mode==17 ? CONSOLE_IO_KEYBOARD_LAYOUT : CONSOLE_IO_BARRIER;
         error=ntcon_presentation_call(endpoint,&request,&reply);
         CHECK(error==(mode==17 ? ERROR_SUCCESS : ERROR_INVALID_DATA));
@@ -177,7 +194,7 @@ static void run_case(unsigned mode)
         if(mode==18)CHECK(ntcon_presentation_call(endpoint,&request,&reply)==ERROR_INVALID_DATA);
         goto done;
     }
-    if(mode==7 || mode==8) {
+    if(mode==7 || mode==8 || mode==19) {
         HANDLE input=CreateFileW(L"CONIN$",GENERIC_READ|GENERIC_WRITE,
             FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,OPEN_EXISTING,0,NULL);
         INPUT_RECORD records[4];DWORD accepted=99,count=0,original_mode=0;
@@ -187,10 +204,21 @@ static void run_case(unsigned mode)
             CHECK(SetConsoleMode(input,ENABLE_MOUSE_INPUT|ENABLE_EXTENDED_FLAGS));
             CHECK(FlushConsoleInputBuffer(input));
             error=ntcon_presentation_input(endpoint,input,&accepted);
-            CHECK(error==(mode==7 ? ERROR_SUCCESS : ERROR_INVALID_DATA));
-            CHECK(accepted==(mode==7 ? 3u : 0u));
+            CHECK(error==(mode==8 ? ERROR_INVALID_DATA : ERROR_SUCCESS));
+            CHECK(accepted==(mode==8 ? 0u : 3u));
             CHECK(PeekConsoleInputW(input,records,4,&count));
-            CHECK(count==(mode==7 ? 3u : 0u));
+            CHECK(count==(mode==8 ? 0u : 3u));
+            if(mode==19 && count==3) {
+                ntcon_capture capture={0};CHECK(!ntcon_capture_begin(&capture));
+                CHECK(records[0].EventType==MOUSE_EVENT && records[0].Event.MouseEvent.dwEventFlags==MOUSE_MOVED);
+                CHECK(records[0].Event.MouseEvent.dwMousePosition.X==capture.info.srWindow.Right &&
+                    records[0].Event.MouseEvent.dwMousePosition.Y==capture.info.srWindow.Bottom);
+                CHECK(!records[0].Event.MouseEvent.dwButtonState);
+                CHECK(records[1].Event.MouseEvent.dwButtonState==FROM_LEFT_1ST_BUTTON_PRESSED &&
+                    records[1].Event.MouseEvent.dwControlKeyState==SHIFT_PRESSED);
+                CHECK(records[2].EventType==MOUSE_EVENT && !records[2].Event.MouseEvent.dwButtonState);
+                ntcon_capture_end(&capture);
+            }
             if(mode==7 && count==3) {
                 CHECK(records[0].EventType==KEY_EVENT && records[0].Event.KeyEvent.bKeyDown &&
                     records[0].Event.KeyEvent.uChar.UnicodeChar=='a');
@@ -224,6 +252,28 @@ static void run_case(unsigned mode)
                 CHECK(WriteConsoleW(buffer,L"N",1,&count,NULL) && count==1);
                 CHECK(ReadConsoleOutputCharacterW(buffer,&cell,1,after.dwCursorPosition,&count) && cell=='N');
             } else CHECK(cell=='Z' && before.dwSize.X==after.dwSize.X && before.dwSize.Y==after.dwSize.Y);
+            if(mode==9) {
+                CONSOLE_SCREEN_BUFFER_INFOEX history={sizeof(history)};
+                CONSOLE_CURSOR_INFO cursor={25,TRUE};
+                COORD tail={19,39},page={0,10};
+                unsigned repeat;
+                CHECK(GetConsoleScreenBufferInfoEx(buffer,&history));
+                history.dwSize.Y=40;history.srWindow.Top=10;history.srWindow.Bottom=17;
+                history.dwCursorPosition.Y=12;
+                CHECK(ntcon_screen_apply(buffer,&history,&cursor)==0);
+                CHECK(WriteConsoleOutputCharacterW(buffer,L"P",1,origin,&count) && count==1);
+                CHECK(WriteConsoleOutputCharacterW(buffer,L"T",1,tail,&count) && count==1);
+                for(repeat=0;repeat<2;++repeat) {
+                    CHECK(ntcon_presentation_seed(endpoint,buffer)==0);
+                    CHECK(GetConsoleScreenBufferInfo(buffer,&after));
+                    CHECK(after.dwSize.X==20 && after.dwSize.Y==40 &&
+                        after.srWindow.Top==10 && after.srWindow.Bottom==17 &&
+                        after.dwCursorPosition.X==4 && after.dwCursorPosition.Y==12);
+                    CHECK(ReadConsoleOutputCharacterW(buffer,&cell,1,origin,&count) && count==1 && cell=='P');
+                    CHECK(ReadConsoleOutputCharacterW(buffer,&cell,1,tail,&count) && count==1 && cell=='T');
+                    CHECK(ReadConsoleOutputCharacterW(buffer,&cell,1,page,&count) && count==1 && cell=='A');
+                }
+            }
             if(mode==11 || mode==13 || mode==16) {
                 HANDLE original=CreateFileW(L"CONOUT$",GENERIC_READ|GENERIC_WRITE,
                     FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,OPEN_EXISTING,0,NULL);
@@ -345,7 +395,9 @@ done:
         }
     } else if(mode>=17)CHECK(state.calls==1);
     else CHECK(mode==11 || mode>=13 ? state.calls>=6u :
-        state.calls==(mode==5 ? 0u : mode==12 || mode==10 ? 4u : mode==9 ? 5u : 1u));
+        state.calls==(mode==5 ? 0u : mode==12 || mode==10 ? 6u : mode==9 ? 21u : 1u));
+    if(mode>=9 && mode<=16)CHECK(state.snapshot_begins==state.snapshot_ends &&
+        state.snapshot_begins==(mode==9 ? 3u : 1u));
     if(mode>=11 && mode<=16)CHECK(state.activations==1 && state.releases==1);
     if(mode==16) {
         DWORD i;CHECK(state.returned_count==ARRAYSIZE(state.returned));
@@ -403,7 +455,7 @@ int wmain(int argc,WCHAR **argv)
         CHECK(SetStdHandle(STD_INPUT_HANDLE,input));
         run_case(16);
         if(input!=INVALID_HANDLE_VALUE)CloseHandle(input);
-    } else for(mode=0;mode<=18;++mode)if(mode!=16)run_case(mode);
+    } else for(mode=0;mode<=19;++mode)if(mode!=16)run_case(mode);
     fprintf(log,"NTCON-PRESENTATION checks=%u failures=%u named-pipe=yes production-activation=no\n",checks,failures);
     fclose(log);return failures ? 1 : 0;
 }

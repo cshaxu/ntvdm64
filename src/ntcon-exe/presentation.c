@@ -14,10 +14,14 @@ struct ntcon_presentation {
     DWORD published_count,published_width;
     console_text_style handoff_font;
     BOOL has_handoff_font;
+    BOOL seeded;
+    ntcon_mouse mouse;
 };
 static DWORD exchange(ntcon_presentation *client,console_io_request *request,console_io_reply *reply)
 {
-    return ntkvm_worker_call(&client->channel,request,reply);
+    DWORD error=ntkvm_worker_call(&client->channel,request,reply);
+    ntcon_trace_error("exchange",request->operation,error);
+    return error;
 }
 DWORD ntcon_presentation_open(HANDLE pipe,HANDLE frontend,HANDLE stop,DWORD generation,
     ntcon_presentation **output)
@@ -44,7 +48,7 @@ DWORD ntcon_presentation_call(ntcon_presentation *client,const console_io_reques
 {
     console_io_request request;DWORD error;
     if(!client || !input || !reply || input->bytes>CONSOLE_IO_DATA_BYTES ||
-        input->operation<CONSOLE_IO_WRITE || input->operation>CONSOLE_IO_READ_TEXT_CONFIGURATION)
+        input->operation<CONSOLE_IO_WRITE || input->operation>CONSOLE_IO_SNAPSHOT_END)
         return ERROR_INVALID_PARAMETER;
     memcpy(&request,input,offsetof(console_io_request,data)+input->bytes);
     EnterCriticalSection(&client->lock);error=exchange(client,&request,reply);
@@ -53,7 +57,7 @@ DWORD ntcon_presentation_call(ntcon_presentation *client,const console_io_reques
 DWORD ntcon_presentation_input(ntcon_presentation *client,HANDLE input,DWORD *accepted)
 {
     console_io_request request={0};console_io_reply reply;
-    INPUT_RECORD records[CONSOLE_IO_INPUT_CAPACITY];DWORD error,index;
+    INPUT_RECORD records[CONSOLE_IO_INPUT_CAPACITY*2];DWORD error,index,count=0;
     if(!client || !accepted || !input || input==INVALID_HANDLE_VALUE)return ERROR_INVALID_PARAMETER;
     *accepted=0;
     request.operation=CONSOLE_IO_READ_INPUT;request.state.count=CONSOLE_IO_INPUT_CAPACITY;
@@ -61,12 +65,41 @@ DWORD ntcon_presentation_input(ntcon_presentation *client,HANDLE input,DWORD *ac
     error=exchange(client,&request,&reply);
     if(!error && (reply.state.count>CONSOLE_IO_INPUT_CAPACITY ||
         reply.bytes!=reply.state.count*sizeof(console_io_input)))error=ERROR_INVALID_DATA;
+    if(!error && reply.state.count) {
+        ntcon_capture capture={0};
+        error=ntcon_capture_begin(&capture);
+        if(!error)error=ntcon_mouse_geometry(&client->mouse,capture.info.srWindow,
+            client->has_handoff_font ? client->handoff_font.font_height : 16);
+        ntcon_capture_end(&capture);
+    }
     for(index=0;!error && index<reply.state.count;++index) {
         console_io_input wire;
         memcpy(&wire,reply.data+index*sizeof(wire),sizeof(wire));
-        if(!ntkvm_worker_decode_input(&wire,&records[index]))error=ERROR_INVALID_DATA;
+        if(wire.type==CONSOLE_INPUT_POINTER) {
+            console_pointer_input pointer;DWORD generated=0;
+            if(wire.buttons>3 || wire.flags<CONSOLE_MOUSE_ENTER || wire.flags>CONSOLE_MOUSE_LEAVE) {
+                error=ERROR_INVALID_DATA;break;
+            }
+            pointer.dx=wire.x;pointer.dy=wire.y;pointer.control=wire.control;
+            pointer.buttons=(uint16_t)wire.buttons;pointer.action=(uint16_t)wire.flags;
+            error=ntcon_mouse_input(&client->mouse,&pointer,records+count,&generated);
+            count+=generated;
+        } else {
+            if(!ntkvm_worker_decode_input(&wire,&records[count]))error=ERROR_INVALID_DATA;
+            else {
+                if(wire.type==MOUSE_EVENT && client->mouse.ready) {
+                    ntcon_mouse *mouse=&client->mouse;
+                    mouse->x=max(0,min(wire.x-mouse->viewport.Left,
+                        mouse->viewport.Right-mouse->viewport.Left))*8;
+                    mouse->y=max(0,min(wire.y-mouse->viewport.Top,
+                        mouse->viewport.Bottom-mouse->viewport.Top))*mouse->font_height;
+                    mouse->buttons=wire.buttons&0xffff;mouse->visible=FALSE;
+                }
+                ++count;
+            }
+        }
     }
-    if(!error)error=ntcon_input_write(input,records,reply.state.count,accepted);
+    if(!error && count)error=ntcon_input_write(input,records,count,accepted);
     /* Once removed from the frontend queue, an ambiguous failed batch cannot
      * be retried. Retain the failure rather than duplicate delivered keys. */
     if(error && error!=ERROR_NOT_READY && error!=ERROR_BUSY)client->channel.failure=error;
@@ -111,8 +144,11 @@ DWORD ntcon_presentation_capture(ntcon_presentation *client,const console_text_s
         offset+=count;
     }
     EnterCriticalSection(&client->lock);
-    error=ntcon_text_frame_pack(&capture.info,&capture.cursor,cells,total,
+    error=ntcon_mouse_geometry(&client->mouse,capture.info.srWindow,
+        client->has_handoff_font ? client->handoff_font.font_height : font->font_height);
+    if(!error)error=ntcon_text_frame_pack(&capture.info,&capture.cursor,cells,total,
         client->has_handoff_font ? &client->handoff_font : font,&description,&payload);
+    if(!error)ntcon_mouse_compose(&client->mouse,&description,payload);
     LeaveCriticalSection(&client->lock);
     if(error)goto done;
     /* Use the same copied Console operations as NTVDM for the visible text
@@ -191,6 +227,7 @@ DWORD ntcon_presentation_capture(ntcon_presentation *client,const console_text_s
 done:
     if(payload)HeapFree(GetProcessHeap(),0,payload);
     if(cells)HeapFree(GetProcessHeap(),0,cells);
+    ntcon_trace_error("capture",0,error);
     ntcon_capture_end(&capture);return error;
 }
 
@@ -222,11 +259,15 @@ DWORD ntcon_presentation_seed(ntcon_presentation *client,HANDLE output)
     CONSOLE_SCREEN_BUFFER_INFOEX info={sizeof(info)};
     CONSOLE_CURSOR_INFO cursor;
     console_text_configuration configuration;
-    BOOL has_configuration=FALSE;
+    BOOL has_configuration=FALSE,snapshot_held=FALSE;
     CHAR_INFO *cells=NULL;
-    DWORD error,total,offset=0,width,count,index;
+    DWORD error,total,offset=0,width,count,index,row_bias=0,capacity_rows;
     if(!client || !output || output==INVALID_HANDLE_VALUE)return ERROR_INVALID_PARAMETER;
     EnterCriticalSection(&client->lock);
+    request.operation=CONSOLE_IO_SNAPSHOT_BEGIN;
+    error=exchange(client,&request,&reply);
+    if(error)goto done;
+    snapshot_held=TRUE;
     request.operation=CONSOLE_IO_SCREEN_INFO;
     error=exchange(client,&request,&reply);
     if(error)goto done;
@@ -276,23 +317,39 @@ DWORD ntcon_presentation_seed(ntcon_presentation *client,HANDLE output)
     if(memcmp(&screen,&reply.state,sizeof(screen))) {error=ERROR_RETRY;goto done;}
     error=read_configuration(client,&configuration,&has_configuration);
     if(error)goto done;
+    ZeroMemory(&request,sizeof(request));request.operation=CONSOLE_IO_SNAPSHOT_END;
+    error=exchange(client,&request,&reply);
+    snapshot_held=FALSE;
+    if(error)goto done;
     if(!GetConsoleScreenBufferInfoEx(output,&info)) {error=GetLastError();goto done;}
+    /* The frontend transfers the current page, not permission to erase this
+     * Console's history. Preserve rows preceding the native viewport when a
+     * DOS page returns at origin. Logical width/height still come exclusively
+     * from the handoff; native storage capacity never selects them. */
+    capacity_rows=(DWORD)screen.height;
+    if(client->seeded) {
+        row_bias=(DWORD)max(0,info.srWindow.Top-screen.top);
+        if(row_bias>(DWORD)SHRT_MAX-(DWORD)screen.height) {
+            error=ERROR_ARITHMETIC_OVERFLOW;goto done;
+        }
+        capacity_rows=max((DWORD)info.dwSize.Y,row_bias+(DWORD)screen.height);
+    }
     if(has_configuration)for(index=0;index<16;++index) {
         DWORD rgb=configuration.palette[index];
         if(rgb>0xffffff) {error=ERROR_INVALID_DATA;goto done;}
         info.ColorTable[index]=RGB((rgb>>16)&255,(rgb>>8)&255,rgb&255);
     }
-    info.dwSize.X=(SHORT)screen.width;info.dwSize.Y=(SHORT)screen.height;
-    info.dwCursorPosition.X=(SHORT)screen.x;info.dwCursorPosition.Y=(SHORT)screen.y;
-    info.srWindow.Left=(SHORT)screen.left;info.srWindow.Top=(SHORT)screen.top;
-    info.srWindow.Right=(SHORT)screen.right;info.srWindow.Bottom=(SHORT)screen.bottom;
+    info.dwSize.X=(SHORT)screen.width;info.dwSize.Y=(SHORT)capacity_rows;
+    info.dwCursorPosition.X=(SHORT)screen.x;info.dwCursorPosition.Y=(SHORT)(screen.y+row_bias);
+    info.srWindow.Left=(SHORT)screen.left;info.srWindow.Top=(SHORT)(screen.top+row_bias);
+    info.srWindow.Right=(SHORT)screen.right;info.srWindow.Bottom=(SHORT)(screen.bottom+row_bias);
     info.wAttributes=(WORD)screen.attribute;
     error=ntcon_screen_apply(output,&info,&cursor);
     for(offset=0;!error && offset<total;offset+=count) {
         count=min(width-offset%width,CONSOLE_IO_DATA_BYTES/sizeof(console_io_cell));
         if(!(offset%width) && count==width)
             count=width*min((total-offset)/width,(CONSOLE_IO_DATA_BYTES/sizeof(console_io_cell))/width);
-        error=ntcon_cells_write(output,offset,cells+offset,count);
+        error=ntcon_cells_write(output,row_bias*width+offset,cells+offset,count);
     }
     /* Seed is the acknowledged common screen. Publish subsequent changes,
      * not thousands of unchanged scrollback rows on every input iteration. */
@@ -300,10 +357,23 @@ DWORD ntcon_presentation_seed(ntcon_presentation *client,HANDLE output)
         client->has_handoff_font=has_configuration;
         if(has_configuration)client->handoff_font=configuration.style;
         if(client->published_cells)HeapFree(GetProcessHeap(),0,client->published_cells);
-        client->published_cells=cells;cells=NULL;
-        client->published_count=total;client->published_width=width;
+        client->published_cells=NULL;client->published_count=0;
+        if(!row_bias && capacity_rows==(DWORD)screen.height) {
+            client->published_cells=cells;cells=NULL;
+            client->published_count=total;client->published_width=width;
+        }
+        client->seeded=TRUE;
+        client->mouse.visible=FALSE;client->mouse.buttons=0;
+        error=ntcon_mouse_geometry(&client->mouse,info.srWindow,
+            has_configuration ? configuration.style.font_height : 16);
     }
 done:
+    if(snapshot_held) {
+        DWORD release;
+        ZeroMemory(&request,sizeof(request));request.operation=CONSOLE_IO_SNAPSHOT_END;
+        release=exchange(client,&request,&reply);
+        if(!error)error=release;
+    }
     if(cells)HeapFree(GetProcessHeap(),0,cells);
     LeaveCriticalSection(&client->lock);return error;
 }
@@ -362,10 +432,22 @@ static DWORD return_unused_input(ntcon_presentation *client)
 }
 DWORD ntcon_presentation_end(ntcon_presentation *client,const console_text_style *font)
 {
-    console_io_request request={0};console_io_reply reply;DWORD error,released;
+    console_io_request request={0};console_io_reply reply;DWORD error,released,attempt;
     if(!client || !font)return ERROR_INVALID_PARAMETER;
     EnterCriticalSection(&client->lock);
-    error=ntcon_presentation_capture(client,font);
+    {
+        console_pointer_input leave={0};INPUT_RECORD records[2];DWORD count=0,written=0;
+        leave.action=CONSOLE_MOUSE_LEAVE;
+        error=client->mouse.ready ? ntcon_mouse_input(&client->mouse,&leave,records,&count) : 0;
+        if(!error && count)error=ntcon_input_write(GetStdHandle(STD_INPUT_HANDLE),records,count,&written);
+    }
+    /* A native target may resize during capture. Restart from a fresh
+     * snapshot before returning unused input or releasing ownership. */
+    if(!error)for(attempt=0;attempt<8;++attempt) {
+        error=ntcon_presentation_capture(client,font);
+        if(error!=ERROR_RETRY)break;
+        if(attempt<7)Sleep(10);
+    }
     if(!error)error=return_unused_input(client);
     if(!error) {
         request.operation=CONSOLE_IO_BARRIER;

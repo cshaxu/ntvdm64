@@ -8,6 +8,9 @@
 typedef struct run16_console_frontend {
     HANDLE input,output;
     uint32_t generation,sequence;
+    /* Borrowed session geometry, protected by enter/leave. Physical Console
+     * clipping is presentation only and must not become worker geometry. */
+    SMALL_RECT *logical_window;
     run16_console_video video;
     void *io_context;
     DWORD (*activate)(void *,BOOL,DWORD);
@@ -16,6 +19,8 @@ typedef struct run16_console_frontend {
     /* Frontend-local shared-screen transaction; not a worker/IPC callback. */
     DWORD (*screen_begin)(void *);
     DWORD (*screen_end)(void *,BOOL);
+    DWORD (*snapshot_begin)(void *);
+    DWORD (*snapshot_end)(void *);
     /* Called while enter's I/O lock is held; policy only, no UI mutation. */
     BOOL (*text_frame_required)(void *);
     /* Copied input owned by frontend; callbacks hold the enter lock. */
@@ -25,4 +30,8 @@ typedef struct run16_console_frontend {
 } run16_console_frontend;
 DWORD run16_console_dispatch(run16_console_frontend *,const console_io_request *,
     console_io_reply *);
+/* Original nt_fulsc.c::calcScreenParams can reproduce these return modes.
+ * Caller serializes the screen and commits ownership only after success. */
+BOOL run16_console_dos_size(COORD);
+DWORD run16_console_prepare_dos(HANDLE,SMALL_RECT *,COORD);
 #endif

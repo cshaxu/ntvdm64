@@ -22,6 +22,7 @@ typedef struct native_membership {
 static DWORD begin_io(void *context,HANDLE stop)
 {
     native_membership *state=context;
+    DWORD retries=0;
     for(;;) {
         DWORD error=ERROR_NOT_READY;
         if(WaitForSingleObject(stop,0)!=WAIT_TIMEOUT)return ERROR_OPERATION_ABORTED;
@@ -42,7 +43,17 @@ static DWORD begin_io(void *context,HANDLE stop)
          * through the target lifetime or response I/O. */
         if(!error)return ERROR_SUCCESS;
         LeaveCriticalSection(state->lock);
-        if(error!=ERROR_NOT_READY && error!=ERROR_BUSY)return error;
+        /* A screen can change while the frontend is copied into this
+         * Console. The presentation rejects that torn seed with RETRY and
+         * deactivates itself; retry the complete admission, never a partial
+         * cell batch or an already accepted execution request. */
+        if(error==ERROR_RETRY && ++retries<8) {
+            if(WaitForSingleObject(stop,10)!=WAIT_TIMEOUT)return ERROR_OPERATION_ABORTED;
+            continue;
+        }
+        if(error!=ERROR_NOT_READY && error!=ERROR_BUSY) {
+            ntcon_trace_error("begin-io",0,error);return error;
+        }
         if(WaitForSingleObject(state->thread,10)!=WAIT_TIMEOUT) {
             if(!GetExitCodeThread(state->thread,&error))return GetLastError();
             return error ? error : ERROR_OPERATION_ABORTED;
@@ -56,21 +67,27 @@ static void release_launch(void *context)
 }
 static DWORD end_io(void *context)
 {
-    native_membership *state=context;DWORD error,count=0,*members=NULL;
+    native_membership *state=context;DWORD error,count=0,*members=NULL,attempt;
     EnterCriticalSection(state->lock);
     error=ntcon_console_members(&members,&count);
     if(members)HeapFree(GetProcessHeap(),0,members);
     /* Completion belongs to the direct target. Its surviving Console users
      * retain presentation independently; never reseed over their live output. */
     if(!error && state->presenting) {
-        if(state->users>1 || count)
-            error=ntcon_presentation_capture(state->presentation,&state->font);
+        if(state->users>1 || count) {
+            for(attempt=0;attempt<8;++attempt) {
+                error=ntcon_presentation_capture(state->presentation,&state->font);
+                if(error!=ERROR_RETRY)break;
+                if(attempt<7)Sleep(10);
+            }
+        }
         else {
             error=ntcon_presentation_end(state->presentation,&state->font);
             state->presenting=FALSE;
         }
     }
     if(state->users)--state->users;
+    ntcon_trace_error("end-io",0,error);
     LeaveCriticalSection(state->lock);return error;
 }
 static DWORD take_presentation(native_membership *state)
@@ -158,6 +175,7 @@ static DWORD WINAPI sample_members(void *context)
 {
     native_membership *state=context;
     DWORD error=sample_members_loop(context),count=0,*members=NULL,sample;
+    ntcon_trace_error("pump",0,error);
     if(!error || WaitForSingleObject(state->quit,0)!=WAIT_TIMEOUT)return error;
     /* A dead frontend may leave an empty resident worker, but never a live
      * Console whose sole I/O pump has silently exited. Serialize with launch
@@ -205,9 +223,11 @@ static DWORD membership_bind(native_membership *state,HANDLE frontend)
     membership_close(state);
     {
         unsigned bank,glyph;
-        state->font.font_height=14;
+        /* Match original startup 80x25 VGA; later handoffs supply the actual
+         * DOS font banks. This bitmap font is not the hidden Console font. */
+        state->font.font_height=16;
         for(bank=0;bank<2;++bank)for(glyph=0;glyph<256;++glyph)
-            memcpy(state->font.fonts[bank][glyph],frontend_native_font[glyph],14);
+            memcpy(state->font.fonts[bank][glyph],frontend_native_vga_font[glyph],16);
     }
     state->quit=CreateEventW(NULL,TRUE,FALSE,NULL);
     state->stop_requested=CreateEventW(NULL,TRUE,FALSE,NULL);
@@ -240,6 +260,7 @@ int wmain(int argc,WCHAR **argv)
     CsrPortHeap=HeapCreate(0,0,0);
     if(!CsrPortHeap)return GetLastError();
     error=worker_base_connect();
+    if(!error)error=ntcon_console_initialize();
     if(!error)error=ntcon_executions_open(&requests);
     if(!error)ntcon_executions_bind_io(requests,&io);
     if(!error && !SetConsoleCtrlHandler(control_event,TRUE))error=GetLastError();

@@ -84,58 +84,6 @@ static void dos_contract(void)
 }
 int main(void)
 {
-    frontend_native_mouse mouse={0},saved;
-    frontend_window_input input={0};capture output={0};
-    SMALL_RECT viewport={20,100,99,124},invalid={-1,0,79,24};
-    input.event.type=KVM_EVENT_MOUSE;input.event.source_identity=7;
-    input.event.data.mouse.relative=TRUE;input.control_state=SHIFT_PRESSED;
-    assert(frontend_native_mouse_dispatch(&mouse,&input,sink,&output)==ERROR_NOT_READY);
-    assert(frontend_native_mouse_geometry(&mouse,invalid,8,14)==ERROR_INVALID_PARAMETER);
-    assert(frontend_native_mouse_geometry(&mouse,viewport,UINT_MAX,14)==ERROR_ARITHMETIC_OVERFLOW);
-    assert(!frontend_native_mouse_geometry(&mouse,viewport,8,14));
-    input.event.data.mouse.delta_x=1;
-    assert(!frontend_native_mouse_dispatch(&mouse,&input,sink,&output));
-    assert(output.count==1 && output.events[0].EventType==MOUSE_EVENT);
-    assert(output.events[0].Event.MouseEvent.dwMousePosition.X==60);
-    assert(output.events[0].Event.MouseEvent.dwMousePosition.Y==112);
-    assert(output.events[0].Event.MouseEvent.dwButtonState==0);
-    assert(output.events[0].Event.MouseEvent.dwEventFlags==MOUSE_MOVED);
-    assert(output.events[0].Event.MouseEvent.dwControlKeyState==SHIFT_PRESSED);
-    input.event.data.mouse.delta_x=7;
-    assert(!frontend_native_mouse_dispatch(&mouse,&input,sink,&output));
-    assert(output.events[1].Event.MouseEvent.dwMousePosition.X==61);
-    input.event.data.mouse.delta_x=0;input.event.data.mouse.buttons=KVM_MOUSE_BUTTON_LEFT;
-    assert(!frontend_native_mouse_dispatch(&mouse,&input,sink,&output));
-    assert(output.count==3 && output.events[2].Event.MouseEvent.dwEventFlags==0);
-    assert(output.events[2].Event.MouseEvent.dwButtonState==FROM_LEFT_1ST_BUTTON_PRESSED);
-    saved=mouse;output.error=ERROR_BROKEN_PIPE;input.event.type=KVM_EVENT_INPUT_RESET;
-    assert(frontend_native_mouse_dispatch(&mouse,&input,sink,&output)==ERROR_BROKEN_PIPE);
-    assert(!memcmp(&mouse,&saved,sizeof(mouse)) && output.count==3);
-    output.error=0;assert(!frontend_native_mouse_dispatch(&mouse,&input,sink,&output));
-    assert(output.count==4 && !mouse.buttons && mouse.source==7);
-    assert(!output.events[3].Event.MouseEvent.dwButtonState);
-    assert(!frontend_native_mouse_dispatch(&mouse,&input,sink,&output) && output.count==4);
-    input.event.type=KVM_EVENT_MOUSE;input.event.data.mouse.delta_x=INT_MAX;
-    input.event.data.mouse.delta_y=INT_MIN;input.event.data.mouse.buttons=KVM_MOUSE_BUTTON_RIGHT;
-    assert(!frontend_native_mouse_dispatch(&mouse,&input,sink,&output));
-    assert(output.count==6);
-    assert(output.events[4].Event.MouseEvent.dwMousePosition.X==99);
-    assert(output.events[4].Event.MouseEvent.dwMousePosition.Y==100);
-    assert(!output.events[4].Event.MouseEvent.dwButtonState);
-    assert(output.events[5].Event.MouseEvent.dwButtonState==RIGHTMOST_BUTTON_PRESSED);
-    input.event.source_identity=8;
-    assert(frontend_native_mouse_dispatch(&mouse,&input,sink,&output)==ERROR_INVALID_STATE);
-    input.event.source_identity=7;input.event.data.mouse.wheel_y=1;
-    assert(frontend_native_mouse_dispatch(&mouse,&input,sink,&output)==ERROR_NOT_SUPPORTED);
-    input.event.data.mouse.wheel_y=0;input.event.data.mouse.relative=FALSE;
-    assert(frontend_native_mouse_dispatch(&mouse,&input,sink,&output)==ERROR_NOT_SUPPORTED);
-    input.event.type=KVM_EVENT_SOURCE_RETIRED;
-    assert(!frontend_native_mouse_dispatch(&mouse,&input,sink,&output));
-    assert(!mouse.source && !mouse.buttons && output.count==7);
-    viewport.Right=29;viewport.Bottom=104;
-    assert(!frontend_native_mouse_geometry(&mouse,viewport,8,14));
-    assert(mouse.x==79 && mouse.y==0);
-    puts("PASS native mouse: viewport origin, subcell motion, no phantom press, buttons, reset, failed sink, retirement, bounds and negative shapes");
     dos_contract();
     return 0;
 }

@@ -9,6 +9,7 @@ struct run16_console_channel {
     HANDLE pipe,worker,stop,thread,io_event,ready;
     BOOL input_pending;
     BOOL kind_selected,native;
+    BOOL snapshot_held;
     run16_native_frontend *root;
 };
 static DWORD activate(void *context,BOOL active,DWORD kind)
@@ -19,7 +20,14 @@ static DWORD activate(void *context,BOOL active,DWORD kind)
     channel->kind_selected=TRUE;channel->native=kind==CONSOLE_IO_WORKER_NATIVE;
     error=channel->native ? run16_native_frontend_native_bind(channel->root,channel,active) :
         run16_native_frontend_dos_bind(channel->root,channel,active);
-    if(!error && active && !channel->native)error=run16_native_frontend_dos_video(channel->root,channel,&channel->console.video);
+    /* A released worker's cached frame predates the new owner's geometry.
+     * Root binding has detached this pointer under the shared I/O lock. Keep
+     * the visible common screen, but require a fresh complete worker frame. */
+    if(!error && !active) {
+        uint32_t serial=channel->console.video.serial;
+        run16_console_video_dispose(&channel->console.video);
+        channel->console.video.serial=serial; /* Handoff does not authorize replay. */
+    }
     return error;
 }
 static DWORD enter(void *context)
@@ -39,6 +47,22 @@ static DWORD screen_begin(void *context)
 static DWORD screen_end(void *context,BOOL write)
 {
     return run16_native_frontend_screen_end(((run16_console_channel *)context)->root,write);
+}
+static DWORD snapshot_begin(void *context)
+{
+    run16_console_channel *channel=context;
+    if(!channel->native)return ERROR_ACCESS_DENIED;
+    if(channel->snapshot_held)return ERROR_BUSY;
+    run16_native_frontend_snapshot_begin(channel->root);
+    channel->snapshot_held=TRUE;return ERROR_SUCCESS;
+}
+static DWORD snapshot_end(void *context)
+{
+    run16_console_channel *channel=context;
+    if(!channel->snapshot_held)return ERROR_INVALID_STATE;
+    channel->snapshot_held=FALSE;
+    run16_native_frontend_snapshot_end(channel->root);
+    return ERROR_SUCCESS;
 }
 static BOOL text_frame_required(void *context)
 {
@@ -115,12 +139,23 @@ static DWORD WINAPI console_channel_main(void *context)
         if (error) break;
         if (request->bytes>CONSOLE_IO_DATA_BYTES) { error=ERROR_INVALID_DATA;break; }
         error=transfer(channel,FALSE,request->data,request->bytes);
+        /* No activation, input wait or publication is legal while this
+         * channel holds the screen lock across the native read tiles. In
+         * particular, an activation would wait for the presentation thread
+         * which is itself waiting for this lock. Protocol misuse closes the
+         * endpoint; the thread's EOF cleanup releases the lock. */
+        if(!error && channel->snapshot_held &&
+            request->operation!=CONSOLE_IO_SCREEN_INFO &&
+            request->operation!=CONSOLE_IO_GET_CURSOR_INFO &&
+            request->operation!=CONSOLE_IO_READ_CELLS_W &&
+            request->operation!=CONSOLE_IO_READ_TEXT_CONFIGURATION &&
+            request->operation!=CONSOLE_IO_SNAPSHOT_END)error=ERROR_INVALID_DATA;
         if(!error && channel->native && request->operation==CONSOLE_IO_VIDEO_BEGIN &&
             (request->bytes!=sizeof(console_video_description) ||
              ((const console_video_description *)request->data)->kind!=CONSOLE_VIDEO_TEXT_FRAME))
             error=ERROR_INVALID_DATA;
         if (!error) error=run16_console_dispatch(&channel->console,request,&reply);
-        if(!error && reply.result && (!channel->native || !channel->console.video.pending) && (request->operation==CONSOLE_IO_VIDEO_BEGIN ||
+        if(!error && reply.result && !channel->console.video.pending && (request->operation==CONSOLE_IO_VIDEO_BEGIN ||
             request->operation==CONSOLE_IO_VIDEO_DATA || request->operation==CONSOLE_IO_VIDEO_TEXT))
             error=run16_native_frontend_dos_video(channel->root,channel,&channel->console.video);
         if (!error && (request->operation==CONSOLE_IO_READ_INPUT ||
@@ -140,6 +175,7 @@ static DWORD WINAPI console_channel_main(void *context)
         if (!error) error=transfer(channel,TRUE,&reply,
             (DWORD)offsetof(console_io_reply,data)+reply.bytes);
     }
+    if(channel->snapshot_held)(void)snapshot_end(channel);
     if (request) HeapFree(GetProcessHeap(),0,request);
     /* This thread owns the endpoint after creation. EOF must reach the worker
      * even when the launcher is still waiting for its original task event. */
@@ -194,9 +230,11 @@ DWORD run16_console_channel_start_request(DWORD request,HANDLE worker,run16_nati
     if (!channel) { if (worker) CloseHandle(worker);return ERROR_NOT_ENOUGH_MEMORY; }
     channel->worker=worker;
     channel->root=root;
+    channel->console.logical_window=run16_native_frontend_text_region(root);
     channel->console.io_context=channel;
     channel->console.activate=activate;channel->console.enter=enter;channel->console.leave=leave;
     channel->console.screen_begin=screen_begin;channel->console.screen_end=screen_end;
+    channel->console.snapshot_begin=snapshot_begin;channel->console.snapshot_end=snapshot_end;
     channel->console.text_frame_required=text_frame_required;
     channel->console.read_text_configuration=read_text_configuration;
     channel->console.read_input=read_input;channel->console.prepend_input=prepend_input;

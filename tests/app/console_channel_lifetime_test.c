@@ -13,6 +13,13 @@
 static HANDLE read_entered,peer;
 static run16_native_frontend *test_frontend;
 static DWORD expected_generation;
+static DWORD WINAPI snapshot_contender(void *context)
+{
+    run16_native_frontend_snapshot_begin(test_frontend);
+    SetEvent((HANDLE)context);
+    run16_native_frontend_snapshot_end(test_frontend);
+    return 0;
+}
 DWORD run16_console_dispatch(run16_console_frontend *owner,
     const console_io_request *request,console_io_reply *reply)
 {
@@ -125,7 +132,7 @@ static void run_case(unsigned mode,unsigned round)
     PROCESS_INFORMATION child={0};
     console_io_request request={0};console_io_reply reply={0};
     DWORD exit_code;ULONGLONG started;
-    expected_generation=1+round*5+mode;
+    expected_generation=1+round*6+mode;
     CHECK(ResetEvent(read_entered));
     if(mode==4) {
         STARTUPINFOW startup={sizeof(startup)};
@@ -146,7 +153,8 @@ static void run_case(unsigned mode,unsigned round)
         CHECK(GetHandleInformation(channel->console.output,&flags) && !(flags&HANDLE_FLAG_INHERIT));
         CHECK(GetHandleInformation(channel->console.input,&flags) && !(flags&HANDLE_FLAG_INHERIT));
     }
-    CHECK(!run16_native_frontend_dos_bind(test_frontend,channel,TRUE));
+    if(mode==5)CHECK(!activate(channel,TRUE,CONSOLE_IO_WORKER_NATIVE));
+    else CHECK(!run16_native_frontend_dos_bind(test_frontend,channel,TRUE));
     CHECK(DuplicateHandle(GetCurrentProcess(),channel->thread,GetCurrentProcess(),
         &thread,0,FALSE,DUPLICATE_SAME_ACCESS));
     CHECK(DuplicateHandle(GetCurrentProcess(),channel->ready,GetCurrentProcess(),
@@ -251,6 +259,17 @@ static void run_case(unsigned mode,unsigned round)
         while(!FindWindowW(NULL,L"NTVDM") && GetTickCount64()<deadline)Sleep(10);
         CHECK(FindWindowW(NULL,L"NTVDM"));
     }
+    if(mode==0 && !round) {
+        uint32_t serial=channel->console.video.serial;
+        console_video_description stale={0};
+        CHECK(serial && channel->console.video.pixels);
+        CHECK(!activate(channel,FALSE,CONSOLE_IO_WORKER_DOS));
+        CHECK(!channel->console.video.pixels && !channel->console.video.pending &&
+            channel->console.video.serial==serial);
+        CHECK(!activate(channel,TRUE,CONSOLE_IO_WORKER_DOS));
+        CHECK(run16_console_video_begin(&channel->console.video,serial,&stale)==ERROR_INVALID_DATA);
+        puts("PASS ownership return discards stale pixels but retains the anti-replay serial");
+    }
     if(mode==1) {
         if(!round)verify_dos_input_queue(channel);
         request.sequence=2;request.operation=CONSOLE_IO_READ_INPUT;
@@ -328,8 +347,47 @@ static void run_case(unsigned mode,unsigned round)
         CHECK(WaitForSingleObject(thread,5000)==WAIT_OBJECT_0);
         CHECK(GetExitCodeThread(thread,&exit_code) && exit_code==ERROR_PROCESS_ABORTED);
         CHECK(WaitForSingleObject(ready,0)==WAIT_OBJECT_0);
+    } else if(mode==5) {
+        HANDLE acquired=CreateEventW(NULL,TRUE,FALSE,NULL),contender;
+        CHECK(acquired);
+        request.sequence=2;request.operation=CONSOLE_IO_SNAPSHOT_BEGIN;
+        peer_io(TRUE,&request,(DWORD)offsetof(console_io_request,data));
+        peer_io(FALSE,&reply,(DWORD)offsetof(console_io_reply,data));
+        CHECK(reply.result && channel->snapshot_held);
+        contender=CreateThread(NULL,0,snapshot_contender,acquired,0,NULL);CHECK(contender);
+        CHECK(WaitForSingleObject(acquired,0)==WAIT_TIMEOUT);
+        request.sequence=3;request.operation=CONSOLE_IO_SCREEN_INFO;
+        peer_io(TRUE,&request,(DWORD)offsetof(console_io_request,data));
+        peer_io(FALSE,&reply,(DWORD)offsetof(console_io_reply,data));
+        CHECK(reply.result && reply.state.width>0 && reply.state.height>0);
+        CHECK(WaitForSingleObject(acquired,0)==WAIT_TIMEOUT);
+        request.sequence=4;request.operation=CONSOLE_IO_SNAPSHOT_END;
+        peer_io(TRUE,&request,(DWORD)offsetof(console_io_request,data));
+        peer_io(FALSE,&reply,(DWORD)offsetof(console_io_reply,data));
+        CHECK(reply.result && !channel->snapshot_held);
+        CHECK(WaitForSingleObject(acquired,5000)==WAIT_OBJECT_0);
+        CHECK(WaitForSingleObject(contender,5000)==WAIT_OBJECT_0);
+        CloseHandle(contender);ResetEvent(acquired);
+        request.sequence=5;request.operation=CONSOLE_IO_SNAPSHOT_BEGIN;
+        peer_io(TRUE,&request,(DWORD)offsetof(console_io_request,data));
+        peer_io(FALSE,&reply,(DWORD)offsetof(console_io_reply,data));
+        CHECK(reply.result && channel->snapshot_held);
+        contender=CreateThread(NULL,0,snapshot_contender,acquired,0,NULL);CHECK(contender);
+        CHECK(WaitForSingleObject(acquired,0)==WAIT_TIMEOUT);
+        if(round&1) {
+            request.sequence=6;request.operation=CONSOLE_IO_DOS_ACTIVE;
+            peer_io(TRUE,&request,(DWORD)offsetof(console_io_request,data));
+            CHECK(WaitForSingleObject(thread,5000)==WAIT_OBJECT_0);
+            CHECK(GetExitCodeThread(thread,&exit_code) && exit_code==ERROR_INVALID_DATA);
+        } else { CloseHandle(peer);peer=NULL; }
+        CHECK(WaitForSingleObject(thread,5000)==WAIT_OBJECT_0);
+        CHECK(WaitForSingleObject(acquired,5000)==WAIT_OBJECT_0);
+        CHECK(WaitForSingleObject(contender,5000)==WAIT_OBJECT_0);
+        CloseHandle(contender);CloseHandle(acquired);
+        CHECK(!channel->snapshot_held);
+        if(!round)puts("PASS native snapshot blocks concurrent screen owner until END; EOF and invalid activation release held lock");
     }
-    if(mode>=3) {
+    if(mode==3 || mode==4) {
         OVERLAPPED io={0};BYTE byte;DWORD done=0,error;
         io.hEvent=CreateEventW(NULL,TRUE,FALSE,NULL);CHECK(io.hEvent);
         CHECK(!ReadFile(peer,&byte,1,&done,&io));error=GetLastError();
@@ -384,7 +442,7 @@ int main(int argc,char **argv)
     CHECK(WriteConsoleOutputCharacterW(alternate,L"A",1,origin,&count) && count==1);
     CHECK(SetConsoleActiveScreenBuffer(alternate));
     /* Warm up lazy runtime/Console resources before counting owned handles. */
-    for(mode=0;mode<5;++mode) run_case(mode,0);
+    for(mode=0;mode<6;++mode) run_case(mode,0);
     if(argc==2 && !strcmp(argv[1],"--handle-audit")) {
         HANDLE modules;MODULEENTRY32W module={sizeof(module)};
         audit_handles("before-idle");Sleep(3000);audit_handles("after-idle-no-channels");
@@ -397,7 +455,7 @@ int main(int argc,char **argv)
     wait_initial_window_resources();
     CHECK(GetProcessHandleCount(GetCurrentProcess(),&before));
     for(round=1;round<=16;++round)
-        for(mode=0;mode<5;++mode) run_case(mode,round);
+        for(mode=0;mode<6;++mode) run_case(mode,round);
     CHECK(GetProcessHandleCount(GetCurrentProcess(),&after));
     printf("channel handles before=%lu after=%lu\n",before,after);
     CHECK(after==before);
@@ -411,7 +469,7 @@ int main(int argc,char **argv)
     CHECK(SetConsoleActiveScreenBuffer(canonical));
     CloseHandle(alternate);CloseHandle(canonical);CloseHandle(input);
     CloseHandle(read_entered);
-    puts("PASS 85 real channel lifetimes: pipe cancel, nonblocking empty input, barrier/EOF/stop race, oversized request, real process death; joined threads, EOF readiness, no handle growth");
+    puts("PASS 102 real channel lifetimes: pipe cancel, nonblocking empty input, barrier/EOF/stop race, oversized request, real process death, snapshot lock; joined threads, EOF readiness, no handle growth");
     puts("PASS four graphics channels each create/retire two Windows, including active graphics disposal; exact post-warm-up handle equality");
     puts("PASS all nested channels retain canonical K while active surface is A; private handle copies survive frontend teardown");
     puts("PASS stopped presentation owner rejects handoff without waiting for execution or restarting a helper");

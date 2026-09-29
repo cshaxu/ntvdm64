@@ -2,6 +2,18 @@
 #define NTCON_TEXT_FRAME_H
 #include <windows.h>
 #include "interface/console_video.h"
+#include "interface/console_mouse.h"
+
+typedef struct ntcon_mouse {
+    SMALL_RECT viewport;
+    LONG x,y;
+    unsigned font_height;
+    DWORD buttons;
+    BOOL ready,visible;
+} ntcon_mouse;
+DWORD ntcon_mouse_geometry(ntcon_mouse *,SMALL_RECT,unsigned);
+DWORD ntcon_mouse_input(ntcon_mouse *,const console_pointer_input *,INPUT_RECORD [2],DWORD *);
+void ntcon_mouse_compose(const ntcon_mouse *,const console_video_description *,BYTE *);
 
 /* Backend-local conversion. The result uses the unchanged NTVDM wire ABI;
  * release *payload with HeapFree. Fonts are supplied by the backend's current

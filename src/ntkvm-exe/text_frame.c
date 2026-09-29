@@ -2,6 +2,49 @@
 #include "lib/kvm-window/render.h"
 #include "interface/console_video.h"
 
+/* A styled 80x50/font16 page fits the library's TEXT carrier, although its
+ * 800-line raster does not fit the DIB carrier. Reuse the existing 512 glyph
+ * slots for the variants actually used by this copied page. This is only a
+ * render representation: neither the wire font nor worker cells are changed.
+ * More than 512 distinct variants retains the explicit raster limit. */
+static BOOL styled_text_frame(const kvm_window_text_frame *fonts,
+    const kvm_text_cell *cells,const frontend_text_extension *extension,
+    BOOL cursor_phase,kvm_window_frame *output)
+{
+    short slots[2][256][2];unsigned row,column,used=0;
+    unsigned columns=fonts->base.text_columns,rows=fonts->base.text_rows;
+    memset(slots,0xff,sizeof(slots));
+    output->graphics=0;output->text=*fonts;
+    output->text.base.cursor_phase=(lib_u8)!!cursor_phase;
+    for(row=0;row<rows;++row)for(column=0;column<columns;++column) {
+        size_t index=(size_t)row*columns+column;
+        kvm_text_cell cell=cells[index];
+        unsigned flags=extension->cell_styles[index*extension->cell_style_stride];
+        unsigned underlined=(flags&CONSOLE_TEXT_UNDERLINE)!=0;
+        short *slot;
+        if(cell.glyph_bank>1 || (flags&~CONSOLE_TEXT_STYLE_MASK)) {
+            SetLastError(ERROR_INVALID_DATA);return FALSE;
+        }
+        slot=&slots[cell.glyph_bank][cell.glyph_index][underlined];
+        if(*slot<0) {
+            const lib_u8 *source=cell.glyph_bank ? fonts->secondary_font : fonts->font;
+            lib_u8 *target;
+            if(used==512) {SetLastError(ERROR_NOT_SUPPORTED);return FALSE;}
+            *slot=(short)used++;
+            target=*slot>=256 ? output->text.secondary_font : output->text.font;
+            target+=(*slot%256)*KVM_WINDOW_FONT_HEIGHT;
+            memcpy(target,source+cell.glyph_index*KVM_WINDOW_FONT_HEIGHT,KVM_WINDOW_FONT_HEIGHT);
+            if(underlined)target[fonts->base.font_height-1]=0xff;
+        }
+        cell.glyph_bank=(lib_u8)(*slot/256);cell.glyph_index=(lib_u8)(*slot%256);
+        output->text.base.cells[row*KVM_TEXT_COLUMNS+column]=cell;
+    }
+    if(kvm_text_frame_validate(&output->text.base)!=LIB_STATUS_OK) {
+        SetLastError(ERROR_INVALID_DATA);return FALSE;
+    }
+    output->valid=1;return TRUE;
+}
+
 BOOL frontend_text_frame_prepare(frontend_text_raster *scratch,
     const kvm_window_text_frame *fonts, const kvm_text_cell *cells,
     size_t cell_count, const frontend_text_extension *extension,
@@ -14,6 +57,15 @@ BOOL frontend_text_frame_prepare(frontend_text_raster *scratch,
     }
     columns = fonts->base.text_columns;
     rows = fonts->base.text_rows;
+    if(columns && columns<=KVM_TEXT_COLUMNS && rows && rows<=KVM_TEXT_ROWS &&
+        fonts->base.font_height && fonts->base.font_height<=KVM_WINDOW_FONT_HEIGHT &&
+        rows*fonts->base.font_height>KVM_WINDOW_GRAPHICS_MAX_HEIGHT &&
+        extension && extension->cell_styles && !extension->cursor_visible) {
+        if(cell_count<(size_t)columns*rows) {
+            SetLastError(ERROR_INSUFFICIENT_BUFFER);return FALSE;
+        }
+        return styled_text_frame(fonts,cells,extension,cursor_phase,output);
+    }
     if (columns > KVM_TEXT_COLUMNS || rows > KVM_TEXT_ROWS ||
         fonts->base.font_height > KVM_WINDOW_FONT_HEIGHT ||
         (extension && (extension->cursor_visible || extension->cell_styles)))

@@ -88,8 +88,7 @@ DWORD run16_console_video_data(run16_console_video *video, uint32_t serial,
                 style->cursor_height<0 || style->cursor_height>32 ||
                 style->cursor_height1<0 || style->cursor_height1>32 ||
                 style->cursor_start < -32 || style->cursor_start>31 ||
-                style->cursor_start1 < -32 || style->cursor_start1>31 ||
-                video->pending_description.height>768/style->font_height) {
+                style->cursor_start1 < -32 || style->cursor_start1>31) {
                 discard_pending(video);return ERROR_INVALID_DATA;
             }
         }

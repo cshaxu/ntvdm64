@@ -21,6 +21,9 @@ semantics; NTCON supplies their finite backend binding.
 - `text_frame.c`: native cells to the shared bitmap-glyph text frame. Uses the
   admitted ROM font or transferred DOS font banks; no alternate NTKVM glyph
   mapper. Optional style bytes preserve underline. Grid flags are unsupported.
+  Window mouse position/buttons and reverse-video cell composition also belong
+  here. Only the copied frame is painted; hidden Console cells/caret/history
+  and the screen returned to another worker remain untouched.
 - `presentation.c`: native capture/seed/member-specific operations under its
   instance lock. Ordered transport, cancellation, frame chunks, ordinary input
   codec, activation and key-return encoding use `worker-base`.
@@ -48,6 +51,14 @@ the actual hidden Console to close and acknowledges confirmed closure. Launcher
 death never invokes that operation. No process-tree kill or second scheduler.
 Capture detects geometry changes but does not promise an atomic content snapshot
 against unrelated concurrent native writers.
+
+Logical text geometry comes from the frontend handoff or the running native
+application, never host display dimensions. The invisible Console uses fixed
+carrier font metrics, independent of its copied bitmap fonts; inherited state
+is applied and read back before acknowledgment. A return preserves native
+scrollback storage separately from the current logical viewport. See the
+[S13 ledger](../../docs/etc/evidence/m0-t423-s13-text-geometry.md) for actual
+mode, resize-race, pointer, history and bidirectional handoff evidence.
 
 ## Provenance and verification
 

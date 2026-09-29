@@ -12,13 +12,17 @@ typedef struct ntcon_capture {
 } ntcon_capture;
 
 DWORD ntcon_capture_begin(ntcon_capture *);
+/* One-time invisible carrier setup, before targets exist. Fixed font metrics
+ * keep ordinary native resize APIs independent of inherited host font size. */
+DWORD ntcon_console_initialize(void);
+void ntcon_trace_error(const char *stage,DWORD operation,DWORD error);
 /* Explicit process-local buffer; no HANDLE is serialized. */
 DWORD ntcon_capture_begin_output(ntcon_capture *,HANDLE);
 DWORD ntcon_capture_read(ntcon_capture *,DWORD offset,
     CHAR_INFO *,DWORD capacity,SMALL_RECT *,DWORD *count);
 void ntcon_capture_end(ntcon_capture *);
-/* The same public Console binding is used for initial hidden-buffer seeding
- * and visible presentation. Neither operation changes an execution lifetime. */
+/* Apply the acknowledged screen to this worker's invisible Console carrier.
+ * Visible presentation and its bitmap font remain entirely NTKVM-owned. */
 DWORD ntcon_screen_apply(HANDLE,const CONSOLE_SCREEN_BUFFER_INFOEX *,const CONSOLE_CURSOR_INFO *);
 DWORD ntcon_cells_write(HANDLE,DWORD,const CHAR_INFO *,DWORD);
 /* Returns attached members excluding this backend; caller frees *members with

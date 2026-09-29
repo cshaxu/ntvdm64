@@ -8,6 +8,14 @@ static BOOL encode_input(const INPUT_RECORD *record,console_io_input *wire)
 {
     ZeroMemory(wire,sizeof(*wire));wire->type=record->EventType;
     switch (record->EventType) {
+    case CONSOLE_INPUT_POINTER: {
+        console_pointer_input mouse;
+        memcpy(&mouse,&record->Event,sizeof(mouse));
+        wire->x=mouse.dx;wire->y=mouse.dy;wire->buttons=mouse.buttons;
+        wire->flags=mouse.action;wire->control=mouse.control;
+        return mouse.buttons<=3 && mouse.action>=CONSOLE_MOUSE_ENTER &&
+            mouse.action<=CONSOLE_MOUSE_LEAVE;
+    }
     case CONSOLE_INPUT_RELATIVE_MOUSE: {
         console_mouse_input mouse;
         memcpy(&mouse,&record->Event,sizeof(mouse));
@@ -52,6 +60,41 @@ static BOOL coordinate(int32_t value)
     return value>=SHRT_MIN && value<=SHRT_MAX;
 }
 
+BOOL run16_console_dos_size(COORD size)
+{
+    /* Original calcScreenParams/DoFullScreenResume, not VGA's full mode set. */
+    return size.X==80 && (size.Y==22 || size.Y==25 || size.Y==28 || size.Y==43 || size.Y==50);
+}
+
+DWORD run16_console_prepare_dos(HANDLE output,SMALL_RECT *window,COORD last_dos)
+{
+    CONSOLE_SCREEN_BUFFER_INFO before,after;
+    SMALL_RECT physical={0,0,0,0};
+    COORD size,cursor;
+    if(!window)return ERROR_INVALID_PARAMETER;
+    size.X=window->Right-window->Left+1;size.Y=window->Bottom-window->Top+1;
+    if(!run16_console_dos_size(size))size=run16_console_dos_size(last_dos) ? last_dos : (COORD){80,25};
+    if(!GetConsoleScreenBufferInfo(output,&before))return GetLastError();
+    if(before.dwSize.X==size.X && before.dwSize.Y==size.Y &&
+        !window->Left && !window->Top && window->Right==size.X-1 && window->Bottom==size.Y-1)
+        return ERROR_SUCCESS;
+    /* Reuse OpenNT ResizeScreenBuffer's no-reflow row retention. Original
+     * DoFullScreenResume subsequently reads from origin and changes real VGA
+     * state; never acknowledge a frame-header-only DOS mode conversion. */
+    if(!opennt_console_resize_grid(output,NULL,TRUE,&physical) ||
+        !opennt_console_resize_grid(output,&size,FALSE,NULL) ||
+        !GetConsoleScreenBufferInfo(output,&after))return GetLastError();
+    if(after.dwSize.X!=size.X || after.dwSize.Y!=size.Y)return ERROR_RETRY;
+    cursor.X=min(before.dwCursorPosition.X,size.X-1);
+    cursor.Y=min(before.dwCursorPosition.Y,size.Y-1);
+    physical.Right=min(size.X,after.dwMaximumWindowSize.X)-1;
+    physical.Bottom=min(size.Y,after.dwMaximumWindowSize.Y)-1;
+    if(!SetConsoleCursorPosition(output,cursor) ||
+        !opennt_console_resize_grid(output,NULL,TRUE,&physical))return GetLastError();
+    window->Left=window->Top=0;window->Right=size.X-1;window->Bottom=size.Y-1;
+    return ERROR_SUCCESS;
+}
+
 
 DWORD run16_console_dispatch(run16_console_frontend *owner,const console_io_request *request,
     console_io_reply *reply)
@@ -68,7 +111,7 @@ DWORD run16_console_dispatch(run16_console_frontend *owner,const console_io_requ
     if (!owner->generation || request->generation!=owner->generation) return ERROR_ACCESS_DENIED;
     if (!request->sequence || owner->sequence==UINT32_MAX ||
         request->sequence!=owner->sequence+1 || request->bytes>CONSOLE_IO_DATA_BYTES ||
-        request->operation<CONSOLE_IO_WRITE || request->operation>CONSOLE_IO_READ_TEXT_CONFIGURATION)
+        request->operation<CONSOLE_IO_WRITE || request->operation>CONSOLE_IO_SNAPSHOT_END)
         return ERROR_INVALID_DATA;
     cells=request->operation>=CONSOLE_IO_READ_CELLS_A && request->operation<=CONSOLE_IO_WRITE_CELLS_W;
     write_cells=request->operation>=CONSOLE_IO_WRITE_CELLS_A && request->operation<=CONSOLE_IO_WRITE_CELLS_W;
@@ -137,6 +180,12 @@ DWORD run16_console_dispatch(run16_console_frontend *owner,const console_io_requ
     position.X=(SHORT)s->x; position.Y=(SHORT)s->y;
     SetLastError(ERROR_SUCCESS);
     switch (request->operation) {
+    case CONSOLE_IO_SNAPSHOT_BEGIN:
+        mode=owner->snapshot_begin ? owner->snapshot_begin(owner->io_context) : ERROR_INVALID_FUNCTION;
+        ok=mode==ERROR_SUCCESS;SetLastError(mode);break;
+    case CONSOLE_IO_SNAPSHOT_END:
+        mode=owner->snapshot_end ? owner->snapshot_end(owner->io_context) : ERROR_INVALID_FUNCTION;
+        ok=mode==ERROR_SUCCESS;SetLastError(mode);break;
     case CONSOLE_IO_READ_TEXT_CONFIGURATION:
         mode=owner->read_text_configuration ?
             owner->read_text_configuration(owner->io_context,s->count,s->mode,reply) : ERROR_NOT_FOUND;
@@ -268,6 +317,11 @@ DWORD run16_console_dispatch(run16_console_frontend *owner,const console_io_requ
         CONSOLE_SCREEN_BUFFER_INFO info;
         ok=GetConsoleScreenBufferInfo(owner->output,&info);
         if (ok) {
+            if(owner->logical_window) {
+                info.srWindow=*owner->logical_window;
+                /* Transport capacity, not host pixel/font-derived limits. */
+                info.dwMaximumWindowSize.X=160;info.dwMaximumWindowSize.Y=96;
+            }
             reply->state.width=info.dwSize.X; reply->state.height=info.dwSize.Y;
             reply->state.x=info.dwCursorPosition.X; reply->state.y=info.dwCursorPosition.Y;
             reply->state.left=info.srWindow.Left; reply->state.top=info.srWindow.Top;
@@ -389,11 +443,38 @@ DWORD run16_console_dispatch(run16_console_frontend *owner,const console_io_requ
     case CONSOLE_IO_BUFFER_SIZE: {
         COORD size={(SHORT)s->width,(SHORT)s->height};
         ok=opennt_console_resize_grid(owner->output,&size,FALSE,NULL);
+        if(ok && owner->logical_window) {
+            SMALL_RECT *r=owner->logical_window;
+            r->Right=min(r->Right,size.X-1);r->Bottom=min(r->Bottom,size.Y-1);
+            r->Left=min(r->Left,r->Right);r->Top=min(r->Top,r->Bottom);
+        }
         break;
     }
     case CONSOLE_IO_WINDOW_RECT: {
         SMALL_RECT rect={(SHORT)s->left,(SHORT)s->top,(SHORT)s->right,(SHORT)s->bottom};
-        ok=opennt_console_resize_grid(owner->output,NULL,s->mode!=0,&rect);
+        if(owner->logical_window) {
+            CONSOLE_SCREEN_BUFFER_INFO info;
+            LONG left=rect.Left,top=rect.Top,right=rect.Right,bottom=rect.Bottom;
+            if(!s->mode) {
+                left+=owner->logical_window->Left;top+=owner->logical_window->Top;
+                right+=owner->logical_window->Right;bottom+=owner->logical_window->Bottom;
+            }
+            ok=GetConsoleScreenBufferInfo(owner->output,&info);
+            if(ok && (left<0 || top<0 || right<left || bottom<top ||
+                right>=info.dwSize.X || bottom>=info.dwSize.Y ||
+                right-left>=160 || bottom-top>=96)) {ok=FALSE;SetLastError(ERROR_INVALID_PARAMETER);}
+            if(ok) {
+                SMALL_RECT physical;
+                rect.Left=(SHORT)left;rect.Top=(SHORT)top;rect.Right=(SHORT)right;rect.Bottom=(SHORT)bottom;
+                /* Only the visible presenter uses pixel-derived constraints.
+                 * Preserve the complete logical region independently. */
+                physical=rect;
+                physical.Right=(SHORT)(left+min(right-left+1,info.dwMaximumWindowSize.X)-1);
+                physical.Bottom=(SHORT)(top+min(bottom-top+1,info.dwMaximumWindowSize.Y)-1);
+                ok=opennt_console_resize_grid(owner->output,NULL,TRUE,&physical);
+                if(ok)*owner->logical_window=rect;
+            }
+        } else ok=opennt_console_resize_grid(owner->output,NULL,s->mode!=0,&rect);
         break;
     }
     case CONSOLE_IO_READ_CELLS_A:

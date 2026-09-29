@@ -1,9 +1,11 @@
 #include "native_console_frontend.h"
+#include "console_frontend.h"
 #include "window_controller.h"
 #include "window_keyboard.h"
 #include "window_mouse.h"
 #include "window_frame.h"
 #include "lib/kvm-window/render.h"
+#include "opennt-abi/host-compat/include/console_grid.h"
 
 /* Visible presentation and copied input only. DOS temporarily owns the I/O
  * route; the attached native worker is the return route, not a local backend. */
@@ -13,6 +15,9 @@ struct run16_native_frontend {
     BOOL input_mode_saved;
     HANDLE stop,refresh,refreshed,thread,changed,control[2];
     HANDLE console_input,console_output,console_surface;
+    SMALL_RECT logical_window;
+    BOOL native_geometry_pending;
+    COORD last_dos_size;
     HANDLE handoff,handoff_done;
     const void *handoff_owner;
     BOOL handoff_active,handoff_native;
@@ -26,8 +31,8 @@ struct run16_native_frontend {
     BOOL controls_live;
     frontend_window_controller *window;
     frontend_keyboard_delivery keyboard;
-    frontend_native_mouse native_mouse;
     frontend_dos_mouse dos_mouse;
+    DWORD pointer_control;
     kvm_window_frame *window_frame;
     BOOL window_active;
     BOOL console_f_down,console_shortcut;
@@ -72,6 +77,20 @@ static DWORD dos_input_write(run16_native_frontend *frontend,
 static DWORD window_records(void *context,const INPUT_RECORD *records,DWORD count)
 {
     run16_native_frontend *frontend=context;
+    if(!frontend->dos_owner && count && records[0].EventType==CONSOLE_INPUT_RELATIVE_MOUSE) {
+        INPUT_RECORD translated[2];DWORD i;
+        if(count>ARRAYSIZE(translated))return ERROR_INVALID_DATA;
+        memcpy(translated,records,count*sizeof(*records));
+        for(i=0;i<count;++i)if(records[i].EventType==CONSOLE_INPUT_RELATIVE_MOUSE) {
+            console_mouse_input motion;console_pointer_input pointer;
+            memcpy(&motion,&records[i].Event,sizeof(motion));
+            pointer.dx=motion.dx;pointer.dy=motion.dy;pointer.control=frontend->pointer_control;
+            pointer.buttons=motion.buttons;pointer.action=motion.action;
+            translated[i].EventType=CONSOLE_INPUT_POINTER;
+            memcpy(&translated[i].Event,&pointer,sizeof(pointer));
+        }
+        return dos_input_write(frontend,translated,count,FALSE);
+    }
     /* Both workers consume this copied queue through the same channel. */
     return dos_input_write(frontend,records,count,FALSE);
 }
@@ -79,13 +98,9 @@ static lib_bool window_input(void *context,const frontend_window_input *input)
 {
     run16_native_frontend *frontend=context;
     DWORD error;
-    if(frontend->dos_owner) {
-        error=frontend_dos_mouse_dispatch(&frontend->dos_mouse,input,window_records,frontend);
-        if(error)return FALSE;
-    } else {
-        error=frontend_native_mouse_dispatch(&frontend->native_mouse,input,window_records,frontend);
-        if(error)return FALSE;
-    }
+    frontend->pointer_control=input->control_state;
+    error=frontend_dos_mouse_dispatch(&frontend->dos_mouse,input,window_records,frontend);
+    if(error)return FALSE;
     return frontend_keyboard_dispatch(&frontend->keyboard,input,!frontend->dos_owner,
         window_records,frontend)==ERROR_SUCCESS;
 }
@@ -93,7 +108,7 @@ static DWORD window_route(void *context,BOOL window,BOOL graphics)
 {
     run16_native_frontend *frontend=context;
     (void)graphics;
-    if(!window && frontend->dos_owner) {
+    if(!window) {
         DWORD error=frontend_dos_mouse_leave(&frontend->dos_mouse,window_records,frontend);
         if(error)return error;
     }
@@ -121,7 +136,7 @@ static DWORD window_route(void *context,BOOL window,BOOL graphics)
     frontend->window_active=window;
     /* Painting must work before the user moves the mouse. Geometry may arrive
        after a forced Window selection; the frame path completes that case. */
-    if(window && frontend->dos_owner && frontend->dos_mouse.width)
+    if(window && frontend->dos_mouse.width)
         return frontend_dos_mouse_enter(&frontend->dos_mouse,window_records,frontend);
     return ERROR_SUCCESS;
 }
@@ -208,8 +223,7 @@ static DWORD present_loop(run16_native_frontend *frontend)
             error=collect_dos_console(frontend);
             waits[count++]=frontend->console_input;
         }
-        if(!error && (frontend->dos_owner ? frontend->dos_mouse.width!=0 :
-            frontend->native_owner && frontend->native_mouse.ready))
+        if(!error && frontend->dos_mouse.width)
             error=frontend_window_poll(frontend->window);
         if(!error) {
             LONG display=InterlockedExchange(&frontend->display_request,0);
@@ -226,23 +240,11 @@ static DWORD present_loop(run16_native_frontend *frontend)
                     error=frontend_window_dos_frame(video,frontend->window_frame);
                     if(!error && !kvm_window_frame_size(frontend->window_frame,&width,&height))
                         error=ERROR_INVALID_DATA;
-                    if(!error && frontend->dos_owner)
+                    if(!error)
                         error=frontend_dos_mouse_geometry(&frontend->dos_mouse,width,height);
-                    if(!error && !frontend->dos_owner) {
-                        CONSOLE_SCREEN_BUFFER_INFO info;
-                        const console_text_style *style=(const console_text_style *)video->pixels;
-                        if(video->description.kind!=CONSOLE_VIDEO_TEXT_FRAME)error=ERROR_INVALID_DATA;
-                        else if(!GetConsoleScreenBufferInfo(frontend->console_output,&info))error=GetLastError();
-                        else error=frontend_native_mouse_geometry(&frontend->native_mouse,
-                            info.srWindow,8,style->font_height);
-                    }
-                    if(!error && !frontend->dos_owner && frontend->native_mouse.source) {
-                        POINT pointer={frontend->native_mouse.x,frontend->native_mouse.y};
-                        error=frontend_window_pointer(frontend->window_frame,&pointer);
-                    }
                     if(!error)error=frontend_window_present(frontend->window,frontend->window_frame,
                         video->description.kind==CONSOLE_VIDEO_DIB);
-                    if(!error && frontend->window_active && frontend->dos_owner)
+                    if(!error && frontend->window_active)
                         error=frontend_dos_mouse_enter(&frontend->dos_mouse,window_records,frontend);
                 } else error=frontend_window_clear(frontend->window);
                 if(!error)*published=serial;
@@ -292,6 +294,34 @@ DWORD run16_native_frontend_create(run16_native_frontend **output)
     if(frontend->console_input==INVALID_HANDLE_VALUE || frontend->console_output==INVALID_HANDLE_VALUE) {
         error=GetLastError();run16_native_frontend_destroy(frontend);return error;
     }
+    {
+        CONSOLE_SCREEN_BUFFER_INFO info;
+        COORD capacity;
+        /* Initial logical text mode, not the monitor-constrained viewport.
+         * Existing cells/scrollback survive; subsequent worker requests own
+         * deliberate geometry changes. */
+        frontend->logical_window.Right=79;frontend->logical_window.Bottom=24;
+        if(!GetConsoleScreenBufferInfo(frontend->console_output,&info)) {
+            error=GetLastError();run16_native_frontend_destroy(frontend);return error;
+        }
+        capacity.X=80;capacity.Y=max(info.dwSize.Y,25);
+        if(info.srWindow.Right>=80) {
+            SMALL_RECT window=info.srWindow;
+            window.Left=0;window.Right=79;
+            if(!opennt_console_resize_grid(frontend->console_output,NULL,TRUE,&window)) {
+                error=GetLastError();run16_native_frontend_destroy(frontend);return error;
+            }
+        }
+        if((capacity.X!=info.dwSize.X || capacity.Y!=info.dwSize.Y) &&
+            !opennt_console_resize_grid(frontend->console_output,&capacity,FALSE,NULL)) {
+            error=GetLastError();run16_native_frontend_destroy(frontend);return error;
+        }
+        if(!GetConsoleScreenBufferInfo(frontend->console_output,&info)) {
+            error=GetLastError();run16_native_frontend_destroy(frontend);return error;
+        }
+        frontend->logical_window.Top=max(0,info.dwCursorPosition.Y-24);
+        frontend->logical_window.Bottom=frontend->logical_window.Top+24;
+    }
     if(!GetConsoleMode(frontend->console_input,&frontend->original_input_mode)) {
         error=GetLastError();run16_native_frontend_destroy(frontend);return error;
     }
@@ -322,6 +352,8 @@ DWORD run16_native_frontend_create(run16_native_frontend **output)
     if(!frontend->thread) { error=GetLastError();run16_native_frontend_destroy(frontend);return error; }
     *output=frontend;return ERROR_SUCCESS;
 }
+SMALL_RECT *run16_native_frontend_text_region(run16_native_frontend *frontend)
+{ return frontend ? &frontend->logical_window : NULL; }
 DWORD run16_native_frontend_console(run16_native_frontend *frontend,HANDLE *input,HANDLE *output)
 {
     DWORD error;
@@ -377,7 +409,23 @@ static DWORD apply_binding(run16_native_frontend *frontend,const void *owner,BOO
     if(active && *slot==owner)return 0;
     if(*slot && *slot!=owner)return ERROR_BUSY;
     if(!active && !*slot)return 0;
-    if(frontend->dos_owner ? frontend->dos_mouse.width!=0 : frontend->native_mouse.ready)
+    if(!native) {
+        if(active && frontend->native_geometry_pending) {
+            error=run16_console_prepare_dos(frontend->console_output,
+                &frontend->logical_window,frontend->last_dos_size);
+            if(error)return error;
+            frontend->native_geometry_pending=FALSE;
+        } else if(!active) {
+            COORD size={frontend->logical_window.Right-frontend->logical_window.Left+1,
+                frontend->logical_window.Bottom-frontend->logical_window.Top+1};
+            if(run16_console_dos_size(size))frontend->last_dos_size=size;
+        }
+    }
+    /* Initial DOS startup retains the original Console scrollback path.
+     * Only a published native page needs conversion before DOS resumes. */
+    if(native && !active && frontend->native_video && frontend->native_video->pixels)
+        frontend->native_geometry_pending=TRUE;
+    if(frontend->dos_mouse.width)
         error=frontend_window_mode(frontend->window)==FRONTEND_DISPLAY_WINDOW ?
             frontend_window_poll(frontend->window) : frontend_window_clear(frontend->window);
     if(error)return error;
@@ -385,13 +433,12 @@ static DWORD apply_binding(run16_native_frontend *frontend,const void *owner,BOO
      * Keep unsent keyboard/focus typeahead in the one frontend queue. */
     for(i=0;i<frontend->dos_input_count;++i) {
         WORD type=frontend->dos_input[i].EventType;
-        if(type!=CONSOLE_INPUT_RELATIVE_MOUSE && type!=MOUSE_EVENT)
+        if(type!=CONSOLE_INPUT_RELATIVE_MOUSE && type!=CONSOLE_INPUT_POINTER && type!=MOUSE_EVENT)
             frontend->dos_input[kept++]=frontend->dos_input[i];
     }
     frontend->dos_input_count=kept;
     if(!kept && !ResetEvent(frontend->dos_input_ready))return GetLastError();
     ZeroMemory(&frontend->dos_mouse,sizeof(frontend->dos_mouse));
-    ZeroMemory(&frontend->native_mouse,sizeof(frontend->native_mouse));
     *slot=active ? owner : NULL;
     if(!native && frontend->dos_pending==owner)frontend->dos_pending=NULL;
     if(native) {
@@ -471,6 +518,10 @@ DWORD run16_native_frontend_screen_begin(run16_native_frontend *frontend)
 { (void)frontend;return 0; }
 DWORD run16_native_frontend_screen_end(run16_native_frontend *frontend,BOOL write)
 { (void)frontend;(void)write;return 0; }
+void run16_native_frontend_snapshot_begin(run16_native_frontend *frontend)
+{ EnterCriticalSection(&frontend->io_lock); }
+void run16_native_frontend_snapshot_end(run16_native_frontend *frontend)
+{ LeaveCriticalSection(&frontend->io_lock); }
 BOOL run16_native_frontend_text_frame_required(run16_native_frontend *frontend)
 {
     /* This request disables the original DOS stream path. Font handoff must

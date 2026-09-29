@@ -6,7 +6,7 @@
 
 /* Direct worker/frontend protocol; no pointers or native resource identities.
  * Local x86 peers are authenticated by the BaseSrv channel attachment. */
-#define CONSOLE_IO_VERSION 17u
+#define CONSOLE_IO_VERSION 19u
 /* Activation's state.mode selects the endpoint's input interpretation, not
  * a different frame format or an execution scheduler. */
 enum { CONSOLE_IO_WORKER_DOS=0, CONSOLE_IO_WORKER_NATIVE=1 };
@@ -68,7 +68,11 @@ enum console_io_operation {
     /* state.count = byte offset, state.mode = revision (zero starts read).
      * Reply count = total bytes, mode = revision; data is one bounded tile.
      * No published text configuration returns ERROR_NOT_FOUND. */
-    CONSOLE_IO_READ_TEXT_CONFIGURATION
+    CONSOLE_IO_READ_TEXT_CONFIGURATION,
+    /* Native worker copies a multi-tile frontend screen while its channel
+     * owns the frontend I/O lock. The channel releases it on END or EOF. */
+    CONSOLE_IO_SNAPSHOT_BEGIN,
+    CONSOLE_IO_SNAPSHOT_END
 };
 enum console_io_window_query {
     CONSOLE_WINDOW_ICONIC=1,

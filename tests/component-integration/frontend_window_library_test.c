@@ -29,7 +29,7 @@ static DWORD frontend_window_native_frame_pointer(const run16_native_frame_info 
     if(error)return error;
     video.pixels=payload;video.published_serial=1;
     error=frontend_window_dos_frame(&video,frame);
-    if(!error && !frame->graphics) {
+    if(!error && !pointer && !frame->graphics) {
         kvm_window_text_frame *fonts=HeapAlloc(GetProcessHeap(),0,sizeof(*fonts));
         frontend_text_raster *scratch=HeapAlloc(GetProcessHeap(),0,sizeof(*scratch));
         if(!fonts || !scratch)error=ERROR_NOT_ENOUGH_MEMORY;
@@ -44,7 +44,6 @@ static DWORD frontend_window_native_frame_pointer(const run16_native_frame_info 
         if(scratch)HeapFree(GetProcessHeap(),0,scratch);
         if(fonts)HeapFree(GetProcessHeap(),0,fonts);
     }
-    if(!error)error=frontend_window_pointer(frame,pointer);
     HeapFree(GetProcessHeap(),0,payload);
     if(error)frame->valid=0;
     return error;
@@ -278,6 +277,64 @@ int main(void)
         CHECK(frame->image.height==500 && frame->image.pixels[19*640+7]==9);
         --text.bytes;
         CHECK(run16_console_video_begin(&video,5,&text)==ERROR_INVALID_DATA);
+        /* Text transport is not subject to the 768-line DIB limit. The
+         * unchanged library directly renders 80x50 with a 16-line font. */
+        text.height=50;text.bytes=sizeof(*style)+160*50;
+        style->font_height=16;style->attribute_font_select=1;
+        style->fonts[1][65][15]=1;
+        CHECK(!run16_console_video_begin(&video,6,&text));
+        CHECK(!run16_console_video_data(&video,6,0,payload,text.bytes));
+        CHECK(!frontend_window_dos_frame(&video,frame) && !frame->graphics);
+        CHECK(frame->text.base.text_rows==50 && frame->text.base.font_height==16);
+        valid=LIB_FALSE;
+        CHECK(kvm_window_render_frame(frame,pixels,640,800,&valid,&changed));
+        CHECK(pixels[799*640+639]==0x123456);
+        free(payload);run16_console_video_dispose(&video);
+        /* The normal native 16-line font plus a per-cell underline must not
+         * turn a supported 80x50 TEXT page into an oversized DIB. */
+        text.stride=240;text.bytes=sizeof(*style)+text.stride*50;
+        payload=calloc(1,text.bytes);CHECK(payload);style=(console_text_style *)payload;
+        style->font_height=16;text.palette[7]=0xabcdef;
+        for(unsigned cell=0;cell<4000;++cell) {
+            payload[sizeof(*style)+cell*3]=' ';
+            payload[sizeof(*style)+cell*3+1]=7;
+        }
+        payload[sizeof(*style)+3999*3+2]=CONSOLE_TEXT_UNDERLINE;
+        CHECK(!run16_console_video_begin(&video,1,&text));
+        CHECK(!run16_console_video_data(&video,1,0,payload,text.bytes));
+        CHECK(!frontend_window_dos_frame(&video,frame) && !frame->graphics);
+        valid=LIB_FALSE;
+        CHECK(kvm_window_render_frame(frame,pixels,640,800,&valid,&changed));
+        CHECK(pixels[799*640+639]==0xabcdef && pixels[799*640+631]==0);
+        CHECK(pixels[798*640+639]==0);
+        CHECK(payload[sizeof(*style)+3999*3]==' ' && style->fonts[0][' '][15]==0);
+        style->attribute_font_select=1;
+        for(unsigned glyph=0;glyph<256;++glyph)for(unsigned line=0;line<16;++line) {
+            style->fonts[0][glyph][line]=(BYTE)(glyph+line);
+            style->fonts[1][glyph][line]=(BYTE)(glyph+line+1);
+        }
+        for(unsigned cell=0;cell<4000;++cell) {
+            payload[sizeof(*style)+cell*3]=(BYTE)(cell%256);
+            payload[sizeof(*style)+cell*3+1]=7;
+            payload[sizeof(*style)+cell*3+2]=cell>=256 && cell<512 ? CONSOLE_TEXT_UNDERLINE : 0;
+        }
+        CHECK(!run16_console_video_begin(&video,2,&text));
+        CHECK(!run16_console_video_data(&video,2,0,payload,text.bytes));
+        CHECK(!frontend_window_dos_frame(&video,frame) && !frame->graphics);
+        for(unsigned cell=0;cell<512;++cell) {
+            kvm_text_cell mapped=frame->text.base.cells[(cell/80)*KVM_TEXT_COLUMNS+cell%80];
+            const lib_u8 *font=mapped.glyph_bank ? frame->text.secondary_font : frame->text.font;
+            CHECK(mapped.foreground==7 && mapped.background==0);
+            for(unsigned line=0;line<16;++line)
+                CHECK(font[mapped.glyph_index*16+line]==
+                    (cell>=256 && line==15 ? 255 : (BYTE)(cell%256+line)));
+        }
+        /* No silent style loss if a dual-font page needs a 513th variant. */
+        payload[sizeof(*style)+512*3+1]=15;
+        CHECK(!run16_console_video_begin(&video,3,&text));
+        CHECK(!run16_console_video_data(&video,3,0,payload,text.bytes));
+        CHECK(frontend_window_dos_frame(&video,frame)==ERROR_NOT_SUPPORTED && !frame->valid);
+        CHECK(style->fonts[0][0][15]==15 && style->fonts[1][0][15]==16);
         free(payload);run16_console_video_dispose(&video);
         puts("PASS copied DOS text: complete-frame publication, 80x50 dual font, tall glyph fallback and malformed frame retention");
     }
@@ -299,21 +356,6 @@ int main(void)
     native.cursor.bVisible = TRUE;
     CHECK(frontend_window_native_frame(&native, native_cells, 5001u * 300u, frame) == ERROR_SUCCESS);
     CHECK(frame->image.palette[frame->image.pixels[13 * 8]] == (0x151617 ^ 0xffffff));
-    {
-        POINT pointer={0,0};unsigned arrow_pixels=0,index;
-        CHAR_INFO original=native_cells[5001 * 299 + 5000];
-        DWORD pointer_error=frontend_window_native_frame_pointer(&native,native_cells,5001u*300u,&pointer,frame);
-        if(pointer_error)fprintf(stderr,"pointer conversion error=%lu last=%lu\n",pointer_error,GetLastError());
-        CHECK(!pointer_error);
-        for(index=0;index<8u*14u;++index) {
-            DWORD color=frame->image.palette[frame->image.pixels[index]];
-            if(color==0 || color==0xffffff)++arrow_pixels;
-        }
-        CHECK(arrow_pixels && !memcmp(&original,&native_cells[5001 * 299 + 5000],sizeof(original)));
-        CHECK(!frontend_window_native_frame(&native,native_cells,5001u*300u,frame));
-        CHECK(frame->image.palette[frame->image.pixels[0]]==0x050a0f);
-        puts("PASS native pointer is a clipped OS arrow on copied raster; Console cells and text caret remain independent");
-    }
     CHECK(frontend_window_native_frame(&native, native_cells, 1, frame) == ERROR_INVALID_DATA && !frame->valid);
     /* Large backing buffers and large visible viewports are distinct. */
     native.cursor.bVisible = FALSE;

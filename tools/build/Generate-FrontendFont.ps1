@@ -18,6 +18,15 @@ for ($glyph=0; $glyph -lt 256; ++$glyph) {
     $lines += '    {' + ($values -join ',') + '},'
 }
 $lines += '};'
+# Original sas.h EGA_HIFONT / ega_vide.c load_font(...,16), used by the
+# original 80x25 VGA mode. Keep the EGA table for its existing consumers.
+$lines += 'static const unsigned char frontend_native_vga_font[256][16] = {'
+for ($glyph=0; $glyph -lt 256; ++$glyph) {
+    $offset = 0x3990 + $glyph*16
+    $values = $bytes[$offset..($offset+15)] | ForEach-Object { '0x{0:x2}' -f $_ }
+    $lines += '    {' + ($values -join ',') + '},'
+}
+$lines += '};'
 $text = ($lines -join "`n") + "`n"
 [void](New-Item -ItemType Directory -Force -Path ([IO.Path]::GetDirectoryName($output)))
 if (!(Test-Path -LiteralPath $output) -or [IO.File]::ReadAllText($output) -cne $text) {

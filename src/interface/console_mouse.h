@@ -5,6 +5,16 @@
 /* Private copied input between authenticated frontend and DOS worker. This
  * tag is never a Windows Console INPUT_RECORD event for a native process. */
 #define CONSOLE_INPUT_RELATIVE_MOUSE 0x8001u
+/* Backend-owned logical pointer. Unlike the DOS geometry notification above,
+ * this carries modifiers, not a frontend-selected coordinate extent. Never
+ * deliver this private record to a native Console application. */
+#define CONSOLE_INPUT_POINTER 0x8002u
+typedef struct console_pointer_input {
+    int32_t dx,dy;
+    uint32_t control;
+    uint16_t buttons,action;
+} console_pointer_input;
+typedef char console_pointer_payload_size[(sizeof(console_pointer_input)==16) ? 1 : -1];
 enum console_mouse_action {
     CONSOLE_MOUSE_ENTER=1,
     CONSOLE_MOUSE_MOVE,

@@ -7,6 +7,8 @@ typedef struct run16_native_frontend run16_native_frontend;
 DWORD run16_native_frontend_create(run16_native_frontend **);
 /* Caller owns non-inheritable duplicates of the session's canonical handles. */
 DWORD run16_native_frontend_console(run16_native_frontend *,HANDLE *,HANDLE *);
+/* Frontend-local borrowed state; channel access requires the shared I/O lock. */
+SMALL_RECT *run16_native_frontend_text_region(run16_native_frontend *);
 /* Frontend-local presentation request; never changes target execution. */
 DWORD run16_native_frontend_display(run16_native_frontend *,BOOL window);
 void run16_native_frontend_destroy(run16_native_frontend *);
@@ -22,6 +24,8 @@ DWORD run16_native_frontend_dos_enter(run16_native_frontend *,const void *);
 void run16_native_frontend_dos_leave(run16_native_frontend *);
 DWORD run16_native_frontend_screen_begin(run16_native_frontend *);
 DWORD run16_native_frontend_screen_end(run16_native_frontend *,BOOL);
+void run16_native_frontend_snapshot_begin(run16_native_frontend *);
+void run16_native_frontend_snapshot_end(run16_native_frontend *);
 /* Caller holds the successful dos_enter lock. */
 BOOL run16_native_frontend_text_frame_required(run16_native_frontend *);
 /* Caller holds the active channel's I/O lock; copied data only. */

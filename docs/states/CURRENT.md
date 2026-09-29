@@ -27,6 +27,35 @@
 
 ### Current investigation
 
+Final gate update: r70 temporarily published the fully tested candidate;
+published Console r71 and Window r75 each passed17/17, WOW r76 preserved all
+three frontiers, and DOS/native mouse checks r77/r78 passed. However r79 real
+22-row geometry handoff returned1237 from a subsequent native child. S13 stays
+open. The complete eight-file runtime was restored to the S12 hashes from
+publication-backup-r70. Candidate r81 passed the five-mode matrix but does not
+erase the intermittent failure. The later protocol19 candidate holds the
+NTKVM frontend lock across NTCON's full multi-tile snapshot; EOF and invalid
+operations release it. Candidate r94/r97-r105 pass the lock, Console/Window,
+mouse, WOW, five-mode geometry and DDWWDDWW gates. Coherent r106 publication
+replaced the eight-file package with backup/manifest. Published r107-r112 pass
+the previously failing 22-row case, all five modes, Console/Window17/17 each,
+DOS/native mouse and three WOW baseline frontiers. All eight published hashes
+match formal output. r79 remains recorded as a real historical failure; its
+exact emitting stage was not traced then, and is not asserted retroactively.
+
+Earlier r51-r67: worker-owned reverse-video mouse block is implemented and
+tested without TEXT frame ABI/shared-library changes. The input channel is now
+version19 for the screen snapshot transaction and worker-owned pointer events.
+Five real DOS video modes22/25/28/43/50 pass three native/DOS/native cycles each;
+the BIOS probe uses the original INT10 query activation instead of mistaking
+dormant stream-mode BIOS data for an applied VGA mode. Original mirrors are
+unchanged. Two independent native sessions retain dimensions/history, and the
+DDWWDDWW Window chain passes. Styled80x50/font16 uses existing library glyph
+slots instead of an oversized DIB. Console/Window r56/r57 each pass17/17;
+WOW r63 retains the three distinct frontiers. At that stage, final relink,
+whole-set publication, governance and commit/push remained delivery gates;
+the newer r106-r112 evidence above supersedes that publication status.
+
 Published-package isolated-desktop probes r135-r137 used no Computer Use.
 Both DOS -> CMD -> DOS and CMD -> DOS -> CMD completed with scripted input.
 r137 retained one HWND: DOS text 80x22/font16 with client 411x227, native text
@@ -36,6 +65,57 @@ logical extents. This proves the physical-viewport leak, not a passing repair.
 Raw evidence is O:/winnt/Logs2/t423-window-geometry-r135.txt through r137.txt,
 including .geometry.txt and per-line snapshots. r133 failed before input-ready
 and is not a passing geometry run; r134 passed the standard round trip.
+
+S13 research r1-r3 adds tests/observation/console_logical_geometry_probe.c,
+built /MT x86 under build/M0-T423/S13/console-geometry-r1 through r3.
+The probe self-launches on a private desktop; it never switches the desktop,
+changes registry/guest/product files, or queries host display dimensions to
+choose geometry. Runtime reports are O:/winnt/Logs2/t423-s13-console-geometry-r1.txt
+through r3.txt. Default 7x16 hidden font rejected viewport 80x25 with error 87;
+1x1 and requested 2x2 (actual 1x2) triggered buffer minimum-size failures.
+Fixed actual 2x4 accepted and read back exact buffer/viewport 80x25, 80x50 and
+120x40. This is one-host API feasibility evidence, not a production solution
+or universal size guarantee. Next: prove independent logical geometry and
+application-originated resize observation, then real backend application and
+original DOS return conversion. These experiments preceded the production candidate.
+
+The uncommitted candidate now separates logical and physical viewport state,
+applies/readbacks real NTCON geometry, and prepares supported DOS geometry for
+the original return path. Targeted capture/conversion tests pass. Real private
+desktop r18 DOS -> CMD -> DOS retained one HWND, 80x25/font16 and client
+304x190 across 534 probe samples. r20 reverse CMD -> DOS -> CMD also preserved
+80x25/font16. Repeated native history reseed tests pass (352 presentation checks).
+r21 exposed MODE clipping through inherited hidden font metrics; fixed carrier
+initialization corrected r22 to full 120x40, then DOS fallback and native return
+at 80x25. Broader supported resize, live scrolling, failure/acknowledgment and
+full regression remain open. r25 traced resize-time capture failure; r31
+proved the changed-geometry retry and full 43-row DOS/font8 handoff, including
+200-column host independence and removal of the stale25 frame. Formal race,
+frame and lifecycle fixtures pass. Full Console r33 caught initial DOS
+scrollback truncation; repaired nested-mem r34 passes unchanged assertions.
+Complete Console/Window suites r35/r36 pass 17/17 each; r37 retains frame
+anti-replay serial checks. WOW r38 preserves the three previous frontiers.
+Earlier r39 exposed inactive-union native arrow reads; r40's temporary
+conversion still failed80x50 at the graphics768-line limit. Both approaches
+are superseded by the approved NTCON text-cell pointer below, which passes
+80x50 without a graphics frame or library change.
+The earlier800-line library-capacity request is withdrawn: the owner has
+approved moving native pointer ownership into NTCON, rather than extending
+NTKVM's native-only composition. r41 logical mouse geometry and existing
+failure/reset assertions pass. Owner selected the reverse-video text-cell
+pointer, keeping the text ABI and library unchanged. NTCON now owns the logical
+pointer, copied-frame composition and native input translation; NTKVM's native
+position/arrow implementation is removed. Candidate input protocol18 carries
+relative pointer/modifier records without frontend-selected geometry. r42 has
+86 passing packing/pointer checks; r45 has378 passing real-Console/pipe checks.
+Full Console/Window regression r46/r47 each passes17/17. Real native80x50
+Window input r48 passes movement/press/release through NTCON, with sink receipt
+and output marker. WOW r49 preserves all three baseline frontiers. Real r50
+native50 -> DOS50 -> native120x40 -> restored DOS50 passes, including actual
+DOS font8 frames and output markers. No S closure is claimed.
+No candidate has
+replaced O:/winnt. Details and failed attempts are
+indexed in the [S13 evidence ledger](../etc/evidence/m0-t423-s13-text-geometry.md).
 
 Audit actual original DOS mode support and Console resize observability first.
 NTKVM owns acknowledged logical geometry, separate from physical viewport and

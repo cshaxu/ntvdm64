@@ -72,6 +72,13 @@ discards frontend-local dead-key composition, and retains the live source identi
 SOURCE_RETIRED alone permanently retires that identity. Native mouse capture
 release remains owned by kvm-window, not by the NTVDM worker.
 
+Logical text-region state is separate from the visible Console's physically
+limited viewport. Backend handoffs use the logical region; only presentation
+uses host window limits. NTKVM routes native pointer motion/modifiers but does
+not integrate its position or draw a native arrow. NTCON composes its text
+block cursor in the common frame; NTVDM retains its original guest cursor.
+No worker depends on this component's private renderer or display dimensions.
+
 ## Retired S9 backend evidence
 
 S9's native_conpty/native_terminal implementation is removed from the S12

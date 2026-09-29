@@ -1,6 +1,31 @@
 /* Recovered from S8 d253e55af native_console_capture.c; see component README. */
 #include "console_state.h"
 #include <string.h>
+#include <stdio.h>
+
+/* Optional failure evidence, never a geometry selector or recovery policy. */
+void ntcon_trace_error(const char *stage,DWORD operation,DWORD error)
+{
+    WCHAR path[MAX_PATH];char line[320];DWORD length,written;
+    HANDLE file,output;
+    CONSOLE_SCREEN_BUFFER_INFO info={0};
+    CONSOLE_FONT_INFOEX font={sizeof(font)};
+    if(!error || error==ERROR_NOT_READY || error==ERROR_BUSY)return;
+    length=GetEnvironmentVariableW(L"NTCON_GEOMETRY_ERROR_LOG",path,MAX_PATH);
+    if(!length || length>=MAX_PATH)return;
+    output=CreateFileW(L"CONOUT$",GENERIC_READ|GENERIC_WRITE,
+        FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,OPEN_EXISTING,0,NULL);
+    if(output!=INVALID_HANDLE_VALUE) {
+        GetConsoleScreenBufferInfo(output,&info);GetCurrentConsoleFontEx(output,FALSE,&font);
+        CloseHandle(output);
+    }
+    length=(DWORD)sprintf_s(line,sizeof(line),"pid=%lu stage=%s operation=%lu error=%lu buffer=%dx%d rect=%d,%d,%d,%d cursor=%d,%d carrier=%dx%d\r\n",
+        GetCurrentProcessId(),stage,operation,error,info.dwSize.X,info.dwSize.Y,
+        info.srWindow.Left,info.srWindow.Top,info.srWindow.Right,info.srWindow.Bottom,
+        info.dwCursorPosition.X,info.dwCursorPosition.Y,font.dwFontSize.X,font.dwFontSize.Y);
+    file=CreateFileW(path,FILE_APPEND_DATA,FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,OPEN_ALWAYS,0,NULL);
+    if(file!=INVALID_HANDLE_VALUE){WriteFile(file,line,length,&written,NULL);CloseHandle(file);}
+}
 
 /* Same-owner recovery: S8 native_console_host.c::input_records. Do not use an
  * inherited Ctrl-C ignore flag: each native target retains its own handlers. */
@@ -32,6 +57,61 @@ DWORD ntcon_input_write(HANDLE input,const INPUT_RECORD *records,DWORD count,DWO
     return ERROR_SUCCESS;
 }
 
+/* A hidden Console still enforces pixel-window limits. Use a fixed carrier
+ * font only when that blocks the requested logical region; never derive the
+ * region from those limits. This is not the copied glyph/Window font. */
+static DWORD prepare_hidden_geometry(HANDLE output)
+{
+    CONSOLE_FONT_INFOEX font={sizeof(font)},actual={sizeof(actual)};
+    if(!GetCurrentConsoleFontEx(output,FALSE,&font))return GetLastError();
+    if(font.dwFontSize.X==2 && font.dwFontSize.Y==4)return ERROR_SUCCESS;
+    font.dwFontSize.X=2;font.dwFontSize.Y=4;
+    font.FontFamily=FF_MODERN; font.FontWeight=FW_NORMAL;
+    wcscpy_s(font.FaceName,LF_FACESIZE,L"Consolas");
+    if(!SetCurrentConsoleFontEx(output,FALSE,&font) ||
+        !GetCurrentConsoleFontEx(output,FALSE,&actual))return GetLastError();
+    return actual.dwFontSize.X==2 && actual.dwFontSize.Y==4 ? ERROR_SUCCESS : ERROR_NOT_SUPPORTED;
+}
+
+DWORD ntcon_console_initialize(void)
+{
+    DWORD error;
+    HANDLE output=CreateFileW(L"CONOUT$",GENERIC_READ|GENERIC_WRITE,
+        FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,OPEN_EXISTING,0,NULL);
+    if(output==INVALID_HANDLE_VALUE)return GetLastError();
+    error=prepare_hidden_geometry(output);
+    CloseHandle(output);return error;
+}
+
+static BOOL set_hidden_size(HANDLE output,COORD size)
+{
+    CONSOLE_SCREEN_BUFFER_INFOEX info={sizeof(info)};
+    if(SetConsoleScreenBufferSize(output,size))return TRUE;
+    if(GetLastError()!=ERROR_INVALID_PARAMETER)return FALSE;
+    if(!GetConsoleScreenBufferInfoEx(output,&info))return FALSE;
+    info.dwSize=size;
+    ++info.srWindow.Right;++info.srWindow.Bottom;
+    return SetConsoleScreenBufferInfoEx(output,&info);
+}
+
+static BOOL set_hidden_window(HANDLE output,const SMALL_RECT *window)
+{
+    CONSOLE_SCREEN_BUFFER_INFOEX info={sizeof(info)};
+    CONSOLE_SCREEN_BUFFER_INFO actual;
+    DWORD error;
+    if(SetConsoleWindowInfo(output,TRUE,window))return TRUE;
+    if(GetLastError()!=ERROR_INVALID_PARAMETER)return FALSE;
+    if(!GetConsoleScreenBufferInfoEx(output,&info))return FALSE;
+    info.srWindow=*window;
+    ++info.srWindow.Right;++info.srWindow.Bottom;
+    if(!SetConsoleScreenBufferInfoEx(output,&info) ||
+        !GetConsoleScreenBufferInfo(output,&actual))return FALSE;
+    if(!memcmp(&actual.srWindow,window,sizeof(*window)))return TRUE;
+    error=prepare_hidden_geometry(output);
+    if(error) {SetLastError(error);return FALSE;}
+    return SetConsoleWindowInfo(output,TRUE,window);
+}
+
 DWORD ntcon_screen_apply(HANDLE output,const CONSOLE_SCREEN_BUFFER_INFOEX *info,
     const CONSOLE_CURSOR_INFO *cursor)
 {
@@ -39,7 +119,7 @@ DWORD ntcon_screen_apply(HANDLE output,const CONSOLE_SCREEN_BUFFER_INFOEX *info,
     CONSOLE_CURSOR_INFO old_cursor;
     CONSOLE_SCREEN_BUFFER_INFO current;
     COORD capacity;
-    BOOL moved,colors,cursor_moved;
+    BOOL moved,resized,colors,cursor_moved;
     if(!info || !cursor || info->cbSize!=sizeof(*info) ||
         info->dwSize.X<=0 || info->dwSize.Y<=0 ||
         info->srWindow.Left<0 || info->srWindow.Top<0 ||
@@ -50,19 +130,22 @@ DWORD ntcon_screen_apply(HANDLE output,const CONSOLE_SCREEN_BUFFER_INFOEX *info,
         !cursor->dwSize || cursor->dwSize>100) return ERROR_INVALID_DATA;
     if(!GetConsoleScreenBufferInfoEx(output,&previous)) return GetLastError();
     if(!GetConsoleCursorInfo(output,&old_cursor))return GetLastError();
-    capacity.X=max(previous.dwSize.X,info->dwSize.X);
-    capacity.Y=max(previous.dwSize.Y,info->dwSize.Y);
+    resized=previous.dwSize.X!=info->dwSize.X || previous.dwSize.Y!=info->dwSize.Y;
     moved=memcmp(&previous.srWindow,&info->srWindow,sizeof(info->srWindow))!=0;
     cursor_moved=previous.dwCursorPosition.X!=info->dwCursorPosition.X ||
         previous.dwCursorPosition.Y!=info->dwCursorPosition.Y;
     colors=previous.wPopupAttributes!=info->wPopupAttributes ||
         memcmp(previous.ColorTable,info->ColorTable,sizeof(info->ColorTable))!=0;
-    /* Grow before moving the viewport; shrink only after it fits. */
+    /* Grow before moving the viewport; shrink only after it fits. InfoEx is
+     * only the fallback for the invisible carrier's pixel-window limits.
+     * Its setter consumes exclusive right/bottom, unlike its getter. */
+    capacity.X=max(previous.dwSize.X,info->dwSize.X);
+    capacity.Y=max(previous.dwSize.Y,info->dwSize.Y);
     if((capacity.X!=previous.dwSize.X || capacity.Y!=previous.dwSize.Y) &&
-        !SetConsoleScreenBufferSize(output,capacity)) return GetLastError();
-    if(moved && !SetConsoleWindowInfo(output,TRUE,&info->srWindow))return GetLastError();
+        !set_hidden_size(output,capacity))return GetLastError();
+    if(moved && !set_hidden_window(output,&info->srWindow))return GetLastError();
     if((capacity.X!=info->dwSize.X || capacity.Y!=info->dwSize.Y) &&
-        !SetConsoleScreenBufferSize(output,info->dwSize)) return GetLastError();
+        !set_hidden_size(output,info->dwSize))return GetLastError();
     copy=*info;
     if(colors && !SetConsoleScreenBufferInfoEx(output,&copy))return GetLastError();
     if(previous.wAttributes!=info->wAttributes && !SetConsoleTextAttribute(output,info->wAttributes))return GetLastError();
@@ -70,13 +153,20 @@ DWORD ntcon_screen_apply(HANDLE output,const CONSOLE_SCREEN_BUFFER_INFOEX *info,
     /* Moving a cursor may scroll the viewport; restore the source's exact
      * inclusive rectangle afterward, including a user-scrolled history view.
      * Do not resize an unchanged buffer: that creates input-event feedback. */
-    if(moved || colors || cursor_moved) {
+    if(resized || moved || colors || cursor_moved) {
         if(!GetConsoleScreenBufferInfo(output,&current))return GetLastError();
         if(memcmp(&current.srWindow,&info->srWindow,sizeof(info->srWindow)) &&
-            !SetConsoleWindowInfo(output,TRUE,&info->srWindow))return GetLastError();
+            !set_hidden_window(output,&info->srWindow))return GetLastError();
     }
     if((old_cursor.dwSize!=cursor->dwSize || old_cursor.bVisible!=cursor->bVisible) &&
         !SetConsoleCursorInfo(output,cursor))return GetLastError();
+    /* API success alone is not an application acknowledgment: the backend
+     * must really expose the inherited buffer, region and cursor to targets. */
+    if(!GetConsoleScreenBufferInfo(output,&current))return GetLastError();
+    if(current.dwSize.X!=info->dwSize.X || current.dwSize.Y!=info->dwSize.Y ||
+        memcmp(&current.srWindow,&info->srWindow,sizeof(info->srWindow)) ||
+        current.dwCursorPosition.X!=info->dwCursorPosition.X ||
+        current.dwCursorPosition.Y!=info->dwCursorPosition.Y)return ERROR_RETRY;
     return ERROR_SUCCESS;
 }
 
@@ -186,8 +276,20 @@ DWORD ntcon_capture_read(ntcon_capture *capture,DWORD offset,
     actual=requested;
     if (!GetConsoleScreenBufferInfoEx(capture->buffer,&before)) return GetLastError();
     if (!same_geometry(&capture->info,&before)) return ERROR_RETRY;
-    if (!ReadConsoleOutputW(capture->buffer,cells,size,origin,&actual) ||
-        !GetConsoleScreenBufferInfoEx(capture->buffer,&after)) return GetLastError();
+    if (!ReadConsoleOutputW(capture->buffer,cells,size,origin,&actual)) {
+        DWORD error=GetLastError();
+        /* A target can shrink the buffer after our preceding geometry read,
+         * making a formerly valid tile invalid. Prove that change before
+         * treating the API failure as a torn snapshot; do not mask real I/O
+         * errors or publish cells from two different geometries. */
+        if(GetConsoleScreenBufferInfoEx(capture->buffer,&after) &&
+            !same_geometry(&before,&after)) {
+            ntcon_trace_error("resized-during-read",0,error);
+            return ERROR_RETRY;
+        }
+        return error;
+    }
+    if (!GetConsoleScreenBufferInfoEx(capture->buffer,&after)) return GetLastError();
     if (memcmp(&requested,&actual,sizeof(actual)) || !same_geometry(&before,&after))
         return ERROR_RETRY;
     *region=actual;*count=columns*rows;

@@ -3,48 +3,6 @@
 #include "text_frame.h"
 
 
-/* Preserve the already accepted system-arrow presentation. GDI draws only
- * this pointer, never a second font renderer. */
-DWORD frontend_window_pointer(kvm_window_frame *frame,const POINT *pointer)
-{
-    HDC dc=NULL;HBITMAP bitmap=NULL;HGDIOBJ previous=NULL;
-    BITMAPINFO bmi={0};DWORD *pixels=NULL,error=ERROR_GEN_FAILURE;
-    unsigned n,i,colours=32,width=frame->image.width,height=frame->image.height;
-    HCURSOR arrow;ICONINFO icon={0};
-    if(!pointer)return 0;
-    dc=CreateCompatibleDC(NULL);if(!dc)goto done;
-    bmi.bmiHeader.biSize=sizeof(BITMAPINFOHEADER);
-    bmi.bmiHeader.biWidth=(LONG)width;bmi.bmiHeader.biHeight=-(LONG)height;
-    bmi.bmiHeader.biPlanes=1;bmi.bmiHeader.biBitCount=32;bmi.bmiHeader.biCompression=BI_RGB;
-    bitmap=CreateDIBSection(dc,&bmi,DIB_RGB_COLORS,(void **)&pixels,NULL,0);
-    if(!bitmap)goto done;
-    previous=SelectObject(dc,bitmap);if(!previous || previous==HGDI_ERROR)goto done;
-    for(n=0;n<width*height;++n)pixels[n]=frame->image.palette[frame->image.pixels[n]];
-    arrow=(HCURSOR)LoadImageW(NULL,MAKEINTRESOURCEW(32512),IMAGE_CURSOR,0,0,
-        LR_DEFAULTSIZE|LR_SHARED|LR_MONOCHROME);
-    if(!arrow || !GetIconInfo(arrow,&icon))goto done;
-    if(!DrawIconEx(dc,pointer->x-(int)icon.xHotspot,pointer->y-(int)icon.yHotspot,
-        arrow,0,0,0,NULL,DI_NORMAL) || !GdiFlush())goto done;
-    for(n=0;n<width*height;++n) {
-        DWORD rgb=pixels[n]&0xffffff;
-        for(i=0;i<colours && rgb!=frame->image.palette[i];++i) {}
-        if(i==colours) {
-            if(colours==KVM_WINDOW_GRAPHICS_PALETTE_ENTRIES) {error=ERROR_NOT_SUPPORTED;goto done;}
-            frame->image.palette[colours++]=rgb;
-        }
-        frame->image.pixels[n]=(lib_u8)i;
-    }
-    error=0;
-done:
-    if(icon.hbmMask)DeleteObject(icon.hbmMask);
-    if(icon.hbmColor)DeleteObject(icon.hbmColor);
-    if(previous && previous!=HGDI_ERROR)SelectObject(dc,previous);
-    if(bitmap)DeleteObject(bitmap);
-    if(dc)DeleteDC(dc);
-    return error;
-}
-
-
 static DWORD dos_text_frame(const run16_console_video *video,kvm_window_frame *frame)
 {
     const console_video_description *d=&video->description;
@@ -56,7 +14,7 @@ static DWORD dos_text_frame(const run16_console_video *video,kvm_window_frame *f
         (d->stride!=d->width*2 && d->stride!=d->width*3) || d->bytes!=sizeof(*style)+d->stride*d->height)
         return ERROR_INVALID_DATA;
     cell_bytes=d->stride/d->width;
-    if(!style->font_height || style->font_height>32 || d->height>768/style->font_height ||
+    if(!style->font_height || style->font_height>32 ||
         style->attribute_font_select>1 || style->cursor_visible>1 ||
         style->cursor_height<0 || style->cursor_height>32 || style->cursor_height1<0 || style->cursor_height1>32 ||
         style->cursor_start < -32 || style->cursor_start>31 ||

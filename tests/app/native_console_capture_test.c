@@ -94,9 +94,46 @@ static int child(void)
     CHECK(font.dwFontSize.X==after.dwFontSize.X && font.dwFontSize.Y==after.dwFontSize.Y &&
         font.FontFamily==after.FontFamily && font.FontWeight==after.FontWeight &&
         !wcscmp(font.FaceName,after.FaceName));
+    {
+        const COORD regions[]={{80,25},{80,50},{120,40},{80,25},{20,8},{80,43}};
+        DWORD region;
+        /* NTCON seeds CONOUT$, the active native carrier. Inactive buffers
+         * remain covered above; conhost's window/font setters require the
+         * active buffer to apply full logical viewport changes. */
+        CHECK(SetConsoleActiveScreenBuffer(output));
+        /* The request, not the host desktop or hidden font, owns these
+         * dimensions. Include both growth and a small shrink after growth. */
+        for(region=0;region<ARRAYSIZE(regions);++region) {
+            WCHAR edge=0;COORD last;
+            CHECK(GetConsoleScreenBufferInfoEx(output,&info));
+            info.dwSize=regions[region];
+            info.srWindow=(SMALL_RECT){0,0,info.dwSize.X-1,info.dwSize.Y-1};
+            last=(COORD){info.dwSize.X-1,info.dwSize.Y-1};
+            info.dwCursorPosition=last;
+            {
+                DWORD applied=ntcon_screen_apply(output,&info,&cursor);
+                if(applied) {
+                    char diagnostic[192];DWORD written;
+                    GetCurrentConsoleFontEx(output,FALSE,&after);
+                    GetConsoleScreenBufferInfoEx(output,&actual);
+                    sprintf_s(diagnostic,sizeof(diagnostic),"geometry %dx%d error=%lu actual=%d,%d-%d,%d font=%d,%d\n",
+                        regions[region].X,regions[region].Y,applied,actual.srWindow.Left,actual.srWindow.Top,
+                        actual.srWindow.Right,actual.srWindow.Bottom,after.dwFontSize.X,after.dwFontSize.Y);
+                    WriteFile(report,diagnostic,(DWORD)strlen(diagnostic),&written,NULL);
+                }
+                OK(applied);
+            }
+            CHECK(GetConsoleScreenBufferInfoEx(output,&actual));
+            CHECK(actual.dwSize.X==regions[region].X && actual.dwSize.Y==regions[region].Y);
+            CHECK(!memcmp(&actual.srWindow,&info.srWindow,sizeof(info.srWindow)));
+            CHECK(actual.dwCursorPosition.X==last.X && actual.dwCursorPosition.Y==last.Y);
+            CHECK(WriteConsoleOutputCharacterW(output,L"X",1,last,&count) && count==1);
+            CHECK(ReadConsoleOutputCharacterW(output,&edge,1,last,&count) && count==1 && edge==L'X');
+        }
+    }
     CloseHandle(output);
     {
-        const char text[]="PASS native Console presentation: scrollback, Unicode, palette, cursor, 5001 columns, invalid spans, no font scaling\n";
+        const char text[]="PASS native Console presentation: scrollback, Unicode, palette, cursor, 5001 columns, invalid spans, ordinary font unchanged; logical 80x25/80x50/120x40/20x8/80x43 exact and edge-cell retained\n";
         CHECK(WriteFile(report,text,sizeof(text)-1,&count,NULL));
     }
     return 0;
