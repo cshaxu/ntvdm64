@@ -468,3 +468,7 @@ that phase log, so its precise emitting function remains historically
 unproven; the cross-RPC frontend screen race has been corrected and the
 previously failing publication sequence now passes. This is a tested repair,
 not a claim that every possible native writer can be locked by this product.
+
+S13 production/test delivery is pushed as P1 `307c4a1b5`. The subsequent
+documentation-only closure records the delivered revision without changing
+the tested binary inputs or reopening T423/S14.

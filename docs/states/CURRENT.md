@@ -2,13 +2,14 @@
 
 ## Current Work
 
-**Active: M0 T423 S13** — logical text geometry handoff repair.
+**No active M/T/S packet.** M0 T423 remains open. S13 was delivered in P1
+`307c4a1b5`; S14 is not admitted.
 
-## Active Packet
+## Last Closed Packet
 
-| Field | Active brief |
+| Field | S13 closure brief |
 | --- | --- |
-| Identifier Mode | M0 T423 S13, Ordinary Mode; one active S. |
+| Identifier Mode | M0 T423 S13, Ordinary Mode; closed delivery record. |
 | Candidate Proposal | [Console/Window proposal](../proposals/proposal-kvm-window-graphics-presentation-001.md) |
 | Admission And Approval | Owner approval 2026-09-29: new S13 fixes text-size handoff; former product-experience S13 becomes S14, not admitted. |
 | Objective | Preserve logical text dimensions across DOS/native launch and return; eliminate hidden-Console viewport clipping and unintended Window scale changes. |
@@ -21,7 +22,7 @@
 | Asset Needs | Existing media and x86 caches; new artifacts under build/M0-T423/S13; runtime logs under O:/winnt/Logs2. |
 | Reporting Requirements | Actual supported DOS modes, geometry provenance, conversion results, tests, deployed hashes and unpassed cases. |
 | Stop Conditions | Need for guest/shared-lib mutation, API interception, new helper or violation of original execution semantics requires owner decision; ordinary failures remain repair work. |
-| Exit Criteria | Real backend application and tests, not frame-header-only agreement; x86 regression, coherent eight-file publication, governance review, commit/push; T423 still awaits owner acceptance. |
+| Exit Criteria | Met by formal x86, real backend tests, coherent eight-file publication, governance verification and pushed P1 `307c4a1b5`; T423 still awaits owner acceptance. |
 | Original Owner Request | Admit new S13 for approved text-size handoff repair; shift former S13. NTKVM stores authoritative geometry; native changes propagate; unsupported DOS extent restores last valid DOS mode. |
 | Similar-Issue Sweep | Native root initialization, nested launch/return, buffer replacement, scrolling, display switching, font geometry, viewport offsets and mouse mapping. |
 
@@ -127,13 +128,28 @@ pad growth and clamp cursor; preserve native scrollback. No arbitrary DOS mode
 or metadata-only success is allowed. The approved detailed contract is in the
 linked proposal.
 
+## Latest Delivery
+
+S13 P1 `307c4a1b5` is pushed. NTKVM now carries acknowledged logical text
+geometry independent of physical viewport; NTCON applies native geometry and
+returns supported DOS geometry through the original path. NTCON owns its
+reverse-video text mouse pointer. Project-owned screen publication and the
+multi-RPC native snapshot use one frontend I/O lock: first acquirer proceeds,
+the other waits, and end/EOF/protocol failure releases it. Native programs
+writing their own hidden Console cannot acquire that lock, so capture validates
+its before/after geometry and uses only bounded retry on a changed snapshot.
+The full verified eight-file set is published at O:/winnt. Published r107-r112
+and the lock/channel tests passed; the earlier r79 failure remains in the
+[S13 evidence ledger](../etc/evidence/m0-t423-s13-text-geometry.md), not erased
+from history. This closes S13 only, not T423. S14 awaits separate admission.
+
 ## Previous Delivery
 
 M0 T423 S12 implementation and verification are complete. Its P2 delivery
 contains the independent NTCON worker, common worker mechanisms, production
 integration, obsolete-backend removal and the accumulated reviewed tests.
-The coherent eight-file package is published at O:/winnt and post-publication
-checks pass. It remains the usable baseline during S13; do not close T423 automatically.
+The coherent S12 eight-file package was the baseline during S13; do not close
+T423 automatically.
 
 T423 remains open. Product-experience/component-lifetime work is now S14,
 not admitted. It is not the cancelled RDP packet.
@@ -240,9 +256,15 @@ Owner accepted mouse delivery 965083eec; [evidence](../etc/evidence/m0-t423-s11-
 
 Delivered NTCON/shared-worker package fbbbe4870; S13 addresses owner-reported geometry defect; [evidence](../etc/evidence/m0-t423-s12-ntcon-backend.md).
 
+## S13 Closure Record
+
+Delivered geometry handoff, cross-process screen snapshot locking and native
+worker-owned mouse pointer in pushed P1 `307c4a1b5`; full eight-file package
+published and checked after publication. [Evidence](../etc/evidence/m0-t423-s13-text-geometry.md).
+
 ## Recent M0 Closures
 
-S12 is the latest implementation closure; owner side-test acceptance is pending.
+S13 is the latest implementation closure; owner side-test acceptance is pending.
 S11 965083eec remains the recoverable owner-accepted baseline;
 [S11 evidence](../etc/evidence/m0-t423-s11-interaction-retirement.md).
 Earlier T423 stage records are linked by the proposal and S12 ledger.
