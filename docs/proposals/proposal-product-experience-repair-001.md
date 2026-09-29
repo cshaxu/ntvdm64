@@ -10,7 +10,9 @@ and its scope is transferred to the final planned S14 of the
 It shares that package's component-lifecycle ownership and is not a separate T.
 The previous queue-position-2 instruction is superseded. Owner inserted text
 geometry repair as S13 on 2026-09-29; this former S13 is now S14, admitted
-by the owner on 2026-09-29. CURRENT is the sole active-packet authority.
+by the owner on 2026-09-29 and closed after owner-reported verification on
+2026-09-29. T423 stays open and no next S is automatically admitted. CURRENT
+is the sole packet-status authority.
 The former RDP S13 plan was cancelled because the owner confirmed it resolved;
 this product-experience scope does not reopen RDP work.
 

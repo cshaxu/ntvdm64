@@ -1,8 +1,8 @@
 # M0 T423 S14 product-experience evidence
 
-S14 is admitted and remains open for owner-side validation of the exact
-`COMMAND -> Window -> CMD -> modern EDIT` interaction and Explorer drag/drop.
-This record distinguishes demonstrated component behavior from that final
+S14 was accepted by the owner on 2026-09-29 after the tested and published P1
+`631206f9e`; the owner explicitly directed closure and a wait for further
+instruction. This record distinguishes automated evidence from owner-reported
 interactive acceptance.
 
 ## Root cause and implementation
@@ -65,15 +65,17 @@ unchanged to preserve package coherence. Published SHA-256:
 | wow32.dll | 0D2AE60264B03A8040D98AA86BCF80455127064084E2217D318D5E13F90FA94A |
 | VDMREDIR.dll | 79698D12E90DC8F8ACF8FED250DC0A2C9BE57711C03E4DF44A0112549E023500 |
 
-## Remaining S14 acceptance
+## Owner acceptance and evidence limits
 
-- Owner should test the exact visible `run16 command` -> Ctrl+Alt+F -> `cmd`
-  -> modern `edit.exe` -> mouse-click File menu chain. The focused real-process
-  fixture plus Window route regression prove the pieces, not this complete
-  interactive sequence.
-- Actual Explorer drag/drop Console retirement is not yet reproduced on the
-  physical desktop; the private-desktop direct GUI and interactive exit cases
-  are not a substitute for that path.
-- No physical-desktop focus or pointer-grab test was run; owner had asked not
-  to interrupt desktop work. The private-desktop capture/release test is
-  affirmative but bounded evidence.
+- The owner reported verification passed and directed S14 closure; no detailed
+  screenshot, transcript or individual Explorer drag/drop result was supplied.
+  Therefore the owner-side verification is recorded as an acceptance decision,
+  not relabeled as an independently captured automated witness for every
+  physical-desktop path.
+- Automated tests did not drive the full visible `run16 command` ->
+  Ctrl+Alt+F -> `cmd` -> modern `edit.exe` -> File click sequence in one run.
+  They independently exercised the real Edit menu input boundary and the
+  Console/Window routes. Actual Explorer drag/drop and physical-desktop focus
+  were likewise not captured by automation.
+- T423 remains open. S14 closure does not claim SOL/WRITE functionality beyond
+  the retained baseline frontiers.

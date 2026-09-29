@@ -2,23 +2,24 @@
 
 ## Current Work
 
-**Active: M0 T423 S14** — product experience, pointer release and process/Console lifetime. S13 was delivered in P1 `307c4a1b5` with documentation closure P2 `1f22bf7ba`; T423 remains open.
+**No active M/T/S packet.** M0 T423 remains open. S14 product experience was
+accepted by the owner on 2026-09-29. Await the owner's next instruction; do
+not automatically admit another S or close T423.
 
-S14 candidate and coherent eight-file `O:/winnt` publication now pass the
+S14 candidate and coherent eight-file `O:/winnt` publication passed the
 focused modern Edit VT mouse-click fixture, Ctrl+Alt+M capture-release fixture,
 17/17 Console and 17/17 Window routes, private-desktop direct CMD/Notepad/
-WINMINE retirement, and the three preserved WOW frontiers. The exact visible
-COMMAND -> Window -> CMD -> Edit click sequence and Explorer drag/drop remain
-owner-side acceptance, so S14 is not marked closed. Evidence:
+WINMINE retirement, and the three preserved WOW frontiers. The owner then
+reported verification passed and explicitly directed S14 closure. Evidence:
 [S14 product experience](../etc/evidence/m0-t423-s14-product-experience.md).
 
-## Active Packet
+## Last Closed Packet
 
-| Field | Active brief |
+| Field | S14 closure brief |
 | --- | --- |
-| Identifier Mode | M0 T423 S14, Ordinary Mode; one active S. |
+| Identifier Mode | M0 T423 S14, Ordinary Mode; closed by owner acceptance. No new S admitted. |
 | Candidate Proposal | [Console/Window proposal](../proposals/proposal-kvm-window-graphics-presentation-001.md) and [product-experience scope](../proposals/proposal-product-experience-repair-001.md). |
-| Admission And Approval | Owner approval 2026-09-29 to admit S14 with modern EDIT mouse menu clicks, Ctrl+Alt+M host-pointer release, GUI one-shot Console retirement and interactive exit non-hang. |
+| Admission And Approval | Owner admitted S14 and reported verification passed on 2026-09-29; explicitly requested S14 closure and a wait for further instruction. |
 | Objective | Deliver correct native text pointer clicks in Window, a distinct host-pointer release hotkey, and correct launcher/frontend/worker exit for direct GUI and interactive DOS/native text. |
 | Non-goals | No guest or shared-library modification, new helper, ConPTY, scheduler, GUI-window capture, arbitrary timeout or recursive process-tree kill. |
 | Reference Baseline | S13 production P1 `307c4a1b5`, closure P2 `1f22bf7ba`, coherent published eight-file O:/winnt package and 17-route Console/Window regression. |
@@ -29,11 +30,11 @@ owner-side acceptance, so S14 is not marked closed. Evidence:
 | Asset Needs | Existing original guest/package; host modern EDIT location resolved at test time; build/M0-T423/S14 for all new intermediates, O:/winnt/tests for runtime fixtures and O:/winnt/Logs2 for logs. |
 | Reporting Requirements | Exact invocation, target path/type, Console owner, process/lifetime events, input records, observed menu behavior, exit codes, build/test/deployed hashes, residual limitations and source-diff accounting. |
 | Stop Conditions | Proven need to alter guest/shared lib, introduce a helper/second frontend owner or change original execution semantics requires owner decision; ordinary defects within approved UX/lifecycle scope remain repair work. |
-| Exit Criteria | Real native pointer-click and release tests, direct GUI/interactive exit checks, x86 build and full non-regression, coherent eight-file publication, governance review, commit/push and clean synchronized worktree. T423 remains open for owner acceptance. |
+| Exit Criteria | Focused input and lifecycle probes, formal x86, full Console/Window and WOW baseline regression, coherent eight-file publication, pushed P1 `631206f9e`, owner verification, and documentation closure. T423 remains open. |
 | Original Owner Request | “准入S14” plus modern EDIT Window menu clicks, Ctrl+Alt+M releasing the mouse to host, and direct Win16/Win32 GUI plus COMMAND/CMD exit no-stuck checks. |
 | Similar-Issue Sweep | DOS vs native pointer input; click/release/focus/recapture; direct/Explorer/inherited-shell Console ownership; GUI/interactive startup, failure, cancellation and nested return. |
 
-## Last Closed Packet
+## Previous Closed Packet
 
 | Field | S13 closure brief |
 | --- | --- |
