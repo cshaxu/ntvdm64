@@ -5,11 +5,12 @@
 Repair user-visible launch, Console ownership and completion behavior while
 preserving original DOS/WOW execution semantics and verified capabilities.
 By latest owner direction, this former candidate is removed from the T queue
-and its scope is transferred to the final planned S13 of the
+and its scope is transferred to the final planned S14 of the
 [Console/Window frontend package](proposal-kvm-window-graphics-presentation-001.md).
 It shares that package's component-lifecycle ownership and is not a separate T.
-The previous queue-position-2 instruction is superseded. CURRENT retains S12
-as the sole active packet; S13 requires separate admission after S12 completes.
+The previous queue-position-2 instruction is superseded. Owner inserted text
+geometry repair as S13 on 2026-09-29; this former S13 is now S14 and still
+requires separate admission. CURRENT is the sole active-packet authority.
 The former RDP S13 plan was cancelled because the owner confirmed it resolved;
 this product-experience scope does not reopen RDP work.
 
