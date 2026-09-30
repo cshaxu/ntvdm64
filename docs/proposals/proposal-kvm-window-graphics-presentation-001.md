@@ -78,9 +78,24 @@ NTCON 从实际启动的 target 产生/清除完整路径。不得新增第二�
 active target 与 MEMBERS 投影、NTVDM 原有标签/深度保留、五列表格断言，以及
 真实 NTCON 会话关闭和适用 x86/DOS/Window/WOW 回归。
 
-## S20：NTVDM/NTCON 生命周期语义审计与收束
+## S20：移除 creator/ERROR_BUSY 生命周期轮询
 
-S20 是 T423 的最后一个 S。基于 S19 的统一 worker 管理投影，逐项审计
+S20 专门完成 [TODO](../states/TODO.md) 中保留的 NTKVM 100ms
+creator/`ERROR_BUSY` 生命周期轮询消除，不与 S17 已交付的
+`retire -> restored` 恢复屏障混算。新增一项经过认证的
+`frontend_state_changed` 等待能力（不得复用 request-ready 事件），并在每次
+改变 `FrontendUsage()` 或 retirement eligibility 的服务端状态变更后发信号。
+NTKVM 将 creator 句柄直接加入 wait-set；`RetireFrontend()` 返回
+`ERROR_BUSY` 后只能等待这项状态事件再重试，绝不使用定时超时或 sleep。
+
+验收覆盖 lost-wake、`ERROR_BUSY`、并发 admission、正常/异常 root 退出、
+嵌套/native membership、broker loss 和“无计时轮询”检查。该工作只修复项目
+新增的前端生命周期边界；不改变 guest、原 DOS/WOW 调度或 S17 的恢复语义。
+
+## S21：NTVDM/NTCON 生命周期语义审计与收束
+
+S21 是 T423 的最后一个 S。基于 S19 的统一 worker 管理投影及 S20 的无轮询
+前端等待，逐项审计
 NTVDM 与 NTCON 的登记、就绪/占用、接单、嵌套、target/task 完成、前端断连、
 空闲、显式管理关闭、异常退出和资源回收语义。识别仍有可证明同形的状态、
 协议、验证、复制记录、关闭确认或测试边界，并在不改变原 DOS/WOW record
@@ -458,7 +473,8 @@ S5 扩展验收已交付至 `1fb291a8f`；S6 从最新 nxvm 四组件核验开�
 | S14（已验收收口） | 产品体验与组件生命周期修复；已发布并推送 P1 `631206f9e`，owner 于 2026-09-29 报告验证通过并要求收口。自动测试与 owner 验收边界见[S14 证据](../etc/evidence/m0-t423-s14-product-experience.md)。T423 仍保持打开，等待后续指令。 |
 | S15–S18 | 后续已准入的鼠标所有权、零延迟输入交接、Window 退场恢复和原生根任务退场确认；S18 是当前活动包，具体状态只由 CURRENT 管理。 |
 | S19（S18 后下一项） | PID-first worker 管理投影与 NTMON 任务显示：统一 NTVDM/NTCON 的 NTSRV/NTMON 管理契约、真实 PID 选择及 NTCON active target 标签。 |
-| S20（最后一个 S） | NTVDM/NTCON 生命周期语义审计：以 S19 的共同投影为基础，审计并完成仍可证明同形的 lifecycle/management 机制统一，保留不同 owner 的实际语义。 |
+| S20 | 消除 NTKVM retained creator/`ERROR_BUSY` 100ms 轮询：以认证 state-change wait-set 取代 timer polling，覆盖丢失唤醒、并发 admission、断连与异常退出。 |
+| S21（最后一个 S） | NTVDM/NTCON 生命周期语义审计：以 S19/S20 的共同投影和无轮询等待为基础，审计并完成仍可证明同形的 lifecycle/management 机制统一，保留不同 owner 的实际语义。 |
 
 ### Owner 增补：清理交付与实测修复分离
 

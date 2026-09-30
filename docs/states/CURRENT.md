@@ -2,10 +2,25 @@
 
 ## Current Work
 
-**M0 T423 — S18 已由 owner 验收收口；等待下一项 S 的明确启动指令。**
+**M0 T423 — S19 PID-first worker 管理投影与 NTMON 任务显示（已准入，执行中）。**
 
-T423 仍保持打开，但此刻没有活动 S。下一项已规划 S19（PID-first worker
-管理投影与 NTMON 显示）；不得在未重新准入前修改其生产代码。
+| Field | S19 active packet |
+| --- | --- |
+| Identifier Mode | M0 T423 S19，普通实施模式。 |
+| Admission And Approval | Owner 于 2026-09-30 指示“todo 中的消除轮询的工作加入 S20；原 S20 顺延；准入 S19 修复”。S19 现正式准入；S20 专门承接轮询消除，原生命周期审计顺延 S21。 |
+| Objective | 将 NTVDM/NTCON 向 NTSRV/NTMON 暴露的管理对象改为 PID-first 的已认证实时投影；NTMON 只显示/提交真实 worker PID，并正确显示/关闭 NTVDM 与 NTCON。 |
+| Non-goals | 不新增通用任务注册表、进程树枚举或任意 PID 控制；不改变原 DOS/WOW record 调度、guest、共享库、输入/显示协议或 worker 执行生命周期。 |
+| Reference Baseline | S18 P1 `6d459d27b`，已推送 `main`；其 x86 构建、根 Console 恢复路径与八文件发布记录为非回退基线。 |
+| Files And ABI Surface | `src/interface` 的版本化管理契约；`worker-base` 的通用上报/验证客户端；`ntsrv-exe` 的唯一认证投影与 PID 解析；`ntmon-exe` 的五列表格/PID 操作；NTVDM/NTCON 的真实任务标签。 |
+| Applicable Rules | 当前读取集、镜像/adapter 最小差异、不可修改 guest、x86 构建、生产 P 发布与证据规则。 |
+| Verification | PID-only snapshot/terminate、PID 重用后的当前注册解析、NTCON idle/active/MEMBERS、NTVDM DOS/Win16/WOW 标签与深度、五列表格、NTCON 正常会话关闭，以及适用 x86、DOS/Window/WOW 非回退。 |
+| Expected Markers | 表头严格为 `PID  KIND  ELAPSED  STACK  TASK`；无 sequence/epoch 露出；NTCON 为 `WIN32`、活动完整路径或 `<EMPTY>`；终止只作用于当前认证注册的 worker。 |
+| Asset Needs | 现有原始 guest/package；所有中间物仅在 `build/M0-T423/S19`；运行日志在 `O:/winnt/Logs2`；候选完整包经验证后才发布至 `O:/winnt`。 |
+| Reporting Requirements | 逐项记录旧/新管理选择键、认证/重用处理、真实 worker/target 状态、测试命令和退出码、x86 与发布哈希、剩余独立语义。 |
+| Stop Conditions | 需要 guest/共享库修改、任意宿主进程控制、第二注册表或改变原 DOS/WOW 调度时停止并报告；其余实现缺陷在本 S 内修复。 |
+| Exit Criteria | 生产接入且删除 sequence/epoch 的跨 NTMON 边界依赖；全部定向验证和适用回归通过；x86 构建、完整包发布、提交推送、工作区干净并等待 owner 验证。 |
+| Original Owner Request | “todo中的消除轮询的工作加入s20；原s20顺延；准入s19修复”。 |
+| Similar-Issue Sweep | 枚举所有跨 NTSRV/NTMON worker 标识、选择、Delete、kind 分派、标签/成员/空闲状态与 PID 重用路径；内部 sequence/generation 只允许留在服务端认证实现。 |
 
 ## S18 Closure Record
 
