@@ -2,6 +2,7 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T423 S16 typeahead handoff](evidence/m0-t423-s16-typeahead-handoff.md) | M0 T423 S16 | Distinguishes Console verifier false negative from real Window input-order fault and tracks the exact handoff repair. | Retain through T423 acceptance. |
 | [T423 S15 mouse ownership and position](evidence/m0-t423-s15-mouse-ownership-position.md) | M0 T423 S15 | Window capture/absolute-pointer repair, published regression and explicit zero-delay input transfer to S16. | Retain through T423 acceptance. |
 | [T423 S14 product experience](evidence/m0-t423-s14-product-experience.md) | M0 T423 S14 | Native Edit mouse-input root cause, pointer-release hotkey, exit probes, formal package regression and remaining owner-side gates. | Retain through T423 acceptance. |
 | [T423 S13 text geometry](evidence/m0-t423-s13-text-geometry.md) | M0 T423 S13 | Logical geometry source audit, real handoff observations, candidate tests and remaining acceptance gates. | Retain through owner T423 acceptance. |

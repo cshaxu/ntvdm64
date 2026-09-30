@@ -2,10 +2,36 @@
 
 ## Current Work
 
-**No active M/T/S packet.** The owner directed S15 closure on 2026-09-29
-and authorized S16 next; T423 remains open. The zero-delay DOS/native input
-instability is transferred to S16, not counted as an S15 pass. See the
-[S15 closure evidence](../etc/evidence/m0-t423-s15-mouse-ownership-position.md).
+**Active: M0 T423 S16** — Ordinary Mode. The owner closed S15 in P2
+`59a6dcfb1` and admitted this separate zero-delay DOS/native input-order
+investigation and repair. T423 remains open.
+
+## Active Packet
+
+| Field | S16 zero-delay DOS/native input handoff |
+| --- | --- |
+| Identifier Mode | M0 T423 S16, Ordinary Mode. |
+| Candidate Proposal | [Console/Window proposal](../proposals/proposal-kvm-window-graphics-presentation-001.md), S16 addendum. |
+| Admission And Approval | Owner request of 2026-09-29: close/push S15, then use S16 to determine whether the unstable test is a production or test defect and resolve it. |
+| Objective | Make DOS↔native text input handoff deterministic without lost, duplicated, or reordered keystrokes, or prove and correct an observer-only defect while retaining strict assertions. |
+| Non-goals | No guest-media change, mouse repair reopening, new helper/process, broad scheduler or frontend ownership redesign, or accepting timeouts as success. |
+| Reference Baseline | Published S15 P1 `de720a74c`, S15 closure P2 `59a6dcfb1`; 17/17 Console and Window cases plus WOW frontiers. `dos-native-typeahead` passed once and timed out once at `eexit` under identical published Window conditions; S14 baseline also failed. |
+| Files And ABI Surface | First audit test observer and copied input handoff; if production-owned, change only the proven NTKVM/NTCON/worker-base/NTVDM boundary and its focused tests. |
+| Applicable Rules | docs/README.md reading set, source policy, immutable guest, original MVDM semantics, x86 CCPU40, eight-file every-production-P regression/publication gate. |
+| Verification | Repeat the exact zero-delay sequence under Console and Window, compare paced control and accepted S14/S15 packages, trace key identity/order/owner at the delivery boundary, run focused positive/negative tests and full production-P gate if code changes. |
+| Expected Markers | All scripted keys are consumed exactly once in order; final `exit` remains `exit`, two MEM results appear, expected COMMAND exit code 1, no timeout or residual owner. Repeat runs show stable results. |
+| Asset Needs | Existing `O:/winnt` published package and observer, immutable guest, build/M0-T423/S16 for any intermediate, O:/winnt/Logs2 for logs. |
+| Reporting Requirements | Identify test versus production root cause with exact input/output evidence, show failing and repaired runs, preserve S15 baselines and report remaining uncertainty. |
+| Stop Conditions | Need to change original guest/MVDM behavior, add an unapproved process, or alter cross-component ownership requires owner direction; ordinary local defects remain in scope. |
+| Exit Criteria | Proven cause, regression test that catches it without timing camouflage, repeated passing real routes, applicable x86 build/full regression/coherent publication, reviewed commit/push and clean worktree. |
+| Original Owner Request | “把S15收口了，提交推送，然后再用S16来解决这个测试不稳定的问题，看看是生产代码有问题还是只是测试的问题。” |
+| Similar-Issue Sweep | Console and Window; DOS→native→DOS and native→DOS→native; paced and immediate input; nested COMMAND/CMD; disconnect and process exit. |
+
+S16 P1 investigation corrected a Console-only verifier false negative: a
+native CMD banner present in a line snapshot was clipped from the final DOS
+screen. The unchanged strict merger now includes this case; the rerun passed.
+The Window `eexit` timeout remains real and unresolved. Details:
+[S16 input handoff evidence](../etc/evidence/m0-t423-s16-typeahead-handoff.md).
 
 S15 production P1 `de720a74c` is published as a coherent eight-file package
 to `O:/winnt`. Focused mouse tests, published 17/17 Console and 17/17 Window
@@ -23,7 +49,7 @@ WINMINE retirement, and the three preserved WOW frontiers. The owner then
 reported verification passed and explicitly directed S14 closure. Evidence:
 [S14 product experience](../etc/evidence/m0-t423-s14-product-experience.md).
 
-## Last Closed Packet
+## S15 Closure Record
 
 | Field | S15 closure brief |
 | --- | --- |
@@ -34,10 +60,11 @@ reported verification passed and explicitly directed S14 closure. Evidence:
 | Limitations | Supplemental zero-delay DOS/native typeahead is unstable and explicitly transferred to S16; not a pass or a mouse-repair regression claim. |
 | Evidence | [S15 mouse ownership and position](../etc/evidence/m0-t423-s15-mouse-ownership-position.md). |
 
-## Earlier Closed Packet
+## S14 Closure Record
 
 | Field | S14 closure brief |
 | --- | --- |
+| Evidence | [S14 product experience](../etc/evidence/m0-t423-s14-product-experience.md). |
 | Identifier Mode | M0 T423 S14, Ordinary Mode; closed by owner acceptance. No new S admitted. |
 | Candidate Proposal | [Console/Window proposal](../proposals/proposal-kvm-window-graphics-presentation-001.md) and [product-experience scope](../proposals/proposal-product-experience-repair-001.md). |
 | Admission And Approval | Owner admitted S14 and reported verification passed on 2026-09-29; explicitly requested S14 closure and a wait for further instruction. |

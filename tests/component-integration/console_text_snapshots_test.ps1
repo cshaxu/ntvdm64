@@ -16,4 +16,13 @@ $grown=Merge-ConsoleTextSnapshots @("[0] banner`n[1] R:\>","[0] banner`n[1] R:\>
 if ([regex]::Matches($grown,'R:\\>').Count -ne 1 -or $grown -notmatch 'R:\\>mem') {
     throw 'Live prompt growth was duplicated or lost'
 }
+$nativeBeforeShrink="[0] DOS prompt`n[1] Microsoft Windows [Version 10]`n[2] native command"
+$nativeAfterShrink="[0] Microsoft Windows [Version 10]`n[1] native command`n[2] DOS result"
+$nativeFinal="[0] native command`n[1] DOS result`n[2] exit"
+$transcript=Merge-ConsoleTextSnapshots @($nativeBeforeShrink,$nativeAfterShrink,$nativeFinal)
+if([regex]::Matches($transcript,'Microsoft Windows \[Version').Count -ne 1 -or
+    [regex]::Matches($transcript,'DOS result').Count -ne 1 -or
+    $transcript -notmatch 'exit') {
+    throw 'Console buffer shrink lost a previously observed native banner or duplicated output'
+}
 Write-Output 'PASS overlapping snapshots retain output/error exactly once and reject unproved continuity'

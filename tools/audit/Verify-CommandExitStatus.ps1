@@ -302,10 +302,12 @@ try {
                 throw "Missing captured guest Console text: $($case.Name)"
             }
             $screen=Get-Content -LiteralPath $consolePath -Raw
-            if($env:MVDM_OBSERVER_WINDOW_INPUT -eq '1' -and $case.Text) {
-                # Window text snapshots reflect a finite guest screen, not
-                # native Console scrollback. Require contiguous overlap; never
-                # count the same MEM result once per captured frame.
+            if($case.Text -and ($env:MVDM_OBSERVER_WINDOW_INPUT -eq '1' -or
+                $case.Name -eq 'dos-native-typeahead')) {
+                # Window text is finite, and a Console/native/DOS transition
+                # can also shrink the final buffer after a proven CMD banner.
+                # Require contiguous overlap; never count the same MEM result
+                # once per captured frame or accept an unrelated repaint.
                 $snapshots=@(Get-ChildItem -LiteralPath (Split-Path $report) -Filter ((Split-Path $report -Leaf)+'.line-*.console.txt') |
                     Sort-Object Name | ForEach-Object { Get-Content -LiteralPath $_.FullName -Raw })
                 if(!$snapshots.Count){throw "Missing Window command snapshots: $($case.Name)"}
