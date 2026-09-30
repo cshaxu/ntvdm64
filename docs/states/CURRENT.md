@@ -2,51 +2,21 @@
 
 ## Current Work
 
-**Active: M0 T423 S16** — Ordinary Mode. The owner closed S15 in P2
-`59a6dcfb1` and admitted this separate zero-delay DOS/native input-order
-investigation and repair. T423 remains open.
+**No active M/T/S packet.** M0 T423 S16 is closed by owner direction after
+the published P3 `4c867f332`. T423 remains open. The retained supplementary
+reverse-route observation is recorded as a non-pass limitation, not silently
+carried as active work; see [S16 input handoff evidence](../etc/evidence/m0-t423-s16-typeahead-handoff.md).
 
-## Active Packet
+## S16 Closure Record
 
 | Field | S16 zero-delay DOS/native input handoff |
 | --- | --- |
-| Identifier Mode | M0 T423 S16, Ordinary Mode. |
-| Candidate Proposal | [Console/Window proposal](../proposals/proposal-kvm-window-graphics-presentation-001.md), S16 addendum. |
-| Admission And Approval | Owner request of 2026-09-29: close/push S15, then use S16 to determine whether the unstable test is a production or test defect and resolve it. |
-| Objective | Make DOS↔native text input handoff deterministic without lost, duplicated, or reordered keystrokes, or prove and correct an observer-only defect while retaining strict assertions. |
-| Non-goals | No guest-media change, mouse repair reopening, new helper/process, broad scheduler or frontend ownership redesign, or accepting timeouts as success. |
-| Reference Baseline | Published S15 P1 `de720a74c`, S15 closure P2 `59a6dcfb1`; 17/17 Console and Window cases plus WOW frontiers. `dos-native-typeahead` passed once and timed out once at `eexit` under identical published Window conditions; S14 baseline also failed. |
-| Files And ABI Surface | First audit test observer and copied input handoff; if production-owned, change only the proven NTKVM/NTCON/worker-base/NTVDM boundary and its focused tests. |
-| Applicable Rules | docs/README.md reading set, source policy, immutable guest, original MVDM semantics, x86 CCPU40, eight-file every-production-P regression/publication gate. |
-| Verification | Repeat the exact zero-delay sequence under Console and Window, compare paced control and accepted S14/S15 packages, trace key identity/order/owner at the delivery boundary, run focused positive/negative tests and full production-P gate if code changes. |
-| Expected Markers | All scripted keys are consumed exactly once in order; final `exit` remains `exit`, two MEM results appear, expected COMMAND exit code 1, no timeout or residual owner. Repeat runs show stable results. |
-| Asset Needs | Existing `O:/winnt` published package and observer, immutable guest, build/M0-T423/S16 for any intermediate, O:/winnt/Logs2 for logs. |
-| Reporting Requirements | Identify test versus production root cause with exact input/output evidence, show failing and repaired runs, preserve S15 baselines and report remaining uncertainty. |
-| Stop Conditions | Need to change original guest/MVDM behavior, add an unapproved process, or alter cross-component ownership requires owner direction; ordinary local defects remain in scope. |
-| Exit Criteria | Proven cause, regression test that catches it without timing camouflage, repeated passing real routes, applicable x86 build/full regression/coherent publication, reviewed commit/push and clean worktree. |
-| Original Owner Request | “把S15收口了，提交推送，然后再用S16来解决这个测试不稳定的问题，看看是生产代码有问题还是只是测试的问题。” |
-| Similar-Issue Sweep | Console and Window; DOS→native→DOS and native→DOS→native; paced and immediate input; nested COMMAND/CMD; disconnect and process exit. |
-
-S16 P1 investigation corrected a Console-only verifier false negative: a
-native CMD banner present in a line snapshot was clipped from the final DOS
-screen. The unchanged strict merger now includes this case; the rerun passed.
-Further published-package counterchecks reproduced `eexit` in Console and
-`xexit` in Window, while an isolated pure-DOS typeahead control passed. A
-byte-identical short-path package still failed. Bounded device/BIOS tracing
-then located a stale host keyboard IRQ at the original 8042 reset boundary;
-the native-returned key was replayed before DOS input resumed. The S16
-candidate retires only that standalone host carrier through mirror hook
-DIV-321 and a named worker adapter. Correctly linked candidate runs passed
-six zero-delay Console and six Window repetitions, the focused original-device
-fixture, and 17/17 in each full candidate matrix. The coherent eight-file
-package is now published at `O:/winnt`; the post-publication 17/17 Console,
-17/17 Window, two more exact zero-delay runs per route, and the preserved
-WINMINE/SOL/WRITE frontiers passed. The first full-matrix attempt was
-invalidated by a pre-existing global broker with idle native workers; a
-clean-service rerun passed. A separate reverse nested supplemental script
-still times out on both the untouched S15 baseline and S16 candidate, so S16
-remains active pending its product-versus-observer determination. Details:
-[S16 input handoff evidence](../etc/evidence/m0-t423-s16-typeahead-handoff.md).
+| Identifier Mode | M0 T423 S16, Ordinary Mode; closed by owner direction. |
+| Delivery | P1 `0e31c1505`, P2 `f348d049d`, production P3 `4c867f332`, all pushed to `main`. |
+| Outcome | Corrected a Console transcript false negative and retired the standalone pending keyboard IRQ/PIC carrier before the original 8042 reset returns a user-owned key across DOS/native handoff. |
+| Verification | Focused original-device fixture; six zero-delay repetitions each in Console and Window; 17/17 Console and 17/17 Window matrices; coherent eight-file `O:/winnt` publication; two more published zero-delay repetitions per route; preserved WINMINE/SOL/WRITE frontiers. |
+| Limitations | The supplementary Window reverse nested script also times out on the untouched S15 baseline. It is recorded as unresolved observer/product evidence and is not counted as passed or as a DIV-321 regression. |
+| Evidence | [S16 input handoff evidence](../etc/evidence/m0-t423-s16-typeahead-handoff.md). |
 
 S15 production P1 `de720a74c` is published as a coherent eight-file package
 to `O:/winnt`. Focused mouse tests, published 17/17 Console and 17/17 Window
