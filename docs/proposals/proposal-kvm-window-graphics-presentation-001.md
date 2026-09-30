@@ -35,6 +35,23 @@ frontend 使用者，不能把“确认此任务已归还”扩大成等待整�
 返回路径。验收包括重复真实 CMD→DOS→Window→exit 回归、非 Window 对照、
 合法共享前端使用者、异常关闭与完整既有生产回归。
 
+## S18：原生根任务的同一退场确认
+
+S17 的 `retire -> restored` 屏障已修复 DOS 根任务；owner 随后确认原生
+字符根任务仍遗漏同一规则：`cmd.exe -> run16 cmd -> CAF -> exit` 能在
+NTCON 的 final-presentation 完成后立即让 root `run16` 返回，NTKVM 则只能
+在 creator 已退出后开始恢复外层 CMD 的原 buffer/input mode。S18 以 S17
+的已验证机制修复该不对称，而不是引入第二条延时或重绘路径。
+
+- root native text 在其直接 target 的实际退出码与既有 final-presentation
+  fence 都完成后，发出既有 root retirement；随后等待既有 `restored`。
+- NTKVM 的既有 pending/task/member 保护保持不变；不把 target 完成扩大成
+  worker/后代终止，也不等待无关 frontend 用户。
+- 内层 run16 不持有 root lifecycle，不得发送或等待 root retirement。
+- 复验 DOS、原生、shell-fallback native 三种根返回，以及 Window/Console、
+  成功/失败 final fence 与既有退出码；生产 P 仍执行 x86、DOS/Window、WOW
+  非回退和八文件发布门槛。
+
 ## 最新批准：文本区域尺寸交接修复
 
 Owner 于 2026-09-29 批准新增尺寸交接修复 S；CURRENT 登记为 S13。

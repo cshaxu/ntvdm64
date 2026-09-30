@@ -2,9 +2,25 @@
 
 ## Current Work
 
-**No active M/T/S packet.** The owner closed M0 T423 S17 after its production
-P1; T423 remains open for a later admitted packet. The unrelated NTSRV
-state-notification protocol debt is recorded in [TODO](TODO.md).
+**M0 T423 S18 — root native Window exit to outer CMD recovery (ordinary).**
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T423 S18, ordinary implementation/repair packet. |
+| Admission And Approval | Owner reported that `cmd.exe -> run16 cmd -> CAF -> exit` still returns an outer CMD before its input display is restored, and directed repair by continuing this task. |
+| Objective | Make every root character task—DOS or native text—wait for NTKVM's successful original-Console restoration acknowledgement before returning control to an outer CMD. |
+| Non-goals | No guest/shared-library change, delay, injected keystroke, forced redraw, second frontend, helper, process-tree termination, or alteration of original DOS/WOW execution. |
+| Reference Baseline | S17 P2 `e8bd658f8`; its DOS root path is accepted, but its native root path lacks the corresponding retirement signal. |
+| Files And ABI Surface | `src/run16-exe/main.c`, existing frontend-scope contract/comments, focused lifecycle/Window regression source, S18 evidence and this proposal/status record. No new wire protocol. |
+| Applicable Rules | `docs/README.md` reading set; execution, architecture, coding and document rules; immutable guest; x86 package and every-production-P publication gate. |
+| Verification | Add/extend a focused regression that proves both `CMD -> run16 command -> CAF -> exit` and `CMD -> run16 cmd -> CAF -> exit` return only after restoration; run private-desktop actual CMD test, ordinary Console counterpart, affected lifecycle fixture, x86 build, required DOS/Window and WOW non-regression gates. |
+| Expected Markers | Native direct completion sends the same root retirement request after its own final-presentation fence; NTKVM drains/restores first; only then can root `run16` return to outer CMD. Both paths retain correct exit codes. |
+| Asset Needs | Existing immutable O:/winnt media; build/M0-T423/S18 intermediates; O:/winnt/Logs2 runtime evidence. |
+| Reporting Requirements | Record direct DOS/native call shape, completion/fence/retire/restore order, observed outer-CMD input state, test commands/results, hashes and any limitation. |
+| Stop Conditions | A need for a guest/shared-library change, a new backend/worker, or a different execution-lifetime policy pauses for owner decision. Ordinary root-return defects remain in scope. |
+| Exit Criteria | Shared root-return barrier is in production for DOS and native text; focused tests and actual private-desktop Window evidence pass; required build/regression/publication, review, commit/push and clean worktree complete. |
+| Original Owner Request | “`cmd.exe -> run16 cmd -> CAF -> exit -> 回到外部cmd.exe，还是同样症状`”. |
+| Similar-Issue Sweep | DOS/native root return, direct versus shell-fallback native launch, successful/failed final-presentation fence, inherited/owned Console and non-root launcher paths. |
 
 ## S17 Closure Record
 
