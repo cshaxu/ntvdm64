@@ -11,6 +11,25 @@ NTVDM 原始输入读取和所有权交接，逐键证明来源与去向；区�
 放宽输出断言或重试掩盖故障。覆盖 Console／Window、双向交接、嵌套、
 断连及退出；生产改动须按既定八文件构建、回归和发布门槛交付。
 
+## S17：Window 退场后的外层 CMD 输入恢复
+
+S16 已由 owner 于 2026-09-30 收口。S17 调查并修复可复现的 Window
+退场回归：在 CMD 执行 `run16 command`、按 Ctrl+Alt+F 进入 Window、再在
+DOS COMMAND 执行 `exit` 后，Window 消失并回到外层 CMD 提示符，但下一次
+可见行输入／回显偶尔失效；盲打 `echo CHECK123` 后，CMD 执行该命令并恢复。
+
+先用低扰动时间戳和状态快照核对 `ntkvm` 的临时 Console buffer 恢复、输入
+源／模式恢复、`close_window()`／闲置退场，以及 `run16` 向外层 CMD 返回的
+实际先后。不得以 Sleep、强制重绘、注入按键或修改 OpenNT guest 掩盖问题。
+若证实退场竞态，建立只覆盖该 root run16 任务的退场确认屏障：外层 CMD
+重新取得控制前，须确认原 buffer、输入源和输入模式已经恢复；若仍有合法
+frontend 使用者，不能把“确认此任务已归还”扩大成等待整个 `ntkvm` 退出。
+核查边界至少包括 `native_console_frontend.c::window_route`／
+`run16_native_frontend_destroy`、`window_controller.c::close_window`、
+`session_service.c` 的闲置退场和通道停止顺序，以及 `run16-exe` 的完成／
+返回路径。验收包括重复真实 CMD→DOS→Window→exit 回归、非 Window 对照、
+合法共享前端使用者、异常关闭与完整既有生产回归。
+
 ## 最新批准：文本区域尺寸交接修复
 
 Owner 于 2026-09-29 批准新增尺寸交接修复 S；CURRENT 登记为 S13。

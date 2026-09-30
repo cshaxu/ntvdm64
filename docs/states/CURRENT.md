@@ -2,10 +2,30 @@
 
 ## Current Work
 
-**No active M/T/S packet.** M0 T423 S16 is closed by owner direction after
-the published P3 `4c867f332`. T423 remains open. The retained supplementary
-reverse-route observation is recorded as a non-pass limitation, not silently
-carried as active work; see [S16 input handoff evidence](../etc/evidence/m0-t423-s16-typeahead-handoff.md).
+**Active: M0 T423 S17** — Ordinary Mode. The owner closed S16 in P4
+`6f45b9d51` and admitted the Window-exit/CMD-input recovery investigation and
+repair below. T423 remains open.
+
+## Active Packet
+
+| Field | S17 Window exit to outer CMD input recovery |
+| --- | --- |
+| Identifier Mode | M0 T423 S17, Ordinary Mode. |
+| Candidate Proposal | [Console/Window proposal](../proposals/proposal-kvm-window-graphics-presentation-001.md), S17 addendum. |
+| Admission And Approval | Owner request of 2026-09-30, after S16 closure: investigate and repair `CMD → run16 command → Ctrl+Alt+F → exit` returning to an apparently non-responsive CMD, proving cause before any workaround. |
+| Objective | Restore deterministic outer-CMD Console input and echo when a Window-mode DOS session returns, without altering guest behavior or manufacturing input/output. |
+| Non-goals | No guest change, arbitrary delay, forced redraw, injected key, broad frontend redesign, or waiting for all NTKVM users when only the completing root task needs confirmation. |
+| Reference Baseline | Published S16 P3 `4c867f332`/S16 closure `6f45b9d51`; owner reproduced the failure while process inspection showed `run16`, `ntkvm`, and `ntvdm` exited, line input/echo mode enabled, no selection, and the original CMD buffer active. |
+| Files And ABI Surface | `ntkvm-exe/native_console_frontend.c`, `window_controller.c`, `session_service.c`; `run16-exe/main.c`/`frontend_scope.c`; only a minimal completion/confirmation record if evidence proves one is required; focused observation tests and evidence. |
+| Applicable Rules | docs reading set, immutable guest, original Console/VDM semantics, named component ownership, x86 CCPU40, and eight-file production-P gate. |
+| Verification | Collect low-perturbation order evidence for window-route, original buffer/input restoration, session/channel stop, and run16 return; reproduce Window route repeatedly; compare no-Window exit; test legitimate remaining frontend membership and failure/close routes; run affected tests and full production gate for a code P. |
+| Expected Markers | Outer CMD is not released before its original active buffer, input source, and enabled input mode are restored; `echo CHECK123` visibly echoes and executes on its first entry; no residual product process or regression of legitimate shared frontend use. |
+| Asset Needs | Existing immutable O:/winnt package, build/M0-T423/S17 only for intermediates, O:/winnt/Logs2 observations. |
+| Reporting Requirements | Record exact order and owner identities, distinguish test from production source, show failing and repaired traces, state any independent residual limitation, and distinguish task confirmation from whole-frontend retirement. |
+| Stop Conditions | Proven need to modify guest/OpenNT semantics, add a process, or change worker/frontend ownership outside the stated confirmation boundary requires renewed owner direction. |
+| Exit Criteria | Proven cause; focused regression catches it without timing camouflage; repeat Window and control routes pass; applicable x86/full regressions and coherent publication pass; reviewed pushed P and clean worktree. |
+| Original Owner Request | “S17收口后请调查并修复以下回归，先验证根因，不要直接加延时或强制重绘。” |
+| Similar-Issue Sweep | Buffer restore versus input-source restore; normal Window exit, close/failure, no-Window route, root versus legitimate remaining frontend member, inherited CMD versus direct Console. |
 
 ## S16 Closure Record
 
