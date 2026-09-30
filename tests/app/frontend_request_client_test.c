@@ -58,10 +58,10 @@ done:
     CloseHandle(event);CloseHandle(pipe);
     return error;
 }
-DWORD OpenNtBaseClientSubmitWorkerChannel(HANDLE capability,HANDLE pipe)
+DWORD OpenNtBaseClientSubmitWorkerChannel(HANDLE capability,HANDLE pipe,const WCHAR image[260])
 {
     HANDLE copy=NULL;
-    if(capability!=(HANDLE)1)return ERROR_ACCESS_DENIED;
+    if(capability!=(HANDLE)1 || !image)return ERROR_ACCESS_DENIED;
     if(!DuplicateHandle(GetCurrentProcess(),pipe,GetCurrentProcess(),&copy,0,FALSE,DUPLICATE_SAME_ACCESS))return GetLastError();
     peer_thread=CreateThread(NULL,0,peer,copy,0,NULL);
     if(!peer_thread){DWORD error=GetLastError();CloseHandle(copy);return error;}

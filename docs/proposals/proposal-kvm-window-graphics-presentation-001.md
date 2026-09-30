@@ -62,7 +62,10 @@ worker 即为 PID 操作目标。私有连接 generation、路由及 sequence �
 BaseSrv 内部，但不得跨 NTMON 管理边界。
 
 表头固定为 `PID  KIND  ELAPSED  STACK  TASK`。NTCON 行显示其 worker PID、
-`WIN32`、`MEMBERS=<n>` 和当前执行的 Win32 target 完整路径；空闲时 TASK
+`WIN32`、与 DOS/WOW 一致的逻辑任务栈深度和当前执行的 Win32 target 完整路径；
+NTSRV 以直接请求及 NTCON 上报的实际附着变化维护 `CONRECORD`，所以 `CMD → EDIT`
+可显示为两层并以 EDIT 为 TASK。Console 附着成员数只作为该 broker 记录更新的输入和
+NTCON 内部的安全回收依据，不属于管理投影。空闲时 TASK
 为 `<EMPTY>`。NTVDM 行显示其 worker PID，并保留源定义的 DOS/Win16/WOW16
 kind、任务深度和任务标签。不得将 PID、成员、状态或起始时间拼接为
 `TASK / DETAILS` 长行。

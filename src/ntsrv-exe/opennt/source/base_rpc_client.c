@@ -520,7 +520,7 @@ static DWORD classify_missing_interface(RPC_BINDING_HANDLE binding)
     RPC_STATUS status,uuid_status;
     unsigned int index;
     DWORD result=RPC_S_SERVER_UNAVAILABLE;
-    status=RpcIfInqId(Client_vdm_service_v18_0_c_ifspec,&expected);
+    status=RpcIfInqId(Client_vdm_service_v19_0_c_ifspec,&expected);
     if (status) return status;
     status=RpcMgmtInqIfIds(binding,&interfaces);
     if (status) return status;
@@ -722,30 +722,30 @@ DWORD OpenNtBaseClientBindConsoleContext(HANDLE capability)
     return error;
 }
 
-DWORD OpenNtBaseClientSubmitWorkerChannel(HANDLE capability,HANDLE channel)
+DWORD OpenNtBaseClientSubmitWorkerChannel(HANDLE capability,HANDLE channel,const WCHAR image[260])
 {
     DWORD error=ERROR_INVALID_STATE;
     if (!client.connection || !client.binding || !client.process) return error;
     RpcTryExcept {
         error=Client_SubmitWorkerChannel(client.binding,client.connection,client.process,
-            client.generation,capability,channel);
+            client.generation,capability,channel,(WCHAR *)image);
     }
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
     return error;
 }
-static DWORD client_take_channel(HANDLE *channel,HANDLE *caller_process,HANDLE *execution,HANDLE *frontend,BOOL wait)
+static DWORD client_take_channel(HANDLE *channel,HANDLE *caller_process,HANDLE *execution,HANDLE *frontend,DWORD *request,BOOL wait)
 {
     DWORD error=ERROR_INVALID_STATE;
-    if (!channel || !caller_process || !execution) return ERROR_INVALID_PARAMETER;
+    if (!channel || !caller_process || !execution || !request) return ERROR_INVALID_PARAMETER;
     *channel=NULL;*caller_process=NULL;*execution=NULL;
-    if (frontend) *frontend=NULL;
+    if (frontend) *frontend=NULL;*request=0;
     if (!client.connection || !client.binding || !client.process) return error;
     RpcTryExcept {
         error=wait ? Client_WaitWorkerChannel(client.binding,client.connection,client.process,
-            client.generation,channel,caller_process,execution,frontend) :
+            client.generation,channel,caller_process,execution,frontend,request) :
             Client_TakeWorkerChannel(client.binding,client.connection,client.process,
-                client.generation,channel,caller_process,execution,frontend);
+                client.generation,channel,caller_process,execution,frontend,request);
     }
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
@@ -759,15 +759,15 @@ static DWORD client_take_channel(HANDLE *channel,HANDLE *caller_process,HANDLE *
     return error;
 }
 
-DWORD OpenNtBaseClientTakeWorkerChannel(HANDLE *channel,HANDLE *caller_process,HANDLE *execution,HANDLE *frontend)
+DWORD OpenNtBaseClientTakeWorkerChannel(HANDLE *channel,HANDLE *caller_process,HANDLE *execution,HANDLE *frontend,DWORD *request)
 {
     if (!frontend) return ERROR_INVALID_PARAMETER;
-    return client_take_channel(channel,caller_process,execution,frontend,FALSE);
+    return client_take_channel(channel,caller_process,execution,frontend,request,FALSE);
 }
-DWORD OpenNtBaseClientWaitWorkerChannel(HANDLE *channel,HANDLE *caller_process,HANDLE *execution,HANDLE *frontend)
+DWORD OpenNtBaseClientWaitWorkerChannel(HANDLE *channel,HANDLE *caller_process,HANDLE *execution,HANDLE *frontend,DWORD *request)
 {
     if (!frontend) return ERROR_INVALID_PARAMETER;
-    return client_take_channel(channel,caller_process,execution,frontend,TRUE);
+    return client_take_channel(channel,caller_process,execution,frontend,request,TRUE);
 }
 
 DWORD OpenNtBaseClientRegisterNativeBackend(HANDLE frontend,HANDLE stop,HANDLE closed)
@@ -782,12 +782,12 @@ DWORD OpenNtBaseClientRegisterNativeBackend(HANDLE frontend,HANDLE stop,HANDLE c
     RpcEndExcept
     return error;
 }
-DWORD OpenNtBaseClientCompleteWorkerChannel(void)
+DWORD OpenNtBaseClientCompleteWorkerChannel(DWORD request)
 {
     DWORD error=ERROR_INVALID_STATE;
     if(!client.connection || !client.binding || !client.process)return error;
     RpcTryExcept {
-        error=Client_CompleteWorkerChannel(client.binding,client.connection,client.process,client.generation);
+        error=Client_CompleteWorkerChannel(client.binding,client.connection,client.process,client.generation,request);
     }
     RpcExcept(1) {error=RpcExceptionCode();}
     RpcEndExcept

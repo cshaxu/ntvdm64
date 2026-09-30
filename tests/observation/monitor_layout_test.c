@@ -26,15 +26,15 @@ int wmain(void)
         DTASKMGR_WORKER native={0};FILETIME now;WCHAR line[512];
         GetSystemTimeAsFileTime(&now);
         native.kind=4;native.process_id=1234;
-        native.state=8;native.reserved=2;
+        native.state=8;native.stack_depth=2;
         native.started_filetime=((uint64_t)now.dwHighDateTime<<32)|now.dwLowDateTime;
         lstrcpyW(native.image,L"ntcon.exe");
         task_line(line,ARRAYSIZE(line),&state,&native,&now);
         assert(wcsstr(line,L"WIN32") && wcsstr(line,L"1234") &&
-            wcsstr(line,L"MEMBERS=2") && wcsstr(line,L"ntcon.exe"));
-        state.confirm_kind=4;state.confirm_pid=1234;state.confirm_task_count=2;
+            wcsstr(line,L"2") && !wcsstr(line,L"MEMBERS=") && wcsstr(line,L"ntcon.exe"));
+        state.confirm_pid=1234;state.confirm_task_count=2;
         confirmation_text(line,ARRAYSIZE(line),&state);
-        assert(wcsstr(line,L"Close WIN32 worker 1234 (2 members)") && !wcsstr(line,L"tasks"));
+        assert(wcsstr(line,L"End worker 1234 and all its 2 tasks") && !wcsstr(line,L"members"));
         ZeroMemory(&state,sizeof(state));
     }
     BOOL allocated=AllocConsole();

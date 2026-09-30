@@ -9,6 +9,16 @@
 extern PCONSOLERECORD DOSHead;
 extern PWOWHEAD WOWHead;
 
+/* Keep the older focused fixture readable while exercising the production
+ * CONRECORD transaction.  One accepted test channel has one request ID. */
+static DWORD test_native_request;
+#define OpenNtBaseServiceSubmitWorkerChannel(a,b,c,d,e) \
+    OpenNtBaseServiceSubmitWorkerChannel(a,b,c,d,e,L"fixture.exe")
+#define OpenNtBaseServiceTakeWorkerChannel(a,b,c,d,e,f,g) \
+    OpenNtBaseServiceTakeWorkerChannel(a,b,c,d,e,f,g,&test_native_request)
+#define OpenNtBaseServiceCompleteWorkerChannel(a,b,c) \
+    OpenNtBaseServiceCompleteWorkerChannel(a,b,c,test_native_request)
+
 #define CHECK(value) do { if (!(value)) { fprintf(stderr,"FAIL %d\\n",__LINE__);return 1; } } while (0)
 
 static DWORD WINAPI same_console_query(void *context,HANDLE caller,const HANDLE *candidates,
@@ -295,6 +305,10 @@ int main(int argc,char **argv)
                 CHECK(!OpenNtBaseServiceTakeWorkerChannel(worker,child.dwProcessId,workerGeneration,
                     &request_pipe,&sender,&execution,&io_capability));
                 CHECK(request_pipe && execution && io_capability && GetProcessId(sender)==GetCurrentProcessId());
+                CHECK(!OpenNtBaseServiceSnapshot(service,&managementEpoch,&workerInfo,1,&workerInfoCount));
+                CHECK(workerInfoCount==1 && workerInfo.kind==4 && workerInfo.stack_depth==1 &&
+                    workerInfo.reserved==1 && workerInfo.task==test_native_request &&
+                    !wcscmp(workerInfo.image,L"fixture.exe"));
                 CHECK(WriteFile(client,"NTC",3,&count,NULL) && count==3);
                 CHECK(ReadFile(request_pipe,actual,3,&count,NULL) && count==3 && !memcmp(actual,"NTC",3));
                 CHECK(!OpenNtBaseServiceRetainFrontendRoot(worker,child.dwProcessId,workerGeneration,
@@ -471,9 +485,13 @@ int main(int argc,char **argv)
             CHECK(!OpenNtBaseServiceReportNativeBackend(worker,child.dwProcessId,workerGeneration,sample,2,L"native-two"));
         }
         CHECK(!OpenNtBaseServiceSnapshot(service,&managementEpoch,&workerInfo,1,&workerInfoCount));
+        /* NTCON's physical sample is only the input.  NTSRV materializes
+         * broker-owned observed CONRECORDs, so a native CMD -> EDIT-style
+         * attachment reports the logical stack and its actual top image
+         * without exposing a MEMBERS count to management clients. */
         CHECK(workerInfoCount==1 && workerInfo.kind==4 && workerInfo.sequence==workerGeneration &&
-            workerInfo.process_id==child.dwProcessId && workerInfo.reserved==2 &&
-            !wcscmp(workerInfo.image,L"native-two"));
+            workerInfo.process_id==child.dwProcessId && workerInfo.stack_depth==2 &&
+            workerInfo.reserved==workerInfo.stack_depth && !wcscmp(workerInfo.image,L"native-two"));
         /* No session-owner acknowledgement: do not claim success or kill the
          * backend. This is a service fixture, not a real Console-close test. */
         CHECK(OpenNtBaseServiceTerminateWorker(service,child.dwProcessId)==ERROR_TIMEOUT);

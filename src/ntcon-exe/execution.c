@@ -14,6 +14,7 @@ struct ntcon_executions {
 typedef struct ntcon_execution {
     ntcon_executions *owner;
     HANDLE root_capability,pipe,sender,execution,event;
+    DWORD request;
 } ntcon_execution;
 static void release_request(ntcon_execution *request)
 {
@@ -150,7 +151,7 @@ done:
     if(receipt)CloseHandle(receipt);
     if(target)CloseHandle(target);
     if(payload)HeapFree(GetProcessHeap(),0,payload);
-    (void)OpenNtBaseClientCompleteWorkerChannel();
+    (void)OpenNtBaseClientCompleteWorkerChannel(request->request);
     release_request(request);
     finish_request(owner);
     return error;
@@ -177,13 +178,14 @@ void ntcon_executions_bind_io(ntcon_executions *owner,const ntcon_execution_io *
 BOOL ntcon_executions_idle(ntcon_executions *owner)
 { return WaitForSingleObject(owner->idle,0)==WAIT_OBJECT_0; }
 DWORD ntcon_execution_start(ntcon_executions *owner,HANDLE root_capability,HANDLE channel,
-    HANDLE sender,HANDLE execution)
+    HANDLE sender,HANDLE execution,DWORD request_id)
 {
     ntcon_execution *request=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*request));
     DWORD error;HANDLE thread;
     if(!request) { CloseHandle(root_capability);CloseHandle(channel);CloseHandle(sender);CloseHandle(execution);return ERROR_NOT_ENOUGH_MEMORY; }
     request->owner=owner;request->root_capability=root_capability;
     request->pipe=channel;request->sender=sender;request->execution=execution;
+    request->request=request_id;
     request->event=CreateEventW(NULL,TRUE,FALSE,NULL);
     if(!request->event) { error=GetLastError();release_request(request);return error; }
     EnterCriticalSection(&owner->lock);

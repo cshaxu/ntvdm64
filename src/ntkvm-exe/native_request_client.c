@@ -9,11 +9,13 @@ static DWORD submit_receipt(HANDLE root,HANDLE root_capability,const run16_nativ
     native_request_header header={NATIVE_REQUEST_VERSION,0};
     native_request_reply reply={0};
     run16_native_start local={0};
+    WCHAR image[260]={0};
     BYTE *payload=NULL;DWORD error,bytes;
     *target=NULL;*receipt=NULL;local.capabilities[0]=local.capabilities[1]=NULL;
     if(completion)*completion=NULL;
     if(start) {
         local=*start;local.capabilities[0]=local.capabilities[1]=NULL;
+        if(start->application)lstrcpynW(image,start->application,260);
         error=run16_native_launch_pack(&local,&payload,&bytes);if(error)return error;
         header.bytes=bytes;
     }
@@ -32,7 +34,7 @@ static DWORD submit_receipt(HANDLE root,HANDLE root_capability,const run16_nativ
             error=GetLastError();CancelIoEx(server,&io);GetOverlappedResult(server,&io,&ignored,TRUE);goto done;
         }
     }
-    error=OpenNtBaseClientSubmitWorkerChannel(root_capability,server);
+    error=OpenNtBaseClientSubmitWorkerChannel(root_capability,server,image);
     CloseHandle(server);server=INVALID_HANDLE_VALUE;
     if(!error)error=frontend_request_transfer(client,root,NULL,event,TRUE,&header,sizeof(header));
     if(!error && header.bytes)error=frontend_request_transfer(client,root,NULL,event,TRUE,payload,header.bytes);

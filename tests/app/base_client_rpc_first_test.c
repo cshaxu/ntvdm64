@@ -484,7 +484,7 @@ static int native_worker_startup(void)
     launch_client=CreateFileW(pipe_name,GENERIC_READ|GENERIC_WRITE,0,NULL,OPEN_EXISTING,0,NULL);
     REQUIRE(launch_client!=INVALID_HANDLE_VALUE);
     REQUIRE(ConnectNamedPipe(launch_server,NULL) || GetLastError()==ERROR_PIPE_CONNECTED);
-    REQUIRE(!OpenNtBaseClientSubmitWorkerChannel(capability,launch_server));
+    REQUIRE(!OpenNtBaseClientSubmitWorkerChannel(capability,launch_server,L"fixture.exe"));
     CloseHandle(launch_server);launch_server=NULL;
     REQUIRE(WriteFile(launch_client,"L",1,&read,NULL) && read==1);
     REQUIRE(ReadFile(launch_client,&marker,1,&read,NULL) && read==1 && marker=='R');
@@ -615,6 +615,9 @@ static int ntcon_public_startup(void)
         }
         REQUIRE(GetExitCodeProcess(children[index].hProcess,&code));
         CloseHandle(children[index].hProcess);
+        if(wait!=WAIT_OBJECT_0 || code!=61+index)
+            fprintf(stderr,"native child %lu wait=%lu exit=%lu expected=%lu\n",
+                (unsigned long)index,(unsigned long)wait,(unsigned long)code,61ul+index);
         REQUIRE(wait==WAIT_OBJECT_0 && code==61+index);
     }
     /* Selection rejects ambiguous workers. Successful selection after both
@@ -779,9 +782,9 @@ int main(int argc,char **argv)
         REQUIRE(WriteFile(pipe,"N",1,&written,NULL) && written==1);
         {
             HANDLE request=NULL,sender=NULL,execution=NULL,io_capability=NULL;
-            HANDLE root=NULL;DWORD root_generation=0,error;
+            HANDLE root=NULL;DWORD root_generation=0,error,request_id=0;
             char marker=0;
-            error=OpenNtBaseClientWaitWorkerChannel(&request,&sender,&execution,&io_capability);
+            error=OpenNtBaseClientWaitWorkerChannel(&request,&sender,&execution,&io_capability,&request_id);
             REQUIRE(!error && request && sender && execution && io_capability);
             REQUIRE(GetProcessId(sender)==GetProcessId(frontend));
             REQUIRE(!OpenNtBaseClientRetainFrontendRoot(io_capability,&root,&root_generation));

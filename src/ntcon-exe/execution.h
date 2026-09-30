@@ -18,7 +18,7 @@ BOOL ntcon_executions_idle(ntcon_executions *);
 /* Consumes all four authenticated attachments, including on failure. No
  * process-tree ownership: closing a request never kills its running target. */
 DWORD ntcon_execution_start(ntcon_executions *,HANDLE frontend,HANDLE channel,
-    HANDLE sender,HANDLE execution);
+    HANDLE sender,HANDLE execution,DWORD request);
 /* Stop accepting before close. Cancels local waits and joins request cleanup,
  * never native targets. Finished requests release themselves without waiting
  * for another launcher to wake the worker's blocking receive. */

@@ -5,7 +5,7 @@
 static FILE *log;
 static unsigned checks,failures,serial;
 /* This fixture owns attachments directly, without a broker delivery lease. */
-DWORD OpenNtBaseClientCompleteWorkerChannel(void) { return ERROR_SUCCESS; }
+DWORD OpenNtBaseClientCompleteWorkerChannel(DWORD request) { (void)request;return ERROR_SUCCESS; }
 #define CHECK(x) do {++checks;if(!(x)){++failures;fprintf(log,"FAIL %d %s\n",__LINE__,#x);}} while(0)
 static HANDLE submit_access(ntcon_executions *owner,DWORD access)
 {
@@ -22,7 +22,7 @@ static HANDLE submit_access(ntcon_executions *owner,DWORD access)
     CHECK(frontend && execution);
     CHECK(DuplicateHandle(GetCurrentProcess(),GetCurrentProcess(),GetCurrentProcess(),
         &process,access,FALSE,0));
-    error=ntcon_execution_start(owner,frontend,server,process,execution);
+    error=ntcon_execution_start(owner,frontend,server,process,execution,1);
     CHECK(!error);if(error){CloseHandle(client);return NULL;}
     return client;
 }

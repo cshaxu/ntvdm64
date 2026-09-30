@@ -37,7 +37,6 @@ typedef struct MONITOR_STATE {
     ULONG selected_pid;
     ULONG confirm_pid;
     ULONG confirm_task_count;
-    ULONG confirm_kind;
     DWORD status;
     DWORD action_error;
     ULONG rendered_rows;
@@ -195,13 +194,6 @@ static void task_line(WCHAR *line,DWORD capacity,const MONITOR_STATE *state,
     started.dwLowDateTime=(DWORD)item->started_filetime;
     started.dwHighDateTime=(DWORD)(item->started_filetime>>32);
     elapsed_text(&started,now,elapsed);
-    if(item->kind==4u) {
-        swprintf_s(line,capacity,L"%c  %-8lu %-7s %-10s MEMBERS=%-3lu %s",
-            item->process_id==state->selected_pid ? L'>' : L' ',(unsigned long)item->process_id,
-            kind_name(item->kind),elapsed,(unsigned long)item->reserved,
-            item->image[0] ? item->image : L"Unknown");
-        return;
-    }
     swprintf_s(line,capacity,L"%c  %-8lu %-7s %-10s %-5lu %s",
         item->process_id==state->selected_pid ? L'>' : L' ',(unsigned long)item->process_id,
         kind_name(item->kind),elapsed,(unsigned long)item->stack_depth,
@@ -209,10 +201,7 @@ static void task_line(WCHAR *line,DWORD capacity,const MONITOR_STATE *state,
 }
 static void confirmation_text(WCHAR *line,DWORD capacity,const MONITOR_STATE *state)
 {
-    if(state->confirm_kind==4u)
-        swprintf_s(line,capacity,L"Close WIN32 worker %lu (%lu members) [Y/N]?",
-            (unsigned long)state->confirm_pid,(unsigned long)state->confirm_task_count);
-    else swprintf_s(line,capacity,L"End worker %lu and all its %lu tasks [Y/N]?",
+    swprintf_s(line,capacity,L"End worker %lu and all its %lu tasks [Y/N]?",
         (unsigned long)state->confirm_pid,(unsigned long)state->confirm_task_count);
 }
 static PCWSTR scrolled_text(PCWSTR text,DWORD offset)
@@ -320,7 +309,7 @@ static void render(HANDLE output,MONITOR_STATE *state,DTASKMGR_WORKER *items,ULO
     if (state->confirm_pid) {
         confirmation_text(line,ARRAYSIZE(line),state);
         footer_text(frame,state->status,state->action_error,line);
-    } else footer_text(frame,state->status,state->action_error,L"UP/DOWN=Select Task\tDEL=End Task\tESC=EXIT");
+    } else footer_text(frame,state->status,state->action_error,L"UP/DOWN=Select   DEL=Kill   F3=Exit");
     render_line(output,(SHORT)row++,frame,MONITOR_STATUS_ATTRIBUTE);
     state->rendered_rows=row;
 }
@@ -355,8 +344,7 @@ static DWORD refresh(MONITOR_STATE *state,DTASKMGR_WORKER **items,ULONG *count)
         for (index=0;index<result_count;++index)
             if (result[index].process_id==state->confirm_pid) {
                 live=TRUE;
-                state->confirm_task_count=result[index].reserved;
-                state->confirm_kind=result[index].kind;
+                state->confirm_task_count=result[index].stack_depth;
                 break;
             }
         if (!live) { state->confirm_pid=0; state->confirm_task_count=0; }
@@ -410,7 +398,7 @@ int wmain(void)
                     if (items) MIDL_user_free(items);
                     continue;
                 }
-                if (key==VK_ESCAPE) { if (items) MIDL_user_free(items); break; }
+                if (key==VK_F3) { if (items) MIDL_user_free(items); break; }
                 for (index=0;index<count;++index) if (items[index].process_id==state.selected_pid) break;
                 if (key==VK_UP && count) state.selected_pid=items[index ? index-1 : 0].process_id;
                 if (key==VK_DOWN && count) state.selected_pid=items[index+1<count ? index+1 : count-1].process_id;
@@ -419,8 +407,7 @@ int wmain(void)
                 if (key==VK_DELETE) {
                     state.action_error=ERROR_SUCCESS;
                     state.confirm_pid=state.selected_pid;
-                    state.confirm_task_count=index<count ? items[index].reserved : 0;
-                    state.confirm_kind=index<count ? items[index].kind : 0;
+                    state.confirm_task_count=index<count ? items[index].stack_depth : 0;
                 }
             }
         }

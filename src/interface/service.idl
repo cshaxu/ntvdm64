@@ -1,7 +1,7 @@
 import "wtypes.idl";
 [
     uuid(7d3e78bd-0472-4736-8797-e64e966d692e),
-    version(18.0),
+    version(19.0),
     pointer_default(unique)
 ]
 interface vdm_service
@@ -10,7 +10,7 @@ interface vdm_service
     error_status_t CompleteWorkerChannel(
         [in] handle_t binding, [in] VDM_CONNECTION connection,
         [in, system_handle(sh_process)] HANDLE process,
-        [in] unsigned long generation);
+        [in] unsigned long generation, [in] unsigned long request);
     /* Explicit native-worker grant in the authenticated execution Console. */
     error_status_t SelectNativeWorker(
         [in] handle_t binding, [in] VDM_CONNECTION connection,
@@ -18,13 +18,15 @@ interface vdm_service
         [in] unsigned long generation,
         [out, system_handle(sh_process)] HANDLE *worker);
     /* Same authenticated attachment transaction, to the admitted worker.
-     * Launch payloads and target results remain on the direct pipe. */
+     * The copied image is management metadata only; launch payloads and
+     * target results remain on the direct pipe. */
     error_status_t SubmitWorkerChannel(
         [in] handle_t binding, [in] VDM_CONNECTION connection,
         [in, system_handle(sh_process)] HANDLE process,
         [in] unsigned long generation,
         [in, system_handle(sh_event)] HANDLE capability,
-        [in, system_handle(sh_pipe)] HANDLE channel);
+        [in, system_handle(sh_pipe)] HANDLE channel,
+        [in] wchar_t image[260]);
     error_status_t TakeWorkerChannel(
         [in] handle_t binding, [in] VDM_CONNECTION connection,
         [in, system_handle(sh_process)] HANDLE process,
@@ -32,7 +34,8 @@ interface vdm_service
         [out, system_handle(sh_pipe)] HANDLE *channel,
         [out, system_handle(sh_process)] HANDLE *caller_process,
         [out, system_handle(sh_event)] HANDLE *execution,
-        [out, system_handle(sh_event)] HANDLE *frontend);
+        [out, system_handle(sh_event)] HANDLE *frontend,
+        [out] unsigned long *request);
     error_status_t WaitWorkerChannel(
         [in] handle_t binding, [in] VDM_CONNECTION connection,
         [in, system_handle(sh_process)] HANDLE process,
@@ -40,7 +43,8 @@ interface vdm_service
         [out, system_handle(sh_pipe)] HANDLE *channel,
         [out, system_handle(sh_process)] HANDLE *caller_process,
         [out, system_handle(sh_event)] HANDLE *execution,
-        [out, system_handle(sh_event)] HANDLE *frontend);
+        [out, system_handle(sh_event)] HANDLE *frontend,
+        [out] unsigned long *request);
     error_status_t RegisterNativeBackend(
         [in] handle_t binding, [in] VDM_CONNECTION connection,
         [in, system_handle(sh_process)] HANDLE process,
@@ -149,7 +153,10 @@ interface vdm_service
         unsigned long process_id;
         unsigned long kind;
         unsigned long state;
-        /* Count of the worker's original DOS/WOW task records. */
+        /* Logical active-task depth.  DOS/WOW derive it from their original
+         * records; native workers derive it from broker-owned CONRECORDs
+         * materialized from direct requests and authenticated attachment
+         * observations. */
         unsigned long reserved;
         hyper started_filetime;
         unsigned long task;

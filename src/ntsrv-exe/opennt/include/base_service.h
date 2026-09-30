@@ -17,8 +17,10 @@ typedef struct OPENNT_BASE_WORKER_INFO {
     uint32_t sequence;
     uint32_t kind;
     uint32_t state;
-    /* Count of original source records currently executing or queued for this
-     * worker. This is management-only metadata, not a guest-visible task ID. */
+    /* Count of broker-owned logical records currently executing or queued for
+     * this worker. DOS/WOW uses original records; native text uses CONRECORD
+     * records from direct requests and attachment observations. This is
+     * management-only metadata, not a guest-visible task ID. */
     uint32_t reserved;
     uint64_t started_filetime;
     uint32_t task;
@@ -76,7 +78,7 @@ DWORD OpenNtBaseServiceRetainFrontendRoot(OPENNT_BASE_CONNECTION *,DWORD pid,
  * capability. Stop/closed are typed session-control attachments, not task IDs. */
 DWORD OpenNtBaseServiceRegisterNativeBackend(OPENNT_BASE_CONNECTION *,DWORD pid,
     DWORD generation,HANDLE frontend,HANDLE stop,HANDLE closed);
-DWORD OpenNtBaseServiceCompleteWorkerChannel(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation);
+DWORD OpenNtBaseServiceCompleteWorkerChannel(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,DWORD request);
 DWORD OpenNtBaseServiceNativeSampleEpoch(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,uint64_t *epoch);
 DWORD OpenNtBaseServiceReportNativeBackend(OPENNT_BASE_CONNECTION *,DWORD pid,
     DWORD generation,uint64_t epoch,DWORD members,const WCHAR image[260]);
@@ -95,11 +97,11 @@ DWORD OpenNtBaseServiceWorkerFrontendCapability(OPENNT_BASE_CONNECTION *,DWORD p
  * to its admitted native worker. No launch payload or target-result policy here.
  * Receiver owns all four references; sender rundown drops pending ones only. */
 DWORD OpenNtBaseServiceSubmitWorkerChannel(OPENNT_BASE_CONNECTION *,DWORD pid,
-    DWORD generation,HANDLE capability,HANDLE channel);
+    DWORD generation,HANDLE capability,HANDLE channel,const WCHAR image[OPENNT_BASE_WORKER_IMAGE_CHARS]);
 DWORD OpenNtBaseServiceTakeWorkerChannel(OPENNT_BASE_CONNECTION *,DWORD pid,
-    DWORD generation,HANDLE *channel,HANDLE *caller_process,HANDLE *execution,HANDLE *frontend);
+    DWORD generation,HANDLE *channel,HANDLE *caller_process,HANDLE *execution,HANDLE *frontend,DWORD *request);
 DWORD OpenNtBaseServiceWaitWorkerChannel(OPENNT_BASE_CONNECTION *,DWORD pid,
-    DWORD generation,HANDLE *channel,HANDLE *caller_process,HANDLE *execution,HANDLE *frontend);
+    DWORD generation,HANDLE *channel,HANDLE *caller_process,HANDLE *execution,HANDLE *frontend,DWORD *request);
 /* Request identifies an authenticated connection's still-pending original
  * DOS command, not a caller-nominated worker. The root's event wakes it to
  * acquire that selected worker and publish a direct route. No I/O payloads. */

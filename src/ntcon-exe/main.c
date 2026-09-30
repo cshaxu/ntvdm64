@@ -269,8 +269,8 @@ int wmain(int argc,WCHAR **argv)
     if(!error)ntcon_executions_bind_io(requests,&io);
     if(!error && !SetConsoleCtrlHandler(control_event,TRUE))error=GetLastError();
     while(!error) {
-        HANDLE channel=NULL,sender=NULL,execution=NULL,frontend=NULL;
-        error=OpenNtBaseClientWaitWorkerChannel(&channel,&sender,&execution,&frontend);
+        HANDLE channel=NULL,sender=NULL,execution=NULL,frontend=NULL;DWORD request=0;
+        error=OpenNtBaseClientWaitWorkerChannel(&channel,&sender,&execution,&frontend,&request);
         if(error)break;
         /* An unaccepted request closes its attachments; it neither ends the
          * worker nor cancels other requests or already running targets. */
@@ -281,12 +281,12 @@ int wmain(int argc,WCHAR **argv)
                 !ntcon_executions_idle(requests) ? ERROR_BUSY : membership_bind(&membership,frontend);
             if(binding) {
                 CloseHandle(frontend);CloseHandle(channel);CloseHandle(sender);CloseHandle(execution);
-                (void)OpenNtBaseClientCompleteWorkerChannel();
+                (void)OpenNtBaseClientCompleteWorkerChannel(request);
                 continue;
             }
         }
-        if(ntcon_execution_start(requests,frontend,channel,sender,execution))
-            (void)OpenNtBaseClientCompleteWorkerChannel();
+        if(ntcon_execution_start(requests,frontend,channel,sender,execution,request))
+            (void)OpenNtBaseClientCompleteWorkerChannel(request);
     }
     if(membership.quit)SetEvent(membership.quit);
     ntcon_executions_close(requests);
