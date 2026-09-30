@@ -101,10 +101,16 @@ static int console_context_rpc(RPC_BINDING_HANDLE binding,HANDLE self)
     {
         WCHAR name[96];
         HANDLE server,client,received=NULL,sender=NULL,context=NULL,io=NULL,probe=NULL;
+        SECURITY_DESCRIPTOR descriptor;
+        SECURITY_ATTRIBUTES security={sizeof(security),&descriptor,FALSE};
         ULONG request=0;
         swprintf_s(name,96,L"\\\\.\\pipe\\ntvdm-worker-channel-rpc-%lu",GetCurrentProcessId());
+        CHECK(InitializeSecurityDescriptor(&descriptor,SECURITY_DESCRIPTOR_REVISION));
+        /* The test client is a restricted token in the same runner.  The
+         * service still authenticates the creator/server identities. */
+        CHECK(SetSecurityDescriptorDacl(&descriptor,TRUE,NULL,FALSE));
         server=CreateNamedPipeW(name,PIPE_ACCESS_DUPLEX|FILE_FLAG_FIRST_PIPE_INSTANCE,
-            PIPE_TYPE_BYTE|PIPE_WAIT|PIPE_REJECT_REMOTE_CLIENTS,1,1024,1024,0,NULL);
+            PIPE_TYPE_BYTE|PIPE_WAIT,1,1024,1024,0,&security);
         CHECK(server!=INVALID_HANDLE_VALUE);
         client=CreateFileW(name,GENERIC_READ|GENERIC_WRITE,0,NULL,OPEN_EXISTING,0,NULL);
         CHECK(client!=INVALID_HANDLE_VALUE && (ConnectNamedPipe(server,NULL) || GetLastError()==ERROR_PIPE_CONNECTED));
@@ -175,7 +181,11 @@ int main(int argc,char **argv)
         if (error==ERROR_SUCCESS) break;
         Sleep(50);
     }
-    CHECK(error==ERROR_SUCCESS && (!existing || count));
+    if(error!=ERROR_SUCCESS || (existing && !count)) {
+        fprintf(stderr,"TaskSnapshot error=%lu count=%lu existing=%d\n",
+            (unsigned long)error,(unsigned long)count,existing);
+        return 1;
+    }
     if (existing) {
         for (index=0;index<count;++index)
             wprintf(L"WORKER pid=%lu task=%lu kind=%lu state=%lu image=%ls\n",

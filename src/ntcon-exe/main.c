@@ -19,6 +19,18 @@ typedef struct native_membership {
     DWORD users;
     BOOL presenting;
 } native_membership;
+/* A frontend route is borrowed presentation state, not this worker's Console
+ * or target lifetime.  The caller holds state->lock. */
+static void membership_detach_presentation(native_membership *state)
+{
+    ntcon_presentation_close(state->presentation);state->presentation=NULL;
+    if(state->pipe)CloseHandle(state->pipe);
+    if(state->frontend)CloseHandle(state->frontend);
+    if(state->ready)CloseHandle(state->ready);
+    if(state->capability)CloseHandle(state->capability);
+    state->pipe=state->frontend=state->ready=state->capability=NULL;
+    state->presenting=FALSE;
+}
 static DWORD begin_io(void *context,HANDLE stop)
 {
     native_membership *state=context;
@@ -166,6 +178,12 @@ static DWORD sample_members_loop(void *context)
             error=ntcon_presentation_end(state->presentation,&state->font);
             state->presenting=FALSE;
         }
+        if(error==ERROR_PIPE_NOT_CONNECTED || error==ERROR_BROKEN_PIPE) {
+            /* Root/frontend loss revokes copied I/O only.  Preserve the
+             * resident worker and every actual native Console member for a
+             * later broker-authorized route. */
+            membership_detach_presentation(state);error=0;
+        }
         LeaveCriticalSection(state->lock);
         if(error)return error;
         /* Publish empty membership only after the last screen/input handoff;
@@ -181,10 +199,8 @@ static DWORD WINAPI sample_members(void *context)
     DWORD error=sample_members_loop(context),count=0,*members=NULL,sample;
     ntcon_trace_error("pump",0,error);
     if(!error || WaitForSingleObject(state->quit,0)!=WAIT_TIMEOUT)return error;
-    /* A dead frontend may leave an empty resident worker, but never a live
-     * Console whose sole I/O pump has silently exited. Serialize with launch
-     * admission, then use the same Console-owner close as explicit shutdown.
-     * This is not launcher death, descendant enumeration or process-tree kill. */
+    /* Only an unrecoverable worker-side failure reaches here. Frontend pipe
+     * loss is detached in sample_members_loop and cannot kill a live worker. */
     EnterCriticalSection(state->lock);
     sample=ntcon_console_members(&members,&count);
     if(members)HeapFree(GetProcessHeap(),0,members);

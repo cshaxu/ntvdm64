@@ -268,6 +268,15 @@ static void service_clear_frontend(OPENNT_BASE_CONNECTION *connection)
         if (caller->frontend_channel_root==connection->process.SequenceNumber ||
             caller->channel_worker_generation==connection->process.SequenceNumber)
             service_clear_frontend_channel(caller);
+        /* A frontend root is only an I/O capability.  A resident native
+         * worker retains its Console and actual clients after that root
+         * leaves; release the stale association without terminating either. */
+        if (caller->native_worker &&
+            caller->native_root==connection->process.SequenceNumber) {
+            caller->native_root=0;
+            if (caller->native_sample_epoch!=UINT64_MAX)
+                ++caller->native_sample_epoch;
+        }
     }
     while (context_link!=&connection->service->console_contexts) {
         OPENNT_BASE_CONSOLE_CONTEXT *context=CONTAINING_RECORD(context_link,
@@ -948,10 +957,6 @@ DWORD OpenNtBaseServiceSnapshot(OPENNT_BASE_SERVICE *service,uint64_t *epoch,
     *count=0; *epoch=0;
     EnterCriticalSection(&service->lock);
     for (link=service->worker_watches.Flink;link!=&service->worker_watches;link=link->Flink) ++needed;
-    for(link=service->connections.Flink;link!=&service->connections;link=link->Flink) {
-        OPENNT_BASE_CONNECTION *native=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
-        if(native->native_root && !native->native_worker && WaitForSingleObject(native->process.ProcessHandle,0)==WAIT_TIMEOUT)++needed;
-    }
     *epoch=service->management_epoch;
     *count=needed;
     if (needed>capacity || (needed && !entries)) {
@@ -972,7 +977,7 @@ DWORD OpenNtBaseServiceSnapshot(OPENNT_BASE_SERVICE *service,uint64_t *epoch,
             LIST_ENTRY *entry;
             for(entry=service->connections.Flink;entry!=&service->connections;entry=entry->Flink) {
                 OPENNT_BASE_CONNECTION *native=CONTAINING_RECORD(entry,OPENNT_BASE_CONNECTION,service_link);
-                if(native->process.SequenceNumber!=watch->process.SequenceNumber || !native->native_root)continue;
+                if(native->process.SequenceNumber!=watch->process.SequenceNumber || !native->native_worker)continue;
                 service_copy_conrecord(native,item);
                 break;
             }
@@ -983,17 +988,6 @@ DWORD OpenNtBaseServiceSnapshot(OPENNT_BASE_SERVICE *service,uint64_t *epoch,
          * current work. */
         if (!item->image[0])
             lstrcpynW(item->image,L"<EMPTY>",OPENNT_BASE_WORKER_IMAGE_CHARS);
-    }
-    for(link=service->connections.Flink;link!=&service->connections;link=link->Flink) {
-        OPENNT_BASE_CONNECTION *native=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
-        OPENNT_BASE_WORKER_INFO *item;FILETIME started,ignored;
-        if(!native->native_root || native->native_worker || WaitForSingleObject(native->process.ProcessHandle,0)!=WAIT_TIMEOUT)continue;
-        item=&entries[index++];ZeroMemory(item,sizeof(*item));
-        item->sequence=native->process.SequenceNumber;item->kind=4;
-        item->process_id=(DWORD)(ULONG_PTR)native->process.ClientId.UniqueProcess;
-        service_copy_conrecord(native,item);
-        if(GetProcessTimes(native->process.ProcessHandle,&started,&ignored,&ignored,&ignored))
-            item->started_filetime=((uint64_t)started.dwHighDateTime<<32)|started.dwLowDateTime;
     }
     *count=index;
     service_sort_management_records(entries,index);
@@ -1016,7 +1010,17 @@ DWORD OpenNtBaseServiceTerminateWorker(OPENNT_BASE_SERVICE *service,uint32_t pro
             LIST_ENTRY *entry;error=ERROR_NOT_READY;
             for(entry=service->connections.Flink;entry!=&service->connections;entry=entry->Flink) {
                 OPENNT_BASE_CONNECTION *native=CONTAINING_RECORD(entry,OPENNT_BASE_CONNECTION,service_link);
-                if((DWORD)(ULONG_PTR)native->process.ClientId.UniqueProcess==process_id && native->native_root) {error=ERROR_NOT_FOUND;break;}
+                if((DWORD)(ULONG_PTR)native->process.ClientId.UniqueProcess!=process_id ||
+                    !native->native_worker)continue;
+                if(!native->native_stop || !native->native_closed)break;
+                if(!DuplicateHandle(GetCurrentProcess(),watch->process.ProcessHandle,GetCurrentProcess(),&process,
+                    SYNCHRONIZE,FALSE,0) ||
+                    !DuplicateHandle(GetCurrentProcess(),native->native_stop,GetCurrentProcess(),&native_stop,
+                    EVENT_MODIFY_STATE,FALSE,0) ||
+                    !DuplicateHandle(GetCurrentProcess(),native->native_closed,GetCurrentProcess(),&native_closed,
+                    SYNCHRONIZE,FALSE,0))error=GetLastError();
+                else {watch->termination_requested=TRUE;error=ERROR_SUCCESS;}
+                break;
             }
             break;
         }
@@ -1028,20 +1032,6 @@ DWORD OpenNtBaseServiceTerminateWorker(OPENNT_BASE_SERVICE *service,uint32_t pro
         watch->termination_requested=TRUE;
         error=ERROR_SUCCESS;
         break;
-    }
-    if(error==ERROR_NOT_FOUND) {
-        for(link=service->connections.Flink;link!=&service->connections;link=link->Flink) {
-            OPENNT_BASE_CONNECTION *native=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
-            if(!native->native_root || (DWORD)(ULONG_PTR)native->process.ClientId.UniqueProcess!=process_id)continue;
-            if(!DuplicateHandle(GetCurrentProcess(),native->process.ProcessHandle,GetCurrentProcess(),&process,
-                SYNCHRONIZE,FALSE,0) ||
-                !DuplicateHandle(GetCurrentProcess(),native->native_stop,GetCurrentProcess(),&native_stop,
-                EVENT_MODIFY_STATE,FALSE,0) ||
-                !DuplicateHandle(GetCurrentProcess(),native->native_closed,GetCurrentProcess(),&native_closed,
-                SYNCHRONIZE,FALSE,0))error=GetLastError();
-            else error=0;
-            break;
-        }
     }
     LeaveCriticalSection(&service->lock);
     if(native_stop && native_closed && !error) {
@@ -1322,7 +1312,11 @@ DWORD OpenNtBaseServiceRegisterNativeBackend(OPENNT_BASE_CONNECTION *connection,
     if(!connection)return ERROR_ACCESS_DENIED;
     if(!compare || !query)return ERROR_CALL_NOT_IMPLEMENTED;
     EnterCriticalSection(&connection->service->lock);
-    if(connection->frontend_capability || connection->process.fVDM)
+    /* Only the process which claimed the authenticated native reservation may
+     * become a native worker.  A connected launcher/root is not sufficient. */
+    if(!connection->native_worker ||
+        connection->reservation_kind!=OPENNT_BASE_WORKER_NATIVE ||
+        connection->frontend_capability || connection->process.fVDM)
         {error=ERROR_INVALID_STATE;goto done;}
     error=OpenNtBaseServiceRetainFrontendRoot(connection,pid,generation,frontend,&root,&root_generation);
     if(error)goto done;
@@ -1397,8 +1391,7 @@ DWORD OpenNtBaseServiceNativeSampleEpoch(OPENNT_BASE_CONNECTION *connection,
     if(!epoch)return ERROR_INVALID_PARAMETER;
     *epoch=0;if(!connection)return error;
     EnterCriticalSection(&connection->service->lock);
-    if(OpenNtBaseServicePeer(connection,pid,generation) &&
-        (connection->native_worker || connection->native_root)) {
+    if(OpenNtBaseServicePeer(connection,pid,generation) && connection->native_worker) {
         if(!connection->native_sample_epoch)connection->native_sample_epoch=1;
         *epoch=connection->native_sample_epoch;error=ERROR_SUCCESS;
     }
@@ -1412,11 +1405,16 @@ DWORD OpenNtBaseServiceReportNativeBackend(OPENNT_BASE_CONNECTION *connection,
     LIST_ENTRY *link;
     if(!connection || !image)return error;
     EnterCriticalSection(&connection->service->lock);
-    if(OpenNtBaseServicePeer(connection,pid,generation) && connection->native_root) {
+    if(OpenNtBaseServicePeer(connection,pid,generation) && connection->native_worker) {
         if(members>65535)error=ERROR_INVALID_DATA;
         else if(!epoch || epoch!=connection->native_sample_epoch)error=ERROR_RETRY;
         else {
-            error=ERROR_PIPE_NOT_CONNECTED;
+            /* Membership is worker truth, not a frontend-root property.  A
+             * retired root must not force a live NTCON to report a transport
+             * failure or to die with its attached native clients. */
+            connection->native_members=members;
+            error=service_sync_native_conrecords(connection,members,image);
+            if(error)goto done;
             for(link=connection->service->connections.Flink;
                 link!=&connection->service->connections;link=link->Flink) {
                 OPENNT_BASE_CONNECTION *root=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
@@ -1426,18 +1424,17 @@ DWORD OpenNtBaseServiceReportNativeBackend(OPENNT_BASE_CONNECTION *connection,
                 if(!root->frontend_closing && root->frontend_capability &&
                     WaitForSingleObject(root->process.ProcessHandle,0)==WAIT_TIMEOUT) {
                     ULONG image_chars=0;
-                    connection->native_members=members;
                     while(image_chars<OPENNT_BASE_WORKER_IMAGE_CHARS && image[image_chars])++image_chars;
                     if(image_chars)CopyMemory(connection->native_image,image,image_chars*sizeof(*image));
                     connection->native_image[image_chars<OPENNT_BASE_WORKER_IMAGE_CHARS ? image_chars :
                         OPENNT_BASE_WORKER_IMAGE_CHARS-1]=L'\0';
-                    error=service_sync_native_conrecords(connection,members,image);
-                    if(!error)service_signal_frontend_states(connection->service);
                 }
                 break;
             }
+            service_signal_frontend_states(connection->service);
         }
     }
+done:
     LeaveCriticalSection(&connection->service->lock);return error;
 }
 

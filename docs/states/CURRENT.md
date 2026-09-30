@@ -4,18 +4,28 @@
 
 ## Active Packet
 
-**Active: M0 T423 S23**
+**Active: M0 T423 S24**
 
-| Field | M0 T423 S23 — NTSRV 统一 worker 生命周期权威 |
+| Field | M0 T423 S24 — NTCON participant graph and CONRECORD truthfulness |
 | --- | --- |
 | Admission | Owner authorized automatic sequential S23--S28 admission after S22. |
-| Objective | NTSRV is sole NTVDM/NTCON reservation, registration, watch, close and dead-worker authority.  NTCON remains resident `READY/EMPTY`, releases only stale route/root, then safely rebinds a later compatible root. |
-| Boundaries | Preserve original DOS/WOW records, scheduling, completion and cleanup.  No guest/shared-lib change, helper, timer polling, tree kill or second scheduler.  NTKVM route loss is I/O-capability loss, never a direct NTCON kill. |
-| Reference | S22 `5aa308f69`; [S22 evidence](../etc/evidence/m0-t423-s22-native-edit-colour-audit.md); [T423 successor plan](../proposals/proposal-kvm-window-graphics-presentation-001.md#owner-approved-successor-plan-after-s22-unified-ntvdmntcon-worker-control-plane). |
-| Required proof | Reject unreserved native registration; no bare snapshot row; EMPTY/rebind only for same session/authenticated execution Console; explicit close/broker loss terminates; formal x86, established regressions, coherent eight-file publication and governance. |
-| Assets | `build/M0-T423/S23`, `O:/winnt/Logs2`; immutable guest. |
+| Objective | Replace native member-count guesses with PID-based `DIRECT`/`OBSERVED` CONRECORD truth, while preserving NTSRV as the only worker authority. |
+| Boundaries | Preserve original DOS/WOW record ownership and completion. No guest/shared-lib change, helper, timer polling, tree kill or second scheduler. |
+| Reference | [S23 evidence](../etc/evidence/m0-t423-s23-unified-worker-lifecycle.md); [T423 successor plan](../proposals/proposal-kvm-window-graphics-presentation-001.md#owner-approved-successor-plan-after-s22-unified-ntvdmntcon-worker-control-plane). |
+| Required proof | Direct/nested CMD and EDIT, DOS-to-CMD/CMD-to-DOS, replacement and residual-child cases; surviving observed child remains BUSY; empty NTCON becomes reusable; x86, regression, publication and governance. |
+| Assets | `build/M0-T423/S24`, `O:/winnt/Logs2`; immutable guest. |
 
 T423 仍不得自行收口。
+
+## S23 Closure Record
+
+NTSRV now admits native backend registration only from a prepared native
+reservation, projects only authenticated worker watches, retains NTCON after
+frontend route loss, and can explicitly close that resident worker after its
+root is gone.  Focused reservation/rebind/close, empty monitor RPC and
+frontend lifecycle fixtures pass with protocol-19 MIDL regeneration and x86
+relink.  PID-accurate participant records are deliberately S24 work.  See
+[S23 evidence](../etc/evidence/m0-t423-s23-unified-worker-lifecycle.md).
 
 ## S22 Closure Record
 
