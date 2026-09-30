@@ -1,7 +1,7 @@
 import "wtypes.idl";
 [
     uuid(7d3e78bd-0472-4736-8797-e64e966d692e),
-    version(17.0),
+    version(18.0),
     pointer_default(unique)
 ]
 interface vdm_service
@@ -340,6 +340,13 @@ interface vdm_service
         [in] unsigned long generation,
         [out] unsigned long *pending,
         [out] unsigned long *tasks);
+    /* Root-private auto-reset state event. It is separate from the
+     * request-ready capability and wakes retirement retry only. */
+    error_status_t FrontendStateChanged(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [out, system_handle(sh_event)] HANDLE *state_changed);
     error_status_t RetireFrontend(
         [in] handle_t binding, [in] VDM_CONNECTION connection,
         [in, system_handle(sh_process)] HANDLE process,

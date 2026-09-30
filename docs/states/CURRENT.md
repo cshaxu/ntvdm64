@@ -2,37 +2,47 @@
 
 ## Current Work
 
-**Active: M0 T423 S19** — PID-first worker 管理投影与 NTMON 任务显示（已准入，执行中）。
+**Active: M0 T423 S21** — 审计并收束 NTVDM/NTCON 项目新增的同形生命周期机制（已准入，执行中）。
 
 ## Active Packet
 
-| Field | S19 active packet |
+| Field | S21 active packet |
 | --- | --- |
-| Identifier Mode | M0 T423 S19，普通实施模式。 |
-| Admission And Approval | Owner 于 2026-09-30 指示“todo 中的消除轮询的工作加入 S20；原 S20 顺延；准入 S19 修复”。S19 现正式准入；S20 专门承接轮询消除，原生命周期审计顺延 S21。 |
-| Objective | 将 NTVDM/NTCON 向 NTSRV/NTMON 暴露的管理对象改为 PID-first 的已认证实时投影；NTMON 只显示/提交真实 worker PID，并正确显示/关闭 NTVDM 与 NTCON。 |
-| Non-goals | 不新增通用任务注册表、进程树枚举或任意 PID 控制；不改变原 DOS/WOW record 调度、guest、共享库、输入/显示协议或 worker 执行生命周期。 |
-| Reference Baseline | S18 P1 `6d459d27b`，已推送 `main`；其 x86 构建、根 Console 恢复路径与八文件发布记录为非回退基线。 |
-| Files And ABI Surface | `src/interface` 的版本化管理契约；`worker-base` 的通用上报/验证客户端；`ntsrv-exe` 的唯一认证投影与 PID 解析；`ntmon-exe` 的五列表格/PID 操作；NTVDM/NTCON 的真实任务标签。 |
+| Identifier Mode | M0 T423 S21，普通实施模式。 |
+| Admission And Approval | Owner 的持续目标要求完成 S19、S20、S21；S20 已完成并发布协议 18 包，S21 自动准入。 |
+| Objective | 审计 NTVDM/NTCON 的项目新增 worker 生命周期机制；只提取正常、失败、嵌套、断连和退出语义可证明相同的公共实现到 `worker-base`。 |
+| Non-goals | 不搬运、重写或绕过原始 OpenNT/MVDM 的 DOS/WOW record 调度、任务完成、阻塞/恢复和清理；不新增 scheduler、registry、process-tree kill、guest 或共享库改动。 |
+| Reference Baseline | S20 协议 18 已发布七组件包及其 x86、COMMAND/MEM/EDIT、NTCON 管理和 broker-loss 证据。 |
+| Files And ABI Surface | `worker-base` 中项目新增的共同协议客户端、连接/注册、请求/响应校验、断连/取消、帧传输、输入转换、交接屏障、完成通知、资源释放和失败回滚；`interface` 仅保留跨组件声明。 |
 | Applicable Rules | 当前读取集、镜像/adapter 最小差异、不可修改 guest、x86 构建、生产 P 发布与证据规则。 |
-| Verification | PID-only snapshot/terminate、PID 重用后的当前注册解析、NTCON idle/active/MEMBERS、NTVDM DOS/Win16/WOW 标签与深度、五列表格、NTCON 正常会话关闭，以及适用 x86、DOS/Window/WOW 非回退。 |
-| Expected Markers | 表头严格为 `PID  KIND  ELAPSED  STACK  TASK`；无 sequence/epoch 露出；NTCON 为 `WIN32`、活动完整路径或 `<EMPTY>`；终止只作用于当前认证注册的 worker。 |
-| Asset Needs | 现有原始 guest/package；所有中间物仅在 `build/M0-T423/S19`；运行日志在 `O:/winnt/Logs2`；候选完整包经验证后才发布至 `O:/winnt`。 |
-| Reporting Requirements | 逐项记录旧/新管理选择键、认证/重用处理、真实 worker/target 状态、测试命令和退出码、x86 与发布哈希、剩余独立语义。 |
-| Stop Conditions | 需要 guest/共享库修改、任意宿主进程控制、第二注册表或改变原 DOS/WOW 调度时停止并报告；其余实现缺陷在本 S 内修复。 |
-| Exit Criteria | 生产接入且删除 sequence/epoch 的跨 NTMON 边界依赖；全部定向验证和适用回归通过；x86 构建、完整包发布、提交推送、工作区干净并等待 owner 验证。 |
-| Original Owner Request | “todo中的消除轮询的工作加入s20；原s20顺延；准入s19修复”。 |
-| Similar-Issue Sweep | 枚举所有跨 NTSRV/NTMON worker 标识、选择、Delete、kind 分派、标签/成员/空闲状态与 PID 重用路径；内部 sequence/generation 只允许留在服务端认证实现。 |
+| Verification | 建立逐项来源/位置/共享判断/目标位置表；双向 DOS↔Win32 交接、父程序恢复前确认、输入顺序、正常/异常退出、断连、成员、嵌套和独立会话隔离。 |
+| Expected Markers | 被提取机制以显式实例状态、资源所有权和锁边界在两个 worker 生产路径复用；镜像逻辑仍在原文件和原 owner。 |
+| Asset Needs | 原始 guest/package 不变；中间物仅在 `build/M0-T423/S21`；运行日志在 `O:/winnt/Logs2`；通过整包回归后才发布。 |
+| Reporting Requirements | 清楚区分原始镜像/项目新增/既有公共代码；列出实际消除的重复及必须独立保留的原因，记录构建、回归、发布哈希和未完成项。 |
+| Stop Conditions | 需要迁移原始 OpenNT/MVDM 执行逻辑、改变 DOS/WOW 调度或发现两侧失败语义不等价时停止该候选提取并如实记录；其余缺陷在本 S 内修复。 |
+| Exit Criteria | 完成全量来源审计、生产接入和重复删除；验证所提取机制的正常/失败边界，x86、适用回归、发布、提交推送与干净工作区。 |
+| Original Owner Request | “将 NTVDM 和 NTCON 两个 worker 中，所有项目新增、语义一致且适合共享的实现，提取到 worker-base，并接入双方生产路径。” |
+| Similar-Issue Sweep | 不只查同名函数：覆盖连接、注册、协议、交接、通知、释放、取消和失败回滚；同形即审查，不因生命周期边界一概拒绝共享。 |
 
-## S19 P2 Progress
+## S20 Closure Record
+
+| Field | S20 event-driven retirement |
+| --- | --- |
+| Delivery | Protocol 18 `FrontendStateChanged` capability, NTSRV mutation signalling and NTKVM direct wait-set; completion commit pending. |
+| Outcome | Removed the project-added 100ms creator/`ERROR_BUSY` timer path. `ERROR_BUSY` retries only after a root-authenticated NTSRV state event; S17 restoration acknowledgement remains independent. |
+| Verification | Focused lost-wake/root-authorisation fixtures; full 590-node x86 build; published COMMAND/MEM/EDIT/nested/native regressions; NTCON management isolation; isolated broker loss returns 1722; governance and diff checks. |
+| Publication | Coherent seven-component protocol 18 package published to `O:/winnt`; exact hashes and observations are in [S20 evidence](../etc/evidence/m0-t423-s20-event-driven-retirement.md). |
+| Non-work | No guest, shared-library, original DOS/WOW scheduling or execution-lifecycle change. |
+| Evidence | [S20 event-driven retirement](../etc/evidence/m0-t423-s20-event-driven-retirement.md). |
+
+## S19 Closure Record
 
 Protocol 17 PID-first management is implemented, the full 573-node x86 graph
 has completed, and the coherent seven-file package is published to
 `O:/winnt`.  [S19 P1](../etc/evidence/m0-t423-s19-pid-worker-management-p1.md)
 records the focused provider proof; [S19 P2](../etc/evidence/m0-t423-s19-p2-runtime-validation.md)
 records the published hashes, real PID-close isolation and the complete
-17-route text regression.  S19 now waits only for owner-side acceptance; S20
-remains the separately admitted polling-removal successor.
+17-route text regression.  S20 now consumes this completed P2 baseline.
 
 ## S18 Closure Record
 

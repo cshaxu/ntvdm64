@@ -418,6 +418,7 @@ int main(int argc,char **argv)
         HANDLE capability=CreateEventW(NULL,TRUE,FALSE,NULL),wrong=CreateEventW(NULL,TRUE,FALSE,NULL);
         HANDLE stop=CreateEventW(NULL,TRUE,FALSE,NULL),closed=CreateEventW(NULL,TRUE,FALSE,NULL);
         HANDLE automatic=CreateEventW(NULL,FALSE,FALSE,NULL);
+        HANDLE frontend_state=NULL;
         CHECK(capability && wrong && stop && closed && automatic);
         CHECK(GetModuleFileNameA(NULL,command,MAX_PATH));
         {char executable[MAX_PATH];strcpy_s(executable,MAX_PATH,command);
@@ -429,6 +430,11 @@ int main(int argc,char **argv)
         CHECK(!OpenNtBaseServiceConnect(service,child.hProcess,&worker,&workerGeneration));
         CHECK(!OpenNtBaseServiceConnect(service,laterChild.hProcess,&later,&laterGeneration));
         CHECK(!OpenNtBaseServiceRegisterFrontendRoot(launcher,GetCurrentProcessId(),launcherGeneration,capability));
+        CHECK(OpenNtBaseServiceFrontendStateChanged(worker,child.dwProcessId,workerGeneration,
+            &frontend_state)==ERROR_ACCESS_DENIED && !frontend_state);
+        CHECK(!OpenNtBaseServiceFrontendStateChanged(launcher,GetCurrentProcessId(),launcherGeneration,
+            &frontend_state));
+        CHECK(WaitForSingleObject(frontend_state,0)==WAIT_TIMEOUT);
         CHECK(OpenNtBaseServiceRegisterNativeBackend(worker,child.dwProcessId,workerGeneration+1,
             capability,stop,closed)==ERROR_ACCESS_DENIED);
         CHECK(OpenNtBaseServiceRegisterNativeBackend(worker,child.dwProcessId,workerGeneration,
@@ -439,6 +445,7 @@ int main(int argc,char **argv)
             capability,automatic,closed)==ERROR_INVALID_PARAMETER);
         CHECK(!OpenNtBaseServiceRegisterNativeBackend(worker,child.dwProcessId,workerGeneration,
             capability,stop,closed));
+        CHECK(WaitForSingleObject(frontend_state,0)==WAIT_OBJECT_0);
         {
             DWORD pending=0,tasks=0;
             CHECK(!OpenNtBaseServiceFrontendUsage(launcher,GetCurrentProcessId(),launcherGeneration,&pending,&tasks));
@@ -481,7 +488,7 @@ int main(int argc,char **argv)
         CHECK(OpenNtBaseServiceIsEmpty(service) && OpenNtBaseServiceStop(service));
         CHECK(TerminateProcess(child.hProcess,0));CHECK(TerminateProcess(laterChild.hProcess,0));
         CloseHandle(child.hProcess);CloseHandle(laterChild.hProcess);CloseHandle(self);
-        CloseHandle(capability);CloseHandle(wrong);CloseHandle(stop);CloseHandle(closed);CloseHandle(automatic);
+        CloseHandle(frontend_state);CloseHandle(capability);CloseHandle(wrong);CloseHandle(stop);CloseHandle(closed);CloseHandle(automatic);
         puts("PASS native backend registry: authenticated root, unique live instance, real identity, member report, no fake close, rundown");
         return 0;
     }

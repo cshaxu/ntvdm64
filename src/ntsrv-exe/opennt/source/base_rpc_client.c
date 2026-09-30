@@ -520,7 +520,7 @@ static DWORD classify_missing_interface(RPC_BINDING_HANDLE binding)
     RPC_STATUS status,uuid_status;
     unsigned int index;
     DWORD result=RPC_S_SERVER_UNAVAILABLE;
-    status=RpcIfInqId(Client_vdm_service_v17_0_c_ifspec,&expected);
+    status=RpcIfInqId(Client_vdm_service_v18_0_c_ifspec,&expected);
     if (status) return status;
     status=RpcMgmtInqIfIds(binding,&interfaces);
     if (status) return status;
@@ -844,6 +844,25 @@ DWORD OpenNtBaseClientFrontendUsage(DWORD *pending,DWORD *tasks)
     RpcEndExcept
     if(!error){*pending=local_pending;*tasks=local_tasks;}
     return error;
+}
+
+DWORD OpenNtBaseClientFrontendStateChanged(HANDLE *state_changed)
+{
+    DWORD error=ERROR_INVALID_STATE;
+    HANDLE local=NULL;
+    if(!state_changed)return ERROR_INVALID_PARAMETER;
+    *state_changed=NULL;
+    if(!client.connection || !client.binding || !client.process)return error;
+    RpcTryExcept {
+        error=Client_FrontendStateChanged(client.binding,client.connection,client.process,
+            client.generation,&local);
+    }
+    RpcExcept(1) { error=RpcExceptionCode(); }
+    RpcEndExcept
+    if(error) { if(local)CloseHandle(local);return error; }
+    if(!local)return ERROR_INVALID_HANDLE;
+    *state_changed=local;
+    return ERROR_SUCCESS;
 }
 
 DWORD OpenNtBaseClientRetireFrontend(void)

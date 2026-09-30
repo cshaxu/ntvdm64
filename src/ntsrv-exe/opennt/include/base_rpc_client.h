@@ -14,6 +14,7 @@ DWORD WINAPI OpenNtBaseClientWowStarted(ULONG task);
  * guesses transport receipts. Returned startup event is owned/wait-only. */
 DWORD OpenNtBaseClientWowStartup(HANDLE parent,HANDLE *event,BOOL *started);
 DWORD OpenNtBaseClientFrontendUsage(DWORD *pending,DWORD *tasks);
+DWORD OpenNtBaseClientFrontendStateChanged(HANDLE *state_changed);
 DWORD OpenNtBaseClientRetireFrontend(void);
 DWORD OpenNtBaseClientRegisterFrontendRoot(HANDLE capability);
 DWORD OpenNtBaseClientRegisterNativeBackend(HANDLE frontend,HANDLE stop,HANDLE closed);

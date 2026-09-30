@@ -6,9 +6,9 @@ typedef struct frontend_channel {
     run16_console_channel *channel;
 } frontend_channel;
 struct frontend_session_service {
-    HANDLE capability,notification,stop,thread,retire;
+    HANDLE capability,notification,stop,thread,retire,state_changed;
     HANDLE creator;
-    BOOL admitted,retire_requested;
+    BOOL admitted,retire_requested,creator_exited;
     frontend_channel *channels;
     run16_native_frontend *native;
     void (*channel_ready)(void);
@@ -16,16 +16,26 @@ struct frontend_session_service {
 static DWORD WINAPI frontend_pump(void *context)
 {
     frontend_session_service *scope=context;
-    HANDLE waits[3]={scope->stop,scope->notification,scope->retire};
+    HANDLE waits[5];
     DWORD error=ERROR_SUCCESS;
     for (;;) {
-        DWORD wait_count=(scope->retire && !scope->retire_requested) ? 3 : 2;
-        DWORD wait=WaitForMultipleObjects(wait_count,waits,FALSE,scope->creator ? 100 : INFINITE);
+        DWORD wait_count=0,retire_index=MAXDWORD,creator_index=MAXDWORD,wait;
+        waits[wait_count++]=scope->stop;
+        waits[wait_count++]=scope->notification;
+        if(scope->retire && !scope->retire_requested) {
+            retire_index=wait_count;waits[wait_count++]=scope->retire;
+        }
+        if(scope->creator && !scope->creator_exited) { creator_index=wait_count;waits[wait_count++]=scope->creator; }
+        if(scope->state_changed) waits[wait_count++]=scope->state_changed;
+        wait=WaitForMultipleObjects(wait_count,waits,FALSE,INFINITE);
         if (wait==WAIT_OBJECT_0) break;
-        if (wait!=WAIT_OBJECT_0+1 && wait!=WAIT_OBJECT_0+2 && wait!=WAIT_TIMEOUT) {
+        if (wait<WAIT_OBJECT_0 || wait>=WAIT_OBJECT_0+wait_count) {
             return GetLastError();
         }
-        if(wait==WAIT_OBJECT_0+2)scope->retire_requested=TRUE;
+        if(retire_index!=MAXDWORD && wait==WAIT_OBJECT_0+retire_index)
+            scope->retire_requested=TRUE;
+        if(creator_index!=MAXDWORD && wait==WAIT_OBJECT_0+creator_index)
+            scope->creator_exited=TRUE;
         for (;;) {
             HANDLE worker=NULL;
             DWORD request=0;
@@ -56,7 +66,7 @@ static DWORD WINAPI frontend_pump(void *context)
             scope->admitted=TRUE;
             if (scope->channel_ready) scope->channel_ready();
         }
-        if(scope->creator && (WaitForSingleObject(scope->creator,0)==WAIT_OBJECT_0 ||
+        if(scope->creator && (scope->creator_exited ||
             (scope->admitted && scope->retire_requested))){
             DWORD pending=0,tasks=0;
             error=OpenNtBaseClientFrontendUsage(&pending,&tasks);
@@ -65,6 +75,9 @@ static DWORD WINAPI frontend_pump(void *context)
              * The frontend owns neither targets nor a second backend census. */
             if(pending || tasks)continue;
             error=OpenNtBaseClientRetireFrontend();
+            /* ERROR_BUSY is not retried on a timer. The root-private
+             * auto-reset NTSRV state event remains signalled across a
+             * mutation that races this attempt, then wakes this wait-set. */
             if(error==ERROR_BUSY)continue;
             if(error)return error;
             /* No new admissions after the broker barrier. End idle DOS I/O
@@ -104,6 +117,7 @@ DWORD frontend_service_close(frontend_session_service *scope)
      * the caller must report failure rather than manufacture a handoff. */
     if(error)return error;
     if(scope->stop)CloseHandle(scope->stop);
+    if(scope->state_changed)CloseHandle(scope->state_changed);
     HeapFree(GetProcessHeap(),0,scope);
     return ERROR_SUCCESS;
 }
@@ -118,6 +132,10 @@ static DWORD service_start(HANDLE capability,HANDLE notification,HANDLE creator,
     if(!scope)return ERROR_NOT_ENOUGH_MEMORY;
     scope->capability=capability;scope->notification=notification;scope->channel_ready=ready;
     scope->creator=creator;scope->retire=retire;
+    if(creator) {
+        error=OpenNtBaseClientFrontendStateChanged(&scope->state_changed);
+        if(error)goto fail;
+    }
     scope->stop=CreateEventW(NULL,TRUE,FALSE,NULL);
     if(!scope->stop){error=GetLastError();goto fail;}
     error=run16_native_frontend_create(&scope->native);if(error)goto fail;

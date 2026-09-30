@@ -16,7 +16,7 @@
 #define COUNT 34
 struct run16_console_channel { HANDLE thread,release; DWORD index; };
 static run16_console_channel *channels[COUNT];
-static HANDLE notification,ready;
+static HANDLE notification,ready,retirement_state;
 static CRITICAL_SECTION lock;
 static DWORD pending,created;
 static LONG stopped;
@@ -60,11 +60,22 @@ DWORD OpenNtBaseClientFrontendUsage(DWORD *pending_count,DWORD *tasks)
     *pending_count=(DWORD)InterlockedCompareExchange(&usage_pending,0,0);*tasks=0;
     CHECK(SetEvent(usage_seen));return 0;
 }
+DWORD OpenNtBaseClientFrontendStateChanged(HANDLE *state_changed)
+{
+    *state_changed=NULL;
+    CHECK(retirement_state);
+    return DuplicateHandle(GetCurrentProcess(),retirement_state,GetCurrentProcess(),state_changed,
+        SYNCHRONIZE,FALSE,0) ? ERROR_SUCCESS : GetLastError();
+}
 DWORD OpenNtBaseClientRetireFrontend(void)
 {
+    LONG attempt;
     CHECK(retirement_mode);
-    /* Admission can race the idle snapshot; the service barrier wins. */
-    return InterlockedIncrement(&retire_calls)==1 ? ERROR_BUSY : ERROR_SUCCESS;
+    /* Admission can race the idle snapshot. Model the broker's subsequent
+     * state mutation: only that event may authorize the retry. */
+    attempt=InterlockedIncrement(&retire_calls);
+    if(attempt==1) { CHECK(SetEvent(retirement_state)); return ERROR_BUSY; }
+    return ERROR_SUCCESS;
 }
 DWORD run16_native_frontend_destroy(run16_native_frontend *value) { if(value)HeapFree(GetProcessHeap(),0,value);return 0; }
 DWORD run16_native_worker_request_submit(HANDLE worker,HANDLE capability,const run16_native_start *start,HANDLE *out,HANDLE *receipt)
@@ -170,18 +181,21 @@ static void service_controls_retirement(void)
 {
     frontend_session_service *service=NULL;
     HANDLE creator=CreateEventW(NULL,TRUE,TRUE,NULL);
-    usage_seen=CreateEventW(NULL,TRUE,FALSE,NULL);CHECK(creator && usage_seen);
+    usage_seen=CreateEventW(NULL,TRUE,FALSE,NULL);
+    retirement_state=CreateEventW(NULL,FALSE,FALSE,NULL);
+    CHECK(creator && usage_seen && retirement_state);
     retirement_mode=TRUE;usage_pending=1;
     CHECK(!frontend_service_start_process(notification,notification,creator,notification,&service));
     CHECK(WaitForSingleObject(usage_seen,5000)==WAIT_OBJECT_0);
     CHECK(WaitForSingleObject(frontend_service_thread(service),0)==WAIT_TIMEOUT);
     CHECK(!retire_calls && !drain_calls);
-    InterlockedExchange(&usage_pending,0);CHECK(SetEvent(notification));
+    InterlockedExchange(&usage_pending,0);CHECK(SetEvent(retirement_state));
     CHECK(WaitForSingleObject(frontend_service_thread(service),5000)==WAIT_OBJECT_0);
     CHECK(retire_calls==2 && drain_calls==1);
     frontend_service_close(service);
-    retirement_mode=FALSE;CloseHandle(usage_seen);CloseHandle(creator);
-    puts("PASS service-reported native usage pins frontend; raced admission retries retirement; no local backend census");
+    retirement_mode=FALSE;CloseHandle(retirement_state);retirement_state=NULL;
+    CloseHandle(usage_seen);CloseHandle(creator);
+    puts("PASS service-reported native usage pins frontend; raced admission retries only after state event; no local backend census");
 }
 int main(void)
 {

@@ -375,6 +375,15 @@ error_status_t Server_FrontendUsage(handle_t binding,VDM_CONNECTION connection,H
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
     return error ? error : OpenNtBaseServiceFrontendUsage(connection,pid,generation,pending,tasks);
 }
+error_status_t Server_FrontendStateChanged(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+    ULONG generation,HANDLE *state_changed)
+{
+    DWORD pid,error;
+    if(!state_changed)return ERROR_INVALID_PARAMETER;
+    *state_changed=NULL;
+    error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    return error ? error : OpenNtBaseServiceFrontendStateChanged(connection,pid,generation,state_changed);
+}
 error_status_t Server_RetireFrontend(handle_t binding,VDM_CONNECTION connection,HANDLE process,ULONG generation)
 {
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
@@ -730,7 +739,7 @@ int main(void)
         (void)OpenNtBaseServiceStop(service);
         return (int)error;
     }
-    result=RpcServerRegisterIf3(Server_vdm_service_v17_0_s_ifspec,NULL,NULL,
+    result=RpcServerRegisterIf3(Server_vdm_service_v18_0_s_ifspec,NULL,NULL,
         RPC_IF_ALLOW_SECURE_ONLY | RPC_IF_ALLOW_LOCAL_ONLY,RPC_C_LISTEN_MAX_CALLS_DEFAULT,
         (unsigned)-1,authorize,NULL);
     if (!result) {
@@ -754,7 +763,7 @@ int main(void)
         if (result) basesrv_idle_fatal("RpcMgmtWaitServerListen",result);
     }
     {
-        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v17_0_s_ifspec,NULL,TRUE);
+        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v18_0_s_ifspec,NULL,TRUE);
         if (!result && cleanup) result=cleanup;
     }
     if (idle_timer) CloseHandle(idle_timer);

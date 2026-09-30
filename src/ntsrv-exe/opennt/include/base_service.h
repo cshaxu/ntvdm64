@@ -111,6 +111,8 @@ DWORD OpenNtBaseServiceFrontendRequest(OPENNT_BASE_CONNECTION *,DWORD pid,
  * Pending attachment is distinct from active original DOS records. */
 DWORD OpenNtBaseServiceFrontendUsage(OPENNT_BASE_CONNECTION *,DWORD pid,
     DWORD generation,DWORD *pending,DWORD *tasks);
+DWORD OpenNtBaseServiceFrontendStateChanged(OPENNT_BASE_CONNECTION *,DWORD pid,
+    DWORD generation,HANDLE *state_changed);
 /* Atomically reject retirement while original work/admission remains, else
  * revoke future joins. Frontend first drains its own native/local requests. */
 DWORD OpenNtBaseServiceRetireFrontend(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation);

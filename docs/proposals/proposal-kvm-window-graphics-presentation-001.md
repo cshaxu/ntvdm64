@@ -15,8 +15,8 @@ NTVDM 原始输入读取和所有权交接，逐键证明来源与去向；区�
 
 已由 owner 于 2026-09-30 在 P1 `0b1bc30f3` 后收口；证据见
 [S17 recovery ledger](../etc/evidence/m0-t423-s17-window-exit-input-recovery.md)。
-后续彻底移除既有 creator/`ERROR_BUSY` 轮询的跨 NTSRV 协议工作已转入
-[TODO](../states/TODO.md)，不属于本 S 的恢复屏障。
+后续彻底移除既有 creator/`ERROR_BUSY` 轮询的跨 NTSRV 协议工作已由 owner
+准入 S20，不属于本 S 的恢复屏障。
 
 S16 已由 owner 于 2026-09-30 收口。S17 调查并修复可复现的 Window
 退场回归：在 CMD 执行 `run16 command`、按 Ctrl+Alt+F 进入 Window、再在
@@ -80,8 +80,8 @@ active target 与 MEMBERS 投影、NTVDM 原有标签/深度保留、五列表�
 
 ## S20：移除 creator/ERROR_BUSY 生命周期轮询
 
-S20 专门完成 [TODO](../states/TODO.md) 中保留的 NTKVM 100ms
-creator/`ERROR_BUSY` 生命周期轮询消除，不与 S17 已交付的
+S20 专门完成从 TODO 准入的 NTKVM 100ms creator/`ERROR_BUSY` 生命周期轮询
+消除，不与 S17 已交付的
 `retire -> restored` 恢复屏障混算。新增一项经过认证的
 `frontend_state_changed` 等待能力（不得复用 request-ready 事件），并在每次
 改变 `FrontendUsage()` 或 retirement eligibility 的服务端状态变更后发信号。
