@@ -520,7 +520,7 @@ static DWORD classify_missing_interface(RPC_BINDING_HANDLE binding)
     RPC_STATUS status,uuid_status;
     unsigned int index;
     DWORD result=RPC_S_SERVER_UNAVAILABLE;
-    status=RpcIfInqId(Client_vdm_service_v16_0_c_ifspec,&expected);
+    status=RpcIfInqId(Client_vdm_service_v17_0_c_ifspec,&expected);
     if (status) return status;
     status=RpcMgmtInqIfIds(binding,&interfaces);
     if (status) return status;
@@ -806,13 +806,13 @@ DWORD OpenNtBaseClientNativeSampleEpoch(uint64_t *epoch)
     if(!error)*epoch=(uint64_t)value;
     return error;
 }
-DWORD OpenNtBaseClientReportNativeBackend(uint64_t epoch,DWORD members)
+DWORD OpenNtBaseClientReportNativeBackend(uint64_t epoch,DWORD members,const WCHAR image[260])
 {
     DWORD error=ERROR_INVALID_STATE;
-    if(!client.connection || !client.binding || !client.process)return error;
+    if(!client.connection || !client.binding || !client.process || !image)return error;
     RpcTryExcept {
         error=Client_ReportNativeBackend(client.binding,client.connection,client.process,
-            client.generation,(hyper)epoch,members);
+            client.generation,(hyper)epoch,members,(WCHAR *)image);
     }
     RpcExcept(1) {error=RpcExceptionCode();}
     RpcEndExcept

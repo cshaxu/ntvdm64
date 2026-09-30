@@ -237,7 +237,7 @@ int main(int argc,char **argv)
         CHECK(!OpenNtBaseServiceSnapshot(service,&managementEpoch,&workerInfo,1,&workerInfoCount));
         CHECK(workerInfoCount==1 && workerInfo.kind==4 && workerInfo.sequence==workerGeneration &&
             workerInfo.process_id==child.dwProcessId && !workerInfo.state);
-        CHECK(OpenNtBaseServiceTerminateWorker(service,managementEpoch,workerGeneration)==ERROR_NOT_READY);
+        CHECK(OpenNtBaseServiceTerminateWorker(service,child.dwProcessId)==ERROR_NOT_READY);
         {
             HANDLE capability=CreateEventW(NULL,TRUE,FALSE,NULL),foreign=CreateEventW(NULL,TRUE,FALSE,NULL);
             HANDLE ready=CreateEventW(NULL,TRUE,FALSE,NULL),server=NULL,client=NULL;
@@ -342,7 +342,7 @@ int main(int argc,char **argv)
             CHECK(!OpenNtBaseServiceRegisterNativeBackend(worker,child.dwProcessId,workerGeneration,
                 capability,native_stop,native_closed));
             CHECK(!OpenNtBaseServiceNativeSampleEpoch(worker,child.dwProcessId,workerGeneration,&old_sample));
-            CHECK(!OpenNtBaseServiceReportNativeBackend(worker,child.dwProcessId,workerGeneration,old_sample,2));
+            CHECK(!OpenNtBaseServiceReportNativeBackend(worker,child.dwProcessId,workerGeneration,old_sample,2,L"native-one"));
             CHECK(!OpenNtBaseServiceSnapshot(service,&managementEpoch,&workerInfo,1,&workerInfoCount));
             CHECK(workerInfoCount==1 && workerInfo.kind==4 && workerInfo.reserved==2 &&
                 workerInfo.process_id==child.dwProcessId && workerInfo.sequence==workerGeneration);
@@ -372,8 +372,8 @@ int main(int argc,char **argv)
                 capability,native_stop,native_closed));
             CHECK(!OpenNtBaseServiceNativeSampleEpoch(worker,child.dwProcessId,workerGeneration,&new_sample));
             CHECK(new_sample>old_sample);
-            CHECK(OpenNtBaseServiceReportNativeBackend(worker,child.dwProcessId,workerGeneration,old_sample,0)==ERROR_RETRY);
-            CHECK(!OpenNtBaseServiceReportNativeBackend(worker,child.dwProcessId,workerGeneration,new_sample,0));
+            CHECK(OpenNtBaseServiceReportNativeBackend(worker,child.dwProcessId,workerGeneration,old_sample,0,L"")==ERROR_RETRY);
+            CHECK(!OpenNtBaseServiceReportNativeBackend(worker,child.dwProcessId,workerGeneration,new_sample,0,L""));
             CHECK(!OpenNtBaseServiceSnapshot(service,&managementEpoch,&workerInfo,1,&workerInfoCount));
             CHECK(workerInfoCount==1 && workerInfo.reserved==0 && workerInfo.sequence==workerGeneration);
             CHECK(!OpenNtBaseServiceRequestFrontend(launcher,GetCurrentProcessId(),launcherGeneration,capability));
@@ -448,32 +448,32 @@ int main(int argc,char **argv)
         CHECK(OpenNtBaseServiceRegisterNativeBackend(later,laterChild.dwProcessId,laterGeneration,
             capability,stop,closed)==ERROR_ALREADY_EXISTS);
         CHECK(!OpenNtBaseServiceNativeSampleEpoch(worker,child.dwProcessId,workerGeneration,&sample) && sample);
-        CHECK(OpenNtBaseServiceReportNativeBackend(later,laterChild.dwProcessId,laterGeneration,sample,1)==ERROR_ACCESS_DENIED);
-        CHECK(OpenNtBaseServiceReportNativeBackend(worker,child.dwProcessId,workerGeneration,sample,65536)==ERROR_INVALID_DATA);
-        CHECK(OpenNtBaseServiceReportNativeBackend(worker,child.dwProcessId,workerGeneration,0,0)==ERROR_RETRY);
-        CHECK(OpenNtBaseServiceReportNativeBackend(worker,child.dwProcessId,workerGeneration,sample+1,0)==ERROR_RETRY);
-        CHECK(!OpenNtBaseServiceReportNativeBackend(worker,child.dwProcessId,workerGeneration,sample,2));
+        CHECK(OpenNtBaseServiceReportNativeBackend(later,laterChild.dwProcessId,laterGeneration,sample,1,L"x")==ERROR_ACCESS_DENIED);
+        CHECK(OpenNtBaseServiceReportNativeBackend(worker,child.dwProcessId,workerGeneration,sample,65536,L"x")==ERROR_INVALID_DATA);
+        CHECK(OpenNtBaseServiceReportNativeBackend(worker,child.dwProcessId,workerGeneration,0,0,L"")==ERROR_RETRY);
+        CHECK(OpenNtBaseServiceReportNativeBackend(worker,child.dwProcessId,workerGeneration,sample+1,0,L"")==ERROR_RETRY);
+        CHECK(!OpenNtBaseServiceReportNativeBackend(worker,child.dwProcessId,workerGeneration,sample,2,L"native-two"));
         {
             DWORD pending=0,tasks=0;
             CHECK(!OpenNtBaseServiceFrontendUsage(launcher,GetCurrentProcessId(),launcherGeneration,&pending,&tasks));
             CHECK(pending==1 && tasks==0); /* No fabricated DOS records. */
             CHECK(OpenNtBaseServiceRetireFrontend(launcher,GetCurrentProcessId(),launcherGeneration)==ERROR_BUSY);
-            CHECK(!OpenNtBaseServiceReportNativeBackend(worker,child.dwProcessId,workerGeneration,sample,0));
+            CHECK(!OpenNtBaseServiceReportNativeBackend(worker,child.dwProcessId,workerGeneration,sample,0,L""));
             CHECK(!OpenNtBaseServiceFrontendUsage(launcher,GetCurrentProcessId(),launcherGeneration,&pending,&tasks));
             CHECK(!pending && !tasks);
-            CHECK(!OpenNtBaseServiceReportNativeBackend(worker,child.dwProcessId,workerGeneration,sample,2));
+            CHECK(!OpenNtBaseServiceReportNativeBackend(worker,child.dwProcessId,workerGeneration,sample,2,L"native-two"));
         }
         CHECK(!OpenNtBaseServiceSnapshot(service,&managementEpoch,&workerInfo,1,&workerInfoCount));
         CHECK(workerInfoCount==1 && workerInfo.kind==4 && workerInfo.sequence==workerGeneration &&
-            workerInfo.process_id==child.dwProcessId && workerInfo.reserved==2);
-        CHECK(OpenNtBaseServiceTerminateWorker(service,managementEpoch+1,workerGeneration)==ERROR_REVISION_MISMATCH);
+            workerInfo.process_id==child.dwProcessId && workerInfo.reserved==2 &&
+            !wcscmp(workerInfo.image,L"native-two"));
         /* No session-owner acknowledgement: do not claim success or kill the
          * backend. This is a service fixture, not a real Console-close test. */
-        CHECK(OpenNtBaseServiceTerminateWorker(service,managementEpoch,workerGeneration)==ERROR_TIMEOUT);
+        CHECK(OpenNtBaseServiceTerminateWorker(service,child.dwProcessId)==ERROR_TIMEOUT);
         CHECK(WaitForSingleObject(stop,0)==WAIT_OBJECT_0 && WaitForSingleObject(child.hProcess,0)==WAIT_TIMEOUT);
-        CHECK(!OpenNtBaseServiceReportNativeBackend(worker,child.dwProcessId,workerGeneration,sample,0));
+        CHECK(!OpenNtBaseServiceReportNativeBackend(worker,child.dwProcessId,workerGeneration,sample,0,L""));
         CHECK(!OpenNtBaseServiceRetireFrontend(launcher,GetCurrentProcessId(),launcherGeneration));
-        CHECK(OpenNtBaseServiceReportNativeBackend(worker,child.dwProcessId,workerGeneration,sample,2)==ERROR_PIPE_NOT_CONNECTED);
+        CHECK(OpenNtBaseServiceReportNativeBackend(worker,child.dwProcessId,workerGeneration,sample,2,L"native-two")==ERROR_PIPE_NOT_CONNECTED);
         CHECK(WaitForSingleObject(child.hProcess,0)==WAIT_TIMEOUT);
         CHECK(!OpenNtBaseServiceDisconnect(worker));
         CHECK(!OpenNtBaseServiceSnapshot(service,&managementEpoch,&workerInfo,1,&workerInfoCount) && !workerInfoCount);
@@ -1033,7 +1033,6 @@ int main(int argc,char **argv)
     CHECK(OpenNtBaseServiceSnapshot(service,&managementEpoch,&workerInfo,1,&workerInfoCount)==ERROR_SUCCESS);
     CHECK(workerInfoCount==1 && workerInfo.sequence==workerGeneration &&
         workerInfo.started_filetime!=0 && !wcscmp(workerInfo.image,L"MEM.EXE"));
-    CHECK(OpenNtBaseServiceTerminateWorker(service,managementEpoch+1,workerGeneration)==ERROR_REVISION_MISMATCH);
     /* READY alone is not worker readiness: a resident COMMAND prompt has no
      * outstanding GetNextVDMCommand wait to receive an unrelated launch. */
     { BOOL recordExists=FALSE;
@@ -1418,7 +1417,7 @@ int main(int argc,char **argv)
             CHECK(WaitForSingleObject(child.hProcess,0)==WAIT_TIMEOUT);
             CHECK(TerminateProcess(child.hProcess,0)); /* fixture cleanup */
             CHECK(WaitForSingleObject(child.hProcess,5000)==WAIT_OBJECT_0);
-        } else CHECK(OpenNtBaseServiceTerminateWorker(service,managementEpoch,workerGeneration)==ERROR_SUCCESS);
+        } else CHECK(OpenNtBaseServiceTerminateWorker(service,child.dwProcessId)==ERROR_SUCCESS);
         { DWORD wait=WaitForSingleObject(laterParentEvent,5000);
           if (wait!=WAIT_OBJECT_0) fprintf(stderr,"pair completion wait=%lu error=%lu handle=%p\n",wait,GetLastError(),laterParentEvent);
           CHECK(wait==WAIT_OBJECT_0); }

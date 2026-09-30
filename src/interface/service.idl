@@ -1,7 +1,7 @@
 import "wtypes.idl";
 [
     uuid(7d3e78bd-0472-4736-8797-e64e966d692e),
-    version(16.0),
+    version(17.0),
     pointer_default(unique)
 ]
 interface vdm_service
@@ -55,7 +55,8 @@ interface vdm_service
     error_status_t ReportNativeBackend(
         [in] handle_t binding, [in] VDM_CONNECTION connection,
         [in, system_handle(sh_process)] HANDLE process,
-        [in] unsigned long generation, [in] hyper epoch, [in] unsigned long members);
+        [in] unsigned long generation, [in] hyper epoch, [in] unsigned long members,
+        [in] wchar_t image[260]);
     /* Execution Console association only; not frontend ownership or task selection. */
     error_status_t AcquireConsoleContext(
         [in] handle_t binding, [in] VDM_CONNECTION connection,
@@ -140,10 +141,12 @@ interface vdm_service
         [out, system_handle(sh_process)] HANDLE *frontend,
         [out] unsigned long *frontend_generation,
         [out, system_handle(sh_event)] HANDLE *ready);
-    /* PID is display-only; epoch/sequence remain the only management selector.
-     * No HANDLE, guest pointer or original record pointer is serialized. */
+    /* This is an authenticated, copied management projection.  PID is its
+     * sole cross-process worker identity; BaseSrv's sequence/generation stays
+     * private routing state.  No HANDLE, guest pointer or record pointer is
+     * serialized. */
     typedef struct _DTASKMGR_WORKER {
-        unsigned long sequence;
+        unsigned long process_id;
         unsigned long kind;
         unsigned long state;
         /* Count of the worker's original DOS/WOW task records. */
@@ -151,7 +154,6 @@ interface vdm_service
         hyper started_filetime;
         unsigned long task;
         unsigned long stack_depth;
-        unsigned long process_id;
         wchar_t image[260];
     } DTASKMGR_WORKER;
     /* Authenticated lifetime capability, not a PID or restart authority. */
@@ -318,7 +320,6 @@ interface vdm_service
         [in, system_handle(sh_process)] HANDLE process,
         [in] unsigned long protocol,
         [in] byte application_version[32],
-        [out] hyper *epoch,
         [out] unsigned long *count,
         [out, size_is(,*count)] DTASKMGR_WORKER **entries);
     error_status_t TerminateWorker(
@@ -326,8 +327,7 @@ interface vdm_service
         [in, system_handle(sh_process)] HANDLE process,
         [in] unsigned long protocol,
         [in] byte application_version[32],
-        [in] hyper epoch,
-        [in] unsigned long sequence);
+        [in] unsigned long process_id);
     error_status_t RegisterWowExec(
         [in] handle_t binding,
         [in] VDM_CONNECTION connection,

@@ -21,7 +21,7 @@ static BOOL dos_records(PCWSTR report, unsigned stage, PCWSTR phase)
     RPC_BINDING_HANDLE binding = NULL; HANDLE self = NULL;
     WCHAR endpoint[128], path[MAX_PATH]; FILE *file = NULL;
     DTASKMGR_WORKER *rows = NULL; ULONG count = 0, i;
-    hyper epoch = 0; DWORD error; BOOL ok = FALSE;
+    DWORD error; BOOL ok = FALSE;
     unsigned char version[APP_VERSION_BYTES] = APP_VERSION;
     if (!broker_rpc_capture_scope(&scope)) return FALSE;
     swprintf_s(endpoint, ARRAYSIZE(endpoint), L"ntvdm-basesrv-%lu-%08lx-%08lx",
@@ -37,15 +37,14 @@ static BOOL dos_records(PCWSTR report, unsigned stage, PCWSTR phase)
         FALSE, GetCurrentProcessId());
     if (!self) goto done;
     RpcTryExcept {
-        error = Client_TaskSnapshot(binding, self, APP_PROTOCOL_VERSION, version, &epoch, &count, &rows);
+        error = Client_TaskSnapshot(binding, self, APP_PROTOCOL_VERSION, version, &count, &rows);
     } RpcExcept(1) { error = RpcExceptionCode(); } RpcEndExcept
     /* Stage 1 observes final completion; an empty snapshot is valid there. */
-    if (error || !epoch || (!count && stage != 1)) goto done;
+    if (error || (!count && stage != 1)) goto done;
     swprintf_s(path, ARRAYSIZE(path), L"%ls.records-%u-%ls", report, stage, phase);
     if (_wfopen_s(&file, path, L"w")) goto done;
-    fprintf(file, "EPOCH %llu\n", (unsigned long long)epoch);
     for (i = 0; i < count; ++i) {
-        fprintf(file, "RECORD %lu %lu %lu %lu %lu %ls\n", rows[i].sequence,
+        fprintf(file, "RECORD %lu %lu %lu %lu %lu %ls\n", rows[i].process_id,
             rows[i].task, rows[i].kind, rows[i].state, rows[i].stack_depth, rows[i].image);
     }
     ok = !ferror(file);

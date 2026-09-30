@@ -22,7 +22,7 @@ int wmain(int argc,WCHAR **argv)
         Sleep(20000);return 3;
     }
     if(argc==2 && !wcscmp(argv[1],L"--owner")) {
-        HWND window=GetConsoleWindow();
+        HWND window=GetConsoleWindow();WCHAR active[MAX_PATH];
         if(!window || IsWindowVisible(window))return 4;
         ready=CreateEventW(&security,TRUE,FALSE,NULL);
         close_seen=CreateEventW(&security,TRUE,FALSE,NULL);
@@ -31,6 +31,9 @@ int wmain(int argc,WCHAR **argv)
             (unsigned long long)(ULONG_PTR)ready,(unsigned long long)(ULONG_PTR)close_seen);
         if(!CreateProcessW(image,command,NULL,NULL,TRUE,0,NULL,NULL,&startup,&process))return 6;
         if(WaitForSingleObject(ready,5000)!=WAIT_OBJECT_0)error=7;
+        /* The management projection must name the actual attached native
+         * target, not the NTCON carrier or a synthetic label. */
+        if(!error && (ntcon_console_active_image(active) || _wcsicmp(active,image)))error=16;
         if(!error)error=ntcon_console_close();
         if(!error && (IsWindow(window) || GetConsoleWindow()))error=8;
         if(!error && WaitForSingleObject(close_seen,1000)!=WAIT_OBJECT_0)error=9;
@@ -43,7 +46,7 @@ int wmain(int argc,WCHAR **argv)
         if(WaitForSingleObject(process.hProcess,15000)!=WAIT_OBJECT_0)error=13;
         else if(!GetExitCodeProcess(process.hProcess,&code))error=14;
         else error=code;
-        printf("NTCON-CLOSE error=%lu normal-console-close-and-client-signal=%s\n",error,error ? "FAIL" : "PASS");
+        printf("NTCON-CLOSE error=%lu target-image-and-normal-console-close=%s\n",error,error ? "FAIL" : "PASS");
     } else return 15;
     if(process.hProcess) {
         if(WaitForSingleObject(process.hProcess,0)==WAIT_TIMEOUT)TerminateProcess(process.hProcess,99);

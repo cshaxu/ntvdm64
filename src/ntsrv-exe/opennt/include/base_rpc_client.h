@@ -18,7 +18,7 @@ DWORD OpenNtBaseClientRetireFrontend(void);
 DWORD OpenNtBaseClientRegisterFrontendRoot(HANDLE capability);
 DWORD OpenNtBaseClientRegisterNativeBackend(HANDLE frontend,HANDLE stop,HANDLE closed);
 DWORD OpenNtBaseClientNativeSampleEpoch(uint64_t *epoch);
-DWORD OpenNtBaseClientReportNativeBackend(uint64_t epoch,DWORD members);
+DWORD OpenNtBaseClientReportNativeBackend(uint64_t epoch,DWORD members,const WCHAR image[260]);
 DWORD OpenNtBaseClientCompleteWorkerChannel(void);
 DWORD OpenNtBaseClientWorkerFrontendCapability(HANDLE *capability);
 DWORD OpenNtBaseClientRetainFrontendRoot(HANDLE capability,HANDLE *root,DWORD *generation);

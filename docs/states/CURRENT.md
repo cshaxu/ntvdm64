@@ -2,7 +2,9 @@
 
 ## Current Work
 
-**M0 T423 — S19 PID-first worker 管理投影与 NTMON 任务显示（已准入，执行中）。**
+**Active: M0 T423 S19** — PID-first worker 管理投影与 NTMON 任务显示（已准入，执行中）。
+
+## Active Packet
 
 | Field | S19 active packet |
 | --- | --- |
@@ -21,6 +23,13 @@
 | Exit Criteria | 生产接入且删除 sequence/epoch 的跨 NTMON 边界依赖；全部定向验证和适用回归通过；x86 构建、完整包发布、提交推送、工作区干净并等待 owner 验证。 |
 | Original Owner Request | “todo中的消除轮询的工作加入s20；原s20顺延；准入s19修复”。 |
 | Similar-Issue Sweep | 枚举所有跨 NTSRV/NTMON worker 标识、选择、Delete、kind 分派、标签/成员/空闲状态与 PID 重用路径；内部 sequence/generation 只允许留在服务端认证实现。 |
+
+## S19 P1 Progress
+
+Protocol 17 PID-first management is implemented and focused x86 evidence is
+recorded in [S19 P1](../etc/evidence/m0-t423-s19-pid-worker-management-p1.md).
+The full x86 runtime graph is still rebuilding before any `O:/winnt`
+publication or S19 closure claim.
 
 ## S18 Closure Record
 

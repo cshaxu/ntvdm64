@@ -35,6 +35,11 @@ foreach ($line in $environment) {
     if ($name -ieq 'Path') {
         if ($pathSet) { continue }
         $pathSet = $true
+        # PowerShell can retain both PATH and Path as separate entries while
+        # native CreateProcess observes only one.  Normalize the VS-provided
+        # value onto the canonical PowerShell spelling so cl.exe is resolvable.
+        $env:Path = $line.Substring($index + 1)
+        continue
     }
     Set-Item -Path ('env:' + $name) -Value $line.Substring($index + 1)
 }

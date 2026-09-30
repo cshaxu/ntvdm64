@@ -148,14 +148,14 @@ int main(int argc,char **argv)
     WCHAR path[MAX_PATH],*slash;
     HANDLE self;
     DWORD error=RPC_S_SERVER_UNAVAILABLE,attempt;
-    hyper epoch=0,valid_epoch=0;
     ULONG count=0;
     DTASKMGR_WORKER *entries=NULL;
+    BOOL empty=argc==2 && !_stricmp(argv[1],"--empty");
     BOOL existing=argc>=2 && (!_stricmp(argv[1],"--existing") || !_stricmp(argv[1],"--terminate"));
     BOOL terminate=(argc==2 || argc==3) && !_stricmp(argv[1],"--terminate");
     DWORD selected_pid=terminate && argc==3 ? strtoul(argv[2],NULL,10) : 0;
     ULONG index;
-    if (argc!=1 && !existing) { fputs("usage: monitor-rpc-test [--existing]\n",stderr); return 2; }
+    if (argc!=1 && !empty && !existing) { fputs("usage: monitor-rpc-test [--empty|--existing|--terminate [pid]]\n",stderr); return 2; }
     CHECK(broker_rpc_capture_scope(&scope));
     if (!existing) {
         CHECK(GetModuleFileNameW(NULL,path,MAX_PATH));
@@ -168,18 +168,18 @@ int main(int argc,char **argv)
     for (attempt=0;attempt<100;++attempt) {
         RpcTryExcept {
             error=Client_TaskSnapshot(binding,self,APP_PROTOCOL_VERSION,(unsigned char *)version,
-                &epoch,&count,&entries);
+                &count,&entries);
         }
         RpcExcept(1) { error=RpcExceptionCode(); }
         RpcEndExcept
         if (error==ERROR_SUCCESS) break;
         Sleep(50);
     }
-    CHECK(error==ERROR_SUCCESS && epoch!=0 && (!existing || count));
+    CHECK(error==ERROR_SUCCESS && (!existing || count));
     if (existing) {
         for (index=0;index<count;++index)
-            wprintf(L"WORKER sequence=%lu task=%lu kind=%lu state=%lu image=%ls\n",
-                (unsigned long)entries[index].sequence,(unsigned long)entries[index].task,
+            wprintf(L"WORKER pid=%lu task=%lu kind=%lu state=%lu image=%ls\n",
+                (unsigned long)entries[index].process_id,(unsigned long)entries[index].task,
                 (unsigned long)entries[index].kind,(unsigned long)entries[index].state,
                 entries[index].image);
         if (terminate) {
@@ -192,7 +192,7 @@ int main(int argc,char **argv)
             } else CHECK(count==1);
             RpcTryExcept {
                 error=Client_TerminateWorker(binding,self,APP_PROTOCOL_VERSION,(unsigned char *)version,
-                    epoch,entries[selected].sequence);
+                    entries[selected].process_id);
             }
             RpcExcept(1) { error=RpcExceptionCode(); }
             RpcEndExcept
@@ -204,17 +204,18 @@ int main(int argc,char **argv)
         return 0;
     }
     CHECK(count==0 && entries==NULL);
-    CHECK(console_context_rpc(binding,self)==0);
-    valid_epoch=epoch;
+    /* The empty path isolates the public management ABI from the host's
+     * separately exercised Console named-pipe policy. */
+    if (!empty) CHECK(console_context_rpc(binding,self)==0);
     RpcTryExcept {
         error=Client_TaskSnapshot(binding,self,APP_PROTOCOL_VERSION+1,(unsigned char *)version,
-            &epoch,&count,&entries);
+            &count,&entries);
     }
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
     CHECK(error==ERROR_REVISION_MISMATCH);
     RpcTryExcept {
-        error=Client_TerminateWorker(binding,self,APP_PROTOCOL_VERSION,(unsigned char *)version,valid_epoch,1);
+        error=Client_TerminateWorker(binding,self,APP_PROTOCOL_VERSION,(unsigned char *)version,1);
     }
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
@@ -231,6 +232,7 @@ int main(int argc,char **argv)
     }
     CHECK(WaitForSingleObject(broker.hProcess,5000)==WAIT_OBJECT_0);
     CloseHandle(broker.hThread);CloseHandle(broker.hProcess);
-    puts("PASS: authenticated DTASKMGR RPC sees empty broker, rejects version and cannot terminate absent worker");
+    puts(empty ? "PASS: empty PID-only DTASKMGR RPC rejects version and absent worker"
+        : "PASS: authenticated DTASKMGR RPC sees empty broker, rejects version and cannot terminate absent worker");
     return 0;
 }

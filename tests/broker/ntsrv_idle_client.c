@@ -32,8 +32,8 @@ int main(int argc,char **argv)
         if (!strcmp(argv[1],"observe")) {
             deadline=GetTickCount64()+duration;
             do {
-                hyper epoch=0;ULONG count=0;DTASKMGR_WORKER *entries=NULL;
-                error=Client_TaskSnapshot(binding,process,APP_PROTOCOL_VERSION,version,&epoch,&count,&entries);
+                ULONG count=0;DTASKMGR_WORKER *entries=NULL;
+                error=Client_TaskSnapshot(binding,process,APP_PROTOCOL_VERSION,version,&count,&entries);
                 if (entries) midl_user_free(entries);
                 if (error || count) { error=error?error:ERROR_INVALID_DATA;break; }
                 puts("OBSERVED EMPTY");fflush(stdout);

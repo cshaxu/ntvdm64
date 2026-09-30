@@ -9,8 +9,9 @@
 typedef struct OPENNT_BASE_SERVICE OPENNT_BASE_SERVICE;
 typedef struct OPENNT_BASE_CONNECTION OPENNT_BASE_CONNECTION;
 typedef void (WINAPI *OPENNT_BASE_EMPTY_NOTIFY)(void *);
-/* Copied management projection. PID is display-only; epoch/sequence select
- * control operations. No HANDLE, original record pointer or guest address. */
+/* Copied management projection. PID selects the currently authenticated,
+ * registered worker. BaseSrv sequence remains private routing state. No
+ * HANDLE, original record pointer or guest address crosses this boundary. */
 #define OPENNT_BASE_WORKER_IMAGE_CHARS 260u
 typedef struct OPENNT_BASE_WORKER_INFO {
     uint32_t sequence;
@@ -24,7 +25,7 @@ typedef struct OPENNT_BASE_WORKER_INFO {
     /* Management-only depth: 0 is the resident PermCom, 1 its COMMAND,
      * and each child command increases the visible call depth. */
     uint32_t stack_depth;
-    uint32_t process_id; /* Display only; never a termination selector. */
+    uint32_t process_id;
     WCHAR image[OPENNT_BASE_WORKER_IMAGE_CHARS];
 } OPENNT_BASE_WORKER_INFO;
 /* The original service owns ConsoleRecord selection.  This callback only
@@ -41,10 +42,11 @@ BOOL OpenNtBaseServiceConfigureEmptyNotify(OPENNT_BASE_SERVICE *,OPENNT_BASE_EMP
  * connected interactive VDM. */
 BOOL OpenNtBaseServiceIsEmpty(OPENNT_BASE_SERVICE *);
 /* Management callers are authenticated by the transport before reaching
- * these methods.  The epoch rejects selections copied before a broker restart. */
+ * these methods. The service resolves a PID while holding its registration
+ * lock, so a removed/reused prior process cannot be selected. */
 DWORD OpenNtBaseServiceSnapshot(OPENNT_BASE_SERVICE *,uint64_t *epoch,
     OPENNT_BASE_WORKER_INFO *entries,uint32_t capacity,uint32_t *count);
-DWORD OpenNtBaseServiceTerminateWorker(OPENNT_BASE_SERVICE *,uint64_t epoch,uint32_t sequence);
+DWORD OpenNtBaseServiceTerminateWorker(OPENNT_BASE_SERVICE *,uint32_t process_id);
 DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *,HANDLE,OPENNT_BASE_CONNECTION **,DWORD *);
 /* Independent native-worker admission through the existing reservation path.
  * Execution Console binding is authenticated separately from frontend I/O. */
@@ -77,7 +79,7 @@ DWORD OpenNtBaseServiceRegisterNativeBackend(OPENNT_BASE_CONNECTION *,DWORD pid,
 DWORD OpenNtBaseServiceCompleteWorkerChannel(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation);
 DWORD OpenNtBaseServiceNativeSampleEpoch(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,uint64_t *epoch);
 DWORD OpenNtBaseServiceReportNativeBackend(OPENNT_BASE_CONNECTION *,DWORD pid,
-    DWORD generation,uint64_t epoch,DWORD members);
+    DWORD generation,uint64_t epoch,DWORD members,const WCHAR image[260]);
 /* Preserve the caller's verified execution Console across a hidden backend.
  * The returned unnamed event is a separate, wait-only capability, not the
  * frontend event or a caller-selected Console/worker identity. The root owns

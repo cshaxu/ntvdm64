@@ -148,14 +148,14 @@ error_status_t Server_RevokeStream(handle_t binding,VDM_CONNECTION connection,HA
     return OpenNtBaseServiceRevokeStream(connection,pid,generation,receipt);
 }
 error_status_t Server_TaskSnapshot(handle_t binding,HANDLE process,ULONG protocol,
-    unsigned char application_version[32],hyper *epoch,ULONG *count,DTASKMGR_WORKER **entries)
+    unsigned char application_version[32],ULONG *count,DTASKMGR_WORKER **entries)
 {
     OPENNT_BASE_WORKER_INFO *local=NULL;
     DWORD pid,error;
     uint32_t actual=0,index;
     uint64_t service_epoch=0;
-    if (!epoch || !count || !entries) return ERROR_INVALID_PARAMETER;
-    *epoch=0; *count=0; *entries=NULL;
+    if (!count || !entries) return ERROR_INVALID_PARAMETER;
+    *count=0; *entries=NULL;
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
     if (error) return error;
     error=basesrv_management_version(protocol,application_version);
@@ -169,33 +169,31 @@ error_status_t Server_TaskSnapshot(handle_t binding,HANDLE process,ULONG protoco
         *entries=MIDL_user_allocate(sizeof(**entries)*actual);
         if (!*entries) { error=ERROR_NOT_ENOUGH_MEMORY; goto done; }
         for (index=0;index<actual;++index) {
-            (*entries)[index].sequence=local[index].sequence;
+            (*entries)[index].process_id=local[index].process_id;
             (*entries)[index].kind=local[index].kind;
             (*entries)[index].state=local[index].state;
             (*entries)[index].reserved=local[index].reserved;
             (*entries)[index].started_filetime=(hyper)local[index].started_filetime;
             (*entries)[index].task=local[index].task;
             (*entries)[index].stack_depth=local[index].stack_depth;
-            (*entries)[index].process_id=local[index].process_id;
             memcpy((*entries)[index].image,local[index].image,sizeof(local[index].image));
         }
     }
-    *epoch=(hyper)service_epoch;
     *count=actual;
 done:
     if (local) HeapFree(GetProcessHeap(),0,local);
     if (error && *entries) { MIDL_user_free(*entries); *entries=NULL; }
-    if (error) { *epoch=0; *count=0; }
+    if (error) *count=0;
     return error;
 }
 error_status_t Server_TerminateWorker(handle_t binding,HANDLE process,ULONG protocol,
-    unsigned char application_version[32],hyper epoch,ULONG sequence)
+    unsigned char application_version[32],ULONG process_id)
 {
     DWORD pid,error;
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
     if (error) return error;
     error=basesrv_management_version(protocol,application_version);
-    if (!error) error=OpenNtBaseServiceTerminateWorker(service,(uint64_t)epoch,sequence);
+    if (!error) error=OpenNtBaseServiceTerminateWorker(service,process_id);
     basesrv_schedule_empty_stop();
     return error;
 }
@@ -348,10 +346,10 @@ error_status_t Server_NativeSampleEpoch(handle_t binding,VDM_CONNECTION connecti
     return error;
 }
 error_status_t Server_ReportNativeBackend(handle_t binding,VDM_CONNECTION connection,HANDLE process,
-    ULONG generation,hyper epoch,ULONG members)
+    ULONG generation,hyper epoch,ULONG members,WCHAR image[260])
 {
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    return error ? error : OpenNtBaseServiceReportNativeBackend(connection,pid,generation,(uint64_t)epoch,members);
+    return error ? error : OpenNtBaseServiceReportNativeBackend(connection,pid,generation,(uint64_t)epoch,members,image);
 }
 error_status_t Server_RegisterFrontendRoot(handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,HANDLE capability)
@@ -732,7 +730,7 @@ int main(void)
         (void)OpenNtBaseServiceStop(service);
         return (int)error;
     }
-    result=RpcServerRegisterIf3(Server_vdm_service_v16_0_s_ifspec,NULL,NULL,
+    result=RpcServerRegisterIf3(Server_vdm_service_v17_0_s_ifspec,NULL,NULL,
         RPC_IF_ALLOW_SECURE_ONLY | RPC_IF_ALLOW_LOCAL_ONLY,RPC_C_LISTEN_MAX_CALLS_DEFAULT,
         (unsigned)-1,authorize,NULL);
     if (!result) {
@@ -756,7 +754,7 @@ int main(void)
         if (result) basesrv_idle_fatal("RpcMgmtWaitServerListen",result);
     }
     {
-        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v16_0_s_ifspec,NULL,TRUE);
+        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v17_0_s_ifspec,NULL,TRUE);
         if (!result && cleanup) result=cleanup;
     }
     if (idle_timer) CloseHandle(idle_timer);

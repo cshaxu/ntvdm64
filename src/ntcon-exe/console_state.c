@@ -387,3 +387,22 @@ DWORD ntcon_console_members(DWORD **members,DWORD *count)
     }
     return ERROR_RETRY;
 }
+
+DWORD ntcon_console_active_image(WCHAR image[260])
+{
+    DWORD *members=NULL,count=0,index,error;
+    if(!image)return ERROR_INVALID_PARAMETER;
+    image[0]=L'\0';
+    error=ntcon_console_members(&members,&count);
+    if(error)return error;
+    for(index=0;index<count;++index) {
+        HANDLE process=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION,FALSE,members[index]);
+        DWORD chars=260;
+        if(process && QueryFullProcessImageNameW(process,0,image,&chars) && chars) {
+            CloseHandle(process);HeapFree(GetProcessHeap(),0,members);return ERROR_SUCCESS;
+        }
+        if(process)CloseHandle(process);
+    }
+    HeapFree(GetProcessHeap(),0,members);
+    return ERROR_NOT_FOUND;
+}

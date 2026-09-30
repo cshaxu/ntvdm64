@@ -2,6 +2,7 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T423 S18 native root restoration](evidence/m0-t423-s18-native-root-restoration.md) | M0 T423 S18 | Restores the native root `run16 cmd` retirement/Console-restoration acknowledgement before outer CMD resumes. | Retain through T423 acceptance. |
 | [T423 S17 Window-exit input recovery](evidence/m0-t423-s17-window-exit-input-recovery.md) | M0 T423 S17 | Proves and repairs the root launcher/NTKVM buffer-restore acknowledgement race before outer CMD input resumes. | Retain through T423 acceptance. |
 | [T423 S16 typeahead handoff](evidence/m0-t423-s16-typeahead-handoff.md) | M0 T423 S16 | Distinguishes Console verifier false negative from real Window input-order fault and tracks the exact handoff repair. | Retain through T423 acceptance. |
 | [T423 S15 mouse ownership and position](evidence/m0-t423-s15-mouse-ownership-position.md) | M0 T423 S15 | Window capture/absolute-pointer repair, published regression and explicit zero-delay input transfer to S16. | Retain through T423 acceptance. |
@@ -240,6 +241,10 @@ the clean build, Console ownership diagnosis and current S1 verification gaps.
 
 [Dtmgr EDIT-style presentation](evidence/dtmgr-edit-style.md) records the
 owner-requested title, frame and scrollbar reference audit and focused checks.
+
+[T423 S19 PID-first worker management P1](evidence/m0-t423-s19-pid-worker-management-p1.md)
+records the protocol-17 public management boundary and focused x86 evidence;
+the active packet retains its unclosed full-package gates.
 
 [Retained prior status](evidence/m0-t423-restart-prior-status.md) preserves the
 pre-restart chronology; current admission remains in states/CURRENT.md.

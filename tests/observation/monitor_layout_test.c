@@ -25,20 +25,16 @@ int wmain(void)
     {
         DTASKMGR_WORKER native={0};FILETIME now;WCHAR line[512];
         GetSystemTimeAsFileTime(&now);
-        native.kind=4;native.sequence=73;native.process_id=1234;
+        native.kind=4;native.process_id=1234;
         native.state=8;native.reserved=2;
         native.started_filetime=((uint64_t)now.dwHighDateTime<<32)|now.dwLowDateTime;
         lstrcpyW(native.image,L"ntcon.exe");
         task_line(line,ARRAYSIZE(line),&state,&native,&now);
-        assert(wcsstr(line,L"NTCON") && wcsstr(line,L"PID=1234") &&
-            wcsstr(line,L"Active") && wcsstr(line,L"MEMBERS=2") && wcsstr(line,L"START="));
-        native.reserved=0;task_line(line,ARRAYSIZE(line),&state,&native,&now);
-        assert(wcsstr(line,L"Idle"));
-        native.state|=0x80000000u;task_line(line,ARRAYSIZE(line),&state,&native,&now);
-        assert(wcsstr(line,L"Closing"));
-        state.confirm_kind=4;state.confirm_sequence=73;state.confirm_task_count=2;
+        assert(wcsstr(line,L"WIN32") && wcsstr(line,L"1234") &&
+            wcsstr(line,L"MEMBERS=2") && wcsstr(line,L"ntcon.exe"));
+        state.confirm_kind=4;state.confirm_pid=1234;state.confirm_task_count=2;
         confirmation_text(line,ARRAYSIZE(line),&state);
-        assert(wcsstr(line,L"Close NTCON 73 Console (2 members)") && !wcsstr(line,L"tasks"));
+        assert(wcsstr(line,L"Close WIN32 worker 1234 (2 members)") && !wcsstr(line,L"tasks"));
         ZeroMemory(&state,sizeof(state));
     }
     BOOL allocated=AllocConsole();
@@ -72,36 +68,36 @@ int wmain(void)
     cell(78,23,L'\x2192',MONITOR_SCROLL_ATTRIBUTE);
     cell(57,24,L'B',MONITOR_STATUS_ATTRIBUTE);
     for (i=0;i<24;++i) {
-        items[i].sequence=i+1;
+        items[i].process_id=i+1;
         items[i].kind=1;
         lstrcpyW(items[i].image,L"COMMAND.COM");
     }
     for (i=0;i<200;++i) items[23].image[i]=L'X';
     items[23].image[200]=0;
     state.status=ERROR_SUCCESS;
-    state.selected_sequence=1;
+    state.selected_pid=1;
     render(output,&state,items,3);
     capture(output);
     cell(79,4,L' ',MONITOR_THUMB_ATTRIBUTE);
-    state.selected_sequence=2;
+    state.selected_pid=2;
     render(output,&state,items,3);
     capture(output);
     assert(state.first_visible==0);
     cell(1,5,L'>',MONITOR_SELECTED_ATTRIBUTE);
     cell(79,4,L'\x2591',MONITOR_SCROLL_ATTRIBUTE);
     cell(79,5,L' ',MONITOR_THUMB_ATTRIBUTE);
-    state.selected_sequence=3;
+    state.selected_pid=3;
     render(output,&state,items,3);
     capture(output);
     cell(79,5,L'\x2591',MONITOR_SCROLL_ATTRIBUTE);
     cell(79,6,L' ',MONITOR_THUMB_ATTRIBUTE);
-    state.selected_sequence=2;
+    state.selected_pid=2;
     render(output,&state,items,24);
     capture(output);
     assert(state.first_visible==0);
     cell(79,5,L' ',MONITOR_THUMB_ATTRIBUTE);
     cell(79,6,L'\x2591',MONITOR_SCROLL_ATTRIBUTE);
-    state.selected_sequence=24;
+    state.selected_pid=24;
     render(output,&state,items,24);
     capture(output);
     assert(state.first_visible==5);
@@ -113,8 +109,8 @@ int wmain(void)
     capture(output);
     cell(77,23,L' ',MONITOR_THUMB_ATTRIBUTE);
     cell(78,22,L'X',MONITOR_SELECTED_ATTRIBUTE);
-    state.selected_sequence=1;
-    state.confirm_sequence=1;
+    state.selected_pid=1;
+    state.confirm_pid=1;
     state.confirm_task_count=2;
     render(output,&state,items,1);
     capture(output);
@@ -123,7 +119,7 @@ int wmain(void)
     cell(79,3,L'\x2191',MONITOR_SCROLL_ATTRIBUTE);
     cell(79,4,L' ',MONITOR_THUMB_ATTRIBUTE);
     cell(1,24,L'E',MONITOR_STATUS_ATTRIBUTE);
-    state.confirm_sequence=0;
+    state.confirm_pid=0;
     render(output,&state,NULL,0);
     capture(output);
     cell(3,4,L'N',MONITOR_NORMAL_ATTRIBUTE);

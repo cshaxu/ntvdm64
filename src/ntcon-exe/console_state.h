@@ -28,6 +28,9 @@ DWORD ntcon_cells_write(HANDLE,DWORD,const CHAR_INFO *,DWORD);
 /* Returns attached members excluding this backend; caller frees *members with
  * HeapFree(GetProcessHeap(),0,...). Failure never reports an empty session. */
 DWORD ntcon_console_members(DWORD **members,DWORD *count);
+/* Snapshot a currently attached native target image for management only.
+ * It never chooses execution ownership or controls the target process. */
+DWORD ntcon_console_active_image(WCHAR image[260]);
 /* Explicit management shutdown only. Detach this carrier, request normal
  * Console close, and confirm the owned window disappeared before success. */
 DWORD ntcon_console_close(void);
