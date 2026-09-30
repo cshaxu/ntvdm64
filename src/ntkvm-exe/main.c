@@ -7,7 +7,7 @@
 #include <string.h>
 
 PVOID CsrPortHeap;
-static DWORD session_entry(HANDLE pipe,HANDLE caller,HANDLE notification)
+static DWORD session_entry(HANDLE pipe,HANDLE caller,HANDLE notification,HANDLE retire,HANDLE restored)
 {
     DWORD pid=0,error,ignored;
     HANDLE event=NULL;
@@ -23,7 +23,7 @@ static DWORD session_entry(HANDLE pipe,HANDLE caller,HANDLE notification)
     error=OpenNtBaseClientConnectCurrent();if(error)goto respond;
     error=OpenNtBaseClientWatchBroker();if(error)goto respond;
     error=OpenNtBaseClientRegisterFrontendRoot(notification);if(error)goto respond;
-    error=frontend_service_start_process(notification,notification,caller,&service);if(error)goto respond;
+    error=frontend_service_start_process(notification,notification,caller,retire,&service);if(error)goto respond;
 respond:
     reply.status=error;
     {
@@ -37,23 +37,36 @@ respond:
         else error=ignored;
     }else error=GetLastError();
 done:
-    frontend_service_close(service);
+    {
+        DWORD close_error=frontend_service_close(service),ack_error=ERROR_SUCCESS;
+        BOOL acknowledged=FALSE;
+        if(!error && close_error)error=close_error;
+        /* The launcher holds only SYNCHRONIZE access to this private event.
+         * Signal it after, never before, buffer and input-mode restoration. */
+        if(!close_error) {
+            acknowledged=SetEvent(restored);
+            if(!acknowledged)ack_error=GetLastError();
+            if(!acknowledged && !error)error=ack_error;
+        }
+    }
     OpenNtBaseClientDisconnectCurrent();
     if(notification)CloseHandle(notification);
     if(event)CloseHandle(event);
-    CloseHandle(pipe);CloseHandle(caller);
+    CloseHandle(pipe);CloseHandle(caller);CloseHandle(retire);CloseHandle(restored);
     return error;
 }
 int wmain(int argc,WCHAR **argv)
 {
     WCHAR *end;
-    UINT_PTR pipe,caller,notification;
+    UINT_PTR pipe,caller,notification,retire,restored;
     DWORD result;
-    if(argc!=5 || wcscmp(argv[1],L"--session"))return ERROR_INVALID_PARAMETER;
+    if(argc!=7 || wcscmp(argv[1],L"--session"))return ERROR_INVALID_PARAMETER;
     pipe=(UINT_PTR)wcstoul(argv[2],&end,16);if(!pipe || *end)return ERROR_INVALID_PARAMETER;
     caller=(UINT_PTR)wcstoul(argv[3],&end,16);if(!caller || *end)return ERROR_INVALID_PARAMETER;
     notification=(UINT_PTR)wcstoul(argv[4],&end,16);if(!notification || *end)return ERROR_INVALID_PARAMETER;
+    retire=(UINT_PTR)wcstoul(argv[5],&end,16);if(!retire || *end)return ERROR_INVALID_PARAMETER;
+    restored=(UINT_PTR)wcstoul(argv[6],&end,16);if(!restored || *end)return ERROR_INVALID_PARAMETER;
     CsrPortHeap=HeapCreate(0,0,0);if(!CsrPortHeap)return ERROR_NOT_ENOUGH_MEMORY;
-    result=session_entry((HANDLE)pipe,(HANDLE)caller,(HANDLE)notification);
+    result=session_entry((HANDLE)pipe,(HANDLE)caller,(HANDLE)notification,(HANDLE)retire,(HANDLE)restored);
     HeapDestroy(CsrPortHeap);return (int)result;
 }

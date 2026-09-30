@@ -6,9 +6,9 @@ typedef struct frontend_channel {
     run16_console_channel *channel;
 } frontend_channel;
 struct frontend_session_service {
-    HANDLE capability,notification,stop,thread;
+    HANDLE capability,notification,stop,thread,retire;
     HANDLE creator;
-    BOOL admitted;
+    BOOL admitted,retire_requested;
     frontend_channel *channels;
     run16_native_frontend *native;
     void (*channel_ready)(void);
@@ -16,12 +16,16 @@ struct frontend_session_service {
 static DWORD WINAPI frontend_pump(void *context)
 {
     frontend_session_service *scope=context;
-    HANDLE waits[2]={scope->stop,scope->notification};
+    HANDLE waits[3]={scope->stop,scope->notification,scope->retire};
     DWORD error=ERROR_SUCCESS;
     for (;;) {
-        DWORD wait=WaitForMultipleObjects(2,waits,FALSE,scope->creator ? 100 : INFINITE);
+        DWORD wait_count=(scope->retire && !scope->retire_requested) ? 3 : 2;
+        DWORD wait=WaitForMultipleObjects(wait_count,waits,FALSE,scope->creator ? 100 : INFINITE);
         if (wait==WAIT_OBJECT_0) break;
-        if (wait!=WAIT_OBJECT_0+1 && wait!=WAIT_TIMEOUT) return GetLastError();
+        if (wait!=WAIT_OBJECT_0+1 && wait!=WAIT_OBJECT_0+2 && wait!=WAIT_TIMEOUT) {
+            return GetLastError();
+        }
+        if(wait==WAIT_OBJECT_0+2)scope->retire_requested=TRUE;
         for (;;) {
             HANDLE worker=NULL;
             DWORD request=0;
@@ -52,10 +56,11 @@ static DWORD WINAPI frontend_pump(void *context)
             scope->admitted=TRUE;
             if (scope->channel_ready) scope->channel_ready();
         }
-        if(scope->creator &&
-            (scope->admitted || WaitForSingleObject(scope->creator,0)==WAIT_OBJECT_0)){
+        if(scope->creator && (WaitForSingleObject(scope->creator,0)==WAIT_OBJECT_0 ||
+            (scope->admitted && scope->retire_requested))){
             DWORD pending=0,tasks=0;
-            error=OpenNtBaseClientFrontendUsage(&pending,&tasks);if(error)return error;
+            error=OpenNtBaseClientFrontendUsage(&pending,&tasks);
+            if(error)return error;
             /* NTSRV includes native admissions and reported Console members.
              * The frontend owns neither targets nor a second backend census. */
             if(pending || tasks)continue;
@@ -77,10 +82,11 @@ static DWORD WINAPI frontend_pump(void *context)
     return ERROR_SUCCESS;
 }
 
-void frontend_service_close(frontend_session_service *scope)
+DWORD frontend_service_close(frontend_session_service *scope)
 {
     frontend_channel *entry;
-    if (!scope) return;
+    DWORD error=ERROR_SUCCESS;
+    if (!scope) return ERROR_SUCCESS;
     if (scope->stop) SetEvent(scope->stop);
     run16_native_frontend_cancel(scope->native);
     if (scope->thread) {
@@ -92,11 +98,16 @@ void frontend_service_close(frontend_session_service *scope)
         run16_console_channel_stop(entry->channel);
         HeapFree(GetProcessHeap(),0,entry);
     }
-    run16_native_frontend_destroy(scope->native);
+    error=run16_native_frontend_destroy(scope->native);
+    /* A failed restore deliberately retains the native object and its
+     * handles for process cleanup.  Do not free the owning service storage:
+     * the caller must report failure rather than manufacture a handoff. */
+    if(error)return error;
     if(scope->stop)CloseHandle(scope->stop);
     HeapFree(GetProcessHeap(),0,scope);
+    return ERROR_SUCCESS;
 }
-static DWORD service_start(HANDLE capability,HANDLE notification,HANDLE creator,
+static DWORD service_start(HANDLE capability,HANDLE notification,HANDLE creator,HANDLE retire,
     void (*ready)(void),frontend_session_service **output)
 {
     frontend_session_service *scope;
@@ -106,7 +117,7 @@ static DWORD service_start(HANDLE capability,HANDLE notification,HANDLE creator,
     scope=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*scope));
     if(!scope)return ERROR_NOT_ENOUGH_MEMORY;
     scope->capability=capability;scope->notification=notification;scope->channel_ready=ready;
-    scope->creator=creator;
+    scope->creator=creator;scope->retire=retire;
     scope->stop=CreateEventW(NULL,TRUE,FALSE,NULL);
     if(!scope->stop){error=GetLastError();goto fail;}
     error=run16_native_frontend_create(&scope->native);if(error)goto fail;
@@ -114,17 +125,17 @@ static DWORD service_start(HANDLE capability,HANDLE notification,HANDLE creator,
     if(!scope->thread){error=GetLastError();goto fail;}
     *output=scope;return ERROR_SUCCESS;
 fail:
-    frontend_service_close(scope);return error;
+    (void)frontend_service_close(scope);return error;
 }
 DWORD frontend_service_start(HANDLE capability,HANDLE notification,
     void (*ready)(void),frontend_session_service **output)
 {
-    return service_start(capability,notification,NULL,ready,output);
+    return service_start(capability,notification,NULL,NULL,ready,output);
 }
 DWORD frontend_service_start_process(HANDLE capability,HANDLE notification,
-    HANDLE creator,frontend_session_service **output)
+    HANDLE creator,HANDLE retire,frontend_session_service **output)
 {
-    if(!creator)return ERROR_INVALID_PARAMETER;
-    return service_start(capability,notification,creator,NULL,output);
+    if(!creator || !retire)return ERROR_INVALID_PARAMETER;
+    return service_start(capability,notification,creator,retire,NULL,output);
 }
 HANDLE frontend_service_thread(frontend_session_service *scope){return scope ? scope->thread : NULL;}

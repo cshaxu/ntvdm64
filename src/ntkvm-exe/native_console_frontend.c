@@ -598,9 +598,10 @@ void run16_native_frontend_dos_forget(run16_native_frontend *frontend,const void
     SetEvent(frontend->changed);
     LeaveCriticalSection(&frontend->io_lock);
 }
-void run16_native_frontend_destroy(run16_native_frontend *frontend)
+DWORD run16_native_frontend_destroy(run16_native_frontend *frontend)
 {
-    if(!frontend)return;
+    DWORD error=ERROR_SUCCESS;
+    if(!frontend)return ERROR_SUCCESS;
     AcquireSRWLockExclusive(&control_lock);
     if(control_owner==frontend) {
         control_owner=NULL;
@@ -611,14 +612,18 @@ void run16_native_frontend_destroy(run16_native_frontend *frontend)
     /* All resources observe the frontend stop, but closing the native Console must
      * never signal that session-wide event. */
     if(frontend->thread) { WaitForSingleObject(frontend->thread,INFINITE);CloseHandle(frontend->thread); }
-    if(frontend->window)return; /* Failed Window join: retain all callback context. */
+    if(frontend->window)return ERROR_BUSY; /* Failed Window join: retain all callback context. */
     /* Restore before closing a surface even after a presentation failure. A
      * failed restore retains its handles for terminal process cleanup. */
     if(frontend->console_surface) {
-        if(!SetConsoleActiveScreenBuffer(frontend->console_output))return;
+        if(!SetConsoleActiveScreenBuffer(frontend->console_output))return GetLastError();
         CloseHandle(frontend->console_surface);
+        frontend->console_surface=NULL;
     }
-    if(frontend->input_mode_saved)SetConsoleMode(frontend->console_input,frontend->original_input_mode);
+    if(frontend->input_mode_saved) {
+        if(!SetConsoleMode(frontend->console_input,frontend->original_input_mode))return GetLastError();
+        frontend->input_mode_saved=FALSE;
+    }
     if(frontend->console_input && frontend->console_input!=INVALID_HANDLE_VALUE)CloseHandle(frontend->console_input);
     if(frontend->console_output && frontend->console_output!=INVALID_HANDLE_VALUE)CloseHandle(frontend->console_output);
     if(frontend->stop)CloseHandle(frontend->stop);
@@ -635,4 +640,5 @@ void run16_native_frontend_destroy(run16_native_frontend *frontend)
     DeleteCriticalSection(&frontend->io_lock);
     DeleteCriticalSection(&frontend->lock);
     HeapFree(GetProcessHeap(),0,frontend);
+    return error;
 }

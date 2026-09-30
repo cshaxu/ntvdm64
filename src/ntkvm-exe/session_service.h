@@ -5,9 +5,12 @@ typedef struct frontend_session_service frontend_session_service;
 /* Called by the process already registered as the authenticated frontend.
  * Borrowed capability/notification remain valid until service_close joins. */
 DWORD frontend_service_start(HANDLE,HANDLE,void (*)(void),frontend_session_service **);
-/* Independent process: creator is a borrowed startup hold, never target
- * lifetime. It is ignored after the first admitted I/O request. */
-DWORD frontend_service_start_process(HANDLE,HANDLE,HANDLE,frontend_session_service **);
-void frontend_service_close(frontend_session_service *);
+/* Independent process: creator is a borrowed failure/early-start hold;
+ * retire is the root launcher's explicit direct-DOS completion signal. */
+DWORD frontend_service_start_process(HANDLE,HANDLE,HANDLE,HANDLE,frontend_session_service **);
+/* Returns only after the native Console has been restored.  A failure leaves
+ * the root caller unacknowledged rather than returning it to a half-restored
+ * Console. */
+DWORD frontend_service_close(frontend_session_service *);
 HANDLE frontend_service_thread(frontend_session_service *);
 #endif

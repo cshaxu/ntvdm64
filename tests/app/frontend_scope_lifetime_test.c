@@ -41,6 +41,8 @@ DWORD frontend_bootstrap_start(PCWSTR image,frontend_connection *connection)
 void frontend_bootstrap_release(frontend_connection *connection)
 {
     if(connection->capability)CloseHandle(connection->capability);
+    if(connection->retire)CloseHandle(connection->retire);
+    if(connection->restored)CloseHandle(connection->restored);
     if(connection->process)CloseHandle(connection->process);
     if(connection->channel)CloseHandle(connection->channel);
     ZeroMemory(connection,sizeof(*connection));
@@ -64,7 +66,7 @@ DWORD OpenNtBaseClientRetireFrontend(void)
     /* Admission can race the idle snapshot; the service barrier wins. */
     return InterlockedIncrement(&retire_calls)==1 ? ERROR_BUSY : ERROR_SUCCESS;
 }
-void run16_native_frontend_destroy(run16_native_frontend *value) { if(value)HeapFree(GetProcessHeap(),0,value); }
+DWORD run16_native_frontend_destroy(run16_native_frontend *value) { if(value)HeapFree(GetProcessHeap(),0,value);return 0; }
 DWORD run16_native_worker_request_submit(HANDLE worker,HANDLE capability,const run16_native_start *start,HANDLE *out,HANDLE *receipt)
 { (void)worker;(void)capability;(void)start;*out=*receipt=NULL;return ERROR_NOT_SUPPORTED; }
 DWORD run16_native_worker_request_begin(HANDLE worker,HANDLE capability,const run16_native_start *start,HANDLE *out,HANDLE *receipt,HANDLE *completion)
@@ -170,7 +172,7 @@ static void service_controls_retirement(void)
     HANDLE creator=CreateEventW(NULL,TRUE,TRUE,NULL);
     usage_seen=CreateEventW(NULL,TRUE,FALSE,NULL);CHECK(creator && usage_seen);
     retirement_mode=TRUE;usage_pending=1;
-    CHECK(!frontend_service_start_process(notification,notification,creator,&service));
+    CHECK(!frontend_service_start_process(notification,notification,creator,notification,&service));
     CHECK(WaitForSingleObject(usage_seen,5000)==WAIT_OBJECT_0);
     CHECK(WaitForSingleObject(frontend_service_thread(service),0)==WAIT_TIMEOUT);
     CHECK(!retire_calls && !drain_calls);

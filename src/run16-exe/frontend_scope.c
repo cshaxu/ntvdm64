@@ -27,7 +27,7 @@ static DWORD inherited_capability(const char *name,HANDLE *capability)
     return ERROR_SUCCESS;
 }
 struct run16_frontend_scope {
-    HANDLE capability,root,receipt,completion,worker;
+    HANDLE capability,retire,restored,root,receipt,completion,worker;
     BOOL owns_environment,has_execution;
     DWORD console_mask;
 };
@@ -36,6 +36,8 @@ void run16_frontend_scope_end(run16_frontend_scope *scope)
     if(!scope)return;
     if(scope->owns_environment)SetEnvironmentVariableA(FRONTEND_ENV,NULL);
     if(scope->capability)CloseHandle(scope->capability);
+    if(scope->retire)CloseHandle(scope->retire);
+    if(scope->restored)CloseHandle(scope->restored);
     if(scope->root)CloseHandle(scope->root);
     if(scope->receipt)CloseHandle(scope->receipt);
     if(scope->completion)CloseHandle(scope->completion);
@@ -76,6 +78,8 @@ DWORD run16_frontend_scope_begin(run16_frontend_scope **output)
         if(wcscpy_s(slash+1,ARRAYSIZE(image)-(size_t)(slash+1-image),L"ntkvm.exe")){error=ERROR_FILENAME_EXCED_RANGE;goto fail;}
         error=frontend_bootstrap_start(image,&connection);if(error)goto fail;
         scope->capability=connection.capability;connection.capability=NULL;
+        scope->retire=connection.retire;connection.retire=NULL;
+        scope->restored=connection.restored;connection.restored=NULL;
         scope->root=connection.process;connection.process=NULL;
         frontend_bootstrap_release(&connection);
         sprintf_s(text,sizeof(text),"%lx",(unsigned long)(uintptr_t)scope->capability);
@@ -239,4 +243,28 @@ done:
     if(worker)CloseHandle(worker);
     if(members)HeapFree(GetProcessHeap(),0,members);
     return error;
+}
+
+DWORD run16_frontend_scope_restore_parent(run16_frontend_scope *scope)
+{
+    HANDLE waits[2];
+    DWORD wait,status=ERROR_GEN_FAILURE;
+    /* Only a root launcher can return an outer CMD to this Console.  An
+     * inherited scope is an inner invocation and must never hold its root's
+     * frontend lifetime. */
+    if(!scope || !scope->owns_environment || !scope->restored)return ERROR_SUCCESS;
+    waits[0]=scope->restored;waits[1]=scope->root;
+    wait=WaitForMultipleObjects(2,waits,FALSE,INFINITE);
+    if(wait==WAIT_OBJECT_0)return ERROR_SUCCESS;
+    if(wait==WAIT_OBJECT_0+1) {
+        if(!GetExitCodeProcess(scope->root,&status))status=GetLastError();
+        return status ? status : ERROR_GEN_FAILURE;
+    }
+    return GetLastError();
+}
+
+DWORD run16_frontend_scope_retire(run16_frontend_scope *scope)
+{
+    if(!scope || !scope->owns_environment || !scope->retire)return ERROR_SUCCESS;
+    return SetEvent(scope->retire) ? ERROR_SUCCESS : GetLastError();
 }

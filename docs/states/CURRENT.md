@@ -27,6 +27,13 @@ repair below. T423 remains open.
 | Original Owner Request | “S17收口后请调查并修复以下回归，先验证根因，不要直接加延时或强制重绘。” |
 | Similar-Issue Sweep | Buffer restore versus input-source restore; normal Window exit, close/failure, no-Window route, root versus legitimate remaining frontend member, inherited CMD versus direct Console. |
 
+S17 P1 is implemented and under owner acceptance: the evidence records the
+proven restore/return race, explicit root retirement and post-restore
+acknowledgement. The focused Console/Window routes and the complete ordinary
+17-row DOS actual-output matrix pass on the published `O:/winnt` package.
+The remaining closure check is the owner's exact interactive outer-CMD
+reproduction, not an unverified assumption.
+
 ## S16 Closure Record
 
 | Field | S16 zero-delay DOS/native input handoff |

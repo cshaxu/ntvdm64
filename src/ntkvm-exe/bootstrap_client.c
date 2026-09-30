@@ -8,6 +8,8 @@ void frontend_bootstrap_release(frontend_connection *connection)
 {
     if(!connection)return;
     if(connection->capability)CloseHandle(connection->capability);
+    if(connection->retire)CloseHandle(connection->retire);
+    if(connection->restored)CloseHandle(connection->restored);
     if(connection->channel)CloseHandle(connection->channel);
     if(connection->process)CloseHandle(connection->process);
     ZeroMemory(connection,sizeof(*connection));
@@ -17,7 +19,7 @@ DWORD frontend_bootstrap_start(PCWSTR image,frontend_connection *output)
     static LONG serial;
     WCHAR name[96],command[1024];
     HANDLE server=INVALID_HANDLE_VALUE,child_pipe=INVALID_HANDLE_VALUE,caller=NULL,event=NULL,verified=NULL;
-    HANDLE inherited[3],deadline=NULL,notification=NULL;
+    HANDLE inherited[5],deadline=NULL,notification=NULL,retire=NULL,restored=NULL;
     LARGE_INTEGER due;
     SECURITY_ATTRIBUTES security={sizeof(security),NULL,TRUE};
     STARTUPINFOEXW startup={0};PROCESS_INFORMATION process={0};
@@ -42,6 +44,12 @@ DWORD frontend_bootstrap_start(PCWSTR image,frontend_connection *output)
     notification=CreateEventW(&security,TRUE,FALSE,NULL);
     if(!notification || !DuplicateHandle(GetCurrentProcess(),notification,GetCurrentProcess(),
         &output->capability,SYNCHRONIZE,FALSE,0)){error=GetLastError();goto done;}
+    retire=CreateEventW(&security,TRUE,FALSE,NULL);
+    if(!retire || !DuplicateHandle(GetCurrentProcess(),retire,GetCurrentProcess(),&output->retire,
+        EVENT_MODIFY_STATE,FALSE,0)){error=GetLastError();goto done;}
+    restored=CreateEventW(&security,TRUE,FALSE,NULL);
+    if(!restored || !DuplicateHandle(GetCurrentProcess(),restored,GetCurrentProcess(),
+        &output->restored,SYNCHRONIZE,FALSE,0)){error=GetLastError();goto done;}
     event=CreateEventW(NULL,TRUE,FALSE,NULL);if(!event){error=GetLastError();goto done;}
     {
         OVERLAPPED io={0};DWORD ignored;io.hEvent=event;
@@ -57,16 +65,18 @@ DWORD frontend_bootstrap_start(PCWSTR image,frontend_connection *output)
     startup.lpAttributeList=HeapAlloc(GetProcessHeap(),0,size);
     if(!startup.lpAttributeList){error=ERROR_NOT_ENOUGH_MEMORY;goto done;}
     if(!InitializeProcThreadAttributeList(startup.lpAttributeList,1,0,&size)){error=GetLastError();goto done;}
-    attributes=TRUE;inherited[0]=child_pipe;inherited[1]=caller;inherited[2]=notification;
+    attributes=TRUE;inherited[0]=child_pipe;inherited[1]=caller;inherited[2]=notification;inherited[3]=retire;inherited[4]=restored;
     if(!UpdateProcThreadAttribute(startup.lpAttributeList,0,PROC_THREAD_ATTRIBUTE_HANDLE_LIST,
         inherited,sizeof(inherited),NULL,NULL)){error=GetLastError();goto done;}
-    if(swprintf_s(command,1024,L"\"%ls\" --session %Ix %Ix %Ix",image,
-        (UINT_PTR)child_pipe,(UINT_PTR)caller,(UINT_PTR)notification)<0){error=ERROR_FILENAME_EXCED_RANGE;goto done;}
+    if(swprintf_s(command,1024,L"\"%ls\" --session %Ix %Ix %Ix %Ix %Ix",image,
+        (UINT_PTR)child_pipe,(UINT_PTR)caller,(UINT_PTR)notification,(UINT_PTR)retire,(UINT_PTR)restored)<0){error=ERROR_FILENAME_EXCED_RANGE;goto done;}
     if(!CreateProcessW(image,command,NULL,NULL,TRUE,EXTENDED_STARTUPINFO_PRESENT|DETACHED_PROCESS,
         NULL,NULL,&startup.StartupInfo,&process)){error=GetLastError();goto done;}
     CloseHandle(process.hThread);process.hThread=NULL;
     CloseHandle(child_pipe);child_pipe=INVALID_HANDLE_VALUE;
     CloseHandle(notification);notification=NULL;
+    CloseHandle(retire);retire=NULL;
+    CloseHandle(restored);restored=NULL;
     /* Bound only pre-handoff startup. A live but unresponsive peer must not
      * hold the launcher forever; this is not a running-target lifetime limit. */
     deadline=CreateWaitableTimerW(NULL,TRUE,NULL);
@@ -94,6 +104,8 @@ done:
     if(event)CloseHandle(event);
     if(caller)CloseHandle(caller);
     if(notification)CloseHandle(notification);
+    if(retire)CloseHandle(retire);
+    if(restored)CloseHandle(restored);
     if(child_pipe!=INVALID_HANDLE_VALUE)CloseHandle(child_pipe);
     if(server!=INVALID_HANDLE_VALUE)CloseHandle(server);
     if(attributes)DeleteProcThreadAttributeList(startup.lpAttributeList);

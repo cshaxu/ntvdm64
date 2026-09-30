@@ -562,6 +562,16 @@ done:
         DWORD handoff=run16_frontend_scope_resume_parent(frontend_scope);
         s34_run16_trace("native-resume",handoff);
         if(handoff)result=handoff;
+        else {
+            handoff=run16_frontend_scope_retire(frontend_scope);
+            s34_run16_trace("frontend-retire",handoff);
+            if(handoff)result=handoff;
+            else {
+                handoff=run16_frontend_scope_restore_parent(frontend_scope);
+                s34_run16_trace("frontend-restored",handoff);
+                if(handoff)result=handoff;
+            }
+        }
     }
     return result;
 }

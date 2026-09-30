@@ -12,4 +12,8 @@ DWORD run16_frontend_scope_console_mask(run16_frontend_scope *);
 DWORD run16_frontend_scope_launch_native(run16_frontend_scope *,const run16_native_start *,HANDLE *);
 DWORD run16_frontend_scope_wait_native(run16_frontend_scope *,HANDLE,DWORD *);
 DWORD run16_frontend_scope_resume_parent(run16_frontend_scope *);
+/* Root DOS completion barrier: do not return an outer CMD while its active
+ * screen buffer and input mode are still owned by NTKVM teardown. */
+DWORD run16_frontend_scope_restore_parent(run16_frontend_scope *);
+DWORD run16_frontend_scope_retire(run16_frontend_scope *);
 #endif
