@@ -24,12 +24,15 @@
 | Original Owner Request | “todo中的消除轮询的工作加入s20；原s20顺延；准入s19修复”。 |
 | Similar-Issue Sweep | 枚举所有跨 NTSRV/NTMON worker 标识、选择、Delete、kind 分派、标签/成员/空闲状态与 PID 重用路径；内部 sequence/generation 只允许留在服务端认证实现。 |
 
-## S19 P1 Progress
+## S19 P2 Progress
 
-Protocol 17 PID-first management is implemented and focused x86 evidence is
-recorded in [S19 P1](../etc/evidence/m0-t423-s19-pid-worker-management-p1.md).
-The full x86 runtime graph is still rebuilding before any `O:/winnt`
-publication or S19 closure claim.
+Protocol 17 PID-first management is implemented, the full 573-node x86 graph
+has completed, and the coherent seven-file package is published to
+`O:/winnt`.  [S19 P1](../etc/evidence/m0-t423-s19-pid-worker-management-p1.md)
+records the focused provider proof; [S19 P2](../etc/evidence/m0-t423-s19-p2-runtime-validation.md)
+records the published hashes, real PID-close isolation and the complete
+17-route text regression.  S19 now waits only for owner-side acceptance; S20
+remains the separately admitted polling-removal successor.
 
 ## S18 Closure Record
 

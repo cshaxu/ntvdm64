@@ -244,7 +244,11 @@ owner-requested title, frame and scrollbar reference audit and focused checks.
 
 [T423 S19 PID-first worker management P1](evidence/m0-t423-s19-pid-worker-management-p1.md)
 records the protocol-17 public management boundary and focused x86 evidence;
-the active packet retains its unclosed full-package gates.
+the active packet retains its owner-acceptance gate.
+
+[T423 S19 PID-first worker management P2](evidence/m0-t423-s19-p2-runtime-validation.md)
+records the complete x86 build, coherent published-package hashes, real
+PID-close/session-isolation evidence and the 17-route text regression.
 
 [Retained prior status](evidence/m0-t423-restart-prior-status.md) preserves the
 pre-restart chronology; current admission remains in states/CURRENT.md.
