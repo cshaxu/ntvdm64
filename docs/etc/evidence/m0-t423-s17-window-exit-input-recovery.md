@@ -80,13 +80,14 @@ The Window test uses the public Window input route but an isolated desktop;
 it does not move or focus the owner's desktop. The ordinary Console control
 does not take the Window route.
 
-## Remaining acceptance
+## Closure and follow-up
 
-The exact outer interactive CMD reproduction remains the owner's useful final
-acceptance check: execute `run16 command`, use `Ctrl+Alt+F`, execute `exit`,
-then enter `echo CHECK123`. The first typed command must visibly echo and
-execute. This requirement is retained for S17 closure; it is not substituted
-by a process-exit-only assertion.
+The owner directed S17 closure after reviewing the repair and its ordinary
+production gates. The exact outer interactive CMD reproduction remains a
+useful post-delivery observation, but is not represented as an unrun automated
+pass. The unrelated retained 100 ms creator/`ERROR_BUSY` poll is registered
+in [TODO](../../states/TODO.md); the S17 `retire → restore → restored` barrier
+itself remains event-driven.
 
 The coherent eight-file `O:/winnt` package at delivery carries these hashes:
 `run16 E878015329D2173EDC942DBE4BBBF67FB39DDB08A5E034331DA9D77A56C811C3`,

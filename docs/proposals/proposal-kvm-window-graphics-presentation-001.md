@@ -13,6 +13,11 @@ NTVDM 原始输入读取和所有权交接，逐键证明来源与去向；区�
 
 ## S17：Window 退场后的外层 CMD 输入恢复
 
+已由 owner 于 2026-09-30 在 P1 `0b1bc30f3` 后收口；证据见
+[S17 recovery ledger](../etc/evidence/m0-t423-s17-window-exit-input-recovery.md)。
+后续彻底移除既有 creator/`ERROR_BUSY` 轮询的跨 NTSRV 协议工作已转入
+[TODO](../states/TODO.md)，不属于本 S 的恢复屏障。
+
 S16 已由 owner 于 2026-09-30 收口。S17 调查并修复可复现的 Window
 退场回归：在 CMD 执行 `run16 command`、按 Ctrl+Alt+F 进入 Window、再在
 DOS COMMAND 执行 `exit` 后，Window 消失并回到外层 CMD 提示符，但下一次
