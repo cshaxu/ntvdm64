@@ -2,27 +2,18 @@
 
 ## Current Work
 
-**Active: M0 T423 S21** — 审计并收束 NTVDM/NTCON 项目新增的同形生命周期机制（已准入，执行中）。
+**No active M/T/S packet.** M0 T423 S1--S21 已完成，等待 owner 对 T423 进行验收审计；不得自行收口 T423。
 
-## Active Packet
+## S21 Closure Record
 
-| Field | S21 active packet |
+| Field | S21 worker-base audit |
 | --- | --- |
-| Identifier Mode | M0 T423 S21，普通实施模式。 |
-| Admission And Approval | Owner 的持续目标要求完成 S19、S20、S21；S20 已完成并发布协议 18 包，S21 自动准入。 |
-| Objective | 审计 NTVDM/NTCON 的项目新增 worker 生命周期机制；只提取正常、失败、嵌套、断连和退出语义可证明相同的公共实现到 `worker-base`。 |
-| Non-goals | 不搬运、重写或绕过原始 OpenNT/MVDM 的 DOS/WOW record 调度、任务完成、阻塞/恢复和清理；不新增 scheduler、registry、process-tree kill、guest 或共享库改动。 |
-| Reference Baseline | S20 协议 18 已发布七组件包及其 x86、COMMAND/MEM/EDIT、NTCON 管理和 broker-loss 证据。 |
-| Files And ABI Surface | `worker-base` 中项目新增的共同协议客户端、连接/注册、请求/响应校验、断连/取消、帧传输、输入转换、交接屏障、完成通知、资源释放和失败回滚；`interface` 仅保留跨组件声明。 |
-| Applicable Rules | 当前读取集、镜像/adapter 最小差异、不可修改 guest、x86 构建、生产 P 发布与证据规则。 |
-| Verification | 建立逐项来源/位置/共享判断/目标位置表；双向 DOS↔Win32 交接、父程序恢复前确认、输入顺序、正常/异常退出、断连、成员、嵌套和独立会话隔离。 |
-| Expected Markers | 被提取机制以显式实例状态、资源所有权和锁边界在两个 worker 生产路径复用；镜像逻辑仍在原文件和原 owner。 |
-| Asset Needs | 原始 guest/package 不变；中间物仅在 `build/M0-T423/S21`；运行日志在 `O:/winnt/Logs2`；通过整包回归后才发布。 |
-| Reporting Requirements | 清楚区分原始镜像/项目新增/既有公共代码；列出实际消除的重复及必须独立保留的原因，记录构建、回归、发布哈希和未完成项。 |
-| Stop Conditions | 需要迁移原始 OpenNT/MVDM 执行逻辑、改变 DOS/WOW 调度或发现两侧失败语义不等价时停止该候选提取并如实记录；其余缺陷在本 S 内修复。 |
-| Exit Criteria | 完成全量来源审计、生产接入和重复删除；验证所提取机制的正常/失败边界，x86、适用回归、发布、提交推送与干净工作区。 |
-| Original Owner Request | “将 NTVDM 和 NTCON 两个 worker 中，所有项目新增、语义一致且适合共享的实现，提取到 worker-base，并接入双方生产路径。” |
-| Similar-Issue Sweep | 不只查同名函数：覆盖连接、注册、协议、交接、通知、释放、取消和失败回滚；同形即审查，不因生命周期边界一概拒绝共享。 |
+| Delivery | `9610f9e19`，已推送 `main`。 |
+| Outcome | 全量来源审计确认：项目新增且语义相同的 broker 连接/回滚和有序 frontend 协议客户端已在 `worker-base` 中并同时链接进 NTVDM/NTCON；没有残余的安全同形候选。 |
+| Retained ownership | 原始 DOS/WOW bootstrap、record 完成与 guest input 留在 NTVDM；真实 native Console、target completion、成员观察和 presentation 留在 NTCON。 |
+| Verification | S20 的 590 节点 x86 正式包保持完全相同的生产源基线；重新运行 frontend scope、native backend reservation 和 empty monitor RPC fixtures 均通过；治理及 diff 检查通过。 |
+| Publication | 无生产代码/ABI/构建图变更，故不伪造新发布；`O:/winnt` 继续为 S20 已验证的 protocol-18 七组件包。 |
+| Evidence | [S21 worker-base audit](../etc/evidence/m0-t423-s21-worker-base-audit.md)。 |
 
 ## S20 Closure Record
 
