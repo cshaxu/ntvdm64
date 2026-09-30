@@ -14,6 +14,12 @@ Source-recovery rationale and red/green evidence are recorded in the
 
 ## Registered divergences
 
+ADAPTER-SOFTPC-KEYBOARD-RESET (`mvdm_keyboard_reset.c`) owns only retirement
+of the standalone host's delayed keyboard IRQ and PIC request for a filled,
+user-originated 8042 output slot at the original reset boundary, via DIV-321.
+It does not reset keyboard flags or guest state, synthesize input, or alter
+the original scan-code algorithms.
+
 ADAPTER-SOFTPC-KEYBOARD-ORIGIN (`mvdm_keyboard_history.c` and its header)
 is the S6 pending keyboard metadata carrier. It assigns nonzero raw-record
 origins and maps selected pending origins back to the original 100-record

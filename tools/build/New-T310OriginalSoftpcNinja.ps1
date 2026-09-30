@@ -291,6 +291,7 @@ $adapterSoftpcNames = @('mvdm_softpc_firmware.c', 'mvdm_shadow_registry.c', 'mvd
                         'mvdm_softpc_presentation_font.c',
                         'mvdm_softpc_text_video.c',
                         'mvdm_keyboard_history.c',
+                        'mvdm_keyboard_reset.c',
                         'mvdm_softpc_mouse_input.c', 'mvdm_softpc_mouse_bridge.c',
                         'mvdm_softpc_mouse_guest.c',
                         'mvdm_softpc_descriptor_fields.c')

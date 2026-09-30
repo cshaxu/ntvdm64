@@ -85,11 +85,13 @@ void AT_kbd_init(void)
 extern int GetHistoryKeyEvent(PKEY_EVENT_RECORD event,int number);
 int keys_in_6805_buff(int *part_key_transferred)
 {
-    LONG data[8]={held_event_count,output_full,pending_8042,KbdData,
-        output_contents,buff_6805_out_ptr,buff_6805_in_ptr,0};
+    LONG data[12]={held_event_count,output_full,pending_8042,KbdData,
+        output_contents,buff_6805_out_ptr,buff_6805_in_ptr,
+        bKbdEoiPending,bDelayIntPending,VirtualIca[ICA_MASTER].ica_isr,
+        VirtualIca[ICA_MASTER].ica_irr,VirtualIca[ICA_MASTER].ica_count[KEYBOARD_INT_LINE]};
     int index,result;
     KEY_EVENT_RECORD key;
-    record_event(2,data,7);
+    record_event(2,data,12);
     /* nt_block_event_thread has stopped the input thread at this boundary.
      * Read the actual source-owned history, newest first, before its later
      * ReturnUnusedKeyEvents call. This does not dequeue or alter a record. */

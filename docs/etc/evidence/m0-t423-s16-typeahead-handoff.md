@@ -67,3 +67,91 @@ Next: obtain low-perturbation key-by-key ownership evidence across both
 handoff directions, then patch only the proven boundary and repeat real
 zero-delay routes plus the full production regression gate. Do not add sleeps
 or weaken assertions.
+
+## Device/IRQ owner localization and candidate repair
+
+The published S15 executable was reproduced on both display routes, then a
+test-only worker with a bounded memory-mapped keyboard observer sampled the
+unchanged return/reentry sequence. The failing return had a full original
+8042 output slot, `bKbdEoiPending=1`, PIC master ISR clear and keyboard IRR
+set. `ReturnUnusedKeyEvents` returned the native key; the original BIOS
+buffer was empty immediately after `ReturnBiosBufferKeys`, but held the same
+character before the input thread resumed. It therefore was not merely
+duplicated by the test writer or misread by the final-screen verifier. The
+source-owned pending IRQ replayed it during the handoff gap. Evidence:
+`O:/winnt/Logs2/t423-s16-irq-observed-r1.kbd` and the subsequent bounded
+BIOS/insert observations under the same log root. The observer does not alter
+guest media or issue input records.
+
+An early candidate initially appeared to fail in the ordinary worker, while
+the test-only worker passed 18 repeated routes. That apparent contradiction
+was a build artifact: `keyba.obj` had been rebuilt but the linker consumed
+the stale `original-softpc-keymouse.lib` from the S15 cache. That executable
+did **not** contain the proposed repair; it is not a repair failure. The
+library was rebuilt explicitly before relinking `ntvdm.exe` and comparing
+hashes. That correctly linked, adapter-extracted candidate passed six
+consecutive Console and six consecutive Window zero-delay
+`dos-native-typeahead` runs, without sleeps, relaxed output checks or guest
+changes (`t423-s16-adapter-{console,window}-r1` through `r6`). It also passed
+the standard 17/17 Console and Window matrices and preserved the three WOW
+frontiers; these are candidate observations, not a release.
+
+The broader first adapter additionally cleared `bKbdEoiPending`,
+`bDelayIntPending`, `KbdData` and `output_contents` on *every* reset. A separate
+native→DOS→native control exposed actual missing keys after DOS returned:
+one run produced `xit`/`em` and timed out, another completed but produced
+`windove-return` instead of `window-native-return`. The untouched S15 package
+passed the same reverse control three times. We therefore rejected that
+broader candidate, regardless of its 12 primary-route passes. The later
+candidate leaves those original keyboard variables alone and retires only a
+delayed/PIC IRQ when the original 8042 output slot was full *and* its DIV-317
+origin identifies a user key, not a device-internal ACK. The original-device
+fixture verifies both no-output and internal-response exclusions. The final
+candidate then passed six consecutive Console and six consecutive Window
+zero-delay primary routes (`t423-s16-finalorigin-{console,window}-r1` through
+`r6`), 17/17 in both full candidate matrices, and the retained three WOW
+frontiers. No fixed delay or output-assertion relaxation was used.
+
+The current candidate leaves one original-owner hook in
+`softpc.new/base/keymouse/keyba.c::Reset6805and8042` (DIV-321). The bounded
+`ntvdm-exe/softpc/mvdm_keyboard_reset.c` adapter retires the standalone
+delayed IRQ/PIC request for a user-originated filled 8042 slot before the next
+guest command;
+original keyboard flags, shadow bytes, 6805 queue, scan translation, BIOS
+buffer, task dispatch and frontend input remain where they were. The focused
+original-device fixture passes against the hook and verifies the 8042-full
+versus empty reset choice.
+
+Reverse-case comparison also found a limitation of the supplementary scripted
+observer: the Console final screen can lose the first MEM result, while two
+separate snapshots prove both. A proposed generalization of the contiguous
+overlap merger was rejected when the original Console switches buffers and
+produces no contiguous overlap; the established strict merger stays limited
+to its previously verified routes. The final candidate's Console reverse
+control passed twice; a third completed with exit 1 but was rejected by that
+supplemental verifier, and is **not** counted as a passing control. In Window,
+the untouched S15 package and candidate both timed out in this extra reverse
+script; this is a pre-existing, separately unresolved test/product boundary,
+not acceptance and not evidence that S16 repaired the reverse Window path.
+A pre-existing global NTSRV with idle NTCONs also contaminated an early
+short-root run. The verifier now rejects a foreign broker before an isolated
+test begins. After verified idle-process cleanup, both full candidate
+matrices passed.
+
+The coherent eight-file candidate was published with old/new SHA-256 and
+rollback copies in `build/M0-T423/S16/publication-backup-r1/manifest.json`.
+Only `ntvdm.exe` changed bytes; guest media and configuration matched the
+pre-publication hashes. The published package passed 17/17 Console and 17/17
+Window routes (`t423-s16-published-{console,window}-r1-summary.json`), and
+the exact zero-delay handoff passed two further runs per route
+(`t423-s16-published-typeahead-{console,window}-r1/r2`). The published
+WINMINE main-window and original SOL/WRITE out-of-memory frontiers were also
+preserved (`t423-s16-published-wow-r1-*`); those frontiers do not constitute
+full SOL or WRITE acceptance.
+
+The extra reverse nested script remains unresolved. Its untouched S15
+Window baseline timed out after displaying both MEM outputs and the native
+return marker, with the final DOS prompt still live. The candidate has the
+same result. This is neither a regression introduced by DIV-321 nor a passing
+test. It requires a separate key ownership/observer-timing determination
+before the broad bidirectional S16 exit claim can be made.

@@ -1,5 +1,14 @@
 # mvdm
 
+MVDM-HOST-DIV-321: `softpc.new/base/keymouse/keyba.c::Reset6805and8042`
+retains the original 6805/8042 reset and delegates only stale host keyboard
+IRQ retirement to `ntvdm-exe/softpc/mvdm_keyboard_reset.c`. The original
+reset clears queued device bytes but not the standalone delayed IRQ/PIC state;
+after a DOS/native handoff that pending IRQ can replay a returned key into
+the next DOS command. The adapter clears the pending host IRQ carrier before
+the next guest command. It does not own key translation, guest BIOS, or
+Console input policy. [S16 evidence](../../docs/etc/evidence/m0-t423-s16-typeahead-handoff.md).
+
 MVDM-HOST-DIV-211 (S11 candidate): the event loop again consumes batches of
 five host records. Scan-less keyboard expansion is moved unchanged into the
 worker's win32/console_compat.c boundary, with a forty-record stack result
@@ -466,6 +475,7 @@ runtime-discovery inputs.  The complete per-file provenance is in
 | ID | Original purpose | Reason | Implementation | Files |
 | --- | --- | --- | --- | --- |
 | MVDM-HOST-DIV-320 | Overlay a word with named low/high bytes for original port I/O and device registers. | The original non-CPU30 union always orders high then low; selected x86 CCPU40 needs host-little-endian layout when original ios.c assigns X then reads byte.low/high. An external facade cannot change this C union layout. | Owner-supplied LITTLEND conditional selects low then high, retaining the other layout and original algorithms. Scalar and repeated-word original I/O dispatch is covered by ccpu_bounded_execution_fixture; no CPU30 profile is enabled. | `softpc.new/host/inc/host_cpu.h`; [S9 evidence](../../docs/etc/evidence/m0-t423-s9-conpty-migration.md) |
+| MVDM-HOST-DIV-321 | Retire stale host keyboard IRQ at original 6805/8042 reset. | Original reset clears the device queue but the standalone delayed IRQ/PIC request remains; on DOS/native return the same key can re-enter the guest after it was returned to native input. | A one-call mirror hook delegates retirement of the host delayed/PIC request only when the 8042 output slot carries a user-key origin; device-internal responses, original keyboard flags, scan, BIOS and command semantics remain unchanged. | `softpc.new/base/keymouse/keyba.c`; `ntvdm-exe/softpc/mvdm_keyboard_reset.c`; [S16 evidence](../../docs/etc/evidence/m0-t423-s16-typeahead-handoff.md) |
 | MVDM-HOST-DIV-319 | Complete redundant shared WOWEXEC without starting another task. | Standalone asynchronous launch needs to distinguish this original successful no-op from failed initialization; ExitVDM alone carries no reason. | One call before the unchanged original ExitVDM publishes the authenticated startup acknowledgement through the DLL binding; original classification, completion and error cleanup remain owned here. | `wow32/wkman.c`; `../wow32-dll/source/wow_user_registration_bridge.c`; [S8 evidence](../../docs/etc/evidence/m0-t423-s8-gui-launch-wait.md) |
 
 ### Re-rooted MVDM support declarations

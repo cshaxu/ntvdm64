@@ -32,9 +32,20 @@ native CMD banner present in a line snapshot was clipped from the final DOS
 screen. The unchanged strict merger now includes this case; the rerun passed.
 Further published-package counterchecks reproduced `eexit` in Console and
 `xexit` in Window, while an isolated pure-DOS typeahead control passed. A
-byte-identical short-path package still failed; test-only tracing perturbed
-the race and is not accepted as a repair. The shared DOS/native handoff fault
-remains active, with no production fix or new release yet. Details:
+byte-identical short-path package still failed. Bounded device/BIOS tracing
+then located a stale host keyboard IRQ at the original 8042 reset boundary;
+the native-returned key was replayed before DOS input resumed. The S16
+candidate retires only that standalone host carrier through mirror hook
+DIV-321 and a named worker adapter. Correctly linked candidate runs passed
+six zero-delay Console and six Window repetitions, the focused original-device
+fixture, and 17/17 in each full candidate matrix. The coherent eight-file
+package is now published at `O:/winnt`; the post-publication 17/17 Console,
+17/17 Window, two more exact zero-delay runs per route, and the preserved
+WINMINE/SOL/WRITE frontiers passed. The first full-matrix attempt was
+invalidated by a pre-existing global broker with idle native workers; a
+clean-service rerun passed. A separate reverse nested supplemental script
+still times out on both the untouched S15 baseline and S16 candidate, so S16
+remains active pending its product-versus-observer determination. Details:
 [S16 input handoff evidence](../etc/evidence/m0-t423-s16-typeahead-handoff.md).
 
 S15 production P1 `de720a74c` is published as a coherent eight-file package

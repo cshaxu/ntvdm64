@@ -90,6 +90,7 @@ static char SccsID[]="@(#)keyba.c	1.57 06/22/95 Copyright Insignia Solutions Ltd
 /* DIVERGENCE(MVDM-HOST-DIV-317): metadata only; original scan bytes unchanged. */
 #include "mvdm_keyboard_history.h"
 extern mvdm_keyboard_history nt_keyboard_history;
+extern void mvdm_keyboard_reset_pending_irq(void); /* DIVERGENCE(MVDM-HOST-DIV-321) */
 #endif
 
 
@@ -1148,6 +1149,7 @@ GLOBAL unsigned PendingKeyboardHistory(void)
 void Reset6805and8042(void)
 {
     int key;
+    mvdm_keyboard_reset_pending_irq(); /* DIVERGENCE(MVDM-HOST-DIV-321) */
     mvdm_keyboard_history_clear_device(&nt_keyboard_history); /* DIV-317 */
 
     /* Reset 6805 */

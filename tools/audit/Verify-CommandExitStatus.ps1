@@ -85,6 +85,11 @@ function Test-ExactFileBytes {
     }
     return $true
 }
+$foreignBroker=@(Get-CimInstance Win32_Process -Filter "Name='ntsrv.exe'" |
+    Where-Object {$_.ExecutablePath -notin $productPaths})
+if($foreignBroker.Count){
+    throw 'A different package owns the system BaseSrv; stop it before this isolated test. No process was changed.'
+}
 if ((Get-PackageProcesses).Count) { throw 'Package already in use; no existing process will be stopped.' }
 if ((!$Cases -or 'guest-seven' -in $Cases) -and !$GuestFixturePath) {
     throw 'Guest cases require -GuestFixturePath with a verified build-root fixture.'

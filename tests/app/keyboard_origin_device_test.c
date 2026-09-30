@@ -48,6 +48,10 @@ static void KbdIntDelay(void) { ++interrupts; }
 static int WaitKbdHdw(unsigned long timeout) { (void)timeout;return 0; }
 static void HostReleaseKbd(void) { }
 static int bios_buffer_size(void) { return 0; }
+static unsigned reset_pending_irq_calls;
+static void mvdm_keyboard_reset_pending_irq(void) {
+    if(output_full && nt_keyboard_history.output)++reset_pending_irq_calls;
+}
 #include "keyboard_device_add.inc"
 #include "keyboard_device_remove.inc"
 #include "keyboard_device_clear.inc"
@@ -121,10 +125,15 @@ int main(void)
     begin();host_key_down(0x12);end();continue_output();
     CHECK(PendingKeyboardHistory()==1);
     Reset6805and8042();
+    CHECK(reset_pending_irq_calls==1);
     CHECK(mvdm_keyboard_history_selected(&nt_keyboard_history)==1);
     CHECK(!output_full && !pending_8042 && !scanning_discontinued && !held_event_count);
     CHECK(!nt_keyboard_history.output && !nt_keyboard_history.pending && !nt_keyboard_history.prefix);
     CHECK(!PendingKeyboardHistory());
+    Reset6805and8042();CHECK(reset_pending_irq_calls==1);
+    AddTo6805BuffImm(0xfa);continue_output();
+    CHECK(output_full && !nt_keyboard_history.output);
+    Reset6805and8042();CHECK(reset_pending_irq_calls==1);
     puts("PASS original full hardware reset clears device provenance but preserves captured return selection");
     CHECK(interrupts>0);return 0;
 }

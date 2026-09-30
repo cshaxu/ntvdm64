@@ -31,7 +31,17 @@ foreach($entry in $patterns.GetEnumerator()){
 }
 $vs='C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 $lines=& cmd.exe /d /s /c ('call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && set')
-foreach($line in $lines){$i=$line.IndexOf('=');if($i -gt 0){Set-Item -LiteralPath ('env:'+$line.Substring(0,$i)) -Value $line.Substring($i+1)}}
+$pathSet=$false
+foreach($line in $lines){
+    $i=$line.IndexOf('=')
+    if($i -le 0){continue}
+    $name=$line.Substring(0,$i)
+    if($name -ieq 'Path'){
+        if($pathSet){continue}
+        $pathSet=$true
+    }
+    Set-Item -LiteralPath ('env:'+$name) -Value $line.Substring($i+1)
+}
 & cl.exe /nologo /MT /W4 /WX /c (Join-Path $root 'src/ntvdm-exe/softpc/mvdm_keyboard_history.c') "/Fo:$build/origin.obj"
 if($LASTEXITCODE){throw 'Origin carrier compilation failed'}
 & cl.exe /nologo /MT /W4 /I $build /I (Join-Path $root 'src') (Join-Path $root 'tests/app/keyboard_origin_device_test.c') (Join-Path $build 'origin.obj') "/Fo:$build/test.obj" "/Fe:$build/test.exe"
