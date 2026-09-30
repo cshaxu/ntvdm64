@@ -77,7 +77,7 @@ DWORD ntcon_presentation_input(ntcon_presentation *client,HANDLE input,DWORD *ac
         memcpy(&wire,reply.data+index*sizeof(wire),sizeof(wire));
         if(wire.type==CONSOLE_INPUT_POINTER) {
             console_pointer_input pointer;DWORD generated=0;
-            if(wire.buttons>3 || wire.flags<CONSOLE_MOUSE_ENTER || wire.flags>CONSOLE_MOUSE_LEAVE) {
+            if(wire.buttons>3 || wire.flags<CONSOLE_MOUSE_ENTER || wire.flags>CONSOLE_MOUSE_POSITION) {
                 error=ERROR_INVALID_DATA;break;
             }
             pointer.dx=wire.x;pointer.dy=wire.y;pointer.control=wire.control;

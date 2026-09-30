@@ -8,6 +8,9 @@ static RECT border;
 static BOOL release_clip;
 static DWORD calls,failure;
 static DWORD layout_calls,layout_error;
+static BOOL window_clip_owned;
+static BOOL test_window_clip_owned(void *context)
+{ (void)context;return window_clip_owned; }
 static BOOL WINAPI test_layout(LPSTR name)
 {
     ++layout_calls;
@@ -43,7 +46,8 @@ int main(void)
     console_io_request request={0};
     console_io_reply reply;
     DWORD operation;
-    owner.generation=17;request.version=CONSOLE_IO_VERSION;request.generation=17;
+    owner.generation=17;owner.window_clip_owned=test_window_clip_owned;
+    request.version=CONSOLE_IO_VERSION;request.generation=17;
     request.sequence=1;request.operation=CONSOLE_IO_SET_POINTER;
     request.state.x=40000;request.state.y=-40000;
     CHECK(!run16_console_dispatch(&owner,&request,&reply) && reply.result && calls==1);
@@ -60,6 +64,12 @@ int main(void)
     CHECK(reply.state.left==-50000 && reply.state.top==-40000 &&
         reply.state.right==50000 && reply.state.bottom==40000);
     ++request.sequence;request.operation=CONSOLE_IO_SET_POINTER_CLIP;request.state.has_clip=0;
+    CHECK(!run16_console_dispatch(&owner,&request,&reply) && reply.result && release_clip);
+    window_clip_owned=TRUE;release_clip=FALSE;
+    ++request.sequence;request.operation=CONSOLE_IO_SET_POINTER_CLIP;
+    CHECK(!run16_console_dispatch(&owner,&request,&reply) && reply.result && !release_clip);
+    window_clip_owned=FALSE;
+    ++request.sequence;request.operation=CONSOLE_IO_SET_POINTER_CLIP;
     CHECK(!run16_console_dispatch(&owner,&request,&reply) && reply.result && release_clip);
     failure=ERROR_ACCESS_DENIED;
     for (operation=CONSOLE_IO_GET_POINTER;operation<=CONSOLE_IO_SET_POINTER_CLIP;++operation) {

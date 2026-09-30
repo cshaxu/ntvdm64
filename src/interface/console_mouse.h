@@ -18,7 +18,9 @@ typedef char console_pointer_payload_size[(sizeof(console_pointer_input)==16) ? 
 enum console_mouse_action {
     CONSOLE_MOUSE_ENTER=1,
     CONSOLE_MOUSE_MOVE,
-    CONSOLE_MOUSE_LEAVE
+    CONSOLE_MOUSE_LEAVE,
+    /* Native text pointer coordinates in content pixels, not a delta. */
+    CONSOLE_MOUSE_POSITION
 };
 typedef struct console_mouse_input {
     int32_t dx,dy;

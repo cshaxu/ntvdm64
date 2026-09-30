@@ -28,6 +28,8 @@ void run16_native_frontend_snapshot_begin(run16_native_frontend *);
 void run16_native_frontend_snapshot_end(run16_native_frontend *);
 /* Caller holds the successful dos_enter lock. */
 BOOL run16_native_frontend_text_frame_required(run16_native_frontend *);
+/* Caller holds the frontend I/O lock through console dispatch enter/leave. */
+BOOL run16_native_frontend_window_clip_owned(run16_native_frontend *);
 /* Caller holds the active channel's I/O lock; copied data only. */
 DWORD run16_native_frontend_read_text_configuration(run16_native_frontend *,DWORD,DWORD,console_io_reply *);
 /* Borrowed readiness; data operations require the successful dos_enter lock. */

@@ -6,7 +6,7 @@
 
 /* Direct worker/frontend protocol; no pointers or native resource identities.
  * Local x86 peers are authenticated by the BaseSrv channel attachment. */
-#define CONSOLE_IO_VERSION 19u
+#define CONSOLE_IO_VERSION 20u
 /* Activation's state.mode selects the endpoint's input interpretation, not
  * a different frame format or an execution scheduler. */
 enum { CONSOLE_IO_WORKER_DOS=0, CONSOLE_IO_WORKER_NATIVE=1 };

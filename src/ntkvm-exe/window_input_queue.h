@@ -11,6 +11,9 @@ typedef struct frontend_window_input {
     DWORD control_state;
     HKL keyboard_layout;
     DWORD ui_thread_id;
+    POINT pointer_screen;
+    RECT pointer_clip;
+    BOOL pointer_position_valid;
 } frontend_window_input;
 
 /* This FIFO is the sole copied Window-input channel to the frontend I/O owner

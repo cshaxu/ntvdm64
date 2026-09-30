@@ -166,6 +166,17 @@ int wmain(int argc,WCHAR **argv)
             CHECK(!mouse.x && !mouse.y && events[0].Event.MouseEvent.dwMousePosition.Y==100);
         }
         CHECK(!ntcon_mouse_geometry(&other,(SMALL_RECT){0,0,79,24},16));
+        motion=(console_pointer_input){0,0,0,0,CONSOLE_MOUSE_POSITION};
+        CHECK(!ntcon_mouse_input(&other,&motion,events,&count) &&
+            !other.x && !other.y && count==1);
+        motion.dx=639;motion.dy=399;motion.buttons=1;
+        CHECK(!ntcon_mouse_input(&other,&motion,events,&count) &&
+            other.x==639 && other.y==399 && count==2 &&
+            events[1].Event.MouseEvent.dwMousePosition.X==79 &&
+            events[1].Event.MouseEvent.dwMousePosition.Y==24);
+        motion.buttons=0;motion.dx=0;motion.dy=0;
+        CHECK(!ntcon_mouse_input(&other,&motion,events,&count) &&
+            !other.x && !other.y && count==2);
         saved=other;motion=(console_pointer_input){0,0,0,3,CONSOLE_MOUSE_MOVE};
         CHECK(!ntcon_mouse_input(&mouse,&motion,events,&count) && count==1);
         CHECK(events[0].Event.MouseEvent.dwButtonState==

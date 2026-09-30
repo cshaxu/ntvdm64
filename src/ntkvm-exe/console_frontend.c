@@ -14,7 +14,7 @@ static BOOL encode_input(const INPUT_RECORD *record,console_io_input *wire)
         wire->x=mouse.dx;wire->y=mouse.dy;wire->buttons=mouse.buttons;
         wire->flags=mouse.action;wire->control=mouse.control;
         return mouse.buttons<=3 && mouse.action>=CONSOLE_MOUSE_ENTER &&
-            mouse.action<=CONSOLE_MOUSE_LEAVE;
+            mouse.action<=CONSOLE_MOUSE_POSITION;
     }
     case CONSOLE_INPUT_RELATIVE_MOUSE: {
         console_mouse_input mouse;
@@ -258,7 +258,10 @@ DWORD run16_console_dispatch(run16_console_frontend *owner,const console_io_requ
     }
     case CONSOLE_IO_SET_POINTER_CLIP: {
         RECT rect={s->left,s->top,s->right,s->bottom};
-        ok=ClipCursor(s->has_clip ? &rect : NULL);break;
+        /* Original DOS menu detach may release its clip while the frontend's
+         * Window capture is active. It does not own that host clip. */
+        ok=owner->window_clip_owned && owner->window_clip_owned(owner->io_context) ?
+            TRUE : ClipCursor(s->has_clip ? &rect : NULL);break;
     }
     case CONSOLE_IO_GET_TITLE_A:
         /* Empty titles can leave the caller's buffer untouched. Return only

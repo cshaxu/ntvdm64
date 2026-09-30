@@ -190,7 +190,12 @@ int main(void)
         mouse.buttons=4;
         operation(&owner,CONSOLE_IO_READ_INPUT);request.state.count=1;
         CHECK(!run16_console_dispatch(&owner,&request,&reply) && !reply.result && reply.error==ERROR_INVALID_DATA);
-        mouse.buttons=0;mouse.action=CONSOLE_MOUSE_LEAVE+1;
+        mouse.buttons=0;mouse.action=CONSOLE_MOUSE_POSITION;
+        operation(&owner,CONSOLE_IO_READ_INPUT);request.state.count=1;
+        CHECK(!run16_console_dispatch(&owner,&request,&reply) && reply.result && reply.state.count==1);
+        memcpy(&wire,reply.data,sizeof(wire));
+        CHECK(wire.type==CONSOLE_INPUT_POINTER && wire.flags==CONSOLE_MOUSE_POSITION);
+        mouse.action=CONSOLE_MOUSE_POSITION+1;
         operation(&owner,CONSOLE_IO_READ_INPUT);request.state.count=1;
         CHECK(!run16_console_dispatch(&owner,&request,&reply) && !reply.result && reply.error==ERROR_INVALID_DATA);
         owner.read_input=NULL;owner.io_context=NULL;

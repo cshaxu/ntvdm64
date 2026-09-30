@@ -29,8 +29,9 @@ DWORD ntcon_mouse_input(ntcon_mouse *mouse,const console_pointer_input *input,
     ntcon_mouse next;DWORD buttons;
     if(!mouse || !input || !records || !count)return ERROR_INVALID_PARAMETER;
     *count=0;
-    if(input->buttons>3 || input->action<CONSOLE_MOUSE_ENTER || input->action>CONSOLE_MOUSE_LEAVE ||
-        (input->action!=CONSOLE_MOUSE_MOVE && (input->dx || input->dy || input->buttons)))
+    if(input->buttons>3 || input->action<CONSOLE_MOUSE_ENTER || input->action>CONSOLE_MOUSE_POSITION ||
+        (input->action!=CONSOLE_MOUSE_MOVE && input->action!=CONSOLE_MOUSE_POSITION &&
+         (input->dx || input->dy || input->buttons)))
         return ERROR_INVALID_DATA;
     if(!mouse->ready)return ERROR_NOT_READY;
     next=*mouse;
@@ -39,8 +40,10 @@ DWORD ntcon_mouse_input(ntcon_mouse *mouse,const console_pointer_input *input,
         next.buttons=0;next.visible=FALSE;
     } else {
         next.visible=TRUE;
-        next.x=pointer_bound((LONGLONG)next.x+input->dx,(next.viewport.Right-next.viewport.Left+1)*8);
-        next.y=pointer_bound((LONGLONG)next.y+input->dy,
+        next.x=pointer_bound(input->action==CONSOLE_MOUSE_POSITION ? input->dx :
+            (LONGLONG)next.x+input->dx,(next.viewport.Right-next.viewport.Left+1)*8);
+        next.y=pointer_bound(input->action==CONSOLE_MOUSE_POSITION ? input->dy :
+            (LONGLONG)next.y+input->dy,
             (next.viewport.Bottom-next.viewport.Top+1)*next.font_height);
         buttons=((input->buttons&1) ? FROM_LEFT_1ST_BUTTON_PRESSED : 0) |
             ((input->buttons&2) ? RIGHTMOST_BUTTON_PRESSED : 0);

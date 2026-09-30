@@ -33,6 +33,7 @@ struct run16_native_frontend {
     frontend_keyboard_delivery keyboard;
     frontend_dos_mouse dos_mouse;
     DWORD pointer_control;
+    const frontend_window_input *pointer_input;
     kvm_window_frame *window_frame;
     BOOL window_active;
     BOOL console_f_down,console_shortcut;
@@ -86,6 +87,15 @@ static DWORD window_records(void *context,const INPUT_RECORD *records,DWORD coun
             memcpy(&motion,&records[i].Event,sizeof(motion));
             pointer.dx=motion.dx;pointer.dy=motion.dy;pointer.control=frontend->pointer_control;
             pointer.buttons=motion.buttons;pointer.action=motion.action;
+            if(motion.action==CONSOLE_MOUSE_MOVE && frontend->pointer_input &&
+                frontend->window_frame && frontend->window_frame->valid &&
+                !frontend->window_frame->graphics &&
+                frontend_native_pointer_position(frontend->pointer_input,
+                    frontend->window_frame->text.base.text_columns*8u,
+                    frontend->window_frame->text.base.text_rows*
+                        (frontend->window_frame->text.base.font_height ?
+                         frontend->window_frame->text.base.font_height : 16u),
+                    &pointer.dx,&pointer.dy))pointer.action=CONSOLE_MOUSE_POSITION;
             translated[i].EventType=CONSOLE_INPUT_POINTER;
             memcpy(&translated[i].Event,&pointer,sizeof(pointer));
         }
@@ -99,7 +109,9 @@ static lib_bool window_input(void *context,const frontend_window_input *input)
     run16_native_frontend *frontend=context;
     DWORD error;
     frontend->pointer_control=input->control_state;
+    frontend->pointer_input=input;
     error=frontend_dos_mouse_dispatch(&frontend->dos_mouse,input,window_records,frontend);
+    frontend->pointer_input=NULL;
     if(error)return FALSE;
     return frontend_keyboard_dispatch(&frontend->keyboard,input,!frontend->dos_owner,
         window_records,frontend)==ERROR_SUCCESS;
@@ -528,6 +540,8 @@ BOOL run16_native_frontend_text_frame_required(run16_native_frontend *frontend)
      * not request a display transition while the user remains in Console. */
     return frontend_window_mode(frontend->window)==FRONTEND_DISPLAY_WINDOW;
 }
+BOOL run16_native_frontend_window_clip_owned(run16_native_frontend *frontend)
+{ return frontend->window_active; }
 DWORD run16_native_frontend_read_text_configuration(run16_native_frontend *frontend,
     DWORD offset,DWORD revision,console_io_reply *reply)
 {

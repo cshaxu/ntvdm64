@@ -23,6 +23,8 @@ typedef struct run16_console_frontend {
     DWORD (*snapshot_end)(void *);
     /* Called while enter's I/O lock is held; policy only, no UI mutation. */
     BOOL (*text_frame_required)(void *);
+    /* The Window presentation, not DOS, owns the host pointer clip. */
+    BOOL (*window_clip_owned)(void *);
     /* Copied input owned by frontend; callbacks hold the enter lock. */
     DWORD (*read_input)(void *,BOOL,INPUT_RECORD *,DWORD,DWORD *);
     DWORD (*prepend_input)(void *,const INPUT_RECORD *,DWORD);

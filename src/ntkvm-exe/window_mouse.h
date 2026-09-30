@@ -16,4 +16,8 @@ DWORD frontend_dos_mouse_enter(frontend_dos_mouse *,frontend_mouse_sink,void *);
 DWORD frontend_dos_mouse_dispatch(frontend_dos_mouse *,const frontend_window_input *,
     frontend_mouse_sink,void *);
 DWORD frontend_dos_mouse_leave(frontend_dos_mouse *,frontend_mouse_sink,void *);
+/* Map the captured host pointer to the native worker's text content pixels.
+ * DOS never uses this mapping or receives native Console coordinates. */
+BOOL frontend_native_pointer_position(const frontend_window_input *,unsigned,unsigned,
+    int32_t *,int32_t *);
 #endif

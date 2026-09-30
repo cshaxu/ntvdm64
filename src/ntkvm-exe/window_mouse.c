@@ -2,6 +2,24 @@
 #include <limits.h>
 #include <string.h>
 
+BOOL frontend_native_pointer_position(const frontend_window_input *input,
+    unsigned width,unsigned height,int32_t *x,int32_t *y)
+{
+    LONGLONG px,py,clip_width,clip_height;
+    if(!input || !input->pointer_position_valid || !width || !height || !x || !y ||
+        width>INT32_MAX || height>INT32_MAX)return FALSE;
+    clip_width=(LONGLONG)input->pointer_clip.right-input->pointer_clip.left;
+    clip_height=(LONGLONG)input->pointer_clip.bottom-input->pointer_clip.top;
+    if(clip_width<=0 || clip_height<=0)return FALSE;
+    px=(LONGLONG)input->pointer_screen.x-input->pointer_clip.left;
+    py=(LONGLONG)input->pointer_screen.y-input->pointer_clip.top;
+    if(px<0)px=0;else if(px>=clip_width)px=clip_width-1;
+    if(py<0)py=0;else if(py>=clip_height)py=clip_height-1;
+    *x=(int32_t)(px*width/clip_width);
+    *y=(int32_t)(py*height/clip_height);
+    return TRUE;
+}
+
 static INPUT_RECORD dos_record(const frontend_dos_mouse *state,unsigned action,int32_t dx,int32_t dy,unsigned buttons)
 {
     INPUT_RECORD result={0};

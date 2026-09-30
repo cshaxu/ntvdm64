@@ -82,8 +82,24 @@ static void dos_contract(void)
     assert(payload(&out,5).action==CONSOLE_MOUSE_ENTER && payload(&out,6).width==320);
     puts("PASS DOS mouse converter: copied relative records, atomic enter/move, reset/release, retire/re-entry, source and shape rejection; no guest execution");
 }
+static void native_position_contract(void)
+{
+    frontend_window_input input={0};int32_t x=-1,y=-1;
+    input.pointer_position_valid=TRUE;
+    input.pointer_clip=(RECT){100,200,500,450};
+    input.pointer_screen=(POINT){100,200};
+    assert(frontend_native_pointer_position(&input,640,400,&x,&y) && x==0 && y==0);
+    input.pointer_screen=(POINT){499,449};
+    assert(frontend_native_pointer_position(&input,640,400,&x,&y) && x==638 && y==398);
+    input.pointer_screen=(POINT){300,325};
+    assert(frontend_native_pointer_position(&input,640,400,&x,&y) && x==320 && y==200);
+    input.pointer_position_valid=FALSE;
+    assert(!frontend_native_pointer_position(&input,640,400,&x,&y));
+    puts("PASS native pointer mapping: capture offset, content center and all edges");
+}
 int main(void)
 {
     dos_contract();
+    native_position_contract();
     return 0;
 }
