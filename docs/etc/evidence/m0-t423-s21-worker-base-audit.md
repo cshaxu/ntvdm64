@@ -58,6 +58,16 @@ binary. Its focused worker-boundary fixtures were rerun:
 - `monitor-rpc-test.exe --empty` passed absent-worker and version-rejection
   cases.
 
+The unchanged, hash-matched `O:/winnt` protocol-18 package was also exercised
+again with the ordinary frontend.  Fresh logs under `O:/winnt/Logs2` record
+successful `empty`, native `ver`, interactive `MEM`, nested `COMMAND`/`MEM`,
+direct `MEM`, `COMMAND.COM /c ver`, and EDIT-return routes.  The EDIT route
+was rerun alone with a fresh prefix after the batch completed its preceding
+routes, and passed.  A fresh real two-session NTCON management run then closed
+only the selected NTCON/CMD pair; the independent session received
+`ISOLATED-SESSION-OK` and returned 23.  These routes cover normal completion,
+DOS/native handoff, nested input ownership, explicit close and isolation.
+
 The S20 formal graph itself remains the 590-node x86 proof recorded in its
 predecessor evidence. A fresh S21 graph was generated under
 `build/M0-T423/S21/formal`; its first build attempt exposed only a local
@@ -69,4 +79,5 @@ counted as a build result and does not alter the unchanged production baseline.
 No additional project-added mechanism is both semantically identical and safe
 to extract. Remaining similar code has distinct original DOS/WOW or native
 Console/target ownership. Moving it would violate the S21 non-goal rather than
-reduce duplication. Runtime verification remains required before S21 closure.
+reduce duplication. The focused and real-package checks above satisfy S21's
+applicable runtime verification without claiming a new binary publication.

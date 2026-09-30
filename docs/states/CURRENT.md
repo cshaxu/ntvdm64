@@ -11,7 +11,7 @@
 | Delivery | `9610f9e19`，已推送 `main`。 |
 | Outcome | 全量来源审计确认：项目新增且语义相同的 broker 连接/回滚和有序 frontend 协议客户端已在 `worker-base` 中并同时链接进 NTVDM/NTCON；没有残余的安全同形候选。 |
 | Retained ownership | 原始 DOS/WOW bootstrap、record 完成与 guest input 留在 NTVDM；真实 native Console、target completion、成员观察和 presentation 留在 NTCON。 |
-| Verification | S20 的 590 节点 x86 正式包保持完全相同的生产源基线；重新运行 frontend scope、native backend reservation 和 empty monitor RPC fixtures 均通过；治理及 diff 检查通过。 |
+| Verification | S20 的 590 节点 x86 正式包保持完全相同的生产源基线；重新运行 frontend scope、native backend reservation、empty monitor RPC，以及真实 COMMAND/MEM/EDIT/嵌套/原生路径和双会话 NTCON 管理隔离均通过；治理及 diff 检查通过。 |
 | Publication | 无生产代码/ABI/构建图变更，故不伪造新发布；`O:/winnt` 继续为 S20 已验证的 protocol-18 七组件包。 |
 | Evidence | [S21 worker-base audit](../etc/evidence/m0-t423-s21-worker-base-audit.md)。 |
 
