@@ -346,10 +346,17 @@ error_status_t Server_NativeSampleEpoch(handle_t binding,VDM_CONNECTION connecti
     return error;
 }
 error_status_t Server_ReportNativeBackend(handle_t binding,VDM_CONNECTION connection,HANDLE process,
-    ULONG generation,hyper epoch,ULONG members,WCHAR image[260])
+    ULONG generation,hyper epoch,ULONG member_count,ULONG member_ids[])
 {
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    return error ? error : OpenNtBaseServiceReportNativeBackend(connection,pid,generation,(uint64_t)epoch,members,image);
+    return error ? error : OpenNtBaseServiceReportNativeBackend(connection,pid,generation,
+        (uint64_t)epoch,member_count,member_ids);
+}
+error_status_t Server_BindNativeTarget(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+    ULONG generation,ULONG request,HANDLE target)
+{
+    DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    return error ? error : OpenNtBaseServiceBindNativeTarget(connection,pid,generation,request,target);
 }
 error_status_t Server_RegisterFrontendRoot(handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,HANDLE capability)
@@ -739,7 +746,7 @@ int main(void)
         (void)OpenNtBaseServiceStop(service);
         return (int)error;
     }
-    result=RpcServerRegisterIf3(Server_vdm_service_v19_0_s_ifspec,NULL,NULL,
+    result=RpcServerRegisterIf3(Server_vdm_service_v20_0_s_ifspec,NULL,NULL,
         RPC_IF_ALLOW_SECURE_ONLY | RPC_IF_ALLOW_LOCAL_ONLY,RPC_C_LISTEN_MAX_CALLS_DEFAULT,
         (unsigned)-1,authorize,NULL);
     if (!result) {
@@ -763,7 +770,7 @@ int main(void)
         if (result) basesrv_idle_fatal("RpcMgmtWaitServerListen",result);
     }
     {
-        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v19_0_s_ifspec,NULL,TRUE);
+        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v20_0_s_ifspec,NULL,TRUE);
         if (!result && cleanup) result=cleanup;
     }
     if (idle_timer) CloseHandle(idle_timer);

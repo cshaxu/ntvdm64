@@ -91,6 +91,10 @@ struct OPENNT_BASE_CONNECTION {
 typedef struct OPENNT_BASE_CONRECORD {
     LIST_ENTRY link;
     DWORD request;
+    /* The direct target is bound from NTCON's actual CreateProcess handle;
+     * observed entries are keyed by the actual Console PID sample.  Never
+     * derive either identity from a member count. */
+    DWORD process_id;
     /* Direct records are created by an admitted Run16 request.  Observed
      * records describe a native child which Windows attached to NTCON's
      * Console (for example CMD -> EDIT).  Both are broker-owned management
@@ -203,38 +207,63 @@ static DWORD service_next_conrecord(OPENNT_BASE_CONNECTION *connection,DWORD *re
     *request=connection->next_conrecord;
     return ERROR_SUCCESS;
 }
-static DWORD service_sync_native_conrecords(OPENNT_BASE_CONNECTION *connection,DWORD members,
-    const WCHAR image[OPENNT_BASE_WORKER_IMAGE_CHARS])
+static BOOL service_contains_native_member(const DWORD *member_ids,DWORD member_count,DWORD process_id)
 {
-    DWORD direct=0,depth=service_conrecord_depth(connection),desired=members,request,error;
+    DWORD index;
+    for(index=0;index<member_count;++index)
+        if(member_ids[index]==process_id)return TRUE;
+    return FALSE;
+}
+static OPENNT_BASE_CONRECORD *service_find_conrecord(OPENNT_BASE_CONNECTION *connection,DWORD process_id)
+{
     LIST_ENTRY *link;
-    OPENNT_BASE_CONRECORD *record;
     for(link=connection->conrecords.Flink;link!=&connection->conrecords;link=link->Flink) {
-        record=CONTAINING_RECORD(link,OPENNT_BASE_CONRECORD,link);
-        if(!record->observed)++direct;
+        OPENNT_BASE_CONRECORD *record=CONTAINING_RECORD(link,OPENNT_BASE_CONRECORD,link);
+        if(record->process_id==process_id)return record;
     }
-    /* A just-admitted target may not have attached to its Console yet.  Its
-     * direct record remains authoritative until completion. */
-    if(desired<direct)desired=direct;
-    while(depth<desired) {
+    return NULL;
+}
+static void service_query_native_image(DWORD process_id,WCHAR image[OPENNT_BASE_WORKER_IMAGE_CHARS])
+{
+    HANDLE process;
+    DWORD characters=OPENNT_BASE_WORKER_IMAGE_CHARS;
+    if(!image)return;
+    image[0]=L'\0';
+    process=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION,FALSE,process_id);
+    if(process) {
+        (void)QueryFullProcessImageNameW(process,0,image,&characters);
+        CloseHandle(process);
+    }
+    if(!image[0])lstrcpynW(image,L"<UNKNOWN>",OPENNT_BASE_WORKER_IMAGE_CHARS);
+}
+static DWORD service_sync_native_conrecords(OPENNT_BASE_CONNECTION *connection,DWORD member_count,
+    const DWORD *member_ids)
+{
+    DWORD index;
+    LIST_ENTRY *link,*next;
+    OPENNT_BASE_CONRECORD *record;
+    /* Only records which were created from a prior physical membership sample
+     * retire here.  A direct record remains until its own completion RPC,
+     * even if process exit races the next Console sample. */
+    for(link=connection->conrecords.Flink;link!=&connection->conrecords;link=next) {
+        next=link->Flink;
+        record=CONTAINING_RECORD(link,OPENNT_BASE_CONRECORD,link);
+        if(record->observed && !service_contains_native_member(member_ids,member_count,record->process_id))
+            service_delete_conrecord(record);
+    }
+    for(index=0;index<member_count;++index) {
+        DWORD process_id=member_ids[index];
+        if(!process_id || process_id==GetProcessId(connection->process.ProcessHandle))return ERROR_INVALID_DATA;
+        record=service_find_conrecord(connection,process_id);
+        if(record) {
+            service_query_native_image(process_id,record->image);
+            continue;
+        }
         record=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*record));
         if(!record)return ERROR_NOT_ENOUGH_MEMORY;
-        error=service_next_conrecord(connection,&request);
-        if(error) { HeapFree(GetProcessHeap(),0,record);return error; }
-        record->request=request;record->observed=TRUE;
+        record->observed=TRUE;record->process_id=process_id;
+        service_query_native_image(process_id,record->image);
         InsertTailList(&connection->conrecords,&record->link);
-        ++depth;
-    }
-    /* Physical membership can only retire records NTCON derived from that
-     * membership.  Never let a transient sample erase an admitted request. */
-    while(depth>desired) {
-        record=CONTAINING_RECORD(connection->conrecords.Blink,OPENNT_BASE_CONRECORD,link);
-        if(!record->observed)break;
-        service_delete_conrecord(record);--depth;
-    }
-    if(members && image[0] && !IsListEmpty(&connection->conrecords)) {
-        record=CONTAINING_RECORD(connection->conrecords.Blink,OPENNT_BASE_CONRECORD,link);
-        lstrcpynW(record->image,image,OPENNT_BASE_WORKER_IMAGE_CHARS);
     }
     return ERROR_SUCCESS;
 }
@@ -1399,43 +1428,60 @@ DWORD OpenNtBaseServiceNativeSampleEpoch(OPENNT_BASE_CONNECTION *connection,
 }
 
 DWORD OpenNtBaseServiceReportNativeBackend(OPENNT_BASE_CONNECTION *connection,
-    DWORD pid,DWORD generation,uint64_t epoch,DWORD members,const WCHAR image[OPENNT_BASE_WORKER_IMAGE_CHARS])
+    DWORD pid,DWORD generation,uint64_t epoch,DWORD member_count,const DWORD *member_ids)
 {
     DWORD error=ERROR_ACCESS_DENIED;
-    LIST_ENTRY *link;
-    if(!connection || !image)return error;
+    if(!connection || (member_count && !member_ids))return error;
     EnterCriticalSection(&connection->service->lock);
     if(OpenNtBaseServicePeer(connection,pid,generation) && connection->native_worker) {
-        if(members>65535)error=ERROR_INVALID_DATA;
+        if(member_count>65535)error=ERROR_INVALID_DATA;
         else if(!epoch || epoch!=connection->native_sample_epoch)error=ERROR_RETRY;
         else {
             /* Membership is worker truth, not a frontend-root property.  A
              * retired root must not force a live NTCON to report a transport
              * failure or to die with its attached native clients. */
-            connection->native_members=members;
-            error=service_sync_native_conrecords(connection,members,image);
+            connection->native_members=member_count;
+            error=service_sync_native_conrecords(connection,member_count,member_ids);
             if(error)goto done;
-            for(link=connection->service->connections.Flink;
-                link!=&connection->service->connections;link=link->Flink) {
-                OPENNT_BASE_CONNECTION *root=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
-                if(root->process.SequenceNumber!=connection->native_root)continue;
-                /* Retirement and reports share this lock. A late report must
-                 * not resurrect a retired frontend or validate a dead root. */
-                if(!root->frontend_closing && root->frontend_capability &&
-                    WaitForSingleObject(root->process.ProcessHandle,0)==WAIT_TIMEOUT) {
-                    ULONG image_chars=0;
-                    while(image_chars<OPENNT_BASE_WORKER_IMAGE_CHARS && image[image_chars])++image_chars;
-                    if(image_chars)CopyMemory(connection->native_image,image,image_chars*sizeof(*image));
-                    connection->native_image[image_chars<OPENNT_BASE_WORKER_IMAGE_CHARS ? image_chars :
-                        OPENNT_BASE_WORKER_IMAGE_CHARS-1]=L'\0';
-                }
-                break;
-            }
             service_signal_frontend_states(connection->service);
         }
     }
 done:
     LeaveCriticalSection(&connection->service->lock);return error;
+}
+
+DWORD OpenNtBaseServiceBindNativeTarget(OPENNT_BASE_CONNECTION *connection,DWORD pid,
+    DWORD generation,DWORD request,HANDLE target)
+{
+    DWORD error=ERROR_ACCESS_DENIED,target_pid=0;
+    LIST_ENTRY *link;
+    if(!connection || !request || !target)return error;
+    target_pid=GetProcessId(target);
+    if(!target_pid)return GetLastError();
+    EnterCriticalSection(&connection->service->lock);
+    if(OpenNtBaseServicePeer(connection,pid,generation) && connection->native_worker) {
+        for(link=connection->conrecords.Flink;link!=&connection->conrecords;link=link->Flink) {
+            OPENNT_BASE_CONRECORD *record=CONTAINING_RECORD(link,OPENNT_BASE_CONRECORD,link);
+            if(!record->observed && record->request==request) {
+                if(record->process_id && record->process_id!=target_pid)error=ERROR_INVALID_STATE;
+                else {
+                    OPENNT_BASE_CONRECORD *observed=service_find_conrecord(connection,target_pid);
+                    /* A sample may race CreateProcess.  Replace its temporary
+                     * observed description with the authoritative admitted
+                     * direct record; never expose one PID as two tasks. */
+                    if(observed && observed!=record && observed->observed)
+                        service_delete_conrecord(observed);
+                    record->process_id=target_pid;
+                    service_query_native_image(target_pid,record->image);
+                    service_signal_frontend_states(connection->service);
+                    error=ERROR_SUCCESS;
+                }
+                break;
+            }
+        }
+    }
+    LeaveCriticalSection(&connection->service->lock);
+    return error;
 }
 
 DWORD OpenNtBaseServiceAcquireConsoleContext(OPENNT_BASE_CONNECTION *connection,

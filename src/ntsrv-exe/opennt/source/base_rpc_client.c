@@ -520,7 +520,7 @@ static DWORD classify_missing_interface(RPC_BINDING_HANDLE binding)
     RPC_STATUS status,uuid_status;
     unsigned int index;
     DWORD result=RPC_S_SERVER_UNAVAILABLE;
-    status=RpcIfInqId(Client_vdm_service_v19_0_c_ifspec,&expected);
+    status=RpcIfInqId(Client_vdm_service_v20_0_c_ifspec,&expected);
     if (status) return status;
     status=RpcMgmtInqIfIds(binding,&interfaces);
     if (status) return status;
@@ -806,13 +806,25 @@ DWORD OpenNtBaseClientNativeSampleEpoch(uint64_t *epoch)
     if(!error)*epoch=(uint64_t)value;
     return error;
 }
-DWORD OpenNtBaseClientReportNativeBackend(uint64_t epoch,DWORD members,const WCHAR image[260])
+DWORD OpenNtBaseClientReportNativeBackend(uint64_t epoch,DWORD member_count,const DWORD *member_ids)
 {
     DWORD error=ERROR_INVALID_STATE;
-    if(!client.connection || !client.binding || !client.process || !image)return error;
+    if(!client.connection || !client.binding || !client.process || (member_count && !member_ids))return error;
     RpcTryExcept {
         error=Client_ReportNativeBackend(client.binding,client.connection,client.process,
-            client.generation,(hyper)epoch,members,(WCHAR *)image);
+            client.generation,(hyper)epoch,member_count,(DWORD *)member_ids);
+    }
+    RpcExcept(1) {error=RpcExceptionCode();}
+    RpcEndExcept
+    return error;
+}
+DWORD OpenNtBaseClientBindNativeTarget(DWORD request,HANDLE target)
+{
+    DWORD error=ERROR_INVALID_STATE;
+    if(!request || !target || !client.connection || !client.binding || !client.process)return error;
+    RpcTryExcept {
+        error=Client_BindNativeTarget(client.binding,client.connection,client.process,
+            client.generation,request,target);
     }
     RpcExcept(1) {error=RpcExceptionCode();}
     RpcEndExcept

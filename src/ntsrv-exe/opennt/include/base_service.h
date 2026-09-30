@@ -81,7 +81,9 @@ DWORD OpenNtBaseServiceRegisterNativeBackend(OPENNT_BASE_CONNECTION *,DWORD pid,
 DWORD OpenNtBaseServiceCompleteWorkerChannel(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,DWORD request);
 DWORD OpenNtBaseServiceNativeSampleEpoch(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,uint64_t *epoch);
 DWORD OpenNtBaseServiceReportNativeBackend(OPENNT_BASE_CONNECTION *,DWORD pid,
-    DWORD generation,uint64_t epoch,DWORD members,const WCHAR image[260]);
+    DWORD generation,uint64_t epoch,DWORD member_count,const DWORD *member_ids);
+DWORD OpenNtBaseServiceBindNativeTarget(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,
+    DWORD request,HANDLE target);
 /* Preserve the caller's verified execution Console across a hidden backend.
  * The returned unnamed event is a separate, wait-only capability, not the
  * frontend event or a caller-selected Console/worker identity. The root owns

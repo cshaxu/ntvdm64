@@ -114,6 +114,7 @@ static DWORD WINAPI serve(void *context)
                 bound=!reply.error;
             }
             if(!reply.error)reply.error=launch_request(request,payload,header.bytes,&target);
+            if(!reply.error)reply.error=OpenNtBaseClientBindNativeTarget(request->request,target);
             if(bound && owner->io.release_launch)owner->io.release_launch(owner->io.context);
             if(!reply.error && !DuplicateHandle(GetCurrentProcess(),target,request->sender,&remote,
                 SYNCHRONIZE|PROCESS_QUERY_LIMITED_INFORMATION,FALSE,0))reply.error=GetLastError();

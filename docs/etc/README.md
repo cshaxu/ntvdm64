@@ -2,6 +2,7 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T423 S24 native participant graph](evidence/m0-t423-s24-native-participant-graph.md) | M0 T423 S24 | Replaces NTCON member-count inference with authenticated direct target and PID-observed CONRECORD projection. | Retain through T423 acceptance. |
 | [T423 S22 native EDIT colour audit](evidence/m0-t423-s22-native-edit-colour-audit.md) | M0 T423 S22 | Proves the modern EDIT target emits monochrome Console attributes before NTCON capture; records the terminal-capability boundary. | Retain through T423 acceptance. |
 | [T423 S21 worker-base audit](evidence/m0-t423-s21-worker-base-audit.md) | M0 T423 S21 | Separates already-shared worker mechanisms from DOS/WOW and native-Console owner-local paths. | Retain through T423 acceptance. |
 | [T423 S20 event-driven retirement](evidence/m0-t423-s20-event-driven-retirement.md) | M0 T423 S20 | Replaces project-added creator/retirement polling with an authenticated NTSRV state event while preserving the S17 restore acknowledgement. | Retain through T423 acceptance. |

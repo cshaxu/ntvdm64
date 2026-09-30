@@ -1,19 +1,30 @@
 #include "ntcon-exe/execution.h"
 #include "interface/frontend_protocol.h"
 #include "interface/native_launch.h"
+#include <sddl.h>
 #include <stdio.h>
 static FILE *log;
 static unsigned checks,failures,serial;
 /* This fixture owns attachments directly, without a broker delivery lease. */
 DWORD OpenNtBaseClientCompleteWorkerChannel(DWORD request) { (void)request;return ERROR_SUCCESS; }
+DWORD OpenNtBaseClientBindNativeTarget(DWORD request,HANDLE target)
+{ return request && target ? ERROR_SUCCESS : ERROR_INVALID_PARAMETER; }
 #define CHECK(x) do {++checks;if(!(x)){++failures;fprintf(log,"FAIL %d %s\n",__LINE__,#x);}} while(0)
 static HANDLE submit_access(ntcon_executions *owner,DWORD access)
 {
-    WCHAR name[128];HANDLE server,client,process=NULL,frontend,execution;
+    WCHAR name[128];HANDLE server,client,process=NULL,frontend,execution;PSECURITY_DESCRIPTOR descriptor=NULL;
+    SECURITY_ATTRIBUTES attributes={sizeof(attributes),NULL,FALSE};
     DWORD error;
     swprintf_s(name,128,L"\\\\.\\pipe\\ntcon-lifetime-%lu-%u",GetCurrentProcessId(),++serial);
+    /* This is an in-process lifetime fixture.  Its local client must not
+     * inherit a restrictive interactive-session pipe DACL. */
+    CHECK(ConvertStringSecurityDescriptorToSecurityDescriptorW(L"D:(A;;GA;;;WD)",SDDL_REVISION_1,
+        &descriptor,NULL));
+    if(!descriptor)return NULL;
+    attributes.lpSecurityDescriptor=descriptor;
     server=CreateNamedPipeW(name,PIPE_ACCESS_DUPLEX|FILE_FLAG_OVERLAPPED|FILE_FLAG_FIRST_PIPE_INSTANCE,
-        PIPE_TYPE_BYTE|PIPE_WAIT|PIPE_REJECT_REMOTE_CLIENTS,1,1024,1024,0,NULL);
+        PIPE_TYPE_BYTE|PIPE_WAIT,1,1024,1024,0,&attributes);
+    LocalFree(descriptor);
     CHECK(server!=INVALID_HANDLE_VALUE);if(server==INVALID_HANDLE_VALUE)return NULL;
     client=CreateFileW(name,GENERIC_READ|GENERIC_WRITE,0,NULL,OPEN_EXISTING,0,NULL);
     CHECK(client!=INVALID_HANDLE_VALUE);if(client==INVALID_HANDLE_VALUE){CloseHandle(server);return NULL;}

@@ -4,18 +4,27 @@
 
 ## Active Packet
 
-**Active: M0 T423 S24**
+**Active: M0 T423 S25**
 
-| Field | M0 T423 S24 — NTCON participant graph and CONRECORD truthfulness |
+| Field | M0 T423 S25 — common external worker control |
 | --- | --- |
 | Admission | Owner authorized automatic sequential S23--S28 admission after S22. |
-| Objective | Replace native member-count guesses with PID-based `DIRECT`/`OBSERVED` CONRECORD truth, while preserving NTSRV as the only worker authority. |
+| Objective | Make external control of resident NTVDM and NTCON follow one authenticated authority path without moving original DOS/WOW behavior. |
 | Boundaries | Preserve original DOS/WOW record ownership and completion. No guest/shared-lib change, helper, timer polling, tree kill or second scheduler. |
-| Reference | [S23 evidence](../etc/evidence/m0-t423-s23-unified-worker-lifecycle.md); [T423 successor plan](../proposals/proposal-kvm-window-graphics-presentation-001.md#owner-approved-successor-plan-after-s22-unified-ntvdmntcon-worker-control-plane). |
-| Required proof | Direct/nested CMD and EDIT, DOS-to-CMD/CMD-to-DOS, replacement and residual-child cases; surviving observed child remains BUSY; empty NTCON becomes reusable; x86, regression, publication and governance. |
-| Assets | `build/M0-T423/S24`, `O:/winnt/Logs2`; immutable guest. |
+| Reference | [S24 evidence](../etc/evidence/m0-t423-s24-native-participant-graph.md); [T423 successor plan](../proposals/proposal-kvm-window-graphics-presentation-001.md#owner-approved-successor-plan-after-s22-unified-ntvdmntcon-worker-control-plane). |
+| Required proof | Equivalent selection, stop, completion and failure behavior for both worker kinds; x86, regression, publication and governance. |
+| Assets | `build/M0-T423/S25`, `O:/winnt/Logs2`; immutable guest. |
 
 T423 仍不得自行收口。
+
+## S24 Closure Record
+
+Protocol 20 replaces NTCON's count-only participant report with actual Console
+member PIDs.  NTSRV now projects a typed direct target bound by NTCON itself
+and independently sampled observed members; the worker remains resident when
+that projection becomes empty.  Reservation/typed-binding, 367-check NTCON
+lifetime and empty management RPC tests pass after fresh x86 relinking.  See
+[S24 evidence](../etc/evidence/m0-t423-s24-native-participant-graph.md).
 
 ## S23 Closure Record
 

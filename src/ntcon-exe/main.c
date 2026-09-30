@@ -122,7 +122,7 @@ static DWORD sample_members_loop(void *context)
 {
     native_membership *state=context;DWORD error=0;
     while(WaitForSingleObject(state->quit,30)==WAIT_TIMEOUT) {
-        uint64_t epoch=0;DWORD *members=NULL,count=0;WCHAR image[260]=L"";
+        uint64_t epoch=0;DWORD *members=NULL,count=0;
         /* Keep the client sample and local request count in one handoff
          * interval. A pre-launch empty sample must not release/reseed the
          * screen after that request has already spawned a surviving client. */
@@ -140,12 +140,8 @@ static DWORD sample_members_loop(void *context)
         }
         error=OpenNtBaseClientNativeSampleEpoch(&epoch);
         if(!error)error=ntcon_console_members(&members,&count);
-        if(!error && count) {
-            DWORD image_error=ntcon_console_active_image(image);
-            if(image_error && image_error!=ERROR_NOT_FOUND)error=image_error;
-        }
-        if(members)HeapFree(GetProcessHeap(),0,members);
         if(error) {
+            if(members)HeapFree(GetProcessHeap(),0,members);
             LeaveCriticalSection(state->lock);
             if(error==ERROR_RETRY || error==ERROR_BUSY)continue;
             return error;
@@ -188,7 +184,8 @@ static DWORD sample_members_loop(void *context)
         if(error)return error;
         /* Publish empty membership only after the last screen/input handoff;
          * otherwise the frontend can retire before receiving that handoff. */
-        error=OpenNtBaseClientReportNativeBackend(epoch,count,image);
+        error=OpenNtBaseClientReportNativeBackend(epoch,count,members);
+        if(members)HeapFree(GetProcessHeap(),0,members);
         if(error && error!=ERROR_RETRY && error!=ERROR_BUSY)return error;
     }
     return 0;

@@ -274,6 +274,7 @@ int main(int argc,char **argv)
             HANDLE selected=NULL,taken=NULL,frontend=NULL,input_ready=NULL,retained=NULL;
             OPENNT_BASE_CONNECTION *root=NULL;
             DWORD request=0,frontend_generation=0,root_generation=0,old_generation;
+            DWORD reported_members[2];
             HANDLE native_stop=CreateEventW(NULL,TRUE,FALSE,NULL);
             HANDLE native_closed=CreateEventW(NULL,TRUE,FALSE,NULL);
             uint64_t old_sample=0,new_sample=0;
@@ -326,10 +327,14 @@ int main(int argc,char **argv)
                     &request_pipe,&sender,&execution,&io_capability));
                 CHECK(request_pipe && execution && io_capability && GetProcessId(sender)==GetCurrentProcessId());
                 completed_request=test_native_request;
+                /* The worker, not a launcher-supplied number, binds its
+                 * actual CreateProcess target to the direct CONRECORD. */
+                CHECK(!OpenNtBaseServiceBindNativeTarget(worker,child.dwProcessId,workerGeneration,
+                    test_native_request,laterChild.hProcess));
                 CHECK(!OpenNtBaseServiceSnapshot(service,&managementEpoch,&workerInfo,1,&workerInfoCount));
                 CHECK(workerInfoCount==1 && workerInfo.kind==4 && workerInfo.stack_depth==1 &&
                     workerInfo.reserved==1 && workerInfo.task==test_native_request &&
-                    !wcscmp(workerInfo.image,L"fixture.exe"));
+                    wcscmp(workerInfo.image,L"fixture.exe"));
                 CHECK(WriteFile(client,"NTC",3,&count,NULL) && count==3);
                 CHECK(ReadFile(request_pipe,actual,3,&count,NULL) && count==3 && !memcmp(actual,"NTC",3));
                 CHECK(!OpenNtBaseServiceRetainFrontendRoot(worker,child.dwProcessId,workerGeneration,
@@ -381,7 +386,10 @@ int main(int argc,char **argv)
             CHECK(!OpenNtBaseServiceRegisterNativeBackend(worker,child.dwProcessId,workerGeneration,
                 capability,native_stop,native_closed));
             CHECK(!OpenNtBaseServiceNativeSampleEpoch(worker,child.dwProcessId,workerGeneration,&old_sample));
-            CHECK(!OpenNtBaseServiceReportNativeBackend(worker,child.dwProcessId,workerGeneration,old_sample,2,L"native-one"));
+            reported_members[0]=laterChild.dwProcessId;
+            reported_members[1]=GetCurrentProcessId();
+            CHECK(!OpenNtBaseServiceReportNativeBackend(worker,child.dwProcessId,workerGeneration,
+                old_sample,2,reported_members));
             CHECK(!OpenNtBaseServiceSnapshot(service,&managementEpoch,&workerInfo,1,&workerInfoCount));
             CHECK(workerInfoCount==1 && workerInfo.kind==4 && workerInfo.reserved==2 &&
                 workerInfo.process_id==child.dwProcessId && workerInfo.sequence==workerGeneration);
@@ -411,8 +419,10 @@ int main(int argc,char **argv)
                 capability,native_stop,native_closed));
             CHECK(!OpenNtBaseServiceNativeSampleEpoch(worker,child.dwProcessId,workerGeneration,&new_sample));
             CHECK(new_sample>old_sample);
-            CHECK(OpenNtBaseServiceReportNativeBackend(worker,child.dwProcessId,workerGeneration,old_sample,0,L"")==ERROR_RETRY);
-            CHECK(!OpenNtBaseServiceReportNativeBackend(worker,child.dwProcessId,workerGeneration,new_sample,0,L""));
+            CHECK(OpenNtBaseServiceReportNativeBackend(worker,child.dwProcessId,workerGeneration,
+                old_sample,0,NULL)==ERROR_RETRY);
+            CHECK(!OpenNtBaseServiceReportNativeBackend(worker,child.dwProcessId,workerGeneration,
+                new_sample,0,NULL));
             CHECK(!OpenNtBaseServiceSnapshot(service,&managementEpoch,&workerInfo,1,&workerInfoCount));
             CHECK(workerInfoCount==1 && workerInfo.reserved==0 && workerInfo.sequence==workerGeneration);
             CHECK(!OpenNtBaseServiceRequestFrontend(launcher,GetCurrentProcessId(),launcherGeneration,capability));

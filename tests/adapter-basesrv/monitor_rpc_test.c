@@ -114,12 +114,12 @@ static int console_context_rpc(RPC_BINDING_HANDLE binding,HANDLE self)
         CHECK(server!=INVALID_HANDLE_VALUE);
         client=CreateFileW(name,GENERIC_READ|GENERIC_WRITE,0,NULL,OPEN_EXISTING,0,NULL);
         CHECK(client!=INVALID_HANDLE_VALUE && (ConnectNamedPipe(server,NULL) || GetLastError()==ERROR_PIPE_CONNECTED));
-        RPC_CHECK(Client_SubmitWorkerChannel(binding,connection,self,generation+1,frontend,server),ERROR_ACCESS_DENIED);
-        RPC_CHECK(Client_SubmitWorkerChannel(binding,connection,self,generation,execution,server),ERROR_ACCESS_DENIED);
-        RPC_CHECK(Client_SubmitWorkerChannel(binding,connection,self,generation,frontend,client),ERROR_INVALID_PARAMETER);
+        RPC_CHECK(Client_SubmitWorkerChannel(binding,connection,self,generation+1,frontend,server,L"monitor-rpc-test.exe"),ERROR_ACCESS_DENIED);
+        RPC_CHECK(Client_SubmitWorkerChannel(binding,connection,self,generation,execution,server,L"monitor-rpc-test.exe"),ERROR_ACCESS_DENIED);
+        RPC_CHECK(Client_SubmitWorkerChannel(binding,connection,self,generation,frontend,client,L"monitor-rpc-test.exe"),ERROR_INVALID_PARAMETER);
         /* Frontend identity alone cannot nominate an execution recipient. */
-        RPC_CHECK(Client_SubmitWorkerChannel(binding,connection,self,generation,frontend,server),ERROR_NOT_READY);
-        RPC_CHECK(Client_TakeWorkerChannel(binding,connection,self,generation,&received,&sender,&context,&io),ERROR_ACCESS_DENIED);
+        RPC_CHECK(Client_SubmitWorkerChannel(binding,connection,self,generation,frontend,server,L"monitor-rpc-test.exe"),ERROR_NOT_READY);
+        RPC_CHECK(Client_TakeWorkerChannel(binding,connection,self,generation,&received,&sender,&context,&io,&request),ERROR_ACCESS_DENIED);
         CHECK(!received && !sender && !context && !io);
         RPC_CHECK(Client_FrontendRequest(binding,connection,self,generation,&request,&probe),ERROR_NOT_FOUND);
         CHECK(!probe && !request && WaitForSingleObject(frontend,0)==WAIT_TIMEOUT);

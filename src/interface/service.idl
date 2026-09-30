@@ -1,7 +1,7 @@
 import "wtypes.idl";
 [
     uuid(7d3e78bd-0472-4736-8797-e64e966d692e),
-    version(19.0),
+    version(20.0),
     pointer_default(unique)
 ]
 interface vdm_service
@@ -59,8 +59,17 @@ interface vdm_service
     error_status_t ReportNativeBackend(
         [in] handle_t binding, [in] VDM_CONNECTION connection,
         [in, system_handle(sh_process)] HANDLE process,
-        [in] unsigned long generation, [in] hyper epoch, [in] unsigned long members,
-        [in] wchar_t image[260]);
+        [in] unsigned long generation, [in] hyper epoch,
+        [in] unsigned long member_count,
+        [in, size_is(member_count)] unsigned long member_ids[]);
+    /* The authenticated native worker binds an admitted direct record to the
+     * actual target it just created.  This is a typed process attachment,
+     * never a launcher-nominated numeric PID. */
+    error_status_t BindNativeTarget(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation, [in] unsigned long request,
+        [in, system_handle(sh_process)] HANDLE target);
     /* Execution Console association only; not frontend ownership or task selection. */
     error_status_t AcquireConsoleContext(
         [in] handle_t binding, [in] VDM_CONNECTION connection,
