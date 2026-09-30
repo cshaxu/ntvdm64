@@ -30,11 +30,40 @@ through NTKVM before the selected worker consumes copied input.
   output-count, bad-command, or exit-code assertions.
 
 Thus one failure was definitely an observer/verifier false negative; the
-Window `eexit` timeout remains a separate real input-order fault. Static
-review points to the handoff among NTKVM's copied input queue, NTCON's hidden
-Console `return_unused_input`, and DOS reactivation. None is yet proved to be
-the producer of the extra `e`; no production fix is claimed by this P.
+Window `eexit` timeout remains a separate real input-order fault.
 
-Next: obtain key-by-key ownership evidence across both handoff directions,
-then patch only the proven boundary and repeat real zero-delay routes plus the
-full production regression gate. Do not add sleeps or weaken assertions.
+## Published-package counterchecks
+
+The same unchanged ordinary eight-file package reproduced the defect after
+P1, with actual final DOS text rather than only a timeout:
+
+| Route / log prefix | Result | Final command |
+| --- | --- | --- |
+| Window, `t423-s16-window-repro-1` | timeout | `xexit` |
+| Console, `t423-s16-console-repeat-1` | timeout | `eexit` |
+| Window, short build-root alias `t423-s16-window-shortroot-control` | timeout | `xexit` |
+| Pure DOS nested `t423-s16-dos-only-typeahead` | pass | intact `exit` |
+
+Both Console and Window failures occurred after two real MEM outputs, so a
+Window-only key mapping defect and a final-screen marker false negative are
+insufficient explanations. The short-root control used the byte-identical
+published NTKVM and still failed; the package path is not the cause. The
+observer calls its scripted input writer once and submits one make/break pair
+per character. The current evidence therefore establishes a real shared
+handoff/consumption instability, but not yet its exact producer.
+
+An isolated x86 `frontend-video-observer.exe` was built under the S15 formal
+cache and run from a copied package in `build/M0-T423/S16` via a temporary
+short drive alias. Its three Window runs passed. A reduced handoff-only trace
+variant also passed twice; the experimental test-only change was removed
+because logging changed timing and did not capture a failing run. Neither
+observed pass is accepted as a product repair, and the production package
+was never replaced. Static review narrows the next witness to NTKVM's copied
+input queue, NTCON's hidden-Console `return_unused_input`, and the original
+DOS history/reentry consumer. No code owner among those three has yet been
+proved to duplicate or lose a particular key.
+
+Next: obtain low-perturbation key-by-key ownership evidence across both
+handoff directions, then patch only the proven boundary and repeat real
+zero-delay routes plus the full production regression gate. Do not add sleeps
+or weaken assertions.

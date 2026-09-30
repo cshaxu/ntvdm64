@@ -30,7 +30,11 @@ investigation and repair. T423 remains open.
 S16 P1 investigation corrected a Console-only verifier false negative: a
 native CMD banner present in a line snapshot was clipped from the final DOS
 screen. The unchanged strict merger now includes this case; the rerun passed.
-The Window `eexit` timeout remains real and unresolved. Details:
+Further published-package counterchecks reproduced `eexit` in Console and
+`xexit` in Window, while an isolated pure-DOS typeahead control passed. A
+byte-identical short-path package still failed; test-only tracing perturbed
+the race and is not accepted as a repair. The shared DOS/native handoff fault
+remains active, with no production fix or new release yet. Details:
 [S16 input handoff evidence](../etc/evidence/m0-t423-s16-typeahead-handoff.md).
 
 S15 production P1 `de720a74c` is published as a coherent eight-file package
