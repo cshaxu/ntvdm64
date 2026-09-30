@@ -3,6 +3,8 @@
 Project-added worker mechanisms reused by NTVDM and NTCON only. The current
 connection.c/h owns their shared ConnectCurrent/WatchBroker initialization and
 disconnect, including failed-watch cleanup. Both production entries call it.
+The S21 audit records this shared boundary and the owner-local mechanisms that
+must not be merged: [worker-base audit](../../docs/etc/evidence/m0-t423-s21-worker-base-audit.md).
 The service still owns authentication; the worker owns its heap/backend state.
 
 run16, NTSRV, NTKVM and NTMON retain their own common two-kind handling paths.

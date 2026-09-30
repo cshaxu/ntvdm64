@@ -2,6 +2,7 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T423 S21 worker-base audit](evidence/m0-t423-s21-worker-base-audit.md) | M0 T423 S21 | Separates already-shared worker mechanisms from DOS/WOW and native-Console owner-local paths. | Retain through T423 acceptance. |
 | [T423 S20 event-driven retirement](evidence/m0-t423-s20-event-driven-retirement.md) | M0 T423 S20 | Replaces project-added creator/retirement polling with an authenticated NTSRV state event while preserving the S17 restore acknowledgement. | Retain through T423 acceptance. |
 | [T423 S18 native root restoration](evidence/m0-t423-s18-native-root-restoration.md) | M0 T423 S18 | Restores the native root `run16 cmd` retirement/Console-restoration acknowledgement before outer CMD resumes. | Retain through T423 acceptance. |
 | [T423 S17 Window-exit input recovery](evidence/m0-t423-s17-window-exit-input-recovery.md) | M0 T423 S17 | Proves and repairs the root launcher/NTKVM buffer-restore acknowledgement race before outer CMD input resumes. | Retain through T423 acceptance. |
