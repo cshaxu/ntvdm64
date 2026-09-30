@@ -2,35 +2,19 @@
 
 ## Current Work
 
-**Active packet: M0 T423 S15, Ordinary Mode.** S14 was accepted and closed by
-the owner on 2026-09-29; the owner subsequently admitted this bounded mouse
-repair. T423 remains open and must not close without separate owner review.
+**No active M/T/S packet.** The owner directed S15 closure on 2026-09-29
+and authorized S16 next; T423 remains open. The zero-delay DOS/native input
+instability is transferred to S16, not counted as an S15 pass. See the
+[S15 closure evidence](../etc/evidence/m0-t423-s15-mouse-ownership-position.md).
 
-| Field | S15 mouse ownership and RDP position repair |
-| --- | --- |
-| Identifier Mode | M0 T423 S15, Ordinary Mode. |
-| Candidate Proposal | [Console/Window proposal](../proposals/proposal-kvm-window-graphics-presentation-001.md), amended for this owner-admitted follow-up. |
-| Admission And Approval | Owner request of 2026-09-29: repair both diagnosed root causes, build/test/commit/push, then wait for owner verification. |
-| Objective | Preserve NTKVM Window mouse capture across DOS-to-native handoff; align native text pointer with the actual captured host pointer under RDP absolute input so every text edge remains reachable. |
-| Non-goals | No original MVDM or guest edits; no executable-name mouse policy, new helper, scheduler, frontend owner, or change to DOS guest mouse semantics. |
-| Reference Baseline | S14 accepted P1 `631206f9e`, documentation `99c458b4b`, published coherent eight-file O:/winnt package. Original mouse detach forwards ClipCursor(NULL) through NTKVM; NTCON's square begins at viewport center independent of captured host position. |
-| Files And ABI Surface | NTKVM pointer-clip arbitration and Window input mapping, NTCON native pointer state, declaration-only interface only if copied input needs a minimal extension; focused tests/evidence. Keep shared library changes out unless a general library boundary defect is proven. |
-| Applicable Rules | docs/README.md reading set, source policy, immutable guest, strict mirror, x86 CCPU40 and every-production-P regression/publication gate. |
-| Verification | Focused ownership/release and absolute-coordinate/edge tests including RDP-style normalized input; real private-desktop DOS→CMD→DOS and modern EDIT routes; 17 Console and 17 Window DOS routes, three WOW frontiers, formal x86 build, eight-file package hash check. Physical desktop/RDP observation is owner-waived only under the recorded T423 exception, not counted as passed. |
-| Expected Markers | DOS's source-scoped ClipCursor(NULL) never releases NTKVM-owned Window capture; deliberate Ctrl+Alt+M/focus loss still releases. Native square reaches left/right/top/bottom when the captured host pointer does, independent of initial capture position; clicks retain correct cells. |
-| Asset Needs | Existing original guest and published package, build/M0-T423/S15 for new intermediates, O:/winnt/Logs2 for runtime logs; preserve owner sessions. |
-| Reporting Requirements | Exact source call chain, selected fix boundary, focused and full test results, previous/deployed hashes, untested physical RDP limitation and final clean/pushed state. |
-| Stop Conditions | A necessary guest/mirror change, new process or materially different frontend ownership requires owner decision. Ordinary failures in this scope remain repair work. |
-| Exit Criteria | Focused proof and full regression, coherent x86 publication, reviewed diff/governance, commit and push; stop for owner verification without closing T423. |
-| Original Owner Request | “请你帮我修复好刚才找出的两个问题的根源，然后编译测试提交推送以后等我验证。这个修复呢作为一个新的S任务来执行。” |
-| Similar-Issue Sweep | Console versus Window clip ownership; DOS/native handoff and return; physical/RDP absolute and relative input; native cursor edges, clicks, resize, release and recapture. |
-
-S15 production P1 is implemented and its coherent eight-file package is
-published to `O:/winnt`. Focused mouse tests, published 17/17 Console and
-17/17 Window matrices, and preserved WINMINE/SOL/WRITE frontiers are recorded
-in [S15 evidence](../etc/evidence/m0-t423-s15-mouse-ownership-position.md).
-Physical RDP behavior still awaits owner side-test. S15 is in verification,
-not owner-closed; do not admit S16 or close T423 on this evidence alone.
+S15 production P1 `de720a74c` is published as a coherent eight-file package
+to `O:/winnt`. Focused mouse tests, published 17/17 Console and 17/17 Window
+matrices, and preserved WINMINE/SOL/WRITE frontiers are recorded in
+[S15 evidence](../etc/evidence/m0-t423-s15-mouse-ownership-position.md).
+Physical RDP observation remains owner-waived, not passed. A repeat of the
+supplemental `dos-native-typeahead` test passed once and timed out once with
+`eexit`; the owner explicitly assigned this separate instability to S16 and
+directed S15 closure without treating that test as passing.
 
 S14 candidate and coherent eight-file `O:/winnt` publication passed the
 focused modern Edit VT mouse-click fixture, Ctrl+Alt+M capture-release fixture,
@@ -40,6 +24,17 @@ reported verification passed and explicitly directed S14 closure. Evidence:
 [S14 product experience](../etc/evidence/m0-t423-s14-product-experience.md).
 
 ## Last Closed Packet
+
+| Field | S15 closure brief |
+| --- | --- |
+| Identifier Mode | M0 T423 S15, Ordinary Mode; closed by owner direction. |
+| Delivery | Production P1 `de720a74c`; documentation closure P2. |
+| Outcome | Mouse capture ownership and native absolute-position conversion delivered in the published eight-file package. |
+| Verification | Focused tests, 17/17 Console, 17/17 Window, three WOW frontiers; physical RDP interaction owner-waived. |
+| Limitations | Supplemental zero-delay DOS/native typeahead is unstable and explicitly transferred to S16; not a pass or a mouse-repair regression claim. |
+| Evidence | [S15 mouse ownership and position](../etc/evidence/m0-t423-s15-mouse-ownership-position.md). |
+
+## Earlier Closed Packet
 
 | Field | S14 closure brief |
 | --- | --- |

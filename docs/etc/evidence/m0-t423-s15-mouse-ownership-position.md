@@ -57,6 +57,16 @@ shared KVM libraries, or the DOS mouse movement contract.
   established observers above. The focused modern EDIT VT mouse test passed
   in `t423-s15-modern-edit-r1.txt`.
 
-Physical RDP pointer behavior has not been visually verified by the agent;
-the recorded T423 owner exception permits private-desktop probes plus owner
-side-testing. S15 awaits owner verification and T423 remains open.
+After P1, the published `O:/winnt` package ran `dos-native-typeahead` twice
+under private-desktop Window mode with zero line delay and a 60-second timeout.
+`t423-s15-published-typeahead-r1` passed: two MEM outputs, intact `exit`,
+original COMMAND exit 1. The identical `r2` timed out: the final command was
+`eexit`, matching the prior S14/candidate failure. This is an unstable
+DOS/native input-order path, not a reliable pass. The owner explicitly directed
+S15 closure and transfer of this issue to S16 to distinguish test timing from
+production behavior. No test assertion was weakened.
+
+Physical RDP pointer behavior was not visually verified by the agent; the
+recorded T423 exception permits private-desktop probes plus owner side-test.
+S15 is closed by owner direction with that waiver and the typeahead transfer;
+T423 remains open.
