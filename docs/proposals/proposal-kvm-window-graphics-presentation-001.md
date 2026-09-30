@@ -108,6 +108,26 @@ NTVDM 与 NTCON 的登记、就绪/占用、接单、嵌套、target/task 完成
 diff accounting、完整生命周期矩阵与生产发布门槛后，T423 交由 owner 验收，
 不得自行关闭。
 
+## S22：NTCON 原生文本色彩链路审计与修复
+
+Owner 于 2026-09-30 准入 S22，处理 `run16 edit.exe` 等 Win32 文本目标在
+NTKVM Window 呈现中显示为黑白的问题。先建立可复现、可读取的证据链，逐段
+核对：目标写入的原生 Console 属性／VT 模式、隐藏 Console 的 `CHAR_INFO` 与
+`ColorTable`、NTCON 发出的统一文本帧，以及 NTKVM 将属性索引映射到像素调色板
+的结果。不得把“NTKVM 可绘制合成色样”误写成真实 native target 已输出色彩。
+
+修复以实际丢失点为准：保留统一的 NTVDM/NTCON 文本帧 ABI、NTKVM 的前端
+所有权和原始 OpenNT 镜像；不改 guest、共享库或系统主题，不用硬编码色表、
+定时重绘、延时和程序名特判。若证据表明 native target 依赖终端查询／回复，
+不得误作普通 Console 初始化问题；必须停在该边界，请 owner 决定是否重规划
+为真正的双向终端，渲染器不得猜测或伪造颜色。
+
+验收至少包含：传统属性色与 VT 色的隐藏 Console 捕获、帧到 Window 的调色板
+像素断言、`run16 edit.exe` 的可观察运行证据、DOS↔NTCON 交接后色表不被错误
+覆盖、Console/Window 切换及既有 COMMAND/MEM/EDIT/DOS17/WOW 非回退。生产 P
+仍须正式 x86 构建、七组件一致发布到 `O:/winnt`、日志在 `O:/winnt/Logs2`、
+提交推送和治理检查；完成后停下等待 owner 验收，不自行收口 T423。
+
 ## 最新批准：文本区域尺寸交接修复
 
 Owner 于 2026-09-29 批准新增尺寸交接修复 S；CURRENT 登记为 S13。

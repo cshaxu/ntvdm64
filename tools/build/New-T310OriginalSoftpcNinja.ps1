@@ -1382,6 +1382,8 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build obj/tests/ntcon_text_frame.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/ntcon_text_frame_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags + ' /std:c11')
     $graph.Add('build ntcon-text-frame-test.exe: console_test_link obj/tests/ntcon_text_frame.obj obj/ntcon/text_frame.obj obj/run16/console_video.obj')
+    $graph.Add('build obj/tests/ntcon_native_colour_probe.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/ntcon_native_colour_probe.c')))
+    $graph.Add('build ntcon-native-colour-probe.exe: console_test_link obj/tests/ntcon_native_colour_probe.obj obj/ntcon/text_frame.obj')
     $graph.Add('build obj/ntcon/presentation.obj: cc ' + (NinjaPath (Join-Path $root 'src/ntcon-exe/presentation.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build obj/tests/ntcon_presentation.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/ntcon_presentation_test.c')))
