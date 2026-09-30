@@ -90,6 +90,27 @@ it is not a safe local renderer patch.
 
 ## Follow-up
 
-S22 remains active pending owner direction: accept ordinary-Console native
-colour degradation as the backend limitation, or approve a distinct terminal
-backend/replanning.  No production executable has been rebuilt or published.
+### Historical ConPTY correction
+
+The first S22 conclusion must not be read as evidence that a helper-free
+ConPTY backend is impossible.  The repository's S9 P5 delivery `3b40345f8`
+is named "replace helper backend with shared ConPTY".  Its retained
+[S9 migration ledger](m0-t423-s9-conpty-migration.md)
+records removal of the 330-line helper pair, one retained ConPTY across
+native-to-DOS-to-native use, authenticated nested paths, and a native terminal
+model that owns parser state, screen snapshots and terminal replies.  The
+formal tests covered fragmented VT, RGB attributes, alternate screen, resize
+and a cursor-position reply.  Thus a single long-lived `ntcon.exe` can own
+the pseudoconsole, its synchronous input/output pipes, parser and target
+launches; no extra helper process is an API requirement.
+
+That historical code does not yet prove the specific modern Edit colour path:
+its retained reply assertion is CPR (`ESC[6n` to `ESC[row;colR`), while this
+target asks OSC palette/default-colour queries.  A correct revival must retain
+the single-owner/no-helper topology, recover the previously proven terminal
+state and handoff mechanisms, then add only the target-independent OSC 4/10/11
+reply contract and prove it against real Edit.  It must not emulate colour by
+program-name special case.
+
+S22 remains active while the owner decides whether to restore this helper-free
+ConPTY architecture.  No production executable has been rebuilt or published.
