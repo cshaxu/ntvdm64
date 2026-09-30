@@ -4,27 +4,26 @@
 
 ## Active Packet
 
-**Active: M0 T423 S22**
+**Active: M0 T423 S23**
 
-| Field | M0 T423 S22 — NTCON 原生文本色彩链路审计与修复 |
+| Field | M0 T423 S23 — NTSRV 统一 worker 生命周期权威 |
 | --- | --- |
-| Identifier Mode | Ordinary Mode；owner 于 2026-09-30 准入。 |
-| Admission And Approval | “准入s22 帮我研究清楚 为啥run16 edit.exe win32程序启动后是黑白的 丢了色彩”。 |
-| Objective | 找到目标、隐藏 Console、统一文本帧或 NTKVM 中的实际失色点；并按 owner 追加要求，修正 NTCON 的管理投影，使其逻辑任务栈与 NTVDM 同形，绝不把物理 Console 成员数显示为任务。 |
-| Non-goals | 不改 guest、原始镜像、共享库、系统主题；不以静态色表、延时、重绘或程序名特判伪修。 |
-| Reference Baseline | S21 `9610f9e19`；已发布 protocol-18 八组件包；[S22 audit](../etc/evidence/m0-t423-s22-native-edit-colour-audit.md)。 |
-| Files And ABI Surface | NTCON Console 状态/帧打包、NTKVM 文字渲染、NTSRV/NTMON 管理投影、测试和 S22 evidence；接口只在证据要求时改。 |
-| Applicable Rules | task reading set、immutable guest、x86 CCPU40、每生产 P 回归/八组件发布。 |
-| Verification | 真实 `%SystemRoot%\System32\edit.exe` 隐藏 Console 采样；传统/VT 色、帧/像素断言、DOS↔NTCON 交接和回归；NTSRV native-request stack 与 Console-membership 分离、NTMON 统一 STACK/三热键回归。 |
-| Expected Markers | 同一 cell 属性及 16 色表能逐段对应；区分 target 单色输出与传输/渲染损失。 |
-| Asset Needs | `build/M0-T423/S22`、系统 EDIT、`O:/winnt/Logs2`；不动 guest。 |
-| Reporting Requirements | 输入、命令、属性/调色板观测、解释、置信度、未完成项和 diff。 |
-| Stop Conditions | 需改 guest/共享库/原始语义或引入第二渲染器则暂停请求决定。 |
-| Exit Criteria | 根因有可复现证据；若有生产修复则完成 x86、回归、八组件发布、推送；否则明确记录无产品失色点并等 owner 决定。 |
-| Original Owner Request | 如 Admission And Approval。 |
-| Similar-Issue Sweep | ANSI/传统属性、调色板更新、DOS↔native handoff、Console/Window 与尺寸/字体。 |
+| Admission | Owner authorized automatic sequential S23--S28 admission after S22. |
+| Objective | NTSRV is sole NTVDM/NTCON reservation, registration, watch, close and dead-worker authority.  NTCON remains resident `READY/EMPTY`, releases only stale route/root, then safely rebinds a later compatible root. |
+| Boundaries | Preserve original DOS/WOW records, scheduling, completion and cleanup.  No guest/shared-lib change, helper, timer polling, tree kill or second scheduler.  NTKVM route loss is I/O-capability loss, never a direct NTCON kill. |
+| Reference | S22 `5aa308f69`; [S22 evidence](../etc/evidence/m0-t423-s22-native-edit-colour-audit.md); [T423 successor plan](../proposals/proposal-kvm-window-graphics-presentation-001.md#owner-approved-successor-plan-after-s22-unified-ntvdmntcon-worker-control-plane). |
+| Required proof | Reject unreserved native registration; no bare snapshot row; EMPTY/rebind only for same session/authenticated execution Console; explicit close/broker loss terminates; formal x86, established regressions, coherent eight-file publication and governance. |
+| Assets | `build/M0-T423/S23`, `O:/winnt/Logs2`; immutable guest. |
 
 T423 仍不得自行收口。
+
+## S22 Closure Record
+
+Modern EDIT emits only attributes 7/15 into the ordinary hidden Console because
+its generic OSC 4/10/11 terminal queries receive no reply.  NTCON packing and
+NTKVM palette rendering preserve those captured values; no renderer defect or
+safe local production fix exists.  The 130-check packer fixture and probe
+passed; no new executable is published.  See [S22 evidence](../etc/evidence/m0-t423-s22-native-edit-colour-audit.md).
 
 ## S21 Closure Record
 

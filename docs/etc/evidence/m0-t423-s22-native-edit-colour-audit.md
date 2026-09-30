@@ -112,5 +112,19 @@ state and handoff mechanisms, then add only the target-independent OSC 4/10/11
 reply contract and prove it against real Edit.  It must not emulate colour by
 program-name special case.
 
-S22 remains active while the owner decides whether to restore this helper-free
-ConPTY architecture.  No production executable has been rebuilt or published.
+## Closure disposition
+
+The owner subsequently approved the S23--S28 worker-control sequence and
+authorized automatic sequential admission.  S22 therefore closes with this
+bounded result: the ordinary hidden-Console product path preserves exactly the
+attributes and palette supplied by the target, and modern EDIT elects its
+monochrome fallback because that endpoint cannot answer its generic OSC
+4/10/11 terminal queries.  No target-name special case, static palette,
+forced redraw or renderer patch is admitted.  Restoring a bidirectional
+terminal backend is a separate architecture decision, not an S22 colour
+patch.
+
+No production source changed for this disposition.  The existing S22 probe,
+the 130-check production packer fixture, and the already-published S22
+management-projection delivery are the applicable verification; no new
+unverified executable is published.

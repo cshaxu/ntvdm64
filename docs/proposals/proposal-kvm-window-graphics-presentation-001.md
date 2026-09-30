@@ -131,6 +131,106 @@ NTKVM Window 呈现中显示为黑白的问题。先建立可复现、可读取�
 仍须正式 x86 构建、七组件一致发布到 `O:/winnt`、日志在 `O:/winnt/Logs2`、
 提交推送和治理检查；完成后停下等待 owner 验收，不自行收口 T423。
 
+## Owner-approved successor plan after S22: unified NTVDM/NTCON worker control plane
+
+The owner clarified the intended model on 2026-09-30.  This section is the
+authoritative successor plan for T423 after the currently active S22 closes;
+it does not admit S23 or any later S before that point.
+
+### Chosen model
+
+NTVDM and NTCON are equal product-level workers.  NTSRV is the sole authority
+for each worker's reservation, registration, liveness watch, explicit
+termination request and dead-worker cleanup.  NTKVM owns presentation only:
+visible Console/Window state, input, frame display and route attachment.  A
+failed NTKVM route is an I/O capability failure, not permission for NTKVM to
+terminate NTCON.  Run16 remains a launcher/parent-completion client; NTMON
+consumes the one broker management projection.
+
+The workers deliberately retain different *internal execution owners*:
+
+| Worker | Internal task source and executor | Must remain outside common control code |
+| --- | --- | --- |
+| NTVDM | Original OpenNT DOSRecord/WOWRecord, BaseSrv dispatch and guest execution | Original DOS/WOW records, scheduling, completion and cleanup |
+| NTCON | Native Console participant graph and Windows native process execution | Console ownership, CreateProcess/waits, native child semantics and Console close |
+
+This difference does not permit two lifecycle/control protocols.  Cross-binary
+registration, identity/version checks, frontend capability, route handoff,
+completion/cancellation, disconnect, worker death, management snapshot and
+explicit worker-close requests are one product control plane, defined in
+`src/interface`, implemented by NTSRV/worker-base and consumed through common
+paths in Run16, NTKVM and NTMON.  A kind switch may select a worker-local
+callback only at the actual DOS/WOW versus native execution boundary.
+
+### Native child registration decision
+
+Every real Win32 text participant attached to an NTCON Console is represented
+in NTSRV, but arbitrary Win32 programs are **not** required to call NTSRV and
+are never forced through Run16.  NTCON is their authenticated container and
+registers them on their behalf from an actual Console participant sample.
+
+`CONRECORD` has two non-interchangeable classes:
+
+| Class | Origin | Identity and completion authority |
+| --- | --- | --- |
+| `DIRECT` | A Run16 request admitted by NTSRV and delivered to NTCON | Broker request ID; NTCON reports its direct target PID and completes the direct parent receipt only when that target completes. |
+| `OBSERVED` | A native child observed attached to the authenticated NTCON Console | PID, observed parent relation where available, image and membership lifetime; it has no fabricated Run16 receipt or broker-synthesized exit code. |
+
+Thus `run16 cmd -> cmd -> edit` becomes one NTCON worker with a complete
+broker management stack (direct CMD plus observed CMD and EDIT), while Windows
+continues to own the native parent/child waits and exit codes.  `CMD -> run16
+COMMAND.COM` simultaneously has an NTCON participant for the waiting Run16
+and an NTVDM original DOS record for COMMAND.COM; that is two real workers,
+not duplicate task accounting.  No injection, PATH interception, helper,
+process-tree kill or second scheduler is permitted.
+
+### Resident worker and EMPTY transition
+
+NTCON is a resident Win32-text worker, not a per-request backend.  Its normal
+cycle must be the same product-level cycle as a resident NTVDM:
+
+```
+registered READY/EMPTY -> admitted work -> BUSY -> READY/EMPTY -> wait for next work
+```
+
+After a direct native target completes, NTCON remains BUSY while any observed
+native Console participant, pending direct completion, active DOS/native route
+or presentation handoff remains.  It reaches `READY/EMPTY` only when all of
+those are absent.  At that point it retains its NTSRV connection, authenticated
+worker watch, reservation and hidden Console, releases the previous NTKVM
+presentation/input route and old frontend-root association, and waits for the
+next authenticated request.  Compatibility is exact: the later request must
+belong to the same NTSRV session and the same authenticated execution-Console
+identity; after the prior root is fully unbound, a new root on that Console
+may bind the resident worker.  A separate Explorer Console, another visible
+Console, or another NTSRV session may not.  No empty transition may create a
+second NTCON or leave a stale frontend capability attached to the resident
+worker.
+
+NTMON represents this ordinary reusable state with `STACK=0`, `TASK=<EMPTY>`
+and ready state.  Empty is not worker termination.  NTCON may terminate only
+for an explicit NTSRV worker-close request, broker failure/shutdown, a defined
+real session-close rule, or its own unrecoverable failure.  Presentation loss
+alone is never a termination cause.
+
+### Successor S sequence
+
+| S | Bounded objective | Required result before the next S |
+| --- | --- | --- |
+| S23 | NTSRV as the sole NTVDM/NTCON lifecycle authority | Require reservation-bound NTCON registration; remove bare native-backend snapshot rows; make NTCON resident `READY/EMPTY` after all work ends; release only its old route/root association and safely rebind a later compatible root; NTKVM route loss cannot directly terminate NTCON; one authenticated worker watch per worker. |
+| S24 | NTCON participant graph and CONRECORD truthfulness | Publish PID-based `DIRECT`/`OBSERVED` records rather than member-count guesses; prove direct CMD, nested CMD/EDIT, DOS-to-CMD, CMD-to-DOS, replacement and residual-child cases without fabricating native completion; prove a surviving observed child keeps NTCON BUSY and an entirely empty worker becomes reusable. |
+| S25 | Shared external worker-control implementation | Extract only project-added, semantically identical client/control code to worker-base/interface; make Run16, NTSRV, NTKVM and NTMON use the same worker admission, ready/empty, route, completion, disconnect and death paths.  Preserve original DOS/WOW internals and NTCON native execution callbacks. |
+| S26 | One management projection and compact product ABI | Project DOS/WOW records and CONRECORDs to one DTO; map management kind as `0=DOS`, `1=Win16`, `2=Win32`; keep NTMON labels `DOS`, `Win16`, `WIN32`; project a reusable worker as `STACK=0/TASK=<EMPTY>`; repair WOW `stack_depth`; retire only proven duplicate fields/caches. |
+| S27 | Cross-component divergence retirement | Audit remaining project-added NTVDM/NTCON divergence in NTSRV, NTKVM, Run16, NTMON, worker-base and interface; remove every same-semantic duplicate and record each retained worker-local difference with its owner and failure/cleanup reason. |
+| S28 | Whole control-plane acceptance | Execute repeated same-worker reuse, direct and nested DOS/native lifecycle, route/root rebind, completion, disconnect, worker death, explicit kill, independent-session and management-display matrices; complete production regression, package publication and diff/duplicate accounting. |
+
+S23--S28 are sequential and owner-authorized for automatic admission: an S may
+not defer its own worker-control edge merely because a later S has an
+integration matrix.  Every production P retains the existing formal x86 build,
+established DOS routes, WOW frontier non-regression, coherent package
+publication and governance gates.  S22 closed with an evidenced target
+terminal-capability limitation, not a renderer repair.
+
 ## 最新批准：文本区域尺寸交接修复
 
 Owner 于 2026-09-29 批准新增尺寸交接修复 S；CURRENT 登记为 S13。
