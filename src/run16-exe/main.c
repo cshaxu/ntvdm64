@@ -638,7 +638,24 @@ static DWORD launch_native(run16_frontend_scope *scope,PCWSTR application,PCWSTR
     for(i=0;i<3;++i)if(GetConsoleMode(start.standard[i],&mode))start.console_mask|=1u<<i;
     error=run16_frontend_scope_launch_native(scope,&start,&target);
     s34_run16_trace("native-submit",error);
-    if(!error)error=run16_frontend_scope_wait_native(scope,target,&result);
+    if(!error) {
+        DWORD completion=run16_frontend_scope_wait_native(scope,target,&result);
+        /* The direct native target can have completed even when its final
+         * presentation fence reports an error. In either case, a root
+         * launcher must not hand an outer CMD its Console until NTKVM has
+         * restored the original buffer/input mode. A live target has not
+         * completed the handoff and retains the existing failure path. */
+        if(target && WaitForSingleObject(target,0)==WAIT_OBJECT_0) {
+            DWORD handoff=run16_frontend_scope_retire(scope);
+            s34_run16_trace("frontend-retire",handoff);
+            if(!handoff) {
+                handoff=run16_frontend_scope_restore_parent(scope);
+                s34_run16_trace("frontend-restored",handoff);
+            }
+            if(!completion)completion=handoff;
+        }
+        error=completion;
+    }
 done:
     if(target)CloseHandle(target);
     if(environment)FreeEnvironmentStringsW(environment);

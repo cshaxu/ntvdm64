@@ -52,6 +52,47 @@ NTCON 的 final-presentation 完成后立即让 root `run16` 返回，NTKVM 则�
   成功/失败 final fence 与既有退出码；生产 P 仍执行 x86、DOS/Window、WOW
   非回退和八文件发布门槛。
 
+## S19：PID-first worker 管理投影与 NTMON 任务显示
+
+S18 完成后，下一项 S 将统一 NTVDM/NTCON 向 NTSRV/NTMON 提供的 worker
+管理投影。NTMON 对用户只显示并操作真实 Windows PID；不再显示或传递
+BaseSrv 私有 sequence 或 management epoch。NTSRV 按当前已认证、存活的
+注册 worker PID 解析 Delete；PID 复用于后来注册的 worker 时，该当前
+worker 即为 PID 操作目标。私有连接 generation、路由及 sequence 可留在
+BaseSrv 内部，但不得跨 NTMON 管理边界。
+
+表头固定为 `PID  KIND  ELAPSED  STACK  TASK`。NTCON 行显示其 worker PID、
+`WIN32`、`MEMBERS=<n>` 和当前执行的 Win32 target 完整路径；空闲时 TASK
+为 `<EMPTY>`。NTVDM 行显示其 worker PID，并保留源定义的 DOS/Win16/WOW16
+kind、任务深度和任务标签。不得将 PID、成员、状态或起始时间拼接为
+`TASK / DETAILS` 长行。
+
+`interface` 定义版本化复制管理契约；`worker-base` 仅提供 NTVDM/NTCON
+复用的 worker 端上报客户端、验证和序列化；NTSRV 是唯一认证和管理投影点；
+NTMON 只渲染投影并发起 PID 请求。NTVDM 从原 DOS/WOW 记录产生 task label，
+NTCON 从实际启动的 target 产生/清除完整路径。不得新增第二个通用任务注册表、
+进程树枚举或任意进程控制；NTCON Delete 仍须完成其拥有的 Console 会话关闭
+确认，不能仅终止 carrier。
+
+验收包括 PID-only snapshot/terminate 契约、当前 PID 注册查找、NTCON idle/
+active target 与 MEMBERS 投影、NTVDM 原有标签/深度保留、五列表格断言，以及
+真实 NTCON 会话关闭和适用 x86/DOS/Window/WOW 回归。
+
+## S20：NTVDM/NTCON 生命周期语义审计与收束
+
+S20 是 T423 的最后一个 S。基于 S19 的统一 worker 管理投影，逐项审计
+NTVDM 与 NTCON 的登记、就绪/占用、接单、嵌套、target/task 完成、前端断连、
+空闲、显式管理关闭、异常退出和资源回收语义。识别仍有可证明同形的状态、
+协议、验证、复制记录、关闭确认或测试边界，并在不改变原 DOS/WOW record
+所有权、NTCON target 执行所有权和既定 native Console 会话关闭语义的前提下
+统一实现。
+
+审计不得以抽象“common”层替代真实 owner，也不得为了合并而合并。每个候选
+合并点须记录两侧原语义、调用者、失败/清理顺序、共享边界和回归证明；不同
+语义必须保留在其实际执行 owner 中。完成同形机制的去重、镜像/adapter
+diff accounting、完整生命周期矩阵与生产发布门槛后，T423 交由 owner 验收，
+不得自行关闭。
+
 ## 最新批准：文本区域尺寸交接修复
 
 Owner 于 2026-09-29 批准新增尺寸交接修复 S；CURRENT 登记为 S13。
@@ -414,7 +455,10 @@ S5 扩展验收已交付至 `1fb291a8f`；S6 从最新 nxvm 四组件核验开�
 | S11 | 完成 Window EDIT 鼠标输入批处理、压力与取消/交接修复；编译、回归、发布、提交推送后停下等 owner 验证。 |
 | S12 | 实施开头已批准的 NTCON 独立原生文本后端；承接原生屏幕连续性、真实成员及退场，保持 S11 鼠标回归。Owner 已验收 S11 并批准准入，实施状态见 CURRENT。 |
 | S13 | 文本区域尺寸交接修复：按最新契约统一 NTKVM 权威状态、两端真实应用/确认、原生 resize 传播和 DOS 不兼容尺寸转换。 |
-| S14（最后一个 S，已验收收口） | 产品体验与组件生命周期修复；已发布并推送 P1 `631206f9e`，owner 于 2026-09-29 报告验证通过并要求收口。自动测试与 owner 验收边界见[S14 证据](../etc/evidence/m0-t423-s14-product-experience.md)。T423 仍保持打开，等待后续指令。 |
+| S14（已验收收口） | 产品体验与组件生命周期修复；已发布并推送 P1 `631206f9e`，owner 于 2026-09-29 报告验证通过并要求收口。自动测试与 owner 验收边界见[S14 证据](../etc/evidence/m0-t423-s14-product-experience.md)。T423 仍保持打开，等待后续指令。 |
+| S15–S18 | 后续已准入的鼠标所有权、零延迟输入交接、Window 退场恢复和原生根任务退场确认；S18 是当前活动包，具体状态只由 CURRENT 管理。 |
+| S19（S18 后下一项） | PID-first worker 管理投影与 NTMON 任务显示：统一 NTVDM/NTCON 的 NTSRV/NTMON 管理契约、真实 PID 选择及 NTCON active target 标签。 |
+| S20（最后一个 S） | NTVDM/NTCON 生命周期语义审计：以 S19 的共同投影为基础，审计并完成仍可证明同形的 lifecycle/management 机制统一，保留不同 owner 的实际语义。 |
 
 ### Owner 增补：清理交付与实测修复分离
 
