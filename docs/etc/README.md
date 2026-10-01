@@ -2,6 +2,7 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T423 S25 native nesting and wait evidence](evidence/m0-t423-s25-native-nesting-wait.md) | M0 T423 S25 | Reproduces the accepted-baseline nested native deadlock, separates the known long-path limitation, and records the host wait cycle to repair. | Retain through T423 acceptance. |
 | [T423 S24 native participant graph](evidence/m0-t423-s24-native-participant-graph.md) | M0 T423 S24 | Records the rejected sampling/Job authority claims, direct-target truth boundary and required successor decision. | Retain through T423 acceptance. |
 | [T423 S23 unified worker lifecycle](evidence/m0-t423-s23-unified-worker-lifecycle.md) | M0 T423 S23 | Reservation-bound NTCON registration, resident worker lifecycle and sole NTSRV authority baseline. | Retain through T423 acceptance. |
 | [T423 S22 native EDIT colour audit](evidence/m0-t423-s22-native-edit-colour-audit.md) | M0 T423 S22 | Proves the modern EDIT target emits monochrome Console attributes before NTCON capture; records the terminal-capability boundary. | Retain through T423 acceptance. |

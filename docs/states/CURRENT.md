@@ -25,7 +25,8 @@
 | Similar-Issue Sweep | Run16 reserve/submit, NTCON I/O admission, NTVDM activation, NTKVM teardown, and other classified project-owned timers. |
 
 T423 remains open and must not close without owner acceptance. See the
-[S25 sequence](../proposals/proposal-kvm-window-graphics-presentation-001.md#successor-s-sequence).
+[S25 sequence](../proposals/proposal-kvm-window-graphics-presentation-001.md#successor-s-sequence)
+and [live evidence](../etc/evidence/m0-t423-s25-native-nesting-wait.md).
 
 ## S24 Closure Record
 
