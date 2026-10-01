@@ -1,13 +1,13 @@
 # M0 T423 S24 — NTSRV-Owned Native Participant Projection
 
-> **S24 replan (current authority).** This document retains the Job experiment
+> **S24 closed baseline.** This document retains the Job experiment
 > as research evidence only. S24's publishable baseline is deliberately
 > narrower: a resident NTCON registers before its blocking get-next call,
 > receives one authenticated direct command, binds that direct target identity
 > before `ResumeThread`, returns the target's actual Windows result, becomes
 > READY, and is reused. No Job creation, assignment, notification or
 > `Observed` record may be a condition of that direct path. The proposed Job
-> projection is deferred to S25 and can never control receipts, READY/EMPTY,
+> projection is deferred to S26 and can never control receipts, READY/EMPTY,
 > shutdown, or scheduling.
 
 ## Observation Contract
@@ -127,7 +127,7 @@ published `O:/winnt` package independently passed plain `run16 cmd` input
 and visible `/c ver` output. Report files are under
 `build/M0-T423/S24-helperless-clean/*gated*.txt`.
 
-The deeper `run16 cmd /c P:\\native-reuse.cmd` private-desktop probe still
+The deeper `run16 cmd /c native-reuse.cmd` private-desktop probe (with the script on the mapped test drive) still
 timed out and is **not** a passing native-nested result; the direct same-Console
 reuse result above does not cover it. Earlier expanded matrix cases are not
 used to claim an old-package defect merely because that observer missed text.
@@ -135,8 +135,12 @@ The headless `console-frontend-test.exe` stops at its real Console resize
 check with Win32 error 87; its earlier checks pass, but the whole fixture is
 not claimed as passing. The accepted 30 ms hidden-Console output sampler and
 the previously existing 10 ms startup/handoff retries remain unchanged in
-this delivery. S24 is republished for owner testing, not owner-accepted or T423
-closed.
+this delivery. On 2026-09-30 the owner reported basic verification passed,
+accepted this seven-file package as the latest baseline and directed S24 closure.
+The timed-out native-nested probe is explicitly transferred to S25 for root-cause
+repair and real-program regression proof; no pass is inferred from the owner's
+acceptance. Other minor side-test issues remain unspecified pending owner report.
+T423 is not closed.
 
 The published candidate latches a failed broker completion RPC as a worker
 fault instead of entering another GetNext call. The focused lifetime fixture

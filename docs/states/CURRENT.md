@@ -2,22 +2,15 @@
 
 ## Current Work
 
-## Active Packet
+## Task Intermission
 
-**Active: M0 T423 S24 (NTCON direct-command baseline)**
+**No active M/T/S packet.** M0 T423 remains open between S packets. S24 is
+closed by owner acceptance; S25 is next in the [T423 sequence](../proposals/proposal-kvm-window-graphics-presentation-001.md#successor-s-sequence)
+and has not begun. The latest accepted runtime baseline is the coherent
+protocol-23 seven-file package at `O:/winnt`; see [S24 evidence](../etc/evidence/m0-t423-s24-native-participant-graph.md).
+Do not autonomously close T423.
 
-| Field | M0 T423 S24 — resident NTCON direct-command baseline |
-| --- | --- |
-| Admission | Owner authorized automatic sequential successor admission after S22; the current proposal now orders S23--S29, with S25 newly assigned polling cleanup. S24 alone remains active. |
-| Objective | Deliver the bounded resident NTCON path: `READY → GetNextConsoleCommand → direct Win32 text target → direct completion → READY`, including reuse. |
-| Boundaries | Preserve original DOS/WOW record ownership and completion. No guest/shared-lib change, helper, tree kill or second scheduler. Broker completion failure must not be ignored. Owner approved retaining bounded NTCON hidden-Console output sampling after the event-source probe failed; unchanged cursor/window state must not be reapplied every sample. Job descendant observation and rich monitor call stacks are successor work, not S24 gates. |
-| Reference | [S24 evidence](../etc/evidence/m0-t423-s24-native-participant-graph.md); [replanned T423 sequence](../proposals/proposal-kvm-window-graphics-presentation-001.md#successor-s-sequence). |
-| Required proof | A coherent protocol-versioned package starts `command` and `cmd`; NTCON can receive one direct command, launch it, return its actual completion and wait ready for a subsequent direct command. |
-| Assets | `build/M0-T423/S24-helperless-clean`, `O:/winnt/Logs2`; immutable guest. |
-
-T423 仍不得自行收口。
-
-## S24 Design Record
+## S24 Closure Record
 
 S24 was incorrectly allowed to grow from a direct-worker baseline into a Job
 observer and monitor-projection redesign.  That expansion is frozen.  The
@@ -31,8 +24,11 @@ channel existed. NTCON now waits for that channel before launching an
 interactive target and releases the final presentation on completion. The
 revised seven-file package was rebuilt and published to `O:/winnt` with matching
 hashes; its real CMD prompt, input, `/c ver` output, same-Console direct reuse,
-and DOS COMMAND/MEM paths passed isolated tests. S24 remains open pending
-owner acceptance; deeper native-nested testing is not claimed as passing.
+and DOS COMMAND/MEM paths passed isolated tests. The owner reported basic
+verification passed and directed S24 closure with this package as the latest
+baseline. The deeper native-nested batch probe timed out and is transferred to
+S25 for diagnosis, repair and regression proof; it is not an S24 pass. Other
+minor observations await the owner's details and are not invented here.
 The owner explicitly allowed the bounded hidden-Console output sampler after
 the event-source probe found no reliable notification. No new timer polling
 was added for command acquisition or completion. The pre-existing 10 ms
