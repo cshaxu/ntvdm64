@@ -355,8 +355,8 @@ table had no pre-existing S32 or higher row to renumber; any later admitted
 continuation begins at S33 rather than reusing this identifier.
 
 The preceding S30 already synchronized `APP_PROTOCOL_VERSION=25` and
-`service.idl` `version(25.0)`. S32 must confirm the generated MIDL identity and
-re-run old RPC interface, old application protocol and wrong application
+`service.idl` `version(25.0)`. S32 must regenerate MIDL, confirm the generated
+interface identity, and re-run old RPC interface, old application protocol and wrong application
 version negatives before changing identity transport. Do not bump either
 version merely because an outdated problem statement cited 23.0; bump both
 only if S32 actually changes the wire contract.
