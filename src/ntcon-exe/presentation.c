@@ -406,11 +406,10 @@ DWORD ntcon_presentation_begin(ntcon_presentation *client,HANDLE output)
 static DWORD return_unused_input(ntcon_presentation *client)
 {
     HANDLE input=GetStdHandle(STD_INPUT_HANDLE);
-    DWORD *members=NULL,members_count=0,pending=0,read=0,error,index,keys=0;
+    DWORD pending=0,read=0,error=0,index,keys=0;
     INPUT_RECORD *records=NULL;
-    error=ntcon_console_members(&members,&members_count);
-    if(members)HeapFree(GetProcessHeap(),0,members);
-    if(error || members_count)return error;
+    /* Input ownership is transferred by the direct command's handoff.
+     * A Console process snapshot cannot establish task membership. */
     if(!GetNumberOfConsoleInputEvents(input,&pending))return GetLastError();
     if(!pending)return 0;
     if(pending>SIZE_MAX/sizeof(*records))return ERROR_ARITHMETIC_OVERFLOW;

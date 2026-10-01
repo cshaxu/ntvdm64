@@ -148,26 +148,16 @@ M0 T418 S1 retired the former `wire`, `broker` and `base_vdm_record` local
 registry plane.  It had no production caller and duplicated neither the live
 service transport nor the mirrored BaseSrv owner.  The selected broker surface
 is the versioned `vdm_message`/`vdm_values`/`vdm_startup` transport plus its
-authenticated receipt, delivery, Console-membership and RPC-security bindings.
+authenticated receipt, delivery and RPC-security bindings.
 The service protocol is owned by `basesrv` in the executable-owned transition;
 it must not be revived here as a second local registry.
 
-`console_membership.h/.c` implement the finite modern Console observation
-mechanism selected by the T412 S1 Console design. NT4 Console HANDLE identity
-cannot be transported as a modern cross-process identity, and the original
-BaseSrv record-selection policy remains its owner rather than being rewritten.
-The reviewed S1 feasibility fixture supplied the public API sequence; the
-formal component adds attached-process refusal, bounded snapshot resizing,
-caller-presence validation and publish-only-after-detach failure semantics.
-Its ABI accepts a caller PID and candidate PIDs and returns membership bytes;
-it neither opens unrelated processes nor treats PID membership as authority.
-An isolated detached helper must call it. The parent must pin and revalidate
-authenticated process lifetimes/generations. That helper transaction is not
-yet integrated into basesrv; run16 now supplies the private helper entry. The formal broker-transport archive is
-selected by Verify-BrokerConsoleMembership, whose link map and real owned
-Console tests cover same/different membership, attached refusal, unchanged
-failure output and detached return. Concurrent snapshot growth, detach failure
-and parent-generation revalidation are not proven by this test.
+The detached `run16 --internal-console-probe` membership helper has been
+removed. The launcher reports the member PID snapshot of its own attached
+Console through its existing authenticated RPC connection. BaseSrv compares
+that bounded snapshot only with registered process identities to select an
+original ConsoleRecord; the report supplies no Console HANDLE, worker claim or
+task selection authority.
 
 The formal service.idl now has separate sh_file and sh_pipe input endpoints
 for standard-stream receipts, plus revocation. Both use authenticated connection

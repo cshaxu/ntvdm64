@@ -9,6 +9,7 @@
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
 #include "run16-exe/worker_launch.h"
 #include "worker-base/connection.h"
+#include "worker-base/next_command.h"
 #include "ntkvm-exe/native_request_client.h"
 #include "interface/console_io.h"
 #include <stddef.h>
@@ -642,6 +643,10 @@ static int ntcon_execution_rpc(void)
     uint64_t reservation=0;DWORD error=0,code=0,deadline,index;
     HANDLE capability=NULL;
     REQUIRE(!OpenNtBaseClientConnectCurrent());
+    /* Match the public run16 connection sequence.  The report is the
+     * helper-free, authenticated Console association input; it carries no
+     * worker selection or completion authority. */
+    REQUIRE(!OpenNtBaseClientReportCurrentConsoleMembers());
     {
         HANDLE selected=NULL;
         REQUIRE(OpenNtBaseClientSelectNativeWorker(&selected)==ERROR_NOT_FOUND && !selected);
@@ -781,17 +786,18 @@ int main(int argc,char **argv)
         REQUIRE(!OpenNtBaseClientWorkerFrontendCapability(&capability) && capability);
         REQUIRE(WriteFile(pipe,"N",1,&written,NULL) && written==1);
         {
-            HANDLE request=NULL,sender=NULL,execution=NULL,io_capability=NULL;
-            HANDLE root=NULL;DWORD root_generation=0,error,request_id=0;
+            worker_base_next_command native_command={0};
+            HANDLE root=NULL;DWORD root_generation=0,error;
             char marker=0;
-            error=OpenNtBaseClientWaitWorkerChannel(&request,&sender,&execution,&io_capability,&request_id);
-            REQUIRE(!error && request && sender && execution && io_capability);
-            REQUIRE(GetProcessId(sender)==GetProcessId(frontend));
-            REQUIRE(!OpenNtBaseClientRetainFrontendRoot(io_capability,&root,&root_generation));
+            error=worker_base_get_next_command(&native_command);
+            REQUIRE(!error && native_command.channel && native_command.sender && native_command.execution && native_command.frontend && native_command.request);
+            REQUIRE(GetProcessId(native_command.sender)==GetProcessId(frontend));
+            REQUIRE(!OpenNtBaseClientRetainFrontendRoot(native_command.frontend,&root,&root_generation));
             REQUIRE(GetProcessId(root)==GetProcessId(frontend) && root_generation==generation);
-            REQUIRE(ReadFile(request,&marker,1,&written,NULL) && written==1 && marker=='L');
-            REQUIRE(WriteFile(request,"R",1,&written,NULL) && written==1);
-            CloseHandle(root);CloseHandle(io_capability);CloseHandle(execution);CloseHandle(sender);CloseHandle(request);
+            REQUIRE(ReadFile(native_command.channel,&marker,1,&written,NULL) && written==1 && marker=='L');
+            REQUIRE(WriteFile(native_command.channel,"R",1,&written,NULL) && written==1);
+            REQUIRE(!worker_base_complete_next_command(native_command.request));
+            CloseHandle(root);worker_base_dispose_next_command(&native_command);
         }
         CloseHandle(capability);CloseHandle(ready);CloseHandle(frontend);CloseHandle(pipe);
         worker_base_disconnect();return 73;

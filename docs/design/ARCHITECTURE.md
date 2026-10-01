@@ -279,8 +279,13 @@ not an NTKVM-owned backend with a frontend-bounded lifetime. Both expose the
 same external worker discovery/start/registration, request/completion,
 handoff/re-entry, exit/fault and monitor management model. I/O association is
 separate from worker identity. NTKVM connects as presentation client only.
-Audit and reuse the actual selected NTVDM lifecycle instead of introducing a
-second scheduler or encoding native tasks as guest DOS/WOW records. The older
+The selected original OpenNT NTVDM/MVDM interface and lifecycle are the
+canonical shape: NTCON adapts at its own boundary to a same-shaped native
+worker contract. No original MVDM mirror may include, call, schedule, or
+otherwise adapt to NTCON. Shared project-added mechanics may be extracted only
+when they leave the original owner and its control order intact. Audit and
+reuse the actual selected NTVDM lifecycle instead of introducing a second
+scheduler or encoding native tasks as guest DOS/WOW records. The older
 per-frontend candidate description below is superseded wherever it conflicts.
 
 The owner admits src/ntcon-exe producing ntcon.exe as the native text backend.

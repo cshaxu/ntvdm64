@@ -1,6 +1,7 @@
 #include "session_service.h"
 #include "console_channel.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
+#include <stdio.h>
 typedef struct frontend_channel {
     struct frontend_channel *next;
     run16_console_channel *channel;

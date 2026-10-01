@@ -69,7 +69,8 @@ DWORD frontend_bootstrap_start(PCWSTR image,frontend_connection *output)
     if(!UpdateProcThreadAttribute(startup.lpAttributeList,0,PROC_THREAD_ATTRIBUTE_HANDLE_LIST,
         inherited,sizeof(inherited),NULL,NULL)){error=GetLastError();goto done;}
     if(swprintf_s(command,1024,L"\"%ls\" --session %Ix %Ix %Ix %Ix %Ix",image,
-        (UINT_PTR)child_pipe,(UINT_PTR)caller,(UINT_PTR)notification,(UINT_PTR)retire,(UINT_PTR)restored)<0){error=ERROR_FILENAME_EXCED_RANGE;goto done;}
+        (UINT_PTR)child_pipe,(UINT_PTR)caller,(UINT_PTR)notification,(UINT_PTR)retire,
+        (UINT_PTR)restored)<0){error=ERROR_FILENAME_EXCED_RANGE;goto done;}
     if(!CreateProcessW(image,command,NULL,NULL,TRUE,EXTENDED_STARTUPINFO_PRESENT|DETACHED_PROCESS,
         NULL,NULL,&startup.StartupInfo,&process)){error=GetLastError();goto done;}
     CloseHandle(process.hThread);process.hThread=NULL;

@@ -5,6 +5,7 @@
 #include "console_state.h"
 #include "presentation.h"
 #include "worker-base/connection.h"
+#include "worker-base/next_command.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
 #include "native_pc_font.h"
 
@@ -36,6 +37,8 @@ static DWORD begin_io(void *context,HANDLE stop)
     native_membership *state=context;
     DWORD retries=0;
     for(;;) {
+        /* A Console target must not run before its frontend can receive output
+         * and provide input. Broker delivery alone is not an I/O handoff. */
         DWORD error=ERROR_NOT_READY;
         if(WaitForSingleObject(stop,0)!=WAIT_TIMEOUT)return ERROR_OPERATION_ABORTED;
         if(WaitForSingleObject(state->stop_requested,0)!=WAIT_TIMEOUT)return ERROR_OPERATION_ABORTED;
@@ -79,23 +82,21 @@ static void release_launch(void *context)
 }
 static DWORD end_io(void *context)
 {
-    native_membership *state=context;DWORD error,count=0,*members=NULL,attempt;
+    native_membership *state=context;DWORD error=ERROR_SUCCESS,attempt;
     EnterCriticalSection(state->lock);
-    error=ntcon_console_members(&members,&count);
-    if(members)HeapFree(GetProcessHeap(),0,members);
-    /* Completion belongs to the direct target. Its surviving Console users
-     * retain presentation independently; never reseed over their live output. */
+    /* Completion belongs to the direct target.  A Job event may project an
+     * Observed descendant in NTSRV's one ConRecord chain, but neither that
+     * observation nor a physical Console snapshot can retain NTSRV BUSY. */
     if(!error && state->presenting) {
-        if(state->users>1 || count) {
+        if(state->users>1) {
             for(attempt=0;attempt<8;++attempt) {
                 error=ntcon_presentation_capture(state->presentation,&state->font);
                 if(error!=ERROR_RETRY)break;
                 if(attempt<7)Sleep(10);
             }
-        }
-        else {
+        } else {
             error=ntcon_presentation_end(state->presentation,&state->font);
-            state->presenting=FALSE;
+            if(!error)state->presenting=FALSE;
         }
     }
     if(state->users)--state->users;
@@ -118,14 +119,10 @@ static DWORD take_presentation(native_membership *state)
     error=ntcon_presentation_call(state->presentation,&request,&reply);
     return error==ERROR_NOT_READY || error==ERROR_BUSY ? ERROR_SUCCESS : error;
 }
-static DWORD sample_members_loop(void *context)
+static DWORD presentation_loop(void *context)
 {
     native_membership *state=context;DWORD error=0;
     while(WaitForSingleObject(state->quit,30)==WAIT_TIMEOUT) {
-        uint64_t epoch=0;DWORD *members=NULL,count=0;
-        /* Keep the client sample and local request count in one handoff
-         * interval. A pre-launch empty sample must not release/reseed the
-         * screen after that request has already spawned a surviving client. */
         EnterCriticalSection(state->lock);
         if(WaitForSingleObject(state->stop_requested,0)==WAIT_OBJECT_0) {
             error=ntcon_console_close();
@@ -138,16 +135,8 @@ static DWORD sample_members_loop(void *context)
             LeaveCriticalSection(state->lock);
             return error ? error : ERROR_CANCELLED;
         }
-        error=OpenNtBaseClientNativeSampleEpoch(&epoch);
-        if(!error)error=ntcon_console_members(&members,&count);
-        if(error) {
-            if(members)HeapFree(GetProcessHeap(),0,members);
-            LeaveCriticalSection(state->lock);
-            if(error==ERROR_RETRY || error==ERROR_BUSY)continue;
-            return error;
-        }
         error=take_presentation(state);
-        if(!error && state->presentation && (state->users || count)) {
+        if(!error && state->presentation && state->users) {
             DWORD accepted=0;
             if(!state->presenting) {
                 HANDLE output=CreateFileW(L"CONOUT$",GENERIC_READ|GENERIC_WRITE,
@@ -159,7 +148,7 @@ static DWORD sample_members_loop(void *context)
             /* A completed direct target may still be waiting for its final
              * presentation receipt. Do not feed the next DOS command to a
              * Console which has no native consumer during that interval. */
-            if(!error && count)error=ntcon_presentation_input(state->presentation,GetStdHandle(STD_INPUT_HANDLE),&accepted);
+            if(!error)error=ntcon_presentation_input(state->presentation,GetStdHandle(STD_INPUT_HANDLE),&accepted);
             if(error==ERROR_BUSY) {
                 /* DOS requested the shared screen. Publish before releasing,
                  * then import its final screen before resuming native I/O. */
@@ -170,9 +159,6 @@ static DWORD sample_members_loop(void *context)
             if(!error)error=ntcon_presentation_capture(state->presentation,&state->font);
             if(error==ERROR_NOT_READY || error==ERROR_BUSY){state->presenting=FALSE;error=0;}
             if(error==ERROR_RETRY)error=0;
-        } else if(!error && state->presentation && state->presenting) {
-            error=ntcon_presentation_end(state->presentation,&state->font);
-            state->presenting=FALSE;
         }
         if(error==ERROR_PIPE_NOT_CONNECTED || error==ERROR_BROKEN_PIPE) {
             /* Root/frontend loss revokes copied I/O only.  Preserve the
@@ -182,29 +168,22 @@ static DWORD sample_members_loop(void *context)
         }
         LeaveCriticalSection(state->lock);
         if(error)return error;
-        /* Publish empty membership only after the last screen/input handoff;
-         * otherwise the frontend can retire before receiving that handoff. */
-        error=OpenNtBaseClientReportNativeBackend(epoch,count,members);
-        if(members)HeapFree(GetProcessHeap(),0,members);
-        if(error && error!=ERROR_RETRY && error!=ERROR_BUSY)return error;
     }
     return 0;
 }
-static DWORD WINAPI sample_members(void *context)
+static DWORD WINAPI presentation_pump(void *context)
 {
     native_membership *state=context;
-    DWORD error=sample_members_loop(context),count=0,*members=NULL,sample;
+    DWORD error=presentation_loop(context);
     ntcon_trace_error("pump",0,error);
     if(!error || WaitForSingleObject(state->quit,0)!=WAIT_TIMEOUT)return error;
     /* Only an unrecoverable worker-side failure reaches here. Frontend pipe
-     * loss is detached in sample_members_loop and cannot kill a live worker. */
+     * loss is detached in presentation_loop and cannot kill a live worker. */
     EnterCriticalSection(state->lock);
-    sample=ntcon_console_members(&members,&count);
-    if(members)HeapFree(GetProcessHeap(),0,members);
-    if(state->users || count || sample) {
+    if(state->users) {
         SetEvent(state->stop_requested);
         (void)ntcon_console_close();
-        /* Main can be blocked in WaitWorkerChannel; do not wait on that RPC
+        /* Main can be blocked in GetNextCommand; do not wait on that RPC
          * to report an unrecoverable worker-side presentation failure. */
         TerminateProcess(GetCurrentProcess(),error);
     }
@@ -253,7 +232,7 @@ static DWORD membership_bind(native_membership *state,HANDLE frontend)
     else if(!DuplicateHandle(GetCurrentProcess(),frontend,GetCurrentProcess(),&state->capability,SYNCHRONIZE,FALSE,0))error=GetLastError();
     else error=OpenNtBaseClientRegisterNativeBackend(frontend,state->stop_requested,state->closed);
     if(!error) {
-        state->thread=CreateThread(NULL,0,sample_members,state,0,NULL);
+        state->thread=CreateThread(NULL,0,presentation_pump,state,0,NULL);
         if(!state->thread)error=GetLastError();
     }
     if(error)membership_close(state);
@@ -277,29 +256,37 @@ int wmain(int argc,WCHAR **argv)
     CsrPortHeap=HeapCreate(0,0,0);
     if(!CsrPortHeap)return GetLastError();
     error=worker_base_connect();
-    if(!error)error=ntcon_console_initialize();
-    if(!error)error=ntcon_executions_open(&requests);
+    if(!error) error=ntcon_console_initialize();
+    if(!error) error=ntcon_executions_open(&requests);
     if(!error)ntcon_executions_bind_io(requests,&io);
     if(!error && !SetConsoleCtrlHandler(control_event,TRUE))error=GetLastError();
     while(!error) {
-        HANDLE channel=NULL,sender=NULL,execution=NULL,frontend=NULL;DWORD request=0;
-        error=OpenNtBaseClientWaitWorkerChannel(&channel,&sender,&execution,&frontend,&request);
+        worker_base_next_command command;
+        /* Keep the same worker cadence as the original VDM path: one
+         * admitted Direct command completes before this resident worker
+         * returns to GetNext.  Native descendants remain Windows-owned and
+         * never become broker completion records. */
+        error=ntcon_executions_wait_idle(requests);
+        if(error)break;
+        error=worker_base_get_next_command(&command);
         if(error)break;
         /* An unaccepted request closes its attachments; it neither ends the
          * worker nor cancels other requests or already running targets. */
         {
             typedef BOOL (WINAPI *compare_handles)(HANDLE,HANDLE);
             compare_handles compare=(compare_handles)GetProcAddress(GetModuleHandleW(L"kernelbase.dll"),"CompareObjectHandles");
-            DWORD binding=membership.capability && (!compare || !compare(membership.capability,frontend)) &&
-                !ntcon_executions_idle(requests) ? ERROR_BUSY : membership_bind(&membership,frontend);
-            if(binding) {
-                CloseHandle(frontend);CloseHandle(channel);CloseHandle(sender);CloseHandle(execution);
-                (void)OpenNtBaseClientCompleteWorkerChannel(request);
-                continue;
+            DWORD binding=membership.capability && (!compare || !compare(membership.capability,command.frontend)) &&
+                !ntcon_executions_idle(requests) ? ERROR_BUSY : membership_bind(&membership,command.frontend);
+            /* Binding failure still consumes the protocol request and replies
+             * through its native channel.  Do not complete a broker command
+             * while run16 is waiting for a reply that no thread will send. */
+            if(ntcon_execution_start(requests,&command,binding)) {
+                DWORD completion=worker_base_complete_next_command(command.request);
+                if(completion)ntcon_executions_note_broker_failure(requests,completion);
+                worker_base_dispose_next_command(&command);
             }
+            continue;
         }
-        if(ntcon_execution_start(requests,frontend,channel,sender,execution,request))
-            (void)OpenNtBaseClientCompleteWorkerChannel(request);
     }
     if(membership.quit)SetEvent(membership.quit);
     ntcon_executions_close(requests);

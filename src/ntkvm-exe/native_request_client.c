@@ -36,9 +36,9 @@ static DWORD submit_receipt(HANDLE root,HANDLE root_capability,const run16_nativ
     }
     error=OpenNtBaseClientSubmitWorkerChannel(root_capability,server,image);
     CloseHandle(server);server=INVALID_HANDLE_VALUE;
-    if(!error)error=frontend_request_transfer(client,root,NULL,event,TRUE,&header,sizeof(header));
-    if(!error && header.bytes)error=frontend_request_transfer(client,root,NULL,event,TRUE,payload,header.bytes);
-    if(!error)error=frontend_request_transfer(client,root,NULL,event,FALSE,&reply,sizeof(reply));
+    if(!error) error=frontend_request_transfer(client,root,NULL,event,TRUE,&header,sizeof(header));
+    if(!error && header.bytes) error=frontend_request_transfer(client,root,NULL,event,TRUE,payload,header.bytes);
+    if(!error) error=frontend_request_transfer(client,root,NULL,event,FALSE,&reply,sizeof(reply));
     if(!error) {
         if(reply.version!=NATIVE_REQUEST_VERSION || reply.target>(uint64_t)(ULONG_PTR)-1 ||
             reply.receipt>(uint64_t)(ULONG_PTR)-1 ||

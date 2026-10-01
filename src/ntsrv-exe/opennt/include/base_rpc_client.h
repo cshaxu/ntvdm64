@@ -6,6 +6,7 @@
 #include <windows.h>
 #include <stdint.h>
 DWORD OpenNtBaseClientConnectCurrent(void);
+DWORD OpenNtBaseClientReportCurrentConsoleMembers(void);
 /* Arm only after launcher creation rollback is no longer required. Workers
  * arm immediately after Connect, before entering guest code. */
 DWORD OpenNtBaseClientWatchBroker(void);
@@ -18,8 +19,6 @@ DWORD OpenNtBaseClientFrontendStateChanged(HANDLE *state_changed);
 DWORD OpenNtBaseClientRetireFrontend(void);
 DWORD OpenNtBaseClientRegisterFrontendRoot(HANDLE capability);
 DWORD OpenNtBaseClientRegisterNativeBackend(HANDLE frontend,HANDLE stop,HANDLE closed);
-DWORD OpenNtBaseClientNativeSampleEpoch(uint64_t *epoch);
-DWORD OpenNtBaseClientReportNativeBackend(uint64_t epoch,DWORD member_count,const DWORD *member_ids);
 DWORD OpenNtBaseClientBindNativeTarget(DWORD request,HANDLE target);
 DWORD OpenNtBaseClientCompleteWorkerChannel(DWORD request);
 DWORD OpenNtBaseClientWorkerFrontendCapability(HANDLE *capability);
@@ -28,8 +27,7 @@ DWORD OpenNtBaseClientRetainFrontendRoot(HANDLE capability,HANDLE *root,DWORD *g
 DWORD OpenNtBaseClientAcquireConsoleContext(HANDLE frontend,HANDLE *capability);
 DWORD OpenNtBaseClientBindConsoleContext(HANDLE capability);
 DWORD OpenNtBaseClientSubmitWorkerChannel(HANDLE capability,HANDLE channel,const WCHAR image[260]);
-DWORD OpenNtBaseClientTakeWorkerChannel(HANDLE *channel,HANDLE *caller_process,HANDLE *execution,HANDLE *frontend,DWORD *request);
-DWORD OpenNtBaseClientWaitWorkerChannel(HANDLE *channel,HANDLE *caller_process,HANDLE *execution,HANDLE *frontend,DWORD *request);
+DWORD OpenNtBaseClientGetNextNativeCommand(HANDLE *channel,HANDLE *caller_process,HANDLE *execution,HANDLE *frontend,DWORD *request);
 DWORD OpenNtBaseClientRequestFrontend(HANDLE capability);
 DWORD OpenNtBaseClientFrontendRequest(DWORD *request,HANDLE *worker);
 DWORD OpenNtBaseClientAttachFrontendRequest(DWORD request,HANDLE pipe,HANDLE ready,DWORD *generation);

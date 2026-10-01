@@ -17,7 +17,6 @@
 #include <wchar.h>
 
 UNICODE_STRING BaseDotComSuffixName, BaseDotPifSuffixName, BaseDotExeSuffixName;
-DWORD app_console_probe(void);
 PVOID CsrPortHeap;
 BOOL BaseCreateVDMEnvironment(PWCHAR environment, ANSI_STRING *ansi,
                               UNICODE_STRING *unicode);
@@ -100,21 +99,6 @@ static void end_worker_win16_directory(WORKER_WIN16DIR_SCOPE *scope)
     if (scope->environment != NULL) HeapFree(GetProcessHeap(), 0,
         scope->environment);
     ZeroMemory(scope, sizeof(*scope));
-}
-
-static void s34_run16_trace(const char *stage, DWORD value)
-{
-    char path[MAX_PATH],line[96];
-    HANDLE file;
-    DWORD bytes,written;
-    if (!GetEnvironmentVariableA("MVDM_S34_TRACE_PATH",path,sizeof(path))) return;
-    file=CreateFileA(path,FILE_APPEND_DATA,FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,
-        OPEN_ALWAYS,FILE_ATTRIBUTE_NORMAL,NULL);
-    if (file==INVALID_HANDLE_VALUE) return;
-    bytes=(DWORD)sprintf_s(line,sizeof(line),"%lu run16-%s %lu\r\n",
-        (unsigned long)GetCurrentProcessId(),stage,(unsigned long)value);
-    if (bytes) (void)WriteFile(file,line,bytes,&written,NULL);
-    CloseHandle(file);
 }
 
 static BOOL sibling_path(PCWSTR name, PWSTR output, DWORD capacity)
@@ -207,8 +191,15 @@ static DWORD connect_broker(void)
     for (attempt = 0; attempt < 100; ++attempt)
     {
         error = OpenNtBaseClientConnectCurrent();
-        if (!error)
-            return ERROR_SUCCESS;
+        if (!error) {
+            /* The launcher is the process attached to the caller's real
+             * Console.  Report that local membership through its already
+             * authenticated BaseClient connection; BaseSrv uses it only to
+             * associate an existing ConsoleRecord. */
+            error=OpenNtBaseClientReportCurrentConsoleMembers();
+            if (!error) return ERROR_SUCCESS;
+            OpenNtBaseClientDisconnectCurrent();
+        }
         if (error == ERROR_REVISION_MISMATCH)
             return error; /* Never start/retry a broker for an incompatible peer. */
         /* Re-try only at bounded intervals.  This covers a listener which
@@ -342,12 +333,8 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command,run16_f
                       &task, check_creation_flags, &startup))
     {
         result = GetLastError();
-        s34_run16_trace("check-failed",result);
         goto done;
     }
-    s34_run16_trace("check-flags",check_creation_flags);
-    s34_run16_trace("vdm-state",message.u.CheckVDM.VDMState);
-    s34_run16_trace("vdm-task",task);
     /* srvvdm.c has already selected and queued a same-Console resident DOS
      * record.  Its original Check reply carries the parent completion event;
      * wait and query the original exit-code route, never create another VDM. */
@@ -356,7 +343,6 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command,run16_f
         parent_wait = message.u.CheckVDM.WaitObjectForParent;
         if ((binary & ~BINARY_SUBTYPE_MASK)==BINARY_TYPE_DOS) {
             result=frontend_capability ? OpenNtBaseClientRequestFrontend(frontend_capability) : ERROR_INVALID_STATE;
-            s34_run16_trace("reuse-frontend",result);
             if (result && result!=ERROR_ALREADY_EXISTS) { CloseHandle(parent_wait);goto done; }
         }
         result=OpenNtBaseClientWatchBroker();
@@ -457,7 +443,6 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command,run16_f
     registered = TRUE;
     if (binary==BINARY_TYPE_DOS) {
         result=frontend_capability ? OpenNtBaseClientRequestFrontend(frontend_capability) : ERROR_INVALID_STATE;
-        s34_run16_trace("new-frontend",result);
         if (result && result!=ERROR_ALREADY_EXISTS) goto done;
     }
     if (ResumeThread(worker.hThread) == (DWORD)-1)
@@ -490,7 +475,6 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command,run16_f
         if (worker_index && wait==WAIT_OBJECT_0+worker_index &&
             WaitForSingleObject(parent_wait,2000)!=WAIT_OBJECT_0) {
             if (GetExitCodeProcess(worker.hProcess,&code))
-                s34_run16_trace("worker-exit",code);
             result=ERROR_PROCESS_ABORTED;
             fputs("run16: ntvdm exited without task completion\n",stderr);
             goto waited;
@@ -522,7 +506,6 @@ waited:
      * mistake the broker-side result for the worker's own exit code. */
     if (worker.hProcess && WaitForSingleObject(worker.hProcess, 0) == WAIT_OBJECT_0 &&
         GetExitCodeProcess(worker.hProcess, &worker_status))
-        s34_run16_trace("worker-status", worker_status);
     if (parent_wait && parent_wait != worker.hProcess)
         CloseHandle(parent_wait);
 done:
@@ -554,21 +537,17 @@ done:
     if (worker_command.Buffer)
         RtlFreeUnicodeString(&worker_command);
     (void)BaseDestroyVDMEnvironment(&environment, &unicode_environment);
-    s34_run16_trace("task-completed",task_completed);
     /* Only an acknowledged DOS completion can resume its native parent's
      * presentation. Startup/fault results must not select another worker or
      * be replaced by an unrelated resume error. */
     if (task_completed && (binary & ~BINARY_SUBTYPE_MASK)==BINARY_TYPE_DOS) {
         DWORD handoff=run16_frontend_scope_resume_parent(frontend_scope);
-        s34_run16_trace("native-resume",handoff);
         if(handoff)result=handoff;
         else {
             handoff=run16_frontend_scope_retire(frontend_scope);
-            s34_run16_trace("frontend-retire",handoff);
             if(handoff)result=handoff;
             else {
                 handoff=run16_frontend_scope_restore_parent(frontend_scope);
-                s34_run16_trace("frontend-restored",handoff);
                 if(handoff)result=handoff;
             }
         }
@@ -637,7 +616,6 @@ static DWORD launch_native(run16_frontend_scope *scope,PCWSTR application,PCWSTR
     start.console_mask=run16_frontend_scope_console_mask(scope);
     for(i=0;i<3;++i)if(GetConsoleMode(start.standard[i],&mode))start.console_mask|=1u<<i;
     error=run16_frontend_scope_launch_native(scope,&start,&target);
-    s34_run16_trace("native-submit",error);
     if(!error) {
         DWORD completion=run16_frontend_scope_wait_native(scope,target,&result);
         /* The direct native target can have completed even when its final
@@ -647,10 +625,8 @@ static DWORD launch_native(run16_frontend_scope *scope,PCWSTR application,PCWSTR
          * completed the handoff and retains the existing failure path. */
         if(target && WaitForSingleObject(target,0)==WAIT_OBJECT_0) {
             DWORD handoff=run16_frontend_scope_retire(scope);
-            s34_run16_trace("frontend-retire",handoff);
             if(!handoff) {
                 handoff=run16_frontend_scope_restore_parent(scope);
-                s34_run16_trace("frontend-restored",handoff);
             }
             if(!completion)completion=handoff;
         }
@@ -696,12 +672,6 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
     {
         result = GetLastError();
         goto done;
-    }
-    s34_run16_trace("args",(DWORD)count);
-    if (count == 1 && !wcscmp(arguments[0], L"--internal-console-probe"))
-    {
-        LocalFree(arguments);
-        return (int)app_console_probe();
     }
     initial_console_only=GetConsoleProcessList(&console_member,1)==1 && console_member==GetCurrentProcessId();
     RtlInitUnicodeString(&BaseDotComSuffixName, L".com");
@@ -780,7 +750,6 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
         binary = BINARY_TYPE_WIN16;
     if (binary)
     {
-        s34_run16_trace("binary",binary);
         PCWSTR image_name;
         if (!image_resolved &&
             !GetFullPathNameW(image_argument, MAX_PATH, application, NULL))
@@ -831,13 +800,11 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
             goto done;
         }
         result = connect_broker();
-        s34_run16_trace("broker",result);
         if (!result)
         {
             if ((binary & ~BINARY_SUBTYPE_MASK)==BINARY_TYPE_DOS)
                 result=run16_frontend_scope_begin(&frontend_scope);
             if (!result) result = launch_vdm(binary, application, launch_command,frontend_scope,initial_console_only,options.wait);
-            s34_run16_trace("worker",result);
         }
         run16_frontend_scope_end(frontend_scope);frontend_scope=NULL;
         OpenNtBaseClientDisconnectCurrent();
@@ -868,9 +835,7 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
         if (!NT_SUCCESS(status)) { result=RtlNtStatusToDosError(status);goto done; }
         if (information.SubSystemType==IMAGE_SUBSYSTEM_WINDOWS_CUI) {
             result=connect_broker();
-            s34_run16_trace("native-broker",result);
             if (!result) result=run16_frontend_scope_begin(&frontend_scope);
-            s34_run16_trace("native-frontend",result);
             if (!result) result=OpenNtBaseClientWatchBroker();
             if (result) goto done;
         }
@@ -883,7 +848,6 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
 done:
     run16_frontend_scope_end(frontend_scope);
     OpenNtBaseClientDisconnectCurrent();
-    s34_run16_trace("exit",result);
     LocalFree(arguments);
     return (int)result;
 }

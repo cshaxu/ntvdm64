@@ -77,7 +77,7 @@ static BOOL bind_basesrv(MONITOR_STATE *state)
 }
 static const WCHAR *kind_name(ULONG kind)
 {
-    return kind==4u ? L"WIN32" : kind==3u ? L"WOW16" : kind==2u ? L"Win16" : L"DOS";
+    return kind==2u ? L"WIN32" : kind==1u ? L"WIN16" : L"DOS";
 }
 static void elapsed_text(const FILETIME *started,const FILETIME *now,WCHAR output[16])
 {

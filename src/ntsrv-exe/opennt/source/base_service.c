@@ -34,8 +34,6 @@ struct OPENNT_BASE_SERVICE {
     LIST_ENTRY worker_watches;
     LIST_ENTRY frontend_routes;
     LIST_ENTRY console_contexts;
-    OPENNT_BASE_CONSOLE_QUERY console_query;
-    void *console_query_context;
     OPENNT_BASE_EMPTY_NOTIFY empty_notify;
     void *empty_notify_context;
     uint64_t management_epoch;
@@ -48,6 +46,16 @@ struct OPENNT_BASE_CONNECTION {
     ULONG task;
     OPENNT_BASE_WORKER_KIND reservation_kind;
     HANDLE console;
+    DWORD *console_members;
+    DWORD console_member_count;
+    /* A resident native worker outlives the direct launcher that registered
+     * it.  Retain that launcher's execution-Console identity separately from
+     * the worker's own hidden Console membership, so a later launcher on the
+     * same Console can select the existing worker after the first launcher
+     * has returned.  This is only a local Console discriminator: it conveys
+     * no handle, capability, task authority or completion right. */
+    DWORD *execution_console_members;
+    DWORD execution_console_member_count;
     BOOL wow;
     BOOL retired;
     BOOL pending_creation;
@@ -74,8 +82,7 @@ struct OPENNT_BASE_CONNECTION {
     HANDLE frontend_channel,frontend_execution;
     DWORD channel_worker_generation; /* Zero selects the retained frontend route. */
     HANDLE channel_frontend; /* Authenticated I/O association for worker delivery. */
-    DWORD native_root,native_members;
-    WCHAR native_image[OPENNT_BASE_WORKER_IMAGE_CHARS]; /* Physical Console sample only. */
+    DWORD native_root;
     DWORD native_inflight,native_activity_root;
     /* Project-owned native-text counterpart to BaseSrv's original DOSRECORD
      * projection.  The broker, not the native Console process list, owns
@@ -83,7 +90,6 @@ struct OPENNT_BASE_CONNECTION {
     LIST_ENTRY conrecords;
     struct OPENNT_BASE_CONRECORD *pending_conrecord;
     DWORD next_conrecord;
-    uint64_t native_sample_epoch;
     HANDLE native_stop,native_closed;
     LIST_ENTRY service_link;
     LIST_ENTRY retired_link;
@@ -92,9 +98,11 @@ typedef struct OPENNT_BASE_CONRECORD {
     LIST_ENTRY link;
     DWORD request;
     /* The direct target is bound from NTCON's actual CreateProcess handle;
-     * observed entries are keyed by the actual Console PID sample.  Never
+     * observed entries are keyed by an NTSRV-owned Job notification. Never
      * derive either identity from a member count. */
     DWORD process_id;
+    /* Kernel Job NEW_PROCESS supplies the actual native parent identity. */
+    DWORD parent_process_id;
     /* Direct records are created by an admitted Run16 request.  Observed
      * records describe a native child which Windows attached to NTCON's
      * Console (for example CMD -> EDIT).  Both are broker-owned management
@@ -136,11 +144,6 @@ typedef struct OPENNT_BASE_MANAGEMENT_LABEL {
     ULONG task;
     WCHAR image[OPENNT_BASE_WORKER_IMAGE_CHARS];
 } OPENNT_BASE_MANAGEMENT_LABEL;
-typedef struct OPENNT_BASE_CONSOLE_CANDIDATE {
-    HANDLE process;
-    ULONG generation;
-    HANDLE console;
-} OPENNT_BASE_CONSOLE_CANDIDATE;
 typedef struct OPENNT_BASE_CONSOLE_CONTEXT {
     LIST_ENTRY link;
     OPENNT_BASE_CONNECTION *root; /* Removed under service lock before root free. */
@@ -177,6 +180,22 @@ static void service_delete_conrecord(OPENNT_BASE_CONRECORD *record)
     RemoveEntryList(&record->link);
     HeapFree(GetProcessHeap(),0,record);
 }
+static DWORD service_copy_execution_console_members(OPENNT_BASE_CONNECTION *destination,
+    const OPENNT_BASE_CONNECTION *source)
+{
+    DWORD *copy=NULL;
+    if (!destination || !source) return ERROR_INVALID_PARAMETER;
+    if (source->console_member_count) {
+        copy=HeapAlloc(GetProcessHeap(),0,source->console_member_count*sizeof(*copy));
+        if (!copy) return ERROR_NOT_ENOUGH_MEMORY;
+        memcpy(copy,source->console_members,source->console_member_count*sizeof(*copy));
+    }
+    if (destination->execution_console_members)
+        HeapFree(GetProcessHeap(),0,destination->execution_console_members);
+    destination->execution_console_members=copy;
+    destination->execution_console_member_count=source->console_member_count;
+    return ERROR_SUCCESS;
+}
 static void service_clear_pending_conrecord(OPENNT_BASE_CONNECTION *connection)
 {
     if (connection->pending_conrecord) {
@@ -195,6 +214,9 @@ static DWORD service_conrecord_depth(const OPENNT_BASE_CONNECTION *connection)
 {
     const LIST_ENTRY *link;
     DWORD depth=0;
+    /* One ConRecord list is the native management stack. Direct records and
+     * Job-observed descendants have distinct completion authority, but NTMON
+     * intentionally presents both as entries in this single stack. */
     for(link=connection->conrecords.Flink;link!=&connection->conrecords;link=link->Flink)
         ++depth;
     return depth;
@@ -206,22 +228,6 @@ static DWORD service_next_conrecord(OPENNT_BASE_CONNECTION *connection,DWORD *re
     if(!++connection->next_conrecord)++connection->next_conrecord;
     *request=connection->next_conrecord;
     return ERROR_SUCCESS;
-}
-static BOOL service_contains_native_member(const DWORD *member_ids,DWORD member_count,DWORD process_id)
-{
-    DWORD index;
-    for(index=0;index<member_count;++index)
-        if(member_ids[index]==process_id)return TRUE;
-    return FALSE;
-}
-static OPENNT_BASE_CONRECORD *service_find_conrecord(OPENNT_BASE_CONNECTION *connection,DWORD process_id)
-{
-    LIST_ENTRY *link;
-    for(link=connection->conrecords.Flink;link!=&connection->conrecords;link=link->Flink) {
-        OPENNT_BASE_CONRECORD *record=CONTAINING_RECORD(link,OPENNT_BASE_CONRECORD,link);
-        if(record->process_id==process_id)return record;
-    }
-    return NULL;
 }
 static void service_query_native_image(DWORD process_id,WCHAR image[OPENNT_BASE_WORKER_IMAGE_CHARS])
 {
@@ -235,37 +241,6 @@ static void service_query_native_image(DWORD process_id,WCHAR image[OPENNT_BASE_
         CloseHandle(process);
     }
     if(!image[0])lstrcpynW(image,L"<UNKNOWN>",OPENNT_BASE_WORKER_IMAGE_CHARS);
-}
-static DWORD service_sync_native_conrecords(OPENNT_BASE_CONNECTION *connection,DWORD member_count,
-    const DWORD *member_ids)
-{
-    DWORD index;
-    LIST_ENTRY *link,*next;
-    OPENNT_BASE_CONRECORD *record;
-    /* Only records which were created from a prior physical membership sample
-     * retire here.  A direct record remains until its own completion RPC,
-     * even if process exit races the next Console sample. */
-    for(link=connection->conrecords.Flink;link!=&connection->conrecords;link=next) {
-        next=link->Flink;
-        record=CONTAINING_RECORD(link,OPENNT_BASE_CONRECORD,link);
-        if(record->observed && !service_contains_native_member(member_ids,member_count,record->process_id))
-            service_delete_conrecord(record);
-    }
-    for(index=0;index<member_count;++index) {
-        DWORD process_id=member_ids[index];
-        if(!process_id || process_id==GetProcessId(connection->process.ProcessHandle))return ERROR_INVALID_DATA;
-        record=service_find_conrecord(connection,process_id);
-        if(record) {
-            service_query_native_image(process_id,record->image);
-            continue;
-        }
-        record=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*record));
-        if(!record)return ERROR_NOT_ENOUGH_MEMORY;
-        record->observed=TRUE;record->process_id=process_id;
-        service_query_native_image(process_id,record->image);
-        InsertTailList(&connection->conrecords,&record->link);
-    }
-    return ERROR_SUCCESS;
 }
 static void service_delete_frontend(OPENNT_FRONTEND_ROUTE *route)
 {
@@ -303,8 +278,6 @@ static void service_clear_frontend(OPENNT_BASE_CONNECTION *connection)
         if (caller->native_worker &&
             caller->native_root==connection->process.SequenceNumber) {
             caller->native_root=0;
-            if (caller->native_sample_epoch!=UINT64_MAX)
-                ++caller->native_sample_epoch;
         }
     }
     while (context_link!=&connection->service->console_contexts) {
@@ -674,20 +647,6 @@ OPENNT_BASE_SERVICE *OpenNtBaseServiceStart(void)
     BaseSrvVDMInit();
     return service;
 }
-BOOL OpenNtBaseServiceConfigureConsoleQuery(OPENNT_BASE_SERVICE *service,
-    OPENNT_BASE_CONSOLE_QUERY query,void *context)
-{
-    BOOL result=FALSE;
-    if (!service || !query) { SetLastError(ERROR_INVALID_PARAMETER); return FALSE; }
-    EnterCriticalSection(&service->lock);
-    if (IsListEmpty(&service->connections)) {
-        service->console_query=query;
-        service->console_query_context=context;
-        result=TRUE;
-    } else SetLastError(ERROR_BUSY);
-    LeaveCriticalSection(&service->lock);
-    return result;
-}
 BOOL OpenNtBaseServiceConfigureEmptyNotify(OPENNT_BASE_SERVICE *service,
     OPENNT_BASE_EMPTY_NOTIFY notify,void *context)
 {
@@ -724,6 +683,8 @@ BOOL OpenNtBaseServiceStop(OPENNT_BASE_SERVICE *service)
         connection=CONTAINING_RECORD(entry,OPENNT_BASE_CONNECTION,retired_link);
         if (connection->frontend_capability) CloseHandle(connection->frontend_capability);
         if (connection->frontend_state_changed) CloseHandle(connection->frontend_state_changed);
+        if (connection->console_members) HeapFree(GetProcessHeap(),0,connection->console_members);
+        if (connection->execution_console_members) HeapFree(GetProcessHeap(),0,connection->execution_console_members);
         HeapFree(GetProcessHeap(),0,connection);
     }
     DeleteCriticalSection(&service->lock);
@@ -894,7 +855,7 @@ static void service_copy_management_record(OPENNT_BASE_WORKER_WATCH *watch,
     PDOSRECORD dos,selected=NULL;
     PWOWRECORD wow,selected_wow=NULL;
     if(watch->kind==OPENNT_BASE_WORKER_NATIVE) {
-        item->kind=4u;
+        item->kind=2u; /* Win32 text worker */
         /* Execution request/member publication is a separate binding. A
          * claimed process alone is not proof of native command readiness. */
         item->state=0;
@@ -909,7 +870,7 @@ static void service_copy_management_record(OPENNT_BASE_WORKER_WATCH *watch,
                     selected_wow=wow;
             }
             if (selected_wow) {
-                item->kind=3u; /* WOW16 / Win16 worker */
+                item->kind=1u; /* WOW16 / Win16 worker */
                 item->state=selected_wow->fDispatched ? VDM_BUSY : VDM_READY;
                 item->task=selected_wow->iTask;
                 service_copy_management_image(selected_wow->lpVDMInfo,item->image);
@@ -936,7 +897,7 @@ static void service_copy_management_record(OPENNT_BASE_WORKER_WATCH *watch,
     }
     if (selected) {
         OPENNT_BASE_MANAGEMENT_LABEL *label;
-        item->kind=1u; /* DOS worker */
+        item->kind=0u; /* DOS worker */
         item->state=selected->VDMState;
         item->reserved=item->stack_depth;
         if (selected->lpVDMInfo) {
@@ -969,7 +930,9 @@ static void service_copy_conrecord(OPENNT_BASE_CONNECTION *native,
     OPENNT_BASE_CONRECORD *record=NULL;
     if (!IsListEmpty(&native->conrecords))
         record=CONTAINING_RECORD(native->conrecords.Blink,OPENNT_BASE_CONRECORD,link);
-    item->state=record ? VDM_BUSY : VDM_READY;
+    /* A Job-observed descendant remains visible in TASK/STACK, but only an
+     * admitted Direct request controls the worker's product lifecycle. */
+    item->state=native->native_inflight ? VDM_BUSY : VDM_READY;
     item->stack_depth=service_conrecord_depth(native);
     item->reserved=item->stack_depth;
     item->task=record ? record->request : 0;
@@ -998,7 +961,7 @@ DWORD OpenNtBaseServiceSnapshot(OPENNT_BASE_SERVICE *service,uint64_t *epoch,
         ZeroMemory(item,sizeof(*item));
         item->sequence=watch->process.SequenceNumber;
         item->process_id=(DWORD)(ULONG_PTR)watch->process.ClientId.UniqueProcess;
-        item->kind=watch->wow ? 3u : 1u;
+        item->kind=watch->wow ? 1u : 0u;
         item->state=watch->termination_requested ? 0x80000000u : VDM_READY;
         item->started_filetime=((uint64_t)watch->started.dwHighDateTime<<32)|watch->started.dwLowDateTime;
         service_copy_management_record(watch,item);
@@ -1162,7 +1125,11 @@ DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *service,HANDLE process,
         else (void)OpenNtBaseRemoveProcess(&service->registry,&connection->process);
     }
     LeaveCriticalSection(&service->lock);
-    if (error) HeapFree(GetProcessHeap(),0,connection);
+    if (error) {
+        if (connection->console_members) HeapFree(GetProcessHeap(),0,connection->console_members);
+        if (connection->execution_console_members) HeapFree(GetProcessHeap(),0,connection->execution_console_members);
+        HeapFree(GetProcessHeap(),0,connection);
+    }
     return error;
 }
 DWORD OpenNtBaseServiceDisconnect(OPENNT_BASE_CONNECTION *connection)
@@ -1193,6 +1160,8 @@ DWORD OpenNtBaseServiceDisconnect(OPENNT_BASE_CONNECTION *connection)
         if (connection->native_stop) CloseHandle(connection->native_stop);
         if (connection->native_closed) CloseHandle(connection->native_closed);
         if (connection->wow_start_event) CloseHandle(connection->wow_start_event);
+        if (connection->console_members) HeapFree(GetProcessHeap(),0,connection->console_members);
+        if (connection->execution_console_members) HeapFree(GetProcessHeap(),0,connection->execution_console_members);
         HeapFree(GetProcessHeap(),0,connection);
     }
     return error;
@@ -1359,7 +1328,6 @@ DWORD OpenNtBaseServiceRegisterNativeBackend(OPENNT_BASE_CONNECTION *connection,
         if(connection->native_stop && WaitForSingleObject(connection->native_stop,0)==WAIT_OBJECT_0)
             {error=ERROR_BUSY;goto done;}
     }
-    if(connection->native_sample_epoch==UINT64_MAX) {error=ERROR_ARITHMETIC_OVERFLOW;goto done;}
     if(compare(stop,closed) || compare(stop,frontend) || compare(closed,frontend))
         {error=ERROR_INVALID_PARAMETER;goto done;}
     events[0]=stop;events[1]=closed;
@@ -1379,8 +1347,7 @@ DWORD OpenNtBaseServiceRegisterNativeBackend(OPENNT_BASE_CONNECTION *connection,
         SYNCHRONIZE|EVENT_MODIFY_STATE,FALSE,0) ||
         !DuplicateHandle(GetCurrentProcess(),closed,GetCurrentProcess(),&closed_copy,SYNCHRONIZE,FALSE,0))
         {error=GetLastError();goto done;}
-    connection->native_root=root_generation;connection->native_members=MAXDWORD;
-    ++connection->native_sample_epoch;
+    connection->native_root=root_generation;
     if(connection->native_stop)CloseHandle(connection->native_stop);
     if(connection->native_closed)CloseHandle(connection->native_closed);
     connection->native_stop=stop_copy;connection->native_closed=closed_copy;
@@ -1405,50 +1372,13 @@ DWORD OpenNtBaseServiceCompleteWorkerChannel(OPENNT_BASE_CONNECTION *connection,
             if(!candidate->observed && candidate->request==request) { record=candidate;break; }
         }
         if(request && !record)error=ERROR_INVALID_STATE;
-        else if(connection->native_sample_epoch==UINT64_MAX)error=ERROR_ARITHMETIC_OVERFLOW;
-        else if(request) { service_delete_conrecord(record);--connection->native_inflight;
-            ++connection->native_sample_epoch;
+        else if(request) {
+            service_delete_conrecord(record);--connection->native_inflight;
             service_signal_frontend_states(connection->service);error=ERROR_SUCCESS; }
     }
     LeaveCriticalSection(&connection->service->lock);return error;
 }
 
-DWORD OpenNtBaseServiceNativeSampleEpoch(OPENNT_BASE_CONNECTION *connection,
-    DWORD pid,DWORD generation,uint64_t *epoch)
-{
-    DWORD error=ERROR_ACCESS_DENIED;
-    if(!epoch)return ERROR_INVALID_PARAMETER;
-    *epoch=0;if(!connection)return error;
-    EnterCriticalSection(&connection->service->lock);
-    if(OpenNtBaseServicePeer(connection,pid,generation) && connection->native_worker) {
-        if(!connection->native_sample_epoch)connection->native_sample_epoch=1;
-        *epoch=connection->native_sample_epoch;error=ERROR_SUCCESS;
-    }
-    LeaveCriticalSection(&connection->service->lock);return error;
-}
-
-DWORD OpenNtBaseServiceReportNativeBackend(OPENNT_BASE_CONNECTION *connection,
-    DWORD pid,DWORD generation,uint64_t epoch,DWORD member_count,const DWORD *member_ids)
-{
-    DWORD error=ERROR_ACCESS_DENIED;
-    if(!connection || (member_count && !member_ids))return error;
-    EnterCriticalSection(&connection->service->lock);
-    if(OpenNtBaseServicePeer(connection,pid,generation) && connection->native_worker) {
-        if(member_count>65535)error=ERROR_INVALID_DATA;
-        else if(!epoch || epoch!=connection->native_sample_epoch)error=ERROR_RETRY;
-        else {
-            /* Membership is worker truth, not a frontend-root property.  A
-             * retired root must not force a live NTCON to report a transport
-             * failure or to die with its attached native clients. */
-            connection->native_members=member_count;
-            error=service_sync_native_conrecords(connection,member_count,member_ids);
-            if(error)goto done;
-            service_signal_frontend_states(connection->service);
-        }
-    }
-done:
-    LeaveCriticalSection(&connection->service->lock);return error;
-}
 
 DWORD OpenNtBaseServiceBindNativeTarget(OPENNT_BASE_CONNECTION *connection,DWORD pid,
     DWORD generation,DWORD request,HANDLE target)
@@ -1465,12 +1395,11 @@ DWORD OpenNtBaseServiceBindNativeTarget(OPENNT_BASE_CONNECTION *connection,DWORD
             if(!record->observed && record->request==request) {
                 if(record->process_id && record->process_id!=target_pid)error=ERROR_INVALID_STATE;
                 else {
-                    OPENNT_BASE_CONRECORD *observed=service_find_conrecord(connection,target_pid);
-                    /* A sample may race CreateProcess.  Replace its temporary
-                     * observed description with the authoritative admitted
-                     * direct record; never expose one PID as two tasks. */
-                    if(observed && observed!=record && observed->observed)
-                        service_delete_conrecord(observed);
+                    /* S24 owns only direct identity and receipt.  The target
+                     * is still created suspended, so this registration occurs
+                     * before it can execute; Job-based descendant observation
+                     * is deliberately a later monitor-only S and must not
+                     * decide whether this direct command may resume. */
                     record->process_id=target_pid;
                     service_query_native_image(target_pid,record->image);
                     service_signal_frontend_states(connection->service);
@@ -1649,12 +1578,12 @@ static DWORD service_attach_frontend(OPENNT_BASE_CONNECTION *connection,
     EVENT_BASIC_INFORMATION event_info;
     LIST_ENTRY *link;
     DWORD error,flags;
-    if(connection->frontend_closing)return ERROR_PIPE_NOT_CONNECTED;
+    if(connection->frontend_closing) return ERROR_PIPE_NOT_CONNECTED;
     if (NtQueryEvent(ready,EventBasicInformation,&event_info,sizeof(event_info),NULL)<0 ||
         event_info.EventType!=NotificationEvent) { error=ERROR_INVALID_PARAMETER;goto done; }
     if (GetFileType(pipe)!=FILE_TYPE_PIPE ||
         !GetNamedPipeInfo(pipe,&flags,NULL,NULL,NULL) || (flags&PIPE_TYPE_MESSAGE)) {
-        error=ERROR_INVALID_PARAMETER; goto done;
+        error=ERROR_INVALID_PARAMETER;goto done;
     }
     link=connection->service->frontend_routes.Flink;
     while (link!=&connection->service->frontend_routes) {
@@ -1669,7 +1598,7 @@ static DWORD service_attach_frontend(OPENNT_BASE_CONNECTION *connection,
             }
             /* A live root owns presentation across nested command lifetimes.
              * Do not permit a child launcher to replace it, even after Take. */
-            error=ERROR_ALREADY_EXISTS; goto done;
+            error=ERROR_ALREADY_EXISTS;goto done;
         }
     }
     route=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*route));
@@ -1677,7 +1606,7 @@ static DWORD service_attach_frontend(OPENNT_BASE_CONNECTION *connection,
     if (!DuplicateHandle(GetCurrentProcess(),ready,GetCurrentProcess(),&route->ready,
             SYNCHRONIZE,FALSE,0)) { error=GetLastError();goto done; }
     if (!DuplicateHandle(GetCurrentProcess(),pipe,GetCurrentProcess(),&route->pipe,
-            0,FALSE,DUPLICATE_SAME_ACCESS)) { error=GetLastError(); goto done; }
+            0,FALSE,DUPLICATE_SAME_ACCESS)) { error=GetLastError();goto done; }
     if (!DuplicateHandle(GetCurrentProcess(),worker,GetCurrentProcess(),&route->worker,
             PROCESS_QUERY_LIMITED_INFORMATION|SYNCHRONIZE,FALSE,0)) { error=GetLastError();goto done; }
     route->root=connection;
@@ -1783,13 +1712,9 @@ DWORD OpenNtBaseServiceFrontendUsage(OPENNT_BASE_CONNECTION *root,DWORD pid,
         if(caller->native_activity_root==generation && caller->native_inflight &&
             WaitForSingleObject(caller->process.ProcessHandle,0)==WAIT_TIMEOUT)
             pending_count=1;
-        /* Native Console users are not DOS records. A registered backend with
-         * unknown or nonempty membership pins presentation independently of
-         * the submitting launcher's lifetime. Zero is meaningful only after
-         * the backend has explicitly reported it. */
-        if(caller->native_root==generation && caller->native_members &&
-            WaitForSingleObject(caller->process.ProcessHandle,0)==WAIT_TIMEOUT)
-            pending_count=1;
+        /* ConRecords are NTMON projection only.  In particular, a Job-observed
+         * native descendant has no receipt and cannot retain this root's
+         * frontend capability or change worker readiness. */
     }
     /* A route pins the actual selected worker, not the submitting launcher.
      * The original DOSRecord chain survives launcher disconnection. Read it
@@ -1958,11 +1883,18 @@ DWORD OpenNtBaseServiceTakeWorkerChannel(OPENNT_BASE_CONNECTION *root,DWORD pid,
         if (WaitForSingleObject(caller->process.ProcessHandle,0)!=WAIT_TIMEOUT) {
             service_clear_frontend_channel(caller);continue;
         }
-        if(caller->pending_conrecord && root->native_sample_epoch==UINT64_MAX) {error=ERROR_ARITHMETIC_OVERFLOW;goto done;}
         if(caller->pending_conrecord && (root->native_inflight==MAXDWORD ||
             (root->native_inflight && root->native_activity_root!=caller->frontend_channel_root))) {
             error=ERROR_BUSY;goto done;
         }
+        /* The caller is the direct launcher actually attached to the
+         * execution Console.  Capture its already-authenticated snapshot at
+         * command delivery, not from the frontend presenter: NTKVM may have
+         * a different private Console.  This bounded identity survives the
+         * direct launcher return solely to select the same resident NTCON on
+         * a later same-Console launch. */
+        error=service_copy_execution_console_members(root,caller);
+        if(error)goto done;
         /* The pinned sender process permits only this direct channel's finite
          * stream/capability exchange, never an arbitrary broker duplication API. */
         if (!DuplicateHandle(GetCurrentProcess(),caller->process.ProcessHandle,GetCurrentProcess(),
@@ -1980,10 +1912,8 @@ DWORD OpenNtBaseServiceTakeWorkerChannel(OPENNT_BASE_CONNECTION *root,DWORD pid,
             *request=caller->pending_conrecord->request;
             caller->pending_conrecord=NULL;
             ++root->native_inflight;
-            ++root->native_sample_epoch;
             root->native_activity_root=caller->frontend_channel_root;
         }
-        root->native_members=MAXDWORD;
         service_clear_frontend_channel(caller);
         service_signal_frontend_states(root->service);
         error=ERROR_SUCCESS;goto done;
@@ -2001,7 +1931,7 @@ done:
     return error;
 }
 
-DWORD OpenNtBaseServiceWaitWorkerChannel(OPENNT_BASE_CONNECTION *connection,DWORD pid,
+DWORD OpenNtBaseServiceGetNextNativeCommand(OPENNT_BASE_CONNECTION *connection,DWORD pid,
     DWORD generation,HANDLE *channel,HANDLE *caller_process,HANDLE *execution,HANDLE *frontend,DWORD *request)
 {
     DWORD error;
@@ -2065,7 +1995,9 @@ DWORD OpenNtBaseServiceAttachFrontendRequest(OPENNT_BASE_CONNECTION *root,DWORD 
     DWORD error=ERROR_ACCESS_DENIED;
     if (!root) return error;
     EnterCriticalSection(&root->service->lock);
-    if (!OpenNtBaseServicePeer(root,pid,generation) || !root->frontend_capability) goto done;
+    if (!OpenNtBaseServicePeer(root,pid,generation) || !root->frontend_capability) {
+        goto done;
+    }
     for(link=root->service->frontend_routes.Flink;link!=&root->service->frontend_routes;link=link->Flink) {
         OPENNT_FRONTEND_ROUTE *route=CONTAINING_RECORD(link,OPENNT_FRONTEND_ROUTE,link);
         if(route->root!=root || !route->native_worker || route->request!=request)continue;
@@ -2363,81 +2295,79 @@ BOOL OpenNtBaseServiceWorkerReservation(OPENNT_BASE_CONNECTION *connection,uint6
 static DWORD service_bind_existing_console(OPENNT_BASE_CONNECTION *connection)
 {
     OPENNT_BASE_SERVICE *service;
-    OPENNT_BASE_CONSOLE_CANDIDATE *candidates=NULL;
-    HANDLE *processes=NULL;
-    OPENNT_BASE_CONSOLE_QUERY query;
-    void *context;
-    HANDLE caller=NULL,selected=NULL;
-    BYTE *members=NULL;
-    DWORD count=0,index=0,error=0;
+    HANDLE selected=NULL;
+    DWORD index,error=0;
     LIST_ENTRY *entry;
     if (!connection) return ERROR_INVALID_PARAMETER;
     service=connection->service;
     EnterCriticalSection(&service->lock);
     if (connection->console) { LeaveCriticalSection(&service->lock); return ERROR_SUCCESS; }
+    /* The launcher itself is attached to the Console, so it reports its
+     * local member list once through the authenticated RPC connection.
+     * Match only against another live, registered connection identity;
+     * this replaces the former detached run16 probe and transfers neither a
+     * Console HANDLE nor process authority. */
     for (entry=service->connections.Flink;entry!=&service->connections;entry=entry->Flink) {
         OPENNT_BASE_CONNECTION *other=CONTAINING_RECORD(entry,OPENNT_BASE_CONNECTION,service_link);
-        if (other!=connection && other->console) ++count;
-    }
-    query=service->console_query;context=service->console_query_context;
-    if (!count) {
-        if (!++service->next_console || service->next_console==MAXDWORD) error=ERROR_ARITHMETIC_OVERFLOW;
-        else connection->console=(HANDLE)(ULONG_PTR)service->next_console;
-        LeaveCriticalSection(&service->lock);
-        return error;
-    }
-    if (!query) { LeaveCriticalSection(&service->lock); return ERROR_NOT_SUPPORTED; }
-    candidates=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,count*sizeof(*candidates));
-    processes=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,count*sizeof(*processes));
-    members=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,count);
-    if (!candidates || !processes || !members) { LeaveCriticalSection(&service->lock); error=ERROR_NOT_ENOUGH_MEMORY; goto done; }
-    if (!OpenNtBaseRetainRegisteredProcess(&service->registry,
-            (DWORD)connection->process.ClientId.UniqueProcess,connection->process.SequenceNumber,&caller)) {
-        LeaveCriticalSection(&service->lock); error=GetLastError(); goto done;
-    }
-    for (entry=service->connections.Flink;entry!=&service->connections;entry=entry->Flink) {
-        OPENNT_BASE_CONNECTION *other=CONTAINING_RECORD(entry,OPENNT_BASE_CONNECTION,service_link);
+        DWORD candidate=(DWORD)other->process.ClientId.UniqueProcess;
+        const DWORD *members=other->console_members;
+        DWORD count=other->console_member_count;
+        BOOL shared=FALSE;
         if (other==connection || !other->console) continue;
-        candidates[index].generation=other->process.SequenceNumber;
-        candidates[index].console=other->console;
-        if (!OpenNtBaseRetainRegisteredProcess(&service->registry,
-                (DWORD)other->process.ClientId.UniqueProcess,other->process.SequenceNumber,
-                &candidates[index].process)) {
-            LeaveCriticalSection(&service->lock); error=GetLastError(); goto done;
+        if (other->native_worker && other->execution_console_member_count) {
+            members=other->execution_console_members;
+            count=other->execution_console_member_count;
         }
-        processes[index]=candidates[index].process;
-        ++index;
+        for (index=0;index<connection->console_member_count;++index) {
+            DWORD member;
+            for(member=0;member<count;++member)
+                if(connection->console_members[index]==members[member]) { shared=TRUE;break; }
+            if(shared)break;
+        }
+        if(!count) {
+            for(index=0;index<connection->console_member_count;++index)
+                if(connection->console_members[index]==candidate) {shared=TRUE;break;}
+        }
+        if (!shared) continue;
+        if (selected && selected!=other->console) { error=ERROR_RETRY;break; }
+        selected=other->console;
     }
-    LeaveCriticalSection(&service->lock);
-    if (index!=count) { error=ERROR_RETRY; goto done; }
-    /* The query consumes a packed HANDLE vector, not the first field of an
-     * array whose stride also includes generation and Console identity.
-     * candidates retains ownership and the post-query identity checks. */
-    error=query(context,caller,processes,count,NULL,5000,members);
-    if (error) goto done;
-    for (index=0;index<count;++index) if (members[index]) {
-        HANDLE verified=NULL;
-        if (!OpenNtBaseRetainRegisteredProcess(&service->registry,GetProcessId(candidates[index].process),
-                candidates[index].generation,&verified)) { error=ERROR_RETRY; goto done; }
-        CloseHandle(verified);
-        if (selected && selected!=candidates[index].console) { error=ERROR_RETRY; goto done; }
-        selected=candidates[index].console;
-    }
-    EnterCriticalSection(&service->lock);
-    if (!connection->console) {
+    if (!error) {
         if (selected) connection->console=selected;
         else if (!++service->next_console || service->next_console==MAXDWORD) error=ERROR_ARITHMETIC_OVERFLOW;
         else connection->console=(HANDLE)(ULONG_PTR)service->next_console;
     }
     LeaveCriticalSection(&service->lock);
-done:
-    if (caller) CloseHandle(caller);
-    if (candidates) {
-        for (index=0;index<count;++index) if (candidates[index].process) CloseHandle(candidates[index].process);
-        HeapFree(GetProcessHeap(),0,candidates);
+    return error;
+}
+
+DWORD OpenNtBaseServiceReportConsoleMembers(OPENNT_BASE_CONNECTION *connection,
+    DWORD pid,DWORD generation,DWORD count,const DWORD *members)
+{
+    DWORD *copy=NULL,error=ERROR_ACCESS_DENIED,index;
+    if (count>4096 || (count && !members)) return ERROR_INVALID_PARAMETER;
+    if (count) {
+        copy=HeapAlloc(GetProcessHeap(),0,count*sizeof(*copy));
+        if (!copy) return ERROR_NOT_ENOUGH_MEMORY;
+        for (index=0;index<count;++index) {
+            if (!members[index]) { HeapFree(GetProcessHeap(),0,copy);return ERROR_INVALID_DATA; }
+            copy[index]=members[index];
+        }
     }
-    if (members) HeapFree(GetProcessHeap(),0,members);
-    if (processes) HeapFree(GetProcessHeap(),0,processes);
+    if (!connection) { if(copy)HeapFree(GetProcessHeap(),0,copy);return error; }
+    EnterCriticalSection(&connection->service->lock);
+    if (OpenNtBaseServicePeer(connection,pid,generation)) {
+        BOOL self=FALSE;
+        for(index=0;index<count;++index)
+            if(copy[index]==(DWORD)connection->process.ClientId.UniqueProcess) { self=TRUE;break; }
+        if (!count || self) {
+            if (connection->console_members) HeapFree(GetProcessHeap(),0,connection->console_members);
+            connection->console_members=copy;connection->console_member_count=count;copy=NULL;
+            error=ERROR_SUCCESS;
+        } else error=ERROR_INVALID_DATA;
+    }
+    LeaveCriticalSection(&connection->service->lock);
+    if(copy)HeapFree(GetProcessHeap(),0,copy);
     return error;
 }
 

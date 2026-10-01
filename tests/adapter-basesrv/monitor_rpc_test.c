@@ -119,7 +119,7 @@ static int console_context_rpc(RPC_BINDING_HANDLE binding,HANDLE self)
         RPC_CHECK(Client_SubmitWorkerChannel(binding,connection,self,generation,frontend,client,L"monitor-rpc-test.exe"),ERROR_INVALID_PARAMETER);
         /* Frontend identity alone cannot nominate an execution recipient. */
         RPC_CHECK(Client_SubmitWorkerChannel(binding,connection,self,generation,frontend,server,L"monitor-rpc-test.exe"),ERROR_NOT_READY);
-        RPC_CHECK(Client_TakeWorkerChannel(binding,connection,self,generation,&received,&sender,&context,&io,&request),ERROR_ACCESS_DENIED);
+        RPC_CHECK(Client_GetNextNativeCommand(binding,connection,self,generation,&received,&sender,&context,&io,&request),ERROR_ACCESS_DENIED);
         CHECK(!received && !sender && !context && !io);
         RPC_CHECK(Client_FrontendRequest(binding,connection,self,generation,&request,&probe),ERROR_NOT_FOUND);
         CHECK(!probe && !request && WaitForSingleObject(frontend,0)==WAIT_TIMEOUT);

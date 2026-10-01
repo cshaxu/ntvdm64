@@ -1,20 +1,20 @@
 /* Recovered from NTKVM native_console_request.c. NTCON creates the native
  * target on its own Console; the requester receives that actual process. */
 #include "execution.h"
-#include "io.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
+#include "io.h"
 #include "interface/native_launch.h"
 #include "interface/frontend_protocol.h"
 struct ntcon_executions {
     CRITICAL_SECTION lock;
-    HANDLE stop,idle;
-    DWORD active;
+    HANDLE stop,idle,broker_failed;
+    DWORD active,broker_error;
     ntcon_execution_io io;
 };
 typedef struct ntcon_execution {
     ntcon_executions *owner;
     HANDLE root_capability,pipe,sender,execution,event;
-    DWORD request;
+    DWORD request,preflight_error;
 } ntcon_execution;
 static void release_request(ntcon_execution *request)
 {
@@ -25,10 +25,31 @@ static void release_request(ntcon_execution *request)
     if(request->root_capability)CloseHandle(request->root_capability);
     HeapFree(GetProcessHeap(),0,request);
 }
+/* Before the serving thread exists, the caller still owns the broker command
+ * attachments.  Keep that common worker-base failure contract intact: the
+ * caller completes and disposes the command exactly once. */
+static void release_unstarted_request(ntcon_execution *request)
+{
+    if(!request)return;
+    request->root_capability=NULL;
+    request->pipe=NULL;
+    request->sender=NULL;
+    request->execution=NULL;
+    request->request=0;
+    release_request(request);
+}
 static void finish_request(ntcon_executions *owner)
 {
     EnterCriticalSection(&owner->lock);
     if(!--owner->active)SetEvent(owner->idle);
+    LeaveCriticalSection(&owner->lock);
+}
+void ntcon_executions_note_broker_failure(ntcon_executions *owner,DWORD error)
+{
+    if(!owner || !error)return;
+    EnterCriticalSection(&owner->lock);
+    if(!owner->broker_error)owner->broker_error=error;
+    SetEvent(owner->broker_failed);
     LeaveCriticalSection(&owner->lock);
 }
 static DWORD launch_request(ntcon_execution *request,BYTE *payload,DWORD bytes,HANDLE *target)
@@ -62,11 +83,21 @@ static DWORD launch_request(ntcon_execution *request,BYTE *payload,DWORD bytes,H
     {
         BYTE *local_payload=NULL;DWORD local_bytes=0;PROCESS_INFORMATION process={0};
         error=run16_native_launch_pack(&start,&local_payload,&local_bytes);
-        if(!error)error=run16_native_launch_start(local_payload,local_bytes,&process);
+        if(!error)error=run16_native_launch_start_suspended(local_payload,local_bytes,&process);
+        /* Bind the direct target identity before it can execute.  S24 does
+         * not assign a Job here: descendant observation is deferred and must
+         * never decide direct-command admission or completion. */
+        if(!error)error=OpenNtBaseClientBindNativeTarget(request->request,process.hProcess);
+        if(!error && ResumeThread(process.hThread)==(DWORD)-1)error=GetLastError();
         if(local_payload)HeapFree(GetProcessHeap(),0,local_payload);
         if(process.hThread)CloseHandle(process.hThread);
         if(!error)*target=process.hProcess;
-        else if(process.hProcess)CloseHandle(process.hProcess);
+        else if(process.hProcess) {
+            /* The target has not been handed off until ResumeThread succeeds.
+             * This is the one permitted startup rollback, never a tree kill. */
+            (void)TerminateProcess(process.hProcess,error ? error : ERROR_OPERATION_ABORTED);
+            CloseHandle(process.hProcess);
+        }
     }
 done:
     for(i=0;i<3;++i)if(local[i]) {
@@ -103,6 +134,14 @@ static DWORD WINAPI serve(void *context)
         else {
             error=ntcon_channel_transfer(request->pipe,request->sender,owner->stop,request->event,FALSE,payload,header.bytes);
             if(error)goto done;
+            /* The client writes its whole request before reading the reply.
+             * Consume that payload first, then return an explicit preflight
+             * failure on the established channel rather than completing the
+             * broker record and leaving run16 blocked on its reply. */
+            if(request->preflight_error) {
+                reply.error=request->preflight_error;
+                goto reply_ready;
+            }
             /* Prepare the completion export before allowing target side
              * effects. A denied export must not start an unreportable task. */
             receipt=CreateEventW(NULL,TRUE,FALSE,NULL);
@@ -114,7 +153,6 @@ static DWORD WINAPI serve(void *context)
                 bound=!reply.error;
             }
             if(!reply.error)reply.error=launch_request(request,payload,header.bytes,&target);
-            if(!reply.error)reply.error=OpenNtBaseClientBindNativeTarget(request->request,target);
             if(bound && owner->io.release_launch)owner->io.release_launch(owner->io.context);
             if(!reply.error && !DuplicateHandle(GetCurrentProcess(),target,request->sender,&remote,
                 SYNCHRONIZE|PROCESS_QUERY_LIMITED_INFORMATION,FALSE,0))reply.error=GetLastError();
@@ -122,6 +160,7 @@ static DWORD WINAPI serve(void *context)
             reply.receipt=reply.error ? 0 : (uint64_t)(ULONG_PTR)remote_receipt;
         }
     }
+reply_ready:
     error=ntcon_channel_transfer(request->pipe,request->sender,owner->stop,request->event,TRUE,&reply,sizeof(reply));
     if(error && remote) {
         HANDLE copy=NULL;
@@ -152,7 +191,10 @@ done:
     if(receipt)CloseHandle(receipt);
     if(target)CloseHandle(target);
     if(payload)HeapFree(GetProcessHeap(),0,payload);
-    (void)OpenNtBaseClientCompleteWorkerChannel(request->request);
+    {
+        DWORD completion_error=worker_base_complete_next_command(request->request);
+        if(completion_error)ntcon_executions_note_broker_failure(owner,completion_error);
+    }
     release_request(request);
     finish_request(owner);
     return error;
@@ -166,38 +208,59 @@ DWORD ntcon_executions_open(ntcon_executions **output)
     if(!owner)return ERROR_NOT_ENOUGH_MEMORY;
     owner->stop=CreateEventW(NULL,TRUE,FALSE,NULL);
     owner->idle=CreateEventW(NULL,TRUE,TRUE,NULL);
-    if(!owner->stop || !owner->idle) {
+    owner->broker_failed=CreateEventW(NULL,TRUE,FALSE,NULL);
+    if(!owner->stop || !owner->idle || !owner->broker_failed) {
         error=GetLastError();
         if(owner->stop)CloseHandle(owner->stop);
         if(owner->idle)CloseHandle(owner->idle);
+        if(owner->broker_failed)CloseHandle(owner->broker_failed);
         HeapFree(GetProcessHeap(),0,owner);return error;
     }
-    InitializeCriticalSection(&owner->lock);*output=owner;return ERROR_SUCCESS;
+    InitializeCriticalSection(&owner->lock);
+    *output=owner;return ERROR_SUCCESS;
 }
 void ntcon_executions_bind_io(ntcon_executions *owner,const ntcon_execution_io *io)
 { owner->io=*io; }
 BOOL ntcon_executions_idle(ntcon_executions *owner)
 { return WaitForSingleObject(owner->idle,0)==WAIT_OBJECT_0; }
-DWORD ntcon_execution_start(ntcon_executions *owner,HANDLE root_capability,HANDLE channel,
-    HANDLE sender,HANDLE execution,DWORD request_id)
+DWORD ntcon_executions_wait_idle(ntcon_executions *owner)
+{
+    DWORD wait,error;
+    if(!owner)return ERROR_INVALID_PARAMETER;
+    /* Do not re-enter GetNext while a serving thread still owns a request.
+     * Once that thread has released it, a latched broker failure wins over
+     * READY even if both events are signaled together. */
+    wait=WaitForSingleObject(owner->idle,INFINITE);
+    if(wait==WAIT_OBJECT_0 && WaitForSingleObject(owner->broker_failed,0)==WAIT_OBJECT_0) {
+        EnterCriticalSection(&owner->lock);error=owner->broker_error;LeaveCriticalSection(&owner->lock);
+        return error ? error : ERROR_BROKEN_PIPE;
+    }
+    return wait==WAIT_OBJECT_0 ? ERROR_SUCCESS :
+        wait==WAIT_FAILED ? GetLastError() : ERROR_OPERATION_ABORTED;
+}
+DWORD ntcon_execution_start(ntcon_executions *owner,worker_base_next_command *command,DWORD preflight_error)
 {
     ntcon_execution *request=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*request));
     DWORD error;HANDLE thread;
-    if(!request) { CloseHandle(root_capability);CloseHandle(channel);CloseHandle(sender);CloseHandle(execution);return ERROR_NOT_ENOUGH_MEMORY; }
-    request->owner=owner;request->root_capability=root_capability;
-    request->pipe=channel;request->sender=sender;request->execution=execution;
-    request->request=request_id;
+    if(!owner || !command || !command->request)return ERROR_INVALID_PARAMETER;
+    if(!request)return ERROR_NOT_ENOUGH_MEMORY;
+    request->owner=owner;request->root_capability=command->frontend;
+    request->pipe=command->channel;request->sender=command->sender;
+    request->execution=command->execution;request->request=command->request;
+    request->preflight_error=preflight_error;
     request->event=CreateEventW(NULL,TRUE,FALSE,NULL);
-    if(!request->event) { error=GetLastError();release_request(request);return error; }
+    if(!request->event) { error=GetLastError();release_unstarted_request(request);return error; }
     EnterCriticalSection(&owner->lock);
     if(WaitForSingleObject(owner->stop,0)!=WAIT_TIMEOUT) {
-        LeaveCriticalSection(&owner->lock);release_request(request);return ERROR_OPERATION_ABORTED;
+        LeaveCriticalSection(&owner->lock);release_unstarted_request(request);return ERROR_OPERATION_ABORTED;
     }
     if(!owner->active)ResetEvent(owner->idle);
     ++owner->active;
     LeaveCriticalSection(&owner->lock);
     thread=CreateThread(NULL,0,serve,request,0,NULL);
-    if(!thread) { error=GetLastError();release_request(request);finish_request(owner);return error; }
+    if(!thread) { error=GetLastError();release_unstarted_request(request);finish_request(owner);return error; }
+    /* Only the live serving thread owns these handles from this point. */
+    ZeroMemory(command,sizeof(*command));
     CloseHandle(thread);return ERROR_SUCCESS;
 }
 void ntcon_executions_close(ntcon_executions *owner)
@@ -208,6 +271,7 @@ void ntcon_executions_close(ntcon_executions *owner)
     /* Last cleanup signals idle under lock; do not destroy the lock until it
      * has finished touching the owner. No target process is terminated. */
     EnterCriticalSection(&owner->lock);LeaveCriticalSection(&owner->lock);
-    DeleteCriticalSection(&owner->lock);CloseHandle(owner->idle);CloseHandle(owner->stop);
+    DeleteCriticalSection(&owner->lock);
+    CloseHandle(owner->broker_failed);CloseHandle(owner->idle);CloseHandle(owner->stop);
     HeapFree(GetProcessHeap(),0,owner);
 }

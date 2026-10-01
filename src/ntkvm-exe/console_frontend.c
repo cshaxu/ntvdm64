@@ -335,13 +335,20 @@ DWORD run16_console_dispatch(run16_console_frontend *owner,const console_io_requ
         }
         break;
     }
-    case CONSOLE_IO_CURSOR_POSITION:
-        ok=SetConsoleCursorPosition(owner->output,position);
+    case CONSOLE_IO_CURSOR_POSITION: {
+        CONSOLE_SCREEN_BUFFER_INFO current;
+        ok=GetConsoleScreenBufferInfo(owner->output,&current);
+        if(ok && (current.dwCursorPosition.X!=position.X ||
+            current.dwCursorPosition.Y!=position.Y))
+            ok=SetConsoleCursorPosition(owner->output,position);
         break;
+    }
     case CONSOLE_IO_CURSOR_INFO: {
-        CONSOLE_CURSOR_INFO cursor;
+        CONSOLE_CURSOR_INFO cursor,current;
         cursor.dwSize=s->cursor_size; cursor.bVisible=s->cursor_visible;
-        ok=SetConsoleCursorInfo(owner->output,&cursor);
+        ok=GetConsoleCursorInfo(owner->output,&current);
+        if(ok && (current.dwSize!=cursor.dwSize || current.bVisible!=cursor.bVisible))
+            ok=SetConsoleCursorInfo(owner->output,&cursor);
         break;
     }
     case CONSOLE_IO_GET_CURSOR_INFO: {
@@ -370,9 +377,13 @@ DWORD run16_console_dispatch(run16_console_frontend *owner,const console_io_requ
         ok=ScrollConsoleScreenBufferA(owner->output,&rect,s->has_clip ? &clip : NULL,position,&fill);
         break;
     }
-    case CONSOLE_IO_ATTRIBUTE:
-        ok=SetConsoleTextAttribute(owner->output,(WORD)s->attribute);
+    case CONSOLE_IO_ATTRIBUTE: {
+        CONSOLE_SCREEN_BUFFER_INFO current;
+        ok=GetConsoleScreenBufferInfo(owner->output,&current);
+        if(ok && current.wAttributes!=(WORD)s->attribute)
+            ok=SetConsoleTextAttribute(owner->output,(WORD)s->attribute);
         break;
+    }
     case CONSOLE_IO_GET_MODE:
         ok=GetConsoleMode(s->input ? owner->input : owner->output,&mode);
         reply->state.mode=mode;
@@ -469,6 +480,10 @@ DWORD run16_console_dispatch(run16_console_frontend *owner,const console_io_requ
             if(ok) {
                 SMALL_RECT physical;
                 rect.Left=(SHORT)left;rect.Top=(SHORT)top;rect.Right=(SHORT)right;rect.Bottom=(SHORT)bottom;
+                if(owner->logical_window->Left==rect.Left &&
+                    owner->logical_window->Top==rect.Top &&
+                    owner->logical_window->Right==rect.Right &&
+                    owner->logical_window->Bottom==rect.Bottom)break;
                 /* Only the visible presenter uses pixel-derived constraints.
                  * Preserve the complete logical region independently. */
                 physical=rect;

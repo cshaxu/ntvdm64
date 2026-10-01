@@ -12,7 +12,7 @@ const source = (path) => `${root}/${path}`;
 mkdirSync(build, { recursive: true });
 writeFileSync(resolve(build, 'build.ninja'), [
   'ninja_required_version = 1.10',
-  'cflags = /nologo /TC /c /MT /W4 /WX /showIncludes',
+  'cflags = /nologo /TC /c /MT /W4 /WX /D_CRT_SECURE_NO_WARNINGS /showIncludes',
   'rule cc',
   '  command = cl.exe $cflags /Fo$out $in',
   '  deps = msvc',

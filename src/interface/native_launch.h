@@ -18,5 +18,8 @@ DWORD run16_native_launch_unpack(BYTE *,DWORD,run16_native_launch_packet *,WCHAR
 /* NTCON-owned local resource materialization, also used by run16 GUI launch.
  * No worker scheduling, Console creation or frontend ownership is involved. */
 DWORD run16_native_launch_start(BYTE *,DWORD,PROCESS_INFORMATION *);
+/* NTCON uses this exact create path to attach a direct target to its
+ * event-only Job before any target instruction can execute. */
+DWORD run16_native_launch_start_suspended(BYTE *,DWORD,PROCESS_INFORMATION *);
 
 #endif

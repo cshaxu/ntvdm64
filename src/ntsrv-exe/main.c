@@ -9,11 +9,9 @@
 #include "ntsrv-exe/transport/rpc_security.h"
 #include "opennt-abi/source/public/internal/base/inc/vdmapi.h"
 #include "ntsrv-exe/opennt/include/base_service.h"
-#include "ntsrv-exe/console_query.h"
 #include "interface/version.h"
 static broker_rpc_scope scope;
 static OPENNT_BASE_SERVICE *service;
-static WCHAR console_helper[MAX_PATH];
 static SRWLOCK idle_lock=SRWLOCK_INIT;
 static HANDLE idle_timer;
 static ULONGLONG idle_deadline;
@@ -22,24 +20,6 @@ static BOOL idle_stopping;
 #define BASESRV_EMPTY_GRACE_MS 10000u
 #define BASE_CHECK_REPLY_BYTES 40u
 #define BASE_UPDATE_REPLY_BYTES 32u
-
-static BOOL basesrv_sibling_path(PCWSTR name,PWSTR output,DWORD capacity)
-{
-    DWORD length;
-    PWSTR slash;
-    if (!name || !output || !capacity) return FALSE;
-    length=GetModuleFileNameW(NULL,output,capacity);
-    if (!length || length>=capacity || !(slash=wcsrchr(output,L'\\'))) return FALSE;
-    ++slash;
-    if ((DWORD)(slash-output)+lstrlenW(name)+1>capacity) return FALSE;
-    lstrcpyW(slash,name);
-    return TRUE;
-}
-static DWORD WINAPI basesrv_console_query(void *context,HANDLE caller,
-    const HANDLE *candidates,DWORD count,HANDLE cancel,DWORD timeout,BYTE *members)
-{
-    return app_console_query((const WCHAR *)context,caller,candidates,count,cancel,timeout,members);
-}
 
 static __declspec(noreturn) void basesrv_idle_fatal(PCSTR operation,DWORD error)
 {
@@ -263,6 +243,14 @@ error_status_t Server_Connect(handle_t binding,HANDLE process,ULONG protocol,
     }
     return status;
 }
+error_status_t Server_ReportConsoleMembers(handle_t binding,VDM_CONNECTION connection,
+    HANDLE process,ULONG generation,ULONG count,ULONG *members)
+{
+    DWORD pid;
+    RPC_STATUS status=broker_rpc_peer_process(&scope,binding,process,&pid);
+    if (status) return status;
+    return OpenNtBaseServiceReportConsoleMembers(connection,pid,generation,count,members);
+}
 error_status_t Server_BrokerProcess(handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,HANDLE *server)
 {
@@ -283,22 +271,13 @@ error_status_t Server_SubmitWorkerChannel(handle_t binding,VDM_CONNECTION connec
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
     return error ? error : OpenNtBaseServiceSubmitWorkerChannel(connection,pid,generation,capability,channel,image);
 }
-error_status_t Server_TakeWorkerChannel(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+error_status_t Server_GetNextNativeCommand(handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,HANDLE *channel,HANDLE *caller_process,HANDLE *execution,HANDLE *frontend,ULONG *request)
 {
     DWORD pid,error;
     *channel=NULL;*caller_process=NULL;*execution=NULL;*frontend=NULL;*request=0;
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    return error ? error : OpenNtBaseServiceTakeWorkerChannel(connection,pid,generation,
-        channel,caller_process,execution,frontend,request);
-}
-error_status_t Server_WaitWorkerChannel(handle_t binding,VDM_CONNECTION connection,HANDLE process,
-    ULONG generation,HANDLE *channel,HANDLE *caller_process,HANDLE *execution,HANDLE *frontend,ULONG *request)
-{
-    DWORD pid,error;
-    *channel=NULL;*caller_process=NULL;*execution=NULL;*frontend=NULL;*request=0;
-    error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    return error ? error : OpenNtBaseServiceWaitWorkerChannel(connection,pid,generation,
+    return error ? error : OpenNtBaseServiceGetNextNativeCommand(connection,pid,generation,
         channel,caller_process,execution,frontend,request);
 }
 error_status_t Server_WorkerFrontendCapability(handle_t binding,VDM_CONNECTION connection,HANDLE process,
@@ -335,22 +314,6 @@ error_status_t Server_CompleteWorkerChannel(handle_t binding,VDM_CONNECTION conn
 {
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
     return error ? error : OpenNtBaseServiceCompleteWorkerChannel(connection,pid,generation,request);
-}
-error_status_t Server_NativeSampleEpoch(handle_t binding,VDM_CONNECTION connection,HANDLE process,
-    ULONG generation,hyper *epoch)
-{
-    uint64_t value=0;DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    *epoch=0;
-    if(!error)error=OpenNtBaseServiceNativeSampleEpoch(connection,pid,generation,&value);
-    if(!error)*epoch=(hyper)value;
-    return error;
-}
-error_status_t Server_ReportNativeBackend(handle_t binding,VDM_CONNECTION connection,HANDLE process,
-    ULONG generation,hyper epoch,ULONG member_count,ULONG member_ids[])
-{
-    DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    return error ? error : OpenNtBaseServiceReportNativeBackend(connection,pid,generation,
-        (uint64_t)epoch,member_count,member_ids);
 }
 error_status_t Server_BindNativeTarget(handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,ULONG request,HANDLE target)
@@ -414,8 +377,9 @@ error_status_t Server_AttachFrontendRequest(handle_t binding,VDM_CONNECTION conn
     ULONG generation,ULONG request,HANDLE channel,HANDLE ready)
 {
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    return error ? error : OpenNtBaseServiceAttachFrontendRequest(connection,pid,generation,
-        request,channel,ready);
+    if(error) return error;
+    error=OpenNtBaseServiceAttachFrontendRequest(connection,pid,generation,request,channel,ready);
+    return error;
 }
 error_status_t Server_SelectNativeWorker(handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,HANDLE *worker)
@@ -739,14 +703,12 @@ int main(void)
     if (result) return (int)result;
     service=OpenNtBaseServiceStart();
     if (!service) return ERROR_NOT_ENOUGH_MEMORY;
-    if (!basesrv_sibling_path(L"run16.exe",console_helper,MAX_PATH) ||
-        !OpenNtBaseServiceConfigureConsoleQuery(service,basesrv_console_query,console_helper) ||
-        !OpenNtBaseServiceConfigureEmptyNotify(service,basesrv_worker_terminated,NULL)) {
+    if (!OpenNtBaseServiceConfigureEmptyNotify(service,basesrv_worker_terminated,NULL)) {
         DWORD error=GetLastError();
         (void)OpenNtBaseServiceStop(service);
         return (int)error;
     }
-    result=RpcServerRegisterIf3(Server_vdm_service_v20_0_s_ifspec,NULL,NULL,
+    result=RpcServerRegisterIf3(Server_vdm_service_v23_0_s_ifspec,NULL,NULL,
         RPC_IF_ALLOW_SECURE_ONLY | RPC_IF_ALLOW_LOCAL_ONLY,RPC_C_LISTEN_MAX_CALLS_DEFAULT,
         (unsigned)-1,authorize,NULL);
     if (!result) {
@@ -770,7 +732,7 @@ int main(void)
         if (result) basesrv_idle_fatal("RpcMgmtWaitServerListen",result);
     }
     {
-        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v20_0_s_ifspec,NULL,TRUE);
+        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v23_0_s_ifspec,NULL,TRUE);
         if (!result && cleanup) result=cleanup;
     }
     if (idle_timer) CloseHandle(idle_timer);

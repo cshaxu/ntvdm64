@@ -45,7 +45,7 @@ static DWORD environment_copy(PCWSTR source,HANDLE *capabilities,PWSTR *output)
     return ERROR_SUCCESS;
 }
 
-DWORD run16_native_launch_start(BYTE *payload,DWORD bytes,PROCESS_INFORMATION *process)
+static DWORD native_launch_start(BYTE *payload,DWORD bytes,PROCESS_INFORMATION *process,BOOL suspended)
 {
     run16_native_launch_packet header;
     WCHAR *strings[4],*environment=NULL;
@@ -91,7 +91,7 @@ DWORD run16_native_launch_start(BYTE *payload,DWORD bytes,PROCESS_INFORMATION *p
     if(used && !UpdateProcThreadAttribute(startup.lpAttributeList,0,PROC_THREAD_ATTRIBUTE_HANDLE_LIST,
         unique,used*sizeof(HANDLE),NULL,NULL)) { error=GetLastError();goto done; }
     if(!CreateProcessW(*strings[0] ? strings[0] : NULL,strings[1],NULL,NULL,used!=0,
-        CREATE_UNICODE_ENVIRONMENT|EXTENDED_STARTUPINFO_PRESENT,
+        CREATE_UNICODE_ENVIRONMENT|EXTENDED_STARTUPINFO_PRESENT|(suspended ? CREATE_SUSPENDED : 0),
         environment,strings[2],&startup.StartupInfo,process)) error=GetLastError();
 done:
     if(initialized) DeleteProcThreadAttributeList(startup.lpAttributeList);
@@ -100,3 +100,7 @@ done:
     for(i=0;i<used;++i) CloseHandle(unique[i]);
     return error;
 }
+DWORD run16_native_launch_start_suspended(BYTE *payload,DWORD bytes,PROCESS_INFORMATION *process)
+{ return native_launch_start(payload,bytes,process,TRUE); }
+DWORD run16_native_launch_start(BYTE *payload,DWORD bytes,PROCESS_INFORMATION *process)
+{ return native_launch_start(payload,bytes,process,FALSE); }

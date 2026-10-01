@@ -10,6 +10,7 @@
 #include "ntsrv-exe/transport/vdm_receipt.h"
 #include <base_client.h>
 #include <base_command.h>
+#include <base_service.h>
 #include <base_rpc_client.h>
 #include "interface/version.h" /* Shared metadata, no product behavior. */
 
@@ -39,40 +40,6 @@ static ULONG parent_receipt;
  * close it.  This is one VDM client's single ConsoleRecord wait, not a task
  * scheduler or a reusable-worker policy. */
 static HANDLE worker_wait_event;
-/* S34-only host diagnostic.  It is entirely opt-in, writes no guest Console
- * data and carries no command/handle payload: its purpose is to distinguish
- * a pre-Get worker stall from an RPC/command completion stall. */
-static void s34_trace(const char *stage,DWORD value)
-{
-    char path[MAX_PATH],line[128];
-    DWORD bytes,written;
-    HANDLE file;
-    if (!GetEnvironmentVariableA("MVDM_S34_TRACE_PATH",path,sizeof(path))) return;
-    file=CreateFileA(path,FILE_APPEND_DATA,FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,
-        OPEN_ALWAYS,FILE_ATTRIBUTE_NORMAL,NULL);
-    if (file==INVALID_HANDLE_VALUE) return;
-    bytes=(DWORD)sprintf_s(line,sizeof(line),"%lu %s %lu\r\n",
-        (unsigned long)GetCurrentProcessId(),stage,(unsigned long)value);
-    if (bytes) (void)WriteFile(file,line,bytes,&written,NULL);
-    CloseHandle(file);
-}
-static void s34_trace_command(const char *command,DWORD length)
-{
-    char path[MAX_PATH],line[320];
-    DWORD bytes,written,copy=length;
-    HANDLE file;
-    if (!GetEnvironmentVariableA("MVDM_S34_TRACE_PATH",path,sizeof(path))) return;
-    if (!command) { s34_trace("get-command-null",length); return; }
-    if (copy>240u) copy=240u;
-    file=CreateFileA(path,FILE_APPEND_DATA,FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,
-        OPEN_ALWAYS,FILE_ATTRIBUTE_NORMAL,NULL);
-    if (file==INVALID_HANDLE_VALUE) return;
-    bytes=(DWORD)sprintf_s(line,sizeof(line),"%lu get-command %.*s\r\n",
-        (unsigned long)GetCurrentProcessId(),(int)copy,command);
-    if (bytes) (void)WriteFile(file,line,bytes,&written,NULL);
-    CloseHandle(file);
-}
-
 /* Owner-approved standalone failure containment, not guest termination or
  * BaseSrv scheduling. Never reconnect a live command to a replacement server.
  * TerminateProcess avoids deadlocking in CRT/DLL teardown while other threads
@@ -270,9 +237,6 @@ static NTSTATUS get_command(PCSR_API_MSG message,ULONG length)
     ULONG reply_bytes=0;
     DWORD error=ERROR_INVALID_DATA;
     BOOL applied=FALSE;
-    s34_trace("get-enter",length);
-    s34_trace("get-state",base->u.GetNextVDMCommand.VDMState);
-    s34_trace("get-exit",base->u.GetNextVDMCommand.ExitCode);
     if (!request) request=(uint32_t)InterlockedIncrement(&request_id);
     if (length!=sizeof(BASE_GET_NEXT_VDM_COMMAND_MSG) ||
         !OpenNtBaseEncodeGetCommand(base,request,client.generation,NULL,0,&wire_bytes) ||
@@ -287,16 +251,12 @@ static NTSTATUS get_command(PCSR_API_MSG message,ULONG length)
     }
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
-    s34_trace("get-rpc",error);
     if (!error && wait_event_count<=1 && (!wait_event_count || wait_events) &&
         pipe_count<=3 && (!pipe_count || pipe_handles) &&
         file_count<=3 && (!file_count || file_handles) && reply && reply_bytes) {
         if (wait_event_count) wait_event=wait_events[0];
         applied=OpenNtBaseApplyGetCommand(reply,(uint32_t)reply_bytes,client.generation,request,base);
-        if (applied) s34_trace_command(base->u.GetNextVDMCommand.CmdLine,
-            base->u.GetNextVDMCommand.CmdLen);
     }
-    s34_trace("get-wait",wait_event ? 1u : 0u);
     if (applied) {
         base->u.GetNextVDMCommand.WaitObjectForVDM=wait_event;
         if (pipe_count || file_count) {
@@ -368,7 +328,6 @@ done:
     if (reply) MIDL_user_free(reply);
     if (wire) HeapFree(GetProcessHeap(),0,wire);
     if (error || !applied) {
-        s34_trace("get-fail",error ? error : ERROR_INVALID_DATA);
         SetLastError(error ? error : ERROR_INVALID_DATA);
         message->ReturnValue=(ULONG)STATUS_UNSUCCESSFUL;
         return STATUS_UNSUCCESSFUL;
@@ -382,7 +341,6 @@ done:
             return STATUS_UNSUCCESSFUL;
         }
     }
-    s34_trace("get-ok",pipe_count+file_count);
     return (NTSTATUS)message->ReturnValue;
 }
 
@@ -395,18 +353,15 @@ static NTSTATUS exit_command(PCSR_API_MSG message,ULONG length)
 
     if (length!=sizeof(*exit_message)) goto done;
     is_wow=exit_message->ConsoleHandle==(HANDLE)-1;
-    s34_trace("exit-enter",is_wow ? exit_message->iWowTask : 0u);
     RpcTryExcept {
         error=Client_Exit(client.binding,client.connection,client.process,client.generation,
             is_wow ? 1u : 0u,is_wow ? exit_message->iWowTask : 0u,&close_worker_wait);
     }
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
-    s34_trace("exit-rpc",error);
     if (error || close_worker_wait>1u || (close_worker_wait && !worker_wait_event)) goto done;
     exit_message->WaitObjectForVDM=close_worker_wait ? worker_wait_event : NULL;
     if (close_worker_wait) worker_wait_event=NULL;
-    s34_trace("exit-ok",close_worker_wait);
     message->ReturnValue=STATUS_SUCCESS;
     return STATUS_SUCCESS;
 done:
@@ -493,7 +448,6 @@ static NTSTATUS reenter_command(PCSR_API_MSG message,ULONG length)
     if (length!=sizeof(*reenter) ||
         (reenter->fIncDec!=INCREMENT_REENTER_COUNT &&
          reenter->fIncDec!=DECREMENT_REENTER_COUNT)) goto done;
-    s34_trace("reenter",reenter->fIncDec);
     RpcTryExcept {
         error=Client_Reenter(client.binding,client.connection,client.process,client.generation,
             reenter->fIncDec);
@@ -520,7 +474,7 @@ static DWORD classify_missing_interface(RPC_BINDING_HANDLE binding)
     RPC_STATUS status,uuid_status;
     unsigned int index;
     DWORD result=RPC_S_SERVER_UNAVAILABLE;
-    status=RpcIfInqId(Client_vdm_service_v20_0_c_ifspec,&expected);
+    status=RpcIfInqId(Client_vdm_service_v23_0_c_ifspec,&expected);
     if (status) return status;
     status=RpcMgmtInqIfIds(binding,&interfaces);
     if (status) return status;
@@ -600,6 +554,42 @@ DWORD OpenNtBaseClientConnectCurrent(void)
 done:
     if (text) RpcStringFreeW(&text);
     if (error) OpenNtBaseClientDisconnectCurrent();
+    return error;
+}
+
+DWORD OpenNtBaseClientReportCurrentConsoleMembers(void)
+{
+    DWORD capacity=32,count,error=ERROR_SUCCESS,*members=NULL;
+    if (!client.connection || !client.process) return ERROR_INVALID_STATE;
+    members=HeapAlloc(GetProcessHeap(),0,capacity*sizeof(*members));
+    if (!members) return ERROR_NOT_ENOUGH_MEMORY;
+    count=GetConsoleProcessList(members,capacity);
+    if (!count) {
+        /* A detached/GUI launcher has no Console to associate.  This is a
+         * valid empty association, not a failed broker connection and never
+         * selects an existing worker. */
+        error=GetLastError();
+        if(error==ERROR_INVALID_HANDLE) error=ERROR_SUCCESS;
+        else goto done;
+    }
+    if (count>capacity) {
+        DWORD *expanded;
+        if (count>4096 || count>MAXDWORD/sizeof(*members)) { error=ERROR_ARITHMETIC_OVERFLOW;goto done; }
+        expanded=HeapReAlloc(GetProcessHeap(),0,members,count*sizeof(*members));
+        if (!expanded) { error=ERROR_NOT_ENOUGH_MEMORY;goto done; }
+        members=expanded;capacity=count;
+        count=GetConsoleProcessList(members,capacity);
+        if (!count) { error=GetLastError();goto done; }
+        if (count>capacity) { error=ERROR_RETRY;goto done; }
+    }
+    RpcTryExcept {
+        error=Client_ReportConsoleMembers(client.binding,client.connection,client.process,
+            client.generation,count,members);
+    }
+    RpcExcept(1) { error=RpcExceptionCode(); }
+    RpcEndExcept
+done:
+    HeapFree(GetProcessHeap(),0,members);
     return error;
 }
 
@@ -734,7 +724,7 @@ DWORD OpenNtBaseClientSubmitWorkerChannel(HANDLE capability,HANDLE channel,const
     RpcEndExcept
     return error;
 }
-static DWORD client_take_channel(HANDLE *channel,HANDLE *caller_process,HANDLE *execution,HANDLE *frontend,DWORD *request,BOOL wait)
+static DWORD client_get_next_native_command(HANDLE *channel,HANDLE *caller_process,HANDLE *execution,HANDLE *frontend,DWORD *request)
 {
     DWORD error=ERROR_INVALID_STATE;
     if (!channel || !caller_process || !execution || !request) return ERROR_INVALID_PARAMETER;
@@ -742,10 +732,8 @@ static DWORD client_take_channel(HANDLE *channel,HANDLE *caller_process,HANDLE *
     if (frontend) *frontend=NULL;*request=0;
     if (!client.connection || !client.binding || !client.process) return error;
     RpcTryExcept {
-        error=wait ? Client_WaitWorkerChannel(client.binding,client.connection,client.process,
-            client.generation,channel,caller_process,execution,frontend,request) :
-            Client_TakeWorkerChannel(client.binding,client.connection,client.process,
-                client.generation,channel,caller_process,execution,frontend,request);
+        error=Client_GetNextNativeCommand(client.binding,client.connection,client.process,
+            client.generation,channel,caller_process,execution,frontend,request);
     }
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
@@ -759,15 +747,10 @@ static DWORD client_take_channel(HANDLE *channel,HANDLE *caller_process,HANDLE *
     return error;
 }
 
-DWORD OpenNtBaseClientTakeWorkerChannel(HANDLE *channel,HANDLE *caller_process,HANDLE *execution,HANDLE *frontend,DWORD *request)
+DWORD OpenNtBaseClientGetNextNativeCommand(HANDLE *channel,HANDLE *caller_process,HANDLE *execution,HANDLE *frontend,DWORD *request)
 {
     if (!frontend) return ERROR_INVALID_PARAMETER;
-    return client_take_channel(channel,caller_process,execution,frontend,request,FALSE);
-}
-DWORD OpenNtBaseClientWaitWorkerChannel(HANDLE *channel,HANDLE *caller_process,HANDLE *execution,HANDLE *frontend,DWORD *request)
-{
-    if (!frontend) return ERROR_INVALID_PARAMETER;
-    return client_take_channel(channel,caller_process,execution,frontend,request,TRUE);
+    return client_get_next_native_command(channel,caller_process,execution,frontend,request);
 }
 
 DWORD OpenNtBaseClientRegisterNativeBackend(HANDLE frontend,HANDLE stop,HANDLE closed)
@@ -788,31 +771,6 @@ DWORD OpenNtBaseClientCompleteWorkerChannel(DWORD request)
     if(!client.connection || !client.binding || !client.process)return error;
     RpcTryExcept {
         error=Client_CompleteWorkerChannel(client.binding,client.connection,client.process,client.generation,request);
-    }
-    RpcExcept(1) {error=RpcExceptionCode();}
-    RpcEndExcept
-    return error;
-}
-DWORD OpenNtBaseClientNativeSampleEpoch(uint64_t *epoch)
-{
-    hyper value=0;DWORD error=ERROR_INVALID_STATE;
-    if(!epoch)return ERROR_INVALID_PARAMETER;
-    *epoch=0;if(!client.connection || !client.binding || !client.process)return error;
-    RpcTryExcept {
-        error=Client_NativeSampleEpoch(client.binding,client.connection,client.process,client.generation,&value);
-    }
-    RpcExcept(1) {error=RpcExceptionCode();}
-    RpcEndExcept
-    if(!error)*epoch=(uint64_t)value;
-    return error;
-}
-DWORD OpenNtBaseClientReportNativeBackend(uint64_t epoch,DWORD member_count,const DWORD *member_ids)
-{
-    DWORD error=ERROR_INVALID_STATE;
-    if(!client.connection || !client.binding || !client.process || (member_count && !member_ids))return error;
-    RpcTryExcept {
-        error=Client_ReportNativeBackend(client.binding,client.connection,client.process,
-            client.generation,(hyper)epoch,member_count,(DWORD *)member_ids);
     }
     RpcExcept(1) {error=RpcExceptionCode();}
     RpcEndExcept
@@ -1087,13 +1045,6 @@ NTSTATUS NTAPI OpenNtBaseClientCallServer(PCSR_API_MSG message,
             message->ReturnValue=STATUS_UNSUCCESSFUL;
             return STATUS_UNSUCCESSFUL;
         }
-        {
-            DWORD window_pid=0;
-            HWND window=((PBASE_API_MSG)message)->u.RegisterWowExec.hwndWowExec;
-            s34_trace("register-wowexec-window",(ULONG)(ULONG_PTR)window);
-            (void)GetWindowThreadProcessId(window,&window_pid);
-            s34_trace("register-wowexec-window-pid",window_pid);
-        }
         RpcTryExcept {
             error=Client_RegisterWowExec(client.binding,client.connection,client.process,
                 client.generation,(ULONG)(ULONG_PTR)
@@ -1101,7 +1052,6 @@ NTSTATUS NTAPI OpenNtBaseClientCallServer(PCSR_API_MSG message,
         }
         RpcExcept(1) { error=RpcExceptionCode(); }
         RpcEndExcept
-        s34_trace("register-wowexec-rpc",error);
         message->ReturnValue=error ? rpc_failure(error) : STATUS_SUCCESS;
         return (NTSTATUS)message->ReturnValue;
     }

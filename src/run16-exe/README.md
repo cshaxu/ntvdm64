@@ -43,7 +43,8 @@ GUI segments do not inherit character-frontend authority; character segments
 can share their authenticated frontend without sharing completion ownership.
 
 The ntsrv client library owns the service protocol and bindings to original
-BaseSrv records. `console_probe.c` supplies its bounded private Console
-membership query; it is not an interactive frontend. Native handles remain
-local or explicitly authenticated transferred capabilities. No frame/input
-stream is relayed through the broker.
+BaseSrv records. The launcher reports the member PIDs of its own attached
+Console through that authenticated connection; BaseSrv compares the result
+only with registered connections to select an existing ConsoleRecord. Native
+handles remain local or explicitly authenticated transferred capabilities. No
+frame/input stream is relayed through the broker.

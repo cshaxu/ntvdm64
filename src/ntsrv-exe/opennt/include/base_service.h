@@ -17,10 +17,9 @@ typedef struct OPENNT_BASE_WORKER_INFO {
     uint32_t sequence;
     uint32_t kind;
     uint32_t state;
-    /* Count of broker-owned logical records currently executing or queued for
-     * this worker. DOS/WOW uses original records; native text uses CONRECORD
-     * records from direct requests and attachment observations. This is
-     * management-only metadata, not a guest-visible task ID. */
+    /* Count of management records currently executing or queued for this
+     * worker. DOS/WOW uses original records; native text uses one CONRECORD
+     * stack containing direct requests and Job-observed descendants. */
     uint32_t reserved;
     uint64_t started_filetime;
     uint32_t task;
@@ -30,14 +29,8 @@ typedef struct OPENNT_BASE_WORKER_INFO {
     uint32_t process_id;
     WCHAR image[OPENNT_BASE_WORKER_IMAGE_CHARS];
 } OPENNT_BASE_WORKER_INFO;
-/* The original service owns ConsoleRecord selection.  This callback only
- * answers membership for already authenticated, live process handles; it
- * never accepts a caller-supplied Console identity or selects a command. */
-typedef DWORD (WINAPI *OPENNT_BASE_CONSOLE_QUERY)(void *,HANDLE,const HANDLE *,DWORD,HANDLE,DWORD,BYTE *);
 OPENNT_BASE_SERVICE *OpenNtBaseServiceStart(void);
 BOOL OpenNtBaseServiceStop(OPENNT_BASE_SERVICE *);
-/* Configure before the first authenticated connection. */
-BOOL OpenNtBaseServiceConfigureConsoleQuery(OPENNT_BASE_SERVICE *,OPENNT_BASE_CONSOLE_QUERY,void *);
 BOOL OpenNtBaseServiceConfigureEmptyNotify(OPENNT_BASE_SERVICE *,OPENNT_BASE_EMPTY_NOTIFY,void *);
 /* True only when all authenticated client connections and all finite launch
  * reservations are gone.  It deliberately says nothing about a quiet but
@@ -50,6 +43,11 @@ DWORD OpenNtBaseServiceSnapshot(OPENNT_BASE_SERVICE *,uint64_t *epoch,
     OPENNT_BASE_WORKER_INFO *entries,uint32_t capacity,uint32_t *count);
 DWORD OpenNtBaseServiceTerminateWorker(OPENNT_BASE_SERVICE *,uint32_t process_id);
 DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *,HANDLE,OPENNT_BASE_CONNECTION **,DWORD *);
+/* Local Console membership is sampled only by the authenticated launcher
+ * which is actually attached to that Console.  It is a bounded selection
+ * hint for original ConsoleRecord association, never a task/worker claim. */
+DWORD OpenNtBaseServiceReportConsoleMembers(OPENNT_BASE_CONNECTION *,DWORD pid,
+    DWORD generation,DWORD count,const DWORD *members);
 /* Independent native-worker admission through the existing reservation path.
  * Execution Console binding is authenticated separately from frontend I/O. */
 DWORD OpenNtBaseServiceCreateNativeReservation(OPENNT_BASE_CONNECTION *,DWORD pid,
@@ -79,9 +77,6 @@ DWORD OpenNtBaseServiceRetainFrontendRoot(OPENNT_BASE_CONNECTION *,DWORD pid,
 DWORD OpenNtBaseServiceRegisterNativeBackend(OPENNT_BASE_CONNECTION *,DWORD pid,
     DWORD generation,HANDLE frontend,HANDLE stop,HANDLE closed);
 DWORD OpenNtBaseServiceCompleteWorkerChannel(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,DWORD request);
-DWORD OpenNtBaseServiceNativeSampleEpoch(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,uint64_t *epoch);
-DWORD OpenNtBaseServiceReportNativeBackend(OPENNT_BASE_CONNECTION *,DWORD pid,
-    DWORD generation,uint64_t epoch,DWORD member_count,const DWORD *member_ids);
 DWORD OpenNtBaseServiceBindNativeTarget(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,
     DWORD request,HANDLE target);
 /* Preserve the caller's verified execution Console across a hidden backend.
@@ -102,7 +97,7 @@ DWORD OpenNtBaseServiceSubmitWorkerChannel(OPENNT_BASE_CONNECTION *,DWORD pid,
     DWORD generation,HANDLE capability,HANDLE channel,const WCHAR image[OPENNT_BASE_WORKER_IMAGE_CHARS]);
 DWORD OpenNtBaseServiceTakeWorkerChannel(OPENNT_BASE_CONNECTION *,DWORD pid,
     DWORD generation,HANDLE *channel,HANDLE *caller_process,HANDLE *execution,HANDLE *frontend,DWORD *request);
-DWORD OpenNtBaseServiceWaitWorkerChannel(OPENNT_BASE_CONNECTION *,DWORD pid,
+DWORD OpenNtBaseServiceGetNextNativeCommand(OPENNT_BASE_CONNECTION *,DWORD pid,
     DWORD generation,HANDLE *channel,HANDLE *caller_process,HANDLE *execution,HANDLE *frontend,DWORD *request);
 /* Request identifies an authenticated connection's still-pending original
  * DOS command, not a caller-nominated worker. The root's event wakes it to

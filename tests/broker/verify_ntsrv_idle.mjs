@@ -46,7 +46,7 @@ try {
     assert.equal(buildResult.status,0,`Ninja failed: ${buildResult.error||''}; see idle-build.log`);
     const flags=`/nologo /c /MT /W4 /Gy /I obj/basesrv /I "${root}/src"`;
     compile(`cl.exe ${flags} "${root}/tests/broker/ntsrv_idle_test.c" /Foidle-test.obj`);
-    compile('link.exe /nologo /opt:ref /out:idle-test.exe idle-test.obj obj/basesrv/stub.obj obj/basesrv/console_query.obj obj/run16/support.obj opennt-base-server.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib rpcrt4.lib ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib');
+    compile('link.exe /nologo /opt:ref /out:idle-test.exe idle-test.obj obj/basesrv/stub.obj obj/run16/support.obj opennt-base-server.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib rpcrt4.lib ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib');
     compile(`cl.exe ${flags} "${root}/tests/broker/ntsrv_idle_client.c" /Foidle-client.obj`);
     compile('link.exe /nologo /opt:ref /out:idle-client.exe idle-client.obj obj/worker/stub.obj broker-transport.lib rpcrt4.lib advapi32.lib kernel32.lib');
 } finally { fs.closeSync(log); }

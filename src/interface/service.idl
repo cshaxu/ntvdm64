@@ -1,7 +1,7 @@
 import "wtypes.idl";
 [
     uuid(7d3e78bd-0472-4736-8797-e64e966d692e),
-    version(20.0),
+    version(23.0),
     pointer_default(unique)
 ]
 interface vdm_service
@@ -27,16 +27,10 @@ interface vdm_service
         [in, system_handle(sh_event)] HANDLE capability,
         [in, system_handle(sh_pipe)] HANDLE channel,
         [in] wchar_t image[260]);
-    error_status_t TakeWorkerChannel(
-        [in] handle_t binding, [in] VDM_CONNECTION connection,
-        [in, system_handle(sh_process)] HANDLE process,
-        [in] unsigned long generation,
-        [out, system_handle(sh_pipe)] HANDLE *channel,
-        [out, system_handle(sh_process)] HANDLE *caller_process,
-        [out, system_handle(sh_event)] HANDLE *execution,
-        [out, system_handle(sh_event)] HANDLE *frontend,
-        [out] unsigned long *request);
-    error_status_t WaitWorkerChannel(
+    /* Native worker's one-command blocking acquire.  This is deliberately
+     * shaped as GetNext rather than a transport wait: the recipient owns one
+     * admitted Direct command, completes it, and then acquires the next. */
+    error_status_t GetNextNativeCommand(
         [in] handle_t binding, [in] VDM_CONNECTION connection,
         [in, system_handle(sh_process)] HANDLE process,
         [in] unsigned long generation,
@@ -52,16 +46,6 @@ interface vdm_service
         [in, system_handle(sh_event)] HANDLE frontend,
         [in, system_handle(sh_event)] HANDLE stop,
         [in, system_handle(sh_event)] HANDLE closed);
-    error_status_t NativeSampleEpoch(
-        [in] handle_t binding, [in] VDM_CONNECTION connection,
-        [in, system_handle(sh_process)] HANDLE process,
-        [in] unsigned long generation, [out] hyper *epoch);
-    error_status_t ReportNativeBackend(
-        [in] handle_t binding, [in] VDM_CONNECTION connection,
-        [in, system_handle(sh_process)] HANDLE process,
-        [in] unsigned long generation, [in] hyper epoch,
-        [in] unsigned long member_count,
-        [in, size_is(member_count)] unsigned long member_ids[]);
     /* The authenticated native worker binds an admitted direct record to the
      * actual target it just created.  This is a typed process attachment,
      * never a launcher-nominated numeric PID. */
@@ -162,10 +146,9 @@ interface vdm_service
         unsigned long process_id;
         unsigned long kind;
         unsigned long state;
-        /* Logical active-task depth.  DOS/WOW derive it from their original
-         * records; native workers derive it from broker-owned CONRECORDs
-         * materialized from direct requests and authenticated attachment
-         * observations. */
+        /* Logical active-task depth. DOS/WOW derive it from their original
+         * records; native workers expose their single CONRECORD stack,
+         * including Job-observed descendants. */
         unsigned long reserved;
         hyper started_filetime;
         unsigned long task;
@@ -188,6 +171,17 @@ interface vdm_service
         [out] byte server_version[32],
         [out] VDM_CONNECTION *connection,
         [out] unsigned long *generation);
+    /* A launcher reports only the PIDs currently attached to its own
+     * Console.  BaseSrv compares this local observation with authenticated
+     * connections to choose an existing ConsoleRecord; no helper process,
+     * Console HANDLE or caller-selected worker crosses the boundary. */
+    error_status_t ReportConsoleMembers(
+        [in] handle_t binding,
+        [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [in] unsigned long member_count,
+        [in, size_is(member_count)] unsigned long member_ids[]);
     error_status_t First(
         [in] handle_t binding,
         [in] VDM_CONNECTION connection,

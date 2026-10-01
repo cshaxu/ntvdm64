@@ -308,31 +308,14 @@ DWORD run16_native_frontend_create(run16_native_frontend **output)
     }
     {
         CONSOLE_SCREEN_BUFFER_INFO info;
-        COORD capacity;
-        /* Initial logical text mode, not the monitor-constrained viewport.
-         * Existing cells/scrollback survive; subsequent worker requests own
-         * deliberate geometry changes. */
-        frontend->logical_window.Right=79;frontend->logical_window.Bottom=24;
+        /* Preserve the Console that the launcher handed over.  A worker's
+         * first explicit frame/geometry request owns any conversion; forcing
+         * 80x25 here loses scrollback and can form an invalid rectangle when
+         * the current viewport is offset. */
         if(!GetConsoleScreenBufferInfo(frontend->console_output,&info)) {
             error=GetLastError();run16_native_frontend_destroy(frontend);return error;
         }
-        capacity.X=80;capacity.Y=max(info.dwSize.Y,25);
-        if(info.srWindow.Right>=80) {
-            SMALL_RECT window=info.srWindow;
-            window.Left=0;window.Right=79;
-            if(!opennt_console_resize_grid(frontend->console_output,NULL,TRUE,&window)) {
-                error=GetLastError();run16_native_frontend_destroy(frontend);return error;
-            }
-        }
-        if((capacity.X!=info.dwSize.X || capacity.Y!=info.dwSize.Y) &&
-            !opennt_console_resize_grid(frontend->console_output,&capacity,FALSE,NULL)) {
-            error=GetLastError();run16_native_frontend_destroy(frontend);return error;
-        }
-        if(!GetConsoleScreenBufferInfo(frontend->console_output,&info)) {
-            error=GetLastError();run16_native_frontend_destroy(frontend);return error;
-        }
-        frontend->logical_window.Top=max(0,info.dwCursorPosition.Y-24);
-        frontend->logical_window.Bottom=frontend->logical_window.Top+24;
+        frontend->logical_window=info.srWindow;
     }
     if(!GetConsoleMode(frontend->console_input,&frontend->original_input_mode)) {
         error=GetLastError();run16_native_frontend_destroy(frontend);return error;

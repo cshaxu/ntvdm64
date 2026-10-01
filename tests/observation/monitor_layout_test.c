@@ -25,7 +25,7 @@ int wmain(void)
     {
         DTASKMGR_WORKER native={0};FILETIME now;WCHAR line[512];
         GetSystemTimeAsFileTime(&now);
-        native.kind=4;native.process_id=1234;
+        native.kind=2;native.process_id=1234;
         native.state=8;native.stack_depth=2;
         native.started_filetime=((uint64_t)now.dwHighDateTime<<32)|now.dwLowDateTime;
         lstrcpyW(native.image,L"ntcon.exe");
@@ -69,7 +69,7 @@ int wmain(void)
     cell(57,24,L'B',MONITOR_STATUS_ATTRIBUTE);
     for (i=0;i<24;++i) {
         items[i].process_id=i+1;
-        items[i].kind=1;
+        items[i].kind=0;
         lstrcpyW(items[i].image,L"COMMAND.COM");
     }
     for (i=0;i<200;++i) items[23].image[i]=L'X';

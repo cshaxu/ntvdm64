@@ -6,18 +6,6 @@
 #include <string.h>
 #include <wchar.h>
 
-static DWORD members(DWORD expected,DWORD pid)
-{
-    DWORD *ids=NULL,count=0,error,index;BOOL found=pid==0;
-    error=ntcon_console_members(&ids,&count);
-    if(!error) {
-        for(index=0;index<count;++index)if(ids[index]==pid)found=TRUE;
-        if(count!=expected || !found)error=ERROR_INVALID_DATA;
-    }
-    if(ids)HeapFree(GetProcessHeap(),0,ids);
-    return error;
-}
-
 static HANDLE input_signal;
 static volatile LONG input_signal_kind;
 static BOOL WINAPI input_control(DWORD event)
@@ -122,7 +110,6 @@ static int attached_client(PCWSTR self)
     PROCESS_INFORMATION child={0};STARTUPINFOW startup={sizeof(startup)};
     SECURITY_ATTRIBUTES security={sizeof(security),NULL,TRUE};WCHAR command[1024];
 #define CHECK(expression) do { if(!(expression)) {error=__LINE__;goto done;} } while(0)
-    CHECK(members(0,0)==0);
     CHECK(!GetConsoleWindow() || !IsWindowVisible(GetConsoleWindow()));
     {int input_result=input_contract();if(input_result){error=20000+input_result;goto done;}}
     output=CreateFileW(L"CONOUT$",GENERIC_READ|GENERIC_WRITE,
@@ -172,12 +159,8 @@ static int attached_client(PCWSTR self)
         (unsigned long)(ULONG_PTR)ready,(unsigned long)(ULONG_PTR)finish);
     CHECK(CreateProcessW(self,command,NULL,NULL,TRUE,0,NULL,NULL,&startup,&child));
     CHECK(WaitForSingleObject(ready,5000)==WAIT_OBJECT_0);
-    CHECK(members(1,child.dwProcessId)==0);
     CHECK(SetEvent(finish) && WaitForSingleObject(child.hProcess,5000)==WAIT_OBJECT_0);
     CHECK(GetExitCodeProcess(child.hProcess,&code) && code==73);
-    /* Process signaling and Console detach notification can be ordered separately. */
-    for(index=0;index<100 && members(0,0);++index)Sleep(10);
-    CHECK(members(0,0)==0);
     CloseHandle(child.hThread);CloseHandle(child.hProcess);ZeroMemory(&child,sizeof(child));
     ResetEvent(ready);ResetEvent(finish);
     swprintf_s(command,1024,L"\"%ls\" --spawn-peer %lx %lx",self,
@@ -186,20 +169,16 @@ static int attached_client(PCWSTR self)
     CHECK(WaitForSingleObject(ready,5000)==WAIT_OBJECT_0);
     CHECK(WaitForSingleObject(child.hProcess,5000)==WAIT_OBJECT_0);
     CHECK(GetExitCodeProcess(child.hProcess,&code) && code==73);
-    /* The direct target is gone, but its attached child still uses the same
-     * Console. This must not become an idle/retired backend. */
-    for(index=0;index<100 && members(1,0);++index)Sleep(10);
-    CHECK(members(1,0)==0);
+    /* Participant retention/order is verified by the Job event fixture,
+     * not by polling this Console. */
     CHECK(SetEvent(finish));
-    for(index=0;index<100 && members(0,0);++index)Sleep(10);
-    CHECK(members(0,0)==0);
     CloseHandle(child.hThread);CloseHandle(child.hProcess);ZeroMemory(&child,sizeof(child));
     ResetEvent(ready);ResetEvent(finish);
     swprintf_s(command,1024,L"\"%ls\" --peer %lx %lx",self,
         (unsigned long)(ULONG_PTR)ready,(unsigned long)(ULONG_PTR)finish);
     CHECK(CreateProcessW(self,command,NULL,NULL,TRUE,DETACHED_PROCESS,NULL,NULL,&startup,&child));
     CHECK(WaitForSingleObject(ready,5000)==WAIT_OBJECT_0);
-    CHECK(members(0,0)==0 && WaitForSingleObject(child.hProcess,0)==WAIT_TIMEOUT);
+    CHECK(WaitForSingleObject(child.hProcess,0)==WAIT_TIMEOUT);
     CHECK(SetEvent(finish) && WaitForSingleObject(child.hProcess,5000)==WAIT_OBJECT_0);
     CHECK(GetExitCodeProcess(child.hProcess,&code) && code==73);
 done:
@@ -250,6 +229,6 @@ done:
     if(process.hThread)CloseHandle(process.hThread);if(process.hProcess)CloseHandle(process.hProcess);
     printf("NTCON-STATE hidden-console error=%lu client-line=%lu\n",error,code);
     if(error || code)return 1;
-    puts("NTCON-STATE PASS real-cells cursor active-buffer members descendant-retention detached-survivor stale-geometry raw-cooked-input mouse-pair ctrl-c-break; protocol covered by ntcon-presentation-test");
+    puts("NTCON-STATE PASS real-cells cursor active-buffer detached-survivor stale-geometry raw-cooked-input mouse-pair ctrl-c-break; participant graph covered by ntcon-job-tracker-test");
     return 0;
 }

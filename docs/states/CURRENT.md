@@ -4,27 +4,47 @@
 
 ## Active Packet
 
-**Active: M0 T423 S25**
+**Active: M0 T423 S24 (NTCON direct-command baseline)**
 
-| Field | M0 T423 S25 — common external worker control |
+| Field | M0 T423 S24 — resident NTCON direct-command baseline |
 | --- | --- |
-| Admission | Owner authorized automatic sequential S23--S28 admission after S22. |
-| Objective | Make external control of resident NTVDM and NTCON follow one authenticated authority path without moving original DOS/WOW behavior. |
-| Boundaries | Preserve original DOS/WOW record ownership and completion. No guest/shared-lib change, helper, timer polling, tree kill or second scheduler. |
-| Reference | [S24 evidence](../etc/evidence/m0-t423-s24-native-participant-graph.md); [T423 successor plan](../proposals/proposal-kvm-window-graphics-presentation-001.md#owner-approved-successor-plan-after-s22-unified-ntvdmntcon-worker-control-plane). |
-| Required proof | Equivalent selection, stop, completion and failure behavior for both worker kinds; x86, regression, publication and governance. |
-| Assets | `build/M0-T423/S25`, `O:/winnt/Logs2`; immutable guest. |
+| Admission | Owner authorized automatic sequential successor admission after S22; the current proposal now orders S23--S29, with S25 newly assigned polling cleanup. S24 alone remains active. |
+| Objective | Deliver the bounded resident NTCON path: `READY → GetNextConsoleCommand → direct Win32 text target → direct completion → READY`, including reuse. |
+| Boundaries | Preserve original DOS/WOW record ownership and completion. No guest/shared-lib change, helper, tree kill or second scheduler. Broker completion failure must not be ignored. Owner approved retaining bounded NTCON hidden-Console output sampling after the event-source probe failed; unchanged cursor/window state must not be reapplied every sample. Job descendant observation and rich monitor call stacks are successor work, not S24 gates. |
+| Reference | [S24 evidence](../etc/evidence/m0-t423-s24-native-participant-graph.md); [replanned T423 sequence](../proposals/proposal-kvm-window-graphics-presentation-001.md#successor-s-sequence). |
+| Required proof | A coherent protocol-versioned package starts `command` and `cmd`; NTCON can receive one direct command, launch it, return its actual completion and wait ready for a subsequent direct command. |
+| Assets | `build/M0-T423/S24-helperless-clean`, `O:/winnt/Logs2`; immutable guest. |
 
 T423 仍不得自行收口。
 
-## S24 Closure Record
+## S24 Design Record
 
-Protocol 20 replaces NTCON's count-only participant report with actual Console
-member PIDs.  NTSRV now projects a typed direct target bound by NTCON itself
-and independently sampled observed members; the worker remains resident when
-that projection becomes empty.  Reservation/typed-binding, 367-check NTCON
-lifetime and empty management RPC tests pass after fresh x86 relinking.  See
-[S24 evidence](../etc/evidence/m0-t423-s24-native-participant-graph.md).
+S24 was incorrectly allowed to grow from a direct-worker baseline into a Job
+observer and monitor-projection redesign.  That expansion is frozen.  The
+already implemented Job candidate and its fixture remain retained research,
+but are neither published as the S24 product claim nor a closure prerequisite.
+The direct-command loop passed focused tests, but the first protocol-23
+publication failed owner testing: `run16 cmd` had no visible input/output and
+`cmd /c ver` produced no visible text. That package was rolled back. The
+root cause was NTCON accepting the direct command before its NTKVM presentation
+channel existed. NTCON now waits for that channel before launching an
+interactive target and releases the final presentation on completion. The
+revised seven-file package was rebuilt and published to `O:/winnt` with matching
+hashes; its real CMD prompt, input, `/c ver` output, same-Console direct reuse,
+and DOS COMMAND/MEM paths passed isolated tests. S24 remains open pending
+owner acceptance; deeper native-nested testing is not claimed as passing.
+The owner explicitly allowed the bounded hidden-Console output sampler after
+the event-source probe found no reliable notification. No new timer polling
+was added for command acquisition or completion. The pre-existing 10 ms
+startup and handoff retries remain disclosed debt for S25 by owner direction;
+S24 does not claim to have removed them. Do not describe the earlier published
+package as containing the latest candidate changes.
+
+The detached `run16 --internal-console-probe` membership helper was removed
+from the current candidate. The authenticated launcher now reports only its
+own attached-Console PID snapshot; BaseSrv intersects it with registered
+connection identities for ConsoleRecord selection. No Console handle, worker
+identity or task authority is carried by that report.
 
 ## S23 Closure Record
 
@@ -142,21 +162,7 @@ reported verification passed and explicitly directed S14 closure. Evidence:
 | --- | --- |
 | Evidence | [S14 product experience](../etc/evidence/m0-t423-s14-product-experience.md). |
 | Identifier Mode | M0 T423 S14, Ordinary Mode; closed by owner acceptance. No new S admitted. |
-| Candidate Proposal | [Console/Window proposal](../proposals/proposal-kvm-window-graphics-presentation-001.md) and [product-experience scope](../proposals/proposal-product-experience-repair-001.md). |
-| Admission And Approval | Owner admitted S14 and reported verification passed on 2026-09-29; explicitly requested S14 closure and a wait for further instruction. |
-| Objective | Deliver correct native text pointer clicks in Window, a distinct host-pointer release hotkey, and correct launcher/frontend/worker exit for direct GUI and interactive DOS/native text. |
-| Non-goals | No guest or shared-library modification, new helper, ConPTY, scheduler, GUI-window capture, arbitrary timeout or recursive process-tree kill. |
-| Reference Baseline | S13 production P1 `307c4a1b5`, closure P2 `1f22bf7ba`, coherent published eight-file O:/winnt package and 17-route Console/Window regression. |
-| Files And ABI Surface | NTKVM hotkey/pointer capture and input routing; NTCON native Console mouse translation; run16 and NTSRV/NTKVM lifecycle only where evidence identifies ownership; interface only if a copied contract needs versioning; tests and evidence. |
-| Applicable Rules | docs/README.md reading set; source-first mirror, immutable guest, x86 CCPU40, build/output hygiene and every-production-P publication gate. |
-| Verification | Reproduce `run16 command` → Window → `cmd` → modern EDIT menu click; press Ctrl+Alt+M and verify host pointer released without closing Window or injecting guest keys; test direct `run16 winmine`, `run16 notepad.exe`, and `run16 command`/`run16 cmd` then exit, with inherited versus product-owned Console distinction. Run focused negative/lifecycle tests, formal x86, DOS 17-route Console/Window and prior WOW frontiers, publish and verify all eight files. |
-| Expected Markers | Classic native clients retain mouse records; VT-input modern EDIT receives mouse character sequences and its menu responds; release hotkey leaves host pointer free and a later deliberate Window interaction recaptures as specified; GUI run16 returns without a stuck product-owned Console; interactive exits retire their correct frontend/worker resources without hanging. |
-| Asset Needs | Existing original guest/package; host modern EDIT location resolved at test time; build/M0-T423/S14 for all new intermediates, O:/winnt/tests for runtime fixtures and O:/winnt/Logs2 for logs. |
-| Reporting Requirements | Exact invocation, target path/type, Console owner, process/lifetime events, input records, observed menu behavior, exit codes, build/test/deployed hashes, residual limitations and source-diff accounting. |
-| Stop Conditions | Proven need to alter guest/shared lib, introduce a helper/second frontend owner or change original execution semantics requires owner decision; ordinary defects within approved UX/lifecycle scope remain repair work. |
-| Exit Criteria | Focused input and lifecycle probes, formal x86, full Console/Window and WOW baseline regression, coherent eight-file publication, pushed P1 `631206f9e`, owner verification, and documentation closure. T423 remains open. |
-| Original Owner Request | “准入S14” plus modern EDIT Window menu clicks, Ctrl+Alt+M releasing the mouse to host, and direct Win16/Win32 GUI plus COMMAND/CMD exit no-stuck checks. |
-| Similar-Issue Sweep | DOS vs native pointer input; click/release/focus/recapture; direct/Explorer/inherited-shell Console ownership; GUI/interactive startup, failure, cancellation and nested return. |
+| Summary | Closed; detailed scope, verification and acceptance remain in the linked S14 evidence. |
 
 ## Previous Closed Packet
 

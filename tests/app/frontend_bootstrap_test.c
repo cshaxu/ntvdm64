@@ -58,7 +58,7 @@ int wmain(int argc,WCHAR **argv)
     if(argc==2 && !wcscmp(argv[1],L"--warm-create"))return 0;
     /* A deliberately silent, live bootstrap peer. Production timeout must
      * cancel its pending read and roll back this unaccepted process only. */
-    if(argc==5 && !wcscmp(argv[1],L"--session"))return rejected_peer(
+    if(argc==7 && !wcscmp(argv[1],L"--session"))return rejected_peer(
         (HANDLE)(UINT_PTR)wcstoul(argv[2],NULL,16),(HANDLE)(UINT_PTR)wcstoul(argv[3],NULL,16));
     if(argc==2 && !wcscmp(argv[1],L"--startup-rejections")){
         static const WCHAR *modes[]={L"version",L"application",L"status",L"short",L"unregistered"};

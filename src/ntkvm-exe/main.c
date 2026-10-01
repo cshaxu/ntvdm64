@@ -3,10 +3,21 @@
 #include "native_request_protocol.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
 #include <shellapi.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 PVOID CsrPortHeap;
+static void bootstrap_trace(const char *stage,DWORD error)
+{
+    WCHAR path[MAX_PATH];char text[96];HANDLE file;DWORD count,length;
+    length=GetEnvironmentVariableW(L"NTVDM_BOOTSTRAP_TRACE",path,ARRAYSIZE(path));
+    if(!length || length>=ARRAYSIZE(path))return;
+    file=CreateFileW(path,FILE_APPEND_DATA,FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,OPEN_ALWAYS,FILE_ATTRIBUTE_NORMAL,NULL);
+    if(file==INVALID_HANDLE_VALUE)return;
+    count=(DWORD)sprintf_s(text,sizeof(text),"ntkvm %s %lu\r\n",stage,error);
+    if(count)WriteFile(file,text,count,&length,NULL);CloseHandle(file);
+}
 static DWORD session_entry(HANDLE pipe,HANDLE caller,HANDLE notification,HANDLE retire,HANDLE restored)
 {
     DWORD pid=0,error,ignored;
@@ -16,14 +27,14 @@ static DWORD session_entry(HANDLE pipe,HANDLE caller,HANDLE notification,HANDLE 
     /* The inherited process capability pins the creator; the private pipe
      * must have been created by that same process. Arguments alone grant nothing. */
     if(!GetNamedPipeServerProcessId(pipe,&pid) || !pid || pid!=GetProcessId(caller) ||
-        WaitForSingleObject(caller,0)!=WAIT_TIMEOUT)return ERROR_ACCESS_DENIED;
-    if(!AttachConsole(pid))return GetLastError();
+        WaitForSingleObject(caller,0)!=WAIT_TIMEOUT){bootstrap_trace("identity",ERROR_ACCESS_DENIED);return ERROR_ACCESS_DENIED;}
+    if(!AttachConsole(pid)){error=GetLastError();bootstrap_trace("attach",error);return error;}
     event=CreateEventW(NULL,TRUE,FALSE,NULL);
     if(!event){error=GetLastError();goto done;}
-    error=OpenNtBaseClientConnectCurrent();if(error)goto respond;
-    error=OpenNtBaseClientWatchBroker();if(error)goto respond;
-    error=OpenNtBaseClientRegisterFrontendRoot(notification);if(error)goto respond;
-    error=frontend_service_start_process(notification,notification,caller,retire,&service);if(error)goto respond;
+    error=OpenNtBaseClientConnectCurrent();if(error){bootstrap_trace("connect",error);goto respond;}
+    error=OpenNtBaseClientWatchBroker();if(error){bootstrap_trace("watch",error);goto respond;}
+    error=OpenNtBaseClientRegisterFrontendRoot(notification);if(error){bootstrap_trace("register",error);goto respond;}
+    error=frontend_service_start_process(notification,notification,caller,retire,&service);if(error){bootstrap_trace("service",error);goto respond;}
 respond:
     reply.status=error;
     {
@@ -36,6 +47,7 @@ respond:
         if(!GetExitCodeThread(frontend_service_thread(service),&ignored))error=GetLastError();
         else error=ignored;
     }else error=GetLastError();
+    bootstrap_trace("thread",error);
 done:
     {
         DWORD close_error=frontend_service_close(service),ack_error=ERROR_SUCCESS;
