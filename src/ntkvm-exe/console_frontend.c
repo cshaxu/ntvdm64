@@ -89,6 +89,11 @@ DWORD run16_console_prepare_dos(HANDLE output,SMALL_RECT *window)
     if(before.dwSize.X==size.X && before.dwSize.Y==size.Y &&
         !window->Left && !window->Top && window->Right==size.X-1 && window->Bottom==size.Y-1)
         return ERROR_SUCCESS;
+    /* ConPTY treats a one-cell viewport as a one-cell backing page. Reduce
+     * only to the target's representable viewport before resizing storage;
+     * otherwise the ordinary 30->28 DOS handoff destroys the shared grid. */
+    physical.Right=min(size.X,min(before.dwSize.X,before.dwMaximumWindowSize.X))-1;
+    physical.Bottom=min(size.Y,min(before.dwSize.Y,before.dwMaximumWindowSize.Y))-1;
     /* Reuse OpenNT ResizeScreenBuffer's no-reflow row retention. Original
      * DoFullScreenResume subsequently reads from origin and changes real VGA
      * state; never acknowledge a frame-header-only DOS mode conversion. */

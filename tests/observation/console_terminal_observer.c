@@ -87,6 +87,25 @@ static int log_contains(const char *path,const char *needle) {
     }
     CloseHandle(file);return found;
 }
+/* The first 80x28 page after native VER returns to DOS must still contain
+ * both the caller's banner and VER's output. A transient blank page is a
+ * failure even if COMMAND subsequently redraws its prompt. */
+static int s33_first_resized_page_kept_text(const char *raw_path,const char *expected) {
+    char path[MAX_PATH],line[256];FILE *file=NULL;
+    int in_page=0,banner=0,version=0;
+    if(snprintf(path,sizeof(path),"%s.cells.txt",raw_path)<=0 ||
+        fopen_s(&file,path,"r") || !file)return 0;
+    while(fgets(line,sizeof(line),file)) {
+        if(!strncmp(line,"t=",2)) {
+            if(in_page)break;
+            if(strstr(line,"buffer=80,28"))in_page=1;
+        } else if(in_page) {
+            if(strstr(line,"Microsoft(R) Windows NT DOS"))banner=1;
+            if(strstr(line,expected))version=1;
+        }
+    }
+    fclose(file);return in_page && banner && version;
+}
 
 static int guest_command_failed(const char *path) {
     return log_contains(path,"Bad command or filename") ||
@@ -155,11 +174,15 @@ int main(int argc,char **argv) {
         SetStdHandle(STD_INPUT_HANDLE,ci);SetStdHandle(STD_OUTPUT_HANDLE,co);SetStdHandle(STD_ERROR_HANDLE,co);
         CloseHandle(CreateThread(NULL,0,watch_cells,NULL,0,NULL));
         STARTUPINFOA startup={sizeof(startup)};PROCESS_INFORMATION child={0};
-        char runtime[MAX_PATH]="O:\\winnt",cmd[MAX_PATH+32];
+        char runtime[MAX_PATH]="O:\\winnt",cmd[MAX_PATH+32],system_directory[MAX_PATH];
         GetEnvironmentVariableA("TEST_RUNTIME_ROOT",runtime,sizeof(runtime));
         { char initial[MAX_PATH] = "COMMAND.COM";
           GetEnvironmentVariableA("MVDM_TEST_INITIAL_COMMAND",initial,sizeof(initial));
-          snprintf(cmd,sizeof(cmd),"%s\\run16.exe %s",runtime,initial); }
+          if(GetEnvironmentVariableA("MVDM_TEST_DIRECT_CMD",NULL,0)) {
+              if(!GetSystemDirectoryA(system_directory,sizeof(system_directory)))return 66;
+              snprintf(cmd,sizeof(cmd),"%s\\cmd.exe /d /k",system_directory);
+          }
+          else snprintf(cmd,sizeof(cmd),"%s\\run16.exe %s",runtime,initial); }
         {
             char launch[2 * MAX_PATH + 32];
             snprintf(launch,sizeof(launch),"PTY child runtime=%s command=%s\r\n",runtime,cmd);
@@ -173,7 +196,7 @@ int main(int argc,char **argv) {
     HPCON pty;
     STARTUPINFOEXA si={0};PROCESS_INFORMATION pi={0};SIZE_T bytes=0;
     COORD size;
-    if(argc!=4 && (argc!=5 || (strcmp(argv[4],"--mouse") && strcmp(argv[4],"--resize") && strcmp(argv[4],"--video-int10") && strcmp(argv[4],"--system-capability") && strcmp(argv[4],"--bios-capability") && strcmp(argv[4],"--support-capability") && strcmp(argv[4],"--disks-capability") && strcmp(argv[4],"--comms-capability") && strcmp(argv[4],"--comms-host-medium") && strcmp(argv[4],"--comms-loopback") && strcmp(argv[4],"--lpt-host-medium") && strcmp(argv[4],"--dosx-himem-capability") && strcmp(argv[4],"--pure-dos-capability") && strcmp(argv[4],"--ems-capability") && strcmp(argv[4],"--vdmredir-pipe") && strcmp(argv[4],"--vdmredir-transact") && strcmp(argv[4],"--vdmredir-call") && strcmp(argv[4],"--vdmredir-timeout") && strcmp(argv[4],"--vdmredir-async") && strcmp(argv[4],"--vdmredir-async-write") && strcmp(argv[4],"--vdmredir-mailslot") && strcmp(argv[4],"--vdmredir-terminate") && strcmp(argv[4],"--vdmredir-netbios") && strcmp(argv[4],"--vdmredir-netbios-async") && strcmp(argv[4],"--vdmredir-dlc") && strcmp(argv[4],"--vdmredir-netapi") && strcmp(argv[4],"--vdmredir-net-enum") && strcmp(argv[4],"--vdmredir-wksta") && strcmp(argv[4],"--vdmredir-wksta-set") && strcmp(argv[4],"--vdmredir-message") && strcmp(argv[4],"--vdmredir-service") && strcmp(argv[4],"--vdmredir-assign") && strcmp(argv[4],"--vdmredir-use") && strcmp(argv[4],"--vdmredir-use-info") && strcmp(argv[4],"--vdmredir-use-lifecycle"))))return 64;
+    if(argc!=4 && (argc!=5 || (strcmp(argv[4],"--s33-first-ver") && strcmp(argv[4],"--s33-first-dir") && strcmp(argv[4],"--mouse") && strcmp(argv[4],"--resize") && strcmp(argv[4],"--video-int10") && strcmp(argv[4],"--system-capability") && strcmp(argv[4],"--bios-capability") && strcmp(argv[4],"--support-capability") && strcmp(argv[4],"--disks-capability") && strcmp(argv[4],"--comms-capability") && strcmp(argv[4],"--comms-host-medium") && strcmp(argv[4],"--comms-loopback") && strcmp(argv[4],"--lpt-host-medium") && strcmp(argv[4],"--dosx-himem-capability") && strcmp(argv[4],"--pure-dos-capability") && strcmp(argv[4],"--ems-capability") && strcmp(argv[4],"--vdmredir-pipe") && strcmp(argv[4],"--vdmredir-transact") && strcmp(argv[4],"--vdmredir-call") && strcmp(argv[4],"--vdmredir-timeout") && strcmp(argv[4],"--vdmredir-async") && strcmp(argv[4],"--vdmredir-async-write") && strcmp(argv[4],"--vdmredir-mailslot") && strcmp(argv[4],"--vdmredir-terminate") && strcmp(argv[4],"--vdmredir-netbios") && strcmp(argv[4],"--vdmredir-netbios-async") && strcmp(argv[4],"--vdmredir-dlc") && strcmp(argv[4],"--vdmredir-netapi") && strcmp(argv[4],"--vdmredir-net-enum") && strcmp(argv[4],"--vdmredir-wksta") && strcmp(argv[4],"--vdmredir-wksta-set") && strcmp(argv[4],"--vdmredir-message") && strcmp(argv[4],"--vdmredir-service") && strcmp(argv[4],"--vdmredir-assign") && strcmp(argv[4],"--vdmredir-use") && strcmp(argv[4],"--vdmredir-use-info") && strcmp(argv[4],"--vdmredir-use-lifecycle"))))return 64;
     size.X=(SHORT)atoi(argv[1]);size.Y=(SHORT)atoi(argv[2]);
     if(argc==5 && !strcmp(argv[4],"--lpt-host-medium")) {
         lpt_pipe_server=CreateNamedPipeA("\\\\.\\pipe\\NTVDMLPTTEST",PIPE_ACCESS_INBOUND,PIPE_TYPE_BYTE|PIPE_WAIT,1,16,16,0,NULL);
@@ -224,6 +247,27 @@ int main(int argc,char **argv) {
       if(GetEnvironmentVariableA("MVDM_TEST_BOOT_WAIT_MS",boot_wait_text,
           sizeof(boot_wait_text))) boot_wait=(DWORD)strtoul(boot_wait_text,0,10);
       Sleep(boot_wait); }
+    if(argc==5 && (!strcmp(argv[4],"--s33-first-ver") || !strcmp(argv[4],"--s33-first-dir"))) {
+        char runtime[MAX_PATH]="O:\\winnt",launch[MAX_PATH+32];
+        int dir=!strcmp(argv[4],"--s33-first-dir");
+        DWORD wait,code=STILL_ACTIVE;
+        GetEnvironmentVariableA("TEST_RUNTIME_ROOT",runtime,sizeof(runtime));
+        snprintf(launch,sizeof(launch),"%s\\run16 command\r",runtime);
+        send_keys(launch);Sleep(3000);
+        send_keys(dir ? "dir AUTOEXEC.NT\r" : "ver\r");Sleep(7000);
+        wait=WaitForSingleObject(pi.hProcess,0);
+        send_keys("mem\r");Sleep(1500);
+        send_keys("exit\r");Sleep(1200);send_keys("exit\r");
+        WaitForSingleObject(pi.hProcess,5000);GetExitCodeProcess(pi.hProcess,&code);
+        CloseHandle(job);ClosePseudoConsole(pty);CloseHandle(write_pipe);
+        WaitForSingleObject(thread,3000);CloseHandle(raw_log);
+        { int preserved=s33_first_resized_page_kept_text(argv[3],
+              dir ? "Directory of" : "Microsoft Windows [Version");
+          int dos_alive=log_contains(argv[3],"bytes total conventional memory");
+          printf("s33-child-after-command=%lu final=%lu preserved=%d dos-alive=%d\n",
+              wait,code,preserved,dos_alive);
+          return wait==WAIT_TIMEOUT && preserved && dos_alive ? 0 : 1; }
+    }
     if(argc==5 && !strcmp(argv[4],"--video-int10")) {
         char video_command[MAX_PATH];
         if (!GetEnvironmentVariableA("MVDM_TEST_VIDEO_COMMAND",video_command,

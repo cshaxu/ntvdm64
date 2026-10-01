@@ -2,6 +2,7 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T423 S33 first-command Console preservation](evidence/m0-t423-s33-first-command-screen.md) | M0 T423 S33 | Real ConPTY blank-page root cause, bounded NTKVM resize repair, x86/product/WOW regression and published hashes. | Retain through T423 acceptance. |
 | [T423 S32 frontend-root Console identity](evidence/m0-t423-s32-frontend-console-identity.md) | M0 T423 S32 | NTKVM-root identity, NTSRV resident-worker matching, x86/product/WOW gates, published hashes and explicit legacy-fixture limits. | Retain through T423 acceptance. |
 | [T423 S31 shared Console handoff](evidence/m0-t423-s31-shared-console-handoff.md) | M0 T423 S31 | Removes startup geometry/cursor restoration, proves 80x25/28 handoff and records the published eight-file regression gates. | Retain through T423 acceptance. |
 | [T423 S30 OpenNT geometry and RPC revision](evidence/m0-t423-s30-opennt-geometry-protocol.md) | M0 T423 S30 | Restores original DOS row-selection thresholds, synchronizes MIDL 25 and records product/negative gates plus pending WOW comparison. | Retain through T423 acceptance. |

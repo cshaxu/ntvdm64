@@ -2,10 +2,34 @@
 
 ## Current Work
 
-**No active M/T/S packet.** M0 T423 S32 is closed; its
-[evidence](../etc/evidence/m0-t423-s32-frontend-console-identity.md) records
-the published protocol-25 eight-file package. T423 remains open. S33 is
-proposed but not admitted.
+## Owner Review Intermission
+
+**No active M/T/S packet.** T423 remains open pending owner review. S33 is closed and its
+[evidence](../etc/evidence/m0-t423-s33-first-command-screen.md) records the
+published protocol-25 eight-file package, first-command repair and retained
+limits. The read-only worker task-trace proposal is
+deferred to S34; it has not been admitted or implemented.
+
+## Last Closed S Brief
+
+| Field | S33 brief |
+| --- | --- |
+| Identifier Mode | M0 T423 S33, Ordinary Mode. |
+| Admission And Approval | Owner requested S33 after S32 and supplied the first concrete defect. |
+| Objective | Preserve outer CMD screen content when interactive `run16 command` runs its first command. |
+| Non-goals | No fake redraw, sleep, guest-media edit, task-trace implementation or unrelated product repair. |
+| Reference Baseline | Published S32 protocol-25 eight-file package and S32 evidence. |
+| Files And ABI Surface | Diagnose NTKVM Console/paint, NTVDM original video handoff and Run16 lifecycle; edit only the proven owner and focused tests. |
+| Applicable Rules | Execution, architecture, coding, documentation and immutable-guest source policy. |
+| Verification | Capture real Console cell/viewport/cursor transitions for `cmd.exe` 80×30 → `run16 command` → first `ver` and `dir`; x86 build, focused tests, prior DOS/native/WOW regressions. |
+| Expected Markers | First command does not spuriously clear pre-existing screen cells; authentic DOS changes and original row selection remain intact. |
+| Asset Needs | Existing S32 package, test probes and build-only outputs below `build/M0-T423/S33/`. |
+| Reporting Requirements | Identify cause, changed boundary, before/after screen evidence, regressions and package hashes. |
+| Stop Conditions | If the effect is a proved immutable original guest behavior or requires a changed product display contract, report before expanding scope. |
+| Exit Criteria | Verified no-regression x86 package published to `O:/winnt`, evidence, governance, commit and push; S33 then stops for owner review. |
+| Original Owner Request | In `cmd.exe` at about 80×30, `run16 command` appears to clear the screen on first `ver` or `dir`; fix this first. |
+| Similar-Issue Sweep | Compare first versus later commands, Console versus Window, 25/28/30-row transitions and DOS/native return. |
+| Candidate Proposal | [T423 Console/Window proposal](../proposals/proposal-kvm-window-graphics-presentation-001.md) |
 
 ## Recent M0 Closures
 
@@ -30,30 +54,31 @@ configuration were not changed.
 ## Recent Governance
 
 The T423 proposal and the S30/S31/S32 evidence ledgers retain their prior
-scope, test results and non-passes. No new S is admitted; T423 does not close
+scope, test results and non-passes. T423 does not close
 without owner acceptance.
 
-| Field | Last S29 brief |
-| --- | --- |
-| Identifier Mode | M0 T423 S29, Ordinary Mode. |
-| Admission And Approval | Owner approved automatic sequential S admission through S29; S28 reached its bounded conclusion. |
-| Objective | Whole control-plane acceptance, final divergence/diff accounting and owner handoff; keep T423 open for owner verification. |
-| Non-goals | No new product mechanism, Job-observed task authority, guest/shared-lib change or original DOS/WOW rewrite. |
-| Reference Baseline | Published S28 protocol-25 eight-file package and [S28 audit](../etc/evidence/m0-t423-s28-management-projection.md). |
-| Files And ABI Surface | Existing Run16/NTSRV/NTVDM/NTCON/NTKVM/NTMON/worker-base/interface control paths and tests. |
-| Applicable Rules | [Execution](../rules/EXECUTION.md), [Architecture](../rules/ARCHITECTURE.md), [Coding](../rules/CODING.md), [Documentation](../rules/DOCUMENT.md). |
-| Verification | Repeated reuse, direct/nested DOS/native, route/root rebind, completion, disconnect, worker death, explicit close, independent sessions and management display; full x86, 17+17 and WOW gates for any production P. |
-| Expected Markers | One NTSRV authority, original NTVDM GetNext shape, resident READY/BUSY/READY, direct receipts only for direct targets, clear non-passes. |
-| Asset Needs | Existing product and fixture graphs; new output only under `build/M0-T423/S29/`; immutable guest and `O:/winnt/Logs2`. |
-| Reporting Requirements | Final whole-plane evidence, diff/duplicate accounting, exact package hashes and owner acceptance request. |
-| Stop Conditions | Original execution rewrite, new process/scheduler or guest/shared-lib change requires owner review. |
-| Exit Criteria | S29 evidence, required runtime gates, governance and clean pushed worktree, then stop for owner acceptance without closing T423. |
-| Original Owner Request | Automatic sequential admission for remaining T423 tasks; NTCON adapts to NTVDM's original shape. |
-| Similar-Issue Sweep | Cross-worker fault/reuse symmetry, nested/independent roots, management display and retained limitations. |
+The closed S29 brief and its exact non-passes are retained in the
+[S29 acceptance ledger](../etc/evidence/m0-t423-s29-control-plane-acceptance.md).
 
-S29's [acceptance ledger](../etc/evidence/m0-t423-s29-control-plane-acceptance.md)
-records the completed control-plane gates, exact non-pass, test-only changes,
-and unchanged published package. T423 must not close without owner acceptance.
+## S32 Closure Record
+
+[S32 frontend identity evidence](../etc/evidence/m0-t423-s32-frontend-console-identity.md)
+records the published package and retained non-passes.
+
+## S31 Closure Record
+
+[S31 Console handoff evidence](../etc/evidence/m0-t423-s31-shared-console-handoff.md)
+records the retired startup-geometry restoration.
+
+## S30 Closure Record
+
+[S30 OpenNT geometry evidence](../etc/evidence/m0-t423-s30-opennt-geometry-protocol.md)
+records row selection and protocol revision.
+
+## S29 Closure Record
+
+[S29 control-plane acceptance](../etc/evidence/m0-t423-s29-control-plane-acceptance.md)
+retains the gate results and non-passes; T423 remains open.
 
 ## S28 Closure Record
 
@@ -66,6 +91,16 @@ the source/owner ledger, hashes and non-passes are in the [S28 evidence](../etc/
 
 S27/S26 owner and non-pass records remain in their indexed evidence ledgers;
 S26's Job-observed participant projection was rejected from production.
+
+## S27 Closure Record
+
+[S27 worker-control audit](../etc/evidence/m0-t423-s27-worker-control-audit.md)
+records the bounded shared-worker disposition.
+
+## S26 Closure Record
+
+[S26 Job observation disposition](../etc/evidence/m0-t423-s26-job-observation-disposition.md)
+records rejection of observed ConRecords as product authority.
 
 ## S25 Closure Record
 

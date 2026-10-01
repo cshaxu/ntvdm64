@@ -347,13 +347,15 @@ blocking get-next wait into a timed failure.
 | S30 | Restore OpenNT DOS row selection and service revision | Supersede S13's last-valid-DOS fallback. Select 80×22/25/28/43/50 with the original `calcScreenParams` integer midpoint comparisons against the native Console viewport height; retain existing row-copy and worker handoff. Synchronize `service.idl` revision 25.0 with application protocol 25, regenerate MIDL, fully relink and reject old/new protocol peers. Test every midpoint edge, 30→28, native/DOS nesting, Console/Window and previous DOS/WOW frontiers. Publish only a coherent verified eight-file package; leave T423 open for owner acceptance. |
 | S31 | Preserve final DOS Console state on frontend retirement | Remove project-added restoration of startup geometry and cursor position on ordinary root teardown; retain canonical-buffer selection, cursor shape and input-mode cleanup. Prove real 80×30→80×25/28 Console cell/cursor handoff, DOS/native regression and the complete publication gate. Delivered at `599b0b03a`. |
 | S32 | Frontend-root Console identity and worker reuse | Delivered; [evidence](../etc/evidence/m0-t423-s32-frontend-console-identity.md). NTKVM alone samples the visible Console after AttachConsole and root registration; NTSRV authenticates and owns root identity, worker selection and resident reuse. Launcher identity reporting is removed, with retained local hidden-Console/WOW checks. The original MVDM image and worker-side scheduling are unchanged. |
-| S33 | NTSRV-owned direct/observed worker task traces and NTMON detail modal | Supersede S26's rejected model of placing Observed entries in the ConRecord chain. Retain original DOS/WOW records and existing native Direct ConRecords unchanged as lifecycle/completion authority. Add an NTSRV-owned, read-only task-trace sidecar: NTSRV both collects and holds Direct nodes from its existing BaseSrv/native admission paths; NTVDM and NTCON collect Observed nodes from worker-local execution evidence and push revisioned deltas to NTSRV. `worker-base` supplies only the common worker-side copied-delta client/validation codec; `interface` owns the copied DTO/RPC declarations; NTSRV authenticates, correlates, stores and exports snapshots; NTMON opens a read-only Enter modal. NTCON may use a Job/completion port only for best-effort observed descendants; notification loss and unproved parent relations must be visible as observation gaps. NTVDM may observe original DOS entry and ordinary PDB-termination services without changing guest media; TSR and any other execution edge lacking a proved terminal event remain `unknown`/`uncertain`, not invented completions. Observed nodes never affect Direct completion, BaseSrv scheduling, READY/BUSY/EMPTY, worker selection, root retirement or worker termination. |
+| S33 | Preserve outer CMD screen on first interactive COMMAND operation | Owner inserted this S before the task-trace work. Reproduce `cmd.exe` at approximately 80×30 → `run16 command` → first `ver` or `dir`: the first command appears to clear the inherited screen. Locate the actual Console buffer/viewport/paint transition, restore the original OpenNT user-visible handoff without fake redraw or delay, and retain the S32 package as regression baseline. Additional defects require their own bounded review rather than being silently folded into this repair. |
+| S34 | NTSRV-owned direct/observed worker task traces and NTMON detail modal | Supersede S26's rejected model of placing Observed entries in the ConRecord chain. Retain original DOS/WOW records and existing native Direct ConRecords unchanged as lifecycle/completion authority. Add an NTSRV-owned, read-only task-trace sidecar: NTSRV both collects and holds Direct nodes from its existing BaseSrv/native admission paths; NTVDM and NTCON collect Observed nodes from worker-local execution evidence and push revisioned deltas to NTSRV. `worker-base` supplies only the common worker-side copied-delta client/validation codec; `interface` owns the copied DTO/RPC declarations; NTSRV authenticates, correlates, stores and exports snapshots; NTMON opens a read-only Enter modal. NTCON may use a Job/completion port only for best-effort observed descendants; notification loss and unproved parent relations must be visible as observation gaps. NTVDM may observe original DOS entry and ordinary PDB-termination services without changing guest media; TSR and any other execution edge lacking a proved terminal event remain `unknown`/`uncertain`, not invented completions. Observed nodes never affect Direct completion, BaseSrv scheduling, READY/BUSY/EMPTY, worker selection, root retirement or worker termination. |
 
 ### S32 Console identity boundary
 
 This is the owner-inserted next S after delivered S31. The current T423 S
 table had no pre-existing S32 or higher row to renumber; any later admitted
-continuation begins at S33 rather than reusing this identifier.
+continuation begins at S33 rather than reusing this identifier. The owner later
+inserted a bounded product-repair S33; the task-trace proposal moved to S34.
 
 The preceding S30 already synchronized `APP_PROTOCOL_VERSION=25` and
 `service.idl` `version(25.0)`. S32 must regenerate MIDL, confirm the generated
@@ -396,9 +398,9 @@ local hidden-Console resume and WOW detach, then x86/MIDL/focused RPC,
 the coherent eight-file package only after no regression, then commit and
 push. The authoritative S admission and progress remain in CURRENT.
 
-### S33 task prompt: NTSRV-owned direct/observed task traces
+### S34 task prompt: NTSRV-owned direct/observed task traces
 
-Implement this only after S32 closes and the owner admits S33. Preserve
+Implement this only after S33 closes and the owner admits S34. Preserve
 unrelated work and do not change guest media or the original OpenNT DOS/WOW
 record definitions, list ownership, scheduling, completion, parent-wait or
 worker-reuse semantics.
