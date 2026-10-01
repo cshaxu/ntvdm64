@@ -263,10 +263,11 @@ delivery as non-guaranteed, including these process messages. Thus this path
 cannot make NTSRV the authority for a complete native descendant graph, and a
 missing message cannot truthfully be treated as an exit or readiness proof.
 The implementation must not make an observed child control `BUSY`/`EMPTY`, and
-does not claim that no short-lived participant can be missed. The owner accepts
-this bounded, NTSRV-held native participant projection in preference to guest
-PSP sampling; no replacement event source is assumed complete merely because
-it is kernel-adjacent.
+does not claim that no short-lived participant can be missed. The owner
+admitted research into this bounded native projection in preference to guest
+PSP sampling; S26 subsequently rejected production admission after auditing
+delivery and callback lifetime. No event source becomes complete merely
+because it is kernel-adjacent.
 
 The original BaseSrv boundary is narrower: it owns DOS/WOW records and their
 VDM command/wait lifecycle, not an arbitrary Win32 native descendant graph.
@@ -275,7 +276,7 @@ direct NTCON request only, while Windows retains native descendant waits and
 exit propagation. A best-effort observed projection may aid diagnostics but
 must not become a hidden task scheduler or lifecycle authority.
 
-The retained candidate removes `GetConsoleProcessList` from NTCON participant management
+The retained research candidate removes `GetConsoleProcessList` from NTCON participant management
 entirely: no sampling thread, Console-membership RPC, epoch or fallback
 ConRecord source remains. An externally attached process is outside the
 managed NTCON job/session and is not represented as a product task. Other
@@ -349,7 +350,8 @@ not defer its own worker-control edge merely because a later S has an
 integration matrix.  Every production P retains the existing formal x86 build,
 established DOS routes, WOW frontier non-regression, coherent package
 publication and governance gates. S24 and S25 have closed with their verified
-direct-command and native-nesting baselines; S26 is active. S29 hands T423 to the owner for acceptance rather than
+direct-command and native-nesting baselines; S26 rejected the Job projection
+after its bounded audit, and S27 is active. S29 hands T423 to the owner for acceptance rather than
 closing it automatically. S22 closed with an evidenced target terminal-
 capability limitation, not a renderer repair.
 

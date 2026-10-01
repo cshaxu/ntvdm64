@@ -1400,7 +1400,7 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build ntcon-execution-lifetime-test.exe: frontend_link obj/tests/ntcon_execution_lifetime.obj obj/ntcon/execution.obj obj/ntcon/channel_io.obj obj/ntcon/launch.obj obj/ntcon/launch_packet.obj')
     $graph.Add('build obj/tests/ntsrv_native_job_tracker.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/ntsrv_native_job_tracker_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build obj/tests/native_job_tracker_research.obj: cc ' + (NinjaPath (Join-Path $root 'src/ntsrv-exe/transport/native_job_tracker.c')))
+    $graph.Add('build obj/tests/native_job_tracker_research.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/native_job_tracker_research.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build ntsrv-native-job-tracker-test.exe: console_test_link obj/tests/ntsrv_native_job_tracker.obj obj/tests/native_job_tracker_research.obj')
     $graph.Add('build obj/tests/ntcon_surviving_client.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/ntcon_surviving_client_test.c')))

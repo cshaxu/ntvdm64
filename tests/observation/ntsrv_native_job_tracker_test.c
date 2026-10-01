@@ -1,6 +1,6 @@
 #include <windows.h>
 #include <stdio.h>
-#include "ntsrv-exe/transport/native_job_tracker.h"
+#include "native_job_tracker_research.h"
 
 typedef struct JOB_TEST_STATE {
     HANDLE created,exited,empty;

@@ -4,29 +4,37 @@
 
 ## Active Packet
 
-**Active: M0 T423 S26 — Observed ConRecord research and bounded Job projection**
+**Active: M0 T423 S27 — unified external worker control plane**
 
-| Field | S26 brief |
+| Field | S27 brief |
 | --- | --- |
-| Identifier Mode | M0 T423 S26, Ordinary Mode. |
-| Admission And Approval | Owner authorized automatic sequential S admission through S29; S25's verified package has been published. |
-| Objective | Reassess the retained non-product Job candidate against the verified direct-worker baseline and decide whether a bounded best-effort Observed ConRecord projection is justified. |
-| Non-goals | No observed event may own direct completion, READY/EMPTY, shutdown or scheduling; no new helper process, guest/shared-lib change, or substitute for Windows target exit semantics. |
-| Reference Baseline | S25 protocol-24 eight-file package at `O:/winnt`; [S25 evidence](../etc/evidence/m0-t423-s25-native-nesting-wait.md). |
-| Files And ABI Surface | NTSRV ConRecord and retained Job candidate; NTCON event owner; copied interface/worker-base contract only if proved; NTMON stays a read-only projection. |
+| Identifier Mode | M0 T423 S27, Ordinary Mode. |
+| Admission And Approval | Owner approved automatic sequential S admission through S29; S26 reached its bounded conclusion. |
+| Objective | Audit and converge identical project-added worker admission, registration, direct command/receipt, route release, disconnect, close and death handling without changing original DOS/WOW execution. |
+| Non-goals | No NTVDM-to-NTCON shape conversion, new scheduler/helper, guest/shared-lib change or Job-observed task authority. |
+| Reference Baseline | Published S25 protocol-24 eight-file package and [S26 disposition](../etc/evidence/m0-t423-s26-job-observation-disposition.md). |
+| Files And ABI Surface | Run16, NTSRV, NTVDM, NTCON, NTKVM, NTMON, `worker-base` and `interface` external control paths. |
 | Applicable Rules | [Execution](../rules/EXECUTION.md), [Architecture](../rules/ARCHITECTURE.md), [Coding](../rules/CODING.md), [Documentation](../rules/DOCUMENT.md). |
-| Verification | Test Job event completeness and limitations for short-lived descendants, PID reuse, residual members and external AttachConsole; verify observation cannot change direct receipts or worker lifecycle. Any production P still needs full x86/DOS/Window/WOW gates and coherent publication. |
-| Expected Markers | Explicit admit-or-reject decision with positive and negative evidence; if admitted, bounded Observed projection only, with missed-event contract and no new scheduling authority. |
-| Asset Needs | Retained S24 Job candidate and fixtures; new outputs only under `build/M0-T423/S26/`; immutable guest and `O:/winnt/Logs2`. |
-| Reporting Requirements | Candidate provenance, event coverage/limitations, product-link disposition, monitor semantics and exact regression results. |
-| Stop Conditions | A requirement for Job-based termination or completion authority, new process, guest change or original-logic rewrite needs owner review. |
-| Exit Criteria | Decide and implement the bounded Observed disposition, remove dead candidate code, prove direct lifecycle independence, and satisfy build/publication/governance/commit/push gates for any production change. |
-| Original Owner Request | Automatic sequential admission for all remaining T423 S tasks after S25. |
-| Similar-Issue Sweep | Job event loss, PID reuse, direct/observed ordering, residual descendants, independent roots and explicit close. |
+| Verification | Focused normal/failure/reuse and DOS↔native handoff tests; every production P also needs formal x86, 17+17, WOW frontiers and coherent package publication. |
+| Expected Markers | One authoritative external path per shared action, with explicit worker-local differences and no original mirror expansion. |
+| Asset Needs | Existing product and fixture graphs; new output only under `build/M0-T423/S27/`; immutable guest and `O:/winnt/Logs2`. |
+| Reporting Requirements | Source/owner ledger, removed duplication, retained distinctions, failure evidence, hashes and non-passes. |
+| Stop Conditions | Original execution rewrite, new process/scheduler or guest/shared-lib change requires owner review. |
+| Exit Criteria | Shared paths truly selected, old duplicates removed, required runtime gates passed, eight-file package published, governance and clean pushed worktree. |
+| Original Owner Request | Automatic sequential admission for remaining T423 tasks; NTCON adapts to NTVDM's original shape. |
+| Similar-Issue Sweep | Admission, dispatch, receipt, rebind, disconnect, failure, close and independent roots. |
 
 T423 remains open and must not close without owner acceptance. See the
-[S26 sequence](../proposals/proposal-kvm-window-graphics-presentation-001.md#successor-s-sequence)
-and [S25 evidence](../etc/evidence/m0-t423-s25-native-nesting-wait.md).
+[S27 sequence](../proposals/proposal-kvm-window-graphics-presentation-001.md#successor-s-sequence).
+
+## S26 Closure Record
+
+The Job candidate passed three local event/close fixtures but Windows does
+not guarantee ordinary completion-port messages, and this candidate has an
+unprotected asynchronous connection pointer. S26 rejected product admission,
+moved the unlinked candidate into isolated test research, and retained only
+Direct ConRecords in production. No product artifact changed or was republished.
+[Decision and exact evidence](../etc/evidence/m0-t423-s26-job-observation-disposition.md).
 
 ## S25 Closure Record
 
