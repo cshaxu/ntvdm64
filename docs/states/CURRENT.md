@@ -4,61 +4,66 @@
 
 ## Active Packet
 
-**Active: M0 T423 S25 — native-nested timeout and project-owned wait cleanup**
+**Active: M0 T423 S26 — Observed ConRecord research and bounded Job projection**
 
-| Field | S25 brief |
+| Field | S26 brief |
 | --- | --- |
-| Identifier Mode | M0 T423 S25, Ordinary Mode. |
-| Admission And Approval | Owner explicitly admitted S25 after accepting S24's baseline and transferring the deeper native-nested timeout. |
-| Objective | Diagnose and repair the real nested native batch timeout; bound startup/handoff and eliminate its unnecessary timer retries without changing resident get-next semantics. |
-| Non-goals | No Job graph, helper process, new scheduler, guest/shared-lib mutation, or speculative removal of the owner-accepted hidden-Console output sampler. |
-| Reference Baseline | S24 protocol-23 seven-file package at `O:/winnt`; [S24 evidence](../etc/evidence/m0-t423-s24-native-participant-graph.md). |
-| Files And ABI Surface | Run16/NTCON/NTVDM/NTKVM/NTSRV wait and notification owners; `interface`/`worker-base` only for a proved shared copied contract; focused tests. |
+| Identifier Mode | M0 T423 S26, Ordinary Mode. |
+| Admission And Approval | Owner authorized automatic sequential S admission through S29; S25's verified package has been published. |
+| Objective | Reassess the retained non-product Job candidate against the verified direct-worker baseline and decide whether a bounded best-effort Observed ConRecord projection is justified. |
+| Non-goals | No observed event may own direct completion, READY/EMPTY, shutdown or scheduling; no new helper process, guest/shared-lib change, or substitute for Windows target exit semantics. |
+| Reference Baseline | S25 protocol-24 eight-file package at `O:/winnt`; [S25 evidence](../etc/evidence/m0-t423-s25-native-nesting-wait.md). |
+| Files And ABI Surface | NTSRV ConRecord and retained Job candidate; NTCON event owner; copied interface/worker-base contract only if proved; NTMON stays a read-only projection. |
 | Applicable Rules | [Execution](../rules/EXECUTION.md), [Architecture](../rules/ARCHITECTURE.md), [Coding](../rules/CODING.md), [Documentation](../rules/DOCUMENT.md). |
-| Verification | Reproduce the nested timeout with captured output and process/receipt state; focused lost-wake, deadline, fault and worker-reuse tests; full x86, DOS, Window and WOW non-regression plus coherent package publication for each production P. |
-| Expected Markers | Nested native chain terminates with true target results and visible output; no accepted request is replayed; stuck startup fails within its deadline; resident idle workers still block normally. |
-| Asset Needs | Existing `build/M0-T423/S24-helperless-clean` cache and test scripts; new outputs only under `build/M0-T423/S25/`; immutable guest and `O:/winnt/Logs2`. |
-| Reporting Requirements | Timer inventory and retain/replace decisions; root cause, test commands/results, package hashes and remaining limits in indexed evidence. |
-| Stop Conditions | A required new process, scheduler, guest change, or unapproved original-logic alteration needs owner review; ordinary failures remain S25 repair work. |
-| Exit Criteria | Nested native timeout fixed and regression-tested; owned waits bounded/notified where promised; accepted S24 behavior preserved; formal build, publication, governance, commit and push complete. |
-| Original Owner Request | “好，准入S25”; preceding owner direction assigns the deeper native nested batch timeout to this S. |
-| Similar-Issue Sweep | Run16 reserve/submit, NTCON I/O admission, NTVDM activation, NTKVM teardown, and other classified project-owned timers. |
+| Verification | Test Job event completeness and limitations for short-lived descendants, PID reuse, residual members and external AttachConsole; verify observation cannot change direct receipts or worker lifecycle. Any production P still needs full x86/DOS/Window/WOW gates and coherent publication. |
+| Expected Markers | Explicit admit-or-reject decision with positive and negative evidence; if admitted, bounded Observed projection only, with missed-event contract and no new scheduling authority. |
+| Asset Needs | Retained S24 Job candidate and fixtures; new outputs only under `build/M0-T423/S26/`; immutable guest and `O:/winnt/Logs2`. |
+| Reporting Requirements | Candidate provenance, event coverage/limitations, product-link disposition, monitor semantics and exact regression results. |
+| Stop Conditions | A requirement for Job-based termination or completion authority, new process, guest change or original-logic rewrite needs owner review. |
+| Exit Criteria | Decide and implement the bounded Observed disposition, remove dead candidate code, prove direct lifecycle independence, and satisfy build/publication/governance/commit/push gates for any production change. |
+| Original Owner Request | Automatic sequential admission for all remaining T423 S tasks after S25. |
+| Similar-Issue Sweep | Job event loss, PID reuse, direct/observed ordering, residual descendants, independent roots and explicit close. |
 
 T423 remains open and must not close without owner acceptance. See the
-[S25 sequence](../proposals/proposal-kvm-window-graphics-presentation-001.md#successor-s-sequence)
-and [live evidence](../etc/evidence/m0-t423-s25-native-nesting-wait.md).
+[S26 sequence](../proposals/proposal-kvm-window-graphics-presentation-001.md#successor-s-sequence)
+and [S25 evidence](../etc/evidence/m0-t423-s25-native-nesting-wait.md).
+
+## S25 Closure Record
+
+The native-nested timeout was caused by NTCON waiting for its earlier direct
+CMD target to finish before returning to GetNext, while that CMD waited for
+an inner Run16 request. NTCON now accepts authenticated nested direct commands
+without making original NTVDM scheduling adapt to NTCON. Startup/handoff
+selection has per-launcher state notification and a 10-second deadline;
+NTCON I/O admission and NTVDM frontend binding no longer retry on unbounded
+10-ms readiness timers. NTKVM channel stop has a bounded 10-second join and
+preserves borrowed storage on timeout. The concurrent root-Console geometry
+restoration change was reviewed and tested with this package.
+
+The x86 build, 17 Console and 17 Window cases, WOW depth, lifetime/fault
+fixtures, nested return, concurrent roots and death/timeout negatives passed.
+The verified protocol-24 eight-file
+package was published to `O:/winnt` and passed post-publication native/DOS
+smoke checks. The strict extra final-screen-history check still fails after
+OpenNT-style DOS buffer shrinking; it has no passing S24 baseline, is not
+counted as a pass, and is retained for S29 owner audit rather than changing
+the original fixed-row resize contract inside S25. Full evidence and hashes:
+[S25 record](../etc/evidence/m0-t423-s25-native-nesting-wait.md).
 
 ## S24 Closure Record
 
 S24 was incorrectly allowed to grow from a direct-worker baseline into a Job
-observer and monitor-projection redesign.  That expansion is frozen.  The
-already implemented Job candidate and its fixture remain retained research,
-but are neither published as the S24 product claim nor a closure prerequisite.
-The direct-command loop passed focused tests, but the first protocol-23
-publication failed owner testing: `run16 cmd` had no visible input/output and
-`cmd /c ver` produced no visible text. That package was rolled back. The
-root cause was NTCON accepting the direct command before its NTKVM presentation
-channel existed. NTCON now waits for that channel before launching an
-interactive target and releases the final presentation on completion. The
-revised seven-file package was rebuilt and published to `O:/winnt` with matching
-hashes; its real CMD prompt, input, `/c ver` output, same-Console direct reuse,
-and DOS COMMAND/MEM paths passed isolated tests. The owner reported basic
-verification passed and directed S24 closure with this package as the latest
-baseline. The deeper native-nested batch probe timed out and is transferred to
-S25 for diagnosis, repair and regression proof; it is not an S24 pass. Other
-minor observations await the owner's details and are not invented here.
-The owner explicitly allowed the bounded hidden-Console output sampler after
-the event-source probe found no reliable notification. No new timer polling
-was added for command acquisition or completion. The pre-existing 10 ms
-startup and handoff retries remain disclosed debt for S25 by owner direction;
-S24 does not claim to have removed them. Do not describe the earlier published
-package as containing the latest candidate changes.
-
-The detached `run16 --internal-console-probe` membership helper was removed
-from the current candidate. The authenticated launcher now reports only its
-own attached-Console PID snapshot; BaseSrv intersects it with registered
-connection identities for ConsoleRecord selection. No Console handle, worker
-identity or task authority is carried by that report.
+observer redesign; that retained candidate was excluded from the product
+baseline and is reassessed in S26. The first protocol-23 publication lacked
+visible CMD I/O and was rolled back. NTCON was repaired to await its NTKVM
+channel before target launch; the rebuilt package passed CMD, COMMAND/MEM,
+same-Console reuse and owner verification. Its deeper native nesting remained
+an S25 failure, now repaired. The owner accepted the bounded 30-ms hidden-
+Console output sampler; S25 addressed the separate 10-ms startup retries.
+The detached `--internal-console-probe` helper was removed; authenticated
+Console membership is only a locator, not task authority. Full hashes,
+failed first publication and test evidence remain in the
+[S24 record](../etc/evidence/m0-t423-s24-native-participant-graph.md).
 
 ## S23 Closure Record
 

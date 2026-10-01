@@ -14,7 +14,9 @@ DWORD worker_base_get_next_command(worker_base_next_command *command)
 
 DWORD worker_base_complete_next_command(DWORD request)
 {
-    return request ? OpenNtBaseClientCompleteWorkerChannel(request) : ERROR_INVALID_PARAMETER;
+    /* NTSRV uses request zero for a frontend I/O resume rather than a
+     * Direct task. It still requires the authenticated completion RPC. */
+    return OpenNtBaseClientCompleteWorkerChannel(request);
 }
 
 void worker_base_dispose_next_command(worker_base_next_command *command)

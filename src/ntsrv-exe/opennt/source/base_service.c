@@ -76,6 +76,7 @@ struct OPENNT_BASE_CONNECTION {
     BOOL wow_started;
     HANDLE frontend_capability; /* Root lease, independent of command lifetime. */
     HANDLE frontend_state_changed; /* Root-private auto-reset retirement wake. */
+    HANDLE worker_state_changed; /* Per-launcher auto-reset worker transition wake. */
     BOOL frontend_closing; /* Admission barrier, never execution/task state. */
     DWORD frontend_request_root; /* Original pending command asks this root for I/O. */
     DWORD frontend_channel_root; /* One pending direct launcher-to-root attachment. */
@@ -156,6 +157,14 @@ static void service_signal_frontend_states(OPENNT_BASE_SERVICE *service)
     for(link=service->connections.Flink;link!=&service->connections;link=link->Flink) {
         OPENNT_BASE_CONNECTION *root=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
         if(root->frontend_state_changed) (void)SetEvent(root->frontend_state_changed);
+    }
+}
+static void service_signal_worker_states(OPENNT_BASE_SERVICE *service)
+{
+    LIST_ENTRY *link;
+    for(link=service->connections.Flink;link!=&service->connections;link=link->Flink) {
+        OPENNT_BASE_CONNECTION *caller=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
+        if(caller->worker_state_changed)(void)SetEvent(caller->worker_state_changed);
     }
 }
 static void service_delete_console_context(OPENNT_BASE_CONSOLE_CONTEXT *context)
@@ -407,6 +416,7 @@ static VOID CALLBACK service_worker_terminated(PVOID context,BOOLEAN fired)
     RemoveEntryList(&watch->link);
     WakeAllConditionVariable(&watch->service->frontend_changed);
     service_signal_frontend_states(watch->service);
+    service_signal_worker_states(watch->service);
     notify=watch->service->empty_notify;
     notify_context=watch->service->empty_notify_context;
     LeaveCriticalSection(&watch->service->lock);
@@ -683,6 +693,7 @@ BOOL OpenNtBaseServiceStop(OPENNT_BASE_SERVICE *service)
         connection=CONTAINING_RECORD(entry,OPENNT_BASE_CONNECTION,retired_link);
         if (connection->frontend_capability) CloseHandle(connection->frontend_capability);
         if (connection->frontend_state_changed) CloseHandle(connection->frontend_state_changed);
+        if (connection->worker_state_changed) CloseHandle(connection->worker_state_changed);
         if (connection->console_members) HeapFree(GetProcessHeap(),0,connection->console_members);
         if (connection->execution_console_members) HeapFree(GetProcessHeap(),0,connection->execution_console_members);
         HeapFree(GetProcessHeap(),0,connection);
@@ -1120,6 +1131,7 @@ DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *service,HANDLE process,
         if (!error) {
             service_prune_cancelled_frontends(service);
             InsertTailList(&service->connections,&connection->service_link);
+            if(connection->native_worker)service_signal_worker_states(service);
             *output=connection; *generation=connection->process.SequenceNumber;
         }
         else (void)OpenNtBaseRemoveProcess(&service->registry,&connection->process);
@@ -1157,6 +1169,7 @@ DWORD OpenNtBaseServiceDisconnect(OPENNT_BASE_CONNECTION *connection)
         service_clear_conrecords(connection);
         if (connection->frontend_capability) CloseHandle(connection->frontend_capability);
         if (connection->frontend_state_changed) CloseHandle(connection->frontend_state_changed);
+        if (connection->worker_state_changed) CloseHandle(connection->worker_state_changed);
         if (connection->native_stop) CloseHandle(connection->native_stop);
         if (connection->native_closed) CloseHandle(connection->native_closed);
         if (connection->wow_start_event) CloseHandle(connection->wow_start_event);
@@ -1763,6 +1776,27 @@ DWORD OpenNtBaseServiceFrontendStateChanged(OPENNT_BASE_CONNECTION *root,DWORD p
     return error;
 }
 
+DWORD OpenNtBaseServiceWorkerStateChanged(OPENNT_BASE_CONNECTION *caller,DWORD pid,
+    DWORD generation,HANDLE *state_changed)
+{
+    DWORD error=ERROR_ACCESS_DENIED;
+    if(!state_changed)return ERROR_INVALID_PARAMETER;
+    *state_changed=NULL;
+    if(!caller)return error;
+    EnterCriticalSection(&caller->service->lock);
+    if(OpenNtBaseServicePeer(caller,pid,generation) && !caller->native_worker &&
+        !caller->process.fVDM) {
+        if(!caller->worker_state_changed)
+            caller->worker_state_changed=CreateEventW(NULL,FALSE,FALSE,NULL);
+        if(!caller->worker_state_changed)error=GetLastError();
+        else if(!DuplicateHandle(GetCurrentProcess(),caller->worker_state_changed,
+            GetCurrentProcess(),state_changed,SYNCHRONIZE,FALSE,0))error=GetLastError();
+        else error=ERROR_SUCCESS;
+    }
+    LeaveCriticalSection(&caller->service->lock);
+    return error;
+}
+
 DWORD OpenNtBaseServiceRetireFrontend(OPENNT_BASE_CONNECTION *root,DWORD pid,DWORD generation)
 {
     DWORD pending=0,tasks=0,error;
@@ -2209,6 +2243,7 @@ DWORD OpenNtBaseServiceCreateNativeReservation(OPENNT_BASE_CONNECTION *connectio
         if (!error) {
             connection->reservation=*reservation;
             connection->reservation_kind=OPENNT_BASE_WORKER_NATIVE;
+            service_signal_worker_states(connection->service);
         }
     }
     LeaveCriticalSection(&connection->service->lock);
@@ -2276,6 +2311,7 @@ DWORD OpenNtBaseServiceReleaseReservation(OPENNT_BASE_CONNECTION *connection,DWO
         connection->parent_wait=NULL; connection->worker_failed=FALSE;
         connection->parent_receipt=connection->completed_receipt=0;
         connection->dos_completion_read=FALSE;
+        service_signal_worker_states(connection->service);
     }
     LeaveCriticalSection(&connection->service->lock);
     return error;

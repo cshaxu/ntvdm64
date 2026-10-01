@@ -10,6 +10,8 @@ struct ntcon_executions {
     HANDLE stop,idle,broker_failed;
     DWORD active,broker_error;
     ntcon_execution_io io;
+    ntcon_execution_fault fault;
+    void *fault_context;
 };
 typedef struct ntcon_execution {
     ntcon_executions *owner;
@@ -46,11 +48,15 @@ static void finish_request(ntcon_executions *owner)
 }
 void ntcon_executions_note_broker_failure(ntcon_executions *owner,DWORD error)
 {
+    ntcon_execution_fault fault;
+    void *context;
     if(!owner || !error)return;
     EnterCriticalSection(&owner->lock);
     if(!owner->broker_error)owner->broker_error=error;
+    fault=owner->fault;context=owner->fault_context;
     SetEvent(owner->broker_failed);
     LeaveCriticalSection(&owner->lock);
+    if(fault)fault(context,error);
 }
 static DWORD launch_request(ntcon_execution *request,BYTE *payload,DWORD bytes,HANDLE *target)
 {
@@ -221,15 +227,17 @@ DWORD ntcon_executions_open(ntcon_executions **output)
 }
 void ntcon_executions_bind_io(ntcon_executions *owner,const ntcon_execution_io *io)
 { owner->io=*io; }
+void ntcon_executions_bind_fault(ntcon_executions *owner,ntcon_execution_fault fault,void *context)
+{ owner->fault=fault;owner->fault_context=context; }
 BOOL ntcon_executions_idle(ntcon_executions *owner)
 { return WaitForSingleObject(owner->idle,0)==WAIT_OBJECT_0; }
 DWORD ntcon_executions_wait_idle(ntcon_executions *owner)
 {
     DWORD wait,error;
     if(!owner)return ERROR_INVALID_PARAMETER;
-    /* Do not re-enter GetNext while a serving thread still owns a request.
-     * Once that thread has released it, a latched broker failure wins over
-     * READY even if both events are signaled together. */
+    /* Test/shutdown drain, not the production admission gate: nested CMD
+     * requires GetNext while an earlier direct target is still active.
+     * A latched completion failure wins over idle for callers draining. */
     wait=WaitForSingleObject(owner->idle,INFINITE);
     if(wait==WAIT_OBJECT_0 && WaitForSingleObject(owner->broker_failed,0)==WAIT_OBJECT_0) {
         EnterCriticalSection(&owner->lock);error=owner->broker_error;LeaveCriticalSection(&owner->lock);
@@ -242,7 +250,9 @@ DWORD ntcon_execution_start(ntcon_executions *owner,worker_base_next_command *co
 {
     ntcon_execution *request=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*request));
     DWORD error;HANDLE thread;
-    if(!owner || !command || !command->request)return ERROR_INVALID_PARAMETER;
+    /* request zero is the original broker's I/O-resume channel. The wire
+     * header distinguishes it from a Direct target after GetNext. */
+    if(!owner || !command)return ERROR_INVALID_PARAMETER;
     if(!request)return ERROR_NOT_ENOUGH_MEMORY;
     request->owner=owner;request->root_capability=command->frontend;
     request->pipe=command->channel;request->sender=command->sender;

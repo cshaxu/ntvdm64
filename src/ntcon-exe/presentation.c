@@ -252,6 +252,49 @@ static DWORD read_configuration(ntcon_presentation *client,console_text_configur
         configuration->style.attribute_font_select>1)return ERROR_INVALID_DATA;
     *found=TRUE;return ERROR_SUCCESS;
 }
+/* A DOS page can scroll after the frontend copied it from this Console.
+ * Find its surviving prefix in the native history before writing the page
+ * back, or an earlier viewport offset would overwrite still-live output. */
+static DWORD seed_history_row(HANDLE output,const CONSOLE_SCREEN_BUFFER_INFOEX *info,
+    const CHAR_INFO *cells,DWORD width,DWORD height,DWORD fallback)
+{
+    CHAR_INFO *history;
+    SMALL_RECT region,actual;
+    COORD size,origin={0,0};
+    DWORD first,last,rows,candidate,best=0,best_row=fallback;
+    if(info->dwSize.X!=(SHORT)width || !height)return fallback;
+    first=max(0,info->srWindow.Top-(LONG)height);
+    last=min(info->dwSize.Y-1,info->srWindow.Bottom);
+    if(last<first || last-first+1>SHRT_MAX ||
+        (DWORD)(last-first+1)>SIZE_MAX/(width*sizeof(*history)))return fallback;
+    rows=(DWORD)(last-first+1);
+    history=HeapAlloc(GetProcessHeap(),0,(SIZE_T)rows*width*sizeof(*history));
+    if(!history)return fallback;
+    size.X=(SHORT)width;size.Y=(SHORT)rows;
+    region=(SMALL_RECT){0,(SHORT)first,(SHORT)(width-1),(SHORT)last};actual=region;
+    if(ReadConsoleOutputW(output,history,size,origin,&actual) &&
+        !memcmp(&actual,&region,sizeof(region))) {
+        for(candidate=0;candidate<rows;++candidate) {
+            DWORD matched=0,content=0,row;
+            for(row=candidate;row<rows && matched<height;++row,++matched) {
+                const CHAR_INFO *old=history+row*width,*incoming=cells+matched*width;
+                DWORD column;
+                for(column=0;column<width;++column)
+                    if(old[column].Char.UnicodeChar!=incoming[column].Char.UnicodeChar)break;
+                if(column!=width)break;
+                for(column=0;column<width;++column)
+                    if(incoming[column].Char.UnicodeChar!=L' ' &&
+                        incoming[column].Char.UnicodeChar!=0) {++content;break;}
+            }
+            if(matched>=2 && content>=2 && matched>=best) {
+                best=matched;best_row=first+candidate;
+            }
+        }
+    }
+    HeapFree(GetProcessHeap(),0,history);
+    return best_row;
+}
+
 DWORD ntcon_presentation_seed(ntcon_presentation *client,HANDLE output)
 {
     console_io_request request={0};console_io_reply reply;
@@ -329,6 +372,7 @@ DWORD ntcon_presentation_seed(ntcon_presentation *client,HANDLE output)
     capacity_rows=(DWORD)screen.height;
     if(client->seeded) {
         row_bias=(DWORD)max(0,info.srWindow.Top-screen.top);
+        row_bias=seed_history_row(output,&info,cells,width,(DWORD)screen.height,row_bias);
         if(row_bias>(DWORD)SHRT_MAX-(DWORD)screen.height) {
             error=ERROR_ARITHMETIC_OVERFLOW;goto done;
         }

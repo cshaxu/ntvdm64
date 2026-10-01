@@ -57,8 +57,8 @@ int main(void)
         source[index]=NULL;
     }
 
-    completed=0;
-    CHECK(worker_base_complete_next_command(0)==ERROR_INVALID_PARAMETER);
+    completed=91;
+    CHECK(worker_base_complete_next_command(0)==ERROR_SUCCESS && completed==0);
     CHECK(worker_base_complete_next_command(91)==ERROR_SUCCESS && completed==91);
     puts("PASS worker-base get-next command ownership, failure disposal and completion");
     return 0;

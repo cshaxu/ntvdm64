@@ -124,24 +124,43 @@ DWORD run16_frontend_scope_console_mask(run16_frontend_scope *scope)
     return scope ? scope->console_mask : 0;
 }
 
+static DWORD wait_worker_change(HANDLE changed,HANDLE worker,HANDLE root,ULONGLONG deadline)
+{
+    HANDLE waits[3];DWORD count=0,worker_index=MAXDWORD,root_index,wait,remaining;
+    ULONGLONG now=GetTickCount64();
+    if(now>=deadline)return ERROR_TIMEOUT;
+    remaining=(DWORD)(deadline-now);
+    if(worker){worker_index=count;waits[count++]=worker;}
+    root_index=count;waits[count++]=root;
+    waits[count++]=changed;
+    wait=WaitForMultipleObjects(count,waits,FALSE,remaining);
+    if(wait==WAIT_TIMEOUT)return ERROR_TIMEOUT;
+    if(wait==WAIT_FAILED)return GetLastError();
+    if(worker && wait==WAIT_OBJECT_0+worker_index)return ERROR_PROCESS_ABORTED;
+    if(wait==WAIT_OBJECT_0+root_index)return ERROR_PIPE_NOT_CONNECTED;
+    return wait==WAIT_OBJECT_0+count-1 ? ERROR_SUCCESS : ERROR_INVALID_STATE;
+}
+
 DWORD run16_frontend_scope_launch_native(run16_frontend_scope *scope,const run16_native_start *start,HANDLE *target)
 {
-    HANDLE worker=NULL;DWORD error;
+    HANDLE worker=NULL,changed=NULL;DWORD error;
+    ULONGLONG deadline=GetTickCount64()+10000;
     if(!scope || !start || !target)return ERROR_INVALID_PARAMETER;
     if(scope->receipt)return ERROR_BUSY;
     *target=NULL;
+    error=OpenNtBaseClientWorkerStateChanged(&changed);
+    if(error)return error;
     for(;;) {
         uint64_t reservation=0;
         error=OpenNtBaseClientSelectNativeWorker(&worker);
         if(error!=ERROR_NOT_FOUND)break;
         error=OpenNtBaseClientReserveNativeWorker(&reservation);
         if(error==ERROR_ALREADY_EXISTS) {
-            /* Another launcher owns the finite create/register interval. It
-             * must release or authenticate before this caller can select it.
-             * Broker loss is covered by the launcher's existing process watch. */
-            DWORD wait=WaitForSingleObject(scope->root,10);
-            if(wait==WAIT_TIMEOUT)continue;
-            error=wait==WAIT_FAILED ? GetLastError() : ERROR_PIPE_NOT_CONNECTED;break;
+            /* Each launcher has its own auto-reset state event; NTKVM's
+             * retirement event is never shared with this admission wait. */
+            error=wait_worker_change(changed,NULL,scope->root,deadline);
+            if(!error)continue;
+            break;
         }
         if(!error) {
             WCHAR image[MAX_PATH],command[MAX_PATH+3],*slash;
@@ -165,7 +184,7 @@ DWORD run16_frontend_scope_launch_native(run16_frontend_scope *scope,const run16
         }
         break;
     }
-    if(error)return error;
+    if(error)goto done;
     for(;;) {
         /* Both worker kinds acquire the same authenticated presentation route.
          * A reused route is not a new frontend or an input activation. */
@@ -175,16 +194,13 @@ DWORD run16_frontend_scope_launch_native(run16_frontend_scope *scope,const run16
         if(error!=ERROR_NOT_READY)break;
         /* No request was accepted. Wait only for initial registration; never
          * replay a submitted request or restart a failed worker. */
-        {
-            HANDLE waits[2]={worker,scope->root};
-            DWORD wait=WaitForMultipleObjects(2,waits,FALSE,10);
-            if(wait==WAIT_TIMEOUT)continue;
-            error=wait==WAIT_OBJECT_0 ? ERROR_PROCESS_ABORTED :
-                wait==WAIT_OBJECT_0+1 ? ERROR_PIPE_NOT_CONNECTED : GetLastError();break;
-        }
+        error=wait_worker_change(changed,worker,scope->root,deadline);
+        if(error)break;
     }
     if(!error)scope->worker=worker;
     else CloseHandle(worker);
+done:
+    CloseHandle(changed);
     return error;
 }
 DWORD run16_frontend_scope_wait_native(run16_frontend_scope *scope,HANDLE target,DWORD *result)

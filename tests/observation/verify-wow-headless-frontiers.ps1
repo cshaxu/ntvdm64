@@ -111,8 +111,22 @@ try {
                 Add-Content -LiteralPath ($report+'.cleanup.txt')
             $owned |
                 ForEach-Object {
+                    $ownedPid=$_.ProcessId
                     $process=Get-Process -Id $_.ProcessId -ErrorAction SilentlyContinue
-                    if($process){try {$null=$process.Handle;$process.Kill();$null=$process.WaitForExit(5000)}finally{$process.Dispose()}}
+                    if($process){
+                        try {
+                            $null=$process.Handle
+                            $process.Kill()
+                            $null=$process.WaitForExit(5000)
+                        } catch {
+                            # The private-desktop observer may have completed
+                            # shutdown between the CIM snapshot and Kill().
+                            # Ignore that race only after checking the exact
+                            # process no longer exists; a live access failure
+                            # remains a real cleanup failure.
+                            if(Get-CimInstance Win32_Process -Filter "ProcessId=$ownedPid"){throw}
+                        } finally {$process.Dispose()}
+                    }
                 }
             if($controller){
                 if(!$controller.HasExited){$controller.Kill();$null=$controller.WaitForExit(5000)}

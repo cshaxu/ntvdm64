@@ -118,11 +118,12 @@ T423's S3 ownership-replanning snapshot remains evidence, not a production P.
 The owner subsequently approved the migration report, S4 implementation and
 automatic sequential admission after S4 delivery. This supersedes the earlier
 planning-only pause, never the verification gates. The independent frontend
-runtime package is the six files below plus ntkvm.exe (seven total); the
-pre-S9 helper was a private ntkvm.exe role, not an eighth binary. S9 removes
+runtime package before S12 was the six files below plus ntkvm.exe (seven
+total); S12 added ntcon.exe, making the current package eight files. The
+pre-S9 helper was a private ntkvm.exe role, not an extra binary. S9 removes
 that project helper in favor of ntkvm-owned ConPTY, without adding a product
 executable. Status distinguishes the candidate from the published set. All regression,
-coherent publication and recovery gates apply to that complete seven-file set.
+coherent publication and recovery gates apply to the complete eight-file set.
 Do not publish unverified candidates or claim S3 functional closure.
 
 Owner clarification dated 2026-09-24: before **every P that modifies
@@ -144,9 +145,9 @@ commits containing production changes remain subject to the runtime gate.
    graph, source/header and generated-input identity. Invalidate affected
    dependents when these change; use a clean build when dependency integrity
    is uncertain or a required clean-build milestone applies, not for every
-   edit by default. New run evidence IDs may reference a validated cache;
-   never overwrite sealed artifact/evidence snapshots. Incremental compilation
-   does not waive runtime tests or publication of the complete six-binary set.
+edit by default. New run evidence IDs may reference a validated cache;
+never overwrite sealed artifact/evidence snapshots. Incremental compilation
+does not waive runtime tests or publication of the complete eight-file set.
 3. Pass all 17 established text-gated DOS routes: COMMAND, MEM and EDIT,
    direct, interactive and supported nested COMMAND execution, including EDIT
    exit followed by MEM at the same prompt. Read guest output and verify
@@ -164,9 +165,9 @@ commits containing production changes remain subject to the runtime gate.
    explicitly open within the admitted scope, never counted as functional
    passes. Unknown or unexecuted comparisons do not pass this gate.
 5. Update O:/winnt with the verified coherent set: ntmon.exe, run16.exe,
-   ntsrv.exe, ntvdm.exe, ntkvm.exe, WOW32.DLL and VDMREDIR.DLL, plus required original
-   guest binaries and approved configuration at proper package-relative paths.
-   Validate all seven, including unchanged hashes, against the tested manifest
+   ntsrv.exe, ntvdm.exe, ntcon.exe, ntkvm.exe, WOW32.DLL and VDMREDIR.DLL,
+   plus required original guest binaries and approved configuration at proper
+   package-relative paths. Validate all eight, including unchanged hashes, against the tested manifest
    and verify the published set. Do not test one component combination and
    deploy another. This is the owner's latest usable side-test package, not
    a scratch candidate folder or a hard-coded production path.
@@ -176,7 +177,7 @@ commits containing production changes remain subject to the runtime gate.
    tested inputs invalidate their affected evidence before commit.
 
 Preserve a recoverable coherent last-known-good package and configuration
-before replacement. Never leave locked-file mixtures or a partial six-file
+before replacement. Never leave locked-file mixtures or a partial eight-file
 update. If deployment/validation fails, restore the coherent usable baseline
 and report it; do not publish an unverified or regressed candidate. Respect
 active owner sessions and desktop restrictions. Unavailable GUI access means

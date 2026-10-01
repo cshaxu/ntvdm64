@@ -6,12 +6,17 @@
 static FILE *log;
 static unsigned checks,failures,serial;
 static DWORD completion_error;
+static volatile LONG completed_resume_count;
+static DWORD observed_broker_fault;
+static void record_broker_fault(void *context,DWORD error)
+{ (void)context;observed_broker_fault=error; }
 /* This fixture owns attachments directly, without a broker delivery lease. */
-DWORD worker_base_complete_next_command(DWORD request) { (void)request;return completion_error; }
+DWORD worker_base_complete_next_command(DWORD request)
+{ if(!request)InterlockedIncrement(&completed_resume_count);return completion_error; }
 DWORD OpenNtBaseClientBindNativeTarget(DWORD request,HANDLE target)
 { return request && target ? ERROR_SUCCESS : ERROR_INVALID_PARAMETER; }
 #define CHECK(x) do {++checks;if(!(x)){++failures;fprintf(log,"FAIL %d %s\n",__LINE__,#x);}} while(0)
-static HANDLE submit_access(ntcon_executions *owner,DWORD access,DWORD preflight_error)
+static HANDLE submit_access_kind(ntcon_executions *owner,DWORD access,DWORD preflight_error,DWORD request_id)
 {
     WCHAR name[128];HANDLE server,client,process=NULL,frontend,execution;PSECURITY_DESCRIPTOR descriptor=NULL;
     SECURITY_ATTRIBUTES attributes={sizeof(attributes),NULL,FALSE};
@@ -35,12 +40,16 @@ static HANDLE submit_access(ntcon_executions *owner,DWORD access,DWORD preflight
     CHECK(DuplicateHandle(GetCurrentProcess(),GetCurrentProcess(),GetCurrentProcess(),
         &process,access,FALSE,0));
     {
-        worker_base_next_command command={server,process,execution,frontend,1};
+        worker_base_next_command command={server,process,execution,frontend,request_id};
         error=ntcon_execution_start(owner,&command,preflight_error);
         CHECK(!command.channel && !command.sender && !command.execution && !command.frontend && !command.request);
     }
     CHECK(!error);if(error){CloseHandle(client);return NULL;}
     return client;
+}
+static HANDLE submit_access(ntcon_executions *owner,DWORD access,DWORD preflight_error)
+{
+    return submit_access_kind(owner,access,preflight_error,1);
 }
 static HANDLE submit(ntcon_executions *owner)
 {
@@ -64,9 +73,11 @@ static void resume_barrier(DWORD begin_error,DWORD end_error)
     resume_state state={0,begin_error,end_error};
     ntcon_execution_io io={&state,resume_begin,resume_end,resume_release};
     native_request_header header={NATIVE_REQUEST_VERSION,0};native_request_reply reply={0};
+    LONG before=completed_resume_count;
     CHECK(!ntcon_executions_open(&owner));if(!owner)return;
     ntcon_executions_bind_io(owner,&io);
-    client=submit(owner);
+    client=submit_access_kind(owner,SYNCHRONIZE|PROCESS_DUP_HANDLE|
+        PROCESS_QUERY_LIMITED_INFORMATION,ERROR_SUCCESS,0);
     if(client) {
         CHECK(WriteFile(client,&header,sizeof(header),&bytes,NULL) && bytes==sizeof(header));
         CHECK(ReadFile(client,&reply,sizeof(reply),&bytes,NULL) && bytes==sizeof(reply));
@@ -77,6 +88,7 @@ static void resume_barrier(DWORD begin_error,DWORD end_error)
         CloseHandle(client);
     }
     ntcon_executions_close(owner);
+    CHECK(completed_resume_count==before+1);
     CHECK(state.sequence==(begin_error ? 1u : 3u));
 }
 static void export_failure_does_not_launch(void)
@@ -147,6 +159,8 @@ static void broker_completion_failure_stops_reentry(void)
     ntcon_executions *owner=NULL;HANDLE client;DWORD bytes;
     native_request_header header={0,0};native_request_reply reply={0};
     CHECK(!ntcon_executions_open(&owner));if(!owner)return;
+    observed_broker_fault=ERROR_SUCCESS;
+    ntcon_executions_bind_fault(owner,record_broker_fault,NULL);
     completion_error=RPC_S_SERVER_UNAVAILABLE;
     client=submit(owner);
     if(client) {
@@ -154,6 +168,7 @@ static void broker_completion_failure_stops_reentry(void)
         CHECK(ReadFile(client,&reply,sizeof(reply),&bytes,NULL) && bytes==sizeof(reply));
         CHECK(reply.version==NATIVE_REQUEST_VERSION && reply.error==ERROR_INVALID_DATA);
         CHECK(ntcon_executions_wait_idle(owner)==RPC_S_SERVER_UNAVAILABLE);
+        CHECK(observed_broker_fault==RPC_S_SERVER_UNAVAILABLE);
         CloseHandle(client);
     }
     completion_error=ERROR_SUCCESS;
@@ -219,8 +234,8 @@ int wmain(int argc,WCHAR **argv)
         CHECK(reply.version==NATIVE_REQUEST_VERSION && reply.error==ERROR_INVALID_DATA && !reply.target && !reply.receipt);
         CHECK(!ReadFile(client,&reply,1,&bytes,NULL) && GetLastError()==ERROR_BROKEN_PIPE);
         CloseHandle(client);
-        /* The resident worker may return to GetNext only after this Direct
-         * request has fully released its completion resources. */
+        /* This fixture drains before checking resource counts; production
+         * may enter its next GetNext while an earlier request is active. */
         CHECK(ntcon_executions_wait_idle(owner)==ERROR_SUCCESS);
         /* No next request is needed to release the completed request's process,
          * capability, I/O event and thread handles. The idle, stop and broker

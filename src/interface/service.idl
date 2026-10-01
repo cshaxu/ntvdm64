@@ -357,6 +357,13 @@ interface vdm_service
         [in, system_handle(sh_process)] HANDLE process,
         [in] unsigned long generation,
         [out, system_handle(sh_event)] HANDLE *state_changed);
+    /* Launcher-private wake for worker registration/reservation changes.
+     * Never share the frontend retirement auto-reset event with NTKVM. */
+    error_status_t WorkerStateChanged(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [out, system_handle(sh_event)] HANDLE *state_changed);
     error_status_t RetireFrontend(
         [in] handle_t binding, [in] VDM_CONNECTION connection,
         [in, system_handle(sh_process)] HANDLE process,

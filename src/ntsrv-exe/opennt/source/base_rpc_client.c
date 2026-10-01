@@ -835,6 +835,25 @@ DWORD OpenNtBaseClientFrontendStateChanged(HANDLE *state_changed)
     return ERROR_SUCCESS;
 }
 
+DWORD OpenNtBaseClientWorkerStateChanged(HANDLE *state_changed)
+{
+    DWORD error=ERROR_INVALID_STATE;
+    HANDLE local=NULL;
+    if(!state_changed)return ERROR_INVALID_PARAMETER;
+    *state_changed=NULL;
+    if(!client.connection || !client.binding || !client.process)return error;
+    RpcTryExcept {
+        error=Client_WorkerStateChanged(client.binding,client.connection,client.process,
+            client.generation,&local);
+    }
+    RpcExcept(1) { error=RpcExceptionCode(); }
+    RpcEndExcept
+    if(error) { if(local)CloseHandle(local);return error; }
+    if(!local)return ERROR_INVALID_HANDLE;
+    *state_changed=local;
+    return ERROR_SUCCESS;
+}
+
 DWORD OpenNtBaseClientRetireFrontend(void)
 {
     DWORD error=ERROR_INVALID_STATE;

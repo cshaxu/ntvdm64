@@ -12,12 +12,12 @@
 PVOID CsrPortHeap;
 
 typedef struct native_membership {
-    HANDLE quit,thread,capability,stop_requested,closed;
+    HANDLE quit,thread,capability,stop_requested,closed,admission_ready;
     HANDLE pipe,frontend,ready;
     ntcon_presentation *presentation;
     CRITICAL_SECTION *lock;
     console_text_style font;
-    DWORD users;
+    DWORD users,admissions;
     BOOL presenting;
 } native_membership;
 /* A frontend route is borrowed presentation state, not this worker's Console
@@ -31,49 +31,51 @@ static void membership_detach_presentation(native_membership *state)
     if(state->capability)CloseHandle(state->capability);
     state->pipe=state->frontend=state->ready=state->capability=NULL;
     state->presenting=FALSE;
+    if(state->admission_ready)ResetEvent(state->admission_ready);
 }
 static DWORD begin_io(void *context,HANDLE stop)
 {
     native_membership *state=context;
-    DWORD retries=0;
+    DWORD error=ERROR_SUCCESS,wait;
+    ULONGLONG deadline=GetTickCount64()+10000;
+    EnterCriticalSection(state->lock);
+    ++state->admissions;
     for(;;) {
         /* A Console target must not run before its frontend can receive output
          * and provide input. Broker delivery alone is not an I/O handoff. */
-        DWORD error=ERROR_NOT_READY;
-        if(WaitForSingleObject(stop,0)!=WAIT_TIMEOUT)return ERROR_OPERATION_ABORTED;
-        if(WaitForSingleObject(state->stop_requested,0)!=WAIT_TIMEOUT)return ERROR_OPERATION_ABORTED;
-        EnterCriticalSection(state->lock);
-        if(WaitForSingleObject(state->stop_requested,0)!=WAIT_TIMEOUT) {
-            LeaveCriticalSection(state->lock);return ERROR_OPERATION_ABORTED;
-        }
-        if(state->presentation) {
-            HANDLE output=CreateFileW(L"CONOUT$",GENERIC_READ|GENERIC_WRITE,
-                FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,OPEN_EXISTING,0,NULL);
-            error=state->presenting ? ERROR_SUCCESS :
-                output==INVALID_HANDLE_VALUE ? GetLastError() : ntcon_presentation_begin(state->presentation,output);
-            if(output!=INVALID_HANDLE_VALUE)CloseHandle(output);
-            if(!error){++state->users;state->presenting=TRUE;}
+        HANDLE waits[4];
+        ULONGLONG now;
+        if(WaitForSingleObject(stop,0)!=WAIT_TIMEOUT ||
+            WaitForSingleObject(state->stop_requested,0)!=WAIT_TIMEOUT) {
+            error=ERROR_OPERATION_ABORTED;break;
         }
         /* Successful admission keeps the lock through CreateProcess, not
          * through the target lifetime or response I/O. */
-        if(!error)return ERROR_SUCCESS;
+        if(state->presentation && state->presenting) {
+            ++state->users;--state->admissions;
+            return ERROR_SUCCESS;
+        }
+        now=GetTickCount64();
+        if(now>=deadline){error=ERROR_TIMEOUT;break;}
+        waits[0]=stop;waits[1]=state->stop_requested;
+        waits[2]=state->thread;waits[3]=state->admission_ready;
         LeaveCriticalSection(state->lock);
-        /* A screen can change while the frontend is copied into this
-         * Console. The presentation rejects that torn seed with RETRY and
-         * deactivates itself; retry the complete admission, never a partial
-         * cell batch or an already accepted execution request. */
-        if(error==ERROR_RETRY && ++retries<8) {
-            if(WaitForSingleObject(stop,10)!=WAIT_TIMEOUT)return ERROR_OPERATION_ABORTED;
-            continue;
+        wait=WaitForMultipleObjects(4,waits,FALSE,(DWORD)(deadline-now));
+        EnterCriticalSection(state->lock);
+        if(wait==WAIT_OBJECT_0 || wait==WAIT_OBJECT_0+1)
+            {error=ERROR_OPERATION_ABORTED;break;}
+        if(wait==WAIT_OBJECT_0+2) {
+            if(!GetExitCodeThread(state->thread,&error))error=GetLastError();
+            if(!error)error=ERROR_OPERATION_ABORTED;
+            break;
         }
-        if(error!=ERROR_NOT_READY && error!=ERROR_BUSY) {
-            ntcon_trace_error("begin-io",0,error);return error;
-        }
-        if(WaitForSingleObject(state->thread,10)!=WAIT_TIMEOUT) {
-            if(!GetExitCodeThread(state->thread,&error))return GetLastError();
-            return error ? error : ERROR_OPERATION_ABORTED;
-        }
+        if(wait==WAIT_TIMEOUT){error=ERROR_TIMEOUT;break;}
+        if(wait==WAIT_FAILED){error=GetLastError();break;}
     }
+    --state->admissions;
+    LeaveCriticalSection(state->lock);
+    ntcon_trace_error("begin-io",0,error);
+    return error;
 }
 static void release_launch(void *context)
 {
@@ -96,7 +98,7 @@ static DWORD end_io(void *context)
             }
         } else {
             error=ntcon_presentation_end(state->presentation,&state->font);
-            if(!error)state->presenting=FALSE;
+            if(!error){state->presenting=FALSE;ResetEvent(state->admission_ready);}
         }
     }
     if(state->users)--state->users;
@@ -136,28 +138,35 @@ static DWORD presentation_loop(void *context)
             return error ? error : ERROR_CANCELLED;
         }
         error=take_presentation(state);
-        if(!error && state->presentation && state->users) {
+        if(!error && state->presentation && (state->users || state->admissions)) {
             DWORD accepted=0;
             if(!state->presenting) {
                 HANDLE output=CreateFileW(L"CONOUT$",GENERIC_READ|GENERIC_WRITE,
                     FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,OPEN_EXISTING,0,NULL);
                 error=output==INVALID_HANDLE_VALUE ? GetLastError() : ntcon_presentation_begin(state->presentation,output);
                 if(output!=INVALID_HANDLE_VALUE)CloseHandle(output);
-                if(!error)state->presenting=TRUE;
+                if(!error) {
+                    state->presenting=TRUE;
+                    if(!SetEvent(state->admission_ready))error=GetLastError();
+                }
             }
             /* A completed direct target may still be waiting for its final
              * presentation receipt. Do not feed the next DOS command to a
              * Console which has no native consumer during that interval. */
-            if(!error)error=ntcon_presentation_input(state->presentation,GetStdHandle(STD_INPUT_HANDLE),&accepted);
+            if(!error && state->users)
+                error=ntcon_presentation_input(state->presentation,GetStdHandle(STD_INPUT_HANDLE),&accepted);
             if(error==ERROR_BUSY) {
                 /* DOS requested the shared screen. Publish before releasing,
                  * then import its final screen before resuming native I/O. */
-                error=ntcon_presentation_end(state->presentation,&state->font);
-                state->presenting=FALSE;
+                if(state->presenting)error=ntcon_presentation_end(state->presentation,&state->font);
+                state->presenting=FALSE;ResetEvent(state->admission_ready);
                 if(!error)error=ERROR_NOT_READY;
             }
-            if(!error)error=ntcon_presentation_capture(state->presentation,&state->font);
-            if(error==ERROR_NOT_READY || error==ERROR_BUSY){state->presenting=FALSE;error=0;}
+            if(!error && state->users)
+                error=ntcon_presentation_capture(state->presentation,&state->font);
+            if(error==ERROR_NOT_READY || error==ERROR_BUSY){
+                state->presenting=FALSE;ResetEvent(state->admission_ready);error=0;
+            }
             if(error==ERROR_RETRY)error=0;
         }
         if(error==ERROR_PIPE_NOT_CONNECTED || error==ERROR_BROKEN_PIPE) {
@@ -203,6 +212,7 @@ static void membership_close(native_membership *state)
     if(state->capability)CloseHandle(state->capability);
     if(state->stop_requested)CloseHandle(state->stop_requested);
     if(state->closed)CloseHandle(state->closed);
+    if(state->admission_ready)CloseHandle(state->admission_ready);
     ZeroMemory(state,sizeof(*state));
     state->lock=lock;
 }
@@ -228,7 +238,8 @@ static DWORD membership_bind(native_membership *state,HANDLE frontend)
     state->quit=CreateEventW(NULL,TRUE,FALSE,NULL);
     state->stop_requested=CreateEventW(NULL,TRUE,FALSE,NULL);
     state->closed=CreateEventW(NULL,TRUE,FALSE,NULL);
-    if(!state->quit || !state->stop_requested || !state->closed)error=GetLastError();
+    state->admission_ready=CreateEventW(NULL,TRUE,FALSE,NULL);
+    if(!state->quit || !state->stop_requested || !state->closed || !state->admission_ready)error=GetLastError();
     else if(!DuplicateHandle(GetCurrentProcess(),frontend,GetCurrentProcess(),&state->capability,SYNCHRONIZE,FALSE,0))error=GetLastError();
     else error=OpenNtBaseClientRegisterNativeBackend(frontend,state->stop_requested,state->closed);
     if(!error) {
@@ -242,6 +253,17 @@ static DWORD membership_bind(native_membership *state,HANDLE frontend)
 
 static BOOL WINAPI control_event(DWORD event)
 { return event==CTRL_C_EVENT || event==CTRL_BREAK_EVENT; }
+
+static void broker_completion_fault(void *context,DWORD error)
+{
+    (void)context;
+    ntcon_trace_error("broker-complete",0,error);
+    /* GetNext may be blocked in a synchronous RPC while a serving thread
+     * discovers the failure. Process exit closes the worker's handles; it
+     * does not terminate any native target or descendant. NTSRV owns the
+     * resulting dead-worker rundown. */
+    TerminateProcess(GetCurrentProcess(),error);
+}
 
 int wmain(int argc,WCHAR **argv)
 {
@@ -258,16 +280,16 @@ int wmain(int argc,WCHAR **argv)
     error=worker_base_connect();
     if(!error) error=ntcon_console_initialize();
     if(!error) error=ntcon_executions_open(&requests);
-    if(!error)ntcon_executions_bind_io(requests,&io);
+    if(!error) {
+        ntcon_executions_bind_io(requests,&io);
+        ntcon_executions_bind_fault(requests,broker_completion_fault,NULL);
+    }
     if(!error && !SetConsoleCtrlHandler(control_event,TRUE))error=GetLastError();
     while(!error) {
         worker_base_next_command command;
-        /* Keep the same worker cadence as the original VDM path: one
-         * admitted Direct command completes before this resident worker
-         * returns to GetNext.  Native descendants remain Windows-owned and
-         * never become broker completion records. */
-        error=ntcon_executions_wait_idle(requests);
-        if(error)break;
+        /* An active CMD may wait on an inner run16. GetNext must remain
+         * available to that same frontend while earlier requests execute;
+         * different frontends are rejected by the binding rule below. */
         error=worker_base_get_next_command(&command);
         if(error)break;
         /* An unaccepted request closes its attachments; it neither ends the

@@ -331,10 +331,10 @@ static DWORD console_activate(console_client *client,BOOL active)
 {
     DWORD error;
     EnterCriticalSection(&client->lock);
-    do {
-        error=ntkvm_worker_activate(&client->channel,0,active);
-        if(active && error==ERROR_BUSY)Sleep(10);
-    } while(active && error==ERROR_BUSY);
+    /* NTKVM owns the I/O predicate and waits for its actual binding change
+     * inside this same activation request. It returns one bounded failure;
+     * this worker does not sample another process's ownership on a timer. */
+    error=ntkvm_worker_activate(&client->channel,0,active);
     /* Unlike IRQ cancellation, successful DOS ownership handoff retires the
      * frontend's DOS mouse route and discards its copied relative records.
      * Original nt_block_event_thread has quiesced the event/timer producers

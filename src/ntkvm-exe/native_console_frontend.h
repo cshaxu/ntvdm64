@@ -17,6 +17,10 @@ DWORD run16_native_frontend_destroy(run16_native_frontend *);
 void run16_native_frontend_cancel(run16_native_frontend *);
 DWORD run16_native_frontend_drain(run16_native_frontend *);
 DWORD run16_native_frontend_dos_bind(run16_native_frontend *,const void *,BOOL);
+/* Wait for this root's actual I/O ownership transition, not for input data.
+ * The caller retries the original bind after a successful wait. */
+DWORD run16_native_frontend_wait_dos_ready(run16_native_frontend *,const void *,HANDLE,DWORD);
+void run16_native_frontend_cancel_dos_pending(run16_native_frontend *,const void *);
 DWORD run16_native_frontend_native_bind(run16_native_frontend *,const void *,BOOL);
 /* Channel video is read only under the shared I/O lock. Forget/unbind must
  * detach it before channel storage is disposed. No pointer crosses IPC. */

@@ -67,6 +67,11 @@ DWORD OpenNtBaseClientFrontendStateChanged(HANDLE *state_changed)
     return DuplicateHandle(GetCurrentProcess(),retirement_state,GetCurrentProcess(),state_changed,
         SYNCHRONIZE,FALSE,0) ? ERROR_SUCCESS : GetLastError();
 }
+DWORD OpenNtBaseClientWorkerStateChanged(HANDLE *state_changed)
+{
+    *state_changed=CreateEventW(NULL,FALSE,FALSE,NULL);
+    return *state_changed ? ERROR_SUCCESS : GetLastError();
+}
 DWORD OpenNtBaseClientRetireFrontend(void)
 {
     LONG attempt;
@@ -159,7 +164,7 @@ HANDLE run16_console_channel_thread(run16_console_channel *channel)
 {
     return channel->thread;
 }
-void run16_console_channel_stop(run16_console_channel *channel)
+DWORD run16_console_channel_stop(run16_console_channel *channel)
 {
     CHECK(SetEvent(channel->release));
     CHECK(WaitForSingleObject(channel->thread,5000)==WAIT_OBJECT_0);
@@ -167,6 +172,7 @@ void run16_console_channel_stop(run16_console_channel *channel)
     channels[channel->index]=NULL;
     HeapFree(GetProcessHeap(),0,channel);
     InterlockedIncrement(&stopped);
+    return ERROR_SUCCESS;
 }
 static void attached(void) { CHECK(SetEvent(ready)); }
 static void submit(DWORD id)

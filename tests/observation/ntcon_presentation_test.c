@@ -17,6 +17,7 @@ typedef struct peer_state {
     run16_console_video video;
     console_io_input returned[2*CONSOLE_IO_INPUT_CAPACITY+3];
     DWORD returned_count;
+    LONG page_shift;
 } peer_state;
 static BOOL transfer(HANDLE pipe,BOOL write,void *data,DWORD bytes)
 {
@@ -74,7 +75,8 @@ static DWORD WINAPI peer(void *context)
             reply.state.count=3;reply.bytes=sizeof(events);
             memcpy(reply.data,events,sizeof(events));
         }
-        if((state->mode>=9 && state->mode<=16) || (state->mode==6 && sequence>5)) {
+        if((state->mode>=9 && state->mode<=16) || state->mode==20 ||
+            (state->mode==6 && sequence>5)) {
             if(request.operation==CONSOLE_IO_SNAPSHOT_BEGIN) {
                 if(state->snapshot_begins!=state->snapshot_ends)error=ERROR_BUSY;
                 else ++state->snapshot_begins;
@@ -123,7 +125,8 @@ static DWORD WINAPI peer(void *context)
                     request.state.top+request.state.height>8)return ERROR_INVALID_DATA;
                 reply.state=request.state;reply.bytes=20*request.state.height*sizeof(console_io_cell);
                 for(i=0;i<20*(DWORD)request.state.height;++i) {
-                    console_io_cell cell={(uint16_t)('A'+request.state.top+i/20),7};
+                    console_io_cell cell={(uint16_t)('A'+request.state.top+i/20+
+                        InterlockedCompareExchange(&state->page_shift,0,0)),7};
                     memcpy(reply.data+i*sizeof(cell),&cell,sizeof(cell));
                 }
             } else if(request.operation==CONSOLE_IO_PREPEND_KEYS && state->mode==16) {
@@ -232,7 +235,7 @@ static void run_case(unsigned mode)
         }
         goto done;
     }
-    if(mode>=9) {
+    if(mode>=9 && mode!=17 && mode!=18 && mode!=19) {
         HANDLE buffer=CreateConsoleScreenBuffer(GENERIC_READ|GENERIC_WRITE,
             FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,CONSOLE_TEXTMODE_BUFFER,NULL);
         CONSOLE_SCREEN_BUFFER_INFO before,after;COORD origin={0,0};WCHAR cell=0;DWORD count;
@@ -244,13 +247,15 @@ static void run_case(unsigned mode)
             CHECK(error==(DWORD)(mode==10 ? ERROR_RETRY : mode==12 || mode==14 || mode==15 ? ERROR_INVALID_DATA : ERROR_SUCCESS));
             CHECK(GetConsoleScreenBufferInfo(buffer,&after));
             CHECK(ReadConsoleOutputCharacterW(buffer,&cell,1,origin,&count) && count==1);
-            if(mode==9 || mode==11 || mode==13 || mode==16) {
+            if(mode==9 || mode==11 || mode==13 || mode==16 || mode==20) {
                 COORD last={19,7};
                 CHECK(cell=='A' && after.dwSize.X==20 && after.dwSize.Y==8);
                 CHECK(after.dwCursorPosition.X==4 && after.dwCursorPosition.Y==2);
                 CHECK(ReadConsoleOutputCharacterW(buffer,&cell,1,last,&count) && count==1 && cell=='H');
-                CHECK(WriteConsoleW(buffer,L"N",1,&count,NULL) && count==1);
-                CHECK(ReadConsoleOutputCharacterW(buffer,&cell,1,after.dwCursorPosition,&count) && cell=='N');
+                if(mode!=20) {
+                    CHECK(WriteConsoleW(buffer,L"N",1,&count,NULL) && count==1);
+                    CHECK(ReadConsoleOutputCharacterW(buffer,&cell,1,after.dwCursorPosition,&count) && cell=='N');
+                }
             } else CHECK(cell=='Z' && before.dwSize.X==after.dwSize.X && before.dwSize.Y==after.dwSize.Y);
             if(mode==9) {
                 CONSOLE_SCREEN_BUFFER_INFOEX history={sizeof(history)};
@@ -273,6 +278,24 @@ static void run_case(unsigned mode)
                     CHECK(ReadConsoleOutputCharacterW(buffer,&cell,1,tail,&count) && count==1 && cell=='T');
                     CHECK(ReadConsoleOutputCharacterW(buffer,&cell,1,page,&count) && count==1 && cell=='A');
                 }
+            }
+            if(mode==20) {
+                CONSOLE_SCREEN_BUFFER_INFOEX history={sizeof(history)};
+                CONSOLE_CURSOR_INFO cursor={25,TRUE};
+                COORD first={0,0},second={0,1},shifted={0,2},last={0,9};
+                WCHAR value=0;
+                CHECK(GetConsoleScreenBufferInfoEx(buffer,&history));
+                history.dwSize.Y=40;history.srWindow.Top=0;history.srWindow.Bottom=7;
+                CHECK(ntcon_screen_apply(buffer,&history,&cursor)==0);
+                InterlockedExchange(&state.page_shift,2);
+                CHECK(ntcon_presentation_seed(endpoint,buffer)==0);
+                CHECK(GetConsoleScreenBufferInfo(buffer,&after));
+                CHECK(after.dwSize.Y==40 && after.srWindow.Top==2 &&
+                    after.dwCursorPosition.Y==4);
+                CHECK(ReadConsoleOutputCharacterW(buffer,&value,1,first,&count) && value=='A');
+                CHECK(ReadConsoleOutputCharacterW(buffer,&value,1,second,&count) && value=='B');
+                CHECK(ReadConsoleOutputCharacterW(buffer,&value,1,shifted,&count) && value=='C');
+                CHECK(ReadConsoleOutputCharacterW(buffer,&value,1,last,&count) && value=='J');
             }
             if(mode==11 || mode==13 || mode==16) {
                 HANDLE original=CreateFileW(L"CONOUT$",GENERIC_READ|GENERIC_WRITE,
@@ -393,11 +416,11 @@ done:
             CHECK(style->cursor_column==3 && style->cursor_row==2 && style->cursor_visible);
             CHECK(style->fonts[0][0][0]==0x5a);
         }
-    } else if(mode>=17)CHECK(state.calls==1);
+    } else if(mode>=17 && mode!=20)CHECK(state.calls==1);
     else CHECK(mode==11 || mode>=13 ? state.calls>=6u :
         state.calls==(mode==5 ? 0u : mode==12 || mode==10 ? 6u : mode==9 ? 21u : 1u));
-    if(mode>=9 && mode<=16)CHECK(state.snapshot_begins==state.snapshot_ends &&
-        state.snapshot_begins==(mode==9 ? 3u : 1u));
+    if((mode>=9 && mode<=16) || mode==20)CHECK(state.snapshot_begins==state.snapshot_ends &&
+        state.snapshot_begins==(mode==9 ? 3u : mode==20 ? 2u : 1u));
     if(mode>=11 && mode<=16)CHECK(state.activations==1 && state.releases==1);
     if(mode==16) {
         DWORD i;CHECK(state.returned_count==ARRAYSIZE(state.returned));
@@ -455,7 +478,7 @@ int wmain(int argc,WCHAR **argv)
         CHECK(SetStdHandle(STD_INPUT_HANDLE,input));
         run_case(16);
         if(input!=INVALID_HANDLE_VALUE)CloseHandle(input);
-    } else for(mode=0;mode<=19;++mode)if(mode!=16)run_case(mode);
+    } else for(mode=0;mode<=20;++mode)if(mode!=16)run_case(mode);
     fprintf(log,"NTCON-PRESENTATION checks=%u failures=%u named-pipe=yes production-activation=no\n",checks,failures);
     fclose(log);return failures ? 1 : 0;
 }

@@ -9,13 +9,25 @@
 
 /* Visible presentation and copied input only. DOS temporarily owns the I/O
  * route; the attached native worker is the return route, not a local backend. */
+typedef struct binding_waiter {
+    struct binding_waiter *next;
+    HANDLE changed;
+} binding_waiter;
 struct run16_native_frontend {
     CRITICAL_SECTION lock,io_lock,handoff_lock;
+    binding_waiter *binding_waiters; /* guarded by io_lock; each waiter owns its event */
     DWORD original_input_mode;
     BOOL input_mode_saved;
     HANDLE stop,refresh,refreshed,thread,changed,control[2];
     HANDLE console_input,console_output,console_surface;
     SMALL_RECT logical_window;
+    /* Root teardown returns this borrowed Console to its caller.  The DOS
+     * worker may select a supported 80-column mode on the same buffer; that
+     * must not leave the waiting native shell with a smaller viewport or a
+     * cursor clipped to the DOS page. */
+    CONSOLE_SCREEN_BUFFER_INFO original_screen;
+    CONSOLE_CURSOR_INFO original_cursor;
+    BOOL original_screen_saved,original_cursor_saved;
     BOOL native_geometry_pending;
     COORD last_dos_size;
     HANDLE handoff,handoff_done;
@@ -47,8 +59,38 @@ struct run16_native_frontend {
  * Never wait for IPC or manipulate execution from the OS callback thread. */
 static SRWLOCK control_lock=SRWLOCK_INIT;
 static run16_native_frontend *control_owner;
+/* Called only with io_lock held. Per-waiter manual events avoid both lost
+ * transitions and competition over a shared auto-reset notification. */
+static void signal_binding_waiters(run16_native_frontend *frontend)
+{
+    binding_waiter *waiter;
+    for(waiter=frontend->binding_waiters;waiter;waiter=waiter->next)
+        SetEvent(waiter->changed);
+}
 static DWORD apply_binding(run16_native_frontend *,const void *,BOOL,BOOL);
 static DWORD collect_dos_console(run16_native_frontend *);
+static DWORD restore_original_console(run16_native_frontend *frontend)
+{
+    CONSOLE_SCREEN_BUFFER_INFO current;
+    SMALL_RECT tiny={0,0,0,0};
+    BOOL changed;
+    if(!frontend)return ERROR_INVALID_PARAMETER;
+    if(!frontend->original_screen_saved)return ERROR_SUCCESS;
+    if(!GetConsoleScreenBufferInfo(frontend->console_output,&current))return GetLastError();
+    changed=current.dwSize.X!=frontend->original_screen.dwSize.X ||
+        current.dwSize.Y!=frontend->original_screen.dwSize.Y ||
+        memcmp(&current.srWindow,&frontend->original_screen.srWindow,sizeof(current.srWindow)) ||
+        current.dwCursorPosition.X!=frontend->original_screen.dwCursorPosition.X ||
+        current.dwCursorPosition.Y!=frontend->original_screen.dwCursorPosition.Y;
+    if(changed && (!opennt_console_resize_grid(frontend->console_output,NULL,TRUE,&tiny) ||
+        !opennt_console_resize_grid(frontend->console_output,&frontend->original_screen.dwSize,FALSE,NULL) ||
+        !opennt_console_resize_grid(frontend->console_output,NULL,TRUE,&frontend->original_screen.srWindow) ||
+        !SetConsoleCursorPosition(frontend->console_output,frontend->original_screen.dwCursorPosition)))
+        return GetLastError();
+    if(frontend->original_cursor_saved &&
+        !SetConsoleCursorInfo(frontend->console_output,&frontend->original_cursor))return GetLastError();
+    return ERROR_SUCCESS;
+}
 /* Copied frontend transport records, serialized by io_lock. Windows still
  * owns Console processing and the guest owns its keyboard device. Grow before
  * mutation; no truncation or partial prepend on allocation failure. */
@@ -316,6 +358,11 @@ DWORD run16_native_frontend_create(run16_native_frontend **output)
             error=GetLastError();run16_native_frontend_destroy(frontend);return error;
         }
         frontend->logical_window=info.srWindow;
+        frontend->original_screen=info;frontend->original_screen_saved=TRUE;
+        if(!GetConsoleCursorInfo(frontend->console_output,&frontend->original_cursor)) {
+            error=GetLastError();run16_native_frontend_destroy(frontend);return error;
+        }
+        frontend->original_cursor_saved=TRUE;
     }
     if(!GetConsoleMode(frontend->console_input,&frontend->original_input_mode)) {
         error=GetLastError();run16_native_frontend_destroy(frontend);return error;
@@ -370,7 +417,9 @@ DWORD run16_native_frontend_display(run16_native_frontend *frontend,BOOL window)
 }
 void run16_native_frontend_cancel(run16_native_frontend *frontend)
 {
-    if(frontend && frontend->stop)SetEvent(frontend->stop);
+    if(frontend && frontend->stop) {
+        SetEvent(frontend->stop);
+    }
 }
 DWORD run16_native_frontend_drain(run16_native_frontend *frontend)
 {
@@ -398,8 +447,11 @@ static DWORD apply_binding(run16_native_frontend *frontend,const void *owner,BOO
      * allowed to import it. This is I/O ownership, not task scheduling. */
     if(active && !native && frontend->native_owner) {
         if(frontend->dos_pending && frontend->dos_pending!=owner)return ERROR_BUSY;
-        frontend->dos_pending=owner;return ERROR_BUSY;
+        frontend->dos_pending=owner;
+        signal_binding_waiters(frontend);
+        return ERROR_BUSY;
     }
+    if(active && !native && frontend->dos_pending && frontend->dos_pending!=owner)return ERROR_BUSY;
     if(active && native && (frontend->dos_owner || frontend->dos_pending))return ERROR_NOT_READY;
     if(active && *slot==owner)return 0;
     if(*slot && *slot!=owner)return ERROR_BUSY;
@@ -443,6 +495,7 @@ static DWORD apply_binding(run16_native_frontend *frontend,const void *owner,BOO
         frontend->native_video=NULL;
         frontend->native_video_serial=0;
     }
+    signal_binding_waiters(frontend);
     return 0;
 }
 static DWORD bind_worker(run16_native_frontend *frontend,const void *owner,BOOL active,BOOL native)
@@ -466,6 +519,55 @@ static DWORD bind_worker(run16_native_frontend *frontend,const void *owner,BOOL 
 }
 DWORD run16_native_frontend_dos_bind(run16_native_frontend *frontend,const void *owner,BOOL active)
 { return bind_worker(frontend,owner,active,FALSE); }
+DWORD run16_native_frontend_wait_dos_ready(run16_native_frontend *frontend,const void *owner,
+    HANDLE cancel,DWORD timeout)
+{
+    ULONGLONG deadline=GetTickCount64()+timeout;
+    binding_waiter waiter={0},**link;
+    HANDLE waits[3];
+    DWORD error=ERROR_SUCCESS;
+    if(!frontend || !owner || !cancel || !timeout || timeout>10000)return ERROR_INVALID_PARAMETER;
+    waiter.changed=CreateEventW(NULL,TRUE,FALSE,NULL);
+    if(!waiter.changed)return GetLastError();
+    waits[0]=waiter.changed;waits[1]=cancel;waits[2]=frontend->stop;
+    EnterCriticalSection(&frontend->io_lock);
+    waiter.next=frontend->binding_waiters;
+    frontend->binding_waiters=&waiter;
+    for(;;) {
+        ULONGLONG now;DWORD wait,wait_error;
+        if(WaitForSingleObject(frontend->stop,0)!=WAIT_TIMEOUT ||
+            WaitForSingleObject(cancel,0)!=WAIT_TIMEOUT){error=ERROR_OPERATION_ABORTED;break;}
+        if(!frontend->native_owner && (!frontend->dos_owner || frontend->dos_owner==owner) &&
+            (!frontend->dos_pending || frontend->dos_pending==owner))break;
+        now=GetTickCount64();
+        if(now>=deadline){error=ERROR_TIMEOUT;break;}
+        /* Reset under the predicate lock, then wait outside it. A later
+         * ownership transition sets this private manual event; cancel/stop
+         * have their own persistent handles in the same wait set. */
+        if(!ResetEvent(waiter.changed)){error=GetLastError();break;}
+        LeaveCriticalSection(&frontend->io_lock);
+        wait=WaitForMultipleObjects(3,waits,FALSE,(DWORD)(deadline-now));
+        wait_error=wait==WAIT_FAILED ? GetLastError() : ERROR_SUCCESS;
+        EnterCriticalSection(&frontend->io_lock);
+        if(wait==WAIT_FAILED){error=wait_error;break;}
+        if(wait==WAIT_TIMEOUT){error=ERROR_TIMEOUT;break;}
+    }
+    for(link=&frontend->binding_waiters;*link && *link!=&waiter;link=&(*link)->next){}
+    if(*link==&waiter)*link=waiter.next;
+    LeaveCriticalSection(&frontend->io_lock);
+    CloseHandle(waiter.changed);
+    return error;
+}
+void run16_native_frontend_cancel_dos_pending(run16_native_frontend *frontend,const void *owner)
+{
+    if(!frontend || !owner)return;
+    EnterCriticalSection(&frontend->io_lock);
+    if(frontend->dos_pending==owner) {
+        frontend->dos_pending=NULL;
+        signal_binding_waiters(frontend);
+    }
+    LeaveCriticalSection(&frontend->io_lock);
+}
 DWORD run16_native_frontend_native_bind(run16_native_frontend *frontend,const void *owner,BOOL active)
 { return bind_worker(frontend,owner,active,TRUE); }
 DWORD run16_native_frontend_dos_enter(run16_native_frontend *frontend,const void *owner)
@@ -579,6 +681,7 @@ void run16_native_frontend_dos_forget(run16_native_frontend *frontend,const void
         frontend->native_owner=NULL;frontend->native_video=NULL;frontend->native_video_serial=0;
     }
     SetEvent(frontend->changed);
+    signal_binding_waiters(frontend);
     LeaveCriticalSection(&frontend->io_lock);
 }
 DWORD run16_native_frontend_destroy(run16_native_frontend *frontend)
@@ -603,6 +706,8 @@ DWORD run16_native_frontend_destroy(run16_native_frontend *frontend)
         CloseHandle(frontend->console_surface);
         frontend->console_surface=NULL;
     }
+    error=restore_original_console(frontend);
+    if(error)return error;
     if(frontend->input_mode_saved) {
         if(!SetConsoleMode(frontend->console_input,frontend->original_input_mode))return GetLastError();
         frontend->input_mode_saved=FALSE;

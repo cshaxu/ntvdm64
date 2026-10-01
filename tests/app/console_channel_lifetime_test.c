@@ -11,6 +11,7 @@
 #undef run16_console_dispatch
 #include "../../src/ntkvm-exe/console_video.c"
 static HANDLE read_entered,peer;
+static HANDLE held_dispatch,release_dispatch;
 static run16_native_frontend *test_frontend;
 static DWORD expected_generation;
 static DWORD WINAPI snapshot_contender(void *context)
@@ -23,12 +24,33 @@ static DWORD WINAPI snapshot_contender(void *context)
 DWORD run16_console_dispatch(run16_console_frontend *owner,
     const console_io_request *request,console_io_reply *reply)
 {
+    if(held_dispatch && request->operation==CONSOLE_IO_BARRIER) {
+        run16_native_frontend_snapshot_begin(test_frontend);
+        SetEvent(held_dispatch);
+        WaitForSingleObject(release_dispatch,INFINITE);
+        run16_native_frontend_snapshot_end(test_frontend);
+    }
     if(request->operation==CONSOLE_IO_READ_INPUT) SetEvent(read_entered);
     return actual_dispatch(owner,request,reply);
 }
 #include "../../src/ntkvm-exe/console_channel.c"
 #define CHECK(x) do { if(!(x)) { fprintf(stderr,"FAIL line=%u error=%lu\n", \
     (unsigned)__LINE__,GetLastError());ExitProcess(1); } } while(0)
+typedef struct dos_binding_wait_case {
+    const void *owner;
+    HANDLE cancel,started;
+    DWORD result;
+} dos_binding_wait_case;
+static DWORD WINAPI wait_for_dos_binding(void *context)
+{
+    dos_binding_wait_case *test=context;
+    CHECK(run16_native_frontend_dos_bind(test_frontend,test->owner,TRUE)==ERROR_BUSY);
+    CHECK(SetEvent(test->started));
+    test->result=run16_native_frontend_wait_dos_ready(test_frontend,test->owner,
+        test->cancel,10000);
+    if(test->result)run16_native_frontend_cancel_dos_pending(test_frontend,test->owner);
+    return 0;
+}
 /* Diagnostic-only self-process snapshot; never enters a product binary. */
 static void audit_handles(const char *stage)
 {
@@ -399,7 +421,7 @@ static void run_case(unsigned mode,unsigned round)
         CloseHandle(io.hEvent);
     }
     started=GetTickCount64();
-    run16_console_channel_stop(channel);
+    CHECK(!run16_console_channel_stop(channel));
     CHECK(GetTickCount64()-started<5000);
     if(mode==0 && round<4)CHECK(!FindWindowW(NULL,L"NTVDM"));
     CHECK(WaitForSingleObject(thread,0)==WAIT_OBJECT_0);
@@ -431,10 +453,45 @@ int main(int argc,char **argv)
 {
     unsigned round,mode;DWORD before,after;
     HANDLE input,canonical,alternate;DWORD count;COORD origin={0,0};
+    CONSOLE_SCREEN_BUFFER_INFO original,current,restored;
+    CONSOLE_CURSOR_INFO original_cursor={0},current_cursor={0},restored_cursor={0};
+    SMALL_RECT reduced;
     if(argc==2 && !strcmp(argv[1],"--worker-wait")) {Sleep(INFINITE);return 0;}
     read_entered=CreateEventW(NULL,TRUE,FALSE,NULL);CHECK(read_entered);
     CHECK(!run16_native_frontend_create(&test_frontend));
+    if(argc==2 && !strcmp(argv[1],"--stop-timeout")) {
+        run16_console_channel *channel=NULL;
+        console_io_request request={0};HANDLE worker;ULONGLONG began;
+        DWORD error;
+        held_dispatch=CreateEventW(NULL,TRUE,FALSE,NULL);
+        release_dispatch=CreateEventW(NULL,TRUE,FALSE,NULL);
+        CHECK(held_dispatch && release_dispatch);
+        expected_generation=777;
+        CHECK(DuplicateHandle(GetCurrentProcess(),GetCurrentProcess(),GetCurrentProcess(),
+            &worker,SYNCHRONIZE,FALSE,0));
+        CHECK(!run16_console_channel_start_request(expected_generation,worker,test_frontend,&channel));
+        CHECK(!run16_native_frontend_dos_bind(test_frontend,channel,TRUE));
+        request.version=CONSOLE_IO_VERSION;request.generation=expected_generation;
+        request.sequence=1;request.operation=CONSOLE_IO_BARRIER;
+        peer_io(TRUE,&request,(DWORD)offsetof(console_io_request,data));
+        CHECK(WaitForSingleObject(held_dispatch,1000)==WAIT_OBJECT_0);
+        began=GetTickCount64();
+        error=run16_console_channel_stop(channel);
+        CHECK(error==ERROR_TIMEOUT && GetTickCount64()-began>=9500 &&
+            GetTickCount64()-began<12000);
+        /* Timeout retains the borrowed channel/root. Once the fault clears,
+         * a second stop joins normally and all resources can be reclaimed. */
+        CHECK(SetEvent(release_dispatch));
+        CHECK(!run16_console_channel_stop(channel));
+        CHECK(!run16_native_frontend_destroy(test_frontend));
+        CloseHandle(peer);CloseHandle(held_dispatch);CloseHandle(release_dispatch);
+        CloseHandle(read_entered);
+        puts("PASS stopped channel returns ERROR_TIMEOUT within bound, retains borrowed storage, then joins after fault release");
+        return 0;
+    }
     CHECK(!run16_native_frontend_console(test_frontend,&input,&canonical));
+    CHECK(GetConsoleScreenBufferInfo(canonical,&original));
+    CHECK(GetConsoleCursorInfo(canonical,&original_cursor));
     CHECK(WriteConsoleOutputCharacterW(canonical,L"K",1,origin,&count) && count==1);
     alternate=CreateConsoleScreenBuffer(GENERIC_READ|GENERIC_WRITE,
         FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,CONSOLE_TEXTMODE_BUFFER,NULL);
@@ -460,18 +517,61 @@ int main(int argc,char **argv)
     printf("channel handles before=%lu after=%lu\n",before,after);
     CHECK(after==before);
     {
+        unsigned iteration;
+        for(iteration=0;iteration<32;++iteration) {
+            dos_binding_wait_case test={0};HANDLE waiter;
+            test.owner=&after;
+            test.cancel=CreateEventW(NULL,TRUE,FALSE,NULL);
+            test.started=CreateEventW(NULL,TRUE,FALSE,NULL);
+            CHECK(test.cancel && test.started);
+            CHECK(!run16_native_frontend_native_bind(test_frontend,&before,TRUE));
+            waiter=CreateThread(NULL,0,wait_for_dos_binding,&test,0,NULL);
+            CHECK(waiter && WaitForSingleObject(test.started,1000)==WAIT_OBJECT_0);
+            CHECK(SetEvent(test.cancel));
+            CHECK(WaitForSingleObject(waiter,1000)==WAIT_OBJECT_0);
+            CHECK(test.result==ERROR_OPERATION_ABORTED);
+            CHECK(!run16_native_frontend_native_bind(test_frontend,&before,FALSE));
+            /* A canceled DOS waiter must not reserve the next owner's slot. */
+            CHECK(!run16_native_frontend_dos_bind(test_frontend,&round,TRUE));
+            CHECK(!run16_native_frontend_dos_bind(test_frontend,&round,FALSE));
+            CloseHandle(waiter);CloseHandle(test.cancel);CloseHandle(test.started);
+        }
+    }
+    {
         ULONGLONG began=GetTickCount64();
         run16_native_frontend_cancel(test_frontend);
         CHECK(run16_native_frontend_dos_bind(test_frontend,&before,TRUE)==ERROR_OPERATION_ABORTED);
         CHECK(GetTickCount64()-began<1000);
     }
+    /* The DOS path may reduce the shared root Console to 80x25.  Teardown
+     * must return the outer shell's viewport and cursor, not merely select
+     * its original screen buffer. */
+    CHECK(GetConsoleScreenBufferInfo(canonical,&current));
+    CHECK(GetConsoleCursorInfo(canonical,&current_cursor));
+    reduced=current.srWindow;
+    CHECK(reduced.Bottom>reduced.Top);
+    --reduced.Bottom;
+    CHECK(opennt_console_resize_grid(canonical,NULL,TRUE,&reduced));
+    CHECK(SetConsoleCursorPosition(canonical,(COORD){reduced.Left,reduced.Top}));
+    current_cursor.bVisible=!current_cursor.bVisible;
+    CHECK(SetConsoleCursorInfo(canonical,&current_cursor));
     run16_native_frontend_destroy(test_frontend);
+    CHECK(GetConsoleScreenBufferInfo(canonical,&restored));
+    CHECK(restored.dwSize.X==original.dwSize.X && restored.dwSize.Y==original.dwSize.Y &&
+        !memcmp(&restored.srWindow,&original.srWindow,sizeof(restored.srWindow)) &&
+        restored.dwCursorPosition.X==original.dwCursorPosition.X &&
+        restored.dwCursorPosition.Y==original.dwCursorPosition.Y);
+    CHECK(GetConsoleCursorInfo(canonical,&restored_cursor));
+    CHECK(restored_cursor.dwSize==original_cursor.dwSize &&
+        restored_cursor.bVisible==original_cursor.bVisible);
     CHECK(SetConsoleActiveScreenBuffer(canonical));
     CloseHandle(alternate);CloseHandle(canonical);CloseHandle(input);
     CloseHandle(read_entered);
     puts("PASS 102 real channel lifetimes: pipe cancel, nonblocking empty input, barrier/EOF/stop race, oversized request, real process death, snapshot lock; joined threads, EOF readiness, no handle growth");
     puts("PASS four graphics channels each create/retire two Windows, including active graphics disposal; exact post-warm-up handle equality");
     puts("PASS all nested channels retain canonical K while active surface is A; private handle copies survive frontend teardown");
+    puts("PASS root frontend restores the caller viewport, buffer extent and cursor after a DOS-sized mutation");
     puts("PASS stopped presentation owner rejects handoff without waiting for execution or restarting a helper");
+    puts("PASS 32 canceled DOS binding waits: no lost stop wake and no pending-owner leak");
     return 0;
 }

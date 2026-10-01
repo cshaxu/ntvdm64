@@ -16,10 +16,23 @@ static DWORD activate(void *context,BOOL active,DWORD kind)
 {
     run16_console_channel *channel=context;
     DWORD error;
+    ULONGLONG deadline=GetTickCount64()+10000;
     if(channel->kind_selected && channel->native!=(kind==CONSOLE_IO_WORKER_NATIVE))return ERROR_INVALID_DATA;
     channel->kind_selected=TRUE;channel->native=kind==CONSOLE_IO_WORKER_NATIVE;
-    error=channel->native ? run16_native_frontend_native_bind(channel->root,channel,active) :
-        run16_native_frontend_dos_bind(channel->root,channel,active);
+    do {
+        error=channel->native ? run16_native_frontend_native_bind(channel->root,channel,active) :
+            run16_native_frontend_dos_bind(channel->root,channel,active);
+        if(error==ERROR_BUSY && active && !channel->native) {
+            ULONGLONG now=GetTickCount64();
+            if(now>=deadline){error=ERROR_TIMEOUT;break;}
+            error=run16_native_frontend_wait_dos_ready(channel->root,channel,
+                channel->stop,(DWORD)(deadline-now));
+            if(!error)continue;
+        }
+        break;
+    } while(TRUE);
+    if(error && active && !channel->native)
+        run16_native_frontend_cancel_dos_pending(channel->root,channel);
     /* A released worker's cached frame predates the new owner's geometry.
      * Root binding has detached this pointer under the shared I/O lock. Keep
      * the visible common screen, but require a fresh complete worker frame. */
@@ -194,16 +207,24 @@ HANDLE run16_console_channel_thread(run16_console_channel *channel)
     return channel ? channel->thread : NULL;
 }
 
-void run16_console_channel_stop(run16_console_channel *channel)
+DWORD run16_console_channel_stop(run16_console_channel *channel)
 {
-    if (!channel) return;
-    if (channel->stop) SetEvent(channel->stop);
+    DWORD wait;
+    if (!channel) return ERROR_SUCCESS;
+    if (channel->stop) {
+        SetEvent(channel->stop);
+    }
     if (channel->thread) {
-        /* A source caller can request a blocking Console read. Cancel that
-         * synchronous public API before joining, as well as pipe I/O below. */
-        do {
-            CancelSynchronousIo(channel->thread);
-        } while (WaitForSingleObject(channel->thread,50)==WAIT_TIMEOUT);
+        /* Signal-driven pipe transfers observe stop. Also cancel any active
+         * synchronous Console API and overlapped pipe I/O once, then bound
+         * the join. A timed-out thread still borrows channel/root storage;
+         * the caller must keep both alive until terminal process cleanup. */
+        (void)CancelSynchronousIo(channel->thread);
+        if(channel->pipe && channel->pipe!=INVALID_HANDLE_VALUE)
+            (void)CancelIoEx(channel->pipe,NULL);
+        wait=WaitForSingleObject(channel->thread,10000);
+        if(wait!=WAIT_OBJECT_0)
+            return wait==WAIT_TIMEOUT ? ERROR_TIMEOUT : GetLastError();
         CloseHandle(channel->thread);
     } else if (channel->pipe && channel->pipe!=INVALID_HANDLE_VALUE) CloseHandle(channel->pipe);
     run16_native_frontend_dos_forget(channel->root,channel);
@@ -215,6 +236,7 @@ void run16_console_channel_stop(run16_console_channel *channel)
     if (channel->console.input && channel->console.input!=INVALID_HANDLE_VALUE) CloseHandle(channel->console.input);
     if (channel->console.output && channel->console.output!=INVALID_HANDLE_VALUE) CloseHandle(channel->console.output);
     HeapFree(GetProcessHeap(),0,channel);
+    return ERROR_SUCCESS;
 }
 
 DWORD run16_console_channel_start_request(DWORD request,HANDLE worker,run16_native_frontend *root,run16_console_channel **output)
@@ -282,6 +304,6 @@ DWORD run16_console_channel_start_request(DWORD request,HANDLE worker,run16_nati
     return ERROR_SUCCESS;
 fail:
     if (server!=INVALID_HANDLE_VALUE) CloseHandle(server);
-    run16_console_channel_stop(channel);
+    (void)run16_console_channel_stop(channel);
     return error;
 }

@@ -12,13 +12,15 @@ typedef struct ntcon_execution_io {
      * Lets the Console owner serialize CreateProcess against explicit close. */
     void (*release_launch)(void *);
 } ntcon_execution_io;
+typedef void (*ntcon_execution_fault)(void *,DWORD);
 DWORD ntcon_executions_open(ntcon_executions **);
 /* Configure before accepting any request. The callback context outlives close. */
 void ntcon_executions_bind_io(ntcon_executions *,const ntcon_execution_io *);
+/* A failed broker completion is fatal even while GetNext is blocked. */
+void ntcon_executions_bind_fault(ntcon_executions *,ntcon_execution_fault,void *);
 BOOL ntcon_executions_idle(ntcon_executions *);
-/* The resident native worker must complete its admitted Direct request before
- * returning to its next blocking get-next step.  This is event-driven; it
- * does not inspect Console membership or use a timer. */
+/* Drain helper for shutdown and tests; the production GetNext loop must not
+ * wait for idle because an active CMD may itself start another run16. */
 DWORD ntcon_executions_wait_idle(ntcon_executions *);
 /* A broker completion failure is a worker fault, not permission to accept a
  * second command while NTSRV may still retain the first record. */

@@ -47,8 +47,9 @@ static DWORD WINAPI frontend_pump(void *context)
              * live workers and their task lifetimes are not affected. */
             while ((entry=*link)!=NULL) {
                 if (WaitForSingleObject(run16_console_channel_thread(entry->channel),0)==WAIT_OBJECT_0) {
+                    error=run16_console_channel_stop(entry->channel);
+                    if(error)return error;
                     *link=entry->next;
-                    run16_console_channel_stop(entry->channel);
                     HeapFree(GetProcessHeap(),0,entry);
                 } else link=&entry->next;
             }
@@ -86,8 +87,9 @@ static DWORD WINAPI frontend_pump(void *context)
              * execution based on the creator's process or direct target. */
             while(scope->channels){
                 frontend_channel *entry=scope->channels;
+                error=run16_console_channel_stop(entry->channel);
+                if(error)return error;
                 scope->channels=entry->next;
-                run16_console_channel_stop(entry->channel);
                 HeapFree(GetProcessHeap(),0,entry);
             }
             return run16_native_frontend_drain(scope->native);
@@ -108,8 +110,9 @@ DWORD frontend_service_close(frontend_session_service *scope)
         CloseHandle(scope->thread);
     }
     while ((entry=scope->channels)!=NULL) {
+        error=run16_console_channel_stop(entry->channel);
+        if(error)return error;
         scope->channels=entry->next;
-        run16_console_channel_stop(entry->channel);
         HeapFree(GetProcessHeap(),0,entry);
     }
     error=run16_native_frontend_destroy(scope->native);

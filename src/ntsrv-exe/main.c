@@ -354,6 +354,15 @@ error_status_t Server_FrontendStateChanged(handle_t binding,VDM_CONNECTION conne
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
     return error ? error : OpenNtBaseServiceFrontendStateChanged(connection,pid,generation,state_changed);
 }
+error_status_t Server_WorkerStateChanged(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+    ULONG generation,HANDLE *state_changed)
+{
+    DWORD pid,error;
+    if(!state_changed)return ERROR_INVALID_PARAMETER;
+    *state_changed=NULL;
+    error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    return error ? error : OpenNtBaseServiceWorkerStateChanged(connection,pid,generation,state_changed);
+}
 error_status_t Server_RetireFrontend(handle_t binding,VDM_CONNECTION connection,HANDLE process,ULONG generation)
 {
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
