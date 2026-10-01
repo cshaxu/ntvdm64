@@ -98,17 +98,8 @@ struct OPENNT_BASE_CONNECTION {
 typedef struct OPENNT_BASE_CONRECORD {
     LIST_ENTRY link;
     DWORD request;
-    /* The direct target is bound from NTCON's actual CreateProcess handle;
-     * observed entries are keyed by an NTSRV-owned Job notification. Never
-     * derive either identity from a member count. */
+    /* Bind only the admitted direct target's actual CreateProcess identity. */
     DWORD process_id;
-    /* Kernel Job NEW_PROCESS supplies the actual native parent identity. */
-    DWORD parent_process_id;
-    /* Direct records are created by an admitted Run16 request.  Observed
-     * records describe a native child which Windows attached to NTCON's
-     * Console (for example CMD -> EDIT).  Both are broker-owned management
-     * records; only direct records are completed by the request RPC. */
-    BOOL observed;
     WCHAR image[OPENNT_BASE_WORKER_IMAGE_CHARS];
 } OPENNT_BASE_CONRECORD;
 typedef struct OPENNT_FRONTEND_ROUTE {
@@ -223,9 +214,7 @@ static DWORD service_conrecord_depth(const OPENNT_BASE_CONNECTION *connection)
 {
     const LIST_ENTRY *link;
     DWORD depth=0;
-    /* One ConRecord list is the native management stack. Direct records and
-     * Job-observed descendants have distinct completion authority, but NTMON
-     * intentionally presents both as entries in this single stack. */
+    /* Only broker-admitted Direct records exist in this management stack. */
     for(link=connection->conrecords.Flink;link!=&connection->conrecords;link=link->Flink)
         ++depth;
     return depth;
@@ -876,7 +865,7 @@ static void service_copy_management_record(OPENNT_BASE_WORKER_WATCH *watch,
         (void)RtlEnterCriticalSection(&BaseSrvWOWCriticalSection);
         if (WOWHead && WOWHead->SequenceNumber==watch->process.SequenceNumber) {
             for (wow=WOWHead->WOWRecord;wow;wow=wow->WOWRecordNext) {
-                ++item->reserved;
+                ++item->stack_depth;
                 if (!selected_wow || (!selected_wow->fDispatched && wow->fDispatched))
                     selected_wow=wow;
             }
@@ -910,7 +899,6 @@ static void service_copy_management_record(OPENNT_BASE_WORKER_WATCH *watch,
         OPENNT_BASE_MANAGEMENT_LABEL *label;
         item->kind=0u; /* DOS worker */
         item->state=selected->VDMState;
-        item->reserved=item->stack_depth;
         if (selected->lpVDMInfo) {
             item->task=selected->lpVDMInfo->iTask;
             service_copy_management_image(selected->lpVDMInfo,item->image);
@@ -941,11 +929,9 @@ static void service_copy_conrecord(OPENNT_BASE_CONNECTION *native,
     OPENNT_BASE_CONRECORD *record=NULL;
     if (!IsListEmpty(&native->conrecords))
         record=CONTAINING_RECORD(native->conrecords.Blink,OPENNT_BASE_CONRECORD,link);
-    /* A Job-observed descendant remains visible in TASK/STACK, but only an
-     * admitted Direct request controls the worker's product lifecycle. */
+    /* Only admitted Direct requests populate TASK/STACK. */
     item->state=native->native_inflight ? VDM_BUSY : VDM_READY;
     item->stack_depth=service_conrecord_depth(native);
-    item->reserved=item->stack_depth;
     item->task=record ? record->request : 0;
     lstrcpynW(item->image,record ? record->image : L"<EMPTY>",
         OPENNT_BASE_WORKER_IMAGE_CHARS);
@@ -1382,7 +1368,7 @@ DWORD OpenNtBaseServiceCompleteWorkerChannel(OPENNT_BASE_CONNECTION *connection,
         if(!request) error=ERROR_SUCCESS; /* I/O resume, not a native task. */
         else for(link=connection->conrecords.Flink;link!=&connection->conrecords;link=link->Flink) {
             OPENNT_BASE_CONRECORD *candidate=CONTAINING_RECORD(link,OPENNT_BASE_CONRECORD,link);
-            if(!candidate->observed && candidate->request==request) { record=candidate;break; }
+            if(candidate->request==request) { record=candidate;break; }
         }
         if(request && !record)error=ERROR_INVALID_STATE;
         else if(request) {
@@ -1405,7 +1391,7 @@ DWORD OpenNtBaseServiceBindNativeTarget(OPENNT_BASE_CONNECTION *connection,DWORD
     if(OpenNtBaseServicePeer(connection,pid,generation) && connection->native_worker) {
         for(link=connection->conrecords.Flink;link!=&connection->conrecords;link=link->Flink) {
             OPENNT_BASE_CONRECORD *record=CONTAINING_RECORD(link,OPENNT_BASE_CONRECORD,link);
-            if(!record->observed && record->request==request) {
+            if(record->request==request) {
                 if(record->process_id && record->process_id!=target_pid)error=ERROR_INVALID_STATE;
                 else {
                     /* S24 owns only direct identity and receipt.  The target
@@ -1725,9 +1711,7 @@ DWORD OpenNtBaseServiceFrontendUsage(OPENNT_BASE_CONNECTION *root,DWORD pid,
         if(caller->native_activity_root==generation && caller->native_inflight &&
             WaitForSingleObject(caller->process.ProcessHandle,0)==WAIT_TIMEOUT)
             pending_count=1;
-        /* ConRecords are NTMON projection only.  In particular, a Job-observed
-         * native descendant has no receipt and cannot retain this root's
-         * frontend capability or change worker readiness. */
+        /* Management ConRecords do not add a separate frontend pin. */
     }
     /* A route pins the actual selected worker, not the submitting launcher.
      * The original DOSRecord chain survives launcher disconnection. Read it

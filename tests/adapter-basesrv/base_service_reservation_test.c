@@ -295,7 +295,6 @@ int main(int argc,char **argv)
             HANDLE participant_release=NULL;
             OPENNT_BASE_CONNECTION *root=NULL;
             DWORD request=0,frontend_generation=0,root_generation=0,old_generation;
-            DWORD participant_deadline;
             char participant_name[96],participant_command[MAX_PATH+192];
             HANDLE native_stop=CreateEventW(NULL,TRUE,FALSE,NULL);
             HANDLE native_closed=CreateEventW(NULL,TRUE,FALSE,NULL);
@@ -318,6 +317,17 @@ int main(int argc,char **argv)
             CHECK(CreateProcessA(NULL,participant_command,NULL,NULL,FALSE,CREATE_SUSPENDED|CREATE_NO_WINDOW,
                 NULL,NULL,&startup,&laterChild));
             CHECK(!OpenNtBaseServiceConnect(service,laterChild.hProcess,&root,&root_generation));
+            {
+                /* Model the authenticated same-Console report explicitly.
+                 * The fixture's suspended child has no live Console of its
+                 * own, so omitting this precondition cannot select a worker. */
+                DWORD launcher_members[1]={GetCurrentProcessId()};
+                DWORD root_members[2]={laterChild.dwProcessId,GetCurrentProcessId()};
+                CHECK(!OpenNtBaseServiceReportConsoleMembers(launcher,GetCurrentProcessId(),
+                    launcherGeneration,1,launcher_members));
+                CHECK(!OpenNtBaseServiceReportConsoleMembers(root,laterChild.dwProcessId,
+                    root_generation,2,root_members));
+            }
             /* A second authenticated launcher explicitly selects the existing
              * native worker; merely connecting did not grant command access. */
             CHECK(OpenNtBaseServiceRetainCommandWorker(root,laterChild.dwProcessId,
@@ -362,21 +372,12 @@ int main(int argc,char **argv)
                  * actual CreateProcess target to the direct CONRECORD. */
                 CHECK(!OpenNtBaseServiceBindNativeTarget(worker,child.dwProcessId,workerGeneration,
                     test_native_request,laterChild.hProcess));
-                /* Bind precedes resume: the child created by this direct root
-                 * must enter the server Job, never a sampled Console list. */
+                /* Bind precedes resume; it publishes only the admitted Direct
+                 * target identity, never a sampled Console participant. */
                 CHECK(ResumeThread(laterChild.hThread)!=(DWORD)-1);
-                participant_deadline=GetTickCount()+5000;
-                do {
-                    CHECK(!OpenNtBaseServiceSnapshot(service,&managementEpoch,&workerInfo,1,&workerInfoCount));
-                    if(workerInfoCount==1 && workerInfo.stack_depth==2)break;
-                    Sleep(10);
-                } while((LONG)(participant_deadline-GetTickCount())>0);
                 CHECK(!OpenNtBaseServiceSnapshot(service,&managementEpoch,&workerInfo,1,&workerInfoCount));
-                /* One chain, not two tables: Direct root plus observed native
-                 * descendant.  The observed tail intentionally has no task
-                 * receipt, so it projects TASK=0 while STACK remains two. */
-                CHECK(workerInfoCount==1 && workerInfo.kind==2 && workerInfo.stack_depth==2 &&
-                    workerInfo.reserved==2 && !workerInfo.task && workerInfo.image[0]);
+                CHECK(workerInfoCount==1 && workerInfo.kind==2 && workerInfo.stack_depth==1 &&
+                    workerInfo.task==test_native_request && workerInfo.image[0]);
                 CHECK(WriteFile(client,"NTC",3,&count,NULL) && count==3);
                 CHECK(ReadFile(request_pipe,actual,3,&count,NULL) && count==3 && !memcmp(actual,"NTC",3));
                 CHECK(!OpenNtBaseServiceRetainFrontendRoot(worker,child.dwProcessId,workerGeneration,
@@ -414,11 +415,10 @@ int main(int argc,char **argv)
                 CHECK(!OpenNtBaseServiceCompleteWorkerChannel(worker,child.dwProcessId,workerGeneration));
                 CHECK(OpenNtBaseServiceCompleteWorkerChannel(worker,child.dwProcessId,workerGeneration)==ERROR_INVALID_STATE);
                 CHECK(!OpenNtBaseServiceSnapshot(service,&managementEpoch,&workerInfo,1,&workerInfoCount));
-                /* Completing the Direct receipt removes only its node.  The
-                 * observed descendant remains in the same chain, yet cannot
-                 * hold the resident worker BUSY. */
-                CHECK(workerInfoCount==1 && workerInfo.state && workerInfo.stack_depth==1 &&
-                    workerInfo.reserved==1 && !workerInfo.task);
+                /* The still-live native process is not a broker task after
+                 * its Direct receipt completes. Windows owns its lifetime. */
+                CHECK(workerInfoCount==1 && workerInfo.state && !workerInfo.stack_depth &&
+                    !workerInfo.task && !wcscmp(workerInfo.image,L"<EMPTY>"));
                 CHECK(!OpenNtBaseServiceFrontendUsage(root,laterChild.dwProcessId,root_generation,&pending,&tasks));
                 CHECK(!pending && !tasks);
             }
@@ -428,10 +428,9 @@ int main(int argc,char **argv)
             CHECK(!OpenNtBaseServiceRegisterNativeBackend(worker,child.dwProcessId,workerGeneration,
                 capability,native_stop,native_closed));
             CHECK(!OpenNtBaseServiceSnapshot(service,&managementEpoch,&workerInfo,1,&workerInfoCount));
-            /* Re-registering native backend presentation does not erase the
-             * still-live observed descendant.  It is one visible ConRecord
-             * chain entry, but remains non-authoritative for worker state. */
-            CHECK(workerInfoCount==1 && workerInfo.kind==2 && workerInfo.reserved==1 &&
+            /* Re-registering presentation does not turn an ordinary attached
+             * native process into a broker Direct task. */
+            CHECK(workerInfoCount==1 && workerInfo.kind==2 && !workerInfo.stack_depth &&
                 workerInfo.process_id==child.dwProcessId && workerInfo.sequence==workerGeneration);
             old_generation=root_generation;
             CHECK(!OpenNtBaseServiceSubmitWorkerChannel(launcher,GetCurrentProcessId(),
@@ -458,7 +457,7 @@ int main(int argc,char **argv)
             CHECK(!OpenNtBaseServiceRegisterNativeBackend(worker,child.dwProcessId,workerGeneration,
                 capability,native_stop,native_closed));
             CHECK(!OpenNtBaseServiceSnapshot(service,&managementEpoch,&workerInfo,1,&workerInfoCount));
-            CHECK(workerInfoCount==1 && workerInfo.reserved==1 && workerInfo.sequence==workerGeneration);
+            CHECK(workerInfoCount==1 && !workerInfo.stack_depth && workerInfo.sequence==workerGeneration);
             CHECK(!OpenNtBaseServiceRequestFrontend(launcher,GetCurrentProcessId(),launcherGeneration,capability));
             CHECK(!OpenNtBaseServiceFrontendRequest(root,laterChild.dwProcessId,root_generation,&request,&selected));
             CHECK(GetProcessId(selected)==child.dwProcessId);CloseHandle(selected);
@@ -475,17 +474,11 @@ int main(int argc,char **argv)
             CHECK(!OpenNtBaseServiceDisconnect(root));root=NULL;
             CHECK(SetEvent(participant_release));
             CHECK(WaitForSingleObject(laterChild.hProcess,5000)==WAIT_OBJECT_0);
-            /* EXIT_PROCESS retires the observed tail.  This is still an
-             * observation-only assertion: the resident worker was READY
-             * before it happened, and its lifecycle never waited on it. */
-            participant_deadline=GetTickCount()+5000;
-            do {
-                CHECK(!OpenNtBaseServiceSnapshot(service,&managementEpoch,&workerInfo,1,&workerInfoCount));
-                if(workerInfoCount==1 && !workerInfo.stack_depth)break;
-                Sleep(10);
-            } while((LONG)(participant_deadline-GetTickCount())>0);
+            /* No Job observer is admitted: exit does not complete an invented
+             * ConRecord or change the already READY resident worker. */
+            CHECK(!OpenNtBaseServiceSnapshot(service,&managementEpoch,&workerInfo,1,&workerInfoCount));
             CHECK(workerInfoCount==1 && workerInfo.state && !workerInfo.stack_depth &&
-                !workerInfo.reserved && !workerInfo.task);
+                !workerInfo.task);
             CloseHandle(laterChild.hThread);CloseHandle(laterChild.hProcess);
             CloseHandle(participant_release);participant_release=NULL;
             CloseHandle(client);CloseHandle(server);CloseHandle(ready);CloseHandle(foreign);CloseHandle(capability);
@@ -1584,6 +1577,9 @@ int main(int argc,char **argv)
         updateAnswer,updateAnswerBytes,&updateAnswerBytes,&parentEvent,&parentReceipt)==ERROR_SUCCESS);
     CHECK(ResumeThread(wowChild.hThread)!=(DWORD)-1);
     CHECK(OpenNtBaseServiceConnect(service,wowChild.hProcess,&wowWorker,&wowGeneration)==ERROR_SUCCESS);
+    CHECK(!OpenNtBaseServiceSnapshot(service,&managementEpoch,&workerInfo,1,&workerInfoCount));
+    CHECK(workerInfoCount==1 && workerInfo.kind==1 && workerInfo.stack_depth==1 &&
+        workerInfo.task==wowTask);
     CHECK(OpenNtBaseServiceWowStarted(launcher,GetCurrentProcessId(),launcherGeneration,
         wowTask)==ERROR_ACCESS_DENIED);
     CHECK(OpenNtBaseServiceWowStarted(wowWorker,wowChild.dwProcessId,wowGeneration+1,

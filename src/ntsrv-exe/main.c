@@ -152,7 +152,6 @@ error_status_t Server_TaskSnapshot(handle_t binding,HANDLE process,ULONG protoco
             (*entries)[index].process_id=local[index].process_id;
             (*entries)[index].kind=local[index].kind;
             (*entries)[index].state=local[index].state;
-            (*entries)[index].reserved=local[index].reserved;
             (*entries)[index].started_filetime=(hyper)local[index].started_filetime;
             (*entries)[index].task=local[index].task;
             (*entries)[index].stack_depth=local[index].stack_depth;

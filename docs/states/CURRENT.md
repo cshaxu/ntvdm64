@@ -4,28 +4,37 @@
 
 ## Active Packet
 
-**Active: M0 T423 S28 — management projection and divergence cleanup**
+**Active: M0 T423 S29 — whole control-plane acceptance and owner handoff**
 
-| Field | S28 brief |
+| Field | S29 brief |
 | --- | --- |
-| Identifier Mode | M0 T423 S28, Ordinary Mode. |
-| Admission And Approval | Owner approved automatic sequential S admission through S29; S27 reached its bounded conclusion. |
-| Objective | Make NTMON a pure NTSRV worker/task projection and remove remaining same-semantic project-added NTVDM/NTCON divergence. |
-| Non-goals | No Job-observed task authority, NTVDM-to-NTCON shape conversion, new scheduler/helper, guest/shared-lib change or original DOS/WOW rewrite. |
-| Reference Baseline | Published S27 protocol-24 eight-file package and [S27 audit](../etc/evidence/m0-t423-s27-worker-control-audit.md). |
-| Files And ABI Surface | NTSRV management DTO, NTMON rendering, Run16/NTKVM/worker-base/interface worker-kind boundaries. |
+| Identifier Mode | M0 T423 S29, Ordinary Mode. |
+| Admission And Approval | Owner approved automatic sequential S admission through S29; S28 reached its bounded conclusion. |
+| Objective | Whole control-plane acceptance, final divergence/diff accounting and owner handoff; keep T423 open for owner verification. |
+| Non-goals | No new product mechanism, Job-observed task authority, guest/shared-lib change or original DOS/WOW rewrite. |
+| Reference Baseline | Published S28 protocol-25 eight-file package and [S28 audit](../etc/evidence/m0-t423-s28-management-projection.md). |
+| Files And ABI Surface | Existing Run16/NTSRV/NTVDM/NTCON/NTKVM/NTMON/worker-base/interface control paths and tests. |
 | Applicable Rules | [Execution](../rules/EXECUTION.md), [Architecture](../rules/ARCHITECTURE.md), [Coding](../rules/CODING.md), [Documentation](../rules/DOCUMENT.md). |
-| Verification | Management snapshots plus DOS/native reuse and faults; every production P also needs formal x86, 17+17, WOW frontiers and coherent package publication. |
-| Expected Markers | `kind=0/1/2` for DOS/Win16/Win32; one `PID/STATE/STACK/TASK/IMAGE/START/ELAPSED` DTO; resident `STACK=0/TASK=<EMPTY>`; no `MEMBERS=`. |
-| Asset Needs | Existing product and fixture graphs; new output only under `build/M0-T423/S28/`; immutable guest and `O:/winnt/Logs2`. |
-| Reporting Requirements | Full remaining divergence ledger, removed duplicates, retained distinctions, failure evidence, hashes and non-passes. |
+| Verification | Repeated reuse, direct/nested DOS/native, route/root rebind, completion, disconnect, worker death, explicit close, independent sessions and management display; full x86, 17+17 and WOW gates for any production P. |
+| Expected Markers | One NTSRV authority, original NTVDM GetNext shape, resident READY/BUSY/READY, direct receipts only for direct targets, clear non-passes. |
+| Asset Needs | Existing product and fixture graphs; new output only under `build/M0-T423/S29/`; immutable guest and `O:/winnt/Logs2`. |
+| Reporting Requirements | Final whole-plane evidence, diff/duplicate accounting, exact package hashes and owner acceptance request. |
 | Stop Conditions | Original execution rewrite, new process/scheduler or guest/shared-lib change requires owner review. |
-| Exit Criteria | One management projection, remaining safe duplicates removed, required runtime gates passed, eight-file package published if code changed, governance and clean pushed worktree. |
+| Exit Criteria | S29 evidence, required runtime gates, governance and clean pushed worktree, then stop for owner acceptance without closing T423. |
 | Original Owner Request | Automatic sequential admission for remaining T423 tasks; NTCON adapts to NTVDM's original shape. |
-| Similar-Issue Sweep | Kind/state/stack/task labels and client/control paths for both workers and independent roots. |
+| Similar-Issue Sweep | Cross-worker fault/reuse symmetry, nested/independent roots, management display and retained limitations. |
 
 T423 remains open and must not close without owner acceptance. See the
 [successor sequence](../proposals/proposal-kvm-window-graphics-presentation-001.md#successor-s-sequence).
+
+## S28 Closure Record
+
+S28 removed the redundant management `reserved` field and dead native Job
+projection fields, corrected WOW depth into the sole `stack_depth` field, and
+bumped the shared wire protocol to 25. BaseSrv/NTMON focused tests, all 17
+Console plus 17 Window product cases, and the retained WINMINE/SOL/WRITE
+frontiers passed. The coherent eight-file package is published to `O:/winnt`;
+the source/owner ledger, hashes and non-passes are in the [S28 evidence](../etc/evidence/m0-t423-s28-management-projection.md).
 
 ## S27 Closure Record
 

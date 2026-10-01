@@ -2,6 +2,7 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T423 S28 management projection](evidence/m0-t423-s28-management-projection.md) | M0 T423 S28 | One versioned management DTO, WOW/native/DOS depth proof, remaining ownership differences and full product-gate evidence. | Retain through T423 acceptance. |
 | [T423 S27 worker control-plane audit](evidence/m0-t423-s27-worker-control-audit.md) | M0 T423 S27 | Distinguishes truly shared worker mechanisms from NTCON-only command delivery and records candidate regression limits. | Retain through T423 acceptance. |
 | [T423 S26 Job observation disposition](evidence/m0-t423-s26-job-observation-disposition.md) | M0 T423 S26 | Rejects unsafe, non-authoritative Job projection from product and retains its isolated fixture. | Retain through T423 acceptance. |
 | [T423 S25 native nesting and wait evidence](evidence/m0-t423-s25-native-nesting-wait.md) | M0 T423 S25 | Reproduces the accepted-baseline nested native deadlock, separates the known long-path limitation, and records the host wait cycle to repair. | Retain through T423 acceptance. |

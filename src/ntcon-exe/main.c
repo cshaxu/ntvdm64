@@ -86,9 +86,8 @@ static DWORD end_io(void *context)
 {
     native_membership *state=context;DWORD error=ERROR_SUCCESS,attempt;
     EnterCriticalSection(state->lock);
-    /* Completion belongs to the direct target.  A Job event may project an
-     * Observed descendant in NTSRV's one ConRecord chain, but neither that
-     * observation nor a physical Console snapshot can retain NTSRV BUSY. */
+    /* Completion belongs to the direct target. Physical Console membership
+     * does not create broker tasks or retain NTSRV BUSY. */
     if(!error && state->presenting) {
         if(state->users>1) {
             for(attempt=0;attempt<8;++attempt) {

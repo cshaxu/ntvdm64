@@ -17,14 +17,10 @@ typedef struct OPENNT_BASE_WORKER_INFO {
     uint32_t sequence;
     uint32_t kind;
     uint32_t state;
-    /* Count of management records currently executing or queued for this
-     * worker. DOS/WOW uses original records; native text uses one CONRECORD
-     * stack containing direct requests and Job-observed descendants. */
-    uint32_t reserved;
     uint64_t started_filetime;
     uint32_t task;
-    /* Management-only depth: 0 is the resident PermCom, 1 its COMMAND,
-     * and each child command increases the visible call depth. */
+    /* Management-only depth: original DOS/WOW records or admitted native
+     * Direct records. Zero is a resident worker without an active task. */
     uint32_t stack_depth;
     uint32_t process_id;
     WCHAR image[OPENNT_BASE_WORKER_IMAGE_CHARS];
