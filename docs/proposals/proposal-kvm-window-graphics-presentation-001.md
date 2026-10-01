@@ -345,6 +345,55 @@ blocking get-next wait into a timed failure.
 | S28 | Unified management projection and divergence cleanup | Make NTMON a pure NTSRV projection consumer: `kind=0 DOS, 1 Win16, 2 Win32`, one `PID/STATE/STACK/TASK/IMAGE/START/ELAPSED` DTO, and `STACK=0/TASK=<EMPTY>` for resident workers. Derive Direct from the actual admitted target and any Observed display only from the S26 decision; never infer completion or BUSY from a sample, or display `MEMBERS=`. Audit all remaining project-added NTVDM/NTCON differences in Run16/NTSRV/NTKVM/NTMON/worker-base/interface; delete same-semantic duplicates and account for worker-local differences. Rich native stack display is conditional on S26 evidence, not an S24 claim. |
 | S29 | Whole control-plane acceptance and owner handoff | Add no new product mechanism. Execute repeated resident reuse, direct and nested DOS/Console lifecycle, route/root rebind, completion, disconnect, worker death, explicit close, independent-session and management-display matrices, including the S25 timeout/notification cases and S26 Observed limitations. Audit S25's still-failing supplemental final-banner history check against the original OpenNT resize contract; do not report it as a pass or silently expand the product contract. Include full x86/DOS/Window/WOW production regressions, coherent package publication, governance, and final diff/duplicate accounting. Stop for owner verification; do not autonomously close T423. |
 | S30 | Restore OpenNT DOS row selection and service revision | Supersede S13's last-valid-DOS fallback. Select 80×22/25/28/43/50 with the original `calcScreenParams` integer midpoint comparisons against the native Console viewport height; retain existing row-copy and worker handoff. Synchronize `service.idl` revision 25.0 with application protocol 25, regenerate MIDL, fully relink and reject old/new protocol peers. Test every midpoint edge, 30→28, native/DOS nesting, Console/Window and previous DOS/WOW frontiers. Publish only a coherent verified eight-file package; leave T423 open for owner acceptance. |
+| S31 | Preserve final DOS Console state on frontend retirement | Remove project-added restoration of startup geometry and cursor position on ordinary root teardown; retain canonical-buffer selection, cursor shape and input-mode cleanup. Prove real 80×30→80×25/28 Console cell/cursor handoff, DOS/native regression and the complete publication gate. Delivered at `599b0b03a`. |
+| S32 | Frontend-root Console identity and worker reuse | NTKVM alone samples the visible Console after AttachConsole and root registration; NTSRV authenticates and owns root identity, worker selection and resident reuse. Remove launcher identity reporting and source native execution identity from the registered frontend root. Prove same-root, stale/cross-root, no-Console and version-negative cases plus the full product gate. Keep task/ConRecord/NTMON projection independent of Console membership. |
+
+### S32 Console identity boundary
+
+This is the owner-inserted next S after delivered S31. The current T423 S
+table had no pre-existing S32 or higher row to renumber; any later admitted
+continuation begins at S33 rather than reusing this identifier.
+
+The preceding S30 already synchronized `APP_PROTOCOL_VERSION=25` and
+`service.idl` `version(25.0)`. S32 must confirm the generated MIDL identity and
+re-run old RPC interface, old application protocol and wrong application
+version negatives before changing identity transport. Do not bump either
+version merely because an outdated problem statement cited 23.0; bump both
+only if S32 actually changes the wire contract.
+
+NTKVM attaches to its creator's visible Console, registers its root capability,
+then samples and reports the member PID set through an authenticated root RPC.
+NTSRV stores that set only against the live frontend-root connection and uses
+it solely as a logical Console discriminator for DOS/Win16/NTCON worker
+selection and native direct delivery. An NTCON execution snapshot, if still
+needed after a direct launcher exits, comes from the authenticated frontend
+root, not from that launcher. `service_bind_existing_console()` must require a
+live, authenticated matching root/context and reject stale PID overlap,
+cross-Console or root-rebuild confusion. A new launcher not carrying a root
+capability may require an authenticated on-demand NTKVM membership refresh;
+the implementation must prove this path without timer sampling or treating
+PID lists as process/task authority.
+
+Remove `OpenNtBaseClientReportCurrentConsoleMembers()` from run16's broker
+connection path, but preserve its unrelated local `GetConsoleProcessList`
+checks for selected hidden-Console resume and WOW-owned temporary-Console
+detach unless an equivalent authenticated replacement is proved. Preserve
+`FrontendUsage → RetireFrontend`: NTKVM initiates its retirement while NTSRV
+decides pending task/worker state, without killing targets. Review the
+run16-called `frontend_bootstrap_start()` owner in `ntkvm-exe`; move only a
+genuinely shared client module, without changing run16-initiated bootstrap or
+NTKVM-root lifetime.
+
+No Console member becomes an Observed task, ConRecord stack element, NTMON
+field or worker BUSY authority. No Job, descendant observer, fixed polling,
+NTCON outer-Console sampler, new helper or NTMON process enumeration is in
+scope. Tests must cover root self-PID, repeated and nested run16, DOS↔native
+and resident NTCON reuse, two independent native sessions, root death/rebuild,
+expired capability/PID, GUI launcher with no Console, malformed member sets,
+local hidden-Console resume and WOW detach, then x86/MIDL/focused RPC,
+17 Console + 17 Window routes and the three previous WOW frontiers. Publish
+the coherent eight-file package only after no regression, then commit and
+push. The authoritative S admission and progress remain in CURRENT.
 
 S23--S29 are sequential and owner-authorized for automatic admission: an S may
 not defer its own worker-control edge merely because a later S has an

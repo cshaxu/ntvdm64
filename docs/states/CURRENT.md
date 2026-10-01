@@ -2,15 +2,29 @@
 
 ## Current Work
 
-## Task Intermission
+## Active Packet
 
-**No active M/T/S packet.** M0 T423 remains open for owner acceptance. S31
-has completed its original-semantics shared Console handoff repair, passed
-the required regression comparison, and published the coherent eight-file
-package to `O:/winnt`. Its [evidence](../etc/evidence/m0-t423-s31-shared-console-handoff.md)
-records the x86 build, 17+17 product routes, focused Console handoff,
-published hashes and remaining observation limits. Do not close T423 without
-owner acceptance.
+**Active: M0 T423 S32, Ordinary Mode.** S31 is closed and pushed at
+`599b0b03a`; its [evidence](../etc/evidence/m0-t423-s31-shared-console-handoff.md)
+records the published protocol-25 eight-file baseline. T423 remains open.
+
+| Field | S32 frontend-root Console identity |
+| --- | --- |
+| Identifier Mode | M0 T423 S32, Ordinary Mode. |
+| Admission And Approval | Owner directed insertion of S32 after S31 and supplied its full implementation and verification scope. |
+| Objective | Make NTKVM the sole sampler of visible Console identity, NTSRV its authenticated authority, and run16 a thin direct-task launcher; preserve resident worker selection/reuse. |
+| Non-goals | No Job/process-tree/Observed task graph, polling, MEMBERS projection, NTCON descendant tracking, helper or guest/mirror rewrite. |
+| Reference Baseline | S31 `599b0b03a` and published protocol-25 eight-file package. `APP_PROTOCOL_VERSION` and MIDL `version(25.0)` already agree following S30; reverify old-peer rejection. |
+| Files And ABI Surface | NTKVM root registration and Console sampling; NTSRV connection/root identity and existing-Console matching; run16 launcher admission; BaseClient/interface; focused RPC and lifecycle tests. |
+| Applicable Rules | Execution, architecture, coding, document and source rules; preserve the eight-file gate. |
+| Verification | x86 full build and MIDL regeneration; version mismatch negatives; root/caller identity and false-match negatives; reuse, nested DOS/native, independent sessions, Console/Window 17+17 and prior WOW frontiers. |
+| Expected Markers | Only registered NTKVM roots report a self-containing visible Console member set; NTSRV binds same live root and rejects stale/cross-Console identities; direct worker and NTMON behavior unchanged. |
+| Asset Needs | Existing S31 cache, immutable guest media and original OpenNT comparison; all new intermediates under `build/M0-T423/S32/`. |
+| Reporting Requirements | Owner/data-flow review, removed/retained paths, tests, hashes and non-passes. |
+| Stop Conditions | Need for a second task authority, original MVDM scheduling change, new process/scheduler or unprovable identity/capability binding requires owner review. |
+| Exit Criteria | Production path and negatives pass without S31 regression; coherent eight-file `O:/winnt` publication, evidence, reviewed commit/push and clean synchronized worktree. |
+| Original Owner Request | Audit and refactor T423 Windows Console identity sampling, ownership and reuse: NTKVM samples, NTSRV authenticates and owns selection, run16 does not register outer Console identity. |
+| Similar-Issue Sweep | `execution_console_members`, existing-Console intersection, frontend bootstrap ownership, local hidden-Console resume and WOW temporary Console detach, root retirement and NTMON projection. |
 
 ## Recent M0 Closures
 
@@ -27,7 +41,8 @@ configuration were not changed.
 ## Recent Governance
 
 The T423 proposal and the S30/S31 evidence ledgers retain their prior scope,
-test results and non-passes. No further S is admitted during intermission.
+test results and non-passes. S32 is the sole active S; T423 does not close
+without owner acceptance.
 
 | Field | Last S29 brief |
 | --- | --- |
