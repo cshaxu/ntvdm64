@@ -2,31 +2,20 @@
 
 ## Current Work
 
-## Active Packet
-
-**Active: M0 T423 S32, Ordinary Mode.** S31 is closed and pushed at
-`599b0b03a`; its [evidence](../etc/evidence/m0-t423-s31-shared-console-handoff.md)
-records the published protocol-25 eight-file baseline. T423 remains open.
-
-| Field | S32 frontend-root Console identity |
-| --- | --- |
-| Identifier Mode | M0 T423 S32, Ordinary Mode. |
-| Admission And Approval | Owner directed insertion of S32 after S31 and supplied its full implementation and verification scope. |
-| Objective | Make NTKVM the sole sampler of visible Console identity, NTSRV its authenticated authority, and run16 a thin direct-task launcher; preserve resident worker selection/reuse. |
-| Non-goals | No Job/process-tree/Observed task graph, polling, MEMBERS projection, NTCON descendant tracking, helper or guest/mirror rewrite. |
-| Reference Baseline | S31 `599b0b03a` and published protocol-25 eight-file package. `APP_PROTOCOL_VERSION` and MIDL `version(25.0)` already agree following S30; reverify old-peer rejection. |
-| Files And ABI Surface | NTKVM root registration and Console sampling; NTSRV connection/root identity and existing-Console matching; run16 launcher admission; BaseClient/interface; focused RPC and lifecycle tests. |
-| Applicable Rules | Execution, architecture, coding, document and source rules; preserve the eight-file gate. |
-| Verification | x86 full build and MIDL regeneration; version mismatch negatives; root/caller identity and false-match negatives; reuse, nested DOS/native, independent sessions, Console/Window 17+17 and prior WOW frontiers. |
-| Expected Markers | Only registered NTKVM roots report a self-containing visible Console member set; NTSRV binds same live root and rejects stale/cross-Console identities; direct worker and NTMON behavior unchanged. |
-| Asset Needs | Existing S31 cache, immutable guest media and original OpenNT comparison; all new intermediates under `build/M0-T423/S32/`. |
-| Reporting Requirements | Owner/data-flow review, removed/retained paths, tests, hashes and non-passes. |
-| Stop Conditions | Need for a second task authority, original MVDM scheduling change, new process/scheduler or unprovable identity/capability binding requires owner review. |
-| Exit Criteria | Production path and negatives pass without S31 regression; coherent eight-file `O:/winnt` publication, evidence, reviewed commit/push and clean synchronized worktree. |
-| Original Owner Request | Audit and refactor T423 Windows Console identity sampling, ownership and reuse: NTKVM samples, NTSRV authenticates and owns selection, run16 does not register outer Console identity. |
-| Similar-Issue Sweep | `execution_console_members`, existing-Console intersection, frontend bootstrap ownership, local hidden-Console resume and WOW temporary Console detach, root retirement and NTMON projection. |
+**No active M/T/S packet.** M0 T423 S32 is closed; its
+[evidence](../etc/evidence/m0-t423-s32-frontend-console-identity.md) records
+the published protocol-25 eight-file package. T423 remains open. S33 is
+proposed but not admitted.
 
 ## Recent M0 Closures
+
+S32 made NTKVM the sole sampler of visible Console identity and NTSRV the
+authenticated owner of matching and resident-worker reuse for both NTVDM and
+NTCON. The x86 build, focused service negatives, old-peer rejection, 17
+Console plus 17 Window product cases, retained WOW frontiers, and published
+smoke passed. A legacy no-presenter NTCON fixture and its obsolete
+worker-must-retire assertion remain explicit non-passes, not product passes.
+The prior eight-file package is preserved under the S32 build directory.
 
 S31 removed the root frontend's startup geometry/cursor-position restoration
 while preserving canonical-buffer, input-mode and cursor-shape cleanup. The
@@ -40,8 +29,8 @@ configuration were not changed.
 
 ## Recent Governance
 
-The T423 proposal and the S30/S31 evidence ledgers retain their prior scope,
-test results and non-passes. S32 is the sole active S; T423 does not close
+The T423 proposal and the S30/S31/S32 evidence ledgers retain their prior
+scope, test results and non-passes. No new S is admitted; T423 does not close
 without owner acceptance.
 
 | Field | Last S29 brief |

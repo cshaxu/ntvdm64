@@ -34,6 +34,8 @@ static DWORD session_entry(HANDLE pipe,HANDLE caller,HANDLE notification,HANDLE 
     error=OpenNtBaseClientConnectCurrent();if(error){bootstrap_trace("connect",error);goto respond;}
     error=OpenNtBaseClientWatchBroker();if(error){bootstrap_trace("watch",error);goto respond;}
     error=OpenNtBaseClientRegisterFrontendRoot(notification);if(error){bootstrap_trace("register",error);goto respond;}
+    error=OpenNtBaseClientReportCurrentConsoleMembers();
+    if(error){bootstrap_trace("console-identity",error);goto respond;}
     error=frontend_service_start_process(notification,notification,caller,retire,&service);if(error){bootstrap_trace("service",error);goto respond;}
 respond:
     reply.status=error;

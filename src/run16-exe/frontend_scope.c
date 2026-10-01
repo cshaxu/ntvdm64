@@ -60,14 +60,15 @@ DWORD run16_frontend_scope_begin(run16_frontend_scope **output)
     scope=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*scope));
     if (!scope) return ERROR_NOT_ENOUGH_MEMORY;
     if (inherited_frontend) {
-        /* Inherited locator is untrusted until the broker matches the object. */
-        error=OpenNtBaseClientRetainFrontendRoot(inherited_frontend,&scope->root,&generation);
-        if (error) goto fail;
+        /* The broker first authenticates a worker-local execution context,
+         * when present, then verifies that its owner is the retained root. */
         if (inherited_execution) {
             error=OpenNtBaseClientBindConsoleContext(inherited_execution);
             if (error) goto fail;
             scope->has_execution=TRUE;
         }
+        error=OpenNtBaseClientRetainFrontendRoot(inherited_frontend,&scope->root,&generation);
+        if (error) goto fail;
         if (!DuplicateHandle(GetCurrentProcess(),inherited_frontend,GetCurrentProcess(),
             &scope->capability,SYNCHRONIZE,FALSE,0)) { error=GetLastError();goto fail; }
     } else {

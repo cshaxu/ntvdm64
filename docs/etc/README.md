@@ -2,6 +2,7 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T423 S32 frontend-root Console identity](evidence/m0-t423-s32-frontend-console-identity.md) | M0 T423 S32 | NTKVM-root identity, NTSRV resident-worker matching, x86/product/WOW gates, published hashes and explicit legacy-fixture limits. | Retain through T423 acceptance. |
 | [T423 S31 shared Console handoff](evidence/m0-t423-s31-shared-console-handoff.md) | M0 T423 S31 | Removes startup geometry/cursor restoration, proves 80x25/28 handoff and records the published eight-file regression gates. | Retain through T423 acceptance. |
 | [T423 S30 OpenNT geometry and RPC revision](evidence/m0-t423-s30-opennt-geometry-protocol.md) | M0 T423 S30 | Restores original DOS row-selection thresholds, synchronizes MIDL 25 and records product/negative gates plus pending WOW comparison. | Retain through T423 acceptance. |
 | [T423 S29 control-plane acceptance](evidence/m0-t423-s29-control-plane-acceptance.md) | M0 T423 S29 | Real fault, reuse, independent-session, DOS/Window/WOW gates; explicit non-pass and final ownership accounting. | Retain through owner T423 acceptance. |

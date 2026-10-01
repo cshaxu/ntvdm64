@@ -643,10 +643,6 @@ static int ntcon_execution_rpc(void)
     uint64_t reservation=0;DWORD error=0,code=0,deadline,index;
     HANDLE capability=NULL;
     REQUIRE(!OpenNtBaseClientConnectCurrent());
-    /* Match the public run16 connection sequence.  The report is the
-     * helper-free, authenticated Console association input; it carries no
-     * worker selection or completion authority. */
-    REQUIRE(!OpenNtBaseClientReportCurrentConsoleMembers());
     {
         HANDLE selected=NULL;
         REQUIRE(OpenNtBaseClientSelectNativeWorker(&selected)==ERROR_NOT_FOUND && !selected);
@@ -660,6 +656,9 @@ static int ntcon_execution_rpc(void)
     REQUIRE(!run16_worker_prepare(reservation,image,command,NULL,CREATE_NEW_CONSOLE,&startup,&worker));
     capability=CreateEventW(NULL,TRUE,FALSE,NULL);
     REQUIRE(capability && !OpenNtBaseClientRegisterFrontendRoot(capability));
+    /* This standalone fixture is its own frontend root. A direct launcher
+     * may no longer publish the outer Console identity. */
+    REQUIRE(!OpenNtBaseClientReportCurrentConsoleMembers());
     REQUIRE(GetCurrentDirectoryW(MAX_PATH,directory));
     REQUIRE(GetSystemDirectoryW(native,MAX_PATH));
     REQUIRE(!wcscat_s(native,MAX_PATH,L"\\cmd.exe"));

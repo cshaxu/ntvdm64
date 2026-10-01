@@ -565,12 +565,11 @@ DWORD OpenNtBaseClientReportCurrentConsoleMembers(void)
     if (!members) return ERROR_NOT_ENOUGH_MEMORY;
     count=GetConsoleProcessList(members,capacity);
     if (!count) {
-        /* A detached/GUI launcher has no Console to associate.  This is a
-         * valid empty association, not a failed broker connection and never
-         * selects an existing worker. */
+        /* Only an attached frontend root calls this operation. Losing the
+         * Console before registration must not create an unbound identity. */
         error=GetLastError();
-        if(error==ERROR_INVALID_HANDLE) error=ERROR_SUCCESS;
-        else goto done;
+        if(!error)error=ERROR_INVALID_HANDLE;
+        goto done;
     }
     if (count>capacity) {
         DWORD *expanded;

@@ -346,7 +346,8 @@ blocking get-next wait into a timed failure.
 | S29 | Whole control-plane acceptance and owner handoff | Add no new product mechanism. Execute repeated resident reuse, direct and nested DOS/Console lifecycle, route/root rebind, completion, disconnect, worker death, explicit close, independent-session and management-display matrices, including the S25 timeout/notification cases and S26 Observed limitations. Audit S25's still-failing supplemental final-banner history check against the original OpenNT resize contract; do not report it as a pass or silently expand the product contract. Include full x86/DOS/Window/WOW production regressions, coherent package publication, governance, and final diff/duplicate accounting. Stop for owner verification; do not autonomously close T423. |
 | S30 | Restore OpenNT DOS row selection and service revision | Supersede S13's last-valid-DOS fallback. Select 80×22/25/28/43/50 with the original `calcScreenParams` integer midpoint comparisons against the native Console viewport height; retain existing row-copy and worker handoff. Synchronize `service.idl` revision 25.0 with application protocol 25, regenerate MIDL, fully relink and reject old/new protocol peers. Test every midpoint edge, 30→28, native/DOS nesting, Console/Window and previous DOS/WOW frontiers. Publish only a coherent verified eight-file package; leave T423 open for owner acceptance. |
 | S31 | Preserve final DOS Console state on frontend retirement | Remove project-added restoration of startup geometry and cursor position on ordinary root teardown; retain canonical-buffer selection, cursor shape and input-mode cleanup. Prove real 80×30→80×25/28 Console cell/cursor handoff, DOS/native regression and the complete publication gate. Delivered at `599b0b03a`. |
-| S32 | Frontend-root Console identity and worker reuse | NTKVM alone samples the visible Console after AttachConsole and root registration; NTSRV authenticates and owns root identity, worker selection and resident reuse. Remove launcher identity reporting and source native execution identity from the registered frontend root. Prove same-root, stale/cross-root, no-Console and version-negative cases plus the full product gate. Keep task/ConRecord/NTMON projection independent of Console membership. |
+| S32 | Frontend-root Console identity and worker reuse | Delivered; [evidence](../etc/evidence/m0-t423-s32-frontend-console-identity.md). NTKVM alone samples the visible Console after AttachConsole and root registration; NTSRV authenticates and owns root identity, worker selection and resident reuse. Launcher identity reporting is removed, with retained local hidden-Console/WOW checks. The original MVDM image and worker-side scheduling are unchanged. |
+| S33 | NTSRV-owned direct/observed worker task traces and NTMON detail modal | Supersede S26's rejected model of placing Observed entries in the ConRecord chain. Retain original DOS/WOW records and existing native Direct ConRecords unchanged as lifecycle/completion authority. Add an NTSRV-owned, read-only task-trace sidecar: NTSRV both collects and holds Direct nodes from its existing BaseSrv/native admission paths; NTVDM and NTCON collect Observed nodes from worker-local execution evidence and push revisioned deltas to NTSRV. `worker-base` supplies only the common worker-side copied-delta client/validation codec; `interface` owns the copied DTO/RPC declarations; NTSRV authenticates, correlates, stores and exports snapshots; NTMON opens a read-only Enter modal. NTCON may use a Job/completion port only at its suspended direct-target launch boundary and only to publish observed descendants. NTVDM child observation requires a source audit of original guest EXEC/load/return/TSR/failure boundaries before implementation; until that provider is proved, NTMON reports the capability unavailable rather than fabricating a DOS child chain. Observed nodes never affect Direct completion, BaseSrv scheduling, READY/BUSY/EMPTY, worker selection, root retirement or worker termination. |
 
 ### S32 Console identity boundary
 
@@ -394,6 +395,97 @@ local hidden-Console resume and WOW detach, then x86/MIDL/focused RPC,
 17 Console + 17 Window routes and the three previous WOW frontiers. Publish
 the coherent eight-file package only after no regression, then commit and
 push. The authoritative S admission and progress remain in CURRENT.
+
+### S33 task prompt: NTSRV-owned direct/observed task traces
+
+Implement this only after S32 closes and the owner admits S33. Preserve
+unrelated work and do not change guest media or the original OpenNT DOS/WOW
+record definitions, list ownership, scheduling, completion, parent-wait or
+worker-reuse semantics.
+
+The required ownership model is:
+
+```text
+DIRECT node
+  collector: NTSRV
+  holder:    NTSRV
+  authority: lifecycle/completion authority
+
+OBSERVED node
+  collector: NTVDM or NTCON worker
+  holder:    NTSRV
+  authority: diagnostic/read-only only
+```
+
+`DOSRECORD`/`WOWRECORD` remain original BaseSrv records. Existing
+`OPENNT_BASE_CONRECORD` entries remain NTSRV's admitted native Direct records:
+one record per admitted direct request, held in the worker's `conrecords`
+list until that exact request completes. Neither record type gains an
+`Observed` state or an observed-child list. Do not duplicate either record as
+a second mutable execution stack.
+
+Add a project-owned NTSRV task-trace sidecar associated with a private,
+generation-safe service record identity. It materializes a read-only snapshot
+containing Direct nodes projected from NTSRV's existing DOS/WOW/native
+admission records and Observed nodes reported by workers. Use opaque,
+authenticated record capability/identity binding; never correlate a trace by
+bare PID, exposed sequence, record pointer or a caller-provided parent PID.
+NTSRV owns revision ordering, stale/disconnect handling, snapshot lifetime and
+the sole NTMON query result. Worker death must leave NTSRV able to report the
+last accepted trace and its closed/stale state.
+
+Place copied cross-component DTOs and RPC declarations in `src/interface`.
+`worker-base` may contain only the NTVDM/NTCON-common worker-side encoder,
+validator and authenticated publish client. It is not a cross-process server,
+does not hold records, and is not linked by NTSRV or NTMON. Workers push
+revisioned observed deltas at execution transitions; NTSRV must not synchronously
+query a worker when NTMON opens a modal. NTMON remains a pure NTSRV reader.
+
+Each exported trace node must include an opaque node identity, parent-node
+identity where proved, `DOS`/`WIN16`/`WIN32` kind, `DIRECT`/`OBSERVED`
+relation, active/exited/failed/unknown state, image/path, optional process PID,
+start/end timestamps and snapshot revision. Parent references are valid only
+inside their trace revision. A Direct node is the only node eligible to denote
+task completion; an Observed node must never change direct receipt completion,
+BaseSrv scheduling, worker `READY/BUSY/EMPTY`, frontend use/retirement,
+selection/reuse or termination scope.
+
+For NTCON, establish any Job and completion-port observer in NTCON at the
+existing suspended direct-target boundary, before `ResumeThread`. It observes
+only that direct target's descendants and publishes deltas to NTSRV. The
+direct target remains the completion boundary. Do not put the Job in NTSRV or
+NTMON; do not recursively terminate descendants; do not infer a logical task
+from an observed process. Preserve no-Job behavior until this observer is
+actually admitted and proved.
+
+For NTVDM, first audit the selected original DOS loader and termination paths:
+EXEC/load-and-execute, load-only/overlay, normal return, TSR, Ctrl-C/abnormal
+termination, failed load, parent PSP restoration and COMMAND builtins. A
+Windows Job cannot reveal these guest-internal programs because they share one
+NTVDM process. Implement a DOS observed provider only after this audit proves
+the worker-local event boundaries and their cleanup contract. Until then the
+NTSRV trace must explicitly report that DOS child observation is unavailable;
+it must not manufacture a complete `COMMAND.COM → child` chain from Windows
+process or Console membership data.
+
+Add `WorkerTaskTrace` as a versioned, authenticated, read-only NTSRV management
+query keyed by the currently registered worker PID. PID is only a selection
+key: NTSRV resolves it under its registration lock and returns no trace for a
+removed/reused worker. Update NTMON so Enter on a selected worker opens a
+modal showing the Direct and Observed hierarchy, source/revision/staleness and
+the explicit unavailable state. Keep Delete semantics unchanged. NTMON must
+not create Jobs, enumerate processes, open worker handles for discovery or
+infer task ownership itself.
+
+Verify source ownership and all negative cases: forged/stale worker or trace
+capability, cross-worker/cross-root update, out-of-order/replayed revision,
+worker disconnect/death, PID reuse, direct target launch failure before resume,
+observed child exit before/after direct completion, detached child, nested
+native CMD, resident worker reuse, independent sessions and no-Console roots.
+Prove that observed nodes cannot alter completion, scheduling or termination.
+Run MIDL regeneration, focused service/worker/NTMON tests, the full x86 build,
+Console and Window regressions, and retained DOS/WOW frontiers. Publish only a
+coherent verified package and record all unsupported DOS observation cases.
 
 S23--S29 are sequential and owner-authorized for automatic admission: an S may
 not defer its own worker-control edge merely because a later S has an

@@ -47,14 +47,14 @@ struct OPENNT_BASE_CONNECTION {
     OPENNT_BASE_WORKER_KIND reservation_kind;
     HANDLE console;
     DWORD *console_members;
+    HANDLE *console_member_processes; /* Pinned process identities, not task state. */
     DWORD console_member_count;
-    /* A resident native worker outlives the direct launcher that registered
-     * it.  Retain that launcher's execution-Console identity separately from
-     * the worker's own hidden Console membership, so a later launcher on the
-     * same Console can select the existing worker after the first launcher
-     * has returned.  This is only a local Console discriminator: it conveys
-     * no handle, capability, task authority or completion right. */
+    /* A resident worker outlives its direct launcher. Retain the
+     * authenticated frontend root's visible-Console identity separately
+     * from the worker's own hidden Console membership. This is only a local
+     * Console discriminator, never task or process authority. */
     DWORD *execution_console_members;
+    HANDLE *execution_console_processes;
     DWORD execution_console_member_count;
     BOOL wow;
     BOOL retired;
@@ -180,19 +180,59 @@ static void service_delete_conrecord(OPENNT_BASE_CONRECORD *record)
     RemoveEntryList(&record->link);
     HeapFree(GetProcessHeap(),0,record);
 }
+static void service_release_console_identities(OPENNT_BASE_CONNECTION *connection)
+{
+    DWORD index;
+    if(connection->console_member_processes) {
+        for(index=0;index<connection->console_member_count;++index)
+            if(connection->console_member_processes[index])
+                CloseHandle(connection->console_member_processes[index]);
+        HeapFree(GetProcessHeap(),0,connection->console_member_processes);
+    }
+    if(connection->execution_console_processes) {
+        for(index=0;index<connection->execution_console_member_count;++index)
+            if(connection->execution_console_processes[index])
+                CloseHandle(connection->execution_console_processes[index]);
+        HeapFree(GetProcessHeap(),0,connection->execution_console_processes);
+    }
+    if(connection->console_members)HeapFree(GetProcessHeap(),0,connection->console_members);
+    if(connection->execution_console_members)
+        HeapFree(GetProcessHeap(),0,connection->execution_console_members);
+}
 static DWORD service_copy_execution_console_members(OPENNT_BASE_CONNECTION *destination,
     const OPENNT_BASE_CONNECTION *source)
 {
-    DWORD *copy=NULL;
+    DWORD *copy=NULL,index;
+    HANDLE *processes=NULL;
     if (!destination || !source) return ERROR_INVALID_PARAMETER;
     if (source->console_member_count) {
         copy=HeapAlloc(GetProcessHeap(),0,source->console_member_count*sizeof(*copy));
         if (!copy) return ERROR_NOT_ENOUGH_MEMORY;
+        processes=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,
+            source->console_member_count*sizeof(*processes));
+        if(!processes){HeapFree(GetProcessHeap(),0,copy);return ERROR_NOT_ENOUGH_MEMORY;}
         memcpy(copy,source->console_members,source->console_member_count*sizeof(*copy));
+        for(index=0;index<source->console_member_count;++index) {
+            if(source->console_member_processes[index] &&
+                !DuplicateHandle(GetCurrentProcess(),source->console_member_processes[index],
+                    GetCurrentProcess(),&processes[index],0,FALSE,DUPLICATE_SAME_ACCESS)) {
+                DWORD error=GetLastError(),undo;
+                for(undo=0;undo<index;++undo)if(processes[undo])CloseHandle(processes[undo]);
+                HeapFree(GetProcessHeap(),0,processes);HeapFree(GetProcessHeap(),0,copy);
+                return error;
+            }
+        }
+    }
+    if(destination->execution_console_processes) {
+        for(index=0;index<destination->execution_console_member_count;++index)
+            if(destination->execution_console_processes[index])
+                CloseHandle(destination->execution_console_processes[index]);
+        HeapFree(GetProcessHeap(),0,destination->execution_console_processes);
     }
     if (destination->execution_console_members)
         HeapFree(GetProcessHeap(),0,destination->execution_console_members);
     destination->execution_console_members=copy;
+    destination->execution_console_processes=processes;
     destination->execution_console_member_count=source->console_member_count;
     return ERROR_SUCCESS;
 }
@@ -683,8 +723,7 @@ BOOL OpenNtBaseServiceStop(OPENNT_BASE_SERVICE *service)
         if (connection->frontend_capability) CloseHandle(connection->frontend_capability);
         if (connection->frontend_state_changed) CloseHandle(connection->frontend_state_changed);
         if (connection->worker_state_changed) CloseHandle(connection->worker_state_changed);
-        if (connection->console_members) HeapFree(GetProcessHeap(),0,connection->console_members);
-        if (connection->execution_console_members) HeapFree(GetProcessHeap(),0,connection->execution_console_members);
+        service_release_console_identities(connection);
         HeapFree(GetProcessHeap(),0,connection);
     }
     DeleteCriticalSection(&service->lock);
@@ -1102,9 +1141,26 @@ DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *service,HANDLE process,
                     if (!GetProcessTimes(watch->process.ProcessHandle,&watch->started,&ignored,
                             &ignored,&ignored)) ZeroMemory(&watch->started,sizeof(watch->started));
                 }
-                if (!RegisterWaitForSingleObject(&watch->wait,watch->process.ProcessHandle,
+                /* Both resident worker kinds retain the authenticated root's
+                 * outer-Console identity. NTCON may later refresh it at direct
+                 * delivery; DOS keeps the initial root for re-entry. */
+                if(!shared_wow && console) {
+                    LIST_ENTRY *root_link;
+                    for(root_link=service->connections.Flink;
+                        root_link!=&service->connections;root_link=root_link->Flink) {
+                        OPENNT_BASE_CONNECTION *root=CONTAINING_RECORD(root_link,
+                            OPENNT_BASE_CONNECTION,service_link);
+                        if(root->frontend_capability && root->console==console &&
+                            root->console_member_count && !root->frontend_closing &&
+                            WaitForSingleObject(root->process.ProcessHandle,0)==WAIT_TIMEOUT) {
+                            error=service_copy_execution_console_members(connection,root);
+                            break;
+                        }
+                    }
+                }
+                if (error || !RegisterWaitForSingleObject(&watch->wait,watch->process.ProcessHandle,
                     service_worker_terminated,watch,INFINITE,WT_EXECUTEONLYONCE)) {
-                    error=GetLastError();
+                    if(!error)error=GetLastError();
                     CloseHandle(watch->process.ProcessHandle);
                     HeapFree(GetProcessHeap(),0,watch);
                     if(!connection->native_worker)BaseSrvCleanupVDMResources(&connection->process);
@@ -1124,8 +1180,7 @@ DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *service,HANDLE process,
     }
     LeaveCriticalSection(&service->lock);
     if (error) {
-        if (connection->console_members) HeapFree(GetProcessHeap(),0,connection->console_members);
-        if (connection->execution_console_members) HeapFree(GetProcessHeap(),0,connection->execution_console_members);
+        service_release_console_identities(connection);
         HeapFree(GetProcessHeap(),0,connection);
     }
     return error;
@@ -1159,8 +1214,7 @@ DWORD OpenNtBaseServiceDisconnect(OPENNT_BASE_CONNECTION *connection)
         if (connection->native_stop) CloseHandle(connection->native_stop);
         if (connection->native_closed) CloseHandle(connection->native_closed);
         if (connection->wow_start_event) CloseHandle(connection->wow_start_event);
-        if (connection->console_members) HeapFree(GetProcessHeap(),0,connection->console_members);
-        if (connection->execution_console_members) HeapFree(GetProcessHeap(),0,connection->execution_console_members);
+        service_release_console_identities(connection);
         HeapFree(GetProcessHeap(),0,connection);
     }
     return error;
@@ -1283,11 +1337,33 @@ DWORD OpenNtBaseServiceRetainFrontendRoot(OPENNT_BASE_CONNECTION *connection,
         if (root->frontend_closing || WaitForSingleObject(root->process.ProcessHandle,0)!=WAIT_TIMEOUT) {
             error=ERROR_PIPE_NOT_CONNECTED;goto done;
         }
+        if (connection->console && connection->console!=root->console &&
+            !connection->process.fVDM && !connection->native_worker &&
+            !connection->frontend_capability) {
+            LIST_ENTRY *context_link;
+            BOOL belongs_to_root=FALSE;
+            for(context_link=connection->service->console_contexts.Flink;
+                context_link!=&connection->service->console_contexts;
+                context_link=context_link->Flink) {
+                OPENNT_BASE_CONSOLE_CONTEXT *context=CONTAINING_RECORD(context_link,
+                    OPENNT_BASE_CONSOLE_CONTEXT,link);
+                if(context->root==root && context->console==connection->console)
+                    {belongs_to_root=TRUE;break;}
+            }
+            if(!belongs_to_root) {error=ERROR_ACCESS_DENIED;goto done;}
+        }
         if (!DuplicateHandle(GetCurrentProcess(),root->process.ProcessHandle,
             GetCurrentProcess(),process,PROCESS_QUERY_LIMITED_INFORMATION|SYNCHRONIZE,FALSE,0)) {
             error=GetLastError();goto done;
         }
         *root_generation=root->process.SequenceNumber;
+        /* A launcher without a separately authenticated execution context
+         * uses the registered root's visible Console. Workers and nested
+         * launchers already bound to a hidden execution Console keep that
+         * distinct identity. */
+        if (!connection->console && !connection->process.fVDM &&
+            !connection->native_worker && !connection->frontend_capability)
+            connection->console=root->console;
         error=ERROR_SUCCESS;
         break;
     }
@@ -1905,13 +1981,25 @@ DWORD OpenNtBaseServiceTakeWorkerChannel(OPENNT_BASE_CONNECTION *root,DWORD pid,
             (root->native_inflight && root->native_activity_root!=caller->frontend_channel_root))) {
             error=ERROR_BUSY;goto done;
         }
-        /* The caller is the direct launcher actually attached to the
-         * execution Console.  Capture its already-authenticated snapshot at
-         * command delivery, not from the frontend presenter: NTKVM may have
-         * a different private Console.  This bounded identity survives the
-         * direct launcher return solely to select the same resident NTCON on
-         * a later same-Console launch. */
-        error=service_copy_execution_console_members(root,caller);
+        /* The visible Console identity belongs to the authenticated
+         * frontend root, not to this short-lived direct launcher. */
+        {
+            OPENNT_BASE_CONNECTION *frontend=NULL;
+            LIST_ENTRY *root_link;
+            for(root_link=root->service->connections.Flink;
+                root_link!=&root->service->connections;root_link=root_link->Flink) {
+                OPENNT_BASE_CONNECTION *candidate=CONTAINING_RECORD(root_link,
+                    OPENNT_BASE_CONNECTION,service_link);
+                if(candidate->process.SequenceNumber==caller->frontend_channel_root &&
+                    candidate->frontend_capability &&
+                    WaitForSingleObject(candidate->process.ProcessHandle,0)==WAIT_TIMEOUT) {
+                    frontend=candidate;break;
+                }
+            }
+            if(!frontend || frontend->console!=caller->console ||
+                !frontend->console_member_count) {error=ERROR_PIPE_NOT_CONNECTED;goto done;}
+            error=service_copy_execution_console_members(root,frontend);
+        }
         if(error)goto done;
         /* The pinned sender process permits only this direct channel's finite
          * stream/capability exchange, never an arbitrary broker duplication API. */
@@ -2315,38 +2403,59 @@ BOOL OpenNtBaseServiceWorkerReservation(OPENNT_BASE_CONNECTION *connection,uint6
 static DWORD service_bind_existing_console(OPENNT_BASE_CONNECTION *connection)
 {
     OPENNT_BASE_SERVICE *service;
+    SERVICE_COMPARE_HANDLES compare;
     HANDLE selected=NULL;
     DWORD index,error=0;
     LIST_ENTRY *entry;
     if (!connection) return ERROR_INVALID_PARAMETER;
+    compare=(SERVICE_COMPARE_HANDLES)GetProcAddress(GetModuleHandleW(L"kernelbase.dll"),
+        "CompareObjectHandles");
+    if (!compare) return ERROR_CALL_NOT_IMPLEMENTED;
     service=connection->service;
     EnterCriticalSection(&service->lock);
     if (connection->console) { LeaveCriticalSection(&service->lock); return ERROR_SUCCESS; }
-    /* The launcher itself is attached to the Console, so it reports its
-     * local member list once through the authenticated RPC connection.
-     * Match only against another live, registered connection identity;
-     * this replaces the former detached run16 probe and transfers neither a
-     * Console HANDLE nor process authority. */
+    /* Only NTKVM roots report the visible Console membership. A launcher
+     * inherits its authenticated root's logical Console when it retains the
+     * root capability; membership itself grants no worker or task authority. */
     for (entry=service->connections.Flink;entry!=&service->connections;entry=entry->Flink) {
         OPENNT_BASE_CONNECTION *other=CONTAINING_RECORD(entry,OPENNT_BASE_CONNECTION,service_link);
-        DWORD candidate=(DWORD)other->process.ClientId.UniqueProcess;
         const DWORD *members=other->console_members;
+        const HANDLE *processes=other->console_member_processes;
         DWORD count=other->console_member_count;
         BOOL shared=FALSE;
-        if (other==connection || !other->console) continue;
-        if (other->native_worker && other->execution_console_member_count) {
+        if (other==connection || !other->console ||
+            (!other->frontend_capability && !other->native_worker &&
+                !other->process.fVDM)) continue;
+        if (other->execution_console_member_count) {
             members=other->execution_console_members;
+            processes=other->execution_console_processes;
             count=other->execution_console_member_count;
         }
+        if (WaitForSingleObject(other->process.ProcessHandle,0)!=WAIT_TIMEOUT) continue;
         for (index=0;index<connection->console_member_count;++index) {
             DWORD member;
             for(member=0;member<count;++member)
-                if(connection->console_members[index]==members[member]) { shared=TRUE;break; }
+                if(connection->console_members[index]==members[member] &&
+                    connection->console_member_processes && processes &&
+                    connection->console_member_processes[index] && processes[member] &&
+                    WaitForSingleObject(connection->console_member_processes[index],0)==WAIT_TIMEOUT &&
+                    WaitForSingleObject(processes[member],0)==WAIT_TIMEOUT &&
+                    compare(connection->console_member_processes[index],processes[member]))
+                    { shared=TRUE;break; }
             if(shared)break;
         }
-        if(!count) {
+        /* A resident original DOS worker remains attached to its Console
+         * after the short-lived frontend root retires. Match its actual live
+         * process object in the new root's sample, not a reusable PID value. */
+        if(!shared && other->process.fVDM && !other->wow &&
+            connection->console_member_processes) {
             for(index=0;index<connection->console_member_count;++index)
-                if(connection->console_members[index]==candidate) {shared=TRUE;break;}
+                if(connection->console_members[index]==
+                        (DWORD)other->process.ClientId.UniqueProcess &&
+                    connection->console_member_processes[index] &&
+                    WaitForSingleObject(connection->console_member_processes[index],0)==WAIT_TIMEOUT &&
+                    compare(connection->console_member_processes[index],
+                        other->process.ProcessHandle)) {shared=TRUE;break;}
         }
         if (!shared) continue;
         if (selected && selected!=other->console) { error=ERROR_RETRY;break; }
@@ -2364,29 +2473,55 @@ static DWORD service_bind_existing_console(OPENNT_BASE_CONNECTION *connection)
 DWORD OpenNtBaseServiceReportConsoleMembers(OPENNT_BASE_CONNECTION *connection,
     DWORD pid,DWORD generation,DWORD count,const DWORD *members)
 {
-    DWORD *copy=NULL,error=ERROR_ACCESS_DENIED,index;
-    if (count>4096 || (count && !members)) return ERROR_INVALID_PARAMETER;
-    if (count) {
-        copy=HeapAlloc(GetProcessHeap(),0,count*sizeof(*copy));
-        if (!copy) return ERROR_NOT_ENOUGH_MEMORY;
-        for (index=0;index<count;++index) {
-            if (!members[index]) { HeapFree(GetProcessHeap(),0,copy);return ERROR_INVALID_DATA; }
-            copy[index]=members[index];
+    DWORD *copy=NULL,error=ERROR_ACCESS_DENIED,index,other;
+    HANDLE *processes=NULL;
+    if (!count || count>4096 || !members) return ERROR_INVALID_PARAMETER;
+    copy=HeapAlloc(GetProcessHeap(),0,count*sizeof(*copy));
+    processes=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,count*sizeof(*processes));
+    if (!copy || !processes) {error=ERROR_NOT_ENOUGH_MEMORY;goto done;}
+    for(index=0;index<count;++index) {
+        if(!members[index]) {error=ERROR_INVALID_DATA;goto done;}
+        for(other=0;other<index;++other)
+            if(members[index]==members[other]) {error=ERROR_INVALID_DATA;goto done;}
+        copy[index]=members[index];
+        if(connection && members[index]==pid) {
+            if(!DuplicateHandle(GetCurrentProcess(),connection->process.ProcessHandle,
+                GetCurrentProcess(),&processes[index],SYNCHRONIZE|
+                PROCESS_QUERY_LIMITED_INFORMATION,FALSE,0)) {error=GetLastError();goto done;}
+        } else {
+            /* Every claimed peer must be a live, pinned process object.
+             * A PID which has disappeared or cannot be authenticated may
+             * not influence reuse through a partial sample. */
+            processes[index]=OpenProcess(SYNCHRONIZE|PROCESS_QUERY_LIMITED_INFORMATION,
+                FALSE,members[index]);
+            if(!processes[index]) {error=GetLastError();goto done;}
         }
     }
-    if (!connection) { if(copy)HeapFree(GetProcessHeap(),0,copy);return error; }
+    if (!connection) goto done;
     EnterCriticalSection(&connection->service->lock);
-    if (OpenNtBaseServicePeer(connection,pid,generation)) {
+    if (OpenNtBaseServicePeer(connection,pid,generation) &&
+        connection->frontend_capability && !connection->process.fVDM &&
+        !connection->native_worker &&
+        WaitForSingleObject(connection->process.ProcessHandle,0)==WAIT_TIMEOUT) {
         BOOL self=FALSE;
         for(index=0;index<count;++index)
-            if(copy[index]==(DWORD)connection->process.ClientId.UniqueProcess) { self=TRUE;break; }
-        if (!count || self) {
-            if (connection->console_members) HeapFree(GetProcessHeap(),0,connection->console_members);
-            connection->console_members=copy;connection->console_member_count=count;copy=NULL;
+            if(copy[index]==(DWORD)connection->process.ClientId.UniqueProcess &&
+                processes[index] && GetProcessId(processes[index])==copy[index])
+                {self=TRUE;break;}
+        if(connection->console_members)error=ERROR_ALREADY_EXISTS;
+        else if(self) {
+            connection->console_members=copy;connection->console_member_processes=processes;
+            connection->console_member_count=count;copy=NULL;processes=NULL;
             error=ERROR_SUCCESS;
         } else error=ERROR_INVALID_DATA;
     }
     LeaveCriticalSection(&connection->service->lock);
+    if(!error)error=service_bind_existing_console(connection);
+done:
+    if(processes) {
+        for(index=0;index<count;++index)if(processes[index])CloseHandle(processes[index]);
+        HeapFree(GetProcessHeap(),0,processes);
+    }
     if(copy)HeapFree(GetProcessHeap(),0,copy);
     return error;
 }

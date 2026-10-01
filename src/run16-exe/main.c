@@ -191,15 +191,7 @@ static DWORD connect_broker(void)
     for (attempt = 0; attempt < 100; ++attempt)
     {
         error = OpenNtBaseClientConnectCurrent();
-        if (!error) {
-            /* The launcher is the process attached to the caller's real
-             * Console.  Report that local membership through its already
-             * authenticated BaseClient connection; BaseSrv uses it only to
-             * associate an existing ConsoleRecord. */
-            error=OpenNtBaseClientReportCurrentConsoleMembers();
-            if (!error) return ERROR_SUCCESS;
-            OpenNtBaseClientDisconnectCurrent();
-        }
+        if (!error) return ERROR_SUCCESS;
         if (error == ERROR_REVISION_MISMATCH)
             return error; /* Never start/retry a broker for an incompatible peer. */
         /* Re-try only at bounded intervals.  This covers a listener which
