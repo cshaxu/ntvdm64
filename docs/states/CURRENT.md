@@ -2,13 +2,30 @@
 
 ## Current Work
 
-## Task Intermission
+## Active Packet
 
-**No active M/T/S packet.** M0 T423 remains open between S packets. S24 is
-closed by owner acceptance; S25 is next in the [T423 sequence](../proposals/proposal-kvm-window-graphics-presentation-001.md#successor-s-sequence)
-and has not begun. The latest accepted runtime baseline is the coherent
-protocol-23 seven-file package at `O:/winnt`; see [S24 evidence](../etc/evidence/m0-t423-s24-native-participant-graph.md).
-Do not autonomously close T423.
+**Active: M0 T423 S25 — native-nested timeout and project-owned wait cleanup**
+
+| Field | S25 brief |
+| --- | --- |
+| Identifier Mode | M0 T423 S25, Ordinary Mode. |
+| Admission And Approval | Owner explicitly admitted S25 after accepting S24's baseline and transferring the deeper native-nested timeout. |
+| Objective | Diagnose and repair the real nested native batch timeout; bound startup/handoff and eliminate its unnecessary timer retries without changing resident get-next semantics. |
+| Non-goals | No Job graph, helper process, new scheduler, guest/shared-lib mutation, or speculative removal of the owner-accepted hidden-Console output sampler. |
+| Reference Baseline | S24 protocol-23 seven-file package at `O:/winnt`; [S24 evidence](../etc/evidence/m0-t423-s24-native-participant-graph.md). |
+| Files And ABI Surface | Run16/NTCON/NTVDM/NTKVM/NTSRV wait and notification owners; `interface`/`worker-base` only for a proved shared copied contract; focused tests. |
+| Applicable Rules | [Execution](../rules/EXECUTION.md), [Architecture](../rules/ARCHITECTURE.md), [Coding](../rules/CODING.md), [Documentation](../rules/DOCUMENT.md). |
+| Verification | Reproduce the nested timeout with captured output and process/receipt state; focused lost-wake, deadline, fault and worker-reuse tests; full x86, DOS, Window and WOW non-regression plus coherent package publication for each production P. |
+| Expected Markers | Nested native chain terminates with true target results and visible output; no accepted request is replayed; stuck startup fails within its deadline; resident idle workers still block normally. |
+| Asset Needs | Existing `build/M0-T423/S24-helperless-clean` cache and test scripts; new outputs only under `build/M0-T423/S25/`; immutable guest and `O:/winnt/Logs2`. |
+| Reporting Requirements | Timer inventory and retain/replace decisions; root cause, test commands/results, package hashes and remaining limits in indexed evidence. |
+| Stop Conditions | A required new process, scheduler, guest change, or unapproved original-logic alteration needs owner review; ordinary failures remain S25 repair work. |
+| Exit Criteria | Nested native timeout fixed and regression-tested; owned waits bounded/notified where promised; accepted S24 behavior preserved; formal build, publication, governance, commit and push complete. |
+| Original Owner Request | “好，准入S25”; preceding owner direction assigns the deeper native nested batch timeout to this S. |
+| Similar-Issue Sweep | Run16 reserve/submit, NTCON I/O admission, NTVDM activation, NTKVM teardown, and other classified project-owned timers. |
+
+T423 remains open and must not close without owner acceptance. See the
+[S25 sequence](../proposals/proposal-kvm-window-graphics-presentation-001.md#successor-s-sequence).
 
 ## S24 Closure Record
 
