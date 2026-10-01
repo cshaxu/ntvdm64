@@ -1,4 +1,4 @@
-#include "worker-base/next_command.h"
+#include "ntcon-exe/next_command.h"
 #include <stdio.h>
 
 static HANDLE source[4];
@@ -38,19 +38,19 @@ static int open_sources(void)
 
 int main(void)
 {
-    worker_base_next_command command={0};
+    ntcon_next_command command={0};
     unsigned index;
 
     CHECK(open_sources());source_error=ERROR_SUCCESS;
-    CHECK(worker_base_get_next_command(&command)==ERROR_SUCCESS);
+    CHECK(ntcon_get_next_command(&command)==ERROR_SUCCESS);
     CHECK(command.channel==source[0] && command.sender==source[1] &&
         command.execution==source[2] && command.frontend==source[3] && command.request==77);
-    worker_base_dispose_next_command(&command);
+    ntcon_dispose_next_command(&command);
     CHECK(!command.channel && !command.sender && !command.execution && !command.frontend && !command.request);
     ZeroMemory(source,sizeof(source));
 
     CHECK(open_sources());source_error=ERROR_ACCESS_DENIED;
-    CHECK(worker_base_get_next_command(&command)==ERROR_ACCESS_DENIED);
+    CHECK(ntcon_get_next_command(&command)==ERROR_ACCESS_DENIED);
     CHECK(!command.channel && !command.sender && !command.execution && !command.frontend && !command.request);
     for(index=0;index<ARRAYSIZE(source);++index) {
         CHECK(WaitForSingleObject(source[index],0)==WAIT_FAILED);
@@ -58,8 +58,8 @@ int main(void)
     }
 
     completed=91;
-    CHECK(worker_base_complete_next_command(0)==ERROR_SUCCESS && completed==0);
-    CHECK(worker_base_complete_next_command(91)==ERROR_SUCCESS && completed==91);
-    puts("PASS worker-base get-next command ownership, failure disposal and completion");
+    CHECK(ntcon_complete_next_command(0)==ERROR_SUCCESS && completed==0);
+    CHECK(ntcon_complete_next_command(91)==ERROR_SUCCESS && completed==91);
+    puts("PASS ntcon get-next command ownership, failure disposal and completion");
     return 0;
 }

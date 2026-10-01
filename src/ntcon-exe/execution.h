@@ -1,7 +1,7 @@
 #ifndef NTCON_EXECUTION_H
 #define NTCON_EXECUTION_H
 #include <windows.h>
-#include "worker-base/next_command.h"
+#include "next_command.h"
 
 typedef struct ntcon_executions ntcon_executions;
 typedef struct ntcon_execution_io {
@@ -30,7 +30,7 @@ void ntcon_executions_note_broker_failure(ntcon_executions *,DWORD);
  * the requester has finished its header/payload transfer; it is not a broker
  * completion without a peer-visible result.  No process-tree ownership:
  * closing a request never kills its running target. */
-DWORD ntcon_execution_start(ntcon_executions *,worker_base_next_command *,DWORD preflight_error);
+DWORD ntcon_execution_start(ntcon_executions *,ntcon_next_command *,DWORD preflight_error);
 /* Stop accepting before close. Cancels local waits and joins request cleanup,
  * never native targets. Finished requests release themselves without waiting
  * for another launcher to wake the worker's blocking receive. */

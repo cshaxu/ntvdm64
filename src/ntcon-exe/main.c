@@ -5,7 +5,7 @@
 #include "console_state.h"
 #include "presentation.h"
 #include "worker-base/connection.h"
-#include "worker-base/next_command.h"
+#include "next_command.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
 #include "native_pc_font.h"
 
@@ -286,11 +286,11 @@ int wmain(int argc,WCHAR **argv)
     }
     if(!error && !SetConsoleCtrlHandler(control_event,TRUE))error=GetLastError();
     while(!error) {
-        worker_base_next_command command;
+        ntcon_next_command command;
         /* An active CMD may wait on an inner run16. GetNext must remain
          * available to that same frontend while earlier requests execute;
          * different frontends are rejected by the binding rule below. */
-        error=worker_base_get_next_command(&command);
+        error=ntcon_get_next_command(&command);
         if(error)break;
         /* An unaccepted request closes its attachments; it neither ends the
          * worker nor cancels other requests or already running targets. */
@@ -303,9 +303,9 @@ int wmain(int argc,WCHAR **argv)
              * through its native channel.  Do not complete a broker command
              * while run16 is waiting for a reply that no thread will send. */
             if(ntcon_execution_start(requests,&command,binding)) {
-                DWORD completion=worker_base_complete_next_command(command.request);
+                DWORD completion=ntcon_complete_next_command(command.request);
                 if(completion)ntcon_executions_note_broker_failure(requests,completion);
-                worker_base_dispose_next_command(&command);
+                ntcon_dispose_next_command(&command);
             }
             continue;
         }

@@ -198,7 +198,7 @@ done:
     if(target)CloseHandle(target);
     if(payload)HeapFree(GetProcessHeap(),0,payload);
     {
-        DWORD completion_error=worker_base_complete_next_command(request->request);
+        DWORD completion_error=ntcon_complete_next_command(request->request);
         if(completion_error)ntcon_executions_note_broker_failure(owner,completion_error);
     }
     release_request(request);
@@ -246,7 +246,7 @@ DWORD ntcon_executions_wait_idle(ntcon_executions *owner)
     return wait==WAIT_OBJECT_0 ? ERROR_SUCCESS :
         wait==WAIT_FAILED ? GetLastError() : ERROR_OPERATION_ABORTED;
 }
-DWORD ntcon_execution_start(ntcon_executions *owner,worker_base_next_command *command,DWORD preflight_error)
+DWORD ntcon_execution_start(ntcon_executions *owner,ntcon_next_command *command,DWORD preflight_error)
 {
     ntcon_execution *request=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*request));
     DWORD error;HANDLE thread;

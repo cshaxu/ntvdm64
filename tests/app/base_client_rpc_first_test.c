@@ -9,7 +9,7 @@
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
 #include "run16-exe/worker_launch.h"
 #include "worker-base/connection.h"
-#include "worker-base/next_command.h"
+#include "ntcon-exe/next_command.h"
 #include "ntkvm-exe/native_request_client.h"
 #include "interface/console_io.h"
 #include <stddef.h>
@@ -680,10 +680,23 @@ static int ntcon_execution_rpc(void)
             error=run16_native_worker_request_submit(worker.hProcess,capability,&start,&target,&receipt);
             if(error==ERROR_NOT_READY)Sleep(10);
         }while(error==ERROR_NOT_READY && (LONG)(deadline-GetTickCount())>0);
+        if(error || !target || !receipt)
+            fprintf(stderr,"native submit error=%lu target=%p receipt=%p worker=%lu\n",
+                (unsigned long)error,target,receipt,(unsigned long)worker.dwProcessId);
         REQUIRE(!error && target && receipt);
         REQUIRE(GetProcessId(target)!=worker.dwProcessId);
         CloseHandle(writer);
-        REQUIRE(WaitForSingleObject(target,5000)==WAIT_OBJECT_0);
+        {
+            DWORD target_wait=WaitForSingleObject(target,5000);
+            if(target_wait!=WAIT_OBJECT_0) {
+                DWORD target_code=MAXDWORD;
+                (void)GetExitCodeProcess(target,&target_code);
+                fprintf(stderr,"native target wait=%lu pid=%lu worker=%lu status=%lu\n",
+                    (unsigned long)target_wait,(unsigned long)GetProcessId(target),
+                    (unsigned long)worker.dwProcessId,(unsigned long)target_code);
+            }
+            REQUIRE(target_wait==WAIT_OBJECT_0);
+        }
         REQUIRE(GetExitCodeProcess(target,&code) && code==(index ? 19u : 37u));
         REQUIRE(WaitForSingleObject(receipt,5000)==WAIT_OBJECT_0);
         sprintf_s(expected,sizeof(expected),"NTCON-EXEC-%lu",index);
@@ -786,18 +799,18 @@ int main(int argc,char **argv)
         REQUIRE(!OpenNtBaseClientWorkerFrontendCapability(&capability) && capability);
         REQUIRE(WriteFile(pipe,"N",1,&written,NULL) && written==1);
         {
-            worker_base_next_command native_command={0};
+            ntcon_next_command native_command={0};
             HANDLE root=NULL;DWORD root_generation=0,error;
             char marker=0;
-            error=worker_base_get_next_command(&native_command);
+            error=ntcon_get_next_command(&native_command);
             REQUIRE(!error && native_command.channel && native_command.sender && native_command.execution && native_command.frontend && native_command.request);
             REQUIRE(GetProcessId(native_command.sender)==GetProcessId(frontend));
             REQUIRE(!OpenNtBaseClientRetainFrontendRoot(native_command.frontend,&root,&root_generation));
             REQUIRE(GetProcessId(root)==GetProcessId(frontend) && root_generation==generation);
             REQUIRE(ReadFile(native_command.channel,&marker,1,&written,NULL) && written==1 && marker=='L');
             REQUIRE(WriteFile(native_command.channel,"R",1,&written,NULL) && written==1);
-            REQUIRE(!worker_base_complete_next_command(native_command.request));
-            CloseHandle(root);worker_base_dispose_next_command(&native_command);
+            REQUIRE(!ntcon_complete_next_command(native_command.request));
+            CloseHandle(root);ntcon_dispose_next_command(&native_command);
         }
         CloseHandle(capability);CloseHandle(ready);CloseHandle(frontend);CloseHandle(pipe);
         worker_base_disconnect();return 73;

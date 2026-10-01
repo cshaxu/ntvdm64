@@ -4,28 +4,37 @@
 
 ## Active Packet
 
-**Active: M0 T423 S27 — unified external worker control plane**
+**Active: M0 T423 S28 — management projection and divergence cleanup**
 
-| Field | S27 brief |
+| Field | S28 brief |
 | --- | --- |
-| Identifier Mode | M0 T423 S27, Ordinary Mode. |
-| Admission And Approval | Owner approved automatic sequential S admission through S29; S26 reached its bounded conclusion. |
-| Objective | Audit and converge identical project-added worker admission, registration, direct command/receipt, route release, disconnect, close and death handling without changing original DOS/WOW execution. |
-| Non-goals | No NTVDM-to-NTCON shape conversion, new scheduler/helper, guest/shared-lib change or Job-observed task authority. |
-| Reference Baseline | Published S25 protocol-24 eight-file package and [S26 disposition](../etc/evidence/m0-t423-s26-job-observation-disposition.md). |
-| Files And ABI Surface | Run16, NTSRV, NTVDM, NTCON, NTKVM, NTMON, `worker-base` and `interface` external control paths. |
+| Identifier Mode | M0 T423 S28, Ordinary Mode. |
+| Admission And Approval | Owner approved automatic sequential S admission through S29; S27 reached its bounded conclusion. |
+| Objective | Make NTMON a pure NTSRV worker/task projection and remove remaining same-semantic project-added NTVDM/NTCON divergence. |
+| Non-goals | No Job-observed task authority, NTVDM-to-NTCON shape conversion, new scheduler/helper, guest/shared-lib change or original DOS/WOW rewrite. |
+| Reference Baseline | Published S27 protocol-24 eight-file package and [S27 audit](../etc/evidence/m0-t423-s27-worker-control-audit.md). |
+| Files And ABI Surface | NTSRV management DTO, NTMON rendering, Run16/NTKVM/worker-base/interface worker-kind boundaries. |
 | Applicable Rules | [Execution](../rules/EXECUTION.md), [Architecture](../rules/ARCHITECTURE.md), [Coding](../rules/CODING.md), [Documentation](../rules/DOCUMENT.md). |
-| Verification | Focused normal/failure/reuse and DOS↔native handoff tests; every production P also needs formal x86, 17+17, WOW frontiers and coherent package publication. |
-| Expected Markers | One authoritative external path per shared action, with explicit worker-local differences and no original mirror expansion. |
-| Asset Needs | Existing product and fixture graphs; new output only under `build/M0-T423/S27/`; immutable guest and `O:/winnt/Logs2`. |
-| Reporting Requirements | Source/owner ledger, removed duplication, retained distinctions, failure evidence, hashes and non-passes. |
+| Verification | Management snapshots plus DOS/native reuse and faults; every production P also needs formal x86, 17+17, WOW frontiers and coherent package publication. |
+| Expected Markers | `kind=0/1/2` for DOS/Win16/Win32; one `PID/STATE/STACK/TASK/IMAGE/START/ELAPSED` DTO; resident `STACK=0/TASK=<EMPTY>`; no `MEMBERS=`. |
+| Asset Needs | Existing product and fixture graphs; new output only under `build/M0-T423/S28/`; immutable guest and `O:/winnt/Logs2`. |
+| Reporting Requirements | Full remaining divergence ledger, removed duplicates, retained distinctions, failure evidence, hashes and non-passes. |
 | Stop Conditions | Original execution rewrite, new process/scheduler or guest/shared-lib change requires owner review. |
-| Exit Criteria | Shared paths truly selected, old duplicates removed, required runtime gates passed, eight-file package published, governance and clean pushed worktree. |
+| Exit Criteria | One management projection, remaining safe duplicates removed, required runtime gates passed, eight-file package published if code changed, governance and clean pushed worktree. |
 | Original Owner Request | Automatic sequential admission for remaining T423 tasks; NTCON adapts to NTVDM's original shape. |
-| Similar-Issue Sweep | Admission, dispatch, receipt, rebind, disconnect, failure, close and independent roots. |
+| Similar-Issue Sweep | Kind/state/stack/task labels and client/control paths for both workers and independent roots. |
 
 T423 remains open and must not close without owner acceptance. See the
-[S27 sequence](../proposals/proposal-kvm-window-graphics-presentation-001.md#successor-s-sequence).
+[successor sequence](../proposals/proposal-kvm-window-graphics-presentation-001.md#successor-s-sequence).
+
+## S27 Closure Record
+
+S27 moved the NTCON-only native get-next wrapper out of `worker-base` while
+retaining its two genuinely shared worker clients. Formal x86, targeted
+lifecycle tests, 17+17 product cases, WOW frontier comparisons and published
+native/DOS/EDIT smoke passed. The legacy no-presenter RPC fixture times out on
+both S25 and S27 and is not counted as a pass. Exact ownership, limits and
+hashes: [S27 audit](../etc/evidence/m0-t423-s27-worker-control-audit.md).
 
 ## S26 Closure Record
 
@@ -38,39 +47,19 @@ Direct ConRecords in production. No product artifact changed or was republished.
 
 ## S25 Closure Record
 
-The native-nested timeout was caused by NTCON waiting for its earlier direct
-CMD target to finish before returning to GetNext, while that CMD waited for
-an inner Run16 request. NTCON now accepts authenticated nested direct commands
-without making original NTVDM scheduling adapt to NTCON. Startup/handoff
-selection has per-launcher state notification and a 10-second deadline;
-NTCON I/O admission and NTVDM frontend binding no longer retry on unbounded
-10-ms readiness timers. NTKVM channel stop has a bounded 10-second join and
-preserves borrowed storage on timeout. The concurrent root-Console geometry
-restoration change was reviewed and tested with this package.
-
-The x86 build, 17 Console and 17 Window cases, WOW depth, lifetime/fault
-fixtures, nested return, concurrent roots and death/timeout negatives passed.
-The verified protocol-24 eight-file
-package was published to `O:/winnt` and passed post-publication native/DOS
-smoke checks. The strict extra final-screen-history check still fails after
-OpenNT-style DOS buffer shrinking; it has no passing S24 baseline, is not
-counted as a pass, and is retained for S29 owner audit rather than changing
-the original fixed-row resize contract inside S25. Full evidence and hashes:
+S25 repaired nested CMD deadlock with NTCON concurrent direct acceptance and
+bounded, signalled startup/handoff waits. Its x86, 17+17, WOW, lifecycle and
+fault gates passed; the protocol-24 package was published. The supplemental
+final-screen-history assertion still has no passing baseline and remains an
+S29 audit item, not a pass. Full evidence and hashes:
 [S25 record](../etc/evidence/m0-t423-s25-native-nesting-wait.md).
 
 ## S24 Closure Record
 
-S24 was incorrectly allowed to grow from a direct-worker baseline into a Job
-observer redesign; that retained candidate was excluded from the product
-baseline and is reassessed in S26. The first protocol-23 publication lacked
-visible CMD I/O and was rolled back. NTCON was repaired to await its NTKVM
-channel before target launch; the rebuilt package passed CMD, COMMAND/MEM,
-same-Console reuse and owner verification. Its deeper native nesting remained
-an S25 failure, now repaired. The owner accepted the bounded 30-ms hidden-
-Console output sampler; S25 addressed the separate 10-ms startup retries.
-The detached `--internal-console-probe` helper was removed; authenticated
-Console membership is only a locator, not task authority. Full hashes,
-failed first publication and test evidence remain in the
+S24 delivered the direct NTCON baseline after rolling back an initial package
+without visible CMD I/O. The Job observer was excluded; S26 later rejected
+its product admission. Bounded hidden-Console output sampling remains accepted.
+The removed `--internal-console-probe` is not task authority. Full evidence:
 [S24 record](../etc/evidence/m0-t423-s24-native-participant-graph.md).
 
 ## S23 Closure Record

@@ -11,7 +11,7 @@ static DWORD observed_broker_fault;
 static void record_broker_fault(void *context,DWORD error)
 { (void)context;observed_broker_fault=error; }
 /* This fixture owns attachments directly, without a broker delivery lease. */
-DWORD worker_base_complete_next_command(DWORD request)
+DWORD ntcon_complete_next_command(DWORD request)
 { if(!request)InterlockedIncrement(&completed_resume_count);return completion_error; }
 DWORD OpenNtBaseClientBindNativeTarget(DWORD request,HANDLE target)
 { return request && target ? ERROR_SUCCESS : ERROR_INVALID_PARAMETER; }
@@ -40,7 +40,7 @@ static HANDLE submit_access_kind(ntcon_executions *owner,DWORD access,DWORD pref
     CHECK(DuplicateHandle(GetCurrentProcess(),GetCurrentProcess(),GetCurrentProcess(),
         &process,access,FALSE,0));
     {
-        worker_base_next_command command={server,process,execution,frontend,request_id};
+        ntcon_next_command command={server,process,execution,frontend,request_id};
         error=ntcon_execution_start(owner,&command,preflight_error);
         CHECK(!command.channel && !command.sender && !command.execution && !command.frontend && !command.request);
     }

@@ -1235,7 +1235,7 @@ if ($Architecture -eq 'x86') {
     $graph.Add('  cflags = ' + $baseOwnerFlags)
     $graph.Add('rule base_rpc_test_link')
     $graph.Add('  command = link.exe /nologo /subsystem:console /out:$out $in rpcrt4.lib ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib')
-    $graph.Add('build base-client-rpc-first-test.exe: base_rpc_test_link obj/tests/base_client_rpc_first.obj obj/run16/worker_launch.obj worker-base.lib frontend-client.lib obj/run16/support.obj obj/run16/rpc_client.obj obj/run16/stub.obj opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib | ntsrv.exe ntcon.exe')
+    $graph.Add('build base-client-rpc-first-test.exe: base_rpc_test_link obj/tests/base_client_rpc_first.obj obj/ntcon/next_command.obj obj/run16/worker_launch.obj worker-base.lib frontend-client.lib obj/run16/support.obj obj/run16/rpc_client.obj obj/run16/stub.obj opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib | ntsrv.exe ntcon.exe')
     $nativeServiceFlags = '/nologo /c /MT /W4 /we4013 /showIncludes /I obj/basesrv /I "' + (NinjaPath (Join-Path $root 'src')) + '"'
     # Frontend-only nxvm closure. Refuse source drift before emitting objects;
     # no dependency on the sibling repository at build or runtime.
@@ -1297,9 +1297,9 @@ if ($Architecture -eq 'x86') {
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build obj/worker-base/connection.obj: cc ' + (NinjaPath (Join-Path $root 'src/worker-base/connection.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build obj/worker-base/next_command.obj: cc ' + (NinjaPath (Join-Path $root 'src/worker-base/next_command.c')))
+    $graph.Add('build obj/ntcon/next_command.obj: cc ' + (NinjaPath (Join-Path $root 'src/ntcon-exe/next_command.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build worker-base.lib: lib obj/worker-base/connection.obj obj/worker-base/next_command.obj obj/worker-base/console_client.obj')
+    $graph.Add('build worker-base.lib: lib obj/worker-base/connection.obj obj/worker-base/console_client.obj')
     $graph.Add('build obj/run16/launch_options.obj: cc ' + (NinjaPath (Join-Path $run16Root 'launch_options.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build obj/tests/run16_launch_options.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/run16_launch_options_test.c')))
@@ -1333,9 +1333,9 @@ if ($Architecture -eq 'x86') {
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('rule console_test_link')
     $graph.Add('  command = link.exe /nologo /out:$out $in libcmt.lib libvcruntime.lib libucrt.lib kernel32.lib user32.lib gdi32.lib')
-    $graph.Add('build obj/tests/worker_base_next_command.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/worker_base_next_command_test.c')))
+    $graph.Add('build obj/tests/ntcon_next_command.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/ntcon_next_command_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build worker-base-next-command-test.exe: console_test_link obj/tests/worker_base_next_command.obj obj/worker-base/next_command.obj')
+    $graph.Add('build ntcon-next-command-test.exe: console_test_link obj/tests/ntcon_next_command.obj obj/ntcon/next_command.obj')
     foreach ($kind in @('library','controller','keyboard')) {
         $source = Join-Path $root ('tests/component-integration/frontend_window_' + $kind + '_test.c')
         $object = 'obj/tests/frontend_window_' + $kind + '.obj'
@@ -1379,7 +1379,7 @@ if ($Architecture -eq 'x86') {
         $graph.Add('  cflags = ' + $nativeServiceFlags + ' /I "' + (NinjaPath $fontBuild) + '"')
     }
     $nativeBinding = ' obj/run16/support.obj obj/run16/rpc_client.obj obj/run16/stub.obj opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib'
-    $graph.Add('build ntcon.exe: frontend_link worker-base.lib obj/ntcon/main.obj obj/ntcon/presentation.obj obj/ntcon/text_frame.obj obj/ntcon/console_state.obj obj/ntcon/channel_io.obj obj/ntcon/execution.obj obj/ntcon/launch.obj obj/ntcon/launch_packet.obj' + $nativeBinding)
+    $graph.Add('build ntcon.exe: frontend_link worker-base.lib obj/ntcon/next_command.obj obj/ntcon/main.obj obj/ntcon/presentation.obj obj/ntcon/text_frame.obj obj/ntcon/console_state.obj obj/ntcon/channel_io.obj obj/ntcon/execution.obj obj/ntcon/launch.obj obj/ntcon/launch_packet.obj' + $nativeBinding)
     $graph.Add('build obj/ntcon/text_frame.obj: cc ' + (NinjaPath (Join-Path $root 'src/ntcon-exe/text_frame.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build obj/tests/ntcon_text_frame.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/ntcon_text_frame_test.c')))
@@ -1756,7 +1756,7 @@ if ($objectOutputDirectories.Count -gt 0) {
         target = 'worker-base.lib'
         selected = ($Architecture -eq 'x86')
         disposition = 'project-owned worker connection, ordered frontend client, frame/input and acknowledgment mechanisms; NTVDM and NTCON only'
-        sources = @('connection.c', 'connection.h', 'next_command.c', 'next_command.h', 'console_client.c' | ForEach-Object {
+        sources = @('connection.c', 'connection.h', 'console_client.c' | ForEach-Object {
             $path = 'src/worker-base/' + $_
             [ordered]@{ path = $path; sha256 = Get-NodeSha256 (Join-Path $root $path) }
         })
@@ -1797,7 +1797,7 @@ if ($objectOutputDirectories.Count -gt 0) {
     nativeConsoleComposition = [ordered]@{
         target = 'ntcon.exe'
         disposition = 'independent registered hidden Console worker; shared frontend channel and direct target completion; acceptance remains gated'
-        sources = @('main.c','console_state.c','console_state.h','execution.c','execution.h','launch.c','launch_packet.c','presentation.c','presentation.h','text_frame.c','text_frame.h','io.h','channel_io.c' | ForEach-Object {
+        sources = @('main.c','next_command.c','next_command.h','console_state.c','console_state.h','execution.c','execution.h','launch.c','launch_packet.c','presentation.c','presentation.h','text_frame.c','text_frame.h','io.h','channel_io.c' | ForEach-Object {
             $path = 'src/ntcon-exe/' + $_
             [ordered]@{ path = $path; sha256 = Get-NodeSha256 (Join-Path $root $path) }
         })

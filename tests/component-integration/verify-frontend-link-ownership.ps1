@@ -90,9 +90,14 @@ function Assert-FrontendOwnership([string[]]$Lines) {
     }
     foreach($target in @('worker-base.lib','ntvdm.exe','ntcon.exe')) {
         $actual=@(Get-FrontendSources $target 'worker-base')
-        if(@(Compare-Object @('connection.c','next_command.c','console_client.c') $actual).Count) {
+        if(@(Compare-Object @('connection.c','console_client.c') $actual).Count) {
             throw "$target does not use the complete common worker implementation"
         }
+    }
+    $ntvdmNative=@(Get-FrontendSources 'ntvdm.exe' 'ntcon-exe')
+    $ntconNative=@(Get-FrontendSources 'ntcon.exe' 'ntcon-exe')
+    if('next_command.c' -in $ntvdmNative -or 'next_command.c' -notin $ntconNative) {
+        throw 'NTCON-only native GetNext wrapper must not enter NTVDM or worker-base'
     }
     foreach($target in @('run16.exe','ntsrv.exe','ntkvm.exe','ntmon.exe')) {
         if(@(Get-FrontendSources $target 'worker-base').Count) {
