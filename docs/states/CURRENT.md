@@ -2,11 +2,11 @@
 
 ## Current Work
 
-## Active Packet
+## Task Intermission
 
-**Active: M0 T423 S29 — whole control-plane acceptance and owner handoff**
+**No active M/T/S packet.** M0 T423 remains open for owner acceptance.
 
-| Field | S29 brief |
+| Field | Last S29 brief |
 | --- | --- |
 | Identifier Mode | M0 T423 S29, Ordinary Mode. |
 | Admission And Approval | Owner approved automatic sequential S admission through S29; S28 reached its bounded conclusion. |
@@ -24,8 +24,9 @@
 | Original Owner Request | Automatic sequential admission for remaining T423 tasks; NTCON adapts to NTVDM's original shape. |
 | Similar-Issue Sweep | Cross-worker fault/reuse symmetry, nested/independent roots, management display and retained limitations. |
 
-T423 remains open and must not close without owner acceptance. See the
-[successor sequence](../proposals/proposal-kvm-window-graphics-presentation-001.md#successor-s-sequence).
+S29's [acceptance ledger](../etc/evidence/m0-t423-s29-control-plane-acceptance.md)
+records the completed control-plane gates, exact non-pass, test-only changes,
+and unchanged published package. T423 must not close without owner acceptance.
 
 ## S28 Closure Record
 
@@ -36,23 +37,8 @@ Console plus 17 Window product cases, and the retained WINMINE/SOL/WRITE
 frontiers passed. The coherent eight-file package is published to `O:/winnt`;
 the source/owner ledger, hashes and non-passes are in the [S28 evidence](../etc/evidence/m0-t423-s28-management-projection.md).
 
-## S27 Closure Record
-
-S27 moved the NTCON-only native get-next wrapper out of `worker-base` while
-retaining its two genuinely shared worker clients. Formal x86, targeted
-lifecycle tests, 17+17 product cases, WOW frontier comparisons and published
-native/DOS/EDIT smoke passed. The legacy no-presenter RPC fixture times out on
-both S25 and S27 and is not counted as a pass. Exact ownership, limits and
-hashes: [S27 audit](../etc/evidence/m0-t423-s27-worker-control-audit.md).
-
-## S26 Closure Record
-
-The Job candidate passed three local event/close fixtures but Windows does
-not guarantee ordinary completion-port messages, and this candidate has an
-unprotected asynchronous connection pointer. S26 rejected product admission,
-moved the unlinked candidate into isolated test research, and retained only
-Direct ConRecords in production. No product artifact changed or was republished.
-[Decision and exact evidence](../etc/evidence/m0-t423-s26-job-observation-disposition.md).
+S27/S26 owner and non-pass records remain in their indexed evidence ledgers;
+S26's Job-observed participant projection was rejected from production.
 
 ## S25 Closure Record
 

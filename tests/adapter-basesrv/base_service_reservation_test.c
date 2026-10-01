@@ -597,6 +597,11 @@ int main(int argc,char **argv)
             &taken,&sender,&execution,&io)==ERROR_NOT_FOUND && !taken && !sender && !execution);
         CHECK(WaitForSingleObject(capability,0)==WAIT_TIMEOUT);
         CHECK(!OpenNtBaseServiceConnect(service,self,&launcher,&launcherGeneration));
+        {
+            DWORD members[2]={GetCurrentProcessId(),laterChild.dwProcessId};
+            CHECK(!OpenNtBaseServiceReportConsoleMembers(launcher,GetCurrentProcessId(),
+                launcherGeneration,2,members));
+        }
         {HANDLE selected=NULL;CHECK(!OpenNtBaseServiceSelectNativeWorker(launcher,GetCurrentProcessId(),launcherGeneration,&selected));
          CHECK(GetProcessId(selected)==laterChild.dwProcessId);CloseHandle(selected);}
         CHECK(!frontend_pair(&server,&client));
@@ -606,6 +611,11 @@ int main(int argc,char **argv)
         CHECK(!ReadFile(client,&byte,1,&transferred,NULL) && GetLastError()==ERROR_BROKEN_PIPE);
         CloseHandle(client);
         CHECK(!OpenNtBaseServiceConnect(service,self,&launcher,&launcherGeneration));
+        {
+            DWORD members[2]={GetCurrentProcessId(),laterChild.dwProcessId};
+            CHECK(!OpenNtBaseServiceReportConsoleMembers(launcher,GetCurrentProcessId(),
+                launcherGeneration,2,members));
+        }
         {HANDLE selected=NULL;CHECK(!OpenNtBaseServiceSelectNativeWorker(launcher,GetCurrentProcessId(),launcherGeneration,&selected));
          CHECK(GetProcessId(selected)==laterChild.dwProcessId);CloseHandle(selected);}
         CHECK(!frontend_pair(&server,&client));

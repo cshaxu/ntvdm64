@@ -349,9 +349,10 @@ S23--S29 are sequential and owner-authorized for automatic admission: an S may
 not defer its own worker-control edge merely because a later S has an
 integration matrix.  Every production P retains the existing formal x86 build,
 established DOS routes, WOW frontier non-regression, coherent package
-publication and governance gates. S24 and S25 have closed with their verified
-direct-command and native-nesting baselines; S26 rejected the Job projection
-after its bounded audit, and S27 is active. S29 hands T423 to the owner for acceptance rather than
+publication and governance gates. S24 and S25 closed with their verified
+direct-command and native-nesting baselines; S26 rejected the Job projection;
+S27 and S28 closed their control-plane and management cleanups. S29 completed
+the final test-only acceptance ledger and hands T423 to the owner rather than
 closing it automatically. S22 closed with an evidenced target terminal-
 capability limitation, not a renderer repair.
 

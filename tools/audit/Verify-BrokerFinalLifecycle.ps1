@@ -2,6 +2,7 @@
 param(
     [Parameter(Mandatory)][string]$Observer,
     [string]$PackageRoot='O:\winnt',
+    [string]$LogRoot='O:\winnt\Logs2',
     [Parameter(Mandatory)][string]$LogPrefix,
     [string]$BarrierBroker,
     [switch]$BrokerLoss,
@@ -39,16 +40,17 @@ if($MiddleLayerLoss -and (!$NestedWorkerLoss -or !$NestedInteractive -or $Broker
 }
 $Observer=(Resolve-Path -LiteralPath $Observer).Path
 $PackageRoot=(Resolve-Path -LiteralPath $PackageRoot).Path
+$LogRoot=(Resolve-Path -LiteralPath $LogRoot).Path
 if($LogPrefix -notmatch '^[a-z0-9-]+$'){throw 'Invalid log prefix'}
-$trace=Join-Path $PackageRoot "logs\$LogPrefix.trace"
+$trace=Join-Path $LogRoot "$LogPrefix.trace"
 if(Test-Path -LiteralPath $trace){throw 'Use a fresh log prefix'}
-$paths=@('run16.exe','ntsrv.exe','ntvdm.exe') | ForEach-Object {Join-Path $PackageRoot $_}
+$paths=@('run16.exe','ntsrv.exe','ntvdm.exe','ntkvm.exe') | ForEach-Object {Join-Path $PackageRoot $_}
 function PackageProcesses {
-    @(Get-CimInstance Win32_Process -Filter "Name='run16.exe' OR Name='ntsrv.exe' OR Name='ntvdm.exe'" | Where-Object {$_.ExecutablePath -in $paths})
+    @(Get-CimInstance Win32_Process -Filter "Name='run16.exe' OR Name='ntsrv.exe' OR Name='ntvdm.exe' OR Name='ntkvm.exe'" | Where-Object {$_.ExecutablePath -in $paths})
 }
 function ObservedProcesses {
     $shells=@((Join-Path $env:SystemRoot 'System32\cmd.exe'),(Join-Path $env:SystemRoot 'SysWOW64\cmd.exe'))
-    @(Get-CimInstance Win32_Process -Filter "Name='run16.exe' OR Name='ntsrv.exe' OR Name='ntvdm.exe' OR Name='cmd.exe' OR Name='console-startup-observer.exe'" |
+    @(Get-CimInstance Win32_Process -Filter "Name='run16.exe' OR Name='ntsrv.exe' OR Name='ntvdm.exe' OR Name='ntkvm.exe' OR Name='cmd.exe' OR Name='console-startup-observer.exe'" |
         Where-Object {$_.ExecutablePath -in $paths -or $_.ExecutablePath -eq $Observer -or $_.ExecutablePath -in $shells})
 }
 if((PackageProcesses).Count){throw 'Package already in use'}
@@ -77,7 +79,7 @@ function CollectOwned {
     }
 }
 function StartObserved([string]$name,[string]$target,[string]$inputText=''){
-    $report=Join-Path $PackageRoot "logs\$LogPrefix-$name.txt"
+    $report=Join-Path $LogRoot "$LogPrefix-$name.txt"
     $args=@((Join-Path $PackageRoot 'run16.exe'),$PackageRoot,$report,$target,'--observation-timeout-ms','20000')
     if($inputText){$args+=@('--observe-console-input-text',('"'+$inputText+'"'))}
     $start=[Diagnostics.ProcessStartInfo]::new($Observer,($args -join ' '))
@@ -139,7 +141,7 @@ try {
            @($members | Where-Object Name -eq 'cmd.exe').Count -ne $expectedShells -or
            @($members | Where-Object Name -eq 'ntvdm.exe').Count -ne 1){throw 'Unexpected process chain before close'}
         $members | Select-Object ProcessId,ParentProcessId,Name,ExecutablePath,CommandLine |
-            ConvertTo-Json -Depth 3 | Set-Content (Join-Path $PackageRoot "logs\$LogPrefix-close-chain.json") -Encoding utf8
+            ConvertTo-Json -Depth 3 | Set-Content (Join-Path $LogRoot "$LogPrefix-close-chain.json") -Encoding utf8
         $retained=@($members | ForEach-Object {$p=Get-Process -Id $_.ProcessId;[void]$p.Handle; $p})
         try {
             [void]$inputGate.Set()
@@ -186,7 +188,7 @@ try {
         if(!$native){throw 'DOS did not create the selected native waiting target'}
         ObservedProcesses | Where-Object {$owned.Contains([int]$_.ProcessId)} |
             Select-Object ProcessId,ParentProcessId,Name,ExecutablePath,CommandLine |
-            ConvertTo-Json -Depth 3 | Set-Content -LiteralPath (Join-Path $PackageRoot "logs\$LogPrefix-chain.json") -Encoding utf8
+            ConvertTo-Json -Depth 3 | Set-Content -LiteralPath (Join-Path $LogRoot "$LogPrefix-chain.json") -Encoding utf8
         $pair=@(PackageProcesses | Where-Object {$_.ProcessId -eq $native.ParentProcessId -and $_.Name -eq 'run16.exe'})
         if($pair.Count -ne 1){throw 'Native target has no exact direct run16 parent'}
         $targetProcess=Get-Process -Id $native.ProcessId
@@ -291,7 +293,7 @@ try {
         $workers=@($chain | Where-Object {$_.Name -eq 'ntvdm.exe'})
         $servers=@($chain | Where-Object {$_.Name -eq 'ntsrv.exe'})
         $chain | Select-Object ProcessId,ParentProcessId,Name,ExecutablePath,CommandLine |
-            ConvertTo-Json -Depth 3 | Set-Content -LiteralPath (Join-Path $PackageRoot "logs\$LogPrefix-chain.json") -Encoding utf8
+            ConvertTo-Json -Depth 3 | Set-Content -LiteralPath (Join-Path $LogRoot "$LogPrefix-chain.json") -Encoding utf8
         if($launchers.Count -ne 3 -or $shells.Count -ne 2 -or $workers.Count -ne 1 -or $servers.Count -ne 1){throw 'Expected three run16, two CMD, one worker and one broker'}
         $root=@($launchers | Where-Object {$_.ParentProcessId -notin $shells.ProcessId})
         if($root.Count -ne 1){throw 'Cannot identify unique outer run16'}
@@ -355,7 +357,7 @@ try {
                 if(!$item.Process.WaitForExit(8000)){
                     if($item.Name -eq 'ntvdm.exe' -and $WorkerWindowObserver){
                         & $WorkerWindowObserver $item.Id "NTVDMConsoleTest-$($loss.Process.Id)" |
-                            Set-Content -LiteralPath (Join-Path $PackageRoot "logs\$LogPrefix-worker-windows.txt") -Encoding utf8
+                            Set-Content -LiteralPath (Join-Path $LogRoot "$LogPrefix-worker-windows.txt") -Encoding utf8
                     }
                     throw "Nested process still alive: $($item.Name) PID=$($item.Id)"
                 }
@@ -414,7 +416,7 @@ try {
                 Observers=@($observers | Select-Object Name,Report);
                 ReadyCount=$readyCount;RequiredTasks=$requiredTasks;
                 Reports=@($observers | ForEach-Object {Get-Content -LiteralPath $_.Report -Raw -ErrorAction SilentlyContinue})} |
-                ConvertTo-Json -Depth 5 | Set-Content -LiteralPath (Join-Path $PackageRoot "logs\$LogPrefix-ownership.json") -Encoding utf8
+                ConvertTo-Json -Depth 5 | Set-Content -LiteralPath (Join-Path $LogRoot "$LogPrefix-ownership.json") -Encoding utf8
             throw 'Cannot identify owned broker; see ownership.json'
         }
         $workers=@(PackageProcesses | Where-Object {$_.Name -eq 'ntvdm.exe' -and $owned.Contains([int]$_.ProcessId)})
@@ -437,10 +439,16 @@ try {
         $launcherId=[int]$launcher[0].ProcessId
         $worker=@($workers | Where-Object {$_.ParentProcessId -eq $launcherId})
         if($workers.Count -ne $requiredTasks -or $worker.Count -ne 1){throw 'Cannot identify owned pairs'}
-        $victim=if($WorkerLoss){$worker[0]}elseif($LauncherLoss -or $FrontendLoss){$launcher[0]}else{$servers[0]}
-        # Authenticated root loss closes its DOS session, not unrelated workers.
-        # Retain handles before exit; test cleanup is not product completion.
-        $frontendWorker=if($FrontendLoss -or $LauncherLoss){Get-Process -Id $worker[0].ProcessId}else{$null}
+        $frontend=@(PackageProcesses | Where-Object {
+            $_.Name -eq 'ntkvm.exe' -and $owned.Contains([int]$_.ProcessId) -and
+            $_.ParentProcessId -eq $launcherId
+        })
+        if($FrontendLoss -and $frontend.Count -ne 1){throw 'Cannot identify launcher-owned NTKVM frontend'}
+        $victim=if($WorkerLoss){$worker[0]}elseif($FrontendLoss){$frontend[0]}
+            elseif($LauncherLoss){$launcher[0]}else{$servers[0]}
+        # The independent NTKVM process is the worker's I/O peer. Killing
+        # run16 alone is not a frontend-loss test after the S4 ownership move.
+        $frontendWorker=if($FrontendLoss){Get-Process -Id $worker[0].ProcessId}else{$null}
         if($frontendWorker){[void]$frontendWorker.Handle} # retain before process exit
         Stop-Process -Id $victim.ProcessId
         if($TwoWorkers -and !$BrokerLoss){
@@ -448,7 +456,7 @@ try {
             $otherWorker=$workers | Where-Object {$_.ProcessId -ne $worker[0].ProcessId}
             if(!(PackageProcesses | Where-Object {$_.ProcessId -eq $otherWorker.ProcessId})){throw 'Unrelated worker was terminated'}
         }
-        if($FrontendLoss -or $LauncherLoss){
+        if($FrontendLoss){
             if(!$frontendWorker.WaitForExit(8000)){throw 'Associated worker did not close after root session ended'}
             $results.Add('PASS root session loss closes associated worker while unrelated Console remains held')
             $frontendWorker.Dispose()
@@ -479,6 +487,9 @@ try {
             $results.Add('PASS broker loss: launcher and worker exit, no replay')
         } else {
             if(!(PackageProcesses | Where-Object {$_.ProcessId -eq $servers[0].ProcessId})){throw 'Unrelated broker terminated'}
+            if($LauncherLoss -and !(PackageProcesses | Where-Object {$_.ProcessId -eq $worker[0].ProcessId})){
+                throw 'Launcher death incorrectly terminated its admitted worker'
+            }
             $results.Add("PASS $($victim.Name) loss: bounded parent outcome, broker survives")
             StopOwnedWorkers
         }
@@ -571,6 +582,6 @@ try {
         else{[Environment]::SetEnvironmentVariable($entry.Key,[string]$entry.Value)}
     }
     if($inputGate){[void]$inputGate.Set();$inputGate.Dispose()}
-    $results | Set-Content -LiteralPath (Join-Path $PackageRoot "logs\$LogPrefix-results.txt") -Encoding utf8
+    $results | Set-Content -LiteralPath (Join-Path $LogRoot "$LogPrefix-results.txt") -Encoding utf8
     $results | Write-Output
 }
