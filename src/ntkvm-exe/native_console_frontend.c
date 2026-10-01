@@ -29,7 +29,6 @@ struct run16_native_frontend {
     CONSOLE_CURSOR_INFO original_cursor;
     BOOL original_screen_saved,original_cursor_saved;
     BOOL native_geometry_pending;
-    COORD last_dos_size;
     HANDLE handoff,handoff_done;
     const void *handoff_owner;
     BOOL handoff_active,handoff_native;
@@ -459,13 +458,9 @@ static DWORD apply_binding(run16_native_frontend *frontend,const void *owner,BOO
     if(!native) {
         if(active && frontend->native_geometry_pending) {
             error=run16_console_prepare_dos(frontend->console_output,
-                &frontend->logical_window,frontend->last_dos_size);
+                &frontend->logical_window);
             if(error)return error;
             frontend->native_geometry_pending=FALSE;
-        } else if(!active) {
-            COORD size={frontend->logical_window.Right-frontend->logical_window.Left+1,
-                frontend->logical_window.Bottom-frontend->logical_window.Top+1};
-            if(run16_console_dos_size(size))frontend->last_dos_size=size;
         }
     }
     /* Initial DOS startup retains the original Console scrollback path.

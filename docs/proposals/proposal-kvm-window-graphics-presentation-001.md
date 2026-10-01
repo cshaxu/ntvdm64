@@ -344,6 +344,7 @@ blocking get-next wait into a timed failure.
 | S27 | Unified external worker control-plane closure | Audit the current Run16, NTSRV, NTKVM, NTMON, interface and `worker-base` paths after S24/S25. Converge project-added, semantically identical authenticated admission, registration, direct command/receipt, READY/BUSY/EMPTY, route/root release, disconnect, explicit-close and worker-death handling for NTVDM/NTCON. NTCON adapts to the original NTVDM/BaseSrv shape; original DOS/WOW records, `GetNextVDMCommand`, guest execution and completion stay in place. Remove superseded transport/state paths rather than wrapping both implementations. Verify worker reuse, broker/worker/frontend faults and DOS↔native handoff. |
 | S28 | Unified management projection and divergence cleanup | Make NTMON a pure NTSRV projection consumer: `kind=0 DOS, 1 Win16, 2 Win32`, one `PID/STATE/STACK/TASK/IMAGE/START/ELAPSED` DTO, and `STACK=0/TASK=<EMPTY>` for resident workers. Derive Direct from the actual admitted target and any Observed display only from the S26 decision; never infer completion or BUSY from a sample, or display `MEMBERS=`. Audit all remaining project-added NTVDM/NTCON differences in Run16/NTSRV/NTKVM/NTMON/worker-base/interface; delete same-semantic duplicates and account for worker-local differences. Rich native stack display is conditional on S26 evidence, not an S24 claim. |
 | S29 | Whole control-plane acceptance and owner handoff | Add no new product mechanism. Execute repeated resident reuse, direct and nested DOS/Console lifecycle, route/root rebind, completion, disconnect, worker death, explicit close, independent-session and management-display matrices, including the S25 timeout/notification cases and S26 Observed limitations. Audit S25's still-failing supplemental final-banner history check against the original OpenNT resize contract; do not report it as a pass or silently expand the product contract. Include full x86/DOS/Window/WOW production regressions, coherent package publication, governance, and final diff/duplicate accounting. Stop for owner verification; do not autonomously close T423. |
+| S30 | Restore OpenNT DOS row selection and service revision | Supersede S13's last-valid-DOS fallback. Select 80×22/25/28/43/50 with the original `calcScreenParams` integer midpoint comparisons against the native Console viewport height; retain existing row-copy and worker handoff. Synchronize `service.idl` revision 25.0 with application protocol 25, regenerate MIDL, fully relink and reject old/new protocol peers. Test every midpoint edge, 30→28, native/DOS nesting, Console/Window and previous DOS/WOW frontiers. Publish only a coherent verified eight-file package; leave T423 open for owner acceptance. |
 
 S23--S29 are sequential and owner-authorized for automatic admission: an S may
 not defer its own worker-control edge merely because a later S has an
@@ -377,9 +378,11 @@ S15 限于 NTKVM 对 Window 捕获与原始 DOS Console `ClipCursor` 请求的
   文本区域。已有 Win32 链启动/返回继承当前区域，不恢复初始默认。
 - Win32 程序主动改尺寸允许应用并向后续启动/返回传播；宿主物理窗口限制
   不是程序改尺寸意图。须核实真实 API 可观测性，不能凭 srWindow 变化猜测。
-- 返回 DOS：有实际验证可用的原始视频模式接入路径则原样采用；否则恢复
-  该会话最后一次有效 DOS 文本模式，无记录时用原始启动默认。不硬编码
-  普遍 80x25，不伪造 BIOS/显存状态，不修改 guest。
+- S30 owner correction supersedes the S13 fallback sentence above: native-to-DOS
+  return always uses the original `calcScreenParams` midpoint rule over the
+  current Console viewport height (22/25/28/43/50 rows and 80 columns), never
+  the last valid DOS mode. The original worker still applies its real BIOS/video
+  state; no guest modification or frame-header-only success is allowed.
 - 转换不重排文字，列左对齐；缩短时选择尽量保留顶部且包含光标的连续行；
   超出目标列的内容不进入 DOS 画面，增长处补空格，光标转换/限界。
   原生滚屏历史不清空。兼容交接不跳变；不兼容模式转换允许一次明确变化。

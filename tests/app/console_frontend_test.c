@@ -228,37 +228,45 @@ int main(void)
     {
         SMALL_RECT logical={0,10,119,49},tiny={0,0,0,0},saved;
         CONSOLE_SCREEN_BUFFER_INFO actual;
-        COORD extent={120,60},last={80,28},cursor_at={99,40};
-        SHORT heights[]={22,25,28,43,50};DWORD row,index;WCHAR cell;
+        COORD extent={120,60},cursor_at={99,50};
+        SHORT heights[]={22,25,28,43,50};
+        SHORT input_heights[]={23,24,26,27,30,35,36,46,47};
+        SHORT output_heights[]={22,25,25,28,28,28,43,43,50};
+        DWORD row,index;WCHAR cell;
         CHECK(SetConsoleWindowInfo(owner.output,TRUE,&tiny));
         CHECK(SetConsoleScreenBufferSize(owner.output,extent));
         for(row=0;row<60;++row)
             CHECK(FillConsoleOutputCharacterW(owner.output,(WCHAR)('A'+row%26),120,
                 (COORD){0,(SHORT)row},&count) && count==120);
         CHECK(SetConsoleCursorPosition(owner.output,cursor_at));
-        CHECK(!run16_console_prepare_dos(owner.output,&logical,last));
+        CHECK(!run16_console_prepare_dos(owner.output,&logical));
         CHECK(GetConsoleScreenBufferInfo(owner.output,&actual));
-        CHECK(actual.dwSize.X==80 && actual.dwSize.Y==28 && logical.Right==79 && logical.Bottom==27);
-        CHECK(actual.dwCursorPosition.X==79 && actual.dwCursorPosition.Y==27);
-        CHECK(ReadConsoleOutputCharacterW(owner.output,&cell,1,(COORD){0,0},&count) && count==1 && cell=='N');
-        CHECK(ReadConsoleOutputCharacterW(owner.output,&cell,1,(COORD){79,27},&count) && count==1 && cell=='O');
+        CHECK(actual.dwSize.X==80 && actual.dwSize.Y==43 && logical.Right==79 && logical.Bottom==42);
+        CHECK(actual.dwCursorPosition.X==79 && actual.dwCursorPosition.Y==42);
+        CHECK(ReadConsoleOutputCharacterW(owner.output,&cell,1,(COORD){0,0},&count) && count==1 && cell=='I');
+        CHECK(ReadConsoleOutputCharacterW(owner.output,&cell,1,(COORD){79,42},&count) && count==1 && cell=='Y');
         owner.logical_window=&logical;
         for(index=0;index<ARRAYSIZE(heights);++index) {
             logical=(SMALL_RECT){0,0,79,heights[index]-1};
-            CHECK(!run16_console_prepare_dos(owner.output,&logical,last));
+            CHECK(!run16_console_prepare_dos(owner.output,&logical));
             operation(&owner,CONSOLE_IO_SCREEN_INFO);
             CHECK(!run16_console_dispatch(&owner,&request,&reply) && reply.result);
             CHECK(reply.state.width==80 && reply.state.height==heights[index] &&
                 reply.state.right==79 && reply.state.bottom==heights[index]-1);
         }
+        for(index=0;index<ARRAYSIZE(input_heights);++index) {
+            logical=(SMALL_RECT){0,0,79,input_heights[index]-1};
+            CHECK(!run16_console_prepare_dos(owner.output,&logical));
+            CHECK(logical.Right==79 && logical.Bottom==output_heights[index]-1);
+        }
         logical=(SMALL_RECT){0,0,119,39};saved=logical;
-        CHECK(run16_console_prepare_dos(INVALID_HANDLE_VALUE,&logical,last)==ERROR_INVALID_HANDLE);
+        CHECK(run16_console_prepare_dos(INVALID_HANDLE_VALUE,&logical)==ERROR_INVALID_HANDLE);
         CHECK(!memcmp(&logical,&saved,sizeof(saved)));
-        CHECK(!run16_console_prepare_dos(owner.output,&logical,(COORD){0,0}));
-        CHECK(logical.Right==79 && logical.Bottom==24);
+        CHECK(!run16_console_prepare_dos(owner.output,&logical));
+        CHECK(logical.Right==79 && logical.Bottom==42);
         CHECK(!run16_console_dos_size((COORD){40,25}) && !run16_console_dos_size((COORD){80,40}));
         owner.logical_window=NULL;
-        puts("PASS DOS geometry: original five return modes, last-mode/default fallback, no reflow, cursor-visible rows, clamped cursor, failure does not acknowledge");
+        puts("PASS DOS geometry: original five return modes and midpoint boundaries, no reflow, cursor-visible rows, clamped cursor, failure does not acknowledge");
     }
     CloseHandle(owner.output);owner.output=INVALID_HANDLE_VALUE;
     operation(&owner,CONSOLE_IO_CURRENT_FONT);

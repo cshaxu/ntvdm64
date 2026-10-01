@@ -4,7 +4,27 @@
 
 ## Task Intermission
 
-**No active M/T/S packet.** M0 T423 remains open for owner acceptance.
+**No active M/T/S packet.** M0 T423 remains open for owner acceptance. S30
+has finished its bounded OpenNT geometry and protocol-revision repair; the
+tested protocol-25 eight-file package is published to `O:/winnt`. Its
+[evidence ledger](../etc/evidence/m0-t423-s30-opennt-geometry-protocol.md)
+records the x86 build, all 34 product routes, three WOW frontiers, hashes and
+remaining test-harness limitation. The preceding S29
+[acceptance ledger](../etc/evidence/m0-t423-s29-control-plane-acceptance.md)
+remains the whole-control-plane handoff. Do not close T423 without owner
+acceptance.
+
+## Recent M0 Closures
+
+S30 restored original 22/25/28/43/50-row selection on native-to-DOS return,
+removed the last-DOS-size fallback, synchronized MIDL revision 25.0 and
+verified the published package. The original MVDM image, guest media and
+configuration were not changed.
+
+## Recent Governance
+
+The T423 proposal and the S30 evidence ledger retain the admitted scope,
+test results and non-passes. No further S is admitted during intermission.
 
 | Field | Last S29 brief |
 | --- | --- |
@@ -196,23 +216,10 @@ reported verification passed and explicitly directed S14 closure. Evidence:
 | Original Owner Request | Admit new S13 for approved text-size handoff repair; shift former S13. NTKVM stores authoritative geometry; native changes propagate; unsupported DOS extent restores last valid DOS mode. |
 | Similar-Issue Sweep | Native root initialization, nested launch/return, buffer replacement, scrolling, display switching, font geometry, viewport offsets and mouse mapping. |
 
-### Current investigation
+### Retained S13 investigation
 
-Final gate update: r70 temporarily published the fully tested candidate;
-published Console r71 and Window r75 each passed17/17, WOW r76 preserved all
-three frontiers, and DOS/native mouse checks r77/r78 passed. However r79 real
-22-row geometry handoff returned1237 from a subsequent native child. S13 stays
-open. The complete eight-file runtime was restored to the S12 hashes from
-publication-backup-r70. Candidate r81 passed the five-mode matrix but does not
-erase the intermittent failure. The later protocol19 candidate holds the
-NTKVM frontend lock across NTCON's full multi-tile snapshot; EOF and invalid
-operations release it. Candidate r94/r97-r105 pass the lock, Console/Window,
-mouse, WOW, five-mode geometry and DDWWDDWW gates. Coherent r106 publication
-replaced the eight-file package with backup/manifest. Published r107-r112 pass
-the previously failing 22-row case, all five modes, Console/Window17/17 each,
-DOS/native mouse and three WOW baseline frontiers. All eight published hashes
-match formal output. r79 remains recorded as a real historical failure; its
-exact emitting stage was not traced then, and is not asserted retroactively.
+The completed S13 attempt chronology, including failures and final publication,
+is retained in the [S13 evidence ledger](../etc/evidence/m0-t423-s13-text-geometry.md).
 
 Earlier r51-r67: worker-owned reverse-video mouse block is implemented and
 tested without TEXT frame ABI/shared-library changes. The input channel is now
@@ -313,21 +320,9 @@ and the lock/channel tests passed; the earlier r79 failure remains in the
 [S13 evidence ledger](../etc/evidence/m0-t423-s13-text-geometry.md), not erased
 from history. This closes S13 only, not T423. S14 awaits separate admission.
 
-## Previous Delivery
-
-M0 T423 S12 implementation and verification are complete. Its P2 delivery
-contains the independent NTCON worker, common worker mechanisms, production
-integration, obsolete-backend removal and the accumulated reviewed tests.
-The coherent S12 eight-file package was the baseline during S13; do not close
-T423 automatically.
-
-T423 remains open. Product-experience/component-lifetime work is now S14,
-not admitted. It is not the cancelled RDP packet.
-
-Authorities: [T423 proposal](../proposals/proposal-kvm-window-graphics-presentation-001.md),
-[S12 source/test ledger](../etc/evidence/m0-t423-s12-ntcon-backend.md), and
-[Queue](QUEUE.md). The detailed S12 chronology, failed attempts and owner
-boundary changes remain in the ledger; they are not current open gates.
+Historical S12 handoff and subsequent supersession are retained in the
+[S12 ledger](../etc/evidence/m0-t423-s12-ntcon-backend.md) and
+[T423 proposal](../proposals/proposal-kvm-window-graphics-presentation-001.md).
 
 ## Current Technical Baseline
 
@@ -432,19 +427,6 @@ Delivered geometry handoff, cross-process screen snapshot locking and native
 worker-owned mouse pointer in pushed P1 `307c4a1b5`; full eight-file package
 published and checked after publication. [Evidence](../etc/evidence/m0-t423-s13-text-geometry.md).
 
-## Recent M0 Closures
+## T423 Ownership
 
-S13 is the latest implementation closure; owner side-test acceptance is pending.
-S11 965083eec remains the recoverable owner-accepted baseline;
-[S11 evidence](../etc/evidence/m0-t423-s11-interaction-retirement.md).
-Earlier T423 stage records are linked by the proposal and S12 ledger.
-T422 remains owner-closed; T423 itself is not closed.
-
-## Recent Governance
-
-This delivery preserves and includes the owner's authorized side-chat Queue/WOW
-proposal changes. That delivery did not admit queued candidates. The subsequent
-owner request now admits geometry S13 and defers product experience to S14. No forced push,
-guest/lib change, new scheduler, recursive kill or helper is part of S12.
-Commit/push and repository synchronization are verified as the final delivery
-step; source/test evidence cannot substitute for that check.
+T422 remains owner-closed. T423 remains open pending owner acceptance after S30.

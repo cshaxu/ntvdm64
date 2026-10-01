@@ -35,5 +35,5 @@ DWORD run16_console_dispatch(run16_console_frontend *,const console_io_request *
 /* Original nt_fulsc.c::calcScreenParams can reproduce these return modes.
  * Caller serializes the screen and commits ownership only after success. */
 BOOL run16_console_dos_size(COORD);
-DWORD run16_console_prepare_dos(HANDLE,SMALL_RECT *,COORD);
+DWORD run16_console_prepare_dos(HANDLE,SMALL_RECT *);
 #endif

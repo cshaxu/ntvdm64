@@ -66,14 +66,25 @@ BOOL run16_console_dos_size(COORD size)
     return size.X==80 && (size.Y==22 || size.Y==25 || size.Y==28 || size.Y==43 || size.Y==50);
 }
 
-DWORD run16_console_prepare_dos(HANDLE output,SMALL_RECT *window,COORD last_dos)
+/* Match OpenNT nt_fulsc.c::calcScreenParams and its integer MID_VAL macro.
+ * The active Console viewport, not the previous DOS mode, selects the rows. */
+static SHORT opennt_dos_return_height(SHORT height)
+{
+    if(height<=22+(25-22)/2)return 22;
+    if(height<=25+(28-25)/2)return 25;
+    if(height<=28+(43-28)/2)return 28;
+    if(height<=43+(50-43)/2)return 43;
+    return 50;
+}
+
+DWORD run16_console_prepare_dos(HANDLE output,SMALL_RECT *window)
 {
     CONSOLE_SCREEN_BUFFER_INFO before,after;
     SMALL_RECT physical={0,0,0,0};
     COORD size,cursor;
     if(!window)return ERROR_INVALID_PARAMETER;
-    size.X=window->Right-window->Left+1;size.Y=window->Bottom-window->Top+1;
-    if(!run16_console_dos_size(size))size=run16_console_dos_size(last_dos) ? last_dos : (COORD){80,25};
+    size.X=80;
+    size.Y=opennt_dos_return_height(window->Bottom-window->Top+1);
     if(!GetConsoleScreenBufferInfo(output,&before))return GetLastError();
     if(before.dwSize.X==size.X && before.dwSize.Y==size.Y &&
         !window->Left && !window->Top && window->Right==size.X-1 && window->Bottom==size.Y-1)

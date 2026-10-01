@@ -60,6 +60,9 @@ int main(int argc,char **argv)
         REQUIRE(Client_Connect(binding,process,APP_PROTOCOL_VERSION+1,app_version,
             &server_protocol,server_version,&connection,&generation)==ERROR_REVISION_MISMATCH && !connection && !generation);
         REQUIRE(server_protocol==APP_PROTOCOL_VERSION && !memcmp(server_version,app_version,sizeof(app_version)));
+        REQUIRE(Client_Connect(binding,process,APP_PROTOCOL_VERSION-1,app_version,
+            &server_protocol,server_version,&connection,&generation)==ERROR_REVISION_MISMATCH && !connection && !generation);
+        REQUIRE(server_protocol==APP_PROTOCOL_VERSION && !memcmp(server_version,app_version,sizeof(app_version)));
         app_version[0]='9';
         REQUIRE(Client_Connect(binding,process,APP_PROTOCOL_VERSION,app_version,
             &server_protocol,server_version,&connection,&generation)==ERROR_REVISION_MISMATCH && !connection && !generation);

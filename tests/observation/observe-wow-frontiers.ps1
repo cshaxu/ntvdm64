@@ -6,6 +6,7 @@ param(
     [string]$ProcessPackageRoot,
     [string]$LogRoot,
     [ValidateRange(0,5000)][int]$PostExitObservationMs=0,
+    [switch]$VisibleDesktop,
     [switch]$WaitTarget,
     [ValidateSet('WINMINE.EXE','SOL.EXE','WRITE.EXE')]
     [string[]]$Guests=@('WINMINE.EXE','SOL.EXE','WRITE.EXE')
@@ -53,7 +54,9 @@ foreach($guest in $Guests){
         }
         $start.UseShellExecute=$false
         $start.WindowStyle=[Diagnostics.ProcessWindowStyle]::Hidden
-        $start.EnvironmentVariables['MVDM_OBSERVER_PRIVATE_DESKTOP']='1'
+        if(!$VisibleDesktop){
+            $start.EnvironmentVariables['MVDM_OBSERVER_PRIVATE_DESKTOP']='1'
+        }
         $launcher=[Diagnostics.Process]::Start($start)
         $started=[DateTime]::UtcNow
         $deadline=[DateTime]::UtcNow.AddSeconds(12)
@@ -69,9 +72,15 @@ foreach($guest in $Guests){
                 $remaining=($started.AddSeconds($second)-[DateTime]::UtcNow).TotalMilliseconds
                 if($remaining -gt 0 -and $launcher.WaitForExit([int][Math]::Ceiling($remaining))){break}
                 if($launcher.HasExited){break}
-                $snapshot=@(& $WindowObserver ([string]$worker.ProcessId) ('NTVDMConsoleTest-'+$launcher.Id))
+                $snapshot=if($VisibleDesktop){
+                    @(& $WindowObserver ([string]$worker.ProcessId))
+                } else {
+                    @(& $WindowObserver ([string]$worker.ProcessId) ('NTVDMConsoleTest-'+$launcher.Id))
+                }
                 if($LASTEXITCODE){throw "Window observation failed: $LASTEXITCODE"}
-                if(($snapshot -join "`n") -match 'enumeration-error=|open-desktop-error='){
+                $snapshotText=$snapshot -join "`n"
+                if($snapshotText -match 'open-desktop-error=' -or
+                   (!$VisibleDesktop -and $snapshotText -match 'enumeration-error=')){
                     throw 'Desktop inspection failed; this is not application evidence'
                 }
                 $samples.Add(('sample-ms={0}' -f [int]([DateTime]::UtcNow-$started).TotalMilliseconds))
