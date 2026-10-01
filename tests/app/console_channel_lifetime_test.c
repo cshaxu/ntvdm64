@@ -11,6 +11,7 @@
 #undef run16_console_dispatch
 #include "../../src/ntkvm-exe/console_video.c"
 static HANDLE read_entered,peer;
+static FILE *private_report;
 static HANDLE held_dispatch,release_dispatch;
 static run16_native_frontend *test_frontend;
 static DWORD expected_generation;
@@ -34,8 +35,9 @@ DWORD run16_console_dispatch(run16_console_frontend *owner,
     return actual_dispatch(owner,request,reply);
 }
 #include "../../src/ntkvm-exe/console_channel.c"
-#define CHECK(x) do { if(!(x)) { fprintf(stderr,"FAIL line=%u error=%lu\n", \
-    (unsigned)__LINE__,GetLastError());ExitProcess(1); } } while(0)
+#define CHECK(x) do { if(!(x)) { DWORD check_error=GetLastError(); \
+    fprintf(private_report ? private_report : stderr,"FAIL line=%u error=%lu\n", \
+    (unsigned)__LINE__,check_error);if(private_report)fflush(private_report);ExitProcess(1); } } while(0)
 typedef struct dos_binding_wait_case {
     const void *owner;
     HANDLE cancel,started;
@@ -449,13 +451,105 @@ static void wait_initial_window_resources(void)
     } while(GetTickCount64()<deadline);
     CHECK(FALSE);
 }
+static void test_dos_geometry_handoff(HANDLE canonical,SHORT rows)
+{
+    run16_native_frontend *frontend=NULL;
+    HANDLE input,output,active;
+    CONSOLE_SCREEN_BUFFER_INFO final;
+    CONSOLE_CURSOR_INFO shape,changed,restored;
+    SMALL_RECT tiny={0,0,0,0},full={0,0,79,29},dos_view={0,0,79,rows-1};
+    COORD outer_size={80,30},dos_size={80,rows};
+    COORD old_cursor={0,29},dos_cursor={0,rows-1},old_cell={0,29};
+    WCHAR cell;DWORD written,mode,restored_mode;
+
+    /* This is a private Console API fixture, not a synthesized terminal.
+     * The caller presents 80x30; the DOS mode switch retains the original
+     * cursor-containing tail without reflowing any of its cells. */
+    CHECK(SetConsoleActiveScreenBuffer(canonical));
+    CHECK(SetConsoleWindowInfo(canonical,TRUE,&tiny));
+    CHECK(opennt_console_resize_grid(canonical,&outer_size,FALSE,NULL));
+    CHECK(SetConsoleWindowInfo(canonical,TRUE,&full));
+    CHECK(WriteConsoleOutputCharacterW(canonical,L"C",1,old_cell,&written) && written==1);
+    CHECK(SetConsoleCursorPosition(canonical,old_cursor));
+    CHECK(GetConsoleCursorInfo(canonical,&shape));
+    CHECK(!run16_native_frontend_create(&frontend));
+    CHECK(!run16_native_frontend_console(frontend,&input,&output));
+    CHECK(SetConsoleWindowInfo(canonical,TRUE,&dos_view));
+    CHECK(opennt_console_resize_grid(canonical,&dos_size,FALSE,NULL));
+    CHECK(SetConsoleCursorPosition(canonical,dos_cursor));
+    changed=shape;changed.bVisible=!shape.bVisible;
+    CHECK(SetConsoleCursorInfo(canonical,&changed));
+    CHECK(GetConsoleMode(input,&mode));
+    CHECK(SetConsoleMode(input,mode^ENABLE_PROCESSED_INPUT));
+    CHECK(!run16_native_frontend_destroy(frontend));
+    CHECK(GetConsoleScreenBufferInfo(canonical,&final));
+    CHECK(final.dwSize.X==80 && final.dwSize.Y==rows &&
+        final.srWindow.Left==0 && final.srWindow.Right==79 &&
+        final.srWindow.Top==0 && final.srWindow.Bottom==rows-1 &&
+        final.dwCursorPosition.X==0 && final.dwCursorPosition.Y==rows-1);
+    CHECK(ReadConsoleOutputCharacterW(canonical,&cell,1,dos_cursor,&written) &&
+        written==1 && cell==L'C');
+    CHECK(GetConsoleCursorInfo(canonical,&restored));
+    CHECK(restored.dwSize==shape.dwSize && restored.bVisible==shape.bVisible);
+    CHECK(GetConsoleMode(input,&restored_mode) && restored_mode==mode);
+    /* CONOUT$ opened after teardown must address the canonical active
+     * buffer, not the temporary Window presentation surface. */
+    active=CreateFileW(L"CONOUT$",GENERIC_READ|GENERIC_WRITE,
+        FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,OPEN_EXISTING,0,NULL);
+    CHECK(active!=INVALID_HANDLE_VALUE);
+    CHECK(ReadConsoleOutputCharacterW(active,&cell,1,dos_cursor,&written) &&
+        written==1 && cell==L'C');
+    CloseHandle(active);CloseHandle(output);CloseHandle(input);
+}
+static int run_private_desktop(const char *report,BOOL geometry_only)
+{
+    char name[64],image[MAX_PATH],command[2*MAX_PATH];
+    HDESK desktop;STARTUPINFOA start={sizeof(start)};
+    PROCESS_INFORMATION child={0};DWORD code=ERROR_GEN_FAILURE;
+    sprintf_s(name,sizeof(name),"NTVDMHandoff-%lu",GetCurrentProcessId());
+    desktop=CreateDesktopA(name,NULL,NULL,0,GENERIC_ALL,NULL);
+    if(!desktop)return (int)GetLastError();
+    CHECK(GetModuleFileNameA(NULL,image,sizeof(image)));
+    sprintf_s(command,sizeof(command),"\"%s\" %s \"%s\"",image,
+        geometry_only ? "--geometry-child" : "--private-full",report);
+    start.lpDesktop=name;start.dwFlags=STARTF_USESHOWWINDOW;start.wShowWindow=SW_HIDE;
+    if(CreateProcessA(NULL,command,NULL,NULL,FALSE,CREATE_NEW_CONSOLE,NULL,NULL,&start,&child)) {
+        if(WaitForSingleObject(child.hProcess,120000)==WAIT_OBJECT_0)
+            GetExitCodeProcess(child.hProcess,&code);
+        else {TerminateProcess(child.hProcess,ERROR_TIMEOUT);
+            WaitForSingleObject(child.hProcess,1000);code=ERROR_TIMEOUT;}
+        CloseHandle(child.hThread);CloseHandle(child.hProcess);
+    }else code=GetLastError();
+    CloseDesktop(desktop);
+    printf("private Console handoff exit=%lu report=%s\n",code,report);
+    return (int)code;
+}
 int main(int argc,char **argv)
 {
     unsigned round,mode;DWORD before,after;
     HANDLE input,canonical,alternate;DWORD count;COORD origin={0,0};
-    CONSOLE_SCREEN_BUFFER_INFO original,current,restored;
+    CONSOLE_SCREEN_BUFFER_INFO current,restored;
     CONSOLE_CURSOR_INFO original_cursor={0},current_cursor={0},restored_cursor={0};
     SMALL_RECT reduced;
+    if(argc==3 && !strcmp(argv[1],"--private-desktop"))return run_private_desktop(argv[2],TRUE);
+    if(argc==3 && !strcmp(argv[1],"--private-desktop-full"))return run_private_desktop(argv[2],FALSE);
+    if(argc==3 && !strcmp(argv[1],"--private-full")) {
+        CHECK(!fopen_s(&private_report,argv[2],"w") && private_report);
+        setvbuf(private_report,NULL,_IONBF,0);
+    }
+    if(argc==3 && !strcmp(argv[1],"--geometry-child")) {
+        HANDLE geometry_output;
+        CHECK(!fopen_s(&private_report,argv[2],"w") && private_report);
+        setvbuf(private_report,NULL,_IONBF,0);
+        geometry_output=CreateFileW(L"CONOUT$",GENERIC_READ|GENERIC_WRITE,
+            FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,OPEN_EXISTING,0,NULL);
+        CHECK(geometry_output!=INVALID_HANDLE_VALUE);
+        test_dos_geometry_handoff(geometry_output,25);
+        test_dos_geometry_handoff(geometry_output,28);
+        CloseHandle(geometry_output);
+        fprintf(private_report,"PASS private 80x30 to 80x25/80x28 Console API handoff\n");
+        fclose(private_report);return 0;
+    }
     if(argc==2 && !strcmp(argv[1],"--worker-wait")) {Sleep(INFINITE);return 0;}
     read_entered=CreateEventW(NULL,TRUE,FALSE,NULL);CHECK(read_entered);
     CHECK(!run16_native_frontend_create(&test_frontend));
@@ -490,7 +584,6 @@ int main(int argc,char **argv)
         return 0;
     }
     CHECK(!run16_native_frontend_console(test_frontend,&input,&canonical));
-    CHECK(GetConsoleScreenBufferInfo(canonical,&original));
     CHECK(GetConsoleCursorInfo(canonical,&original_cursor));
     CHECK(WriteConsoleOutputCharacterW(canonical,L"K",1,origin,&count) && count==1);
     alternate=CreateConsoleScreenBuffer(GENERIC_READ|GENERIC_WRITE,
@@ -543,9 +636,8 @@ int main(int argc,char **argv)
         CHECK(run16_native_frontend_dos_bind(test_frontend,&before,TRUE)==ERROR_OPERATION_ABORTED);
         CHECK(GetTickCount64()-began<1000);
     }
-    /* The DOS path may reduce the shared root Console to 80x25.  Teardown
-     * must return the outer shell's viewport and cursor, not merely select
-     * its original screen buffer. */
+    /* Ordinary teardown keeps the most recent shared Console geometry and
+     * cursor while restoring cursor shape and input mode. */
     CHECK(GetConsoleScreenBufferInfo(canonical,&current));
     CHECK(GetConsoleCursorInfo(canonical,&current_cursor));
     reduced=current.srWindow;
@@ -555,23 +647,24 @@ int main(int argc,char **argv)
     CHECK(SetConsoleCursorPosition(canonical,(COORD){reduced.Left,reduced.Top}));
     current_cursor.bVisible=!current_cursor.bVisible;
     CHECK(SetConsoleCursorInfo(canonical,&current_cursor));
-    run16_native_frontend_destroy(test_frontend);
+    CHECK(!run16_native_frontend_destroy(test_frontend));
     CHECK(GetConsoleScreenBufferInfo(canonical,&restored));
-    CHECK(restored.dwSize.X==original.dwSize.X && restored.dwSize.Y==original.dwSize.Y &&
-        !memcmp(&restored.srWindow,&original.srWindow,sizeof(restored.srWindow)) &&
-        restored.dwCursorPosition.X==original.dwCursorPosition.X &&
-        restored.dwCursorPosition.Y==original.dwCursorPosition.Y);
+    CHECK(!memcmp(&restored.srWindow,&reduced,sizeof(reduced)) &&
+        restored.dwCursorPosition.X==reduced.Left &&
+        restored.dwCursorPosition.Y==reduced.Top);
     CHECK(GetConsoleCursorInfo(canonical,&restored_cursor));
     CHECK(restored_cursor.dwSize==original_cursor.dwSize &&
         restored_cursor.bVisible==original_cursor.bVisible);
-    CHECK(SetConsoleActiveScreenBuffer(canonical));
+    test_dos_geometry_handoff(canonical,25);
+    test_dos_geometry_handoff(canonical,28);
     CloseHandle(alternate);CloseHandle(canonical);CloseHandle(input);
     CloseHandle(read_entered);
     puts("PASS 102 real channel lifetimes: pipe cancel, nonblocking empty input, barrier/EOF/stop race, oversized request, real process death, snapshot lock; joined threads, EOF readiness, no handle growth");
     puts("PASS four graphics channels each create/retire two Windows, including active graphics disposal; exact post-warm-up handle equality");
     puts("PASS all nested channels retain canonical K while active surface is A; private handle copies survive frontend teardown");
-    puts("PASS root frontend restores the caller viewport, buffer extent and cursor after a DOS-sized mutation");
+    puts("PASS ordinary teardown retains the final 80x25/80x28 DOS grid and cursor; restores canonical buffer, input mode and cursor shape");
     puts("PASS stopped presentation owner rejects handoff without waiting for execution or restarting a helper");
     puts("PASS 32 canceled DOS binding waits: no lost stop wake and no pending-owner leak");
+    if(private_report) {fprintf(private_report,"PASS private Console handoff fixture\n");fclose(private_report);}
     return 0;
 }

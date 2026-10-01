@@ -21,13 +21,10 @@ struct run16_native_frontend {
     HANDLE stop,refresh,refreshed,thread,changed,control[2];
     HANDLE console_input,console_output,console_surface;
     SMALL_RECT logical_window;
-    /* Root teardown returns this borrowed Console to its caller.  The DOS
-     * worker may select a supported 80-column mode on the same buffer; that
-     * must not leave the waiting native shell with a smaller viewport or a
-     * cursor clipped to the DOS page. */
-    CONSOLE_SCREEN_BUFFER_INFO original_screen;
+    /* Root teardown returns the canonical buffer without undoing the DOS
+     * worker's final cell grid, viewport, or cursor position. */
     CONSOLE_CURSOR_INFO original_cursor;
-    BOOL original_screen_saved,original_cursor_saved;
+    BOOL original_cursor_saved;
     BOOL native_geometry_pending;
     HANDLE handoff,handoff_done;
     const void *handoff_owner;
@@ -68,24 +65,9 @@ static void signal_binding_waiters(run16_native_frontend *frontend)
 }
 static DWORD apply_binding(run16_native_frontend *,const void *,BOOL,BOOL);
 static DWORD collect_dos_console(run16_native_frontend *);
-static DWORD restore_original_console(run16_native_frontend *frontend)
+static DWORD restore_cursor_shape(run16_native_frontend *frontend)
 {
-    CONSOLE_SCREEN_BUFFER_INFO current;
-    SMALL_RECT tiny={0,0,0,0};
-    BOOL changed;
     if(!frontend)return ERROR_INVALID_PARAMETER;
-    if(!frontend->original_screen_saved)return ERROR_SUCCESS;
-    if(!GetConsoleScreenBufferInfo(frontend->console_output,&current))return GetLastError();
-    changed=current.dwSize.X!=frontend->original_screen.dwSize.X ||
-        current.dwSize.Y!=frontend->original_screen.dwSize.Y ||
-        memcmp(&current.srWindow,&frontend->original_screen.srWindow,sizeof(current.srWindow)) ||
-        current.dwCursorPosition.X!=frontend->original_screen.dwCursorPosition.X ||
-        current.dwCursorPosition.Y!=frontend->original_screen.dwCursorPosition.Y;
-    if(changed && (!opennt_console_resize_grid(frontend->console_output,NULL,TRUE,&tiny) ||
-        !opennt_console_resize_grid(frontend->console_output,&frontend->original_screen.dwSize,FALSE,NULL) ||
-        !opennt_console_resize_grid(frontend->console_output,NULL,TRUE,&frontend->original_screen.srWindow) ||
-        !SetConsoleCursorPosition(frontend->console_output,frontend->original_screen.dwCursorPosition)))
-        return GetLastError();
     if(frontend->original_cursor_saved &&
         !SetConsoleCursorInfo(frontend->console_output,&frontend->original_cursor))return GetLastError();
     return ERROR_SUCCESS;
@@ -357,7 +339,6 @@ DWORD run16_native_frontend_create(run16_native_frontend **output)
             error=GetLastError();run16_native_frontend_destroy(frontend);return error;
         }
         frontend->logical_window=info.srWindow;
-        frontend->original_screen=info;frontend->original_screen_saved=TRUE;
         if(!GetConsoleCursorInfo(frontend->console_output,&frontend->original_cursor)) {
             error=GetLastError();run16_native_frontend_destroy(frontend);return error;
         }
@@ -694,14 +675,14 @@ DWORD run16_native_frontend_destroy(run16_native_frontend *frontend)
      * never signal that session-wide event. */
     if(frontend->thread) { WaitForSingleObject(frontend->thread,INFINITE);CloseHandle(frontend->thread); }
     if(frontend->window)return ERROR_BUSY; /* Failed Window join: retain all callback context. */
-    /* Restore before closing a surface even after a presentation failure. A
-     * failed restore retains its handles for terminal process cleanup. */
+    /* Reselect the canonical buffer even after a presentation failure. A
+     * failed cleanup retains its handles for terminal process cleanup. */
     if(frontend->console_surface) {
         if(!SetConsoleActiveScreenBuffer(frontend->console_output))return GetLastError();
         CloseHandle(frontend->console_surface);
         frontend->console_surface=NULL;
     }
-    error=restore_original_console(frontend);
+    error=restore_cursor_shape(frontend);
     if(error)return error;
     if(frontend->input_mode_saved) {
         if(!SetConsoleMode(frontend->console_input,frontend->original_input_mode))return GetLastError();

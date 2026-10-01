@@ -54,7 +54,8 @@ done:
         BOOL acknowledged=FALSE;
         if(!error && close_error)error=close_error;
         /* The launcher holds only SYNCHRONIZE access to this private event.
-         * Signal it after, never before, buffer and input-mode restoration. */
+         * Signal it after, never before, canonical-buffer selection and
+         * input-mode/cursor-shape restoration. */
         if(!close_error) {
             acknowledged=SetEvent(restored);
             if(!acknowledged)ack_error=GetLastError();

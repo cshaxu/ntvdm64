@@ -621,7 +621,7 @@ static DWORD launch_native(run16_frontend_scope *scope,PCWSTR application,PCWSTR
         /* The direct native target can have completed even when its final
          * presentation fence reports an error. In either case, a root
          * launcher must not hand an outer CMD its Console until NTKVM has
-         * restored the original buffer/input mode. A live target has not
+         * reselected the canonical buffer and restored input mode. A live target has not
          * completed the handoff and retains the existing failure path. */
         if(target && WaitForSingleObject(target,0)==WAIT_OBJECT_0) {
             DWORD handoff=run16_frontend_scope_retire(scope);

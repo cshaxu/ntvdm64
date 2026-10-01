@@ -116,7 +116,7 @@ DWORD frontend_service_close(frontend_session_service *scope)
         HeapFree(GetProcessHeap(),0,entry);
     }
     error=run16_native_frontend_destroy(scope->native);
-    /* A failed restore deliberately retains the native object and its
+    /* A failed teardown deliberately retains the native object and its
      * handles for process cleanup.  Do not free the owning service storage:
      * the caller must report failure rather than manufacture a handoff. */
     if(error)return error;

@@ -4,17 +4,20 @@
 
 ## Task Intermission
 
-**No active M/T/S packet.** M0 T423 remains open for owner acceptance. S30
-has finished its bounded OpenNT geometry and protocol-revision repair; the
-tested protocol-25 eight-file package is published to `O:/winnt`. Its
-[evidence ledger](../etc/evidence/m0-t423-s30-opennt-geometry-protocol.md)
-records the x86 build, all 34 product routes, three WOW frontiers, hashes and
-remaining test-harness limitation. The preceding S29
-[acceptance ledger](../etc/evidence/m0-t423-s29-control-plane-acceptance.md)
-remains the whole-control-plane handoff. Do not close T423 without owner
-acceptance.
+**No active M/T/S packet.** M0 T423 remains open for owner acceptance. S31
+has completed its original-semantics shared Console handoff repair, passed
+the required regression comparison, and published the coherent eight-file
+package to `O:/winnt`. Its [evidence](../etc/evidence/m0-t423-s31-shared-console-handoff.md)
+records the x86 build, 17+17 product routes, focused Console handoff,
+published hashes and remaining observation limits. Do not close T423 without
+owner acceptance.
 
 ## Recent M0 Closures
+
+S31 removed the root frontend's startup geometry/cursor-position restoration
+while preserving canonical-buffer, input-mode and cursor-shape cleanup. The
+unchanged OpenNT MVDM mirror and guest media were not modified. The package
+is published for owner side-testing; T423 is still open.
 
 S30 restored original 22/25/28/43/50-row selection on native-to-DOS return,
 removed the last-DOS-size fallback, synchronized MIDL revision 25.0 and
@@ -23,7 +26,7 @@ configuration were not changed.
 
 ## Recent Governance
 
-The T423 proposal and the S30 evidence ledger retain the admitted scope,
+The T423 proposal and the S30/S31 evidence ledgers retain their prior scope,
 test results and non-passes. No further S is admitted during intermission.
 
 | Field | Last S29 brief |

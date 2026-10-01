@@ -308,7 +308,8 @@ try {
             }
             $screen=Get-Content -LiteralPath $consolePath -Raw
             if($case.Text -and ($env:MVDM_OBSERVER_WINDOW_INPUT -eq '1' -or
-                $case.Name -eq 'dos-native-typeahead')) {
+                $case.Name -in @('dos-native-dos','dos-native-typeahead',
+                    'interactive-native-dos-return'))) {
                 # Window text is finite, and a Console/native/DOS transition
                 # can also shrink the final buffer after a proven CMD banner.
                 # Require contiguous overlap; never count the same MEM result
