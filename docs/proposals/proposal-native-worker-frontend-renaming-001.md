@@ -73,8 +73,17 @@ helper, scheduler, observed graph, launch syntax or lifecycle change is admitted
 | --- | --- |
 | S1 | Read-only full referent inventory, ABI decisions, hashes and migration map. |
 | S2 | NTW32/Win32Record migration, complete-tree referent and original-name preservation gates, full production verification and intermediate eight-file publication. |
-| S3 | Frontend NTCON migration after S2; build/test/wiring/name checks and verified final eight-file publication. |
-| S4 | Final ownership/semantic-diff and naming audit, indexes/authorities, clean committed/pushed delivery; owner decides T acceptance. |
+| S3 | Owner-added abnormal-exit/re-launch lifecycle investigation; causal evidence and bounded repair recommendation, no production repair yet. |
+| S4 | Former S3: frontend NTCON migration after S3 disposition; build/test/wiring/name checks and verified final eight-file publication. |
+| S5 | Former S4: final ownership/semantic-diff and naming audit, indexes/authorities, clean committed/pushed delivery; owner decides T acceptance. |
+
+Owner direction on 2026-10-02 adds lifecycle investigation before further
+renaming. Earlier S3/S4 migration labels in this proposal now refer to S4/S5.
+Both run16 cmd and run16 command reportedly hang before any prompt after an
+apparent abnormal exit; NTMON reports Ready but no worker. Preserve the live
+scene, distinguish a resident root from an unusable lease and investigate
+NTSRV admission, completion and workerless-grace ordering. This is research
+scope only, not permission for timer extensions or speculative runtime fixes.
 
 An externally fixed project identifier or imported-original conflict requires
 review, not an alias. Original Console names already classified by S1 are

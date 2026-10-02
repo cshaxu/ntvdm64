@@ -2,12 +2,30 @@
 
 ## Current Work
 
-## Intermission
+## Active Packet
 
-**No active M/T/S packet.** M0 T424 S2 has reached its bounded worker-name
-migration conclusion. T424 remains open; frontend migration S3 is not admitted
-or implemented by this closure. The S2 production P contains the verified
-publication and passing governance/diff review; this is not a new T acceptance.
+**Active: M0 T424 S3** — owner-added lifecycle investigation, Ordinary Mode.
+
+| Field | Admitted record |
+| --- | --- |
+| Identifier Mode | M0 T424 S3, Ordinary Mode; lifecycle investigation only. |
+| Candidate Proposal | [Admitted naming package with owner-added investigation](../proposals/proposal-native-worker-frontend-renaming-001.md). |
+| Admission And Approval | Owner reports basic S2 acceptance with a lifecycle defect after native commands/possible abnormal exit, and requests an additional investigation S. Insert this as next S3; former frontend rename and final audit become S4/S5. |
+| Objective | Identify the causal wait/state sequence behind re-launch hanging in the same still-open Terminal/CMD, distinguish normal resident workers from unusable frontend state, and deliver a bounded repair recommendation with evidence. |
+| Non-goals | No production repair, frontend rename, guest/media change, new helper, scheduler, Job observation, forced teardown or delay workaround in this investigation. |
+| Reference Baseline | S2 `27e85d0a7`, published eight-file package, protocol/RPC 28; S2 acceptance does not waive this reported runtime defect. |
+| Files And ABI Surface | CURRENT, naming proposal/working plan and indexed S3 evidence; read-only run16 frontend scope, NTKVM lease/channel teardown, NTSRV lifecycle/receipts, NTW32 and shared worker contracts. No wire changes. |
+| Applicable Rules | README reading set, EXECUTION, architecture/coding/document rules and source policy; preserve other-session edits. |
+| Verification | Read-only process and source inspection; controlled background normal/abnormal exit and repeated-launch probes after scene capture. Documentation governance, links and diff checks for planning P. No new runtime pass claimed from process enumeration. |
+| Expected Markers | Exact command/input, PID and artifact identity, task-completion/lease/ready/retire sequence, wait location and normal-versus-failure contrast; unproved causes labelled hypotheses. |
+| Asset Needs | Existing S2 package and lifecycle/observer fixtures; temporary products only under build/M0-T424/S3. No new external assets. |
+| Reporting Requirements | Report reproduced versus owner-only symptoms, root cause confidence, affected owner and smallest repair/test handoff. Keep live scene until evidence is captured. |
+| Stop Conditions | Need for production mutation, protocol/ownership changes or intrusive scene destruction requires a revised implementation brief; this research does not admit those changes. |
+| Exit Criteria | Indexed reproducible causal evidence or explicit unresolved boundary, reviewed repair recommendation, governance/link/diff checks and committed/pushed research P. Not functional repair closure. |
+| Original Owner Request | Basic verification passed, but after run16 cmd and possible abnormal exit, back in CMD a subsequent run16 fails/hangs although the Terminal window remains open; append an S to investigate lifecycle gaps. |
+| Similar-Issue Sweep | Normal/abnormal direct completion, root lease return, worker death, broker loss, no-worker grace, failed startup rollback, second launch and independent-session isolation for both workers. |
+
+Initial evidence is recorded in [S3 lifecycle investigation](../etc/evidence/m0-t424-s3-abnormal-exit-relaunch.md).
 
 ## S2 Closure Record
 
@@ -46,10 +64,11 @@ pre-migration baseline in its sealed inventory and S1 Git revision.
 
 The [T424 working plan](../etc/operations/t424-worker-frontend-renaming-plan.md)
 and [proposal](../proposals/proposal-native-worker-frontend-renaming-001.md)
-retain four ordered stages. S1 audits names; S2 delivers the native worker
-as NTW32 and Win32Record while retaining NTKVM frontend. S3 subsequently
-renames NTKVM to the reserved NTCON frontend identity, after S2's committed
-production delivery. S4 owns final referent and semantic audit. T closure
+retain five ordered stages. S1 audits names; S2 delivers the native worker
+as NTW32 and Win32Record while retaining NTKVM frontend. Added S3 investigates
+the owner's abnormal-exit/re-launch defect before further renaming. S4
+renames NTKVM to the reserved NTCON frontend identity after disposition of S3.
+S5 owns final referent and semantic audit. T closure
 remains owner-controlled. No later queued candidate is admitted here.
 
 ## Current Technical Baseline

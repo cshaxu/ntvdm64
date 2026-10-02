@@ -13,8 +13,9 @@ and [final evidence](../evidence/m0-t423-s40-native-alternate-screen-geometry.md
 | --- | --- |
 | S1 | Read-only referent inventory for source, symbols, paths, build, tests, package, endpoints and all documentation/archive; capture baseline hashes and version, classify original/library/fixed names and record an ordered migration map. No production rename. |
 | S2 | Rename the former native worker and project-owned native records to NTW32 and Win32Record. Update all required code/docs/paths; prove zero old project-worker referents, preserving original Console identities/substrings per S1. Pass production regressions and publish coherent intermediate ntw32.exe + ntkvm.exe eight-file package. |
-| S3 | Frontend NTKVM -> NTCON (frontend only) after S2 delivery/gate. Update owner-local names and consumers, regenerate build/package references, verify final eight-file package and publish. |
-| S4 | Final referent/semantic-diff audit, old-name/build/package gates, docs/index reconciliation, regression and clean committed/pushed delivery; T closure remains owner-controlled. |
+| S3 | Owner-added lifecycle investigation: after apparent abnormal exit, both run16 cmd and run16 command hang before a prompt, with no monitor worker. Capture waits, lease/admission/retirement state and bounded repair recommendation; no production repair yet. |
+| S4 | Former S3: frontend NTKVM -> NTCON after S3 disposition; owner-local names, consumers, build/test/package gates and publication. |
+| S5 | Former S4: final referent/semantic audit, indexes, regression and clean delivery; T closure owner-controlled. |
 
 Rename only product-owned identities, preserving original OpenNT/MVDM and
 generic imported KVM library source identities. No guest, extra process/helper,
@@ -22,6 +23,10 @@ observed-task graph, scheduler or launch/completion/lifetime change is admitted.
 Local spelling alone does not authorize an ABI bump; any actual copied-wire,
 RPC/endpoint/version compatibility effect must be proved and coherently managed.
 An externally fixed spelling requires owner review before production migration.
+
+Owner direction on 2026-10-02 adds S3 investigation before further renaming.
+This does not authorize runtime repairs as a name-only change. Findings and any
+later implementation admission must be explicit and separate from accepted S2.
 
 The [S1 name audit](../evidence/m0-t424-s1-name-referent-audit.md) supplies the
 complete-tree inventory, exact original Console exclusions and baseline hashes.

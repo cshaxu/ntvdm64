@@ -2,6 +2,7 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T424 S3 abnormal-exit re-launch](evidence/m0-t424-s3-abnormal-exit-relaunch.md) | M0 T424 S3 | Preserved lifecycle failure scene, source hypotheses and causal investigation gates. | Retain through defect disposition. |
 | [T424 S2 native worker identity](evidence/m0-t424-s2-native-worker-identity.md) | M0 T424 S2 | NTW32/Win32Record migration, Console-name preservation, semantic audit, build/runtime gates, publication hashes and explicit probe limits. | Retain through naming acceptance. |
 | [T424 S1 name referent audit](evidence/m0-t424-s1-name-referent-audit.md) | M0 T424 S1 | Complete-tree inventory, original Console exclusions, ABI decision and eight-file baseline. | Retain through naming acceptance. |
 | [T424 ordered naming migration](operations/t424-worker-frontend-renaming-plan.md) | M0 T424 | Native-worker-first collision prevention, read-only audit and production rename gates. | Retain through T424 acceptance. |
