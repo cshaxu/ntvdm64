@@ -12,7 +12,7 @@ and [final evidence](../evidence/m0-t423-s40-native-alternate-screen-geometry.md
 | Stage | Deliverable and next-stage gate |
 | --- | --- |
 | S1 | Read-only referent inventory for source, symbols, paths, build, tests, package, endpoints and all documentation/archive; capture baseline hashes and version, classify original/library/fixed names and record an ordered migration map. No production rename. |
-| S2 | Old native worker NTCON -> NTW32, project-owned ConRecord -> Win32Record. Update all required code/docs/paths; prove case-insensitive zero old NTCON spellings before reclaiming that name. Pass production regressions and publish coherent intermediate ntw32.exe + ntkvm.exe eight-file package. |
+| S2 | Old native worker NTCON -> NTW32, project-owned ConRecord -> Win32Record. Update all required code/docs/paths; prove case-insensitive zero old project-worker referents before reclaiming that name, preserving original Console identities and unrelated substrings per the S1 audit. Pass production regressions and publish coherent intermediate ntw32.exe + ntkvm.exe eight-file package. |
 | S3 | Old frontend NTKVM -> NTCON only after S2 delivery/gate. Update its owner-local names and all consumers, regenerate build/package references, verify final eight-file package and publish. |
 | S4 | Final referent/semantic-diff audit, old-name/build/package gates, docs/index reconciliation, regression and clean committed/pushed delivery; T closure remains owner-controlled. |
 
@@ -22,6 +22,11 @@ observed-task graph, scheduler or launch/completion/lifetime change is admitted.
 Local spelling alone does not authorize an ABI bump; any actual copied-wire,
 RPC/endpoint/version compatibility effect must be proved and coherently managed.
 An externally fixed spelling requires owner review before production migration.
+
+The [S1 name audit](../evidence/m0-t424-s1-name-referent-audit.md) supplies the
+complete-tree inventory, exact original Console exclusions and baseline hashes.
+The application version advances once to 0.0.424; unchanged wire layout keeps
+protocol/RPC 28. Original OpenNT ntcon source paths are not product aliases.
 
 Each production-code P retains x86 build, focused identity/protocol/lifecycle
 tests, COMMAND/MEM/EDIT direct/nested return, native CMD/modern EDIT including

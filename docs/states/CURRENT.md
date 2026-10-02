@@ -14,14 +14,14 @@
 | Objective | Freeze a referent-classified inventory, naming/ABI decision ledger, published baseline identities and collision-free ordered migration map before any production rename. |
 | Non-goals | No production rename in S1; no behavior, scheduler, lifetime, completion, guest/mirror, shared-library, process/component or launch-syntax change. No observation task implementation. |
 | Reference Baseline | Owner-accepted T423 S40 `f64559086`, protocol/RPC 28, x86 /MT CCPU40; coherent eight-file O:/winnt package and [S40 evidence](../etc/evidence/m0-t423-s40-native-alternate-screen-geometry.md). |
-| Files And ABI Surface | Read source/test/tool/build identities, copied protocol and endpoints, all current/historical documentation including artifacts archive. Changes in S1 are limited to inventory/decision evidence, status and admitted plan. |
+| Files And ABI Surface | Read source/test/tool/build identities, copied protocol and endpoints, all current/historical documentation including artifacts archive. S1 adds a read-only inventory tool and decision evidence; no production code or ABI changes. |
 | Applicable Rules | All execution, documentation, source-layout, architecture and coding authorities; preserve unrelated edits and original names in imported mirrors. Intermediate output/new directories only under build/. |
 | Verification | Documentation governance/link and diff checks for admission; S1 requires reproducible case-insensitive tracked-text/path and untracked-current inventories, eight-file/protocol identity, and per-referent classification without blind substitution. No new runtime pass is claimed by this documentation P. |
 | Expected Markers | Every old NTCON/NTKVM/ConRecord occurrence has an owner/disposition; native worker first, frontend second; externally fixed names separated; recorded test/build/package consumers have a receiver. |
 | Asset Needs | Existing main source, Git history and S40 published/cache evidence; any disposable audit output uses build/M0-T424/S1/r001. No download or guest change. |
 | Reporting Requirements | Exact source/path occurrences and classification, rename mapping, ABI/version decisions, baseline and remaining risks; distinguish audit findings from implemented migration. |
 | Stop Conditions | Externally fixed identifier, imported-original name conflict, semantic/wire change or extra process/helper requirement needs explicit review before S2. |
-| Exit Criteria | Reviewable full inventory and ordered migration/verification ledger, governance and diff review, commit/push; only then admit S2. S1 is not yet complete. |
+| Exit Criteria | Inventory and ordered migration/verification ledger completed in the linked S1 audit; governance/diff review and P commit/push precede S2 admission. No production rename is claimed. |
 | Original Owner Request | “验证通过！T423收口，准入下一个T任务。” |
 | Similar-Issue Sweep | Case variants, C symbols/types/macros, paths and executable names, project-owned ConRecord family, endpoints/generated references, tests/package/scripts and archived documentation. Generic imported kvm library names are not product aliases. |
 
@@ -58,6 +58,12 @@ active packet exists. T422 remains owner-closed.
 | T422 | Initial WOW32 and planning milestone; [closure](../history/m0-t422-initial-wow32-closure.md). |
 
 ## Recent Governance
+
+S1 completed the [full name/ABI audit](../etc/evidence/m0-t424-s1-name-referent-audit.md)
+with reproducible per-occurrence evidence under build/M0-T424/S1/r001. Actual
+publication hashes match S40 eight of eight. Original OpenNT Console identities
+and unrelated substring matches are retained; zero old project-worker referents
+is the migration gate, never corruption of real Console names.
 
 This admission preserves T423's evidence in history, removes the admitted
 candidate from Queue without reordering the remaining candidates, and places

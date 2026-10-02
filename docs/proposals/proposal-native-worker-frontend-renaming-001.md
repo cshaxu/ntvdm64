@@ -62,9 +62,12 @@ turn the rename into a new observed-task stack or execution policy.
    `NTKVM` during this local stage. Compile and run focused
    worker/launcher/broker/protocol checks. **Hard gate:** an exhaustive,
    case-insensitive scan of tracked text and path names throughout the repository,
-   plus untracked current source/documentation files, must find no `NTCON`
-   spelling at all (including this proposal) before frontend rename is
-   admitted. Include `docs/` and the documentation archive under `artifacts/`;
+   plus untracked current source/documentation files, must find no old project
+   worker `NTCON` referent (including this proposal) before frontend rename is
+   admitted. Original OpenNT Console-source identities and unrelated substrings
+   must remain unchanged under the owner's Console boundary; report every raw
+   hit and prove its disposition against the [S1 audit](../etc/evidence/m0-t424-s1-name-referent-audit.md).
+   Include `docs/` and the documentation archive under `artifacts/`;
    do not let a narrow `src/` scan claim success. Classify generated/build
    outputs separately and regenerate
    them before the final acceptance scan. Do not satisfy the gate by hiding a
@@ -104,7 +107,7 @@ is admitted.
 | S | Bounded deliverable |
 | --- | --- |
 | S1 | Read-only referent inventory, naming/ABI decision ledger, baseline hashes and ordered migration map. No production rename. |
-| S2 | Rename the old worker to NTW32 and its project-owned ConRecord family to Win32Record in code and **all** documentation; run the tracked-tree case-insensitive zero-`NTCON` and old-ConRecord referent gates, full production-P regression and publish the coherent intermediate package (`ntw32.exe` + `ntkvm.exe`). Do not admit S3 until the gates and delivery pass. |
+| S2 | Rename the old worker to NTW32 and its project-owned ConRecord family to Win32Record in code and **all** documentation; run the full-tree case-insensitive zero-old-worker and old-ConRecord referent gates, explicitly preserve original Console identities/substrings, pass full production-P regression and publish the coherent intermediate package (`ntw32.exe` + `ntkvm.exe`). Do not admit S3 until the gates and delivery pass. |
 | S3 | Rename the old frontend to NTCON only after S2's gate; update build, package, tests and launch wiring, run the full product gate and publish only the final verified eight-file set. |
 | S4 | Independent final referent/semantic-diff audit: every current `NTCON` means frontend, every native worker means `NTW32`; reconcile indexes and authorities, deliver governance and clean-worktree closure. |
 
