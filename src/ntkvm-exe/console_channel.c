@@ -41,7 +41,9 @@ static DWORD activate(void *context,BOOL active,DWORD kind)
             channel->console.output=logical;
         } else (void)run16_native_frontend_dos_bind(channel->root,channel,FALSE);
     }
-    if(!error && active && channel->native)channel->console.logical_window=NULL;
+    /* The canonical Console may be taller than the published DOS page.
+     * Keep the shared logical viewport through native seeding; the native
+     * worker may subsequently publish a genuine viewport change. */
     if(!error && active && channel->title_valid &&
         !run16_native_frontend_dos_enter(channel->root,channel)) {
         run16_native_frontend_worker_title(channel->root,channel,channel->title);
