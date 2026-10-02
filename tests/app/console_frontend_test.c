@@ -8,6 +8,11 @@ static console_io_request request;
 static console_io_reply reply;
 static DWORD begin_error,end_error,screen_begins,screen_ends,screen_leaves;
 static BOOL screen_written;
+static DWORD title_notifications;
+static void title_changed(void *context)
+{
+    (void)context;++title_notifications;
+}
 static DWORD begin_screen(void *context)
 {
     (void)context;++screen_begins;return begin_error;
@@ -39,15 +44,43 @@ static void operation(run16_console_frontend *owner,uint32_t op)
     request.version=CONSOLE_IO_VERSION; request.generation=owner->generation;
     request.sequence=owner->sequence+1; request.operation=op;
 }
+static int run_on_private_desktop(void)
+{
+    char name[64],image[MAX_PATH],command[MAX_PATH+3];
+    STARTUPINFOA start={sizeof(start)};
+    PROCESS_INFORMATION child={0};
+    HDESK desktop;
+    DWORD code=ERROR_GEN_FAILURE;
+    sprintf_s(name,sizeof(name),"NTVDMConsoleTest-%lu",GetCurrentProcessId());
+    desktop=CreateDesktopA(name,NULL,NULL,0,GENERIC_ALL,NULL);
+    if(!desktop)return (int)GetLastError();
+    if(!GetModuleFileNameA(NULL,image,sizeof(image))) { CloseDesktop(desktop);return (int)GetLastError(); }
+    sprintf_s(command,sizeof(command),"\"%s\"",image);
+    start.lpDesktop=name;
+    if(CreateProcessA(NULL,command,NULL,NULL,FALSE,CREATE_NEW_CONSOLE,NULL,NULL,&start,&child)) {
+        if(WaitForSingleObject(child.hProcess,120000)==WAIT_OBJECT_0)
+            GetExitCodeProcess(child.hProcess,&code);
+        else { TerminateProcess(child.hProcess,ERROR_TIMEOUT);code=ERROR_TIMEOUT; }
+        CloseHandle(child.hThread);CloseHandle(child.hProcess);
+    } else code=GetLastError();
+    CloseDesktop(desktop);
+    fprintf(stderr,"private Console frontend test exit=%lu\n",code);
+    return (int)code;
+}
 int main(void)
 {
     run16_console_frontend owner={0};
     CONSOLE_CURSOR_INFO cursor;
     DWORD count,mode;
+    char desktop[96];DWORD desktop_size;
     COORD position={0,0};
     char cells[8]={0};
     WORD attributes[3]={0};
+    if(!GetUserObjectInformationA(GetThreadDesktop(GetCurrentThreadId()),UOI_NAME,
+        desktop,sizeof(desktop),&desktop_size) || strncmp(desktop,"NTVDMConsoleTest-",17))
+        return run_on_private_desktop();
     owner.generation=17;
+    owner.title_changed=title_changed;
     owner.input=CreateFileW(L"CONIN$",GENERIC_READ|GENERIC_WRITE,FILE_SHARE_READ|FILE_SHARE_WRITE,
         NULL,OPEN_EXISTING,0,NULL);
     owner.output=CreateConsoleScreenBuffer(GENERIC_READ|GENERIC_WRITE,
@@ -118,6 +151,18 @@ int main(void)
     CHECK(run16_console_dispatch(&owner,&request,&reply)==ERROR_INVALID_DATA);
     request.data[0]=0;request.data[2]=0;
     CHECK(run16_console_dispatch(&owner,&request,&reply)==ERROR_INVALID_DATA);
+    {
+        char original[CONSOLE_IO_DATA_BYTES],actual[CONSOLE_IO_DATA_BYTES];
+        GetConsoleTitleA(original,sizeof(original));
+        operation(&owner,CONSOLE_IO_SET_TITLE_A);
+        request.bytes=sizeof("S36-ATTACHED-CONSOLE");
+        memcpy(request.data,"S36-ATTACHED-CONSOLE",request.bytes);
+        CHECK(!run16_console_dispatch(&owner,&request,&reply) && reply.result && title_notifications==1);
+        CHECK(GetConsoleTitleA(actual,sizeof(actual))==sizeof("S36-ATTACHED-CONSOLE")-1 &&
+            !strcmp(actual,"S36-ATTACHED-CONSOLE"));
+        CHECK(SetConsoleTitleA(original));
+        puts("PASS successful Console-title call notifies the attached frontend once");
+    }
     operation(&owner,CONSOLE_IO_GET_TITLE_A);request.state.count=CONSOLE_IO_DATA_BYTES+1;
     CHECK(run16_console_dispatch(&owner,&request,&reply)==ERROR_INVALID_DATA);
     operation(&owner,CONSOLE_IO_SET_POINTER_CLIP);request.state.has_clip=2;

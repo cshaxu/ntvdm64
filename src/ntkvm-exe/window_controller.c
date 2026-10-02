@@ -192,6 +192,18 @@ DWORD frontend_window_present(frontend_window_controller *owner,const kvm_window
     owner->graphics=graphics!=FALSE;
     return frontend_window_poll(owner);
 }
+DWORD frontend_window_set_title(frontend_window_controller *owner,const char *title)
+{
+    DWORD error;
+    if(!owner || !title || strlen(title)>=sizeof(owner->title))return ERROR_INVALID_PARAMETER;
+    if(!strcmp(owner->title,title))return ERROR_SUCCESS;
+    if(owner->window) {
+        error=status_error(kvm_window_set_title(owner->window,title));
+        if(error)return error;
+    }
+    strcpy_s(owner->title,sizeof(owner->title),title);
+    return ERROR_SUCCESS;
+}
 DWORD frontend_window_clear(frontend_window_controller *owner)
 {
     if(!owner)return ERROR_INVALID_PARAMETER;

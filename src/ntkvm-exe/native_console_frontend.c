@@ -66,6 +66,20 @@ static void signal_binding_waiters(run16_native_frontend *frontend)
 }
 static DWORD apply_binding(run16_native_frontend *,const void *,BOOL,BOOL);
 static DWORD collect_dos_console(run16_native_frontend *);
+static DWORD refresh_window_title(frontend_window_controller *window)
+{
+    char title[KVM_WINDOW_TITLE_CAPACITY]={0};
+    DWORD length;
+    SetLastError(ERROR_SUCCESS);
+    length=GetConsoleTitleA(title,sizeof(title));
+    /* A disappearing root Console is handled by the existing lifetime path;
+     * a cosmetic title read must not block a pending worker handoff. */
+    if(!length && GetLastError()!=ERROR_SUCCESS)return ERROR_SUCCESS;
+    /* The local Window control payload has a fixed capacity. Keep its
+     * termination valid even when the Console title is longer. */
+    title[sizeof(title)-1]=0;
+    return frontend_window_set_title(window,title);
+}
 static DWORD restore_cursor_shape(run16_native_frontend *frontend)
 {
     if(!frontend)return ERROR_INVALID_PARAMETER;
@@ -373,6 +387,7 @@ static DWORD present_loop(run16_native_frontend *frontend)
         if(WaitForSingleObject(frontend->stop,0)==WAIT_OBJECT_0)return ERROR_OPERATION_ABORTED;
         if(requested)ResetEvent(frontend->refresh);
         EnterCriticalSection(&frontend->io_lock);
+        (void)refresh_window_title(frontend->window);
         if(WaitForSingleObject(frontend->handoff,0)==WAIT_OBJECT_0) {
             ResetEvent(frontend->handoff);
             frontend->handoff_error=apply_binding(frontend,frontend->handoff_owner,
@@ -428,7 +443,7 @@ static DWORD WINAPI present(void *context)
     DWORD error,ending;
     frontend->window_frame=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*frontend->window_frame));
     if(!frontend->window_frame)return ERROR_NOT_ENOUGH_MEMORY;
-    error=frontend_window_create(&frontend->window,&callbacks,"NTVDM");
+    error=frontend_window_create(&frontend->window,&callbacks,"");
     if(!error)error=present_loop(frontend);
     ending=frontend_window_destroy(frontend->window);
     if(ending)return ending; /* Callback storage must outlive a failed join. */
@@ -526,6 +541,10 @@ DWORD run16_native_frontend_display(run16_native_frontend *frontend,BOOL window)
     if(WaitForSingleObject(frontend->stop,0)==WAIT_OBJECT_0)return ERROR_OPERATION_ABORTED;
     InterlockedExchange(&frontend->display_request,window ? 2 : 1);
     return SetEvent(frontend->changed) ? ERROR_SUCCESS : GetLastError();
+}
+void run16_native_frontend_console_title_changed(run16_native_frontend *frontend)
+{
+    if(frontend && frontend->changed)SetEvent(frontend->changed);
 }
 void run16_native_frontend_cancel(run16_native_frontend *frontend)
 {

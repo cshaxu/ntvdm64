@@ -4,7 +4,7 @@
 #include "window_controller.h"
 #include "window_keyboard.h"
 
-#define CHECK(x) do { if(!(x)) { fprintf(stderr,"FAIL line %d error %lu: %s\n",__LINE__,GetLastError(),#x); return 1; } } while(0)
+#define CHECK(x) do { if(!(x)) { fprintf(stderr,"FAIL line %d error %lu: %s\n",__LINE__,GetLastError(),#x); return __LINE__; } } while(0)
 typedef struct observations {
     LONG retired; DWORD routes; BOOL window,graphics; DWORD consumer_thread;
     HANDLE native_input;frontend_keyboard_delivery keyboard;
@@ -105,6 +105,29 @@ static BOOL text_key(HWND window,WPARAM key,unsigned scan)
     if(!UnhookWindowsHookEx(keyboard_hook))sent=FALSE;
     keyboard_hook=NULL;return sent;
 }
+static int run_on_private_desktop(void)
+{
+    char name[64],image[MAX_PATH],command[MAX_PATH+3];
+    STARTUPINFOA start={sizeof(start)};
+    PROCESS_INFORMATION child={0};
+    HDESK desktop;
+    DWORD code=ERROR_GEN_FAILURE;
+    sprintf_s(name,sizeof(name),"NTVDMConsoleTest-%lu",GetCurrentProcessId());
+    desktop=CreateDesktopA(name,NULL,NULL,0,GENERIC_ALL,NULL);
+    if(!desktop)return (int)GetLastError();
+    if(!GetModuleFileNameA(NULL,image,sizeof(image))) { CloseDesktop(desktop);return (int)GetLastError(); }
+    sprintf_s(command,sizeof(command),"\"%s\"",image);
+    start.lpDesktop=name;
+    if(CreateProcessA(NULL,command,NULL,NULL,FALSE,CREATE_NEW_CONSOLE,NULL,NULL,&start,&child)) {
+        if(WaitForSingleObject(child.hProcess,120000)==WAIT_OBJECT_0)
+            GetExitCodeProcess(child.hProcess,&code);
+        else { TerminateProcess(child.hProcess,ERROR_TIMEOUT);code=ERROR_TIMEOUT; }
+        CloseHandle(child.hThread);CloseHandle(child.hProcess);
+    } else code=GetLastError();
+    CloseDesktop(desktop);
+    fprintf(stderr,"private Window controller test exit=%lu\n",code);
+    return (int)code;
+}
 int main(int argc,char **argv)
 {
     char desktop[96];DWORD size;
@@ -114,7 +137,10 @@ int main(int argc,char **argv)
     kvm_window_frame *frame=calloc(1,sizeof(*frame));
     HWND wa,wb;DWORD routes,input_mode=0;
     (void)argv;CHECK(argc==1);
-    /* Fail closed if someone accidentally invokes this test on their desktop. */
+    /* Never create a test Window on the user's desktop. */
+    if(!GetUserObjectInformationA(GetThreadDesktop(GetCurrentThreadId()),UOI_NAME,
+        desktop,sizeof(desktop),&size) || strncmp(desktop,"NTVDMConsoleTest-",17))
+        return run_on_private_desktop();
     CHECK(GetUserObjectInformationA(GetThreadDesktop(GetCurrentThreadId()),UOI_NAME,
         desktop,sizeof(desktop),&size));
     CHECK(!strncmp(desktop,"NTVDMConsoleTest-",17));
@@ -148,7 +174,37 @@ int main(int argc,char **argv)
     CHECK(frontend_window_mode(a)==FRONTEND_DISPLAY_CONSOLE);
     CHECK(!frontend_window_present(a,frame,FALSE) && !frontend_window_visible(a));
     CHECK(!frontend_window_select(a,FRONTEND_DISPLAY_WINDOW));
-    wa=lookup("Frontend controller A");CHECK(wa && IsWindowVisible(wa) && first.window);
+    {
+        unsigned attempt;
+        for(attempt=0;attempt<100;++attempt) {
+            wa=lookup("Frontend controller A");
+            if(wa && IsWindowVisible(wa) && first.window)break;
+            Sleep(10);
+        }
+        CHECK(attempt<100);
+    }
+    {
+        char actual[KVM_WINDOW_TITLE_CAPACITY];
+        char too_long[KVM_WINDOW_TITLE_CAPACITY+1];
+        unsigned attempt;
+        CHECK(!frontend_window_set_title(a,"Console title changed"));
+        for(attempt=0;attempt<100;++attempt) {
+            GetWindowTextA(wa,actual,sizeof(actual));
+            if(!strcmp(actual,"Console title changed"))break;
+            Sleep(10);
+        }
+        CHECK(attempt<100 && IsWindow(wa));
+        CHECK(!frontend_window_set_title(a,"") && !frontend_window_set_title(a,"Frontend controller A"));
+        for(attempt=0;attempt<100;++attempt) {
+            GetWindowTextA(wa,actual,sizeof(actual));
+            if(!strcmp(actual,"Frontend controller A"))break;
+            Sleep(10);
+        }
+        CHECK(attempt<100 && IsWindow(wa));
+        memset(too_long,'x',sizeof(too_long));too_long[sizeof(too_long)-1]=0;
+        CHECK(frontend_window_set_title(a,too_long)==ERROR_INVALID_PARAMETER);
+        puts("PASS live Window caption update, empty title, capacity guard and unchanged HWND");
+    }
     {
         DWORD_PTR result;unsigned attempt;
         chord_control=chord_alt=0;

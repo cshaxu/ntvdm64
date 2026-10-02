@@ -27,6 +27,7 @@ HANDLE frontend_window_wake(frontend_window_controller *);
 DWORD frontend_window_select(frontend_window_controller *,frontend_display_mode);
 /* Raster carrier != DOS graphics: native Console rasters pass FALSE. */
 DWORD frontend_window_present(frontend_window_controller *,const kvm_window_frame *,BOOL dos_graphics);
+DWORD frontend_window_set_title(frontend_window_controller *,const char *);
 DWORD frontend_window_poll(frontend_window_controller *);
 /* Execution-owner handoff discards stale pixels, but retains display policy. */
 DWORD frontend_window_clear(frontend_window_controller *);

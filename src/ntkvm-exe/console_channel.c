@@ -100,6 +100,11 @@ static BOOL window_clip_owned(void *context)
     run16_console_channel *channel=context;
     return run16_native_frontend_window_clip_owned(channel->root);
 }
+static void title_changed(void *context)
+{
+    run16_console_channel *channel=context;
+    run16_native_frontend_console_title_changed(channel->root);
+}
 static DWORD read_text_configuration(void *context,DWORD offset,DWORD revision,console_io_reply *reply)
 {
     return run16_native_frontend_read_text_configuration(
@@ -277,6 +282,7 @@ DWORD run16_console_channel_start_request(DWORD request,HANDLE worker,run16_nati
     channel->console.snapshot_begin=snapshot_begin;channel->console.snapshot_end=snapshot_end;
     channel->console.text_frame_required=text_frame_required;
     channel->console.window_clip_owned=window_clip_owned;
+    channel->console.title_changed=title_changed;
     channel->console.read_text_configuration=read_text_configuration;
     channel->console.read_input=read_input;channel->console.prepend_input=prepend_input;
     channel->stop=CreateEventW(NULL,TRUE,FALSE,NULL);

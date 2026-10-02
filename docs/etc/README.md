@@ -2,6 +2,7 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T423 S36 visible Console title](evidence/m0-t423-s36-visible-console-title.md) | M0 T423 S36 | NTKVM Window caption source, focused private-desktop tests, 17+17 regression, published hash and limits. | Retain through T423 acceptance. |
 | [T423 S35 native text Window carrier](evidence/m0-t423-s35-native-text-window.md) | M0 T423 S35 | Text-only carrier expansion, x86 and 17+17 regression, published hash and retained acceptance limits. | Retain through T423 acceptance. |
 | [T423 S34 Console projection and root lifetime](evidence/m0-t423-s34-console-projection-root-lifetime.md) | M0 T423 S34 | Full logical-page projection, borrowed Console-root retirement, x86/product/WOW regression and published hashes. | Retain through T423 acceptance. |
 | [T423 S33 first-command Console preservation](evidence/m0-t423-s33-first-command-screen.md) | M0 T423 S33 | Real ConPTY blank-page root cause, bounded NTKVM resize repair, x86/product/WOW regression and published hashes. | Retain through T423 acceptance. |

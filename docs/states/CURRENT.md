@@ -6,61 +6,29 @@
 
 **No active M/T/S packet.**
 
-M0 T423 remains open. S35 has completed its bounded production delivery;
-S36 has not been admitted. See the [S35 evidence](../etc/evidence/m0-t423-s35-native-text-window.md)
-for the published package, passing 17+17 matrix and retained WOW/visual
-acceptance limitations.
+M0 T423 remains open for owner acceptance. S36 has delivered the visible
+Console-title Window caption and a coherent package to `O:/winnt`.
+The read-only task-trace S37 is not admitted.
 
 ## Last Closed S Brief
 
-S35 (Ordinary Mode) followed the owner's instruction: “不管多少宽度高度，文本帧就得要按照文本帧来 render。”
-Its bounded scope, protocol limit, implementation and non-passes are recorded in
-the [S35 evidence](../etc/evidence/m0-t423-s35-native-text-window.md).
+S36 (Ordinary Mode) followed the owner's clarified title source:
+“ntkvm所在的console的标题”. The source, implementation, 17+17 product results,
+published hash and bounded limits are recorded in the
+[S36 evidence](../etc/evidence/m0-t423-s36-visible-console-title.md).
 
 ## Previous S Brief
 
-| Field | S34 brief |
-| --- | --- |
-| Identifier Mode | M0 T423 S34, Ordinary Mode. |
-| Admission And Approval | Owner supplied the full `DIR` screenshot, approved complete logical-page projection and asked this side conversation to take over the related frontend/worker lifecycle work, publication and testing. |
-| Objective | Publish a complete DOS logical page into the physical Console without stale border cells or cursor mismatch; make borrowed NTKVM roots follow the actual outer Console lifetime, with NTVDM/NTCON sharing root-loss semantics. |
-| Non-goals | No guest or original execution-logic edit, fake prompt-line clear, task-trace work, Console-member task records or timer polling. Host scrollback history beyond the logical DOS page is not guaranteed. |
-| Reference Baseline | Published S33 protocol-25 eight-file package and [S33 evidence](../etc/evidence/m0-t423-s33-first-command-screen.md). |
-| Files And ABI Surface | NTKVM projection and authenticated frontend-root lease, NTSRV/root protocol 26, worker-base root handle, NTVDM/NTCON root-loss wiring, focused tests. Original MVDM image and guest media remain unchanged. |
-| Applicable Rules | Execution, architecture, coding, documentation and immutable-guest source policy. |
-| Verification | Capture full `DIR` cell/viewport/cursor transitions; focused tests, x86 build, 17 Console plus 17 Window routes, prior DOS/native/WOW frontiers and published smoke. |
-| Expected Markers | Directory summary appears once, prompt line has no stale suffix, S33 screen preservation and COMMAND/MEM/EDIT interactions remain intact. |
-| Asset Needs | Existing S33 cache and `O:/winnt` package; new build/test output under `build/M0-T423/S34/`. |
-| Reporting Requirements | Exact cause, before/after evidence, changed files, regressions and published hashes. |
-| Stop Conditions | A proved immutable original guest limitation or further display-contract expansion requires renewed owner review. The owner explicitly approved the full-page projection and its no-scrollback tradeoff. |
-| Exit Criteria | Verified coherent eight-file package in `O:/winnt`, evidence, governance, commit/push and clean worktree; T423 remains open. |
-| Original Owner Request | `cmd.exe` → `run16 command` → full `dir` leaves an unclean last line; owner approved fixing, publishing and testing. |
-| Similar-Issue Sweep | First/repeated DIR, native→DOS 25/28/30-row geometry, cell/cursor retention, Console/Window and nested native return. |
-| Candidate Proposal | [T423 Console/Window proposal](../proposals/proposal-kvm-window-graphics-presentation-001.md). |
-
+The prior S35 and S34 results are retained in
+[S35 evidence](../etc/evidence/m0-t423-s35-native-text-window.md) and
+[S34 evidence](../etc/evidence/m0-t423-s34-console-projection-root-lifetime.md).
 S33's [evidence](../etc/evidence/m0-t423-s33-first-command-screen.md)
-records the preceding baseline. The read-only task-trace proposal is S36 and
-is not admitted by S35 closure.
+records its preceding baseline. The read-only task-trace proposal is now S37.
 
 ## Recent M0 Closures
 
-S32 made NTKVM the sole sampler of visible Console identity and NTSRV the
-authenticated owner of matching and resident-worker reuse for both NTVDM and
-NTCON. The x86 build, focused service negatives, old-peer rejection, 17
-Console plus 17 Window product cases, retained WOW frontiers, and published
-smoke passed. A legacy no-presenter NTCON fixture and its obsolete
-worker-must-retire assertion remain explicit non-passes, not product passes.
-The prior eight-file package is preserved under the S32 build directory.
-
-S31 removed the root frontend's startup geometry/cursor-position restoration
-while preserving canonical-buffer, input-mode and cursor-shape cleanup. The
-unchanged OpenNT MVDM mirror and guest media were not modified. The package
-is published for owner side-testing; T423 is still open.
-
-S30 restored original 22/25/28/43/50-row selection on native-to-DOS return,
-removed the last-DOS-size fallback, synchronized MIDL revision 25.0 and
-verified the published package. The original MVDM image, guest media and
-configuration were not changed.
+S30–S32 results, gates and non-passes remain in their linked closure records
+below; S34 and S35 are linked above. T423 remains open.
 
 ## Recent Governance
 

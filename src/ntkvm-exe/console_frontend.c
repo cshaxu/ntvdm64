@@ -293,6 +293,7 @@ DWORD run16_console_dispatch(run16_console_frontend *owner,const console_io_requ
         break;
     case CONSOLE_IO_SET_TITLE_A:
         ok=SetConsoleTitleA((LPCSTR)request->data);
+        if(ok && owner->title_changed)owner->title_changed(owner->io_context);
         break;
     case CONSOLE_IO_WINDOW_QUERY: {
         if (s->mode==CONSOLE_WINDOW_TEXT_FRAME_REQUIRED) {

@@ -25,6 +25,8 @@ typedef struct run16_console_frontend {
     BOOL (*text_frame_required)(void *);
     /* The Window presentation, not DOS, owns the host pointer clip. */
     BOOL (*window_clip_owned)(void *);
+    /* A successful DOS Console title change wakes NTKVM presentation. */
+    void (*title_changed)(void *);
     /* Copied input owned by frontend; callbacks hold the enter lock. */
     DWORD (*read_input)(void *,BOOL,INPUT_RECORD *,DWORD,DWORD *);
     DWORD (*prepend_input)(void *,const INPUT_RECORD *,DWORD);

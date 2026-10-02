@@ -15,6 +15,7 @@ DWORD run16_native_frontend_project_dos(run16_native_frontend *);
 SMALL_RECT *run16_native_frontend_text_region(run16_native_frontend *);
 /* Frontend-local presentation request; never changes target execution. */
 DWORD run16_native_frontend_display(run16_native_frontend *,BOOL window);
+void run16_native_frontend_console_title_changed(run16_native_frontend *);
 /* Terminal teardown must restore the caller's active buffer and input mode
  * before the root launcher returns control to its parent Console. */
 DWORD run16_native_frontend_destroy(run16_native_frontend *);
