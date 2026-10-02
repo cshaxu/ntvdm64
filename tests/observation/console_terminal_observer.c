@@ -8,7 +8,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <wchar.h>
 static HANDLE read_pipe, write_pipe, raw_log;
+static HANDLE host_resize_seen;
+static HANDLE s34_dir_complete_seen;
 static HANDLE named_pipe_server;
 static volatile LONG named_pipe_connected, named_pipe_sent, named_pipe_received;
 static HANDLE lpt_pipe_server;
@@ -63,11 +66,22 @@ static DWORD WINAPI serve_lpt_pipe(void *unused) {
 }
 static DWORD WINAPI copy_output(void *unused) {
     char data[8193]; DWORD n,w;
+    const char resize_code[]="\x1b[8;28;80t";
+    size_t matched=0;
     (void)unused;
     while(ReadFile(read_pipe,data,sizeof(data)-1,&n,NULL)&&n) {
         data[n]=0;
         WriteFile(raw_log,data,n,&w,NULL);
-        for(DWORD i=0;i+3<n;i++)if(!memcmp(data+i,"\x1b[6n",4))WriteFile(write_pipe,"\x1b[1;1R",6,&w,NULL);
+        for(DWORD i=0;i<n;i++) {
+            if(data[i]==resize_code[matched]) {
+                if(++matched==sizeof(resize_code)-1) {
+                    if(host_resize_seen)SetEvent(host_resize_seen);
+                    matched=0;
+                }
+            } else matched=data[i]==resize_code[0] ? 1 : 0;
+            if(i+3<n && !memcmp(data+i,"\x1b[6n",4))
+                WriteFile(write_pipe,"\x1b[1;1R",6,&w,NULL);
+        }
     }
     return 0;
 }
@@ -87,24 +101,37 @@ static int log_contains(const char *path,const char *needle) {
     }
     CloseHandle(file);return found;
 }
-/* The first 80x28 page after native VER returns to DOS must still contain
- * both the caller's banner and VER's output. A transient blank page is a
- * failure even if COMMAND subsequently redraws its prompt. */
-static int s33_first_resized_page_kept_text(const char *raw_path,const char *expected) {
+/* The first physical page containing the command output must still contain
+ * the caller's banner.  NTKVM may now project a 28-row DOS page into a
+ * 30-row visible Console, so the physical buffer height is not a VGA mode. */
+static int s33_first_command_page_kept_text(const char *raw_path,const char *expected) {
     char path[MAX_PATH],line[256];FILE *file=NULL;
     int in_page=0,banner=0,version=0;
     if(snprintf(path,sizeof(path),"%s.cells.txt",raw_path)<=0 ||
         fopen_s(&file,path,"r") || !file)return 0;
     while(fgets(line,sizeof(line),file)) {
         if(!strncmp(line,"t=",2)) {
-            if(in_page)break;
-            if(strstr(line,"buffer=80,28"))in_page=1;
+            if(version)break;
+            in_page=1;banner=0;version=0;
         } else if(in_page) {
             if(strstr(line,"Microsoft(R) Windows NT DOS"))banner=1;
             if(strstr(line,expected))version=1;
         }
     }
     fclose(file);return in_page && banner && version;
+}
+
+static int s34_prompt_has_directory_tail(const char *raw_path) {
+    char path[MAX_PATH],line[256];FILE *file=NULL;
+    int dirty=0;
+    if(snprintf(path,sizeof(path),"%s.cells.txt",raw_path)<=0 ||
+        fopen_s(&file,path,"r") || !file)return -1;
+    while(fgets(line,sizeof(line),file))
+        if(strstr(line,"Dir(s)") && strchr(line,'>') &&
+            ((line[3]>='A' && line[3]<='Z') ||
+             (line[3]>='a' && line[3]<='z')) && line[4]==':' && line[5]=='\\')
+            dirty=1;
+    fclose(file);return dirty;
 }
 
 static int guest_command_failed(const char *path) {
@@ -140,15 +167,38 @@ static void dismiss_comms_error_dialog_until_seen(void) {
 
 static DWORD WINAPI watch_cells(void *unused) {
     HANDLE h=CreateFileA("CONOUT$",GENERIC_READ,FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,OPEN_EXISTING,0,NULL);
+    HANDLE dir_event=NULL;
+    char dir_event_name[80];
     (void)unused;
+    if(GetEnvironmentVariableA("MVDM_TEST_S34_DIR_EVENT",dir_event_name,sizeof(dir_event_name)))
+        dir_event=OpenEventA(EVENT_MODIFY_STATE,FALSE,dir_event_name);
     char path[MAX_PATH];GetEnvironmentVariableA("TEST_CELL_LOG",path,sizeof(path));
     FILE *f=fopen(path,"w");if(!f)return 1;
     DWORD previous=0,begin=GetTickCount();WCHAR data[16000];
-    while(GetTickCount()-begin<22000) {
+    while(GetTickCount()-begin<45000) {
         CONSOLE_SCREEN_BUFFER_INFO info;DWORD count=0,hash=2166136261u,mode=0;
         if(GetConsoleScreenBufferInfo(h,&info)) {
             DWORD total=(DWORD)info.dwSize.X*info.dwSize.Y;if(total>16000)total=16000;
             COORD origin={0,0};ReadConsoleOutputCharacterW(h,data,total,origin,&count);
+            if(dir_event && info.dwSize.X>0) {
+                int summary=0,prompt=0;
+                for(DWORD row=0;row<count/(DWORD)info.dwSize.X;row++) {
+                    WCHAR *line=data+row*(DWORD)info.dwSize.X;
+                    for(DWORD col=0;col+6<(DWORD)info.dwSize.X;col++) {
+                        if(!wcsncmp(line+col,L"Dir(s)",6))summary=1;
+                        if(col>2 && line[0]>=L'A' && line[0]<=L'Z' &&
+                            line[1]==L':' && line[2]==L'\\' &&
+                            line[col]==L'>' &&
+                            info.dwCursorPosition.Y==(SHORT)row &&
+                            info.dwCursorPosition.X==(SHORT)(col+1)) {
+                            DWORD tail=col+1;
+                            while(tail<(DWORD)info.dwSize.X && line[tail]==L' ')tail++;
+                            if(tail==(DWORD)info.dwSize.X)prompt=1;
+                        }
+                    }
+                }
+                if(summary && prompt)SetEvent(dir_event);
+            }
             for(DWORD i=0;i<count;i++)hash=(hash^data[i])*16777619u;
             hash^=info.dwCursorPosition.X+info.dwCursorPosition.Y*4096u;
             GetConsoleMode(h,&mode);hash^=mode;
@@ -162,7 +212,7 @@ static DWORD WINAPI watch_cells(void *unused) {
                 fflush(f);previous=hash;
             }
         }Sleep(40);
-    }fclose(f);CloseHandle(h);return 0;
+    }fclose(f);if(dir_event)CloseHandle(dir_event);CloseHandle(h);return 0;
 }
 
 int main(int argc,char **argv) {
@@ -196,7 +246,7 @@ int main(int argc,char **argv) {
     HPCON pty;
     STARTUPINFOEXA si={0};PROCESS_INFORMATION pi={0};SIZE_T bytes=0;
     COORD size;
-    if(argc!=4 && (argc!=5 || (strcmp(argv[4],"--s33-first-ver") && strcmp(argv[4],"--s33-first-dir") && strcmp(argv[4],"--mouse") && strcmp(argv[4],"--resize") && strcmp(argv[4],"--video-int10") && strcmp(argv[4],"--system-capability") && strcmp(argv[4],"--bios-capability") && strcmp(argv[4],"--support-capability") && strcmp(argv[4],"--disks-capability") && strcmp(argv[4],"--comms-capability") && strcmp(argv[4],"--comms-host-medium") && strcmp(argv[4],"--comms-loopback") && strcmp(argv[4],"--lpt-host-medium") && strcmp(argv[4],"--dosx-himem-capability") && strcmp(argv[4],"--pure-dos-capability") && strcmp(argv[4],"--ems-capability") && strcmp(argv[4],"--vdmredir-pipe") && strcmp(argv[4],"--vdmredir-transact") && strcmp(argv[4],"--vdmredir-call") && strcmp(argv[4],"--vdmredir-timeout") && strcmp(argv[4],"--vdmredir-async") && strcmp(argv[4],"--vdmredir-async-write") && strcmp(argv[4],"--vdmredir-mailslot") && strcmp(argv[4],"--vdmredir-terminate") && strcmp(argv[4],"--vdmredir-netbios") && strcmp(argv[4],"--vdmredir-netbios-async") && strcmp(argv[4],"--vdmredir-dlc") && strcmp(argv[4],"--vdmredir-netapi") && strcmp(argv[4],"--vdmredir-net-enum") && strcmp(argv[4],"--vdmredir-wksta") && strcmp(argv[4],"--vdmredir-wksta-set") && strcmp(argv[4],"--vdmredir-message") && strcmp(argv[4],"--vdmredir-service") && strcmp(argv[4],"--vdmredir-assign") && strcmp(argv[4],"--vdmredir-use") && strcmp(argv[4],"--vdmredir-use-info") && strcmp(argv[4],"--vdmredir-use-lifecycle"))))return 64;
+if(argc!=4 && (argc!=5 || (strcmp(argv[4],"--s33-first-ver") && strcmp(argv[4],"--s33-first-dir") && strcmp(argv[4],"--s34-full-dir") && strcmp(argv[4],"--mouse") && strcmp(argv[4],"--resize") && strcmp(argv[4],"--video-int10") && strcmp(argv[4],"--system-capability") && strcmp(argv[4],"--bios-capability") && strcmp(argv[4],"--support-capability") && strcmp(argv[4],"--disks-capability") && strcmp(argv[4],"--comms-capability") && strcmp(argv[4],"--comms-host-medium") && strcmp(argv[4],"--comms-loopback") && strcmp(argv[4],"--lpt-host-medium") && strcmp(argv[4],"--dosx-himem-capability") && strcmp(argv[4],"--pure-dos-capability") && strcmp(argv[4],"--ems-capability") && strcmp(argv[4],"--vdmredir-pipe") && strcmp(argv[4],"--vdmredir-transact") && strcmp(argv[4],"--vdmredir-call") && strcmp(argv[4],"--vdmredir-timeout") && strcmp(argv[4],"--vdmredir-async") && strcmp(argv[4],"--vdmredir-async-write") && strcmp(argv[4],"--vdmredir-mailslot") && strcmp(argv[4],"--vdmredir-terminate") && strcmp(argv[4],"--vdmredir-netbios") && strcmp(argv[4],"--vdmredir-netbios-async") && strcmp(argv[4],"--vdmredir-dlc") && strcmp(argv[4],"--vdmredir-netapi") && strcmp(argv[4],"--vdmredir-net-enum") && strcmp(argv[4],"--vdmredir-wksta") && strcmp(argv[4],"--vdmredir-wksta-set") && strcmp(argv[4],"--vdmredir-message") && strcmp(argv[4],"--vdmredir-service") && strcmp(argv[4],"--vdmredir-assign") && strcmp(argv[4],"--vdmredir-use") && strcmp(argv[4],"--vdmredir-use-info") && strcmp(argv[4],"--vdmredir-use-lifecycle"))))return 64;
     size.X=(SHORT)atoi(argv[1]);size.Y=(SHORT)atoi(argv[2]);
     if(argc==5 && !strcmp(argv[4],"--lpt-host-medium")) {
         lpt_pipe_server=CreateNamedPipeA("\\\\.\\pipe\\NTVDMLPTTEST",PIPE_ACCESS_INBOUND,PIPE_TYPE_BYTE|PIPE_WAIT,1,16,16,0,NULL);
@@ -224,6 +274,13 @@ int main(int argc,char **argv) {
     if(raw_log==INVALID_HANDLE_VALUE) {
         fprintf(stderr,"cannot create raw log (error %lu)\n",GetLastError());
         return 69;
+    }
+    host_resize_seen=CreateEventW(NULL,TRUE,FALSE,NULL);
+    {
+        char name[80];
+        snprintf(name,sizeof(name),"Local\\MVDM-S34-DIR-%lu",GetCurrentProcessId());
+        s34_dir_complete_seen=CreateEventA(NULL,TRUE,FALSE,name);
+        SetEnvironmentVariableA("MVDM_TEST_S34_DIR_EVENT",name);
     }
     CreatePipe(&in_read,&write_pipe,NULL,0);CreatePipe(&read_pipe,&out_write,NULL,0);
     if(FAILED(CreatePseudoConsole(size,in_read,out_write,0,&pty)))return 65;
@@ -261,12 +318,84 @@ int main(int argc,char **argv) {
         WaitForSingleObject(pi.hProcess,5000);GetExitCodeProcess(pi.hProcess,&code);
         CloseHandle(job);ClosePseudoConsole(pty);CloseHandle(write_pipe);
         WaitForSingleObject(thread,3000);CloseHandle(raw_log);
-        { int preserved=s33_first_resized_page_kept_text(argv[3],
+        { int preserved=s33_first_command_page_kept_text(argv[3],
               dir ? "Directory of" : "Microsoft Windows [Version");
           int dos_alive=log_contains(argv[3],"bytes total conventional memory");
           printf("s33-child-after-command=%lu final=%lu preserved=%d dos-alive=%d\n",
               wait,code,preserved,dos_alive);
           return wait==WAIT_TIMEOUT && preserved && dos_alive ? 0 : 1; }
+    }
+    if(argc==5 && !strcmp(argv[4],"--s34-full-dir")) {
+        char runtime[MAX_PATH]="O:\\winnt",launch[MAX_PATH+32];
+        DWORD wait,code=STILL_ACTIVE;
+        int dirty,entered;
+        GetEnvironmentVariableA("TEST_RUNTIME_ROOT",runtime,sizeof(runtime));
+        snprintf(launch,sizeof(launch),"%s\\run16 command\r",runtime);
+        send_keys(launch);
+        {
+            char text[16];DWORD delay=3000;
+            if(GetEnvironmentVariableA("MVDM_TEST_S34_GUEST_WAIT_MS",text,sizeof(text)))
+                delay=(DWORD)strtoul(text,NULL,10);
+            Sleep(delay);
+        }
+        {
+            char probe[MAX_PATH];
+            if(GetEnvironmentVariableA("MVDM_TEST_S34_SCROLL_MARGIN",probe,sizeof(probe))) {
+                STARTUPINFOA start={sizeof(start)};PROCESS_INFORMATION helper={0};
+                char line[3*MAX_PATH];
+                if(WaitForSingleObject(host_resize_seen,7000)!=WAIT_OBJECT_0)return 76;
+                snprintf(line,sizeof(line),"\"%s\" %lu \"%s.margin.txt\" vt-scroll-region-28",
+                    probe,pi.dwProcessId,argv[3]);
+                if(!CreateProcessA(NULL,line,NULL,NULL,FALSE,CREATE_NO_WINDOW,NULL,NULL,&start,&helper))
+                    return 77;
+                if(WaitForSingleObject(helper.hProcess,5000)!=WAIT_OBJECT_0 ||
+                    !GetExitCodeProcess(helper.hProcess,&code) || code) {
+                    CloseHandle(helper.hThread);CloseHandle(helper.hProcess);return 78;
+                }
+                CloseHandle(helper.hThread);CloseHandle(helper.hProcess);
+            }
+        }
+        send_keys("dir\r");
+        if((GetEnvironmentVariableA("MVDM_TEST_HOST_RETURNS_GEOMETRY",NULL,0) ||
+            GetEnvironmentVariableA("MVDM_TEST_HOST_HONORS_GEOMETRY",NULL,0)) &&
+            WaitForSingleObject(host_resize_seen,7000)==WAIT_OBJECT_0) {
+            COORD host_size=size;
+            if(GetEnvironmentVariableA("MVDM_TEST_HOST_HONORS_GEOMETRY",NULL,0))
+                host_size.Y=28;
+            ResizePseudoConsole(pty,host_size);
+        }
+        if(WaitForSingleObject(s34_dir_complete_seen,20000)!=WAIT_OBJECT_0)
+            fprintf(stderr,"first directory prompt not observed before deadline\n");
+        Sleep(500);
+        {
+            char probe[MAX_PATH];
+            if(GetEnvironmentVariableA("MVDM_TEST_S34_BUFFER_TOGGLE",probe,sizeof(probe))) {
+                STARTUPINFOA start={sizeof(start)};PROCESS_INFORMATION helper={0};
+                char line[3*MAX_PATH];
+                snprintf(line,sizeof(line),"\"%s\" %lu \"%s.toggle.txt\" buffer-toggle",
+                    probe,pi.dwProcessId,argv[3]);
+                if(!CreateProcessA(NULL,line,NULL,NULL,FALSE,CREATE_NO_WINDOW,NULL,NULL,&start,&helper))
+                    return 74;
+                if(WaitForSingleObject(helper.hProcess,5000)!=WAIT_OBJECT_0 ||
+                    !GetExitCodeProcess(helper.hProcess,&code) || code) {
+                    CloseHandle(helper.hThread);CloseHandle(helper.hProcess);return 75;
+                }
+                CloseHandle(helper.hThread);CloseHandle(helper.hProcess);
+                send_keys("ver\r");Sleep(4000);
+            } else if(GetEnvironmentVariableA("MVDM_TEST_S34_REPEAT_DIR",NULL,0)) {
+                send_keys("dir\r");Sleep(4000);
+            }
+        }
+        wait=WaitForSingleObject(pi.hProcess,0);
+        send_keys("exit\r");Sleep(1000);send_keys("exit\r");
+        WaitForSingleObject(pi.hProcess,5000);GetExitCodeProcess(pi.hProcess,&code);
+        CloseHandle(job);ClosePseudoConsole(pty);CloseHandle(write_pipe);
+        WaitForSingleObject(thread,3000);CloseHandle(raw_log);
+        dirty=s34_prompt_has_directory_tail(argv[3]);
+        entered=log_contains(argv[3],"Microsoft(R) Windows NT DOS");
+        printf("s34-child-after-dir=%lu final=%lu entered-dos=%d dirty-prompt=%d\n",
+            wait,code,entered,dirty);
+        return wait==WAIT_TIMEOUT && entered && dirty==0 ? 0 : 1;
     }
     if(argc==5 && !strcmp(argv[4],"--video-int10")) {
         char video_command[MAX_PATH];

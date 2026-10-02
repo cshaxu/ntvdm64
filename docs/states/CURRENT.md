@@ -4,32 +4,35 @@
 
 ## Owner Review Intermission
 
-**No active M/T/S packet.** T423 remains open pending owner review. S33 is closed and its
-[evidence](../etc/evidence/m0-t423-s33-first-command-screen.md) records the
-published protocol-25 eight-file package, first-command repair and retained
-limits. The read-only worker task-trace proposal is
-deferred to S34; it has not been admitted or implemented.
+**No active M/T/S packet.** T423 remains open for owner acceptance. S34 is
+delivered in [its evidence record](../etc/evidence/m0-t423-s34-console-projection-root-lifetime.md):
+the complete eight-file protocol-26 package is published, while S35 task
+tracing remains unadmitted.
 
 ## Last Closed S Brief
 
-| Field | S33 brief |
+| Field | S34 brief |
 | --- | --- |
-| Identifier Mode | M0 T423 S33, Ordinary Mode. |
-| Admission And Approval | Owner requested S33 after S32 and supplied the first concrete defect. |
-| Objective | Preserve outer CMD screen content when interactive `run16 command` runs its first command. |
-| Non-goals | No fake redraw, sleep, guest-media edit, task-trace implementation or unrelated product repair. |
-| Reference Baseline | Published S32 protocol-25 eight-file package and S32 evidence. |
-| Files And ABI Surface | Diagnose NTKVM Console/paint, NTVDM original video handoff and Run16 lifecycle; edit only the proven owner and focused tests. |
+| Identifier Mode | M0 T423 S34, Ordinary Mode. |
+| Admission And Approval | Owner supplied the full `DIR` screenshot, approved complete logical-page projection and asked this side conversation to take over the related frontend/worker lifecycle work, publication and testing. |
+| Objective | Publish a complete DOS logical page into the physical Console without stale border cells or cursor mismatch; make borrowed NTKVM roots follow the actual outer Console lifetime, with NTVDM/NTCON sharing root-loss semantics. |
+| Non-goals | No guest or original execution-logic edit, fake prompt-line clear, task-trace work, Console-member task records or timer polling. Host scrollback history beyond the logical DOS page is not guaranteed. |
+| Reference Baseline | Published S33 protocol-25 eight-file package and [S33 evidence](../etc/evidence/m0-t423-s33-first-command-screen.md). |
+| Files And ABI Surface | NTKVM projection and authenticated frontend-root lease, NTSRV/root protocol 26, worker-base root handle, NTVDM/NTCON root-loss wiring, focused tests. Original MVDM image and guest media remain unchanged. |
 | Applicable Rules | Execution, architecture, coding, documentation and immutable-guest source policy. |
-| Verification | Capture real Console cell/viewport/cursor transitions for `cmd.exe` 80×30 → `run16 command` → first `ver` and `dir`; x86 build, focused tests, prior DOS/native/WOW regressions. |
-| Expected Markers | First command does not spuriously clear pre-existing screen cells; authentic DOS changes and original row selection remain intact. |
-| Asset Needs | Existing S32 package, test probes and build-only outputs below `build/M0-T423/S33/`. |
-| Reporting Requirements | Identify cause, changed boundary, before/after screen evidence, regressions and package hashes. |
-| Stop Conditions | If the effect is a proved immutable original guest behavior or requires a changed product display contract, report before expanding scope. |
-| Exit Criteria | Verified no-regression x86 package published to `O:/winnt`, evidence, governance, commit and push; S33 then stops for owner review. |
-| Original Owner Request | In `cmd.exe` at about 80×30, `run16 command` appears to clear the screen on first `ver` or `dir`; fix this first. |
-| Similar-Issue Sweep | Compare first versus later commands, Console versus Window, 25/28/30-row transitions and DOS/native return. |
-| Candidate Proposal | [T423 Console/Window proposal](../proposals/proposal-kvm-window-graphics-presentation-001.md) |
+| Verification | Capture full `DIR` cell/viewport/cursor transitions; focused tests, x86 build, 17 Console plus 17 Window routes, prior DOS/native/WOW frontiers and published smoke. |
+| Expected Markers | Directory summary appears once, prompt line has no stale suffix, S33 screen preservation and COMMAND/MEM/EDIT interactions remain intact. |
+| Asset Needs | Existing S33 cache and `O:/winnt` package; new build/test output under `build/M0-T423/S34/`. |
+| Reporting Requirements | Exact cause, before/after evidence, changed files, regressions and published hashes. |
+| Stop Conditions | A proved immutable original guest limitation or further display-contract expansion requires renewed owner review. The owner explicitly approved the full-page projection and its no-scrollback tradeoff. |
+| Exit Criteria | Verified coherent eight-file package in `O:/winnt`, evidence, governance, commit/push and clean worktree; T423 remains open. |
+| Original Owner Request | `cmd.exe` → `run16 command` → full `dir` leaves an unclean last line; owner approved fixing, publishing and testing. |
+| Similar-Issue Sweep | First/repeated DIR, native→DOS 25/28/30-row geometry, cell/cursor retention, Console/Window and nested native return. |
+| Candidate Proposal | [T423 Console/Window proposal](../proposals/proposal-kvm-window-graphics-presentation-001.md). |
+
+S33's [evidence](../etc/evidence/m0-t423-s33-first-command-screen.md)
+records the preceding baseline. The read-only task-trace proposal moves to S35
+and is not admitted by S34 closure.
 
 ## Recent M0 Closures
 

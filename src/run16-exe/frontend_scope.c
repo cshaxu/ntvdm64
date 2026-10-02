@@ -44,7 +44,7 @@ void run16_frontend_scope_end(run16_frontend_scope *scope)
     if(scope->worker)CloseHandle(scope->worker);
     HeapFree(GetProcessHeap(),0,scope);
 }
-DWORD run16_frontend_scope_begin(run16_frontend_scope **output)
+static DWORD scope_begin(run16_frontend_scope **output,BOOL lease,BOOL console_owned)
 {
     run16_frontend_scope *scope;
     char text[32];
@@ -75,9 +75,23 @@ DWORD run16_frontend_scope_begin(run16_frontend_scope **output)
         WCHAR image[MAX_PATH],*slash;
         DWORD length=GetModuleFileNameW(NULL,image,ARRAYSIZE(image));
         frontend_connection connection={0};
+        DWORD create_root=1;
+        uint64_t console_window=(uint64_t)(UINT_PTR)GetConsoleWindow();
         if(!length || length>=ARRAYSIZE(image) || !(slash=wcsrchr(image,L'\\'))){error=ERROR_BAD_PATHNAME;goto fail;}
         if(wcscpy_s(slash+1,ARRAYSIZE(image)-(size_t)(slash+1-image),L"ntkvm.exe")){error=ERROR_FILENAME_EXCED_RANGE;goto fail;}
-        error=frontend_bootstrap_start(image,&connection);if(error)goto fail;
+        if(lease && console_window) {
+            error=OpenNtBaseClientAcquireFrontendRoot(console_window,&create_root,
+                &connection.process,&connection.capability,&connection.retire,&connection.restored);
+            if(error)goto fail;
+        }
+        if(create_root) {
+            error=lease && console_window ? frontend_bootstrap_start_lease(image,
+                !console_owned,console_window,&connection) : frontend_bootstrap_start(image,&connection);
+            if(error) {
+                if(lease && console_window)(void)OpenNtBaseClientCancelFrontendRootReservation();
+                goto fail;
+            }
+        }
         scope->capability=connection.capability;connection.capability=NULL;
         scope->retire=connection.retire;connection.retire=NULL;
         scope->restored=connection.restored;connection.restored=NULL;
@@ -109,6 +123,10 @@ fail:
     run16_frontend_scope_end(scope);
     return error;
 }
+DWORD run16_frontend_scope_begin(run16_frontend_scope **output)
+{ return scope_begin(output,FALSE,FALSE); }
+DWORD run16_frontend_scope_begin_lease(run16_frontend_scope **output,BOOL console_owned)
+{ return scope_begin(output,TRUE,console_owned); }
 
 HANDLE run16_frontend_scope_capability(run16_frontend_scope *scope)
 {

@@ -15,10 +15,19 @@ DWORD WINAPI OpenNtBaseClientWowStarted(ULONG task);
  * guesses transport receipts. Returned startup event is owned/wait-only. */
 DWORD OpenNtBaseClientWowStartup(HANDLE parent,HANDLE *event,BOOL *started);
 DWORD OpenNtBaseClientFrontendUsage(DWORD *pending,DWORD *tasks);
+DWORD OpenNtBaseClientRetireWorkerlessFrontend(DWORD *retired);
 DWORD OpenNtBaseClientFrontendStateChanged(HANDLE *state_changed);
 DWORD OpenNtBaseClientWorkerStateChanged(HANDLE *state_changed);
 DWORD OpenNtBaseClientRetireFrontend(void);
 DWORD OpenNtBaseClientRegisterFrontendRoot(HANDLE capability);
+DWORD OpenNtBaseClientAcquireFrontendRoot(uint64_t console_window,DWORD *create_root,
+    HANDLE *root,HANDLE *capability,HANDLE *retire,HANDLE *restored);
+DWORD OpenNtBaseClientCancelFrontendRootReservation(void);
+DWORD OpenNtBaseClientRegisterFrontendLease(uint64_t console_window,DWORD creator_pid,
+    BOOL borrowed,HANDLE retire,HANDLE restored);
+DWORD OpenNtBaseClientFrontendJoinCandidate(DWORD *nonce,DWORD *candidate_pid);
+DWORD OpenNtBaseClientFrontendJoinDecision(DWORD nonce,BOOL same_console);
+DWORD OpenNtBaseClientFrontendLeaseReady(void);
 DWORD OpenNtBaseClientRegisterNativeBackend(HANDLE frontend,HANDLE stop,HANDLE closed);
 DWORD OpenNtBaseClientBindNativeTarget(DWORD request,HANDLE target);
 DWORD OpenNtBaseClientCompleteWorkerChannel(DWORD request);

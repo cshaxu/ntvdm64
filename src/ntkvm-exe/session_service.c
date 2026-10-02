@@ -7,26 +7,65 @@ typedef struct frontend_channel {
     run16_console_channel *channel;
 } frontend_channel;
 struct frontend_session_service {
-    HANDLE capability,notification,stop,thread,retire,state_changed;
-    HANDLE creator;
-    BOOL admitted,retire_requested,creator_exited;
+    HANDLE capability,notification,stop,thread,retire,restored,state_changed;
+    HANDLE creator,console_anchor;
+    BOOL admitted,retire_requested,creator_exited,borrowed;
     frontend_channel *channels;
     run16_native_frontend *native;
     void (*channel_ready)(void);
 };
+/* Borrowed roots must not keep an otherwise closed user Console alive just
+ * because NTKVM itself remains attached. Follow one real Console member at
+ * a time; on its exit, resample only once to find the next surviving member.
+ * This is Console ownership, never a worker/task or descendant census. */
+static DWORD next_console_anchor(HANDLE *anchor)
+{
+    DWORD capacity=16,count=0,index,self=GetCurrentProcessId(),error=ERROR_NOT_FOUND;
+    BOOL inaccessible=FALSE;
+    DWORD *members=NULL;
+    HANDLE selected=NULL;
+    *anchor=NULL;
+    for(;;) {
+        members=HeapAlloc(GetProcessHeap(),0,capacity*sizeof(*members));
+        if(!members)return ERROR_NOT_ENOUGH_MEMORY;
+        count=GetConsoleProcessList(members,capacity);
+        if(!count){error=GetLastError();if(!error)error=ERROR_GEN_FAILURE;break;}
+        if(count<=capacity)break;
+        HeapFree(GetProcessHeap(),0,members);members=NULL;
+        if(count>4096)return ERROR_BUFFER_OVERFLOW;
+        capacity=count;
+    }
+    for(index=0;index<count;++index) {
+        if(members[index]==self)continue;
+        selected=OpenProcess(SYNCHRONIZE,FALSE,members[index]);
+        if(!selected) {
+            if(GetLastError()==ERROR_ACCESS_DENIED)inaccessible=TRUE;
+            continue; /* It may have exited since the snapshot. */
+        }
+        if(WaitForSingleObject(selected,0)==WAIT_TIMEOUT) {
+            *anchor=selected;error=ERROR_SUCCESS;break;
+        }
+        CloseHandle(selected);selected=NULL;
+    }
+    HeapFree(GetProcessHeap(),0,members);
+    if(error==ERROR_NOT_FOUND && inaccessible)error=ERROR_ACCESS_DENIED;
+    return error;
+}
 static DWORD WINAPI frontend_pump(void *context)
 {
     frontend_session_service *scope=context;
-    HANDLE waits[5];
+    HANDLE waits[6];
     DWORD error=ERROR_SUCCESS;
     for (;;) {
-        DWORD wait_count=0,retire_index=MAXDWORD,creator_index=MAXDWORD,wait;
+        DWORD wait_count=0,retire_index=MAXDWORD,creator_index=MAXDWORD,
+            anchor_index=MAXDWORD,wait;
         waits[wait_count++]=scope->stop;
         waits[wait_count++]=scope->notification;
         if(scope->retire && !scope->retire_requested) {
             retire_index=wait_count;waits[wait_count++]=scope->retire;
         }
         if(scope->creator && !scope->creator_exited) { creator_index=wait_count;waits[wait_count++]=scope->creator; }
+        if(scope->console_anchor) { anchor_index=wait_count;waits[wait_count++]=scope->console_anchor; }
         if(scope->state_changed) waits[wait_count++]=scope->state_changed;
         wait=WaitForMultipleObjects(wait_count,waits,FALSE,INFINITE);
         if (wait==WAIT_OBJECT_0) break;
@@ -37,6 +76,34 @@ static DWORD WINAPI frontend_pump(void *context)
             scope->retire_requested=TRUE;
         if(creator_index!=MAXDWORD && wait==WAIT_OBJECT_0+creator_index)
             scope->creator_exited=TRUE;
+        if(anchor_index!=MAXDWORD && wait==WAIT_OBJECT_0+anchor_index) {
+            CloseHandle(scope->console_anchor);scope->console_anchor=NULL;
+            error=next_console_anchor(&scope->console_anchor);
+            if(error==ERROR_NOT_FOUND)return ERROR_SUCCESS;
+            if(error)return error;
+        }
+        {
+            DWORD nonce=0,candidate=0,join;
+            while((join=OpenNtBaseClientFrontendJoinCandidate(&nonce,&candidate))==ERROR_SUCCESS) {
+                DWORD capacity=16,count=0,*members=NULL,index;
+                BOOL same=FALSE;
+                for(;;) {
+                    members=HeapAlloc(GetProcessHeap(),0,capacity*sizeof(*members));
+                    if(!members)return ERROR_NOT_ENOUGH_MEMORY;
+                    count=GetConsoleProcessList(members,capacity);
+                    if(!count || count<=capacity)break;
+                    HeapFree(GetProcessHeap(),0,members);members=NULL;
+                    if(count>4096)return ERROR_BUFFER_OVERFLOW;
+                    capacity=count;
+                }
+                if(count && count<=capacity)
+                    for(index=0;index<count;++index)if(members[index]==candidate){same=TRUE;break;}
+                HeapFree(GetProcessHeap(),0,members);
+                error=OpenNtBaseClientFrontendJoinDecision(nonce,same);
+                if(error)return error;
+            }
+            if(join!=ERROR_NOT_FOUND)return join;
+        }
         for (;;) {
             HANDLE worker=NULL;
             DWORD request=0;
@@ -56,6 +123,10 @@ static DWORD WINAPI frontend_pump(void *context)
             error=OpenNtBaseClientFrontendRequest(&request,&worker);
             if (error==ERROR_NOT_FOUND) break;
             if (error) return error;
+            if(!scope->native) {
+                error=run16_native_frontend_create(&scope->native);
+                if(error){CloseHandle(worker);return error;}
+            }
             entry=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*entry));
             if (!entry) { CloseHandle(worker);return ERROR_NOT_ENOUGH_MEMORY; }
             error=run16_console_channel_start_request(request,worker,scope->native,&entry->channel);
@@ -68,7 +139,7 @@ static DWORD WINAPI frontend_pump(void *context)
             scope->admitted=TRUE;
             if (scope->channel_ready) scope->channel_ready();
         }
-        if(scope->creator && (scope->creator_exited ||
+        if(scope->native && ((scope->creator && scope->creator_exited) ||
             (scope->admitted && scope->retire_requested))){
             DWORD pending=0,tasks=0;
             error=OpenNtBaseClientFrontendUsage(&pending,&tasks);
@@ -76,7 +147,7 @@ static DWORD WINAPI frontend_pump(void *context)
             /* NTSRV includes native admissions and reported Console members.
              * The frontend owns neither targets nor a second backend census. */
             if(pending || tasks)continue;
-            error=OpenNtBaseClientRetireFrontend();
+            error=scope->borrowed ? ERROR_SUCCESS : OpenNtBaseClientRetireFrontend();
             /* ERROR_BUSY is not retried on a timer. The root-private
              * auto-reset NTSRV state event remains signalled across a
              * mutation that races this attempt, then wakes this wait-set. */
@@ -92,7 +163,23 @@ static DWORD WINAPI frontend_pump(void *context)
                 scope->channels=entry->next;
                 HeapFree(GetProcessHeap(),0,entry);
             }
-            return run16_native_frontend_drain(scope->native);
+            error=run16_native_frontend_drain(scope->native);
+            if(error)return error;
+            if(!scope->borrowed)return ERROR_SUCCESS;
+            error=run16_native_frontend_destroy(scope->native);
+            if(error)return error;
+            scope->native=NULL;
+            scope->admitted=scope->retire_requested=FALSE;
+            scope->creator=NULL; /* First launcher is not the next phase's owner. */
+            if(!ResetEvent(scope->retire))return GetLastError();
+            error=OpenNtBaseClientFrontendLeaseReady();
+            if(error)return error;
+        }
+        if(scope->borrowed && !scope->native) {
+            DWORD retired=0;
+            error=OpenNtBaseClientRetireWorkerlessFrontend(&retired);
+            if(error)return error;
+            if(retired)return ERROR_SUCCESS;
         }
     }
     return ERROR_SUCCESS;
@@ -122,11 +209,12 @@ DWORD frontend_service_close(frontend_session_service *scope)
     if(error)return error;
     if(scope->stop)CloseHandle(scope->stop);
     if(scope->state_changed)CloseHandle(scope->state_changed);
+    if(scope->console_anchor)CloseHandle(scope->console_anchor);
     HeapFree(GetProcessHeap(),0,scope);
     return ERROR_SUCCESS;
 }
 static DWORD service_start(HANDLE capability,HANDLE notification,HANDLE creator,HANDLE retire,
-    void (*ready)(void),frontend_session_service **output)
+    HANDLE restored,BOOL borrowed,void (*ready)(void),frontend_session_service **output)
 {
     frontend_session_service *scope;
     DWORD error;
@@ -135,7 +223,11 @@ static DWORD service_start(HANDLE capability,HANDLE notification,HANDLE creator,
     scope=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*scope));
     if(!scope)return ERROR_NOT_ENOUGH_MEMORY;
     scope->capability=capability;scope->notification=notification;scope->channel_ready=ready;
-    scope->creator=creator;scope->retire=retire;
+    scope->creator=creator;scope->retire=retire;scope->restored=restored;scope->borrowed=borrowed;
+    if(borrowed) {
+        error=next_console_anchor(&scope->console_anchor);
+        if(error)goto fail;
+    }
     if(creator) {
         error=OpenNtBaseClientFrontendStateChanged(&scope->state_changed);
         if(error)goto fail;
@@ -152,12 +244,18 @@ fail:
 DWORD frontend_service_start(HANDLE capability,HANDLE notification,
     void (*ready)(void),frontend_session_service **output)
 {
-    return service_start(capability,notification,NULL,NULL,ready,output);
+    return service_start(capability,notification,NULL,NULL,NULL,FALSE,ready,output);
 }
 DWORD frontend_service_start_process(HANDLE capability,HANDLE notification,
     HANDLE creator,HANDLE retire,frontend_session_service **output)
 {
     if(!creator || !retire)return ERROR_INVALID_PARAMETER;
-    return service_start(capability,notification,creator,retire,NULL,output);
+    return service_start(capability,notification,creator,retire,NULL,FALSE,NULL,output);
+}
+DWORD frontend_service_start_process_lease(HANDLE capability,HANDLE notification,
+    HANDLE creator,HANDLE retire,HANDLE restored,BOOL borrowed,frontend_session_service **output)
+{
+    if(!creator || !retire || !restored)return ERROR_INVALID_PARAMETER;
+    return service_start(capability,notification,creator,retire,restored,borrowed,NULL,output);
 }
 HANDLE frontend_service_thread(frontend_session_service *scope){return scope ? scope->thread : NULL;}

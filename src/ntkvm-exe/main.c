@@ -18,7 +18,8 @@ static void bootstrap_trace(const char *stage,DWORD error)
     count=(DWORD)sprintf_s(text,sizeof(text),"ntkvm %s %lu\r\n",stage,error);
     if(count)WriteFile(file,text,count,&length,NULL);CloseHandle(file);
 }
-static DWORD session_entry(HANDLE pipe,HANDLE caller,HANDLE notification,HANDLE retire,HANDLE restored)
+static DWORD session_entry(HANDLE pipe,HANDLE caller,HANDLE notification,HANDLE retire,HANDLE restored,
+    BOOL lease,BOOL borrowed,uint64_t console_window)
 {
     DWORD pid=0,error,ignored;
     HANDLE event=NULL;
@@ -29,6 +30,8 @@ static DWORD session_entry(HANDLE pipe,HANDLE caller,HANDLE notification,HANDLE 
     if(!GetNamedPipeServerProcessId(pipe,&pid) || !pid || pid!=GetProcessId(caller) ||
         WaitForSingleObject(caller,0)!=WAIT_TIMEOUT){bootstrap_trace("identity",ERROR_ACCESS_DENIED);return ERROR_ACCESS_DENIED;}
     if(!AttachConsole(pid)){error=GetLastError();bootstrap_trace("attach",error);return error;}
+    if(lease && (uint64_t)(UINT_PTR)GetConsoleWindow()!=console_window)
+        {bootstrap_trace("console-match",ERROR_ACCESS_DENIED);return ERROR_ACCESS_DENIED;}
     event=CreateEventW(NULL,TRUE,FALSE,NULL);
     if(!event){error=GetLastError();goto done;}
     error=OpenNtBaseClientConnectCurrent();if(error){bootstrap_trace("connect",error);goto respond;}
@@ -36,7 +39,13 @@ static DWORD session_entry(HANDLE pipe,HANDLE caller,HANDLE notification,HANDLE 
     error=OpenNtBaseClientRegisterFrontendRoot(notification);if(error){bootstrap_trace("register",error);goto respond;}
     error=OpenNtBaseClientReportCurrentConsoleMembers();
     if(error){bootstrap_trace("console-identity",error);goto respond;}
-    error=frontend_service_start_process(notification,notification,caller,retire,&service);if(error){bootstrap_trace("service",error);goto respond;}
+    if(lease) {
+        error=OpenNtBaseClientRegisterFrontendLease(console_window,pid,borrowed,retire,restored);
+        if(error){bootstrap_trace("lease",error);goto respond;}
+        error=frontend_service_start_process_lease(notification,notification,caller,retire,
+            restored,borrowed,&service);
+    }else error=frontend_service_start_process(notification,notification,caller,retire,&service);
+    if(error){bootstrap_trace("service",error);goto respond;}
 respond:
     reply.status=error;
     {
@@ -74,14 +83,24 @@ int wmain(int argc,WCHAR **argv)
 {
     WCHAR *end;
     UINT_PTR pipe,caller,notification,retire,restored;
+    uint64_t console_window=0;
+    BOOL lease=FALSE,borrowed=FALSE;
     DWORD result;
-    if(argc!=7 || wcscmp(argv[1],L"--session"))return ERROR_INVALID_PARAMETER;
+    if((argc!=7 && argc!=9) || wcscmp(argv[1],L"--session"))return ERROR_INVALID_PARAMETER;
     pipe=(UINT_PTR)wcstoul(argv[2],&end,16);if(!pipe || *end)return ERROR_INVALID_PARAMETER;
     caller=(UINT_PTR)wcstoul(argv[3],&end,16);if(!caller || *end)return ERROR_INVALID_PARAMETER;
     notification=(UINT_PTR)wcstoul(argv[4],&end,16);if(!notification || *end)return ERROR_INVALID_PARAMETER;
     retire=(UINT_PTR)wcstoul(argv[5],&end,16);if(!retire || *end)return ERROR_INVALID_PARAMETER;
     restored=(UINT_PTR)wcstoul(argv[6],&end,16);if(!restored || *end)return ERROR_INVALID_PARAMETER;
+    if(argc==9) {
+        lease=TRUE;
+        if(wcscmp(argv[7],L"0") && wcscmp(argv[7],L"1"))return ERROR_INVALID_PARAMETER;
+        borrowed=!wcscmp(argv[7],L"1");
+        console_window=_wcstoui64(argv[8],&end,16);
+        if(!console_window || *end)return ERROR_INVALID_PARAMETER;
+    }
     CsrPortHeap=HeapCreate(0,0,0);if(!CsrPortHeap)return ERROR_NOT_ENOUGH_MEMORY;
-    result=session_entry((HANDLE)pipe,(HANDLE)caller,(HANDLE)notification,(HANDLE)retire,(HANDLE)restored);
+    result=session_entry((HANDLE)pipe,(HANDLE)caller,(HANDLE)notification,(HANDLE)retire,
+        (HANDLE)restored,lease,borrowed,console_window);
     HeapDestroy(CsrPortHeap);return (int)result;
 }

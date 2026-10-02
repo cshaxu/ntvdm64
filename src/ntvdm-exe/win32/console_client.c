@@ -4,6 +4,7 @@
 #include "interface/worker_console_client.h"
 #include "opennt-abi/host-compat/include/console_grid.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
+#include "worker-base/connection.h"
 #include "ntvdm-exe/softpc/mvdm_softpc_mouse_bridge.h"
 #include <stddef.h>
 #include <limits.h>
@@ -220,7 +221,10 @@ static DWORD console_command_ready(void *context)
 
 DWORD ntvdm_console_client_begin(session *owner)
 {
+    typedef BOOL (WINAPI *compare_handles)(HANDLE,HANDLE);
+    compare_handles compare;
     console_client *client;
+    HANDLE root=NULL;
     DWORD error;
     if (!owner || owner->console_client) return ERROR_INVALID_STATE;
     client=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*client));
@@ -233,6 +237,14 @@ DWORD ntvdm_console_client_begin(session *owner)
     if (!client->graphics) { error=GetLastError();console_client_end(client);return error; }
     error=OpenNtBaseClientWorkerFrontendCapability(&client->capability);
     if (error) { console_client_end(client);return error; }
+    /* The route's peer and the capability must name the same authenticated
+     * root. A short-lived launcher or a reused PID cannot substitute for it. */
+    error=worker_base_retain_frontend_root(client->capability,&root);
+    compare=(compare_handles)GetProcAddress(GetModuleHandleW(L"kernelbase.dll"),"CompareObjectHandles");
+    if(!error && !compare)error=ERROR_CALL_NOT_IMPLEMENTED;
+    if(!error && !compare(root,client->channel.peer))error=ERROR_ACCESS_DENIED;
+    if(root)CloseHandle(root);
+    if(error){console_client_end(client);return error;}
     error=ntkvm_worker_client_init(&client->channel,client->channel.pipe,
         client->channel.peer,NULL,client->channel.generation);
     if(error){console_client_end(client);return error;}

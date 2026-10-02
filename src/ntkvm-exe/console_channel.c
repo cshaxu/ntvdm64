@@ -31,6 +31,15 @@ static DWORD activate(void *context,BOOL active,DWORD kind)
         }
         break;
     } while(TRUE);
+    if(!error && active && !channel->native) {
+        HANDLE logical=NULL;
+        error=run16_native_frontend_dos_console(channel->root,&logical);
+        if(!error) {
+            CloseHandle(channel->console.output);
+            channel->console.output=logical;
+        } else (void)run16_native_frontend_dos_bind(channel->root,channel,FALSE);
+    }
+    if(!error && active && channel->native)channel->console.logical_window=NULL;
     if(error && active && !channel->native)
         run16_native_frontend_cancel_dos_pending(channel->root,channel);
     /* A released worker's cached frame predates the new owner's geometry.
@@ -59,7 +68,11 @@ static DWORD screen_begin(void *context)
 }
 static DWORD screen_end(void *context,BOOL write)
 {
-    return run16_native_frontend_screen_end(((run16_console_channel *)context)->root,write);
+    run16_console_channel *channel=context;
+    DWORD error=run16_native_frontend_screen_end(channel->root,write);
+    if(!error && write && !channel->native)
+        error=run16_native_frontend_project_dos(channel->root);
+    return error;
 }
 static DWORD snapshot_begin(void *context)
 {

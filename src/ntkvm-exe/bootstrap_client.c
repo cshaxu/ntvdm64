@@ -14,7 +14,8 @@ void frontend_bootstrap_release(frontend_connection *connection)
     if(connection->process)CloseHandle(connection->process);
     ZeroMemory(connection,sizeof(*connection));
 }
-DWORD frontend_bootstrap_start(PCWSTR image,frontend_connection *output)
+static DWORD bootstrap_start(PCWSTR image,BOOL lease,BOOL borrowed,uint64_t console_window,
+    frontend_connection *output)
 {
     static LONG serial;
     WCHAR name[96],command[1024];
@@ -68,9 +69,12 @@ DWORD frontend_bootstrap_start(PCWSTR image,frontend_connection *output)
     attributes=TRUE;inherited[0]=child_pipe;inherited[1]=caller;inherited[2]=notification;inherited[3]=retire;inherited[4]=restored;
     if(!UpdateProcThreadAttribute(startup.lpAttributeList,0,PROC_THREAD_ATTRIBUTE_HANDLE_LIST,
         inherited,sizeof(inherited),NULL,NULL)){error=GetLastError();goto done;}
-    if(swprintf_s(command,1024,L"\"%ls\" --session %Ix %Ix %Ix %Ix %Ix",image,
+    if((lease ? swprintf_s(command,1024,L"\"%ls\" --session %Ix %Ix %Ix %Ix %Ix %u %I64x",image,
         (UINT_PTR)child_pipe,(UINT_PTR)caller,(UINT_PTR)notification,(UINT_PTR)retire,
-        (UINT_PTR)restored)<0){error=ERROR_FILENAME_EXCED_RANGE;goto done;}
+        (UINT_PTR)restored,borrowed!=FALSE,console_window) :
+        swprintf_s(command,1024,L"\"%ls\" --session %Ix %Ix %Ix %Ix %Ix",image,
+        (UINT_PTR)child_pipe,(UINT_PTR)caller,(UINT_PTR)notification,(UINT_PTR)retire,
+        (UINT_PTR)restored))<0){error=ERROR_FILENAME_EXCED_RANGE;goto done;}
     if(!CreateProcessW(image,command,NULL,NULL,TRUE,EXTENDED_STARTUPINFO_PRESENT|DETACHED_PROCESS,
         NULL,NULL,&startup.StartupInfo,&process)){error=GetLastError();goto done;}
     CloseHandle(process.hThread);process.hThread=NULL;
@@ -113,4 +117,14 @@ done:
     if(startup.lpAttributeList)HeapFree(GetProcessHeap(),0,startup.lpAttributeList);
     if(error)frontend_bootstrap_release(output);
     return error;
+}
+DWORD frontend_bootstrap_start(PCWSTR image,frontend_connection *output)
+{
+    return bootstrap_start(image,FALSE,FALSE,0,output);
+}
+DWORD frontend_bootstrap_start_lease(PCWSTR image,BOOL borrowed,uint64_t console_window,
+    frontend_connection *output)
+{
+    if(!console_window)return ERROR_INVALID_HANDLE;
+    return bootstrap_start(image,TRUE,borrowed,console_window,output);
 }

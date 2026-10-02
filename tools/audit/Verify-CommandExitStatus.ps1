@@ -147,10 +147,10 @@ $matrix = @(
     # loop.  Pace complete lines so the next key sequence is not offered while
     # the original keyboard queue is between those two owners.
     @{ Name='nested-empty'; Text="command`rexit`rexit`r"; LineDelayMs=1000; Code=1; ConsoleMarkers=@('Microsoft(R) Windows NT DOS'); ConsoleMarkerCount=2 },
-    @{ Name='nested-mem'; Text="command`rcommand`rmem`rexit`rmem`rexit`rmem`rexit`r"; LineDelayMs=1000; Code=1; ConsoleMarkers=@('bytes total conventional memory'); ConsoleMarkerCount=3 },
-    @{ Name='nested-mem-typeahead'; Supplemental=$true; Text="command`rcommand`rmem`rexit`rmem`rexit`rmem`rexit`r"; LineDelayMs=0; Code=1; ConsoleMarkers=@('bytes total conventional memory'); ConsoleMarkerCount=3 },
+    @{ Name='nested-mem'; Text="command`rcommand`rmem`rexit`rmem`rexit`rmem`rexit`r"; LineDelayMs=1000; Code=1; ConsoleMarkers=@('bytes total conventional memory'); SequentialMemLines=@(3,5,7) },
+    @{ Name='nested-mem-typeahead'; Supplemental=$true; Text="command`rcommand`rmem`rexit`rmem`rexit`rmem`rexit`r"; LineDelayMs=0; Code=1; ConsoleMarkers=@('bytes total conventional memory'); SequentialMemWitnessCount=3 },
     @{ Name='interactive-native-dos-return'; Supplemental=$true; Text="cmd`rrun16 command`rmem`rexit`recho window-native-return`rexit`rmem`rexit`r"; LineDelayMs=1000; Code=1; ConsoleMarkers=@('bytes total conventional memory'); ConsoleMarkerCount=2; ExactConsoleLines=@('window-native-return') },
-    @{ Name='mem-repeat'; Text="mem`rmem`rexit`r"; Code=1; ConsoleMarkers=@('bytes total conventional memory') },
+    @{ Name='mem-repeat'; Text="mem`rmem`rexit`r"; Code=1; ConsoleMarkers=@('bytes total conventional memory'); SequentialMemLines=@(1,2) },
     @{ Name='direct-mem'; Args=@('MEM.EXE'); Code=0; ConsoleMarkers=@('bytes total conventional memory') },
     @{ Name='command-c'; Args=@('COMMAND.COM','/c','ver'); Code=0; ConsoleMarkers=@('MS-DOS Version') },
     # Original COMMAND::LodCom1 -> FatalRet2 uses AX=4C00, not RetCode.
@@ -353,6 +353,44 @@ try {
             foreach($marker in $case.ConsoleMarkers) {
                 if ($screenForMarkers -notmatch [regex]::Escape(($marker -replace '\s',''))) {
                     throw "Missing guest Console marker for $($case.Name): $marker"
+                }
+            }
+            foreach($lineNumber in $case.SequentialMemLines) {
+                $linePath='{0}.line-{1:d2}.console.txt' -f $report,$lineNumber
+                if(!(Test-Path -LiteralPath $linePath)) {
+                    throw "Missing per-command Console snapshot for $($case.Name): line $lineNumber"
+                }
+                $step=Get-Content -LiteralPath $linePath -Raw
+                $plain=($step -replace '(?m)^\[\d+\]\s?','') -replace '\s',''
+                $commandAt=$plain.LastIndexOf('>mem',[StringComparison]::OrdinalIgnoreCase)
+                if($commandAt -lt 0 -or
+                    $plain.IndexOf('bytestotalconventionalmemory',$commandAt,[StringComparison]::OrdinalIgnoreCase) -lt 0) {
+                    throw "MEM output did not follow its own command in $($case.Name): line $lineNumber"
+                }
+            }
+            if ($case.SequentialMemWitnessCount) {
+                # Zero-delay typeahead snapshots can precede their command's
+                # output.  Observe every subsequent snapshot instead of
+                # requiring output in the snapshot taken at key delivery.
+                # Nested MEM reports a distinct executable-size value at
+                # each depth, so each new completed report is one witness.
+                $witnesses=[System.Collections.Generic.HashSet[string]]::new()
+                $lineCount=($case.Text.ToCharArray() | Where-Object { $_ -eq "`r" }).Count
+                for($lineNumber=1; $lineNumber -le $lineCount; $lineNumber++) {
+                    $linePath='{0}.line-{1:d2}.console.txt' -f $report,$lineNumber
+                    if(!(Test-Path -LiteralPath $linePath)) {
+                        throw "Missing typeahead Console snapshot for $($case.Name): line $lineNumber"
+                    }
+                    $step=Get-Content -LiteralPath $linePath -Raw
+                    $plain=($step -replace '(?m)^\[\d+\]\s?','') -replace '\s',''
+                    if($plain -match '>mem' -and $plain -match 'bytestotalconventionalmemory') {
+                        foreach($size in [regex]::Matches($plain,'(\d+)largestexecutableprogramsize')) {
+                            [void]$witnesses.Add($size.Groups[1].Value)
+                        }
+                    }
+                }
+                if($witnesses.Count -ne $case.SequentialMemWitnessCount) {
+                    throw "Expected $($case.SequentialMemWitnessCount) distinct completed MEM reports in $($case.Name), observed $($witnesses.Count)"
                 }
             }
             if ($case.ConsoleMarkerCount -and

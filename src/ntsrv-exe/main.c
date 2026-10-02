@@ -326,6 +326,49 @@ error_status_t Server_RegisterFrontendRoot(handle_t binding,VDM_CONNECTION conne
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
     return error ? error : OpenNtBaseServiceRegisterFrontendRoot(connection,pid,generation,capability);
 }
+error_status_t Server_AcquireFrontendRoot(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+    ULONG generation,LONGLONG console_window,ULONG *create_root,HANDLE *root,HANDLE *capability,
+    HANDLE *retire,HANDLE *restored)
+{
+    DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    if(error)return error;
+    return OpenNtBaseServiceAcquireFrontendRoot(connection,pid,generation,(uint64_t)console_window,
+        create_root,root,capability,retire,restored);
+}
+error_status_t Server_CancelFrontendRootReservation(handle_t binding,VDM_CONNECTION connection,
+    HANDLE process,ULONG generation)
+{
+    DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    return error ? error : OpenNtBaseServiceCancelFrontendRootReservation(connection,pid,generation);
+}
+error_status_t Server_RegisterFrontendLease(handle_t binding,VDM_CONNECTION connection,
+    HANDLE process,ULONG generation,LONGLONG console_window,ULONG creator_pid,ULONG borrowed,
+    HANDLE retire,HANDLE restored)
+{
+    DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    return error ? error : OpenNtBaseServiceRegisterFrontendLease(connection,pid,generation,
+        (uint64_t)console_window,creator_pid,borrowed!=0,retire,restored);
+}
+error_status_t Server_FrontendJoinCandidate(handle_t binding,VDM_CONNECTION connection,
+    HANDLE process,ULONG generation,ULONG *nonce,ULONG *candidate_pid)
+{
+    DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    return error ? error : OpenNtBaseServiceFrontendJoinCandidate(connection,pid,generation,
+        nonce,candidate_pid);
+}
+error_status_t Server_FrontendJoinDecision(handle_t binding,VDM_CONNECTION connection,
+    HANDLE process,ULONG generation,ULONG nonce,ULONG same_console)
+{
+    DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    return error ? error : OpenNtBaseServiceFrontendJoinDecision(connection,pid,generation,
+        nonce,same_console!=0);
+}
+error_status_t Server_FrontendLeaseReady(handle_t binding,VDM_CONNECTION connection,
+    HANDLE process,ULONG generation)
+{
+    DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    return error ? error : OpenNtBaseServiceFrontendLeaseReady(connection,pid,generation);
+}
 error_status_t Server_RetainFrontendRoot(handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,HANDLE capability,HANDLE *root,ULONG *root_generation)
 {
@@ -343,6 +386,15 @@ error_status_t Server_FrontendUsage(handle_t binding,VDM_CONNECTION connection,H
     *pending=*tasks=0;
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
     return error ? error : OpenNtBaseServiceFrontendUsage(connection,pid,generation,pending,tasks);
+}
+error_status_t Server_RetireWorkerlessFrontend(handle_t binding,VDM_CONNECTION connection,
+    HANDLE process,ULONG generation,ULONG *retired)
+{
+    DWORD pid,error;
+    if(!retired)return ERROR_INVALID_PARAMETER;
+    *retired=0;
+    error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    return error ? error : OpenNtBaseServiceRetireWorkerlessFrontend(connection,pid,generation,retired);
 }
 error_status_t Server_FrontendStateChanged(handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,HANDLE *state_changed)
@@ -716,7 +768,7 @@ int main(void)
         (void)OpenNtBaseServiceStop(service);
         return (int)error;
     }
-    result=RpcServerRegisterIf3(Server_vdm_service_v25_0_s_ifspec,NULL,NULL,
+    result=RpcServerRegisterIf3(Server_vdm_service_v26_0_s_ifspec,NULL,NULL,
         RPC_IF_ALLOW_SECURE_ONLY | RPC_IF_ALLOW_LOCAL_ONLY,RPC_C_LISTEN_MAX_CALLS_DEFAULT,
         (unsigned)-1,authorize,NULL);
     if (!result) {
@@ -740,7 +792,7 @@ int main(void)
         if (result) basesrv_idle_fatal("RpcMgmtWaitServerListen",result);
     }
     {
-        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v25_0_s_ifspec,NULL,TRUE);
+        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v26_0_s_ifspec,NULL,TRUE);
         if (!result && cleanup) result=cleanup;
     }
     if (idle_timer) CloseHandle(idle_timer);

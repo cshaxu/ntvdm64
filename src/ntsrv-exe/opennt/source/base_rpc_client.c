@@ -474,7 +474,7 @@ static DWORD classify_missing_interface(RPC_BINDING_HANDLE binding)
     RPC_STATUS status,uuid_status;
     unsigned int index;
     DWORD result=RPC_S_SERVER_UNAVAILABLE;
-    status=RpcIfInqId(Client_vdm_service_v25_0_c_ifspec,&expected);
+    status=RpcIfInqId(Client_vdm_service_v26_0_c_ifspec,&expected);
     if (status) return status;
     status=RpcMgmtInqIfIds(binding,&interfaces);
     if (status) return status;
@@ -799,6 +799,89 @@ DWORD OpenNtBaseClientRegisterFrontendRoot(HANDLE capability)
     RpcEndExcept
     return error;
 }
+DWORD OpenNtBaseClientAcquireFrontendRoot(uint64_t console_window,DWORD *create_root,
+    HANDLE *root,HANDLE *capability,HANDLE *retire,HANDLE *restored)
+{
+    DWORD error=ERROR_INVALID_STATE;
+    if(!create_root || !root || !capability || !retire || !restored)return ERROR_INVALID_PARAMETER;
+    *create_root=0;*root=*capability=*retire=*restored=NULL;
+    if(!client.connection || !client.binding || !client.process)return error;
+    RpcTryExcept {
+        error=Client_AcquireFrontendRoot(client.binding,client.connection,client.process,
+            client.generation,(LONGLONG)console_window,create_root,root,capability,retire,restored);
+    }
+    RpcExcept(1){error=RpcExceptionCode();}
+    RpcEndExcept
+    if(error){
+        if(*root)CloseHandle(*root);if(*capability)CloseHandle(*capability);
+        if(*retire)CloseHandle(*retire);if(*restored)CloseHandle(*restored);
+        *root=*capability=*retire=*restored=NULL;*create_root=0;
+    }
+    return error;
+}
+DWORD OpenNtBaseClientCancelFrontendRootReservation(void)
+{
+    DWORD error=ERROR_INVALID_STATE;
+    if(!client.connection || !client.binding || !client.process)return error;
+    RpcTryExcept {
+        error=Client_CancelFrontendRootReservation(client.binding,client.connection,
+            client.process,client.generation);
+    }
+    RpcExcept(1){error=RpcExceptionCode();}
+    RpcEndExcept
+    return error;
+}
+DWORD OpenNtBaseClientRegisterFrontendLease(uint64_t console_window,DWORD creator_pid,
+    BOOL borrowed,HANDLE retire,HANDLE restored)
+{
+    DWORD error=ERROR_INVALID_STATE;
+    if(!client.connection || !client.binding || !client.process)return error;
+    RpcTryExcept {
+        error=Client_RegisterFrontendLease(client.binding,client.connection,client.process,
+            client.generation,(LONGLONG)console_window,creator_pid,borrowed!=FALSE,retire,restored);
+    }
+    RpcExcept(1){error=RpcExceptionCode();}
+    RpcEndExcept
+    return error;
+}
+DWORD OpenNtBaseClientFrontendJoinCandidate(DWORD *nonce,DWORD *candidate_pid)
+{
+    DWORD error=ERROR_INVALID_STATE;
+    if(!nonce || !candidate_pid)return ERROR_INVALID_PARAMETER;
+    *nonce=*candidate_pid=0;
+    if(!client.connection || !client.binding || !client.process)return error;
+    RpcTryExcept {
+        error=Client_FrontendJoinCandidate(client.binding,client.connection,client.process,
+            client.generation,nonce,candidate_pid);
+    }
+    RpcExcept(1){error=RpcExceptionCode();}
+    RpcEndExcept
+    return error;
+}
+DWORD OpenNtBaseClientFrontendJoinDecision(DWORD nonce,BOOL same_console)
+{
+    DWORD error=ERROR_INVALID_STATE;
+    if(!client.connection || !client.binding || !client.process)return error;
+    RpcTryExcept {
+        error=Client_FrontendJoinDecision(client.binding,client.connection,client.process,
+            client.generation,nonce,same_console!=FALSE);
+    }
+    RpcExcept(1){error=RpcExceptionCode();}
+    RpcEndExcept
+    return error;
+}
+DWORD OpenNtBaseClientFrontendLeaseReady(void)
+{
+    DWORD error=ERROR_INVALID_STATE;
+    if(!client.connection || !client.binding || !client.process)return error;
+    RpcTryExcept {
+        error=Client_FrontendLeaseReady(client.binding,client.connection,client.process,
+            client.generation);
+    }
+    RpcExcept(1){error=RpcExceptionCode();}
+    RpcEndExcept
+    return error;
+}
 
 DWORD OpenNtBaseClientFrontendUsage(DWORD *pending,DWORD *tasks)
 {
@@ -812,6 +895,21 @@ DWORD OpenNtBaseClientFrontendUsage(DWORD *pending,DWORD *tasks)
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
     if(!error){*pending=local_pending;*tasks=local_tasks;}
+    return error;
+}
+
+DWORD OpenNtBaseClientRetireWorkerlessFrontend(DWORD *retired)
+{
+    DWORD error=ERROR_INVALID_STATE,local=0;
+    if(!retired)return ERROR_INVALID_PARAMETER;
+    if(!client.connection || !client.binding || !client.process)return error;
+    RpcTryExcept {
+        error=Client_RetireWorkerlessFrontend(client.binding,client.connection,
+            client.process,client.generation,&local);
+    }
+    RpcExcept(1) { error=RpcExceptionCode(); }
+    RpcEndExcept
+    if(!error)*retired=local;
     return error;
 }
 

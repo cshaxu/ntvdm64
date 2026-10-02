@@ -38,6 +38,13 @@ DWORD frontend_bootstrap_start(PCWSTR image,frontend_connection *connection)
     error=frontend_service_start(notification,notification,attached,&fixture_service);
     return error;
 }
+DWORD frontend_bootstrap_start_lease(PCWSTR image,BOOL borrowed,uint64_t window,
+    frontend_connection *connection)
+{ (void)borrowed;(void)window;return frontend_bootstrap_start(image,connection); }
+DWORD OpenNtBaseClientAcquireFrontendRoot(uint64_t window,DWORD *create_root,
+    HANDLE *root,HANDLE *capability,HANDLE *retire,HANDLE *restored)
+{ (void)window;*create_root=1;*root=*capability=*retire=*restored=NULL;return 0; }
+DWORD OpenNtBaseClientCancelFrontendRootReservation(void){return 0;}
 void frontend_bootstrap_release(frontend_connection *connection)
 {
     if(connection->capability)CloseHandle(connection->capability);
@@ -82,6 +89,11 @@ DWORD OpenNtBaseClientRetireFrontend(void)
     if(attempt==1) { CHECK(SetEvent(retirement_state)); return ERROR_BUSY; }
     return ERROR_SUCCESS;
 }
+DWORD OpenNtBaseClientRetireWorkerlessFrontend(DWORD *retired)
+{
+    *retired=0;
+    return ERROR_SUCCESS;
+}
 DWORD run16_native_frontend_destroy(run16_native_frontend *value) { if(value)HeapFree(GetProcessHeap(),0,value);return 0; }
 DWORD run16_native_worker_request_submit(HANDLE worker,HANDLE capability,const run16_native_start *start,HANDLE *out,HANDLE *receipt)
 { (void)worker;(void)capability;(void)start;*out=*receipt=NULL;return ERROR_NOT_SUPPORTED; }
@@ -110,6 +122,11 @@ DWORD OpenNtBaseClientRegisterFrontendRoot(HANDLE value)
     return DuplicateHandle(GetCurrentProcess(),value,GetCurrentProcess(),
         &notification,0,FALSE,DUPLICATE_SAME_ACCESS) ? 0 : GetLastError();
 }
+DWORD OpenNtBaseClientFrontendJoinCandidate(DWORD *nonce,DWORD *pid)
+{*nonce=*pid=0;return ERROR_NOT_FOUND;}
+DWORD OpenNtBaseClientFrontendJoinDecision(DWORD nonce,BOOL same)
+{(void)nonce;(void)same;return ERROR_INVALID_STATE;}
+DWORD OpenNtBaseClientFrontendLeaseReady(void){return ERROR_INVALID_STATE;}
 DWORD OpenNtBaseClientRetainFrontendRoot(HANDLE value,HANDLE *root,DWORD *generation)
 {
     (void)value;

@@ -65,6 +65,18 @@ DWORD OpenNtBaseServiceRetainPeer(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD gener
  * caller closes the process. No task or worker selection occurs here. */
 DWORD OpenNtBaseServiceRegisterFrontendRoot(OPENNT_BASE_CONNECTION *,DWORD pid,
     DWORD generation,HANDLE capability);
+DWORD OpenNtBaseServiceAcquireFrontendRoot(OPENNT_BASE_CONNECTION *,DWORD pid,
+    DWORD generation,uint64_t console_window,DWORD *create_root,HANDLE *root,
+    HANDLE *capability,HANDLE *retire,HANDLE *restored);
+DWORD OpenNtBaseServiceCancelFrontendRootReservation(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation);
+DWORD OpenNtBaseServiceRegisterFrontendLease(OPENNT_BASE_CONNECTION *,DWORD pid,
+    DWORD generation,uint64_t console_window,DWORD creator_pid,BOOL borrowed,
+    HANDLE retire,HANDLE restored);
+DWORD OpenNtBaseServiceFrontendJoinCandidate(OPENNT_BASE_CONNECTION *,DWORD pid,
+    DWORD generation,DWORD *nonce,DWORD *candidate_pid);
+DWORD OpenNtBaseServiceFrontendJoinDecision(OPENNT_BASE_CONNECTION *,DWORD pid,
+    DWORD generation,DWORD nonce,BOOL same_console);
+DWORD OpenNtBaseServiceFrontendLeaseReady(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation);
 DWORD OpenNtBaseServiceRetainFrontendRoot(OPENNT_BASE_CONNECTION *,DWORD pid,
     DWORD generation,HANDLE capability,HANDLE *root,DWORD *root_generation);
 /* Native backend registration is separate from original DOS/WOW records.
@@ -106,6 +118,8 @@ DWORD OpenNtBaseServiceFrontendRequest(OPENNT_BASE_CONNECTION *,DWORD pid,
  * Pending attachment is distinct from active original DOS records. */
 DWORD OpenNtBaseServiceFrontendUsage(OPENNT_BASE_CONNECTION *,DWORD pid,
     DWORD generation,DWORD *pending,DWORD *tasks);
+DWORD OpenNtBaseServiceRetireWorkerlessFrontend(OPENNT_BASE_CONNECTION *,DWORD pid,
+    DWORD generation,DWORD *retired);
 DWORD OpenNtBaseServiceFrontendStateChanged(OPENNT_BASE_CONNECTION *,DWORD pid,
     DWORD generation,HANDLE *state_changed);
 DWORD OpenNtBaseServiceWorkerStateChanged(OPENNT_BASE_CONNECTION *,DWORD pid,

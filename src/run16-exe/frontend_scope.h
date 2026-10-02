@@ -5,6 +5,7 @@
 typedef struct run16_frontend_scope run16_frontend_scope;
 /* Requires the caller's connected BaseClient. End before disconnecting it. */
 DWORD run16_frontend_scope_begin(run16_frontend_scope **);
+DWORD run16_frontend_scope_begin_lease(run16_frontend_scope **,BOOL console_owned);
 void run16_frontend_scope_end(run16_frontend_scope *);
 HANDLE run16_frontend_scope_capability(run16_frontend_scope *);
 BOOL run16_frontend_scope_has_execution(run16_frontend_scope *);

@@ -1,7 +1,7 @@
 import "wtypes.idl";
 [
     uuid(7d3e78bd-0472-4736-8797-e64e966d692e),
-    version(25.0),
+    version(26.0),
     pointer_default(unique)
 ]
 interface vdm_service
@@ -77,6 +77,42 @@ interface vdm_service
         [in, system_handle(sh_process)] HANDLE process,
         [in] unsigned long generation,
         [in, system_handle(sh_event)] HANDLE capability);
+    /* Console window is a serialized selection key, never authorization.
+     * The root verifies a proposed launcher against its live Console list. */
+    error_status_t AcquireFrontendRoot(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation, [in] hyper console_window,
+        [out] unsigned long *create_root,
+        [out, system_handle(sh_process)] HANDLE *root,
+        [out, system_handle(sh_event)] HANDLE *capability,
+        [out, system_handle(sh_event)] HANDLE *retire,
+        [out, system_handle(sh_event)] HANDLE *restored);
+    error_status_t CancelFrontendRootReservation(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation);
+    error_status_t RegisterFrontendLease(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation, [in] hyper console_window,
+        [in] unsigned long creator_pid, [in] unsigned long borrowed,
+        [in, system_handle(sh_event)] HANDLE retire,
+        [in, system_handle(sh_event)] HANDLE restored);
+    error_status_t FrontendJoinCandidate(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [out] unsigned long *nonce, [out] unsigned long *candidate_pid);
+    error_status_t FrontendJoinDecision(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation, [in] unsigned long nonce,
+        [in] unsigned long same_console);
+    error_status_t FrontendLeaseReady(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation);
     error_status_t RetainFrontendRoot(
         [in] handle_t binding,
         [in] VDM_CONNECTION connection,
@@ -347,6 +383,11 @@ interface vdm_service
         [in] unsigned long generation,
         [out] unsigned long *pending,
         [out] unsigned long *tasks);
+    error_status_t RetireWorkerlessFrontend(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [out] unsigned long *retired);
     /* Root-private auto-reset state event. It is separate from the
      * request-ready capability and wakes retirement retry only. */
     error_status_t FrontendStateChanged(

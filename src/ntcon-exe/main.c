@@ -13,7 +13,7 @@ PVOID CsrPortHeap;
 
 typedef struct native_membership {
     HANDLE quit,thread,capability,stop_requested,closed,admission_ready;
-    HANDLE pipe,frontend,ready;
+    HANDLE pipe,frontend,ready,root;
     ntcon_presentation *presentation;
     CRITICAL_SECTION *lock;
     console_text_style font;
@@ -28,8 +28,7 @@ static void membership_detach_presentation(native_membership *state)
     if(state->pipe)CloseHandle(state->pipe);
     if(state->frontend)CloseHandle(state->frontend);
     if(state->ready)CloseHandle(state->ready);
-    if(state->capability)CloseHandle(state->capability);
-    state->pipe=state->frontend=state->ready=state->capability=NULL;
+    state->pipe=state->frontend=state->ready=NULL;
     state->presenting=FALSE;
     if(state->admission_ready)ResetEvent(state->admission_ready);
 }
@@ -123,18 +122,23 @@ static DWORD take_presentation(native_membership *state)
 static DWORD presentation_loop(void *context)
 {
     native_membership *state=context;DWORD error=0;
-    while(WaitForSingleObject(state->quit,30)==WAIT_TIMEOUT) {
+    HANDLE waits[2]={state->quit,state->root};
+    DWORD wait;
+    while((wait=WaitForMultipleObjects(2,waits,FALSE,30))!=WAIT_OBJECT_0) {
         EnterCriticalSection(state->lock);
-        if(WaitForSingleObject(state->stop_requested,0)==WAIT_OBJECT_0) {
+        if(wait==WAIT_OBJECT_0+1 || WaitForSingleObject(state->stop_requested,0)==WAIT_OBJECT_0) {
             error=ntcon_console_close();
             if(!error && !SetEvent(state->closed))error=GetLastError();
-            /* Explicit registered-session shutdown, never launcher death.
-             * Close acknowledgment precedes worker termination. Do not wait
-             * on the main thread's service request while the broker waits
-             * for this worker to terminate. No descendant enumeration. */
+            /* The authenticated root's exit is Console-session closure,
+             * just as it is for NTVDM. Closing a direct launcher is not.
+             * Explicit management close uses this same backend operation. */
             TerminateProcess(GetCurrentProcess(),error ? error : ERROR_CANCELLED);
             LeaveCriticalSection(state->lock);
             return error ? error : ERROR_CANCELLED;
+        }
+        if(wait!=WAIT_TIMEOUT) {
+            error=wait==WAIT_FAILED ? GetLastError() : ERROR_INVALID_STATE;
+            LeaveCriticalSection(state->lock);return error;
         }
         error=take_presentation(state);
         if(!error && state->presentation && (state->users || state->admissions)) {
@@ -169,9 +173,8 @@ static DWORD presentation_loop(void *context)
             if(error==ERROR_RETRY)error=0;
         }
         if(error==ERROR_PIPE_NOT_CONNECTED || error==ERROR_BROKEN_PIPE) {
-            /* Root/frontend loss revokes copied I/O only.  Preserve the
-             * resident worker and every actual native Console member for a
-             * later broker-authorized route. */
+            /* A route can fail before the root process exits. Retain its
+             * authenticated identity while dropping only the I/O pipe. */
             membership_detach_presentation(state);error=0;
         }
         LeaveCriticalSection(state->lock);
@@ -185,16 +188,15 @@ static DWORD WINAPI presentation_pump(void *context)
     DWORD error=presentation_loop(context);
     ntcon_trace_error("pump",0,error);
     if(!error || WaitForSingleObject(state->quit,0)!=WAIT_TIMEOUT)return error;
-    /* Only an unrecoverable worker-side failure reaches here. Frontend pipe
-     * loss is detached in presentation_loop and cannot kill a live worker. */
+    /* Only an unrecoverable worker-side failure reaches here. A worker whose
+     * presentation watcher has stopped cannot remain resident: it would no
+     * longer observe its root's Console-session close, even while idle. */
     EnterCriticalSection(state->lock);
-    if(state->users) {
-        SetEvent(state->stop_requested);
-        (void)ntcon_console_close();
-        /* Main can be blocked in GetNextCommand; do not wait on that RPC
-         * to report an unrecoverable worker-side presentation failure. */
-        TerminateProcess(GetCurrentProcess(),error);
-    }
+    SetEvent(state->stop_requested);
+    (void)ntcon_console_close();
+    /* Main can be blocked in GetNextCommand; do not wait on that RPC
+     * to report an unrecoverable worker-side presentation failure. */
+    TerminateProcess(GetCurrentProcess(),error);
     LeaveCriticalSection(state->lock);
     return error;
 }
@@ -208,6 +210,7 @@ static void membership_close(native_membership *state)
     if(state->frontend)CloseHandle(state->frontend);
     if(state->ready)CloseHandle(state->ready);
     if(state->quit)CloseHandle(state->quit);
+    if(state->root)CloseHandle(state->root);
     if(state->capability)CloseHandle(state->capability);
     if(state->stop_requested)CloseHandle(state->stop_requested);
     if(state->closed)CloseHandle(state->closed);
@@ -239,8 +242,10 @@ static DWORD membership_bind(native_membership *state,HANDLE frontend)
     state->closed=CreateEventW(NULL,TRUE,FALSE,NULL);
     state->admission_ready=CreateEventW(NULL,TRUE,FALSE,NULL);
     if(!state->quit || !state->stop_requested || !state->closed || !state->admission_ready)error=GetLastError();
-    else if(!DuplicateHandle(GetCurrentProcess(),frontend,GetCurrentProcess(),&state->capability,SYNCHRONIZE,FALSE,0))error=GetLastError();
-    else error=OpenNtBaseClientRegisterNativeBackend(frontend,state->stop_requested,state->closed);
+    else error=worker_base_retain_frontend_root(frontend,&state->root);
+    if(!error && !DuplicateHandle(GetCurrentProcess(),frontend,GetCurrentProcess(),
+        &state->capability,SYNCHRONIZE,FALSE,0))error=GetLastError();
+    if(!error)error=OpenNtBaseClientRegisterNativeBackend(frontend,state->stop_requested,state->closed);
     if(!error) {
         state->thread=CreateThread(NULL,0,presentation_pump,state,0,NULL);
         if(!state->thread)error=GetLastError();
@@ -305,6 +310,14 @@ int wmain(int argc,WCHAR **argv)
                 DWORD completion=ntcon_complete_next_command(command.request);
                 if(completion)ntcon_executions_note_broker_failure(requests,completion);
                 ntcon_dispose_next_command(&command);
+            }
+            if(binding==ERROR_PIPE_NOT_CONNECTED || binding==ERROR_ACCESS_DENIED) {
+                /* The first root may disappear before membership is bound.
+                 * Let the request's structured failure reach its launcher,
+                 * then leave instead of becoming an unowned EMPTY worker. */
+                DWORD drained=ntcon_executions_wait_idle(requests);
+                error=drained ? drained : binding;
+                break;
             }
             continue;
         }

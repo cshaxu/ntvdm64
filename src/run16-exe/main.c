@@ -728,7 +728,7 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
             goto done;
         }
         result=connect_broker();
-        if (!result) result=run16_frontend_scope_begin(&frontend_scope);
+        if (!result) result=run16_frontend_scope_begin_lease(&frontend_scope,initial_console_only);
         if (!result) result=OpenNtBaseClientWatchBroker();
         if (result) goto done;
         result=launch_native(frontend_scope,application,shell_command);
@@ -795,7 +795,7 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
         if (!result)
         {
             if ((binary & ~BINARY_SUBTYPE_MASK)==BINARY_TYPE_DOS)
-                result=run16_frontend_scope_begin(&frontend_scope);
+                result=run16_frontend_scope_begin_lease(&frontend_scope,initial_console_only);
             if (!result) result = launch_vdm(binary, application, launch_command,frontend_scope,initial_console_only,options.wait);
         }
         run16_frontend_scope_end(frontend_scope);frontend_scope=NULL;
@@ -827,7 +827,7 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
         if (!NT_SUCCESS(status)) { result=RtlNtStatusToDosError(status);goto done; }
         if (information.SubSystemType==IMAGE_SUBSYSTEM_WINDOWS_CUI) {
             result=connect_broker();
-            if (!result) result=run16_frontend_scope_begin(&frontend_scope);
+            if (!result) result=run16_frontend_scope_begin_lease(&frontend_scope,initial_console_only);
             if (!result) result=OpenNtBaseClientWatchBroker();
             if (result) goto done;
         }

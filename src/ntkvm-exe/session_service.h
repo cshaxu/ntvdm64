@@ -8,6 +8,8 @@ DWORD frontend_service_start(HANDLE,HANDLE,void (*)(void),frontend_session_servi
 /* Independent process: creator is a borrowed failure/early-start hold;
  * retire is the root launcher's explicit direct-DOS completion signal. */
 DWORD frontend_service_start_process(HANDLE,HANDLE,HANDLE,HANDLE,frontend_session_service **);
+DWORD frontend_service_start_process_lease(HANDLE,HANDLE,HANDLE,HANDLE,HANDLE,BOOL,
+    frontend_session_service **);
 /* Returns only after the native Console has been restored.  A failure leaves
  * the root caller unacknowledged rather than returning it to a half-restored
  * Console. */
