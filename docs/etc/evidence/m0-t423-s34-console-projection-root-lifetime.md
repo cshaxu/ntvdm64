@@ -11,7 +11,7 @@ The owner approved publishing the complete logical DOS page into the physical
 Console, with blank cells outside the DOS page; host scrollback history is not
 an acceptance requirement. The owner also asked that an NTKVM borrowed from an
 existing Console retire when that outer Console actually ends, and that its
-NTVDM and NTCON workers share the resulting root-loss semantics.
+NTVDM and NTW32 workers share the resulting root-loss semantics.
 
 The S33 published protocol-25 package is the comparison baseline. Original
 MVDM mirror files and guest media were not modified.
@@ -38,7 +38,7 @@ same root-loss handle contract. An NTKVM borrowed from an existing Console
 waits on its attached external Console anchor. When that process exits, it
 rechecks the Console members once and transfers the anchor or retires if no
 external member remains. This is handle-driven, not interval polling and not
-a task/ConRecord observer. An NTKVM rooted in a newly created Console follows
+a task/Win32Record observer. An NTKVM rooted in a newly created Console follows
 its owned-root lifetime. NTSRV remains the registration authority; NTKVM
 root loss is not interpreted as a completed DOS/native task.
 
@@ -76,7 +76,7 @@ The published eight files were hash-checked against the staged runtime:
 | run16.exe | `AD5C559DED95EC0249853B38141869CCE16131B14A7FBE5DA31FB5AD93B1513E` |
 | ntsrv.exe | `7A44B6CA6D041460F04E48652A0073E77E19C63DF8549F79B8FFC5E34B9079D6` |
 | ntvdm.exe | `107F9736A812EFE038B8065C1A05F62B92919B1D49543E1C95B163AAD3BF3E93` |
-| ntcon.exe | `62AAC859B8273DB940ECD5FF6419E8A6D8F0BDDE55E302EF90820B56146FFD03` |
+| ntw32.exe | `62AAC859B8273DB940ECD5FF6419E8A6D8F0BDDE55E302EF90820B56146FFD03` |
 | ntkvm.exe | `962D50B67F58F0AFFC7359AB28901A0F0AF893AC70B296DDFBFFB189E57D96FE` |
 | ntmon.exe | `454EB97A05195A23A90C984F250633F1D2D12305D37774DB38A04C67F6695FC2` |
 | wow32.dll | `0D2AE60264B03A8040D98AA86BCF80455127064084E2217D318D5E13F90FA94A` |

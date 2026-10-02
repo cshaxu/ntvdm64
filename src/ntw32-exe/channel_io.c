@@ -1,5 +1,5 @@
 #include "io.h"
-DWORD ntcon_channel_transfer(HANDLE pipe,HANDLE peer,HANDLE stop,HANDLE event,
+DWORD ntw32_channel_transfer(HANDLE pipe,HANDLE peer,HANDLE stop,HANDLE event,
     BOOL write,void *buffer,DWORD bytes)
 {
     BYTE *cursor=buffer;

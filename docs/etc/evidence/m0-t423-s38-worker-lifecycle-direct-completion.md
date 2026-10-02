@@ -18,10 +18,10 @@ channel. Reusing that worker left its next request without a viable frontend.
   direct request reuses the same authenticated route. A dedicated root still
   drains channels when it actually retires. There is no second frontend
   process, new polling loop or DOS execution scheduler.
-- NTCON still creates the direct Win32 text target suspended and binds its
-  actual PID before resuming it. NTCON owns the process handle and reports the
+- NTW32 still creates the direct Win32 text target suspended and binds its
+  actual PID before resuming it. NTW32 owns the process handle and reports the
   real Windows exit code after releasing native I/O. NTSRV writes the result
-  to its direct ConRecord and signals the run16 receipt; run16 reads that
+  to its direct Win32Record and signals the run16 receipt; run16 reads that
   result instead of treating a process handle as its own completion source.
   The result is recorded before the event is signalled, avoiding a wake-before-
   result race. Preflight and worker failure are not fabricated success.
@@ -41,7 +41,7 @@ same x86 MSVC toolchain. This is not claimed as a fresh cold full-graph build.
 
 ## Verification
 
-- Focused fixtures passed: NTCON next-command; NTCON execution lifetime
+- Focused fixtures passed: NTW32 next-command; NTW32 execution lifetime
   (448 checks, zero failures); frontend scope/request client (including real
   native exit 37); BaseSrv reservation default case; and private-desktop
   Console channel lifetime, including two park/resume cycles and input-mode
@@ -71,7 +71,7 @@ same x86 MSVC toolchain. This is not claimed as a fresh cold full-graph build.
 | ntsrv.exe | `5566B5C4B5FC86D97A54E6B0F66300AFEB33B6E7973D29DDFD67BA70D3BB76E5` |
 | ntkvm.exe | `3252111E651719B3A921FFB51A7AB79A66C991FCD28935AD83E6573CE65683AF` |
 | ntvdm.exe | `60155D9B1E8DF83F17AC407B682EFF80033A3A9584CA0CE2314DAFCEE783C0C5` |
-| ntcon.exe | `CBAB7B42FBDB2411126B3B1A5DC0CD8D80183DE94C2EE8CCFE5816EA04026966` |
+| ntw32.exe | `CBAB7B42FBDB2411126B3B1A5DC0CD8D80183DE94C2EE8CCFE5816EA04026966` |
 | ntmon.exe | `3D86477B95A673B602540952805790DDFE7C4541496819030ADF16DDBD4FBA53` |
 | wow32.dll | `0D2AE60264B03A8040D98AA86BCF80455127064084E2217D318D5E13F90FA94A` |
 | VDMREDIR.dll | `1A2418FE667348EF3C6764A85C375A53B40C00D3ECAF2FBC8F74B2D1DF4D881F` |

@@ -26,7 +26,7 @@ interface vdm_service
     /* Same authenticated attachment transaction, to the admitted worker.
      * The copied image is management metadata only; launch payloads and
      * target I/O status remains on the direct pipe; the actual process exit
-     * code is reported by NTCON through CompleteWorkerChannel. */
+     * code is reported by NTW32 through CompleteWorkerChannel. */
     error_status_t SubmitWorkerChannel(
         [in] handle_t binding, [in] VDM_CONNECTION connection,
         [in, system_handle(sh_process)] HANDLE process,

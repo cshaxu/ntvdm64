@@ -10,7 +10,7 @@ extern PCONSOLERECORD DOSHead;
 extern PWOWHEAD WOWHead;
 
 /* Keep the older focused fixture readable while exercising the production
- * CONRECORD transaction.  One accepted test channel has one request ID. */
+ * WIN32RECORD transaction.  One accepted test channel has one request ID. */
 static DWORD test_native_request;
 #define OpenNtBaseServiceSubmitWorkerChannel(a,b,c,d,e) \
     OpenNtBaseServiceSubmitWorkerChannel(a,b,c,d,e,L"fixture.exe")
@@ -83,7 +83,7 @@ static DWORD WINAPI acknowledge_native_close(void *context)
 
 /* The native participant fixture must create its child only after NTSRV has
  * bound the suspended direct root to the server-owned Job.  A named release
- * event keeps both processes alive while the test observes the one ConRecord
+ * event keeps both processes alive while the test observes the one Win32Record
  * chain, then lets the fixture clean itself up without a tree kill. */
 static int reservation_wait_child(const char *release_name)
 {
@@ -442,7 +442,7 @@ int main(int argc,char **argv)
                 CHECK(request_pipe && execution && io_capability && GetProcessId(sender)==GetCurrentProcessId());
                 completed_request=test_native_request;
                 /* The worker, not a launcher-supplied number, binds its
-                 * actual CreateProcess target to the direct CONRECORD. */
+                 * actual CreateProcess target to the direct WIN32RECORD. */
                 {HANDLE completion=CreateEventW(NULL,TRUE,FALSE,NULL);
                     CHECK(completion);
                     CHECK(!OpenNtBaseServiceBindNativeTarget(worker,child.dwProcessId,workerGeneration,
@@ -558,7 +558,7 @@ int main(int argc,char **argv)
             CHECK(SetEvent(participant_release));
             CHECK(WaitForSingleObject(laterChild.hProcess,5000)==WAIT_OBJECT_0);
             /* No Job observer is admitted: exit does not complete an invented
-             * ConRecord or change the already READY resident worker. */
+             * Win32Record or change the already READY resident worker. */
             CHECK(!OpenNtBaseServiceSnapshot(service,&managementEpoch,&workerInfo,1,&workerInfoCount));
             CHECK(workerInfoCount==1 && workerInfo.state && !workerInfo.stack_depth &&
                 !workerInfo.task);

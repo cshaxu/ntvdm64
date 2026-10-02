@@ -12,12 +12,12 @@ remained 640 pixels; the visible jump in this reproducer was height (392 to
 
 NTKVM's DOS page has a logical 80x28 viewport while its canonical visible
 Console can retain the caller's physical 80x30 viewport. During an active
-native-channel switch, `console_channel.c` cleared `logical_window`. NTCON's
+native-channel switch, `console_channel.c` cleared `logical_window`. NTW32's
 initial screen-info request consequently seeded its hidden Console from the
 physical 30-row viewport and published an unintended 30-row text frame. The
 subsequent DOS frame restored 28 rows.
 
-S37 keeps the already-bound logical viewport through native seeding. NTCON's
+S37 keeps the already-bound logical viewport through native seeding. NTW32's
 existing `CONSOLE_IO_WINDOW_RECT` publication still updates that viewport
 when a native program genuinely changes it. No guest, original OpenNT/MVDM
 mirror, worker-base protocol, shared KVM library, font rule or timed redraw

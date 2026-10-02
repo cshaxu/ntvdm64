@@ -61,7 +61,7 @@ runtime checks passed with actual observer output under `O:/winnt/Logs2`:
   propagation detail, so `nested-mem` and the direct/EDIT group were rerun
   with fresh prefixes and passed independently; this is retained procedure
   detail, not a product failure.
-- Real NTCON management close passed: the selected NTCON and attached CMD
+- Real NTW32 management close passed: the selected NTW32 and attached CMD
   ended, while an independently registered Console session stayed live,
   accepted `ISOLATED-SESSION-OK`, and returned 23.
 - An isolated broker-loss run held observer input, terminated only its exact
@@ -77,7 +77,7 @@ Published SHA-256 values are:
 | `ntsrv.exe` | `2F3C9FBBC9028799572FACDF6E9C7FC6A4DC494ACAF2BBE5D0DE1C144045D491` |
 | `ntvdm.exe` | `E64C4A5054E989E0F477101B0B985BF2CF713E1897DFE4C2C5203B982B892BF6` |
 | `ntkvm.exe` | `ECD071A68BE9235B6BF8DD08F5063707F7056EF63B81602FD21C61F9C6700CE4` |
-| `ntcon.exe` | `EE41D67E0914BA007780D8A865612307C00503500BC4D827CB1DBE5810446675` |
+| `ntw32.exe` | `EE41D67E0914BA007780D8A865612307C00503500BC4D827CB1DBE5810446675` |
 | `ntmon.exe` | `6D605BA12AC16199A10FABA6AE90865CEEE43F530339997A3203A5995B84AFBA` |
 | `VDMREDIR.dll` | `74BF30218988B8E56614628938AE1A59825658ED1FE2C9B4853BE87D41EB6307` |
 
@@ -85,12 +85,12 @@ Published SHA-256 values are:
 
 The event is a product-owned lifecycle correction, not a change to original
 OpenNT execution semantics.  Focused lost-wake and root-authorisation tests,
-normal/nested DOS/native output regression and independent NTCON lifecycle
+normal/nested DOS/native output regression and independent NTW32 lifecycle
 coverage support the claim that the timer was removed without weakening the
 existing completion/restore boundaries.
 
 ## Follow-up
 
-S21 audits only project-added, semantically identical NTVDM/NTCON lifecycle
+S21 audits only project-added, semantically identical NTVDM/NTW32 lifecycle
 mechanisms for `worker-base` extraction.  It must not move original OpenNT
 execution or DOS/WOW task ownership out of their source owners.

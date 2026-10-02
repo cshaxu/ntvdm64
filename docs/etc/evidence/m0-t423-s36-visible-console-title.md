@@ -4,7 +4,7 @@
 
 The owner closed S35 and inserted S36: replace the fixed `NTVDM` Window
 caption with the title of the **user-visible Console to which NTKVM is
-attached**. This explicitly excludes NTCON's hidden Console and any Windows
+attached**. This explicitly excludes NTW32's hidden Console and any Windows
 Terminal tab-level override. The input baseline is delivered S35
 `96a5e0bad` and its [evidence](m0-t423-s35-native-text-window.md).
 
@@ -66,7 +66,7 @@ The first delivery observed only NTKVM's attached visible Console title. A
 real nested CMD changes its own Console title without changing that visible
 root, so the Window caption stayed stale. This P adds one copied, bounded
 `CONSOLE_IO_PUBLISH_TITLE_A` operation (Console I/O 21, application/RPC 27):
-NTVDM publishes after a successful original Console-title call; NTCON reads
+NTVDM publishes after a successful original Console-title call; NTW32 reads
 its own hidden Console title during its existing capture and publishes changes.
 The common transport is in `worker-base`. NTKVM accepts the publication only
 from the active channel, caches it for that channel, and rechecks on handoff;
@@ -102,7 +102,7 @@ The older `console-channel-lifetime-test.exe` reports the same line-181
 environment, so it is not counted as a new passing test. The
 `console-client-test.exe` title transport assertions ran through successfully,
 but its later desktop-window fixture fails at `GetConsoleWindow()` in the
-automated private desktop. `ntcon-presentation-test.exe` did not complete and
+automated private desktop. `ntw32-presentation-test.exe` did not complete and
 was stopped; no pass is claimed for it. The 17+17 product and real title probes
 are the runtime acceptance evidence; these focused-fixture limits remain
 recorded, not silently promoted to passes. WOW visual frontiers remain subject
@@ -115,7 +115,7 @@ Published SHA-256 hashes:
 | `run16.exe` | `3C888B501164C379F7B2227F09AC50608C7CB769F9083518996DE89A4DD57710` |
 | `ntsrv.exe` | `72E8A6F266A2BED6075024E18BE789A28A6205ED0CD7AFC8CB7316D43577BBE1` |
 | `ntvdm.exe` | `2FF54F07890D071687D519A2BF7BE4CC82C0D8D88F6E255896D6AA94AF58F780` |
-| `ntcon.exe` | `101E0807BF27CAE4554006D18F5479E514BA06CBD2262FD2766395013A9660A7` |
+| `ntw32.exe` | `101E0807BF27CAE4554006D18F5479E514BA06CBD2262FD2766395013A9660A7` |
 | `ntkvm.exe` | `ABBA80C8B666420A00D6C775DD82FBB0F6B2BEC3DD67750F41FFFD92B94170E1` |
 | `ntmon.exe` | `BE493183DCEC33F3CDEE8B10875FD53FC3F6B1D862232617959149EC5A76AFEF` |
 | `VDMREDIR.dll` | `1A2418FE667348EF3C6764A85C375A53B40C00D3ECAF2FBC8F74B2D1DF4D881F` |

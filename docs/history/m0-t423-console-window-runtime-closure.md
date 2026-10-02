@@ -81,11 +81,11 @@ published package; this does not constitute T423 acceptance.
 | Field | Brief |
 | --- | --- |
 | Identifier Mode | M0 T423 S38, Ordinary Mode. |
-| Admission And Approval | Owner accepted S37 and admitted S38 after repeated Windows Terminal `run16 command` failure; subsequently approved NTSRV-owned component death, ten-second workerless frontend grace, and a common NTSRV direct-completion receipt for DOS and NTCON Win32 text. |
-| Objective | Repair stale frontend retirement and align NTVDM/NTCON worker residency and direct completion with [the approved lifecycle](../design/ARCHITECTURE.md#current-lifecycle-and-direct-completion-contract). Run16 shares one direct-wait/fault flow; NTCON reports actual native exit to NTSRV, which owns the receipt/result without replacing original DOS records. |
-| Non-goals | No guest changes, NTCON GUI path, Win16 wait-for-exit, observed-task scheduler, process-tree kill, second NTKVM worker census, or the separately queued Direct/Observed task-trace T. |
+| Admission And Approval | Owner accepted S37 and admitted S38 after repeated Windows Terminal `run16 command` failure; subsequently approved NTSRV-owned component death, ten-second workerless frontend grace, and a common NTSRV direct-completion receipt for DOS and NTW32 Win32 text. |
+| Objective | Repair stale frontend retirement and align NTVDM/NTW32 worker residency and direct completion with [the approved lifecycle](../design/ARCHITECTURE.md#current-lifecycle-and-direct-completion-contract). Run16 shares one direct-wait/fault flow; NTW32 reports actual native exit to NTSRV, which owns the receipt/result without replacing original DOS records. |
+| Non-goals | No guest changes, NTW32 GUI path, Win16 wait-for-exit, observed-task scheduler, process-tree kill, second NTKVM worker census, or the separately queued Direct/Observed task-trace T. |
 | Reference Baseline | S37 commit `177579bd3`, published eight-file `O:/winnt` package and [S37 evidence](../etc/evidence/m0-t423-s37-window-geometry.md). The prior automated 17+17 matrix did not establish actual Windows Terminal interactive longevity. |
-| Files And ABI Surface | NTSRV worker/root retirement, authenticated native process receipt/result, run16 common wait, NTCON target bind/cleanup, broker-liveness and worker-close edges; interface protocol only as required. Original DOS/WOW owners remain unchanged. |
+| Files And ABI Surface | NTSRV worker/root retirement, authenticated native process receipt/result, run16 common wait, NTW32 target bind/cleanup, broker-liveness and worker-close edges; interface protocol only as required. Original DOS/WOW owners remain unchanged. |
 | Applicable Rules | Documentation, execution, immutable guest, original-source-first, x86 CCPU40, and preservation of concurrent unrelated work. |
 | Verification | Review admission/completion invariants; build x86; focused probes for direct DOS/native exit codes, preflight failure, worker/broker/root death, READY retention, ten-second grace/cancellation and repeat `run16 command` in the same Console. Owner permits coherent eight-file `O:/winnt` publication after build and focused probes, before the longer 17+17/WOW matrix; run broader tests afterward without treating them as prepublication passes. |
 | Expected Markers | First launch survives the transient zero-worker interval; Window-direct `exit` permits another `run16 command` in the same CMD; last-worker loss retires the root after about ten seconds unless a new admission intervenes; no stale root yields 1460. |
@@ -189,11 +189,11 @@ records the bounded shared-worker disposition.
 ## S26 Closure Record
 
 [S26 Job observation disposition](../etc/evidence/m0-t423-s26-job-observation-disposition.md)
-records rejection of observed ConRecords as product authority.
+records rejection of observed Win32Records as product authority.
 
 ## S25 Closure Record
 
-S25 repaired nested CMD deadlock with NTCON concurrent direct acceptance and
+S25 repaired nested CMD deadlock with NTW32 concurrent direct acceptance and
 bounded, signalled startup/handoff waits. Its x86, 17+17, WOW, lifecycle and
 fault gates passed; the protocol-24 package was published. The supplemental
 final-screen-history assertion still has no passing baseline and remains an
@@ -202,7 +202,7 @@ S29 audit item, not a pass. Full evidence and hashes:
 
 ## S24 Closure Record
 
-S24 delivered the direct NTCON baseline after rolling back an initial package
+S24 delivered the direct NTW32 baseline after rolling back an initial package
 without visible CMD I/O. The Job observer was excluded; S26 later rejected
 its product admission. Bounded hidden-Console output sampling remains accepted.
 The removed `--internal-console-probe` is not task authority. Full evidence:
@@ -211,7 +211,7 @@ The removed `--internal-console-probe` is not task authority. Full evidence:
 ## S23 Closure Record
 
 NTSRV now admits native backend registration only from a prepared native
-reservation, projects only authenticated worker watches, retains NTCON after
+reservation, projects only authenticated worker watches, retains NTW32 after
 frontend route loss, and can explicitly close that resident worker after its
 root is gone.  Focused reservation/rebind/close, empty monitor RPC and
 frontend lifecycle fixtures pass with protocol-19 MIDL regeneration and x86
@@ -221,7 +221,7 @@ relink.  PID-accurate participant records are deliberately S24 work.  See
 ## S22 Closure Record
 
 Modern EDIT emits only attributes 7/15 into the ordinary hidden Console because
-its generic OSC 4/10/11 terminal queries receive no reply.  NTCON packing and
+its generic OSC 4/10/11 terminal queries receive no reply.  NTW32 packing and
 NTKVM palette rendering preserve those captured values; no renderer defect or
 safe local production fix exists.  The 130-check packer fixture and probe
 passed; no new executable is published.  See [S22 evidence](../etc/evidence/m0-t423-s22-native-edit-colour-audit.md).
@@ -237,7 +237,7 @@ retains the reviewed source, test and delivery facts.
 | --- | --- |
 | Delivery | Protocol 18 `FrontendStateChanged` capability, NTSRV mutation signalling and NTKVM direct wait-set; completion commit pending. |
 | Outcome | Removed the project-added 100ms creator/`ERROR_BUSY` timer path. `ERROR_BUSY` retries only after a root-authenticated NTSRV state event; S17 restoration acknowledgement remains independent. |
-| Verification | Focused lost-wake/root-authorisation fixtures; full 590-node x86 build; published COMMAND/MEM/EDIT/nested/native regressions; NTCON management isolation; isolated broker loss returns 1722; governance and diff checks. |
+| Verification | Focused lost-wake/root-authorisation fixtures; full 590-node x86 build; published COMMAND/MEM/EDIT/nested/native regressions; NTW32 management isolation; isolated broker loss returns 1722; governance and diff checks. |
 | Publication | Coherent seven-component protocol 18 package published to `O:/winnt`; exact hashes and observations are in [S20 evidence](../etc/evidence/m0-t423-s20-event-driven-retirement.md). |
 | Non-work | No guest, shared-library, original DOS/WOW scheduling or execution-lifecycle change. |
 | Evidence | [S20 event-driven retirement](../etc/evidence/m0-t423-s20-event-driven-retirement.md). |
@@ -371,7 +371,7 @@ Owner accepted mouse delivery 965083eec; [evidence](../etc/evidence/m0-t423-s11-
 
 ## S12 Closure Record
 
-Delivered NTCON/shared-worker package fbbbe4870; S13 addresses owner-reported geometry defect; [evidence](../etc/evidence/m0-t423-s12-ntcon-backend.md).
+Delivered NTW32/shared-worker package fbbbe4870; S13 addresses owner-reported geometry defect; [evidence](../etc/evidence/m0-t423-s12-ntw32-backend.md).
 
 ## S13 Closure Record
 

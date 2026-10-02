@@ -26,7 +26,7 @@ commit and push before closure; T423 awaits owner acceptance.
 - Existing `opennt-abi/host-compat/console_grid.c` provides the source-shaped
   non-reflow buffer conversion. The candidate reuses it, rather than adding
   another cell-reflow engine.
-- NTCON seeds from the copied frontend screen. Its existing exact-size seed
+- NTW32 seeds from the copied frontend screen. Its existing exact-size seed
   can shrink native history when DOS returns a smaller page. Preserving that
   history is now implemented in the candidate and covered by repeated-seed
   tests below; complete live scrolling acceptance remains open.
@@ -70,14 +70,14 @@ not evidence that the product handoff passed or regressed. The corrected r18
 used actual carriage returns. Reports and transcripts are retained.
 
 The uncommitted candidate separates NTKVM logical viewport state from its
-physical viewport, adds real NTCON geometry application/readback, and prepares
+physical viewport, adds real NTW32 geometry application/readback, and prepares
 DOS-compatible geometry before the original worker return path. It does not
 change shared libraries or guest media. The latest native-first font change
 uses the same pinned V7VGA 16-scanline table as default VGA DOS; native-first
 r20-r22 runtime probes include it. The earlier candidate manifest
 `build/M0-T423/S13/candidate-manifest-r16.json` does not cover this latest edit.
 
-NTCON now initializes its own hidden Console carrier with fixed 2x4 font
+NTW32 now initializes its own hidden Console carrier with fixed 2x4 font
 metrics before targets exist. It never queries display dimensions to select
 logical geometry. This carrier font is distinct from copied V7VGA presentation
 fonts. Ordinary application resize remains an actual Console operation; r21
@@ -88,7 +88,7 @@ the differential publication cache if history remains outside the copied page.
 
 Resize capture now rechecks actual geometry even when ReadConsoleOutputW
 fails: only a confirmed intervening geometry change returns ERROR_RETRY.
-The optional NTCON_GEOMETRY_ERROR_LOG records phase/error/actual carrier
+The optional NTW32_GEOMETRY_ERROR_LOG records phase/error/actual carrier
 geometry and never selects dimensions or changes recovery policy. Expected
 configuration-not-found and post-frontend pipe closure can appear alongside
 actual failures; they are not independently failed task evidence.
@@ -98,7 +98,7 @@ anti-replay serial; only a newly completed frame can replace the common view.
 Identical geometry is a no-op. Initial DOS activation preserves the original
 scrollback path; conversion applies when an actual native page is handed back.
 Native initial logical width is80 even if the inherited host backing is wider.
-The NTCON source audit finds no GetSystemMetrics/GetLargestConsoleWindowSize/
+The NTW32 source audit finds no GetSystemMetrics/GetLargestConsoleWindowSize/
 MonitorFrom/GetMonitorInfo or use of dwMaximumWindowSize for selecting geometry.
 The mirror and shared-library trees remain unchanged.
 
@@ -157,7 +157,7 @@ viewport clamping. This is an input-converter test, not a real mouse roundtrip.
 
 Source-order review: NTKVM apply_binding returns preparation errors before
 installing DOS ownership; bind_worker waits for handoff_done and returns the
-actual error. NTCON presentation_begin applies/readbacks screen state and
+actual error. NTW32 presentation_begin applies/readbacks screen state and
 writes imported cells before successful return; a seed error releases the
 native route. Existing per-channel generation/sequence and published serial
 remain the ordering primitives. This review does not replace the outstanding
@@ -167,7 +167,7 @@ partial-failure and real backend resume evidence.
 
 Owner selected the reverse-video text-cell cursor, retaining text-frame ABI
 and shared library. The800-line exception is withdrawn. NTKVM's native mouse
-coordinate functions and GDI arrow compositor are removed. NTCON text_frame.c
+coordinate functions and GDI arrow compositor are removed. NTW32 text_frame.c
 owns logical mouse position, move-before-button translation, release and output
 copy colour inversion. Canonical CHAR_INFO/hidden Console cells, caret and
 handoff font state are not painted with the block. End hides/releases it before
@@ -176,11 +176,11 @@ the final screen receipt. Original DOS mouse code remains unchanged.
 Copied input protocol18 adds POINTER motion/modifier records without frontend
 geometry. Original DOS relative records retain their geometry notification;
 NTKVM shares the routing mechanism, with finite encoding selection only.
-Private pointer records are converted to native MOUSE_EVENTs by NTCON, never
+Private pointer records are converted to native MOUSE_EVENTs by NTW32, never
 sent as private tags to native applications. Failed delivery remains terminal
 and is not replayed. Absolute Console mouse records remain native records.
 
-r42 NTCON frame tests pass86 checks including80x50/font16 TEXT, underlying
+r42 NTW32 frame tests pass86 checks including80x50/font16 TEXT, underlying
 cells/caret preservation, old-cell restoration on move, clamping/modifiers,
 move-before-click, malformed input and leave. Common renderer tests pass.
 The obsolete frontend arrow assertions have been replaced at their approved
@@ -196,13 +196,13 @@ r46 and Window r47 regressions are running; publication remains the S12 set.
 Earlier complete regressions must be rerun for these changed production inputs.
 
 r46 Console and r47 Window have now each completed17/17 passing cases.
-r48 adds tests/observation/ntcon_mouse_probe.c, an ordinary native Console
+r48 adds tests/observation/ntw32_mouse_probe.c, an ordinary native Console
 application launched by candidate run16. It requests80x50 and waits for real
 MOUSE_EVENT records. The existing private desktop observer uses WINDOW_INPUT,
 TEXT_CURSOR and S7MOUSE.dll to switch through CAF, then injects motion/press/
 release at the library output boundary. The downstream frontend queue, wire,
-NTCON translation and hidden Console are production paths. Report
-t423-s13-native-mouse-r48.txt exited0; console text contains NTCON-MOUSE-PASS
+NTW32 translation and hidden Console are production paths. Report
+t423-s13-native-mouse-r48.txt exited0; console text contains NTW32-MOUSE-PASS
 and mouse-window report confirms input-sink-acknowledged=yes. The source tests
 movement before press, release and bounded80x50 coordinates. It is not physical
 Raw Input/capture proof. The separately tested frame-copy assertions establish
@@ -243,7 +243,7 @@ after the S13 geometry preparation call was added. The source graph generator
 now supplies both original production dependencies. After regeneration and
 incremental build, the real storage/font handoff fixture passes32 checks,
 the real Console capture/resize fixture exits0 with its assertions, and the
-expanded NTCON text-frame fixture passes130 checks. The latter retains all
+expanded NTW32 text-frame fixture passes130 checks. The latter retains all
 previous86 checks and adds22/25/28/43/50 logical-height bounds, font8/14/16,
 viewport offsets, full signed motion, modifiers, both-button release,
 malformed leave non-mutation and independent pointer-instance state.
@@ -279,8 +279,8 @@ previous frontiers: WINMINE main window, SOL OOM, WRITE OOM. Physical play,
 foreground activation and clipping remain owner-waived, not proved by these
 background observations.
 
-New tests/observation/ntcon_geometry_handoff_probe.c is an ordinary Win32
-target, built by the formal ntcon-geometry-handoff-probe.exe target and copied
+New tests/observation/ntw32_geometry_handoff_probe.c is an ordinary Win32
+target, built by the formal ntw32-geometry-handoff-probe.exe target and copied
 only to candidate tests/GEOMH.EXE. It observes its inherited80x25 logical view,
 deliberately applies80x43 or80x50 with a200-row history prefix, and performs
 three real run16 COMMAND /c MEM and run16 CMD /c echo calls. It asserts each
@@ -344,7 +344,7 @@ substitute or a guest mode-setting workaround.
 Final formal x86 /MT incremental build succeeds; WOW32 has no changed inputs.
 The first invocation used the wrong lowercase Ninja target vdmredir.dll and
 was rejected before building; the corrected VDMREDIR.dll target succeeds.
-Only NTCON required final relinking after the restored unchanged presentation
+Only NTW32 required final relinking after the restored unchanged presentation
 object. r68 Console and r69 Window each pass the complete17/17 text-gated suite
 against that final candidate. The strict generated-link ownership audit passes:
 no frontend execution/backend/helper and both workers use the common client.
@@ -376,7 +376,7 @@ motion before press and a release, with sink acknowledgment and exit0.
 These passed gates do not override the subsequent r79 failure.
 
 The new reusable tests/observation/verify-text-geometry-handoff.ps1 runs the
-formal ntcon-geometry-handoff-probe.exe and NASM-built GRID.COM from existing
+formal ntw32-geometry-handoff-probe.exe and NASM-built GRID.COM from existing
 package tests/, in private desktops with a200-column observer buffer. It
 requires nine child completions, three history/size checks, actual guest/MEM/
 native output and normal observer exit for each of the five modes. No assertion
@@ -389,7 +389,7 @@ or user file was rolled back or changed.
 
 Candidate r81 passes the complete five-mode wrapper, insufficient to clear the
 intermittent failure. Candidate-only diagnostic additions retain ERROR_RETRY
-in the existing optional NTCON log and label begin-io/end-io failures. There
+in the existing optional NTW32 log and label begin-io/end-io failures. There
 is no retry-policy change or swallowed error. r82 repeats the five-mode matrix
 five times (75 real cycles); r83 adds the native Window mouse prelude before
 each of three more matrices (45 cycles), and enables existing MVDM_S34_TRACE_PATH
@@ -409,20 +409,20 @@ another publication. There is no S13 production P2 yet.
 ## Locked-screen follow-up and similar-race audit
 
 After the owner rejected polling as the primary answer, source review found
-that NTKVM already held one `io_lock` per Console RPC, but NTCON read a
+that NTKVM already held one `io_lock` per Console RPC, but NTW32 read a
 multi-tile frontend image over many RPCs. A DOS write or the NTKVM presenter
 could run between tiles. Protocol19 now adds native-only SNAPSHOT_BEGIN/END:
 the channel thread holds the same recursive frontend lock across the whole
 read; all DOS Console writes and the presenter wait for the first acquirer.
-The NTCON client releases it before applying the copied page to its hidden
+The NTW32 client releases it before applying the copied page to its hidden
 Console. Channel EOF and invalid operations release the lock on that same
 thread. Activation or input waits during a held snapshot are rejected to
 avoid a lock-order deadlock. Original MVDM and guest code remain untouched.
 
-The other audited sites have different ownership. NTCON's own hidden Console
+The other audited sites have different ownership. NTW32's own hidden Console
 can be written by arbitrary native targets which do not acquire this project
 lock; its before/after snapshot validation and bounded retry remain necessary,
-with permanent I/O failures propagated. NTCON membership sampling observes
+with permanent I/O failures propagated. NTW32 membership sampling observes
 the public Console process list, which provides no attachment-change event;
 it is lifecycle observation, not the screen-copy synchronization mechanism.
 Run16's registration wait is also separate from frame publication. No
@@ -439,7 +439,7 @@ WINMINE/SOL/WRITE frontiers. The first mouse-pressure invocation r100 failed
 before entering the guest because the isolated candidate lacked its authored
 WMS7.COM fixture; no product bug is inferred. After copying only authored
 tests into V:/tests, r101 passes1000/1000/200 DOS mouse events. r102 passes
-the native NTCON move/press/release probe with sink acknowledgment. Final
+the native NTW32 move/press/release probe with sink acknowledgment. Final
 candidate r103 passes five actual DOS modes with three DOS/native cycles each;
 r105 passes the full DDWWDDWW sixteen-checkpoint chain. These are candidate
 checks, not evidence that O:/winnt has been updated. The prior r79 failed
@@ -460,7 +460,7 @@ Published `t423-s13-published-r107` passes all five actual DOS mode dimensions
 and three DOS/MEM/native cycles each, including the former r79 22-row failing
 case. Published r108 Console and r109 Window each pass all17 strict cases,
 checking output markers and exit codes. Published r110 passes DOS mouse
-pressure1000/1000/200; r111 passes NTCON move/press/release and sink ACK.
+pressure1000/1000/200; r111 passes NTW32 move/press/release and sink ACK.
 Published r112 preserves WINMINE's main window and the known SOL/WRITE OOM
 frontiers, without claiming those two applications are complete. No begin-io
 or end-io ERROR_RETRY appears in the r107 opt-in phase log. r79 did not have

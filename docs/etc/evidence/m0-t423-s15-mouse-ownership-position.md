@@ -15,12 +15,12 @@ shared KVM libraries, or the DOS mouse movement contract.
    the clip, a DOS clip mutation is acknowledged without touching the host
    clip. Console mode retains the original forwarded request. Deliberate
    capture release remains a separate Window action.
-2. NTCON initialized its text square near the screen center and consumed only
+2. NTW32 initialized its text square near the screen center and consumed only
    relative motion. Under absolute-position RDP input, the physical host
    pointer could reach the capture edge before the square did. NTKVM now
    snapshots pointer and clip coordinates with each Window input event and
    converts native movement to absolute content pixels. The common pointer
-   message adds action `CONSOLE_MOUSE_POSITION` (interface version 20); NTCON
+   message adds action `CONSOLE_MOUSE_POSITION` (interface version 20); NTW32
    applies and clamps it using its current text viewport. DOS continues using
    its existing relative input path. The Win32 square remains available for
    CMD as well as modern EDIT; no executable-name heuristic was added.
@@ -31,7 +31,7 @@ shared KVM libraries, or the DOS mouse movement contract.
   and links were produced with the graph's exact VS x86 compiler/linker
   commands. Ninja itself did not exit normally in this environment, so this
   is an exact-command formal-graph build, not a claimed successful Ninja run.
-- Focused `frontend_window_mouse_test`, `ntcon_text_frame_test` (133 checks,
+- Focused `frontend_window_mouse_test`, `ntw32_text_frame_test` (133 checks,
   zero failures), and `console_pointer_dispatch_test` passed. The updated
   `console_frontend_test` pointer-action assertions passed, but its full run
   could not pass in the non-interactive build terminal: the unrelated

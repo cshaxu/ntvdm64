@@ -30,8 +30,8 @@ versus product-owned Console lifetime, normal exit, startup failure and user
 cancellation/window closure. Record each adjacent confirmed defect separately.
 
 The owner also reported that Window-mode DOS COMMAND → native CMD → modern
-Microsoft Edit shows NTCON's square pointer but does not activate the Edit
-menu on click. Test the actual input representation at the NTCON hidden
+Microsoft Edit shows NTW32's square pointer but does not activate the Edit
+menu on click. Test the actual input representation at the NTW32 hidden
 Console boundary: a native `MOUSE_EVENT` consumer and a VT-input consumer may
 require different input records while receiving the same pointer position.
 Keep NTVDM's original mouse contract and the shared text frame unchanged.
@@ -39,7 +39,7 @@ In Window, Ctrl+Alt+M releases the captured pointer to the host without
 changing display mode, closing the Window or delivering the hotkey to the
 target. The next deliberate capture gesture may recapture it.
 
-run16 owns external launch and parent completion; NTVDM and NTCON own their
+run16 owns external launch and parent completion; NTVDM and NTW32 own their
 respective workers; NTKVM owns visible presentation; NTSRV owns registered
 coordination. Reuse the completed S12 lifecycle implementation. Preserve original
 owners and use minimal bindings. Do not conceal a lifetime defect with an
@@ -66,7 +66,7 @@ plus interactive `run16 command` and `run16 cmd` followed by `exit`, with no
 launcher/frontend wait left stuck. The actual host Edit location is discovered
 from Windows system directories; no fixed drive letter is a product input.
 The modern Edit test must show the negative control (raw `MOUSE_EVENT` leaves
-the menu closed) and positive control (the production NTCON translation opens
+the menu closed) and positive control (the production NTW32 translation opens
 the menu). A mouse-square movement alone is not a passing click test.
 
 ## Acceptance

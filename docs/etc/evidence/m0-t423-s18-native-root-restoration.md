@@ -11,7 +11,7 @@ cmd.exe -> run16 cmd -> Ctrl+Alt+F -> exit -> outer cmd.exe
 ```
 
 The cause was source-visible: `launch_native()` waited for the native target
-and its NTCON final-presentation receipt, then returned directly.  It never
+and its NTW32 final-presentation receipt, then returned directly.  It never
 called the already-existing root retirement and restoration calls.  NTKVM
 therefore began restoring the original Console only after the root `run16`
 process had already returned to its parent.

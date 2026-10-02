@@ -9,9 +9,9 @@ under its service lock against the currently registered process.  It does not
 accept a caller-selected internal generation, and a PID that has subsequently
 been registered again resolves to that current registration.
 
-NTMON now renders `PID KIND ELAPSED STACK TASK`.  NTCON is rendered as
+NTMON now renders `PID KIND ELAPSED STACK TASK`.  NTW32 is rendered as
 `WIN32`, reports `MEMBERS=<n>`, and reports either its current Console client
-image or `<EMPTY>`.  Its Delete path signals the NTCON session owner and waits
+image or `<EMPTY>`.  Its Delete path signals the NTW32 session owner and waits
 for the normal Console-close acknowledgement; it is not a raw carrier kill.
 
 ## Focused x86 evidence
@@ -21,11 +21,11 @@ All commands used `build/M0-T423/S19/formal-final` and the MSVC x86 toolchain.
 | Check | Result |
 | --- | --- |
 | NTSRV formal graph | 39/39 commands; `ntsrv.exe` linked. |
-| NTCON formal graph | 50/50 commands; `ntcon.exe` linked. |
+| NTW32 formal graph | 50/50 commands; `ntw32.exe` linked. |
 | NTMON formal graph | 11/11 commands; `ntmon.exe` linked. |
 | Versioned public management RPC | `monitor-rpc-test.exe --empty` passed: v17 empty snapshot, revision mismatch and absent PID rejection. |
 | Authenticated native registry | `basesrv-service-reservation-test.exe --native-backend` passed: authenticated root, unique live instance, real identity, member report, no fake close and rundown. |
-| NTCON close path | `ntcon-close-test.exe` passed: `target-image-and-normal-console-close=PASS`. |
+| NTW32 close path | `ntw32-close-test.exe` passed: `target-image-and-normal-console-close=PASS`. |
 | NTMON rendering | `verify-monitor-layout.ps1` passed its full layout/selection/confirmation fixture. |
 
 ## Deliberate remaining work

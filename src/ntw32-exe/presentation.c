@@ -7,7 +7,7 @@
 #include <stddef.h>
 #include <string.h>
 #include <limits.h>
-struct ntcon_presentation {
+struct ntw32_presentation {
     ntkvm_worker_client channel;
     CRITICAL_SECTION lock;
     CHAR_INFO *published_cells;
@@ -17,18 +17,18 @@ struct ntcon_presentation {
     BOOL seeded;
     char published_title[CONSOLE_IO_TITLE_BYTES];
     BOOL title_valid;
-    ntcon_mouse mouse;
+    ntw32_mouse mouse;
 };
-static DWORD exchange(ntcon_presentation *client,console_io_request *request,console_io_reply *reply)
+static DWORD exchange(ntw32_presentation *client,console_io_request *request,console_io_reply *reply)
 {
     DWORD error=ntkvm_worker_call(&client->channel,request,reply);
-    ntcon_trace_error("exchange",request->operation,error);
+    ntw32_trace_error("exchange",request->operation,error);
     return error;
 }
-DWORD ntcon_presentation_open(HANDLE pipe,HANDLE frontend,HANDLE stop,DWORD generation,
-    ntcon_presentation **output)
+DWORD ntw32_presentation_open(HANDLE pipe,HANDLE frontend,HANDLE stop,DWORD generation,
+    ntw32_presentation **output)
 {
-    ntcon_presentation *client;DWORD error;
+    ntw32_presentation *client;DWORD error;
     if(!output)return ERROR_INVALID_PARAMETER;
     *output=NULL;
     if(!pipe || pipe==INVALID_HANDLE_VALUE || !frontend || !generation)return ERROR_INVALID_PARAMETER;
@@ -38,14 +38,14 @@ DWORD ntcon_presentation_open(HANDLE pipe,HANDLE frontend,HANDLE stop,DWORD gene
     if(error) { HeapFree(GetProcessHeap(),0,client);return error; }
     InitializeCriticalSection(&client->lock);*output=client;return ERROR_SUCCESS;
 }
-void ntcon_presentation_close(ntcon_presentation *client)
+void ntw32_presentation_close(ntw32_presentation *client)
 {
     if(!client)return;
     if(client->published_cells)HeapFree(GetProcessHeap(),0,client->published_cells);
     ntkvm_worker_client_dispose(&client->channel);DeleteCriticalSection(&client->lock);
     HeapFree(GetProcessHeap(),0,client);
 }
-DWORD ntcon_presentation_call(ntcon_presentation *client,const console_io_request *input,
+DWORD ntw32_presentation_call(ntw32_presentation *client,const console_io_request *input,
     console_io_reply *reply)
 {
     console_io_request request;DWORD error;
@@ -56,7 +56,7 @@ DWORD ntcon_presentation_call(ntcon_presentation *client,const console_io_reques
     EnterCriticalSection(&client->lock);error=exchange(client,&request,reply);
     LeaveCriticalSection(&client->lock);return error;
 }
-DWORD ntcon_presentation_input(ntcon_presentation *client,HANDLE input,DWORD *accepted)
+DWORD ntw32_presentation_input(ntw32_presentation *client,HANDLE input,DWORD *accepted)
 {
     console_io_request request={0};console_io_reply reply;
     INPUT_RECORD records[CONSOLE_IO_INPUT_CAPACITY*2];DWORD error,index,count=0;
@@ -68,11 +68,11 @@ DWORD ntcon_presentation_input(ntcon_presentation *client,HANDLE input,DWORD *ac
     if(!error && (reply.state.count>CONSOLE_IO_INPUT_CAPACITY ||
         reply.bytes!=reply.state.count*sizeof(console_io_input)))error=ERROR_INVALID_DATA;
     if(!error && reply.state.count) {
-        ntcon_capture capture={0};
-        error=ntcon_capture_begin(&capture);
-        if(!error)error=ntcon_mouse_geometry(&client->mouse,capture.info.srWindow,
+        ntw32_capture capture={0};
+        error=ntw32_capture_begin(&capture);
+        if(!error)error=ntw32_mouse_geometry(&client->mouse,capture.info.srWindow,
             client->has_handoff_font ? client->handoff_font.font_height : 16);
-        ntcon_capture_end(&capture);
+        ntw32_capture_end(&capture);
     }
     for(index=0;!error && index<reply.state.count;++index) {
         console_io_input wire;
@@ -84,13 +84,13 @@ DWORD ntcon_presentation_input(ntcon_presentation *client,HANDLE input,DWORD *ac
             }
             pointer.dx=wire.x;pointer.dy=wire.y;pointer.control=wire.control;
             pointer.buttons=(uint16_t)wire.buttons;pointer.action=(uint16_t)wire.flags;
-            error=ntcon_mouse_input(&client->mouse,&pointer,records+count,&generated);
+            error=ntw32_mouse_input(&client->mouse,&pointer,records+count,&generated);
             count+=generated;
         } else {
             if(!ntkvm_worker_decode_input(&wire,&records[count]))error=ERROR_INVALID_DATA;
             else {
                 if(wire.type==MOUSE_EVENT && client->mouse.ready) {
-                    ntcon_mouse *mouse=&client->mouse;
+                    ntw32_mouse *mouse=&client->mouse;
                     mouse->x=max(0,min(wire.x-mouse->viewport.Left,
                         mouse->viewport.Right-mouse->viewport.Left))*8;
                     mouse->y=max(0,min(wire.y-mouse->viewport.Top,
@@ -101,17 +101,17 @@ DWORD ntcon_presentation_input(ntcon_presentation *client,HANDLE input,DWORD *ac
             }
         }
     }
-    if(!error && count)error=ntcon_input_write(input,records,count,accepted);
+    if(!error && count)error=ntw32_input_write(input,records,count,accepted);
     /* Once removed from the frontend queue, an ambiguous failed batch cannot
      * be retried. Retain the failure rather than duplicate delivered keys. */
     if(error && error!=ERROR_NOT_READY && error!=ERROR_BUSY)client->channel.failure=error;
     LeaveCriticalSection(&client->lock);return error;
 }
-DWORD ntcon_presentation_text(ntcon_presentation *client,const console_video_description *description,
+DWORD ntw32_presentation_text(ntw32_presentation *client,const console_video_description *description,
     const void *payload,SIZE_T capacity)
 {
     DWORD error;
-    /* NTCON cannot send DIBs or an inconsistent text shape. Geometry limits
+    /* NTW32 cannot send DIBs or an inconsistent text shape. Geometry limits
      * and style validation remain with the unchanged common receiver. */
     if(!client || !description || !payload || description->kind!=CONSOLE_VIDEO_TEXT_FRAME ||
         description->depth || !description->width || !description->height ||
@@ -124,15 +124,15 @@ DWORD ntcon_presentation_text(ntcon_presentation *client,const console_video_des
     LeaveCriticalSection(&client->lock);return error;
 }
 
-DWORD ntcon_presentation_capture(ntcon_presentation *client,const console_text_style *font)
+DWORD ntw32_presentation_capture(ntw32_presentation *client,const console_text_style *font)
 {
-    ntcon_capture capture={0};CHAR_INFO *cells=NULL;BYTE *payload=NULL;
+    ntw32_capture capture={0};CHAR_INFO *cells=NULL;BYTE *payload=NULL;
     char title[CONSOLE_IO_TITLE_BYTES]={0};BOOL title_read=FALSE;
     console_io_request request={0};console_io_reply reply;
     console_video_description description={0};DWORD error,total,offset=0,count;
     SMALL_RECT region;
     if(!client || !font)return ERROR_INVALID_PARAMETER;
-    error=ntcon_capture_begin(&capture);
+    error=ntw32_capture_begin(&capture);
     if(error)return error;
     SetLastError(ERROR_SUCCESS);
     if(GetConsoleTitleA(title,sizeof(title)) || GetLastError()==ERROR_SUCCESS) {
@@ -145,17 +145,17 @@ DWORD ntcon_presentation_capture(ntcon_presentation *client,const console_text_s
     while(offset<total) {
         DWORD capacity=total-offset;
         if(capacity>4096)capacity=4096;
-        error=ntcon_capture_read(&capture,offset,cells+offset,capacity,&region,&count);
+        error=ntw32_capture_read(&capture,offset,cells+offset,capacity,&region,&count);
         if(error)goto done;
         if(!count || count>capacity) { error=ERROR_INVALID_DATA;goto done; }
         offset+=count;
     }
     EnterCriticalSection(&client->lock);
-    error=ntcon_mouse_geometry(&client->mouse,capture.info.srWindow,
+    error=ntw32_mouse_geometry(&client->mouse,capture.info.srWindow,
         client->has_handoff_font ? client->handoff_font.font_height : font->font_height);
-    if(!error)error=ntcon_text_frame_pack(&capture.info,&capture.cursor,cells,total,
+    if(!error)error=ntw32_text_frame_pack(&capture.info,&capture.cursor,cells,total,
         client->has_handoff_font ? &client->handoff_font : font,&description,&payload);
-    if(!error)ntcon_mouse_compose(&client->mouse,&description,payload);
+    if(!error)ntw32_mouse_compose(&client->mouse,&description,payload);
     LeaveCriticalSection(&client->lock);
     if(error)goto done;
     /* Use the same copied Console operations as NTVDM for the visible text
@@ -174,7 +174,7 @@ DWORD ntcon_presentation_capture(ntcon_presentation *client,const console_text_s
     request.operation=CONSOLE_IO_SCREEN_INFO;
     error=exchange(client,&request,&reply);
     if(!error && (reply.state.width!=capture.info.dwSize.X || reply.state.height!=capture.info.dwSize.Y)) {
-        /* Same order as ntcon_screen_apply: grow before moving the viewport,
+        /* Same order as ntw32_screen_apply: grow before moving the viewport,
          * shrink only after it fits. A native TUI may shrink 120x9001 to
          * 80x25; shrinking beneath the old visible window is invalid. */
         LONG width=max(reply.state.width,capture.info.dwSize.X);
@@ -232,7 +232,7 @@ DWORD ntcon_presentation_capture(ntcon_presentation *client,const console_text_s
         request.state.attribute=capture.info.wAttributes;
         error=exchange(client,&request,&reply);
     }
-    if(!error)error=ntcon_presentation_text(client,&description,payload,description.bytes);
+    if(!error)error=ntw32_presentation_text(client,&description,payload,description.bytes);
     if(client->published_cells)HeapFree(GetProcessHeap(),0,client->published_cells);
     client->published_cells=NULL;client->published_count=0;
     if(!error) {
@@ -244,11 +244,11 @@ captured_done:
 done:
     if(payload)HeapFree(GetProcessHeap(),0,payload);
     if(cells)HeapFree(GetProcessHeap(),0,cells);
-    ntcon_trace_error("capture",0,error);
-    ntcon_capture_end(&capture);return error;
+    ntw32_trace_error("capture",0,error);
+    ntw32_capture_end(&capture);return error;
 }
 
-static DWORD read_configuration(ntcon_presentation *client,console_text_configuration *configuration,BOOL *found)
+static DWORD read_configuration(ntw32_presentation *client,console_text_configuration *configuration,BOOL *found)
 {
     console_io_request request={0};console_io_reply reply;
     DWORD offset=0,revision=0,error;
@@ -312,7 +312,7 @@ static DWORD seed_history_row(HANDLE output,const CONSOLE_SCREEN_BUFFER_INFOEX *
     return best_row;
 }
 
-DWORD ntcon_presentation_seed(ntcon_presentation *client,HANDLE output)
+DWORD ntw32_presentation_seed(ntw32_presentation *client,HANDLE output)
 {
     console_io_request request={0};console_io_reply reply;
     console_io_state screen;
@@ -405,12 +405,12 @@ DWORD ntcon_presentation_seed(ntcon_presentation *client,HANDLE output)
     info.srWindow.Left=(SHORT)screen.left;info.srWindow.Top=(SHORT)(screen.top+row_bias);
     info.srWindow.Right=(SHORT)screen.right;info.srWindow.Bottom=(SHORT)(screen.bottom+row_bias);
     info.wAttributes=(WORD)screen.attribute;
-    error=ntcon_screen_apply(output,&info,&cursor);
+    error=ntw32_screen_apply(output,&info,&cursor);
     for(offset=0;!error && offset<total;offset+=count) {
         count=min(width-offset%width,CONSOLE_IO_DATA_BYTES/sizeof(console_io_cell));
         if(!(offset%width) && count==width)
             count=width*min((total-offset)/width,(CONSOLE_IO_DATA_BYTES/sizeof(console_io_cell))/width);
-        error=ntcon_cells_write(output,row_bias*width+offset,cells+offset,count);
+        error=ntw32_cells_write(output,row_bias*width+offset,cells+offset,count);
     }
     /* Seed is the acknowledged common screen. Publish subsequent changes,
      * not thousands of unchanged scrollback rows on every input iteration. */
@@ -425,7 +425,7 @@ DWORD ntcon_presentation_seed(ntcon_presentation *client,HANDLE output)
         }
         client->seeded=TRUE;
         client->mouse.visible=FALSE;client->mouse.buttons=0;
-        error=ntcon_mouse_geometry(&client->mouse,info.srWindow,
+        error=ntw32_mouse_geometry(&client->mouse,info.srWindow,
             has_configuration ? configuration.style.font_height : 16);
     }
 done:
@@ -439,18 +439,18 @@ done:
     LeaveCriticalSection(&client->lock);return error;
 }
 
-static DWORD activate_presentation(ntcon_presentation *client,BOOL active)
+static DWORD activate_presentation(ntw32_presentation *client,BOOL active)
 {
     return ntkvm_worker_activate(&client->channel,CONSOLE_IO_WORKER_NATIVE,active);
 }
-DWORD ntcon_presentation_begin(ntcon_presentation *client,HANDLE output)
+DWORD ntw32_presentation_begin(ntw32_presentation *client,HANDLE output)
 {
     DWORD error;
     if(!client || !output || output==INVALID_HANDLE_VALUE)return ERROR_INVALID_PARAMETER;
     EnterCriticalSection(&client->lock);
     error=activate_presentation(client,TRUE);
     if(!error) {
-        error=ntcon_presentation_seed(client,output);
+        error=ntw32_presentation_seed(client,output);
         if(!error) {
             console_io_request request={0};console_io_reply reply;
             request.operation=CONSOLE_IO_SET_MODE;request.state.input=1;
@@ -464,7 +464,7 @@ DWORD ntcon_presentation_begin(ntcon_presentation *client,HANDLE output)
 /* Return only records still present in an empty native Console, never replay
  * consumed input. Same PREPEND_KEYS wire shape as console_client.c. The caller
  * serializes execution admission and has stopped this endpoint's input pump. */
-static DWORD return_unused_input(ntcon_presentation *client)
+static DWORD return_unused_input(ntw32_presentation *client)
 {
     HANDLE input=GetStdHandle(STD_INPUT_HANDLE);
     DWORD pending=0,read=0,error=0,index,keys=0;
@@ -490,7 +490,7 @@ static DWORD return_unused_input(ntcon_presentation *client)
     }
     HeapFree(GetProcessHeap(),0,records);return error;
 }
-DWORD ntcon_presentation_end(ntcon_presentation *client,const console_text_style *font)
+DWORD ntw32_presentation_end(ntw32_presentation *client,const console_text_style *font)
 {
     console_io_request request={0};console_io_reply reply;DWORD error,released,attempt;
     if(!client || !font)return ERROR_INVALID_PARAMETER;
@@ -498,13 +498,13 @@ DWORD ntcon_presentation_end(ntcon_presentation *client,const console_text_style
     {
         console_pointer_input leave={0};INPUT_RECORD records[2];DWORD count=0,written=0;
         leave.action=CONSOLE_MOUSE_LEAVE;
-        error=client->mouse.ready ? ntcon_mouse_input(&client->mouse,&leave,records,&count) : 0;
-        if(!error && count)error=ntcon_input_write(GetStdHandle(STD_INPUT_HANDLE),records,count,&written);
+        error=client->mouse.ready ? ntw32_mouse_input(&client->mouse,&leave,records,&count) : 0;
+        if(!error && count)error=ntw32_input_write(GetStdHandle(STD_INPUT_HANDLE),records,count,&written);
     }
     /* A native target may resize during capture. Restart from a fresh
      * snapshot before returning unused input or releasing ownership. */
     if(!error)for(attempt=0;attempt<8;++attempt) {
-        error=ntcon_presentation_capture(client,font);
+        error=ntw32_presentation_capture(client,font);
         if(error!=ERROR_RETRY)break;
         if(attempt<7)Sleep(10);
     }

@@ -62,7 +62,7 @@ monitor-adapter material.
   and service IDL belong to declaration-only `interface`; broker transport
   and validation implementations remain NTSRV-owned. The admitted
   `worker-base` library contains shared project-added worker mechanisms used
-  by NTVDM/NTCON, including their common protocol client, not their consumers'
+  by NTVDM/NTW32, including their common protocol client, not their consumers'
   worker-management, frontend server or rendering. Preserve original mirror
   execution and cleanup in place; shared mechanisms use explicit instance
   state, owned/borrowed resource contracts and caller-owned lock boundaries.

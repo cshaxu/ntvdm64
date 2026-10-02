@@ -2,7 +2,7 @@
 
 > **S24 closed baseline.** This document retains the Job experiment
 > as research evidence only. S24's publishable baseline is deliberately
-> narrower: a resident NTCON registers before its blocking get-next call,
+> narrower: a resident NTW32 registers before its blocking get-next call,
 > receives one authenticated direct command, binds that direct target identity
 > before `ResumeThread`, returns the target's actual Windows result, becomes
 > READY, and is reused. No Job creation, assignment, notification or
@@ -14,7 +14,7 @@
 
 PID sampling correctly removed a count guess, but cannot be authoritative: a
 short-lived descendant can be created and exit between samples. It must not be
-used as acceptance evidence for ConRecord order, completion or worker
+used as acceptance evidence for Win32Record order, completion or worker
 `BUSY`/`EMPTY` state.
 
 The subsequent Job-completion-port design removes that sampling window, but
@@ -34,10 +34,10 @@ That experiment is useful compatibility evidence, not a proof that no event
 can be lost. It does not close S24 or authorize publication.
 
 The owner selected the bounded design: NTSRV owns each direct native root's
-event-only Job and completion port; NTCON creates the target suspended, calls
+event-only Job and completion port; NTW32 creates the target suspended, calls
 the existing authenticated bind, and resumes only after NTSRV has attached it.
 NTSRV stores Job events
-as `Observed` elements in the same ConRecord stack as the `Direct` root.
+as `Observed` elements in the same Win32Record stack as the `Direct` root.
 The direct root's duplicated
 process handle, not a Job event, remains the authority for its run16 receipt.
 Observed participants never govern worker readiness, worker shutdown, or
@@ -54,10 +54,10 @@ and [ETW missing-event semantics](https://learn.microsoft.com/en-us/windows/win3
 
 ## Retained Job Projection Research (not the S24 product path)
 
-NTSRV creates one `CONRECORD` list per NTCON worker. Each element is marked
+NTSRV creates one `WIN32RECORD` list per NTW32 worker. Each element is marked
 `DIRECT` or `OBSERVED` by source; those marks do not create separate tables or
 separate stacks. A direct record is bound
-only by the authenticated NTCON worker passing the typed process handle from
+only by the authenticated NTW32 worker passing the typed process handle from
 its successful `CreateProcess`; it is not a launcher-nominated PID. Job
 notifications append and retire `OBSERVED` elements on that same list.
 `STACK` is exactly this list's length. Direct records alone retain their
@@ -72,10 +72,10 @@ only and never retain a worker in BUSY state.
 
 The full x86 Ninja graph completed successfully in the host toolchain
 environment; a subsequent `ninja -n` reported `no work to do`. The focused
-`ntcon-execution-lifetime-test.exe` passed 444 checks with zero failures,
+`ntw32-execution-lifetime-test.exe` passed 444 checks with zero failures,
 12 completed and 16 cancelled requests, a surviving target after worker
 closure, and no retained handles. The worker-base next-command, native-worker
-reservation, NTCON close and isolated Job-research fixtures also passed.
+reservation, NTW32 close and isolated Job-research fixtures also passed.
 The Job tracker is absent from production NTSRV initialization and linkage.
 
 The first seven-file publication failed owner Win32 interaction and was
@@ -90,14 +90,14 @@ SHA-256 equality between revised formal output and each published file was verif
 | `ntsrv.exe` | `CC10833CCD00F8EFFC03C606FBF9243F263FE3AEC6D124FEEFB919B8631C1805` |
 | `ntvdm.exe` | `2905E54DD661D3AFF9A296D52F4FA8AD53CAE1AB645CF494F190595274D78F92` |
 | `ntkvm.exe` | `519814DB69A01DDD106F0A683D9B6E5B07588D1406EAC01E54A4053DCB92D7E3` |
-| `ntcon.exe` | `33AEFBC83CAA74E29193D0C66420AC12F24FF13FA952CF12519032665FF57A88` |
+| `ntw32.exe` | `33AEFBC83CAA74E29193D0C66420AC12F24FF13FA952CF12519032665FF57A88` |
 | `ntmon.exe` | `F453D27E3BA35D069D581949D0370F3FC5B6DED3B2F4C94BE5C8B105E267E46B` |
 | `VDMREDIR.dll` | `DC0CD220688A2E3C4966EA80CAEEBBAD677944C5526DD101CE5783A01FFA320C` |
 
 In an isolated build package before the readiness correction, direct `cmd`
 requests returned 0, 37, and 0
-in one Console; the sequence exited 0 and left exactly one NTCON after
-starting with zero NTCON processes. The short real-program matrix passed
+in one Console; the sequence exited 0 and left exactly one NTW32 after
+starting with zero NTW32 processes. The short real-program matrix passed
 direct MEM, `COMMAND /c ver`, `COMMAND /c MEM`, interactive MEM, nested
 COMMAND/MEM and EDIT with guest text/exit observations. Published-package
 smoke tests returned 0 for `run16 cmd /c ver`, 0 for
@@ -109,10 +109,10 @@ output or input; they were insufficient and did not justify publication.
 The initial publication was rejected by the owner: `run16 cmd` had no usable
 input/output and `cmd /c ver` printed nothing. It was restored from the
 seven-file backup before any further publication. The exact code regression
-was in NTCON `begin_io`: it returned success while its presentation pointer
+was in NTW32 `begin_io`: it returned success while its presentation pointer
 was null, allowing the hidden-Console target to start before NTKVM attached.
 The revised candidate restores `ERROR_NOT_READY` until the presentation
-exists, and calls the existing `ntcon_presentation_end` for the final direct
+exists, and calls the existing `ntw32_presentation_end` for the final direct
 consumer. This matches NTVDM's earlier `WaitFrontend -> activate -> guest`
 ordering without moving original DOS execution logic into `worker-base`.
 
@@ -151,7 +151,7 @@ member have been removed; the isolated Job fixture remains research evidence.
 The remaining presentation timer cannot be removed merely by waiting on the
 hidden Console input handle: that handle signals input, not arbitrary output
 buffer writes. A bounded x86 probe in
-`tests/observation/ntcon_console_winevent_probe.c` installed an out-of-context
+`tests/observation/ntw32_console_winevent_probe.c` installed an out-of-context
 Console WinEvent hook with a message loop, wrote to the hidden Console via
 `WriteConsoleOutputCharacterW`, and moved its cursor. It received zero real
 Console update/caret notifications; a synthetic `NotifyWinEvent` reached the
@@ -166,13 +166,13 @@ in NTKVM were made idempotent to avoid perturbing host cursor blink, but
 this does not constitute removal of the presentation sampler or prove the
 user-visible blink fixed.
 This exception is specific to observing writes by unmodified native programs
-in NTCON's hidden Console; it does not authorize timer polling for broker
+in NTW32's hidden Console; it does not authorize timer polling for broker
 commands, completion, handoff ordering or other controllable producers.
 The updated NTKVM x86 binary and `console-frontend-test.exe` link successfully
 in `build/M0-T423/S24-helperless-clean`. In this headless invocation, the
 frontend fixture passes its earlier protocol/dispatch sections but stops at
 line 234 while resizing a real host Console (`SetConsoleScreenBufferSize`,
-error 87); it is not recorded as a full pass. The NTCON execution-lifetime
+error 87); it is not recorded as a full pass. The NTW32 execution-lifetime
 fixture separately passes its 444 checks. The WinEvent probe exits 5 by design
 when no real buffer-update notification follows the synthetic callback:
 `synthetic-simple=1 output-wrote=17 real-update=0`.
@@ -189,25 +189,25 @@ Relevant API contracts: [Console screen buffers](https://learn.microsoft.com/en-
   payload, returns a structured `native_request_reply` (`ERROR_BUSY` in the
   fixture), and only then completes the broker command. The requester cannot
   wait for a reply that will never be sent.
-- `ntcon-execution-lifetime-test` passed with
+- `ntw32-execution-lifetime-test` passed with
   `checks=432 failures=0 completed=12 cancelled=16 target-survival=yes`.
   This includes the preflight-rejection reply and proves that the rejected
   request did not launch its probe target.
 - The x86 manual rebuild logged in
   `build/M0-T423/S24-helperless-clean/manual-s24-preflight-build.log` rebuilt
-  `ntcon.exe` and the lifetime fixture. The exact rebuilt seven-component
+  `ntw32.exe` and the lifetime fixture. The exact rebuilt seven-component
   package was copied to `O:/winnt`; SHA-256 equality was checked per file.
 - Actual package checks passed: `run16 cmd /c ver` returned 0,
   `run16 command /c ver` returned 0, and `run16 cmd /c exit 37` returned 37.
   Two successive `run16 cmd /c ver` commands in the same host Console both
-  returned 0 and left exactly one resident `ntcon.exe`, proving direct worker
+  returned 0 and left exactly one resident `ntw32.exe`, proving direct worker
   reuse rather than a second native worker. These commands use the established
   command-line syntax; no `--` separator was introduced.
 
 The S24 graph generated with Node 22.22.1 contains the explicit x86 product
 closure for `run16.exe`, `ntsrv.exe`, `ntvdm.exe`, `ntkvm.exe`, `ntmon.exe`,
-`ntcon.exe` and `VDMREDIR.dll`.  The current formal-r2 x86 rebuild linked the
-current protocol-23 `ntsrv.exe`, `ntcon.exe`, `run16.exe`, `ntkvm.exe`,
+`ntw32.exe` and `VDMREDIR.dll`.  The current formal-r2 x86 rebuild linked the
+current protocol-23 `ntsrv.exe`, `ntw32.exe`, `run16.exe`, `ntkvm.exe`,
 `ntmon.exe` and `ntvdm.exe`; `ntvdm.exe` also passed its current VdmTib
 ownership audit.  This is a build-closure result, not publication or a claim
 that the frontend integration gate below has passed.
@@ -242,10 +242,10 @@ treated as a successful standalone WOW32 build or publication.
   `READY`; releasing the child retires that observed tail to `STACK=0` during
   ordinary cleanup.  Five consecutive runs passed. Thus an Observed node is
   visible in the same chain but has no receipt or BUSY/EMPTY authority.
-- `ntcon-execution-lifetime-test`: 369 checks, zero failures. Covers normal
+- `ntw32-execution-lifetime-test`: 369 checks, zero failures. Covers normal
   and failed execution barriers, cancellation, request-handle release and a
   target surviving worker-side request cleanup.
-- `ntcon-close-test`: pass. Covers the normal Console-session close path
+- `ntw32-close-test`: pass. Covers the normal Console-session close path
   without a Job kill limit.
 - Fresh x86 candidate, short package-root integration: both `run16 MEM.EXE`
   and `cmd.exe /d /c "run16 MEM.EXE"` returned exit `0`; the latter produced
@@ -255,7 +255,7 @@ treated as a successful standalone WOW32 build or publication.
   current source as x86 `/MT`; its generator explicitly defines
   `_CRT_SECURE_NO_WARNINGS` so the selected source is reproducibly clean under
   `/W4 /WX`. Its first result exposed, and the candidate corrects,
-  `ntcon-exe/main.c::end_io` using an uninitialized completion-status local.
+  `ntw32-exe/main.c::end_io` using an uninitialized completion-status local.
   That local had returned random launcher codes after a successful native
   target. The current observer passes `native-cmd-dos`,
   `native-cmd-dos-repeat`, and `dos-native-dos`, each with its expected exit
@@ -265,7 +265,7 @@ treated as a successful standalone WOW32 build or publication.
   absent worker`.
 - The historical `build/M0-T423/S24/formal` package used protocol 20.  The
   regenerated formal-r2 graph compiled the protocol-23 MIDL stubs and linked
-  the affected RPC clients plus NTSRV/NTCON/NTMON.  The remaining S24 gate is
+  the affected RPC clients plus NTSRV/NTW32/NTMON.  The remaining S24 gate is
   end-to-end frontend bootstrap, not an unlinked protocol client.
 
 The current S24 source inputs for `native_job_tracker.c`, `base_service.c`,
@@ -299,25 +299,25 @@ ACL is present.
 ### Worker-shape convergence audit (2026-09-30)
 
 The owner required that OpenNT/MVDM remain the semantic and interface-shape
-authority: NTCON must adapt to that shape, never the reverse.  A source search
-of `src/mvdm` and `src/ntvdm-exe` found no project NTCON registration, native
-worker-channel, or NTCON scheduling call in those mirrors.  The `ntcon` hits
+authority: NTW32 must adapt to that shape, never the reverse.  A source search
+of `src/mvdm` and `src/ntvdm-exe` found no project NTW32 registration, native
+worker-channel, or NTW32 scheduling call in those mirrors.  The `ntw32` hits
 there name the historical NT Console Server or occur in original comments;
-they are not dependencies on this product's `ntcon.exe` worker.
+they are not dependencies on this product's `ntw32.exe` worker.
 
 The project-native receive path is now represented in `worker-base` as
 `GetNextNativeCommand -> Complete -> GetNextNativeCommand`.  Its private
 implementation may wait on the authenticated worker channel, but that
 transport detail is not the worker execution contract.  Original
 `GetNextVDMCommand`, its DOS/WOW records, re-entry, standard streams, waits
-and completion remain in their original MVDM/BaseSrv owners.  NTCON retains
+and completion remain in their original MVDM/BaseSrv owners.  NTW32 retains
 only its native-specific work: suspended `CreateProcess`, authenticated target
 bind, `ResumeThread`, Windows completion and the next receive cycle.
 
 The RPC method and its generated client/server stubs use the same
 `GetNextNativeCommand` name.  This is intentionally a native-worker analogue,
 not a rename or wrapper around original `GetNextVDMCommand`: the latter stays
-in the original MVDM path and NTVDM does not call, include or adapt to NTCON.
+in the original MVDM path and NTVDM does not call, include or adapt to NTW32.
 The earlier externally callable `TakeWorkerChannel` transport operation has
 been removed from the service IDL and client surface.  NTSRV retains its
 nonblocking take routine solely as an internal implementation detail of the
@@ -330,16 +330,16 @@ Focused x86 evidence is positive but deliberately bounded:
 
 - `worker-base-next-command-test.exe`: ownership transfer, failure disposal
   and completion (`PASS`);
-- `ntcon-execution-lifetime-test.exe`: 413 checks, including the new
+- `ntw32-execution-lifetime-test.exe`: 413 checks, including the new
   event-driven direct-completion-to-next-command barrier; 12 completed
   requests, 16 cancelled requests, no residual handles and no target kill on
   close (`PASS`).
 
-The cold formal `ntcon.exe` graph has a 52-command dependency closure.  The
+The cold formal `ntw32.exe` graph has a 52-command dependency closure.  The
 normal Ninja dispatcher did not make progress reliably in this environment,
 so the exact generated x86 command rows were executed in dependency order
 under the same VS x86 environment.  The resulting protocol-23 `ntsrv.exe`
-and `ntcon.exe` linked successfully.  This is a build proof only: neither
+and `ntw32.exe` linked successfully.  This is a build proof only: neither
 candidate is published and the end-to-end frontend/bootstrap gate remains
 open.
 
@@ -355,7 +355,7 @@ cross-worker handling divergence.
 The owner selected the first truthful contract: NTSRV is authoritative for
 submitted Direct native targets, while Job descendants are explicitly
 best-effort `Observed` projection entries.  They are visible in the one
-ConRecord stack used by NTMON, but do not govern receipt completion, worker
+Win32Record stack used by NTMON, but do not govern receipt completion, worker
 readiness or worker shutdown.  This is intentionally analogous to an
 unobserved DOS-only nested execution: it improves management visibility without
 inventing a second scheduler or pretending that Windows parent/child exit
@@ -368,7 +368,7 @@ remains superseded evidence only.
 
 ### Ruled-out Debugger Alternative
 
-`CreateProcess(DEBUG_PROCESS)` would make NTCON a Windows debugger for the
+`CreateProcess(DEBUG_PROCESS)` would make NTW32 a Windows debugger for the
 direct process and, absent `DEBUG_ONLY_THIS_PROCESS`, its descendants. Windows
 then reports debug events, including process create and exit, to the debugger.
 It is not an interchangeable observation API: the debugger's creator thread
@@ -397,7 +397,7 @@ algorithm to recover.
 That distinction is material: `CMD -> CMD -> EDIT` is normally a Windows
 native parent/child chain whose waits and exit propagation remain Windows'
 responsibility. NTSRV must be authoritative for the direct request it admits
-to NTCON, but a full mirror of each Windows descendant would be a new product
+to NTW32, but a full mirror of each Windows descendant would be a new product
 task scheduler/registry rather than a restoration of BaseSrv semantics.
 The authoritative direct-request boundary is therefore both the smallest
 standalone design and the closest available original-owner boundary.
@@ -424,14 +424,14 @@ identity, command, receipt or completion authority.
 
 Focused proof on the current x86 build:
 
-- protocol-23 MIDL, `run16.exe`, `ntsrv.exe`, `ntkvm.exe` and `ntcon.exe`
+- protocol-23 MIDL, `run16.exe`, `ntsrv.exe`, `ntkvm.exe` and `ntw32.exe`
   linked from `build/M0-T423/S24-helperless-clean`;
 - the reservation/lifecycle fixture passed, including its same-Console
   `CheckDOS -> existing worker -> GetNextVDMCommand` reuse case after a
   valid helperless member report;
-- worker-base next-command, NTCON close and the 413-check NTCON request
+- worker-base next-command, NTW32 close and the 413-check NTW32 request
   lifetime fixtures passed;
-- the NTCON execution fixture completed the new report RPC, then failed at
+- the NTW32 execution fixture completed the new report RPC, then failed at
   its pre-existing native `cmd.exe` exit-code assertion. The retained
   protocol-22 baseline fails at the same assertion, so this is not evidence
   of the replacement and is not counted as a pass.
@@ -439,9 +439,9 @@ Focused proof on the current x86 build:
 This is bounded transport cleanup, not S24 closure: the native participant
 projection and full frontend/bootstrap integration remain active work.
 
-The same audit found one local NTCON rollback mismatch: it moved a fetched
+The same audit found one local NTW32 rollback mismatch: it moved a fetched
 command's attachments before `CreateThread` succeeded, so the common
 worker-base caller could not perform its normal `Complete -> dispose`
 rollback on that failure. Attachment ownership now transfers only after the
 serving thread exists; pre-thread failures leave the command intact for the
-common rollback. The current x86 `ntcon.exe` relinked with this correction.
+common rollback. The current x86 `ntw32.exe` relinked with this correction.

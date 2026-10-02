@@ -3501,7 +3501,7 @@ updates that backing's separate counter under its existing lock. Retirement
 resets the count. Native text-output validation uses screen-buffer info rather
 than GetConsoleMode, rejecting CONIN$ without altering either counter. The
 single-text-surface count remains unchanged. This is the already registered
-ADAPTER-WIN32-050 facade: private ntcon/CSR cannot be composed; original caller,
+ADAPTER-WIN32-050 facade: private ntw32/CSR cannot be composed; original caller,
 counter ordering and failure remain, no new mirror hook or guest mutation.
 Physical pointer ownership stays with conhost/Terminal and is not certified.
 

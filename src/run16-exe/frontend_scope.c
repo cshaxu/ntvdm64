@@ -186,7 +186,7 @@ DWORD run16_frontend_scope_launch_native(run16_frontend_scope *scope,const run16
             STARTUPINFOW startup={sizeof(startup)};PROCESS_INFORMATION process={0};
             DWORD length=GetModuleFileNameW(NULL,image,ARRAYSIZE(image));
             if(!length || length>=ARRAYSIZE(image) || !(slash=wcsrchr(image,L'\\')))error=ERROR_BAD_PATHNAME;
-            else if(wcscpy_s(slash+1,ARRAYSIZE(image)-(size_t)(slash+1-image),L"ntcon.exe"))error=ERROR_FILENAME_EXCED_RANGE;
+            else if(wcscpy_s(slash+1,ARRAYSIZE(image)-(size_t)(slash+1-image),L"ntw32.exe"))error=ERROR_FILENAME_EXCED_RANGE;
             else if(swprintf_s(command,ARRAYSIZE(command),L"\"%ls\"",image)<0)error=ERROR_FILENAME_EXCED_RANGE;
             else {
                 startup.dwFlags=STARTF_USESHOWWINDOW;startup.wShowWindow=SW_HIDE;
@@ -241,7 +241,7 @@ DWORD run16_frontend_scope_wait_native(run16_frontend_scope *scope,HANDLE target
     DWORD error=0,winner=0;
     if(!scope || !target || !result)return ERROR_INVALID_PARAMETER;
     if(scope->receipt){
-        /* The broker signals only after the real target exits and NTCON
+        /* The broker signals only after the real target exits and NTW32
          * releases its I/O. Worker/root death cannot masquerade as success. */
         error=run16_wait_direct_event(scope->receipt,scope->worker,scope->root,&winner);
         if(error)return error;

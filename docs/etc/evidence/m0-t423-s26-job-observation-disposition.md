@@ -3,7 +3,7 @@
 ## Question and baseline
 
 Decide whether the retained Job-completion-port candidate can safely add
-best-effort `Observed` elements to NTSRV's single ConRecord list without
+best-effort `Observed` elements to NTSRV's single Win32Record list without
 changing the accepted S25 direct-command and worker-lifecycle baseline.
 Input was `main` at `5cdc3ffe913d05aae1053656cef737999d67a4b4`, the
 protocol-24 eight-file package at `O:/winnt`, the isolated Job fixture, and
@@ -14,7 +14,7 @@ the Windows Job API contract. No guest or product executable was changed.
 1. Inspected the selected product graph and callers. The candidate
    `native_job_tracker.c` was compiled only for
    `ntsrv-native-job-tracker-test.exe`; no production NTSRV caller or link
-   selected it. Production ConRecords remain direct-request records.
+   selected it. Production Win32Records remain direct-request records.
 2. Generated the x86 graph under `build/M0-T423/S26/formal` with
    `tools/build/New-T310OriginalSoftpcNinja.ps1 -Architecture x86`, using
    Node 22.22.1. Built the isolated target with MSVC Win32/x86 `/MT`.
@@ -49,7 +49,7 @@ correctness. The owner-approved alternative in the S26 brief is therefore
 used: the untouched algorithm is retained as an isolated research fixture
 under `tests/observation/`, and removed from the NTSRV product-source tree.
 
-Product contract after S26: one ConRecord list continues to hold only
+Product contract after S26: one Win32Record list continues to hold only
 authenticated `Direct` entries. NTMON may report those requests and their
 actual bound target PID; it must not claim a complete native descendant
 graph. Native children without their own Run16 request remain Windows-owned

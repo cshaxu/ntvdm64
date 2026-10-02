@@ -16,12 +16,12 @@ if([IO.Path]::GetDirectoryName($report) -notin @('O:\winnt\logs','O:\winnt\Logs2
 if((Test-Path $build) -or (Test-Path $report)){throw 'Use fresh build and report paths'}
 [void](Get-Command cl.exe -ErrorAction Stop)
 [void](New-Item -ItemType Directory -Path $build)
-$exe=Join-Path $build 'ntcon-modern-edit-mouse.exe'
+$exe=Join-Path $build 'ntw32-modern-edit-mouse.exe'
 Push-Location $repo
 try {
     & cl.exe /nologo /W4 /MT /Isrc `
-        tests/observation/ntcon_modern_edit_mouse_test.c `
-        src/ntcon-exe/console_state.c `
+        tests/observation/ntw32_modern_edit_mouse_test.c `
+        src/ntw32-exe/console_state.c `
         "/Fo$build\" "/Fe$exe" /link /incremental:no user32.lib `
         *> (Join-Path $build 'build.log')
     if($LASTEXITCODE){throw "Compile failed: $build/build.log"}

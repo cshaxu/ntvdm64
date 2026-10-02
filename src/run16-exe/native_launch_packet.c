@@ -1,4 +1,4 @@
-/* Project-owned native launch packet codec; shared by submitter and NTCON. */
+/* Project-owned native launch packet codec; shared by submitter and NTW32. */
 #include "interface/native_launch.h"
 #include <string.h>
 #include <wchar.h>

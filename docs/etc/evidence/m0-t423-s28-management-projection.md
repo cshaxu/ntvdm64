@@ -11,14 +11,14 @@ quietly restore it.
 | --- | --- |
 | DOS task stack, completion and re-entry | Original BaseSrv DOS records and NTVDM caller shape. Retained in place; NTMON only receives a copied projection. |
 | Win16 task stack and completion | Original WOW records. Corrected the project-added snapshot projection to put their count in `stack_depth`, the same field already used by DOS and native workers. Original WOW policy is unchanged. |
-| Native direct task | Project-added NTSRV `ConRecord` created only by an admitted Run16 request and bound to NTCON's actual target PID. Retained as one Direct record list; it is not a second execution scheduler. |
+| Native direct task | Project-added NTSRV `Win32Record` created only by an admitted Run16 request and bound to NTW32's actual target PID. Retained as one Direct record list; it is not a second execution scheduler. |
 | Native descendants | Windows/target own their execution, parent wait and exit code. The rejected Job observer supplies no production event; no Observed record, parent PID, inferred task or fabricated completion is exposed. |
 | Management DTO | Project-added `service.idl` and `OPENNT_BASE_WORKER_INFO` formerly carried both `reserved` and `stack_depth` for the same count. Removed `reserved`; one versioned `PID/KIND/STATE/START/TASK/STACK/IMAGE` record remains. Protocol 25 prevents mixing layouts. |
 | NTMON | Already consumes only NTSRV's snapshot and uses kind 0 DOS, 1 Win16, 2 Win32. Its displayed task depth comes from the one DTO; no `MEMBERS=` rendering or process enumeration was found in its production path. Retained unchanged. |
 | Run16 worker selection and direct waits | Already one authenticated NTSRV admission route with a native-kind branch; Win32 process exit code remains from the real target HANDLE. No duplicate policy was extracted. |
 | NTKVM frontend | One frontend route and frame/event contract for both worker kinds; it does not create task records or decide worker READY/BUSY. Presentation owner remains separate from NTSRV. |
-| Worker-base | Only the shared connection/death-watch and ordered frontend client remain, as proven in S27. NTCON-only native get-next stays local; original NTVDM `GetNextVDMCommand` remains untouched. |
-| NTCON execution and hidden Console | Worker-local Windows process/Console mechanics are not DOS/WOW semantics and are not moved into a false common scheduler. Its one admitted Direct completion is reported to NTSRV; descendant Windows behavior remains native. |
+| Worker-base | Only the shared connection/death-watch and ordered frontend client remain, as proven in S27. NTW32-only native get-next stays local; original NTVDM `GetNextVDMCommand` remains untouched. |
+| NTW32 execution and hidden Console | Worker-local Windows process/Console mechanics are not DOS/WOW semantics and are not moved into a false common scheduler. Its one admitted Direct completion is reported to NTSRV; descendant Windows behavior remains native. |
 
 The concrete cleanup removes one duplicate 32-bit management field from both
 local and RPC layouts, two dead native-record fields (`observed` and
@@ -70,7 +70,7 @@ that would require the separate source-of-truth decision rejected in S26.
 | `run16.exe` | `6FC19E54840EF9220420C24EE380FE4F481EF76E111018D7DBAFFF8C81EF30B2` |
 | `ntsrv.exe` | `21F158E5F6359EC70C7AB9DC8DC55836DA78B0F4F4170B2220E9D1E9F49415DC` |
 | `ntvdm.exe` | `0CEF521662A57204573383C3725EADF781AC00A572983A8538FE8CC4E3849410` |
-| `ntcon.exe` | `1838DE13DBBCEE9CA5A2E91BDDFB94D35C530DF613FFFA51DAF16A74E06B112D` |
+| `ntw32.exe` | `1838DE13DBBCEE9CA5A2E91BDDFB94D35C530DF613FFFA51DAF16A74E06B112D` |
 | `ntkvm.exe` | `D1B8487317678F58981185063D4A6A65BE4A5DEE105C309C946A836E95E9A2FE` |
 | `ntmon.exe` | `8C62D13121CE6283ED0CE62A565D63D8616951DC940B520EDBA230DA1ED80E02` |
 | `VDMREDIR.dll` | `02AD32A276D346D5C58025A74F241D9CDF2506B8BAF0802A563853CD5E7144C6` |

@@ -74,13 +74,13 @@ function Assert-FrontendOwnership([string[]]$Lines) {
     if ($worker.Count) {
         throw "ntvdm frontend client-only boundary mismatch: $worker"
     }
-    $native = @(Get-FrontendSources 'ntcon.exe')
+    $native = @(Get-FrontendSources 'ntw32.exe')
     if ($native.Count) {
-        throw "ntcon frontend client-only boundary mismatch: $native"
+        throw "ntw32 frontend client-only boundary mismatch: $native"
     }
     foreach($target in @('frontend-client.lib','ntkvm.exe')) {
-        if(@(Get-FrontendSources $target 'ntcon-exe').Count) {
-            throw "$target must not depend on NTCON-private implementation"
+        if(@(Get-FrontendSources $target 'ntw32-exe').Count) {
+            throw "$target must not depend on NTW32-private implementation"
         }
         $actual=@(Get-FrontendSources $target 'run16-exe')
         if('native_launch.c' -in $actual) {
@@ -90,29 +90,29 @@ function Assert-FrontendOwnership([string[]]$Lines) {
             if($required -notin $actual){throw "$target omits shared startup client $required"}
         }
     }
-    $launcherNative=@(Get-FrontendSources 'run16.exe' 'ntcon-exe')
+    $launcherNative=@(Get-FrontendSources 'run16.exe' 'ntw32-exe')
     if($launcherNative.Count -or 'native_launch.c' -notin @(Get-FrontendSources 'run16.exe' 'run16-exe')) {
-        throw 'run16 must retain bounded GUI creation, not NTCON execution/presentation'
+        throw 'run16 must retain bounded GUI creation, not NTW32 execution/presentation'
     }
     foreach($required in @('native_launch.c','native_launch_packet.c')) {
-        if($required -notin @(Get-FrontendSources 'ntcon.exe' 'run16-exe')) {
-            throw "NTCON omits shared native launch primitive $required"
+        if($required -notin @(Get-FrontendSources 'ntw32.exe' 'run16-exe')) {
+            throw "NTW32 omits shared native launch primitive $required"
         }
     }
     $shared = @(Get-FrontendSources 'worker-base.lib')
     if ($shared.Count) {
         throw 'Worker protocol library contains a non-client implementation'
     }
-    foreach($target in @('worker-base.lib','ntvdm.exe','ntcon.exe')) {
+    foreach($target in @('worker-base.lib','ntvdm.exe','ntw32.exe')) {
         $actual=@(Get-FrontendSources $target 'worker-base')
         if(@(Compare-Object @('connection.c','console_client.c') $actual).Count) {
             throw "$target does not use the complete common worker implementation"
         }
     }
-    $ntvdmNative=@(Get-FrontendSources 'ntvdm.exe' 'ntcon-exe')
-    $ntconNative=@(Get-FrontendSources 'ntcon.exe' 'ntcon-exe')
+    $ntvdmNative=@(Get-FrontendSources 'ntvdm.exe' 'ntw32-exe')
+    $ntconNative=@(Get-FrontendSources 'ntw32.exe' 'ntw32-exe')
     if('next_command.c' -in $ntvdmNative -or 'next_command.c' -notin $ntconNative) {
-        throw 'NTCON-only native GetNext wrapper must not enter NTVDM or worker-base'
+        throw 'NTW32-only native GetNext wrapper must not enter NTVDM or worker-base'
     }
     foreach($target in @('run16.exe','ntsrv.exe','ntkvm.exe','ntmon.exe')) {
         if(@(Get-FrontendSources $target 'worker-base').Count) {

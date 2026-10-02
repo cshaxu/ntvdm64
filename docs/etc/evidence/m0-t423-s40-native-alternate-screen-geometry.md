@@ -13,11 +13,11 @@ Private-desktop actual-package reproductions are retained under
 build/M0-T423/S39/r001 as edit-chain-01, edit-chain-04 and edit-chain-05 reports
 and geometry error logs. The test-only fast process witness
 edit-chain-fast-processes-05.json pins actual process handles: EDIT started,
-then CMD and EDIT exited with 0xC000013A; NTCON exited with 87. CMD without
+then CMD and EDIT exited with 0xC000013A; NTW32 exited with 87. CMD without
 EDIT stayed alive until deliberate observer cleanup. A WMI process-event
 subscription was denied; no WMI event coverage is claimed.
 
-NTCON capture already orders native geometry transfer correctly: grow storage,
+NTW32 capture already orders native geometry transfer correctly: grow storage,
 apply viewport, then shrink storage. EDIT changes its alternate buffer to
 80x28. NTKVM's WINDOW_RECT handler incorrectly treated matching cached logical
 geometry as proof that the actual canonical viewport was already applied.
@@ -25,7 +25,7 @@ The real canonical viewport could still be 120x30 or 80x30. Its next
 BUFFER_SIZE(80,28) consequently failed with ERROR_INVALID_PARAMETER.
 
 The cached-geometry early exit originated in S24 `80f704afd7`. The error reaches
-NTCON's existing unrecoverable presentation failure path, which closes its
+NTW32's existing unrecoverable presentation failure path, which closes its
 Console session and exits. This explains both CMD and EDIT termination; it
 is not an EDIT launch failure or a scheduler/receipt issue.
 
@@ -44,7 +44,7 @@ Publish the logical rectangle only on success. Existing channel locking,
 pixel constraints, OpenNT cell-grid primitive and repeated-request no-op remain.
 
 No ERROR_INVALID_PARAMETER is swallowed. Genuine fatal Console-session failure
-still takes the existing NTCON close path. NTCON's already-correct grow/window/
+still takes the existing NTW32 close path. NTW32's already-correct grow/window/
 shrink ordering is retained. SCREEN_INFO's logical region remains a deliberate
 presentation contract, not proof of actual host geometry. NTVDM and guest
 execution, original text-height policy and frame/transport layouts are unchanged.

@@ -26,7 +26,7 @@ both the current buffer and target VGA page can represent, bounded by
 primitive, original 22/25/28/43/50 row selection and final logical VGA
 window. It does not reflow text, inject redraws, delay production execution,
 change the guest, alter a protocol or add a worker path. The similar-issue
-sweep found no second one-cell pre-resize path in NTKVM/NTCON/run16.
+sweep found no second one-cell pre-resize path in NTKVM/NTW32/run16.
 
 ## Regression evidence
 
@@ -66,10 +66,10 @@ directory.
 
 The formal `console-frontend-test.exe`, `console-channel-lifetime-test.exe`
 and `frontend-scope-lifetime-test.exe` passed when run with their required
-independent hidden Console/stream roles. `ntcon-presentation-test.exe` had
+independent hidden Console/stream roles. `ntw32-presentation-test.exe` had
 one input-queue count failure on its first isolated run, then passed 414
 checks on repeat; the S32 test also passed under the same launch conditions.
-The failure is retained in `ntcon-presentation-final.log` and is not counted
+The failure is retained in `ntw32-presentation-final.log` and is not counted
 as a first-run pass or attributed to this NTKVM resize change. The separate
 private-desktop WOW observation reached the retained S32 frontiers:
 WINMINE had a visible game window, SOL its existing modal, and WRITE the
@@ -89,7 +89,7 @@ and configuration were not edited. The final tested candidate hashes are:
 | `run16.exe` | `FAFA724C73CFC147962E461183FDD5418872D809B19C959C4FAD5C01395403F7` |
 | `ntsrv.exe` | `DF40573700567BD20926574385D6CDBF2F1177F7BCD7AB3058B01B0783BF114B` |
 | `ntvdm.exe` | `BA14F4997E454B23488FF6C048438CDC7D664D66EFDC2686894420EC5B8390C8` |
-| `ntcon.exe` | `BBDE203EB8E0D0AB79653D7A717F38E3FE41ACF2F8F1BFD678C669A3BDF5180F` |
+| `ntw32.exe` | `BBDE203EB8E0D0AB79653D7A717F38E3FE41ACF2F8F1BFD678C669A3BDF5180F` |
 | `ntkvm.exe` | `5835991ADE6A16D888B77E7C2E95C29CCFA933A14E02115C90DCD07CAC2CC25B` |
 | `ntmon.exe` | `59D3DEBFAB067BE73ACF7F136BC5B1112E41F457206E74EE76C0A668471B550B` |
 | `WOW32.DLL` | `0D2AE60264B03A8040D98AA86BCF80455127064084E2217D318D5E13F90FA94A` |

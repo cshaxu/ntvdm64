@@ -549,7 +549,7 @@ static BOOL WINAPI launcher_control(DWORD event)
     return event == CTRL_C_EVENT || event == CTRL_BREAK_EVENT;
 }
 
-/* Native resource materialization is shared with NTCON, not its execution loop. */
+/* Native resource materialization is shared with NTW32, not its execution loop. */
 static DWORD launch_gui(PCWSTR application,PCWSTR command,BOOL wait)
 {
     WCHAR directory[MAX_PATH];

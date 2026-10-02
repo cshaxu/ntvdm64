@@ -42,14 +42,14 @@ static DWORD write_vt_mouse(HANDLE input,const MOUSE_EVENT_RECORD *mouse)
 }
 
 /* Optional failure evidence, never a geometry selector or recovery policy. */
-void ntcon_trace_error(const char *stage,DWORD operation,DWORD error)
+void ntw32_trace_error(const char *stage,DWORD operation,DWORD error)
 {
     WCHAR path[MAX_PATH];char line[320];DWORD length,written;
     HANDLE file,output;
     CONSOLE_SCREEN_BUFFER_INFO info={0};
     CONSOLE_FONT_INFOEX font={sizeof(font)};
     if(!error || error==ERROR_NOT_READY || error==ERROR_BUSY)return;
-    length=GetEnvironmentVariableW(L"NTCON_GEOMETRY_ERROR_LOG",path,MAX_PATH);
+    length=GetEnvironmentVariableW(L"NTW32_GEOMETRY_ERROR_LOG",path,MAX_PATH);
     if(!length || length>=MAX_PATH)return;
     output=CreateFileW(L"CONOUT$",GENERIC_READ|GENERIC_WRITE,
         FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,OPEN_EXISTING,0,NULL);
@@ -67,7 +67,7 @@ void ntcon_trace_error(const char *stage,DWORD operation,DWORD error)
 
 /* Same-owner recovery: S8 native_console_host.c::input_records. Do not use an
  * inherited Ctrl-C ignore flag: each native target retains its own handlers. */
-DWORD ntcon_input_write(HANDLE input,const INPUT_RECORD *records,DWORD count,DWORD *written)
+DWORD ntw32_input_write(HANDLE input,const INPUT_RECORD *records,DWORD count,DWORD *written)
 {
     DWORD mode,done;
     if(!written)return ERROR_INVALID_PARAMETER;
@@ -115,7 +115,7 @@ static DWORD prepare_hidden_geometry(HANDLE output)
     return actual.dwFontSize.X==2 && actual.dwFontSize.Y==4 ? ERROR_SUCCESS : ERROR_NOT_SUPPORTED;
 }
 
-DWORD ntcon_console_initialize(void)
+DWORD ntw32_console_initialize(void)
 {
     DWORD error;
     HANDLE output=CreateFileW(L"CONOUT$",GENERIC_READ|GENERIC_WRITE,
@@ -154,7 +154,7 @@ static BOOL set_hidden_window(HANDLE output,const SMALL_RECT *window)
     return SetConsoleWindowInfo(output,TRUE,window);
 }
 
-DWORD ntcon_screen_apply(HANDLE output,const CONSOLE_SCREEN_BUFFER_INFOEX *info,
+DWORD ntw32_screen_apply(HANDLE output,const CONSOLE_SCREEN_BUFFER_INFOEX *info,
     const CONSOLE_CURSOR_INFO *cursor)
 {
     CONSOLE_SCREEN_BUFFER_INFOEX previous={sizeof(previous)},copy;
@@ -212,7 +212,7 @@ DWORD ntcon_screen_apply(HANDLE output,const CONSOLE_SCREEN_BUFFER_INFOEX *info,
     return ERROR_SUCCESS;
 }
 
-DWORD ntcon_cells_write(HANDLE output,DWORD offset,const CHAR_INFO *cells,DWORD count)
+DWORD ntw32_cells_write(HANDLE output,DWORD offset,const CHAR_INFO *cells,DWORD count)
 {
     CONSOLE_SCREEN_BUFFER_INFO info;
     SMALL_RECT requested,actual;
@@ -246,14 +246,14 @@ static BOOL same_geometry(const CONSOLE_SCREEN_BUFFER_INFOEX *left,
         !memcmp(&left->srWindow,&right->srWindow,sizeof(left->srWindow));
 }
 
-void ntcon_capture_end(ntcon_capture *capture)
+void ntw32_capture_end(ntw32_capture *capture)
 {
     if (!capture) return;
     if (capture->buffer && capture->buffer!=INVALID_HANDLE_VALUE) CloseHandle(capture->buffer);
     ZeroMemory(capture,sizeof(*capture));
 }
 
-DWORD ntcon_capture_begin(ntcon_capture *capture)
+DWORD ntw32_capture_begin(ntw32_capture *capture)
 {
     HANDLE output;
     DWORD error;
@@ -262,12 +262,12 @@ DWORD ntcon_capture_begin(ntcon_capture *capture)
     output=CreateFileW(L"CONOUT$",GENERIC_READ|GENERIC_WRITE,
         FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,OPEN_EXISTING,0,NULL);
     if (output==INVALID_HANDLE_VALUE) return GetLastError();
-    error=ntcon_capture_begin_output(capture,output);
+    error=ntw32_capture_begin_output(capture,output);
     CloseHandle(output);
     return error;
 }
 
-DWORD ntcon_capture_begin_output(ntcon_capture *capture,HANDLE output)
+DWORD ntw32_capture_begin_output(ntw32_capture *capture,HANDLE output)
 {
     CONSOLE_SCREEN_BUFFER_INFOEX after={sizeof(after)};
     DWORD error;
@@ -289,11 +289,11 @@ DWORD ntcon_capture_begin_output(ntcon_capture *capture,HANDLE output)
         !same_geometry(&capture->info,&after)) { error=ERROR_RETRY;goto fail; }
     return ERROR_SUCCESS;
 fail:
-    ntcon_capture_end(capture);
+    ntw32_capture_end(capture);
     return error;
 }
 
-DWORD ntcon_capture_read(ntcon_capture *capture,DWORD offset,
+DWORD ntw32_capture_read(ntw32_capture *capture,DWORD offset,
     CHAR_INFO *cells,DWORD capacity,SMALL_RECT *region,DWORD *count)
 {
     CONSOLE_SCREEN_BUFFER_INFOEX before={sizeof(before)},after={sizeof(after)};
@@ -326,7 +326,7 @@ DWORD ntcon_capture_read(ntcon_capture *capture,DWORD offset,
          * errors or publish cells from two different geometries. */
         if(GetConsoleScreenBufferInfoEx(capture->buffer,&after) &&
             !same_geometry(&before,&after)) {
-            ntcon_trace_error("resized-during-read",0,error);
+            ntw32_trace_error("resized-during-read",0,error);
             return ERROR_RETRY;
         }
         return error;
@@ -338,7 +338,7 @@ DWORD ntcon_capture_read(ntcon_capture *capture,DWORD offset,
     return ERROR_SUCCESS;
 }
 
-DWORD ntcon_console_close(void)
+DWORD ntw32_console_close(void)
 {
     HWND window=GetConsoleWindow();DWORD process=0,thread,current_process=0;
     ULONGLONG deadline;

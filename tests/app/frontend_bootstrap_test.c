@@ -143,7 +143,7 @@ int wmain(int argc,WCHAR **argv)
     if(!DuplicateHandle(GetCurrentProcess(),connection.capability,GetCurrentProcess(),&capability,0,FALSE,DUPLICATE_SAME_ACCESS))goto done;
     frontend_bootstrap_release(&connection);
     if(WaitForSingleObject(retained,100)!=WAIT_TIMEOUT){puts("FAIL creator release killed frontend");goto done;}
-    /* Native execution/final-frame/creator-loss tests use the actual NTCON
+    /* Native execution/final-frame/creator-loss tests use the actual NTW32
      * route in verify-frontend-lifetime and the ordinary Console/Window suites.
      * Bootstrap must not retain a second target executor in the frontend. */
     error=frontend_bootstrap_start(image,&second);

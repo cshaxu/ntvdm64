@@ -53,7 +53,7 @@ int wmain(int argc,WCHAR **argv)
         MsgWaitForMultipleObjects(0,NULL,FALSE,50,QS_ALLINPUT);
     }while((LONG)(until-GetTickCount())>0);
     synthetic_simple=seen[EVENT_CONSOLE_UPDATE_SIMPLE-EVENT_CONSOLE_CARET];
-    WriteConsoleOutputCharacterW(output,L"NTCON-EVENT-PROBE",17,position,&written);
+    WriteConsoleOutputCharacterW(output,L"NTW32-EVENT-PROBE",17,position,&written);
     SetConsoleCursorPosition(output,position);
     until=GetTickCount()+2000;
     do {

@@ -32,8 +32,8 @@ if(@(Get-CimInstance Win32_Process -Filter "Name='ntsrv.exe'" |
     Where-Object {$_.ExecutablePath -ne $broker}).Count){throw 'Another broker is in use'}
 $oldPrivate=$env:MVDM_OBSERVER_PRIVATE_DESKTOP
 $oldHistory=$env:MVDM_OBSERVER_SHORT_HISTORY
-$ownedPaths=@('run16.exe','ntsrv.exe','ntkvm.exe','ntcon.exe') | ForEach-Object {Join-Path $BuildRoot $_}
-$sessionPaths=@('ntkvm.exe','ntcon.exe') | ForEach-Object {Join-Path $BuildRoot $_}
+$ownedPaths=@('run16.exe','ntsrv.exe','ntkvm.exe','ntw32.exe') | ForEach-Object {Join-Path $BuildRoot $_}
+$sessionPaths=@('ntkvm.exe','ntw32.exe') | ForEach-Object {Join-Path $BuildRoot $_}
 $cases=@(
     @{Name='output';Args=@('cmd.exe','/d','/c','echo ROOT-NATIVE-VISIBLE & exit /b 37');Code='00000025';Text='ROOT-NATIVE-VISIBLE'},
     @{Name='input';Args=@('cmd.exe','/d');Input="echo ROOT-INPUT-OK`rexit /b 23`r";Code='00000017';Text='ROOT-INPUT-OK'},

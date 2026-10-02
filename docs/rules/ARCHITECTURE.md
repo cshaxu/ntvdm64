@@ -13,14 +13,14 @@ It contains no transport, authentication, scheduling or lifecycle implementation
 Generated RPC files remain under build/. This replaces product-abi and the
 service-owned IDL placement; implementations remain with their executable owner.
 
-Latest NTCON backend selection: an ordinary hidden Console, owned and attached
-by NTCON itself. All private helper/bootstrap processes are prohibited. NTSRV
+Latest NTW32 backend selection: an ordinary hidden Console, owned and attached
+by NTW32 itself. All private helper/bootstrap processes are prohibited. NTSRV
 may not own Console/ConPTY resources; NTKVM is presentation-only. This overrides
 ConPTY ownership references below without changing independent worker identity,
 original DOS/WOW ownership, text-frame ABI or verification requirements.
 
 Owner admits src/worker-base for project-added worker mechanisms reused by
-ntvdm-exe and ntcon-exe. run16-exe, ntsrv-exe, ntkvm-exe and ntmon-exe retain
+ntvdm-exe and ntw32-exe. run16-exe, ntsrv-exe, ntkvm-exe and ntmon-exe retain
 their own worker-handling code, with one common path and explicit kind branches
 where necessary. They do not link worker-base as a generic shared library.
 It owns no scheduler, original DOS/WOW policy or frontend presentation. Shared
@@ -39,9 +39,9 @@ visual comparison.
    manifest-declared host, guest, tool and firmware slices), `opennt-host`,
    `opennt-abi/host-compat`, declaration-only `interface`, `worker-base`, and the
    executable-owned `run16`, `basesrv`, `ntvdm`, `monitor` and admitted
-   `ntkvm-exe` and `ntcon-exe` roots. NTCON owns its admitted native Console
+   `ntkvm-exe` and `ntw32-exe` roots. NTW32 owns its admitted native Console
    backend, using its own ordinary hidden Console, not ConPTY or DOS/WOW policy. NTKVM
-   owns only visible Console/Window, display and input/frame routing. NTCON
+   owns only visible Console/Window, display and input/frame routing. NTW32
    publishes only text frames in the existing NTVDM text-frame ABI, with the
    same bitmap glyph mapping; no backend-specific NTKVM terminal renderer.
    frontend owns character-session presentation; run16

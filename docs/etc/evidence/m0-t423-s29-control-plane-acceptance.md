@@ -8,7 +8,7 @@ reports the authenticated same-Console relationship before selecting a
 worker. The x86 fixture rebuilt and all six focused modes passed:
 worker-channel, frontend-rundown, management-terminate,
 launcher-exit-survival, launcher-disconnect-survival, and
-completion-rundown-race. The NTCON execution-lifetime fixture passed 448
+completion-rundown-race. The NTW32 execution-lifetime fixture passed 448
 checks with zero failures; next-command, close and frontend-scope fixtures
 also passed.
 
@@ -22,7 +22,7 @@ Against the unchanged, x86-built S28 protocol-25 package:
 | NTVDM death | Waiting launcher returned bounded 1067; broker survived; fresh MEM succeeded. |
 | NTKVM frontend death | Associated DOS worker closed; bounded root outcome; fresh MEM succeeded. The old probe wrongly killed run16 and is superseded. |
 | run16 launcher death | Admitted worker survived; fresh MEM succeeded. |
-| NTCON management close, two independent sessions | Selected NTCON/CMD closed; other session still accepted input and returned 23. |
+| NTW32 management close, two independent sessions | Selected NTW32/CMD closed; other session still accepted input and returned 23. |
 | Ordinary Console matrix | All 17 cases passed with captured text and expected exit codes, including direct/nested COMMAND, MEM, EDIT and native commands. |
 | Window matrix | The same 17 cases passed with captured text and expected exit codes. |
 | Supplemental handoff | native-interactive-return, nested-mem-typeahead, native-cmd-dos-repeat and frontend-chain-b passed. |
@@ -63,7 +63,7 @@ file was added in that interval. The substantive duplicate removals and
 retained worker-local owners are itemized in [S27](m0-t423-s27-worker-control-audit.md)
 and [S28](m0-t423-s28-management-projection.md): shared connection/death-watch
 and ordered frontend client remain in worker-base; original NTVDM command,
-DOS/WOW records and execution stay in place; NTCON's Windows Console process
+DOS/WOW records and execution stay in place; NTW32's Windows Console process
 mechanics remain local. The S26 Job-descendant projection stays rejected,
 not silently reinstated.
 

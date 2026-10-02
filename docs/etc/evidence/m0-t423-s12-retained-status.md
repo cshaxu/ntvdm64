@@ -14,7 +14,7 @@ for the recorded runs; this is historical status, not a current packet.
 | Objective | Preserve logical text dimensions across DOS/native launch and return; eliminate hidden-Console viewport clipping and unintended Window scale changes. |
 | Non-goals | No guest/shared-lib modification, helper, ConPTY, new scheduler or S14 lifecycle expansion. |
 | Reference Baseline | S12 P2 fbbbe4870 and published eight-file package; read-only r135-r137 geometry probes. |
-| Files And ABI Surface | NTKVM state/channel; NTCON Console state/presentation/frame packing; NTVDM original video handoff bindings; interface/worker-base only for needed common copied contracts; tests and evidence. |
+| Files And ABI Surface | NTKVM state/channel; NTW32 Console state/presentation/frame packing; NTVDM original video handoff bindings; interface/worker-base only for needed common copied contracts; tests and evidence. |
 | Applicable Rules | docs/README.md task-reading authorities; source-first mirror policy; immutable guest; x86 CCPU40; every-production-P publication gate. |
 | Verification | Original mode-path audit; unit and real private-desktop tests of both directions, explicit native resize, DOS fallback, scrolling/cursor/edge markers, failed acknowledgment and isolation; complete DOS/WOW frontier regression. |
 | Expected Markers | Unchanged handoff preserves full frame extent; right/bottom edges retained; deliberate native resize propagates; unsupported DOS extent converts and is acknowledged before input resumes. |
@@ -47,7 +47,7 @@ Published-package isolated-desktop probes r135-r137 used no Computer Use.
 Both DOS -> CMD -> DOS and CMD -> DOS -> CMD completed with scripted input.
 r137 retained one HWND: DOS text 80x22/font16 with client 411x227, native text
 53x14/font16 with client 411x218, then DOS 80x22. Native Console buffer was
-80x22 but its viewport was 0,0,52,13. NTCON packs srWindow; NTVDM packs guest
+80x22 but its viewport was 0,0,52,13. NTW32 packs srWindow; NTVDM packs guest
 logical extents. This proves the physical-viewport leak, not a passing repair.
 Raw evidence is O:/winnt/Logs2/t423-window-geometry-r135.txt through r137.txt,
 including .geometry.txt and per-line snapshots. r133 failed before input-ready
@@ -67,7 +67,7 @@ application-originated resize observation, then real backend application and
 original DOS return conversion. These experiments preceded the production candidate.
 
 The uncommitted candidate now separates logical and physical viewport state,
-applies/readbacks real NTCON geometry, and prepares supported DOS geometry for
+applies/readbacks real NTW32 geometry, and prepares supported DOS geometry for
 the original return path. Targeted capture/conversion tests pass. Real private
 desktop r18 DOS -> CMD -> DOS retained one HWND, 80x25/font16 and client
 304x190 across 534 probe samples. r20 reverse CMD -> DOS -> CMD also preserved
@@ -84,19 +84,19 @@ Complete Console/Window suites r35/r36 pass 17/17 each; r37 retains frame
 anti-replay serial checks. WOW r38 preserves the three previous frontiers.
 Earlier r39 exposed inactive-union native arrow reads; r40's temporary
 conversion still failed80x50 at the graphics768-line limit. Both approaches
-are superseded by the approved NTCON text-cell pointer below, which passes
+are superseded by the approved NTW32 text-cell pointer below, which passes
 80x50 without a graphics frame or library change.
 The earlier800-line library-capacity request is withdrawn: the owner has
-approved moving native pointer ownership into NTCON, rather than extending
+approved moving native pointer ownership into NTW32, rather than extending
 NTKVM's native-only composition. r41 logical mouse geometry and existing
 failure/reset assertions pass. Owner selected the reverse-video text-cell
-pointer, keeping the text ABI and library unchanged. NTCON now owns the logical
+pointer, keeping the text ABI and library unchanged. NTW32 now owns the logical
 pointer, copied-frame composition and native input translation; NTKVM's native
 position/arrow implementation is removed. Candidate input protocol18 carries
 relative pointer/modifier records without frontend-selected geometry. r42 has
 86 passing packing/pointer checks; r45 has378 passing real-Console/pipe checks.
 Full Console/Window regression r46/r47 each passes17/17. Real native80x50
-Window input r48 passes movement/press/release through NTCON, with sink receipt
+Window input r48 passes movement/press/release through NTW32, with sink receipt
 and output marker. WOW r49 preserves all three baseline frontiers. Real r50
 native50 -> DOS50 -> native120x40 -> restored DOS50 passes, including actual
 DOS font8 frames and output markers. No S closure is claimed.
@@ -117,8 +117,8 @@ linked proposal.
 ## Latest Delivery
 
 S13 P1 `307c4a1b5` is pushed. NTKVM now carries acknowledged logical text
-geometry independent of physical viewport; NTCON applies native geometry and
-returns supported DOS geometry through the original path. NTCON owns its
+geometry independent of physical viewport; NTW32 applies native geometry and
+returns supported DOS geometry through the original path. NTW32 owns its
 reverse-video text mouse pointer. Project-owned screen publication and the
 multi-RPC native snapshot use one frontend I/O lock: first acquirer proceeds,
 the other waits, and end/EOF/protocol failure releases it. Native programs
@@ -130,16 +130,16 @@ and the lock/channel tests passed; the earlier r79 failure remains in the
 from history. This closes S13 only, not T423. S14 awaits separate admission.
 
 Historical S12 handoff and subsequent supersession are retained in the
-[S12 ledger](m0-t423-s12-ntcon-backend.md) and
+[S12 ledger](m0-t423-s12-ntw32-backend.md) and
 [T423 proposal](../../proposals/proposal-kvm-window-graphics-presentation-001.md).
 
 ## Current Technical Baseline
 
 - MSVC Win32/x86 /MT CCPU40; no guest or shared-library modifications.
-- Runtime: run16.exe, ntsrv.exe, ntvdm.exe, ntkvm.exe, ntcon.exe, ntmon.exe,
+- Runtime: run16.exe, ntsrv.exe, ntvdm.exe, ntkvm.exe, ntw32.exe, ntmon.exe,
   WOW32.DLL and VDMREDIR.DLL. Application 0.0.423; service protocol 16,
   copied Console protocol 17, native request protocol 4.
-- NTVDM owns original DOS/WOW execution. NTCON owns native text execution
+- NTVDM owns original DOS/WOW execution. NTW32 owns native text execution
   and its ordinary hidden Console, without ConPTY or a private helper.
   NTSRV handles authenticated registration and management; NTKVM owns visible
   Console/Window and the common frame renderer. run16 waits for direct results.
@@ -148,7 +148,7 @@ Historical S12 handoff and subsequent supersession are retained in the
   activation/key return and client event lifecycle. Original mirror execution,
   scheduling, task completion, blocking/resume and cleanup remain in place.
 - Native actual Console members are independent of worker residency. Returning
-  to DOS does not destroy NTCON; direct target completion does not kill its
+  to DOS does not destroy NTW32; direct target completion does not kill its
   surviving descendants. Parent output waits for the final presentation fence.
 - Cross-component declarations are under interface. The displaced frontend
   executor, ConPTY parser/carrier and duplicate native renderer are removed.
@@ -165,7 +165,7 @@ checked unchanged before publication; NTVDM.REG/user state was not replaced.
 
 | Requirement | Verified evidence |
 | --- | --- |
-| Native execution, registration/reuse, version/auth and failure cleanup | Actual NTCON RPC/public-launch tests; concurrent creation, forged/stale context, stream/EOF, direct results and failed export/launch cases in S12 ledger. |
+| Native execution, registration/reuse, version/auth and failure cleanup | Actual NTW32 RPC/public-launch tests; concurrent creation, forged/stale context, stream/EOF, direct results and failed export/launch cases in S12 ledger. |
 | Common mechanisms and owner boundaries | r106-r120 provenance audit, both production worker links, strict frontend leakage negative controls; transport fixture 336/0 and execution lifecycle 333/0 with zero remaining handles. |
 | DOS/native I/O, completion barrier, key return | Real production round trips, copied input FIFO/negative tests, real unread Console return, final-ack failure/EOF and resume failure fixtures; original DOS block/resume remains the caller. |
 | Nesting and isolation | r130 DDWWDDWW: sixteen input/output checkpoints, same worker identities and restored original DOS depths/tasks. Both twelve-target chains pass separate frontend groups and final retirement. |

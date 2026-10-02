@@ -89,7 +89,7 @@ static DWORD WINAPI copy_output(void *unused) {
 }
 static void send_keys(const char *s) {DWORD w=0;if(!WriteFile(write_pipe,s,(DWORD)strlen(s),&w,NULL)||w!=strlen(s))fprintf(stderr,"console input write failed: %lu/%lu\n",GetLastError(),(unsigned long)w);}
 
-/* The title sample is read from NTCON's own Console, not from a Terminal tab
+/* The title sample is read from NTW32's own Console, not from a Terminal tab
  * label or from the observer's ConPTY. This test-only process attaches just
  * long enough to read the title and never writes to that Console. */
 static DWORD s36_process_pid(const char *runtime,const char *name)
@@ -139,8 +139,8 @@ static void s36_note(const char *stage,const char *value)
 }
 static int s36_sample_title(const char *runtime,const char *stage,char *title,DWORD capacity)
 {
-    DWORD pid=s36_process_pid(runtime,"ntcon.exe"),length,error;
-    if(!pid){s36_note(stage,"ntcon-not-found");return 0;}
+    DWORD pid=s36_process_pid(runtime,"ntw32.exe"),length,error;
+    if(!pid){s36_note(stage,"ntw32-not-found");return 0;}
     FreeConsole();
     if(!AttachConsole(pid)){s36_note(stage,"attach-failed");return 0;}
     SetLastError(ERROR_SUCCESS);

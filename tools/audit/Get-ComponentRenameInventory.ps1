@@ -3,9 +3,11 @@ param(
     [Parameter(Mandatory=$true)][string]$WorkerName,
     [Parameter(Mandatory=$true)][string]$FrontendName,
     [Parameter(Mandatory=$true)][string]$RecordName,
-    [string]$PackageRoot = 'O:/winnt'
+    [string]$PackageRoot = 'O:/winnt',
+    [string]$PackageWorkerName = ''
 )
 $ErrorActionPreference = 'Stop'
+if (!$PackageWorkerName) { $PackageWorkerName = $WorkerName }
 $root = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
 $out = [IO.Path]::GetFullPath((Join-Path $root $OutputRoot))
 $build = [IO.Path]::GetFullPath((Join-Path $root 'build')) + [IO.Path]::DirectorySeparatorChar
@@ -44,11 +46,13 @@ try {
                 if ($token -eq $RecordName) { $class = 'project-record' }
                 elseif ($token -eq $FrontendName) { $class = 'frontend-product' }
                 elseif (($before -match '[a-zA-Z0-9]$') -or ($after -match '^[a-zA-Z0-9]')) { $class = 'substring-not-identity' }
-                elseif ($after -match '^[/\\](client|server|inc|test|private\.c|output\.c|HandleKeyEvent|\{)([/\\.\s:]|$)' -or
+                elseif ($after -match '^[/\\](client|server|inc|test|private\.c|output\.c|HandleKeyEvent|\{)(?![a-zA-Z0-9])' -or
                     $parts[0] -like 'artifacts/documentation-archive/*' -or
                     $parts[0] -eq 'src/ntkvm-exe/window_keyboard.c' -or
                     $parts[0] -eq 'src/ntvdm-exe/win32/console_graphics.c' -or
                     $parts[0] -eq 'src/opennt-abi/host-compat/README.md') { $class = 'original-console-source' }
+                elseif ($parts[0] -match '^docs/(proposals/proposal-(native-worker-frontend-renaming-001|worker-task-trace-observation-001|native-launch-hook-001)\.md|states/CURRENT\.md|etc/operations/t424-worker-frontend-renaming-plan\.md|etc/evidence/m0-t424-s2-native-worker-identity\.md)$' -and
+                    $parts[2] -match '(?i)frontend|must never denote|and .+ is the renamed') { $class = 'reserved-frontend' }
                 $rows.Add([pscustomobject]@{Path=$parts[0];Line=[int]$parts[1];Column=$match.Index+1;Token=$match.Value;Class=$class;Text=$parts[2]})
             }
         }
@@ -63,7 +67,7 @@ try {
         }
     }
     $pathRows | Export-Csv -NoTypeInformation -Encoding UTF8 (Join-Path $out 'paths.csv')
-    $hashes = foreach ($name in @('run16.exe','ntsrv.exe','ntvdm.exe',($WorkerName+'.exe'),($FrontendName+'.exe'),'ntmon.exe','wow32.dll','VDMREDIR.dll')) {
+    $hashes = foreach ($name in @('run16.exe','ntsrv.exe','ntvdm.exe',($PackageWorkerName+'.exe'),($FrontendName+'.exe'),'ntmon.exe','wow32.dll','VDMREDIR.dll')) {
         $path = Join-Path $PackageRoot $name
         [pscustomobject]@{File=$name;Bytes=(Get-Item -LiteralPath $path).Length;SHA256=(Get-FileHash -LiteralPath $path -Algorithm SHA256).Hash}
     }

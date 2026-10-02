@@ -1,6 +1,6 @@
 /* Hidden real-Console smoke test for Microsoft's VT-input Edit. */
 #define _WIN32_WINNT 0x0A00
-#include "ntcon-exe/console_state.h"
+#include "ntw32-exe/console_state.h"
 #include <stdio.h>
 #include <string.h>
 
@@ -68,9 +68,9 @@ int main(int argc,char **argv)
     if(!snapshot(raw) || contains(before,"New File") || contains(raw,"New File"))
         {error=10;goto done;}
     fprintf(report,"NATIVE-MOUSE-RECORD ignored by VT Edit\n");
-    if(ntcon_input_write(input,&mouse,1,&accepted) || accepted!=1){error=4;goto done;}
+    if(ntw32_input_write(input,&mouse,1,&accepted) || accepted!=1){error=4;goto done;}
     mouse.Event.MouseEvent.dwButtonState=0;
-    if(ntcon_input_write(input,&mouse,1,&accepted) || accepted!=1){error=5;goto done;}
+    if(ntw32_input_write(input,&mouse,1,&accepted) || accepted!=1){error=5;goto done;}
     Sleep(500);
     if(!snapshot(after)){error=6;goto done;}
     fprintf(report,"AFTER:\n");for(row=0;row<12;++row)fprintf(report,"%02u %s\n",row,after[row]);

@@ -3,145 +3,101 @@
 ## Status and objective
 
 Owner closed the predecessor and admitted this former queue-head candidate on
-2026-10-02. The active numeric packet belongs only to
-[CURRENT](../states/CURRENT.md); the ordered execution stages are in the
-[working plan](../etc/operations/t424-worker-frontend-renaming-plan.md).
-This document retains the admitted migration scope and acceptance contract.
-S1 is a read-only referent audit; admission alone does not authorize skipping
-that audit or replacing the published package with renamed candidates.
+2026-10-02. Only [CURRENT](../states/CURRENT.md) owns admission and publication;
+the [working plan](../etc/operations/t424-worker-frontend-renaming-plan.md)
+owns the ordered stages. The [S1 audit](../etc/evidence/m0-t424-s1-name-referent-audit.md)
+pins pre-migration source identities in Git, inventories and hashes.
+Names below are migration-normalized; they do not claim runtime acceptance.
 
-Give each product component a name that describes its actual owner:
-
-| Current component and role | Final component and product | Boundary |
+| Role | S2 intermediate owner/product | Final owner/product |
 | --- | --- | --- |
-| `src/ntcon-exe` / `ntcon.exe`, resident Win32 text worker | `src/ntw32-exe` / `ntw32.exe` | Owns the hidden Windows Console and direct native text targets; peer of NTVDM. |
-| `src/ntkvm-exe` / `ntkvm.exe`, visible frontend | `src/ntcon-exe` / `ntcon.exe` | Owns the visible Console, Window, display state, input and presentation routing; not a worker. |
+| Resident Win32 text worker, owns hidden Console and direct native targets | `src/ntw32-exe` / `ntw32.exe` | Same NTW32 worker identity. |
+| Visible Console/Window frontend, owns display/input/presentation routing | `src/ntkvm-exe` / `ntkvm.exe` | S3 reserved frontend identity: `src/ntcon-exe` / `ntcon.exe`. |
 
-The final eight-file package contains `ntmon.exe`, `run16.exe`, `ntsrv.exe`,
-`ntvdm.exe`, `ntw32.exe`, `ntcon.exe`, `WOW32.DLL` and `VDMREDIR.DLL`. Neither
-the name `NTCON` nor a `ntcon_*` product-owned symbol may continue to denote
-the Win32 text worker. Generic imported `kvm-*` library names remain their
-library identity unless a separate source/provenance review establishes that
-they are product component names; this task does not rename an external API
-merely because its spelling contains KVM.
+The final eight files are run16.exe, ntsrv.exe, ntvdm.exe, ntw32.exe,
+ntcon.exe (frontend only), ntmon.exe, WOW32.DLL and VDMREDIR.DLL.
+NTCON and its product-owned symbols must never denote the Win32 worker.
+Generic imported kvm-* libraries keep their own source identities.
 
-The worker rename also includes its **project-owned NTSRV task-record name**:
-
-| Current project-owned spelling | Final spelling and meaning |
-| --- | --- |
-| `OPENNT_BASE_CONRECORD` / `ConRecord` | `OPENNT_BASE_WIN32RECORD` / `Win32Record`: one admitted Direct Win32 text request, peer in naming to the original `DOSRECORD`. |
-| `conrecords`, `pending_conrecord`, `next_conrecord`, `service_delete_conrecord` and analogous members/helpers | Corresponding `win32records`/`pending_win32record`/`next_win32record`/`service_delete_win32record` spellings, consistently through NTSRV, tests and documentation. |
-
-The current `OPENNT_BASE_CONRECORD` in `src/ntsrv-exe/opennt/source/base_service.c`
-is explicitly project-owned, so this is not an excuse to rename or alter the
-original OpenNT `DOSRECORD`, `WOWRECORD` or Console identity/association
-structures. Keep the record's request, target PID/handle, receipt, image,
-list order, Direct completion and management projection unchanged. Do not
-turn the rename into a new observed-task stack or execution policy.
+NTSRV's project-owned native direct record becomes OPENNT_BASE_WIN32RECORD /
+Win32Record, with win32records, pending_win32record, next_win32record and
+corresponding service_*_win32record helpers. Its source is
+src/ntsrv-exe/opennt/source/base_service.c, not an original OpenNT record.
+Preserve its fields/layout/order, request, actual target PID/handle, image,
+receipt, completion and management projection. Original DOSRECORD/WOWRECORD
+and real Console identity structures remain unchanged.
 
 ## Ordered migration and collision prevention
 
-1. Freeze a reviewed inventory of the **old** identities and their referents:
-   executable/component directories, C symbols and types, macros, build targets
-   and object paths, test names, package manifests, launch paths, service/RPC
-   records (including the project-owned `ConRecord` family), log/diagnostic
-   names, and current design/rule/proposal text. Mark
-   each occurrence as native-worker, frontend, generic library, historical
-   evidence, or external compatibility surface. Record the baseline eight-file
-   hashes and active protocol revision before editing.
-2. First rename the **old worker** `NTCON` to `NTW32`, including its directory,
-   executable, every product-owned symbol including `ConRecord` →
-   `Win32Record`, service identity, caller, generated
-   reference, test and documentation reference. Historical documentation is
-   included: rewrite each old-worker `NTCON` reference as `NTW32`, even in
-   retained evidence, archived documentation and proposal text, and rename
-   documentary paths where necessary. Preserve the original pre-migration
-   documents in Git history
-   for exact as-recorded reproduction; record the migration commit and avoid
-   changing recorded test outcomes, hashes or dates. Keep the frontend named
-   `NTKVM` during this local stage. Compile and run focused
-   worker/launcher/broker/protocol checks. **Hard gate:** an exhaustive,
-   case-insensitive scan of tracked text and path names throughout the repository,
-   plus untracked current source/documentation files, must find no old project
-   worker `NTCON` referent (including this proposal) before frontend rename is
-   admitted. Original OpenNT Console-source identities and unrelated substrings
-   must remain unchanged under the owner's Console boundary; report every raw
-   hit and prove its disposition against the [S1 audit](../etc/evidence/m0-t424-s1-name-referent-audit.md).
-   Include `docs/` and the documentation archive under `artifacts/`;
-   do not let a narrow `src/` scan claim success. Classify generated/build
-   outputs separately and regenerate
-   them before the final acceptance scan. Do not satisfy the gate by hiding a
-   reference in an alias, comment or unscanned path. Verify and publish a
-   coherent intermediate eight-file package with `ntw32.exe` and `ntkvm.exe`,
-   without the old `ntcon.exe`, before calling this production S delivered;
-   never publish an untested mixture of old and new files.
-3. Only after the zero-occurrence gate, rename the **old frontend** `NTKVM` to `NTCON`,
-   including its directory, executable, product-owned symbols and all callers.
-   Reconnect the newly named `NTCON` frontend to both `NTVDM` and `NTW32` via
-   the existing interface and worker-base boundaries. Do not implement a new
-   frontend or worker mechanism as a side effect of renaming.
-4. Audit the final `NTCON`/`ntcon`/`NTKVM`/`ntkvm` occurrences by referent,
-   not blind textual replacement. Every final `NTCON` occurrence must mean the
-   frontend; every Win32 text worker occurrence must use `NTW32`. Historical
-   document text is normalized to the new worker name as required above; Git
-   preserves its prior literal form. Current authorities, live proposals,
-   package instructions, operational scripts and indexed evidence must use
-   final names. No intentionally retained alias may give the old worker the
-   new frontend name; an externally fixed binary identifier requires the
-   explicit stop/review decision below.
-5. Review every cross-process identity separately. If a copied protocol value,
-   RPC interface, product version, ACL endpoint or command-line contract
-   actually changes, version both ends coherently and reject mismatched peers.
-   Keep stable wire semantics when only local C names change; do not bump or
-   mutate an ABI solely for spelling. No old/new mixed runtime set may register
-   as a valid coherent product.
+1. S1 freezes every old identity by referent: executable/directory, C symbols,
+   types/guards, build/object targets, tests, package/launch paths, service/RPC
+   references, native record family, diagnostics and all documentation.
+   Capture actual eight-file baseline hashes and protocol. Classify original
+   Console, library and substring identities rather than blindly substituting.
+2. S2 renames only the former native worker and its project-owned record family
+   to NTW32/Win32Record, across code, paths, all current and historical documents,
+   indexed archives and proposals where they actually denote that worker.
+   Preserve recorded outcomes/hashes/dates; Git retains literal earlier records.
+   Keep frontend NTKVM. Do not leave aliases or duplicate implementations.
+   Run a complete case-insensitive tracked-text/path and untracked-current scan:
+   zero old project-worker and record referents. Report every remaining raw hit,
+   proving original Console/substrings or explicitly reserved future frontend
+   identity; no excluded directory may hide worker references. Preserve original
+   OpenNT Console identities and actual API names under the owner's boundary.
+   Classify sealed build evidence separately and regenerate current graphs.
+   Pass focused tests and full production gates; publish a verified intermediate
+   eight-file package with ntw32.exe and ntkvm.exe, removing the obsolete worker
+   basename only after recoverable backup. Never publish an untested mixture.
+3. S3 starts only after S2's audited zero-old-worker gate and production delivery.
+   Rename frontend NTKVM to the reserved NTCON identity, including owner-local
+   symbols/directories, executable/build/package/tests and all consumers.
+   Reconnect to NTVDM and NTW32 through existing interface/worker-base contracts;
+   do not invent another frontend or worker mechanic.
+4. S4 independently audits final referents and semantic equivalence. Every
+   project NTCON denotes frontend, every native worker uses NTW32; original
+   OpenNT Console source names remain originals. Normalize all relevant current
+   and historical text and links, retaining exact pre-migration records in Git.
+5. Review cross-process identities separately. Advance APP_VERSION once per T
+   to 0.0.424 and verify existing application mismatch rejection. Unchanged wire
+   layouts keep protocol/RPC 28 and its UUID. An actual copied-wire, endpoint,
+   ACL or command-line change requires coherent versioning and renewed review.
+   No mixed old/new application set may register as a coherent product.
 
-Moves use `git mv` where appropriate and preserve source ownership. Original
-OpenNT/MVDM mirror code, guest media, task completion, worker lifecycle,
-window/console behavior and the generic imported KVM libraries are not
-reimplemented or semantically modified. No additional executable or helper
-is admitted.
+Moves use git mv. Original OpenNT/MVDM mirrors and guest media retain identity,
+algorithm, source layout and behavior. No shared-library rename, extra process,
+helper, scheduler, observed graph, launch syntax or lifecycle change is admitted.
 
-## Suggested S sequence after T admission
+## S sequence and gates
 
 | S | Bounded deliverable |
 | --- | --- |
-| S1 | Read-only referent inventory, naming/ABI decision ledger, baseline hashes and ordered migration map. No production rename. |
-| S2 | Rename the old worker to NTW32 and its project-owned ConRecord family to Win32Record in code and **all** documentation; run the full-tree case-insensitive zero-old-worker and old-ConRecord referent gates, explicitly preserve original Console identities/substrings, pass full production-P regression and publish the coherent intermediate package (`ntw32.exe` + `ntkvm.exe`). Do not admit S3 until the gates and delivery pass. |
-| S3 | Rename the old frontend to NTCON only after S2's gate; update build, package, tests and launch wiring, run the full product gate and publish only the final verified eight-file set. |
-| S4 | Independent final referent/semantic-diff audit: every current `NTCON` means frontend, every native worker means `NTW32`; reconcile indexes and authorities, deliver governance and clean-worktree closure. |
+| S1 | Read-only full referent inventory, ABI decisions, hashes and migration map. |
+| S2 | NTW32/Win32Record migration, complete-tree referent and original-name preservation gates, full production verification and intermediate eight-file publication. |
+| S3 | Frontend NTCON migration after S2; build/test/wiring/name checks and verified final eight-file publication. |
+| S4 | Final ownership/semantic-diff and naming audit, indexes/authorities, clean committed/pushed delivery; owner decides T acceptance. |
 
-If S1 finds an externally fixed identifier that cannot safely be renamed,
-record its exact consumer and obtain owner review before S2 rather than
-silently treating the old worker as the new frontend. S2 and S3 each obey the
-ordinary production-code P build, full regression, coherent publication,
-commit and push gate. S2's intermediate package is a complete eight-file set,
-not an old/new mixture; S3 replaces it only after its own verification.
-Documentation-only P commits use the documentation gate.
+An externally fixed project identifier or imported-original conflict requires
+review, not an alias. Original Console names already classified by S1 are
+outside the requested product rename. Documentation-only P uses governance,
+link and diff gates; every production P uses the complete runtime gate.
 
 ## Acceptance
 
-- Build the complete MSVC Win32/x86 package from a cleanly regenerated graph;
-  verify no build target, generated dependency or deployment script resolves
-  the old product roles by their previous names.
-- Exercise direct and nested COMMAND/MEM/EDIT and native CMD/EDIT, DOS↔native
-  return, Console/Window switching, resident worker reuse, faults and
-  independent sessions. Preserve the current 17 Console + 17 Window product
-  matrix and the retained WINMINE/SOL/WRITE frontiers.
-- Prove `run16`, `ntsrv`, `ntmon`, `ntvdm`, `NTW32` and the new `NTCON` agree
-  on worker kind, process identity, frontend ownership, receipt and teardown.
-  Monitor must identify the Win32 worker without mistaking the frontend for a
-  task or worker.
-- Prove the new `Win32Record` remains exactly the former Direct native record:
-  one actual admitted request, unchanged receipt/exit-code and worker-stack
-  behavior, no observed descendant as a record element. No product-owned
-  `ConRecord` spelling or old-worker referent remains after S2; the original
-  DOS/WOW and Console identity records are byte/semantics unchanged.
-- Scan source, tests, tools, all current and historical documentation, and
-  package outputs. The S2 scan has zero old-worker-name occurrences; after S3
-  every occurrence of its reused name denotes only the frontend. Compare
-  behavior and protocol with the pre-rename
-  package; a rename is not permission to lower existing functional assertions.
-- Publish one verified coherent final-name package to `O:/winnt`, retain a
-  recoverable prior package, record all eight hashes, commit/push reviewed
-  changes, and leave the active T open for owner acceptance if required.
+- Regenerate MSVC Win32/x86 /MT CCPU40 Ninja/MIDL graph; affected compilation
+  and links have no stale source/object/deployment identities.
+- Exercise direct/nested COMMAND/MEM/EDIT and native CMD/modern EDIT including
+  S40 return, DOS/native handoff/resume, Console/Window switching, residency,
+  faults, independent sessions and unchanged launch arguments. Keep all
+  Console17 + Window17 assertions and WINMINE/SOL/WRITE retained frontiers.
+- Prove run16/NTSRV/NTMON/NTVDM/NTW32/frontend agree on kind, real process
+  identity, frontend ownership, direct receipt and teardown. Monitor must not
+  mistake a frontend for a native worker.
+- Win32Record remains one actual admitted direct request, with unchanged
+  exit-code/receipt and stack behavior; no observed descendant record is added.
+  Original DOS/WOW and genuine Console records remain byte/semantics unchanged.
+- Scan all source, tests, scripts, config, manifests, current/history/archive
+  documents, current generated graphs and package identities. Surviving raw
+  original/substring names are explicitly reviewed, never hidden aliases.
+- Publish the tested coherent eight-file set to O:/winnt, retaining recoverable
+  previous files/config, verify all hashes, commit/push and leave clean main.
+  Keep T open for owner acceptance.

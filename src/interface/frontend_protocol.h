@@ -9,7 +9,7 @@ typedef struct frontend_bootstrap_reply {
     char application[APP_VERSION_BYTES];
 } frontend_bootstrap_reply;
 
-/* NTSRV owns the direct result; NTCON reports its I/O release separately. */
+/* NTSRV owns the direct result; NTW32 reports its I/O release separately. */
 #define NATIVE_REQUEST_VERSION 5u
 /* Zero bytes requests an acknowledged native presentation resume, not a
  * launch. It returns no target/receipt handles and creates no target. */

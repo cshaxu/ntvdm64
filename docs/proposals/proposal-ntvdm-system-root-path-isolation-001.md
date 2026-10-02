@@ -9,7 +9,7 @@ no numeric T allocation,
 active-packet change, production repair or runtime acceptance is claimed.
 
 Introduce one product-owned `NtvdmSystemRoot` directory contract shared by the
-product's native EXEs (`run16`, `ntsrv`, `ntvdm`, `ntkvm`, `ntcon`, `ntmon`). Each
+product's native EXEs (`run16`, `ntsrv`, `ntvdm`, `ntkvm`, `ntw32`, `ntmon`). Each
 process derives its own root from the directory containing its actual loaded
 EXE image. Co-located EXEs normally agree; a split or mismatched package must
 not silently borrow another process's root. Internal product components and
@@ -153,7 +153,7 @@ changing any imported file.
 Product DLLs such as WOW32/VDMREDIR and guest binaries such as KRNL386 may
 live below `root\system32`; their module directory is not the `NtvdmSystemRoot`
 of the containing native EXE. Optional VDD, user-selected PIF/application and
-host DLL loading remain separate cases. S1 must also inventory `ntcon`,
+host DLL loading remain separate cases. S1 must also inventory `ntw32`,
 `ntkvm`, and `ntmon` even if an EXE currently needs no package file: the shared
 root contract must be available consistently without inventing a resource.
 

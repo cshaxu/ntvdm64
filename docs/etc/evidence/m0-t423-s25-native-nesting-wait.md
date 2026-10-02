@@ -2,7 +2,7 @@
 
 ## Question and baseline
 
-Why does the S24-accepted direct NTCON package pass sequential native reuse
+Why does the S24-accepted direct NTW32 package pass sequential native reuse
 but time out when a CMD batch starts another `run16 cmd` before its own CMD
 exits? The baseline is the owner-accepted protocol-23 seven-file package;
 the S24 evidence records its hashes and passing direct tests. This record
@@ -28,21 +28,21 @@ limitation; it is not used to diagnose native nesting.
   45 seconds, with no completed batch text. The latter observer report is
   `build/M0-T423/S25/z-nested-live.txt`; the package remains unmodified.
 - At the 45-second run, the outer CMD remained alive, its first inner
-  `run16 cmd /c ver` remained alive, and both NTCON and NTKVM remained alive.
-  The process snapshot showed outer CMD parented by NTCON and inner run16
+  `run16 cmd /c ver` remained alive, and both NTW32 and NTKVM remained alive.
+  The process snapshot showed outer CMD parented by NTW32 and inner run16
   parented by that CMD. Only test-owned mapped-drive leftovers were ended;
   unrelated installed-package processes were not touched.
-- `src/ntcon-exe/main.c` calls `ntcon_executions_wait_idle()` before every
+- `src/ntw32-exe/main.c` calls `ntw32_executions_wait_idle()` before every
   `worker_base_get_next_command()`. The wait is infinite until all active
   direct serving threads end. Meanwhile the outer CMD waits for the inner
   run16, so its direct serving thread cannot end. The inner request needs
-  the same NTCON to call GetNext. The broker's same-root path already permits
-  an in-flight direct record, and NTCON's execution owner already counts
+  the same NTW32 to call GetNext. The broker's same-root path already permits
+  an in-flight direct record, and NTW32's execution owner already counts
   multiple active requests; the main-loop idle gate is the divergent barrier.
 
 ## S25 candidate repair and first proof
 
-The NTCON main loop no longer waits for all serving threads to become idle
+The NTW32 main loop no longer waits for all serving threads to become idle
 before calling `GetNextNativeCommand`. A second authenticated request may be
 taken while an outer CMD is waiting for its inner `run16`; existing frontend
 identity checks still reject a different frontend during activity. Broker
@@ -63,7 +63,7 @@ captured screen displayed `INNER-NATIVE-RETURNED`, and the script itself
 checked both an inner exit code 37 and a redirected inner exit code 41.
 Its report and screen are `build/M0-T423/S25/nested-fixed-r7.txt` and
 `.console.txt`. Neither test required an extra helper or Job observer.
-Only the changed NTCON executable was copied into the **build-only** test
+Only the changed NTW32 executable was copied into the **build-only** test
 package; `O:/winnt` remains the accepted S24 set. The temporary short drive
 for this run was `Z:`. The S25 candidate is not yet a published P: bounded
 startup/handoff waits, full x86 and runtime gates, side-session NTKVM review,
@@ -87,18 +87,18 @@ and authenticated grants still decide admission. Both direct and nested
 CMD continued to pass after the protocol-version bump to 24.
 
 A negative probe substituted a live but deliberately non-registering
-`ntcon.exe` fixture in a separate build-only package. The observer returned
+`ntw32.exe` fixture in a separate build-only package. The observer returned
 `exit=0x000005b4` (`ERROR_TIMEOUT`) after about 11.6 seconds including test
 setup, rather than hanging or starting a target. Raw report:
 `build/M0-T423/S25/protocol24-stuck-live.txt`. The fixture source is
-`tests/observation/ntcon_unregistered_worker.c`; it is not in any product
+`tests/observation/ntw32_unregistered_worker.c`; it is not in any product
 link. The complete protocol-24 native candidate then returned 0 and showed
 the Windows version for `cmd /c ver`, and returned `0x17` with
 `INNER-NATIVE-RETURNED` for the repository's nested script. Raw reports are
 `build/M0-T423/S25/protocol24-simple.txt` and
 `build/M0-T423/S25/protocol24-nested.txt`, each with a `.console.txt` file.
-After adding bounded NTCON and NTVDM I/O admission retries, an incremental
-x86 rebuild and the NTCON lifetime fixture passed; the real nested native
+After adding bounded NTW32 and NTVDM I/O admission retries, an incremental
+x86 rebuild and the NTW32 lifetime fixture passed; the real nested native
 test again returned `0x17`, and a copied original DOS package ran
 `COMMAND.COM /c MEM` with exit 0 and visible memory figures. The corresponding
 reports are `protocol24-bounded-nested.txt` and `protocol24-dos-mem.txt`.
@@ -138,17 +138,17 @@ non-regression, not application functionality acceptance.
 
 Supplemental nesting exposed an additional concrete contract mismatch.
 NTSRV `CompleteWorkerChannel` accepts request ID zero for an I/O-resume
-channel without a Direct task. The new `worker-base` client and NTCON
+channel without a Direct task. The new `worker-base` client and NTW32
 execution-start check had rejected zero. The worker's previously ignored
 completion then returned 87 (`ERROR_INVALID_PARAMETER`); the S25 explicit
-completion-fault policy correctly terminated NTCON, surfacing 1067 to the
-launcher. Existing error-only NTCON tracing captured
+completion-fault policy correctly terminated NTW32, surfacing 1067 to the
+launcher. Existing error-only NTW32 tracing captured
 `stage=broker-complete error=87` under
-`m0-t423-s25-ntcon-repeat-error-b.txt`. The accepted S24 package instead
+`m0-t423-s25-ntw32-repeat-error-b.txt`. The accepted S24 package instead
 timed out on the same `native-cmd-dos-repeat` supplemental case. The repair
-allows zero through the common completion client and NTCON I/O-resume
+allows zero through the common completion client and NTW32 I/O-resume
 execution path, matching NTSRV's existing contract. The focused
-`worker-base-next-command-test` and NTCON lifetime fixture passed (448
+`worker-base-next-command-test` and NTW32 lifetime fixture passed (448
 checks, no failures, including three exact zero-request completions); after
 the repair, the real
 `native-cmd-dos-repeat` case captured two MEM reports and exited zero under
@@ -161,7 +161,7 @@ again in Window-input mode (prefix
 `m0-t423-s25-proto24-window17-a`, all actual input/text/result assertions).
 The formal and build-only runtime package hashes match for all seven product
 files; the unchanged WOW32 DLL matches the accepted `O:/winnt` copy.
-The deliberately live but non-registering NTCON negative was repeated after
+The deliberately live but non-registering NTW32 negative was repeated after
 the zero-request change: report `m0-t423-s25-proto24-stuck-after-zero.txt`
 records `result=exited`, `exit=0x000005b4` (`ERROR_TIMEOUT`), with no
 unbounded startup wait. The observer executable's own zero exit is not used
@@ -174,7 +174,7 @@ source correction: all 17 actual text/result cases passed under prefix
 The deeper `dos-native-dos` and `frontend-chain-b` executions first returned
 their expected exits (1 and 23) but failed final-screen assertions. Per-line
 snapshots proved the earlier text was visible and later overwritten. In the
-80-column chain, NTCON seeded a scrolled DOS page at its old viewport origin,
+80-column chain, NTW32 seeded a scrolled DOS page at its old viewport origin,
 overwriting live native history. A focused presentation case reproduced this
 with an A-H page followed by a C-J page: A and B were lost. The candidate now
 aligns a trustworthy, nonblank prefix of the returned page with native
@@ -193,7 +193,7 @@ line 04 has already lost that history. Restoring the original buffer shape
 at exit cannot restore the lost cells. This also reproduces when the test
 Console starts at 80 columns, so it is the loss of retained rows, not only
 120-to-80 reflow. This is a distinct frontend geometry/history boundary, not
-fixed by NTCON's hidden-Console import. Evidence is
+fixed by NTW32's hidden-Console import. Evidence is
 `O:/winnt/Logs2/m0-t423-s25-overlap-c-dos-native-dos.txt` (120 columns) and
 `m0-t423-s25-overlap-e-dos-native-dos.txt` (80 columns), with per-line
 snapshots. Neither assertion was weakened. The S24 control had
@@ -205,10 +205,10 @@ or claimed complete while this failure and the remaining gates are reviewed.
 | Path | Classification and disposition |
 | --- | --- |
 | Run16 native reserve/register and unaccepted submit | Previously unbounded 10-ms status polling; candidate now uses per-launcher broker transition events and one 10-s deadline. Accepted requests are never replayed. |
-| NTCON `begin_io` | The new candidate removes its 10-ms readiness retry. The existing presentation thread publishes a manual-reset admission event only after it has attached and acquired the frontend; a request waits on that event, its stop handles, the presentation-thread death handle, and the same 10-s deadline. The retained 30-ms hidden-Console observer is still a timed producer and is disclosed separately. Focused real-chain proof passed; broader lost-wake/fault review remains. |
+| NTW32 `begin_io` | The new candidate removes its 10-ms readiness retry. The existing presentation thread publishes a manual-reset admission event only after it has attached and acquired the frontend; a request waits on that event, its stop handles, the presentation-thread death handle, and the same 10-s deadline. The retained 30-ms hidden-Console observer is still a timed producer and is disclosed separately. Focused real-chain proof passed; broader lost-wake/fault review remains. |
 | NTVDM Console activation | Previously unbounded `ERROR_BUSY` 10-ms retry. The current candidate makes one activation request; NTKVM waits on a private per-request manual-reset event plus cancellation/root-stop handles, with a 10-s deadline. Ownership transitions signal all registered waiters under the ownership lock. The focused real routes and subsequent 17+17 formal package gates pass; publication/owner acceptance remain separate. |
-| NTCON hidden-Console output pump | Deliberate 30-ms output observer accepted by the owner until a reliable producer signal exists; retain and disclose. |
-| NTCON screen capture retries and Console-close checks | Bounded 8-attempt capture consistency retry and bounded explicit-close observation, not startup readiness polling; retain pending negative-path regression. |
+| NTW32 hidden-Console output pump | Deliberate 30-ms output observer accepted by the owner until a reliable producer signal exists; retain and disclose. |
+| NTW32 screen capture retries and Console-close checks | Bounded 8-attempt capture consistency retry and bounded explicit-close observation, not startup readiness polling; retain pending negative-path regression. |
 | NTKVM synchronous-input cancellation join | Replaced repeated 50-ms cancellation with a single cancel and bounded 10-s join. Hidden-Console normal, 32 cancel/wait races and forced held-lock timeout fixtures pass; a timeout retains borrowed storage for terminal process cleanup. |
 | Run16 broker-connect, NTMON refresh, WOW clock | Finite broker-connect retry and deliberate periodic observer/producers; classify and preserve unless a distinct failure is proved. |
 | Run16 worker-death completion grace | One 2-second wait for the direct DOS/WOW parent completion after worker death, followed by explicit failure if no completion arrives; bounded failure observation, not a readiness poll. |
@@ -221,9 +221,9 @@ retained headless WOW frontiers, the side-session NTKVM lifetime fixture,
 and the x86 formal graph have passed as stated above; they do not turn the
 remaining items into passes.
 
-NTCON's admission event is local to the worker, not a second broker queue or
+NTW32's admission event is local to the worker, not a second broker queue or
 new frontend protocol. The presentation owner sets it under the membership
-lock only after `ntcon_presentation_begin` succeeds, and clears it when that
+lock only after `ntw32_presentation_begin` succeeds, and clears it when that
 presentation ends or the route detaches. A request holds its own admission
 count while it waits and rechecks the predicate under the same lock after a
 wake; no auto-reset event is shared by competing request waiters. The first
@@ -231,7 +231,7 @@ isolated x86 source compilation and link succeeded. The focused real cases
 `native-zero`, `native-cmd-dos-repeat`, and `frontend-chain-b` passed with
 actual output and exits 0, 0, and 23 under prefix
 `m0-t423-s25-admission-event-focused` in `O:/winnt/Logs2`. This changed
-`ntcon.exe` was copied only to a new build-local package
+`ntw32.exe` was copied only to a new build-local package
 `build/M0-T423/S25/runtime-admission-event`; `O:/winnt` remains untouched.
 The repeated programmatic Ninja invocation stalled before launching a child
 compiler process; the exact graph-selected `main.c` compile and link commands
@@ -240,7 +240,7 @@ incremental product build remains required before a production P.
 
 The S25 build audit also found that Ninja's default target compiles only the
 original SoftPC library collection; it is not a product build. Its separate
-`product-programs` alias omitted both `ntcon.exe` and `ntkvm.exe`, so invoking
+`product-programs` alias omitted both `ntw32.exe` and `ntkvm.exe`, so invoking
 that alias could falsely suggest that the two-worker product was up to date.
 The graph generator now includes both executables in the alias. Regeneration
 under `build/M0-T423/S25/formal` showed all seven declared product targets,
@@ -415,21 +415,21 @@ final screen again lacked the earlier `Microsoft Windows [Version` marker.
 The latest 17+17 package results must not be read as passing that supplemental
 assertion.
 The final formal x86 fixture binaries were also rerun with their specified
-arguments: `worker-base-next-command-test`, `ntcon-execution-lifetime-test`,
-`ntcon-presentation-test` (including `--input-return`),
+arguments: `worker-base-next-command-test`, `ntw32-execution-lifetime-test`,
+`ntw32-presentation-test` (including `--input-return`),
 `frontend-scope-lifetime-test`, and `basesrv-service-reservation-test` all
-exited zero. `console-frontend-test` and `ntcon-close-test` also exited zero.
+exited zero. `console-frontend-test` and `ntw32-close-test` also exited zero.
 The execution-lifetime log reports 448 checks/zero failures, 12 completed
 requests, 16 cancellations, target survival and zero remaining handles. The
 presentation input-return log reports 677 checks/zero failures. Both are
 under `build/M0-T423/S25/`.
 An initial launch of the execution-lifetime fixture without its required log
 argument returned its documented usage code 2; the proper invocation passed.
-The latest Run16/NTSRV package with only `ntcon.exe` substituted by the
+The latest Run16/NTSRV package with only `ntw32.exe` substituted by the
 build-only live-but-unregistered fixture returned actual launcher status
 `0x000005b4` (`ERROR_TIMEOUT`) in
 `m0-t423-s25-waitset-stuck-final.txt`; it did not hang. A subsequent process
-query found no remaining test-owned Run16/NTKVM/NTCON/NTSRV process.
+query found no remaining test-owned Run16/NTKVM/NTW32/NTSRV process.
 The independent `base-client-rpc-first-test --native-reservation` fixture
 initially rejected the protocol-24 broker because that fixture binary was
 still protocol 23; the formal product target does not include this fixture.
@@ -442,7 +442,7 @@ wait-set package. Its observer report
 `m0-t423-s25-waitset-native-reuse.txt` records actual launcher exit zero,
 and its Console capture contains two real Windows-version lines. The outer
 PowerShell invocation used `Start-Process -Wait`, which additionally waited
-for intentionally resident NTSRV/NTCON descendants after the observer had
+for intentionally resident NTSRV/NTW32 descendants after the observer had
 already written its completed report. That harness wait was interrupted;
 the test-owned processes were verified gone and `Z:` was removed. This was
 not a product timeout and must not be confused with the observer's result.
@@ -459,14 +459,14 @@ proof.
 
 A controlled follow-up eliminated the identity ambiguity: the test started
 one NTSRV instance itself and held that exact process handle before launching
-the isolated observer. While the deliberately non-registering NTCON fixture
+the isolated observer. While the deliberately non-registering NTW32 fixture
 kept Run16 in startup wait, terminating that owned broker made the launcher
 exit with `0x000006ba` (`RPC_S_SERVER_UNAVAILABLE`), not with the 10-second
 timeout. Report: `m0-t423-s25-waitset-broker-death-owned.txt`. This fixture
-does not establish real-worker shutdown because its fake `ntcon.exe` never
+does not establish real-worker shutdown because its fake `ntw32.exe` never
 connects to the broker. A separate ordinary `cmd /c ver` run on the real
-`runtime-formal-waitset` package returned zero, left one resident NTCON, then
-terminated the exact owned NTSRV process. That NTCON process signalled exit
+`runtime-formal-waitset` package returned zero, left one resident NTW32, then
+terminated the exact owned NTSRV process. That NTW32 process signalled exit
 within five seconds. Report:
 `m0-t423-s25-waitset-worker-broker-loss.txt`. Both probes used only temporary
 `Z:` mappings, removed afterward; no test-owned processes remained.
@@ -475,7 +475,7 @@ For frontend death, the first isolated injection killed NTKVM as soon as it
 appeared, before bootstrap completed. The launcher returned error 5; this
 tests early-bootstrap failure only and is not evidence about a pending
 worker-state wait. A second controlled injection waited until the
-deliberately non-registering NTCON fixture had actually started, then killed
+deliberately non-registering NTW32 fixture had actually started, then killed
 that run's NTKVM. The waiting launcher returned `0x000000e9`
 (`ERROR_PIPE_NOT_CONNECTED`) promptly rather than waiting for its deadline.
 Report: `m0-t423-s25-waitset-frontend-death-ready.txt`. The owned broker,
@@ -519,7 +519,7 @@ published `O:/winnt` set. Its SHA-256 values are:
 | `run16.exe` | `7C23E88A3DF5B312319ECF0924AAB940352D32F1A45C1008F05495683D55D780` |
 | `ntsrv.exe` | `23707D9E3A22B241E1F815FB3B72D8B78656C25E2964802667EC773BEA5F4045` |
 | `ntvdm.exe` | `A7FCD3FB2B54105902FFFD3653F462CCB851EE21AC5CE2403F5B195072826A2C` |
-| `ntcon.exe` | `D60137301B96847AF9B1F8730B9C9B4A379B1AD47B3EB2538CF664C839CB10AA` |
+| `ntw32.exe` | `D60137301B96847AF9B1F8730B9C9B4A379B1AD47B3EB2538CF664C839CB10AA` |
 | `ntkvm.exe` | `D71A85C094C2B96AFCA80BDD98FAEC88C5B491765FC1F706D75BFDD7CDDECFF5` |
 | `ntmon.exe` | `22F748D18A34100E00932F0F777EA554382C6E97CD0D501668762854288F919C` |
 | `VDMREDIR.dll` | `D768C09D84EC83597186FB6BC08871C0045915FACC6ACD135820DAD9CAF9BD77` |
@@ -538,7 +538,7 @@ For simultaneous admission, two separate hidden Console observers launched
 `run16 cmd.exe /d /c ver` at the same time against one owned protocol-24
 NTSRV. Both reports (`m0-t423-s25-concurrent-a.txt`,
 `m0-t423-s25-concurrent-b.txt`) recorded real launcher exit zero and visible
-Windows-version output. Two NTCON workers remained resident afterward,
+Windows-version output. Two NTW32 workers remained resident afterward,
 consistent with independent frontend roots; only this test's broker and
 workers were then ended. This is an actual concurrent-start check, not proof
 of every possible reservation interleaving.

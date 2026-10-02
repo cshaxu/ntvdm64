@@ -1,8 +1,8 @@
 # ntkvm frontend executable owner
 
 This owner contains visible Console/Window presentation and copied worker
-screen/input channels. NTVDM and NTCON use the same frame/input contracts.
-NTCON, not NTKVM, owns the ordinary hidden Console and native targets.
+screen/input channels. NTVDM and NTW32 use the same frame/input contracts.
+NTW32, not NTKVM, owns the ordinary hidden Console and native targets.
 The S12 formal graph no longer selects ConPTY, its terminal parser or a private
 helper. The duplicate native renderer has also been removed. Current delivery
 and remaining acceptance gates are recorded in docs/states/CURRENT.md.
@@ -22,7 +22,7 @@ The private request transfer implementation is shared by the two endpoints,
 not duplicated. The launcher-owned client library contains bootstrap_client,
 native_request_client, native_request_io and native_launch_packet under run16-exe.
 Public declarations are in interface. Target creation is compiled from
-run16-exe/native_launch.c into NTCON and run16's
+run16-exe/native_launch.c into NTW32 and run16's
 GUI route; it is not part of this frontend or the launcher client archive.
 
 The worker-side copied protocol client now belongs to worker-base, not this
@@ -36,7 +36,7 @@ Do not create a parallel scheduler or duplicate these presentation providers.
 
 `session_service.c` owns the shared worker-channel pump,
 resource lists and joined teardown. It borrows the registered capability and
-notification until close. NTCON owns native request execution and reports real
+notification until close. NTW32 owns native request execution and reports real
 Console membership separately from its resident worker process. The service
 retirement barrier accounts for pending admission and DOS/native users.
 Launcher completion, I/O failure and frontend-session closure remain
@@ -76,7 +76,7 @@ release remains owned by kvm-window, not by the NTVDM worker.
 Logical text-region state is separate from the visible Console's physically
 limited viewport. Backend handoffs use the logical region; only presentation
 uses host window limits. NTKVM routes native pointer motion/modifiers but does
-not integrate its position or draw a native arrow. NTCON composes its text
+not integrate its position or draw a native arrow. NTW32 composes its text
 block cursor in the common frame; NTVDM retains its original guest cursor.
 No worker depends on this component's private renderer or display dimensions.
 
@@ -84,7 +84,7 @@ No worker depends on this component's private renderer or display dimensions.
 
 S9's native_conpty/native_terminal implementation is removed from the S12
 production graph and source. Historical commits and the S9/S12 evidence retain
-its behavior and experiments; it is not an optional runtime backend. NTCON
+its behavior and experiments; it is not an optional runtime backend. NTW32
 now packs native characters into the common text ABI. NTKVM uses one bitmap
 rasterizer for both workers; font/palette transfer belongs to that shared ABI.
 

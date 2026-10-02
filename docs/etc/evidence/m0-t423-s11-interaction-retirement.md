@@ -8,7 +8,7 @@ supersedes the wait-for-owner instruction below, not the recorded limitations.
 
 Owner requires mouse completion in S11, followed by commit/push and a stop
 for owner validation. Only native continuity/retirement restructuring moves
-to the approved S12 NTCON plan; RDP capture moves to S13. Neither transfer
+to the approved S12 NTW32 plan; RDP capture moves to S13. Neither transfer
 means those capabilities passed. Historical sections below retain the rejected
 alternatives and their evidence. Do not automatically begin S12.
 

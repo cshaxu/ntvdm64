@@ -59,7 +59,7 @@ variant also passed twice; the experimental test-only change was removed
 because logging changed timing and did not capture a failing run. Neither
 observed pass is accepted as a product repair, and the production package
 was never replaced. Static review narrows the next witness to NTKVM's copied
-input queue, NTCON's hidden-Console `return_unused_input`, and the original
+input queue, NTW32's hidden-Console `return_unused_input`, and the original
 DOS history/reentry consumer. No code owner among those three has yet been
 proved to duplicate or lose a particular key.
 

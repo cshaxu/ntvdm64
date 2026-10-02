@@ -30,10 +30,10 @@ $cases=@(
     @{Name='console-client-test';Suffix='close-hang';Arg='--close-hang';Exit='c000013a';Witness='original-shape close callback'}
 )
 if($ExpandedBackend){
-    & (Join-Path $repo 'tests/observation/verify-ntcon-console-state.ps1') `
-        -BuildRoot ((Join-Path $BuildRoot ($LogPrefix+'-ntcon-state')).Substring($repo.Length+1)) `
-        -LogPath (Join-Path $LogRoot ($LogPrefix+'-ntcon-state.log'))
-    foreach($test in @('ntcon-text-frame','ntcon-presentation','frontend-text-handoff')) {
+    & (Join-Path $repo 'tests/observation/verify-ntw32-console-state.ps1') `
+        -BuildRoot ((Join-Path $BuildRoot ($LogPrefix+'-ntw32-state')).Substring($repo.Length+1)) `
+        -LogPath (Join-Path $LogRoot ($LogPrefix+'-ntw32-state.log'))
+    foreach($test in @('ntw32-text-frame','ntw32-presentation','frontend-text-handoff')) {
         $log=Join-Path $LogRoot ($LogPrefix+'-'+$test+'.log')
         if(Test-Path -LiteralPath $log){throw "Refusing to overwrite $log"}
         $process=Start-Process -FilePath (Join-Path $BuildRoot ($test+'-test.exe')) `

@@ -12,7 +12,7 @@ Owner 于 2026-10-02 明确报告“验证通过！T423收口，准入下一个T
 
 S15 已由 owner 收口，其补充 `dos-native-typeahead` 测试一次通过、一次把
 末尾 `exit` 变成 `eexit` 后超时；此前 S14 基线也出现相同现象。S16 单独
-审计并修复：先对照 observer 投递、NTKVM 输入队列、NTCON 隐藏 Console、
+审计并修复：先对照 observer 投递、NTKVM 输入队列、NTW32 隐藏 Console、
 NTVDM 原始输入读取和所有权交接，逐键证明来源与去向；区分观察器时序
 假象与产品丢键／重键。若是测试缺陷，保留严格的真实输入顺序断言后修复
 观察器；若是产品缺陷，在已确认的边界做最小修复。不得以固定 Sleep、
@@ -47,7 +47,7 @@ frontend 使用者，不能把“确认此任务已归还”扩大成等待整�
 
 S17 的 `retire -> restored` 屏障已修复 DOS 根任务；owner 随后确认原生
 字符根任务仍遗漏同一规则：`cmd.exe -> run16 cmd -> CAF -> exit` 能在
-NTCON 的 final-presentation 完成后立即让 root `run16` 返回，NTKVM 则只能
+NTW32 的 final-presentation 完成后立即让 root `run16` 返回，NTKVM 则只能
 在 creator 已退出后开始恢复外层 CMD 的原 buffer/input mode。S18 以 S17
 的已验证机制修复该不对称，而不是引入第二条延时或重绘路径。
 
@@ -62,32 +62,32 @@ NTCON 的 final-presentation 完成后立即让 root `run16` 返回，NTKVM 则�
 
 ## S19：PID-first worker 管理投影与 NTMON 任务显示
 
-S18 完成后，下一项 S 将统一 NTVDM/NTCON 向 NTSRV/NTMON 提供的 worker
+S18 完成后，下一项 S 将统一 NTVDM/NTW32 向 NTSRV/NTMON 提供的 worker
 管理投影。NTMON 对用户只显示并操作真实 Windows PID；不再显示或传递
 BaseSrv 私有 sequence 或 management epoch。NTSRV 按当前已认证、存活的
 注册 worker PID 解析 Delete；PID 复用于后来注册的 worker 时，该当前
 worker 即为 PID 操作目标。私有连接 generation、路由及 sequence 可留在
 BaseSrv 内部，但不得跨 NTMON 管理边界。
 
-表头固定为 `PID  KIND  ELAPSED  STACK  TASK`。NTCON 行显示其 worker PID、
+表头固定为 `PID  KIND  ELAPSED  STACK  TASK`。NTW32 行显示其 worker PID、
 `WIN32`、与 DOS/WOW 一致的逻辑任务栈深度和当前执行的 Win32 target 完整路径；
-NTSRV 以直接请求及 NTCON 上报的实际附着变化维护 `CONRECORD`，所以 `CMD → EDIT`
+NTSRV 以直接请求及 NTW32 上报的实际附着变化维护 `WIN32RECORD`，所以 `CMD → EDIT`
 可显示为两层并以 EDIT 为 TASK。Console 附着成员数只作为该 broker 记录更新的输入和
-NTCON 内部的安全回收依据，不属于管理投影。空闲时 TASK
+NTW32 内部的安全回收依据，不属于管理投影。空闲时 TASK
 为 `<EMPTY>`。NTVDM 行显示其 worker PID，并保留源定义的 DOS/Win16/WOW16
 kind、任务深度和任务标签。不得将 PID、成员、状态或起始时间拼接为
 `TASK / DETAILS` 长行。
 
-`interface` 定义版本化复制管理契约；`worker-base` 仅提供 NTVDM/NTCON
+`interface` 定义版本化复制管理契约；`worker-base` 仅提供 NTVDM/NTW32
 复用的 worker 端上报客户端、验证和序列化；NTSRV 是唯一认证和管理投影点；
 NTMON 只渲染投影并发起 PID 请求。NTVDM 从原 DOS/WOW 记录产生 task label，
-NTCON 从实际启动的 target 产生/清除完整路径。不得新增第二个通用任务注册表、
-进程树枚举或任意进程控制；NTCON Delete 仍须完成其拥有的 Console 会话关闭
+NTW32 从实际启动的 target 产生/清除完整路径。不得新增第二个通用任务注册表、
+进程树枚举或任意进程控制；NTW32 Delete 仍须完成其拥有的 Console 会话关闭
 确认，不能仅终止 carrier。
 
-验收包括 PID-only snapshot/terminate 契约、当前 PID 注册查找、NTCON idle/
+验收包括 PID-only snapshot/terminate 契约、当前 PID 注册查找、NTW32 idle/
 active target 与 MEMBERS 投影、NTVDM 原有标签/深度保留、五列表格断言，以及
-真实 NTCON 会话关闭和适用 x86/DOS/Window/WOW 回归。
+真实 NTW32 会话关闭和适用 x86/DOS/Window/WOW 回归。
 
 ## S20：移除 creator/ERROR_BUSY 生命周期轮询
 
@@ -103,14 +103,14 @@ NTKVM 将 creator 句柄直接加入 wait-set；`RetireFrontend()` 返回
 嵌套/native membership、broker loss 和“无计时轮询”检查。该工作只修复项目
 新增的前端生命周期边界；不改变 guest、原 DOS/WOW 调度或 S17 的恢复语义。
 
-## S21：NTVDM/NTCON 生命周期语义审计与收束
+## S21：NTVDM/NTW32 生命周期语义审计与收束
 
 S21 是 T423 的最后一个 S。基于 S19 的统一 worker 管理投影及 S20 的无轮询
 前端等待，逐项审计
-NTVDM 与 NTCON 的登记、就绪/占用、接单、嵌套、target/task 完成、前端断连、
+NTVDM 与 NTW32 的登记、就绪/占用、接单、嵌套、target/task 完成、前端断连、
 空闲、显式管理关闭、异常退出和资源回收语义。识别仍有可证明同形的状态、
 协议、验证、复制记录、关闭确认或测试边界，并在不改变原 DOS/WOW record
-所有权、NTCON target 执行所有权和既定 native Console 会话关闭语义的前提下
+所有权、NTW32 target 执行所有权和既定 native Console 会话关闭语义的前提下
 统一实现。
 
 审计不得以抽象“common”层替代真实 owner，也不得为了合并而合并。每个候选
@@ -119,27 +119,27 @@ NTVDM 与 NTCON 的登记、就绪/占用、接单、嵌套、target/task 完成
 diff accounting、完整生命周期矩阵与生产发布门槛后，T423 交由 owner 验收，
 不得自行关闭。
 
-## S22：NTCON 原生文本色彩链路审计与修复
+## S22：NTW32 原生文本色彩链路审计与修复
 
 Owner 于 2026-09-30 准入 S22，处理 `run16 edit.exe` 等 Win32 文本目标在
 NTKVM Window 呈现中显示为黑白的问题。先建立可复现、可读取的证据链，逐段
 核对：目标写入的原生 Console 属性／VT 模式、隐藏 Console 的 `CHAR_INFO` 与
-`ColorTable`、NTCON 发出的统一文本帧，以及 NTKVM 将属性索引映射到像素调色板
+`ColorTable`、NTW32 发出的统一文本帧，以及 NTKVM 将属性索引映射到像素调色板
 的结果。不得把“NTKVM 可绘制合成色样”误写成真实 native target 已输出色彩。
 
-修复以实际丢失点为准：保留统一的 NTVDM/NTCON 文本帧 ABI、NTKVM 的前端
+修复以实际丢失点为准：保留统一的 NTVDM/NTW32 文本帧 ABI、NTKVM 的前端
 所有权和原始 OpenNT 镜像；不改 guest、共享库或系统主题，不用硬编码色表、
 定时重绘、延时和程序名特判。若证据表明 native target 依赖终端查询／回复，
 不得误作普通 Console 初始化问题；必须停在该边界，请 owner 决定是否重规划
 为真正的双向终端，渲染器不得猜测或伪造颜色。
 
 验收至少包含：传统属性色与 VT 色的隐藏 Console 捕获、帧到 Window 的调色板
-像素断言、`run16 edit.exe` 的可观察运行证据、DOS↔NTCON 交接后色表不被错误
+像素断言、`run16 edit.exe` 的可观察运行证据、DOS↔NTW32 交接后色表不被错误
 覆盖、Console/Window 切换及既有 COMMAND/MEM/EDIT/DOS17/WOW 非回退。生产 P
 仍须正式 x86 构建、七组件一致发布到 `O:/winnt`、日志在 `O:/winnt/Logs2`、
 提交推送和治理检查；完成后停下等待 owner 验收，不自行收口 T423。
 
-## Owner-approved successor plan after S22: unified NTVDM/NTCON worker control plane
+## Owner-approved successor plan after S22: unified NTVDM/NTW32 worker control plane
 
 The owner clarified the intended model on 2026-09-30.  This section is the
 authoritative successor plan for T423 after the currently active S22 closes;
@@ -147,12 +147,12 @@ it does not admit S23 or any later S before that point.
 
 ### Chosen model
 
-NTVDM and NTCON are equal product-level workers.  NTSRV is the sole authority
+NTVDM and NTW32 are equal product-level workers.  NTSRV is the sole authority
 for each worker's reservation, registration, liveness watch, explicit
 termination request and dead-worker cleanup.  NTKVM owns presentation only:
 visible Console/Window state, input, frame display and route attachment.  A
 failed NTKVM route is an I/O capability failure, not permission for NTKVM to
-terminate NTCON.  Run16 remains a launcher/parent-completion client; NTMON
+terminate NTW32.  Run16 remains a launcher/parent-completion client; NTMON
 consumes the one broker management projection.
 
 The workers deliberately retain different *internal execution owners*:
@@ -160,7 +160,7 @@ The workers deliberately retain different *internal execution owners*:
 | Worker | Internal task source and executor | Must remain outside common control code |
 | --- | --- | --- |
 | NTVDM | Original OpenNT DOSRecord/WOWRecord, BaseSrv dispatch and guest execution | Original DOS/WOW records, scheduling, completion and cleanup |
-| NTCON | Native Console participant graph and Windows native process execution | Console ownership, CreateProcess/waits, native child semantics and Console close |
+| NTW32 | Native Console participant graph and Windows native process execution | Console ownership, CreateProcess/waits, native child semantics and Console close |
 
 This difference does not permit two lifecycle/control protocols.  Cross-binary
 registration, identity/version checks, frontend capability, route handoff,
@@ -172,41 +172,41 @@ callback only at the actual DOS/WOW versus native execution boundary.
 
 ### Native child registration decision
 
-Every Job-notified Win32 text participant in an NTCON direct root's process
+Every Job-notified Win32 text participant in an NTW32 direct root's process
 tree is represented in NTSRV, but arbitrary Win32 programs are **not**
-required to call NTSRV and are never forced through Run16.  NTCON is their
+required to call NTSRV and are never forced through Run16.  NTW32 is their
 authenticated execution container; NTSRV projects their Job notifications.
 
-每个 NTCON 只有一条 `CONRECORD` 链，绝不拆成 Direct/Observed 两张表。
+每个 NTW32 只有一条 `WIN32RECORD` 链，绝不拆成 Direct/Observed 两张表。
 链中的每个元素带有一个不可互换的来源标记：
 
 | Class | Origin | Identity and completion authority |
 | --- | --- | --- |
-| `DIRECT` | A Run16 request admitted by NTSRV and delivered to NTCON | Broker request ID; NTCON reports its direct target PID and completes the direct parent receipt only when that target completes. |
-| `OBSERVED` | A native child observed attached to the authenticated NTCON Console | PID, observed parent relation where available, image and membership lifetime; it has no fabricated Run16 receipt or broker-synthesized exit code. |
+| `DIRECT` | A Run16 request admitted by NTSRV and delivered to NTW32 | Broker request ID; NTW32 reports its direct target PID and completes the direct parent receipt only when that target completes. |
+| `OBSERVED` | A native child observed attached to the authenticated NTW32 Console | PID, observed parent relation where available, image and membership lifetime; it has no fabricated Run16 receipt or broker-synthesized exit code. |
 
-因此 `run16 cmd -> cmd -> edit` 会成为同一个 NTCON worker 的一条完整
+因此 `run16 cmd -> cmd -> edit` 会成为同一个 NTW32 worker 的一条完整
 broker management stack (direct CMD plus observed CMD and EDIT), while Windows
 continues to own the native parent/child waits and exit codes.  `CMD -> run16
-COMMAND.COM` simultaneously has an NTCON participant for the waiting Run16
+COMMAND.COM` simultaneously has an NTW32 participant for the waiting Run16
 and an NTVDM original DOS record for COMMAND.COM; that is two real workers,
 not duplicate task accounting.  No injection, PATH interception, helper,
 process-tree kill or second scheduler is permitted.
 
 ### Resident worker and EMPTY transition
 
-NTCON is a resident Win32-text worker, not a per-request backend.  Its normal
+NTW32 is a resident Win32-text worker, not a per-request backend.  Its normal
 cycle must be the same product-level cycle as a resident NTVDM:
 
 ```
 registered READY/EMPTY -> admitted work -> BUSY -> READY/EMPTY -> wait for next work
 ```
 
-Direct native target 完成后，NTCON 的 `READY/EMPTY` 转换
+Direct native target 完成后，NTW32 的 `READY/EMPTY` 转换
 governed only by its admitted direct request, active DOS/native route and
 presentation handoff.  An `Observed` participant is monitor-only and cannot
 delay that transition: it is a Windows-owned descendant, not a broker task.
-At that point NTCON retains its NTSRV connection, authenticated
+At that point NTW32 retains its NTSRV connection, authenticated
 worker watch, reservation and hidden Console, releases the previous NTKVM
 presentation/input route and old frontend-root association, and waits for the
 next authenticated request.  Compatibility is exact: the later request must
@@ -214,11 +214,11 @@ belong to the same NTSRV session and the same authenticated execution-Console
 identity; after the prior root is fully unbound, a new root on that Console
 may bind the resident worker.  A separate Explorer Console, another visible
 Console, or another NTSRV session may not.  No empty transition may create a
-second NTCON or leave a stale frontend capability attached to the resident
+second NTW32 or leave a stale frontend capability attached to the resident
 worker.
 
 NTMON represents this ordinary reusable state with `STACK=0`, `TASK=<EMPTY>`
-and ready state.  Empty is not worker termination.  NTCON may terminate only
+and ready state.  Empty is not worker termination.  NTW32 may terminate only
 for an explicit NTSRV worker-close request, broker failure/shutdown, a defined
 real session-close rule, or its own unrecoverable failure.  Presentation loss
 alone is never a termination cause.
@@ -226,14 +226,14 @@ alone is never a termination cause.
 This residency rule is not merely a display convention.  NTSRV owns the
 registered identity, reservation, `READY`/`BUSY` transition, same-Console
 rebind eligibility, close request and confirmed rundown for **both** worker
-kinds.  NTVDM and NTCON each retain only their actual execution boundary:
+kinds.  NTVDM and NTW32 each retain only their actual execution boundary:
 original DOS/WOW record handling for the former, and native Console target
 creation/completion for the latter.  Run16, NTKVM and NTMON must select,
 observe or control either worker through the same authenticated NTSRV worker
 path; a frontend route, a launcher, an old root or a visible Console is never
 the worker's lease owner.  A native direct target that finishes completes only
 its direct record.  Console-attached descendants are independently observed
-in the same ConRecord list; their presence changes only NTMON's diagnostic
+in the same Win32Record list; their presence changes only NTMON's diagnostic
 stack projection, not the worker's `READY/EMPTY` state.
 
 The implementation must keep the two facts separate: Windows supplies native
@@ -248,7 +248,7 @@ The following is the owner-selected research direction, not an S24 closure or
 current product guarantee. The direct-command baseline is independent of Job
 notifications; S26 must re-evaluate their admitted diagnostic value after S25.
 
-`GetConsoleProcessList` is not an authority for ConRecord creation, nesting,
+`GetConsoleProcessList` is not an authority for Win32Record creation, nesting,
 completion or `BUSY`/`EMPTY`: a fixed-interval sample can miss a short-lived
 CMD descendant entirely. A Job-completion-port candidate creates a direct
 target suspended, assigns it to an event-only Job before `ResumeThread`, and
@@ -256,12 +256,12 @@ receives `NEW_PROCESS`, `EXIT_PROCESS` and `ACTIVE_PROCESS_ZERO` when Windows
 delivers them. The Job has no `KILL_ON_JOB_CLOSE` or other kill limit, is not a
 scheduler, and its closure never terminates a target tree.
 
-NTSRV owns the event-only Job and its completion port. NTCON creates the
+NTSRV owns the event-only Job and its completion port. NTW32 creates the
 direct target suspended, calls the existing authenticated bind, and resumes
-only after that bind has attached the target to NTSRV's Job. The `Direct` ConRecord
+only after that bind has attached the target to NTSRV's Job. The `Direct` Win32Record
 element binds the broker request and actual target PID and completes its
 receipt only when that target handle actually completes. A received Job
-`NEW_PROCESS` appends an `Observed` element to the same ConRecord stack with
+`NEW_PROCESS` appends an `Observed` element to the same Win32Record stack with
 actual PID, image when obtainable, parent relation and a later exit event.
 NTMON's `STACK` is that list's length; an Observed element has no invented
 receipt or exit code.
@@ -280,14 +280,14 @@ because it is kernel-adjacent.
 The original BaseSrv boundary is narrower: it owns DOS/WOW records and their
 VDM command/wait lifecycle, not an arbitrary Win32 native descendant graph.
 Therefore the source-aligned fallback is NTSRV authority for an admitted
-direct NTCON request only, while Windows retains native descendant waits and
+direct NTW32 request only, while Windows retains native descendant waits and
 exit propagation. A best-effort observed projection may aid diagnostics but
 must not become a hidden task scheduler or lifecycle authority.
 
-The retained research candidate removes `GetConsoleProcessList` from NTCON participant management
+The retained research candidate removes `GetConsoleProcessList` from NTW32 participant management
 entirely: no sampling thread, Console-membership RPC, epoch or fallback
-ConRecord source remains. An externally attached process is outside the
-managed NTCON job/session and is not represented as a product task. Other
+Win32Record source remains. An externally attached process is outside the
+managed NTW32 job/session and is not represented as a product task. Other
 independent uses of the Windows API (for example run16's own initial Console
 ownership probe) are not participant-graph logic and are audited separately.
 `worker-base` and `interface` carry only the versioned copied event protocol,
@@ -296,7 +296,7 @@ scheduler.
 
 ### S24 supplement: same-shaped next-command acquisition
 
-NTCON is a resident worker at the same product boundary as NTVDM.  Its worker
+NTW32 is a resident worker at the same product boundary as NTVDM.  Its worker
 receive path must therefore have the same high-level shape as the original
 `GetNextVDMCommand` cycle:
 
@@ -314,7 +314,7 @@ The project-added Console equivalent is represented as the bounded
 `GetNextConsoleCommand` operation.  NTSRV remains its authoritative admission
 and direct-completion owner; its payload contains only authenticated native
 attachments (request pipe, sender process, execution capability and frontend
-capability) plus the direct request ID.  NTCON receives it through a
+capability) plus the direct request ID.  NTW32 receives it through a
 `worker-base` local command client, owns native `CreateProcess` and Windows
 completion, then completes that same direct request.  `worker-base` owns the
 common copied command receive/dispose/cancel/completion wrapper and validation
@@ -331,26 +331,26 @@ is introduced.
 ### Successor S sequence
 
 The first S24 publication failed owner Win32-text interaction and was rolled
-back. The revised direct-command package restores NTCON's frontend-readiness
+back. The revised direct-command package restores NTW32's frontend-readiness
 gate, passes visible CMD output/input and direct reuse probes, and was accepted
 by the owner as the latest baseline; S24 is closed. The deeper native-nested
 batch probe timed out and is assigned to S25, not counted as an S24 pass.
 The Job tracker/Observed-record experiment remains retained
 research, not a dependency of the direct-command baseline. The code sweep for
 the newly inserted S25 found separate project-owned timer waits in Run16
-native-worker startup and submission, NTCON I/O admission, NTVDM frontend
+native-worker startup and submission, NTW32 I/O admission, NTVDM frontend
 activation, and NTKVM Console-channel teardown. None is an original OpenNT
 command wait. This sequence does not turn the normal resident worker's
 blocking get-next wait into a timed failure.
 
 | S | Bounded objective | Required result before the next S |
 | --- | --- | --- |
-| S23 | NTSRV as the sole NTVDM/NTCON lifecycle authority | Require reservation-bound NTCON registration; remove bare native-backend snapshot rows; make NTCON resident `READY/EMPTY` after all work ends; release only its old route/root association and safely rebind a later compatible root; NTKVM route loss cannot directly terminate NTCON; one authenticated worker watch per worker. |
-| S24 | NTCON direct-command baseline | Freeze graph redesign. Deliver `READY → GetNextConsoleCommand → direct Win32 text target → actual direct completion → READY`, verify reuse, and publish one coherent protocol-versioned seven-file product package. `command` and `cmd` must start from that package. A failed broker completion must fault the worker rather than silently reenter GetNext; unused Job tracking must not start in production. After a hidden-Console WinEvent probe produced no real output notification, the owner approved retaining bounded output sampling for now, with unchanged cursor/window state deduplicated. No new polling is admitted; existing 10 ms startup/handoff retries are disclosed S25 debt, not falsely claimed as removed by S24. |
-| S25 | Project-owned timed-wait and polling cleanup; native-nested timeout | Reproduce and diagnose the S24 `run16 cmd /c native-reuse.cmd` (test script on the mapped drive) private-desktop timeout, repair its actual cause, and prove deeper native nesting and worker reuse with real output, input, completion and no hang; preserve the accepted S24 package behavior. Inventory each production timer wait/retry and classify it as unbounded readiness polling, bounded failure retry, deliberate periodic producer/observer, or one-shot state check. Replace the unbounded Run16 reserve/register and `ERROR_NOT_READY` submission loops, NTCON `begin_io` readiness loop, and NTVDM frontend `ERROR_BUSY` activation loop with producer-signalled state changes, death/cancel wait handles, and a single finite startup/handoff deadline. Review NTKVM's repeated `CancelSynchronousIo` join for a bounded, non-spinning teardown. Do not share an auto-reset event between competing waiters or replay an accepted request. Prove lost-wake, concurrent admission, stuck-but-live worker, frontend/broker death, timeout rollback, DOS/native return, and resident idle get-next behavior. The accepted NTCON 30 ms hidden-Console output sampler stays explicitly disclosed/TODO until a reliable change signal exists; NTMON refresh, WOW clock publication, bounded capture/Console-close and broker-connect retries receive a documented retain-or-replace disposition, not an automatic deletion claim. No Job graph or new scheduler. |
-| S26 | Observed ConRecord research and bounded Job projection | Reassess the retained, currently non-product Job candidate against the verified S24/S25 direct-worker baseline. Decide whether to admit a best-effort `Observed` element in the one ConRecord chain, with an explicit missed-notification/PID-reuse contract and positive/negative tests. If admitted, remove dead candidate paths and link only the proved projection; if rejected, remove the unused product candidate and retain the experiment as evidence. No observed entry may govern direct receipt, `READY/EMPTY`, shutdown or scheduling; Windows retains descendant waits and exit codes. This S cannot be called complete merely because a fixture received every event in a bounded run. |
-| S27 | Unified external worker control-plane closure | Audit the current Run16, NTSRV, NTKVM, NTMON, interface and `worker-base` paths after S24/S25. Converge project-added, semantically identical authenticated admission, registration, direct command/receipt, READY/BUSY/EMPTY, route/root release, disconnect, explicit-close and worker-death handling for NTVDM/NTCON. NTCON adapts to the original NTVDM/BaseSrv shape; original DOS/WOW records, `GetNextVDMCommand`, guest execution and completion stay in place. Remove superseded transport/state paths rather than wrapping both implementations. Verify worker reuse, broker/worker/frontend faults and DOS↔native handoff. |
-| S28 | Unified management projection and divergence cleanup | Make NTMON a pure NTSRV projection consumer: `kind=0 DOS, 1 Win16, 2 Win32`, one `PID/STATE/STACK/TASK/IMAGE/START/ELAPSED` DTO, and `STACK=0/TASK=<EMPTY>` for resident workers. Derive Direct from the actual admitted target and any Observed display only from the S26 decision; never infer completion or BUSY from a sample, or display `MEMBERS=`. Audit all remaining project-added NTVDM/NTCON differences in Run16/NTSRV/NTKVM/NTMON/worker-base/interface; delete same-semantic duplicates and account for worker-local differences. Rich native stack display is conditional on S26 evidence, not an S24 claim. |
+| S23 | NTSRV as the sole NTVDM/NTW32 lifecycle authority | Require reservation-bound NTW32 registration; remove bare native-backend snapshot rows; make NTW32 resident `READY/EMPTY` after all work ends; release only its old route/root association and safely rebind a later compatible root; NTKVM route loss cannot directly terminate NTW32; one authenticated worker watch per worker. |
+| S24 | NTW32 direct-command baseline | Freeze graph redesign. Deliver `READY → GetNextConsoleCommand → direct Win32 text target → actual direct completion → READY`, verify reuse, and publish one coherent protocol-versioned seven-file product package. `command` and `cmd` must start from that package. A failed broker completion must fault the worker rather than silently reenter GetNext; unused Job tracking must not start in production. After a hidden-Console WinEvent probe produced no real output notification, the owner approved retaining bounded output sampling for now, with unchanged cursor/window state deduplicated. No new polling is admitted; existing 10 ms startup/handoff retries are disclosed S25 debt, not falsely claimed as removed by S24. |
+| S25 | Project-owned timed-wait and polling cleanup; native-nested timeout | Reproduce and diagnose the S24 `run16 cmd /c native-reuse.cmd` (test script on the mapped drive) private-desktop timeout, repair its actual cause, and prove deeper native nesting and worker reuse with real output, input, completion and no hang; preserve the accepted S24 package behavior. Inventory each production timer wait/retry and classify it as unbounded readiness polling, bounded failure retry, deliberate periodic producer/observer, or one-shot state check. Replace the unbounded Run16 reserve/register and `ERROR_NOT_READY` submission loops, NTW32 `begin_io` readiness loop, and NTVDM frontend `ERROR_BUSY` activation loop with producer-signalled state changes, death/cancel wait handles, and a single finite startup/handoff deadline. Review NTKVM's repeated `CancelSynchronousIo` join for a bounded, non-spinning teardown. Do not share an auto-reset event between competing waiters or replay an accepted request. Prove lost-wake, concurrent admission, stuck-but-live worker, frontend/broker death, timeout rollback, DOS/native return, and resident idle get-next behavior. The accepted NTW32 30 ms hidden-Console output sampler stays explicitly disclosed/TODO until a reliable change signal exists; NTMON refresh, WOW clock publication, bounded capture/Console-close and broker-connect retries receive a documented retain-or-replace disposition, not an automatic deletion claim. No Job graph or new scheduler. |
+| S26 | Observed Win32Record research and bounded Job projection | Reassess the retained, currently non-product Job candidate against the verified S24/S25 direct-worker baseline. Decide whether to admit a best-effort `Observed` element in the one Win32Record chain, with an explicit missed-notification/PID-reuse contract and positive/negative tests. If admitted, remove dead candidate paths and link only the proved projection; if rejected, remove the unused product candidate and retain the experiment as evidence. No observed entry may govern direct receipt, `READY/EMPTY`, shutdown or scheduling; Windows retains descendant waits and exit codes. This S cannot be called complete merely because a fixture received every event in a bounded run. |
+| S27 | Unified external worker control-plane closure | Audit the current Run16, NTSRV, NTKVM, NTMON, interface and `worker-base` paths after S24/S25. Converge project-added, semantically identical authenticated admission, registration, direct command/receipt, READY/BUSY/EMPTY, route/root release, disconnect, explicit-close and worker-death handling for NTVDM/NTW32. NTW32 adapts to the original NTVDM/BaseSrv shape; original DOS/WOW records, `GetNextVDMCommand`, guest execution and completion stay in place. Remove superseded transport/state paths rather than wrapping both implementations. Verify worker reuse, broker/worker/frontend faults and DOS↔native handoff. |
+| S28 | Unified management projection and divergence cleanup | Make NTMON a pure NTSRV projection consumer: `kind=0 DOS, 1 Win16, 2 Win32`, one `PID/STATE/STACK/TASK/IMAGE/START/ELAPSED` DTO, and `STACK=0/TASK=<EMPTY>` for resident workers. Derive Direct from the actual admitted target and any Observed display only from the S26 decision; never infer completion or BUSY from a sample, or display `MEMBERS=`. Audit all remaining project-added NTVDM/NTW32 differences in Run16/NTSRV/NTKVM/NTMON/worker-base/interface; delete same-semantic duplicates and account for worker-local differences. Rich native stack display is conditional on S26 evidence, not an S24 claim. |
 | S29 | Whole control-plane acceptance and owner handoff | Add no new product mechanism. Execute repeated resident reuse, direct and nested DOS/Console lifecycle, route/root rebind, completion, disconnect, worker death, explicit close, independent-session and management-display matrices, including the S25 timeout/notification cases and S26 Observed limitations. Audit S25's still-failing supplemental final-banner history check against the original OpenNT resize contract; do not report it as a pass or silently expand the product contract. Include full x86/DOS/Window/WOW production regressions, coherent package publication, governance, and final diff/duplicate accounting. Stop for owner verification; do not autonomously close T423. |
 | S30 | Restore OpenNT DOS row selection and service revision | Supersede S13's last-valid-DOS fallback. Select 80×22/25/28/43/50 with the original `calcScreenParams` integer midpoint comparisons against the native Console viewport height; retain existing row-copy and worker handoff. Synchronize `service.idl` revision 25.0 with application protocol 25, regenerate MIDL, fully relink and reject old/new protocol peers. Test every midpoint edge, 30→28, native/DOS nesting, Console/Window and previous DOS/WOW frontiers. Publish only a coherent verified eight-file package; leave T423 open for owner acceptance. |
 | S31 | Preserve final DOS Console state on frontend retirement | Remove project-added restoration of startup geometry and cursor position on ordinary root teardown; retain canonical-buffer selection, cursor shape and input-mode cleanup. Prove real 80×30→80×25/28 Console cell/cursor handoff, DOS/native regression and the complete publication gate. Delivered at `599b0b03a`. |
@@ -358,9 +358,9 @@ blocking get-next wait into a timed failure.
 | S33 | Preserve outer CMD screen on first interactive COMMAND operation | Owner inserted this S before the task-trace work. Reproduce `cmd.exe` at approximately 80×30 → `run16 command` → first `ver` or `dir`: the first command appears to clear the inherited screen. Locate the actual Console buffer/viewport/paint transition, restore the original OpenNT user-visible handoff without fake redraw or delay, and retain the S32 package as regression baseline. Additional defects require their own bounded review rather than being silently folded into this repair. |
 | S34 | Full DIR native-to-DOS last-line handoff repair | Delivered; [evidence](../etc/evidence/m0-t423-s34-console-projection-root-lifetime.md). NTKVM publishes the complete DOS logical page and blanks physical cells beyond it, without modifying original MVDM logic or guaranteeing host scrollback. The same verified protocol-26 package makes borrowed Console-root retirement and both worker types' root-loss behavior consistent. Built, regressed and published for owner side-test; T423 remains open. |
 | S35 (delivered; [evidence](../etc/evidence/m0-t423-s35-native-text-window.md)) | Native text-frame Window rendering and cursor blink | Remove NTKVM's size/style/font raster fallback for copied text frames within the existing protocol's finite 160×96/font32 bounds. Extend only the project-local KVM text carrier/renderer to preserve cells, font banks, underline and both cursor ranges as text. Verify native wide-frame text/cursor geometry, DOS text and graphics isolation, x86 and full package regressions; publish one coherent eight-file package. Live blink/thickness observation remains owner acceptance. |
-| S36 (delivered; [evidence](../etc/evidence/m0-t423-s36-visible-console-title.md)) | NTKVM Window follows the active character worker's actual Console title | The first P replaced the literal caption with NTKVM's visible Console title; the reopened P added a bounded worker-base title publication from both workers, active-owner acceptance in NTKVM and real nested-CMD title/return proof. Original DOS title semantics and NTCON hidden-Console ownership remain intact. x86, 17+17 and published-package tests are recorded in the evidence; focused-fixture non-passes remain explicit. T423 stays open for owner acceptance. |
+| S36 (delivered; [evidence](../etc/evidence/m0-t423-s36-visible-console-title.md)) | NTKVM Window follows the active character worker's actual Console title | The first P replaced the literal caption with NTKVM's visible Console title; the reopened P added a bounded worker-base title publication from both workers, active-owner acceptance in NTKVM and real nested-CMD title/return proof. Original DOS title semantics and NTW32 hidden-Console ownership remain intact. x86, 17+17 and published-package tests are recorded in the evidence; focused-fixture non-passes remain explicit. T423 stays open for owner acceptance. |
 | S37 (delivered; [evidence](../etc/evidence/m0-t423-s37-window-geometry.md)) | Window text geometry stability across DOS/native handoff | Measured the transient 80x28 → 80x30 → 80x28 Window frame during `COMMAND → ver`: in this reproducer height changed, not columns. Preserved NTKVM's logical DOS viewport during native seeding; real `MODE` 100x40 and DOS return 80x43 still work. x86 incremental link, failing-old/passing-new geometry probe, 17+17 product regressions and hash-matched publication are recorded in the evidence. |
-| S38 (delivered; [evidence](../etc/evidence/m0-t423-s38-worker-lifecycle-direct-completion.md)) | Resident-worker frontend reuse and direct completion | The owner expanded the initial Windows Terminal investigation into an approved lifecycle repair. NTSRV arbitrates cancellable ten-second workerless NTKVM retirement; borrowed NTKVM leases park visible presentation while retaining resident worker channels. NTCON holds the real native target handle, reports its exit code after I/O release, and NTSRV issues the direct receipt queried by run16. Original DOS completion remains in its OpenNT owner. The x86 package, focused lifecycle/fault probes, 17+17 matrix and eight-file publication are recorded in the evidence; actual owner Windows Terminal side-test remains separate from private-desktop proof. |
+| S38 (delivered; [evidence](../etc/evidence/m0-t423-s38-worker-lifecycle-direct-completion.md)) | Resident-worker frontend reuse and direct completion | The owner expanded the initial Windows Terminal investigation into an approved lifecycle repair. NTSRV arbitrates cancellable ten-second workerless NTKVM retirement; borrowed NTKVM leases park visible presentation while retaining resident worker channels. NTW32 holds the real native target handle, reports its exit code after I/O release, and NTSRV issues the direct receipt queried by run16. Original DOS completion remains in its OpenNT owner. The x86 package, focused lifecycle/fault probes, 17+17 matrix and eight-file publication are recorded in the evidence; actual owner Windows Terminal side-test remains separate from private-desktop proof. |
 | S39 (transferred; not admitted under T423) | Direct/Observed task-trace observation | Owner moved this read-only NTSRV/NTMON observation scope into the queued [worker task-trace T proposal](proposal-worker-task-trace-observation-001.md), immediately after component renaming. The detailed plan below is retained as research input, not T423 execution authority. T423 remains open for owner acceptance after S38 delivery. |
 
 ### S32 Console identity boundary
@@ -380,8 +380,8 @@ only if S32 actually changes the wire contract.
 NTKVM attaches to its creator's visible Console, registers its root capability,
 then samples and reports the member PID set through an authenticated root RPC.
 NTSRV stores that set only against the live frontend-root connection and uses
-it solely as a logical Console discriminator for DOS/Win16/NTCON worker
-selection and native direct delivery. An NTCON execution snapshot, if still
+it solely as a logical Console discriminator for DOS/Win16/NTW32 worker
+selection and native direct delivery. An NTW32 execution snapshot, if still
 needed after a direct launcher exits, comes from the authenticated frontend
 root, not from that launcher. `service_bind_existing_console()` must require a
 live, authenticated matching root/context and reject stale PID overlap,
@@ -400,11 +400,11 @@ run16-called `frontend_bootstrap_start()` owner in `ntkvm-exe`; move only a
 genuinely shared client module, without changing run16-initiated bootstrap or
 NTKVM-root lifetime.
 
-No Console member becomes an Observed task, ConRecord stack element, NTMON
+No Console member becomes an Observed task, Win32Record stack element, NTMON
 field or worker BUSY authority. No Job, descendant observer, fixed polling,
-NTCON outer-Console sampler, new helper or NTMON process enumeration is in
+NTW32 outer-Console sampler, new helper or NTMON process enumeration is in
 scope. Tests must cover root self-PID, repeated and nested run16, DOS↔native
-and resident NTCON reuse, two independent native sessions, root death/rebuild,
+and resident NTW32 reuse, two independent native sessions, root death/rebuild,
 expired capability/PID, GUI launcher with no Console, malformed member sets,
 local hidden-Console resume and WOW detach, then x86/MIDL/focused RPC,
 17 Console + 17 Window routes and the three previous WOW frontiers. Publish
@@ -430,14 +430,14 @@ DIRECT node
   authority: lifecycle/completion authority
 
 OBSERVED node
-  collector: NTVDM or NTCON worker
+  collector: NTVDM or NTW32 worker
   holder:    NTSRV
   authority: diagnostic/read-only only
 ```
 
 `DOSRECORD`/`WOWRECORD` remain original BaseSrv records. Existing
-`OPENNT_BASE_CONRECORD` entries remain NTSRV's admitted native Direct records:
-one record per admitted direct request, held in the worker's `conrecords`
+`OPENNT_BASE_WIN32RECORD` entries remain NTSRV's admitted native Direct records:
+one record per admitted direct request, held in the worker's `win32records`
 list until that exact request completes. Neither record type gains an
 `Observed` state or an observed-child list. Do not duplicate either record as
 a second mutable execution stack.
@@ -453,7 +453,7 @@ the sole NTMON query result. Worker death must leave NTSRV able to report the
 last accepted trace and its closed/stale state.
 
 Place copied cross-component DTOs and RPC declarations in `src/interface`.
-`worker-base` may contain only the NTVDM/NTCON-common worker-side encoder,
+`worker-base` may contain only the NTVDM/NTW32-common worker-side encoder,
 validator and authenticated publish client. It is not a cross-process server,
 does not hold records, and is not linked by NTSRV or NTMON. Workers push
 revisioned observed deltas at execution transitions; NTSRV must not synchronously
@@ -468,7 +468,7 @@ task completion; an Observed node must never change direct receipt completion,
 BaseSrv scheduling, worker `READY/BUSY/EMPTY`, frontend use/retirement,
 selection/reuse or termination scope.
 
-For NTCON, establish any Job and completion-port observer in NTCON at the
+For NTW32, establish any Job and completion-port observer in NTW32 at the
 existing suspended direct-target boundary, before `ResumeThread`. It observes
 only that direct target's descendants and publishes deltas to NTSRV. The
 direct target remains the completion boundary. Do not put the Job in NTSRV or
@@ -564,7 +564,7 @@ capability limitation, not a renderer repair.
 Owner 于 2026-09-29 批准新增尺寸交接修复 S；CURRENT 登记为 S13。
 S14 已经 owner 验收收口；随后 owner 准入 S15 修复两个实测鼠标问题。
 S15 限于 NTKVM 对 Window 捕获与原始 DOS Console `ClipCursor` 请求的
-所有权隔离，以及 RDP 绝对输入与 NTCON 文本方块光标的位置对齐；不得
+所有权隔离，以及 RDP 绝对输入与 NTW32 文本方块光标的位置对齐；不得
 更改原始 MVDM/guest，不能用程序名猜测是否需要鼠标。须以原有 S14
 完整回归为基线，完成 x86 编译、定向和全量测试、八文件一致发布，
 提交推送后等待 owner 实测，不自动收口 T423。
@@ -574,7 +574,7 @@ S15 限于 NTKVM 对 Window 捕获与原始 DOS Console `ClipCursor` 请求的
 
 - NTKVM 保存当前会话权威逻辑文本区域、文字、光标、字体和交接版本；
   可见窗口像素大小、隐藏 Console 物理视口、滚屏缓冲区容量不能替代逻辑尺寸。
-- NTKVM 验证公共协议；NTCON/NTVDM 验证并真实应用各自后端尺寸。
+- NTKVM 验证公共协议；NTW32/NTVDM 验证并真实应用各自后端尺寸。
   请求、应用、确认后才完成交接并恢复输入，禁止仅修改帧头冒充接通。
 - 首次原生文本初始化采用 DOS 支持的尺寸；从 DOS 进入必须继承实际 DOS
   文本区域。已有 Win32 链启动/返回继承当前区域，不恢复初始默认。
@@ -595,41 +595,41 @@ S15 限于 NTKVM 对 Window 捕获与原始 DOS Console `ClipCursor` 请求的
 并提交推送。模拟测试不替代真实交接。
 
 
-### S13 补充批准：NTCON 自有文本鼠标光标
+### S13 补充批准：NTW32 自有文本鼠标光标
 
 Owner 明确选择文本反色方块，保持现有文本帧协议和共享库，不保留前端
-专用像素箭头。NTCON 接收前端事件、维护逻辑位置及按钮、生成隐藏 Console
+专用像素箭头。NTW32 接收前端事件、维护逻辑位置及按钮、生成隐藏 Console
 的原生鼠标记录，并仅在输出文本帧副本合成软件光标。不得修改隐藏 Console
 真实字符、文本插入光标或用于后端交接的原始屏幕；NTVDM 原始鼠标路径不动。
 NTKVM 删除原生鼠标位置/坐标策略与箭头合成，只保留事件路由和共同呈现。
-输入协议允许显式携带相对位移及修饰键，不把前端物理尺寸强加给 NTCON；
+输入协议允许显式携带相对位移及修饰键，不把前端物理尺寸强加给 NTW32；
 输入扩展须版本化并验证，不改变文本帧形状。交接、释放捕获、断连及退出时
 不得遗留按钮按下或将方块烙入屏幕。80x50/font16 继续走直接文本帧，不为
 光标转成受768行限制的 DIB，也不扩大共享库容量。
 
 ### S13 画面竞争的同步要求
 
-同一 NTKVM 前端内，DOS 写屏与 NTCON 获取前端整幅画面必须争用同一把
-I/O 锁。NTCON 跨多次 RPC 读取时使用明确的 begin/end 事务；先得到锁的
+同一 NTKVM 前端内，DOS 写屏与 NTW32 获取前端整幅画面必须争用同一把
+I/O 锁。NTW32 跨多次 RPC 读取时使用明确的 begin/end 事务；先得到锁的
 一方完成该段工作后才允许另一方继续。断连、取消或协议错误必须释放锁；
 不得以定时轮询代替可控制的生产者/消费者同步。隐藏 Console 的 Win32
-目标不遵守项目锁，NTCON 对其快照只能进行前后几何一致性验证，发现变动
+目标不遵守项目锁，NTW32 对其快照只能进行前后几何一致性验证，发现变动
 丢弃整帧并有限重试，不能发表混合尺寸的帧或把永久错误吞成成功。
 
-## 最新批准：NTCON 独立原生文本后端
+## 最新批准：NTW32 独立原生文本后端
 
 Owner 追加批准统一文本协议最小扩展：原有 glyph/attribute 两字节 cell
 保持有效；需要逐字符样式时，两种 worker 共用可选第三字节 style。
-DOS 默认不设置，NTCON 用它保留下划线；不得借用颜色亮度位表示样式。
+DOS 默认不设置，NTW32 用它保留下划线；不得借用颜色亮度位表示样式。
 NTKVM 仅有一个公共文本解码/渲染入口，不保留 native 字形映射或专用
 渲染器，不修改 guest 或共享 lib。协议版本检查及未知样式拒绝均须验证。
 
 ### 最新后端选择：普通隐藏 Console，撤销 ConPTY 和 helper
 
-Owner 批准保留独立 NTCON worker 架构，后端由 ConPTY 改为 NTCON 自有、
+Owner 批准保留独立 NTW32 worker 架构，后端由 ConPTY 改为 NTW32 自有、
 自附着的普通隐藏 Console。本节优先于下方所有 ConPTY 迁移计划。
 不增加私有 helper（包括短期 bootstrap），NTSRV 不持有或管理 Console/
-ConPTY，NTKVM 不承担后端职责。通过启动属性或 NTCON 本地初始化建立
+ConPTY，NTKVM 不承担后端职责。通过启动属性或 NTW32 本地初始化建立
 隐藏 Console；不得依赖事后寻找用户程序 PID 附着。worker 从创建开始就能
 使用原生 Console API 读写屏幕、输入队列和查询真实附着成员。
 
@@ -642,7 +642,7 @@ Console state/launch/control 测试；ConPTY/VT 泵及前端关闭代理在生�
 下面 S12 清单中的 ConPTY 所有权/解析项改验普通隐藏 Console 的实际拥有、
 状态读取、输入投递、成员识别和会话关闭；其他退出标准不减少。
 
-### 最新优先契约：NTCON 与 NTVDM 并列 worker
+### 最新优先契约：NTW32 与 NTVDM 并列 worker
 
 Owner 追加 `src/interface`：统一拥有所有跨组件协议声明，包括 KVM 文本/
 图形帧、键盘鼠标事件、NTSRV 与 launcher/worker/monitor 的消息、控制和
@@ -651,7 +651,7 @@ Owner 追加 `src/interface`：统一拥有所有跨组件协议声明，包括 
 
 共享组件采用 owner 指定名称 `worker-base`：`src/worker-base/` 和
 `worker-base.lib`。Owner 最新澄清：承载双方语义一致的项目新增 worker 机制，供
-`ntvdm-exe`、`ntcon-exe` 复用。`run16-exe`、`ntsrv-exe`、`ntkvm-exe`、
+`ntvdm-exe`、`ntw32-exe` 复用。`run16-exe`、`ntsrv-exe`、`ntkvm-exe`、
 `ntmon-exe` 各自内部共用处理两类 worker 的主路径，仅在必要处按类型分支，
 不将这些调用者的职责搬入 worker-base。不增加进程或通用 scheduler。
 
@@ -666,18 +666,18 @@ Owner 追加 `src/interface`：统一拥有所有跨组件协议声明，包括 
 NTMON 共用管理入口，NTKVM 共用帧/输入连接；后端差异只留在真实执行边界。
 原始 DOS/WOW record、GetNextVDMCommand/BOP 重入不得改成自主通用调度器；
 Win32 的进程完成也不得伪装成 DOS record。S12 退出须审计重复路径并删除
-旧 frontend-owned NTCON 启动/登记/关闭实现。提取出的函数必须被真实调用，
+旧 frontend-owned NTW32 启动/登记/关闭实现。提取出的函数必须被真实调用，
 不能仅增加一个未使用的“公共”实现。
 
-Owner 明确 NTCON 是 Win32 文本程序的 worker，不是 NTKVM 的附属服务，
+Owner 明确 NTW32 是 Win32 文本程序的 worker，不是 NTKVM 的附属服务，
 存活期不限定为一个 NTKVM 的存活期。此节取代下文按 frontend 生命周期
-创建、唯一登记、关闭 NTCON 的假设；既有候选不因此自动成为正确实现。
+创建、唯一登记、关闭 NTW32 的假设；既有候选不因此自动成为正确实现。
 
 - run16 对两类 worker 采用同形的发现/启动、认证登记、提交、直接任务等待
   和结果返回流程；不得把 native 启动请求绕到 NTKVM 去执行。
 - NTSRV 管理独立的 worker 身份、就绪/占用/等待重入/退出、任务请求与完成、
   故障及 rundown；前端关联是单独的 I/O 绑定，不是 worker 的主身份或租期。
-- NTCON 常驻接单，在外层任务等待期间仍能接收嵌套请求。启动、挂起/交接、
+- NTW32 常驻接单，在外层任务等待期间仍能接收嵌套请求。启动、挂起/交接、
   重入、正常退出、异常退出均须对照 NTVDM 现有原始语义逐项实现和测试。
   挂起不得擅自解释为 SuspendProcess，也不得引入新 scheduler。
 - NTKVM 对两类 worker 采用统一的认证连接、输入投递、文本帧接收和断开
@@ -687,20 +687,20 @@ Owner 明确 NTCON 是 Win32 文本程序的 worker，不是 NTKVM 的附属服�
 - 同形指外部接口和可观察生命周期，不把 Win32 task 塞入原始 DOS/WOW
   guest record，也不复制模拟器内部状态。必须先复用已选原始 worker 管理
   路径，再保留最小的原生执行差异。前端断开、Console 显式关闭和 worker
-  故障分别对照 NTVDM 处理，不能只因 frontend 连接结束就自行回收 NTCON。
+  故障分别对照 NTVDM 处理，不能只因 frontend 连接结束就自行回收 NTW32。
 
 新增验收：两种 worker 的管理操作对照矩阵、前端与 worker 独立存活、前端
 失效/重连、嵌套重入、每层独立结果、显式关闭及异常故障。先审计 NTVDM 的
-实际调用链与退出规则，再迁移 NTCON；不以“永久不退出”冒充同等生命周期。
+实际调用链与退出规则，再迁移 NTW32；不以“永久不退出”冒充同等生命周期。
 先前提出的一次性初始化副本仍未获批准；本次生命周期变更不是该机制授权。
 
 ### Owner 澄清：NTKVM 仅拥有可见前端
 
-Owner 明确：ConPTY 由 NTCON 创建、管理和关闭；NTKVM 只管可见 Console、
+Owner 明确：ConPTY 由 NTW32 创建、管理和关闭；NTKVM 只管可见 Console、
 Window 及其切换。这取代本候选及历史章节中“NTKVM 持有 ConPTY／终端解析器”
 的所有权安排。S12 仍然 active，已有代码与测试保留为迁移输入，不算收口。
 
-- NTCON 拥有 ConPTY、原生输入编码/投递、VT 解析、原生屏幕/历史/模式、
+- NTW32 拥有 ConPTY、原生输入编码/投递、VT 解析、原生屏幕/历史/模式、
   实际成员、原生启动及会话关闭。它输出完整且有一致版本的画面，不让前端
   拼合 VT 状态和另一份 Console 快照。
 - NTVDM 继续拥有 DOS 执行、设备、输入处理及文本/图形帧生成；不迁入
@@ -708,20 +708,20 @@ Window 及其切换。这取代本候选及历史章节中“NTKVM 持有 ConPTY
 - NTKVM 仅采集可见界面输入、选择活动后端、接收完整帧，进行可见 Console/
   Window 呈现和 display 切换。它不创建、附着、读取或关闭后端 ConPTY/
   隐藏 Console，不维护 VT 解析器或原生后端执行/成员状态机。
-- NTCON 与 NTVDM 的文本帧使用严格相同的现行 `product-abi/console_video.h`
+- NTW32 与 NTVDM 的文本帧使用严格相同的现行 `product-abi/console_video.h`
   契约：`console_video_description`、`console_text_style`、字符/属性字节对；
   字段布局、字体银行、调色板、光标、分块提交和完整帧可见规则均一致。
-  NTCON 只发布 `CONSOLE_VIDEO_TEXT_FRAME`，不得把文本转换成图形帧发送。
-  NTCON 后端负责 Unicode 到已批准 PC 字形范围的转换；NTKVM 不保留另一套
+  NTW32 只发布 `CONSOLE_VIDEO_TEXT_FRAME`，不得把文本转换成图形帧发送。
+  NTW32 后端负责 Unicode 到已批准 PC 字形范围的转换；NTKVM 不保留另一套
   native 字形映射或 VT 解析/绘制路径。默认点阵来源与 NTVDM 一致，并验证
   DOS 下载字体及双字体银行在交接中的状态，不能只核对一份默认 ROM 表。
   现行字节字符帧不承诺任意 Unicode 字形；后端可保留原始 Unicode 状态，
   不得暗自扩充 native 专用帧格式。原有 Console Unicode 回归另行明确核对，
   不把窄字形帧测试冒充该能力的证明。
-- NTSRV 继续认证登记和实例管理；NTMON 的结束请求由 NTCON 执行真实会话
+- NTSRV 继续认证登记和实例管理；NTMON 的结束请求由 NTW32 执行真实会话
   关闭并确认，不由 NTKVM 持有 HPCON 代办；run16 不承担终端泵。
 
-迁移依次完成：登记并保全当前证据 → 验证 NTCON 单进程资源建立/附着机制
+迁移依次完成：登记并保全当前证据 → 验证 NTW32 单进程资源建立/附着机制
 及失败清理 → 迁移已有 ConPTY/解析/状态和输入代码 → 统一画面/输入交接 →
 清除 NTKVM 越界链接及管理代理 → 原有完整 S12 验收和八文件交付。
 不得因一种附着调用失败而把资源放回 NTKVM，也不得默默增加 helper、观察
@@ -734,10 +734,10 @@ S11 已推送提交为 965083eec，T423 保持打开，S12 完成后另行交付
 
 本节取代下文 S9/S11 的无 helper、每分支 PTY 约束，不改变已发布事实。
 S11 必须先完成鼠标修复及压力验收，不能把鼠标尾项转给 S12。保全研究、
-候选和测试，仅将屏幕交接/退场重组移交新增 S12 NTCON，不宣称这些缺陷
+候选和测试，仅将屏幕交接/退场重组移交新增 S12 NTW32，不宣称这些缺陷
 通过。Owner 确认 RDP 鼠标问题已经解决，取消原 RDP S13 计划。最新指令将产品体验修复从候选 T 队列移入本 T 的最后一个 S13，范围是组件生命周期及启动/使用/退出体验，不恢复 RDP 待办。S12 仍是唯一 active packet，S13 待 S12 完成后单独准入；CURRENT 是唯一状态权威。
 
-- `src/ntcon-exe/ -> ntcon.exe`：一个字符前端会话共用一个原生文本后端，
+- `src/ntw32-exe/ -> ntw32.exe`：一个字符前端会话共用一个原生文本后端，
   附着真实 Console，提供屏幕/光标/输入/模式及实际成员操作。优先保留
   ConPTY 传输，不能仅包装管道后声称可读写远端 Console 状态。
 - `ntkvm`：可见 Console、Window、display、输入路由与连续呈现的唯一 owner。
@@ -745,15 +745,15 @@ S11 必须先完成鼠标修复及压力验收，不能把鼠标尾项转给 S12
   转发画面。DOS 图形仍走 NTVDM 原始帧路径。
 - `run16`：分类、启动/提交和直接目标结果，不承担终端泵。DOS/native
   文本同步等待；Win32 GUI 默认创建后返回，Win16 默认 InitTask 通知后
-  返回，保留 --wait。NTCON 的存活不延长 launcher 的直接目标等待。
-- `ntsrv`：认证 NTCON 实例、前端归属、版本、端点和生命周期；复用现有
+  返回，保留 --wait。NTW32 的存活不延长 launcher 的直接目标等待。
+- `ntsrv`：认证 NTW32 实例、前端归属、版本、端点和生命周期；复用现有
   资源转交模式。原生后端记录不能进入原始 DOS/WOW records，不新增调度器。
-- `ntmon`：列出已登记 NTCON 的类型、实例/PID、时间、状态及成员；结束
-  操作关闭该原生 Console 会话，必须确认结果，不能只杀 NTCON 外壳。
+- `ntmon`：列出已登记 NTW32 的类型、实例/PID、时间、状态及成员；结束
+  操作关闭该原生 Console 会话，必须确认结果，不能只杀 NTW32 外壳。
   不递归杀进程树，不影响脱离 Console 的 GUI、其他会话或 DOS worker。
 
-`DDWWDDWW` 同步嵌套链共享一个 NTKVM、一个 NTCON 及原始执行关联下的
-一个 NTVDM；跨 DOS 段不拆 NTCON。GUI 分隔的两段字符链仍建立两个前端。
+`DDWWDDWW` 同步嵌套链共享一个 NTKVM、一个 NTW32 及原始执行关联下的
+一个 NTVDM；跨 DOS 段不拆 NTW32。GUI 分隔的两段字符链仍建立两个前端。
 普通 native 子进程依 Windows 规则继承 Console；显式新建/脱离仍保留。
 直接目标退出不代表所有 Console 成员退出；后端自身不能计为业务使用者。
 
@@ -761,14 +761,14 @@ S11 必须先完成鼠标修复及压力验收，不能把鼠标尾项转给 S12
 
 - [x] 审计复用 S8 真实 Console 操作、S9 ConPTY、S11 反例与鼠标候选，
       逐项登记保留/迁移/删除；不重建已验证算法或恢复旧 frontend owner。
-- [x] NTCON x86 /MT 正式组件/构建目标；共享 APP_VERSION 和版本拒绝。
-- [x] NTCON 实际拥有普通隐藏 Console/状态/输入/关闭；NTKVM 源码与链接图无
+- [x] NTW32 x86 /MT 正式组件/构建目标；共享 APP_VERSION 和版本拒绝。
+- [x] NTW32 实际拥有普通隐藏 Console/状态/输入/关闭；NTKVM 源码与链接图无
       后端 ConPTY API、VT 状态或原生会话终止实现，不能以移动文件名代替。
-- [x] 两后端文本帧逐字段/逐字节契约一致，NTCON 无图形帧发布；默认点阵、
+- [x] 两后端文本帧逐字段/逐字节契约一致，NTW32 无图形帧发布；默认点阵、
       DOS 字体交接和缺字行为有测试，NTKVM 使用同一文本帧接收/呈现路径。
 - [x] 认证登记、原子复用/并发启动、rundown、跨会话拒绝与失效实例拒绝。
 - [x] run16 原生提交与实际直接目标结果，launcher 提前死亡不杀 target。
-- [x] NTKVM/NTCON 真实字符、属性、光标和模式交接；固定位置写入、继续
+- [x] NTKVM/NTW32 真实字符、属性、光标和模式交接；固定位置写入、继续
       当前光标、清屏、滚屏、背景输出、输入边沿不重复及重定向不受影响。
 - [x] NTMON 列表、正常/异常消失、整个 Console 会话结束、独立会话隔离。
 - [x] 真实成员保留/退休、启动与关闭竞争、broker/frontend/backend 故障；
@@ -777,11 +777,11 @@ S11 必须先完成鼠标修复及压力验收，不能把鼠标尾项转给 S12
 - [x] DDWWDDWW 和既有两条十二目标链、Console17/Window17、fault、monitor、
       三个独立 WOW headless 前沿；生产调用者证明，不以 fixture 代替。
 - [x] 一致八文件构建/验收/备份/发布至 O:/winnt：run16、ntsrv、ntvdm、
-      ntkvm、ntcon、ntmon、WOW32.DLL、VDMREDIR.DLL；文档治理、提交推送。
+      ntkvm、ntw32、ntmon、WOW32.DLL、VDMREDIR.DLL；文档治理、提交推送。
 
 完成后等待 owner 实测；不自行收口 T。未验证候选不发布；guest/lib 不改。
 新组件目录是 owner 本次显式授权的源码目录例外；中间产物仍仅进 build。
-具体迁移与证据见 [S12 ledger](../etc/evidence/m0-t423-s12-ntcon-backend.md)。
+具体迁移与证据见 [S12 ledger](../etc/evidence/m0-t423-s12-ntw32-backend.md)。
 
 ## 当前方案：独立 frontend.exe（取代根 run16 前端）
 
@@ -921,17 +921,17 @@ S5 扩展验收已交付至 `1fb291a8f`；S6 从最新 nxvm 四组件核验开�
 | S9 | frontend 迁移到 ConPTY，移除自建隐藏 Console/helper 后端；Console 模式在 conhost/Terminal 保持原有交互，Window 模式让 DOS/native 文本共用字体位图呈现，完成输入、嵌套、切换与生命周期闭环。 |
 | S10 | 删除已替代的旧 root owner/重复分支，核算镜像 diff 与自主代码，完整回归/一致发布，等待 owner 验收，不自行关闭 T。 |
 | S11 | 完成 Window EDIT 鼠标输入批处理、压力与取消/交接修复；编译、回归、发布、提交推送后停下等 owner 验证。 |
-| S12 | 实施开头已批准的 NTCON 独立原生文本后端；承接原生屏幕连续性、真实成员及退场，保持 S11 鼠标回归。Owner 已验收 S11 并批准准入，实施状态见 CURRENT。 |
+| S12 | 实施开头已批准的 NTW32 独立原生文本后端；承接原生屏幕连续性、真实成员及退场，保持 S11 鼠标回归。Owner 已验收 S11 并批准准入，实施状态见 CURRENT。 |
 | S13 | 文本区域尺寸交接修复：按最新契约统一 NTKVM 权威状态、两端真实应用/确认、原生 resize 传播和 DOS 不兼容尺寸转换。 |
 | S14（已验收收口） | 产品体验与组件生命周期修复；已发布并推送 P1 `631206f9e`，owner 于 2026-09-29 报告验证通过并要求收口。自动测试与 owner 验收边界见[S14 证据](../etc/evidence/m0-t423-s14-product-experience.md)。T423 仍保持打开，等待后续指令。 |
 | S15–S18 | 后续已准入的鼠标所有权、零延迟输入交接、Window 退场恢复和原生根任务退场确认；S18 是当前活动包，具体状态只由 CURRENT 管理。 |
-| S19（S18 后下一项） | PID-first worker 管理投影与 NTMON 任务显示：统一 NTVDM/NTCON 的 NTSRV/NTMON 管理契约、真实 PID 选择及 NTCON active target 标签。 |
+| S19（S18 后下一项） | PID-first worker 管理投影与 NTMON 任务显示：统一 NTVDM/NTW32 的 NTSRV/NTMON 管理契约、真实 PID 选择及 NTW32 active target 标签。 |
 | S20 | 消除 NTKVM retained creator/`ERROR_BUSY` 100ms 轮询：以认证 state-change wait-set 取代 timer polling，覆盖丢失唤醒、并发 admission、断连与异常退出。 |
-| S21（最后一个 S） | NTVDM/NTCON 生命周期语义审计：以 S19/S20 的共同投影和无轮询等待为基础，审计并完成仍可证明同形的 lifecycle/management 机制统一，保留不同 owner 的实际语义。 |
+| S21（最后一个 S） | NTVDM/NTW32 生命周期语义审计：以 S19/S20 的共同投影和无轮询等待为基础，审计并完成仍可证明同形的 lifecycle/management 机制统一，保留不同 owner 的实际语义。 |
 
 ### Owner 增补：清理交付与实测修复分离
 
-以下是此前准入记录，已由开头 NTCON 规划及上表取代，不是当前 S11 退出标准。
+以下是此前准入记录，已由开头 NTW32 规划及上表取代，不是当前 S11 退出标准。
 当时 owner 指令：先完成 S10 清理收口及提交推送，再准入 S11 实施两项
 修复；RDP 指针问题留给 S12。取代此前“先准入 S11 然后等待”的指令。
 S10 的已完成清理与已通过证据保留；未通过的 Window 文本连续性检查、
