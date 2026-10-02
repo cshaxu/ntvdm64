@@ -42,6 +42,19 @@ or runtime input.
 
 ## Executable-owned transition
 
+T424 S4 admits the following ownership migration of project-added code,
+without changing original mirror logic: frontend/worker CreateProcess and
+authenticated launch orchestration move into ntsrv-exe; run16 keeps CLI,
+broker discovery, submission/direct-result client and actual Console handoff.
+Broker typed copied contracts remain in interface. NTW32 owns native target
+CreateProcess/wait/result reporting; NTKVM owns Console/Window/I/O service;
+worker-base remains worker-only shared client/mechanism code. Existing launcher
+bootstrap, worker launch and direct native request code below are migration
+inputs, not permission to retain duplicate owners. Replaced paths must be
+removed after the matching production path and failure/rollback tests pass.
+No generic spawn/remote-handle-duplication service, new common root, helper,
+mirror change or NTKVM-owned worker policy is admitted.
+
 `run16-exe/bootstrap_client.c`, `native_request_client.c`,
 `native_request_io.c` and `native_launch_packet.c` own the existing finite
 `frontend-client.lib`. `native_launch.c` is its separately selected resource/

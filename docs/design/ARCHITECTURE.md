@@ -8,6 +8,38 @@ NTKVM renderer or modifying guest/shared-library code.
 
 ## Product boundary
 
+### Broker-centered creation and control — T424 S4 target
+
+Owner approval admits migration of project-added orchestration to NTSRV.
+This is a target boundary, not a claim of completed implementation. NTSRV
+creates and authenticates NTKVM and NTVDM/NTW32, binds their frontend/execution
+relationships, delivers direct requests and owns orderly retirement. Run16
+finds/starts NTSRV, classifies/submits its target and waits on broker direct
+completion when the existing launch semantics require it. Its only other
+component exchange is transfer/return of its actual user Console to NTKVM;
+NTSRV does not attach to or own that Console. NTKVM/worker transport remains
+direct for frames, input, title/geometry, route activation, input return and
+final-paint/restoration barriers; it owns no task registry/completion or orderly
+death policy. Shell-out CreateProcess/run16 execution remains local to the
+worker and is not a new task-control RPC edge. NTMON uses NTSRV only.
+
+Both worker kinds retain their original/native execution boundaries. NTW32
+holds/waits on its real target, obtains its actual Windows exit code, completes
+I/O and reports the result to NTSRV; run16 receives the broker result, not a
+direct worker pipe. DOS retains original BaseSrv record/completion semantics.
+Win32 GUI and registered Win16 startup-only semantics are unchanged. No
+original MVDM/OpenNT-host mirror modification is planned by this migration.
+
+NTKVM has no autonomous idle deadline: it waits for NTSRV while its real user
+Console remains alive. NTSRV owns cancellable ten-second no-worker/startup
+decisions, and cannot start its own ten-second empty-service grace with a live
+frontend, worker or legitimate admission. Connected run16, NTKVM and workers
+watch the authenticated broker process handle using event waits, not periodic
+RPC probes. NTSRV orderly instructions have priority; broker loss, true Console
+closure and unrecoverable component faults remain separate failure boundaries.
+This target supersedes S3's immediate orphan retirement policy only upon
+implementation; S3 below describes the current published package.
+
 ### Broker-owned retirement — T424 S3 owner approval
 
 NTSRV owns orderly frontend/worker retirement. With no associated worker and

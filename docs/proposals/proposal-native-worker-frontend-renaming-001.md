@@ -12,7 +12,7 @@ Names below are migration-normalized; they do not claim runtime acceptance.
 | Role | S2 intermediate owner/product | Final owner/product |
 | --- | --- | --- |
 | Resident Win32 text worker, owns hidden Console and direct native targets | `src/ntw32-exe` / `ntw32.exe` | Same NTW32 worker identity. |
-| Visible Console/Window frontend, owns display/input/presentation routing | `src/ntkvm-exe` / `ntkvm.exe` | S3 reserved frontend identity: `src/ntcon-exe` / `ntcon.exe`. |
+| Visible Console/Window frontend, owns display/input/presentation routing | `src/ntkvm-exe` / `ntkvm.exe` | S5 reserved frontend identity: `src/ntcon-exe` / `ntcon.exe`. |
 
 The final eight files are run16.exe, ntsrv.exe, ntvdm.exe, ntw32.exe,
 ntcon.exe (frontend only), ntmon.exe, WOW32.DLL and VDMREDIR.DLL.
@@ -65,7 +65,9 @@ and real Console identity structures remain unchanged.
 
 Moves use git mv. Original OpenNT/MVDM mirrors and guest media retain identity,
 algorithm, source layout and behavior. No shared-library rename, extra process,
-helper, scheduler, observed graph, launch syntax or lifecycle change is admitted.
+helper, scheduler, observed graph or launch syntax change is admitted.
+Subsequent owner-approved S3 retirement and S4 broker-centered creation/control
+are explicit bounded exceptions to this package's initial name-only policy.
 
 ## S sequence and gates
 
@@ -74,11 +76,13 @@ helper, scheduler, observed graph, launch syntax or lifecycle change is admitted
 | S1 | Read-only full referent inventory, ABI decisions, hashes and migration map. |
 | S2 | NTW32/Win32Record migration, complete-tree referent and original-name preservation gates, full production verification and intermediate eight-file publication. |
 | S3 | Owner-added abnormal-exit/re-launch lifecycle investigation and explicitly approved broker-owned retirement repair; highest-priority authenticated close, bounded startup admission, repeated-launch/failure/isolation tests and coherent publication. |
-| S4 | Former S3: frontend NTCON migration after S3 disposition; build/test/wiring/name checks and verified final eight-file publication. |
-| S5 | Former S4: final ownership/semantic-diff and naming audit, indexes/authorities, clean committed/pushed delivery; owner decides T acceptance. |
+| S4 | Owner-added broker-centered launch/control migration, with actual caller Console transfer kept local and worker/frontend I/O direct; no mirror edits. Remove replaced paths, test both worker kinds and publish a coherent eight-file package. |
+| S5 | Former S4: frontend NTCON migration after S4 delivery; build/test/wiring/name checks and verified final eight-file publication. |
+| S6 | Former S5: final ownership/semantic-diff and naming audit, indexes/authorities, clean committed/pushed delivery; owner decides T acceptance. |
 
 Owner direction on 2026-10-02 adds lifecycle investigation before further
-renaming. Earlier S3/S4 migration labels in this proposal now refer to S4/S5.
+renaming. Earlier S3/S4 migration labels in this proposal now refer to S5/S6
+after the subsequent owner-approved architecture insertion.
 Both run16 cmd and run16 command reportedly hang before any prompt after an
 apparent abnormal exit; NTMON reports Ready but no worker. Preserve the live
 scene, distinguish a resident root from an unusable lease and investigate
@@ -93,6 +97,38 @@ NTSRV's own empty grace cannot start with live registered frontends/workers or
 legal admissions. This overrides the investigation-only limitation, not S2's
 name-only scope. Original DOS cleanup and native Console-close acknowledgement
 remain in their respective workers; no helper, scheduler or tree kill is added.
+
+## S4 owner-approved broker-centered boundary
+
+This approval replaces project-added launcher/frontend/worker creation edges,
+not original OpenNT execution, scheduling or task completion. NTSRV creates
+and binds NTKVM, NTVDM and NTW32; run16 only finds/starts NTSRV, submits one
+classified request and waits for its broker result when existing semantics
+require waiting. The actual caller Console is transferred directly to NTKVM,
+never attached to NTSRV. NTKVM/worker direct transport carries only I/O,
+including input return, route activation and final-paint/restoration barriers;
+it cannot own task completion or orderly component retirement.
+
+NTKVM and both workers obey NTSRV's highest-priority control, broker loss and
+their own unrecoverable faults. NTKVM additionally retains true user Console
+closure. NTSRV owns finite ten-second startup/workerless-root deadlines and its
+empty-service grace; NTKVM itself waits indefinitely without an idle timer.
+Each connected nonmonitor component uses the authenticated broker process
+handle for event-driven death detection, not an idle RPC assumption or a
+heartbeat. NTMON remains a disconnected monitor until its user exits.
+
+NTW32 still creates/waits on actual native targets and reports their actual
+exit code and final I/O outcome to NTSRV; NTSRV stores the authoritative direct
+receipt/result. DOS completion retains its original record implementation.
+Neither process ancestry nor I/O association creates recursive kill policy.
+GUI startup-only, Win16 registered startup-only, CLI arguments, resident reuse,
+screen/input continuity and isolation are retained. No new process/component,
+mirror/shared-library/guest change, Observed graph or scheduler is authorized.
+
+The [S4 source-edge ledger](../etc/evidence/m0-t424-s4-broker-centered-launch-control.md)
+defines migration rows and negative/runtime gates. Its initial audit is not
+implementation or publication evidence. Original numbered rename steps above
+are historical order; the S table is the current ordered working plan.
 
 An externally fixed project identifier or imported-original conflict requires
 review, not an alias. Original Console names already classified by S1 are
