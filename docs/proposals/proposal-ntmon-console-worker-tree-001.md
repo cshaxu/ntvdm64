@@ -16,6 +16,14 @@ process ancestry tree or the later Direct/Observed task-trace feature.
 The [task-trace candidate](proposal-worker-task-trace-observation-001.md)
 reuses this ordinary management view and owns only its separate detail modal.
 
+The owner's subsequent clarification assigns native GUI UNBOUND display to
+this candidate, not active T424 S4 or planned S5 GUI routing. S5 supplies
+NTSRV-owned actual GUI handles/registration; this package projects those live
+independent GUI targets alongside unbound WOW using service identities only.
+Distinguish native target rows from resident workers: a GUI management action
+must not end a reused NTW32 carrier. Do not invent process handles for individual
+Win16 tasks. Keep Win32 kind=2 and the original monitor hotkeys.
+
 ## Approved UI
 
 ```text

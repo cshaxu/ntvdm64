@@ -55,9 +55,11 @@ arguments; every native target is submitted to NTSRV and delivered to NTW32.
 NTW32 decides the native GUI/CUI subsystem before acquiring a text frontend,
 creates the actual target and reports authenticated startup/binding success.
 NTSRV holds the registered GUI process handle independently of worker occupancy
-and exposes it in an UNBOUND management projection until actual process exit.
-NTMON consumes that projection only. This is an admitted target, not current
-runtime evidence; the present monitor has no independent UNBOUND section.
+and retains native GUI registration until actual process exit. The owner's
+final clarification assigns monitor/UNBOUND display to the queue-head NTMON T
+candidate, not S4/S5. Its future view consumes service projection only.
+GUI routing/registration is a planned S5 target, not current runtime evidence
+or active S4 scope.
 
 Default GUI run16 returns on startup success, not window closure. Explicit
 --wait keeps its actual completion/exit-code behavior via NTSRV. Releasing the
@@ -70,8 +72,9 @@ capability. Existing Win16 startup semantics remain unchanged; a WOW task must
 not be represented as an invented per-task Windows process handle. No new
 process, helper, Job observation or scheduler is introduced.
 
-S4's unfinished centralization rows carry into S5 without capability claims;
-its bounded replanning conclusion is not architecture or publication acceptance.
+The owner's later clarification keeps S4 active until centralization delivery;
+the premature replanning conclusion/S5 admission is superseded. S4 open rows
+remain S4 requirements; S5 native GUI/monitor work follows its delivery.
 
 ### Broker-owned retirement — T424 S3 owner approval
 

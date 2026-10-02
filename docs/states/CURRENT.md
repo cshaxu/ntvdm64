@@ -4,37 +4,36 @@
 
 ## Active Packet
 
-**Active: M0 T424 S5** — broker-routed Win32 classification and GUI registration,
-Ordinary Mode. Owner requests S4 conclusion and a new S for native GUI targets.
-S4 reaches a bounded replanning conclusion, not functional or P delivery:
-its unfinished centralization rows transfer explicitly into S5 below.
+**Active: M0 T424 S4** — broker-centered launch and control migration,
+Ordinary Mode. Owner clarifies that UNBOUND belongs to the next task, not the
+current implementation. Finish S4 before admitting planned S5 native GUI work.
 S3 remains the delivered baseline `f9fe709aa`; T remains open. Frontend rename
-and final audit move to S6/S7; no queued T is admitted.
+and final audit remain planned S6/S7; no queued T is admitted.
 
 | Field | Admitted record |
 | --- | --- |
-| Identifier Mode | M0 T424 S5, Ordinary Mode; broker-routed native target classification, registration and startup results. |
+| Identifier Mode | M0 T424 S4, Ordinary Mode; centralize project-added launch/control in NTSRV. |
 | Candidate Proposal | [Admitted naming package with owner-added investigation](../proposals/proposal-native-worker-frontend-renaming-001.md). |
-| Admission And Approval | Owner requests Win32 GUI to use run16 -> NTSRV -> NTW32, service-owned actual GUI handles and UNBOUND projection; NTW32 decides native text versus GUI. Existing approval of broker-only launcher control and authenticated Console coordination remains binding. S4 unfinished rows are carried, not claimed complete. |
-| Objective | Deliver broker-created/bound workers, broker-only launcher submission/results and Console coordination; NTW32 classifies and starts native targets. GUI startup success releases its worker occupancy and returns the default launcher, while NTSRV retains the actual GUI process handle and publishes its UNBOUND row until exit. |
-| Non-goals | No frontend rename, mirror/guest/media/shared-lib change, helper, Job observation, scheduler, process-tree kill, launch-syntax change, I/O relay through NTSRV or NTSRV Console attachment. Preserve Win16 policy and explicit --wait semantics; do not terminate a shared text worker to release a GUI request. |
+| Admission And Approval | Existing broker-only launcher control and authenticated Console coordination approval remains binding. Latest owner clarification: finish S4; native GUI routing/registration belongs to S5; UNBOUND display belongs to the queue-head NTMON T candidate. Premature replanning admission is superseded. |
+| Objective | run16 submits and waits on broker-owned direct results; NTSRV owns frontend/worker creation, authenticated binding and orderly retirement. Retain direct NTKVM/worker I/O and nonpolling broker-death waits. |
+| Non-goals | No UNBOUND, native GUI routing/classification change, frontend rename, mirror/guest/media/shared-lib change, helper, Job observation, scheduler, process-tree kill, launch-syntax change, I/O relay through NTSRV or NTSRV Console attachment. Preserve GUI/Win16 startup-only and explicit --wait semantics. |
 | Reference Baseline | S3 `f9fe709aa`, protocol/RPC 29, coherent published eight-file package and retained Console17/Window17/WOW frontiers. S3 delivery does not imply this new architecture already exists. |
-| Files And ABI Surface | S4 candidate surfaces plus NTW32 native image classification and GUI startup binding; service-owned unbound native handles and TaskSnapshot projection; NTMON UNBOUND rendering; versioned interface/client contracts. Preserve original DOS/WOW mirrors and monitor kind values/hotkeys. |
+| Files And ABI Surface | run16 startup/receipt clients; NTSRV project-owned creation, reservation, binding and result transport; NTKVM authenticated Console bootstrap; NTVDM/NTW32 adapters and worker-base; interface and coherent protocol/RPC revision; tests and current design. |
 | Applicable Rules | README reading set, EXECUTION, architecture/coding/document rules and source policy; preserve other-session edits. |
-| Verification | All carried S4 x86/MIDL/edge/authentication/result/restoration/reuse/isolation gates, Console17/Window17 and retained WOW frontiers; GUI startup-only versus --wait, UNBOUND actual identity/exit removal, launch failure, GUI survival after worker release, nested text -> GUI -> text, shared-worker preservation, broker loss, coherent eight-file publication and governance. |
-| Expected Markers | Launcher has no local GUI CreateProcess or native subsystem decision, no worker/frontend IPC. NTW32 classifies before text frontend binding. Service retains authenticated GUI handle independently of worker occupancy; GUI completion cannot complete a text receipt or kill its worker. NTMON consumes service-only UNBOUND projection. |
-| Asset Needs | S3 tested runtime/recovery and retained S4 candidate/test evidence. New artifacts only under build/M0-T424/S5; reuse recorded S2/r001 object cache without overwriting sealed evidence. No external source/media acquisition. |
-| Reporting Requirements | Preserve S4 open-row mapping, distinguish replan from delivery; report real GUI handle ownership, startup acknowledgement versus process exit, worker release policy, UNBOUND provenance and exact tests. |
-| Stop Conditions | Mirror change, arbitrary remote creation/duplication, helper/scheduler, syntax change, automatic tree kill, GUI request killing shared text worker, weakened authentication or baseline regression requires explicit disposition. Preserve other-session edits. |
-| Exit Criteria | Carried S4 rows and new native GUI rows production-wired, obsolete paths removed, required tests/publication reviewed, committed/pushed P. Planning, compilation or S4 replanning alone is not capability closure. |
-| Original Owner Request | Conclude current S and add a new S: Win32 GUI uses run16 -> ntsrv -> ntw32; NTSRV registers GUI process handles, NTMON lists them in UNBOUND; after GUI launch finishes release its NTW32 occupancy and return run16; NTW32 owns Win32 GUI/text classification. |
-| Similar-Issue Sweep | DOS/WOW creation and original record completion; native text direct channel and resume; GUI default/--wait, worker reuse and parent text session, capability propagation across GUI segments, Win16 task versus native process identity, unbound cleanup and failure paths. |
+| Verification | x86/MIDL affected closure; exact-parent creation and edge checks; authenticated bootstrap and wrong-capability negatives; DOS/native direct result and failure, final I/O restoration, reuse/nesting/root isolation/broker loss; Console17/Window17 and retained WOW frontiers; coherent eight-file publication; governance/link/diff and no-mirror-change checks. |
+| Expected Markers | Service creates frontend/workers; text launcher has only service task and Console-handoff receipt/result waits, no NTKVM/worker IPC. Direct worker/frontend I/O does not complete records or decide orderly death. Exact generation/rights, rollback ownership and event-driven broker loss. GUI remains unchanged until S5. |
+| Asset Needs | S3 runtime/recovery and retained S4 candidate/evidence. New artifacts only under build/M0-T424/S4; reuse recorded S2/r001 object cache without overwriting sealed evidence. No external acquisition. |
+| Reporting Requirements | Maintain edge/source/ownership checklist, distinguish target from implementation, report removed direct paths, retained I/O edges, exact tests and open rows. |
+| Stop Conditions | Mirror change, GUI/UNBOUND implementation, arbitrary remote creation/duplication, helper/scheduler, syntax change, weakened authentication or baseline regression requires disposition. Preserve other-session edits. |
+| Exit Criteria | All S4 migration rows production-wired, obsolete paths removed, required tests and coherent publication verified, reviewed committed/pushed P. No claim of closure from planning or compilation alone. |
+| Original Owner Request | Broker-centered architecture cleanup with all launcher/Console coordination through NTSRV; latest clarification: UNBOUND belongs to the next task and must not be implemented in the current S. |
+| Similar-Issue Sweep | Newly created/resident DOS/native workers, inherited frontend scopes, native parent resume, borrowed/owned Console, unchanged GUI/Win16 startup-only, rollback, completion versus infrastructure failure, workerless-root and broker-empty deadlines. |
 
-## S4 Closure Record
+## S4 Implementation Progress
 
-Owner requests conclusion and the next native-GUI stage. S4 is concluded as
-replanning only: no P has been delivered and no functional closure is claimed.
-The following remain mandatory S5 implementation/release rows, not TODO:
+The owner's latest clarification supersedes the premature S5 admission and
+S4 replanning conclusion. S4 remains active; no production P or functional
+closure has been delivered. The following remain mandatory S4 release rows:
 DOS/WOW broker-owned worker creation preserving Check/Update ordering;
 broker-native submission/preflight/final I/O result and parent resume;
 removal of direct launcher/worker pipes, process-result fallbacks and obsolete
@@ -136,9 +135,10 @@ as NTW32 and Win32Record while retaining NTKVM frontend. Added S3 delivers the
 approved broker-owned abnormal-exit/re-launch repair before further renaming.
 S4 centralizes creation, binding, Console handoff coordination and direct result
 transport in NTSRV while keeping Console operations local to NTKVM and
-NTKVM/worker I/O direct; its undelivered rows carry into S5. S5 adds broker-routed
-native GUI startup, NTW32 classification, service-held handles and UNBOUND
-projection. S6 renames NTKVM to the reserved NTCON frontend identity after S5.
+NTKVM/worker I/O direct; finish its open rows before S5. Planned S5 adds broker-routed
+native GUI startup, NTW32 classification and service-held handles, not monitor
+display. UNBOUND display belongs to the queue-head NTMON candidate. S6 renames
+NTKVM to the reserved NTCON frontend identity after S5.
 S7 owns final referent and
 semantic audit. T closure
 remains owner-controlled. No later queued candidate is admitted here.

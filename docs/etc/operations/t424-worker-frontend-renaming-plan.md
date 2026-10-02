@@ -15,7 +15,7 @@ and [final evidence](../evidence/m0-t423-s40-native-alternate-screen-geometry.md
 | S2 | Rename the former native worker and project-owned native records to NTW32 and Win32Record. Update all required code/docs/paths; prove zero old project-worker referents, preserving original Console identities/substrings per S1. Pass production regressions and publish coherent intermediate ntw32.exe + ntkvm.exe eight-file package. |
 | S3 | Owner-added lifecycle investigation and subsequently approved repair: centralize orderly frontend/worker retirement in NTSRV, give authenticated close instructions priority over lease/pending/I/O, retain bounded startup admission and verify repeated launch, failure and session isolation before publication. |
 | S4 | Owner-added broker-centered creation/control migration: NTSRV creates/binds frontend and workers and coordinates Console takeover/return; run16 only submits/waits on NTSRV; NTKVM performs actual Console operations; worker/frontend direct channel is I/O only. Remove displaced direct launcher/frontend/worker control paths; preserve mirror semantics and pass the full production gate. |
-| S5 | Owner-added native GUI routing: finish undelivered S4 centralization rows, then route every native request through run16 -> NTSRV -> NTW32. NTW32 decides GUI/text; NTSRV retains actual GUI handles and exposes UNBOUND rows; default run16 returns on authenticated startup success, not window exit. Pass shared-worker, --wait, failure/exit cleanup and complete production gates. |
+| S5 | After S4 delivery, native GUI routing/classification and service-held handles. Default launcher returns on startup success; preserve --wait/shared workers and full gates. Monitor/UNBOUND display belongs to the queue-head NTMON T candidate, not S4/S5. |
 | S6 | Former S5: frontend NTKVM -> NTCON after S5 delivery; owner-local names, consumers, build/test/package gates and publication. |
 | S7 | Former S6: final referent/semantic audit, indexes, regression and clean delivery; T closure owner-controlled. |
 
@@ -50,12 +50,12 @@ remain unchanged. No mirror edit is planned or authorized by this S.
 
 ## Owner-added native GUI stage and carried work
 
-Owner requests S4 conclusion and adds S5. S4 is bounded replanning, not a
-delivered implementation P. Preserve all candidate changes and exact test
-evidence. S5 first completes its still-open DOS/WOW service creation, broker-only
-native submission/preflight/final status/resume, obsolete path/fixture removal
-and regression/publication rows. This disposition is not a claim that the
-broker-centered architecture is already usable or published.
+The owner's latest clarification keeps S4 active until its centralization
+delivery and leaves GUI display to planned S5. This supersedes the premature
+replanning conclusion/admission, without discarding candidate changes or exact
+test evidence. S4 retains its DOS/WOW service creation, broker-only native
+submission/preflight/final status/resume, obsolete path/fixture removal and
+regression/publication rows. No architecture or runtime closure is claimed.
 
 The new native GUI checklist is:
 
@@ -70,15 +70,14 @@ The new native GUI checklist is:
   occupancy; release it on actual process exit through an event wait.
 - [ ] Default GUI run16 returns on successful launch acknowledgement; preserve
   explicit --wait completion/exit-code semantics through the service. Failure
-  returns a structured startup error and creates no surviving UNBOUND row.
+  returns a structured startup error and creates no surviving GUI row.
 - [ ] Release GUI worker occupancy without killing the GUI or a shared text
   worker. Owner asks for original shared-WOW semantics: release this request,
   not the resident carrier. A worker still carrying text remains BUSY;
   otherwise return READY. Later broker retirement is independent.
-- [ ] Add a service-only UNBOUND snapshot projection and NTMON section. Current
-  monitor has no independent UNBOUND section. Audit Win16 task identity and
-  its existing startup registration; do not pretend each Win16 task has an
-  independent host process handle. Keep kind 0/1/2 and existing three hotkeys.
+- [ ] Retain authoritative GUI registration/identity for the queue-head NTMON
+  T candidate. Monitor/UNBOUND rendering is excluded from S4 and S5; the future
+  view uses service data, not local enumeration or invented Win16 process handles.
 - [ ] Verify direct GUI, text -> GUI -> text, GUI -> fresh text frontend,
   process exit cleanup, authentication/isolation, launch failure, worker
   release while GUI survives and explicit --wait results. No descendant
@@ -88,7 +87,7 @@ Source disposition of the owner's clarification: original `BaseSrvExitWOWTask`
 in opennt-host/base/win32/server/srvvdm.c removes the matching WOWRecord, not the
 shared WOW process. Win16 remains hosted by WOW throughout execution; native
 GUI is an independent Windows process. Thus GUI startup releases only NTW32
-request occupancy; its real GUI handle/UNBOUND record remains owned by NTSRV
+request occupancy; its real GUI handle/management record remains owned by NTSRV
 until process exit. No GUI-launch-success -> worker-termination rule is added.
 
 S6 naming and S7 audit remain sequential and cannot claim S5 runtime work.

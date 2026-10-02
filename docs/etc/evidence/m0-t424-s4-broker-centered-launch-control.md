@@ -37,12 +37,13 @@ GUI handles projected into NTMON UNBOUND. Source inspection still finds local
 only worker snapshots, not an independent UNBOUND section. No runtime pass is
 claimed for that new route.
 
-S4 concludes as bounded replanning, not a delivered production P or completed
-architecture. Preserve the uncommitted candidate and recorded focused results.
-S5 inherits DOS/WOW service creation, native broker-only submission/preflight/
-final-status/parent-resume, removal of obsolete paths and fixtures, full
-regression and coherent publication. None becomes unplanned debt. O:/winnt
-remains S3; no commit/push/publication is represented by this disposition.
+The owner's subsequent clarification supersedes this premature conclusion:
+S4 remains active with DOS/WOW service creation, broker-only native submission/
+preflight/final-status/parent-resume, obsolete-path/fixture removal and full
+regression/publication still required. S5 follows S4 delivery and owns GUI
+routing/registration only; monitor/UNBOUND display belongs to the queue-head
+NTMON T candidate. Preserve all candidate changes and focused evidence.
+O:/winnt remains S3; no production delivery is claimed.
 The new S5 acceptance and worker-release question are recorded in the
 [working plan](../operations/t424-worker-frontend-renaming-plan.md).
 
