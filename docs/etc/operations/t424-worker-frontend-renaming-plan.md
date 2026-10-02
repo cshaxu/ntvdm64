@@ -72,9 +72,9 @@ The new native GUI checklist is:
   explicit --wait completion/exit-code semantics through the service. Failure
   returns a structured startup error and creates no surviving UNBOUND row.
 - [ ] Release GUI worker occupancy without killing the GUI or a shared text
-  worker. Whether an otherwise dedicated carrier is retired after release is
-  a separate broker policy; owner clarification is pending. Never force-kill
-  a reused worker carrying the parent CMD to interpret “release”.
+  worker. Owner asks for original shared-WOW semantics: release this request,
+  not the resident carrier. A worker still carrying text remains BUSY;
+  otherwise return READY. Later broker retirement is independent.
 - [ ] Add a service-only UNBOUND snapshot projection and NTMON section. Current
   monitor has no independent UNBOUND section. Audit Win16 task identity and
   its existing startup registration; do not pretend each Win16 task has an
@@ -83,6 +83,13 @@ The new native GUI checklist is:
   process exit cleanup, authentication/isolation, launch failure, worker
   release while GUI survives and explicit --wait results. No descendant
   observation, Job tracker, helper, scheduler or new executable.
+
+Source disposition of the owner's clarification: original `BaseSrvExitWOWTask`
+in opennt-host/base/win32/server/srvvdm.c removes the matching WOWRecord, not the
+shared WOW process. Win16 remains hosted by WOW throughout execution; native
+GUI is an independent Windows process. Thus GUI startup releases only NTW32
+request occupancy; its real GUI handle/UNBOUND record remains owned by NTSRV
+until process exit. No GUI-launch-success -> worker-termination rule is added.
 
 S6 naming and S7 audit remain sequential and cannot claim S5 runtime work.
 

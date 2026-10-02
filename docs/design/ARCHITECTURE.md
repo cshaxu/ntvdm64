@@ -61,8 +61,10 @@ runtime evidence; the present monitor has no independent UNBOUND section.
 
 Default GUI run16 returns on startup success, not window closure. Explicit
 --wait keeps its actual completion/exit-code behavior via NTSRV. Releasing the
-GUI request cannot kill its target or a reused text worker; dedicated-carrier
-retirement is a separate broker decision, not an implicit local cleanup rule.
+GUI request cannot kill its target or a reused text worker. Following the
+owner's shared-WOW clarification, release the request but retain the resident
+carrier, BUSY if other text work remains and READY otherwise. Later broker
+retirement is independent, not an implicit GUI startup cleanup rule.
 GUI-only segments acquire no character frontend and do not propagate its
 capability. Existing Win16 startup semantics remain unchanged; a WOW task must
 not be represented as an invented per-task Windows process handle. No new

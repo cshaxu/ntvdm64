@@ -151,9 +151,10 @@ NTMON displays the service projection only, with no local process enumeration.
 No Win16 per-task process handle is invented to imitate native GUI ownership.
 
 Releasing a GUI request must not terminate the target or a worker that still
-serves CMD. Dedicated-carrier retirement is distinct from request release and
-remains broker-owned; the exact optional retirement policy awaits the owner's
-clarification. GUI segments do not propagate character frontend authority.
+serves CMD. The owner's original-WOW clarification resolves release as request
+occupancy, not carrier termination: retain the resident worker, BUSY if other
+text work remains and READY otherwise. Later broker retirement is independent.
+GUI segments do not propagate character frontend authority.
 Keep kind values DOS=0, Win16=1, Win32=2 and existing monitor hotkeys. No helper,
 observed descendant graph, scheduler, guest or mirror changes are admitted.
 
