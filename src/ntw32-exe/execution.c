@@ -3,6 +3,7 @@
 #include "execution.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
 #include "io.h"
+#include "console_state.h"
 #include "interface/native_launch.h"
 #include "interface/frontend_protocol.h"
 struct ntw32_executions {
@@ -196,6 +197,12 @@ reply_ready:
             error=bound ? owner->io.end(owner->io.context) : ERROR_SUCCESS;
             bound=FALSE;
             completion.error=error;
+            /* One resource check after the direct process has exited. Do not
+             * close an owned Console still used by an unregistered native
+             * child. Failure is conservative; no timer or observed task is
+             * introduced. The broker, not this worker, owns retirement. */
+            if(ntw32_console_quiescent(GetProcessId(target)))
+                completion.flags=NATIVE_COMPLETION_CONSOLE_EMPTY;
             /* Report only the real target's exit code after native I/O release.
              * NTSRV stores it and signals the launcher's direct receipt. */
             broker_error=ntw32_complete_next_command(request->request,exit_code);

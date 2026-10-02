@@ -148,7 +148,7 @@ static DWORD WINAPI frontend_pump(void *context)
             if (scope->channel_ready) scope->channel_ready();
         }
         if(scope->native && ((scope->creator && scope->creator_exited) ||
-            (scope->admitted && scope->retire_requested))){
+            scope->retire_requested)){
             DWORD pending=0,tasks=0;
             error=OpenNtBaseClientFrontendUsage(&pending,&tasks);
             if(error)return error;

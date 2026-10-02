@@ -22,20 +22,22 @@ static DWORD session_entry(HANDLE pipe,HANDLE caller,HANDLE notification,HANDLE 
     BOOL lease,BOOL borrowed,uint64_t console_window)
 {
     DWORD pid=0,error,ignored;
-    HANDLE event=NULL;
+    HANDLE event=NULL,broker=NULL;
     frontend_session_service *service=NULL;
     frontend_bootstrap_reply reply={FRONTEND_BOOTSTRAP_VERSION,0,APP_VERSION};
-    /* The inherited process capability pins the creator; the private pipe
-     * must have been created by that same process. Arguments alone grant nothing. */
-    if(!GetNamedPipeServerProcessId(pipe,&pid) || !pid || pid!=GetProcessId(caller) ||
-        WaitForSingleObject(caller,0)!=WAIT_TIMEOUT){bootstrap_trace("identity",ERROR_ACCESS_DENIED);return ERROR_ACCESS_DENIED;}
-    if(!AttachConsole(pid)){error=GetLastError();bootstrap_trace("attach",error);return error;}
+    /* The pipe belongs to the authenticated broker, not to the launcher.
+     * The separately inherited caller capability identifies the real Console. */
+    error=OpenNtBaseClientConnectCurrent();if(error){bootstrap_trace("connect",error);goto done;}
+    error=OpenNtBaseClientWatchBroker();if(error){bootstrap_trace("watch",error);goto done;}
+    error=OpenNtBaseClientBrokerProcess(&broker);if(error)goto done;
+    if(!GetNamedPipeServerProcessId(pipe,&pid) || !pid || pid!=GetProcessId(broker) ||
+        WaitForSingleObject(caller,0)!=WAIT_TIMEOUT){error=ERROR_ACCESS_DENIED;bootstrap_trace("identity",error);goto done;}
+    pid=GetProcessId(caller);
+    if(!pid || !AttachConsole(pid)){error=GetLastError();bootstrap_trace("attach",error);goto done;}
     if(lease && (uint64_t)(UINT_PTR)GetConsoleWindow()!=console_window)
-        {bootstrap_trace("console-match",ERROR_ACCESS_DENIED);return ERROR_ACCESS_DENIED;}
+        {error=ERROR_ACCESS_DENIED;bootstrap_trace("console-match",error);goto done;}
     event=CreateEventW(NULL,TRUE,FALSE,NULL);
     if(!event){error=GetLastError();goto done;}
-    error=OpenNtBaseClientConnectCurrent();if(error){bootstrap_trace("connect",error);goto respond;}
-    error=OpenNtBaseClientWatchBroker();if(error){bootstrap_trace("watch",error);goto respond;}
     error=OpenNtBaseClientRegisterFrontendRoot(notification);if(error){bootstrap_trace("register",error);goto respond;}
     error=OpenNtBaseClientReportCurrentConsoleMembers();
     if(error){bootstrap_trace("console-identity",error);goto respond;}
@@ -49,7 +51,7 @@ static DWORD session_entry(HANDLE pipe,HANDLE caller,HANDLE notification,HANDLE 
 respond:
     reply.status=error;
     {
-        DWORD sent=frontend_request_transfer(pipe,caller,NULL,event,TRUE,&reply,sizeof(reply));
+        DWORD sent=frontend_request_transfer(pipe,broker,NULL,event,TRUE,&reply,sizeof(reply));
         if(sent)error=sent;
     }
     if(error)goto done;
@@ -62,20 +64,19 @@ respond:
 done:
     {
         DWORD close_error=frontend_service_close(service),ack_error=ERROR_SUCCESS;
-        BOOL acknowledged=FALSE;
         if(!error && close_error)error=close_error;
-        /* The launcher holds only SYNCHRONIZE access to this private event.
-         * Signal it after, never before, canonical-buffer selection and
-         * input-mode/cursor-shape restoration. */
+        /* Report to the broker only after canonical-buffer selection and
+         * input-mode/cursor-shape restoration. The launcher has no direct
+         * acknowledgement or shutdown channel to this frontend. */
         if(!close_error) {
-            acknowledged=SetEvent(restored);
-            if(!acknowledged)ack_error=GetLastError();
-            if(!acknowledged && !error)error=ack_error;
+            ack_error=OpenNtBaseClientFrontendConsoleRestored();
+            if(ack_error && !error)error=ack_error;
         }
     }
     OpenNtBaseClientDisconnectCurrent();
     if(notification)CloseHandle(notification);
     if(event)CloseHandle(event);
+    if(broker)CloseHandle(broker);
     CloseHandle(pipe);CloseHandle(caller);CloseHandle(retire);CloseHandle(restored);
     return error;
 }

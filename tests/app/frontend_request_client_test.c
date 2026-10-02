@@ -1,13 +1,16 @@
-/* Client-only link: no renderer, input pump, helper or service implementation.
- * Broker admission is mocked here; real RPC identity tests remain mandatory. */
+/* Client-only ownership plus broker-owned wire negatives. The broker test
+ * substitute owns the worker channel and uses production reply validators;
+ * actual RPC identity and process lifecycle tests remain mandatory. */
 #include <windows.h>
 #include <stdio.h>
 #include "interface/native_request_client.h"
 #include "interface/native_request_protocol.h"
+#include "ntsrv-exe/transport/native_control.h"
 
 static HANDLE peer_thread;
 static HANDLE peer_process;
 static DWORD scenario,peer_error;
+static HANDLE broker_pipe;
 static DWORD WINAPI peer(void *context)
 {
     HANDLE pipe=context,event=CreateEventW(NULL,TRUE,FALSE,NULL);
@@ -60,20 +63,62 @@ done:
     CloseHandle(event);CloseHandle(pipe);
     return error;
 }
-DWORD OpenNtBaseClientSubmitWorkerChannel(HANDLE capability,HANDLE pipe,const WCHAR image[260])
+DWORD OpenNtBaseClientSubmitNativeRequest(HANDLE capability,DWORD bytes,BYTE *payload,
+    HANDLE *target,HANDLE *receipt,DWORD *request)
 {
-    HANDLE copy=NULL;
-    if(capability!=(HANDLE)1 || !image)return ERROR_ACCESS_DENIED;
-    if(!DuplicateHandle(GetCurrentProcess(),pipe,GetCurrentProcess(),&copy,0,FALSE,DUPLICATE_SAME_ACCESS))return GetLastError();
-    peer_thread=CreateThread(NULL,0,peer,copy,0,NULL);
-    if(!peer_thread){DWORD error=GetLastError();CloseHandle(copy);return error;}
-    return 0;
+    static LONG serial;WCHAR name[96];DWORD error;
+    HANDLE server=INVALID_HANDLE_VALUE,event=NULL;
+    native_request_header header={NATIVE_REQUEST_VERSION,bytes};
+    native_request_reply reply={0};
+    *target=*receipt=NULL;*request=0;broker_pipe=INVALID_HANDLE_VALUE;
+    if(capability!=(HANDLE)1)return ERROR_ACCESS_DENIED;
+    swprintf_s(name,ARRAYSIZE(name),L"\\\\.\\pipe\\broker-native-fixture-%lu-%lu",
+        GetCurrentProcessId(),(DWORD)InterlockedIncrement(&serial));
+    server=CreateNamedPipeW(name,PIPE_ACCESS_DUPLEX|FILE_FLAG_OVERLAPPED|FILE_FLAG_FIRST_PIPE_INSTANCE,
+        PIPE_TYPE_BYTE|PIPE_WAIT|PIPE_REJECT_REMOTE_CLIENTS,1,65536,65536,0,NULL);
+    if(server==INVALID_HANDLE_VALUE)return GetLastError();
+    broker_pipe=CreateFileW(name,GENERIC_READ|GENERIC_WRITE,0,NULL,OPEN_EXISTING,
+        FILE_FLAG_OVERLAPPED,NULL);
+    if(broker_pipe==INVALID_HANDLE_VALUE){error=GetLastError();goto done;}
+    event=CreateEventW(NULL,TRUE,FALSE,NULL);
+    if(!event){error=GetLastError();goto done;}
+    {
+        OVERLAPPED io={0};io.hEvent=event;
+        if(!ConnectNamedPipe(server,&io) && GetLastError()!=ERROR_PIPE_CONNECTED) {
+            DWORD ignored;error=GetLastError();CancelIoEx(server,&io);
+            GetOverlappedResult(server,&io,&ignored,TRUE);goto done;
+        }
+    }
+    peer_thread=CreateThread(NULL,0,peer,server,0,NULL);
+    if(!peer_thread){error=GetLastError();goto done;}
+    server=INVALID_HANDLE_VALUE; /* Peer owns its end, substitute broker owns ours. */
+    error=frontend_request_transfer(broker_pipe,peer_process,NULL,event,TRUE,&header,sizeof(header));
+    if(!error && bytes)error=frontend_request_transfer(broker_pipe,peer_process,NULL,event,TRUE,payload,bytes);
+    if(!error)error=frontend_request_transfer(broker_pipe,peer_process,NULL,event,FALSE,&reply,sizeof(reply));
+    if(!error)error=broker_native_reply_status(&reply,bytes!=0);
+    if(!error && bytes) {
+        *target=(HANDLE)(ULONG_PTR)reply.target;*receipt=(HANDLE)(ULONG_PTR)reply.receipt;
+        *request=reply.request;
+    }
+done:
+    if(server!=INVALID_HANDLE_VALUE)CloseHandle(server);
+    if(event)CloseHandle(event);
+    if((error || !bytes || scenario==0) && broker_pipe!=INVALID_HANDLE_VALUE) {
+        CloseHandle(broker_pipe);broker_pipe=INVALID_HANDLE_VALUE;
+    }
+    return error;
 }
-DWORD OpenNtBaseClientNativeExitCode(DWORD request,DWORD *exit_code)
+DWORD OpenNtBaseClientFinishNativeRequest(DWORD request,DWORD *exit_code)
 {
+    HANDLE event;DWORD error;native_request_completion completion={0};
     if(request!=91 || !exit_code)return ERROR_INVALID_PARAMETER;
+    if(scenario==12)return ERROR_PROCESS_ABORTED;
     *exit_code=37;
-    return ERROR_SUCCESS;
+    event=CreateEventW(NULL,TRUE,FALSE,NULL);if(!event)return GetLastError();
+    error=frontend_request_transfer(broker_pipe,peer_process,NULL,event,FALSE,&completion,sizeof(completion));
+    if(!error)error=broker_native_completion_status(&completion);
+    CloseHandle(event);CloseHandle(broker_pipe);broker_pipe=INVALID_HANDLE_VALUE;
+    return error;
 }
 int main(void)
 {
@@ -81,6 +126,14 @@ int main(void)
     LPWCH environment;
     run16_native_start start={0};
     DWORD expected[]={0,ERROR_ACCESS_DENIED,ERROR_INVALID_DATA,ERROR_INVALID_DATA,ERROR_BROKEN_PIPE,ERROR_BROKEN_PIPE};
+    {
+        native_request_completion completion={NATIVE_REQUEST_VERSION,0,NATIVE_COMPLETION_CONSOLE_EMPTY};
+        if(broker_native_completion_status(&completion))return 20;
+        completion.flags=2;
+        if(broker_native_completion_status(&completion)!=ERROR_INVALID_DATA)return 21;
+        completion.flags=0;completion.version--;
+        if(broker_native_completion_status(&completion)!=ERROR_INVALID_DATA)return 22;
+    }
     if(!GetEnvironmentVariableW(L"COMSPEC",image,MAX_PATH))return 1;
     if(!GetCurrentDirectoryW(MAX_PATH,directory))return 1;
     environment=GetEnvironmentStringsW();if(!environment)return 1;
@@ -88,9 +141,9 @@ int main(void)
     swprintf_s(command,2*MAX_PATH,L"\"%ls\" /d /c exit 37",image);
     start.application=image;start.command=command;start.directory=directory;start.environment=environment;
     for(scenario=0;scenario<6;++scenario){
-        HANDLE target=NULL,receipt=NULL;DWORD error,result=0;
+        HANDLE target=NULL,receipt=NULL;DWORD error,result=0,request=0;
         peer_error=0;peer_thread=NULL;
-        error=run16_native_worker_request_submit(peer_process,(HANDLE)1,&start,&target,&receipt);
+        error=run16_native_request_submit((HANDLE)1,&start,&target,&receipt,&request);
         if(receipt)CloseHandle(receipt);
         if(!peer_thread || WaitForSingleObject(peer_thread,5000)!=WAIT_OBJECT_0){printf("FAIL admission case=%lu error=%lu\n",scenario,error);return 2;}
         CloseHandle(peer_thread);
@@ -101,25 +154,33 @@ int main(void)
         }else if(target)return 5;
     }
     for(scenario=6;scenario<=8;++scenario) {
-        HANDLE target=NULL,receipt=NULL,completion=NULL;
+        HANDLE target=NULL,receipt=NULL;
         DWORD result,error,request=0,wanted=scenario==6 ? 0 : scenario==7 ? ERROR_WRITE_FAULT : ERROR_BROKEN_PIPE;
-        error=run16_native_worker_request_begin(peer_process,(HANDLE)1,&start,&target,&receipt,&completion,&request);
-        if(error || !completion || WaitForSingleObject(target,5000)!=WAIT_OBJECT_0 ||
+        error=run16_native_request_submit((HANDLE)1,&start,&target,&receipt,&request);
+        if(error || WaitForSingleObject(target,5000)!=WAIT_OBJECT_0 ||
             !GetExitCodeProcess(target,&result) || result!=37)return 6;
         result=0;
-        error=run16_native_worker_request_finish(completion,peer_process,NULL,request,&result);
+        error=run16_native_request_finish(request,&result);
         if(error!=wanted || (!error && result!=37) ||
             WaitForSingleObject(peer_thread,5000)!=WAIT_OBJECT_0 || peer_error)return 7;
         printf("PASS final presentation case=%lu status=%lu target=37\n",scenario,error);
-        CloseHandle(peer_thread);CloseHandle(completion);CloseHandle(receipt);CloseHandle(target);
+        CloseHandle(peer_thread);CloseHandle(receipt);CloseHandle(target);
     }
     for(scenario=9;scenario<=11;++scenario) {
         DWORD error,wanted=scenario==9 ? 0 : scenario==10 ? ERROR_ACCESS_DENIED : ERROR_INVALID_DATA;
         peer_error=0;peer_thread=NULL;
-        error=run16_native_worker_request_resume(peer_process,(HANDLE)1);
+        error=run16_native_request_resume((HANDLE)1);
         if(!peer_thread || WaitForSingleObject(peer_thread,5000)!=WAIT_OBJECT_0 || peer_error || error!=wanted)return 8;
         printf("PASS resume presentation case=%lu status=%lu no target\n",scenario,error);
         CloseHandle(peer_thread);
+    }
+    scenario=12;
+    {
+        DWORD result=99;
+        /* Broker failure must win over a missing final worker channel. */
+        if(run16_native_request_finish(91,&result)!=
+            ERROR_PROCESS_ABORTED || result)return 9;
+        puts("PASS broker worker-failure receipt returned without reading dead presentation channel");
     }
     FreeEnvironmentStringsW(environment);
     CloseHandle(peer_process);

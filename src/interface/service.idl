@@ -1,12 +1,68 @@
 import "wtypes.idl";
 [
     uuid(7d3e78bd-0472-4736-8797-e64e966d692e),
-    version(29.0),
+    version(30.0),
     pointer_default(unique)
 ]
 interface vdm_service
 {
     typedef [context_handle] void *VDM_CONNECTION;
+    /* Copied native launch/control only; worker/frontend I/O stays direct. */
+    error_status_t SubmitNativeRequest(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [in, system_handle(sh_event)] HANDLE frontend,
+        [in, range(0,1048576)] unsigned long bytes,
+        [in, unique, size_is(bytes)] byte *payload,
+        [out, system_handle(sh_process)] HANDLE *target,
+        [out, system_handle(sh_event)] HANDLE *receipt,
+        [out] unsigned long *request);
+    error_status_t FinishNativeRequest(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation, [in] unsigned long request,
+        [out] unsigned long *exit_code);
+    /* Original Check selects kind/task; the caller cannot choose an image,
+     * command line, creation flags or a worker process to resume. */
+    error_status_t StartVdmWorker(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [in, range(2,65536)] unsigned long environment_chars,
+        [in, size_is(environment_chars)] wchar_t *environment,
+        [in] unsigned long show_window,
+        [in, system_handle(sh_event)] HANDLE frontend,
+        [out, system_handle(sh_process)] HANDLE *worker,
+        [out, system_handle(sh_event)] HANDLE *parent,
+        [out] unsigned long *parent_receipt);
+    error_status_t StartNativeWorker(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [out, system_handle(sh_process)] HANDLE *worker);
+    /* The broker creates the exact product frontend. Console operations are
+     * performed by that frontend against this authenticated caller. */
+    error_status_t StartFrontend(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation, [in] hyper console_window,
+        [in] unsigned long borrowed,
+        [out, system_handle(sh_process)] HANDLE *root,
+        [out, system_handle(sh_event)] HANDLE *capability,
+        [out, system_handle(sh_event)] HANDLE *restored);
+    error_status_t ReturnFrontendConsole(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation);
+    error_status_t FrontendConsoleRestored(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation);
+    error_status_t WaitFrontendConsoleRestored(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation);
     error_status_t WorkerShutdownEvent(
         [in] handle_t binding, [in] VDM_CONNECTION connection,
         [in, system_handle(sh_process)] HANDLE process,
@@ -28,17 +84,6 @@ interface vdm_service
         [in, system_handle(sh_process)] HANDLE process,
         [in] unsigned long generation,
         [out, system_handle(sh_process)] HANDLE *worker);
-    /* Same authenticated attachment transaction, to the admitted worker.
-     * The copied image is management metadata only; launch payloads and
-     * target I/O status remains on the direct pipe; the actual process exit
-     * code is reported by NTW32 through CompleteWorkerChannel. */
-    error_status_t SubmitWorkerChannel(
-        [in] handle_t binding, [in] VDM_CONNECTION connection,
-        [in, system_handle(sh_process)] HANDLE process,
-        [in] unsigned long generation,
-        [in, system_handle(sh_event)] HANDLE capability,
-        [in, system_handle(sh_pipe)] HANDLE channel,
-        [in] wchar_t image[260]);
     /* Native worker's one-command blocking acquire.  This is deliberately
      * shaped as GetNext rather than a transport wait: the recipient owns one
      * admitted Direct command, completes it, and then acquires the next. */

@@ -27,7 +27,7 @@ static BOOL retirement_mode;
 static volatile LONG usage_pending,retire_calls,drain_calls,park_calls,broker_shutdown;
 static HANDLE usage_seen,park_seen;
 static void attached(void);
-DWORD frontend_bootstrap_start(PCWSTR image,frontend_connection *connection)
+static DWORD fixture_frontend_start(PCWSTR image,frontend_connection *connection)
 {
     DWORD error;
     CHECK(wcsstr(image,L"ntkvm.exe")!=NULL);
@@ -38,9 +38,17 @@ DWORD frontend_bootstrap_start(PCWSTR image,frontend_connection *connection)
     error=frontend_service_start(notification,notification,attached,&fixture_service);
     return error;
 }
-DWORD frontend_bootstrap_start_lease(PCWSTR image,BOOL borrowed,uint64_t window,
-    frontend_connection *connection)
-{ (void)borrowed;(void)window;return frontend_bootstrap_start(image,connection); }
+DWORD OpenNtBaseClientStartFrontend(uint64_t window,BOOL borrowed,HANDLE *root,
+    HANDLE *capability,HANDLE *restored)
+{
+    frontend_connection value={0};DWORD error;
+    (void)window;(void)borrowed;
+    error=fixture_frontend_start(L"ntkvm.exe",&value);
+    *root=value.process;*capability=value.capability;*restored=NULL;
+    return error;
+}
+DWORD OpenNtBaseClientReturnFrontendConsole(void){return ERROR_SUCCESS;}
+DWORD OpenNtBaseClientWaitFrontendConsoleRestored(void){return ERROR_SUCCESS;}
 DWORD OpenNtBaseClientAcquireFrontendRoot(uint64_t window,DWORD *create_root,
     HANDLE *root,HANDLE *capability,HANDLE *retire,HANDLE *restored)
 { (void)window;*create_root=1;*root=*capability=*retire=*restored=NULL;return 0; }
@@ -48,10 +56,8 @@ DWORD OpenNtBaseClientCancelFrontendRootReservation(void){return 0;}
 void frontend_bootstrap_release(frontend_connection *connection)
 {
     if(connection->capability)CloseHandle(connection->capability);
-    if(connection->retire)CloseHandle(connection->retire);
     if(connection->restored)CloseHandle(connection->restored);
     if(connection->process)CloseHandle(connection->process);
-    if(connection->channel)CloseHandle(connection->channel);
     ZeroMemory(connection,sizeof(*connection));
 }
 /* This fixture exercises scope/channel lifetime, not native presentation. */
@@ -97,14 +103,12 @@ DWORD OpenNtBaseClientRetireWorkerlessFrontend(DWORD *retired)
     return ERROR_SUCCESS;
 }
 DWORD run16_native_frontend_destroy(run16_native_frontend *value) { if(value)HeapFree(GetProcessHeap(),0,value);return 0; }
-DWORD run16_native_worker_request_submit(HANDLE worker,HANDLE capability,const run16_native_start *start,HANDLE *out,HANDLE *receipt)
-{ (void)worker;(void)capability;(void)start;*out=*receipt=NULL;return ERROR_NOT_SUPPORTED; }
-DWORD run16_native_worker_request_begin(HANDLE worker,HANDLE capability,const run16_native_start *start,HANDLE *out,HANDLE *receipt,HANDLE *completion,DWORD *request)
-{ *completion=NULL;*request=0;return run16_native_worker_request_submit(worker,capability,start,out,receipt); }
-DWORD run16_native_worker_request_finish(HANDLE completion,HANDLE worker,HANDLE frontend,DWORD request,DWORD *exit_code)
-{ (void)completion;(void)worker;(void)frontend;(void)request;(void)exit_code;CHECK(FALSE);return ERROR_NOT_SUPPORTED; }
-DWORD run16_native_worker_request_resume(HANDLE worker,HANDLE capability)
-{ (void)worker;(void)capability;CHECK(FALSE);return ERROR_NOT_SUPPORTED; }
+DWORD run16_native_request_submit(HANDLE capability,const run16_native_start *start,HANDLE *out,HANDLE *receipt,DWORD *request)
+{ (void)capability;(void)start;*out=*receipt=NULL;*request=0;return ERROR_NOT_SUPPORTED; }
+DWORD run16_native_request_finish(DWORD request,DWORD *exit_code)
+{ (void)request;(void)exit_code;CHECK(FALSE);return ERROR_NOT_SUPPORTED; }
+DWORD run16_native_request_resume(HANDLE capability)
+{ (void)capability;CHECK(FALSE);return ERROR_NOT_SUPPORTED; }
 DWORD OpenNtBaseClientSelectNativeWorker(HANDLE *worker)
 { *worker=NULL;return ERROR_NOT_SUPPORTED; }
 DWORD OpenNtBaseClientRequestFrontend(HANDLE capability)
@@ -113,10 +117,6 @@ DWORD OpenNtBaseClientReserveNativeWorker(uint64_t *reservation)
 { *reservation=0;return ERROR_NOT_SUPPORTED; }
 DWORD OpenNtBaseClientReleaseWorker(uint64_t reservation)
 { (void)reservation;return ERROR_NOT_SUPPORTED; }
-DWORD run16_worker_prepare(uint64_t reservation,PCWSTR image,PWSTR command,void *environment,
-    DWORD flags,const STARTUPINFOW *startup,PROCESS_INFORMATION *worker)
-{ (void)reservation;(void)image;(void)command;(void)environment;(void)flags;(void)startup;
-  ZeroMemory(worker,sizeof(*worker));return ERROR_NOT_SUPPORTED; }
 
 DWORD OpenNtBaseClientRegisterFrontendRoot(HANDLE value)
 {
@@ -124,6 +124,8 @@ DWORD OpenNtBaseClientRegisterFrontendRoot(HANDLE value)
     return DuplicateHandle(GetCurrentProcess(),value,GetCurrentProcess(),
         &notification,0,FALSE,DUPLICATE_SAME_ACCESS) ? 0 : GetLastError();
 }
+DWORD OpenNtBaseClientStartNativeWorker(HANDLE *worker)
+{ return OpenNtBaseClientSelectNativeWorker(worker); }
 DWORD OpenNtBaseClientFrontendJoinCandidate(DWORD *nonce,DWORD *pid)
 {*nonce=*pid=0;return ERROR_NOT_FOUND;}
 DWORD OpenNtBaseClientFrontendJoinDecision(DWORD nonce,BOOL same)

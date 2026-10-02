@@ -1,5 +1,4 @@
 #include "frontend_scope.h"
-#include "worker_launch.h"
 #include "interface/frontend_bootstrap.h"
 #include "interface/native_request_client.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
@@ -27,7 +26,7 @@ static DWORD inherited_capability(const char *name,HANDLE *capability)
     return ERROR_SUCCESS;
 }
 struct run16_frontend_scope {
-    HANDLE capability,retire,restored,root,receipt,completion,worker;
+    HANDLE capability,restored,root,receipt;
     BOOL owns_environment,has_execution;
     DWORD console_mask,native_request;
 };
@@ -36,12 +35,9 @@ void run16_frontend_scope_end(run16_frontend_scope *scope)
     if(!scope)return;
     if(scope->owns_environment)SetEnvironmentVariableA(FRONTEND_ENV,NULL);
     if(scope->capability)CloseHandle(scope->capability);
-    if(scope->retire)CloseHandle(scope->retire);
     if(scope->restored)CloseHandle(scope->restored);
     if(scope->root)CloseHandle(scope->root);
     if(scope->receipt)CloseHandle(scope->receipt);
-    if(scope->completion)CloseHandle(scope->completion);
-    if(scope->worker)CloseHandle(scope->worker);
     HeapFree(GetProcessHeap(),0,scope);
 }
 static DWORD scope_begin(run16_frontend_scope **output,BOOL lease,BOOL console_owned)
@@ -72,28 +68,12 @@ static DWORD scope_begin(run16_frontend_scope **output,BOOL lease,BOOL console_o
         if (!DuplicateHandle(GetCurrentProcess(),inherited_frontend,GetCurrentProcess(),
             &scope->capability,SYNCHRONIZE,FALSE,0)) { error=GetLastError();goto fail; }
     } else {
-        WCHAR image[MAX_PATH],*slash;
-        DWORD length=GetModuleFileNameW(NULL,image,ARRAYSIZE(image));
         frontend_connection connection={0};
-        DWORD create_root=1;
         uint64_t console_window=(uint64_t)(UINT_PTR)GetConsoleWindow();
-        if(!length || length>=ARRAYSIZE(image) || !(slash=wcsrchr(image,L'\\'))){error=ERROR_BAD_PATHNAME;goto fail;}
-        if(wcscpy_s(slash+1,ARRAYSIZE(image)-(size_t)(slash+1-image),L"ntkvm.exe")){error=ERROR_FILENAME_EXCED_RANGE;goto fail;}
-        if(lease && console_window) {
-            error=OpenNtBaseClientAcquireFrontendRoot(console_window,&create_root,
-                &connection.process,&connection.capability,&connection.retire,&connection.restored);
-            if(error)goto fail;
-        }
-        if(create_root) {
-            error=lease && console_window ? frontend_bootstrap_start_lease(image,
-                !console_owned,console_window,&connection) : frontend_bootstrap_start(image,&connection);
-            if(error) {
-                if(lease && console_window)(void)OpenNtBaseClientCancelFrontendRootReservation();
-                goto fail;
-            }
-        }
+        error=OpenNtBaseClientStartFrontend(console_window,lease && !console_owned,
+            &connection.process,&connection.capability,&connection.restored);
+        if(error)goto fail;
         scope->capability=connection.capability;connection.capability=NULL;
-        scope->retire=connection.retire;connection.retire=NULL;
         scope->restored=connection.restored;connection.restored=NULL;
         scope->root=connection.process;connection.process=NULL;
         frontend_bootstrap_release(&connection);
@@ -170,36 +150,13 @@ DWORD run16_frontend_scope_launch_native(run16_frontend_scope *scope,const run16
     error=OpenNtBaseClientWorkerStateChanged(&changed);
     if(error)return error;
     for(;;) {
-        uint64_t reservation=0;
-        error=OpenNtBaseClientSelectNativeWorker(&worker);
-        if(error!=ERROR_NOT_FOUND)break;
-        error=OpenNtBaseClientReserveNativeWorker(&reservation);
+        error=OpenNtBaseClientStartNativeWorker(&worker);
         if(error==ERROR_ALREADY_EXISTS) {
             /* Each launcher has its own auto-reset state event; NTKVM's
              * retirement event is never shared with this admission wait. */
             error=wait_worker_change(changed,NULL,scope->root,deadline);
             if(!error)continue;
             break;
-        }
-        if(!error) {
-            WCHAR image[MAX_PATH],command[MAX_PATH+3],*slash;
-            STARTUPINFOW startup={sizeof(startup)};PROCESS_INFORMATION process={0};
-            DWORD length=GetModuleFileNameW(NULL,image,ARRAYSIZE(image));
-            if(!length || length>=ARRAYSIZE(image) || !(slash=wcsrchr(image,L'\\')))error=ERROR_BAD_PATHNAME;
-            else if(wcscpy_s(slash+1,ARRAYSIZE(image)-(size_t)(slash+1-image),L"ntw32.exe"))error=ERROR_FILENAME_EXCED_RANGE;
-            else if(swprintf_s(command,ARRAYSIZE(command),L"\"%ls\"",image)<0)error=ERROR_FILENAME_EXCED_RANGE;
-            else {
-                startup.dwFlags=STARTF_USESHOWWINDOW;startup.wShowWindow=SW_HIDE;
-                error=run16_worker_prepare(reservation,image,command,NULL,CREATE_NEW_CONSOLE,&startup,&process);
-                if(!error && ResumeThread(process.hThread)==(DWORD)-1) {
-                    error=GetLastError();TerminateProcess(process.hProcess,error);
-                    WaitForSingleObject(process.hProcess,INFINITE);
-                }
-            }
-            if(process.hThread)CloseHandle(process.hThread);
-            if(!error){worker=process.hProcess;process.hProcess=NULL;}
-            if(process.hProcess)CloseHandle(process.hProcess);
-            if(error)(void)OpenNtBaseClientReleaseWorker(reservation);
         }
         break;
     }
@@ -209,52 +166,41 @@ DWORD run16_frontend_scope_launch_native(run16_frontend_scope *scope,const run16
          * A reused route is not a new frontend or an input activation. */
         error=OpenNtBaseClientRequestFrontend(scope->capability);
         if(error==ERROR_ALREADY_EXISTS)error=ERROR_SUCCESS;
-        if(!error)error=run16_native_worker_request_begin(worker,scope->capability,start,target,&scope->receipt,&scope->completion,&scope->native_request);
+        if(!error)error=run16_native_request_submit(scope->capability,start,target,&scope->receipt,&scope->native_request);
         if(error!=ERROR_NOT_READY)break;
         /* No request was accepted. Wait only for initial registration; never
          * replay a submitted request or restart a failed worker. */
         error=wait_worker_change(changed,worker,scope->root,deadline);
         if(error)break;
     }
-    if(!error)scope->worker=worker;
-    else CloseHandle(worker);
+    CloseHandle(worker);
 done:
     CloseHandle(changed);
     return error;
 }
-DWORD run16_wait_direct_event(HANDLE receipt,HANDLE worker,HANDLE root,DWORD *winner)
+DWORD run16_wait_direct_event(HANDLE receipt)
 {
-    HANDLE waits[3];DWORD count=0,wait,worker_index=MAXDWORD,root_index=MAXDWORD;
-    if(!receipt || !winner)return ERROR_INVALID_PARAMETER;
-    waits[count++]=receipt;
-    if(worker && worker!=receipt){worker_index=count;waits[count++]=worker;}
-    if(root && root!=receipt && root!=worker){root_index=count;waits[count++]=root;}
-    wait=WaitForMultipleObjects(count,waits,FALSE,INFINITE);
+    DWORD wait;
+    if(!receipt)return ERROR_INVALID_PARAMETER;
+    wait=WaitForSingleObject(receipt,INFINITE);
     if(wait==WAIT_FAILED)return GetLastError();
-    if(wait>=WAIT_OBJECT_0+count)return ERROR_INVALID_STATE;
-    *winner=wait-WAIT_OBJECT_0==worker_index ? 1u :
-        wait-WAIT_OBJECT_0==root_index ? 2u : 0u;
+    if(wait!=WAIT_OBJECT_0)return ERROR_INVALID_STATE;
     return ERROR_SUCCESS;
 }
 DWORD run16_frontend_scope_wait_native(run16_frontend_scope *scope,HANDLE target,DWORD *result)
 {
-    DWORD error=0,winner=0;
+    DWORD error=0;
     if(!scope || !target || !result)return ERROR_INVALID_PARAMETER;
     if(scope->receipt){
-        /* The broker signals only after the real target exits and NTW32
-         * releases its I/O. Worker/root death cannot masquerade as success. */
-        error=run16_wait_direct_event(scope->receipt,scope->worker,scope->root,&winner);
+        /* NTSRV owns completion and fails outstanding receipts on worker
+         * rundown. Its authenticated death watcher covers broker loss. */
+        error=run16_wait_direct_event(scope->receipt);
         if(error)return error;
-        if(winner)return winner==1 ? ERROR_PROCESS_ABORTED : ERROR_PIPE_NOT_CONNECTED;
     }else return ERROR_INVALID_STATE;
     if(scope->receipt){
-        /* The direct channel carries NTSRV's actual process result and the
-         * separate final presentation status, never an inferred exit code. */
-        error=run16_native_worker_request_finish(scope->completion,scope->worker,scope->root,
-            scope->native_request,result);
+        /* NTSRV joins the real task result with the final I/O acknowledgement. */
+        error=run16_native_request_finish(scope->native_request,result);
         CloseHandle(scope->receipt);scope->receipt=NULL;
-        CloseHandle(scope->completion);scope->completion=NULL;
-        CloseHandle(scope->worker);scope->worker=NULL;
     }
     return error;
 }
@@ -284,7 +230,7 @@ DWORD run16_frontend_scope_resume_parent(run16_frontend_scope *scope)
     if(error==ERROR_NOT_FOUND){error=0;goto done;}
     if(error)goto done;
     for(index=0;index<count;++index)if(members[index]==GetProcessId(worker))break;
-    if(index<count)error=run16_native_worker_request_resume(worker,scope->capability);
+    if(index<count)error=run16_native_request_resume(scope->capability);
 done:
     if(worker)CloseHandle(worker);
     if(members)HeapFree(GetProcessHeap(),0,members);
@@ -293,24 +239,15 @@ done:
 
 DWORD run16_frontend_scope_restore_parent(run16_frontend_scope *scope)
 {
-    HANDLE waits[2];
-    DWORD wait,status=ERROR_GEN_FAILURE;
     /* Only a root launcher can return an outer CMD to this Console.  An
      * inherited scope is an inner invocation and must never hold its root's
      * frontend lifetime. */
     if(!scope || !scope->owns_environment || !scope->restored)return ERROR_SUCCESS;
-    waits[0]=scope->restored;waits[1]=scope->root;
-    wait=WaitForMultipleObjects(2,waits,FALSE,INFINITE);
-    if(wait==WAIT_OBJECT_0)return ERROR_SUCCESS;
-    if(wait==WAIT_OBJECT_0+1) {
-        if(!GetExitCodeProcess(scope->root,&status))status=GetLastError();
-        return status ? status : ERROR_GEN_FAILURE;
-    }
-    return GetLastError();
+    return OpenNtBaseClientWaitFrontendConsoleRestored();
 }
 
 DWORD run16_frontend_scope_retire(run16_frontend_scope *scope)
 {
-    if(!scope || !scope->owns_environment || !scope->retire)return ERROR_SUCCESS;
-    return SetEvent(scope->retire) ? ERROR_SUCCESS : GetLastError();
+    if(!scope || !scope->owns_environment || !scope->restored)return ERROR_SUCCESS;
+    return OpenNtBaseClientReturnFrontendConsole();
 }

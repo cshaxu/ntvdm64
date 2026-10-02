@@ -1,7 +1,7 @@
 /* run16 is the public CreateProcess CLI composition, never a VDM worker.
  * Image classification and CheckVDM stay in their selected original OpenNT
- * owners.  This entry owns only executable discovery, broker startup and
- * suspended-worker rollback around the admitted standalone boundary. */
+ * owners. This entry owns executable discovery, broker startup, task
+ * submission and broker receipt waits. NTSRV owns worker creation/rollback. */
 #include <nt.h>
 #include <base_classifier.h>
 #include "ntsrv-exe/opennt/include/base_capture.h"
@@ -10,7 +10,6 @@
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
 #include "frontend_scope.h"
 #include "launch_options.h"
-#include "run16-exe/worker_launch.h"
 #include "interface/console_io.h"
 #include <shellapi.h>
 #include <stdio.h>
@@ -191,7 +190,10 @@ static DWORD connect_broker(void)
     for (attempt = 0; attempt < 100; ++attempt)
     {
         error = OpenNtBaseClientConnectCurrent();
-        if (!error) return ERROR_SUCCESS;
+        /* Service loss is relevant from admission onward, not only after a
+         * worker has started. The shared authenticated process-handle watcher
+         * blocks on broker/stop events, with no periodic liveness RPC. */
+        if (!error) return OpenNtBaseClientWatchBroker();
         if (error == ERROR_REVISION_MISMATCH)
             return error; /* Never start/retry a broker for an incompatible peer. */
         /* Re-try only at bounded intervals.  This covers a listener which
@@ -213,16 +215,15 @@ static DWORD connect_broker(void)
     return error;
 }
 
-static DWORD wait_wow_startup(HANDLE parent,HANDLE worker)
+static DWORD wait_wow_startup(HANDLE parent)
 {
-    HANDLE ready=NULL,events[3];
+    HANDLE ready=NULL,events[2];
     BOOL started=FALSE;
-    DWORD error,wait,result=0,count=2;
+    DWORD error,wait,result=0;
     error=OpenNtBaseClientWowStartup(parent,&ready,&started);
     if (error) return error;
     events[0]=ready; events[1]=parent;
-    if (worker) events[count++]=worker;
-    wait=started ? WAIT_OBJECT_0 : WaitForMultipleObjects(count,events,FALSE,INFINITE);
+    wait=started ? WAIT_OBJECT_0 : WaitForMultipleObjects(ARRAYSIZE(events),events,FALSE,INFINITE);
     if (wait==WAIT_FAILED) error=GetLastError();
     CloseHandle(ready); ready=NULL;
     if (error) return error;
@@ -232,8 +233,6 @@ static DWORD wait_wow_startup(HANDLE parent,HANDLE worker)
     if (ready) CloseHandle(ready);
     if (error) return error;
     if (started) return ERROR_SUCCESS;
-    if (worker && WaitForSingleObject(worker,0)==WAIT_OBJECT_0)
-        return ERROR_PROCESS_ABORTED;
     if (WaitForSingleObject(parent,0)!=WAIT_OBJECT_0) return ERROR_INVALID_STATE;
     if (!BaseCheckForVDM(parent,&result)) return GetLastError();
     /* Shared WOW's original zero completion is not a successful InitTask.
@@ -247,28 +246,15 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command,run16_f
     ANSI_STRING environment = {0};
     UNICODE_STRING unicode_environment = {0};
     WORKER_WIN16DIR_SCOPE win16_directory = {0};
-    UNICODE_STRING worker_command = {0};
-    OPENNT_BASE_VDM_CONFIG configuration;
-    const OPENNT_BASE_VDM_CONFIG *previous_configuration;
     STARTUPINFOW startup = {sizeof(startup)};
     PROCESS_INFORMATION worker = {0};
     HANDLE frontend_capability=run16_frontend_scope_capability(frontend_scope);
-    WCHAR worker_path[MAX_PATH];
-    CHAR worker_image[MAX_PATH];
-    CHAR kernel_stem[MAX_PATH];
-    PCHAR image_slash;
     ULONG task = 0;
-    ULONG vdm_size = 0;
-    uint64_t reservation = 0;
     HANDLE parent_wait;
     DWORD result = ERROR_GEN_FAILURE;
-    DWORD worker_status;
-    DWORD worker_creation_flags;
-    BOOL prepared = FALSE;
     BOOL published = FALSE;
-    BOOL registered = FALSE;
+    BOOL service_start_attempted = FALSE;
     BOOL resumed = FALSE;
-    BOOL startup_failed = FALSE;
     BOOL task_completed = FALSE;
     /* A Console-subsystem launcher started by Explorer already has a new
      * Console. Original CreateProcess classified this as a new DOS session
@@ -337,18 +323,17 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command,run16_f
             result=frontend_capability ? OpenNtBaseClientRequestFrontend(frontend_capability) : ERROR_INVALID_STATE;
             if (result && result!=ERROR_ALREADY_EXISTS) { CloseHandle(parent_wait);goto done; }
         }
-        result=OpenNtBaseClientWatchBroker();
-        if (result) { CloseHandle(parent_wait); goto done; }
         if (binary==BINARY_TYPE_WIN16 && !wait_target) {
-            result=wait_wow_startup(parent_wait,NULL);
+            result=wait_wow_startup(parent_wait);
             CloseHandle(parent_wait);
             goto done;
         }
         {
-            DWORD wait=WaitForSingleObject(parent_wait,INFINITE);
-            if (wait!=WAIT_OBJECT_0 || !BaseCheckForVDM(parent_wait,&result))
-                result=GetLastError();
-            else task_completed=TRUE;
+            result=run16_wait_direct_event(parent_wait);
+            if(!result) {
+                if(!BaseCheckForVDM(parent_wait,&result))result=GetLastError();
+                else task_completed=TRUE;
+            }
         }
         CloseHandle(parent_wait);
         goto done;
@@ -366,162 +351,45 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command,run16_f
      * UPDATE_VDM_UNDO_CREATION cleanup, not leave that record to a later
      * unrelated launcher. */
     published = TRUE;
-    result = OpenNtBaseClientReserveWorker(task, &reservation);
-    if (result)
-        goto done;
-    if (!sibling_path(L"ntvdm.exe", worker_path, MAX_PATH))
-    {
-        result = GetLastError();
-        goto done;
-    }
-    if (!WideCharToMultiByte(CP_ACP, 0, worker_path, -1, worker_image,
-                             sizeof(worker_image), NULL, NULL))
-    {
-        result = GetLastError();
-        goto done;
-    }
-    image_slash = strrchr(worker_image, '\\');
-    if (!image_slash || sprintf_s(kernel_stem, sizeof(kernel_stem), "%.*s\\system32\\krnl386", (int)(image_slash - worker_image), worker_image) <= 0 ||
-        !OpenNtBaseInitializeVdmConfig(&configuration, worker_image, kernel_stem))
-    {
-        result = GetLastError();
-        goto done;
-    }
-    previous_configuration = OpenNtBaseBindVdmConfig(&configuration);
-    /* BaseGetVdmConfigInfo's second parameter is only the DOS new-console
-     * session id.  BaseCheckVDM also returns a nonzero WOW task id, but that
-     * is owned by the shared-WOW record and must not become the worker's
-     * original -i switch (which selects separate WOW). */
-    if (!BaseGetVdmConfigInfo(worker_path,
-                              binary == BINARY_TYPE_DOS ? task : 0, binary, &worker_command, &vdm_size))
-    {
-        result = GetLastError();
-        (void)OpenNtBaseBindVdmConfig(previous_configuration);
-        goto done;
-    }
-    (void)OpenNtBaseBindVdmConfig(previous_configuration);
-    /* A nonzero DOS session id is CheckDOS's original no-console result.
-     * Create the matching physical Console rather than letting that worker
-     * inherit the resident COMMAND Console it was deliberately separated
-     * from. */
-    worker_creation_flags=CREATE_UNICODE_ENVIRONMENT;
-    if (binary==BINARY_TYPE_WIN16 || binary==BINARY_TYPE_SEPWOW) {
-        /* Original OpenNT base/win32/client/process.c starts WOW with
-         * CREATE_NO_WINDOW, not an inherited or newly visible Console.
-         * Leave the guest command's startup/show state unchanged. */
-        worker_creation_flags |= CREATE_NO_WINDOW;
-    } else {
-        /* DOS I/O belongs to the authenticated frontend, not this worker's
-         * Windows Console membership. The original execution Console/task
-         * identity was already captured by CheckVDM and the reservation.
-         * Inheriting a native hidden Console would count an idle DOS worker
-         * as a native user and prevent that frontend from retiring. */
-        worker_creation_flags |= DETACHED_PROCESS;
-    }
-    result = run16_worker_prepare(reservation, worker_path, worker_command.Buffer,
-        unicode_environment.Buffer, worker_creation_flags, &startup, &worker);
-    if (result)
-        goto done;
-    prepared = TRUE;
-    /* Preserve the original post-CreateProcess registration shape.  The
-     * broker resolves the worker from the authenticated reservation; it does
-     * not receive this raw handle in its command wire. */
-    parent_wait = worker.hProcess;
-    if (!BaseUpdateVDMEntry(UPDATE_VDM_PROCESS_HANDLE, &parent_wait, task, binary))
-    {
-        result = GetLastError();
-        goto done;
-    }
-    registered = TRUE;
-    if (binary==BINARY_TYPE_DOS) {
-        result=frontend_capability ? OpenNtBaseClientRequestFrontend(frontend_capability) : ERROR_INVALID_STATE;
-        if (result && result!=ERROR_ALREADY_EXISTS) goto done;
-    }
-    if (ResumeThread(worker.hThread) == (DWORD)-1)
-    {
-        result = GetLastError();
-        goto done;
-    }
+    /* NTSRV owns exact sibling configuration, reservation, suspended creation,
+     * original Update, frontend admission, Resume and startup rollback. The
+     * launcher passes only the already-projected environment and show state. */
+    service_start_attempted=TRUE;
+    result=OpenNtBaseClientStartVdmWorker(unicode_environment.Buffer,
+        unicode_environment.Length/sizeof(WCHAR),startup.wShowWindow,
+        frontend_capability,&worker.hProcess,&parent_wait);
+    if(result)goto done;
     resumed = TRUE;
-    result=OpenNtBaseClientWatchBroker();
-    if (result) {
-        goto waited;
-    }
     if (binary==BINARY_TYPE_WIN16 && !wait_target) {
-        result=wait_wow_startup(parent_wait,worker.hProcess);
+        result=wait_wow_startup(parent_wait);
         goto waited;
     }
-    /* A dead worker cannot deliver another completion. Keep original task
-     * results, but never return to an infinite event wait after process exit. */
-    {
-        DWORD code,winner=0;
-        result=run16_wait_direct_event(parent_wait ? parent_wait : worker.hProcess,
-            worker.hProcess,NULL,&winner);
-        if(result)goto waited;
-        if (winner==1 &&
-            WaitForSingleObject(parent_wait,2000)!=WAIT_OBJECT_0) {
-            if (GetExitCodeProcess(worker.hProcess,&code))
-            result=ERROR_PROCESS_ABORTED;
-            fputs("run16: ntvdm exited without task completion\n",stderr);
-            goto waited;
-        }
-        if (WaitForSingleObject(worker.hProcess,0)==WAIT_OBJECT_0 &&
-            GetExitCodeProcess(worker.hProcess,&code) &&
-            (code==ERROR_REVISION_MISMATCH || code==RPC_S_UNKNOWN_IF ||
-             code==RPC_S_PROCNUM_OUT_OF_RANGE)) {
-            fputs("run16: version mismatch: ntvdm worker rejected the broker protocol/application version\n",stderr);
-            result=ERROR_REVISION_MISMATCH;
-            startup_failed=TRUE;
-            goto waited;
-        }
-    }
-    if (parent_wait && parent_wait != worker.hProcess)
-    {
-        if (!BaseCheckForVDM(parent_wait, &result))
-            result = GetLastError();
+    /* NTSRV observes true worker failure and the original independent-Console
+     * worker-exit branch. Both reach this service receipt; run16 never waits
+     * on or queries the worker process as a substitute task completion. */
+    result=run16_wait_direct_event(parent_wait);
+    if(!result) {
+        if(!BaseCheckForVDM(parent_wait,&result))result=GetLastError();
         else task_completed=TRUE;
     }
-    else if (!GetExitCodeProcess(worker.hProcess, &result))
-    {
-        result = GetLastError();
-    }
 waited:
-    /* Diagnostic only: ERROR_PROCESS_ABORTED is the launcher's public
-     * result for an uncompleted worker.  Preserve the actual child status
-     * in the existing opt-in S34 trace so failure attribution does not
-     * mistake the broker-side result for the worker's own exit code. */
-    if (worker.hProcess && WaitForSingleObject(worker.hProcess, 0) == WAIT_OBJECT_0 &&
-        GetExitCodeProcess(worker.hProcess, &worker_status))
     if (parent_wait && parent_wait != worker.hProcess)
         CloseHandle(parent_wait);
 done:
     end_worker_win16_directory(&win16_directory);
     NtCurrentPeb()->ProcessParameters->ConsoleHandle=saved_console;
-    if (published && (!resumed || startup_failed) && result)
+    if (published && !service_start_attempted && !resumed && result)
     {
         HANDLE undo_task = (HANDLE)(ULONG_PTR)task;
-        ULONG undo_state = registered ? VDM_FULLY_CREATED : VDM_PARTIALLY_CREATED;
+        ULONG undo_state = VDM_PARTIALLY_CREATED;
         /* Preserve the launch failure.  This is best-effort only because the
          * original record owner may itself report an earlier cleanup fault. */
         (void)BaseUpdateVDMEntry(UPDATE_VDM_UNDO_CREATION, &undo_task, undo_state, binary);
-    }
-    if (worker.hProcess && (!prepared || !resumed))
-    {
-        (void)TerminateProcess(worker.hProcess, result ? result : ERROR_PROCESS_ABORTED);
-        (void)WaitForSingleObject(worker.hProcess, INFINITE);
-    }
-    if (reservation && (!prepared || !resumed))
-    {
-        DWORD release = OpenNtBaseClientReleaseWorker(reservation);
-        if (!result && release)
-            result = release;
     }
     if (worker.hThread)
         CloseHandle(worker.hThread);
     if (worker.hProcess)
         CloseHandle(worker.hProcess);
-    if (worker_command.Buffer)
-        RtlFreeUnicodeString(&worker_command);
     (void)BaseDestroyVDMEnvironment(&environment, &unicode_environment);
     /* Only an acknowledged DOS completion can resume its native parent's
      * presentation. Startup/fault results must not select another worker or
@@ -723,7 +591,6 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
         }
         result=connect_broker();
         if (!result) result=run16_frontend_scope_begin_lease(&frontend_scope,initial_console_only);
-        if (!result) result=OpenNtBaseClientWatchBroker();
         if (result) goto done;
         result=launch_native(frontend_scope,application,shell_command);
         goto done;
@@ -822,7 +689,6 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
         if (information.SubSystemType==IMAGE_SUBSYSTEM_WINDOWS_CUI) {
             result=connect_broker();
             if (!result) result=run16_frontend_scope_begin_lease(&frontend_scope,initial_console_only);
-            if (!result) result=OpenNtBaseClientWatchBroker();
             if (result) goto done;
         }
     }

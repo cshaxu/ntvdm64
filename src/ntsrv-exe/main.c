@@ -14,9 +14,80 @@ static broker_rpc_scope scope;
 static OPENNT_BASE_SERVICE *service;
 static SRWLOCK idle_lock=SRWLOCK_INIT;
 static HANDLE idle_timer;
-static HANDLE frontend_timer; /* Finite startup admission deadline, not orphan grace. */
+static HANDLE frontend_timer; /* Broker-only startup and workerless-root deadlines. */
 static ULONGLONG idle_deadline;
 static ULONG pending_connects;
+error_status_t Server_SubmitNativeRequest(handle_t binding,VDM_CONNECTION connection,
+    HANDLE process,ULONG generation,HANDLE frontend,ULONG bytes,BYTE *payload,
+    HANDLE *target,HANDLE *receipt,ULONG *request)
+{
+    DWORD pid,error;
+    if(!target || !receipt || !request)return ERROR_INVALID_PARAMETER;
+    *target=*receipt=NULL;*request=0;
+    error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    return error ? error : OpenNtBaseServiceSubmitNativeRequest(connection,pid,generation,
+        frontend,bytes,payload,target,receipt,request);
+}
+error_status_t Server_FinishNativeRequest(handle_t binding,VDM_CONNECTION connection,
+    HANDLE process,ULONG generation,ULONG request,ULONG *exit_code)
+{
+    DWORD pid,error;
+    if(!exit_code)return ERROR_INVALID_PARAMETER;
+    *exit_code=0;
+    error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    return error ? error : OpenNtBaseServiceFinishNativeRequest(connection,pid,generation,
+        request,exit_code);
+}
+error_status_t Server_StartVdmWorker(handle_t binding,VDM_CONNECTION connection,
+    HANDLE process,ULONG generation,ULONG characters,WCHAR *environment,
+    ULONG show,HANDLE frontend,HANDLE *worker,HANDLE *parent,ULONG *receipt)
+{
+    DWORD pid,error;
+    if(!worker || !parent || !receipt)return ERROR_INVALID_PARAMETER;
+    *worker=*parent=NULL;*receipt=0;
+    error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    return error ? error : OpenNtBaseServiceStartVdmWorker(connection,pid,generation,
+        characters,environment,show,frontend,worker,parent,receipt);
+}
+error_status_t Server_StartNativeWorker(handle_t binding,VDM_CONNECTION connection,
+    HANDLE process,ULONG generation,HANDLE *worker)
+{
+    DWORD pid,error;
+    if(!worker)return ERROR_INVALID_PARAMETER;
+    *worker=NULL;
+    error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    return error ? error : OpenNtBaseServiceStartNativeWorker(connection,pid,generation,worker);
+}
+error_status_t Server_StartFrontend(handle_t binding,VDM_CONNECTION connection,
+    HANDLE process,ULONG generation,LONGLONG window,ULONG borrowed,
+    HANDLE *root,HANDLE *capability,HANDLE *restored)
+{
+    DWORD pid,error;
+    if(!root || !capability || !restored)return ERROR_INVALID_PARAMETER;
+    *root=*capability=*restored=NULL;
+    if(borrowed>1)return ERROR_INVALID_PARAMETER;
+    error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    return error ? error : OpenNtBaseServiceStartFrontend(connection,pid,generation,
+        (uint64_t)window,borrowed!=0,root,capability,restored);
+}
+error_status_t Server_ReturnFrontendConsole(handle_t binding,VDM_CONNECTION connection,
+    HANDLE process,ULONG generation)
+{
+    DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    return error ? error : OpenNtBaseServiceReturnFrontendConsole(connection,pid,generation);
+}
+error_status_t Server_FrontendConsoleRestored(handle_t binding,VDM_CONNECTION connection,
+    HANDLE process,ULONG generation)
+{
+    DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    return error ? error : OpenNtBaseServiceFrontendConsoleRestored(connection,pid,generation);
+}
+error_status_t Server_WaitFrontendConsoleRestored(handle_t binding,VDM_CONNECTION connection,
+    HANDLE process,unsigned long generation)
+{
+    DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    return error ? error : OpenNtBaseServiceWaitFrontendConsoleRestored(connection,pid,generation);
+}
 static BOOL idle_stopping;
 #define BASESRV_EMPTY_GRACE_MS 10000u
 #define BASE_CHECK_REPLY_BYTES 40u
@@ -259,17 +330,12 @@ error_status_t Server_BrokerProcess(handle_t binding,VDM_CONNECTION connection,H
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
     if (error) return error;
     if (!OpenNtBaseServicePeer(connection,pid,generation)) return ERROR_ACCESS_DENIED;
-    /* RPC consumes this non-inheritable, wait-only duplicate. The receiver
-     * cannot terminate or modify the server through this capability. */
+    /* RPC consumes this non-inheritable identity/wait duplicate. The receiver
+     * can verify a bootstrap pipe's server PID but cannot terminate, modify
+     * or duplicate resources from the broker through this capability. */
     if (!DuplicateHandle(GetCurrentProcess(),GetCurrentProcess(),GetCurrentProcess(),
-            server,SYNCHRONIZE,FALSE,0)) return GetLastError();
+            server,SYNCHRONIZE|PROCESS_QUERY_LIMITED_INFORMATION,FALSE,0)) return GetLastError();
     return ERROR_SUCCESS;
-}
-error_status_t Server_SubmitWorkerChannel(handle_t binding,VDM_CONNECTION connection,HANDLE process,
-    ULONG generation,HANDLE capability,HANDLE channel,WCHAR image[260])
-{
-    DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    return error ? error : OpenNtBaseServiceSubmitWorkerChannel(connection,pid,generation,capability,channel,image);
 }
 error_status_t Server_GetNextNativeCommand(handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,HANDLE *channel,HANDLE *caller_process,HANDLE *execution,HANDLE *frontend,ULONG *request)
@@ -783,7 +849,7 @@ int main(void)
         (void)OpenNtBaseServiceStop(service);
         return (int)error;
     }
-    result=RpcServerRegisterIf3(Server_vdm_service_v29_0_s_ifspec,NULL,NULL,
+    result=RpcServerRegisterIf3(Server_vdm_service_v30_0_s_ifspec,NULL,NULL,
         RPC_IF_ALLOW_SECURE_ONLY | RPC_IF_ALLOW_LOCAL_ONLY,RPC_C_LISTEN_MAX_CALLS_DEFAULT,
         (unsigned)-1,authorize,NULL);
     if (!result) {
@@ -830,7 +896,7 @@ int main(void)
         if (result) basesrv_idle_fatal("RpcMgmtWaitServerListen",result);
     }
     {
-        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v29_0_s_ifspec,NULL,TRUE);
+        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v30_0_s_ifspec,NULL,TRUE);
         if (!result && cleanup) result=cleanup;
     }
     if (idle_timer) CloseHandle(idle_timer);

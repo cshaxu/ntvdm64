@@ -59,13 +59,15 @@ try {
                     $nativeTarget=Get-Process -Id $children[0].ProcessId;$null=$nativeTarget.Handle
                 }
                 if($fault -eq 'worker'){$worker.Kill()}else{$frontend.Kill()}
-                if(!$frontend.WaitForExit(8000)){throw 'Broker did not retire workerless frontend'}
+                # The owner-approved workerless-root grace is ten seconds;
+                # frontend death still closes its worker without that grace.
+                if(!$frontend.WaitForExit(15000)){throw 'Broker did not retire workerless frontend after ten-second grace'}
                 if(!$worker.WaitForExit(8000)){throw 'Worker did not obey broker frontend-loss instruction'}
                 if(!$observerProcess.WaitForExit(10000)){throw 'Direct launcher failed to return'}
                 $text=Get-Content $report -Raw
                 if($text -notmatch '(?m)^result=exited\r?$'){throw 'Timeout is not task completion'}
                 $exit=[regex]::Match($text,'(?m)^exit=0x([0-9a-f]+)\r?$')
-                if(!$exit.Success -or [Convert]::ToUInt32($exit.Groups[1].Value,16) -eq 0){throw 'Fault was reported as success'}
+                if(!$exit.Success -or [Convert]::ToUInt32($exit.Groups[1].Value,16) -ne 1067){throw 'Worker/frontend failure did not return the broker task failure 1067'}
                 # Nothing remains registered: now, and only now, empty grace applies.
                 if(!$broker.WaitForExit(15000)){throw 'Empty broker failed to retire after its grace'}
                 Write-Output "PASS $kind $fault loss: broker-ordered peer retirement, failed direct receipt, empty service retirement"

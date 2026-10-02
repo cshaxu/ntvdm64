@@ -7,7 +7,6 @@
 #include <wchar.h>
 #include "ntsrv-exe/opennt/include/base_client.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
-#include "run16-exe/worker_launch.h"
 #include "worker-base/connection.h"
 #include "ntw32-exe/next_command.h"
 #include "interface/native_request_client.h"
@@ -444,71 +443,12 @@ static int native_reservation_rpc(void)
     return 0;
 }
 
-static int native_worker_startup(void)
-{
-    WCHAR image[MAX_PATH],command[MAX_PATH+64],pipe_name[128];uint64_t reservation=0;
-    HANDLE capability=NULL,ready=NULL,server=NULL,pipe=NULL;DWORD generation=0,read=0;char marker=0;
-    HANDLE launch_server=NULL,launch_client=NULL;
-    STARTUPINFOW startup={sizeof(startup)};PROCESS_INFORMATION worker={0};DWORD code=0,error;
-    REQUIRE(OpenNtBaseClientConnectCurrent()==ERROR_SUCCESS);
-    REQUIRE(OpenNtBaseClientReserveNativeWorker(&reservation)==ERROR_SUCCESS);
-    REQUIRE(GetModuleFileNameW(NULL,image,MAX_PATH));
-    startup.dwFlags=STARTF_USESHOWWINDOW;startup.wShowWindow=SW_HIDE;
-    REQUIRE(swprintf_s(command,ARRAYSIZE(command),L"\"%ls\" --native-worker-child",image)>0);
-    error=run16_worker_prepare(0,image,command,NULL,CREATE_NEW_CONSOLE,&startup,&worker);
-    REQUIRE(error==ERROR_INVALID_PARAMETER && !worker.hProcess && !worker.hThread);
-    /* A rejected Prepare must reclaim the never-resumed process and return
-     * no live handles; it must not consume the legitimate reservation. */
-    error=run16_worker_prepare(UINT64_MAX,image,command,NULL,CREATE_NEW_CONSOLE,&startup,&worker);
-    REQUIRE(error!=ERROR_SUCCESS && !worker.hProcess && !worker.hThread);
-    /* Both kinds use the launcher's actual suspended-create/Prepare transaction. */
-    error=run16_worker_prepare(reservation,image,command,NULL,CREATE_NEW_CONSOLE,&startup,&worker);
-    REQUIRE(error==ERROR_SUCCESS && worker.hProcess && worker.hThread);
-    REQUIRE(WaitForSingleObject(worker.hProcess,0)==WAIT_TIMEOUT);
-    capability=CreateEventW(NULL,TRUE,FALSE,NULL);ready=CreateEventW(NULL,TRUE,FALSE,NULL);
-    REQUIRE(capability && ready && !OpenNtBaseClientRegisterFrontendRoot(capability));
-    REQUIRE(swprintf_s(pipe_name,ARRAYSIZE(pipe_name),L"\\\\.\\pipe\\worker-base-native-%lu",GetCurrentProcessId())>0);
-    server=CreateNamedPipeW(pipe_name,PIPE_ACCESS_DUPLEX|FILE_FLAG_FIRST_PIPE_INSTANCE,
-        PIPE_TYPE_BYTE|PIPE_WAIT|PIPE_REJECT_REMOTE_CLIENTS,1,1024,1024,0,NULL);
-    REQUIRE(server!=INVALID_HANDLE_VALUE);
-    pipe=CreateFileW(pipe_name,GENERIC_READ|GENERIC_WRITE,0,NULL,OPEN_EXISTING,0,NULL);
-    REQUIRE(pipe!=INVALID_HANDLE_VALUE);
-    REQUIRE(ConnectNamedPipe(server,NULL) || GetLastError()==ERROR_PIPE_CONNECTED);
-    REQUIRE(!OpenNtBaseClientAttachFrontend(pipe,&generation,ready) && generation);
-    CloseHandle(pipe);pipe=NULL;
-    REQUIRE(ResumeThread(worker.hThread)==1);
-    REQUIRE(ReadFile(server,&marker,1,&read,NULL) && read==1 && marker=='N');
-    REQUIRE(swprintf_s(pipe_name,ARRAYSIZE(pipe_name),L"\\\\.\\pipe\\worker-native-launch-%lu",GetCurrentProcessId())>0);
-    launch_server=CreateNamedPipeW(pipe_name,PIPE_ACCESS_DUPLEX|FILE_FLAG_FIRST_PIPE_INSTANCE,
-        PIPE_TYPE_BYTE|PIPE_WAIT|PIPE_REJECT_REMOTE_CLIENTS,1,1024,1024,0,NULL);
-    REQUIRE(launch_server!=INVALID_HANDLE_VALUE);
-    launch_client=CreateFileW(pipe_name,GENERIC_READ|GENERIC_WRITE,0,NULL,OPEN_EXISTING,0,NULL);
-    REQUIRE(launch_client!=INVALID_HANDLE_VALUE);
-    REQUIRE(ConnectNamedPipe(launch_server,NULL) || GetLastError()==ERROR_PIPE_CONNECTED);
-    REQUIRE(!OpenNtBaseClientSubmitWorkerChannel(capability,launch_server,L"fixture.exe"));
-    CloseHandle(launch_server);launch_server=NULL;
-    REQUIRE(WriteFile(launch_client,"L",1,&read,NULL) && read==1);
-    REQUIRE(ReadFile(launch_client,&marker,1,&read,NULL) && read==1 && marker=='R');
-    CloseHandle(launch_client);
-    if(WaitForSingleObject(worker.hProcess,10000)!=WAIT_OBJECT_0) {
-        TerminateProcess(worker.hProcess,99);WaitForSingleObject(worker.hProcess,5000);
-        CloseHandle(worker.hThread);CloseHandle(worker.hProcess);return 1;
-    }
-    REQUIRE(GetExitCodeProcess(worker.hProcess,&code) && code==73);
-    CloseHandle(server);CloseHandle(ready);CloseHandle(capability);
-    CloseHandle(worker.hThread);CloseHandle(worker.hProcess);
-    error=OpenNtBaseClientReleaseWorker(reservation);
-    REQUIRE(!error || error==ERROR_NOT_FOUND);
-    OpenNtBaseClientDisconnectCurrent();
-    puts("PASS shared launcher native worker: rollback, suspended creation, Prepare, hidden Console, authenticated frontend and direct worker channel, completion");
-    return 0;
-}
 
 static int ntw32_reuse_child(char **argv)
 {
     HANDLE frontend=(HANDLE)(ULONG_PTR)strtoul(argv[2],NULL,16);
     HANDLE execution=(HANDLE)(ULONG_PTR)strtoul(argv[3],NULL,16);
-    DWORD expected=(DWORD)strtoul(argv[4],NULL,10),code;
+    DWORD expected=(DWORD)strtoul(argv[4],NULL,10),code,request=0;
     HANDLE worker=NULL,target=NULL,receipt=NULL,foreign=CreateEventW(NULL,TRUE,FALSE,NULL);
     WCHAR native[MAX_PATH],directory[MAX_PATH],command[MAX_PATH+64],*environment;
     run16_native_start start={0};uint64_t reservation=0;
@@ -525,10 +465,11 @@ static int ntw32_reuse_child(char **argv)
     environment=GetEnvironmentStringsW();REQUIRE(environment);
     start.application=native;start.command=command;start.directory=directory;
     start.environment=environment;start.console_mask=7;
-    REQUIRE(!run16_native_worker_request_submit(worker,frontend,&start,&target,&receipt));
+    REQUIRE(!run16_native_request_submit(frontend,&start,&target,&receipt,&request));
     REQUIRE(WaitForSingleObject(target,5000)==WAIT_OBJECT_0);
     REQUIRE(GetExitCodeProcess(target,&code) && code==73);
     REQUIRE(WaitForSingleObject(receipt,5000)==WAIT_OBJECT_0);
+    REQUIRE(!run16_native_request_finish(request,&code) && code==73);
     REQUIRE(WaitForSingleObject(worker,0)==WAIT_TIMEOUT);
     CloseHandle(target);CloseHandle(receipt);CloseHandle(worker);
     {
@@ -639,35 +580,31 @@ static int ntw32_execution_rpc(void)
 {
     WCHAR image[MAX_PATH],command[MAX_PATH+64],directory[MAX_PATH],native[MAX_PATH];
     WCHAR *slash,*environment;
-    STARTUPINFOW startup={sizeof(startup)};PROCESS_INFORMATION worker={0};
-    uint64_t reservation=0;DWORD error=0,code=0,deadline,index;
+    HANDLE worker=NULL;DWORD error=0,code=0,deadline,index;
     HANDLE capability=NULL;
     REQUIRE(!OpenNtBaseClientConnectCurrent());
     {
         HANDLE selected=NULL;
         REQUIRE(OpenNtBaseClientSelectNativeWorker(&selected)==ERROR_NOT_FOUND && !selected);
     }
-    REQUIRE(!OpenNtBaseClientReserveNativeWorker(&reservation));
     REQUIRE(GetModuleFileNameW(NULL,image,MAX_PATH));
     slash=wcsrchr(image,L'\\');REQUIRE(slash);
     REQUIRE(!wcscpy_s(slash+1,MAX_PATH-(size_t)(slash+1-image),L"ntw32.exe"));
     REQUIRE(swprintf_s(command,ARRAYSIZE(command),L"\"%ls\"",image)>0);
-    startup.dwFlags=STARTF_USESHOWWINDOW;startup.wShowWindow=SW_HIDE;
-    REQUIRE(!run16_worker_prepare(reservation,image,command,NULL,CREATE_NEW_CONSOLE,&startup,&worker));
     capability=CreateEventW(NULL,TRUE,FALSE,NULL);
     REQUIRE(capability && !OpenNtBaseClientRegisterFrontendRoot(capability));
     /* This standalone fixture is its own frontend root. A direct launcher
      * may no longer publish the outer Console identity. */
     REQUIRE(!OpenNtBaseClientReportCurrentConsoleMembers());
+    REQUIRE(!OpenNtBaseClientStartNativeWorker(&worker) && worker);
     REQUIRE(GetCurrentDirectoryW(MAX_PATH,directory));
     REQUIRE(GetSystemDirectoryW(native,MAX_PATH));
     REQUIRE(!wcscat_s(native,MAX_PATH,L"\\cmd.exe"));
     environment=GetEnvironmentStringsW();REQUIRE(environment);
-    REQUIRE(ResumeThread(worker.hThread)==1);
     for(index=0;index<2;++index) {
         run16_native_start start={0};
         HANDLE output=NULL,writer=NULL,target=NULL,receipt=NULL;
-        DWORD bytes=0;char text[128]={0},expected[32];
+        DWORD bytes=0,request=0;char text[128]={0},expected[32];
         REQUIRE(CreatePipe(&output,&writer,NULL,0));
         REQUIRE(swprintf_s(command,ARRAYSIZE(command),L"\"%ls\" /d /c \"echo NTW32-EXEC-%lu&exit /b %lu\"",
             native,index,index ? 19ul : 37ul)>0);
@@ -676,14 +613,14 @@ static int ntw32_execution_rpc(void)
         start.standard[1]=start.standard[2]=writer;
         deadline=GetTickCount()+5000;
         do {
-            error=run16_native_worker_request_submit(worker.hProcess,capability,&start,&target,&receipt);
+            error=run16_native_request_submit(capability,&start,&target,&receipt,&request);
             if(error==ERROR_NOT_READY)Sleep(10);
         }while(error==ERROR_NOT_READY && (LONG)(deadline-GetTickCount())>0);
         if(error || !target || !receipt)
             fprintf(stderr,"native submit error=%lu target=%p receipt=%p worker=%lu\n",
-                (unsigned long)error,target,receipt,(unsigned long)worker.dwProcessId);
+                (unsigned long)error,target,receipt,(unsigned long)GetProcessId(worker));
         REQUIRE(!error && target && receipt);
-        REQUIRE(GetProcessId(target)!=worker.dwProcessId);
+        REQUIRE(GetProcessId(target)!=GetProcessId(worker));
         CloseHandle(writer);
         {
             DWORD target_wait=WaitForSingleObject(target,5000);
@@ -692,16 +629,17 @@ static int ntw32_execution_rpc(void)
                 (void)GetExitCodeProcess(target,&target_code);
                 fprintf(stderr,"native target wait=%lu pid=%lu worker=%lu status=%lu\n",
                     (unsigned long)target_wait,(unsigned long)GetProcessId(target),
-                    (unsigned long)worker.dwProcessId,(unsigned long)target_code);
+                    (unsigned long)GetProcessId(worker),(unsigned long)target_code);
             }
             REQUIRE(target_wait==WAIT_OBJECT_0);
         }
         REQUIRE(GetExitCodeProcess(target,&code) && code==(index ? 19u : 37u));
         REQUIRE(WaitForSingleObject(receipt,5000)==WAIT_OBJECT_0);
+        REQUIRE(!run16_native_request_finish(request,&code) && code==(index ? 19u : 37u));
         sprintf_s(expected,sizeof(expected),"NTW32-EXEC-%lu",index);
         REQUIRE(ReadFile(output,text,sizeof(text)-1,&bytes,NULL) && bytes && strstr(text,expected));
         REQUIRE(!ReadFile(output,text,sizeof(text)-1,&bytes,NULL) && GetLastError()==ERROR_BROKEN_PIPE);
-        REQUIRE(WaitForSingleObject(worker.hProcess,0)==WAIT_TIMEOUT);
+        REQUIRE(WaitForSingleObject(worker,0)==WAIT_TIMEOUT);
         CloseHandle(output);CloseHandle(target);CloseHandle(receipt);
         if(!index) {
             WCHAR missing[MAX_PATH];HANDLE failed=NULL,failed_receipt=NULL;
@@ -711,14 +649,14 @@ static int ntw32_execution_rpc(void)
             REQUIRE(GetFileAttributesW(missing)==INVALID_FILE_ATTRIBUTES && GetLastError()==ERROR_FILE_NOT_FOUND);
             start.application=missing;start.console_mask=7;
             start.standard[0]=start.standard[1]=start.standard[2]=NULL;
-            error=run16_native_worker_request_submit(worker.hProcess,capability,&start,&failed,&failed_receipt);
+            error=run16_native_request_submit(capability,&start,&failed,&failed_receipt,&request);
             REQUIRE(error==ERROR_FILE_NOT_FOUND && !failed && !failed_receipt);
-            REQUIRE(WaitForSingleObject(worker.hProcess,0)==WAIT_TIMEOUT);
+            REQUIRE(WaitForSingleObject(worker,0)==WAIT_TIMEOUT);
         }
     }
     FreeEnvironmentStringsW(environment);
-    REQUIRE(!ntw32_reuse_launcher(capability,worker.dwProcessId));
-    REQUIRE(WaitForSingleObject(worker.hProcess,0)==WAIT_TIMEOUT);
+    REQUIRE(!ntw32_reuse_launcher(capability,GetProcessId(worker)));
+    REQUIRE(WaitForSingleObject(worker,0)==WAIT_TIMEOUT);
     {
         WCHAR name[128];HANDLE server,client,ready,selected=NULL;
         DWORD request_id=0,generation=0,bytes=0;
@@ -726,7 +664,7 @@ static int ntw32_execution_rpc(void)
         /* Public run16 already requested this route before returning. Do not
          * mask a lost request by recreating it from the fixture connection. */
         REQUIRE(!OpenNtBaseClientFrontendRequest(&request_id,&selected));
-        REQUIRE(GetProcessId(selected)==worker.dwProcessId);CloseHandle(selected);
+        REQUIRE(GetProcessId(selected)==GetProcessId(worker));CloseHandle(selected);
         swprintf_s(name,ARRAYSIZE(name),L"\\\\.\\pipe\\ntw32-runtime-presentation-%lu",GetCurrentProcessId());
         server=CreateNamedPipeW(name,PIPE_ACCESS_DUPLEX|FILE_FLAG_OVERLAPPED|FILE_FLAG_FIRST_PIPE_INSTANCE,
             PIPE_TYPE_BYTE|PIPE_WAIT|PIPE_REJECT_REMOTE_CLIENTS,1,32768,32768,0,NULL);
@@ -746,7 +684,7 @@ static int ntw32_execution_rpc(void)
         reply.error=ERROR_NOT_READY;
         REQUIRE(WriteFile(client,&reply,offsetof(console_io_reply,data),&bytes,NULL) &&
             bytes==offsetof(console_io_reply,data));
-        Sleep(200);REQUIRE(WaitForSingleObject(worker.hProcess,0)==WAIT_TIMEOUT);
+        Sleep(200);REQUIRE(WaitForSingleObject(worker,0)==WAIT_TIMEOUT);
         CloseHandle(client);CloseHandle(server);CloseHandle(ready);
     }
     {
@@ -760,10 +698,13 @@ static int ntw32_execution_rpc(void)
         REQUIRE(!pending);
     }
     /* Fixture shutdown is explicit, not launcher-death or target completion. */
-    REQUIRE(TerminateProcess(worker.hProcess,0) && WaitForSingleObject(worker.hProcess,5000)==WAIT_OBJECT_0);
-    CloseHandle(worker.hThread);CloseHandle(worker.hProcess);CloseHandle(capability);
-    error=OpenNtBaseClientReleaseWorker(reservation);
-    REQUIRE(!error || error==ERROR_NOT_FOUND);
+    {
+        HANDLE terminate=OpenProcess(PROCESS_TERMINATE|SYNCHRONIZE,FALSE,GetProcessId(worker));
+        REQUIRE(terminate && TerminateProcess(terminate,0) &&
+            WaitForSingleObject(terminate,5000)==WAIT_OBJECT_0);
+        CloseHandle(terminate);
+    }
+    CloseHandle(worker);CloseHandle(capability);
     OpenNtBaseClientDisconnectCurrent();
     puts("PASS actual NTW32: independent entry, authenticated requests, exact 37/19 results, alias/EOF, failed launch/reuse; second launcher returns 73 and public run16 returns 61 through existing worker; forged context rejected; worker survives launcher");
     return 0;
@@ -781,39 +722,9 @@ int main(int argc,char **argv)
     ULONG expected=argc==2 && !lstrcmpA(argv[1],"--existing")?0:1;
     if (argc==5 && !lstrcmpA(argv[1],"--ntw32-reuse-child")) return ntw32_reuse_child(argv);
     if (argc==2 && !lstrcmpA(argv[1],"--native-reservation")) return native_reservation_rpc();
-    if (argc==2 && !lstrcmpA(argv[1],"--native-worker-startup")) return native_worker_startup();
+    if (argc==2 && !lstrcmpA(argv[1],"--native-worker-startup")) return ntw32_execution_rpc();
     if (argc==2 && !lstrcmpA(argv[1],"--ntw32-execution")) return ntw32_execution_rpc();
     if (argc==2 && !lstrcmpA(argv[1],"--ntw32-public-startup")) return ntw32_public_startup();
-    if (argc==2 && !lstrcmpA(argv[1],"--native-worker-child")) {
-        DWORD ids[4],generation=0,written=0;CONSOLE_SCREEN_BUFFER_INFO info;HANDLE output;
-        HANDLE pipe=NULL,frontend=NULL,ready=NULL,capability=NULL;
-        REQUIRE(GetConsoleProcessList(ids,4)==1 && ids[0]==GetCurrentProcessId());
-        output=CreateFileW(L"CONOUT$",GENERIC_READ|GENERIC_WRITE,
-            FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,OPEN_EXISTING,0,NULL);
-        REQUIRE(output!=INVALID_HANDLE_VALUE && GetConsoleScreenBufferInfo(output,&info));
-        CloseHandle(output);
-        REQUIRE(worker_base_connect()==ERROR_SUCCESS);
-        REQUIRE(!OpenNtBaseClientTakeFrontend(&pipe,&frontend,&generation,&ready));
-        REQUIRE(pipe && frontend && ready && generation);
-        REQUIRE(!OpenNtBaseClientWorkerFrontendCapability(&capability) && capability);
-        REQUIRE(WriteFile(pipe,"N",1,&written,NULL) && written==1);
-        {
-            ntw32_next_command native_command={0};
-            HANDLE root=NULL;DWORD root_generation=0,error;
-            char marker=0;
-            error=ntw32_get_next_command(&native_command);
-            REQUIRE(!error && native_command.channel && native_command.sender && native_command.execution && native_command.frontend && native_command.request);
-            REQUIRE(GetProcessId(native_command.sender)==GetProcessId(frontend));
-            REQUIRE(!OpenNtBaseClientRetainFrontendRoot(native_command.frontend,&root,&root_generation));
-            REQUIRE(GetProcessId(root)==GetProcessId(frontend) && root_generation==generation);
-            REQUIRE(ReadFile(native_command.channel,&marker,1,&written,NULL) && written==1 && marker=='L');
-            REQUIRE(WriteFile(native_command.channel,"R",1,&written,NULL) && written==1);
-            REQUIRE(!ntw32_complete_next_command(native_command.request,0));
-            CloseHandle(root);ntw32_dispose_next_command(&native_command);
-        }
-        CloseHandle(capability);CloseHandle(ready);CloseHandle(frontend);CloseHandle(pipe);
-        worker_base_disconnect();return 73;
-    }
     if (argc==2 && !lstrcmpA(argv[1],"--reservation-child")) return reservation_child(FALSE);
     if (argc==2 && !lstrcmpA(argv[1],"--reservation-parent")) return reservation_parent(FALSE);
     if (argc==2 && !lstrcmpA(argv[1],"--frontend-cancel-child")) return reservation_child(2);

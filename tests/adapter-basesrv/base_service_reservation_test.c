@@ -2,6 +2,7 @@
 #include "basesrv.h"
 #include <base_command.h>
 #include "ntsrv-exe/transport/vdm_receipt.h"
+#include "ntsrv-exe/transport/frontend_admission.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -12,14 +13,33 @@ extern PWOWHEAD WOWHead;
 /* Keep the older focused fixture readable while exercising the production
  * WIN32RECORD transaction.  One accepted test channel has one request ID. */
 static DWORD test_native_request;
-#define OpenNtBaseServiceSubmitWorkerChannel(a,b,c,d,e) \
-    OpenNtBaseServiceSubmitWorkerChannel(a,b,c,d,e,L"fixture.exe")
+#define queue_native_fixture(a,b,c,d,e) \
+    OpenNtBaseServiceQueueNativeChannel(a,b,c,d,e,L"fixture.exe",GetCurrentProcessId())
 #define OpenNtBaseServiceTakeWorkerChannel(a,b,c,d,e,f,g) \
     OpenNtBaseServiceTakeWorkerChannel(a,b,c,d,e,f,g,&test_native_request)
 #define OpenNtBaseServiceCompleteWorkerChannel(a,b,c) \
     OpenNtBaseServiceCompleteWorkerChannel(a,b,c,test_native_request,37)
 
 #define CHECK(value) do { if (!(value)) { fprintf(stderr,"FAIL %d\\n",__LINE__);return 1; } } while (0)
+
+/* This in-process fixture is the trusted service producer, not an RPC client.
+ * Seed the same exact-object admission used by StartFrontend. Keep real
+ * ungranted registration coverage in the broker bootstrap RPC fixture. */
+static DWORD fixture_register_root(OPENNT_BASE_CONNECTION *root,DWORD pid,
+    DWORD generation,HANDLE capability)
+{
+    HANDLE process=NULL;
+    DWORD error=OpenNtBaseServiceRetainPeer(root,pid,generation,&process);
+    if(error)return error;
+    error=broker_frontend_admit(root,pid,generation,process,capability,capability,capability);
+    if(!error) {
+        error=OpenNtBaseServiceRegisterFrontendRoot(root,pid,generation,capability);
+        broker_frontend_clear_admission(root);
+    }
+    CloseHandle(process);
+    return error;
+}
+#define OpenNtBaseServiceRegisterFrontendRoot(a,b,c,d) fixture_register_root(a,b,c,d)
 
 static int frontend_pair(HANDLE *server,HANDLE *client)
 {
@@ -293,9 +313,12 @@ static int frontend_authority(void)
         CHECK(CreateProcessA(NULL,command,NULL,NULL,FALSE,CREATE_SUSPENDED|CREATE_NO_WINDOW,
             NULL,NULL,&startup,&child));
         CHECK(!OpenNtBaseServiceConnect(service,child.hProcess,&root,&root_generation));
-        CHECK(!OpenNtBaseServiceRegisterFrontendRoot(root,child.dwProcessId,root_generation,capability));
+        CHECK(!broker_frontend_admit(launcher,GetCurrentProcessId(),launcher_generation,
+            child.hProcess,capability,retire,restored));
+        CHECK(!(OpenNtBaseServiceRegisterFrontendRoot)(root,child.dwProcessId,root_generation,capability));
         CHECK(!OpenNtBaseServiceRegisterFrontendLease(root,child.dwProcessId,root_generation,
             1234,GetCurrentProcessId(),borrowed,retire,restored));
+        broker_frontend_clear_admission(launcher);
         CHECK(OpenNtBaseServiceWorkerShutdownEvent(root,child.dwProcessId,root_generation,&shutdown)==ERROR_ACCESS_DENIED);
         CHECK(!shutdown);
         CHECK(!OpenNtBaseServiceRetireExpiredFrontends(service));
@@ -346,6 +369,18 @@ static int frontend_authority(void)
         } else {
         /* No LeaseReady call: the obsolete idle gate must not pin this root. */
         CHECK(!OpenNtBaseServiceDisconnect(launcher));launcher=NULL;
+        CHECK(!OpenNtBaseServiceRetireExpiredFrontends(service));
+        CHECK(!OpenNtBaseServiceRetireWorkerlessFrontend(root,child.dwProcessId,root_generation,&closing) && !closing);
+        CHECK(!OpenNtBaseServiceNextFrontendDeadline(service,&deadline) && deadline);
+        {
+            HANDLE timer=CreateWaitableTimerW(NULL,TRUE,NULL);
+            LARGE_INTEGER due;ULONGLONG now=GetTickCount64();
+            CHECK(timer && deadline>now && deadline<=now+10000);
+            due.QuadPart=-(LONGLONG)(deadline-now+1)*10000;
+            CHECK(SetWaitableTimer(timer,&due,0,NULL,NULL,FALSE));
+            CHECK(WaitForSingleObject(timer,15000)==WAIT_OBJECT_0);
+            CloseHandle(timer);
+        }
         CHECK(!OpenNtBaseServiceRetireExpiredFrontends(service));
         CHECK(!OpenNtBaseServiceRetireWorkerlessFrontend(root,child.dwProcessId,root_generation,&closing) && closing);
         CHECK(!OpenNtBaseServiceNextFrontendDeadline(service,&deadline) && !deadline);
@@ -533,15 +568,15 @@ int main(int argc,char **argv)
             {
                 HANDLE request_pipe=NULL,sender=NULL,execution=NULL,io_capability=NULL;
                 char actual[4]={0};DWORD count=0,completed_request=0;
-                CHECK(OpenNtBaseServiceSubmitWorkerChannel(launcher,GetCurrentProcessId(),
+                CHECK(queue_native_fixture(launcher,GetCurrentProcessId(),
                     launcherGeneration+1,capability,server)==ERROR_ACCESS_DENIED);
-                CHECK(OpenNtBaseServiceSubmitWorkerChannel(launcher,GetCurrentProcessId(),
+                CHECK(queue_native_fixture(launcher,GetCurrentProcessId(),
                     launcherGeneration,foreign,server)==ERROR_ACCESS_DENIED);
-                CHECK(OpenNtBaseServiceSubmitWorkerChannel(launcher,GetCurrentProcessId(),
+                CHECK(queue_native_fixture(launcher,GetCurrentProcessId(),
                     launcherGeneration,capability,client)==ERROR_INVALID_PARAMETER);
-                CHECK(!OpenNtBaseServiceSubmitWorkerChannel(launcher,GetCurrentProcessId(),
+                CHECK(!queue_native_fixture(launcher,GetCurrentProcessId(),
                     launcherGeneration,capability,server));
-                CHECK(OpenNtBaseServiceSubmitWorkerChannel(launcher,GetCurrentProcessId(),
+                CHECK(queue_native_fixture(launcher,GetCurrentProcessId(),
                     launcherGeneration,capability,server)==ERROR_BUSY);
                 CHECK(OpenNtBaseServiceTakeWorkerChannel(root,laterChild.dwProcessId,root_generation,
                     &request_pipe,&sender,&execution,&io_capability)==ERROR_ACCESS_DENIED);
@@ -623,7 +658,7 @@ int main(int argc,char **argv)
             CHECK(workerInfoCount==1 && workerInfo.kind==2 && !workerInfo.stack_depth &&
                 workerInfo.process_id==child.dwProcessId && workerInfo.sequence==workerGeneration);
             old_generation=root_generation;
-            CHECK(!OpenNtBaseServiceSubmitWorkerChannel(launcher,GetCurrentProcessId(),
+            CHECK(!queue_native_fixture(launcher,GetCurrentProcessId(),
                 launcherGeneration,capability,server));
             CHECK(!OpenNtBaseServiceDisconnect(root));root=NULL;
             {
@@ -766,21 +801,23 @@ int main(int argc,char **argv)
         CHECK(!OpenNtBaseServicePrepareWorker(launcher,GetCurrentProcessId(),launcherGeneration,reservation,laterChild.hProcess));
         CHECK(!OpenNtBaseServiceConnect(service,laterChild.hProcess,&worker,&workerGeneration));
         CHECK(!frontend_pair(&server,&client));
-        CHECK(OpenNtBaseServiceSubmitWorkerChannel(launcher,GetCurrentProcessId(),launcherGeneration+1,
+        CHECK(queue_native_fixture(launcher,GetCurrentProcessId(),launcherGeneration+1,
             capability,server)==ERROR_ACCESS_DENIED);
-        CHECK(OpenNtBaseServiceSubmitWorkerChannel(launcher,GetCurrentProcessId(),launcherGeneration,
+        CHECK(queue_native_fixture(launcher,GetCurrentProcessId(),launcherGeneration,
             wrong,server)==ERROR_ACCESS_DENIED);
-        CHECK(OpenNtBaseServiceSubmitWorkerChannel(launcher,GetCurrentProcessId(),launcherGeneration,
+        CHECK(queue_native_fixture(launcher,GetCurrentProcessId(),launcherGeneration,
             capability,wrong)==ERROR_INVALID_PARAMETER);
-        CHECK(OpenNtBaseServiceSubmitWorkerChannel(launcher,GetCurrentProcessId(),launcherGeneration,
+        CHECK(queue_native_fixture(launcher,GetCurrentProcessId(),launcherGeneration,
             capability,client)==ERROR_INVALID_PARAMETER);
-        CHECK(OpenNtBaseServiceSubmitWorkerChannel(later,child.dwProcessId,laterGeneration,
-            capability,server)==ERROR_INVALID_PARAMETER); /* Not the pipe creator. */
+        CHECK(OpenNtBaseServiceQueueNativeChannel(later,child.dwProcessId,laterGeneration,
+            capability,server,L"fixture.exe",child.dwProcessId)==ERROR_INVALID_PARAMETER);
+        /* The broker, not the launcher, now creates the private pair. Reject
+         * a claimed producer PID which does not own its actual pipe ends. */
         CHECK(!OpenNtBaseServiceAcquireConsoleContext(launcher,GetCurrentProcessId(),launcherGeneration,
             capability,&expected));
-        CHECK(!OpenNtBaseServiceSubmitWorkerChannel(launcher,GetCurrentProcessId(),launcherGeneration,
+        CHECK(!queue_native_fixture(launcher,GetCurrentProcessId(),launcherGeneration,
             capability,server));
-        CHECK(OpenNtBaseServiceSubmitWorkerChannel(launcher,GetCurrentProcessId(),launcherGeneration,
+        CHECK(queue_native_fixture(launcher,GetCurrentProcessId(),launcherGeneration,
             capability,server)==ERROR_BUSY);
         CHECK(OpenNtBaseServiceTakeWorkerChannel(launcher,GetCurrentProcessId(),launcherGeneration,
             &taken,&sender,&execution,&io)==ERROR_ACCESS_DENIED && !taken && !sender && !execution);
@@ -810,7 +847,7 @@ int main(int argc,char **argv)
         {HANDLE selected=NULL;CHECK(!OpenNtBaseServiceSelectNativeWorker(launcher,GetCurrentProcessId(),launcherGeneration,&selected));
          CHECK(GetProcessId(selected)==laterChild.dwProcessId);CloseHandle(selected);}
         CHECK(!frontend_pair(&server,&client));
-        CHECK(!OpenNtBaseServiceSubmitWorkerChannel(launcher,GetCurrentProcessId(),launcherGeneration,capability,server));
+        CHECK(!queue_native_fixture(launcher,GetCurrentProcessId(),launcherGeneration,capability,server));
         CloseHandle(server);server=NULL;
         CHECK(!OpenNtBaseServiceDisconnect(launcher));launcher=NULL;
         CHECK(!ReadFile(client,&byte,1,&transferred,NULL) && GetLastError()==ERROR_BROKEN_PIPE);
@@ -825,11 +862,11 @@ int main(int argc,char **argv)
         {HANDLE selected=NULL;CHECK(!OpenNtBaseServiceSelectNativeWorker(launcher,GetCurrentProcessId(),launcherGeneration,&selected));
          CHECK(GetProcessId(selected)==laterChild.dwProcessId);CloseHandle(selected);}
         CHECK(!frontend_pair(&server,&client));
-        CHECK(!OpenNtBaseServiceSubmitWorkerChannel(launcher,GetCurrentProcessId(),launcherGeneration,capability,server));
+        CHECK(!queue_native_fixture(launcher,GetCurrentProcessId(),launcherGeneration,capability,server));
         CloseHandle(server);server=NULL;
         CHECK(!OpenNtBaseServiceDisconnect(later));later=NULL;
         CHECK(!ReadFile(client,&byte,1,&transferred,NULL) && GetLastError()==ERROR_BROKEN_PIPE);
-        CHECK(OpenNtBaseServiceSubmitWorkerChannel(launcher,GetCurrentProcessId(),launcherGeneration,
+        CHECK(queue_native_fixture(launcher,GetCurrentProcessId(),launcherGeneration,
             capability,client)==ERROR_INVALID_PARAMETER);
         CloseHandle(client);
         CHECK(!OpenNtBaseServiceDisconnect(launcher));
@@ -1378,8 +1415,10 @@ int main(int argc,char **argv)
     {
         DWORD members[2]={laterChild.dwProcessId,child.dwProcessId};
         laterFrontend=CreateEventW(NULL,TRUE,FALSE,NULL);CHECK(laterFrontend);
-        CHECK(!OpenNtBaseServiceRegisterFrontendRoot(later,laterChild.dwProcessId,
-            laterGeneration,laterFrontend));
+        { DWORD rootError=OpenNtBaseServiceRegisterFrontendRoot(later,laterChild.dwProcessId,
+              laterGeneration,laterFrontend);
+          if(rootError)fprintf(stderr,"later root admission error=%lu\n",rootError);
+          CHECK(rootError==ERROR_SUCCESS); }
         CHECK(OpenNtBaseServiceReportConsoleMembers(later,laterChild.dwProcessId,
             laterGeneration,2,members)==ERROR_SUCCESS);
     }

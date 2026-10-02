@@ -25,8 +25,10 @@ void ntw32_capture_end(ntw32_capture *);
  * Visible presentation and its bitmap font remain entirely NTKVM-owned. */
 DWORD ntw32_screen_apply(HANDLE,const CONSOLE_SCREEN_BUFFER_INFOEX *,const CONSOLE_CURSOR_INFO *);
 DWORD ntw32_cells_write(HANDLE,DWORD,const CHAR_INFO *,DWORD);
-/* Returns attached members excluding this backend; caller frees *members with
- * HeapFree(GetProcessHeap(),0,...). Failure never reports an empty session. */
+/* One completion-boundary resource check, not a task census. The caller holds
+ * the signalled direct target HANDLE, pinning completed_target against reuse.
+ * Failure or any other live attachment prevents automatic CloseOnExit. */
+BOOL ntw32_console_quiescent(DWORD completed_target);
 /* Explicit management shutdown only. Detach this carrier, request normal
  * Console close, and confirm the owned window disappeared before success. */
 DWORD ntw32_console_close(void);

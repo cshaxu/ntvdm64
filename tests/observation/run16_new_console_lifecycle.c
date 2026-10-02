@@ -25,6 +25,7 @@ static void collect_children(DWORD parent, child_watch watches[8], unsigned *cou
         if (entry.th32ParentProcessID != parent ||
             (_wcsicmp(entry.szExeFile, L"ntvdm.exe") &&
              _wcsicmp(entry.szExeFile, L"ntsrv.exe") &&
+             _wcsicmp(entry.szExeFile, L"ntw32.exe") &&
              _wcsicmp(entry.szExeFile, L"ntkvm.exe"))) continue;
         for (index = 0; index < *count; ++index)
             if (watches[index].pid == entry.th32ProcessID) break;
@@ -160,9 +161,11 @@ int wmain(int argc, WCHAR **argv)
     FILE *report;
     BOOL enumeration, passed;
     BOOL wow_mode = argc == 5 && !wcscmp(argv[4], L"--wow");
+    BOOL retained_native = argc == 8 && !wcscmp(argv[7], L"--native-retained");
+    BOOL native_mode = retained_native || (argc == 8 && !wcscmp(argv[7], L"--native"));
     wow_frontier frontier = {0};
     DWORD console_attach_error = ERROR_SUCCESS;
-    if (argc != 4 && !wow_mode && argc != 6 && argc != 7) return 64; /* root, command, report, [--wow | exit, workers, [frontend]] */
+    if (argc != 4 && !wow_mode && argc != 6 && argc != 7 && !native_mode) return 64; /* root, command, report, [--wow | exit, workers, [frontend, --native]] */
     if (argc >= 6) {
         WCHAR *end;
         unsigned __int64 value = _wcstoui64(argv[4], &end, 10);
@@ -171,7 +174,7 @@ int wmain(int argc, WCHAR **argv)
         if (wcscmp(argv[5], L"0") && wcscmp(argv[5], L"1")) return 64;
         expected_workers = argv[5][0] - L'0';
     }
-    if (argc == 7) {
+    if (argc >= 7) {
         if (wcscmp(argv[6], L"0") && wcscmp(argv[6], L"1")) return 64;
         minimum_frontends = argv[6][0] - L'0';
     }
@@ -219,16 +222,30 @@ int wmain(int argc, WCHAR **argv)
     GetExitCodeProcess(child.hProcess, &code);
     fprintf(report, "launcher=%lu wait=%lu exit=%lu elapsed-ms=%lu\n",
         child.dwProcessId, wait, code, GetTickCount() - started);
-    /* Observe normal teardown without holding the Console or killing any
-     * participant. Broker residency is permitted; attached worker is not. */
-    if (wait == WAIT_OBJECT_0) Sleep(5000);
+    /* NTSRV retires an unused root after its independent DOS session ends.
+     * Observe actual exit events rather than an unconditional delay. This
+     * observer never keeps the Console attached or kills a live participant
+     * to satisfy the assertions. Broker residency remains permitted. */
+    if (wait == WAIT_OBJECT_0 && !retained_native) {
+        HANDLE exits[8];DWORD exit_count=0,teardown;
+        for(index=0;index<count;++index)
+            if(!_wcsicmp(watches[index].name,L"ntvdm.exe") ||
+                !_wcsicmp(watches[index].name,L"ntw32.exe") ||
+                !_wcsicmp(watches[index].name,L"ntkvm.exe"))
+                exits[exit_count++]=watches[index].process;
+        teardown=exit_count ? WaitForMultipleObjects(exit_count,exits,TRUE,5000) : WAIT_FAILED;
+        fprintf(report,"broker-owned-teardown-wait=%lu participants=%lu\n",teardown,exit_count);
+    }
     for (index = 0; index < count; ++index) {
         DWORD state = WaitForSingleObject(watches[index].process, 0), exit_code = STILL_ACTIVE;
         GetExitCodeProcess(watches[index].process, &exit_code);
         fprintf(report, "child=%lu name=%ls wait=%lu exit=%lu\n",
             watches[index].pid, watches[index].name, state, exit_code);
-        if (!_wcsicmp(watches[index].name, L"ntvdm.exe")) {
+        if (!_wcsicmp(watches[index].name, L"ntvdm.exe") ||
+            !_wcsicmp(watches[index].name,L"ntw32.exe")) {
             ++workers;
+            if((native_mode && _wcsicmp(watches[index].name,L"ntw32.exe")) ||
+                (!native_mode && _wcsicmp(watches[index].name,L"ntvdm.exe"))) ++live_workers;
             if (state != WAIT_OBJECT_0) ++live_workers;
             if (wait == WAIT_TIMEOUT && !frontier.found) timeout_threads(report, &watches[index]);
         }
@@ -259,6 +276,9 @@ int wmain(int argc, WCHAR **argv)
     }
     passed = wait == WAIT_OBJECT_0 && code == expected_code && workers == expected_workers &&
         live_workers == 0 && frontends >= minimum_frontends && live_frontends == 0 && enumeration && windows == 0;
+    if(retained_native)
+        passed=wait==WAIT_OBJECT_0 && code==expected_code && workers==expected_workers &&
+            live_workers==1 && frontends==1 && live_frontends==1 && enumeration && windows>=1;
     if (wow_mode) {
         if (AttachConsole(child.dwProcessId)) {
             DWORD members[8], member_count = GetConsoleProcessList(members, ARRAYSIZE(members));

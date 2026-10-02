@@ -15,9 +15,11 @@ and [final evidence](../evidence/m0-t423-s40-native-alternate-screen-geometry.md
 | S2 | Rename the former native worker and project-owned native records to NTW32 and Win32Record. Update all required code/docs/paths; prove zero old project-worker referents, preserving original Console identities/substrings per S1. Pass production regressions and publish coherent intermediate ntw32.exe + ntkvm.exe eight-file package. |
 | S3 | Owner-added lifecycle investigation and subsequently approved repair: centralize orderly frontend/worker retirement in NTSRV, give authenticated close instructions priority over lease/pending/I/O, retain bounded startup admission and verify repeated launch, failure and session isolation before publication. |
 | S4 | Owner-added broker-centered creation/control migration: NTSRV creates/binds frontend and workers and coordinates Console takeover/return; run16 only submits/waits on NTSRV; NTKVM performs actual Console operations; worker/frontend direct channel is I/O only. Remove displaced direct launcher/frontend/worker control paths; preserve mirror semantics and pass the full production gate. |
-| S5 | After S4 delivery, native GUI routing/classification and service-held handles. Default launcher returns on startup success; preserve --wait/shared workers and full gates. Monitor/UNBOUND display belongs to the queue-head NTMON T candidate, not S4/S5. |
-| S6 | Former S5: frontend NTKVM -> NTCON after S5 delivery; owner-local names, consumers, build/test/package gates and publication. |
-| S7 | Former S6: final referent/semantic audit, indexes, regression and clean delivery; T closure owner-controlled. |
+| S5 | After S4 delivery, architecture/code cleanup of owner-approved audit findings 1-5: consolidate duplicate control transport, clarify shared implementation ownership, remove launcher target completion dependence, clear NTKVM dead state and obsolete tests; preserve behavior and pass the full production gate. |
+| S6 | After S5 cleanup delivery, native worker NTW32 -> NTVWM. Rename product-owned component/executable/symbols and all consumers, preserving existing native text/GUI behavior and Win32Record identity; no GUI routing implementation. Pass name-only equivalence, production regression and coherent ntvwm.exe + ntkvm.exe eight-file publication. |
+| S7 | After S6 naming delivery, native GUI routing/classification in NTVWM and service-held handles. Default launcher returns on startup success; preserve --wait/shared workers and full gates. Monitor/UNBOUND display belongs to the queue-head NTMON T candidate, not S4-S7. |
+| S8 | frontend NTKVM -> NTCON after S7 delivery; owner-local names, consumers, build/test/package gates and publication. |
+| S9 | final referent/semantic audit, indexes, regression and clean delivery; T closure owner-controlled. |
 
 Rename only product-owned identities, preserving original OpenNT/MVDM and
 generic imported KVM library source identities. No guest, extra process/helper,
@@ -48,10 +50,74 @@ creates the frontend but does not acquire its Console or relay user I/O. Both wo
 report real direct results to NTSRV; native GUI and Win16 startup-only semantics
 remain unchanged. No mirror edit is planned or authorized by this S.
 
+## S5 architecture/code cleanup checklist
+
+Owner inserts audit findings 1-5 immediately after S4 delivery. This is a
+planned S5, not a second active packet or an expansion of S4. Use S4's delivered
+source, tested eight-file manifest and retained runtime frontiers as baseline.
+Maintain an origin/current owner/target owner/consumer/disposition ledger for
+each row, with exact production callers, test cases and removed-line accounting.
+
+- [ ] Consolidate ntw32-exe/channel_io.c and run16-exe/native_request_io.c,
+  whose bodies match after symbol/include normalization. Keep one linked
+  implementation; remove the duplicate. Preserve completed-I/O-first ordering,
+  partial reads/writes, EOF, peer death, cancellation and OVERLAPPED completion
+  before releasing resources. Do not substitute worker-base's stricter
+  peer-death-first frontend transport merely because it looks similar.
+- [ ] Resolve shared transport, packet-codec and native-launch-primitive
+  ownership currently under run16-exe and consumed by NTSRV/NTKVM/NTW32. Keep
+  one explicit implementation owner and audited link path; retain the existing
+  owned-client-library pattern where appropriate. Use admitted roots/static
+  libraries, not a generic common component. interface remains declaration-only;
+  worker-base remains worker-only. No duplicate forwarding provider or helper.
+- [ ] Remove the native-text launcher completion target-HANDLE parameter and
+  local process-status gate for Console return. NTSRV must communicate enough
+  authenticated result/handoff state to distinguish a completed target with
+  failed final I/O from an unfinished target/infrastructure failure. NTW32
+  still executes/waits on the real target; NTSRV owns receipts/results; run16
+  waits broker completion and restoration only. Do not merely delete the
+  guard or return early. Preserve actual exit codes, one-time consumption,
+  worker-loss handling and canonical Console restoration before outer CMD
+  resumes. Version any actual copied-contract change coherently and regenerate
+  MIDL; unchanged GUI explicit --wait is a separate retained boundary.
+- [ ] Audit and remove proven write-only NTKVM session fields
+  capability/restored/borrowed/admitted and redundant parameter plumbing.
+  Check all current callers before removing APIs. Correct session_service.h's
+  obsolete launcher-owned retire description. Preserve Console ownership,
+  park/reuse, channel joins/cleanup and failure/restoration semantics.
+- [ ] Retire tests/app/frontend_bootstrap_test.c's removed direct-bootstrap
+  calls and obsolete root registration. Map every assertion to retained broker
+  bootstrap/scope fixtures before deletion; migrate missing coverage. Remove
+  stale build/docs references and redundant test aliases only after preserving
+  authentication, reuse, restoration and broker-loss tests.
+
+Verification: x86 /MT CCPU40 affected closure and dependency-driven relink;
+frontend-request-client-test, ntw32-execution-lifetime-test,
+frontend-scope-lifetime-test, broker bootstrap and service reservation/RPC
+fixtures. Add simultaneous completed-I/O/peer-death, pending cancellation,
+partial transfer, EOF and handle-lifetime checks for the single transport.
+Cover target completion plus final-I/O failure, unfinished worker failure,
+broker loss, forged/stale receipts, nested DOS/native parent return,
+owned/borrowed restoration and independent sessions. Prove production native
+launcher completion/return no longer depends on a target process handle.
+Retain Console17/Window17, COMMAND/MEM/EDIT, modern EDIT return and existing WOW
+frontiers without weakening assertions. Apply the full production-P gate:
+recoverable coherent eight-file O:/winnt publication, hashes, reviewed
+commit/push and clean synchronized worktree. All five rows must close; an
+unlinked shared wrapper or a new duplicate is not completion.
+
+Non-goals: audit item 6's Console-list consolidation and broad base_service.c
+split are not included. Preserve approved capture polling and backend retry
+policy. No worker/frontend rename or GUI routing in S5; no original mirror,
+guest/shared-lib edit, new process/component/helper, scheduler, observed graph,
+authentication weakening or launch-syntax change. Naming follows as S6,
+GUI routing as S7, frontend naming as S8 and final audit as S9.
+
 ## Owner-added native GUI stage and carried work
 
 The owner's latest clarification keeps S4 active until its centralization
-delivery and leaves GUI display to planned S5. This supersedes the premature
+delivery. Following the owner's naming-first reorder, GUI routing belongs to
+planned S7 after S6 NTVWM naming. This supersedes the premature
 replanning conclusion/admission, without discarding candidate changes or exact
 test evidence. S4 retains its DOS/WOW service creation, broker-only native
 submission/preflight/final status/resume, obsolete path/fixture removal and
@@ -60,11 +126,11 @@ regression/publication rows. No architecture or runtime closure is claimed.
 The new native GUI checklist is:
 
 - [ ] Keep launch syntax and broad DOS/Win16/native family discovery; move
-  the authoritative native GUI/CUI subsystem decision from run16 to NTW32.
+  the authoritative native GUI/CUI subsystem decision from run16 to NTVWM.
 - [ ] Route native submission/startup acknowledgement only through NTSRV;
   remove run16's local GUI CreateProcess path. Classify before text-frontend
   binding so GUI-only launches do not acquire a character frontend.
-- [ ] NTW32 creates the actual target and registers a restricted real process
+- [ ] NTVWM creates the actual target and registers a restricted real process
   handle/identity against the authenticated service request. NTSRV retains
   that GUI handle after startup/launcher return, independently of worker
   occupancy; release it on actual process exit through an event wait.
@@ -76,7 +142,7 @@ The new native GUI checklist is:
   not the resident carrier. A worker still carrying text remains BUSY;
   otherwise return READY. Later broker retirement is independent.
 - [ ] Retain authoritative GUI registration/identity for the queue-head NTMON
-  T candidate. Monitor/UNBOUND rendering is excluded from S4 and S5; the future
+  T candidate. Monitor/UNBOUND rendering is excluded from S4-S7; the future
   view uses service data, not local enumeration or invented Win16 process handles.
 - [ ] Verify direct GUI, text -> GUI -> text, GUI -> fresh text frontend,
   process exit cleanup, authentication/isolation, launch failure, worker
@@ -86,11 +152,32 @@ The new native GUI checklist is:
 Source disposition of the owner's clarification: original `BaseSrvExitWOWTask`
 in opennt-host/base/win32/server/srvvdm.c removes the matching WOWRecord, not the
 shared WOW process. Win16 remains hosted by WOW throughout execution; native
-GUI is an independent Windows process. Thus GUI startup releases only NTW32
+GUI is an independent Windows process. Thus GUI startup releases only NTVWM
 request occupancy; its real GUI handle/management record remains owned by NTSRV
 until process exit. No GUI-launch-success -> worker-termination rule is added.
 
-S6 naming and S7 audit remain sequential and cannot claim S5 runtime work.
+## Owner-added native worker name stage
+
+Owner direction on 2026-10-02 places naming before GUI routing: S6 renames
+NTW32 to NTVWM, a native Windows worker identity chosen to pair with NTVDM.
+S6 changes names only and preserves existing behavior; S7 then supplies the
+unified native text/GUI routing. Naming is not proof of that future capability.
+The new component/product is src/ntvwm-exe / ntvwm.exe. Original OpenNT/MVDM,
+Windows API names, Win32Record, kind DOS=0/Win16=1/Win32=2, and imported KVM
+libraries are not renamed. No new executable role, alias or duplicate worker
+is added. The accepted current NTW32 package remains current until S6 delivery.
+
+S6 audits all product-owned NTW32 referents in paths, C symbols/guards,
+consumers, build targets, tests, configuration, launch/package identities and
+documentation. Classify historical evidence and original/fixed identities
+before substitution; preserve recorded hashes/results and source provenance.
+Use the existing worker-base and interface paths, not a parallel implementation.
+Verify actual wire/endpoint compatibility effects; a spelling change alone
+does not authorize an ABI change. Publish a coherent recovered/tested eight-file
+package and remove the old basename only after its recoverable backup.
+
+S8 frontend naming and S9 audit remain sequential and cannot claim S7 runtime
+work. This insertion changes the plan only; S4 remains the sole active packet.
 
 The [S1 name audit](../evidence/m0-t424-s1-name-referent-audit.md) supplies the
 complete-tree inventory, exact original Console exclusions and baseline hashes.

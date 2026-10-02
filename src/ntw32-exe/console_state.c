@@ -3,6 +3,39 @@
 #include <string.h>
 #include <stdio.h>
 
+BOOL ntw32_console_quiescent(DWORD completed_target)
+{
+    DWORD capacity=16,count,index,*members=NULL;
+    BOOL self=FALSE,empty=FALSE;
+    for(;;) {
+        members=HeapAlloc(GetProcessHeap(),0,capacity*sizeof(*members));
+        if(!members)return FALSE;
+        count=GetConsoleProcessList(members,capacity);
+        if(!count)goto done;
+        if(count<=capacity)break;
+        HeapFree(GetProcessHeap(),0,members);members=NULL;
+        if(count>65536)return FALSE;
+        capacity=count; /* Buffer growth, not a timed membership poll. */
+    }
+    for(index=0;index<count;++index) {
+        HANDLE process;DWORD wait,error;
+        if(members[index]==GetCurrentProcessId()){self=TRUE;continue;}
+        if(members[index]==completed_target)continue;
+        process=OpenProcess(SYNCHRONIZE,FALSE,members[index]);
+        if(!process) {
+            error=GetLastError();
+            if(error==ERROR_INVALID_PARAMETER)continue; /* Gone before pin. */
+            goto done;
+        }
+        wait=WaitForSingleObject(process,0);CloseHandle(process);
+        if(wait!=WAIT_OBJECT_0)goto done;
+    }
+    empty=self;
+done:
+    if(members)HeapFree(GetProcessHeap(),0,members);
+    return empty;
+}
+
 /* A VT-input native client consumes character records, not MOUSE_EVENTs.
  * Keep the ordinary Console path unchanged for classic clients. */
 static DWORD write_vt_mouse(HANDLE input,const MOUSE_EVENT_RECORD *mouse)

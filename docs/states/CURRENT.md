@@ -2,62 +2,54 @@
 
 ## Current Work
 
-## Active Packet
+## Next Admission
 
-**Active: M0 T424 S4** — broker-centered launch and control migration,
-Ordinary Mode. Owner clarifies that UNBOUND belongs to the next task, not the
-current implementation. Finish S4 before admitting planned S5 native GUI work.
-S3 remains the delivered baseline `f9fe709aa`; T remains open. Frontend rename
-and final audit remain planned S6/S7; no queued T is admitted.
+**No active M/T/S packet.** Between S4 production delivery and the next
+sequential admission, M0 T424 remains open for owner acceptance. S4's
+verification, coherent publication and reviewed production P are recorded
+below; admit the approved S5 architecture/code cleanup after the delivery
+commit is pushed. Do not begin naming or GUI routing here.
 
-| Field | Admitted record |
-| --- | --- |
-| Identifier Mode | M0 T424 S4, Ordinary Mode; centralize project-added launch/control in NTSRV. |
-| Candidate Proposal | [Admitted naming package with owner-added investigation](../proposals/proposal-native-worker-frontend-renaming-001.md). |
-| Admission And Approval | Existing broker-only launcher control and authenticated Console coordination approval remains binding. Latest owner clarification: finish S4; native GUI routing/registration belongs to S5; UNBOUND display belongs to the queue-head NTMON T candidate. Premature replanning admission is superseded. |
-| Objective | run16 submits and waits on broker-owned direct results; NTSRV owns frontend/worker creation, authenticated binding and orderly retirement. Retain direct NTKVM/worker I/O and nonpolling broker-death waits. |
-| Non-goals | No UNBOUND, native GUI routing/classification change, frontend rename, mirror/guest/media/shared-lib change, helper, Job observation, scheduler, process-tree kill, launch-syntax change, I/O relay through NTSRV or NTSRV Console attachment. Preserve GUI/Win16 startup-only and explicit --wait semantics. |
-| Reference Baseline | S3 `f9fe709aa`, protocol/RPC 29, coherent published eight-file package and retained Console17/Window17/WOW frontiers. S3 delivery does not imply this new architecture already exists. |
-| Files And ABI Surface | run16 startup/receipt clients; NTSRV project-owned creation, reservation, binding and result transport; NTKVM authenticated Console bootstrap; NTVDM/NTW32 adapters and worker-base; interface and coherent protocol/RPC revision; tests and current design. |
-| Applicable Rules | README reading set, EXECUTION, architecture/coding/document rules and source policy; preserve other-session edits. |
-| Verification | x86/MIDL affected closure; exact-parent creation and edge checks; authenticated bootstrap and wrong-capability negatives; DOS/native direct result and failure, final I/O restoration, reuse/nesting/root isolation/broker loss; Console17/Window17 and retained WOW frontiers; coherent eight-file publication; governance/link/diff and no-mirror-change checks. |
-| Expected Markers | Service creates frontend/workers; text launcher has only service task and Console-handoff receipt/result waits, no NTKVM/worker IPC. Direct worker/frontend I/O does not complete records or decide orderly death. Exact generation/rights, rollback ownership and event-driven broker loss. GUI remains unchanged until S5. |
-| Asset Needs | S3 runtime/recovery and retained S4 candidate/evidence. New artifacts only under build/M0-T424/S4; reuse recorded S2/r001 object cache without overwriting sealed evidence. No external acquisition. |
-| Reporting Requirements | Maintain edge/source/ownership checklist, distinguish target from implementation, report removed direct paths, retained I/O edges, exact tests and open rows. |
-| Stop Conditions | Mirror change, GUI/UNBOUND implementation, arbitrary remote creation/duplication, helper/scheduler, syntax change, weakened authentication or baseline regression requires disposition. Preserve other-session edits. |
-| Exit Criteria | All S4 migration rows production-wired, obsolete paths removed, required tests and coherent publication verified, reviewed committed/pushed P. No claim of closure from planning or compilation alone. |
-| Original Owner Request | Broker-centered architecture cleanup with all launcher/Console coordination through NTSRV; latest clarification: UNBOUND belongs to the next task and must not be implemented in the current S. |
-| Similar-Issue Sweep | Newly created/resident DOS/native workers, inherited frontend scopes, native parent resume, borrowed/owned Console, unchanged GUI/Win16 startup-only, rollback, completion versus infrastructure failure, workerless-root and broker-empty deadlines. |
+## S4 Closure Record
 
-## S4 Implementation Progress
+The production P containing this record delivers broker-centered creation and
+control, APP_VERSION 0.0.424 / protocol and RPC major 30. NTSRV creates NTKVM
+and both workers, authenticates exact capabilities, routes text submit/resume
+and real direct results, coordinates Console restoration and owns cancellable
+ten-second retirement. Run16 has no direct frontend/worker control pipe.
+Worker/frontend I/O stays direct. Original DosSesId/PIF CloseOnExit, DOS/WOW
+execution and GUI/Win16 startup-only or explicit --wait remain unchanged.
 
-The owner's latest clarification supersedes the premature S5 admission and
-S4 replanning conclusion. S4 remains active; no production P or functional
-closure has been delivered. The following remain mandatory S4 release rows:
-DOS/WOW broker-owned worker creation preserving Check/Update ordering;
-broker-native submission/preflight/final I/O result and parent resume;
-removal of direct launcher/worker pipes, process-result fallbacks and obsolete
-bootstrap APIs/fixtures; full regression and coherent eight-file publication.
-The candidate is preserved in the main worktree; do not revert or publish it
-merely to create a clean closure. Detailed S4 findings remain evidence.
+Worker-base's existing connection and frontend-protocol clients are reused
+by both workers. NTSRV uses common worker creation and root retirement/return
+confirmation; run16 uses a common direct receipt wait. Hidden Console
+attachment operations stay native-local, not a second task registry. No
+mirror, guest, shared-library, helper, scheduler or launch-syntax changes.
 
-S4's initial source audit and ordered implementation checklist are recorded in
-[broker-centered migration](../etc/evidence/m0-t424-s4-broker-centered-launch-control.md).
-The retained S4 candidate is in the main worktree, protocol/RPC 30:
-NTSRV creates NTKVM and the native text worker, coordinates Console return,
-and owns cancellable ten-second workerless-root retirement. Actual process
-parent/authentication, restoration, broker loss and grace/cancellation probes
-pass, as does same-outer-CMD DOS/native/DOS re-entry. The launcher watcher
-now starts at broker admission. Native worker rundown preserves existing
-Win32Records on the authenticated launcher, signals failure receipts under
-the service lock and supports one-time result queries; native completion
-wait no longer infers failure from worker/root process handles. Focused
-client/actual-process failure checks pass; these are not the full release gate.
-DOS/WOW worker creation, native direct-channel replacement and parent resume,
-obsolete fixture/API removal and full regression remain open. This is not a
-delivered P or S4 functional closure. O:/winnt remains the accepted S3 package; all
-candidate artifacts and run evidence remain in build/. See S4 evidence.
-The delivered predecessor is [S3 lifecycle repair](../etc/evidence/m0-t424-s3-abnormal-exit-relaunch.md).
+The final fixed eight-file set passes x86/MIDL/WOW linking, Console17 and
+Window17 (17/17 each), actual RPC authentication/version negatives, four
+worker/frontend death scenarios, COMMAND -> CMD -> modern EDIT -> CMD -> DOS,
+outer cooked-CMD return and independent-session isolation. Request lifetime
+has 586 checks, zero failures and zero remaining-handle delta. WINMINE's
+visible main-window frontier and SOL/WRITE's known memory dialogs are retained,
+not three usability passes. Historical fake-root fixture variants and manual
+RDP/foreground UX are not claimed passing.
+
+O:/winnt now contains the exact final manifest's eight files. Accepted S3
+products/configuration are recoverable under build/M0-T424/S4/r001/
+accepted-s3-recovery. Original guest files and configuration are unchanged.
+Published-package DOS/native/DOS and outer cooked CMD exit 19 smoke passes;
+the test service retires normally. Governance, relative-link and diff checks
+pass, with source inputs pinned and no selected mirror/library diff.
+
+Exact commands, failures and corrected assertions, source/ownership ledger,
+manifests and release limitations are in
+[S4 migration evidence](../etc/evidence/m0-t424-s4-broker-centered-launch-control.md).
+S4 is not a claim that all later audit rows are already eliminated. The owner's
+S5 cleanup covers duplicate transport/primitive ownership, remaining diagnostic
+target handles, NTKVM dead state and obsolete bootstrap fixtures; S6 names
+NTVWM, S7 routes native GUI, S8 names the frontend NTCON, and S9 audits closure.
+UNBOUND display remains the separate queue-head NTMON T candidate.
 
 ## S3 Closure Record
 
@@ -84,7 +76,7 @@ previous package recovery is under build/M0-T424/S3/r001/published-recovery.
 Guest media, SYSTEM.INI and NTVDM.REG are not overwritten. Z: is removed after
 testing. T424 remains open. S3 did not implement broker-owned creation;
 the subsequent owner implementation approval is admitted separately as S4.
-Frontend renaming is now S6 and has not started.
+Frontend renaming is now S8, after S6 NTW32 -> NTVWM and S7 GUI routing, and has not started.
 
 Owner's subsequent implementation approval supersedes research-only scope:
 NTKVM exits on NTSRV instruction or user Console closure (fault/broker-loss
@@ -130,26 +122,30 @@ pre-migration baseline in its sealed inventory and S1 Git revision.
 
 The [T424 working plan](../etc/operations/t424-worker-frontend-renaming-plan.md)
 and [proposal](../proposals/proposal-native-worker-frontend-renaming-001.md)
-retain seven ordered stages. S1 audits names; S2 delivers the native worker
+retain nine ordered stages. S1 audits names; S2 delivers the native worker
 as NTW32 and Win32Record while retaining NTKVM frontend. Added S3 delivers the
 approved broker-owned abnormal-exit/re-launch repair before further renaming.
 S4 centralizes creation, binding, Console handoff coordination and direct result
 transport in NTSRV while keeping Console operations local to NTKVM and
-NTKVM/worker I/O direct; finish its open rows before S5. Planned S5 adds broker-routed
-native GUI startup, NTW32 classification and service-held handles, not monitor
-display. UNBOUND display belongs to the queue-head NTMON candidate. S6 renames
-NTKVM to the reserved NTCON frontend identity after S5.
-S7 owns final referent and
+NTKVM/worker I/O direct; finish its open rows before S5 cleanup. S5 closes the
+five owner-approved architecture/code findings, without changing mirrors,
+guest, shared lib or accepted polling. Owner-added S6 renames
+NTW32 to NTVWM; it is name-only and preserves existing behavior. S7 then adds
+broker-routed native GUI startup, NTVWM classification and service-held handles,
+not monitor display. UNBOUND display belongs to the queue-head NTMON candidate.
+S8 then renames NTKVM to
+the reserved NTCON frontend identity. S9 owns final referent and
 semantic audit. T closure
 remains owner-controlled. No later queued candidate is admitted here.
 
 ## Current Technical Baseline
 
-Published S3 package at O:/winnt: run16.exe, ntsrv.exe, ntvdm.exe, ntw32.exe,
+Published S4 package at O:/winnt: run16.exe, ntsrv.exe, ntvdm.exe, ntw32.exe,
 ntkvm.exe, ntmon.exe, WOW32.DLL, VDMREDIR.DLL. APP_VERSION is 0.0.424;
-protocol/RPC is 29 with unchanged UUID and a typed authenticated worker shutdown
-event RPC. MSVC Win32/x86 /MT CCPU40 is unchanged. Exact hashes and commands are in S3
-evidence; predecessor accepted T423 S40 `f64559086` is recoverable.
+protocol/RPC is 30 with unchanged UUID and authenticated broker-owned creation,
+submission, restoration and shutdown contracts. MSVC Win32/x86 /MT CCPU40 is
+unchanged. Exact hashes and commands are in S4 evidence; S3 `f9fe709aa` and
+predecessor accepted T423 S40 `f64559086` remain recoverable.
 
 ## Previous T closure
 

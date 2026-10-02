@@ -39,13 +39,18 @@ NTKVM reuses the transport/codec without linking target creation.
 primitive used by run16 GUI creation and NTW32 native text creation. It owns
 no worker state, Console session, execution policy or frontend renderer.
 
-`frontend_scope.c` is a client of the independent `ntkvm.exe` frontend. It
-resolves or requests an authenticated character-session association, submits
-native Console execution, and waits for its direct target. It owns no renderer
+`frontend_scope.c` coordinates the independent `ntkvm.exe` frontend only
+through NTSRV. It requests an authenticated character-session association,
+submits native execution and waits for the broker's direct result plus final
+I/O acknowledgement. Worker creation and Console takeover/return coordination
+are NTSRV operations; no launcher/frontend or launcher/worker pipe remains.
+It owns no renderer
 or frontend notification pump. `ntkvm-exe` owns visible Console, Window,
 display state, direct worker I/O and input routing. NTW32 owns its ordinary
-hidden Console and native targets; native completion alone does not end its
-worker residency. There is no product helper or ConPTY backend.
+hidden Console and native targets. Borrowed-Console native completion does not
+end worker residency. A self-owned Console can close on exit only after NTSRV
+confirms final I/O release and no remaining use; the worker does not decide
+that policy. There is no product helper or ConPTY backend.
 Original guest devices, painters and execution remain in ntvdm/MVDM.
 GUI segments do not inherit character-frontend authority; character segments
 can share their authenticated frontend without sharing completion ownership.

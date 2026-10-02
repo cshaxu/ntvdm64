@@ -413,3 +413,446 @@ probe was corrected to wait on the exact test process and the service receipt,
 without changing production code or adding delays/polls. The failure log is
 not removed. Final governance/relative links and diff checks pass. Candidate
 test processes and Z: have been cleaned up; O:/winnt remains accepted S3.
+
+## DOS/WOW broker creation candidate (uncommitted, not published)
+
+StartVdmWorker consumes the authenticated original Check result. NTSRV selects
+its trusted sibling ntvdm.exe, prepares the original configuration, creates
+suspended, calls its existing source-shaped Update adapter, requests the DOS
+frontend, and resumes. run16 no longer creates/resumes this new worker. This
+does not yet remove its old worker-result fallback or native direct pipe.
+
+Recovery ledger: directly linking the original vdm.c client archive was
+attempted and failed with OpenNtBaseClientCallServer/CsrPortHeap imports that
+belong to client RPC/capture, not the service. The smallest usable next rung is
+a generated build-only carrier selecting the unchanged BaseGetVdmConfigInfo
+and BaseSetLastNTError bodies from that tracked mirror. The build manifest
+records source identity and the selected closure. Existing base_config binding
+supplies package paths; no mirror modification, new configuration algorithm or
+fake CSR client is used. Exceptional intrusion and new algorithm rungs are
+unnecessary and not selected.
+
+The x86 product-programs and broker-frontend-bootstrap-test.exe links, followed
+by build-supplement.cmd, passed. The first production relaunch test did not:
+service-vdm-create-relaunch.txt reports timeout; captured Console lines never
+show the DOS prompt. The Windows PowerShell 5 invocation first failed before
+launch (ArgumentList unavailable); rerunning with current PowerShell produced
+the actual timeout. Neither result is a pass.
+
+Read-only existing worker_thread_snapshot.c captured the exact private-test
+worker waiting in Client_WaitFrontend. Process enumeration proved NTSRV was
+the actual parent of NTKVM and NTVDM. Source comparison against Server_Update
+identified the borrowed receipt-table event being passed directly as a typed
+RPC output. Typed transfer consumes that handle; the existing Update path
+instead uses export_handles to duplicate it. The new admission callback now
+prepares its own export duplicate before Resume, preserving the table event.
+All fallible worker handle preparation likewise precedes Resume; after the
+worker can consume a published record there is no export-failure rollback.
+The corrected candidate's actual startup/reuse retest is recorded below.
+
+Existing probe source/command:
+
+```powershell
+cmd.exe /c build\M0-T424\S2\r001\run-ninja-parallel.cmd product-programs broker-frontend-bootstrap-test.exe
+cmd.exe /c build\M0-T424\S2\r001\build-supplement.cmd
+# Copy only the eight candidate binaries into build/M0-T424/S4/r001/runtime.
+subst.exe Z: (Join-Path $repo 'build/M0-T424/S4/r001/runtime')
+try {
+    & tests/observation/verify-frontend-relaunch.ps1 -Observer build/M0-T424/S2/r001/observer.exe -PackageRoot Z:/ -ReportPath (Join-Path $repo 'build/M0-T424/S4/r001/service-vdm-create-relaunch.txt')
+} finally { subst.exe Z: /d }
+```
+
+Use a fresh report path for every repeat. Test-only failed-session cleanup
+targeted the enumerated private probe PIDs, not user or published processes.
+Full gate and S4 closure remain open; accepted O:/winnt remains S3.
+
+Corrected run: service-vdm-create-relaunch2.txt reports exited/19; its line-03
+and line-07 Console captures both contain MEM's total conventional-memory
+output, line-05 contains native Microsoft Windows VER. The strict script
+passes. This verifies real new DOS startup plus same-Console reuse across
+native execution, not a mocked caller.
+
+broker-frontend-bootstrap-test.exe now additionally calls the actual new RPC
+without original Check admission and with an unterminated environment. It
+requires INVALID_STATE/INVALID_PARAMETER respectively and no exported worker
+or parent handles. Its existing authentic-root, exact service parent, Console
+return and broker-loss assertions remain enabled. Observer run
+service-vdm-admission-negative.txt reports exited/0 and its Console capture
+contains all three strict PASS groups. These assertions do not prove every
+post-Check rollback branch.
+
+The existing observe-wow-frontiers.ps1 command with prefix
+service-vdm-create-wow and PostExitObservationMs 5000 retains three independent
+observations: WINMINE startup returns 0 and its guest main window remains;
+SOL and WRITE startup return 0 and retain their known original memory-error
+dialogs with live WOW workers. This is frontier preservation, not gameplay or
+SOL/WRITE usability acceptance. Guest/configuration files were not modified.
+Z: was removed after both actual workload runs. No S4 P, full regression gate
+or O:/winnt publication has yet been delivered.
+
+## Native broker-only control increment (uncommitted)
+
+This increment supersedes the preceding progress note's still-open native
+pipe statement, not its retained failure chronology. SubmitNativeRequest
+receives a copied launch packet through authenticated RPC. NTSRV creates and
+owns the connected worker-control pipe, retains it on the existing direct
+Win32Record, and returns typed target/receipt attachments. FinishNativeRequest
+consumes that record's actual completion and checks the final I/O reply. A
+latched worker-failure result does not require reading a dead worker channel.
+Native parent resume uses the same broker request with no launch payload.
+NTW32 target creation/completion and direct worker/frontend I/O remain intact.
+GUI routing/classification and monitor UNBOUND are not implemented here.
+
+The actual initial production relaunch report
+broker-native-control-relaunch.txt passes the strict same-outer-CMD DOS
+MEM/EXIT, native VER, DOS MEM/EXIT, cooked CMD exit-19 assertions. This is
+selected-chain evidence, not Console17/Window17 or S4 closure.
+
+The first failure probes broker-native-control-failure.txt through failure5
+exit 1. Their observer had not enabled its existing private-desktop mode;
+the separately captured failure5 stdout reports bootstrap 87 before native
+execution. Direct execution without a real Console reproduces that fixture
+prerequisite failure. These runs are not production failure-receipt passes.
+With MVDM_OBSERVER_PRIVATE_DESKTOP=1, failure6 exits 0 and its Console snapshot
+asserts failure 1067, wrong-request rejection, one-time consumption and no dead
+presentation-channel read. broker-native-control-completed-loss.txt exits 0;
+its snapshot asserts actual target result 37 survives worker rundown and is
+consumed once. Test-only cleanup uses its own target handles.
+
+The old client-only fixture still expected launcher-owned pipes and was not
+valid after migration. Its broker substitute now owns the byte channel and
+uses production native_control reply validators selected into the NTSRV
+binding archive. The same negative matrix remains: invalid version,
+contradictory error/handle, EOF, partial reply, delayed final presentation,
+WRITE_FAULT, missing final reply, resume rejection and broker failure. The
+launcher receives no completion pipe. This focused fixture passes exit 0;
+actual RPC authentication and process lifecycle remain separate probes.
+
+Commands, using the existing admitted object cache:
+
+```powershell
+cmd.exe /c build\M0-T424\S2\r001\run-ninja-parallel.cmd product-programs frontend-request-client-test.exe broker-frontend-bootstrap-test.exe
+& build/M0-T424/S2/r001/frontend-request-client-test.exe
+$env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
+try {
+    & build/M0-T424/S2/r001/observer.exe (Join-Path $repo 'build/M0-T424/S2/r001/broker-frontend-bootstrap-test.exe') (Join-Path $repo 'build/M0-T424/S4/r001/runtime') (Join-Path $repo 'build/M0-T424/S4/r001/broker-native-control-failure6.txt') --observation-timeout-ms 25000 --native-worker-failure
+} finally { Remove-Item Env:MVDM_OBSERVER_PRIVATE_DESKTOP }
+```
+
+Product and focused-test x86 links pass.
+After extracting the production validators, the refreshed eight-file build
+candidate also passes broker-native-control-relaunch2.txt, using the same
+strict script and exit-19/text assertions. Z: was removed in finally.
+The final full regression/publication
+gate is not run; unused old control API/fields and DOS process-result fallbacks
+remain mandatory cleanup, not deferred S5 work. Accepted O:/winnt is unchanged.
+
+## Broker-only DOS result and independent Console association increment
+
+Run16 now waits only its service receipt for DOS, including the original
+nonzero-DosSessionId branch whose Update returns no parent event. NTSRV
+retains the created process and installs a one-shot process wait before
+Resume, then translates its actual exit into a parent receipt. Original
+cmdmisc.c CloseOnExit/TerminateVDM behavior and DOS records are unchanged.
+Disconnect cancels and joins the callback before freeing the connection.
+Native client worker/pipe fields and obsolete wrapper names are removed too.
+
+broker-only-new-console-mem.txt failed with ACCESS_DENIED (5). Original
+CheckDOS allocated a distinct execution Console, while RetainFrontendRoot
+required the visible-root Console identity. The fix prepares a ConsoleContext
+association from the launcher's already-authenticated root generation and
+the service-allocated execution Console before publishing the source record.
+Source failure deletes it; root rundown releases it. Worker/root lifetime
+checks use that association, not PID guesses or untrusted member lists.
+
+mem2 returns zero and observes NTVDM exit but fails the fixture's obsolete
+five-second teardown observation. S4 gives NTSRV ten seconds to retire a
+workerless root. The fixture now waits pinned NTVDM/NTKVM exit handles for
+at most fifteen seconds, retaining all no-live-worker/frontend/Console-window
+assertions. broker-only-new-console-mem3.txt passes: launcher exit 0,
+teardown wait 0, worker/frontend exit 0, no live participants or Console windows.
+This is independent-Console lifecycle evidence, not the full S4 release gate.
+
+Exact probe: MSVC x86 /MT /O2 builds
+tests/observation/run16_new_console_lifecycle.c with object and executable
+outputs in build/M0-T424/S4/r001. With Z: mapped to its runtime candidate:
+
+```powershell
+& build/M0-T424/S4/r001/new-console-lifecycle.exe Z:\ MEM.EXE build/M0-T424/S4/r001/broker-only-new-console-mem3.txt 0 1 1
+```
+
+Z: is removed in finally. Product and focused bootstrap fixture incremental
+x86 links pass. broker-only-result-relaunch.txt passes actual DOS MEM/native
+VER/DOS MEM/cooked CMD exit 19 after removal of launcher process fallbacks;
+native-request and frontend-scope fixtures also pass. Unused SubmitWorkerChannel
+API and old launcher creator test selection remain cleanup rows. Full runtime
+matrix, fault/authentication/WOW and coherent publication remain open.
+O:/winnt is unchanged; S4 is not closed and GUI/UNBOUND stay out of scope.
+
+## Owned Console close-on-exit symmetry increment (uncommitted)
+
+Owner requests symmetric DOS/native text close-on-exit. Original nonzero
+DosSesId (`task`) worker exit and cmdmisc/PIF CloseOnExit remain in their
+original owners, with no mirror change. NTSRV's shared
+`service_retire_completed_root` now checks the authenticated root, other
+workers, pending requests/channels and unfinished native result consumers,
+pre-arms the existing Console-return latch, and sends the existing retirement
+notification. Native qualifies only for its creator's self-owned Console,
+never a borrowed CMD Console or an inner launcher. NTW32's resource check is
+native-local; broker connection/death/shutdown and frontend I/O still use the
+existing worker-base mechanisms. Launcher uses the existing broker-only
+result and Console-return paths. No new cross-component edge is introduced.
+
+Native final-completion wire advances NATIVE_REQUEST_VERSION 5 to 6 with a
+validated CONSOLE_EMPTY flag. Unpublished S4 APP/RPC remains 30. Unknown flags
+and old versions fail. The resource check occurs once after actual target
+completion, not at fixed intervals; list growth only resizes the read buffer.
+It ignores the completed target while its handle pins its identity, accepts
+already-dead attachments, and conservatively refuses close for unknown/live
+attachments or no Console. This never creates tasks, observed records or a
+stack. NTSRV acts after the final private-channel acknowledgement, not the
+earlier task-completion RPC; no helper, Job or process-tree kill is added.
+
+Initial close1/close2 probes returned native result 37 but failed retirement.
+The broker queried PID from a synchronize-only wait handle. The fix retrieves
+the owning connection in the existing authoritative result lookup, removing
+that extra process scan/query. `broker-owned-native-close3.txt` passes:
+launcher 37, NTKVM/NTW32 exited and no live frontend/worker/Console windows.
+NTW32's broker-directed GetNext shutdown exits 1223; this is not substituted
+for the direct target's result 37.
+
+`broker-owned-native-residual2.txt` establishes a native child before CMD
+returns 37 and proves NTW32/NTKVM remain live. residual1 did not establish
+that precondition and failed; it remains a non-pass. This resource observation
+does not prove a complete descendant history or prevent future attachment
+races. The enhanced real `native-console-capture-test.exe` separately proves
+live attachment rejection, pinned completed-target acceptance and no-Console
+conservative rejection without weakening geometry/cell/cursor/palette tests.
+
+`broker-shared-close-regression1.txt` passes DOS MEM/EXIT -> native VER -> DOS
+MEM/EXIT -> outer cooked CMD exit 19. Native execution-lifetime fixture:
+586 checks, zero failures, target survival and zero remaining handles.
+Native GetNext fixture and wire-negative fixture pass, including delayed final
+ACK, write failure, EOF, versions, contradictory/partial replies and worker
+failure receipts. Affected x86 links pass. Raw evidence remains under
+build/M0-T424/S4/r001 and the recorded S2/r001 cache; Z: is removed in finally.
+
+Full Console17/Window17/WOW and coherent publication remain open. S4 is not
+closed or published; O:/winnt remains the accepted S3 package. GUI/UNBOUND,
+guest/media and shared-library changes are not included.
+
+The owned-Console candidate subsequently passes Console17 and Window17
+(`t424-s4-owned-console17-summary.json`, `t424-s4-owned-window17-summary.json`):
+17 cases each, expected versus actual match and original guest/interaction
+assertions retained. These runs precede the final unused-bootstrap-field
+cleanup, so they are regression evidence for that candidate, not the final
+source/package publication gate. Removed from the production interface:
+unused frontend_bootstrap_start/start_lease declarations, direct channel and
+launcher-retire fields; the scope fixture now uses a private fixture start
+function, not a pretend public direct-bootstrap implementation.
+
+Cleanup x86 links and the existing scope lifetime fixture pass. With the
+cleaned source's package, `broker-clean-bootstrap-owned-dos1.txt` and
+`broker-clean-bootstrap-owned-native1.txt` both pass actual independent
+Console teardown, no live frontend/worker and no Console-window residue.
+Original DOS result is 0; actual native result is 37. Old creator files and
+public SubmitWorkerChannel RPC were also deleted earlier in this candidate;
+the remaining native queue primitive is NTSRV-private and not launcher RPC.
+Documentation governance and diff checks pass. Final-source matrices,
+fault/authentication/version/WOW checks and publication remain pending.
+
+## Shared-path review and final-source regression increment
+
+The owner requires reuse without new DOS/native control forks. The source
+review confirms these production boundaries:
+
+| Mechanism and provenance | Shared owner / production consumers | Deliberately independent boundary |
+| --- | --- | --- |
+| Project-added broker connect/death watch/disconnect and shutdown-event client | worker-base/connection.c; NTVDM and NTW32 entries | Backend heap and original worker execution remain local. |
+| Project-added ordered frontend exchange, frame chunks, validation/cancellation and input encoding | worker-base/console_client.c; both workers | NTKVM owns the server and rendering; interface owns wire declarations. |
+| Project-added independent-Console retirement and return acknowledgement | NTSRV service_retire_completed_root; original independent DOS exit and native final-I/O completion | DOS DosSesId/PIF completion remains original; NTW32 reports actual backend resource state, not retirement policy. |
+| Project-added direct receipt wait | run16_wait_direct_event; DOS and native launch paths | Original BaseCheckForVDM and native FinishNativeRequest decode their actual broker records; WOW startup remains distinct. |
+
+NTSRV and run16 do not link worker-base just to reuse their own policy. No
+original execution algorithm is relocated, no second worker scheduler is
+introduced, and no mirror/guest/library edit is part of this increment.
+
+The cleaned-source runtime passes `t424-s4-final-console17-summary.json` and
+`t424-s4-final-window17-summary.json`: 17/17 each with original expected results
+and assertions retained. `final-native-wire.txt`, `final-frontend-scope.txt`
+and `final-native-capture.txt` pass protocol, scope and actual Console-resource /
+geometry checks. Evidence is under build/M0-T424/S4/r001; temporary Z: was
+removed by each matrix's finally block. These are candidate tests, not a
+publication or S4 closure.
+
+The broad legacy in-process service fixture remains a non-pass. Its precise
+diagnostic (`final-service-reservation4.txt` and Console capture) is
+`later root admission error=5`: the fixture creates a suspended child and
+tries RegisterFrontendRoot without the broker StartFrontend grant. The earlier
+line-only diagnostic was incorrectly described as ReportConsoleMembers failure;
+the rejection is before membership publication. Production RegisterFrontendRoot
+requires the exact broker-created process and inherited event. Do not weaken
+that authentication or remove the positive reuse assertions to make the fixture
+pass. Its setup needs migration, and the outstanding full fault/auth/version/WOW
+and review/publication rows remain open. Failed fixture children were cleaned
+by exact captured PID/command line; no product target was killed as a test pass.
+
+### Admission-fixture migration
+
+The legacy fixture setup is now migrated rather than exempted. Production
+StartFrontend's borrowed exact-process/event tuple preparation and clearing
+are extracted as NTSRV-private `broker_frontend_admit` /
+`broker_frontend_clear_admission` in the existing service owner. The declaration
+is transport/frontend_admission.h, not a new RPC or public client privilege.
+Trusted CreateProcess still precedes admission and ResumeThread follows it;
+the owning Start call pins and releases its resources. RegisterFrontendRoot
+and RegisterFrontendLease still compare the exact admitted objects.
+
+The in-process service producer fixture uses that same boundary and retains
+the actual object-type, generation, duplicate, context, completion, reuse and
+failure assertions. `admitted-service-reservation1.txt` now passes the full
+original Check/Update/Get/Exit lifecycle and WOW startup/reuse/failure checks.
+Console-identity, frontend-root, native-backend, three nested reentry variants,
+completed-worker-loss and completion-rundown-race pass. Frontend-authority and
+worker-channel first exposed obsolete expectations and failed; retained `-2`
+runs pass after matching the approved ten-second workerless deadline and
+broker-owned pipe producer identity. The latter negative still rejects a PID
+which does not own the real connected byte-pipe ends; no assertion is relaxed
+to accept arbitrary pipes.
+
+Actual broker RPC tests separately prove an uncreated process cannot register
+a root. `admitted-broker-normal.txt`, `admitted-broker-startup-rejections.txt`,
+`admitted-broker-native-worker-failure.txt` and
+`admitted-broker-native-completed-worker-loss.txt` pass exact broker-parent
+creation, forged capability/restoration denial, malformed VDM environment,
+wrong bootstrap/application versions, truncated/unregistered startup, final
+Console return, broker loss, failure result 1067 and retained completed target
+result 37. This is not evidence from the fixture's simulated producer alone.
+
+Affected x86 and supplemental links pass. A new final package gate with prefix
+`t424-s4-admission-final` is in progress; earlier final-source matrices predate
+this extraction and are retained as earlier evidence only. Publication and
+S4 closure remain unclaimed.
+
+### Nullable resume request and post-fix integration
+
+The actual RPC fixture uncovered a production wire defect, not merely stale
+fixture setup: native parent resume sends an empty payload, but SubmitNativeRequest
+declared that pointer as a required MIDL reference. RPC returned
+RPC_X_NULL_REF_POINTER (1780) before NTSRV could validate the request. The
+unpublished protocol/RPC 30 candidate now declares the payload `unique` with
+its existing byte count. NTSRV's size, operation, generation and capability
+checks remain authoritative; a null pointer does not authorize a nonempty
+request. MIDL was regenerated and the affected x86 and supplemental WOW
+closure relinked. No delivered protocol version was reused for a changed wire.
+
+`admitted-monitor-rpc4.txt` passes actual RPC positive and negative cases:
+broker-created frontend admission, forged-root denial, stale generation and
+capability rejection, application protocol/version mismatch, and native
+request validation. The launcher cannot consume the NTKVM root's frontend
+request queue (ACCESS_DENIED); the fixture no longer pretends they are the
+same connection. Earlier failed runs are retained, not counted as passes.
+
+With the corrected package, `t424-s4-nullable-relaunch.txt` passes DOS MEM /
+native VER / DOS MEM and outer cooked-CMD result 19. The actual modern EDIT
+return test `t424-s4-nullable-edit-return.txt` passes COMMAND -> CMD -> EDIT ->
+CMD echo -> DOS MEM -> launcher completion. The first combined script's later
+isolation setup rejected the still-live empty broker during its ten-second
+grace; that setup failure is not an isolation pass. After normal broker exit,
+`t424-s4-nullable-isolation2.txt` and its second-session report pass selected
+worker closure without affecting the independent Console, subsequent input
+and result 23. Temporary Z: is removed in finally blocks.
+
+Fresh post-wire-fix Console17/Window17 matrices are running under prefix
+`t424-s4-wire-final`. This increment is candidate evidence, not publication,
+commit or S4 closure. O:/winnt remains the accepted previous package.
+
+Those post-wire-fix matrices subsequently pass 17/17 each. Final header-input
+rebuild relinks five EXEs, so that exact earlier package is preserved under
+`wire-tested-recovery`, not silently equated to the new binary hashes. The
+full current eight-file set is fixed in `release-candidate-manifest.json`;
+its separate full regression uses prefix `t424-s4-release`. Supplemental WOW
+linking is complete. Source provenance remains unchanged: no MVDM/OpenNT-host
+mirror, guest or shared-library diff.
+
+Current focused tests `wire-final-frontend-request-client-test.txt`,
+`wire-final-frontend-scope-lifetime-test.txt` and
+`wire-final-native-console-capture-test.txt` all exit zero with their assertion
+output inspected. `wire-final-request-lifetime.txt` reports 586 checks, zero
+failures, 12 completed / 16 cancelled requests, handed-off target survival and
+zero remaining-handle delta. These fixtures cover broker completion failure
+stopping reentry, final-I/O/resume errors, failed export/startup and cancellation;
+they do not replace actual guest/worker tests.
+
+The shared-path review distinguishes actual extraction from reuse: existing
+worker-base connection and console_client implementations remain production
+consumers for both workers; this S4 does not invent a second copy or move the
+original DOS scheduling into them. New creation is NTSRV-local worker_spawn,
+called for both kinds; native status decoding is its explicit wire boundary.
+The common broker retirement helper and launcher receipt wait are the new
+two-kind paths. NTW32's hidden Console attachment observation stays local
+because DOS task/PSP/PIF state is not that resource; sharing it would fabricate
+equivalent backend semantics. Historical fake-root RPC fixture variants are
+not claimed passing after authentication changed; actual broker bootstrap,
+monitor RPC and product reentry tests are the selected authenticated evidence.
+
+## Final S4 package verification and publication
+
+The fixed `release-candidate-manifest.json` eight-file package passes
+`t424-s4-release-console17-summary.json` and
+`t424-s4-release-window17-summary.json`, 17/17 each, using the unchanged
+Verify-CommandExitStatus assertions and S3 case list. The four actual fault
+cases in `t424-s4-release-retirement-{ntvdm,ntw32}-{worker,frontend}.txt`
+return broker failure 1067, obey peer retirement and then the empty-service
+deadline. This is real process/guest evidence, not just event mocks.
+
+`release-monitor-rpc.txt` passes the actual RPC authentication and application
+protocol/version negatives. Old S3 RPC29 run16 is tested against RPC30 with
+the current empty-management check first proving endpoint readiness. It exits
+1306 and prints `broker RPC interface incompatible` in
+`release-old-rpc-rejection2.txt.console.txt`. Original S3
+classify_missing_interface deliberately maps a confirmed wrong major to
+ERROR_REVISION_MISMATCH; the first harness incorrectly expected raw 1717 and
+failed, and its report is retained. The corrected assertion follows that
+verified original client behavior, not an arbitrary accepted failure code.
+
+Final-package `release-relaunch.txt` passes DOS MEM -> native VER -> DOS MEM
+and outer cooked CMD exit 19. `release-edit-return.txt` passes actual modern
+EDIT screen, Ctrl+Q, CMD echo, DOS MEM and launcher completion.
+`release-isolation` verifies selected worker closure does not terminate the
+independent Console and that it accepts subsequent input and returns 23.
+Tests wait actual broker process exit between singleton scenarios, rather
+than mistaking its admitted empty grace for a hang or inserting production
+delays. Temporary Z: is removed after testing.
+
+`t424-s4-release-wow-{winmine,sol,write}` retains the three independently
+compared S3 frontiers: visible WINMINE guest main class/text
+00C900A800C000D7; SOL's known memory dialog
+00C400DA00B400E600B200BB00B900BB; WRITE's known not-enough-memory dialog.
+This is noninteractive private-desktop observation, not gameplay or a claim
+that SOL/WRITE are usable. RDP capture and foreground manual UX are not
+revalidated by these probes.
+
+Final affected MSVC x86 /MT CCPU40 targets and MIDL30 generated closure link;
+supplemental WOW32 relink completes. All eight PE machine fields are x86.
+`release-source-manifest.json` pins 39 changed surviving source/test/build
+inputs; no production input changed during the final gate. Existing compiler
+warnings remain; a zero-warning claim is not made. Mirror/guest/shared-library
+diff checks, documentation governance, relative links and diff checks pass.
+
+Publication copies only the eight current product files into O:/winnt after
+preserving its hash-matching accepted S3 files and existing configuration under
+`accepted-s3-recovery`, with `accepted-s3-recovery-manifest.json`. Original
+COMMAND/MEM/EDIT/NTIO/NTDOS and SYSTEM.INI match the tested assets and are not
+changed. `published-manifest.json` matches all eight candidate hashes. The
+postpublication smoke in `published-relaunch.txt` passes DOS/native/DOS,
+outer cooked CMD result 19 and normal service retirement. Publication is not
+inferred from copying files alone.
+
+S4 closes the creation/control migration, not every subsequent cleanup or the
+T. The owner's newly inserted S5 checklist retains duplicate native transport,
+shared primitive ownership, launcher diagnostic target-handle dependencies,
+NTKVM dead state and obsolete direct-bootstrap fixture cleanup as explicit
+next-stage work. Naming follows S6, GUI routing S7, frontend naming S8 and
+final audit S9. No helper, descendant registry, new scheduler, original DOS/PIF
+policy or launch-syntax change is introduced by S4.

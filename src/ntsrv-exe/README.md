@@ -8,7 +8,7 @@ resource/Console mechanics only; it must not replace that original strategy.
 
 The S2 frontend association is independent of DOS/WOW scheduling. An original
 pending command selects the worker; an authenticated inherited capability
-selects the root run16. The service retains a pending resource attachment so
+selects the NTKVM frontend root. The service retains a pending resource attachment so
 root/request rundown can cancel a waiting worker before the pipe exists.
 It transfers pipe/event references once, never keyboard records or frames.
 A cancelled undelivered attachment cannot be adopted by another root. After
@@ -21,11 +21,22 @@ Service stop also drains the final idle residue. This is resource cleanup,
 not an idle-worker timer or a new task scheduler.
 
 Non-root launcher rundown never terminates handed-off DOS tasks or workers.
-The authenticated root process defines interactive session lifetime: its death
-is observed by the associated DOS worker and dispatched to original VDM close,
-not to a broker process-tree kill. Pipe failure alone remains I/O failure.
+The authenticated NTKVM root defines interactive session lifetime. NTSRV
+observes root loss and sends its authoritative worker shutdown instruction;
+the worker executes its own original/native Console-close boundary, not a
+broker process-tree kill. Pipe failure alone remains I/O failure.
 Actual worker death fails unfinished requests with ERROR_PROCESS_ABORTED;
 pre-handoff startup rollback remains separate.
+
+The S4 candidate also centralizes exact sibling NTKVM/NTVDM/NTW32 creation
+and all launcher Console takeover/restore acknowledgement through this service.
+Independent DOS worker-exit completion preserves original DosSesId/PIF policy.
+Self-owned native text close-on-exit follows final I/O acknowledgement and a
+conservative backend resource check. Both use the same broker retirement and
+sticky Console-return latch; borrowed sessions retain resident workers.
+Only worker/frontend I/O travels directly, without the broker as a frame relay.
+The current active packet/evidence, not this component description, determines
+verification and publication status.
 
 Original worker cleanup frees DOS records, including completed results not yet
 collected by their parent. Before either orderly ExitVDM or process rundown

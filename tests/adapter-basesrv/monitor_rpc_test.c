@@ -76,21 +76,34 @@ static int inner_launcher(HANDLE frontend,HANDLE execution,DWORD flags,DWORD exp
 static int console_context_rpc(RPC_BINDING_HANDLE binding,HANDLE self)
 {
     VDM_CONNECTION connection=NULL;
-    HANDLE frontend=CreateEventW(NULL,TRUE,FALSE,NULL),execution=NULL;
+    HANDLE frontend=NULL,execution=NULL,root=NULL,restored=NULL;
+    HANDLE forged=CreateEventW(NULL,TRUE,FALSE,NULL);
     ULONG server_protocol=0,generation=0;
     unsigned char server_version[APP_VERSION_BYTES]={0};
+    unsigned char wrong_version[APP_VERSION_BYTES];
     DWORD error;
 #define RPC_CHECK(call,expected) do { \
     RpcTryExcept { error=(call); } \
     RpcExcept(1) { error=RpcExceptionCode(); } RpcEndExcept \
+    if(error!=(expected))fprintf(stderr,"RPC actual=%lu expected=%lu\n",error,(DWORD)(expected)); \
     CHECK(error==(expected)); \
 } while (0)
-    CHECK(frontend);
+    CHECK(forged);
+    RPC_CHECK(Client_Connect(binding,self,APP_PROTOCOL_VERSION-1,(unsigned char *)version,
+        &server_protocol,server_version,&connection,&generation),ERROR_REVISION_MISMATCH);
+    CHECK(!connection && !generation);
+    memcpy(wrong_version,version,sizeof(wrong_version));wrong_version[0]='!';
+    RPC_CHECK(Client_Connect(binding,self,APP_PROTOCOL_VERSION,wrong_version,
+        &server_protocol,server_version,&connection,&generation),ERROR_REVISION_MISMATCH);
+    CHECK(!connection && !generation);
     RPC_CHECK(Client_Connect(binding,self,APP_PROTOCOL_VERSION,(unsigned char *)version,
         &server_protocol,server_version,&connection,&generation),ERROR_SUCCESS);
     CHECK(connection && generation && server_protocol==APP_PROTOCOL_VERSION &&
         !memcmp(server_version,version,sizeof(version)));
-    RPC_CHECK(Client_RegisterFrontendRoot(binding,connection,self,generation,frontend),ERROR_SUCCESS);
+    RPC_CHECK(Client_RegisterFrontendRoot(binding,connection,self,generation,forged),ERROR_ACCESS_DENIED);
+    RPC_CHECK(Client_StartFrontend(binding,connection,self,generation,
+        (ULONGLONG)(UINT_PTR)GetConsoleWindow(),TRUE,&root,&frontend,&restored),ERROR_SUCCESS);
+    CHECK(root && frontend && restored);
     RPC_CHECK(Client_AcquireConsoleContext(binding,connection,self,generation+1,frontend,&execution),
         ERROR_ACCESS_DENIED);
     CHECK(!execution);
@@ -99,47 +112,47 @@ static int console_context_rpc(RPC_BINDING_HANDLE binding,HANDLE self)
     CHECK(execution && WaitForSingleObject(execution,0)==WAIT_TIMEOUT);
     CHECK(!SetEvent(execution) && GetLastError()==ERROR_ACCESS_DENIED);
     {
-        WCHAR name[96];
-        HANDLE server,client,received=NULL,sender=NULL,context=NULL,io=NULL,probe=NULL;
-        SECURITY_DESCRIPTOR descriptor;
-        SECURITY_ATTRIBUTES security={sizeof(security),&descriptor,FALSE};
+        HANDLE received=NULL,sender=NULL,context=NULL,io=NULL,probe=NULL,target=NULL,receipt=NULL;
+        BYTE malformed=0;
         ULONG request=0;
-        swprintf_s(name,96,L"\\\\.\\pipe\\ntvdm-worker-channel-rpc-%lu",GetCurrentProcessId());
-        CHECK(InitializeSecurityDescriptor(&descriptor,SECURITY_DESCRIPTOR_REVISION));
-        /* The test client is a restricted token in the same runner.  The
-         * service still authenticates the creator/server identities. */
-        CHECK(SetSecurityDescriptorDacl(&descriptor,TRUE,NULL,FALSE));
-        server=CreateNamedPipeW(name,PIPE_ACCESS_DUPLEX|FILE_FLAG_FIRST_PIPE_INSTANCE,
-            PIPE_TYPE_BYTE|PIPE_WAIT,1,1024,1024,0,&security);
-        CHECK(server!=INVALID_HANDLE_VALUE);
-        client=CreateFileW(name,GENERIC_READ|GENERIC_WRITE,0,NULL,OPEN_EXISTING,0,NULL);
-        CHECK(client!=INVALID_HANDLE_VALUE && (ConnectNamedPipe(server,NULL) || GetLastError()==ERROR_PIPE_CONNECTED));
-        RPC_CHECK(Client_SubmitWorkerChannel(binding,connection,self,generation+1,frontend,server,L"monitor-rpc-test.exe"),ERROR_ACCESS_DENIED);
-        RPC_CHECK(Client_SubmitWorkerChannel(binding,connection,self,generation,execution,server,L"monitor-rpc-test.exe"),ERROR_ACCESS_DENIED);
-        RPC_CHECK(Client_SubmitWorkerChannel(binding,connection,self,generation,frontend,client,L"monitor-rpc-test.exe"),ERROR_INVALID_PARAMETER);
+        RPC_CHECK(Client_SubmitNativeRequest(binding,connection,self,generation+1,frontend,0,NULL,
+            &target,&receipt,&request),ERROR_ACCESS_DENIED);
+        CHECK(!target && !receipt && !request);
+        RPC_CHECK(Client_SubmitNativeRequest(binding,connection,self,generation,execution,0,NULL,
+            &target,&receipt,&request),ERROR_ACCESS_DENIED);
+        CHECK(!target && !receipt && !request);
+        RPC_CHECK(Client_SubmitNativeRequest(binding,connection,self,generation,frontend,1,&malformed,
+            &target,&receipt,&request),ERROR_INVALID_DATA);
+        CHECK(!target && !receipt && !request);
         /* Frontend identity alone cannot nominate an execution recipient. */
-        RPC_CHECK(Client_SubmitWorkerChannel(binding,connection,self,generation,frontend,server,L"monitor-rpc-test.exe"),ERROR_NOT_READY);
+        RPC_CHECK(Client_SubmitNativeRequest(binding,connection,self,generation,frontend,0,NULL,
+            &target,&receipt,&request),ERROR_NOT_READY);
+        CHECK(!target && !receipt && !request);
         RPC_CHECK(Client_GetNextNativeCommand(binding,connection,self,generation,&received,&sender,&context,&io,&request),ERROR_ACCESS_DENIED);
         CHECK(!received && !sender && !context && !io);
-        RPC_CHECK(Client_FrontendRequest(binding,connection,self,generation,&request,&probe),ERROR_NOT_FOUND);
+        /* The launcher now retains a separate real NTKVM root. It cannot
+         * consume that root's worker-I/O request queue. */
+        RPC_CHECK(Client_FrontendRequest(binding,connection,self,generation,&request,&probe),ERROR_ACCESS_DENIED);
         CHECK(!probe && !request && WaitForSingleObject(frontend,0)==WAIT_TIMEOUT);
-        CloseHandle(client);CloseHandle(server);
-        puts("PASS actual RPC worker-only execution: frontend identity cannot submit/take without worker admission; typed pipe and generation rejection");
+        puts("PASS actual RPC worker-only execution: generation/capability/payload rejection, no client pipe attachment, no submit/take without worker admission");
     }
     RPC_CHECK(Client_BindConsoleContext(binding,connection,self,generation,frontend),ERROR_ACCESS_DENIED);
     RPC_CHECK(Client_BindConsoleContext(binding,connection,self,generation+1,execution),ERROR_ACCESS_DENIED);
     RPC_CHECK(Client_BindConsoleContext(binding,connection,self,generation,execution),ERROR_SUCCESS);
     CHECK(inner_launcher(frontend,frontend,CREATE_NO_WINDOW,ERROR_ACCESS_DENIED)==0);
-    /* This fixture registers only a root identity, not a frontend request
-     * pump. Positive inner launch now belongs to the real root CLI tests. */
+    /* Positive nested execution belongs to the product CLI tests. */
     puts("PASS: production inner run16 rejects frontend object used as execution capability");
     RPC_CHECK(Client_Disconnect(binding,self,generation,&connection),ERROR_SUCCESS);
     CHECK(!connection);
+    /* Launcher disconnect does not revoke a live root. Observe the broker's
+     * real workerless retirement before asserting stale-context rejection. */
+    CHECK(WaitForSingleObject(root,15000)==WAIT_OBJECT_0);
     RPC_CHECK(Client_Connect(binding,self,APP_PROTOCOL_VERSION,(unsigned char *)version,
         &server_protocol,server_version,&connection,&generation),ERROR_SUCCESS);
     RPC_CHECK(Client_BindConsoleContext(binding,connection,self,generation,execution),ERROR_ACCESS_DENIED);
     RPC_CHECK(Client_Disconnect(binding,self,generation,&connection),ERROR_SUCCESS);
-    CloseHandle(execution);CloseHandle(frontend);
+    CloseHandle(execution);CloseHandle(frontend);CloseHandle(root);
+    CloseHandle(restored);CloseHandle(forged);
     puts("PASS: typed execution Console RPC, restricted rights, separate frontend authority, generation and root rundown");
 #undef RPC_CHECK
     return 0;

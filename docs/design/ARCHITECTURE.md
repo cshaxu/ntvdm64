@@ -8,10 +8,11 @@ NTKVM renderer or modifying guest/shared-library code.
 
 ## Product boundary
 
-### Broker-centered creation and control — T424 S4 target
+### Broker-centered creation and control — T424 S4 delivery
 
-Owner approval admits migration of project-added orchestration to NTSRV.
-This is a target boundary, not a claim of completed implementation. NTSRV
+Owner-approved migration of project-added orchestration is delivered by S4;
+the [S4 evidence](../etc/evidence/m0-t424-s4-broker-centered-launch-control.md)
+records production tests, publication and remaining S5 cleanup. NTSRV
 creates and authenticates NTKVM and NTVDM/NTW32, binds their frontend/execution
 relationships, delivers direct requests and owns orderly retirement. Run16
 finds/starts NTSRV, classifies/submits its target and waits on broker direct
@@ -44,21 +45,38 @@ frontend, worker or legitimate admission. Connected run16, NTKVM and workers
 watch the authenticated broker process handle using event waits, not periodic
 RPC probes. NTSRV orderly instructions have priority; broker loss, true Console
 closure and unrecoverable component faults remain separate failure boundaries.
-This target supersedes S3's immediate orphan retirement policy only upon
-implementation; S3 below describes the current published package.
+This delivered policy supersedes S3's immediate orphan retirement;
+the S3 section below describes the retained predecessor, not the current package.
 
-### Native GUI registration — T424 S5 target
+### Architecture/code cleanup — T424 S5 target
+
+The owner inserts a bounded cleanup after S4 delivery, before S6 worker naming.
+Consolidate identical control transport while retaining completed-I/O-first
+semantics; clarify the actual owned-client implementation/link boundaries;
+remove launcher target-handle decisions from native-text completion/Console
+return in favor of authenticated broker result/handoff state; remove NTKVM
+dead fields and stale ownership comments; retire replaced bootstrap tests only
+after mapping their assertions. Preserve the final restoration barrier and
+real target failure/result distinctions. This is a planned cleanup, not proof
+of production completion. Do not merge the strict frontend transport blindly,
+add a generic shared component, expand worker-base to nonworker consumers or
+relocate original execution. Detailed checklist and gates belong to the
+[T424 plan](../etc/operations/t424-worker-frontend-renaming-plan.md#s5-architecturecode-cleanup-checklist).
+
+### Native GUI registration — T424 S7 target
 
 The subsequent owner direction removes local run16 GUI creation from the target
-topology. Run16 retains broad DOS/Win16/native family discovery and unchanged
-arguments; every native target is submitted to NTSRV and delivered to NTW32.
-NTW32 decides the native GUI/CUI subsystem before acquiring a text frontend,
+topology. Owner places S6 NTW32 -> NTVWM naming before this S7 implementation;
+the rename alone does not deliver GUI routing. Run16 retains broad
+DOS/Win16/native family discovery and unchanged arguments; every native target
+is submitted to NTSRV and delivered to NTVWM. NTVWM decides the native GUI/CUI
+subsystem before acquiring a text frontend,
 creates the actual target and reports authenticated startup/binding success.
 NTSRV holds the registered GUI process handle independently of worker occupancy
 and retains native GUI registration until actual process exit. The owner's
 final clarification assigns monitor/UNBOUND display to the queue-head NTMON T
-candidate, not S4/S5. Its future view consumes service projection only.
-GUI routing/registration is a planned S5 target, not current runtime evidence
+candidate, not S4-S7. Its future view consumes service projection only.
+GUI routing/registration is a planned S7 target, not current runtime evidence
 or active S4 scope.
 
 Default GUI run16 returns on startup success, not window closure. Explicit
@@ -73,8 +91,9 @@ not be represented as an invented per-task Windows process handle. No new
 process, helper, Job observation or scheduler is introduced.
 
 The owner's later clarification keeps S4 active until centralization delivery;
-the premature replanning conclusion/S5 admission is superseded. S4 open rows
-remain S4 requirements; S5 native GUI/monitor work follows its delivery.
+the premature replanning conclusion/then-labelled S5 admission is superseded. S4 open rows
+remain S4 requirements; S5 cleanup, S6 naming and S7 native GUI work follow.
+Monitor/UNBOUND display remains outside both stages.
 
 ### Broker-owned retirement — T424 S3 owner approval
 

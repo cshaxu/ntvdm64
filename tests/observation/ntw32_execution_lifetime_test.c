@@ -8,6 +8,8 @@ static unsigned checks,failures,serial;
 static DWORD completion_error;
 static volatile LONG completed_resume_count;
 static DWORD observed_broker_fault;
+BOOL ntw32_console_quiescent(DWORD completed_target)
+{ (void)completed_target;return FALSE; } /* This fixture owns no carrier. */
 static void record_broker_fault(void *context,DWORD error)
 { (void)context;observed_broker_fault=error; }
 /* This fixture owns attachments directly, without a broker delivery lease. */

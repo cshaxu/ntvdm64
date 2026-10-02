@@ -8,6 +8,10 @@
  * the service; transport guarantees connection rundown follows active calls. */
 typedef struct OPENNT_BASE_SERVICE OPENNT_BASE_SERVICE;
 typedef struct OPENNT_BASE_CONNECTION OPENNT_BASE_CONNECTION;
+DWORD OpenNtBaseServiceStartNativeWorker(OPENNT_BASE_CONNECTION *,DWORD,DWORD,HANDLE *);
+DWORD OpenNtBaseServiceSubmitNativeRequest(OPENNT_BASE_CONNECTION *,DWORD,DWORD,HANDLE,
+    DWORD,BYTE *,HANDLE *,HANDLE *,DWORD *);
+DWORD OpenNtBaseServiceFinishNativeRequest(OPENNT_BASE_CONNECTION *,DWORD,DWORD,DWORD,DWORD *);
 typedef void (WINAPI *OPENNT_BASE_EMPTY_NOTIFY)(void *);
 /* Copied management projection. PID selects the currently authenticated,
  * registered worker. BaseSrv sequence remains private routing state. No
@@ -45,8 +49,8 @@ DWORD OpenNtBaseServiceSnapshot(OPENNT_BASE_SERVICE *,uint64_t *epoch,
     OPENNT_BASE_WORKER_INFO *entries,uint32_t capacity,uint32_t *count);
 DWORD OpenNtBaseServiceTerminateWorker(OPENNT_BASE_SERVICE *,uint32_t process_id);
 DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *,HANDLE,OPENNT_BASE_CONNECTION **,DWORD *);
-/* Local Console membership is sampled only by the authenticated launcher
- * which is actually attached to that Console.  It is a bounded selection
+/* Local Console membership is sampled only by the authenticated NTKVM root
+ * which is actually attached to that Console. It is a bounded selection
  * hint for original ConsoleRecord association, never a task/worker claim. */
 DWORD OpenNtBaseServiceReportConsoleMembers(OPENNT_BASE_CONNECTION *,DWORD pid,
     DWORD generation,DWORD count,const DWORD *members);
@@ -64,6 +68,11 @@ BOOL OpenNtBaseServicePeer(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation);
 /* For authenticated in-flight calls only. Caller closes the returned handle;
  * retaining it does not extend the RPC context or registration lifetime. */
 DWORD OpenNtBaseServiceRetainPeer(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,HANDLE *);
+DWORD OpenNtBaseServiceStartFrontend(OPENNT_BASE_CONNECTION *,DWORD,DWORD,
+    uint64_t,BOOL,HANDLE *,HANDLE *,HANDLE *);
+DWORD OpenNtBaseServiceReturnFrontendConsole(OPENNT_BASE_CONNECTION *,DWORD,DWORD);
+DWORD OpenNtBaseServiceWaitFrontendConsoleRestored(OPENNT_BASE_CONNECTION *,DWORD,DWORD);
+DWORD OpenNtBaseServiceFrontendConsoleRestored(OPENNT_BASE_CONNECTION *,DWORD,DWORD);
 /* Independent of DOS command receipts: a root registers an unnamed event
  * received through an authenticated typed attachment. Descendants present
  * a restricted duplicate of that same object, never a trusted handle number.
@@ -107,11 +116,12 @@ DWORD OpenNtBaseServiceBindConsoleContext(OPENNT_BASE_CONNECTION *,DWORD pid,
     DWORD generation,HANDLE capability);
 DWORD OpenNtBaseServiceWorkerFrontendCapability(OPENNT_BASE_CONNECTION *,DWORD pid,
     DWORD generation,HANDLE *capability);
-/* One pending launcher channel per authenticated connection, delivered only
- * to its admitted native worker. No launch payload or target-result policy here.
- * Receiver owns all four references; sender rundown drops pending ones only. */
-DWORD OpenNtBaseServiceSubmitWorkerChannel(OPENNT_BASE_CONNECTION *,DWORD pid,
-    DWORD generation,HANDLE capability,HANDLE channel,const WCHAR image[OPENNT_BASE_WORKER_IMAGE_CHARS]);
+/* Service-private enqueue used by its native request producer, not an RPC
+ * endpoint. Validate the producer's actual pipe-server PID; clients cannot
+ * nominate a transport. Receiver owns its copied channel attachments. */
+DWORD OpenNtBaseServiceQueueNativeChannel(OPENNT_BASE_CONNECTION *,DWORD pid,
+    DWORD generation,HANDLE capability,HANDLE channel,
+    const WCHAR image[OPENNT_BASE_WORKER_IMAGE_CHARS],DWORD server_pid);
 DWORD OpenNtBaseServiceTakeWorkerChannel(OPENNT_BASE_CONNECTION *,DWORD pid,
     DWORD generation,HANDLE *channel,HANDLE *caller_process,HANDLE *execution,HANDLE *frontend,DWORD *request);
 DWORD OpenNtBaseServiceGetNextNativeCommand(OPENNT_BASE_CONNECTION *,DWORD pid,
@@ -203,4 +213,6 @@ DWORD OpenNtBaseServiceExit(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,
 void OpenNtBaseServiceReleaseCommandReply(void *);
 DWORD OpenNtBaseServiceAttachStream(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,DWORD role,HANDLE,DWORD *);
 DWORD OpenNtBaseServiceRevokeStream(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,DWORD receipt);
+DWORD OpenNtBaseServiceStartVdmWorker(OPENNT_BASE_CONNECTION *,DWORD,DWORD,
+    DWORD,const WCHAR *,DWORD,HANDLE,HANDLE *,HANDLE *,DWORD *);
 #endif

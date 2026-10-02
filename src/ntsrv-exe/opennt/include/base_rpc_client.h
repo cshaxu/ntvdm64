@@ -5,7 +5,18 @@
 #define OPENNT_BASE_RPC_CLIENT_H
 #include <windows.h>
 #include <stdint.h>
+DWORD OpenNtBaseClientSubmitNativeRequest(HANDLE,DWORD,BYTE *,HANDLE *,HANDLE *,DWORD *);
+DWORD OpenNtBaseClientFinishNativeRequest(DWORD,DWORD *);
 DWORD OpenNtBaseClientConnectCurrent(void);
+DWORD OpenNtBaseClientBrokerProcess(HANDLE *server);
+DWORD OpenNtBaseClientStartFrontend(uint64_t console_window,BOOL borrowed,
+    HANDLE *root,HANDLE *capability,HANDLE *restored);
+DWORD OpenNtBaseClientReturnFrontendConsole(void);
+DWORD OpenNtBaseClientStartNativeWorker(HANDLE *);
+DWORD OpenNtBaseClientStartVdmWorker(PCWSTR environment,DWORD characters,
+    DWORD show,HANDLE frontend,HANDLE *worker,HANDLE *parent);
+DWORD OpenNtBaseClientWaitFrontendConsoleRestored(void);
+DWORD OpenNtBaseClientFrontendConsoleRestored(void);
 DWORD OpenNtBaseClientReportCurrentConsoleMembers(void);
 /* Arm only after launcher creation rollback is no longer required. Workers
  * arm immediately after Connect, before entering guest code. */
@@ -38,7 +49,6 @@ DWORD OpenNtBaseClientRetainFrontendRoot(HANDLE capability,HANDLE *root,DWORD *g
 /* Separate execution association; caller owns/closes the wait-only event. */
 DWORD OpenNtBaseClientAcquireConsoleContext(HANDLE frontend,HANDLE *capability);
 DWORD OpenNtBaseClientBindConsoleContext(HANDLE capability);
-DWORD OpenNtBaseClientSubmitWorkerChannel(HANDLE capability,HANDLE channel,const WCHAR image[260]);
 DWORD OpenNtBaseClientGetNextNativeCommand(HANDLE *channel,HANDLE *caller_process,HANDLE *execution,HANDLE *frontend,DWORD *request);
 DWORD OpenNtBaseClientRequestFrontend(HANDLE capability);
 DWORD OpenNtBaseClientFrontendRequest(DWORD *request,HANDLE *worker);

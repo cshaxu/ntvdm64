@@ -10,12 +10,15 @@ typedef struct frontend_bootstrap_reply {
 } frontend_bootstrap_reply;
 
 /* NTSRV owns the direct result; NTW32 reports its I/O release separately. */
-#define NATIVE_REQUEST_VERSION 5u
+#define NATIVE_REQUEST_VERSION 6u
 /* Zero bytes requests an acknowledged native presentation resume, not a
  * launch. It returns no target/receipt handles and creates no target. */
 typedef struct native_request_header { uint32_t version,bytes; } native_request_header;
 typedef struct native_request_reply { uint32_t version,error,request,reserved;uint64_t target,receipt; } native_request_reply;
-typedef struct native_request_completion { uint32_t version,error; } native_request_completion;
+/* Resource state at the final I/O boundary, not task membership or an exit
+ * instruction. Only NTSRV decides whether an owned Console can retire. */
+#define NATIVE_COMPLETION_CONSOLE_EMPTY 1u
+typedef struct native_request_completion { uint32_t version,error,flags; } native_request_completion;
 
 /* Followed by application/command/directory/environment strings. Numeric
  * resource slots are never authority: the authenticated receiver materializes

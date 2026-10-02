@@ -10,6 +10,30 @@ static HANDLE report;
     if(report) WriteFile(report,line,(DWORD)strlen(line),&failure_written,NULL);else fputs(line,stderr);ExitProcess(1); } } while(0)
 #define OK(call) do { DWORD test_error=(call);SetLastError(test_error);CHECK(test_error==ERROR_SUCCESS); } while(0)
 
+static void check_console_resources(void)
+{
+    SECURITY_ATTRIBUTES security={sizeof(security),NULL,TRUE};
+    STARTUPINFOW startup={sizeof(startup)};PROCESS_INFORMATION process={0};
+    WCHAR image[MAX_PATH],command[MAX_PATH+100];
+    HANDLE ready=CreateEventW(&security,TRUE,FALSE,NULL);
+    HANDLE stop=CreateEventW(&security,TRUE,FALSE,NULL);
+    CHECK(ready && stop && ntw32_console_quiescent(0));
+    CHECK(GetModuleFileNameW(NULL,image,MAX_PATH));
+    swprintf_s(command,ARRAYSIZE(command),L"\"%ls\" --attachment-child %lx %lx",image,
+        (unsigned long)(ULONG_PTR)ready,(unsigned long)(ULONG_PTR)stop);
+    CHECK(CreateProcessW(image,command,NULL,NULL,TRUE,0,NULL,NULL,&startup,&process));
+    CloseHandle(process.hThread);
+    CHECK(WaitForSingleObject(ready,5000)==WAIT_OBJECT_0);
+    CHECK(!ntw32_console_quiescent(0)); /* Real live residual attachment. */
+    CHECK(SetEvent(stop) && WaitForSingleObject(process.hProcess,5000)==WAIT_OBJECT_0);
+    CHECK(ntw32_console_quiescent(process.dwProcessId)); /* Target remains pinned. */
+    CloseHandle(process.hProcess);CloseHandle(stop);CloseHandle(ready);
+    CHECK(FreeConsole());
+    CHECK(!ntw32_console_quiescent(0)); /* No Console is not an empty Console. */
+    CHECK(AllocConsole());
+    if(GetConsoleWindow())ShowWindow(GetConsoleWindow(),SW_HIDE);
+}
+
 static void seed(HANDLE buffer,SHORT width,SHORT height,WCHAR base)
 {
     CHAR_INFO cells[256];
@@ -43,6 +67,7 @@ static int child(void)
     DWORD i,count;
     CHECK(FreeConsole() && AllocConsole());
     if(GetConsoleWindow())ShowWindow(GetConsoleWindow(),SW_HIDE);
+    check_console_resources();
     output=CreateConsoleScreenBuffer(GENERIC_READ|GENERIC_WRITE,
         FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,CONSOLE_TEXTMODE_BUFFER,NULL);
     CHECK(output!=INVALID_HANDLE_VALUE);
@@ -133,7 +158,7 @@ static int child(void)
     }
     CloseHandle(output);
     {
-        const char text[]="PASS native Console presentation: scrollback, Unicode, palette, cursor, 5001 columns, invalid spans, ordinary font unchanged; logical 80x25/80x50/120x40/20x8/80x43 exact and edge-cell retained\n";
+        const char text[]="PASS native Console resource check: live attachment prevents close; pinned completed target permits close; no Console fails conservatively\nPASS native Console presentation: scrollback, Unicode, palette, cursor, 5001 columns, invalid spans, ordinary font unchanged; logical 80x25/80x50/120x40/20x8/80x43 exact and edge-cell retained\n";
         CHECK(WriteFile(report,text,sizeof(text)-1,&count,NULL));
     }
     return 0;
@@ -152,6 +177,12 @@ int main(int argc,char **argv)
     if(argc==3 && !strcmp(argv[1],"--child")) {
         report=(HANDLE)(ULONG_PTR)strtoul(argv[2],NULL,16);
         return child();
+    }
+    if(argc==4 && !strcmp(argv[1],"--attachment-child")) {
+        HANDLE ready=(HANDLE)(ULONG_PTR)strtoul(argv[2],NULL,16);
+        HANDLE stop=(HANDLE)(ULONG_PTR)strtoul(argv[3],NULL,16);
+        if(!SetEvent(ready))return 2;
+        return WaitForSingleObject(stop,5000)==WAIT_OBJECT_0 ? 0 : 3;
     }
     CHECK(CreatePipe(&input,&output,&security,4096));
     CHECK(SetHandleInformation(input,HANDLE_FLAG_INHERIT,0));
