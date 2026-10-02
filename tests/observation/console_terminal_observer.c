@@ -5,6 +5,7 @@
  */
 #define _WIN32_WINNT 0x0A00
 #include <windows.h>
+#include <tlhelp32.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -86,6 +87,109 @@ static DWORD WINAPI copy_output(void *unused) {
     return 0;
 }
 static void send_keys(const char *s) {DWORD w=0;if(!WriteFile(write_pipe,s,(DWORD)strlen(s),&w,NULL)||w!=strlen(s))fprintf(stderr,"console input write failed: %lu/%lu\n",GetLastError(),(unsigned long)w);}
+
+/* The title sample is read from NTCON's own Console, not from a Terminal tab
+ * label or from the observer's ConPTY. This test-only process attaches just
+ * long enough to read the title and never writes to that Console. */
+static DWORD s36_process_pid(const char *runtime,const char *name)
+{
+    char expected[MAX_PATH];HANDLE image;
+    BY_HANDLE_FILE_INFORMATION wanted;
+    HANDLE snapshot=CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS,0);
+    PROCESSENTRY32 entry={0};DWORD result=0;
+    snprintf(expected,sizeof(expected),"%s\\%s",runtime,name);
+    image=CreateFileA(expected,0,FILE_SHARE_READ|FILE_SHARE_WRITE|FILE_SHARE_DELETE,
+        NULL,OPEN_EXISTING,0,NULL);
+    if(snapshot==INVALID_HANDLE_VALUE || image==INVALID_HANDLE_VALUE ||
+        !GetFileInformationByHandle(image,&wanted)) {
+        if(snapshot!=INVALID_HANDLE_VALUE)CloseHandle(snapshot);
+        if(image!=INVALID_HANDLE_VALUE)CloseHandle(image);
+        return 0;
+    }
+    entry.dwSize=sizeof(entry);
+    if(Process32First(snapshot,&entry))do {
+        char path[MAX_PATH];DWORD size=sizeof(path);
+        HANDLE process;
+        if(_stricmp(entry.szExeFile,name))continue;
+        process=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION,FALSE,entry.th32ProcessID);
+        if(process && QueryFullProcessImageNameA(process,0,path,&size)) {
+            HANDLE candidate=CreateFileA(path,0,FILE_SHARE_READ|FILE_SHARE_WRITE|FILE_SHARE_DELETE,
+                NULL,OPEN_EXISTING,0,NULL);
+            BY_HANDLE_FILE_INFORMATION actual;
+            if(candidate!=INVALID_HANDLE_VALUE) {
+                if(GetFileInformationByHandle(candidate,&actual) &&
+                    actual.dwVolumeSerialNumber==wanted.dwVolumeSerialNumber &&
+                    actual.nFileIndexHigh==wanted.nFileIndexHigh &&
+                    actual.nFileIndexLow==wanted.nFileIndexLow)
+                    result=entry.th32ProcessID;
+                CloseHandle(candidate);
+            }
+        }
+        if(process)CloseHandle(process);
+        if(result)break;
+    }while(Process32Next(snapshot,&entry));
+    CloseHandle(snapshot);CloseHandle(image);return result;
+}
+static void s36_note(const char *stage,const char *value)
+{
+    char line[256];DWORD written;
+    int length=snprintf(line,sizeof(line),"\r\nS36-PROBE %s <%s>\r\n",stage,value);
+    if(length>0 && length<(int)sizeof(line))WriteFile(raw_log,line,(DWORD)length,&written,NULL);
+}
+static int s36_sample_title(const char *runtime,const char *stage,char *title,DWORD capacity)
+{
+    DWORD pid=s36_process_pid(runtime,"ntcon.exe"),length,error;
+    if(!pid){s36_note(stage,"ntcon-not-found");return 0;}
+    FreeConsole();
+    if(!AttachConsole(pid)){s36_note(stage,"attach-failed");return 0;}
+    SetLastError(ERROR_SUCCESS);
+    length=GetConsoleTitleA(title,capacity);
+    error=GetLastError();
+    if(capacity)title[capacity-1]=0;
+    s36_note(stage,title);
+    FreeConsole();
+    return length || error==ERROR_SUCCESS;
+}
+static int s36_send_caf(DWORD console_pid)
+{
+    HANDLE input;INPUT_RECORD keys[2]={0};DWORD written=0;
+    FreeConsole();
+    if(!AttachConsole(console_pid)){s36_note("caf","attach-failed");return 0;}
+    input=CreateFileW(L"CONIN$",GENERIC_READ|GENERIC_WRITE,
+        FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,OPEN_EXISTING,0,NULL);
+    if(input==INVALID_HANDLE_VALUE){s36_note("caf","conin-failed");FreeConsole();return 0;}
+    keys[0].EventType=KEY_EVENT;keys[0].Event.KeyEvent.bKeyDown=TRUE;
+    keys[0].Event.KeyEvent.wRepeatCount=1;keys[0].Event.KeyEvent.wVirtualKeyCode='F';
+    keys[0].Event.KeyEvent.wVirtualScanCode=0x21;
+    keys[0].Event.KeyEvent.dwControlKeyState=NUMLOCK_ON|LEFT_CTRL_PRESSED|LEFT_ALT_PRESSED;
+    keys[1]=keys[0];keys[1].Event.KeyEvent.bKeyDown=FALSE;
+    WriteConsoleInputW(input,keys,2,&written);
+    CloseHandle(input);FreeConsole();s36_note("caf",written==2?"sent":"write-failed");return written==2;
+}
+static int s36_window_title(const char *runtime,const char *stage,const char *expected)
+{
+    DWORD pid=s36_process_pid(runtime,"ntkvm.exe"),actual_pid=0;
+    char caption[128]={0};HWND window=FindWindowW(L"LibKvmWindow",NULL);
+    if(!pid || !window || !IsWindowVisible(window)){
+        s36_note(stage,"window-not-visible");return 0;
+    }
+    GetWindowThreadProcessId(window,&actual_pid);
+    if(pid!=actual_pid || !GetWindowTextA(window,caption,sizeof(caption))){
+        s36_note(stage,"window-owner-or-title-failed");return 0;
+    }
+    s36_note(stage,caption);return !strcmp(caption,expected);
+}
+static int s36_close_window(void)
+{
+    HWND window=FindWindowW(L"LibKvmWindow",NULL);
+    ULONGLONG deadline=GetTickCount64()+5000;
+    if(!window || !PostMessageW(window,WM_CLOSE,0,0)){
+        s36_note("close-window","not-found-or-post-failed");return 0;
+    }
+    while(IsWindow(window) && GetTickCount64()<deadline)Sleep(25);
+    s36_note("close-window",IsWindow(window)?"still-open":"closed");
+    return !IsWindow(window);
+}
 
 static int log_contains(const char *path,const char *needle) {
     HANDLE file; DWORD size,read; char *data; int found=0;
@@ -245,8 +349,9 @@ int main(int argc,char **argv) {
     HANDLE in_read,out_write,thread,job;
     HPCON pty;
     STARTUPINFOEXA si={0};PROCESS_INFORMATION pi={0};SIZE_T bytes=0;
+    HDESK s36_desktop=NULL;char s36_desktop_name[64]={0};
     COORD size;
-if(argc!=4 && (argc!=5 || (strcmp(argv[4],"--s33-first-ver") && strcmp(argv[4],"--s33-first-dir") && strcmp(argv[4],"--s34-full-dir") && strcmp(argv[4],"--mouse") && strcmp(argv[4],"--resize") && strcmp(argv[4],"--video-int10") && strcmp(argv[4],"--system-capability") && strcmp(argv[4],"--bios-capability") && strcmp(argv[4],"--support-capability") && strcmp(argv[4],"--disks-capability") && strcmp(argv[4],"--comms-capability") && strcmp(argv[4],"--comms-host-medium") && strcmp(argv[4],"--comms-loopback") && strcmp(argv[4],"--lpt-host-medium") && strcmp(argv[4],"--dosx-himem-capability") && strcmp(argv[4],"--pure-dos-capability") && strcmp(argv[4],"--ems-capability") && strcmp(argv[4],"--vdmredir-pipe") && strcmp(argv[4],"--vdmredir-transact") && strcmp(argv[4],"--vdmredir-call") && strcmp(argv[4],"--vdmredir-timeout") && strcmp(argv[4],"--vdmredir-async") && strcmp(argv[4],"--vdmredir-async-write") && strcmp(argv[4],"--vdmredir-mailslot") && strcmp(argv[4],"--vdmredir-terminate") && strcmp(argv[4],"--vdmredir-netbios") && strcmp(argv[4],"--vdmredir-netbios-async") && strcmp(argv[4],"--vdmredir-dlc") && strcmp(argv[4],"--vdmredir-netapi") && strcmp(argv[4],"--vdmredir-net-enum") && strcmp(argv[4],"--vdmredir-wksta") && strcmp(argv[4],"--vdmredir-wksta-set") && strcmp(argv[4],"--vdmredir-message") && strcmp(argv[4],"--vdmredir-service") && strcmp(argv[4],"--vdmredir-assign") && strcmp(argv[4],"--vdmredir-use") && strcmp(argv[4],"--vdmredir-use-info") && strcmp(argv[4],"--vdmredir-use-lifecycle"))))return 64;
+if(argc!=4 && (argc!=5 || (strcmp(argv[4],"--s36-nested-title") && strcmp(argv[4],"--s33-first-ver") && strcmp(argv[4],"--s33-first-dir") && strcmp(argv[4],"--s34-full-dir") && strcmp(argv[4],"--mouse") && strcmp(argv[4],"--resize") && strcmp(argv[4],"--video-int10") && strcmp(argv[4],"--system-capability") && strcmp(argv[4],"--bios-capability") && strcmp(argv[4],"--support-capability") && strcmp(argv[4],"--disks-capability") && strcmp(argv[4],"--comms-capability") && strcmp(argv[4],"--comms-host-medium") && strcmp(argv[4],"--comms-loopback") && strcmp(argv[4],"--lpt-host-medium") && strcmp(argv[4],"--dosx-himem-capability") && strcmp(argv[4],"--pure-dos-capability") && strcmp(argv[4],"--ems-capability") && strcmp(argv[4],"--vdmredir-pipe") && strcmp(argv[4],"--vdmredir-transact") && strcmp(argv[4],"--vdmredir-call") && strcmp(argv[4],"--vdmredir-timeout") && strcmp(argv[4],"--vdmredir-async") && strcmp(argv[4],"--vdmredir-async-write") && strcmp(argv[4],"--vdmredir-mailslot") && strcmp(argv[4],"--vdmredir-terminate") && strcmp(argv[4],"--vdmredir-netbios") && strcmp(argv[4],"--vdmredir-netbios-async") && strcmp(argv[4],"--vdmredir-dlc") && strcmp(argv[4],"--vdmredir-netapi") && strcmp(argv[4],"--vdmredir-net-enum") && strcmp(argv[4],"--vdmredir-wksta") && strcmp(argv[4],"--vdmredir-wksta-set") && strcmp(argv[4],"--vdmredir-message") && strcmp(argv[4],"--vdmredir-service") && strcmp(argv[4],"--vdmredir-assign") && strcmp(argv[4],"--vdmredir-use") && strcmp(argv[4],"--vdmredir-use-info") && strcmp(argv[4],"--vdmredir-use-lifecycle"))))return 64;
     size.X=(SHORT)atoi(argv[1]);size.Y=(SHORT)atoi(argv[2]);
     if(argc==5 && !strcmp(argv[4],"--lpt-host-medium")) {
         lpt_pipe_server=CreateNamedPipeA("\\\\.\\pipe\\NTVDMLPTTEST",PIPE_ACCESS_INBOUND,PIPE_TYPE_BYTE|PIPE_WAIT,1,16,16,0,NULL);
@@ -291,6 +396,12 @@ if(argc!=4 && (argc!=5 || (strcmp(argv[4],"--s33-first-ver") && strcmp(argv[4],"
     InitializeProcThreadAttributeList(si.lpAttributeList,1,0,&bytes);
     UpdateProcThreadAttribute(si.lpAttributeList,0,PROC_THREAD_ATTRIBUTE_PSEUDOCONSOLE,pty,sizeof(pty),NULL,NULL);
     si.StartupInfo.cb=sizeof(si);
+    if(argc==5 && !strcmp(argv[4],"--s36-nested-title")) {
+        snprintf(s36_desktop_name,sizeof(s36_desktop_name),"NTVDMConsoleTest-S36-%lu",GetCurrentProcessId());
+        s36_desktop=CreateDesktopA(s36_desktop_name,NULL,NULL,0,GENERIC_ALL,NULL);
+        if(!s36_desktop || !SetThreadDesktop(s36_desktop))return 79;
+        si.StartupInfo.lpDesktop=s36_desktop_name;
+    }
     job=CreateJobObjectA(NULL,NULL); limits.BasicLimitInformation.LimitFlags=JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE;
     SetInformationJobObject(job,JobObjectExtendedLimitInformation,&limits,sizeof(limits));
     HANDLE saved_in=GetStdHandle(STD_INPUT_HANDLE),saved_out=GetStdHandle(STD_OUTPUT_HANDLE),saved_err=GetStdHandle(STD_ERROR_HANDLE);
@@ -304,6 +415,48 @@ if(argc!=4 && (argc!=5 || (strcmp(argv[4],"--s33-first-ver") && strcmp(argv[4],"
       if(GetEnvironmentVariableA("MVDM_TEST_BOOT_WAIT_MS",boot_wait_text,
           sizeof(boot_wait_text))) boot_wait=(DWORD)strtoul(boot_wait_text,0,10);
       Sleep(boot_wait); }
+    if(argc==5 && !strcmp(argv[4],"--s36-nested-title")) {
+        char runtime[MAX_PATH]="O:\\winnt",launch[MAX_PATH+32],title[128]={0};
+        int outer,nested,inner,after,window_outer,window_nested,window_inner,window_after;
+        GetEnvironmentVariableA("TEST_RUNTIME_ROOT",runtime,sizeof(runtime));
+        snprintf(launch,sizeof(launch),"%s\\run16 cmd\r",runtime);
+        send_keys(launch);Sleep(3000);
+        send_keys("title S36-OUTER\r");Sleep(1000);
+        outer=s36_sample_title(runtime,"outer",title,sizeof(title)) &&
+            !strcmp(title,"S36-OUTER");
+        if(!s36_send_caf(pi.dwProcessId))return 80;
+        Sleep(1200);
+        window_outer=s36_window_title(runtime,"outer","S36-OUTER");
+        if(!s36_close_window())return 81;
+        send_keys("cmd\r");Sleep(1500);
+        nested=s36_sample_title(runtime,"nested-before-title",title,sizeof(title)) &&
+            !strcmp(title,"S36-OUTER - cmd");
+        if(!s36_send_caf(pi.dwProcessId))return 86;
+        Sleep(1200);
+        window_nested=s36_window_title(runtime,"nested-before-title","S36-OUTER - cmd");
+        if(!s36_close_window())return 87;
+        send_keys("title S36-INNER\r");Sleep(1000);
+        inner=s36_sample_title(runtime,"inner",title,sizeof(title)) &&
+            !strcmp(title,"S36-INNER");
+        if(!s36_send_caf(pi.dwProcessId))return 82;
+        Sleep(1200);
+        window_inner=s36_window_title(runtime,"inner","S36-INNER");
+        if(!s36_close_window())return 83;
+        send_keys("exit\r");Sleep(1500);
+        after=s36_sample_title(runtime,"after-inner-exit",title,sizeof(title));
+        if(!s36_send_caf(pi.dwProcessId))return 84;
+        Sleep(1200);
+        window_after=after && s36_window_title(runtime,"after-inner-exit",title);
+        if(!s36_close_window())return 85;
+        send_keys("exit\r");Sleep(500);send_keys("exit\r");
+        WaitForSingleObject(pi.hProcess,5000);
+        CloseHandle(job);ClosePseudoConsole(pty);CloseHandle(write_pipe);
+        WaitForSingleObject(thread,3000);CloseHandle(raw_log);
+        printf("s36-title outer=%d nested=%d inner=%d after=%d window=%d/%d/%d/%d\n",
+            outer,nested,inner,after,window_outer,window_nested,window_inner,window_after);
+        return outer && nested && inner && after && window_outer && window_nested &&
+            window_inner && window_after ? 0 : 1;
+    }
     if(argc==5 && (!strcmp(argv[4],"--s33-first-ver") || !strcmp(argv[4],"--s33-first-dir"))) {
         char runtime[MAX_PATH]="O:\\winnt",launch[MAX_PATH+32];
         int dir=!strcmp(argv[4],"--s33-first-dir");

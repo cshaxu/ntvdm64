@@ -6,7 +6,7 @@
 
 /* Direct worker/frontend protocol; no pointers or native resource identities.
  * Local x86 peers are authenticated by the BaseSrv channel attachment. */
-#define CONSOLE_IO_VERSION 20u
+#define CONSOLE_IO_VERSION 21u
 /* Activation's state.mode selects the endpoint's input interpretation, not
  * a different frame format or an execution scheduler. */
 enum { CONSOLE_IO_WORKER_DOS=0, CONSOLE_IO_WORKER_NATIVE=1 };
@@ -17,6 +17,7 @@ enum { CONSOLE_IO_WORKER_DOS=0, CONSOLE_IO_WORKER_NATIVE=1 };
 #define CONSOLE_COMMAND_STREAMS_ENTRY "NTVDM_COMMAND_STREAMS_V1="
 #define CONSOLE_COMMAND_STREAMS_WENTRY L"NTVDM_COMMAND_STREAMS_V1="
 #define CONSOLE_IO_DATA_BYTES 16384u
+#define CONSOLE_IO_TITLE_BYTES 128u
 typedef struct console_io_cell {
     uint16_t character,attribute;
 } console_io_cell;
@@ -72,7 +73,10 @@ enum console_io_operation {
     /* Native worker copies a multi-tile frontend screen while its channel
      * owns the frontend I/O lock. The channel releases it on END or EOF. */
     CONSOLE_IO_SNAPSHOT_BEGIN,
-    CONSOLE_IO_SNAPSHOT_END
+    CONSOLE_IO_SNAPSHOT_END,
+    /* Worker-owned Console title for the active Window caption. This does
+     * not change the frontend's native Console title or execution owner. */
+    CONSOLE_IO_PUBLISH_TITLE_A
 };
 enum console_io_window_query {
     CONSOLE_WINDOW_ICONIC=1,

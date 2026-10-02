@@ -27,6 +27,8 @@ typedef struct run16_console_frontend {
     BOOL (*window_clip_owned)(void *);
     /* A successful DOS Console title change wakes NTKVM presentation. */
     void (*title_changed)(void *);
+    /* Copied caption metadata, not a SetConsoleTitle on the root Console. */
+    void (*publish_title)(void *,const char *);
     /* Copied input owned by frontend; callbacks hold the enter lock. */
     DWORD (*read_input)(void *,BOOL,INPUT_RECORD *,DWORD,DWORD *);
     DWORD (*prepend_input)(void *,const INPUT_RECORD *,DWORD);

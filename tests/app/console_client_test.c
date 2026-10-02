@@ -73,6 +73,13 @@ DWORD OpenNtBaseClientWorkerFrontendCapability(HANDLE *capability)
     *capability=CreateEventW(NULL,TRUE,FALSE,NULL);
     return *capability ? ERROR_SUCCESS : GetLastError();
 }
+DWORD worker_base_retain_frontend_root(HANDLE capability,HANDLE *process)
+{
+    CHECK(capability!=NULL && process!=NULL);
+    /* The broker's authenticated root retention is covered by RPC tests. */
+    return DuplicateHandle(GetCurrentProcess(),frontend_process,GetCurrentProcess(),
+        process,SYNCHRONIZE,FALSE,0) ? ERROR_SUCCESS : GetLastError();
+}
 DWORD OpenNtBaseClientAcquireConsoleContext(HANDLE root_capability,HANDLE *capability)
 {
     CHECK(root_capability!=NULL);
@@ -278,7 +285,9 @@ int main(int argc,char **argv)
         native_title(saved,sizeof(saved));
         for (t=0;t<sizeof(titles)/sizeof(titles[0]);++t) {
             sequence=frontend.sequence;
-            CHECK(SetConsoleTitleA(titles[t]) && frontend.sequence==sequence+1);
+            /* A successful original SetConsoleTitleA is followed by the
+             * supplemental worker title publication for Window mode. */
+            CHECK(SetConsoleTitleA(titles[t]) && frontend.sequence==sequence+2);
             for (c=0;c<4;++c) {
                 memset(expected_title,0x7e,sizeof(expected_title));
                 memset(actual_title,0x7e,sizeof(actual_title));

@@ -32,6 +32,9 @@ struct run16_native_frontend {
     BOOL handoff_active,handoff_native;
     DWORD handoff_error;
     const void *dos_owner,*native_owner;
+    const void *title_owner;
+    char worker_title[CONSOLE_IO_TITLE_BYTES];
+    BOOL worker_title_valid;
     const void *dos_pending;
     const run16_console_video *dos_video,*native_video;
     uint32_t dos_video_serial,native_video_serial;
@@ -66,10 +69,13 @@ static void signal_binding_waiters(run16_native_frontend *frontend)
 }
 static DWORD apply_binding(run16_native_frontend *,const void *,BOOL,BOOL);
 static DWORD collect_dos_console(run16_native_frontend *);
-static DWORD refresh_window_title(frontend_window_controller *window)
+static DWORD refresh_window_title(run16_native_frontend *frontend)
 {
     char title[KVM_WINDOW_TITLE_CAPACITY]={0};
     DWORD length;
+    const void *active=frontend->dos_owner ? frontend->dos_owner : frontend->native_owner;
+    if(active && frontend->worker_title_valid && frontend->title_owner==active)
+        return frontend_window_set_title(frontend->window,frontend->worker_title);
     SetLastError(ERROR_SUCCESS);
     length=GetConsoleTitleA(title,sizeof(title));
     /* A disappearing root Console is handled by the existing lifetime path;
@@ -78,7 +84,7 @@ static DWORD refresh_window_title(frontend_window_controller *window)
     /* The local Window control payload has a fixed capacity. Keep its
      * termination valid even when the Console title is longer. */
     title[sizeof(title)-1]=0;
-    return frontend_window_set_title(window,title);
+    return frontend_window_set_title(frontend->window,title);
 }
 static DWORD restore_cursor_shape(run16_native_frontend *frontend)
 {
@@ -387,13 +393,13 @@ static DWORD present_loop(run16_native_frontend *frontend)
         if(WaitForSingleObject(frontend->stop,0)==WAIT_OBJECT_0)return ERROR_OPERATION_ABORTED;
         if(requested)ResetEvent(frontend->refresh);
         EnterCriticalSection(&frontend->io_lock);
-        (void)refresh_window_title(frontend->window);
         if(WaitForSingleObject(frontend->handoff,0)==WAIT_OBJECT_0) {
             ResetEvent(frontend->handoff);
             frontend->handoff_error=apply_binding(frontend,frontend->handoff_owner,
                 frontend->handoff_active,frontend->handoff_native);
             SetEvent(frontend->handoff_done);
         }
+        (void)refresh_window_title(frontend);
         if(frontend->dos_owner || frontend->native_owner || frontend->window_active) {
             error=collect_dos_console(frontend);
             waits[count++]=frontend->console_input;
@@ -546,6 +552,14 @@ void run16_native_frontend_console_title_changed(run16_native_frontend *frontend
 {
     if(frontend && frontend->changed)SetEvent(frontend->changed);
 }
+void run16_native_frontend_worker_title(run16_native_frontend *frontend,const void *owner,const char *title)
+{
+    if(!frontend || !owner || !title ||
+        (frontend->dos_owner ? frontend->dos_owner : frontend->native_owner)!=owner)return;
+    strcpy_s(frontend->worker_title,sizeof(frontend->worker_title),title);
+    frontend->title_owner=owner;frontend->worker_title_valid=TRUE;
+    SetEvent(frontend->changed);
+}
 void run16_native_frontend_cancel(run16_native_frontend *frontend)
 {
     if(frontend && frontend->stop) {
@@ -610,6 +624,7 @@ static DWORD apply_binding(run16_native_frontend *frontend,const void *owner,BOO
     if(!kept && !ResetEvent(frontend->dos_input_ready))return GetLastError();
     ZeroMemory(&frontend->dos_mouse,sizeof(frontend->dos_mouse));
     *slot=active ? owner : NULL;
+    frontend->title_owner=NULL;frontend->worker_title_valid=FALSE;
     if(!native && frontend->dos_pending==owner)frontend->dos_pending=NULL;
     if(native) {
         frontend->native_video=NULL;frontend->native_video_serial=0;

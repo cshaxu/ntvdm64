@@ -9,9 +9,17 @@ static console_io_reply reply;
 static DWORD begin_error,end_error,screen_begins,screen_ends,screen_leaves;
 static BOOL screen_written;
 static DWORD title_notifications;
+static DWORD published_titles;
+static char last_published_title[CONSOLE_IO_TITLE_BYTES];
 static void title_changed(void *context)
 {
     (void)context;++title_notifications;
+}
+static void publish_title(void *context,const char *title)
+{
+    (void)context;
+    strcpy_s(last_published_title,sizeof(last_published_title),title);
+    ++published_titles;
 }
 static DWORD begin_screen(void *context)
 {
@@ -81,6 +89,7 @@ int main(void)
         return run_on_private_desktop();
     owner.generation=17;
     owner.title_changed=title_changed;
+    owner.publish_title=publish_title;
     owner.input=CreateFileW(L"CONIN$",GENERIC_READ|GENERIC_WRITE,FILE_SHARE_READ|FILE_SHARE_WRITE,
         NULL,OPEN_EXISTING,0,NULL);
     owner.output=CreateConsoleScreenBuffer(GENERIC_READ|GENERIC_WRITE,
@@ -163,6 +172,15 @@ int main(void)
         CHECK(SetConsoleTitleA(original));
         puts("PASS successful Console-title call notifies the attached frontend once");
     }
+    operation(&owner,CONSOLE_IO_PUBLISH_TITLE_A);
+    request.bytes=3;memcpy(request.data,"bad",3);
+    CHECK(run16_console_dispatch(&owner,&request,&reply)==ERROR_INVALID_DATA &&
+        published_titles==0);
+    operation(&owner,CONSOLE_IO_PUBLISH_TITLE_A);
+    request.bytes=sizeof("S36-NESTED-CMD");
+    memcpy(request.data,"S36-NESTED-CMD",request.bytes);
+    CHECK(!run16_console_dispatch(&owner,&request,&reply) && reply.result &&
+        published_titles==1 && !strcmp(last_published_title,"S36-NESTED-CMD"));
     operation(&owner,CONSOLE_IO_GET_TITLE_A);request.state.count=CONSOLE_IO_DATA_BYTES+1;
     CHECK(run16_console_dispatch(&owner,&request,&reply)==ERROR_INVALID_DATA);
     operation(&owner,CONSOLE_IO_SET_POINTER_CLIP);request.state.has_clip=2;

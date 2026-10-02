@@ -10,6 +10,8 @@ struct run16_console_channel {
     BOOL input_pending;
     BOOL kind_selected,native;
     BOOL snapshot_held;
+    char title[CONSOLE_IO_TITLE_BYTES];
+    BOOL title_valid;
     run16_native_frontend *root;
 };
 static DWORD activate(void *context,BOOL active,DWORD kind)
@@ -40,6 +42,11 @@ static DWORD activate(void *context,BOOL active,DWORD kind)
         } else (void)run16_native_frontend_dos_bind(channel->root,channel,FALSE);
     }
     if(!error && active && channel->native)channel->console.logical_window=NULL;
+    if(!error && active && channel->title_valid &&
+        !run16_native_frontend_dos_enter(channel->root,channel)) {
+        run16_native_frontend_worker_title(channel->root,channel,channel->title);
+        run16_native_frontend_dos_leave(channel->root);
+    }
     if(error && active && !channel->native)
         run16_native_frontend_cancel_dos_pending(channel->root,channel);
     /* A released worker's cached frame predates the new owner's geometry.
@@ -104,6 +111,16 @@ static void title_changed(void *context)
 {
     run16_console_channel *channel=context;
     run16_native_frontend_console_title_changed(channel->root);
+}
+static void publish_title(void *context,const char *title)
+{
+    run16_console_channel *channel=context;
+    strcpy_s(channel->title,sizeof(channel->title),title);
+    channel->title_valid=TRUE;
+    if(!run16_native_frontend_dos_enter(channel->root,channel)) {
+        run16_native_frontend_worker_title(channel->root,channel,channel->title);
+        run16_native_frontend_dos_leave(channel->root);
+    }
 }
 static DWORD read_text_configuration(void *context,DWORD offset,DWORD revision,console_io_reply *reply)
 {
@@ -283,6 +300,7 @@ DWORD run16_console_channel_start_request(DWORD request,HANDLE worker,run16_nati
     channel->console.text_frame_required=text_frame_required;
     channel->console.window_clip_owned=window_clip_owned;
     channel->console.title_changed=title_changed;
+    channel->console.publish_title=publish_title;
     channel->console.read_text_configuration=read_text_configuration;
     channel->console.read_input=read_input;channel->console.prepend_input=prepend_input;
     channel->stop=CreateEventW(NULL,TRUE,FALSE,NULL);

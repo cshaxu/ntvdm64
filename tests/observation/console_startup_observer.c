@@ -652,7 +652,7 @@ static BOOL console_caf_return(HANDLE input,const char *report_path)
     if(!WriteConsoleInputW(input,keys,2,&written) || written!=2)goto done;
     deadline=GetTickCount64()+10000;
     do {
-        window=FindWindowW(L"LibKvmWindow",L"NTVDM");
+        window=FindWindowW(L"LibKvmWindow",NULL);
         if(window && IsWindowVisible(window))break;
         Sleep(25);
     } while(GetTickCount64()<deadline);
@@ -685,7 +685,7 @@ static HWND scripted_input_window(void)
      * This is private-desktop observation only, never global input. */
     if(!scripted_window_frontend)return NULL;
     do {
-        window=FindWindowW(L"LibKvmWindow",L"NTVDM");
+        window=FindWindowW(L"LibKvmWindow",NULL);
         if(window && IsWindowVisible(window))break;
         Sleep(10);
     } while(GetTickCount64()<deadline);
@@ -1017,7 +1017,7 @@ static BOOL graphics_window_return(HANDLE input,HANDLE output,const char *report
     report=fopen(path,"w");if(!report)return FALSE;
     deadline=GetTickCount64()+15000;
     do {
-        window=FindWindowW(L"LibKvmWindow",L"NTVDM");
+        window=FindWindowW(L"LibKvmWindow",NULL);
         if(window && IsWindowVisible(window))break;
         Sleep(25);
     } while(GetTickCount64()<deadline);
@@ -1067,7 +1067,7 @@ static BOOL window_mouse_probe(const char *package,const char *report_path)
         package[strlen(package)-1]=='\\' ? "" : "\\");
     deadline=GetTickCount64()+15000;
     do {
-        window=FindWindowW(L"LibKvmWindow",L"NTVDM");
+        window=FindWindowW(L"LibKvmWindow",NULL);
         if(window && IsWindowVisible(window))break;
         Sleep(25);
     } while(GetTickCount64()<deadline);

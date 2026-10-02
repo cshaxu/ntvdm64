@@ -127,13 +127,14 @@ DWORD run16_console_dispatch(run16_console_frontend *owner,const console_io_requ
     if (!owner->generation || request->generation!=owner->generation) return ERROR_ACCESS_DENIED;
     if (!request->sequence || owner->sequence==UINT32_MAX ||
         request->sequence!=owner->sequence+1 || request->bytes>CONSOLE_IO_DATA_BYTES ||
-        request->operation<CONSOLE_IO_WRITE || request->operation>CONSOLE_IO_SNAPSHOT_END)
+        request->operation<CONSOLE_IO_WRITE || request->operation>CONSOLE_IO_PUBLISH_TITLE_A)
         return ERROR_INVALID_DATA;
     cells=request->operation>=CONSOLE_IO_READ_CELLS_A && request->operation<=CONSOLE_IO_WRITE_CELLS_W;
     write_cells=request->operation>=CONSOLE_IO_WRITE_CELLS_A && request->operation<=CONSOLE_IO_WRITE_CELLS_W;
     if (request->operation!=CONSOLE_IO_WRITE && !write_cells &&
         request->operation!=CONSOLE_IO_PREPEND_KEYS &&
         request->operation!=CONSOLE_IO_SET_TITLE_A &&
+        request->operation!=CONSOLE_IO_PUBLISH_TITLE_A &&
         request->operation!=CONSOLE_IO_VIDEO_BEGIN &&
         request->operation!=CONSOLE_IO_VIDEO_DATA && request->bytes)
         return ERROR_INVALID_DATA;
@@ -144,6 +145,10 @@ DWORD run16_console_dispatch(run16_console_frontend *owner,const console_io_requ
     if (request->operation==CONSOLE_IO_GET_TITLE_A && s->count>CONSOLE_IO_DATA_BYTES)
         return ERROR_INVALID_DATA;
     if (request->operation==CONSOLE_IO_SET_TITLE_A && (!request->bytes ||
+        memchr(request->data,0,request->bytes)!=request->data+request->bytes-1))
+        return ERROR_INVALID_DATA;
+    if (request->operation==CONSOLE_IO_PUBLISH_TITLE_A && (!request->bytes ||
+        request->bytes>CONSOLE_IO_TITLE_BYTES ||
         memchr(request->data,0,request->bytes)!=request->data+request->bytes-1))
         return ERROR_INVALID_DATA;
     if (request->operation==CONSOLE_IO_PREPEND_KEYS &&
@@ -294,6 +299,11 @@ DWORD run16_console_dispatch(run16_console_frontend *owner,const console_io_requ
     case CONSOLE_IO_SET_TITLE_A:
         ok=SetConsoleTitleA((LPCSTR)request->data);
         if(ok && owner->title_changed)owner->title_changed(owner->io_context);
+        break;
+    case CONSOLE_IO_PUBLISH_TITLE_A:
+        if(owner->publish_title)owner->publish_title(owner->io_context,(const char *)request->data);
+        ok=owner->publish_title!=NULL;
+        if(!ok)SetLastError(ERROR_INVALID_FUNCTION);
         break;
     case CONSOLE_IO_WINDOW_QUERY: {
         if (s->mode==CONSOLE_WINDOW_TEXT_FRAME_REQUIRED) {

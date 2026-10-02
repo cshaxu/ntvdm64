@@ -15,6 +15,8 @@ struct ntcon_presentation {
     console_text_style handoff_font;
     BOOL has_handoff_font;
     BOOL seeded;
+    char published_title[CONSOLE_IO_TITLE_BYTES];
+    BOOL title_valid;
     ntcon_mouse mouse;
 };
 static DWORD exchange(ntcon_presentation *client,console_io_request *request,console_io_reply *reply)
@@ -48,7 +50,7 @@ DWORD ntcon_presentation_call(ntcon_presentation *client,const console_io_reques
 {
     console_io_request request;DWORD error;
     if(!client || !input || !reply || input->bytes>CONSOLE_IO_DATA_BYTES ||
-        input->operation<CONSOLE_IO_WRITE || input->operation>CONSOLE_IO_SNAPSHOT_END)
+        input->operation<CONSOLE_IO_WRITE || input->operation>CONSOLE_IO_PUBLISH_TITLE_A)
         return ERROR_INVALID_PARAMETER;
     memcpy(&request,input,offsetof(console_io_request,data)+input->bytes);
     EnterCriticalSection(&client->lock);error=exchange(client,&request,reply);
@@ -125,12 +127,17 @@ DWORD ntcon_presentation_text(ntcon_presentation *client,const console_video_des
 DWORD ntcon_presentation_capture(ntcon_presentation *client,const console_text_style *font)
 {
     ntcon_capture capture={0};CHAR_INFO *cells=NULL;BYTE *payload=NULL;
+    char title[CONSOLE_IO_TITLE_BYTES]={0};BOOL title_read=FALSE;
     console_io_request request={0};console_io_reply reply;
-    console_video_description description;DWORD error,total,offset=0,count;
+    console_video_description description={0};DWORD error,total,offset=0,count;
     SMALL_RECT region;
     if(!client || !font)return ERROR_INVALID_PARAMETER;
     error=ntcon_capture_begin(&capture);
     if(error)return error;
+    SetLastError(ERROR_SUCCESS);
+    if(GetConsoleTitleA(title,sizeof(title)) || GetLastError()==ERROR_SUCCESS) {
+        title[sizeof(title)-1]=0;title_read=TRUE;
+    }
     total=(DWORD)capture.info.dwSize.X*(DWORD)capture.info.dwSize.Y;
     if(!total || total>SIZE_MAX/sizeof(*cells)) { error=ERROR_ARITHMETIC_OVERFLOW;goto done; }
     cells=HeapAlloc(GetProcessHeap(),0,(SIZE_T)total*sizeof(*cells));
@@ -155,6 +162,15 @@ DWORD ntcon_presentation_capture(ntcon_presentation *client,const console_text_s
      * surface, and the same bitmap text frame for Window. Unicode stays in
      * Console cells; the bounded PC glyph conversion lives only here. */
     EnterCriticalSection(&client->lock);
+    if(title_read && (!client->title_valid || strcmp(client->published_title,title))) {
+        error=ntkvm_worker_publish_title(&client->channel,title);
+        if(!error) {
+            strcpy_s(client->published_title,sizeof(client->published_title),title);
+            client->title_valid=TRUE;
+        }
+    }
+    if(error==ERROR_NOT_READY || error==ERROR_BUSY)error=ERROR_SUCCESS;
+    if(error)goto captured_done;
     request.operation=CONSOLE_IO_SCREEN_INFO;
     error=exchange(client,&request,&reply);
     if(!error && (reply.state.width!=capture.info.dwSize.X || reply.state.height!=capture.info.dwSize.Y)) {
@@ -223,6 +239,7 @@ DWORD ntcon_presentation_capture(ntcon_presentation *client,const console_text_s
         client->published_cells=cells;cells=NULL;client->published_count=total;
         client->published_width=(DWORD)capture.info.dwSize.X;
     }
+captured_done:
     LeaveCriticalSection(&client->lock);
 done:
     if(payload)HeapFree(GetProcessHeap(),0,payload);
@@ -497,5 +514,6 @@ DWORD ntcon_presentation_end(ntcon_presentation *client,const console_text_style
         error=exchange(client,&request,&reply);
     }
     released=activate_presentation(client,FALSE);
+    client->title_valid=FALSE;
     LeaveCriticalSection(&client->lock);return error ? error : released;
 }

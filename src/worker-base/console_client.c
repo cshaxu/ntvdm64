@@ -137,6 +137,19 @@ DWORD ntkvm_worker_video(ntkvm_worker_client *client,const console_video_descrip
     return error;
 }
 
+DWORD ntkvm_worker_publish_title(ntkvm_worker_client *client,const char *title)
+{
+    console_io_request request={0};console_io_reply reply;
+    size_t length;
+    if(!client || !title)return ERROR_INVALID_PARAMETER;
+    length=strnlen_s(title,CONSOLE_IO_TITLE_BYTES);
+    if(length==CONSOLE_IO_TITLE_BYTES)return ERROR_INVALID_PARAMETER;
+    request.operation=CONSOLE_IO_PUBLISH_TITLE_A;
+    request.bytes=(uint32_t)length+1;
+    memcpy(request.data,title,request.bytes);
+    return ntkvm_worker_call(client,&request,&reply);
+}
+
 BOOL ntkvm_worker_decode_input(const console_io_input *wire,INPUT_RECORD *record)
 {
     if(wire->type>UINT16_MAX || wire->repeat>UINT16_MAX || wire->virtual_key>UINT16_MAX ||

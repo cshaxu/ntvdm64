@@ -557,6 +557,14 @@ BOOL WINAPI MvdmSetConsoleTitleA(LPCSTR title)
     memcpy(client->request.data,title,length+1);
     error=exchange(client,&reply);
     if (!error) { result=reply.result!=0;error=reply.error; }
+    if(!error && result) {
+        char copied[CONSOLE_IO_TITLE_BYTES];
+        memcpy(copied,title,min(length,sizeof(copied)-1));
+        copied[min(length,sizeof(copied)-1)]=0;
+        /* The original Console title call has already succeeded. Window
+         * caption publication is supplemental and cannot change its result. */
+        (void)ntkvm_worker_publish_title(&client->channel,copied);
+    }
     LeaveCriticalSection(&client->lock);
     SetLastError(error);return !error && result;
 }

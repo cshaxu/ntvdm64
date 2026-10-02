@@ -2,20 +2,42 @@
 
 ## Current Work
 
-## No Active S
+## No Active S Packet
 
-**No active M/T/S packet.**
+M0 T423 remains open for owner acceptance. Reopened S36 is delivered and
+closed with the active-worker title protocol, real nested-CMD title proof,
+17/17 Console and 17/17 Window regressions, and a hash-matched eight-file
+`O:/winnt` package. See the [S36 evidence](../etc/evidence/m0-t423-s36-visible-console-title.md).
+S37 has not been admitted; no implementation packet is active.
 
-M0 T423 remains open for owner acceptance. S36 has delivered the visible
-Console-title Window caption and a coherent package to `O:/winnt`.
-The read-only task-trace S37 is not admitted.
+## Closed S: M0 T423 S36 (Ordinary Mode, reopened)
 
-## Last Closed S Brief
+| Field | Brief |
+| --- | --- |
+| Identifier Mode | M0 T423 S36, Ordinary Mode, reopened for owner-reported title-following gap; delivered. |
+| Admission And Approval | Owner rejected treating the S36 title work as finished and directed that shared worker-base title updates and real nested-CMD verification remain in S36. The task-trace S37 is unchanged and not admitted. |
+| Objective | Make the Window caption track the current DOS or native text execution owner's actual Console title, including native CMD nesting and return, without inventing a title when no program changed one. |
+| Non-goals | No guest, original MVDM mirror, Windows Terminal tab API, process-tree inference, new helper or polling solely for titles. |
+| Reference Baseline | S36 first delivery `68395440c`, coherent eight-file `O:/winnt` package and [evidence](../etc/evidence/m0-t423-s36-visible-console-title.md); its narrow title-source acceptance is reopened. |
+| Files And ABI Surface | `src/interface` copied title operation, `src/worker-base` common worker client, NTVDM existing Console-title binding, NTCON hidden-Console title source, NTKVM active-owner caption, focused tests and product graph. |
+| Applicable Rules | Documentation, execution, source-first, immutable guest, x86 CCPU40, no invented mirror files and every-production-P publication rules. |
+| Verification | Old/new real nested-CMD title probes, title payload/version negatives, x86 graph, 17/17 Console and 17/17 Window product cases, published-package smoke. Focused-fixture non-passes and the retained WOW boundary are disclosed in evidence. |
+| Expected Markers | Same shared client used by both workers; NTKVM accepts only active owner; real nested CMD title sequence and Window captions agree when native title changes; DOS title operation preserves original Console semantics. |
+| Asset Needs | Existing x86 build cache and immutable `O:/winnt` media; all new build/test output under `build/M0-T423/S36`. |
+| Reporting Requirements | Source/runtime observations, exact title sequence, wire/diff changes, passing and non-passing tests, deployed eight-file hashes and limits. |
+| Stop Conditions | A need to change guest or original mirror semantics, add a helper, or treat Terminal tab decoration as Console title requires owner decision. |
+| Exit Criteria | Verified nested-title chain, protocol negative tests, full P gate, coherent `O:/winnt` publication, reviewed diff, evidence, commit and push. T423 remains open for owner acceptance. |
+| Original Owner Request | “你继续使用s36啊 毕竟s36这个没做完”；“对 按照这个思路给我做一下workerbase 并实测cmd的嵌套导致的标题变化”。 |
+| Similar-Issue Sweep | DOS direct/nested, native direct/nested, DOS↔native handoff, return, inactive worker, independent frontend and frontend loss. |
 
-S36 (Ordinary Mode) followed the owner's clarified title source:
-“ntkvm所在的console的标题”. The source, implementation, 17+17 product results,
-published hash and bounded limits are recorded in the
+## S36 First Delivery (Reopened)
+
+S36's first P (Ordinary Mode) followed the owner's initially clarified title
+source: “ntkvm所在的console的标题”. Its implementation, 17+17 product results,
+published hash and limits are recorded in the
 [S36 evidence](../etc/evidence/m0-t423-s36-visible-console-title.md).
+The owner subsequently found that CMD nesting does not make the Window caption
+follow the active title; S36 is reopened until that gap is tested and repaired.
 
 ## Previous S Brief
 
@@ -23,7 +45,7 @@ The prior S35 and S34 results are retained in
 [S35 evidence](../etc/evidence/m0-t423-s35-native-text-window.md) and
 [S34 evidence](../etc/evidence/m0-t423-s34-console-projection-root-lifetime.md).
 S33's [evidence](../etc/evidence/m0-t423-s33-first-command-screen.md)
-records its preceding baseline. The read-only task-trace proposal is now S37.
+records its preceding baseline. The read-only task-trace proposal remains S37.
 
 ## Recent M0 Closures
 

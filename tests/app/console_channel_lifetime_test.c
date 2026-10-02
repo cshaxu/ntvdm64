@@ -208,13 +208,13 @@ static void run_case(unsigned mode,unsigned round)
         memset(request.data,1,4);
         peer_io(TRUE,&request,(DWORD)offsetof(console_io_request,data)+4);
         peer_io(FALSE,&reply,(DWORD)offsetof(console_io_reply,data));CHECK(reply.result);
-        Sleep(100);CHECK(!FindWindowW(NULL,L"NTVDM"));
+        Sleep(100);CHECK(!FindWindowW(L"LibKvmWindow",NULL));
         request.sequence=4;request.state.count=4;
         peer_io(TRUE,&request,(DWORD)offsetof(console_io_request,data)+4);
         peer_io(FALSE,&reply,(DWORD)offsetof(console_io_reply,data));CHECK(reply.result);
         deadline=GetTickCount64()+5000;
         do {
-            window=FindWindowW(NULL,L"NTVDM");
+            window=FindWindowW(L"LibKvmWindow",NULL);
             if(window)break;
             Sleep(10);
         } while(GetTickCount64()<deadline);
@@ -280,8 +280,8 @@ static void run_case(unsigned mode,unsigned round)
         peer_io(TRUE,&request,(DWORD)offsetof(console_io_request,data)+8);
         peer_io(FALSE,&reply,(DWORD)offsetof(console_io_reply,data));CHECK(reply.result);
         deadline=GetTickCount64()+5000;
-        while(!FindWindowW(NULL,L"NTVDM") && GetTickCount64()<deadline)Sleep(10);
-        CHECK(FindWindowW(NULL,L"NTVDM"));
+        while(!FindWindowW(L"LibKvmWindow",NULL) && GetTickCount64()<deadline)Sleep(10);
+        CHECK(FindWindowW(L"LibKvmWindow",NULL));
     }
     if(mode==0 && !round) {
         uint32_t serial=channel->console.video.serial;
@@ -355,7 +355,7 @@ static void run_case(unsigned mode,unsigned round)
             } while(GetTickCount64()<deadline);
              /* A frame request disables the guest's original stream output.
               * Console must retain that path and its scrollback. */
-             CHECK(reply.state.left==wanted && !FindWindowW(NULL,L"NTVDM"));
+             CHECK(reply.state.left==wanted && !FindWindowW(L"LibKvmWindow",NULL));
         }
         /* Acknowledged normal output followed by peer EOF races owner stop. */
         CHECK(CloseHandle(peer));peer=NULL;
@@ -425,7 +425,7 @@ static void run_case(unsigned mode,unsigned round)
     started=GetTickCount64();
     CHECK(!run16_console_channel_stop(channel));
     CHECK(GetTickCount64()-started<5000);
-    if(mode==0 && round<4)CHECK(!FindWindowW(NULL,L"NTVDM"));
+    if(mode==0 && round<4)CHECK(!FindWindowW(L"LibKvmWindow",NULL));
     CHECK(WaitForSingleObject(thread,0)==WAIT_OBJECT_0);
     CHECK(GetExitCodeThread(thread,&exit_code) && exit_code!=STILL_ACTIVE && exit_code!=0);
     CHECK(WaitForSingleObject(ready,0)==WAIT_OBJECT_0);
