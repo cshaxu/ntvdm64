@@ -25,8 +25,8 @@ foreach($symbol in 'run16_native_screen_apply','run16_native_cells_write','ntkvm
     'run16_native_view_begin','run16_native_view_present'){
     if($map -match [regex]::Escape($symbol)){throw "Displaced frontend backend remains: $symbol"}
 }
-$nativeMap=Get-Content -LiteralPath (Join-Path $BuildRoot 'ntw32.exe.map') -Raw
-foreach($symbol in 'ntw32_screen_apply','ntw32_cells_write'){
+$nativeMap=Get-Content -LiteralPath (Join-Path $BuildRoot 'ntvwm.exe.map') -Raw
+foreach($symbol in 'ntvwm_screen_apply','ntvwm_cells_write'){
     if($nativeMap -notmatch [regex]::Escape($symbol)){throw "Native worker provider missing: $symbol"}
 }
 $imports=& dumpbin.exe /nologo /imports (Join-Path $BuildRoot 'ntmon.exe')

@@ -36,7 +36,7 @@ The existing `frontend-client.lib` now has this launcher source owner:
 `native_launch_packet.c`. Public declarations are under `interface`.
 NTKVM reuses the transport/codec without linking target creation.
 `native_launch.c` is the separately linked restricted resource/CreateProcess
-primitive used by run16 GUI creation and NTW32 native text creation. It owns
+primitive used by run16 GUI creation and NTVWM native text creation. It owns
 no worker state, Console session, execution policy or frontend renderer.
 
 `frontend_scope.c` coordinates the independent `ntkvm.exe` frontend only
@@ -46,7 +46,7 @@ I/O acknowledgement. Worker creation and Console takeover/return coordination
 are NTSRV operations; no launcher/frontend or launcher/worker pipe remains.
 It owns no renderer
 or frontend notification pump. `ntkvm-exe` owns visible Console, Window,
-display state, direct worker I/O and input routing. NTW32 owns its ordinary
+display state, direct worker I/O and input routing. NTVWM owns its ordinary
 hidden Console and native targets. Borrowed-Console native completion does not
 end worker residency. A self-owned Console can close on exit only after NTSRV
 confirms final I/O release and no remaining use; the worker does not decide

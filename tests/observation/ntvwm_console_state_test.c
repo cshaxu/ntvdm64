@@ -1,6 +1,6 @@
 /* Real hidden ordinary Console fixture; no ConPTY, helper or frontend. */
 #define _WIN32_WINNT 0x0A00
-#include "ntw32-exe/console_state.h"
+#include "ntvwm-exe/console_state.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -37,7 +37,7 @@ static int input_contract(void)
     records[2].Event.MouseEvent.dwMousePosition.Y=3;
     records[2].Event.MouseEvent.dwButtonState=FROM_LEFT_1ST_BUTTON_PRESSED;
     records[3]=records[2];records[3].Event.MouseEvent.dwButtonState=0;
-    VERIFY_INPUT(!ntw32_input_write(input,records,4,&count) && count==4);
+    VERIFY_INPUT(!ntvwm_input_write(input,records,4,&count) && count==4);
     VERIFY_INPUT(GetNumberOfConsoleInputEvents(input,&queued) && queued==4);
     VERIFY_INPUT(ReadConsoleInputW(input,readback,4,&count) && count==4);
     VERIFY_INPUT(readback[0].Event.KeyEvent.uChar.UnicodeChar==L'a' &&
@@ -56,14 +56,14 @@ static int input_contract(void)
         VERIFY_INPUT(length>0 && FlushConsoleInputBuffer(input));
         /* The VT client sees characters, while classic clients above saw
          * unchanged native records. No target-specific executable check. */
-        VERIFY_INPUT(!ntw32_input_write(input,records+2,1,&count) && count==1);
+        VERIFY_INPUT(!ntvwm_input_write(input,records+2,1,&count) && count==1);
         VERIFY_INPUT(ReadConsoleInputW(input,readback,ARRAYSIZE(readback),&count) &&
             count==(DWORD)length);
         for(index=0;index<count;++index)VERIFY_INPUT(readback[index].EventType==KEY_EVENT &&
             readback[index].Event.KeyEvent.bKeyDown &&
             readback[index].Event.KeyEvent.uChar.UnicodeChar==(WCHAR)expected[index]);
         records[2].Event.MouseEvent.dwButtonState=0;
-        VERIFY_INPUT(!ntw32_input_write(input,records+2,1,&count) && count==1);
+        VERIFY_INPUT(!ntvwm_input_write(input,records+2,1,&count) && count==1);
         VERIFY_INPUT(ReadConsoleInputW(input,readback,ARRAYSIZE(readback),&count) &&
             count==(DWORD)length && readback[count-1].Event.KeyEvent.uChar.UnicodeChar==L'm');
     }
@@ -71,7 +71,7 @@ static int input_contract(void)
     VERIFY_INPUT(SetConsoleMode(input,ENABLE_LINE_INPUT|ENABLE_PROCESSED_INPUT));
     records[1]=records[0];records[1].Event.KeyEvent.wVirtualKeyCode=VK_RETURN;
     records[1].Event.KeyEvent.uChar.UnicodeChar=L'\r';
-    VERIFY_INPUT(!ntw32_input_write(input,records,2,&count) && count==2);
+    VERIFY_INPUT(!ntvwm_input_write(input,records,2,&count) && count==2);
     VERIFY_INPUT(ReadConsoleW(input,line,8,&count,NULL) && count==3 &&
         line[0]==L'a' && line[1]==L'\r' && line[2]==L'\n');
     input_signal=CreateEventW(NULL,TRUE,FALSE,NULL);VERIFY_INPUT(input_signal!=NULL);
@@ -79,16 +79,16 @@ static int input_contract(void)
     records[0].Event.KeyEvent.wVirtualKeyCode='C';
     records[0].Event.KeyEvent.uChar.UnicodeChar=3;
     records[0].Event.KeyEvent.dwControlKeyState=LEFT_CTRL_PRESSED;
-    VERIFY_INPUT(!ntw32_input_write(input,records,1,&count) && count==1);
+    VERIFY_INPUT(!ntvwm_input_write(input,records,1,&count) && count==1);
     VERIFY_INPUT(WaitForSingleObject(input_signal,3000)==WAIT_OBJECT_0 && input_signal_kind==CTRL_C_EVENT);
     VERIFY_INPUT(ResetEvent(input_signal));
     records[0].Event.KeyEvent.wVirtualKeyCode=VK_CANCEL;
-    VERIFY_INPUT(!ntw32_input_write(input,records,1,&count) && count==1);
+    VERIFY_INPUT(!ntvwm_input_write(input,records,1,&count) && count==1);
     VERIFY_INPUT(WaitForSingleObject(input_signal,3000)==WAIT_OBJECT_0 && input_signal_kind==CTRL_BREAK_EVENT);
     /* Raw Ctrl-C remains a key record, not a generated signal. */
     VERIFY_INPUT(SetConsoleMode(input,0) && FlushConsoleInputBuffer(input));
     records[0].Event.KeyEvent.wVirtualKeyCode='C';
-    VERIFY_INPUT(!ntw32_input_write(input,records,1,&count) && count==1);
+    VERIFY_INPUT(!ntvwm_input_write(input,records,1,&count) && count==1);
     VERIFY_INPUT(ReadConsoleInputW(input,readback,1,&count) && count==1 &&
         readback[0].Event.KeyEvent.uChar.UnicodeChar==3);
 done:
@@ -103,7 +103,7 @@ done:
 
 static int attached_client(PCWSTR self)
 {
-    ntw32_capture capture={0};CONSOLE_SCREEN_BUFFER_INFOEX info={sizeof(info)};
+    ntvwm_capture capture={0};CONSOLE_SCREEN_BUFFER_INFOEX info={sizeof(info)};
     CONSOLE_CURSOR_INFO cursor={25,TRUE};CHAR_INFO cells[24],readback[24];
     SMALL_RECT region;DWORD count=0,error=0,index,code=0;
     HANDLE output=INVALID_HANDLE_VALUE,alternate=INVALID_HANDLE_VALUE,ready=NULL,finish=NULL;
@@ -117,12 +117,12 @@ static int attached_client(PCWSTR self)
     CHECK(output!=INVALID_HANDLE_VALUE);
     CHECK(GetConsoleScreenBufferInfoEx(output,&info));
     info.dwCursorPosition.X=7;info.dwCursorPosition.Y=3;
-    CHECK(ntw32_screen_apply(output,&info,&cursor)==0);
+    CHECK(ntvwm_screen_apply(output,&info,&cursor)==0);
     for(index=0;index<24;++index) {cells[index].Char.UnicodeChar=(WCHAR)('A'+index);cells[index].Attributes=0x1e;}
-    CHECK(ntw32_cells_write(output,(DWORD)info.dwSize.X*3,cells,24)==0);
-    CHECK(ntw32_capture_begin(&capture)==0);
+    CHECK(ntvwm_cells_write(output,(DWORD)info.dwSize.X*3,cells,24)==0);
+    CHECK(ntvwm_capture_begin(&capture)==0);
     CHECK(capture.info.dwCursorPosition.X==7 && capture.info.dwCursorPosition.Y==3);
-    CHECK(ntw32_capture_read(&capture,(DWORD)info.dwSize.X*3,readback,24,&region,&count)==0);
+    CHECK(ntvwm_capture_read(&capture,(DWORD)info.dwSize.X*3,readback,24,&region,&count)==0);
     CHECK(count==24 && !memcmp(cells,readback,sizeof(cells)));
     /* Never silently accept a tile against geometry from an older capture. */
     {COORD enlarged=info.dwSize;++enlarged.Y;
@@ -130,13 +130,13 @@ static int attached_client(PCWSTR self)
             error=0x80000000u|((DWORD)(USHORT)info.dwSize.Y<<16)|(GetLastError()&0xffffu);
             goto done;
         }
-        CHECK(ntw32_capture_read(&capture,0,readback,24,&region,&count)==ERROR_RETRY);
+        CHECK(ntvwm_capture_read(&capture,0,readback,24,&region,&count)==ERROR_RETRY);
         CHECK(count==0 && SetConsoleScreenBufferSize(output,info.dwSize));}
-    ntw32_capture_end(&capture);
+    ntvwm_capture_end(&capture);
     info.dwCursorPosition.X=info.dwSize.X;
-    CHECK(ntw32_screen_apply(output,&info,&cursor)==ERROR_INVALID_DATA);
+    CHECK(ntvwm_screen_apply(output,&info,&cursor)==ERROR_INVALID_DATA);
     CHECK(GetConsoleScreenBufferInfoEx(output,&info) && info.dwCursorPosition.X==7);
-    CHECK(ntw32_cells_write(output,MAXDWORD,cells,24)==ERROR_INVALID_PARAMETER);
+    CHECK(ntvwm_cells_write(output,MAXDWORD,cells,24)==ERROR_INVALID_PARAMETER);
 
     /* A native program reads the actual cursor and continues after a DOS-shaped
      * transfer, rather than a frontend-only parser change. */
@@ -146,11 +146,11 @@ static int attached_client(PCWSTR self)
     alternate=CreateConsoleScreenBuffer(GENERIC_READ|GENERIC_WRITE,
         FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,CONSOLE_TEXTMODE_BUFFER,NULL);
     CHECK(alternate!=INVALID_HANDLE_VALUE && SetConsoleActiveScreenBuffer(alternate));
-    CHECK(ntw32_cells_write(alternate,0,cells,24)==0);
-    CHECK(ntw32_capture_begin(&capture)==0);
-    CHECK(ntw32_capture_read(&capture,0,readback,24,&region,&count)==0);
+    CHECK(ntvwm_cells_write(alternate,0,cells,24)==0);
+    CHECK(ntvwm_capture_begin(&capture)==0);
+    CHECK(ntvwm_capture_read(&capture,0,readback,24,&region,&count)==0);
     CHECK(count==24 && !memcmp(cells,readback,sizeof(cells)));
-    ntw32_capture_end(&capture);
+    ntvwm_capture_end(&capture);
     CHECK(SetConsoleActiveScreenBuffer(output));
 
     ready=CreateEventW(&security,TRUE,FALSE,NULL);finish=CreateEventW(&security,TRUE,FALSE,NULL);
@@ -182,7 +182,7 @@ static int attached_client(PCWSTR self)
     CHECK(SetEvent(finish) && WaitForSingleObject(child.hProcess,5000)==WAIT_OBJECT_0);
     CHECK(GetExitCodeProcess(child.hProcess,&code) && code==73);
 done:
-    ntw32_capture_end(&capture);
+    ntvwm_capture_end(&capture);
     if(output!=INVALID_HANDLE_VALUE)SetConsoleActiveScreenBuffer(output);
     if(finish)SetEvent(finish);
     if(child.hProcess) {
@@ -227,8 +227,8 @@ done:
     if(process.hProcess && WaitForSingleObject(process.hProcess,0)==WAIT_TIMEOUT)
         TerminateProcess(process.hProcess,99);
     if(process.hThread)CloseHandle(process.hThread);if(process.hProcess)CloseHandle(process.hProcess);
-    printf("NTW32-STATE hidden-console error=%lu client-line=%lu\n",error,code);
+    printf("NTVWM-STATE hidden-console error=%lu client-line=%lu\n",error,code);
     if(error || code)return 1;
-    puts("NTW32-STATE PASS real-cells cursor active-buffer detached-survivor stale-geometry raw-cooked-input mouse-pair ctrl-c-break; participant graph covered by ntw32-job-tracker-test");
+    puts("NTVWM-STATE PASS real-cells cursor active-buffer detached-survivor stale-geometry raw-cooked-input mouse-pair ctrl-c-break; participant graph covered by ntvwm-job-tracker-test");
     return 0;
 }

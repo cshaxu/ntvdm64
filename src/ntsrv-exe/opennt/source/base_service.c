@@ -135,7 +135,7 @@ typedef struct OPENNT_BASE_WIN32RECORD {
     DWORD process_id;
     DWORD launcher_generation,exit_code,completion_error;
     BOOL completed;
-    HANDLE receipt; /* Signalled after NTW32 reports exit and I/O release. */
+    HANDLE receipt; /* Signalled after NTVWM reports exit and I/O release. */
     HANDLE control,control_worker; /* Broker-owned final I/O acknowledgement. */
     WCHAR image[OPENNT_BASE_WORKER_IMAGE_CHARS];
 } OPENNT_BASE_WIN32RECORD;
@@ -1292,7 +1292,7 @@ DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *service,HANDLE process,
                             &ignored,&ignored)) ZeroMemory(&watch->started,sizeof(watch->started));
                 }
                 /* Both resident worker kinds retain the authenticated root's
-                 * outer-Console identity. NTW32 may later refresh it at direct
+                 * outer-Console identity. NTVWM may later refresh it at direct
                  * delivery; DOS keeps the initial root for re-entry. */
                 if(!error && !shared_wow && console) {
                     LIST_ENTRY *root_link;
@@ -3734,7 +3734,7 @@ DWORD OpenNtBaseServiceStartNativeWorker(OPENNT_BASE_CONNECTION *connection,DWOR
     length=GetModuleFileNameW(NULL,image,ARRAYSIZE(image));
     if(!length || length>=ARRAYSIZE(image) || !(slash=wcsrchr(image,L'\\')))
         {error=ERROR_BAD_PATHNAME;goto done;}
-    if(wcscpy_s(slash+1,ARRAYSIZE(image)-(size_t)(slash+1-image),L"ntw32.exe") ||
+    if(wcscpy_s(slash+1,ARRAYSIZE(image)-(size_t)(slash+1-image),L"ntvwm.exe") ||
         swprintf_s(command,ARRAYSIZE(command),L"\"%ls\"",image)<0)
         {error=ERROR_FILENAME_EXCED_RANGE;goto done;}
     startup.dwFlags=STARTF_USESHOWWINDOW;startup.wShowWindow=SW_HIDE;

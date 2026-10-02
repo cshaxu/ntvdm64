@@ -25,7 +25,7 @@ static void collect_children(DWORD parent, child_watch watches[8], unsigned *cou
         if (entry.th32ParentProcessID != parent ||
             (_wcsicmp(entry.szExeFile, L"ntvdm.exe") &&
              _wcsicmp(entry.szExeFile, L"ntsrv.exe") &&
-             _wcsicmp(entry.szExeFile, L"ntw32.exe") &&
+             _wcsicmp(entry.szExeFile, L"ntvwm.exe") &&
              _wcsicmp(entry.szExeFile, L"ntkvm.exe"))) continue;
         for (index = 0; index < *count; ++index)
             if (watches[index].pid == entry.th32ProcessID) break;
@@ -230,7 +230,7 @@ int wmain(int argc, WCHAR **argv)
         HANDLE exits[8];DWORD exit_count=0,teardown;
         for(index=0;index<count;++index)
             if(!_wcsicmp(watches[index].name,L"ntvdm.exe") ||
-                !_wcsicmp(watches[index].name,L"ntw32.exe") ||
+                !_wcsicmp(watches[index].name,L"ntvwm.exe") ||
                 !_wcsicmp(watches[index].name,L"ntkvm.exe"))
                 exits[exit_count++]=watches[index].process;
         teardown=exit_count ? WaitForMultipleObjects(exit_count,exits,TRUE,5000) : WAIT_FAILED;
@@ -242,9 +242,9 @@ int wmain(int argc, WCHAR **argv)
         fprintf(report, "child=%lu name=%ls wait=%lu exit=%lu\n",
             watches[index].pid, watches[index].name, state, exit_code);
         if (!_wcsicmp(watches[index].name, L"ntvdm.exe") ||
-            !_wcsicmp(watches[index].name,L"ntw32.exe")) {
+            !_wcsicmp(watches[index].name,L"ntvwm.exe")) {
             ++workers;
-            if((native_mode && _wcsicmp(watches[index].name,L"ntw32.exe")) ||
+            if((native_mode && _wcsicmp(watches[index].name,L"ntvwm.exe")) ||
                 (!native_mode && _wcsicmp(watches[index].name,L"ntvdm.exe"))) ++live_workers;
             if (state != WAIT_OBJECT_0) ++live_workers;
             if (wait == WAIT_TIMEOUT && !frontier.found) timeout_threads(report, &watches[index]);

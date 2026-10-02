@@ -28,7 +28,7 @@ broker process-tree kill. Pipe failure alone remains I/O failure.
 Actual worker death fails unfinished requests with ERROR_PROCESS_ABORTED;
 pre-handoff startup rollback remains separate.
 
-The S4 candidate also centralizes exact sibling NTKVM/NTVDM/NTW32 creation
+The S4 candidate also centralizes exact sibling NTKVM/NTVDM/NTVWM creation
 and all launcher Console takeover/restore acknowledgement through this service.
 Independent DOS worker-exit completion preserves original DosSesId/PIF policy.
 Self-owned native text close-on-exit follows final I/O acknowledgement and a

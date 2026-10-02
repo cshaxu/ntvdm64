@@ -139,7 +139,7 @@ try {
                 }
             }
         }
-        # S12 replaces the retained ConPTY with independent NTW32 workers.
+        # S12 replaces the retained ConPTY with independent NTVWM workers.
         # Live topology above proves retention while targets exist; after all
         # targets return, empty frontends must retire without explicit kill.
         # These PIDs are fixture observations, never production authorization.
@@ -166,10 +166,10 @@ try {
         Write-Output "PASS twelve-target nesting/identity/results/topology/visible-input-output/retirement $case"
         # Independent idle workers may outlive their frontend. Candidate-only
         # test housekeeping, NOT a normal worker-retirement assertion.
-        $candidateNtcon=Join-Path $ProcessPackageRoot 'ntw32.exe'
-        $launchNtcon=Join-Path $PackageRoot 'ntw32.exe'
+        $candidateNtcon=Join-Path $ProcessPackageRoot 'ntvwm.exe'
+        $launchNtcon=Join-Path $PackageRoot 'ntvwm.exe'
         if((Get-FileHash $candidateNtcon).Hash -ne (Get-FileHash $launchNtcon).Hash){throw 'Candidate identity mismatch'}
-        foreach($entry in @(Get-CimInstance Win32_Process -Filter "Name='ntw32.exe'")){
+        foreach($entry in @(Get-CimInstance Win32_Process -Filter "Name='ntvwm.exe'")){
             $process=Get-Process -Id $entry.ProcessId -ErrorAction Stop
             try {
                 $null=$process.Handle

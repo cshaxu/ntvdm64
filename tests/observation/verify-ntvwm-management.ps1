@@ -18,7 +18,7 @@ if(!$physical.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::Ordin
 if($LogPrefix -notmatch '^[a-z0-9-]+$'){throw 'Invalid log prefix'}
 if(@(Get-CimInstance Win32_Process -Filter "Name='ntsrv.exe'").Count){throw 'An existing broker must not be controlled by this test'}
 $paths=@()
-foreach($name in @('run16.exe','ntsrv.exe','ntkvm.exe','ntw32.exe')){
+foreach($name in @('run16.exe','ntsrv.exe','ntkvm.exe','ntvwm.exe')){
     $actual=Join-Path $physical $name;$launch=Join-Path $PackageRoot $name
     if((Get-FileHash $actual).Hash -ne (Get-FileHash $launch).Hash){throw 'Candidate mismatch'}
     $paths+=@($actual,$launch)
@@ -37,7 +37,7 @@ try {
         'cmd.exe','/d','/k','--observation-timeout-ms','25000') -WindowStyle Hidden -PassThru
     $deadline=[DateTime]::UtcNow.AddSeconds(15)
     do {
-        $native=@(Get-CimInstance Win32_Process -Filter "Name='ntw32.exe'" | Where-Object {$_.ExecutablePath -in $paths})
+        $native=@(Get-CimInstance Win32_Process -Filter "Name='ntvwm.exe'" | Where-Object {$_.ExecutablePath -in $paths})
         if($native.Count -eq 1){
             $children=@(Get-CimInstance Win32_Process -Filter "Name='cmd.exe'" | Where-Object {$_.ParentProcessId -eq $native[0].ProcessId})
             if($children.Count -eq 1){
@@ -48,7 +48,7 @@ try {
         }
         Start-Sleep -Milliseconds 100
     }while([DateTime]::UtcNow -lt $deadline)
-    if(!$worker -or !$target){throw 'Real NTW32/CMD pair did not start'}
+    if(!$worker -or !$target){throw 'Real NTVWM/CMD pair did not start'}
     $frontend=$null
     if($FrontendLoss){
         $owners=@(Get-CimInstance Win32_Process -Filter "Name='ntkvm.exe'" | Where-Object {$_.ExecutablePath -in $paths})
@@ -56,7 +56,7 @@ try {
         $frontend=Get-Process -Id $owners[0].ProcessId;$null=$frontend.Handle
     }
     if($TwoSessions){
-        $gateName='Local\ntw32-isolation-'+[guid]::NewGuid().ToString('N')
+        $gateName='Local\ntvwm-isolation-'+[guid]::NewGuid().ToString('N')
         $gate=[Threading.EventWaitHandle]::new($false,[Threading.EventResetMode]::ManualReset,$gateName)
         $env:MVDM_OBSERVER_INPUT_GATE=$gateName
         $otherReport=Join-Path $LogRoot "$LogPrefix-other.txt"
@@ -68,7 +68,7 @@ try {
         $env:MVDM_OBSERVER_INPUT_GATE=$oldGate
         $deadline=[DateTime]::UtcNow.AddSeconds(10)
         do {
-            $native=@(Get-CimInstance Win32_Process -Filter "Name='ntw32.exe'" | Where-Object {
+            $native=@(Get-CimInstance Win32_Process -Filter "Name='ntvwm.exe'" | Where-Object {
                 $_.ExecutablePath -in $paths -and $_.ProcessId -ne $worker.Id
             })
             if($native.Count -eq 1){
@@ -81,12 +81,12 @@ try {
             }
             Start-Sleep -Milliseconds 100
         }while([DateTime]::UtcNow -lt $deadline)
-        if(!$otherWorker -or !$otherTarget){throw 'Independent second NTW32/CMD pair did not start'}
+        if(!$otherWorker -or !$otherTarget){throw 'Independent second NTVWM/CMD pair did not start'}
     }
     if($WorkerLoss){
         if($worker.Path -notin $paths){throw 'Pinned worker identity changed'}
         $worker.Kill()
-        if(!$worker.WaitForExit(5000)){throw 'Fault injection did not end NTW32'}
+        if(!$worker.WaitForExit(5000)){throw 'Fault injection did not end NTVWM'}
         if($target.HasExited){throw 'Worker-loss case requires an attached client that remains alive'}
     }elseif($FrontendLoss){
         if($frontend.Path -notin $paths){throw 'Pinned frontend identity changed'}
@@ -97,7 +97,7 @@ try {
             -RedirectStandardOutput "$report.management.log" -RedirectStandardError "$report.management.err"
         if(!$monitor.WaitForExit(18000) -or $monitor.ExitCode -ne 0){throw 'Management RPC rejected or timed out'}
     }
-    if(!$WorkerLoss -and (!$worker.WaitForExit(5000) -or !$target.WaitForExit(5000))){throw 'NTW32 or attached CMD survived acknowledged close'}
+    if(!$WorkerLoss -and (!$worker.WaitForExit(5000) -or !$target.WaitForExit(5000))){throw 'NTVWM or attached CMD survived acknowledged close'}
     if(!$observerProcess.WaitForExit(10000)){throw 'Direct launcher did not return after management close'}
     $record=Get-Content $report -Raw
     if($record -notmatch '(?m)^result=exited\r?$'){throw 'Launcher timeout is not completion'}
@@ -109,7 +109,7 @@ try {
         if([Convert]::ToUInt32($result.Groups[1].Value,16) -ne 1067 -or $target.HasExited){
             throw 'Worker failure must return 1067 without actively terminating its native target'
         }
-        Write-Output 'PASS unexpected NTW32 death returns 1067 while its native target survives'
+        Write-Output 'PASS unexpected NTVWM death returns 1067 while its native target survives'
     }else{
         Write-Output "PASS real close (frontend-loss=$FrontendLoss): worker=$($worker.Id) target=$($target.Id) target-exit=$($target.ExitCode)"
     }

@@ -1,4 +1,4 @@
-#include "ntw32-exe/console_state.h"
+#include "ntvwm-exe/console_state.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <wchar.h>
@@ -31,11 +31,11 @@ int wmain(int argc,WCHAR **argv)
             (unsigned long long)(ULONG_PTR)ready,(unsigned long long)(ULONG_PTR)close_seen);
         if(!CreateProcessW(image,command,NULL,NULL,TRUE,0,NULL,NULL,&startup,&process))return 6;
         if(WaitForSingleObject(ready,5000)!=WAIT_OBJECT_0)error=7;
-        if(!error)error=ntw32_console_close();
+        if(!error)error=ntvwm_console_close();
         if(!error && (IsWindow(window) || GetConsoleWindow()))error=8;
         if(!error && WaitForSingleObject(close_seen,1000)!=WAIT_OBJECT_0)error=9;
         if(!error && WaitForSingleObject(process.hProcess,5000)!=WAIT_OBJECT_0)error=10;
-        if(!error && ntw32_console_close()!=ERROR_INVALID_HANDLE)error=11;
+        if(!error && ntvwm_console_close()!=ERROR_INVALID_HANDLE)error=11;
     } else if(argc==1) {
         swprintf_s(command,ARRAYSIZE(command),L"\"%ls\" --owner",image);
         startup.dwFlags=STARTF_USESHOWWINDOW;startup.wShowWindow=SW_HIDE;
@@ -43,7 +43,7 @@ int wmain(int argc,WCHAR **argv)
         if(WaitForSingleObject(process.hProcess,15000)!=WAIT_OBJECT_0)error=13;
         else if(!GetExitCodeProcess(process.hProcess,&code))error=14;
         else error=code;
-        printf("NTW32-CLOSE error=%lu target-image-and-normal-console-close=%s\n",error,error ? "FAIL" : "PASS");
+        printf("NTVWM-CLOSE error=%lu target-image-and-normal-console-close=%s\n",error,error ? "FAIL" : "PASS");
     } else return 15;
     if(process.hProcess) {
         if(WaitForSingleObject(process.hProcess,0)==WAIT_TIMEOUT)TerminateProcess(process.hProcess,99);

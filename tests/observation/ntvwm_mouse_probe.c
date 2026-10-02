@@ -27,9 +27,9 @@ int main(void)
             if(!moved)return 6;
             pressed=TRUE;
         } else if(pressed) {
-            puts("NTW32-MOUSE-PASS 80x50 movement-before-click release native-records");
+            puts("NTVWM-MOUSE-PASS 80x50 movement-before-click release native-records");
             fflush(stdout);SetConsoleMode(input,mode);return 0;
         }
     }
-    puts("NTW32-MOUSE-FAIL timeout");fflush(stdout);return 7;
+    puts("NTVWM-MOUSE-FAIL timeout");fflush(stdout);return 7;
 }

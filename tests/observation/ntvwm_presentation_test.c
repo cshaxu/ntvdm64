@@ -1,5 +1,5 @@
-#include "ntw32-exe/presentation.h"
-#include "ntw32-exe/console_state.h"
+#include "ntvwm-exe/presentation.h"
+#include "ntvwm-exe/console_state.h"
 #include "ntkvm-exe/console_video.h"
 #include "interface/worker_console_client.h"
 #include <stdio.h>
@@ -13,6 +13,7 @@ typedef struct peer_state {
     unsigned mode,calls;
     unsigned activations,releases;
     unsigned snapshot_begins,snapshot_ends,screen_reads;
+    unsigned titles;
     console_io_state screen;
     run16_console_video video;
     console_io_input returned[2*CONSOLE_IO_INPUT_CAPACITY+3];
@@ -85,6 +86,11 @@ static DWORD WINAPI peer(void *context)
                 else ++state->snapshot_ends;
             } else if(request.operation==CONSOLE_IO_DOS_ACTIVE) {
                 if(request.state.input)++state->activations;else ++state->releases;
+            } else if(request.operation==CONSOLE_IO_PUBLISH_TITLE_A) {
+                if(!request.bytes || request.bytes>CONSOLE_IO_TITLE_BYTES ||
+                    request.data[request.bytes-1] ||
+                    strlen((const char *)request.data)+1!=request.bytes)return ERROR_INVALID_DATA;
+                ++state->titles;
             } else if(request.operation==CONSOLE_IO_SCREEN_INFO) {
                 ++state->screen_reads;
                 reply.state=state->screen;
@@ -167,9 +173,9 @@ static DWORD WINAPI peer(void *context)
 static void run_case(unsigned mode)
 {
     WCHAR name[120];HANDLE pipe=NULL,client=INVALID_HANDLE_VALUE,thread=NULL,stop=NULL,process=NULL;
-    ntw32_presentation *endpoint=NULL;peer_state state={0};DWORD error,exit_code=0;
+    ntvwm_presentation *endpoint=NULL;peer_state state={0};DWORD error,exit_code=0;
     console_io_request request={0};console_io_reply reply;
-    swprintf_s(name,120,L"\\\\.\\pipe\\ntw32-presentation-test-%lu-%u",GetCurrentProcessId(),mode);
+    swprintf_s(name,120,L"\\\\.\\pipe\\ntvwm-presentation-test-%lu-%u",GetCurrentProcessId(),mode);
     pipe=CreateNamedPipeW(name,PIPE_ACCESS_DUPLEX|FILE_FLAG_FIRST_PIPE_INSTANCE,
         PIPE_TYPE_BYTE|PIPE_READMODE_BYTE|PIPE_WAIT|PIPE_REJECT_REMOTE_CLIENTS,1,65536,65536,0,NULL);
     CHECK(pipe!=INVALID_HANDLE_VALUE);if(pipe==INVALID_HANDLE_VALUE)return;
@@ -187,14 +193,14 @@ static void run_case(unsigned mode)
     thread=CreateThread(NULL,0,peer,&state,0,NULL);CHECK(thread!=NULL);if(!thread)goto done;
     CHECK(DuplicateHandle(GetCurrentProcess(),GetCurrentProcess(),GetCurrentProcess(),
         &process,SYNCHRONIZE,FALSE,0));
-    CHECK(ntw32_presentation_open(client,process,stop,17,&endpoint)==0);
+    CHECK(ntvwm_presentation_open(client,process,stop,17,&endpoint)==0);
     if(!endpoint)goto done;
     if(mode==17 || mode==18) {
         request.operation=mode==17 ? CONSOLE_IO_KEYBOARD_LAYOUT : CONSOLE_IO_BARRIER;
-        error=ntw32_presentation_call(endpoint,&request,&reply);
+        error=ntvwm_presentation_call(endpoint,&request,&reply);
         CHECK(error==(mode==17 ? ERROR_SUCCESS : ERROR_INVALID_DATA));
         if(!error)CHECK(reply.bytes==KL_NAMELENGTH && !memcmp(reply.data,"00000409",KL_NAMELENGTH));
-        if(mode==18)CHECK(ntw32_presentation_call(endpoint,&request,&reply)==ERROR_INVALID_DATA);
+        if(mode==18)CHECK(ntvwm_presentation_call(endpoint,&request,&reply)==ERROR_INVALID_DATA);
         goto done;
     }
     if(mode==7 || mode==8 || mode==19) {
@@ -206,13 +212,17 @@ static void run_case(unsigned mode)
             CHECK(GetConsoleMode(input,&original_mode));
             CHECK(SetConsoleMode(input,ENABLE_MOUSE_INPUT|ENABLE_EXTENDED_FLAGS));
             CHECK(FlushConsoleInputBuffer(input));
-            error=ntw32_presentation_input(endpoint,input,&accepted);
+            error=ntvwm_presentation_input(endpoint,input,&accepted);
             CHECK(error==(mode==8 ? ERROR_INVALID_DATA : ERROR_SUCCESS));
             CHECK(accepted==(mode==8 ? 0u : 3u));
             CHECK(PeekConsoleInputW(input,records,4,&count));
+            fprintf(log,"input case=%u accepted=%lu queued=%lu\n",mode,accepted,count);
+            for(DWORD index=0;index<count;++index)
+                fprintf(log,"input record=%lu type=%u flags=%lu\n",index,records[index].EventType,
+                    records[index].EventType==MOUSE_EVENT ? records[index].Event.MouseEvent.dwEventFlags : 0);
             CHECK(count==(mode==8 ? 0u : 3u));
             if(mode==19 && count==3) {
-                ntw32_capture capture={0};CHECK(!ntw32_capture_begin(&capture));
+                ntvwm_capture capture={0};CHECK(!ntvwm_capture_begin(&capture));
                 CHECK(records[0].EventType==MOUSE_EVENT && records[0].Event.MouseEvent.dwEventFlags==MOUSE_MOVED);
                 CHECK(records[0].Event.MouseEvent.dwMousePosition.X==capture.info.srWindow.Right &&
                     records[0].Event.MouseEvent.dwMousePosition.Y==capture.info.srWindow.Bottom);
@@ -220,7 +230,7 @@ static void run_case(unsigned mode)
                 CHECK(records[1].Event.MouseEvent.dwButtonState==FROM_LEFT_1ST_BUTTON_PRESSED &&
                     records[1].Event.MouseEvent.dwControlKeyState==SHIFT_PRESSED);
                 CHECK(records[2].EventType==MOUSE_EVENT && !records[2].Event.MouseEvent.dwButtonState);
-                ntw32_capture_end(&capture);
+                ntvwm_capture_end(&capture);
             }
             if(mode==7 && count==3) {
                 CHECK(records[0].EventType==KEY_EVENT && records[0].Event.KeyEvent.bKeyDown &&
@@ -229,7 +239,7 @@ static void run_case(unsigned mode)
                 CHECK(records[2].EventType==MOUSE_EVENT && !records[2].Event.MouseEvent.dwButtonState &&
                     records[2].Event.MouseEvent.dwMousePosition.X==3 && records[2].Event.MouseEvent.dwMousePosition.Y==2);
             }
-            if(mode==8)CHECK(ntw32_presentation_input(endpoint,input,&accepted)==ERROR_INVALID_DATA && !accepted);
+            if(mode==8)CHECK(ntvwm_presentation_input(endpoint,input,&accepted)==ERROR_INVALID_DATA && !accepted);
             CHECK(FlushConsoleInputBuffer(input));CHECK(SetConsoleMode(input,original_mode));
             CloseHandle(input);
         }
@@ -243,7 +253,7 @@ static void run_case(unsigned mode)
         if(buffer!=INVALID_HANDLE_VALUE) {
             CHECK(GetConsoleScreenBufferInfo(buffer,&before));
             CHECK(WriteConsoleOutputCharacterW(buffer,L"Z",1,origin,&count) && count==1);
-            error=mode>=11 ? ntw32_presentation_begin(endpoint,buffer) : ntw32_presentation_seed(endpoint,buffer);
+            error=mode>=11 ? ntvwm_presentation_begin(endpoint,buffer) : ntvwm_presentation_seed(endpoint,buffer);
             CHECK(error==(DWORD)(mode==10 ? ERROR_RETRY : mode==12 || mode==14 || mode==15 ? ERROR_INVALID_DATA : ERROR_SUCCESS));
             CHECK(GetConsoleScreenBufferInfo(buffer,&after));
             CHECK(ReadConsoleOutputCharacterW(buffer,&cell,1,origin,&count) && count==1);
@@ -265,11 +275,11 @@ static void run_case(unsigned mode)
                 CHECK(GetConsoleScreenBufferInfoEx(buffer,&history));
                 history.dwSize.Y=40;history.srWindow.Top=10;history.srWindow.Bottom=17;
                 history.dwCursorPosition.Y=12;
-                CHECK(ntw32_screen_apply(buffer,&history,&cursor)==0);
+                CHECK(ntvwm_screen_apply(buffer,&history,&cursor)==0);
                 CHECK(WriteConsoleOutputCharacterW(buffer,L"P",1,origin,&count) && count==1);
                 CHECK(WriteConsoleOutputCharacterW(buffer,L"T",1,tail,&count) && count==1);
                 for(repeat=0;repeat<2;++repeat) {
-                    CHECK(ntw32_presentation_seed(endpoint,buffer)==0);
+                    CHECK(ntvwm_presentation_seed(endpoint,buffer)==0);
                     CHECK(GetConsoleScreenBufferInfo(buffer,&after));
                     CHECK(after.dwSize.X==20 && after.dwSize.Y==40 &&
                         after.srWindow.Top==10 && after.srWindow.Bottom==17 &&
@@ -286,9 +296,9 @@ static void run_case(unsigned mode)
                 WCHAR value=0;
                 CHECK(GetConsoleScreenBufferInfoEx(buffer,&history));
                 history.dwSize.Y=40;history.srWindow.Top=0;history.srWindow.Bottom=7;
-                CHECK(ntw32_screen_apply(buffer,&history,&cursor)==0);
+                CHECK(ntvwm_screen_apply(buffer,&history,&cursor)==0);
                 InterlockedExchange(&state.page_shift,2);
-                CHECK(ntw32_presentation_seed(endpoint,buffer)==0);
+                CHECK(ntvwm_presentation_seed(endpoint,buffer)==0);
                 CHECK(GetConsoleScreenBufferInfo(buffer,&after));
                 CHECK(after.dwSize.Y==40 && after.srWindow.Top==2 &&
                     after.dwCursorPosition.Y==4);
@@ -315,7 +325,7 @@ static void run_case(unsigned mode)
                         CHECK(WriteConsoleInputW(input,keys,ARRAYSIZE(keys),&written) && written==ARRAYSIZE(keys));
                     }
                     CHECK(SetConsoleActiveScreenBuffer(buffer));
-                    CHECK(ntw32_presentation_end(endpoint,&font)==0);
+                    CHECK(ntvwm_presentation_end(endpoint,&font)==0);
                     if(mode==16) {
                         DWORD remaining=MAXDWORD;
                         CHECK(GetNumberOfConsoleInputEvents(GetStdHandle(STD_INPUT_HANDLE),&remaining) && !remaining);
@@ -328,7 +338,7 @@ static void run_case(unsigned mode)
         goto done;
     }
     request.operation=CONSOLE_IO_BARRIER;
-    error=ntw32_presentation_call(endpoint,&request,&reply);
+    error=ntvwm_presentation_call(endpoint,&request,&reply);
     fprintf(log,"case=%u first_error=%lu reply_error=%lu\n",mode,(unsigned long)error,(unsigned long)reply.error);
     if(mode==0 || mode==6) {
         console_video_description description={0};console_text_style *style;
@@ -341,12 +351,12 @@ static void run_case(unsigned mode)
         style=(console_text_style *)payload;style->font_height=14;
         memset(style->fonts,0x5a,sizeof(style->fonts));
         memset(payload+sizeof(*style),'A',4000);
-        CHECK(ntw32_presentation_text(endpoint,&description,payload,description.bytes)==0);
-        CHECK(ntw32_presentation_call(endpoint,&request,&reply)==0);
+        CHECK(ntvwm_presentation_text(endpoint,&description,payload,description.bytes)==0);
+        CHECK(ntvwm_presentation_call(endpoint,&request,&reply)==0);
         description.kind=CONSOLE_VIDEO_DIB;
-        CHECK(ntw32_presentation_text(endpoint,&description,payload,description.bytes)==ERROR_INVALID_PARAMETER);
+        CHECK(ntvwm_presentation_text(endpoint,&description,payload,description.bytes)==ERROR_INVALID_PARAMETER);
         description.kind=CONSOLE_VIDEO_TEXT_FRAME;
-        CHECK(ntw32_presentation_text(endpoint,&description,payload,description.bytes-1)==ERROR_INVALID_PARAMETER);
+        CHECK(ntvwm_presentation_text(endpoint,&description,payload,description.bytes-1)==ERROR_INVALID_PARAMETER);
         if(mode==6) {
             HANDLE original=CreateFileW(L"CONOUT$",GENERIC_READ|GENERIC_WRITE,
                 FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,OPEN_EXISTING,0,NULL);
@@ -379,7 +389,7 @@ static void run_case(unsigned mode)
                 CHECK(SetConsoleCursorPosition(buffer,position));
                 CHECK(SetConsoleCursorInfo(buffer,&cursor));
                 CHECK(SetConsoleActiveScreenBuffer(buffer));
-                CHECK(ntw32_presentation_capture(endpoint,style)==0);
+                CHECK(ntvwm_presentation_capture(endpoint,style)==0);
                 CHECK(SetConsoleActiveScreenBuffer(original));
             }
             if(buffer!=INVALID_HANDLE_VALUE)CloseHandle(buffer);
@@ -389,10 +399,10 @@ static void run_case(unsigned mode)
     } else {
         CHECK(error==(DWORD)(mode==4 ? ERROR_PIPE_NOT_CONNECTED : mode==5 ? ERROR_OPERATION_ABORTED : ERROR_INVALID_DATA));
         /* Framing/cancellation failure cannot reuse a desynchronized stream. */
-        CHECK(ntw32_presentation_call(endpoint,&request,&reply)==error);
+        CHECK(ntvwm_presentation_call(endpoint,&request,&reply)==error);
     }
 done:
-    ntw32_presentation_close(endpoint);
+    ntvwm_presentation_close(endpoint);
     if(client!=INVALID_HANDLE_VALUE)CloseHandle(client);
     if(thread) {
         DWORD wait=WaitForSingleObject(thread,3000);
@@ -409,6 +419,7 @@ done:
         CHECK(mode==6 ? state.calls>8u : state.calls==5u);
         if(mode==6)CHECK(state.screen.width<=80 && state.screen.height<=25 &&
             state.screen.right<state.screen.width && state.screen.bottom<state.screen.height);
+        if(mode==6)CHECK(state.titles==1);
         CHECK(state.video.published_serial==(mode==6 ? 2u : 1u) && state.video.description.kind==CONSOLE_VIDEO_TEXT_FRAME);
         CHECK(state.video.pixels && state.video.pixels[sizeof(console_text_style)]==(mode==6 ? 'Z' : 'A'));
         if(mode==6 && state.video.pixels) {
@@ -478,7 +489,14 @@ int wmain(int argc,WCHAR **argv)
         CHECK(SetStdHandle(STD_INPUT_HANDLE,input));
         run_case(16);
         if(input!=INVALID_HANDLE_VALUE)CloseHandle(input);
-    } else for(mode=0;mode<=20;++mode)if(mode!=16)run_case(mode);
-    fprintf(log,"NTW32-PRESENTATION checks=%u failures=%u named-pipe=yes production-activation=no\n",checks,failures);
+    } else {
+        /* The geometry cases generate asynchronous WINDOW_BUFFER_SIZE_EVENTs.
+         * Verify exact injected-input order before changing Console geometry;
+         * do not weaken the queue-count assertions or wait out the event. */
+        run_case(7);run_case(8);run_case(19);
+        for(mode=0;mode<=20;++mode)
+            if(mode!=7 && mode!=8 && mode!=16 && mode!=19)run_case(mode);
+    }
+    fprintf(log,"NTVWM-PRESENTATION checks=%u failures=%u named-pipe=yes production-activation=no\n",checks,failures);
     fclose(log);return failures ? 1 : 0;
 }

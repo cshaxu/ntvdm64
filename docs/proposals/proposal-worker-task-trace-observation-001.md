@@ -8,14 +8,14 @@ The active component-renaming package is absent from Queue and is not
 expanded by this planning revision. T423 is owner-closed; this transfers its
 former unimplemented S39 observation plan, not an active or completed S.
 Implementation depends on both the delivered naming package and the launch
-hook package. Here `NTW32` is the Win32 text worker and `NTCON` is the renamed
+hook package. Here `NTVWM` is the Win32 text worker and `NTCON` is the renamed
 visible Console/Window frontend. Reuse the preceding
 [NTMON Console-root tree package](proposal-ntmon-console-worker-tree-001.md)
 for the ordinary management list, root selection/close and worker grouping;
 this package adds the separate task-detail modal, not a second tree or DEL policy.
 
 Provide an NTSRV-authoritative, read-only view of the execution chain for a
-selected NTVDM or NTW32 worker. NTMON reads that view and opens a detail modal
+selected NTVDM or NTVWM worker. NTMON reads that view and opens a detail modal
 showing `DIRECT` and `OBSERVED` nodes, their proved relationships, provenance,
 revision and uncertainty. The trace explains what happened; it never becomes
 a second task scheduler, a worker-lifetime authority or a source of exit codes.
@@ -33,7 +33,7 @@ plan as proof of implementation.
 | --- | --- | --- | --- |
 | Direct DOS/Win16/native admission | NTSRV's existing BaseSrv/native admission and completion path | NTSRV; projected to NTMON | Existing original DOS/WOW records and direct native Win32Records alone control receipt/completion. |
 | Observed DOS/Win16 execution transition | NTVDM at proved original worker-local service boundaries | NTSRV trace sidecar; NTMON reads snapshot | Diagnostic only. |
-| Observed Win32 text descendant creation | nthook32.dll/nthook64.dll in authenticated controlled native parents; NTW32 supplies direct-root identity | NTSRV trace sidecar; NTMON reads snapshot | Covered API launch edges only; diagnostic, not native execution authority. |
+| Observed Win32 text descendant creation | nthook32.dll/nthook64.dll in authenticated controlled native parents; NTVWM supplies direct-root identity | NTSRV trace sidecar; NTMON reads snapshot | Covered API launch edges only; diagnostic, not native execution authority. |
 | Observed native exit | NTSRV event wait on a validated retained process reference from creation registration | NTSRV trace sidecar; NTMON reads snapshot | Actual registered process exit; never a Direct receipt or worker-lifetime decision. |
 
 Original `DOSRECORD`/`WOWRECORD` and renamed native Direct Win32Records retain
@@ -70,8 +70,8 @@ Only actual Direct completion may release a waiting run16 or change worker
 state; Observed deltas cannot affect admission, receipt, worker selection,
 root retirement, task kill or process termination.
 
-For NTW32, reuse the delivered launch hook's creation reports. No Job or
-completion-port descendant observer is selected. NTW32 reports/authenticates
+For NTVWM, reuse the delivered launch hook's creation reports. No Job or
+completion-port descendant observer is selected. NTVWM reports/authenticates
 the direct root; injected controlled parents report actual successful child
 creation through the same finite versioned observation contract. Retain a
 process-instance reference at creation so an immediately exited child remains
@@ -85,7 +85,7 @@ sampling or DLL detach notifications, to mark Observed exit. Handle waits
 cover forced exit of a registered process. Creation-before-exit ordering,
 concurrent callbacks, cancellation, callback rundown, PID reuse and process
 reference release require explicit locks/ownership and tests. These waits are
-diagnostic only: NTW32 still waits its actual direct target, performs I/O cleanup
+diagnostic only: NTVWM still waits its actual direct target, performs I/O cleanup
 and reports the existing receipt result. An observer must not publish that
 receipt, decide BUSY/EMPTY/READY, close a Console or terminate any process.
 

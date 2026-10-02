@@ -39,7 +39,7 @@ src/
   ntsrv-exe/
   ntvdm-exe/
   ntkvm-exe/
-  ntw32-exe/
+  ntvwm-exe/
   ntmon-exe/
   wow32-dll/
   vdmredir-dll/
@@ -69,7 +69,7 @@ authenticated launch orchestration move into ntsrv-exe; run16 keeps CLI,
 broker discovery and submission/direct-result/Console-handoff RPC clients.
 NTSRV coordinates takeover/return acknowledgements; NTKVM performs actual
 Console operations. Remove the run16/NTKVM direct bootstrap channel too.
-Broker typed copied contracts remain in interface. NTW32 owns native target
+Broker typed copied contracts remain in interface. NTVWM owns native target
 CreateProcess/wait/result reporting; NTKVM owns Console/Window/I/O service;
 worker-base remains worker-only shared client/mechanism code. Existing launcher
 bootstrap, worker launch and direct native request code below are migration
@@ -81,10 +81,10 @@ mirror change or NTKVM-owned worker policy is admitted.
 `run16-exe/bootstrap_client.c`, `native_request_client.c`,
 `native_request_io.c` and `native_launch_packet.c` own the existing finite
 `frontend-client.lib`. `native_launch.c` is its separately selected resource/
-CreateProcess primitive shared with NTW32; NTKVM never links target creation.
+CreateProcess primitive shared with NTVWM; NTKVM never links target creation.
 Public startup/client declarations are in `interface/frontend_bootstrap.h`,
 `native_request_client.h`, `native_request_protocol.h` and `native_launch.h`.
-No private NTKVM/NTW32 implementation root is a shared startup source owner.
+No private NTKVM/NTVWM implementation root is a shared startup source owner.
 
 Cross-component wire declarations and service IDL have one owner: interface.
 Frame/input formats and service/monitor/launcher/worker contracts migrate there
@@ -93,7 +93,7 @@ stay in their executable components. Earlier product-abi and service-owned IDL
 placement below is superseded; generated RPC outputs remain below build/.
 
 The owner-admitted worker-base static library holds project-added mechanisms
-shared by NTVDM and NTW32 with matching full contracts: lifecycle, worker
+shared by NTVDM and NTVWM with matching full contracts: lifecycle, worker
 clients, ordered transport, validation/cancellation, frame/input codecs and
 handoff acknowledgments. Audit source provenance, not only file placement.
 Original mirror execution, scheduling, completion, blocking/resume and cleanup
@@ -104,20 +104,20 @@ handling internally. Backend state operations remain explicit in each worker.
 BaseSrv client implementation remains NTSRV-owned; IDL belongs to interface.
 
 Latest owner directive selects an ordinary hidden Console owned/attached by
-ntw32-exe, replacing the ConPTY/VT plan below. No private helper is permitted.
-Console state, input and membership operations stay in NTW32; NTSRV only
+ntvwm-exe, replacing the ConPTY/VT plan below. No private helper is permitted.
+Console state, input and membership operations stay in NTVWM; NTSRV only
 coordinates authenticated lifecycle and NTKVM only presents copied frames.
 
-The admitted NTW32 replacement supersedes the historical S9/S11 owner
-description below. src/ntw32-exe owns its ordinary hidden Console, native Console
+The admitted NTVWM replacement supersedes the historical S9/S11 owner
+description below. src/ntvwm-exe owns its ordinary hidden Console, native Console
 state, input binding, member observation and text-frame production, and produces
-ntw32.exe. NTKVM keeps only visible Console/Window, display and input/frame
+ntvwm.exe. NTKVM keeps only visible Console/Window, display and input/frame
 routing; run16 keeps launcher duties. NTSRV implements authenticated
 backend registration/client transport and NTMON consumes that management view.
 No original DOS/WOW record or generic compatibility root is introduced.
 
-NTW32 text frames use the existing NTVDM console_video.h layout exactly,
-including font banks, glyph/attribute pairs, palette and cursor. NTW32 never
+NTVWM text frames use the existing NTVDM console_video.h layout exactly,
+including font banks, glyph/attribute pairs, palette and cursor. NTVWM never
 publishes graphics frames. Its bitmap glyph mapping must agree with NTVDM;
 NTKVM has one backend-neutral text-frame renderer, not a native VT/font engine.
 This is the admitted S12 target, not a claim that the retained candidate has

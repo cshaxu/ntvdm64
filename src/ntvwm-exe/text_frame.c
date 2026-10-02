@@ -3,7 +3,7 @@
 
 static LONG pointer_bound(LONGLONG value,LONG extent)
 { return value<0 ? 0 : value>=extent ? extent-1 : (LONG)value; }
-DWORD ntw32_mouse_geometry(ntw32_mouse *mouse,SMALL_RECT view,unsigned height)
+DWORD ntvwm_mouse_geometry(ntvwm_mouse *mouse,SMALL_RECT view,unsigned height)
 {
     LONG width,rows;
     if(!mouse || view.Left<0 || view.Top<0 || view.Right<view.Left ||
@@ -14,7 +14,7 @@ DWORD ntw32_mouse_geometry(ntw32_mouse *mouse,SMALL_RECT view,unsigned height)
     mouse->viewport=view;mouse->font_height=height;mouse->ready=TRUE;
     return ERROR_SUCCESS;
 }
-static INPUT_RECORD pointer_record(const ntw32_mouse *mouse,DWORD buttons,DWORD flags,DWORD control)
+static INPUT_RECORD pointer_record(const ntvwm_mouse *mouse,DWORD buttons,DWORD flags,DWORD control)
 {
     INPUT_RECORD result={0};result.EventType=MOUSE_EVENT;
     result.Event.MouseEvent.dwMousePosition.X=(SHORT)(mouse->viewport.Left+mouse->x/8);
@@ -23,10 +23,10 @@ static INPUT_RECORD pointer_record(const ntw32_mouse *mouse,DWORD buttons,DWORD 
     result.Event.MouseEvent.dwEventFlags=flags;result.Event.MouseEvent.dwControlKeyState=control;
     return result;
 }
-DWORD ntw32_mouse_input(ntw32_mouse *mouse,const console_pointer_input *input,
+DWORD ntvwm_mouse_input(ntvwm_mouse *mouse,const console_pointer_input *input,
     INPUT_RECORD records[2],DWORD *count)
 {
-    ntw32_mouse next;DWORD buttons;
+    ntvwm_mouse next;DWORD buttons;
     if(!mouse || !input || !records || !count)return ERROR_INVALID_PARAMETER;
     *count=0;
     if(input->buttons>3 || input->action<CONSOLE_MOUSE_ENTER || input->action>CONSOLE_MOUSE_POSITION ||
@@ -55,7 +55,7 @@ DWORD ntw32_mouse_input(ntw32_mouse *mouse,const console_pointer_input *input,
     }
     *mouse=next;return ERROR_SUCCESS;
 }
-void ntw32_mouse_compose(const ntw32_mouse *mouse,const console_video_description *description,BYTE *payload)
+void ntvwm_mouse_compose(const ntvwm_mouse *mouse,const console_video_description *description,BYTE *payload)
 {
     DWORD x,y,bytes;
     if(!mouse || !mouse->ready || !mouse->visible || !payload ||
@@ -88,7 +88,7 @@ static BYTE pc_glyph(WCHAR character)
     return (BYTE)byte;
 }
 
-DWORD ntw32_text_frame_pack(const CONSOLE_SCREEN_BUFFER_INFOEX *screen,
+DWORD ntvwm_text_frame_pack(const CONSOLE_SCREEN_BUFFER_INFOEX *screen,
     const CONSOLE_CURSOR_INFO *cursor,const CHAR_INFO *cells,SIZE_T count,
     const console_text_style *font,console_video_description *description,BYTE **payload)
 {

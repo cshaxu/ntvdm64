@@ -1,4 +1,4 @@
-#include "ntw32-exe/execution.h"
+#include "ntvwm-exe/execution.h"
 #include "interface/frontend_protocol.h"
 #include "interface/native_launch.h"
 #include <sddl.h>
@@ -8,22 +8,22 @@ static unsigned checks,failures,serial;
 static DWORD completion_error;
 static volatile LONG completed_resume_count;
 static DWORD observed_broker_fault;
-BOOL ntw32_console_quiescent(DWORD completed_target)
+BOOL ntvwm_console_quiescent(DWORD completed_target)
 { (void)completed_target;return FALSE; } /* This fixture owns no carrier. */
 static void record_broker_fault(void *context,DWORD error)
 { (void)context;observed_broker_fault=error; }
 /* This fixture owns attachments directly, without a broker delivery lease. */
-DWORD ntw32_complete_next_command(DWORD request,DWORD exit_code)
+DWORD ntvwm_complete_next_command(DWORD request,DWORD exit_code)
 { (void)exit_code;if(!request)InterlockedIncrement(&completed_resume_count);return completion_error; }
 DWORD OpenNtBaseClientBindNativeTarget(DWORD request,HANDLE target,HANDLE receipt)
 { return request && target && receipt ? ERROR_SUCCESS : ERROR_INVALID_PARAMETER; }
 #define CHECK(x) do {++checks;if(!(x)){++failures;fprintf(log,"FAIL %d %s\n",__LINE__,#x);}} while(0)
-static HANDLE submit_access_kind(ntw32_executions *owner,DWORD access,DWORD preflight_error,DWORD request_id)
+static HANDLE submit_access_kind(ntvwm_executions *owner,DWORD access,DWORD preflight_error,DWORD request_id)
 {
     WCHAR name[128];HANDLE server,client,process=NULL,frontend,execution;PSECURITY_DESCRIPTOR descriptor=NULL;
     SECURITY_ATTRIBUTES attributes={sizeof(attributes),NULL,FALSE};
     DWORD error;
-    swprintf_s(name,128,L"\\\\.\\pipe\\ntw32-lifetime-%lu-%u",GetCurrentProcessId(),++serial);
+    swprintf_s(name,128,L"\\\\.\\pipe\\ntvwm-lifetime-%lu-%u",GetCurrentProcessId(),++serial);
     /* This is an in-process lifetime fixture.  Its local client must not
      * inherit a restrictive interactive-session pipe DACL. */
     CHECK(ConvertStringSecurityDescriptorToSecurityDescriptorW(L"D:(A;;GA;;;WD)",SDDL_REVISION_1,
@@ -42,18 +42,18 @@ static HANDLE submit_access_kind(ntw32_executions *owner,DWORD access,DWORD pref
     CHECK(DuplicateHandle(GetCurrentProcess(),GetCurrentProcess(),GetCurrentProcess(),
         &process,access,FALSE,0));
     {
-        ntw32_next_command command={server,process,execution,frontend,request_id};
-        error=ntw32_execution_start(owner,&command,preflight_error);
+        ntvwm_next_command command={server,process,execution,frontend,request_id};
+        error=ntvwm_execution_start(owner,&command,preflight_error);
         CHECK(!command.channel && !command.sender && !command.execution && !command.frontend && !command.request);
     }
     CHECK(!error);if(error){CloseHandle(client);return NULL;}
     return client;
 }
-static HANDLE submit_access(ntw32_executions *owner,DWORD access,DWORD preflight_error)
+static HANDLE submit_access(ntvwm_executions *owner,DWORD access,DWORD preflight_error)
 {
     return submit_access_kind(owner,access,preflight_error,1);
 }
-static HANDLE submit(ntw32_executions *owner)
+static HANDLE submit(ntvwm_executions *owner)
 {
     return submit_access(owner,SYNCHRONIZE|PROCESS_DUP_HANDLE|PROCESS_QUERY_LIMITED_INFORMATION,ERROR_SUCCESS);
 }
@@ -71,13 +71,13 @@ static DWORD resume_end(void *context)
 { resume_state *state=context;CHECK(state->sequence++==2);return state->end_error; }
 static void resume_barrier(DWORD begin_error,DWORD end_error)
 {
-    ntw32_executions *owner=NULL;HANDLE client;DWORD bytes;
+    ntvwm_executions *owner=NULL;HANDLE client;DWORD bytes;
     resume_state state={0,begin_error,end_error};
-    ntw32_execution_io io={&state,resume_begin,resume_end,resume_release};
+    ntvwm_execution_io io={&state,resume_begin,resume_end,resume_release};
     native_request_header header={NATIVE_REQUEST_VERSION,0};native_request_reply reply={0};
     LONG before=completed_resume_count;
-    CHECK(!ntw32_executions_open(&owner));if(!owner)return;
-    ntw32_executions_bind_io(owner,&io);
+    CHECK(!ntvwm_executions_open(&owner));if(!owner)return;
+    ntvwm_executions_bind_io(owner,&io);
     client=submit_access_kind(owner,SYNCHRONIZE|PROCESS_DUP_HANDLE|
         PROCESS_QUERY_LIMITED_INFORMATION,ERROR_SUCCESS,0);
     if(client) {
@@ -89,23 +89,23 @@ static void resume_barrier(DWORD begin_error,DWORD end_error)
         CHECK(!ReadFile(client,&reply,1,&bytes,NULL) && GetLastError()==ERROR_BROKEN_PIPE);
         CloseHandle(client);
     }
-    ntw32_executions_close(owner);
+    ntvwm_executions_close(owner);
     CHECK(completed_resume_count==before+1);
     CHECK(state.sequence==(begin_error ? 1u : 3u));
 }
 static void export_failure_does_not_launch(void)
 {
-    ntw32_executions *owner=NULL;HANDLE client,marker;
+    ntvwm_executions *owner=NULL;HANDLE client,marker;
     WCHAR image[MAX_PATH],command[MAX_PATH+180],directory[MAX_PATH],name[128],*environment;
     run16_native_start start={0};BYTE *payload=NULL;DWORD size,bytes;
     native_request_header header={NATIVE_REQUEST_VERSION,0};native_request_reply reply={0};
-    swprintf_s(name,ARRAYSIZE(name),L"Local\\ntw32-no-launch-%lu-%u",GetCurrentProcessId(),++serial);
+    swprintf_s(name,ARRAYSIZE(name),L"Local\\ntvwm-no-launch-%lu-%u",GetCurrentProcessId(),++serial);
     marker=CreateEventW(NULL,TRUE,FALSE,name);CHECK(marker!=NULL);if(!marker)return;
-    CHECK(!ntw32_executions_open(&owner));if(!owner){CloseHandle(marker);return;}
+    CHECK(!ntvwm_executions_open(&owner));if(!owner){CloseHandle(marker);return;}
     /* Deliberately omit PROCESS_DUP_HANDLE: the real OS rejects the export,
      * without replacing CreateProcess or the production request executor. */
     client=submit_access(owner,SYNCHRONIZE|PROCESS_QUERY_LIMITED_INFORMATION,ERROR_SUCCESS);
-    if(!client){ntw32_executions_close(owner);CloseHandle(marker);return;}
+    if(!client){ntvwm_executions_close(owner);CloseHandle(marker);return;}
     CHECK(GetModuleFileNameW(NULL,image,MAX_PATH));
     CHECK(GetCurrentDirectoryW(MAX_PATH,directory));
     swprintf_s(command,ARRAYSIZE(command),L"\"%ls\" --probe-target %ls",image,name);
@@ -122,21 +122,21 @@ static void export_failure_does_not_launch(void)
         CHECK(!ReadFile(client,&reply,1,&bytes,NULL) && GetLastError()==ERROR_BROKEN_PIPE);
         HeapFree(GetProcessHeap(),0,payload);
     }
-    ntw32_executions_close(owner);
+    ntvwm_executions_close(owner);
     CHECK(WaitForSingleObject(marker,1500)==WAIT_TIMEOUT);
     CloseHandle(client);CloseHandle(marker);FreeEnvironmentStringsW(environment);
 }
 static void preflight_failure_replies_before_launch(void)
 {
-    ntw32_executions *owner=NULL;HANDLE client,marker;
+    ntvwm_executions *owner=NULL;HANDLE client,marker;
     WCHAR image[MAX_PATH],command[MAX_PATH+180],directory[MAX_PATH],name[128],*environment;
     run16_native_start start={0};BYTE *payload=NULL;DWORD size,bytes;
     native_request_header header={NATIVE_REQUEST_VERSION,0};native_request_reply reply={0};
-    swprintf_s(name,ARRAYSIZE(name),L"Local\\ntw32-preflight-%lu-%u",GetCurrentProcessId(),++serial);
+    swprintf_s(name,ARRAYSIZE(name),L"Local\\ntvwm-preflight-%lu-%u",GetCurrentProcessId(),++serial);
     marker=CreateEventW(NULL,TRUE,FALSE,name);CHECK(marker!=NULL);if(!marker)return;
-    CHECK(!ntw32_executions_open(&owner));if(!owner){CloseHandle(marker);return;}
+    CHECK(!ntvwm_executions_open(&owner));if(!owner){CloseHandle(marker);return;}
     client=submit_access(owner,SYNCHRONIZE|PROCESS_DUP_HANDLE|PROCESS_QUERY_LIMITED_INFORMATION,ERROR_BUSY);
-    if(!client){ntw32_executions_close(owner);CloseHandle(marker);return;}
+    if(!client){ntvwm_executions_close(owner);CloseHandle(marker);return;}
     CHECK(GetModuleFileNameW(NULL,image,MAX_PATH));CHECK(GetCurrentDirectoryW(MAX_PATH,directory));
     swprintf_s(command,ARRAYSIZE(command),L"\"%ls\" --probe-target %ls",image,name);
     environment=GetEnvironmentStringsW();CHECK(environment!=NULL);
@@ -152,29 +152,29 @@ static void preflight_failure_replies_before_launch(void)
         CHECK(!ReadFile(client,&reply,1,&bytes,NULL) && GetLastError()==ERROR_BROKEN_PIPE);
         HeapFree(GetProcessHeap(),0,payload);
     }
-    ntw32_executions_close(owner);
+    ntvwm_executions_close(owner);
     CHECK(WaitForSingleObject(marker,1500)==WAIT_TIMEOUT);
     CloseHandle(client);CloseHandle(marker);FreeEnvironmentStringsW(environment);
 }
 static void broker_completion_failure_stops_reentry(void)
 {
-    ntw32_executions *owner=NULL;HANDLE client;DWORD bytes;
+    ntvwm_executions *owner=NULL;HANDLE client;DWORD bytes;
     native_request_header header={0,0};native_request_reply reply={0};
-    CHECK(!ntw32_executions_open(&owner));if(!owner)return;
+    CHECK(!ntvwm_executions_open(&owner));if(!owner)return;
     observed_broker_fault=ERROR_SUCCESS;
-    ntw32_executions_bind_fault(owner,record_broker_fault,NULL);
+    ntvwm_executions_bind_fault(owner,record_broker_fault,NULL);
     completion_error=RPC_S_SERVER_UNAVAILABLE;
     client=submit(owner);
     if(client) {
         CHECK(WriteFile(client,&header,sizeof(header),&bytes,NULL) && bytes==sizeof(header));
         CHECK(ReadFile(client,&reply,sizeof(reply),&bytes,NULL) && bytes==sizeof(reply));
         CHECK(reply.version==NATIVE_REQUEST_VERSION && reply.error==ERROR_INVALID_DATA);
-        CHECK(ntw32_executions_wait_idle(owner)==RPC_S_SERVER_UNAVAILABLE);
+        CHECK(ntvwm_executions_wait_idle(owner)==RPC_S_SERVER_UNAVAILABLE);
         CHECK(observed_broker_fault==RPC_S_SERVER_UNAVAILABLE);
         CloseHandle(client);
     }
     completion_error=ERROR_SUCCESS;
-    ntw32_executions_close(owner);
+    ntvwm_executions_close(owner);
 }
 static SIZE_T busy_heap_bytes(void)
 {
@@ -187,17 +187,17 @@ static SIZE_T busy_heap_bytes(void)
 }
 static void invalid_arguments_do_not_allocate(void)
 {
-    ntw32_executions *owner=NULL;ntw32_next_command command={0};
+    ntvwm_executions *owner=NULL;ntvwm_next_command command={0};
     SIZE_T before,after;unsigned i;
-    CHECK(!ntw32_executions_open(&owner));if(!owner)return;
+    CHECK(!ntvwm_executions_open(&owner));if(!owner)return;
     before=busy_heap_bytes();
     for(i=0;i<32;++i) {
-        CHECK(ntw32_execution_start(NULL,&command,0)==ERROR_INVALID_PARAMETER);
-        CHECK(ntw32_execution_start(owner,NULL,0)==ERROR_INVALID_PARAMETER);
-        CHECK(ntw32_execution_start(NULL,NULL,0)==ERROR_INVALID_PARAMETER);
+        CHECK(ntvwm_execution_start(NULL,&command,0)==ERROR_INVALID_PARAMETER);
+        CHECK(ntvwm_execution_start(owner,NULL,0)==ERROR_INVALID_PARAMETER);
+        CHECK(ntvwm_execution_start(NULL,NULL,0)==ERROR_INVALID_PARAMETER);
     }
     after=busy_heap_bytes();CHECK(before==after);
-    CHECK(ntw32_executions_idle(owner));ntw32_executions_close(owner);
+    CHECK(ntvwm_executions_idle(owner));ntvwm_executions_close(owner);
 }
 static void launch_packet_boundaries(void)
 {
@@ -226,8 +226,8 @@ static void launch_packet_boundaries(void)
 }
 static void oversized_headers_do_not_wait_for_payload(void)
 {
-    ntw32_executions *owner=NULL;DWORD lengths[]={NATIVE_LAUNCH_MAX_BYTES+1,MAXDWORD},i,bytes;
-    CHECK(!ntw32_executions_open(&owner));if(!owner)return;
+    ntvwm_executions *owner=NULL;DWORD lengths[]={NATIVE_LAUNCH_MAX_BYTES+1,MAXDWORD},i,bytes;
+    CHECK(!ntvwm_executions_open(&owner));if(!owner)return;
     for(i=0;i<ARRAYSIZE(lengths);++i) {
         HANDLE client=submit(owner);native_request_header header={NATIVE_REQUEST_VERSION,lengths[i]};
         native_request_reply reply={0};if(!client)continue;
@@ -236,18 +236,18 @@ static void oversized_headers_do_not_wait_for_payload(void)
         CHECK(WriteFile(client,&header,sizeof(header),&bytes,NULL) && bytes==sizeof(header));
         CHECK(ReadFile(client,&reply,sizeof(reply),&bytes,NULL) && bytes==sizeof(reply));
         CHECK(reply.error==ERROR_INVALID_DATA && !reply.target && !reply.receipt);
-        CloseHandle(client);CHECK(!ntw32_executions_wait_idle(owner));
+        CloseHandle(client);CHECK(!ntvwm_executions_wait_idle(owner));
     }
-    ntw32_executions_close(owner);
+    ntvwm_executions_close(owner);
 }
 static void target_survives_close(void)
 {
-    ntw32_executions *owner=NULL;HANDLE client,target,receipt;
+    ntvwm_executions *owner=NULL;HANDLE client,target,receipt;
     WCHAR image[MAX_PATH],command[MAX_PATH+40],directory[MAX_PATH],*environment;
     run16_native_start start={0};BYTE *payload=NULL;DWORD size,bytes;
     native_request_header header={NATIVE_REQUEST_VERSION,0};native_request_reply reply={0};
-    CHECK(!ntw32_executions_open(&owner));if(!owner)return;
-    client=submit(owner);if(!client){ntw32_executions_close(owner);return;}
+    CHECK(!ntvwm_executions_open(&owner));if(!owner)return;
+    client=submit(owner);if(!client){ntvwm_executions_close(owner);return;}
     CHECK(GetModuleFileNameW(NULL,image,MAX_PATH));
     CHECK(GetCurrentDirectoryW(MAX_PATH,directory));
     swprintf_s(command,ARRAYSIZE(command),L"\"%ls\" --held-target",image);
@@ -255,14 +255,14 @@ static void target_survives_close(void)
     start.application=image;start.command=command;start.directory=directory;
     start.environment=environment;start.console_mask=7;
     CHECK(!run16_native_launch_pack(&start,&payload,&size));
-    if(!payload){FreeEnvironmentStringsW(environment);CloseHandle(client);ntw32_executions_close(owner);return;}
+    if(!payload){FreeEnvironmentStringsW(environment);CloseHandle(client);ntvwm_executions_close(owner);return;}
     header.bytes=size;
     CHECK(WriteFile(client,&header,sizeof(header),&bytes,NULL) && bytes==sizeof(header));
     CHECK(WriteFile(client,payload,size,&bytes,NULL) && bytes==size);
     CHECK(ReadFile(client,&reply,sizeof(reply),&bytes,NULL) && bytes==sizeof(reply));
     CHECK(reply.version==NATIVE_REQUEST_VERSION && !reply.error && reply.target && reply.receipt);
     target=(HANDLE)(ULONG_PTR)reply.target;receipt=(HANDLE)(ULONG_PTR)reply.receipt;
-    ntw32_executions_close(owner);
+    ntvwm_executions_close(owner);
     CHECK(target && WaitForSingleObject(target,0)==WAIT_TIMEOUT);
     CHECK(receipt && WaitForSingleObject(receipt,0)==WAIT_TIMEOUT);
     /* Only the fixture disposes its own known target; product request cleanup
@@ -278,7 +278,7 @@ static void target_survives_close(void)
 }
 int wmain(int argc,WCHAR **argv)
 {
-    ntw32_executions *owner=NULL;DWORD baseline,current,bytes,deadline;
+    ntvwm_executions *owner=NULL;DWORD baseline,current,bytes,deadline;
     HANDLE pending[16]={0};unsigned i;
     if(argc==3 && !lstrcmpW(argv[1],L"--probe-target")){
         HANDLE marker=OpenEventW(EVENT_MODIFY_STATE,FALSE,argv[2]);
@@ -300,7 +300,7 @@ int wmain(int argc,WCHAR **argv)
      * retained request handles; repeat the same target case below. */
     target_survives_close();
     CHECK(GetProcessHandleCount(GetCurrentProcess(),&baseline));
-    CHECK(ntw32_executions_open(&owner)==0);if(!owner)return 3;
+    CHECK(ntvwm_executions_open(&owner)==0);if(!owner)return 3;
     for(i=0;i<12;++i) {
         HANDLE client=submit(owner);native_request_header header={0,0};native_request_reply reply={0};
         if(!client)continue;
@@ -311,7 +311,7 @@ int wmain(int argc,WCHAR **argv)
         CloseHandle(client);
         /* This fixture drains before checking resource counts; production
          * may enter its next GetNext while an earlier request is active. */
-        CHECK(ntw32_executions_wait_idle(owner)==ERROR_SUCCESS);
+        CHECK(ntvwm_executions_wait_idle(owner)==ERROR_SUCCESS);
         /* No next request is needed to release the completed request's process,
          * capability, I/O event and thread handles. The idle, stop and broker
          * completion-failure events are the only group-owned handles. */
@@ -326,7 +326,7 @@ int wmain(int argc,WCHAR **argv)
     for(i=0;i<16;++i)pending[i]=submit(owner);
     /* Sixteen blocked header reads must cancel and clean up without a helper,
      * a new launcher request or a native process termination. */
-    ntw32_executions_close(owner);
+    ntvwm_executions_close(owner);
     for(i=0;i<16;++i)if(pending[i]) {
         char byte;
         CHECK(!ReadFile(pending[i],&byte,1,&bytes,NULL) && GetLastError()==ERROR_BROKEN_PIPE);
@@ -340,7 +340,7 @@ int wmain(int argc,WCHAR **argv)
     resume_barrier(ERROR_ACCESS_DENIED,ERROR_SUCCESS);
     resume_barrier(ERROR_SUCCESS,ERROR_PIPE_NOT_CONNECTED);
     CHECK(GetProcessHandleCount(GetCurrentProcess(),&current) && current==baseline);
-    fprintf(log,"NTW32-REQUEST-LIFETIME checks=%u failures=%u completed=12 cancelled=16 target-survival=yes remaining-handles=%ld\n",
+    fprintf(log,"NTVWM-REQUEST-LIFETIME checks=%u failures=%u completed=12 cancelled=16 target-survival=yes remaining-handles=%ld\n",
         checks,failures,(long)(current-baseline));
     fclose(log);return failures ? 1 : 0;
 }

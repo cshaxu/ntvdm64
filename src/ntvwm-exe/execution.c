@@ -1,4 +1,4 @@
-/* Recovered from NTKVM native_console_request.c. NTW32 creates the native
+/* Recovered from NTKVM native_console_request.c. NTVWM creates the native
  * target on its own Console; the requester receives that actual process. */
 #include "execution.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
@@ -6,20 +6,20 @@
 #include "console_state.h"
 #include "interface/native_launch.h"
 #include "interface/frontend_protocol.h"
-struct ntw32_executions {
+struct ntvwm_executions {
     CRITICAL_SECTION lock;
     HANDLE stop,idle,broker_failed;
     DWORD active,broker_error;
-    ntw32_execution_io io;
-    ntw32_execution_fault fault;
+    ntvwm_execution_io io;
+    ntvwm_execution_fault fault;
     void *fault_context;
 };
-typedef struct ntw32_execution {
-    ntw32_executions *owner;
+typedef struct ntvwm_execution {
+    ntvwm_executions *owner;
     HANDLE root_capability,pipe,sender,execution,event;
     DWORD request,preflight_error;
-} ntw32_execution;
-static void release_request(ntw32_execution *request)
+} ntvwm_execution;
+static void release_request(ntvwm_execution *request)
 {
     if(request->pipe)CloseHandle(request->pipe);
     if(request->sender)CloseHandle(request->sender);
@@ -31,7 +31,7 @@ static void release_request(ntw32_execution *request)
 /* Before the serving thread exists, the caller still owns the broker command
  * attachments.  Keep that common worker-base failure contract intact: the
  * caller completes and disposes the command exactly once. */
-static void release_unstarted_request(ntw32_execution *request)
+static void release_unstarted_request(ntvwm_execution *request)
 {
     if(!request)return;
     request->root_capability=NULL;
@@ -41,15 +41,15 @@ static void release_unstarted_request(ntw32_execution *request)
     request->request=0;
     release_request(request);
 }
-static void finish_request(ntw32_executions *owner)
+static void finish_request(ntvwm_executions *owner)
 {
     EnterCriticalSection(&owner->lock);
     if(!--owner->active)SetEvent(owner->idle);
     LeaveCriticalSection(&owner->lock);
 }
-void ntw32_executions_note_broker_failure(ntw32_executions *owner,DWORD error)
+void ntvwm_executions_note_broker_failure(ntvwm_executions *owner,DWORD error)
 {
-    ntw32_execution_fault fault;
+    ntvwm_execution_fault fault;
     void *context;
     if(!owner || !error)return;
     EnterCriticalSection(&owner->lock);
@@ -59,7 +59,7 @@ void ntw32_executions_note_broker_failure(ntw32_executions *owner,DWORD error)
     LeaveCriticalSection(&owner->lock);
     if(fault)fault(context,error);
 }
-static DWORD launch_request(ntw32_execution *request,BYTE *payload,DWORD bytes,
+static DWORD launch_request(ntvwm_execution *request,BYTE *payload,DWORD bytes,
     HANDLE receipt,HANDLE *target)
 {
     run16_native_launch_packet header;
@@ -116,8 +116,8 @@ done:
 }
 static DWORD WINAPI serve(void *context)
 {
-    ntw32_execution *request=context;
-    ntw32_executions *owner=request->owner;
+    ntvwm_execution *request=context;
+    ntvwm_executions *owner=request->owner;
     native_request_header header;
     native_request_reply reply={NATIVE_REQUEST_VERSION,0,0};
     BYTE *payload=NULL;HANDLE target=NULL,remote=NULL,receipt=NULL,remote_receipt=NULL;DWORD error;
@@ -191,7 +191,7 @@ reply_ready:
             DWORD broker_error,exit_code=0;
             if(!GetExitCodeProcess(target,&exit_code)) {
                 error=GetLastError();
-                ntw32_executions_note_broker_failure(owner,error);
+                ntvwm_executions_note_broker_failure(owner,error);
                 goto done;
             }
             error=bound ? owner->io.end(owner->io.context) : ERROR_SUCCESS;
@@ -201,13 +201,13 @@ reply_ready:
              * close an owned Console still used by an unregistered native
              * child. Failure is conservative; no timer or observed task is
              * introduced. The broker, not this worker, owns retirement. */
-            if(ntw32_console_quiescent(GetProcessId(target)))
+            if(ntvwm_console_quiescent(GetProcessId(target)))
                 completion.flags=NATIVE_COMPLETION_CONSOLE_EMPTY;
             /* Report only the real target's exit code after native I/O release.
              * NTSRV stores it and signals the launcher's direct receipt. */
-            broker_error=ntw32_complete_next_command(request->request,exit_code);
+            broker_error=ntvwm_complete_next_command(request->request,exit_code);
             if(broker_error) {
-                ntw32_executions_note_broker_failure(owner,broker_error);
+                ntvwm_executions_note_broker_failure(owner,broker_error);
                 error=broker_error;
                 goto done;
             }
@@ -225,19 +225,19 @@ done:
         if(target) {
             /* A running target has not completed. Worker rundown, not a fake
              * success receipt, must fail the broker's outstanding record. */
-            ntw32_executions_note_broker_failure(owner,error ? error : ERROR_PROCESS_ABORTED);
+            ntvwm_executions_note_broker_failure(owner,error ? error : ERROR_PROCESS_ABORTED);
         } else {
-            DWORD completion_error=ntw32_complete_next_command(request->request,0);
-            if(completion_error)ntw32_executions_note_broker_failure(owner,completion_error);
+            DWORD completion_error=ntvwm_complete_next_command(request->request,0);
+            if(completion_error)ntvwm_executions_note_broker_failure(owner,completion_error);
         }
     }
     release_request(request);
     finish_request(owner);
     return error;
 }
-DWORD ntw32_executions_open(ntw32_executions **output)
+DWORD ntvwm_executions_open(ntvwm_executions **output)
 {
-    ntw32_executions *owner;DWORD error;
+    ntvwm_executions *owner;DWORD error;
     if(!output)return ERROR_INVALID_PARAMETER;
     *output=NULL;
     owner=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*owner));
@@ -255,13 +255,13 @@ DWORD ntw32_executions_open(ntw32_executions **output)
     InitializeCriticalSection(&owner->lock);
     *output=owner;return ERROR_SUCCESS;
 }
-void ntw32_executions_bind_io(ntw32_executions *owner,const ntw32_execution_io *io)
+void ntvwm_executions_bind_io(ntvwm_executions *owner,const ntvwm_execution_io *io)
 { owner->io=*io; }
-void ntw32_executions_bind_fault(ntw32_executions *owner,ntw32_execution_fault fault,void *context)
+void ntvwm_executions_bind_fault(ntvwm_executions *owner,ntvwm_execution_fault fault,void *context)
 { owner->fault=fault;owner->fault_context=context; }
-BOOL ntw32_executions_idle(ntw32_executions *owner)
+BOOL ntvwm_executions_idle(ntvwm_executions *owner)
 { return WaitForSingleObject(owner->idle,0)==WAIT_OBJECT_0; }
-DWORD ntw32_executions_wait_idle(ntw32_executions *owner)
+DWORD ntvwm_executions_wait_idle(ntvwm_executions *owner)
 {
     DWORD wait,error;
     if(!owner)return ERROR_INVALID_PARAMETER;
@@ -276,9 +276,9 @@ DWORD ntw32_executions_wait_idle(ntw32_executions *owner)
     return wait==WAIT_OBJECT_0 ? ERROR_SUCCESS :
         wait==WAIT_FAILED ? GetLastError() : ERROR_OPERATION_ABORTED;
 }
-DWORD ntw32_execution_start(ntw32_executions *owner,ntw32_next_command *command,DWORD preflight_error)
+DWORD ntvwm_execution_start(ntvwm_executions *owner,ntvwm_next_command *command,DWORD preflight_error)
 {
-    ntw32_execution *request;
+    ntvwm_execution *request;
     DWORD error;HANDLE thread;
     /* request zero is the original broker's I/O-resume channel. The wire
      * header distinguishes it from a Direct target after GetNext. */
@@ -304,7 +304,7 @@ DWORD ntw32_execution_start(ntw32_executions *owner,ntw32_next_command *command,
     ZeroMemory(command,sizeof(*command));
     CloseHandle(thread);return ERROR_SUCCESS;
 }
-void ntw32_executions_close(ntw32_executions *owner)
+void ntvwm_executions_close(ntvwm_executions *owner)
 {
     if(!owner)return;
     EnterCriticalSection(&owner->lock);SetEvent(owner->stop);LeaveCriticalSection(&owner->lock);

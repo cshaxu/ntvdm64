@@ -5,7 +5,7 @@
 #include "lib/kvm-window/render.h"
 #include "window_frame.h"
 #include "text_frame.h"
-#include "ntw32-exe/text_frame.h"
+#include "ntvwm-exe/text_frame.h"
 #include "native_pc_font.h"
 
 /* Test-local capture input, not a second production frame contract. */
@@ -14,7 +14,7 @@ typedef struct run16_native_frame_info {
     CONSOLE_CURSOR_INFO cursor;
 } run16_native_frame_info;
 
-/* Test adapter only: production NTW32 packing -> common frontend decoder.
+/* Test adapter only: production NTVWM packing -> common frontend decoder.
  * Keep the established pixel assertions, with no native renderer in NTKVM. */
 static DWORD frontend_window_native_frame_pointer(const run16_native_frame_info *info,
     const CHAR_INFO *cells,SIZE_T count,const POINT *pointer,kvm_window_frame *frame)
@@ -24,7 +24,7 @@ static DWORD frontend_window_native_frame_pointer(const run16_native_frame_info 
     frame->valid=0;font.font_height=14;
     for(bank=0;bank<2;++bank)for(glyph=0;glyph<256;++glyph)
         memcpy(font.fonts[bank][glyph],frontend_native_font[glyph],14);
-    error=ntw32_text_frame_pack(&info->screen,&info->cursor,cells,count,&font,
+    error=ntvwm_text_frame_pack(&info->screen,&info->cursor,cells,count,&font,
         &video.description,&payload);
     if(error)return error;
     video.pixels=payload;video.published_serial=1;

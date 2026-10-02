@@ -28,10 +28,10 @@ int wmain(void)
         native.kind=2;native.process_id=1234;
         native.state=8;native.stack_depth=2;
         native.started_filetime=((uint64_t)now.dwHighDateTime<<32)|now.dwLowDateTime;
-        lstrcpyW(native.image,L"ntw32.exe");
+        lstrcpyW(native.image,L"ntvwm.exe");
         task_line(line,ARRAYSIZE(line),&state,&native,&now);
         assert(wcsstr(line,L"WIN32") && wcsstr(line,L"1234") &&
-            wcsstr(line,L"2") && !wcsstr(line,L"MEMBERS=") && wcsstr(line,L"ntw32.exe"));
+            wcsstr(line,L"2") && !wcsstr(line,L"MEMBERS=") && wcsstr(line,L"ntvwm.exe"));
         state.confirm_pid=1234;state.confirm_task_count=2;
         confirmation_text(line,ARRAYSIZE(line),&state);
         assert(wcsstr(line,L"End worker 1234 and all its 2 tasks") && !wcsstr(line,L"members"));

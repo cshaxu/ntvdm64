@@ -1,13 +1,13 @@
 /*
  * Observe the system EDIT.EXE in the same kind of hidden ordinary Console
- * owned by NTW32.  This is a test probe: it neither changes the product
+ * owned by NTVWM.  This is a test probe: it neither changes the product
  * Console mode nor drives the application's UI.
  */
 #define _WIN32_WINNT 0x0A00
 #include <windows.h>
 #include <stdio.h>
 #include <wchar.h>
-#include "ntw32-exe/text_frame.h"
+#include "ntvwm-exe/text_frame.h"
 
 static int host(WCHAR *ready_name,WCHAR *finish_name,WCHAR *reply_name,BOOL terminal_profile)
 {
@@ -24,7 +24,7 @@ static int host(WCHAR *ready_name,WCHAR *finish_name,WCHAR *reply_name,BOOL term
     if(terminal_profile) {
         SetEnvironmentVariableW(L"TERM",L"xterm-256color");
         SetEnvironmentVariableW(L"COLORTERM",L"truecolor");
-        SetEnvironmentVariableW(L"WT_SESSION",L"ntw32-colour-probe");
+        SetEnvironmentVariableW(L"WT_SESSION",L"ntvwm-colour-probe");
     }
     /* Modern EDIT asks this question during terminal setup.  An ordinary
      * Console API surface parses OSC output but does not answer it on CONIN$. */
@@ -61,9 +61,9 @@ static int sample(BOOL terminal_profile,const WCHAR *self,const WCHAR *report)
     SMALL_RECT region;COORD size,origin={0,0};DWORD count=0,mode=0,attributes[16]={0};
     console_text_style font={0};console_video_description frame={0};BYTE *payload=NULL;
     DWORD frame_attributes[16]={0};DWORD error=0,index;BOOL query_reply=FALSE;FILE *file=NULL;
-    swprintf_s(ready_name,96,L"Global\\ntw32-colour-ready-%lu-%u",GetCurrentProcessId(),terminal_profile);
-    swprintf_s(finish_name,96,L"Global\\ntw32-colour-finish-%lu-%u",GetCurrentProcessId(),terminal_profile);
-    swprintf_s(reply_name,96,L"Global\\ntw32-colour-reply-%lu-%u",GetCurrentProcessId(),terminal_profile);
+    swprintf_s(ready_name,96,L"Global\\ntvwm-colour-ready-%lu-%u",GetCurrentProcessId(),terminal_profile);
+    swprintf_s(finish_name,96,L"Global\\ntvwm-colour-finish-%lu-%u",GetCurrentProcessId(),terminal_profile);
+    swprintf_s(reply_name,96,L"Global\\ntvwm-colour-reply-%lu-%u",GetCurrentProcessId(),terminal_profile);
     ready=CreateEventW(NULL,TRUE,FALSE,ready_name);finish=CreateEventW(NULL,TRUE,FALSE,finish_name);
     reply=CreateEventW(NULL,TRUE,FALSE,reply_name);
     if(!ready || !finish || !reply){error=GetLastError();goto done;}
@@ -90,14 +90,14 @@ static int sample(BOOL terminal_profile,const WCHAR *self,const WCHAR *report)
     size=info.dwSize;region=(SMALL_RECT){0,0,(SHORT)(size.X-1),(SHORT)(size.Y-1)};
     if(!ReadConsoleOutputW(output,cells,size,origin,&region)){error=GetLastError();goto done;}
     for(index=0;index<count;++index)++attributes[cells[index].Attributes&15];
-    /* Apply the production NTW32 packer to these exact target cells.  This
+    /* Apply the production NTVWM packer to these exact target cells.  This
      * distinguishes target-side monochrome output from a frame conversion
      * fault without touching the target or the frontend. */
     font.font_height=16;
     {
         CONSOLE_CURSOR_INFO cursor={25,TRUE};
         if(!GetConsoleCursorInfo(output,&cursor) ||
-            (error=ntw32_text_frame_pack(&info,&cursor,cells,count,&font,&frame,&payload)))goto done;
+            (error=ntvwm_text_frame_pack(&info,&cursor,cells,count,&font,&frame,&payload)))goto done;
     }
     for(index=0;index<frame.width*frame.height;++index)
         ++frame_attributes[payload[sizeof(console_text_style)+index*2+1]&15];

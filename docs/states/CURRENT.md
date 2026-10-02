@@ -30,7 +30,11 @@ separation, GUI routing and frontend naming remain subsequent stages.
 
 The [ordered plan](../etc/operations/t424-worker-frontend-renaming-plan.md)
 owns the S6 name-only requirements. Admission is not implementation or publication.
-O:/winnt remains verified S5 until the complete S6 gate and delivery.
+The coherent S6 eight-file candidate is now verified and published at O:/winnt;
+native worker is ntvwm.exe, frontend remains ntkvm.exe, protocol/RPC31 is unchanged.
+[S6 evidence](../etc/evidence/m0-t424-s6-native-worker-name.md) records name-only
+production equivalence, explicit fixture repairs, full gates and S5 recovery.
+Production commit/push and sequential S7 admission remain the final delivery step.
 
 ## S5 Closure Record
 

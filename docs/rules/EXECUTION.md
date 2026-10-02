@@ -108,10 +108,10 @@ never a passing result.
 
 ### Every-P regression and side-test publication gate
 
-Owner-admitted T423 S12 will add ntw32.exe to the seven-file package described
-below. Starting with S12 NTW32 production delivery, require one coherent eight-file set;
+Owner-admitted T423 S12 will add ntvwm.exe to the seven-file package described
+below. Starting with S12 NTVWM production delivery, require one coherent eight-file set;
 all prior regression, recovery and publication gates remain binding. The new
-src/ntw32-exe source directory is expressly authorized; build/ remains the
+src/ntvwm-exe source directory is expressly authorized; build/ remains the
 only location for new intermediate, staging and test-result directories.
 
 T423's S3 ownership-replanning snapshot remains evidence, not a production P.
@@ -119,7 +119,7 @@ The owner subsequently approved the migration report, S4 implementation and
 automatic sequential admission after S4 delivery. This supersedes the earlier
 planning-only pause, never the verification gates. The independent frontend
 runtime package before S12 was the six files below plus ntkvm.exe (seven
-total); S12 added ntw32.exe, making the current package eight files. The
+total); S12 added ntvwm.exe, making the current package eight files. The
 pre-S9 helper was a private ntkvm.exe role, not an extra binary. S9 removes
 that project helper in favor of ntkvm-owned ConPTY, without adding a product
 executable. Status distinguishes the candidate from the published set. All regression,
@@ -165,7 +165,7 @@ does not waive runtime tests or publication of the complete eight-file set.
    explicitly open within the admitted scope, never counted as functional
    passes. Unknown or unexecuted comparisons do not pass this gate.
 5. Update O:/winnt with the verified coherent set: ntmon.exe, run16.exe,
-   ntsrv.exe, ntvdm.exe, ntw32.exe, ntkvm.exe, WOW32.DLL and VDMREDIR.DLL,
+   ntsrv.exe, ntvdm.exe, ntvwm.exe, ntkvm.exe, WOW32.DLL and VDMREDIR.DLL,
    plus required original guest binaries and approved configuration at proper
    package-relative paths. Validate all eight, including unchanged hashes, against the tested manifest
    and verify the published set. Do not test one component combination and

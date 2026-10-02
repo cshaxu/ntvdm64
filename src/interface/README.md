@@ -9,11 +9,11 @@ application/protocol identity. Moving these files does not change wire layout.
 vdm_protocol.h owns the copied VDM envelope, operation values, startup scalars
 and payload spans. The service transport keeps encoder/validator functions and
 pointer-bearing local encode inputs. vdm-protocol-test checks existing layouts
-and malformed/short/overflow inputs; this is not NTW32 production acceptance.
+and malformed/short/overflow inputs; this is not NTVWM production acceptance.
 
 frontend_protocol.h also owns bootstrap replies, native request/replies and
 copied launch packets. The superseded native_console_protocol.h/private
-control channel is removed; NTW32 uses console_io like NTVDM. native_launch.h
+control channel is removed; NTVWM uses console_io like NTVDM. native_launch.h
 declares the shared launch codec/materializer and borrowed local string views;
 those local API types are not serialized records.
 

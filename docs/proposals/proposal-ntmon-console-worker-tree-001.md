@@ -6,7 +6,7 @@ Owner-approved planning dated 2026-10-02, unnumbered candidate at the head of
 the remaining Queue. The active component-renaming/lifecycle packet is not
 expanded or displaced. Admit this candidate only after that package delivers
 its coherent baseline. Names here use the final identities: NTCON is the
-visible Console/Window frontend (previously NTKVM), NTW32 is the native text
+visible Console/Window frontend (previously NTKVM), NTVWM is the native text
 worker, and NTVDM hosts DOS/Win16.
 
 Replace NTMON's flat worker list with a tree of registered Console roots and
@@ -21,7 +21,7 @@ this candidate, not active T424 S4 or planned S5 GUI routing. S5 supplies
 NTSRV-owned actual GUI handles/registration; this package projects those live
 independent GUI targets alongside unbound WOW using service identities only.
 Distinguish native target rows from resident workers: a GUI management action
-must not end a reused NTW32 carrier. Do not invent process handles for individual
+must not end a reused NTVWM carrier. Do not invent process handles for individual
 Win16 tasks. Keep Win32 kind=2 and the original monitor hotkeys.
 
 ## Approved UI

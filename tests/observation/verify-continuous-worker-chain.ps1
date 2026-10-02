@@ -111,8 +111,8 @@ try {
     'PASS DDWWDDWW: sixteen input/output checkpoints, one frontend, same DOS/native workers, original DOS depth/task restore, direct results and empty completion'
     # Empty independent workers may remain resident. This is test housekeeping,
     # never evidence that frontend exit should terminate a worker.
-    $image=Join-Path $PackageRoot 'ntw32.exe'
-    foreach($entry in @(Get-CimInstance Win32_Process -Filter "Name='ntw32.exe'")){
+    $image=Join-Path $PackageRoot 'ntvwm.exe'
+    foreach($entry in @(Get-CimInstance Win32_Process -Filter "Name='ntvwm.exe'")){
         $process=Get-Process -Id $entry.ProcessId -ErrorAction Stop
         try {
             $null=$process.Handle

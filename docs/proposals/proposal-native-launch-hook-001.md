@@ -5,7 +5,7 @@
 Owner-approved planning, fourth unnumbered candidate in the remaining queue,
 after NTMON Console-root management, root/search isolation and the bounded CCPU40/V86 contract audit; all
 follow the active component-renaming package. This is not implementation
-admission and does not expand T424. Finish the naming package first: NTW32 is
+admission and does not expand T424. Finish the naming package first: NTVWM is
 the native text worker and NTCON is the visible Console/Window frontend in
 this proposal. The current intermediate tree may still call that frontend
 NTKVM; use the delivered naming baseline at admission. Reuse the preceding
@@ -24,7 +24,7 @@ descendant observation. Monitoring is not a prerequisite for launch compatibilit
 | Owner | Responsibility |
 | --- | --- |
 | Proposed src/nthook-dll | One specialist source component producing nthook32.dll and nthook64.dll; bounded API interception, target recognition, recursion exclusion and controlled native-child propagation. The same finite installation mechanism is reused by worker bootstrap and DLL propagation, not independently rewritten. |
-| NTW32 | Install the correct DLL into its direct native text target before execution, at the existing suspended-create/bind/resume boundary; retain actual target wait, exit reporting, hidden Console and startup rollback. |
+| NTVWM | Install the correct DLL into its direct native text target before execution, at the existing suspended-create/bind/resume boundary; retain actual target wait, exit reporting, hidden Console and startup rollback. |
 | run16 | Existing classification, submission and direct-result behavior; reuse its audited type-recognition code through a narrow owned classifier library, without a second resolver or generic common component. No input pump or self-redirection. |
 | NTSRV | Existing admission/completion authority; authenticate hook reports in the subsequent trace package and hold observation-only process references there. No process enumeration, DLL injection owner or native scheduler. |
 | interface | Copied versioned hook initialization/report declarations where needed; no injector, resolver or authentication implementation. |
@@ -38,7 +38,7 @@ third-party code require explicit architecture/provenance registration at
 implementation admission; this proposal does not create those roots now.
 
 The x64 hook is a narrowly proposed native-target toolchain island, not an
-x64 NTVDM product, CCPU executor or port of run16/NTSRV/NTW32. Current authorities
+x64 NTVDM product, CCPU executor or port of run16/NTSRV/NTVWM. Current authorities
 exclude general native-x64 builds. At admission, record the owner-approved
 hook-only exception in the relevant architecture/build rules, with exact
 toolchain, CRT, artifact manifest and cross-width copied ABI. Never link x86
@@ -110,7 +110,7 @@ system Registry write or global hook installation is admitted.
 | S | Complete deliverable and gate |
 | --- | --- |
 | S1 | Source/API/bitness audit and finite contract ledger; select one reusable classifier and installation mechanism, document provenance/license and failed earlier recovery rungs, freeze initialization/report ABI and supported/unsupported flags. Define reproducible test sources/cases, cross-width feasibility and architecture exceptions before production implementation. |
-| S2 | Production nthook32.dll and NTW32 initial installation plus controlled 32-bit child propagation; actual SysWOW64 CMD -> COMMAND -> return, nested CMD and DOS/native crossings, preserved streams/arguments/environment/exit behavior, recursion and failure tests. Publish only the passing coherent package. |
+| S2 | Production nthook32.dll and NTVWM initial installation plus controlled 32-bit child propagation; actual SysWOW64 CMD -> COMMAND -> return, nested CMD and DOS/native crossings, preserved streams/arguments/environment/exit behavior, recursion and failure tests. Publish only the passing coherent package. |
 | S3 | nthook64.dll and no-helper cross-width installation/propagation closure; actual 64-bit CMD launch and all four width combinations, safe unsupported boundaries and process/handle cleanup. Building the DLLs alone cannot close S3. |
 | S4 | Whole-package concurrency, session isolation, fault, native passthrough and compatibility audit; sealed hook artifacts plus existing runtime set, verified ordinary launch gates and trace-package handoff. Stop for owner acceptance; do not silently close T. |
 
@@ -144,7 +144,7 @@ or runtime success is claimed by this planning change.
 - [CreateProcessW contract](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-createprocessw).
 - [Microsoft Detours process/DLL installation](https://github.com/microsoft/Detours/wiki/DetourCreateProcessWithDllEx): reference, not an import decision; its cross-width helper route is excluded by this proposal.
 - [Windows process waits](https://learn.microsoft.com/en-us/windows/win32/procthread/waiting-for-processes).
-- Current run16 native classification/launch code, NTW32 suspended direct
+- Current run16 native classification/launch code, NTVWM suspended direct
   creation and bind/resume sequence, existing interface resource attachments
   and the delivered naming package. Audit current paths at admission.
 

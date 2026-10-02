@@ -5,7 +5,7 @@
 #include "console_video.h"
 
 /* Local client state, never a wire record. worker-base owns the implementation;
- * NTVDM/NTW32 embed it, serialize calls and own all borrowed HANDLEs. No
+ * NTVDM/NTVWM embed it, serialize calls and own all borrowed HANDLEs. No
  * renderer, Console ownership, guest state or task scheduling lives here. */
 typedef struct ntkvm_worker_client {
     HANDLE pipe,peer,cancel,event;

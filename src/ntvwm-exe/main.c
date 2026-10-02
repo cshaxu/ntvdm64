@@ -14,7 +14,7 @@ PVOID CsrPortHeap;
 typedef struct native_membership {
     HANDLE quit,thread,capability,stop_requested,closed,admission_ready,shutdown;
     HANDLE pipe,frontend,ready,root;
-    ntw32_presentation *presentation;
+    ntvwm_presentation *presentation;
     CRITICAL_SECTION *lock;
     console_text_style font;
     DWORD users,admissions;
@@ -24,7 +24,7 @@ typedef struct native_membership {
  * or target lifetime.  The caller holds state->lock. */
 static void membership_detach_presentation(native_membership *state)
 {
-    ntw32_presentation_close(state->presentation);state->presentation=NULL;
+    ntvwm_presentation_close(state->presentation);state->presentation=NULL;
     if(state->pipe)CloseHandle(state->pipe);
     if(state->frontend)CloseHandle(state->frontend);
     if(state->ready)CloseHandle(state->ready);
@@ -73,7 +73,7 @@ static DWORD begin_io(void *context,HANDLE stop)
     }
     --state->admissions;
     LeaveCriticalSection(state->lock);
-    ntw32_trace_error("begin-io",0,error);
+    ntvwm_trace_error("begin-io",0,error);
     return error;
 }
 static void release_launch(void *context)
@@ -90,17 +90,17 @@ static DWORD end_io(void *context)
     if(!error && state->presenting) {
         if(state->users>1) {
             for(attempt=0;attempt<8;++attempt) {
-                error=ntw32_presentation_capture(state->presentation,&state->font);
+                error=ntvwm_presentation_capture(state->presentation,&state->font);
                 if(error!=ERROR_RETRY)break;
                 if(attempt<7)Sleep(10);
             }
         } else {
-            error=ntw32_presentation_end(state->presentation,&state->font);
+            error=ntvwm_presentation_end(state->presentation,&state->font);
             if(!error){state->presenting=FALSE;ResetEvent(state->admission_ready);}
         }
     }
     if(state->users)--state->users;
-    ntw32_trace_error("end-io",0,error);
+    ntvwm_trace_error("end-io",0,error);
     LeaveCriticalSection(state->lock);return error;
 }
 static DWORD take_presentation(native_membership *state)
@@ -111,12 +111,12 @@ static DWORD take_presentation(native_membership *state)
     error=OpenNtBaseClientTakeFrontend(&state->pipe,&state->frontend,&generation,&state->ready);
     if(error==ERROR_NOT_READY)return ERROR_SUCCESS;
     if(error)return error;
-    error=ntw32_presentation_open(state->pipe,state->frontend,state->quit,generation,&state->presentation);
+    error=ntvwm_presentation_open(state->pipe,state->frontend,state->quit,generation,&state->presentation);
     if(error)return error;
     /* Establish transport, not input ownership. An inactive frontend is a
      * valid attached endpoint; only execution handoff may activate it. */
     request.operation=CONSOLE_IO_BARRIER;
-    error=ntw32_presentation_call(state->presentation,&request,&reply);
+    error=ntvwm_presentation_call(state->presentation,&request,&reply);
     return error==ERROR_NOT_READY || error==ERROR_BUSY ? ERROR_SUCCESS : error;
 }
 static DWORD presentation_loop(void *context)
@@ -127,7 +127,7 @@ static DWORD presentation_loop(void *context)
     while((wait=WaitForMultipleObjects(3,waits,FALSE,30))!=WAIT_OBJECT_0+2) {
         EnterCriticalSection(state->lock);
         if(wait==WAIT_OBJECT_0 || wait==WAIT_OBJECT_0+1) {
-            error=ntw32_console_close();
+            error=ntvwm_console_close();
             if(!error && !SetEvent(state->closed))error=GetLastError();
             /* The authenticated broker orders Console-session closure,
              * just as it does for NTVDM. Closing a direct launcher does not.
@@ -146,7 +146,7 @@ static DWORD presentation_loop(void *context)
             if(!state->presenting) {
                 HANDLE output=CreateFileW(L"CONOUT$",GENERIC_READ|GENERIC_WRITE,
                     FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,OPEN_EXISTING,0,NULL);
-                error=output==INVALID_HANDLE_VALUE ? GetLastError() : ntw32_presentation_begin(state->presentation,output);
+                error=output==INVALID_HANDLE_VALUE ? GetLastError() : ntvwm_presentation_begin(state->presentation,output);
                 if(output!=INVALID_HANDLE_VALUE)CloseHandle(output);
                 if(!error) {
                     state->presenting=TRUE;
@@ -157,16 +157,16 @@ static DWORD presentation_loop(void *context)
              * presentation receipt. Do not feed the next DOS command to a
              * Console which has no native consumer during that interval. */
             if(!error && state->users)
-                error=ntw32_presentation_input(state->presentation,GetStdHandle(STD_INPUT_HANDLE),&accepted);
+                error=ntvwm_presentation_input(state->presentation,GetStdHandle(STD_INPUT_HANDLE),&accepted);
             if(error==ERROR_BUSY) {
                 /* DOS requested the shared screen. Publish before releasing,
                  * then import its final screen before resuming native I/O. */
-                if(state->presenting)error=ntw32_presentation_end(state->presentation,&state->font);
+                if(state->presenting)error=ntvwm_presentation_end(state->presentation,&state->font);
                 state->presenting=FALSE;ResetEvent(state->admission_ready);
                 if(!error)error=ERROR_NOT_READY;
             }
             if(!error && state->users)
-                error=ntw32_presentation_capture(state->presentation,&state->font);
+                error=ntvwm_presentation_capture(state->presentation,&state->font);
             if(error==ERROR_NOT_READY || error==ERROR_BUSY){
                 state->presenting=FALSE;ResetEvent(state->admission_ready);error=0;
             }
@@ -186,14 +186,14 @@ static DWORD WINAPI presentation_pump(void *context)
 {
     native_membership *state=context;
     DWORD error=presentation_loop(context);
-    ntw32_trace_error("pump",0,error);
+    ntvwm_trace_error("pump",0,error);
     if(!error || WaitForSingleObject(state->quit,0)!=WAIT_TIMEOUT)return error;
     /* Only an unrecoverable worker-side failure reaches here. A worker whose
      * presentation watcher has stopped cannot remain resident: it would no
      * longer consume the broker's Console-session close, even while idle. */
     EnterCriticalSection(state->lock);
     SetEvent(state->stop_requested);
-    (void)ntw32_console_close();
+    (void)ntvwm_console_close();
     /* Main can be blocked in GetNextCommand; do not wait on that RPC
      * to report an unrecoverable worker-side presentation failure. */
     TerminateProcess(GetCurrentProcess(),error);
@@ -205,7 +205,7 @@ static void membership_close(native_membership *state)
     CRITICAL_SECTION *lock=state->lock;
     if(state->quit)SetEvent(state->quit);
     if(state->thread){WaitForSingleObject(state->thread,INFINITE);CloseHandle(state->thread);}
-    ntw32_presentation_close(state->presentation);
+    ntvwm_presentation_close(state->presentation);
     if(state->pipe)CloseHandle(state->pipe);
     if(state->frontend)CloseHandle(state->frontend);
     if(state->ready)CloseHandle(state->ready);
@@ -263,7 +263,7 @@ static BOOL WINAPI control_event(DWORD event)
 static void broker_completion_fault(void *context,DWORD error)
 {
     (void)context;
-    ntw32_trace_error("broker-complete",0,error);
+    ntvwm_trace_error("broker-complete",0,error);
     /* GetNext may be blocked in a synchronous RPC while a serving thread
      * discovers the failure. Process exit closes the worker's handles; it
      * does not terminate any native target or descendant. NTSRV owns the
@@ -274,29 +274,29 @@ static void broker_completion_fault(void *context,DWORD error)
 int wmain(int argc,WCHAR **argv)
 {
     DWORD error;
-    ntw32_executions *requests=NULL;
+    ntvwm_executions *requests=NULL;
     native_membership membership={0};
     CRITICAL_SECTION io_lock;
-    ntw32_execution_io io={&membership,begin_io,end_io,release_launch};
+    ntvwm_execution_io io={&membership,begin_io,end_io,release_launch};
     (void)argv;
     if(argc!=1)return ERROR_INVALID_PARAMETER;
     InitializeCriticalSection(&io_lock);membership.lock=&io_lock;
     CsrPortHeap=HeapCreate(0,0,0);
     if(!CsrPortHeap)return GetLastError();
     error=worker_base_connect();
-    if(!error) error=ntw32_console_initialize();
-    if(!error) error=ntw32_executions_open(&requests);
+    if(!error) error=ntvwm_console_initialize();
+    if(!error) error=ntvwm_executions_open(&requests);
     if(!error) {
-        ntw32_executions_bind_io(requests,&io);
-        ntw32_executions_bind_fault(requests,broker_completion_fault,NULL);
+        ntvwm_executions_bind_io(requests,&io);
+        ntvwm_executions_bind_fault(requests,broker_completion_fault,NULL);
     }
     if(!error && !SetConsoleCtrlHandler(control_event,TRUE))error=GetLastError();
     while(!error) {
-        ntw32_next_command command;
+        ntvwm_next_command command;
         /* An active CMD may wait on an inner run16. GetNext must remain
          * available to that same frontend while earlier requests execute;
          * different frontends are rejected by the binding rule below. */
-        error=ntw32_get_next_command(&command);
+        error=ntvwm_get_next_command(&command);
         if(error)break;
         /* An unaccepted request closes its attachments; it neither ends the
          * worker nor cancels other requests or already running targets. */
@@ -304,20 +304,20 @@ int wmain(int argc,WCHAR **argv)
             typedef BOOL (WINAPI *compare_handles)(HANDLE,HANDLE);
             compare_handles compare=(compare_handles)GetProcAddress(GetModuleHandleW(L"kernelbase.dll"),"CompareObjectHandles");
             DWORD binding=membership.capability && (!compare || !compare(membership.capability,command.frontend)) &&
-                !ntw32_executions_idle(requests) ? ERROR_BUSY : membership_bind(&membership,command.frontend);
+                !ntvwm_executions_idle(requests) ? ERROR_BUSY : membership_bind(&membership,command.frontend);
             /* Binding failure still consumes the protocol request and replies
              * through its native channel.  Do not complete a broker command
              * while run16 is waiting for a reply that no thread will send. */
-            if(ntw32_execution_start(requests,&command,binding)) {
-                DWORD completion=ntw32_complete_next_command(command.request,0);
-                if(completion)ntw32_executions_note_broker_failure(requests,completion);
-                ntw32_dispose_next_command(&command);
+            if(ntvwm_execution_start(requests,&command,binding)) {
+                DWORD completion=ntvwm_complete_next_command(command.request,0);
+                if(completion)ntvwm_executions_note_broker_failure(requests,completion);
+                ntvwm_dispose_next_command(&command);
             }
             if(binding==ERROR_PIPE_NOT_CONNECTED || binding==ERROR_ACCESS_DENIED) {
                 /* The first root may disappear before membership is bound.
                  * Let the request's structured failure reach its launcher,
                  * then leave instead of becoming an unowned EMPTY worker. */
-                DWORD drained=ntw32_executions_wait_idle(requests);
+                DWORD drained=ntvwm_executions_wait_idle(requests);
                 error=drained ? drained : binding;
                 break;
             }
@@ -325,7 +325,7 @@ int wmain(int argc,WCHAR **argv)
         }
     }
     if(membership.quit)SetEvent(membership.quit);
-    ntw32_executions_close(requests);
+    ntvwm_executions_close(requests);
     membership_close(&membership);
     worker_base_disconnect();
     HeapDestroy(CsrPortHeap);CsrPortHeap=NULL;

@@ -1,9 +1,9 @@
 # Worker Base
 
-Project-added worker mechanisms reused by NTVDM and NTW32 only. The current
+Project-added worker mechanisms reused by NTVDM and NTVWM only. The current
 connection.c/h owns their shared ConnectCurrent/WatchBroker initialization and
 disconnect, including failed-watch cleanup. Both production entries call it.
-The NTW32-only GetNextNativeCommand wrapper belongs to `ntw32-exe`, not this
+The NTVWM-only GetNextNativeCommand wrapper belongs to `ntvwm-exe`, not this
 shared library; NTVDM retains its original BaseSrv-shaped GetNextVDMCommand.
 The S21 audit records this shared boundary and the owner-local mechanisms that
 must not be merged: [worker-base audit](../../docs/etc/evidence/m0-t423-s21-worker-base-audit.md).

@@ -1,9 +1,9 @@
 # Native Console Worker
 
-NTW32 is the Win32-text worker peer of NTVDM. It owns and remains attached to
+NTVWM is the Win32-text worker peer of NTVDM. It owns and remains attached to
 an ordinary hidden Console. There is no ConPTY or private helper. Windows
 supplies Console storage, line editing, native Console APIs and attached-client
-semantics; NTW32 supplies their finite backend binding.
+semantics; NTVWM supplies their finite backend binding.
 
 ## Ownership
 
@@ -15,7 +15,7 @@ semantics; NTW32 supplies their finite backend binding.
   Completion-export rights are checked before starting the target.
 - Launcher-owned `run16-exe/native_launch_packet.c` and `native_launch.c`
   provide the shared packet codec and restricted resource/process primitive.
-  NTW32 owns their worker execution caller; NTKVM links only the codec.
+  NTVWM owns their worker execution caller; NTKVM links only the codec.
 - `console_state.c`: actual Console geometry, cells/cursor, active-buffer
   capture, native input, unread-key draining and actual membership observation.
 - `text_frame.c`: native cells to the shared bitmap-glyph text frame. Uses the
@@ -39,7 +39,7 @@ Original DOS/WOW execution and cleanup remain with NTVDM's original mirrors.
 ## Handoff and lifetime
 
 A DOS activation waits for native final capture and release before importing
-the common screen. NTW32 seeds its actual Console on activation and publishes
+the common screen. NTVWM seeds its actual Console on activation and publishes
 only text frames. A direct native target's completion is not its descendants'
 completion: surviving attached clients retain interaction. Once native clients
 are gone, unread keys are returned in reverse-prepended batches to preserve FIFO

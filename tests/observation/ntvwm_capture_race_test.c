@@ -5,7 +5,7 @@
 static unsigned injected;
 static BOOL WINAPI race_read(HANDLE,CHAR_INFO *,COORD,COORD,SMALL_RECT *);
 #define ReadConsoleOutputW race_read
-#include "../../src/ntw32-exe/console_state.c"
+#include "../../src/ntvwm-exe/console_state.c"
 #undef ReadConsoleOutputW
 static BOOL WINAPI race_read(HANDLE output,CHAR_INFO *cells,COORD size,COORD origin,SMALL_RECT *rect)
 {
@@ -22,19 +22,19 @@ int wmain(int argc,WCHAR **argv)
         FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,CONSOLE_TEXTMODE_BUFFER,NULL);
     if(output==INVALID_HANDLE_VALUE){fclose(log);return 3;}
     for(mode=0;mode<4;++mode) {
-        ntw32_capture capture={0};CHAR_INFO cells[80];SMALL_RECT rect={0,0,19,1};
+        ntvwm_capture capture={0};CHAR_INFO cells[80];SMALL_RECT rect={0,0,19,1};
         DWORD count=99,error,expected=mode==1 ? ERROR_RETRY :
             mode==2 ? ERROR_ACCESS_DENIED : mode==3 ? ERROR_INVALID_PARAMETER : ERROR_SUCCESS;
         if(!SetConsoleWindowInfo(output,TRUE,&rect) ||
             !SetConsoleScreenBufferSize(output,(COORD){80,300}) ||
-            ntw32_capture_begin_output(&capture,output)) {++failures;break;}
+            ntvwm_capture_begin_output(&capture,output)) {++failures;break;}
         injected=mode;
-        error=ntw32_capture_read(&capture,80*200,cells,80,&rect,&count);
+        error=ntvwm_capture_read(&capture,80*200,cells,80,&rect,&count);
         fprintf(log,"case=%u error=%lu expected=%lu count=%lu\n",mode,error,expected,count);
         if(error!=expected || count!=(mode ? 0u : 80u))++failures;
-        ntw32_capture_end(&capture);
+        ntvwm_capture_end(&capture);
     }
     CloseHandle(output);
-    fprintf(log,"NTW32-CAPTURE-RACE failures=%u changed-only-retry=yes unchanged-errors-preserved=yes\n",failures);
+    fprintf(log,"NTVWM-CAPTURE-RACE failures=%u changed-only-retry=yes unchanged-errors-preserved=yes\n",failures);
     fclose(log);return failures ? 1 : 0;
 }

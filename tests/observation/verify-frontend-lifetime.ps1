@@ -24,7 +24,7 @@ if(!$ProcessPackageRoot.StartsWith($build,[StringComparison]::OrdinalIgnoreCase)
 }
 if(Test-Path $EvidenceRoot){throw 'Use fresh evidence'}
 $paths=@()
-foreach($name in @('run16.exe','ntkvm.exe','ntvdm.exe','ntw32.exe','ntsrv.exe')){
+foreach($name in @('run16.exe','ntkvm.exe','ntvdm.exe','ntvwm.exe','ntsrv.exe')){
     $launch=Join-Path $PackageRoot $name
     $physical=Join-Path $ProcessPackageRoot $name
     if((Get-FileHash $launch).Hash -ne (Get-FileHash $physical).Hash){throw 'Candidate identity mismatch'}
@@ -51,7 +51,7 @@ try {
     if($Window){$env:MVDM_LIFETIME_WINDOW='1'}else{Remove-Item Env:MVDM_LIFETIME_WINDOW -ErrorAction SilentlyContinue}
     $selected=@('normal','frontend','launcher','worker')
     # Expanded coverage adds an independent session to every case. The retired
-    # ConPTY-host fault is not an NTW32-worker fault and is not counted as passed.
+    # ConPTY-host fault is not an NTVWM-worker fault and is not counted as passed.
     if($Cases){$selected=@($selected | Where-Object {$_ -in $Cases})}
     if(!$selected.Count){throw 'No selected cases'}
     foreach($case in $selected){

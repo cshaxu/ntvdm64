@@ -54,8 +54,8 @@ $generatedFixtures = @(
     (Join-Path $runtimeFixtureRoot 'D7.CMD')
 )
 $productNames = @('run16.exe','ntvdm.exe','ntsrv.exe','ntkvm.exe')
-# Retain compatibility with sealed pre-NTW32 evidence packages.
-if(Test-Path -LiteralPath (Join-Path $PackageRoot 'ntw32.exe')){$productNames+='ntw32.exe'}
+# Retain compatibility with sealed pre-NTVWM evidence packages.
+if(Test-Path -LiteralPath (Join-Path $PackageRoot 'ntvwm.exe')){$productNames+='ntvwm.exe'}
 $productPaths = $productNames | ForEach-Object { Join-Path $PackageRoot $_ }
 if($Cases -contains 'native-surviving-client'){
     $productPaths+=Join-Path $runtimeFixtureRoot 'SURVIVE.EXE'
@@ -71,7 +71,7 @@ if($ProcessPackageRoot){
     }
 }
 function Get-PackageProcesses {
-    @(Get-CimInstance Win32_Process -Filter "Name='run16.exe' OR Name='ntvdm.exe' OR Name='ntsrv.exe' OR Name='ntkvm.exe' OR Name='ntw32.exe' OR Name='SURVIVE.EXE'" |
+    @(Get-CimInstance Win32_Process -Filter "Name='run16.exe' OR Name='ntvdm.exe' OR Name='ntsrv.exe' OR Name='ntkvm.exe' OR Name='ntvwm.exe' OR Name='SURVIVE.EXE'" |
         Where-Object { $_.ExecutablePath -in $productPaths })
 }
 function Test-ExactFileBytes {

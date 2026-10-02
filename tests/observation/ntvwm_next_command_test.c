@@ -1,4 +1,4 @@
-#include "ntw32-exe/next_command.h"
+#include "ntvwm-exe/next_command.h"
 #include <stdio.h>
 
 static HANDLE source[4];
@@ -38,19 +38,19 @@ static int open_sources(void)
 
 int main(void)
 {
-    ntw32_next_command command={0};
+    ntvwm_next_command command={0};
     unsigned index;
 
     CHECK(open_sources());source_error=ERROR_SUCCESS;
-    CHECK(ntw32_get_next_command(&command)==ERROR_SUCCESS);
+    CHECK(ntvwm_get_next_command(&command)==ERROR_SUCCESS);
     CHECK(command.channel==source[0] && command.sender==source[1] &&
         command.execution==source[2] && command.frontend==source[3] && command.request==77);
-    ntw32_dispose_next_command(&command);
+    ntvwm_dispose_next_command(&command);
     CHECK(!command.channel && !command.sender && !command.execution && !command.frontend && !command.request);
     ZeroMemory(source,sizeof(source));
 
     CHECK(open_sources());source_error=ERROR_ACCESS_DENIED;
-    CHECK(ntw32_get_next_command(&command)==ERROR_ACCESS_DENIED);
+    CHECK(ntvwm_get_next_command(&command)==ERROR_ACCESS_DENIED);
     CHECK(!command.channel && !command.sender && !command.execution && !command.frontend && !command.request);
     for(index=0;index<ARRAYSIZE(source);++index) {
         CHECK(WaitForSingleObject(source[index],0)==WAIT_FAILED);
@@ -58,8 +58,8 @@ int main(void)
     }
 
     completed=91;
-    CHECK(ntw32_complete_next_command(0,0)==ERROR_SUCCESS && completed==0);
-    CHECK(ntw32_complete_next_command(91,37)==ERROR_SUCCESS && completed==91);
-    puts("PASS ntw32 get-next command ownership, failure disposal and completion");
+    CHECK(ntvwm_complete_next_command(0,0)==ERROR_SUCCESS && completed==0);
+    CHECK(ntvwm_complete_next_command(91,37)==ERROR_SUCCESS && completed==91);
+    puts("PASS ntvwm get-next command ownership, failure disposal and completion");
     return 0;
 }

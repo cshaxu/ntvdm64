@@ -15,7 +15,7 @@ if(!$physical.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::Ordin
 if($LogPrefix -notmatch '^[a-z0-9-]+$'){throw 'Invalid prefix'}
 if(@(Get-CimInstance Win32_Process -Filter "Name='ntsrv.exe'").Count){throw 'Existing broker must not be controlled'}
 $paths=@()
-foreach($name in @('run16.exe','ntkvm.exe','ntsrv.exe','ntvdm.exe','ntw32.exe')){
+foreach($name in @('run16.exe','ntkvm.exe','ntsrv.exe','ntvdm.exe','ntvwm.exe')){
     $actual=Join-Path $physical $name;$launch=Join-Path $PackageRoot $name
     if((Get-FileHash $actual).Hash -ne (Get-FileHash $launch).Hash){throw 'Candidate mismatch'}
     $paths+=@($actual,$launch)
@@ -23,7 +23,7 @@ foreach($name in @('run16.exe','ntkvm.exe','ntsrv.exe','ntvdm.exe','ntw32.exe'))
 $old=$env:MVDM_OBSERVER_PRIVATE_DESKTOP
 try {
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
-    foreach($kind in @('ntvdm','ntw32')){
+    foreach($kind in @('ntvdm','ntvwm')){
         foreach($fault in @('worker','frontend')){
             $report=Join-Path $LogRoot "$LogPrefix-$kind-$fault.txt"
             if(Test-Path $report){throw 'Use fresh evidence'}
@@ -46,7 +46,7 @@ try {
                     Start-Sleep -Milliseconds 50 # Test observation, not production control.
                 }while([DateTime]::UtcNow -lt $until)
                 if(!$worker -or !$frontend -or !$broker){throw 'Expected worker/root/broker were not registered'}
-                if($kind -eq 'ntw32'){
+                if($kind -eq 'ntvwm'){
                     # Registration precedes CreateProcess: wait for the actual target,
                     # not merely the worker's registry presence, before injecting death.
                     do {

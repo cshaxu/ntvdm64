@@ -14,7 +14,7 @@ if(!$physical.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::Ordin
 }
 if($LogPrefix -notmatch '^[a-z0-9-]+$'){throw 'Invalid log prefix'}
 $paths=@()
-foreach($name in @('run16.exe','ntkvm.exe','ntsrv.exe','ntmon.exe','ntw32.exe')){
+foreach($name in @('run16.exe','ntkvm.exe','ntsrv.exe','ntmon.exe','ntvwm.exe')){
     $launch=Join-Path $PackageRoot $name;$actual=Join-Path $physical $name
     if((Get-FileHash $launch).Hash -ne (Get-FileHash $actual).Hash){throw 'Candidate identity mismatch'}
     $paths+=@($launch,$actual)
@@ -56,7 +56,7 @@ try {
                 $inputRecord=Get-Content ($report+'.window-input.txt') -Raw
                 if($inputRecord -notmatch 'frontend=\d+ input-delivered=1 '){throw 'Window did not receive the function key'}
             }
-            Write-Output "PASS actual NTMon $mode title, F3 input and direct exit 0 through NTW32"
+            Write-Output "PASS actual NTMon $mode title, F3 input and direct exit 0 through NTVWM"
         } finally {
             Get-CimInstance Win32_Process | Where-Object {$_.ExecutablePath -in $paths} | ForEach-Object {
                 $process=Get-Process -Id $_.ProcessId -ErrorAction SilentlyContinue

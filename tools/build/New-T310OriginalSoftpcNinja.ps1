@@ -1266,7 +1266,7 @@ if ($Architecture -eq 'x86') {
     $graph.Add('  cflags = ' + $baseOwnerFlags)
     $graph.Add('rule base_rpc_test_link')
     $graph.Add('  command = link.exe /nologo /subsystem:console /out:$out $in rpcrt4.lib ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib')
-    $graph.Add('build base-client-rpc-first-test.exe: base_rpc_test_link obj/tests/base_client_rpc_first.obj obj/ntw32/next_command.obj worker-base.lib frontend-client.lib obj/run16/support.obj obj/run16/rpc_client.obj obj/run16/stub.obj opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib | ntsrv.exe ntw32.exe')
+    $graph.Add('build base-client-rpc-first-test.exe: base_rpc_test_link obj/tests/base_client_rpc_first.obj obj/ntvwm/next_command.obj worker-base.lib frontend-client.lib obj/run16/support.obj obj/run16/rpc_client.obj obj/run16/stub.obj opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib | ntsrv.exe ntvwm.exe')
     $nativeServiceFlags = '/nologo /c /MT /W4 /we4013 /showIncludes /I obj/basesrv /I "' + (NinjaPath (Join-Path $root 'src')) + '"'
     # Frontend-only nxvm closure. Refuse source drift before emitting objects;
     # no dependency on the sibling repository at build or runtime.
@@ -1326,7 +1326,7 @@ if ($Architecture -eq 'x86') {
     $graph.Add('  cflags = ' + $baseOwnerFlags)
     $graph.Add('build obj/worker-base/connection.obj: cc ' + (NinjaPath (Join-Path $root 'src/worker-base/connection.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build obj/ntw32/next_command.obj: cc ' + (NinjaPath (Join-Path $root 'src/ntw32-exe/next_command.c')))
+    $graph.Add('build obj/ntvwm/next_command.obj: cc ' + (NinjaPath (Join-Path $root 'src/ntvwm-exe/next_command.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build worker-base.lib: lib obj/worker-base/connection.obj obj/worker-base/console_client.obj')
     $graph.Add('build obj/run16/launch_options.obj: cc ' + (NinjaPath (Join-Path $run16Root 'launch_options.c')))
@@ -1362,15 +1362,15 @@ if ($Architecture -eq 'x86') {
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('rule console_test_link')
     $graph.Add('  command = link.exe /nologo /out:$out $in libcmt.lib libvcruntime.lib libucrt.lib kernel32.lib user32.lib gdi32.lib')
-    $graph.Add('build obj/tests/ntw32_next_command.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/ntw32_next_command_test.c')))
+    $graph.Add('build obj/tests/ntvwm_next_command.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/ntvwm_next_command_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build ntw32-next-command-test.exe: console_test_link obj/tests/ntw32_next_command.obj obj/ntw32/next_command.obj')
+    $graph.Add('build ntvwm-next-command-test.exe: console_test_link obj/tests/ntvwm_next_command.obj obj/ntvwm/next_command.obj')
     foreach ($kind in @('library','controller','keyboard')) {
         $source = Join-Path $root ('tests/component-integration/frontend_window_' + $kind + '_test.c')
         $object = 'obj/tests/frontend_window_' + $kind + '.obj'
         $graph.Add('build ' + $object + ': cc ' + (NinjaPath $source))
         $graph.Add('  cflags = ' + $nativeServiceFlags + ' /std:c11 /I "' + (NinjaPath $frontendRoot) + '" /I "' + (NinjaPath $fontBuild) + '"')
-        $graph.Add('build frontend-window-' + $kind + '-test.exe: console_test_link ' + $object + ' frontend-window.lib obj/run16/console_video.obj obj/ntw32/text_frame.obj')
+        $graph.Add('build frontend-window-' + $kind + '-test.exe: console_test_link ' + $object + ' frontend-window.lib obj/run16/console_video.obj obj/ntvwm/text_frame.obj')
     }
     $graph.Add('build console-frontend-test.exe: console_test_link obj/tests/console_frontend_test.obj obj/run16/console_frontend.obj obj/run16/console_video.obj ' + $consoleGridObject)
     $graph.Add('build obj/tests/console_video.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/console_video_test.c')))
@@ -1407,40 +1407,40 @@ if ($Architecture -eq 'x86') {
     $graph.Add('  command = link.exe /nologo /subsystem:console /entry:wmainCRTStartup /opt:ref /out:$out /map:$out.map $in rpcrt4.lib ntdll.lib kernel32.lib shell32.lib user32.lib gdi32.lib advapi32.lib legacy_stdio_definitions.lib')
     $graph.Add('build ntkvm.exe: frontend_link obj/frontend/main.obj obj/frontend/session_service.obj obj/run16/native_console_frontend.obj frontend-window.lib obj/run16/console_frontend.obj obj/run16/console_video.obj obj/run16/console_channel.obj frontend-client.lib obj/run16/support.obj obj/run16/rpc_client.obj obj/run16/stub.obj ' + $consoleGridObject + ' opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib')
     foreach ($name in @('main','console_state','execution')) {
-        $graph.Add('build obj/ntw32/' + $name + '.obj: cc ' + (NinjaPath (Join-Path $root ('src/ntw32-exe/' + $name + '.c'))))
+        $graph.Add('build obj/ntvwm/' + $name + '.obj: cc ' + (NinjaPath (Join-Path $root ('src/ntvwm-exe/' + $name + '.c'))))
         $graph.Add('  cflags = ' + $nativeServiceFlags + ' /I "' + (NinjaPath $fontBuild) + '"')
     }
     $nativeBinding = ' obj/run16/support.obj obj/run16/rpc_client.obj obj/run16/stub.obj opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib'
-    $graph.Add('build ntw32.exe: frontend_link worker-base.lib obj/ntw32/next_command.obj obj/ntw32/main.obj obj/ntw32/presentation.obj obj/ntw32/text_frame.obj obj/ntw32/console_state.obj obj/frontend/native_request_io.obj obj/ntw32/execution.obj obj/run16/native_launch.obj obj/run16/native_launch_packet.obj' + $nativeBinding)
-    $graph.Add('build obj/ntw32/text_frame.obj: cc ' + (NinjaPath (Join-Path $root 'src/ntw32-exe/text_frame.c')))
+    $graph.Add('build ntvwm.exe: frontend_link worker-base.lib obj/ntvwm/next_command.obj obj/ntvwm/main.obj obj/ntvwm/presentation.obj obj/ntvwm/text_frame.obj obj/ntvwm/console_state.obj obj/frontend/native_request_io.obj obj/ntvwm/execution.obj obj/run16/native_launch.obj obj/run16/native_launch_packet.obj' + $nativeBinding)
+    $graph.Add('build obj/ntvwm/text_frame.obj: cc ' + (NinjaPath (Join-Path $root 'src/ntvwm-exe/text_frame.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build obj/tests/ntw32_text_frame.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/ntw32_text_frame_test.c')))
+    $graph.Add('build obj/tests/ntvwm_text_frame.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/ntvwm_text_frame_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags + ' /std:c11')
-    $graph.Add('build ntw32-text-frame-test.exe: console_test_link obj/tests/ntw32_text_frame.obj obj/ntw32/text_frame.obj obj/run16/console_video.obj')
-    $graph.Add('build obj/tests/ntw32_native_colour_probe.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/ntw32_native_colour_probe.c')))
-    $graph.Add('build ntw32-native-colour-probe.exe: console_test_link obj/tests/ntw32_native_colour_probe.obj obj/ntw32/text_frame.obj')
-    $graph.Add('build obj/ntw32/presentation.obj: cc ' + (NinjaPath (Join-Path $root 'src/ntw32-exe/presentation.c')))
+    $graph.Add('build ntvwm-text-frame-test.exe: console_test_link obj/tests/ntvwm_text_frame.obj obj/ntvwm/text_frame.obj obj/run16/console_video.obj')
+    $graph.Add('build obj/tests/ntvwm_native_colour_probe.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/ntvwm_native_colour_probe.c')))
+    $graph.Add('build ntvwm-native-colour-probe.exe: console_test_link obj/tests/ntvwm_native_colour_probe.obj obj/ntvwm/text_frame.obj')
+    $graph.Add('build obj/ntvwm/presentation.obj: cc ' + (NinjaPath (Join-Path $root 'src/ntvwm-exe/presentation.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build obj/tests/ntw32_presentation.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/ntw32_presentation_test.c')))
+    $graph.Add('build obj/tests/ntvwm_presentation.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/ntvwm_presentation_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build ntw32-presentation-test.exe: console_test_link obj/worker-base/console_client.obj obj/tests/ntw32_presentation.obj obj/ntw32/presentation.obj obj/ntw32/console_state.obj obj/ntw32/text_frame.obj obj/run16/console_video.obj')
+    $graph.Add('build ntvwm-presentation-test.exe: console_test_link obj/worker-base/console_client.obj obj/tests/ntvwm_presentation.obj obj/ntvwm/presentation.obj obj/ntvwm/console_state.obj obj/ntvwm/text_frame.obj obj/run16/console_video.obj')
     $graph.Add('build obj/tests/frontend_text_handoff.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/frontend_text_handoff_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build frontend-text-handoff-test.exe: console_test_link obj/tests/frontend_text_handoff.obj obj/run16/native_console_frontend.obj frontend-window.lib obj/run16/console_frontend.obj obj/run16/console_video.obj ' + $consoleGridObject)
-    $graph.Add('build obj/tests/ntw32_execution_lifetime.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/ntw32_execution_lifetime_test.c')))
+    $graph.Add('build obj/tests/ntvwm_execution_lifetime.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/ntvwm_execution_lifetime_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build ntw32-execution-lifetime-test.exe: frontend_link obj/tests/ntw32_execution_lifetime.obj obj/ntw32/execution.obj obj/frontend/native_request_io.obj obj/run16/native_launch.obj obj/run16/native_launch_packet.obj')
+    $graph.Add('build ntvwm-execution-lifetime-test.exe: frontend_link obj/tests/ntvwm_execution_lifetime.obj obj/ntvwm/execution.obj obj/frontend/native_request_io.obj obj/run16/native_launch.obj obj/run16/native_launch_packet.obj')
     $graph.Add('build obj/tests/ntsrv_native_job_tracker.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/ntsrv_native_job_tracker_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build obj/tests/native_job_tracker_research.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/native_job_tracker_research.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build ntsrv-native-job-tracker-test.exe: console_test_link obj/tests/ntsrv_native_job_tracker.obj obj/tests/native_job_tracker_research.obj')
-    $graph.Add('build obj/tests/ntw32_surviving_client.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/ntw32_surviving_client_test.c')))
+    $graph.Add('build obj/tests/ntvwm_surviving_client.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/ntvwm_surviving_client_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build ntw32-surviving-client-test.exe: frontend_link obj/tests/ntw32_surviving_client.obj')
-    $graph.Add('build obj/tests/ntw32_close.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/ntw32_close_test.c')))
+    $graph.Add('build ntvwm-surviving-client-test.exe: frontend_link obj/tests/ntvwm_surviving_client.obj')
+    $graph.Add('build obj/tests/ntvwm_close.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/ntvwm_close_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build ntw32-close-test.exe: frontend_link obj/tests/ntw32_close.obj obj/ntw32/console_state.obj')
+    $graph.Add('build ntvwm-close-test.exe: frontend_link obj/tests/ntvwm_close.obj obj/ntvwm/console_state.obj')
     $graph.Add('build obj/tests/frontend_request_client.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/frontend_request_client_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build frontend-request-client-test.exe: console_test_link obj/tests/frontend_request_client.obj frontend-client.lib obj/run16/native_launch.obj obj/opennt-base-bindings/native-control.obj')
@@ -1464,13 +1464,13 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build broker-frontend-bootstrap-test.exe: frontend_link obj/tests/broker_frontend_bootstrap.obj frontend-client.lib obj/run16/support.obj obj/run16/rpc_client.obj obj/run16/stub.obj opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib | ntkvm.exe ntsrv.exe')
     $graph.Add('build obj/tests/native_console_capture.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/native_console_capture_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build native-console-capture-test.exe: console_test_link obj/tests/native_console_capture.obj obj/ntw32/console_state.obj')
-    $graph.Add('build obj/tests/ntw32_capture_race.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/ntw32_capture_race_test.c')))
+    $graph.Add('build native-console-capture-test.exe: console_test_link obj/tests/native_console_capture.obj obj/ntvwm/console_state.obj')
+    $graph.Add('build obj/tests/ntvwm_capture_race.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/ntvwm_capture_race_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build ntw32-capture-race-test.exe: console_test_link obj/tests/ntw32_capture_race.obj')
-    $graph.Add('build obj/tests/ntw32_geometry_handoff.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/ntw32_geometry_handoff_probe.c')))
+    $graph.Add('build ntvwm-capture-race-test.exe: console_test_link obj/tests/ntvwm_capture_race.obj')
+    $graph.Add('build obj/tests/ntvwm_geometry_handoff.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/ntvwm_geometry_handoff_probe.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build ntw32-geometry-handoff-probe.exe: console_test_link obj/tests/ntw32_geometry_handoff.obj')
+    $graph.Add('build ntvwm-geometry-handoff-probe.exe: console_test_link obj/tests/ntvwm_geometry_handoff.obj')
     $graph.Add('build obj/tests/console_channel_lifetime.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/console_channel_lifetime_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build console-channel-lifetime-test.exe: console_test_link obj/tests/console_channel_lifetime.obj obj/run16/native_console_frontend.obj frontend-window.lib ' + $consoleGridObject)
@@ -1619,7 +1619,7 @@ $graph.Add('build debugger-bindings.lib: lib ' + ((@($adapterDebuggerObjects) + 
 $graph.Add('build softpc-ccpu-vector-defaults.lib: lib ' + $patchVectorDefaultsObject)
 $graph.Add('build softpc-activity-check.lib: lib ' + $patchActivityCheckObject)
 $graph.Add('build original-softpc-candidate: phony original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-redir.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-softpc-host-roots.lib original-opennt-netlib.lib original-opennt-netapi-api.lib original-opennt-xactsrv.lib original-opennt-rtl-x86.lib softpc-bindings.lib vdmredir-dll-bindings.lib worker-shell.lib worker-command-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib')
-$graph.Add('build product-programs: phony run16.exe ntsrv.exe ntvdm.exe ntw32.exe ntkvm.exe ntmon.exe VDMREDIR.dll')
+$graph.Add('build product-programs: phony run16.exe ntsrv.exe ntvdm.exe ntvwm.exe ntkvm.exe ntmon.exe VDMREDIR.dll')
 $graph.Add('build obj/tests/ccpu_halt_reset_test.obj: cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/ccpu_halt_reset_test.c')))
 $hostFixtureSeamsObject = 'obj/tests/ccpu_host_fixture_seams.obj'
 $graph.Add('build ' + $hostFixtureSeamsObject + ': cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/ccpu_host_fixture_seams.c')))
@@ -1787,7 +1787,7 @@ if ($objectOutputDirectories.Count -gt 0) {
     workerBaseComposition = [ordered]@{
         target = 'worker-base.lib'
         selected = ($Architecture -eq 'x86')
-        disposition = 'project-owned worker connection, ordered frontend client, frame/input and acknowledgment mechanisms; NTVDM and NTW32 only'
+        disposition = 'project-owned worker connection, ordered frontend client, frame/input and acknowledgment mechanisms; NTVDM and NTVWM only'
         sources = @('connection.c', 'connection.h', 'console_client.c' | ForEach-Object {
             $path = 'src/worker-base/' + $_
             [ordered]@{ path = $path; sha256 = Get-NodeSha256 (Join-Path $root $path) }
@@ -1812,7 +1812,7 @@ if ($objectOutputDirectories.Count -gt 0) {
     }
     nativeLaunchComposition = [ordered]@{
         target = 'obj/run16/native_launch.obj'
-        consumers = @('run16.exe','ntw32.exe')
+        consumers = @('run16.exe','ntvwm.exe')
         disposition = 'launcher-owned restricted resource/CreateProcess primitive; no worker policy or frontend ownership'
         sources = @('src/run16-exe/native_launch.c','src/interface/native_launch.h' | ForEach-Object {
             [ordered]@{ path = $_; sha256 = Get-NodeSha256 (Join-Path $root $_) }
@@ -1835,10 +1835,10 @@ if ($objectOutputDirectories.Count -gt 0) {
         })
     }
     nativeConsoleComposition = [ordered]@{
-        target = 'ntw32.exe'
+        target = 'ntvwm.exe'
         disposition = 'independent registered hidden Console worker; shared frontend channel and direct target completion; acceptance remains gated'
         sources = @('main.c','next_command.c','next_command.h','console_state.c','console_state.h','execution.c','execution.h','presentation.c','presentation.h','text_frame.c','text_frame.h' | ForEach-Object {
-            $path = 'src/ntw32-exe/' + $_
+            $path = 'src/ntvwm-exe/' + $_
             [ordered]@{ path = $path; sha256 = Get-NodeSha256 (Join-Path $root $path) }
         })
     }
