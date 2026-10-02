@@ -2,17 +2,39 @@
 
 ## Current Work
 
-## Next Admission
+## Active Packet
 
-**No active M/T/S packet.** Between S4 production delivery and the next
-sequential admission, M0 T424 remains open for owner acceptance. S4's
-verification, coherent publication and reviewed production P are recorded
-below; admit the approved S5 architecture/code cleanup after the delivery
-commit is pushed. Do not begin naming or GUI routing here.
+**Active: M0 T424 S5** — owner-approved architecture/code cleanup,
+Ordinary Mode. S4 production P `e4fbaed21` is pushed and published;
+T424 remains open for owner acceptance. This stage implements only the five
+approved cleanup rows, not NTVWM naming, GUI routing or frontend naming.
+
+| Field | Admitted record |
+| --- | --- |
+| Identifier Mode | M0 T424 S5, Ordinary Mode. |
+| Candidate Proposal | [Admitted naming/control proposal](../proposals/proposal-native-worker-frontend-renaming-001.md). |
+| Admission And Approval | Owner's standing automatic sequential admission and approved audit findings 1-5 after S4; retain shared worker-base mechanisms and common consumer paths, preserve other-session changes. |
+| Objective | Remove duplicate control transport, make shared primitive ownership explicit, remove launcher native-target completion dependence, remove proven NTKVM dead state and obsolete bootstrap tests while retaining S4 behavior. |
+| Non-goals | No Console-list consolidation or broad base_service split; no rename, GUI/UNBOUND routing, mirror/guest/shared-lib change, new component/process/helper, scheduler, observation graph, authentication weakening or launch-syntax change. Retain approved capture polling/backend retry. |
+| Reference Baseline | S4 production P e4fbaed21, protocol/RPC 30, coherent published eight-file manifest, Console17/Window17 and retained independent WOW frontiers; [S4 evidence](../etc/evidence/m0-t424-s4-broker-centered-launch-control.md). |
+| Files And ABI Surface | Native control transfer/codec/launch owners and existing static client library, NTW32 execution, run16 receipt/return, NTKVM session state, service result contracts only as required, interface/build/tests. Any actual wire change requires paired application/RPC revision and MIDL. |
+| Applicable Rules | README authority set, EXECUTION, architecture/coding/document rules and source policy; preserve original source semantics and parallel edits. |
+| Verification | Affected x86/MIDL closure; completed-I/O/peer-death, partial transfer/EOF/cancel/resource lifetime; receipt completion versus final-I/O failure, broker/worker loss, authentication, owned/borrowed restoration, nesting/reuse/isolation; Console17/Window17, actual modern EDIT return and WOW frontiers; coherent eight-file recovery/publication and governance/link/diff review. |
+| Expected Markers | One linked control-transfer implementation with completed-I/O-first semantics; shared frontend transport retains its different strict-peer contract. Text launcher completion and Console return use broker state rather than target HANDLE/status. Removed dead fields/providers have no remaining production callers. |
+| Asset Needs | Delivered S4 source/runtime/hashes; reuse valid S2/r001 build cache. New artifacts only under build/M0-T424/S5. No external acquisition or desktop automation. |
+| Reporting Requirements | Maintain origin/current owner/target owner/consumer ledger and removed-line accounting for all five rows; exact tests/assertions and limitations; distinguish planned, linked, tested and published. |
+| Stop Conditions | Original execution relocation, incomplete receipt/handoff semantics, weakened assertion/authentication, new helper/framework, undeclared wire or baseline regression requires disposition. |
+| Exit Criteria | All five rows genuinely production-wired with duplicates/dead paths removed, retained assertion coverage, full gate and coherent publication verified; reviewed committed/pushed P and clean synchronized worktree. |
+| Original Owner Request | Share suitable project-added mechanisms rather than duplicate DOS/native interaction; approved cleanup findings 1-5 before naming, keeping original backend semantics and consumer-local common policy. |
+| Similar-Issue Sweep | NTSRV/NTKVM/NTW32 transport consumers; unused APIs/test aliases; target-completion/final-I/O failure; failed export/startup/receipt/return; simultaneous peer death and completed I/O; nested and independent sessions. |
+
+Use the [S5 checklist](../etc/operations/t424-worker-frontend-renaming-plan.md#s5-architecturecode-cleanup-checklist).
+Admission is documentation-only; no S5 implementation or fresh runtime pass
+is claimed. O:/winnt remains the verified S4 package until S5 delivery.
 
 ## S4 Closure Record
 
-The production P containing this record delivers broker-centered creation and
+Production P `e4fbaed21`, pushed to main, delivers broker-centered creation and
 control, APP_VERSION 0.0.424 / protocol and RPC major 30. NTSRV creates NTKVM
 and both workers, authenticates exact capabilities, routes text submit/resume
 and real direct results, coordinates Console restoration and owns cancellable
