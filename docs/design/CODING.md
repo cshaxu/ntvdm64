@@ -45,7 +45,9 @@ or runtime input.
 T424 S4 admits the following ownership migration of project-added code,
 without changing original mirror logic: frontend/worker CreateProcess and
 authenticated launch orchestration move into ntsrv-exe; run16 keeps CLI,
-broker discovery, submission/direct-result client and actual Console handoff.
+broker discovery and submission/direct-result/Console-handoff RPC clients.
+NTSRV coordinates takeover/return acknowledgements; NTKVM performs actual
+Console operations. Remove the run16/NTKVM direct bootstrap channel too.
 Broker typed copied contracts remain in interface. NTW32 owns native target
 CreateProcess/wait/result reporting; NTKVM owns Console/Window/I/O service;
 worker-base remains worker-only shared client/mechanism code. Existing launcher

@@ -76,7 +76,7 @@ are explicit bounded exceptions to this package's initial name-only policy.
 | S1 | Read-only full referent inventory, ABI decisions, hashes and migration map. |
 | S2 | NTW32/Win32Record migration, complete-tree referent and original-name preservation gates, full production verification and intermediate eight-file publication. |
 | S3 | Owner-added abnormal-exit/re-launch lifecycle investigation and explicitly approved broker-owned retirement repair; highest-priority authenticated close, bounded startup admission, repeated-launch/failure/isolation tests and coherent publication. |
-| S4 | Owner-added broker-centered launch/control migration, with actual caller Console transfer kept local and worker/frontend I/O direct; no mirror edits. Remove replaced paths, test both worker kinds and publish a coherent eight-file package. |
+| S4 | Owner-added broker-centered launch/control migration, including authenticated Console takeover/return coordination; actual Console operations stay in NTKVM and worker/frontend I/O stays direct; no mirror edits. Remove replaced paths, test both worker kinds and publish a coherent eight-file package. |
 | S5 | Former S4: frontend NTCON migration after S4 delivery; build/test/wiring/name checks and verified final eight-file publication. |
 | S6 | Former S5: final ownership/semantic-diff and naming audit, indexes/authorities, clean committed/pushed delivery; owner decides T acceptance. |
 
@@ -104,8 +104,14 @@ This approval replaces project-added launcher/frontend/worker creation edges,
 not original OpenNT execution, scheduling or task completion. NTSRV creates
 and binds NTKVM, NTVDM and NTW32; run16 only finds/starts NTSRV, submits one
 classified request and waits for its broker result when existing semantics
-require waiting. The actual caller Console is transferred directly to NTKVM,
-never attached to NTSRV. NTKVM/worker direct transport carries only I/O,
+require waiting. The owner's subsequent refinement sends Console takeover,
+return and restoration acknowledgement through NTSRV too; run16/NTKVM need
+no direct IPC. NTKVM performs AttachConsole against the authenticated actual
+caller while run16 remains alive/attached until takeover acknowledgement.
+NTSRV never attaches to the Console. Root run16 returns only after the service
+receives canonical buffer/input restoration acknowledgement; inner launchers
+do not return the root lease. Preserve current geometry/grid/cursor instead
+of restoring the startup snapshot. NTKVM/worker direct transport carries only I/O,
 including input return, route activation and final-paint/restoration barriers;
 it cannot own task completion or orderly component retirement.
 

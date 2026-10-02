@@ -13,19 +13,19 @@ audit stages move to S5/S6; no queued T is admitted.
 | --- | --- |
 | Identifier Mode | M0 T424 S4, Ordinary Mode; centralize project-added launch/control in NTSRV. |
 | Candidate Proposal | [Admitted naming package with owner-added investigation](../proposals/proposal-native-worker-frontend-renaming-001.md). |
-| Admission And Approval | Owner approves a new S implementing the audited ideal edges: run16 connects only to NTSRV except its actual Console transfer to NTKVM; NTSRV creates/binds frontend and workers; direct worker/frontend traffic is I/O only. Expected mirror changes: none. |
+| Admission And Approval | Owner approves a new S implementing the audited ideal edges, then refines Console handoff: run16 connects only to NTSRV, including authenticated Console takeover/return coordination; NTSRV creates/binds frontend and workers; NTKVM performs AttachConsole locally; direct worker/frontend traffic is I/O only. Expected mirror changes: none. |
 | Objective | run16 submits and waits on broker-owned direct results; NTSRV owns frontend/worker creation, authenticated binding and orderly retirement. Retain direct NTKVM/worker I/O and nonpolling broker-death waits. |
-| Non-goals | No frontend rename, mirror/guest/media/shared-lib change, helper, Job observation, scheduler, process-tree kill, launch-syntax change, I/O relay through NTSRV or native GUI/Win16 completion-policy change. |
+| Non-goals | No frontend rename, mirror/guest/media/shared-lib change, helper, Job observation, scheduler, process-tree kill, launch-syntax change, I/O relay through NTSRV, NTSRV Console attachment or native GUI/Win16 completion-policy change. |
 | Reference Baseline | S3 `f9fe709aa`, protocol/RPC 29, coherent published eight-file package and retained Console17/Window17/WOW frontiers. S3 delivery does not imply this new architecture already exists. |
 | Files And ABI Surface | run16 startup/receipt clients; NTSRV project-owned creation, reservation, binding and result transport; NTKVM authenticated Console bootstrap; NTVDM/NTW32 adapters and worker-base; interface and coherent next protocol revision for changed RPC; tests and current design. |
 | Applicable Rules | README reading set, EXECUTION, architecture/coding/document rules and source policy; preserve other-session edits. |
 | Verification | x86/MIDL affected closure; exact-parent creation and edge checks; authenticated bootstrap and wrong-capability negatives; DOS/native direct result and failure, final I/O restoration, reuse/nesting/root isolation/broker loss; Console17/Window17 and retained WOW frontiers; coherent eight-file publication; governance/link/diff and no-mirror-change checks. |
-| Expected Markers | NTSRV is actual frontend/worker creator; launcher has only service receipt/result waits plus Console handoff; direct I/O does not complete records or decide orderly death; exact generation/rights and rollback ownership; broker-death wait-set has no timer. |
+| Expected Markers | NTSRV is actual frontend/worker creator; launcher has only service task and Console-handoff receipt/result waits, no NTKVM/worker IPC; direct worker/frontend I/O does not complete records or decide orderly death; exact generation/rights and rollback ownership; broker-death wait-set has no timer. |
 | Asset Needs | S3 tested runtime/recovery and existing fixtures. New artifacts only under build/M0-T424/S4; reuse the recorded S2/r001 object cache without overwriting sealed S3 runtime evidence. No external source/media acquisition. |
 | Reporting Requirements | Maintain an edge/source/ownership checklist, distinguish target from implementation, report removed direct paths and retained Console/I/O edges, exact tests and remaining open rows. |
 | Stop Conditions | Any needed mirror change, arbitrary remote creation/duplication service, helper/scheduler, syntax or GUI-policy change, weakened authentication or previous-runtime regression requires explicit disposition; preserve other-session edits. |
 | Exit Criteria | All migration checklist rows production-wired with obsolete paths removed, required tests and coherent publication verified, reviewed committed/pushed P; no claim of S/T closure from planning or compilation alone. |
-| Original Owner Request | Admit a new S to complete broker-centered architecture cleanup/upgrade; run16 Console transfer is not NTSRV's responsibility; all nonmonitor clients detect broker loss without polling; unrecoverable self-faults remain valid for every component. No expected MVDM/OpenNT-host mirror changes. |
+| Original Owner Request | Admit a new S to complete broker-centered architecture cleanup/upgrade; subsequent refinement sends Console takeover/restoration authorization and acknowledgement through NTSRV too, while NTKVM alone performs actual Console operations. All nonmonitor clients detect broker loss without polling; unrecoverable self-faults remain valid for every component. No expected MVDM/OpenNT-host mirror changes. |
 | Similar-Issue Sweep | Newly created/resident DOS and native workers, inherited frontend scopes, native parent resume, borrowed/owned Console, GUI/Win16 startup-only, pending rollback, direct completion versus infrastructure failure, workerless-root deadline and broker-empty deadline. |
 
 S4's initial source audit and ordered implementation checklist are recorded in
@@ -107,8 +107,9 @@ and [proposal](../proposals/proposal-native-worker-frontend-renaming-001.md)
 retain six ordered stages. S1 audits names; S2 delivers the native worker
 as NTW32 and Win32Record while retaining NTKVM frontend. Added S3 delivers the
 approved broker-owned abnormal-exit/re-launch repair before further renaming.
-S4 centralizes creation, binding and direct result transport in NTSRV while
-keeping Console transfer local and NTKVM/worker I/O direct. S5 renames NTKVM
+S4 centralizes creation, binding, Console handoff coordination and direct result
+transport in NTSRV while keeping Console operations local to NTKVM and
+NTKVM/worker I/O direct. S5 renames NTKVM
 to the reserved NTCON frontend identity after S4. S6 owns final referent and
 semantic audit. T closure
 remains owner-controlled. No later queued candidate is admitted here.

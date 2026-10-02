@@ -15,9 +15,11 @@ This is a target boundary, not a claim of completed implementation. NTSRV
 creates and authenticates NTKVM and NTVDM/NTW32, binds their frontend/execution
 relationships, delivers direct requests and owns orderly retirement. Run16
 finds/starts NTSRV, classifies/submits its target and waits on broker direct
-completion when the existing launch semantics require it. Its only other
-component exchange is transfer/return of its actual user Console to NTKVM;
-NTSRV does not attach to or own that Console. NTKVM/worker transport remains
+completion when the existing launch semantics require it. Console takeover,
+return and restoration acknowledgement also pass through authenticated NTSRV
+control: no run16/NTKVM IPC exception remains. NTSRV supplies the actual caller
+process capability; NTKVM alone attaches to that caller's Console. NTSRV does
+not attach to or own that Console. NTKVM/worker transport remains
 direct for frames, input, title/geometry, route activation, input return and
 final-paint/restoration barriers; it owns no task registry/completion or orderly
 death policy. Shell-out CreateProcess/run16 execution remains local to the
@@ -29,6 +31,11 @@ I/O and reports the result to NTSRV; run16 receives the broker result, not a
 direct worker pipe. DOS retains original BaseSrv record/completion semantics.
 Win32 GUI and registered Win16 startup-only semantics are unchanged. No
 original MVDM/OpenNT-host mirror modification is planned by this migration.
+The caller stays alive/attached until takeover is acknowledged. Root task
+completion does not authorize returning to outer CMD until NTKVM reports
+canonical buffer/input restoration through NTSRV; inner launchers cannot
+return the root lease. Restoration preserves the current grid/geometry/cursor
+and restores modes/active buffer, not an old startup page or cursor position.
 
 NTKVM has no autonomous idle deadline: it waits for NTSRV while its real user
 Console remains alive. NTSRV owns cancellable ten-second no-worker/startup

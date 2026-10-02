@@ -14,7 +14,7 @@ and [final evidence](../evidence/m0-t423-s40-native-alternate-screen-geometry.md
 | S1 | Read-only referent inventory for source, symbols, paths, build, tests, package, endpoints and all documentation/archive; capture baseline hashes and version, classify original/library/fixed names and record an ordered migration map. No production rename. |
 | S2 | Rename the former native worker and project-owned native records to NTW32 and Win32Record. Update all required code/docs/paths; prove zero old project-worker referents, preserving original Console identities/substrings per S1. Pass production regressions and publish coherent intermediate ntw32.exe + ntkvm.exe eight-file package. |
 | S3 | Owner-added lifecycle investigation and subsequently approved repair: centralize orderly frontend/worker retirement in NTSRV, give authenticated close instructions priority over lease/pending/I/O, retain bounded startup admission and verify repeated launch, failure and session isolation before publication. |
-| S4 | Owner-added broker-centered creation/control migration: NTSRV creates/binds frontend and workers; run16 only submits/waits on NTSRV except actual Console transfer; worker/frontend direct channel is I/O only. Remove displaced direct launcher/worker launch and completion paths; preserve mirror semantics and pass the full production gate. |
+| S4 | Owner-added broker-centered creation/control migration: NTSRV creates/binds frontend and workers and coordinates Console takeover/return; run16 only submits/waits on NTSRV; NTKVM performs actual Console operations; worker/frontend direct channel is I/O only. Remove displaced direct launcher/frontend/worker control paths; preserve mirror semantics and pass the full production gate. |
 | S5 | Former S4: frontend NTKVM -> NTCON after S4 delivery; owner-local names, consumers, build/test/package gates and publication. |
 | S6 | Former S5: final referent/semantic audit, indexes, regression and clean delivery; T closure owner-controlled. |
 
@@ -40,8 +40,10 @@ The owner's subsequent architecture approval adds S4 before renaming. Its
 records current versus target edges, reusable mechanisms, ordered production
 migration and exact acceptance. NTKVM waits indefinitely for broker work;
 finite startup/workerless deadlines belong to NTSRV, never an NTKVM timer.
-Console transfer remains between actual caller run16 and NTKVM; NTSRV creates
-the frontend but does not acquire its Console or relay user I/O. Both workers
+The subsequent Console refinement removes the direct launcher/frontend IPC
+exception: NTSRV authenticates/coordinates takeover and restoration acknowledgements,
+while NTKVM performs AttachConsole against the actual caller, not NTSRV. NTSRV
+creates the frontend but does not acquire its Console or relay user I/O. Both workers
 report real direct results to NTSRV; native GUI and Win16 startup-only semantics
 remain unchanged. No mirror edit is planned or authorized by this S.
 

@@ -4,7 +4,9 @@
 
 Owner admits implementation after the component-edge audit: NTSRV creates,
 authenticates, binds and retires frontend/workers; run16 keeps task submission
-and direct-result waiting, except its actual Console transfer to NTKVM.
+and direct-result waiting. The owner's subsequent refinement removes the
+Console-handoff IPC exception too: all coordination/acknowledgement goes
+through NTSRV, and only actual Console operations stay in NTKVM.
 The baseline is main `f9fe709aa`, S3 protocol/RPC 29 and its tested eight-file
 publication. Initial worktree inspection was clean. This initial record is a
 source audit/admission, not a new build, runtime pass or published capability.
@@ -31,7 +33,7 @@ run against its production implementation.
 | Edge | Current production purpose/source | Migration decision |
 | --- | --- | --- |
 | run16 -> NTSRV | `main.c`, `frontend_scope.c`: discovery, original Check/Update, root/worker reservation, submission and result lookup. | Keep discovery/typed submission/results; move resource creation orchestration to service. |
-| run16 -> NTKVM | `bootstrap_client.c`: creates frontend, inherits Console-handoff capabilities, receives bootstrap acknowledgement; scope owns lease-return/restored events. | NTSRV creates frontend. Keep only authenticated actual-caller Console transfer/return; do not lose restored-before-outer-CMD-input barrier. |
+| run16 -> NTKVM | `bootstrap_client.c`: creates frontend, inherits Console-handoff capabilities, receives bootstrap acknowledgement; scope owns lease-return/restored events. | Remove this edge entirely. NTSRV creates/authorizes frontend and coordinates Console takeover/return acknowledgements; preserve restored-before-outer-CMD-input barrier through service receipts. |
 | run16 -> NTVDM | `worker_launch.c` + `main.c`: creates suspended worker, Prepare/Update, resumes, sometimes waits on worker process as well as DOS record. | Remove launcher creation/process ownership and worker-death result inference; NTSRV creates/binds and completes failures. Retain original DOS receipt/result shape. |
 | run16 -> NTW32 | `frontend_scope.c`, `native_request_client.c`: creates/selects worker; direct launch payload/reply/final-status pipe and null-payload parent-resume request; waits worker/root handles. | Remove these task/control edges. Copied launch request plus typed stream attachments and structured result are broker-owned; parent execution resume is broker-routed. |
 | NTSRV -> frontend/workers | Registration, process watches, request/route binding, highest-priority orderly close. No actual frontend/worker creation today. | Add finite exact-sibling creation to the existing authenticated admission; reuse watches and reservations, not a second registry. |
@@ -40,14 +42,14 @@ run against its production implementation.
 | worker -> inner run16 | Original shell-out process creation/wait, not a task-control IPC channel. | Keep original execution semantics; inner launcher uses same broker-only task path. |
 | NTMON -> NTSRV | Copied TaskSnapshot and explicit TerminateWorker; no direct worker traffic. | Already matches; verify unchanged. |
 
-Required topology (Console transfer is the deliberately retained exception):
+Required topology (no launcher/frontend IPC exception):
 
 ```text
-run16 -------- task admission / result -------- NTSRV -------- NTMON
-  |                                              |
-  | real caller Console handoff/return            | create / bind / control
-  v                                              v
-NTKVM <-------------- direct I/O -------------- NTVDM / NTW32
+run16 ----- task / Console-handoff control ----- NTSRV ----- NTMON
+                                                  |
+                                     create / bind / control / receipts
+                                          /               \
+                                       NTKVM <--- I/O ---> NTVDM / NTW32
 ```
 
 NTSRV does not forward frames, own a visible/hidden Console, become a GUI
@@ -61,7 +63,7 @@ sessions. The drawing describes target ownership, not a current runtime pass.
 | --- | --- | --- |
 | Original DOS Check/Update/GetNext/exit record semantics | `opennt-host/base/win32/client` and `server/srvvdm.c`, MVDM callers | Unchanged originals. Service adapter calls/binds them; never extract scheduler or rewrite records for native shape. |
 | Project-added suspended worker creation and startup rollback | `run16-exe/worker_launch.c`, `main.c`, scope native creation | NTSRV finite worker-spawn owner. Preserve immutable worker command/environment/configuration and Prepare-before-Resume order. No successful-worker launcher kill pairing. |
-| Project-added frontend bootstrap | `run16-exe/bootstrap_client.c`, `ntkvm-exe/main.c` | Split creation from Console transfer. Service authorizes exact frontend generation; actual caller transfers restricted pipe/event/process capabilities. Authenticate both authorities; never attach frontend to service Console. |
+| Project-added frontend bootstrap | `run16-exe/bootstrap_client.c`, `ntkvm-exe/main.c` | Service owns creation and authenticated handoff request/acknowledgement. Derive actual caller process from authenticated launcher connection; supply restricted capabilities to frontend. Remove direct launcher pipe/events; never attach frontend to service Console. |
 | Native packet bounds/resource binding | `run16-exe/native_launch_packet.c`, `native_launch.c` and NTW32 execution | Reuse existing codec/bounds and worker-local target creation. Cross RPC only copied/versioned payload and typed authenticated stream attachments; no trusted sender-local handle numbers or generic duplication API. |
 | Native direct request pipe/result transport | `native_request_client.c`, `native_request_io.c`, service Win32Record, NTW32 execution | Broker submission/receipt/result owns launch/preflight error, actual exit code and final I/O status. Remove replaced launcher-to-worker pipe; do not add a parallel completion queue with independent truth. |
 | Broker process death watcher | `ntsrv-exe/opennt/source/base_rpc_client.c`: `broker_lifetime_watch`, `OpenNtBaseClientWatchBroker` | Reuse authenticated broker handle and infinite event wait for run16, frontend and both workers. No heartbeat/RPC poll. Arm before admitted waits; ensure startup rollback ownership is handed to service first. |
@@ -105,9 +107,11 @@ enlarging this S.
    treated as launcher-owned cleanup. Do not wait on creation/registration
    while holding a lock needed by the created component's Connect/register.
 7. Borrowed outer CMD may regain input only after canonical Console/input modes
-   and route have been restored. This acknowledgement may stay in the allowed
-   run16/NTKVM Console-transfer boundary; it is not worker task completion or
-   waiting for the entire resident frontend to exit.
+   and route have been restored. NTKVM reports restoration to NTSRV; NTSRV
+   signals the root launcher's service-owned handoff receipt. Task completion
+   alone cannot signal restoration. Inner launchers cannot return the root's
+   lease. This is not waiting for the entire resident frontend to exit or
+   restoring an obsolete startup geometry/cursor snapshot.
 
 ## Ordered implementation checklist
 
@@ -117,11 +121,11 @@ test evidence exist. Documentation/source audit alone checks no runtime row.
 - [x] Admit S4, preserve S3 source/publication baseline, separate current and target.
 - [x] Audit creation/completion/Console-transfer edges and reusable broker watch.
 - [ ] Define finite typed broker launch/result attachments, coherent next RPC/application protocol and generation authentication; no speculative unrelated methods.
-- [ ] Service-created NTKVM with real-caller Console bootstrap/return and same-root reuse; remove frontend CreateProcess from run16.
+- [ ] Service-created NTKVM with broker-mediated real-caller Console bootstrap/return/restoration receipts and same-root reuse; remove frontend CreateProcess and all direct NTKVM IPC from run16.
 - [ ] Service-created NTVDM/NTW32 with existing original Check/Update and native GetNext contracts; remove launcher worker CreateProcess/resume/process fallback waits.
 - [ ] Broker-only native launch/preflight/completion/I/O-status receipt plus broker-routed parent resume; delete replaced direct launcher/worker request path.
 - [ ] Both workers/frontend obey broker control; broker-owned ten-second workerless deadline; no local idle policy or new death polling.
-- [ ] Unified launcher direct service wait/failure/result flow, retaining original DOS and native result sources, Win16/GUI startup-only and allowed Console restoration barrier.
+- [ ] Unified launcher direct service wait/failure/result flow, retaining original DOS and native result sources, Win16/GUI startup-only and broker-mediated Console restoration barrier.
 - [ ] Exact creation/binding/error/rollback tests, runtime matrices, previous frontiers, edge/mirror audit, coherent publication and commit/push.
 
 Follow dependency order. Do not publish an intermediate mixture of old/new
@@ -133,7 +137,7 @@ and evidence are not overwritten.
 
 | Required invariant | Test source/entrypoint and assertions |
 | --- | --- |
-| Exact process ownership and removed edges | Add controlled service-launch fixture/probe under tests/app or tests/observation: record actual parent identity/generation for NTKVM/NTVDM/NTW32; assert launcher only creates missing NTSRV, no direct native launch/completion pipe remains. Static edge audit supplements, not replaces runtime. |
+| Exact process ownership and removed edges | Add controlled service-launch fixture/probe under tests/app or tests/observation: record actual parent identity/generation for NTKVM/NTVDM/NTW32; assert launcher only creates missing NTSRV, no direct frontend bootstrap or native launch/completion IPC remains. Static edge audit supplements, not replaces runtime. |
 | Bootstrap safety | Extend `tests/app/frontend_bootstrap_test.c` and frontend-scope lifetime tests: exact actual Console caller, service-issued creation identity, unrelated/old-generation/forged capability rejected; no arbitrary image/handle inheritance. |
 | Native direct result | Extend next-command/execution and service reservation fixtures: preflight/CreateProcess failure, actual nonzero exit, final I/O failure, completion RPC failure, launcher death and broker/worker loss; exactly one corresponding result, no unrelated record completion. |
 | DOS/native repeated launch and cooked return | `tests/observation/verify-frontend-relaunch.ps1`: same outer CMD, DOS -> native -> DOS, final cooked echo result19, original Console/cursor/input restoration barrier. |
