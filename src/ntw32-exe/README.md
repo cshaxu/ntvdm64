@@ -27,8 +27,9 @@ semantics; NTW32 supplies their finite backend binding.
 - `presentation.c`: native capture/seed/member-specific operations under its
   instance lock. Ordered transport, cancellation, frame chunks, ordinary input
   codec, activation and key-return encoding use `worker-base`.
-- `channel_io.c`: native execution-pipe transfer. Its completed-I/O-versus-peer-
-  death contract differs from the shared strict frontend client; it stays local.
+- Native execution-pipe transfer links the single frontend-client transport
+  object (`run16-exe/native_request_io.c`). Its completed-I/O-first contract
+  differs from worker-base's strict frontend transport; no duplicate remains.
 
 Cross-component declarations live in `interface`. NTSRV owns authentication,
 discovery and worker management; run16 owns submission/direct-result waiting;

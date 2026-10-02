@@ -7,9 +7,9 @@ typedef struct frontend_channel {
     run16_console_channel *channel;
 } frontend_channel;
 struct frontend_session_service {
-    HANDLE capability,notification,stop,thread,retire,restored,state_changed;
+    HANDLE notification,stop,thread,retire,state_changed;
     HANDLE creator,console_anchor;
-    BOOL admitted,retire_requested,creator_exited,borrowed;
+    BOOL retire_requested,creator_exited;
     frontend_channel *channels;
     run16_native_frontend *native;
     void (*channel_ready)(void);
@@ -144,7 +144,6 @@ static DWORD WINAPI frontend_pump(void *context)
                 return error;
             }
             entry->next=scope->channels;scope->channels=entry;
-            scope->admitted=TRUE;
             if (scope->channel_ready) scope->channel_ready();
         }
         if(scope->native && ((scope->creator && scope->creator_exited) ||
@@ -201,17 +200,17 @@ DWORD frontend_service_close(frontend_session_service *scope)
     HeapFree(GetProcessHeap(),0,scope);
     return ERROR_SUCCESS;
 }
-static DWORD service_start(HANDLE capability,HANDLE notification,HANDLE creator,HANDLE retire,
-    HANDLE restored,BOOL borrowed,void (*ready)(void),frontend_session_service **output)
+static DWORD service_start(HANDLE notification,HANDLE creator,HANDLE retire,
+    BOOL borrowed,void (*ready)(void),frontend_session_service **output)
 {
     frontend_session_service *scope;
     DWORD error;
-    if(!output || !capability || !notification)return ERROR_INVALID_PARAMETER;
+    if(!output || !notification)return ERROR_INVALID_PARAMETER;
     *output=NULL;
     scope=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*scope));
     if(!scope)return ERROR_NOT_ENOUGH_MEMORY;
-    scope->capability=capability;scope->notification=notification;scope->channel_ready=ready;
-    scope->creator=creator;scope->retire=retire;scope->restored=restored;scope->borrowed=borrowed;
+    scope->notification=notification;scope->channel_ready=ready;
+    scope->creator=creator;scope->retire=retire;
     if(borrowed) {
         error=next_console_anchor(&scope->console_anchor);
         if(error)goto fail;
@@ -229,21 +228,15 @@ static DWORD service_start(HANDLE capability,HANDLE notification,HANDLE creator,
 fail:
     (void)frontend_service_close(scope);return error;
 }
-DWORD frontend_service_start(HANDLE capability,HANDLE notification,
+DWORD frontend_service_start(HANDLE notification,
     void (*ready)(void),frontend_session_service **output)
 {
-    return service_start(capability,notification,NULL,NULL,NULL,FALSE,ready,output);
+    return service_start(notification,NULL,NULL,FALSE,ready,output);
 }
-DWORD frontend_service_start_process(HANDLE capability,HANDLE notification,
-    HANDLE creator,HANDLE retire,frontend_session_service **output)
+DWORD frontend_service_start_process(HANDLE notification,
+    HANDLE creator,HANDLE retire,BOOL borrowed,frontend_session_service **output)
 {
     if(!creator || !retire)return ERROR_INVALID_PARAMETER;
-    return service_start(capability,notification,creator,retire,NULL,FALSE,NULL,output);
-}
-DWORD frontend_service_start_process_lease(HANDLE capability,HANDLE notification,
-    HANDLE creator,HANDLE retire,HANDLE restored,BOOL borrowed,frontend_session_service **output)
-{
-    if(!creator || !retire || !restored)return ERROR_INVALID_PARAMETER;
-    return service_start(capability,notification,creator,retire,restored,borrowed,NULL,output);
+    return service_start(notification,creator,retire,borrowed,NULL,output);
 }
 HANDLE frontend_service_thread(frontend_session_service *scope){return scope ? scope->thread : NULL;}

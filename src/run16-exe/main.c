@@ -453,7 +453,6 @@ static DWORD launch_gui(PCWSTR application,PCWSTR command,BOOL wait)
 static DWORD launch_native(run16_frontend_scope *scope,PCWSTR application,PCWSTR command)
 {
     run16_native_start start={0};
-    HANDLE target=NULL;
     WCHAR directory[32768];
     PWSTR environment=NULL;
     DWORD error,result=ERROR_PROCESS_ABORTED,mode,i,length;
@@ -469,15 +468,16 @@ static DWORD launch_native(run16_frontend_scope *scope,PCWSTR application,PCWSTR
     start.standard[2]=GetStdHandle(STD_ERROR_HANDLE);
     start.console_mask=run16_frontend_scope_console_mask(scope);
     for(i=0;i<3;++i)if(GetConsoleMode(start.standard[i],&mode))start.console_mask|=1u<<i;
-    error=run16_frontend_scope_launch_native(scope,&start,&target);
+    error=run16_frontend_scope_launch_native(scope,&start);
     if(!error) {
-        DWORD completion=run16_frontend_scope_wait_native(scope,target,&result);
+        DWORD target_completed=0;
+        DWORD completion=run16_frontend_scope_wait_native(scope,&result,&target_completed);
         /* The direct native target can have completed even when its final
          * presentation fence reports an error. In either case, a root
          * launcher must not hand an outer CMD its Console until NTKVM has
          * reselected the canonical buffer and restored input mode. A live target has not
          * completed the handoff and retains the existing failure path. */
-        if(target && WaitForSingleObject(target,0)==WAIT_OBJECT_0) {
+        if(target_completed) {
             DWORD handoff=run16_frontend_scope_retire(scope);
             if(!handoff) {
                 handoff=run16_frontend_scope_restore_parent(scope);
@@ -487,7 +487,6 @@ static DWORD launch_native(run16_frontend_scope *scope,PCWSTR application,PCWSTR
         error=completion;
     }
 done:
-    if(target)CloseHandle(target);
     if(environment)FreeEnvironmentStringsW(environment);
     return error ? error : result;
 }

@@ -1,5 +1,26 @@
 # Source Layout
 
+## Owner-approved T424 S7 library reorganization
+
+The owner explicitly plans src/common as the successor to src/interface after
+S6 naming delivery. Until that implementation, the existing interface layout remains
+current. In S7, keep protocol declarations/version identity/service IDL in a
+declaration-only submodule; separately select audited project-added shared
+transport, codec, authenticated-client and Console-snapshot implementations.
+This bounded approval supersedes the generic-common prohibition below only
+for these cross-component mechanisms. It creates no executable/helper or
+generic compatibility framework. Common cannot depend on EXE-private code or
+worker-base; worker-base remains worker-only and may use neutral common modules.
+Resource ownership, authentication policy, service records/retirement and
+frontend rendering remain with their existing owners.
+
+S7 also provenance-classifies and splits project-added NTSRV base_service.c
+implementation into bounded service-private modules. Original OpenNT/MVDM
+source stays in its upstream-relative mirror; preserve original algorithms,
+ordering and minimal registered hooks, with pinned-source diff accounting.
+Do not extract original execution/completion into common/worker-base.
+See the [S7 checklist](../etc/operations/t424-worker-frontend-renaming-plan.md#s7-common-library-and-service-source-separation).
+
 S12 owner-approved common text ABI extension adds an optional per-cell style
 byte to the original glyph/attribute pair. Both workers use the same interface
 definition and frontend decoder; DOS keeps pairs. This supersedes the exact

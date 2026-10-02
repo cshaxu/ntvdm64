@@ -3003,11 +3003,13 @@ done:
 }
 
 DWORD OpenNtBaseServiceFinishNativeRequest(OPENNT_BASE_CONNECTION *caller,DWORD pid,
-    DWORD generation,DWORD request,DWORD *exit_code)
+    DWORD generation,DWORD request,DWORD *exit_code,DWORD *target_completed)
 {
-    HANDLE pipe=NULL,worker=NULL,event=NULL;DWORD error,idle_worker=0;
+    HANDLE pipe=NULL,worker=NULL,event=NULL;DWORD error,io_error=0,idle_worker=0;
     native_request_completion completion={0};
-    if(!caller || !request || !exit_code)return ERROR_INVALID_PARAMETER;
+    if(!exit_code || !target_completed)return ERROR_INVALID_PARAMETER;
+    *exit_code=*target_completed=0;
+    if(!caller || !request)return ERROR_INVALID_PARAMETER;
     if(!OpenNtBaseServicePeer(caller,pid,generation))return ERROR_ACCESS_DENIED;
     EnterCriticalSection(&caller->service->lock);
     {
@@ -3016,11 +3018,13 @@ DWORD OpenNtBaseServiceFinishNativeRequest(OPENNT_BASE_CONNECTION *caller,DWORD 
         if(!record)error=ERROR_NOT_FOUND;
         else if(!record->completed)error=ERROR_NOT_READY;
         else if(record->completion_error)error=ERROR_SUCCESS;
-        else if(!record->control || !record->control_worker)error=ERROR_INVALID_STATE;
+        else if(!record->control || !record->control_worker) {
+            error=ERROR_SUCCESS;io_error=ERROR_INVALID_STATE;
+        }
         else if(!DuplicateHandle(GetCurrentProcess(),record->control,GetCurrentProcess(),&pipe,
             0,FALSE,DUPLICATE_SAME_ACCESS) ||
             !DuplicateHandle(GetCurrentProcess(),record->control_worker,GetCurrentProcess(),&worker,
-                SYNCHRONIZE,FALSE,0))error=GetLastError();
+                SYNCHRONIZE,FALSE,0)) {error=ERROR_SUCCESS;io_error=GetLastError();}
         else {error=ERROR_SUCCESS;idle_worker=owner->native_worker ? owner->process.SequenceNumber : 0;}
     }
     LeaveCriticalSection(&caller->service->lock);
@@ -3029,6 +3033,11 @@ DWORD OpenNtBaseServiceFinishNativeRequest(OPENNT_BASE_CONNECTION *caller,DWORD 
      * Never demand a reply from a failed worker to report its broker failure. */
     error=OpenNtBaseServiceNativeExitCode(caller,pid,generation,request,exit_code);
     if(error)goto done;
+    /* Only successfully consuming this caller's real completion grants the
+     * Console-return decision. A final-I/O error does not undo target exit;
+     * worker failure, forged/stale receipts and races never set this flag. */
+    *target_completed=TRUE;
+    if(io_error){error=io_error;goto done;}
     event=CreateEventW(NULL,TRUE,FALSE,NULL);
     if(!event){error=GetLastError();goto done;}
     error=frontend_request_transfer(pipe,worker,caller->process.ProcessHandle,event,FALSE,&completion,sizeof(completion));

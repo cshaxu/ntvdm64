@@ -140,13 +140,12 @@ static DWORD wait_worker_change(HANDLE changed,HANDLE worker,HANDLE root,ULONGLO
     return wait==WAIT_OBJECT_0+count-1 ? ERROR_SUCCESS : ERROR_INVALID_STATE;
 }
 
-DWORD run16_frontend_scope_launch_native(run16_frontend_scope *scope,const run16_native_start *start,HANDLE *target)
+DWORD run16_frontend_scope_launch_native(run16_frontend_scope *scope,const run16_native_start *start)
 {
-    HANDLE worker=NULL,changed=NULL;DWORD error;
+    HANDLE worker=NULL,changed=NULL,target=NULL;DWORD error;
     ULONGLONG deadline=GetTickCount64()+10000;
-    if(!scope || !start || !target)return ERROR_INVALID_PARAMETER;
+    if(!scope || !start)return ERROR_INVALID_PARAMETER;
     if(scope->receipt)return ERROR_BUSY;
-    *target=NULL;
     error=OpenNtBaseClientWorkerStateChanged(&changed);
     if(error)return error;
     for(;;) {
@@ -166,7 +165,7 @@ DWORD run16_frontend_scope_launch_native(run16_frontend_scope *scope,const run16
          * A reused route is not a new frontend or an input activation. */
         error=OpenNtBaseClientRequestFrontend(scope->capability);
         if(error==ERROR_ALREADY_EXISTS)error=ERROR_SUCCESS;
-        if(!error)error=run16_native_request_submit(scope->capability,start,target,&scope->receipt,&scope->native_request);
+        if(!error)error=run16_native_request_submit(scope->capability,start,&target,&scope->receipt,&scope->native_request);
         if(error!=ERROR_NOT_READY)break;
         /* No request was accepted. Wait only for initial registration; never
          * replay a submitted request or restart a failed worker. */
@@ -175,6 +174,9 @@ DWORD run16_frontend_scope_launch_native(run16_frontend_scope *scope,const run16
     }
     CloseHandle(worker);
 done:
+    /* The exported reference is startup diagnostics only. Neither task
+     * completion nor Console return depends on local target observation. */
+    if(target)CloseHandle(target);
     CloseHandle(changed);
     return error;
 }
@@ -187,10 +189,11 @@ DWORD run16_wait_direct_event(HANDLE receipt)
     if(wait!=WAIT_OBJECT_0)return ERROR_INVALID_STATE;
     return ERROR_SUCCESS;
 }
-DWORD run16_frontend_scope_wait_native(run16_frontend_scope *scope,HANDLE target,DWORD *result)
+DWORD run16_frontend_scope_wait_native(run16_frontend_scope *scope,DWORD *result,DWORD *target_completed)
 {
     DWORD error=0;
-    if(!scope || !target || !result)return ERROR_INVALID_PARAMETER;
+    if(!scope || !result || !target_completed)return ERROR_INVALID_PARAMETER;
+    *result=*target_completed=0;
     if(scope->receipt){
         /* NTSRV owns completion and fails outstanding receipts on worker
          * rundown. Its authenticated death watcher covers broker loss. */
@@ -199,7 +202,7 @@ DWORD run16_frontend_scope_wait_native(run16_frontend_scope *scope,HANDLE target
     }else return ERROR_INVALID_STATE;
     if(scope->receipt){
         /* NTSRV joins the real task result with the final I/O acknowledgement. */
-        error=run16_native_request_finish(scope->native_request,result);
+        error=run16_native_request_finish(scope->native_request,result,target_completed);
         CloseHandle(scope->receipt);scope->receipt=NULL;
     }
     return error;

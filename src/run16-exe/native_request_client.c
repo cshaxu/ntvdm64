@@ -16,11 +16,11 @@ DWORD run16_native_request_submit(HANDLE root_capability,const run16_native_star
     HeapFree(GetProcessHeap(),0,payload);
     return error;
 }
-DWORD run16_native_request_finish(DWORD request,DWORD *exit_code)
+DWORD run16_native_request_finish(DWORD request,DWORD *exit_code,DWORD *target_completed)
 {
-    if(!exit_code || !request)return ERROR_INVALID_PARAMETER;
-    *exit_code=0;
-    return OpenNtBaseClientFinishNativeRequest(request,exit_code);
+    if(!exit_code || !target_completed || !request)return ERROR_INVALID_PARAMETER;
+    *exit_code=*target_completed=0;
+    return OpenNtBaseClientFinishNativeRequest(request,exit_code,target_completed);
 }
 DWORD run16_native_request_resume(HANDLE capability)
 {

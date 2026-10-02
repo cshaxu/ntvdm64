@@ -6,7 +6,7 @@
 #include <windows.h>
 #include <stdint.h>
 DWORD OpenNtBaseClientSubmitNativeRequest(HANDLE,DWORD,BYTE *,HANDLE *,HANDLE *,DWORD *);
-DWORD OpenNtBaseClientFinishNativeRequest(DWORD,DWORD *);
+DWORD OpenNtBaseClientFinishNativeRequest(DWORD,DWORD *,DWORD *);
 DWORD OpenNtBaseClientConnectCurrent(void);
 DWORD OpenNtBaseClientBrokerProcess(HANDLE *server);
 DWORD OpenNtBaseClientStartFrontend(uint64_t console_window,BOOL borrowed,

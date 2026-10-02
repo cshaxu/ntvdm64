@@ -11,7 +11,7 @@ typedef struct OPENNT_BASE_CONNECTION OPENNT_BASE_CONNECTION;
 DWORD OpenNtBaseServiceStartNativeWorker(OPENNT_BASE_CONNECTION *,DWORD,DWORD,HANDLE *);
 DWORD OpenNtBaseServiceSubmitNativeRequest(OPENNT_BASE_CONNECTION *,DWORD,DWORD,HANDLE,
     DWORD,BYTE *,HANDLE *,HANDLE *,DWORD *);
-DWORD OpenNtBaseServiceFinishNativeRequest(OPENNT_BASE_CONNECTION *,DWORD,DWORD,DWORD,DWORD *);
+DWORD OpenNtBaseServiceFinishNativeRequest(OPENNT_BASE_CONNECTION *,DWORD,DWORD,DWORD,DWORD *,DWORD *);
 typedef void (WINAPI *OPENNT_BASE_EMPTY_NOTIFY)(void *);
 /* Copied management projection. PID selects the currently authenticated,
  * registered worker. BaseSrv sequence remains private routing state. No

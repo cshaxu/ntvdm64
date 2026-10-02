@@ -108,12 +108,13 @@ done:
     }
     return error;
 }
-DWORD OpenNtBaseClientFinishNativeRequest(DWORD request,DWORD *exit_code)
+DWORD OpenNtBaseClientFinishNativeRequest(DWORD request,DWORD *exit_code,DWORD *target_completed)
 {
     HANDLE event;DWORD error;native_request_completion completion={0};
-    if(request!=91 || !exit_code)return ERROR_INVALID_PARAMETER;
+    if(request!=91 || !exit_code || !target_completed)return ERROR_INVALID_PARAMETER;
     if(scenario==12)return ERROR_PROCESS_ABORTED;
     *exit_code=37;
+    *target_completed=TRUE;
     event=CreateEventW(NULL,TRUE,FALSE,NULL);if(!event)return GetLastError();
     error=frontend_request_transfer(broker_pipe,peer_process,NULL,event,FALSE,&completion,sizeof(completion));
     if(!error)error=broker_native_completion_status(&completion);
@@ -155,13 +156,13 @@ int main(void)
     }
     for(scenario=6;scenario<=8;++scenario) {
         HANDLE target=NULL,receipt=NULL;
-        DWORD result,error,request=0,wanted=scenario==6 ? 0 : scenario==7 ? ERROR_WRITE_FAULT : ERROR_BROKEN_PIPE;
+        DWORD result,error,request=0,completed=0,wanted=scenario==6 ? 0 : scenario==7 ? ERROR_WRITE_FAULT : ERROR_BROKEN_PIPE;
         error=run16_native_request_submit((HANDLE)1,&start,&target,&receipt,&request);
         if(error || WaitForSingleObject(target,5000)!=WAIT_OBJECT_0 ||
             !GetExitCodeProcess(target,&result) || result!=37)return 6;
         result=0;
-        error=run16_native_request_finish(request,&result);
-        if(error!=wanted || (!error && result!=37) ||
+        error=run16_native_request_finish(request,&result,&completed);
+        if(error!=wanted || result!=37 || completed!=TRUE ||
             WaitForSingleObject(peer_thread,5000)!=WAIT_OBJECT_0 || peer_error)return 7;
         printf("PASS final presentation case=%lu status=%lu target=37\n",scenario,error);
         CloseHandle(peer_thread);CloseHandle(receipt);CloseHandle(target);
@@ -176,10 +177,10 @@ int main(void)
     }
     scenario=12;
     {
-        DWORD result=99;
+        DWORD result=99,completed=99;
         /* Broker failure must win over a missing final worker channel. */
-        if(run16_native_request_finish(91,&result)!=
-            ERROR_PROCESS_ABORTED || result)return 9;
+        if(run16_native_request_finish(91,&result,&completed)!=
+            ERROR_PROCESS_ABORTED || result || completed)return 9;
         puts("PASS broker worker-failure receipt returned without reading dead presentation channel");
     }
     FreeEnvironmentStringsW(environment);

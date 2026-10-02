@@ -29,8 +29,13 @@ approved cleanup rows, not NTVWM naming, GUI routing or frontend naming.
 | Similar-Issue Sweep | NTSRV/NTKVM/NTW32 transport consumers; unused APIs/test aliases; target-completion/final-I/O failure; failed export/startup/receipt/return; simultaneous peer death and completed I/O; nested and independent sessions. |
 
 Use the [S5 checklist](../etc/operations/t424-worker-frontend-renaming-plan.md#s5-architecturecode-cleanup-checklist).
-Admission is documentation-only; no S5 implementation or fresh runtime pass
-is claimed. O:/winnt remains the verified S4 package until S5 delivery.
+Implementation provenance and progress are recorded in the
+[S5 ledger](../etc/evidence/m0-t424-s5-shared-control-cleanup.md).
+S5 protocol/RPC 31 links; all five rows and focused transport, receipt/lifetime,
+actual broker/RPC, Console17/Window17, EDIT return, relaunch, isolation and
+four retirement gates pass. Existing WOW frontiers are retained. Eight files
+are published with matching hashes and postpublication smoke; reviewed Git
+delivery follows. See the S5 ledger for failed harness attempts and limitations.
 
 ## S4 Closure Record
 
@@ -70,7 +75,7 @@ manifests and release limitations are in
 S4 is not a claim that all later audit rows are already eliminated. The owner's
 S5 cleanup covers duplicate transport/primitive ownership, remaining diagnostic
 target handles, NTKVM dead state and obsolete bootstrap fixtures; S6 names
-NTVWM, S7 routes native GUI, S8 names the frontend NTCON, and S9 audits closure.
+NTVWM, S8 routes native GUI, S9 names the frontend NTCON, and S10 audits closure.
 UNBOUND display remains the separate queue-head NTMON T candidate.
 
 ## S3 Closure Record
@@ -98,7 +103,7 @@ previous package recovery is under build/M0-T424/S3/r001/published-recovery.
 Guest media, SYSTEM.INI and NTVDM.REG are not overwritten. Z: is removed after
 testing. T424 remains open. S3 did not implement broker-owned creation;
 the subsequent owner implementation approval is admitted separately as S4.
-Frontend renaming is now S8, after S6 NTW32 -> NTVWM and S7 GUI routing, and has not started.
+Frontend renaming is now S9, after S6 NTW32 -> NTVWM and S8 GUI routing, and has not started.
 
 Owner's subsequent implementation approval supersedes research-only scope:
 NTKVM exits on NTSRV instruction or user Console closure (fault/broker-loss
@@ -144,29 +149,32 @@ pre-migration baseline in its sealed inventory and S1 Git revision.
 
 The [T424 working plan](../etc/operations/t424-worker-frontend-renaming-plan.md)
 and [proposal](../proposals/proposal-native-worker-frontend-renaming-001.md)
-retain nine ordered stages. S1 audits names; S2 delivers the native worker
+retain ten ordered stages. S1 audits names; S2 delivers the native worker
 as NTW32 and Win32Record while retaining NTKVM frontend. Added S3 delivers the
 approved broker-owned abnormal-exit/re-launch repair before further renaming.
 S4 centralizes creation, binding, Console handoff coordination and direct result
 transport in NTSRV while keeping Console operations local to NTKVM and
 NTKVM/worker I/O direct; finish its open rows before S5 cleanup. S5 closes the
 five owner-approved architecture/code findings, without changing mirrors,
-guest, shared lib or accepted polling. Owner-added S6 renames
-NTW32 to NTVWM; it is name-only and preserves existing behavior. S7 then adds
+guest, shared lib or accepted polling. New S7 owns the bounded interface-to-common
+library reorganization and provenance-first NTSRV service split; see the
+[S7 checklist](../etc/operations/t424-worker-frontend-renaming-plan.md#s7-common-library-and-service-source-separation).
+Owner-added S6 renames
+NTW32 to NTVWM; it is name-only and preserves existing behavior. S8 then adds
 broker-routed native GUI startup, NTVWM classification and service-held handles,
 not monitor display. UNBOUND display belongs to the queue-head NTMON candidate.
-S8 then renames NTKVM to
-the reserved NTCON frontend identity. S9 owns final referent and
+S9 then renames NTKVM to
+the reserved NTCON frontend identity. S10 owns final referent and
 semantic audit. T closure
 remains owner-controlled. No later queued candidate is admitted here.
 
 ## Current Technical Baseline
 
-Published S4 package at O:/winnt: run16.exe, ntsrv.exe, ntvdm.exe, ntw32.exe,
+Published S5 package at O:/winnt: run16.exe, ntsrv.exe, ntvdm.exe, ntw32.exe,
 ntkvm.exe, ntmon.exe, WOW32.DLL, VDMREDIR.DLL. APP_VERSION is 0.0.424;
-protocol/RPC is 30 with unchanged UUID and authenticated broker-owned creation,
+protocol/RPC is 31 with unchanged UUID and authenticated broker-owned creation,
 submission, restoration and shutdown contracts. MSVC Win32/x86 /MT CCPU40 is
-unchanged. Exact hashes and commands are in S4 evidence; S3 `f9fe709aa` and
+unchanged. Exact hashes and commands are in S5 evidence; S4 `e4fbaed21`, S3 `f9fe709aa` and
 predecessor accepted T423 S40 `f64559086` remain recoverable.
 
 ## Previous T closure

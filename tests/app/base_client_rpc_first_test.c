@@ -469,7 +469,7 @@ static int ntw32_reuse_child(char **argv)
     REQUIRE(WaitForSingleObject(target,5000)==WAIT_OBJECT_0);
     REQUIRE(GetExitCodeProcess(target,&code) && code==73);
     REQUIRE(WaitForSingleObject(receipt,5000)==WAIT_OBJECT_0);
-    REQUIRE(!run16_native_request_finish(request,&code) && code==73);
+    { DWORD completed=0; REQUIRE(!run16_native_request_finish(request,&code,&completed) && code==73 && completed==TRUE); }
     REQUIRE(WaitForSingleObject(worker,0)==WAIT_TIMEOUT);
     CloseHandle(target);CloseHandle(receipt);CloseHandle(worker);
     {
@@ -635,7 +635,7 @@ static int ntw32_execution_rpc(void)
         }
         REQUIRE(GetExitCodeProcess(target,&code) && code==(index ? 19u : 37u));
         REQUIRE(WaitForSingleObject(receipt,5000)==WAIT_OBJECT_0);
-        REQUIRE(!run16_native_request_finish(request,&code) && code==(index ? 19u : 37u));
+        { DWORD completed=0; REQUIRE(!run16_native_request_finish(request,&code,&completed) && code==(index ? 19u : 37u) && completed==TRUE); }
         sprintf_s(expected,sizeof(expected),"NTW32-EXEC-%lu",index);
         REQUIRE(ReadFile(output,text,sizeof(text)-1,&bytes,NULL) && bytes && strstr(text,expected));
         REQUIRE(!ReadFile(output,text,sizeof(text)-1,&bytes,NULL) && GetLastError()==ERROR_BROKEN_PIPE);

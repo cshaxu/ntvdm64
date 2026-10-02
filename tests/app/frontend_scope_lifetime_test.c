@@ -24,6 +24,9 @@ static DWORD registrations,retains,bindings,retain_error=ERROR_ACCESS_DENIED;
 static HANDLE expected_execution;
 static frontend_session_service *fixture_service;
 static BOOL retirement_mode;
+static BOOL native_mode;
+static DWORD native_error;
+static HANDLE diagnostic_target;
 static volatile LONG usage_pending,retire_calls,drain_calls,park_calls,broker_shutdown;
 static HANDLE usage_seen,park_seen;
 static void attached(void);
@@ -35,7 +38,7 @@ static DWORD fixture_frontend_start(PCWSTR image,frontend_connection *connection
     notification=CreateEventW(NULL,TRUE,FALSE,NULL);CHECK(notification);++registrations;
     CHECK(DuplicateHandle(GetCurrentProcess(),notification,GetCurrentProcess(),&connection->capability,SYNCHRONIZE,TRUE,0));
     CHECK(DuplicateHandle(GetCurrentProcess(),GetCurrentProcess(),GetCurrentProcess(),&connection->process,SYNCHRONIZE,FALSE,0));
-    error=frontend_service_start(notification,notification,attached,&fixture_service);
+    error=frontend_service_start(notification,attached,&fixture_service);
     return error;
 }
 DWORD OpenNtBaseClientStartFrontend(uint64_t window,BOOL borrowed,HANDLE *root,
@@ -104,15 +107,33 @@ DWORD OpenNtBaseClientRetireWorkerlessFrontend(DWORD *retired)
 }
 DWORD run16_native_frontend_destroy(run16_native_frontend *value) { if(value)HeapFree(GetProcessHeap(),0,value);return 0; }
 DWORD run16_native_request_submit(HANDLE capability,const run16_native_start *start,HANDLE *out,HANDLE *receipt,DWORD *request)
-{ (void)capability;(void)start;*out=*receipt=NULL;*request=0;return ERROR_NOT_SUPPORTED; }
-DWORD run16_native_request_finish(DWORD request,DWORD *exit_code)
-{ (void)request;(void)exit_code;CHECK(FALSE);return ERROR_NOT_SUPPORTED; }
+{
+    (void)capability;(void)start;*out=*receipt=NULL;*request=0;
+    if(!native_mode)return ERROR_NOT_SUPPORTED;
+    /* Deliberately not a completed process. Scope must close diagnostics and
+     * use the broker receipt/result rather than wait on this reference. */
+    *out=diagnostic_target=CreateEventW(NULL,TRUE,FALSE,NULL);CHECK(*out);
+    *receipt=CreateEventW(NULL,TRUE,TRUE,NULL);CHECK(*receipt);
+    *request=41;return ERROR_SUCCESS;
+}
+DWORD run16_native_request_finish(DWORD request,DWORD *exit_code,DWORD *completed)
+{
+    CHECK(native_mode && request==41);
+    *completed=native_error!=ERROR_PROCESS_ABORTED;
+    *exit_code=*completed ? 37 : 0;
+    return native_error;
+}
 DWORD run16_native_request_resume(HANDLE capability)
 { (void)capability;CHECK(FALSE);return ERROR_NOT_SUPPORTED; }
 DWORD OpenNtBaseClientSelectNativeWorker(HANDLE *worker)
-{ *worker=NULL;return ERROR_NOT_SUPPORTED; }
+{
+    *worker=NULL;
+    if(!native_mode)return ERROR_NOT_SUPPORTED;
+    CHECK(DuplicateHandle(GetCurrentProcess(),GetCurrentProcess(),GetCurrentProcess(),worker,SYNCHRONIZE,FALSE,0));
+    return ERROR_SUCCESS;
+}
 DWORD OpenNtBaseClientRequestFrontend(HANDLE capability)
-{ (void)capability;CHECK(FALSE);return ERROR_NOT_SUPPORTED; }
+{ (void)capability;CHECK(native_mode);return ERROR_SUCCESS; }
 DWORD OpenNtBaseClientReserveNativeWorker(uint64_t *reservation)
 { *reservation=0;return ERROR_NOT_SUPPORTED; }
 DWORD OpenNtBaseClientReleaseWorker(uint64_t reservation)
@@ -213,7 +234,7 @@ static void service_controls_retirement(void)
     retirement_state=CreateEventW(NULL,FALSE,FALSE,NULL);
     CHECK(creator && usage_seen && park_seen && retirement_state);
     retirement_mode=TRUE;usage_pending=1;
-    CHECK(!frontend_service_start_process(notification,notification,creator,notification,&service));
+    CHECK(!frontend_service_start_process(notification,creator,notification,FALSE,&service));
     CHECK(WaitForSingleObject(usage_seen,5000)==WAIT_OBJECT_0);
     CHECK(WaitForSingleObject(frontend_service_thread(service),0)==WAIT_TIMEOUT);
     CHECK(!retire_calls && !drain_calls);
@@ -295,6 +316,24 @@ int main(void)
     CHECK(SetEnvironmentVariableA("NTVDM_EXECUTION_CONSOLE",NULL));
     CloseHandle(execution);
     puts("PASS inner joins without frontend ownership; orphan, invalid and disconnected capabilities never promote to root");
+    {
+        static const DWORD errors[]={0,ERROR_WRITE_FAULT,ERROR_PROCESS_ABORTED};
+        run16_native_start start={0};DWORD case_index,flags,result,completed,before,after;
+        CHECK(GetProcessHandleCount(GetCurrentProcess(),&before));
+        native_mode=TRUE;
+        for(case_index=0;case_index<ARRAYSIZE(errors);++case_index) {
+            native_error=errors[case_index];
+            CHECK(!run16_frontend_scope_launch_native(scope,&start));
+            CHECK(!GetHandleInformation(diagnostic_target,&flags) && GetLastError()==ERROR_INVALID_HANDLE);
+            result=completed=99;
+            CHECK(run16_frontend_scope_wait_native(scope,&result,&completed)==native_error);
+            CHECK(completed==(DWORD)(native_error!=ERROR_PROCESS_ABORTED));
+            CHECK(result==(completed ? 37u : 0u));
+        }
+        native_mode=FALSE;
+        CHECK(GetProcessHandleCount(GetCurrentProcess(),&after) && after==before);
+        puts("PASS native receipt alone distinguishes target completion/final-I/O failure/unfinished failure; diagnostic reference closed before wait; no leaked handles");
+    }
     submit(1); /* Keep this channel live throughout the repeated short ones. */
     for (i=1;i<COUNT;++i) {
         HANDLE release,thread;

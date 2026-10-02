@@ -2,7 +2,7 @@
  * target on its own Console; the requester receives that actual process. */
 #include "execution.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
-#include "io.h"
+#include "interface/native_request_protocol.h"
 #include "console_state.h"
 #include "interface/native_launch.h"
 #include "interface/frontend_protocol.h"
@@ -122,7 +122,7 @@ static DWORD WINAPI serve(void *context)
     native_request_reply reply={NATIVE_REQUEST_VERSION,0,0};
     BYTE *payload=NULL;HANDLE target=NULL,remote=NULL,receipt=NULL,remote_receipt=NULL;DWORD error;
     BOOL bound=FALSE,broker_completed=FALSE;
-    error=ntw32_channel_transfer(request->pipe,request->sender,owner->stop,request->event,FALSE,&header,sizeof(header));
+    error=frontend_request_transfer(request->pipe,request->sender,owner->stop,request->event,FALSE,&header,sizeof(header));
     if(error)goto done;
     if(header.version==NATIVE_REQUEST_VERSION && !header.bytes) {
         reply.error=owner->io.begin ? owner->io.begin(owner->io.context,owner->stop) : ERROR_NOT_SUPPORTED;
@@ -130,7 +130,7 @@ static DWORD WINAPI serve(void *context)
             if(owner->io.release_launch)owner->io.release_launch(owner->io.context);
             reply.error=owner->io.end ? owner->io.end(owner->io.context) : ERROR_SUCCESS;
         }
-        error=ntw32_channel_transfer(request->pipe,request->sender,owner->stop,request->event,
+        error=frontend_request_transfer(request->pipe,request->sender,owner->stop,request->event,
             TRUE,&reply,sizeof(reply));
         goto done;
     }
@@ -141,7 +141,7 @@ static DWORD WINAPI serve(void *context)
         payload=HeapAlloc(GetProcessHeap(),0,header.bytes);
         if(!payload)reply.error=ERROR_NOT_ENOUGH_MEMORY;
         else {
-            error=ntw32_channel_transfer(request->pipe,request->sender,owner->stop,request->event,FALSE,payload,header.bytes);
+            error=frontend_request_transfer(request->pipe,request->sender,owner->stop,request->event,FALSE,payload,header.bytes);
             if(error)goto done;
             /* The client writes its whole request before reading the reply.
              * Consume that payload first, then return an explicit preflight
@@ -171,7 +171,7 @@ static DWORD WINAPI serve(void *context)
         }
     }
 reply_ready:
-    error=ntw32_channel_transfer(request->pipe,request->sender,owner->stop,request->event,TRUE,&reply,sizeof(reply));
+    error=frontend_request_transfer(request->pipe,request->sender,owner->stop,request->event,TRUE,&reply,sizeof(reply));
     if(error && remote) {
         HANDLE copy=NULL;
         /* An incomplete response cannot be consumed. Reclaim only our export
@@ -212,7 +212,7 @@ reply_ready:
                 goto done;
             }
             broker_completed=TRUE;
-            (void)ntw32_channel_transfer(request->pipe,request->sender,owner->stop,request->event,
+            (void)frontend_request_transfer(request->pipe,request->sender,owner->stop,request->event,
                 TRUE,&completion,sizeof(completion));
         }
     }

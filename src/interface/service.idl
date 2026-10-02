@@ -1,7 +1,7 @@
 import "wtypes.idl";
 [
     uuid(7d3e78bd-0472-4736-8797-e64e966d692e),
-    version(30.0),
+    version(31.0),
     pointer_default(unique)
 ]
 interface vdm_service
@@ -22,7 +22,10 @@ interface vdm_service
         [in] handle_t binding, [in] VDM_CONNECTION connection,
         [in, system_handle(sh_process)] HANDLE process,
         [in] unsigned long generation, [in] unsigned long request,
-        [out] unsigned long *exit_code);
+        [out] unsigned long *exit_code,
+        /* True only after this caller consumes a real target completion.
+         * Final I/O failure is separate from an unfinished worker failure. */
+        [out] unsigned long *target_completed);
     /* Original Check selects kind/task; the caller cannot choose an image,
      * command line, creation flags or a worker process to resume. */
     error_status_t StartVdmWorker(

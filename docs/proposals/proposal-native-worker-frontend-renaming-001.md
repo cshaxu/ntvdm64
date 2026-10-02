@@ -11,8 +11,8 @@ Names below are migration-normalized; they do not claim runtime acceptance.
 
 | Role | S2 intermediate owner/product | Final owner/product |
 | --- | --- | --- |
-| Resident native Windows worker; text owns hidden Console, GUI retains native windows under S7 | `src/ntw32-exe` / `ntw32.exe` | S6 worker identity: `src/ntvwm-exe` / `ntvwm.exe`. |
-| Visible Console/Window frontend, owns display/input/presentation routing | `src/ntkvm-exe` / `ntkvm.exe` | S8 reserved frontend identity: `src/ntcon-exe` / `ntcon.exe`. |
+| Resident native Windows worker; text owns hidden Console, GUI retains native windows under S8 | `src/ntw32-exe` / `ntw32.exe` | S6 worker identity: `src/ntvwm-exe` / `ntvwm.exe`. |
+| Visible Console/Window frontend, owns display/input/presentation routing | `src/ntkvm-exe` / `ntkvm.exe` | S9 reserved frontend identity: `src/ntcon-exe` / `ntcon.exe`. |
 
 The final eight files are run16.exe, ntsrv.exe, ntvdm.exe, ntvwm.exe,
 ntcon.exe (frontend only), ntmon.exe, WOW32.DLL and VDMREDIR.DLL.
@@ -79,12 +79,13 @@ are explicit bounded exceptions to this package's initial name-only policy.
 | S4 | Owner-added broker-centered launch/control migration, including authenticated Console takeover/return coordination; actual Console operations stay in NTKVM and worker/frontend I/O stays direct; no mirror edits. Remove replaced paths, test both worker kinds and publish a coherent eight-file package. |
 | S5 | After S4 delivery, architecture/code cleanup of owner-approved audit findings 1-5: consolidate duplicate control transport, clarify shared implementation ownership, remove launcher target completion dependence, clear NTKVM dead state and obsolete tests; preserve behavior and pass the full production gate. |
 | S6 | After S5 cleanup delivery, NTW32 -> NTVWM native worker/component migration. Name-only equivalence, consumer/build/test/package updates and coherent ntvwm.exe + ntkvm.exe eight-file publication; preserve existing behavior, Win32Record and kind values. No GUI routing implementation. |
-| S7 | After S6 naming delivery, native GUI routing/classification in NTVWM and service-held handles; default launcher returns on startup success. Preserve --wait/shared workers. Monitor/UNBOUND display belongs to the queue-head NTMON T candidate. |
-| S8 | frontend NTCON migration after S7 delivery; build/test/wiring/name checks and verified final eight-file publication. |
-| S9 | final ownership/semantic-diff and naming audit, indexes/authorities, clean committed/pushed delivery; owner decides T acceptance. |
+| S7 | After S6 naming delivery, convert interface into the bounded cross-component common static-library family, consolidate suitable project-added shared mechanisms and split NTSRV project-owned service implementation from original OpenNT carriers. Preserve mirror topology/control order and pass provenance, dependency and full production gates. |
+| S8 | After S7 common/service separation delivery, native GUI routing/classification in NTVWM and service-held handles; default launcher returns on startup success. Preserve --wait/shared workers. Monitor/UNBOUND display belongs to the queue-head NTMON T candidate. |
+| S9 | frontend NTCON migration after S8 delivery; build/test/wiring/name checks and verified final eight-file publication. |
+| S10 | final ownership/semantic-diff and naming audit, indexes/authorities, clean committed/pushed delivery; owner decides T acceptance. |
 
 Owner direction on 2026-10-02 adds lifecycle investigation before further
-renaming. Earlier S3/S4 migration labels in this proposal now refer to S8/S9
+renaming. Earlier S3/S4 migration labels in this proposal now refer to S9/S10
 after the owner-approved architecture, native-GUI and NTVWM naming insertions.
 Both run16 cmd and run16 command reportedly hang before any prompt after an
 apparent abnormal exit; NTMON reports Ready but no worker. Preserve the live
@@ -156,8 +157,29 @@ tests and the full production-P publication gate. Original mirrors, guest,
 shared lib, accepted polling, launch syntax and GUI behavior are unchanged.
 Console-list consolidation and the broader service-file split are excluded.
 S4 stays the only active packet until delivery; planned S5 does not excuse any
-unfinished S4 gate. S6 naming, S7 GUI routing, S8 frontend naming and S9 audit
+unfinished S4 gate. S6 naming, S8 GUI routing, S9 frontend naming and S10 audit
 follow sequentially. This planning update is not runtime or closure evidence.
+
+## S7 owner-approved common library and source separation
+
+After S6 naming delivery, transform interface into a bounded common static-library
+family: retain a declaration/IDL-only protocol submodule and consolidate
+audited cross-component project-added mechanics in explicitly owned modules.
+Keep worker-only mechanisms in worker-base and service/frontend/backend policy
+in the executable owner. No new executable or helper is authorized.
+The [S7 checklist](../etc/operations/t424-worker-frontend-renaming-plan.md#s7-common-library-and-service-source-separation)
+owns provenance, source/link migration, Console snapshot mechanics and tests.
+
+Classify base_service.c by source provenance, not its opennt directory name.
+Split only project-added NTSRV implementation into service-private modules;
+original OpenNT algorithms and selected mirror paths remain intact with minimal
+registered binding hooks. Original execution/completion may not move into
+common or worker-base. Record pinned-upstream comparisons and per-mirror diff
+accounting, wire-version effects, deleted duplicates and retained differences.
+S5 remains active. S6 naming precedes planned S7 common/service separation;
+S8 GUI, S9 frontend naming and S10 audit follow.
+This express bounded admission supersedes the previous generic-common ban
+for S7 only; it does not authorize an unrestricted utility/framework component.
 
 ## Subsequent owner-approved native GUI boundary
 
@@ -170,7 +192,7 @@ can then return the default launcher's startup result. NTSRV retains the
 authenticated GUI process handle after the worker releases this request and
 after run16 returns; it removes registration on actual process exit. The owner's
 final clarification assigns monitor/UNBOUND display to the queue-head
-[NTMON candidate](proposal-ntmon-console-worker-tree-001.md), not S4-S7.
+[NTMON candidate](proposal-ntmon-console-worker-tree-001.md), not S4-S8.
 The future view uses service registration only, never local enumeration.
 No Win16 per-task process handle is invented to imitate native GUI ownership.
 
@@ -185,7 +207,7 @@ observed descendant graph, scheduler, guest or mirror changes are admitted.
 The owner's later clarification retains S4 as the active migration, superseding
 the premature replanning conclusion and then-labelled S5 admission. Its open rows remain S4
 release requirements, listed in the working plan and CURRENT. S5 cleanup starts
-only after S4 delivery; naming is S6 and GUI routing is S7 after S6. No candidate publication or
+only after S4 delivery; naming is S6 and GUI routing is S8 after S6. No candidate publication or
 production P is claimed by these
 planning changes.
 
@@ -199,8 +221,8 @@ link and diff gates; every production P uses the complete runtime gate.
 Owner direction on 2026-10-02 inserts native worker naming before frontend
 naming. The subsequent naming-first reorder assigns NTW32 -> NTVWM to S6,
 after S5 cleanup delivery, to express the native Windows worker role symmetrically
-with NTVDM; S7 then implements unified native text/GUI routing. S8 retains
-NTKVM -> NTCON; final audit moves to S9. This is planning only: S4 stays active,
+with NTVDM; S7 then reorganizes common/service code and S8 implements unified native text/GUI routing. S9 retains
+NTKVM -> NTCON; final audit moves to S10. This is planning only: S4 stays active,
 and current production/source names remain NTW32 until the admitted S6 migration.
 Earlier NTW32 references describe S2-S4 inputs and delivered historical facts,
 not an alternative final worker name.
@@ -211,7 +233,7 @@ launch/package paths and relevant documentation. Audit provenance/referents
 before renaming; preserve original OpenNT/MVDM and Windows API identities,
 Win32Record, monitor kind values and imported KVM library names. No alias,
 additional worker implementation, helper, launch-syntax or lifecycle change.
-S7's GUI routing is not implemented or claimed by this name-only stage. Both worker
+S8's GUI routing is not implemented or claimed by this name-only stage. Both worker
 kinds continue to use existing interface/worker-base contracts and NTSRV-owned
 common consumer paths. Coherently manage any proven wire/endpoint compatibility
 effect rather than bumping an ABI for local spelling alone.
@@ -219,7 +241,7 @@ effect rather than bumping an ABI for local spelling alone.
 Apply the full production gate, including native GUI startup/explicit --wait,
 native text interaction/return, DOS/native nesting, lifecycle/isolation,
 Console17 + Window17 and retained WOW frontiers. S6 tests existing GUI behavior,
-not the unimplemented S7 route. Before S7, publish and hash
+not the unimplemented S8 route. Before S7, publish and hash
 verify the eight-file ntvwm.exe + ntkvm.exe intermediate set; remove the old
 ntw32.exe only after recoverable backup. Final acceptance below reads NTW32
 as the S2-S4 input identity and NTVWM as the post-S6 native worker identity.

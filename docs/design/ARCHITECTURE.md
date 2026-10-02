@@ -63,10 +63,35 @@ add a generic shared component, expand worker-base to nonworker consumers or
 relocate original execution. Detailed checklist and gates belong to the
 [T424 plan](../etc/operations/t424-worker-frontend-renaming-plan.md#s5-architecturecode-cleanup-checklist).
 
-### Native GUI registration — T424 S7 target
+### Common library and service separation — T424 S7 target
+
+After S6 naming delivery, the owner admits converting src/interface into src/common:
+a declaration/IDL-only protocol submodule plus narrowly scoped, separately
+selected shared implementation modules. Cross-component project-added transport,
+codec, authenticated client and Console-snapshot mechanics may be consolidated
+after provenance and full-contract review. This planned library is static,
+not another executable/helper or a general compatibility framework.
+Worker-only mechanisms remain worker-base; common has no dependency on EXEs
+or worker-base. Process resources, renderer, task/lifecycle authority and
+authorization policy retain their executable owner. Common instances and
+resource/locking/failure contracts must be explicit.
+
+NTSRV's large base_service.c is split by provenance and service responsibility,
+not merely file size. Original OpenNT/MVDM code remains in its upstream-relative
+mirror, preserving algorithms, ordering and minimal diff. Project-added service
+state, admission/retirement, native receipts and projections remain NTSRV-private,
+not common policy. The path/banner cannot substitute for an original-source
+ledger. The [S7 checklist](../etc/operations/t424-worker-frontend-renaming-plan.md#s7-common-library-and-service-source-separation)
+requires source/hash/block classification, mirror comparisons, duplicate removal,
+production link coverage and the full regression/publication gate.
+Until S7 implementation, interface remains the delivered declaration-only root.
+This bounded owner approval supersedes the blanket common-root prohibition
+for the stated purpose, not other ownership or mirror restrictions.
+
+### Native GUI registration — T424 S8 target
 
 The subsequent owner direction removes local run16 GUI creation from the target
-topology. Owner places S6 NTW32 -> NTVWM naming before this S7 implementation;
+topology. Owner places S6 NTW32 -> NTVWM naming before this S8 implementation;
 the rename alone does not deliver GUI routing. Run16 retains broad
 DOS/Win16/native family discovery and unchanged arguments; every native target
 is submitted to NTSRV and delivered to NTVWM. NTVWM decides the native GUI/CUI
@@ -75,8 +100,8 @@ creates the actual target and reports authenticated startup/binding success.
 NTSRV holds the registered GUI process handle independently of worker occupancy
 and retains native GUI registration until actual process exit. The owner's
 final clarification assigns monitor/UNBOUND display to the queue-head NTMON T
-candidate, not S4-S7. Its future view consumes service projection only.
-GUI routing/registration is a planned S7 target, not current runtime evidence
+candidate, not S4-S8. Its future view consumes service projection only.
+GUI routing/registration is a planned S8 target, not current runtime evidence
 or active S4 scope.
 
 Default GUI run16 returns on startup success, not window closure. Explicit
@@ -92,7 +117,7 @@ process, helper, Job observation or scheduler is introduced.
 
 The owner's later clarification keeps S4 active until centralization delivery;
 the premature replanning conclusion/then-labelled S5 admission is superseded. S4 open rows
-remain S4 requirements; S5 cleanup, S6 naming and S7 native GUI work follow.
+remain S4 requirements; S5 cleanup, S6 naming and S8 native GUI work follow.
 Monitor/UNBOUND display remains outside both stages.
 
 ### Broker-owned retirement — T424 S3 owner approval

@@ -474,7 +474,7 @@ static DWORD classify_missing_interface(RPC_BINDING_HANDLE binding)
     RPC_STATUS status,uuid_status;
     unsigned int index;
     DWORD result=RPC_S_SERVER_UNAVAILABLE;
-    status=RpcIfInqId(Client_vdm_service_v30_0_c_ifspec,&expected);
+    status=RpcIfInqId(Client_vdm_service_v31_0_c_ifspec,&expected);
     if (status) return status;
     status=RpcMgmtInqIfIds(binding,&interfaces);
     if (status) return status;
@@ -978,18 +978,19 @@ DWORD OpenNtBaseClientSubmitNativeRequest(HANDLE frontend,DWORD bytes,BYTE *payl
     }
     return error;
 }
-DWORD OpenNtBaseClientFinishNativeRequest(DWORD request,DWORD *exit_code)
+DWORD OpenNtBaseClientFinishNativeRequest(DWORD request,DWORD *exit_code,DWORD *target_completed)
 {
     DWORD error=ERROR_INVALID_STATE;
-    if(!exit_code || !request)return ERROR_INVALID_PARAMETER;
-    *exit_code=0;
+    if(!exit_code || !target_completed || !request)return ERROR_INVALID_PARAMETER;
+    *exit_code=*target_completed=0;
     if(!client.connection || !client.binding || !client.process)return error;
     RpcTryExcept {
         error=Client_FinishNativeRequest(client.binding,client.connection,client.process,
-            client.generation,request,exit_code);
+            client.generation,request,exit_code,target_completed);
     }
-    RpcExcept(1){error=RpcExceptionCode();}
+    RpcExcept(1){error=RpcExceptionCode();*exit_code=*target_completed=0;}
     RpcEndExcept
+    if(*target_completed>1) {*exit_code=*target_completed=0;return ERROR_INVALID_DATA;}
     return error;
 }
 DWORD OpenNtBaseClientStartVdmWorker(PCWSTR environment,DWORD characters,DWORD show,

@@ -128,7 +128,7 @@ static DWORD native_worker_failure(HANDLE worker,HANDLE capability,BOOL complete
     WCHAR image[MAX_PATH],command[MAX_PATH+16],directory[MAX_PATH];
     LPWCH environment=NULL;run16_native_start start={0};
     HANDLE changed=NULL,target=NULL,receipt=NULL,control=NULL;
-    DWORD request=0,error,result=0,wait;ULONGLONG deadline=GetTickCount64()+10000;
+    DWORD request=0,error,result=0,wait,target_completed=99;ULONGLONG deadline=GetTickCount64()+10000;
     error=OpenNtBaseClientWorkerStateChanged(&changed);if(error)return error;
     if(!GetEnvironmentVariableW(L"COMSPEC",image,ARRAYSIZE(image)) ||
         !GetCurrentDirectoryW(ARRAYSIZE(directory),directory)) {error=GetLastError();goto done;}
@@ -159,14 +159,19 @@ static DWORD native_worker_failure(HANDLE worker,HANDLE capability,BOOL complete
     if(WaitForSingleObject(control,5000)!=WAIT_OBJECT_0){error=ERROR_TIMEOUT;goto done;}
     /* The receipt is now broker-owned, not inferred from the killed process.
      * A wrong request cannot consume the latched result. */
-    error=OpenNtBaseClientNativeExitCode(request+1,&result);
-    if(error!=ERROR_NOT_FOUND){error=ERROR_INVALID_DATA;goto done;}
-    error=completed ? OpenNtBaseClientNativeExitCode(request,&result) :
-        run16_native_request_finish(request,&result);
-    if(completed ? error || result!=37 : error!=ERROR_PROCESS_ABORTED || result)
+    error=run16_native_request_finish(request+1,&result,&target_completed);
+    if(error!=ERROR_NOT_FOUND || target_completed || result){error=ERROR_INVALID_DATA;goto done;}
+    error=run16_native_request_finish(request,&result,&target_completed);
+    printf("native finish after worker rundown: status=%lu result=%lu target-completed=%lu\n",
+        error,result,target_completed);
+    /* The worker may have queued its final ACK before the injected death.
+     * Completed-first transport must accept that ACK; otherwise pipe/death
+     * failure is valid, but neither can erase the actual result/return grant. */
+    if(completed ? (error && error!=ERROR_BROKEN_PIPE && error!=ERROR_PROCESS_ABORTED) || result!=37 || target_completed!=TRUE :
+        error!=ERROR_PROCESS_ABORTED || result || target_completed)
         {error=ERROR_INVALID_DATA;goto done;}
-    error=OpenNtBaseClientNativeExitCode(request,&result);
-    if(error!=ERROR_NOT_FOUND){error=ERROR_INVALID_DATA;goto done;}
+    error=run16_native_request_finish(request,&result,&target_completed);
+    if(error!=ERROR_NOT_FOUND || target_completed || result){error=ERROR_INVALID_DATA;goto done;}
     puts(completed ?
         "PASS actual target result 37 retained across worker rundown; wrong receipt denied; result consumed once" :
         "PASS broker signals native worker failure 1067; wrong receipt denied; result consumed once; no dead-channel read");

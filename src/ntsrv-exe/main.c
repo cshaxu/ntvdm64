@@ -29,14 +29,14 @@ error_status_t Server_SubmitNativeRequest(handle_t binding,VDM_CONNECTION connec
         frontend,bytes,payload,target,receipt,request);
 }
 error_status_t Server_FinishNativeRequest(handle_t binding,VDM_CONNECTION connection,
-    HANDLE process,ULONG generation,ULONG request,ULONG *exit_code)
+    HANDLE process,ULONG generation,ULONG request,ULONG *exit_code,ULONG *target_completed)
 {
     DWORD pid,error;
-    if(!exit_code)return ERROR_INVALID_PARAMETER;
-    *exit_code=0;
+    if(!exit_code || !target_completed)return ERROR_INVALID_PARAMETER;
+    *exit_code=*target_completed=0;
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
     return error ? error : OpenNtBaseServiceFinishNativeRequest(connection,pid,generation,
-        request,exit_code);
+        request,exit_code,target_completed);
 }
 error_status_t Server_StartVdmWorker(handle_t binding,VDM_CONNECTION connection,
     HANDLE process,ULONG generation,ULONG characters,WCHAR *environment,
@@ -849,7 +849,7 @@ int main(void)
         (void)OpenNtBaseServiceStop(service);
         return (int)error;
     }
-    result=RpcServerRegisterIf3(Server_vdm_service_v30_0_s_ifspec,NULL,NULL,
+    result=RpcServerRegisterIf3(Server_vdm_service_v31_0_s_ifspec,NULL,NULL,
         RPC_IF_ALLOW_SECURE_ONLY | RPC_IF_ALLOW_LOCAL_ONLY,RPC_C_LISTEN_MAX_CALLS_DEFAULT,
         (unsigned)-1,authorize,NULL);
     if (!result) {
@@ -896,7 +896,7 @@ int main(void)
         if (result) basesrv_idle_fatal("RpcMgmtWaitServerListen",result);
     }
     {
-        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v30_0_s_ifspec,NULL,TRUE);
+        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v31_0_s_ifspec,NULL,TRUE);
         if (!result && cleanup) result=cleanup;
     }
     if (idle_timer) CloseHandle(idle_timer);
