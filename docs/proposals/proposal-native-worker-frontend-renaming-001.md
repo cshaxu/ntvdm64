@@ -12,7 +12,7 @@ Names below are migration-normalized; they do not claim runtime acceptance.
 | Role | S2 intermediate owner/product | Final owner/product |
 | --- | --- | --- |
 | Resident Win32 text worker, owns hidden Console and direct native targets | `src/ntw32-exe` / `ntw32.exe` | Same NTW32 worker identity. |
-| Visible Console/Window frontend, owns display/input/presentation routing | `src/ntkvm-exe` / `ntkvm.exe` | S5 reserved frontend identity: `src/ntcon-exe` / `ntcon.exe`. |
+| Visible Console/Window frontend, owns display/input/presentation routing | `src/ntkvm-exe` / `ntkvm.exe` | S6 reserved frontend identity: `src/ntcon-exe` / `ntcon.exe`. |
 
 The final eight files are run16.exe, ntsrv.exe, ntvdm.exe, ntw32.exe,
 ntcon.exe (frontend only), ntmon.exe, WOW32.DLL and VDMREDIR.DLL.
@@ -77,12 +77,13 @@ are explicit bounded exceptions to this package's initial name-only policy.
 | S2 | NTW32/Win32Record migration, complete-tree referent and original-name preservation gates, full production verification and intermediate eight-file publication. |
 | S3 | Owner-added abnormal-exit/re-launch lifecycle investigation and explicitly approved broker-owned retirement repair; highest-priority authenticated close, bounded startup admission, repeated-launch/failure/isolation tests and coherent publication. |
 | S4 | Owner-added broker-centered launch/control migration, including authenticated Console takeover/return coordination; actual Console operations stay in NTKVM and worker/frontend I/O stays direct; no mirror edits. Remove replaced paths, test both worker kinds and publish a coherent eight-file package. |
-| S5 | Former S4: frontend NTCON migration after S4 delivery; build/test/wiring/name checks and verified final eight-file publication. |
-| S6 | Former S5: final ownership/semantic-diff and naming audit, indexes/authorities, clean committed/pushed delivery; owner decides T acceptance. |
+| S5 | Owner-added native GUI routing/classification and UNBOUND projection; finish carried S4 centralization rows before release. NTW32 classifies GUI/text and creates native targets; NTSRV holds GUI handles beyond startup; default launcher returns on launch acknowledgement. Preserve --wait and shared text workers. |
+| S6 | Former S5: frontend NTCON migration after S5 delivery; build/test/wiring/name checks and verified final eight-file publication. |
+| S7 | Former S6: final ownership/semantic-diff and naming audit, indexes/authorities, clean committed/pushed delivery; owner decides T acceptance. |
 
 Owner direction on 2026-10-02 adds lifecycle investigation before further
-renaming. Earlier S3/S4 migration labels in this proposal now refer to S5/S6
-after the subsequent owner-approved architecture insertion.
+renaming. Earlier S3/S4 migration labels in this proposal now refer to S6/S7
+after the subsequent owner-approved architecture and native-GUI insertions.
 Both run16 cmd and run16 command reportedly hang before any prompt after an
 apparent abnormal exit; NTMON reports Ready but no worker. Preserve the live
 scene, distinguish a resident root from an unusable lease and investigate
@@ -135,6 +136,32 @@ The [S4 source-edge ledger](../etc/evidence/m0-t424-s4-broker-centered-launch-co
 defines migration rows and negative/runtime gates. Its initial audit is not
 implementation or publication evidence. Original numbered rename steps above
 are historical order; the S table is the current ordered working plan.
+
+## Subsequent owner-approved native GUI boundary
+
+Win32 GUI is no longer a local run16 CreateProcess exception in the target
+architecture: native requests go run16 -> NTSRV -> NTW32, and NTW32 owns the
+authoritative GUI/text classification before text frontend binding. This
+changes routing, not default GUI startup-only or explicit --wait semantics.
+NTW32 reports successful actual creation/binding/start to NTSRV; the service
+can then return the default launcher's startup result. NTSRV retains the
+authenticated GUI process handle after the worker releases this request and
+after run16 returns; it removes the UNBOUND projection on actual process exit.
+NTMON displays the service projection only, with no local process enumeration.
+No Win16 per-task process handle is invented to imitate native GUI ownership.
+
+Releasing a GUI request must not terminate the target or a worker that still
+serves CMD. Dedicated-carrier retirement is distinct from request release and
+remains broker-owned; the exact optional retirement policy awaits the owner's
+clarification. GUI segments do not propagate character frontend authority.
+Keep kind values DOS=0, Win16=1, Win32=2 and existing monitor hotkeys. No helper,
+observed descendant graph, scheduler, guest or mirror changes are admitted.
+
+S4 is concluded by owner-directed replanning, not production acceptance.
+Its retained undelivered rows are mandatory S5 prerequisites, listed in the
+working plan and CURRENT. No eight-file candidate has been published or a P
+claimed merely by this sequence change. Only verified S5 production delivery
+may establish the new baseline.
 
 An externally fixed project identifier or imported-original conflict requires
 review, not an alias. Original Console names already classified by S1 are

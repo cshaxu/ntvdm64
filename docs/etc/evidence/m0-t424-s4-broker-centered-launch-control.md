@@ -28,6 +28,24 @@ Source conclusions have high confidence for the named current paths. Runtime
 equivalence of the proposed migration remains unproved until the tests below
 run against its production implementation.
 
+## Owner-directed bounded replanning disposition
+
+The owner requests S4 conclusion and a new stage routing Win32 GUI through
+run16 -> NTSRV -> NTW32 with worker-side GUI/text classification and service-held
+GUI handles projected into NTMON UNBOUND. Source inspection still finds local
+`launch_gui` and PE subsystem selection in run16/main.c; NTMON currently has
+only worker snapshots, not an independent UNBOUND section. No runtime pass is
+claimed for that new route.
+
+S4 concludes as bounded replanning, not a delivered production P or completed
+architecture. Preserve the uncommitted candidate and recorded focused results.
+S5 inherits DOS/WOW service creation, native broker-only submission/preflight/
+final-status/parent-resume, removal of obsolete paths and fixtures, full
+regression and coherent publication. None becomes unplanned debt. O:/winnt
+remains S3; no commit/push/publication is represented by this disposition.
+The new S5 acceptance and worker-release question are recorded in the
+[working plan](../operations/t424-worker-frontend-renaming-plan.md).
+
 ## Current edges versus required edges
 
 | Edge | Current production purpose/source | Migration decision |
@@ -167,3 +185,230 @@ correctly rejected a missing evidence link inside the retained S3 closure
 section; the link was added, without weakening the gate. `git diff --check`
 passes. This documentation-only admission P does not require or claim a new
 build/test/deployment. No source, mirror, guest or published file was modified.
+
+## First implementation checkpoint — uncommitted candidate
+
+The admission facts above describe the documentation P, not the current
+candidate. Production migration has started. Protocol and RPC major are both
+30; MIDL regeneration and the hard-coded client/server interface references
+are synchronized. No mirror, guest or shared-library source changed.
+
+Implemented candidate subset:
+
+- NTSRV `StartFrontend` creates the exact sibling NTKVM suspended, records
+  its process/event grant before Resume, and authenticates its bootstrap reply.
+  Only the exact created process and inherited event objects can register its
+  root/Console lease. The authenticated actual launcher process, never the
+  service Console, is the AttachConsole target.
+- run16 no longer creates NTKVM or sends its return event. `ReturnFrontendConsole`
+  requests return through the service; NTKVM reports restoration via RPC.
+  `WaitFrontendConsoleRestored` waits on the service condition variable, not
+  the frontend process. The acknowledgement is retained for the individual
+  launcher lease, independently of a reusable root event reset.
+- Existing finite bootstrap transfer/restricted inheritance is reused. The
+  broker process capability adds only query-limited identity access to its
+  prior synchronize access, not terminate/duplicate-resource rights.
+- Existing scope/channel lifetime assertions remain. The bootstrap test
+  executable now selects the broker-owned fixture, preserving `--identity`,
+  five adversarial reply cases and the ten-second silent-peer timeout. Fake
+  providers are confined to an isolated build test package; production RPC
+  does not accept a caller-selected executable.
+
+Initial real bootstrap failed with pipe error 109; bounded process-exit
+attribution exposed access denied 5. Existing opt-in trace localized this to
+duplicating the authenticated broker handle with query access that its old
+wait-only grant did not contain. The minimal read-only grant correction
+resolved it; temporary stage/argument tracing was removed. These failed runs
+are retained, not counted as passes.
+
+Exact commands executed (PowerShell, from repository root):
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File tools/build/New-T310OriginalSoftpcNinja.ps1 -Architecture x86 -BuildRoot build/M0-T424/S2/r001 -NodeExecutable O:/.nvm/versions/node/v22.22.1/bin/node.exe
+cmd.exe /c build\M0-T424\S2\r001\run-ninja-parallel.cmd product-programs
+cmd.exe /c build\M0-T424\S2\r001\build-supplement.cmd
+cmd.exe /c build\M0-T424\S2\r001\run-ninja-parallel.cmd frontend-scope-lifetime-test.exe frontend-bootstrap-test.exe broker-frontend-bootstrap-test.exe
+build/M0-T424/S2/r001/frontend-scope-lifetime-test.exe
+$env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
+$repo=(Resolve-Path .).Path
+build/M0-T424/S2/r001/observer.exe (Join-Path $repo 'build/M0-T424/S2/r001/broker-frontend-bootstrap-test.exe') O:/winnt (Join-Path $repo 'build/M0-T424/S4/r001/broker-bootstrap-grant.txt') --observation-timeout-ms 20000 probe
+build/M0-T424/S2/r001/observer.exe (Join-Path $repo 'build/M0-T424/S2/r001/frontend-bootstrap-test.exe') O:/winnt (Join-Path $repo 'build/M0-T424/S4/r001/bootstrap-rejections.txt') --observation-timeout-ms 25000 --startup-rejections
+Remove-Item Env:MVDM_OBSERVER_PRIVATE_DESKTOP
+```
+
+Results: x86 product links and WOW32 relink exit 0; scope fixture passes all
+four marker groups; actual RPC bootstrap/parent/authentication/return/broker-loss
+probe exits 0. Five rejection cases exit 0 with errors 1306, 1306, 5, 109 and 5,
+respectively; each preserves local handle count and returns no capabilities.
+Reports and Console output are under build/M0-T424/S4/r001.
+The same observer command with `--startup-timeout`, a 20000ms observation
+bound and report `bootstrap-timeout.txt` also exits 0: the production ten-second
+deadline returns 1460, preserves local handle count and clears all returned
+capabilities. No test-owned service/frontend remains after cleanup.
+
+A coherent protocol-30 eight-file candidate was assembled under
+build/M0-T424/S4/r001/runtime using unchanged S3 guest/configuration copies.
+With this runtime mapped temporarily as Z:, isolated `run16 command.com /c ver`
+and `run16 cmd.exe /c ver` both exit 0 and display the actual DOS/native version.
+These are two focused output-gated smokes, not the Console17/Window17 matrix.
+Fixture-owned processes were cleaned up and Z: removed. O:/winnt was not
+modified, and no candidate publication, P delivery or S4 closure is claimed.
+
+Still open: service-created workers; broker-only native launch/final-status and
+parent-resume; removal of worker/root fallback waits; service ten-second
+workerless-root policy; old manually registered frontend fixture migration and
+unused old bootstrap test/API cleanup; same-root concurrency and generation
+negatives; full product/WOW regression and publication gates. Strict root
+creation grants intentionally require those old fixtures to use a real
+service-created root; no production test bypass is admitted.
+
+## Native creation and broker-owned grace checkpoint — uncommitted
+
+The first checkpoint's open-worker/grace rows above are superseded only for
+the following tested subset; S4 remains open.
+
+`StartNativeWorker` now selects a registered same-Console native worker or
+creates the exact same-package `ntw32.exe` in NTSRV through the existing
+reservation. The recovered startup transaction in
+`src/ntsrv-exe/transport/worker_spawn.c` keeps its temporary startup-only Job
+through Prepare/Resume and disarms it before successful handoff. It has no
+Job observer or target lifetime pairing and accepts no RPC-selected image.
+The native creation body in run16's scope is deleted. DOS/WOW still uses its
+old launcher startup transaction and remains an explicit migration row.
+
+NTSRV's existing event/timer loop now owns a cancellable ten-second deadline
+for workerless roots, not immediate S3 orphan retirement. A live associated
+worker clears that deadline. Last-worker loss starts a fresh grace; rechecks
+do not renew it. Legitimate authenticated startup is still bounded. NTKVM
+has no added timer, member poll or autonomous idle decision.
+
+Exact focused commands, using the previously recorded x86 cache:
+
+```powershell
+cmd.exe /c build\M0-T424\S2\r001\run-ninja-parallel.cmd product-programs broker-frontend-bootstrap-test.exe frontend-scope-lifetime-test.exe
+build/M0-T424/S2/r001/frontend-scope-lifetime-test.exe
+$repo=(Resolve-Path .).Path
+$env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
+build/M0-T424/S2/r001/observer.exe (Join-Path $repo 'build/M0-T424/S2/r001/broker-frontend-bootstrap-test.exe') O:/winnt (Join-Path $repo 'build/M0-T424/S4/r001/broker-worker-parent-grace.txt') --observation-timeout-ms 20000 probe
+build/M0-T424/S2/r001/observer.exe (Join-Path $repo 'build/M0-T424/S2/r001/broker-frontend-bootstrap-test.exe') O:/winnt (Join-Path $repo 'build/M0-T424/S4/r001/broker-workerless-grace.txt') --observation-timeout-ms 20000 --workerless-grace
+build/M0-T424/S2/r001/observer.exe (Join-Path $repo 'build/M0-T424/S2/r001/broker-frontend-bootstrap-test.exe') O:/winnt (Join-Path $repo 'build/M0-T424/S4/r001/broker-workerless-cancel.txt') --observation-timeout-ms 35000 --workerless-cancel
+Remove-Item Env:MVDM_OBSERVER_PRIVATE_DESKTOP
+cmd.exe /c build\M0-T424\S2\r001\build-supplement.cmd
+```
+
+All three actual process probes report exited/0 and their exact marker
+assertions. The parent probe confirms NTSRV created both NTKVM and NTW32,
+rejects a launcher trying to register itself as a root, and proves broker
+loss terminates both clients. The grace probe observes survival for eight
+seconds then service-requested exit. The cancellation probe observes survival
+past eleven seconds with a worker, kills only its own exact test worker, then
+observes a fresh ten-second root grace. Toolhelp parent enumeration is test
+evidence only; no production process enumeration was introduced.
+
+After assembling the coherent eight-file candidate under
+build/M0-T424/S4/r001/runtime and mapping only that runtime to Z:, this command
+passed with actual conventional-memory output at both DOS prompts, native VER,
+and the outer CMD's real exit 19:
+
+```powershell
+tests/observation/verify-frontend-relaunch.ps1 -Observer build/M0-T424/S2/r001/observer.exe -PackageRoot Z:/ -ReportPath (Join-Path $repo 'build/M0-T424/S4/r001/native-service-create-relaunch.txt')
+```
+
+Exact candidate-owned processes were cleaned up; a later explicit `subst Z: /d`
+removed the mapping after the command session handle was no longer present.
+These tests do not prove the full Console17/Window17/WOW gate. O:/winnt is
+unchanged. The subsequently built launcher change arms the existing
+authenticated, nonpolling broker-process watcher immediately at connection
+rather than after worker startup, removing four redundant call sites. It
+requires a new runtime comparison before any production delivery.
+
+Next required production work is still DOS/WOW service-created startup and
+copied, typed native submission/result/resume through NTSRV. The existing
+launcher-to-native-worker pipe, remote stream-handle exchange, root/worker
+fallback waits and obsolete manually registered-root fixtures remain open;
+their retention in this intermediate tree is not a final architecture claim.
+
+## Native failure receipt checkpoint — uncommitted
+
+The launcher watcher is armed at broker admission. Native completion now waits
+only on its service receipt; the old worker/root process fallback is removed
+from that wait. Before attempting the still-retained final presentation pipe,
+the client queries the broker result, so worker failure cannot block reading
+a reply from a dead worker. The direct submission/final-status/resume pipe is
+still an open migration row, not an accepted final edge.
+
+On native worker rundown, NTSRV preserves each existing receipt-bearing
+Win32Record on its authenticated launcher's existing record list. An unfinished
+record becomes a terminal infrastructure failure (1067, no invented target
+exit code); an already completed record retains its actual exit code. Records
+without a live launcher are deleted. No separate completion registry or
+single-slot result cache is introduced. Record transfer, receipt signalling,
+disconnect cleanup and result query share the existing service lock. Queries
+remain authenticated by launcher generation and request, consume only their
+own terminal record once, and do not count retained results as active tasks.
+Original DOS/WOW records and mirror source are unchanged.
+
+Affected x86 product links and the supplemental WOW32 link pass in the same
+recorded cache. `frontend-request-client-test.exe` passes its existing launch,
+reply rejection, final-presentation and resume assertions plus the new case:
+a broker 1067 result returns without reading an invalid presentation channel.
+`frontend-scope-lifetime-test.exe` retains all four existing resource/identity
+groups. The actual production client/provider probe is:
+
+```powershell
+cmd.exe /c build\M0-T424\S2\r001\run-ninja-parallel.cmd product-programs frontend-request-client-test.exe frontend-scope-lifetime-test.exe frontend-bootstrap-test.exe
+build/M0-T424/S2/r001/frontend-request-client-test.exe
+build/M0-T424/S2/r001/frontend-scope-lifetime-test.exe
+cmd.exe /c build\M0-T424\S2\r001\build-supplement.cmd
+$env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
+build/M0-T424/S2/r001/observer.exe (Join-Path $repo 'build/M0-T424/S2/r001/frontend-bootstrap-test.exe') O:/winnt (Join-Path $repo 'build/M0-T424/S4/r001/native-failure-retained-record.txt') --observation-timeout-ms 25000 --native-worker-failure
+Remove-Item Env:MVDM_OBSERVER_PRIVATE_DESKTOP
+```
+
+That probe reports exited/0 and explicitly proves: actual service-created
+worker and live CMD target, injected exact worker death, broker receipt wakes,
+wrong request cannot consume the result, correct request returns 1067 without
+dead-channel I/O, and a second query returns NOT_FOUND. Test-only process
+termination is not production policy. The fixture's executable is in build;
+using O:/winnt as its unchanged guest/root setting does not deploy any binary.
+
+The candidate eight-file package was refreshed under build/M0-T424/S4/r001/runtime.
+With only that package temporarily mapped to Z:, the following strict probes
+exercise the launcher watcher and result path. Four fault cases require the
+specific broker task failure 1067, not merely a nonzero exit. The frontend
+wait bound now covers the approved ten-second service grace rather than the
+old eight-second immediate-retirement expectation; no production Sleep or
+test success bypass is added.
+
+```powershell
+tests/observation/verify-broker-retirement.ps1 -Observer build/M0-T424/S2/r001/observer.exe -PackageRoot Z:/ -ProcessPackageRoot (Join-Path $repo 'build/M0-T424/S4/r001/runtime') -LogRoot (Join-Path $repo 'build/M0-T424/S4/r001') -LogPrefix retained-record-retirement
+tests/observation/verify-frontend-relaunch.ps1 -Observer build/M0-T424/S2/r001/observer.exe -PackageRoot Z:/ -ReportPath (Join-Path $repo 'build/M0-T424/S4/r001/retained-record-relaunch.txt')
+```
+
+The four latest fault cases pass. Same-outer-CMD relaunch also passes with
+both DOS MEM outputs, native VER and outer exit 19. Z: is removed after this
+run; no full Console17/Window17/WOW verdict, publication, commit or S4 closure
+follows from these focused checks. DOS/WOW
+service-created startup, copied broker-only native submission/final-status and
+parent-resume, stale fixture/API cleanup and full regression remain open.
+
+Additional result comparison: `--native-completed-worker-loss` runs a real
+CMD target exiting 37, waits for its broker completion, kills the exact worker
+and queries the result after actual process death. The result remains 37;
+wrong-request and duplicate-consumption negatives pass. Its runtime assertion
+does not establish the exact callback timing: preservation on worker rundown
+is additionally verified by the source ownership/lock review and the unfinished
+target's receipt test (which cannot wake before service failure handling).
+Final probe reports are `record-result-native-worker-failure.txt` and
+`record-result-native-completed-worker-loss.txt`, both exited/0 with their
+strict markers. Invoke the same observer command above with these fresh report
+names and the corresponding case argument.
+
+The earlier `retained-record-native-worker-failure.txt` is a retained test
+harness failure, not a product pass: adding SelectNativeWorker as a death
+observer returned INVALID_STATE (5023), because that stateful selection API
+is not a management query for a launcher already holding a reservation. The
+probe was corrected to wait on the exact test process and the service receipt,
+without changing production code or adding delays/polls. The failure log is
+not removed. Final governance/relative links and diff checks pass. Candidate
+test processes and Z: have been cleaned up; O:/winnt remains accepted S3.

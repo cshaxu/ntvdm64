@@ -47,6 +47,30 @@ closure and unrecoverable component faults remain separate failure boundaries.
 This target supersedes S3's immediate orphan retirement policy only upon
 implementation; S3 below describes the current published package.
 
+### Native GUI registration — T424 S5 target
+
+The subsequent owner direction removes local run16 GUI creation from the target
+topology. Run16 retains broad DOS/Win16/native family discovery and unchanged
+arguments; every native target is submitted to NTSRV and delivered to NTW32.
+NTW32 decides the native GUI/CUI subsystem before acquiring a text frontend,
+creates the actual target and reports authenticated startup/binding success.
+NTSRV holds the registered GUI process handle independently of worker occupancy
+and exposes it in an UNBOUND management projection until actual process exit.
+NTMON consumes that projection only. This is an admitted target, not current
+runtime evidence; the present monitor has no independent UNBOUND section.
+
+Default GUI run16 returns on startup success, not window closure. Explicit
+--wait keeps its actual completion/exit-code behavior via NTSRV. Releasing the
+GUI request cannot kill its target or a reused text worker; dedicated-carrier
+retirement is a separate broker decision, not an implicit local cleanup rule.
+GUI-only segments acquire no character frontend and do not propagate its
+capability. Existing Win16 startup semantics remain unchanged; a WOW task must
+not be represented as an invented per-task Windows process handle. No new
+process, helper, Job observation or scheduler is introduced.
+
+S4's unfinished centralization rows carry into S5 without capability claims;
+its bounded replanning conclusion is not architecture or publication acceptance.
+
 ### Broker-owned retirement — T424 S3 owner approval
 
 NTSRV owns orderly frontend/worker retirement. With no associated worker and
