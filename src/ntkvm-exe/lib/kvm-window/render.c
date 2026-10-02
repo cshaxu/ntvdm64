@@ -5,7 +5,7 @@ lib_bool kvm_window_frame_size(const kvm_window_frame *frame, lib_u32 *width, li
     if (kvm_window_frame_validate(frame) != LIB_STATUS_OK || !width || !height) return LIB_FALSE;
     *width = frame->graphics ? frame->image.width : frame->text.base.text_columns * 8u;
     *height = frame->graphics ? frame->image.height : frame->text.base.text_rows *
-        (frame->text.base.font_height != 0u ? frame->text.base.font_height : KVM_WINDOW_FONT_HEIGHT);
+        (frame->text.base.font_height != 0u ? frame->text.base.font_height : KVM_WINDOW_DEFAULT_FONT_HEIGHT);
     return LIB_TRUE;
 }
 
@@ -25,7 +25,7 @@ lib_bool kvm_window_render_frame(const kvm_window_frame *frame, lib_u32 *pixels,
 {
     kvm_window_rect damage = {(lib_i32)width, (lib_i32)height, 0, 0};
     lib_u32 row;
-    lib_u32 frame_width, frame_height, cell_height = KVM_WINDOW_FONT_HEIGHT;
+    lib_u32 frame_width, frame_height, cell_height = KVM_WINDOW_DEFAULT_FONT_HEIGHT;
 
     if (!pixels || !valid || !changed ||
         !kvm_window_frame_size(frame, &frame_width, &frame_height) ||
@@ -49,6 +49,9 @@ lib_bool kvm_window_render_frame(const kvm_window_frame *frame, lib_u32 *pixels,
                 const kvm_text_cell *cell = &cells[column];
                 const lib_u8 *font = cell->glyph_bank ? text->secondary_font : text->font;
                 lib_u8 bits = font[(lib_size)cell->glyph_index * KVM_WINDOW_FONT_HEIGHT + row % cell_height];
+                if (text->styles[(row / cell_height) * KVM_TEXT_COLUMNS + column] &
+                    KVM_WINDOW_TEXT_UNDERLINE && row % cell_height == cell_height - 1u)
+                    bits = 0xffu;
                 lib_u32 bit;
                 for (bit = 0u; bit < 8u; ++bit) {
                     lib_u32 x = column * 8u + bit;

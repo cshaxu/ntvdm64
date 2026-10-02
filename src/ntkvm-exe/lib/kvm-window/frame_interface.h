@@ -7,13 +7,19 @@
 #define KVM_WINDOW_GRAPHICS_MAX_HEIGHT 768u
 #define KVM_WINDOW_GRAPHICS_MAX_PIXELS (KVM_WINDOW_GRAPHICS_MAX_WIDTH * KVM_WINDOW_GRAPHICS_MAX_HEIGHT)
 #define KVM_WINDOW_GRAPHICS_PALETTE_ENTRIES 256u
-#define KVM_WINDOW_FONT_HEIGHT 16u
+#define KVM_WINDOW_DEFAULT_FONT_HEIGHT 16u
+#define KVM_WINDOW_FONT_HEIGHT 32u
 #define KVM_WINDOW_FONT_GLYPHS 256u
+#define KVM_WINDOW_TEXT_UNDERLINE 1u
 
 typedef struct kvm_window_text_frame {
     kvm_text_frame base;
     lib_u8 font[KVM_WINDOW_FONT_GLYPHS * KVM_WINDOW_FONT_HEIGHT];
     lib_u8 secondary_font[KVM_WINDOW_FONT_GLYPHS * KVM_WINDOW_FONT_HEIGHT];
+    lib_u8 styles[KVM_TEXT_COLUMNS * KVM_TEXT_ROWS];
+    lib_u8 secondary_cursor_top;
+    lib_u8 secondary_cursor_bottom;
+    lib_bool secondary_cursor_visible;
 } kvm_window_text_frame;
 
 typedef struct kvm_window_graphics_frame {
@@ -51,8 +57,13 @@ static inline lib_status kvm_window_frame_validate(const kvm_window_frame *frame
     }
     status = kvm_text_frame_validate(&frame->text.base);
     if (status != LIB_STATUS_OK) return status;
-    return frame->text.base.font_height > KVM_WINDOW_FONT_HEIGHT ?
-        LIB_STATUS_UNSUPPORTED : LIB_STATUS_OK;
+    if (frame->text.base.font_height > KVM_WINDOW_FONT_HEIGHT)
+        return LIB_STATUS_UNSUPPORTED;
+    for (lib_size row = 0u; row < frame->text.base.text_rows; ++row)
+        for (lib_size column = 0u; column < frame->text.base.text_columns; ++column)
+            if (frame->text.styles[row * KVM_TEXT_COLUMNS + column] &
+                ~KVM_WINDOW_TEXT_UNDERLINE) return LIB_STATUS_INVALID_ARGUMENT;
+    return LIB_STATUS_OK;
 }
 
 /* Call only after validation. No inactive union arm or pixel tail is copied. */

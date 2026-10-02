@@ -278,13 +278,14 @@ static void win32_window_resize_client(lib_win32_hwnd window,
 }
 
 static lib_bool win32_window_cursor_rect(lib_win32_hwnd window,
-    const kvm_win32_window_context *context, lib_win32_rect *cursor)
+    const kvm_win32_window_context *context, lib_u32 index,lib_win32_rect *cursor)
 {
     kvm_window_rect display;
     kvm_window_rect result;
     if (!window || !context || !cursor || !win32_window_display_rect(context,
             context->surface_width, context->surface_height, &display)) return LIB_FALSE;
-    if (!kvm_window_cursor_rect(&context->frame, &display, &result)) return LIB_FALSE;
+    if (!(index ? kvm_window_secondary_cursor_rect(&context->frame,&display,&result) :
+        kvm_window_cursor_rect(&context->frame,&display,&result))) return LIB_FALSE;
     kvm_win32_rect_store(cursor, &result);
     return LIB_TRUE;
 }
@@ -302,9 +303,20 @@ static lib_bool win32_window_paint(lib_win32_hwnd window, kvm_win32_window_conte
         display.bottom - display.top, context->surface_dc, 0, 0,
         (lib_i32)context->surface_width, (lib_i32)context->surface_height, LIB_WIN32_SRCCOPY)) return LIB_FALSE;
     if (context->cursor_blink_visible) {
-        lib_win32_rect cursor;
-        if (win32_window_cursor_rect(window, context, &cursor))
-            return lib_win32_invert_rect(dc, &cursor) != 0;
+        lib_win32_rect cursors[2];lib_u32 index,count=0;
+        for(index=0;index<2u;++index)
+            if(win32_window_cursor_rect(window,context,index,&cursors[count]))++count;
+        /* Both original cursor ranges address the same character cell.
+         * Merge overlap before inversion so it never cancels itself. */
+        if(count==2 && cursors[0].left==cursors[1].left &&
+            cursors[0].right==cursors[1].right &&
+            cursors[0].top<=cursors[1].bottom && cursors[1].top<=cursors[0].bottom) {
+            if(cursors[1].top<cursors[0].top)cursors[0].top=cursors[1].top;
+            if(cursors[1].bottom>cursors[0].bottom)cursors[0].bottom=cursors[1].bottom;
+            count=1;
+        }
+        for(index=0;index<count;++index)
+            if(!lib_win32_invert_rect(dc,&cursors[index]))return LIB_FALSE;
     }
     return LIB_TRUE;
 }
@@ -321,6 +333,7 @@ static void win32_window_advance_cursor_blink(lib_win32_hwnd window,
     kvm_win32_window_context *context)
 {
     lib_win32_rect cursor;
+    lib_u32 index;
     lib_win32_dword now = lib_win32_get_tick_count();
     lib_win32_dword periods;
 
@@ -328,15 +341,17 @@ static void win32_window_advance_cursor_blink(lib_win32_hwnd window,
      * also prevent an old tick from advancing a newly unfrozen phase early. */
     if (!win32_window_accepting_input(context) || context->frozen ||
         kvm_window_frame_validate(&context->frame) != LIB_STATUS_OK || context->frame.graphics ||
-        !context->frame.text.base.cursor_visible ||
+        (!context->frame.text.base.cursor_visible &&
+            !context->frame.text.secondary_cursor_visible) ||
         (lib_win32_long)(now - context->cursor_blink_due) < 0)
         return;
     periods = (now - context->cursor_blink_due) / WIN32_WINDOW_CURSOR_BLINK_INTERVAL_MS + 1u;
     if ((periods & 1u) != 0u)
         context->cursor_blink_visible = context->cursor_blink_visible == LIB_FALSE;
     context->cursor_blink_due += periods * WIN32_WINDOW_CURSOR_BLINK_INTERVAL_MS;
-    if (win32_window_cursor_rect(window, context, &cursor))
-        (void)win32_window_invalidate(window, context, &cursor);
+    for(index=0;index<2u;++index)
+        if(win32_window_cursor_rect(window,context,index,&cursor))
+            (void)win32_window_invalidate(window,context,&cursor);
 }
 
 static lib_i32 win32_window_transition(kvm_win32_window_context *context,
@@ -470,10 +485,13 @@ static void win32_window_consume_frame(lib_win32_hwnd window,
 {
     lib_u32 width;
     lib_u32 height;
-    lib_win32_rect old_cursor = {0}, new_cursor = {0};
-    lib_bool old_visible = context->cursor_blink_visible &&
-        win32_window_cursor_rect(window, context, &old_cursor);
-    lib_bool new_visible;
+    lib_win32_rect old_cursor[2] = {{0},{0}},new_cursor[2] = {{0},{0}};
+    lib_bool old_visible[2] = {0},new_visible[2] = {0};
+    lib_u32 index;
+
+    if(context->cursor_blink_visible)
+        for(index=0;index<2u;++index)
+            old_visible[index]=win32_window_cursor_rect(window,context,index,&old_cursor[index]);
 
     if (!win32_window_accepting_input(context) ||
         !kvm_component_mailboxes_capture_frame(&context->component->base.mailboxes,
@@ -500,13 +518,17 @@ static void win32_window_consume_frame(lib_win32_hwnd window,
             if (!win32_window_invalidate(window, context, &target)) return;
         }
     }
-    new_visible = context->cursor_blink_visible &&
-        win32_window_cursor_rect(window, context, &new_cursor);
-    if (old_visible != new_visible ||
-        (old_visible && (old_cursor.left != new_cursor.left || old_cursor.top != new_cursor.top ||
-            old_cursor.right != new_cursor.right || old_cursor.bottom != new_cursor.bottom))) {
-        if (old_visible && !win32_window_invalidate(window, context, &old_cursor)) return;
-        if (new_visible && !win32_window_invalidate(window, context, &new_cursor)) return;
+    for(index=0;index<2u;++index) {
+        new_visible[index]=context->cursor_blink_visible &&
+            win32_window_cursor_rect(window,context,index,&new_cursor[index]);
+        if(old_visible[index]!=new_visible[index] ||
+            (old_visible[index] && (old_cursor[index].left!=new_cursor[index].left ||
+                old_cursor[index].top!=new_cursor[index].top ||
+                old_cursor[index].right!=new_cursor[index].right ||
+                old_cursor[index].bottom!=new_cursor[index].bottom))) {
+            if(old_visible[index] && !win32_window_invalidate(window,context,&old_cursor[index]))return;
+            if(new_visible[index] && !win32_window_invalidate(window,context,&new_cursor[index]))return;
+        }
     }
     kvm_component_mailboxes_acknowledge_frame(&context->component->base.mailboxes,
         context->displayed_sequence);

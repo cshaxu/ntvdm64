@@ -29,21 +29,6 @@ static DWORD frontend_window_native_frame_pointer(const run16_native_frame_info 
     if(error)return error;
     video.pixels=payload;video.published_serial=1;
     error=frontend_window_dos_frame(&video,frame);
-    if(!error && !pointer && !frame->graphics) {
-        kvm_window_text_frame *fonts=HeapAlloc(GetProcessHeap(),0,sizeof(*fonts));
-        frontend_text_raster *scratch=HeapAlloc(GetProcessHeap(),0,sizeof(*scratch));
-        if(!fonts || !scratch)error=ERROR_NOT_ENOUGH_MEMORY;
-        else {
-            unsigned row,columns=frame->text.base.text_columns,rows=frame->text.base.text_rows;
-            *fonts=frame->text;
-            for(row=0;row<rows;++row)memmove(fonts->base.cells+row*columns,
-                frame->text.base.cells+row*KVM_TEXT_COLUMNS,columns*sizeof(kvm_text_cell));
-            if(!frontend_text_frame_rasterize(scratch,fonts,fonts->base.cells,
-                columns*rows,NULL,TRUE,frame))error=GetLastError();
-        }
-        if(scratch)HeapFree(GetProcessHeap(),0,scratch);
-        if(fonts)HeapFree(GetProcessHeap(),0,fonts);
-    }
     HeapFree(GetProcessHeap(),0,payload);
     if(error)frame->valid=0;
     return error;
@@ -53,6 +38,18 @@ static DWORD frontend_window_native_frame(const run16_native_frame_info *info,
 { return frontend_window_native_frame_pointer(info,cells,count,NULL,frame); }
 
 #define CHECK(x) do { if (!(x)) { fprintf(stderr, "line %d: %s\n", __LINE__, #x); return 1; } } while (0)
+
+static lib_u32 *text_pixels(const kvm_window_frame *frame,lib_u32 *width,lib_u32 *height)
+{
+    lib_u32 *pixels;lib_bool valid=LIB_FALSE;kvm_window_rect changed;
+    if(!kvm_window_frame_size(frame,width,height))return NULL;
+    pixels=calloc((size_t)*width**height,sizeof(*pixels));
+    if(!pixels)return NULL;
+    if(!kvm_window_render_frame(frame,pixels,*width,*height,&valid,&changed)) {
+        free(pixels);return NULL;
+    }
+    return pixels;
+}
 
 typedef struct input_count { unsigned hotkeys, keys; } input_count;
 
@@ -83,6 +80,7 @@ static int native_unicode_bounds(kvm_window_frame *frame)
         run16_native_frame_info info = {0};
         CHAR_INFO cells[4], original[4];
         unsigned column, x, y, ink = 0, span = (test==1 || test==2) ? 2 : 1;
+        lib_u32 width,height,*pixels;
         info.screen.dwSize.X = 4; info.screen.dwSize.Y = 1;
         info.screen.srWindow.Right = 3;
         info.screen.ColorTable[7] = RGB(255, 255, 255);
@@ -99,10 +97,10 @@ static int native_unicode_bounds(kvm_window_frame *frame)
         memcpy(original, cells, sizeof(cells));
         CHECK(frontend_window_native_frame(&info, cells, 4, frame) == ERROR_SUCCESS);
         CHECK(!memcmp(cells, original, sizeof(cells)));
-        CHECK(frame->valid && frame->graphics && frame->image.width == 32 &&
-            frame->image.height == FRONTEND_NATIVE_CELL_HEIGHT);
-        for (y = 0; y < frame->image.height; ++y) for (x = 0; x < 32; ++x) {
-            DWORD rgb = frame->image.palette[frame->image.pixels[y * 32 + x]];
+        CHECK(frame->valid && !frame->graphics);
+        pixels=text_pixels(frame,&width,&height);CHECK(pixels && width==32 && height==14);
+        for (y = 0; y < height; ++y) for (x = 0; x < 32; ++x) {
+            DWORD rgb = pixels[y * width + x];
             unsigned glyph=test==0 ? 0 : test==3 ? 2 : 1;
             BOOL set=x>=8 && x<16 && (expected[glyph][y]&(0x80>>(x-8)));
             CHECK(rgb==(set ? 0xffffffu : 0));
@@ -110,6 +108,7 @@ static int native_unicode_bounds(kvm_window_frame *frame)
             if (x >= 8 && x < (1 + span) * 8) ink += rgb != 0;
             else CHECK(rgb == 0);
         }
+        free(pixels);
         CHECK(ink != 0);
         printf("PASS native Unicode carrier: %s has ink within %u cells; source unchanged\n",
             names[test], span);
@@ -121,6 +120,7 @@ static int native_unicode_bounds(kvm_window_frame *frame)
 static int native_style_colors(kvm_window_frame *frame)
 {
     run16_native_frame_info info={0};CHAR_INFO cells[4]={0};unsigned i;
+    lib_u32 width,height,*pixels;
     info.screen.dwSize=(COORD){4,1};info.screen.srWindow.Right=3;
     info.screen.ColorTable[7]=RGB(10,20,30);info.screen.ColorTable[15]=RGB(40,50,60);
     info.cursor.dwSize=25;
@@ -129,10 +129,13 @@ static int native_style_colors(kvm_window_frame *frame)
         cells[i].Attributes=(i<2 ? 7 : 15)|((i&1) ? COMMON_LVB_UNDERSCORE : 0);
     }
     CHECK(!frontend_window_native_frame(&info,cells,4,frame));
+    CHECK(!frame->graphics);
+    pixels=text_pixels(frame,&width,&height);CHECK(pixels && width==32 && height==14);
     for(i=0;i<4;++i) {
-        DWORD rgb=frame->image.palette[frame->image.pixels[13*32+i*8]];
+        DWORD rgb=pixels[13*width+i*8];
         CHECK(rgb==(!(i&1) ? 0 : i<2 ? 0x0a141e : 0x28323c));
     }
+    free(pixels);
     puts("PASS shared style byte: underline is independent of foreground intensity");
     return 0;
 }
@@ -140,7 +143,7 @@ static int native_style_colors(kvm_window_frame *frame)
 int main(void)
 {
     kvm_window_frame *frame = calloc(1, sizeof(*frame));
-    lib_u32 *pixels = calloc(640u * 800u, sizeof(*pixels));
+    lib_u32 *pixels = calloc(1280u * 3072u, sizeof(*pixels));
     lib_u32 width, height;
     lib_bool valid = LIB_FALSE;
     kvm_window_rect changed = {0};
@@ -181,10 +184,10 @@ int main(void)
     frame->text.base.text_rows = 50;
     frame->text.base.font_height = 8;
     frame->text.base.text_palette[1] = 0x123456;
-    frame->text.base.cells[49 * 80 + 79].glyph_index = 65;
-    frame->text.base.cells[49 * 80 + 79].glyph_bank = 1;
-    frame->text.base.cells[49 * 80 + 79].foreground = 1;
-    frame->text.secondary_font[65 * 16 + 7] = 1;
+    frame->text.base.cells[49 * KVM_TEXT_COLUMNS + 79].glyph_index = 65;
+    frame->text.base.cells[49 * KVM_TEXT_COLUMNS + 79].glyph_bank = 1;
+    frame->text.base.cells[49 * KVM_TEXT_COLUMNS + 79].foreground = 1;
+    frame->text.secondary_font[65 * KVM_WINDOW_FONT_HEIGHT + 7] = 1;
     CHECK(kvm_window_frame_validate(frame) == LIB_STATUS_OK);
     CHECK(kvm_window_frame_size(frame, &width, &height) && width == 640 && height == 400);
     CHECK(kvm_window_render_frame(frame, pixels, width, height, &valid, &changed));
@@ -192,7 +195,7 @@ int main(void)
     CHECK(!kvm_window_render_frame(frame, pixels, width, height, &valid, &changed));
     frame->text.base.text_rows = 43;
     CHECK(kvm_window_frame_size(frame, &width, &height) && height == 344);
-    frame->text.base.text_rows = 51;
+    frame->text.base.text_rows = 97;
     CHECK(kvm_window_frame_validate(frame) == LIB_STATUS_UNSUPPORTED);
     memset(frame, 0, sizeof(*frame));
     frame->valid = frame->graphics = LIB_TRUE;
@@ -273,8 +276,10 @@ int main(void)
         payload[sizeof(*style)]=65;payload[sizeof(*style)+1]=9;
         CHECK(!run16_console_video_begin(&video,4,&text));
         CHECK(!run16_console_video_data(&video,4,0,payload,text.bytes));
-        CHECK(!frontend_window_dos_frame(&video,frame) && frame->graphics);
-        CHECK(frame->image.height==500 && frame->image.pixels[19*640+7]==9);
+        CHECK(!frontend_window_dos_frame(&video,frame) && !frame->graphics);
+        valid=LIB_FALSE;
+        CHECK(kvm_window_render_frame(frame,pixels,640,500,&valid,&changed));
+        CHECK(pixels[19*640+7]==0x123456);
         --text.bytes;
         CHECK(run16_console_video_begin(&video,5,&text)==ERROR_INVALID_DATA);
         /* Text transport is not subject to the 768-line DIB limit. The
@@ -326,17 +331,20 @@ int main(void)
             const lib_u8 *font=mapped.glyph_bank ? frame->text.secondary_font : frame->text.font;
             CHECK(mapped.foreground==7 && mapped.background==0);
             for(unsigned line=0;line<16;++line)
-                CHECK(font[mapped.glyph_index*16+line]==
-                    (cell>=256 && line==15 ? 255 : (BYTE)(cell%256+line)));
+                CHECK(font[mapped.glyph_index*KVM_WINDOW_FONT_HEIGHT+line]==
+                    (BYTE)(cell%256+line));
+            CHECK(frame->text.styles[(cell/80)*KVM_TEXT_COLUMNS+cell%80]==
+                (cell>=256 ? CONSOLE_TEXT_UNDERLINE : 0));
         }
-        /* No silent style loss if a dual-font page needs a 513th variant. */
+        /* Styles are stored per cell, so a 513th distinct glyph/style
+         * combination no longer exhausts the two source font banks. */
         payload[sizeof(*style)+512*3+1]=15;
         CHECK(!run16_console_video_begin(&video,3,&text));
         CHECK(!run16_console_video_data(&video,3,0,payload,text.bytes));
-        CHECK(frontend_window_dos_frame(&video,frame)==ERROR_NOT_SUPPORTED && !frame->valid);
+        CHECK(!frontend_window_dos_frame(&video,frame) && !frame->graphics);
         CHECK(style->fonts[0][0][15]==15 && style->fonts[1][0][15]==16);
         free(payload);run16_console_video_dispose(&video);
-        puts("PASS copied DOS text: complete-frame publication, 80x50 dual font, tall glyph fallback and malformed frame retention");
+        puts("PASS copied DOS text: complete-frame publication, 80x50 dual font, tall glyph text and malformed frame retention");
     }
     native_cells = calloc(5001u * 300u, sizeof(*native_cells));
     CHECK(native_cells != NULL);
@@ -349,13 +357,15 @@ int main(void)
     native_cells[5001 * 299 + 5000].Char.UnicodeChar = L' ';
     native_cells[5001 * 299 + 5000].Attributes = 0x23 | COMMON_LVB_UNDERSCORE;
     CHECK(frontend_window_native_frame(&native, native_cells, 5001u * 300u, frame) == ERROR_SUCCESS);
-    CHECK(frame->image.width == 8 && frame->image.height == 14);
-    CHECK(frame->image.palette[frame->image.pixels[0]] == 0x050a0f);
-    CHECK(frame->image.palette[frame->image.pixels[13 * 8]] == 0x151617);
+    CHECK(!frame->graphics && frame->text.base.text_columns==1 && frame->text.base.text_rows==1);
+    valid=LIB_FALSE;
+    CHECK(kvm_window_render_frame(frame,pixels,8,14,&valid,&changed));
+    CHECK(pixels[0] == 0x050a0f && pixels[13*8] == 0x151617);
     native.screen.dwCursorPosition.X = 5000; native.screen.dwCursorPosition.Y = 299;
     native.cursor.bVisible = TRUE;
     CHECK(frontend_window_native_frame(&native, native_cells, 5001u * 300u, frame) == ERROR_SUCCESS);
-    CHECK(frame->image.palette[frame->image.pixels[13 * 8]] == (0x151617 ^ 0xffffff));
+    CHECK(!frame->graphics && frame->text.base.cursor_visible);
+    CHECK(frame->text.base.cursor_top==10 && frame->text.base.cursor_bottom==13);
     CHECK(frontend_window_native_frame(&native, native_cells, 1, frame) == ERROR_INVALID_DATA && !frame->valid);
     /* Large backing buffers and large visible viewports are distinct. */
     native.cursor.bVisible = FALSE;
@@ -365,16 +375,61 @@ int main(void)
     native_cells[5001 * 53 + 159].Char.UnicodeChar = L' ';
     native_cells[5001 * 53 + 159].Attributes = 0x23 | COMMON_LVB_UNDERSCORE;
     CHECK(frontend_window_native_frame(&native, native_cells, 5001u * 300u, frame) == ERROR_SUCCESS);
-    CHECK(frame->valid && frame->image.width == 1280 && frame->image.height == 756);
-    CHECK(frame->image.palette[frame->image.pixels[755 * 1280 + 1279]] == 0x151617);
+    CHECK(frame->valid && !frame->graphics && frame->text.base.text_columns==160 &&
+        frame->text.base.text_rows==54);
+    valid=LIB_FALSE;
+    CHECK(kvm_window_render_frame(frame,pixels,1280,756,&valid,&changed));
+    CHECK(pixels[755 * 1280 + 1279] == 0x151617);
+    native.screen.srWindow.Right=119;native.screen.srWindow.Bottom=29;
+    native.screen.dwCursorPosition=(COORD){4,2};native.cursor.bVisible=TRUE;
+    CHECK(frontend_window_native_frame(&native,native_cells,5001u*300u,frame)==ERROR_SUCCESS);
+    CHECK(!frame->graphics && frame->text.base.text_columns==120 &&
+        frame->text.base.text_rows==30 && frame->text.base.cursor_visible);
+    {
+        kvm_window_rect display={0,0,960,420},cursor_rect;
+        CHECK(kvm_window_cursor_rect(frame,&display,&cursor_rect));
+        CHECK(cursor_rect.left==32 && cursor_rect.right==40 &&
+            cursor_rect.bottom>cursor_rect.top);
+    }
+    native.screen.srWindow.Right=159;native.screen.srWindow.Bottom=95;
+    native.cursor.bVisible=FALSE;
+    CHECK(frontend_window_native_frame(&native,native_cells,5001u*300u,frame)==ERROR_SUCCESS);
+    CHECK(!frame->graphics && frame->text.base.text_columns==160 &&
+        frame->text.base.text_rows==96);
     native.screen.srWindow.Right = 160;
     CHECK(frontend_window_native_frame(&native, native_cells, 5001u * 300u, frame) == ERROR_NOT_SUPPORTED && !frame->valid);
     native.screen.srWindow.Right = 159;
-    native.screen.srWindow.Bottom = 54;
+    native.screen.srWindow.Bottom = 96;
     CHECK(frontend_window_native_frame(&native, native_cells, 5001u * 300u, frame) == ERROR_NOT_SUPPORTED && !frame->valid);
-    /* This is the library transport boundary, not proof of oversized Window
-     * support. Never mask it by reducing the source font or cropping cells. */
-    puts("PASS nominal native raster; oversized Window transport rejected without font shrinking");
+    {
+        console_video_description text={120,30,360,0,0,{0},CONSOLE_VIDEO_TEXT_FRAME};
+        console_text_style *style;BYTE *payload;
+        kvm_window_rect display={0,0,960,960},cursor_a,cursor_b;
+        text.bytes=sizeof(console_text_style)+text.stride*text.height;
+        payload=calloc(1,text.bytes);CHECK(payload);
+        style=(console_text_style *)payload;style->font_height=32;
+        style->cursor_column=1;style->cursor_row=1;style->cursor_visible=TRUE;
+        style->cursor_start=30;style->cursor_height=2;
+        style->cursor_start1=0;style->cursor_height1=2;
+        style->fonts[0][65][31]=0x80;
+        payload[sizeof(*style)+(120+1)*3]=65;
+        payload[sizeof(*style)+(120+1)*3+1]=7;
+        payload[sizeof(*style)+(120+1)*3+2]=CONSOLE_TEXT_UNDERLINE;
+        text.palette[7]=0xffffff;
+        CHECK(!run16_console_video_begin(&video,11,&text));
+        CHECK(!run16_console_video_data(&video,11,0,payload,text.bytes));
+        CHECK(!frontend_window_dos_frame(&video,frame) && !frame->graphics);
+        CHECK(kvm_window_frame_size(frame,&width,&height) && width==960 && height==960);
+        CHECK(kvm_window_cursor_rect(frame,&display,&cursor_a));
+        CHECK(kvm_window_secondary_cursor_rect(frame,&display,&cursor_b));
+        CHECK(cursor_a.top==62 && cursor_a.bottom==64 &&
+            cursor_b.top==32 && cursor_b.bottom==34);
+        valid=LIB_FALSE;
+        CHECK(kvm_window_render_frame(frame,pixels,width,height,&valid,&changed));
+        CHECK(pixels[63*width+8]==0xffffff && pixels[32*width+8]==0);
+        free(payload);run16_console_video_dispose(&video);
+    }
+    puts("PASS native 160-column text; oversized protocol view rejected without font shrinking");
     free(native_cells);
     free(pixels); free(frame);
     puts("PASS nxvm x86 closure: 80x50/43, font banks, indexed graphics, CAF make/break, invalid lifecycle");

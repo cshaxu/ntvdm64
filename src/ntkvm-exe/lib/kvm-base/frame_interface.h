@@ -3,7 +3,8 @@
 
 #include "lib/types/types_interface.h"
 
-/* Shared text fields only. Capacity is 80x50, not a default visible size.
+/* Shared text fields only. Capacity matches the copied text-video contract,
+ * not a default visible size.
  * Each stored row occupies KVM_TEXT_COLUMNS cells,
  * even when fewer columns are visible. Palette entries are 0x00RRGGBB.
  * Glyph indices select resources supplied by the receiving leaf's frame.
@@ -12,8 +13,8 @@
  * font_height == 0 means 16 scanlines. Inclusive cursor_top/bottom are clipped
  * to that height; a start beyond it is hidden. bottom < top retains the full
  * cell fallback. Console approximates the visible height, not its position. */
-#define KVM_TEXT_COLUMNS 80u
-#define KVM_TEXT_ROWS 50u
+#define KVM_TEXT_COLUMNS 160u
+#define KVM_TEXT_ROWS 96u
 
 typedef struct kvm_text_cell {
     lib_u8 glyph_index;

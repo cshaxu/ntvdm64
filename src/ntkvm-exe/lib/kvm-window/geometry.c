@@ -99,13 +99,14 @@ lib_bool kvm_window_fit_aspect_size(lib_i32 available_width, lib_i32 available_h
     return LIB_TRUE;
 }
 
-lib_bool kvm_window_cursor_rect(const kvm_window_frame *frame, const kvm_window_rect *display,
-    kvm_window_rect *cursor)
+static lib_bool cursor_rect_range(const kvm_window_frame *frame,
+    const kvm_window_rect *display,kvm_window_rect *cursor,
+    lib_u8 cursor_top,lib_u8 cursor_bottom,lib_bool cursor_visible)
 {
     lib_i32 width, height, cell_top, cell_bottom;
     lib_u32 top, bottom, font_height;
     if (kvm_window_frame_validate(frame) != LIB_STATUS_OK || !display || !cursor || frame->graphics ||
-        !frame->text.base.cursor_visible || frame->text.base.cursor_column < 0 || frame->text.base.cursor_row < 0 ||
+        !cursor_visible || frame->text.base.cursor_column < 0 || frame->text.base.cursor_row < 0 ||
         frame->text.base.cursor_column >= frame->text.base.text_columns || frame->text.base.cursor_row >= frame->text.base.text_rows)
         return LIB_FALSE;
     width = display->right - display->left;
@@ -117,11 +118,11 @@ lib_bool kvm_window_cursor_rect(const kvm_window_frame *frame, const kvm_window_
     cursor->right = display->left+(lib_i32)((lib_i64)(frame->text.base.cursor_column+1)*width/frame->text.base.text_columns);
     cursor->top = display->top+cell_top;
     cursor->bottom = display->top+cell_bottom;
-    font_height = frame->text.base.font_height ? frame->text.base.font_height : KVM_WINDOW_FONT_HEIGHT;
-    if (frame->text.base.cursor_bottom >= frame->text.base.cursor_top) {
-        top = frame->text.base.cursor_top;
+    font_height = frame->text.base.font_height ? frame->text.base.font_height : KVM_WINDOW_DEFAULT_FONT_HEIGHT;
+    if (cursor_bottom >= cursor_top) {
+        top = cursor_top;
         if (top >= font_height) return LIB_FALSE;
-        bottom = (lib_u32)frame->text.base.cursor_bottom + 1u;
+        bottom = (lib_u32)cursor_bottom + 1u;
         if (bottom > font_height) bottom = font_height;
         cursor->top = display->top+cell_top+(lib_i32)(
             (lib_i64)(cell_bottom-cell_top)*top/font_height);
@@ -129,6 +130,22 @@ lib_bool kvm_window_cursor_rect(const kvm_window_frame *frame, const kvm_window_
             ((lib_i64)(cell_bottom-cell_top)*bottom+font_height-1u)/font_height);
     }
     return cursor->right > cursor->left && cursor->bottom > cursor->top;
+}
+
+lib_bool kvm_window_cursor_rect(const kvm_window_frame *frame,
+    const kvm_window_rect *display,kvm_window_rect *cursor)
+{
+    if(!frame)return LIB_FALSE;
+    return cursor_rect_range(frame,display,cursor,frame->text.base.cursor_top,
+        frame->text.base.cursor_bottom,frame->text.base.cursor_visible);
+}
+
+lib_bool kvm_window_secondary_cursor_rect(const kvm_window_frame *frame,
+    const kvm_window_rect *display,kvm_window_rect *cursor)
+{
+    if(!frame)return LIB_FALSE;
+    return cursor_rect_range(frame,display,cursor,frame->text.secondary_cursor_top,
+        frame->text.secondary_cursor_bottom,frame->text.secondary_cursor_visible);
 }
 
 

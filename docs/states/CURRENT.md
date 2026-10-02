@@ -2,14 +2,22 @@
 
 ## Current Work
 
-## Owner Review Intermission
+## No Active S
 
-**No active M/T/S packet.** T423 remains open for owner acceptance. S34 is
-delivered in [its evidence record](../etc/evidence/m0-t423-s34-console-projection-root-lifetime.md):
-the complete eight-file protocol-26 package is published, while S35 task
-tracing remains unadmitted.
+**No active M/T/S packet.**
+
+M0 T423 remains open. S35 has completed its bounded production delivery;
+S36 has not been admitted. See the [S35 evidence](../etc/evidence/m0-t423-s35-native-text-window.md)
+for the published package, passing 17+17 matrix and retained WOW/visual
+acceptance limitations.
 
 ## Last Closed S Brief
+
+S35 (Ordinary Mode) followed the owner's instruction: “不管多少宽度高度，文本帧就得要按照文本帧来 render。”
+Its bounded scope, protocol limit, implementation and non-passes are recorded in
+the [S35 evidence](../etc/evidence/m0-t423-s35-native-text-window.md).
+
+## Previous S Brief
 
 | Field | S34 brief |
 | --- | --- |
@@ -31,8 +39,8 @@ tracing remains unadmitted.
 | Candidate Proposal | [T423 Console/Window proposal](../proposals/proposal-kvm-window-graphics-presentation-001.md). |
 
 S33's [evidence](../etc/evidence/m0-t423-s33-first-command-screen.md)
-records the preceding baseline. The read-only task-trace proposal moves to S35
-and is not admitted by S34 closure.
+records the preceding baseline. The read-only task-trace proposal is S36 and
+is not admitted by S35 closure.
 
 ## Recent M0 Closures
 

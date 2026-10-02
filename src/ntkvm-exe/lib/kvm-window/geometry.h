@@ -21,4 +21,6 @@ lib_bool kvm_window_fit_aspect_size(lib_i32 width, lib_i32 height, lib_u32 sourc
     lib_u32 source_height, lib_i32 *out_width, lib_i32 *out_height);
 lib_bool kvm_window_cursor_rect(const kvm_window_frame *frame, const kvm_window_rect *display,
     kvm_window_rect *cursor);
+lib_bool kvm_window_secondary_cursor_rect(const kvm_window_frame *frame,
+    const kvm_window_rect *display,kvm_window_rect *cursor);
 #endif

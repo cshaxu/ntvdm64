@@ -8,7 +8,7 @@ static DWORD dos_text_frame(const run16_console_video *video,kvm_window_frame *f
     const console_video_description *d=&video->description;
     const console_text_style *style=(const console_text_style *)video->pixels;
     const BYTE *cells=video->pixels+sizeof(*style);
-    frontend_text_snapshot *snapshot=NULL;frontend_text_raster *scratch=NULL;
+    frontend_text_snapshot *snapshot=NULL;
     unsigned i,bank,glyph,line,cell_bytes;DWORD error=ERROR_NOT_ENOUGH_MEMORY;
     if(!d->width || d->width>160 || !d->height || d->height>96 || d->depth ||
         (d->stride!=d->width*2 && d->stride!=d->width*3) || d->bytes!=sizeof(*style)+d->stride*d->height)
@@ -20,8 +20,7 @@ static DWORD dos_text_frame(const run16_console_video *video,kvm_window_frame *f
         style->cursor_start < -32 || style->cursor_start>31 ||
         style->cursor_start1 < -32 || style->cursor_start1>31)return ERROR_INVALID_DATA;
     snapshot=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*snapshot));
-    scratch=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*scratch));
-    if(!snapshot || !scratch)goto done;
+    if(!snapshot)goto done;
     snapshot->cell_count=d->width*d->height;
     if(cell_bytes==3) {
         for(i=0;i<snapshot->cell_count;++i)if(cells[i*3+2]&~CONSOLE_TEXT_STYLE_MASK) {
@@ -45,9 +44,8 @@ static DWORD dos_text_frame(const run16_console_video *video,kvm_window_frame *f
     snapshot->extension.cursor_bottom=(lib_u8)(style->cursor_start1+style->cursor_height1-1);
     memcpy(snapshot->fonts.base.text_palette,d->palette,sizeof(snapshot->fonts.base.text_palette));
     for(bank=0;bank<2;++bank)for(glyph=0;glyph<256;++glyph)for(line=0;line<style->font_height;++line) {
-        BYTE *font=line>=16 ? snapshot->extension.upper_font[bank] :
-            bank ? snapshot->fonts.secondary_font : snapshot->fonts.font;
-        font[glyph*16+(line%16)]=style->fonts[bank][glyph][line];
+        BYTE *font=bank ? snapshot->fonts.secondary_font : snapshot->fonts.font;
+        font[glyph*KVM_WINDOW_FONT_HEIGHT+line]=style->fonts[bank][glyph][line];
     }
     for(i=0;i<snapshot->cell_count;++i) {
         BYTE attribute=cells[i*cell_bytes+1];
@@ -55,10 +53,9 @@ static DWORD dos_text_frame(const run16_console_video *video,kvm_window_frame *f
         snapshot->cells[i].glyph_bank=style->attribute_font_select && (attribute&8) ? 1 : 0;
         snapshot->cells[i].foreground=attribute&15;snapshot->cells[i].background=attribute>>4;
     }
-    error=frontend_text_frame_prepare(scratch,&snapshot->fonts,snapshot->cells,
+    error=frontend_text_frame_prepare(&snapshot->fonts,snapshot->cells,
         snapshot->cell_count,&snapshot->extension,TRUE,frame) ? ERROR_SUCCESS : GetLastError();
 done:
-    if(scratch)HeapFree(GetProcessHeap(),0,scratch);
     if(snapshot)HeapFree(GetProcessHeap(),0,snapshot);
     return error;
 }
