@@ -1,7 +1,7 @@
 #include "frontend_scope.h"
 #include "worker_launch.h"
-#include "ntkvm-exe/bootstrap.h"
-#include "ntkvm-exe/native_request_client.h"
+#include "interface/frontend_bootstrap.h"
+#include "interface/native_request_client.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
 #include "interface/console_io.h"
 #include <stdint.h>

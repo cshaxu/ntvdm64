@@ -10,7 +10,7 @@
 #include "run16-exe/worker_launch.h"
 #include "worker-base/connection.h"
 #include "ntcon-exe/next_command.h"
-#include "ntkvm-exe/native_request_client.h"
+#include "interface/native_request_client.h"
 #include "interface/console_io.h"
 #include <stddef.h>
 

@@ -2,8 +2,8 @@
  * This tests the real RPC path; it does not select the ordinary CLI route. */
 #include <windows.h>
 #include <stdio.h>
-#include "ntkvm-exe/bootstrap.h"
-#include "ntkvm-exe/native_request_protocol.h"
+#include "interface/frontend_bootstrap.h"
+#include "interface/native_request_protocol.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
 
 PVOID CsrPortHeap;

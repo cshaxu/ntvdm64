@@ -8,7 +8,7 @@
 #include "run16-exe/frontend_scope.h"
 #include "ntkvm-exe/console_channel.h"
 #include "ntkvm-exe/session_service.h"
-#include "ntkvm-exe/bootstrap.h"
+#include "interface/frontend_bootstrap.h"
 #include "interface/console_io.h"
 
 #define CHECK(x) do { if (!(x)) { fprintf(stderr,"line %u error %lu: %s\n", \
@@ -59,6 +59,8 @@ struct run16_native_frontend { DWORD unused; };
 DWORD run16_native_frontend_create(run16_native_frontend **out)
 { *out=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(**out));return *out ? 0 : ERROR_NOT_ENOUGH_MEMORY; }
 void run16_native_frontend_cancel(run16_native_frontend *value) { (void)value; }
+DWORD run16_native_frontend_park(run16_native_frontend *value)
+{ (void)value;CHECK(FALSE);return ERROR_NOT_SUPPORTED; }
 DWORD run16_native_frontend_drain(run16_native_frontend *value)
 { (void)value;CHECK(retirement_mode);InterlockedIncrement(&drain_calls);return 0; }
 DWORD OpenNtBaseClientFrontendUsage(DWORD *pending_count,DWORD *tasks)

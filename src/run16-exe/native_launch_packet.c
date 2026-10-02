@@ -5,7 +5,7 @@
 
 DWORD run16_native_launch_pack(const run16_native_start *start,BYTE **output,DWORD *bytes)
 {
-    PCWSTR strings[4],entry;
+    PCWSTR strings[4];
     run16_native_launch_packet header={0};
     uint64_t total=sizeof(header);
     DWORD i;
@@ -17,19 +17,23 @@ DWORD run16_native_launch_pack(const run16_native_start *start,BYTE **output,DWO
     strings[0]=start->application ? start->application : L"";
     strings[1]=start->command;strings[2]=start->directory;strings[3]=start->environment;
     for(i=0;i<3;++i) {
-        size_t count=wcslen(strings[i])+1;
+        size_t count=wcsnlen_s(strings[i],32767)+1;
         if(count>32767) return ERROR_FILENAME_EXCED_RANGE;
         header.characters[i]=(uint32_t)count;
+        total+=(uint64_t)count*sizeof(WCHAR);
     }
-    entry=strings[3];
-    if(!*entry) header.characters[3]=2;
+    if(!*strings[3]) header.characters[3]=2;
     else {
-        while(*entry) entry+=wcslen(entry)+1;
-        if((uint64_t)(entry-strings[3])+1>MAXDWORD) return ERROR_ARITHMETIC_OVERFLOW;
-        header.characters[3]=(uint32_t)(entry-strings[3])+1;
+        DWORD limit=(DWORD)((NATIVE_LAUNCH_MAX_BYTES-total)/sizeof(WCHAR)),count;
+        /* Bound the scan as well as allocation. The terminator must fit the
+         * remaining packet budget, including the environment's double NUL. */
+        for(count=1;count<limit;++count)
+            if(!strings[3][count-1] && !strings[3][count])break;
+        if(count==limit)return ERROR_BUFFER_OVERFLOW;
+        header.characters[3]=count+1;
     }
-    for(i=0;i<4;++i) total+=(uint64_t)header.characters[i]*sizeof(WCHAR);
-    if(total>MAXDWORD) return ERROR_ARITHMETIC_OVERFLOW;
+    total+=(uint64_t)header.characters[3]*sizeof(WCHAR);
+    if(total>NATIVE_LAUNCH_MAX_BYTES) return ERROR_BUFFER_OVERFLOW;
     header.console_mask=start->console_mask;
     for(i=0;i<3;++i) header.standard[i]=(uint64_t)(ULONG_PTR)start->standard[i];
     for(i=0;i<2;++i) header.capabilities[i]=(uint64_t)(ULONG_PTR)start->capabilities[i];
@@ -52,7 +56,8 @@ DWORD run16_native_launch_unpack(BYTE *payload,DWORD bytes,run16_native_launch_p
     uint64_t total=sizeof(*header);
     DWORD i,offset;
     BYTE *cursor;
-    if(!payload || bytes<sizeof(*header)) return ERROR_INVALID_DATA;
+    if(!payload || !header || !strings || bytes<sizeof(*header) ||
+        bytes>NATIVE_LAUNCH_MAX_BYTES) return ERROR_INVALID_DATA;
     memcpy(header,payload,sizeof(*header));
     if(header->console_mask>7) return ERROR_INVALID_DATA;
     for(i=0;i<4;++i) {

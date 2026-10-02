@@ -183,6 +183,13 @@ and report it; do not publish an unverified or regressed candidate. Respect
 active owner sessions and desktop restrictions. Unavailable GUI access means
 pending verification, not a waived gate; continue safe background work.
 
+Owner permanent approval dated 2026-10-02 permits ending running project
+processes that block publication/replacement of its EXEs without another
+confirmation. Resolve the exact package paths and targets first, preserve the
+coherent recovery package, and verify the final eight-file set. This does not
+authorize terminating unrelated host applications or changing product task-
+termination semantics.
+
 Owner exception dated 2026-09-26 for the active T423 frontend work and its
 subsequent S stages: physical desktop interaction, foreground activation and
 pointer clipping/release observation may be skipped when source-logic review

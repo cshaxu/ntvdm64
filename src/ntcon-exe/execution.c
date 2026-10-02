@@ -133,7 +133,8 @@ static DWORD WINAPI serve(void *context)
             TRUE,&reply,sizeof(reply));
         goto done;
     }
-    if(header.version!=NATIVE_REQUEST_VERSION || header.bytes<sizeof(run16_native_launch_packet)) {
+    if(header.version!=NATIVE_REQUEST_VERSION || header.bytes<sizeof(run16_native_launch_packet) ||
+        header.bytes>NATIVE_LAUNCH_MAX_BYTES) {
         reply.error=ERROR_INVALID_DATA;
     } else {
         payload=HeapAlloc(GetProcessHeap(),0,header.bytes);
@@ -270,11 +271,12 @@ DWORD ntcon_executions_wait_idle(ntcon_executions *owner)
 }
 DWORD ntcon_execution_start(ntcon_executions *owner,ntcon_next_command *command,DWORD preflight_error)
 {
-    ntcon_execution *request=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*request));
+    ntcon_execution *request;
     DWORD error;HANDLE thread;
     /* request zero is the original broker's I/O-resume channel. The wire
      * header distinguishes it from a Direct target after GetNext. */
     if(!owner || !command)return ERROR_INVALID_PARAMETER;
+    request=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*request));
     if(!request)return ERROR_NOT_ENOUGH_MEMORY;
     request->owner=owner;request->root_capability=command->frontend;
     request->pipe=command->channel;request->sender=command->sender;

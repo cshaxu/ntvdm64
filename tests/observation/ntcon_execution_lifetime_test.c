@@ -174,6 +174,70 @@ static void broker_completion_failure_stops_reentry(void)
     completion_error=ERROR_SUCCESS;
     ntcon_executions_close(owner);
 }
+static SIZE_T busy_heap_bytes(void)
+{
+    PROCESS_HEAP_ENTRY entry={0};SIZE_T bytes=0;
+    CHECK(HeapLock(GetProcessHeap()));
+    while(HeapWalk(GetProcessHeap(),&entry))
+        if(entry.wFlags&PROCESS_HEAP_ENTRY_BUSY)bytes+=entry.cbData;
+    CHECK(GetLastError()==ERROR_NO_MORE_ITEMS);
+    CHECK(HeapUnlock(GetProcessHeap()));return bytes;
+}
+static void invalid_arguments_do_not_allocate(void)
+{
+    ntcon_executions *owner=NULL;ntcon_next_command command={0};
+    SIZE_T before,after;unsigned i;
+    CHECK(!ntcon_executions_open(&owner));if(!owner)return;
+    before=busy_heap_bytes();
+    for(i=0;i<32;++i) {
+        CHECK(ntcon_execution_start(NULL,&command,0)==ERROR_INVALID_PARAMETER);
+        CHECK(ntcon_execution_start(owner,NULL,0)==ERROR_INVALID_PARAMETER);
+        CHECK(ntcon_execution_start(NULL,NULL,0)==ERROR_INVALID_PARAMETER);
+    }
+    after=busy_heap_bytes();CHECK(before==after);
+    CHECK(ntcon_executions_idle(owner));ntcon_executions_close(owner);
+}
+static void launch_packet_boundaries(void)
+{
+    run16_native_start start={0};run16_native_launch_packet decoded;
+    WCHAR *strings[4],*environment;BYTE *payload=NULL;DWORD bytes=0;
+    DWORD count=(NATIVE_LAUNCH_MAX_BYTES-sizeof(decoded))/sizeof(WCHAR)-5,i;
+    environment=HeapAlloc(GetProcessHeap(),0,(count+1)*sizeof(WCHAR));
+    CHECK(environment!=NULL);if(!environment)return;
+    for(i=0;i<count+1;++i)environment[i]=L'A';
+    environment[1]=L'=';environment[count-2]=environment[count-1]=0;
+    start.command=L"x";start.directory=L".";start.environment=environment;
+    CHECK(!run16_native_launch_pack(&start,&payload,&bytes));
+    CHECK(bytes==NATIVE_LAUNCH_MAX_BYTES && bytes>65536);
+    if(payload) {
+        CHECK(!run16_native_launch_unpack(payload,bytes,&decoded,strings));
+        CHECK(run16_native_launch_unpack(payload,bytes+2,&decoded,strings)==ERROR_INVALID_DATA);
+        CHECK(run16_native_launch_unpack(payload,bytes,NULL,strings)==ERROR_INVALID_DATA);
+        CHECK(run16_native_launch_unpack(payload,bytes,&decoded,NULL)==ERROR_INVALID_DATA);
+        ((run16_native_launch_packet *)payload)->characters[3]=MAXDWORD;
+        CHECK(run16_native_launch_unpack(payload,bytes,&decoded,strings)==ERROR_INVALID_DATA);
+        HeapFree(GetProcessHeap(),0,payload);payload=NULL;
+    }
+    environment[count-2]=L'A';environment[count]=0;
+    CHECK(run16_native_launch_pack(&start,&payload,&bytes)==ERROR_BUFFER_OVERFLOW);
+    CHECK(!payload && !bytes);HeapFree(GetProcessHeap(),0,environment);
+}
+static void oversized_headers_do_not_wait_for_payload(void)
+{
+    ntcon_executions *owner=NULL;DWORD lengths[]={NATIVE_LAUNCH_MAX_BYTES+1,MAXDWORD},i,bytes;
+    CHECK(!ntcon_executions_open(&owner));if(!owner)return;
+    for(i=0;i<ARRAYSIZE(lengths);++i) {
+        HANDLE client=submit(owner);native_request_header header={NATIVE_REQUEST_VERSION,lengths[i]};
+        native_request_reply reply={0};if(!client)continue;
+        /* Send only the header: a receiver attempting payload allocation/read
+         * would hang here. Rejection must precede reading the advertised body. */
+        CHECK(WriteFile(client,&header,sizeof(header),&bytes,NULL) && bytes==sizeof(header));
+        CHECK(ReadFile(client,&reply,sizeof(reply),&bytes,NULL) && bytes==sizeof(reply));
+        CHECK(reply.error==ERROR_INVALID_DATA && !reply.target && !reply.receipt);
+        CloseHandle(client);CHECK(!ntcon_executions_wait_idle(owner));
+    }
+    ntcon_executions_close(owner);
+}
 static void target_survives_close(void)
 {
     ntcon_executions *owner=NULL;HANDLE client,target,receipt;
@@ -220,7 +284,16 @@ int wmain(int argc,WCHAR **argv)
         SetEvent(marker);CloseHandle(marker);return 0;
     }
     if(argc==2 && !lstrcmpW(argv[1],L"--held-target")){Sleep(10000);return 73;}
+    if(argc==3 && !lstrcmpW(argv[1],L"--invalid-arguments")) {
+        if(_wfopen_s(&log,argv[2],L"wx"))return 2;
+        invalid_arguments_do_not_allocate();
+        fprintf(log,"INVALID-ARGUMENT-HEAP checks=%u failures=%u\n",checks,failures);
+        fclose(log);return failures ? 1 : 0;
+    }
     if(argc!=2 || _wfopen_s(&log,argv[1],L"wx"))return 2;
+    invalid_arguments_do_not_allocate();
+    launch_packet_boundaries();
+    oversized_headers_do_not_wait_for_payload();
     /* Initialize the host's process-creation facilities before measuring
      * retained request handles; repeat the same target case below. */
     target_survives_close();

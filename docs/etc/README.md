@@ -2,6 +2,8 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T423 S39 startup client quality](evidence/m0-t423-s39-startup-client-quality.md) | M0 T423 S39 | Native packet bounds, invalid-argument heap proof, shared startup ownership, build/test/publication facts and limits. | Retain through T423 acceptance. |
+| [Retained S12 status detail](evidence/m0-t423-s12-retained-status.md) | M0 T423 S39 | Earlier admission/publication detail moved out of CURRENT to retain its 32 KiB control-plane limit. | Historical evidence. |
 | [T423 S38 worker lifecycle and direct completion](evidence/m0-t423-s38-worker-lifecycle-direct-completion.md) | M0 T423 S38 | Resident frontend reuse, native completion receipt, x86/fault/17+17 gates, publication hashes and explicit limits. | Retain through T423 acceptance. |
 | [T423 S37 Window geometry](evidence/m0-t423-s37-window-geometry.md) | M0 T423 S37 | DOS/native logical viewport handoff, failing-old/passing-new geometry probes, native resize, 17+17 regression and publication. | Retain through T423 acceptance. |
 | [T423 S36 visible Console title](evidence/m0-t423-s36-visible-console-title.md) | M0 T423 S36 | NTKVM Window caption source, focused private-desktop tests, 17+17 regression, published hash and limits. | Retain through T423 acceptance. |

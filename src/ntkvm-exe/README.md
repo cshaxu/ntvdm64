@@ -19,9 +19,10 @@ the old run16 name do not identify their source or final executable owner.
 records from the service/renderer. Both the ordinary run16 link and the
 client-only fixture exclude frontend service, input-pump and renderer objects.
 The private request transfer implementation is shared by the two endpoints,
-not duplicated. The client library contains bootstrap_client,
-native_request_client and native_request_io, plus NTCON's launch_packet codec.
-Target creation is compiled from ntcon-exe/launch.c into NTCON and run16's
+not duplicated. The launcher-owned client library contains bootstrap_client,
+native_request_client, native_request_io and native_launch_packet under run16-exe.
+Public declarations are in interface. Target creation is compiled from
+run16-exe/native_launch.c into NTCON and run16's
 GUI route; it is not part of this frontend or the launcher client archive.
 
 The worker-side copied protocol client now belongs to worker-base, not this

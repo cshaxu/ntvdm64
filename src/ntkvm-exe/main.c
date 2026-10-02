@@ -1,6 +1,6 @@
-#include "bootstrap.h"
+#include "interface/frontend_bootstrap.h"
 #include "session_service.h"
-#include "native_request_protocol.h"
+#include "interface/native_request_protocol.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
 #include <shellapi.h>
 #include <stdio.h>

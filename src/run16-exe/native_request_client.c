@@ -1,5 +1,5 @@
-#include "native_request_client.h"
-#include "native_request_protocol.h"
+#include "interface/native_request_client.h"
+#include "interface/native_request_protocol.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
 #include <stdio.h>
 static DWORD submit_receipt(HANDLE root,HANDLE root_capability,const run16_native_start *start,HANDLE *target,HANDLE *receipt,HANDLE *completion,DWORD *request)

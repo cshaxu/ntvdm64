@@ -1,4 +1,4 @@
-#include "native_request_protocol.h"
+#include "interface/native_request_protocol.h"
 DWORD frontend_request_transfer(HANDLE pipe,HANDLE peer,HANDLE stop,HANDLE event,
     BOOL write,void *buffer,DWORD bytes)
 {

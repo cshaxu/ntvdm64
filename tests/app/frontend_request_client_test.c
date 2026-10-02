@@ -2,8 +2,8 @@
  * Broker admission is mocked here; real RPC identity tests remain mandatory. */
 #include <windows.h>
 #include <stdio.h>
-#include "ntkvm-exe/native_request_client.h"
-#include "ntkvm-exe/native_request_protocol.h"
+#include "interface/native_request_client.h"
+#include "interface/native_request_protocol.h"
 
 static HANDLE peer_thread;
 static HANDLE peer_process;
@@ -18,7 +18,7 @@ static DWORD WINAPI peer(void *context)
     PROCESS_INFORMATION process={0};
     error=frontend_request_transfer(pipe,peer_process,NULL,event,FALSE,&header,sizeof(header));
     if(error)goto done;
-    if(header.version!=NATIVE_REQUEST_VERSION || header.bytes>65536){error=ERROR_INVALID_DATA;goto done;}
+    if(header.version!=NATIVE_REQUEST_VERSION || header.bytes>NATIVE_LAUNCH_MAX_BYTES){error=ERROR_INVALID_DATA;goto done;}
     if(scenario>=9) {
         if(header.bytes){error=ERROR_INVALID_DATA;goto done;}
         if(scenario==10)reply.error=ERROR_ACCESS_DENIED;

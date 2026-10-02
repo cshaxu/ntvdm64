@@ -601,6 +601,16 @@ component ABI.
 
 ## Dependency direction
 
+The finite `frontend-client.lib` implementation is launcher-owned under
+`run16-exe`: frontend bootstrap, native request/receipt transport and copied
+launch packet codec. Public declarations live in `interface`, not EXE-private
+include paths. NTKVM links the client transport/codec without target creation.
+NTCON reuses the launch codec and the separately selected launcher-owned
+native resource/CreateProcess primitive; worker Console state, execution and
+completion remain NTCON-owned. This is the same owned-client-library pattern
+as the NTSRV client, not a generic shared component, process, or runtime
+dependency on run16.exe. Worker-base remains worker-only.
+
 ```text
 run16 -> basesrv protocol client
 monitor -> basesrv management protocol client

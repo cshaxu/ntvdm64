@@ -42,6 +42,14 @@ or runtime input.
 
 ## Executable-owned transition
 
+`run16-exe/bootstrap_client.c`, `native_request_client.c`,
+`native_request_io.c` and `native_launch_packet.c` own the existing finite
+`frontend-client.lib`. `native_launch.c` is its separately selected resource/
+CreateProcess primitive shared with NTCON; NTKVM never links target creation.
+Public startup/client declarations are in `interface/frontend_bootstrap.h`,
+`native_request_client.h`, `native_request_protocol.h` and `native_launch.h`.
+No private NTKVM/NTCON implementation root is a shared startup source owner.
+
 Cross-component wire declarations and service IDL have one owner: interface.
 Frame/input formats and service/monitor/launcher/worker contracts migrate there
 without layout changes. Endpoint implementations and process-private types

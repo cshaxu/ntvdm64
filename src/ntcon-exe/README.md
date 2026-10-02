@@ -13,9 +13,9 @@ semantics; NTCON supplies their finite backend binding.
 - `execution.c`: direct target creation/completion, request cleanup and
   final-presentation acknowledgment. Requester death does not kill its target.
   Completion-export rights are checked before starting the target.
-- `launch_packet.c` and `launch.c`: copied packet codec and restricted local
-  resource/process materialization. run16 also links the same creation body for
-  GUI launch. NTKVM links only the codec, never creation or execution.
+- Launcher-owned `run16-exe/native_launch_packet.c` and `native_launch.c`
+  provide the shared packet codec and restricted resource/process primitive.
+  NTCON owns their worker execution caller; NTKVM links only the codec.
 - `console_state.c`: actual Console geometry, cells/cursor, active-buffer
   capture, native input, unread-key draining and actual membership observation.
 - `text_frame.c`: native cells to the shared bitmap-glyph text frame. Uses the

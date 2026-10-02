@@ -10,7 +10,7 @@ $repo = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
 foreach ($path in @('src/interface/service.idl',
         'src/ntsrv-exe/opennt/source/base_rpc_client.c',
         'src/ntsrv-exe/opennt/source/base_service.c',
-        'src/ntkvm-exe/native_request_client.c')) {
+        'src/run16-exe/native_request_client.c')) {
     $source = Get-Content -LiteralPath (Join-Path $repo $path) -Raw
     if ($source -match 'SubmitFrontendChannel|TakeFrontendChannel|run16_native_request_submit') {
         throw "Retired frontend execution entry remains: $path"
@@ -57,10 +57,14 @@ function Assert-FrontendOwnership([string[]]$Lines) {
         }
         return @($sources | Sort-Object)
     }
-    $client = @('bootstrap_client.c',
+    $client = @('bootstrap_client.c', 'native_launch_packet.c',
         'native_request_client.c', 'native_request_io.c') | Sort-Object
     foreach ($target in @('frontend-client.lib', 'run16.exe')) {
-        $actual = @(Get-FrontendSources $target)
+        if (@(Get-FrontendSources $target).Count) {
+            throw "$target must not depend on NTKVM-private implementation"
+        }
+        $actual = @(Get-FrontendSources $target 'run16-exe' |
+            Where-Object { $target -eq 'frontend-client.lib' -or $_ -in $client })
         if (@(Compare-Object $client $actual).Count) {
             throw "$target frontend source ownership mismatch: $($actual -join ', ')"
         }
@@ -75,14 +79,25 @@ function Assert-FrontendOwnership([string[]]$Lines) {
         throw "ntcon frontend client-only boundary mismatch: $native"
     }
     foreach($target in @('frontend-client.lib','ntkvm.exe')) {
-        $actual=@(Get-FrontendSources $target 'ntcon-exe')
-        if(@(Compare-Object @('launch_packet.c') $actual).Count) {
-            throw "$target must contain only the NTCON packet codec, not target creation"
+        if(@(Get-FrontendSources $target 'ntcon-exe').Count) {
+            throw "$target must not depend on NTCON-private implementation"
+        }
+        $actual=@(Get-FrontendSources $target 'run16-exe')
+        if('native_launch.c' -in $actual) {
+            throw "$target must not contain target creation"
+        }
+        foreach($required in $client) {
+            if($required -notin $actual){throw "$target omits shared startup client $required"}
         }
     }
     $launcherNative=@(Get-FrontendSources 'run16.exe' 'ntcon-exe')
-    if(@(Compare-Object @('launch.c','launch_packet.c') $launcherNative).Count) {
+    if($launcherNative.Count -or 'native_launch.c' -notin @(Get-FrontendSources 'run16.exe' 'run16-exe')) {
         throw 'run16 must retain bounded GUI creation, not NTCON execution/presentation'
+    }
+    foreach($required in @('native_launch.c','native_launch_packet.c')) {
+        if($required -notin @(Get-FrontendSources 'ntcon.exe' 'run16-exe')) {
+            throw "NTCON omits shared native launch primitive $required"
+        }
     }
     $shared = @(Get-FrontendSources 'worker-base.lib')
     if ($shared.Count) {
@@ -115,7 +130,7 @@ function Assert-FrontendOwnership([string[]]$Lines) {
             'console_frontend.c', 'console_video.c', 'native_console_frontend.c',
             'window_controller.c', 'window_frame.c',
             'window_keyboard.c', 'window_input_queue.c',
-            'lib/kvm-window/win32/component.c') + $client) {
+            'lib/kvm-window/win32/component.c')) {
         if ($required -notin $service) { throw "ntkvm.exe omits $required" }
     }
 }
@@ -125,7 +140,7 @@ Assert-FrontendOwnership $graph
 foreach($target in @('frontend-client.lib','ntkvm.exe')) {
     $mutated=@($graph | ForEach-Object {
         if($_ -match ('^build '+[regex]::Escape($target)+'(?: |:)')) {
-            $_ -replace ': (\S+) ', ': $1 obj/ntcon/launch.obj '
+            $_ -replace ': (\S+) ', ': $1 obj/run16/native_launch.obj '
         } else { $_ }
     })
     $rejected=$false
