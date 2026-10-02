@@ -2,8 +2,8 @@
 
 ## Status and dependency
 
-Owner-approved planning, third unnumbered candidate in the remaining queue,
-after root/search isolation and the bounded CCPU40/V86 contract audit; all
+Owner-approved planning, fourth unnumbered candidate in the remaining queue,
+after NTMON Console-root management, root/search isolation and the bounded CCPU40/V86 contract audit; all
 follow the active component-renaming package. This is not implementation
 admission and does not expand T424. Finish the naming package first: NTW32 is
 the native text worker and NTCON is the visible Console/Window frontend in

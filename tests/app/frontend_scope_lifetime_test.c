@@ -24,8 +24,8 @@ static DWORD registrations,retains,bindings,retain_error=ERROR_ACCESS_DENIED;
 static HANDLE expected_execution;
 static frontend_session_service *fixture_service;
 static BOOL retirement_mode;
-static volatile LONG usage_pending,retire_calls,drain_calls;
-static HANDLE usage_seen;
+static volatile LONG usage_pending,retire_calls,drain_calls,park_calls,broker_shutdown;
+static HANDLE usage_seen,park_seen;
 static void attached(void);
 DWORD frontend_bootstrap_start(PCWSTR image,frontend_connection *connection)
 {
@@ -60,7 +60,7 @@ DWORD run16_native_frontend_create(run16_native_frontend **out)
 { *out=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(**out));return *out ? 0 : ERROR_NOT_ENOUGH_MEMORY; }
 void run16_native_frontend_cancel(run16_native_frontend *value) { (void)value; }
 DWORD run16_native_frontend_park(run16_native_frontend *value)
-{ (void)value;CHECK(FALSE);return ERROR_NOT_SUPPORTED; }
+{ (void)value;CHECK(retirement_mode);InterlockedIncrement(&park_calls);CHECK(SetEvent(park_seen));return 0; }
 DWORD run16_native_frontend_drain(run16_native_frontend *value)
 { (void)value;CHECK(retirement_mode);InterlockedIncrement(&drain_calls);return 0; }
 DWORD OpenNtBaseClientFrontendUsage(DWORD *pending_count,DWORD *tasks)
@@ -93,7 +93,7 @@ DWORD OpenNtBaseClientRetireFrontend(void)
 }
 DWORD OpenNtBaseClientRetireWorkerlessFrontend(DWORD *retired)
 {
-    *retired=0;
+    *retired=(DWORD)InterlockedCompareExchange(&broker_shutdown,0,0);
     return ERROR_SUCCESS;
 }
 DWORD run16_native_frontend_destroy(run16_native_frontend *value) { if(value)HeapFree(GetProcessHeap(),0,value);return 0; }
@@ -128,7 +128,7 @@ DWORD OpenNtBaseClientFrontendJoinCandidate(DWORD *nonce,DWORD *pid)
 {*nonce=*pid=0;return ERROR_NOT_FOUND;}
 DWORD OpenNtBaseClientFrontendJoinDecision(DWORD nonce,BOOL same)
 {(void)nonce;(void)same;return ERROR_INVALID_STATE;}
-DWORD OpenNtBaseClientFrontendLeaseReady(void){return ERROR_INVALID_STATE;}
+DWORD OpenNtBaseClientFrontendLeaseReady(void){CHECK(retirement_mode);return ERROR_SUCCESS;}
 DWORD OpenNtBaseClientRetainFrontendRoot(HANDLE value,HANDLE *root,DWORD *generation)
 {
     (void)value;
@@ -207,20 +207,27 @@ static void service_controls_retirement(void)
     frontend_session_service *service=NULL;
     HANDLE creator=CreateEventW(NULL,TRUE,TRUE,NULL);
     usage_seen=CreateEventW(NULL,TRUE,FALSE,NULL);
+    park_seen=CreateEventW(NULL,TRUE,FALSE,NULL);
     retirement_state=CreateEventW(NULL,FALSE,FALSE,NULL);
-    CHECK(creator && usage_seen && retirement_state);
+    CHECK(creator && usage_seen && park_seen && retirement_state);
     retirement_mode=TRUE;usage_pending=1;
     CHECK(!frontend_service_start_process(notification,notification,creator,notification,&service));
     CHECK(WaitForSingleObject(usage_seen,5000)==WAIT_OBJECT_0);
     CHECK(WaitForSingleObject(frontend_service_thread(service),0)==WAIT_TIMEOUT);
     CHECK(!retire_calls && !drain_calls);
     InterlockedExchange(&usage_pending,0);CHECK(SetEvent(retirement_state));
+    CHECK(WaitForSingleObject(park_seen,5000)==WAIT_OBJECT_0);
+    CHECK(WaitForSingleObject(frontend_service_thread(service),0)==WAIT_TIMEOUT);
+    CHECK(park_calls==1 && !retire_calls && !drain_calls);
+    /* A stale pending admission must never veto the broker's close order. */
+    InterlockedExchange(&usage_pending,1);InterlockedExchange(&broker_shutdown,1);
+    CHECK(SetEvent(retirement_state));
     CHECK(WaitForSingleObject(frontend_service_thread(service),5000)==WAIT_OBJECT_0);
-    CHECK(retire_calls==2 && drain_calls==1);
+    CHECK(!retire_calls && !drain_calls);
     frontend_service_close(service);
     retirement_mode=FALSE;CloseHandle(retirement_state);retirement_state=NULL;
-    CloseHandle(usage_seen);CloseHandle(creator);
-    puts("PASS service-reported native usage pins frontend; raced admission retries only after state event; no local backend census");
+    CloseHandle(usage_seen);CloseHandle(park_seen);CloseHandle(creator);
+    puts("PASS completed lease parks without self-retirement; broker shutdown overrides stale pending usage");
 }
 int main(void)
 {

@@ -8,6 +8,21 @@ NTKVM renderer or modifying guest/shared-library code.
 
 ## Product boundary
 
+### Broker-owned retirement — T424 S3 owner approval
+
+NTSRV owns orderly frontend/worker retirement. With no associated worker and
+no legitimate in-progress startup, it immediately instructs the frontend to
+exit, regardless of presentation lease/idle state. Only NTSRV retains a
+ten-second empty-service grace, after all frontends/workers/admissions are gone.
+Frontend loss is decided by NTSRV and delivered to associated workers through
+an authenticated shutdown event. All recipients prioritize that instruction
+over ordinary lease, pending and I/O work. User closure of the visible Console,
+broker loss and unrecoverable component faults remain exit paths. Task completion
+only returns I/O; it does not retire components. Original DOS close handling and
+native Console close acknowledgement remain local operations. Startup admission
+has a finite ten-second deadline, not a permanent orphan-root exemption.
+This supersedes older frontend-grace/self-retirement descriptions below.
+
 `ntvdm.exe` is a non-invasive Windows CLI that hosts NT4-era DOS and bounded
 WOW16 workloads without replacing Windows system files, rebuilding the kernel,
 recreating a private NT subsystem, or requiring installation-time host

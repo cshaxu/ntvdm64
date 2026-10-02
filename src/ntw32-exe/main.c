@@ -12,7 +12,7 @@
 PVOID CsrPortHeap;
 
 typedef struct native_membership {
-    HANDLE quit,thread,capability,stop_requested,closed,admission_ready;
+    HANDLE quit,thread,capability,stop_requested,closed,admission_ready,shutdown;
     HANDLE pipe,frontend,ready,root;
     ntw32_presentation *presentation;
     CRITICAL_SECTION *lock;
@@ -122,15 +122,15 @@ static DWORD take_presentation(native_membership *state)
 static DWORD presentation_loop(void *context)
 {
     native_membership *state=context;DWORD error=0;
-    HANDLE waits[2]={state->quit,state->root};
+    HANDLE waits[3]={state->shutdown,state->stop_requested,state->quit};
     DWORD wait;
-    while((wait=WaitForMultipleObjects(2,waits,FALSE,30))!=WAIT_OBJECT_0) {
+    while((wait=WaitForMultipleObjects(3,waits,FALSE,30))!=WAIT_OBJECT_0+2) {
         EnterCriticalSection(state->lock);
-        if(wait==WAIT_OBJECT_0+1 || WaitForSingleObject(state->stop_requested,0)==WAIT_OBJECT_0) {
+        if(wait==WAIT_OBJECT_0 || wait==WAIT_OBJECT_0+1) {
             error=ntw32_console_close();
             if(!error && !SetEvent(state->closed))error=GetLastError();
-            /* The authenticated root's exit is Console-session closure,
-             * just as it is for NTVDM. Closing a direct launcher is not.
+            /* The authenticated broker orders Console-session closure,
+             * just as it does for NTVDM. Closing a direct launcher does not.
              * Explicit management close uses this same backend operation. */
             TerminateProcess(GetCurrentProcess(),error ? error : ERROR_CANCELLED);
             LeaveCriticalSection(state->lock);
@@ -190,7 +190,7 @@ static DWORD WINAPI presentation_pump(void *context)
     if(!error || WaitForSingleObject(state->quit,0)!=WAIT_TIMEOUT)return error;
     /* Only an unrecoverable worker-side failure reaches here. A worker whose
      * presentation watcher has stopped cannot remain resident: it would no
-     * longer observe its root's Console-session close, even while idle. */
+     * longer consume the broker's Console-session close, even while idle. */
     EnterCriticalSection(state->lock);
     SetEvent(state->stop_requested);
     (void)ntw32_console_close();
@@ -215,6 +215,7 @@ static void membership_close(native_membership *state)
     if(state->stop_requested)CloseHandle(state->stop_requested);
     if(state->closed)CloseHandle(state->closed);
     if(state->admission_ready)CloseHandle(state->admission_ready);
+    if(state->shutdown)CloseHandle(state->shutdown);
     ZeroMemory(state,sizeof(*state));
     state->lock=lock;
 }
@@ -246,6 +247,7 @@ static DWORD membership_bind(native_membership *state,HANDLE frontend)
     if(!error && !DuplicateHandle(GetCurrentProcess(),frontend,GetCurrentProcess(),
         &state->capability,SYNCHRONIZE,FALSE,0))error=GetLastError();
     if(!error)error=OpenNtBaseClientRegisterNativeBackend(frontend,state->stop_requested,state->closed);
+    if(!error)error=worker_base_shutdown_event(&state->shutdown);
     if(!error) {
         state->thread=CreateThread(NULL,0,presentation_pump,state,0,NULL);
         if(!state->thread)error=GetLastError();

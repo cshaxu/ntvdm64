@@ -36,6 +36,7 @@ BOOL OpenNtBaseServiceIsEmpty(OPENNT_BASE_SERVICE *);
  * is service-owned and must not be closed by the caller. */
 HANDLE OpenNtBaseServiceFrontendLifetimeChanged(OPENNT_BASE_SERVICE *);
 DWORD OpenNtBaseServiceNextFrontendDeadline(OPENNT_BASE_SERVICE *,ULONGLONG *deadline);
+DWORD OpenNtBaseServiceWorkerShutdownEvent(OPENNT_BASE_CONNECTION *,DWORD,DWORD,HANDLE *);
 DWORD OpenNtBaseServiceRetireExpiredFrontends(OPENNT_BASE_SERVICE *);
 /* Management callers are authenticated by the transport before reaching
  * these methods. The service resolves a PID while holding its registration

@@ -253,6 +253,114 @@ static int frontend_console_identity(void)
     return 0;
 }
 
+/* Broker retirement is independent of borrowed/dedicated presentation and
+ * of LeaseReady. Only an authenticated, bounded startup owner may defer it. */
+typedef struct NATIVE_COMMAND_WAIT_TEST {
+    OPENNT_BASE_CONNECTION *connection;
+    DWORD pid,generation,error,request;
+    HANDLE started,channel,caller,execution,frontend;
+} NATIVE_COMMAND_WAIT_TEST;
+static DWORD WINAPI native_command_wait(void *context)
+{
+    NATIVE_COMMAND_WAIT_TEST *test=context;
+    SetEvent(test->started);
+    test->error=OpenNtBaseServiceGetNextNativeCommand(test->connection,test->pid,test->generation,
+        &test->channel,&test->caller,&test->execution,&test->frontend,&test->request);
+    return test->error;
+}
+static int frontend_authority(void)
+{
+    DWORD phase;
+    for(phase=0;phase<4;++phase) {
+        DWORD borrowed=phase%2;
+        OPENNT_BASE_SERVICE *service=OpenNtBaseServiceStart();
+        OPENNT_BASE_CONNECTION *launcher=NULL,*root=NULL;
+        HANDLE self=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION|SYNCHRONIZE,FALSE,GetCurrentProcessId());
+        HANDLE capability=CreateEventW(NULL,TRUE,FALSE,NULL);
+        HANDLE retire=CreateEventW(NULL,TRUE,FALSE,NULL),restored=CreateEventW(NULL,TRUE,FALSE,NULL);
+        HANDLE selected=NULL,selected_cap=NULL,selected_retire=NULL,selected_restored=NULL,shutdown=NULL;
+        PROCESS_INFORMATION child={0};
+        STARTUPINFOA startup={sizeof(startup)};
+        char image[MAX_PATH],command[MAX_PATH+32];
+        DWORD launcher_generation=0,root_generation=0,create=0,closing=0;
+        ULONGLONG deadline=0,before=GetTickCount64();
+        CHECK(service && self && capability && retire && restored);
+        CHECK(!OpenNtBaseServiceConnect(service,self,&launcher,&launcher_generation));
+        CHECK(!OpenNtBaseServiceAcquireFrontendRoot(launcher,GetCurrentProcessId(),launcher_generation,
+            1234,&create,&selected,&selected_cap,&selected_retire,&selected_restored) && create);
+        CHECK(GetModuleFileNameA(NULL,image,MAX_PATH));
+        sprintf_s(command,sizeof(command),"\"%s\" --reservation-child",image);
+        CHECK(CreateProcessA(NULL,command,NULL,NULL,FALSE,CREATE_SUSPENDED|CREATE_NO_WINDOW,
+            NULL,NULL,&startup,&child));
+        CHECK(!OpenNtBaseServiceConnect(service,child.hProcess,&root,&root_generation));
+        CHECK(!OpenNtBaseServiceRegisterFrontendRoot(root,child.dwProcessId,root_generation,capability));
+        CHECK(!OpenNtBaseServiceRegisterFrontendLease(root,child.dwProcessId,root_generation,
+            1234,GetCurrentProcessId(),borrowed,retire,restored));
+        CHECK(OpenNtBaseServiceWorkerShutdownEvent(root,child.dwProcessId,root_generation,&shutdown)==ERROR_ACCESS_DENIED);
+        CHECK(!shutdown);
+        CHECK(!OpenNtBaseServiceRetireExpiredFrontends(service));
+        CHECK(!OpenNtBaseServiceRetireWorkerlessFrontend(root,child.dwProcessId,root_generation,&closing) && !closing);
+        CHECK(!OpenNtBaseServiceNextFrontendDeadline(service,&deadline));
+        CHECK(deadline>=before && deadline<=GetTickCount64()+10000);
+        if(phase>=2) {
+            OPENNT_BASE_CONNECTION *worker=NULL;
+            PROCESS_INFORMATION backend={0};
+            DWORD worker_generation=0,retained_generation=0;
+            DWORD members[2]={child.dwProcessId,GetCurrentProcessId()};
+            uint64_t reservation=0;
+            HANDLE retained=NULL;
+            HANDLE command_wait=NULL;
+            NATIVE_COMMAND_WAIT_TEST waiting={0};
+            CHECK(!OpenNtBaseServiceReportConsoleMembers(root,child.dwProcessId,root_generation,2,members));
+            CHECK(!OpenNtBaseServiceRetainFrontendRoot(launcher,GetCurrentProcessId(),launcher_generation,
+                capability,&retained,&retained_generation));CloseHandle(retained);
+            CHECK(!OpenNtBaseServiceCreateNativeReservation(launcher,GetCurrentProcessId(),launcher_generation,&reservation));
+            CHECK(CreateProcessA(NULL,command,NULL,NULL,FALSE,CREATE_SUSPENDED|CREATE_NO_WINDOW,
+                NULL,NULL,&startup,&backend));
+            CHECK(!OpenNtBaseServicePrepareWorker(launcher,GetCurrentProcessId(),launcher_generation,reservation,backend.hProcess));
+            CHECK(!OpenNtBaseServiceConnect(service,backend.hProcess,&worker,&worker_generation));
+            CHECK(OpenNtBaseServiceWorkerShutdownEvent(worker,backend.dwProcessId,worker_generation+1,&shutdown)==ERROR_ACCESS_DENIED);
+            CHECK(!OpenNtBaseServiceWorkerShutdownEvent(worker,backend.dwProcessId,worker_generation,&shutdown));
+            CHECK(WaitForSingleObject(shutdown,0)==WAIT_TIMEOUT);
+            CHECK(!SetEvent(shutdown) && GetLastError()==ERROR_ACCESS_DENIED);
+            waiting.connection=worker;waiting.pid=backend.dwProcessId;waiting.generation=worker_generation;
+            waiting.started=CreateEventW(NULL,TRUE,FALSE,NULL);CHECK(waiting.started);
+            command_wait=CreateThread(NULL,0,native_command_wait,&waiting,0,NULL);CHECK(command_wait);
+            CHECK(WaitForSingleObject(waiting.started,5000)==WAIT_OBJECT_0);
+            CHECK(WaitForSingleObject(command_wait,0)==WAIT_TIMEOUT);
+            CHECK(!OpenNtBaseServiceDisconnect(root));root=NULL;
+            CHECK(WaitForSingleObject(shutdown,0)==WAIT_TIMEOUT); /* Not worker policy. */
+            CHECK(!OpenNtBaseServiceRetireExpiredFrontends(service));
+            CHECK(WaitForSingleObject(shutdown,0)==WAIT_OBJECT_0);
+            CHECK(WaitForSingleObject(command_wait,5000)==WAIT_OBJECT_0);
+            CHECK(waiting.error==ERROR_CANCELLED && !waiting.request && !waiting.channel &&
+                !waiting.caller && !waiting.execution && !waiting.frontend);
+            CloseHandle(command_wait);CloseHandle(waiting.started);
+            CHECK(WaitForSingleObject(backend.hProcess,0)==WAIT_TIMEOUT); /* Instruction, not tree kill. */
+            CHECK(TerminateProcess(backend.hProcess,0));
+            CHECK(!OpenNtBaseServiceDisconnect(worker));
+            CloseHandle(shutdown);CloseHandle(backend.hThread);CloseHandle(backend.hProcess);
+            CHECK(!OpenNtBaseServiceDisconnect(launcher));launcher=NULL;
+            {ULONGLONG until=GetTickCount64()+5000;
+                while(!OpenNtBaseServiceIsEmpty(service) && GetTickCount64()<until)Sleep(1);}
+        } else {
+        /* No LeaseReady call: the obsolete idle gate must not pin this root. */
+        CHECK(!OpenNtBaseServiceDisconnect(launcher));launcher=NULL;
+        CHECK(!OpenNtBaseServiceRetireExpiredFrontends(service));
+        CHECK(!OpenNtBaseServiceRetireWorkerlessFrontend(root,child.dwProcessId,root_generation,&closing) && closing);
+        CHECK(!OpenNtBaseServiceNextFrontendDeadline(service,&deadline) && !deadline);
+        CHECK(!OpenNtBaseServiceIsEmpty(service));
+        CHECK(!OpenNtBaseServiceDisconnect(root));root=NULL;
+        }
+        CHECK(OpenNtBaseServiceIsEmpty(service) && OpenNtBaseServiceStop(service));
+        CHECK(TerminateProcess(child.hProcess,0));
+        CloseHandle(child.hThread);CloseHandle(child.hProcess);
+        CloseHandle(capability);CloseHandle(retire);CloseHandle(restored);CloseHandle(self);
+    }
+    puts("PASS: broker retires workerless dedicated/borrowed roots without an idle gate; startup admission remains bounded");
+    return 0;
+}
+
 int main(int argc,char **argv)
 {
     OPENNT_BASE_SERVICE *service=NULL;
@@ -288,6 +396,8 @@ int main(int argc,char **argv)
         return reservation_descendant(argv[2]);
     if(argc==2 && !strcmp(argv[1],"--console-identity"))
         return frontend_console_identity();
+    if(argc==2 && !strcmp(argv[1],"--frontend-authority"))
+        return frontend_authority();
     if (argc!=1) {
         static const char *modes[]={
             "--reservation-child","--native-worker","--native-backend","--frontend-root","--worker-channel","--frontend-unclaimed-stop",

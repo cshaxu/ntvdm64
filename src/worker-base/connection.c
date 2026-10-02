@@ -17,6 +17,11 @@ void worker_base_disconnect(void)
     OpenNtBaseClientDisconnectCurrent();
 }
 
+DWORD worker_base_shutdown_event(HANDLE *shutdown)
+{
+    return OpenNtBaseClientWorkerShutdownEvent(shutdown);
+}
+
 DWORD worker_base_retain_frontend_root(HANDLE capability,HANDLE *process)
 {
     DWORD generation,error;

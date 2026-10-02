@@ -4,6 +4,8 @@
 /* Worker-side broker lifetime binding. The caller owns CsrPortHeap and its
  * backend state; it must disconnect before destroying that storage. */
 DWORD worker_base_connect(void);
+/* Caller owns a synchronize-only shutdown event; NTSRV alone signals it. */
+DWORD worker_base_shutdown_event(HANDLE *shutdown);
 void worker_base_disconnect(void);
 /* Resolve a copied frontend capability through NTSRV. The returned process
  * handle is wait-only and belongs to the caller; an event or PID alone is

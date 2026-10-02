@@ -11,7 +11,7 @@
 #include <base_interactive.h>
 #include <base_event.h>
 #include "ntsrv-exe/transport/vdm_receipt.h"
-#define FRONTEND_WORKERLESS_GRACE_MS 10000u
+#define FRONTEND_STARTUP_DEADLINE_MS 10000u
 typedef NTSTATUS (*OPENNT_USER_TEST_TOKEN_FOR_INTERACTIVE)(HANDLE,PLUID);
 extern OPENNT_USER_TEST_TOKEN_FOR_INTERACTIVE UserTestTokenForInteractive;
 /* srvvdm.c owns these source-shaped lists and their lock objects.  They are
@@ -81,7 +81,9 @@ struct OPENNT_BASE_CONNECTION {
     uint64_t frontend_console_window,frontend_reserved_window;
     HANDLE frontend_retire,frontend_restored;
     BOOL frontend_borrowed,frontend_idle;
-    ULONGLONG frontend_workerless_since;
+    ULONGLONG frontend_admission_deadline;
+    DWORD frontend_creator_generation;
+    HANDLE frontend_exit_watch,frontend_exit_process;
     OPENNT_BASE_CONNECTION *frontend_join_caller;
     DWORD frontend_join_nonce,frontend_join_pid;
     int frontend_join_decision;
@@ -142,6 +144,8 @@ typedef struct OPENNT_BASE_WORKER_WATCH {
      * DOSRecord chain remains the sole source of task depth and state. */
     LIST_ENTRY management_labels;
     BOOL termination_requested;
+    HANDLE shutdown;
+    BOOL frontend_associated;
 } OPENNT_BASE_WORKER_WATCH;
 typedef struct OPENNT_BASE_MANAGEMENT_LABEL {
     LIST_ENTRY link;
@@ -156,6 +160,7 @@ typedef struct OPENNT_BASE_CONSOLE_CONTEXT {
     HANDLE capability,console;
 } OPENNT_BASE_CONSOLE_CONTEXT;
 static DWORD service_bind_existing_console(OPENNT_BASE_CONNECTION *connection);
+static BOOL service_root_has_worker(OPENNT_BASE_CONNECTION *root);
 /* A resident native worker may be selected only while its original
  * authenticated frontend root is still an open character session. A new
  * root in the same Windows Console is not a replacement for that root. */
@@ -513,6 +518,7 @@ static VOID CALLBACK service_worker_terminated(PVOID context,BOOLEAN fired)
     LeaveCriticalSection(&watch->service->lock);
 service_clear_management_labels(watch);
     CloseHandle(watch->process.ProcessHandle);
+    if(watch->shutdown)CloseHandle(watch->shutdown);
     HeapFree(GetProcessHeap(),0,watch);
     if (notify) notify(notify_context);
 }
@@ -1208,6 +1214,8 @@ DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *service,HANDLE process,
                 watch->console=console;
                 watch->wow=shared_wow;
                 watch->reservation=reservation;
+                watch->shutdown=CreateEventW(NULL,TRUE,FALSE,NULL);
+                if(!watch->shutdown)error=GetLastError();
                 InitializeListHead(&watch->management_labels);
                 /* The first DOS record precedes the worker's first RPC.  Copy
                  * only its label before original GetNextVDMCommand releases
@@ -1221,7 +1229,7 @@ DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *service,HANDLE process,
                 /* Both resident worker kinds retain the authenticated root's
                  * outer-Console identity. NTW32 may later refresh it at direct
                  * delivery; DOS keeps the initial root for re-entry. */
-                if(!shared_wow && console) {
+                if(!error && !shared_wow && console) {
                     LIST_ENTRY *root_link;
                     for(root_link=service->connections.Flink;
                         root_link!=&service->connections;root_link=root_link->Flink) {
@@ -1231,6 +1239,7 @@ DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *service,HANDLE process,
                             root->console_member_count && !root->frontend_closing &&
                             WaitForSingleObject(root->process.ProcessHandle,0)==WAIT_TIMEOUT) {
                             error=service_copy_execution_console_members(connection,root);
+                            watch->frontend_associated=TRUE;
                             break;
                         }
                     }
@@ -1239,6 +1248,7 @@ DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *service,HANDLE process,
                     service_worker_terminated,watch,INFINITE,WT_EXECUTEONLYONCE)) {
                     if(!error)error=GetLastError();
                     CloseHandle(watch->process.ProcessHandle);
+                    if(watch->shutdown)CloseHandle(watch->shutdown);
                     HeapFree(GetProcessHeap(),0,watch);
                     if(!connection->native_worker)BaseSrvCleanupVDMResources(&connection->process);
                 } else {
@@ -1258,7 +1268,7 @@ DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *service,HANDLE process,
                     OPENNT_BASE_CONNECTION *root=CONTAINING_RECORD(root_link,
                         OPENNT_BASE_CONNECTION,service_link);
                     if(root->frontend_capability && root->console==console)
-                        root->frontend_workerless_since=0;
+                        root->frontend_admission_deadline=0;
                 }
                 service_signal_frontend_states(service);
             }
@@ -1309,6 +1319,9 @@ DWORD OpenNtBaseServiceDisconnect(OPENNT_BASE_CONNECTION *connection)
     if (!error) {
         service_clear_pending_win32record(connection);
         service_clear_win32records(connection);
+        if(connection->frontend_exit_watch)
+            (void)UnregisterWaitEx(connection->frontend_exit_watch,INVALID_HANDLE_VALUE);
+        if(connection->frontend_exit_process)CloseHandle(connection->frontend_exit_process);
         if (connection->frontend_capability) CloseHandle(connection->frontend_capability);
         if (connection->frontend_retire) CloseHandle(connection->frontend_retire);
         if (connection->frontend_restored) CloseHandle(connection->frontend_restored);
@@ -1481,7 +1494,9 @@ DWORD OpenNtBaseServiceAcquireFrontendRoot(OPENNT_BASE_CONNECTION *caller,DWORD 
                     if(!ResetEvent(root->frontend_retire) || !ResetEvent(root->frontend_restored))
                         {error=GetLastError();break;}
                     root->frontend_idle=FALSE;
-                    root->frontend_workerless_since=0;
+                    root->frontend_admission_deadline=service_root_has_worker(root) ? 0 :
+                        GetTickCount64()+FRONTEND_STARTUP_DEADLINE_MS;
+                    root->frontend_creator_generation=generation;
                     caller->retained_frontend_root=root->process.SequenceNumber;
                     /* Match RetainFrontendRoot: the authenticated reusable
                      * root also establishes the caller's Console identity. */
@@ -1536,6 +1551,13 @@ DWORD OpenNtBaseServiceCancelFrontendRootReservation(OPENNT_BASE_CONNECTION *cal
     return error;
 }
 
+static VOID CALLBACK service_frontend_exited(PVOID context,BOOLEAN fired)
+{
+    OPENNT_BASE_SERVICE *service=context;
+    (void)fired;
+    (void)SetEvent(service->frontend_lifetime_changed);
+}
+
 DWORD OpenNtBaseServiceRegisterFrontendLease(OPENNT_BASE_CONNECTION *root,DWORD pid,
     DWORD generation,uint64_t console_window,DWORD creator_pid,BOOL borrowed,
     HANDLE retire,HANDLE restored)
@@ -1573,6 +1595,25 @@ DWORD OpenNtBaseServiceRegisterFrontendLease(OPENNT_BASE_CONNECTION *root,DWORD 
     }
     root->frontend_console_window=console_window;
     root->frontend_borrowed=borrowed;
+    root->frontend_creator_generation=creator->process.SequenceNumber;
+    root->frontend_admission_deadline=GetTickCount64()+FRONTEND_STARTUP_DEADLINE_MS;
+    creator->retained_frontend_root=generation;
+    /* Registry removal closes ProcessHandle before context disposal. The
+     * registered wait therefore owns a separate copy until joined below. */
+    if(!DuplicateHandle(GetCurrentProcess(),root->process.ProcessHandle,GetCurrentProcess(),
+        &root->frontend_exit_process,SYNCHRONIZE,FALSE,0) ||
+       !RegisterWaitForSingleObject(&root->frontend_exit_watch,root->frontend_exit_process,
+        service_frontend_exited,root->service,INFINITE,WT_EXECUTEONLYONCE)) {
+        error=GetLastError();
+        root->frontend_console_window=0;
+        root->frontend_creator_generation=0;
+        root->frontend_admission_deadline=0;
+        creator->retained_frontend_root=0;
+        CloseHandle(root->frontend_retire);root->frontend_retire=NULL;
+        CloseHandle(root->frontend_restored);root->frontend_restored=NULL;
+        if(root->frontend_exit_process){CloseHandle(root->frontend_exit_process);root->frontend_exit_process=NULL;}
+        goto done;
+    }
     creator->frontend_reserved_window=0;
     service_signal_frontend_states(root->service);
     WakeAllConditionVariable(&root->service->frontend_changed);
@@ -1620,9 +1661,9 @@ DWORD OpenNtBaseServiceFrontendLeaseReady(OPENNT_BASE_CONNECTION *root,DWORD pid
     if(!root)return error;
     EnterCriticalSection(&root->service->lock);
     if(OpenNtBaseServicePeer(root,pid,generation) && root->frontend_capability &&
-        root->frontend_borrowed && !root->frontend_closing && root->frontend_restored) {
+        !root->frontend_closing && root->frontend_restored) {
         if(SetEvent(root->frontend_restored)) {
-            /* A borrowed root returns the visible Console, not the worker
+            /* A leased root returns the visible Console, not the worker
              * channels. Keep delivered routes for resident worker reuse. */
             root->frontend_idle=TRUE;
             service_signal_frontend_states(root->service);
@@ -1751,7 +1792,7 @@ DWORD OpenNtBaseServiceRegisterNativeBackend(OPENNT_BASE_CONNECTION *connection,
             OPENNT_BASE_CONNECTION *registered_root=CONTAINING_RECORD(root_link,
                 OPENNT_BASE_CONNECTION,service_link);
             if(registered_root->process.SequenceNumber==root_generation)
-                {registered_root->frontend_workerless_since=0;break;}
+                {registered_root->frontend_admission_deadline=0;break;}
         }
     }
     if(connection->native_stop)CloseHandle(connection->native_stop);
@@ -2216,7 +2257,27 @@ DWORD OpenNtBaseServiceRetireWorkerlessFrontend(OPENNT_BASE_CONNECTION *root,DWO
     return error;
 }
 
-/* The broker alone owns the worker census and the one-shot workerless clock.
+DWORD OpenNtBaseServiceWorkerShutdownEvent(OPENNT_BASE_CONNECTION *worker,DWORD pid,
+    DWORD generation,HANDLE *shutdown)
+{
+    LIST_ENTRY *link;
+    DWORD error=ERROR_ACCESS_DENIED;
+    if(!worker || !shutdown)return ERROR_INVALID_PARAMETER;
+    *shutdown=NULL;
+    EnterCriticalSection(&worker->service->lock);
+    if(OpenNtBaseServicePeer(worker,pid,generation))
+        for(link=worker->service->worker_watches.Flink;link!=&worker->service->worker_watches;link=link->Flink) {
+            OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(link,OPENNT_BASE_WORKER_WATCH,link);
+            if(watch->process.SequenceNumber!=generation)continue;
+            error=DuplicateHandle(GetCurrentProcess(),watch->shutdown,GetCurrentProcess(),shutdown,
+                SYNCHRONIZE,FALSE,0) ? ERROR_SUCCESS : GetLastError();
+            break;
+        }
+    LeaveCriticalSection(&worker->service->lock);
+    return error;
+}
+
+/* The broker alone owns the worker census and bounded startup admission.
  * This is a Console-root lifetime check, never a DOS/native task scheduler. */
 static BOOL service_root_has_worker(OPENNT_BASE_CONNECTION *root)
 {
@@ -2245,13 +2306,19 @@ static BOOL service_root_has_worker(OPENNT_BASE_CONNECTION *root)
 }
 static BOOL service_root_workerless(OPENNT_BASE_CONNECTION *root)
 {
-    DWORD pending=0,tasks=0,pid=(DWORD)(ULONG_PTR)root->process.ClientId.UniqueProcess;
-    if(!root->frontend_capability || !root->frontend_borrowed || !root->frontend_idle ||
-        root->frontend_join_caller || root->frontend_closing ||
+    LIST_ENTRY *link;
+    if(!root->frontend_capability || !root->frontend_console_window || root->frontend_closing ||
         WaitForSingleObject(root->process.ProcessHandle,0)!=WAIT_TIMEOUT ||
         service_root_has_worker(root))return FALSE;
-    return !OpenNtBaseServiceFrontendUsage(root,pid,root->process.SequenceNumber,
-        &pending,&tasks) && !pending && !tasks;
+    /* Only a live authenticated startup owner grants a bounded exemption.
+     * Idle/pending/join leftovers cannot indefinitely keep an orphan alive. */
+    if(root->frontend_admission_deadline>GetTickCount64())
+        for(link=root->service->connections.Flink;link!=&root->service->connections;link=link->Flink) {
+            OPENNT_BASE_CONNECTION *caller=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
+            if(caller->process.SequenceNumber==root->frontend_creator_generation &&
+                WaitForSingleObject(caller->process.ProcessHandle,0)==WAIT_TIMEOUT)return FALSE;
+        }
+    return TRUE;
 }
 HANDLE OpenNtBaseServiceFrontendLifetimeChanged(OPENNT_BASE_SERVICE *service)
 {
@@ -2266,10 +2333,14 @@ DWORD OpenNtBaseServiceNextFrontendDeadline(OPENNT_BASE_SERVICE *service,ULONGLO
     EnterCriticalSection(&service->lock);
     for(link=service->connections.Flink;link!=&service->connections;link=link->Flink) {
         OPENNT_BASE_CONNECTION *root=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
-        if(!service_root_workerless(root)) {root->frontend_workerless_since=0;continue;}
-        if(!root->frontend_workerless_since)root->frontend_workerless_since=now ? now : 1;
-        if(!*deadline || root->frontend_workerless_since+FRONTEND_WORKERLESS_GRACE_MS<*deadline)
-            *deadline=root->frontend_workerless_since+FRONTEND_WORKERLESS_GRACE_MS;
+        if(!root->frontend_capability || !root->frontend_console_window || root->frontend_closing ||
+            WaitForSingleObject(root->process.ProcessHandle,0)!=WAIT_TIMEOUT ||
+            service_root_has_worker(root))continue;
+        if(service_root_workerless(root)) {
+            if(!*deadline || now<*deadline)*deadline=now;
+        } else if(root->frontend_admission_deadline &&
+            (!*deadline || root->frontend_admission_deadline<*deadline))
+            *deadline=root->frontend_admission_deadline;
     }
     LeaveCriticalSection(&service->lock);
     return ERROR_SUCCESS;
@@ -2277,18 +2348,43 @@ DWORD OpenNtBaseServiceNextFrontendDeadline(OPENNT_BASE_SERVICE *service,ULONGLO
 DWORD OpenNtBaseServiceRetireExpiredFrontends(OPENNT_BASE_SERVICE *service)
 {
     LIST_ENTRY *link;
-    ULONGLONG now;
     BOOL changed=FALSE;
     if(!service)return ERROR_INVALID_PARAMETER;
-    now=GetTickCount64();
     EnterCriticalSection(&service->lock);
     for(link=service->connections.Flink;link!=&service->connections;link=link->Flink) {
         OPENNT_BASE_CONNECTION *root=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
-        if(!service_root_workerless(root)) {root->frontend_workerless_since=0;continue;}
-        if(root->frontend_workerless_since &&
-            now-root->frontend_workerless_since>=FRONTEND_WORKERLESS_GRACE_MS) {
+        if(service_root_workerless(root)) {
             root->frontend_closing=TRUE;
             changed=TRUE;
+        }
+    }
+    /* Only NTSRV translates lost frontend ownership into worker shutdown.
+     * A live worker which has never been associated is still in startup. */
+    for(link=service->worker_watches.Flink;link!=&service->worker_watches;link=link->Flink) {
+        OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(link,OPENNT_BASE_WORKER_WATCH,link);
+        LIST_ENTRY *root_link;
+        BOOL attached=FALSE;
+        DWORD native_root=0;
+        if(watch->wow)continue;
+        if(watch->kind==OPENNT_BASE_WORKER_NATIVE)
+            for(root_link=service->connections.Flink;root_link!=&service->connections;root_link=root_link->Flink) {
+                OPENNT_BASE_CONNECTION *worker=CONTAINING_RECORD(root_link,OPENNT_BASE_CONNECTION,service_link);
+                if(worker->process.SequenceNumber==watch->process.SequenceNumber){native_root=worker->native_root;break;}
+            }
+        for(root_link=service->connections.Flink;root_link!=&service->connections;root_link=root_link->Flink) {
+            OPENNT_BASE_CONNECTION *root=CONTAINING_RECORD(root_link,OPENNT_BASE_CONNECTION,service_link);
+            if(!root->frontend_capability)continue;
+            if((native_root && native_root==root->process.SequenceNumber) ||
+                (!native_root && root->console==watch->console)) {
+                watch->frontend_associated=TRUE;
+                if(!root->frontend_closing && WaitForSingleObject(root->process.ProcessHandle,0)==WAIT_TIMEOUT)
+                    attached=TRUE;
+            }
+        }
+        if(watch->frontend_associated && !attached && watch->shutdown &&
+            WaitForSingleObject(watch->shutdown,0)==WAIT_TIMEOUT) {
+            (void)SetEvent(watch->shutdown);
+            changed=TRUE; /* Also wake pre-binding GetNextCommand. */
         }
     }
     if(changed) {
@@ -2524,8 +2620,22 @@ DWORD OpenNtBaseServiceGetNextNativeCommand(OPENNT_BASE_CONNECTION *connection,D
 {
     DWORD error;
     if (!connection) return ERROR_ACCESS_DENIED;
+    if(!channel || !caller_process || !execution || !frontend || !request)return ERROR_INVALID_PARAMETER;
+    *channel=*caller_process=*execution=*frontend=NULL;*request=0;
     EnterCriticalSection(&connection->service->lock);
     for (;;) {
+        LIST_ENTRY *link;
+        if(!OpenNtBaseServicePeer(connection,pid,generation)){error=ERROR_ACCESS_DENIED;break;}
+        /* Close is authoritative even before the first presentation binding;
+         * never deliver another queued command after this broker instruction. */
+        for(link=connection->service->worker_watches.Flink;
+            link!=&connection->service->worker_watches;link=link->Flink) {
+            OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(link,OPENNT_BASE_WORKER_WATCH,link);
+            if(watch->process.SequenceNumber==generation &&
+                WaitForSingleObject(watch->shutdown,0)==WAIT_OBJECT_0) {
+                error=ERROR_CANCELLED;goto done;
+            }
+        }
         error=OpenNtBaseServiceTakeWorkerChannel(connection,pid,generation,
             channel,caller_process,execution,frontend,request);
         if (error!=ERROR_NOT_FOUND) break;
@@ -2534,6 +2644,7 @@ DWORD OpenNtBaseServiceGetNextNativeCommand(OPENNT_BASE_CONNECTION *connection,D
         if (!SleepConditionVariableCS(&connection->service->frontend_changed,
                 &connection->service->lock,INFINITE)) { error=GetLastError();break; }
     }
+done:
     LeaveCriticalSection(&connection->service->lock);
     return error;
 }

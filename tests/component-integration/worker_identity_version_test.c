@@ -26,8 +26,11 @@ int wmain(int argc, WCHAR **argv)
     HANDLE self = NULL;
     ULONG protocol = 0, generation = 0;
     DWORD error = 0, attempt;
+    RPC_IF_ID interface_id;
     int failed = 1;
-    if (argc != 2 || !broker_rpc_capture_scope(&scope)) return 2;
+    if ((argc != 2 && argc != 3) || !broker_rpc_capture_scope(&scope)) return 2;
+    if(RpcIfInqId(Client_vdm_service_v29_0_c_ifspec,&interface_id) ||
+        interface_id.VersMajor!=APP_PROTOCOL_VERSION || interface_id.VersMinor!=0)return 2;
     swprintf_s(endpoint,128,L"ntvdm-basesrv-%lu-%08lx-%08lx",
         scope.session,(ULONG)scope.logon.HighPart,scope.logon.LowPart);
     if (RpcStringBindingComposeW(NULL,(RPC_WSTR)L"ncalrpc",NULL,
@@ -71,7 +74,22 @@ int wmain(int argc, WCHAR **argv)
             &protocol,server,&connection,&generation);
     } RpcExcept(1) { error=RpcExceptionCode(); } RpcEndExcept
     if (error!=ERROR_REVISION_MISMATCH || connection || generation) goto done;
-    puts("PASS wrong application protocol rejected; RPC major and UUID unchanged");
+    puts("PASS wrong application protocol rejected; RPC major matches application protocol");
+    if(argc==3) {
+        PROCESS_INFORMATION legacy={0};
+        WCHAR command[2*MAX_PATH];
+        DWORD legacy_exit=0;
+        swprintf_s(command,2*MAX_PATH,L"\"%ls\" cmd /c exit 0",argv[2]);
+        if(!CreateProcessW(argv[2],command,NULL,NULL,FALSE,CREATE_NO_WINDOW,NULL,NULL,&startup,&legacy))goto done;
+        if(WaitForSingleObject(legacy.hProcess,15000)!=WAIT_OBJECT_0) {
+            TerminateProcess(legacy.hProcess,ERROR_TIMEOUT);
+            CloseHandle(legacy.hThread);CloseHandle(legacy.hProcess);goto done;
+        }
+        error=GetExitCodeProcess(legacy.hProcess,&legacy_exit) ? legacy_exit : GetLastError();
+        CloseHandle(legacy.hThread);CloseHandle(legacy.hProcess);
+        if(error!=ERROR_REVISION_MISMATCH)goto done;
+        puts("PASS previous RPC interface client rejected before launching a target");
+    }
     failed=0;
 done:
     if (connection && binding) Client_Disconnect(binding,self,generation,&connection);

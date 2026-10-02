@@ -17,6 +17,7 @@ DWORD OpenNtBaseClientWowStartup(HANDLE parent,HANDLE *event,BOOL *started);
 DWORD OpenNtBaseClientFrontendUsage(DWORD *pending,DWORD *tasks);
 DWORD OpenNtBaseClientRetireWorkerlessFrontend(DWORD *retired);
 DWORD OpenNtBaseClientFrontendStateChanged(HANDLE *state_changed);
+DWORD OpenNtBaseClientWorkerShutdownEvent(HANDLE *shutdown);
 DWORD OpenNtBaseClientWorkerStateChanged(HANDLE *state_changed);
 DWORD OpenNtBaseClientRetireFrontend(void);
 DWORD OpenNtBaseClientRegisterFrontendRoot(HANDLE capability);

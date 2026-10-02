@@ -2,14 +2,17 @@
 
 ## Status, dependency and outcome
 
-Owner-requested unnumbered T candidate, fourth in the remaining queue after
+Owner-requested unnumbered T candidate, fifth in the remaining queue after
 the [native launch-hook candidate](proposal-native-launch-hook-001.md).
 The active component-renaming package is absent from Queue and is not
 expanded by this planning revision. T423 is owner-closed; this transfers its
 former unimplemented S39 observation plan, not an active or completed S.
 Implementation depends on both the delivered naming package and the launch
 hook package. Here `NTW32` is the Win32 text worker and `NTCON` is the renamed
-visible Console/Window frontend.
+visible Console/Window frontend. Reuse the preceding
+[NTMON Console-root tree package](proposal-ntmon-console-worker-tree-001.md)
+for the ordinary management list, root selection/close and worker grouping;
+this package adds the separate task-detail modal, not a second tree or DEL policy.
 
 Provide an NTSRV-authoritative, read-only view of the execution chain for a
 selected NTVDM or NTW32 worker. NTMON reads that view and opens a detail modal

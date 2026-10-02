@@ -73,7 +73,7 @@ helper, scheduler, observed graph, launch syntax or lifecycle change is admitted
 | --- | --- |
 | S1 | Read-only full referent inventory, ABI decisions, hashes and migration map. |
 | S2 | NTW32/Win32Record migration, complete-tree referent and original-name preservation gates, full production verification and intermediate eight-file publication. |
-| S3 | Owner-added abnormal-exit/re-launch lifecycle investigation; causal evidence and bounded repair recommendation, no production repair yet. |
+| S3 | Owner-added abnormal-exit/re-launch lifecycle investigation and explicitly approved broker-owned retirement repair; highest-priority authenticated close, bounded startup admission, repeated-launch/failure/isolation tests and coherent publication. |
 | S4 | Former S3: frontend NTCON migration after S3 disposition; build/test/wiring/name checks and verified final eight-file publication. |
 | S5 | Former S4: final ownership/semantic-diff and naming audit, indexes/authorities, clean committed/pushed delivery; owner decides T acceptance. |
 
@@ -83,7 +83,16 @@ Both run16 cmd and run16 command reportedly hang before any prompt after an
 apparent abnormal exit; NTMON reports Ready but no worker. Preserve the live
 scene, distinguish a resident root from an unusable lease and investigate
 NTSRV admission, completion and workerless-grace ordering. This is research
-scope only, not permission for timer extensions or speculative runtime fixes.
+scope initially. The owner's subsequent explicit approval admits implementation:
+NTSRV alone decides orderly frontend/worker retirement; NTKVM keeps the user
+Console-close boundary, while NTVDM/NTW32 consume authenticated broker shutdown
+events. Broker instructions take precedence over pending/lease/I/O state.
+Orphan roots retire without an idle prerequisite or a no-worker grace; only a
+live authenticated startup owner grants a bounded ten-second admission window.
+NTSRV's own empty grace cannot start with live registered frontends/workers or
+legal admissions. This overrides the investigation-only limitation, not S2's
+name-only scope. Original DOS cleanup and native Console-close acknowledgement
+remain in their respective workers; no helper, scheduler or tree kill is added.
 
 An externally fixed project identifier or imported-original conflict requires
 review, not an alias. Original Console names already classified by S1 are

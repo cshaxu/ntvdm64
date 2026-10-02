@@ -72,6 +72,14 @@ static DWORD WINAPI frontend_pump(void *context)
         if (wait<WAIT_OBJECT_0 || wait>=WAIT_OBJECT_0+wait_count) {
             return GetLastError();
         }
+        /* Broker shutdown is authoritative even with a stale lease/pending
+         * request. Check it before joins, channel work or lease restoration. */
+        {
+            DWORD retired=0;
+            error=OpenNtBaseClientRetireWorkerlessFrontend(&retired);
+            if(error)return error;
+            if(retired)return ERROR_SUCCESS;
+        }
         if(retire_index!=MAXDWORD && wait==WAIT_OBJECT_0+retire_index)
             scope->retire_requested=TRUE;
         if(creator_index!=MAXDWORD && wait==WAIT_OBJECT_0+creator_index)
@@ -147,29 +155,11 @@ static DWORD WINAPI frontend_pump(void *context)
             /* NTSRV includes native admissions and reported Console members.
              * The frontend owns neither targets nor a second backend census. */
             if(pending || tasks)continue;
-            error=scope->borrowed ? ERROR_SUCCESS : OpenNtBaseClientRetireFrontend();
-            /* ERROR_BUSY is not retried on a timer. The root-private
-             * auto-reset NTSRV state event remains signalled across a
-             * mutation that races this attempt, then wakes this wait-set. */
-            if(error==ERROR_BUSY)continue;
-            if(error)return error;
-            /* No new admissions after the broker barrier. A borrowed root
-             * returns the visible Console but retains resident worker I/O;
-             * a dedicated root may drain its channels and retire. */
-            if(scope->borrowed) {
+            /* Return the visible Console but retain resident worker I/O.
+             * Only the broker decides when the root must retire. */
+            {
                 error=run16_native_frontend_park(scope->native);
                 if(error)return error;
-            }else {
-                while(scope->channels){
-                    frontend_channel *entry=scope->channels;
-                    error=run16_console_channel_stop(entry->channel);
-                    if(error)return error;
-                    scope->channels=entry->next;
-                    HeapFree(GetProcessHeap(),0,entry);
-                }
-                error=run16_native_frontend_drain(scope->native);
-                if(error)return error;
-                return ERROR_SUCCESS;
             }
             /* Resident channels remain admitted across borrowed leases. A
              * second launch must be able to retire the same frontend. */
@@ -178,12 +168,6 @@ static DWORD WINAPI frontend_pump(void *context)
             if(!ResetEvent(scope->retire))return GetLastError();
             error=OpenNtBaseClientFrontendLeaseReady();
             if(error)return error;
-        }
-        if(scope->borrowed) {
-            DWORD retired=0;
-            error=OpenNtBaseClientRetireWorkerlessFrontend(&retired);
-            if(error)return error;
-            if(retired)return ERROR_SUCCESS;
         }
     }
     return ERROR_SUCCESS;

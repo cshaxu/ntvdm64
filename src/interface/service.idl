@@ -1,12 +1,17 @@
 import "wtypes.idl";
 [
     uuid(7d3e78bd-0472-4736-8797-e64e966d692e),
-    version(28.0),
+    version(29.0),
     pointer_default(unique)
 ]
 interface vdm_service
 {
     typedef [context_handle] void *VDM_CONNECTION;
+    error_status_t WorkerShutdownEvent(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [out, system_handle(sh_event)] HANDLE *shutdown);
     error_status_t CompleteWorkerChannel(
         [in] handle_t binding, [in] VDM_CONNECTION connection,
         [in, system_handle(sh_process)] HANDLE process,

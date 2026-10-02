@@ -28,7 +28,7 @@ static BOOL decode_input(const console_io_input *wire,INPUT_RECORD *record)
 typedef struct console_client {
     session *owner;
     ntkvm_worker_client channel;
-    HANDLE ready,wake,stop,rearm,watcher;
+    HANDLE ready,wake,stop,rearm,watcher,shutdown;
     HANDLE capability,input_identity,output_identity;
     CRITICAL_SECTION lock;
     console_io_request request;
@@ -147,7 +147,7 @@ BOOL ntvdm_console_text_palette(PALETTEENTRY colours[16])
 
 /* Original nt_event.c owns the VDM close decision/cleanup. The NT4 Console
  * Server used a callback thread and bounded wait before forced close. Our
- * authenticated root process is the session lifetime capability; no native
+ * authenticated broker instruction controls session retirement; no native
  * Console, PID ancestry, or guest/task policy is acquired here. */
 extern BOOL CntrlHandler(ULONG type);
 static DWORD WINAPI console_close_callback(void *context)
@@ -167,12 +167,12 @@ static DWORD WINAPI console_input_watch(void *context)
     console_client *client=context;
     BOOL pending=FALSE;
     for (;;) {
-        HANDLE waits[3]={client->stop,client->channel.peer,pending ? client->rearm : client->ready};
+        HANDLE waits[3]={client->shutdown,client->stop,pending ? client->rearm : client->ready};
         DWORD result=WaitForMultipleObjects(3,waits,FALSE,INFINITE);
-        if (result==WAIT_OBJECT_0) return 0;
-        if (result==WAIT_OBJECT_0+1) {
+        if (result==WAIT_OBJECT_0+1) return 0;
+        if (result==WAIT_OBJECT_0) {
             HANDLE close=CreateThread(NULL,0,console_close_callback,client,0,NULL);
-            /* The frontend is gone: there is no remaining UI in which to
+            /* The broker ordered closure: there is no remaining UI in which to
              * cancel closing this session. Bound a blocked original handler,
              * then close this worker only, as Console Server forced close did.
              * This timeout is a close grace, never a guest idle timeout. */
@@ -204,6 +204,7 @@ static void console_client_end(void *context)
     if (client->wake) CloseHandle(client->wake);
     if (client->stop) CloseHandle(client->stop);
     if (client->rearm) CloseHandle(client->rearm);
+    if (client->shutdown) CloseHandle(client->shutdown);
     if (client->input_identity) CloseHandle(client->input_identity);
     if (client->output_identity) CloseHandle(client->output_identity);
     DeleteCriticalSection(&client->lock);
@@ -257,6 +258,8 @@ DWORD ntvdm_console_client_begin(session *owner)
         !client->input_identity || !client->output_identity) {
         error=GetLastError();console_client_end(client);return error;
     }
+    error=worker_base_shutdown_event(&client->shutdown);
+    if(error){console_client_end(client);return error;}
     client->watcher=CreateThread(NULL,0,console_input_watch,client,0,NULL);
     error=client->watcher ? console_activate(client,TRUE) : GetLastError();
     if (!error && !session_register_teardown(owner,console_client_end,client))error=ERROR_NOT_ENOUGH_MEMORY;
