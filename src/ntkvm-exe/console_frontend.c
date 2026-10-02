@@ -507,16 +507,16 @@ DWORD run16_console_dispatch(run16_console_frontend *owner,const console_io_requ
             if(ok) {
                 SMALL_RECT physical;
                 rect.Left=(SHORT)left;rect.Top=(SHORT)top;rect.Right=(SHORT)right;rect.Bottom=(SHORT)bottom;
-                if(owner->logical_window->Left==rect.Left &&
-                    owner->logical_window->Top==rect.Top &&
-                    owner->logical_window->Right==rect.Right &&
-                    owner->logical_window->Bottom==rect.Bottom)break;
                 /* Only the visible presenter uses pixel-derived constraints.
                  * Preserve the complete logical region independently. */
                 physical=rect;
                 physical.Right=(SHORT)(left+min(right-left+1,info.dwMaximumWindowSize.X)-1);
                 physical.Bottom=(SHORT)(top+min(bottom-top+1,info.dwMaximumWindowSize.Y)-1);
-                ok=opennt_console_resize_grid(owner->output,NULL,TRUE,&physical);
+                /* Cached logical geometry does not prove the actual viewport
+                 * was applied: DOS and canonical Console can differ. A native
+                 * alternate screen may shrink storage immediately afterward. */
+                if(memcmp(&info.srWindow,&physical,sizeof(physical)))
+                    ok=opennt_console_resize_grid(owner->output,NULL,TRUE,&physical);
                 if(ok)*owner->logical_window=rect;
             }
         } else ok=opennt_console_resize_grid(owner->output,NULL,s->mode!=0,&rect);

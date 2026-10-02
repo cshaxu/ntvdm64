@@ -501,6 +501,59 @@ static void test_dos_geometry_handoff(HANDLE canonical,SHORT rows)
         written==1 && cell==L'C');
     CloseHandle(active);CloseHandle(output);CloseHandle(input);
 }
+/* A DOS logical viewport can already match the native alternate screen while
+ * the canonical Console still has the larger caller viewport. A WINDOW_RECT
+ * acknowledgment must cover the real physical projection before BUFFER_SIZE. */
+static void test_native_geometry_projection(SHORT rows)
+{
+    run16_console_frontend owner={0};
+    console_io_request request={0};console_io_reply reply;
+    SMALL_RECT logical={0,0,79,(SHORT)(rows-1)},large={0,0,79,29};
+    CONSOLE_SCREEN_BUFFER_INFO info;
+    WCHAR cell;DWORD count;
+    HANDLE output=CreateConsoleScreenBuffer(GENERIC_READ|GENERIC_WRITE,
+        FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,CONSOLE_TEXTMODE_BUFFER,NULL);
+    CHECK(output!=INVALID_HANDLE_VALUE);
+    CHECK(GetConsoleScreenBufferInfo(output,&info));
+    CHECK(SetConsoleScreenBufferSize(output,(COORD){max(info.dwSize.X,80),max(info.dwSize.Y,60)}));
+    CHECK(SetConsoleWindowInfo(output,TRUE,&large));
+    CHECK(SetConsoleScreenBufferSize(output,(COORD){80,60}));
+    CHECK(WriteConsoleOutputCharacterW(output,L"P",1,(COORD){7,17},&count) && count==1);
+    CHECK(SetConsoleCursorPosition(output,(COORD){3,11}));
+    owner.output=output;owner.generation=1;owner.logical_window=&logical;
+    request.version=CONSOLE_IO_VERSION;request.generation=1;request.sequence=1;
+    request.operation=CONSOLE_IO_WINDOW_RECT;request.state.mode=1;
+    request.state.right=logical.Right;request.state.bottom=logical.Bottom;
+    CHECK(!actual_dispatch(&owner,&request,&reply) && !reply.error);
+    CHECK(GetConsoleScreenBufferInfo(output,&info));
+    CHECK(!memcmp(&info.srWindow,&logical,sizeof(logical)));
+    CHECK(info.dwCursorPosition.X==3 && info.dwCursorPosition.Y==11);
+    /* A second identical request is a verified no-op, not a cached guess. */
+    ++request.sequence;
+    CHECK(!actual_dispatch(&owner,&request,&reply) && !reply.error);
+    ++request.sequence;request.operation=CONSOLE_IO_BUFFER_SIZE;
+    request.state.width=80;request.state.height=rows;
+    CHECK(!actual_dispatch(&owner,&request,&reply) && !reply.error);
+    CHECK(GetConsoleScreenBufferInfo(output,&info) && info.dwSize.X==80 && info.dwSize.Y==rows);
+    CHECK(ReadConsoleOutputCharacterW(output,&cell,1,(COORD){7,17},&count) && count==1 && cell==L'P');
+    CHECK(info.dwCursorPosition.X==3 && info.dwCursorPosition.Y==11);
+    ++request.sequence;request.operation=CONSOLE_IO_WINDOW_RECT;
+    request.state.bottom=rows;
+    CHECK(!actual_dispatch(&owner,&request,&reply) && reply.error==ERROR_INVALID_PARAMETER);
+    CHECK(logical.Bottom==rows-1);
+    ++request.sequence;request.operation=CONSOLE_IO_BUFFER_SIZE;
+    request.state.height=60;
+    CHECK(!actual_dispatch(&owner,&request,&reply) && !reply.error);
+    ++request.sequence;request.operation=CONSOLE_IO_WINDOW_RECT;
+    request.state.bottom=29;
+    CHECK(!actual_dispatch(&owner,&request,&reply) && !reply.error);
+    CHECK(GetConsoleScreenBufferInfo(output,&info) && info.dwSize.Y==60 && info.srWindow.Bottom==29);
+    CHECK(ReadConsoleOutputCharacterW(output,&cell,1,(COORD){7,17},&count) && count==1 && cell==L'P');
+    CHECK(info.dwCursorPosition.X==3 && info.dwCursorPosition.Y==11);
+    CloseHandle(output);
+    fprintf(private_report ? private_report : stdout,
+        "PASS native logical/physical 80x30 -> 80x%d projection, repeat, shrink/grow, cells/cursor and invalid rectangle\n",rows);
+}
 static int run_private_desktop(const char *report,BOOL geometry_only)
 {
     char name[64],image[MAX_PATH],command[2*MAX_PATH];
@@ -544,6 +597,8 @@ int main(int argc,char **argv)
         geometry_output=CreateFileW(L"CONOUT$",GENERIC_READ|GENERIC_WRITE,
             FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,OPEN_EXISTING,0,NULL);
         CHECK(geometry_output!=INVALID_HANDLE_VALUE);
+        test_native_geometry_projection(25);
+        test_native_geometry_projection(28);
         test_dos_geometry_handoff(geometry_output,25);
         test_dos_geometry_handoff(geometry_output,28);
         CloseHandle(geometry_output);
@@ -551,6 +606,8 @@ int main(int argc,char **argv)
         fclose(private_report);return 0;
     }
     if(argc==2 && !strcmp(argv[1],"--worker-wait")) {Sleep(INFINITE);return 0;}
+    test_native_geometry_projection(25);
+    test_native_geometry_projection(28);
     read_entered=CreateEventW(NULL,TRUE,FALSE,NULL);CHECK(read_entered);
     CHECK(!run16_native_frontend_create(&test_frontend));
     if(argc==2 && !strcmp(argv[1],"--stop-timeout")) {

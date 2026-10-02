@@ -4,9 +4,22 @@
 
 ## Intermission
 
-**No active M/T/S packet.** T423 remains open for owner acceptance and further
-direction. S39 completes the three requested quality repairs; the existing
-30 ms NTCON presentation sampling is explicitly retained. No next S is admitted.
+**No active M/T/S packet.** M0 T423 S40 has reached its bounded closure; T423
+remains open pending owner acceptance, with no successor admitted here.
+
+## S40 Closure Record
+
+Owner admitted S40 with “帮我继续调研和修复” after COMMAND -> CMD -> modern
+EDIT unexpectedly ended CMD. [S40 evidence](../etc/evidence/m0-t423-s40-native-alternate-screen-geometry.md)
+records the real process/error proof, cached-versus-actual Console viewport
+repair in NTKVM, baseline-failing geometry fixture and passing shrink/grow,
+cell/cursor, invalid-request and existing lifecycle tests. The published
+O:/winnt package passes actual EDIT Ctrl+Q -> CMD echo -> DOS MEM -> completion;
+Console17 and Window17 each pass 17/17, with retained WOW frontier observations.
+All eight hashes agree with staging. Only NTKVM changes among product files;
+guest, mirror, shared lib, ABI and legitimate worker failure semantics remain
+unchanged. Synthetic Window Ctrl+Q is explicitly unsupported by the test
+harness, not claimed as physical-input acceptance. See evidence for limits.
 
 ## S39 Closure Record
 
@@ -26,9 +39,9 @@ layouts are unchanged; existing SOL/WRITE and physical-desktop limits remain.
 
 ## Current Technical Baseline
 
-The published baseline is S39, based on S38 `2cf3cec60`, protocol/RPC revision
+The published baseline is S40, based on S39 `3c592ec1e`, protocol/RPC revision
 28, MSVC Win32/x86 /MT with CCPU40. Its eight-file hashes and 17+17 results are
-in the S39 evidence above. Earlier detailed S12 state is
+in the S40 evidence above. Earlier detailed S12 state is
 retained in the historical status link rather than duplicated here.
 
 S38 delivered the resident-worker frontend reuse and direct-completion repair.
@@ -341,4 +354,4 @@ published and checked after publication. [Evidence](../etc/evidence/m0-t423-s13-
 
 ## T423 Ownership
 
-T422 remains owner-closed. T423 remains open pending owner acceptance after S30.
+T422 remains owner-closed. T423 remains open pending owner acceptance after S40.

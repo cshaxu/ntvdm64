@@ -561,6 +561,9 @@ static BOOL set1_key_for_ascii(char character, WORD *virtual_key,
     switch (character == '\n' ? '\r' : character) {
     case '\r': *virtual_key = VK_RETURN; *scan_code = 0x1c; return TRUE;
     case '\x1b': *virtual_key = VK_ESCAPE; *scan_code = 0x01; return TRUE;
+    case '\x11': /* Modern EDIT's normal Ctrl+Q exit, not target termination. */
+        *virtual_key = 'Q'; *scan_code = 0x10;
+        *control_state |= LEFT_CTRL_PRESSED; return TRUE;
     default: break;
     }
     for (index = 0; index < ARRAYSIZE(punctuation); ++index) {
@@ -730,18 +733,23 @@ static BOOL write_console_input_text(HANDLE input, const char *text, DWORD line_
          * state mutation. */
         DWORD control_state = NUMLOCK_ON;
         BOOL shifted;
+        BOOL controlled;
 
         if (!set1_key_for_ascii(character, &key_code, &scan_code,
                                 &control_state))
             return FALSE;
         shifted = (control_state & SHIFT_PRESSED) != 0;
+        controlled = (control_state & LEFT_CTRL_PRESSED) != 0;
+        /* SendMessage does not set the target UI thread's physical Ctrl
+         * state. Do not pretend an injected Window chord is a real one. */
+        if (scripted_window_frontend && controlled) return FALSE;
         memset(records, 0, sizeof(records));
-        if (shifted) {
+        if (shifted || controlled) {
             records[0].EventType = KEY_EVENT;
             records[0].Event.KeyEvent.bKeyDown = TRUE;
             records[0].Event.KeyEvent.wRepeatCount = 1;
-            records[0].Event.KeyEvent.wVirtualKeyCode = VK_SHIFT;
-            records[0].Event.KeyEvent.wVirtualScanCode = 0x2a;
+            records[0].Event.KeyEvent.wVirtualKeyCode = controlled ? VK_CONTROL : VK_SHIFT;
+            records[0].Event.KeyEvent.wVirtualScanCode = controlled ? 0x1d : 0x2a;
             records[0].Event.KeyEvent.dwControlKeyState = control_state;
             records[1] = records[0];
             records[1].Event.KeyEvent.wVirtualKeyCode = key_code;
