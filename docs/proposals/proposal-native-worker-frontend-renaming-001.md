@@ -2,10 +2,13 @@
 
 ## Status and objective
 
-Owner-requested unnumbered T candidate at the head of the queue. This is
-planning only: T423 remains open for owner acceptance after S38 delivery. Do not admit this T,
-rename production files, or replace the published package until the owner
-closes the current T and admits this candidate.
+Owner closed the predecessor and admitted this former queue-head candidate on
+2026-10-02. The active numeric packet belongs only to
+[CURRENT](../states/CURRENT.md); the ordered execution stages are in the
+[working plan](../etc/operations/t424-worker-frontend-renaming-plan.md).
+This document retains the admitted migration scope and acceptance contract.
+S1 is a read-only referent audit; admission alone does not authorize skipping
+that audit or replacing the published package with renamed candidates.
 
 Give each product component a name that describes its actual owner:
 
