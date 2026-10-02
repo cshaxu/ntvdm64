@@ -118,7 +118,7 @@ GUI routing as S8, frontend naming as S9 and final audit as S10.
 ## S7 common library and service source separation
 
 Owner's latest reorder places this stage after S6 NTVWM naming.
-S5 remains the only active packet. This is planning authorization, not an
+CURRENT owns the active packet. This is planning authorization, not an
 immediate source move or a claim of S7 admission/delivery. S6 naming now precedes this S7; S8-S10 follow in order: native GUI routing,
 frontend NTCON naming, final audit.
 

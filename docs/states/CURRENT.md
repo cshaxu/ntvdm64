@@ -4,38 +4,45 @@
 
 ## Active Packet
 
-**Active: M0 T424 S5** — owner-approved architecture/code cleanup,
-Ordinary Mode. S4 production P `e4fbaed21` is pushed and published;
-T424 remains open for owner acceptance. This stage implements only the five
-approved cleanup rows, not NTVWM naming, GUI routing or frontend naming.
+**Active: M0 T424 S6** — owner-approved NTW32 -> NTVWM naming migration,
+Ordinary Mode. S5 production P `6d4444195` is pushed and published;
+T424 remains open for owner acceptance. This stage is name-only; common/service
+separation, GUI routing and frontend naming remain subsequent stages.
 
 | Field | Admitted record |
 | --- | --- |
-| Identifier Mode | M0 T424 S5, Ordinary Mode. |
+| Identifier Mode | M0 T424 S6, Ordinary Mode. |
 | Candidate Proposal | [Admitted naming/control proposal](../proposals/proposal-native-worker-frontend-renaming-001.md). |
-| Admission And Approval | Owner's standing automatic sequential admission and approved audit findings 1-5 after S4; retain shared worker-base mechanisms and common consumer paths, preserve other-session changes. |
-| Objective | Remove duplicate control transport, make shared primitive ownership explicit, remove launcher native-target completion dependence, remove proven NTKVM dead state and obsolete bootstrap tests while retaining S4 behavior. |
-| Non-goals | No Console-list consolidation or broad base_service split; no rename, GUI/UNBOUND routing, mirror/guest/shared-lib change, new component/process/helper, scheduler, observation graph, authentication weakening or launch-syntax change. Retain approved capture polling/backend retry. |
-| Reference Baseline | S4 production P e4fbaed21, protocol/RPC 30, coherent published eight-file manifest, Console17/Window17 and retained independent WOW frontiers; [S4 evidence](../etc/evidence/m0-t424-s4-broker-centered-launch-control.md). |
-| Files And ABI Surface | Native control transfer/codec/launch owners and existing static client library, NTW32 execution, run16 receipt/return, NTKVM session state, service result contracts only as required, interface/build/tests. Any actual wire change requires paired application/RPC revision and MIDL. |
+| Admission And Approval | Standing automatic sequential admission after verified S5 delivery and owner's explicit NTW32 -> NTVWM name-only stage before common/GUI work. Preserve shared mechanisms and other-session changes. |
+| Objective | Rename the project native worker component/product and its actual referents to NTVWM without changing execution, completion, I/O or lifetime behavior. |
+| Non-goals | No common/service split, GUI/UNBOUND routing, frontend rename, mirror/guest/shared-lib change, new helper/scheduler/observer, authentication weakening or launch-syntax change. Retain approved polling and existing backend semantics. |
+| Reference Baseline | S5 production P 6d4444195, protocol/RPC 31, coherent eight-file publication, Console17/Window17 and retained WOW frontiers; [S5 evidence](../etc/evidence/m0-t424-s5-shared-control-cleanup.md). |
+| Files And ABI Surface | Project native component paths/symbols, executable basename, consumers, build/package/test/scripts/docs. Preserve genuine Console/OpenNT/library names and copied protocol semantics; version only proven wire compatibility change. |
 | Applicable Rules | README authority set, EXECUTION, architecture/coding/document rules and source policy; preserve original source semantics and parallel edits. |
-| Verification | Affected x86/MIDL closure; completed-I/O/peer-death, partial transfer/EOF/cancel/resource lifetime; receipt completion versus final-I/O failure, broker/worker loss, authentication, owned/borrowed restoration, nesting/reuse/isolation; Console17/Window17, actual modern EDIT return and WOW frontiers; coherent eight-file recovery/publication and governance/link/diff review. |
-| Expected Markers | One linked control-transfer implementation with completed-I/O-first semantics; shared frontend transport retains its different strict-peer contract. Text launcher completion and Console return use broker state rather than target HANDLE/status. Removed dead fields/providers have no remaining production callers. |
-| Asset Needs | Delivered S4 source/runtime/hashes; reuse valid S2/r001 build cache. New artifacts only under build/M0-T424/S5. No external acquisition or desktop automation. |
-| Reporting Requirements | Maintain origin/current owner/target owner/consumer ledger and removed-line accounting for all five rows; exact tests/assertions and limitations; distinguish planned, linked, tested and published. |
-| Stop Conditions | Original execution relocation, incomplete receipt/handoff semantics, weakened assertion/authentication, new helper/framework, undeclared wire or baseline regression requires disposition. |
-| Exit Criteria | All five rows genuinely production-wired with duplicates/dead paths removed, retained assertion coverage, full gate and coherent publication verified; reviewed committed/pushed P and clean synchronized worktree. |
-| Original Owner Request | Share suitable project-added mechanisms rather than duplicate DOS/native interaction; approved cleanup findings 1-5 before naming, keeping original backend semantics and consumer-local common policy. |
-| Similar-Issue Sweep | NTSRV/NTKVM/NTW32 transport consumers; unused APIs/test aliases; target-completion/final-I/O failure; failed export/startup/receipt/return; simultaneous peer death and completed I/O; nested and independent sessions. |
+| Verification | Complete-tree referent/path inventory and classified zero-old-worker gate; name-only diff review, x86/MIDL/WOW linking, focused protocol/lifecycle and Console17/Window17, actual EDIT return/relaunch/isolation and WOW frontiers; recoverable eight-file publication/smoke plus governance/link/diff review. |
+| Expected Markers | Native component/product is ntvwm-exe/ntvwm.exe; frontend remains NTKVM. Same worker-base and consumer common paths, broker receipts and backend semantics; no aliases or second implementations. |
+| Asset Needs | Delivered S5 source/runtime/hashes; reuse valid build cache, new artifacts only under build/M0-T424/S6. No external assets or desktop automation. |
+| Reporting Requirements | Inventory actual name referents and exclusions, source/name-only comparison, consumers/link/package coverage and exact tests/publication; distinguish naming from later GUI implementation. |
+| Stop Conditions | Semantic/wire changes without proof, wrong original/library rename, weakened tests/authentication, duplicate aliases, mirror/guest/library drift or baseline regression. |
+| Exit Criteria | Name-only production migration wired everywhere, classified full-tree audit and all production gates pass; coherent recoverable publication and reviewed commit/push, clean worktree. |
+| Original Owner Request | Name the native Windows worker NTVWM before GUI routing; preserve original semantics and shared worker-base/consumer handling, no needless fork. |
+| Similar-Issue Sweep | Component/product/config names, process filters, path ownership, source manifests, runtime publication/removal, fixtures and archived true worker referents; exclude original Console and reserved frontend NTCON identity. |
 
-Use the [S5 checklist](../etc/operations/t424-worker-frontend-renaming-plan.md#s5-architecturecode-cleanup-checklist).
-Implementation provenance and progress are recorded in the
-[S5 ledger](../etc/evidence/m0-t424-s5-shared-control-cleanup.md).
-S5 protocol/RPC 31 links; all five rows and focused transport, receipt/lifetime,
-actual broker/RPC, Console17/Window17, EDIT return, relaunch, isolation and
-four retirement gates pass. Existing WOW frontiers are retained. Eight files
-are published with matching hashes and postpublication smoke; reviewed Git
-delivery follows. See the S5 ledger for failed harness attempts and limitations.
+The [ordered plan](../etc/operations/t424-worker-frontend-renaming-plan.md)
+owns the S6 name-only requirements. Admission is not implementation or publication.
+O:/winnt remains verified S5 until the complete S6 gate and delivery.
+
+## S5 Closure Record
+
+Production P `6d4444195` is pushed to main. The [S5 ledger](../etc/evidence/m0-t424-s5-shared-control-cleanup.md)
+records all five implemented cleanup rows, provenance, retained specialist
+contracts, removed duplication/dead state/tests and real broker completion.
+Protocol/RPC31, x86/MIDL/WOW links, focused tests, Console17/Window17,
+relaunch/modern EDIT return, independent sessions and four retirement cases pass.
+Existing WOW frontiers remain limits, not three usability passes. Eight files
+are published with matching hashes and postpublication smoke; accepted S4 is
+recoverable. No mirror/guest/shared-lib edit, helper or execution policy change.
+The approved other-session S7 planning is included, not implemented. T424 stays open.
 
 ## S4 Closure Record
 
