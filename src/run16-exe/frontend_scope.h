@@ -12,6 +12,8 @@ BOOL run16_frontend_scope_has_execution(run16_frontend_scope *);
 DWORD run16_frontend_scope_console_mask(run16_frontend_scope *);
 DWORD run16_frontend_scope_launch_native(run16_frontend_scope *,const run16_native_start *,HANDLE *);
 DWORD run16_frontend_scope_wait_native(run16_frontend_scope *,HANDLE,DWORD *);
+/* Common direct-task receipt wait; result decoding remains with its source. */
+DWORD run16_wait_direct_event(HANDLE receipt,HANDLE worker,HANDLE root,DWORD *winner);
 DWORD run16_frontend_scope_resume_parent(run16_frontend_scope *);
 /* Root character-task completion barrier: do not return an outer CMD while its active
  * screen buffer and input mode are still owned by NTKVM teardown. */

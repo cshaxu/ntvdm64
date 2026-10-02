@@ -12,8 +12,8 @@ DWORD OpenNtBaseClientGetNextNativeCommand(HANDLE *channel,HANDLE *sender,HANDLE
     return source_error;
 }
 
-DWORD OpenNtBaseClientCompleteWorkerChannel(DWORD request)
-{ completed=request;return ERROR_SUCCESS; }
+DWORD OpenNtBaseClientCompleteWorkerChannel(DWORD request,DWORD exit_code)
+{ (void)exit_code;completed=request;return ERROR_SUCCESS; }
 
 #define CHECK(value) do { if(!(value)) { fprintf(stderr,"FAIL %d: %s\n",__LINE__,#value); return 1; } } while(0)
 
@@ -58,8 +58,8 @@ int main(void)
     }
 
     completed=91;
-    CHECK(ntcon_complete_next_command(0)==ERROR_SUCCESS && completed==0);
-    CHECK(ntcon_complete_next_command(91)==ERROR_SUCCESS && completed==91);
+    CHECK(ntcon_complete_next_command(0,0)==ERROR_SUCCESS && completed==0);
+    CHECK(ntcon_complete_next_command(91,37)==ERROR_SUCCESS && completed==91);
     puts("PASS ntcon get-next command ownership, failure disposal and completion");
     return 0;
 }

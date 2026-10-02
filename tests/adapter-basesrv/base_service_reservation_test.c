@@ -17,7 +17,7 @@ static DWORD test_native_request;
 #define OpenNtBaseServiceTakeWorkerChannel(a,b,c,d,e,f,g) \
     OpenNtBaseServiceTakeWorkerChannel(a,b,c,d,e,f,g,&test_native_request)
 #define OpenNtBaseServiceCompleteWorkerChannel(a,b,c) \
-    OpenNtBaseServiceCompleteWorkerChannel(a,b,c,test_native_request)
+    OpenNtBaseServiceCompleteWorkerChannel(a,b,c,test_native_request,37)
 
 #define CHECK(value) do { if (!(value)) { fprintf(stderr,"FAIL %d\\n",__LINE__);return 1; } } while (0)
 
@@ -443,8 +443,12 @@ int main(int argc,char **argv)
                 completed_request=test_native_request;
                 /* The worker, not a launcher-supplied number, binds its
                  * actual CreateProcess target to the direct CONRECORD. */
-                CHECK(!OpenNtBaseServiceBindNativeTarget(worker,child.dwProcessId,workerGeneration,
-                    test_native_request,laterChild.hProcess));
+                {HANDLE completion=CreateEventW(NULL,TRUE,FALSE,NULL);
+                    CHECK(completion);
+                    CHECK(!OpenNtBaseServiceBindNativeTarget(worker,child.dwProcessId,workerGeneration,
+                        test_native_request,laterChild.hProcess,completion));
+                    CloseHandle(completion);
+                }
                 /* Bind precedes resume; it publishes only the admitted Direct
                  * target identity, never a sampled Console participant. */
                 CHECK(ResumeThread(laterChild.hThread)!=(DWORD)-1);
@@ -487,6 +491,9 @@ int main(int argc,char **argv)
                 CHECK(OpenNtBaseServiceCompleteWorkerChannel(worker,child.dwProcessId,workerGeneration+1)==ERROR_ACCESS_DENIED);
                 CHECK(!OpenNtBaseServiceCompleteWorkerChannel(worker,child.dwProcessId,workerGeneration));
                 CHECK(OpenNtBaseServiceCompleteWorkerChannel(worker,child.dwProcessId,workerGeneration)==ERROR_INVALID_STATE);
+                {DWORD exit_code=0;
+                    CHECK(!OpenNtBaseServiceNativeExitCode(launcher,GetCurrentProcessId(),launcherGeneration,
+                        test_native_request,&exit_code) && exit_code==37);}
                 CHECK(!OpenNtBaseServiceSnapshot(service,&managementEpoch,&workerInfo,1,&workerInfoCount));
                 /* The still-live native process is not a broker task after
                  * its Direct receipt completes. Windows owns its lifetime. */

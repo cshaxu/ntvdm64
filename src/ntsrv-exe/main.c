@@ -14,6 +14,7 @@ static broker_rpc_scope scope;
 static OPENNT_BASE_SERVICE *service;
 static SRWLOCK idle_lock=SRWLOCK_INIT;
 static HANDLE idle_timer;
+static HANDLE frontend_timer;
 static ULONGLONG idle_deadline;
 static ULONG pending_connects;
 static BOOL idle_stopping;
@@ -309,16 +310,22 @@ error_status_t Server_RegisterNativeBackend(handle_t binding,VDM_CONNECTION conn
     return error ? error : OpenNtBaseServiceRegisterNativeBackend(connection,pid,generation,frontend,stop,closed);
 }
 error_status_t Server_CompleteWorkerChannel(handle_t binding,VDM_CONNECTION connection,HANDLE process,
-    ULONG generation,ULONG request)
+    ULONG generation,ULONG request,ULONG exit_code)
 {
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    return error ? error : OpenNtBaseServiceCompleteWorkerChannel(connection,pid,generation,request);
+    return error ? error : OpenNtBaseServiceCompleteWorkerChannel(connection,pid,generation,request,exit_code);
+}
+error_status_t Server_NativeExitCode(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+    ULONG generation,ULONG request,ULONG *exit_code)
+{
+    DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    return error ? error : OpenNtBaseServiceNativeExitCode(connection,pid,generation,request,exit_code);
 }
 error_status_t Server_BindNativeTarget(handle_t binding,VDM_CONNECTION connection,HANDLE process,
-    ULONG generation,ULONG request,HANDLE target)
+    ULONG generation,ULONG request,HANDLE target,HANDLE receipt)
 {
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    return error ? error : OpenNtBaseServiceBindNativeTarget(connection,pid,generation,request,target);
+    return error ? error : OpenNtBaseServiceBindNativeTarget(connection,pid,generation,request,target,receipt);
 }
 error_status_t Server_RegisterFrontendRoot(handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,HANDLE capability)
@@ -768,12 +775,14 @@ int main(void)
         (void)OpenNtBaseServiceStop(service);
         return (int)error;
     }
-    result=RpcServerRegisterIf3(Server_vdm_service_v27_0_s_ifspec,NULL,NULL,
+    result=RpcServerRegisterIf3(Server_vdm_service_v28_0_s_ifspec,NULL,NULL,
         RPC_IF_ALLOW_SECURE_ONLY | RPC_IF_ALLOW_LOCAL_ONLY,RPC_C_LISTEN_MAX_CALLS_DEFAULT,
         (unsigned)-1,authorize,NULL);
     if (!result) {
         idle_timer=CreateWaitableTimerW(NULL,FALSE,NULL);
         if (!idle_timer) basesrv_idle_fatal("CreateWaitableTimer",GetLastError());
+        frontend_timer=CreateWaitableTimerW(NULL,FALSE,NULL);
+        if (!frontend_timer) basesrv_idle_fatal("Create frontend timer",GetLastError());
         /* Arm only after listening succeeds, never race stop against startup. */
         result=RpcServerListen(1,RPC_C_LISTEN_MAX_CALLS_DEFAULT,TRUE);
     }
@@ -782,20 +791,40 @@ int main(void)
         fwprintf(stdout,L"basesrv: listening on %ls\n",endpoint); fflush(stdout);
         /* Manual and launcher starts have the same ten-second empty grace. */
         basesrv_schedule_empty_stop();
-        do {
-            if (WaitForSingleObject(idle_timer,INFINITE)!=WAIT_OBJECT_0)
-                basesrv_idle_fatal("idle wait",GetLastError());
-        } while (!basesrv_claim_empty_stop());
+        for(;;) {
+            HANDLE waits[3]={idle_timer,frontend_timer,
+                OpenNtBaseServiceFrontendLifetimeChanged(service)};
+            ULONGLONG deadline=0,now;
+            LARGE_INTEGER due;
+            DWORD wait,error=OpenNtBaseServiceNextFrontendDeadline(service,&deadline);
+            if(error)basesrv_idle_fatal("frontend deadline",error);
+            if(deadline) {
+                now=GetTickCount64();
+                due.QuadPart=-(LONGLONG)(deadline>now ? deadline-now : 1u)*10000;
+                if(!SetWaitableTimer(frontend_timer,&due,0,NULL,NULL,FALSE))
+                    basesrv_idle_fatal("Set frontend timer",GetLastError());
+            } else if(!CancelWaitableTimer(frontend_timer))
+                basesrv_idle_fatal("Cancel frontend timer",GetLastError());
+            wait=WaitForMultipleObjects(3,waits,FALSE,INFINITE);
+            if(wait==WAIT_OBJECT_0) {
+                if(basesrv_claim_empty_stop())break;
+            } else if(wait==WAIT_OBJECT_0+1) {
+                error=OpenNtBaseServiceRetireExpiredFrontends(service);
+                if(error)basesrv_idle_fatal("frontend retirement",error);
+            } else if(wait!=WAIT_OBJECT_0+2)
+                basesrv_idle_fatal("lifetime wait",GetLastError());
+        }
         result=RpcMgmtStopServerListening(NULL);
         if (result) basesrv_idle_fatal("RpcMgmtStopServerListening",result);
         result=RpcMgmtWaitServerListen();
         if (result) basesrv_idle_fatal("RpcMgmtWaitServerListen",result);
     }
     {
-        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v27_0_s_ifspec,NULL,TRUE);
+        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v28_0_s_ifspec,NULL,TRUE);
         if (!result && cleanup) result=cleanup;
     }
     if (idle_timer) CloseHandle(idle_timer);
+    if (frontend_timer) CloseHandle(frontend_timer);
     if (!OpenNtBaseServiceStop(service)) return ERROR_BUSY;
     return (int)result;
 }

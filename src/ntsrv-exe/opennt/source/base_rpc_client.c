@@ -474,7 +474,7 @@ static DWORD classify_missing_interface(RPC_BINDING_HANDLE binding)
     RPC_STATUS status,uuid_status;
     unsigned int index;
     DWORD result=RPC_S_SERVER_UNAVAILABLE;
-    status=RpcIfInqId(Client_vdm_service_v27_0_c_ifspec,&expected);
+    status=RpcIfInqId(Client_vdm_service_v28_0_c_ifspec,&expected);
     if (status) return status;
     status=RpcMgmtInqIfIds(binding,&interfaces);
     if (status) return status;
@@ -764,24 +764,40 @@ DWORD OpenNtBaseClientRegisterNativeBackend(HANDLE frontend,HANDLE stop,HANDLE c
     RpcEndExcept
     return error;
 }
-DWORD OpenNtBaseClientCompleteWorkerChannel(DWORD request)
+DWORD OpenNtBaseClientCompleteWorkerChannel(DWORD request,DWORD exit_code)
 {
     DWORD error=ERROR_INVALID_STATE;
     if(!client.connection || !client.binding || !client.process)return error;
     RpcTryExcept {
-        error=Client_CompleteWorkerChannel(client.binding,client.connection,client.process,client.generation,request);
+        error=Client_CompleteWorkerChannel(client.binding,client.connection,client.process,
+            client.generation,request,exit_code);
     }
     RpcExcept(1) {error=RpcExceptionCode();}
     RpcEndExcept
     return error;
 }
-DWORD OpenNtBaseClientBindNativeTarget(DWORD request,HANDLE target)
+DWORD OpenNtBaseClientNativeExitCode(DWORD request,DWORD *exit_code)
 {
     DWORD error=ERROR_INVALID_STATE;
-    if(!request || !target || !client.connection || !client.binding || !client.process)return error;
+    if(!request || !exit_code)return ERROR_INVALID_PARAMETER;
+    *exit_code=0;
+    if(!client.connection || !client.binding || !client.process)return error;
+    RpcTryExcept {
+        error=Client_NativeExitCode(client.binding,client.connection,client.process,
+            client.generation,request,exit_code);
+    }
+    RpcExcept(1) {error=RpcExceptionCode();}
+    RpcEndExcept
+    return error;
+}
+DWORD OpenNtBaseClientBindNativeTarget(DWORD request,HANDLE target,HANDLE receipt)
+{
+    DWORD error=ERROR_INVALID_STATE;
+    if(!request || !target || !receipt || !client.connection || !client.binding || !client.process)
+        return error;
     RpcTryExcept {
         error=Client_BindNativeTarget(client.binding,client.connection,client.process,
-            client.generation,request,target);
+            client.generation,request,target,receipt);
     }
     RpcExcept(1) {error=RpcExceptionCode();}
     RpcEndExcept

@@ -631,6 +631,19 @@ int main(int argc,char **argv)
         }
     }
     {
+        DWORD caller_mode,worker_mode,observed;
+        CHECK(GetConsoleMode(input,&caller_mode));
+        worker_mode=caller_mode^ENABLE_PROCESSED_INPUT;
+        CHECK(SetConsoleMode(input,worker_mode));
+        CHECK(!run16_native_frontend_park(test_frontend));
+        CHECK(GetConsoleMode(input,&observed) && observed==caller_mode);
+        CHECK(!run16_native_frontend_dos_bind(test_frontend,&round,TRUE));
+        CHECK(GetConsoleMode(input,&observed) && observed==worker_mode);
+        CHECK(!run16_native_frontend_dos_bind(test_frontend,&round,FALSE));
+        CHECK(!run16_native_frontend_park(test_frontend));
+        CHECK(GetConsoleMode(input,&observed) && observed==caller_mode);
+    }
+    {
         ULONGLONG began=GetTickCount64();
         run16_native_frontend_cancel(test_frontend);
         CHECK(run16_native_frontend_dos_bind(test_frontend,&before,TRUE)==ERROR_OPERATION_ABORTED);
@@ -665,6 +678,7 @@ int main(int argc,char **argv)
     puts("PASS ordinary teardown retains the final 80x25/80x28 DOS grid and cursor; restores canonical buffer, input mode and cursor shape");
     puts("PASS stopped presentation owner rejects handoff without waiting for execution or restarting a helper");
     puts("PASS 32 canceled DOS binding waits: no lost stop wake and no pending-owner leak");
+    puts("PASS borrowed frontend park twice: caller input mode restored, resident worker binding resumes its prior mode");
     if(private_report) {fprintf(private_report,"PASS private Console handoff fixture\n");fclose(private_report);}
     return 0;
 }

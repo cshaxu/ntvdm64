@@ -23,6 +23,9 @@ void run16_native_frontend_worker_title(run16_native_frontend *,const void *,con
 DWORD run16_native_frontend_destroy(run16_native_frontend *);
 void run16_native_frontend_cancel(run16_native_frontend *);
 DWORD run16_native_frontend_drain(run16_native_frontend *);
+/* Return the borrowed visible Console to its caller without closing resident
+ * worker channels. A later worker activation may reuse the same frontend. */
+DWORD run16_native_frontend_park(run16_native_frontend *);
 DWORD run16_native_frontend_dos_bind(run16_native_frontend *,const void *,BOOL);
 /* Wait for this root's actual I/O ownership transition, not for input data.
  * The caller retries the original bind after a successful wait. */

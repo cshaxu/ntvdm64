@@ -9,12 +9,12 @@ typedef struct frontend_bootstrap_reply {
     char application[APP_VERSION_BYTES];
 } frontend_bootstrap_reply;
 
-/* Completion receipt is presentation-only; process completion owns results. */
-#define NATIVE_REQUEST_VERSION 4u
+/* NTSRV owns the direct result; NTCON reports its I/O release separately. */
+#define NATIVE_REQUEST_VERSION 5u
 /* Zero bytes requests an acknowledged native presentation resume, not a
  * launch. It returns no target/receipt handles and creates no target. */
 typedef struct native_request_header { uint32_t version,bytes; } native_request_header;
-typedef struct native_request_reply { uint32_t version,error;uint64_t target,receipt; } native_request_reply;
+typedef struct native_request_reply { uint32_t version,error,request,reserved;uint64_t target,receipt; } native_request_reply;
 typedef struct native_request_completion { uint32_t version,error; } native_request_completion;
 
 /* Followed by application/command/directory/environment strings. Numeric

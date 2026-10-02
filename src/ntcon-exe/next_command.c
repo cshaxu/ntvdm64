@@ -12,11 +12,11 @@ DWORD ntcon_get_next_command(ntcon_next_command *command)
     return error;
 }
 
-DWORD ntcon_complete_next_command(DWORD request)
+DWORD ntcon_complete_next_command(DWORD request,DWORD exit_code)
 {
     /* NTSRV uses request zero for a frontend I/O resume rather than a
      * Direct task. It still requires the authenticated completion RPC. */
-    return OpenNtBaseClientCompleteWorkerChannel(request);
+    return OpenNtBaseClientCompleteWorkerChannel(request,exit_code);
 }
 
 void ntcon_dispose_next_command(ntcon_next_command *command)

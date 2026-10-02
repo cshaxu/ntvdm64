@@ -2,8 +2,36 @@
 
 ## Current Work
 
-**No active M/T/S packet.** T423 remains open for owner acceptance. The next S is
-the prior task-trace S37, now S38; it has not been admitted.
+## Intermission
+
+**No active M/T/S packet.** T423 remains open for owner side-test and acceptance.
+
+## Last Packet: M0 T423 S38
+
+S38 delivered the resident-worker frontend reuse and direct-completion repair.
+The reviewed build, 17+17 matrices, fault/exit probes, final eight-file
+`O:/winnt` hashes and explicit non-passes are in
+[S38 evidence](../etc/evidence/m0-t423-s38-worker-lifecycle-direct-completion.md).
+The owner Windows Terminal repetition has not yet been reported against this
+published package; this does not constitute T423 acceptance.
+
+| Field | Brief |
+| --- | --- |
+| Identifier Mode | M0 T423 S38, Ordinary Mode. |
+| Admission And Approval | Owner accepted S37 and admitted S38 after repeated Windows Terminal `run16 command` failure; subsequently approved NTSRV-owned component death, ten-second workerless frontend grace, and a common NTSRV direct-completion receipt for DOS and NTCON Win32 text. |
+| Objective | Repair stale frontend retirement and align NTVDM/NTCON worker residency and direct completion with [the approved lifecycle](../design/ARCHITECTURE.md#current-lifecycle-and-direct-completion-contract). Run16 shares one direct-wait/fault flow; NTCON reports actual native exit to NTSRV, which owns the receipt/result without replacing original DOS records. |
+| Non-goals | No guest changes, NTCON GUI path, Win16 wait-for-exit, observed-task scheduler, process-tree kill, second NTKVM worker census, or the separately queued Direct/Observed task-trace T. |
+| Reference Baseline | S37 commit `177579bd3`, published eight-file `O:/winnt` package and [S37 evidence](../etc/evidence/m0-t423-s37-window-geometry.md). The prior automated 17+17 matrix did not establish actual Windows Terminal interactive longevity. |
+| Files And ABI Surface | NTSRV worker/root retirement, authenticated native process receipt/result, run16 common wait, NTCON target bind/cleanup, broker-liveness and worker-close edges; interface protocol only as required. Original DOS/WOW owners remain unchanged. |
+| Applicable Rules | Documentation, execution, immutable guest, original-source-first, x86 CCPU40, and preservation of concurrent unrelated work. |
+| Verification | Review admission/completion invariants; build x86; focused probes for direct DOS/native exit codes, preflight failure, worker/broker/root death, READY retention, ten-second grace/cancellation and repeat `run16 command` in the same Console. Owner permits coherent eight-file `O:/winnt` publication after build and focused probes, before the longer 17+17/WOW matrix; run broader tests afterward without treating them as prepublication passes. |
+| Expected Markers | First launch survives the transient zero-worker interval; Window-direct `exit` permits another `run16 command` in the same CMD; last-worker loss retires the root after about ten seconds unless a new admission intervenes; no stale root yields 1460. |
+| Asset Needs | Existing published package and build-root probes/logs; no guest binary modification. |
+| Reporting Requirements | Exact reproducer, timing and worker/root state evidence, source owner, focused and cumulative test results, deployed eight-file hashes, limitations and diff review. |
+| Stop Conditions | Need to change original guest, system Console/registry settings, execution-task semantics or add a new process requires renewed owner direction. |
+| Exit Criteria | Source-backed cause, reviewed production repair, focused and cumulative evidence with explicit non-passes, coherent eight-file publication, governance, diff review, commit and push. |
+| Original Owner Request | “按照这个方案修修看，代码做好就发布8组件给我测试”；“编译、针对性探针测试逻辑无误后即可发布到o:\winnt”；“写入design/architecture，然后将该S任务按照这个规划实现”。 |
+| Similar-Issue Sweep | Direct COMMAND, `COMMAND /c`, nested COMMAND, Windows Terminal versus conhost/ConPTY, frontend loss and worker-fault paths. |
 
 ## Last Closure
 
@@ -20,7 +48,9 @@ The prior S35 and S34 results are retained in
 [S35 evidence](../etc/evidence/m0-t423-s35-native-text-window.md) and
 [S34 evidence](../etc/evidence/m0-t423-s34-console-projection-root-lifetime.md).
 S33's [evidence](../etc/evidence/m0-t423-s33-first-command-screen.md)
-records its preceding baseline. The read-only task-trace proposal is now S38.
+records its preceding baseline. The former S39 read-only task-trace plan has
+been transferred to the second queued T candidate, after component renaming;
+it is not admitted under T423.
 
 ## Recent M0 Closures
 
@@ -32,6 +62,26 @@ below; S34 and S35 are linked above. T423 remains open.
 The T423 proposal and the S30/S31/S32 evidence ledgers retain their prior
 scope, test results and non-passes. T423 does not close
 without owner acceptance.
+
+## S37 Closure Record
+
+[S37 evidence](../etc/evidence/m0-t423-s37-window-geometry.md).
+
+## S36 Closure Record
+
+[S36 evidence](../etc/evidence/m0-t423-s36-visible-console-title.md).
+
+## S35 Closure Record
+
+[S35 evidence](../etc/evidence/m0-t423-s35-native-text-window.md).
+
+## S34 Closure Record
+
+[S34 evidence](../etc/evidence/m0-t423-s34-console-projection-root-lifetime.md).
+
+## S33 Closure Record
+
+[S33 evidence](../etc/evidence/m0-t423-s33-first-command-screen.md).
 
 The closed S29 brief and its exact non-passes are retained in the
 [S29 acceptance ledger](../etc/evidence/m0-t423-s29-control-plane-acceptance.md).
@@ -115,14 +165,8 @@ passed; no new executable is published.  See [S22 evidence](../etc/evidence/m0-t
 
 ## S21 Closure Record
 
-| Field | S21 worker-base audit |
-| --- | --- |
-| Delivery | `9610f9e19`，已推送 `main`。 |
-| Outcome | 全量来源审计确认：项目新增且语义相同的 broker 连接/回滚和有序 frontend 协议客户端已在 `worker-base` 中并同时链接进 NTVDM/NTCON；没有残余的安全同形候选。 |
-| Retained ownership | 原始 DOS/WOW bootstrap、record 完成与 guest input 留在 NTVDM；真实 native Console、target completion、成员观察和 presentation 留在 NTCON。 |
-| Verification | S20 的 590 节点 x86 正式包保持完全相同的生产源基线；重新运行 frontend scope、native backend reservation、empty monitor RPC，以及真实 COMMAND/MEM/EDIT/嵌套/原生路径和双会话 NTCON 管理隔离均通过；治理及 diff 检查通过。 |
-| Publication | 无生产代码/ABI/构建图变更，故不伪造新发布；`O:/winnt` 继续为 S20 已验证的 protocol-18 七组件包。 |
-| Evidence | [S21 worker-base audit](../etc/evidence/m0-t423-s21-worker-base-audit.md)。 |
+[S21 worker-base audit](../etc/evidence/m0-t423-s21-worker-base-audit.md)
+retains the reviewed source, test and delivery facts.
 
 ## S20 Closure Record
 

@@ -32,6 +32,11 @@ BOOL OpenNtBaseServiceConfigureEmptyNotify(OPENNT_BASE_SERVICE *,OPENNT_BASE_EMP
  * reservations are gone.  It deliberately says nothing about a quiet but
  * connected interactive VDM. */
 BOOL OpenNtBaseServiceIsEmpty(OPENNT_BASE_SERVICE *);
+/* Broker-owned, one-shot workerless frontend retirement. The returned event
+ * is service-owned and must not be closed by the caller. */
+HANDLE OpenNtBaseServiceFrontendLifetimeChanged(OPENNT_BASE_SERVICE *);
+DWORD OpenNtBaseServiceNextFrontendDeadline(OPENNT_BASE_SERVICE *,ULONGLONG *deadline);
+DWORD OpenNtBaseServiceRetireExpiredFrontends(OPENNT_BASE_SERVICE *);
 /* Management callers are authenticated by the transport before reaching
  * these methods. The service resolves a PID while holding its registration
  * lock, so a removed/reused prior process cannot be selected. */
@@ -84,9 +89,12 @@ DWORD OpenNtBaseServiceRetainFrontendRoot(OPENNT_BASE_CONNECTION *,DWORD pid,
  * capability. Stop/closed are typed session-control attachments, not task IDs. */
 DWORD OpenNtBaseServiceRegisterNativeBackend(OPENNT_BASE_CONNECTION *,DWORD pid,
     DWORD generation,HANDLE frontend,HANDLE stop,HANDLE closed);
-DWORD OpenNtBaseServiceCompleteWorkerChannel(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,DWORD request);
+DWORD OpenNtBaseServiceCompleteWorkerChannel(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,
+    DWORD request,DWORD exit_code);
+DWORD OpenNtBaseServiceNativeExitCode(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,
+    DWORD request,DWORD *exit_code);
 DWORD OpenNtBaseServiceBindNativeTarget(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,
-    DWORD request,HANDLE target);
+    DWORD request,HANDLE target,HANDLE receipt);
 /* Preserve the caller's verified execution Console across a hidden backend.
  * The returned unnamed event is a separate, wait-only capability, not the
  * frontend event or a caller-selected Console/worker identity. The root owns

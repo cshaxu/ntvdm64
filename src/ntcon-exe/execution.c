@@ -58,7 +58,8 @@ void ntcon_executions_note_broker_failure(ntcon_executions *owner,DWORD error)
     LeaveCriticalSection(&owner->lock);
     if(fault)fault(context,error);
 }
-static DWORD launch_request(ntcon_execution *request,BYTE *payload,DWORD bytes,HANDLE *target)
+static DWORD launch_request(ntcon_execution *request,BYTE *payload,DWORD bytes,
+    HANDLE receipt,HANDLE *target)
 {
     run16_native_launch_packet header;
     run16_native_start start={0};
@@ -93,7 +94,7 @@ static DWORD launch_request(ntcon_execution *request,BYTE *payload,DWORD bytes,H
         /* Bind the direct target identity before it can execute.  S24 does
          * not assign a Job here: descendant observation is deferred and must
          * never decide direct-command admission or completion. */
-        if(!error)error=OpenNtBaseClientBindNativeTarget(request->request,process.hProcess);
+        if(!error)error=OpenNtBaseClientBindNativeTarget(request->request,process.hProcess,receipt);
         if(!error && ResumeThread(process.hThread)==(DWORD)-1)error=GetLastError();
         if(local_payload)HeapFree(GetProcessHeap(),0,local_payload);
         if(process.hThread)CloseHandle(process.hThread);
@@ -119,7 +120,7 @@ static DWORD WINAPI serve(void *context)
     native_request_header header;
     native_request_reply reply={NATIVE_REQUEST_VERSION,0,0};
     BYTE *payload=NULL;HANDLE target=NULL,remote=NULL,receipt=NULL,remote_receipt=NULL;DWORD error;
-    BOOL bound=FALSE;
+    BOOL bound=FALSE,broker_completed=FALSE;
     error=ntcon_channel_transfer(request->pipe,request->sender,owner->stop,request->event,FALSE,&header,sizeof(header));
     if(error)goto done;
     if(header.version==NATIVE_REQUEST_VERSION && !header.bytes) {
@@ -158,10 +159,11 @@ static DWORD WINAPI serve(void *context)
                 reply.error=owner->io.begin(owner->io.context,owner->stop);
                 bound=!reply.error;
             }
-            if(!reply.error)reply.error=launch_request(request,payload,header.bytes,&target);
+            if(!reply.error)reply.error=launch_request(request,payload,header.bytes,receipt,&target);
             if(bound && owner->io.release_launch)owner->io.release_launch(owner->io.context);
             if(!reply.error && !DuplicateHandle(GetCurrentProcess(),target,request->sender,&remote,
                 SYNCHRONIZE|PROCESS_QUERY_LIMITED_INFORMATION,FALSE,0))reply.error=GetLastError();
+            if(!reply.error)reply.request=request->request;
             reply.target=(uint64_t)(ULONG_PTR)remote;
             reply.receipt=reply.error ? 0 : (uint64_t)(ULONG_PTR)remote_receipt;
         }
@@ -184,12 +186,26 @@ reply_ready:
         HANDLE waits[2]={target,owner->stop};
         if(WaitForMultipleObjects(2,waits,FALSE,INFINITE)==WAIT_OBJECT_0) {
             native_request_completion completion={NATIVE_REQUEST_VERSION,0};
+            DWORD broker_error,exit_code=0;
+            if(!GetExitCodeProcess(target,&exit_code)) {
+                error=GetLastError();
+                ntcon_executions_note_broker_failure(owner,error);
+                goto done;
+            }
             error=bound ? owner->io.end(owner->io.context) : ERROR_SUCCESS;
             bound=FALSE;
             completion.error=error;
+            /* Report only the real target's exit code after native I/O release.
+             * NTSRV stores it and signals the launcher's direct receipt. */
+            broker_error=ntcon_complete_next_command(request->request,exit_code);
+            if(broker_error) {
+                ntcon_executions_note_broker_failure(owner,broker_error);
+                error=broker_error;
+                goto done;
+            }
+            broker_completed=TRUE;
             (void)ntcon_channel_transfer(request->pipe,request->sender,owner->stop,request->event,
                 TRUE,&completion,sizeof(completion));
-            SetEvent(receipt);
         }
     }
 done:
@@ -197,9 +213,15 @@ done:
     if(receipt)CloseHandle(receipt);
     if(target)CloseHandle(target);
     if(payload)HeapFree(GetProcessHeap(),0,payload);
-    {
-        DWORD completion_error=ntcon_complete_next_command(request->request);
-        if(completion_error)ntcon_executions_note_broker_failure(owner,completion_error);
+    if(!broker_completed){
+        if(target) {
+            /* A running target has not completed. Worker rundown, not a fake
+             * success receipt, must fail the broker's outstanding record. */
+            ntcon_executions_note_broker_failure(owner,error ? error : ERROR_PROCESS_ABORTED);
+        } else {
+            DWORD completion_error=ntcon_complete_next_command(request->request,0);
+            if(completion_error)ntcon_executions_note_broker_failure(owner,completion_error);
+        }
     }
     release_request(request);
     finish_request(owner);

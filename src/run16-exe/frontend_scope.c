@@ -29,7 +29,7 @@ static DWORD inherited_capability(const char *name,HANDLE *capability)
 struct run16_frontend_scope {
     HANDLE capability,retire,restored,root,receipt,completion,worker;
     BOOL owns_environment,has_execution;
-    DWORD console_mask;
+    DWORD console_mask,native_request;
 };
 void run16_frontend_scope_end(run16_frontend_scope *scope)
 {
@@ -209,7 +209,7 @@ DWORD run16_frontend_scope_launch_native(run16_frontend_scope *scope,const run16
          * A reused route is not a new frontend or an input activation. */
         error=OpenNtBaseClientRequestFrontend(scope->capability);
         if(error==ERROR_ALREADY_EXISTS)error=ERROR_SUCCESS;
-        if(!error)error=run16_native_worker_request_begin(worker,scope->capability,start,target,&scope->receipt,&scope->completion);
+        if(!error)error=run16_native_worker_request_begin(worker,scope->capability,start,target,&scope->receipt,&scope->completion,&scope->native_request);
         if(error!=ERROR_NOT_READY)break;
         /* No request was accepted. Wait only for initial registration; never
          * replay a submitted request or restart a failed worker. */
@@ -222,25 +222,36 @@ done:
     CloseHandle(changed);
     return error;
 }
+DWORD run16_wait_direct_event(HANDLE receipt,HANDLE worker,HANDLE root,DWORD *winner)
+{
+    HANDLE waits[3];DWORD count=0,wait,worker_index=MAXDWORD,root_index=MAXDWORD;
+    if(!receipt || !winner)return ERROR_INVALID_PARAMETER;
+    waits[count++]=receipt;
+    if(worker && worker!=receipt){worker_index=count;waits[count++]=worker;}
+    if(root && root!=receipt && root!=worker){root_index=count;waits[count++]=root;}
+    wait=WaitForMultipleObjects(count,waits,FALSE,INFINITE);
+    if(wait==WAIT_FAILED)return GetLastError();
+    if(wait>=WAIT_OBJECT_0+count)return ERROR_INVALID_STATE;
+    *winner=wait-WAIT_OBJECT_0==worker_index ? 1u :
+        wait-WAIT_OBJECT_0==root_index ? 2u : 0u;
+    return ERROR_SUCCESS;
+}
 DWORD run16_frontend_scope_wait_native(run16_frontend_scope *scope,HANDLE target,DWORD *result)
 {
-    DWORD error=0,wait;
+    DWORD error=0,winner=0;
     if(!scope || !target || !result)return ERROR_INVALID_PARAMETER;
     if(scope->receipt){
-        HANDLE waits[3]={target,scope->worker,scope->root};
-        /* A live target does not prove that its worker can still complete the
-         * request. Observe the authenticated endpoints without owning or
-         * terminating the handed-off target's execution lifetime. */
-        wait=WaitForMultipleObjects(3,waits,FALSE,INFINITE);
-        if(wait!=WAIT_OBJECT_0)return wait==WAIT_OBJECT_0+1 ? ERROR_PROCESS_ABORTED :
-            wait==WAIT_OBJECT_0+2 ? ERROR_PIPE_NOT_CONNECTED : GetLastError();
-    }else if(WaitForSingleObject(target,INFINITE)!=WAIT_OBJECT_0)return GetLastError();
-    if(!GetExitCodeProcess(target,result))return GetLastError();
+        /* The broker signals only after the real target exits and NTCON
+         * releases its I/O. Worker/root death cannot masquerade as success. */
+        error=run16_wait_direct_event(scope->receipt,scope->worker,scope->root,&winner);
+        if(error)return error;
+        if(winner)return winner==1 ? ERROR_PROCESS_ABORTED : ERROR_PIPE_NOT_CONNECTED;
+    }else return ERROR_INVALID_STATE;
     if(scope->receipt){
-        /* Reuse the authenticated request stream: the worker reports final
-         * presentation status before DOS can resume. Peer/root death cancels
-         * the read; a timeout must never silently authorize handoff. */
-        error=run16_native_worker_request_finish(scope->completion,scope->worker,scope->root);
+        /* The direct channel carries NTSRV's actual process result and the
+         * separate final presentation status, never an inferred exit code. */
+        error=run16_native_worker_request_finish(scope->completion,scope->worker,scope->root,
+            scope->native_request,result);
         CloseHandle(scope->receipt);scope->receipt=NULL;
         CloseHandle(scope->completion);scope->completion=NULL;
         CloseHandle(scope->worker);scope->worker=NULL;

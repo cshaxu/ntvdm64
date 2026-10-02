@@ -808,7 +808,7 @@ int main(int argc,char **argv)
             REQUIRE(GetProcessId(root)==GetProcessId(frontend) && root_generation==generation);
             REQUIRE(ReadFile(native_command.channel,&marker,1,&written,NULL) && written==1 && marker=='L');
             REQUIRE(WriteFile(native_command.channel,"R",1,&written,NULL) && written==1);
-            REQUIRE(!ntcon_complete_next_command(native_command.request));
+            REQUIRE(!ntcon_complete_next_command(native_command.request,0));
             CloseHandle(root);ntcon_dispose_next_command(&native_command);
         }
         CloseHandle(capability);CloseHandle(ready);CloseHandle(frontend);CloseHandle(pipe);

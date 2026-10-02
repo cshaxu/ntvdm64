@@ -37,6 +37,7 @@ static DWORD WINAPI peer(void *context)
         /* Same-process fixture recipient; ownership transfers to the client. */
         reply.target=(uint64_t)(ULONG_PTR)process.hProcess;
         reply.receipt=(uint64_t)(ULONG_PTR)CreateEventW(NULL,TRUE,TRUE,NULL);
+        reply.request=91;
         if(!reply.receipt){error=GetLastError();goto done;}
     }else if(scenario==1)reply.error=ERROR_ACCESS_DENIED;
     else if(scenario==2)reply.version++;
@@ -48,7 +49,8 @@ static DWORD WINAPI peer(void *context)
     }
     error=frontend_request_transfer(pipe,peer_process,NULL,event,TRUE,&reply,sizeof(reply));
     if(!error && scenario>=6 && scenario!=8) {
-        native_request_completion completion={NATIVE_REQUEST_VERSION,scenario==7 ? ERROR_WRITE_FAULT : 0};
+        native_request_completion completion={NATIVE_REQUEST_VERSION,
+            scenario==7 ? ERROR_WRITE_FAULT : 0};
         if(scenario==6)Sleep(2100); /* A completed target is not the frame barrier. */
         error=frontend_request_transfer(pipe,peer_process,NULL,event,TRUE,&completion,sizeof(completion));
     }
@@ -66,6 +68,12 @@ DWORD OpenNtBaseClientSubmitWorkerChannel(HANDLE capability,HANDLE pipe,const WC
     peer_thread=CreateThread(NULL,0,peer,copy,0,NULL);
     if(!peer_thread){DWORD error=GetLastError();CloseHandle(copy);return error;}
     return 0;
+}
+DWORD OpenNtBaseClientNativeExitCode(DWORD request,DWORD *exit_code)
+{
+    if(request!=91 || !exit_code)return ERROR_INVALID_PARAMETER;
+    *exit_code=37;
+    return ERROR_SUCCESS;
 }
 int main(void)
 {
@@ -94,12 +102,14 @@ int main(void)
     }
     for(scenario=6;scenario<=8;++scenario) {
         HANDLE target=NULL,receipt=NULL,completion=NULL;
-        DWORD result,error,wanted=scenario==6 ? 0 : scenario==7 ? ERROR_WRITE_FAULT : ERROR_BROKEN_PIPE;
-        error=run16_native_worker_request_begin(peer_process,(HANDLE)1,&start,&target,&receipt,&completion);
+        DWORD result,error,request=0,wanted=scenario==6 ? 0 : scenario==7 ? ERROR_WRITE_FAULT : ERROR_BROKEN_PIPE;
+        error=run16_native_worker_request_begin(peer_process,(HANDLE)1,&start,&target,&receipt,&completion,&request);
         if(error || !completion || WaitForSingleObject(target,5000)!=WAIT_OBJECT_0 ||
             !GetExitCodeProcess(target,&result) || result!=37)return 6;
-        error=run16_native_worker_request_finish(completion,peer_process,NULL);
-        if(error!=wanted || WaitForSingleObject(peer_thread,5000)!=WAIT_OBJECT_0 || peer_error)return 7;
+        result=0;
+        error=run16_native_worker_request_finish(completion,peer_process,NULL,request,&result);
+        if(error!=wanted || (!error && result!=37) ||
+            WaitForSingleObject(peer_thread,5000)!=WAIT_OBJECT_0 || peer_error)return 7;
         printf("PASS final presentation case=%lu status=%lu target=37\n",scenario,error);
         CloseHandle(peer_thread);CloseHandle(completion);CloseHandle(receipt);CloseHandle(target);
     }

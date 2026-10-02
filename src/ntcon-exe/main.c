@@ -307,7 +307,7 @@ int wmain(int argc,WCHAR **argv)
              * through its native channel.  Do not complete a broker command
              * while run16 is waiting for a reply that no thread will send. */
             if(ntcon_execution_start(requests,&command,binding)) {
-                DWORD completion=ntcon_complete_next_command(command.request);
+                DWORD completion=ntcon_complete_next_command(command.request,0);
                 if(completion)ntcon_executions_note_broker_failure(requests,completion);
                 ntcon_dispose_next_command(&command);
             }

@@ -153,29 +153,33 @@ static DWORD WINAPI frontend_pump(void *context)
              * mutation that races this attempt, then wakes this wait-set. */
             if(error==ERROR_BUSY)continue;
             if(error)return error;
-            /* No new admissions after the broker barrier. End idle DOS I/O
-             * channels before draining presentation; never stop
-             * execution based on the creator's process or direct target. */
-            while(scope->channels){
-                frontend_channel *entry=scope->channels;
-                error=run16_console_channel_stop(entry->channel);
+            /* No new admissions after the broker barrier. A borrowed root
+             * returns the visible Console but retains resident worker I/O;
+             * a dedicated root may drain its channels and retire. */
+            if(scope->borrowed) {
+                error=run16_native_frontend_park(scope->native);
                 if(error)return error;
-                scope->channels=entry->next;
-                HeapFree(GetProcessHeap(),0,entry);
+            }else {
+                while(scope->channels){
+                    frontend_channel *entry=scope->channels;
+                    error=run16_console_channel_stop(entry->channel);
+                    if(error)return error;
+                    scope->channels=entry->next;
+                    HeapFree(GetProcessHeap(),0,entry);
+                }
+                error=run16_native_frontend_drain(scope->native);
+                if(error)return error;
+                return ERROR_SUCCESS;
             }
-            error=run16_native_frontend_drain(scope->native);
-            if(error)return error;
-            if(!scope->borrowed)return ERROR_SUCCESS;
-            error=run16_native_frontend_destroy(scope->native);
-            if(error)return error;
-            scope->native=NULL;
-            scope->admitted=scope->retire_requested=FALSE;
+            /* Resident channels remain admitted across borrowed leases. A
+             * second launch must be able to retire the same frontend. */
+            scope->retire_requested=FALSE;
             scope->creator=NULL; /* First launcher is not the next phase's owner. */
             if(!ResetEvent(scope->retire))return GetLastError();
             error=OpenNtBaseClientFrontendLeaseReady();
             if(error)return error;
         }
-        if(scope->borrowed && !scope->native) {
+        if(scope->borrowed) {
             DWORD retired=0;
             error=OpenNtBaseClientRetireWorkerlessFrontend(&retired);
             if(error)return error;

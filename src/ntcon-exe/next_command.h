@@ -18,7 +18,7 @@ typedef struct ntcon_next_command {
  * The underlying transport may wait on a channel, but that is not NTCON's
  * execution contract. */
 DWORD ntcon_get_next_command(ntcon_next_command *);
-DWORD ntcon_complete_next_command(DWORD request);
+DWORD ntcon_complete_next_command(DWORD request,DWORD exit_code);
 void ntcon_dispose_next_command(ntcon_next_command *);
 
 #endif

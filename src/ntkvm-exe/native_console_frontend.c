@@ -19,7 +19,10 @@ struct run16_native_frontend {
     binding_waiter *binding_waiters; /* guarded by io_lock; each waiter owns its event */
     DWORD original_input_mode;
     BOOL input_mode_saved;
-    HANDLE stop,refresh,refreshed,thread,changed,control[2];
+    DWORD parked_input_mode;
+    BOOL parked;
+    HANDLE stop,refresh,refreshed,thread,changed,park,park_done,control[2];
+    DWORD park_error;
     HANDLE console_input,console_output,console_surface,dos_surface;
     SMALL_RECT logical_window;
     /* Root teardown returns the canonical buffer without undoing the DOS
@@ -294,7 +297,7 @@ static DWORD window_route(void *context,BOOL window,BOOL graphics)
     }
     /* Drain records with their old source policy before changing visibility.
      * Guest prepend never uses this physical Console queue. */
-    if((frontend->dos_owner || frontend->window_active) && frontend->window_active!=window) {
+    if((frontend->dos_owner || frontend->native_owner) && frontend->window_active!=window) {
         DWORD error=collect_dos_console(frontend);if(error)return error;
     }
     /* Recovered from the former presentation/console_route owner. Canonical
@@ -385,8 +388,8 @@ static DWORD present_loop(run16_native_frontend *frontend)
 {
     for(;;) {
         HANDLE waits[8]={frontend->stop,frontend->changed,frontend->refresh,
-            frontend->handoff,frontend_window_wake(frontend->window)};
-        DWORD error=0,wait,count=5;
+            frontend->handoff,frontend->park,frontend_window_wake(frontend->window)};
+        DWORD error=0,wait,count=6;
         BOOL requested=WaitForSingleObject(frontend->refresh,0)==WAIT_OBJECT_0;
         const run16_console_video *video;
         uint32_t *published;
@@ -398,6 +401,24 @@ static DWORD present_loop(run16_native_frontend *frontend)
             frontend->handoff_error=apply_binding(frontend,frontend->handoff_owner,
                 frontend->handoff_active,frontend->handoff_native);
             SetEvent(frontend->handoff_done);
+        }
+        if(WaitForSingleObject(frontend->park,0)==WAIT_OBJECT_0) {
+            ResetEvent(frontend->park);
+            frontend->park_error=(frontend->dos_owner || frontend->native_owner) ? ERROR_BUSY :
+                frontend_window_clear(frontend->window);
+            if(!frontend->park_error)
+                frontend->park_error=frontend_window_select(frontend->window,FRONTEND_DISPLAY_CONSOLE);
+            if(!frontend->park_error &&
+                !GetConsoleMode(frontend->console_input,&frontend->parked_input_mode))
+                frontend->park_error=GetLastError();
+            if(!frontend->park_error && frontend->input_mode_saved &&
+                !SetConsoleMode(frontend->console_input,frontend->original_input_mode))
+                frontend->park_error=GetLastError();
+            if(!frontend->park_error) {
+                frontend->parked=TRUE;
+                frontend->console_f_down=frontend->console_shortcut=FALSE;
+            }
+            SetEvent(frontend->park_done);
         }
         (void)refresh_window_title(frontend);
         if(frontend->dos_owner || frontend->native_owner || frontend->window_active) {
@@ -498,12 +519,15 @@ DWORD run16_native_frontend_create(run16_native_frontend **output)
     frontend->refresh=CreateEventW(NULL,TRUE,FALSE,NULL);
     frontend->refreshed=CreateEventW(NULL,TRUE,FALSE,NULL);
     frontend->changed=CreateEventW(NULL,FALSE,FALSE,NULL);
+    frontend->park=CreateEventW(NULL,TRUE,FALSE,NULL);
+    frontend->park_done=CreateEventW(NULL,TRUE,FALSE,NULL);
     frontend->control[0]=CreateEventW(NULL,FALSE,FALSE,NULL);
     frontend->control[1]=CreateEventW(NULL,FALSE,FALSE,NULL);
     frontend->handoff=CreateEventW(NULL,TRUE,FALSE,NULL);
     frontend->handoff_done=CreateEventW(NULL,TRUE,FALSE,NULL);
     frontend->dos_input_ready=CreateEventW(NULL,TRUE,FALSE,NULL);
     if(!frontend->stop || !frontend->refresh || !frontend->refreshed || !frontend->changed ||
+        !frontend->park || !frontend->park_done ||
         !frontend->control[0] || !frontend->control[1] || !frontend->handoff || !frontend->handoff_done || !frontend->dos_input_ready) {
         error=GetLastError();run16_native_frontend_destroy(frontend);return error;
     }
@@ -582,6 +606,19 @@ DWORD run16_native_frontend_drain(run16_native_frontend *frontend)
     LeaveCriticalSection(&frontend->lock);
     return error;
 }
+DWORD run16_native_frontend_park(run16_native_frontend *frontend)
+{
+    HANDLE waits[3];DWORD wait,error;
+    if(!frontend)return ERROR_INVALID_PARAMETER;
+    waits[0]=frontend->park_done;waits[1]=frontend->stop;waits[2]=frontend->thread;
+    if(!ResetEvent(frontend->park_done) || !SetEvent(frontend->park))return GetLastError();
+    wait=WaitForMultipleObjects(3,waits,FALSE,INFINITE);
+    if(wait==WAIT_OBJECT_0)return frontend->park_error;
+    if(wait==WAIT_OBJECT_0+1)return ERROR_OPERATION_ABORTED;
+    if(wait==WAIT_FAILED)return GetLastError();
+    if(!GetExitCodeThread(frontend->thread,&error))return GetLastError();
+    return error ? error : ERROR_BROKEN_PIPE;
+}
 /* Only the original worker's block/resume edges select this binding. The
  * owner is a root-local channel address, never a process/task scheduler ID. */
 static DWORD apply_binding(run16_native_frontend *frontend,const void *owner,BOOL active,BOOL native)
@@ -601,6 +638,13 @@ static DWORD apply_binding(run16_native_frontend *frontend,const void *owner,BOO
     if(active && *slot==owner)return 0;
     if(*slot && *slot!=owner)return ERROR_BUSY;
     if(!active && !*slot)return 0;
+    /* A borrowed root restores the outer CMD's cooked mode while idle. Its
+     * resident worker resumes the mode it had before that temporary return. */
+    if(active && frontend->parked) {
+        if(!SetConsoleMode(frontend->console_input,frontend->parked_input_mode))
+            return GetLastError();
+        frontend->parked=FALSE;
+    }
     if(!native && active) {
         error=prepare_dos_surface(frontend);
         if(error)return error;
@@ -857,6 +901,8 @@ DWORD run16_native_frontend_destroy(run16_native_frontend *frontend)
     if(frontend->refresh)CloseHandle(frontend->refresh);
     if(frontend->refreshed)CloseHandle(frontend->refreshed);
     if(frontend->changed)CloseHandle(frontend->changed);
+    if(frontend->park)CloseHandle(frontend->park);
+    if(frontend->park_done)CloseHandle(frontend->park_done);
     if(frontend->control[0])CloseHandle(frontend->control[0]);
     if(frontend->control[1])CloseHandle(frontend->control[1]);
     if(frontend->handoff)CloseHandle(frontend->handoff);

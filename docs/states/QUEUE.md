@@ -77,40 +77,48 @@ later package merely because an earlier linked component has no runtime proof.
 
 | Next order | Candidate implementation package | Proposal |
 | --- | --- | --- |
-| 1 | NtvdmSystemRoot and application search isolation — derive the internal package root from run16.exe, bind internal components/media to that root, and remove implicit package-first priority from user application PATH lookup. | [Proposal](../proposals/proposal-ntvdm-system-root-path-isolation-001.md) |
-| 2 | CCPU40/V86 guest-contract consistency audit — reuse existing evidence, freeze the selected contract boundary and resolve changed or unproved edges into actionable original-owner handoffs; no renewed global CPU audit or speculative repair. | [Proposal](../proposals/proposal-ccpu40-v86-guest-contract-audit-001.md) |
-| 3 | WOW32 messages, callbacks and task execution — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-message-task-execution-001.md) |
-| 4 | WOW32 USER objects and shared view — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-user-objects-shared-view-001.md) |
-| 5 | WOW32 modules, memory and resource aliases — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-modules-memory-aliases-001.md) |
-| 6 | WOW32 files, directories, environment and OEM — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-files-environment-oem-001.md) |
-| 7 | WOW32 resource discovery and loading foundation — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-resource-loading-001.md) |
-| 8 | WOW32 dialogs, input, hooks and timers — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-dialogs-input-hooks-timers-001.md) |
-| 9 | WOW32 GDI identity, DC and drawing — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-gdi-dc-drawing-001.md) |
-| 10 | WOW32 fonts, text and metafiles — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-fonts-text-metafiles-001.md) |
-| 11 | WOW32 resource conversion, menus and accelerators — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-menus-resource-conversion-001.md) |
-| 12 | WOW32 clipboard — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-clipboard-001.md) |
-| 13 | WOW32 DDE — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-dde-001.md) |
-| 14 | WOW32 shell and layered Registry — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-shell-registry-001.md) |
-| 15 | WOW32 Winsock — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-winsock-001.md) |
-| 16 | WOW32 COMM — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-comm-001.md) |
-| 17 | WOW32 printing and spool — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-printing-spool-001.md) |
-| 18 | WOW32 sound and multimedia — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-sound-multimedia-001.md) |
-| 19 | WOW32 ToolHelp and WOW debugger interfaces — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-toolhelp-debugger-001.md) |
-| 20 | WOW32 common dialogs and related OLE interfaces — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-common-dialogs-ole-001.md) |
-| 21 | WOW32 WOW hard-error responses — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-hard-error-responses-001.md) |
-| 22 | WOW32 whole-provider and three-application acceptance — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-integrated-acceptance-001.md) |
-| 23 | OpenNT error-dialog response and termination semantics recovery — restore and verify residual source-defined response and completion paths; reuse WOW-owned results, bringing forward only dependencies needed for safe WOW execution. | [Proposal](../proposals/proposal-error-dialog-termination-semantics-restoration-001.md) |
-| 24 | MVDM whole-closure completeness audit and recovery — repair missing/cropped/unconnected originals and remove the local providers displaced by those recoveries; hand off the reconciled inventory to minimization. | [Proposal](../proposals/proposal-mvdm-whole-closure-recovery-001.md) |
-| 25 | Project-wide original-source implementation minimization review — reuse the closure inventory to consolidate remaining duplicate or unnecessary implementations, mirror diffs, overlays and bindings without losing verified capabilities. | [Proposal](../proposals/proposal-original-source-implementation-minimization-review-001.md) |
+| 1 | Rename the Win32 text worker and Console frontend — first NTCON to NTW32 and project-owned ConRecord to Win32Record with zero-old-name gates, then NTKVM to NTCON; update code symbols, paths, build/package identities and all documentation without changing behavior. | [Proposal](../proposals/proposal-native-worker-frontend-renaming-001.md) |
+| 2 | NTSRV-owned Direct/Observed worker task traces and NTMON hierarchy — read-only, provenance-marked task observation after component renaming; never a second scheduler or completion authority. | [Proposal](../proposals/proposal-worker-task-trace-observation-001.md) |
+| 3 | NtvdmSystemRoot and application search isolation — derive the internal package root from run16.exe, bind internal components/media to that root, and remove implicit package-first priority from user application PATH lookup. | [Proposal](../proposals/proposal-ntvdm-system-root-path-isolation-001.md) |
+| 4 | CCPU40/V86 guest-contract consistency audit — reuse existing evidence, freeze the selected contract boundary and resolve changed or unproved edges into actionable original-owner handoffs; no renewed global CPU audit or speculative repair. | [Proposal](../proposals/proposal-ccpu40-v86-guest-contract-audit-001.md) |
+| 5 | WOW32 messages, callbacks and task execution — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-message-task-execution-001.md) |
+| 6 | WOW32 USER objects and shared view — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-user-objects-shared-view-001.md) |
+| 7 | WOW32 modules, memory and resource aliases — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-modules-memory-aliases-001.md) |
+| 8 | WOW32 files, directories, environment and OEM — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-files-environment-oem-001.md) |
+| 9 | WOW32 resource discovery and loading foundation — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-resource-loading-001.md) |
+| 10 | WOW32 dialogs, input, hooks and timers — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-dialogs-input-hooks-timers-001.md) |
+| 11 | WOW32 GDI identity, DC and drawing — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-gdi-dc-drawing-001.md) |
+| 12 | WOW32 fonts, text and metafiles — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-fonts-text-metafiles-001.md) |
+| 13 | WOW32 resource conversion, menus and accelerators — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-menus-resource-conversion-001.md) |
+| 14 | WOW32 clipboard — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-clipboard-001.md) |
+| 15 | WOW32 DDE — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-dde-001.md) |
+| 16 | WOW32 shell and layered Registry — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-shell-registry-001.md) |
+| 17 | WOW32 Winsock — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-winsock-001.md) |
+| 18 | WOW32 COMM — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-comm-001.md) |
+| 19 | WOW32 printing and spool — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-printing-spool-001.md) |
+| 20 | WOW32 sound and multimedia — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-sound-multimedia-001.md) |
+| 21 | WOW32 ToolHelp and WOW debugger interfaces — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-toolhelp-debugger-001.md) |
+| 22 | WOW32 common dialogs and related OLE interfaces — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-common-dialogs-ole-001.md) |
+| 23 | WOW32 WOW hard-error responses — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-hard-error-responses-001.md) |
+| 24 | WOW32 whole-provider and three-application acceptance — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-integrated-acceptance-001.md) |
+| 25 | OpenNT error-dialog response and termination semantics recovery — restore and verify residual source-defined response and completion paths; reuse WOW-owned results, bringing forward only dependencies needed for safe WOW execution. | [Proposal](../proposals/proposal-error-dialog-termination-semantics-restoration-001.md) |
+| 26 | MVDM whole-closure completeness audit and recovery — repair missing/cropped/unconnected originals and remove the local providers displaced by those recoveries; hand off the reconciled inventory to minimization. | [Proposal](../proposals/proposal-mvdm-whole-closure-recovery-001.md) |
+| 27 | Project-wide original-source implementation minimization review — reuse the closure inventory to consolidate remaining duplicate or unnecessary implementations, mirror diffs, overlays and bindings without losing verified capabilities. | [Proposal](../proposals/proposal-original-source-implementation-minimization-review-001.md) |
 
-Owner direction dated 2026-09-28 promotes root/search isolation from the tail
-to the head and replaces the aggregate WOW32 candidate with twenty independent
+Owner direction dated 2026-09-28 promoted root/search isolation from the tail
+to the then-head and replaced the aggregate WOW32 candidate with twenty independent
 owner packages. The [WOW32 program](../proposals/proposal-wow32-production-completion-002.md)
 retains the shared evidence, acceptance gates and complete transfer mapping;
 it is background, not an additional candidate. The owner first promoted product
 experience repair to position 2, then transferred it into the current frontend
 package because it shares component-lifecycle ownership. It is no longer an
-independent queued candidate. Root/search isolation is followed by contract
+independent queued candidate. The owner subsequently placed the
+[component-renaming proposal](../proposals/proposal-native-worker-frontend-renaming-001.md)
+at the new queue head. The former current-package read-only task-trace plan is now
+the [second candidate](../proposals/proposal-worker-task-trace-observation-001.md),
+after component renaming and before root/search isolation. Neither candidate
+is admitted and neither interrupts the active packet.
+Root/search isolation is followed by contract
 auditing, the WOW packages, general error recovery, completeness recovery and
 minimization. This supersedes the
 2026-09-27 tail placement, without admitting work or changing the active packet.
@@ -119,7 +127,9 @@ The owner promoted the former tail graphics/full-screen presentation candidate
 and admitted it in Status for source/architecture confirmation before coding.
 It is therefore absent from this unadmitted queue. The owner-approved planning
 revisions of 2026-09-24 and 2026-09-28 order the candidates above; this does
-not interrupt or change the active packet. Root/search isolation is followed by
+not interrupt or change the active packet. After component renaming and
+task-trace observation,
+root/search isolation is followed by
 bounded evidence-reusing contract auditing, the
 separate WOW capability packages, error/lifetime recovery, completeness recovery
 and finally global minimization.

@@ -2,7 +2,7 @@
 #include "native_request_protocol.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
 #include <stdio.h>
-static DWORD submit_receipt(HANDLE root,HANDLE root_capability,const run16_native_start *start,HANDLE *target,HANDLE *receipt,HANDLE *completion)
+static DWORD submit_receipt(HANDLE root,HANDLE root_capability,const run16_native_start *start,HANDLE *target,HANDLE *receipt,HANDLE *completion,DWORD *request)
 {
     static LONG serial;
     WCHAR name[96];HANDLE server=INVALID_HANDLE_VALUE,client=INVALID_HANDLE_VALUE,event=NULL;
@@ -13,6 +13,7 @@ static DWORD submit_receipt(HANDLE root,HANDLE root_capability,const run16_nativ
     BYTE *payload=NULL;DWORD error,bytes;
     *target=NULL;*receipt=NULL;local.capabilities[0]=local.capabilities[1]=NULL;
     if(completion)*completion=NULL;
+    if(request)*request=0;
     if(start) {
         local=*start;local.capabilities[0]=local.capabilities[1]=NULL;
         if(start->application)lstrcpynW(image,start->application,260);
@@ -42,12 +43,13 @@ static DWORD submit_receipt(HANDLE root,HANDLE root_capability,const run16_nativ
     if(!error) {
         if(reply.version!=NATIVE_REQUEST_VERSION || reply.target>(uint64_t)(ULONG_PTR)-1 ||
             reply.receipt>(uint64_t)(ULONG_PTR)-1 ||
-            (!reply.error && start && (!reply.target || !reply.receipt)) ||
-            (!start && (reply.target || reply.receipt)) ||
-            (reply.error && (reply.target || reply.receipt)))error=ERROR_INVALID_DATA;
+            (!reply.error && start && (!reply.target || !reply.receipt || !reply.request)) ||
+            (!start && (reply.target || reply.receipt || reply.request)) ||
+            (reply.error && (reply.target || reply.receipt || reply.request)))error=ERROR_INVALID_DATA;
         else if(reply.error)error=reply.error;
         else {
             *target=(HANDLE)(ULONG_PTR)reply.target;*receipt=(HANDLE)(ULONG_PTR)reply.receipt;
+            if(request)*request=reply.request;
             if(completion){*completion=client;client=INVALID_HANDLE_VALUE;}
         }
     }
@@ -59,22 +61,27 @@ done:
     return error;
 }
 DWORD run16_native_worker_request_submit(HANDLE worker,HANDLE capability,const run16_native_start *start,HANDLE *target,HANDLE *receipt)
-{ return submit_receipt(worker,capability,start,target,receipt,NULL); }
+{ return submit_receipt(worker,capability,start,target,receipt,NULL,NULL); }
 DWORD run16_native_worker_request_begin(HANDLE worker,HANDLE capability,const run16_native_start *start,
-    HANDLE *target,HANDLE *receipt,HANDLE *completion)
-{ return submit_receipt(worker,capability,start,target,receipt,completion); }
-DWORD run16_native_worker_request_finish(HANDLE pipe,HANDLE worker,HANDLE frontend)
+    HANDLE *target,HANDLE *receipt,HANDLE *completion,DWORD *request)
+{ return submit_receipt(worker,capability,start,target,receipt,completion,request); }
+DWORD run16_native_worker_request_finish(HANDLE pipe,HANDLE worker,HANDLE frontend,DWORD request,DWORD *exit_code)
 {
     native_request_completion reply={0};DWORD error;
+    if(!exit_code || !request)return ERROR_INVALID_PARAMETER;
+    *exit_code=0;
     HANDLE event=CreateEventW(NULL,TRUE,FALSE,NULL);
     if(!event)return GetLastError();
     error=frontend_request_transfer(pipe,worker,frontend,event,FALSE,&reply,sizeof(reply));
     CloseHandle(event);
-    if(!error)error=reply.version==NATIVE_REQUEST_VERSION ? reply.error : ERROR_INVALID_DATA;
+    if(!error) {
+        error=reply.version==NATIVE_REQUEST_VERSION ? reply.error : ERROR_INVALID_DATA;
+        if(!error)error=OpenNtBaseClientNativeExitCode(request,exit_code);
+    }
     return error;
 }
 DWORD run16_native_worker_request_resume(HANDLE worker,HANDLE capability)
 {
     HANDLE target=NULL,receipt=NULL;
-    return submit_receipt(worker,capability,NULL,&target,&receipt,NULL);
+    return submit_receipt(worker,capability,NULL,&target,&receipt,NULL,NULL);
 }

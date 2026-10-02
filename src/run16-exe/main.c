@@ -454,17 +454,11 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command,run16_f
     /* A dead worker cannot deliver another completion. Keep original task
      * results, but never return to an infinite event wait after process exit. */
     {
-        HANDLE completion[2]={parent_wait ? parent_wait : worker.hProcess,NULL};
-        DWORD code,count=1,worker_index=0,wait;
-        if (completion[0]!=worker.hProcess) {
-            worker_index=count;completion[count++]=worker.hProcess;
-        }
-        wait=WaitForMultipleObjects(count,completion,FALSE,INFINITE);
-        if (wait==WAIT_FAILED) {
-            result=GetLastError();
-            goto waited;
-        }
-        if (worker_index && wait==WAIT_OBJECT_0+worker_index &&
+        DWORD code,winner=0;
+        result=run16_wait_direct_event(parent_wait ? parent_wait : worker.hProcess,
+            worker.hProcess,NULL,&winner);
+        if(result)goto waited;
+        if (winner==1 &&
             WaitForSingleObject(parent_wait,2000)!=WAIT_OBJECT_0) {
             if (GetExitCodeProcess(worker.hProcess,&code))
             result=ERROR_PROCESS_ABORTED;

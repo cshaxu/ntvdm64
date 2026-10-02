@@ -265,6 +265,67 @@ never session, Console or native-resource policy.
 
 ## T423 DOS frontend ownership transition
 
+### Current lifecycle and direct-completion contract
+
+NTSRV is the single authority for registered NTVDM and NTCON workers, their
+frontend-root associations, direct-command admission and completion, and
+cooperative retirement. NTKVM owns visible Console/Window presentation, not
+worker lifetime. Run16 classifies and submits one direct target, then waits
+only when that target's established launch semantics require it. Execution
+ancestry, frontend I/O association and worker residency are separate relations;
+none implies recursive process-tree termination.
+
+- A DOS direct request uses the original BaseSrv DOS record and its completion
+  event/exit-code path. Original DOS/WOW execution, scheduling and completion
+  remain in their OpenNT owners. Internal guest execution without a new run16
+  direct request is not fabricated as a broker completion.
+- An NTCON Win32-text direct request binds the actual suspended target's
+  process identity to its authenticated NTSRV ConRecord before resuming it.
+  NTCON retains and waits on the real process handle, obtains its Windows exit
+  code, completes its Console/I/O cleanup, and reports that result to NTSRV.
+  NTSRV stores the result and issues the direct completion receipt; run16
+  waits for that receipt and queries NTSRV rather than deciding completion
+  from its own process handle. NTCON's
+  ordinary Win32 descendants retain Windows parent/child and exit semantics;
+  observation never creates a synthetic direct receipt.
+- Run16 uses one outer direct-wait/fault/receipt flow for synchronous DOS and
+  Win32-text targets. NTSRV may share the project-owned publication and result
+  transport, but the DOS result source remains the original record and the
+  Win32 result source is NTCON's authenticated report of its real target exit.
+  Win16 retains its
+  original registered startup-only return, and Win32 GUI retains its native
+  startup-only return; neither waits for window closure or enters the NTCON
+  direct-completion path.
+- A completed task does not retire its worker. NTVDM and NTCON remain READY
+  and reacquire commands while NTSRV and their associated frontend root are
+  viable. A direct Win32 receipt may complete while native descendants still
+  use NTCON's Console; that Console must not be torn down or reused until its
+  actual resource state permits it. Monitor-only observations do not decide
+  the direct exit code or authorize killing descendants.
+- A borrowed NTKVM root returns the visible Console to the outer caller on
+  direct completion, but parks its presentation and preserves the already
+  delivered worker channels. The resident worker can therefore publish the
+  next direct request through the same authenticated frontend root; the
+  caller's input mode is restored between leases. A new lease resumes that
+  root rather than creating a second channel or equating task completion with
+  worker disconnection.
+- NTSRV arbitrates component death. NTKVM exits when its host Console is gone
+  or NTSRV is lost; after its last associated worker and in-flight admission
+  disappear, NTSRV starts a cancellable ten-second workerless grace and then
+  requests orderly NTKVM retirement. Registered workers do not die merely
+  because a launcher or one task exits. When a frontend root actually dies,
+  NTSRV directs only its associated workers to close; unrelated roots/workers
+  continue. On NTSRV death, connected NTKVM/NTVDM/NTCON instances fail closed
+  through their broker-liveness contract. NTMON remains available as a
+  disconnected monitor until its user exits.
+- NTSRV itself retains a cancellable ten-second empty-service grace when no
+  workers or pending admissions remain. Its timers never replace a direct
+  task completion, force-kill a handed-off native target, or create a second
+  scheduler. Explicit NTMON worker termination goes through NTSRV. Worker or
+  broker failure completes affected unfinished direct requests with a clear
+  failure, not a fabricated target success. No Job kill-on-close, recursive
+  process-tree kill, or launcher-death-to-worker-kill follows from this model.
+
 ### Latest admitted NTCON replacement
 
 Latest owner approval replaces ConPTY with NTCON's own ordinary hidden Console.

@@ -1,7 +1,7 @@
 import "wtypes.idl";
 [
     uuid(7d3e78bd-0472-4736-8797-e64e966d692e),
-    version(27.0),
+    version(28.0),
     pointer_default(unique)
 ]
 interface vdm_service
@@ -10,7 +10,13 @@ interface vdm_service
     error_status_t CompleteWorkerChannel(
         [in] handle_t binding, [in] VDM_CONNECTION connection,
         [in, system_handle(sh_process)] HANDLE process,
-        [in] unsigned long generation, [in] unsigned long request);
+        [in] unsigned long generation, [in] unsigned long request,
+        [in] unsigned long exit_code);
+    error_status_t NativeExitCode(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation, [in] unsigned long request,
+        [out] unsigned long *exit_code);
     /* Explicit native-worker grant in the authenticated execution Console. */
     error_status_t SelectNativeWorker(
         [in] handle_t binding, [in] VDM_CONNECTION connection,
@@ -19,7 +25,8 @@ interface vdm_service
         [out, system_handle(sh_process)] HANDLE *worker);
     /* Same authenticated attachment transaction, to the admitted worker.
      * The copied image is management metadata only; launch payloads and
-     * target results remain on the direct pipe. */
+     * target I/O status remains on the direct pipe; the actual process exit
+     * code is reported by NTCON through CompleteWorkerChannel. */
     error_status_t SubmitWorkerChannel(
         [in] handle_t binding, [in] VDM_CONNECTION connection,
         [in, system_handle(sh_process)] HANDLE process,
@@ -53,7 +60,8 @@ interface vdm_service
         [in] handle_t binding, [in] VDM_CONNECTION connection,
         [in, system_handle(sh_process)] HANDLE process,
         [in] unsigned long generation, [in] unsigned long request,
-        [in, system_handle(sh_process)] HANDLE target);
+        [in, system_handle(sh_process)] HANDLE target,
+        [in, system_handle(sh_event)] HANDLE receipt);
     /* Execution Console association only; not frontend ownership or task selection. */
     error_status_t AcquireConsoleContext(
         [in] handle_t binding, [in] VDM_CONNECTION connection,

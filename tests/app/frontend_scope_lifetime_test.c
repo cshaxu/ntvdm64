@@ -97,10 +97,10 @@ DWORD OpenNtBaseClientRetireWorkerlessFrontend(DWORD *retired)
 DWORD run16_native_frontend_destroy(run16_native_frontend *value) { if(value)HeapFree(GetProcessHeap(),0,value);return 0; }
 DWORD run16_native_worker_request_submit(HANDLE worker,HANDLE capability,const run16_native_start *start,HANDLE *out,HANDLE *receipt)
 { (void)worker;(void)capability;(void)start;*out=*receipt=NULL;return ERROR_NOT_SUPPORTED; }
-DWORD run16_native_worker_request_begin(HANDLE worker,HANDLE capability,const run16_native_start *start,HANDLE *out,HANDLE *receipt,HANDLE *completion)
-{ *completion=NULL;return run16_native_worker_request_submit(worker,capability,start,out,receipt); }
-DWORD run16_native_worker_request_finish(HANDLE completion,HANDLE worker,HANDLE frontend)
-{ (void)completion;(void)worker;(void)frontend;CHECK(FALSE);return ERROR_NOT_SUPPORTED; }
+DWORD run16_native_worker_request_begin(HANDLE worker,HANDLE capability,const run16_native_start *start,HANDLE *out,HANDLE *receipt,HANDLE *completion,DWORD *request)
+{ *completion=NULL;*request=0;return run16_native_worker_request_submit(worker,capability,start,out,receipt); }
+DWORD run16_native_worker_request_finish(HANDLE completion,HANDLE worker,HANDLE frontend,DWORD request,DWORD *exit_code)
+{ (void)completion;(void)worker;(void)frontend;(void)request;(void)exit_code;CHECK(FALSE);return ERROR_NOT_SUPPORTED; }
 DWORD run16_native_worker_request_resume(HANDLE worker,HANDLE capability)
 { (void)worker;(void)capability;CHECK(FALSE);return ERROR_NOT_SUPPORTED; }
 DWORD OpenNtBaseClientSelectNativeWorker(HANDLE *worker)

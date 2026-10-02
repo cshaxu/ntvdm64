@@ -29,8 +29,9 @@ DWORD OpenNtBaseClientFrontendJoinCandidate(DWORD *nonce,DWORD *candidate_pid);
 DWORD OpenNtBaseClientFrontendJoinDecision(DWORD nonce,BOOL same_console);
 DWORD OpenNtBaseClientFrontendLeaseReady(void);
 DWORD OpenNtBaseClientRegisterNativeBackend(HANDLE frontend,HANDLE stop,HANDLE closed);
-DWORD OpenNtBaseClientBindNativeTarget(DWORD request,HANDLE target);
-DWORD OpenNtBaseClientCompleteWorkerChannel(DWORD request);
+DWORD OpenNtBaseClientBindNativeTarget(DWORD request,HANDLE target,HANDLE receipt);
+DWORD OpenNtBaseClientCompleteWorkerChannel(DWORD request,DWORD exit_code);
+DWORD OpenNtBaseClientNativeExitCode(DWORD request,DWORD *exit_code);
 DWORD OpenNtBaseClientWorkerFrontendCapability(HANDLE *capability);
 DWORD OpenNtBaseClientRetainFrontendRoot(HANDLE capability,HANDLE *root,DWORD *generation);
 /* Separate execution association; caller owns/closes the wait-only event. */
