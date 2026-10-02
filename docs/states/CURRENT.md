@@ -4,37 +4,49 @@
 
 ## Active Packet
 
-**Active: M0 T424 S6** — owner-approved NTW32 -> NTVWM naming migration,
-Ordinary Mode. S5 production P `6d4444195` is pushed and published;
-T424 remains open for owner acceptance. This stage is name-only; common/service
-separation, GUI routing and frontend naming remain subsequent stages.
+**Active: M0 T424 S7** — owner-approved common library and NTSRV source
+separation, Ordinary Mode. S6 production P `21b576a9e` is pushed and published.
+T424 remains open for owner acceptance. GUI routing and frontend naming remain
+subsequent stages; this admission is not a claim of S7 implementation.
 
 | Field | Admitted record |
 | --- | --- |
-| Identifier Mode | M0 T424 S6, Ordinary Mode. |
+| Identifier Mode | M0 T424 S7, Ordinary Mode. |
 | Candidate Proposal | [Admitted naming/control proposal](../proposals/proposal-native-worker-frontend-renaming-001.md). |
-| Admission And Approval | Standing automatic sequential admission after verified S5 delivery and owner's explicit NTW32 -> NTVWM name-only stage before common/GUI work. Preserve shared mechanisms and other-session changes. |
-| Objective | Rename the project native worker component/product and its actual referents to NTVWM without changing execution, completion, I/O or lifetime behavior. |
-| Non-goals | No common/service split, GUI/UNBOUND routing, frontend rename, mirror/guest/shared-lib change, new helper/scheduler/observer, authentication weakening or launch-syntax change. Retain approved polling and existing backend semantics. |
-| Reference Baseline | S5 production P 6d4444195, protocol/RPC 31, coherent eight-file publication, Console17/Window17 and retained WOW frontiers; [S5 evidence](../etc/evidence/m0-t424-s5-shared-control-cleanup.md). |
-| Files And ABI Surface | Project native component paths/symbols, executable basename, consumers, build/package/test/scripts/docs. Preserve genuine Console/OpenNT/library names and copied protocol semantics; version only proven wire compatibility change. |
+| Admission And Approval | Standing automatic sequential admission after verified S6 delivery; explicit owner approval for bounded common/static-library organization, provenance-based NTSRV split and maximum suitable worker-base/consumer reuse. Preserve other-session changes. |
+| Objective | Inventory provenance and ownership, convert interface to bounded common submodules, consolidate genuinely shared project mechanisms, and separate project-added NTSRV implementation from original carriers without changing broker control or original execution semantics. |
+| Non-goals | No GUI/UNBOUND routing, worker/frontend rename, guest/shared-lib change, helper/scheduler/observer, authentication weakening, launch-syntax or original scheduling change. Retain approved polling and specialist ownership. |
+| Reference Baseline | S6 production P 21b576a9e, protocol/RPC31, coherent ntvwm.exe + ntkvm.exe eight-file publication, Console17/Window17 and retained WOW frontiers; [S6 evidence](../etc/evidence/m0-t424-s6-native-worker-name.md). |
+| Files And ABI Surface | interface/common declarations and selected neutral implementations; worker-base remains worker-only; NTSRV private modules and consumers/build/tests/docs. Audit original OpenNT blocks against pinned inputs before moving anything. Preserve wire layout unless a proven change requires paired app/RPC versioning. |
 | Applicable Rules | README authority set, EXECUTION, architecture/coding/document rules and source policy; preserve original source semantics and parallel edits. |
-| Verification | Complete-tree referent/path inventory and classified zero-old-worker gate; name-only diff review, x86/MIDL/WOW linking, focused protocol/lifecycle and Console17/Window17, actual EDIT return/relaunch/isolation and WOW frontiers; recoverable eight-file publication/smoke plus governance/link/diff review. |
-| Expected Markers | Native component/product is ntvwm-exe/ntvwm.exe; frontend remains NTKVM. Same worker-base and consumer common paths, broker receipts and backend semantics; no aliases or second implementations. |
-| Asset Needs | Delivered S5 source/runtime/hashes; reuse valid build cache, new artifacts only under build/M0-T424/S6. No external assets or desktop automation. |
-| Reporting Requirements | Inventory actual name referents and exclusions, source/name-only comparison, consumers/link/package coverage and exact tests/publication; distinguish naming from later GUI implementation. |
-| Stop Conditions | Semantic/wire changes without proof, wrong original/library rename, weakened tests/authentication, duplicate aliases, mirror/guest/library drift or baseline regression. |
-| Exit Criteria | Name-only production migration wired everywhere, classified full-tree audit and all production gates pass; coherent recoverable publication and reviewed commit/push, clean worktree. |
-| Original Owner Request | Name the native Windows worker NTVWM before GUI routing; preserve original semantics and shared worker-base/consumer handling, no needless fork. |
-| Similar-Issue Sweep | Component/product/config names, process filters, path ownership, source manifests, runtime publication/removal, fixtures and archived true worker referents; exclude original Console and reserved frontend NTCON identity. |
+| Verification | Provenance/function ledger, pinned-original byte/normalized comparisons, selected static-link dependency checks, snapshot growth/error tests, retained transport/receipt/authentication/lifetime assertions, x86/MIDL/WOW links, Console17/Window17, real EDIT/relaunch/isolation/retirement and WOW frontiers; recoverable eight-file publication/smoke plus governance/link/diff review. |
+| Expected Markers | One implementation per suitable shared mechanism, no reverse dependency from common to worker-base/EXEs, explicit state/resource/lock ownership, NTSRV remains sole registry/retirement authority, original DOS/WOW remains original-owned; remove replaced wrappers/files. |
+| Asset Needs | Delivered S6 source/runtime/hashes and existing pinned OpenNT inputs; reuse valid x86/MT CCPU40 cache, new artifacts only under build/M0-T424/S7. No external assets or desktop automation. |
+| Reporting Requirements | Source/block provenance, current/target owner and consumers, shared/independent rationale, actual duplication removed, specialist contracts retained, per-mirror diff accounting and exact gates/publication. |
+| Stop Conditions | Original execution migrated or reverse-called, generic policy framework/second registry, authentication/test weakening, unowned shared state, broadened mirror diff without boundary proof, wire mismatch or regression. |
+| Exit Criteria | Every approved S7 plan row implemented and production-wired, provenance/dependency audit and full retained gates pass; coherent recoverable publication, reviewed commit/push and clean worktree. |
+| Original Owner Request | Reuse suitable project-added common worker mechanisms in worker-base and single NTSRV/run16 consumer paths; split independent service additions from original OpenNT carriers and migrate interface into bounded common, no needless forks. |
+| Similar-Issue Sweep | Protocol declarations, duplicate transfer/codec/client bodies, Console snapshot growth/error mechanics, source/build ownership, service registration/admission/retirement/receipt/management state, wrappers/includes and mirror provenance. |
 
 The [ordered plan](../etc/operations/t424-worker-frontend-renaming-plan.md)
-owns the S6 name-only requirements. Admission is not implementation or publication.
-The coherent S6 eight-file candidate is now verified and published at O:/winnt;
-native worker is ntvwm.exe, frontend remains ntkvm.exe, protocol/RPC31 is unchanged.
-[S6 evidence](../etc/evidence/m0-t424-s6-native-worker-name.md) records name-only
-production equivalence, explicit fixture repairs, full gates and S5 recovery.
-Production commit/push and sequential S7 admission remain the final delivery step.
+owns the complete S7 requirements and dependency order. Begin with its
+provenance/ownership inventory before physical moves. O:/winnt remains delivered
+S6 until the complete S7 production gate and delivery.
+
+## S6 Closure Record
+
+Production P `21b576a9e` is pushed to main. The [S6 ledger](../etc/evidence/m0-t424-s6-native-worker-name.md)
+records twelve source and seventeen test/script path moves, sixty-six naming
+inputs, 69-input bounded equivalence and the two explicitly diagnosed fixture
+repairs without production behavior change or assertion weakening. x86/WOW
+links, unchanged MIDL31, focused tests, Console17/Window17, actual EDIT return,
+relaunch, isolation, four retirement cases and real version mismatch pass.
+Retained WOW frontiers are not three usability passes. Eight files are published
+with matching hashes and postpublication cooked-CMD/relaunch/retirement smoke;
+accepted S5 is recoverable. Only the backed-up old worker basename was removed.
+No guest/configuration/mirror/shared-library edit, helper, policy or syntax change.
+Governance/link/diff review passes. T424 remains open; S7 and later work is not
+claimed implemented by S6.
 
 ## S5 Closure Record
 
