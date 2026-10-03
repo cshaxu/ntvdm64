@@ -13,12 +13,12 @@ int wmain(int argc,WCHAR **argv)
     if(argc!=2 || _wfopen_s(&log,argv[1],L"wx"))return 2;
     CHECK(run16_native_frontend_create(&frontend)==0);
     if(!frontend)goto done;
-    CHECK(run16_native_frontend_dos_bind(frontend,&dos,TRUE)==0);
-    error=run16_native_frontend_dos_enter(frontend,&dos);CHECK(error==0);
+    CHECK(run16_native_frontend_bind(frontend,&dos,TRUE,TRUE)==0);
+    error=run16_native_frontend_enter(frontend,&dos);CHECK(error==0);
     if(!error) {
         CHECK(!run16_native_frontend_text_frame_required(frontend));
         CHECK(run16_native_frontend_read_text_configuration(frontend,0,0,&reply)==ERROR_NOT_FOUND);
-        run16_native_frontend_dos_leave(frontend);
+        run16_native_frontend_leave(frontend);
     }
     description.kind=CONSOLE_VIDEO_TEXT_CONFIGURATION;
     description.bytes=sizeof(*style);description.palette[1]=0x123456;
@@ -47,12 +47,12 @@ int wmain(int argc,WCHAR **argv)
         style->font_height=16;
         HeapFree(GetProcessHeap(),0,video.pixels);video.pixels=NULL;
     }
-    CHECK(run16_native_frontend_dos_video(frontend,&dos,&video)==0);
-    CHECK(run16_native_frontend_dos_bind(frontend,&dos,FALSE)==0);
+    CHECK(run16_native_frontend_video(frontend,&dos,&video,TRUE)==0);
+    CHECK(run16_native_frontend_bind(frontend,&dos,FALSE,TRUE)==0);
     /* Destroy the channel storage: retained configuration must be copied. */
     run16_console_video_dispose(&video);
-    CHECK(run16_native_frontend_native_bind(frontend,&native,TRUE)==0);
-    error=run16_native_frontend_dos_enter(frontend,&native);CHECK(error==0);
+    CHECK(run16_native_frontend_bind(frontend,&native,TRUE,FALSE)==0);
+    error=run16_native_frontend_enter(frontend,&native);CHECK(error==0);
     if(!error) {
         while(offset<sizeof(copy)) {
             error=run16_native_frontend_read_text_configuration(frontend,offset,revision,&reply);
@@ -67,9 +67,9 @@ int wmain(int argc,WCHAR **argv)
         CHECK(run16_native_frontend_read_text_configuration(frontend,0,revision+1,&reply)==ERROR_RETRY);
         CHECK(run16_native_frontend_read_text_configuration(frontend,sizeof(copy),revision,&reply)==ERROR_INVALID_PARAMETER);
         CHECK(run16_native_frontend_read_text_configuration(frontend,1,0,&reply)==ERROR_INVALID_PARAMETER);
-        run16_native_frontend_dos_leave(frontend);
+        run16_native_frontend_leave(frontend);
     }
-    CHECK(run16_native_frontend_native_bind(frontend,&native,FALSE)==0);
+    CHECK(run16_native_frontend_bind(frontend,&native,FALSE,FALSE)==0);
     HeapFree(GetProcessHeap(),0,payload);
 dispose:
     run16_native_frontend_destroy(frontend);run16_console_video_dispose(&video);

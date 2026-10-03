@@ -27,13 +27,12 @@ static DWORD activate(void *context,BOOL active,DWORD kind)
     if(channel->kind_selected && channel->native!=(kind==CONSOLE_IO_WORKER_NATIVE))return ERROR_INVALID_DATA;
     channel->kind_selected=TRUE;channel->native=kind==CONSOLE_IO_WORKER_NATIVE;
     do {
-        error=channel->native ? run16_native_frontend_native_bind(channel->root,channel,active) :
-            run16_native_frontend_dos_bind(channel->root,channel,active);
-        if(error==ERROR_BUSY && active && !channel->native) {
+        error=run16_native_frontend_bind(channel->root,channel,active,!channel->native);
+        if(error==ERROR_BUSY && active) {
             ULONGLONG now=GetTickCount64();
             if(now>=deadline){error=ERROR_TIMEOUT;break;}
-            error=run16_native_frontend_wait_dos_ready(channel->root,channel,
-                channel->stop,(DWORD)(deadline-now));
+            error=run16_native_frontend_wait_ready(channel->root,channel,
+                channel->stop,channel->worker,(DWORD)(deadline-now));
             if(!error)continue;
         }
         break;
@@ -44,19 +43,18 @@ static DWORD activate(void *context,BOOL active,DWORD kind)
         if(!error) {
             CloseHandle(channel->console.output);
             channel->console.output=logical;
-        } else if(channel->native)(void)run16_native_frontend_native_bind(channel->root,channel,FALSE);
-        else (void)run16_native_frontend_dos_bind(channel->root,channel,FALSE);
+        } else (void)run16_native_frontend_bind(channel->root,channel,FALSE,FALSE);
     }
     /* The canonical Console may be taller than the published DOS page.
      * Keep the shared logical viewport through native seeding; the native
      * worker may subsequently publish a genuine viewport change. */
     if(!error && active && channel->title_valid &&
-        !run16_native_frontend_dos_enter(channel->root,channel)) {
+        !run16_native_frontend_enter(channel->root,channel)) {
         run16_native_frontend_worker_title(channel->root,channel,channel->title);
-        run16_native_frontend_dos_leave(channel->root);
+        run16_native_frontend_leave(channel->root);
     }
-    if(error && active && !channel->native)
-        run16_native_frontend_cancel_dos_pending(channel->root,channel);
+    if(error && active)
+        run16_native_frontend_cancel_pending(channel->root,channel);
     /* A released worker's cached frame predates the new owner's geometry.
      * Root binding has detached this pointer under the shared I/O lock. Keep
      * the visible common screen, but require a fresh complete worker frame. */
@@ -70,12 +68,12 @@ static DWORD activate(void *context,BOOL active,DWORD kind)
 static DWORD enter(void *context)
 {
     run16_console_channel *channel=context;
-    return run16_native_frontend_dos_enter(channel->root,channel);
+    return run16_native_frontend_enter(channel->root,channel);
 }
 static void leave(void *context)
 {
     run16_console_channel *channel=context;
-    run16_native_frontend_dos_leave(channel->root);
+    run16_native_frontend_leave(channel->root);
 }
 static DWORD screen_begin(void *context)
 {
@@ -104,7 +102,7 @@ static DWORD publication(void *context,uint32_t operation)
         /* Save the last committed frame; a failed tile stream cannot mutate
          * the object still borrowed by the renderer. */
         channel->committed_video=channel->console.video;
-        error=run16_native_frontend_dos_video(channel->root,channel,&channel->committed_video);
+        error=run16_native_frontend_video(channel->root,channel,&channel->committed_video,FALSE);
         if(error) {
             CloseHandle(channel->publication_surface);channel->publication_surface=NULL;
             ZeroMemory(&channel->committed_video,sizeof(channel->committed_video));return error;
@@ -140,7 +138,7 @@ static DWORD publication(void *context,uint32_t operation)
         /* Commit consumes the grid even if projection fails. Replace the
          * renderer's borrowed frame before disposing its previous storage. */
         {
-            DWORD frame_error=run16_native_frontend_dos_video(channel->root,channel,&channel->console.video);
+            DWORD frame_error=run16_native_frontend_video(channel->root,channel,&channel->console.video,FALSE);
             if(!error)error=frame_error;
             if(!frame_error)run16_console_video_dispose(&channel->committed_video);
         }
@@ -153,7 +151,7 @@ static DWORD publication(void *context,uint32_t operation)
         channel->console.video=channel->committed_video;
         if(channel->console.video.serial<attempted_serial)channel->console.video.serial=attempted_serial;
         ZeroMemory(&channel->committed_video,sizeof(channel->committed_video));
-        error=run16_native_frontend_dos_video(channel->root,channel,&channel->console.video);
+        error=run16_native_frontend_video(channel->root,channel,&channel->console.video,FALSE);
     }
     channel->console.logical_window=run16_native_frontend_text_region(channel->root);
     {
@@ -198,9 +196,9 @@ static void publish_title(void *context,const char *title)
     run16_console_channel *channel=context;
     strcpy_s(channel->title,sizeof(channel->title),title);
     channel->title_valid=TRUE;
-    if(!run16_native_frontend_dos_enter(channel->root,channel)) {
+    if(!run16_native_frontend_enter(channel->root,channel)) {
         run16_native_frontend_worker_title(channel->root,channel,channel->title);
-        run16_native_frontend_dos_leave(channel->root);
+        run16_native_frontend_leave(channel->root);
     }
 }
 static DWORD read_text_configuration(void *context,DWORD offset,DWORD revision,console_io_reply *reply)
@@ -216,12 +214,12 @@ static BOOL active(run16_console_channel *channel)
 static DWORD read_input(void *context,BOOL peek,INPUT_RECORD *records,DWORD count,DWORD *read)
 {
     run16_console_channel *channel=context;
-    return run16_native_frontend_dos_read(channel->root,peek,records,count,read);
+    return run16_native_frontend_read(channel->root,peek,records,count,read);
 }
 static DWORD prepend_input(void *context,const INPUT_RECORD *records,DWORD count)
 {
     run16_console_channel *channel=context;
-    return run16_native_frontend_dos_prepend(channel->root,records,count);
+    return run16_native_frontend_prepend(channel->root,records,count);
 }
 
 /* Explicit cancellation plus peer death. Never close an OVERLAPPED event or
@@ -232,7 +230,7 @@ static DWORD transfer(run16_console_channel *channel,BOOL write,void *buffer,DWO
     while (bytes) {
         common_pipe_operation io;
         DWORD done=0,error,wait;
-        HANDLE waits[4]={channel->stop,channel->worker,channel->io_event,run16_native_frontend_dos_ready(channel->root)};
+        HANDLE waits[4]={channel->stop,channel->worker,channel->io_event,run16_native_frontend_ready(channel->root)};
         if (WaitForSingleObject(channel->stop,0)==WAIT_OBJECT_0) return ERROR_OPERATION_ABORTED;
         error=common_pipe_begin(&io,channel->pipe,channel->io_event,write,cursor,bytes,bytes,&done);
         if (error) {
@@ -300,7 +298,7 @@ static DWORD WINAPI console_channel_main(void *context)
         if (!error) error=run16_console_dispatch(&channel->console,request,&reply);
         if(!error && reply.result && !channel->publication_surface && !channel->console.video.pending && (request->operation==CONSOLE_IO_VIDEO_BEGIN ||
             request->operation==CONSOLE_IO_VIDEO_DATA || request->operation==CONSOLE_IO_VIDEO_TEXT))
-            error=run16_native_frontend_dos_video(channel->root,channel,&channel->console.video);
+            error=run16_native_frontend_video(channel->root,channel,&channel->console.video,!channel->native);
         if(!error && reply.result && !channel->native && !channel->console.video.pending &&
             channel->console.video.pixels && channel->console.video.description.kind==CONSOLE_VIDEO_TEXT_FRAME &&
             request->operation==CONSOLE_IO_VIDEO_DATA) {
@@ -372,7 +370,7 @@ DWORD run16_console_channel_stop(run16_console_channel *channel)
             return wait==WAIT_TIMEOUT ? ERROR_TIMEOUT : GetLastError();
         CloseHandle(channel->thread);
     } else if (channel->pipe && channel->pipe!=INVALID_HANDLE_VALUE) CloseHandle(channel->pipe);
-    run16_native_frontend_dos_forget(channel->root,channel);
+    run16_native_frontend_forget(channel->root,channel);
     run16_console_video_dispose(&channel->console.video);
     run16_console_video_dispose(&channel->committed_video);
     if (channel->io_event) CloseHandle(channel->io_event);

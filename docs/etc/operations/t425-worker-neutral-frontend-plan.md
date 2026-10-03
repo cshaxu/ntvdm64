@@ -19,7 +19,7 @@ extent repair is admitted. T closure requires owner acceptance.
 | Stage | Bounded closure |
 | --- | --- |
 | S1 | Provenance/contract audit and worker-neutral mouse/keyboard production paths. Remove frontend native-only pointer and key/text kind selection; NTVWM consumes the existing relative/absolute contract locally. |
-| S2 | One channel-based frontend I/O owner and pending handoff, replacing DOS/native slots and wrappers while retaining final-paint, input return, release/resume and cancellation barriers. |
+| S2 | One channel-based frontend I/O owner with independently cancellable pending requests for multiple channels, replacing DOS/native slots and wrappers while retaining final-paint, input return, release/resume and cancellation barriers. Pending is not a single-slot cardinality limit or an execution scheduler. |
 | S3 | Operation-based publication/snapshot/locking and common worker clients. Replace type-only checks with explicit operation contracts; retain original Console/VGA production and native hidden Console capture. |
 | S4 | Whole-package source/contract/dependency audit, duplicate removal review and retained acceptance; stop for owner T verification. |
 
@@ -28,7 +28,7 @@ negative/lifecycle tests and prior frontiers, Console17/Window17, native EDIT/
 nested return/isolation/RPC/version/WOW gates, recoverable eight-file
 publication and reviewed commit/push. Partial implementations or unused
 wrappers do not close a stage. Reuse validated incremental cache by input
-identity; new outputs only build/M0-T425/S<n>/r001.
+identity; new outputs only under declared build/M0-T425/S<n>/r<nnn> run roots.
 
 ## Initial source and operation disposition
 
@@ -51,8 +51,10 @@ identity; new outputs only build/M0-T425/S<n>/r001.
   geometry changes, ordered release and stale-source rejection.
 - [x] S1: physical keys, text/dead-key/layout, returned keys and held-key reset;
   no duplicate characters or missing scan/modifier state.
-- [ ] S2: both handoff directions, committed final state before acquisition,
+- [x] S2: both handoff directions, committed final state before acquisition,
   input return before parent output, stop/disconnect/stale owner; remove slots.
+  The [S2 ledger](../evidence/m0-t425-s2-channel-owner-handoff.md) retains
+  multi-pending FIFO/cancellation, exact publication and regression evidence.
 - [ ] S3: snapshot/publication validation, atomic tiled commit, rollback and
   resource release; no half-frame or late-owner overwrite; remove old paths.
 - [ ] Real worker clients wired through existing common/worker-base; original

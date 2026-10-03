@@ -4,6 +4,7 @@
 | --- | --- | --- | --- |
 | [T425 worker-neutral frontend plan](operations/t425-worker-neutral-frontend-plan.md) | M0 T425 | Admitted input/ownership/publication unification, provenance and production gates. | Retain through T425 acceptance. |
 | [T425 S1 worker-neutral input](evidence/m0-t425-s1-worker-neutral-input.md) | M0 T425 S1 | Common mouse/key contract, worker-local adaptation, actual tests and publication status. | Retain through T425 acceptance. |
+| [T425 S2 channel ownership](evidence/m0-t425-s2-channel-owner-handoff.md) | M0 T425 S2 | One active channel, multiple pending requests, lock/cancellation contract and actual verification status. | Retain through T425 acceptance. |
 | [T424 S13 final audit](evidence/m0-t424-s13-final-audit.md) | M0 T424 S13 | Complete-stage ownership/referent audit, document corrections and unchanged release verification. | Retain through owner T424 acceptance. |
 | [T424 S12 logical surface](evidence/m0-t424-s12-logical-surface.md) | M0 T424 S12 | Unified storage/atomic publication/handoff provenance, tests and release ledger. | Retain through T424 acceptance. |
 | [T424 S11 frontend identity](evidence/m0-t424-s11-frontend-name.md) | M0 T424 S11 | Referent inventory, name-only wiring, retained behavior and recoverable publication. | Retain through naming acceptance. |

@@ -38,19 +38,28 @@ DWORD run16_console_dispatch(run16_console_frontend *owner,
 #define CHECK(x) do { if(!(x)) { DWORD check_error=GetLastError(); \
     fprintf(private_report ? private_report : stderr,"FAIL line=%u error=%lu\n", \
     (unsigned)__LINE__,check_error);if(private_report)fflush(private_report);ExitProcess(1); } } while(0)
-typedef struct dos_binding_wait_case {
+typedef struct binding_wait_case {
     const void *owner;
     HANDLE cancel,started;
+    HANDLE peer;
     DWORD result;
-} dos_binding_wait_case;
-static DWORD WINAPI wait_for_dos_binding(void *context)
+    DWORD timeout;
+    BOOL prepare_vga;
+} binding_wait_case;
+static DWORD WINAPI wait_for_binding(void *context)
 {
-    dos_binding_wait_case *test=context;
-    CHECK(run16_native_frontend_dos_bind(test_frontend,test->owner,TRUE)==ERROR_BUSY);
+    binding_wait_case *test=context;
+    HANDLE wait_peer=test->peer;
+    /* Production channels own a real worker process handle. The process
+     * pseudo-handle is not a valid member of this multi-object wait set. */
+    if(!wait_peer)CHECK(DuplicateHandle(GetCurrentProcess(),GetCurrentProcess(),
+        GetCurrentProcess(),&wait_peer,SYNCHRONIZE,FALSE,0));
+    CHECK(run16_native_frontend_bind(test_frontend,test->owner,TRUE,test->prepare_vga)==ERROR_BUSY);
     CHECK(SetEvent(test->started));
-    test->result=run16_native_frontend_wait_dos_ready(test_frontend,test->owner,
-        test->cancel,10000);
-    if(test->result)run16_native_frontend_cancel_dos_pending(test_frontend,test->owner);
+    test->result=run16_native_frontend_wait_ready(test_frontend,test->owner,
+        test->cancel,wait_peer,test->timeout ? test->timeout : 10000);
+    if(test->result)run16_native_frontend_cancel_pending(test_frontend,test->owner);
+    if(!test->peer)CloseHandle(wait_peer);
     return 0;
 }
 /* Diagnostic-only self-process snapshot; never enters a product binary. */
@@ -106,47 +115,47 @@ static void peer_io(BOOL write,void *buffer,DWORD bytes)
 static void verify_dos_input_queue(run16_console_channel *channel)
 {
     INPUT_RECORD first[130]={0},second[130]={0},received[260];
-    DWORD i,count,pending;HANDLE ready=run16_native_frontend_dos_ready(test_frontend);
+    DWORD i,count,pending;HANDLE ready=run16_native_frontend_ready(test_frontend);
     for(i=0;i<130;++i) {
         first[i].EventType=second[i].EventType=KEY_EVENT;
         first[i].Event.KeyEvent.wRepeatCount=second[i].Event.KeyEvent.wRepeatCount=1;
         first[i].Event.KeyEvent.uChar.UnicodeChar=(WCHAR)(0x100+i);
         second[i].Event.KeyEvent.uChar.UnicodeChar=(WCHAR)(0x200+i);
     }
-    CHECK(!run16_native_frontend_dos_enter(test_frontend,channel));
+    CHECK(!run16_native_frontend_enter(test_frontend,channel));
     CHECK(WaitForSingleObject(ready,0)==WAIT_TIMEOUT);
-    CHECK(!run16_native_frontend_dos_prepend(test_frontend,second,130));
-    CHECK(!run16_native_frontend_dos_prepend(test_frontend,first,130));
+    CHECK(!run16_native_frontend_prepend(test_frontend,second,130));
+    CHECK(!run16_native_frontend_prepend(test_frontend,first,130));
     CHECK(WaitForSingleObject(ready,0)==WAIT_OBJECT_0);
-    CHECK(!run16_native_frontend_dos_read(test_frontend,TRUE,received,260,&count) && count==260);
+    CHECK(!run16_native_frontend_read(test_frontend,TRUE,received,260,&count) && count==260);
     CHECK(!memcmp(received,first,sizeof(first)) && !memcmp(received+130,second,sizeof(second)));
-    CHECK(!run16_native_frontend_dos_read(test_frontend,FALSE,received,17,&count) && count==17);
+    CHECK(!run16_native_frontend_read(test_frontend,FALSE,received,17,&count) && count==17);
     CHECK(!memcmp(received,first,17*sizeof(*first)));
     CHECK(WaitForSingleObject(ready,0)==WAIT_OBJECT_0);
-    CHECK(run16_native_frontend_dos_prepend(test_frontend,first,MAXDWORD)==ERROR_ARITHMETIC_OVERFLOW);
-    CHECK(!run16_native_frontend_dos_prepend(test_frontend,first,0));
-    CHECK(!run16_native_frontend_dos_read(test_frontend,FALSE,received,260,&count) && count==243);
+    CHECK(run16_native_frontend_prepend(test_frontend,first,MAXDWORD)==ERROR_ARITHMETIC_OVERFLOW);
+    CHECK(!run16_native_frontend_prepend(test_frontend,first,0));
+    CHECK(!run16_native_frontend_read(test_frontend,FALSE,received,260,&count) && count==243);
     CHECK(!memcmp(received,first+17,113*sizeof(*first)) && !memcmp(received+113,second,sizeof(second)));
     CHECK(WaitForSingleObject(ready,0)==WAIT_TIMEOUT);
     CHECK(FlushConsoleInputBuffer(channel->console.input));
-    CHECK(!run16_native_frontend_dos_prepend(test_frontend,first,3));
-    run16_native_frontend_dos_leave(test_frontend);
+    CHECK(!run16_native_frontend_prepend(test_frontend,first,3));
+    run16_native_frontend_leave(test_frontend);
     /* Both backend channels consume the same frontend-owned unsent queue.
      * Handoff must not inject these records into the visible Console. */
-    CHECK(!run16_native_frontend_dos_bind(test_frontend,channel,FALSE));
+    CHECK(!run16_native_frontend_bind(test_frontend,channel,FALSE,TRUE));
     CHECK(WaitForSingleObject(ready,0)==WAIT_OBJECT_0);
     CHECK(GetNumberOfConsoleInputEvents(channel->console.input,&pending) && pending==0);
-    CHECK(!run16_native_frontend_native_bind(test_frontend,channel,TRUE));
-    CHECK(!run16_native_frontend_dos_enter(test_frontend,channel));
-    CHECK(!run16_native_frontend_dos_read(test_frontend,FALSE,received,3,&count) && count==3);
+    CHECK(!run16_native_frontend_bind(test_frontend,channel,TRUE,FALSE));
+    CHECK(!run16_native_frontend_enter(test_frontend,channel));
+    CHECK(!run16_native_frontend_read(test_frontend,FALSE,received,3,&count) && count==3);
     CHECK(!memcmp(received,first,3*sizeof(*first)));
-    run16_native_frontend_dos_leave(test_frontend);
-    CHECK(!run16_native_frontend_native_bind(test_frontend,channel,FALSE));
-    CHECK(!run16_native_frontend_dos_bind(test_frontend,channel,TRUE));
-    CHECK(!run16_native_frontend_dos_enter(test_frontend,channel));
+    run16_native_frontend_leave(test_frontend);
+    CHECK(!run16_native_frontend_bind(test_frontend,channel,FALSE,FALSE));
+    CHECK(!run16_native_frontend_bind(test_frontend,channel,TRUE,TRUE));
+    CHECK(!run16_native_frontend_enter(test_frontend,channel));
     CHECK(FlushConsoleInputBuffer(channel->console.input));
-    do { CHECK(!run16_native_frontend_dos_read(test_frontend,FALSE,received,260,&count)); } while(count);
-    run16_native_frontend_dos_leave(test_frontend);
+    do { CHECK(!run16_native_frontend_read(test_frontend,FALSE,received,260,&count)); } while(count);
+    run16_native_frontend_leave(test_frontend);
     puts("PASS DOS input growth, atomic prepend/order, peek, partial drain/readiness, overflow preservation and shared native-channel handoff");
 }
 static void run_case(unsigned mode,unsigned round)
@@ -185,10 +194,10 @@ static void run_case(unsigned mode,unsigned round)
         &ready,0,FALSE,DUPLICATE_SAME_ACCESS));
     {
         INPUT_RECORD stale[64];DWORD count;
-        CHECK(!run16_native_frontend_dos_enter(test_frontend,channel));
+        CHECK(!run16_native_frontend_enter(test_frontend,channel));
         CHECK(FlushConsoleInputBuffer(channel->console.input));
-        do { CHECK(!run16_native_frontend_dos_read(test_frontend,FALSE,stale,64,&count)); } while(count);
-        run16_native_frontend_dos_leave(test_frontend);
+        do { CHECK(!run16_native_frontend_read(test_frontend,FALSE,stale,64,&count)); } while(count);
+        run16_native_frontend_leave(test_frontend);
     }
     request.version=CONSOLE_IO_VERSION;request.generation=expected_generation;
     request.sequence=1;request.operation=CONSOLE_IO_BARRIER;
@@ -221,9 +230,9 @@ static void run_case(unsigned mode,unsigned round)
         CHECK(window && GetWindowThreadProcessId(window,&window_pid) && window_pid==GetCurrentProcessId());
         if(!round) {
             INPUT_RECORD physical={0},records[64];DWORD count,written,i,keys=0;
-            CHECK(!run16_native_frontend_dos_enter(test_frontend,channel));
-            do { CHECK(!run16_native_frontend_dos_read(test_frontend,FALSE,records,64,&count)); } while(count);
-            run16_native_frontend_dos_leave(test_frontend);
+            CHECK(!run16_native_frontend_enter(test_frontend,channel));
+            do { CHECK(!run16_native_frontend_read(test_frontend,FALSE,records,64,&count)); } while(count);
+            run16_native_frontend_leave(test_frontend);
             physical.EventType=KEY_EVENT;physical.Event.KeyEvent.bKeyDown=TRUE;
             physical.Event.KeyEvent.wRepeatCount=1;physical.Event.KeyEvent.wVirtualKeyCode='Z';
             CHECK(WriteConsoleInputW(channel->console.input,&physical,1,&written) && written==1);
@@ -231,9 +240,9 @@ static void run_case(unsigned mode,unsigned round)
             CHECK(PostMessageW(window,WM_KEYUP,'A',(LPARAM)0xc01e0001));
             deadline=GetTickCount64()+5000;
             while(keys<2 && GetTickCount64()<deadline) {
-                CHECK(!run16_native_frontend_dos_enter(test_frontend,channel));
-                CHECK(!run16_native_frontend_dos_read(test_frontend,FALSE,records,64,&count));
-                run16_native_frontend_dos_leave(test_frontend);
+                CHECK(!run16_native_frontend_enter(test_frontend,channel));
+                CHECK(!run16_native_frontend_read(test_frontend,FALSE,records,64,&count));
+                run16_native_frontend_leave(test_frontend);
                 for(i=0;i<count;++i)if(records[i].EventType==KEY_EVENT) {
                     CHECK(records[i].Event.KeyEvent.wVirtualKeyCode=='A');
                     CHECK(records[i].Event.KeyEvent.bKeyDown==(keys==0));++keys;
@@ -255,9 +264,9 @@ static void run_case(unsigned mode,unsigned round)
         CHECK(!IsWindow(window));
         if(!round) {
             INPUT_RECORD records[64];DWORD count,i,keys=0;
-            CHECK(!run16_native_frontend_dos_enter(test_frontend,channel));
-            CHECK(!run16_native_frontend_dos_read(test_frontend,FALSE,records,64,&count));
-            run16_native_frontend_dos_leave(test_frontend);
+            CHECK(!run16_native_frontend_enter(test_frontend,channel));
+            CHECK(!run16_native_frontend_read(test_frontend,FALSE,records,64,&count));
+            run16_native_frontend_leave(test_frontend);
             for(i=0;i<count;++i)if(records[i].EventType==KEY_EVENT) {
                 CHECK(records[i].Event.KeyEvent.wVirtualKeyCode=='B');
                 CHECK(records[i].Event.KeyEvent.bKeyDown==(keys==0));++keys;
@@ -327,7 +336,7 @@ static void run_case(unsigned mode,unsigned round)
                     keys[key].Event.KeyEvent.dwControlKeyState=key==3 ? 0 : LEFT_CTRL_PRESSED|LEFT_ALT_PRESSED;
                 }
                 CHECK(WriteConsoleInputW(channel->console.input,keys,4,&written) && written==4);
-                CHECK(WaitForSingleObject(run16_native_frontend_dos_ready(test_frontend),5000)==WAIT_OBJECT_0);
+                CHECK(WaitForSingleObject(run16_native_frontend_ready(test_frontend),5000)==WAIT_OBJECT_0);
                 request.operation=CONSOLE_IO_PEEK_INPUT;request.state.mode=0;request.state.count=4;
                 peer_io(TRUE,&request,(DWORD)offsetof(console_io_request,data));
                 peer_io(FALSE,&reply,(DWORD)offsetof(console_io_reply,data));
@@ -622,7 +631,7 @@ static void test_native_seed_origin(HANDLE canonical)
     CHECK(!run16_native_frontend_create(&frontend));
     CHECK(!run16_native_frontend_console(frontend,&input,&output));
     logical=run16_native_frontend_text_region(frontend);
-    CHECK(!run16_native_frontend_native_bind(frontend,&owner,TRUE));
+    CHECK(!run16_native_frontend_bind(frontend,&owner,TRUE,FALSE));
     CloseHandle(output);
     CHECK(!run16_native_frontend_logical_console(frontend,&output));
     owner.output=output;owner.logical_window=logical;owner.generation=1;
@@ -639,7 +648,7 @@ static void test_native_seed_origin(HANDLE canonical)
     CHECK(WriteConsoleW(canonical,L"S10-SEED\r\n",10,&written,NULL) && written==10);
     CHECK(GetConsoleScreenBufferInfo(canonical,&info) &&
         info.dwCursorPosition.X==0 && info.dwCursorPosition.Y==30);
-    CHECK(!run16_native_frontend_native_bind(frontend,&owner,FALSE));
+    CHECK(!run16_native_frontend_bind(frontend,&owner,FALSE,FALSE));
     CHECK(!run16_native_frontend_destroy(frontend));
     CHECK(GetConsoleScreenBufferInfo(canonical,&info) && info.dwCursorPosition.Y==30);
     CHECK(SetConsoleMode(canonical,mode));
@@ -705,7 +714,7 @@ static void test_logical_publication(void)
     DWORD count,bytes;WCHAR cell;
     SMALL_RECT window;
     channel.root=test_frontend;channel.native=TRUE;
-    CHECK(!run16_native_frontend_native_bind(test_frontend,&channel,TRUE));
+    CHECK(!run16_native_frontend_bind(test_frontend,&channel,TRUE,FALSE));
     CHECK(!run16_native_frontend_console(test_frontend,&input,&canonical));
     CHECK(!run16_native_frontend_logical_console(test_frontend,&channel.console.output));
     channel.console.logical_window=run16_native_frontend_text_region(test_frontend);
@@ -793,9 +802,9 @@ static void test_logical_publication(void)
     CHECK(run16_console_video_begin(&channel.console.video,2,&description)==ERROR_INVALID_DATA);
     CHECK(ReadConsoleOutputCharacterW(channel.console.output,&cell,1,(COORD){0,2},&count) && cell==L'C');
     leave(&channel);
-    CHECK(!run16_native_frontend_native_bind(test_frontend,&channel,FALSE));
+    CHECK(!run16_native_frontend_bind(test_frontend,&channel,FALSE,FALSE));
     CHECK(enter(&channel)==ERROR_NOT_READY);
-    run16_native_frontend_dos_forget(test_frontend,&channel);
+    run16_native_frontend_forget(test_frontend,&channel);
     run16_console_video_dispose(&channel.console.video);HeapFree(GetProcessHeap(),0,payload);
     CloseHandle(channel.console.output);CloseHandle(input);CloseHandle(canonical);
     fprintf(private_report ? private_report : stdout,
@@ -863,8 +872,8 @@ int main(int argc,char **argv)
     test_logical_publication();
     /* The publication fixture deliberately leaves an offset viewport. Start
      * the older channel marker fixture after the real DOS conversion edge. */
-    CHECK(!run16_native_frontend_dos_bind(test_frontend,&before,TRUE));
-    CHECK(!run16_native_frontend_dos_bind(test_frontend,&before,FALSE));
+    CHECK(!run16_native_frontend_bind(test_frontend,&before,TRUE,TRUE));
+    CHECK(!run16_native_frontend_bind(test_frontend,&before,FALSE,TRUE));
     {
         HANDLE logical;WCHAR cell;DWORD copied;
         CHECK(!run16_native_frontend_logical_console(test_frontend,&logical));
@@ -885,7 +894,7 @@ int main(int argc,char **argv)
         CHECK(DuplicateHandle(GetCurrentProcess(),GetCurrentProcess(),GetCurrentProcess(),
             &worker,SYNCHRONIZE,FALSE,0));
         CHECK(!run16_console_channel_start_request(expected_generation,worker,test_frontend,&channel));
-        CHECK(!run16_native_frontend_dos_bind(test_frontend,channel,TRUE));
+        CHECK(!run16_native_frontend_bind(test_frontend,channel,TRUE,TRUE));
         request.version=CONSOLE_IO_VERSION;request.generation=expected_generation;
         request.sequence=1;request.operation=CONSOLE_IO_BARRIER;
         peer_io(TRUE,&request,(DWORD)offsetof(console_io_request,data));
@@ -938,24 +947,161 @@ int main(int argc,char **argv)
     {
         unsigned iteration;
         for(iteration=0;iteration<32;++iteration) {
-            dos_binding_wait_case test={0};HANDLE waiter;
+            binding_wait_case test={0};HANDLE waiter;
             test.owner=&after;
+            test.prepare_vga=(iteration&1)!=0;
             test.cancel=CreateEventW(NULL,TRUE,FALSE,NULL);
             test.started=CreateEventW(NULL,TRUE,FALSE,NULL);
             CHECK(test.cancel && test.started);
-            CHECK(!run16_native_frontend_native_bind(test_frontend,&before,TRUE));
-            waiter=CreateThread(NULL,0,wait_for_dos_binding,&test,0,NULL);
+            CHECK(!run16_native_frontend_bind(test_frontend,&before,TRUE,(iteration&2)!=0));
+            waiter=CreateThread(NULL,0,wait_for_binding,&test,0,NULL);
             CHECK(waiter && WaitForSingleObject(test.started,1000)==WAIT_OBJECT_0);
             CHECK(SetEvent(test.cancel));
             CHECK(WaitForSingleObject(waiter,1000)==WAIT_OBJECT_0);
             CHECK(test.result==ERROR_OPERATION_ABORTED);
-            CHECK(!run16_native_frontend_native_bind(test_frontend,&before,FALSE));
-            /* A canceled DOS waiter must not reserve the next owner's slot. */
-            CHECK(!run16_native_frontend_dos_bind(test_frontend,&round,TRUE));
-            CHECK(!run16_native_frontend_dos_bind(test_frontend,&round,FALSE));
+            CHECK(!run16_native_frontend_bind(test_frontend,&before,FALSE,FALSE));
+            /* Cancellation never reserves or retires either channel kind. */
+            CHECK(!run16_native_frontend_bind(test_frontend,&round,TRUE,TRUE));
+            CHECK(!run16_native_frontend_bind(test_frontend,&round,FALSE,TRUE));
             CloseHandle(waiter);CloseHandle(test.cancel);CloseHandle(test.started);
         }
     }
+    {
+        unsigned pattern;
+        for(pattern=0;pattern<4;++pattern) {
+            binding_wait_case test={0};HANDLE waiter;
+            INPUT_RECORD queued={0},received={0};DWORD read=0;
+            unsigned previous=0,incoming=0,unrelated=0;
+            test.owner=&incoming;test.prepare_vga=(pattern&1)!=0;
+            test.cancel=CreateEventW(NULL,TRUE,FALSE,NULL);
+            test.started=CreateEventW(NULL,TRUE,FALSE,NULL);
+            CHECK(test.cancel && test.started);
+            CHECK(!run16_native_frontend_bind(test_frontend,&previous,TRUE,(pattern&2)!=0));
+            CHECK(!run16_native_frontend_enter(test_frontend,&previous));
+            queued.EventType=KEY_EVENT;queued.Event.KeyEvent.wVirtualKeyCode='Q';
+            CHECK(!run16_native_frontend_prepend(test_frontend,&queued,1));
+            run16_native_frontend_leave(test_frontend);
+            waiter=CreateThread(NULL,0,wait_for_binding,&test,0,NULL);
+            CHECK(waiter && WaitForSingleObject(test.started,1000)==WAIT_OBJECT_0);
+            CHECK(WaitForSingleObject(waiter,0)==WAIT_TIMEOUT);
+            CHECK(!run16_native_frontend_enter(test_frontend,&previous));
+            {
+                DWORD result=run16_native_frontend_read(test_frontend,FALSE,&received,1,&read);
+                if(result!=ERROR_BUSY || read)fprintf(private_report ? private_report : stderr,
+                    "pending read result=%lu read=%lu waiter-result=%lu pattern=%u\n",result,read,test.result,pattern);
+                CHECK(result==ERROR_BUSY && !read);
+            }
+            CHECK(!run16_native_frontend_read(test_frontend,TRUE,&received,1,&read) && read==1);
+            run16_native_frontend_leave(test_frontend);
+            CHECK(run16_native_frontend_enter(test_frontend,&incoming)==ERROR_NOT_READY);
+            CHECK(run16_native_frontend_bind(test_frontend,&unrelated,TRUE,FALSE)==ERROR_BUSY);
+            run16_native_frontend_forget(test_frontend,&unrelated);
+            CHECK(!run16_native_frontend_enter(test_frontend,&previous));
+            run16_native_frontend_leave(test_frontend);
+            CHECK(!run16_native_frontend_bind(test_frontend,&previous,FALSE,FALSE));
+            {
+                DWORD wait=WaitForSingleObject(waiter,1000);
+                if(wait!=WAIT_OBJECT_0 || test.result)fprintf(private_report ? private_report : stderr,
+                    "pending release wait=%lu result=%lu pattern=%u\n",wait,test.result,pattern);
+                CHECK(wait==WAIT_OBJECT_0 && !test.result);
+            }
+            CHECK(!run16_native_frontend_bind(test_frontend,&incoming,TRUE,test.prepare_vga));
+            CHECK(!run16_native_frontend_enter(test_frontend,&incoming));
+            CHECK(!run16_native_frontend_read(test_frontend,FALSE,&received,1,&read) &&
+                read==1 && received.Event.KeyEvent.wVirtualKeyCode=='Q');
+            run16_native_frontend_leave(test_frontend);
+            CHECK(run16_native_frontend_enter(test_frontend,&previous)==ERROR_NOT_READY);
+            CHECK(!run16_native_frontend_bind(test_frontend,&incoming,FALSE,FALSE));
+            CloseHandle(waiter);CloseHandle(test.cancel);CloseHandle(test.started);
+        }
+        fprintf(private_report ? private_report : stdout,"PASS four operation-pair handoffs: pending registration, old-owner barrier, ordered input, stale isolation and release notification\n");
+    }
+    {
+        unsigned cancel_request;
+        for(cancel_request=0;cancel_request<3;++cancel_request) {
+            unsigned old_owner=0,first=0,second=0;
+            binding_wait_case waiting[2]={{0}};HANDLE threads[2];unsigned index;
+            CHECK(!run16_native_frontend_bind(test_frontend,&old_owner,TRUE,FALSE));
+            for(index=0;index<2;++index) {
+                waiting[index].owner=index ? (const void *)&second : (const void *)&first;
+                waiting[index].prepare_vga=index!=0;
+                waiting[index].cancel=CreateEventW(NULL,TRUE,FALSE,NULL);
+                waiting[index].started=CreateEventW(NULL,TRUE,FALSE,NULL);
+                CHECK(waiting[index].cancel && waiting[index].started);
+                threads[index]=CreateThread(NULL,0,wait_for_binding,&waiting[index],0,NULL);
+                CHECK(threads[index] && WaitForSingleObject(waiting[index].started,1000)==WAIT_OBJECT_0);
+                CHECK(WaitForSingleObject(threads[index],0)==WAIT_TIMEOUT);
+            }
+            /* Repeating an acquisition cannot create a second pending node. */
+            CHECK(run16_native_frontend_bind(test_frontend,&first,TRUE,FALSE)==ERROR_BUSY);
+            if(cancel_request) {
+                unsigned cancelled=cancel_request-1;
+                CHECK(SetEvent(waiting[cancelled].cancel));
+                CHECK(WaitForSingleObject(threads[cancelled],1000)==WAIT_OBJECT_0 &&
+                    waiting[cancelled].result==ERROR_OPERATION_ABORTED);
+                /* Removing either request preserves the other and active A. */
+                CHECK(WaitForSingleObject(threads[1-cancelled],0)==WAIT_TIMEOUT);
+                CHECK(!run16_native_frontend_enter(test_frontend,&old_owner));
+                run16_native_frontend_leave(test_frontend);
+            }
+            CHECK(!run16_native_frontend_bind(test_frontend,&old_owner,FALSE,FALSE));
+            CHECK(run16_native_frontend_park(test_frontend)==ERROR_BUSY);
+            if(cancel_request!=1) {
+                CHECK(WaitForSingleObject(threads[0],1000)==WAIT_OBJECT_0 && !waiting[0].result);
+                if(!cancel_request)CHECK(WaitForSingleObject(threads[1],0)==WAIT_TIMEOUT);
+                CHECK(!run16_native_frontend_bind(test_frontend,&first,TRUE,FALSE));
+                if(!cancel_request)CHECK(WaitForSingleObject(threads[1],0)==WAIT_TIMEOUT);
+                CHECK(!run16_native_frontend_bind(test_frontend,&first,FALSE,FALSE));
+            }
+            if(cancel_request!=2) {
+                CHECK(WaitForSingleObject(threads[1],1000)==WAIT_OBJECT_0 && !waiting[1].result);
+                CHECK(!run16_native_frontend_bind(test_frontend,&second,TRUE,TRUE));
+                CHECK(!run16_native_frontend_bind(test_frontend,&second,FALSE,FALSE));
+            }
+            CHECK(!run16_native_frontend_park(test_frontend));
+            for(index=0;index<2;++index) {
+                CloseHandle(threads[index]);CloseHandle(waiting[index].cancel);CloseHandle(waiting[index].started);
+            }
+        }
+        fprintf(private_report ? private_report : stdout,"PASS multiple pending channels: ordered acquisition, deduplicated requests, independent head/tail cancellation and pending park barrier\n");
+    }
+    {
+        unsigned failure;
+        for(failure=0;failure<2;++failure) {
+            unsigned old_owner=0,incoming=0,next=0;
+            binding_wait_case test={0};HANDLE waiter;
+            PROCESS_INFORMATION child={0};STARTUPINFOW startup={sizeof(startup)};
+            WCHAR image[MAX_PATH],command[MAX_PATH+32];
+            test.owner=&incoming;test.timeout=failure ? 10000 : 100;
+            test.cancel=CreateEventW(NULL,TRUE,FALSE,NULL);
+            test.started=CreateEventW(NULL,TRUE,FALSE,NULL);
+            CHECK(test.cancel && test.started);
+            if(failure) {
+                CHECK(GetModuleFileNameW(NULL,image,MAX_PATH));
+                CHECK(swprintf_s(command,MAX_PATH+32,L"\"%s\" --worker-wait",image)>0);
+                CHECK(CreateProcessW(image,command,NULL,NULL,FALSE,CREATE_SUSPENDED,
+                    NULL,NULL,&startup,&child));
+                test.peer=child.hProcess;
+            }
+            CHECK(!run16_native_frontend_bind(test_frontend,&old_owner,TRUE,FALSE));
+            waiter=CreateThread(NULL,0,wait_for_binding,&test,0,NULL);
+            CHECK(waiter && WaitForSingleObject(test.started,1000)==WAIT_OBJECT_0);
+            if(failure)CHECK(TerminateProcess(child.hProcess,123));
+            CHECK(WaitForSingleObject(waiter,2000)==WAIT_OBJECT_0);
+            CHECK(test.result==(DWORD)(failure ? ERROR_BROKEN_PIPE : ERROR_TIMEOUT));
+            CHECK(!run16_native_frontend_enter(test_frontend,&old_owner));
+            run16_native_frontend_leave(test_frontend);
+            CHECK(!run16_native_frontend_bind(test_frontend,&old_owner,FALSE,FALSE));
+            CHECK(!run16_native_frontend_bind(test_frontend,&next,TRUE,FALSE));
+            CHECK(!run16_native_frontend_bind(test_frontend,&next,FALSE,FALSE));
+            CloseHandle(waiter);CloseHandle(test.cancel);CloseHandle(test.started);
+            if(child.hProcess){CloseHandle(child.hThread);CloseHandle(child.hProcess);}
+        }
+        fprintf(private_report ? private_report : stdout,"PASS pending timeout and real peer death remove only their request and preserve active/replacement channel\n");
+    }
+    CHECK(GetProcessHandleCount(GetCurrentProcess(),&after));
+    CHECK(after==before);
+    fprintf(private_report ? private_report : stdout,"PASS pending wait/cancel/acquire/peer-death handle count remains %lu\n",after);
     {
         DWORD caller_mode,worker_mode,observed;
         CHECK(GetConsoleMode(input,&caller_mode));
@@ -963,16 +1109,16 @@ int main(int argc,char **argv)
         CHECK(SetConsoleMode(input,worker_mode));
         CHECK(!run16_native_frontend_park(test_frontend));
         CHECK(GetConsoleMode(input,&observed) && observed==caller_mode);
-        CHECK(!run16_native_frontend_dos_bind(test_frontend,&round,TRUE));
+        CHECK(!run16_native_frontend_bind(test_frontend,&round,TRUE,TRUE));
         CHECK(GetConsoleMode(input,&observed) && observed==worker_mode);
-        CHECK(!run16_native_frontend_dos_bind(test_frontend,&round,FALSE));
+        CHECK(!run16_native_frontend_bind(test_frontend,&round,FALSE,TRUE));
         CHECK(!run16_native_frontend_park(test_frontend));
         CHECK(GetConsoleMode(input,&observed) && observed==caller_mode);
     }
     {
         ULONGLONG began=GetTickCount64();
         run16_native_frontend_cancel(test_frontend);
-        CHECK(run16_native_frontend_dos_bind(test_frontend,&before,TRUE)==ERROR_OPERATION_ABORTED);
+        CHECK(run16_native_frontend_bind(test_frontend,&before,TRUE,TRUE)==ERROR_OPERATION_ABORTED);
         CHECK(GetTickCount64()-began<1000);
     }
     /* Ordinary teardown keeps the most recent shared Console geometry and
