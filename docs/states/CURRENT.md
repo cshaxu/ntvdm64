@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T425 S3, Ordinary Mode.** T425 remains open;
+**Active: M0 T425 S4, Ordinary Mode.** T425 remains open;
 S2 P1 36372657a is delivered, pushed and published. The owner requests
 continued execution of the full worker-neutral
 frontend objective and the ordered approved plan. Owner closes T424 and admits
@@ -60,25 +60,26 @@ lifecycle, RPC11/GUI5, five version negatives, exact retained WOW frontiers and
 strict repeated DIR pass. Its coherent eight-file set is now at O:/winnt, with
 S2 recovery retained. Postpublication rapid native/DOS relaunch, cooked CMD
 return and GUI smoke terminate zero with all eight hashes retained. Reviewed
-P delivery remains pending; T425 remains open for S4 and owner verification.
+S3 P1 ec0cf2b02 is committed and pushed with clean synchronized main. S4 is
+automatically admitted under the approved sequence; owner T verification remains open.
 
 ## Active Packet
 
 | Field | Admitted record |
 | --- | --- |
-| Identifier Mode | M0 T425 S3, Ordinary Mode. |
+| Identifier Mode | M0 T425 S4, Ordinary Mode. |
 | Admission And Approval | Owner: 收口当前t任务，准入新的t任务做这个ntcon统一工作。 Earlier implementation approval and provenance/ownership principles retained. |
-| Objective | Worker-neutral publication, snapshots and locking using explicit operation contracts; remove frontend channel kind checks and type-only import/conversion decisions, wire both actual worker clients through the existing common mechanisms. |
+| Objective | Audit the whole worker-neutral frontend objective across input, ownership, publication, snapshots, actual client/provider paths and dependencies; identify and remove any remaining project-owned type-only branches or duplicate mechanisms within approved scope. |
 | Non-goals | No guest, original mirror or imported library edit; no worker-font/geometry repair, polling cleanup, helper, scheduler, lifecycle policy or T closure. RDP capture root cause remains a separately evidenced physical boundary, not repaired by deleting checks. |
-| Reference Baseline | T425 S2 P1 36372657a, clean synchronized main before S3 admission; published x86 /MT CCPU40 APP 0.0.425 protocol/RPC35 I/O23 eight-file set and S2 ledger. |
+| Reference Baseline | T425 S3 P1 ec0cf2b02, clean synchronized main after push; published x86 /MT CCPU40 APP 0.0.425 protocol/RPC36 I/O24 eight-file r004 set; S3 ledger and S2 recovery. |
 | Files And ABI Surface | NTCON publication/snapshot/Console handlers, common protocol/codec/console client, worker-base and NTVDM/NTVWM project-owned clients; production-linked tests. Actual wire changes synchronize app/IDL/I/O revisions and regenerate MIDL. No original mirror, guest or imported library change. |
 | Applicable Rules | README full authority set, EXECUTION, architecture/coding/document rules, CONTRIBUTING and source policy. |
 | Verification | Atomic publication/tiled rollback, snapshot consistency, optional styles, stale/inactive channels, frame/resource lifetime; both handoff directions and nested return, final-paint and input barriers; x86 affected closure, focused/lifecycle/RPC/version/WOW, Console17/Window17, EDIT/isolation, coherent recoverable eight-file publication. |
-| Expected Markers | Same operation authorization and locks for both worker clients; frontend has no DOS/native kind, VGA selector or native-only publication policy. Original Console/VGA and hidden Console capture remain worker-owned. |
-| Asset Needs | Existing source/media and identity-validated incremental cache build/M0-T424/S2/r001; new S3 evidence/intermediates only build/M0-T425/S3/r001 or later declared fresh run. No downloads. |
+| Expected Markers | Requirement-by-requirement evidence for one frontend input, ownership and publication path; no type-only frontend authorization/conversion/rendering; explicit independent original/device boundaries and no unused alternative production implementation. |
+| Asset Needs | Existing source/media, identity-validated incremental cache build/M0-T424/S2/r001 and sealed S1/S2/S3 evidence; new S4 intermediates only build/M0-T425/S4/r001 or later declared run. No downloads. |
 | Reporting Requirements | Provenance/current/target ownership ledger, removed branches, exact tests and failures, published hashes; no physical RDP pass invented. |
 | Stop Conditions | Changed original semantics, weakened barriers/authentication/assertions, regression, new helper/component or unapproved shared-library modification. |
-| Exit Criteria | S3 operation/lock/client checklist production-wired and verified, replaced type-only paths removed, coherent publication, reviewed commit/push and clean main. S4 whole-objective audit and owner T verification remain open. |
+| Exit Criteria | Whole-objective source/contract/dependency and duplicate-removal audit proves each approved requirement, with exact retained test evidence and limitations. Any production repair repeats affected build/runtime/publication gates. Reviewed S4 commit/push and clean main; stop before owner T closure. |
 | Original Owner Request | 收口当前t任务，准入新的t任务做这个ntcon统一工作。 |
 | Similar-Issue Sweep | Every activation/snapshot/publication/frame/Console operation and lock at frontend/client boundaries, graphics/text configuration, optional styles, release/resume, rollback/EOF, both workers and pending/nested return. |
 
