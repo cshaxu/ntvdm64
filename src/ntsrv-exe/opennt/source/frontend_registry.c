@@ -7,7 +7,38 @@ static void service_console_return_ack(OPENNT_BASE_CONNECTION *root);
 static VOID CALLBACK service_frontend_exited(PVOID context,BOOLEAN fired);
 static DWORD service_attach_frontend(OPENNT_BASE_CONNECTION *connection,
     HANDLE worker,HANDLE pipe,HANDLE ready);
-static DWORD service_frontend_idle(OPENNT_BASE_CONNECTION *root);
+
+/* The event is a projection, not a queue. All writers and consumers hold the
+ * existing service lock. Decided joins wait on frontend_changed for a lease;
+ * they are not work for the frontend's authentication pump. */
+DWORD service_refresh_frontend_work(OPENNT_BASE_CONNECTION *root)
+{
+    LIST_ENTRY *link;
+    BOOL pending;
+    DWORD error;
+    if(!root || !root->frontend_capability)return ERROR_SUCCESS;
+    pending=root->frontend_join_caller && !root->frontend_join_decision;
+    for(link=root->service->connections.Flink;
+        !pending && link!=&root->service->connections;link=link->Flink) {
+        OPENNT_BASE_CONNECTION *caller=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
+        pending=caller->frontend_request_root==root->process.SequenceNumber;
+    }
+    for(link=root->service->frontend_routes.Flink;
+        !pending && link!=&root->service->frontend_routes;link=link->Flink) {
+        OPENNT_FRONTEND_ROUTE *route=CONTAINING_RECORD(link,OPENNT_FRONTEND_ROUTE,link);
+        pending=route->root==root && route->native_worker && !route->pipe &&
+            !route->delivered && WaitForSingleObject(route->worker,0)==WAIT_TIMEOUT;
+    }
+    if(pending ? SetEvent(root->frontend_capability) : ResetEvent(root->frontend_capability))
+        return ERROR_SUCCESS;
+    error=GetLastError();
+    /* A broken notification cannot authorize another successful acquisition.
+     * Use the existing broker-owned failure/retirement path, not retries. */
+    root->frontend_closing=TRUE;
+    service_signal_frontend_states(root->service);
+    WakeAllConditionVariable(&root->service->frontend_changed);
+    return error;
+}
 
 void service_delete_console_context(OPENNT_BASE_CONSOLE_CONTEXT *context)
 {
@@ -93,11 +124,15 @@ DWORD service_copy_execution_console_members(OPENNT_BASE_CONNECTION *destination
 
 void service_delete_frontend(OPENNT_FRONTEND_ROUTE *route)
 {
+    OPENNT_BASE_CONNECTION *root=route->root;
     RemoveEntryList(&route->link);
     if (route->pipe) CloseHandle(route->pipe);
     if (route->ready) CloseHandle(route->ready);
     CloseHandle(route->worker);
     HeapFree(GetProcessHeap(),0,route);
+    /* Cleanup has no caller result; notification failure is handled by the
+     * helper's explicit broker retirement, never hidden as successful work. */
+    (void)service_refresh_frontend_work(root);
 }
 
 void service_clear_frontend(OPENNT_BASE_CONNECTION *connection)
@@ -129,11 +164,13 @@ void service_clear_frontend(OPENNT_BASE_CONNECTION *connection)
             route->request==connection->process.SequenceNumber)) {
             if (route->delivered || route->native_worker) service_delete_frontend(route);
             else {
+                OPENNT_BASE_CONNECTION *root=route->root;
                 /* Retain only the selected worker identity until its exit:
                  * a waiter must observe cancellation, not await a new root. */
                 route->root=NULL;
                 if (route->pipe) { CloseHandle(route->pipe);route->pipe=NULL; }
                 if (route->ready) { CloseHandle(route->ready);route->ready=NULL; }
+                (void)service_refresh_frontend_work(root);
             }
         }
     }
@@ -258,9 +295,8 @@ DWORD OpenNtBaseServiceAcquireFrontendRoot(OPENNT_BASE_CONNECTION *caller,DWORD 
                 root->frontend_join_pid=pid;
                 root->frontend_join_decision=0;
                 root->frontend_join_caller=caller;
-                if(!SetEvent(root->frontend_capability)) {
-                    root->frontend_join_caller=NULL;error=GetLastError();break;
-                }
+                error=service_refresh_frontend_work(root);
+                if(error)break;
             }
             if(root->frontend_join_caller==caller) {
                 if(root->frontend_join_decision<0){error=ERROR_ACCESS_DENIED;break;}
@@ -307,6 +343,10 @@ done:
             if(item->frontend_join_caller==caller){
                 item->frontend_join_caller=NULL;item->frontend_join_nonce=0;
                 item->frontend_join_pid=0;item->frontend_join_decision=0;
+                {
+                    DWORD notification_error=service_refresh_frontend_work(item);
+                    if(!error)error=notification_error;
+                }
             }
         }
         WakeAllConditionVariable(&service->frontend_changed);
@@ -718,8 +758,8 @@ DWORD OpenNtBaseServiceFrontendJoinDecision(OPENNT_BASE_CONNECTION *root,DWORD p
         root->frontend_join_caller && root->frontend_join_nonce==nonce &&
         !root->frontend_join_decision) {
         root->frontend_join_decision=same_console ? 1 : -1;
+        error=service_refresh_frontend_work(root);
         WakeAllConditionVariable(&root->service->frontend_changed);
-        error=ERROR_SUCCESS;
     }
     LeaveCriticalSection(&root->service->lock);
     return error;
@@ -1013,15 +1053,18 @@ DWORD OpenNtBaseServiceRequestFrontend(OPENNT_BASE_CONNECTION *connection,DWORD 
         if (root->process.SequenceNumber!=root_generation) continue;
         pending=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*pending));
         if (!pending) { error=ERROR_NOT_ENOUGH_MEMORY;break; }
-        if (!SetEvent(root->frontend_capability)) {
-            error=GetLastError();HeapFree(GetProcessHeap(),0,pending);break;
-        }
         pending->root=root;pending->worker=worker;worker=NULL;
         pending->request=generation;
         pending->native_worker=connection->selected_native_generation!=0 ||
             connection->reservation_kind==OPENNT_BASE_WORKER_NATIVE;
         InsertTailList(&connection->service->frontend_routes,&pending->link);
         connection->frontend_request_root=root_generation;
+        error=service_refresh_frontend_work(root);
+        if(error) {
+            connection->frontend_request_root=0;
+            service_delete_frontend(pending);
+            break;
+        }
         service_signal_frontend_states(connection->service);
         error=ERROR_SUCCESS;
         break;
@@ -1050,19 +1093,6 @@ DWORD OpenNtBaseServiceFrontendStateChanged(OPENNT_BASE_CONNECTION *root,DWORD p
     }
     LeaveCriticalSection(&root->service->lock);
     return error;
-}
-
-
-/* Frontend wakeups are for presentation attachment, never target execution. */
-static DWORD service_frontend_idle(OPENNT_BASE_CONNECTION *root)
-{
-    LIST_ENTRY *link;
-    for (link=root->service->connections.Flink;link!=&root->service->connections;link=link->Flink) {
-        OPENNT_BASE_CONNECTION *caller=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
-        if (caller->frontend_request_root==root->process.SequenceNumber)
-            return ERROR_NOT_FOUND;
-    }
-    return ResetEvent(root->frontend_capability) ? ERROR_NOT_FOUND : GetLastError();
 }
 
 
@@ -1097,7 +1127,8 @@ DWORD OpenNtBaseServiceFrontendRequest(OPENNT_BASE_CONNECTION *root,DWORD pid,
         if (!error) { *request=caller->process.SequenceNumber;goto done; }
         caller->frontend_request_root=0; /* Completed/departed original caller, not a new task. */
     }
-    error=service_frontend_idle(root);
+    error=service_refresh_frontend_work(root);
+    if(!error)error=ERROR_NOT_FOUND;
 done:
     LeaveCriticalSection(&root->service->lock);
     return error;
@@ -1140,6 +1171,12 @@ DWORD OpenNtBaseServiceAttachFrontendRequest(OPENNT_BASE_CONNECTION *root,DWORD 
     }
 done:
     if (worker) CloseHandle(worker);
+    if(OpenNtBaseServicePeer(root,pid,generation) && root->frontend_capability) {
+        DWORD notification_error=service_refresh_frontend_work(root);
+        if(!error || error==ERROR_ALREADY_EXISTS) {
+            if(notification_error)error=notification_error;
+        }
+    }
     LeaveCriticalSection(&root->service->lock);
     return error;
 }

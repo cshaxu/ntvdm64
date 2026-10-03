@@ -554,6 +554,52 @@ static void test_native_geometry_projection(SHORT rows)
     fprintf(private_report ? private_report : stdout,
         "PASS native logical/physical 80x30 -> 80x%d projection, repeat, shrink/grow, cells/cursor and invalid rectangle\n",rows);
 }
+static void test_native_seed_origin(HANDLE canonical)
+{
+    run16_native_frontend *frontend=NULL;
+    run16_console_frontend owner={0};
+    console_io_request request={0};console_io_reply reply;
+    CONSOLE_SCREEN_BUFFER_INFO info;
+    SMALL_RECT tiny={0,0,0,0},view={4,2,83,29},*logical;
+    DWORD mode,written;WCHAR cell;
+    HANDLE input,output;
+    CHECK(SetConsoleActiveScreenBuffer(canonical));
+    CHECK(SetConsoleWindowInfo(canonical,TRUE,&tiny));
+    CHECK(SetConsoleScreenBufferSize(canonical,(COORD){120,100}));
+    CHECK(SetConsoleCursorPosition(canonical,(COORD){4,29}));
+    CHECK(SetConsoleWindowInfo(canonical,TRUE,&view));
+    CHECK(GetConsoleMode(canonical,&mode));
+    CHECK(SetConsoleMode(canonical,mode|ENABLE_VIRTUAL_TERMINAL_PROCESSING));
+    CHECK(WriteConsoleOutputCharacterW(canonical,L"K",1,(COORD){83,2},&written) && written==1);
+    CHECK(!run16_native_frontend_create(&frontend));
+    CHECK(!run16_native_frontend_console(frontend,&input,&output));
+    logical=run16_native_frontend_text_region(frontend);
+    /* The DOS producer's surface-local rectangle must not be paired with
+     * the canonical absolute cursor in the next native seed. */
+    *logical=(SMALL_RECT){0,0,79,27};
+    CHECK(!run16_native_frontend_native_bind(frontend,&owner,TRUE));
+    owner.output=output;owner.logical_window=logical;owner.generation=1;
+    request.version=CONSOLE_IO_VERSION;request.generation=1;request.sequence=1;
+    request.operation=CONSOLE_IO_SCREEN_INFO;
+    CHECK(!actual_dispatch(&owner,&request,&reply) && !reply.error);
+    CHECK(reply.state.left==4 && reply.state.top==2 &&
+        reply.state.right==83 && reply.state.bottom==29 &&
+        reply.state.x==4 && reply.state.y==29);
+    CHECK(GetConsoleScreenBufferInfo(canonical,&info));
+    CHECK(!memcmp(&info.srWindow,&view,sizeof(view)) && info.dwSize.X==120 && info.dwSize.Y==100);
+    CHECK(ReadConsoleOutputCharacterW(canonical,&cell,1,(COORD){83,2},&written) && written==1 && cell==L'K');
+    CHECK(GetConsoleMode(canonical,&written) && written==(mode|ENABLE_VIRTUAL_TERMINAL_PROCESSING));
+    CHECK(WriteConsoleW(canonical,L"S10-SEED\r\n",10,&written,NULL) && written==10);
+    CHECK(GetConsoleScreenBufferInfo(canonical,&info) &&
+        info.dwCursorPosition.X==0 && info.dwCursorPosition.Y==30);
+    CHECK(!run16_native_frontend_native_bind(frontend,&owner,FALSE));
+    CHECK(!run16_native_frontend_destroy(frontend));
+    CHECK(GetConsoleScreenBufferInfo(canonical,&info) && info.dwCursorPosition.Y==30);
+    CHECK(SetConsoleMode(canonical,mode));
+    CloseHandle(output);CloseHandle(input);
+    fprintf(private_report ? private_report : stdout,
+        "PASS native seed absolute origin, unchanged logical extent/grid/cursor/VT, real CRLF and teardown\n");
+}
 static int run_private_desktop(const char *report,BOOL geometry_only)
 {
     char name[64],image[MAX_PATH],command[2*MAX_PATH];
@@ -601,6 +647,7 @@ int main(int argc,char **argv)
         test_native_geometry_projection(28);
         test_dos_geometry_handoff(geometry_output,25);
         test_dos_geometry_handoff(geometry_output,28);
+        test_native_seed_origin(geometry_output);
         CloseHandle(geometry_output);
         fprintf(private_report,"PASS private 80x30 to 80x25/80x28 Console API handoff\n");
         fclose(private_report);return 0;

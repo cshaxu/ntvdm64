@@ -649,6 +649,21 @@ static DWORD apply_binding(run16_native_frontend *frontend,const void *owner,BOO
         error=prepare_dos_surface(frontend);
         if(error)return error;
     }
+    if(native && active) {
+        CONSOLE_SCREEN_BUFFER_INFO info;
+        SHORT width=frontend->logical_window.Right-frontend->logical_window.Left+1;
+        SHORT height=frontend->logical_window.Bottom-frontend->logical_window.Top+1;
+        if(!GetConsoleScreenBufferInfo(frontend->console_output,&info))return GetLastError();
+        /* DOS uses a zero-origin surface; native seeding reads the canonical
+         * buffer and its absolute cursor. Preserve the logical extent, but
+         * put its viewport in that same coordinate system before publishing
+         * ownership. A mixed-origin VT seed can scroll onto the wrong row. */
+        if(width<=0 || height<=0 ||
+            (LONG)info.srWindow.Left+width>info.dwSize.X ||
+            (LONG)info.srWindow.Top+height>info.dwSize.Y)return ERROR_INVALID_DATA;
+        frontend->logical_window=(SMALL_RECT){info.srWindow.Left,info.srWindow.Top,
+            info.srWindow.Left+width-1,info.srWindow.Top+height-1};
+    }
     /* Initial DOS startup retains the original Console scrollback path.
      * Only a published native page needs conversion before DOS resumes. */
     if(native && !active && frontend->native_video && frontend->native_video->pixels)

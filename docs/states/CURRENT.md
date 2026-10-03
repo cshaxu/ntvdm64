@@ -2,13 +2,42 @@
 
 ## Current Work
 
-**No active M/T/S packet.** T424 remains open. S9 native GUI routing is
-closed by its containing production P; S10 has not yet been admitted. The
+**Active: M0 T424 S10, Ordinary Mode.** T424 remains open. S10's verified
+delivery is recorded below; S11 naming has not started. The
 [working plan](../etc/operations/t424-worker-frontend-renaming-plan.md)
 defines the approved order. The
-[S9 ledger](../etc/evidence/m0-t424-s9-native-gui-routing.md) records the
+[S10 ledger](../etc/evidence/m0-t424-s10-frontend-notification.md) records the
 current x86 /MT CCPU40, APP 0.0.424, protocol/RPC33 eight-file O:/winnt package.
-The rapid relaunch/lost-wakeup repair is planned S10, not an S9 repair claim.
+The rapid relaunch/lost-wakeup repair is S10 work, not an S9 repair claim.
+
+## Active Packet
+
+| Field | Admitted record |
+| --- | --- |
+| Identifier Mode | M0 T424 S10, Ordinary Mode. |
+| Candidate Proposal | [Admitted proposal](../proposals/proposal-native-worker-frontend-renaming-001.md) and [S10 checklist](../etc/operations/t424-worker-frontend-renaming-plan.md#s10-rapid-relaunch-and-frontend-notification-checklist). |
+| Admission And Approval | Owner-added S10 rapid-relaunch/lost-wakeup stage after S9 delivery; standing automatic sequential S admission. Preserve other-session modifications. |
+| Objective | Repair the project-added NTSRV shared frontend notification reset race under the existing lock and the owner-approved adjacent DOS/native seed coordinate defect; preserve logical dimensions, current grid/cursor and VT mode. |
+| Non-goals | No original mirror/guest/shared-library change, new component/process/helper/scheduler, Job/Observed graph, frontend rename, launch syntax change, polling cleanup or new transport. |
+| Reference Baseline | Delivered S9 8ff029fbd, APP 0.0.424 protocol/RPC33 x86 /MT CCPU40; coherent eight-file O:/winnt package and [S9 evidence](../etc/evidence/m0-t424-s9-native-gui-routing.md). Its delayed relaunch test does not establish rapid-launch race freedom. |
+| Files And ABI Surface | NTSRV-private notification state and NTKVM native-binding snapshot coordinates, affected private call sites, deterministic service/Console fixtures and rapid-relaunch probes, build/evidence/docs. No wire change; preserve public DOS/WOW contracts. |
+| Applicable Rules | README authority reading set, EXECUTION, architecture/coding/document rules, CONTRIBUTING and source policy. Original execution/completion stays in its original owner. |
+| Verification | Source-confirmed failing deterministic interleaving on S9; positive/negative/reset/no-spin tests against production service; rapid interactive CMD and DOS/native alternation, concurrent and isolated sessions, completion/Console-return/fault gates. Affected x86 links, RPC, Console17/Window17, EDIT and retained WOW frontiers, governance/link/diff/source ownership, recoverable eight-file publication and smoke. |
+| Expected Markers | An undecided join inserted between empty-join and empty-channel checks stays signaled and is processed without unrelated wakeup; event resets only with no actionable work. Decided joins awaiting leases do not spin. Removed partial/scattered event maintenance. |
+| Asset Needs | Existing S9 source/artifacts/immutable guests/configuration; build/M0-T424/S10/r001 for new output, valid S2/r001 cache reused by input identity. No external assets. |
+| Reporting Requirements | Exact interleaving, source ownership, complete affected event/reset sweep, pending predicate and lock/error/cancel contracts, tests/identities and unresolved failure attribution. No blanket claim all reported hangs share this cause. |
+| Stop Conditions | Original execution migration, authentication weakening, expanded control/ABI/helper/scheduler, altered independent completion/restore semantics, retries/Sleep hiding the race, known regression or publication mismatch. |
+| Exit Criteria | Reproduced causal race repaired in production and deterministic tests, stated retained gates pass, coherent O:/winnt publication, reviewed commit/push and clean tree. T closure remains owner-controlled. |
+| Original Owner Request | Insert rapid CMD exit/relaunch and frontend lost-wakeup repair as S10; shift frontend naming/final audit to S11/S12 and preserve the existing architecture. |
+| Similar-Issue Sweep | Every adjacent SetEvent/ResetEvent and wait predicate in NTSRV, NTKVM, NTVWM and common transport; keep independent receipt/retire/restored/input/OVERLAPPED contracts unless the same defect is proved. |
+
+S10 repairs the reproduced lost wakeup and separately approved mixed-origin
+native seed. Seven notification cases, Console17/Window17, rapid batch and
+interactive relaunch, concurrent/isolated sessions, EDIT/fault/receipt/GUI,
+resource and five version-negative gates pass. WOW retains its three known
+frontiers, not usability passes. The eight-file package is published with S9
+recovery; final smoke/P delivery is recorded in the S10 ledger. No mirror,
+guest, shared lib, wire or launch syntax changed. T closure stays owner-controlled.
 
 ## S9 Closed Packet
 
@@ -276,7 +305,7 @@ pre-migration baseline in its sealed inventory and S1 Git revision.
 
 The [T424 working plan](../etc/operations/t424-worker-frontend-renaming-plan.md)
 and [proposal](../proposals/proposal-native-worker-frontend-renaming-001.md)
-retain eleven ordered stages after owner separation of service work. S1 audits names; S2 delivers the native worker
+retain twelve ordered stages after owner service/race additions. S1 audits names; S2 delivers the native worker
 as NTW32 and Win32Record while retaining NTKVM frontend. Added S3 delivers the
 approved broker-owned abnormal-exit/re-launch repair before further renaming.
 S4 centralizes creation, binding, Console handoff coordination and direct result
@@ -289,23 +318,19 @@ NTSRV service split; see the
 [S7 checklist](../etc/operations/t424-worker-frontend-renaming-plan.md#s7-common-library-and-service-source-separation).
 Owner-added S6 renames
 NTW32 to NTVWM; it is name-only and preserves existing behavior. S9 then adds
-broker-routed native GUI startup, NTVWM classification and service-held handles,
+broker-routed native GUI startup, pre-admission classification and service-held handles,
 not monitor display. UNBOUND display belongs to the queue-head NTMON candidate.
-S10 then renames NTKVM to
-the reserved NTCON frontend identity. S11 owns final referent and
+Added S10 repairs rapid relaunch before S11 renames NTKVM to
+the reserved NTCON frontend identity. S12 owns final referent and
 semantic audit. T closure
 remains owner-controlled. No later queued candidate is admitted here.
 
 ## Current Technical Baseline
 
-Published S8 package at O:/winnt: run16.exe, ntsrv.exe, ntvdm.exe, ntvwm.exe,
-ntkvm.exe, ntmon.exe, WOW32.DLL, VDMREDIR.DLL. APP_VERSION is 0.0.424;
-protocol/RPC is 32 with unchanged UUID and authenticated broker-owned creation,
-submission, restoration and shutdown contracts. MSVC Win32/x86 /MT CCPU40 is
-unchanged. Exact hashes and commands are in S8 evidence; accepted S7
-`d83d2b212`, S6
-`21b576a9e`, S4 `e4fbaed21`, S3 `f9fe709aa` and
-predecessor accepted T423 S40 `f64559086` remain recoverable.
+Published S10 (containing P) at O:/winnt: run16.exe, ntsrv.exe, ntvdm.exe,
+ntvwm.exe, ntkvm.exe, ntmon.exe, WOW32.DLL, VDMREDIR.DLL. APP 0.0.424,
+protocol/RPC33, MSVC Win32/x86 /MT CCPU40. Exact hashes and verification
+are in the S10 ledger; prior S9 and earlier accepted packages remain recoverable.
 
 ## Previous T closure
 

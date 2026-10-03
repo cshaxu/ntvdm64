@@ -217,6 +217,8 @@ typedef NTSTATUS (NTAPI *SERVICE_QUERY_OBJECT)(HANDLE,ULONG,PVOID,ULONG,PULONG);
 /* Finite internal linkage only; resource init/release transport original calls,
  * not DOS/WOW policy. Cross-module calls never acquire a second service state. */
 void service_signal_frontend_states(OPENNT_BASE_SERVICE *service);
+/* Service lock held; project frontend work notification only. */
+DWORD service_refresh_frontend_work(OPENNT_BASE_CONNECTION *root);
 void service_signal_worker_states(OPENNT_BASE_SERVICE *service);
 /* Process-watch callback is cross-module even without a direct call. */
 VOID CALLBACK service_worker_terminated(PVOID context,BOOLEAN fired);

@@ -1523,7 +1523,7 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build ntvwm-geometry-handoff-probe.exe: console_test_link obj/tests/ntvwm_geometry_handoff.obj')
     $graph.Add('build obj/tests/console_channel_lifetime.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/console_channel_lifetime_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build console-channel-lifetime-test.exe: console_test_link obj/tests/console_channel_lifetime.obj obj/run16/native_console_frontend.obj frontend-window.lib ' + $consoleGridObject)
+    $graph.Add('build console-channel-lifetime-test.exe: console_test_link obj/tests/console_channel_lifetime.obj obj/run16/native_console_frontend.obj frontend-window.lib common-transport.lib ' + $consoleGridObject)
     $graph.Add('build obj/tests/console_pointer_dispatch_test.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/console_pointer_dispatch_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('rule pointer_test_link')

@@ -268,6 +268,7 @@ DWORD OpenNtBaseServiceDisconnect(OPENNT_BASE_CONNECTION *connection)
             if(root->frontend_join_caller==connection) {
                 root->frontend_join_caller=NULL;
                 root->frontend_join_decision=-1;
+                (void)service_refresh_frontend_work(root);
             }
         }
         WakeAllConditionVariable(&service->frontend_changed);

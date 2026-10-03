@@ -15,6 +15,7 @@ extern PWOWHEAD WOWHead;
  * Real RPC authentication/startup remains covered by cross-process fixtures. */
 DWORD fixture_queue_native_command(OPENNT_BASE_CONNECTION *,DWORD,DWORD,HANDLE,DWORD,const BYTE *);
 DWORD fixture_take_native_command(OPENNT_BASE_CONNECTION *,DWORD,DWORD,DWORD,BYTE *,DWORD *,HANDLE *,HANDLE *,HANDLE *,DWORD *);
+DWORD fixture_frontend_notification_denied(OPENNT_BASE_CONNECTION *,DWORD,DWORD,DWORD,BOOL,BOOL *);
 static const BYTE native_payload[3]={'N','T','C'};
 static DWORD test_native_request;
 #define queue_native_fixture(a,b,c,d,e) \
@@ -433,6 +434,187 @@ static int frontend_authority(void)
     return 0;
 }
 
+typedef struct FRONTEND_JOIN_WAIT_TEST {
+    OPENNT_BASE_CONNECTION *caller;
+    DWORD generation,error,create;
+    HANDLE process,capability,retire,restored;
+} FRONTEND_JOIN_WAIT_TEST;
+
+static DWORD WINAPI frontend_join_wait(void *context)
+{
+    FRONTEND_JOIN_WAIT_TEST *test=context;
+    test->error=OpenNtBaseServiceAcquireFrontendRoot(test->caller,
+        GetCurrentProcessId(),test->generation,1234,&test->create,
+        &test->process,&test->capability,&test->retire,&test->restored);
+    return test->error;
+}
+
+static void WINAPI frontend_notification_cleanup(void *context)
+{
+    SetEvent((HANDLE)context);
+}
+
+/* Execute the NTKVM empty-join / empty-channel interleaving through the
+ * production service. Event publication, not a timer, positions the join. */
+static int frontend_notification(BOOL baseline)
+{
+    DWORD phase;
+    for(phase=0;phase<(baseline ? 1u : 7u);++phase) {
+    BOOL overlap=phase==2 || phase==3;
+    OPENNT_BASE_SERVICE *service=OpenNtBaseServiceStart();
+    OPENNT_BASE_CONNECTION *launcher=NULL,*root=NULL;
+    HANDLE self=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION|SYNCHRONIZE,
+        FALSE,GetCurrentProcessId());
+    HANDLE capability=CreateEventW(NULL,TRUE,FALSE,NULL);
+    HANDLE retire=CreateEventW(NULL,TRUE,FALSE,NULL);
+    HANDLE restored=CreateEventW(NULL,TRUE,FALSE,NULL);
+    HANDLE startup_result=CreateEventW(NULL,TRUE,FALSE,NULL),thread,worker=NULL;
+    HANDLE worker_cleanup=CreateEventW(NULL,TRUE,FALSE,NULL);
+    HANDLE selected=NULL,selected_cap=NULL,selected_retire=NULL,selected_restored=NULL;
+    PROCESS_INFORMATION child={0};STARTUPINFOA startup={sizeof(startup)};
+    PROCESS_INFORMATION backend={0};
+    OPENNT_BASE_CONNECTION *backend_connection=NULL;
+    DWORD backend_generation=0,verified_generation=0;
+    uint64_t reservation=0;
+    HANDLE retained=NULL,server=NULL,client=NULL,ready=NULL;
+    FRONTEND_JOIN_WAIT_TEST waiting={0};
+    char image[MAX_PATH],command[MAX_PATH+32];
+    DWORD generation=0,root_generation=0,create=0,nonce=0,candidate=0,request=0;
+    DWORD notification,join_result,after_decision,after_completion;
+    CHECK(service && self && capability && retire && restored && startup_result);
+    CHECK(worker_cleanup && OpenNtBaseServiceConfigureEmptyNotify(service,
+        frontend_notification_cleanup,worker_cleanup));
+    CHECK(!OpenNtBaseServiceConnect(service,self,&launcher,&generation));
+    CHECK(!OpenNtBaseServiceAcquireFrontendRoot(launcher,GetCurrentProcessId(),generation,
+        1234,&create,&selected,&selected_cap,&selected_retire,&selected_restored) && create);
+    CHECK(GetModuleFileNameA(NULL,image,MAX_PATH));
+    sprintf_s(command,sizeof(command),"\"%s\" --reservation-child",image);
+    CHECK(CreateProcessA(NULL,command,NULL,NULL,FALSE,CREATE_SUSPENDED|CREATE_NO_WINDOW,
+        NULL,NULL,&startup,&child));
+    CHECK(!OpenNtBaseServiceConnect(service,child.hProcess,&root,&root_generation));
+    CHECK(!broker_frontend_admit(launcher,GetCurrentProcessId(),generation,
+        child.hProcess,capability,retire,restored,startup_result));
+    CHECK(!(OpenNtBaseServiceRegisterFrontendRoot)(root,child.dwProcessId,root_generation,capability));
+    CHECK(!OpenNtBaseServiceRegisterFrontendLease(root,child.dwProcessId,root_generation,
+        1234,GetCurrentProcessId(),TRUE,retire,restored));
+    CHECK(!OpenNtBaseServiceFrontendStartupResult(root,child.dwProcessId,root_generation,capability,0));
+    broker_frontend_clear_admission(launcher);
+    if(overlap) {
+        DWORD members[2]={child.dwProcessId,GetCurrentProcessId()};
+        CHECK(!OpenNtBaseServiceReportConsoleMembers(root,child.dwProcessId,root_generation,2,members));
+        CHECK(!OpenNtBaseServiceRetainFrontendRoot(launcher,GetCurrentProcessId(),generation,
+            capability,&retained,&verified_generation));
+        CHECK(verified_generation==root_generation);CloseHandle(retained);
+        CHECK(!OpenNtBaseServiceCreateNativeReservation(launcher,GetCurrentProcessId(),generation,&reservation));
+        CHECK(CreateProcessA(NULL,command,NULL,NULL,FALSE,CREATE_SUSPENDED|CREATE_NO_WINDOW,
+            NULL,NULL,&startup,&backend));
+        CHECK(!OpenNtBaseServicePrepareWorker(launcher,GetCurrentProcessId(),generation,reservation,backend.hProcess));
+        CHECK(!OpenNtBaseServiceConnect(service,backend.hProcess,&backend_connection,&backend_generation));
+    }
+    CHECK(OpenNtBaseServiceFrontendJoinCandidate(root,child.dwProcessId,root_generation,
+        &nonce,&candidate)==ERROR_NOT_FOUND);
+    waiting.caller=launcher;waiting.generation=generation;
+    thread=CreateThread(NULL,0,frontend_join_wait,&waiting,0,NULL);CHECK(thread);
+    CHECK(WaitForSingleObject(capability,5000)==WAIT_OBJECT_0);
+    if(overlap) {
+        DWORD channel_error=OpenNtBaseServiceRequestFrontend(launcher,GetCurrentProcessId(),generation,capability);
+        fprintf(stderr,"overlap RequestFrontend=%lu\n",channel_error);
+        CHECK(!channel_error);
+        CHECK(!OpenNtBaseServiceFrontendRequest(root,child.dwProcessId,root_generation,&request,&worker));
+        CHECK(request==generation && GetProcessId(worker)==backend.dwProcessId);
+        CloseHandle(worker);worker=NULL;
+    } else CHECK(OpenNtBaseServiceFrontendRequest(root,child.dwProcessId,root_generation,
+        &request,&worker)==ERROR_NOT_FOUND && !worker);
+    notification=WaitForSingleObject(capability,0);
+    CHECK(!OpenNtBaseServiceFrontendJoinCandidate(root,child.dwProcessId,root_generation,
+        &nonce,&candidate) && candidate==GetCurrentProcessId());
+    if(phase>=4) {
+        /* Root loss must wake this authenticated admission, not strand it on
+         * a departed root's join. The caller may reserve a replacement, but
+         * receives no old process/event capabilities. */
+        if(phase==4){CHECK(!OpenNtBaseServiceDisconnect(root));root=NULL;}
+        else {
+            BOOL closing=FALSE;
+            CHECK(fixture_frontend_notification_denied(root,child.dwProcessId,
+                root_generation,nonce,phase==6,&closing)==ERROR_ACCESS_DENIED && closing);
+            /* Notification Set/Reset failure may not grant this broken root
+             * or strand the acquisition on its condition-variable wait. */
+        }
+        CHECK(WaitForSingleObject(thread,5000)==WAIT_OBJECT_0);
+        CHECK(!waiting.error && waiting.create && !waiting.process &&
+            !waiting.capability && !waiting.retire && !waiting.restored);
+        broker_frontend_clear_admission(launcher);
+        after_decision=after_completion=WAIT_TIMEOUT;
+        join_result=waiting.error;
+        goto notification_cleanup;
+    }
+    CHECK(OpenNtBaseServiceFrontendJoinDecision(root,child.dwProcessId,
+        root_generation,nonce+1,FALSE)==ERROR_ACCESS_DENIED);
+    CHECK(!OpenNtBaseServiceFrontendJoinDecision(root,child.dwProcessId,root_generation,nonce,phase==1));
+    after_decision=WaitForSingleObject(capability,0);
+    if(phase==1) {
+        /* A granted join cannot proceed until the prior lease is returned.
+         * It must wait on the existing condition variable, not spin the pump. */
+        CHECK(WaitForSingleObject(thread,0)==WAIT_TIMEOUT);
+        CHECK(OpenNtBaseServiceFrontendJoinCandidate(root,child.dwProcessId,
+            root_generation,&nonce,&candidate)==ERROR_NOT_FOUND);
+        CHECK(!OpenNtBaseServiceFrontendLeaseReady(root,child.dwProcessId,root_generation));
+    }
+    CHECK(WaitForSingleObject(thread,5000)==WAIT_OBJECT_0);
+    join_result=waiting.error;
+    if(overlap) {
+        if(phase==2) {
+            CHECK(!frontend_pair(&server,&client));
+            ready=CreateEventW(NULL,TRUE,FALSE,NULL);CHECK(ready);
+            CHECK(!OpenNtBaseServiceAttachFrontendRequest(root,child.dwProcessId,root_generation,
+                request,client,ready));
+            CloseHandle(server);CloseHandle(client);CloseHandle(ready);
+        } else {
+            /* A worker can die before attachment. Its real watch removes the
+             * route; the frontend then consumes the stale caller marker. */
+            CHECK(TerminateProcess(backend.hProcess,0));
+            CHECK(WaitForSingleObject(backend.hProcess,5000)==WAIT_OBJECT_0);
+            CHECK(WaitForSingleObject(worker_cleanup,5000)==WAIT_OBJECT_0);
+        }
+        CHECK(OpenNtBaseServiceFrontendRequest(root,child.dwProcessId,root_generation,
+            &request,&worker)==ERROR_NOT_FOUND && !worker);
+        CHECK(!OpenNtBaseServiceDisconnect(backend_connection));
+        if(phase==2)CHECK(TerminateProcess(backend.hProcess,0));
+        CHECK(WaitForSingleObject(backend.hProcess,5000)==WAIT_OBJECT_0);
+        CloseHandle(backend.hThread);CloseHandle(backend.hProcess);
+    }
+    after_completion=WaitForSingleObject(capability,0);
+    if(phase==1) {
+        CHECK(!join_result && !waiting.create && waiting.process && waiting.capability &&
+            waiting.retire && waiting.restored && GetProcessId(waiting.process)==child.dwProcessId);
+        CloseHandle(waiting.process);CloseHandle(waiting.capability);
+        CloseHandle(waiting.retire);CloseHandle(waiting.restored);
+    }
+notification_cleanup:
+    CloseHandle(thread);
+    CHECK(!OpenNtBaseServiceDisconnect(launcher));
+    if(root)CHECK(!OpenNtBaseServiceDisconnect(root));
+    if(overlap)CHECK(WaitForSingleObject(worker_cleanup,5000)==WAIT_OBJECT_0);
+    CHECK(OpenNtBaseServiceStop(service));
+    CHECK(TerminateProcess(child.hProcess,0));
+    CHECK(WaitForSingleObject(child.hProcess,5000)==WAIT_OBJECT_0);
+    CloseHandle(child.hThread);CloseHandle(child.hProcess);
+    CloseHandle(startup_result);CloseHandle(capability);CloseHandle(retire);
+    CloseHandle(restored);CloseHandle(self);
+    CloseHandle(worker_cleanup);
+    if(phase!=1 && phase<4)CHECK(join_result==ERROR_ACCESS_DENIED && !waiting.create && !waiting.process &&
+        !waiting.capability && !waiting.retire && !waiting.restored);
+    printf("frontend notification after empty-channel check: %lu; baseline=%u\n",
+        notification,(unsigned)baseline);
+    CHECK(notification==(baseline ? WAIT_TIMEOUT : WAIT_OBJECT_0));
+    if(!baseline)CHECK(after_decision==(overlap ? WAIT_OBJECT_0 : WAIT_TIMEOUT) &&
+        after_completion==WAIT_TIMEOUT);
+    puts(baseline ? "PASS: S9 lost-wakeup interleaving reproduced" :
+        "PASS: pending frontend join survives empty-channel check");
+    }
+    return 0;
+}
+
 int main(int argc,char **argv)
 {
     OPENNT_BASE_SERVICE *service=NULL;
@@ -470,6 +652,10 @@ int main(int argc,char **argv)
         return frontend_console_identity();
     if(argc==2 && !strcmp(argv[1],"--frontend-authority"))
         return frontend_authority();
+    if(argc==2 && !strcmp(argv[1],"--frontend-notification-baseline"))
+        return frontend_notification(TRUE);
+    if(argc==2 && !strcmp(argv[1],"--frontend-notification"))
+        return frontend_notification(FALSE);
     if (argc!=1) {
         static const char *modes[]={
             "--reservation-child","--native-worker","--native-backend","--frontend-root","--native-command","--frontend-unclaimed-stop",

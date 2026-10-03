@@ -41,6 +41,12 @@ S10 now nor claims S9 delivery or a repaired runtime.
 
 ## S10 rapid relaunch and frontend notification checklist
 
+Owner additionally approves the causally reproduced DOS/native snapshot-origin
+repair within S10. Keep the logical text dimensions and current cell grid/cursor,
+but express native seed geometry in canonical-buffer coordinates under the
+existing ownership/snapshot lock. No VT disabling, row compensation, old CMD
+snapshot restore, new transport or original mirror change.
+
 Owner reproducer: rapidly repeat run16 cmd -> exit -> run16 cmd -> exit in
 one outer CMD. The read-only source audit of the latest S9 worktree finds
 the previously identified reset unchanged in NTSRV's project-owned
@@ -61,40 +67,41 @@ rapid consecutive interactive native launches. Record exact tested source and
 artifact identities in S10's implementation evidence rather than treating
 the earlier probe as acceptance of this race.
 
-- [ ] Reconfirm the failing interleaving against the delivered S9 baseline;
+- [x] Reconfirm the failing interleaving against the delivered S9 baseline;
   distinguish startup acquisition, direct completion and Console-return waits.
   Keep the reported hang open until causal evidence classifies it.
-- [ ] Give the existing shared frontend notification one NTSRV-private
+- [x] Give the existing shared frontend notification one NTSRV-private
   pending-work predicate/update mechanism under service->lock. Include
   undecided joins and all actionable pending channel/route delivery work;
   reset only when all work represented by this event is absent. Keep state
   authoritative and the event merely its wakeup projection.
-- [ ] Apply that mechanism to join creation/decision/cancellation, channel
+- [x] Apply that mechanism to join creation/decision/cancellation, channel
   request/delivery, route cleanup and connection rundown. Remove displaced
   partial checks and scattered maintenance, not just add a wrapper beside them.
   Define cancellation, event-operation failure and resource ownership explicitly.
-- [ ] Prevent busy loops: a decided join awaiting lease availability is not
+- [x] Prevent busy loops: a decided join awaiting lease availability is not
   an undecided authentication job. Preserve its existing frontend_changed
   condition-variable predicate/recheck and finite admission deadline.
-- [ ] Retain separate retire/restored lease acknowledgements, direct receipts,
+- [x] Retain separate retire/restored lease acknowledgements, direct receipts,
   private ownership waiters, input readiness and per-operation OVERLAPPED events.
   Recheck adjacent reset/wait contracts; repair another site only if a causal
   defect of the same class is proved, otherwise document why it stays independent.
-- [ ] Add a deterministic production-service fixture: insert a join after
+- [x] Add a deterministic production-service fixture: insert a join after
   NTKVM's empty join check but before its channel-empty check, then assert the
   event remains signaled and the join is processed without an unrelated wakeup.
   Cover simultaneous join/channel work, refusal/cancellation/disconnect,
   pending native routes and the last-item-consumed reset without event spinning.
-- [ ] Exercise rapid same-Console interactive CMD exit/relaunch and COMMAND/
+- [x] Exercise rapid same-Console interactive CMD exit/relaunch and COMMAND/
   native alternation, resident reuse, concurrent launchers, independent Console
   isolation, broker/worker loss and restoration-before-outer-CMD-return. Record
   which phase any timeout blocks; do not use Sleep to make the race disappear.
-- [ ] Pass affected x86 /MT CCPU40 builds, existing RPC/reservation/receipt/
+- [x] Pass affected x86 /MT CCPU40 builds, existing RPC/reservation/receipt/
   lifecycle gates, Console17/Window17 and retained WOW frontiers; publish the
   coherent recoverable eight-file set to O:/winnt with hashes, reviewed P
   commit/push and clean synchronized tree. T closure remains owner-controlled.
 
-Bounds: repair project-added NTSRV frontend notification semantics, not
+Bounds: repair project-added NTSRV frontend notification and approved NTKVM
+native snapshot coordinates, not
 original OpenNT/MVDM execution. No mirror/guest/shared-lib modification,
 new process/component/helper/protocol, scheduler, Observed records, polling
 cleanup, arbitrary retry/delay or frontend rename. No planned wire change;
