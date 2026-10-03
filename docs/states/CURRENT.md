@@ -2,10 +2,45 @@
 
 ## Current Work
 
-**No active M/T/S packet.** T424 remains open after the S8 private service
-separation delivery. The next planned native GUI-routing stage has not started.
-The [S8 ledger](../etc/evidence/m0-t424-s8-ntsrv-service-separation.md) records
-implementation, verification, publication and the unattributed input observation.
+**Active: M0 T424 S9, Ordinary Mode.** Owner explicitly admits the next S
+after S8 delivery. T424 remains open; S9 is native GUI routing, not frontend
+renaming or monitor/UNBOUND presentation. The
+[working plan](../etc/operations/t424-worker-frontend-renaming-plan.md)
+defines the approved order. The
+[S8 ledger](../etc/evidence/m0-t424-s8-ntsrv-service-separation.md) records
+the accepted implementation/publication and the unattributed input observation.
+
+## Active Packet
+
+| Field | Admitted record |
+| --- | --- |
+| Identifier Mode | M0 T424 S9, Ordinary Mode. |
+| Candidate Proposal | [Admitted proposal](../proposals/proposal-native-worker-frontend-renaming-001.md), latest ordered working plan S9. |
+| Admission And Approval | Owner: admit the next S after S8; previously approved native GUI routing through NTSRV/NTVWM, original shared-WOW-style request release, default startup-only and explicit --wait. Preserve other-session changes. |
+| Objective | Native GUI and CUI requests go run16 -> NTSRV -> NTVWM; NTVWM authoritatively classifies before character frontend binding. NTSRV retains authenticated GUI identity/handle until actual exit, independently of launcher and worker occupancy. |
+| Non-goals | No UNBOUND/monitor-tree display, frontend rename, guest/shared-lib/mirror edit, helper/process role, Job/Observed descendants, scheduler, polling cleanup or launch-syntax change. Preserve DOS/Win16 and existing kind/hotkeys. |
+| Reference Baseline | S8 d30f33870 pushed to main; x86 /MT CCPU40, APP 0.0.424 and protocol/RPC32, coherent eight-file O:/winnt package. The additional isolated unchanged relaunch probe passes with outer CMD exit 19; the earlier sporadic missing-character observation remains unclassified, not repaired. |
+| Files And ABI Surface | run16 native dispatch/scope, NTVWM classification/execution/worker boundary, NTSRV native-command/worker/lifecycle modules and private state, common protocol/authenticated clients, selected build/tests/docs. Retain public original DOS/WOW contracts. Actual wire changes require synchronized APP_PROTOCOL/IDL major and regenerated MIDL. |
+| Applicable Rules | README authority set, EXECUTION, design/rules architecture and coding, DOCUMENT, CONTRIBUTING and source policy. Reuse original subsystem metadata and existing authenticated transport/receipt mechanisms; no expanded mirror diff. |
+| Verification | Source/ownership and four-rung audit; x86 links/MIDL when changed; direct GUI startup/--wait/exit cleanup, failure and authentication negatives, text -> GUI -> text and GUI -> fresh text frontend, worker release while GUI survives, shared text-worker preservation, isolation and handle/resource lifetime. Retain RPC/receipt/fault gates, Console17/Window17, actual EDIT return/relaunch and existing WOW frontiers; governance/link/diff and coherent publication smoke. |
+| Expected Markers | No local run16 GUI CreateProcess or native subsystem policy; GUI startup creates no character frontend. Real authenticated GUI target persists in service registration after default launcher returns; --wait obtains actual exit result. GUI release never kills target/shared carrier and cannot complete unrelated requests. |
+| Asset Needs | Existing source, fixtures, immutable guest/configuration and S8 source/artifact baseline; no external assets. New output only build/M0-T424/S9/r001; reuse proven build/M0-T424/S2/r001 x86/WOW cache with input identity. |
+| Reporting Requirements | Origin/current/target owner ledger, removed paths and duplicate code, authenticated handle rights/ownership and every startup/completion/rundown transition; exact tests/results, unsupported frontiers and deferred monitor view. Admission is not implementation acceptance. |
+| Stop Conditions | Guest/mirror/shared-lib mutation, extra process/helper/scheduler, GUI creating character frontend, target/worker termination on GUI request release, launch semantics drift, authentication weakening, incompatible mixed protocol or known runtime regression. |
+| Exit Criteria | Complete production routing and service-held GUI lifetime, displaced local launch path removed, all stated positive/negative/lifecycle and retained gates met, recoverable coherent eight-file O:/winnt publication, reviewed commit/push and clean synchronized tree. T closure remains owner-controlled. |
+| Original Owner Request | Admit the next S; unified Win32 GUI routing/classification and service registration, default return on startup, shared-WOW-style occupancy release; UNBOUND belongs to the future NTMON task. |
+| Similar-Issue Sweep | Native shell fallback/direct image, inherited capability stripping across GUI, redirected standard resources, no-Console GUI launcher, workerless GUI lifetime, concurrent shared text use, early target exit/startup failure and broker/worker rundown. |
+
+### S9 Initial Audit
+
+The baseline still queries native subsystem metadata and launches GUI locally
+in run16/main.c. NTVWM currently binds frontend membership before serving every
+GetNext native request, and its execution thread begins text I/O before target
+creation. These are actual migration points, not completed GUI support.
+Keep the original image-section metadata contract; move its native policy to
+NTVWM and separate GUI request occupancy from service-held process lifetime.
+Production changes and new runtime verification have not started; O:/winnt
+remains the accepted S8 set.
 
 ## S8 Closed Packet
 
