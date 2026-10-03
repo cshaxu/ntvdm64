@@ -72,6 +72,10 @@ DWORD ntcon_worker_exchange(ntcon_worker_client *client,console_io_request *requ
         return ERROR_INVALID_PARAMETER;
     ZeroMemory(reply,sizeof(*reply));
     if(client->failure)return client->failure;
+    /* A disposed connection is an expected unavailable endpoint. Do not
+     * mutate its sequence or latch a transfer error: the caller may bind a
+     * newly authorized transport after the broker's disconnect barrier. */
+    if(!client->pipe)return ERROR_NOT_READY;
     if(client->sequence==UINT32_MAX)return ERROR_ARITHMETIC_OVERFLOW;
     request->version=CONSOLE_IO_VERSION;request->generation=client->generation;
     request->sequence=++client->sequence;
@@ -104,6 +108,8 @@ DWORD ntcon_worker_video(ntcon_worker_client *client,const console_video_descrip
     console_io_request request={0};console_io_reply reply;
     DWORD error,offset=0,count;
     if(!client || (description && (!pixels || !description->bytes)))return ERROR_INVALID_PARAMETER;
+    if(client->failure)return client->failure;
+    if(!client->pipe)return ERROR_NOT_READY;
     if(client->video_serial==UINT32_MAX)return ERROR_ARITHMETIC_OVERFLOW;
     request.state.mode=++client->video_serial;
     request.operation=description ? CONSOLE_IO_VIDEO_BEGIN : CONSOLE_IO_VIDEO_TEXT;

@@ -34,10 +34,6 @@ DWORD run16_native_frontend_bind(run16_native_frontend *,const void *,BOOL);
 /* Active owner requests exact text storage conversion under the I/O lock. */
 /* Optional commit result distinguishes rollback from terminal projection error. */
 DWORD run16_native_frontend_prepare_text(run16_native_frontend *,const void *,COORD,BOOL *);
-/* Wait for this root's actual I/O ownership transition, not for input data.
- * The caller retries the original bind after a successful wait. */
-DWORD run16_native_frontend_wait_ready(run16_native_frontend *,const void *,HANDLE,HANDLE,DWORD);
-void run16_native_frontend_cancel_pending(run16_native_frontend *,const void *);
 /* Channel video is read only under the shared I/O lock. Forget/unbind must
  * detach it before channel storage is disposed. No pointer crosses IPC. */
 DWORD run16_native_frontend_video(run16_native_frontend *,const void *,run16_console_video *,BOOL import_text);

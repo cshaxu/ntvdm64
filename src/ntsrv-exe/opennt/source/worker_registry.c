@@ -272,6 +272,25 @@ DWORD OpenNtBaseServiceWorkerShutdownEvent(OPENNT_BASE_CONNECTION *worker,DWORD 
 }
 
 
+DWORD OpenNtBaseServiceWorkerIoReleaseEvent(OPENNT_BASE_CONNECTION *worker,DWORD pid,
+    DWORD generation,HANDLE *release)
+{
+    DWORD error=ERROR_ACCESS_DENIED;
+    if(!worker || !release)return ERROR_INVALID_PARAMETER;
+    *release=NULL;
+    EnterCriticalSection(&worker->service->lock);
+    if(OpenNtBaseServicePeer(worker,pid,generation) &&
+        (worker->registered_worker || (worker->native_worker && worker->native_root))) {
+        if(!worker->worker_io_release)
+            worker->worker_io_release=CreateEventW(NULL,FALSE,FALSE,NULL);
+        if(!worker->worker_io_release)error=GetLastError();
+        else error=DuplicateHandle(GetCurrentProcess(),worker->worker_io_release,
+            GetCurrentProcess(),release,SYNCHRONIZE,FALSE,0) ? ERROR_SUCCESS : GetLastError();
+    }
+    LeaveCriticalSection(&worker->service->lock);
+    return error;
+}
+
 DWORD OpenNtBaseServiceWorkerStateChanged(OPENNT_BASE_CONNECTION *caller,DWORD pid,
     DWORD generation,HANDLE *state_changed)
 {

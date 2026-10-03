@@ -8,6 +8,8 @@
  * the service; transport guarantees connection rundown follows active calls. */
 typedef struct OPENNT_BASE_SERVICE OPENNT_BASE_SERVICE;
 typedef struct OPENNT_BASE_CONNECTION OPENNT_BASE_CONNECTION;
+DWORD OpenNtBaseServiceWorkerIoTransition(OPENNT_BASE_CONNECTION *,DWORD,DWORD,DWORD);
+DWORD OpenNtBaseServiceFrontendIoDisconnected(OPENNT_BASE_CONNECTION *,DWORD,DWORD);
 DWORD OpenNtBaseServiceStartNativeWorker(OPENNT_BASE_CONNECTION *,DWORD,DWORD,HANDLE *);
 DWORD OpenNtBaseServiceSubmitNativeRequest(OPENNT_BASE_CONNECTION *,DWORD,DWORD,HANDLE,
     DWORD,BYTE *,HANDLE *,HANDLE *,DWORD *);
@@ -41,6 +43,7 @@ BOOL OpenNtBaseServiceIsEmpty(OPENNT_BASE_SERVICE *);
 HANDLE OpenNtBaseServiceFrontendLifetimeChanged(OPENNT_BASE_SERVICE *);
 DWORD OpenNtBaseServiceNextFrontendDeadline(OPENNT_BASE_SERVICE *,ULONGLONG *deadline);
 DWORD OpenNtBaseServiceWorkerShutdownEvent(OPENNT_BASE_CONNECTION *,DWORD,DWORD,HANDLE *);
+DWORD OpenNtBaseServiceWorkerIoReleaseEvent(OPENNT_BASE_CONNECTION *,DWORD,DWORD,HANDLE *);
 DWORD OpenNtBaseServiceRetireExpiredFrontends(OPENNT_BASE_SERVICE *);
 /* Management callers are authenticated by the transport before reaching
  * these methods. The service resolves a PID while holding its registration

@@ -42,7 +42,7 @@ static DWORD WINAPI peer(void *context)
         if(!transfer(state->pipe,FALSE,request.data,request.bytes))return ERROR_BROKEN_PIPE;
         ++state->calls;
         /* The sender must never acquire the frontend implicitly. */
-        if(request.operation==CONSOLE_IO_ACTIVATE && state->mode<11)return ERROR_INVALID_FUNCTION;
+        if(request.operation==CONSOLE_IO_ACTIVATE)return ERROR_INVALID_FUNCTION;
         if(state->mode==0 || (state->mode==6 && sequence<=5)) {
             if(sequence==1)error=ERROR_NOT_READY;
             else if(request.operation==CONSOLE_IO_VIDEO_BEGIN) {
@@ -425,6 +425,8 @@ done:
         CHECK(GetExitCodeThread(thread,&exit_code) && exit_code==0);
         CloseHandle(thread);
     }
+    fprintf(log,"mode=%u calls=%u activations=%u releases=%u\n",mode,state.calls,
+        state.activations,state.releases);
     if(mode==0 || mode==6) {
         CHECK(mode==6 ? state.calls>8u : state.calls==5u);
         if(mode==6)CHECK(state.screen.width<=80 && state.screen.height<=25 &&
@@ -439,10 +441,12 @@ done:
         }
     } else if(mode>=17 && mode!=20)CHECK(state.calls==1);
     else CHECK(mode==11 || mode>=13 ? state.calls>=6u :
-        state.calls==(mode==5 ? 0u : mode==12 || mode==10 ? 6u : mode==9 ? 21u : 1u));
+        state.calls==(mode==5 ? 0u : mode==12 ? 4u : mode==10 ? 6u : mode==9 ? 21u : 1u));
     if((mode>=9 && mode<=16) || mode==20)CHECK(state.snapshot_begins==state.snapshot_ends &&
         state.snapshot_begins==(mode==9 ? 3u : mode==20 ? 2u : 1u));
-    if(mode>=11 && mode<=16)CHECK(state.activations==1 && state.releases==1);
+    /* Ownership is admitted/released over NTSRV RPC, never by presentation.
+     * Reject ACTIVATE above, while retaining final paint/input/barrier checks. */
+    CHECK(state.activations==0 && state.releases==0);
     if(mode==16) {
         DWORD i;CHECK(state.returned_count==ARRAYSIZE(state.returned));
         for(i=0;i<state.returned_count;++i)

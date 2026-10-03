@@ -130,7 +130,7 @@ static DWORD WINAPI serve(void *context)
         startup_status=owner->io.begin ? owner->io.begin(owner->io.context,owner->stop) : ERROR_NOT_SUPPORTED;
         if(!startup_status) {
             if(owner->io.release_launch)owner->io.release_launch(owner->io.context);
-            startup_status=owner->io.end ? owner->io.end(owner->io.context) : ERROR_SUCCESS;
+            startup_status=owner->io.resume ? owner->io.resume(owner->io.context) : ERROR_NOT_SUPPORTED;
         }
         error=OpenNtBaseClientNativeStartupResult(request->caller_generation,request->request,
             startup_status,NULL,NULL);

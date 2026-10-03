@@ -23,6 +23,47 @@ extent repair is admitted. T closure requires owner acceptance.
 | S3 | Operation-based publication/snapshot/locking and common worker clients. Replace type-only checks with explicit operation contracts; retain original Console/VGA production and native hidden Console capture. |
 | S4 | Whole-package source/contract/dependency audit, duplicate removal review and retained acceptance; stop for owner T verification. |
 | S5 | Owner follow-up: clean misleading DOS-specific names in the shared format decoder and actual callers/tests; preserve TEXT_FRAME/TEXT_CONFIGURATION/DIB processing and all runtime gates. Stop for owner T verification after delivery. |
+| S6 | Owner-approved broker-controlled handoff repair: NTSRV owns associations and connection/takeover/release authorization; NTCON has zero or one physical I/O pipe, no pending-owner list. Close and acknowledge the old pipe before granting the next. Preserve original DOS block/resume/reentry; use the same worker-facing contract for NTVWM. |
+
+## S6 connection ownership and implementation boundary
+
+This approval supersedes S2's multi-pending frontend policy, not its retained
+historical test evidence. Logical association with several workers lives only
+in NTSRV. NTCON stores only its current channel and persistent presentation
+state. Each worker stores its current authorized frontend/channel and its own
+execution state, not a frontend association tree or acquisition schedule.
+
+The control sequence is broker authorization -> old worker final publication
+and input return -> confirmed release -> both endpoints close the old pipe ->
+disconnect acknowledgement -> broker-authorized new connection -> incoming
+state import acknowledgement -> resumed execution/input. Zero connected
+workers is a valid intermediate state. An expected I/O disconnect neither
+completes a task nor retires a component; broker loss and genuine faults remain
+distinct failures. Pipes carry data and transport acknowledgements, not ownership
+arbitration. A parent waiting for a child cannot autonomously reacquire.
+
+Execution determines handoff: original NTVDM stops event input and flushes
+final output/returns unused keys before its project release hook. NTSRV confirms
+both physical pipe ends closed before granting another connection. Native
+Windows children do not expose a shell-out hook to NTVWM; an admitted child or
+resume phase therefore supplies the broker notification to finish native I/O.
+An acquisition RPC alone must never trigger that notification or authorize
+preemption. Existing association state carries the grant; no new lease ticket,
+connection generation, worker queue or task scheduler is introduced.
+
+Original NTVDM execution, task completion and blocking/resume code remains in
+its mirror, with unchanged hooks into project adapters. Same-worker reentry
+must distinguish a new admitted execution phase from the suspended parent,
+not infer it from PID. NTVWM retains native process/Console semantics and
+adapts the common control contract locally. Future full NTVWM reentry and
+NTMON tree display are not silently added to S6. No new helper or component.
+
+S6 is implemented and its complete r015 set is verified and published. The
+[S6 ledger](../evidence/m0-t425-s6-broker-io-ownership.md) preserves early
+partial/failing iterations, final bidirectional nested return, cancellation,
+stale acknowledgements, input ordering, old-pipe closure, independent roots
+and retained complete product gates. The containing reviewed P delivers S6;
+owner T verification remains required. No next S is automatically invented.
 
 Every production P builds affected x86 /MT CCPU40 closure, retains focused
 negative/lifecycle tests and prior frontiers, Console17/Window17, native EDIT/
@@ -72,6 +113,10 @@ identity; new outputs only under declared build/M0-T425/S<n>/r<nnn> run roots.
 - [x] S5 shared format-decoder naming cleanup, affected build and retained
   runtime/publication gates. The [S5 ledger](../evidence/m0-t425-s5-format-decoder-names.md)
   records the containing reviewed P, published eight-file set and limits.
+- [x] S6 replaces frontend-local pending arbitration with broker-authorized
+  single I/O connection and both-end closure barrier. Full retained gates,
+  source/build identity, recoverable eight-file publication and postpublication
+  rapid/cooked-CMD/GUI smoke pass; the containing reviewed P delivers S6.
 - [ ] Owner verification and acceptance before T closure.
 
 ## RDP boundary

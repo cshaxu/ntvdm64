@@ -5,6 +5,8 @@
 #define OPENNT_BASE_RPC_CLIENT_H
 #include <windows.h>
 #include <stdint.h>
+DWORD OpenNtBaseClientWorkerIoTransition(DWORD);
+DWORD OpenNtBaseClientFrontendIoDisconnected(void);
 DWORD OpenNtBaseClientSubmitNativeRequest(HANDLE,DWORD,BYTE *,HANDLE *,HANDLE *,DWORD *);
 DWORD OpenNtBaseClientFinishNativeRequest(DWORD,DWORD *,DWORD *);
 DWORD OpenNtBaseClientConnectCurrent(void);
@@ -30,6 +32,7 @@ DWORD OpenNtBaseClientFrontendUsage(DWORD *pending,DWORD *tasks);
 DWORD OpenNtBaseClientRetireWorkerlessFrontend(DWORD *retired);
 DWORD OpenNtBaseClientFrontendStateChanged(HANDLE *state_changed);
 DWORD OpenNtBaseClientWorkerShutdownEvent(HANDLE *shutdown);
+DWORD OpenNtBaseClientWorkerIoReleaseEvent(HANDLE *release);
 DWORD OpenNtBaseClientWorkerStateChanged(HANDLE *state_changed);
 DWORD OpenNtBaseClientRetireFrontend(void);
 DWORD OpenNtBaseClientRegisterFrontendRoot(HANDLE capability);
@@ -54,6 +57,7 @@ DWORD OpenNtBaseClientBindConsoleContext(HANDLE capability);
 DWORD OpenNtBaseClientGetNextNativeCommand(DWORD capacity,BYTE *payload,DWORD *bytes,HANDLE *caller_process,HANDLE *execution,HANDLE *frontend,DWORD *request,DWORD *caller_generation);
 DWORD OpenNtBaseClientNativeStartupResult(DWORD caller_generation,DWORD request,DWORD status,HANDLE target,HANDLE receipt);
 DWORD OpenNtBaseClientRequestFrontend(HANDLE capability);
+/* Success with zero request/NULL worker is an explicit disconnect command. */
 DWORD OpenNtBaseClientFrontendRequest(DWORD *request,HANDLE *worker);
 DWORD OpenNtBaseClientAttachFrontendRequest(DWORD request,HANDLE pipe,HANDLE ready,DWORD *generation);
 /* Caller closes the query/synchronize-only handle. Valid only while its

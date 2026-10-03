@@ -6,7 +6,7 @@
 
 /* Direct worker/frontend protocol; no pointers or native resource identities.
  * Local x86 peers are authenticated by the BaseSrv channel attachment. */
-#define CONSOLE_IO_VERSION 24u
+#define CONSOLE_IO_VERSION 25u
 /* One-hop worker -> launcher stream routing, not an authorization token.
  * Versioned name; three low bits designate worker-local interactive endpoints.
  * File/pipe handles remain actual inherited resources. Consume before launch. */

@@ -8,6 +8,12 @@
  * instruction. Only NTSRV decides whether an owned Console can retire. */
 #define NATIVE_COMPLETION_CONSOLE_EMPTY 1u
 
+/* Authenticated NTSRV control, never worker/frontend pipe operations.
+ * Existing RPC connections identify the endpoints; no second lease token. */
+#define WORKER_IO_ACQUIRE 1u
+#define WORKER_IO_RELEASE_BEGIN 2u
+#define WORKER_IO_RELEASED 3u
+
 /* Followed by application/command/directory/environment strings. Numeric
  * resource slots are never authority: the authenticated receiver materializes
  * and checks only the allowed resources of its pinned sender. */

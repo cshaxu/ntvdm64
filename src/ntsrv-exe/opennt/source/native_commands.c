@@ -658,6 +658,12 @@ DWORD service_take_native_command(OPENNT_BASE_CONNECTION *root,DWORD pid,
         if(caller->pending_win32record) {
             error=service_next_win32record(root,&caller->pending_win32record->request);
             if(error)goto done;
+        }
+        if(caller->channel_frontend) {
+            error=service_authorize_worker_io(root,pid);
+            if(error)goto done;
+        }
+        if(caller->pending_win32record) {
             InsertTailList(&root->win32records,&caller->pending_win32record->link);
             *request=caller->pending_win32record->request;
             caller->pending_win32record=NULL;

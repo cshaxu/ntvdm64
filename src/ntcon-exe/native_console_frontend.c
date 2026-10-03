@@ -10,17 +10,8 @@
 
 /* Visible presentation and copied input only. The active identity is a local
  * authenticated channel, never a worker kind, process tree or task record. */
-typedef struct binding_waiter {
-    struct binding_waiter *next;
-    HANDLE changed;
-} binding_waiter;
-typedef struct pending_binding {
-    struct pending_binding *next;
-    const void *owner;
-} pending_binding;
 struct run16_native_frontend {
     CRITICAL_SECTION io_lock,handoff_lock;
-    binding_waiter *binding_waiters; /* guarded by io_lock; each waiter owns its event */
     DWORD original_input_mode;
     BOOL input_mode_saved;
     DWORD parked_input_mode;
@@ -42,7 +33,6 @@ struct run16_native_frontend {
     const void *title_owner;
     char worker_title[CONSOLE_IO_TITLE_BYTES];
     BOOL worker_title_valid;
-    pending_binding *pending; /* request order, guarded by io_lock */
     const run16_console_video *video;
     uint32_t video_serial;
     console_text_configuration text_configuration;
@@ -64,38 +54,6 @@ struct run16_native_frontend {
  * Never wait for IPC or manipulate execution from the OS callback thread. */
 static SRWLOCK control_lock=SRWLOCK_INIT;
 static run16_native_frontend *control_owner;
-/* Called only with io_lock held. Per-waiter manual events avoid both lost
- * transitions and competition over a shared auto-reset notification. */
-static void signal_binding_waiters(run16_native_frontend *frontend)
-{
-    binding_waiter *waiter;
-    for(waiter=frontend->binding_waiters;waiter;waiter=waiter->next)
-        SetEvent(waiter->changed);
-}
-/* Local I/O acquisition requests only. These nodes own no task, process,
- * completion or borrowed frame; channel teardown removes its own request. */
-static DWORD append_pending(run16_native_frontend *frontend,const void *owner)
-{
-    pending_binding **link=&frontend->pending,*entry;
-    while(*link) {
-        if((*link)->owner==owner)return ERROR_SUCCESS;
-        link=&(*link)->next;
-    }
-    entry=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*entry));
-    if(!entry)return ERROR_NOT_ENOUGH_MEMORY;
-    entry->owner=owner;*link=entry;
-    signal_binding_waiters(frontend);
-    return ERROR_SUCCESS;
-}
-static void remove_pending(run16_native_frontend *frontend,const void *owner)
-{
-    pending_binding **link=&frontend->pending,*entry;
-    while(*link && (*link)->owner!=owner)link=&(*link)->next;
-    if(!*link)return;
-    entry=*link;*link=entry->next;
-    HeapFree(GetProcessHeap(),0,entry);
-    signal_binding_waiters(frontend);
-}
 static DWORD apply_binding(run16_native_frontend *,const void *,BOOL);
 static DWORD collect_console(run16_native_frontend *);
 static DWORD refresh_window_title(run16_native_frontend *frontend)
@@ -545,7 +503,7 @@ static DWORD present_loop(run16_native_frontend *frontend)
         }
         if(WaitForSingleObject(frontend->park,0)==WAIT_OBJECT_0) {
             ResetEvent(frontend->park);
-            frontend->park_error=(frontend->owner || frontend->pending) ? ERROR_BUSY :
+            frontend->park_error=frontend->owner ? ERROR_BUSY :
                 frontend_window_clear(frontend->window);
             if(!frontend->park_error)
                 frontend->park_error=frontend_window_select(frontend->window,FRONTEND_DISPLAY_CONSOLE);
@@ -752,15 +710,10 @@ DWORD run16_native_frontend_park(run16_native_frontend *frontend)
 static DWORD apply_binding(run16_native_frontend *frontend,const void *owner,BOOL active)
 {
     DWORD error=0,i,kept=0;
-    /* Every incoming channel waits for the previous owner's final publication
-     * and release. Preserve request order across wakeups, without classifying
-     * workers or deciding which tasks execute. One pending node per channel. */
+    /* Exactly one actual owner. NTSRV/execution boundaries request release;
+     * acquisition cannot preempt it or create a frontend scheduling queue. */
     if(active && frontend->owner==owner)return ERROR_SUCCESS;
-    if(active && (frontend->owner ||
-        (frontend->pending && frontend->pending->owner!=owner))) {
-        error=append_pending(frontend,owner);
-        return error ? error : ERROR_BUSY;
-    }
+    if(active && frontend->owner)return ERROR_BUSY;
     if(!active && frontend->owner && frontend->owner!=owner)return ERROR_BUSY;
     if(!active && !frontend->owner)return ERROR_SUCCESS;
     /* A borrowed root restores the outer CMD's cooked mode while idle. Its
@@ -795,9 +748,7 @@ static DWORD apply_binding(run16_native_frontend *frontend,const void *owner,BOO
     ZeroMemory(&frontend->window_mouse,sizeof(frontend->window_mouse));
     frontend->owner=active ? owner : NULL;
     frontend->title_owner=NULL;frontend->worker_title_valid=FALSE;
-    remove_pending(frontend,owner);
     frontend->video=NULL;frontend->video_serial=0;
-    signal_binding_waiters(frontend);
     return 0;
 }
 DWORD run16_native_frontend_bind(run16_native_frontend *frontend,const void *owner,BOOL active)
@@ -833,59 +784,6 @@ DWORD run16_native_frontend_prepare_text(run16_native_frontend *frontend,const v
     return error;
 }
 
-DWORD run16_native_frontend_wait_ready(run16_native_frontend *frontend,const void *owner,
-    HANDLE cancel,HANDLE peer,DWORD timeout)
-{
-    ULONGLONG deadline=GetTickCount64()+timeout;
-    binding_waiter waiter={0},**link;
-    HANDLE waits[5];
-    DWORD error=ERROR_SUCCESS;
-    if(!frontend || !owner || !cancel || !peer || !timeout || timeout>10000)return ERROR_INVALID_PARAMETER;
-    waiter.changed=CreateEventW(NULL,TRUE,FALSE,NULL);
-    if(!waiter.changed)return GetLastError();
-    waits[0]=frontend->stop;waits[1]=cancel;waits[2]=peer;
-    waits[3]=frontend->thread;waits[4]=waiter.changed;
-    EnterCriticalSection(&frontend->io_lock);
-    waiter.next=frontend->binding_waiters;
-    frontend->binding_waiters=&waiter;
-    for(;;) {
-        ULONGLONG now;DWORD wait,wait_error;
-        if(WaitForSingleObject(frontend->stop,0)!=WAIT_TIMEOUT ||
-            WaitForSingleObject(cancel,0)!=WAIT_TIMEOUT){error=ERROR_OPERATION_ABORTED;break;}
-        if(WaitForSingleObject(peer,0)!=WAIT_TIMEOUT){error=ERROR_BROKEN_PIPE;break;}
-        if(WaitForSingleObject(frontend->thread,0)!=WAIT_TIMEOUT) {
-            if(!GetExitCodeThread(frontend->thread,&error))error=GetLastError();
-            else if(!error)error=ERROR_BROKEN_PIPE;
-            break;
-        }
-        if(frontend->owner==owner || (!frontend->owner &&
-            (!frontend->pending || frontend->pending->owner==owner)))break;
-        now=GetTickCount64();
-        if(now>=deadline){error=ERROR_TIMEOUT;break;}
-        /* Reset under the predicate lock, then wait outside it. A later
-         * ownership transition sets this private manual event; cancel/stop
-         * have their own persistent handles in the same wait set. */
-        if(!ResetEvent(waiter.changed)){error=GetLastError();break;}
-        LeaveCriticalSection(&frontend->io_lock);
-        wait=WaitForMultipleObjects(5,waits,FALSE,(DWORD)(deadline-now));
-        wait_error=wait==WAIT_FAILED ? GetLastError() : ERROR_SUCCESS;
-        EnterCriticalSection(&frontend->io_lock);
-        if(wait==WAIT_FAILED){error=wait_error;break;}
-        if(wait==WAIT_TIMEOUT){error=ERROR_TIMEOUT;break;}
-    }
-    for(link=&frontend->binding_waiters;*link && *link!=&waiter;link=&(*link)->next){}
-    if(*link==&waiter)*link=waiter.next;
-    LeaveCriticalSection(&frontend->io_lock);
-    CloseHandle(waiter.changed);
-    return error;
-}
-void run16_native_frontend_cancel_pending(run16_native_frontend *frontend,const void *owner)
-{
-    if(!frontend || !owner)return;
-    EnterCriticalSection(&frontend->io_lock);
-    remove_pending(frontend,owner);
-    LeaveCriticalSection(&frontend->io_lock);
-}
 DWORD run16_native_frontend_enter(run16_native_frontend *frontend,const void *owner)
 {
     if(!frontend || !owner)return ERROR_INVALID_PARAMETER;
@@ -1020,7 +918,6 @@ DWORD run16_native_frontend_read(run16_native_frontend *frontend,BOOL peek,
 {
     DWORD count=frontend->input_count;
     *read=0;
-    if(!peek && frontend->pending)return ERROR_BUSY;
     if(count>capacity)count=capacity;
     if(count)memcpy(records,frontend->input,count*sizeof(*records));
     if(!peek && count) {
@@ -1042,14 +939,12 @@ void run16_native_frontend_forget(run16_native_frontend *frontend,const void *ow
      * below still detaches its borrowed channel storage before disposal. */
     (void)run16_native_frontend_bind(frontend,owner,FALSE);
     EnterCriticalSection(&frontend->io_lock);
-    remove_pending(frontend,owner);
     if(frontend->owner==owner) {
         frontend->owner=NULL;frontend->video=NULL;
         frontend->video_serial=0;
         ZeroMemory(&frontend->window_mouse,sizeof(frontend->window_mouse));
     }
     SetEvent(frontend->changed);
-    signal_binding_waiters(frontend);
     LeaveCriticalSection(&frontend->io_lock);
 }
 DWORD run16_native_frontend_destroy(run16_native_frontend *frontend)
@@ -1067,7 +962,6 @@ DWORD run16_native_frontend_destroy(run16_native_frontend *frontend)
      * never signal that session-wide event. */
     if(frontend->thread) { WaitForSingleObject(frontend->thread,INFINITE);CloseHandle(frontend->thread); }
     if(frontend->window)return ERROR_BUSY; /* Failed Window join: retain all callback context. */
-    while(frontend->pending)remove_pending(frontend,frontend->pending->owner);
     /* Reselect the canonical buffer even after a presentation failure. A
      * failed cleanup retains its handles for terminal process cleanup. */
     if(frontend->console_surface) {

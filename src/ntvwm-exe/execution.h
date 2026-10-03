@@ -11,6 +11,8 @@ typedef struct ntvwm_execution_io {
     /* Paired with successful begin after the launch attempt, before reply I/O.
      * Lets the Console owner serialize CreateProcess against explicit close. */
     void (*release_launch)(void *);
+    /* Completes the temporary I/O resume admission, retaining parent I/O. */
+    DWORD (*resume)(void *);
 } ntvwm_execution_io;
 typedef void (*ntvwm_execution_fault)(void *,DWORD);
 DWORD ntvwm_executions_open(ntvwm_executions **);

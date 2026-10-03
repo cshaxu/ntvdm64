@@ -352,7 +352,8 @@ static void capture_timeout_guest(FILE *report,HANDLE process,DWORD pid,
         pid,rva,base,offset,path);
     CloseHandle(output);
 }
-static void report_direct_children(FILE *report, DWORD parent, BOOL contexts,const char *guest_prefix)
+static void report_children(FILE *report, DWORD parent, BOOL contexts,const char *guest_prefix,
+    unsigned depth)
 {
     HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
     PROCESSENTRY32 entry;
@@ -371,8 +372,8 @@ static void report_direct_children(FILE *report, DWORD parent, BOOL contexts,con
             DWORD wait = process ? WaitForSingleObject(process, 0) : WAIT_FAILED;
             BOOL have_code = process && GetExitCodeProcess(process, &code);
             if (process) QueryFullProcessImageNameA(process, 0, path, &length);
-            fprintf(report, "direct-child pid=%lu name=%s wait=%lu exit-known=%u exit=%08lx path=%s\n",
-                    entry.th32ProcessID, entry.szExeFile, wait,
+            fprintf(report, "%s pid=%lu name=%s wait=%lu exit-known=%u exit=%08lx path=%s\n",
+                    depth ? "descendant-child" : "direct-child",entry.th32ProcessID, entry.szExeFile, wait,
                     (unsigned)have_code, code, path);
             if (process && contexts && wait==WAIT_TIMEOUT) {
                 observation_thread_context threads[OBSERVATION_THREAD_LIMIT]={0};
@@ -399,9 +400,18 @@ static void report_direct_children(FILE *report, DWORD parent, BOOL contexts,con
                 if(symbols)SymCleanup(process);
             }
             if (process) CloseHandle(process);
+            /* Timeout-only diagnostics: broker-created workers are no longer
+             * direct launcher children. Capture their stacks too, without
+             * deriving any product task/ownership/termination policy. */
+            if(contexts && wait==WAIT_TIMEOUT && depth<8)
+                report_children(report,entry.th32ProcessID,TRUE,guest_prefix,depth+1);
         }
     } while (Process32Next(snapshot, &entry));
     CloseHandle(snapshot);
+}
+static void report_direct_children(FILE *report,DWORD parent,BOOL contexts,const char *guest_prefix)
+{
+    report_children(report,parent,contexts,guest_prefix,0);
 }
 
 /* The product's original illegal-opcode path formats a bounded `CS:... OP:`

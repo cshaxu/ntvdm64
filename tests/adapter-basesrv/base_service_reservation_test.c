@@ -16,6 +16,7 @@ extern PWOWHEAD WOWHead;
 DWORD fixture_queue_native_command(OPENNT_BASE_CONNECTION *,DWORD,DWORD,HANDLE,DWORD,const BYTE *);
 DWORD fixture_take_native_command(OPENNT_BASE_CONNECTION *,DWORD,DWORD,DWORD,BYTE *,DWORD *,HANDLE *,HANDLE *,HANDLE *,DWORD *);
 DWORD fixture_frontend_notification_denied(OPENNT_BASE_CONNECTION *,DWORD,DWORD,DWORD,BOOL,BOOL *);
+int fixture_io_authority(void);
 static const BYTE native_payload[3]={'N','T','C'};
 static DWORD test_native_request;
 #define queue_native_fixture(a,b,c,d,e) \
@@ -644,6 +645,7 @@ int main(int argc,char **argv)
     uint32_t workerInfoCount=0;
     ULONG standardCount=0;
     STARTUPINFOA getStartup={sizeof(getStartup)};
+    if(argc==2 && !strcmp(argv[1],"--io-authority"))return fixture_io_authority();
     if(argc==3 && !strcmp(argv[1],"--reservation-wait-child"))
         return reservation_wait_child(argv[2]);
     if(argc==3 && !strcmp(argv[1],"--reservation-descendant"))
@@ -781,9 +783,11 @@ int main(int argc,char **argv)
                 root_generation,capability)==ERROR_ALREADY_EXISTS);
             CHECK(OpenNtBaseServiceRequestFrontend(launcher,GetCurrentProcessId(),launcherGeneration,foreign)==ERROR_ACCESS_DENIED);
             CHECK(!OpenNtBaseServiceRequestFrontend(launcher,GetCurrentProcessId(),launcherGeneration,capability));
-            CHECK(!OpenNtBaseServiceFrontendRequest(root,initial_process.dwProcessId,root_generation,&request,&selected));
-            CHECK(request==launcherGeneration && GetProcessId(selected)==child.dwProcessId);
-            CloseHandle(selected);
+            CHECK(OpenNtBaseServiceFrontendRequest(root,initial_process.dwProcessId,
+                root_generation,&request,&selected)==ERROR_NOT_FOUND);
+            CHECK(!request && !selected);
+            CHECK(OpenNtBaseServiceWorkerIoTransition(worker,child.dwProcessId,
+                workerGeneration,WORKER_IO_ACQUIRE)==ERROR_ACCESS_DENIED);
             CHECK(!frontend_pair(&server,&client));
             {
                 HANDLE sender=NULL,execution=NULL,io_capability=NULL;
@@ -836,6 +840,12 @@ int main(int argc,char **argv)
                  * the subsequent completion proof. */
                 test_native_request=completed_request;
             }
+            CHECK(!OpenNtBaseServiceWorkerIoTransition(worker,child.dwProcessId,
+                workerGeneration,WORKER_IO_ACQUIRE));
+            CHECK(!OpenNtBaseServiceFrontendRequest(root,initial_process.dwProcessId,
+                root_generation,&request,&selected));
+            CHECK(request==launcherGeneration && GetProcessId(selected)==child.dwProcessId);
+            CloseHandle(selected);selected=NULL;
             CHECK(!OpenNtBaseServiceAttachFrontendRequest(root,initial_process.dwProcessId,root_generation,
                 request,client,ready));
             CHECK(OpenNtBaseServiceTakeFrontend(worker,child.dwProcessId,workerGeneration+1,
@@ -1031,6 +1041,11 @@ int main(int argc,char **argv)
         CHECK(CreateProcessA(NULL,command,NULL,NULL,FALSE,CREATE_SUSPENDED|CREATE_NO_WINDOW,NULL,NULL,&startup,&laterChild));
         CHECK(!OpenNtBaseServicePrepareWorker(launcher,GetCurrentProcessId(),launcherGeneration,reservation,laterChild.hProcess));
         CHECK(!OpenNtBaseServiceConnect(service,laterChild.hProcess,&worker,&workerGeneration));
+        /* The copied command seam does not invent an I/O association. Admit
+         * the same broker-owned route as production before taking a command;
+         * admission alone still must not wake the presentation endpoint. */
+        CHECK(!OpenNtBaseServiceRequestFrontend(launcher,GetCurrentProcessId(),
+            launcherGeneration,capability));
         CHECK(queue_native_fixture(launcher,GetCurrentProcessId(),launcherGeneration+1,
             capability,native_payload)==ERROR_ACCESS_DENIED);
         CHECK(queue_native_fixture(launcher,GetCurrentProcessId(),launcherGeneration,
@@ -1354,8 +1369,18 @@ int main(int argc,char **argv)
           sprintf_s(command,sizeof(command),"\"%s\" --reservation-child",executable); }
         CHECK(CreateProcessA(NULL,command,NULL,NULL,FALSE,CREATE_NO_WINDOW,NULL,NULL,&startup,&rootProcess));
         CHECK(OpenNtBaseServiceConnect(service,rootProcess.hProcess,&rootConnection,&rootGeneration)==ERROR_SUCCESS);
-        CHECK(OpenNtBaseServiceRegisterFrontendRoot(rootConnection,rootProcess.dwProcessId,
-            rootGeneration,capability)==ERROR_SUCCESS);
+        /* Use the actual caller-created-root admission. Console association
+         * is established separately by the root's authenticated sample. */
+        CHECK(!broker_frontend_admit(launcher,GetCurrentProcessId(),launcherGeneration,
+            rootProcess.hProcess,capability,capability,capability,NULL));
+        CHECK(!(OpenNtBaseServiceRegisterFrontendRoot)(rootConnection,rootProcess.dwProcessId,
+            rootGeneration,capability));
+        broker_frontend_clear_admission(launcher);
+        {
+            DWORD members[3]={rootProcess.dwProcessId,GetCurrentProcessId(),child.dwProcessId};
+            CHECK(!OpenNtBaseServiceReportConsoleMembers(rootConnection,rootProcess.dwProcessId,
+                rootGeneration,ARRAYSIZE(members),members));
+        }
         CHECK(OpenNtBaseServiceFrontendUsage(launcher,GetCurrentProcessId(),launcherGeneration,
             &usage_pending,&usage_tasks)==ERROR_ACCESS_DENIED && usage_pending==99 && usage_tasks==99);
         CHECK(OpenNtBaseServiceFrontendUsage(rootConnection,rootProcess.dwProcessId,rootGeneration+1,
@@ -1369,6 +1394,9 @@ int main(int argc,char **argv)
             launcherGeneration,other)==ERROR_ACCESS_DENIED);
         CHECK(OpenNtBaseServiceRequestFrontend(launcher,GetCurrentProcessId(),
             launcherGeneration,capability)==ERROR_SUCCESS);
+        CHECK(WaitForSingleObject(capability,0)==WAIT_TIMEOUT);
+        CHECK(!OpenNtBaseServiceWorkerIoTransition(worker,child.dwProcessId,
+            workerGeneration,WORKER_IO_ACQUIRE));
         CHECK(WaitForSingleObject(capability,0)==WAIT_OBJECT_0);
         CHECK(!OpenNtBaseServiceFrontendUsage(rootConnection,rootProcess.dwProcessId,rootGeneration,
             &usage_pending,&usage_tasks) && usage_pending && usage_tasks==1);
@@ -1483,6 +1511,17 @@ int main(int argc,char **argv)
         char payload=0;
         FRONTEND_WAIT_TEST waiting={0};
         HANDLE waitingThread=NULL;
+        HANDLE capability=CreateEventW(NULL,TRUE,FALSE,NULL);
+        CHECK(capability);
+        /* Transport validation follows the same broker admission as the
+         * production worker. Association alone cannot publish an endpoint. */
+        CHECK(!OpenNtBaseServiceRegisterFrontendRoot(launcher,GetCurrentProcessId(),
+            launcherGeneration,capability));
+        CHECK(!OpenNtBaseServiceRequestFrontend(launcher,GetCurrentProcessId(),
+            launcherGeneration,capability));
+        CHECK(!OpenNtBaseServiceWorkerIoTransition(worker,child.dwProcessId,
+            workerGeneration,WORKER_IO_ACQUIRE));
+        wowFrontend=capability; /* Retain this root for the later WOW boundary checks. */
         ready=CreateEventW(NULL,TRUE,FALSE,NULL);CHECK(ready);
         CHECK(frontend_pair(&pending,&ui)==0);
         CHECK(OpenNtBaseServiceAttachFrontend(launcher,GetCurrentProcessId(),
@@ -1668,8 +1707,11 @@ int main(int argc,char **argv)
         HANDLE pending=NULL,ui=NULL,ready=CreateEventW(NULL,TRUE,FALSE,NULL);
         CHECK(ready);
         CHECK(frontend_pair(&pending,&ui)==0);
+        /* The worker's live endpoint belongs to the original root. A second
+         * authenticated root cannot replace it merely by selecting the same
+         * resident worker. Same-root duplicate rejection is checked above. */
         CHECK(OpenNtBaseServiceAttachFrontend(later,laterChild.dwProcessId,
-            laterGeneration,pending,ready)==ERROR_ALREADY_EXISTS);
+            laterGeneration,pending,ready)==ERROR_ACCESS_DENIED);
         CloseHandle(pending);CloseHandle(ui);CloseHandle(ready);
     }
     CHECK(WaitForSingleObject(getWait,0)==WAIT_OBJECT_0);
@@ -2028,9 +2070,9 @@ int main(int argc,char **argv)
     /* The worker learns WOW from its launcher reservation.  This retains the
      * original -1 Console sentinel for sequence publication and ExitVDM;
      * it is not inferred from a worker-supplied request bit. */
-    wowFrontend=CreateEventW(NULL,TRUE,FALSE,NULL);CHECK(wowFrontend);
+    CHECK(wowFrontend);
     CHECK(OpenNtBaseServiceRegisterFrontendRoot(launcher,GetCurrentProcessId(),
-        launcherGeneration,wowFrontend)==ERROR_SUCCESS);
+        launcherGeneration,wowFrontend)==ERROR_ALREADY_EXISTS);
     CHECK(OpenNtBaseServiceAcquireConsoleContext(launcher,GetCurrentProcessId(),
         launcherGeneration,wowFrontend,&wowContext)==ERROR_SUCCESS && wowContext);
     check.u.CheckVDM.BinaryType=BINARY_TYPE_WIN16;
@@ -2086,6 +2128,14 @@ int main(int argc,char **argv)
     }
     {
         HANDLE denied=NULL;
+        /* Shared startup probes must preserve TakeFrontend's WOW fallback;
+         * invalid peers still fail authentication before that disposition. */
+        CHECK(OpenNtBaseServiceWorkerIoTransition(wowWorker,wowChild.dwProcessId,
+            wowGeneration+1,WORKER_IO_ACQUIRE)==ERROR_ACCESS_DENIED);
+        CHECK(OpenNtBaseServiceWorkerIoTransition(launcher,GetCurrentProcessId(),
+            launcherGeneration,WORKER_IO_ACQUIRE)==ERROR_ACCESS_DENIED);
+        CHECK(OpenNtBaseServiceWorkerIoTransition(wowWorker,wowChild.dwProcessId,
+            wowGeneration,WORKER_IO_ACQUIRE)==ERROR_NOT_SUPPORTED);
         /* Even a valid C-segment capability cannot turn a registered WOW
          * worker or its submitted WOW request into a character I/O member.
          * Original Get/Exit below must still work after these rejections. */

@@ -78,6 +78,48 @@ DWORD common_rpc_worker_shutdown_event(const common_rpc_connection *state,HANDLE
     *shutdown=local;return ERROR_SUCCESS;
 }
 
+DWORD common_rpc_worker_io_transition(const common_rpc_connection *state,DWORD action)
+{
+    DWORD error=ERROR_INVALID_STATE;
+    if(!state || !state->connection || !state->binding || !state->process)return error;
+    RpcTryExcept {
+        error=Client_WorkerIoTransition(state->binding,state->connection,state->process,
+            state->generation,action);
+    }
+    RpcExcept(1) { error=RpcExceptionCode(); }
+    RpcEndExcept
+    return error;
+}
+DWORD common_rpc_frontend_io_disconnected(const common_rpc_connection *state)
+{
+    DWORD error=ERROR_INVALID_STATE;
+    if(!state || !state->connection || !state->binding || !state->process)return error;
+    RpcTryExcept {
+        error=Client_FrontendIoDisconnected(state->binding,state->connection,state->process,
+            state->generation);
+    }
+    RpcExcept(1) { error=RpcExceptionCode(); }
+    RpcEndExcept
+    return error;
+}
+DWORD common_rpc_worker_io_release_event(const common_rpc_connection *state,HANDLE *release)
+{
+    DWORD error=ERROR_INVALID_STATE;
+    HANDLE local=NULL;
+    if(!release)return ERROR_INVALID_PARAMETER;
+    *release=NULL;
+    if(!state || !state->connection || !state->binding || !state->process)return error;
+    RpcTryExcept {
+        error=Client_WorkerIoReleaseEvent(state->binding,state->connection,state->process,
+            state->generation,&local);
+    }
+    RpcExcept(1) { error=RpcExceptionCode(); }
+    RpcEndExcept
+    if(error){if(local)CloseHandle(local);return error;}
+    if(!local)return ERROR_INVALID_HANDLE;
+    *release=local;return ERROR_SUCCESS;
+}
+
 DWORD common_rpc_worker_state_changed(const common_rpc_connection *state,HANDLE *state_changed)
 {
     DWORD error=ERROR_INVALID_STATE;

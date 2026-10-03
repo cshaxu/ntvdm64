@@ -808,6 +808,24 @@ if (!OpenNtBaseFinishGetCommand(&message,&state)) { error=ERROR_INVALID_DATA; go
     error=service_wait_resolve(connection,generation,message.u.GetNextVDMCommand.WaitObjectForVDM,
         BROKER_VDM_WORKER_WAIT,wait_event);
     if (error) goto done;
+    /* Original GetNext decides when a DOS execution/reentry or parent resume
+     * is available. Grant its transport phase only after that result, never
+     * from an idle worker's request to acquire the frontend. */
+    /* srvvdm.c returns STATUS_NO_MEMORY with no wait object for its ordinary
+     * RETURN_ON_NO_COMMAND resume. The original client clears CmdSize and
+     * cmdExec32 resumes its parent on that result. Do not require a success
+     * command payload to authorize the parent's transport phase. The original
+     * return value, execution and task completion stay unchanged. */
+    if(!*wait_event && (message.ReturnValue==STATUS_SUCCESS ||
+        (message.ReturnValue==STATUS_NO_MEMORY &&
+         (message.u.GetNextVDMCommand.VDMState & RETURN_ON_NO_COMMAND))) && connection->process.fVDM &&
+        !connection->wow && !(message.u.GetNextVDMCommand.VDMState &
+            (ASKING_FOR_ENVIRONMENT|ASKING_FOR_PIF|ASKING_FOR_WOW_BINARY))) {
+        error=service_authorize_worker_io(connection,pid);
+        /* Redirected/nonfrontend workers have no I/O association to grant. */
+        if(error==ERROR_NOT_FOUND)error=ERROR_SUCCESS;
+        if(error)goto done;
+    }
     *output=state.reply; *output_bytes=state.reply_bytes; state.reply=NULL;
     error=ERROR_SUCCESS;
 done:

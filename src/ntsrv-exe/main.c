@@ -397,6 +397,25 @@ error_status_t Server_WorkerShutdownEvent(handle_t binding,VDM_CONNECTION connec
     *shutdown=NULL;
     return error ? error : OpenNtBaseServiceWorkerShutdownEvent(connection,pid,generation,shutdown);
 }
+error_status_t Server_WorkerIoTransition(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+    ULONG generation,ULONG action)
+{
+    DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    return error ? error : OpenNtBaseServiceWorkerIoTransition(connection,pid,generation,action);
+}
+error_status_t Server_FrontendIoDisconnected(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+    ULONG generation)
+{
+    DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    return error ? error : OpenNtBaseServiceFrontendIoDisconnected(connection,pid,generation);
+}
+error_status_t Server_WorkerIoReleaseEvent(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+    ULONG generation,HANDLE *release)
+{
+    DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    *release=NULL;
+    return error ? error : OpenNtBaseServiceWorkerIoReleaseEvent(connection,pid,generation,release);
+}
 error_status_t Server_CompleteWorkerChannel(handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,ULONG request,ULONG exit_code,ULONG io_error,ULONG io_flags)
 {
@@ -863,7 +882,7 @@ int main(void)
         (void)OpenNtBaseServiceStop(service);
         return (int)error;
     }
-    result=RpcServerRegisterIf3(Server_vdm_service_v36_0_s_ifspec,NULL,NULL,
+    result=RpcServerRegisterIf3(Server_vdm_service_v37_0_s_ifspec,NULL,NULL,
         RPC_IF_ALLOW_SECURE_ONLY | RPC_IF_ALLOW_LOCAL_ONLY,RPC_C_LISTEN_MAX_CALLS_DEFAULT,
         (unsigned)-1,authorize,NULL);
     if (!result) {
@@ -910,7 +929,7 @@ int main(void)
         if (result) basesrv_idle_fatal("RpcMgmtWaitServerListen",result);
     }
     {
-        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v36_0_s_ifspec,NULL,TRUE);
+        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v37_0_s_ifspec,NULL,TRUE);
         if (!result && cleanup) result=cleanup;
     }
     if (idle_timer) CloseHandle(idle_timer);

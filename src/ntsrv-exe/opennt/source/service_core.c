@@ -98,6 +98,7 @@ BOOL OpenNtBaseServiceStop(OPENNT_BASE_SERVICE *service)
         if (connection->frontend_restored) CloseHandle(connection->frontend_restored);
         if (connection->frontend_state_changed) CloseHandle(connection->frontend_state_changed);
         if (connection->worker_state_changed) CloseHandle(connection->worker_state_changed);
+        if (connection->worker_io_release) CloseHandle(connection->worker_io_release);
         service_release_console_identities(connection);
         HeapFree(GetProcessHeap(),0,connection);
     }
@@ -286,6 +287,7 @@ DWORD OpenNtBaseServiceDisconnect(OPENNT_BASE_CONNECTION *connection)
         if (connection->frontend_restored) CloseHandle(connection->frontend_restored);
         if (connection->frontend_state_changed) CloseHandle(connection->frontend_state_changed);
         if (connection->worker_state_changed) CloseHandle(connection->worker_state_changed);
+        if (connection->worker_io_release) CloseHandle(connection->worker_io_release);
         if (connection->native_stop) CloseHandle(connection->native_stop);
         if (connection->native_closed) CloseHandle(connection->native_closed);
         if (connection->wow_start_event) CloseHandle(connection->wow_start_event);

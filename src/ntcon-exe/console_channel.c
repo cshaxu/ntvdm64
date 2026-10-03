@@ -22,18 +22,9 @@ static DWORD activate(void *context,BOOL active)
 {
     run16_console_channel *channel=context;
     DWORD error;
-    ULONGLONG deadline=GetTickCount64()+10000;
-    do {
-        error=run16_native_frontend_bind(channel->root,channel,active);
-        if(error==ERROR_BUSY && active) {
-            ULONGLONG now=GetTickCount64();
-            if(now>=deadline){error=ERROR_TIMEOUT;break;}
-            error=run16_native_frontend_wait_ready(channel->root,channel,
-                channel->stop,channel->worker,(DWORD)(deadline-now));
-            if(!error)continue;
-        }
-        break;
-    } while(TRUE);
+    /* NTSRV has already granted the only connection. A conflicting local
+     * binding is an invariant failure, not permission to queue or arbitrate. */
+    error=run16_native_frontend_bind(channel->root,channel,active);
     if(!error && active) {
         HANDLE logical=NULL;
         error=run16_native_frontend_logical_console(channel->root,&logical);
@@ -49,8 +40,6 @@ static DWORD activate(void *context,BOOL active)
         run16_native_frontend_worker_title(channel->root,channel,channel->title);
         run16_native_frontend_leave(channel->root);
     }
-    if(error && active)
-        run16_native_frontend_cancel_pending(channel->root,channel);
     /* A released worker's cached frame predates the new owner's geometry.
      * Root binding has detached this pointer under the shared I/O lock. Keep
      * the visible common screen, but require a fresh complete worker frame. */
@@ -60,6 +49,12 @@ static DWORD activate(void *context,BOOL active)
         channel->console.video.serial=serial; /* Handoff does not authorize replay. */
     }
     return error;
+}
+static DWORD reject_pipe_activation(void *context,BOOL active)
+{
+    (void)context;(void)active;
+    /* Connection ownership is granted by authenticated NTSRV RPC only. */
+    return ERROR_NOT_SUPPORTED;
 }
 static DWORD prepare_text(void *context,COORD size)
 {
@@ -370,13 +365,14 @@ DWORD run16_console_channel_stop(run16_console_channel *channel)
         SetEvent(channel->stop);
     }
     if (channel->thread) {
-        /* Signal-driven pipe transfers observe stop. Also cancel any active
-         * synchronous Console API and overlapped pipe I/O once, then bound
+        /* Signal-driven pipe transfers observe stop and cancel/drain their
+         * own OVERLAPPED before closing the pipe. Cancel only synchronous
+         * Console work here: the thread may already have closed its pipe,
+         * so this borrowed handle value cannot safely be used for CancelIoEx.
+         * Then bound
          * the join. A timed-out thread still borrows channel/root storage;
          * the caller must keep both alive until terminal process cleanup. */
         (void)CancelSynchronousIo(channel->thread);
-        if(channel->pipe && channel->pipe!=INVALID_HANDLE_VALUE)
-            (void)CancelIoEx(channel->pipe,NULL);
         wait=WaitForSingleObject(channel->thread,10000);
         if(wait!=WAIT_OBJECT_0)
             return wait==WAIT_TIMEOUT ? ERROR_TIMEOUT : GetLastError();
@@ -415,7 +411,7 @@ DWORD run16_console_channel_start_request(DWORD request,HANDLE worker,run16_nati
     channel->root=root;
     channel->console.logical_window=run16_native_frontend_text_region(root);
     channel->console.io_context=channel;
-    channel->console.activate=activate;channel->console.prepare_text=prepare_text;
+    channel->console.activate=reject_pipe_activation;channel->console.prepare_text=prepare_text;
     channel->console.video_data=video_data;
     channel->console.enter=enter;channel->console.leave=leave;
     channel->console.screen_begin=screen_begin;channel->console.screen_end=screen_end;
@@ -459,6 +455,10 @@ DWORD run16_console_channel_start_request(DWORD request,HANDLE worker,run16_nati
     if (!GetNamedPipeClientProcessId(server,&client_pid) || client_pid!=GetCurrentProcessId()) {
         error=ERROR_ACCESS_DENIED;goto fail;
     }
+    /* Bind the broker-authorized channel before exporting the pipe. A worker
+     * receiving the attachment must not race an unbound presentation. */
+    error=activate(channel,TRUE);
+    if(error)goto fail;
     error=OpenNtBaseClientAttachFrontendRequest(request,server,channel->ready,
         &generation);
     if (error) goto fail;

@@ -6,9 +6,13 @@
 DWORD worker_base_connect(void);
 /* Caller owns a synchronize-only shutdown event; NTSRV alone signals it. */
 DWORD worker_base_shutdown_event(HANDLE *shutdown);
+/* Service instruction to publish/return input and release presentation.
+ * This does not end a task or worker. Caller owns a wait-only event handle. */
+DWORD worker_base_io_release_event(HANDLE *release);
+/* Caller serializes its endpoint and quiesces all pipe calls before close.
+ * Peer handles authenticate transport only; NTSRV owns the association.
+ * Handles are explicit instance state; NULL means no physical channel. */
+DWORD worker_base_io_open(HANDLE *pipe,HANDLE *peer,HANDLE *ready,DWORD *generation);
+DWORD worker_base_io_close(HANDLE *pipe,HANDLE *peer,HANDLE *ready);
 void worker_base_disconnect(void);
-/* Resolve a copied frontend capability through NTSRV. The returned process
- * handle is wait-only and belongs to the caller; an event or PID alone is
- * never proof that a worker is still attached to its original root. */
-DWORD worker_base_retain_frontend_root(HANDLE capability,HANDLE *process);
 #endif

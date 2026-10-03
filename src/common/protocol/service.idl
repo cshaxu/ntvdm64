@@ -1,12 +1,20 @@
 import "wtypes.idl";
 [
     uuid(7d3e78bd-0472-4736-8797-e64e966d692e),
-    version(36.0),
+    version(37.0),
     pointer_default(unique)
 ]
 interface vdm_service
 {
     typedef [context_handle] void *VDM_CONNECTION;
+    error_status_t WorkerIoTransition(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation, [in] unsigned long action);
+    error_status_t FrontendIoDisconnected(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation);
     /* Copied native launch/control only; worker/frontend I/O stays direct.
      * The launcher classifies before admission. A NULL frontend submits a GUI
      * startup request: no character route, service-held actual process lifetime.
@@ -82,6 +90,13 @@ interface vdm_service
         [in, system_handle(sh_process)] HANDLE process,
         [in] unsigned long generation,
         [out, system_handle(sh_event)] HANDLE *shutdown);
+    /* Service-directed I/O release, not task completion or worker shutdown.
+     * The recipient receives synchronize rights only. */
+    error_status_t WorkerIoReleaseEvent(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [out, system_handle(sh_event)] HANDLE *release);
     error_status_t CompleteWorkerChannel(
         [in] handle_t binding, [in] VDM_CONNECTION connection,
         [in, system_handle(sh_process)] HANDLE process,
@@ -208,6 +223,9 @@ interface vdm_service
         [in, system_handle(sh_process)] HANDLE process,
         [in] unsigned long generation,
         [in, system_handle(sh_event)] HANDLE capability);
+    /* Success with request=0 and worker=NULL instructs the frontend to close
+     * its sole I/O endpoint and acknowledge FrontendIoDisconnected. Nonzero
+     * request delivers an authenticated endpoint for a new connection. */
     error_status_t FrontendRequest(
         [in] handle_t binding, [in] VDM_CONNECTION connection,
         [in, system_handle(sh_process)] HANDLE process,

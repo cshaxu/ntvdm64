@@ -27,6 +27,17 @@ static HANDLE attachment(unsigned index)
 EVENT_CALL(WorkerFrontendCapability)
 EVENT_CALL(WorkerShutdownEvent)
 EVENT_CALL(WorkerStateChanged)
+EVENT_CALL(WorkerIoReleaseEvent)
+error_status_t Client_WorkerIoTransition(handle_t binding,VDM_CONNECTION connection,
+    HANDLE process,unsigned long generation,unsigned long action)
+{
+    peer(binding,connection,process,generation);CHECK(action==1);return result();
+}
+error_status_t Client_FrontendIoDisconnected(handle_t binding,VDM_CONNECTION connection,
+    HANDLE process,unsigned long generation)
+{
+    peer(binding,connection,process,generation);return result();
+}
 error_status_t Client_AcquireConsoleContext(handle_t binding,VDM_CONNECTION connection,
     HANDLE process,unsigned long generation,HANDLE frontend,HANDLE *capability)
 {
@@ -72,12 +83,13 @@ int main(void)
     unsigned i,initial;
     common_rpc_connection invalid={0};
     event_client events[]={common_rpc_worker_frontend_capability,
-        common_rpc_worker_shutdown_event,common_rpc_worker_state_changed};
+        common_rpc_worker_shutdown_event,common_rpc_worker_state_changed,
+        common_rpc_worker_io_release_event};
     expected.binding=(RPC_BINDING_HANDLE)(ULONG_PTR)11;
     expected.connection=(VDM_CONNECTION)(ULONG_PTR)12;
     expected.process=CreateEventW(NULL,TRUE,FALSE,NULL);expected.generation=13;
     CHECK(expected.process && GetProcessHandleCount(GetCurrentProcess(),&before));
-    for(i=0;i<3;++i) {
+    for(i=0;i<4;++i) {
         CHECK(events[i](&expected,NULL)==ERROR_INVALID_PARAMETER);
         output=expected.process;CHECK(events[i](NULL,&output)==ERROR_INVALID_STATE && !output);
         output=expected.process;CHECK(events[i](&invalid,&output)==ERROR_INVALID_STATE && !output);
@@ -87,13 +99,15 @@ int main(void)
     CHECK(common_rpc_acquire_console_context(NULL,NULL,&output)==ERROR_INVALID_STATE && !output);
     CHECK(common_rpc_bind_console_context(NULL,NULL)==ERROR_INVALID_STATE);
     CHECK(common_rpc_register_native_backend(NULL,NULL,NULL,NULL)==ERROR_INVALID_STATE);
+    CHECK(common_rpc_worker_io_transition(NULL,1)==ERROR_INVALID_STATE);
+    CHECK(common_rpc_frontend_io_disconnected(NULL)==ERROR_INVALID_STATE);
     CHECK(common_rpc_take_frontend(&expected,NULL,&frontend,&generation,&ready,FALSE)==ERROR_INVALID_PARAMETER);
     pipe=frontend=ready=expected.process;generation=99;
     CHECK(common_rpc_take_frontend(NULL,&pipe,&frontend,&generation,&ready,TRUE)==ERROR_INVALID_STATE);
     CHECK(!pipe && !frontend && !ready && !generation && !calls);
     for(mode=0;mode<3;++mode) {
         initial=calls;want=mode==0 ? 0 : mode==1 ? ERROR_ACCESS_DENIED : RPC_S_CALL_FAILED;
-        for(i=0;i<3;++i) {
+        for(i=0;i<4;++i) {
             CHECK(events[i](&expected,&output)==want);
             if(want){CHECK(!output);closed(1);}else {CHECK(output!=NULL);CloseHandle(output);}
         }
@@ -101,6 +115,8 @@ int main(void)
         if(want){CHECK(!output);closed(1);}else {CHECK(output!=NULL);CloseHandle(output);}
         CHECK(common_rpc_bind_console_context(&expected,expected.process)==want);
         CHECK(common_rpc_register_native_backend(&expected,expected.process,expected.process,NULL)==want);
+        CHECK(common_rpc_worker_io_transition(&expected,1)==want);
+        CHECK(common_rpc_frontend_io_disconnected(&expected)==want);
         for(i=0;i<2;++i) {
             generation=99;
             error=common_rpc_take_frontend(&expected,&pipe,&frontend,&generation,&ready,i!=0);
@@ -109,7 +125,7 @@ int main(void)
             else {CHECK(pipe && frontend && ready && generation==42);
                 CloseHandle(pipe);CloseHandle(frontend);CloseHandle(ready);}
         }
-        CHECK(calls==initial+8);
+        CHECK(calls==initial+11);
     }
     CHECK(takes==3 && waits==3);
     mode=3;

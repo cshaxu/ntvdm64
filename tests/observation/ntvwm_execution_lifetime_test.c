@@ -195,7 +195,7 @@ static void resume_barrier(DWORD begin_error,DWORD end_error)
 {
     ntvwm_executions *owner=NULL;unsigned id;startup_observation *result;
     resume_state state={0,begin_error,end_error};
-    ntvwm_execution_io io={&state,resume_begin,resume_end,resume_release};LONG before=completed_resume_count;
+    ntvwm_execution_io io={&state,resume_begin,NULL,resume_release,resume_end};LONG before=completed_resume_count;
     CHECK(!ntvwm_executions_open(&owner));if(!owner)return;
     ntvwm_executions_bind_io(owner,&io);id=submit(owner,NULL,0,SENDER_ACCESS,0,0);
     if(id) {

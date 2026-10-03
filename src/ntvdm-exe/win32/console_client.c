@@ -169,8 +169,22 @@ static DWORD WINAPI console_input_watch(void *context)
     console_client *client=context;
     BOOL pending=FALSE;
     for (;;) {
-        HANDLE waits[3]={client->shutdown,client->stop,pending ? client->rearm : client->ready};
-        DWORD result=WaitForMultipleObjects(3,waits,FALSE,INFINITE);
+        HANDLE ready=NULL,waits[4]={client->shutdown,client->stop,client->rearm,NULL};
+        DWORD count=3,result;
+        /* The original guest wait event is stable across broker reconnection.
+         * Pin a wait-only copy before dropping the endpoint lock; closing an
+         * old channel must never invalidate a concurrent Windows wait. */
+        EnterCriticalSection(&client->lock);
+        if(!pending && client->channel.pipe && client->ready) {
+            if(!DuplicateHandle(GetCurrentProcess(),client->ready,GetCurrentProcess(),
+                &ready,SYNCHRONIZE,FALSE,0)) {
+                DWORD error=GetLastError();LeaveCriticalSection(&client->lock);return error;
+            }
+            waits[count++]=ready;
+        }
+        LeaveCriticalSection(&client->lock);
+        result=WaitForMultipleObjects(count,waits,FALSE,INFINITE);
+        if(ready)CloseHandle(ready);
         if (result==WAIT_OBJECT_0+1) return 0;
         if (result==WAIT_OBJECT_0) {
             HANDLE close=CreateThread(NULL,0,console_close_callback,client,0,NULL);
@@ -182,11 +196,11 @@ static DWORD WINAPI console_input_watch(void *context)
             TerminateProcess(GetCurrentProcess(),CONTROL_C_EXIT);
             return ERROR_PROCESS_ABORTED;
         }
-        if (result!=WAIT_OBJECT_0+2) {
+        if(result==WAIT_OBJECT_0+2){pending=FALSE;continue;}
+        if (result!=WAIT_OBJECT_0+3) {
             SetEvent(client->wake);return result==WAIT_FAILED ? GetLastError() : ERROR_PIPE_NOT_CONNECTED;
         }
-        if (!pending) SetEvent(client->wake);
-        pending=!pending;
+        SetEvent(client->wake);pending=TRUE;
     }
 }
 
@@ -217,22 +231,18 @@ static void console_client_end(void *context)
 static DWORD console_command_ready(void *context)
 {
     console_client *client=context;
-    if (WaitForSingleObject(client->channel.peer,0)==WAIT_TIMEOUT) return console_activate(client,TRUE);
-    /* A dead root closes this session; it cannot be rebound to a new root. */
-    return ERROR_PIPE_NOT_CONNECTED;
+    return console_activate(client,TRUE);
 }
 
 DWORD ntvdm_console_client_begin(session *owner)
 {
-    typedef BOOL (WINAPI *compare_handles)(HANDLE,HANDLE);
-    compare_handles compare;
     console_client *client;
-    HANDLE root=NULL;
     DWORD error;
     if (!owner || owner->console_client) return ERROR_INVALID_STATE;
     client=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*client));
     if (!client) return ERROR_NOT_ENOUGH_MEMORY;
-    error=OpenNtBaseClientWaitFrontend(&client->channel.pipe,&client->channel.peer,&client->channel.generation,&client->ready);
+    error=worker_base_io_open(&client->channel.pipe,&client->channel.peer,&client->ready,
+        &client->channel.generation);
     if (error) { HeapFree(GetProcessHeap(),0,client);return error; }
     client->owner=owner;
     InitializeCriticalSection(&client->lock);
@@ -240,14 +250,8 @@ DWORD ntvdm_console_client_begin(session *owner)
     if (!client->graphics) { error=GetLastError();console_client_end(client);return error; }
     error=OpenNtBaseClientWorkerFrontendCapability(&client->capability);
     if (error) { console_client_end(client);return error; }
-    /* The route's peer and the capability must name the same authenticated
-     * root. A short-lived launcher or a reused PID cannot substitute for it. */
-    error=worker_base_retain_frontend_root(client->capability,&root);
-    compare=(compare_handles)GetProcAddress(GetModuleHandleW(L"kernelbase.dll"),"CompareObjectHandles");
-    if(!error && !compare)error=ERROR_CALL_NOT_IMPLEMENTED;
-    if(!error && !compare(root,client->channel.peer))error=ERROR_ACCESS_DENIED;
-    if(root)CloseHandle(root);
-    if(error){console_client_end(client);return error;}
+    /* The authenticated broker grants both transport and shell-out capability.
+     * This worker does not resolve or retain a separate frontend relationship. */
     error=ntcon_worker_client_init(&client->channel,client->channel.pipe,
         client->channel.peer,NULL,client->channel.generation);
     if(error){console_client_end(client);return error;}
@@ -346,12 +350,31 @@ static DWORD exchange(console_client *client,console_io_reply *reply)
 
 static DWORD console_activate(console_client *client,BOOL active)
 {
-    DWORD error;
+    DWORD error=ERROR_SUCCESS;
     EnterCriticalSection(&client->lock);
-    /* NTCON owns the I/O predicate and waits for its actual binding change
-     * inside this same activation request. It returns one bounded failure;
-     * this worker does not sample another process's ownership on a timer. */
-    error=ntcon_worker_activate(&client->channel,active);
+    if(active && !client->channel.pipe) {
+        error=worker_base_io_open(&client->channel.pipe,&client->channel.peer,&client->ready,
+            &client->channel.generation);
+        if(!error)error=ntcon_worker_client_init(&client->channel,client->channel.pipe,
+            client->channel.peer,NULL,client->channel.generation);
+        if(!error)SetEvent(client->rearm);
+    }
+    if(!active && client->channel.pipe) {
+        console_io_request barrier={0};console_io_reply reply;
+        HANDLE pipe=client->channel.pipe,peer=client->channel.peer;
+        barrier.operation=CONSOLE_IO_BARRIER;
+        error=ntcon_worker_call(&client->channel,&barrier,&reply);
+        if(!error) {
+            error=worker_base_io_close(&pipe,&peer,&client->ready);
+            /* A rejected release leaves the usable transport intact. Only
+             * after physical closure discard its local operation state. */
+            if(!pipe) {
+                ntcon_worker_client_dispose(&client->channel);
+                client->configuration_sent=FALSE;
+                ResetEvent(client->wake);SetEvent(client->rearm);
+            }
+        }
+    }
     if(!error && active) {
         console_io_reply reply;
         int64_t height;
@@ -367,7 +390,7 @@ static DWORD console_activate(console_client *client,BOOL active)
         /* Conversion is part of acquisition, before guest producers resume.
          * A failed conversion must not strand the frontend's active owner. */
         if(error) {
-            DWORD release=ntcon_worker_activate(&client->channel,FALSE);
+            DWORD release=console_activate(client,FALSE);
             if(!release)ZeroMemory(&client->mouse,sizeof(client->mouse));
             else client->channel.failure=release; /* Failed return is not reusable. */
         }

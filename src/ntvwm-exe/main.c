@@ -8,29 +8,33 @@
 #include "next_command.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
 #include "native_pc_font.h"
+#include <stdio.h>
 
 PVOID CsrPortHeap;
 
+
 typedef struct native_membership {
-    HANDLE quit,thread,capability,stop_requested,closed,admission_ready,shutdown;
-    HANDLE pipe,frontend,ready,root;
+    HANDLE quit,thread,capability,stop_requested,closed,admission_ready,shutdown,io_release;
+    HANDLE pipe,frontend,ready;
     ntvwm_presentation *presentation;
     CRITICAL_SECTION *lock;
     console_text_style font;
     DWORD users,admissions;
     BOOL presenting;
+    /* A live native parent may be blocked in an inner launcher. Only an
+     * authenticated command/resume admission can request ownership again. */
+    BOOL io_released;
 } native_membership;
-/* A frontend route is borrowed presentation state, not this worker's Console
- * or target lifetime.  The caller holds state->lock. */
-static void membership_detach_presentation(native_membership *state)
+/* Called with the execution/I/O lock held, after final paint/input return.
+ * Dispose only local transport state; the broker retains logical association. */
+static DWORD membership_release_io(native_membership *state)
 {
+    DWORD error;
     ntvwm_presentation_close(state->presentation);state->presentation=NULL;
-    if(state->pipe)CloseHandle(state->pipe);
-    if(state->frontend)CloseHandle(state->frontend);
-    if(state->ready)CloseHandle(state->ready);
-    state->pipe=state->frontend=state->ready=NULL;
-    state->presenting=FALSE;
-    if(state->admission_ready)ResetEvent(state->admission_ready);
+    error=worker_base_io_close(&state->pipe,&state->frontend,&state->ready);
+    state->presenting=FALSE;state->io_released=TRUE;
+    ResetEvent(state->admission_ready);
+    return error;
 }
 static DWORD begin_io(void *context,HANDLE stop)
 {
@@ -83,33 +87,34 @@ static void release_launch(void *context)
 }
 static DWORD end_io(void *context)
 {
-    native_membership *state=context;DWORD error=ERROR_SUCCESS,attempt;
+    native_membership *state=context;DWORD error=ERROR_SUCCESS;
     EnterCriticalSection(state->lock);
     /* Completion belongs to the direct target. Physical Console membership
      * does not create broker tasks or retain NTSRV BUSY. */
     if(!error && state->presenting) {
-        if(state->users>1) {
-            for(attempt=0;attempt<8;++attempt) {
-                error=ntvwm_presentation_capture(state->presentation,&state->font);
-                if(error!=ERROR_RETRY)break;
-                if(attempt<7)Sleep(10);
-            }
-        } else {
-            error=ntvwm_presentation_end(state->presentation,&state->font);
-            if(!error){state->presenting=FALSE;ResetEvent(state->admission_ready);}
-        }
+        error=ntvwm_presentation_end(state->presentation,&state->font);
+        if(!error)error=membership_release_io(state);
     }
     if(state->users)--state->users;
     ntvwm_trace_error("end-io",0,error);
     LeaveCriticalSection(state->lock);return error;
+}
+static DWORD resume_io(void *context)
+{
+    native_membership *state=context;
+    /* begin_io's temporary admission is not a new target. The authenticated
+     * resume keeps the parent presenting instead of releasing it again. */
+    EnterCriticalSection(state->lock);
+    if(state->users)--state->users;
+    LeaveCriticalSection(state->lock);
+    return ERROR_SUCCESS;
 }
 static DWORD take_presentation(native_membership *state)
 {
     DWORD generation=0,error;
     console_io_request request={0};console_io_reply reply;
     if(state->presentation)return ERROR_SUCCESS;
-    error=OpenNtBaseClientTakeFrontend(&state->pipe,&state->frontend,&generation,&state->ready);
-    if(error==ERROR_NOT_READY)return ERROR_SUCCESS;
+    error=worker_base_io_open(&state->pipe,&state->frontend,&state->ready,&generation);
     if(error)return error;
     error=ntvwm_presentation_open(state->pipe,state->frontend,state->quit,generation,&state->presentation);
     if(error)return error;
@@ -122,9 +127,9 @@ static DWORD take_presentation(native_membership *state)
 static DWORD presentation_loop(void *context)
 {
     native_membership *state=context;DWORD error=0;
-    HANDLE waits[3]={state->shutdown,state->stop_requested,state->quit};
+    HANDLE waits[4]={state->shutdown,state->stop_requested,state->quit,state->io_release};
     DWORD wait;
-    while((wait=WaitForMultipleObjects(3,waits,FALSE,30))!=WAIT_OBJECT_0+2) {
+    while((wait=WaitForMultipleObjects(4,waits,FALSE,30))!=WAIT_OBJECT_0+2) {
         EnterCriticalSection(state->lock);
         if(wait==WAIT_OBJECT_0 || wait==WAIT_OBJECT_0+1) {
             error=ntvwm_console_close();
@@ -136,20 +141,28 @@ static DWORD presentation_loop(void *context)
             LeaveCriticalSection(state->lock);
             return error ? error : ERROR_CANCELLED;
         }
+        if(wait==WAIT_OBJECT_0+3) {
+            error=state->presenting ? ntvwm_presentation_end(state->presentation,&state->font) : ERROR_SUCCESS;
+            if(!error && state->presentation)error=membership_release_io(state);
+            LeaveCriticalSection(state->lock);
+            if(error)return error;
+            continue;
+        }
         if(wait!=WAIT_TIMEOUT) {
             error=wait==WAIT_FAILED ? GetLastError() : ERROR_INVALID_STATE;
             LeaveCriticalSection(state->lock);return error;
         }
-        error=take_presentation(state);
-        if(!error && state->presentation && (state->users || state->admissions)) {
+        if(state->admissions || (state->users && !state->io_released)) {
             DWORD accepted=0;
-            if(!state->presenting) {
+            error=take_presentation(state);
+            if(!error && !state->presenting) {
                 HANDLE output=CreateFileW(L"CONOUT$",GENERIC_READ|GENERIC_WRITE,
                     FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,OPEN_EXISTING,0,NULL);
                 error=output==INVALID_HANDLE_VALUE ? GetLastError() : ntvwm_presentation_begin(state->presentation,output);
                 if(output!=INVALID_HANDLE_VALUE)CloseHandle(output);
                 if(!error) {
                     state->presenting=TRUE;
+                    state->io_released=FALSE;
                     if(!SetEvent(state->admission_ready))error=GetLastError();
                 }
             }
@@ -158,13 +171,6 @@ static DWORD presentation_loop(void *context)
              * Console which has no native consumer during that interval. */
             if(!error && state->users)
                 error=ntvwm_presentation_input(state->presentation,GetStdHandle(STD_INPUT_HANDLE),&accepted);
-            if(error==ERROR_BUSY) {
-                /* DOS requested the shared screen. Publish before releasing,
-                 * then import its final screen before resuming native I/O. */
-                if(state->presenting)error=ntvwm_presentation_end(state->presentation,&state->font);
-                state->presenting=FALSE;ResetEvent(state->admission_ready);
-                if(!error)error=ERROR_NOT_READY;
-            }
             if(!error && state->users)
                 error=ntvwm_presentation_capture(state->presentation,&state->font);
             if(error==ERROR_NOT_READY || error==ERROR_BUSY){
@@ -172,11 +178,8 @@ static DWORD presentation_loop(void *context)
             }
             if(error==ERROR_RETRY)error=0;
         }
-        if(error==ERROR_PIPE_NOT_CONNECTED || error==ERROR_BROKEN_PIPE) {
-            /* A route can fail before the root process exits. Retain its
-             * authenticated identity while dropping only the I/O pipe. */
-            membership_detach_presentation(state);error=0;
-        }
+        /* Unexpected transport failure is not permission to rediscover or
+         * reconnect a frontend. Expected broker release was handled above. */
         LeaveCriticalSection(state->lock);
         if(error)return error;
     }
@@ -210,12 +213,12 @@ static void membership_close(native_membership *state)
     if(state->frontend)CloseHandle(state->frontend);
     if(state->ready)CloseHandle(state->ready);
     if(state->quit)CloseHandle(state->quit);
-    if(state->root)CloseHandle(state->root);
     if(state->capability)CloseHandle(state->capability);
     if(state->stop_requested)CloseHandle(state->stop_requested);
     if(state->closed)CloseHandle(state->closed);
     if(state->admission_ready)CloseHandle(state->admission_ready);
     if(state->shutdown)CloseHandle(state->shutdown);
+    if(state->io_release)CloseHandle(state->io_release);
     ZeroMemory(state,sizeof(*state));
     state->lock=lock;
 }
@@ -243,11 +246,12 @@ static DWORD membership_bind(native_membership *state,HANDLE frontend)
     state->closed=CreateEventW(NULL,TRUE,FALSE,NULL);
     state->admission_ready=CreateEventW(NULL,TRUE,FALSE,NULL);
     if(!state->quit || !state->stop_requested || !state->closed || !state->admission_ready)error=GetLastError();
-    else error=worker_base_retain_frontend_root(frontend,&state->root);
+    else error=ERROR_SUCCESS;
     if(!error && !DuplicateHandle(GetCurrentProcess(),frontend,GetCurrentProcess(),
         &state->capability,SYNCHRONIZE,FALSE,0))error=GetLastError();
     if(!error)error=OpenNtBaseClientRegisterNativeBackend(frontend,state->stop_requested,state->closed);
     if(!error)error=worker_base_shutdown_event(&state->shutdown);
+    if(!error)error=worker_base_io_release_event(&state->io_release);
     if(!error) {
         state->thread=CreateThread(NULL,0,presentation_pump,state,0,NULL);
         if(!state->thread)error=GetLastError();
@@ -277,7 +281,7 @@ int wmain(int argc,WCHAR **argv)
     ntvwm_executions *requests=NULL;
     native_membership membership={0};
     CRITICAL_SECTION io_lock;
-    ntvwm_execution_io io={&membership,begin_io,end_io,release_launch};
+    ntvwm_execution_io io={&membership,begin_io,end_io,release_launch,resume_io};
     (void)argv;
     if(argc!=1)return ERROR_INVALID_PARAMETER;
     InitializeCriticalSection(&io_lock);membership.lock=&io_lock;

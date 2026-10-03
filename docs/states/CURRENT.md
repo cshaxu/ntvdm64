@@ -2,7 +2,9 @@
 
 ## Current Work
 
-**Active: M0 T425 S5, Ordinary Mode.** Naming cleanup verified; awaiting owner T acceptance.
+**Active: M0 T425 S6, Ordinary Mode; delivered, awaiting owner verification.**
+Broker-owned nested I/O handoff is implemented, tested and published. The
+containing reviewed S6 P delivers it; no further implementation S is admitted.
 T425 remains open. S3 P1 ec0cf2b02 is delivered, pushed and published. The owner requests
 continued execution of the full worker-neutral
 frontend objective and the ordered approved plan. Owner closes T424 and admits
@@ -90,29 +92,102 @@ edits are preserved, outside this P. Stop before owner T closure.
 
 | Field | Admitted record |
 | --- | --- |
-| Identifier Mode | M0 T425 S5, Ordinary Mode. |
-| Admission And Approval | Owner: 你看下。如果成立，准入新的S任务修复。 Verified format-only dispatch; admit naming cleanup without changing behavior. |
-| Objective | Name the shared NTCON text/DIB decoder by format, not DOS provenance; update real production caller and tests, retaining all format validation and rendering. |
-| Non-goals | No guest, original mirror or imported library edit; no worker-font/geometry repair, polling cleanup, helper, scheduler, lifecycle policy or T closure. RDP capture root cause remains a separately evidenced physical boundary, not repaired by deleting checks. |
-| Reference Baseline | Delivered S4 d1588a08f; published S3 ec0cf2b02 x86 /MT CCPU40 APP 0.0.425 protocol/RPC36 I/O24 eight-file r004 set and retained S2 recovery. |
-| Files And ABI Surface | NTCON window_frame.c/h, native_console_frontend.c and production-linked frontend_window_library_test.c; adjacent renderer-name sweep. No copied ABI, wire revision, original mirror, guest or library change. |
+| Identifier Mode | M0 T425 S6, Ordinary Mode. |
+| Admission And Approval | Owner: 很好，就按这个逻辑执行。 NTSRV owns frontend/worker associations and all connect/disconnect/takeover control. NTCON retains zero or one physical I/O pipe, no pending owners or worker list; workers retain only their authorized current frontend and local execution state. S5 8936db484 is delivered; T remains open. |
+| Objective | Native CMD root to nested DOS remains interactive; parent resumes only after final-paint/input return, old-pipe closure acknowledgement and NTSRV-authorized reconnection. Both directions use one broker-controlled I/O connection without changing original block/resume/reentry or adding a lease ticket/generation. |
+| Non-goals | No original MVDM/OpenNT-host, guest or imported library edit; no new helper, scheduler, process-tree observation, polling cleanup or T closure. |
+| Reference Baseline | Published S5 8936db484, x86 /MT CCPU40 APP 0.0.425 protocol/RPC36 I/O24 eight-file package, retained S3 recovery. Native-root CAF to DOS reproducer is a newly confirmed regression, not a passed S5 gate. |
+| Files And ABI Surface | NTVWM presentation/execution admission, NTCON channel/ownership, existing NTSRV route/resume control, shared worker client where contracts match, production-linked and real-process tests. Any necessary copied contract change synchronizes protocol/IDL and negative tests. |
 | Applicable Rules | README full authority set, EXECUTION, architecture/coding/document rules, CONTRIBUTING and source policy. |
 | Verification | Atomic publication/tiled rollback, snapshot consistency, optional styles, stale/inactive channels, frame/resource lifetime; both handoff directions and nested return, final-paint and input barriers; x86 affected closure, focused/lifecycle/RPC/version/WOW, Console17/Window17, EDIT/isolation, coherent recoverable eight-file publication. |
-| Expected Markers | Old DOS-specific decoder identifiers absent from production/tests; shared text/DIB decoder tests pass; format bodies and configuration-only handling unchanged. |
-| Asset Needs | Existing source/media and identity-validated incremental cache build/M0-T424/S2/r001; new S5 intermediates only build/M0-T425/S5/r001 or later declared run. No downloads. |
+| Expected Markers | COMMAND executes VER/MEM and returns to interactive CMD. A blocked parent never reacquires early. NTCON has zero/one pipe; associations live only in NTSRV. Normal release does not complete tasks or kill workers. Final-paint/input return and disconnect acknowledgements precede a new connection. |
+| Asset Needs | Existing immutable source/media, validated cache build/M0-T424/S2/r001; S6 intermediates and reports only build/M0-T425/S6/r001 or declared later run. No downloads. |
 | Reporting Requirements | Provenance/current/target ownership ledger, removed branches, exact tests and failures, published hashes; no physical RDP pass invented. |
 | Stop Conditions | Changed original semantics, weakened barriers/authentication/assertions, regression, new helper/component or unapproved shared-library modification. |
-| Exit Criteria | Reviewed naming-only production diff, affected x86 build, decoder and retained runtime gates, coherent recoverable eight-file publication, reviewed S5 commit/push with owned changes committed; preserve unrelated other-session edits. Stop before owner T closure. |
-| Original Owner Request | Text frame、Text configuration、DIB 分流保留格式处理。这是消息格式区别，不是 worker 类型区别。dos_text_frame、frontend_window_dos_frame 等名字仍可清理，行为已按格式选择。你看下。如果成立，准入新的S任务修复。 |
-| Similar-Issue Sweep | Shared frame decode declarations/callers/tests and unused historical native-cell constants; preserve legitimate DOS-original and format-specific names. |
+| Exit Criteria | Root cause and bounded control/ownership disposition, actual source/test repair, affected x86 build and retained runtime gates, coherent recoverable eight-file publication, reviewed S6 commit/push. Preserve other-session changes and stop before owner T closure. |
+| Original Owner Request | run16 cmd -> CAF -> command (expected incompatibility) -> run16 command (resource-in-use dialog, DOS appears but keyboard dead). Fix correct parent/child handoff semantics; review one ownership slot with no competing pending acquisition and NTSRV-managed authority. |
+| Similar-Issue Sweep | Both handoff directions, native parent reentry, same-worker nesting, multiple callers, cancellation, input return/order, final publication barriers and disconnected owners. |
 
 ## Current Technical Baseline
 
-Published tested T425 S5 release at O:/winnt: run16.exe, ntsrv.exe, ntvdm.exe,
+S6 candidate progress: affected x86 targets link with synchronized RPC37/I/O25.
+The production-linked `basesrv-service-reservation-test --io-authority` passes:
+an acquisition cannot evict the current owner, both disconnect acknowledgements
+precede the next grant, and a released parent needs a new execution/resume grant.
+The shared RPC client fixture passes 198 checks with zero handle delta. These
+are focused mechanism results, not real guest/RPC handoff or package acceptance.
+NTCON's production channel no longer queues/retries local ownership acquisition.
+At this early stage full nested/runtime gates remained open and O:/winnt retained S5.
+S6 r002 additionally proves actual CMD input/exit=23 and private-desktop Window
+CMD -> COMMAND -> VER/MEM -> CMD return/exit=23. NTSRV now issues the frontend
+disconnect command and awaits both endpoint acknowledgements. MIDL ACF permits
+serving-thread I/O RPCs alongside blocked native GetNext; idle associations no
+longer pin Console return. Original no-command DOS resume also receives I/O
+authorization without changing its return value. The reproducible
+`verify-broker-io-handoff.ps1 -Case nested-window` r011 probe passes actual
+guest output, parent input return and exit=23 with unchanged runtime hashes.
+Older fixtures now perform authenticated root registration and broker I/O
+acquisition before endpoint validation, without weakening original reentry
+assertions. Fresh r012 passes sixteen authority/reentry/cancellation/completion
+cases, including all five original reentry orderings and WOW boundary checks.
+The unused frontend-local binding-wait API/list is now removed. Cleaned r003
+real channel and frame-failure fixtures pass with stable handles; its actual
+Window nested probe also passes. r003 Console17 passes; Window nested-MEM
+times out reproducibly without diagnostics. r004's temporarily traced worker
+passes Window17, which does not resolve that uninstrumented failure. Temporary
+production tracing is removed. Presentation/input-return fixtures now strictly
+reject I/O activation control and pass 441/688 checks; RPC198 and link ownership
+also pass. Channel stop no longer cancels through a pipe handle its thread may
+already have closed. r006 tests this fix and captures descendant worker stacks
+only after timeout. r007's video-only guard exposes a late state-query failure
+that poisons the disposed client before reconnection. The strict production
+client fixture reproduces error87 before repair. The shared common client now
+returns NOT_READY without mutating unbound transport state, for both workers;
+the same fixture and three uninstrumented r012 Window nested-MEM repeats pass.
+The private video guard and all temporary diagnostics are removed. Final r013
+passes the client fixture, all seven input/presentation fixtures, authority and
+RPC198; Console17 and Window17 both pass in full, including nested-MEM/EDIT.
+Retained EDIT return/relaunch, independent-session close/isolation and all four
+worker/frontend-loss retirement cases pass. A stale monitor RPC fixture caused
+1717 in the first isolation attempt; RPC37 rebuilding and fresh rerun pass.
+r014 rebuilds the VDMREDIR closure, checks the dependency-current WOW graph,
+and stages a fresh coherent eight-product candidate for final package gates.
+RPC11/GUI5 pass after updating two legacy fixtures to real association/admission/
+acquisition order, including rejection before execution authorization. Frozen
+inputs total 284; 47 imported-library inputs remain unchanged. r014 final
+Console17/Window17, five version negatives and strict DIR pass, but all three
+WOW guests exit 1067 before their retained frontier. Isolated WINMINE confirms
+the regression; identical-observer S5 control reaches its prior visible window.
+The new ACQUIRE entry rejected WOW's normal unsupported-character-I/O startup
+probe as ACCESS_DENIED. It now authenticates first and retains NOT_SUPPORTED;
+stale-peer/launcher denials and authenticated WOW fallback assertions are added
+to the production-linked fixture. Affected closure builds; fresh r015 strict
+WOW comparisons against S2/S3/S5 and the new fixture assertions pass. r015
+Console17/Window17 and sixteen service-archive cases pass. Final retained
+RPC11/GUI5/version negatives and modern EDIT return pass. A retained-test
+driver rejects its own Z: broker alias after EDIT; no unrelated process is
+stopped. A fresh driver verifies alias/product identity and reruns remaining
+relaunch/isolation/retirement, DIR and nested handoff gates. Its 284 inputs are freshly sealed,
+47 imported-library inputs unchanged. r014 is not publishable.
+All final prepublication gates now pass, including real nested Window return,
+both-session isolation and four broker fault/retirement cases. The coherent
+r015 S6 eight-file package is published with verified S5 recovery. Published
+12-pair rapid native/DOS and 12 interactive CMD relaunches, cooked outer-CMD
+return and GUI startup/wait smoke all pass with unchanged eight-file hashes.
+Final source/diff and requirement review pass; the containing reviewed S6 P
+delivers this repair. Other-session Queue/proposal edits remain outside this P.
+T425 remains open for owner verification; no next S is admitted. The
+[S6 candidate ledger](../etc/evidence/m0-t425-s6-broker-io-ownership.md) records
+source disposition, failed predecessors and remaining full-package gates.
+Earlier partial reports are not release proof; r015's final full-package and
+publication evidence now certifies the bounded S6 implementation.
+
+Published tested T425 S6 release at O:/winnt: run16.exe, ntsrv.exe, ntvdm.exe,
 ntvwm.exe, ntcon.exe, ntmon.exe, WOW32.DLL, VDMREDIR.DLL. APP 0.0.425,
-protocol/RPC36 I/O24, MSVC Win32/x86 /MT CCPU40. Exact release/recovery hashes,
-Console17/Window17 and retained limits are in the S5 ledger; recovery is S3.
-Only NTCON changed from S3, with identifier-only decoder/caller edits. The prior
+protocol/RPC37 I/O25, MSVC Win32/x86 /MT CCPU40. Exact release/recovery hashes,
+Console17/Window17 and retained limits are in the S6 ledger; recovery is S5.
+NTCON, worker-base and project worker/service adapters implement broker-owned
+connection grants and both-end closure; original execution stays unchanged. The prior
 [S12 ledger](../etc/evidence/m0-t424-s12-logical-surface.md) remains the
 accepted T424 recovery baseline.
 [S13](../etc/evidence/m0-t424-s13-final-audit.md) indexes all thirteen stages.

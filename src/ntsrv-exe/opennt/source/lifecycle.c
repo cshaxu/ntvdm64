@@ -124,7 +124,9 @@ DWORD OpenNtBaseServiceFrontendUsage(OPENNT_BASE_CONNECTION *root,DWORD pid,
     for(link=root->service->frontend_routes.Flink;link!=&root->service->frontend_routes;link=link->Flink){
         OPENNT_FRONTEND_ROUTE *route=CONTAINING_RECORD(link,OPENNT_FRONTEND_ROUTE,link);
         if(route->root!=root || WaitForSingleObject(route->worker,0)!=WAIT_TIMEOUT)continue;
-        if(!route->delivered)pending_count=1;
+        /* Resident association survives a closed I/O pipe. Only an admitted,
+         * not-yet-delivered connection pins the Console-return barrier. */
+        if(route->io_requested && !route->delivered)pending_count=1;
         for(watch_link=root->service->worker_watches.Flink;watch_link!=&root->service->worker_watches;watch_link=watch_link->Flink){
             OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(watch_link,OPENNT_BASE_WORKER_WATCH,link);
             PCONSOLERECORD console;

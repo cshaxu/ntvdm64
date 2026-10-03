@@ -395,16 +395,12 @@ done:
     LeaveCriticalSection(&client->lock);return error;
 }
 
-static DWORD activate_presentation(ntvwm_presentation *client,BOOL active)
-{
-    return ntcon_worker_activate(&client->channel,active);
-}
 DWORD ntvwm_presentation_begin(ntvwm_presentation *client,HANDLE output)
 {
     DWORD error;
     if(!client || !output || output==INVALID_HANDLE_VALUE)return ERROR_INVALID_PARAMETER;
     EnterCriticalSection(&client->lock);
-    error=activate_presentation(client,TRUE);
+    error=ERROR_SUCCESS; /* NTSRV granted the connected transport already. */
     if(!error) {
         error=ntvwm_presentation_seed(client,output);
         if(!error) {
@@ -413,7 +409,6 @@ DWORD ntvwm_presentation_begin(ntvwm_presentation *client,HANDLE output)
             request.state.mode=ENABLE_WINDOW_INPUT|ENABLE_MOUSE_INPUT|ENABLE_EXTENDED_FLAGS;
             error=exchange(client,&request,&reply);
         }
-        if(error)(void)activate_presentation(client,FALSE);
     }
     LeaveCriticalSection(&client->lock);return error;
 }
@@ -448,7 +443,7 @@ static DWORD return_unused_input(ntvwm_presentation *client)
 }
 DWORD ntvwm_presentation_end(ntvwm_presentation *client,const console_text_style *font)
 {
-    console_io_request request={0};console_io_reply reply;DWORD error,released,attempt;
+    console_io_request request={0};console_io_reply reply;DWORD error,attempt;
     if(!client || !font)return ERROR_INVALID_PARAMETER;
     EnterCriticalSection(&client->lock);
     {
@@ -469,7 +464,6 @@ DWORD ntvwm_presentation_end(ntvwm_presentation *client,const console_text_style
         request.operation=CONSOLE_IO_BARRIER;
         error=exchange(client,&request,&reply);
     }
-    released=activate_presentation(client,FALSE);
     client->title_valid=FALSE;
-    LeaveCriticalSection(&client->lock);return error ? error : released;
+    LeaveCriticalSection(&client->lock);return error;
 }

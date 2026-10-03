@@ -61,30 +61,6 @@ static DWORD test_bind(run16_native_frontend *frontend,const void *owner,BOOL ac
     }
     return error;
 }
-typedef struct binding_wait_case {
-    const void *owner;
-    HANDLE cancel,started;
-    HANDLE peer;
-    DWORD result;
-    DWORD timeout;
-    BOOL prepare_vga;
-} binding_wait_case;
-static DWORD WINAPI wait_for_binding(void *context)
-{
-    binding_wait_case *test=context;
-    HANDLE wait_peer=test->peer;
-    /* Production channels own a real worker process handle. The process
-     * pseudo-handle is not a valid member of this multi-object wait set. */
-    if(!wait_peer)CHECK(DuplicateHandle(GetCurrentProcess(),GetCurrentProcess(),
-        GetCurrentProcess(),&wait_peer,SYNCHRONIZE,FALSE,0));
-    CHECK(test_bind(test_frontend,test->owner,TRUE,test->prepare_vga)==ERROR_BUSY);
-    CHECK(SetEvent(test->started));
-    test->result=run16_native_frontend_wait_ready(test_frontend,test->owner,
-        test->cancel,wait_peer,test->timeout ? test->timeout : 10000);
-    if(test->result)run16_native_frontend_cancel_pending(test_frontend,test->owner);
-    if(!test->peer)CloseHandle(wait_peer);
-    return 0;
-}
 /* Diagnostic-only self-process snapshot; never enters a product binary. */
 static void audit_handles(const char *stage)
 {
@@ -1241,164 +1217,49 @@ int main(int argc,char **argv)
     CHECK(GetProcessHandleCount(GetCurrentProcess(),&after));
     printf("channel handles before=%lu after=%lu\n",before,after);
     CHECK(after==before);
+    /* Connection waiting, cancellation and peer-death arbitration belong to
+     * NTSRV (production-linked --io-authority and frontend-wait cases).
+     * The frontend has no waiting owners: conflicting binds fail immediately
+     * and cannot alter the current channel or consume its queued input. */
     {
-        unsigned iteration;
-        for(iteration=0;iteration<32;++iteration) {
-            binding_wait_case test={0};HANDLE waiter;
-            test.owner=&after;
-            test.prepare_vga=(iteration&1)!=0;
-            test.cancel=CreateEventW(NULL,TRUE,FALSE,NULL);
-            test.started=CreateEventW(NULL,TRUE,FALSE,NULL);
-            CHECK(test.cancel && test.started);
-            CHECK(!test_bind(test_frontend,&before,TRUE,(iteration&2)!=0));
-            waiter=CreateThread(NULL,0,wait_for_binding,&test,0,NULL);
-            CHECK(waiter && WaitForSingleObject(test.started,1000)==WAIT_OBJECT_0);
-            CHECK(SetEvent(test.cancel));
-            CHECK(WaitForSingleObject(waiter,1000)==WAIT_OBJECT_0);
-            CHECK(test.result==ERROR_OPERATION_ABORTED);
-            CHECK(!test_bind(test_frontend,&before,FALSE,FALSE));
-            /* Cancellation never reserves or retires either channel kind. */
-            CHECK(!test_bind(test_frontend,&round,TRUE,TRUE));
-            CHECK(!test_bind(test_frontend,&round,FALSE,TRUE));
-            CloseHandle(waiter);CloseHandle(test.cancel);CloseHandle(test.started);
-        }
-    }
-    {
-        unsigned pattern;
+        unsigned pattern,iteration;
         for(pattern=0;pattern<4;++pattern) {
-            binding_wait_case test={0};HANDLE waiter;
             INPUT_RECORD queued={0},received={0};DWORD read=0;
             unsigned previous=0,incoming=0,unrelated=0;
-            test.owner=&incoming;test.prepare_vga=(pattern&1)!=0;
-            test.cancel=CreateEventW(NULL,TRUE,FALSE,NULL);
-            test.started=CreateEventW(NULL,TRUE,FALSE,NULL);
-            CHECK(test.cancel && test.started);
             CHECK(!test_bind(test_frontend,&previous,TRUE,(pattern&2)!=0));
             CHECK(!run16_native_frontend_enter(test_frontend,&previous));
             queued.EventType=KEY_EVENT;queued.Event.KeyEvent.wVirtualKeyCode='Q';
             CHECK(!run16_native_frontend_prepend(test_frontend,&queued,1));
+            queued.Event.KeyEvent.wVirtualKeyCode='R';
+            CHECK(!run16_native_frontend_prepend(test_frontend,&queued,1));
             run16_native_frontend_leave(test_frontend);
-            waiter=CreateThread(NULL,0,wait_for_binding,&test,0,NULL);
-            CHECK(waiter && WaitForSingleObject(test.started,1000)==WAIT_OBJECT_0);
-            CHECK(WaitForSingleObject(waiter,0)==WAIT_TIMEOUT);
-            CHECK(!run16_native_frontend_enter(test_frontend,&previous));
-            {
-                DWORD result=run16_native_frontend_read(test_frontend,FALSE,&received,1,&read);
-                if(result!=ERROR_BUSY || read)fprintf(private_report ? private_report : stderr,
-                    "pending read result=%lu read=%lu waiter-result=%lu pattern=%u\n",result,read,test.result,pattern);
-                CHECK(result==ERROR_BUSY && !read);
+            for(iteration=0;iteration<32;++iteration) {
+                CHECK(test_bind(test_frontend,&incoming,TRUE,(pattern&1)!=0)==ERROR_BUSY);
+                CHECK(test_bind(test_frontend,&unrelated,TRUE,FALSE)==ERROR_BUSY);
+                CHECK(test_bind(test_frontend,&incoming,FALSE,FALSE)==ERROR_BUSY);
+                CHECK(run16_native_frontend_enter(test_frontend,&incoming)==ERROR_NOT_READY);
             }
-            CHECK(!run16_native_frontend_read(test_frontend,TRUE,&received,1,&read) && read==1);
-            run16_native_frontend_leave(test_frontend);
-            CHECK(run16_native_frontend_enter(test_frontend,&incoming)==ERROR_NOT_READY);
-            CHECK(test_bind(test_frontend,&unrelated,TRUE,FALSE)==ERROR_BUSY);
             run16_native_frontend_forget(test_frontend,&unrelated);
             CHECK(!run16_native_frontend_enter(test_frontend,&previous));
+            CHECK(!run16_native_frontend_read(test_frontend,FALSE,&received,1,&read) &&
+                read==1 && received.Event.KeyEvent.wVirtualKeyCode=='R');
+            CHECK(!run16_native_frontend_read(test_frontend,TRUE,&received,1,&read) &&
+                read==1 && received.Event.KeyEvent.wVirtualKeyCode=='Q');
             run16_native_frontend_leave(test_frontend);
             CHECK(!test_bind(test_frontend,&previous,FALSE,FALSE));
-            {
-                DWORD wait=WaitForSingleObject(waiter,1000);
-                if(wait!=WAIT_OBJECT_0 || test.result)fprintf(private_report ? private_report : stderr,
-                    "pending release wait=%lu result=%lu pattern=%u\n",wait,test.result,pattern);
-                CHECK(wait==WAIT_OBJECT_0 && !test.result);
-            }
-            CHECK(!test_bind(test_frontend,&incoming,TRUE,test.prepare_vga));
+            CHECK(!test_bind(test_frontend,&incoming,TRUE,(pattern&1)!=0));
             CHECK(!run16_native_frontend_enter(test_frontend,&incoming));
             CHECK(!run16_native_frontend_read(test_frontend,FALSE,&received,1,&read) &&
                 read==1 && received.Event.KeyEvent.wVirtualKeyCode=='Q');
             run16_native_frontend_leave(test_frontend);
             CHECK(run16_native_frontend_enter(test_frontend,&previous)==ERROR_NOT_READY);
             CHECK(!test_bind(test_frontend,&incoming,FALSE,FALSE));
-            CloseHandle(waiter);CloseHandle(test.cancel);CloseHandle(test.started);
         }
-        fprintf(private_report ? private_report : stdout,"PASS four operation-pair handoffs: pending registration, old-owner barrier, ordered input, stale isolation and release notification\n");
+        CHECK(GetProcessHandleCount(GetCurrentProcess(),&after));
+        CHECK(after==before);
+        fprintf(private_report ? private_report : stdout,
+            "PASS sole-channel binding: immediate conflict rejection, ordered input, stale isolation and stable handles=%lu\n",after);
     }
-    {
-        unsigned cancel_request;
-        for(cancel_request=0;cancel_request<3;++cancel_request) {
-            unsigned old_owner=0,first=0,second=0;
-            binding_wait_case waiting[2]={{0}};HANDLE threads[2];unsigned index;
-            CHECK(!test_bind(test_frontend,&old_owner,TRUE,FALSE));
-            for(index=0;index<2;++index) {
-                waiting[index].owner=index ? (const void *)&second : (const void *)&first;
-                waiting[index].prepare_vga=index!=0;
-                waiting[index].cancel=CreateEventW(NULL,TRUE,FALSE,NULL);
-                waiting[index].started=CreateEventW(NULL,TRUE,FALSE,NULL);
-                CHECK(waiting[index].cancel && waiting[index].started);
-                threads[index]=CreateThread(NULL,0,wait_for_binding,&waiting[index],0,NULL);
-                CHECK(threads[index] && WaitForSingleObject(waiting[index].started,1000)==WAIT_OBJECT_0);
-                CHECK(WaitForSingleObject(threads[index],0)==WAIT_TIMEOUT);
-            }
-            /* Repeating an acquisition cannot create a second pending node. */
-            CHECK(test_bind(test_frontend,&first,TRUE,FALSE)==ERROR_BUSY);
-            if(cancel_request) {
-                unsigned cancelled=cancel_request-1;
-                CHECK(SetEvent(waiting[cancelled].cancel));
-                CHECK(WaitForSingleObject(threads[cancelled],1000)==WAIT_OBJECT_0 &&
-                    waiting[cancelled].result==ERROR_OPERATION_ABORTED);
-                /* Removing either request preserves the other and active A. */
-                CHECK(WaitForSingleObject(threads[1-cancelled],0)==WAIT_TIMEOUT);
-                CHECK(!run16_native_frontend_enter(test_frontend,&old_owner));
-                run16_native_frontend_leave(test_frontend);
-            }
-            CHECK(!test_bind(test_frontend,&old_owner,FALSE,FALSE));
-            CHECK(run16_native_frontend_park(test_frontend)==ERROR_BUSY);
-            if(cancel_request!=1) {
-                CHECK(WaitForSingleObject(threads[0],1000)==WAIT_OBJECT_0 && !waiting[0].result);
-                if(!cancel_request)CHECK(WaitForSingleObject(threads[1],0)==WAIT_TIMEOUT);
-                CHECK(!test_bind(test_frontend,&first,TRUE,FALSE));
-                if(!cancel_request)CHECK(WaitForSingleObject(threads[1],0)==WAIT_TIMEOUT);
-                CHECK(!test_bind(test_frontend,&first,FALSE,FALSE));
-            }
-            if(cancel_request!=2) {
-                CHECK(WaitForSingleObject(threads[1],1000)==WAIT_OBJECT_0 && !waiting[1].result);
-                CHECK(!test_bind(test_frontend,&second,TRUE,TRUE));
-                CHECK(!test_bind(test_frontend,&second,FALSE,FALSE));
-            }
-            CHECK(!run16_native_frontend_park(test_frontend));
-            for(index=0;index<2;++index) {
-                CloseHandle(threads[index]);CloseHandle(waiting[index].cancel);CloseHandle(waiting[index].started);
-            }
-        }
-        fprintf(private_report ? private_report : stdout,"PASS multiple pending channels: ordered acquisition, deduplicated requests, independent head/tail cancellation and pending park barrier\n");
-    }
-    {
-        unsigned failure;
-        for(failure=0;failure<2;++failure) {
-            unsigned old_owner=0,incoming=0,next=0;
-            binding_wait_case test={0};HANDLE waiter;
-            PROCESS_INFORMATION child={0};STARTUPINFOW startup={sizeof(startup)};
-            WCHAR image[MAX_PATH],command[MAX_PATH+32];
-            test.owner=&incoming;test.timeout=failure ? 10000 : 100;
-            test.cancel=CreateEventW(NULL,TRUE,FALSE,NULL);
-            test.started=CreateEventW(NULL,TRUE,FALSE,NULL);
-            CHECK(test.cancel && test.started);
-            if(failure) {
-                CHECK(GetModuleFileNameW(NULL,image,MAX_PATH));
-                CHECK(swprintf_s(command,MAX_PATH+32,L"\"%s\" --worker-wait",image)>0);
-                CHECK(CreateProcessW(image,command,NULL,NULL,FALSE,CREATE_SUSPENDED,
-                    NULL,NULL,&startup,&child));
-                test.peer=child.hProcess;
-            }
-            CHECK(!test_bind(test_frontend,&old_owner,TRUE,FALSE));
-            waiter=CreateThread(NULL,0,wait_for_binding,&test,0,NULL);
-            CHECK(waiter && WaitForSingleObject(test.started,1000)==WAIT_OBJECT_0);
-            if(failure)CHECK(TerminateProcess(child.hProcess,123));
-            CHECK(WaitForSingleObject(waiter,2000)==WAIT_OBJECT_0);
-            CHECK(test.result==(DWORD)(failure ? ERROR_BROKEN_PIPE : ERROR_TIMEOUT));
-            CHECK(!run16_native_frontend_enter(test_frontend,&old_owner));
-            run16_native_frontend_leave(test_frontend);
-            CHECK(!test_bind(test_frontend,&old_owner,FALSE,FALSE));
-            CHECK(!test_bind(test_frontend,&next,TRUE,FALSE));
-            CHECK(!test_bind(test_frontend,&next,FALSE,FALSE));
-            CloseHandle(waiter);CloseHandle(test.cancel);CloseHandle(test.started);
-            if(child.hProcess){CloseHandle(child.hThread);CloseHandle(child.hProcess);}
-        }
-        fprintf(private_report ? private_report : stdout,"PASS pending timeout and real peer death remove only their request and preserve active/replacement channel\n");
-    }
-    CHECK(GetProcessHandleCount(GetCurrentProcess(),&after));
-    CHECK(after==before);
-    fprintf(private_report ? private_report : stdout,"PASS pending wait/cancel/acquire/peer-death handle count remains %lu\n",after);
     {
         DWORD caller_mode,worker_mode,observed;
         CHECK(GetConsoleMode(input,&caller_mode));
@@ -1446,7 +1307,7 @@ int main(int argc,char **argv)
     puts("PASS all nested channels retain canonical K while active surface is A; private handle copies survive frontend teardown");
     puts("PASS ordinary teardown retains the final 80x25/80x28 DOS grid and cursor; restores canonical buffer, input mode and cursor shape");
     puts("PASS stopped presentation owner rejects handoff without waiting for execution or restarting a helper");
-    puts("PASS 32 canceled DOS binding waits: no lost stop wake and no pending-owner leak");
+    puts("PASS conflicting channel binds cannot preempt the sole owner or create waiting owners");
     puts("PASS borrowed frontend park twice: caller input mode restored, resident worker binding resumes its prior mode");
     if(private_report) {fprintf(private_report,"PASS private Console handoff fixture\n");fclose(private_report);}
     return 0;

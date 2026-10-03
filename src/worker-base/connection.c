@@ -1,5 +1,6 @@
 #include "connection.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
+#include "common/protocol/frontend_protocol.h"
 
 /* Existing NTVDM bootstrap ordering. No launcher admission, frontend ownership
  * or DOS/native execution policy lives here. The service owns authentication. */
@@ -22,18 +23,33 @@ DWORD worker_base_shutdown_event(HANDLE *shutdown)
     return OpenNtBaseClientWorkerShutdownEvent(shutdown);
 }
 
-DWORD worker_base_retain_frontend_root(HANDLE capability,HANDLE *process)
+DWORD worker_base_io_release_event(HANDLE *release)
 {
-    DWORD generation,error;
-    if(!process)return ERROR_INVALID_PARAMETER;
-    *process=NULL;
-    if(!capability || capability==INVALID_HANDLE_VALUE)return ERROR_INVALID_HANDLE;
-    error=OpenNtBaseClientRetainFrontendRoot(capability,process,&generation);
+    return OpenNtBaseClientWorkerIoReleaseEvent(release);
+}
+
+DWORD worker_base_io_open(HANDLE *pipe,HANDLE *peer,HANDLE *ready,DWORD *generation)
+{
+    DWORD error;
+    if(!pipe || !peer || !ready || !generation || *pipe || *peer || *ready)
+        return ERROR_INVALID_PARAMETER;
+    error=OpenNtBaseClientWorkerIoTransition(WORKER_IO_ACQUIRE);
     if(error)return error;
-    if(!*process || WaitForSingleObject(*process,0)!=WAIT_TIMEOUT) {
-        if(*process)CloseHandle(*process);
-        *process=NULL;
-        return ERROR_PIPE_NOT_CONNECTED;
-    }
-    return ERROR_SUCCESS;
+    error=OpenNtBaseClientWaitFrontend(pipe,peer,generation,ready);
+    /* A failed granted connection is an infrastructure failure. Never claim
+     * release acknowledgement without both endpoints actually closing. */
+    return error;
+}
+DWORD worker_base_io_close(HANDLE *pipe,HANDLE *peer,HANDLE *ready)
+{
+    DWORD error;
+    if(!pipe || !peer || !ready || !*pipe)return ERROR_INVALID_PARAMETER;
+    error=OpenNtBaseClientWorkerIoTransition(WORKER_IO_RELEASE_BEGIN);
+    if(error)return error;
+    if(*pipe)CloseHandle(*pipe);
+    if(*peer)CloseHandle(*peer);
+    if(*ready)CloseHandle(*ready);
+    *pipe=*peer=*ready=NULL;
+    error=OpenNtBaseClientWorkerIoTransition(WORKER_IO_RELEASED);
+    return error;
 }

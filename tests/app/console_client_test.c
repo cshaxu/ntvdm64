@@ -40,6 +40,8 @@ static BOOL native_set_display(HANDLE h,DWORD flags,COORD *size)
 static session owner;
 static __declspec(thread) session *bound;
 static HANDLE delivery,peer,stop,readiness,frontend_process;
+static HANDLE server_thread;
+static void create_transport(void);
 static HANDLE broker_shutdown;
 static session_teardown_fn cleanup;
 static void *cleanup_context;
@@ -88,13 +90,6 @@ DWORD OpenNtBaseClientWorkerFrontendCapability(HANDLE *capability)
     *capability=CreateEventW(NULL,TRUE,FALSE,NULL);
     return *capability ? ERROR_SUCCESS : GetLastError();
 }
-DWORD worker_base_retain_frontend_root(HANDLE capability,HANDLE *process)
-{
-    CHECK(capability!=NULL && process!=NULL);
-    /* The broker's authenticated root retention is covered by RPC tests. */
-    return DuplicateHandle(GetCurrentProcess(),frontend_process,GetCurrentProcess(),
-        process,SYNCHRONIZE,FALSE,0) ? ERROR_SUCCESS : GetLastError();
-}
 DWORD worker_base_shutdown_event(HANDLE *shutdown)
 {
     CHECK(shutdown!=NULL);
@@ -122,6 +117,7 @@ int session_register_teardown(session *instance,session_teardown_fn function,voi
 }
 DWORD OpenNtBaseClientWaitFrontend(HANDLE *pipe,HANDLE *process,DWORD *generation,HANDLE *ready)
 {
+    if(readiness)CloseHandle(readiness);
     readiness=CreateEventW(NULL,TRUE,FALSE,NULL);
     CHECK(readiness);
     CHECK(DuplicateHandle(GetCurrentProcess(),readiness,GetCurrentProcess(),ready,
@@ -129,6 +125,24 @@ DWORD OpenNtBaseClientWaitFrontend(HANDLE *pipe,HANDLE *process,DWORD *generatio
     *pipe=delivery;delivery=NULL;*generation=17;
     CHECK(DuplicateHandle(GetCurrentProcess(),frontend_process,GetCurrentProcess(),process,
         SYNCHRONIZE,FALSE,0));
+    return ERROR_SUCCESS;
+}
+DWORD worker_base_io_open(HANDLE *pipe,HANDLE *process,HANDLE *ready,DWORD *generation)
+{
+    DWORD error=bind_dos(NULL,TRUE);
+    if(error)return error;
+    if(!delivery)create_transport();
+    return OpenNtBaseClientWaitFrontend(pipe,process,generation,ready);
+}
+DWORD worker_base_io_close(HANDLE *pipe,HANDLE *process,HANDLE *ready)
+{
+    DWORD error=bind_dos(NULL,FALSE);
+    if(error)return error;
+    CHECK(*pipe && *process && *ready);
+    CloseHandle(*pipe);CloseHandle(*process);CloseHandle(*ready);
+    *pipe=*process=*ready=NULL;
+    CHECK(WaitForSingleObject(server_thread,5000)==WAIT_OBJECT_0);
+    CloseHandle(server_thread);server_thread=NULL;
     return ERROR_SUCCESS;
 }
 static BOOL transfer(BOOL write,void *buffer,DWORD size)
@@ -156,10 +170,22 @@ static DWORD WINAPI serve(void *unused)
     }
     CloseHandle(peer);return 0;
 }
-int main(int argc,char **argv)
+static void create_transport(void)
 {
     WCHAR name[96];
-    HANDLE local,thread;
+    static DWORD instance;
+    swprintf_s(name,ARRAYSIZE(name),L"\\\\.\\pipe\\ntvdm-console-fixture-%lu-%lu",GetCurrentProcessId(),++instance);
+    delivery=CreateNamedPipeW(name,PIPE_ACCESS_DUPLEX|FILE_FLAG_OVERLAPPED|FILE_FLAG_FIRST_PIPE_INSTANCE,
+        PIPE_TYPE_BYTE|PIPE_WAIT|PIPE_REJECT_REMOTE_CLIENTS,1,32768,32768,0,NULL);
+    CHECK(delivery!=INVALID_HANDLE_VALUE);
+    peer=CreateFileW(name,GENERIC_READ|GENERIC_WRITE,0,NULL,OPEN_EXISTING,0,NULL);
+    CHECK(peer!=INVALID_HANDLE_VALUE);
+    frontend.sequence=0;
+    server_thread=CreateThread(NULL,0,serve,NULL,0,NULL);CHECK(server_thread);
+}
+int main(int argc,char **argv)
+{
+    HANDLE local;
     CONSOLE_SCREEN_BUFFER_INFO info;
     CONSOLE_CURSOR_INFO cursor={20,FALSE},actual;
     COORD p={2,1};
@@ -202,14 +228,8 @@ int main(int argc,char **argv)
     CHECK(local!=INVALID_HANDLE_VALUE && frontend.output!=INVALID_HANDLE_VALUE &&
         frontend.input!=INVALID_HANDLE_VALUE);
     CHECK(SetConsoleActiveScreenBuffer(frontend.output));
-    swprintf_s(name,96,L"\\\\.\\pipe\\ntvdm-console-fixture-%lu",GetCurrentProcessId());
-    delivery=CreateNamedPipeW(name,PIPE_ACCESS_DUPLEX|FILE_FLAG_OVERLAPPED|FILE_FLAG_FIRST_PIPE_INSTANCE,
-        PIPE_TYPE_BYTE|PIPE_WAIT|PIPE_REJECT_REMOTE_CLIENTS,1,32768,32768,0,NULL);
-    CHECK(delivery!=INVALID_HANDLE_VALUE);
-    peer=CreateFileW(name,GENERIC_READ|GENERIC_WRITE,0,NULL,OPEN_EXISTING,0,NULL);
-    CHECK(peer!=INVALID_HANDLE_VALUE);
     stop=CreateEventW(NULL,TRUE,FALSE,NULL);CHECK(stop);
-    thread=CreateThread(NULL,0,serve,NULL,0,NULL);CHECK(thread);
+    create_transport();
     CHECK(!ntvdm_console_client_begin(&owner));bound=&owner;
     {
         mvdm_mouse_bridge *mouse=mvdm_softpc_mouse_current();
@@ -222,6 +242,26 @@ int main(int argc,char **argv)
         bind_error=ERROR_SUCCESS;
         CHECK(ntvdm_console_set_active(FALSE) && !dos_active);
         CHECK(!mouse->submitted && !mouse->active && !mouse->queue.count);
+        {
+            console_text_style style={0};
+            console_video_description description={0};
+            DWORD serial=frontend.video.serial;
+            style.font_height=16;
+            description.kind=CONSOLE_VIDEO_TEXT_CONFIGURATION;
+            description.bytes=sizeof(style);
+            CHECK(!ntvdm_console_publish_video(&description,&style,sizeof(style)) &&
+                GetLastError()==ERROR_NOT_READY);
+            CHECK(!ntvdm_console_publish_video(NULL,NULL,0) &&
+                GetLastError()==ERROR_NOT_READY);
+            CHECK(!ntvdm_console_publish_video(&description,NULL,0) &&
+                GetLastError()==ERROR_INVALID_PARAMETER);
+            {
+                LONG values[4]={0};
+                CHECK(!ntvdm_console_window_query(CONSOLE_WINDOW_TEXT_FRAME_REQUIRED,values) &&
+                    GetLastError()==ERROR_NOT_READY);
+            }
+            CHECK(frontend.video.serial==serial && !dos_active);
+        }
         CHECK(ntvdm_console_set_active(TRUE) && dos_active && !mouse->submitted);
         CHECK(ntvdm_console_set_active(FALSE) && !dos_active);
         prepare_error=ERROR_NOT_ENOUGH_MEMORY;
@@ -830,8 +870,8 @@ disconnected:
     }
     cleanup(cleanup_context);bound=NULL;
     CHECK(!owner.console_client);
-    CHECK(WaitForSingleObject(thread,5000)==WAIT_OBJECT_0);
-    CloseHandle(thread);CloseHandle(stop);CloseHandle(local);CloseHandle(frontend.output);CloseHandle(frontend.input);
+    CHECK(WaitForSingleObject(server_thread,5000)==WAIT_OBJECT_0);
+    CloseHandle(server_thread);CloseHandle(stop);CloseHandle(local);CloseHandle(frontend.output);CloseHandle(frontend.input);
     CloseHandle(readiness);CloseHandle(frontend_process);CloseHandle(broker_shutdown);
     puts("PASS client transport, distinct frontend ownership, native error and idle frontend loss");
     return 0;

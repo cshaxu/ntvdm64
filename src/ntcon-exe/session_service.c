@@ -3,15 +3,11 @@
 #include "common/console/members.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
 #include <stdio.h>
-typedef struct frontend_channel {
-    struct frontend_channel *next;
-    run16_console_channel *channel;
-} frontend_channel;
 struct frontend_session_service {
     HANDLE notification,stop,thread,retire,state_changed;
     HANDLE creator,console_anchor;
     BOOL retire_requested,creator_exited;
-    frontend_channel *channels;
+    run16_console_channel *channel;
     run16_native_frontend *native;
     void (*channel_ready)(void);
 };
@@ -48,7 +44,7 @@ static DWORD next_console_anchor(HANDLE *anchor)
 static DWORD WINAPI frontend_pump(void *context)
 {
     frontend_session_service *scope=context;
-    HANDLE waits[6];
+    HANDLE waits[7];
     DWORD error=ERROR_SUCCESS;
     for (;;) {
         DWORD wait_count=0,retire_index=MAXDWORD,creator_index=MAXDWORD,
@@ -61,6 +57,7 @@ static DWORD WINAPI frontend_pump(void *context)
         if(scope->creator && !scope->creator_exited) { creator_index=wait_count;waits[wait_count++]=scope->creator; }
         if(scope->console_anchor) { anchor_index=wait_count;waits[wait_count++]=scope->console_anchor; }
         if(scope->state_changed) waits[wait_count++]=scope->state_changed;
+        if(scope->channel)waits[wait_count++]=run16_console_channel_thread(scope->channel);
         wait=WaitForMultipleObjects(wait_count,waits,FALSE,INFINITE);
         if (wait==WAIT_OBJECT_0) break;
         if (wait<WAIT_OBJECT_0 || wait>=WAIT_OBJECT_0+wait_count) {
@@ -103,35 +100,39 @@ static DWORD WINAPI frontend_pump(void *context)
         for (;;) {
             HANDLE worker=NULL;
             DWORD request=0;
-            frontend_channel *entry;
-            frontend_channel **link=&scope->channels;
             if (WaitForSingleObject(scope->stop,0)==WAIT_OBJECT_0) return ERROR_SUCCESS;
-            /* This pump alone owns the list. Retire only joined channels;
-             * live workers and their task lifetimes are not affected. */
-            while ((entry=*link)!=NULL) {
-                if (WaitForSingleObject(run16_console_channel_thread(entry->channel),0)==WAIT_OBJECT_0) {
-                    error=run16_console_channel_stop(entry->channel);
-                    if(error)return error;
-                    *link=entry->next;
-                    HeapFree(GetProcessHeap(),0,entry);
-                } else link=&entry->next;
-            }
             error=OpenNtBaseClientFrontendRequest(&request,&worker);
-            if (error==ERROR_NOT_FOUND) break;
-            if (error) return error;
+            if(error==ERROR_NOT_FOUND) {
+                /* EOF is a transport failure unless NTSRV has authorized
+                 * release. It cannot itself choose the next logical owner. */
+                if(scope->channel && WaitForSingleObject(
+                    run16_console_channel_thread(scope->channel),0)==WAIT_OBJECT_0)
+                    return ERROR_PIPE_NOT_CONNECTED;
+                break;
+            }
+            if(error)return error;
+            if(!request && !worker) {
+                /* NTSRV orders the endpoint closed after final I/O. Joining
+                 * and disposal precede our acknowledgement, never vice versa. */
+                error=run16_console_channel_stop(scope->channel);
+                if(error)return error;
+                scope->channel=NULL;
+                error=OpenNtBaseClientFrontendIoDisconnected();
+                if(error)return error;
+                continue;
+            }
+            if(!request || !worker || scope->channel) {
+                if(worker)CloseHandle(worker);
+                return ERROR_INVALID_STATE;
+            }
             if(!scope->native) {
                 error=run16_native_frontend_create(&scope->native);
                 if(error){CloseHandle(worker);return error;}
             }
-            entry=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*entry));
-            if (!entry) { CloseHandle(worker);return ERROR_NOT_ENOUGH_MEMORY; }
-            error=run16_console_channel_start_request(request,worker,scope->native,&entry->channel);
+            error=run16_console_channel_start_request(request,worker,scope->native,&scope->channel);
             if (error) {
-                HeapFree(GetProcessHeap(),0,entry);
-                if (error==ERROR_ALREADY_EXISTS) continue;
                 return error;
             }
-            entry->next=scope->channels;scope->channels=entry;
             if (scope->channel_ready) scope->channel_ready();
         }
         if(scope->native && ((scope->creator && scope->creator_exited) ||
@@ -162,7 +163,6 @@ static DWORD WINAPI frontend_pump(void *context)
 
 DWORD frontend_service_close(frontend_session_service *scope)
 {
-    frontend_channel *entry;
     DWORD error=ERROR_SUCCESS;
     if (!scope) return ERROR_SUCCESS;
     if (scope->stop) SetEvent(scope->stop);
@@ -171,11 +171,10 @@ DWORD frontend_service_close(frontend_session_service *scope)
         WaitForSingleObject(scope->thread,INFINITE);
         CloseHandle(scope->thread);
     }
-    while ((entry=scope->channels)!=NULL) {
-        error=run16_console_channel_stop(entry->channel);
+    if(scope->channel) {
+        error=run16_console_channel_stop(scope->channel);
         if(error)return error;
-        scope->channels=entry->next;
-        HeapFree(GetProcessHeap(),0,entry);
+        scope->channel=NULL;
     }
     error=run16_native_frontend_destroy(scope->native);
     /* A failed teardown deliberately retains the native object and its

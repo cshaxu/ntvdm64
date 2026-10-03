@@ -8,6 +8,25 @@ NTCON renderer or modifying guest/shared-library code.
 
 ## Product boundary
 
+### Broker-controlled single I/O connection — T425 S6 delivery
+
+Owner-approved S6 replaces the frontend pending-owner policy with one
+NTSRV-controlled connection. NTSRV alone retains logical frontend/worker
+associations and authorizes connect, release, disconnect and reacquisition.
+NTCON retains zero or one current worker pipe and persistent display/input
+state, not a worker list or pending acquisition queue. Workers retain their
+current authorized frontend/channel and local execution state only.
+
+Handoff confirms final publication/input return and closure of the old pipe
+before NTSRV grants a new connection. Expected I/O disconnection is not task
+completion, worker failure or component retirement. Direct worker/frontend
+traffic is data and transport acknowledgement, not control arbitration.
+Original NTVDM blocking/resume/reentry and native execution remain owner-local.
+The [S6 release evidence](../etc/evidence/m0-t425-s6-broker-io-ownership.md)
+records production-linked authority/reentry tests, actual bidirectional nested
+handoff, final retained gates and coherent eight-file publication. The
+containing reviewed S6 P delivers this boundary; T425 awaits owner acceptance.
+
 ### Broker-centered creation and control — T424 S4 delivery
 
 Owner-approved migration of project-added orchestration is delivered by S4;

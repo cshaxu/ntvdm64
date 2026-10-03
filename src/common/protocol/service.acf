@@ -14,4 +14,9 @@ interface vdm_service
     CompleteWorkerChannel([context_handle_noserialize] connection);
     NativeStartupResult([context_handle_noserialize] connection);
     TakeFrontend([context_handle_noserialize] connection);
+    /* The serving I/O thread must acquire/release its connection while the
+     * worker's command thread is blocked in GetNextNativeCommand. Both calls
+     * use the same authenticated identity and service-lock/CV protection. */
+    WorkerIoTransition([context_handle_noserialize] connection);
+    WaitFrontend([context_handle_noserialize] connection);
 }

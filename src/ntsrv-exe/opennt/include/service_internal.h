@@ -120,7 +120,9 @@ struct OPENNT_BASE_CONNECTION {
     DWORD retained_frontend_root; /* Authenticated launcher association, not a task. */
     HANDLE frontend_state_changed; /* Root-private auto-reset retirement wake. */
     HANDLE worker_state_changed; /* Per-launcher auto-reset worker transition wake. */
+    HANDLE worker_io_release; /* Service-owned auto-reset I/O instruction, not a task. */
     BOOL frontend_closing; /* Admission barrier, never execution/task state. */
+    struct OPENNT_FRONTEND_ROUTE *frontend_io_route; /* Borrowed, service-lock protected. */
     DWORD frontend_request_root; /* Original pending command asks this root for I/O. */
     DWORD frontend_channel_root; /* One pending direct launcher-to-root attachment. */
     HANDLE frontend_execution;
@@ -169,6 +171,7 @@ typedef struct OPENNT_FRONTEND_ROUTE {
     BOOL delivered;
     BOOL native_worker; /* I/O route survives its native launcher, not its root. */
     DWORD request;
+    BOOL io_requested,io_releasing,io_worker_closed,io_frontend_closed;
 } OPENNT_FRONTEND_ROUTE;
 typedef struct OPENNT_BASE_WORKER_WATCH {
     LIST_ENTRY link;
@@ -249,6 +252,7 @@ BOOL service_root_has_worker(OPENNT_BASE_CONNECTION *root);
 DWORD service_queue_native_command(OPENNT_BASE_CONNECTION *connection,DWORD pid,
     DWORD generation,HANDLE capability,const WCHAR image[OPENNT_BASE_WORKER_IMAGE_CHARS],
     DWORD bytes,const BYTE *payload);
+DWORD service_authorize_worker_io(OPENNT_BASE_CONNECTION *worker,DWORD pid);
 DWORD service_take_native_command(OPENNT_BASE_CONNECTION *root,DWORD pid,
     DWORD generation,DWORD capacity,BYTE *payload,DWORD *bytes,
     HANDLE *caller_process,HANDLE *execution,HANDLE *frontend,DWORD *request,DWORD *caller_generation);
