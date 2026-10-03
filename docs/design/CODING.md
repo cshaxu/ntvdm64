@@ -333,6 +333,13 @@ solely because this machine lacks its external medium.
 
 ## Build layout
 
+The NTSRV-private service units share only `service_internal.h`, the same
+explicit service instance and finite internal helper declarations. Do not
+include a service `.c` file in another translation unit, export private state
+as a protocol, or copy the implementation into tests. Private fixture hooks
+link the production archive. Preserve original DOS/WOW lock, callback, receipt
+and cleanup ordering when reorganizing project adaptation code.
+
 Ninja is generated from the source-owner and package-selection manifests.
 Disposable objects, libraries, generated files, fixture executables and build
 results belong under `build/<task-id>/<run-id>/`; selected formal product

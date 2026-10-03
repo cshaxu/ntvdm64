@@ -2,12 +2,15 @@
 
 ## Current Work
 
-## Active Packet
+**No active M/T/S packet.** T424 remains open after the S8 private service
+separation delivery. The next planned native GUI-routing stage has not started.
+The [S8 ledger](../etc/evidence/m0-t424-s8-ntsrv-service-separation.md) records
+implementation, verification, publication and the unattributed input observation.
 
-**Active: M0 T424 S8** — owner-admitted NTSRV provenance review and
-service-private source separation, Ordinary Mode. S7 production P
-`d83d2b212` is pushed and published. T424 remains open; this admission is not
-a claim that the S8 source split is implemented or tested.
+## S8 Closed Packet
+
+M0 T424 S8, Ordinary Mode; the admitted record is retained below. The containing
+production P supplies the reviewed commit/push; this is not T424 closure.
 
 | Field | Admitted record |
 | --- | --- |
@@ -28,12 +31,21 @@ a claim that the S8 source split is implemented or tested.
 | Original Owner Request | Service splitting is next S; admit S8 and identify its current component. Original mirror logic stays in place; project additions are reorganized within NTSRV only. |
 | Similar-Issue Sweep | Related service headers/transport wrappers/build ownership, service shutdown/rundown, borrowed resources and native/DOS completion boundaries; do not extend into unrelated component redesign. |
 
-Initial source inspection confirms the main carrier is
-src/ntsrv-exe/opennt/source/base_service.c, with related declarations in
-opennt/include/base_service.h and server RPC dispatch in ntsrv-exe/main.c.
-These are NTSRV implementation carriers, not original mirror paths.
-S8 begins with provenance/contract review; exact target module names follow
-that review. Original srvvdm.c policy remains under src/opennt-host.
+The owner-approved six private modules are service_core, worker_registry,
+frontend_registry, native_commands, lifecycle and management, beside the
+retained base_service DOS/WOW interface/resource adapter. All link the existing
+service provider; one explicit service state/recursive lock remains unchanged.
+The [complete provenance ledger](../etc/evidence/m0-t424-s8-ntsrv-service-separation.md)
+records every one of 137 definitions, eight private layouts and original owners.
+All affected x86 links, exact-body/layout/private-consumer gates, eleven actual
+RPC scenarios and Console17/Window17 pass. Retained EDIT return, relaunch,
+independent-session, four retirement, resource/fault and version-negative gates
+pass. WOW retains the existing three frontiers, not three usability passes.
+The coherent eight-file S8 package is published to O:/winnt with S7 recovery.
+After one failed input observation, unchanged-assertion postpublication r002
+and three consecutive r003-r005 pass. Six S7 controls also pass; the initial
+missing first character is not causally classified or claimed repaired and is
+retained in TODO. Original mirror changes are zero; T424 remains open.
 
 ## S7 Closed Packet
 
@@ -245,11 +257,12 @@ remains owner-controlled. No later queued candidate is admitted here.
 
 ## Current Technical Baseline
 
-Published S7 package at O:/winnt: run16.exe, ntsrv.exe, ntvdm.exe, ntvwm.exe,
+Published S8 package at O:/winnt: run16.exe, ntsrv.exe, ntvdm.exe, ntvwm.exe,
 ntkvm.exe, ntmon.exe, WOW32.DLL, VDMREDIR.DLL. APP_VERSION is 0.0.424;
 protocol/RPC is 32 with unchanged UUID and authenticated broker-owned creation,
 submission, restoration and shutdown contracts. MSVC Win32/x86 /MT CCPU40 is
-unchanged. Exact hashes and commands are in S7 evidence; accepted S6
+unchanged. Exact hashes and commands are in S8 evidence; accepted S7
+`d83d2b212`, S6
 `21b576a9e`, S4 `e4fbaed21`, S3 `f9fe709aa` and
 predecessor accepted T423 S40 `f64559086` remain recoverable.
 

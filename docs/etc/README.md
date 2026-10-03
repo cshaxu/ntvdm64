@@ -2,6 +2,7 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T424 S8 NTSRV private separation](evidence/m0-t424-s8-ntsrv-service-separation.md) | M0 T424 S8 | Complete function provenance/disposition ledger, private state/lock ownership and production verification. | Retain through architecture migration acceptance. |
 | [T424 S7 common/service separation](evidence/m0-t424-s7-common-service-separation.md) | M0 T424 S7 | Provenance and resource-ownership inventory, shared/provider decisions and production verification checklist. | Retain through architecture migration acceptance. |
 | [T424 S6 native worker name](evidence/m0-t424-s6-native-worker-name.md) | M0 T424 S6 | Classified naming inventory, name-only equivalence and production delivery gates. | Retain through naming acceptance. |
 | [T424 S5 shared-control cleanup](evidence/m0-t424-s5-shared-control-cleanup.md) | M0 T424 S5 | Provenance, shared-provider disposition, retained contracts and verification progress. | Retain through cleanup acceptance. |

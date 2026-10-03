@@ -6,6 +6,36 @@ The mirrored `opennt-host/base/win32/server/srvvdm.c` remains the sole original
 DOS/WOW record-policy owner. This component supplies transport and modern
 resource/Console mechanics only; it must not replace that original strategy.
 
+The private service implementation under `opennt/source` is separated into
+`service_core.c` (connection/authentication/rundown), `worker_registry.c`
+(reservation/admission/reuse/process watches), `frontend_registry.c`
+(root identity/routes/Console takeover and return), `native_commands.c`
+(direct native delivery and receipt), `lifecycle.c` (authoritative retirement
+and shutdown), and `management.c` (read-only projection). `base_service.c`
+retains the source-shaped DOS/WOW interface/resource adapters. These are
+translation units of the same provider, not new components or registries.
+`opennt/include/service_internal.h` is private to those units and the test-only
+hook fixture. It exposes the same explicit service instance, unchanged recursive
+service lock and finite cross-module helpers; it is not a public/wire ABI.
+Original DOS/WOW records, locks and algorithms stay in `srvvdm.c`. The native
+command queue is not a generalized DOS/WOW scheduler. Fixture hooks link the
+production provider, rather than embedding another copy of the service.
+
+The private service implementation under `opennt/source` is separated into
+`service_core.c` (connection/authentication/rundown), `worker_registry.c`
+(reservation/admission/reuse/process watches), `frontend_registry.c`
+(root identity/routes/Console takeover and return), `native_commands.c`
+(direct native delivery and receipt), `lifecycle.c` (authoritative retirement
+and shutdown), and `management.c` (read-only projection). `base_service.c`
+retains the source-shaped DOS/WOW interface/resource adapters. These are
+translation units of the same provider, not new components or registries.
+`opennt/include/service_internal.h` is private to those units and the test-only
+hook fixture. It exposes the same explicit service instance, unchanged recursive
+service lock and finite cross-module helpers; it is not a public/wire ABI.
+Original DOS/WOW records, locks and algorithms stay in `srvvdm.c`. The native
+command queue is not a generalized DOS/WOW scheduler. Fixture hooks link the
+production provider, rather than embedding another copy of the service.
+
 The S2 frontend association is independent of DOS/WOW scheduling. An original
 pending command selects the worker; an authenticated inherited capability
 selects the NTKVM frontend root. The service retains a pending resource attachment so

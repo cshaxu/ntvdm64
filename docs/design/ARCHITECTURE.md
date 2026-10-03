@@ -416,6 +416,24 @@ never session, Console or native-resource policy.
 
 ## T423 DOS frontend ownership transition
 
+### T424 service-private source organization
+
+NTSRV's project adaptation uses one explicit service instance and its existing
+recursive lock. Within `src/ntsrv-exe/opennt/source`, `service_core.c` owns
+service/connection authentication and rundown; `worker_registry.c` owns
+reservation, creation, admission and reuse; `frontend_registry.c` owns root
+identity, routes and Console takeover/return; `native_commands.c` owns direct
+native command/result transport; `lifecycle.c` owns retirement and shutdown;
+`management.c` reads the bounded management projection. `base_service.c` retains
+the original-shaped DOS/WOW interface/resource bindings. All seven units link
+as one existing service provider. `service_internal.h` is private implementation
+state, not copied protocol data or a public client dependency.
+
+Original DOS/WOW execution, task completion, blocking/resume and cleanup stay
+in their OpenNT/MVDM mirrors. This organization neither relocates them nor
+creates another registry, scheduler or lock authority. Cross-module helpers
+preserve existing caller-held lock/resource contracts and original lock order.
+
 ### Current lifecycle and direct-completion contract
 
 NTSRV is the single authority for registered NTVDM and NTVWM workers, their

@@ -10,6 +10,12 @@ $repo = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
 foreach ($path in @('src/common/protocol/service.idl',
         'src/ntsrv-exe/opennt/source/base_rpc_client.c',
         'src/ntsrv-exe/opennt/source/base_service.c',
+        'src/ntsrv-exe/opennt/source/service_core.c',
+        'src/ntsrv-exe/opennt/source/worker_registry.c',
+        'src/ntsrv-exe/opennt/source/frontend_registry.c',
+        'src/ntsrv-exe/opennt/source/native_commands.c',
+        'src/ntsrv-exe/opennt/source/lifecycle.c',
+        'src/ntsrv-exe/opennt/source/management.c',
         'src/run16-exe/native_request_client.c')) {
     $source = Get-Content -LiteralPath (Join-Path $repo $path) -Raw
     if ($source -match 'SubmitFrontendChannel|TakeFrontendChannel') {
@@ -19,6 +25,12 @@ foreach ($path in @('src/common/protocol/service.idl',
 # The surviving run16 submit wrapper calls NTSRV, not a frontend receiver.
 foreach($path in @('src/common/protocol/frontend_protocol.h',
         'src/ntsrv-exe/opennt/source/base_service.c',
+        'src/ntsrv-exe/opennt/source/service_core.c',
+        'src/ntsrv-exe/opennt/source/worker_registry.c',
+        'src/ntsrv-exe/opennt/source/frontend_registry.c',
+        'src/ntsrv-exe/opennt/source/native_commands.c',
+        'src/ntsrv-exe/opennt/source/lifecycle.c',
+        'src/ntsrv-exe/opennt/source/management.c',
         'src/ntvwm-exe/execution.c')) {
     $source=Get-Content -LiteralPath (Join-Path $repo $path) -Raw
     if($source -match 'native_request_completion|broker_native_completion_status|QueueNativeChannel|TakeWorkerChannel|native_request_header|native_request_reply|frontend_bootstrap_reply') {
@@ -78,7 +90,7 @@ function Assert-FrontendOwnership([string[]]$Lines) {
     }
     $fixtureSources=@(Get-FrontendSources 'basesrv-service-reservation-test.exe' 'adapter-basesrv' 'tests')
     if(@(Compare-Object @('base_service_reservation_test.c','base_service_fixture.c') $fixtureSources).Count) {
-        throw 'Copied service fixture must explicitly select its test-only service translation'
+        throw 'Service fixture must select its private hooks and reservation test'
     }
     $client = @('bootstrap_client.c',
         'native_request_client.c') | Sort-Object

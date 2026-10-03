@@ -192,18 +192,23 @@ native GUI routing, frontend NTCON naming, final audit.
   same-Console joining, hidden-Console quiescence and parent-resume decisions
   in their owners. Audit capacity limits and failure behavior; do not turn
   snapshots into polling, task records, ancestry or a lifecycle authority.
-- [ ] **S8, transferred:** Audit ntsrv-exe/opennt/source/base_service.c and its related headers
+- [x] **S8 implementation:** Audit ntsrv-exe/opennt/source/base_service.c and its related headers
   block-by-block against pinned original OpenNT inputs. Its path and banner
   are not provenance proof. Separate retained original/subset code, derived
   same-shaped adaptations and independently added project mechanisms.
   Publish a function/block ledger with original path/hash, classification,
   current/target location and retained-versus-removed diff accounting.
-- [ ] **S8, transferred:** Split project-added registration/connection, frontend admission and
+- [x] **S8 implementation:** Split project-added registration/connection, frontend admission and
   retirement, native request/receipt and management projection into bounded
   NTSRV-private modules with one explicit service-state owner and documented
   locks/borrowed resources. These are specialist service modules, not common
   policy or a second registry. Choose final filenames after dependency review;
   do not merely scatter the large file or expose all private fields publicly.
+  The [complete S8 ledger](../evidence/m0-t424-s8-ntsrv-service-separation.md)
+  records 113 unchanged definitions moved to service_core, worker_registry,
+  frontend_registry, native_commands, lifecycle and management; 24 original-
+  interface/resource adapters remain in base_service. Existing state/lock and
+  public contracts are unchanged. Delivery status remains CURRENT-owned.
 - [x] Preserve actual original OpenNT/MVDM code in its upstream-relative mirror
   paths. Restore exact upstream bytes wherever normalized content is equal.
   Never move original DOS/WOW execution, record completion, ordering or cleanup

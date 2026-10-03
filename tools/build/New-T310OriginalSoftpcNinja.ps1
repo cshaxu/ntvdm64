@@ -1185,6 +1185,12 @@ if ($Architecture -eq 'x86') {
             @('exports', 'src/opennt-host/windows/core/ntuser/server/exports.c', $baseServerFlags))
         'opennt-base-bindings' = @(
             @('service', 'src/ntsrv-exe/opennt/source/base_service.c', $baseServerFlags),
+            @('service-core', 'src/ntsrv-exe/opennt/source/service_core.c', $baseServerFlags),
+            @('worker-registry', 'src/ntsrv-exe/opennt/source/worker_registry.c', $baseServerFlags),
+            @('frontend-registry', 'src/ntsrv-exe/opennt/source/frontend_registry.c', $baseServerFlags),
+            @('native-commands', 'src/ntsrv-exe/opennt/source/native_commands.c', $baseServerFlags),
+            @('service-lifecycle', 'src/ntsrv-exe/opennt/source/lifecycle.c', $baseServerFlags),
+            @('service-management', 'src/ntsrv-exe/opennt/source/management.c', $baseServerFlags),
             @('worker-spawn', 'src/ntsrv-exe/transport/worker_spawn.c', ('/nologo /c /MT /W4 /we4013 /showIncludes /I "' + (NinjaPath (Join-Path $root 'src')) + '"')),
             @('command', 'src/ntsrv-exe/opennt/source/base_command.c', $baseServerFlags),
             @('values', 'src/ntsrv-exe/opennt/source/base_values.c', $baseServerFlags),

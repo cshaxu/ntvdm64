@@ -1,8 +1,7 @@
-/* Test-only translation of the actual service implementation. Explicitly
- * selected instead of its archive member by this one in-process fixture.
- * Expose the same private copied queue/take operations, without adding a
- * production API, transport, substitute policy or duplicate implementation. */
-#include "../../src/ntsrv-exe/opennt/source/base_service.c"
+/* Test-only access to the actual archive's private copied queue/take seam.
+ * Do not embed a second service translation. All service modules are selected
+ * from the same production archive; no substitute policy or public API. */
+#include <service_internal.h>
 
 DWORD fixture_queue_native_command(OPENNT_BASE_CONNECTION *connection,DWORD pid,
     DWORD generation,HANDLE capability,DWORD bytes,const BYTE *payload)
