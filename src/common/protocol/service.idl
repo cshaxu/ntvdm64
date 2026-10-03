@@ -1,7 +1,7 @@
 import "wtypes.idl";
 [
     uuid(7d3e78bd-0472-4736-8797-e64e966d692e),
-    version(31.0),
+    version(32.0),
     pointer_default(unique)
 ]
 interface vdm_service
@@ -58,6 +58,14 @@ interface vdm_service
         [in] handle_t binding, [in] VDM_CONNECTION connection,
         [in, system_handle(sh_process)] HANDLE process,
         [in] unsigned long generation);
+    /* Startup outcome from the exact broker-admitted frontend process.
+     * This is not the later Console restoration acknowledgement. */
+    error_status_t FrontendStartupResult(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation,
+        [in, system_handle(sh_event)] HANDLE capability,
+        [in] unsigned long status);
     error_status_t FrontendConsoleRestored(
         [in] handle_t binding, [in] VDM_CONNECTION connection,
         [in, system_handle(sh_process)] HANDLE process,
@@ -75,7 +83,8 @@ interface vdm_service
         [in] handle_t binding, [in] VDM_CONNECTION connection,
         [in, system_handle(sh_process)] HANDLE process,
         [in] unsigned long generation, [in] unsigned long request,
-        [in] unsigned long exit_code);
+        [in] unsigned long exit_code,
+        [in] unsigned long io_error, [in] unsigned long io_flags);
     error_status_t NativeExitCode(
         [in] handle_t binding, [in] VDM_CONNECTION connection,
         [in, system_handle(sh_process)] HANDLE process,
@@ -94,11 +103,20 @@ interface vdm_service
         [in] handle_t binding, [in] VDM_CONNECTION connection,
         [in, system_handle(sh_process)] HANDLE process,
         [in] unsigned long generation,
-        [out, system_handle(sh_pipe)] HANDLE *channel,
+        [in, range(1,1048576)] unsigned long capacity,
+        [out, size_is(capacity), length_is(*bytes)] byte *payload,
+        [out] unsigned long *bytes,
         [out, system_handle(sh_process)] HANDLE *caller_process,
         [out, system_handle(sh_event)] HANDLE *execution,
         [out, system_handle(sh_event)] HANDLE *frontend,
-        [out] unsigned long *request);
+        [out] unsigned long *request, [out] unsigned long *caller_generation);
+    error_status_t NativeStartupResult(
+        [in] handle_t binding, [in] VDM_CONNECTION connection,
+        [in, system_handle(sh_process)] HANDLE process,
+        [in] unsigned long generation, [in] unsigned long caller_generation,
+        [in] unsigned long request, [in] unsigned long status,
+        [in, system_handle(sh_process)] HANDLE target,
+        [in, system_handle(sh_event)] HANDLE receipt);
     error_status_t RegisterNativeBackend(
         [in] handle_t binding, [in] VDM_CONNECTION connection,
         [in, system_handle(sh_process)] HANDLE process,

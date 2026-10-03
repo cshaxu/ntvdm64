@@ -18,14 +18,14 @@ the old run16 name do not identify their source or final executable owner.
 `frontend-client.lib` now isolates native launch requests and copied launch
 records from the service/renderer. Both the ordinary run16 link and the
 client-only fixture exclude frontend service, input-pump and renderer objects.
-The private request transfer implementation is shared by the two endpoints,
-not duplicated. The launcher-owned client library contains bootstrap_client,
-native_request_client, native_request_io and native_launch_packet under run16-exe.
-Public declarations are in interface. Target creation is compiled from
+The launcher-owned client library contains bootstrap_client and
+native_request_client under run16-exe. Common owns protocol declarations,
+the copied packet codec and pipe transport; no launcher transfer wrapper remains.
+Target creation is compiled from
 run16-exe/native_launch.c into NTVWM and run16's
 GUI route; it is not part of this frontend or the launcher client archive.
 
-The worker-side copied protocol client now belongs to worker-base, not this
+The worker-side copied protocol client now belongs to common, not this
 frontend component. Both workers link its ordered transport, validation,
 frame/input codec and resource lifecycle. This owner retains the service,
 renderer and frontend arbitration only; no private worker-client copy remains.

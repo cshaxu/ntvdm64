@@ -1,22 +1,14 @@
 /* Recovered from S8 d253e55af native_console_capture.c; see component README. */
 #include "console_state.h"
+#include "common/console/members.h"
 #include <string.h>
 #include <stdio.h>
 
 BOOL ntvwm_console_quiescent(DWORD completed_target)
 {
-    DWORD capacity=16,count,index,*members=NULL;
+    DWORD count,index,*members=NULL;
     BOOL self=FALSE,empty=FALSE;
-    for(;;) {
-        members=HeapAlloc(GetProcessHeap(),0,capacity*sizeof(*members));
-        if(!members)return FALSE;
-        count=GetConsoleProcessList(members,capacity);
-        if(!count)goto done;
-        if(count<=capacity)break;
-        HeapFree(GetProcessHeap(),0,members);members=NULL;
-        if(count>65536)return FALSE;
-        capacity=count; /* Buffer growth, not a timed membership poll. */
-    }
+    if(common_console_members_read(16,65536,0,&members,&count))return FALSE;
     for(index=0;index<count;++index) {
         HANDLE process;DWORD wait,error;
         if(members[index]==GetCurrentProcessId()){self=TRUE;continue;}
@@ -32,7 +24,7 @@ BOOL ntvwm_console_quiescent(DWORD completed_target)
     }
     empty=self;
 done:
-    if(members)HeapFree(GetProcessHeap(),0,members);
+    common_console_members_release(members);
     return empty;
 }
 

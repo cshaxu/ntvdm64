@@ -2,10 +2,9 @@
  * target on its own Console; the requester receives that actual process. */
 #include "execution.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
-#include "interface/native_request_protocol.h"
 #include "console_state.h"
-#include "interface/native_launch.h"
-#include "interface/frontend_protocol.h"
+#include "run16-exe/native_launch.h"
+#include "common/protocol/frontend_protocol.h"
 struct ntvwm_executions {
     CRITICAL_SECTION lock;
     HANDLE stop,idle,broker_failed;
@@ -16,15 +15,16 @@ struct ntvwm_executions {
 };
 typedef struct ntvwm_execution {
     ntvwm_executions *owner;
-    HANDLE root_capability,pipe,sender,execution,event;
-    DWORD request,preflight_error;
+    HANDLE root_capability,sender,execution;
+    BYTE *payload;
+    DWORD bytes;
+    DWORD request,preflight_error,caller_generation;
 } ntvwm_execution;
 static void release_request(ntvwm_execution *request)
 {
-    if(request->pipe)CloseHandle(request->pipe);
+    if(request->payload)HeapFree(GetProcessHeap(),0,request->payload);
     if(request->sender)CloseHandle(request->sender);
     if(request->execution)CloseHandle(request->execution);
-    if(request->event)CloseHandle(request->event);
     if(request->root_capability)CloseHandle(request->root_capability);
     HeapFree(GetProcessHeap(),0,request);
 }
@@ -35,7 +35,7 @@ static void release_unstarted_request(ntvwm_execution *request)
 {
     if(!request)return;
     request->root_capability=NULL;
-    request->pipe=NULL;
+    request->payload=NULL;
     request->sender=NULL;
     request->execution=NULL;
     request->request=0;
@@ -118,77 +118,53 @@ static DWORD WINAPI serve(void *context)
 {
     ntvwm_execution *request=context;
     ntvwm_executions *owner=request->owner;
-    native_request_header header;
-    native_request_reply reply={NATIVE_REQUEST_VERSION,0,0};
-    BYTE *payload=NULL;HANDLE target=NULL,remote=NULL,receipt=NULL,remote_receipt=NULL;DWORD error;
-    BOOL bound=FALSE,broker_completed=FALSE;
-    error=frontend_request_transfer(request->pipe,request->sender,owner->stop,request->event,FALSE,&header,sizeof(header));
-    if(error)goto done;
-    if(header.version==NATIVE_REQUEST_VERSION && !header.bytes) {
-        reply.error=owner->io.begin ? owner->io.begin(owner->io.context,owner->stop) : ERROR_NOT_SUPPORTED;
-        if(!reply.error) {
+    DWORD startup_status=ERROR_SUCCESS;
+    BYTE *payload=request->payload;HANDLE target=NULL,receipt=NULL;DWORD error=ERROR_SUCCESS;
+    BOOL bound=FALSE,broker_completed=FALSE,startup_reported=FALSE;
+    if(!request->bytes) {
+        startup_status=owner->io.begin ? owner->io.begin(owner->io.context,owner->stop) : ERROR_NOT_SUPPORTED;
+        if(!startup_status) {
             if(owner->io.release_launch)owner->io.release_launch(owner->io.context);
-            reply.error=owner->io.end ? owner->io.end(owner->io.context) : ERROR_SUCCESS;
+            startup_status=owner->io.end ? owner->io.end(owner->io.context) : ERROR_SUCCESS;
         }
-        error=frontend_request_transfer(request->pipe,request->sender,owner->stop,request->event,
-            TRUE,&reply,sizeof(reply));
+        error=OpenNtBaseClientNativeStartupResult(request->caller_generation,request->request,
+            startup_status,NULL,NULL);
+        startup_reported=TRUE;
+        if(error)ntvwm_executions_note_broker_failure(owner,error);
         goto done;
     }
-    if(header.version!=NATIVE_REQUEST_VERSION || header.bytes<sizeof(run16_native_launch_packet) ||
-        header.bytes>NATIVE_LAUNCH_MAX_BYTES) {
-        reply.error=ERROR_INVALID_DATA;
+    if(!payload || request->bytes<sizeof(run16_native_launch_packet) ||
+        request->bytes>NATIVE_LAUNCH_MAX_BYTES) {
+        startup_status=ERROR_INVALID_DATA;
     } else {
-        payload=HeapAlloc(GetProcessHeap(),0,header.bytes);
-        if(!payload)reply.error=ERROR_NOT_ENOUGH_MEMORY;
-        else {
-            error=frontend_request_transfer(request->pipe,request->sender,owner->stop,request->event,FALSE,payload,header.bytes);
-            if(error)goto done;
-            /* The client writes its whole request before reading the reply.
-             * Consume that payload first, then return an explicit preflight
-             * failure on the established channel rather than completing the
-             * broker record and leaving run16 blocked on its reply. */
+        {
+            /* Validate copied command data, then publish preflight
+             * failure through RPC before completing its broker record. */
             if(request->preflight_error) {
-                reply.error=request->preflight_error;
+                startup_status=request->preflight_error;
                 goto reply_ready;
             }
-            /* Prepare the completion export before allowing target side
-             * effects. A denied export must not start an unreportable task. */
+            /* Prepare the completion object before target side effects.
+             * Its typed binding is authenticated before ResumeThread. */
             receipt=CreateEventW(NULL,TRUE,FALSE,NULL);
-            if(!receipt)reply.error=GetLastError();
-            if(!reply.error && !DuplicateHandle(GetCurrentProcess(),receipt,request->sender,&remote_receipt,
-                SYNCHRONIZE,FALSE,0))reply.error=GetLastError();
-            if(!reply.error && owner->io.begin) {
-                reply.error=owner->io.begin(owner->io.context,owner->stop);
-                bound=!reply.error;
+            if(!receipt)startup_status=GetLastError();
+            if(!startup_status && owner->io.begin) {
+                startup_status=owner->io.begin(owner->io.context,owner->stop);
+                bound=!startup_status;
             }
-            if(!reply.error)reply.error=launch_request(request,payload,header.bytes,receipt,&target);
+            if(!startup_status)startup_status=launch_request(request,payload,request->bytes,receipt,&target);
             if(bound && owner->io.release_launch)owner->io.release_launch(owner->io.context);
-            if(!reply.error && !DuplicateHandle(GetCurrentProcess(),target,request->sender,&remote,
-                SYNCHRONIZE|PROCESS_QUERY_LIMITED_INFORMATION,FALSE,0))reply.error=GetLastError();
-            if(!reply.error)reply.request=request->request;
-            reply.target=(uint64_t)(ULONG_PTR)remote;
-            reply.receipt=reply.error ? 0 : (uint64_t)(ULONG_PTR)remote_receipt;
         }
     }
 reply_ready:
-    error=frontend_request_transfer(request->pipe,request->sender,owner->stop,request->event,TRUE,&reply,sizeof(reply));
-    if(error && remote) {
-        HANDLE copy=NULL;
-        /* An incomplete response cannot be consumed. Reclaim only our export
-         * copy, never the handed-off target process or any descendant. */
-        if(DuplicateHandle(request->sender,remote,GetCurrentProcess(),&copy,
-            0,FALSE,DUPLICATE_SAME_ACCESS|DUPLICATE_CLOSE_SOURCE))CloseHandle(copy);
-    }
-    if((error || reply.error) && remote_receipt){
-        HANDLE copy=NULL;
-        if(DuplicateHandle(request->sender,remote_receipt,GetCurrentProcess(),&copy,
-            0,FALSE,DUPLICATE_SAME_ACCESS|DUPLICATE_CLOSE_SOURCE))CloseHandle(copy);
-    }
-    if(!error && !reply.error){
+    error=OpenNtBaseClientNativeStartupResult(request->caller_generation,request->request,
+        startup_status,startup_status ? NULL : target,startup_status ? NULL : receipt);
+    startup_reported=TRUE;
+    if(error)ntvwm_executions_note_broker_failure(owner,error);
+    if(!error && !startup_status){
         HANDLE waits[2]={target,owner->stop};
         if(WaitForMultipleObjects(2,waits,FALSE,INFINITE)==WAIT_OBJECT_0) {
-            native_request_completion completion={NATIVE_REQUEST_VERSION,0};
-            DWORD broker_error,exit_code=0;
+            DWORD broker_error,exit_code=0,io_flags=0;
             if(!GetExitCodeProcess(target,&exit_code)) {
                 error=GetLastError();
                 ntvwm_executions_note_broker_failure(owner,error);
@@ -196,31 +172,32 @@ reply_ready:
             }
             error=bound ? owner->io.end(owner->io.context) : ERROR_SUCCESS;
             bound=FALSE;
-            completion.error=error;
             /* One resource check after the direct process has exited. Do not
              * close an owned Console still used by an unregistered native
              * child. Failure is conservative; no timer or observed task is
              * introduced. The broker, not this worker, owns retirement. */
             if(ntvwm_console_quiescent(GetProcessId(target)))
-                completion.flags=NATIVE_COMPLETION_CONSOLE_EMPTY;
+                io_flags=NATIVE_COMPLETION_CONSOLE_EMPTY;
             /* Report only the real target's exit code after native I/O release.
              * NTSRV stores it and signals the launcher's direct receipt. */
-            broker_error=ntvwm_complete_next_command(request->request,exit_code);
+            broker_error=ntvwm_complete_native_request(request->request,exit_code,error,io_flags);
             if(broker_error) {
                 ntvwm_executions_note_broker_failure(owner,broker_error);
                 error=broker_error;
                 goto done;
             }
             broker_completed=TRUE;
-            (void)frontend_request_transfer(request->pipe,request->sender,owner->stop,request->event,
-                TRUE,&completion,sizeof(completion));
         }
     }
 done:
+    if(!startup_reported) {
+        DWORD startup_error=OpenNtBaseClientNativeStartupResult(request->caller_generation,
+            request->request,error ? error : ERROR_PROCESS_ABORTED,NULL,NULL);
+        if(startup_error)ntvwm_executions_note_broker_failure(owner,startup_error);
+    }
     if(bound)(void)owner->io.end(owner->io.context);
     if(receipt)CloseHandle(receipt);
     if(target)CloseHandle(target);
-    if(payload)HeapFree(GetProcessHeap(),0,payload);
     if(!broker_completed){
         if(target) {
             /* A running target has not completed. Worker rundown, not a fake
@@ -280,17 +257,16 @@ DWORD ntvwm_execution_start(ntvwm_executions *owner,ntvwm_next_command *command,
 {
     ntvwm_execution *request;
     DWORD error;HANDLE thread;
-    /* request zero is the original broker's I/O-resume channel. The wire
-     * header distinguishes it from a Direct target after GetNext. */
+    /* A zero-length command is the existing broker I/O-resume request,
+     * not a Direct target. */
     if(!owner || !command)return ERROR_INVALID_PARAMETER;
     request=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*request));
     if(!request)return ERROR_NOT_ENOUGH_MEMORY;
     request->owner=owner;request->root_capability=command->frontend;
-    request->pipe=command->channel;request->sender=command->sender;
+    request->payload=command->payload;request->bytes=command->bytes;request->sender=command->sender;
     request->execution=command->execution;request->request=command->request;
+    request->caller_generation=command->caller_generation;
     request->preflight_error=preflight_error;
-    request->event=CreateEventW(NULL,TRUE,FALSE,NULL);
-    if(!request->event) { error=GetLastError();release_unstarted_request(request);return error; }
     EnterCriticalSection(&owner->lock);
     if(WaitForSingleObject(owner->stop,0)!=WAIT_TIMEOUT) {
         LeaveCriticalSection(&owner->lock);release_unstarted_request(request);return ERROR_OPERATION_ABORTED;

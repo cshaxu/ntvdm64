@@ -7,7 +7,9 @@
 #include <stdint.h>
 #include "service.h"
 #include "ntsrv-exe/transport/rpc_security.h"
-#include "interface/version.h"
+#include "common/protocol/version.h"
+#include "common/rpc/local_binding.h"
+#include "common/rpc/management.h"
 
 #define MONITOR_COLUMNS 80
 #define MONITOR_ROWS 25
@@ -48,24 +50,16 @@ typedef struct MONITOR_STATE {
     CONSOLE_SCREEN_BUFFER_INFO console;
     BOOL console_saved;
 } MONITOR_STATE;
-static const unsigned char app_version[APP_VERSION_BYTES]=APP_VERSION;
 
 static BOOL bind_basesrv(MONITOR_STATE *state)
 {
     WCHAR endpoint[128];
-    RPC_WSTR text=NULL;
     RPC_STATUS rpc;
     if (!broker_rpc_capture_scope(&state->scope)) return FALSE;
     swprintf_s(endpoint,_countof(endpoint),L"ntvdm-basesrv-%lu-%08lx-%08lx",state->scope.session,
         (ULONG)state->scope.logon.HighPart,(ULONG)state->scope.logon.LowPart);
-    rpc=RpcStringBindingComposeW(NULL,(RPC_WSTR)L"ncalrpc",NULL,(RPC_WSTR)endpoint,NULL,&text);
+    rpc=common_rpc_bind_local(endpoint,&state->binding);
     if (rpc!=RPC_S_OK) { SetLastError(rpc); return FALSE; }
-    rpc=RpcBindingFromStringBindingW(text,&state->binding);
-    RpcStringFreeW(&text);
-    if (rpc!=RPC_S_OK) { SetLastError(rpc); return FALSE; }
-    rpc=RpcBindingSetAuthInfoW(state->binding,NULL,RPC_C_AUTHN_LEVEL_PKT_PRIVACY,
-        RPC_C_AUTHN_WINNT,NULL,RPC_C_AUTHZ_NONE);
-    if (rpc!=RPC_S_OK) { RpcBindingFree(&state->binding); SetLastError(rpc); return FALSE; }
     /* A system_handle must be a real, duplicable client handle.  The BaseSrv
      * peer check compares its server-side PID with the authenticated RPC
      * caller.  This is deliberately the same shape as monitor_rpc_test,
@@ -318,18 +312,15 @@ static DWORD refresh(MONITOR_STATE *state,DTASKMGR_WORKER **items,ULONG *count)
     ULONG result_count=0;
     DTASKMGR_WORKER *result=NULL;
     DWORD error=ERROR_SUCCESS;
+    common_rpc_management management;
     if (!state->binding && !bind_basesrv(state)) return GetLastError();
-    RpcTryExcept {
-        error=Client_TaskSnapshot(state->binding,state->process,APP_PROTOCOL_VERSION,
-            (unsigned char *)app_version,&result_count,&result);
-    }
-    RpcExcept(1) { error=RpcExceptionCode(); }
-    RpcEndExcept
+    management.binding=state->binding;management.process=state->process;
+    error=common_rpc_task_snapshot(&management,&result_count,&result);
     if (error) {
         /* With no authoritative snapshot, a queued kill cannot remain valid. */
         state->confirm_pid=0;
         state->confirm_task_count=0;
-        if (result) MIDL_user_free(result); return error;
+        return error;
     }
     *items=result; *count=result_count;
     if (result_count && !state->selected_pid) state->selected_pid=result[0].process_id;
@@ -353,15 +344,10 @@ static DWORD refresh(MONITOR_STATE *state,DTASKMGR_WORKER **items,ULONG *count)
 }
 static DWORD terminate_worker(MONITOR_STATE *state)
 {
-    DWORD error=ERROR_SUCCESS;
+    common_rpc_management management;
     if (!state->confirm_pid) return ERROR_NOT_FOUND;
-    RpcTryExcept {
-        error=Client_TerminateWorker(state->binding,state->process,APP_PROTOCOL_VERSION,
-            (unsigned char *)app_version,state->confirm_pid);
-    }
-    RpcExcept(1) { error=RpcExceptionCode(); }
-    RpcEndExcept
-    return error;
+    management.binding=state->binding;management.process=state->process;
+    return common_rpc_terminate_worker(&management,state->confirm_pid);
 }
 int wmain(void)
 {

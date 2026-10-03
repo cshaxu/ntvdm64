@@ -1,5 +1,5 @@
 #include "text_frame.h"
-#include "interface/console_video.h"
+#include "common/protocol/console_video.h"
 
 /* The copied text protocol is bounded at 160x96/font32. Retain the page as
  * text so the Window, rather than a baked image, owns cursor blinking. */

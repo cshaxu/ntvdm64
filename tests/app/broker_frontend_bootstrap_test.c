@@ -3,8 +3,7 @@
 #include <windows.h>
 #include <tlhelp32.h>
 #include <stdio.h>
-#include "interface/native_request_protocol.h"
-#include "interface/native_request_client.h"
+#include "run16-exe/native_request_client.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
 
 PVOID CsrPortHeap;
@@ -51,28 +50,46 @@ static void stop_broker(PROCESS_INFORMATION *broker)
 /* Test-only sibling provider. Production StartFrontend has no caller-selected
  * executable: the fixture broker lives in an isolated build package whose
  * trusted sibling ntkvm.exe is this controlled adversarial executable. */
-static int rejected_peer(HANDLE pipe,HANDLE caller)
+static int rejected_peer(HANDLE caller,HANDLE capability)
 {
-    WCHAR mode[24];HANDLE event=NULL,peer=NULL,probe=NULL,remote=NULL;
-    DWORD error,bytes,pid;frontend_bootstrap_reply reply={FRONTEND_BOOTSTRAP_VERSION,0,APP_VERSION};
-    if(!GetEnvironmentVariableW(L"FRONTEND_TEST_REPLY",mode,ARRAYSIZE(mode))) {Sleep(30000);return 74;}
+    WCHAR mode[24];HANDLE probe=NULL,remote=NULL;DWORD error;
+    if(!GetEnvironmentVariableW(L"FRONTEND_TEST_REPLY",mode,ARRAYSIZE(mode))) {
+        (void)WaitForSingleObject(caller,30000);return 74;
+    }
     probe=CreateEventW(NULL,TRUE,FALSE,NULL);if(!probe)return 80;
     if(DuplicateHandle(GetCurrentProcess(),probe,caller,&remote,SYNCHRONIZE,FALSE,0) ||
         GetLastError()!=ERROR_ACCESS_DENIED){CloseHandle(probe);return 81;}
     CloseHandle(probe);
-    if(!wcscmp(mode,L"version"))++reply.version;
-    else if(!wcscmp(mode,L"application"))reply.application[0]='!';
-    else if(!wcscmp(mode,L"status"))reply.status=ERROR_ACCESS_DENIED;
-    bytes=!wcscmp(mode,L"short") ? sizeof(reply)-1 : sizeof(reply);
-    if(!GetNamedPipeServerProcessId(pipe,&pid))return 82;
-    peer=OpenProcess(SYNCHRONIZE,FALSE,pid);if(!peer)return 82;
-    event=CreateEventW(NULL,TRUE,FALSE,NULL);if(!event){CloseHandle(peer);return 82;}
-    error=frontend_request_transfer(pipe,peer,NULL,event,TRUE,&reply,bytes);
-    CloseHandle(event);CloseHandle(peer);CloseHandle(pipe);return error ? 83 : 0;
+    CsrPortHeap=HeapCreate(0,0,0);if(!CsrPortHeap)return 82;
+    error=OpenNtBaseClientConnectCurrent();
+    if(!error && !wcscmp(mode,L"capability")) {
+        probe=CreateEventW(NULL,TRUE,FALSE,NULL);
+        if(!probe)error=GetLastError();
+        else {
+            error=OpenNtBaseClientFrontendStartupResult(probe,ERROR_ACCESS_DENIED);
+            if(error!=ERROR_ACCESS_DENIED) {
+                (void)OpenNtBaseClientFrontendStartupResult(capability,ERROR_INVALID_DATA);
+                error=ERROR_INVALID_DATA;
+            }
+            CloseHandle(probe);
+        }
+    } else if(!error) {
+        /* Failure may be reported before registration; success may not.
+         * Version/application mismatch is covered by the real RPC Connect
+         * tests, not by a now-removed pipe reply version field. */
+        error=OpenNtBaseClientFrontendStartupResult(capability,
+            !wcscmp(mode,L"status") ? ERROR_ACCESS_DENIED : ERROR_SUCCESS);
+        if(!wcscmp(mode,L"unregistered") && error!=ERROR_ACCESS_DENIED) {
+            (void)OpenNtBaseClientFrontendStartupResult(capability,ERROR_INVALID_DATA);
+            error=ERROR_INVALID_DATA;
+        }
+    }
+    OpenNtBaseClientDisconnectCurrent();HeapDestroy(CsrPortHeap);CsrPortHeap=NULL;
+    CloseHandle(caller);CloseHandle(capability);return (int)error;
 }
 static int startup_failures(BOOL timeout)
 {
-    static const WCHAR *modes[]={L"version",L"application",L"status",L"short",L"unregistered"};
+    static const WCHAR *modes[]={L"status",L"unregistered",L"capability"};
     WCHAR self[MAX_PATH],source[MAX_PATH],package[MAX_PATH],image[MAX_PATH],*slash;
     PROCESS_INFORMATION broker={0};HANDLE root=NULL,cap=NULL,restored=NULL;
     DWORD error,i,before=0,after=0;int failed=1;
@@ -100,8 +117,7 @@ static int startup_failures(BOOL timeout)
         elapsed=GetTickCount64()-began;
         if(!GetProcessHandleCount(GetCurrentProcess(),&after) || before!=after || root || cap || restored ||
             !error || (timeout ? error!=ERROR_TIMEOUT || elapsed<9000 || elapsed>15000 :
-                error==ERROR_TIMEOUT || (i<2 && error!=ERROR_REVISION_MISMATCH) ||
-                (i==2 && error!=ERROR_ACCESS_DENIED))) {
+                error!=ERROR_ACCESS_DENIED)) {
             printf("FAIL rejection %lu error=%lu elapsed=%llu handles=%lu/%lu\n",i,error,elapsed,before,after);goto done;
         }
         printf("PASS broker-owned rejection %ls error=%lu no local handle leak\n",timeout ? L"timeout" : modes[i],error);
@@ -164,9 +180,9 @@ static DWORD native_worker_failure(HANDLE worker,HANDLE capability,BOOL complete
     error=run16_native_request_finish(request,&result,&target_completed);
     printf("native finish after worker rundown: status=%lu result=%lu target-completed=%lu\n",
         error,result,target_completed);
-    /* The worker may have queued its final ACK before the injected death.
-     * Completed-first transport must accept that ACK; otherwise pipe/death
-     * failure is valid, but neither can erase the actual result/return grant. */
+    /* A broker-latched completion remains consumable after worker death.
+     * A recorded final-I/O error cannot erase the actual result/return grant;
+     * there is no final worker pipe reply to read after rundown. */
     if(completed ? (error && error!=ERROR_BROKEN_PIPE && error!=ERROR_PROCESS_ABORTED) || result!=37 || target_completed!=TRUE :
         error!=ERROR_PROCESS_ABORTED || result || target_completed)
         {error=ERROR_INVALID_DATA;goto done;}
@@ -197,7 +213,7 @@ int wmain(int argc,WCHAR **argv)
     HANDLE root=NULL,capability=NULL,restored=NULL,fake=NULL,owner=NULL,worker=NULL;
     DWORD error,result=0,generation=0,i;int failed=1;
     ULONGLONG started=0;
-    if(argc==9 && !wcscmp(argv[1],L"--session"))return rejected_peer(
+    if(argc==8 && !wcscmp(argv[1],L"--session"))return rejected_peer(
         (HANDLE)(UINT_PTR)wcstoul(argv[2],NULL,16),(HANDLE)(UINT_PTR)wcstoul(argv[3],NULL,16));
     if(argc==3 && !wcscmp(argv[1],L"--identity"))return identity_role(argv[2]);
     if(argc==2 && !wcscmp(argv[1],L"--startup-rejections"))return startup_failures(FALSE);

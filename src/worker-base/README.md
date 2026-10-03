@@ -14,12 +14,11 @@ They do not link worker-base. Launcher request packing belongs to run16;
 NTSRV owns worker creation and shared Console retirement/return-ack decisions,
 not this worker-side library. Original DOS/PIF policy stays at its source owner
 and hidden Console resource operations stay at the native worker boundary.
-console_client.c owns their common ordered frontend client, validation,
-cancellation, frame chunks, input codec and atomic key-return encoding.
-It borrows pipe/peer/cancel, owns its event, and requires the caller's existing
-lock across each exchange/frame. Dispose follows completion of in-flight calls.
-Activation is one attempt; backend retry/teardown/guest state stay local.
-Cross-component declarations belong to interface. No scheduler, frontend
+T424 S7 moves the neutral ordered frontend protocol client into
+common/console/client.c/h, selected once in common-console.lib. Its borrowed
+handles, local event, caller locks and single-attempt activation are unchanged.
+Worker-only connection adaptation remains here; protocol declarations and
+shared I/O client mechanics belong to common. No scheduler, frontend
 presentation, native Console state or original DOS/WOW policy belongs here.
 
 Original OpenNT/MVDM execution, task completion, block/resume and cleanup

@@ -10,7 +10,8 @@
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
 #include "frontend_scope.h"
 #include "launch_options.h"
-#include "interface/console_io.h"
+#include "native_launch.h"
+#include "common/protocol/console_io.h"
 #include <shellapi.h>
 #include <stdio.h>
 #include <wchar.h>

@@ -12,7 +12,8 @@ $vs='C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tool
 $envLines=& cmd.exe /d /s /c ('call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && set')
 foreach($line in $envLines){$i=$line.IndexOf('=');if($i -gt 0){Set-Item -Path ('env:'+$line.Substring(0,$i)) -Value $line.Substring($i+1)}}
 $sources=@('tests/app/console_input_batch_test.c',
- 'src/worker-base/console_client.c',
+ 'src/common/console/client.c',
+ 'src/common/transport/pipe_transfer.c',
  'src/ntvdm-exe/win32/console_client.c','src/ntvdm-exe/win32/console_graphics.c',
  'src/ntvdm-exe/win32/console_bitmap.c','src/opennt-abi/host-compat/console_grid.c',
  'src/ntvdm-exe/session/session.c','src/ntvdm-exe/session/guest_memory_lease.c') |

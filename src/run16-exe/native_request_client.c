@@ -1,4 +1,4 @@
-#include "interface/native_request_client.h"
+#include "run16-exe/native_request_client.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
 DWORD run16_native_request_submit(HANDLE root_capability,const run16_native_start *start,HANDLE *target,HANDLE *receipt,DWORD *request)
 {

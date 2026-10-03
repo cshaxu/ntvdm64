@@ -65,6 +65,20 @@ relocate original execution. Detailed checklist and gates belong to the
 
 ### Common library and service separation — T424 S7 target
 
+Owner's subsequent closure revision separates these goals: S7 owns common and
+the two protocol families; the complete NTSRV block-provenance review and
+service-private source split belong to the next S8. Earlier combined wording
+below is retained context, not an S7 service-split completion claim. Native GUI,
+frontend naming and final audit follow as S9, S10 and S11.
+
+Final owner transport clarification: common carries both protocol families
+and their suitable shared client/transport mechanisms. NTSRV control uses
+RPC; direct NTKVM-worker I/O retains named pipes. Worker-base may depend on
+common; common has no reverse dependency on worker-base or EXE-private code.
+Neither protocol depends on or relays through the other. Endpoint-specific
+authentication policy, execution, rendering and retirement remain owner-local.
+RPC migration of worker I/O is not admitted.
+
 After S6 naming delivery, the owner admits converting src/interface into src/common:
 a declaration/IDL-only protocol submodule plus narrowly scoped, separately
 selected shared implementation modules. Cross-component project-added transport,
@@ -84,7 +98,17 @@ not common policy. The path/banner cannot substitute for an original-source
 ledger. The [S7 checklist](../etc/operations/t424-worker-frontend-renaming-plan.md#s7-common-library-and-service-source-separation)
 requires source/hash/block classification, mirror comparisons, duplicate removal,
 production link coverage and the full regression/publication gate.
-Until S7 implementation, interface remains the delivered declaration-only root.
+The accepted S6 runtime retains the previous interface source layout. The S7
+candidate now selects common/protocol for copied declarations/IDL,
+common/codec for bounded packet validation and common/transport and
+common/console for neutral transfer and on-demand snapshot mechanics.
+Worker-only clients may depend on these common providers; common never depends
+on worker-base or executable-private implementation. Local client instance
+declarations are not wire contracts and stay with their implementation owner.
+The native control pipe, its transitional interface header and the internal
+service pipe test seams are removed in the candidate. Remaining client/service
+organization and full runtime verification are still open; source cleanup alone
+does not prove S7 completion or authorize publication of a mixed package.
 This bounded owner approval supersedes the blanket common-root prohibition
 for the stated purpose, not other ownership or mirror restrictions.
 

@@ -1,7 +1,7 @@
 #ifndef BROKER_VDM_MESSAGE_H
 #define BROKER_VDM_MESSAGE_H
 #include <stdint.h>
-#include "interface/vdm_protocol.h"
+#include "common/protocol/vdm_protocol.h"
 /* x86 little-endian envelope only. No sender identity, native value or generic
  * CSR message is represented. Operation-specific body validation is mandatory.
  * trusted_generation comes from an authenticated registration; it is not read

@@ -2,7 +2,7 @@
 #define RUN16_NATIVE_CONSOLE_FRONTEND_H
 #include <windows.h>
 #include "console_video.h"
-#include "interface/console_io.h"
+#include "common/protocol/console_io.h"
 typedef struct run16_native_frontend run16_native_frontend;
 DWORD run16_native_frontend_create(run16_native_frontend **);
 /* Caller owns non-inheritable duplicates of the session's canonical handles. */

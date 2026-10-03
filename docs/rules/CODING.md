@@ -21,6 +21,10 @@ ordering and minimal registered hooks, with pinned-source diff accounting.
 Do not extract original execution/completion into common/worker-base.
 See the [S7 checklist](../etc/operations/t424-worker-frontend-renaming-plan.md#s7-common-library-and-service-source-separation).
 
+Owner's subsequent closure direction transfers the complete service block
+ledger and physical split to the next S8. S7 retains common and the two
+protocol families; all ownership and mirror restrictions still apply to S8.
+
 `mvdm-host` below is a logical host-slice name. Its selected original files
 live physically under `src/mvdm/`; the extracted printer carrier is named
 monitor-adapter material.

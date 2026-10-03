@@ -3,7 +3,7 @@
 #include "ntvdm-exe/win32/console_text.h"
 #include "ntvdm-exe/win32/console_client.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_text_video.h"
-#include "interface/console_io.h"
+#include "common/protocol/console_io.h"
 #include <stdio.h>
 #include <string.h>
 #define CHECK(x) do { if (!(x)) { fprintf(stderr,"FAIL %d error=%lu\n",__LINE__,GetLastError()); return 1; } } while(0)

@@ -1,7 +1,7 @@
 /* Worker-local transport only. No native Console presentation or guest policy. */
 #include "console_client.h"
 #include "console_text.h"
-#include "interface/worker_console_client.h"
+#include "common/console/client.h"
 #include "opennt-abi/host-compat/include/console_grid.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
 #include "worker-base/connection.h"

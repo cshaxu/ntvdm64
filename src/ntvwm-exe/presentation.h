@@ -1,7 +1,7 @@
 #ifndef NTVWM_PRESENTATION_H
 #define NTVWM_PRESENTATION_H
 #include <windows.h>
-#include "interface/console_io.h"
+#include "common/protocol/console_io.h"
 typedef struct ntvwm_presentation ntvwm_presentation;
 /* Borrow authenticated pipe/frontend/stop references for this endpoint's
  * lifetime. One serialized request stream; close only after users join. */

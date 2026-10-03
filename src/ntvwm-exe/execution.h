@@ -25,9 +25,10 @@ DWORD ntvwm_executions_wait_idle(ntvwm_executions *);
 /* A broker completion failure is a worker fault, not permission to accept a
  * second command while NTSRV may still retain the first record. */
 void ntvwm_executions_note_broker_failure(ntvwm_executions *,DWORD);
-/* Consumes all authenticated command attachments, including on failure.  A
- * preflight_error is returned through the normal native request reply after
- * the requester has finished its header/payload transfer; it is not a broker
+/* Successful thread handoff consumes the copied command and attachments;
+ * on startup failure the caller retains them for completion and disposal.
+ * A preflight_error is returned through the authenticated startup RPC,
+ * before completion; it is not a broker
  * completion without a peer-visible result.  No process-tree ownership:
  * closing a request never kills its running target. */
 DWORD ntvwm_execution_start(ntvwm_executions *,ntvwm_next_command *,DWORD preflight_error);

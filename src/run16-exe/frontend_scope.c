@@ -1,8 +1,9 @@
 #include "frontend_scope.h"
-#include "interface/frontend_bootstrap.h"
-#include "interface/native_request_client.h"
+#include "run16-exe/frontend_bootstrap.h"
+#include "run16-exe/native_request_client.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
-#include "interface/console_io.h"
+#include "common/protocol/console_io.h"
+#include "common/console/members.h"
 #include <stdint.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -209,25 +210,16 @@ DWORD run16_frontend_scope_wait_native(run16_frontend_scope *scope,DWORD *result
 }
 DWORD run16_frontend_scope_resume_parent(run16_frontend_scope *scope)
 {
-    DWORD capacity=16,count,index,error=0,*members=NULL;
+    DWORD count,index,error=0,*members=NULL;
     HANDLE worker=NULL;
     if(!scope || !scope->has_execution)return 0;
     /* Actual attachment distinguishes a native caller from a DOS-side
      * launcher. This is a routing check only; broker selection and the
      * authenticated completion receipt still grant endpoint authority. */
-    for(;;) {
-        members=HeapAlloc(GetProcessHeap(),0,capacity*sizeof(*members));
-        if(!members)return ERROR_NOT_ENOUGH_MEMORY;
-        count=GetConsoleProcessList(members,capacity);
-        if(!count) {
-            error=GetLastError();
-            if(error==ERROR_INVALID_HANDLE)error=0;
-            goto done;
-        }
-        if(count<=capacity)break;
-        HeapFree(GetProcessHeap(),0,members);members=NULL;
-        if(count>65536)return ERROR_BUFFER_OVERFLOW;
-        capacity=count;
+    error=common_console_members_read(16,65536,0,&members,&count);
+    if(error) {
+        if(error==ERROR_INVALID_HANDLE)error=0;
+        goto done;
     }
     error=OpenNtBaseClientSelectNativeWorker(&worker);
     if(error==ERROR_NOT_FOUND){error=0;goto done;}
@@ -236,7 +228,7 @@ DWORD run16_frontend_scope_resume_parent(run16_frontend_scope *scope)
     if(index<count)error=run16_native_request_resume(scope->capability);
 done:
     if(worker)CloseHandle(worker);
-    if(members)HeapFree(GetProcessHeap(),0,members);
+    common_console_members_release(members);
     return error;
 }
 

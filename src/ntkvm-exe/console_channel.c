@@ -1,5 +1,6 @@
 #include "console_channel.h"
 #include "console_frontend.h"
+#include "common/transport/pipe_transfer.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
 #include <stddef.h>
 #include <stdio.h>
@@ -151,16 +152,12 @@ static DWORD transfer(run16_console_channel *channel,BOOL write,void *buffer,DWO
 {
     BYTE *cursor=buffer;
     while (bytes) {
-        OVERLAPPED io={0};
+        common_pipe_operation io;
         DWORD done=0,error,wait;
         HANDLE waits[4]={channel->stop,channel->worker,channel->io_event,run16_native_frontend_dos_ready(channel->root)};
-        BOOL ok;
         if (WaitForSingleObject(channel->stop,0)==WAIT_OBJECT_0) return ERROR_OPERATION_ABORTED;
-        ResetEvent(channel->io_event);io.hEvent=channel->io_event;
-        ok=write ? WriteFile(channel->pipe,cursor,bytes,&done,&io) :
-            ReadFile(channel->pipe,cursor,bytes,&done,&io);
-        if (!ok) {
-            error=GetLastError();
+        error=common_pipe_begin(&io,channel->pipe,channel->io_event,write,cursor,bytes,bytes,&done);
+        if (error) {
             if (error!=ERROR_IO_PENDING) return error;
             for (;;) {
                 wait=WaitForMultipleObjects(!write && !channel->input_pending && active(channel) ? 4 : 3,waits,FALSE,INFINITE);
@@ -171,11 +168,12 @@ static DWORD transfer(run16_console_channel *channel,BOOL write,void *buffer,DWO
             if (wait!=WAIT_OBJECT_0+2) {
                 error=wait==WAIT_FAILED ? GetLastError() :
                     wait==WAIT_OBJECT_0 ? ERROR_OPERATION_ABORTED : ERROR_PROCESS_ABORTED;
-                CancelIoEx(channel->pipe,&io);
-                (void)GetOverlappedResult(channel->pipe,&io,&done,TRUE);
+                common_pipe_cancel_drain(&io);
                 return error;
             }
-            if (!GetOverlappedResult(channel->pipe,&io,&done,FALSE)) return GetLastError();
+            error=common_pipe_finish(&io,&done);
+            common_pipe_cancel_drain(&io);
+            if(error)return error;
         }
         if (!done || done>bytes) return ERROR_BROKEN_PIPE;
         cursor+=done;bytes-=done;

@@ -1,7 +1,7 @@
 #ifndef RUN16_FRONTEND_SCOPE_H
 #define RUN16_FRONTEND_SCOPE_H
 #include <windows.h>
-#include "interface/native_launch.h"
+#include "common/codec/native_launch.h"
 typedef struct run16_frontend_scope run16_frontend_scope;
 /* Requires the caller's connected BaseClient. End before disconnecting it. */
 DWORD run16_frontend_scope_begin(run16_frontend_scope **);

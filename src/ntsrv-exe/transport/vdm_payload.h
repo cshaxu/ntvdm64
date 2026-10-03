@@ -2,7 +2,7 @@
 #define BROKER_VDM_PAYLOAD_H
 #include <stdint.h>
 
-#include "interface/vdm_protocol.h"
+#include "common/protocol/vdm_protocol.h"
 /* Local encode inputs only: no native pointer enters the copied record. */
 typedef struct broker_vdm_payload_input {
     uint32_t present, length, data_bytes;

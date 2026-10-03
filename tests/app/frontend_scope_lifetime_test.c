@@ -8,8 +8,8 @@
 #include "run16-exe/frontend_scope.h"
 #include "ntkvm-exe/console_channel.h"
 #include "ntkvm-exe/session_service.h"
-#include "interface/frontend_bootstrap.h"
-#include "interface/console_io.h"
+#include "run16-exe/frontend_bootstrap.h"
+#include "common/protocol/console_io.h"
 
 #define CHECK(x) do { if (!(x)) { fprintf(stderr,"line %u error %lu: %s\n", \
     (unsigned)__LINE__,GetLastError(),#x); ExitProcess(1); } } while (0)

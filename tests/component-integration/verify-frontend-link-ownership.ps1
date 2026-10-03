@@ -7,14 +7,28 @@ $graph = Get-Content -LiteralPath (Join-Path $BuildRoot 'build.ninja')
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
 # Presentation attachment is live; execution submission to a frontend is not.
 # A stale RPC method must not survive merely because no EXE calls it today.
-foreach ($path in @('src/interface/service.idl',
+foreach ($path in @('src/common/protocol/service.idl',
         'src/ntsrv-exe/opennt/source/base_rpc_client.c',
         'src/ntsrv-exe/opennt/source/base_service.c',
         'src/run16-exe/native_request_client.c')) {
     $source = Get-Content -LiteralPath (Join-Path $repo $path) -Raw
-    if ($source -match 'SubmitFrontendChannel|TakeFrontendChannel|run16_native_request_submit') {
+    if ($source -match 'SubmitFrontendChannel|TakeFrontendChannel') {
         throw "Retired frontend execution entry remains: $path"
     }
+}
+# The surviving run16 submit wrapper calls NTSRV, not a frontend receiver.
+foreach($path in @('src/common/protocol/frontend_protocol.h',
+        'src/ntsrv-exe/opennt/source/base_service.c',
+        'src/ntvwm-exe/execution.c')) {
+    $source=Get-Content -LiteralPath (Join-Path $repo $path) -Raw
+    if($source -match 'native_request_completion|broker_native_completion_status|QueueNativeChannel|TakeWorkerChannel|native_request_header|native_request_reply|frontend_bootstrap_reply') {
+        throw "Retired native/bootstrap control pipe protocol or test seam remains: $path"
+    }
+}
+$requestClient = Get-Content -LiteralPath (Join-Path $repo 'src/run16-exe/native_request_client.c') -Raw
+if ($requestClient -notmatch 'OpenNtBaseClientSubmitNativeRequest' -or
+    $requestClient -match 'CreateNamedPipe|CreateFile|native_request_transfer|WriteFile|ReadFile') {
+    throw 'Launcher native submission must remain a service client, not direct I/O'
 }
 
 function Assert-FrontendOwnership([string[]]$Lines) {
@@ -33,7 +47,7 @@ function Assert-FrontendOwnership([string[]]$Lines) {
         $inputs = ($Matches[3] -split '\s+\|\|?\s+')[0] -split '\s+'
         foreach ($output in $outputs) { $edges[$output] = $inputs }
     }
-    function Get-FrontendSources([string]$Target,[string]$Owner='ntkvm-exe') {
+    function Get-FrontendSources([string]$Target,[string]$Owner='ntkvm-exe',[string]$Root='src') {
         if (!$edges.ContainsKey($Target)) { throw "Missing graph target: $Target" }
         $pending = [Collections.Generic.Stack[string]]::new()
         $seen = [Collections.Generic.HashSet[string]]::new()
@@ -48,7 +62,7 @@ function Assert-FrontendOwnership([string[]]$Lines) {
                 if ($input -in @('frontend-terminal.lib','ntkvm-worker-client.lib')) {
                     throw 'Retired frontend archive re-entered a production link'
                 }
-                if ($input -match ('/src/'+[regex]::Escape($Owner)+'/(.+\.c)$')) {
+                if ($input -match ('/'+[regex]::Escape($Root)+'/'+[regex]::Escape($Owner)+'/(.+\.c)$')) {
                     [void]$sources.Add($Matches[1])
                 } elseif ($input -match '\.(obj|lib)$' -and $edges.ContainsKey($input)) {
                     $pending.Push($input)
@@ -57,8 +71,17 @@ function Assert-FrontendOwnership([string[]]$Lines) {
         }
         return @($sources | Sort-Object)
     }
-    $client = @('bootstrap_client.c', 'native_launch_packet.c',
-        'native_request_client.c', 'native_request_io.c') | Sort-Object
+    foreach($target in @('run16.exe','ntsrv.exe','ntvdm.exe','ntvwm.exe','ntkvm.exe','ntmon.exe')) {
+        if(@(Get-FrontendSources $target 'adapter-basesrv' 'tests').Count) {
+            throw "$target includes service test-only translation/hooks"
+        }
+    }
+    $fixtureSources=@(Get-FrontendSources 'basesrv-service-reservation-test.exe' 'adapter-basesrv' 'tests')
+    if(@(Compare-Object @('base_service_reservation_test.c','base_service_fixture.c') $fixtureSources).Count) {
+        throw 'Copied service fixture must explicitly select its test-only service translation'
+    }
+    $client = @('bootstrap_client.c',
+        'native_request_client.c') | Sort-Object
     foreach ($target in @('frontend-client.lib', 'run16.exe')) {
         if (@(Get-FrontendSources $target).Count) {
             throw "$target must not depend on NTKVM-private implementation"
@@ -69,7 +92,7 @@ function Assert-FrontendOwnership([string[]]$Lines) {
             throw "$target frontend source ownership mismatch: $($actual -join ', ')"
         }
     }
-    # Shared worker clients now belong to worker-base, never NTKVM-private code.
+    # Shared I/O clients belong to common, never NTKVM-private code.
     $worker = @(Get-FrontendSources 'ntvdm.exe')
     if ($worker.Count) {
         throw "ntvdm frontend client-only boundary mismatch: $worker"
@@ -94,9 +117,46 @@ function Assert-FrontendOwnership([string[]]$Lines) {
     if($launcherNative.Count -or 'native_launch.c' -notin @(Get-FrontendSources 'run16.exe' 'run16-exe')) {
         throw 'run16 must retain bounded GUI creation, not NTVWM execution/presentation'
     }
-    foreach($required in @('native_launch.c','native_launch_packet.c')) {
+    foreach($required in @('native_launch.c')) {
         if($required -notin @(Get-FrontendSources 'ntvwm.exe' 'run16-exe')) {
             throw "NTVWM omits shared native launch primitive $required"
+        }
+    }
+    foreach($archive in @('frontend-client.lib','opennt-base-bindings.lib','worker-base.lib')) {
+        if(@(Get-FrontendSources $archive 'common').Count) {
+            throw "$archive must not embed neutral common providers"
+        }
+    }
+    foreach($archive in @('common-codec.lib','common-transport.lib','common-console.lib','common-rpc.lib')) {
+        foreach($owner in @('run16-exe','ntsrv-exe','ntkvm-exe','ntvwm-exe','ntvdm-exe','worker-base')) {
+            if(@(Get-FrontendSources $archive $owner).Count) {
+                throw "$archive reverse-depends on $owner"
+            }
+        }
+    }
+    if(@(Compare-Object @('codec/native_launch.c') @(Get-FrontendSources 'common-codec.lib' 'common')).Count) {
+        throw 'Common native packet codec must have exactly one provider'
+    }
+    if(@(Compare-Object @('transport/pipe_transfer.c') @(Get-FrontendSources 'common-transport.lib' 'common')).Count) {
+        throw 'Common pipe mechanics must have exactly one provider'
+    }
+    if(@(Compare-Object @('console/members.c','console/client.c') @(Get-FrontendSources 'common-console.lib' 'common')).Count) {
+        throw 'Common Console snapshot/client must have exactly one provider'
+    }
+    if(@(Compare-Object @('rpc/local_binding.c','rpc/native_command.c','rpc/frontend_control.c','rpc/worker_control.c','rpc/management.c') @(Get-FrontendSources 'common-rpc.lib' 'common')).Count) {
+        throw 'Common RPC binding/native-command/frontend-control/worker-control clients must each have exactly one provider'
+    }
+    foreach($target in @('run16.exe','ntvdm.exe','ntvwm.exe','ntkvm.exe','ntmon.exe')) {
+        if('rpc/local_binding.c' -notin @(Get-FrontendSources $target 'common')) {
+            throw "$target omits shared local RPC binding"
+        }
+    }
+    foreach($target in @('run16.exe','ntsrv.exe','ntvwm.exe','ntkvm.exe')) {
+        if('codec/native_launch.c' -notin @(Get-FrontendSources $target 'common')) {
+            throw "$target omits the common native packet codec"
+        }
+        if('console/members.c' -notin @(Get-FrontendSources $target 'common')) {
+            throw "$target omits the common Console snapshot implementation"
         }
     }
     $shared = @(Get-FrontendSources 'worker-base.lib')
@@ -105,8 +165,13 @@ function Assert-FrontendOwnership([string[]]$Lines) {
     }
     foreach($target in @('worker-base.lib','ntvdm.exe','ntvwm.exe')) {
         $actual=@(Get-FrontendSources $target 'worker-base')
-        if(@(Compare-Object @('connection.c','console_client.c') $actual).Count) {
+        if(@(Compare-Object @('connection.c') $actual).Count) {
             throw "$target does not use the complete common worker implementation"
+        }
+    }
+    foreach($target in @('ntvdm.exe','ntvwm.exe','console-client-test.exe','ntvwm-presentation-test.exe')) {
+        if('console/client.c' -notin @(Get-FrontendSources $target 'common')) {
+            throw "$target omits the common frontend protocol client"
         }
     }
     $ntvdmNative=@(Get-FrontendSources 'ntvdm.exe' 'ntvwm-exe')
@@ -136,6 +201,37 @@ function Assert-FrontendOwnership([string[]]$Lines) {
 }
 
 Assert-FrontendOwnership $graph
+foreach($target in @('run16.exe','ntsrv.exe','ntvdm.exe','ntvwm.exe','ntkvm.exe','ntmon.exe')) {
+    $mutated=@($graph | ForEach-Object {
+        if($_ -match ('^build '+[regex]::Escape($target)+'(?: |:)')) {
+            $_ -replace ': (\S+) ', ': $1 obj/tests/base_service_fixture.obj '
+        } else { $_ }
+    })
+    $rejected=$false
+    try {Assert-FrontendOwnership $mutated} catch {$rejected=$true}
+    if(!$rejected){throw "Service fixture contamination accepted: $target"}
+}
+# Neutral code must be selected once, not copied into private archives.
+foreach($archive in @('frontend-client.lib','opennt-base-bindings.lib','worker-base.lib')) {
+    $mutated=@($graph | ForEach-Object {
+        if($_ -match ('^build '+[regex]::Escape($archive)+':')) {
+            $_ -replace ': (\S+) ', ': $1 obj/common/native_launch.obj '
+        } else { $_ }
+    })
+    $rejected=$false
+    try { Assert-FrontendOwnership $mutated } catch { $rejected=$true }
+    if(!$rejected){throw "Common provider embedding accepted: $archive"}
+}
+foreach($archive in @('common-codec.lib','common-transport.lib','common-console.lib','common-rpc.lib')) {
+    $mutated=@($graph | ForEach-Object {
+        if($_ -match ('^build '+[regex]::Escape($archive)+':')) {
+            $_ -replace ': (\S+) ', ': $1 obj/run16/native_launch.obj '
+        } else { $_ }
+    })
+    $rejected=$false
+    try { Assert-FrontendOwnership $mutated } catch { $rejected=$true }
+    if(!$rejected){throw "Common reverse dependency accepted: $archive"}
+}
 # The packet codec is shared with callers; native target creation is not.
 foreach($target in @('frontend-client.lib','ntkvm.exe')) {
     $mutated=@($graph | ForEach-Object {

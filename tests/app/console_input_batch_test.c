@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "conapi.h"
-#include "interface/console_mouse.h"
+#include "common/protocol/console_mouse.h"
 static INPUT_RECORD queue[1024];
 static DWORD queued, position, reads, peeks;
 static DWORD mouse_capacity=256;

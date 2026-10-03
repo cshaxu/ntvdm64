@@ -9,8 +9,8 @@
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
 #include "worker-base/connection.h"
 #include "ntvwm-exe/next_command.h"
-#include "interface/native_request_client.h"
-#include "interface/console_io.h"
+#include "run16-exe/native_request_client.h"
+#include "common/protocol/console_io.h"
 #include <stddef.h>
 
 /* BaseCheckForVDM shares its original client translation unit with

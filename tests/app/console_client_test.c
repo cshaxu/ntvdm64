@@ -40,6 +40,7 @@ static BOOL native_set_display(HANDLE h,DWORD flags,COORD *size)
 static session owner;
 static __declspec(thread) session *bound;
 static HANDLE delivery,peer,stop,readiness,frontend_process;
+static HANDLE broker_shutdown;
 static session_teardown_fn cleanup;
 static void *cleanup_context;
 static run16_console_frontend frontend;
@@ -79,6 +80,16 @@ DWORD worker_base_retain_frontend_root(HANDLE capability,HANDLE *process)
     /* The broker's authenticated root retention is covered by RPC tests. */
     return DuplicateHandle(GetCurrentProcess(),frontend_process,GetCurrentProcess(),
         process,SYNCHRONIZE,FALSE,0) ? ERROR_SUCCESS : GetLastError();
+}
+DWORD worker_base_shutdown_event(HANDLE *shutdown)
+{
+    CHECK(shutdown!=NULL);
+    if(!broker_shutdown)broker_shutdown=CreateEventW(NULL,TRUE,FALSE,NULL);
+    if(!broker_shutdown)return GetLastError();
+    /* Mock only the authenticated broker instruction; production workers no
+     * longer treat root process death itself as a lifecycle decision. */
+    return DuplicateHandle(GetCurrentProcess(),broker_shutdown,GetCurrentProcess(),
+        shutdown,SYNCHRONIZE,FALSE,0) ? ERROR_SUCCESS : GetLastError();
 }
 DWORD OpenNtBaseClientAcquireConsoleContext(HANDLE root_capability,HANDLE *capability)
 {
@@ -780,6 +791,7 @@ int main(int argc,char **argv)
     SetEvent(stop);
     CHECK(TerminateProcess(frontend_process,23));
     CHECK(WaitForSingleObject(frontend_process,5000)==WAIT_OBJECT_0);
+    CHECK(SetEvent(broker_shutdown)); /* Simulated NTSRV root-loss instruction. */
     Sleep(10000);
     CHECK(!"root close did not terminate fixture");
 disconnected:
@@ -799,7 +811,7 @@ disconnected:
     CHECK(!owner.console_client);
     CHECK(WaitForSingleObject(thread,5000)==WAIT_OBJECT_0);
     CloseHandle(thread);CloseHandle(stop);CloseHandle(local);CloseHandle(frontend.output);CloseHandle(frontend.input);
-    CloseHandle(readiness);CloseHandle(frontend_process);
+    CloseHandle(readiness);CloseHandle(frontend_process);CloseHandle(broker_shutdown);
     puts("PASS client transport, distinct frontend ownership, native error and idle frontend loss");
     return 0;
 }

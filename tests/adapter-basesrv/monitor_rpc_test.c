@@ -9,7 +9,8 @@
 #include <wchar.h>
 #include "service.h"
 #include "ntsrv-exe/transport/rpc_security.h"
-#include "interface/version.h"
+#include "common/protocol/version.h"
+#include "common/rpc/management.h"
 
 #define CHECK(value) do { if (!(value)) { fprintf(stderr,"FAIL %d: %lu\n",__LINE__,(unsigned long)GetLastError()); return 1; } } while (0)
 
@@ -100,7 +101,17 @@ static int console_context_rpc(RPC_BINDING_HANDLE binding,HANDLE self)
         &server_protocol,server_version,&connection,&generation),ERROR_SUCCESS);
     CHECK(connection && generation && server_protocol==APP_PROTOCOL_VERSION &&
         !memcmp(server_version,version,sizeof(version)));
+    /* A launcher cannot impersonate a native worker or report a guessed
+     * request's startup, even with valid process/event attachments. */
+    RPC_CHECK(Client_NativeStartupResult(binding,connection,self,generation,
+        generation,1,ERROR_SUCCESS,self,forged),ERROR_ACCESS_DENIED);
+    RPC_CHECK(Client_NativeStartupResult(binding,connection,self,generation+1,
+        generation,1,ERROR_ACCESS_DENIED,NULL,NULL),ERROR_ACCESS_DENIED);
     RPC_CHECK(Client_RegisterFrontendRoot(binding,connection,self,generation,forged),ERROR_ACCESS_DENIED);
+    RPC_CHECK(Client_FrontendStartupResult(binding,connection,self,generation,
+        forged,ERROR_ACCESS_DENIED),ERROR_ACCESS_DENIED);
+    RPC_CHECK(Client_FrontendStartupResult(binding,connection,self,generation+1,
+        forged,ERROR_SUCCESS),ERROR_ACCESS_DENIED);
     RPC_CHECK(Client_StartFrontend(binding,connection,self,generation,
         (ULONGLONG)(UINT_PTR)GetConsoleWindow(),TRUE,&root,&frontend,&restored),ERROR_SUCCESS);
     CHECK(root && frontend && restored);
@@ -114,6 +125,7 @@ static int console_context_rpc(RPC_BINDING_HANDLE binding,HANDLE self)
     {
         HANDLE received=NULL,sender=NULL,context=NULL,io=NULL,probe=NULL,target=NULL,receipt=NULL;
         BYTE malformed=0;
+        DWORD caller_generation=0,bytes=0;
         ULONG request=0;
         RPC_CHECK(Client_SubmitNativeRequest(binding,connection,self,generation+1,frontend,0,NULL,
             &target,&receipt,&request),ERROR_ACCESS_DENIED);
@@ -128,7 +140,7 @@ static int console_context_rpc(RPC_BINDING_HANDLE binding,HANDLE self)
         RPC_CHECK(Client_SubmitNativeRequest(binding,connection,self,generation,frontend,0,NULL,
             &target,&receipt,&request),ERROR_NOT_READY);
         CHECK(!target && !receipt && !request);
-        RPC_CHECK(Client_GetNextNativeCommand(binding,connection,self,generation,&received,&sender,&context,&io,&request),ERROR_ACCESS_DENIED);
+        RPC_CHECK(Client_GetNextNativeCommand(binding,connection,self,generation,1,&malformed,&bytes,&sender,&context,&io,&request,&caller_generation),ERROR_ACCESS_DENIED);
         CHECK(!received && !sender && !context && !io);
         /* The launcher now retains a separate real NTKVM root. It cannot
          * consume that root's worker-I/O request queue. */
@@ -162,6 +174,7 @@ int main(int argc,char **argv)
 {
     broker_rpc_scope scope={0};
     RPC_BINDING_HANDLE binding;
+    common_rpc_management management;
     PROCESS_INFORMATION broker={0};
     STARTUPINFOW startup={sizeof(startup)};
     WCHAR path[MAX_PATH],*slash;
@@ -184,13 +197,9 @@ int main(int argc,char **argv)
     self=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION|SYNCHRONIZE|PROCESS_DUP_HANDLE,FALSE,GetCurrentProcessId());
     CHECK(self!=NULL);
     binding=bind_server(&scope); CHECK(binding!=NULL);
+    management.binding=binding;management.process=self;
     for (attempt=0;attempt<100;++attempt) {
-        RpcTryExcept {
-            error=Client_TaskSnapshot(binding,self,APP_PROTOCOL_VERSION,(unsigned char *)version,
-                &count,&entries);
-        }
-        RpcExcept(1) { error=RpcExceptionCode(); }
-        RpcEndExcept
+        error=common_rpc_task_snapshot(&management,&count,&entries);
         if (error==ERROR_SUCCESS) break;
         Sleep(50);
     }
@@ -213,12 +222,7 @@ int main(int argc,char **argv)
                     if(entries[selected].process_id==selected_pid)break;
                 CHECK(selected<count);
             } else CHECK(count==1);
-            RpcTryExcept {
-                error=Client_TerminateWorker(binding,self,APP_PROTOCOL_VERSION,(unsigned char *)version,
-                    entries[selected].process_id);
-            }
-            RpcExcept(1) { error=RpcExceptionCode(); }
-            RpcEndExcept
+            error=common_rpc_terminate_worker(&management,entries[selected].process_id);
             CHECK(error==ERROR_SUCCESS);
             puts("PASS: authenticated DTASKMGR RPC accepted selected live worker termination");
         }

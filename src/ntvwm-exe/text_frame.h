@@ -1,8 +1,8 @@
 #ifndef NTVWM_TEXT_FRAME_H
 #define NTVWM_TEXT_FRAME_H
 #include <windows.h>
-#include "interface/console_video.h"
-#include "interface/console_mouse.h"
+#include "common/protocol/console_video.h"
+#include "common/protocol/console_mouse.h"
 
 typedef struct ntvwm_mouse {
     SMALL_RECT viewport;

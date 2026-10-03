@@ -1,5 +1,5 @@
 /* Project-owned native launch packet codec; shared by submitter and NTVWM. */
-#include "interface/native_launch.h"
+#include "common/codec/native_launch.h"
 #include <string.h>
 #include <wchar.h>
 

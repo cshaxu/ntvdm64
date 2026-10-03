@@ -12,5 +12,6 @@ interface vdm_service
     RegisterNativeBackend([context_handle_noserialize] connection);
     BindNativeTarget([context_handle_noserialize] connection);
     CompleteWorkerChannel([context_handle_noserialize] connection);
+    NativeStartupResult([context_handle_noserialize] connection);
     TakeFrontend([context_handle_noserialize] connection);
 }

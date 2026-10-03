@@ -14,12 +14,22 @@ worker-base; worker-base remains worker-only and may use neutral common modules.
 Resource ownership, authentication policy, service records/retirement and
 frontend rendering remain with their existing owners.
 
+Final S7 owner clarification places both protocol families and suitable shared
+client/transport mechanisms in common: NTSRV control uses RPC, direct
+NTKVM-worker I/O uses named pipes. Common is their source/library carrier,
+not a service relay or a shared scheduling authority. Worker-base may depend
+on common, never the reverse. Do not migrate worker I/O to RPC.
+
 S7 also provenance-classifies and splits project-added NTSRV base_service.c
 implementation into bounded service-private modules. Original OpenNT/MVDM
 source stays in its upstream-relative mirror; preserve original algorithms,
 ordering and minimal registered hooks, with pinned-source diff accounting.
 Do not extract original execution/completion into common/worker-base.
 See the [S7 checklist](../etc/operations/t424-worker-frontend-renaming-plan.md#s7-common-library-and-service-source-separation).
+
+Owner's subsequent closure direction transfers the complete service block
+ledger and physical split to the next S8. S7 retains common and the two
+protocol families; all ownership and mirror restrictions still apply to S8.
 
 Owner-approved S12 text extension supersedes the byte-pair-only wording below:
 both workers use one text ABI with original glyph/attribute pairs or optional

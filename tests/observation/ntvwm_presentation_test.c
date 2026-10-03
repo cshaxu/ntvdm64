@@ -1,7 +1,7 @@
 #include "ntvwm-exe/presentation.h"
 #include "ntvwm-exe/console_state.h"
 #include "ntkvm-exe/console_video.h"
-#include "interface/worker_console_client.h"
+#include "common/console/client.h"
 #include <stdio.h>
 #include <stddef.h>
 #include <string.h>

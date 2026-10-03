@@ -1,7 +1,7 @@
 #ifndef RUN16_CONSOLE_VIDEO_H
 #define RUN16_CONSOLE_VIDEO_H
 #include <windows.h>
-#include "interface/console_video.h"
+#include "common/protocol/console_video.h"
 
 /* Access is serialized by the channel owner, including disposal. Rendering
  * must take a snapshot through that owner; raw pointers never cross IPC. */

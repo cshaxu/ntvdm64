@@ -2,36 +2,59 @@
 
 ## Current Work
 
-## Active Packet
+**No active numeric M/T/S packet.** T424 remains open for owner acceptance.
+S7's common/two-protocol implementation is closed with the reviewed P1 delivery
+record below. Service source separation is planned as the next S8 by owner
+direction; S8 implementation has not started. No T closure is claimed.
 
-**Active: M0 T424 S7** — owner-approved common library and NTSRV source
-separation, Ordinary Mode. S6 production P `21b576a9e` is pushed and published.
-T424 remains open for owner acceptance. GUI routing and frontend naming remain
-subsequent stages; this admission is not a claim of S7 implementation.
+## S7 Closed Packet
 
 | Field | Admitted record |
 | --- | --- |
 | Identifier Mode | M0 T424 S7, Ordinary Mode. |
 | Candidate Proposal | [Admitted naming/control proposal](../proposals/proposal-native-worker-frontend-renaming-001.md). |
 | Admission And Approval | Standing automatic sequential admission after verified S6 delivery; explicit owner approval for bounded common/static-library organization, provenance-based NTSRV split and maximum suitable worker-base/consumer reuse. Preserve other-session changes. |
-| Objective | Inventory provenance and ownership, convert interface to bounded common submodules, consolidate genuinely shared project mechanisms, and separate project-added NTSRV implementation from original carriers without changing broker control or original execution semantics. |
+| Objective | Inventory affected provenance and ownership; eliminate extra native/frontend control pipes so service control uses authenticated RPC and NTKVM-worker I/O retains its direct pipe; organize suitable shared RPC, protocol, codec and transport mechanisms in common. Complete service block review and NTSRV-private physical split transfer to next S8 by owner direction. |
 | Non-goals | No GUI/UNBOUND routing, worker/frontend rename, guest/shared-lib change, helper/scheduler/observer, authentication weakening, launch-syntax or original scheduling change. Retain approved polling and specialist ownership. |
 | Reference Baseline | S6 production P 21b576a9e, protocol/RPC31, coherent ntvwm.exe + ntkvm.exe eight-file publication, Console17/Window17 and retained WOW frontiers; [S6 evidence](../etc/evidence/m0-t424-s6-native-worker-name.md). |
-| Files And ABI Surface | interface/common declarations and selected neutral implementations; worker-base remains worker-only; NTSRV private modules and consumers/build/tests/docs. Audit original OpenNT blocks against pinned inputs before moving anything. Preserve wire layout unless a proven change requires paired app/RPC versioning. |
+| Files And ABI Surface | interface/common declarations and selected neutral implementations; worker-base remains worker-only; NTSRV private modules, native GetNext/launch/completion and frontend startup acknowledgement, consumers/build/tests/docs. Audit original OpenNT blocks against pinned inputs before moving anything. Actual RPC contract changes require paired app/RPC versioning and regenerated MIDL. |
 | Applicable Rules | README authority set, EXECUTION, architecture/coding/document rules and source policy; preserve original source semantics and parallel edits. |
 | Verification | Provenance/function ledger, pinned-original byte/normalized comparisons, selected static-link dependency checks, snapshot growth/error tests, retained transport/receipt/authentication/lifetime assertions, x86/MIDL/WOW links, Console17/Window17, real EDIT/relaunch/isolation/retirement and WOW frontiers; recoverable eight-file publication/smoke plus governance/link/diff review. |
-| Expected Markers | One implementation per suitable shared mechanism, no reverse dependency from common to worker-base/EXEs, explicit state/resource/lock ownership, NTSRV remains sole registry/retirement authority, original DOS/WOW remains original-owned; remove replaced wrappers/files. |
+| Expected Markers | Two message protocol families only: authenticated NTSRV RPC control and the existing common NTKVM-worker direct pipe I/O; no auxiliary native-control or bootstrap-ack pipe. One implementation per suitable shared mechanism, no reverse dependency from common to worker-base/EXEs, explicit state/resource/lock ownership, NTSRV remains sole registry/retirement authority, original DOS/WOW remains original-owned; remove replaced wrappers/files. |
 | Asset Needs | Delivered S6 source/runtime/hashes and existing pinned OpenNT inputs; reuse valid x86/MT CCPU40 cache, new artifacts only under build/M0-T424/S7. No external assets or desktop automation. |
 | Reporting Requirements | Source/block provenance, current/target owner and consumers, shared/independent rationale, actual duplication removed, specialist contracts retained, per-mirror diff accounting and exact gates/publication. |
 | Stop Conditions | Original execution migrated or reverse-called, generic policy framework/second registry, authentication/test weakening, unowned shared state, broadened mirror diff without boundary proof, wire mismatch or regression. |
-| Exit Criteria | Every approved S7 plan row implemented and production-wired, provenance/dependency audit and full retained gates pass; coherent recoverable publication, reviewed commit/push and clean worktree. |
+| Exit Criteria | Common/two-protocol S7 rows implemented and production-wired, affected provenance/dependency audit and full retained gates pass; coherent recoverable publication, reviewed commit/push and clean worktree. Service-private source split and its complete block ledger transfer to S8, not a completion claim. |
 | Original Owner Request | Reuse suitable project-added common worker mechanisms in worker-base and single NTSRV/run16 consumer paths; split independent service additions from original OpenNT carriers and migrate interface into bounded common, no needless forks. |
 | Similar-Issue Sweep | Protocol declarations, duplicate transfer/codec/client bodies, Console snapshot growth/error mechanics, source/build ownership, service registration/admission/retirement/receipt/management state, wrappers/includes and mirror provenance. |
 
-The [ordered plan](../etc/operations/t424-worker-frontend-renaming-plan.md)
-owns the complete S7 requirements and dependency order. Begin with its
-provenance/ownership inventory before physical moves. O:/winnt remains delivered
-S6 until the complete S7 production gate and delivery.
+## S7 Closure Record
+
+The [common/service ledger](../etc/evidence/m0-t424-s7-common-service-separation.md)
+records the reviewed production P1 source, failures and final gates. Common
+owns copied protocols, codec, exact pipe transfer, bounded Console snapshots,
+neutral worker-I/O client and suitable shared RPC clients. Worker-base may
+depend common; no reverse dependency or common registry/policy is introduced.
+NTSRV control uses authenticated RPC; NTKVM-worker I/O retains its direct
+named pipe. Auxiliary native control and frontend startup pipes are removed.
+Original execution, service authority and frontend rendering stay local.
+
+Protocol/RPC32, regenerated MIDL, six x86 EXEs and both DLL links pass.
+Console17/Window17 pass 17/17 each; actual EDIT return, same-Console relaunch,
+two-session isolation, four retirement cases and eleven actual RPC fixtures
+pass. Five incompatible-server variants reject launcher and NTVDM with 1306.
+Shared fault/resource fixtures and copied execution lifetime (850/0, zero
+remaining handles) pass. Existing WOW frontiers remain unchanged, not three
+usability passes. No original mirror, guest, configuration or shared KVM
+library change is included. Retained polling is not removed.
+
+Eight x86 products are published to O:/winnt with exact candidate hashes and
+accepted S6 recovered under build/M0-T424/S7/r001/accepted-s6-recovery.
+Postpublication DOS/native/DOS relaunch and outer cooked CMD exit 19 pass.
+The P1 commit carries this closure record; its actual revision/push and clean
+tree are checked at delivery, not inferred from compilation. T424 stays open.
+Service split and the complete provenance/block ledger transfer to S8 using
+the current inventory/partial manual review; neither is claimed completed.
 
 ## S6 Closure Record
 
@@ -172,7 +195,7 @@ pre-migration baseline in its sealed inventory and S1 Git revision.
 
 The [T424 working plan](../etc/operations/t424-worker-frontend-renaming-plan.md)
 and [proposal](../proposals/proposal-native-worker-frontend-renaming-001.md)
-retain ten ordered stages. S1 audits names; S2 delivers the native worker
+retain eleven ordered stages after owner separation of service work. S1 audits names; S2 delivers the native worker
 as NTW32 and Win32Record while retaining NTKVM frontend. Added S3 delivers the
 approved broker-owned abnormal-exit/re-launch repair before further renaming.
 S4 centralizes creation, binding, Console handoff coordination and direct result
@@ -180,24 +203,26 @@ transport in NTSRV while keeping Console operations local to NTKVM and
 NTKVM/worker I/O direct; finish its open rows before S5 cleanup. S5 closes the
 five owner-approved architecture/code findings, without changing mirrors,
 guest, shared lib or accepted polling. New S7 owns the bounded interface-to-common
-library reorganization and provenance-first NTSRV service split; see the
+library reorganization and two-protocol unification; S8 owns provenance-first
+NTSRV service split; see the
 [S7 checklist](../etc/operations/t424-worker-frontend-renaming-plan.md#s7-common-library-and-service-source-separation).
 Owner-added S6 renames
-NTW32 to NTVWM; it is name-only and preserves existing behavior. S8 then adds
+NTW32 to NTVWM; it is name-only and preserves existing behavior. S9 then adds
 broker-routed native GUI startup, NTVWM classification and service-held handles,
 not monitor display. UNBOUND display belongs to the queue-head NTMON candidate.
-S9 then renames NTKVM to
-the reserved NTCON frontend identity. S10 owns final referent and
+S10 then renames NTKVM to
+the reserved NTCON frontend identity. S11 owns final referent and
 semantic audit. T closure
 remains owner-controlled. No later queued candidate is admitted here.
 
 ## Current Technical Baseline
 
-Published S5 package at O:/winnt: run16.exe, ntsrv.exe, ntvdm.exe, ntw32.exe,
+Published S7 package at O:/winnt: run16.exe, ntsrv.exe, ntvdm.exe, ntvwm.exe,
 ntkvm.exe, ntmon.exe, WOW32.DLL, VDMREDIR.DLL. APP_VERSION is 0.0.424;
-protocol/RPC is 31 with unchanged UUID and authenticated broker-owned creation,
+protocol/RPC is 32 with unchanged UUID and authenticated broker-owned creation,
 submission, restoration and shutdown contracts. MSVC Win32/x86 /MT CCPU40 is
-unchanged. Exact hashes and commands are in S5 evidence; S4 `e4fbaed21`, S3 `f9fe709aa` and
+unchanged. Exact hashes and commands are in S7 evidence; accepted S6
+`21b576a9e`, S4 `e4fbaed21`, S3 `f9fe709aa` and
 predecessor accepted T423 S40 `f64559086` remain recoverable.
 
 ## Previous T closure

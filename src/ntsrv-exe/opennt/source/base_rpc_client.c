@@ -12,7 +12,13 @@
 #include <base_command.h>
 #include <base_service.h>
 #include <base_rpc_client.h>
-#include "interface/version.h" /* Shared metadata, no product behavior. */
+#include "common/protocol/version.h" /* Shared metadata, no product behavior. */
+#include "common/console/members.h"
+#include "common/rpc/local_binding.h"
+#include "common/rpc/native_command.h"
+#include "common/rpc/frontend_control.h"
+#include "common/rpc/worker_control.h"
+#include "common/codec/native_launch.h"
 
 typedef struct OPENNT_BASE_RPC_CLIENT {
     RPC_BINDING_HANDLE binding;
@@ -27,6 +33,11 @@ typedef struct OPENNT_BASE_RPC_CLIENT {
 } OPENNT_BASE_RPC_CLIENT;
 
 static OPENNT_BASE_RPC_CLIENT client;
+static common_rpc_connection client_rpc_view(void)
+{
+    common_rpc_connection view={client.binding,client.connection,client.process,client.generation};
+    return view;
+}
 void OpenNtBaseClientSetCommandBinding(DWORD (*ready)(void *),void *context)
 {
     client.command_ready=ready;client.command_context=context;
@@ -474,7 +485,7 @@ static DWORD classify_missing_interface(RPC_BINDING_HANDLE binding)
     RPC_STATUS status,uuid_status;
     unsigned int index;
     DWORD result=RPC_S_SERVER_UNAVAILABLE;
-    status=RpcIfInqId(Client_vdm_service_v31_0_c_ifspec,&expected);
+    status=RpcIfInqId(Client_vdm_service_v32_0_c_ifspec,&expected);
     if (status) return status;
     status=RpcMgmtInqIfIds(binding,&interfaces);
     if (status) return status;
@@ -496,7 +507,6 @@ DWORD OpenNtBaseClientConnectCurrent(void)
     unsigned char server_version[APP_VERSION_BYTES]={0};
     ULONG server_protocol=0;
     broker_rpc_scope scope;
-    RPC_WSTR text=NULL;
     WCHAR endpoint[128];
     DWORD error=ERROR_GEN_FAILURE;
     ULONG generation=0;
@@ -506,11 +516,9 @@ DWORD OpenNtBaseClientConnectCurrent(void)
     if (!broker_rpc_capture_scope(&scope)) return GetLastError();
     wsprintfW(endpoint,L"ntvdm-basesrv-%lu-%08lx-%08lx",scope.session,
         (ULONG)scope.logon.HighPart,scope.logon.LowPart);
-    if (RpcStringBindingComposeW(NULL,(RPC_WSTR)L"ncalrpc",NULL,
-            (RPC_WSTR)endpoint,NULL,&text)) goto done;
-    if (RpcBindingFromStringBindingW(text,&client.binding)) goto done;
-    if (RpcBindingSetAuthInfoW(client.binding,NULL,RPC_C_AUTHN_LEVEL_PKT_PRIVACY,
-            RPC_C_AUTHN_WINNT,NULL,RPC_C_AUTHZ_NONE)) goto done;
+    /* Preserve this source-shaped client's historical binding-failure result;
+     * the neutral mechanism itself returns the precise RPC status. */
+    if(common_rpc_bind_local(endpoint,&client.binding))goto done;
     /* Original BaseSrvUpdateDOSEntry duplicates the authenticated worker's
      * self pseudo-handle; no broader process access is needed. */
     client.process=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION|SYNCHRONIZE|PROCESS_DUP_HANDLE,
@@ -552,34 +560,21 @@ DWORD OpenNtBaseClientConnectCurrent(void)
     }
     error=ERROR_SUCCESS;
 done:
-    if (text) RpcStringFreeW(&text);
     if (error) OpenNtBaseClientDisconnectCurrent();
     return error;
 }
 
 DWORD OpenNtBaseClientReportCurrentConsoleMembers(void)
 {
-    DWORD capacity=32,count,error=ERROR_SUCCESS,*members=NULL;
+    DWORD count,error,*members=NULL;
     if (!client.connection || !client.process) return ERROR_INVALID_STATE;
-    members=HeapAlloc(GetProcessHeap(),0,capacity*sizeof(*members));
-    if (!members) return ERROR_NOT_ENOUGH_MEMORY;
-    count=GetConsoleProcessList(members,capacity);
-    if (!count) {
-        /* Only an attached frontend root calls this operation. Losing the
-         * Console before registration must not create an unbound identity. */
-        error=GetLastError();
-        if(!error)error=ERROR_INVALID_HANDLE;
+    /* Only the attached root samples identity. Preserve its two-read ceiling;
+     * common owns allocation, never authentication or registration policy. */
+    error=common_console_members_read(32,4096,2,&members,&count);
+    if(error) {
+        if(error==ERROR_BUFFER_OVERFLOW)error=ERROR_ARITHMETIC_OVERFLOW;
+        if(error==ERROR_GEN_FAILURE)error=ERROR_INVALID_HANDLE;
         goto done;
-    }
-    if (count>capacity) {
-        DWORD *expanded;
-        if (count>4096 || count>MAXDWORD/sizeof(*members)) { error=ERROR_ARITHMETIC_OVERFLOW;goto done; }
-        expanded=HeapReAlloc(GetProcessHeap(),0,members,count*sizeof(*members));
-        if (!expanded) { error=ERROR_NOT_ENOUGH_MEMORY;goto done; }
-        members=expanded;capacity=count;
-        count=GetConsoleProcessList(members,capacity);
-        if (!count) { error=GetLastError();goto done; }
-        if (count>capacity) { error=ERROR_RETRY;goto done; }
     }
     RpcTryExcept {
         error=Client_ReportConsoleMembers(client.binding,client.connection,client.process,
@@ -588,7 +583,7 @@ DWORD OpenNtBaseClientReportCurrentConsoleMembers(void)
     RpcExcept(1) { error=RpcExceptionCode(); }
     RpcEndExcept
 done:
-    HeapFree(GetProcessHeap(),0,members);
+    common_console_members_release(members);
     return error;
 }
 
@@ -669,100 +664,47 @@ void OpenNtBaseClientDisconnectCurrent(void)
 
 DWORD OpenNtBaseClientWorkerFrontendCapability(HANDLE *capability)
 {
-    DWORD error=ERROR_INVALID_STATE;
-    if (!capability) return ERROR_INVALID_PARAMETER;
-    *capability=NULL;
-    if (!client.connection || !client.binding || !client.process) return error;
-    RpcTryExcept {
-        error=Client_WorkerFrontendCapability(client.binding,client.connection,client.process,
-            client.generation,capability);
-    }
-    RpcExcept(1) { error=RpcExceptionCode(); }
-    RpcEndExcept
-    if (error && *capability) { CloseHandle(*capability);*capability=NULL; }
-    return error;
+    common_rpc_connection state=client_rpc_view();
+    return common_rpc_worker_frontend_capability(&state,capability);
 }
 
 DWORD OpenNtBaseClientAcquireConsoleContext(HANDLE frontend,HANDLE *capability)
 {
-    DWORD error=ERROR_INVALID_STATE;
-    if (!capability) return ERROR_INVALID_PARAMETER;
-    *capability=NULL;
-    if (!client.connection || !client.binding || !client.process) return error;
-    RpcTryExcept {
-        error=Client_AcquireConsoleContext(client.binding,client.connection,client.process,
-            client.generation,frontend,capability);
-    }
-    RpcExcept(1) { error=RpcExceptionCode(); }
-    RpcEndExcept
-    if (error && *capability) { CloseHandle(*capability);*capability=NULL; }
-    return error;
+    common_rpc_connection state=client_rpc_view();
+    return common_rpc_acquire_console_context(&state,frontend,capability);
 }
 DWORD OpenNtBaseClientBindConsoleContext(HANDLE capability)
 {
-    DWORD error=ERROR_INVALID_STATE;
-    if (!client.connection || !client.binding || !client.process) return error;
-    RpcTryExcept {
-        error=Client_BindConsoleContext(client.binding,client.connection,client.process,
-            client.generation,capability);
-    }
-    RpcExcept(1) { error=RpcExceptionCode(); }
-    RpcEndExcept
-    return error;
+    common_rpc_connection state=client_rpc_view();
+    return common_rpc_bind_console_context(&state,capability);
 }
 
-static DWORD client_get_next_native_command(HANDLE *channel,HANDLE *caller_process,HANDLE *execution,HANDLE *frontend,DWORD *request)
+DWORD OpenNtBaseClientGetNextNativeCommand(DWORD capacity,BYTE *payload,DWORD *bytes,HANDLE *caller_process,HANDLE *execution,HANDLE *frontend,DWORD *request,DWORD *caller_generation)
 {
-    DWORD error=ERROR_INVALID_STATE;
-    if (!channel || !caller_process || !execution || !request) return ERROR_INVALID_PARAMETER;
-    *channel=NULL;*caller_process=NULL;*execution=NULL;
-    if (frontend) *frontend=NULL;*request=0;
-    if (!client.connection || !client.binding || !client.process) return error;
-    RpcTryExcept {
-        error=Client_GetNextNativeCommand(client.binding,client.connection,client.process,
-            client.generation,channel,caller_process,execution,frontend,request);
-    }
-    RpcExcept(1) { error=RpcExceptionCode(); }
-    RpcEndExcept
-    if (error) {
-        if (*channel) CloseHandle(*channel);
-        if (*caller_process) CloseHandle(*caller_process);
-        if (*execution) CloseHandle(*execution);
-        if (frontend && *frontend) { CloseHandle(*frontend);*frontend=NULL; }
-        *channel=NULL;*caller_process=NULL;*execution=NULL;
-    }
-    return error;
+    common_rpc_connection view=client_rpc_view();
+    return common_rpc_next_native_command(&view,capacity,payload,bytes,caller_process,
+        execution,frontend,request,caller_generation);
 }
 
-DWORD OpenNtBaseClientGetNextNativeCommand(HANDLE *channel,HANDLE *caller_process,HANDLE *execution,HANDLE *frontend,DWORD *request)
+DWORD OpenNtBaseClientNativeStartupResult(DWORD caller_generation,DWORD request,DWORD status,HANDLE target,HANDLE receipt)
 {
-    if (!frontend) return ERROR_INVALID_PARAMETER;
-    return client_get_next_native_command(channel,caller_process,execution,frontend,request);
+    common_rpc_connection view=client_rpc_view();
+    return common_rpc_native_startup_result(&view,caller_generation,request,status,target,receipt);
 }
 
 DWORD OpenNtBaseClientRegisterNativeBackend(HANDLE frontend,HANDLE stop,HANDLE closed)
 {
-    DWORD error=ERROR_INVALID_STATE;
-    if(!client.connection || !client.binding || !client.process)return error;
-    RpcTryExcept {
-        error=Client_RegisterNativeBackend(client.binding,client.connection,client.process,
-            client.generation,frontend,stop,closed);
-    }
-    RpcExcept(1) {error=RpcExceptionCode();}
-    RpcEndExcept
-    return error;
+    common_rpc_connection state=client_rpc_view();
+    return common_rpc_register_native_backend(&state,frontend,stop,closed);
 }
 DWORD OpenNtBaseClientCompleteWorkerChannel(DWORD request,DWORD exit_code)
 {
-    DWORD error=ERROR_INVALID_STATE;
-    if(!client.connection || !client.binding || !client.process)return error;
-    RpcTryExcept {
-        error=Client_CompleteWorkerChannel(client.binding,client.connection,client.process,
-            client.generation,request,exit_code);
-    }
-    RpcExcept(1) {error=RpcExceptionCode();}
-    RpcEndExcept
-    return error;
+    return OpenNtBaseClientCompleteNativeRequest(request,exit_code,0,0);
+}
+DWORD OpenNtBaseClientCompleteNativeRequest(DWORD request,DWORD exit_code,DWORD io_error,DWORD io_flags)
+{
+    common_rpc_connection view=client_rpc_view();
+    return common_rpc_complete_native_command(&view,request,exit_code,io_error,io_flags);
 }
 DWORD OpenNtBaseClientNativeExitCode(DWORD request,DWORD *exit_code)
 {
@@ -806,22 +748,8 @@ DWORD OpenNtBaseClientRegisterFrontendRoot(HANDLE capability)
 DWORD OpenNtBaseClientAcquireFrontendRoot(uint64_t console_window,DWORD *create_root,
     HANDLE *root,HANDLE *capability,HANDLE *retire,HANDLE *restored)
 {
-    DWORD error=ERROR_INVALID_STATE;
-    if(!create_root || !root || !capability || !retire || !restored)return ERROR_INVALID_PARAMETER;
-    *create_root=0;*root=*capability=*retire=*restored=NULL;
-    if(!client.connection || !client.binding || !client.process)return error;
-    RpcTryExcept {
-        error=Client_AcquireFrontendRoot(client.binding,client.connection,client.process,
-            client.generation,(LONGLONG)console_window,create_root,root,capability,retire,restored);
-    }
-    RpcExcept(1){error=RpcExceptionCode();}
-    RpcEndExcept
-    if(error){
-        if(*root)CloseHandle(*root);if(*capability)CloseHandle(*capability);
-        if(*retire)CloseHandle(*retire);if(*restored)CloseHandle(*restored);
-        *root=*capability=*retire=*restored=NULL;*create_root=0;
-    }
-    return error;
+    common_rpc_connection state=client_rpc_view();
+    return common_rpc_acquire_frontend_root(&state,console_window,create_root,root,capability,retire,restored);
 }
 DWORD OpenNtBaseClientCancelFrontendRootReservation(void)
 {
@@ -889,51 +817,20 @@ DWORD OpenNtBaseClientFrontendLeaseReady(void)
 
 DWORD OpenNtBaseClientFrontendUsage(DWORD *pending,DWORD *tasks)
 {
-    DWORD error=ERROR_INVALID_STATE,local_pending=0,local_tasks=0;
-    if(!pending || !tasks)return ERROR_INVALID_PARAMETER;
-    if(!client.connection || !client.binding || !client.process)return error;
-    RpcTryExcept {
-        error=Client_FrontendUsage(client.binding,client.connection,client.process,
-            client.generation,&local_pending,&local_tasks);
-    }
-    RpcExcept(1) { error=RpcExceptionCode(); }
-    RpcEndExcept
-    if(!error){*pending=local_pending;*tasks=local_tasks;}
-    return error;
+    common_rpc_connection state=client_rpc_view();
+    return common_rpc_frontend_usage(&state,pending,tasks);
 }
 
 DWORD OpenNtBaseClientRetireWorkerlessFrontend(DWORD *retired)
 {
-    DWORD error=ERROR_INVALID_STATE,local=0;
-    if(!retired)return ERROR_INVALID_PARAMETER;
-    if(!client.connection || !client.binding || !client.process)return error;
-    RpcTryExcept {
-        error=Client_RetireWorkerlessFrontend(client.binding,client.connection,
-            client.process,client.generation,&local);
-    }
-    RpcExcept(1) { error=RpcExceptionCode(); }
-    RpcEndExcept
-    if(!error)*retired=local;
-    return error;
+    common_rpc_connection state=client_rpc_view();
+    return common_rpc_retire_workerless_frontend(&state,retired);
 }
 
 DWORD OpenNtBaseClientFrontendStateChanged(HANDLE *state_changed)
 {
-    DWORD error=ERROR_INVALID_STATE;
-    HANDLE local=NULL;
-    if(!state_changed)return ERROR_INVALID_PARAMETER;
-    *state_changed=NULL;
-    if(!client.connection || !client.binding || !client.process)return error;
-    RpcTryExcept {
-        error=Client_FrontendStateChanged(client.binding,client.connection,client.process,
-            client.generation,&local);
-    }
-    RpcExcept(1) { error=RpcExceptionCode(); }
-    RpcEndExcept
-    if(error) { if(local)CloseHandle(local);return error; }
-    if(!local)return ERROR_INVALID_HANDLE;
-    *state_changed=local;
-    return ERROR_SUCCESS;
+    common_rpc_connection state=client_rpc_view();
+    return common_rpc_frontend_state_changed(&state,state_changed);
 }
 
 DWORD OpenNtBaseClientBrokerProcess(HANDLE *server)
@@ -962,36 +859,13 @@ DWORD OpenNtBaseClientStartNativeWorker(HANDLE *worker)
 DWORD OpenNtBaseClientSubmitNativeRequest(HANDLE frontend,DWORD bytes,BYTE *payload,
     HANDLE *target,HANDLE *receipt,DWORD *request)
 {
-    DWORD error=ERROR_INVALID_STATE;
-    if(!target || !receipt || !request)return ERROR_INVALID_PARAMETER;
-    *target=*receipt=NULL;*request=0;
-    if(!client.connection || !client.binding || !client.process)return error;
-    RpcTryExcept {
-        error=Client_SubmitNativeRequest(client.binding,client.connection,client.process,
-            client.generation,frontend,bytes,payload,target,receipt,request);
-    }
-    RpcExcept(1){error=RpcExceptionCode();}
-    RpcEndExcept
-    if(error) {
-        if(*target)CloseHandle(*target);if(*receipt)CloseHandle(*receipt);
-        *target=*receipt=NULL;*request=0;
-    }
-    return error;
+    common_rpc_connection view=client_rpc_view();
+    return common_rpc_submit_native_request(&view,frontend,bytes,payload,target,receipt,request);
 }
 DWORD OpenNtBaseClientFinishNativeRequest(DWORD request,DWORD *exit_code,DWORD *target_completed)
 {
-    DWORD error=ERROR_INVALID_STATE;
-    if(!exit_code || !target_completed || !request)return ERROR_INVALID_PARAMETER;
-    *exit_code=*target_completed=0;
-    if(!client.connection || !client.binding || !client.process)return error;
-    RpcTryExcept {
-        error=Client_FinishNativeRequest(client.binding,client.connection,client.process,
-            client.generation,request,exit_code,target_completed);
-    }
-    RpcExcept(1){error=RpcExceptionCode();*exit_code=*target_completed=0;}
-    RpcEndExcept
-    if(*target_completed>1) {*exit_code=*target_completed=0;return ERROR_INVALID_DATA;}
-    return error;
+    common_rpc_connection view=client_rpc_view();
+    return common_rpc_finish_native_request(&view,request,exit_code,target_completed);
 }
 DWORD OpenNtBaseClientStartVdmWorker(PCWSTR environment,DWORD characters,DWORD show,
     HANDLE frontend,HANDLE *worker,HANDLE *parent)
@@ -1020,107 +894,46 @@ DWORD OpenNtBaseClientStartVdmWorker(PCWSTR environment,DWORD characters,DWORD s
 DWORD OpenNtBaseClientStartFrontend(uint64_t window,BOOL borrowed,
     HANDLE *root,HANDLE *capability,HANDLE *restored)
 {
-    DWORD error=ERROR_INVALID_STATE;
-    if(!root || !capability || !restored)return ERROR_INVALID_PARAMETER;
-    *root=*capability=*restored=NULL;
-    if(!client.connection || !client.binding || !client.process)return error;
-    RpcTryExcept {
-        error=Client_StartFrontend(client.binding,client.connection,client.process,
-            client.generation,(LONGLONG)window,borrowed!=FALSE,root,capability,restored);
-    }
-    RpcExcept(1){error=RpcExceptionCode();}
-    RpcEndExcept
-    if(error){
-        if(*root)CloseHandle(*root);if(*capability)CloseHandle(*capability);
-        if(*restored)CloseHandle(*restored);
-        *root=*capability=*restored=NULL;
-    }
-    return error;
+    common_rpc_connection state=client_rpc_view();
+    return common_rpc_start_frontend(&state,window,borrowed,root,capability,restored);
 }
 DWORD OpenNtBaseClientReturnFrontendConsole(void)
 {
-    DWORD error=ERROR_INVALID_STATE;
-    if(!client.connection || !client.binding || !client.process)return error;
-    RpcTryExcept {
-        error=Client_ReturnFrontendConsole(client.binding,client.connection,
-            client.process,client.generation);
-    }
-    RpcExcept(1){error=RpcExceptionCode();}
-    RpcEndExcept
-    return error;
+    common_rpc_connection state=client_rpc_view();
+    return common_rpc_return_frontend_console(&state);
 }
 DWORD OpenNtBaseClientFrontendConsoleRestored(void)
 {
-    DWORD error=ERROR_INVALID_STATE;
-    if(!client.connection || !client.binding || !client.process)return error;
-    RpcTryExcept {
-        error=Client_FrontendConsoleRestored(client.binding,client.connection,
-            client.process,client.generation);
-    }
-    RpcExcept(1){error=RpcExceptionCode();}
-    RpcEndExcept
-    return error;
+    common_rpc_connection state=client_rpc_view();
+    return common_rpc_frontend_console_restored(&state);
+}
+DWORD OpenNtBaseClientFrontendStartupResult(HANDLE capability,DWORD status)
+{
+    common_rpc_connection state=client_rpc_view();
+    return common_rpc_frontend_startup_result(&state,capability,status);
 }
 DWORD OpenNtBaseClientWaitFrontendConsoleRestored(void)
 {
-    DWORD error=ERROR_INVALID_STATE;
-    if(!client.connection || !client.binding || !client.process)return error;
-    RpcTryExcept {
-        error=Client_WaitFrontendConsoleRestored(client.binding,client.connection,
-            client.process,client.generation);
-    }
-    RpcExcept(1) { error=RpcExceptionCode(); }
-    RpcEndExcept
-    return error;
+    common_rpc_connection state=client_rpc_view();
+    return common_rpc_wait_frontend_console_restored(&state);
 }
 
 DWORD OpenNtBaseClientWorkerShutdownEvent(HANDLE *shutdown)
 {
-    DWORD error=ERROR_INVALID_STATE;
-    HANDLE local=NULL;
-    if(!shutdown)return ERROR_INVALID_PARAMETER;
-    *shutdown=NULL;
-    if(!client.connection || !client.binding || !client.process)return error;
-    RpcTryExcept {
-        error=Client_WorkerShutdownEvent(client.binding,client.connection,client.process,
-            client.generation,&local);
-    }
-    RpcExcept(1) { error=RpcExceptionCode(); }
-    RpcEndExcept
-    if(error){if(local)CloseHandle(local);return error;}
-    if(!local)return ERROR_INVALID_HANDLE;
-    *shutdown=local;return ERROR_SUCCESS;
+    common_rpc_connection state=client_rpc_view();
+    return common_rpc_worker_shutdown_event(&state,shutdown);
 }
 
 DWORD OpenNtBaseClientWorkerStateChanged(HANDLE *state_changed)
 {
-    DWORD error=ERROR_INVALID_STATE;
-    HANDLE local=NULL;
-    if(!state_changed)return ERROR_INVALID_PARAMETER;
-    *state_changed=NULL;
-    if(!client.connection || !client.binding || !client.process)return error;
-    RpcTryExcept {
-        error=Client_WorkerStateChanged(client.binding,client.connection,client.process,
-            client.generation,&local);
-    }
-    RpcExcept(1) { error=RpcExceptionCode(); }
-    RpcEndExcept
-    if(error) { if(local)CloseHandle(local);return error; }
-    if(!local)return ERROR_INVALID_HANDLE;
-    *state_changed=local;
-    return ERROR_SUCCESS;
+    common_rpc_connection state=client_rpc_view();
+    return common_rpc_worker_state_changed(&state,state_changed);
 }
 
 DWORD OpenNtBaseClientRetireFrontend(void)
 {
-    DWORD error=ERROR_INVALID_STATE;
-    if(!client.connection || !client.binding || !client.process)return error;
-    RpcTryExcept {
-        error=Client_RetireFrontend(client.binding,client.connection,client.process,client.generation);
-    }
-    RpcExcept(1) { error=RpcExceptionCode(); }
-    RpcEndExcept
-    return error;
+    common_rpc_connection state=client_rpc_view();
+    return common_rpc_retire_frontend(&state);
 }
 
 DWORD OpenNtBaseClientRetainFrontendRoot(HANDLE capability,HANDLE *root,DWORD *generation)
@@ -1230,25 +1043,8 @@ DWORD OpenNtBaseClientAttachFrontend(HANDLE pipe,DWORD *generation,HANDLE ready)
 
 static DWORD take_frontend(HANDLE *pipe,HANDLE *frontend,DWORD *frontend_generation,HANDLE *ready,BOOL wait)
 {
-    DWORD error=ERROR_INVALID_STATE;
-    if (!pipe || !frontend || !frontend_generation || !ready) return ERROR_INVALID_PARAMETER;
-    *pipe=NULL; *frontend=NULL; *frontend_generation=0;*ready=NULL;
-    if (!client.connection || !client.binding || !client.process) return error;
-    RpcTryExcept {
-        error=wait ? Client_WaitFrontend(client.binding,client.connection,client.process,
-            client.generation,pipe,frontend,frontend_generation,ready) :
-            Client_TakeFrontend(client.binding,client.connection,client.process,
-            client.generation,pipe,frontend,frontend_generation,ready);
-    }
-    RpcExcept(1) { error=RpcExceptionCode(); }
-    RpcEndExcept
-    if (error) {
-        if (*pipe) CloseHandle(*pipe);
-        if (*frontend) CloseHandle(*frontend);
-        if (*ready) CloseHandle(*ready);
-        *pipe=NULL; *frontend=NULL; *frontend_generation=0;*ready=NULL;
-    }
-    return error;
+    common_rpc_connection state=client_rpc_view();
+    return common_rpc_take_frontend(&state,pipe,frontend,frontend_generation,ready,wait);
 }
 
 DWORD OpenNtBaseClientTakeFrontend(HANDLE *pipe,HANDLE *frontend,DWORD *generation,HANDLE *ready)

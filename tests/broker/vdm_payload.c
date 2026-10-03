@@ -1,4 +1,4 @@
-#include "interface/vdm_protocol.h"
+#include "common/protocol/vdm_protocol.h"
 #include "vdm_values.h"
 #include "vdm_startup.h"
 #include "vdm_payload.h"

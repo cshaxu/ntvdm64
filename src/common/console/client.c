@@ -1,6 +1,7 @@
 /* Project-owned worker client of the copied NTKVM protocol, shared by both backends.
  * Resource ownership and backend-specific handoff remain with each caller. */
-#include "interface/worker_console_client.h"
+#include "common/console/client.h"
+#include "common/transport/pipe_transfer.h"
 #include <stddef.h>
 #include <limits.h>
 #include <string.h>
@@ -52,34 +53,8 @@ DWORD ntkvm_worker_prepend_keys(ntkvm_worker_client *client,const INPUT_RECORD *
 
 static DWORD transfer(ntkvm_worker_client *client,BOOL write,void *buffer,DWORD bytes)
 {
-    BYTE *cursor=buffer;
-    while(bytes) {
-        OVERLAPPED io={0};
-        HANDLE waits[3]={client->peer,client->event,client->cancel};
-        DWORD count=0,error,wait;
-        BOOL ok;
-        if(client->cancel && WaitForSingleObject(client->cancel,0)==WAIT_OBJECT_0)
-            return ERROR_OPERATION_ABORTED;
-        if(WaitForSingleObject(client->peer,0)!=WAIT_TIMEOUT)return ERROR_PIPE_NOT_CONNECTED;
-        ResetEvent(client->event);io.hEvent=client->event;
-        ok=write ? WriteFile(client->pipe,cursor,bytes,&count,&io) :
-            ReadFile(client->pipe,cursor,bytes,&count,&io);
-        if(!ok) {
-            error=GetLastError();if(error!=ERROR_IO_PENDING)return error;
-            wait=WaitForMultipleObjects(client->cancel ? 3 : 2,waits,FALSE,INFINITE);
-            if(wait!=WAIT_OBJECT_0+1) {
-                error=wait==WAIT_FAILED ? GetLastError() :
-                    wait==WAIT_OBJECT_0+2 ? ERROR_OPERATION_ABORTED : ERROR_PIPE_NOT_CONNECTED;
-                CancelIoEx(client->pipe,&io);
-                (void)GetOverlappedResult(client->pipe,&io,&count,TRUE);
-                return error;
-            }
-            if(!GetOverlappedResult(client->pipe,&io,&count,FALSE))return GetLastError();
-        }
-        if(!count || count>bytes)return ERROR_BROKEN_PIPE;
-        cursor+=count;bytes-=count;
-    }
-    return ERROR_SUCCESS;
+    return common_pipe_transfer(client->pipe,client->peer,client->cancel,client->event,
+        COMMON_PIPE_PEER_DEATH_FIRST,ERROR_PIPE_NOT_CONNECTED,write,buffer,bytes,bytes);
 }
 
 DWORD ntkvm_worker_exchange(ntkvm_worker_client *client,console_io_request *request,console_io_reply *reply)

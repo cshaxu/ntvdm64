@@ -3,14 +3,14 @@
  * Actual pipe/kernel lifetime remains covered by the request/execution tests. */
 #include <windows.h>
 #include <stdio.h>
-#include "interface/native_request_protocol.h"
-static DWORD last_error,remaining,step,wait_result,stop_result;
-static BOOL pending,eof,fail_result;
+#include "common/transport/pipe_transfer.h"
+static DWORD last_error,remaining,step,wait_result,stop_result,peer_result;
+static BOOL pending,eof,fail_result,peer_first;
 static unsigned checks,failures,cancels,drains,calls;
 #define CHECK(x) do { ++checks; if(!(x)) { ++failures; printf("FAIL line %d: %s\n",__LINE__,#x); } } while(0)
 static DWORD WINAPI fake_error(void) { return last_error; }
 static DWORD WINAPI fake_single(HANDLE handle,DWORD timeout)
-{ (void)handle;(void)timeout;return stop_result; }
+{ (void)timeout;return handle==(HANDLE)2 ? peer_result : stop_result; }
 static BOOL WINAPI fake_reset(HANDLE event) { (void)event;return TRUE; }
 static BOOL WINAPI fake_read(HANDLE pipe,LPVOID buffer,DWORD bytes,LPDWORD count,LPOVERLAPPED io)
 {
@@ -26,7 +26,7 @@ static BOOL WINAPI fake_write(HANDLE pipe,LPCVOID buffer,DWORD bytes,LPDWORD cou
 static DWORD WINAPI fake_wait(DWORD count,const HANDLE *handles,BOOL all,DWORD timeout)
 {
     CHECK(count==2 || count==3);CHECK(!all && timeout==INFINITE);
-    CHECK(handles[0]==(HANDLE)1 && handles[1]==(HANDLE)2);
+    CHECK(handles[0]==(HANDLE)(peer_first ? 2 : 1) && handles[1]==(HANDLE)(peer_first ? 1 : 2));
     return wait_result;
 }
 static BOOL WINAPI fake_cancel(HANDLE pipe,LPOVERLAPPED io)
@@ -47,11 +47,17 @@ static BOOL WINAPI fake_result(HANDLE pipe,LPOVERLAPPED io,LPDWORD count,BOOL wa
 #define WaitForMultipleObjects fake_wait
 #define CancelIoEx fake_cancel
 #define GetOverlappedResult fake_result
-#include "../../src/run16-exe/native_request_io.c"
+#include "../../src/common/transport/pipe_transfer.c"
+/* This fixture explicitly selects completion-first; endpoint priority is not
+ * a launcher-owned wrapper around the common transport. */
+static DWORD frontend_request_transfer(HANDLE pipe,HANDLE peer,HANDLE stop,HANDLE event,
+    BOOL write,void *buffer,DWORD bytes)
+{ return common_pipe_transfer(pipe,peer,stop,event,COMMON_PIPE_COMPLETION_FIRST,
+    ERROR_PROCESS_ABORTED,write,buffer,bytes,bytes); }
 static void reset_case(void)
 {
     last_error=0;remaining=17;step=3;wait_result=WAIT_OBJECT_0;
-    stop_result=WAIT_TIMEOUT;pending=FALSE;eof=FALSE;fail_result=FALSE;
+    stop_result=peer_result=WAIT_TIMEOUT;pending=FALSE;eof=FALSE;fail_result=FALSE;peer_first=FALSE;
     cancels=drains=calls=0;
 }
 int main(void)
@@ -79,6 +85,24 @@ int main(void)
     reset_case();pending=TRUE;fail_result=TRUE;
     CHECK(frontend_request_transfer((HANDLE)4,(HANDLE)2,NULL,(HANDLE)1,FALSE,bytes,17)==ERROR_BROKEN_PIPE);
     CHECK(!cancels && !drains);
-    printf("control transfer checks=%u failures=%u\n",checks,failures);
+    reset_case();peer_first=TRUE;pending=TRUE;wait_result=WAIT_OBJECT_0+1;
+    CHECK(!common_pipe_transfer((HANDLE)4,(HANDLE)2,NULL,(HANDLE)1,
+        COMMON_PIPE_PEER_DEATH_FIRST,ERROR_PIPE_NOT_CONNECTED,FALSE,bytes,17,sizeof(bytes)));
+    CHECK(calls==6 && !cancels && !drains);
+    reset_case();peer_first=TRUE;pending=TRUE;wait_result=WAIT_OBJECT_0;
+    CHECK(common_pipe_transfer((HANDLE)4,(HANDLE)2,NULL,(HANDLE)1,
+        COMMON_PIPE_PEER_DEATH_FIRST,ERROR_PIPE_NOT_CONNECTED,FALSE,bytes,17,sizeof(bytes))==ERROR_PIPE_NOT_CONNECTED);
+    CHECK(cancels==1 && drains==1);
+    reset_case();peer_first=TRUE;peer_result=WAIT_OBJECT_0;
+    CHECK(common_pipe_transfer((HANDLE)4,(HANDLE)2,NULL,(HANDLE)1,
+        COMMON_PIPE_PEER_DEATH_FIRST,ERROR_PIPE_NOT_CONNECTED,FALSE,bytes,17,sizeof(bytes))==ERROR_PIPE_NOT_CONNECTED);
+    CHECK(!calls && !cancels && !drains);
+    reset_case();
+    CHECK(common_pipe_transfer((HANDLE)4,(HANDLE)2,NULL,(HANDLE)1,
+        COMMON_PIPE_COMPLETION_FIRST,ERROR_PROCESS_ABORTED,FALSE,bytes,18,sizeof(bytes))==ERROR_INVALID_PARAMETER);
+    CHECK(common_pipe_transfer((HANDLE)4,(HANDLE)2,NULL,(HANDLE)1,
+        (common_pipe_priority)99,ERROR_PROCESS_ABORTED,FALSE,bytes,17,sizeof(bytes))==ERROR_INVALID_PARAMETER);
+    CHECK(!calls);
+    printf("common/control transfer checks=%u failures=%u\n",checks,failures);
     return failures ? 1 : 0;
 }

@@ -9,7 +9,7 @@
 #include "ntsrv-exe/transport/rpc_security.h"
 #include "opennt-abi/source/public/internal/base/inc/vdmapi.h"
 #include "ntsrv-exe/opennt/include/base_service.h"
-#include "interface/version.h"
+#include "common/protocol/version.h"
 static broker_rpc_scope scope;
 static OPENNT_BASE_SERVICE *service;
 static SRWLOCK idle_lock=SRWLOCK_INIT;
@@ -81,6 +81,13 @@ error_status_t Server_FrontendConsoleRestored(handle_t binding,VDM_CONNECTION co
 {
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
     return error ? error : OpenNtBaseServiceFrontendConsoleRestored(connection,pid,generation);
+}
+error_status_t Server_FrontendStartupResult(handle_t binding,VDM_CONNECTION connection,
+    HANDLE process,ULONG generation,HANDLE capability,ULONG status)
+{
+    DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    return error ? error : OpenNtBaseServiceFrontendStartupResult(connection,pid,generation,
+        capability,status);
 }
 error_status_t Server_WaitFrontendConsoleRestored(handle_t binding,VDM_CONNECTION connection,
     HANDLE process,unsigned long generation)
@@ -338,13 +345,20 @@ error_status_t Server_BrokerProcess(handle_t binding,VDM_CONNECTION connection,H
     return ERROR_SUCCESS;
 }
 error_status_t Server_GetNextNativeCommand(handle_t binding,VDM_CONNECTION connection,HANDLE process,
-    ULONG generation,HANDLE *channel,HANDLE *caller_process,HANDLE *execution,HANDLE *frontend,ULONG *request)
+    ULONG generation,ULONG capacity,BYTE *payload,ULONG *bytes,HANDLE *caller_process,HANDLE *execution,HANDLE *frontend,ULONG *request,ULONG *caller_generation)
 {
     DWORD pid,error;
-    *channel=NULL;*caller_process=NULL;*execution=NULL;*frontend=NULL;*request=0;
+    *bytes=0;*caller_process=NULL;*execution=NULL;*frontend=NULL;*request=0;*caller_generation=0;
     error=broker_rpc_peer_process(&scope,binding,process,&pid);
     return error ? error : OpenNtBaseServiceGetNextNativeCommand(connection,pid,generation,
-        channel,caller_process,execution,frontend,request);
+        capacity,payload,bytes,caller_process,execution,frontend,request,caller_generation);
+}
+error_status_t Server_NativeStartupResult(handle_t binding,VDM_CONNECTION connection,HANDLE process,
+    ULONG generation,ULONG caller_generation,ULONG request,ULONG status,HANDLE target,HANDLE receipt)
+{
+    DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
+    return error ? error : OpenNtBaseServiceNativeStartupResult(connection,pid,generation,
+        caller_generation,request,status,target,receipt);
 }
 error_status_t Server_WorkerFrontendCapability(handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,HANDLE *capability)
@@ -384,10 +398,10 @@ error_status_t Server_WorkerShutdownEvent(handle_t binding,VDM_CONNECTION connec
     return error ? error : OpenNtBaseServiceWorkerShutdownEvent(connection,pid,generation,shutdown);
 }
 error_status_t Server_CompleteWorkerChannel(handle_t binding,VDM_CONNECTION connection,HANDLE process,
-    ULONG generation,ULONG request,ULONG exit_code)
+    ULONG generation,ULONG request,ULONG exit_code,ULONG io_error,ULONG io_flags)
 {
     DWORD pid,error=broker_rpc_peer_process(&scope,binding,process,&pid);
-    return error ? error : OpenNtBaseServiceCompleteWorkerChannel(connection,pid,generation,request,exit_code);
+    return error ? error : OpenNtBaseServiceCompleteNativeRequest(connection,pid,generation,request,exit_code,io_error,io_flags);
 }
 error_status_t Server_NativeExitCode(handle_t binding,VDM_CONNECTION connection,HANDLE process,
     ULONG generation,ULONG request,ULONG *exit_code)
@@ -849,7 +863,7 @@ int main(void)
         (void)OpenNtBaseServiceStop(service);
         return (int)error;
     }
-    result=RpcServerRegisterIf3(Server_vdm_service_v31_0_s_ifspec,NULL,NULL,
+    result=RpcServerRegisterIf3(Server_vdm_service_v32_0_s_ifspec,NULL,NULL,
         RPC_IF_ALLOW_SECURE_ONLY | RPC_IF_ALLOW_LOCAL_ONLY,RPC_C_LISTEN_MAX_CALLS_DEFAULT,
         (unsigned)-1,authorize,NULL);
     if (!result) {
@@ -896,7 +910,7 @@ int main(void)
         if (result) basesrv_idle_fatal("RpcMgmtWaitServerListen",result);
     }
     {
-        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v31_0_s_ifspec,NULL,TRUE);
+        RPC_STATUS cleanup=RpcServerUnregisterIf(Server_vdm_service_v32_0_s_ifspec,NULL,TRUE);
         if (!result && cleanup) result=cleanup;
     }
     if (idle_timer) CloseHandle(idle_timer);

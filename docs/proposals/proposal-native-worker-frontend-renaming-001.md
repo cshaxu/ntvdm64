@@ -9,10 +9,18 @@ owns the ordered stages. The [S1 audit](../etc/evidence/m0-t424-s1-name-referent
 pins pre-migration source identities in Git, inventories and hashes.
 Names below are migration-normalized; they do not claim runtime acceptance.
 
+Owner's latest bounded-stage revision separates service source refactoring
+from common/protocol delivery: S7 delivers common and the two existing
+transport families, S8 completes the NTSRV provenance/block ledger and
+service-private physical split, S9 implements GUI routing, S10 renames the
+frontend and S11 audits closure. The linked working plan is the current
+sequence; earlier admission chronology below is retained as history, not
+permission to fold S8 work back into S7. T closure remains owner-controlled.
+
 | Role | S2 intermediate owner/product | Final owner/product |
 | --- | --- | --- |
-| Resident native Windows worker; text owns hidden Console, GUI retains native windows under S8 | `src/ntw32-exe` / `ntw32.exe` | S6 worker identity: `src/ntvwm-exe` / `ntvwm.exe`. |
-| Visible Console/Window frontend, owns display/input/presentation routing | `src/ntkvm-exe` / `ntkvm.exe` | S9 reserved frontend identity: `src/ntcon-exe` / `ntcon.exe`. |
+| Resident native Windows worker; text owns hidden Console, GUI retains native windows under S9 | `src/ntw32-exe` / `ntw32.exe` | S6 worker identity: `src/ntvwm-exe` / `ntvwm.exe`. |
+| Visible Console/Window frontend, owns display/input/presentation routing | `src/ntkvm-exe` / `ntkvm.exe` | S10 reserved frontend identity: `src/ntcon-exe` / `ntcon.exe`. |
 
 The final eight files are run16.exe, ntsrv.exe, ntvdm.exe, ntvwm.exe,
 ntcon.exe (frontend only), ntmon.exe, WOW32.DLL and VDMREDIR.DLL.

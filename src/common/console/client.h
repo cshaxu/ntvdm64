@@ -1,10 +1,10 @@
 #ifndef NTKVM_WORKER_CONSOLE_CLIENT_H
 #define NTKVM_WORKER_CONSOLE_CLIENT_H
 #include <windows.h>
-#include "console_io.h"
-#include "console_video.h"
+#include "common/protocol/console_io.h"
+#include "common/protocol/console_video.h"
 
-/* Local client state, never a wire record. worker-base owns the implementation;
+/* Local client state, never a wire record. common owns the implementation;
  * NTVDM/NTVWM embed it, serialize calls and own all borrowed HANDLEs. No
  * renderer, Console ownership, guest state or task scheduling lives here. */
 typedef struct ntkvm_worker_client {

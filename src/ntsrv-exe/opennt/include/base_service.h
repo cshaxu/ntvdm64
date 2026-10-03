@@ -73,6 +73,7 @@ DWORD OpenNtBaseServiceStartFrontend(OPENNT_BASE_CONNECTION *,DWORD,DWORD,
 DWORD OpenNtBaseServiceReturnFrontendConsole(OPENNT_BASE_CONNECTION *,DWORD,DWORD);
 DWORD OpenNtBaseServiceWaitFrontendConsoleRestored(OPENNT_BASE_CONNECTION *,DWORD,DWORD);
 DWORD OpenNtBaseServiceFrontendConsoleRestored(OPENNT_BASE_CONNECTION *,DWORD,DWORD);
+DWORD OpenNtBaseServiceFrontendStartupResult(OPENNT_BASE_CONNECTION *,DWORD,DWORD,HANDLE,DWORD);
 /* Independent of DOS command receipts: a root registers an unnamed event
  * received through an authenticated typed attachment. Descendants present
  * a restricted duplicate of that same object, never a trusted handle number.
@@ -101,6 +102,8 @@ DWORD OpenNtBaseServiceRegisterNativeBackend(OPENNT_BASE_CONNECTION *,DWORD pid,
     DWORD generation,HANDLE frontend,HANDLE stop,HANDLE closed);
 DWORD OpenNtBaseServiceCompleteWorkerChannel(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,
     DWORD request,DWORD exit_code);
+DWORD OpenNtBaseServiceCompleteNativeRequest(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,
+    DWORD request,DWORD exit_code,DWORD io_error,DWORD io_flags);
 DWORD OpenNtBaseServiceNativeExitCode(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,
     DWORD request,DWORD *exit_code);
 DWORD OpenNtBaseServiceBindNativeTarget(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,
@@ -116,16 +119,10 @@ DWORD OpenNtBaseServiceBindConsoleContext(OPENNT_BASE_CONNECTION *,DWORD pid,
     DWORD generation,HANDLE capability);
 DWORD OpenNtBaseServiceWorkerFrontendCapability(OPENNT_BASE_CONNECTION *,DWORD pid,
     DWORD generation,HANDLE *capability);
-/* Service-private enqueue used by its native request producer, not an RPC
- * endpoint. Validate the producer's actual pipe-server PID; clients cannot
- * nominate a transport. Receiver owns its copied channel attachments. */
-DWORD OpenNtBaseServiceQueueNativeChannel(OPENNT_BASE_CONNECTION *,DWORD pid,
-    DWORD generation,HANDLE capability,HANDLE channel,
-    const WCHAR image[OPENNT_BASE_WORKER_IMAGE_CHARS],DWORD server_pid);
-DWORD OpenNtBaseServiceTakeWorkerChannel(OPENNT_BASE_CONNECTION *,DWORD pid,
-    DWORD generation,HANDLE *channel,HANDLE *caller_process,HANDLE *execution,HANDLE *frontend,DWORD *request);
 DWORD OpenNtBaseServiceGetNextNativeCommand(OPENNT_BASE_CONNECTION *,DWORD pid,
-    DWORD generation,HANDLE *channel,HANDLE *caller_process,HANDLE *execution,HANDLE *frontend,DWORD *request);
+    DWORD generation,DWORD capacity,BYTE *payload,DWORD *bytes,HANDLE *caller_process,HANDLE *execution,HANDLE *frontend,DWORD *request,DWORD *caller_generation);
+DWORD OpenNtBaseServiceNativeStartupResult(OPENNT_BASE_CONNECTION *,DWORD pid,DWORD generation,
+    DWORD caller_generation,DWORD request,DWORD status,HANDLE target,HANDLE receipt);
 /* Request identifies an authenticated connection's still-pending original
  * DOS command, not a caller-nominated worker. The root's event wakes it to
  * acquire that selected worker and publish a direct route. No I/O payloads. */

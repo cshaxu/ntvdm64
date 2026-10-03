@@ -305,11 +305,13 @@ int wmain(int argc,WCHAR **argv)
             compare_handles compare=(compare_handles)GetProcAddress(GetModuleHandleW(L"kernelbase.dll"),"CompareObjectHandles");
             DWORD binding=membership.capability && (!compare || !compare(membership.capability,command.frontend)) &&
                 !ntvwm_executions_idle(requests) ? ERROR_BUSY : membership_bind(&membership,command.frontend);
-            /* Binding failure still consumes the protocol request and replies
-             * through its native channel.  Do not complete a broker command
-             * while run16 is waiting for a reply that no thread will send. */
-            if(ntvwm_execution_start(requests,&command,binding)) {
-                DWORD completion=ntvwm_complete_next_command(command.request,0);
+            /* Even allocation/thread failure must report startup before
+             * completing the record. No serving thread owns this command. */
+            DWORD start_error=ntvwm_execution_start(requests,&command,binding);
+            if(start_error) {
+                DWORD completion=OpenNtBaseClientNativeStartupResult(command.caller_generation,
+                    command.request,start_error,NULL,NULL);
+                if(!completion)completion=ntvwm_complete_next_command(command.request,0);
                 if(completion)ntvwm_executions_note_broker_failure(requests,completion);
                 ntvwm_dispose_next_command(&command);
             }

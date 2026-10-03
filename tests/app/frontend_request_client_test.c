@@ -1,190 +1,111 @@
-/* Client-only ownership plus broker-owned wire negatives. The broker test
- * substitute owns the worker channel and uses production reply validators;
- * actual RPC identity and process lifecycle tests remain mandatory. */
+/* Launcher-only unit with substituted authenticated RPC. Real broker role,
+ * version and typed-object rejection remain monitor_rpc_test's responsibility.
+ * No old native control pipe or numeric reply DTO is emulated here. */
 #include <windows.h>
 #include <stdio.h>
-#include "interface/native_request_client.h"
-#include "interface/native_request_protocol.h"
-#include "ntsrv-exe/transport/native_control.h"
+#include "run16-exe/native_request_client.h"
+#include "run16-exe/native_launch.h"
 
-static HANDLE peer_thread;
-static HANDLE peer_process;
-static DWORD scenario,peer_error;
-static HANDLE broker_pipe;
-static DWORD WINAPI peer(void *context)
+static DWORD scenario,final_status,created;
+static HANDLE final_ready,final_permission,completion_thread;
+static DWORD WINAPI complete_target(void *context)
 {
-    HANDLE pipe=context,event=CreateEventW(NULL,TRUE,FALSE,NULL);
-    native_request_header header;
-    native_request_reply reply={NATIVE_REQUEST_VERSION,0,0};
-    BYTE *payload=NULL;
-    DWORD error;
-    PROCESS_INFORMATION process={0};
-    error=frontend_request_transfer(pipe,peer_process,NULL,event,FALSE,&header,sizeof(header));
-    if(error)goto done;
-    if(header.version!=NATIVE_REQUEST_VERSION || header.bytes>NATIVE_LAUNCH_MAX_BYTES){error=ERROR_INVALID_DATA;goto done;}
-    if(scenario>=9) {
-        if(header.bytes){error=ERROR_INVALID_DATA;goto done;}
-        if(scenario==10)reply.error=ERROR_ACCESS_DENIED;
-        if(scenario==11)reply.target=1; /* Resume must never export a target. */
-        error=frontend_request_transfer(pipe,peer_process,NULL,event,TRUE,&reply,sizeof(reply));
-        goto done;
+    HANDLE target=context;DWORD error=ERROR_SUCCESS;
+    if(WaitForSingleObject(target,5000)!=WAIT_OBJECT_0 ||
+        WaitForSingleObject(final_permission,5000)!=WAIT_OBJECT_0)error=ERROR_TIMEOUT;
+    if(!error) {
+        final_status=scenario==7 ? ERROR_WRITE_FAULT : scenario==8 ? ERROR_BROKEN_PIPE : ERROR_SUCCESS;
+        if(!SetEvent(final_ready))error=GetLastError();
     }
-    payload=HeapAlloc(GetProcessHeap(),0,header.bytes);
-    if(!payload){error=ERROR_NOT_ENOUGH_MEMORY;goto done;}
-    error=frontend_request_transfer(pipe,peer_process,NULL,event,FALSE,payload,header.bytes);
-    if(error)goto done;
-    if(scenario==0 || scenario>=6){
-        error=run16_native_launch_start(payload,header.bytes,&process);
-        if(error)goto done;
-        CloseHandle(process.hThread);
-        /* Same-process fixture recipient; ownership transfers to the client. */
-        reply.target=(uint64_t)(ULONG_PTR)process.hProcess;
-        reply.receipt=(uint64_t)(ULONG_PTR)CreateEventW(NULL,TRUE,TRUE,NULL);
-        reply.request=91;
-        if(!reply.receipt){error=GetLastError();goto done;}
-    }else if(scenario==1)reply.error=ERROR_ACCESS_DENIED;
-    else if(scenario==2)reply.version++;
-    else if(scenario==3){reply.error=ERROR_ACCESS_DENIED;reply.target=1;}
-    else if(scenario==4)goto done; /* EOF is not target success. */
-    else if(scenario==5){
-        error=frontend_request_transfer(pipe,peer_process,NULL,event,TRUE,&reply,sizeof(reply)/2);
-        goto done;
-    }
-    error=frontend_request_transfer(pipe,peer_process,NULL,event,TRUE,&reply,sizeof(reply));
-    if(!error && scenario>=6 && scenario!=8) {
-        native_request_completion completion={NATIVE_REQUEST_VERSION,
-            scenario==7 ? ERROR_WRITE_FAULT : 0};
-        if(scenario==6)Sleep(2100); /* A completed target is not the frame barrier. */
-        error=frontend_request_transfer(pipe,peer_process,NULL,event,TRUE,&completion,sizeof(completion));
-    }
-done:
-    peer_error=error;
-    if(payload)HeapFree(GetProcessHeap(),0,payload);
-    CloseHandle(event);CloseHandle(pipe);
-    return error;
+    CloseHandle(target);return error;
 }
 DWORD OpenNtBaseClientSubmitNativeRequest(HANDLE capability,DWORD bytes,BYTE *payload,
     HANDLE *target,HANDLE *receipt,DWORD *request)
 {
-    static LONG serial;WCHAR name[96];DWORD error;
-    HANDLE server=INVALID_HANDLE_VALUE,event=NULL;
-    native_request_header header={NATIVE_REQUEST_VERSION,bytes};
-    native_request_reply reply={0};
-    *target=*receipt=NULL;*request=0;broker_pipe=INVALID_HANDLE_VALUE;
+    static const DWORD errors[]={0,ERROR_ACCESS_DENIED,ERROR_REVISION_MISMATCH,
+        ERROR_INVALID_DATA,ERROR_BROKEN_PIPE,RPC_S_SERVER_UNAVAILABLE};
+    run16_native_launch_packet packet;WCHAR *strings[4];PROCESS_INFORMATION process={0};DWORD error;
+    *target=*receipt=NULL;*request=0;
     if(capability!=(HANDLE)1)return ERROR_ACCESS_DENIED;
-    swprintf_s(name,ARRAYSIZE(name),L"\\\\.\\pipe\\broker-native-fixture-%lu-%lu",
-        GetCurrentProcessId(),(DWORD)InterlockedIncrement(&serial));
-    server=CreateNamedPipeW(name,PIPE_ACCESS_DUPLEX|FILE_FLAG_OVERLAPPED|FILE_FLAG_FIRST_PIPE_INSTANCE,
-        PIPE_TYPE_BYTE|PIPE_WAIT|PIPE_REJECT_REMOTE_CLIENTS,1,65536,65536,0,NULL);
-    if(server==INVALID_HANDLE_VALUE)return GetLastError();
-    broker_pipe=CreateFileW(name,GENERIC_READ|GENERIC_WRITE,0,NULL,OPEN_EXISTING,
-        FILE_FLAG_OVERLAPPED,NULL);
-    if(broker_pipe==INVALID_HANDLE_VALUE){error=GetLastError();goto done;}
-    event=CreateEventW(NULL,TRUE,FALSE,NULL);
-    if(!event){error=GetLastError();goto done;}
-    {
-        OVERLAPPED io={0};io.hEvent=event;
-        if(!ConnectNamedPipe(server,&io) && GetLastError()!=ERROR_PIPE_CONNECTED) {
-            DWORD ignored;error=GetLastError();CancelIoEx(server,&io);
-            GetOverlappedResult(server,&io,&ignored,TRUE);goto done;
-        }
+    if(!bytes) {
+        if(payload)return ERROR_INVALID_DATA;
+        return scenario==9 ? ERROR_SUCCESS : scenario==10 ? ERROR_ACCESS_DENIED : ERROR_INVALID_DATA;
     }
-    peer_thread=CreateThread(NULL,0,peer,server,0,NULL);
-    if(!peer_thread){error=GetLastError();goto done;}
-    server=INVALID_HANDLE_VALUE; /* Peer owns its end, substitute broker owns ours. */
-    error=frontend_request_transfer(broker_pipe,peer_process,NULL,event,TRUE,&header,sizeof(header));
-    if(!error && bytes)error=frontend_request_transfer(broker_pipe,peer_process,NULL,event,TRUE,payload,bytes);
-    if(!error)error=frontend_request_transfer(broker_pipe,peer_process,NULL,event,FALSE,&reply,sizeof(reply));
-    if(!error)error=broker_native_reply_status(&reply,bytes!=0);
-    if(!error && bytes) {
-        *target=(HANDLE)(ULONG_PTR)reply.target;*receipt=(HANDLE)(ULONG_PTR)reply.receipt;
-        *request=reply.request;
+    error=run16_native_launch_unpack(payload,bytes,&packet,strings);if(error)return error;
+    if(packet.capabilities[0] || packet.capabilities[1])return ERROR_INVALID_DATA;
+    if(scenario<6 && errors[scenario])return errors[scenario];
+    error=run16_native_launch_start(payload,bytes,&process);if(error)return error;
+    ++created;CloseHandle(process.hThread);
+    *target=process.hProcess;*request=91;
+    *receipt=CreateEventW(NULL,TRUE,scenario<6,NULL);
+    if(!*receipt){error=GetLastError();CloseHandle(*target);*target=NULL;*request=0;return error;}
+    if(scenario>=6 && scenario<=8) {
+        HANDLE owned=NULL;
+        if(!DuplicateHandle(GetCurrentProcess(),*target,GetCurrentProcess(),&owned,SYNCHRONIZE,FALSE,0))return GetLastError();
+        completion_thread=CreateThread(NULL,0,complete_target,owned,0,NULL);
+        if(!completion_thread){error=GetLastError();CloseHandle(owned);return error;}
     }
-done:
-    if(server!=INVALID_HANDLE_VALUE)CloseHandle(server);
-    if(event)CloseHandle(event);
-    if((error || !bytes || scenario==0) && broker_pipe!=INVALID_HANDLE_VALUE) {
-        CloseHandle(broker_pipe);broker_pipe=INVALID_HANDLE_VALUE;
-    }
-    return error;
+    return ERROR_SUCCESS;
 }
 DWORD OpenNtBaseClientFinishNativeRequest(DWORD request,DWORD *exit_code,DWORD *target_completed)
 {
-    HANDLE event;DWORD error;native_request_completion completion={0};
     if(request!=91 || !exit_code || !target_completed)return ERROR_INVALID_PARAMETER;
     if(scenario==12)return ERROR_PROCESS_ABORTED;
-    *exit_code=37;
-    *target_completed=TRUE;
-    event=CreateEventW(NULL,TRUE,FALSE,NULL);if(!event)return GetLastError();
-    error=frontend_request_transfer(broker_pipe,peer_process,NULL,event,FALSE,&completion,sizeof(completion));
-    if(!error)error=broker_native_completion_status(&completion);
-    CloseHandle(event);CloseHandle(broker_pipe);broker_pipe=INVALID_HANDLE_VALUE;
-    return error;
+    if(WaitForSingleObject(final_ready,5000)!=WAIT_OBJECT_0)return ERROR_TIMEOUT;
+    *exit_code=37;*target_completed=TRUE;return final_status;
 }
 int main(void)
 {
-    WCHAR image[MAX_PATH],command[2*MAX_PATH],directory[MAX_PATH];
-    LPWCH environment;
+    WCHAR image[MAX_PATH],command[2*MAX_PATH],directory[MAX_PATH];LPWCH environment;
     run16_native_start start={0};
-    DWORD expected[]={0,ERROR_ACCESS_DENIED,ERROR_INVALID_DATA,ERROR_INVALID_DATA,ERROR_BROKEN_PIPE,ERROR_BROKEN_PIPE};
-    {
-        native_request_completion completion={NATIVE_REQUEST_VERSION,0,NATIVE_COMPLETION_CONSOLE_EMPTY};
-        if(broker_native_completion_status(&completion))return 20;
-        completion.flags=2;
-        if(broker_native_completion_status(&completion)!=ERROR_INVALID_DATA)return 21;
-        completion.flags=0;completion.version--;
-        if(broker_native_completion_status(&completion)!=ERROR_INVALID_DATA)return 22;
-    }
-    if(!GetEnvironmentVariableW(L"COMSPEC",image,MAX_PATH))return 1;
-    if(!GetCurrentDirectoryW(MAX_PATH,directory))return 1;
+    DWORD expected[]={0,ERROR_ACCESS_DENIED,ERROR_REVISION_MISMATCH,ERROR_INVALID_DATA,
+        ERROR_BROKEN_PIPE,RPC_S_SERVER_UNAVAILABLE};
+    if(!GetEnvironmentVariableW(L"COMSPEC",image,MAX_PATH) || !GetCurrentDirectoryW(MAX_PATH,directory))return 1;
     environment=GetEnvironmentStringsW();if(!environment)return 1;
-    peer_process=OpenProcess(SYNCHRONIZE,FALSE,GetCurrentProcessId());if(!peer_process)return 1;
     swprintf_s(command,2*MAX_PATH,L"\"%ls\" /d /c exit 37",image);
     start.application=image;start.command=command;start.directory=directory;start.environment=environment;
-    for(scenario=0;scenario<6;++scenario){
-        HANDLE target=NULL,receipt=NULL;DWORD error,result=0,request=0;
-        peer_error=0;peer_thread=NULL;
+    /* Launcher authority slots must be stripped before copied RPC submission. */
+    start.capabilities[0]=(HANDLE)123;start.capabilities[1]=(HANDLE)456;
+    for(scenario=0;scenario<6;++scenario) {
+        HANDLE target=NULL,receipt=NULL;DWORD error,result=0,request=0,before=created;
         error=run16_native_request_submit((HANDLE)1,&start,&target,&receipt,&request);
-        if(receipt)CloseHandle(receipt);
-        if(!peer_thread || WaitForSingleObject(peer_thread,5000)!=WAIT_OBJECT_0){printf("FAIL admission case=%lu error=%lu\n",scenario,error);return 2;}
-        CloseHandle(peer_thread);
-        if(error!=expected[scenario] || peer_error){printf("FAIL case=%lu error=%lu peer=%lu\n",scenario,error,peer_error);return 3;}
-        if(!error){
-            if(!target || WaitForSingleObject(target,5000)!=WAIT_OBJECT_0 || !GetExitCodeProcess(target,&result) || result!=37)return 4;
-            CloseHandle(target);
-        }else if(target)return 5;
+        if(error!=expected[scenario])return 2;
+        if(!error) {
+            if(!target || !receipt || request!=91 || WaitForSingleObject(target,5000)!=WAIT_OBJECT_0 ||
+                !GetExitCodeProcess(target,&result) || result!=37)return 3;
+            CloseHandle(target);CloseHandle(receipt);
+        } else if(target || receipt || request || created!=before)return 4;
     }
     for(scenario=6;scenario<=8;++scenario) {
-        HANDLE target=NULL,receipt=NULL;
-        DWORD result,error,request=0,completed=0,wanted=scenario==6 ? 0 : scenario==7 ? ERROR_WRITE_FAULT : ERROR_BROKEN_PIPE;
+        HANDLE target=NULL,receipt=NULL;DWORD result,error,request=0,completed=0,thread_result;
+        DWORD wanted=scenario==6 ? 0 : scenario==7 ? ERROR_WRITE_FAULT : ERROR_BROKEN_PIPE;
+        final_ready=CreateEventW(NULL,TRUE,FALSE,NULL);final_permission=CreateEventW(NULL,TRUE,FALSE,NULL);
+        if(!final_ready || !final_permission)return 5;
         error=run16_native_request_submit((HANDLE)1,&start,&target,&receipt,&request);
         if(error || WaitForSingleObject(target,5000)!=WAIT_OBJECT_0 ||
             !GetExitCodeProcess(target,&result) || result!=37)return 6;
-        result=0;
-        error=run16_native_request_finish(request,&result,&completed);
-        if(error!=wanted || result!=37 || completed!=TRUE ||
-            WaitForSingleObject(peer_thread,5000)!=WAIT_OBJECT_0 || peer_error)return 7;
+        if(WaitForSingleObject(final_ready,0)!=WAIT_TIMEOUT || WaitForSingleObject(receipt,0)!=WAIT_TIMEOUT)return 7;
+        if(!SetEvent(final_permission))return 8;
+        result=0;error=run16_native_request_finish(request,&result,&completed);
+        if(error!=wanted || result!=37 || !completed ||
+            WaitForSingleObject(completion_thread,5000)!=WAIT_OBJECT_0 ||
+            !GetExitCodeThread(completion_thread,&thread_result) || thread_result)return 9;
         printf("PASS final presentation case=%lu status=%lu target=37\n",scenario,error);
-        CloseHandle(peer_thread);CloseHandle(receipt);CloseHandle(target);
+        CloseHandle(completion_thread);CloseHandle(target);CloseHandle(receipt);
+        CloseHandle(final_ready);CloseHandle(final_permission);
     }
     for(scenario=9;scenario<=11;++scenario) {
-        DWORD error,wanted=scenario==9 ? 0 : scenario==10 ? ERROR_ACCESS_DENIED : ERROR_INVALID_DATA;
-        peer_error=0;peer_thread=NULL;
-        error=run16_native_request_resume((HANDLE)1);
-        if(!peer_thread || WaitForSingleObject(peer_thread,5000)!=WAIT_OBJECT_0 || peer_error || error!=wanted)return 8;
-        printf("PASS resume presentation case=%lu status=%lu no target\n",scenario,error);
-        CloseHandle(peer_thread);
+        DWORD before=created,wanted=scenario==9 ? 0 : scenario==10 ? ERROR_ACCESS_DENIED : ERROR_INVALID_DATA;
+        if(run16_native_request_resume((HANDLE)1)!=wanted || created!=before)return 10;
+        printf("PASS RPC resume case=%lu status=%lu no target\n",scenario,wanted);
     }
     scenario=12;
     {
         DWORD result=99,completed=99;
-        /* Broker failure must win over a missing final worker channel. */
-        if(run16_native_request_finish(91,&result,&completed)!=
-            ERROR_PROCESS_ABORTED || result || completed)return 9;
-        puts("PASS broker worker-failure receipt returned without reading dead presentation channel");
+        if(run16_native_request_finish(91,&result,&completed)!=ERROR_PROCESS_ABORTED || result || completed)return 11;
+        puts("PASS broker failure returned with cleared result, no dead-channel read");
     }
     FreeEnvironmentStringsW(environment);
-    CloseHandle(peer_process);
-    puts("PASS client-only link, worker execution only: actual target 37; rejection, version, contradictory reply, EOF and partial reply fail without UI ownership");
+    puts("PASS client-only RPC submission, authority stripping, real exit 37, I/O barrier, errors and resume");
     return 0;
 }

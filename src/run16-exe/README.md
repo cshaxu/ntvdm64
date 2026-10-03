@@ -32,9 +32,10 @@ that path returns the shell result, not a fabricated GUI creation result.
 ## Frontend and service boundary
 
 The existing `frontend-client.lib` now has this launcher source owner:
-`bootstrap_client.c`, `native_request_client.c`, `native_request_io.c` and
-`native_launch_packet.c`. Public declarations are under `interface`.
-NTKVM reuses the transport/codec without linking target creation.
+`bootstrap_client.c` and `native_request_client.c`. Its private API declarations
+remain here; cross-component protocols and the copied packet codec belong to
+`common`. No launcher-owned pipe transfer wrapper remains.
+NTKVM reuses common transport/codec without linking target creation.
 `native_launch.c` is the separately linked restricted resource/CreateProcess
 primitive used by run16 GUI creation and NTVWM native text creation. It owns
 no worker state, Console session, execution policy or frontend renderer.

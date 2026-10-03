@@ -1,7 +1,7 @@
 #ifndef FRONTEND_WINDOW_MOUSE_H
 #define FRONTEND_WINDOW_MOUSE_H
 #include "window_input_queue.h"
-#include "interface/console_mouse.h"
+#include "common/protocol/console_mouse.h"
 
 typedef DWORD (*frontend_mouse_sink)(void *,const INPUT_RECORD *,DWORD);
 /* DOS receives relative frame pixels, never native Console positions. Guest

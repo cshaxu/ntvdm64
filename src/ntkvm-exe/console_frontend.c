@@ -1,7 +1,7 @@
 /* Presentation only: original SoftPC produces the operations; public Console
  * owns host cells/scrollback. No guest state, command selection or scheduler. */
 #include "console_frontend.h"
-#include "interface/console_io.h"
+#include "common/protocol/console_io.h"
 #include <limits.h>
 #include <string.h>
 static BOOL encode_input(const INPUT_RECORD *record,console_io_input *wire)

@@ -1,4 +1,15 @@
-# Cross-component interfaces
+# Interface migration marker
+
+T424 S7 moves the current declaration/IDL owner to common/protocol and the
+native packet codec API to common/codec. Local bootstrap/request client APIs
+belong to run16-exe; worker client instance declarations belong to worker-base.
+The transitional native_request_protocol.h and launcher transfer wrapper are
+removed. Both protocols now have declarations in common; the old bootstrap/
+native control-pipe DTOs are also removed. The internal service native pipe
+test seams are deleted; copied-queue tests use a test-only translation of the
+actual private service implementation, never a production transport/API.
+The previous layout below is retained as provenance context, not current
+file-location guidance.
 
 Single declaration owner for product identity and cross-executable contracts.
 console_io, console_mouse and console_video retain the existing copied KVM

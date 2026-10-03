@@ -17,6 +17,7 @@ DWORD OpenNtBaseClientStartVdmWorker(PCWSTR environment,DWORD characters,
     DWORD show,HANDLE frontend,HANDLE *worker,HANDLE *parent);
 DWORD OpenNtBaseClientWaitFrontendConsoleRestored(void);
 DWORD OpenNtBaseClientFrontendConsoleRestored(void);
+DWORD OpenNtBaseClientFrontendStartupResult(HANDLE capability,DWORD status);
 DWORD OpenNtBaseClientReportCurrentConsoleMembers(void);
 /* Arm only after launcher creation rollback is no longer required. Workers
  * arm immediately after Connect, before entering guest code. */
@@ -43,13 +44,15 @@ DWORD OpenNtBaseClientFrontendLeaseReady(void);
 DWORD OpenNtBaseClientRegisterNativeBackend(HANDLE frontend,HANDLE stop,HANDLE closed);
 DWORD OpenNtBaseClientBindNativeTarget(DWORD request,HANDLE target,HANDLE receipt);
 DWORD OpenNtBaseClientCompleteWorkerChannel(DWORD request,DWORD exit_code);
+DWORD OpenNtBaseClientCompleteNativeRequest(DWORD request,DWORD exit_code,DWORD io_error,DWORD io_flags);
 DWORD OpenNtBaseClientNativeExitCode(DWORD request,DWORD *exit_code);
 DWORD OpenNtBaseClientWorkerFrontendCapability(HANDLE *capability);
 DWORD OpenNtBaseClientRetainFrontendRoot(HANDLE capability,HANDLE *root,DWORD *generation);
 /* Separate execution association; caller owns/closes the wait-only event. */
 DWORD OpenNtBaseClientAcquireConsoleContext(HANDLE frontend,HANDLE *capability);
 DWORD OpenNtBaseClientBindConsoleContext(HANDLE capability);
-DWORD OpenNtBaseClientGetNextNativeCommand(HANDLE *channel,HANDLE *caller_process,HANDLE *execution,HANDLE *frontend,DWORD *request);
+DWORD OpenNtBaseClientGetNextNativeCommand(DWORD capacity,BYTE *payload,DWORD *bytes,HANDLE *caller_process,HANDLE *execution,HANDLE *frontend,DWORD *request,DWORD *caller_generation);
+DWORD OpenNtBaseClientNativeStartupResult(DWORD caller_generation,DWORD request,DWORD status,HANDLE target,HANDLE receipt);
 DWORD OpenNtBaseClientRequestFrontend(HANDLE capability);
 DWORD OpenNtBaseClientFrontendRequest(DWORD *request,HANDLE *worker);
 DWORD OpenNtBaseClientAttachFrontendRequest(DWORD request,HANDLE pipe,HANDLE ready,DWORD *generation);

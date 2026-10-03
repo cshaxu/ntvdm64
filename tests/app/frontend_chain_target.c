@@ -10,7 +10,7 @@
 #include <rpc.h>
 #include "service.h"
 #include "ntsrv-exe/transport/rpc_security.h"
-#include "interface/version.h"
+#include "common/protocol/version.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
 
 PVOID CsrPortHeap;

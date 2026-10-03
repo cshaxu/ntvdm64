@@ -76,8 +76,8 @@ try {
         Revision=(& git rev-parse HEAD);TrackedFiles=@(& git ls-files).Count;UntrackedFiles=$untracked.Count
         Occurrences=$rows.Count;MatchingFiles=@($rows.Path | Sort-Object -Unique).Count;MatchingPaths=@($pathRows).Count
         Classes=@($rows | Group-Object Class | Select-Object Name,Count)
-        Version=[IO.File]::ReadAllText((Join-Path $root 'src/interface/version.h'))
-        RpcIdentity=@([IO.File]::ReadAllLines((Join-Path $root 'src/interface/service.idl')) | Select-Object -First 6)
+        Version=[IO.File]::ReadAllText((Join-Path $root 'src/common/protocol/version.h'))
+        RpcIdentity=@([IO.File]::ReadAllLines((Join-Path $root 'src/common/protocol/service.idl')) | Select-Object -First 6)
     }
     $summary | ConvertTo-Json -Depth 5 | Set-Content -Encoding UTF8 (Join-Path $out 'summary.json')
     $summary | ConvertTo-Json -Depth 5

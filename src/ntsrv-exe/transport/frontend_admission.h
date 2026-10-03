@@ -5,6 +5,6 @@
  * four resources until clear; registration compares these exact objects.
  * Called after trusted CreateProcess and before ResumeThread. */
 DWORD broker_frontend_admit(OPENNT_BASE_CONNECTION *,DWORD,DWORD,
-    HANDLE process,HANDLE capability,HANDLE retire,HANDLE restored);
+    HANDLE process,HANDLE capability,HANDLE retire,HANDLE restored,HANDLE startup_result);
 void broker_frontend_clear_admission(OPENNT_BASE_CONNECTION *);
 #endif

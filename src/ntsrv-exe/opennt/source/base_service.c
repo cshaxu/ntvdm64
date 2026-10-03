@@ -13,11 +13,9 @@
 #include <base_config.h>
 #include "ntsrv-exe/transport/vdm_receipt.h"
 #include "ntsrv-exe/transport/worker_spawn.h"
-#include "ntsrv-exe/transport/native_control.h"
 #include "ntsrv-exe/transport/frontend_admission.h"
-#include "interface/frontend_bootstrap.h"
-#include "interface/native_request_protocol.h"
-#include "interface/native_launch.h"
+#include "run16-exe/frontend_bootstrap.h"
+#include "common/codec/native_launch.h"
 #include <stdio.h>
 #define FRONTEND_STARTUP_DEADLINE_MS 10000u
 typedef NTSTATUS (*OPENNT_USER_TEST_TOKEN_FOR_INTERACTIVE)(HANDLE,PLUID);
@@ -97,6 +95,9 @@ struct OPENNT_BASE_CONNECTION {
     HANDLE frontend_retire,frontend_restored;
     HANDLE frontend_start_process; /* Borrowed only during the active Start RPC. */
     HANDLE frontend_start_capability,frontend_start_retire,frontend_start_restored;
+    HANDLE frontend_start_result; /* Start RPC owns event; never exported. */
+    DWORD frontend_start_status;
+    BOOL frontend_start_reported;
     BOOL frontend_starting;
     BOOL frontend_return_pending,frontend_return_complete;
     BOOL frontend_borrowed,frontend_idle;
@@ -113,9 +114,17 @@ struct OPENNT_BASE_CONNECTION {
     BOOL frontend_closing; /* Admission barrier, never execution/task state. */
     DWORD frontend_request_root; /* Original pending command asks this root for I/O. */
     DWORD frontend_channel_root; /* One pending direct launcher-to-root attachment. */
-    HANDLE frontend_channel,frontend_execution;
+    HANDLE frontend_execution;
+    BYTE *native_command_payload;
+    DWORD native_command_bytes;
+    BOOL native_command_pending;
     DWORD channel_worker_generation; /* Zero selects the retained frontend route. */
     HANDLE channel_frontend; /* Authenticated I/O association for worker delivery. */
+    /* One Submit RPC owns the event until its scope is cleared under lock.
+     * Result resources are owned here until moved to its typed RPC outputs. */
+    HANDLE native_start_event,native_start_target,native_start_receipt;
+    DWORD native_start_worker,native_start_request,native_start_status;
+    BOOL native_start_reported;
     DWORD native_root;
     DWORD native_inflight,native_activity_root;
     /* Project-owned native-text counterpart to BaseSrv's original DOSRECORD
@@ -136,7 +145,8 @@ typedef struct OPENNT_BASE_WIN32RECORD {
     DWORD launcher_generation,exit_code,completion_error;
     BOOL completed;
     HANDLE receipt; /* Signalled after NTVWM reports exit and I/O release. */
-    HANDLE control,control_worker; /* Broker-owned final I/O acknowledgement. */
+    DWORD io_error,io_flags; /* Final I/O precedes receipt under the service lock. */
+    BOOL startup_delivered;
     WCHAR image[OPENNT_BASE_WORKER_IMAGE_CHARS];
 } OPENNT_BASE_WIN32RECORD;
 typedef struct OPENNT_FRONTEND_ROUTE {
@@ -264,8 +274,6 @@ static void service_delete_win32record(OPENNT_BASE_WIN32RECORD *record)
     if (!record) return;
     RemoveEntryList(&record->link);
     if(record->receipt)CloseHandle(record->receipt);
-    if(record->control)CloseHandle(record->control);
-    if(record->control_worker)CloseHandle(record->control_worker);
     HeapFree(GetProcessHeap(),0,record);
 }
 static void service_release_console_identities(OPENNT_BASE_CONNECTION *connection)
@@ -426,10 +434,12 @@ static void service_delete_frontend(OPENNT_FRONTEND_ROUTE *route)
 }
 static void service_clear_frontend_channel(OPENNT_BASE_CONNECTION *connection)
 {
-    if (connection->frontend_channel) CloseHandle(connection->frontend_channel);
+    if(connection->native_command_payload)HeapFree(GetProcessHeap(),0,connection->native_command_payload);
+    connection->native_command_payload=NULL;connection->native_command_bytes=0;
+    connection->native_command_pending=FALSE;
     if (connection->frontend_execution) CloseHandle(connection->frontend_execution);
     if (connection->channel_frontend) CloseHandle(connection->channel_frontend);
-    connection->frontend_channel=NULL;connection->frontend_execution=NULL;
+    connection->frontend_execution=NULL;
     connection->channel_frontend=NULL;connection->channel_worker_generation=0;
     connection->frontend_channel_root=0;
     service_clear_pending_win32record(connection);
@@ -1622,7 +1632,7 @@ done:
 /* Reuses the verified restricted-inheritance bootstrap, now entirely inside
  * the broker. No caller-selected image, command, PID or Console HANDLE. */
 DWORD broker_frontend_admit(OPENNT_BASE_CONNECTION *caller,DWORD pid,DWORD generation,
-    HANDLE process,HANDLE capability,HANDLE retire,HANDLE restored)
+    HANDLE process,HANDLE capability,HANDLE retire,HANDLE restored,HANDLE startup_result)
 {
     DWORD error=ERROR_ACCESS_DENIED;
     if(!caller || !process || !capability || !retire || !restored)
@@ -1636,6 +1646,9 @@ DWORD broker_frontend_admit(OPENNT_BASE_CONNECTION *caller,DWORD pid,DWORD gener
             caller->frontend_start_capability=capability;
             caller->frontend_start_retire=retire;
             caller->frontend_start_restored=restored;
+            caller->frontend_start_result=startup_result;
+            caller->frontend_start_status=0;
+            caller->frontend_start_reported=FALSE;
             caller->frontend_starting=TRUE;
             error=ERROR_SUCCESS;
         }
@@ -1650,22 +1663,54 @@ void broker_frontend_clear_admission(OPENNT_BASE_CONNECTION *caller)
     caller->frontend_start_capability=NULL;
     caller->frontend_start_retire=NULL;
     caller->frontend_start_restored=NULL;
+    caller->frontend_start_result=NULL;
+    caller->frontend_start_status=0;
+    caller->frontend_start_reported=FALSE;
     caller->frontend_starting=FALSE;
     LeaveCriticalSection(&caller->service->lock);
+}
+
+DWORD OpenNtBaseServiceFrontendStartupResult(OPENNT_BASE_CONNECTION *root,DWORD pid,
+    DWORD generation,HANDLE capability,DWORD status)
+{
+    LIST_ENTRY *link;
+    DWORD error=ERROR_ACCESS_DENIED;
+    SERVICE_COMPARE_HANDLES compare=(SERVICE_COMPARE_HANDLES)GetProcAddress(
+        GetModuleHandleW(L"kernelbase.dll"),"CompareObjectHandles");
+    if(!root || !capability)return ERROR_INVALID_PARAMETER;
+    if(!compare)return ERROR_CALL_NOT_IMPLEMENTED;
+    EnterCriticalSection(&root->service->lock);
+    if(!OpenNtBaseServicePeer(root,pid,generation))goto done;
+    for(link=root->service->connections.Flink;link!=&root->service->connections;link=link->Flink) {
+        OPENNT_BASE_CONNECTION *creator=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
+        if(!creator->frontend_starting || !creator->frontend_start_process ||
+            !creator->frontend_start_capability || !creator->frontend_start_result ||
+            !compare(creator->frontend_start_process,root->process.ProcessHandle) ||
+            !compare(creator->frontend_start_capability,capability))continue;
+        if(creator->frontend_start_reported){error=ERROR_ALREADY_EXISTS;break;}
+        /* Failure may precede root registration; success must prove the
+         * registered Console lease, not merely possession of an event. */
+        if(!status && (!root->frontend_capability || !root->frontend_console_window ||
+            !compare(root->frontend_capability,capability)))break;
+        creator->frontend_start_status=status;
+        if(!SetEvent(creator->frontend_start_result)){error=GetLastError();break;}
+        creator->frontend_start_reported=TRUE;
+        error=ERROR_SUCCESS;break;
+    }
+done:
+    LeaveCriticalSection(&root->service->lock);
+    return error;
 }
 
 DWORD OpenNtBaseServiceStartFrontend(OPENNT_BASE_CONNECTION *caller,DWORD pid,
     DWORD generation,uint64_t window,BOOL borrowed,HANDLE *root,HANDLE *capability,HANDLE *restored)
 {
-    static LONG serial;
-    WCHAR image[MAX_PATH],name[96],command[1024],*slash;
-    HANDLE pipe=INVALID_HANDLE_VALUE,child=INVALID_HANDLE_VALUE,creator=NULL;
+    WCHAR image[MAX_PATH],command[1024],*slash;
+    HANDLE creator=NULL;
     HANDLE notification=NULL,retire=NULL,ack=NULL,event=NULL,timer=NULL,verified=NULL;
-    HANDLE inherited[5],unused_retire=NULL;
+    HANDLE inherited[4],unused_retire=NULL;
     SECURITY_ATTRIBUTES security={sizeof(security),NULL,TRUE};
     STARTUPINFOEXW startup={0};PROCESS_INFORMATION process={0};
-    frontend_bootstrap_reply reply={0};
-    const char expected[APP_VERSION_BYTES]=APP_VERSION;
     LARGE_INTEGER due;SIZE_T bytes=0;
     DWORD error,create=0,length,root_generation=0;
     BOOL attributes=FALSE,accepted=FALSE;
@@ -1697,69 +1742,52 @@ DWORD OpenNtBaseServiceStartFrontend(OPENNT_BASE_CONNECTION *caller,DWORD pid,
         {error=ERROR_BAD_PATHNAME;goto done;}
     if(wcscpy_s(slash+1,ARRAYSIZE(image)-(size_t)(slash+1-image),L"ntkvm.exe"))
         {error=ERROR_FILENAME_EXCED_RANGE;goto done;}
-    swprintf_s(name,ARRAYSIZE(name),L"\\\\.\\pipe\\ntvdm-frontend-start-%lu-%lu",
-        GetCurrentProcessId(),(DWORD)InterlockedIncrement(&serial));
-    pipe=CreateNamedPipeW(name,PIPE_ACCESS_DUPLEX|FILE_FLAG_OVERLAPPED|FILE_FLAG_FIRST_PIPE_INSTANCE,
-        PIPE_TYPE_BYTE|PIPE_WAIT|PIPE_REJECT_REMOTE_CLIENTS,1,4096,4096,0,NULL);
-    if(pipe==INVALID_HANDLE_VALUE){error=GetLastError();goto done;}
-    child=CreateFileW(name,GENERIC_READ|GENERIC_WRITE,0,&security,OPEN_EXISTING,
-        FILE_FLAG_OVERLAPPED|SECURITY_SQOS_PRESENT|SECURITY_IDENTIFICATION,NULL);
-    if(child==INVALID_HANDLE_VALUE){error=GetLastError();goto done;}
     notification=CreateEventW(&security,TRUE,FALSE,NULL);
     retire=CreateEventW(&security,TRUE,FALSE,NULL);
     ack=CreateEventW(&security,TRUE,FALSE,NULL);
     event=CreateEventW(NULL,TRUE,FALSE,NULL);
     if(!notification || !retire || !ack || !event){error=GetLastError();goto done;}
-    {
-        OVERLAPPED io={0};DWORD ignored;io.hEvent=event;
-        if(!ConnectNamedPipe(pipe,&io) && GetLastError()!=ERROR_PIPE_CONNECTED){
-            error=GetLastError();CancelIoEx(pipe,&io);GetOverlappedResult(pipe,&io,&ignored,TRUE);goto done;
-        }
-    }
     InitializeProcThreadAttributeList(NULL,1,0,&bytes);
     startup.lpAttributeList=HeapAlloc(GetProcessHeap(),0,bytes);
     if(!startup.lpAttributeList){error=ERROR_NOT_ENOUGH_MEMORY;goto done;}
     if(!InitializeProcThreadAttributeList(startup.lpAttributeList,1,0,&bytes))
         {error=GetLastError();goto done;}
     attributes=TRUE;
-    inherited[0]=child;inherited[1]=creator;inherited[2]=notification;
-    inherited[3]=retire;inherited[4]=ack;
+    inherited[0]=creator;inherited[1]=notification;
+    inherited[2]=retire;inherited[3]=ack;
     if(!UpdateProcThreadAttribute(startup.lpAttributeList,0,PROC_THREAD_ATTRIBUTE_HANDLE_LIST,
         inherited,sizeof(inherited),NULL,NULL)){error=GetLastError();goto done;}
     startup.StartupInfo.cb=sizeof(startup);
-    if(swprintf_s(command,ARRAYSIZE(command),L"\"%ls\" --session %Ix %Ix %Ix %Ix %Ix %u %I64x",
-        image,(UINT_PTR)child,(UINT_PTR)creator,(UINT_PTR)notification,(UINT_PTR)retire,
+    if(swprintf_s(command,ARRAYSIZE(command),L"\"%ls\" --session %Ix %Ix %Ix %Ix %u %I64x",
+        image,(UINT_PTR)creator,(UINT_PTR)notification,(UINT_PTR)retire,
         (UINT_PTR)ack,borrowed!=FALSE,window)<0){error=ERROR_FILENAME_EXCED_RANGE;goto done;}
     if(!CreateProcessW(image,command,NULL,NULL,TRUE,
         CREATE_SUSPENDED|EXTENDED_STARTUPINFO_PRESENT|DETACHED_PROCESS,NULL,NULL,
         &startup.StartupInfo,&process)){error=GetLastError();goto done;}
-    error=broker_frontend_admit(caller,pid,generation,process.hProcess,notification,retire,ack);
+    error=broker_frontend_admit(caller,pid,generation,process.hProcess,notification,retire,ack,event);
     if(error)goto done;
     if(ResumeThread(process.hThread)==(DWORD)-1){error=GetLastError();goto done;}
     CloseHandle(process.hThread);process.hThread=NULL;
-    CloseHandle(child);child=INVALID_HANDLE_VALUE;
     timer=CreateWaitableTimerW(NULL,TRUE,NULL);
     if(!timer){error=GetLastError();goto done;}
     due.QuadPart=-10LL*1000*10000;
     if(!SetWaitableTimer(timer,&due,0,NULL,NULL,FALSE)){error=GetLastError();goto done;}
-    error=frontend_request_transfer(pipe,process.hProcess,timer,event,FALSE,&reply,sizeof(reply));
-    if(error==ERROR_OPERATION_ABORTED && WaitForSingleObject(timer,0)==WAIT_OBJECT_0)
-        error=ERROR_TIMEOUT;
-    if(error==ERROR_BROKEN_PIPE) {
-        HANDLE waits[2]={process.hProcess,timer};
-        /* Pipe rundown can precede the process object's exit notification.
-         * Attribute an early fault within the existing admission deadline;
-         * never add an unbounded wait or replay this bootstrap. */
-        (void)WaitForMultipleObjects(2,waits,FALSE,INFINITE);
+    {
+        HANDLE waits[4]={event,process.hProcess,creator,timer};
+        DWORD wait=WaitForMultipleObjects(ARRAYSIZE(waits),waits,FALSE,INFINITE);
+        if(wait==WAIT_OBJECT_0) {
+            EnterCriticalSection(&caller->service->lock);
+            error=caller->frontend_start_reported ? caller->frontend_start_status : ERROR_INVALID_STATE;
+            LeaveCriticalSection(&caller->service->lock);
+        }else if(wait==WAIT_OBJECT_0+3)error=ERROR_TIMEOUT;
+        else if(wait==WAIT_FAILED)error=GetLastError();
+        else error=ERROR_PROCESS_ABORTED;
     }
     if(error && WaitForSingleObject(process.hProcess,0)==WAIT_OBJECT_0) {
         DWORD status;
         if(GetExitCodeProcess(process.hProcess,&status) && status)error=status;
     }
     if(error)goto done;
-    if(reply.version!=FRONTEND_BOOTSTRAP_VERSION || memcmp(reply.application,expected,sizeof(expected)))
-        {error=ERROR_REVISION_MISMATCH;goto done;}
-    if(reply.status){error=reply.status;goto done;}
     error=OpenNtBaseServiceRetainFrontendRoot(caller,pid,generation,notification,&verified,&root_generation);
     if(error)goto done;
     if(GetProcessId(verified)!=process.dwProcessId){error=ERROR_ACCESS_DENIED;goto done;}
@@ -1785,8 +1813,6 @@ done:
     if(verified)CloseHandle(verified);if(creator)CloseHandle(creator);
     if(notification)CloseHandle(notification);if(retire)CloseHandle(retire);if(ack)CloseHandle(ack);
     if(timer)CloseHandle(timer);if(event)CloseHandle(event);
-    if(child!=INVALID_HANDLE_VALUE)CloseHandle(child);
-    if(pipe!=INVALID_HANDLE_VALUE)CloseHandle(pipe);
     if(attributes)DeleteProcThreadAttributeList(startup.lpAttributeList);
     if(startup.lpAttributeList)HeapFree(GetProcessHeap(),0,startup.lpAttributeList);
     return error;
@@ -2147,8 +2173,16 @@ done:
 DWORD OpenNtBaseServiceCompleteWorkerChannel(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD generation,
     DWORD request,DWORD exit_code)
 {
+    return OpenNtBaseServiceCompleteNativeRequest(connection,pid,generation,request,exit_code,0,0);
+}
+
+DWORD OpenNtBaseServiceCompleteNativeRequest(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD generation,
+    DWORD request,DWORD exit_code,DWORD io_error,DWORD io_flags)
+{
     DWORD error=ERROR_ACCESS_DENIED;
     if(!connection)return ERROR_INVALID_PARAMETER;
+    if(io_flags & ~NATIVE_COMPLETION_CONSOLE_EMPTY)return ERROR_INVALID_DATA;
+    if(!request && (io_error || io_flags))return ERROR_INVALID_PARAMETER;
     EnterCriticalSection(&connection->service->lock);
     if(OpenNtBaseServicePeer(connection,pid,generation) && connection->native_worker) {
         OPENNT_BASE_WIN32RECORD *record=NULL;
@@ -2165,6 +2199,8 @@ DWORD OpenNtBaseServiceCompleteWorkerChannel(OPENNT_BASE_CONNECTION *connection,
              * on the direct channel, so it has no successful exit receipt. */
             if(record->process_id) {
                 record->exit_code=exit_code;
+                record->io_error=io_error;
+                record->io_flags=io_flags;
                 record->completed=TRUE;
                 if(!record->receipt || !SetEvent(record->receipt)) {
                     error=record->receipt ? GetLastError() : ERROR_INVALID_STATE;
@@ -2811,29 +2847,26 @@ static DWORD service_frontend_idle(OPENNT_BASE_CONNECTION *root)
     return ResetEvent(root->frontend_capability) ? ERROR_NOT_FOUND : GetLastError();
 }
 
-DWORD OpenNtBaseServiceQueueNativeChannel(OPENNT_BASE_CONNECTION *connection,DWORD pid,
-    DWORD generation,HANDLE capability,HANDLE channel,const WCHAR image[OPENNT_BASE_WORKER_IMAGE_CHARS],
-    DWORD channel_owner)
+static DWORD service_queue_native_command(OPENNT_BASE_CONNECTION *connection,DWORD pid,
+    DWORD generation,HANDLE capability,const WCHAR image[OPENNT_BASE_WORKER_IMAGE_CHARS],
+    DWORD bytes,const BYTE *payload)
 {
-    HANDLE root_process=NULL,execution=NULL,owned=NULL,worker=NULL,frontend=NULL;
-    DWORD root_generation=0,worker_generation=0,flags,server_pid,client_pid,error;
+    HANDLE root_process=NULL,execution=NULL,worker=NULL,frontend=NULL;
+    DWORD root_generation=0,worker_generation=0,error;
     OPENNT_BASE_WIN32RECORD *record=NULL;
+    BYTE *owned_payload=NULL;
     LIST_ENTRY *link;
     if (!connection || !image) return ERROR_ACCESS_DENIED;
     EnterCriticalSection(&connection->service->lock);
     error=ERROR_ACCESS_DENIED;
     if (!OpenNtBaseServicePeer(connection,pid,generation) || connection->process.fVDM || connection->native_worker) goto done;
-    /* Only the producer's connected byte-pipe pair. In production the broker
-     * creates both ends; neither a public listener nor a client pipe crosses
-     * SubmitNativeRequest. Tests exercise this internal validation directly. */
-    if (GetFileType(channel)!=FILE_TYPE_PIPE ||
-        !GetNamedPipeInfo(channel,&flags,NULL,NULL,NULL) ||
-        !(flags&PIPE_SERVER_END) || (flags&PIPE_TYPE_MESSAGE) ||
-        !GetNamedPipeServerProcessId(channel,&server_pid) || server_pid!=channel_owner ||
-        !GetNamedPipeClientProcessId(channel,&client_pid) || client_pid!=channel_owner) {
-        error=ERROR_INVALID_PARAMETER;goto done;
+    if (connection->native_command_pending) { error=ERROR_BUSY;goto done; }
+    if(bytes>NATIVE_LAUNCH_MAX_BYTES || (bytes && !payload)) {error=ERROR_INVALID_PARAMETER;goto done;}
+    if(bytes) {
+        owned_payload=HeapAlloc(GetProcessHeap(),0,bytes);
+        if(!owned_payload){error=ERROR_NOT_ENOUGH_MEMORY;goto done;}
+        CopyMemory(owned_payload,payload,bytes);
     }
-    if (connection->frontend_channel) { error=ERROR_BUSY;goto done; }
     if(image[0]) {
         SIZE_T characters=0;
         while(characters<OPENNT_BASE_WORKER_IMAGE_CHARS && image[characters])++characters;
@@ -2864,13 +2897,12 @@ DWORD OpenNtBaseServiceQueueNativeChannel(OPENNT_BASE_CONNECTION *connection,DWO
         if (!DuplicateHandle(GetCurrentProcess(),capability,GetCurrentProcess(),&frontend,
                 SYNCHRONIZE,FALSE,0)) { error=GetLastError();goto done; }
     }
-    if (!DuplicateHandle(GetCurrentProcess(),channel,GetCurrentProcess(),&owned,
-        0,FALSE,DUPLICATE_SAME_ACCESS)) { error=GetLastError();goto done; }
     error=ERROR_ACCESS_DENIED;
     for (link=connection->service->connections.Flink;link!=&connection->service->connections;link=link->Flink) {
         OPENNT_BASE_CONNECTION *root=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
         if (root->process.SequenceNumber!=root_generation) continue;
-        connection->frontend_channel=owned;owned=NULL;
+        connection->native_command_payload=owned_payload;owned_payload=NULL;
+        connection->native_command_bytes=bytes;connection->native_command_pending=TRUE;
         connection->frontend_execution=execution;execution=NULL;
         connection->frontend_channel_root=root_generation;
         connection->channel_worker_generation=worker_generation;
@@ -2885,8 +2917,8 @@ done:
     if (worker) CloseHandle(worker);
     if (frontend) CloseHandle(frontend);
     if (execution) CloseHandle(execution);
-    if (owned) CloseHandle(owned);
     if (record) HeapFree(GetProcessHeap(),0,record);
+    if (owned_payload) HeapFree(GetProcessHeap(),0,owned_payload);
     LeaveCriticalSection(&connection->service->lock);
     return error;
 }
@@ -2912,17 +2944,61 @@ static OPENNT_BASE_WIN32RECORD *service_native_result_record(OPENNT_BASE_CONNECT
     return NULL;
 }
 
+DWORD OpenNtBaseServiceNativeStartupResult(OPENNT_BASE_CONNECTION *worker,DWORD pid,DWORD generation,
+    DWORD caller_generation,DWORD request,DWORD status,HANDLE target,HANDLE receipt)
+{
+    DWORD error=ERROR_ACCESS_DENIED;
+    LIST_ENTRY *link;
+    HANDLE owned_target=NULL,owned_receipt=NULL;
+    if(!worker || !caller_generation)return error;
+    EnterCriticalSection(&worker->service->lock);
+    if(!OpenNtBaseServicePeer(worker,pid,generation) || !worker->native_worker)goto done;
+    for(link=worker->service->connections.Flink;link!=&worker->service->connections;link=link->Flink) {
+        OPENNT_BASE_CONNECTION *caller=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
+        OPENNT_BASE_WIN32RECORD *record;
+        SERVICE_COMPARE_HANDLES compare;
+        if(caller->process.SequenceNumber!=caller_generation)continue;
+        if(!caller->native_start_event || caller->native_start_worker!=generation ||
+            caller->native_start_request!=request)goto done;
+        if(caller->native_start_reported){error=ERROR_ALREADY_EXISTS;goto done;}
+        if(status || !request) {
+            if(target || receipt){error=ERROR_INVALID_DATA;goto done;}
+        } else {
+            record=service_native_result_record(caller,request,NULL);
+            compare=(SERVICE_COMPARE_HANDLES)GetProcAddress(GetModuleHandleW(L"kernelbase.dll"),"CompareObjectHandles");
+            if(!record || record->startup_delivered || !compare || !target || !receipt ||
+                record->process_id!=GetProcessId(target) || !compare(record->receipt,receipt)) {
+                error=ERROR_INVALID_DATA;goto done;
+            }
+            if(!DuplicateHandle(GetCurrentProcess(),target,GetCurrentProcess(),&owned_target,
+                    SYNCHRONIZE|PROCESS_QUERY_LIMITED_INFORMATION,FALSE,0) ||
+                !DuplicateHandle(GetCurrentProcess(),receipt,GetCurrentProcess(),&owned_receipt,
+                    SYNCHRONIZE,FALSE,0)){error=GetLastError();goto done;}
+        }
+        caller->native_start_status=status;
+        caller->native_start_reported=TRUE;
+        if(!SetEvent(caller->native_start_event)) {
+            error=GetLastError();caller->native_start_reported=FALSE;goto done;
+        }
+        caller->native_start_target=owned_target;owned_target=NULL;
+        caller->native_start_receipt=owned_receipt;owned_receipt=NULL;
+        error=ERROR_SUCCESS;break;
+    }
+done:
+    LeaveCriticalSection(&worker->service->lock);
+    if(owned_target)CloseHandle(owned_target);if(owned_receipt)CloseHandle(owned_receipt);
+    return error;
+}
+
 DWORD OpenNtBaseServiceSubmitNativeRequest(OPENNT_BASE_CONNECTION *caller,DWORD pid,
     DWORD generation,HANDLE frontend,DWORD bytes,BYTE *payload,
     HANDLE *target,HANDLE *receipt,DWORD *request)
 {
-    static LONG serial;
-    WCHAR name[96],image[OPENNT_BASE_WORKER_IMAGE_CHARS]={0};
-    HANDLE server=INVALID_HANDLE_VALUE,client=INVALID_HANDLE_VALUE,event=NULL,worker=NULL;
-    HANDLE exported_target=NULL,exported_receipt=NULL,root=NULL;
+    WCHAR image[OPENNT_BASE_WORKER_IMAGE_CHARS]={0};
+    HANDLE startup=NULL,worker=NULL;
+    HANDLE root=NULL;
     DWORD root_generation=0;
-    native_request_header header={NATIVE_REQUEST_VERSION,bytes};
-    native_request_reply reply={0};DWORD error;
+    DWORD error;
     if(!target || !receipt || !request)return ERROR_INVALID_PARAMETER;
     *target=*receipt=NULL;*request=0;
     if(!caller || !OpenNtBaseServicePeer(caller,pid,generation))return ERROR_ACCESS_DENIED;
@@ -2941,72 +3017,66 @@ DWORD OpenNtBaseServiceSubmitNativeRequest(OPENNT_BASE_CONNECTION *caller,DWORD 
     } else if(payload)return ERROR_INVALID_PARAMETER;
     error=OpenNtBaseServiceRetainCommandWorker(caller,pid,generation,&worker);
     if(error)return error;
-    event=CreateEventW(NULL,TRUE,FALSE,NULL);
-    if(!event){error=GetLastError();goto done;}
-    swprintf_s(name,ARRAYSIZE(name),L"\\\\.\\pipe\\ntsrv-native-%lu-%lu",
-        GetCurrentProcessId(),(DWORD)InterlockedIncrement(&serial));
-    server=CreateNamedPipeW(name,PIPE_ACCESS_DUPLEX|FILE_FLAG_OVERLAPPED|FILE_FLAG_FIRST_PIPE_INSTANCE,
-        PIPE_TYPE_BYTE|PIPE_WAIT|PIPE_REJECT_REMOTE_CLIENTS,1,65536,65536,0,NULL);
-    if(server==INVALID_HANDLE_VALUE){error=GetLastError();goto done;}
-    client=CreateFileW(name,GENERIC_READ|GENERIC_WRITE,0,NULL,OPEN_EXISTING,
-        FILE_FLAG_OVERLAPPED|SECURITY_SQOS_PRESENT|SECURITY_IDENTIFICATION,NULL);
-    if(client==INVALID_HANDLE_VALUE){error=GetLastError();goto done;}
-    {
-        OVERLAPPED io={0};DWORD ignored;io.hEvent=event;
-        if(!ConnectNamedPipe(server,&io) && GetLastError()!=ERROR_PIPE_CONNECTED) {
-            error=GetLastError();CancelIoEx(server,&io);GetOverlappedResult(server,&io,&ignored,TRUE);goto done;
+    startup=CreateEventW(NULL,TRUE,FALSE,NULL);
+    if(!startup){error=GetLastError();goto done;}
+    EnterCriticalSection(&caller->service->lock);
+    if(caller->native_start_event)error=ERROR_BUSY;
+    else {
+        error=service_queue_native_command(caller,pid,generation,frontend,image,bytes,payload);
+        if(!error) {
+            caller->native_start_event=startup;
+            caller->native_start_worker=caller->channel_worker_generation;
+            caller->native_start_request=MAXDWORD;caller->native_start_reported=FALSE;
         }
     }
-    error=OpenNtBaseServiceQueueNativeChannel(caller,pid,generation,frontend,server,image,GetCurrentProcessId());
+    LeaveCriticalSection(&caller->service->lock);
     if(error)goto done;
-    CloseHandle(server);server=INVALID_HANDLE_VALUE;
-    error=frontend_request_transfer(client,worker,caller->process.ProcessHandle,event,TRUE,&header,sizeof(header));
-    if(!error && bytes)error=frontend_request_transfer(client,worker,caller->process.ProcessHandle,event,TRUE,payload,bytes);
-    if(!error)error=frontend_request_transfer(client,worker,caller->process.ProcessHandle,event,FALSE,&reply,sizeof(reply));
-    if(error)goto done;
-    error=broker_native_reply_status(&reply,bytes!=0);
-    if(error)goto done;
-    if(!bytes){error=ERROR_SUCCESS;goto done;}
-    /* Existing worker exports name the authenticated launcher's namespace.
-     * Reclaim those exact exports into service-owned typed RPC attachments;
-     * the launcher never sees or operates the worker control pipe. */
-    if(!DuplicateHandle(caller->process.ProcessHandle,(HANDLE)(ULONG_PTR)reply.target,
-        GetCurrentProcess(),&exported_target,0,FALSE,DUPLICATE_SAME_ACCESS|DUPLICATE_CLOSE_SOURCE) ||
-        !DuplicateHandle(caller->process.ProcessHandle,(HANDLE)(ULONG_PTR)reply.receipt,
-        GetCurrentProcess(),&exported_receipt,0,FALSE,DUPLICATE_SAME_ACCESS|DUPLICATE_CLOSE_SOURCE)) {
-        error=GetLastError();goto done;
+    {
+        HANDLE waits[3]={startup,worker,caller->process.ProcessHandle};
+        DWORD wait=WaitForMultipleObjects(3,waits,FALSE,10000);
+        if(wait!=WAIT_OBJECT_0) {
+            error=wait==WAIT_TIMEOUT ? ERROR_TIMEOUT : wait==WAIT_FAILED ? GetLastError() : ERROR_PROCESS_ABORTED;
+            goto done;
+        }
     }
     EnterCriticalSection(&caller->service->lock);
     {
-        OPENNT_BASE_WIN32RECORD *record=service_native_result_record(caller,reply.request,NULL);
-        SERVICE_COMPARE_HANDLES compare=(SERVICE_COMPARE_HANDLES)GetProcAddress(
-            GetModuleHandleW(L"kernelbase.dll"),"CompareObjectHandles");
-        if(!record || record->control || !compare ||
-            record->process_id!=GetProcessId(exported_target) ||
-            !compare(record->receipt,exported_receipt))error=ERROR_INVALID_DATA;
-        else {
-            record->control=client;client=INVALID_HANDLE_VALUE;
-            record->control_worker=worker;worker=NULL;
-            *target=exported_target;exported_target=NULL;
-            *receipt=exported_receipt;exported_receipt=NULL;
-            *request=reply.request;error=ERROR_SUCCESS;
+        OPENNT_BASE_WIN32RECORD *record;
+        error=caller->native_start_reported ? caller->native_start_status : ERROR_INVALID_STATE;
+        if(!error && bytes) {
+            record=service_native_result_record(caller,caller->native_start_request,NULL);
+            if(!record || record->startup_delivered || !caller->native_start_target || !caller->native_start_receipt)
+                error=ERROR_INVALID_DATA;
+            else {
+            record->startup_delivered=TRUE;
+            *target=caller->native_start_target;caller->native_start_target=NULL;
+            *receipt=caller->native_start_receipt;caller->native_start_receipt=NULL;
+            *request=caller->native_start_request;
+            }
         }
     }
     LeaveCriticalSection(&caller->service->lock);
 done:
-    if(exported_target)CloseHandle(exported_target);
-    if(exported_receipt)CloseHandle(exported_receipt);
-    if(server!=INVALID_HANDLE_VALUE)CloseHandle(server);
-    if(client!=INVALID_HANDLE_VALUE)CloseHandle(client);
-    if(event)CloseHandle(event);if(worker)CloseHandle(worker);
+    EnterCriticalSection(&caller->service->lock);
+    if(startup && caller->native_start_event==startup) {
+        caller->native_start_event=NULL;caller->native_start_worker=0;
+        caller->native_start_request=0;caller->native_start_reported=FALSE;
+        if(caller->native_start_target)CloseHandle(caller->native_start_target);
+        if(caller->native_start_receipt)CloseHandle(caller->native_start_receipt);
+        caller->native_start_target=caller->native_start_receipt=NULL;
+        /* Only an undelivered command is rolled back here; running targets
+         * and their existing direct completion records are never killed. */
+        if(error)service_clear_frontend_channel(caller);
+    }
+    LeaveCriticalSection(&caller->service->lock);
+    if(startup)CloseHandle(startup);if(worker)CloseHandle(worker);
     return error;
 }
 
 DWORD OpenNtBaseServiceFinishNativeRequest(OPENNT_BASE_CONNECTION *caller,DWORD pid,
     DWORD generation,DWORD request,DWORD *exit_code,DWORD *target_completed)
 {
-    HANDLE pipe=NULL,worker=NULL,event=NULL;DWORD error,io_error=0,idle_worker=0;
-    native_request_completion completion={0};
+    DWORD error,io_error=0,io_flags=0,idle_worker=0;
     if(!exit_code || !target_completed)return ERROR_INVALID_PARAMETER;
     *exit_code=*target_completed=0;
     if(!caller || !request)return ERROR_INVALID_PARAMETER;
@@ -3018,14 +3088,10 @@ DWORD OpenNtBaseServiceFinishNativeRequest(OPENNT_BASE_CONNECTION *caller,DWORD 
         if(!record)error=ERROR_NOT_FOUND;
         else if(!record->completed)error=ERROR_NOT_READY;
         else if(record->completion_error)error=ERROR_SUCCESS;
-        else if(!record->control || !record->control_worker) {
-            error=ERROR_SUCCESS;io_error=ERROR_INVALID_STATE;
+        else {
+            error=ERROR_SUCCESS;io_error=record->io_error;io_flags=record->io_flags;
+            idle_worker=owner->native_worker ? owner->process.SequenceNumber : 0;
         }
-        else if(!DuplicateHandle(GetCurrentProcess(),record->control,GetCurrentProcess(),&pipe,
-            0,FALSE,DUPLICATE_SAME_ACCESS) ||
-            !DuplicateHandle(GetCurrentProcess(),record->control_worker,GetCurrentProcess(),&worker,
-                SYNCHRONIZE,FALSE,0)) {error=ERROR_SUCCESS;io_error=GetLastError();}
-        else {error=ERROR_SUCCESS;idle_worker=owner->native_worker ? owner->process.SequenceNumber : 0;}
     }
     LeaveCriticalSection(&caller->service->lock);
     if(error)goto done;
@@ -3038,27 +3104,24 @@ DWORD OpenNtBaseServiceFinishNativeRequest(OPENNT_BASE_CONNECTION *caller,DWORD 
      * worker failure, forged/stale receipts and races never set this flag. */
     *target_completed=TRUE;
     if(io_error){error=io_error;goto done;}
-    event=CreateEventW(NULL,TRUE,FALSE,NULL);
-    if(!event){error=GetLastError();goto done;}
-    error=frontend_request_transfer(pipe,worker,caller->process.ProcessHandle,event,FALSE,&completion,sizeof(completion));
-    if(!error)error=broker_native_completion_status(&completion);
-    if(!error && idle_worker && (completion.flags & NATIVE_COMPLETION_CONSOLE_EMPTY)) {
+    if(idle_worker && (io_flags & NATIVE_COMPLETION_CONSOLE_EMPTY)) {
         EnterCriticalSection(&caller->service->lock);
         service_retire_completed_root(caller,idle_worker);
         LeaveCriticalSection(&caller->service->lock);
     }
 done:
-    if(event)CloseHandle(event);if(pipe)CloseHandle(pipe);if(worker)CloseHandle(worker);
     return error;
 }
 
-DWORD OpenNtBaseServiceTakeWorkerChannel(OPENNT_BASE_CONNECTION *root,DWORD pid,
-    DWORD generation,HANDLE *channel,HANDLE *caller_process,HANDLE *execution,HANDLE *frontend,DWORD *request)
+static DWORD service_take_native_command(OPENNT_BASE_CONNECTION *root,DWORD pid,
+    DWORD generation,DWORD capacity,BYTE *payload,DWORD *bytes,
+    HANDLE *caller_process,HANDLE *execution,HANDLE *frontend,DWORD *request,DWORD *caller_generation)
 {
     LIST_ENTRY *link;
     DWORD error=ERROR_ACCESS_DENIED;
-    if (!channel || !caller_process || !execution || !frontend || !request) return ERROR_INVALID_PARAMETER;
-    *channel=NULL;*caller_process=NULL;*execution=NULL;*frontend=NULL;*request=0;
+    if (!payload || !bytes || !caller_generation || !caller_process || !execution || !frontend || !request) return ERROR_INVALID_PARAMETER;
+    *caller_process=NULL;*execution=NULL;*frontend=NULL;*request=0;
+    *bytes=0;*caller_generation=0;
     if (!root) return error;
     EnterCriticalSection(&root->service->lock);
     if (!OpenNtBaseServicePeer(root,pid,generation) ||
@@ -3068,6 +3131,10 @@ DWORD OpenNtBaseServiceTakeWorkerChannel(OPENNT_BASE_CONNECTION *root,DWORD pid,
         if (caller->channel_worker_generation!=generation) continue;
         if (WaitForSingleObject(caller->process.ProcessHandle,0)!=WAIT_TIMEOUT) {
             service_clear_frontend_channel(caller);continue;
+        }
+        /* A short output buffer leaves command and completion ownership intact. */
+        if(caller->native_command_bytes>capacity) {
+            error=ERROR_INSUFFICIENT_BUFFER;goto done;
         }
         if(caller->pending_win32record && (root->native_inflight==MAXDWORD ||
             (root->native_inflight && root->native_activity_root!=caller->frontend_channel_root))) {
@@ -3097,8 +3164,6 @@ DWORD OpenNtBaseServiceTakeWorkerChannel(OPENNT_BASE_CONNECTION *root,DWORD pid,
          * stream/capability exchange, never an arbitrary broker duplication API. */
         if (!DuplicateHandle(GetCurrentProcess(),caller->process.ProcessHandle,GetCurrentProcess(),
                 caller_process,SYNCHRONIZE|PROCESS_QUERY_LIMITED_INFORMATION|PROCESS_DUP_HANDLE,FALSE,0) ||
-            !DuplicateHandle(GetCurrentProcess(),caller->frontend_channel,GetCurrentProcess(),
-                channel,0,FALSE,DUPLICATE_SAME_ACCESS) ||
             !DuplicateHandle(GetCurrentProcess(),caller->frontend_execution,GetCurrentProcess(),
                 execution,SYNCHRONIZE,FALSE,0) ||
             !DuplicateHandle(GetCurrentProcess(),caller->channel_frontend,GetCurrentProcess(),
@@ -3112,6 +3177,10 @@ DWORD OpenNtBaseServiceTakeWorkerChannel(OPENNT_BASE_CONNECTION *root,DWORD pid,
             ++root->native_inflight;
             root->native_activity_root=caller->frontend_channel_root;
         }
+        if(caller->native_start_event)caller->native_start_request=*request;
+        if(caller->native_command_bytes)CopyMemory(payload,caller->native_command_payload,caller->native_command_bytes);
+        *bytes=caller->native_command_bytes;
+        *caller_generation=caller->process.SequenceNumber;
         service_clear_frontend_channel(caller);
         service_signal_frontend_states(root->service);
         error=ERROR_SUCCESS;goto done;
@@ -3119,23 +3188,26 @@ DWORD OpenNtBaseServiceTakeWorkerChannel(OPENNT_BASE_CONNECTION *root,DWORD pid,
     error=ERROR_NOT_FOUND;
 done:
     if (error) {
-        if (*channel) CloseHandle(*channel);
         if (*caller_process) CloseHandle(*caller_process);
         if (*execution) CloseHandle(*execution);
         if (*frontend) { CloseHandle(*frontend);*frontend=NULL; }
-        *channel=NULL;*caller_process=NULL;*execution=NULL;
+        *caller_process=NULL;*execution=NULL;
+        *request=0;*bytes=0;*caller_generation=0;
     }
     LeaveCriticalSection(&root->service->lock);
     return error;
 }
 
 DWORD OpenNtBaseServiceGetNextNativeCommand(OPENNT_BASE_CONNECTION *connection,DWORD pid,
-    DWORD generation,HANDLE *channel,HANDLE *caller_process,HANDLE *execution,HANDLE *frontend,DWORD *request)
+    DWORD generation,DWORD capacity,BYTE *payload,DWORD *bytes,HANDLE *caller_process,
+    HANDLE *execution,HANDLE *frontend,DWORD *request,DWORD *caller_generation)
 {
     DWORD error;
     if (!connection) return ERROR_ACCESS_DENIED;
-    if(!channel || !caller_process || !execution || !frontend || !request)return ERROR_INVALID_PARAMETER;
-    *channel=*caller_process=*execution=*frontend=NULL;*request=0;
+    if(!payload || !capacity || capacity>NATIVE_LAUNCH_MAX_BYTES || !bytes ||
+        !caller_process || !execution || !frontend || !request || !caller_generation)return ERROR_INVALID_PARAMETER;
+    *bytes=*caller_generation=0;
+    *caller_process=*execution=*frontend=NULL;*request=0;
     EnterCriticalSection(&connection->service->lock);
     for (;;) {
         LIST_ENTRY *link;
@@ -3150,8 +3222,8 @@ DWORD OpenNtBaseServiceGetNextNativeCommand(OPENNT_BASE_CONNECTION *connection,D
                 error=ERROR_CANCELLED;goto done;
             }
         }
-        error=OpenNtBaseServiceTakeWorkerChannel(connection,pid,generation,
-            channel,caller_process,execution,frontend,request);
+        error=service_take_native_command(connection,pid,generation,capacity,payload,bytes,
+            caller_process,execution,frontend,request,caller_generation);
         if (error!=ERROR_NOT_FOUND) break;
         /* Same arrival/rundown condition as worker frontend attachment. This
          * waits for a capability, not for task completion or a scheduler. */

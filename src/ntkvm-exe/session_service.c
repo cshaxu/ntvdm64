@@ -1,5 +1,6 @@
 #include "session_service.h"
 #include "console_channel.h"
+#include "common/console/members.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
 #include <stdio.h>
 typedef struct frontend_channel {
@@ -20,21 +21,14 @@ struct frontend_session_service {
  * This is Console ownership, never a worker/task or descendant census. */
 static DWORD next_console_anchor(HANDLE *anchor)
 {
-    DWORD capacity=16,count=0,index,self=GetCurrentProcessId(),error=ERROR_NOT_FOUND;
+    DWORD count=0,index,self=GetCurrentProcessId(),error=ERROR_NOT_FOUND;
     BOOL inaccessible=FALSE;
     DWORD *members=NULL;
     HANDLE selected=NULL;
     *anchor=NULL;
-    for(;;) {
-        members=HeapAlloc(GetProcessHeap(),0,capacity*sizeof(*members));
-        if(!members)return ERROR_NOT_ENOUGH_MEMORY;
-        count=GetConsoleProcessList(members,capacity);
-        if(!count){error=GetLastError();if(!error)error=ERROR_GEN_FAILURE;break;}
-        if(count<=capacity)break;
-        HeapFree(GetProcessHeap(),0,members);members=NULL;
-        if(count>4096)return ERROR_BUFFER_OVERFLOW;
-        capacity=count;
-    }
+    error=common_console_members_read(16,4096,0,&members,&count);
+    if(error)return error;
+    error=ERROR_NOT_FOUND;
     for(index=0;index<count;++index) {
         if(members[index]==self)continue;
         selected=OpenProcess(SYNCHRONIZE,FALSE,members[index]);
@@ -47,7 +41,7 @@ static DWORD next_console_anchor(HANDLE *anchor)
         }
         CloseHandle(selected);selected=NULL;
     }
-    HeapFree(GetProcessHeap(),0,members);
+    common_console_members_release(members);
     if(error==ERROR_NOT_FOUND && inaccessible)error=ERROR_ACCESS_DENIED;
     return error;
 }
@@ -93,20 +87,14 @@ static DWORD WINAPI frontend_pump(void *context)
         {
             DWORD nonce=0,candidate=0,join;
             while((join=OpenNtBaseClientFrontendJoinCandidate(&nonce,&candidate))==ERROR_SUCCESS) {
-                DWORD capacity=16,count=0,*members=NULL,index;
+                DWORD count=0,*members=NULL,index,snapshot_error;
                 BOOL same=FALSE;
-                for(;;) {
-                    members=HeapAlloc(GetProcessHeap(),0,capacity*sizeof(*members));
-                    if(!members)return ERROR_NOT_ENOUGH_MEMORY;
-                    count=GetConsoleProcessList(members,capacity);
-                    if(!count || count<=capacity)break;
-                    HeapFree(GetProcessHeap(),0,members);members=NULL;
-                    if(count>4096)return ERROR_BUFFER_OVERFLOW;
-                    capacity=count;
-                }
-                if(count && count<=capacity)
+                snapshot_error=common_console_members_read(16,4096,0,&members,&count);
+                if(snapshot_error==ERROR_NOT_ENOUGH_MEMORY || snapshot_error==ERROR_BUFFER_OVERFLOW)
+                    return snapshot_error;
+                if(!snapshot_error)
                     for(index=0;index<count;++index)if(members[index]==candidate){same=TRUE;break;}
-                HeapFree(GetProcessHeap(),0,members);
+                common_console_members_release(members);
                 error=OpenNtBaseClientFrontendJoinDecision(nonce,same);
                 if(error)return error;
             }

@@ -1,4 +1,4 @@
-#include "interface/frontend_bootstrap.h"
+#include "run16-exe/frontend_bootstrap.h"
 
 /* Local references to broker-issued capabilities only. Creation, bootstrap
  * transfer and Console lease return are NTSRV operations, not launcher IPC. */

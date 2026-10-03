@@ -26,12 +26,12 @@ semantics; NTVWM supplies their finite backend binding.
   and the screen returned to another worker remain untouched.
 - `presentation.c`: native capture/seed/member-specific operations under its
   instance lock. Ordered transport, cancellation, frame chunks, ordinary input
-  codec, activation and key-return encoding use `worker-base`.
-- Native execution-pipe transfer links the single frontend-client transport
-  object (`run16-exe/native_request_io.c`). Its completed-I/O-first contract
-  differs from worker-base's strict frontend transport; no duplicate remains.
+  codec, activation and key-return encoding use the `common` I/O client.
+- Native execution commands, startup acknowledgement and completion use NTSRV
+  RPC. There is no native execution control pipe. Worker/frontend I/O retains
+  the common pipe transport and its caller-selected priority contract.
 
-Cross-component declarations live in `interface`. NTSRV owns authentication,
+Cross-component declarations live in `common/protocol`. NTSRV owns authentication,
 discovery and worker management; run16 owns submission/direct-result waiting;
 NTKVM owns visible Console/Window, display state, routing and the single renderer.
 Original DOS/WOW execution and cleanup remain with NTVDM's original mirrors.

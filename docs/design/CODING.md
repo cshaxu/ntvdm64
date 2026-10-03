@@ -2,9 +2,20 @@
 
 ## Owner-approved T424 S7 library reorganization
 
-The owner explicitly plans src/common as the successor to src/interface after
-S6 naming delivery. Until that implementation, the existing interface layout remains
-current. In S7, keep protocol declarations/version identity/service IDL in a
+Owner's closure revision keeps common/two-protocol organization in S7 and
+transfers the complete service-provenance ledger and NTSRV-private physical
+split below to the next S8. No transferred implementation is claimed complete.
+
+The owner admits src/common as the successor to src/interface after
+S6 naming delivery. The current S7 candidate has moved copied declarations
+and IDL into common/protocol, bounded packet codecs into common/codec and
+neutral transfer/snapshot mechanisms into common/transport and common/console.
+Neutral I/O-client instance/API declarations and implementation now belong to
+common/console/client; worker-only connection adaptation and launcher-private
+client declarations retain their owners.
+This layout is implemented in the candidate, not a delivered runtime claim;
+the transitional interface/native_request_protocol.h and native control pipe
+have been removed. In S7, keep protocol declarations/version identity/service IDL in a
 declaration-only submodule; separately select audited project-added shared
 transport, codec, authenticated-client and Console-snapshot implementations.
 This bounded approval supersedes the generic-common prohibition below only

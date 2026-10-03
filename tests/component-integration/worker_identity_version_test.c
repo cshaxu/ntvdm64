@@ -6,7 +6,7 @@
 #include <string.h>
 #include <rpc.h>
 #include "service.h"
-#include "interface/version.h"
+#include "common/protocol/version.h"
 #include "ntsrv-exe/transport/rpc_security.h"
 
 void *__RPC_USER midl_user_allocate(size_t bytes) { return malloc(bytes); }

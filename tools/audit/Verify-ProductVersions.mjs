@@ -10,12 +10,12 @@ const runtime=process.env.OPENNT_VERSION_TEST_RUNTIME;
 if(!runtime)throw Error('OPENNT_VERSION_TEST_RUNTIME must name the deployed runtime directory');
 fs.mkdirSync(build,{recursive:true});fs.mkdirSync(logs,{recursive:true});
 const source=fs.readFileSync('src/ntsrv-exe/main.c','utf8');
-const header=fs.readFileSync('src/interface/version.h','utf8');
+const header=fs.readFileSync('src/common/protocol/version.h','utf8');
 const version=header.match(/#define APP_VERSION "(0\.0\.[0-9]+)"/)[1];
 const protocol=Number(header.match(/#define APP_PROTOCOL_VERSION ([0-9]+)u/)[1]);
 const active=fs.readFileSync('docs/states/CURRENT.md','utf8').match(/\*\*Active: M[0-9]+ T([0-9]+) S[0-9]+(?:\.|\*\*)/);
 if(active)assert.equal(version,`0.0.${active[1]}`,'Application version must match admitted T');
-const idl=fs.readFileSync('src/interface/service.idl','utf8');
+const idl=fs.readFileSync('src/common/protocol/service.idl','utf8');
 assert(idl.includes(`version(${protocol}.0)`),'RPC major and protocol must agree');
 assert.match(idl,/application_version\[32\]/);
 assert.match(header,/#define APP_VERSION_BYTES 32u/);
@@ -50,7 +50,7 @@ try {
         fs.writeFileSync(path.join(build,`${name}.c`),body);
         compile(`cl.exe /nologo /c /MT /W4 /we4013 /I "${product}/obj/basesrv" /I "${root}/src" ${name}.c /Fo${name}.obj`);
         const stub=name==='legacy-interface'?'legacy-stub.obj':`"${product}/obj/basesrv/stub.obj"`;
-        compile(`link.exe /nologo /opt:ref /out:${name}.exe ${name}.obj ${stub} "${product}/obj/run16/support.obj" "${product}/opennt-base-server.lib" "${product}/opennt-base-bindings.lib" "${product}/broker-transport.lib" "${product}/original-opennt-rtl-x86.lib" rpcrt4.lib ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib`);
+        compile(`link.exe /nologo /opt:ref /out:${name}.exe ${name}.obj ${stub} "${product}/obj/run16/support.obj" "${product}/opennt-base-server.lib" "${product}/opennt-base-bindings.lib" "${product}/broker-transport.lib" "${product}/original-opennt-rtl-x86.lib" "${product}/common-rpc.lib" "${product}/common-transport.lib" "${product}/common-codec.lib" "${product}/common-console.lib" rpcrt4.lib ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib`);
     }
 } finally {fs.closeSync(compileLog);}
 for (const [name] of variants) {

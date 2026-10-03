@@ -1,7 +1,7 @@
 #ifndef MVDM_SOFTPC_MOUSE_BRIDGE_H
 #define MVDM_SOFTPC_MOUSE_BRIDGE_H
 #include <windows.h>
-#include "interface/console_mouse.h"
+#include "common/protocol/console_mouse.h"
 #include "mvdm_softpc_mouse_input.h"
 
 typedef struct mvdm_mouse_bridge {
