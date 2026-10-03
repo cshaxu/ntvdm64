@@ -2,10 +2,38 @@
 
 ## Current Work
 
-**No active numeric M/T/S packet.** T424 remains open for owner acceptance.
-S7's common/two-protocol implementation is closed with the reviewed P1 delivery
-record below. Service source separation is planned as the next S8 by owner
-direction; S8 implementation has not started. No T closure is claimed.
+## Active Packet
+
+**Active: M0 T424 S8** — owner-admitted NTSRV provenance review and
+service-private source separation, Ordinary Mode. S7 production P
+`d83d2b212` is pushed and published. T424 remains open; this admission is not
+a claim that the S8 source split is implemented or tested.
+
+| Field | Admitted record |
+| --- | --- |
+| Identifier Mode | M0 T424 S8, Ordinary Mode. |
+| Candidate Proposal | [Admitted proposal](../proposals/proposal-native-worker-frontend-renaming-001.md). |
+| Admission And Approval | Owner: move service split to next S, close S7, then explicitly admit S8. Preserve all existing and other-session work. |
+| Objective | Complete the source/block provenance ledger and split project-added service responsibilities into bounded NTSRV-private modules, preserving one state/lock authority and production behavior. |
+| Non-goals | No new component/process, scheduler, Job/observed records, GUI routing, frontend rename, guest/shared-lib change, polling cleanup or worker-I/O transport migration. No original DOS/WOW logic extraction. |
+| Reference Baseline | S7 d83d2b212, x86 /MT CCPU40, APP 0.0.424 and protocol/RPC32, published coherent eight files; [S7 closure evidence](../etc/evidence/m0-t424-s7-common-service-separation.md). |
+| Files And ABI Surface | Primarily ntsrv-exe/opennt/source/base_service.c and related service-private headers/modules; selected build/test wiring and ownership documentation. Preserve common protocols and public contracts; physical refactoring alone does not bump ABI. |
+| Applicable Rules | README authority reading set, EXECUTION, architecture/coding/document rules, CONTRIBUTING and source policy. Original mirror paths/control order remain authoritative. |
+| Verification | Pinned-original comparisons and complete function/block attribution before movement; source/body and resource/lock contract review; affected x86 links, original reservation and actual RPC/fault/receipt fixtures, Console17/Window17, actual EDIT/relaunch/isolation/retirement, retained WOW frontiers, coherent publication/smoke and governance/link/diff checks. |
+| Expected Markers | Registration/connection, frontend admission/retirement, native command/receipt and management projection separated by service responsibility; one service state/lock owner, no duplicate providers or exported private state framework. |
+| Asset Needs | Reuse S7's 137-definition inventory and partial manual review plus pinned OpenNT originals. New intermediates/reports under build/M0-T424/S8/r001; reuse valid S2 x86/WOW cache with dependency identity. No new assets. |
+| Reporting Requirements | Each block's origin/current/target owner and disposition; exact moved/retained/removed bodies, lock and handle ownership, tests and remaining independent logic. Research/inventory is not implementation acceptance. |
+| Stop Conditions | Moving original execution/completion into project modules/common, reverse calls, duplicated authority/lock state, semantic or protocol drift, expanded mirror diff, weakened assertions or runtime regression. |
+| Exit Criteria | Complete audited split production-linked, no duplicate old implementation, unchanged original semantics and accepted behavior, full required gates, recovered/coherent O:/winnt eight-file publication, reviewed commit/push and clean tree. T remains open. |
+| Original Owner Request | Service splitting is next S; admit S8 and identify its current component. Original mirror logic stays in place; project additions are reorganized within NTSRV only. |
+| Similar-Issue Sweep | Related service headers/transport wrappers/build ownership, service shutdown/rundown, borrowed resources and native/DOS completion boundaries; do not extend into unrelated component redesign. |
+
+Initial source inspection confirms the main carrier is
+src/ntsrv-exe/opennt/source/base_service.c, with related declarations in
+opennt/include/base_service.h and server RPC dispatch in ntsrv-exe/main.c.
+These are NTSRV implementation carriers, not original mirror paths.
+S8 begins with provenance/contract review; exact target module names follow
+that review. Original srvvdm.c policy remains under src/opennt-host.
 
 ## S7 Closed Packet
 
