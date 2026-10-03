@@ -2,8 +2,8 @@
 
 ## Current Work
 
-**No active M/T/S packet.** T425 remains open in task intermission;
-S2 P1 is delivered by the containing commit and published. The owner requests
+**Active: M0 T425 S3, Ordinary Mode.** T425 remains open;
+S2 P1 36372657a is delivered, pushed and published. The owner requests
 continued execution of the full worker-neutral
 frontend objective and the ordered approved plan. Owner closes T424 and admits
 the new NTCON worker-neutral I/O package. The
@@ -23,43 +23,76 @@ CCPU40 APP 0.0.425, protocol/RPC35 I/O23, eight files at O:/winnt. The
 [S1 ledger](../etc/evidence/m0-t425-s1-worker-neutral-input.md) records source
 disposition, exact release/recovery hashes, tests and physical RDP limits.
 S1 and S2 are closed by reviewed P delivery. S2 consolidates frontend
-ownership and multi-pending handoff; S3 publication consolidation is next.
+ownership and multi-pending handoff; S3 publication consolidation is admitted.
 The [S2 ledger](../etc/evidence/m0-t425-s2-channel-owner-handoff.md) records
 passing multi-pending/cancellation/handle tests and the completed prepublication
-regression and postpublication smoke. The coherent S2 package is at O:/winnt;
-S1 remains the verified recovery package.
+regression and postpublication smoke. S2 is now the retained recovery package
+for the published S3 set.
 
-## Most Recently Delivered Packet
+S3's [operation/client ledger](../etc/evidence/m0-t425-s3-operation-publication.md)
+records the source/contract inventory and tested production path. Activation is
+operation-only; VGA selection belongs to NTVDM's project client. Both workers
+share authorization, snapshot locks and atomic frame/grid/font publication.
+Precommit failures preserve old state; postcommit projection errors fail the
+channel explicitly. Original worker execution and device semantics stay local.
+
+Latest focused rerun covers exact geometry authorization, removal of no-op
+root screen wrappers and worker-side conversion failure/owner release. The
+earlier isolated candidate passed Console17/Window17 and five real version
+negatives before transaction changes; those do not certify the final candidate.
+Those earlier reports remain historical, not final release evidence.
+
+Standalone reception now stages and validates bytes before the common frontend
+prepares/commits grid, frame and font state. Batch publication now uses the same
+transaction. Actual allocation/revision failures preserve prior state; real
+pipe postcommit projection failures return an error and EOF with coherent
+logical state. Focused tests pass. Final release is build/M0-T425/S3/r004;
+earlier reports/packages are preserved rather than overwritten.
+
+r002 Console17/Window17 and retained lifecycle gates pass. Adjacent geometry
+commit now detaches stale frame references even on projection failure; channel
+postcommit errors are terminal. Affected x86 build and full allocation/revision/
+projection/geometry failure fixture pass with stable handle counts. RPC11 and
+GUI5 also pass. Refreshing the build input graph relinks five products; fresh
+r004 seals the resulting eight-file identity and 265 source/generated inputs.
+r003 is preserved as earlier evidence. r004 Console17/Window17, retained
+lifecycle, RPC11/GUI5, five version negatives, exact retained WOW frontiers and
+strict repeated DIR pass. Its coherent eight-file set is now at O:/winnt, with
+S2 recovery retained. Postpublication rapid native/DOS relaunch, cooked CMD
+return and GUI smoke terminate zero with all eight hashes retained. Reviewed
+P delivery remains pending; T425 remains open for S4 and owner verification.
+
+## Active Packet
 
 | Field | Admitted record |
 | --- | --- |
-| Identifier Mode | M0 T425 S2, Ordinary Mode. |
+| Identifier Mode | M0 T425 S3, Ordinary Mode. |
 | Admission And Approval | Owner: 收口当前t任务，准入新的t任务做这个ntcon统一工作。 Earlier implementation approval and provenance/ownership principles retained. |
-| Objective | One authenticated channel-based frontend I/O owner and pending handoff; remove DOS/native ownership slots and duplicate wrappers without changing final-paint, input-return, release/resume or cancellation ordering. |
+| Objective | Worker-neutral publication, snapshots and locking using explicit operation contracts; remove frontend channel kind checks and type-only import/conversion decisions, wire both actual worker clients through the existing common mechanisms. |
 | Non-goals | No guest, original mirror or imported library edit; no worker-font/geometry repair, polling cleanup, helper, scheduler, lifecycle policy or T closure. RDP capture root cause remains a separately evidenced physical boundary, not repaired by deleting checks. |
-| Reference Baseline | T425 S1 2bbc2f570, published x86 /MT CCPU40 APP 0.0.425 protocol/RPC35 I/O23 eight-file set; S1 ledger records recovery and retained frontiers. |
-| Files And ABI Surface | NTCON native_console_frontend, Console service and channel handlers, shared I/O contracts if actually required; production-linked handoff/lifetime/input-return tests. No original mirror, guest or imported library change. |
+| Reference Baseline | T425 S2 P1 36372657a, clean synchronized main before S3 admission; published x86 /MT CCPU40 APP 0.0.425 protocol/RPC35 I/O23 eight-file set and S2 ledger. |
+| Files And ABI Surface | NTCON publication/snapshot/Console handlers, common protocol/codec/console client, worker-base and NTVDM/NTVWM project-owned clients; production-linked tests. Actual wire changes synchronize app/IDL/I/O revisions and regenerate MIDL. No original mirror, guest or imported library change. |
 | Applicable Rules | README full authority set, EXECUTION, architecture/coding/document rules, CONTRIBUTING and source policy. |
-| Verification | Both handoff directions and same-kind nested handoff, final committed state before acquisition, returned input before parent output, stale owner/disconnect/stop; affected x86 builds, retained focused/lifecycle/RPC/version/WOW, Console17 and Window17, EDIT/nested/isolation and recoverable eight-file publication. |
-| Expected Markers | One active channel identity and independently cancellable pending requests for multiple channels; uniform acquire/release/forget/input paths, no worker-kind ownership choice. Original device/native operations remain local. |
-| Asset Needs | Existing source, immutable media and identity-validated cache; preliminary results build/M0-T425/S2/r001 and final candidate/results r002. No downloads. |
+| Verification | Atomic publication/tiled rollback, snapshot consistency, optional styles, stale/inactive channels, frame/resource lifetime; both handoff directions and nested return, final-paint and input barriers; x86 affected closure, focused/lifecycle/RPC/version/WOW, Console17/Window17, EDIT/isolation, coherent recoverable eight-file publication. |
+| Expected Markers | Same operation authorization and locks for both worker clients; frontend has no DOS/native kind, VGA selector or native-only publication policy. Original Console/VGA and hidden Console capture remain worker-owned. |
+| Asset Needs | Existing source/media and identity-validated incremental cache build/M0-T424/S2/r001; new S3 evidence/intermediates only build/M0-T425/S3/r001 or later declared fresh run. No downloads. |
 | Reporting Requirements | Provenance/current/target ownership ledger, removed branches, exact tests and failures, published hashes; no physical RDP pass invented. |
 | Stop Conditions | Changed original semantics, weakened barriers/authentication/assertions, regression, new helper/component or unapproved shared-library modification. |
-| Exit Criteria | S2 ownership/handoff checklist production-wired and verified, old duplicate slots/wrappers removed, coherent publication, reviewed commit/push and clean main. S3 publication work remains open; T closure awaits owner. |
+| Exit Criteria | S3 operation/lock/client checklist production-wired and verified, replaced type-only paths removed, coherent publication, reviewed commit/push and clean main. S4 whole-objective audit and owner T verification remain open. |
 | Original Owner Request | 收口当前t任务，准入新的t任务做这个ntcon统一工作。 |
-| Similar-Issue Sweep | Window/Console keyboard and mouse, reset/retirement, activation/release/pending, text publication/snapshot and route disconnect, both workers and nested return. |
+| Similar-Issue Sweep | Every activation/snapshot/publication/frame/Console operation and lock at frontend/client boundaries, graphics/text configuration, optional styles, release/resume, rollback/EOF, both workers and pending/nested return. |
 
 ## Current Technical Baseline
 
-Published T425 S2 P1 at O:/winnt: run16.exe, ntsrv.exe, ntvdm.exe,
+Published tested T425 S3 candidate at O:/winnt: run16.exe, ntsrv.exe, ntvdm.exe,
 ntvwm.exe, ntcon.exe, ntmon.exe, WOW32.DLL, VDMREDIR.DLL. APP 0.0.425,
-protocol/RPC35 I/O23, MSVC Win32/x86 /MT CCPU40. Exact release/recovery hashes,
-Console17/Window17 and retained limits are in the S2 ledger; recovery is S1. The prior
+protocol/RPC36 I/O24, MSVC Win32/x86 /MT CCPU40. Exact release/recovery hashes,
+Console17/Window17 and retained limits are in the S3 ledger; recovery is S2. The prior
 [S12 ledger](../etc/evidence/m0-t424-s12-logical-surface.md) remains the
 accepted T424 recovery baseline.
 [S13](../etc/evidence/m0-t424-s13-final-audit.md) indexes all thirteen stages.
 Original mirrors, imported libraries and guest/configuration are unchanged
-by T425 S1/S2. Physical RDP capture is not claimed verified or fixed.
+by T425 S1/S2/S3. Physical RDP capture is not claimed verified or fixed.
 
 ## Previous T closure
 
@@ -78,10 +111,10 @@ in T424's closure history and ff50ff588, not an active packet.
 
 ## Recent Governance
 
-S2 P1 delivers channel ownership and independently cancellable pending handoffs
+S2 P1 36372657a delivers channel ownership and independently cancellable pending handoffs
 with coherent eight-file publication and retained regression gates. Its
-containing commit owns this status and the S2 ledger. T425 remains open for
-S3 publication consolidation and S4 owner audit.
+commit owns the S2 ledger. Clean synchronized main was verified after push;
+this S3 admission starts the next packet. T425 remains open for S4 owner audit.
 Owner closes T424 and admits T425 for worker-neutral frontend I/O. The
 provisional T424 S14 documentation brief transfers without an implementation
 claim. Queue order is unchanged. Pure admission/closure documentation does

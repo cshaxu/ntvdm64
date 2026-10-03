@@ -1,6 +1,7 @@
 /* Worker-local transport only. No native Console presentation or guest policy. */
 #include "console_client.h"
 #include "console_text.h"
+#include "console_geometry.h"
 #include "common/console/client.h"
 #include "opennt-abi/host-compat/include/console_grid.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
@@ -350,7 +351,27 @@ static DWORD console_activate(console_client *client,BOOL active)
     /* NTCON owns the I/O predicate and waits for its actual binding change
      * inside this same activation request. It returns one bounded failure;
      * this worker does not sample another process's ownership on a timer. */
-    error=ntcon_worker_activate(&client->channel,0,active);
+    error=ntcon_worker_activate(&client->channel,active);
+    if(!error && active) {
+        console_io_reply reply;
+        int64_t height;
+        ZeroMemory(&client->request,sizeof(client->request));
+        client->request.operation=CONSOLE_IO_SCREEN_INFO;
+        error=ntcon_worker_call(&client->channel,&client->request,&reply);
+        if(!error) {
+            height=(int64_t)reply.state.bottom-reply.state.top+1;
+            if(height<=0 || height>SHRT_MAX)error=ERROR_INVALID_DATA;
+            else error=ntcon_worker_prepare_text(&client->channel,
+                (COORD){80,ntvdm_console_return_height((SHORT)height)});
+        }
+        /* Conversion is part of acquisition, before guest producers resume.
+         * A failed conversion must not strand the frontend's active owner. */
+        if(error) {
+            DWORD release=ntcon_worker_activate(&client->channel,FALSE);
+            if(!release)ZeroMemory(&client->mouse,sizeof(client->mouse));
+            else client->channel.failure=release; /* Failed return is not reusable. */
+        }
+    }
     /* Unlike IRQ cancellation, successful DOS ownership handoff retires the
      * frontend's DOS mouse route and discards its copied relative records.
      * Original nt_block_event_thread has quiesced the event/timer producers

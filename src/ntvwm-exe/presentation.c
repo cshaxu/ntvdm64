@@ -49,7 +49,7 @@ DWORD ntvwm_presentation_call(ntvwm_presentation *client,const console_io_reques
 {
     console_io_request request;DWORD error;
     if(!client || !input || !reply || input->bytes>CONSOLE_IO_DATA_BYTES ||
-        input->operation<CONSOLE_IO_WRITE || input->operation>CONSOLE_IO_PUBLICATION_ABORT)
+        input->operation<CONSOLE_IO_WRITE || input->operation>CONSOLE_IO_PREPARE_TEXT_REGION)
         return ERROR_INVALID_PARAMETER;
     memcpy(&request,input,offsetof(console_io_request,data)+input->bytes);
     EnterCriticalSection(&client->lock);error=exchange(client,&request,reply);
@@ -397,7 +397,7 @@ done:
 
 static DWORD activate_presentation(ntvwm_presentation *client,BOOL active)
 {
-    return ntcon_worker_activate(&client->channel,CONSOLE_IO_WORKER_NATIVE,active);
+    return ntcon_worker_activate(&client->channel,active);
 }
 DWORD ntvwm_presentation_begin(ntvwm_presentation *client,HANDLE output)
 {

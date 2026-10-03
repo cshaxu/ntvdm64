@@ -36,7 +36,7 @@ struct run16_native_frontend {
     BOOL original_cursor_saved;
     HANDLE handoff,handoff_done;
     const void *handoff_owner;
-    BOOL handoff_active,handoff_prepare_vga;
+    BOOL handoff_active;
     DWORD handoff_error;
     const void *owner;
     const void *title_owner;
@@ -96,7 +96,7 @@ static void remove_pending(run16_native_frontend *frontend,const void *owner)
     HeapFree(GetProcessHeap(),0,entry);
     signal_binding_waiters(frontend);
 }
-static DWORD apply_binding(run16_native_frontend *,const void *,BOOL,BOOL);
+static DWORD apply_binding(run16_native_frontend *,const void *,BOOL);
 static DWORD collect_console(run16_native_frontend *);
 static DWORD refresh_window_title(run16_native_frontend *frontend)
 {
@@ -205,13 +205,16 @@ DWORD run16_native_frontend_commit_text(run16_native_frontend *frontend,HANDLE s
 {
     HANDLE previous=frontend->logical_surface;
     frontend->logical_surface=surface;frontend->logical_window=window;
+    /* Conversion committed: no prior frame describes this new grid, even
+     * when the subsequent physical projection fails. Font metadata survives. */
+    frontend->video=NULL;frontend->video_serial=0;
     CloseHandle(previous);
     return run16_native_frontend_project_text(frontend);
 }
 /* A VGA text frame is a complete cell publication, not a bitmap. Decode only
  * the worker's byte glyphs into the same Console cell storage used by stream
  * operations. Fonts/palette remain the worker's copied presentation metadata. */
-static DWORD import_dos_text(run16_native_frontend *frontend,const run16_console_video *video)
+static DWORD prepare_text_frame(run16_native_frontend *frontend,const run16_console_video *video,HANDLE *output)
 {
     const console_text_style *style=(const console_text_style *)video->pixels;
     const BYTE *text=video->pixels+sizeof(*style);
@@ -222,6 +225,7 @@ static DWORD import_dos_text(run16_native_frontend *frontend,const run16_console
     HANDLE incoming=NULL;
     CHAR_INFO *cells;
     DWORD error,index,count=(DWORD)size.X*size.Y,step=video->description.stride/size.X;
+    *output=NULL;
     error=clone_grid(frontend->logical_surface,&incoming);if(error)return error;
     cells=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,count*sizeof(*cells));
     if(!cells){CloseHandle(incoming);return ERROR_NOT_ENOUGH_MEMORY;}
@@ -231,6 +235,8 @@ static DWORD import_dos_text(run16_native_frontend *frontend,const run16_console
             error=GetLastError();goto done;
         }
         cells[index].Attributes=text[index*step+1];
+        if(step==3 && (text[index*step+2]&CONSOLE_TEXT_UNDERLINE))
+            cells[index].Attributes|=COMMON_LVB_UNDERSCORE;
     }
     if(!GetConsoleScreenBufferInfo(incoming,&info)){error=GetLastError();goto done;}
     {
@@ -245,12 +251,12 @@ static DWORD import_dos_text(run16_native_frontend *frontend,const run16_console
         !SetConsoleCursorPosition(incoming,(COORD){(SHORT)style->cursor_column,(SHORT)style->cursor_row}))) {
         error=GetLastError();goto done;
     }
-    error=run16_native_frontend_commit_text(frontend,incoming,(SMALL_RECT){0,0,size.X-1,size.Y-1});
+    *output=incoming;error=ERROR_SUCCESS;
     incoming=NULL;
 done:
     HeapFree(GetProcessHeap(),0,cells);if(incoming)CloseHandle(incoming);return error;
 }
-static DWORD prepare_logical_surface(run16_native_frontend *frontend)
+static DWORD prepare_logical_surface(run16_native_frontend *frontend,COORD requested,BOOL *committed)
 {
     CONSOLE_SCREEN_BUFFER_INFO visible;
     SMALL_RECT shrink,window;
@@ -273,12 +279,13 @@ static DWORD prepare_logical_surface(run16_native_frontend *frontend)
     shrink=(SMALL_RECT){0,0,min(visible.dwSize.X,viewport_size.X)-1,
         min(visible.dwSize.Y,viewport_size.Y)-1};
     /* Window changes can resize/reflow even an inactive ConPTY buffer.
-     * Preserve the copied cells at both calls, before VGA conversion. */
+     * Preserve the copied cells at both calls, before requested conversion. */
     if(!opennt_console_resize_grid(incoming,NULL,TRUE,&shrink) ||
         !opennt_console_resize_grid(incoming,&viewport_size,FALSE,NULL)){error=GetLastError();goto fail;}
     window=(SMALL_RECT){0,0,viewport_size.X-1,viewport_size.Y-1};
-    error=run16_console_prepare_dos(incoming,&window);
+    error=run16_console_prepare_text(incoming,&window,requested);
     if(error)goto fail;
+    *committed=TRUE;
     return run16_native_frontend_commit_text(frontend,incoming,window);
 fail:
     CloseHandle(incoming);return error;
@@ -533,7 +540,7 @@ static DWORD present_loop(run16_native_frontend *frontend)
         if(WaitForSingleObject(frontend->handoff,0)==WAIT_OBJECT_0) {
             ResetEvent(frontend->handoff);
             frontend->handoff_error=apply_binding(frontend,frontend->handoff_owner,
-                frontend->handoff_active,frontend->handoff_prepare_vga);
+                frontend->handoff_active);
             SetEvent(frontend->handoff_done);
         }
         if(WaitForSingleObject(frontend->park,0)==WAIT_OBJECT_0) {
@@ -742,7 +749,7 @@ DWORD run16_native_frontend_park(run16_native_frontend *frontend)
 }
 /* Only the original worker's block/resume edges select this binding. The
  * owner is a root-local channel address, never a process/task scheduler ID. */
-static DWORD apply_binding(run16_native_frontend *frontend,const void *owner,BOOL active,BOOL prepare_vga)
+static DWORD apply_binding(run16_native_frontend *frontend,const void *owner,BOOL active)
 {
     DWORD error=0,i,kept=0;
     /* Every incoming channel waits for the previous owner's final publication
@@ -772,10 +779,6 @@ static DWORD apply_binding(run16_native_frontend *frontend,const void *owner,BOO
             return GetLastError();
         frontend->parked=FALSE;
     }
-    if(prepare_vga && active) {
-        error=prepare_logical_surface(frontend);
-        if(error)return error;
-    }
     if(frontend->window_mouse.width)
         error=frontend_window_mode(frontend->window)==FRONTEND_DISPLAY_WINDOW ?
             frontend_window_poll(frontend->window) : frontend_window_clear(frontend->window);
@@ -797,12 +800,12 @@ static DWORD apply_binding(run16_native_frontend *frontend,const void *owner,BOO
     signal_binding_waiters(frontend);
     return 0;
 }
-DWORD run16_native_frontend_bind(run16_native_frontend *frontend,const void *owner,BOOL active,BOOL prepare_vga)
+DWORD run16_native_frontend_bind(run16_native_frontend *frontend,const void *owner,BOOL active)
 {
     HANDLE waits[3];DWORD wait,error;
     if(!frontend || !owner)return ERROR_INVALID_PARAMETER;
     EnterCriticalSection(&frontend->handoff_lock);
-    frontend->handoff_owner=owner;frontend->handoff_active=active;frontend->handoff_prepare_vga=prepare_vga;
+    frontend->handoff_owner=owner;frontend->handoff_active=active;
     waits[0]=frontend->handoff_done;waits[1]=frontend->stop;waits[2]=frontend->thread;
     if(!ResetEvent(frontend->handoff_done) || !SetEvent(frontend->handoff))error=GetLastError();
     else {
@@ -816,6 +819,20 @@ DWORD run16_native_frontend_bind(run16_native_frontend *frontend,const void *own
     LeaveCriticalSection(&frontend->handoff_lock);
     return error;
 }
+DWORD run16_native_frontend_prepare_text(run16_native_frontend *frontend,const void *owner,COORD size,BOOL *committed)
+{
+    DWORD error;
+    BOOL local_committed=FALSE;
+    if(!committed)committed=&local_committed;
+    *committed=FALSE;
+    if(size.X<=0 || size.Y<=0)return ERROR_INVALID_PARAMETER;
+    error=run16_native_frontend_enter(frontend,owner);
+    if(error)return error;
+    error=prepare_logical_surface(frontend,size,committed);
+    run16_native_frontend_leave(frontend);
+    return error;
+}
+
 DWORD run16_native_frontend_wait_ready(run16_native_frontend *frontend,const void *owner,
     HANDLE cancel,HANDLE peer,DWORD timeout)
 {
@@ -876,23 +893,39 @@ DWORD run16_native_frontend_enter(run16_native_frontend *frontend,const void *ow
     if(frontend->owner==owner)return ERROR_SUCCESS;
     LeaveCriticalSection(&frontend->io_lock);return ERROR_NOT_READY;
 }
-DWORD run16_native_frontend_video(run16_native_frontend *frontend,const void *owner,
-    const run16_console_video *video,BOOL import_text)
+static DWORD publish_video(run16_native_frontend *frontend,const void *owner,
+    run16_console_video *video,BOOL import_text,HANDLE prepared,SMALL_RECT window,BOOL *committed)
 {
-    DWORD error=run16_native_frontend_enter(frontend,owner);
+    run16_console_video candidate;
+    console_text_configuration copy;
+    HANDLE incoming=prepared;
+    BOOL staged,configuration_only,configuration_changed=FALSE;
+    DWORD error;
+    if(committed)*committed=FALSE;
+    if(!video)return ERROR_INVALID_PARAMETER;
+    error=run16_native_frontend_enter(frontend,owner);
     if(error)return error;
-    if(import_text && !video->pending && video->pixels &&
-        video->description.kind==CONSOLE_VIDEO_TEXT_FRAME) {
-        error=import_dos_text(frontend,video);
-        if(error){run16_native_frontend_leave(frontend);return error;}
+    candidate=*video;
+    staged=video->pending && video->pending_validated;
+    configuration_only=staged && video->pending_description.kind==CONSOLE_VIDEO_TEXT_CONFIGURATION;
+    if(staged) {
+        candidate.pending=NULL;
+        if(configuration_only) {
+            memcpy(&candidate.configuration.style,video->pending,sizeof(candidate.configuration.style));
+            memcpy(candidate.configuration.palette,video->pending_description.palette,sizeof(candidate.configuration.palette));
+            candidate.configuration_serial=video->pending_serial;
+        } else {
+            candidate.pixels=video->pending;
+            candidate.description=video->pending_description;
+            candidate.published_serial=video->pending_serial;
+        }
     }
-    if(!video->pending && (video->configuration_serial>video->published_serial ||
-        (video->pixels && video->description.kind==CONSOLE_VIDEO_TEXT_FRAME))) {
-        console_text_configuration copy;
-        if(video->configuration_serial>video->published_serial)copy=video->configuration;
+    if(!candidate.pending && (candidate.configuration_serial>candidate.published_serial ||
+        (candidate.pixels && candidate.description.kind==CONSOLE_VIDEO_TEXT_FRAME))) {
+        if(candidate.configuration_serial>candidate.published_serial)copy=candidate.configuration;
         else {
-            memcpy(&copy.style,video->pixels,sizeof(copy.style));
-            memcpy(copy.palette,video->description.palette,sizeof(copy.palette));
+            memcpy(&copy.style,candidate.pixels,sizeof(copy.style));
+            memcpy(copy.palette,candidate.description.palette,sizeof(copy.palette));
         }
         /* Cursor movement is not a new font/palette configuration. */
         copy.style.cursor_column=copy.style.cursor_row=0;
@@ -902,22 +935,58 @@ DWORD run16_native_frontend_video(run16_native_frontend *frontend,const void *ow
             if(frontend->text_revision==UINT32_MAX) {
                 run16_native_frontend_leave(frontend);return ERROR_ARITHMETIC_OVERFLOW;
             }
-            frontend->text_configuration=copy;++frontend->text_revision;
+            configuration_changed=TRUE;
         }
     }
+    if(import_text && !configuration_only && !candidate.pending && candidate.pixels &&
+        candidate.description.kind==CONSOLE_VIDEO_TEXT_FRAME) {
+        error=prepare_text_frame(frontend,&candidate,&incoming);
+        if(error){run16_native_frontend_leave(frontend);return error;}
+        window=(SMALL_RECT){0,0,(SHORT)candidate.description.width-1,
+            (SHORT)candidate.description.height-1};
+    }
+    /* Wake before committing, while holding the renderer's lock. A failed
+     * notification leaves every committed resource untouched; a successful
+     * wake cannot read the candidate before this transaction releases it. */
+    if(!SetEvent(frontend->changed)) {
+        error=GetLastError();if(incoming && !prepared)CloseHandle(incoming);
+        run16_native_frontend_leave(frontend);return error;
+    }
+    if(staged) {
+        error=run16_console_video_commit_pending(video);
+        if(error){if(incoming && !prepared)CloseHandle(incoming);run16_native_frontend_leave(frontend);return error;}
+    }
+    if(incoming) {
+        HANDLE previous=frontend->logical_surface;
+        frontend->logical_surface=incoming;
+        frontend->logical_window=window;
+        CloseHandle(previous);
+    }
+    if(configuration_changed){frontend->text_configuration=copy;++frontend->text_revision;}
     frontend->video=video;
-    error=SetEvent(frontend->changed) ? ERROR_SUCCESS : GetLastError();
+    if(committed)*committed=TRUE;
+    /* Projection can fail only after a coherent logical commit. The channel
+     * must then fail closed, not pretend to roll back already released data. */
+    error=incoming ? run16_native_frontend_project_text(frontend) : ERROR_SUCCESS;
     run16_native_frontend_leave(frontend);
     return error;
+}
+DWORD run16_native_frontend_video(run16_native_frontend *frontend,const void *owner,
+    run16_console_video *video,BOOL import_text)
+{
+    return publish_video(frontend,owner,video,import_text,NULL,(SMALL_RECT){0},NULL);
+}
+DWORD run16_native_frontend_publish_text(run16_native_frontend *frontend,const void *owner,
+    run16_console_video *video,HANDLE surface,SMALL_RECT window,BOOL *committed)
+{
+    if(committed)*committed=FALSE;
+    if(!surface || surface==INVALID_HANDLE_VALUE || !committed)return ERROR_INVALID_PARAMETER;
+    return publish_video(frontend,owner,video,FALSE,surface,window,committed);
 }
 void run16_native_frontend_leave(run16_native_frontend *frontend)
 {
     LeaveCriticalSection(&frontend->io_lock);
 }
-DWORD run16_native_frontend_screen_begin(run16_native_frontend *frontend)
-{ (void)frontend;return 0; }
-DWORD run16_native_frontend_screen_end(run16_native_frontend *frontend,BOOL write)
-{ (void)frontend;(void)write;return 0; }
 void run16_native_frontend_snapshot_begin(run16_native_frontend *frontend)
 { EnterCriticalSection(&frontend->io_lock); }
 void run16_native_frontend_snapshot_end(run16_native_frontend *frontend)
@@ -971,7 +1040,7 @@ void run16_native_frontend_forget(run16_native_frontend *frontend,const void *ow
     /* Retire Window input against its current owner before removing the source.
      * A stopped/failed presentation thread may refuse the handoff; the lock
      * below still detaches its borrowed channel storage before disposal. */
-    (void)run16_native_frontend_bind(frontend,owner,FALSE,FALSE);
+    (void)run16_native_frontend_bind(frontend,owner,FALSE);
     EnterCriticalSection(&frontend->io_lock);
     remove_pending(frontend,owner);
     if(frontend->owner==owner) {

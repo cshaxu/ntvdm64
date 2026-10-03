@@ -2,18 +2,20 @@
 #include <limits.h>
 #include <string.h>
 
-static void discard_pending(run16_console_video *video)
+void run16_console_video_abort_pending(run16_console_video *video)
 {
+    if (!video) return;
     if (video->pending) HeapFree(GetProcessHeap(), 0, video->pending);
     video->pending = NULL;
     video->pending_serial = video->received = 0;
+    video->pending_validated = FALSE;
     ZeroMemory(&video->pending_description, sizeof(video->pending_description));
 }
 
 void run16_console_video_dispose(run16_console_video *video)
 {
     if (!video) return;
-    discard_pending(video);
+    run16_console_video_abort_pending(video);
     if (video->pixels) HeapFree(GetProcessHeap(), 0, video->pixels);
     ZeroMemory(video, sizeof(*video));
 }
@@ -52,21 +54,22 @@ DWORD run16_console_video_begin(run16_console_video *video, uint32_t serial,
         if (description->palette[i] & 0xff000000u) return ERROR_INVALID_DATA;
     pending = HeapAlloc(GetProcessHeap(), 0, (SIZE_T)bytes);
     if (!pending) return ERROR_NOT_ENOUGH_MEMORY;
-    discard_pending(video);
+    run16_console_video_abort_pending(video);
     video->pending = pending;
     video->pending_description = *description;
     video->serial = video->pending_serial = serial;
     return ERROR_SUCCESS;
 }
 
-DWORD run16_console_video_data(run16_console_video *video, uint32_t serial,
+DWORD run16_console_video_stage_data(run16_console_video *video, uint32_t serial,
     uint32_t offset, const void *data, uint32_t bytes)
 {
     if (!video || !data) return ERROR_INVALID_PARAMETER;
     if (!video->pending || !serial || serial != video->pending_serial ||
         offset != video->received || !bytes ||
+        video->received > video->pending_description.bytes ||
         bytes > video->pending_description.bytes - video->received) {
-        discard_pending(video);
+        run16_console_video_abort_pending(video);
         return ERROR_INVALID_DATA;
     }
     memcpy(video->pending + offset, data, bytes);
@@ -80,7 +83,7 @@ DWORD run16_console_video_data(run16_console_video *video, uint32_t serial,
                 const BYTE *cells=video->pending+sizeof(*style);
                 uint32_t i,count=video->pending_description.width*video->pending_description.height;
                 for(i=0;i<count;++i)if(cells[i*3+2]&~CONSOLE_TEXT_STYLE_MASK) {
-                    discard_pending(video);return ERROR_INVALID_DATA;
+                    run16_console_video_abort_pending(video);return ERROR_INVALID_DATA;
                 }
             }
             if(!style->font_height || style->font_height>32 ||
@@ -89,27 +92,45 @@ DWORD run16_console_video_data(run16_console_video *video, uint32_t serial,
                 style->cursor_height1<0 || style->cursor_height1>32 ||
                 style->cursor_start < -32 || style->cursor_start>31 ||
                 style->cursor_start1 < -32 || style->cursor_start1>31) {
-                discard_pending(video);return ERROR_INVALID_DATA;
+                run16_console_video_abort_pending(video);return ERROR_INVALID_DATA;
             }
         }
-        if(video->pending_description.kind==CONSOLE_VIDEO_TEXT_CONFIGURATION) {
-            memcpy(&video->configuration.style,video->pending,sizeof(console_text_style));
-            memcpy(video->configuration.palette,video->pending_description.palette,
-                sizeof(video->configuration.palette));
-            video->configuration_serial=serial;
-            discard_pending(video);
-            return ERROR_SUCCESS;
-        }
-        /* Publish only after the complete payload. The last complete frame
-         * survives a partial transfer until TEXT, disposal or replacement. */
-        if (video->pixels) HeapFree(GetProcessHeap(), 0, video->pixels);
-        video->pixels = video->pending;
-        video->description = video->pending_description;
-        video->published_serial = serial;
-        video->pending = NULL;
-        discard_pending(video);
+        video->pending_validated = TRUE;
     }
     return ERROR_SUCCESS;
+}
+
+DWORD run16_console_video_commit_pending(run16_console_video *video)
+{
+    if(!video || !video->pending || !video->pending_validated ||
+        video->received!=video->pending_description.bytes)
+        return ERROR_INVALID_STATE;
+    if(video->pending_description.kind==CONSOLE_VIDEO_TEXT_CONFIGURATION) {
+        memcpy(&video->configuration.style,video->pending,sizeof(console_text_style));
+        memcpy(video->configuration.palette,video->pending_description.palette,
+            sizeof(video->configuration.palette));
+        video->configuration_serial=video->pending_serial;
+        run16_console_video_abort_pending(video);
+        return ERROR_SUCCESS;
+    }
+    /* No allocation or external call can fail after validation. The owner
+     * holds its publication lock and has prepared every dependent resource. */
+    if (video->pixels) HeapFree(GetProcessHeap(), 0, video->pixels);
+    video->pixels = video->pending;
+    video->description = video->pending_description;
+    video->published_serial = video->pending_serial;
+    video->pending = NULL;
+    run16_console_video_abort_pending(video);
+    return ERROR_SUCCESS;
+}
+
+DWORD run16_console_video_data(run16_console_video *video,uint32_t serial,
+    uint32_t offset,const void *data,uint32_t bytes)
+{
+    DWORD error=run16_console_video_stage_data(video,serial,offset,data,bytes);
+    if(error)return error;
+    return video->received==video->pending_description.bytes ?
+        run16_console_video_commit_pending(video) : ERROR_SUCCESS;
 }
 
 DWORD run16_console_video_text(run16_console_video *video, uint32_t serial)

@@ -13,7 +13,11 @@ typedef struct run16_console_frontend {
     SMALL_RECT *logical_window;
     run16_console_video video;
     void *io_context;
-    DWORD (*activate)(void *,BOOL,DWORD);
+    DWORD (*activate)(void *,BOOL);
+    DWORD (*prepare_text)(void *,COORD);
+    /* Standalone receivers may defer byte commit until dependent storage is
+     * prepared; private owned fixtures can use the codec's automatic commit. */
+    DWORD (*video_data)(void *,uint32_t,uint32_t,const void *,uint32_t);
     DWORD (*enter)(void *);
     void (*leave)(void *);
     /* Frontend-local shared-screen transaction; not a worker/IPC callback. */
@@ -37,8 +41,7 @@ typedef struct run16_console_frontend {
 } run16_console_frontend;
 DWORD run16_console_dispatch(run16_console_frontend *,const console_io_request *,
     console_io_reply *);
-/* Original nt_fulsc.c::calcScreenParams can reproduce these return modes.
- * Caller serializes the screen and commits ownership only after success. */
-BOOL run16_console_dos_size(COORD);
-DWORD run16_console_prepare_dos(HANDLE,SMALL_RECT *);
+/* Storage conversion accepts explicit dimensions; it selects no device mode.
+ * Caller serializes access and owns the returned logical viewport. */
+DWORD run16_console_prepare_text(HANDLE,SMALL_RECT *,COORD);
 #endif

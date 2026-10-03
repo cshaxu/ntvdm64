@@ -1,7 +1,7 @@
 import "wtypes.idl";
 [
     uuid(7d3e78bd-0472-4736-8797-e64e966d692e),
-    version(35.0),
+    version(36.0),
     pointer_default(unique)
 ]
 interface vdm_service

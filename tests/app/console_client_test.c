@@ -46,13 +46,27 @@ static void *cleanup_context;
 static run16_console_frontend frontend;
 static BOOL dos_active;
 static DWORD bind_error;
+static DWORD prepare_error,prepare_calls;
 static BOOL text_required;
 static BOOL require_text(void *context) { (void)context;return text_required; }
-static DWORD bind_dos(void *context,BOOL active,DWORD kind)
+static DWORD bind_dos(void *context,BOOL active)
 {
-    CHECK(kind==CONSOLE_IO_WORKER_DOS);
     (void)context;if(bind_error)return bind_error;
     dos_active=active;return ERROR_SUCCESS;
+}
+static DWORD prepare_text(void *context,COORD size)
+{
+    static SMALL_RECT logical;
+    CONSOLE_SCREEN_BUFFER_INFO info;
+    (void)context;
+    CHECK(dos_active);
+    ++prepare_calls;
+    if(prepare_error)return prepare_error;
+    if(!frontend.logical_window) {
+        if(!GetConsoleScreenBufferInfo(frontend.output,&info))return GetLastError();
+        logical=info.srWindow;frontend.logical_window=&logical;
+    }
+    return run16_console_prepare_text(frontend.output,frontend.logical_window,size);
 }
 static BOOL hang_close;
 static DWORD execution_error;
@@ -184,6 +198,7 @@ int main(int argc,char **argv)
         NULL,OPEN_EXISTING,0,NULL);
     frontend.generation=17;
     frontend.activate=bind_dos;
+    frontend.prepare_text=prepare_text;
     CHECK(local!=INVALID_HANDLE_VALUE && frontend.output!=INVALID_HANDLE_VALUE &&
         frontend.input!=INVALID_HANDLE_VALUE);
     CHECK(SetConsoleActiveScreenBuffer(frontend.output));
@@ -208,6 +223,12 @@ int main(int argc,char **argv)
         CHECK(ntvdm_console_set_active(FALSE) && !dos_active);
         CHECK(!mouse->submitted && !mouse->active && !mouse->queue.count);
         CHECK(ntvdm_console_set_active(TRUE) && dos_active && !mouse->submitted);
+        CHECK(ntvdm_console_set_active(FALSE) && !dos_active);
+        prepare_error=ERROR_NOT_ENOUGH_MEMORY;
+        CHECK(!ntvdm_console_set_active(TRUE) && GetLastError()==prepare_error && !dos_active);
+        prepare_error=ERROR_SUCCESS;
+        CHECK(ntvdm_console_set_active(TRUE) && dos_active && prepare_calls>=4);
+        puts("PASS acquisition selects current VGA geometry at worker boundary; conversion failure releases owner before guest resume");
     }
     {
         HANDLE input=CreateFileA("CONIN$",GENERIC_READ|GENERIC_WRITE,

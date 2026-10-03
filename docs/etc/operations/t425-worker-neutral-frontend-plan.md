@@ -55,9 +55,11 @@ identity; new outputs only under declared build/M0-T425/S<n>/r<nnn> run roots.
   input return before parent output, stop/disconnect/stale owner; remove slots.
   The [S2 ledger](../evidence/m0-t425-s2-channel-owner-handoff.md) retains
   multi-pending FIFO/cancellation, exact publication and regression evidence.
-- [ ] S3: snapshot/publication validation, atomic tiled commit, rollback and
+- [x] S3: snapshot/publication validation, atomic tiled commit, rollback and
   resource release; no half-frame or late-owner overwrite; remove old paths.
-- [ ] Real worker clients wired through existing common/worker-base; original
+  The [S3 ledger](../evidence/m0-t425-s3-operation-publication.md) records
+  actual failure/pipe tests and the selected r004 published release.
+- [x] Real worker clients wired through existing common/worker-base; original
   NTVDM algorithms never adapted to NTVWM convenience.
 - [ ] Retained production gates, exact release/recovery hashes, mirror/library
   review, governance/links and reviewed sequential P delivery.
@@ -76,5 +78,5 @@ Shared kvm-window checks capture ownership and clip bounds before delivering
 motion. This precedes worker conversion, so branch removal alone is not proof
 of an RDP release repair. Identify the failed predicate with low-perturbation
 evidence; retain safety checks. Imported-library edits need separate approval.
-Both workers already use the common text renderer; worker frame/font/extent
+Both workers use the common text renderer; worker frame/font/extent
 differences are excluded for now. Do not claim physical acceptance from mocks.

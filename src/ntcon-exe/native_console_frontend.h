@@ -29,21 +29,25 @@ void run16_native_frontend_cancel(run16_native_frontend *);
 /* Return the borrowed visible Console to its caller without closing resident
  * worker channels. A later worker activation may reuse the same frontend. */
 DWORD run16_native_frontend_park(run16_native_frontend *);
-/* One channel owner. prepare_vga requests the existing VGA capability
- * conversion only; it does not select a different ownership/wait policy. */
-DWORD run16_native_frontend_bind(run16_native_frontend *,const void *,BOOL,BOOL prepare_vga);
+/* One channel owner; acquisition has no worker/device classification. */
+DWORD run16_native_frontend_bind(run16_native_frontend *,const void *,BOOL);
+/* Active owner requests exact text storage conversion under the I/O lock. */
+/* Optional commit result distinguishes rollback from terminal projection error. */
+DWORD run16_native_frontend_prepare_text(run16_native_frontend *,const void *,COORD,BOOL *);
 /* Wait for this root's actual I/O ownership transition, not for input data.
  * The caller retries the original bind after a successful wait. */
 DWORD run16_native_frontend_wait_ready(run16_native_frontend *,const void *,HANDLE,HANDLE,DWORD);
 void run16_native_frontend_cancel_pending(run16_native_frontend *,const void *);
 /* Channel video is read only under the shared I/O lock. Forget/unbind must
  * detach it before channel storage is disposed. No pointer crosses IPC. */
-DWORD run16_native_frontend_video(run16_native_frontend *,const void *,const run16_console_video *,BOOL import_text);
+DWORD run16_native_frontend_video(run16_native_frontend *,const void *,run16_console_video *,BOOL import_text);
+/* Complete batch grid/frame/font publication uses the same transaction.
+ * Surface is consumed iff committed is TRUE, including projection failure. */
+DWORD run16_native_frontend_publish_text(run16_native_frontend *,const void *,
+    run16_console_video *,HANDLE,SMALL_RECT,BOOL *committed);
 /* Successful enter retains the shared I/O lock until leave. */
 DWORD run16_native_frontend_enter(run16_native_frontend *,const void *);
 void run16_native_frontend_leave(run16_native_frontend *);
-DWORD run16_native_frontend_screen_begin(run16_native_frontend *);
-DWORD run16_native_frontend_screen_end(run16_native_frontend *,BOOL);
 void run16_native_frontend_snapshot_begin(run16_native_frontend *);
 void run16_native_frontend_snapshot_end(run16_native_frontend *);
 /* Caller holds the successful enter lock. */

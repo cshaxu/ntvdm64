@@ -9,25 +9,22 @@ struct run16_console_channel {
     run16_console_frontend console;
     HANDLE pipe,worker,stop,thread,io_event,ready;
     BOOL input_pending;
-    BOOL kind_selected,native;
     BOOL snapshot_held;
     HANDLE publication_surface;
-    BOOL publication_failed;
+    DWORD publication_terminal_error;
     SMALL_RECT publication_window;
     run16_console_video committed_video;
     char title[CONSOLE_IO_TITLE_BYTES];
     BOOL title_valid;
     run16_native_frontend *root;
 };
-static DWORD activate(void *context,BOOL active,DWORD kind)
+static DWORD activate(void *context,BOOL active)
 {
     run16_console_channel *channel=context;
     DWORD error;
     ULONGLONG deadline=GetTickCount64()+10000;
-    if(channel->kind_selected && channel->native!=(kind==CONSOLE_IO_WORKER_NATIVE))return ERROR_INVALID_DATA;
-    channel->kind_selected=TRUE;channel->native=kind==CONSOLE_IO_WORKER_NATIVE;
     do {
-        error=run16_native_frontend_bind(channel->root,channel,active,!channel->native);
+        error=run16_native_frontend_bind(channel->root,channel,active);
         if(error==ERROR_BUSY && active) {
             ULONGLONG now=GetTickCount64();
             if(now>=deadline){error=ERROR_TIMEOUT;break;}
@@ -43,11 +40,10 @@ static DWORD activate(void *context,BOOL active,DWORD kind)
         if(!error) {
             CloseHandle(channel->console.output);
             channel->console.output=logical;
-        } else (void)run16_native_frontend_bind(channel->root,channel,FALSE,FALSE);
+        } else (void)run16_native_frontend_bind(channel->root,channel,FALSE);
     }
-    /* The canonical Console may be taller than the published DOS page.
-     * Keep the shared logical viewport through native seeding; the native
-     * worker may subsequently publish a genuine viewport change. */
+    /* Keep the shared logical viewport through acquisition. Only a copied
+     * geometry operation or publication changes its dimensions. */
     if(!error && active && channel->title_valid &&
         !run16_native_frontend_enter(channel->root,channel)) {
         run16_native_frontend_worker_title(channel->root,channel,channel->title);
@@ -65,6 +61,42 @@ static DWORD activate(void *context,BOOL active,DWORD kind)
     }
     return error;
 }
+static DWORD prepare_text(void *context,COORD size)
+{
+    run16_console_channel *channel=context;
+    HANDLE logical=NULL;
+    BOOL committed=FALSE;
+    DWORD error=run16_native_frontend_prepare_text(channel->root,channel,size,&committed);
+    if(!error)error=run16_native_frontend_logical_console(channel->root,&logical);
+    if(!error){CloseHandle(channel->console.output);channel->console.output=logical;}
+    else if(committed)channel->publication_terminal_error=error;
+    return error;
+}
+static DWORD video_data(void *context,uint32_t serial,uint32_t offset,const void *data,uint32_t bytes)
+{
+    run16_console_channel *channel=context;
+    run16_console_video *video=&channel->console.video;
+    HANDLE logical=NULL;
+    DWORD error;
+    /* Explicit batches already own a private grid and frame. Standalone
+     * publications need the same old-until-commit guarantee. */
+    if(channel->publication_surface)
+        return run16_console_video_data(video,serial,offset,data,bytes);
+    error=run16_console_video_stage_data(video,serial,offset,data,bytes);
+    if(error || !video->pending_validated)return error;
+    error=run16_native_frontend_video(channel->root,channel,video,TRUE);
+    if(error) {
+        if(video->pending)run16_console_video_abort_pending(video); /* Precommit failure. */
+        else channel->publication_terminal_error=error; /* Projection failed after commit. */
+        return error;
+    }
+    if(video->pixels && video->description.kind==CONSOLE_VIDEO_TEXT_FRAME) {
+        error=run16_native_frontend_logical_console(channel->root,&logical);
+        if(error){channel->publication_terminal_error=error;return error;}
+        CloseHandle(channel->console.output);channel->console.output=logical;
+    }
+    return ERROR_SUCCESS;
+}
 static DWORD enter(void *context)
 {
     run16_console_channel *channel=context;
@@ -77,24 +109,23 @@ static void leave(void *context)
 }
 static DWORD screen_begin(void *context)
 {
-    return run16_native_frontend_screen_begin(((run16_console_channel *)context)->root);
+    /* Dispatch already holds enter's I/O lock. The callback pair retains
+     * the dispatch failure contract; there is no second screen mutex. */
+    (void)context;return ERROR_SUCCESS;
 }
 static DWORD screen_end(void *context,BOOL write)
 {
     run16_console_channel *channel=context;
-    DWORD error=run16_native_frontend_screen_end(channel->root,write);
-    if(!error && write && !channel->publication_surface)
-        error=run16_native_frontend_project_text(channel->root);
-    return error;
+    return write && !channel->publication_surface ?
+        run16_native_frontend_project_text(channel->root) : ERROR_SUCCESS;
 }
 static DWORD publication(void *context,uint32_t operation)
 {
     run16_console_channel *channel=context;
     DWORD error;
-    HANDLE logical;
-    if(!channel->native)return ERROR_ACCESS_DENIED;
+    BOOL committed;
     if(operation==CONSOLE_IO_PUBLICATION_BEGIN) {
-        if(channel->publication_failed)return ERROR_INVALID_STATE;
+        if(channel->publication_terminal_error)return ERROR_INVALID_STATE;
         if(channel->publication_surface)return ERROR_BUSY;
         error=run16_native_frontend_clone_text(channel->root,&channel->publication_surface,
             &channel->publication_window);
@@ -130,19 +161,14 @@ static DWORD publication(void *context,uint32_t operation)
             frame->width!=(uint32_t)(channel->publication_window.Right-channel->publication_window.Left+1) ||
             frame->height!=(uint32_t)(channel->publication_window.Bottom-channel->publication_window.Top+1))
             return ERROR_INVALID_DATA;
-        /* Move the staged grid, not a copy into the visible Console. The
-         * shared I/O lock spans grid/window/frame replacement and projection. */
-        logical=channel->publication_surface;
+        /* Validate font/revision/notification before consuming staging. Grid,
+         * frame and font then use the same commit as standalone publication. */
+        error=run16_native_frontend_publish_text(channel->root,channel,&channel->console.video,
+            channel->publication_surface,channel->publication_window,&committed);
+        if(!committed)return error; /* Staging can still be explicitly aborted. */
         channel->publication_surface=NULL;channel->console.output=NULL;
-        error=run16_native_frontend_commit_text(channel->root,logical,channel->publication_window);
-        /* Commit consumes the grid even if projection fails. Replace the
-         * renderer's borrowed frame before disposing its previous storage. */
-        {
-            DWORD frame_error=run16_native_frontend_video(channel->root,channel,&channel->console.video,FALSE);
-            if(!error)error=frame_error;
-            if(!frame_error)run16_console_video_dispose(&channel->committed_video);
-        }
-        channel->publication_failed=error!=ERROR_SUCCESS;
+        run16_console_video_dispose(&channel->committed_video);
+        if(error)channel->publication_terminal_error=error;
     } else {
         uint32_t attempted_serial=channel->console.video.serial;
         CloseHandle(channel->publication_surface);
@@ -156,6 +182,7 @@ static DWORD publication(void *context,uint32_t operation)
     channel->console.logical_window=run16_native_frontend_text_region(channel->root);
     {
         DWORD handle_error=run16_native_frontend_logical_console(channel->root,&channel->console.output);
+        if(handle_error)channel->publication_terminal_error=handle_error;
         if(!error)error=handle_error;
     }
     return error;
@@ -163,7 +190,6 @@ static DWORD publication(void *context,uint32_t operation)
 static DWORD snapshot_begin(void *context)
 {
     run16_console_channel *channel=context;
-    if(!channel->native)return ERROR_ACCESS_DENIED;
     if(channel->snapshot_held)return ERROR_BUSY;
     run16_native_frontend_snapshot_begin(channel->root);
     channel->snapshot_held=TRUE;return ERROR_SUCCESS;
@@ -280,40 +306,25 @@ static DWORD WINAPI console_channel_main(void *context)
             request->operation!=CONSOLE_IO_READ_CELLS_W &&
             request->operation!=CONSOLE_IO_READ_TEXT_CONFIGURATION &&
             request->operation!=CONSOLE_IO_SNAPSHOT_END)error=ERROR_INVALID_DATA;
-        if(!error && channel->native && request->operation==CONSOLE_IO_VIDEO_BEGIN &&
-            (request->bytes!=sizeof(console_video_description) ||
-             ((const console_video_description *)request->data)->kind!=CONSOLE_VIDEO_TEXT_FRAME))
-            error=ERROR_INVALID_DATA;
         if(!error && channel->publication_surface &&
-            (request->operation==CONSOLE_IO_DOS_ACTIVE || request->operation==CONSOLE_IO_SNAPSHOT_BEGIN ||
+            (request->operation==CONSOLE_IO_ACTIVATE || request->operation==CONSOLE_IO_PREPARE_TEXT_REGION ||
+             request->operation==CONSOLE_IO_SNAPSHOT_BEGIN ||
              request->operation==CONSOLE_IO_READ_INPUT || request->operation==CONSOLE_IO_PEEK_INPUT))
             error=ERROR_INVALID_DATA;
-        if(!error && !channel->native && (request->operation==CONSOLE_IO_VIDEO_BEGIN ||
+        if(!error && (request->operation==CONSOLE_IO_VIDEO_BEGIN ||
             request->operation==CONSOLE_IO_VIDEO_DATA || request->operation==CONSOLE_IO_VIDEO_TEXT)) {
-            /* Dispatch replaces the published frame at the final data chunk.
+            /* Dispatch commits frame and dependent grid at the final chunk.
              * Keep its logical-grid import and duplicate update in that same
              * critical section; the renderer must not see new-frame/old-grid. */
             run16_native_frontend_snapshot_begin(channel->root);video_locked=TRUE;
         }
         if (!error) error=run16_console_dispatch(&channel->console,request,&reply);
         if(!error && reply.result && !channel->publication_surface && !channel->console.video.pending && (request->operation==CONSOLE_IO_VIDEO_BEGIN ||
-            request->operation==CONSOLE_IO_VIDEO_DATA || request->operation==CONSOLE_IO_VIDEO_TEXT))
-            error=run16_native_frontend_video(channel->root,channel,&channel->console.video,!channel->native);
-        if(!error && reply.result && !channel->native && !channel->console.video.pending &&
-            channel->console.video.pixels && channel->console.video.description.kind==CONSOLE_VIDEO_TEXT_FRAME &&
-            request->operation==CONSOLE_IO_VIDEO_DATA) {
-            HANDLE logical=NULL;
-            /* Full VGA publication may replace storage. Subsequent original
-             * Console operations must use that committed instance, not the
-             * previous grid retained by this channel's duplicate handle. */
-            run16_native_frontend_snapshot_begin(channel->root);
-            error=run16_native_frontend_logical_console(channel->root,&logical);
-            if(!error){CloseHandle(channel->console.output);channel->console.output=logical;}
-            run16_native_frontend_snapshot_end(channel->root);
-        }
+            request->operation==CONSOLE_IO_VIDEO_TEXT))
+            error=run16_native_frontend_video(channel->root,channel,&channel->console.video,TRUE);
         if(video_locked)run16_native_frontend_snapshot_end(channel->root);
         if (!error && (request->operation==CONSOLE_IO_READ_INPUT ||
-            request->operation==CONSOLE_IO_PEEK_INPUT || request->operation==CONSOLE_IO_DOS_ACTIVE)) {
+            request->operation==CONSOLE_IO_PEEK_INPUT || request->operation==CONSOLE_IO_ACTIVATE)) {
             INPUT_RECORD record;
             DWORD count=0;
             /* Reset before checking the frontend queue. Its stable readiness
@@ -328,6 +339,7 @@ static DWORD WINAPI console_channel_main(void *context)
         }
         if (!error) error=transfer(channel,TRUE,&reply,
             (DWORD)offsetof(console_io_reply,data)+reply.bytes);
+        if(!error && channel->publication_terminal_error)error=channel->publication_terminal_error;
     }
     if(channel->snapshot_held)(void)snapshot_end(channel);
     if(channel->publication_surface) {
@@ -403,7 +415,9 @@ DWORD run16_console_channel_start_request(DWORD request,HANDLE worker,run16_nati
     channel->root=root;
     channel->console.logical_window=run16_native_frontend_text_region(root);
     channel->console.io_context=channel;
-    channel->console.activate=activate;channel->console.enter=enter;channel->console.leave=leave;
+    channel->console.activate=activate;channel->console.prepare_text=prepare_text;
+    channel->console.video_data=video_data;
+    channel->console.enter=enter;channel->console.leave=leave;
     channel->console.screen_begin=screen_begin;channel->console.screen_end=screen_end;
     channel->console.snapshot_begin=snapshot_begin;channel->console.snapshot_end=snapshot_end;
     channel->console.publication=publication;

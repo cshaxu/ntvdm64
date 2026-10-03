@@ -53,43 +53,22 @@ static BOOL coordinate(int32_t value)
     return value>=SHRT_MIN && value<=SHRT_MAX;
 }
 
-BOOL run16_console_dos_size(COORD size)
-{
-    /* Original calcScreenParams/DoFullScreenResume, not VGA's full mode set. */
-    return size.X==80 && (size.Y==22 || size.Y==25 || size.Y==28 || size.Y==43 || size.Y==50);
-}
-
-/* Match OpenNT nt_fulsc.c::calcScreenParams and its integer MID_VAL macro.
- * The active Console viewport, not the previous DOS mode, selects the rows. */
-static SHORT opennt_dos_return_height(SHORT height)
-{
-    if(height<=22+(25-22)/2)return 22;
-    if(height<=25+(28-25)/2)return 25;
-    if(height<=28+(43-28)/2)return 28;
-    if(height<=43+(50-43)/2)return 43;
-    return 50;
-}
-
-DWORD run16_console_prepare_dos(HANDLE output,SMALL_RECT *window)
+DWORD run16_console_prepare_text(HANDLE output,SMALL_RECT *window,COORD size)
 {
     CONSOLE_SCREEN_BUFFER_INFO before,after;
     SMALL_RECT physical={0,0,0,0};
-    COORD size;
-    if(!window)return ERROR_INVALID_PARAMETER;
-    size.X=80;
-    size.Y=opennt_dos_return_height(window->Bottom-window->Top+1);
+    if(!window || size.X<=0 || size.Y<=0)return ERROR_INVALID_PARAMETER;
     if(!GetConsoleScreenBufferInfo(output,&before))return GetLastError();
     if(before.dwSize.X==size.X && before.dwSize.Y==size.Y &&
         !window->Left && !window->Top && window->Right==size.X-1 && window->Bottom==size.Y-1)
         return ERROR_SUCCESS;
     /* ConPTY treats a one-cell viewport as a one-cell backing page. Reduce
      * only to the target's representable viewport before resizing storage;
-     * otherwise the ordinary 30->28 DOS handoff destroys the shared grid. */
+     * otherwise a shrinking handoff destroys the shared grid. */
     physical.Right=min(size.X,min(before.dwSize.X,before.dwMaximumWindowSize.X))-1;
     physical.Bottom=min(size.Y,min(before.dwSize.Y,before.dwMaximumWindowSize.Y))-1;
-    /* Reuse OpenNT ResizeScreenBuffer's no-reflow row retention. Original
-     * DoFullScreenResume subsequently reads from origin and changes real VGA
-     * state; never acknowledge a frame-header-only DOS mode conversion. */
+    /* Reuse OpenNT ResizeScreenBuffer's no-reflow row retention. This only
+     * changes storage; the requesting worker owns its device interpretation. */
     if(!opennt_console_resize_grid(output,NULL,TRUE,&physical) ||
         !opennt_console_resize_grid(output,&size,FALSE,NULL) ||
         !GetConsoleScreenBufferInfo(output,&after))return GetLastError();
@@ -117,7 +96,7 @@ DWORD run16_console_dispatch(run16_console_frontend *owner,const console_io_requ
     if (!owner->generation || request->generation!=owner->generation) return ERROR_ACCESS_DENIED;
     if (!request->sequence || owner->sequence==UINT32_MAX ||
         request->sequence!=owner->sequence+1 || request->bytes>CONSOLE_IO_DATA_BYTES ||
-        request->operation<CONSOLE_IO_WRITE || request->operation>CONSOLE_IO_PUBLICATION_ABORT)
+        request->operation<CONSOLE_IO_WRITE || request->operation>CONSOLE_IO_PREPARE_TEXT_REGION)
         return ERROR_INVALID_DATA;
     cells=request->operation>=CONSOLE_IO_READ_CELLS_A && request->operation<=CONSOLE_IO_WRITE_CELLS_W;
     write_cells=request->operation>=CONSOLE_IO_WRITE_CELLS_A && request->operation<=CONSOLE_IO_WRITE_CELLS_W;
@@ -148,7 +127,10 @@ DWORD run16_console_dispatch(run16_console_frontend *owner,const console_io_requ
         s->count>CONSOLE_IO_INPUT_CAPACITY)
         return ERROR_INVALID_DATA;
     if (request->operation==CONSOLE_IO_WINDOW_RECT && s->mode>1) return ERROR_INVALID_DATA;
-    if (request->operation==CONSOLE_IO_DOS_ACTIVE && s->mode>CONSOLE_IO_WORKER_NATIVE) return ERROR_INVALID_DATA;
+    if (request->operation==CONSOLE_IO_ACTIVATE && (s->mode || request->bytes)) return ERROR_INVALID_DATA;
+    if(request->operation==CONSOLE_IO_PREPARE_TEXT_REGION &&
+        (s->width<=0 || s->height<=0 || s->width>SHRT_MAX || s->height>SHRT_MAX || request->bytes))
+        return ERROR_INVALID_DATA;
     if (request->operation==CONSOLE_IO_CURRENT_FONT && s->mode>1) return ERROR_INVALID_DATA;
     if (cells && (s->width<=0 || s->height<=0 || s->width>SHRT_MAX || s->height>SHRT_MAX ||
         (uint64_t)s->width*s->height>CONSOLE_IO_DATA_BYTES/sizeof(CHAR_INFO) ||
@@ -167,8 +149,8 @@ DWORD run16_console_dispatch(run16_console_frontend *owner,const console_io_requ
     reply->version=CONSOLE_IO_VERSION;
     reply->generation=owner->generation;
     reply->sequence=request->sequence;
-    if(request->operation==CONSOLE_IO_DOS_ACTIVE) {
-        reply->error=owner->activate ? owner->activate(owner->io_context,s->input!=0,s->mode) : ERROR_INVALID_FUNCTION;
+    if(request->operation==CONSOLE_IO_ACTIVATE) {
+        reply->error=owner->activate ? owner->activate(owner->io_context,s->input!=0) : ERROR_INVALID_FUNCTION;
         reply->result=reply->error==ERROR_SUCCESS;
         return ERROR_SUCCESS;
     }
@@ -191,6 +173,10 @@ DWORD run16_console_dispatch(run16_console_frontend *owner,const console_io_requ
     position.X=(SHORT)s->x; position.Y=(SHORT)s->y;
     SetLastError(ERROR_SUCCESS);
     switch (request->operation) {
+    case CONSOLE_IO_PREPARE_TEXT_REGION:
+        mode=owner->prepare_text ? owner->prepare_text(owner->io_context,
+            (COORD){(SHORT)s->width,(SHORT)s->height}) : ERROR_INVALID_FUNCTION;
+        ok=mode==ERROR_SUCCESS;SetLastError(mode);break;
     case CONSOLE_IO_PUBLICATION_BEGIN:
     case CONSOLE_IO_PUBLICATION_END:
     case CONSOLE_IO_PUBLICATION_ABORT:
@@ -224,7 +210,8 @@ DWORD run16_console_dispatch(run16_console_frontend *owner,const console_io_requ
         ok=mode==ERROR_SUCCESS;SetLastError(mode);break;
     }
     case CONSOLE_IO_VIDEO_DATA:
-        mode=run16_console_video_data(&owner->video,s->mode,s->count,request->data,request->bytes);
+        mode=owner->video_data ? owner->video_data(owner->io_context,s->mode,s->count,request->data,request->bytes) :
+            run16_console_video_data(&owner->video,s->mode,s->count,request->data,request->bytes);
         ok=mode==ERROR_SUCCESS;SetLastError(mode);break;
     case CONSOLE_IO_VIDEO_TEXT:
         mode=run16_console_video_text(&owner->video,s->mode);

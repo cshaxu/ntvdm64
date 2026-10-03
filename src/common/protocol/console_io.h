@@ -6,10 +6,7 @@
 
 /* Direct worker/frontend protocol; no pointers or native resource identities.
  * Local x86 peers are authenticated by the BaseSrv channel attachment. */
-#define CONSOLE_IO_VERSION 23u
-/* Activation's state.mode selects the endpoint's input interpretation, not
- * a different frame format or an execution scheduler. */
-enum { CONSOLE_IO_WORKER_DOS=0, CONSOLE_IO_WORKER_NATIVE=1 };
+#define CONSOLE_IO_VERSION 24u
 /* One-hop worker -> launcher stream routing, not an authorization token.
  * Versioned name; three low bits designate worker-local interactive endpoints.
  * File/pipe handles remain actual inherited resources. Consume before launch. */
@@ -68,7 +65,8 @@ enum console_io_operation {
     CONSOLE_IO_GET_DISPLAY_MODE,
     CONSOLE_IO_SET_DISPLAY_MODE,
     CONSOLE_IO_KEYBOARD_LAYOUT,
-    CONSOLE_IO_DOS_ACTIVE,
+    /* input selects acquisition/release; mode is reserved zero. */
+    CONSOLE_IO_ACTIVATE,
     /* state.count = byte offset, state.mode = revision (zero starts read).
      * Reply count = total bytes, mode = revision; data is one bounded tile.
      * No published text configuration returns ERROR_NOT_FOUND. */
@@ -85,7 +83,11 @@ enum console_io_operation {
      * Activation, input and seed snapshots are prohibited within the batch. */
     CONSOLE_IO_PUBLICATION_BEGIN,
     CONSOLE_IO_PUBLICATION_END,
-    CONSOLE_IO_PUBLICATION_ABORT
+    CONSOLE_IO_PUBLICATION_ABORT,
+    /* Active owner requests exact storage dimensions in width/height.
+     * Rebase the current viewport and retain original cell-grid resize rules.
+     * Device-mode selection belongs to the caller, never the frontend. */
+    CONSOLE_IO_PREPARE_TEXT_REGION
 };
 enum console_io_window_query {
     CONSOLE_WINDOW_ICONIC=1,

@@ -21,11 +21,19 @@ void ntcon_worker_client_dispose(ntcon_worker_client *client)
     ZeroMemory(client,sizeof(*client));
 }
 
-DWORD ntcon_worker_activate(ntcon_worker_client *client,DWORD kind,BOOL active)
+DWORD ntcon_worker_activate(ntcon_worker_client *client,BOOL active)
 {
     console_io_request request={0};console_io_reply reply;
-    request.operation=CONSOLE_IO_DOS_ACTIVE;request.state.input=active!=FALSE;
-    request.state.mode=kind;
+    request.operation=CONSOLE_IO_ACTIVATE;request.state.input=active!=FALSE;
+    return ntcon_worker_call(client,&request,&reply);
+}
+
+DWORD ntcon_worker_prepare_text(ntcon_worker_client *client,COORD size)
+{
+    console_io_request request={0};console_io_reply reply;
+    if(size.X<=0 || size.Y<=0)return ERROR_INVALID_PARAMETER;
+    request.operation=CONSOLE_IO_PREPARE_TEXT_REGION;
+    request.state.width=size.X;request.state.height=size.Y;
     return ntcon_worker_call(client,&request,&reply);
 }
 

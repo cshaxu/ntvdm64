@@ -42,7 +42,7 @@ static DWORD WINAPI peer(void *context)
         if(!transfer(state->pipe,FALSE,request.data,request.bytes))return ERROR_BROKEN_PIPE;
         ++state->calls;
         /* The sender must never acquire the frontend implicitly. */
-        if(request.operation==CONSOLE_IO_DOS_ACTIVE && state->mode<11)return ERROR_INVALID_FUNCTION;
+        if(request.operation==CONSOLE_IO_ACTIVATE && state->mode<11)return ERROR_INVALID_FUNCTION;
         if(state->mode==0 || (state->mode==6 && sequence<=5)) {
             if(sequence==1)error=ERROR_NOT_READY;
             else if(request.operation==CONSOLE_IO_VIDEO_BEGIN) {
@@ -94,7 +94,7 @@ static DWORD WINAPI peer(void *context)
             } else if(request.operation==CONSOLE_IO_SNAPSHOT_END) {
                 if(state->snapshot_begins!=state->snapshot_ends+1)error=ERROR_INVALID_STATE;
                 else ++state->snapshot_ends;
-            } else if(request.operation==CONSOLE_IO_DOS_ACTIVE) {
+            } else if(request.operation==CONSOLE_IO_ACTIVATE) {
                 if(request.state.input)++state->activations;else ++state->releases;
             } else if(request.operation==CONSOLE_IO_PUBLISH_TITLE_A) {
                 if(!request.bytes || request.bytes>CONSOLE_IO_TITLE_BYTES ||

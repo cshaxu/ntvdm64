@@ -1,5 +1,6 @@
 /* Run with CREATE_NO_WINDOW: real Windows Console operations, no user desktop. */
 #include "ntcon-exe/console_frontend.h"
+#include "console_geometry_fixture.h"
 #include <stdio.h>
 #include <stddef.h>
 #include <string.h>
@@ -299,7 +300,7 @@ int main(void)
             CHECK(FillConsoleOutputCharacterW(owner.output,(WCHAR)('A'+row%26),120,
                 (COORD){0,(SHORT)row},&count) && count==120);
         CHECK(SetConsoleCursorPosition(owner.output,cursor_at));
-        CHECK(!run16_console_prepare_dos(owner.output,&logical));
+        CHECK(!test_prepare_vga(owner.output,&logical));
         CHECK(GetConsoleScreenBufferInfo(owner.output,&actual));
         CHECK(actual.dwSize.X==80 && actual.dwSize.Y==43 && logical.Right==79 && logical.Bottom==42);
         /* The retained cell-grid primitive wraps an out-of-range X to zero;
@@ -310,7 +311,7 @@ int main(void)
         owner.logical_window=&logical;
         for(index=0;index<ARRAYSIZE(heights);++index) {
             logical=(SMALL_RECT){0,0,79,heights[index]-1};
-            CHECK(!run16_console_prepare_dos(owner.output,&logical));
+            CHECK(!test_prepare_vga(owner.output,&logical));
             operation(&owner,CONSOLE_IO_SCREEN_INFO);
             CHECK(!run16_console_dispatch(&owner,&request,&reply) && reply.result);
             CHECK(reply.state.width==80 && reply.state.height==heights[index] &&
@@ -318,15 +319,35 @@ int main(void)
         }
         for(index=0;index<ARRAYSIZE(input_heights);++index) {
             logical=(SMALL_RECT){0,0,79,input_heights[index]-1};
-            CHECK(!run16_console_prepare_dos(owner.output,&logical));
+            CHECK(!test_prepare_vga(owner.output,&logical));
             CHECK(logical.Right==79 && logical.Bottom==output_heights[index]-1);
         }
         logical=(SMALL_RECT){0,0,119,39};saved=logical;
-        CHECK(run16_console_prepare_dos(INVALID_HANDLE_VALUE,&logical)==ERROR_INVALID_HANDLE);
+        CHECK(test_prepare_vga(INVALID_HANDLE_VALUE,&logical)==ERROR_INVALID_HANDLE);
         CHECK(!memcmp(&logical,&saved,sizeof(saved)));
-        CHECK(!run16_console_prepare_dos(owner.output,&logical));
+        CHECK(!test_prepare_vga(owner.output,&logical));
         CHECK(logical.Right==79 && logical.Bottom==42);
-        CHECK(!run16_console_dos_size((COORD){40,25}) && !run16_console_dos_size((COORD){80,40}));
+        CHECK(ntvdm_console_return_height(40)==43);
+        /* The underlying storage operation must not round to VGA modes or
+         * force 80 columns. Only the worker's compatibility selector does. */
+        CHECK(!run16_console_prepare_text(owner.output,&logical,(COORD){100,35}));
+        CHECK(GetConsoleScreenBufferInfo(owner.output,&actual));
+        CHECK(actual.dwSize.X==100 && actual.dwSize.Y==35 &&
+            logical.Right==99 && logical.Bottom==34);
+        CHECK(!run16_console_prepare_text(owner.output,&logical,(COORD){80,30}));
+        CHECK(GetConsoleScreenBufferInfo(owner.output,&actual));
+        CHECK(actual.dwSize.X==80 && actual.dwSize.Y==30 &&
+            logical.Right==79 && logical.Bottom==29);
+        saved=logical;
+        CHECK(run16_console_prepare_text(owner.output,&logical,(COORD){0,25})==ERROR_INVALID_PARAMETER);
+        CHECK(run16_console_prepare_text(owner.output,&logical,(COORD){80,0})==ERROR_INVALID_PARAMETER);
+        CHECK(run16_console_prepare_text(owner.output,&logical,(COORD){-1,25})==ERROR_INVALID_PARAMETER);
+        CHECK(!memcmp(&logical,&saved,sizeof(saved)));
+        CHECK(GetConsoleScreenBufferInfo(owner.output,&actual) &&
+            actual.dwSize.X==80 && actual.dwSize.Y==30);
+        CHECK(run16_console_prepare_text(INVALID_HANDLE_VALUE,&logical,(COORD){80,28})==ERROR_INVALID_HANDLE);
+        CHECK(!memcmp(&logical,&saved,sizeof(saved)));
+        puts("PASS explicit text storage geometry: exact 100x35/80x30, invalid dimensions/handle preserve acknowledgement, no VGA selection");
         owner.logical_window=NULL;
         puts("PASS DOS geometry: original five return modes and midpoint boundaries, no reflow, cursor-visible rows, clamped cursor, failure does not acknowledge");
     }

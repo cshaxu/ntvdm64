@@ -13,7 +13,8 @@ int wmain(int argc,WCHAR **argv)
     if(argc!=2 || _wfopen_s(&log,argv[1],L"wx"))return 2;
     CHECK(run16_native_frontend_create(&frontend)==0);
     if(!frontend)goto done;
-    CHECK(run16_native_frontend_bind(frontend,&dos,TRUE,TRUE)==0);
+    CHECK(run16_native_frontend_bind(frontend,&dos,TRUE)==0);
+    CHECK(run16_native_frontend_prepare_text(frontend,&dos,(COORD){80,25},NULL)==0);
     error=run16_native_frontend_enter(frontend,&dos);CHECK(error==0);
     if(!error) {
         CHECK(!run16_native_frontend_text_frame_required(frontend));
@@ -48,10 +49,10 @@ int wmain(int argc,WCHAR **argv)
         HeapFree(GetProcessHeap(),0,video.pixels);video.pixels=NULL;
     }
     CHECK(run16_native_frontend_video(frontend,&dos,&video,TRUE)==0);
-    CHECK(run16_native_frontend_bind(frontend,&dos,FALSE,TRUE)==0);
+    CHECK(run16_native_frontend_bind(frontend,&dos,FALSE)==0);
     /* Destroy the channel storage: retained configuration must be copied. */
     run16_console_video_dispose(&video);
-    CHECK(run16_native_frontend_bind(frontend,&native,TRUE,FALSE)==0);
+    CHECK(run16_native_frontend_bind(frontend,&native,TRUE)==0);
     error=run16_native_frontend_enter(frontend,&native);CHECK(error==0);
     if(!error) {
         while(offset<sizeof(copy)) {
@@ -69,7 +70,7 @@ int wmain(int argc,WCHAR **argv)
         CHECK(run16_native_frontend_read_text_configuration(frontend,1,0,&reply)==ERROR_INVALID_PARAMETER);
         run16_native_frontend_leave(frontend);
     }
-    CHECK(run16_native_frontend_bind(frontend,&native,FALSE,FALSE)==0);
+    CHECK(run16_native_frontend_bind(frontend,&native,FALSE)==0);
     HeapFree(GetProcessHeap(),0,payload);
 dispose:
     run16_native_frontend_destroy(frontend);run16_console_video_dispose(&video);

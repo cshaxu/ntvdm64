@@ -6,6 +6,7 @@
 #include <stddef.h>
 #include <tlhelp32.h>
 #include "ntcon-exe/native_console_frontend.h"
+#include "console_geometry_fixture.h"
 #define run16_console_dispatch actual_dispatch
 #include "../../src/ntcon-exe/console_frontend.c"
 #undef run16_console_dispatch
@@ -25,6 +26,11 @@ static DWORD WINAPI snapshot_contender(void *context)
 DWORD run16_console_dispatch(run16_console_frontend *owner,
     const console_io_request *request,console_io_reply *reply)
 {
+#ifdef NTCON_FRAME_FAILURE_TEST
+    if((request->operation==CONSOLE_IO_VIDEO_DATA || request->operation==CONSOLE_IO_PUBLICATION_END) &&
+        InterlockedCompareExchange(&arm_pipe_projection,0,1)==1)
+        fail_projection_target=test_frontend->console_output;
+#endif
     if(held_dispatch && request->operation==CONSOLE_IO_BARRIER) {
         run16_native_frontend_snapshot_begin(test_frontend);
         SetEvent(held_dispatch);
@@ -38,6 +44,23 @@ DWORD run16_console_dispatch(run16_console_frontend *owner,
 #define CHECK(x) do { if(!(x)) { DWORD check_error=GetLastError(); \
     fprintf(private_report ? private_report : stderr,"FAIL line=%u error=%lu\n", \
     (unsigned)__LINE__,check_error);if(private_report)fflush(private_report);ExitProcess(1); } } while(0)
+/* Fixtures explicitly compose acquisition with the worker's requested VGA
+ * geometry. Production bind itself is worker-neutral and selects no mode. */
+static DWORD test_bind(run16_native_frontend *frontend,const void *owner,BOOL active,BOOL request_vga)
+{
+    DWORD error=run16_native_frontend_bind(frontend,owner,active);
+    if(!error && active && request_vga) {
+        SMALL_RECT region;
+        error=run16_native_frontend_enter(frontend,owner);
+        if(!error) {
+            region=*run16_native_frontend_text_region(frontend);
+            run16_native_frontend_leave(frontend);
+            error=run16_native_frontend_prepare_text(frontend,owner,(COORD){80,
+                ntvdm_console_return_height(region.Bottom-region.Top+1)},NULL);
+        }
+    }
+    return error;
+}
 typedef struct binding_wait_case {
     const void *owner;
     HANDLE cancel,started;
@@ -54,7 +77,7 @@ static DWORD WINAPI wait_for_binding(void *context)
      * pseudo-handle is not a valid member of this multi-object wait set. */
     if(!wait_peer)CHECK(DuplicateHandle(GetCurrentProcess(),GetCurrentProcess(),
         GetCurrentProcess(),&wait_peer,SYNCHRONIZE,FALSE,0));
-    CHECK(run16_native_frontend_bind(test_frontend,test->owner,TRUE,test->prepare_vga)==ERROR_BUSY);
+    CHECK(test_bind(test_frontend,test->owner,TRUE,test->prepare_vga)==ERROR_BUSY);
     CHECK(SetEvent(test->started));
     test->result=run16_native_frontend_wait_ready(test_frontend,test->owner,
         test->cancel,wait_peer,test->timeout ? test->timeout : 10000);
@@ -142,16 +165,16 @@ static void verify_dos_input_queue(run16_console_channel *channel)
     run16_native_frontend_leave(test_frontend);
     /* Both backend channels consume the same frontend-owned unsent queue.
      * Handoff must not inject these records into the visible Console. */
-    CHECK(!run16_native_frontend_bind(test_frontend,channel,FALSE,TRUE));
+    CHECK(!test_bind(test_frontend,channel,FALSE,TRUE));
     CHECK(WaitForSingleObject(ready,0)==WAIT_OBJECT_0);
     CHECK(GetNumberOfConsoleInputEvents(channel->console.input,&pending) && pending==0);
-    CHECK(!run16_native_frontend_bind(test_frontend,channel,TRUE,FALSE));
+    CHECK(!test_bind(test_frontend,channel,TRUE,FALSE));
     CHECK(!run16_native_frontend_enter(test_frontend,channel));
     CHECK(!run16_native_frontend_read(test_frontend,FALSE,received,3,&count) && count==3);
     CHECK(!memcmp(received,first,3*sizeof(*first)));
     run16_native_frontend_leave(test_frontend);
-    CHECK(!run16_native_frontend_bind(test_frontend,channel,FALSE,FALSE));
-    CHECK(!run16_native_frontend_bind(test_frontend,channel,TRUE,TRUE));
+    CHECK(!test_bind(test_frontend,channel,FALSE,FALSE));
+    CHECK(!test_bind(test_frontend,channel,TRUE,TRUE));
     CHECK(!run16_native_frontend_enter(test_frontend,channel));
     CHECK(FlushConsoleInputBuffer(channel->console.input));
     do { CHECK(!run16_native_frontend_read(test_frontend,FALSE,received,260,&count)); } while(count);
@@ -186,8 +209,8 @@ static void run_case(unsigned mode,unsigned round)
         CHECK(GetHandleInformation(channel->console.output,&flags) && !(flags&HANDLE_FLAG_INHERIT));
         CHECK(GetHandleInformation(channel->console.input,&flags) && !(flags&HANDLE_FLAG_INHERIT));
     }
-    if(mode>=5)CHECK(!activate(channel,TRUE,CONSOLE_IO_WORKER_NATIVE));
-    else CHECK(!activate(channel,TRUE,CONSOLE_IO_WORKER_DOS));
+    CHECK(!activate(channel,TRUE));
+    if(mode<5)CHECK(!prepare_text(channel,(COORD){80,25}));
     CHECK(DuplicateHandle(GetCurrentProcess(),channel->thread,GetCurrentProcess(),
         &thread,0,FALSE,DUPLICATE_SAME_ACCESS));
     CHECK(DuplicateHandle(GetCurrentProcess(),channel->ready,GetCurrentProcess(),
@@ -296,10 +319,10 @@ static void run_case(unsigned mode,unsigned round)
         uint32_t serial=channel->console.video.serial;
         console_video_description stale={0};
         CHECK(serial && channel->console.video.pixels);
-        CHECK(!activate(channel,FALSE,CONSOLE_IO_WORKER_DOS));
+        CHECK(!activate(channel,FALSE));
         CHECK(!channel->console.video.pixels && !channel->console.video.pending &&
             channel->console.video.serial==serial);
-        CHECK(!activate(channel,TRUE,CONSOLE_IO_WORKER_DOS));
+        CHECK(!activate(channel,TRUE));
         CHECK(run16_console_video_begin(&channel->console.video,serial,&stale)==ERROR_INVALID_DATA);
         puts("PASS ownership return discards stale pixels but retains the anti-replay serial");
     }
@@ -408,7 +431,7 @@ static void run_case(unsigned mode,unsigned round)
         contender=CreateThread(NULL,0,snapshot_contender,acquired,0,NULL);CHECK(contender);
         CHECK(WaitForSingleObject(acquired,0)==WAIT_TIMEOUT);
         if(round&1) {
-            request.sequence=6;request.operation=CONSOLE_IO_DOS_ACTIVE;
+            request.sequence=6;request.operation=CONSOLE_IO_ACTIVATE;
             peer_io(TRUE,&request,(DWORD)offsetof(console_io_request,data));
             CHECK(WaitForSingleObject(thread,5000)==WAIT_OBJECT_0);
             CHECK(GetExitCodeThread(thread,&exit_code) && exit_code==ERROR_INVALID_DATA);
@@ -418,7 +441,7 @@ static void run_case(unsigned mode,unsigned round)
         CHECK(WaitForSingleObject(contender,5000)==WAIT_OBJECT_0);
         CloseHandle(contender);CloseHandle(acquired);
         CHECK(!channel->snapshot_held);
-        if(!round)puts("PASS native snapshot blocks concurrent screen owner until END; EOF and invalid activation release held lock");
+        if(!round)puts("PASS channel snapshot blocks concurrent screen owner until END; EOF and invalid activation release held lock");
     }
     if(mode==6) {
         HANDLE committed;WCHAR cell;DWORD count;
@@ -437,7 +460,7 @@ static void run_case(unsigned mode,unsigned round)
         CHECK(!run16_native_frontend_logical_console(test_frontend,&committed));
         CHECK(ReadConsoleOutputCharacterW(committed,&cell,1,(COORD){0,0},&count) && count==1 && cell==L'K');
         CloseHandle(committed);
-        fprintf(private_report ? private_report : stdout,"PASS real pipe EOF aborts unpublished native grid without replacing committed cells\n");
+        fprintf(private_report ? private_report : stdout,"PASS real pipe EOF aborts unpublished channel grid without replacing committed cells\n");
     }
     if(mode==3 || mode==4) {
         OVERLAPPED io={0};BYTE byte;DWORD done=0,error;
@@ -631,7 +654,7 @@ static void test_native_seed_origin(HANDLE canonical)
     CHECK(!run16_native_frontend_create(&frontend));
     CHECK(!run16_native_frontend_console(frontend,&input,&output));
     logical=run16_native_frontend_text_region(frontend);
-    CHECK(!run16_native_frontend_bind(frontend,&owner,TRUE,FALSE));
+    CHECK(!test_bind(frontend,&owner,TRUE,FALSE));
     CloseHandle(output);
     CHECK(!run16_native_frontend_logical_console(frontend,&output));
     owner.output=output;owner.logical_window=logical;owner.generation=1;
@@ -648,7 +671,7 @@ static void test_native_seed_origin(HANDLE canonical)
     CHECK(WriteConsoleW(canonical,L"S10-SEED\r\n",10,&written,NULL) && written==10);
     CHECK(GetConsoleScreenBufferInfo(canonical,&info) &&
         info.dwCursorPosition.X==0 && info.dwCursorPosition.Y==30);
-    CHECK(!run16_native_frontend_bind(frontend,&owner,FALSE,FALSE));
+    CHECK(!test_bind(frontend,&owner,FALSE,FALSE));
     CHECK(!run16_native_frontend_destroy(frontend));
     CHECK(GetConsoleScreenBufferInfo(canonical,&info) && info.dwCursorPosition.Y==30);
     CHECK(SetConsoleMode(canonical,mode));
@@ -672,7 +695,7 @@ static void test_dos_conversion_thresholds(void)
             CHECK(WriteConsoleOutputCharacterW(output,&marker,1,(COORD){0,row},&count) && count==1);
         }
         CHECK(SetConsoleCursorPosition(output,(COORD){0,heights[index]-1}));
-        CHECK(!run16_console_prepare_dos(output,&logical));
+        CHECK(!test_prepare_vga(output,&logical));
         CHECK(GetConsoleScreenBufferInfo(output,&info) && info.dwSize.X==80 &&
             info.dwSize.Y==expected[index] && info.dwCursorPosition.Y==min(heights[index]-1,expected[index]-1));
         CHECK(logical.Top==0 && logical.Bottom==expected[index]-1);
@@ -703,7 +726,263 @@ static DWORD WINAPI publication_reader(void *context)
     run16_native_frontend_snapshot_end(test_frontend);
     return read->error;
 }
-static void test_logical_publication(void)
+static void test_prepare_operation(void)
+{
+    run16_console_channel channel={0};console_io_request request={0};console_io_reply reply;
+    CONSOLE_SCREEN_BUFFER_INFO info;
+    channel.root=test_frontend;channel.console.generation=1;
+    channel.console.io_context=&channel;channel.console.activate=activate;
+    channel.console.prepare_text=prepare_text;channel.console.enter=enter;channel.console.leave=leave;
+    request.version=CONSOLE_IO_VERSION;request.generation=1;request.sequence=1;
+    request.operation=CONSOLE_IO_PREPARE_TEXT_REGION;request.state.width=100;request.state.height=35;
+    CHECK(!actual_dispatch(&channel.console,&request,&reply) && !reply.result && reply.error==ERROR_NOT_READY);
+    request.sequence=2;request.operation=CONSOLE_IO_ACTIVATE;request.state.mode=1;
+    CHECK(actual_dispatch(&channel.console,&request,&reply)==ERROR_INVALID_DATA && channel.console.sequence==1);
+    request.state.mode=0;request.state.input=1;
+    CHECK(!actual_dispatch(&channel.console,&request,&reply) && reply.result);
+    request.sequence=3;request.operation=CONSOLE_IO_PREPARE_TEXT_REGION;
+    CHECK(!actual_dispatch(&channel.console,&request,&reply) && reply.result);
+    CHECK(GetConsoleScreenBufferInfo(channel.console.output,&info) && info.dwSize.X==100 && info.dwSize.Y==35);
+    request.sequence=4;request.state.width=0;
+    CHECK(actual_dispatch(&channel.console,&request,&reply)==ERROR_INVALID_DATA && channel.console.sequence==3);
+    CHECK(GetConsoleScreenBufferInfo(channel.console.output,&info) && info.dwSize.X==100 && info.dwSize.Y==35);
+    CHECK(!activate(&channel,FALSE));
+    run16_native_frontend_forget(test_frontend,&channel);CloseHandle(channel.console.output);
+    fprintf(private_report ? private_report : stdout,
+        "PASS operation-only activation and exact text-region request: inactive denied, reserved kind rejected, invalid geometry preserves state\n");
+}
+static void test_standalone_text(BOOL native,BOOL styled)
+{
+    run16_console_channel channel={0};
+    console_video_description description={0};
+    console_text_style *style;
+    BYTE *payload,*text;
+    HANDLE logical;
+    DWORD count,index,bytes,step=styled ? 3 : 2;
+    WCHAR cell;WORD attribute;
+    channel.root=test_frontend;
+    CHECK(!test_bind(test_frontend,&channel,TRUE,!native));
+    CHECK(!run16_native_frontend_logical_console(test_frontend,&channel.console.output));
+    description.kind=CONSOLE_VIDEO_TEXT_FRAME;
+    description.width=80;description.height=25;description.stride=80*step;
+    description.bytes=sizeof(console_text_style)+description.stride*25;
+    bytes=description.bytes;
+    payload=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,bytes);CHECK(payload);
+    style=(console_text_style *)payload;style->font_height=16;
+    style->cursor_visible=1;style->cursor_column=3;style->cursor_row=24;style->cursor_height=4;
+    text=payload+sizeof(*style);
+    for(index=0;index<80*25;++index){text[index*step]=' ';text[index*step+1]=7;}
+    text[0]='K';text[1]=0x1e;if(styled)text[2]=CONSOLE_TEXT_UNDERLINE;
+    CHECK(!enter(&channel));
+    CHECK(!run16_console_video_begin(&channel.console.video,1,&description));
+    CHECK(!video_data(&channel,1,0,payload,bytes/2));
+    CHECK(!channel.console.video.pixels && channel.console.video.pending && !channel.console.video.pending_validated);
+    CHECK(!video_data(&channel,1,bytes/2,payload+bytes/2,bytes-bytes/2));
+    CHECK(channel.console.video.published_serial==1 && !channel.console.video.pending && !channel.publication_terminal_error);
+    CHECK(!run16_native_frontend_logical_console(test_frontend,&logical));
+    CHECK(ReadConsoleOutputCharacterW(logical,&cell,1,(COORD){0,0},&count) && count==1 && cell==L'K');
+    CHECK(ReadConsoleOutputAttribute(logical,&attribute,1,(COORD){0,0},&count) && count==1 &&
+        attribute==(WORD)(0x1e|(styled ? COMMON_LVB_UNDERSCORE : 0)));
+    if(styled) {
+        /* A bad optional style cannot replace either the committed frame
+         * or grid; the type-neutral validator still rejects it. */
+        text[2]=CONSOLE_TEXT_STYLE_MASK+1;
+        CHECK(!run16_console_video_begin(&channel.console.video,2,&description));
+        CHECK(video_data(&channel,2,0,payload,bytes)==ERROR_INVALID_DATA);
+        CHECK(channel.console.video.published_serial==1 && !channel.console.video.pending);
+        CHECK(ReadConsoleOutputCharacterW(logical,&cell,1,(COORD){0,0},&count) && cell==L'K');
+    }
+    CloseHandle(logical);
+    leave(&channel);
+    CHECK(!test_bind(test_frontend,&channel,FALSE,FALSE));
+    run16_native_frontend_forget(test_frontend,&channel);
+    run16_console_video_dispose(&channel.console.video);HeapFree(GetProcessHeap(),0,payload);
+    CloseHandle(channel.console.output);
+    fprintf(private_report ? private_report : stdout,
+        "PASS standalone text kind=%u styled=%u committed glyph/attribute, optional underline and malformed-style preservation\n",
+        (unsigned)native,(unsigned)styled);
+}
+#ifdef NTCON_FRAME_FAILURE_TEST
+static void test_projection_failure_pipe(BOOL batch)
+{
+    run16_console_channel *channel=NULL;
+    console_io_request request={0};console_io_reply reply;
+    console_video_description description={0};
+    console_text_style *style;
+    BYTE *payload,*text;HANDLE worker;
+    DWORD bytes,index,offset,count,code;WCHAR cell;
+    expected_generation=batch ? 922 : 921;
+    CHECK(DuplicateHandle(GetCurrentProcess(),GetCurrentProcess(),GetCurrentProcess(),&worker,SYNCHRONIZE,FALSE,0));
+    CHECK(!run16_console_channel_start_request(expected_generation,worker,test_frontend,&channel));
+    CHECK(!activate(channel,TRUE));
+    CHECK(!prepare_text(channel,(COORD){80,25}));
+    request.version=CONSOLE_IO_VERSION;request.generation=expected_generation;
+    if(batch) {
+        request.sequence++;request.operation=CONSOLE_IO_PUBLICATION_BEGIN;
+        peer_io(TRUE,&request,(DWORD)offsetof(console_io_request,data));
+        peer_io(FALSE,&reply,(DWORD)offsetof(console_io_reply,data));CHECK(reply.result);
+        CHECK(!enter(channel));
+        CHECK(SetConsoleCursorPosition(channel->console.output,(COORD){0,0}));
+        CHECK(WriteConsoleOutputCharacterW(channel->console.output,L"P",1,(COORD){0,0},&count));
+        leave(channel);
+    }
+    description.kind=CONSOLE_VIDEO_TEXT_FRAME;description.width=80;description.height=25;
+    description.stride=160;bytes=description.bytes=sizeof(*style)+160*25;
+    payload=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,bytes);CHECK(payload);
+    style=(console_text_style *)payload;style->font_height=16;
+    style->cursor_visible=1;style->cursor_height=4;
+    text=payload+sizeof(*style);
+    for(index=0;index<80*25;++index){text[index*2]=' ';text[index*2+1]=7;}
+    text[0]='P';
+    request.sequence++;request.operation=CONSOLE_IO_VIDEO_BEGIN;
+    request.state.mode=1;request.bytes=sizeof(description);
+    memcpy(request.data,&description,sizeof(description));
+    peer_io(TRUE,&request,(DWORD)offsetof(console_io_request,data)+request.bytes);
+    peer_io(FALSE,&reply,(DWORD)offsetof(console_io_reply,data));CHECK(reply.result);
+    for(offset=0;offset<bytes;offset+=count) {
+        count=min(bytes-offset,CONSOLE_IO_DATA_BYTES);
+        request.sequence++;request.operation=CONSOLE_IO_VIDEO_DATA;
+        request.state.count=offset;request.bytes=count;memcpy(request.data,payload+offset,count);
+        if(!batch && offset+count==bytes)InterlockedExchange(&arm_pipe_projection,1);
+        peer_io(TRUE,&request,(DWORD)offsetof(console_io_request,data)+count);
+        peer_io(FALSE,&reply,(DWORD)offsetof(console_io_reply,data));
+        CHECK(reply.result==(BOOL)(batch || offset+count<bytes));
+    }
+    if(batch) {
+        request.sequence++;request.operation=CONSOLE_IO_PUBLICATION_END;request.bytes=0;
+        InterlockedExchange(&arm_pipe_projection,1);
+        peer_io(TRUE,&request,(DWORD)offsetof(console_io_request,data));
+        peer_io(FALSE,&reply,(DWORD)offsetof(console_io_reply,data));CHECK(!reply.result);
+    }
+    CHECK(reply.error==ERROR_WRITE_FAULT && !arm_pipe_projection);
+    CHECK(WaitForSingleObject(channel->thread,3000)==WAIT_OBJECT_0);
+    CHECK(GetExitCodeThread(channel->thread,&code) && code==ERROR_WRITE_FAULT);
+    CHECK(channel->publication_terminal_error==ERROR_WRITE_FAULT && !channel->publication_surface);
+    CHECK(!run16_native_frontend_enter(test_frontend,channel));
+    CHECK(test_frontend->video==&channel->console.video && channel->console.video.published_serial==1);
+    CHECK(ReadConsoleOutputCharacterW(test_frontend->logical_surface,&cell,1,(COORD){0,0},&count) && cell==L'P');
+    CHECK(channel->console.video.pixels[sizeof(*style)]=='P');
+    run16_native_frontend_leave(test_frontend);
+    CHECK(!PeekNamedPipe(peer,NULL,0,NULL,&count,NULL) && GetLastError()==ERROR_BROKEN_PIPE);
+    CloseHandle(peer);peer=NULL;
+    CHECK(!run16_console_channel_stop(channel));HeapFree(GetProcessHeap(),0,payload);
+    fprintf(private_report ? private_report : stdout,
+        "PASS real pipe postcommit projection failure batch=%u: error reply, coherent grid/frame, terminal thread and EOF, no unsafe retry\n",(unsigned)batch);
+}
+static void test_failed_text_commit(BOOL styled)
+{
+    run16_console_channel channel={0};
+    console_video_description description={0};
+    console_text_configuration saved_configuration;
+    CONSOLE_SCREEN_BUFFER_INFO before,after;
+    console_text_style *style;
+    BYTE *payload,*text,*previous;
+    HANDLE old_surface;
+    DWORD bytes,count,index,revision,step=styled ? 3 : 2;
+    WCHAR cell;WORD attribute;
+    channel.root=test_frontend;
+    CHECK(!test_bind(test_frontend,&channel,TRUE,FALSE));
+    CHECK(!run16_native_frontend_logical_console(test_frontend,&channel.console.output));
+    CHECK(!enter(&channel));
+    description.kind=CONSOLE_VIDEO_TEXT_FRAME;
+    description.width=80;description.height=25;description.stride=80*step;
+    bytes=description.bytes=sizeof(*style)+description.stride*25;
+    payload=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,bytes);CHECK(payload);
+    style=(console_text_style *)payload;style->font_height=16;
+    style->cursor_visible=1;style->cursor_column=3;style->cursor_row=24;style->cursor_height=4;
+    text=payload+sizeof(*style);
+    for(index=0;index<80*25;++index){text[index*step]=' ';text[index*step+1]=7;}
+    text[0]='K';text[1]=0x1e;if(styled)text[2]=CONSOLE_TEXT_UNDERLINE;
+    CHECK(!run16_console_video_begin(&channel.console.video,1,&description));
+    CHECK(!video_data(&channel,1,0,payload,bytes));
+    previous=channel.console.video.pixels;old_surface=test_frontend->logical_surface;
+    revision=test_frontend->text_revision;saved_configuration=test_frontend->text_configuration;
+    CHECK(GetConsoleScreenBufferInfo(old_surface,&before));
+
+    text[0]='Z';style->cursor_column=1;style->cursor_row=0;style->font_height=8;
+    CHECK(!run16_console_video_begin(&channel.console.video,2,&description));
+    fail_frame_allocation=TRUE;
+    CHECK(video_data(&channel,2,0,payload,bytes)==ERROR_NOT_ENOUGH_MEMORY);
+    CHECK(!fail_frame_allocation && !channel.publication_terminal_error);
+    CHECK(channel.console.video.pixels==previous && channel.console.video.published_serial==1);
+    CHECK(!channel.console.video.pending && channel.console.video.serial==2);
+    CHECK(test_frontend->logical_surface==old_surface && test_frontend->video==&channel.console.video);
+    CHECK(test_frontend->text_revision==revision &&
+        !memcmp(&test_frontend->text_configuration,&saved_configuration,sizeof(saved_configuration)));
+    CHECK(GetConsoleScreenBufferInfo(old_surface,&after) &&
+        !memcmp(&before.dwSize,&after.dwSize,sizeof(before.dwSize)) &&
+        !memcmp(&before.dwCursorPosition,&after.dwCursorPosition,sizeof(before.dwCursorPosition)));
+    CHECK(ReadConsoleOutputCharacterW(old_surface,&cell,1,(COORD){0,0},&count) && cell==L'K');
+    CHECK(ReadConsoleOutputAttribute(old_surface,&attribute,1,(COORD){0,0},&count) &&
+        attribute==(WORD)(0x1e|(styled ? COMMON_LVB_UNDERSCORE : 0)));
+    CHECK(run16_console_video_begin(&channel.console.video,2,&description)==ERROR_INVALID_DATA);
+
+    /* Revision exhaustion is another precommit failure, before any grid or
+     * frame swap. The test alters only the real instance's boundary counter. */
+    test_frontend->text_revision=UINT32_MAX;
+    CHECK(!run16_console_video_begin(&channel.console.video,3,&description));
+    CHECK(video_data(&channel,3,0,payload,bytes)==ERROR_ARITHMETIC_OVERFLOW);
+    CHECK(test_frontend->logical_surface==old_surface && channel.console.video.pixels==previous);
+    CHECK(!channel.console.video.pending && channel.console.video.published_serial==1);
+    CHECK(!channel.publication_terminal_error &&
+        !memcmp(&test_frontend->text_configuration,&saved_configuration,sizeof(saved_configuration)));
+    test_frontend->text_revision=revision;
+    CHECK(!run16_console_video_begin(&channel.console.video,4,&description));
+    CHECK(!video_data(&channel,4,0,payload,bytes));
+    CHECK(channel.console.video.published_serial==4 && !channel.console.video.pending);
+    CHECK(ReadConsoleOutputCharacterW(channel.console.output,&cell,1,(COORD){0,0},&count) && cell==L'Z');
+    CHECK(GetConsoleScreenBufferInfo(channel.console.output,&after) && after.dwCursorPosition.X==1 && after.dwCursorPosition.Y==0);
+    /* A staged batch must not consume its private grid before font metadata
+     * is admitted. Failure leaves the old complete grid/frame available to
+     * the renderer; abort returns its ownership to the channel. */
+    old_surface=test_frontend->logical_surface;
+    revision=test_frontend->text_revision;saved_configuration=test_frontend->text_configuration;
+    previous=channel.console.video.pixels;
+    CHECK(!publication(&channel,CONSOLE_IO_PUBLICATION_BEGIN));
+    CHECK(WriteConsoleOutputCharacterW(channel.console.output,L"Y",1,(COORD){0,0},&count));
+    text[0]='Y';style->font_height=16;
+    CHECK(!run16_console_video_begin(&channel.console.video,5,&description));
+    CHECK(!video_data(&channel,5,0,payload,bytes));
+    test_frontend->text_revision=UINT32_MAX;
+    CHECK(publication(&channel,CONSOLE_IO_PUBLICATION_END)==ERROR_ARITHMETIC_OVERFLOW);
+    CHECK(channel.publication_surface && !channel.publication_terminal_error);
+    CHECK(test_frontend->logical_surface==old_surface && test_frontend->video==&channel.committed_video);
+    CHECK(channel.committed_video.pixels==previous && channel.committed_video.published_serial==4);
+    CHECK(!memcmp(&test_frontend->text_configuration,&saved_configuration,sizeof(saved_configuration)));
+    CHECK(ReadConsoleOutputCharacterW(old_surface,&cell,1,(COORD){0,0},&count) && cell==L'Z');
+    CHECK(!publication(&channel,CONSOLE_IO_PUBLICATION_ABORT));
+    CHECK(test_frontend->video==&channel.console.video && channel.console.video.pixels==previous);
+    CHECK(channel.console.video.serial==5 && channel.console.video.published_serial==4);
+    test_frontend->text_revision=revision;
+    CHECK(!publication(&channel,CONSOLE_IO_PUBLICATION_BEGIN));
+    CHECK(WriteConsoleOutputCharacterW(channel.console.output,L"Y",1,(COORD){0,0},&count));
+    CHECK(!run16_console_video_begin(&channel.console.video,6,&description));
+    CHECK(!video_data(&channel,6,0,payload,bytes));
+    CHECK(!publication(&channel,CONSOLE_IO_PUBLICATION_END));
+    CHECK(!channel.publication_surface && !channel.committed_video.pixels && !channel.publication_terminal_error);
+    CHECK(test_frontend->video==&channel.console.video && channel.console.video.published_serial==6);
+    CHECK(ReadConsoleOutputCharacterW(channel.console.output,&cell,1,(COORD){0,0},&count) && cell==L'Y');
+    /* A committed geometry conversion must detach the old frame even if
+     * canonical projection fails; the transport must not silently continue. */
+    fail_projection_target=test_frontend->console_output;
+    CHECK(prepare_text(&channel,(COORD){80,28})==ERROR_WRITE_FAULT);
+    CHECK(!fail_projection_target && channel.publication_terminal_error==ERROR_WRITE_FAULT);
+    CHECK(!test_frontend->video && !test_frontend->video_serial);
+    CHECK(GetConsoleScreenBufferInfo(test_frontend->logical_surface,&after));
+    CHECK(after.dwSize.X==80 && after.dwSize.Y==28);
+    CHECK(ReadConsoleOutputCharacterW(test_frontend->logical_surface,&cell,1,(COORD){0,0},&count) && cell==L'Y');
+    fprintf(private_report ? private_report : stdout,
+        "PASS actual batch revision failure styled=%u: grid/frame/font commit remains coherent, abort preserves high-water and subsequent batch succeeds\n",(unsigned)styled);
+    leave(&channel);
+    CHECK(!test_bind(test_frontend,&channel,FALSE,FALSE));
+    run16_native_frontend_forget(test_frontend,&channel);
+    run16_console_video_dispose(&channel.console.video);
+    CloseHandle(channel.console.output);HeapFree(GetProcessHeap(),0,payload);
+    fprintf(private_report ? private_report : stdout,
+        "PASS actual standalone import failure styled=%u: allocation/revision failures preserve frame/grid/cursor/font, serial high-water and next success\n",(unsigned)styled);
+}
+#endif
+static void test_logical_publication(BOOL native)
 {
     run16_console_channel channel={0};
     HANDLE committed,staging,canonical,input;
@@ -713,9 +992,14 @@ static void test_logical_publication(void)
     BYTE *payload;
     DWORD count,bytes;WCHAR cell;
     SMALL_RECT window;
-    channel.root=test_frontend;channel.native=TRUE;
-    CHECK(!run16_native_frontend_bind(test_frontend,&channel,TRUE,FALSE));
+    channel.root=test_frontend;
+    CHECK(!test_bind(test_frontend,&channel,TRUE,FALSE));
     CHECK(!run16_native_frontend_console(test_frontend,&input,&canonical));
+    /* Each operation-mode run starts with the same physical canvas. The
+     * previous run deliberately finishes with a smaller clipped canvas. */
+    CHECK(SetConsoleCursorPosition(canonical,(COORD){0,0}));
+    CHECK(SetConsoleScreenBufferSize(canonical,(COORD){120,60}));
+    CHECK(SetConsoleWindowInfo(canonical,TRUE,&(SMALL_RECT){0,0,79,29}));
     CHECK(!run16_native_frontend_logical_console(test_frontend,&channel.console.output));
     channel.console.logical_window=run16_native_frontend_text_region(test_frontend);
     CHECK(!enter(&channel));
@@ -802,7 +1086,7 @@ static void test_logical_publication(void)
     CHECK(run16_console_video_begin(&channel.console.video,2,&description)==ERROR_INVALID_DATA);
     CHECK(ReadConsoleOutputCharacterW(channel.console.output,&cell,1,(COORD){0,2},&count) && cell==L'C');
     leave(&channel);
-    CHECK(!run16_native_frontend_bind(test_frontend,&channel,FALSE,FALSE));
+    CHECK(!test_bind(test_frontend,&channel,FALSE,FALSE));
     CHECK(enter(&channel)==ERROR_NOT_READY);
     run16_native_frontend_forget(test_frontend,&channel);
     run16_console_video_dispose(&channel.console.video);HeapFree(GetProcessHeap(),0,payload);
@@ -869,11 +1153,23 @@ int main(int argc,char **argv)
     read_entered=CreateEventW(NULL,TRUE,FALSE,NULL);CHECK(read_entered);
     CHECK(GetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE),&original_cursor));
     CHECK(!run16_native_frontend_create(&test_frontend));
-    test_logical_publication();
+    test_prepare_operation();
+    test_standalone_text(FALSE,FALSE);
+    test_standalone_text(FALSE,TRUE);
+    test_standalone_text(TRUE,FALSE);
+    test_standalone_text(TRUE,TRUE);
+#ifdef NTCON_FRAME_FAILURE_TEST
+    test_failed_text_commit(FALSE);
+    test_failed_text_commit(TRUE);
+    test_projection_failure_pipe(FALSE);
+    test_projection_failure_pipe(TRUE);
+#endif
+    test_logical_publication(FALSE);
+    test_logical_publication(TRUE);
     /* The publication fixture deliberately leaves an offset viewport. Start
      * the older channel marker fixture after the real DOS conversion edge. */
-    CHECK(!run16_native_frontend_bind(test_frontend,&before,TRUE,TRUE));
-    CHECK(!run16_native_frontend_bind(test_frontend,&before,FALSE,TRUE));
+    CHECK(!test_bind(test_frontend,&before,TRUE,TRUE));
+    CHECK(!test_bind(test_frontend,&before,FALSE,TRUE));
     {
         HANDLE logical;WCHAR cell;DWORD copied;
         CHECK(!run16_native_frontend_logical_console(test_frontend,&logical));
@@ -894,7 +1190,7 @@ int main(int argc,char **argv)
         CHECK(DuplicateHandle(GetCurrentProcess(),GetCurrentProcess(),GetCurrentProcess(),
             &worker,SYNCHRONIZE,FALSE,0));
         CHECK(!run16_console_channel_start_request(expected_generation,worker,test_frontend,&channel));
-        CHECK(!run16_native_frontend_bind(test_frontend,channel,TRUE,TRUE));
+        CHECK(!test_bind(test_frontend,channel,TRUE,TRUE));
         request.version=CONSOLE_IO_VERSION;request.generation=expected_generation;
         request.sequence=1;request.operation=CONSOLE_IO_BARRIER;
         peer_io(TRUE,&request,(DWORD)offsetof(console_io_request,data));
@@ -928,6 +1224,7 @@ int main(int argc,char **argv)
     /* Warm up lazy runtime/Console resources before counting owned handles. */
     for(mode=0;mode<6;++mode) run_case(mode,0);
     run_case(6,0);
+    run_case(6,1);
     if(argc==2 && !strcmp(argv[1],"--handle-audit")) {
         HANDLE modules;MODULEENTRY32W module={sizeof(module)};
         audit_handles("before-idle");Sleep(3000);audit_handles("after-idle-no-channels");
@@ -953,16 +1250,16 @@ int main(int argc,char **argv)
             test.cancel=CreateEventW(NULL,TRUE,FALSE,NULL);
             test.started=CreateEventW(NULL,TRUE,FALSE,NULL);
             CHECK(test.cancel && test.started);
-            CHECK(!run16_native_frontend_bind(test_frontend,&before,TRUE,(iteration&2)!=0));
+            CHECK(!test_bind(test_frontend,&before,TRUE,(iteration&2)!=0));
             waiter=CreateThread(NULL,0,wait_for_binding,&test,0,NULL);
             CHECK(waiter && WaitForSingleObject(test.started,1000)==WAIT_OBJECT_0);
             CHECK(SetEvent(test.cancel));
             CHECK(WaitForSingleObject(waiter,1000)==WAIT_OBJECT_0);
             CHECK(test.result==ERROR_OPERATION_ABORTED);
-            CHECK(!run16_native_frontend_bind(test_frontend,&before,FALSE,FALSE));
+            CHECK(!test_bind(test_frontend,&before,FALSE,FALSE));
             /* Cancellation never reserves or retires either channel kind. */
-            CHECK(!run16_native_frontend_bind(test_frontend,&round,TRUE,TRUE));
-            CHECK(!run16_native_frontend_bind(test_frontend,&round,FALSE,TRUE));
+            CHECK(!test_bind(test_frontend,&round,TRUE,TRUE));
+            CHECK(!test_bind(test_frontend,&round,FALSE,TRUE));
             CloseHandle(waiter);CloseHandle(test.cancel);CloseHandle(test.started);
         }
     }
@@ -976,7 +1273,7 @@ int main(int argc,char **argv)
             test.cancel=CreateEventW(NULL,TRUE,FALSE,NULL);
             test.started=CreateEventW(NULL,TRUE,FALSE,NULL);
             CHECK(test.cancel && test.started);
-            CHECK(!run16_native_frontend_bind(test_frontend,&previous,TRUE,(pattern&2)!=0));
+            CHECK(!test_bind(test_frontend,&previous,TRUE,(pattern&2)!=0));
             CHECK(!run16_native_frontend_enter(test_frontend,&previous));
             queued.EventType=KEY_EVENT;queued.Event.KeyEvent.wVirtualKeyCode='Q';
             CHECK(!run16_native_frontend_prepend(test_frontend,&queued,1));
@@ -994,24 +1291,24 @@ int main(int argc,char **argv)
             CHECK(!run16_native_frontend_read(test_frontend,TRUE,&received,1,&read) && read==1);
             run16_native_frontend_leave(test_frontend);
             CHECK(run16_native_frontend_enter(test_frontend,&incoming)==ERROR_NOT_READY);
-            CHECK(run16_native_frontend_bind(test_frontend,&unrelated,TRUE,FALSE)==ERROR_BUSY);
+            CHECK(test_bind(test_frontend,&unrelated,TRUE,FALSE)==ERROR_BUSY);
             run16_native_frontend_forget(test_frontend,&unrelated);
             CHECK(!run16_native_frontend_enter(test_frontend,&previous));
             run16_native_frontend_leave(test_frontend);
-            CHECK(!run16_native_frontend_bind(test_frontend,&previous,FALSE,FALSE));
+            CHECK(!test_bind(test_frontend,&previous,FALSE,FALSE));
             {
                 DWORD wait=WaitForSingleObject(waiter,1000);
                 if(wait!=WAIT_OBJECT_0 || test.result)fprintf(private_report ? private_report : stderr,
                     "pending release wait=%lu result=%lu pattern=%u\n",wait,test.result,pattern);
                 CHECK(wait==WAIT_OBJECT_0 && !test.result);
             }
-            CHECK(!run16_native_frontend_bind(test_frontend,&incoming,TRUE,test.prepare_vga));
+            CHECK(!test_bind(test_frontend,&incoming,TRUE,test.prepare_vga));
             CHECK(!run16_native_frontend_enter(test_frontend,&incoming));
             CHECK(!run16_native_frontend_read(test_frontend,FALSE,&received,1,&read) &&
                 read==1 && received.Event.KeyEvent.wVirtualKeyCode=='Q');
             run16_native_frontend_leave(test_frontend);
             CHECK(run16_native_frontend_enter(test_frontend,&previous)==ERROR_NOT_READY);
-            CHECK(!run16_native_frontend_bind(test_frontend,&incoming,FALSE,FALSE));
+            CHECK(!test_bind(test_frontend,&incoming,FALSE,FALSE));
             CloseHandle(waiter);CloseHandle(test.cancel);CloseHandle(test.started);
         }
         fprintf(private_report ? private_report : stdout,"PASS four operation-pair handoffs: pending registration, old-owner barrier, ordered input, stale isolation and release notification\n");
@@ -1021,7 +1318,7 @@ int main(int argc,char **argv)
         for(cancel_request=0;cancel_request<3;++cancel_request) {
             unsigned old_owner=0,first=0,second=0;
             binding_wait_case waiting[2]={{0}};HANDLE threads[2];unsigned index;
-            CHECK(!run16_native_frontend_bind(test_frontend,&old_owner,TRUE,FALSE));
+            CHECK(!test_bind(test_frontend,&old_owner,TRUE,FALSE));
             for(index=0;index<2;++index) {
                 waiting[index].owner=index ? (const void *)&second : (const void *)&first;
                 waiting[index].prepare_vga=index!=0;
@@ -1033,7 +1330,7 @@ int main(int argc,char **argv)
                 CHECK(WaitForSingleObject(threads[index],0)==WAIT_TIMEOUT);
             }
             /* Repeating an acquisition cannot create a second pending node. */
-            CHECK(run16_native_frontend_bind(test_frontend,&first,TRUE,FALSE)==ERROR_BUSY);
+            CHECK(test_bind(test_frontend,&first,TRUE,FALSE)==ERROR_BUSY);
             if(cancel_request) {
                 unsigned cancelled=cancel_request-1;
                 CHECK(SetEvent(waiting[cancelled].cancel));
@@ -1044,19 +1341,19 @@ int main(int argc,char **argv)
                 CHECK(!run16_native_frontend_enter(test_frontend,&old_owner));
                 run16_native_frontend_leave(test_frontend);
             }
-            CHECK(!run16_native_frontend_bind(test_frontend,&old_owner,FALSE,FALSE));
+            CHECK(!test_bind(test_frontend,&old_owner,FALSE,FALSE));
             CHECK(run16_native_frontend_park(test_frontend)==ERROR_BUSY);
             if(cancel_request!=1) {
                 CHECK(WaitForSingleObject(threads[0],1000)==WAIT_OBJECT_0 && !waiting[0].result);
                 if(!cancel_request)CHECK(WaitForSingleObject(threads[1],0)==WAIT_TIMEOUT);
-                CHECK(!run16_native_frontend_bind(test_frontend,&first,TRUE,FALSE));
+                CHECK(!test_bind(test_frontend,&first,TRUE,FALSE));
                 if(!cancel_request)CHECK(WaitForSingleObject(threads[1],0)==WAIT_TIMEOUT);
-                CHECK(!run16_native_frontend_bind(test_frontend,&first,FALSE,FALSE));
+                CHECK(!test_bind(test_frontend,&first,FALSE,FALSE));
             }
             if(cancel_request!=2) {
                 CHECK(WaitForSingleObject(threads[1],1000)==WAIT_OBJECT_0 && !waiting[1].result);
-                CHECK(!run16_native_frontend_bind(test_frontend,&second,TRUE,TRUE));
-                CHECK(!run16_native_frontend_bind(test_frontend,&second,FALSE,FALSE));
+                CHECK(!test_bind(test_frontend,&second,TRUE,TRUE));
+                CHECK(!test_bind(test_frontend,&second,FALSE,FALSE));
             }
             CHECK(!run16_native_frontend_park(test_frontend));
             for(index=0;index<2;++index) {
@@ -1083,7 +1380,7 @@ int main(int argc,char **argv)
                     NULL,NULL,&startup,&child));
                 test.peer=child.hProcess;
             }
-            CHECK(!run16_native_frontend_bind(test_frontend,&old_owner,TRUE,FALSE));
+            CHECK(!test_bind(test_frontend,&old_owner,TRUE,FALSE));
             waiter=CreateThread(NULL,0,wait_for_binding,&test,0,NULL);
             CHECK(waiter && WaitForSingleObject(test.started,1000)==WAIT_OBJECT_0);
             if(failure)CHECK(TerminateProcess(child.hProcess,123));
@@ -1091,9 +1388,9 @@ int main(int argc,char **argv)
             CHECK(test.result==(DWORD)(failure ? ERROR_BROKEN_PIPE : ERROR_TIMEOUT));
             CHECK(!run16_native_frontend_enter(test_frontend,&old_owner));
             run16_native_frontend_leave(test_frontend);
-            CHECK(!run16_native_frontend_bind(test_frontend,&old_owner,FALSE,FALSE));
-            CHECK(!run16_native_frontend_bind(test_frontend,&next,TRUE,FALSE));
-            CHECK(!run16_native_frontend_bind(test_frontend,&next,FALSE,FALSE));
+            CHECK(!test_bind(test_frontend,&old_owner,FALSE,FALSE));
+            CHECK(!test_bind(test_frontend,&next,TRUE,FALSE));
+            CHECK(!test_bind(test_frontend,&next,FALSE,FALSE));
             CloseHandle(waiter);CloseHandle(test.cancel);CloseHandle(test.started);
             if(child.hProcess){CloseHandle(child.hThread);CloseHandle(child.hProcess);}
         }
@@ -1109,16 +1406,16 @@ int main(int argc,char **argv)
         CHECK(SetConsoleMode(input,worker_mode));
         CHECK(!run16_native_frontend_park(test_frontend));
         CHECK(GetConsoleMode(input,&observed) && observed==caller_mode);
-        CHECK(!run16_native_frontend_bind(test_frontend,&round,TRUE,TRUE));
+        CHECK(!test_bind(test_frontend,&round,TRUE,TRUE));
         CHECK(GetConsoleMode(input,&observed) && observed==worker_mode);
-        CHECK(!run16_native_frontend_bind(test_frontend,&round,FALSE,TRUE));
+        CHECK(!test_bind(test_frontend,&round,FALSE,TRUE));
         CHECK(!run16_native_frontend_park(test_frontend));
         CHECK(GetConsoleMode(input,&observed) && observed==caller_mode);
     }
     {
         ULONGLONG began=GetTickCount64();
         run16_native_frontend_cancel(test_frontend);
-        CHECK(run16_native_frontend_bind(test_frontend,&before,TRUE,TRUE)==ERROR_OPERATION_ABORTED);
+        CHECK(test_bind(test_frontend,&before,TRUE,TRUE)==ERROR_OPERATION_ABORTED);
         CHECK(GetTickCount64()-began<1000);
     }
     /* Ordinary teardown keeps the most recent shared Console geometry and
