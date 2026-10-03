@@ -35,18 +35,18 @@ The existing `frontend-client.lib` now has this launcher source owner:
 `bootstrap_client.c` and `native_request_client.c`. Its private API declarations
 remain here; cross-component protocols and the copied packet codec belong to
 `common`. No launcher-owned pipe transfer wrapper remains.
-NTKVM reuses common transport/codec without linking target creation.
+NTCON reuses common transport/codec without linking target creation.
 `native_launch.c` is the separately linked restricted resource/CreateProcess
 primitive used by run16 GUI creation and NTVWM native text creation. It owns
 no worker state, Console session, execution policy or frontend renderer.
 
-`frontend_scope.c` coordinates the independent `ntkvm.exe` frontend only
+`frontend_scope.c` coordinates the independent `ntcon.exe` frontend only
 through NTSRV. It requests an authenticated character-session association,
 submits native execution and waits for the broker's direct result plus final
 I/O acknowledgement. Worker creation and Console takeover/return coordination
 are NTSRV operations; no launcher/frontend or launcher/worker pipe remains.
 It owns no renderer
-or frontend notification pump. `ntkvm-exe` owns visible Console, Window,
+or frontend notification pump. `ntcon-exe` owns visible Console, Window,
 display state, direct worker I/O and input routing. NTVWM owns its ordinary
 hidden Console and native targets. Borrowed-Console native completion does not
 end worker residency. A self-owned Console can close on exit only after NTSRV
@@ -57,7 +57,7 @@ GUI segments do not inherit character-frontend authority; character segments
 can share their authenticated frontend without sharing completion ownership.
 
 The ntsrv client library owns the service protocol and bindings to original
-BaseSrv records. NTKVM reports its attached root Console identity through its
+BaseSrv records. NTCON reports its attached root Console identity through its
 authenticated connection; BaseSrv owns matching and resident-worker reuse.
 The launcher does not register an outer Console member snapshot. Native
 handles remain local or explicitly authenticated transferred capabilities. No

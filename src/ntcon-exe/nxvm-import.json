@@ -3,7 +3,7 @@
   "revision": "3186afcd7b743e9797364c6a762eccd3b5576ca1",
   "license": "MIT; Copyright (c) 2026 Neko; see lib/LICENSE.nxvm",
   "licenseSha256": "BF37952D329B48CEE37B42D90B96D30DC049940902E42D69338A19CF72003543",
-  "destination": "src/ntkvm-exe",
+  "destination": "src/ntcon-exe",
   "profile": "MSVC Win32/x86 /MT /std:c11; frontend-only",
   "files": [
     {

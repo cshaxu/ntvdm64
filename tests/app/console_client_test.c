@@ -5,7 +5,7 @@
 #include "ntvdm-exe/win32/console_client.h"
 #include "ntvdm-exe/win32/console_text.h"
 #include "ntvdm-exe/softpc/mvdm_softpc_mouse_bridge.h"
-#include "ntkvm-exe/console_frontend.h"
+#include "ntcon-exe/console_frontend.h"
 static BOOL native_write_cells(HANDLE output,const CHAR_INFO *buffer,COORD size,
     COORD origin,PSMALL_RECT region) { return WriteConsoleOutputW(output,buffer,size,origin,region); }
 static BOOL native_read_cells(HANDLE output,PCHAR_INFO buffer,COORD size,

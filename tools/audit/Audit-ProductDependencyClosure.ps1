@@ -51,7 +51,7 @@ function Get-Closure($Edges,[string]$Target) {
 }
 $formal=Read-Graph $BuildRoot
 $wow=Read-Graph $WowBuildRoot
-$closures=@(foreach($target in 'run16.exe','ntsrv.exe','ntkvm.exe','ntmon.exe','ntvdm.exe','VDMREDIR.dll'){
+$closures=@(foreach($target in 'run16.exe','ntsrv.exe','ntcon.exe','ntmon.exe','ntvdm.exe','VDMREDIR.dll'){
     Get-Closure $formal $target
 })+@(Get-Closure $wow 'wow32.dll')
 $closures | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath (Join-Path $output 'explicit-closure.json')

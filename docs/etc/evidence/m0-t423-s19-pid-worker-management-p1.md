@@ -1,5 +1,10 @@
 # M0 T423 S19 P1 — PID-first worker management
 
+T424 S11 naming normalization: frontend labels/current source links now use NTCON.
+This does not claim the new basename existed in the recorded historical package.
+Exact earlier source, commands and product names remain in Git and sealed build
+evidence; recorded hashes, dates, results and limitations are unchanged.
+
 ## Delivered boundary
 
 The versioned `service.idl` management boundary is protocol 17.  Its public
@@ -30,7 +35,7 @@ All commands used `build/M0-T423/S19/formal-final` and the MSVC x86 toolchain.
 
 ## Deliberate remaining work
 
-This is P1, not S19 closure.  The formal `run16`, `ntvdm`, `ntkvm` and
+This is P1, not S19 closure.  The formal `run16`, `ntvdm`, `ntcon` and
 `VDMREDIR` targets are being rebuilt against protocol 17 before a coherent
 runtime package may replace `O:/winnt`; full DOS/Window/WOW non-regression,
 publication, final governance and owner verification remain S19 exit gates.

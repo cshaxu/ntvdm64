@@ -1,5 +1,10 @@
 # T423 S30 OpenNT DOS return geometry and RPC revision
 
+T424 S11 naming normalization: frontend labels/current source links now use NTCON.
+This does not claim the new basename existed in the recorded historical package.
+Exact earlier source, commands and product names remain in Git and sealed build
+evidence; recorded hashes, dates, results and limitations are unchanged.
+
 ## Source decision
 
 Original `mvdm/softpc.new/host/src/nt_fulsc.c::calcScreenParams` uses the
@@ -8,7 +13,7 @@ exactly one 80-column VGA text mode: 22, 25, 28, 43 or 50 rows. The cutoffs
 are 23, 26, 35 and 46 inclusive. Thus a 30-row native viewport returns to
 DOS as 80x28, not 80x25. S13's retained-last-DOS-mode fallback was a
 project-added policy and is removed. The original MVDM video code remains
-unchanged; NTKVM's host-buffer handoff now makes the same selection. Existing
+unchanged; NTCON's host-buffer handoff now makes the same selection. Existing
 `opennt_console_resize_grid` keeps the original no-reflow, cursor-containing
 row-copy behavior. This is visible-screen preservation, not archival
 scrollback.
@@ -86,7 +91,7 @@ configuration were not modified.
 | `ntsrv.exe` | `207365EB3F620DA3975B3D92D33CB2BF7F3FE1E54F6CE71406042ADF5D4006EF` |
 | `ntvdm.exe` | `3EF7B9764BBC6BBCCED9D51AB4DBB92E5E67B69E07F5D294E4682D609962B9D0` |
 | `ntw32.exe` | `226EA48B181018446F91E0481D86C08DD55CFBB76CC6D3C792960CAFEB360CFE` |
-| `ntkvm.exe` | `DF1A3BEF1D9720CC5E3CB9802BD0274E87268D7AA93FB29453C893E72ACFB8FF` |
+| `ntcon.exe` | `DF1A3BEF1D9720CC5E3CB9802BD0274E87268D7AA93FB29453C893E72ACFB8FF` |
 | `WOW32.DLL` | `0D2AE60264B03A8040D98AA86BCF80455127064084E2217D318D5E13F90FA94A` |
 | `VDMREDIR.DLL` | `3F266DB9BC52F937F1786D89CFBE879E37E0B2077E67D731A05C555EC7CDAA5F` |
 

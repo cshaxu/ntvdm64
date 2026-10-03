@@ -26,7 +26,7 @@ static void collect_children(DWORD parent, child_watch watches[8], unsigned *cou
             (_wcsicmp(entry.szExeFile, L"ntvdm.exe") &&
              _wcsicmp(entry.szExeFile, L"ntsrv.exe") &&
              _wcsicmp(entry.szExeFile, L"ntvwm.exe") &&
-             _wcsicmp(entry.szExeFile, L"ntkvm.exe"))) continue;
+             _wcsicmp(entry.szExeFile, L"ntcon.exe"))) continue;
         for (index = 0; index < *count; ++index)
             if (watches[index].pid == entry.th32ProcessID) break;
         if (index < *count || *count == 8) continue;
@@ -231,7 +231,7 @@ int wmain(int argc, WCHAR **argv)
         for(index=0;index<count;++index)
             if(!_wcsicmp(watches[index].name,L"ntvdm.exe") ||
                 !_wcsicmp(watches[index].name,L"ntvwm.exe") ||
-                !_wcsicmp(watches[index].name,L"ntkvm.exe"))
+                !_wcsicmp(watches[index].name,L"ntcon.exe"))
                 exits[exit_count++]=watches[index].process;
         teardown=exit_count ? WaitForMultipleObjects(exit_count,exits,TRUE,5000) : WAIT_FAILED;
         fprintf(report,"broker-owned-teardown-wait=%lu participants=%lu\n",teardown,exit_count);
@@ -249,7 +249,7 @@ int wmain(int argc, WCHAR **argv)
             if (state != WAIT_OBJECT_0) ++live_workers;
             if (wait == WAIT_TIMEOUT && !frontier.found) timeout_threads(report, &watches[index]);
         }
-        if (!_wcsicmp(watches[index].name, L"ntkvm.exe")) {
+        if (!_wcsicmp(watches[index].name, L"ntcon.exe")) {
             ++frontends;
             if (state != WAIT_OBJECT_0) ++live_frontends;
             if (state != WAIT_OBJECT_0) timeout_threads(report, &watches[index]);

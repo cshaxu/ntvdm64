@@ -1,5 +1,10 @@
 # M0 T423 S15 — mouse ownership and native position
 
+T424 S11 naming normalization: frontend labels/current source links now use NTCON.
+This does not claim the new basename existed in the recorded historical package.
+Exact earlier source, commands and product names remain in Git and sealed build
+evidence; recorded hashes, dates, results and limitations are unchanged.
+
 ## Scope and cause
 
 S14 was accepted and closed before S15 admission. S15 addresses two observed
@@ -9,15 +14,15 @@ shared KVM libraries, or the DOS mouse movement contract.
 1. Original `cmdexec.c` blocks the DOS event thread during native execution;
    `nt_event.c` detaches the DOS mouse menu; `nt_mouse.c` calls
    `ClipCursor(NULL)`. The compatibility RPC previously forwarded this
-   directly to the host even while NTKVM Window owned mouse capture. On the
+   directly to the host even while NTCON Window owned mouse capture. On the
    next input, the Window library observed that its clip had disappeared and
-   released capture. NTKVM now arbitrates that request: while its Window owns
+   released capture. NTCON now arbitrates that request: while its Window owns
    the clip, a DOS clip mutation is acknowledged without touching the host
    clip. Console mode retains the original forwarded request. Deliberate
    capture release remains a separate Window action.
 2. NTW32 initialized its text square near the screen center and consumed only
    relative motion. Under absolute-position RDP input, the physical host
-   pointer could reach the capture edge before the square did. NTKVM now
+   pointer could reach the capture edge before the square did. NTCON now
    snapshots pointer and clip coordinates with each Window input event and
    converts native movement to absolute content pixels. The common pointer
    message adds action `CONSOLE_MOUSE_POSITION` (interface version 20); NTW32

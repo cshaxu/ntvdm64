@@ -10,11 +10,11 @@ $ErrorActionPreference='Stop'
 if($LogPrefix -notmatch '^[a-z0-9-]+$'){throw 'Invalid log prefix'}
 $PackageRoot=(Resolve-Path -LiteralPath $PackageRoot).Path
 $Observer=(Resolve-Path -LiteralPath $Observer).Path
-$paths=@('run16.exe','ntkvm.exe','ntvdm.exe','ntsrv.exe') |
+$paths=@('run16.exe','ntcon.exe','ntvdm.exe','ntsrv.exe') |
     ForEach-Object {Join-Path $PackageRoot $_}
 if($ProcessPackageRoot){
     $ProcessPackageRoot=(Resolve-Path -LiteralPath $ProcessPackageRoot).Path
-    foreach($name in @('run16.exe','ntkvm.exe','ntvdm.exe','ntsrv.exe')){
+    foreach($name in @('run16.exe','ntcon.exe','ntvdm.exe','ntsrv.exe')){
         $physical=Join-Path $ProcessPackageRoot $name
         if((Get-FileHash $physical).Hash -ne (Get-FileHash (Join-Path $PackageRoot $name)).Hash){
             throw "Process package differs from launch package: $name"

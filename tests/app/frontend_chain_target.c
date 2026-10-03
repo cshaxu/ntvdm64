@@ -113,7 +113,7 @@ static BOOL topology(PCWSTR report, unsigned stage, BOOL continuous)
     if (!GetModuleFileNameW(NULL, image, ARRAYSIZE(image))) return FALSE;
     slash = wcsrchr(image, L'\\'); if (!slash) return FALSE; *slash = 0;
     slash = wcsrchr(image, L'\\'); if (!slash) return FALSE;
-    wcscpy_s(slash+1, ARRAYSIZE(image)-(size_t)(slash+1-image), L"ntkvm.exe");
+    wcscpy_s(slash+1, ARRAYSIZE(image)-(size_t)(slash+1-image), L"ntcon.exe");
     file = CreateFileW(image, 0, FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
         NULL, OPEN_EXISTING, 0, NULL);
     if (file == INVALID_HANDLE_VALUE) return FALSE;
@@ -122,7 +122,7 @@ static BOOL topology(PCWSTR report, unsigned stage, BOOL continuous)
     snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
     if (snapshot == INVALID_HANDLE_VALUE) return FALSE;
     if (Process32FirstW(snapshot, &entry)) do {
-        if (!_wcsicmp(entry.szExeFile, L"ntkvm.exe")) {
+        if (!_wcsicmp(entry.szExeFile, L"ntcon.exe")) {
             HANDLE process = OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION | SYNCHRONIZE,
                 FALSE, entry.th32ProcessID);
             if (process) {

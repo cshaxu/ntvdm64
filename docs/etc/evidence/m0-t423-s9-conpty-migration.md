@@ -1,5 +1,10 @@
 # ConPTY migration boundary ledger
 
+T424 S11 naming normalization: frontend labels/current source links now use NTCON.
+This does not claim the new basename existed in the recorded historical package.
+Exact earlier source, commands and product names remain in Git and sealed build
+evidence; recorded hashes, dates, results and limitations are unchanged.
+
 ## S9 P5 coherent publication
 
 Production delivery: 3b40345f8, pushed to main. S9 bounded closure retains
@@ -18,7 +23,7 @@ the published files. Both formal x86 graphs report no pending build edges.
 | run16.exe | 50F68E7A31B03963DC7FF690BA5CDCA516F0974B85266D4872A515549643E8E3 |
 | ntsrv.exe | 6A484DF11EB736C43E0C86CDACE298B38DE66D4F8200D367D0B5DD8CAE3F1971 |
 | ntvdm.exe | 15D90CD94C6BF464B9094822E408D43F5A72337207BA0917241D2D32C84BB666 |
-| ntkvm.exe | 271064978FFD6738C481E4C942E89235310497588E76D239308520D166C175F1 |
+| ntcon.exe | 271064978FFD6738C481E4C942E89235310497588E76D239308520D166C175F1 |
 | ntmon.exe | 81DD06DC176CD6709E4DFAC9EB77B9B952F0AD3A4DA07E89B11CC7DF5A2B9A20 |
 | VDMREDIR.dll | 294E410688FEB0DF48EA39549F7F22F49E473206B0015D5889E32A37E7F082CC |
 | wow32.dll | 0D2AE60264B03A8040D98AA86BCF80455127064084E2217D318D5E13F90FA94A |
@@ -48,7 +53,7 @@ move are included. Strict horizontal-wheel tests remain unchanged and red;
 the explicit TODO/owner disposition permits delivery, not a blanket green
 suite. This production P does not close the overall T.
 
-Final staged C/H accounting versus S8 737ae267e: ntkvm +1,562/-889, net +673
+Final staged C/H accounting versus S8 737ae267e: ntcon +1,562/-889, net +673
 authored lines, including the seven new files and removal of the 330-line
 helper pair. The 80,024-byte pinned external archive remains separately
 counted. mvdm has +6 host_cpu.h lines and +1 README line; opennt-host has
@@ -89,7 +94,7 @@ production lifetime policy. Earlier unwaived entries below are chronology.
 Production frontend review confirms that main.c accepts only the authenticated
 session entry: its AttachConsole binds the creator's visible Console, not a
 hidden helper. Native target creation goes through the ConPTY launch binding.
-No production caller invokes ntkvm_conpty_release; existing release callers
+No production caller invokes ntcon_conpty_release; existing release callers
 are resource/lifecycle/diagnostic fixtures. Close is owned by failed initial
 setup or final frontend teardown, not an individual target's completion.
 ReleasePseudoConsole is still resolved as a resource-layer prerequisite;
@@ -189,7 +194,7 @@ GUI sync/async refresh, wheel disposition and final publication remain open.
 ## Final-graph incremental-build review
 
 Ninja's dry-run initially requested only run16.exe relinking. `-d explain`
-identified ntkvm.exe's newer timestamp, not a changed launcher object or
+identified ntcon.exe's newer timestamp, not a changed launcher object or
 archive. The generator had declared the runtime EXE using a single `|`;
 the actual linker command does not consume it. Changed that one dependency
 to order-only `||` in the generator and the existing formal graph. Real
@@ -198,7 +203,7 @@ No production C source or binary changed in this correction.
 
 verify-frontend-link-ownership.ps1 now rejects the ordinary dependency as an
 additional negative control, besides its seven source-ownership/leakage
-controls. All controls pass. Formal x86 run16/ntsrv/ntvdm/ntkvm/ntmon/VDMREDIR
+controls. All controls pass. Formal x86 run16/ntsrv/ntvdm/ntcon/ntmon/VDMREDIR
 and the separate WOW32 graph report no work to do. This is dependency/cache
 evidence, not a substitute for runtime tests or a fresh compilation claim.
 
@@ -211,7 +216,7 @@ coherent publication and pushed delivery remain open as well.
 
 ## Shared lifetime review and outer Console refresh
 
-The owner reconfirmed one ntkvm / one retained ConPTY for all native-text
+The owner reconfirmed one ntcon / one retained ConPTY for all native-text
 targets, including native -> DOS -> native. Source review finds only two
 frontend-level backend-close sites: rollback of the first backend/view
 initialization before a target is admitted, and frontend destruction.
@@ -225,7 +230,7 @@ tests/observation/verify-native-root-console.ps1: output (37), input (23),
 shell (0), nested native (23), interactive nested native (inner 37 / outer 23),
 and retained history (19). The reports and Console text are under Logs2.
 Input cases require executed markers, not echoed commands; history requires
-prior shell text and the 80x300 buffer. Formal run16, ntsrv and ntkvm hashes
+prior shell text and the 80x300 buffer. Formal run16, ntsrv and ntcon hashes
 were independently compared with the staged S9 package and match, including
 frontend 27106497. GUI cases are not included in this six-case result.
 
@@ -307,13 +312,13 @@ older acceptance observers and all production binaries remain unchanged.
 
 Logs2 t423-s9-ntmon-r5-console/window pass on frontend 27106497. Both require
 the actual NTVDM Task Monitor title before input and direct exit 0 after F3.
-Window additionally requires CAF creating a visible ntkvm Window and its
+Window additionally requires CAF creating a visible ntcon Window and its
 input-owner/delivered witnesses. This proves real native full-screen text
 startup and function-key consumption across both presentation paths; it does
 not independently prove monitor task deletion, every key or pixel equality.
 
 Earlier r1 was a successful Console observation without final cleanup; its
-exact test-owned retained ntsrv/ntkvm PIDs 30424/27616 were checked and stopped.
+exact test-owned retained ntsrv/ntcon PIDs 30424/27616 were checked and stopped.
 R2 refused that occupied endpoint without launching. R3 used the wrong evidence
 suffix; r4 expected result=pass without the observer's error=0 suffix. Both
 had actual target exit 0 but were failed verifier runs, not acceptance. R5
@@ -329,10 +334,10 @@ All actual callers and member/window fixtures use the reduced interface;
 run16's README now names retained ConPTY ownership rather than hidden helper.
 No externally visible protocol, original mirror or shared library is changed.
 
-Incremental x86 ntkvm/member/window-controller targets compile and link.
+Incremental x86 ntcon/member/window-controller targets compile and link.
 O:/winnt/Logs2/t423-s9-nohelper-members-r1.log proves retained ConPTY after
 verified direct-parent and descendant termination; cancellation is not empty
-membership. New staged ntkvm SHA-256:
+membership. New staged ntcon SHA-256:
 271064978FFD6738C481E4C942E89235310497588E76D239308520D166C175F1.
 Only build/M0-T423/S9/p is updated; O:/winnt remains untouched.
 
@@ -433,7 +438,7 @@ failed for an incorrect object path and omitted launch object; no runtime
 evidence is attributed to those failed attempts.
 
 After horizontal direction correction, the incremental native backend and
-ntkvm.exe targets compile/link successfully. wheel-contract-after-r5.log still
+ntcon.exe targets compile/link successfully. wheel-contract-after-r5.log still
 reports exactly the same three vertical records and zero horizontal records;
 the parity gate exits 77. No binary is copied from this newer formal cache to
 the staged integration package or O:/winnt. Exact step tests must not confuse
@@ -448,7 +453,7 @@ has been requested asynchronously; unrelated acceptance continues.
 
 ## Complete production build and final package identity
 
-The formal x86 product-programs plus ntkvm targets complete after 21 incremental
+The formal x86 product-programs plus ntcon targets complete after 21 incremental
 compile/link edges; the WOW cache reports no work. The complete build relinks
 run16, ntsrv, ntvdm and VDMREDIR with different hashes from the earlier staged
 set. No semantic equivalence is inferred merely from unchanged source diffs.
@@ -461,7 +466,7 @@ Only the build/M0-T423/S9/p candidate is updated, never O:/winnt.
 | run16.exe | 50F68E7A31B03963DC7FF690BA5CDCA516F0974B85266D4872A515549643E8E3 |
 | ntsrv.exe | 6A484DF11EB736C43E0C86CDACE298B38DE66D4F8200D367D0B5DD8CAE3F1971 |
 | ntvdm.exe | 15D90CD94C6BF464B9094822E408D43F5A72337207BA0917241D2D32C84BB666 |
-| ntkvm.exe | 86D679F2C54AA89A73DA4E77B160A0C3F5259C9EBFB1AE82E57170E763E095B1 |
+| ntcon.exe | 86D679F2C54AA89A73DA4E77B160A0C3F5259C9EBFB1AE82E57170E763E095B1 |
 | ntmon.exe | 81DD06DC176CD6709E4DFAC9EB77B9B952F0AD3A4DA07E89B11CC7DF5A2B9A20 |
 | VDMREDIR.dll | 294E410688FEB0DF48EA39549F7F22F49E473206B0015D5889E32A37E7F082CC |
 | wow32.dll | 0D2AE60264B03A8040D98AA86BCF80455127064084E2217D318D5E13F90FA94A |
@@ -472,7 +477,7 @@ uses t423-s9-final-* prefixes; unexecuted or ongoing cases are not passes.
 
 ## Exact-candidate gate reconciliation (86D679F2)
 
-The staged ntkvm SHA-256 remains
+The staged ntcon SHA-256 remains
 86D679F2C54AA89A73DA4E77B160A0C3F5259C9EBFB1AE82E57170E763E095B1.
 These refreshed passes supersede older candidate results only for their stated
 coverage; they do not yet authorize S closure or publication.
@@ -567,13 +572,13 @@ No guest change, helper, new scheduler or relaxed fault assertion is involved.
 
 Candidate SHA-256:
 86D679F2C54AA89A73DA4E77B160A0C3F5259C9EBFB1AE82E57170E763E095B1.
-Formal x86 ntkvm and frontend fixture compile successfully. All five Console
+Formal x86 ntcon and frontend fixture compile successfully. All five Console
 and five Window fault cases pass, including actual native 37, DOS 7 and
 unrelated-session 53 results. Evidence prefixes:
 O:/winnt/Logs2/t423-s9-serialized-fault-r2-* and
 O:/winnt/Logs2/t423-s9-serialized-fault-window-r2-*; corresponding evidence
 directories are under build/M0-T423/S9. Prior F499 candidate is retained in
-serialized-fault-r1/previous-ntkvm.exe. No O:/winnt binary is changed.
+serialized-fault-r1/previous-ntcon.exe. No O:/winnt binary is changed.
 Earlier Console17/Window17/chain/transport passes belong to F499, not this
 newer production change; complete refresh and real-guest concurrency remain.
 
@@ -622,7 +627,7 @@ No production P or O:/winnt publication is claimed.
 The corrected generator regenerated the formal x86 graph/source manifest;
 terminalScreenBinding now records both private binding source hashes once.
 The selected frontend and transport fixtures rebuild successfully, and formal
-ntkvm.exe retains F499388D. The expanded refreshed suite passes all 15 component
+ntcon.exe retains F499388D. The expanded refreshed suite passes all 15 component
 cases and 26 resource cases under
 O:/winnt/Logs2/t423-s9-serialized-transport-r1-*. It includes the real native
 concurrent-output witness, failed-input/close, retained admission and native
@@ -643,7 +648,7 @@ Job or execution scheduler. The native resource remains the same ConPTY.
 
 This is the finite frontend binding for the shared-screen contract registered
 above: the original Console operation remains in console_frontend.c; parser
-serialization and copied-cell import stay in ntkvm. No new wire operation or
+serialization and copied-cell import stay in ntcon. No new wire operation or
 worker-side Windows Console use is introduced. ResizePseudoConsole and reply
 pipe writes are deliberately outside the parser lock because they may require
 the output reader to make progress. A DOS geometry change updates the local
@@ -665,7 +670,7 @@ The production candidate staged only under build/M0-T423/S9/p has SHA-256
 B76885E46A56F9F9272C90764EAE71B9D364C23A853F397334E20F9CAE01B39A.
 It passes missing/native-zero focused cases and all seventeen Window routes:
 O:/winnt/Logs2/t423-s9-serialized-window17-r1-summary.json. The preceding
-staged ntkvm is retained under concurrent-import-r1/previous-ntkvm.exe.
+staged ntcon is retained under concurrent-import-r1/previous-ntcon.exe.
 No O:/winnt binary was changed.
 
 console_frontend_test.c additionally tests callback read/write selection,
@@ -723,11 +728,11 @@ an in-progress CSI with its RGB/bold intact, and checks invalid-top rejection
 without losing the last output. Log:
 O:/winnt/Logs2/t423-s9-handoff-import-r1.log.
 
-The formal x86 ntkvm candidate SHA-256 is
+The formal x86 ntcon candidate SHA-256 is
 EA934A47994C63714384B9263204699619267C49CE2DEAFC3ABE7B394DD8BC5F.
 It was copied only to the existing build/M0-T423/S9/p staging package (R:/).
-The preceding staged ntkvm is preserved in
-build/M0-T423/S9/handoff-import-r1/previous-ntkvm.exe. O:/winnt publication
+The preceding staged ntcon is preserved in
+build/M0-T423/S9/handoff-import-r1/previous-ntcon.exe. O:/winnt publication
 files are untouched. Read-only process inspection confirmed no staging
 process was running before replacement.
 
@@ -766,7 +771,7 @@ screen.c's original resize/history-pop conversion and get-cell representation.
 The source archive, original function bodies and four shared KVM components
 remain byte-identical. This is explicitly an extension using libvterm's private
 layout, not a claim of an entirely unextended upstream runtime. It belongs only
-to ntkvm and has no guest, launcher, worker, IPC or second-renderer ABI.
+to ntcon and has no guest, launcher, worker, IPC or second-renderer ABI.
 
 The added ABI takes copied VTermScreenCell values, exact screen dimensions and
 a checked local cursor. It replaces only the active screen's cells and current
@@ -796,7 +801,7 @@ wide cells and invalid-input non-mutation. The focused verifier requires the
 exact 28-check success marker. This is a unit boundary test, not DOS handoff.
 
 The formal x86 graph was regenerated in the existing
-build/M0-T423/S1/restart-formal-x86 cache and ntkvm.exe compiled/linked with
+build/M0-T423/S1/restart-formal-x86 cache and ntcon.exe compiled/linked with
 the same screen translation-unit selection. No O:/winnt file was replaced.
 The frontend handoff caller is NOT wired to the new entrypoint yet: it must
 first supply the correct shared-screen/history update without erasing native
@@ -806,7 +811,7 @@ production P, Window17 pass, or S9 closure.
 
 ## Live Console-seed shortcut audit
 
-Question: can the existing fresh-only ntkvm_terminal_seed_console be reused
+Question: can the existing fresh-only ntcon_terminal_seed_console be reused
 for DOS-to-native handoff on the retained parser? The checked-in
 tests/observation/native_terminal_test.c --live-seed-audit now exercises
 non-default RGB pen, disabled wrapping, saved cursor, repeated history import,
@@ -879,7 +884,7 @@ Next implementation analysis must retain the parser's native mode/saved-cursor
 state while reflecting actual DOS screen writes; arbitrary row offsets or
 resetting the parser at each handoff are not established by these probes.
 
-Current candidate ntkvm SHA-256 remains
+Current candidate ntcon SHA-256 remains
 41E7296AB5F1757CDB5ABB1D417BA1414EFF26B729DD187567767A8667CEDC23.
 Verify-CommandExitStatus.ps1 with OrdinaryFrontend, private desktop, package R:/
 and physical build/M0-T423/S9/p now passes all 17 Console cases:
@@ -897,7 +902,7 @@ The current formal graph passes verify-frontend-link-ownership.ps1 with
 BuildRoot=build/M0-T423/S1/restart-formal-x86, including all seven deliberately
 wrong link controls. Source review traces native CUI classification in
 run16-exe/main.c through frontend_scope and the authenticated native request
-to run16_native_frontend_launch, its single backend, ntkvm_conpty_launch and
+to run16_native_frontend_launch, its single backend, ntcon_conpty_launch and
 PROC_THREAD_ATTRIBUTE_PSEUDOCONSOLE. The in-process service entry reaches the
 same frontend launch method. File/pipe redirection preserves its explicit
 standard handles; it does not choose a second native launch backend. GUI
@@ -919,7 +924,7 @@ Read-only SHA-256 inspection of O:/winnt found the exact live set below:
 | run16.exe | 9003161B3011270CFD6BF0C9371416E3621C1047112D5A254FBE935C62AD38FD |
 | ntsrv.exe | FAEE345492997C3CC4CA5C78DF20DD8337E5857B6EEFE8D9DBD0B4E4504C1F49 |
 | ntvdm.exe | 4AC3870B8E3E0EDE7CA28A136A9F16E9DF1F4400D05907C988F22B049647980F |
-| ntkvm.exe | A41AC299AE871414798B6DBBA4C28618E11E54EF081F0D22F09BAF279CAF9E5C |
+| ntcon.exe | A41AC299AE871414798B6DBBA4C28618E11E54EF081F0D22F09BAF279CAF9E5C |
 | wow32.dll | 0D2AE60264B03A8040D98AA86BCF80455127064084E2217D318D5E13F90FA94A |
 | VDMREDIR.dll | C65FCE1CFB22A6E4136364B285BB0A0FBF434EDB100C98A9EBA8B5A50F0AF693 |
 
@@ -973,7 +978,7 @@ No conclusion of universal impossibility is drawn from this bounded test.
 The missing/ver output-composition regression remains open; subsequent work
 must preserve native full-screen addressing, mouse coordinates and scrolling,
 not merely translate rows until this one text test passes. Resource lifetime
-and the one-ntkvm/one-ConPTY decision remain unchanged. No S9 production
+and the one-ntcon/one-ConPTY decision remain unchanged. No S9 production
 candidate has been published or submitted on the strength of this audit.
 
 ## Question and baseline
@@ -1014,7 +1019,7 @@ remain in force. An offset heuristic must not be committed as equivalent to
 native absolute addressing. Independent verification can continue while this
 question is outstanding; no new product policy has been implemented.
 
-Replace the project-owned hidden Console/helper with ntkvm-owned ConPTY,
+Replace the project-owned hidden Console/helper with ntcon-owned ConPTY,
 without losing accepted DOS/native nesting, input return, retirement, mouse
 or GUI startup contracts. Baseline is S8 production d253e55af and delivery
 record 6ef96410d; the verified seven-file package remains at O:/winnt.
@@ -1193,7 +1198,7 @@ callback cannot recover it. Before selection, audit an upstream-supported
 parser interception boundary or the Microsoft parser closure; do not patch
 shared libraries or add a duplicate terminal screen model to hide this gap.
 
-The source review also confirms ntkvm is attached to its visible Console,
+The source review also confirms ntcon is attached to its visible Console,
 whereas the inner run16 may be attached to the native backend. Public Console
 handles are not generic cross-process transferable handles; see
 [Microsoft Console handles](https://learn.microsoft.com/en-us/windows/console/console-handles).
@@ -1229,7 +1234,7 @@ All eleven cases were rerun, not just the two repaired control tests.
 
 The remaining input-reclamation issue cannot be hidden by that success:
 
-1. ntkvm/main.c attaches to the visible Console, and native_console_frontend
+1. ntcon/main.c attaches to the visible Console, and native_console_frontend
    retains its input/output handles. FreeConsole would invalidate that state.
 2. The current helper owns the other Console and native_console_view obtains
    its actual unread records through INPUT_READ. A local shadow of all sent
@@ -1254,7 +1259,7 @@ extension or production migration has been implemented pending that decision.
 
 ## Text renderer boundary and retained baseline
 
-S9 P4 is test/audit only. Source review of ntkvm-exe/window_frame.c,
+S9 P4 is test/audit only. Source review of ntcon-exe/window_frame.c,
 text_frame.c, window_frame.h and lib/kvm-window/render.c confirms two current
 paths: DOS copies the guest's actual two font banks into the imported bitmap
 renderer; native text uses an independent 8x14 GDI/Consolas raster. The latter
@@ -1455,7 +1460,7 @@ remain open; this is working implementation, not a delivered P or S closure.
 ## Pinned parser import and production terminal-state binding
 
 The audited official libvterm 0.3.3 archive is now a repository-local source
-input at src/ntkvm-exe/lib/libvterm-0.3.3.tar.gz. Its previously recorded
+input at src/ntcon-exe/lib/libvterm-0.3.3.tar.gz. Its previously recorded
 SHA256 is unchanged. libvterm-import.json names all nine C units, eight
 headers/generated include inputs, MIT license and stopping boundary. It is
 not an OpenNT mirror or a replacement scheduler. Original NT4 has no UTF-8/VT
@@ -1673,7 +1678,7 @@ validate that mirror change.
 
 The formal generator now verifies the pinned libvterm archive, materializes
 only its admitted runtime files beneath the existing build root and selects
-frontend-terminal.lib in ntkvm and its frontend tests. Launcher/client and
+frontend-terminal.lib in ntcon and its frontend tests. Launcher/client and
 worker links do not acquire terminal state. The old native_console_host.c
 (278 lines), helper-protocol header (52 lines) and executable dispatch are
 removed. The local native_console_frame.h retains only presentation records,
@@ -1682,11 +1687,11 @@ not a process protocol. No helper fallback remains in the selected frontend.
 The first sandboxed Ninja request (exact PID 36604) remained in EventPairLow
 with no compiler children/output. It was inspected and stopped individually;
 session 49652 ended with exit 1. The subsequent authorized invocation completed
-the actual 89-edge x86 /MT ntkvm link, retained in
+the actual 89-edge x86 /MT ntcon link, retained in
 build/M0-T423/S9/backend-r2/formal-link.log. The final header/test cleanup
-incremental build completed in formal-cleanup-build.log, including ntkvm and
+incremental build completed in formal-cleanup-build.log, including ntcon and
 four affected test targets. This supersedes the earlier formal-link blocker,
-not the remaining runtime gates. The final candidate ntkvm.exe SHA-256 is
+not the remaining runtime gates. The final candidate ntcon.exe SHA-256 is
 8B34D3FC5B70D38BD0605B32064BC858AA5A7860429FA69DFF1D8610FE086D0E.
 
 Retired test protocol disposition is explicit:
@@ -1729,7 +1734,7 @@ O:/winnt/Logs2, including their .console.txt snapshots:
 
 The frontend ownership gate passes with seven negative controls, including
 terminal-archive leakage to the worker and attempted retired-helper injection
-into ntkvm. These are native/frontend evidence, not actual DOS17, authenticated
+into ntcon. These are native/frontend evidence, not actual DOS17, authenticated
 twelve-program chains, full fault matrices or WOW frontier passes. Shared
 bitmap replacement, production scrolling/coordinate fidelity and all remaining
 package gates stay open. The SoftPC change remains included but unverified by
@@ -1788,7 +1793,7 @@ Upstream warning output is retained.
 | --- | --- |
 | window_frame.c | 3F665EB2C9E511FED1094B2A67F7B88FEEC46121E2438D15DFCC004AE2979845 |
 | generated native_pc_font.h | 83B1A17A19B6E8C04405A2CFEF9E43C141C0DB7F3B82CAFB294B7BD725F0B8B7 |
-| formal ntkvm.exe | 2BC73ABB2B096FD9ECE4EE13F079AEF632E4C6CBA754A6C18720F033D013E54B |
+| formal ntcon.exe | 2BC73ABB2B096FD9ECE4EE13F079AEF632E4C6CBA754A6C18720F033D013E54B |
 
 This does not prove full DOS17, authenticated nesting, simultaneous-button/
 scroll-coordinate/fault matrices or three WOW frontiers on the full package.
@@ -1967,7 +1972,7 @@ verify-native-terminal.ps1 at seed-r1 passes 199 assertions (the prior 183 plus
 backend bursts including clean-EOF input. Formal seed-r1/formal-build.log links
 the frontend. t423-s9-seed-command-r1 passes native-zero and missing; the final
 screen retains DOS banner, missing-command error and later Windows version.
-t423-s9-console17-r3 passes all 17 routes. That candidate's ntkvm SHA-256 is
+t423-s9-console17-r3 passes all 17 routes. That candidate's ntcon SHA-256 is
 2B472B1148F8602DA8C755D658C000368C4A2F37F031405C4C0A81BC68607E4F.
 
 Additional failures were not waived:
@@ -2145,7 +2150,7 @@ need migration; no cases have been deleted or counted as passed.
 
 verify-frontend-link-ownership.ps1 against the formal S1/restart-formal-x86
 graph passes, including seven negative leakage controls and explicit refusal
-of native_console_host.c in ntkvm. Incremental x86 ntkvm.exe and
+of native_console_host.c in ntcon. Incremental x86 ntcon.exe and
 native-console-frontend-test.exe compilation succeeds; exact build log is
 build/M0-T423/S9/admission-guard-r2/comment-sweep-build.log. This is build/source
 evidence only, not a new frontend runtime pass. Documentation governance and
@@ -2154,7 +2159,7 @@ git diff --check pass. O:/winnt is unchanged; no production P is delivered.
 ### Retained single-ConPTY decision and nested I/O recovery (2026-09-28)
 
 The owner supersedes the preceding unresolved-membership requirement: one
-ntkvm keeps one ConPTY across all native text targets and intervening DOS
+ntcon keeps one ConPTY across all native text targets and intervening DOS
 execution. Do not add an observer process or Job. An uncertain last-client
 state may retain the frontend until explicit close; direct-target completion
 must return independently. Early release and per-burst recreation are removed
@@ -2226,7 +2231,7 @@ the real child's CTRL_CLOSE handler and actual child completion; retained
 admission proves actual new-child output/input, not merely CreateProcess.
 This is resource-layer closure evidence, not frontend UI-close observation.
 
-The retained-ConPTY formal ntkvm candidate SHA-256 is
+The retained-ConPTY formal ntcon candidate SHA-256 is
 E13E106A0F6F48F7C183D0EB1D22DBBAB5B36735B77E309D0246962FAA0BD301.
 Verify-CommandExitStatus.ps1 with OrdinaryFrontend, the private-desktop
 observer, PackageRoot=R:/, physical build/M0-T423/S9/p and authored G7.COM
@@ -2254,7 +2259,7 @@ DOS handoff rather than requiring an obsolete repaint to recover it.
 
 Incremental x86 build evidence is
 build/M0-T423/S9/persistent-r1/presentation-revision-build.log. The candidate
-ntkvm SHA-256 is 41E7296AB5F1757CDB5ABB1D417BA1414EFF26B729DD187567767A8667CEDC23.
+ntcon SHA-256 is 41E7296AB5F1757CDB5ABB1D417BA1414EFF26B729DD187567767A8667CEDC23.
 revision-terminal-r1 records 215 passing assertions but its wrapper rejected
 the old hardcoded count 199. After updating the strict expected count to 215,
 revision-terminal-r2 passes all terminal assertions and both real backend
@@ -2364,7 +2369,7 @@ retained ungated-input failures. Horizontal-wheel disposition and final
 review/publication remain open.
 
 Formal x86/WOW graphs now have no pending work. A redundant run16 relink was
-caused only by ntkvm.exe's runtime dependency timestamp; the generator now
+caused only by ntcon.exe's runtime dependency timestamp; the generator now
 uses an order-only dependency, verified with an additional negative control.
 No candidate binary changed. S8 GUI sync/async refresh remains an explicit
 S9 checklist item, separate from the passing twelve-target chains.
@@ -2416,7 +2421,7 @@ four files relative to the preceding tested package; old seven files are saved
 under build/M0-T423/S9/final-package-r1 with old/new hashes in candidate.json.
 The build-only candidate now contains this coherent final-build set. Final
 integration refresh is in progress under t423-s9-final-*; prior passes below
-must not be attributed to the new package solely because ntkvm stayed 86D679F2.
+must not be attributed to the new package solely because ntcon stayed 86D679F2.
 O:/winnt is untouched; no production P is delivered.
 
 86D679F2 passes refreshed Console17/Window17, both twelve-program chains,
@@ -2483,7 +2488,7 @@ No production/library change or publication was made by this diagnostic;
 the shared-picture repair and Window missing/ver gate remain open. See the
 S9 ledger's live Console-seed audit for exact failed and successful evidence.
 
-Live-package audit correction (2026-09-28): O:/winnt/ntkvm.exe still has the
+Live-package audit correction (2026-09-28): O:/winnt/ntcon.exe still has the
 S8 A41AC299 hash, but ntvdm.exe is now 4AC3870B, matching the staged S9 worker
 rather than S8's 8BA2FFF5. The other six live hashes match the S8 manifest.
 No cause or prior approval is inferred from timestamps. Preserve these files;
@@ -2537,9 +2542,9 @@ real-child test now proves that post-release launch success does not prove I/O
 attachment: output disappears after early ReleasePseudoConsole, while retaining
 HPCON passes actual output/input. The earlier admission conclusion is withdrawn.
 The released-resource refusal guard is restored; 26 resource cases and formal
-x86 ntkvm linking pass. Upper-layer early release caused the nested reuse
+x86 ntcon linking pass. Upper-layer early release caused the nested reuse
 failure; the retained candidate below removes that release and recreation.
-Owner resolved lifetime on 2026-09-28: one ntkvm retains one ConPTY across all
+Owner resolved lifetime on 2026-09-28: one ntcon retains one ConPTY across all
 native launches and intervening DOS tasks. No Job or observer process. Uncertain
 last-client retirement may retain the frontend until explicit session close;
 direct-target results must still return independently. Remove early release and
@@ -2568,7 +2573,7 @@ and guest regression remain open; this is not a delivered production P.
 The owner-approved SoftPC host_cpu.h byte-order change is preserved for the
 combined S9 review and verification. O:/winnt is unchanged at S8.
 
-The formal x86 graph now selects ConPTY/terminal state and ntkvm links
+The formal x86 graph now selects ConPTY/terminal state and ntcon links
 successfully. The old helper source/protocol (330 lines) and dispatch are
 deleted. Migrated formal backend/membership tests and private-desktop frontend,
 Window-to-CMD and four control-event cases pass; the ownership verifier rejects
@@ -2659,7 +2664,7 @@ pending before coherent publication and P delivery.
 
 S6 P1 f0f671e5e delivered independent frontend Console/Window display;
 [S6 ledger](m0-t423-s6-window-display.md). S7's accepted
-ntkvm/ntsrv seven-file mouse checkpoint is recoverable under
+ntcon/ntsrv seven-file mouse checkpoint is recoverable under
 build/M0-T423/S8/pre-publication; the reviewed S8 set is now at O:/winnt,
 with published-path verification complete and S8 P2 d253e55af pushed.
 

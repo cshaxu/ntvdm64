@@ -68,7 +68,7 @@ void ntvwm_mouse_compose(const ntvwm_mouse *mouse,const console_video_descriptio
     payload[sizeof(console_text_style)+y*description->stride+x*bytes+1]^=0x77;
 }
 
-/* Recovered from ntkvm-exe/window_frame.c native_glyph. Same bounded PC
+/* Recovered from ntcon-exe/window_frame.c native_glyph. Same bounded PC
  * mapping, now at its backend owner. Unsupported Unicode is one '?' cell;
  * the second cell of a wide/surrogate pair remains blank. */
 static BYTE pc_glyph(WCHAR character)

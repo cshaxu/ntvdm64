@@ -1,5 +1,10 @@
 # T424 S5 shared-control cleanup
 
+T424 S11 naming normalization: frontend labels/current source links now use NTCON.
+This does not claim the new basename existed in the recorded historical package.
+Exact earlier source, commands and product names remain in Git and sealed build
+evidence; recorded hashes, dates, results and limitations are unchanged.
+
 ## Question and baseline
 
 Remove the five owner-approved project-code duplications without changing
@@ -12,10 +17,10 @@ are implemented and pass the delivery gates below. Disposable output belongs und
 
 | Logic | Source/current location | Shared decision/target | Independent boundary |
 | --- | --- | --- | --- |
-| Completed-first byte transfer | Project additions: run16-exe/native_request_io.c and ntw32-exe/channel_io.c, identical bodies after symbol/include normalization | Reuse the existing frontend-client transport object in native production and fixtures; remove channel_io.c and io.h, not a forwarding wrapper | worker-base/console_client.c has strict-peer-first semantics and must not replace this contract. NTSRV/NTKVM consumers cannot become worker-base consumers. |
+| Completed-first byte transfer | Project additions: run16-exe/native_request_io.c and ntw32-exe/channel_io.c, identical bodies after symbol/include normalization | Reuse the existing frontend-client transport object in native production and fixtures; remove channel_io.c and io.h, not a forwarding wrapper | worker-base/console_client.c has strict-peer-first semantics and must not replace this contract. NTSRV/NTCON consumers cannot become worker-base consumers. |
 | Launch packet and resource primitive | Project additions in run16-exe/native_launch_packet.c and native_launch.c, linked by multiple executable owners | Retain the finite owned-client implementation model; audit one object/provider per executable, declaration-only interface | Target creation and hidden Console execution remain native-worker-local; no generic common root. |
 | Native completion/return | Project additions in run16 frontend_scope/main and NTSRV native result path | Launcher closes the startup diagnostic target handle immediately; broker receipt and authenticated target_completed result determine completion/Console return | Real target handle/wait stays NTW32; original DOS completion remains original. |
-| NTKVM session plumbing | Project-added session_service.c/h | capability/restored/borrowed/admitted stored fields have no read sites; borrowed argument still selects Console anchor at startup. Remove only dead storage and redundant internal parameters | Notification, creator, retire, Console anchor, restoration report and channel joins remain. |
+| NTCON session plumbing | Project-added session_service.c/h | capability/restored/borrowed/admitted stored fields have no read sites; borrowed argument still selects Console anchor at startup. Remove only dead storage and redundant internal parameters | Notification, creator, retire, Console anchor, restoration report and channel joins remain. |
 | Direct bootstrap fixture | Project tests/app/frontend_bootstrap_test.c | Retire the dead direct-bootstrap fixture and redundant broker-test executable alias; see assertion mapping below | Current authentication, restoration, reuse and broker-loss assertions stay in the retained fixtures. |
 
 The two workers already share connection/watch-broker and Console protocol
@@ -27,13 +32,13 @@ library.
 Worker-only reuse is already production-wired: connection/watch-broker,
 authenticated frontend capability resolution and shutdown-event acquisition
 are implemented in worker-base/connection.c. Both workers embed the explicit
-ntkvm_worker_client state from interface/worker_console_client.h and use
+ntcon_worker_client state from interface/worker_console_client.h and use
 worker-base/console_client.c for request sequencing/validation, input batch
 encoding, frame transactions and title publication. Callers keep their endpoint
 locks; the client owns its overlapped event, not borrowed pipe/peer/cancel
 handles. Backend activation/retry and original DOS API partial-result semantics
 remain caller-owned. This is the shared mechanism boundary, not a second
-task registry or common scheduler. Consumers do not link NTKVM private rendering.
+task registry or common scheduler. Consumers do not link NTCON private rendering.
 
 ## Bootstrap assertion transfer
 
@@ -58,7 +63,7 @@ for S5. Mapping is not a fresh S5 integration-pass claim.
 
 ## Verification state
 
-Affected x86 NTW32/NTKVM and focused fixtures compile/link from the reused
+Affected x86 NTW32/NTCON and focused fixtures compile/link from the reused
 cache. control-transfer-test has 72 checks / zero failures: mock/unit ordering
 evidence, not a real kernel test. Actual request/execution fixtures pass:
 NTW32 request-lifetime reports 586 checks / zero failures / zero remaining
@@ -69,12 +74,12 @@ parked lease, shutdown priority, channel reclamation and final join.
 
 Commands: existing run-ninja-parallel.cmd builds control-transfer-test.exe,
 frontend-request-client-test.exe, ntw32-execution-lifetime-test.exe,
-frontend-scope-lifetime-test.exe, ntw32.exe and ntkvm.exe. Each fixture's report
+frontend-scope-lifetime-test.exe, ntw32.exe and ntcon.exe. Each fixture's report
 is below build/M0-T424/S5/r001. Generator uses the installed Node executable
 explicitly; the first invocation without that argument failed its prerequisite
 check and is not a successful build.
 
-Removed duplicate transport: 28-line body and 6-line private header. NTKVM
+Removed duplicate transport: 28-line body and 6-line private header. NTCON
 removes four write-only fields, redundant capability/restored parameters and
 the duplicate lease-start wrapper. Borrowed Console anchor selection and
 authenticated restoration remain. Single transfer source links once per

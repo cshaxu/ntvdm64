@@ -1,5 +1,10 @@
 # T423 S12 NTW32 Backend
 
+T424 S11 naming normalization: frontend labels/current source links now use NTCON.
+This does not claim the new basename existed in the recorded historical package.
+Exact earlier source, commands and product names remain in Git and sealed build
+evidence; recorded hashes, dates, results and limitations are unchanged.
+
 Current result: implementation/verification closed in S12 P2; the verified
 eight-file O:/winnt package awaits owner side testing. See
 [final delivery](#final-publication-and-closure-r131-r132). Earlier observations
@@ -51,7 +56,7 @@ Extended the real RPC test to invoke actual run16.exe from the second launcher
 process with authenticated inherited capabilities. That public CLI selects the
 already resident NTW32, runs CMD and returns 61. Existing 37/19, second-client
 73, forged-context rejection and worker-survival checks also pass. The root
-is a test-registered frontend, not NTKVM presentation: this proves the public
+is a test-registered frontend, not NTCON presentation: this proves the public
 execution/return route, not visible interaction or initial-worker creation via
 the public CLI. Build logs: build/M0-T423/S12/public-native-build-r1.log and
 r2.log; runtime O:/winnt/Logs2/t423-s12-public-native-r1.log and .err.log.
@@ -203,7 +208,7 @@ The remaining declaration review must distinguish such local projections from
 actual duplicated wire records; this review alone does not close that sweep.
 
 Added ntw32-text-frame-test.exe to the formal x86 Ninja graph. It links the
-NTW32 producer directly to the unchanged NTKVM/NTVDM frame receiver and checks
+NTW32 producer directly to the unchanged NTCON/NTVDM frame receiver and checks
 font banks, palette, cursor, PC glyph mapping, chunked atomic publication and
 malformed input. Fixed a clipped surrogate-pair trailing cell: the preceding
 high surrogate may be outside the viewport but remains inside the captured
@@ -227,7 +232,7 @@ dispatcher. worker-base connects and watches the broker; WaitWorkerChannel
 uses the service's existing capability-arrival condition and worker-death wake,
 not a polling loop or new task scheduler. Protocol remains unpublished v12.
 
-execution.c selectively recovers NTKVM native_console_request.c: validate the
+execution.c selectively recovers NTCON native_console_request.c: validate the
 copied packet; accept authority only from authenticated broker attachments;
 duplicate the pinned sender's allowed streams preserving aliases; invoke the
 existing native CreateProcess body without ConPTY; return the real target
@@ -246,7 +251,7 @@ Build logs: build/M0-T423/S12/ntw32-entry-build-r1.log and r2.log; runtime logs:
 O:/winnt/Logs2/t423-s12-ntw32-entry-{ntw32-execution,native-worker-startup,
 native-reservation,client}-r2.log. All pass; six x86 EXEs link.
 
-This does not prove public run16/NTKVM integration: their old private NTW32
+This does not prove public run16/NTCON integration: their old private NTW32
 caller is now incompatible and cannot be published. Native final-frame receipt
 currently observes target completion only, not presentation. Full frontend
 binding, later-launcher reuse, input/screen continuity, member retirement,
@@ -262,7 +267,7 @@ resource duplication and cleanup; they do not introduce a command queue or
 target scheduler. Only the launcher's existing prepared reservation currently
 grants worker selection. Later-client admission/re-entry remains open.
 The worker receives the sender process, byte pipe, execution capability and
-authenticated frontend capability. NTKVM cannot take a worker-directed request.
+authenticated frontend capability. NTCON cannot take a worker-directed request.
 Source shapes reused: service_submit/take frontend channel in base_service.c;
 the service contains only attachments, not launch payload or process creation.
 
@@ -316,15 +321,15 @@ direct native launch/re-entry and the shared production frame endpoint.
 
 Latest owner approval replaces ConPTY with an ordinary hidden Console attached
 to and owned by the independent NTW32 worker. No private helper/bootstrap,
-NTSRV Console owner, or second selectable ConPTY backend. NTKVM remains a
+NTSRV Console owner, or second selectable ConPTY backend. NTCON remains a
 presenter of the unchanged NTVDM text ABI and bitmap glyph mapping. Older
 ConPTY experiments below are retained evidence, not pending authorization.
 
 | Existing owner | Disposition | Required proof |
 | --- | --- | --- |
 | S8 Console screen/cell operations | Reuse in attached NTW32 boundary, not old frontend helper owner | Actual Console readback and shared-buffer witness |
-| NTKVM ConPTY resource and terminal parser | Remove from production on cutover; NTW32 uses actual hidden Console state | One independent NTW32 reused across DOS intervals |
-| NTKVM native launch packing and authenticated request | Reuse validated resource marshalling, route actual creation into backend | Redirected streams, exact process result and rollback |
+| NTCON ConPTY resource and terminal parser | Remove from production on cutover; NTW32 uses actual hidden Console state | One independent NTW32 reused across DOS intervals |
+| NTCON native launch packing and authenticated request | Reuse validated resource marshalling, route actual creation into backend | Redirected streams, exact process result and rollback |
 | NTSRV frontend/worker authentication and management | Extend named native-backend registry separately from DOS/WOW records | Cross-session, stale ID, wrong version and rundown negatives |
 | NTMON snapshot/termination | Extend registered backend kind and session-close result | Retained clients, explicit close and unrelated survivor |
 | S11 local parser import/branch restoration | Remove when real backend synchronization replaces it | No stale cursor, lost text or duplicate output |
@@ -354,7 +359,7 @@ checks; Git identifies the P2 delivery and remote synchronization.
 ### Worker-side library restriction implemented
 
 worker-base now contains only connection.c/h and README. Both workers use its
-service connection/broker-watch lifecycle. run16/ntsrv/ntkvm/ntmon product edges
+service connection/broker-watch lifecycle. run16/ntsrv/ntcon/ntmon product edges
 no longer link this archive. Input conversion and byte transport return to their
 endpoint owners; NTVDM retains its original exchange/frame logic. NTW32's old
 private control candidate still awaits production replacement, not acceptance.
@@ -404,7 +409,7 @@ Governance/diff checks pass. No product publication or S12 closure is claimed.
 
 The owner's latest clarification supersedes the broad sharing model recorded
 below. Only NTVDM/NTW32 worker-side lifecycle belongs in worker-base. run16,
-NTSRV, NTKVM and NTMON each retain their own common two-kind handling path.
+NTSRV, NTCON and NTMON each retain their own common two-kind handling path.
 Transport/codec/frame extractions are not admitted by reuse alone and remain
 pending relocation; non-worker worker-base link edges must be removed too.
 
@@ -446,7 +451,7 @@ completed-I/O precedence, optional stop and PROCESS_ABORTED. Both drain cancelle
 operations. Original DOS close callbacks and task policy remain NTVDM-owned.
 
 Build: build/M0-T423/S12/shared-transport-build-r1.log, x86 /MT NTVDM, NTW32,
-NTKVM and affected fixtures; VdmTib ownership passes. console-client-test.exe
+NTCON and affected fixtures; VdmTib ownership passes. console-client-test.exe
 normal exits 73 as expected; --broken-pipe exits 0; --close-hang exits
 0xc000013a. frontend-request-client-test.exe verifies target result 37 and
 rejection/version/contradictory-reply/EOF/partial-reply failures. Logs use
@@ -489,14 +494,14 @@ blindly generalized into worker-base or presented as native re-entry proof.
 
 ### Shared input codec and native control dispatch
 
-The original NTKVM encode_input and NTVDM decode_input bodies move unchanged
+The original NTCON encode_input and NTVDM decode_input bodies move unchanged
 to worker-base/console_input.c; both production callers select those symbols.
 NTW32 control version 3 adds bounded INPUT_WRITE using the same wire record.
 It validates the entire packet before inserting anything and rejects the
 DOS-private relative mouse record. Native Console input uses the recovered
 S8 ntw32_input_write, not a new terminal parser or line editor.
 
-x86 ntvdm/ntkvm/ntw32 plus console-client/console-frontend targets link:
+x86 ntvdm/ntcon/ntw32 plus console-client/console-frontend targets link:
 build/M0-T423/S12/shared-input-build-r1.log. Hidden Console r6 passes raw/cooked
 input and control dispatch, including invalid trailing record causing no
 partial insertion and valid DOS-private relative input rejected for native.
@@ -538,14 +543,14 @@ closure is claimed.
 
 ### Shared channel transport
 
-worker-base/channel_io.c replaces NTKVM native_request_io.c and the duplicate
+worker-base/channel_io.c replaces NTCON native_request_io.c and the duplicate
 NTW32 channel_io.c. All native/frontend callers now select worker_base_transfer;
 both old source files are removed. Framing/authentication remain at call sites.
 NTVDM's different peer-death precedence/error and the frontend's additional
 DOS-input readiness wait are not silently changed by this extraction.
 
 build/M0-T423/S12/worker-base-channel-build-r1.log records successful x86 links
-for run16, ntkvm, ntw32 and frontend-request-client-test. The frontend ownership
+for run16, ntcon, ntw32 and frontend-request-client-test. The frontend ownership
 verifier and leakage controls pass. The protocol fixture returned access denied
 inside the sandbox; authorized execution passes actual target exit 37, request
 rejection, version mismatch, contradictory result, EOF and partial reply.
@@ -608,11 +613,11 @@ submission, or eight-file publication is made.
 
 ### First implementation slice: attached Console operations
 
-Recovery selection: d253e55af:src/ntkvm-exe/native_console_capture.[ch]
+Recovery selection: d253e55af:src/ntcon-exe/native_console_capture.[ch]
 supplies the existing grow/move/shrink ordering, exact rectangle writes,
 active CONOUT$ reopening and bounded tile reads. Recover these mechanics into
 ntw32-exe/console_state.[ch], with owner names updated, not a second renderer.
-The current NTKVM visible-output functions remain selected until the formal
+The current NTCON visible-output functions remain selected until the formal
 composition can share the recovered source without changing dependencies.
 That temporary duplication is migration WIP, not accepted final architecture.
 
@@ -689,7 +694,7 @@ selection, and cannot yet be published as a complete backend.
 
 Remaining next integration: authenticated NTSRV backend ownership and atomic
 reuse; explicit Console-session stop/confirmation distinct from carrier death;
-actual native launch result resources; NTKVM real-screen synchronization and
+actual native launch result resources; NTCON real-screen synchronization and
 NTMON projection. Keep retirement/admission races open until those paths are
 tested. Carrier channel loss by itself never kills native clients.
 
@@ -778,7 +783,7 @@ Channel protocol 2 adds serialized launch begin/write/commit/abort. The selected
 CreateProcess body is the existing native_console_launch.c, now called inside
 NTW32's attached Console. The pinned frontend supplies finite stream and
 authenticated capability attachments; the actual created process query/wait
-reference returns to the existing request/launcher completion path. NTKVM no
+reference returns to the existing request/launcher completion path. NTCON no
 longer creates a PTY per native branch: one backend persists across DOS intervals.
 The pre-migration WIP frontend/backend sources are preserved below
 build/M0-T423/S12/native-migration-input-r1, not revived as a second provider.
@@ -809,7 +814,7 @@ t423-s12-native-root-r1 through r4 preserve these findings:
   remains member-gated, but output/final refresh is no longer suppressed by zero
   members. Both GUI tests pass in r4, including three GUI boundaries and distinct
   character frontend identities before/inside/after them.
-- The runner now observes NTKVM and NTW32 retirement before cleanup. All eight
+- The runner now observes NTCON and NTW32 retirement before cleanup. All eight
   cases have a retirement witness across r3/r4, not just launcher completion.
   A single all-cases rerun against final production inputs is still required.
 
@@ -832,7 +837,7 @@ S11/input-r4/observer.exe, PackageRoot Z:, ProcessPackageRoot S12/p.
 
 Exact tested candidate hashes at handoff-r3:
 
-- ntkvm.exe: 33458293A4006B9C0551D679880BDEB26660226B8E39076DDA8C416A04D651EE
+- ntcon.exe: 33458293A4006B9C0551D679880BDEB26660226B8E39076DDA8C416A04D651EE
 - ntw32.exe: 73400614C151C8270CC23BC1BBC41C5393B1A1040052C22BE7A550AE43FC951E
 - ntsrv.exe: 9F98CE5B3D4657ED2EEC173ED9114EB172DB14A69CDD3A9D1D2384800934645B
 - ntvdm.exe: 423BE6CAA2D5F38CCC08794B9CE504580D0D0A88E21D25663772031E83745C80
@@ -880,7 +885,7 @@ sleep, waive text assertions or publish the candidate.
 
 Concurrent-r1 candidate hashes after frontend-build-r4:
 
-- ntkvm.exe: 024AD57842DFE9178B6D795B827CF8EC666CA1B51DA6D923CC95F4CF7A4933C6
+- ntcon.exe: 024AD57842DFE9178B6D795B827CF8EC666CA1B51DA6D923CC95F4CF7A4933C6
 - ntmon.exe: 22D880EEB5330AC96070BED017BAA01102FDCD18F2976095B89E7D4A4FACFD9F
 
 Other executable identities remain as above. O:/winnt remains S11. This is
@@ -889,7 +894,7 @@ uncommitted S12 implementation/research with documented failures, not closure.
 ## Ownership and exact-text-contract correction
 
 Owner clarification requires NTW32 to create/manage/close ConPTY and own VT,
-input and screen state. NTKVM owns only visible Console/Window and routing.
+input and screen state. NTCON owns only visible Console/Window and routing.
 Both text producers must use existing product-abi/console_video.h verbatim;
 NTW32 publishes TEXT_FRAME only, with the same bitmap character mapping.
 The proposal, architecture/layout and active brief now reflect this boundary.
@@ -897,7 +902,7 @@ The retained mixed implementation is not accepted production ownership.
 
 Audit: ntvdm-exe/win32/console_text.c publishes console_text_style plus packed
 glyph/attribute pairs. softpc/mvdm_softpc_text_video.c copies active EGA font
-banks, including downloaded fonts. In contrast, ntkvm-exe/window_frame.c uses
+banks, including downloaded fonts. In contrast, ntcon-exe/window_frame.c uses
 a private Unicode-to-PC map and generated 14-line ROM font to rasterize native
 text into a graphics frame. That native path must be superseded, not retained
 behind a renamed RPC. Font-bank/default-font equivalence and text-only wire
@@ -952,7 +957,7 @@ O:/winnt remains the accepted S11 package; no S12 production P is claimed.
 ### Shared text-frame producer checkpoint
 
 Added ntw32-exe/text_frame.[ch], selectively reusing the existing private
-PC437/control-picture conversion from ntkvm-exe/window_frame.c. Windows Console
+PC437/control-picture conversion from ntcon-exe/window_frame.c. Windows Console
 Unicode capture remains backend-local. The producer emits only the unchanged
 NTVDM description/style/glyph-attribute ABI, copies both supplied font banks
 byte-for-byte and supplies palette/cursor metadata. Original mirrors and shared
@@ -962,7 +967,7 @@ must be removed at switchover, not kept as a parallel provider.
 
 Reproducer: MSVC x86 /MT /W4 /WX /std:c11 /Isrc, compiling
 tests/observation/ntw32_text_frame_test.c, src/ntw32-exe/text_frame.c and the
-unchanged src/ntkvm-exe/console_video.c, with /Fo and /Fe under
+unchanged src/ntcon-exe/console_video.c, with /Fo and /Fe under
 build/M0-T423/S12/text-frame-r1. Run test.exe with the new log path
 O:/winnt/Logs2/t423-s12-text-frame-r1.log. Result: 46 checks, zero failures.
 This tests the real production NTVDM receiver without a native decoder:
@@ -985,11 +990,11 @@ Migration inventory (final ownership, not current implementation claims):
 
 | Existing mechanism | Disposition |
 | --- | --- |
-| ntkvm native_conpty stream/create/close | Move implementation and state to NTW32; frontend retains copied client calls only. |
-| ntkvm native_terminal parser/history/input encoding | Reuse in NTW32; remove frontend link to parser after migration. |
+| ntcon native_conpty stream/create/close | Move implementation and state to NTW32; frontend retains copied client calls only. |
+| ntcon native_terminal parser/history/input encoding | Reuse in NTW32; remove frontend link to parser after migration. |
 | NTW32 capture/members/launch/auth tests | Retain and adapt bootstrap ownership; preserve actual Console readback and lifetime assertions. |
-| ntkvm window_frame native_glyph/native raster producer | Supersede with NTW32 text producer and remove duplicate mapping; audit pointer presentation separately. |
-| NTVDM console_video.h and NTKVM console_video receiver | Retain unchanged common frame format and complete-publication rules. |
+| ntcon window_frame native_glyph/native raster producer | Supersede with NTW32 text producer and remove duplicate mapping; audit pointer presentation separately. |
+| NTVDM console_video.h and NTCON console_video receiver | Retain unchanged common frame format and complete-publication rules. |
 | NTVDM active EGA fonts/default ROM source | Retain original owner; bind equivalent backend font state without modifying guest or shared lib. |
 | Frontend management HPCON-close acknowledgement | Replace with NTW32-owned close confirmation; no frontend HPCON remains. |
 
@@ -1021,7 +1026,7 @@ ConPTY and starts a short-lived private bootstrap role of ntw32.exe attached
 to it. The main NTW32 attaches while that role is explicitly held ready; after
 verified attachment the bootstrap exits, leaving only one steady-state NTW32.
 Only then initialize screen state and launch user targets. No extra executable,
-per-task helper, observer, Job or scheduler; NTKVM never receives HPCON. r4
+per-task helper, observer, Job or scheduler; NTCON never receives HPCON. r4
 proves the core attachment sequence but does not validate this product mode,
 authentication, rollback or integration. The proposal's no-implicit-helper
 rule requires explicit approval before implementing this additional role.
@@ -1031,7 +1036,7 @@ Do not silently substitute hidden Console or frontend ownership.
 
 The owner subsequently directs NTW32 to be a worker peer of NTVDM, with the
 same external startup/handoff/re-entry/completion/exit management, not bounded
-by one NTKVM lifetime. This changes the candidate ownership/registration model,
+by one NTCON lifetime. This changes the candidate ownership/registration model,
 not merely its retention timeout. The bootstrap proposal remains unapproved;
 that separate question does not prevent auditing the newly admitted lifecycle.
 
@@ -1039,7 +1044,7 @@ Actual selected-source comparison:
 
 | Operation | Existing NTVDM owner/path | NTW32 candidate gap and disposition |
 | --- | --- | --- |
-| Admission and reuse | run16-exe/main.c BaseCheckVDM; base_service.c OpenNtBaseServiceCheck; original srvvdm.c DOS records | frontend_scope.c currently submits to NTKVM. Replace frontend execution submission with NTSRV worker admission; keep backend-specific execution records separate from original guest records. |
+| Admission and reuse | run16-exe/main.c BaseCheckVDM; base_service.c OpenNtBaseServiceCheck; original srvvdm.c DOS records | frontend_scope.c currently submits to NTCON. Replace frontend execution submission with NTSRV worker admission; keep backend-specific execution records separate from original guest records. |
 | Create and authenticate | run16 main ReserveWorker, CREATE_SUSPENDED, PrepareWorker, BaseUpdateVDMEntry, ResumeThread; base_reservation.c claim by live OS process identity | ntw32 channel_client creates a frontend-bound carrier. Reuse reservation/prepare/claim mechanics, not a new PID-trust or process registry. Pre-handoff rollback remains distinct from post-handoff lifetime. |
 | Worker identity and death | base_service.c OpenNtBaseServiceConnect claims reservation, registers one-shot service_worker_terminated process watch | native_root currently identifies frontend generation and management enumerates live RPC connections. Replace with independent worker identity/process watch; keep frontend binding separate. |
 | Readiness and nested work | Check distinguishes an actual BaseSrvDOSWorkerWaitPending from merely VDM_READY; original GetNextVDMCommand owns guest re-entry | NTW32 request service must remain receptive while a direct target waits. Do not mistake a live or occupied worker for a pending command consumer, and do not SuspendProcess user targets to emulate DOS state. |
@@ -1061,10 +1066,10 @@ Safe implementation order within S12:
    backend kind while preserving current DOS/WOW callers and negative tests.
 2. Route native admission, ready/re-entry and completion through the same
    service/client lifecycle; reuse native payload/stream validators and direct
-   target process completion. Cut the NTKVM execution-submission dependency.
+   target process completion. Cut the NTCON execution-submission dependency.
 3. Bind independent NTW32 process startup and resource ownership; resolve the
    still-pending initialization mechanism without assuming approval.
-4. Connect only copied input/text frames to NTKVM and worker management to
+4. Connect only copied input/text frames to NTCON and worker management to
    NTMON. Remove old frontend-generation ownership/close proxies after tests.
 5. Verify worker/launcher/frontend failure separately, nested direct results,
    pending admission versus shutdown, existing screen/input regressions and
@@ -1191,7 +1196,7 @@ MSVC Win32/x86 /MT incremental build: build/M0-T423/S12/public-startup-build-r1.
 Runtime: O:/winnt/Logs2/t423-s12-public-startup-r1.log and .err, exit 0 / PASS.
 Broker logs use the public-startup-broker-r1 stem in the same runtime directory.
 This is real launcher/worker/RPC execution evidence with a fixture frontend,
-not actual NTKVM frame/input, DOS handoff, or full product acceptance. One
+not actual NTCON frame/input, DOS handoff, or full product acceptance. One
 concurrent run covers this interleaving, not every possible retirement race.
 No candidate publication, production P, or S12 closure is claimed.
 
@@ -1224,7 +1229,7 @@ Current source inspection identifies why merely invoking the tested frame sender
 from NTW32 main is insufficient. This is source evidence, not a runtime failure
 or completed fix:
 
-- ntkvm-exe/console_channel.c already supplies one authenticated console_io
+- ntcon-exe/console_channel.c already supplies one authenticated console_io
   dispatcher and frame receiver; reuse this endpoint for both workers.
 - native_console_frontend.c::apply_dos_binding allows only one channel owner
   and rejects a different active owner with ERROR_BUSY. Its inactive path still
@@ -1538,10 +1543,10 @@ remain open. The accepted O:/winnt binaries were not replaced.
 
 ### Remove native execution reception from the frontend service
 
-The actual run16 path already selects and submits to NTW32, but NTKVM's
+The actual run16 path already selects and submits to NTW32, but NTCON's
 session_service still contained the previous TakeFrontendChannel/native-request
 execution receiver and request-lifetime list. That parallel receiver is removed.
-The NTKVM and frontend-video-observer links no longer include
+The NTCON and frontend-video-observer links no longer include
 native_console_request.obj. Frames still use the existing worker channel; no
 new transport or worker scheduler is introduced. Historical request source and
 other ConPTY inputs remain pending their individual migration, not production
@@ -1568,9 +1573,9 @@ Build graph and logs: build/M0-T423/S12/presentation-only-graph-r1.log and
 presentation-only-build-r1/r2.log. The first link found a previously missing
 fixture declaration for the launcher's RequestFrontend call; the fixture now
 explicitly rejects that out-of-scope call rather than fabricating success.
-NTKVM, observer and lifetime test subsequently build successfully.
+NTCON, observer and lifetime test subsequently build successfully.
 verify-frontend-link-ownership.ps1 passes against the current formal cache and
-rejects an injected native_console_request.obj edge in NTKVM, in addition to
+rejects an injected native_console_request.obj edge in NTCON, in addition to
 its prior helper/rendering leakage controls. It explicitly does not certify
 the still-pending ConPTY source migration. No publication or S12 closure.
 
@@ -1657,7 +1662,7 @@ cover actual target result 37, delayed final success beyond two seconds,
 final ERROR_WRITE_FAULT and completion pipe EOF. These are supporting fixtures,
 not replacements for the real workload results.
 
-Physical cleanup removes native_console_request.c/.h from NTKVM and their
+Physical cleanup removes native_console_request.c/.h from NTCON and their
 manifest/build entries. Updated frontend link ownership checks reject native
 request, backend, capture, view and ConPTY/parser leakage. Regenerated graph:
 build/M0-T423/S12/vertical-cleanup-graph-r11.log. Other displaced sources and
@@ -1701,13 +1706,13 @@ inherited Console and exits 37. The child waits on a pinned parent process
 handle, verifies 37, prints a prompt, reads `survivor` from the Console and
 emits NATIVE-SURVIVOR-INPUT-OK before exiting 19. Thus the input witness cannot
 precede direct-target termination. The existing observer supplies ordinary
-Console/Window input through the production NTKVM/NTW32 path.
+Console/Window input through the production NTCON/NTW32 path.
 
 Build target ntw32-surviving-client-test.exe; graph/build evidence
 build/M0-T423/S12/survivor-graph-r14.log and survivor-build-r14.log.
 Verify-CommandExitStatus.ps1 adds Cases native-surviving-client and
 NativeSurvivorFixture pointing to that build artifact, copied only into the
-candidate's tests directory. OrdinaryFrontend verifies one independent NTKVM
+candidate's tests directory. OrdinaryFrontend verifies one independent NTCON
 and now requires its natural exit within 10 seconds after the surviving
 client completes, before test cleanup. The direct run16 result must remain 37.
 
@@ -1727,7 +1732,7 @@ Build evidence: build/M0-T423/S12/survivor-build-r17.log. Repeated Console/Windo
 runs are required; this race is not asserted to explain every prior timeout.
 
 t423-s12-survivor-r17-1/-2 (Console) and -3/-4 (Window) all pass the full
-surviving-client workload and natural NTKVM retirement assertion. No candidate
+surviving-client workload and natural NTCON retirement assertion. No candidate
 publication or management-stop success is inferred. These results cover this
 explicit real-client lifecycle, not all failure/admission races.
 
@@ -1789,7 +1794,7 @@ process, helper or special behavior.
 
 The displaced native_console_view.c/.h have no remaining external callers;
 the old native_console_capture.c/.h duplicate the Console binding now owned by
-NTW32. These four tracked NTKVM files are removed (395 deleted lines), along
+NTW32. These four tracked NTCON files are removed (395 deleted lines), along
 with source-manifest and obsolete link edges. They remain recoverable from Git.
 The existing native_console_capture_test.c keeps its assertions but now calls
 ntw32_screen_apply/ntw32_cells_write and links the production NTW32 binding.
@@ -1798,9 +1803,9 @@ Other old backend/parser and duplicate bitmap-rendering code remains pending;
 this is not a claim of total cleanup.
 
 build/M0-T423/S12/cleanup-graph-r25.log and cleanup-build-r25.log prove x86
-NTKVM/NTW32 and the migrated Console test build. Frontend link-ownership
+NTCON/NTW32 and the migrated Console test build. Frontend link-ownership
 negative controls and component-minimization provider checks pass: no obsolete
-view/Console writer/ConPTY symbol in NTKVM, actual writer symbols in NTW32.
+view/Console writer/ConPTY symbol in NTCON, actual writer symbols in NTW32.
 O:/winnt/Logs2/t423-s12-capture-r25.log passes real Console scrollback, Unicode,
 palette, cursor, invalid-span and no-font-scaling assertions after migration.
 Source deletion neither removes those assertions nor counts a renamed provider
@@ -1890,7 +1895,7 @@ not a new font generator/renderer or imported USER/Console server policy.
 
 interface/console_io.h advances the direct channel to 15 and adds a bounded,
 revision-checked read of console_text_configuration (existing style plus 16
-copied RGB palette entries). NTKVM copies only the last complete text frame's
+copied RGB palette entries). NTCON copies only the last complete text frame's
 configuration, retaining no channel pointer. Cursor fields are not inherited.
 The snapshot survives channel disposal; stale revision/invalid offsets fail.
 Text frames are requested in Console mode as well because later native/Window
@@ -1901,7 +1906,7 @@ NTW32 reads the two bounded tiles only after acquiring I/O ownership, validates
 their revision, size and font shape, imports the palette into its real Console
 and uses the copied fonts for subsequent text frames. No snapshot means the
 existing original-ROM default for an initial native-only session; it is not a
-substitute for a snapshot that failed validation. NTKVM still interprets no
+substitute for a snapshot that failed validation. NTCON still interprets no
 Unicode and generates no new glyphs in this path. Existing text-frame layout
 and one shared renderer are unchanged; the obsolete native renderer remains
 until its accepted style coverage is migrated.
@@ -1909,7 +1914,7 @@ until its accepted style coverage is migrated.
 font-build-r31.log builds all six x86 EXEs plus the channel test. Protocol/real
 Console tests at t423-s12-font-r31.log pass 303 checks, including exact two-bank
 font bytes/palette, invalid font and inconsistent revision rejection.
-frontend-text-handoff-test.exe uses actual NTKVM storage, owner switching and
+frontend-text-handoff-test.exe uses actual NTCON storage, owner switching and
 channel disposal; t423-s12-frontend-font-r32.log passes 22 checks. After the
 zero-initialization-only test-source correction, font-build-r33.log and
 t423-s12-frontend-font-r33.log repeat the 22-check pass. Latest frontend-link
@@ -1937,7 +1942,7 @@ frame. No guest, mirror or shared-library changes. Grid styles remain
 unsupported rather than gaining speculative rendering behavior.
 
 The duplicate native_glyph and native rasterizer are physically removed from
-ntkvm-exe/window_frame.c. NTW32 owns character conversion; NTKVM uses one
+ntcon-exe/window_frame.c. NTW32 owns character conversion; NTCON uses one
 copied-frame decoder and the existing library raster path. Underline precedes
 caret inversion, independently of font banks and color. The existing pixel
 test now composes the actual NTW32 packer and common decoder, preserving
@@ -1967,7 +1972,7 @@ there is no S12 commit/push or closure.
 
 ## Displaced backend retirement and current regression gate
 
-r39-r42 physically remove NTKVM native_conpty, native_terminal,
+r39-r42 physically remove NTCON native_conpty, native_terminal,
 native_terminal_screen and native_console_backend source/header pairs;
 NTW32 channel_client/channel and control source/header; and the private
 native_console_protocol header. Hash-checked pre-deletion copies are retained
@@ -2007,7 +2012,7 @@ assertion. Its final 120x9001 capture retains all three results and banners.
 This is not a guest or observer repair. The earlier r42 assertion that always
 requesting frames was the correct Console contract was itself incorrect.
 
-stream-ab-r44-build.log builds NTKVM; the previous candidate is retained under
+stream-ab-r44-build.log builds NTCON; the previous candidate is retained under
 pre-stream-r44. Only the build-root candidate was replaced. The corrected
 channel fixture checks Console=false, CAF Window=true, return Console=false.
 t423-s12-stream-channel-r44 exits zero and passes all 85 lifetimes and exact
@@ -2061,7 +2066,7 @@ there is no process-tree enumeration, helper, Job or launcher-death policy.
 Normal requested shutdown is excluded from this fault path.
 
 verify-ntw32-management.ps1 now has FrontendLoss fault injection using a pinned
-candidate NTKVM process, retaining the existing independent-session gate.
+candidate NTCON process, retaining the existing independent-session gate.
 t423-s12-frontend-loss-r49 passes: affected CMD exits with CTRL_CLOSE result,
 NTW32 exits, launcher reports 0x3e3, and the independent CMD echoes
 ISOLATED-SESSION-OK before returning 23. This proves real frontend-loss cleanup
@@ -2163,7 +2168,7 @@ boundary must preserve that ordering.
 Trace-free Console regression r59 and Window regression r60 both pass all 17
 cases using the protocol 4 candidate (prefixes t423-s12-console-r59 and
 t423-s12-window-r60). Both harnesses terminate with exit zero. Window CAF
-witnesses identify the visible NTKVM window and its input owner; ordinary
+witnesses identify the visible NTCON window and its input owner; ordinary
 noninteractive cases retain the harness's existing route selection.
 The client-only protocol fixture r60 exits zero: final presentation success,
 failure and EOF remain distinct; resume accepts a zero-handle success, forwards
@@ -2275,7 +2280,7 @@ without clicking the dialog or changing the guest.
 r76 completes the full trace-free Console17 suite on the changed r72 run16
 candidate, with actual output/result assertions. Logs use prefixes
 t423-s12-pressure-r75 and t423-s12-console-r76. Window17 r77 is started on the
-same candidate; its result is pending. NTKVM README now describes its current
+same candidate; its result is pending. NTCON README now describes its current
 presenter/service ownership and explicitly labels retained libvterm material
 as research, not a selectable production backend. No publication or P yet.
 
@@ -2479,9 +2484,9 @@ Current call-site audit identifies these cleanup items:
 | Surface | Observed state | Required disposition |
 | --- | --- | --- |
 | Native execution submission | run16 production calls the worker path; native_request_client.c still selects SubmitFrontendChannel through a boolean route. Only old fixtures use run16_native_request_submit/submit_receipt. | Migrate or retire obsolete fixtures, then delete frontend execution and its unconsumed service path. Preserve the distinct live worker-to-frontend presentation attachment. |
-| Launch/source ownership | NTW32 execution and run16 GUI creation consume native_launch.h/native_console_launch.c physically under ntkvm-exe. | Reconcile launcher/request source ownership and build edges. NTKVM retains presentation/bootstrap only; no generic common library or implementation in interface/worker-base. |
+| Launch/source ownership | NTW32 execution and run16 GUI creation consume native_launch.h/native_console_launch.c physically under ntcon-exe. | Reconcile launcher/request source ownership and build edges. NTCON retains presentation/bootstrap only; no generic common library or implementation in interface/worker-base. |
 | Result versus I/O completion | run16 waits the target, then reads native_request_completion from the request pipe. The separate receipt event is closed, not waited, by that production path. | Audit all consumers and remove redundant event state where the authenticated stream provides the barrier. Preserve failure cancellation and final-frame ordering. |
-| DOS/native handoff | NTKVM dos_pending blocks native reads until final capture/release; NTW32 begin seeds its actual Console; run16 DOS completion requests native resume. | Verify one stop/drain/publish/import/resume chain, retaining OpenNT task completion/re-entry. No new scheduler, independent saved screens or target suspension. |
+| DOS/native handoff | NTCON dos_pending blocks native reads until final capture/release; NTW32 begin seeds its actual Console; run16 DOS completion requests native resume. | Verify one stop/drain/publish/import/resume chain, retaining OpenNT task completion/re-entry. No new scheduler, independent saved screens or target suspension. |
 
 Inspected: native_request_client.c/.h, native_console_launch.c, native_launch.h,
 native_console_frontend.c, run16 frontend_scope.c/main.c, NTW32 execution.c/main.c,
@@ -2557,8 +2562,8 @@ and overlays are unchanged by this edit; test/document lines are excluded.
 
 ## Shared worker presentation client r101-r102
 
-NTVDM and NTW32 now link the same ntkvm-worker-client.lib, implemented only
-by src/ntkvm-exe/worker_client.c. src/interface/worker_console_client.h declares
+NTVDM and NTW32 now link the same ntcon-worker-client.lib, implemented only
+by src/ntcon-exe/worker_client.c. src/interface/worker_console_client.h declares
 the common API and borrowed-handle client state, not a wire record or renderer.
 worker-base remains worker lifecycle only. Both backends share request ordering,
 version/generation/sequence validation, cancellation and disconnect handling,
@@ -2612,7 +2617,7 @@ copied frontend transport are project implementations, not OpenNT originals.
 | Mechanism / provenance | Current source | Decision and target / reason |
 | --- | --- | --- |
 | Standalone connect/watch/failed-watch disconnect; project bootstrap | worker-base/connection.c; both entrypoints | Already shared, retain worker-base; Base RPC authentication stays with NTSRV. |
-| Ordered KVM request/reply, version/generation/sequence/length checks; project copied transport | ntkvm-exe/worker_client.c | Move implementation to worker-base/console_client.c and retire ntkvm-worker-client.lib; both production workers link worker-base. |
+| Ordered KVM request/reply, version/generation/sequence/length checks; project copied transport | ntcon-exe/worker_client.c | Move implementation to worker-base/console_client.c and retire ntcon-worker-client.lib; both production workers link worker-base. |
 | Overlapped wait/cancel/drain and sticky disconnect; project client | Same common client | Share unchanged; borrowed handles and caller lock remain explicit. |
 | Frame chunking/serial and ordinary input decode; project client | Same common client | Share unchanged; DOS relative device decoding stays NTVDM-specific. |
 | Per-client event initialization/disposal; project adaptation | ntvdm-exe/win32/console_client.c and ntw32-exe/presentation.c | Extract init/dispose; own only event, borrow endpoint handles. Existing endpoint owners still close their resources after callers join. |
@@ -2622,7 +2627,7 @@ copied frontend transport are project implementations, not OpenNT originals.
 | Project PC input batching, relative mouse and text publication hooks | Mirror nt_event.c, nt_graph.c DIV-311/313/314/316/317/318 and NTVDM adapters | Audit despite mirror location. Guest BIOS/controller/VGA behavior has no NTW32 equivalent; retain minimal hooks and local adapter. No mirror edits in r106. |
 | DOS/WOW record completion, command reentry, guest failure cleanup | Original command and Base VDM owners | Remain original. NTW32 actual process wait/result is not equivalent and stays execution.c. Shared byte transport does not replace completion semantics. |
 | Native request byte transport | ntw32-exe/channel_io.c | Not the same failure contract as KVM: completed I/O wins over peer exit, PROCESS_ABORTED rather than PIPE_NOT_CONNECTED. Native-only mechanism; do not silently merge into strict frontend transport. |
-| Native members, unread-input draining, Ctrl-C, capture/seed/empty retirement | ntw32-exe/main.c, console_state.c, presentation.c | Native-specific. Cannot drain a Console with surviving consumers or emulate it using DOS BIOS state. Existing common screen service remains NTKVM-owned. |
+| Native members, unread-input draining, Ctrl-C, capture/seed/empty retirement | ntw32-exe/main.c, console_state.c, presentation.c | Native-specific. Cannot drain a Console with surviving consumers or emulate it using DOS BIOS state. Existing common screen service remains NTCON-owned. |
 | Guest memory/TEB/CCPU/graphics teardown versus native Console session close | NTVDM bootstrap/session and NTW32 membership | Different resources and original failure order; keep backend-specific, not a callback framework. |
 | Copied cell/font wire versus producer state | NTVDM console_text.c and NTW32 text_frame.c | Shared ABI/client, distinct producers: actual VGA glyphs versus native Unicode/cell attributes. Do not reconstruct guest fonts from native text. |
 | Authenticated capabilities, broker disconnect/watch, startup rollback | NTSRV Base client and run16 worker_launch.c | Existing common owner implementations, already used by both kinds. Do not duplicate into worker-base or move consumer responsibilities. |
@@ -2694,16 +2699,16 @@ gates stay open. No S12 commit/push, formal publication or closure is claimed.
 Reviewed native_console_launch.c against all callers before moving it. This is
 project-added packet/resource materialization, not OpenNT scheduling. NTW32
 owns native text creation; run16 also uses the same body for GUI creation with
-no character-session capabilities. That GUI caller must remain; NTKVM has no
+no character-session capabilities. That GUI caller must remain; NTCON has no
 creation caller. Split unchanged function bodies into ntw32-exe/launch_packet.c
 and launch.c, moving shared declarations to interface/native_launch.h. Removed
-the old NTKVM source/header. The client archive includes only the packet codec;
+the old NTCON source/header. The client archive includes only the packet codec;
 run16 explicitly links local creation for GUI, and NTW32 links both. No native
 request, guest, task-result, screen or input policy was changed.
 
 Exact normalized comparisons of both extracted function groups with the
 pre-move source pass. r120 x86 builds all six EXEs and affected fixtures. The
-ownership gate requires zero NTKVM sources in either worker and rejects native
+ownership gate requires zero NTCON sources in either worker and rejects native
 creation in the frontend/client archive; run16 may contain only the two finite
 native launch sources, not NTW32 execution or presentation. The new stale-source
 negative control initially exposed a missing verifier rejection in r118; r120
@@ -2735,7 +2740,7 @@ r124 completes Console17 and Window17, both 17/17 on the new eight-file build
 candidate. Summaries: O:/winnt/Logs2/t423-s12-console-r124-summary.json and
 t423-s12-window-r124-summary.json, with per-case output/interaction reports.
 Normal repository-config git diff --check returns zero; documentation,
-component-minimization and link-owner negative controls pass. NTKVM's map has
+component-minimization and link-owner negative controls pass. NTCON's map has
 no run16_native_launch_start. A deliberately overridden autocrlf=false check
 produced CR-as-whitespace noise; no formatting or repository setting was changed
 in response. Final process query finds no live product test processes.
@@ -2805,7 +2810,7 @@ partial/error contract; NTW32 consumes a batch and writes actual Console input,
 with sticky failure after ambiguous delivery. Both use the one common wire
 transport and ordinary event decoder. Their difference is not duplicated
 transport hidden behind different names. Server-side screen restoration and
-barrier completion remain the single NTKVM service implementation.
+barrier completion remain the single NTCON service implementation.
 
 `verify-wow-headless-frontiers.ps1` with observer-r70, the retained publication
 window reader, current Z: candidate, Logs2 prefix `t423-s12-shared-final-r127`
@@ -2899,7 +2904,7 @@ Published O:/winnt checks:
   and WMS7.COM under O:/winnt/tests: burst1000, retire1000 and latency200 pass
   strict guest/sink acknowledgment. No desktop focus/clipping claim.
 - Final eight hashes still match the manifest; process query finds no run16,
-  NTSRV, NTVDM, NTW32 or NTKVM test processes. Documentation governance,
+  NTSRV, NTVDM, NTW32 or NTCON test processes. Documentation governance,
   relative links and git diff checks pass. Remote main was synchronized before
   delivery; no force push is used.
 

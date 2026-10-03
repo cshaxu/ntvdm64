@@ -49,7 +49,7 @@ static void stop_broker(PROCESS_INFORMATION *broker)
 }
 /* Test-only sibling provider. Production StartFrontend has no caller-selected
  * executable: the fixture broker lives in an isolated build package whose
- * trusted sibling ntkvm.exe is this controlled adversarial executable. */
+ * trusted sibling ntcon.exe is this controlled adversarial executable. */
 static int rejected_peer(HANDLE caller,HANDLE capability)
 {
     WCHAR mode[24];HANDLE probe=NULL,remote=NULL;DWORD error;
@@ -97,7 +97,7 @@ static int startup_failures(BOOL timeout)
     wcscpy_s(source,ARRAYSIZE(source),self);slash=wcsrchr(source,L'\\');if(!slash)return 84;slash[1]=0;
     swprintf_s(package,ARRAYSIZE(package),L"%lsbootstrap-rejections",source);
     if(!CreateDirectoryW(package,NULL) && GetLastError()!=ERROR_ALREADY_EXISTS)return 84;
-    swprintf_s(image,ARRAYSIZE(image),L"%ls\\ntkvm.exe",package);
+    swprintf_s(image,ARRAYSIZE(image),L"%ls\\ntcon.exe",package);
     if(!CopyFileW(self,image,FALSE))return 84;
     wcscat_s(source,ARRAYSIZE(source),L"ntsrv.exe");
     swprintf_s(image,ARRAYSIZE(image),L"%ls\\ntsrv.exe",package);

@@ -1,5 +1,10 @@
 # Retained S12 status detail
 
+T424 S11 naming normalization: frontend labels/current source links now use NTCON.
+This does not claim the new basename existed in the recorded historical package.
+Exact earlier source, commands and product names remain in Git and sealed build
+evidence; recorded hashes, dates, results and limitations are unchanged.
+
 Moved unchanged from CURRENT during S39 admission to keep the active control
 document within its 32 KiB limit. The linked evidence remains authoritative
 for the recorded runs; this is historical status, not a current packet.
@@ -14,7 +19,7 @@ for the recorded runs; this is historical status, not a current packet.
 | Objective | Preserve logical text dimensions across DOS/native launch and return; eliminate hidden-Console viewport clipping and unintended Window scale changes. |
 | Non-goals | No guest/shared-lib modification, helper, ConPTY, new scheduler or S14 lifecycle expansion. |
 | Reference Baseline | S12 P2 fbbbe4870 and published eight-file package; read-only r135-r137 geometry probes. |
-| Files And ABI Surface | NTKVM state/channel; NTW32 Console state/presentation/frame packing; NTVDM original video handoff bindings; interface/worker-base only for needed common copied contracts; tests and evidence. |
+| Files And ABI Surface | NTCON state/channel; NTW32 Console state/presentation/frame packing; NTVDM original video handoff bindings; interface/worker-base only for needed common copied contracts; tests and evidence. |
 | Applicable Rules | docs/README.md task-reading authorities; source-first mirror policy; immutable guest; x86 CCPU40; every-production-P publication gate. |
 | Verification | Original mode-path audit; unit and real private-desktop tests of both directions, explicit native resize, DOS fallback, scrolling/cursor/edge markers, failed acknowledgment and isolation; complete DOS/WOW frontier regression. |
 | Expected Markers | Unchanged handoff preserves full frame extent; right/bottom edges retained; deliberate native resize propagates; unsupported DOS extent converts and is acknowledged before input resumes. |
@@ -22,7 +27,7 @@ for the recorded runs; this is historical status, not a current packet.
 | Reporting Requirements | Actual supported DOS modes, geometry provenance, conversion results, tests, deployed hashes and unpassed cases. |
 | Stop Conditions | Need for guest/shared-lib mutation, API interception, new helper or violation of original execution semantics requires owner decision; ordinary failures remain repair work. |
 | Exit Criteria | Met by formal x86, real backend tests, coherent eight-file publication, governance verification and pushed P1 `307c4a1b5`; T423 still awaits owner acceptance. |
-| Original Owner Request | Admit new S13 for approved text-size handoff repair; shift former S13. NTKVM stores authoritative geometry; native changes propagate; unsupported DOS extent restores last valid DOS mode. |
+| Original Owner Request | Admit new S13 for approved text-size handoff repair; shift former S13. NTCON stores authoritative geometry; native changes propagate; unsupported DOS extent restores last valid DOS mode. |
 | Similar-Issue Sweep | Native root initialization, nested launch/return, buffer replacement, scrolling, display switching, font geometry, viewport offsets and mouse mapping. |
 
 ### Retained S13 investigation
@@ -88,10 +93,10 @@ are superseded by the approved NTW32 text-cell pointer below, which passes
 80x50 without a graphics frame or library change.
 The earlier800-line library-capacity request is withdrawn: the owner has
 approved moving native pointer ownership into NTW32, rather than extending
-NTKVM's native-only composition. r41 logical mouse geometry and existing
+NTCON's native-only composition. r41 logical mouse geometry and existing
 failure/reset assertions pass. Owner selected the reverse-video text-cell
 pointer, keeping the text ABI and library unchanged. NTW32 now owns the logical
-pointer, copied-frame composition and native input translation; NTKVM's native
+pointer, copied-frame composition and native input translation; NTCON's native
 position/arrow implementation is removed. Candidate input protocol18 carries
 relative pointer/modifier records without frontend-selected geometry. r42 has
 86 passing packing/pointer checks; r45 has378 passing real-Console/pipe checks.
@@ -105,7 +110,7 @@ replaced O:/winnt. Details and failed attempts are
 indexed in the [S13 evidence ledger](m0-t423-s13-text-geometry.md).
 
 Audit actual original DOS mode support and Console resize observability first.
-NTKVM owns acknowledged logical geometry, separate from physical viewport and
+NTCON owns acknowledged logical geometry, separate from physical viewport and
 scrollback. Workers apply backend state before acknowledging/resuming input.
 DOS-compatible dimensions pass through original mode paths; otherwise restore
 the last valid DOS mode, or original startup default if none. Conversion does
@@ -116,7 +121,7 @@ linked proposal.
 
 ## Latest Delivery
 
-S13 P1 `307c4a1b5` is pushed. NTKVM now carries acknowledged logical text
+S13 P1 `307c4a1b5` is pushed. NTCON now carries acknowledged logical text
 geometry independent of physical viewport; NTW32 applies native geometry and
 returns supported DOS geometry through the original path. NTW32 owns its
 reverse-video text mouse pointer. Project-owned screen publication and the
@@ -136,12 +141,12 @@ Historical S12 handoff and subsequent supersession are retained in the
 ## Current Technical Baseline
 
 - MSVC Win32/x86 /MT CCPU40; no guest or shared-library modifications.
-- Runtime: run16.exe, ntsrv.exe, ntvdm.exe, ntkvm.exe, ntw32.exe, ntmon.exe,
+- Runtime: run16.exe, ntsrv.exe, ntvdm.exe, ntcon.exe, ntw32.exe, ntmon.exe,
   WOW32.DLL and VDMREDIR.DLL. Application 0.0.423; service protocol 16,
   copied Console protocol 17, native request protocol 4.
 - NTVDM owns original DOS/WOW execution. NTW32 owns native text execution
   and its ordinary hidden Console, without ConPTY or a private helper.
-  NTSRV handles authenticated registration and management; NTKVM owns visible
+  NTSRV handles authenticated registration and management; NTCON owns visible
   Console/Window and the common frame renderer. run16 waits for direct results.
 - worker-base owns matching project-added worker connection/client mechanisms:
   ordered transfer, validation/cancellation, frame chunks, input codec,

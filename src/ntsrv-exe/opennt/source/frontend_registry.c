@@ -475,7 +475,7 @@ DWORD OpenNtBaseServiceStartFrontend(OPENNT_BASE_CONNECTION *caller,DWORD pid,
     length=GetModuleFileNameW(NULL,image,ARRAYSIZE(image));
     if(!length || length>=ARRAYSIZE(image) || !(slash=wcsrchr(image,L'\\')))
         {error=ERROR_BAD_PATHNAME;goto done;}
-    if(wcscpy_s(slash+1,ARRAYSIZE(image)-(size_t)(slash+1-image),L"ntkvm.exe"))
+    if(wcscpy_s(slash+1,ARRAYSIZE(image)-(size_t)(slash+1-image),L"ntcon.exe"))
         {error=ERROR_FILENAME_EXCED_RANGE;goto done;}
     notification=CreateEventW(&security,TRUE,FALSE,NULL);
     retire=CreateEventW(&security,TRUE,FALSE,NULL);
@@ -1293,7 +1293,7 @@ DWORD service_bind_existing_console(OPENNT_BASE_CONNECTION *connection)
     service=connection->service;
     EnterCriticalSection(&service->lock);
     if (connection->console) { LeaveCriticalSection(&service->lock); return ERROR_SUCCESS; }
-    /* Only NTKVM roots report the visible Console membership. A launcher
+    /* Only NTCON roots report the visible Console membership. A launcher
      * inherits its authenticated root's logical Console when it retains the
      * root capability; membership itself grants no worker or task authority. */
     for (entry=service->connections.Flink;entry!=&service->connections;entry=entry->Flink) {

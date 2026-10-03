@@ -40,7 +40,7 @@ changing display mode, closing the Window or delivering the hotkey to the
 target. The next deliberate capture gesture may recapture it.
 
 run16 owns external launch and parent completion; NTVDM and NTVWM own their
-respective workers; NTKVM owns visible presentation; NTSRV owns registered
+respective workers; NTCON owns visible presentation; NTSRV owns registered
 coordination. Reuse the completed S12 lifecycle implementation. Preserve original
 owners and use minimal bindings. Do not conceal a lifetime defect with an
 arbitrary timeout or unconditional termination.

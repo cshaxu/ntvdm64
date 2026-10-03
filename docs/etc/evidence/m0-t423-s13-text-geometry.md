@@ -1,5 +1,10 @@
 # T423 S13 text geometry evidence
 
+T424 S11 naming normalization: frontend labels/current source links now use NTCON.
+This does not claim the new basename existed in the recorded historical package.
+Exact earlier source, commands and product names remain in Git and sealed build
+evidence; recorded hashes, dates, results and limitations are unchanged.
+
 ## Question and inputs
 
 Does DOS/native handoff preserve logical text extent independently of the
@@ -69,7 +74,7 @@ r17 supplied literal escape text instead of carriage returns; its timeout is
 not evidence that the product handoff passed or regressed. The corrected r18
 used actual carriage returns. Reports and transcripts are retained.
 
-The uncommitted candidate separates NTKVM logical viewport state from its
+The uncommitted candidate separates NTCON logical viewport state from its
 physical viewport, adds real NTW32 geometry application/readback, and prepares
 DOS-compatible geometry before the original worker return path. It does not
 change shared libraries or guest media. The latest native-first font change
@@ -140,7 +145,7 @@ weaken the test, or change shared libraries to mask the issue.
 window_frame.c now validates the active union arm and uses the existing
 frontend_text_frame_rasterize/library glyph renderer before GDI arrow
 composition. The test adapter no longer performs this conversion on behalf of
-the production pointer call. Formal x86 NTKVM and renderer fixture link.
+the production pointer call. Formal x86 NTCON and renderer fixture link.
 The r40 fixture proves direct80x25/font16 conversion with unchanged640x400
 extent. Its strict80x50 assertion still fails, now with ERROR_NOT_SUPPORTED50
 at the explicit768-line graphics limit rather than an inactive-union read.
@@ -148,14 +153,14 @@ No shared-library edit or runtime publication has occurred. A minimal800-line
 capacity exception has been requested from the owner; it is not yet approved.
 
 r41 builds tests/component-integration/frontend_window_mouse_test.c together
-with the production window_mouse.c (/MT /TC /std:c11, src and NTKVM include
+with the production window_mouse.c (/MT /TC /std:c11, src and NTCON include
 roots). Output is build/M0-T423/S13/mouse-r41/test.exe; log is
 O:/winnt/Logs2/t423-s13-mouse-r41-fixture.txt. Existing DOS/native/reset/failure
 assertions and the added22/25/28/43/50-row matrix pass: logical viewport
 origin100, bottom/right bounds, no invented button, font16->8 and smaller
 viewport clamping. This is an input-converter test, not a real mouse roundtrip.
 
-Source-order review: NTKVM apply_binding returns preparation errors before
+Source-order review: NTCON apply_binding returns preparation errors before
 installing DOS ownership; bind_worker waits for handoff_done and returns the
 actual error. NTW32 presentation_begin applies/readbacks screen state and
 writes imported cells before successful return; a seed error releases the
@@ -166,7 +171,7 @@ partial-failure and real backend resume evidence.
 ## Approved backend-owned text pointer (supersedes r40 composition)
 
 Owner selected the reverse-video text-cell cursor, retaining text-frame ABI
-and shared library. The800-line exception is withdrawn. NTKVM's native mouse
+and shared library. The800-line exception is withdrawn. NTCON's native mouse
 coordinate functions and GDI arrow compositor are removed. NTW32 text_frame.c
 owns logical mouse position, move-before-button translation, release and output
 copy colour inversion. Canonical CHAR_INFO/hidden Console cells, caret and
@@ -175,7 +180,7 @@ the final screen receipt. Original DOS mouse code remains unchanged.
 
 Copied input protocol18 adds POINTER motion/modifier records without frontend
 geometry. Original DOS relative records retain their geometry notification;
-NTKVM shares the routing mechanism, with finite encoding selection only.
+NTCON shares the routing mechanism, with finite encoding selection only.
 Private pointer records are converted to native MOUSE_EVENTs by NTW32, never
 sent as private tags to native applications. Failed delivery remains terminal
 and is not replayed. Absolute Console mouse records remain native records.
@@ -261,7 +266,7 @@ O:/winnt remains the S12 package; no S13 production P is claimed yet.
 r53 adds a strict production common-decoder pixel assertion for80x50/font16
 with a single underlined cell. It fails: the optional-style raster fallback
 exceeds768 lines even though the direct TEXT carrier supports800. r54/r55
-repair only ntkvm-exe/text_frame.c, retaining the library and copied protocol.
+repair only ntcon-exe/text_frame.c, retaining the library and copied protocol.
 For an otherwise directly representable page whose styled raster is too tall,
 the adapter assigns used (font bank, glyph, underline) variants to the library's
 existing512 text glyph slots. Colors, caret, dimensions and original wire
@@ -409,8 +414,8 @@ another publication. There is no S13 production P2 yet.
 ## Locked-screen follow-up and similar-race audit
 
 After the owner rejected polling as the primary answer, source review found
-that NTKVM already held one `io_lock` per Console RPC, but NTW32 read a
-multi-tile frontend image over many RPCs. A DOS write or the NTKVM presenter
+that NTCON already held one `io_lock` per Console RPC, but NTW32 read a
+multi-tile frontend image over many RPCs. A DOS write or the NTCON presenter
 could run between tiles. Protocol19 now adds native-only SNAPSHOT_BEGIN/END:
 the channel thread holds the same recursive frontend lock across the whole
 read; all DOS Console writes and the presenter wait for the first acquirer.

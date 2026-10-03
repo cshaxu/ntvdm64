@@ -49,7 +49,7 @@ DWORD OpenNtBaseServiceSnapshot(OPENNT_BASE_SERVICE *,uint64_t *epoch,
     OPENNT_BASE_WORKER_INFO *entries,uint32_t capacity,uint32_t *count);
 DWORD OpenNtBaseServiceTerminateWorker(OPENNT_BASE_SERVICE *,uint32_t process_id);
 DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *,HANDLE,OPENNT_BASE_CONNECTION **,DWORD *);
-/* Local Console membership is sampled only by the authenticated NTKVM root
+/* Local Console membership is sampled only by the authenticated NTCON root
  * which is actually attached to that Console. It is a bounded selection
  * hint for original ConsoleRecord association, never a task/worker claim. */
 DWORD OpenNtBaseServiceReportConsoleMembers(OPENNT_BASE_CONNECTION *,DWORD pid,

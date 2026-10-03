@@ -1,5 +1,10 @@
 # T424 S2 — Native worker identity migration
 
+T424 S11 naming normalization: frontend labels/current source links now use NTCON.
+This does not claim the new basename existed in the recorded historical package.
+Exact earlier source, commands and product names remain in Git and sealed build
+evidence; recorded hashes, dates, results and limitations are unchanged.
+
 ## Objective, source and scope
 
 Rename the project Win32 text worker to NTW32 and its project-owned native
@@ -23,7 +28,7 @@ identifier substrings remain original. No guest, shared library, original
 mirror code, ACL, endpoint, command syntax, scheduling or lifecycle changed.
 The only changed file under a mirror root is the project mvdm README.
 This is a project-name migration, not historical-source recovery or a claim
-of newly implemented native capabilities. Frontend remains NTKVM in S2;
+of newly implemented native capabilities. Frontend remains NTCON in S2;
 the reserved NTCON frontend name belongs to the later S3, not this worker.
 
 ## Audit and ABI
@@ -31,7 +36,7 @@ the reserved NTCON frontend name belongs to the later S3, not this worker.
 Get-ComponentRenameInventory.ps1 scans all tracked text/path names and all
 untracked non-ignored text, including the indexed archive; no archive directory
 is excluded. Invoke with WorkerName set to the former worker name,
-FrontendName=ntkvm, RecordName set to the former record family,
+FrontendName=ntcon, RecordName set to the former record family,
 PackageWorkerName=ntw32, PackageRoot=O:/winnt and a fresh OutputRoot below build/.
 The literal pre-migration arguments remain sealed in S1 Git/inventory.
 
@@ -127,7 +132,7 @@ Eight tested x86 files were published together to O:/winnt. The recovery set,
 original exact basenames, prepublication and published manifests are under
 run-root/published-recovery and *publication-hashes.json. The obsolete worker
 EXE was removed only after a recoverable backup and eight-of-eight hash check;
-the intermediate frontend is still ntkvm.exe. SYSTEM.INI, NTVDM.REG and guest
+the intermediate frontend is still ntcon.exe. SYSTEM.INI, NTVDM.REG and guest
 media were not overwritten. Z: staging mapping was removed after testing.
 
 | Published file | SHA-256 |
@@ -136,7 +141,7 @@ media were not overwritten. Z: staging mapping was removed after testing.
 | ntsrv.exe | 8FD2C38EDD4758AA12A793D244C2010E59760A9BC524ED07137FEFF595CAA164 |
 | ntvdm.exe | 50AC0FF4A2018023D1E777F542806BBC463B2EA31FDB4BF82F93BCB955C0596D |
 | ntw32.exe | F59C29ACCE6CF23A7EE5CA59C9F261630D503F27BAAC53421F4057581165A492 |
-| ntkvm.exe | 8950683266549DE72451207DD1DCA0C0CFBB426819060BB197CD3A4F11F74783 |
+| ntcon.exe | 8950683266549DE72451207DD1DCA0C0CFBB426819060BB197CD3A4F11F74783 |
 | ntmon.exe | 1DD84B369BE0B632196331F8BCF512CE04C9A603199F3697825F312B57962F90 |
 | wow32.dll | BEB688FE832921D788DB297787B2D1062D7FDD095AF1A304824F31DE7F19D0C1 |
 | VDMREDIR.dll | 13BC631926C741DC31E1A259A85DA6482BD6B8093DE1716B08D3FF35226C4DC9 |

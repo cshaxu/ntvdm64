@@ -1,6 +1,6 @@
 #include "ntvwm-exe/presentation.h"
 #include "ntvwm-exe/console_state.h"
-#include "ntkvm-exe/console_video.h"
+#include "ntcon-exe/console_video.h"
 #include "common/console/client.h"
 #include <stdio.h>
 #include <stddef.h>
@@ -459,19 +459,19 @@ int wmain(int argc,WCHAR **argv)
     unsigned mode;
     if((argc!=2 && argc!=3) || _wfopen_s(&log,argv[1],L"wx"))return 2;
     {
-        ntkvm_worker_client client={0};DWORD flags;
+        ntcon_worker_client client={0};DWORD flags;
         HANDLE borrowed=CreateEventW(NULL,TRUE,FALSE,NULL),event;
         CHECK(borrowed!=NULL);
-        CHECK(ntkvm_worker_client_init(&client,NULL,GetCurrentProcess(),NULL,1)==ERROR_INVALID_PARAMETER);
+        CHECK(ntcon_worker_client_init(&client,NULL,GetCurrentProcess(),NULL,1)==ERROR_INVALID_PARAMETER);
         CHECK(!client.event);
-        CHECK(!ntkvm_worker_client_init(&client,borrowed,GetCurrentProcess(),borrowed,17));
+        CHECK(!ntcon_worker_client_init(&client,borrowed,GetCurrentProcess(),borrowed,17));
         event=client.event;
         CHECK(event && client.pipe==borrowed && client.cancel==borrowed && client.generation==17);
-        ntkvm_worker_client_dispose(&client);
+        ntcon_worker_client_dispose(&client);
         CHECK(!client.event && !client.pipe && !client.peer && !client.cancel);
         CHECK(!GetHandleInformation(event,&flags) && GetLastError()==ERROR_INVALID_HANDLE);
         CHECK(GetHandleInformation(borrowed,&flags));
-        ntkvm_worker_client_dispose(&client);
+        ntcon_worker_client_dispose(&client);
         CHECK(GetHandleInformation(borrowed,&flags));
         CloseHandle(borrowed);
     }

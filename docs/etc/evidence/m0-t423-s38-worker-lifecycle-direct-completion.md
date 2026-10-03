@@ -1,8 +1,13 @@
 # T423 S38: resident frontend reuse and direct completion
 
+T424 S11 naming normalization: frontend labels/current source links now use NTCON.
+This does not claim the new basename existed in the recorded historical package.
+Exact earlier source, commands and product names remain in Git and sealed build
+evidence; recorded hashes, dates, results and limitations are unchanged.
+
 S37 was the reference package. The owner reproduced `run16 command` failing
 on a later launch in the same Windows Terminal CMD tab (error 1460); killing
-the retained NTKVM made another launch work. This was not a COMMAND guest
+the retained NTCON made another launch work. This was not a COMMAND guest
 failure: the previous borrowed frontend lease had drained its DOS channel,
 NTSRV had removed the delivered route, and the resident NTVDM retained the old
 channel. Reusing that worker left its next request without a viable frontend.
@@ -13,7 +18,7 @@ channel. Reusing that worker left its next request without a viable frontend.
   cancellable ten-second workerless grace only after the root is idle with no
   worker or pending task. The active worker can remain READY after its direct
   task ends; a launcher exit alone does not kill it.
-- A borrowed NTKVM lease now parks Window/Console presentation, restores the
+- A borrowed NTCON lease now parks Window/Console presentation, restores the
   outer caller's input mode, and keeps delivered worker channels. A later
   direct request reuses the same authenticated route. A dedicated root still
   drains channels when it actually retires. There is no second frontend
@@ -56,7 +61,7 @@ same x86 MSVC toolchain. This is not claimed as a fresh cold full-graph build.
   `build/M0-T423/S38/r002/s38-race-console-summary.json` and
   `build/M0-T423/S38/r002/s38-race-window-summary.json`.
 - Killing only the isolated NTVDM worker while a direct DOS launch waited
-  returned 1067 to its run16. The workerless NTKVM survived at seconds 0–9
+  returned 1067 to its run16. The workerless NTCON survived at seconds 0–9
   and retired at approximately second 10; NTSRV's own empty-service grace
   followed. This establishes the tested death edge, not a universal timing
   guarantee across arbitrary host scheduling.
@@ -69,7 +74,7 @@ same x86 MSVC toolchain. This is not claimed as a fresh cold full-graph build.
 | --- | --- |
 | run16.exe | `879CFDF3169E17E9EDE6F6BD5FA405339CED4840AB50D06664B3C9C1744A2FBD` |
 | ntsrv.exe | `5566B5C4B5FC86D97A54E6B0F66300AFEB33B6E7973D29DDFD67BA70D3BB76E5` |
-| ntkvm.exe | `3252111E651719B3A921FFB51A7AB79A66C991FCD28935AD83E6573CE65683AF` |
+| ntcon.exe | `3252111E651719B3A921FFB51A7AB79A66C991FCD28935AD83E6573CE65683AF` |
 | ntvdm.exe | `60155D9B1E8DF83F17AC407B682EFF80033A3A9584CA0CE2314DAFCEE783C0C5` |
 | ntw32.exe | `CBAB7B42FBDB2411126B3B1A5DC0CD8D80183DE94C2EE8CCFE5816EA04026966` |
 | ntmon.exe | `3D86477B95A673B602540952805790DDFE7C4541496819030ADF16DDBD4FBA53` |

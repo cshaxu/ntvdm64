@@ -8,7 +8,7 @@
 #include <string.h>
 #include <limits.h>
 struct ntvwm_presentation {
-    ntkvm_worker_client channel;
+    ntcon_worker_client channel;
     CRITICAL_SECTION lock;
     CHAR_INFO *published_cells;
     DWORD published_count,published_width;
@@ -21,7 +21,7 @@ struct ntvwm_presentation {
 };
 static DWORD exchange(ntvwm_presentation *client,console_io_request *request,console_io_reply *reply)
 {
-    DWORD error=ntkvm_worker_call(&client->channel,request,reply);
+    DWORD error=ntcon_worker_call(&client->channel,request,reply);
     ntvwm_trace_error("exchange",request->operation,error);
     return error;
 }
@@ -34,7 +34,7 @@ DWORD ntvwm_presentation_open(HANDLE pipe,HANDLE frontend,HANDLE stop,DWORD gene
     if(!pipe || pipe==INVALID_HANDLE_VALUE || !frontend || !generation)return ERROR_INVALID_PARAMETER;
     client=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*client));
     if(!client)return ERROR_NOT_ENOUGH_MEMORY;
-    error=ntkvm_worker_client_init(&client->channel,pipe,frontend,stop,generation);
+    error=ntcon_worker_client_init(&client->channel,pipe,frontend,stop,generation);
     if(error) { HeapFree(GetProcessHeap(),0,client);return error; }
     InitializeCriticalSection(&client->lock);*output=client;return ERROR_SUCCESS;
 }
@@ -42,7 +42,7 @@ void ntvwm_presentation_close(ntvwm_presentation *client)
 {
     if(!client)return;
     if(client->published_cells)HeapFree(GetProcessHeap(),0,client->published_cells);
-    ntkvm_worker_client_dispose(&client->channel);DeleteCriticalSection(&client->lock);
+    ntcon_worker_client_dispose(&client->channel);DeleteCriticalSection(&client->lock);
     HeapFree(GetProcessHeap(),0,client);
 }
 DWORD ntvwm_presentation_call(ntvwm_presentation *client,const console_io_request *input,
@@ -87,7 +87,7 @@ DWORD ntvwm_presentation_input(ntvwm_presentation *client,HANDLE input,DWORD *ac
             error=ntvwm_mouse_input(&client->mouse,&pointer,records+count,&generated);
             count+=generated;
         } else {
-            if(!ntkvm_worker_decode_input(&wire,&records[count]))error=ERROR_INVALID_DATA;
+            if(!ntcon_worker_decode_input(&wire,&records[count]))error=ERROR_INVALID_DATA;
             else {
                 if(wire.type==MOUSE_EVENT && client->mouse.ready) {
                     ntvwm_mouse *mouse=&client->mouse;
@@ -120,7 +120,7 @@ DWORD ntvwm_presentation_text(ntvwm_presentation *client,const console_video_des
         (uint64_t)sizeof(console_text_style)+(uint64_t)description->stride*description->height!=description->bytes ||
         capacity<description->bytes)return ERROR_INVALID_PARAMETER;
     EnterCriticalSection(&client->lock);
-    error=ntkvm_worker_video(&client->channel,description,payload);
+    error=ntcon_worker_video(&client->channel,description,payload);
     LeaveCriticalSection(&client->lock);return error;
 }
 
@@ -163,7 +163,7 @@ DWORD ntvwm_presentation_capture(ntvwm_presentation *client,const console_text_s
      * Console cells; the bounded PC glyph conversion lives only here. */
     EnterCriticalSection(&client->lock);
     if(title_read && (!client->title_valid || strcmp(client->published_title,title))) {
-        error=ntkvm_worker_publish_title(&client->channel,title);
+        error=ntcon_worker_publish_title(&client->channel,title);
         if(!error) {
             strcpy_s(client->published_title,sizeof(client->published_title),title);
             client->title_valid=TRUE;
@@ -441,7 +441,7 @@ done:
 
 static DWORD activate_presentation(ntvwm_presentation *client,BOOL active)
 {
-    return ntkvm_worker_activate(&client->channel,CONSOLE_IO_WORKER_NATIVE,active);
+    return ntcon_worker_activate(&client->channel,CONSOLE_IO_WORKER_NATIVE,active);
 }
 DWORD ntvwm_presentation_begin(ntvwm_presentation *client,HANDLE output)
 {
@@ -483,7 +483,7 @@ static DWORD return_unused_input(ntvwm_presentation *client)
     while(!error && keys) {
         console_io_reply reply;
         DWORD count=min(keys,CONSOLE_IO_INPUT_CAPACITY),base=keys-count;
-        error=ntkvm_worker_prepend_keys(&client->channel,records+base,count,&reply);
+        error=ntcon_worker_prepend_keys(&client->channel,records+base,count,&reply);
         if(!error && !reply.result)error=reply.error ? reply.error : ERROR_GEN_FAILURE;
         if(!error && reply.state.count!=count)error=ERROR_WRITE_FAULT;
         keys=base;

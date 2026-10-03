@@ -28,7 +28,7 @@ control channel is removed; NTVWM uses console_io like NTVDM. native_launch.h
 declares the shared launch codec/materializer and borrowed local string views;
 those local API types are not serialized records.
 
-worker_console_client.h declares the shared NTKVM worker-client API and its
+worker_console_client.h declares the shared NTCON worker-client API and its
 local, borrowed-handle request state. This is not a serialized wire record and
 does not confer ownership of a Console, guest or process. The only implementation
 is worker-base/console_client.c, linked by both worker backends; no code lives here.

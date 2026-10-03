@@ -53,7 +53,7 @@ $generatedFixtures = @(
     (Join-Path $runtimeFixtureRoot 'EOF.CMD'),
     (Join-Path $runtimeFixtureRoot 'D7.CMD')
 )
-$productNames = @('run16.exe','ntvdm.exe','ntsrv.exe','ntkvm.exe')
+$productNames = @('run16.exe','ntvdm.exe','ntsrv.exe','ntcon.exe')
 # Retain compatibility with sealed pre-NTVWM evidence packages.
 if(Test-Path -LiteralPath (Join-Path $PackageRoot 'ntvwm.exe')){$productNames+='ntvwm.exe'}
 $productPaths = $productNames | ForEach-Object { Join-Path $PackageRoot $_ }
@@ -71,7 +71,7 @@ if($ProcessPackageRoot){
     }
 }
 function Get-PackageProcesses {
-    @(Get-CimInstance Win32_Process -Filter "Name='run16.exe' OR Name='ntvdm.exe' OR Name='ntsrv.exe' OR Name='ntkvm.exe' OR Name='ntvwm.exe' OR Name='SURVIVE.EXE'" |
+    @(Get-CimInstance Win32_Process -Filter "Name='run16.exe' OR Name='ntvdm.exe' OR Name='ntsrv.exe' OR Name='ntcon.exe' OR Name='ntvwm.exe' OR Name='SURVIVE.EXE'" |
         Where-Object { $_.ExecutablePath -in $productPaths })
 }
 function Test-ExactFileBytes {
@@ -188,7 +188,7 @@ if($OrdinaryFrontend -and $FrontendObserver){throw 'Select ordinary or instrumen
 if(!$OrdinaryFrontend -and @($matrix | Where-Object {$_.RootFrontend -and $_.Name -in $Cases}).Count){
     if(!$FrontendObserver -or
        (Get-FileHash -LiteralPath $FrontendObserver).Hash -ne
-       (Get-FileHash -LiteralPath (Join-Path $PackageRoot 'ntkvm.exe')).Hash){
+       (Get-FileHash -LiteralPath (Join-Path $PackageRoot 'ntcon.exe')).Hash){
         throw 'Owner cases require the test-only frontend observer in the isolated test package'
     }
 }
@@ -261,7 +261,7 @@ try {
                     if($OrdinaryFrontend -and $case.RootFrontend){
                         foreach($node in $tree){
                             $frontendId=[int]$node.ProcessId
-                            if($node.ExecutablePath -eq (Join-Path $PackageRoot 'ntkvm.exe') -and
+                            if($node.ExecutablePath -eq (Join-Path $PackageRoot 'ntcon.exe') -and
                                 $node.CommandLine -match '--session\s' -and
                                 $observedDescendants.Contains($frontendId) -and !$frontendWaiters.ContainsKey($frontendId)){
                                 $probe=$null

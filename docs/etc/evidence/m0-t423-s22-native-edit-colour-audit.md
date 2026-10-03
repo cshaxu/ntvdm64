@@ -1,8 +1,13 @@
 # T423 S22 native EDIT colour audit
 
+T424 S11 naming normalization: frontend labels/current source links now use NTCON.
+This does not claim the new basename existed in the recorded historical package.
+Exact earlier source, commands and product names remain in Git and sealed build
+evidence; recorded hashes, dates, results and limitations are unchanged.
+
 ## Question
 
-Why does `run16 edit.exe` appear monochrome in the NTKVM Window route: does
+Why does `run16 edit.exe` appear monochrome in the NTCON Window route: does
 colour disappear in NTW32 capture/frame transport/rendering, or has the target
 already chosen a monochrome terminal presentation?
 
@@ -13,7 +18,7 @@ already chosen a monochrome terminal presentation?
 - New checked-in probe:
   `tests/observation/ntw32_native_colour_probe.c`.
 - Production NTW32 sources: `console_state.c`, `text_frame.c` and
-  `presentation.c`; NTKVM `window_frame.c`.
+  `presentation.c`; NTCON `window_frame.c`.
 
 ## Procedure
 
@@ -73,7 +78,7 @@ terminal-looking environment variables does not create those replies.
 
 ## Interpretation and confidence
 
-**High confidence:** this is not an NTKVM rendering loss, a wrong copied
+**High confidence:** this is not an NTCON rendering loss, a wrong copied
 palette, or an NTW32 frame conversion error.  On the current native-worker
 backend, Edit itself has already emitted only attributes 7 and 15 before
 NTW32 reads the screen.  The Window renderer then correctly displays those

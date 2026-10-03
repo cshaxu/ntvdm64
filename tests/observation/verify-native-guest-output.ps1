@@ -20,7 +20,7 @@ if($LogPrefix -notmatch '^[a-z0-9-]+$'){throw 'Invalid prefix'}
 $report=Join-Path (Resolve-Path $LogRoot).Path ($LogPrefix+'.txt')
 if(Test-Path $report){throw 'Use fresh runtime report'}
 $paths=@()
-foreach($name in @('run16.exe','ntkvm.exe','ntsrv.exe','ntvdm.exe')){
+foreach($name in @('run16.exe','ntcon.exe','ntsrv.exe','ntvdm.exe')){
     $launch=Join-Path $PackageRoot $name;$actual=Join-Path $physical $name
     if((Get-FileHash $launch).Hash -ne (Get-FileHash $actual).Hash){throw 'Package identity mismatch'}
     $paths+=@($launch,$actual)

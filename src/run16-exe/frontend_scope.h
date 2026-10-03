@@ -19,7 +19,7 @@ DWORD run16_frontend_scope_wait_native(run16_frontend_scope *,DWORD *,DWORD *);
 DWORD run16_wait_direct_event(HANDLE receipt);
 DWORD run16_frontend_scope_resume_parent(run16_frontend_scope *);
 /* Root character-task completion barrier: do not return an outer CMD while its active
- * screen buffer and input mode are still owned by NTKVM teardown. */
+ * screen buffer and input mode are still owned by NTCON teardown. */
 DWORD run16_frontend_scope_restore_parent(run16_frontend_scope *);
 DWORD run16_frontend_scope_retire(run16_frontend_scope *);
 #endif

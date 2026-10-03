@@ -22,12 +22,12 @@ static BOOL decode_input(const console_io_input *wire,INPUT_RECORD *record)
         ZeroMemory(record,sizeof(*record));record->EventType=CONSOLE_INPUT_RELATIVE_MOUSE;
         memcpy(&record->Event,&mouse,sizeof(mouse));return TRUE;
     }
-    return ntkvm_worker_decode_input(wire,record);
+    return ntcon_worker_decode_input(wire,record);
 }
 
 typedef struct console_client {
     session *owner;
-    ntkvm_worker_client channel;
+    ntcon_worker_client channel;
     HANDLE ready,wake,stop,rearm,watcher,shutdown;
     HANDLE capability,input_identity,output_identity;
     CRITICAL_SECTION lock;
@@ -198,7 +198,7 @@ static void console_client_end(void *context)
         WaitForSingleObject(client->watcher,INFINITE);CloseHandle(client->watcher);
     }
     CloseHandle(client->channel.pipe);CloseHandle(client->channel.peer);
-    ntkvm_worker_client_dispose(&client->channel);
+    ntcon_worker_client_dispose(&client->channel);
     CloseHandle(client->ready);
     if (client->capability) CloseHandle(client->capability);
     if (client->wake) CloseHandle(client->wake);
@@ -246,7 +246,7 @@ DWORD ntvdm_console_client_begin(session *owner)
     if(!error && !compare(root,client->channel.peer))error=ERROR_ACCESS_DENIED;
     if(root)CloseHandle(root);
     if(error){console_client_end(client);return error;}
-    error=ntkvm_worker_client_init(&client->channel,client->channel.pipe,
+    error=ntcon_worker_client_init(&client->channel,client->channel.pipe,
         client->channel.peer,NULL,client->channel.generation);
     if(error){console_client_end(client);return error;}
     client->wake=CreateEventW(NULL,TRUE,FALSE,NULL);
@@ -339,17 +339,17 @@ static console_client *input_client(HANDLE input)
  * request sequence, including stream chunks and geometry queries. */
 static DWORD exchange(console_client *client,console_io_reply *reply)
 {
-    return ntkvm_worker_exchange(&client->channel,&client->request,reply);
+    return ntcon_worker_exchange(&client->channel,&client->request,reply);
 }
 
 static DWORD console_activate(console_client *client,BOOL active)
 {
     DWORD error;
     EnterCriticalSection(&client->lock);
-    /* NTKVM owns the I/O predicate and waits for its actual binding change
+    /* NTCON owns the I/O predicate and waits for its actual binding change
      * inside this same activation request. It returns one bounded failure;
      * this worker does not sample another process's ownership on a timer. */
-    error=ntkvm_worker_activate(&client->channel,0,active);
+    error=ntcon_worker_activate(&client->channel,0,active);
     /* Unlike IRQ cancellation, successful DOS ownership handoff retires the
      * frontend's DOS mouse route and discards its copied relative records.
      * Original nt_block_event_thread has quiesced the event/timer producers
@@ -382,7 +382,7 @@ BOOL ntvdm_console_publish_video(const console_video_description *description,
         !memcmp(pixels,&client->sent_configuration.style,sizeof(console_text_style)) &&
         !memcmp(description->palette,client->sent_configuration.palette,
             sizeof(client->sent_configuration.palette)))goto done;
-    error=ntkvm_worker_video(&client->channel,description,pixels);
+    error=ntcon_worker_video(&client->channel,description,pixels);
     if(!error && description && description->kind==CONSOLE_VIDEO_TEXT_CONFIGURATION &&
         description->bytes==sizeof(console_text_style)) {
         memcpy(&client->sent_configuration.style,pixels,sizeof(console_text_style));
@@ -566,7 +566,7 @@ BOOL WINAPI MvdmSetConsoleTitleA(LPCSTR title)
         copied[min(length,sizeof(copied)-1)]=0;
         /* The original Console title call has already succeeded. Window
          * caption publication is supplemental and cannot change its result. */
-        (void)ntkvm_worker_publish_title(&client->channel,copied);
+        (void)ntcon_worker_publish_title(&client->channel,copied);
     }
     LeaveCriticalSection(&client->lock);
     SetLastError(error);return !error && result;
@@ -1010,7 +1010,7 @@ BOOL ntvdm_console_prepend_keys(HANDLE input,PINPUT_RECORD records,DWORD length,
         SetLastError(ERROR_INVALID_PARAMETER);return FALSE;
     }
     EnterCriticalSection(&client->lock);
-    error=ntkvm_worker_prepend_keys(&client->channel,records,length,&reply);
+    error=ntcon_worker_prepend_keys(&client->channel,records,length,&reply);
     if (!error) {
         *written=reply.state.count;ok=reply.result;if (!ok) error=reply.error;
     }

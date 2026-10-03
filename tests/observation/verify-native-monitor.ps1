@@ -14,7 +14,7 @@ if(!$physical.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::Ordin
 }
 if($LogPrefix -notmatch '^[a-z0-9-]+$'){throw 'Invalid log prefix'}
 $paths=@()
-foreach($name in @('run16.exe','ntkvm.exe','ntsrv.exe','ntmon.exe','ntvwm.exe')){
+foreach($name in @('run16.exe','ntcon.exe','ntsrv.exe','ntmon.exe','ntvwm.exe')){
     $launch=Join-Path $PackageRoot $name;$actual=Join-Path $physical $name
     if((Get-FileHash $launch).Hash -ne (Get-FileHash $actual).Hash){throw 'Candidate identity mismatch'}
     $paths+=@($launch,$actual)

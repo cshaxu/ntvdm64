@@ -48,7 +48,7 @@ try {
                 elseif (($before -match '[a-zA-Z0-9]$') -or ($after -match '^[a-zA-Z0-9]')) { $class = 'substring-not-identity' }
                 elseif ($after -match '^[/\\](client|server|inc|test|private\.c|output\.c|HandleKeyEvent|\{)(?![a-zA-Z0-9])' -or
                     $parts[0] -like 'artifacts/documentation-archive/*' -or
-                    $parts[0] -eq 'src/ntkvm-exe/window_keyboard.c' -or
+                    $parts[0] -eq 'src/ntcon-exe/window_keyboard.c' -or
                     $parts[0] -eq 'src/ntvdm-exe/win32/console_graphics.c' -or
                     $parts[0] -eq 'src/opennt-abi/host-compat/README.md') { $class = 'original-console-source' }
                 elseif ($parts[0] -match '^docs/(proposals/proposal-(native-worker-frontend-renaming-001|worker-task-trace-observation-001|native-launch-hook-001)\.md|states/CURRENT\.md|etc/operations/t424-worker-frontend-renaming-plan\.md|etc/evidence/m0-t424-s2-native-worker-identity\.md)$' -and

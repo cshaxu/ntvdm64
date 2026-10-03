@@ -1,5 +1,10 @@
 # M0 T423 S40 native alternate-screen geometry
 
+T424 S11 naming normalization: frontend labels/current source links now use NTCON.
+This does not claim the new basename existed in the recorded historical package.
+Exact earlier source, commands and product names remain in Git and sealed build
+evidence; recorded hashes, dates, results and limitations are unchanged.
+
 ## Scope and baseline
 
 Owner requested investigation and repair of COMMAND -> CMD -> installed modern
@@ -19,7 +24,7 @@ subscription was denied; no WMI event coverage is claimed.
 
 NTW32 capture already orders native geometry transfer correctly: grow storage,
 apply viewport, then shrink storage. EDIT changes its alternate buffer to
-80x28. NTKVM's WINDOW_RECT handler incorrectly treated matching cached logical
+80x28. NTCON's WINDOW_RECT handler incorrectly treated matching cached logical
 geometry as proof that the actual canonical viewport was already applied.
 The real canonical viewport could still be 120x30 or 80x30. Its next
 BUFFER_SIZE(80,28) consequently failed with ERROR_INVALID_PARAMETER.
@@ -37,7 +42,7 @@ See [SetConsoleWindowInfo](https://learn.microsoft.com/en-us/windows/console/set
 
 ## Repair and adjacent audit
 
-Only src/ntkvm-exe/console_frontend.c changes production behavior. Compute the
+Only src/ntcon-exe/console_frontend.c changes production behavior. Compute the
 same physical projection as before, compare it against GetConsoleScreenBufferInfo's
 actual srWindow, and skip the resize only when those physical rectangles match.
 Publish the logical rectangle only on success. Existing channel locking,
@@ -55,8 +60,8 @@ Build root: build/M0-T423/S40/r001. VS2022 MSVC14.43.34808 x86 /MT, SDK
 10.0.22621.0, CCPU40; unchanged source/build inputs reuse the sealed S39 cache.
 Generate with tools/build/New-T310OriginalSoftpcNinja.ps1, Architecture=x86,
 BuildRoot=the above root, NodeExecutable=O:/.nvm/versions/node/v22.22.1/bin/node.exe.
-Execute its compile/link commands for console_frontend.obj, ntkvm.exe and
-console-channel-lifetime-test.exe. Only NTKVM changes among the eight products.
+Execute its compile/link commands for console_frontend.obj, ntcon.exe and
+console-channel-lifetime-test.exe. Only NTCON changes among the eight products.
 The observer is separately compiled x86 /MT from console_startup_observer.c
 with user32.lib and dbghelp.lib, with object and EXE under the build root.
 
@@ -96,7 +101,7 @@ existing inputs/production artifacts are unchanged by that harness safeguard.
 
 Focused tests pass and the coherent package has been published to O:/winnt.
 Recovery copy is build-root/published-recovery; prepublication-hashes.json and
-published-hashes.json prove all eight files. Only NTKVM differs from S39:
+published-hashes.json prove all eight files. Only NTCON differs from S39:
 SHA256 `886E2ECC9D8937F17E21A63E634018AC3F8087766632D9BB582B30F731EE1F94`.
 Other seven hashes exactly match the indexed S39 evidence. Guest/configuration
 and NTVDM.REG are not overwritten. Only exact O:/winnt package processes are

@@ -6,8 +6,8 @@
 #include <stdio.h>
 #include <string.h>
 #include "run16-exe/frontend_scope.h"
-#include "ntkvm-exe/console_channel.h"
-#include "ntkvm-exe/session_service.h"
+#include "ntcon-exe/console_channel.h"
+#include "ntcon-exe/session_service.h"
 #include "run16-exe/frontend_bootstrap.h"
 #include "common/protocol/console_io.h"
 
@@ -33,7 +33,7 @@ static void attached(void);
 static DWORD fixture_frontend_start(PCWSTR image,frontend_connection *connection)
 {
     DWORD error;
-    CHECK(wcsstr(image,L"ntkvm.exe")!=NULL);
+    CHECK(wcsstr(image,L"ntcon.exe")!=NULL);
     ZeroMemory(connection,sizeof(*connection));
     notification=CreateEventW(NULL,TRUE,FALSE,NULL);CHECK(notification);++registrations;
     CHECK(DuplicateHandle(GetCurrentProcess(),notification,GetCurrentProcess(),&connection->capability,SYNCHRONIZE,TRUE,0));
@@ -46,7 +46,7 @@ DWORD OpenNtBaseClientStartFrontend(uint64_t window,BOOL borrowed,HANDLE *root,
 {
     frontend_connection value={0};DWORD error;
     (void)window;(void)borrowed;
-    error=fixture_frontend_start(L"ntkvm.exe",&value);
+    error=fixture_frontend_start(L"ntcon.exe",&value);
     *root=value.process;*capability=value.capability;*restored=NULL;
     return error;
 }

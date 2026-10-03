@@ -154,7 +154,7 @@ static DWORD scope_launch_native(run16_frontend_scope *scope,const run16_native_
     for(;;) {
         error=OpenNtBaseClientStartNativeWorker(&worker);
         if(error==ERROR_ALREADY_EXISTS) {
-            /* Each launcher has its own auto-reset state event; NTKVM's
+            /* Each launcher has its own auto-reset state event; NTCON's
              * retirement event is never shared with this admission wait. */
             error=wait_worker_change(changed,NULL,scope->root,deadline);
             if(!error)continue;

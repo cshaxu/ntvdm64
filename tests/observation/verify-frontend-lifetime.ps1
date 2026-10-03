@@ -24,7 +24,7 @@ if(!$ProcessPackageRoot.StartsWith($build,[StringComparison]::OrdinalIgnoreCase)
 }
 if(Test-Path $EvidenceRoot){throw 'Use fresh evidence'}
 $paths=@()
-foreach($name in @('run16.exe','ntkvm.exe','ntvdm.exe','ntvwm.exe','ntsrv.exe')){
+foreach($name in @('run16.exe','ntcon.exe','ntvdm.exe','ntvwm.exe','ntsrv.exe')){
     $launch=Join-Path $PackageRoot $name
     $physical=Join-Path $ProcessPackageRoot $name
     if((Get-FileHash $launch).Hash -ne (Get-FileHash $physical).Hash){throw 'Candidate identity mismatch'}

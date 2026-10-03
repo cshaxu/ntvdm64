@@ -186,7 +186,7 @@ production delivery. Never lower the baseline or equate a window with playabilit
 Use valid incremental build caches with exact toolchain/flags/dependency
 identity; rebuild affected closure, not blindly all sources. Preserve sealed
 evidence independently. Publish the complete package selected at admission: currently ntmon.exe,
-run16.exe, ntsrv.exe, ntvdm.exe, ntkvm.exe, WOW32.DLL and VDMREDIR.DLL, plus
+run16.exe, ntsrv.exe, ntvdm.exe, ntcon.exe, WOW32.DLL and VDMREDIR.DLL, plus
 original needed media and reviewed config to O:/winnt. Verify all final hashes and keep a recoverable coherent
 baseline; protect owner sessions/data and do not leave mixed deployments.
 

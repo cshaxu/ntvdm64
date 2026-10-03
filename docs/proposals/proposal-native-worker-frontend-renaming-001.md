@@ -14,15 +14,20 @@ from common/protocol delivery: S7 delivers common and the two existing
 transport families, S8 completes the NTSRV provenance/block ledger and
 service-private physical split and S9 implements GUI routing. The subsequent
 owner insertion makes S10 the rapid relaunch/frontend lost-wakeup repair;
-former S10 frontend naming becomes S11 and former S11 final audit becomes S12.
+former S10 frontend naming becomes S11. The next owner approval inserts unified
+logical text storage/handoff as S12; the former S12 final audit becomes S13.
 The linked working plan is the current
 sequence; earlier admission chronology below is retained as history, not
 permission to fold S8 work back into S7. T closure remains owner-controlled.
 
+The [S11 delivery ledger](../etc/evidence/m0-t424-s11-frontend-name.md) records
+the frontend identity migration and verified eight-file publication. CURRENT
+retains the owner's stop after S11; S12 planning is not a second admission.
+
 | Role | S2 intermediate owner/product | Final owner/product |
 | --- | --- | --- |
 | Resident native Windows worker; text owns hidden Console, GUI retains native windows under S9 | `src/ntw32-exe` / `ntw32.exe` | S6 worker identity: `src/ntvwm-exe` / `ntvwm.exe`. |
-| Visible Console/Window frontend, owns display/input/presentation routing | `src/ntkvm-exe` / `ntkvm.exe` | S11 reserved frontend identity: `src/ntcon-exe` / `ntcon.exe`. |
+| Visible Console/Window frontend, owns display/input/presentation routing | S2 product `ntkvm.exe`; its owner is moved by S11. | S11 frontend identity: `src/ntcon-exe` / `ntcon.exe`. |
 
 The final eight files are run16.exe, ntsrv.exe, ntvdm.exe, ntvwm.exe,
 ntcon.exe (frontend only), ntmon.exe, WOW32.DLL and VDMREDIR.DLL.
@@ -94,7 +99,32 @@ are explicit bounded exceptions to this package's initial name-only policy.
 | S9 | Native GUI routing through NTVWM and service-held handles; launcher classification precedes admission as in DOS/WOW. Default launcher returns on startup success. Preserve --wait/shared workers. Monitor/UNBOUND display belongs to the queue-head NTMON T candidate. |
 | S10 | Rapid relaunch/frontend lost-wakeup repair after S9: one lock-protected NTSRV pending-work notification mechanism, deterministic race and fast CMD/COMMAND reuse tests, unchanged completion/Console-return/isolation semantics and full publication gates. |
 | S11 | Frontend NTCON migration after S10 repair delivery; build/test/wiring/name checks and verified final eight-file publication. |
-| S12 | Final ownership/semantic-diff and naming audit, indexes/authorities, clean committed/pushed delivery; owner decides T acceptance. |
+| S12 | Unified frontend logical_surface for NTVDM/NTVWM text, fixed upper-left projection against actual canvas and symmetric current-state DOS/native handoff; implementation, regression and coherent publication after S11. |
+| S13 | Former S12 final ownership/semantic-diff and naming audit, indexes/authorities, clean committed/pushed delivery; owner decides T acceptance. |
+
+## Owner-added S12 unified text surface
+
+S12 is approved for sequential execution after S11 naming delivery, not a second
+active packet. NTCON then means the frontend formerly named NTKVM; NTVWM remains
+the native worker. Generalize frontend-owned dos_surface into logical_surface
+and require both workers' text to enter it before Console/Window presentation.
+Remove replaced native visible-Console and text-render bypasses. The native
+worker retains its hidden execution Console; original mirrors and execution
+remain untouched. This is an explicit bounded presentation/handoff extension
+to the initial name-only scope, not a new backend or lifecycle policy.
+
+The logical grid, viewport and cursor are independent of physical canvas size.
+After any attempted physical resize, use measured actual dimensions for fixed
+upper-left intersection painting and blank-margin clearing, including attributes.
+Clipping never discards logical data; out-of-view cursors hide instead of moving
+the viewport. Both handoff directions commit/acknowledge the old final state,
+apply/acknowledge the incoming worker's supported state, then release input and
+execution. Inherit current state, not initial CMD geometry; retain original
+DOS height selection and cell-grid resize, not paragraph reflow or compensation.
+Host scrollback is not promised. The
+[S12 checklist](../etc/operations/t424-worker-frontend-renaming-plan.md#s12-unified-logical-surface-and-dosnative-handoff)
+owns production wiring/removal, failure/race/geometry tests and publication
+gates. Current active admission remains solely in CURRENT; final audit is S13.
 
 ## Owner-added S10 rapid relaunch repair
 
@@ -120,7 +150,7 @@ active-stage statements in the retained approval chronology below are historical
 and superseded by the current S table and CURRENT.
 
 Owner direction on 2026-10-02 adds lifecycle investigation before further
-renaming. Earlier S3/S4 migration labels in this proposal now refer to S11/S12
+renaming. Earlier S3/S4 migration labels in this proposal now refer to S11/S13
 after the owner-approved architecture, native-GUI and NTVWM naming insertions.
 Both run16 cmd and run16 command reportedly hang before any prompt after an
 apparent abnormal exit; NTMON reports Ready but no worker. Preserve the live

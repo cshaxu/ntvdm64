@@ -44,13 +44,13 @@ $LogRoot=(Resolve-Path -LiteralPath $LogRoot).Path
 if($LogPrefix -notmatch '^[a-z0-9-]+$'){throw 'Invalid log prefix'}
 $trace=Join-Path $LogRoot "$LogPrefix.trace"
 if(Test-Path -LiteralPath $trace){throw 'Use a fresh log prefix'}
-$paths=@('run16.exe','ntsrv.exe','ntvdm.exe','ntkvm.exe') | ForEach-Object {Join-Path $PackageRoot $_}
+$paths=@('run16.exe','ntsrv.exe','ntvdm.exe','ntcon.exe') | ForEach-Object {Join-Path $PackageRoot $_}
 function PackageProcesses {
-    @(Get-CimInstance Win32_Process -Filter "Name='run16.exe' OR Name='ntsrv.exe' OR Name='ntvdm.exe' OR Name='ntkvm.exe'" | Where-Object {$_.ExecutablePath -in $paths})
+    @(Get-CimInstance Win32_Process -Filter "Name='run16.exe' OR Name='ntsrv.exe' OR Name='ntvdm.exe' OR Name='ntcon.exe'" | Where-Object {$_.ExecutablePath -in $paths})
 }
 function ObservedProcesses {
     $shells=@((Join-Path $env:SystemRoot 'System32\cmd.exe'),(Join-Path $env:SystemRoot 'SysWOW64\cmd.exe'))
-    @(Get-CimInstance Win32_Process -Filter "Name='run16.exe' OR Name='ntsrv.exe' OR Name='ntvdm.exe' OR Name='ntkvm.exe' OR Name='cmd.exe' OR Name='console-startup-observer.exe'" |
+    @(Get-CimInstance Win32_Process -Filter "Name='run16.exe' OR Name='ntsrv.exe' OR Name='ntvdm.exe' OR Name='ntcon.exe' OR Name='cmd.exe' OR Name='console-startup-observer.exe'" |
         Where-Object {$_.ExecutablePath -in $paths -or $_.ExecutablePath -eq $Observer -or $_.ExecutablePath -in $shells})
 }
 if((PackageProcesses).Count){throw 'Package already in use'}
@@ -440,13 +440,13 @@ try {
         $worker=@($workers | Where-Object {$_.ParentProcessId -eq $launcherId})
         if($workers.Count -ne $requiredTasks -or $worker.Count -ne 1){throw 'Cannot identify owned pairs'}
         $frontend=@(PackageProcesses | Where-Object {
-            $_.Name -eq 'ntkvm.exe' -and $owned.Contains([int]$_.ProcessId) -and
+            $_.Name -eq 'ntcon.exe' -and $owned.Contains([int]$_.ProcessId) -and
             $_.ParentProcessId -eq $launcherId
         })
-        if($FrontendLoss -and $frontend.Count -ne 1){throw 'Cannot identify launcher-owned NTKVM frontend'}
+        if($FrontendLoss -and $frontend.Count -ne 1){throw 'Cannot identify launcher-owned NTCON frontend'}
         $victim=if($WorkerLoss){$worker[0]}elseif($FrontendLoss){$frontend[0]}
             elseif($LauncherLoss){$launcher[0]}else{$servers[0]}
-        # The independent NTKVM process is the worker's I/O peer. Killing
+        # The independent NTCON process is the worker's I/O peer. Killing
         # run16 alone is not a frontend-loss test after the S4 ownership move.
         $frontendWorker=if($FrontendLoss){Get-Process -Id $worker[0].ProcessId}else{$null}
         if($frontendWorker){[void]$frontendWorker.Handle} # retain before process exit

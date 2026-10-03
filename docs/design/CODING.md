@@ -49,7 +49,7 @@ src/
   run16-exe/
   ntsrv-exe/
   ntvdm-exe/
-  ntkvm-exe/
+  ntcon-exe/
   ntvwm-exe/
   ntmon-exe/
   wow32-dll/
@@ -78,24 +78,24 @@ T424 S4 admits the following ownership migration of project-added code,
 without changing original mirror logic: frontend/worker CreateProcess and
 authenticated launch orchestration move into ntsrv-exe; run16 keeps CLI,
 broker discovery and submission/direct-result/Console-handoff RPC clients.
-NTSRV coordinates takeover/return acknowledgements; NTKVM performs actual
-Console operations. Remove the run16/NTKVM direct bootstrap channel too.
+NTSRV coordinates takeover/return acknowledgements; NTCON performs actual
+Console operations. Remove the run16/NTCON direct bootstrap channel too.
 Broker typed copied contracts remain in interface. NTVWM owns native target
-CreateProcess/wait/result reporting; NTKVM owns Console/Window/I/O service;
+CreateProcess/wait/result reporting; NTCON owns Console/Window/I/O service;
 worker-base remains worker-only shared client/mechanism code. Existing launcher
 bootstrap, worker launch and direct native request code below are migration
 inputs, not permission to retain duplicate owners. Replaced paths must be
 removed after the matching production path and failure/rollback tests pass.
 No generic spawn/remote-handle-duplication service, new common root, helper,
-mirror change or NTKVM-owned worker policy is admitted.
+mirror change or NTCON-owned worker policy is admitted.
 
 `run16-exe/bootstrap_client.c`, `native_request_client.c`,
 `native_request_io.c` and `native_launch_packet.c` own the existing finite
 `frontend-client.lib`. `native_launch.c` is its separately selected resource/
-CreateProcess primitive shared with NTVWM; NTKVM never links target creation.
+CreateProcess primitive shared with NTVWM; NTCON never links target creation.
 Public startup/client declarations are in `interface/frontend_bootstrap.h`,
 `native_request_client.h`, `native_request_protocol.h` and `native_launch.h`.
-No private NTKVM/NTVWM implementation root is a shared startup source owner.
+No private NTCON/NTVWM implementation root is a shared startup source owner.
 
 Cross-component wire declarations and service IDL have one owner: interface.
 Frame/input formats and service/monitor/launcher/worker contracts migrate there
@@ -110,19 +110,19 @@ handoff acknowledgments. Audit source provenance, not only file placement.
 Original mirror execution, scheduling, completion, blocking/resume and cleanup
 remain in place; no reverse-call extraction or new scheduler is permitted.
 Launcher creation belongs to run16; broker management to NTSRV; presentation
-to NTKVM; monitoring to NTMON. These consumers retain their common kind-aware
+to NTCON; monitoring to NTMON. These consumers retain their common kind-aware
 handling internally. Backend state operations remain explicit in each worker.
 BaseSrv client implementation remains NTSRV-owned; IDL belongs to interface.
 
 Latest owner directive selects an ordinary hidden Console owned/attached by
 ntvwm-exe, replacing the ConPTY/VT plan below. No private helper is permitted.
 Console state, input and membership operations stay in NTVWM; NTSRV only
-coordinates authenticated lifecycle and NTKVM only presents copied frames.
+coordinates authenticated lifecycle and NTCON only presents copied frames.
 
 The admitted NTVWM replacement supersedes the historical S9/S11 owner
 description below. src/ntvwm-exe owns its ordinary hidden Console, native Console
 state, input binding, member observation and text-frame production, and produces
-ntvwm.exe. NTKVM keeps only visible Console/Window, display and input/frame
+ntvwm.exe. NTCON keeps only visible Console/Window, display and input/frame
 routing; run16 keeps launcher duties. NTSRV implements authenticated
 backend registration/client transport and NTMON consumes that management view.
 No original DOS/WOW record or generic compatibility root is introduced.
@@ -130,17 +130,17 @@ No original DOS/WOW record or generic compatibility root is introduced.
 NTVWM text frames use the existing NTVDM console_video.h layout exactly,
 including font banks, glyph/attribute pairs, palette and cursor. NTVWM never
 publishes graphics frames. Its bitmap glyph mapping must agree with NTVDM;
-NTKVM has one backend-neutral text-frame renderer, not a native VT/font engine.
+NTCON has one backend-neutral text-frame renderer, not a native VT/font engine.
 This is the admitted S12 target, not a claim that the retained candidate has
 already completed ownership migration.
 
-`src/ntkvm-exe/ -> ntkvm.exe` owns visible Console, Window/display and the
+`src/ntcon-exe/ -> ntcon.exe` owns visible Console, Window/display and the
 I/O service. S9 replaces its earlier hidden-Console/helper implementation
 with one frontend-owned ConPTY retained across native targets and DOS
 intervals in the published baseline. The superseded S11 prototype keeps a
 backend per independent native branch, with ordinary children inheriting that
 branch's Console and Windows-owned last-client EOF. All such resources remain
-ntkvm-owned; one frontend still selects the interactive endpoint.
+ntcon-owned; one frontend still selects the interactive endpoint.
 run16 links only the finite frontend client, never the renderer or
 input pump. No project helper or second backend is retained in the S9 graph.
 These are historical implementation facts, not permission to retain ConPTY

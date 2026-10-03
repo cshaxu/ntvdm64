@@ -94,7 +94,7 @@ block/resume boundaries to the independent frontend. The block notification
 follows original final painting, unused-key return, mode restoration and timer
 stop; resume acquires presentation/input before original Console queries and
 event-thread release. `ntvdm-exe/win32/console_client.c` carries that finite
-notification; `ntkvm-exe` serializes native and DOS I/O and returns unread hidden
+notification; `ntcon-exe` serializes native and DOS I/O and returns unread hidden
 Console records through the original-shaped native prepend operation. The NT4
 shared visible Console did not require a cross-process presentation binding;
 the owner-admitted independent frontend split does. No guest, original scheduler,

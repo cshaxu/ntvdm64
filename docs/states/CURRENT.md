@@ -2,121 +2,76 @@
 
 ## Current Work
 
-**Active: M0 T424 S10, Ordinary Mode.** T424 remains open. The reopened
-Terminal DIR repair now passes its strict cursor/geometry checks, Console17,
-Window17 and retained EDIT/relaunch/isolation/fault gates. The eight-file
-package is published with verified hashes; this P closes S10. S11 naming is
-owner-approved next, not yet implemented. The
-[working plan](../etc/operations/t424-worker-frontend-renaming-plan.md)
-defines the approved order. The
-[S10 ledger](../etc/evidence/m0-t424-s10-frontend-notification.md) records the
-current x86 /MT CCPU40, APP 0.0.424, protocol/RPC33 eight-file O:/winnt package.
-The rapid relaunch/lost-wakeup repair is S10 work, not an S9 repair claim.
+**No active numeric M/T/S packet.** T424 remains open. S11 frontend naming
+is delivered by the containing reviewed P; stop and await owner instructions.
+S12 and later stages are not admitted by this packet. The
+[working plan](../etc/operations/t424-worker-frontend-renaming-plan.md) owns order;
+[S11 evidence](../etc/evidence/m0-t424-s11-frontend-name.md) owns the naming ledger.
+The published S11 eight-file package is x86 /MT CCPU40, APP 0.0.424,
+protocol/RPC33, with ntcon.exe as frontend and ntvwm.exe as native worker.
 
-## Active Packet
+## S11 Closed Packet
 
 | Field | Admitted record |
 | --- | --- |
-| Identifier Mode | M0 T424 S10, Ordinary Mode. |
-| Candidate Proposal | [Admitted proposal](../proposals/proposal-native-worker-frontend-renaming-001.md) and [S10 checklist](../etc/operations/t424-worker-frontend-renaming-plan.md#s10-rapid-relaunch-and-frontend-notification-checklist). |
-| Admission And Approval | Owner-added S10 rapid-relaunch/lost-wakeup stage after S9 delivery; standing automatic sequential S admission. Preserve other-session modifications. |
-| Objective | Retain delivered notification/seed fixes; diagnose and repair the owner-reproduced Terminal COMMAND DIR prompt overwriting directory cells. Capture output/cursor/geometry order and strengthen actual DIR completion/cursor assertions before publication. Preserve logical dimensions, grid and VT mode. |
-| Non-goals | No original mirror/guest/shared-library change, new component/process/helper/scheduler, Job/Observed graph, frontend rename, launch syntax change, polling cleanup or new transport. |
-| Reference Baseline | Delivered S9 8ff029fbd, APP 0.0.424 protocol/RPC33 x86 /MT CCPU40; coherent eight-file O:/winnt package and [S9 evidence](../etc/evidence/m0-t424-s9-native-gui-routing.md). Its delayed relaunch test does not establish rapid-launch race freedom. |
-| Files And ABI Surface | NTSRV-private notification state and NTKVM native-binding snapshot coordinates, affected private call sites, deterministic service/Console fixtures and rapid-relaunch probes, build/evidence/docs. No wire change; preserve public DOS/WOW contracts. |
-| Applicable Rules | README authority reading set, EXECUTION, architecture/coding/document rules, CONTRIBUTING and source policy. Original execution/completion stays in its original owner. |
-| Verification | Source-confirmed failing deterministic interleaving on S9; positive/negative/reset/no-spin tests against production service; rapid interactive CMD and DOS/native alternation, concurrent and isolated sessions, completion/Console-return/fault gates. Affected x86 links, RPC, Console17/Window17, EDIT and retained WOW frontiers, governance/link/diff/source ownership, recoverable eight-file publication and smoke. |
-| Expected Markers | An undecided join inserted between empty-join and empty-channel checks stays signaled and is processed without unrelated wakeup; event resets only with no actionable work. Decided joins awaiting leases do not spin. Removed partial/scattered event maintenance. |
-| Asset Needs | Existing S9 source/artifacts/immutable guests/configuration; build/M0-T424/S10/r001 for new output, valid S2/r001 cache reused by input identity. No external assets. |
-| Reporting Requirements | Exact interleaving, source ownership, complete affected event/reset sweep, pending predicate and lock/error/cancel contracts, tests/identities and unresolved failure attribution. No blanket claim all reported hangs share this cause. |
-| Stop Conditions | Original execution migration, authentication weakening, expanded control/ABI/helper/scheduler, altered independent completion/restore semantics, retries/Sleep hiding the race, known regression or publication mismatch. |
-| Exit Criteria | Reproduced causal race repaired in production and deterministic tests, stated retained gates pass, coherent O:/winnt publication, reviewed commit/push and clean tree. T closure remains owner-controlled. |
-| Original Owner Request | Insert rapid CMD exit/relaunch and frontend lost-wakeup repair as S10; shift frontend naming/final audit to S11/S12 and preserve the existing architecture. |
-| Similar-Issue Sweep | Every adjacent SetEvent/ResetEvent and wait predicate in NTSRV, NTKVM, NTVWM and common transport; keep independent receipt/retire/restored/input/OVERLAPPED contracts unless the same defect is proved. |
+| Identifier Mode | M0 T424 S11, Ordinary Mode. |
+| Candidate Proposal | [Admitted proposal](../proposals/proposal-native-worker-frontend-renaming-001.md), ordered working plan S11. |
+| Admission And Approval | Owner: execute naming, build/test, close/commit/push, then wait for instructions. Preserve other-session changes, including pending S12 planning documents. |
+| Objective | Rename the visible Console/Window frontend component/product/project symbols to NTCON, update every production consumer, build/test/package identity and current documentation; no duplicate alias. |
+| Non-goals | No original mirror/guest/shared-library content change, worker rename, logical-surface implementation, launch syntax/polling cleanup, new process/helper/scheduler, Job/Observed graph or lifecycle policy. Native worker remains NTVWM. |
+| Reference Baseline | S10 repair 013df6371 pushed; eight-file DIR-repair publication manifest, x86 /MT CCPU40 APP 0.0.424 protocol/RPC33. S10 Console17/Window17, strict repeated DIR, EDIT, relaunch, isolation and four fault cases pass. |
+| Files And ABI Surface | Move the previous frontend owner to src/ntcon-exe via git mv; project-owned symbols/guards, common worker client, authenticated sibling identity, build/fixtures/tools/docs and package paths. Retain original OpenNT Console names and imported kvm-* identities. Unchanged wire layout/UUID keeps protocol/RPC33. |
+| Applicable Rules | Complete README authority set, EXECUTION, design/rules architecture/coding/document, CONTRIBUTING and source policy. Provenance before substitution; preserve unrelated edits. |
+| Verification | Complete tracked/untracked referent inventory, normalized production equivalence, immutable mirror/library hashes, regenerated x86 graph and affected links; focused protocol/authentication/client/frame/lifecycle tests, strict DIR, Console17/Window17, actual modern EDIT return, resident reuse/isolation/faults and retained WOW frontiers; governance/links/diff and coherent eight-file publication/smoke. |
+| Expected Markers | Frontend product ntcon.exe and source src/ntcon-exe; NTVWM remains native worker; no previous-name provider/alias or stale authentication/build/package path. Both workers share existing common I/O client. |
+| Asset Needs | Existing immutable media/config and S10 package; new outputs only build/M0-T424/S11/r001. Reuse valid S2/r001 objects by dependency identity, regenerate current graph. No downloads. |
+| Reporting Requirements | Classify each remaining historical/raw hit, report moved/renamed inputs, consumer and endpoint effects, exact tests/results and publication/recovery hashes. No manual desktop or WOW usability pass invented. |
+| Stop Conditions | Semantic changes disguised as naming, changed mirror/library/guest bytes, alias/extra role, auth or version weakening, failed retained gate or mixed publication. Stop after S11 delivery. |
+| Exit Criteria | Complete production naming/wiring, all stated gates pass, recoverable eight-file O:/winnt publication and obsolete frontend basename removal, reviewed commit/push, clean synchronized main. T stays open; await owner. |
+| Original Owner Request | Execute naming, compile/test, close/commit/push, then wait. |
+| Similar-Issue Sweep | Sibling image/auth identities, project symbols/guards, import manifest destination, build/object/package/test paths, current docs, legacy references and frozen historical evidence. |
 
-S10 repairs the reproduced lost wakeup and separately approved mixed-origin
-native seed. Seven notification cases, Console17/Window17, rapid batch and
-interactive relaunch, concurrent/isolated sessions, EDIT/fault/receipt/GUI,
-resource and five version-negative gates pass. WOW retains its three known
-frontiers, not usability passes. The eight-file package is published with S9
-recovery; final smoke/P delivery is recorded in the S10 ledger. No mirror,
-guest, shared lib, wire or launch syntax changed. T closure stays owner-controlled.
+S11 moves 73 owner paths, including unchanged imported libraries. Sixty-nine
+source/test/tool inputs pass naming-only equivalence; original mirror
+implementations and 44 pinned library files remain unchanged. Focused control,
+frame/input/receipt/resource/authentication, Console17/Window17, strict repeated
+DIR, EDIT/relaunch/isolation/four-fault/GUI and five version negatives pass.
+WOW retains its existing frontiers, not three usability passes. Eight x86
+products are published with verified hashes and S10 recovery; the old frontend basename
+is recoverably removed. Postpublication rapid/DOS/native/GUI smoke and hash
+checks pass. The containing P supplies commit/push and clean synchronized main.
+Other-session S12 planning is preserved; it is neither implementation nor
+automatic permission to resume after the owner's explicit stop.
 
-## S9 Closed Packet
+## S10 Closure Record
 
-| Field | Admitted record |
-| --- | --- |
-| Identifier Mode | M0 T424 S9, Ordinary Mode. |
-| Candidate Proposal | [Admitted proposal](../proposals/proposal-native-worker-frontend-renaming-001.md), latest ordered working plan S9. |
-| Admission And Approval | Owner: admit the next S after S8; previously approved native GUI routing through NTSRV/NTVWM, original shared-WOW-style request release, default startup-only and explicit --wait. Preserve other-session changes. |
-| Objective | Native GUI and CUI requests go run16 -> NTSRV -> NTVWM. Match DOS/WOW classification order: run16 classifies before service admission and character frontend binding; NTVWM executes the admitted kind. NTSRV retains authenticated GUI identity/handle until actual exit, independently of launcher and worker occupancy. |
-| Non-goals | No UNBOUND/monitor-tree display, frontend rename, guest/shared-lib/mirror edit, helper/process role, Job/Observed descendants, scheduler, polling cleanup or launch-syntax change. Preserve DOS/Win16 and existing kind/hotkeys. |
-| Reference Baseline | S8 d30f33870 pushed to main; x86 /MT CCPU40, APP 0.0.424 and protocol/RPC32, coherent eight-file O:/winnt package. The additional isolated unchanged relaunch probe passes with outer CMD exit 19; the earlier sporadic missing-character observation remains unclassified, not repaired. |
-| Files And ABI Surface | run16 native classification/dispatch/scope, NTVWM execution/worker boundary, NTSRV native-command/worker/lifecycle modules and private state, common protocol/authenticated clients, selected build/tests/docs. Retain public original DOS/WOW contracts. Actual wire changes require synchronized APP_PROTOCOL/IDL major and regenerated MIDL. |
-| Applicable Rules | README authority set, EXECUTION, design/rules architecture and coding, DOCUMENT, CONTRIBUTING and source policy. Reuse original subsystem metadata and existing authenticated transport/receipt mechanisms; no expanded mirror diff. |
-| Verification | Source/ownership and four-rung audit; x86 links/MIDL when changed; direct GUI startup/--wait/exit cleanup, failure and authentication negatives, text -> GUI -> text and GUI -> fresh text frontend, worker release while GUI survives, shared text-worker preservation, isolation and handle/resource lifetime. Retain RPC/receipt/fault gates, Console17/Window17, actual EDIT return/relaunch and existing WOW frontiers; governance/link/diff and coherent publication smoke. |
-| Expected Markers | No local run16 GUI CreateProcess; launcher classification precedes service admission as in DOS/WOW. GUI startup creates no character frontend. Real authenticated GUI target persists in service registration after default launcher returns; --wait obtains actual exit result. GUI release never kills target/shared carrier and cannot complete unrelated requests. |
-| Asset Needs | Existing source, fixtures, immutable guest/configuration and S8 source/artifact baseline; no external assets. New output only build/M0-T424/S9/r001; reuse proven build/M0-T424/S2/r001 x86/WOW cache with input identity. |
-| Reporting Requirements | Origin/current/target owner ledger, removed paths and duplicate code, authenticated handle rights/ownership and every startup/completion/rundown transition; exact tests/results, unsupported frontiers and deferred monitor view. Admission is not implementation acceptance. |
-| Stop Conditions | Guest/mirror/shared-lib mutation, extra process/helper/scheduler, GUI creating character frontend, target/worker termination on GUI request release, launch semantics drift, authentication weakening, incompatible mixed protocol or known runtime regression. |
-| Exit Criteria | Complete production routing and service-held GUI lifetime, displaced local launch path removed, all stated positive/negative/lifecycle and retained gates met, recoverable coherent eight-file O:/winnt publication, reviewed commit/push and clean synchronized tree. T closure remains owner-controlled. |
-| Original Owner Request | Admit the next S; unified Win32 GUI routing/classification and service registration, default return on startup, shared-WOW-style occupancy release; UNBOUND belongs to the future NTMON task. |
-| Similar-Issue Sweep | Native shell fallback/direct image, inherited capability stripping across GUI, redirected standard resources, no-Console GUI launcher, workerless GUI lifetime, concurrent shared text use, early target exit/startup failure and broker/worker rundown. |
+The [S10 ledger](../etc/evidence/m0-t424-s10-frontend-notification.md) retains
+notification/seed repair dac11fe55 and reopened DIR repair 013df6371, both
+pushed. Native viewport metadata no longer implicitly shrinks ConPTY storage;
+explicit storage resize remains valid. Strict repeated DIR/cursor/geometry,
+Console17 r004, Window17 r006 and EDIT/relaunch/isolation/four-fault dir-r006
+gates pass. Earlier failed CAF run is retained, not relabelled as a pass.
+The hash-verified eight-file package has S10 recovery; no original mirror,
+guest/library content, wire, launch syntax or history guarantee changed.
 
-S9 retains launcher classification, shared native submission/receipt and
-service-owned GUI identity independently of request occupancy; no character
-frontend for GUI. Default returns startup success; --wait returns actual exit.
-Mirrors, guest, shared libraries and launch syntax remain unchanged.
+## S9 Closure Record
 
-The frozen final package passes Console17/Window17, eleven RPC cases, modern
-EDIT return/relaunch, independent sessions, four fault-retirement cases and
-five version negatives. Five real-window GUI cases and DOS -> GUI -> DOS pass;
-classification is 227/0 and execution resources 1073/0/zero net handles. WOW
-retains its existing three frontiers, not three usability passes. All eight
-products are published with S8 recovery; postpublication DOS/native relaunch,
-GUI startup/--wait and eight-file identity pass. The containing S9 P supplies
-reviewed commit/push; T424 is not closed. The separate S10 planning additions
-are preserved without claiming the rapid-launch race fixed.
+S9 8ff029fbd is pushed. The [S9 ledger](../etc/evidence/m0-t424-s9-native-gui-routing.md)
+retains the admitted packet, source ownership and tests: native GUI/CUI routes
+through NTSRV/NTVWM, launcher classifies before admission, GUI defaults to
+startup-only and explicit --wait retains actual exit results. GUI identity
+outlives worker occupancy without creating a character frontend. Console17/
+Window17, RPC/GUI/EDIT/lifetime/version gates and known WOW frontiers are
+recorded; eight products were published recoverably. UNBOUND is excluded.
 
-## S8 Closed Packet
+## S8 Closure Record
 
-M0 T424 S8, Ordinary Mode; the admitted record is retained below. The containing
-production P supplies the reviewed commit/push; this is not T424 closure.
-
-| Field | Admitted record |
-| --- | --- |
-| Identifier Mode | M0 T424 S8, Ordinary Mode. |
-| Candidate Proposal | [Admitted proposal](../proposals/proposal-native-worker-frontend-renaming-001.md). |
-| Admission And Approval | Owner: move service split to next S, close S7, then explicitly admit S8. Preserve all existing and other-session work. |
-| Objective | Complete the source/block provenance ledger and split project-added service responsibilities into bounded NTSRV-private modules, preserving one state/lock authority and production behavior. |
-| Non-goals | No new component/process, scheduler, Job/observed records, GUI routing, frontend rename, guest/shared-lib change, polling cleanup or worker-I/O transport migration. No original DOS/WOW logic extraction. |
-| Reference Baseline | S7 d83d2b212, x86 /MT CCPU40, APP 0.0.424 and protocol/RPC32, published coherent eight files; [S7 closure evidence](../etc/evidence/m0-t424-s7-common-service-separation.md). |
-| Files And ABI Surface | Primarily ntsrv-exe/opennt/source/base_service.c and related service-private headers/modules; selected build/test wiring and ownership documentation. Preserve common protocols and public contracts; physical refactoring alone does not bump ABI. |
-| Applicable Rules | README authority reading set, EXECUTION, architecture/coding/document rules, CONTRIBUTING and source policy. Original mirror paths/control order remain authoritative. |
-| Verification | Pinned-original comparisons and complete function/block attribution before movement; source/body and resource/lock contract review; affected x86 links, original reservation and actual RPC/fault/receipt fixtures, Console17/Window17, actual EDIT/relaunch/isolation/retirement, retained WOW frontiers, coherent publication/smoke and governance/link/diff checks. |
-| Expected Markers | Registration/connection, frontend admission/retirement, native command/receipt and management projection separated by service responsibility; one service state/lock owner, no duplicate providers or exported private state framework. |
-| Asset Needs | Reuse S7's 137-definition inventory and partial manual review plus pinned OpenNT originals. New intermediates/reports under build/M0-T424/S8/r001; reuse valid S2 x86/WOW cache with dependency identity. No new assets. |
-| Reporting Requirements | Each block's origin/current/target owner and disposition; exact moved/retained/removed bodies, lock and handle ownership, tests and remaining independent logic. Research/inventory is not implementation acceptance. |
-| Stop Conditions | Moving original execution/completion into project modules/common, reverse calls, duplicated authority/lock state, semantic or protocol drift, expanded mirror diff, weakened assertions or runtime regression. |
-| Exit Criteria | Complete audited split production-linked, no duplicate old implementation, unchanged original semantics and accepted behavior, full required gates, recovered/coherent O:/winnt eight-file publication, reviewed commit/push and clean tree. T remains open. |
-| Original Owner Request | Service splitting is next S; admit S8 and identify its current component. Original mirror logic stays in place; project additions are reorganized within NTSRV only. |
-| Similar-Issue Sweep | Related service headers/transport wrappers/build ownership, service shutdown/rundown, borrowed resources and native/DOS completion boundaries; do not extend into unrelated component redesign. |
-
-The owner-approved six private modules are service_core, worker_registry,
-frontend_registry, native_commands, lifecycle and management, beside the
-retained base_service DOS/WOW interface/resource adapter. All link the existing
-service provider; one explicit service state/recursive lock remains unchanged.
-The [complete provenance ledger](../etc/evidence/m0-t424-s8-ntsrv-service-separation.md)
-records every one of 137 definitions, eight private layouts and original owners.
-All affected x86 links, exact-body/layout/private-consumer gates, eleven actual
-RPC scenarios and Console17/Window17 pass. Retained EDIT return, relaunch,
-independent-session, four retirement, resource/fault and version-negative gates
-pass. WOW retains the existing three frontiers, not three usability passes.
-The coherent eight-file S8 package is published to O:/winnt with S7 recovery.
-After one failed input observation, unchanged-assertion postpublication r002
-and three consecutive r003-r005 pass. Six S7 controls also pass; the initial
-missing first character is not causally classified or claimed repaired and is
-retained in TODO. Original mirror changes are zero; T424 remains open.
+S8 d30f33870 is pushed. The [S8 ledger](../etc/evidence/m0-t424-s8-ntsrv-service-separation.md)
+retains the admitted packet and full provenance/function disposition: 113
+project-added definitions move unchanged into private service modules, 24
+original-interface adapters remain. One state/lock authority and mirror bytes
+are preserved. Focused/negative/lifetime, Console17/Window17, EDIT/isolation,
+version and retained WOW gates plus coherent publication are recorded there.
 
 ## S7 Closed Packet
 
@@ -125,13 +80,13 @@ retained in TODO. Original mirror changes are zero; T424 remains open.
 | Identifier Mode | M0 T424 S7, Ordinary Mode. |
 | Candidate Proposal | [Admitted naming/control proposal](../proposals/proposal-native-worker-frontend-renaming-001.md). |
 | Admission And Approval | Standing automatic sequential admission after verified S6 delivery; explicit owner approval for bounded common/static-library organization, provenance-based NTSRV split and maximum suitable worker-base/consumer reuse. Preserve other-session changes. |
-| Objective | Inventory affected provenance and ownership; eliminate extra native/frontend control pipes so service control uses authenticated RPC and NTKVM-worker I/O retains its direct pipe; organize suitable shared RPC, protocol, codec and transport mechanisms in common. Complete service block review and NTSRV-private physical split transfer to next S8 by owner direction. |
+| Objective | Inventory affected provenance and ownership; eliminate extra native/frontend control pipes so service control uses authenticated RPC and NTCON-worker I/O retains its direct pipe; organize suitable shared RPC, protocol, codec and transport mechanisms in common. Complete service block review and NTSRV-private physical split transfer to next S8 by owner direction. |
 | Non-goals | No GUI/UNBOUND routing, worker/frontend rename, guest/shared-lib change, helper/scheduler/observer, authentication weakening, launch-syntax or original scheduling change. Retain approved polling and specialist ownership. |
-| Reference Baseline | S6 production P 21b576a9e, protocol/RPC31, coherent ntvwm.exe + ntkvm.exe eight-file publication, Console17/Window17 and retained WOW frontiers; [S6 evidence](../etc/evidence/m0-t424-s6-native-worker-name.md). |
+| Reference Baseline | S6 production P 21b576a9e, protocol/RPC31, coherent ntvwm.exe + ntcon.exe eight-file publication, Console17/Window17 and retained WOW frontiers; [S6 evidence](../etc/evidence/m0-t424-s6-native-worker-name.md). |
 | Files And ABI Surface | interface/common declarations and selected neutral implementations; worker-base remains worker-only; NTSRV private modules, native GetNext/launch/completion and frontend startup acknowledgement, consumers/build/tests/docs. Audit original OpenNT blocks against pinned inputs before moving anything. Actual RPC contract changes require paired app/RPC versioning and regenerated MIDL. |
 | Applicable Rules | README authority set, EXECUTION, architecture/coding/document rules and source policy; preserve original source semantics and parallel edits. |
 | Verification | Provenance/function ledger, pinned-original byte/normalized comparisons, selected static-link dependency checks, snapshot growth/error tests, retained transport/receipt/authentication/lifetime assertions, x86/MIDL/WOW links, Console17/Window17, real EDIT/relaunch/isolation/retirement and WOW frontiers; recoverable eight-file publication/smoke plus governance/link/diff review. |
-| Expected Markers | Two message protocol families only: authenticated NTSRV RPC control and the existing common NTKVM-worker direct pipe I/O; no auxiliary native-control or bootstrap-ack pipe. One implementation per suitable shared mechanism, no reverse dependency from common to worker-base/EXEs, explicit state/resource/lock ownership, NTSRV remains sole registry/retirement authority, original DOS/WOW remains original-owned; remove replaced wrappers/files. |
+| Expected Markers | Two message protocol families only: authenticated NTSRV RPC control and the existing common NTCON-worker direct pipe I/O; no auxiliary native-control or bootstrap-ack pipe. One implementation per suitable shared mechanism, no reverse dependency from common to worker-base/EXEs, explicit state/resource/lock ownership, NTSRV remains sole registry/retirement authority, original DOS/WOW remains original-owned; remove replaced wrappers/files. |
 | Asset Needs | Delivered S6 source/runtime/hashes and existing pinned OpenNT inputs; reuse valid x86/MT CCPU40 cache, new artifacts only under build/M0-T424/S7. No external assets or desktop automation. |
 | Reporting Requirements | Source/block provenance, current/target owner and consumers, shared/independent rationale, actual duplication removed, specialist contracts retained, per-mirror diff accounting and exact gates/publication. |
 | Stop Conditions | Original execution migrated or reverse-called, generic policy framework/second registry, authentication/test weakening, unowned shared state, broadened mirror diff without boundary proof, wire mismatch or regression. |
@@ -146,7 +101,7 @@ records the reviewed production P1 source, failures and final gates. Common
 owns copied protocols, codec, exact pipe transfer, bounded Console snapshots,
 neutral worker-I/O client and suitable shared RPC clients. Worker-base may
 depend common; no reverse dependency or common registry/policy is introduced.
-NTSRV control uses authenticated RPC; NTKVM-worker I/O retains its direct
+NTSRV control uses authenticated RPC; NTCON-worker I/O retains its direct
 named pipe. Auxiliary native control and frontend startup pipes are removed.
 Original execution, service authority and frontend rendering stay local.
 
@@ -197,7 +152,7 @@ The approved other-session S7 planning is included, not implemented. T424 stays 
 ## S4 Closure Record
 
 Production P `e4fbaed21`, pushed to main, delivers broker-centered creation and
-control, APP_VERSION 0.0.424 / protocol and RPC major 30. NTSRV creates NTKVM
+control, APP_VERSION 0.0.424 / protocol and RPC major 30. NTSRV creates NTCON
 and both workers, authenticates exact capabilities, routes text submit/resume
 and real direct results, coordinates Console restoration and owns cancellable
 ten-second retirement. Run16 has no direct frontend/worker control pipe.
@@ -231,7 +186,7 @@ manifests and release limitations are in
 [S4 migration evidence](../etc/evidence/m0-t424-s4-broker-centered-launch-control.md).
 S4 is not a claim that all later audit rows are already eliminated. The owner's
 S5 cleanup covers duplicate transport/primitive ownership, remaining diagnostic
-target handles, NTKVM dead state and obsolete bootstrap fixtures; S6 names
+target handles, NTCON dead state and obsolete bootstrap fixtures; S6 names
 NTVWM, S8 routes native GUI, S9 names the frontend NTCON, and S10 audits closure.
 UNBOUND display remains the separate queue-head NTMON T candidate.
 
@@ -263,7 +218,7 @@ the subsequent owner implementation approval is admitted separately as S4.
 Frontend renaming is now S9, after S6 NTW32 -> NTVWM and S8 GUI routing, and has not started.
 
 Owner's subsequent implementation approval supersedes research-only scope:
-NTKVM exits on NTSRV instruction or user Console closure (fault/broker-loss
+NTCON exits on NTSRV instruction or user Console closure (fault/broker-loss
 remain failure exits); workers obey NTSRV shutdown, not frontend-death policy
 of their own. An orphan root retires immediately after legitimate startup
 admission ends, independently of idle/lease state. NTSRV's ten-second empty
@@ -293,7 +248,7 @@ Physical desktop/RDP observation and synthetic Window Ctrl+Q remain unclaimed.
 All eight O:/winnt hashes match the verified staging package. The old worker
 executable was backed up under build/M0-T424/S2/r001/published-recovery and
 removed after verification. SYSTEM.INI, NTVDM.REG and guest media were not
-overwritten. Temporary Z: mapping is removed. Frontend is still NTKVM.
+overwritten. Temporary Z: mapping is removed. Frontend is still NTCON.
 
 ## S1 Closure Record
 
@@ -307,11 +262,11 @@ pre-migration baseline in its sealed inventory and S1 Git revision.
 The [T424 working plan](../etc/operations/t424-worker-frontend-renaming-plan.md)
 and [proposal](../proposals/proposal-native-worker-frontend-renaming-001.md)
 retain thirteen stages. S1 audits names; S2 delivers the native worker
-as NTW32 and Win32Record while retaining NTKVM frontend. Added S3 delivers the
+as NTW32 and Win32Record while retaining NTCON frontend. Added S3 delivers the
 approved broker-owned abnormal-exit/re-launch repair before further renaming.
 S4 centralizes creation, binding, Console handoff coordination and direct result
-transport in NTSRV while keeping Console operations local to NTKVM and
-NTKVM/worker I/O direct; finish its open rows before S5 cleanup. S5 closes the
+transport in NTSRV while keeping Console operations local to NTCON and
+NTCON/worker I/O direct; finish its open rows before S5 cleanup. S5 closes the
 five owner-approved architecture/code findings, without changing mirrors,
 guest, shared lib or accepted polling. New S7 owns the bounded interface-to-common
 library reorganization and two-protocol unification; S8 owns provenance-first
@@ -321,16 +276,17 @@ Owner-added S6 renames
 NTW32 to NTVWM; it is name-only and preserves existing behavior. S9 then adds
 broker-routed native GUI startup, pre-admission classification and service-held handles,
 not monitor display. UNBOUND display belongs to the queue-head NTMON candidate.
-S10 repairs relaunch; S11 renames NTKVM to NTCON. Approved S12 then unifies
+S10 repairs relaunch; S11 gives the frontend its NTCON identity. Approved S12 then unifies
 logical_surface and DOS/native handoff per the linked plan; S13 is the former
-S12 final audit. Active S is unchanged; T closure remains owner-controlled.
+S12 final audit. No next S is admitted while awaiting owner instructions;
+T closure remains owner-controlled.
 
 ## Current Technical Baseline
 
-Published S10 (containing P) at O:/winnt: run16.exe, ntsrv.exe, ntvdm.exe,
-ntvwm.exe, ntkvm.exe, ntmon.exe, WOW32.DLL, VDMREDIR.DLL. APP 0.0.424,
+Published S11 (containing P) at O:/winnt: run16.exe, ntsrv.exe, ntvdm.exe,
+ntvwm.exe, ntcon.exe, ntmon.exe, WOW32.DLL, VDMREDIR.DLL. APP 0.0.424,
 protocol/RPC33, MSVC Win32/x86 /MT CCPU40. Exact hashes and verification
-are in the S10 ledger; prior S9 and earlier accepted packages remain recoverable.
+are in the S11 ledger; accepted S10 and earlier packages remain recoverable.
 
 ## Previous T closure
 

@@ -3,7 +3,7 @@
  * Never a product input. */
 #define run16_console_video_data production_video_data
 #define run16_console_video_text production_video_text
-#include "../../src/ntkvm-exe/console_video.c"
+#include "../../src/ntcon-exe/console_video.c"
 #undef run16_console_video_data
 #undef run16_console_video_text
 #include <stdio.h>
@@ -31,7 +31,7 @@ static FILE *report(void)
 /* Same production converter and sink; observe acceptance, not merely a
  * successful SendMessage to a Window which may already be retiring. */
 #define frontend_keyboard_dispatch production_keyboard_dispatch
-#include "../../src/ntkvm-exe/window_keyboard.c"
+#include "../../src/ntcon-exe/window_keyboard.c"
 #undef frontend_keyboard_dispatch
 typedef struct observed_keyboard_sink {
     frontend_keyboard_sink sink;
@@ -131,7 +131,7 @@ DWORD run16_console_video_text(run16_console_video *video,uint32_t serial)
 }
 
 #define run16_console_dispatch production_console_dispatch
-#include "../../src/ntkvm-exe/console_frontend.c"
+#include "../../src/ntcon-exe/console_frontend.c"
 #undef run16_console_dispatch
 DWORD run16_console_dispatch(run16_console_frontend *owner,
     const console_io_request *request,console_io_reply *reply)

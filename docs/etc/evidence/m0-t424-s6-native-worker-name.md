@@ -1,5 +1,10 @@
 # T424 S6 native Windows worker name
 
+T424 S11 naming normalization: frontend labels/current source links now use NTCON.
+This does not claim the new basename existed in the recorded historical package.
+Exact earlier source, commands and product names remain in Git and sealed build
+evidence; recorded hashes, dates, results and limitations are unchanged.
+
 ## Question and baseline
 
 Perform the owner-approved NTW32 -> NTVWM name-only migration after S5
@@ -95,7 +100,7 @@ or the explicit *-final stems under the build root.
 
 All eight candidate PE machine fields are x86, and the frozen 74-input source
 manifest matches. O:/winnt now has the matching eight-file manifest, with
-ntvwm.exe instead of ntw32.exe; frontend remains ntkvm.exe. Accepted S5 eight
+ntvwm.exe instead of ntw32.exe; frontend remains ntcon.exe. Accepted S5 eight
 products and available configuration are hash-verified and recoverable under
 accepted-s5-recovery. Only after verification is the old ntw32.exe basename
 removed from O:/winnt; no alias or second implementation remains. No guest or

@@ -9,7 +9,7 @@ no numeric T allocation,
 active-packet change, production repair or runtime acceptance is claimed.
 
 Introduce one product-owned `NtvdmSystemRoot` directory contract shared by the
-product's native EXEs (`run16`, `ntsrv`, `ntvdm`, `ntkvm`, `ntvwm`, `ntmon`). Each
+product's native EXEs (`run16`, `ntsrv`, `ntvdm`, `ntcon`, `ntvwm`, `ntmon`). Each
 process derives its own root from the directory containing its actual loaded
 EXE image. Co-located EXEs normally agree; a split or mismatched package must
 not silently borrow another process's root. Internal product components and
@@ -121,7 +121,7 @@ Classification is by invocation role, not filename extension or package presence
 
 | Role | Selected examples | Policy |
 | --- | --- | --- |
-| Internal executable | ntkvm.exe, ntvdm.exe, ntsrv.exe; internally invoked run16.exe | Accurate package-relative path from the established root; use the actual selected package at admission, without reviving a retired helper. |
+| Internal executable | ntcon.exe, ntvdm.exe, ntsrv.exe; internally invoked run16.exe | Accurate package-relative path from the established root; use the actual selected package at admission, without reviving a retired helper. |
 | Internal DOS interpreter | Product-generated COMMAND.COM /c and startup interpreter selection | Explicit package interpreter path; distinguish from a user's command request. |
 | Host product modules | WOW32.DLL, VDMREDIR.DLL | Root-derived module identity through their existing loader boundaries. |
 | Guest system media/config | NTIO.SYS, NTDOS.SYS, KRNL386.EXE, DOSX, HIMEM, REDIR, MSCDEXNT, CONFIG.NT, AUTOEXEC.NT, SYSTEM.INI and configured guest dependencies | Declared package-relative layout and original configuration/loader semantics, not generic application PATH injection. |
@@ -154,7 +154,7 @@ Product DLLs such as WOW32/VDMREDIR and guest binaries such as KRNL386 may
 live below `root\system32`; their module directory is not the `NtvdmSystemRoot`
 of the containing native EXE. Optional VDD, user-selected PIF/application and
 host DLL loading remain separate cases. S1 must also inventory `ntvwm`,
-`ntkvm`, and `ntmon` even if an EXE currently needs no package file: the shared
+`ntcon`, and `ntmon` even if an EXE currently needs no package file: the shared
 root contract must be available consistently without inventing a resource.
 
 ## Proposed S tasks

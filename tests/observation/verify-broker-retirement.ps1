@@ -15,7 +15,7 @@ if(!$physical.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::Ordin
 if($LogPrefix -notmatch '^[a-z0-9-]+$'){throw 'Invalid prefix'}
 if(@(Get-CimInstance Win32_Process -Filter "Name='ntsrv.exe'").Count){throw 'Existing broker must not be controlled'}
 $paths=@()
-foreach($name in @('run16.exe','ntkvm.exe','ntsrv.exe','ntvdm.exe','ntvwm.exe')){
+foreach($name in @('run16.exe','ntcon.exe','ntsrv.exe','ntvdm.exe','ntvwm.exe')){
     $actual=Join-Path $physical $name;$launch=Join-Path $PackageRoot $name
     if((Get-FileHash $actual).Hash -ne (Get-FileHash $launch).Hash){throw 'Candidate mismatch'}
     $paths+=@($actual,$launch)
@@ -35,7 +35,7 @@ try {
                 $until=[DateTime]::UtcNow.AddSeconds(15)
                 do {
                     $workerRows=@(Get-CimInstance Win32_Process -Filter "Name='$kind.exe'" | Where-Object {$_.ExecutablePath -in $paths})
-                    $frontRows=@(Get-CimInstance Win32_Process -Filter "Name='ntkvm.exe'" | Where-Object {$_.ExecutablePath -in $paths})
+                    $frontRows=@(Get-CimInstance Win32_Process -Filter "Name='ntcon.exe'" | Where-Object {$_.ExecutablePath -in $paths})
                     $brokerRows=@(Get-CimInstance Win32_Process -Filter "Name='ntsrv.exe'" | Where-Object {$_.ExecutablePath -in $paths})
                     if($workerRows.Count -eq 1 -and $frontRows.Count -eq 1 -and $brokerRows.Count -eq 1){
                         $worker=Get-Process -Id $workerRows[0].ProcessId;$null=$worker.Handle

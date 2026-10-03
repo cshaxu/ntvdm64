@@ -144,7 +144,7 @@ try {
         # targets return, empty frontends must retire without explicit kill.
         # These PIDs are fixture observations, never production authorization.
         $frontendIds=@($rows | Where-Object Owner | Select-Object -ExpandProperty Owner -Unique)
-        $helperIds=@(Get-CimInstance Win32_Process -Filter "Name='ntkvm.exe'" |
+        $helperIds=@(Get-CimInstance Win32_Process -Filter "Name='ntcon.exe'" |
             Where-Object {$_.ParentProcessId -in $frontendIds} | Select-Object -ExpandProperty ProcessId)
         if($helperIds.Count){throw 'Unexpected native backend helper process'}
         foreach($processId in $frontendIds){
@@ -153,7 +153,7 @@ try {
             try {
                 $null=$process.Handle
                 if(!$process.HasExited -and
-                    (Get-FileHash $process.Path).Hash -ne (Get-FileHash (Join-Path $PackageRoot 'ntkvm.exe')).Hash){
+                    (Get-FileHash $process.Path).Hash -ne (Get-FileHash (Join-Path $PackageRoot 'ntcon.exe')).Hash){
                     throw 'Observed frontend identity changed'
                 }
                 if(!$process.WaitForExit(15000)){throw "Empty frontend $processId did not retire"}

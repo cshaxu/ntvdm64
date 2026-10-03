@@ -15,7 +15,7 @@ typedef struct run16_native_frame_info {
 } run16_native_frame_info;
 
 /* Test adapter only: production NTVWM packing -> common frontend decoder.
- * Keep the established pixel assertions, with no native renderer in NTKVM. */
+ * Keep the established pixel assertions, with no native renderer in NTCON. */
 static DWORD frontend_window_native_frame_pointer(const run16_native_frame_info *info,
     const CHAR_INFO *cells,SIZE_T count,const POINT *pointer,kvm_window_frame *frame)
 {

@@ -1,5 +1,10 @@
 # M0 T423 S19 P2 — PID-first runtime validation
 
+T424 S11 naming normalization: frontend labels/current source links now use NTCON.
+This does not claim the new basename existed in the recorded historical package.
+Exact earlier source, commands and product names remain in Git and sealed build
+evidence; recorded hashes, dates, results and limitations are unchanged.
+
 ## Scope
 
 This record validates the protocol-17 PID-first management implementation in
@@ -17,7 +22,7 @@ machine `0x014c` and copied byte-for-byte to `O:/winnt`:
 | `run16.exe` | `8b5b0d2d715bc14932fe31a637566c06db5197fb760b47f0e0d4890f1d791ba0` |
 | `ntsrv.exe` | `328160517deb9fca64444a0d4c6b717301ef5cddf992b9c20c06c4f23292a5b3` |
 | `ntvdm.exe` | `df6ddef9c54c5fd8aaccac76b85dc6c310bd2eb6f4afbf820c026983e64ef120` |
-| `ntkvm.exe` | `9a37864b9b83c6938dc4fc25db852bda63258327ec64ce745d92729f99d939ea` |
+| `ntcon.exe` | `9a37864b9b83c6938dc4fc25db852bda63258327ec64ce745d92729f99d939ea` |
 | `ntw32.exe` | `fc2a31ce09f1e927e487fbf5f576fb14ff42eb94d7529087d0c324472e5a422f` |
 | `ntmon.exe` | `01cbc12a3bde8f9a0f295b474a8945e479afca454eb879d845685276bc45eeb6` |
 | `VDMREDIR.dll` | `c55dc99b5507e03eb59c009f25397f946316a50a068fbff6f393ddfc914bda82` |

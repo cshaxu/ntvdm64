@@ -1,9 +1,14 @@
 # T423 S8 GUI launch and wait
 
+T424 S11 naming normalization: frontend labels/current source links now use NTCON.
+This does not claim the new basename existed in the recorded historical package.
+Exact earlier source, commands and product names remain in Git and sealed build
+evidence; recorded hashes, dates, results and limitations are unchanged.
+
 ## Baseline and scope
 
 S8 was admitted after S7 P1 99276d68d and closure P2 125fd13ff.
-O:/winnt retains the verified seven-file S7 publication, including ntkvm.exe
+O:/winnt retains the verified seven-file S7 publication, including ntcon.exe
 and ntsrv.exe. The launcher-option/native-GUI candidate is wired and under test;
 the published package remains unchanged. This is a bounded launch/wait
 audit, not ConPTY, path lookup, a new scheduler or guest modification.
@@ -506,7 +511,7 @@ supervisor SHA256
 F0EA6D4A44ACED00D8D467EBCA6C7D169EFF6995BE42E2EF637EEEBE8F0F80C1.
 
 Updated src/run16-exe/README.md: it still described the superseded root-run16
-renderer/input pump and files now owned by ntkvm. It now documents actual
+renderer/input pump and files now owned by ntcon. It now documents actual
 launcher/frontend ownership and the S8 explicit wait contract, without claiming
 S8 verification/publication complete. Actual malformed/missing-image and WOW
 loader failures still need their distinct evidence; locked-image rejection is

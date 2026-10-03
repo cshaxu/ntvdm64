@@ -16,7 +16,7 @@ frontend rendering remain with their existing owners.
 
 Final S7 owner clarification places both protocol families and suitable shared
 client/transport mechanisms in common: NTSRV control uses RPC, direct
-NTKVM-worker I/O uses named pipes. Common is their source/library carrier,
+NTCON-worker I/O uses named pipes. Common is their source/library carrier,
 not a service relay or a shared scheduling authority. Worker-base may depend
 on common, never the reverse. Do not migrate worker I/O to RPC.
 
@@ -34,7 +34,7 @@ protocol families; all ownership and mirror restrictions still apply to S8.
 Owner-approved S12 text extension supersedes the byte-pair-only wording below:
 both workers use one text ABI with original glyph/attribute pairs or optional
 glyph/attribute/style triples. DOS pairs remain unchanged. Style flags are
-backend-neutral; NTKVM keeps one renderer and no native character mapper.
+backend-neutral; NTCON keeps one renderer and no native character mapper.
 No guest or shared-library change is authorized by this extension.
 
 Owner admits src/interface as the single owner of cross-component protocol
@@ -46,12 +46,12 @@ service-owned IDL placement; implementations remain with their executable owner.
 
 Latest NTVWM backend selection: an ordinary hidden Console, owned and attached
 by NTVWM itself. All private helper/bootstrap processes are prohibited. NTSRV
-may not own Console/ConPTY resources; NTKVM is presentation-only. This overrides
+may not own Console/ConPTY resources; NTCON is presentation-only. This overrides
 ConPTY ownership references below without changing independent worker identity,
 original DOS/WOW ownership, text-frame ABI or verification requirements.
 
 Owner admits src/worker-base for project-added worker mechanisms reused by
-ntvdm-exe and ntvwm-exe. run16-exe, ntsrv-exe, ntkvm-exe and ntmon-exe retain
+ntvdm-exe and ntvwm-exe. run16-exe, ntsrv-exe, ntcon-exe and ntmon-exe retain
 their own worker-handling code, with one common path and explicit kind branches
 where necessary. They do not link worker-base as a generic shared library.
 It owns no scheduler, original DOS/WOW policy or frontend presentation. Shared
@@ -70,11 +70,11 @@ visual comparison.
    manifest-declared host, guest, tool and firmware slices), `opennt-host`,
    `opennt-abi/host-compat`, declaration-only `interface`, `worker-base`, and the
    executable-owned `run16`, `basesrv`, `ntvdm`, `monitor` and admitted
-   `ntkvm-exe` and `ntvwm-exe` roots. NTVWM owns its admitted native Console
-   backend, using its own ordinary hidden Console, not ConPTY or DOS/WOW policy. NTKVM
+   `ntcon-exe` and `ntvwm-exe` roots. NTVWM owns its admitted native Console
+   backend, using its own ordinary hidden Console, not ConPTY or DOS/WOW policy. NTCON
    owns only visible Console/Window, display and input/frame routing. NTVWM
    publishes only text frames in the existing NTVDM text-frame ABI, with the
-   same bitmap glyph mapping; no backend-specific NTKVM terminal renderer.
+   same bitmap glyph mapping; no backend-specific NTCON terminal renderer.
    frontend owns character-session presentation; run16
    retains only launcher/direct-target completion duties. T418 has retired
    generic `app`, `session`, `broker` and `adapter-*` production roots;

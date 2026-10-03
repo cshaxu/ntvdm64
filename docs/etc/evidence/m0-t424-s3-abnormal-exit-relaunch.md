@@ -1,5 +1,10 @@
 # T424 S3 abnormal-exit and re-launch investigation
 
+T424 S11 naming normalization: frontend labels/current source links now use NTCON.
+This does not claim the new basename existed in the recorded historical package.
+Exact earlier source, commands and product names remain in Git and sealed build
+evidence; recorded hashes, dates, results and limitations are unchanged.
+
 ## Question and baseline
 
 Owner basically accepts S2 but reports native commands and an apparent abnormal
@@ -14,17 +19,17 @@ owner-approved repair and its separate verification are recorded afterwards.
 On 2026-10-02, from the main worktree:
 
 ```powershell
-Get-Process run16,ntsrv,ntkvm,ntvdm,ntw32 -ErrorAction SilentlyContinue |
+Get-Process run16,ntsrv,ntcon,ntvdm,ntw32 -ErrorAction SilentlyContinue |
   Select-Object Id,ProcessName,StartTime,Path
-Get-Process ntkvm,ntsrv -ErrorAction SilentlyContinue | ForEach-Object {
+Get-Process ntcon,ntsrv -ErrorAction SilentlyContinue | ForEach-Object {
   $_ | Select-Object Id,ProcessName,StartTime,CPU,HandleCount
   $_.Threads | Select-Object Id,ThreadState,WaitReason
 }
 ```
 
-Only NTKVM PID 18804 and NTSRV PID 10616 were visible, from O:/winnt. At the
+Only NTCON PID 18804 and NTSRV PID 10616 were visible, from O:/winnt. At the
 second observation they had survived about eight minutes. No run16, NTVDM or
-NTW32 appeared. NTKVM had 183 handles/four waiting threads; NTSRV had 117
+NTW32 appeared. NTCON had 183 handles/four waiting threads; NTSRV had 117
 handles/three waiting threads. No process was killed or input/buffer changed.
 Process-name enumeration is not an authenticated broker-state snapshot;
 WaitReason does not reveal the actual wait stack or prove deadlock.
@@ -32,7 +37,7 @@ WaitReason does not reveal the actual wait stack or prove deadlock.
 ## Source observations and confidence
 
 - run16 frontend_scope.c restore waits on restored/root indefinitely.
-- NTKVM session_service.c parks a borrowed root, resets retire and calls
+- NTCON session_service.c parks a borrowed root, resets retire and calls
   FrontendLeaseReady after usage drains, retaining resident worker channels.
 - NTSRV service_root_workerless requires borrowed idle root, no join caller,
   no closing state, no live associated worker, pending or task before grace.
@@ -50,7 +55,7 @@ lease-ready -> next admission. Privately reproduce target/launcher/worker
 failure and repeated launches for both workers; check independent-session
 isolation and broker's workerless grace. Deliver the smallest owner-local
 repair recommendation and exact regression cases before implementation.
-NTMON is worker/task presentation, not a frontend census; absence of NTKVM
+NTMON is worker/task presentation, not a frontend census; absence of NTCON
 there is expected and does not settle its state.
 
 At this investigation checkpoint no new build, publication, runtime pass or
@@ -68,8 +73,8 @@ Reuse the existing read-only observer, not a product dependency:
 Sandbox-only capture returned WCT error 1444 and no stack/module evidence.
 Elevated capture succeeded; the observer briefly suspends each inspected
 thread to read/resume its context. It neither kills processes nor changes UI.
-NTKVM module base 00CF0000; its pump thread 20676 has frame 00CF1D17, mapping
-to frontend_pump (preferred 00401C00) in the S2 ntkvm.exe.map. Main thread
+NTCON module base 00CF0000; its pump thread 20676 has frame 00CF1D17, mapping
+to frontend_pump (preferred 00401C00) in the S2 ntcon.exe.map. Main thread
 29856 waits on thread 20676; WCT reports no cycle. Other frontend threads are
 waiting. NTSRV base 00DE0000, main wait frame 00DE37F0; RPC threads are idle in
 this snapshot. This supports a live but waiting frontend pump rather than a
@@ -79,7 +84,7 @@ are not captured, so the lease hypothesis remains unproved.
 ## Owner-approved implementation
 
 The owner subsequently authorizes broker-owned retirement and requires NTSRV
-instructions to take precedence for NTKVM, NTVDM and NTW32. The corrected
+instructions to take precedence for NTCON, NTVDM and NTW32. The corrected
 contract does not depend on identifying which inaccessible old lease field
 pinned PID 18804: source inspection proves that the previous borrowed/idle/join/
 pending gates could veto orphan retirement, and that the frontend could skip
@@ -101,7 +106,7 @@ prove the exact internal field; do not claim it did.
   Reconciliation also wakes the existing GetNext condition variable. Native
   GetNext checks close before taking another command, including its first
   pre-presentation wait; tests assert cancellation without returned handles.
-- NTKVM checks the authenticated close decision before joins, channel work,
+- NTCON checks the authenticated close decision before joins, channel work,
   pending/tasks and lease restoration. Direct completion parks both borrowed
   and dedicated roots; it no longer makes a dedicated root self-retire.
 - NTVDM/NTW32 replace direct frontend-process lifetime waits with the broker

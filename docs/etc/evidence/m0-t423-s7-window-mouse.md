@@ -1,5 +1,10 @@
 # T423 S7 Window mouse
 
+T424 S11 naming normalization: frontend labels/current source links now use NTCON.
+This does not claim the new basename existed in the recorded historical package.
+Exact earlier source, commands and product names remain in Git and sealed build
+evidence; recorded hashes, dates, results and limitations are unchanged.
+
 ## Current acceptance summary (P1 delivery)
 
 The later dated/run-labelled findings supersede the initial audit below;
@@ -23,7 +28,7 @@ DIV-318 hooks. Initial claims of a conversion-only/no-mirror scope are history.
 | Delivery | Renamed seven-file publication and formal-path verification complete; reviewed P1 submission records commit/push in Git. See final verification below. |
 
 Runtime reports are in owner-approved O:/winnt/Logs2. O:/winnt now contains
-the verified S7 ntkvm/ntsrv package; S: names its retained build package.
+the verified S7 ntcon/ntsrv package; S: names its retained build package.
 Q: retains the earlier old-name mouse package. Both the previous S6 and the
 old-name S7 package remain recoverable in their distinct build-local backups.
 
@@ -1029,7 +1034,7 @@ with WINMINE main-window and SOL/WRITE original OOM frontiers, same headless
 interpretation as r24. These old-name observations have finished.
 
 Owner adds the naming change to S7, not a new S: frontend.exe/frontend-exe
-becomes ntkvm.exe/ntkvm-exe; basesrv.exe/basesrv-exe becomes
+becomes ntcon.exe/ntcon-exe; basesrv.exe/basesrv-exe becomes
 ntsrv.exe/ntsrv-exe; run16 and ntvdm remain. The two directories were moved
 with git mv, preserving all WIP and library contents. Production includes,
 launcher siblings, process-image checks, active tests and build targets were
@@ -1082,7 +1087,7 @@ All 44 imported library files still match nxvm-import.json SHA256 entries.
 An active src/tools/tests non-document search found no former executable or
 component names outside excluded historical/legacy/library material. Original
 BaseSrv API symbols remain unchanged. The no-I/O fault harness was rebuilt
-as x86 /MT /O2 with the renamed ntkvm process identity; its outputs remain
+as x86 /MT /O2 with the renamed ntcon process identity; its outputs remain
 under build/M0-T423/S7 and its copy is in renamed-p/tests, not the live package.
 
 verify-frontend-lifetime.ps1 r42 (-ExpandedFaults -Window) and r43
@@ -1147,7 +1152,7 @@ r50 is running; this checkpoint is not commit/push or S7 closure.
 | Published file | SHA256 |
 | --- | --- |
 | monitor.exe | C3F3300C7105110D038B6BD58067A9456E8F263457166DD1E39B91E0D1005967 |
-| ntkvm.exe | 745C2F4F9908AFBFE50E7515EB3C90854E6FE39062B2D43203954CB627A4CAD3 |
+| ntcon.exe | 745C2F4F9908AFBFE50E7515EB3C90854E6FE39062B2D43203954CB627A4CAD3 |
 | ntsrv.exe | 921C47BB53D681704A2C2FB868DCA32A130F7175E8A7AD9B483FBC08334FD02F |
 | ntvdm.exe | 2C45F36D8A1F3DA470036ADB91540612B37E96FFBE541E612D3CEC9587B0EBD4 |
 | run16.exe | EA5AA8F94613AC6E78D84591EEA0FADE582476EFA267EE75E48C2B336AA27140 |

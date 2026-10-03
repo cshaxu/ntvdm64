@@ -16,7 +16,7 @@ struct frontend_session_service {
     void (*channel_ready)(void);
 };
 /* Borrowed roots must not keep an otherwise closed user Console alive just
- * because NTKVM itself remains attached. Follow one real Console member at
+ * because NTCON itself remains attached. Follow one real Console member at
  * a time; on its exit, resample only once to find the next surviving member.
  * This is Console ownership, never a worker/task or descendant census. */
 static DWORD next_console_anchor(HANDLE *anchor)

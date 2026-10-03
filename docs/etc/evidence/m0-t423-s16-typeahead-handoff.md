@@ -1,5 +1,10 @@
 # M0 T423 S16 — zero-delay input handoff
 
+T424 S11 naming normalization: frontend labels/current source links now use NTCON.
+This does not claim the new basename existed in the recorded historical package.
+Exact earlier source, commands and product names remain in Git and sealed build
+evidence; recorded hashes, dates, results and limitations are unchanged.
+
 ## Question and inputs
 
 Why does the supplementary `dos-native-typeahead` case intermittently turn
@@ -12,7 +17,7 @@ binary, original COMMAND/CMD/MEM media, and private-desktop Console/Window.
 The observer writes one paired key make/break per character, 100 ms apart,
 with no *extra line* delay in this case. Window injection uses the public
 Window key route; Console injection uses `WriteConsoleInputA`. Both route
-through NTKVM before the selected worker consumes copied input.
+through NTCON before the selected worker consumes copied input.
 
 - Published Window run `t423-s15-published-typeahead-r1` completed with two
   MEM outputs and exit 1. An identical `r2` timed out with real captured
@@ -47,7 +52,7 @@ P1, with actual final DOS text rather than only a timeout:
 Both Console and Window failures occurred after two real MEM outputs, so a
 Window-only key mapping defect and a final-screen marker false negative are
 insufficient explanations. The short-root control used the byte-identical
-published NTKVM and still failed; the package path is not the cause. The
+published NTCON and still failed; the package path is not the cause. The
 observer calls its scripted input writer once and submits one make/break pair
 per character. The current evidence therefore establishes a real shared
 handoff/consumption instability, but not yet its exact producer.
@@ -58,7 +63,7 @@ short drive alias. Its three Window runs passed. A reduced handoff-only trace
 variant also passed twice; the experimental test-only change was removed
 because logging changed timing and did not capture a failing run. Neither
 observed pass is accepted as a product repair, and the production package
-was never replaced. Static review narrows the next witness to NTKVM's copied
+was never replaced. Static review narrows the next witness to NTCON's copied
 input queue, NTW32's hidden-Console `return_unused_input`, and the original
 DOS history/reentry consumer. No code owner among those three has yet been
 proved to duplicate or lose a particular key.

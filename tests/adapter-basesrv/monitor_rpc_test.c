@@ -142,7 +142,7 @@ static int console_context_rpc(RPC_BINDING_HANDLE binding,HANDLE self)
         CHECK(!target && !receipt && !request);
         RPC_CHECK(Client_GetNextNativeCommand(binding,connection,self,generation,1,&malformed,&bytes,&sender,&context,&io,&request,&caller_generation),ERROR_ACCESS_DENIED);
         CHECK(!received && !sender && !context && !io);
-        /* The launcher now retains a separate real NTKVM root. It cannot
+        /* The launcher now retains a separate real NTCON root. It cannot
          * consume that root's worker-I/O request queue. */
         RPC_CHECK(Client_FrontendRequest(binding,connection,self,generation,&request,&probe),ERROR_ACCESS_DENIED);
         CHECK(!probe && !request && WaitForSingleObject(frontend,0)==WAIT_TIMEOUT);

@@ -1,5 +1,10 @@
 # M0 T423 Console/Window runtime closure
 
+T424 S11 naming normalization: frontend labels/current source links now use NTCON.
+This does not claim the new basename existed in the recorded historical package.
+Exact earlier source, commands and product names remain in Git and sealed build
+evidence; recorded hashes, dates, results and limitations are unchanged.
+
 ## Owner acceptance
 
 On 2026-10-02 the owner reported “验证通过！T423收口，准入下一个T任务。”
@@ -39,11 +44,11 @@ remains open pending owner acceptance, with no successor admitted here.
 Owner admitted S40 with “帮我继续调研和修复” after COMMAND -> CMD -> modern
 EDIT unexpectedly ended CMD. [S40 evidence](../etc/evidence/m0-t423-s40-native-alternate-screen-geometry.md)
 records the real process/error proof, cached-versus-actual Console viewport
-repair in NTKVM, baseline-failing geometry fixture and passing shrink/grow,
+repair in NTCON, baseline-failing geometry fixture and passing shrink/grow,
 cell/cursor, invalid-request and existing lifecycle tests. The published
 O:/winnt package passes actual EDIT Ctrl+Q -> CMD echo -> DOS MEM -> completion;
 Console17 and Window17 each pass 17/17, with retained WOW frontier observations.
-All eight hashes agree with staging. Only NTKVM changes among product files;
+All eight hashes agree with staging. Only NTCON changes among product files;
 guest, mirror, shared lib, ABI and legitimate worker failure semantics remain
 unchanged. Synthetic Window Ctrl+Q is explicitly unsupported by the test
 harness, not claimed as physical-input acceptance. See evidence for limits.
@@ -83,7 +88,7 @@ published package; this does not constitute T423 acceptance.
 | Identifier Mode | M0 T423 S38, Ordinary Mode. |
 | Admission And Approval | Owner accepted S37 and admitted S38 after repeated Windows Terminal `run16 command` failure; subsequently approved NTSRV-owned component death, ten-second workerless frontend grace, and a common NTSRV direct-completion receipt for DOS and NTW32 Win32 text. |
 | Objective | Repair stale frontend retirement and align NTVDM/NTW32 worker residency and direct completion with [the approved lifecycle](../design/ARCHITECTURE.md#current-lifecycle-and-direct-completion-contract). Run16 shares one direct-wait/fault flow; NTW32 reports actual native exit to NTSRV, which owns the receipt/result without replacing original DOS records. |
-| Non-goals | No guest changes, NTW32 GUI path, Win16 wait-for-exit, observed-task scheduler, process-tree kill, second NTKVM worker census, or the separately queued Direct/Observed task-trace T. |
+| Non-goals | No guest changes, NTW32 GUI path, Win16 wait-for-exit, observed-task scheduler, process-tree kill, second NTCON worker census, or the separately queued Direct/Observed task-trace T. |
 | Reference Baseline | S37 commit `177579bd3`, published eight-file `O:/winnt` package and [S37 evidence](../etc/evidence/m0-t423-s37-window-geometry.md). The prior automated 17+17 matrix did not establish actual Windows Terminal interactive longevity. |
 | Files And ABI Surface | NTSRV worker/root retirement, authenticated native process receipt/result, run16 common wait, NTW32 target bind/cleanup, broker-liveness and worker-close edges; interface protocol only as required. Original DOS/WOW owners remain unchanged. |
 | Applicable Rules | Documentation, execution, immutable guest, original-source-first, x86 CCPU40, and preservation of concurrent unrelated work. |
@@ -222,7 +227,7 @@ relink.  PID-accurate participant records are deliberately S24 work.  See
 
 Modern EDIT emits only attributes 7/15 into the ordinary hidden Console because
 its generic OSC 4/10/11 terminal queries receive no reply.  NTW32 packing and
-NTKVM palette rendering preserve those captured values; no renderer defect or
+NTCON palette rendering preserve those captured values; no renderer defect or
 safe local production fix exists.  The 130-check packer fixture and probe
 passed; no new executable is published.  See [S22 evidence](../etc/evidence/m0-t423-s22-native-edit-colour-audit.md).
 
@@ -235,7 +240,7 @@ retains the reviewed source, test and delivery facts.
 
 | Field | S20 event-driven retirement |
 | --- | --- |
-| Delivery | Protocol 18 `FrontendStateChanged` capability, NTSRV mutation signalling and NTKVM direct wait-set; completion commit pending. |
+| Delivery | Protocol 18 `FrontendStateChanged` capability, NTSRV mutation signalling and NTCON direct wait-set; completion commit pending. |
 | Outcome | Removed the project-added 100ms creator/`ERROR_BUSY` timer path. `ERROR_BUSY` retries only after a root-authenticated NTSRV state event; S17 restoration acknowledgement remains independent. |
 | Verification | Focused lost-wake/root-authorisation fixtures; full 590-node x86 build; published COMMAND/MEM/EDIT/nested/native regressions; NTW32 management isolation; isolated broker loss returns 1722; governance and diff checks. |
 | Publication | Coherent seven-component protocol 18 package published to `O:/winnt`; exact hashes and observations are in [S20 evidence](../etc/evidence/m0-t423-s20-event-driven-retirement.md). |
@@ -268,8 +273,8 @@ records the published hashes, real PID-close isolation and the complete
 | Field | S17 Window exit to outer CMD input recovery |
 | --- | --- |
 | Delivery | P0 `4089ebaa2`, production P1 `0b1bc30f3`, both pushed to `main`. |
-| Outcome | Root `run16` now waits for NTKVM's successful original-buffer/input-mode restoration acknowledgement before it returns an outer CMD to its Console. |
-| Cause | The prior root completed its DOS record and returned while NTKVM could still be switching away from its temporary Window screen buffer. |
+| Outcome | Root `run16` now waits for NTCON's successful original-buffer/input-mode restoration acknowledgement before it returns an outer CMD to its Console. |
+| Cause | The prior root completed its DOS record and returned while NTCON could still be switching away from its temporary Window screen buffer. |
 | Verification | Low-perturbation order witness; focused lifetime fixture; isolated ordinary Console and Window routes; full 17-row ordinary actual-output/exit matrix; x86 incremental build and coherent eight-file `O:/winnt` publication. |
 | Non-work | No guest change, forced redraw, injected input or recovery sleep. The separate 100 ms `creator`/`ERROR_BUSY` poll needs a broker state-change protocol and is TODO debt, not a claimed S17 repair. |
 | Evidence | [S17 recovery ledger](../etc/evidence/m0-t423-s17-window-exit-input-recovery.md). |

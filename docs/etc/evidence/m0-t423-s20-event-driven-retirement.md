@@ -1,8 +1,13 @@
 # M0 T423 S20 Event-Driven Frontend Retirement
 
+T424 S11 naming normalization: frontend labels/current source links now use NTCON.
+This does not claim the new basename existed in the recorded historical package.
+Exact earlier source, commands and product names remain in Git and sealed build
+evidence; recorded hashes, dates, results and limitations are unchanged.
+
 ## Question
 
-Can the project-owned NTKVM creator and retirement path stop using its 100 ms
+Can the project-owned NTCON creator and retirement path stop using its 100 ms
 timeout without reusing the request-ready capability or weakening the S17
 `retire -> restored` acknowledgement?
 
@@ -10,7 +15,7 @@ timeout without reusing the request-ready capability or weakening the S17
 
 - S19 P2 baseline `0683ff05a` (protocol 17).
 - The admitted S20 scope in the T423 presentation proposal and active packet.
-- The project-owned NTSRV frontend-root service, Base RPC client and NTKVM
+- The project-owned NTSRV frontend-root service, Base RPC client and NTCON
   session service.  Original OpenNT DOS/WOW scheduling and guest media are
   outside this change.
 
@@ -21,7 +26,7 @@ NTSRV owns the auto-reset event and duplicates only a wait handle to the
 authenticated root.  It is deliberately separate from the request-ready
 capability: request arrival does not establish that retirement is now legal.
 
-NTKVM places both its creator process and this state event directly in its
+NTCON places both its creator process and this state event directly in its
 wait-set.  A creator signal is remembered and removed from the wait-set, so it
 cannot produce a permanent signalled-handle spin.  A failed
 `RetireFrontend(ERROR_BUSY)` retries only after a broker state event; it has no
@@ -76,7 +81,7 @@ Published SHA-256 values are:
 | `run16.exe` | `83D888C6EACA1CD448C7DFF0227B0540F7C81ABE9A6058FD53D958F9FDEF0142` |
 | `ntsrv.exe` | `2F3C9FBBC9028799572FACDF6E9C7FC6A4DC494ACAF2BBE5D0DE1C144045D491` |
 | `ntvdm.exe` | `E64C4A5054E989E0F477101B0B985BF2CF713E1897DFE4C2C5203B982B892BF6` |
-| `ntkvm.exe` | `ECD071A68BE9235B6BF8DD08F5063707F7056EF63B81602FD21C61F9C6700CE4` |
+| `ntcon.exe` | `ECD071A68BE9235B6BF8DD08F5063707F7056EF63B81602FD21C61F9C6700CE4` |
 | `ntw32.exe` | `EE41D67E0914BA007780D8A865612307C00503500BC4D827CB1DBE5810446675` |
 | `ntmon.exe` | `6D605BA12AC16199A10FABA6AE90865CEEE43F530339997A3203A5995B84AFBA` |
 | `VDMREDIR.dll` | `74BF30218988B8E56614628938AE1A59825658ED1FE2C9B4853BE87D41EB6307` |

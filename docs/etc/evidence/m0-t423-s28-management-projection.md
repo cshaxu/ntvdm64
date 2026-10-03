@@ -1,5 +1,10 @@
 # T423 S28 management projection and divergence audit
 
+T424 S11 naming normalization: frontend labels/current source links now use NTCON.
+This does not claim the new basename existed in the recorded historical package.
+Exact earlier source, commands and product names remain in Git and sealed build
+evidence; recorded hashes, dates, results and limitations are unchanged.
+
 ## Source/owner ledger
 
 This is an audit of the selected x86 production graph, including project-added
@@ -16,7 +21,7 @@ quietly restore it.
 | Management DTO | Project-added `service.idl` and `OPENNT_BASE_WORKER_INFO` formerly carried both `reserved` and `stack_depth` for the same count. Removed `reserved`; one versioned `PID/KIND/STATE/START/TASK/STACK/IMAGE` record remains. Protocol 25 prevents mixing layouts. |
 | NTMON | Already consumes only NTSRV's snapshot and uses kind 0 DOS, 1 Win16, 2 Win32. Its displayed task depth comes from the one DTO; no `MEMBERS=` rendering or process enumeration was found in its production path. Retained unchanged. |
 | Run16 worker selection and direct waits | Already one authenticated NTSRV admission route with a native-kind branch; Win32 process exit code remains from the real target HANDLE. No duplicate policy was extracted. |
-| NTKVM frontend | One frontend route and frame/event contract for both worker kinds; it does not create task records or decide worker READY/BUSY. Presentation owner remains separate from NTSRV. |
+| NTCON frontend | One frontend route and frame/event contract for both worker kinds; it does not create task records or decide worker READY/BUSY. Presentation owner remains separate from NTSRV. |
 | Worker-base | Only the shared connection/death-watch and ordered frontend client remain, as proven in S27. NTW32-only native get-next stays local; original NTVDM `GetNextVDMCommand` remains untouched. |
 | NTW32 execution and hidden Console | Worker-local Windows process/Console mechanics are not DOS/WOW semantics and are not moved into a false common scheduler. Its one admitted Direct completion is reported to NTSRV; descendant Windows behavior remains native. |
 
@@ -71,11 +76,11 @@ that would require the separate source-of-truth decision rejected in S26.
 | `ntsrv.exe` | `21F158E5F6359EC70C7AB9DC8DC55836DA78B0F4F4170B2220E9D1E9F49415DC` |
 | `ntvdm.exe` | `0CEF521662A57204573383C3725EADF781AC00A572983A8538FE8CC4E3849410` |
 | `ntw32.exe` | `1838DE13DBBCEE9CA5A2E91BDDFB94D35C530DF613FFFA51DAF16A74E06B112D` |
-| `ntkvm.exe` | `D1B8487317678F58981185063D4A6A65BE4A5DEE105C309C946A836E95E9A2FE` |
+| `ntcon.exe` | `D1B8487317678F58981185063D4A6A65BE4A5DEE105C309C946A836E95E9A2FE` |
 | `ntmon.exe` | `8C62D13121CE6283ED0CE62A565D63D8616951DC940B520EDBA230DA1ED80E02` |
 | `VDMREDIR.dll` | `02AD32A276D346D5C58025A74F241D9CDF2506B8BAF0802A563853CD5E7144C6` |
 | `WOW32.DLL` | `0D2AE60264B03A8040D98AA86BCF80455127064084E2217D318D5E13F90FA94A` |
 
 S29 retains whole-plane fault/reuse/management acceptance, the previously
 recorded supplemental final-banner limitation, and any independently reviewed
-NTKVM side-session change. S28 does not claim T423 closure.
+NTCON side-session change. S28 does not claim T423 closure.

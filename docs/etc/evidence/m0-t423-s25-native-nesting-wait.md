@@ -1,5 +1,10 @@
 # M0 T423 S25 — Native Nesting and Wait Evidence
 
+T424 S11 naming normalization: frontend labels/current source links now use NTCON.
+This does not claim the new basename existed in the recorded historical package.
+Exact earlier source, commands and product names remain in Git and sealed build
+evidence; recorded hashes, dates, results and limitations are unchanged.
+
 ## Question and baseline
 
 Why does the S24-accepted direct NTW32 package pass sequential native reuse
@@ -28,7 +33,7 @@ limitation; it is not used to diagnose native nesting.
   45 seconds, with no completed batch text. The latter observer report is
   `build/M0-T423/S25/z-nested-live.txt`; the package remains unmodified.
 - At the 45-second run, the outer CMD remained alive, its first inner
-  `run16 cmd /c ver` remained alive, and both NTW32 and NTKVM remained alive.
+  `run16 cmd /c ver` remained alive, and both NTW32 and NTCON remained alive.
   The process snapshot showed outer CMD parented by NTW32 and inner run16
   parented by that CMD. Only test-owned mapped-drive leftovers were ended;
   unrelated installed-package processes were not touched.
@@ -66,7 +71,7 @@ Its report and screen are `build/M0-T423/S25/nested-fixed-r7.txt` and
 Only the changed NTW32 executable was copied into the **build-only** test
 package; `O:/winnt` remains the accepted S24 set. The temporary short drive
 for this run was `Z:`. The S25 candidate is not yet a published P: bounded
-startup/handoff waits, full x86 and runtime gates, side-session NTKVM review,
+startup/handoff waits, full x86 and runtime gates, side-session NTCON review,
 coherent package publication, and governance remain outstanding.
 
 The first local probes returned error 5 even for the accepted `O:/winnt`
@@ -77,7 +82,7 @@ not counted as a product-code failure or a nested-timeout result.
 
 ## Protocol-24 startup wait candidate
 
-S25 added a launcher-private NTSRV worker-state event, separate from NTKVM's
+S25 added a launcher-private NTSRV worker-state event, separate from NTCON's
 auto-reset retirement event. Native worker registration, reservation release,
 and worker death signal every waiting launcher's own event. Run16 rechecks
 selection/admission after wake, waits on the selected worker and root
@@ -122,7 +127,7 @@ The protocol-24 candidate passed all 17 default
 `Verify-CommandExitStatus.ps1` cases with the ordinary frontend, including
 actual COMMAND/MEM/EDIT text, guest exit code 7, nested COMMAND, and native
 delegation. The reports use prefix `m0-t423-s25-proto24-dos17-a` under
-`O:/winnt/Logs2`. The side-session NTKVM viewport restoration was present
+`O:/winnt/Logs2`. The side-session NTCON viewport restoration was present
 in this build; its `console-channel-lifetime-test.exe` passed when started
 in its own hidden Console. Direct invocation without a Console returned
 `ERROR_INVALID_HANDLE` and is not a product result.
@@ -206,10 +211,10 @@ or claimed complete while this failure and the remaining gates are reviewed.
 | --- | --- |
 | Run16 native reserve/register and unaccepted submit | Previously unbounded 10-ms status polling; candidate now uses per-launcher broker transition events and one 10-s deadline. Accepted requests are never replayed. |
 | NTW32 `begin_io` | The new candidate removes its 10-ms readiness retry. The existing presentation thread publishes a manual-reset admission event only after it has attached and acquired the frontend; a request waits on that event, its stop handles, the presentation-thread death handle, and the same 10-s deadline. The retained 30-ms hidden-Console observer is still a timed producer and is disclosed separately. Focused real-chain proof passed; broader lost-wake/fault review remains. |
-| NTVDM Console activation | Previously unbounded `ERROR_BUSY` 10-ms retry. The current candidate makes one activation request; NTKVM waits on a private per-request manual-reset event plus cancellation/root-stop handles, with a 10-s deadline. Ownership transitions signal all registered waiters under the ownership lock. The focused real routes and subsequent 17+17 formal package gates pass; publication/owner acceptance remain separate. |
+| NTVDM Console activation | Previously unbounded `ERROR_BUSY` 10-ms retry. The current candidate makes one activation request; NTCON waits on a private per-request manual-reset event plus cancellation/root-stop handles, with a 10-s deadline. Ownership transitions signal all registered waiters under the ownership lock. The focused real routes and subsequent 17+17 formal package gates pass; publication/owner acceptance remain separate. |
 | NTW32 hidden-Console output pump | Deliberate 30-ms output observer accepted by the owner until a reliable producer signal exists; retain and disclose. |
 | NTW32 screen capture retries and Console-close checks | Bounded 8-attempt capture consistency retry and bounded explicit-close observation, not startup readiness polling; retain pending negative-path regression. |
-| NTKVM synchronous-input cancellation join | Replaced repeated 50-ms cancellation with a single cancel and bounded 10-s join. Hidden-Console normal, 32 cancel/wait races and forced held-lock timeout fixtures pass; a timeout retains borrowed storage for terminal process cleanup. |
+| NTCON synchronous-input cancellation join | Replaced repeated 50-ms cancellation with a single cancel and bounded 10-s join. Hidden-Console normal, 32 cancel/wait races and forced held-lock timeout fixtures pass; a timeout retains borrowed storage for terminal process cleanup. |
 | Run16 broker-connect, NTMON refresh, WOW clock | Finite broker-connect retry and deliberate periodic observer/producers; classify and preserve unless a distinct failure is proved. |
 | Run16 worker-death completion grace | One 2-second wait for the direct DOS/WOW parent completion after worker death, followed by explicit failure if no completion arrives; bounded failure observation, not a readiness poll. |
 | NTVDM mouse-input backpressure | `console_compat.c` yields for 1 ms only when the downstream mouse queue has zero capacity, leaving the raw record queued and returning to the original event loop. This is neither startup readiness nor broker/worker scheduling; retain pending its separate input-pressure contract. |
@@ -217,7 +222,7 @@ or claimed complete while this failure and the remaining gates are reviewed.
 
 The supplemental final-screen history failure, coherent `O:/winnt`
 publication, governance, and push remain S25 work. Console17, Window17,
-retained headless WOW frontiers, the side-session NTKVM lifetime fixture,
+retained headless WOW frontiers, the side-session NTCON lifetime fixture,
 and the x86 formal graph have passed as stated above; they do not turn the
 remaining items into passes.
 
@@ -240,7 +245,7 @@ incremental product build remains required before a production P.
 
 The S25 build audit also found that Ninja's default target compiles only the
 original SoftPC library collection; it is not a product build. Its separate
-`product-programs` alias omitted both `ntw32.exe` and `ntkvm.exe`, so invoking
+`product-programs` alias omitted both `ntw32.exe` and `ntcon.exe`, so invoking
 that alias could falsely suggest that the two-worker product was up to date.
 The graph generator now includes both executables in the alias. Regeneration
 under `build/M0-T423/S25/formal` showed all seven declared product targets,
@@ -284,7 +289,7 @@ was not used as the repair.
 ## DOS activation wait candidate
 
 NTVDM now makes one Console activation request instead of sleeping 10 ms and
-retrying `ERROR_BUSY`. The first NTKVM candidate used a condition variable
+retrying `ERROR_BUSY`. The first NTCON candidate used a condition variable
 under its `io_lock`; the later cancellation audit replaced it with a private
 manual-reset event for each waiting request and a wait set containing that
 event, channel cancel and root stop. Ownership transitions set the registered
@@ -295,7 +300,7 @@ is confined to the worker/frontend adapter, not the original OpenNT task
 scheduler or guest.
 
 The graph-selected x86 source compile and link commands produced
-`ntkvm.exe` and `ntvdm.exe`, including the VDM TIB storage audit. They were
+`ntcon.exe` and `ntvdm.exe`, including the VDM TIB storage audit. They were
 copied into the new build-only `build/M0-T423/S25/runtime-binding-event`
 package; `O:/winnt` was not replaced. With this package temporarily mapped
 only to `Z:` and unmounted after each run, `native-zero`,
@@ -314,14 +319,14 @@ the task itself exits with its expected code. See
 `m0-t423-s25-binding-event-dos-native-dos-dos-native-dos.txt` and its
 line-02/final Console snapshots in `O:/winnt/Logs2`. This assertion remains
 intact and is not counted as passed. The explicit pending-binding rollback
-was added after those full-matrix runs. Its x86 NTKVM rebuild and focused
+was added after those full-matrix runs. Its x86 NTCON rebuild and focused
 `native-zero`, `native-cmd-dos-repeat`, and `frontend-chain-b` real cases
 passed in the separate build-only `runtime-binding-rollback` package under
 `m0-t423-s25-binding-rollback-focused`; the full matrices have not been
 repeated for this later binary. A further lost-wake review found that stop
 notifications had to acquire the same `io_lock` as the condition predicate;
 otherwise cancellation could occur between the check and sleep. The corrected
-NTKVM binary was built into the distinct `runtime-binding-wake` package, and
+NTCON binary was built into the distinct `runtime-binding-wake` package, and
 the same three real focused cases again passed under
 `m0-t423-s25-binding-wake-focused`. The current x86
 `console-channel-lifetime-test.exe` also exited zero in its own hidden
@@ -331,7 +336,7 @@ cancel-versus-wait races while a native owner held the frontend. It verifies
 prompt `ERROR_OPERATION_ABORTED`, clears the canceled DOS pending slot, and
 admits a different DOS owner afterward; its rebuilt x86 executable exited
 zero in a hidden Console. These checks do not prove every fault/lost-wake case.
-At this intermediate stage, NTKVM cancellation-teardown, remaining
+At this intermediate stage, NTCON cancellation-teardown, remaining
 fault/lost-wake cases, coherent publication, governance and push were still
 open S25 gates; later results are recorded below.
 
@@ -350,14 +355,14 @@ SOL/WRITE acceptance). No formal product binary was published to `O:/winnt`
 at this point. The strict supplemental screen-history assertion and the
 remaining fault/teardown gates were still open at this stage.
 
-## Bounded NTKVM channel teardown
+## Bounded NTCON channel teardown
 
 The prior channel stop repeatedly issued `CancelSynchronousIo` and joined in
 50-ms slices without a terminal bound. The current code signals stop, issues
 one synchronous cancel and one pipe `CancelIoEx`, then waits once for at most
 10 seconds. On a timeout it returns `ERROR_TIMEOUT` without closing/freeing
 storage that the still-running channel thread may reference. The frontend
-service preserves that channel/root and reports failure; NTKVM's process
+service preserves that channel/root and reports failure; NTCON's process
 exit then supplies terminal resource cleanup rather than a use-after-free.
 No DOS task, native target or worker is killed by this mechanism.
 
@@ -392,7 +397,7 @@ then releases the dispatch, joins it and cleans up. Its normal hidden-Console
 mode also returned zero. This proves the bounded teardown case, not every
 possible blocked Windows Console operation.
 
-The concurrent NTKVM restoration change in the shared worktree records the
+The concurrent NTCON restoration change in the shared worktree records the
 calling Console's buffer extent, viewport and cursor at frontend creation and
 restores them before root teardown. Its focused channel fixture mutates the
 DOS-sized buffer and cursor, then verifies the caller's exact geometry and
@@ -429,7 +434,7 @@ The latest Run16/NTSRV package with only `ntw32.exe` substituted by the
 build-only live-but-unregistered fixture returned actual launcher status
 `0x000005b4` (`ERROR_TIMEOUT`) in
 `m0-t423-s25-waitset-stuck-final.txt`; it did not hang. A subsequent process
-query found no remaining test-owned Run16/NTKVM/NTW32/NTSRV process.
+query found no remaining test-owned Run16/NTCON/NTW32/NTSRV process.
 The independent `base-client-rpc-first-test --native-reservation` fixture
 initially rejected the protocol-24 broker because that fixture binary was
 still protocol 23; the formal product target does not include this fixture.
@@ -471,12 +476,12 @@ within five seconds. Report:
 `m0-t423-s25-waitset-worker-broker-loss.txt`. Both probes used only temporary
 `Z:` mappings, removed afterward; no test-owned processes remained.
 
-For frontend death, the first isolated injection killed NTKVM as soon as it
+For frontend death, the first isolated injection killed NTCON as soon as it
 appeared, before bootstrap completed. The launcher returned error 5; this
 tests early-bootstrap failure only and is not evidence about a pending
 worker-state wait. A second controlled injection waited until the
 deliberately non-registering NTW32 fixture had actually started, then killed
-that run's NTKVM. The waiting launcher returned `0x000000e9`
+that run's NTCON. The waiting launcher returned `0x000000e9`
 (`ERROR_PIPE_NOT_CONNECTED`) promptly rather than waiting for its deadline.
 Report: `m0-t423-s25-waitset-frontend-death-ready.txt`. The owned broker,
 fake worker and temporary `Z:` mapping were cleaned afterward.
@@ -486,7 +491,7 @@ The same strict case was run against the isolated preceding S24 package as
 status before reaching the final-screen assertion. It is not a
 valid passing screen-history baseline. The S25 candidate reaches the later
 DOS task and returns the expected code, revealing an additional display
-frontier. Source inspection identifies a concrete risk: NTKVM's
+frontier. Source inspection identifies a concrete risk: NTCON's
 `run16_console_prepare_dos` resizes the physical Console buffer down to the
 DOS 80x25 page on native-to-DOS handoff, which necessarily discards older
 Console scrollback. No assertion was weakened, and the current package is
@@ -520,7 +525,7 @@ published `O:/winnt` set. Its SHA-256 values are:
 | `ntsrv.exe` | `23707D9E3A22B241E1F815FB3B72D8B78656C25E2964802667EC773BEA5F4045` |
 | `ntvdm.exe` | `A7FCD3FB2B54105902FFFD3653F462CCB851EE21AC5CE2403F5B195072826A2C` |
 | `ntw32.exe` | `D60137301B96847AF9B1F8730B9C9B4A379B1AD47B3EB2538CF664C839CB10AA` |
-| `ntkvm.exe` | `D71A85C094C2B96AFCA80BDD98FAEC88C5B491765FC1F706D75BFDD7CDDECFF5` |
+| `ntcon.exe` | `D71A85C094C2B96AFCA80BDD98FAEC88C5B491765FC1F706D75BFDD7CDDECFF5` |
 | `ntmon.exe` | `22F748D18A34100E00932F0F777EA554382C6E97CD0D501668762854288F919C` |
 | `VDMREDIR.dll` | `D768C09D84EC83597186FB6BC08871C0045915FACC6ACD135820DAD9CAF9BD77` |
 | `WOW32.DLL` | `0D2AE60264B03A8040D98AA86BCF80455127064084E2217D318D5E13F90FA94A` |

@@ -1,5 +1,10 @@
 # T423 S39: native packet bounds and startup client ownership
 
+T424 S11 naming normalization: frontend labels/current source links now use NTCON.
+This does not claim the new basename existed in the recorded historical package.
+Exact earlier source, commands and product names remain in Git and sealed build
+evidence; recorded hashes, dates, results and limitations are unchanged.
+
 ## Question and baseline
 
 The owner approved three audit repairs and explicitly excluded the existing
@@ -11,8 +16,8 @@ revision 28 and its published coherent eight-file package. T423 stays open.
 | Source and previous location | Disposition and final owner | Preserved boundary |
 | --- | --- | --- |
 | Project-added `ntw32-exe/launch_packet.c` | Move to `run16-exe/native_launch_packet.c`; existing frontend-client archive. | Copied native launch strings/handles; no execution or frontend policy. |
-| Project-added `ntw32-exe/launch.c` | Move to `run16-exe/native_launch.c`; separate object linked by run16 and NTW32. | Same restricted handle materialization and CreateProcess body. NTKVM does not link it. |
-| Project-added NTKVM bootstrap/request client and transfer | Move existing three C files to run16-exe, retaining frontend-client.lib. | Startup/request/receipt client only; no rendering, hidden Console, input pump or worker state. |
+| Project-added `ntw32-exe/launch.c` | Move to `run16-exe/native_launch.c`; separate object linked by run16 and NTW32. | Same restricted handle materialization and CreateProcess body. NTCON does not link it. |
+| Project-added NTCON bootstrap/request client and transfer | Move existing three C files to run16-exe, retaining frontend-client.lib. | Startup/request/receipt client only; no rendering, hidden Console, input pump or worker state. |
 | Public bootstrap/request/transfer declarations | Move three headers to interface. | Declarations only; no transport implementation or wire layout change. |
 | NTW32 request executor | Retain NTW32-owned. | Worker execution, target binding, broker completion and cleanup remain unchanged apart from validation/allocation order. |
 | NTVDM/NTW32 common worker client | Retain worker-base unchanged. | Consumers do not acquire worker-base dependencies. |
@@ -39,7 +44,7 @@ translation unit to relocate. No original algorithm is replaced.
    request cleanup closes its channel. Valid resume requests remain unchanged.
 2. `ntw32_execution_start` validates owner/command before HeapAlloc. Invalid
    arguments leave caller-owned resources untouched and allocate nothing.
-3. Shared startup implementations no longer originate in NTKVM/NTW32-private
+3. Shared startup implementations no longer originate in NTCON/NTW32-private
    roots; the old files are removed, public include sites and formal source/
    link manifests are updated. No parallel old implementation remains.
 
@@ -59,7 +64,7 @@ Reuse the sealed S38 object/library cache only for unchanged inputs. Compile
 the changed/moved startup sources, NTW32 executor, launcher/frontend include
 consumers and affected tests, then execute the archive/link commands from the
 generated Ninja graph with its x86 VS environment. Rebuilt product closure:
-run16, NTW32, NTKVM. The other five published artifacts match S38 exactly.
+run16, NTW32, NTCON. The other five published artifacts match S38 exactly.
 This is incremental verified reuse, not a claimed cold full-graph rebuild.
 
 Focused entrypoints and results:
@@ -104,7 +109,7 @@ The tested package is now at O:/winnt.
 | --- | --- |
 | run16.exe | `299A58AB889BB53EC54315791FE4B5CC08B450CDEC2231FCE91C92AB8A1F556E` |
 | ntsrv.exe | `5566B5C4B5FC86D97A54E6B0F66300AFEB33B6E7973D29DDFD67BA70D3BB76E5` |
-| ntkvm.exe | `EAA7A291C11E708CF33CDC91CDB9B2C98BD2F294AD48046576A2B0E33A14FA87` |
+| ntcon.exe | `EAA7A291C11E708CF33CDC91CDB9B2C98BD2F294AD48046576A2B0E33A14FA87` |
 | ntvdm.exe | `60155D9B1E8DF83F17AC407B682EFF80033A3A9584CA0CE2314DAFCEE783C0C5` |
 | ntw32.exe | `4002CB09C8B732DECA4CC7BA0901359411B368BF36B8CBA4C29DA14294901CB4` |
 | ntmon.exe | `3D86477B95A673B602540952805790DDFE7C4541496819030ADF16DDBD4FBA53` |

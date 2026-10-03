@@ -7,7 +7,7 @@ if (!$output.StartsWith($buildPrefix, [StringComparison]::OrdinalIgnoreCase)) {
     throw 'Build output must remain below repository build/'
 }
 if ($env:VSCMD_ARG_TGT_ARCH -ne 'x86') { throw 'Run from the MSVC x86 developer environment' }
-$owner = Join-Path $repo 'src/ntkvm-exe'
+$owner = Join-Path $repo 'src/ntcon-exe'
 $manifest = Get-Content (Join-Path $owner 'nxvm-import.json') -Raw | ConvertFrom-Json
 if ((Get-FileHash (Join-Path $owner 'lib/LICENSE.nxvm') -Algorithm SHA256).Hash -ne $manifest.licenseSha256) {
     throw 'Imported license differs from pinned nxvm'

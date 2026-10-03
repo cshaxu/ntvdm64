@@ -1,8 +1,13 @@
 # T423 S29 whole control-plane acceptance
 
+T424 S11 naming normalization: frontend labels/current source links now use NTCON.
+This does not claim the new basename existed in the recorded historical package.
+Exact earlier source, commands and product names remain in Git and sealed build
+evidence; recorded hashes, dates, results and limitations are unchanged.
+
 S29 introduced no product mechanism, mirror diff, overlay or guest-media change.
 It corrected two test assumptions: the lifecycle probe now distinguishes loss
-of the independent NTKVM frontend from loss of its run16 launcher and writes
+of the independent NTCON frontend from loss of its run16 launcher and writes
 its evidence to `O:/winnt/Logs2`; the BaseSrv worker-channel fixture now
 reports the authenticated same-Console relationship before selecting a
 worker. The x86 fixture rebuilt and all six focused modes passed:
@@ -20,7 +25,7 @@ Against the unchanged, x86-built S28 protocol-25 package:
 | --- | --- |
 | Broker death | Launcher and worker failed without request replay; fresh MEM succeeded. |
 | NTVDM death | Waiting launcher returned bounded 1067; broker survived; fresh MEM succeeded. |
-| NTKVM frontend death | Associated DOS worker closed; bounded root outcome; fresh MEM succeeded. The old probe wrongly killed run16 and is superseded. |
+| NTCON frontend death | Associated DOS worker closed; bounded root outcome; fresh MEM succeeded. The old probe wrongly killed run16 and is superseded. |
 | run16 launcher death | Admitted worker survived; fresh MEM succeeded. |
 | NTW32 management close, two independent sessions | Selected NTW32/CMD closed; other session still accepted input and returned 23. |
 | Ordinary Console matrix | All 17 cases passed with captured text and expected exit codes, including direct/nested COMMAND, MEM, EDIT and native commands. |
@@ -67,7 +72,7 @@ DOS/WOW records and execution stay in place; NTW32's Windows Console process
 mechanics remain local. The S26 Job-descendant projection stays rejected,
 not silently reinstated.
 
-No other session's NTKVM edit was present in this worktree at the S29 evidence
+No other session's NTCON edit was present in this worktree at the S29 evidence
 snapshot. Any later edit must receive its own source review, x86 build,
 34-case regression and coherent publication before it can supersede this
 published baseline. T423 remains open for owner acceptance.

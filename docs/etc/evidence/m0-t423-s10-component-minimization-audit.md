@@ -1,5 +1,10 @@
 # T423 S10 component minimization audit
 
+T424 S11 naming normalization: frontend labels/current source links now use NTCON.
+This does not claim the new basename existed in the recorded historical package.
+Exact earlier source, commands and product names remain in Git and sealed build
+evidence; recorded hashes, dates, results and limitations are unchanged.
+
 ## Question and baseline
 
 Owner requested simplification of authored architecture, executable/DLL dependency
@@ -38,7 +43,7 @@ The minimum-risk recommendation is therefore **remove product-package as a
 component, retain product-abi as a header-only contract, and decompose opennt-abi
 by provenance and actual consumers**. Merging all three would reduce directory
 count but increase coupling. If eliminating product-abi is later desired, move
-I/O declarations to ntkvm's public interface and keep product identity in one
+I/O declarations to ntcon's public interface and keep product identity in one
 explicit shared header; that is optional organization, not runtime simplification.
 
 Of 209 source files, 197 match a same-path reference byte-for-byte. The other 12
@@ -53,7 +58,7 @@ subset carriers cannot simply be moved into an original mirror.
 
 | Candidate | Evidence | Action and retained contract |
 | --- | --- | --- |
-| native_console_capture.c old reader | Lines 75-164, 90 lines; production has no reader callers; tests still call it; symbols remain in ntkvm map. | Remove old hidden-Console snapshot reader from production. Preserve live screen_apply/cells_write and adapt their tests; do not delete the whole file indiscriminately. |
+| native_console_capture.c old reader | Lines 75-164, 90 lines; production has no reader callers; tests still call it; symbols remain in ntcon map. | Remove old hidden-Console snapshot reader from production. Preserve live screen_apply/cells_write and adapt their tests; do not delete the whole file indiscriminately. |
 | native_console_view.c old wait | Lines 277-310, 34 lines; no src/tests caller. | Remove obsolete second presentation/wait loop and declaration. Keep current frontend wait/completion implementation. |
 | session_service.c launch/wait forwarding | Last two functions, eight lines; no src/tests caller, present in map. | Remove both wrappers and declarations. |
 | native_conpty.c ReleasePseudoConsole | Release path is test-only, yet open_events requires the API at production initialization. | Remove the test-only production requirement and separate diagnostic lifecycle probing from the persistent production backend. Never release on direct-target completion. |
@@ -67,15 +72,15 @@ Other test convenience/inspection APIs are not automatically dead functionality.
 
 ## Dependency findings
 
-The explicit graph contains four ntkvm client translation units in run16, zero
-ntkvm units in worker, and 38 ntkvm units in frontend plus eight separately
+The explicit graph contains four ntcon client translation units in run16, zero
+ntcon units in worker, and 38 ntcon units in frontend plus eight separately
 classified imported libvterm sources. These are source selections, not PE size.
 run16's four units are bootstrap, native request client/I/O and process-launch
 binding; they do not embed the renderer or terminal parser.
 
 Broad Base archives do not imply every executable embeds the broker server.
 Maps show run16 extracting client/classifier/capture and finite startup bindings;
-ntsrv extracts dispatch/record resources/streams/waits; ntkvm extracts client-side
+ntsrv extracts dispatch/record resources/streams/waits; ntcon extracts client-side
 command/payload/process/startup values; ntmon extracts RPC security. No evidence
 supports deleting these dependencies merely because archives share a name.
 WOW32 and VDMREDIR importing ntvdm.exe is their intentional parent-provider ABI,
@@ -99,7 +104,7 @@ PID. S9's helper-removal claim is scoped to the native I/O backend.
 | --- | --- | --- |
 | run16.exe | RPCRT4, ntdll, KERNEL32, SHELL32, USER32, ADVAPI32 | RPC/security/process APIs; SHELL32 supplies CommandLineToArgvW; USER32 supplies wsprintfW and GetWindowThreadProcessId. Replacing formatting alone will not remove USER32 because window-PID validation remains. No renderer/VT implementation is linked. |
 | ntsrv.exe | RPCRT4, ntdll, KERNEL32, USER32, ADVAPI32 | USER32 imports are GetUserObjectInformationW, GetProcessWindowStation and GetWindowThreadProcessId: interactive admission and window ownership validation, not a frontend pump. Retain. |
-| ntkvm.exe | RPCRT4, KERNEL32, USER32, GDI32, ADVAPI32, ntdll | Frontend/security/Window drawing dependencies are consistent with ownership. No external helper or libvterm DLL import. |
+| ntcon.exe | RPCRT4, KERNEL32, USER32, GDI32, ADVAPI32, ntdll | Frontend/security/Window drawing dependencies are consistent with ownership. No external helper or libvterm DLL import. |
 | ntmon.exe | RPCRT4, KERNEL32, USER32, ADVAPI32 | USER32's only imported symbol is wsprintfW in main.c; concrete removable module dependency after bounded formatting replacement and link verification. |
 | ntvdm.exe | RPCRT4, KERNEL32, USER32, ADVAPI32, GDI32, ntdll | Worker still supports original keyboard conversion, WOW native windows and palette/resource bindings. Do not remove USER32/GDI32 wholesale to enforce DOS frontend isolation. |
 | wow32.dll | ntvdm.exe, KERNEL32, USER32, GDI32, ADVAPI32, SHELL32, COMDLG32, VERSION, NTDLL | Original WOW API families and finite parent-provider ABI; these module families match the DLL purpose, not redundant frontend composition. |
@@ -111,7 +116,7 @@ absence from static imports does not prove absence of dynamic loading.
 
 The worker's cursor APIs illustrate why deletion cannot be based solely on PE
 imports: conapi.h redirects original calls to MvdmGetCursorPos/MvdmClipCursor;
-console_client.c routes bound DOS sessions to ntkvm but retains native fallback
+console_client.c routes bound DOS sessions to ntcon but retains native fallback
 without a client. mvdm_standalone_worker.c explicitly permits the separate WOW
 route without DOS frontend binding, and mvdm_softpc_wow_page_domain.c itself uses
 GetCursorPos. Thus the import alone is not proof of an active duplicate DOS
@@ -122,7 +127,7 @@ reachability needs call-site/profile proof before removal, not an assumption.
 
 Keep the seven product files and their existing responsibilities. Do not add
 another shared manager, scheduler, input-recovery service or compatibility
-framework to reduce small wrappers. One owner holds each resource: ntkvm holds
+framework to reduce small wrappers. One owner holds each resource: ntcon holds
 presentation/ConPTY, worker holds guest machine state, ntsrv holds authenticated
 original service records, launcher holds only its direct target wait. Public
 client code may be linked into several images without duplicating server state.
@@ -181,7 +186,7 @@ contract; original declaration collisions remain subject to the audit above.
 The three obsolete frontend cohorts remove 133 C lines including their separator
 line (the earlier 132-line audit excluded it), plus 19 header lines with one
 replacement line. Test-only ConPTY release is compiled only under
-NTKVM_CONPTY_TEST_RELEASE and resolves its optional API at the diagnostic call,
+NTCON_CONPTY_TEST_RELEASE and resolves its optional API at the diagnostic call,
 not production startup. Its guarded source remains for the strict lifecycle
 fixture; it is not claimed deleted. Including these guards, production authored
 C/H net reduction is 144 lines, excluding unchanged relocations and tests.
@@ -253,7 +258,7 @@ S11 also investigates the retained Window continuity failure, without assuming
 it has the same cause. S12 owns the RDP host-pointer capture/clipping report.
 
 The latest formal build (final-build.log) passes after the comment-only helper
-wording correction. Its ntkvm hash is B2D335F740C4D22CDE58BC454EF900F3D9BC89756115ACA9D7586DDFE3349179;
+wording correction. Its ntcon hash is B2D335F740C4D22CDE58BC454EF900F3D9BC89756115ACA9D7586DDFE3349179;
 the runtime candidate tested above is 100E8C9FF16395ACD717453CCB8C6F9047DA56157E7677D715F577880B5FBE39.
 Those identities are distinct; neither is published or asserted to have passed
 all production gates. NTMon's reduced-link candidate is

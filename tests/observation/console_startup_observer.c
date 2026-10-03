@@ -664,7 +664,7 @@ static BOOL console_caf_return(HANDLE input,const char *report_path)
     process=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION|SYNCHRONIZE,FALSE,pid);
     if(!process || !QueryFullProcessImageNameW(process,0,image,&image_length))goto done;
     { const WCHAR *name=wcsrchr(image,L'\\');
-      if(!name || _wcsicmp(name+1,L"ntkvm.exe"))goto done; }
+      if(!name || _wcsicmp(name+1,L"ntcon.exe"))goto done; }
     fprintf(report,"caf-visible-window=1 frontend=%lu\n",pid);
     if(GetEnvironmentVariableA("MVDM_OBSERVER_WINDOW_INPUT",NULL,0)) {
         scripted_window_frontend=pid;ok=TRUE;
@@ -1034,7 +1034,7 @@ static BOOL graphics_window_return(HANDLE input,HANDLE output,const char *report
     process=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION|SYNCHRONIZE,FALSE,pid);
     if(!process || !QueryFullProcessImageNameW(process,0,image,&image_length))goto done;
     { const WCHAR *name=wcsrchr(image,L'\\');
-      if(!name || _wcsicmp(name+1,L"ntkvm.exe"))goto done; }
+      if(!name || _wcsicmp(name+1,L"ntcon.exe"))goto done; }
     fprintf(report,"automatic-graphics-window=1 frontend=%lu\n",pid);
     if(!SendMessageTimeoutW(window,WM_CLOSE,0,0,SMTO_ABORTIFHUNG,3000,&result))goto done;
     Sleep(500);
@@ -1071,7 +1071,7 @@ static BOOL window_mouse_probe(const char *package,const char *report_path)
         desktop,sizeof(desktop),&needed) || strncmp(desktop,"NTVDMConsoleTest-",17))return FALSE;
     snprintf(path,sizeof(path),"%s.mouse-window.txt",report_path);
     report=fopen(path,"w");if(!report)return FALSE;
-    snprintf(expected,sizeof(expected),"%s%sntkvm.exe",package,
+    snprintf(expected,sizeof(expected),"%s%sntcon.exe",package,
         package[strlen(package)-1]=='\\' ? "" : "\\");
     deadline=GetTickCount64()+15000;
     do {

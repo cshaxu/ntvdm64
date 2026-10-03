@@ -1,8 +1,13 @@
 # T424 S10 frontend notification evidence
 
+T424 S11 naming normalization: frontend labels/current source links now use NTCON.
+This does not claim the new basename existed in the recorded historical package.
+Exact earlier source, commands and product names remain in Git and sealed build
+evidence; recorded hashes, dates, results and limitations are unchanged.
+
 ## Question and boundary
 
-Does an undecided frontend join lose its notification when NTKVM checks for
+Does an undecided frontend join lose its notification when NTCON checks for
 channel work after checking for joins? S10 repairs project-added NTSRV
 notification maintenance, not original DOS/WOW execution or the public wire.
 T424 remains open. The experiment history below retains failed attempts;
@@ -66,7 +71,7 @@ guest mutation or O:/winnt replacement occurs.
 Causal source locations: `frontend_registry.c` sets the capability after
 publishing `frontend_join_caller` in AcquireFrontendRoot;
 `service_frontend_idle()` considers only `frontend_request_root` and resets
-the same capability. NTKVM's `session_service.c` checks candidates before
+the same capability. NTCON's `session_service.c` checks candidates before
 channel requests. The test exercises precisely the gap between those checks.
 Confidence is high for this specific lost-wakeup defect. It does not prove
 that every historical rapid-launch timeout has this cause.
@@ -149,7 +154,7 @@ These are recorded non-passes, not weakened into acceptance. Authenticated
 root/route cancellation still needs a current-boundary fixture.
 
 Incremental product build also passes:
-`cmd /c build\M0-T424\S2\r001\run-ninja-parallel.cmd run16.exe ntsrv.exe ntvdm.exe ntvwm.exe ntkvm.exe ntmon.exe VDMREDIR.dll`.
+`cmd /c build\M0-T424\S2\r001\run-ninja-parallel.cmd run16.exe ntsrv.exe ntvdm.exe ntvwm.exe ntcon.exe ntmon.exe VDMREDIR.dll`.
 Six dependent EXE links rebuild against the changed service archive; the
 NTVDM VdmTib storage audit passes. Unchanged DLL identity still needs the
 coherent release manifest, not an inference from this build.
@@ -299,7 +304,7 @@ the final delivery below supersedes that pending status, not its test history.
 
 ## Approved coordinate repair and follow-up
 
-The existing NTKVM io_lock serializes apply_binding and the native snapshot
+The existing NTCON io_lock serializes apply_binding and the native snapshot
 barrier. Native activation now rebases the logical rectangle to the canonical
 viewport origin before publishing the native owner. Width/height remain unchanged;
 the real canonical cells, cursor, VT mode and physical buffer are not rewritten.
@@ -347,12 +352,12 @@ O:/winnt, commit/push and S10 closure remain pending.
 | Join/route rundown | service_clear_frontend clears borrowed channels, deletes delivered/native routes, retains a cancelled DOS identity only for its original waiter, and refreshes the affected root after removal. Disconnect removes the caller from the connection list before refreshing its cancelled join. |
 | Attach/delivery | Root authentication precedes mutation; AttachFrontendRequest clears its caller marker then refreshes. Attached routes have a pipe and are not pending work; taking a route changes pipe-present to delivered, neither is an actionable pending route. |
 | frontend_changed CV | Existing acquisition predicate/recheck holds the service lock; decided joins awaiting an old lease are excluded from pump work, not deprived of their lease notification. |
-| retire/restored | Independent Console lease acknowledgment. NTKVM parks/restores before LeaseReady; its pump resets retire before publishing that acknowledgment. Receipt completion cannot substitute for restoration. |
+| retire/restored | Independent Console lease acknowledgment. NTCON parks/restores before LeaseReady; its pump resets retire before publishing that acknowledgment. Receipt completion cannot substitute for restoration. |
 | frontend_state/lifetime_changed | Existing broker-owned state-change notifications and monotonic shutdown decisions, not another partially-reset work queue. No manual ResetEvent in service_core/lifecycle for the auto-reset lifetime event. |
-| NTKVM pump | One owner lists channels and processes joins before channel requests; wait-set includes notification, stop, retire, creator, Console anchor and state changes. NTSRV retirement is checked first. |
+| NTCON pump | One owner lists channels and processes joins before channel requests; wait-set includes notification, stop, retire, creator, Console anchor and state changes. NTSRV retirement is checked first. |
 | NTVWM admission_ready | Membership lock owns presentation/presenting and the reset/set transitions. begin_io rechecks under that same lock and waits on ready, stop and thread death with the existing admission deadline. |
 | NTVWM idle/receipt | Execution lock owns active count and idle transition. Direct Windows completion and its broker-failure latch remain independent; neither becomes frontend authentication work. |
-| Input/OVERLAPPED | NTKVM io_lock owns unsent input and readiness. common pipe_transfer resets only the exclusively-owned operation event before issuing I/O, drains pending cancellation before release, and preserves explicit completion/death priority. |
+| Input/OVERLAPPED | NTCON io_lock owns unsent input and readiness. common pipe_transfer resets only the exclusively-owned operation event before issuing I/O, drains pending cancellation before release, and preserves explicit completion/death priority. |
 
 No additional same-class partial predicate/reset defect was established by this
 sweep. Existing capture retries/30ms presentation polling remain explicitly
@@ -378,7 +383,7 @@ same-Console concurrent pairs, each real target/launcher exit0 and exact
 probe handle count89 -> 89. Version negatives reject all five app/protocol/
 legacy-interface variants before task delivery. WOW retains actual WINMINE
 window and SOL/WRITE memory-dialog frontiers, not three gameplay passes.
-gui-coordinate-r003 passes all five GUI cases against the final NTKVM repair,
+gui-coordinate-r003 passes all five GUI cases against the final NTCON repair,
 including carrier retirement while GUI survives and text -> GUI -> text.
 
 Final incremental x86 products and the corrected Console lifetime Ninja target
@@ -402,7 +407,7 @@ manifest pins the exact x86 /MT CCPU40 APP0.0.424 protocol/RPC33 files; the
 S9 recovery remains under build/M0-T424/S10/r001/accepted-s9-recovery.
 
 Production changes are limited to NTSRV's private notification helper/call
-sites and NTKVM's native ownership coordinate rebase. The displaced partial
+sites and NTCON's native ownership coordinate rebase. The displaced partial
 idle reset is removed; no second queue, scheduler, worker registry or transport
 was introduced. The build generator gains the existing common-transport test
 dependency; tests exercise real service/Console and real target completion.
@@ -452,7 +457,7 @@ DOS resume inherits the old cursor, and the next stream prompt overwrites
 directory output. The independent inactive-buffer API probe does not resize
 the canonical buffer; shadow creation alone is not the cause.
 
-Repair boundary: project-added NTKVM receiver only. Native channels mark
+Repair boundary: project-added NTCON receiver only. Native channels mark
 their canonical output as a projected viewport. Copied worker WINDOW_RECT
 updates logical metadata, not the host viewport/storage. Explicit BUFFER_SIZE
 remains authoritative and first fits the physical viewport when storage must
@@ -463,7 +468,7 @@ guest/mirror/shared-library edit, protocol change or history promise.
 
 Confirmed targeted checks:
 
-- x86 /MT incremental NTKVM and test links pass, retaining existing warnings.
+- x86 /MT incremental NTCON and test links pass, retaining existing warnings.
 - `console-channel-lifetime-test.exe --private-desktop-full channel-dir-fixed.txt`
   exits 0: projected viewport preserves row-29 cells/cursor; explicit native
   shrink to 25 remains valid; retained channel/teardown/resource cases execute.
@@ -477,7 +482,7 @@ Confirmed targeted checks:
   projection, not a requirement that Terminal itself shrink to 28 rows.
 
 Eight-file candidate published to O:/winnt with hash equality in
-`dir-repair-published-manifest.json`; only NTKVM differs from delivered S10.
+`dir-repair-published-manifest.json`; only NTCON differs from delivered S10.
 Recovery is `accepted-s10-dir-recovery`. Guest/config files were not replaced.
 Console17 passes (`t424-s10-console17-dir-r004-*`). Window17 r004 fails its
 native-zero case before scripted Window delivery: CAF helper reports failure,

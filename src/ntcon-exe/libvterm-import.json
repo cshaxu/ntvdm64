@@ -6,7 +6,7 @@
   "sha256": "09156F43DD2128BD347CBEEBE50D9A571D32C64E0CF18D211197946AFF7226E0",
   "license": "MIT",
   "notice": "lib/LICENSE.libvterm",
-  "owner": "ntkvm-exe",
+  "owner": "ntcon-exe",
   "purpose": "ConPTY UTF-8/VT terminal state and replies; no launcher or worker dependency",
   "modifications": ["Original files remain unchanged; screen.c is compiled through native_terminal_screen.c, which appends the registered frontend-local cell/cursor import using the pinned private layout"],
   "screenBinding": "native_terminal_screen.c",

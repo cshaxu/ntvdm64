@@ -1,14 +1,19 @@
 # T423 S31 shared Console handoff
 
+T424 S11 naming normalization: frontend labels/current source links now use NTCON.
+This does not claim the new basename existed in the recorded historical package.
+Exact earlier source, commands and product names remain in Git and sealed build
+evidence; recorded hashes, dates, results and limitations are unchanged.
+
 ## Question and source boundary
 
 Returning from DOS to an outer Win32 CMD left the Console at the DOS-sized
-cell grid, but NTKVM teardown forcibly restored the caller's startup buffer,
+cell grid, but NTCON teardown forcibly restored the caller's startup buffer,
 viewport and cursor. A 30-row caller could therefore regain an empty 26th–30th
 row and a cursor at row 30 after DOS had ended on row 25 or 28. Original
 OpenNT's ordinary `nt_block_event_thread(0)` / `ResetConsoleState()` route does
 not restore the initial geometry; its special stream-I/O branch is distinct.
-This S changes project-owned NTKVM teardown only. MVDM mirrors, guest media,
+This S changes project-owned NTCON teardown only. MVDM mirrors, guest media,
 protocol and shared libraries are unchanged.
 
 ## Implementation and focused proof
@@ -20,7 +25,7 @@ leaves the final DOS cell grid and cursor in place. Related comments were
 corrected without changing execution behavior.
 
 The x86 `/MT` graph was regenerated from the S30 object cache under
-`build/M0-T423/S31/formal/`. The changed Run16 and NTKVM targets and the
+`build/M0-T423/S31/formal/`. The changed Run16 and NTCON targets and the
 Console-channel lifetime fixture were compiled and linked; unchanged package
 members retained their S30 hashes. Ninja's subprocess-output wait stalled on
 this host, so the graph-emitted build commands were executed in order by the
@@ -68,7 +73,7 @@ passed earlier. No guest/configuration file was changed.
 | `ntsrv.exe` | `207365EB3F620DA3975B3D92D33CB2BF7F3FE1E54F6CE71406042ADF5D4006EF` |
 | `ntvdm.exe` | `3EF7B9764BBC6BBCCED9D51AB4DBB92E5E67B69E07F5D294E4682D609962B9D0` |
 | `ntw32.exe` | `226EA48B181018446F91E0481D86C08DD55CFBB76CC6D3C792960CAFEB360CFE` |
-| `ntkvm.exe` | `A4BE7B4F12025BD88E4DA73E53C416EAD306121821264A4197269CF53C00BDAC` |
+| `ntcon.exe` | `A4BE7B4F12025BD88E4DA73E53C416EAD306121821264A4197269CF53C00BDAC` |
 | `WOW32.DLL` | `0D2AE60264B03A8040D98AA86BCF80455127064084E2217D318D5E13F90FA94A` |
 | `VDMREDIR.DLL` | `3F266DB9BC52F937F1786D89CFBE879E37E0B2077E67D731A05C555EC7CDAA5F` |
 

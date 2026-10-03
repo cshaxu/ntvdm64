@@ -23,7 +23,7 @@ four selected component trees. Their READMEs and recursive quoted includes
 were inspected. The selected closure is 44 byte-exact files: fifteen C units,
 their required headers and four READMEs, plus the original root MIT notice.
 The complete per-path SHA-256 and compile selection is
-[nxvm-import.json](../../../src/ntkvm-exe/nxvm-import.json).
+[nxvm-import.json](../../../src/ntcon-exe/nxvm-import.json).
 Original license: MIT, Copyright (c) 2026 Neko; retained as
 src/frontend-exe/lib/LICENSE.nxvm, SHA-256
 BF37952D329B48CEE37B42D90B96D30DC049940902E42D69338A19CF72003543.

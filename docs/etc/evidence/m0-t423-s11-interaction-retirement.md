@@ -1,5 +1,10 @@
 # T423 S11 Interaction And Retirement
 
+T424 S11 naming normalization: frontend labels/current source links now use NTCON.
+This does not claim the new basename existed in the recorded historical package.
+Exact earlier source, commands and product names remain in Git and sealed build
+evidence; recorded hashes, dates, results and limitations are unchanged.
+
 ## Latest scope and mouse repair, 2026-09-28
 
 Owner accepted the published repair on 2026-09-28 and authorized S11 closure
@@ -95,7 +100,7 @@ counterexample and its S12 receiver remain unchanged.
 ### Sealed seven-file publication candidate
 
 To exclude S12 WIP without reverting it, the final graph uses a read-only
-git archive of HEAD 44d465bf8 src/ntkvm-exe under
+git archive of HEAD 44d465bf8 src/ntcon-exe under
 build/M0-T423/S11/pressure-r1/head-source. Its archive SHA256 is
 2AA363732852A77899B668AACD1E939B216903294AA22B7E6CA703F00D6E9686.
 The generated s11-delivery.ninja graph redirects frontend sources/includes
@@ -114,7 +119,7 @@ uncommitted native-branch prototype. Earlier L: candidates remain preserved.
 | run16.exe | 26763B94285E6AA1E9D790AC86807E5C6426A1F13EC0784B716C4F13E6FB3CBA |
 | ntsrv.exe | FF7624F46496A4D179E20AF41367A5E4EFF5FCB2FC9D7C5CA3E223AA5A63F00C |
 | ntvdm.exe | CED9E83E052FD8123F95560F1890F64EAE3E9976143C6726ED1FB8F53274C981 |
-| ntkvm.exe | D9C4A0E5A66C99E3993F85335F31DA42BDD3D2D1086A4A3A25A1603F78E0763C |
+| ntcon.exe | D9C4A0E5A66C99E3993F85335F31DA42BDD3D2D1086A4A3A25A1603F78E0763C |
 | ntmon.exe | 721A6592C13AD2931249C47C7BBCC0BC6F0EBDD59EF7D8A63A9B46D6840114E1 |
 | WOW32.DLL | 0D2AE60264B03A8040D98AA86BCF80455127064084E2217D318D5E13F90FA94A |
 | VDMREDIR.DLL | 2F643878A91B62E58584AE02C1D26852E28B30BB4267CAF46E7F5A741F8BD3C4 |
@@ -191,7 +196,7 @@ not establish the only cause.
 
 ## Retirement Source Findings
 
-src/ntkvm-exe/native_console_backend.c::run16_native_backend_members returns
+src/ntcon-exe/native_console_backend.c::run16_native_backend_members returns
 retained ConPTY liveness, not attached-client count. session_service.c tests
 this value before OpenNtBaseClientRetireFrontend, so retained idle ConPTY
 prevents retirement. Do not remove the guard without replacing its contract.
@@ -207,7 +212,7 @@ that evidence, not a new speculative Job or observer implementation.
 Public system API review:
 
 - [GetConsoleProcessList](https://learn.microsoft.com/en-us/windows/console/getconsoleprocesslist)
-  queries the caller's current Console, not an arbitrary HPCON. ntkvm is
+  queries the caller's current Console, not an arbitrary HPCON. ntcon is
   attached to its visible Console, so this is not the requested query.
 - [ReleasePseudoConsole](https://learn.microsoft.com/en-us/windows/console/releasepseudoconsole)
   releases the keepalive reference; remaining clients may continue until
@@ -361,7 +366,7 @@ and private relative mouse ordering/button/bounds, key expansion and shortcuts.
 The combined candidate lives only under build/M0-T423/S11/mouse-owner-r1/p,
 mapped to Q:. Its worker SHA256 is
 1EF894DB4A713BB9A215FF3B093F0E4BE886DD2A6628A1B3481F31BB9BF6EEC5;
-ntkvm SHA256 is
+ntcon SHA256 is
 41E6B87652DE04D06FEFF8DAC9A79CEDD82360819C4463BEC2D5EDF4E90FC553.
 Earlier X:/Y: mapping attempts failed before a guest ran; they are not passes
 and existing mappings were not removed.
@@ -401,7 +406,7 @@ No unverified candidate has been published or committed as a completed P.
 
 The owner approves separate PTYs for independent native branches, retaining
 outer PTYs while DOS or inner native branches execute. Ordinary native children
-inherit their actual Console. One ntkvm still owns all presentation and selects
+inherit their actual Console. One ntcon still owns all presentation and selects
 one interactive endpoint. This replaces permanent session-wide reuse; it does
 not admit a helper, observer, Job or execution scheduler.
 
@@ -412,7 +417,7 @@ availability and rejects post-release independent attachment. The existing
 output reader drains to EOF before resource disposal. Client completion and
 frontend admission remain independent. The original OpenNT shared Console
 does not supply this modern PTY resource policy; its process/task results and
-worker handoff are retained, with the new resource binding solely in ntkvm.
+worker handoff are retained, with the new resource binding solely in ntcon.
 
 Production candidate changes are native_conpty release admission,
 native_console_backend private cancellation, and native_console_frontend's
@@ -429,7 +434,7 @@ outlives its direct parent and produces final output before EOF, isolated A/B
 input/output, and a live detached process does not count as Console occupancy.
 These are real Windows resource tests, not guest or full product acceptance.
 
-The incremental x86 ntkvm build passes at branch-r1/formal-build.log and
+The incremental x86 ntcon build passes at branch-r1/formal-build.log and
 branch-r2/formal-build.log. Candidates V: and W: map only to their respective
 build/M0-T423/S11/branch-r{1,2}/p directories. O:/winnt remains untouched.
 Verify-CommandExitStatus.ps1 with private desktop, Window input, OrdinaryFrontend
@@ -457,7 +462,7 @@ contract above. S11 remains open; no production P or publication is claimed.
 Further verification: branch-r2 passes all 17 Console guest routes through
 Verify-CommandExitStatus.ps1, OrdinaryFrontend, private desktop, PackageRoot W:,
 GuestFixturePath build/M0-T423/S11/branch-r2/G7.COM, Logs2 prefix
-t423-s11-branch-console-r3. The candidate ntkvm SHA256 is
+t423-s11-branch-console-r3. The candidate ntcon SHA256 is
 AD76C66B4BDF7A826B6C56F9BE9CF18C1B02090A71346A970C146B1BE4CC111D.
 The initial attempted invocation without GuestFixturePath was rejected before
 starting a guest and is not a test failure or pass.
@@ -466,7 +471,7 @@ The subsequent backend error-path correction returns startup handshake errors
 instead of signaling stop and falsely returning success, initializes target
 on unsupported API failure, and captures DuplicateHandle failure immediately.
 branch-r3/formal-build.log records the successful incremental x86 build;
-ntkvm SHA256 41E6B87652DE04D06FEFF8DAC9A79CEDD82360819C4463BEC2D5EDF4E90FC553.
+ntcon SHA256 41E6B87652DE04D06FEFF8DAC9A79CEDD82360819C4463BEC2D5EDF4E90FC553.
 Logs2 t423-s11-branch-component-r3 observes the current formal frontend fixture
 on a private desktop: exit zero, ordinary CAF/X, native mouse button/focus,
 typeahead ordering, direct results 37/0/259, cancellation and bounded cleanup
@@ -531,7 +536,7 @@ Console did not require copies between independent native Console buffers.
 
 The smallest alternative to investigate is an authenticated, bounded return
 handoff performed by the already-attached run16 that launched DOS from an
-outer native Console: ntkvm supplies the canonical screen/cursor; that client
+outer native Console: ntcon supplies the canonical screen/cursor; that client
 applies them before returning to its waiting native parent. This adds no
 helper, input pump or renderer, but it DOES change the current explicit ban
 on launcher Console I/O. It is a proposal only, not approved or implemented.
@@ -540,7 +545,7 @@ Keep the continuous-output gate open rather than silently making that change.
 ### Owner-Admitted Frontend Composition Prototype
 
 The owner instead admits a bounded composition prototype: keep independent
-ConPTY parsers, let ntkvm own one visible canvas and map new native updates
+ConPTY parsers, let ntcon own one visible canvas and map new native updates
 onto the canvas after DOS handoff. No helper or launcher Console I/O is
 authorized. Do not identify programs/prompts or guess application intent to
 make tests pass. This supersedes the pending launcher-exception suggestion,

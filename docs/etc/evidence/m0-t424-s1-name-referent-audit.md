@@ -1,5 +1,10 @@
 # T424 S1 — Component name referent audit
 
+T424 S11 naming normalization: frontend labels/current source links now use NTCON.
+This does not claim the new basename existed in the recorded historical package.
+Exact earlier source, commands and product names remain in Git and sealed build
+evidence; recorded hashes, dates, results and limitations are unchanged.
+
 S2 normalizes project-worker/record identity labels in this historical record.
 Exact pre-migration names, command arguments and path inventory remain in Git
 at the S1 delivery `3c8e6b7d1` and sealed build/M0-T424/S1/r001 output. Hashes,
@@ -18,7 +23,7 @@ This is an audit/documentation delivery, not runtime capability implementation.
 ## Reproduction and coverage
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File tools/audit/Get-ComponentRenameInventory.ps1 -OutputRoot build/M0-T424/S1/r001 -WorkerName ntw32 -FrontendName ntkvm -RecordName win32record
+powershell -NoProfile -ExecutionPolicy Bypass -File tools/audit/Get-ComponentRenameInventory.ps1 -OutputRoot build/M0-T424/S1/r001 -WorkerName ntw32 -FrontendName ntcon -RecordName win32record
 ```
 
 The script uses Git's case-insensitive binary-excluding tracked text search,
@@ -51,10 +56,10 @@ at the intermediate-stage gate, not substitution into a worker name.
 | 17 worker-named observation source/script paths plus cross-component tests/observer/product matrices | S2 paths, includes, assertions, diagnostic names and process selection | Existing assertions remain; no dropping legacy-name cases instead of migrating them. |
 | `docs/` current design/rules/state, proposals, history and evidence | S2 old-worker referents and associated documentary filename/links | Preserve hash values, dates, outcomes; Git retains literal pre-migration evidence. S3 reserved frontend names must not be mistaken for worker names. |
 | Pre-2026-09-10 documentation archive under `artifacts/` | Preserve its original Console-source references | This archive predates the project native worker; paths such as `windows/core/ntcon/client` mean original OpenNT, not the product worker. Do not corrupt provenance ledgers. |
-| `ntkvm-exe/window_keyboard.c`, `ntvdm-exe/win32/console_{graphics,compat,client,bitmap}.c`, host-compat README | Preserve original `ntcon/server`, `ntcon/client`, `HandleKeyEvent`, bitmap/private service citations | Refers to OpenNT Windows Console implementation; not project worker. |
+| `ntcon-exe/window_keyboard.c`, `ntvdm-exe/win32/console_{graphics,compat,client,bitmap}.c`, host-compat README | Preserve original `ntcon/server`, `ntcon/client`, `HandleKeyEvent`, bitmap/private service citations | Refers to OpenNT Windows Console implementation; not project worker. |
 | Original `mvdm/softpc.new/host/src/nt_event.c` comment | Preserve `ntcon\client\iostubs.c` | Original source identity. `mvdm/README.md` separately has two project worker references to rename. |
 | `GetCurrentConsoleFontEx`, `PrintContext`, `CurrentControlSet`, `NTCONFIGFILE`, `BaseClientConnectRoutine`, client-connect names | Preserve exactly | Substring matches are not identities; genuine Console/configuration/connection API symbols. |
-| Old frontend `src/ntkvm-exe/`, executable, tests and product-owned symbols | S3 only, after verified worker-name migration | No simultaneous directory collision; generic imported `kvm-*` library identities unchanged. |
+| Old frontend `src/ntcon-exe/`, executable, tests and product-owned symbols | S3 only, after verified worker-name migration | No simultaneous directory collision; generic imported `kvm-*` library identities unchanged. |
 | Existing generated graphs/caches and sealed test logs under `build/` | New graph/current artifacts regenerated; sealed predecessor evidence remains immutable | Not runtime inputs unless explicit matching-input reuse is proved. Historical hash/log names are not silently rewritten. |
 
 ## Gate interpretation under the owner's Console boundary
@@ -91,7 +96,7 @@ eight matching. No deployment occurred during S1.
 | ntsrv.exe | 5566B5C4B5FC86D97A54E6B0F66300AFEB33B6E7973D29DDFD67BA70D3BB76E5 |
 | ntvdm.exe | 60155D9B1E8DF83F17AC407B682EFF80033A3A9584CA0CE2314DAFCEE783C0C5 |
 | ntw32.exe | 4002CB09C8B732DECA4CC7BA0901359411B368BF36B8CBA4C29DA14294901CB4 |
-| ntkvm.exe | 886E2ECC9D8937F17E21A63E634018AC3F8087766632D9BB582B30F731EE1F94 |
+| ntcon.exe | 886E2ECC9D8937F17E21A63E634018AC3F8087766632D9BB582B30F731EE1F94 |
 | ntmon.exe | 3D86477B95A673B602540952805790DDFE7C4541496819030ADF16DDBD4FBA53 |
 | wow32.dll | 0D2AE60264B03A8040D98AA86BCF80455127064084E2217D318D5E13F90FA94A |
 | VDMREDIR.dll | 1A2418FE667348EF3C6764A85C375A53B40C00D3ECAF2FBC8F74B2D1DF4D881F |

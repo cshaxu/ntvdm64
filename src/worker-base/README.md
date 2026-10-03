@@ -9,7 +9,7 @@ The S21 audit records this shared boundary and the owner-local mechanisms that
 must not be merged: [worker-base audit](../../docs/etc/evidence/m0-t423-s21-worker-base-audit.md).
 The service still owns authentication; the worker owns its heap/backend state.
 
-run16, NTSRV, NTKVM and NTMON retain their own common two-kind handling paths.
+run16, NTSRV, NTCON and NTMON retain their own common two-kind handling paths.
 They do not link worker-base. Launcher request packing belongs to run16;
 NTSRV owns worker creation and shared Console retirement/return-ack decisions,
 not this worker-side library. Original DOS/PIF policy stays at its source owner

@@ -18,7 +18,7 @@ if(!$physical.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::Ordin
 if($LogPrefix -notmatch '^[a-z0-9-]+$'){throw 'Invalid log prefix'}
 if(@(Get-CimInstance Win32_Process -Filter "Name='ntsrv.exe'").Count){throw 'An existing broker must not be controlled by this test'}
 $paths=@()
-foreach($name in @('run16.exe','ntsrv.exe','ntkvm.exe','ntvwm.exe')){
+foreach($name in @('run16.exe','ntsrv.exe','ntcon.exe','ntvwm.exe')){
     $actual=Join-Path $physical $name;$launch=Join-Path $PackageRoot $name
     if((Get-FileHash $actual).Hash -ne (Get-FileHash $launch).Hash){throw 'Candidate mismatch'}
     $paths+=@($actual,$launch)
@@ -51,7 +51,7 @@ try {
     if(!$worker -or !$target){throw 'Real NTVWM/CMD pair did not start'}
     $frontend=$null
     if($FrontendLoss){
-        $owners=@(Get-CimInstance Win32_Process -Filter "Name='ntkvm.exe'" | Where-Object {$_.ExecutablePath -in $paths})
+        $owners=@(Get-CimInstance Win32_Process -Filter "Name='ntcon.exe'" | Where-Object {$_.ExecutablePath -in $paths})
         if($owners.Count -ne 1){throw 'Expected exactly one authenticated test frontend before isolation launch'}
         $frontend=Get-Process -Id $owners[0].ProcessId;$null=$frontend.Handle
     }

@@ -38,7 +38,7 @@ production provider, rather than embedding another copy of the service.
 
 The S2 frontend association is independent of DOS/WOW scheduling. An original
 pending command selects the worker; an authenticated inherited capability
-selects the NTKVM frontend root. The service retains a pending resource attachment so
+selects the NTCON frontend root. The service retains a pending resource attachment so
 root/request rundown can cancel a waiting worker before the pipe exists.
 It transfers pipe/event references once, never keyboard records or frames.
 A cancelled undelivered attachment cannot be adopted by another root. After
@@ -51,14 +51,14 @@ Service stop also drains the final idle residue. This is resource cleanup,
 not an idle-worker timer or a new task scheduler.
 
 Non-root launcher rundown never terminates handed-off DOS tasks or workers.
-The authenticated NTKVM root defines interactive session lifetime. NTSRV
+The authenticated NTCON root defines interactive session lifetime. NTSRV
 observes root loss and sends its authoritative worker shutdown instruction;
 the worker executes its own original/native Console-close boundary, not a
 broker process-tree kill. Pipe failure alone remains I/O failure.
 Actual worker death fails unfinished requests with ERROR_PROCESS_ABORTED;
 pre-handoff startup rollback remains separate.
 
-The S4 candidate also centralizes exact sibling NTKVM/NTVDM/NTVWM creation
+The S4 candidate also centralizes exact sibling NTCON/NTVDM/NTVWM creation
 and all launcher Console takeover/restore acknowledgement through this service.
 Independent DOS worker-exit completion preserves original DosSesId/PIF policy.
 Self-owned native text close-on-exit follows final I/O acknowledgement and a

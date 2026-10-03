@@ -1,4 +1,4 @@
-/* Project-owned worker client of the copied NTKVM protocol, shared by both backends.
+/* Project-owned worker client of the copied NTCON protocol, shared by both backends.
  * Resource ownership and backend-specific handoff remain with each caller. */
 #include "common/console/client.h"
 #include "common/transport/pipe_transfer.h"
@@ -6,7 +6,7 @@
 #include <limits.h>
 #include <string.h>
 
-DWORD ntkvm_worker_client_init(ntkvm_worker_client *client,HANDLE pipe,HANDLE peer,HANDLE cancel,DWORD generation)
+DWORD ntcon_worker_client_init(ntcon_worker_client *client,HANDLE pipe,HANDLE peer,HANDLE cancel,DWORD generation)
 {
     if(!client || !pipe || pipe==INVALID_HANDLE_VALUE || !peer || !generation)
         return ERROR_INVALID_PARAMETER;
@@ -15,21 +15,21 @@ DWORD ntkvm_worker_client_init(ntkvm_worker_client *client,HANDLE pipe,HANDLE pe
     client->pipe=pipe;client->peer=peer;client->cancel=cancel;client->generation=generation;
     return ERROR_SUCCESS;
 }
-void ntkvm_worker_client_dispose(ntkvm_worker_client *client)
+void ntcon_worker_client_dispose(ntcon_worker_client *client)
 {
     if(client->event)CloseHandle(client->event);
     ZeroMemory(client,sizeof(*client));
 }
 
-DWORD ntkvm_worker_activate(ntkvm_worker_client *client,DWORD kind,BOOL active)
+DWORD ntcon_worker_activate(ntcon_worker_client *client,DWORD kind,BOOL active)
 {
     console_io_request request={0};console_io_reply reply;
     request.operation=CONSOLE_IO_DOS_ACTIVE;request.state.input=active!=FALSE;
     request.state.mode=kind;
-    return ntkvm_worker_call(client,&request,&reply);
+    return ntcon_worker_call(client,&request,&reply);
 }
 
-DWORD ntkvm_worker_prepend_keys(ntkvm_worker_client *client,const INPUT_RECORD *records,
+DWORD ntcon_worker_prepend_keys(ntcon_worker_client *client,const INPUT_RECORD *records,
     DWORD count,console_io_reply *reply)
 {
     console_io_request request={0};DWORD i,error;
@@ -46,18 +46,18 @@ DWORD ntkvm_worker_prepend_keys(ntkvm_worker_client *client,const INPUT_RECORD *
         wire.control=key->dwControlKeyState;
         memcpy(request.data+i*sizeof(wire),&wire,sizeof(wire));
     }
-    error=ntkvm_worker_exchange(client,&request,reply);
+    error=ntcon_worker_exchange(client,&request,reply);
     if(!error && reply->state.count>count)error=client->failure=ERROR_INVALID_DATA;
     return error;
 }
 
-static DWORD transfer(ntkvm_worker_client *client,BOOL write,void *buffer,DWORD bytes)
+static DWORD transfer(ntcon_worker_client *client,BOOL write,void *buffer,DWORD bytes)
 {
     return common_pipe_transfer(client->pipe,client->peer,client->cancel,client->event,
         COMMON_PIPE_PEER_DEATH_FIRST,ERROR_PIPE_NOT_CONNECTED,write,buffer,bytes,bytes);
 }
 
-DWORD ntkvm_worker_exchange(ntkvm_worker_client *client,console_io_request *request,console_io_reply *reply)
+DWORD ntcon_worker_exchange(ntcon_worker_client *client,console_io_request *request,console_io_reply *reply)
 {
     DWORD error;
     if(!client || !request || !reply || request->bytes>CONSOLE_IO_DATA_BYTES)
@@ -85,13 +85,13 @@ DWORD ntkvm_worker_exchange(ntkvm_worker_client *client,console_io_request *requ
     return error;
 }
 
-DWORD ntkvm_worker_call(ntkvm_worker_client *client,console_io_request *request,console_io_reply *reply)
+DWORD ntcon_worker_call(ntcon_worker_client *client,console_io_request *request,console_io_reply *reply)
 {
-    DWORD error=ntkvm_worker_exchange(client,request,reply);
+    DWORD error=ntcon_worker_exchange(client,request,reply);
     return error ? error : reply->result ? ERROR_SUCCESS : reply->error ? reply->error : ERROR_GEN_FAILURE;
 }
 
-DWORD ntkvm_worker_video(ntkvm_worker_client *client,const console_video_description *description,const void *pixels)
+DWORD ntcon_worker_video(ntcon_worker_client *client,const console_video_description *description,const void *pixels)
 {
     console_io_request request={0};console_io_reply reply;
     DWORD error,offset=0,count;
@@ -102,17 +102,17 @@ DWORD ntkvm_worker_video(ntkvm_worker_client *client,const console_video_descrip
     if(description) {
         request.bytes=sizeof(*description);memcpy(request.data,description,sizeof(*description));
     }
-    error=ntkvm_worker_call(client,&request,&reply);
+    error=ntcon_worker_call(client,&request,&reply);
     while(!error && description && offset<description->bytes) {
         count=min(description->bytes-offset,CONSOLE_IO_DATA_BYTES);
         request.operation=CONSOLE_IO_VIDEO_DATA;request.state.count=offset;request.bytes=count;
         memcpy(request.data,(const BYTE *)pixels+offset,count);
-        error=ntkvm_worker_call(client,&request,&reply);offset+=count;
+        error=ntcon_worker_call(client,&request,&reply);offset+=count;
     }
     return error;
 }
 
-DWORD ntkvm_worker_publish_title(ntkvm_worker_client *client,const char *title)
+DWORD ntcon_worker_publish_title(ntcon_worker_client *client,const char *title)
 {
     console_io_request request={0};console_io_reply reply;
     size_t length;
@@ -122,10 +122,10 @@ DWORD ntkvm_worker_publish_title(ntkvm_worker_client *client,const char *title)
     request.operation=CONSOLE_IO_PUBLISH_TITLE_A;
     request.bytes=(uint32_t)length+1;
     memcpy(request.data,title,request.bytes);
-    return ntkvm_worker_call(client,&request,&reply);
+    return ntcon_worker_call(client,&request,&reply);
 }
 
-BOOL ntkvm_worker_decode_input(const console_io_input *wire,INPUT_RECORD *record)
+BOOL ntcon_worker_decode_input(const console_io_input *wire,INPUT_RECORD *record)
 {
     if(wire->type>UINT16_MAX || wire->repeat>UINT16_MAX || wire->virtual_key>UINT16_MAX ||
         wire->scan>UINT16_MAX || wire->character>UINT16_MAX || wire->key_down>1 || wire->focus>1 ||

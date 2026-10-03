@@ -22,13 +22,16 @@ and [final evidence](../evidence/m0-t423-s40-native-alternate-screen-geometry.md
 | S9 | Native GUI routing through NTVWM and service-held handles. Keep launcher classification before service admission, matching DOS/WOW order. Default launcher returns on startup success; preserve --wait/shared workers and full gates. Monitor/UNBOUND display belongs to the queue-head NTMON T candidate. |
 | S10 | Owner-added rapid relaunch/lost-wakeup repair after S9 delivery. Centralize NTSRV frontend pending-work notification under its existing lock; deterministic interleaving tests and rapid CMD/COMMAND reuse, completion/Console-return and isolation regressions before coherent publication. |
 | S11 | Frontend NTKVM -> NTCON after S10 repair delivery; owner-local names, consumers, build/test/package gates and publication. |
-| S12 | Final referent/semantic audit, indexes, regression and clean delivery; T closure owner-controlled. |
+| S12 | Owner-approved unified frontend logical_surface for both NTVDM and NTVWM, fixed upper-left presentation and symmetric DOS/native text handoff. Execute after S11 delivery; remove replaced bypasses, verify and publish the coherent package. |
+| S13 | Former S12 final referent/semantic audit, indexes, regression and clean delivery; T closure owner-controlled. |
 
 Rename only product-owned identities, preserving original OpenNT/MVDM and
 generic imported KVM library source identities. No guest, extra process/helper,
 observed-task graph or scheduler is admitted. The subsequent owner-approved
 S3 retirement and S4 broker-centered creation/control changes are explicit
 exceptions to the initial name-only launch/completion/lifetime exclusion.
+S12 is an additional bounded text-storage/presentation and handoff exception,
+not permission to change original worker execution or lifecycle semantics.
 Local spelling alone does not authorize an ABI bump; any actual copied-wire,
 RPC/endpoint/version compatibility effect must be proved and coherently managed.
 An externally fixed spelling requires owner review before production migration.
@@ -36,8 +39,98 @@ An externally fixed spelling requires owner review before production migration.
 Owner direction on 2026-10-02 inserts the lost-wakeup repair as S10 and shifts
 the former frontend naming/final audit S10/S11 to S11/S12. The table above is
 the current sequence; earlier numbering/replanning chronology below remains
-historical. CURRENT retains the sole active S9; this insertion neither admits
-S10 now nor claims S9 delivery or a repaired runtime.
+historical. The subsequent owner approval inserts unified text storage/handoff
+as S12 and moves final audit to S13. S12 is approved for sequential execution
+after S11 delivery; CURRENT alone records the active packet. This planning
+update does not interrupt S10, admit a second active packet or claim runtime
+implementation/acceptance.
+
+## S12 unified logical surface and DOS/native handoff
+
+After S11, NTCON is the frontend formerly named NTKVM; NTVWM is the native
+worker. The frontend owns logical_surface. NTVWM still owns its hidden
+execution Console and actual native targets. This is project-added frontend
+adaptation, not original OpenNT storage or a Windows-compatibility exception.
+Use the delivered S11 package as the regression baseline.
+
+### Production closure checklist
+
+- [ ] Audit provenance and both text routes before extraction. Rename and
+  generalize dos_surface into logical_surface; route NTVDM operations/frames
+  and NTVWM frames through the same storage and presentation path. Remove
+  replaced native direct-to-visible-Console writes and text-render bypasses;
+  a field rename or unused wrapper is not completion. Leave original
+  OpenNT/MVDM execution and mirror algorithms at their existing owners.
+- [ ] Store complete logical buffer cells/attributes, buffer extent, logical
+  viewport origin/extent, buffer-relative cursor, shape/visibility and the
+  existing style/font/palette metadata. Host dimensions never truncate this
+  storage. Normalize buffer/viewport coordinates once: an 80x30 buffer with
+  viewport rows 2..29 and cursor row 29 presents 80x28 with local cursor row 27.
+- [ ] Publish a consistent snapshot under explicit instance state and locks.
+  Per-operation locks alone must not expose mixed geometry, row tiles and
+  cursor from different native publications. Define commit/failure behavior
+  using existing channel barriers/generations where sufficient; no generic
+  scheduler or second task registry. Rendering reads a consistent committed
+  snapshot; failed/partial/stale publication cannot replace it.
+- [ ] On a logical dimension change, attempt the appropriate physical resize,
+  then query the actual canvas. Resize rejection or implicit host reflow must
+  not mutate logical content. Do not classify Terminal tabs or depend on host
+  product names. Window pixel sizing/scaling is separate from text geometry;
+  all text remains text rendering, not a large-frame bitmap fallback.
+- [ ] For Console presentation, map the logical viewport's upper-left to the
+  actual canvas upper-left. Paint the width/height intersection; clear all
+  unused visible right/bottom cells and attributes. Never bottom-align, pan,
+  reflow or apply row compensation. Smaller canvases clip presentation only;
+  larger canvases reveal preserved content. Hide an out-of-intersection
+  cursor rather than clamping it or moving the host viewport. Map mouse
+  input through this same intersection; blank margins are not guest cells.
+  Window uses the same logical snapshot and existing text renderer semantics.
+- [ ] Implement the same handoff order in both directions: old owner drains
+  and submits final grid/geometry/cursor; frontend acknowledges that snapshot;
+  convert only for the incoming worker's capabilities; incoming worker applies
+  and acknowledges the actual state; only then release execution/input or
+  resumed-parent output. Preserve input order/return and existing I/O barriers.
+  Old-owner late output must not overwrite the new owner's state.
+- [ ] Seed workers from the current logical state, never the initial outer CMD
+  snapshot or physical host size. Native applications may explicitly change
+  geometry; pass that current geometry into the next handoff. DOS keeps the
+  original height mapping: <=23 -> 22, 24..26 -> 25, 27..35 -> 28,
+  36..46 -> 43, >=47 -> 50. Other capability conversions require audited,
+  deterministic worker-supported rules, not host-driven heuristics.
+- [ ] Keep original cell-grid resize semantics: no paragraph reflow; growth
+  keeps existing rows and appends blanks; shrink shifts the cursor-containing
+  tail only when the old cursor is outside the new height, transforming cursor
+  consistently. Ordinary DOS release retains current geometry/grid/cursor;
+  do not restore launch-time CMD geometry/cursor/page. Stream-I/O-specific
+  restoration remains special. DOS graphics stays on its existing graphics
+  route, not logical_surface. Host scrollback history is not promised.
+- [ ] Preserve NTSRV registration/binding/lifecycle/results, thin run16 and
+  direct worker/frontend I/O. Frontend storage/rendering stays frontend-local;
+  suitable common transport/validation and worker-base client mechanics remain
+  shared. No helper, executable, component, Job/Observed graph, scheduler,
+  guest/mirror/shared-lib change or launch-syntax change. Actual wire changes
+  require paired application/IDL versions, MIDL regeneration and mismatch
+  negatives; local storage changes alone do not require a version bump.
+
+### Required evidence and release
+
+- [ ] Test wider/taller, narrower/taller, wider/shorter and both-smaller canvases,
+  accepted/refused/unapplied physical resize, nonzero viewport origin, edge
+  cursors hidden/reappearing, blank-margin characters/attributes and mouse
+  coordinates. Prove clipping does not alter logical data or move the viewport.
+- [ ] Test complete/partial/failed publication, concurrent render/capture,
+  stale-owner output, disconnect and both handoff acknowledgements. Assert the
+  resumed parent cannot output before final-state application is confirmed.
+- [ ] Exercise DOS -> native -> DOS and native -> DOS -> native, nested and
+  repeated COMMAND/CMD DIR/MEM, modern EDIT/EDIT.COM full-screen redraw,
+  program-requested sizes, Console/Window switches and independent sessions.
+  Check coherent grid, geometry, prompt and cursor at every ownership boundary.
+- [ ] Build affected x86 targets; retain lifecycle, handles, native completion,
+  DOS resume, Console17 + Window17 and existing WOW frontier assertions. Record
+  exact commands/results, remaining limits and eliminated duplicate paths.
+  Publish/hash-check the validated eight-file package to O:/winnt, commit/push
+  under execution rules and hand off for owner side testing. Only then S13
+  final audit may begin; T closure remains owner-controlled.
 
 ## S10 rapid relaunch and frontend notification checklist
 
@@ -383,7 +476,7 @@ Verify actual wire/endpoint compatibility effects; a spelling change alone
 does not authorize an ABI change. Publish a coherent recovered/tested eight-file
 package and remove the old basename only after its recoverable backup.
 
-S11 frontend naming and S12 audit follow the new S10 repair and cannot claim S9 runtime
+S11 frontend naming, S12 logical-surface/handoff work and S13 audit follow the new S10 repair and cannot claim S9 runtime
 work. This insertion changes the plan only; S4 remains the sole active packet.
 
 The [S1 name audit](../evidence/m0-t424-s1-name-referent-audit.md) supplies the

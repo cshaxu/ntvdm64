@@ -22,7 +22,7 @@ DWORD ntvwm_capture_read(ntvwm_capture *,DWORD offset,
     CHAR_INFO *,DWORD capacity,SMALL_RECT *,DWORD *count);
 void ntvwm_capture_end(ntvwm_capture *);
 /* Apply the acknowledged screen to this worker's invisible Console carrier.
- * Visible presentation and its bitmap font remain entirely NTKVM-owned. */
+ * Visible presentation and its bitmap font remain entirely NTCON-owned. */
 DWORD ntvwm_screen_apply(HANDLE,const CONSOLE_SCREEN_BUFFER_INFOEX *,const CONSOLE_CURSOR_INFO *);
 DWORD ntvwm_cells_write(HANDLE,DWORD,const CHAR_INFO *,DWORD);
 /* One completion-boundary resource check, not a task census. The caller holds

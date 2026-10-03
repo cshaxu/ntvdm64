@@ -1,4 +1,4 @@
-/* Recovered from NTKVM native_console_request.c. NTVWM creates the native
+/* Recovered from NTCON native_console_request.c. NTVWM creates the native
  * target on its own Console; the requester receives that actual process. */
 #include "execution.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"

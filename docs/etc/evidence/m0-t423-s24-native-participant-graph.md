@@ -1,5 +1,10 @@
 # M0 T423 S24 — NTSRV-Owned Native Participant Projection
 
+T424 S11 naming normalization: frontend labels/current source links now use NTCON.
+This does not claim the new basename existed in the recorded historical package.
+Exact earlier source, commands and product names remain in Git and sealed build
+evidence; recorded hashes, dates, results and limitations are unchanged.
+
 > **S24 closed baseline.** This document retains the Job experiment
 > as research evidence only. S24's publishable baseline is deliberately
 > narrower: a resident NTW32 registers before its blocking get-next call,
@@ -89,7 +94,7 @@ SHA-256 equality between revised formal output and each published file was verif
 | `run16.exe` | `A9FCE7D707E9155872D9B95B09BA2662FA62268F02D0778C55CC921F646CF60D` |
 | `ntsrv.exe` | `CC10833CCD00F8EFFC03C606FBF9243F263FE3AEC6D124FEEFB919B8631C1805` |
 | `ntvdm.exe` | `2905E54DD661D3AFF9A296D52F4FA8AD53CAE1AB645CF494F190595274D78F92` |
-| `ntkvm.exe` | `519814DB69A01DDD106F0A683D9B6E5B07588D1406EAC01E54A4053DCB92D7E3` |
+| `ntcon.exe` | `519814DB69A01DDD106F0A683D9B6E5B07588D1406EAC01E54A4053DCB92D7E3` |
 | `ntw32.exe` | `33AEFBC83CAA74E29193D0C66420AC12F24FF13FA952CF12519032665FF57A88` |
 | `ntmon.exe` | `F453D27E3BA35D069D581949D0370F3FC5B6DED3B2F4C94BE5C8B105E267E46B` |
 | `VDMREDIR.dll` | `DC0CD220688A2E3C4966EA80CAEEBBAD677944C5526DD101CE5783A01FFA320C` |
@@ -110,7 +115,7 @@ The initial publication was rejected by the owner: `run16 cmd` had no usable
 input/output and `cmd /c ver` printed nothing. It was restored from the
 seven-file backup before any further publication. The exact code regression
 was in NTW32 `begin_io`: it returned success while its presentation pointer
-was null, allowing the hidden-Console target to start before NTKVM attached.
+was null, allowing the hidden-Console target to start before NTCON attached.
 The revised candidate restores `ERROR_NOT_READY` until the presentation
 exists, and calls the existing `ntw32_presentation_end` for the final direct
 consumer. This matches NTVDM's earlier `WaitFrontend -> activate -> guest`
@@ -162,13 +167,13 @@ presentation loop and bounded geometry retries are therefore disclosed product
 behavior, not a claim of event-driven output. Changing them to an infinite
 wait without a reliable output signal would freeze native screen updates.
 Repeated cursor-position, cursor-info, attribute and logical-window setters
-in NTKVM were made idempotent to avoid perturbing host cursor blink, but
+in NTCON were made idempotent to avoid perturbing host cursor blink, but
 this does not constitute removal of the presentation sampler or prove the
 user-visible blink fixed.
 This exception is specific to observing writes by unmodified native programs
 in NTW32's hidden Console; it does not authorize timer polling for broker
 commands, completion, handoff ordering or other controllable producers.
-The updated NTKVM x86 binary and `console-frontend-test.exe` link successfully
+The updated NTCON x86 binary and `console-frontend-test.exe` link successfully
 in `build/M0-T423/S24-helperless-clean`. In this headless invocation, the
 frontend fixture passes its earlier protocol/dispatch sections but stops at
 line 234 while resizing a real host Console (`SetConsoleScreenBufferSize`,
@@ -205,9 +210,9 @@ Relevant API contracts: [Console screen buffers](https://learn.microsoft.com/en-
   command-line syntax; no `--` separator was introduced.
 
 The S24 graph generated with Node 22.22.1 contains the explicit x86 product
-closure for `run16.exe`, `ntsrv.exe`, `ntvdm.exe`, `ntkvm.exe`, `ntmon.exe`,
+closure for `run16.exe`, `ntsrv.exe`, `ntvdm.exe`, `ntcon.exe`, `ntmon.exe`,
 `ntw32.exe` and `VDMREDIR.dll`.  The current formal-r2 x86 rebuild linked the
-current protocol-23 `ntsrv.exe`, `ntw32.exe`, `run16.exe`, `ntkvm.exe`,
+current protocol-23 `ntsrv.exe`, `ntw32.exe`, `run16.exe`, `ntcon.exe`,
 `ntmon.exe` and `ntvdm.exe`; `ntvdm.exe` also passed its current VdmTib
 ownership audit.  This is a build-closure result, not publication or a claim
 that the frontend integration gate below has passed.
@@ -424,7 +429,7 @@ identity, command, receipt or completion authority.
 
 Focused proof on the current x86 build:
 
-- protocol-23 MIDL, `run16.exe`, `ntsrv.exe`, `ntkvm.exe` and `ntw32.exe`
+- protocol-23 MIDL, `run16.exe`, `ntsrv.exe`, `ntcon.exe` and `ntw32.exe`
   linked from `build/M0-T423/S24-helperless-clean`;
 - the reservation/lifecycle fixture passed, including its same-Console
   `CheckDOS -> existing worker -> GetNextVDMCommand` reuse case after a

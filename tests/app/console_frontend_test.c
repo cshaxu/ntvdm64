@@ -1,5 +1,5 @@
 /* Run with CREATE_NO_WINDOW: real Windows Console operations, no user desktop. */
-#include "ntkvm-exe/console_frontend.h"
+#include "ntcon-exe/console_frontend.h"
 #include <stdio.h>
 #include <stddef.h>
 #include <string.h>

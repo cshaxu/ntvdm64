@@ -454,7 +454,7 @@ static void WINAPI frontend_notification_cleanup(void *context)
     SetEvent((HANDLE)context);
 }
 
-/* Execute the NTKVM empty-join / empty-channel interleaving through the
+/* Execute the NTCON empty-join / empty-channel interleaving through the
  * production service. Event publication, not a timer, positions the join. */
 static int frontend_notification(BOOL baseline)
 {

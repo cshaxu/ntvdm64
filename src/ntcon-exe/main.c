@@ -14,7 +14,7 @@ static void bootstrap_trace(const char *stage,DWORD error)
     if(!length || length>=ARRAYSIZE(path))return;
     file=CreateFileW(path,FILE_APPEND_DATA,FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,OPEN_ALWAYS,FILE_ATTRIBUTE_NORMAL,NULL);
     if(file==INVALID_HANDLE_VALUE)return;
-    count=(DWORD)sprintf_s(text,sizeof(text),"ntkvm %s %lu\r\n",stage,error);
+    count=(DWORD)sprintf_s(text,sizeof(text),"ntcon %s %lu\r\n",stage,error);
     if(count)WriteFile(file,text,count,&length,NULL);CloseHandle(file);
 }
 static DWORD session_entry(HANDLE caller,HANDLE notification,HANDLE retire,HANDLE restored,

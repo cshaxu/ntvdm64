@@ -2,7 +2,7 @@
 param([Parameter(Mandatory)][string]$BuildRoot)
 $ErrorActionPreference = 'Stop'
 $repository = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
-$owner = Join-Path $repository 'src/ntkvm-exe'
+$owner = Join-Path $repository 'src/ntcon-exe'
 $manifest = Get-Content -Raw -LiteralPath (Join-Path $owner 'libvterm-import.json') | ConvertFrom-Json
 $archive = Join-Path $owner $manifest.archive
 if ((Get-FileHash -Algorithm SHA256 -LiteralPath $archive).Hash -ne $manifest.sha256) {

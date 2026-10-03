@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <wchar.h>
-#include "ntkvm-exe/lib/kvm-window/frame_interface.h"
+#include "ntcon-exe/lib/kvm-window/frame_interface.h"
 static HANDLE read_pipe, write_pipe, raw_log;
 static HANDLE host_resize_seen;
 static HANDLE s34_dir_complete_seen;
@@ -169,7 +169,7 @@ static int s36_send_caf(DWORD console_pid)
 }
 static int s36_window_title(const char *runtime,const char *stage,const char *expected)
 {
-    DWORD pid=s36_process_pid(runtime,"ntkvm.exe"),actual_pid=0;
+    DWORD pid=s36_process_pid(runtime,"ntcon.exe"),actual_pid=0;
     char caption[128]={0};HWND window=FindWindowW(L"LibKvmWindow",NULL);
     if(!pid || !window || !IsWindowVisible(window)){
         s36_note(stage,"window-not-visible");return 0;
@@ -262,7 +262,7 @@ static int log_contains(const char *path,const char *needle) {
     CloseHandle(file);return found;
 }
 /* The first physical page containing the command output must still contain
- * the caller's banner.  NTKVM may now project a 28-row DOS page into a
+ * the caller's banner.  NTCON may now project a 28-row DOS page into a
  * 30-row visible Console, so the physical buffer height is not a VGA mode. */
 static int s33_first_command_page_kept_text(const char *raw_path,const char *expected) {
     char path[MAX_PATH],line[256];FILE *file=NULL;

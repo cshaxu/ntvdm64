@@ -1,7 +1,7 @@
 #include <windows.h>
 #include <stdio.h>
 #include <string.h>
-#include "ntkvm-exe/console_frontend.h"
+#include "ntcon-exe/console_frontend.h"
 #define REQUIRE(x) do { if (!(x)) {printf("FAIL line=%d\n",__LINE__);return 1;} } while(0)
 
 static DWORD dispatch_frame(run16_console_frontend *owner, console_io_request *request,

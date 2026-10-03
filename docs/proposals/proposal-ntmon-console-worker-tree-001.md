@@ -6,7 +6,7 @@ Owner-approved planning dated 2026-10-02, unnumbered candidate at the head of
 the remaining Queue. The active component-renaming/lifecycle packet is not
 expanded or displaced. Admit this candidate only after that package delivers
 its coherent baseline. Names here use the final identities: NTCON is the
-visible Console/Window frontend (previously NTKVM), NTVWM is the native text
+visible Console/Window frontend (previously NTCON), NTVWM is the native text
 worker, and NTVDM hosts DOS/Win16.
 
 Replace NTMON's flat worker list with a tree of registered Console roots and

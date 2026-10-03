@@ -7,7 +7,7 @@ source separation belongs to S8, not to this neutral library.
 
 Common is the carrier of both admitted protocol families and their applicable
 shared client/transport mechanisms: NTSRV control uses RPC; direct
-NTKVM-worker I/O uses named pipes. Their underlying transport differs, not
+NTCON-worker I/O uses named pipes. Their underlying transport differs, not
 their common source ownership. They do not depend on or relay through each
 other. Endpoint authentication policy, execution, rendering and lifecycle
 authority stay with their executable owner. Worker-base may depend on common;
@@ -25,7 +25,7 @@ embed a second copy. Local target materialization is separately declared in
 run16-exe/native_launch.h. I/O-client instance state is declared in
 common/console/client.h, not a wire protocol header.
 
-`console/client` owns the existing shared NTKVM named-pipe protocol client:
+`console/client` owns the existing shared NTCON named-pipe protocol client:
 ordered requests/replies, frame chunks, title publication, input decoding and
 atomic key-return encoding. It retains borrowed pipe/peer/cancel handles and
 owns only its local operation event. Callers keep their locks across exchanges

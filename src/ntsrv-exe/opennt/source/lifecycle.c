@@ -202,7 +202,7 @@ static ULONGLONG service_root_retirement_deadline(OPENNT_BASE_CONNECTION *root,U
         return 0;
     }
     /* Start once on loss of the last worker; rechecks do not renew the grace.
-     * A newly associated worker cancels it. NTKVM owns no local deadline. */
+     * A newly associated worker cancels it. NTCON owns no local deadline. */
     if(!root->frontend_workerless_deadline)
         root->frontend_workerless_deadline=now+FRONTEND_STARTUP_DEADLINE_MS;
     deadline=root->frontend_workerless_deadline;

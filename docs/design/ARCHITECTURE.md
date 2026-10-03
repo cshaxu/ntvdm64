@@ -4,7 +4,7 @@ Owner-approved S12 text extension: the common text ABI accepts original
 glyph/attribute pairs or optional glyph/attribute/style triples. Both workers
 share the decoder; DOS continues to publish pairs. This supersedes the exact
 byte-pair-only restriction below, preserving native underline without a second
-NTKVM renderer or modifying guest/shared-library code.
+NTCON renderer or modifying guest/shared-library code.
 
 ## Product boundary
 
@@ -13,14 +13,14 @@ NTKVM renderer or modifying guest/shared-library code.
 Owner-approved migration of project-added orchestration is delivered by S4;
 the [S4 evidence](../etc/evidence/m0-t424-s4-broker-centered-launch-control.md)
 records production tests, publication and remaining S5 cleanup. NTSRV
-creates and authenticates NTKVM and NTVDM/NTVWM, binds their frontend/execution
+creates and authenticates NTCON and NTVDM/NTVWM, binds their frontend/execution
 relationships, delivers direct requests and owns orderly retirement. Run16
 finds/starts NTSRV, classifies/submits its target and waits on broker direct
 completion when the existing launch semantics require it. Console takeover,
 return and restoration acknowledgement also pass through authenticated NTSRV
-control: no run16/NTKVM IPC exception remains. NTSRV supplies the actual caller
-process capability; NTKVM alone attaches to that caller's Console. NTSRV does
-not attach to or own that Console. NTKVM/worker transport remains
+control: no run16/NTCON IPC exception remains. NTSRV supplies the actual caller
+process capability; NTCON alone attaches to that caller's Console. NTSRV does
+not attach to or own that Console. NTCON/worker transport remains
 direct for frames, input, title/geometry, route activation, input return and
 final-paint/restoration barriers; it owns no task registry/completion or orderly
 death policy. Shell-out CreateProcess/run16 execution remains local to the
@@ -33,15 +33,15 @@ direct worker pipe. DOS retains original BaseSrv record/completion semantics.
 Win32 GUI and registered Win16 startup-only semantics are unchanged. No
 original MVDM/OpenNT-host mirror modification is planned by this migration.
 The caller stays alive/attached until takeover is acknowledged. Root task
-completion does not authorize returning to outer CMD until NTKVM reports
+completion does not authorize returning to outer CMD until NTCON reports
 canonical buffer/input restoration through NTSRV; inner launchers cannot
 return the root lease. Restoration preserves the current grid/geometry/cursor
 and restores modes/active buffer, not an old startup page or cursor position.
 
-NTKVM has no autonomous idle deadline: it waits for NTSRV while its real user
+NTCON has no autonomous idle deadline: it waits for NTSRV while its real user
 Console remains alive. NTSRV owns cancellable ten-second no-worker/startup
 decisions, and cannot start its own ten-second empty-service grace with a live
-frontend, worker or legitimate admission. Connected run16, NTKVM and workers
+frontend, worker or legitimate admission. Connected run16, NTCON and workers
 watch the authenticated broker process handle using event waits, not periodic
 RPC probes. NTSRV orderly instructions have priority; broker loss, true Console
 closure and unrecoverable component faults remain separate failure boundaries.
@@ -54,7 +54,7 @@ The owner inserts a bounded cleanup after S4 delivery, before S6 worker naming.
 Consolidate identical control transport while retaining completed-I/O-first
 semantics; clarify the actual owned-client implementation/link boundaries;
 remove launcher target-handle decisions from native-text completion/Console
-return in favor of authenticated broker result/handoff state; remove NTKVM
+return in favor of authenticated broker result/handoff state; remove NTCON
 dead fields and stale ownership comments; retire replaced bootstrap tests only
 after mapping their assertions. Preserve the final restoration barrier and
 real target failure/result distinctions. This is a planned cleanup, not proof
@@ -71,15 +71,52 @@ service-private source split belong to the next S8. Earlier combined wording
 below is retained context, not an S7 service-split completion claim. Native GUI,
 frontend naming and final audit originally followed as S9, S10 and S11.
 The owner's later insertion makes S10 a bounded NTSRV frontend lost-wakeup
-repair, S11 frontend naming and S12 final audit. Its
+repair, S11 frontend naming, owner-added S12 unified logical text surface and
+S13 final audit. The S10
 [checklist](../etc/operations/t424-worker-frontend-renaming-plan.md#s10-rapid-relaunch-and-frontend-notification-checklist)
 keeps the shared notification a projection of every actionable pending join/
 channel request under the existing service lock. Separate completion/return
 acknowledgements retain their contracts; no new control edge or mirror change.
 
+### Approved T424 S12 text storage and handoff target
+
+This is a planned target, not an implementation claim. After S11 the frontend
+is NTCON (the renamed frontend); the native worker is NTVWM. The frontend owns one
+logical_surface path for both workers' text: operations/frames -> committed
+logical state -> visible Console or Window. Replaced native direct-to-visible
+Console paths must be removed. NTVWM retains its hidden execution Console;
+original OpenNT/MVDM execution and graphics paths remain at their owners.
+This surface is project-added presentation adaptation, not original OpenNT.
+
+Logical storage retains buffer extent/cells/attributes, viewport origin/extent,
+buffer-relative cursor and shape/visibility, and existing text style/font
+metadata. Normalize viewport-relative presentation without discarding buffer
+rows. Publication/capture/render use consistent committed state and explicit
+locking; tiled updates cannot expose half-applied geometry or cursor.
+
+Logical size changes may request physical resizing, but projection uses the
+actual resulting canvas. Console projection is always upper-left anchored:
+paint the intersection, clear unused right/bottom characters and attributes,
+hide cursors outside it and map mouse events only to logical cells. No reflow,
+bottom alignment, cursor-following viewport, row compensation or host-size
+truncation of logical storage. Window uses the same state as text, not a bitmap
+fallback. Host scrollback history is outside this guarantee.
+
+Both handoff directions drain/commit/acknowledge the old owner's final state,
+apply/acknowledge incoming-worker capability conversion, then release input
+and execution/resumed-parent output. Inherit current logical state, never the
+initial outer CMD snapshot. Retain original DOS VGA height selection and
+cursor-aware cell-grid resize; ordinary release does not restore old CMD
+geometry/cursor. Existing stream-I/O special restoration remains special.
+NTSRV retains control/lifecycle authority, run16 remains thin, and worker I/O
+remains direct. No new helper/component, mirror/guest/shared-lib changes or
+new scheduling policy. The
+[S12 plan](../etc/operations/t424-worker-frontend-renaming-plan.md#s12-unified-logical-surface-and-dosnative-handoff)
+owns detailed capability, failure, isolation and release acceptance.
+
 Final owner transport clarification: common carries both protocol families
 and their suitable shared client/transport mechanisms. NTSRV control uses
-RPC; direct NTKVM-worker I/O retains named pipes. Worker-base may depend on
+RPC; direct NTCON-worker I/O retains named pipes. Worker-base may depend on
 common; common has no reverse dependency on worker-base or EXE-private code.
 Neither protocol depends on or relays through the other. Endpoint-specific
 authentication policy, execution, rendering and retirement remain owner-local.
@@ -181,7 +218,7 @@ service IDL. worker-base holds project-added worker mechanisms shared by
 NTVDM/NTVWM when their normal, failure, nested and teardown contracts match.
 This includes the finite presentation client, ordered transport, protocol
 validation, frame/input codec and local client resource lifecycle, declared
-by interface/worker_console_client.h. NTKVM retains server/rendering/ownership.
+by interface/worker_console_client.h. NTCON retains server/rendering/ownership.
 Original OpenNT/MVDM execution, scheduling, task completion, block/resume and
 cleanup stay in their mirrors; never extract original logic and reverse-call it.
 Backend-specific guest and native Console operations remain explicit locally.
@@ -389,7 +426,7 @@ src/run16-exe/   -> run16.exe
 src/ntsrv-exe/ -> ntsrv.exe
 src/ntvdm-exe/   -> ntvdm.exe
 src/ntmon-exe/ -> ntmon.exe
-src/ntkvm-exe/ -> ntkvm.exe
+src/ntcon-exe/ -> ntcon.exe
 ```
 
 The former `app`, `session`, `broker` and adapter roots are README-only move
@@ -447,7 +484,7 @@ preserve existing caller-held lock/resource contracts and original lock order.
 
 NTSRV is the single authority for registered NTVDM and NTVWM workers, their
 frontend-root associations, direct-command admission and completion, and
-cooperative retirement. NTKVM owns visible Console/Window presentation, not
+cooperative retirement. NTCON owns visible Console/Window presentation, not
 worker lifetime. Run16 classifies and submits one direct target, then waits
 only when that target's established launch semantics require it. Execution
 ancestry, frontend I/O association and worker residency are separate relations;
@@ -480,20 +517,20 @@ none implies recursive process-tree termination.
   use NTVWM's Console; that Console must not be torn down or reused until its
   actual resource state permits it. Monitor-only observations do not decide
   the direct exit code or authorize killing descendants.
-- A borrowed NTKVM root returns the visible Console to the outer caller on
+- A borrowed NTCON root returns the visible Console to the outer caller on
   direct completion, but parks its presentation and preserves the already
   delivered worker channels. The resident worker can therefore publish the
   next direct request through the same authenticated frontend root; the
   caller's input mode is restored between leases. A new lease resumes that
   root rather than creating a second channel or equating task completion with
   worker disconnection.
-- NTSRV arbitrates component death. NTKVM exits when its host Console is gone
+- NTSRV arbitrates component death. NTCON exits when its host Console is gone
   or NTSRV is lost; after its last associated worker and in-flight admission
   disappear, NTSRV starts a cancellable ten-second workerless grace and then
-  requests orderly NTKVM retirement. Registered workers do not die merely
+  requests orderly NTCON retirement. Registered workers do not die merely
   because a launcher or one task exits. When a frontend root actually dies,
   NTSRV directs only its associated workers to close; unrelated roots/workers
-  continue. On NTSRV death, connected NTKVM/NTVDM/NTVWM instances fail closed
+  continue. On NTSRV death, connected NTCON/NTVDM/NTVWM instances fail closed
   through their broker-liveness contract. NTMON remains available as a
   disconnected monitor until its user exits.
 - NTSRV itself retains a cancellable ten-second empty-service grace when no
@@ -508,16 +545,16 @@ none implies recursive process-tree termination.
 
 Latest owner approval replaces ConPTY with NTVWM's own ordinary hidden Console.
 NTVWM is its attached resident worker and uses public Console APIs directly;
-there is no private helper/bootstrap or NTSRV-owned pseudoconsole. NTKVM remains
+there is no private helper/bootstrap or NTSRV-owned pseudoconsole. NTCON remains
 presentation only. The ConPTY descriptions below are superseded design history,
 not selectable alternative production backends. Independent-worker lifecycle,
 native direct results, same text-frame ABI and screen/input continuity remain.
 
 Latest owner clarification: NTVWM is a Win32-text worker peer of NTVDM,
-not an NTKVM-owned backend with a frontend-bounded lifetime. Both expose the
+not an NTCON-owned backend with a frontend-bounded lifetime. Both expose the
 same external worker discovery/start/registration, request/completion,
 handoff/re-entry, exit/fault and monitor management model. I/O association is
-separate from worker identity. NTKVM connects as presentation client only.
+separate from worker identity. NTCON connects as presentation client only.
 The selected original OpenNT NTVDM/MVDM interface and lifecycle are the
 canonical shape: NTVWM adapts at its own boundary to a same-shaped native
 worker contract. No original MVDM mirror may include, call, schedule, or
@@ -530,14 +567,14 @@ per-frontend candidate description below is superseded wherever it conflicts.
 The owner admits src/ntvwm-exe producing ntvwm.exe as the native text backend.
 This supersedes the historical S9/S11 no-helper and per-native-branch rules
 below, not their publication history. One character frontend session reuses
-one NTVWM/real Console across DOS intervals. NTKVM owns visible presentation,
+one NTVWM/real Console across DOS intervals. NTCON owns visible presentation,
 display and direct I/O routing only. NTVWM owns its ordinary hidden Console,
 native input/state/member operations, text-frame production and Console closure.
 Screen/cursor transfer must reach the real Console, not just a parser cache.
 Both backends publish text in the exact existing console_video.h ABI: copied
 console_video_description, console_text_style and glyph/attribute byte pairs.
 NTVWM publishes text only, with the same bitmap glyph mapping as NTVDM; no
-native-specific terminal parser or font mapper remains in NTKVM. Default fonts
+native-specific terminal parser or font mapper remains in NTCON. Default fonts
 and active guest font-bank handoff require explicit equivalence tests.
 Run16 keeps classification, submission and existing GUI startup-only/--wait
 and DOS/native-text direct-completion behavior; it never owns an I/O pump.
@@ -552,7 +589,7 @@ remain unchanged. Status and the S12 ledger own implementation evidence.
 
 ### Current owner-approved replacement
 
-The independent `src/ntkvm-exe/` product replaces root-run16 UI ownership.
+The independent `src/ntcon-exe/` product replaces root-run16 UI ownership.
 It owns visible Console, Window, the native text backend and display for one
 character session. run16 is exclusively a classification/start/submission and
 direct-target wait client; no launcher owns an input pump or presentation.
@@ -571,7 +608,7 @@ target completion. No native process-tree termination is introduced.
 
 The Console ownership split is now implemented and verified by S4's linked
 source, graph and real runtime evidence. Its complete runtime set is seven
-files, including ntkvm.exe. S4 used a helper role of that same executable;
+files, including ntcon.exe. S4 used a helper role of that same executable;
 the published S9 replacement below removed that native I/O helper role.
 Window/display and Window mouse have subsequent S6/S7 evidence; they were not
 proved by the earlier Console migration alone. Status owns publication and delivery state; the
@@ -579,8 +616,8 @@ proposal assigns remaining validation and final owner acceptance.
 
 ### Published S9 backend replacement
 
-S9 replaces the private hidden-Console/helper backend with ntkvm-owned ConPTY.
-Only ntkvm owns the pseudoconsole, streams, terminal state and display/input
+S9 replaces the private hidden-Console/helper backend with ntcon-owned ConPTY.
+Only ntcon owns the pseudoconsole, streams, terminal state and display/input
 routing. No persistent/transient helper role or launcher/worker Console-I/O
 substitute is admitted. The S9 ledger records the published implementation and
 its explicitly accepted limitations. The S11 replacement below uses released
@@ -594,7 +631,7 @@ shared Console. Preserve original DOS unused-key/BIOS-buffer return and do not
 close a live native session merely to discard its input. Display changes do
 not change the execution session or create another pseudoconsole.
 
-One ntkvm retains one pseudoconsole across every native-text launch in that
+One ntcon retains one pseudoconsole across every native-text launch in that
 frontend, including DOS intervals and intervals with no known native target.
 Direct-target completion never releases admission or recreates that backend.
 No observer process or Job is introduced to infer last-client retirement;
@@ -612,7 +649,7 @@ does not require a general Unicode font subsystem or a second native renderer.
 
 This earlier owner-approved prototype is superseded by the NTVWM plan above;
 it is retained as research context, not the current implementation directive.
-S9 above remains the published baseline until verified migration. ntkvm still
+S9 above remains the published baseline until verified migration. ntcon still
 owns the sole visible Console/Window and display state. Each independently
 launched native text branch receives a ConPTY; ordinary native descendants
 inherit their real Console without interception. Win32 -> DOS -> Win32 may
@@ -629,7 +666,7 @@ positioned output and scrolling must pass the same continuity tests.
 
 After successful initial attachment, relinquish that backend's keepalive with
 ReleasePseudoConsole. It is not reused for independent launches. Windows owns
-attached-client lifetime and output EOF; ntkvm drains output before disposal.
+attached-client lifetime and output EOF; ntcon drains output before disposal.
 Direct-target completion still supplies only that requester's result and never
 proves all Console clients have exited. No membership query helper, observer,
 Job, process-tree kill or new execution scheduler is added. Missing API support
@@ -782,7 +819,7 @@ component ABI.
 The finite `frontend-client.lib` implementation is launcher-owned under
 `run16-exe`: frontend bootstrap, native request/receipt transport and copied
 launch packet codec. Public declarations live in `interface`, not EXE-private
-include paths. NTKVM links the client transport/codec without target creation.
+include paths. NTCON links the client transport/codec without target creation.
 NTVWM reuses the launch codec and the separately selected launcher-owned
 native resource/CreateProcess primitive; worker Console state, execution and
 completion remain NTVWM-owned. This is the same owned-client-library pattern

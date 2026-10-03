@@ -17,14 +17,14 @@ $LogRoot=(Resolve-Path -LiteralPath $LogRoot).Path
 $launcher=Join-Path $PackageRoot 'run16.exe'
 if(!$ProcessPackageRoot){$ProcessPackageRoot=$PackageRoot}
 $ProcessPackageRoot=(Resolve-Path -LiteralPath $ProcessPackageRoot).Path
-foreach($name in @('run16.exe','ntvdm.exe','ntkvm.exe','ntsrv.exe')){
+foreach($name in @('run16.exe','ntvdm.exe','ntcon.exe','ntsrv.exe')){
     if((Get-FileHash (Join-Path $PackageRoot $name)).Hash -ne
         (Get-FileHash (Join-Path $ProcessPackageRoot $name)).Hash){throw 'Process package differs from launch package'}
 }
-$paths=@('run16.exe','ntvdm.exe','ntkvm.exe','ntsrv.exe') |
+$paths=@('run16.exe','ntvdm.exe','ntcon.exe','ntsrv.exe') |
     ForEach-Object {(Join-Path $ProcessPackageRoot $_);(Join-Path $PackageRoot $_)}
 $worker=@((Join-Path $ProcessPackageRoot 'ntvdm.exe'),(Join-Path $PackageRoot 'ntvdm.exe'))
-$frontend=@((Join-Path $ProcessPackageRoot 'ntkvm.exe'),(Join-Path $PackageRoot 'ntkvm.exe'))
+$frontend=@((Join-Path $ProcessPackageRoot 'ntcon.exe'),(Join-Path $PackageRoot 'ntcon.exe'))
 if(@(Get-CimInstance Win32_Process -Filter "Name='ntsrv.exe'").Count){throw 'Another broker is running'}
 if(@(Get-CimInstance Win32_Process | Where-Object {$_.ExecutablePath -in $paths}).Count){throw 'Candidate already in use'}
 $oldPrivate=$env:MVDM_OBSERVER_PRIVATE_DESKTOP
@@ -85,7 +85,7 @@ try {
                 Start-Sleep -Milliseconds 200
             } while([DateTime]::UtcNow -lt $deadline)
             if(!$frontier){throw "$app did not reach its selected retained frontier"}
-            if(@(Get-CimInstance Win32_Process -Filter "Name='ntkvm.exe'" |
+            if(@(Get-CimInstance Win32_Process -Filter "Name='ntcon.exe'" |
                 Where-Object {$_.ExecutablePath -in $frontend}).Count){throw 'GUI launch created a character frontend'}
             if(!$controller.WaitForExit(20000)){throw 'Headless observer did not finish'}
             $record=Get-Content -LiteralPath $report -Raw

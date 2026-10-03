@@ -28,7 +28,7 @@ typedef struct run16_console_frontend {
     BOOL (*text_frame_required)(void *);
     /* The Window presentation, not DOS, owns the host pointer clip. */
     BOOL (*window_clip_owned)(void *);
-    /* A successful DOS Console title change wakes NTKVM presentation. */
+    /* A successful DOS Console title change wakes NTCON presentation. */
     void (*title_changed)(void *);
     /* Copied caption metadata, not a SetConsoleTitle on the root Console. */
     void (*publish_title)(void *,const char *);

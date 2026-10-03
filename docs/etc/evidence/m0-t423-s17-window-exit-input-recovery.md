@@ -1,16 +1,21 @@
 # M0 T423 S17 — Window exit to outer CMD input recovery
 
+T424 S11 naming normalization: frontend labels/current source links now use NTCON.
+This does not claim the new basename existed in the recorded historical package.
+Exact earlier source, commands and product names remain in Git and sealed build
+evidence; recorded hashes, dates, results and limitations are unchanged.
+
 ## Question and inputs
 
 Why can an outer `CMD` appear to stop echoing after `run16 command`, a Window
 route (`Ctrl+Alt+F`), and DOS `exit`, although the command still accepts and
 executes a blind `echo CHECK123`? The inputs are the published S16 package,
 the immutable `O:/winnt` guest media, the ordinary frontend observer, and the
-affected `run16-exe` and `ntkvm-exe` source paths.
+affected `run16-exe` and `ntcon-exe` source paths.
 
 ## Cause
 
-The Window route makes NTKVM select a temporary Console screen buffer. Its
+The Window route makes NTCON select a temporary Console screen buffer. Its
 teardown restores the outer CMD's original buffer and input mode in
 `run16_native_frontend_destroy`. Before this S, the root launcher returned to
 the outer CMD after its DOS record completed, with no acknowledgement that
@@ -24,23 +29,23 @@ input and echo enabled, no selection, and the original buffer selected.
 ## Repair and ownership
 
 The repair adds two private inherited synchronization events to the existing
-root `run16` → NTKVM bootstrap; it changes no guest code or OpenNT/MVDM
+root `run16` → NTCON bootstrap; it changes no guest code or OpenNT/MVDM
 semantics.
 
 | Record | Owner | Meaning |
 | --- | --- | --- |
-| `retire` | root `run16` signals; NTKVM observes | The root direct DOS completion is now eligible for frontend retirement. It prevents the early-start interval (frontend registered before the DOS record) from looking globally idle. |
-| `restored` | NTKVM signals; root `run16` observes | Original active buffer and input mode have been restored, or no acknowledgement is sent on restore failure. |
+| `retire` | root `run16` signals; NTCON observes | The root direct DOS completion is now eligible for frontend retirement. It prevents the early-start interval (frontend registered before the DOS record) from looking globally idle. |
+| `restored` | NTCON signals; root `run16` observes | Original active buffer and input mode have been restored, or no acknowledgement is sent on restore failure. |
 
 `run16` signals `retire` only after the direct DOS completion and original
 parent-resume work. It then waits for `restored` before it returns to its
-outer CMD. NTKVM keeps its broker-reported pending/task/member check: another
+outer CMD. NTCON keeps its broker-reported pending/task/member check: another
 legitimate frontend user is not torn down merely because this root completed.
 The retire event is latched after first observation, so a still-live frontend
 does not spin on a signaled manual-reset event.
 
 `frontend_service_close` now returns the native-Console restoration result;
-NTKVM signals `restored` only after that result is successful. A failed
+NTCON signals `restored` only after that result is successful. A failed
 restore returns a real error instead of falsely handing a half-restored
 Console to the caller.
 
@@ -54,11 +59,11 @@ records the required Window route order:
 run16 task-completed
 run16 native-resume
 run16 frontend-retire
-ntkvm pump usage
-ntkvm pump retired
-ntkvm pump drain
-ntkvm restore
-ntkvm ack
+ntcon pump usage
+ntcon pump retired
+ntcon pump drain
+ntcon restore
+ntcon ack
 run16 frontend-restored
 run16 worker
 run16 exit
@@ -92,7 +97,7 @@ itself remains event-driven.
 The coherent eight-file `O:/winnt` package at delivery carries these hashes:
 `run16 E878015329D2173EDC942DBE4BBBF67FB39DDB08A5E034331DA9D77A56C811C3`,
 `ntsrv 552FEEEA2115221B7C39461AD4F6E7B91249D032AF893CACE712F62DA02A48EF`,
-`ntkvm 453A7DF32259083AE389DCABE84D425E34DA6A59FD37886DF3359958D30C4C44`,
+`ntcon 453A7DF32259083AE389DCABE84D425E34DA6A59FD37886DF3359958D30C4C44`,
 `ntvdm 338A9D2DEA003F1CB58D4F234E30442499FD3111279064B4FF88F750513C2BBE`,
 `ntw32 64ACFC7C4F8AA9696FF25DB761C0AC9CF6AA84203A6E40A0417E2162B5B52570`,
 `ntmon 589936026400EF4C4C6E5D212E53C5B0389DB42F8843238E392E5CBF78C2EBA3`,

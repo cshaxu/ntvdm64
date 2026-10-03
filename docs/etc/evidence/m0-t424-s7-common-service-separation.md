@@ -1,5 +1,10 @@
 # T424 S7 common mechanisms and service ownership
 
+T424 S11 naming normalization: frontend labels/current source links now use NTCON.
+This does not claim the new basename existed in the recorded historical package.
+Exact earlier source, commands and product names remain in Git and sealed build
+evidence; recorded hashes, dates, results and limitations are unchanged.
+
 ## Explicit native-control common client checkpoint
 
 ### Copied service queue removal checkpoint
@@ -125,7 +130,7 @@ the original srvvdm.c remains the DOS/WOW record/execution owner.
 | interface/frontend_bootstrap.h | Launcher-local broker-issued references and release | run16-owned frontend connection declaration | Handle release is not frontend retirement or direct launcher/frontend IPC |
 | worker-base/connection.c | Project worker initialization/watch/failed cleanup; NTVDM/NTVWM | Keep shared worker-base production owner | Common must not reverse-depend on worker-base/EXEs |
 | base_rpc_client.c and related client declarations | Shared authenticated RPC adaptation plus retained BaseClient-shaped seams | Audit each function before choosing common client versus source-shaped seam | Original BaseClient command semantics do not become generic common policy |
-| repeated Console list allocation/growth | Project mechanics in NTKVM, native worker, run16 and RPC root reporter | Common snapshot primitive after comparing full growth/error contracts | Anchor selection, root authentication, quiescence and parent resume remain owner-local |
+| repeated Console list allocation/growth | Project mechanics in NTCON, native worker, run16 and RPC root reporter | Common snapshot primitive after comparing full growth/error contracts | Anchor selection, root authentication, quiescence and parent resume remain owner-local |
 | base_service.c registration/connection/frontend/native/management additions | Project finite bindings around original mirror owners | Provenance ledger then bounded NTSRV-private modules | Single registry/lock authority; no common policy or second registry |
 | original mirror execution/completion/block-resume/cleanup | OpenNT/MVDM original owners, retained by original callers | Keep original-relative paths and minimize registered hooks | Never move original algorithm into common/worker-base and reverse-call it |
 
@@ -140,7 +145,7 @@ frontend ownership, task receipt authority or native target materialization.
 - [x] Initial source/hash/function/call inventory and concrete owner map.
 - [x] Verify the two auxiliary control pipes still participate in production.
 - [x] Replace NTSRV-NTVWM command/launch/final-I/O pipe messages with RPC; copied-command and actual startup/receipt checks below.
-- [x] Replace NTSRV-NTKVM bootstrap acknowledgement pipe with RPC; actual startup/authentication fixtures below.
+- [x] Replace NTSRV-NTCON bootstrap acknowledgement pipe with RPC; actual startup/authentication fixtures below.
 - [x] Source/dependency sweep proves only service RPC and worker-frontend I/O message families remain; runtime regressions still required separately.
 - [x] Share bounded pipe mechanics with explicit completion/death ordering; retain owner-specific protocol and resource contracts.
 - [ ] S8 transferred: finish complete manual service block provenance and per-mirror accounting before service moves.
@@ -173,7 +178,7 @@ exit code. Resume requests currently use request zero and a zero-byte pipe
 header; their reply must remain distinct from direct task completion. Nested
 direct execution cannot be serialized behind an outer target wait.
 
-The frontend pipe currently authenticates the broker PID in NTKVM while
+The frontend pipe currently authenticates the broker PID in NTCON while
 RegisterFrontendLease authenticates the exact admitted child and inherited
 capabilities in NTSRV. Its replacement must preserve this grant, report
 failure even before root registration, and never accept an arbitrary process
@@ -317,7 +322,7 @@ full real-service/product acceptance remains open.
 
 The owner's final clarification places both protocol families and applicable
 shared client/transport mechanisms in common: NTSRV control on RPC and direct
-NTKVM-worker I/O on named pipes. The briefly discussed I/O-to-RPC migration
+NTCON-worker I/O on named pipes. The briefly discussed I/O-to-RPC migration
 is withdrawn. No I/O-to-RPC production change was made; worker-base may depend
 on common, not the reverse. No S7 publication or delivery is claimed.
 
@@ -332,7 +337,7 @@ Endpoint/logon selection, service peer checks, version handshake, process
 attachments and broker-loss policy remain unchanged and outside this provider.
 This is project mechanism reuse, not an original OpenNT algorithm extraction.
 Common has no reverse private/worker dependency. One common-rpc.lib provider
-is selected by explicit link input for run16, NTVDM, NTVWM, NTKVM and NTMON;
+is selected by explicit link input for run16, NTVDM, NTVWM, NTCON and NTMON;
 there are no copies embedded in private archives.
 
 Build-common-rpc-binding.log records six x86 executable links and the new
@@ -430,7 +435,7 @@ Copied command RPC delivery, service separation and full S7 gates remain open.
 
 The final owner clarification makes common the carrier of both protocols and
 their shared client mechanisms. Provenance review of all functions in the
-existing project-added worker-base/console_client.c found only NTKVM protocol
+existing project-added worker-base/console_client.c found only NTCON protocol
 encoding, sequence/generation/reply validation, frame chunks, title publication,
 input decoding and exact pipe exchange. It has no original mirror algorithm,
 backend binding, frontend rendering, task registry or retirement policy.
@@ -650,7 +655,7 @@ change, third protocol, registry, timer or frontend ownership is introduced.
 The build selects frontend_control.obj through common-rpc.lib, with generated
 service.h dependencies and source hashes in its composition. Ownership checks
 require three RPC providers and reject private/reverse/test-source leakage.
-Actual run16/ntkvm/ntvdm/ntvwm maps attribute the new implementation to
+Actual run16/ntcon/ntvdm/ntvwm maps attribute the new implementation to
 common-rpc:frontend_control.obj; NTMON selects only its needed binding.
 
 Build-frontend-control-r001/r002.log pass six x86 products and selected fixtures.
@@ -902,7 +907,7 @@ Version r001 used the known unsupported long runtime path and NTVDM returned
 161 before RPC; r002 uses only approved Z: and retains every mismatch assertion.
 No production delay, fallback, authorization or acceptance assertion was loosened.
 
-Source review finds only worker-I/O pipe creation in NTKVM; common owns its
+Source review finds only worker-I/O pipe creation in NTCON; common owns its
 exact/partial/cancel/drain transport. Native command/startup/final-I/O and
 frontend startup control now use authenticated RPC. Local diagnostic file
 WriteFile calls are not message protocols. Original DOS/WOW adapters and

@@ -1,5 +1,10 @@
 # T423 S37: stable Window geometry across DOS/native handoff
 
+T424 S11 naming normalization: frontend labels/current source links now use NTCON.
+This does not claim the new basename existed in the recorded historical package.
+Exact earlier source, commands and product names remain in Git and sealed build
+evidence; recorded hashes, dates, results and limitations are unchanged.
+
 The S36 published eight-file package was the baseline. In an isolated
 80x30 Windows Console, `run16 command`, Ctrl+Alt+F, then `ver` changed the
 Window text frame from 80x28 to 80x30 and back. The measured client width
@@ -10,7 +15,7 @@ remained 640 pixels; the visible jump in this reproducer was height (392 to
 
 ## Cause and change
 
-NTKVM's DOS page has a logical 80x28 viewport while its canonical visible
+NTCON's DOS page has a logical 80x28 viewport while its canonical visible
 Console can retain the caller's physical 80x30 viewport. During an active
 native-channel switch, `console_channel.c` cleared `logical_window`. NTW32's
 initial screen-info request consequently seeded its hidden Console from the
@@ -22,11 +27,11 @@ existing `CONSOLE_IO_WINDOW_RECT` publication still updates that viewport
 when a native program genuinely changes it. No guest, original OpenNT/MVDM
 mirror, worker-base protocol, shared KVM library, font rule or timed redraw
 was changed. The only production edit is in
-`src/ntkvm-exe/console_channel.c`.
+`src/ntcon-exe/console_channel.c`.
 
 ## Reproduction and acceptance
 
-The x86 `console_channel.c` object was compiled and `ntkvm.exe` linked using
+The x86 `console_channel.c` object was compiled and `ntcon.exe` linked using
 the S36 generated product graph and its cached, unchanged objects. The
 seven other staged product binaries remained hash-identical to S36. A fresh
 S37 x86 graph was also generated; a cold compile was interrupted because the
@@ -52,7 +57,7 @@ On the candidate:
 Reports are under `build/M0-T423/S37/p1/`:
 `candidate-assert-roundtrip.raw`, `candidate-assert-resize.raw`,
 `s37-console17-summary.json`, `s37-window17-summary.json` and
-`published-assert-roundtrip.raw`. The published `O:/winnt/ntkvm.exe` hash is
+`published-assert-roundtrip.raw`. The published `O:/winnt/ntcon.exe` hash is
 `A93E5AE94D13AB8402ACEBB1926E385DD7AB2726DAB98FCD27A6EC88E41A83FC`,
 matching the candidate. The other seven published product files match their
 S36 staged hashes. The temporary `Z:` test alias was removed.

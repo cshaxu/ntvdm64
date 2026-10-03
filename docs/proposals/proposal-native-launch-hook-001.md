@@ -8,7 +8,7 @@ follow the active component-renaming package. This is not implementation
 admission and does not expand T424. Finish the naming package first: NTVWM is
 the native text worker and NTCON is the visible Console/Window frontend in
 this proposal. The current intermediate tree may still call that frontend
-NTKVM; use the delivered naming baseline at admission. Reuse the preceding
+NTCON; use the delivered naming baseline at admission. Reuse the preceding
 root/search package's resolver and package-root contract rather than creating
 a parallel lookup policy. Incorporate any relevant contract-audit handoff.
 

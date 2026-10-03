@@ -1,8 +1,8 @@
-# ntkvm frontend executable owner
+# ntcon frontend executable owner
 
 This owner contains visible Console/Window presentation and copied worker
 screen/input channels. NTVDM and NTVWM use the same frame/input contracts.
-NTVWM, not NTKVM, owns the ordinary hidden Console and native targets.
+NTVWM, not NTCON, owns the ordinary hidden Console and native targets.
 The S12 formal graph no longer selects ConPTY, its terminal parser or a private
 helper. The duplicate native renderer has also been removed. Current delivery
 and remaining acceptance gates are recorded in docs/states/CURRENT.md.
@@ -10,7 +10,7 @@ and remaining acceptance gates are recorded in docs/states/CURRENT.md.
 ## Client and service separation
 
 The formal graph links the service and presentation into
-ntkvm.exe, not run16.exe. The ordinary launcher selects the independent
+ntcon.exe, not run16.exe. The ordinary launcher selects the independent
 frontend through its authenticated client. There is no private helper role.
 Object-cache paths retaining
 the old run16 name do not identify their source or final executable owner.
@@ -75,7 +75,7 @@ release remains owned by kvm-window, not by the NTVDM worker.
 
 Logical text-region state is separate from the visible Console's physically
 limited viewport. Backend handoffs use the logical region; only presentation
-uses host window limits. NTKVM routes native pointer motion/modifiers but does
+uses host window limits. NTCON routes native pointer motion/modifiers but does
 not integrate its position or draw a native arrow. NTVWM composes its text
 block cursor in the common frame; NTVDM retains its original guest cursor.
 No worker depends on this component's private renderer or display dimensions.
@@ -85,7 +85,7 @@ No worker depends on this component's private renderer or display dimensions.
 S9's native_conpty/native_terminal implementation is removed from the S12
 production graph and source. Historical commits and the S9/S12 evidence retain
 its behavior and experiments; it is not an optional runtime backend. NTVWM
-now packs native characters into the common text ABI. NTKVM uses one bitmap
+now packs native characters into the common text ABI. NTCON uses one bitmap
 rasterizer for both workers; font/palette transfer belongs to that shared ABI.
 
 libvterm-import.json, its unchanged MIT source archive and license are retained

@@ -15,11 +15,11 @@ semantics; NTVWM supplies their finite backend binding.
   Completion-export rights are checked before starting the target.
 - Launcher-owned `run16-exe/native_launch_packet.c` and `native_launch.c`
   provide the shared packet codec and restricted resource/process primitive.
-  NTVWM owns their worker execution caller; NTKVM links only the codec.
+  NTVWM owns their worker execution caller; NTCON links only the codec.
 - `console_state.c`: actual Console geometry, cells/cursor, active-buffer
   capture, native input, unread-key draining and actual membership observation.
 - `text_frame.c`: native cells to the shared bitmap-glyph text frame. Uses the
-  admitted ROM font or transferred DOS font banks; no alternate NTKVM glyph
+  admitted ROM font or transferred DOS font banks; no alternate NTCON glyph
   mapper. Optional style bytes preserve underline. Grid flags are unsupported.
   Window mouse position/buttons and reverse-video cell composition also belong
   here. Only the copied frame is painted; hidden Console cells/caret/history
@@ -33,7 +33,7 @@ semantics; NTVWM supplies their finite backend binding.
 
 Cross-component declarations live in `common/protocol`. NTSRV owns authentication,
 discovery and worker management; run16 owns submission/direct-result waiting;
-NTKVM owns visible Console/Window, display state, routing and the single renderer.
+NTCON owns visible Console/Window, display state, routing and the single renderer.
 Original DOS/WOW execution and cleanup remain with NTVDM's original mirrors.
 
 ## Handoff and lifetime
@@ -65,7 +65,7 @@ mode, resize-race, pointer, history and bidirectional handoff evidence.
 
 Console operations selectively reuse project S8 `d253e55af` capture/host/input
 mechanics. Glyph conversion is moved from the retired native frontend producer;
-the duplicate NTKVM renderer, ConPTY parser, carrier and control protocol are
+the duplicate NTCON renderer, ConPTY parser, carrier and control protocol are
 removed. No OpenNT Console-server shell is imported; no guest/shared lib changes.
 
 The [S12 ledger](../../docs/etc/evidence/m0-t423-s12-ntw32-backend.md) retains

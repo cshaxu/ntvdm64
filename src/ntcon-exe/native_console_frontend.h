@@ -7,7 +7,7 @@ typedef struct run16_native_frontend run16_native_frontend;
 DWORD run16_native_frontend_create(run16_native_frontend **);
 /* Caller owns non-inheritable duplicates of the session's canonical handles. */
 DWORD run16_native_frontend_console(run16_native_frontend *,HANDLE *,HANDLE *);
-/* The active DOS channel uses a private Console API grid. NTKVM projects
+/* The active DOS channel uses a private Console API grid. NTCON projects
  * that grid onto the unchanged user-visible Console after each mutation. */
 DWORD run16_native_frontend_dos_console(run16_native_frontend *,HANDLE *);
 DWORD run16_native_frontend_project_dos(run16_native_frontend *);
