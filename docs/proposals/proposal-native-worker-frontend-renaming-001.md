@@ -22,7 +22,8 @@ permission to fold S8 work back into S7. T closure remains owner-controlled.
 
 The [S11 delivery ledger](../etc/evidence/m0-t424-s11-frontend-name.md) records
 the frontend identity migration and verified eight-file publication. CURRENT
-retains the owner's stop after S11; S12 planning is not a second admission.
+records the latest owner authorization for sequential S12/S13 after S11;
+T closure still awaits owner validation. Planning alone is not admission.
 
 | Role | S2 intermediate owner/product | Final owner/product |
 | --- | --- | --- |

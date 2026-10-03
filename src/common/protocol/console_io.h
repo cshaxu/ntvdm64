@@ -6,7 +6,7 @@
 
 /* Direct worker/frontend protocol; no pointers or native resource identities.
  * Local x86 peers are authenticated by the BaseSrv channel attachment. */
-#define CONSOLE_IO_VERSION 21u
+#define CONSOLE_IO_VERSION 22u
 /* Activation's state.mode selects the endpoint's input interpretation, not
  * a different frame format or an execution scheduler. */
 enum { CONSOLE_IO_WORKER_DOS=0, CONSOLE_IO_WORKER_NATIVE=1 };
@@ -76,7 +76,13 @@ enum console_io_operation {
     CONSOLE_IO_SNAPSHOT_END,
     /* Worker-owned Console title for the active Window caption. This does
      * not change the frontend's native Console title or execution owner. */
-    CONSOLE_IO_PUBLISH_TITLE_A
+    CONSOLE_IO_PUBLISH_TITLE_A,
+    /* Stage a complete text publication without changing committed state.
+     * END atomically commits geometry/cells/cursor/frame; ABORT discards it.
+     * Activation, input and seed snapshots are prohibited within the batch. */
+    CONSOLE_IO_PUBLICATION_BEGIN,
+    CONSOLE_IO_PUBLICATION_END,
+    CONSOLE_IO_PUBLICATION_ABORT
 };
 enum console_io_window_query {
     CONSOLE_WINDOW_ICONIC=1,

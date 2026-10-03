@@ -65,7 +65,7 @@ int main(void)
         REQUIRE(dispatch_frame(&owner,&request,&reply,CONSOLE_IO_VIDEO_DATA,3)==0 && reply.result);
         request.bytes=0;
         REQUIRE(dispatch_frame(&owner,&request,&reply,CONSOLE_IO_VIDEO_TEXT,4)==0 && reply.result);
-        REQUIRE(!owner.video.pending && !owner.video.pixels && !owner.video.published_serial);
+        REQUIRE(!owner.video.pending && !owner.video.pixels && owner.video.published_serial==4);
         request.bytes=1; request.state.count=1;
         REQUIRE(dispatch_frame(&owner,&request,&reply,CONSOLE_IO_VIDEO_DATA,3)==0 && !reply.result);
         REQUIRE(reply.error==ERROR_INVALID_DATA && !owner.video.pending && !owner.video.pixels);
@@ -90,7 +90,7 @@ int main(void)
     REQUIRE(reply.error==ERROR_INVALID_DATA && !owner.video.pending && owner.video.published_serial==1);
     request.bytes=0; request.state.count=0;
     REQUIRE(dispatch_frame(&owner,&request,&reply,CONSOLE_IO_VIDEO_TEXT,3)==0 && reply.result);
-    REQUIRE(!owner.video.pixels && !owner.video.pending && !owner.video.published_serial);
+    REQUIRE(!owner.video.pixels && !owner.video.pending && owner.video.published_serial==3);
     request.bytes=1;
     REQUIRE(dispatch_frame(&owner,&request,&reply,CONSOLE_IO_VIDEO_DATA,2)==0 && !reply.result);
     description.width=UINT32_MAX;

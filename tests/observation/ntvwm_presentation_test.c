@@ -13,6 +13,7 @@ typedef struct peer_state {
     unsigned mode,calls;
     unsigned activations,releases;
     unsigned snapshot_begins,snapshot_ends,screen_reads;
+    unsigned publication_begins,publication_ends,publication_aborts;
     unsigned titles;
     console_io_state screen;
     run16_console_video video;
@@ -78,7 +79,14 @@ static DWORD WINAPI peer(void *context)
         }
         if((state->mode>=9 && state->mode<=16) || state->mode==20 ||
             (state->mode==6 && sequence>5)) {
-            if(request.operation==CONSOLE_IO_SNAPSHOT_BEGIN) {
+            if(request.operation==CONSOLE_IO_PUBLICATION_BEGIN) {
+                if(state->publication_begins!=state->publication_ends+state->publication_aborts)error=ERROR_BUSY;
+                else ++state->publication_begins;
+            } else if(request.operation==CONSOLE_IO_PUBLICATION_END || request.operation==CONSOLE_IO_PUBLICATION_ABORT) {
+                if(state->publication_begins!=state->publication_ends+state->publication_aborts+1)error=ERROR_INVALID_STATE;
+                else if(request.operation==CONSOLE_IO_PUBLICATION_END)++state->publication_ends;
+                else ++state->publication_aborts;
+            } else if(request.operation==CONSOLE_IO_SNAPSHOT_BEGIN) {
                 if(state->snapshot_begins!=state->snapshot_ends)error=ERROR_BUSY;
                 else ++state->snapshot_begins;
             } else if(request.operation==CONSOLE_IO_SNAPSHOT_END) {
@@ -270,7 +278,7 @@ static void run_case(unsigned mode)
             if(mode==9) {
                 CONSOLE_SCREEN_BUFFER_INFOEX history={sizeof(history)};
                 CONSOLE_CURSOR_INFO cursor={25,TRUE};
-                COORD tail={19,39},page={0,10};
+                COORD tail={19,39},page={0,7};
                 unsigned repeat;
                 CHECK(GetConsoleScreenBufferInfoEx(buffer,&history));
                 history.dwSize.Y=40;history.srWindow.Top=10;history.srWindow.Bottom=17;
@@ -281,18 +289,18 @@ static void run_case(unsigned mode)
                 for(repeat=0;repeat<2;++repeat) {
                     CHECK(ntvwm_presentation_seed(endpoint,buffer)==0);
                     CHECK(GetConsoleScreenBufferInfo(buffer,&after));
-                    CHECK(after.dwSize.X==20 && after.dwSize.Y==40 &&
-                        after.srWindow.Top==10 && after.srWindow.Bottom==17 &&
-                        after.dwCursorPosition.X==4 && after.dwCursorPosition.Y==12);
-                    CHECK(ReadConsoleOutputCharacterW(buffer,&cell,1,origin,&count) && count==1 && cell=='P');
-                    CHECK(ReadConsoleOutputCharacterW(buffer,&cell,1,tail,&count) && count==1 && cell=='T');
-                    CHECK(ReadConsoleOutputCharacterW(buffer,&cell,1,page,&count) && count==1 && cell=='A');
+                    CHECK(after.dwSize.X==20 && after.dwSize.Y==8 &&
+                        after.srWindow.Top==0 && after.srWindow.Bottom==7 &&
+                        after.dwCursorPosition.X==4 && after.dwCursorPosition.Y==2);
+                    CHECK(ReadConsoleOutputCharacterW(buffer,&cell,1,origin,&count) && count==1 && cell=='A');
+                    CHECK(ReadConsoleOutputCharacterW(buffer,&cell,1,tail,&count) && count==0);
+                    CHECK(ReadConsoleOutputCharacterW(buffer,&cell,1,page,&count) && count==1 && cell=='H');
                 }
             }
             if(mode==20) {
                 CONSOLE_SCREEN_BUFFER_INFOEX history={sizeof(history)};
                 CONSOLE_CURSOR_INFO cursor={25,TRUE};
-                COORD first={0,0},second={0,1},shifted={0,2},last={0,9};
+                COORD first={0,0},second={0,1},shifted={0,2},last={0,7};
                 WCHAR value=0;
                 CHECK(GetConsoleScreenBufferInfoEx(buffer,&history));
                 history.dwSize.Y=40;history.srWindow.Top=0;history.srWindow.Bottom=7;
@@ -300,11 +308,11 @@ static void run_case(unsigned mode)
                 InterlockedExchange(&state.page_shift,2);
                 CHECK(ntvwm_presentation_seed(endpoint,buffer)==0);
                 CHECK(GetConsoleScreenBufferInfo(buffer,&after));
-                CHECK(after.dwSize.Y==40 && after.srWindow.Top==2 &&
-                    after.dwCursorPosition.Y==4);
-                CHECK(ReadConsoleOutputCharacterW(buffer,&value,1,first,&count) && value=='A');
-                CHECK(ReadConsoleOutputCharacterW(buffer,&value,1,second,&count) && value=='B');
-                CHECK(ReadConsoleOutputCharacterW(buffer,&value,1,shifted,&count) && value=='C');
+                CHECK(after.dwSize.Y==8 && after.srWindow.Top==0 &&
+                    after.dwCursorPosition.Y==2);
+                CHECK(ReadConsoleOutputCharacterW(buffer,&value,1,first,&count) && value=='C');
+                CHECK(ReadConsoleOutputCharacterW(buffer,&value,1,second,&count) && value=='D');
+                CHECK(ReadConsoleOutputCharacterW(buffer,&value,1,shifted,&count) && value=='E');
                 CHECK(ReadConsoleOutputCharacterW(buffer,&value,1,last,&count) && value=='J');
             }
             if(mode==11 || mode==13 || mode==16) {

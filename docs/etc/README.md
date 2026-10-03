@@ -2,6 +2,7 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T424 S12 logical surface](evidence/m0-t424-s12-logical-surface.md) | M0 T424 S12 | Unified storage/atomic publication/handoff provenance, tests and release ledger. | Retain through T424 acceptance. |
 | [T424 S11 frontend identity](evidence/m0-t424-s11-frontend-name.md) | M0 T424 S11 | Referent inventory, name-only wiring, retained behavior and recoverable publication. | Retain through naming acceptance. |
 | [T424 S10 frontend notification](evidence/m0-t424-s10-frontend-notification.md) | M0 T424 S10 | Deterministic production-service lost-wakeup reproduction and pending repair gates. | Retain through T424 acceptance. |
 | [T424 S9 native GUI routing](evidence/m0-t424-s9-native-gui-routing.md) | M0 T424 S9 | Ownership audit, implementation increments and GUI routing acceptance checklist. | Retain through T424 acceptance. |

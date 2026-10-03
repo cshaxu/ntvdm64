@@ -55,29 +55,29 @@ Use the delivered S11 package as the regression baseline.
 
 ### Production closure checklist
 
-- [ ] Audit provenance and both text routes before extraction. Rename and
+- [x] Audit provenance and both text routes before extraction. Rename and
   generalize dos_surface into logical_surface; route NTVDM operations/frames
   and NTVWM frames through the same storage and presentation path. Remove
   replaced native direct-to-visible-Console writes and text-render bypasses;
   a field rename or unused wrapper is not completion. Leave original
   OpenNT/MVDM execution and mirror algorithms at their existing owners.
-- [ ] Store complete logical buffer cells/attributes, buffer extent, logical
+- [x] Store complete logical buffer cells/attributes, buffer extent, logical
   viewport origin/extent, buffer-relative cursor, shape/visibility and the
   existing style/font/palette metadata. Host dimensions never truncate this
   storage. Normalize buffer/viewport coordinates once: an 80x30 buffer with
   viewport rows 2..29 and cursor row 29 presents 80x28 with local cursor row 27.
-- [ ] Publish a consistent snapshot under explicit instance state and locks.
+- [x] Publish a consistent snapshot under explicit instance state and locks.
   Per-operation locks alone must not expose mixed geometry, row tiles and
   cursor from different native publications. Define commit/failure behavior
   using existing channel barriers/generations where sufficient; no generic
   scheduler or second task registry. Rendering reads a consistent committed
   snapshot; failed/partial/stale publication cannot replace it.
-- [ ] On a logical dimension change, attempt the appropriate physical resize,
+- [x] On a logical dimension change, attempt the appropriate physical resize,
   then query the actual canvas. Resize rejection or implicit host reflow must
   not mutate logical content. Do not classify Terminal tabs or depend on host
   product names. Window pixel sizing/scaling is separate from text geometry;
   all text remains text rendering, not a large-frame bitmap fallback.
-- [ ] For Console presentation, map the logical viewport's upper-left to the
+- [x] For Console presentation, map the logical viewport's upper-left to the
   actual canvas upper-left. Paint the width/height intersection; clear all
   unused visible right/bottom cells and attributes. Never bottom-align, pan,
   reflow or apply row compensation. Smaller canvases clip presentation only;
@@ -85,26 +85,26 @@ Use the delivered S11 package as the regression baseline.
   cursor rather than clamping it or moving the host viewport. Map mouse
   input through this same intersection; blank margins are not guest cells.
   Window uses the same logical snapshot and existing text renderer semantics.
-- [ ] Implement the same handoff order in both directions: old owner drains
+- [x] Implement the same handoff order in both directions: old owner drains
   and submits final grid/geometry/cursor; frontend acknowledges that snapshot;
   convert only for the incoming worker's capabilities; incoming worker applies
   and acknowledges the actual state; only then release execution/input or
   resumed-parent output. Preserve input order/return and existing I/O barriers.
   Old-owner late output must not overwrite the new owner's state.
-- [ ] Seed workers from the current logical state, never the initial outer CMD
+- [x] Seed workers from the current logical state, never the initial outer CMD
   snapshot or physical host size. Native applications may explicitly change
   geometry; pass that current geometry into the next handoff. DOS keeps the
   original height mapping: <=23 -> 22, 24..26 -> 25, 27..35 -> 28,
   36..46 -> 43, >=47 -> 50. Other capability conversions require audited,
   deterministic worker-supported rules, not host-driven heuristics.
-- [ ] Keep original cell-grid resize semantics: no paragraph reflow; growth
+- [x] Keep original cell-grid resize semantics: no paragraph reflow; growth
   keeps existing rows and appends blanks; shrink shifts the cursor-containing
   tail only when the old cursor is outside the new height, transforming cursor
   consistently. Ordinary DOS release retains current geometry/grid/cursor;
   do not restore launch-time CMD geometry/cursor/page. Stream-I/O-specific
   restoration remains special. DOS graphics stays on its existing graphics
   route, not logical_surface. Host scrollback history is not promised.
-- [ ] Preserve NTSRV registration/binding/lifecycle/results, thin run16 and
+- [x] Preserve NTSRV registration/binding/lifecycle/results, thin run16 and
   direct worker/frontend I/O. Frontend storage/rendering stays frontend-local;
   suitable common transport/validation and worker-base client mechanics remain
   shared. No helper, executable, component, Job/Observed graph, scheduler,
@@ -114,23 +114,30 @@ Use the delivered S11 package as the regression baseline.
 
 ### Required evidence and release
 
-- [ ] Test wider/taller, narrower/taller, wider/shorter and both-smaller canvases,
+- [x] Test wider/taller, narrower/taller, wider/shorter and both-smaller canvases,
   accepted/refused/unapplied physical resize, nonzero viewport origin, edge
   cursors hidden/reappearing, blank-margin characters/attributes and mouse
   coordinates. Prove clipping does not alter logical data or move the viewport.
-- [ ] Test complete/partial/failed publication, concurrent render/capture,
+- [x] Test complete/partial/failed publication, concurrent render/capture,
   stale-owner output, disconnect and both handoff acknowledgements. Assert the
   resumed parent cannot output before final-state application is confirmed.
-- [ ] Exercise DOS -> native -> DOS and native -> DOS -> native, nested and
+- [x] Exercise DOS -> native -> DOS and native -> DOS -> native, nested and
   repeated COMMAND/CMD DIR/MEM, modern EDIT/EDIT.COM full-screen redraw,
   program-requested sizes, Console/Window switches and independent sessions.
   Check coherent grid, geometry, prompt and cursor at every ownership boundary.
-- [ ] Build affected x86 targets; retain lifecycle, handles, native completion,
+- [x] Build affected x86 targets; retain lifecycle, handles, native completion,
   DOS resume, Console17 + Window17 and existing WOW frontier assertions. Record
   exact commands/results, remaining limits and eliminated duplicate paths.
   Publish/hash-check the validated eight-file package to O:/winnt, commit/push
   under execution rules and hand off for owner side testing. Only then S13
   final audit may begin; T closure remains owner-controlled.
+
+The [S12 ledger](../evidence/m0-t424-s12-logical-surface.md) records production
+delivery, actual test commands, failures and release identities. Physical
+resize requests are grow-only; an unapplied/refused request uses actual-canvas
+projection without logical mutation. Desktop/RDP manual behavior remains an
+owner check, and the single unreproduced management-close failure is explicitly
+retained rather than claimed repaired. Neither limits original grid semantics.
 
 ## S10 rapid relaunch and frontend notification checklist
 

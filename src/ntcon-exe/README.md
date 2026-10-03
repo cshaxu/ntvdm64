@@ -3,7 +3,7 @@
 This owner contains visible Console/Window presentation and copied worker
 screen/input channels. NTVDM and NTVWM use the same frame/input contracts.
 NTVWM, not NTCON, owns the ordinary hidden Console and native targets.
-The S12 formal graph no longer selects ConPTY, its terminal parser or a private
+The T423 S12 formal graph no longer selects ConPTY, its terminal parser or a private
 helper. The duplicate native renderer has also been removed. Current delivery
 and remaining acceptance gates are recorded in docs/states/CURRENT.md.
 
@@ -21,9 +21,9 @@ client-only fixture exclude frontend service, input-pump and renderer objects.
 The launcher-owned client library contains bootstrap_client and
 native_request_client under run16-exe. Common owns protocol declarations,
 the copied packet codec and pipe transport; no launcher transfer wrapper remains.
-Target creation is compiled from
-run16-exe/native_launch.c into NTVWM and run16's
-GUI route; it is not part of this frontend or the launcher client archive.
+The shared process primitive in run16-exe/native_launch.c is used by the
+NTVWM target owner and launcher service bootstrap. Native GUI submission also
+goes through NTSRV to NTVWM; it is not a frontend execution route.
 
 The worker-side copied protocol client now belongs to common, not this
 frontend component. Both workers link its ordered transport, validation,
@@ -31,7 +31,7 @@ frame/input codec and resource lifecycle. This owner retains the service,
 renderer and frontend arbitration only; no private worker-client copy remains.
 
 BaseSrv retains authentication and original DOS/WOW records, ntvdm retains
-guest execution, and run16 retains classification and direct-target waiting.
+guest execution, and run16 retains submission and direct-result receipt waiting.
 Do not create a parallel scheduler or duplicate these presentation providers.
 
 `session_service.c` owns the shared worker-channel pump,
@@ -80,13 +80,24 @@ not integrate its position or draw a native arrow. NTVWM composes its text
 block cursor in the common frame; NTVDM retains its original guest cursor.
 No worker depends on this component's private renderer or display dimensions.
 
+T424 S12 unifies Console storage as logical_surface. Native buffer tiles,
+viewport, cursor and text frame are staged under the per-channel publication
+contract; only a complete validated publication replaces the committed grid
+and renderer snapshot. Abort/EOF retains the prior snapshot and anti-replay
+serial. DOS stream operations and complete VGA frames use this same storage.
+Physical Console size clips upper-left projection only; unused visible cells
+are blanked. Host cursor updates are skipped when unchanged, preserving blink.
+Current logical state seeds the next worker; no old-page/row-bias heuristic
+or initial CMD snapshot is a source of truth. Host scrollback is not promised.
+
 ## Retired S9 backend evidence
 
-S9's native_conpty/native_terminal implementation is removed from the S12
-production graph and source. Historical commits and the S9/S12 evidence retain
+T423 S9's native_conpty/native_terminal implementation is removed from its S12
+production graph and source. Historical commits and the T423 S9/S12 evidence retain
 its behavior and experiments; it is not an optional runtime backend. NTVWM
-now packs native characters into the common text ABI. NTCON uses one bitmap
-rasterizer for both workers; font/palette transfer belongs to that shared ABI.
+now packs native characters into the common text ABI. NTCON uses the same
+text renderer for both workers, not a native bitmap-frame fallback;
+font/palette transfer belongs to that shared ABI.
 
 libvterm-import.json, its unchanged MIT source archive and license are retained
 research provenance only. They have no formal production link edge. Historical

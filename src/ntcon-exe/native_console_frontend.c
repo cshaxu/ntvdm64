@@ -23,13 +23,13 @@ struct run16_native_frontend {
     BOOL parked;
     HANDLE stop,refresh,refreshed,thread,changed,park,park_done,control[2];
     DWORD park_error;
-    HANDLE console_input,console_output,console_surface,dos_surface;
+    HANDLE console_input,console_output,console_surface,logical_surface;
     SMALL_RECT logical_window;
+    COORD attempted_canvas;
     /* Root teardown returns the canonical buffer without undoing the DOS
      * worker's final cell grid, viewport, or cursor position. */
     CONSOLE_CURSOR_INFO original_cursor;
     BOOL original_cursor_saved;
-    BOOL native_geometry_pending;
     HANDLE handoff,handoff_done;
     const void *handoff_owner;
     BOOL handoff_active,handoff_native;
@@ -128,79 +128,188 @@ static DWORD copy_grid(HANDLE source,HANDLE target,SMALL_RECT source_rect,COORD 
             actual.Right==target_rect.Right && actual.Bottom==target_rect.Bottom;
     }
     error=ok ? ERROR_SUCCESS : GetLastError();
+    if(!ok && !error)error=ERROR_INVALID_DATA;
     HeapFree(GetProcessHeap(),0,cells);
     return error;
 }
-static DWORD prepare_dos_surface(run16_native_frontend *frontend)
+static DWORD clone_grid(HANDLE source,HANDLE *output)
 {
-    CONSOLE_SCREEN_BUFFER_INFO visible,shadow;
+    CONSOLE_SCREEN_BUFFER_INFO info,target;
+    CONSOLE_CURSOR_INFO cursor;
+    HANDLE copy;
+    SMALL_RECT fit;
+    DWORD error=ERROR_SUCCESS;
+    LONG row;
+    *output=NULL;
+    if(!GetConsoleScreenBufferInfo(source,&info) || !GetConsoleCursorInfo(source,&cursor))
+        return GetLastError();
+    copy=CreateConsoleScreenBuffer(GENERIC_READ|GENERIC_WRITE,
+        FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,CONSOLE_TEXTMODE_BUFFER,NULL);
+    if(copy==INVALID_HANDLE_VALUE)return GetLastError();
+    if(!GetConsoleScreenBufferInfo(copy,&target)){error=GetLastError();goto fail;}
+    fit=(SMALL_RECT){0,0,min(info.dwSize.X,target.dwSize.X)-1,
+        min(info.dwSize.Y,target.dwSize.Y)-1};
+    if(!SetConsoleWindowInfo(copy,TRUE,&fit) || !SetConsoleScreenBufferSize(copy,info.dwSize)) {
+        error=GetLastError();goto fail;
+    }
+    for(row=0;row<info.dwSize.Y;) {
+        SHORT rows=(SHORT)min(info.dwSize.Y-row,max(1,4096/info.dwSize.X));
+        error=copy_grid(source,copy,(SMALL_RECT){0,(SHORT)row,info.dwSize.X-1,(SHORT)(row+rows-1)},(COORD){0,(SHORT)row});
+        if(error)goto fail;
+        row+=rows;
+    }
+    if(!SetConsoleCursorPosition(copy,info.dwCursorPosition) ||
+        !SetConsoleCursorInfo(copy,&cursor) || !SetConsoleTextAttribute(copy,info.wAttributes)) {
+        error=GetLastError();goto fail;
+    }
+    *output=copy;return ERROR_SUCCESS;
+fail:
+    CloseHandle(copy);return error;
+}
+DWORD run16_native_frontend_clone_text(run16_native_frontend *frontend,HANDLE *output,SMALL_RECT *window)
+{
+    DWORD error;
+    if(!frontend || !output || !window)return ERROR_INVALID_PARAMETER;
+    *output=NULL;
+    error=clone_grid(frontend->logical_surface,output);
+    if(!error)*window=frontend->logical_window;
+    return error;
+}
+DWORD run16_native_frontend_commit_text(run16_native_frontend *frontend,HANDLE surface,SMALL_RECT window)
+{
+    HANDLE previous=frontend->logical_surface;
+    frontend->logical_surface=surface;frontend->logical_window=window;
+    CloseHandle(previous);
+    return run16_native_frontend_project_text(frontend);
+}
+/* A VGA text frame is a complete cell publication, not a bitmap. Decode only
+ * the worker's byte glyphs into the same Console cell storage used by stream
+ * operations. Fonts/palette remain the worker's copied presentation metadata. */
+static DWORD import_dos_text(run16_native_frontend *frontend,const run16_console_video *video)
+{
+    const console_text_style *style=(const console_text_style *)video->pixels;
+    const BYTE *text=video->pixels+sizeof(*style);
+    COORD size={(SHORT)video->description.width,(SHORT)video->description.height},origin={0,0};
+    SMALL_RECT rect={0,0,size.X-1,size.Y-1};
+    CONSOLE_SCREEN_BUFFER_INFO info;
+    CONSOLE_CURSOR_INFO cursor;
+    HANDLE incoming=NULL;
+    CHAR_INFO *cells;
+    DWORD error,index,count=(DWORD)size.X*size.Y,step=video->description.stride/size.X;
+    error=clone_grid(frontend->logical_surface,&incoming);if(error)return error;
+    cells=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,count*sizeof(*cells));
+    if(!cells){CloseHandle(incoming);return ERROR_NOT_ENOUGH_MEMORY;}
+    for(index=0;index<count;++index) {
+        char glyph=(char)text[index*step];
+        if(!MultiByteToWideChar(GetConsoleOutputCP(),0,&glyph,1,&cells[index].Char.UnicodeChar,1)) {
+            error=GetLastError();goto done;
+        }
+        cells[index].Attributes=text[index*step+1];
+    }
+    if(!GetConsoleScreenBufferInfo(incoming,&info)){error=GetLastError();goto done;}
+    {
+        SMALL_RECT fit={0,0,min(size.X,info.dwSize.X)-1,min(size.Y,info.dwSize.Y)-1};
+        if(!SetConsoleWindowInfo(incoming,TRUE,&fit) || !SetConsoleScreenBufferSize(incoming,size) ||
+            !WriteConsoleOutputW(incoming,cells,size,origin,&rect)) {error=GetLastError();goto done;}
+    }
+    cursor.dwSize=max(1,min(100,style->cursor_height*100/(int)style->font_height));
+    cursor.bVisible=style->cursor_visible && style->cursor_column>=0 && style->cursor_row>=0 &&
+        style->cursor_column<size.X && style->cursor_row<size.Y;
+    if(!SetConsoleCursorInfo(incoming,&cursor) || (cursor.bVisible &&
+        !SetConsoleCursorPosition(incoming,(COORD){(SHORT)style->cursor_column,(SHORT)style->cursor_row}))) {
+        error=GetLastError();goto done;
+    }
+    error=run16_native_frontend_commit_text(frontend,incoming,(SMALL_RECT){0,0,size.X-1,size.Y-1});
+    incoming=NULL;
+done:
+    HeapFree(GetProcessHeap(),0,cells);if(incoming)CloseHandle(incoming);return error;
+}
+static DWORD prepare_logical_surface(run16_native_frontend *frontend)
+{
+    CONSOLE_SCREEN_BUFFER_INFO visible;
     SMALL_RECT shrink,window;
     COORD cursor,viewport_size;
     DWORD error;
-    if(!GetConsoleScreenBufferInfo(frontend->console_output,&visible))return GetLastError();
-    if(!frontend->dos_surface) {
-        frontend->dos_surface=CreateConsoleScreenBuffer(GENERIC_READ|GENERIC_WRITE,
-            FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,CONSOLE_TEXTMODE_BUFFER,NULL);
-        if(frontend->dos_surface==INVALID_HANDLE_VALUE) {
-            frontend->dos_surface=NULL;return GetLastError();
-        }
-    }
-    if(!GetConsoleScreenBufferInfo(frontend->dos_surface,&shadow))return GetLastError();
-    viewport_size=(COORD){visible.srWindow.Right-visible.srWindow.Left+1,
-        visible.srWindow.Bottom-visible.srWindow.Top+1};
-    shrink=(SMALL_RECT){0,0,min(shadow.dwSize.X,viewport_size.X)-1,
-        min(shadow.dwSize.Y,viewport_size.Y)-1};
-    if(!SetConsoleWindowInfo(frontend->dos_surface,TRUE,&shrink) ||
-        !SetConsoleScreenBufferSize(frontend->dos_surface,viewport_size))return GetLastError();
-    window=(SMALL_RECT){0,0,viewport_size.X-1,viewport_size.Y-1};
-    if(!SetConsoleWindowInfo(frontend->dos_surface,TRUE,&window))return GetLastError();
-    error=copy_grid(frontend->console_output,frontend->dos_surface,
-        visible.srWindow,(COORD){0,0});
-    if(error)return error;
-    cursor=(COORD){visible.dwCursorPosition.X-visible.srWindow.Left,
-        visible.dwCursorPosition.Y-visible.srWindow.Top};
+    HANDLE incoming=NULL;
+    if(!GetConsoleScreenBufferInfo(frontend->logical_surface,&visible))return GetLastError();
+    viewport_size=(COORD){frontend->logical_window.Right-frontend->logical_window.Left+1,
+        frontend->logical_window.Bottom-frontend->logical_window.Top+1};
+    /* Capability conversion operates on the current logical viewport, never
+     * the host canvas. Copy before shrinking so offset viewports survive. */
+    error=clone_grid(frontend->logical_surface,&incoming);if(error)return error;
+    error=copy_grid(frontend->logical_surface,incoming,frontend->logical_window,(COORD){0,0});
+    if(error)goto fail;
+    cursor=(COORD){visible.dwCursorPosition.X-frontend->logical_window.Left,
+        visible.dwCursorPosition.Y-frontend->logical_window.Top};
     if(cursor.X<0 || cursor.Y<0 || cursor.X>=viewport_size.X ||
         cursor.Y>=viewport_size.Y)cursor=(COORD){0,0};
-    if(!SetConsoleCursorPosition(frontend->dos_surface,cursor))return GetLastError();
-    frontend->logical_window=window;
-    error=run16_console_prepare_dos(frontend->dos_surface,&frontend->logical_window);
-    if(error)return error;
-    frontend->native_geometry_pending=FALSE;
-    return run16_native_frontend_project_dos(frontend);
+    if(!SetConsoleCursorPosition(incoming,cursor)){error=GetLastError();goto fail;}
+    shrink=(SMALL_RECT){0,0,min(visible.dwSize.X,viewport_size.X)-1,
+        min(visible.dwSize.Y,viewport_size.Y)-1};
+    /* Window changes can resize/reflow even an inactive ConPTY buffer.
+     * Preserve the copied cells at both calls, before VGA conversion. */
+    if(!opennt_console_resize_grid(incoming,NULL,TRUE,&shrink) ||
+        !opennt_console_resize_grid(incoming,&viewport_size,FALSE,NULL)){error=GetLastError();goto fail;}
+    window=(SMALL_RECT){0,0,viewport_size.X-1,viewport_size.Y-1};
+    error=run16_console_prepare_dos(incoming,&window);
+    if(error)goto fail;
+    return run16_native_frontend_commit_text(frontend,incoming,window);
+fail:
+    CloseHandle(incoming);return error;
 }
-DWORD run16_native_frontend_project_dos(run16_native_frontend *frontend)
+DWORD run16_native_frontend_project_text(run16_native_frontend *frontend)
 {
     CONSOLE_SCREEN_BUFFER_INFO logical,visible;
+    CONSOLE_CURSOR_INFO shape,visible_shape;
     DWORD count,error;
     COORD cursor;
-    if(!frontend || !frontend->dos_surface)return ERROR_INVALID_STATE;
-    if(!GetConsoleScreenBufferInfo(frontend->dos_surface,&logical) ||
-        !GetConsoleScreenBufferInfo(frontend->console_output,&visible))return GetLastError();
-    /* The host viewport may be one row shorter than OpenNT's selected VGA
-     * mode (for example, 24 visible rows select DOS 25). Keep the complete
-     * logical page in the canonical buffer; the cursor lets Console choose
-     * which portion is physically visible. Never reject the DOS activation. */
-    if((LONG)visible.srWindow.Left+logical.dwSize.X>SHRT_MAX ||
-        (LONG)visible.srWindow.Top+logical.dwSize.Y>SHRT_MAX)
-        return ERROR_ARITHMETIC_OVERFLOW;
-    if(visible.dwSize.X<visible.srWindow.Left+logical.dwSize.X ||
-        visible.dwSize.Y<visible.srWindow.Top+logical.dwSize.Y) {
-        COORD size={max(visible.dwSize.X,(SHORT)(visible.srWindow.Left+logical.dwSize.X)),
-            max(visible.dwSize.Y,(SHORT)(visible.srWindow.Top+logical.dwSize.Y))};
-        if(!SetConsoleScreenBufferSize(frontend->console_output,size))return GetLastError();
+    SHORT width,height,canvas_width,canvas_height;
+    SMALL_RECT source;
+    if(!frontend || !frontend->logical_surface)return ERROR_INVALID_STATE;
+    if(!GetConsoleScreenBufferInfo(frontend->logical_surface,&logical) ||
+        !GetConsoleScreenBufferInfo(frontend->console_output,&visible) ||
+        !GetConsoleCursorInfo(frontend->logical_surface,&shape) ||
+        !GetConsoleCursorInfo(frontend->console_output,&visible_shape))return GetLastError();
+    {
+        COORD requested={frontend->logical_window.Right-frontend->logical_window.Left+1,
+            frontend->logical_window.Bottom-frontend->logical_window.Top+1};
+        if(frontend->attempted_canvas.X!=requested.X || frontend->attempted_canvas.Y!=requested.Y) {
+            SMALL_RECT fit=visible.srWindow;
+            frontend->attempted_canvas=requested;
+            /* A refused/unapplied host resize is not a logical resize. Bound
+             * the request to representable host storage and query its result. */
+            /* Do not shrink the host canvas: an embedded terminal can retain
+             * its outer rows despite that API succeeding. Unused rows belong
+             * to projection clearing, not a fabricated smaller host page. */
+            fit.Right=fit.Left+max(visible.srWindow.Right-visible.srWindow.Left+1,
+                min(requested.X,min(visible.dwMaximumWindowSize.X,visible.dwSize.X-fit.Left)))-1;
+            fit.Bottom=fit.Top+max(visible.srWindow.Bottom-visible.srWindow.Top+1,
+                min(requested.Y,min(visible.dwMaximumWindowSize.Y,visible.dwSize.Y-fit.Top)))-1;
+            if(memcmp(&fit,&visible.srWindow,sizeof(fit)))
+                (void)SetConsoleWindowInfo(frontend->console_output,TRUE,&fit);
+            if(!GetConsoleScreenBufferInfo(frontend->console_output,&visible))return GetLastError();
+        }
     }
-    error=copy_grid(frontend->dos_surface,frontend->console_output,
-        (SMALL_RECT){0,0,logical.dwSize.X-1,logical.dwSize.Y-1},
+    canvas_width=visible.srWindow.Right-visible.srWindow.Left+1;
+    canvas_height=visible.srWindow.Bottom-visible.srWindow.Top+1;
+    width=min(canvas_width,frontend->logical_window.Right-frontend->logical_window.Left+1);
+    height=min(canvas_height,frontend->logical_window.Bottom-frontend->logical_window.Top+1);
+    if(width<=0 || height<=0)return ERROR_INVALID_DATA;
+    source=(SMALL_RECT){frontend->logical_window.Left,frontend->logical_window.Top,
+        frontend->logical_window.Left+width-1,frontend->logical_window.Top+height-1};
+    /* Presentation never resizes storage to force a cursor into view. The
+     * queried physical canvas only clips this copy; logical data survives. */
+    error=copy_grid(frontend->logical_surface,frontend->console_output,
+        source,
         (COORD){visible.srWindow.Left,visible.srWindow.Top});
     if(error)return error;
-    if(visible.srWindow.Right-visible.srWindow.Left+1>logical.dwSize.X ||
-        visible.srWindow.Bottom-visible.srWindow.Top+1>logical.dwSize.Y) {
+    if(canvas_width>width || canvas_height>height) {
         SHORT row;
         for(row=visible.srWindow.Top;row<=visible.srWindow.Bottom;++row) {
             COORD start;
             DWORD excess;
-            if(row<visible.srWindow.Top+logical.dwSize.Y) {
-                start=(COORD){visible.srWindow.Left+logical.dwSize.X,row};
+            if(row<visible.srWindow.Top+height) {
+                start=(COORD){visible.srWindow.Left+width,row};
                 excess=visible.srWindow.Right-start.X+1;
             } else {
                 start=(COORD){visible.srWindow.Left,row};
@@ -215,9 +324,16 @@ DWORD run16_native_frontend_project_dos(run16_native_frontend *frontend)
             if(count!=excess)return ERROR_WRITE_FAULT;
         }
     }
-    cursor=(COORD){visible.srWindow.Left+logical.dwCursorPosition.X,
-        visible.srWindow.Top+logical.dwCursorPosition.Y};
-    if(!SetConsoleCursorPosition(frontend->console_output,cursor))return GetLastError();
+    cursor=(COORD){logical.dwCursorPosition.X-frontend->logical_window.Left,
+        logical.dwCursorPosition.Y-frontend->logical_window.Top};
+    if(cursor.X<0 || cursor.Y<0 || cursor.X>=width || cursor.Y>=height)shape.bVisible=FALSE;
+    else {
+        cursor.X+=visible.srWindow.Left;cursor.Y+=visible.srWindow.Top;
+        if((cursor.X!=visible.dwCursorPosition.X || cursor.Y!=visible.dwCursorPosition.Y) &&
+            !SetConsoleCursorPosition(frontend->console_output,cursor))return GetLastError();
+    }
+    if((shape.dwSize!=visible_shape.dwSize || shape.bVisible!=visible_shape.bVisible) &&
+        !SetConsoleCursorInfo(frontend->console_output,&shape))return GetLastError();
     return ERROR_SUCCESS;
 }
 /* Copied frontend transport records, serialized by io_lock. Windows still
@@ -331,6 +447,12 @@ static DWORD console_input(void *context,const INPUT_RECORD *record,BOOL *keep)
 {
     run16_native_frontend *frontend=context;
     *keep=TRUE;
+    if(record->EventType==WINDOW_BUFFER_SIZE_EVENT) {
+        /* A visible-canvas event is not a resize of either worker's execution
+         * Console. Reproject committed state; do not forward host geometry. */
+        *keep=FALSE;
+        return run16_native_frontend_project_text(frontend);
+    }
     if(record->EventType==KEY_EVENT && record->Event.KeyEvent.wVirtualKeyCode=='F') {
         const KEY_EVENT_RECORD *key=&record->Event.KeyEvent;
         BOOL chord=(key->dwControlKeyState&(LEFT_CTRL_PRESSED|RIGHT_CTRL_PRESSED)) &&
@@ -367,6 +489,18 @@ static DWORD collect_dos_console(run16_native_frontend *frontend)
         if(frontend->window_active)continue; /* Inactive physical source. */
         for(i=0;i<count;++i) {
             BOOL keep;
+            if(records[i].EventType==MOUSE_EVENT) {
+                CONSOLE_SCREEN_BUFFER_INFO canvas;
+                COORD *point=&records[i].Event.MouseEvent.dwMousePosition;
+                SHORT width=frontend->logical_window.Right-frontend->logical_window.Left+1;
+                SHORT height=frontend->logical_window.Bottom-frontend->logical_window.Top+1;
+                if(!GetConsoleScreenBufferInfo(frontend->console_output,&canvas))return GetLastError();
+                point->X-=canvas.srWindow.Left;point->Y-=canvas.srWindow.Top;
+                if(point->X<0 || point->Y<0 || point->X>=width || point->Y>=height ||
+                    point->X>canvas.srWindow.Right-canvas.srWindow.Left ||
+                    point->Y>canvas.srWindow.Bottom-canvas.srWindow.Top)continue;
+                point->X+=frontend->logical_window.Left;point->Y+=frontend->logical_window.Top;
+            }
             error=console_input(frontend,&records[i],&keep);if(error)return error;
             if(keep)records[kept++]=records[i];
         }
@@ -438,7 +572,7 @@ static DWORD present_loop(run16_native_frontend *frontend)
             uint32_t serial=video->published_serial;
             if(serial!=*published && (!video->pending || video->pixels)) {
                 if(video->pixels) {
-                    lib_u32 width,height;
+                    lib_u32 width=0,height=0;
                     error=frontend_window_dos_frame(video,frontend->window_frame);
                     if(!error && !kvm_window_frame_size(frontend->window_frame,&width,&height))
                         error=ERROR_INVALID_DATA;
@@ -506,10 +640,14 @@ DWORD run16_native_frontend_create(run16_native_frontend **output)
             error=GetLastError();run16_native_frontend_destroy(frontend);return error;
         }
         frontend->logical_window=info.srWindow;
+        frontend->attempted_canvas=(COORD){info.srWindow.Right-info.srWindow.Left+1,
+            info.srWindow.Bottom-info.srWindow.Top+1};
         if(!GetConsoleCursorInfo(frontend->console_output,&frontend->original_cursor)) {
             error=GetLastError();run16_native_frontend_destroy(frontend);return error;
         }
         frontend->original_cursor_saved=TRUE;
+        error=clone_grid(frontend->console_output,&frontend->logical_surface);
+        if(error){run16_native_frontend_destroy(frontend);return error;}
     }
     if(!GetConsoleMode(frontend->console_input,&frontend->original_input_mode)) {
         error=GetLastError();run16_native_frontend_destroy(frontend);return error;
@@ -558,11 +696,11 @@ DWORD run16_native_frontend_console(run16_native_frontend *frontend,HANDLE *inpu
     }
     return ERROR_SUCCESS;
 }
-DWORD run16_native_frontend_dos_console(run16_native_frontend *frontend,HANDLE *output)
+DWORD run16_native_frontend_logical_console(run16_native_frontend *frontend,HANDLE *output)
 {
-    if(!frontend || !output || !frontend->dos_surface)return ERROR_INVALID_PARAMETER;
+    if(!frontend || !output || !frontend->logical_surface)return ERROR_INVALID_PARAMETER;
     *output=NULL;
-    return DuplicateHandle(GetCurrentProcess(),frontend->dos_surface,GetCurrentProcess(),
+    return DuplicateHandle(GetCurrentProcess(),frontend->logical_surface,GetCurrentProcess(),
         output,0,FALSE,DUPLICATE_SAME_ACCESS) ? ERROR_SUCCESS : GetLastError();
 }
 DWORD run16_native_frontend_display(run16_native_frontend *frontend,BOOL window)
@@ -641,33 +779,23 @@ static DWORD apply_binding(run16_native_frontend *frontend,const void *owner,BOO
     /* A borrowed root restores the outer CMD's cooked mode while idle. Its
      * resident worker resumes the mode it had before that temporary return. */
     if(active && frontend->parked) {
+        HANDLE incoming=NULL;
+        CONSOLE_SCREEN_BUFFER_INFO current;
+        /* The outer shell legitimately owned the canonical page while parked.
+         * Import that new page once at reacquisition, never during handoff. */
+        error=GetConsoleScreenBufferInfo(frontend->console_output,&current) ?
+            clone_grid(frontend->console_output,&incoming) : GetLastError();
+        if(error)return error;
+        CloseHandle(frontend->logical_surface);frontend->logical_surface=incoming;
+        frontend->logical_window=current.srWindow;
         if(!SetConsoleMode(frontend->console_input,frontend->parked_input_mode))
             return GetLastError();
         frontend->parked=FALSE;
     }
     if(!native && active) {
-        error=prepare_dos_surface(frontend);
+        error=prepare_logical_surface(frontend);
         if(error)return error;
     }
-    if(native && active) {
-        CONSOLE_SCREEN_BUFFER_INFO info;
-        SHORT width=frontend->logical_window.Right-frontend->logical_window.Left+1;
-        SHORT height=frontend->logical_window.Bottom-frontend->logical_window.Top+1;
-        if(!GetConsoleScreenBufferInfo(frontend->console_output,&info))return GetLastError();
-        /* DOS uses a zero-origin surface; native seeding reads the canonical
-         * buffer and its absolute cursor. Preserve the logical extent, but
-         * put its viewport in that same coordinate system before publishing
-         * ownership. A mixed-origin VT seed can scroll onto the wrong row. */
-        if(width<=0 || height<=0 ||
-            (LONG)info.srWindow.Left+width>info.dwSize.X ||
-            (LONG)info.srWindow.Top+height>info.dwSize.Y)return ERROR_INVALID_DATA;
-        frontend->logical_window=(SMALL_RECT){info.srWindow.Left,info.srWindow.Top,
-            info.srWindow.Left+width-1,info.srWindow.Top+height-1};
-    }
-    /* Initial DOS startup retains the original Console scrollback path.
-     * Only a published native page needs conversion before DOS resumes. */
-    if(native && !active && frontend->native_video && frontend->native_video->pixels)
-        frontend->native_geometry_pending=TRUE;
     if(frontend->dos_mouse.width)
         error=frontend_window_mode(frontend->window)==FRONTEND_DISPLAY_WINDOW ?
             frontend_window_poll(frontend->window) : frontend_window_clear(frontend->window);
@@ -779,6 +907,11 @@ DWORD run16_native_frontend_dos_video(run16_native_frontend *frontend,const void
 {
     DWORD error=run16_native_frontend_dos_enter(frontend,owner);
     if(error)return error;
+    if(frontend->dos_owner==owner && !video->pending && video->pixels &&
+        video->description.kind==CONSOLE_VIDEO_TEXT_FRAME) {
+        error=import_dos_text(frontend,video);
+        if(error){run16_native_frontend_dos_leave(frontend);return error;}
+    }
     if(!video->pending && (video->configuration_serial>video->published_serial ||
         (video->pixels && video->description.kind==CONSOLE_VIDEO_TEXT_FRAME))) {
         console_text_configuration copy;
@@ -903,7 +1036,7 @@ DWORD run16_native_frontend_destroy(run16_native_frontend *frontend)
         CloseHandle(frontend->console_surface);
         frontend->console_surface=NULL;
     }
-    if(frontend->dos_surface) {CloseHandle(frontend->dos_surface);frontend->dos_surface=NULL;}
+    if(frontend->logical_surface) {CloseHandle(frontend->logical_surface);frontend->logical_surface=NULL;}
     error=restore_cursor_shape(frontend);
     if(error)return error;
     if(frontend->input_mode_saved) {

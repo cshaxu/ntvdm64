@@ -177,8 +177,8 @@ static void run_case(unsigned mode,unsigned round)
         CHECK(GetHandleInformation(channel->console.output,&flags) && !(flags&HANDLE_FLAG_INHERIT));
         CHECK(GetHandleInformation(channel->console.input,&flags) && !(flags&HANDLE_FLAG_INHERIT));
     }
-    if(mode==5)CHECK(!activate(channel,TRUE,CONSOLE_IO_WORKER_NATIVE));
-    else CHECK(!run16_native_frontend_dos_bind(test_frontend,channel,TRUE));
+    if(mode>=5)CHECK(!activate(channel,TRUE,CONSOLE_IO_WORKER_NATIVE));
+    else CHECK(!activate(channel,TRUE,CONSOLE_IO_WORKER_DOS));
     CHECK(DuplicateHandle(GetCurrentProcess(),channel->thread,GetCurrentProcess(),
         &thread,0,FALSE,DUPLICATE_SAME_ACCESS));
     CHECK(DuplicateHandle(GetCurrentProcess(),channel->ready,GetCurrentProcess(),
@@ -411,6 +411,25 @@ static void run_case(unsigned mode,unsigned round)
         CHECK(!channel->snapshot_held);
         if(!round)puts("PASS native snapshot blocks concurrent screen owner until END; EOF and invalid activation release held lock");
     }
+    if(mode==6) {
+        HANDLE committed;WCHAR cell;DWORD count;
+        console_io_cell replacement={'R',0x4f};
+        request.sequence=2;request.operation=CONSOLE_IO_PUBLICATION_BEGIN;
+        peer_io(TRUE,&request,(DWORD)offsetof(console_io_request,data));
+        peer_io(FALSE,&reply,(DWORD)offsetof(console_io_reply,data));CHECK(reply.result);
+        request.sequence=3;request.operation=CONSOLE_IO_WRITE_CELLS_W;
+        request.state.width=request.state.height=1;request.bytes=sizeof(replacement);
+        memcpy(request.data,&replacement,sizeof(replacement));
+        peer_io(TRUE,&request,(DWORD)offsetof(console_io_request,data)+request.bytes);
+        peer_io(FALSE,&reply,(DWORD)offsetof(console_io_reply,data));CHECK(reply.result);
+        CloseHandle(peer);peer=NULL;
+        CHECK(WaitForSingleObject(thread,5000)==WAIT_OBJECT_0);
+        CHECK(!channel->publication_surface);
+        CHECK(!run16_native_frontend_logical_console(test_frontend,&committed));
+        CHECK(ReadConsoleOutputCharacterW(committed,&cell,1,(COORD){0,0},&count) && count==1 && cell==L'K');
+        CloseHandle(committed);
+        fprintf(private_report ? private_report : stdout,"PASS real pipe EOF aborts unpublished native grid without replacing committed cells\n");
+    }
     if(mode==3 || mode==4) {
         OVERLAPPED io={0};BYTE byte;DWORD done=0,error;
         io.hEvent=CreateEventW(NULL,TRUE,FALSE,NULL);CHECK(io.hEvent);
@@ -509,7 +528,6 @@ static void test_native_projected_viewport(HANDLE output)
     CHECK(SetConsoleScreenBufferSize(output,(COORD){80,30}));
     CHECK(WriteConsoleOutputCharacterW(output,L"N",1,(COORD){0,29},&count) && count==1);
     owner.output=output;owner.generation=1;owner.logical_window=&logical;
-    owner.projected_viewport=TRUE;
     request.version=CONSOLE_IO_VERSION;request.generation=1;request.sequence=1;
     request.operation=CONSOLE_IO_WINDOW_RECT;request.state.mode=1;
     request.state.top=2;request.state.right=79;request.state.bottom=29;
@@ -554,7 +572,8 @@ static void test_native_geometry_projection(SHORT rows)
     request.state.right=logical.Right;request.state.bottom=logical.Bottom;
     CHECK(!actual_dispatch(&owner,&request,&reply) && !reply.error);
     CHECK(GetConsoleScreenBufferInfo(output,&info));
-    CHECK(!memcmp(&info.srWindow,&logical,sizeof(logical)));
+    CHECK(!memcmp(&info.srWindow,&large,sizeof(large)));
+    CHECK(logical.Bottom==rows-1 && info.dwSize.Y==60);
     CHECK(info.dwCursorPosition.X==3 && info.dwCursorPosition.Y==11);
     /* A second identical request is a verified no-op, not a cached guess. */
     ++request.sequence;
@@ -575,7 +594,7 @@ static void test_native_geometry_projection(SHORT rows)
     ++request.sequence;request.operation=CONSOLE_IO_WINDOW_RECT;
     request.state.bottom=29;
     CHECK(!actual_dispatch(&owner,&request,&reply) && !reply.error);
-    CHECK(GetConsoleScreenBufferInfo(output,&info) && info.dwSize.Y==60 && info.srWindow.Bottom==29);
+    CHECK(GetConsoleScreenBufferInfo(output,&info) && info.dwSize.Y==60 && logical.Bottom==29);
     CHECK(ReadConsoleOutputCharacterW(output,&cell,1,(COORD){7,17},&count) && count==1 && cell==L'P');
     CHECK(info.dwCursorPosition.X==3 && info.dwCursorPosition.Y==11);
     test_native_projected_viewport(output);
@@ -603,10 +622,9 @@ static void test_native_seed_origin(HANDLE canonical)
     CHECK(!run16_native_frontend_create(&frontend));
     CHECK(!run16_native_frontend_console(frontend,&input,&output));
     logical=run16_native_frontend_text_region(frontend);
-    /* The DOS producer's surface-local rectangle must not be paired with
-     * the canonical absolute cursor in the next native seed. */
-    *logical=(SMALL_RECT){0,0,79,27};
     CHECK(!run16_native_frontend_native_bind(frontend,&owner,TRUE));
+    CloseHandle(output);
+    CHECK(!run16_native_frontend_logical_console(frontend,&output));
     owner.output=output;owner.logical_window=logical;owner.generation=1;
     request.version=CONSOLE_IO_VERSION;request.generation=1;request.sequence=1;
     request.operation=CONSOLE_IO_SCREEN_INFO;
@@ -628,6 +646,160 @@ static void test_native_seed_origin(HANDLE canonical)
     CloseHandle(output);CloseHandle(input);
     fprintf(private_report ? private_report : stdout,
         "PASS native seed absolute origin, unchanged logical extent/grid/cursor/VT, real CRLF and teardown\n");
+}
+static void test_dos_conversion_thresholds(void)
+{
+    const SHORT heights[]={23,24,26,27,30,35,36,46,47,50};
+    const SHORT expected[]={22,25,25,28,28,28,43,43,50,50};
+    for(unsigned index=0;index<sizeof(heights)/sizeof(*heights);++index) {
+        HANDLE output=CreateConsoleScreenBuffer(GENERIC_READ|GENERIC_WRITE,
+            FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,CONSOLE_TEXTMODE_BUFFER,NULL);
+        CONSOLE_SCREEN_BUFFER_INFO info;SMALL_RECT physical={0,0,79,19};
+        SMALL_RECT logical={0,0,79,heights[index]-1};DWORD count;WCHAR cell;
+        CHECK(output!=INVALID_HANDLE_VALUE && SetConsoleWindowInfo(output,TRUE,&physical));
+        CHECK(SetConsoleScreenBufferSize(output,(COORD){80,heights[index]}));
+        for(SHORT row=0;row<heights[index];++row) {
+            WCHAR marker=L'A'+row%26;
+            CHECK(WriteConsoleOutputCharacterW(output,&marker,1,(COORD){0,row},&count) && count==1);
+        }
+        CHECK(SetConsoleCursorPosition(output,(COORD){0,heights[index]-1}));
+        CHECK(!run16_console_prepare_dos(output,&logical));
+        CHECK(GetConsoleScreenBufferInfo(output,&info) && info.dwSize.X==80 &&
+            info.dwSize.Y==expected[index] && info.dwCursorPosition.Y==min(heights[index]-1,expected[index]-1));
+        CHECK(logical.Top==0 && logical.Bottom==expected[index]-1);
+        CHECK(ReadConsoleOutputCharacterW(output,&cell,1,(COORD){0,0},&count) && count==1 &&
+            cell==L'A'+max(0,heights[index]-expected[index])%26);
+        if(expected[index]>heights[index])
+            CHECK(ReadConsoleOutputCharacterW(output,&cell,1,(COORD){0,expected[index]-1},&count) && count==1 && cell==L' ');
+        CloseHandle(output);
+    }
+    fprintf(private_report ? private_report : stdout,
+        "PASS ten original VGA height thresholds; cursor-containing row retention and blank growth\n");
+}
+typedef struct publication_read_case {
+    WCHAR cell;
+    CONSOLE_SCREEN_BUFFER_INFO info;
+    DWORD error;
+} publication_read_case;
+static DWORD WINAPI publication_reader(void *context)
+{
+    publication_read_case *read=context;
+    HANDLE logical=NULL;DWORD count;
+    run16_native_frontend_snapshot_begin(test_frontend);
+    read->error=run16_native_frontend_logical_console(test_frontend,&logical);
+    if(!read->error && (!ReadConsoleOutputCharacterW(logical,&read->cell,1,
+        (COORD){0,2},&count) || count!=1 || !GetConsoleScreenBufferInfo(logical,&read->info)))
+        read->error=GetLastError() ? GetLastError() : ERROR_READ_FAULT;
+    if(logical)CloseHandle(logical);
+    run16_native_frontend_snapshot_end(test_frontend);
+    return read->error;
+}
+static void test_logical_publication(void)
+{
+    run16_console_channel channel={0};
+    HANDLE committed,staging,canonical,input;
+    CONSOLE_SCREEN_BUFFER_INFO info,after;
+    console_video_description description={0};
+    console_text_style *style;
+    BYTE *payload;
+    DWORD count,bytes;WCHAR cell;
+    SMALL_RECT window;
+    channel.root=test_frontend;channel.native=TRUE;
+    CHECK(!run16_native_frontend_native_bind(test_frontend,&channel,TRUE));
+    CHECK(!run16_native_frontend_console(test_frontend,&input,&canonical));
+    CHECK(!run16_native_frontend_logical_console(test_frontend,&channel.console.output));
+    channel.console.logical_window=run16_native_frontend_text_region(test_frontend);
+    CHECK(!enter(&channel));
+    CHECK(!run16_native_frontend_clone_text(test_frontend,&staging,&window));
+    CHECK(SetConsoleWindowInfo(staging,TRUE,&(SMALL_RECT){0,0,79,24}));
+    CHECK(SetConsoleScreenBufferSize(staging,(COORD){80,30}));
+    CHECK(SetConsoleCursorPosition(staging,(COORD){7,29}));
+    CHECK(WriteConsoleOutputCharacterW(staging,L"A",1,(COORD){0,2},&count) && count==1);
+    CHECK(!run16_native_frontend_commit_text(test_frontend,staging,(SMALL_RECT){0,2,79,29}));
+    CloseHandle(channel.console.output);
+    CHECK(!run16_native_frontend_logical_console(test_frontend,&channel.console.output));
+    CHECK(!publication(&channel,CONSOLE_IO_PUBLICATION_BEGIN));
+    CHECK(publication(&channel,CONSOLE_IO_PUBLICATION_BEGIN)==ERROR_BUSY);
+    CHECK(WriteConsoleOutputCharacterW(channel.console.output,L"B",1,(COORD){0,2},&count) && count==1);
+    {
+        publication_read_case read={0};HANDLE reader;
+        /* Unlike a single locked fixture call, production releases the root
+         * lock between incoming tiles. A different reader must see the prior
+         * complete grid, not this publication's candidate cell/geometry. */
+        leave(&channel);
+        reader=CreateThread(NULL,0,publication_reader,&read,0,NULL);CHECK(reader);
+        CHECK(WaitForSingleObject(reader,3000)==WAIT_OBJECT_0);
+        CloseHandle(reader);
+        CHECK(!read.error && read.cell==L'A' && read.info.dwSize.Y==30 &&
+            read.info.dwCursorPosition.Y==29);
+        CHECK(!enter(&channel));
+    }
+    CHECK(!run16_native_frontend_logical_console(test_frontend,&committed));
+    CHECK(ReadConsoleOutputCharacterW(committed,&cell,1,(COORD){0,2},&count) && count==1 && cell==L'A');
+    CHECK(GetConsoleScreenBufferInfo(committed,&info) && info.dwSize.Y==30 && info.dwCursorPosition.Y==29);
+    CloseHandle(committed);
+    CHECK(publication(&channel,CONSOLE_IO_PUBLICATION_END)==ERROR_INVALID_DATA);
+    CHECK(!publication(&channel,CONSOLE_IO_PUBLICATION_ABORT));
+    CHECK(ReadConsoleOutputCharacterW(channel.console.output,&cell,1,(COORD){0,2},&count) && cell==L'A');
+    CHECK(!publication(&channel,CONSOLE_IO_PUBLICATION_BEGIN));
+    CHECK(WriteConsoleOutputCharacterW(channel.console.output,L"C",1,(COORD){0,2},&count) && count==1);
+    description.kind=CONSOLE_VIDEO_TEXT_FRAME;description.width=80;description.height=28;
+    description.stride=160;description.bytes=sizeof(console_text_style)+160*28;
+    bytes=description.bytes;payload=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,bytes);CHECK(payload);
+    style=(console_text_style *)payload;style->font_height=16;style->cursor_column=7;
+    style->cursor_row=27;style->cursor_height=4;style->cursor_visible=1;
+    CHECK(!run16_console_video_begin(&channel.console.video,1,&description));
+    CHECK(!run16_console_video_data(&channel.console.video,1,0,payload,bytes/2));
+    CHECK(publication(&channel,CONSOLE_IO_PUBLICATION_END)==ERROR_INVALID_DATA);
+    CHECK(!run16_console_video_data(&channel.console.video,1,bytes/2,payload+bytes/2,bytes-bytes/2));
+    CHECK(!publication(&channel,CONSOLE_IO_PUBLICATION_END));
+    CHECK(ReadConsoleOutputCharacterW(channel.console.output,&cell,1,(COORD){0,2},&count) && cell==L'C');
+    CHECK(GetConsoleScreenBufferInfo(channel.console.output,&after) &&
+        after.dwSize.Y==30 && after.dwCursorPosition.Y==29);
+    CHECK(!run16_native_frontend_project_text(test_frontend));
+    CHECK(GetConsoleScreenBufferInfo(canonical,&after) &&
+        after.dwCursorPosition.X==after.srWindow.Left+7 &&
+        after.dwCursorPosition.Y==after.srWindow.Top+27);
+    /* Host-only canvas changes must neither clip storage nor pan the logical
+     * viewport. The same upper-left mapping covers all four intersections. */
+    for(unsigned index=0;index<4;++index) {
+        SHORT width=index&1 ? 60 : 100,height=index&2 ? 20 : 30;
+        SMALL_RECT canvas={0,0,width-1,height-1};
+        CONSOLE_CURSOR_INFO cursor;
+        CHECK(SetConsoleCursorPosition(canonical,(COORD){0,0}));
+        CHECK(SetConsoleScreenBufferSize(canonical,(COORD){120,60}));
+        CHECK(SetConsoleWindowInfo(canonical,TRUE,&canvas));
+        CHECK(FillConsoleOutputCharacterW(canonical,L'Z',120*60,(COORD){0,0},&count));
+        CHECK(FillConsoleOutputAttribute(canonical,0x4f,120*60,(COORD){0,0},&count));
+        CHECK(!run16_native_frontend_project_text(test_frontend));
+        CHECK(GetConsoleScreenBufferInfo(canonical,&after) && !memcmp(&after.srWindow,&canvas,sizeof(canvas)));
+        CHECK(ReadConsoleOutputCharacterW(canonical,&cell,1,(COORD){0,0},&count) && cell==L'C');
+        CHECK(GetConsoleCursorInfo(canonical,&cursor) && cursor.bVisible==(height>=28));
+        if(width>80) {
+            WORD attr;
+            CHECK(ReadConsoleOutputCharacterW(canonical,&cell,1,(COORD){80,0},&count) && cell==L' ');
+            CHECK(ReadConsoleOutputAttribute(canonical,&attr,1,(COORD){80,0},&count) && attr==info.wAttributes);
+        }
+        if(height>28)CHECK(ReadConsoleOutputCharacterW(canonical,&cell,1,(COORD){0,28},&count) && cell==L' ');
+        CHECK(GetConsoleScreenBufferInfo(channel.console.output,&after) && after.dwSize.Y==30 && after.dwCursorPosition.Y==29);
+        CHECK(channel.console.logical_window->Top==2 && channel.console.logical_window->Bottom==29);
+    }
+    CHECK(!publication(&channel,CONSOLE_IO_PUBLICATION_BEGIN));
+    CHECK(WriteConsoleOutputCharacterW(channel.console.output,L"D",1,(COORD){0,2},&count));
+    CHECK(!run16_console_video_begin(&channel.console.video,2,&description));
+    CHECK(!run16_console_video_data(&channel.console.video,2,0,payload,bytes/2));
+    CHECK(!publication(&channel,CONSOLE_IO_PUBLICATION_ABORT));
+    CHECK(channel.console.video.serial==2 && channel.console.video.published_serial==1);
+    CHECK(run16_console_video_begin(&channel.console.video,2,&description)==ERROR_INVALID_DATA);
+    CHECK(ReadConsoleOutputCharacterW(channel.console.output,&cell,1,(COORD){0,2},&count) && cell==L'C');
+    leave(&channel);
+    CHECK(!run16_native_frontend_native_bind(test_frontend,&channel,FALSE));
+    CHECK(enter(&channel)==ERROR_NOT_READY);
+    run16_native_frontend_dos_forget(test_frontend,&channel);
+    run16_console_video_dispose(&channel.console.video);HeapFree(GetProcessHeap(),0,payload);
+    CloseHandle(channel.console.output);CloseHandle(input);CloseHandle(canonical);
+    fprintf(private_report ? private_report : stdout,
+        "PASS logical publication complete/partial/abort; offset viewport cursor; four canvas intersections, attributes and stale owner\n");
 }
 static int run_private_desktop(const char *report,BOOL geometry_only)
 {
@@ -684,8 +856,24 @@ int main(int argc,char **argv)
     if(argc==2 && !strcmp(argv[1],"--worker-wait")) {Sleep(INFINITE);return 0;}
     test_native_geometry_projection(25);
     test_native_geometry_projection(28);
+    test_dos_conversion_thresholds();
     read_entered=CreateEventW(NULL,TRUE,FALSE,NULL);CHECK(read_entered);
+    CHECK(GetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE),&original_cursor));
     CHECK(!run16_native_frontend_create(&test_frontend));
+    test_logical_publication();
+    /* The publication fixture deliberately leaves an offset viewport. Start
+     * the older channel marker fixture after the real DOS conversion edge. */
+    CHECK(!run16_native_frontend_dos_bind(test_frontend,&before,TRUE));
+    CHECK(!run16_native_frontend_dos_bind(test_frontend,&before,FALSE));
+    {
+        HANDLE logical;WCHAR cell;DWORD copied;
+        CHECK(!run16_native_frontend_logical_console(test_frontend,&logical));
+        CHECK(ReadConsoleOutputCharacterW(logical,&cell,1,(COORD){0,0},&copied) &&
+            copied==1 && cell==L'C');
+        CHECK(GetConsoleScreenBufferInfo(logical,&current) &&
+            current.dwSize.X==80 && current.dwSize.Y==28 && current.dwCursorPosition.Y==27);
+        CloseHandle(logical);
+    }
     if(argc==2 && !strcmp(argv[1],"--stop-timeout")) {
         run16_console_channel *channel=NULL;
         console_io_request request={0};HANDLE worker;ULONGLONG began;
@@ -717,8 +905,12 @@ int main(int argc,char **argv)
         return 0;
     }
     CHECK(!run16_native_frontend_console(test_frontend,&input,&canonical));
-    CHECK(GetConsoleCursorInfo(canonical,&original_cursor));
-    CHECK(WriteConsoleOutputCharacterW(canonical,L"K",1,origin,&count) && count==1);
+    {
+        HANDLE logical;
+        CHECK(!run16_native_frontend_logical_console(test_frontend,&logical));
+        CHECK(WriteConsoleOutputCharacterW(logical,L"K",1,origin,&count) && count==1);
+        CHECK(!run16_native_frontend_project_text(test_frontend));CloseHandle(logical);
+    }
     alternate=CreateConsoleScreenBuffer(GENERIC_READ|GENERIC_WRITE,
         FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,CONSOLE_TEXTMODE_BUFFER,NULL);
     CHECK(alternate!=INVALID_HANDLE_VALUE);
@@ -726,6 +918,7 @@ int main(int argc,char **argv)
     CHECK(SetConsoleActiveScreenBuffer(alternate));
     /* Warm up lazy runtime/Console resources before counting owned handles. */
     for(mode=0;mode<6;++mode) run_case(mode,0);
+    run_case(6,0);
     if(argc==2 && !strcmp(argv[1],"--handle-audit")) {
         HANDLE modules;MODULEENTRY32W module={sizeof(module)};
         audit_handles("before-idle");Sleep(3000);audit_handles("after-idle-no-channels");

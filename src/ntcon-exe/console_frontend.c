@@ -1,5 +1,5 @@
-/* Presentation only: original SoftPC produces the operations; public Console
- * owns host cells/scrollback. No guest state, command selection or scheduler. */
+/* Presentation only: worker operations mutate frontend-owned logical cells.
+ * No guest execution state, scrollback engine, command selection or scheduler. */
 #include "console_frontend.h"
 #include "common/protocol/console_io.h"
 #include <limits.h>
@@ -81,7 +81,7 @@ DWORD run16_console_prepare_dos(HANDLE output,SMALL_RECT *window)
 {
     CONSOLE_SCREEN_BUFFER_INFO before,after;
     SMALL_RECT physical={0,0,0,0};
-    COORD size,cursor;
+    COORD size;
     if(!window)return ERROR_INVALID_PARAMETER;
     size.X=80;
     size.Y=opennt_dos_return_height(window->Bottom-window->Top+1);
@@ -101,12 +101,9 @@ DWORD run16_console_prepare_dos(HANDLE output,SMALL_RECT *window)
         !opennt_console_resize_grid(output,&size,FALSE,NULL) ||
         !GetConsoleScreenBufferInfo(output,&after))return GetLastError();
     if(after.dwSize.X!=size.X || after.dwSize.Y!=size.Y)return ERROR_RETRY;
-    cursor.X=min(before.dwCursorPosition.X,size.X-1);
-    cursor.Y=min(before.dwCursorPosition.Y,size.Y-1);
     physical.Right=min(size.X,after.dwMaximumWindowSize.X)-1;
     physical.Bottom=min(size.Y,after.dwMaximumWindowSize.Y)-1;
-    if(!SetConsoleCursorPosition(output,cursor) ||
-        !opennt_console_resize_grid(output,NULL,TRUE,&physical))return GetLastError();
+    if(!opennt_console_resize_grid(output,NULL,TRUE,&physical))return GetLastError();
     window->Left=window->Top=0;window->Right=size.X-1;window->Bottom=size.Y-1;
     return ERROR_SUCCESS;
 }
@@ -127,7 +124,7 @@ DWORD run16_console_dispatch(run16_console_frontend *owner,const console_io_requ
     if (!owner->generation || request->generation!=owner->generation) return ERROR_ACCESS_DENIED;
     if (!request->sequence || owner->sequence==UINT32_MAX ||
         request->sequence!=owner->sequence+1 || request->bytes>CONSOLE_IO_DATA_BYTES ||
-        request->operation<CONSOLE_IO_WRITE || request->operation>CONSOLE_IO_PUBLISH_TITLE_A)
+        request->operation<CONSOLE_IO_WRITE || request->operation>CONSOLE_IO_PUBLICATION_ABORT)
         return ERROR_INVALID_DATA;
     cells=request->operation>=CONSOLE_IO_READ_CELLS_A && request->operation<=CONSOLE_IO_WRITE_CELLS_W;
     write_cells=request->operation>=CONSOLE_IO_WRITE_CELLS_A && request->operation<=CONSOLE_IO_WRITE_CELLS_W;
@@ -201,6 +198,11 @@ DWORD run16_console_dispatch(run16_console_frontend *owner,const console_io_requ
     position.X=(SHORT)s->x; position.Y=(SHORT)s->y;
     SetLastError(ERROR_SUCCESS);
     switch (request->operation) {
+    case CONSOLE_IO_PUBLICATION_BEGIN:
+    case CONSOLE_IO_PUBLICATION_END:
+    case CONSOLE_IO_PUBLICATION_ABORT:
+        mode=owner->publication ? owner->publication(owner->io_context,request->operation) : ERROR_INVALID_FUNCTION;
+        ok=mode==ERROR_SUCCESS;SetLastError(mode);break;
     case CONSOLE_IO_SNAPSHOT_BEGIN:
         mode=owner->snapshot_begin ? owner->snapshot_begin(owner->io_context) : ERROR_INVALID_FUNCTION;
         ok=mode==ERROR_SUCCESS;SetLastError(mode);break;
@@ -483,7 +485,7 @@ DWORD run16_console_dispatch(run16_console_frontend *owner,const console_io_requ
     }
     case CONSOLE_IO_BUFFER_SIZE: {
         COORD size={(SHORT)s->width,(SHORT)s->height};
-        if(owner->projected_viewport) {
+        if(owner->logical_window) {
             CONSOLE_SCREEN_BUFFER_INFO info;
             ok=GetConsoleScreenBufferInfo(owner->output,&info);
             if(!ok)break;
@@ -518,23 +520,11 @@ DWORD run16_console_dispatch(run16_console_frontend *owner,const console_io_requ
                 right>=info.dwSize.X || bottom>=info.dwSize.Y ||
                 right-left>=160 || bottom-top>=96)) {ok=FALSE;SetLastError(ERROR_INVALID_PARAMETER);}
             if(ok) {
-                SMALL_RECT physical;
                 rect.Left=(SHORT)left;rect.Top=(SHORT)top;rect.Right=(SHORT)right;rect.Bottom=(SHORT)bottom;
-                /* Only the visible presenter uses pixel-derived constraints.
-                 * Preserve the complete logical region independently. */
-                physical=rect;
-                physical.Right=(SHORT)(left+min(right-left+1,info.dwMaximumWindowSize.X)-1);
-                physical.Bottom=(SHORT)(top+min(bottom-top+1,info.dwMaximumWindowSize.Y)-1);
-                /* Cached logical geometry does not prove the actual viewport
-                 * was applied: DOS and canonical Console can differ. A native
-                 * alternate screen may shrink storage immediately afterward. */
                 /* This is copied worker viewport metadata, not a request to
                  * resize the visible terminal. ConPTY SetConsoleWindowInfo
                  * can shrink storage and invalidate the frame's later rows
                  * and cursor. Apply storage changes only at BUFFER_SIZE. */
-                if(!owner->projected_viewport &&
-                    memcmp(&info.srWindow,&physical,sizeof(physical)))
-                    ok=opennt_console_resize_grid(owner->output,NULL,TRUE,&physical);
                 if(ok)*owner->logical_window=rect;
             }
         } else ok=opennt_console_resize_grid(owner->output,NULL,s->mode!=0,&rect);

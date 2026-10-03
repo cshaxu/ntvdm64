@@ -14,7 +14,6 @@ struct ntvwm_presentation {
     DWORD published_count,published_width;
     console_text_style handoff_font;
     BOOL has_handoff_font;
-    BOOL seeded;
     char published_title[CONSOLE_IO_TITLE_BYTES];
     BOOL title_valid;
     ntvwm_mouse mouse;
@@ -50,7 +49,7 @@ DWORD ntvwm_presentation_call(ntvwm_presentation *client,const console_io_reques
 {
     console_io_request request;DWORD error;
     if(!client || !input || !reply || input->bytes>CONSOLE_IO_DATA_BYTES ||
-        input->operation<CONSOLE_IO_WRITE || input->operation>CONSOLE_IO_PUBLISH_TITLE_A)
+        input->operation<CONSOLE_IO_WRITE || input->operation>CONSOLE_IO_PUBLICATION_ABORT)
         return ERROR_INVALID_PARAMETER;
     memcpy(&request,input,offsetof(console_io_request,data)+input->bytes);
     EnterCriticalSection(&client->lock);error=exchange(client,&request,reply);
@@ -127,7 +126,7 @@ DWORD ntvwm_presentation_text(ntvwm_presentation *client,const console_video_des
 DWORD ntvwm_presentation_capture(ntvwm_presentation *client,const console_text_style *font)
 {
     ntvwm_capture capture={0};CHAR_INFO *cells=NULL;BYTE *payload=NULL;
-    char title[CONSOLE_IO_TITLE_BYTES]={0};BOOL title_read=FALSE;
+    char title[CONSOLE_IO_TITLE_BYTES]={0};BOOL title_read=FALSE,publication_held=FALSE;
     console_io_request request={0};console_io_reply reply;
     console_video_description description={0};DWORD error,total,offset=0,count;
     SMALL_RECT region;
@@ -158,9 +157,9 @@ DWORD ntvwm_presentation_capture(ntvwm_presentation *client,const console_text_s
     if(!error)ntvwm_mouse_compose(&client->mouse,&description,payload);
     LeaveCriticalSection(&client->lock);
     if(error)goto done;
-    /* Use the same copied Console operations as NTVDM for the visible text
-     * surface, and the same bitmap text frame for Window. Unicode stays in
-     * Console cells; the bounded PC glyph conversion lives only here. */
+    /* Publish the complete logical cell grid and its viewport text metadata
+     * as one transaction. Unicode remains in logical Console cells; bounded
+     * PC glyph conversion remains in this worker, not the frontend. */
     EnterCriticalSection(&client->lock);
     if(title_read && (!client->title_valid || strcmp(client->published_title,title))) {
         error=ntcon_worker_publish_title(&client->channel,title);
@@ -171,6 +170,10 @@ DWORD ntvwm_presentation_capture(ntvwm_presentation *client,const console_text_s
     }
     if(error==ERROR_NOT_READY || error==ERROR_BUSY)error=ERROR_SUCCESS;
     if(error)goto captured_done;
+    ZeroMemory(&request,sizeof(request));request.operation=CONSOLE_IO_PUBLICATION_BEGIN;
+    error=exchange(client,&request,&reply);
+    if(error)goto captured_done;
+    publication_held=TRUE;
     request.operation=CONSOLE_IO_SCREEN_INFO;
     error=exchange(client,&request,&reply);
     if(!error && (reply.state.width!=capture.info.dwSize.X || reply.state.height!=capture.info.dwSize.Y)) {
@@ -233,6 +236,11 @@ DWORD ntvwm_presentation_capture(ntvwm_presentation *client,const console_text_s
         error=exchange(client,&request,&reply);
     }
     if(!error)error=ntvwm_presentation_text(client,&description,payload,description.bytes);
+    if(!error) {
+        ZeroMemory(&request,sizeof(request));request.operation=CONSOLE_IO_PUBLICATION_END;
+        error=exchange(client,&request,&reply);
+        if(!error)publication_held=FALSE;
+    }
     if(client->published_cells)HeapFree(GetProcessHeap(),0,client->published_cells);
     client->published_cells=NULL;client->published_count=0;
     if(!error) {
@@ -240,6 +248,11 @@ DWORD ntvwm_presentation_capture(ntvwm_presentation *client,const console_text_s
         client->published_width=(DWORD)capture.info.dwSize.X;
     }
 captured_done:
+    if(publication_held) {
+        DWORD aborted;
+        ZeroMemory(&request,sizeof(request));request.operation=CONSOLE_IO_PUBLICATION_ABORT;
+        aborted=exchange(client,&request,&reply);if(!error)error=aborted;
+    }
     LeaveCriticalSection(&client->lock);
 done:
     if(payload)HeapFree(GetProcessHeap(),0,payload);
@@ -269,49 +282,6 @@ static DWORD read_configuration(ntvwm_presentation *client,console_text_configur
         configuration->style.attribute_font_select>1)return ERROR_INVALID_DATA;
     *found=TRUE;return ERROR_SUCCESS;
 }
-/* A DOS page can scroll after the frontend copied it from this Console.
- * Find its surviving prefix in the native history before writing the page
- * back, or an earlier viewport offset would overwrite still-live output. */
-static DWORD seed_history_row(HANDLE output,const CONSOLE_SCREEN_BUFFER_INFOEX *info,
-    const CHAR_INFO *cells,DWORD width,DWORD height,DWORD fallback)
-{
-    CHAR_INFO *history;
-    SMALL_RECT region,actual;
-    COORD size,origin={0,0};
-    DWORD first,last,rows,candidate,best=0,best_row=fallback;
-    if(info->dwSize.X!=(SHORT)width || !height)return fallback;
-    first=max(0,info->srWindow.Top-(LONG)height);
-    last=min(info->dwSize.Y-1,info->srWindow.Bottom);
-    if(last<first || last-first+1>SHRT_MAX ||
-        (DWORD)(last-first+1)>SIZE_MAX/(width*sizeof(*history)))return fallback;
-    rows=(DWORD)(last-first+1);
-    history=HeapAlloc(GetProcessHeap(),0,(SIZE_T)rows*width*sizeof(*history));
-    if(!history)return fallback;
-    size.X=(SHORT)width;size.Y=(SHORT)rows;
-    region=(SMALL_RECT){0,(SHORT)first,(SHORT)(width-1),(SHORT)last};actual=region;
-    if(ReadConsoleOutputW(output,history,size,origin,&actual) &&
-        !memcmp(&actual,&region,sizeof(region))) {
-        for(candidate=0;candidate<rows;++candidate) {
-            DWORD matched=0,content=0,row;
-            for(row=candidate;row<rows && matched<height;++row,++matched) {
-                const CHAR_INFO *old=history+row*width,*incoming=cells+matched*width;
-                DWORD column;
-                for(column=0;column<width;++column)
-                    if(old[column].Char.UnicodeChar!=incoming[column].Char.UnicodeChar)break;
-                if(column!=width)break;
-                for(column=0;column<width;++column)
-                    if(incoming[column].Char.UnicodeChar!=L' ' &&
-                        incoming[column].Char.UnicodeChar!=0) {++content;break;}
-            }
-            if(matched>=2 && content>=2 && matched>=best) {
-                best=matched;best_row=first+candidate;
-            }
-        }
-    }
-    HeapFree(GetProcessHeap(),0,history);
-    return best_row;
-}
-
 DWORD ntvwm_presentation_seed(ntvwm_presentation *client,HANDLE output)
 {
     console_io_request request={0};console_io_reply reply;
@@ -321,7 +291,7 @@ DWORD ntvwm_presentation_seed(ntvwm_presentation *client,HANDLE output)
     console_text_configuration configuration;
     BOOL has_configuration=FALSE,snapshot_held=FALSE;
     CHAR_INFO *cells=NULL;
-    DWORD error,total,offset=0,width,count,index,row_bias=0,capacity_rows;
+    DWORD error,total,offset=0,width,count,index;
     if(!client || !output || output==INVALID_HANDLE_VALUE)return ERROR_INVALID_PARAMETER;
     EnterCriticalSection(&client->lock);
     request.operation=CONSOLE_IO_SNAPSHOT_BEGIN;
@@ -382,35 +352,24 @@ DWORD ntvwm_presentation_seed(ntvwm_presentation *client,HANDLE output)
     snapshot_held=FALSE;
     if(error)goto done;
     if(!GetConsoleScreenBufferInfoEx(output,&info)) {error=GetLastError();goto done;}
-    /* The frontend transfers the current page, not permission to erase this
-     * Console's history. Preserve rows preceding the native viewport when a
-     * DOS page returns at origin. Logical width/height still come exclusively
-     * from the handoff; native storage capacity never selects them. */
-    capacity_rows=(DWORD)screen.height;
-    if(client->seeded) {
-        row_bias=(DWORD)max(0,info.srWindow.Top-screen.top);
-        row_bias=seed_history_row(output,&info,cells,width,(DWORD)screen.height,row_bias);
-        if(row_bias>(DWORD)SHRT_MAX-(DWORD)screen.height) {
-            error=ERROR_ARITHMETIC_OVERFLOW;goto done;
-        }
-        capacity_rows=max((DWORD)info.dwSize.Y,row_bias+(DWORD)screen.height);
-    }
+    /* The acknowledged logical grid is the entire current handoff state.
+     * Neither old native storage nor history matching may bias its origin. */
     if(has_configuration)for(index=0;index<16;++index) {
         DWORD rgb=configuration.palette[index];
         if(rgb>0xffffff) {error=ERROR_INVALID_DATA;goto done;}
         info.ColorTable[index]=RGB((rgb>>16)&255,(rgb>>8)&255,rgb&255);
     }
-    info.dwSize.X=(SHORT)screen.width;info.dwSize.Y=(SHORT)capacity_rows;
-    info.dwCursorPosition.X=(SHORT)screen.x;info.dwCursorPosition.Y=(SHORT)(screen.y+row_bias);
-    info.srWindow.Left=(SHORT)screen.left;info.srWindow.Top=(SHORT)(screen.top+row_bias);
-    info.srWindow.Right=(SHORT)screen.right;info.srWindow.Bottom=(SHORT)(screen.bottom+row_bias);
+    info.dwSize.X=(SHORT)screen.width;info.dwSize.Y=(SHORT)screen.height;
+    info.dwCursorPosition.X=(SHORT)screen.x;info.dwCursorPosition.Y=(SHORT)screen.y;
+    info.srWindow.Left=(SHORT)screen.left;info.srWindow.Top=(SHORT)screen.top;
+    info.srWindow.Right=(SHORT)screen.right;info.srWindow.Bottom=(SHORT)screen.bottom;
     info.wAttributes=(WORD)screen.attribute;
     error=ntvwm_screen_apply(output,&info,&cursor);
     for(offset=0;!error && offset<total;offset+=count) {
         count=min(width-offset%width,CONSOLE_IO_DATA_BYTES/sizeof(console_io_cell));
         if(!(offset%width) && count==width)
             count=width*min((total-offset)/width,(CONSOLE_IO_DATA_BYTES/sizeof(console_io_cell))/width);
-        error=ntvwm_cells_write(output,row_bias*width+offset,cells+offset,count);
+        error=ntvwm_cells_write(output,offset,cells+offset,count);
     }
     /* Seed is the acknowledged common screen. Publish subsequent changes,
      * not thousands of unchanged scrollback rows on every input iteration. */
@@ -419,11 +378,8 @@ DWORD ntvwm_presentation_seed(ntvwm_presentation *client,HANDLE output)
         if(has_configuration)client->handoff_font=configuration.style;
         if(client->published_cells)HeapFree(GetProcessHeap(),0,client->published_cells);
         client->published_cells=NULL;client->published_count=0;
-        if(!row_bias && capacity_rows==(DWORD)screen.height) {
-            client->published_cells=cells;cells=NULL;
-            client->published_count=total;client->published_width=width;
-        }
-        client->seeded=TRUE;
+        client->published_cells=cells;cells=NULL;
+        client->published_count=total;client->published_width=width;
         client->mouse.visible=FALSE;client->mouse.buttons=0;
         error=ntvwm_mouse_geometry(&client->mouse,info.srWindow,
             has_configuration ? configuration.style.font_height : 16);

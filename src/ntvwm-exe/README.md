@@ -56,8 +56,10 @@ against unrelated concurrent native writers.
 Logical text geometry comes from the frontend handoff or the running native
 application, never host display dimensions. The invisible Console uses fixed
 carrier font metrics, independent of its copied bitmap fonts; inherited state
-is applied and read back before acknowledgment. A return preserves native
-scrollback storage separately from the current logical viewport. See the
+is applied and read back before acknowledgment. T424 S12 seeds the exact current
+logical buffer, viewport and cursor; it does not retain an older hidden page
+by history matching or row bias. Full native buffer tiles and the viewport
+text frame commit together through the common publication contract. See the
 [S13 ledger](../../docs/etc/evidence/m0-t423-s13-text-geometry.md) for actual
 mode, resize-race, pointer, history and bidirectional handoff evidence.
 

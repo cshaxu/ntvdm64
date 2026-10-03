@@ -7,10 +7,14 @@ typedef struct run16_native_frontend run16_native_frontend;
 DWORD run16_native_frontend_create(run16_native_frontend **);
 /* Caller owns non-inheritable duplicates of the session's canonical handles. */
 DWORD run16_native_frontend_console(run16_native_frontend *,HANDLE *,HANDLE *);
-/* The active DOS channel uses a private Console API grid. NTCON projects
- * that grid onto the unchanged user-visible Console after each mutation. */
-DWORD run16_native_frontend_dos_console(run16_native_frontend *,HANDLE *);
-DWORD run16_native_frontend_project_dos(run16_native_frontend *);
+/* Both worker kinds use the frontend's private logical Console cell grid. */
+DWORD run16_native_frontend_logical_console(run16_native_frontend *,HANDLE *);
+DWORD run16_native_frontend_project_text(run16_native_frontend *);
+/* All require the active channel's I/O lock. Clone/commit consume only local
+ * storage. Commit consumes the handle; projection failure is an explicit
+ * terminal-channel failure after commit, never a rollback to freed storage. */
+DWORD run16_native_frontend_clone_text(run16_native_frontend *,HANDLE *,SMALL_RECT *);
+DWORD run16_native_frontend_commit_text(run16_native_frontend *,HANDLE,SMALL_RECT);
 /* Frontend-local borrowed state; channel access requires the shared I/O lock. */
 SMALL_RECT *run16_native_frontend_text_region(run16_native_frontend *);
 /* Frontend-local presentation request; never changes target execution. */

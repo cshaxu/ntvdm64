@@ -95,7 +95,13 @@ try {
     }else{
         $monitor=Start-Process -FilePath (Resolve-Path $MonitorRpc).Path -ArgumentList @('--terminate',$worker.Id) -WindowStyle Hidden -PassThru `
             -RedirectStandardOutput "$report.management.log" -RedirectStandardError "$report.management.err"
-        if(!$monitor.WaitForExit(18000) -or $monitor.ExitCode -ne 0){throw 'Management RPC rejected or timed out'}
+        if(!$monitor.WaitForExit(18000) -or $monitor.ExitCode -ne 0){
+            $worker.Refresh();$target.Refresh()
+            @("worker-alive=$(!$worker.HasExited)","target-alive=$(!$target.HasExited)",
+                "worker-exit=$(if($worker.HasExited){$worker.ExitCode}else{'running'})") |
+                Set-Content "$report.management-state.txt"
+            throw 'Management RPC rejected or timed out'
+        }
     }
     if(!$WorkerLoss -and (!$worker.WaitForExit(5000) -or !$target.WaitForExit(5000))){throw 'NTVWM or attached CMD survived acknowledged close'}
     if(!$observerProcess.WaitForExit(10000)){throw 'Direct launcher did not return after management close'}

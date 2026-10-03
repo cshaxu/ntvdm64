@@ -2,13 +2,37 @@
 
 ## Current Work
 
-**No active numeric M/T/S packet.** T424 remains open. S11 frontend naming
-is delivered by the containing reviewed P; stop and await owner instructions.
-S12 and later stages are not admitted by this packet. The
+**No active M/T/S packet.** T424 remains open. S12 is delivered; S13 final audit
+is next under the owner's sequential approval. S11 frontend naming
+is closed at pushed 7ff3c670d; its eight published hashes were reverified.
+The owner now approves sequential S12 and S13 execution, stopping before T closure. The
 [working plan](../etc/operations/t424-worker-frontend-renaming-plan.md) owns order;
 [S11 evidence](../etc/evidence/m0-t424-s11-frontend-name.md) owns the naming ledger.
-The published S11 eight-file package is x86 /MT CCPU40, APP 0.0.424,
-protocol/RPC33, with ntcon.exe as frontend and ntvwm.exe as native worker.
+The published S12 eight-file package is x86 /MT CCPU40, APP 0.0.424,
+protocol/RPC34, I/O22, with ntcon.exe as frontend and ntvwm.exe as native worker.
+The [S12 ledger](../etc/evidence/m0-t424-s12-logical-surface.md) records the
+unified logical grid, atomic publication, current-state handoff, test results,
+recoverable release and one unreproduced management-probe failure.
+
+## S12 Closed Packet
+
+| Field | Admitted record |
+| --- | --- |
+| Identifier Mode | M0 T424 S12, Ordinary Mode. |
+| Admission And Approval | Owner requests S11 exit-criteria review and automatic admission of all remaining T stages, stopping for owner T validation. S11 is delivered and clean. |
+| Objective | Both workers publish into one frontend-owned logical_surface, with consistent committed snapshots, upper-left actual-canvas projection and symmetric current-state text handoff. |
+| Non-goals | No original mirror/guest/imported-library change, launch syntax, polling cleanup, helper/component, Job/Observed graph, scheduler or lifecycle policy. No host scrollback guarantee. |
+| Reference Baseline | Pushed S11 7ff3c670d, verified O:/winnt eight hashes; x86 /MT CCPU40 APP 0.0.424 protocol/RPC33; S11 evidence and retained frontiers. |
+| Files And ABI Surface | NTCON Console/channel/video/window state, common copied I/O contracts and appropriate worker clients, NTVWM/NTVDM boundary adapters, tests and audited build graph. Wire change requires paired app/IDL version and regenerated MIDL. |
+| Applicable Rules | README complete authority set, execution/architecture/coding/document rules, CONTRIBUTING and source policy. |
+| Verification | Production-route provenance audit; full S12 plan checklist including geometry, clipping, cursor/mouse, atomic publication/failure/stale owner, two handoff acknowledgements; affected x86 builds, retained focused/lifecycle/RPC/version, Console17/Window17, EDIT/nesting/isolation/WOW gates and eight-file publication. |
+| Expected Markers | One logical grid independent of host size, no native visible-Console bypass; complete committed state, no late old-owner overwrite, inherited current state and original DOS resize semantics. |
+| Asset Needs | Existing immutable media and accepted S11 package. New artifacts build/M0-T424/S12/r001; validated incremental S2/r001 cache. No downloads. |
+| Reporting Requirements | Exact route/source/removal ledger, tests/commands/hashes, failures and limitations; manual observations not invented. |
+| Stop Conditions | Unapproved owner/mirror/library/guest change, weakened authentication/tests, regression or mixed publication; T closure remains owner-controlled. |
+| Exit Criteria | S12 checklist implemented and genuinely exercised; coherent recoverable eight-file publication, reviewed commit/push, clean main; then admit S13 audit. |
+| Original Owner Request | 按照S11退出标准收口S11（如果没完成请你继续完成S11），然后自动准入本T所有S任务，到达T收口前停下来等我验证。 |
+| Similar-Issue Sweep | Both text sources, frame tiles and operations, capture/seed/window/Console paths, viewport origin/cursor/mouse, release/resume/late publication and resource ownership. |
 
 ## S11 Closed Packet
 
@@ -278,15 +302,15 @@ broker-routed native GUI startup, pre-admission classification and service-held 
 not monitor display. UNBOUND display belongs to the queue-head NTMON candidate.
 S10 repairs relaunch; S11 gives the frontend its NTCON identity. Approved S12 then unifies
 logical_surface and DOS/native handoff per the linked plan; S13 is the former
-S12 final audit. No next S is admitted while awaiting owner instructions;
-T closure remains owner-controlled.
+S12 final audit. S13 is automatically authorized after S12 delivery;
+T closure remains owner-controlled, and no next T is admitted.
 
 ## Current Technical Baseline
 
-Published S11 (containing P) at O:/winnt: run16.exe, ntsrv.exe, ntvdm.exe,
+Published S12 at O:/winnt: run16.exe, ntsrv.exe, ntvdm.exe,
 ntvwm.exe, ntcon.exe, ntmon.exe, WOW32.DLL, VDMREDIR.DLL. APP 0.0.424,
-protocol/RPC33, MSVC Win32/x86 /MT CCPU40. Exact hashes and verification
-are in the S11 ledger; accepted S10 and earlier packages remain recoverable.
+protocol/RPC34, I/O22, MSVC Win32/x86 /MT CCPU40. Exact hashes and verification
+are in the S12 ledger; accepted S11 and earlier packages remain recoverable.
 
 ## Previous T closure
 

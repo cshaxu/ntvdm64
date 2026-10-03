@@ -223,6 +223,8 @@ int main(int argc,char **argv)
                 CHECK(selected<count);
             } else CHECK(count==1);
             error=common_rpc_terminate_worker(&management,entries[selected].process_id);
+            if(error)fprintf(stderr,"TerminateWorker pid=%lu error=%lu\n",
+                (unsigned long)entries[selected].process_id,(unsigned long)error);
             CHECK(error==ERROR_SUCCESS);
             puts("PASS: authenticated DTASKMGR RPC accepted selected live worker termination");
         }
