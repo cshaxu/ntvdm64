@@ -44,8 +44,10 @@ identity; new outputs only under declared build/M0-T425/S<n>/r<nnn> run roots.
 
 ## Checklist and proof
 
-- [ ] Complete function/operation provenance, caller and owner inventory,
+- [x] Complete function/operation provenance, caller and owner inventory,
   including project additions inside mirrors without moving original logic.
+  The [S4 audit](../evidence/m0-t425-s4-worker-neutral-audit.md) records the
+  complete frontend file/operation families and actual worker callers.
 - [x] S1: Console absolute cells, Window relative samples, buttons and
   ENTER/LEAVE/reset; no frontend kind conversion. Test accumulation, bounds,
   geometry changes, ordered release and stale-source rejection.
@@ -61,18 +63,20 @@ identity; new outputs only under declared build/M0-T425/S<n>/r<nnn> run roots.
   actual failure/pipe tests and the selected r004 published release.
 - [x] Real worker clients wired through existing common/worker-base; original
   NTVDM algorithms never adapted to NTVWM convenience.
-- [ ] Retained production gates, exact release/recovery hashes, mirror/library
+- [x] Retained production gates, exact release/recovery hashes, mirror/library
   review, governance/links and reviewed sequential P delivery.
-- [ ] S4 requirement audit and explicit remaining physical boundaries; owner
-  verification before T closure.
+- [x] S4 requirement audit and explicit remaining physical boundaries, with
+  exact assertion mapping, fresh focused/lifetime/dependency tests and sealed
+  release identity review. The containing reviewed P delivers this audit.
+- [ ] Owner verification and acceptance before T closure.
 
 ## RDP boundary
 
 S1 implementation and validation are recorded in the
 [input ledger](../evidence/m0-t425-s1-worker-neutral-input.md): both worker
 clients consume one FRAME_MOUSE contract, frontend input no longer chooses
-a worker-specific conversion. S2/S3 ownership/publication slots remain open;
-passing retained handoff tests does not mean their refactoring is finished.
+a worker-specific conversion. S2/S3 ownership/publication consolidation is
+delivered; S4 audits its whole-objective coverage before owner acceptance.
 
 Shared kvm-window checks capture ownership and clip bounds before delivering
 motion. This precedes worker conversion, so branch removal alone is not proof

@@ -2,8 +2,8 @@
 
 ## Current Work
 
-**Active: M0 T425 S4, Ordinary Mode.** T425 remains open;
-S2 P1 36372657a is delivered, pushed and published. The owner requests
+**Active: M0 T425 S4, Ordinary Mode.** Audit complete; awaiting owner verification.
+T425 remains open. S3 P1 ec0cf2b02 is delivered, pushed and published. The owner requests
 continued execution of the full worker-neutral
 frontend objective and the ordered approved plan. Owner closes T424 and admits
 the new NTCON worker-neutral I/O package. The
@@ -23,7 +23,7 @@ CCPU40 APP 0.0.425, protocol/RPC35 I/O23, eight files at O:/winnt. The
 [S1 ledger](../etc/evidence/m0-t425-s1-worker-neutral-input.md) records source
 disposition, exact release/recovery hashes, tests and physical RDP limits.
 S1 and S2 are closed by reviewed P delivery. S2 consolidates frontend
-ownership and multi-pending handoff; S3 publication consolidation is admitted.
+ownership and multi-pending handoff; S3 publication consolidation is delivered.
 The [S2 ledger](../etc/evidence/m0-t425-s2-channel-owner-handoff.md) records
 passing multi-pending/cancellation/handle tests and the completed prepublication
 regression and postpublication smoke. S2 is now the retained recovery package
@@ -63,6 +63,14 @@ return and GUI smoke terminate zero with all eight hashes retained. Reviewed
 S3 P1 ec0cf2b02 is committed and pushed with clean synchronized main. S4 is
 automatically admitted under the approved sequence; owner T verification remains open.
 
+The [S4 audit](../etc/evidence/m0-t425-s4-worker-neutral-audit.md) maps actual
+production callers and independent worker boundaries. Fresh seven-fixture
+input/presentation tests, full channel/failure/multi-pending fixture and link
+ownership negatives pass. All 265 frozen S3 inputs and eight published hashes
+still match. Requirement/assertion mapping and source/dependency review are
+complete; the containing documentation-only P delivers S4. Stop for owner
+verification before T closure. No production change or physical RDP pass is claimed.
+
 ## Active Packet
 
 | Field | Admitted record |
@@ -85,7 +93,7 @@ automatically admitted under the approved sequence; owner T verification remains
 
 ## Current Technical Baseline
 
-Published tested T425 S3 candidate at O:/winnt: run16.exe, ntsrv.exe, ntvdm.exe,
+Published tested T425 S3 release at O:/winnt: run16.exe, ntsrv.exe, ntvdm.exe,
 ntvwm.exe, ntcon.exe, ntmon.exe, WOW32.DLL, VDMREDIR.DLL. APP 0.0.425,
 protocol/RPC36 I/O24, MSVC Win32/x86 /MT CCPU40. Exact release/recovery hashes,
 Console17/Window17 and retained limits are in the S3 ledger; recovery is S2. The prior
@@ -112,10 +120,10 @@ in T424's closure history and ff50ff588, not an active packet.
 
 ## Recent Governance
 
-S2 P1 36372657a delivers channel ownership and independently cancellable pending handoffs
-with coherent eight-file publication and retained regression gates. Its
-commit owns the S2 ledger. Clean synchronized main was verified after push;
-this S3 admission starts the next packet. T425 remains open for S4 owner audit.
+S3 P1 ec0cf2b02 delivers operation-based publication and actual common clients.
+S4 completes source/contract/dependency and assertion review against that exact
+release, with fresh focused/failure/ownership tests and no production changes.
+The containing S4 P owns the audit ledger; T425 remains open for owner acceptance.
 Owner closes T424 and admits T425 for worker-neutral frontend I/O. The
 provisional T424 S14 documentation brief transfers without an implementation
 claim. Queue order is unchanged. Pure admission/closure documentation does
