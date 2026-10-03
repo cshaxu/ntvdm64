@@ -22,6 +22,7 @@ extent repair is admitted. T closure requires owner acceptance.
 | S2 | One channel-based frontend I/O owner with independently cancellable pending requests for multiple channels, replacing DOS/native slots and wrappers while retaining final-paint, input return, release/resume and cancellation barriers. Pending is not a single-slot cardinality limit or an execution scheduler. |
 | S3 | Operation-based publication/snapshot/locking and common worker clients. Replace type-only checks with explicit operation contracts; retain original Console/VGA production and native hidden Console capture. |
 | S4 | Whole-package source/contract/dependency audit, duplicate removal review and retained acceptance; stop for owner T verification. |
+| S5 | Owner follow-up: clean misleading DOS-specific names in the shared format decoder and actual callers/tests; preserve TEXT_FRAME/TEXT_CONFIGURATION/DIB processing and all runtime gates. Stop for owner T verification after delivery. |
 
 Every production P builds affected x86 /MT CCPU40 closure, retains focused
 negative/lifecycle tests and prior frontiers, Console17/Window17, native EDIT/
@@ -68,6 +69,9 @@ identity; new outputs only under declared build/M0-T425/S<n>/r<nnn> run roots.
 - [x] S4 requirement audit and explicit remaining physical boundaries, with
   exact assertion mapping, fresh focused/lifetime/dependency tests and sealed
   release identity review. The containing reviewed P delivers this audit.
+- [x] S5 shared format-decoder naming cleanup, affected build and retained
+  runtime/publication gates. The [S5 ledger](../evidence/m0-t425-s5-format-decoder-names.md)
+  records the containing reviewed P, published eight-file set and limits.
 - [ ] Owner verification and acceptance before T closure.
 
 ## RDP boundary

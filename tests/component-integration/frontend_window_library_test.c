@@ -28,7 +28,7 @@ static DWORD frontend_window_native_frame_pointer(const run16_native_frame_info 
         &video.description,&payload);
     if(error)return error;
     video.pixels=payload;video.published_serial=1;
-    error=frontend_window_dos_frame(&video,frame);
+    error=frontend_window_decode_frame(&video,frame);
     HeapFree(GetProcessHeap(),0,payload);
     if(error)frame->valid=0;
     return error;
@@ -228,21 +228,21 @@ int main(void)
     description.palette[1] = 0x2468ac;
     CHECK(run16_console_video_begin(&video, 1, &description) == ERROR_SUCCESS);
     CHECK(run16_console_video_data(&video, 1, 0, dib, 4) == ERROR_SUCCESS);
-    CHECK(frontend_window_dos_frame(&video, frame) == ERROR_NO_DATA && !frame->valid);
+    CHECK(frontend_window_decode_frame(&video, frame) == ERROR_NO_DATA && !frame->valid);
     CHECK(run16_console_video_data(&video, 1, 4, dib + 4, 4) == ERROR_SUCCESS);
-    CHECK(frontend_window_dos_frame(&video, frame) == ERROR_SUCCESS);
+    CHECK(frontend_window_decode_frame(&video, frame) == ERROR_SUCCESS);
     CHECK(frame->image.width == 9 && frame->image.stride == 9 && frame->image.height == 2);
     CHECK(frame->image.pixels[0] == 1 && frame->image.pixels[8] == 1);
     CHECK(frame->image.pixels[9] == 0 && frame->image.pixels[10] == 1);
     CHECK(frame->image.palette[1] == 0x2468ac);
     CHECK(run16_console_video_begin(&video, 2, &description) == ERROR_SUCCESS);
-    CHECK(frontend_window_dos_frame(&video, frame) == ERROR_SUCCESS); /* Retain complete frame. */
+    CHECK(frontend_window_decode_frame(&video, frame) == ERROR_SUCCESS); /* Retain complete frame. */
     CHECK(run16_console_video_text(&video, 3) == ERROR_SUCCESS);
-    CHECK(frontend_window_dos_frame(&video, frame) == ERROR_NO_DATA && !frame->valid);
+    CHECK(frontend_window_decode_frame(&video, frame) == ERROR_NO_DATA && !frame->valid);
     description.width = 3; description.depth = 8;
     CHECK(run16_console_video_begin(&video, 4, &description) == ERROR_SUCCESS);
     CHECK(run16_console_video_data(&video, 4, 0, dib, 8) == ERROR_SUCCESS);
-    CHECK(frontend_window_dos_frame(&video, frame) == ERROR_SUCCESS);
+    CHECK(frontend_window_decode_frame(&video, frame) == ERROR_SUCCESS);
     CHECK(frame->image.pixels[2] == 0xee && frame->image.pixels[3] == 0x40);
     run16_console_video_dispose(&video);
     {
@@ -256,9 +256,9 @@ int main(void)
         payload[sizeof(*style)+(49*80+79)*2+1]=9;
         CHECK(!run16_console_video_begin(&video,1,&text));
         CHECK(!run16_console_video_data(&video,1,0,payload,16384));
-        CHECK(frontend_window_dos_frame(&video,frame)==ERROR_NO_DATA);
+        CHECK(frontend_window_decode_frame(&video,frame)==ERROR_NO_DATA);
         CHECK(!run16_console_video_data(&video,1,16384,payload+16384,text.bytes-16384));
-        CHECK(!frontend_window_dos_frame(&video,frame) && !frame->graphics);
+        CHECK(!frontend_window_decode_frame(&video,frame) && !frame->graphics);
         CHECK(frame->text.base.text_rows==50 && frame->text.base.font_height==8);
         valid=LIB_FALSE;
         CHECK(kvm_window_render_frame(frame,pixels,640,400,&valid,&changed));
@@ -266,7 +266,7 @@ int main(void)
         CHECK(!run16_console_video_begin(&video,2,&text));
         style->font_height=33;
         CHECK(run16_console_video_data(&video,2,0,payload,text.bytes)==ERROR_INVALID_DATA);
-        CHECK(video.published_serial==1 && !frontend_window_dos_frame(&video,frame));
+        CHECK(video.published_serial==1 && !frontend_window_decode_frame(&video,frame));
         style->font_height=8;style->cursor_start=INT32_MAX;
         CHECK(!run16_console_video_begin(&video,3,&text));
         CHECK(run16_console_video_data(&video,3,0,payload,text.bytes)==ERROR_INVALID_DATA);
@@ -276,7 +276,7 @@ int main(void)
         payload[sizeof(*style)]=65;payload[sizeof(*style)+1]=9;
         CHECK(!run16_console_video_begin(&video,4,&text));
         CHECK(!run16_console_video_data(&video,4,0,payload,text.bytes));
-        CHECK(!frontend_window_dos_frame(&video,frame) && !frame->graphics);
+        CHECK(!frontend_window_decode_frame(&video,frame) && !frame->graphics);
         valid=LIB_FALSE;
         CHECK(kvm_window_render_frame(frame,pixels,640,500,&valid,&changed));
         CHECK(pixels[19*640+7]==0x123456);
@@ -289,7 +289,7 @@ int main(void)
         style->fonts[1][65][15]=1;
         CHECK(!run16_console_video_begin(&video,6,&text));
         CHECK(!run16_console_video_data(&video,6,0,payload,text.bytes));
-        CHECK(!frontend_window_dos_frame(&video,frame) && !frame->graphics);
+        CHECK(!frontend_window_decode_frame(&video,frame) && !frame->graphics);
         CHECK(frame->text.base.text_rows==50 && frame->text.base.font_height==16);
         valid=LIB_FALSE;
         CHECK(kvm_window_render_frame(frame,pixels,640,800,&valid,&changed));
@@ -307,7 +307,7 @@ int main(void)
         payload[sizeof(*style)+3999*3+2]=CONSOLE_TEXT_UNDERLINE;
         CHECK(!run16_console_video_begin(&video,1,&text));
         CHECK(!run16_console_video_data(&video,1,0,payload,text.bytes));
-        CHECK(!frontend_window_dos_frame(&video,frame) && !frame->graphics);
+        CHECK(!frontend_window_decode_frame(&video,frame) && !frame->graphics);
         valid=LIB_FALSE;
         CHECK(kvm_window_render_frame(frame,pixels,640,800,&valid,&changed));
         CHECK(pixels[799*640+639]==0xabcdef && pixels[799*640+631]==0);
@@ -325,7 +325,7 @@ int main(void)
         }
         CHECK(!run16_console_video_begin(&video,2,&text));
         CHECK(!run16_console_video_data(&video,2,0,payload,text.bytes));
-        CHECK(!frontend_window_dos_frame(&video,frame) && !frame->graphics);
+        CHECK(!frontend_window_decode_frame(&video,frame) && !frame->graphics);
         for(unsigned cell=0;cell<512;++cell) {
             kvm_text_cell mapped=frame->text.base.cells[(cell/80)*KVM_TEXT_COLUMNS+cell%80];
             const lib_u8 *font=mapped.glyph_bank ? frame->text.secondary_font : frame->text.font;
@@ -341,7 +341,7 @@ int main(void)
         payload[sizeof(*style)+512*3+1]=15;
         CHECK(!run16_console_video_begin(&video,3,&text));
         CHECK(!run16_console_video_data(&video,3,0,payload,text.bytes));
-        CHECK(!frontend_window_dos_frame(&video,frame) && !frame->graphics);
+        CHECK(!frontend_window_decode_frame(&video,frame) && !frame->graphics);
         CHECK(style->fonts[0][0][15]==15 && style->fonts[1][0][15]==16);
         free(payload);run16_console_video_dispose(&video);
         puts("PASS copied DOS text: complete-frame publication, 80x50 dual font, tall glyph text and malformed frame retention");
@@ -418,7 +418,7 @@ int main(void)
         text.palette[7]=0xffffff;
         CHECK(!run16_console_video_begin(&video,11,&text));
         CHECK(!run16_console_video_data(&video,11,0,payload,text.bytes));
-        CHECK(!frontend_window_dos_frame(&video,frame) && !frame->graphics);
+        CHECK(!frontend_window_decode_frame(&video,frame) && !frame->graphics);
         CHECK(kvm_window_frame_size(frame,&width,&height) && width==960 && height==960);
         CHECK(kvm_window_cursor_rect(frame,&display,&cursor_a));
         CHECK(kvm_window_secondary_cursor_rect(frame,&display,&cursor_b));

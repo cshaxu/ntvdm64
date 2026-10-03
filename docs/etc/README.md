@@ -2,6 +2,7 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T425 S5 format-decoder names](evidence/m0-t425-s5-format-decoder-names.md) | M0 T425 S5 | Format-only dispatch audit, neutral decoder names, actual build/test and delivery status. | Retain through T425 acceptance. |
 | [T425 worker-neutral frontend plan](operations/t425-worker-neutral-frontend-plan.md) | M0 T425 | Admitted input/ownership/publication unification, provenance and production gates. | Retain through T425 acceptance. |
 | [T425 S1 worker-neutral input](evidence/m0-t425-s1-worker-neutral-input.md) | M0 T425 S1 | Common mouse/key contract, worker-local adaptation, actual tests and publication status. | Retain through T425 acceptance. |
 | [T425 S2 channel ownership](evidence/m0-t425-s2-channel-owner-handoff.md) | M0 T425 S2 | One active channel, multiple pending requests, lock/cancellation contract and actual verification status. | Retain through T425 acceptance. |

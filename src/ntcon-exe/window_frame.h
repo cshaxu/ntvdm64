@@ -3,8 +3,7 @@
 #include "console_video.h"
 #include "lib/kvm-window/frame_interface.h"
 
-enum { FRONTEND_NATIVE_CELL_WIDTH=8, FRONTEND_NATIVE_CELL_HEIGHT=14 };
-
-/* Both workers use this same copied-frame decoder. */
-DWORD frontend_window_dos_frame(const run16_console_video *, kvm_window_frame *);
+/* Decode copied TEXT_FRAME or DIB data, independently of worker type.
+ * TEXT_CONFIGURATION updates metadata; it is not a standalone Window frame. */
+DWORD frontend_window_decode_frame(const run16_console_video *, kvm_window_frame *);
 #endif

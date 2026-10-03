@@ -580,7 +580,7 @@ static DWORD present_loop(run16_native_frontend *frontend)
             if(serial!=*published && (!video->pending || video->pixels)) {
                 if(video->pixels) {
                     lib_u32 width=0,height=0;
-                    error=frontend_window_dos_frame(video,frontend->window_frame);
+                    error=frontend_window_decode_frame(video,frontend->window_frame);
                     if(!error && !kvm_window_frame_size(frontend->window_frame,&width,&height))
                         error=ERROR_INVALID_DATA;
                     if(!error)

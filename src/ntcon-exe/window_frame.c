@@ -3,7 +3,7 @@
 #include "text_frame.h"
 
 
-static DWORD dos_text_frame(const run16_console_video *video,kvm_window_frame *frame)
+static DWORD decode_text_frame(const run16_console_video *video,kvm_window_frame *frame)
 {
     const console_video_description *d=&video->description;
     const console_text_style *style=(const console_text_style *)video->pixels;
@@ -59,7 +59,7 @@ done:
     if(snapshot)HeapFree(GetProcessHeap(),0,snapshot);
     return error;
 }
-DWORD frontend_window_dos_frame(const run16_console_video *video, kvm_window_frame *frame)
+DWORD frontend_window_decode_frame(const run16_console_video *video, kvm_window_frame *frame)
 {
     const console_video_description *description;
     uint64_t stride;
@@ -69,7 +69,7 @@ DWORD frontend_window_dos_frame(const run16_console_video *video, kvm_window_fra
     if (!video) return ERROR_INVALID_PARAMETER;
     if (!video->pixels || !video->published_serial) return ERROR_NO_DATA;
     description = &video->description;
-    if(description->kind==CONSOLE_VIDEO_TEXT_FRAME)return dos_text_frame(video,frame);
+    if(description->kind==CONSOLE_VIDEO_TEXT_FRAME)return decode_text_frame(video,frame);
     if(description->kind!=CONSOLE_VIDEO_DIB)return ERROR_INVALID_DATA;
     if (!description->width || !description->height ||
         (description->depth != 1 && description->depth != 8)) return ERROR_INVALID_DATA;
