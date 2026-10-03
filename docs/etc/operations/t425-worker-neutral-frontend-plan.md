@@ -46,10 +46,10 @@ identity; new outputs only build/M0-T425/S<n>/r001.
 
 - [ ] Complete function/operation provenance, caller and owner inventory,
   including project additions inside mirrors without moving original logic.
-- [ ] S1: Console absolute cells, Window relative samples, buttons and
+- [x] S1: Console absolute cells, Window relative samples, buttons and
   ENTER/LEAVE/reset; no frontend kind conversion. Test accumulation, bounds,
   geometry changes, ordered release and stale-source rejection.
-- [ ] S1: physical keys, text/dead-key/layout, returned keys and held-key reset;
+- [x] S1: physical keys, text/dead-key/layout, returned keys and held-key reset;
   no duplicate characters or missing scan/modifier state.
 - [ ] S2: both handoff directions, committed final state before acquisition,
   input return before parent output, stop/disconnect/stale owner; remove slots.
@@ -63,6 +63,12 @@ identity; new outputs only build/M0-T425/S<n>/r001.
   verification before T closure.
 
 ## RDP boundary
+
+S1 implementation and validation are recorded in the
+[input ledger](../evidence/m0-t425-s1-worker-neutral-input.md): both worker
+clients consume one FRAME_MOUSE contract, frontend input no longer chooses
+a worker-specific conversion. S2/S3 ownership/publication slots remain open;
+passing retained handoff tests does not mean their refactoring is finished.
 
 Shared kvm-window checks capture ownership and clip bounds before delivering
 motion. This precedes worker conversion, so branch removal alone is not proof

@@ -68,7 +68,9 @@ static DWORD WINAPI peer(void *context)
             if(state->mode==8)events[2].type=0xffffffffu;
             if(state->mode==19) {
                 ZeroMemory(events,sizeof(events));
-                events[0].type=events[1].type=events[2].type=CONSOLE_INPUT_POINTER;
+                events[0].type=events[1].type=events[2].type=CONSOLE_INPUT_FRAME_MOUSE;
+                events[0].menu=events[1].menu=640;
+                events[0].focus=events[1].focus=400;
                 events[0].flags=CONSOLE_MOUSE_ENTER;
                 events[1].flags=CONSOLE_MOUSE_MOVE;events[1].x=INT_MAX;events[1].y=INT_MAX;
                 events[1].buttons=1;events[1].control=SHIFT_PRESSED;
@@ -466,6 +468,27 @@ int wmain(int argc,WCHAR **argv)
 {
     unsigned mode;
     if((argc!=2 && argc!=3) || _wfopen_s(&log,argv[1],L"wx"))return 2;
+    {
+        console_io_input wire={0},saved;INPUT_RECORD record;
+        console_frame_mouse_input frame;
+        wire.type=CONSOLE_INPUT_FRAME_MOUSE;wire.flags=CONSOLE_MOUSE_MOVE;
+        wire.menu=640;wire.focus=400;wire.control=SHIFT_PRESSED|LEFT_ALT_PRESSED;
+        wire.x=INT_MIN;wire.y=INT_MAX;wire.buttons=3;saved=wire;
+        CHECK(ntcon_worker_decode_input(&wire,&record));
+        memcpy(&frame,&record.Event,sizeof(frame));
+        CHECK(record.EventType==CONSOLE_INPUT_FRAME_MOUSE && frame.dx==INT_MIN &&
+            frame.dy==INT_MAX && frame.width==640 && frame.height==400 &&
+            frame.buttons==3 && frame.control==wire.control);
+        wire.focus=65536;CHECK(!ntcon_worker_decode_input(&wire,&record));
+        wire=saved;wire.control=0x200;CHECK(!ntcon_worker_decode_input(&wire,&record));
+        wire=saved;wire.menu=0;CHECK(!ntcon_worker_decode_input(&wire,&record));
+        wire=saved;wire.repeat=1;CHECK(!ntcon_worker_decode_input(&wire,&record));
+        wire=saved;wire.flags=CONSOLE_MOUSE_ENTER;CHECK(!ntcon_worker_decode_input(&wire,&record));
+        wire.x=wire.y=wire.buttons=0;CHECK(ntcon_worker_decode_input(&wire,&record));
+        wire.flags=CONSOLE_MOUSE_LEAVE;CHECK(!ntcon_worker_decode_input(&wire,&record));
+        wire.menu=wire.focus=0;CHECK(ntcon_worker_decode_input(&wire,&record));
+        wire.type=0x8002;CHECK(!ntcon_worker_decode_input(&wire,&record));
+    }
     {
         ntcon_worker_client client={0};DWORD flags;
         HANDLE borrowed=CreateEventW(NULL,TRUE,FALSE,NULL),event;

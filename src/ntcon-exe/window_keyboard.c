@@ -3,7 +3,7 @@
 #define KEY_LOCK_BITS (CAPSLOCK_ON | NUMLOCK_ON | SCROLLLOCK_ON)
 
 DWORD frontend_keyboard_dispatch(frontend_keyboard_delivery *delivery,
-    const frontend_window_input *input,BOOL native,frontend_keyboard_sink sink,void *context)
+    const frontend_window_input *input,frontend_keyboard_sink sink,void *context)
 {
     frontend_window_keyboard_state next;
     INPUT_RECORD physical={0},records[FRONTEND_NATIVE_KEY_RECORDS];DWORD count=1,error;
@@ -22,19 +22,20 @@ DWORD frontend_keyboard_dispatch(frontend_keyboard_delivery *delivery,
         return frontend_native_keyboard_reset(&delivery->native);
     }
     if(event->type!=KVM_EVENT_KEY && event->type!=KVM_EVENT_TEXT)return ERROR_SUCCESS;
-    if(native && event->type==KVM_EVENT_TEXT) {
-        if(!event->source_identity || (next.source_identity && next.source_identity!=event->source_identity))
+    if(event->type==KVM_EVENT_TEXT) {
+        if(!event->source_identity || next.releasing ||
+            (next.source_identity && next.source_identity!=event->source_identity))
             return ERROR_INVALID_STATE;
         next.source_identity=event->source_identity;
     } else if(!frontend_window_keyboard_accept(&next,event,input->control_state,input->keyboard_layout,&physical))
         return GetLastError();
-    if(native || event->type==KVM_EVENT_KEY) {
+    {
         /* Original ntcon/HandleKeyEvent supplies character-bearing records
          * even to VDM. ReturnUnusedKeyEvents may give those records back to
          * a native reader, which cannot reconstruct text from scans alone. */
         error=frontend_native_keyboard_records(&delivery->native,event,&physical,input->keyboard_layout,records,&count);
         if(error)return error;
-    } else records[0]=physical;
+    }
     error=sink(context,records,count);
     if(!error)delivery->physical=next;
     return error;

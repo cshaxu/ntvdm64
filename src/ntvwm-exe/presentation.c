@@ -76,14 +76,14 @@ DWORD ntvwm_presentation_input(ntvwm_presentation *client,HANDLE input,DWORD *ac
     for(index=0;!error && index<reply.state.count;++index) {
         console_io_input wire;
         memcpy(&wire,reply.data+index*sizeof(wire),sizeof(wire));
-        if(wire.type==CONSOLE_INPUT_POINTER) {
-            console_pointer_input pointer;DWORD generated=0;
-            if(wire.buttons>3 || wire.flags<CONSOLE_MOUSE_ENTER || wire.flags>CONSOLE_MOUSE_POSITION) {
+        if(wire.type==CONSOLE_INPUT_FRAME_MOUSE) {
+            console_frame_mouse_input frame;DWORD generated=0;
+            INPUT_RECORD decoded;
+            if(!ntcon_worker_decode_input(&wire,&decoded)) {
                 error=ERROR_INVALID_DATA;break;
             }
-            pointer.dx=wire.x;pointer.dy=wire.y;pointer.control=wire.control;
-            pointer.buttons=(uint16_t)wire.buttons;pointer.action=(uint16_t)wire.flags;
-            error=ntvwm_mouse_input(&client->mouse,&pointer,records+count,&generated);
+            memcpy(&frame,&decoded.Event,sizeof(frame));
+            error=ntvwm_mouse_input(&client->mouse,&frame,records+count,&generated);
             count+=generated;
         } else {
             if(!ntcon_worker_decode_input(&wire,&records[count]))error=ERROR_INVALID_DATA;
@@ -452,7 +452,7 @@ DWORD ntvwm_presentation_end(ntvwm_presentation *client,const console_text_style
     if(!client || !font)return ERROR_INVALID_PARAMETER;
     EnterCriticalSection(&client->lock);
     {
-        console_pointer_input leave={0};INPUT_RECORD records[2];DWORD count=0,written=0;
+        console_frame_mouse_input leave={0};INPUT_RECORD records[2];DWORD count=0,written=0;
         leave.action=CONSOLE_MOUSE_LEAVE;
         error=client->mouse.ready ? ntvwm_mouse_input(&client->mouse,&leave,records,&count) : 0;
         if(!error && count)error=ntvwm_input_write(GetStdHandle(STD_INPUT_HANDLE),records,count,&written);

@@ -53,16 +53,16 @@ static DWORD observe_keyboard_sink(void *context,const INPUT_RECORD *records,DWO
     return error;
 }
 DWORD frontend_keyboard_dispatch(frontend_keyboard_delivery *delivery,
-    const frontend_window_input *input,BOOL native,frontend_keyboard_sink sink,void *context)
+    const frontend_window_input *input,frontend_keyboard_sink sink,void *context)
 {
     observed_keyboard_sink observed={sink,context};FILE *file=report();DWORD error;
     if(file) {
-        fprintf(file,"WINDOW_EVENT tick=%llu native=%d source=%llu type=%u down=%u scan=%u\n",
-            GetTickCount64(),native,input->event.source_identity,input->event.type,
+        fprintf(file,"WINDOW_EVENT tick=%llu source=%llu type=%u down=%u scan=%u\n",
+            GetTickCount64(),input->event.source_identity,input->event.type,
             input->event.data.key.pressed,input->event.data.key.scan_code);
         close_report(file);
     }
-    error=production_keyboard_dispatch(delivery,input,native,observe_keyboard_sink,&observed);
+    error=production_keyboard_dispatch(delivery,input,observe_keyboard_sink,&observed);
     return error;
 }
 

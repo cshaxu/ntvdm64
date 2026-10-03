@@ -57,14 +57,6 @@ BOOL frontend_window_input_queue_push(frontend_window_input_queue *queue,
         copied.keyboard_layout = GetKeyboardLayout(0);
         copied.ui_thread_id = GetCurrentThreadId();
     }
-    /* Snapshot with the UI event, not after another event or handoff changes
-     * the pointer/clip. Native text uses this absolute position; DOS still
-     * consumes the original relative KVM event. */
-    if (event->type == KVM_EVENT_MOUSE && GetCapture() &&
-        GetCursorPos(&copied.pointer_screen) && GetClipCursor(&copied.pointer_clip) &&
-        copied.pointer_clip.right>copied.pointer_clip.left &&
-        copied.pointer_clip.bottom>copied.pointer_clip.top)
-        copied.pointer_position_valid=TRUE;
     return enqueue(queue, &copied);
 }
 

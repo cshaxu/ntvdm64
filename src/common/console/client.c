@@ -127,6 +127,20 @@ DWORD ntcon_worker_publish_title(ntcon_worker_client *client,const char *title)
 
 BOOL ntcon_worker_decode_input(const console_io_input *wire,INPUT_RECORD *record)
 {
+    if(!wire || !record)return FALSE;
+    if(wire->type==CONSOLE_INPUT_FRAME_MOUSE) {
+        console_frame_mouse_input mouse;
+        if(wire->menu>UINT16_MAX || wire->focus>UINT16_MAX ||
+            wire->control>UINT16_MAX || wire->buttons>UINT8_MAX || wire->flags>UINT8_MAX ||
+            wire->repeat || wire->virtual_key || wire->scan || wire->character || wire->key_down)
+            return FALSE;
+        mouse.dx=wire->x;mouse.dy=wire->y;mouse.width=(uint16_t)wire->menu;
+        mouse.height=(uint16_t)wire->focus;mouse.control=(uint16_t)wire->control;
+        mouse.buttons=(uint8_t)wire->buttons;mouse.action=(uint8_t)wire->flags;
+        if(!console_frame_mouse_input_valid(&mouse))return FALSE;
+        ZeroMemory(record,sizeof(*record));record->EventType=CONSOLE_INPUT_FRAME_MOUSE;
+        memcpy(&record->Event,&mouse,sizeof(mouse));return TRUE;
+    }
     if(wire->type>UINT16_MAX || wire->repeat>UINT16_MAX || wire->virtual_key>UINT16_MAX ||
         wire->scan>UINT16_MAX || wire->character>UINT16_MAX || wire->key_down>1 || wire->focus>1 ||
         wire->x<SHRT_MIN || wire->x>SHRT_MAX || wire->y<SHRT_MIN || wire->y>SHRT_MAX)return FALSE;

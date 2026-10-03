@@ -1406,7 +1406,7 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build obj/tests/ntvwm_next_command.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/ntvwm_next_command_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build ntvwm-next-command-test.exe: console_test_link obj/tests/ntvwm_next_command.obj obj/ntvwm/next_command.obj')
-    foreach ($kind in @('library','controller','keyboard')) {
+    foreach ($kind in @('library','controller','keyboard','mouse')) {
         $source = Join-Path $root ('tests/component-integration/frontend_window_' + $kind + '_test.c')
         $object = 'obj/tests/frontend_window_' + $kind + '.obj'
         $graph.Add('build ' + $object + ': cc ' + (NinjaPath $source))

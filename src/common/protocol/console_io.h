@@ -6,7 +6,7 @@
 
 /* Direct worker/frontend protocol; no pointers or native resource identities.
  * Local x86 peers are authenticated by the BaseSrv channel attachment. */
-#define CONSOLE_IO_VERSION 22u
+#define CONSOLE_IO_VERSION 23u
 /* Activation's state.mode selects the endpoint's input interpretation, not
  * a different frame format or an execution scheduler. */
 enum { CONSOLE_IO_WORKER_DOS=0, CONSOLE_IO_WORKER_NATIVE=1 };
@@ -22,6 +22,9 @@ typedef struct console_io_cell {
     uint16_t character,attribute;
 } console_io_cell;
 typedef struct console_io_input {
+    /* FRAME_MOUSE: x/y are signed content-pixel deltas, flags is action,
+     * control is Windows modifier bits, menu/focus are width/height. Other
+     * fields must be zero. Ordinary Windows tags retain their native shape. */
     uint32_t type,flags,control,repeat,virtual_key,scan,character,key_down;
     int32_t x,y;
     uint32_t buttons,menu,focus;

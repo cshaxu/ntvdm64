@@ -23,16 +23,13 @@ static INPUT_RECORD pointer_record(const ntvwm_mouse *mouse,DWORD buttons,DWORD 
     result.Event.MouseEvent.dwEventFlags=flags;result.Event.MouseEvent.dwControlKeyState=control;
     return result;
 }
-DWORD ntvwm_mouse_input(ntvwm_mouse *mouse,const console_pointer_input *input,
+DWORD ntvwm_mouse_input(ntvwm_mouse *mouse,const console_frame_mouse_input *input,
     INPUT_RECORD records[2],DWORD *count)
 {
     ntvwm_mouse next;DWORD buttons;
     if(!mouse || !input || !records || !count)return ERROR_INVALID_PARAMETER;
     *count=0;
-    if(input->buttons>3 || input->action<CONSOLE_MOUSE_ENTER || input->action>CONSOLE_MOUSE_POSITION ||
-        (input->action!=CONSOLE_MOUSE_MOVE && input->action!=CONSOLE_MOUSE_POSITION &&
-         (input->dx || input->dy || input->buttons)))
-        return ERROR_INVALID_DATA;
+    if(!console_frame_mouse_input_valid(input))return ERROR_INVALID_DATA;
     if(!mouse->ready)return ERROR_NOT_READY;
     next=*mouse;
     if(input->action==CONSOLE_MOUSE_LEAVE) {
@@ -40,10 +37,8 @@ DWORD ntvwm_mouse_input(ntvwm_mouse *mouse,const console_pointer_input *input,
         next.buttons=0;next.visible=FALSE;
     } else {
         next.visible=TRUE;
-        next.x=pointer_bound(input->action==CONSOLE_MOUSE_POSITION ? input->dx :
-            (LONGLONG)next.x+input->dx,(next.viewport.Right-next.viewport.Left+1)*8);
-        next.y=pointer_bound(input->action==CONSOLE_MOUSE_POSITION ? input->dy :
-            (LONGLONG)next.y+input->dy,
+        next.x=pointer_bound((LONGLONG)next.x+input->dx,(next.viewport.Right-next.viewport.Left+1)*8);
+        next.y=pointer_bound((LONGLONG)next.y+input->dy,
             (next.viewport.Bottom-next.viewport.Top+1)*next.font_height);
         buttons=((input->buttons&1) ? FROM_LEFT_1ST_BUTTON_PRESSED : 0) |
             ((input->buttons&2) ? RIGHTMOST_BUTTON_PRESSED : 0);

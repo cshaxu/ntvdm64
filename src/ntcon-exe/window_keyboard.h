@@ -54,6 +54,6 @@ typedef struct frontend_keyboard_delivery {
 /* Caller serializes dispatch and does not change backend until retirement.
  * A failed sink is terminal: translation state must not be replayed. */
 DWORD frontend_keyboard_dispatch(frontend_keyboard_delivery *,
-    const frontend_window_input *,BOOL native,frontend_keyboard_sink,void *);
+    const frontend_window_input *,frontend_keyboard_sink,void *);
 
 #endif

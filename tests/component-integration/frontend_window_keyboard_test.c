@@ -22,9 +22,9 @@ static void returned_dos_tests(BOOL cooked)
     input.event.type=KVM_EVENT_KEY;input.event.source_identity=51;
     for(index=0;index<ARRAYSIZE(scans);++index) {
         input.event.data.key.scan_code=scans[index];input.event.data.key.pressed=TRUE;
-        assert(!frontend_keyboard_dispatch(&delivery,&input,FALSE,returned_sink,&returned));
+        assert(!frontend_keyboard_dispatch(&delivery,&input,returned_sink,&returned));
         input.event.data.key.pressed=FALSE;
-        assert(!frontend_keyboard_dispatch(&delivery,&input,FALSE,returned_sink,&returned));
+        assert(!frontend_keyboard_dispatch(&delivery,&input,returned_sink,&returned));
         assert(returned.count==2*(index+1));
         assert(returned.records[2*index].Event.KeyEvent.wVirtualScanCode==scans[index]);
         assert(returned.records[2*index].Event.KeyEvent.uChar.UnicodeChar==characters[index]);
@@ -58,16 +58,16 @@ static void delivery_tests(void)
     input.keyboard_layout=GetKeyboardLayout(0);
     input.event.source_identity=37;input.event.type=KVM_EVENT_KEY;
     input.event.data.key.scan_code=0x1e;input.event.data.key.key='A';input.event.data.key.pressed=TRUE;
-    assert(frontend_keyboard_dispatch(&delivery,&input,FALSE,checked_sink,&check)==ERROR_BROKEN_PIPE);
+    assert(frontend_keyboard_dispatch(&delivery,&input,checked_sink,&check)==ERROR_BROKEN_PIPE);
     assert(delivery.physical.held_count==0 && !delivery.physical.source_identity);
     check.error=0;
-    assert(!frontend_keyboard_dispatch(&delivery,&input,FALSE,checked_sink,&check));
+    assert(!frontend_keyboard_dispatch(&delivery,&input,checked_sink,&check));
     assert(delivery.physical.held_count==1 && check.count==1 && check.down);
     input.event.type=KVM_EVENT_SOURCE_RETIRED;check.error=ERROR_BROKEN_PIPE;
-    assert(frontend_keyboard_dispatch(&delivery,&input,FALSE,checked_sink,&check)==ERROR_BROKEN_PIPE);
+    assert(frontend_keyboard_dispatch(&delivery,&input,checked_sink,&check)==ERROR_BROKEN_PIPE);
     assert(delivery.physical.held_count==1 && check.count==1);
     check.error=0;
-    assert(!frontend_keyboard_dispatch(&delivery,&input,FALSE,checked_sink,&check));
+    assert(!frontend_keyboard_dispatch(&delivery,&input,checked_sink,&check));
     assert(delivery.physical.held_count==0 && !delivery.physical.source_identity && check.count==2 && !check.down);
     puts("PASS failed sink does not commit press/release; successful retirement sends one matching break");
 }
@@ -81,23 +81,23 @@ static void input_reset_tests(void)
         input.keyboard_layout=GetKeyboardLayout(0);
         input.event.source_identity=37;input.event.type=KVM_EVENT_KEY;
         input.event.data.key.scan_code=0x1e;input.event.data.key.key='A';input.event.data.key.pressed=TRUE;
-        assert(!frontend_keyboard_dispatch(&delivery,&input,native,checked_sink,&check));
+        assert(!frontend_keyboard_dispatch(&delivery,&input,checked_sink,&check));
         input.event.type=KVM_EVENT_INPUT_RESET;input.event.source_identity=38;
-        assert(!frontend_keyboard_dispatch(&delivery,&input,native,checked_sink,&check));
+        assert(!frontend_keyboard_dispatch(&delivery,&input,checked_sink,&check));
         assert(delivery.physical.held_count==1 && check.count==1);
         input.event.source_identity=37;check.error=ERROR_BROKEN_PIPE;
-        assert(frontend_keyboard_dispatch(&delivery,&input,native,checked_sink,&check)==ERROR_BROKEN_PIPE);
+        assert(frontend_keyboard_dispatch(&delivery,&input,checked_sink,&check)==ERROR_BROKEN_PIPE);
         assert(delivery.physical.held_count==1 && check.count==1);
         check.error=0;
-        assert(!frontend_keyboard_dispatch(&delivery,&input,native,checked_sink,&check));
+        assert(!frontend_keyboard_dispatch(&delivery,&input,checked_sink,&check));
         assert(delivery.physical.held_count==0 && delivery.physical.source_identity==37 && check.count==2 && !check.down);
-        assert(!frontend_keyboard_dispatch(&delivery,&input,native,checked_sink,&check));
+        assert(!frontend_keyboard_dispatch(&delivery,&input,checked_sink,&check));
         assert(check.count==2);
         input.event.type=KVM_EVENT_KEY;
-        assert(!frontend_keyboard_dispatch(&delivery,&input,native,checked_sink,&check));
+        assert(!frontend_keyboard_dispatch(&delivery,&input,checked_sink,&check));
         assert(check.count==3 && check.down && delivery.physical.held_count==1);
         input.event.type=KVM_EVENT_SOURCE_RETIRED;
-        assert(!frontend_keyboard_dispatch(&delivery,&input,native,checked_sink,&check));
+        assert(!frontend_keyboard_dispatch(&delivery,&input,checked_sink,&check));
         assert(check.count==4 && !delivery.physical.source_identity);
     }
     puts("PASS DOS/native input reset: source isolation, rejected sink, idempotence and live-source reuse");
@@ -293,5 +293,22 @@ int main(int argc,char **argv)
     native_tests(argc==2 && !strcmp(argv[1],"--cooked"));
     delivery_tests();
     returned_dos_tests(argc==2 && !strcmp(argv[1],"--cooked"));
+    {
+        frontend_keyboard_delivery delivery={0};frontend_window_input input={0};
+        returned_input output={0};
+        input.keyboard_layout=layout;input.event.source_identity=73;
+        input.event.type=KVM_EVENT_TEXT;input.event.data.text.scalar=0x1f600;
+        assert(!frontend_keyboard_dispatch(&delivery,&input,returned_sink,&output));
+        assert(output.count==2 && output.records[0].Event.KeyEvent.wVirtualKeyCode==VK_PACKET &&
+            output.records[0].Event.KeyEvent.uChar.UnicodeChar==0xd83d &&
+            output.records[1].Event.KeyEvent.uChar.UnicodeChar==0xde00);
+        input.event.source_identity=74;
+        assert(frontend_keyboard_dispatch(&delivery,&input,returned_sink,&output)==ERROR_INVALID_STATE);
+        input.event.source_identity=73;input.event.data.text.scalar=0xd800;
+        assert(frontend_keyboard_dispatch(&delivery,&input,returned_sink,&output)==ERROR_NO_UNICODE_TRANSLATION);
+        assert(output.count==2);
+        assert(!frontend_native_keyboard_reset(&delivery.native));
+        puts("PASS unified text dispatch: surrogate pair, stale source and invalid scalar rejection; worker policy remains local");
+    }
     return 0;
 }

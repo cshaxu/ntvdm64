@@ -23,7 +23,7 @@ static lib_bool input(void *context,const frontend_window_input *copied)
     if(!seen->consumer_thread)seen->consumer_thread=GetCurrentThreadId();
     if(seen->consumer_thread!=GetCurrentThreadId() || event->source)return LIB_FALSE;
     if(event->type==KVM_EVENT_SOURCE_RETIRED)InterlockedIncrement(&seen->retired);
-    if(seen->native_input && frontend_keyboard_dispatch(&seen->keyboard,copied,TRUE,deliver_console,seen))
+    if(seen->native_input && frontend_keyboard_dispatch(&seen->keyboard,copied,deliver_console,seen))
         return LIB_FALSE;
     return LIB_TRUE;
 }

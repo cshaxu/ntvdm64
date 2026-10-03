@@ -2,7 +2,9 @@
 
 ## Current Work
 
-**Active: M0 T425 S1, Ordinary Mode.** Owner closes T424 and admits
+**No active M/T/S packet.** M0 T425 remains open; S1 P1 delivered,
+Ordinary Mode. This is the intermission between S deliveries.
+S2 is next in the ordered approved plan. Owner closes T424 and admits
 the new NTCON worker-neutral I/O package. The
 [T424 closure](../history/m0-t424-component-control-closure.md) retains its
 thirteen delivered stages, exact S12 publication and remaining limitations.
@@ -15,11 +17,14 @@ host input and owns common I/O handoff; workers preserve their own original
 device/native Console interpretation. No original mirror, guest or imported
 library change is authorized. T425 closure remains owner-controlled.
 
-Production remains S12 46abdb554, audited at S13 ff50ff588: x86 /MT CCPU40,
-APP 0.0.424, protocol/RPC34 I/O22, eight files at O:/winnt. This admission is
-documentation-only; it does not publish new runtime capabilities.
+S1's worker-neutral input implementation is built and published: x86 /MT
+CCPU40 APP 0.0.425, protocol/RPC35 I/O23, eight files at O:/winnt. The
+[S1 ledger](../etc/evidence/m0-t425-s1-worker-neutral-input.md) records source
+disposition, exact release/recovery hashes, tests and physical RDP limits.
+S1 is closed by this reviewed P commit/push. S2/S3 owner
+and publication consolidation is not implemented by this input delivery.
 
-## Active Packet
+## Most Recently Delivered Packet
 
 | Field | Admitted record |
 | --- | --- |
@@ -41,13 +46,15 @@ documentation-only; it does not publish new runtime capabilities.
 
 ## Current Technical Baseline
 
-Published S12 46abdb554 at O:/winnt: run16.exe, ntsrv.exe, ntvdm.exe,
-ntvwm.exe, ntcon.exe, ntmon.exe, WOW32.DLL, VDMREDIR.DLL. APP 0.0.424,
-protocol/RPC34 I/O22, MSVC Win32/x86 /MT CCPU40. Exact release/recovery hashes,
-Console17/Window17 and retained limits are in the
-[S12 ledger](../etc/evidence/m0-t424-s12-logical-surface.md).
+Published T425 S1 at O:/winnt: run16.exe, ntsrv.exe, ntvdm.exe,
+ntvwm.exe, ntcon.exe, ntmon.exe, WOW32.DLL, VDMREDIR.DLL. APP 0.0.425,
+protocol/RPC35 I/O23, MSVC Win32/x86 /MT CCPU40. Exact release/recovery hashes,
+Console17/Window17 and retained limits are in the S1 ledger. The prior
+[S12 ledger](../etc/evidence/m0-t424-s12-logical-surface.md) remains the
+accepted T424 recovery baseline.
 [S13](../etc/evidence/m0-t424-s13-final-audit.md) indexes all thirteen stages.
-T425 has not changed or republished runtime products at admission.
+Original mirrors, imported libraries and guest/configuration are unchanged
+by T425 S1. Physical RDP capture is not claimed verified or fixed.
 
 ## Previous T closure
 
@@ -66,6 +73,9 @@ in T424's closure history and ff50ff588, not an active packet.
 
 ## Recent Governance
 
+S1 P1 delivers worker-neutral input with coherent eight-file publication and
+retained regression gates. Its containing commit owns this status and the
+S1 ledger. T425 remains open for S2/S3 consolidation and S4 owner audit.
 Owner closes T424 and admits T425 for worker-neutral frontend I/O. The
 provisional T424 S14 documentation brief transfers without an implementation
 claim. Queue order is unchanged. Pure admission/closure documentation does

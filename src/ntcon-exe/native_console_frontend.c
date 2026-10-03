@@ -46,9 +46,7 @@ struct run16_native_frontend {
     BOOL controls_live;
     frontend_window_controller *window;
     frontend_keyboard_delivery keyboard;
-    frontend_dos_mouse dos_mouse;
-    DWORD pointer_control;
-    const frontend_window_input *pointer_input;
+    frontend_window_mouse window_mouse;
     kvm_window_frame *window_frame;
     BOOL window_active;
     BOOL console_f_down,console_shortcut;
@@ -365,29 +363,6 @@ static DWORD dos_input_write(run16_native_frontend *frontend,
 static DWORD window_records(void *context,const INPUT_RECORD *records,DWORD count)
 {
     run16_native_frontend *frontend=context;
-    if(!frontend->dos_owner && count && records[0].EventType==CONSOLE_INPUT_RELATIVE_MOUSE) {
-        INPUT_RECORD translated[2];DWORD i;
-        if(count>ARRAYSIZE(translated))return ERROR_INVALID_DATA;
-        memcpy(translated,records,count*sizeof(*records));
-        for(i=0;i<count;++i)if(records[i].EventType==CONSOLE_INPUT_RELATIVE_MOUSE) {
-            console_mouse_input motion;console_pointer_input pointer;
-            memcpy(&motion,&records[i].Event,sizeof(motion));
-            pointer.dx=motion.dx;pointer.dy=motion.dy;pointer.control=frontend->pointer_control;
-            pointer.buttons=motion.buttons;pointer.action=motion.action;
-            if(motion.action==CONSOLE_MOUSE_MOVE && frontend->pointer_input &&
-                frontend->window_frame && frontend->window_frame->valid &&
-                !frontend->window_frame->graphics &&
-                frontend_native_pointer_position(frontend->pointer_input,
-                    frontend->window_frame->text.base.text_columns*8u,
-                    frontend->window_frame->text.base.text_rows*
-                        (frontend->window_frame->text.base.font_height ?
-                         frontend->window_frame->text.base.font_height : 16u),
-                    &pointer.dx,&pointer.dy))pointer.action=CONSOLE_MOUSE_POSITION;
-            translated[i].EventType=CONSOLE_INPUT_POINTER;
-            memcpy(&translated[i].Event,&pointer,sizeof(pointer));
-        }
-        return dos_input_write(frontend,translated,count,FALSE);
-    }
     /* Both workers consume this copied queue through the same channel. */
     return dos_input_write(frontend,records,count,FALSE);
 }
@@ -395,12 +370,9 @@ static lib_bool window_input(void *context,const frontend_window_input *input)
 {
     run16_native_frontend *frontend=context;
     DWORD error;
-    frontend->pointer_control=input->control_state;
-    frontend->pointer_input=input;
-    error=frontend_dos_mouse_dispatch(&frontend->dos_mouse,input,window_records,frontend);
-    frontend->pointer_input=NULL;
+    error=frontend_window_mouse_dispatch(&frontend->window_mouse,input,window_records,frontend);
     if(error)return FALSE;
-    return frontend_keyboard_dispatch(&frontend->keyboard,input,!frontend->dos_owner,
+    return frontend_keyboard_dispatch(&frontend->keyboard,input,
         window_records,frontend)==ERROR_SUCCESS;
 }
 static DWORD window_route(void *context,BOOL window,BOOL graphics)
@@ -408,7 +380,7 @@ static DWORD window_route(void *context,BOOL window,BOOL graphics)
     run16_native_frontend *frontend=context;
     (void)graphics;
     if(!window) {
-        DWORD error=frontend_dos_mouse_leave(&frontend->dos_mouse,window_records,frontend);
+        DWORD error=frontend_window_mouse_leave(&frontend->window_mouse,window_records,frontend);
         if(error)return error;
     }
     /* Drain records with their old source policy before changing visibility.
@@ -435,8 +407,8 @@ static DWORD window_route(void *context,BOOL window,BOOL graphics)
     frontend->window_active=window;
     /* Painting must work before the user moves the mouse. Geometry may arrive
        after a forced Window selection; the frame path completes that case. */
-    if(window && frontend->dos_mouse.width)
-        return frontend_dos_mouse_enter(&frontend->dos_mouse,window_records,frontend);
+    if(window && frontend->window_mouse.width)
+        return frontend_window_mouse_enter(&frontend->window_mouse,window_records,frontend);
     return ERROR_SUCCESS;
 }
 /* Recover the former window_input_binding.c Console CAF debounce, with no
@@ -559,7 +531,7 @@ static DWORD present_loop(run16_native_frontend *frontend)
             error=collect_dos_console(frontend);
             waits[count++]=frontend->console_input;
         }
-        if(!error && frontend->dos_mouse.width)
+        if(!error && frontend->window_mouse.width)
             error=frontend_window_poll(frontend->window);
         if(!error) {
             LONG display=InterlockedExchange(&frontend->display_request,0);
@@ -577,11 +549,11 @@ static DWORD present_loop(run16_native_frontend *frontend)
                     if(!error && !kvm_window_frame_size(frontend->window_frame,&width,&height))
                         error=ERROR_INVALID_DATA;
                     if(!error)
-                        error=frontend_dos_mouse_geometry(&frontend->dos_mouse,width,height);
+                        error=frontend_window_mouse_geometry(&frontend->window_mouse,width,height);
                     if(!error)error=frontend_window_present(frontend->window,frontend->window_frame,
                         video->description.kind==CONSOLE_VIDEO_DIB);
                     if(!error && frontend->window_active)
-                        error=frontend_dos_mouse_enter(&frontend->dos_mouse,window_records,frontend);
+                        error=frontend_window_mouse_enter(&frontend->window_mouse,window_records,frontend);
                 } else error=frontend_window_clear(frontend->window);
                 if(!error)*published=serial;
             }
@@ -796,7 +768,7 @@ static DWORD apply_binding(run16_native_frontend *frontend,const void *owner,BOO
         error=prepare_logical_surface(frontend);
         if(error)return error;
     }
-    if(frontend->dos_mouse.width)
+    if(frontend->window_mouse.width)
         error=frontend_window_mode(frontend->window)==FRONTEND_DISPLAY_WINDOW ?
             frontend_window_poll(frontend->window) : frontend_window_clear(frontend->window);
     if(error)return error;
@@ -804,12 +776,12 @@ static DWORD apply_binding(run16_native_frontend *frontend,const void *owner,BOO
      * Keep unsent keyboard/focus typeahead in the one frontend queue. */
     for(i=0;i<frontend->dos_input_count;++i) {
         WORD type=frontend->dos_input[i].EventType;
-        if(type!=CONSOLE_INPUT_RELATIVE_MOUSE && type!=CONSOLE_INPUT_POINTER && type!=MOUSE_EVENT)
+        if(type!=CONSOLE_INPUT_FRAME_MOUSE && type!=MOUSE_EVENT)
             frontend->dos_input[kept++]=frontend->dos_input[i];
     }
     frontend->dos_input_count=kept;
     if(!kept && !ResetEvent(frontend->dos_input_ready))return GetLastError();
-    ZeroMemory(&frontend->dos_mouse,sizeof(frontend->dos_mouse));
+    ZeroMemory(&frontend->window_mouse,sizeof(frontend->window_mouse));
     *slot=active ? owner : NULL;
     frontend->title_owner=NULL;frontend->worker_title_valid=FALSE;
     if(!native && frontend->dos_pending==owner)frontend->dos_pending=NULL;
@@ -1005,7 +977,7 @@ void run16_native_frontend_dos_forget(run16_native_frontend *frontend,const void
     if(frontend->dos_owner==owner) {
         frontend->dos_owner=NULL;frontend->dos_video=NULL;
         frontend->dos_video_serial=0;
-        ZeroMemory(&frontend->dos_mouse,sizeof(frontend->dos_mouse));
+        ZeroMemory(&frontend->window_mouse,sizeof(frontend->window_mouse));
     }
     if(frontend->native_owner==owner) {
         frontend->native_owner=NULL;frontend->native_video=NULL;frontend->native_video_serial=0;

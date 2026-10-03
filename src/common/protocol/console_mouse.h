@@ -2,25 +2,23 @@
 #define NTVDM_CONSOLE_MOUSE_H
 #include <stdint.h>
 
-/* Private copied input between authenticated frontend and DOS worker. This
- * tag is never a Windows Console INPUT_RECORD event for a native process. */
+/* Existing NTVDM-local device record. The frontend wire uses FRAME_MOUSE;
+ * NTVDM adapts it before the original MVDM input loop. */
 #define CONSOLE_INPUT_RELATIVE_MOUSE 0x8001u
-/* Backend-owned logical pointer. Unlike the DOS geometry notification above,
- * this carries modifiers, not a frontend-selected coordinate extent. Never
- * deliver this private record to a native Console application. */
-#define CONSOLE_INPUT_POINTER 0x8002u
-typedef struct console_pointer_input {
+/* Worker-neutral Window sample: relative content pixels, source geometry and
+ * Windows modifier bits. Console input remains ordinary absolute MOUSE_EVENT.
+ * Workers interpret this copied record locally; never write it to Windows. */
+#define CONSOLE_INPUT_FRAME_MOUSE 0x8003u
+typedef struct console_frame_mouse_input {
     int32_t dx,dy;
-    uint32_t control;
-    uint16_t buttons,action;
-} console_pointer_input;
-typedef char console_pointer_payload_size[(sizeof(console_pointer_input)==16) ? 1 : -1];
+    uint16_t width,height,control;
+    uint8_t buttons,action;
+} console_frame_mouse_input;
+typedef char console_frame_mouse_payload_size[(sizeof(console_frame_mouse_input)==16) ? 1 : -1];
 enum console_mouse_action {
     CONSOLE_MOUSE_ENTER=1,
     CONSOLE_MOUSE_MOVE,
-    CONSOLE_MOUSE_LEAVE,
-    /* Native text pointer coordinates in content pixels, not a delta. */
-    CONSOLE_MOUSE_POSITION
+    CONSOLE_MOUSE_LEAVE
 };
 typedef struct console_mouse_input {
     int32_t dx,dy;
@@ -38,5 +36,14 @@ static __inline int console_mouse_input_valid(const console_mouse_input *input)
     if(input->action==CONSOLE_MOUSE_ENTER)
         return !input->dx && !input->dy && !input->buttons;
     return input->action==CONSOLE_MOUSE_MOVE;
+}
+static __inline int console_frame_mouse_input_valid(const console_frame_mouse_input *input)
+{
+    console_mouse_input geometry;
+    if(!input || (input->control&~0x1ffu))return 0;
+    geometry.dx=input->dx;geometry.dy=input->dy;
+    geometry.width=input->width;geometry.height=input->height;
+    geometry.buttons=input->buttons;geometry.action=input->action;
+    return console_mouse_input_valid(&geometry);
 }
 #endif

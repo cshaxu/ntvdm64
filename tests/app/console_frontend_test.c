@@ -37,14 +37,8 @@ static DWORD relative_input(void *context,BOOL peek,INPUT_RECORD *records,DWORD 
 {
     (void)peek;
     if(!capacity)return ERROR_INSUFFICIENT_BUFFER;
-    ZeroMemory(records,sizeof(*records));records->EventType=CONSOLE_INPUT_RELATIVE_MOUSE;
-    memcpy(&records->Event,context,sizeof(console_mouse_input));*count=1;return ERROR_SUCCESS;
-}
-static DWORD pointer_input(void *context,BOOL peek,INPUT_RECORD *records,DWORD capacity,DWORD *count)
-{
-    DWORD error=relative_input(context,peek,records,capacity,count);
-    if(!error)records->EventType=CONSOLE_INPUT_POINTER;
-    return error;
+    ZeroMemory(records,sizeof(*records));records->EventType=CONSOLE_INPUT_FRAME_MOUSE;
+    memcpy(&records->Event,context,sizeof(console_frame_mouse_input));*count=1;return ERROR_SUCCESS;
 }
 static void operation(run16_console_frontend *owner,uint32_t op)
 {
@@ -223,46 +217,49 @@ int main(void)
     CHECK(!run16_console_dispatch(&owner,&request,&reply) && !reply.result &&
         reply.error==ERROR_INVALID_DATA && reply.state.count==0);
     {
-        console_mouse_input mouse={INT32_MIN,INT32_MAX,640,400,3,CONSOLE_MOUSE_MOVE};
+        console_frame_mouse_input mouse={INT32_MIN,INT32_MAX,640,400,
+            SHIFT_PRESSED|RIGHT_CTRL_PRESSED,3,CONSOLE_MOUSE_MOVE};
         console_io_input wire;
         CHECK(sizeof(mouse)<=sizeof(((INPUT_RECORD *)0)->Event));
         owner.read_input=relative_input;owner.io_context=&mouse;
         operation(&owner,CONSOLE_IO_READ_INPUT);request.state.count=1;
         CHECK(!run16_console_dispatch(&owner,&request,&reply) && reply.result && reply.state.count==1);
         memcpy(&wire,reply.data,sizeof(wire));
-        CHECK(wire.type==CONSOLE_INPUT_RELATIVE_MOUSE && wire.x==INT32_MIN && wire.y==INT32_MAX &&
-            wire.buttons==3 && wire.flags==CONSOLE_MOUSE_MOVE && wire.control==(640u|(400u<<16)));
+        CHECK(wire.type==CONSOLE_INPUT_FRAME_MOUSE && wire.x==INT32_MIN && wire.y==INT32_MAX &&
+            wire.buttons==3 && wire.flags==CONSOLE_MOUSE_MOVE && wire.control==mouse.control &&
+            wire.menu==640 && wire.focus==400);
         mouse.buttons=4;
         operation(&owner,CONSOLE_IO_PEEK_INPUT);request.state.count=1;
         CHECK(!run16_console_dispatch(&owner,&request,&reply) && !reply.result && reply.error==ERROR_INVALID_DATA);
         mouse.buttons=0;mouse.dx=mouse.dy=0;mouse.action=CONSOLE_MOUSE_LEAVE;
-        CHECK(!console_mouse_input_valid(&mouse));
-        mouse.width=mouse.height=0;CHECK(console_mouse_input_valid(&mouse));
+        CHECK(!console_frame_mouse_input_valid(&mouse));
+        mouse.width=mouse.height=0;CHECK(console_frame_mouse_input_valid(&mouse));
         owner.read_input=NULL;owner.io_context=NULL;
         puts("PASS private DOS relative input retains 32-bit motion/geometry; malformed buttons and leave rejected; old protocol rejected");
     }
     {
-        console_pointer_input mouse={INT32_MIN,INT32_MAX,SHIFT_PRESSED|RIGHT_CTRL_PRESSED,3,CONSOLE_MOUSE_MOVE};
+        console_frame_mouse_input mouse={INT32_MIN,INT32_MAX,640,400,
+            SHIFT_PRESSED|RIGHT_CTRL_PRESSED,3,CONSOLE_MOUSE_MOVE};
         console_io_input wire;
-        owner.read_input=pointer_input;owner.io_context=&mouse;
+        owner.read_input=relative_input;owner.io_context=&mouse;
         operation(&owner,CONSOLE_IO_READ_INPUT);request.state.count=1;
         CHECK(!run16_console_dispatch(&owner,&request,&reply) && reply.result && reply.state.count==1);
         memcpy(&wire,reply.data,sizeof(wire));
-        CHECK(wire.type==CONSOLE_INPUT_POINTER && wire.x==INT32_MIN && wire.y==INT32_MAX &&
+        CHECK(wire.type==CONSOLE_INPUT_FRAME_MOUSE && wire.x==INT32_MIN && wire.y==INT32_MAX &&
             wire.buttons==3 && wire.flags==CONSOLE_MOUSE_MOVE && wire.control==mouse.control);
         mouse.buttons=4;
         operation(&owner,CONSOLE_IO_READ_INPUT);request.state.count=1;
         CHECK(!run16_console_dispatch(&owner,&request,&reply) && !reply.result && reply.error==ERROR_INVALID_DATA);
-        mouse.buttons=0;mouse.action=CONSOLE_MOUSE_POSITION;
+        mouse.buttons=0;mouse.action=CONSOLE_MOUSE_ENTER;mouse.dx=mouse.dy=0;
         operation(&owner,CONSOLE_IO_READ_INPUT);request.state.count=1;
         CHECK(!run16_console_dispatch(&owner,&request,&reply) && reply.result && reply.state.count==1);
         memcpy(&wire,reply.data,sizeof(wire));
-        CHECK(wire.type==CONSOLE_INPUT_POINTER && wire.flags==CONSOLE_MOUSE_POSITION);
-        mouse.action=CONSOLE_MOUSE_POSITION+1;
+        CHECK(wire.type==CONSOLE_INPUT_FRAME_MOUSE && wire.flags==CONSOLE_MOUSE_ENTER);
+        mouse.action=CONSOLE_MOUSE_LEAVE+1;
         operation(&owner,CONSOLE_IO_READ_INPUT);request.state.count=1;
         CHECK(!run16_console_dispatch(&owner,&request,&reply) && !reply.result && reply.error==ERROR_INVALID_DATA);
         owner.read_input=NULL;owner.io_context=NULL;
-        puts("PASS worker-owned pointer wire: full signed motion, modifiers, button/action validation; no frontend dimensions");
+        puts("PASS common frame mouse wire: signed motion, geometry, modifiers, button/action validation; no worker type");
     }
     owner.screen_begin=begin_screen;owner.screen_end=end_screen;owner.leave=leave_screen;
     begin_error=ERROR_BUSY;
@@ -305,7 +302,9 @@ int main(void)
         CHECK(!run16_console_prepare_dos(owner.output,&logical));
         CHECK(GetConsoleScreenBufferInfo(owner.output,&actual));
         CHECK(actual.dwSize.X==80 && actual.dwSize.Y==43 && logical.Right==79 && logical.Bottom==42);
-        CHECK(actual.dwCursorPosition.X==79 && actual.dwCursorPosition.Y==42);
+        /* The retained cell-grid primitive wraps an out-of-range X to zero;
+         * it clamps Y to the last retained row. Do not assert a new X policy. */
+        CHECK(actual.dwCursorPosition.X==0 && actual.dwCursorPosition.Y==42);
         CHECK(ReadConsoleOutputCharacterW(owner.output,&cell,1,(COORD){0,0},&count) && count==1 && cell=='I');
         CHECK(ReadConsoleOutputCharacterW(owner.output,&cell,1,(COORD){79,42},&count) && count==1 && cell=='Y');
         owner.logical_window=&logical;

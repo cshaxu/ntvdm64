@@ -16,90 +16,75 @@ static DWORD sink(void *context,const INPUT_RECORD *events,DWORD count)
     memcpy(out->events+out->count,events,count*sizeof(*events));out->count+=count;
     return ERROR_SUCCESS;
 }
-static console_mouse_input payload(const capture *out,unsigned index)
+static console_frame_mouse_input payload(const capture *out,unsigned index)
 {
-    console_mouse_input value;
-    assert(index<out->count && out->events[index].EventType==CONSOLE_INPUT_RELATIVE_MOUSE);
+    console_frame_mouse_input value;
+    assert(index<out->count && out->events[index].EventType==CONSOLE_INPUT_FRAME_MOUSE);
     memcpy(&value,&out->events[index].Event,sizeof(value));
-    assert(console_mouse_input_valid(&value));return value;
+    assert(console_frame_mouse_input_valid(&value));return value;
 }
 static void dos_contract(void)
 {
     {
-        frontend_dos_mouse route={0};capture output={0};
-        assert(frontend_dos_mouse_enter(&route,sink,&output)==ERROR_NOT_READY);
-        assert(!frontend_dos_mouse_geometry(&route,640,400));
+        frontend_window_mouse route={0};capture output={0};
+        assert(frontend_window_mouse_enter(&route,sink,&output)==ERROR_NOT_READY);
+        assert(!frontend_window_mouse_geometry(&route,640,400));
         output.error=ERROR_BROKEN_PIPE;
-        assert(frontend_dos_mouse_enter(&route,sink,&output)==ERROR_BROKEN_PIPE);
+        assert(frontend_window_mouse_enter(&route,sink,&output)==ERROR_BROKEN_PIPE);
         assert(!route.active && !output.count);
         output.error=0;
-        assert(!frontend_dos_mouse_enter(&route,sink,&output));
+        assert(!frontend_window_mouse_enter(&route,sink,&output));
         assert(route.active && !route.source && output.count==1);
         assert(payload(&output,0).action==CONSOLE_MOUSE_ENTER);
-        assert(!frontend_dos_mouse_enter(&route,sink,&output) && output.count==1);
-        assert(!frontend_dos_mouse_leave(&route,sink,&output));
+        assert(!frontend_window_mouse_enter(&route,sink,&output) && output.count==1);
+        assert(!frontend_window_mouse_leave(&route,sink,&output));
         assert(!route.active && output.count==2);
         assert(payload(&output,1).action==CONSOLE_MOUSE_LEAVE);
     }
-    frontend_dos_mouse state={0},saved;
-    frontend_window_input input={0};capture out={0};console_mouse_input p;
+    frontend_window_mouse state={0},saved;
+    frontend_window_input input={0};capture out={0};console_frame_mouse_input p;
     input.event.type=KVM_EVENT_MOUSE;input.event.source_identity=17;
     input.event.data.mouse.relative=TRUE;
-    assert(frontend_dos_mouse_dispatch(&state,&input,sink,&out)==ERROR_NOT_READY);
-    assert(frontend_dos_mouse_geometry(&state,65536,400)==ERROR_INVALID_PARAMETER);
-    assert(!frontend_dos_mouse_geometry(&state,640,400));
+    input.control_state=SHIFT_PRESSED|RIGHT_CTRL_PRESSED;
+    assert(frontend_window_mouse_dispatch(&state,&input,sink,&out)==ERROR_NOT_READY);
+    assert(frontend_window_mouse_geometry(&state,65536,400)==ERROR_INVALID_PARAMETER);
+    assert(!frontend_window_mouse_geometry(&state,640,400));
     input.event.data.mouse.delta_x=INT_MIN;input.event.data.mouse.delta_y=INT_MAX;
     saved=state;out.error=ERROR_BROKEN_PIPE;
-    assert(frontend_dos_mouse_dispatch(&state,&input,sink,&out)==ERROR_BROKEN_PIPE);
+    assert(frontend_window_mouse_dispatch(&state,&input,sink,&out)==ERROR_BROKEN_PIPE);
     assert(!out.count && !memcmp(&state,&saved,sizeof(state)));
-    out.error=0;assert(!frontend_dos_mouse_dispatch(&state,&input,sink,&out));
+    out.error=0;assert(!frontend_window_mouse_dispatch(&state,&input,sink,&out));
     assert(out.count==2 && payload(&out,0).action==CONSOLE_MOUSE_ENTER);
     p=payload(&out,1);assert(p.dx==INT_MIN && p.dy==INT_MAX && !p.buttons);
-    assert(p.width==640 && p.height==400);
+    assert(p.width==640 && p.height==400 && p.control==input.control_state);
     input.event.data.mouse.delta_x=input.event.data.mouse.delta_y=0;
     input.event.data.mouse.buttons=KVM_MOUSE_BUTTON_RIGHT;
-    assert(!frontend_dos_mouse_dispatch(&state,&input,sink,&out));
+    assert(!frontend_window_mouse_dispatch(&state,&input,sink,&out));
     p=payload(&out,2);assert(p.action==CONSOLE_MOUSE_MOVE && p.buttons==2 && !p.dx && !p.dy);
     input.event.type=KVM_EVENT_INPUT_RESET;saved=state;out.error=ERROR_BROKEN_PIPE;
-    assert(frontend_dos_mouse_dispatch(&state,&input,sink,&out)==ERROR_BROKEN_PIPE);
+    assert(frontend_window_mouse_dispatch(&state,&input,sink,&out)==ERROR_BROKEN_PIPE);
     assert(!memcmp(&state,&saved,sizeof(state)));
-    out.error=0;assert(!frontend_dos_mouse_dispatch(&state,&input,sink,&out));
+    out.error=0;assert(!frontend_window_mouse_dispatch(&state,&input,sink,&out));
     assert(state.active && state.source==17 && !state.buttons && !payload(&out,3).buttons);
-    assert(!frontend_dos_mouse_dispatch(&state,&input,sink,&out) && out.count==4);
+    assert(!frontend_window_mouse_dispatch(&state,&input,sink,&out) && out.count==4);
     input.event.source_identity=18;
-    assert(frontend_dos_mouse_dispatch(&state,&input,sink,&out)==ERROR_INVALID_STATE);
+    assert(frontend_window_mouse_dispatch(&state,&input,sink,&out)==ERROR_INVALID_STATE);
     input.event.source_identity=17;input.event.type=KVM_EVENT_MOUSE;
     input.event.data.mouse.wheel_y=1;
-    assert(frontend_dos_mouse_dispatch(&state,&input,sink,&out)==ERROR_NOT_SUPPORTED);
+    assert(frontend_window_mouse_dispatch(&state,&input,sink,&out)==ERROR_NOT_SUPPORTED);
     input.event.type=KVM_EVENT_SOURCE_RETIRED;
-    assert(!frontend_dos_mouse_dispatch(&state,&input,sink,&out));
+    assert(!frontend_window_mouse_dispatch(&state,&input,sink,&out));
     assert(!state.active && !state.source && payload(&out,4).action==CONSOLE_MOUSE_LEAVE);
-    assert(!frontend_dos_mouse_leave(&state,sink,&out) && out.count==5);
+    assert(!frontend_window_mouse_leave(&state,sink,&out) && out.count==5);
     input.event.type=KVM_EVENT_MOUSE;input.event.source_identity=18;
     input.event.data.mouse.wheel_y=0;input.event.data.mouse.buttons=0;
-    assert(!frontend_dos_mouse_geometry(&state,320,200));
-    assert(!frontend_dos_mouse_dispatch(&state,&input,sink,&out));
+    assert(!frontend_window_mouse_geometry(&state,320,200));
+    assert(!frontend_window_mouse_dispatch(&state,&input,sink,&out));
     assert(payload(&out,5).action==CONSOLE_MOUSE_ENTER && payload(&out,6).width==320);
     puts("PASS DOS mouse converter: copied relative records, atomic enter/move, reset/release, retire/re-entry, source and shape rejection; no guest execution");
-}
-static void native_position_contract(void)
-{
-    frontend_window_input input={0};int32_t x=-1,y=-1;
-    input.pointer_position_valid=TRUE;
-    input.pointer_clip=(RECT){100,200,500,450};
-    input.pointer_screen=(POINT){100,200};
-    assert(frontend_native_pointer_position(&input,640,400,&x,&y) && x==0 && y==0);
-    input.pointer_screen=(POINT){499,449};
-    assert(frontend_native_pointer_position(&input,640,400,&x,&y) && x==638 && y==398);
-    input.pointer_screen=(POINT){300,325};
-    assert(frontend_native_pointer_position(&input,640,400,&x,&y) && x==320 && y==200);
-    input.pointer_position_valid=FALSE;
-    assert(!frontend_native_pointer_position(&input,640,400,&x,&y));
-    puts("PASS native pointer mapping: capture offset, content center and all edges");
 }
 int main(void)
 {
     dos_contract();
-    native_position_contract();
     return 0;
 }

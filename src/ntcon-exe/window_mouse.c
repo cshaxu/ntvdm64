@@ -2,62 +2,46 @@
 #include <limits.h>
 #include <string.h>
 
-BOOL frontend_native_pointer_position(const frontend_window_input *input,
-    unsigned width,unsigned height,int32_t *x,int32_t *y)
-{
-    LONGLONG px,py,clip_width,clip_height;
-    if(!input || !input->pointer_position_valid || !width || !height || !x || !y ||
-        width>INT32_MAX || height>INT32_MAX)return FALSE;
-    clip_width=(LONGLONG)input->pointer_clip.right-input->pointer_clip.left;
-    clip_height=(LONGLONG)input->pointer_clip.bottom-input->pointer_clip.top;
-    if(clip_width<=0 || clip_height<=0)return FALSE;
-    px=(LONGLONG)input->pointer_screen.x-input->pointer_clip.left;
-    py=(LONGLONG)input->pointer_screen.y-input->pointer_clip.top;
-    if(px<0)px=0;else if(px>=clip_width)px=clip_width-1;
-    if(py<0)py=0;else if(py>=clip_height)py=clip_height-1;
-    *x=(int32_t)(px*width/clip_width);
-    *y=(int32_t)(py*height/clip_height);
-    return TRUE;
-}
-
-static INPUT_RECORD dos_record(const frontend_dos_mouse *state,unsigned action,int32_t dx,int32_t dy,unsigned buttons)
+static INPUT_RECORD frame_record(const frontend_window_mouse *state,unsigned action,int32_t dx,int32_t dy,
+    unsigned buttons,DWORD control)
 {
     INPUT_RECORD result={0};
-    console_mouse_input payload={dx,dy,state->width,state->height,(uint16_t)buttons,(uint16_t)action};
+    console_frame_mouse_input payload={dx,dy,state->width,state->height,
+        (uint16_t)(control&0x1ffu),(uint8_t)buttons,(uint8_t)action};
     if(action==CONSOLE_MOUSE_LEAVE)payload.width=payload.height=0;
-    result.EventType=CONSOLE_INPUT_RELATIVE_MOUSE;
+    result.EventType=CONSOLE_INPUT_FRAME_MOUSE;
     memcpy(&result.Event,&payload,sizeof(payload));
     return result;
 }
-DWORD frontend_dos_mouse_geometry(frontend_dos_mouse *state,unsigned width,unsigned height)
+DWORD frontend_window_mouse_geometry(frontend_window_mouse *state,unsigned width,unsigned height)
 {
     if(!state || !width || !height || width>UINT16_MAX || height>UINT16_MAX)
         return ERROR_INVALID_PARAMETER;
     state->width=(uint16_t)width;state->height=(uint16_t)height;
     return ERROR_SUCCESS;
 }
-DWORD frontend_dos_mouse_leave(frontend_dos_mouse *state,frontend_mouse_sink sink,void *context)
+DWORD frontend_window_mouse_leave(frontend_window_mouse *state,frontend_mouse_sink sink,void *context)
 {
     DWORD error;
     if(!state || !sink)return ERROR_INVALID_PARAMETER;
     if(state->active) {
-        INPUT_RECORD event=dos_record(state,CONSOLE_MOUSE_LEAVE,0,0,0);
+        INPUT_RECORD event=frame_record(state,CONSOLE_MOUSE_LEAVE,0,0,0,0);
         error=sink(context,&event,1);if(error)return error;
     }
     state->active=FALSE;state->buttons=0;state->source=0;
     return ERROR_SUCCESS;
 }
-DWORD frontend_dos_mouse_enter(frontend_dos_mouse *state,frontend_mouse_sink sink,void *context)
+DWORD frontend_window_mouse_enter(frontend_window_mouse *state,frontend_mouse_sink sink,void *context)
 {
     INPUT_RECORD event;DWORD error;
     if(!state || !sink)return ERROR_INVALID_PARAMETER;
     if(state->active)return ERROR_SUCCESS;
     if(!state->width || !state->height)return ERROR_NOT_READY;
-    event=dos_record(state,CONSOLE_MOUSE_ENTER,0,0,0);
+    event=frame_record(state,CONSOLE_MOUSE_ENTER,0,0,0,0);
     error=sink(context,&event,1);if(error)return error;
     state->active=TRUE;return ERROR_SUCCESS;
 }
-DWORD frontend_dos_mouse_dispatch(frontend_dos_mouse *state,const frontend_window_input *input,
+DWORD frontend_window_mouse_dispatch(frontend_window_mouse *state,const frontend_window_input *input,
     frontend_mouse_sink sink,void *context)
 {
     const kvm_input_event *event;INPUT_RECORD records[2];DWORD count=0,error;
@@ -68,10 +52,10 @@ DWORD frontend_dos_mouse_dispatch(frontend_dos_mouse *state,const frontend_windo
         event->type!=KVM_EVENT_SOURCE_RETIRED)return ERROR_SUCCESS;
     if(!event->source_identity || (state->source && state->source!=event->source_identity))
         return ERROR_INVALID_STATE;
-    if(event->type==KVM_EVENT_SOURCE_RETIRED)return frontend_dos_mouse_leave(state,sink,context);
+    if(event->type==KVM_EVENT_SOURCE_RETIRED)return frontend_window_mouse_leave(state,sink,context);
     if(event->type==KVM_EVENT_INPUT_RESET) {
         if(!state->active || !state->buttons)return ERROR_SUCCESS;
-        records[0]=dos_record(state,CONSOLE_MOUSE_MOVE,0,0,0);
+        records[0]=frame_record(state,CONSOLE_MOUSE_MOVE,0,0,0,input->control_state);
         error=sink(context,records,1);if(error)return error;
         state->buttons=0;return ERROR_SUCCESS;
     }
@@ -83,9 +67,9 @@ DWORD frontend_dos_mouse_dispatch(frontend_dos_mouse *state,const frontend_windo
         ((event->data.mouse.buttons&KVM_MOUSE_BUTTON_RIGHT) ? 2 : 0));
     /* One atomic queue write preserves ENTER before its first sample. KVM
      * already scales client deltas to content pixels; do not scale twice. */
-    if(!state->active)records[count++]=dos_record(state,CONSOLE_MOUSE_ENTER,0,0,0);
-    records[count++]=dos_record(state,CONSOLE_MOUSE_MOVE,event->data.mouse.delta_x,
-        event->data.mouse.delta_y,buttons);
+    if(!state->active)records[count++]=frame_record(state,CONSOLE_MOUSE_ENTER,0,0,0,input->control_state);
+    records[count++]=frame_record(state,CONSOLE_MOUSE_MOVE,event->data.mouse.delta_x,
+        event->data.mouse.delta_y,buttons,input->control_state);
     error=sink(context,records,count);if(error)return error;
     state->active=TRUE;state->source=event->source_identity;state->buttons=buttons;
     return ERROR_SUCCESS;

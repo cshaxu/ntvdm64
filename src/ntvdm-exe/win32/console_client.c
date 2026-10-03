@@ -12,14 +12,15 @@
 
 static BOOL decode_input(const console_io_input *wire,INPUT_RECORD *record)
 {
-    if(wire->type==CONSOLE_INPUT_RELATIVE_MOUSE) {
-        console_mouse_input mouse;
-        if(wire->buttons>3 || wire->flags>UINT16_MAX)return FALSE;
-        mouse.dx=wire->x;mouse.dy=wire->y;mouse.buttons=(uint16_t)wire->buttons;
-        mouse.action=(uint16_t)wire->flags;mouse.width=(uint16_t)wire->control;
-        mouse.height=(uint16_t)(wire->control>>16);
-        if(!console_mouse_input_valid(&mouse))return FALSE;
-        ZeroMemory(record,sizeof(*record));record->EventType=CONSOLE_INPUT_RELATIVE_MOUSE;
+    if(wire->type==CONSOLE_INPUT_FRAME_MOUSE) {
+        console_frame_mouse_input frame;console_mouse_input mouse;
+        if(!ntcon_worker_decode_input(wire,record))return FALSE;
+        memcpy(&frame,&record->Event,sizeof(frame));
+        mouse.dx=frame.dx;mouse.dy=frame.dy;mouse.width=frame.width;mouse.height=frame.height;
+        mouse.buttons=frame.buttons;mouse.action=frame.action;
+        /* Adapt only at the device boundary. Original MVDM receives its old
+         * relative record and still owns guest position, scaling and IRQs. */
+        record->EventType=CONSOLE_INPUT_RELATIVE_MOUSE;
         memcpy(&record->Event,&mouse,sizeof(mouse));return TRUE;
     }
     return ntcon_worker_decode_input(wire,record);

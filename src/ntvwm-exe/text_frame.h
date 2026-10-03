@@ -12,7 +12,7 @@ typedef struct ntvwm_mouse {
     BOOL ready,visible;
 } ntvwm_mouse;
 DWORD ntvwm_mouse_geometry(ntvwm_mouse *,SMALL_RECT,unsigned);
-DWORD ntvwm_mouse_input(ntvwm_mouse *,const console_pointer_input *,INPUT_RECORD [2],DWORD *);
+DWORD ntvwm_mouse_input(ntvwm_mouse *,const console_frame_mouse_input *,INPUT_RECORD [2],DWORD *);
 void ntvwm_mouse_compose(const ntvwm_mouse *,const console_video_description *,BYTE *);
 
 /* Backend-local conversion. The result uses the unchanged NTVDM wire ABI;

@@ -98,12 +98,13 @@ int wmain(int argc,WCHAR **argv)
             CHECK(!ntvwm_text_frame_pack(&screen,&cursor,page,4000,&font,&description,&payload));
             if(payload) {
                 ntvwm_mouse mouse={0},saved;
-                console_pointer_input motion={0};INPUT_RECORD events[2];DWORD event_count=0;
+                console_frame_mouse_input motion={0};INPUT_RECORD events[2];DWORD event_count=0;
                 BYTE *text=payload+sizeof(console_text_style);
                 CHECK(!ntvwm_mouse_geometry(&mouse,screen.srWindow,16));
                 ntvwm_mouse_compose(&mouse,&description,payload);
                 CHECK(text[(25*80+40)*2+1]==7);
                 motion.action=CONSOLE_MOUSE_ENTER;
+                motion.width=640;motion.height=800;
                 CHECK(!ntvwm_mouse_input(&mouse,&motion,events,&event_count) && !event_count);
                 ntvwm_mouse_compose(&mouse,&description,payload);
                 CHECK(text[(25*80+40)*2+1]==(7^0x77));
@@ -128,12 +129,13 @@ int wmain(int argc,WCHAR **argv)
                 saved=mouse;motion.buttons=4;
                 CHECK(ntvwm_mouse_input(&mouse,&motion,events,&event_count)==ERROR_INVALID_DATA);
                 CHECK(!memcmp(&mouse,&saved,sizeof(mouse)));
-                motion=(console_pointer_input){0};motion.action=CONSOLE_MOUSE_LEAVE;
+                motion=(console_frame_mouse_input){0};motion.action=CONSOLE_MOUSE_LEAVE;
                 CHECK(!ntvwm_mouse_input(&mouse,&motion,events,&event_count) && event_count==1);
                 CHECK(!events[0].Event.MouseEvent.dwButtonState && !mouse.visible);
                 CHECK(!ntvwm_mouse_input(&mouse,&motion,events,&event_count) && !event_count);
                 CHECK(!ntvwm_mouse_geometry(&mouse,(SMALL_RECT){20,100,59,124},8));
                 CHECK(mouse.x==319 && mouse.y==199);
+                motion.width=320;motion.height=200;
                 motion.action=CONSOLE_MOUSE_MOVE;motion.dx=-1;motion.dy=-1;
                 CHECK(!ntvwm_mouse_input(&mouse,&motion,events,&event_count) && event_count==1);
                 CHECK(events[0].Event.MouseEvent.dwMousePosition.X==59 &&
@@ -151,11 +153,12 @@ int wmain(int argc,WCHAR **argv)
         static const unsigned rows[]={22,25,28,43,50};
         ntvwm_mouse mouse={0},other={0},saved;
         INPUT_RECORD events[2];DWORD count;
-        console_pointer_input motion={0};
+        console_frame_mouse_input motion={0};
         for(i=0;i<ARRAYSIZE(rows);++i) {
             unsigned font_height=rows[i]>=43 ? 8 : rows[i]==28 ? 14 : 16;
             CHECK(!ntvwm_mouse_geometry(&mouse,(SMALL_RECT){0,100,79,(SHORT)(99+rows[i])},font_height));
-            motion=(console_pointer_input){INT_MAX,INT_MAX,LEFT_ALT_PRESSED,0,CONSOLE_MOUSE_MOVE};
+            motion=(console_frame_mouse_input){INT_MAX,INT_MAX,640,(uint16_t)(rows[i]*font_height),
+                LEFT_ALT_PRESSED,0,CONSOLE_MOUSE_MOVE};
             CHECK(!ntvwm_mouse_input(&mouse,&motion,events,&count));
             CHECK(mouse.x==639 && mouse.y==(LONG)(rows[i]*font_height-1) && !mouse.buttons);
             CHECK(count==1 && events[0].Event.MouseEvent.dwMousePosition.X==79 &&
@@ -166,7 +169,7 @@ int wmain(int argc,WCHAR **argv)
             CHECK(!mouse.x && !mouse.y && events[0].Event.MouseEvent.dwMousePosition.Y==100);
         }
         CHECK(!ntvwm_mouse_geometry(&other,(SMALL_RECT){0,0,79,24},16));
-        motion=(console_pointer_input){0,0,0,0,CONSOLE_MOUSE_POSITION};
+        motion=(console_frame_mouse_input){INT_MIN,INT_MIN,640,400,0,0,CONSOLE_MOUSE_MOVE};
         CHECK(!ntvwm_mouse_input(&other,&motion,events,&count) &&
             !other.x && !other.y && count==1);
         motion.dx=639;motion.dy=399;motion.buttons=1;
@@ -174,10 +177,10 @@ int wmain(int argc,WCHAR **argv)
             other.x==639 && other.y==399 && count==2 &&
             events[1].Event.MouseEvent.dwMousePosition.X==79 &&
             events[1].Event.MouseEvent.dwMousePosition.Y==24);
-        motion.buttons=0;motion.dx=0;motion.dy=0;
+        motion.buttons=0;motion.dx=-639;motion.dy=-399;
         CHECK(!ntvwm_mouse_input(&other,&motion,events,&count) &&
             !other.x && !other.y && count==2);
-        saved=other;motion=(console_pointer_input){0,0,0,3,CONSOLE_MOUSE_MOVE};
+        saved=other;motion=(console_frame_mouse_input){0,0,640,400,0,3,CONSOLE_MOUSE_MOVE};
         CHECK(!ntvwm_mouse_input(&mouse,&motion,events,&count) && count==1);
         CHECK(events[0].Event.MouseEvent.dwButtonState==
             (FROM_LEFT_1ST_BUTTON_PRESSED|RIGHTMOST_BUTTON_PRESSED));
@@ -185,7 +188,7 @@ int wmain(int argc,WCHAR **argv)
         saved=mouse;motion.action=CONSOLE_MOUSE_LEAVE;
         CHECK(ntvwm_mouse_input(&mouse,&motion,events,&count)==ERROR_INVALID_DATA && !count);
         CHECK(!memcmp(&mouse,&saved,sizeof(mouse)));
-        motion.buttons=0;
+        motion.buttons=0;motion.width=motion.height=0;
         CHECK(!ntvwm_mouse_input(&mouse,&motion,events,&count) && count==1 && !mouse.visible);
         CHECK(!events[0].Event.MouseEvent.dwButtonState);
         CHECK(!ntvwm_mouse_input(&mouse,&motion,events,&count) && !count);

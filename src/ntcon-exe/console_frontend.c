@@ -8,20 +8,13 @@ static BOOL encode_input(const INPUT_RECORD *record,console_io_input *wire)
 {
     ZeroMemory(wire,sizeof(*wire));wire->type=record->EventType;
     switch (record->EventType) {
-    case CONSOLE_INPUT_POINTER: {
-        console_pointer_input mouse;
+    case CONSOLE_INPUT_FRAME_MOUSE: {
+        console_frame_mouse_input mouse;
         memcpy(&mouse,&record->Event,sizeof(mouse));
+        if(!console_frame_mouse_input_valid(&mouse))return FALSE;
         wire->x=mouse.dx;wire->y=mouse.dy;wire->buttons=mouse.buttons;
         wire->flags=mouse.action;wire->control=mouse.control;
-        return mouse.buttons<=3 && mouse.action>=CONSOLE_MOUSE_ENTER &&
-            mouse.action<=CONSOLE_MOUSE_POSITION;
-    }
-    case CONSOLE_INPUT_RELATIVE_MOUSE: {
-        console_mouse_input mouse;
-        memcpy(&mouse,&record->Event,sizeof(mouse));
-        if(!console_mouse_input_valid(&mouse))return FALSE;
-        wire->x=mouse.dx;wire->y=mouse.dy;wire->buttons=mouse.buttons;
-        wire->flags=mouse.action;wire->control=mouse.width|((uint32_t)mouse.height<<16);
+        wire->menu=mouse.width;wire->focus=mouse.height;
         break;
     }
     case KEY_EVENT:

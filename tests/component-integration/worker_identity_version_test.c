@@ -29,7 +29,7 @@ int wmain(int argc, WCHAR **argv)
     RPC_IF_ID interface_id;
     int failed = 1;
     if ((argc != 2 && argc != 3) || !broker_rpc_capture_scope(&scope)) return 2;
-    if(RpcIfInqId(Client_vdm_service_v29_0_c_ifspec,&interface_id) ||
+    if(RpcIfInqId(Client_vdm_service_v35_0_c_ifspec,&interface_id) ||
         interface_id.VersMajor!=APP_PROTOCOL_VERSION || interface_id.VersMinor!=0)return 2;
     swprintf_s(endpoint,128,L"ntvdm-basesrv-%lu-%08lx-%08lx",
         scope.session,(ULONG)scope.logon.HighPart,scope.logon.LowPart);
