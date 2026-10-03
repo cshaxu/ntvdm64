@@ -139,6 +139,17 @@ projection without logical mutation. Desktop/RDP manual behavior remains an
 owner check, and the single unreproduced management-close failure is explicitly
 retained rather than claimed repaired. Neither limits original grid semantics.
 
+## S13 final audit delivery
+
+The [S13 ledger](../evidence/m0-t424-s13-final-audit.md) maps every admitted
+stage to its delivery evidence and audits the actual current source/build/
+publication. Original executable mirror algorithms, immutable media and KVM
+library inputs are unchanged. Obsolete product aliases are absent; historical
+evidence filenames and README-only move markers remain classified. Current
+design/source documentation reflects delivered common/service/frontend
+ownership, not the superseded candidate topology. This is S delivery only:
+CURRENT retains T424 as open for the owner's final product audit.
+
 ## S10 rapid relaunch and frontend notification checklist
 
 Owner additionally approves the causally reproduced DOS/native snapshot-origin

@@ -1,19 +1,19 @@
 # Source Layout
 
-## Owner-approved T424 S7 library reorganization
+## Delivered T424 common library and service separation
 
-Owner's closure revision keeps common/two-protocol organization in S7 and
-transfers the complete service-provenance ledger and NTSRV-private physical
-split below to the next S8. No transferred implementation is claimed complete.
+S7 delivers common/two-protocol organization; S8 delivers the separately
+admitted service-provenance audit and NTSRV-private physical split. Their
+indexed ledgers retain actual source classification and production tests.
 
 The owner admits src/common as the successor to src/interface after
-S6 naming delivery. The current S7 candidate has moved copied declarations
+S6 naming delivery. The delivered organization has moved copied declarations
 and IDL into common/protocol, bounded packet codecs into common/codec and
 neutral transfer/snapshot mechanisms into common/transport and common/console.
 Neutral I/O-client instance/API declarations and implementation now belong to
 common/console/client; worker-only connection adaptation and launcher-private
 client declarations retain their owners.
-This layout is implemented in the candidate, not a delivered runtime claim;
+The [S7 ledger](../etc/evidence/m0-t424-s7-common-service-separation.md) records delivery;
 the transitional interface/native_request_protocol.h and native control pipe
 have been removed. In S7, keep protocol declarations/version identity/service IDL in a
 declaration-only submodule; separately select audited project-added shared
@@ -25,14 +25,14 @@ worker-base; worker-base remains worker-only and may use neutral common modules.
 Resource ownership, authentication policy, service records/retirement and
 frontend rendering remain with their existing owners.
 
-S7 also provenance-classifies and splits project-added NTSRV base_service.c
+S8 provenance-classifies and splits project-added NTSRV base_service.c
 implementation into bounded service-private modules. Original OpenNT/MVDM
 source stays in its upstream-relative mirror; preserve original algorithms,
 ordering and minimal registered hooks, with pinned-source diff accounting.
 Do not extract original execution/completion into common/worker-base.
 See the [S7 checklist](../etc/operations/t424-worker-frontend-renaming-plan.md#s7-common-library-and-service-source-separation).
 
-S12 owner-approved common text ABI extension adds an optional per-cell style
+T423 S12's owner-approved common text ABI extension adds an optional per-cell style
 byte to the original glyph/attribute pair. Both workers use the same interface
 definition and frontend decoder; DOS keeps pairs. This supersedes the exact
 pair-only wording below, not the ban on native-specific frontend renderers.
@@ -44,7 +44,7 @@ src/
   mvdm/
   opennt-host/
   opennt-abi/host-compat/
-  interface/
+  common/{protocol,codec,transport,console}/
   worker-base/
   run16-exe/
   ntsrv-exe/
@@ -72,36 +72,35 @@ explicitly read-only external reference roots under `O:\repos.external`.
 `src.old/` is quarantined comparison material and never a source, build, link
 or runtime input.
 
-## Executable-owned transition
+## Executable-owned runtime
 
-T424 S4 admits the following ownership migration of project-added code,
+T424 S4 delivers the following ownership migration of project-added code,
 without changing original mirror logic: frontend/worker CreateProcess and
 authenticated launch orchestration move into ntsrv-exe; run16 keeps CLI,
 broker discovery and submission/direct-result/Console-handoff RPC clients.
 NTSRV coordinates takeover/return acknowledgements; NTCON performs actual
-Console operations. Remove the run16/NTCON direct bootstrap channel too.
-Broker typed copied contracts remain in interface. NTVWM owns native target
+Console operations. The run16/NTCON direct bootstrap channel is removed.
+Broker typed copied contracts reside in common/protocol. NTVWM owns native target
 CreateProcess/wait/result reporting; NTCON owns Console/Window/I/O service;
-worker-base remains worker-only shared client/mechanism code. Existing launcher
-bootstrap, worker launch and direct native request code below are migration
-inputs, not permission to retain duplicate owners. Replaced paths must be
-removed after the matching production path and failure/rollback tests pass.
-No generic spawn/remote-handle-duplication service, new common root, helper,
+worker-base remains worker-only shared client/mechanism code. S5 removes
+displaced ownership paths; S7 selects shared mechanisms under the bounded
+common approval. No duplicate startup owner is retained.
+No generic spawn/remote-handle-duplication service, additional common root, helper,
 mirror change or NTCON-owned worker policy is admitted.
 
-`run16-exe/bootstrap_client.c`, `native_request_client.c`,
-`native_request_io.c` and `native_launch_packet.c` own the existing finite
-`frontend-client.lib`. `native_launch.c` is its separately selected resource/
-CreateProcess primitive shared with NTVWM; NTCON never links target creation.
-Public startup/client declarations are in `interface/frontend_bootstrap.h`,
-`native_request_client.h`, `native_request_protocol.h` and `native_launch.h`.
+`run16-exe/bootstrap_client.c` and `native_request_client.c` own the finite
+`frontend-client.lib`. Packet validation is selected from common/codec;
+`native_launch.c` is the separately selected resource/CreateProcess primitive
+used for broker bootstrap and by NTSRV/NTVWM, not local run16 GUI execution.
+NTCON never links target creation. Local startup/client declarations remain
+with their implementation owners; copied wire declarations live in common/protocol.
 No private NTCON/NTVWM implementation root is a shared startup source owner.
 
-Cross-component wire declarations and service IDL have one owner: interface.
-Frame/input formats and service/monitor/launcher/worker contracts migrate there
-without layout changes. Endpoint implementations and process-private types
-stay in their executable components. Earlier product-abi and service-owned IDL
-placement below is superseded; generated RPC outputs remain below build/.
+Cross-component wire declarations and service IDL have one owner: common/protocol.
+Control RPC and direct worker I/O pipes remain separate protocols; no obsolete
+native/initial-frontend control pipe remains. Endpoint implementations and
+process-private types stay in their executable components. Generated RPC
+outputs remain below build/; actual wire changes synchronize app/IDL versions.
 
 The owner-admitted worker-base static library holds project-added mechanisms
 shared by NTVDM and NTVWM with matching full contracts: lifecycle, worker
@@ -109,10 +108,11 @@ clients, ordered transport, validation/cancellation, frame/input codecs and
 handoff acknowledgments. Audit source provenance, not only file placement.
 Original mirror execution, scheduling, completion, blocking/resume and cleanup
 remain in place; no reverse-call extraction or new scheduler is permitted.
-Launcher creation belongs to run16; broker management to NTSRV; presentation
+Broker discovery/submission belongs to run16; worker/frontend creation and
+management to NTSRV; presentation
 to NTCON; monitoring to NTMON. These consumers retain their common kind-aware
 handling internally. Backend state operations remain explicit in each worker.
-BaseSrv client implementation remains NTSRV-owned; IDL belongs to interface.
+BaseSrv client implementation remains NTSRV-owned; IDL belongs to common/protocol.
 
 Latest owner directive selects an ordinary hidden Console owned/attached by
 ntvwm-exe, replacing the ConPTY/VT plan below. No private helper is permitted.
@@ -131,40 +131,36 @@ NTVWM text frames use the existing NTVDM console_video.h layout exactly,
 including font banks, glyph/attribute pairs, palette and cursor. NTVWM never
 publishes graphics frames. Its bitmap glyph mapping must agree with NTVDM;
 NTCON has one backend-neutral text-frame renderer, not a native VT/font engine.
-This is the admitted S12 target, not a claim that the retained candidate has
-already completed ownership migration.
+T424 S12 delivers unified frontend logical_surface and consistent publication
+with exact current-state handoff. Font/palette/style remain worker metadata;
+the frontend owns storage and projection, not native Unicode/VT interpretation.
 
-`src/ntcon-exe/ -> ntcon.exe` owns visible Console, Window/display and the
-I/O service. S9 replaces its earlier hidden-Console/helper implementation
-with one frontend-owned ConPTY retained across native targets and DOS
-intervals in the published baseline. The superseded S11 prototype keeps a
-backend per independent native branch, with ordinary children inheriting that
-branch's Console and Windows-owned last-client EOF. All such resources remain
-ntcon-owned; one frontend still selects the interactive endpoint.
-run16 links only the finite frontend client, never the renderer or
-input pump. No project helper or second backend is retained in the S9 graph.
-These are historical implementation facts, not permission to retain ConPTY
-ownership in the S12 target. Do not duplicate renderers or introduce a common
-library. Status distinguishes
-the source candidate from the published package; layout is not acceptance.
+`src/ntcon-exe/ -> ntcon.exe` owns visible Console, Window/display, logical
+storage and the I/O service. The former frontend-owned ConPTY/helper prototypes
+belong to indexed T423 history, not the current source graph. NTVWM owns its
+hidden execution Console. Run16 links only the finite frontend client, never
+the renderer/input pump. No helper, ConPTY backend, duplicate renderer or
+second runtime owner is retained. CURRENT and evidence govern publication;
+source layout alone is not acceptance.
 
 T418 has moved the original three-program runtime to `src/run16-exe/`,
 `src/ntsrv-exe/` and `src/ntvdm-exe/`; T419 adds the product-owned native Console
 manager, now located at `src/ntmon-exe/` and producing `ntmon.exe`. Retained
 `app`/adapter directory READMEs are archival move markers, never production
 source roots or destinations. `session` is worker-local implementation inside
-`ntvdm`; broker service transport is inside `basesrv`.
+`ntvdm`; broker service transport is inside `ntsrv`.
 
 Do not create a shared Win32 helper root. Place a Win32 binding in the one
 executable that owns its process-local resource. Original code remains in its
 mirror even when several EXEs link it; BaseSrv protocol/client code remains
-`basesrv`-owned even when both clients link it. Only a named, same-shaped
+`ntsrv`-owned even when both clients link it. Only a named, same-shaped
 historical host ABI whose finite public-Win32/NTDLL binding is recorded may
 live in `opennt-abi/host-compat`. The stateless shared product surface is
-limited to declaration-only `interface`; worker package/media configuration
-lives in `ntvdm-exe/package_layout.[ch]`. `interface` owns service IDL and
-copied, versioned broker records; NTSRV owns their transport and validation.
-`product-abi` is a retired move marker. There is no `common` or `win32api` root.
+limited to common's specifically admitted protocol/codec/transport/Console
+mechanisms; worker package/media configuration lives in
+`ntvdm-exe/package_layout.[ch]`. Common/protocol owns service IDL and copied
+versioned records; NTSRV owns service policy. `interface` and `product-abi`
+are retired roots, not production destinations. No generic `win32api` root.
 
 ## Machine-profile selection
 
@@ -344,15 +340,15 @@ Ninja is generated from the source-owner and package-selection manifests.
 Disposable objects, libraries, generated files, fixture executables and build
 results belong under `build/<task-id>/<run-id>/`; selected formal product
 executables may be published at `build/output/`. A real-package run copies only
-original guest media/configuration, the selected three runtime executables and
-their two selected runtime DLLs to the `O:\winnt` package root. Its test
-harnesses, guest probes, manifests and test results belong in
-`O:\winnt\tests\`; observations and all runtime logs belong in
-`O:\winnt\logs\`, never in the repository or beside a package-root executable.
+original guest media/configuration and the coherent eight-file runtime set
+(run16, ntsrv, ntvdm, ntvwm, ntcon, ntmon and two runtime DLLs) to the
+`O:\winnt` package root. Disposable test harnesses, probes, manifests and
+evidence belong below the admitted `build/` run. Production diagnostic logs
+may use `O:\winnt\logs\` or the owner-approved `logs2`, not package-root files.
 `O:\winnt\builds\` is reserved only for deliberately retained versioned
 runtime-package history, never fixtures or disposable output.
 Guest objects and libraries are
 packaging/loading inputs only and never enter the host link. Formal verification
 currently covers accepted x86 CCPU40 compilation plus architecture-neutral token
 behavior; `CPU_30_STYLE` is retired and historical-only; x64 compatibility
-verification is deferred until the SoftPC/MVDM execution path is connected.
+verification is not an admitted product profile.

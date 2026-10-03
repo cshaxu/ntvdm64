@@ -21,21 +21,6 @@ Original DOS/WOW records, locks and algorithms stay in `srvvdm.c`. The native
 command queue is not a generalized DOS/WOW scheduler. Fixture hooks link the
 production provider, rather than embedding another copy of the service.
 
-The private service implementation under `opennt/source` is separated into
-`service_core.c` (connection/authentication/rundown), `worker_registry.c`
-(reservation/admission/reuse/process watches), `frontend_registry.c`
-(root identity/routes/Console takeover and return), `native_commands.c`
-(direct native delivery and receipt), `lifecycle.c` (authoritative retirement
-and shutdown), and `management.c` (read-only projection). `base_service.c`
-retains the source-shaped DOS/WOW interface/resource adapters. These are
-translation units of the same provider, not new components or registries.
-`opennt/include/service_internal.h` is private to those units and the test-only
-hook fixture. It exposes the same explicit service instance, unchanged recursive
-service lock and finite cross-module helpers; it is not a public/wire ABI.
-Original DOS/WOW records, locks and algorithms stay in `srvvdm.c`. The native
-command queue is not a generalized DOS/WOW scheduler. Fixture hooks link the
-production provider, rather than embedding another copy of the service.
-
 The S2 frontend association is independent of DOS/WOW scheduling. An original
 pending command selects the worker; an authenticated inherited capability
 selects the NTCON frontend root. The service retains a pending resource attachment so
@@ -58,7 +43,7 @@ broker process-tree kill. Pipe failure alone remains I/O failure.
 Actual worker death fails unfinished requests with ERROR_PROCESS_ABORTED;
 pre-handoff startup rollback remains separate.
 
-The S4 candidate also centralizes exact sibling NTCON/NTVDM/NTVWM creation
+The S4 delivery also centralizes exact sibling NTCON/NTVDM/NTVWM creation
 and all launcher Console takeover/restore acknowledgement through this service.
 Independent DOS worker-exit completion preserves original DosSesId/PIF policy.
 Self-owned native text close-on-exit follows final I/O acknowledgement and a

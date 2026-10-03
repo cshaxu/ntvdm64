@@ -81,7 +81,7 @@ text frames, then uses original `disable_stream_io`; no new mode transition,
 guest decoder, font loader or worker UI is introduced. Original update,
 palette resolution, cursor batching and error reporting retain their owner.
 S12 also copies the resolved text configuration after the original periodic
-stream flush, without requesting video mode. This lets NTW32 inherit the
+stream flush, without requesting video mode. This lets NTVWM inherit the
 current fonts/palette without changing the DOS stream/cursor path; the adapter
 deduplicates configuration messages. See the
 [S12 ledger](../../docs/etc/evidence/m0-t423-s12-ntw32-backend.md).

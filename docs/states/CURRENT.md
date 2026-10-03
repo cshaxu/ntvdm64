@@ -2,8 +2,9 @@
 
 ## Current Work
 
-**No active M/T/S packet.** T424 remains open. S12 is delivered; S13 final audit
-is next under the owner's sequential approval. S11 frontend naming
+**No active M/T/S packet.** T424 remains open for owner validation. S12 is delivered at
+pushed 46abdb554; S13 completes the final audit under the owner's sequential approval.
+S11 frontend naming
 is closed at pushed 7ff3c670d; its eight published hashes were reverified.
 The owner now approves sequential S12 and S13 execution, stopping before T closure. The
 [working plan](../etc/operations/t424-worker-frontend-renaming-plan.md) owns order;
@@ -13,6 +14,30 @@ protocol/RPC34, I/O22, with ntcon.exe as frontend and ntvwm.exe as native worker
 The [S12 ledger](../etc/evidence/m0-t424-s12-logical-surface.md) records the
 unified logical grid, atomic publication, current-state handoff, test results,
 recoverable release and one unreproduced management-probe failure.
+The [S13 final audit](../etc/evidence/m0-t424-s13-final-audit.md) records the
+complete thirteen-stage ledger, source/dependency review, corrected document
+drift and unchanged published package. All admitted S stages are delivered;
+stop here for owner testing. No T424 closure or next T admission is authorized.
+
+## S13 Closed Packet
+
+| Field | Admitted record |
+| --- | --- |
+| Identifier Mode | M0 T424 S13, Ordinary Mode. |
+| Admission And Approval | Owner automatically admits all remaining T424 stages after S11 review; stop before T closure for owner verification. S12 is committed/pushed, published and clean. |
+| Objective | Complete final referent, dependency, semantic and documentation audit; retain precise evidence for all thirteen stages and the current eight-file product. |
+| Non-goals | No original algorithm/guest/library edit, new capability, lifecycle policy, polling cleanup, helper, observation graph or T closure. |
+| Reference Baseline | S12 46abdb554; x86 APP 0.0.424 protocol/RPC34 I/O22; published eight-file manifest and verified recovery set. |
+| Files And ABI Surface | Read-only source/build/package audit; CURRENT, design/source READMEs, TODO and indexed S13 evidence. No planned wire or production change. |
+| Applicable Rules | Full authority set and source policy, final ordered T424 plan. |
+| Verification | Old project referents versus retained original/historical names, one owner per mechanism, original mirror diff, pinned imported library hashes, published/source identities, governance/relative links/diff. Reuse exact S12 regression evidence for unchanged runtime. |
+| Expected Markers | No obsolete production executable/source/provider aliases, current docs describe actual common/NTSRV/NTCON/worker ownership, exact limitations retained. |
+| Asset Needs | Existing source, staged/frozen S12 package and build graph; outputs only build/M0-T424/S13/r001. |
+| Reporting Requirements | Explicit complete-stage ledger, discovered drift/corrections, unchanged runtime identity, unresolved risks and owner acceptance boundary. |
+| Stop Conditions | Unapproved architecture/mirror/library change, regression or false completion; no next T admission. |
+| Exit Criteria | Complete source/document audit, accurate indexed evidence, coherent existing publication, review/commit/push and clean main; T424 remains open awaiting owner. |
+| Original Owner Request | 按照S11退出标准收口S11，然后自动准入本T所有S任务，到达T收口前停下来等我验证。 |
+| Similar-Issue Sweep | Source symbols/paths, link providers, launch/classification and completion, source/docs role names, service/control versus I/O, retained historical citations and debt. |
 
 ## S12 Closed Packet
 
@@ -302,7 +327,7 @@ broker-routed native GUI startup, pre-admission classification and service-held 
 not monitor display. UNBOUND display belongs to the queue-head NTMON candidate.
 S10 repairs relaunch; S11 gives the frontend its NTCON identity. Approved S12 then unifies
 logical_surface and DOS/native handoff per the linked plan; S13 is the former
-S12 final audit. S13 is automatically authorized after S12 delivery;
+S12 final audit. S13 completes the final source/document/identity audit;
 T closure remains owner-controlled, and no next T is admitted.
 
 ## Current Technical Baseline

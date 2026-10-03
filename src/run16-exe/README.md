@@ -37,7 +37,8 @@ remain here; cross-component protocols and the copied packet codec belong to
 `common`. No launcher-owned pipe transfer wrapper remains.
 NTCON reuses common transport/codec without linking target creation.
 `native_launch.c` is the separately linked restricted resource/CreateProcess
-primitive used by run16 GUI creation and NTVWM native text creation. It owns
+primitive used for service bootstrap and by NTSRV/NTVWM creation. Native
+GUI/text targets route through NTSRV; run16 no longer creates them locally. It owns
 no worker state, Console session, execution policy or frontend renderer.
 
 `frontend_scope.c` coordinates the independent `ntcon.exe` frontend only
