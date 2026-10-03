@@ -22,6 +22,7 @@ static DWORD activate(void *context,BOOL active,DWORD kind)
     ULONGLONG deadline=GetTickCount64()+10000;
     if(channel->kind_selected && channel->native!=(kind==CONSOLE_IO_WORKER_NATIVE))return ERROR_INVALID_DATA;
     channel->kind_selected=TRUE;channel->native=kind==CONSOLE_IO_WORKER_NATIVE;
+    channel->console.projected_viewport=channel->native;
     do {
         error=channel->native ? run16_native_frontend_native_bind(channel->root,channel,active) :
             run16_native_frontend_dos_bind(channel->root,channel,active);

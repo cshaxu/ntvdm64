@@ -501,6 +501,34 @@ static void test_dos_geometry_handoff(HANDLE canonical,SHORT rows)
         written==1 && cell==L'C');
     CloseHandle(active);CloseHandle(output);CloseHandle(input);
 }
+static void test_native_projected_viewport(HANDLE output)
+{
+    run16_console_frontend owner={0};console_io_request request={0};console_io_reply reply;
+    SMALL_RECT logical={0,0,79,27};CONSOLE_SCREEN_BUFFER_INFO info;DWORD count;WCHAR cell;
+    CHECK(SetConsoleWindowInfo(output,TRUE,&(SMALL_RECT){0,0,79,29}));
+    CHECK(SetConsoleScreenBufferSize(output,(COORD){80,30}));
+    CHECK(WriteConsoleOutputCharacterW(output,L"N",1,(COORD){0,29},&count) && count==1);
+    owner.output=output;owner.generation=1;owner.logical_window=&logical;
+    owner.projected_viewport=TRUE;
+    request.version=CONSOLE_IO_VERSION;request.generation=1;request.sequence=1;
+    request.operation=CONSOLE_IO_WINDOW_RECT;request.state.mode=1;
+    request.state.top=2;request.state.right=79;request.state.bottom=29;
+    CHECK(!actual_dispatch(&owner,&request,&reply) && !reply.error);
+    CHECK(GetConsoleScreenBufferInfo(output,&info) && info.dwSize.Y==30);
+    CHECK(logical.Top==2 && logical.Bottom==29);
+    ++request.sequence;request.operation=CONSOLE_IO_CURSOR_POSITION;
+    request.state.x=0;request.state.y=29;
+    CHECK(!actual_dispatch(&owner,&request,&reply) && !reply.error);
+    CHECK(GetConsoleScreenBufferInfo(output,&info) && info.dwCursorPosition.Y==29);
+    CHECK(ReadConsoleOutputCharacterW(output,&cell,1,(COORD){0,29},&count) && count==1 && cell==L'N');
+    /* A genuine storage shrink must still work for native full-screen TUIs. */
+    ++request.sequence;request.operation=CONSOLE_IO_BUFFER_SIZE;
+    request.state.width=80;request.state.height=25;
+    CHECK(!actual_dispatch(&owner,&request,&reply) && !reply.error);
+    CHECK(GetConsoleScreenBufferInfo(output,&info) && info.dwSize.Y==25 && info.dwCursorPosition.Y==24);
+    fprintf(private_report ? private_report : stdout,
+        "PASS native viewport metadata preserves storage/last-row cursor; explicit TUI shrink remains valid\n");
+}
 /* A DOS logical viewport can already match the native alternate screen while
  * the canonical Console still has the larger caller viewport. A WINDOW_RECT
  * acknowledgment must cover the real physical projection before BUFFER_SIZE. */
@@ -550,6 +578,7 @@ static void test_native_geometry_projection(SHORT rows)
     CHECK(GetConsoleScreenBufferInfo(output,&info) && info.dwSize.Y==60 && info.srWindow.Bottom==29);
     CHECK(ReadConsoleOutputCharacterW(output,&cell,1,(COORD){7,17},&count) && count==1 && cell==L'P');
     CHECK(info.dwCursorPosition.X==3 && info.dwCursorPosition.Y==11);
+    test_native_projected_viewport(output);
     CloseHandle(output);
     fprintf(private_report ? private_report : stdout,
         "PASS native logical/physical 80x30 -> 80x%d projection, repeat, shrink/grow, cells/cursor and invalid rectangle\n",rows);

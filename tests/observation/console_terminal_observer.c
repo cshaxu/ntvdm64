@@ -341,11 +341,11 @@ static DWORD WINAPI watch_cells(void *unused) {
             DWORD total=(DWORD)info.dwSize.X*info.dwSize.Y;if(total>16000)total=16000;
             COORD origin={0,0};ReadConsoleOutputCharacterW(h,data,total,origin,&count);
             if(dir_event && info.dwSize.X>0) {
-                int summary=0,prompt=0;
+                int summary=0,prompt=0;SHORT summary_row=-1,prompt_row=-1;
                 for(DWORD row=0;row<count/(DWORD)info.dwSize.X;row++) {
                     WCHAR *line=data+row*(DWORD)info.dwSize.X;
                     for(DWORD col=0;col+6<(DWORD)info.dwSize.X;col++) {
-                        if(!wcsncmp(line+col,L"Dir(s)",6))summary=1;
+                        if(!wcsncmp(line+col,L"Dir(s)",6)) {summary=1;summary_row=(SHORT)row;}
                         if(col>2 && line[0]>=L'A' && line[0]<=L'Z' &&
                             line[1]==L':' && line[2]==L'\\' &&
                             line[col]==L'>' &&
@@ -353,11 +353,11 @@ static DWORD WINAPI watch_cells(void *unused) {
                             info.dwCursorPosition.X==(SHORT)(col+1)) {
                             DWORD tail=col+1;
                             while(tail<(DWORD)info.dwSize.X && line[tail]==L' ')tail++;
-                            if(tail==(DWORD)info.dwSize.X)prompt=1;
+                            if(tail==(DWORD)info.dwSize.X) {prompt=1;prompt_row=(SHORT)row;}
                         }
                     }
                 }
-                if(summary && prompt)SetEvent(dir_event);
+                if(summary && prompt && prompt_row>summary_row)SetEvent(dir_event);
             }
             for(DWORD i=0;i<count;i++)hash=(hash^data[i])*16777619u;
             hash^=info.dwCursorPosition.X+info.dwCursorPosition.Y*4096u;
@@ -622,7 +622,7 @@ if(argc!=4 && (argc!=5 || (strcmp(argv[4],"--s38-window-reentry") && strcmp(argv
     if(argc==5 && !strcmp(argv[4],"--s34-full-dir")) {
         char runtime[MAX_PATH]="O:\\winnt",launch[MAX_PATH+32];
         DWORD wait,code=STILL_ACTIVE;
-        int dirty,entered;
+        int dirty,entered;BOOL directory_complete;
         GetEnvironmentVariableA("TEST_RUNTIME_ROOT",runtime,sizeof(runtime));
         snprintf(launch,sizeof(launch),"%s\\run16 command\r",runtime);
         send_keys(launch);
@@ -658,7 +658,8 @@ if(argc!=4 && (argc!=5 || (strcmp(argv[4],"--s38-window-reentry") && strcmp(argv
                 host_size.Y=28;
             ResizePseudoConsole(pty,host_size);
         }
-        if(WaitForSingleObject(s34_dir_complete_seen,20000)!=WAIT_OBJECT_0)
+        directory_complete=WaitForSingleObject(s34_dir_complete_seen,20000)==WAIT_OBJECT_0;
+        if(!directory_complete)
             fprintf(stderr,"first directory prompt not observed before deadline\n");
         Sleep(500);
         {
@@ -677,7 +678,11 @@ if(argc!=4 && (argc!=5 || (strcmp(argv[4],"--s38-window-reentry") && strcmp(argv
                 CloseHandle(helper.hThread);CloseHandle(helper.hProcess);
                 send_keys("ver\r");Sleep(4000);
             } else if(GetEnvironmentVariableA("MVDM_TEST_S34_REPEAT_DIR",NULL,0)) {
-                send_keys("dir\r");Sleep(4000);
+                ResetEvent(s34_dir_complete_seen);
+                send_keys("dir\r");
+                directory_complete=directory_complete &&
+                    WaitForSingleObject(s34_dir_complete_seen,20000)==WAIT_OBJECT_0;
+                Sleep(500);
             }
         }
         wait=WaitForSingleObject(pi.hProcess,0);
@@ -689,7 +694,7 @@ if(argc!=4 && (argc!=5 || (strcmp(argv[4],"--s38-window-reentry") && strcmp(argv
         entered=log_contains(argv[3],"Microsoft(R) Windows NT DOS");
         printf("s34-child-after-dir=%lu final=%lu entered-dos=%d dirty-prompt=%d\n",
             wait,code,entered,dirty);
-        return wait==WAIT_TIMEOUT && entered && dirty==0 ? 0 : 1;
+        return directory_complete && wait==WAIT_TIMEOUT && entered && dirty==0 ? 0 : 1;
     }
     if(argc==5 && !strcmp(argv[4],"--video-int10")) {
         char video_command[MAX_PATH];

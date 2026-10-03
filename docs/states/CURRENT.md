@@ -2,8 +2,11 @@
 
 ## Current Work
 
-**Active: M0 T424 S10, Ordinary Mode.** T424 remains open. S10's verified
-delivery is recorded below; S11 naming has not started. The
+**Active: M0 T424 S10, Ordinary Mode.** T424 remains open. The reopened
+Terminal DIR repair now passes its strict cursor/geometry checks, Console17,
+Window17 and retained EDIT/relaunch/isolation/fault gates. The eight-file
+package is published with verified hashes; this P closes S10. S11 naming is
+owner-approved next, not yet implemented. The
 [working plan](../etc/operations/t424-worker-frontend-renaming-plan.md)
 defines the approved order. The
 [S10 ledger](../etc/evidence/m0-t424-s10-frontend-notification.md) records the
@@ -17,7 +20,7 @@ The rapid relaunch/lost-wakeup repair is S10 work, not an S9 repair claim.
 | Identifier Mode | M0 T424 S10, Ordinary Mode. |
 | Candidate Proposal | [Admitted proposal](../proposals/proposal-native-worker-frontend-renaming-001.md) and [S10 checklist](../etc/operations/t424-worker-frontend-renaming-plan.md#s10-rapid-relaunch-and-frontend-notification-checklist). |
 | Admission And Approval | Owner-added S10 rapid-relaunch/lost-wakeup stage after S9 delivery; standing automatic sequential S admission. Preserve other-session modifications. |
-| Objective | Repair the project-added NTSRV shared frontend notification reset race under the existing lock and the owner-approved adjacent DOS/native seed coordinate defect; preserve logical dimensions, current grid/cursor and VT mode. |
+| Objective | Retain delivered notification/seed fixes; diagnose and repair the owner-reproduced Terminal COMMAND DIR prompt overwriting directory cells. Capture output/cursor/geometry order and strengthen actual DIR completion/cursor assertions before publication. Preserve logical dimensions, grid and VT mode. |
 | Non-goals | No original mirror/guest/shared-library change, new component/process/helper/scheduler, Job/Observed graph, frontend rename, launch syntax change, polling cleanup or new transport. |
 | Reference Baseline | Delivered S9 8ff029fbd, APP 0.0.424 protocol/RPC33 x86 /MT CCPU40; coherent eight-file O:/winnt package and [S9 evidence](../etc/evidence/m0-t424-s9-native-gui-routing.md). Its delayed relaunch test does not establish rapid-launch race freedom. |
 | Files And ABI Surface | NTSRV-private notification state and NTKVM native-binding snapshot coordinates, affected private call sites, deterministic service/Console fixtures and rapid-relaunch probes, build/evidence/docs. No wire change; preserve public DOS/WOW contracts. |
@@ -60,12 +63,10 @@ guest, shared lib, wire or launch syntax changed. T closure stays owner-controll
 | Original Owner Request | Admit the next S; unified Win32 GUI routing/classification and service registration, default return on startup, shared-WOW-style occupancy release; UNBOUND belongs to the future NTMON task. |
 | Similar-Issue Sweep | Native shell fallback/direct image, inherited capability stripping across GUI, redirected standard resources, no-Console GUI launcher, workerless GUI lifetime, concurrent shared text use, early target exit/startup failure and broker/worker rundown. |
 
-S9 retains launcher classification before service admission and removes local
-GUI target creation. Both native kinds use the same authenticated submission,
-worker startup and service receipt mechanisms. GUI acquires no character
-frontend; NTSRV retains its actual process independently of request occupancy.
-Default returns startup success; --wait returns actual exit. DOS/WOW mirrors,
-guest, shared libraries and launch syntax remain unchanged.
+S9 retains launcher classification, shared native submission/receipt and
+service-owned GUI identity independently of request occupancy; no character
+frontend for GUI. Default returns startup success; --wait returns actual exit.
+Mirrors, guest, shared libraries and launch syntax remain unchanged.
 
 The frozen final package passes Console17/Window17, eleven RPC cases, modern
 EDIT return/relaunch, independent sessions, four fault-retirement cases and
@@ -305,7 +306,7 @@ pre-migration baseline in its sealed inventory and S1 Git revision.
 
 The [T424 working plan](../etc/operations/t424-worker-frontend-renaming-plan.md)
 and [proposal](../proposals/proposal-native-worker-frontend-renaming-001.md)
-retain twelve ordered stages after owner service/race additions. S1 audits names; S2 delivers the native worker
+retain thirteen stages. S1 audits names; S2 delivers the native worker
 as NTW32 and Win32Record while retaining NTKVM frontend. Added S3 delivers the
 approved broker-owned abnormal-exit/re-launch repair before further renaming.
 S4 centralizes creation, binding, Console handoff coordination and direct result
@@ -320,10 +321,9 @@ Owner-added S6 renames
 NTW32 to NTVWM; it is name-only and preserves existing behavior. S9 then adds
 broker-routed native GUI startup, pre-admission classification and service-held handles,
 not monitor display. UNBOUND display belongs to the queue-head NTMON candidate.
-Added S10 repairs rapid relaunch before S11 renames NTKVM to
-the reserved NTCON frontend identity. S12 owns final referent and
-semantic audit. T closure
-remains owner-controlled. No later queued candidate is admitted here.
+S10 repairs relaunch; S11 renames NTKVM to NTCON. Approved S12 then unifies
+logical_surface and DOS/native handoff per the linked plan; S13 is the former
+S12 final audit. Active S is unchanged; T closure remains owner-controlled.
 
 ## Current Technical Baseline
 

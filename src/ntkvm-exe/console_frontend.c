@@ -483,6 +483,19 @@ DWORD run16_console_dispatch(run16_console_frontend *owner,const console_io_requ
     }
     case CONSOLE_IO_BUFFER_SIZE: {
         COORD size={(SHORT)s->width,(SHORT)s->height};
+        if(owner->projected_viewport) {
+            CONSOLE_SCREEN_BUFFER_INFO info;
+            ok=GetConsoleScreenBufferInfo(owner->output,&info);
+            if(!ok)break;
+            if(size.X>0 && size.Y>0 &&
+                (info.srWindow.Right>=size.X || info.srWindow.Bottom>=size.Y)) {
+                SMALL_RECT fit={0,0,
+                    min(info.srWindow.Right-info.srWindow.Left+1,size.X)-1,
+                    min(info.srWindow.Bottom-info.srWindow.Top+1,size.Y)-1};
+                ok=opennt_console_resize_grid(owner->output,NULL,TRUE,&fit);
+                if(!ok)break;
+            }
+        }
         ok=opennt_console_resize_grid(owner->output,&size,FALSE,NULL);
         if(ok && owner->logical_window) {
             SMALL_RECT *r=owner->logical_window;
@@ -515,7 +528,12 @@ DWORD run16_console_dispatch(run16_console_frontend *owner,const console_io_requ
                 /* Cached logical geometry does not prove the actual viewport
                  * was applied: DOS and canonical Console can differ. A native
                  * alternate screen may shrink storage immediately afterward. */
-                if(memcmp(&info.srWindow,&physical,sizeof(physical)))
+                /* This is copied worker viewport metadata, not a request to
+                 * resize the visible terminal. ConPTY SetConsoleWindowInfo
+                 * can shrink storage and invalidate the frame's later rows
+                 * and cursor. Apply storage changes only at BUFFER_SIZE. */
+                if(!owner->projected_viewport &&
+                    memcmp(&info.srWindow,&physical,sizeof(physical)))
                     ok=opennt_console_resize_grid(owner->output,NULL,TRUE,&physical);
                 if(ok)*owner->logical_window=rect;
             }

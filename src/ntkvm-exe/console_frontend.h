@@ -11,6 +11,9 @@ typedef struct run16_console_frontend {
     /* Borrowed session geometry, protected by enter/leave. Physical Console
      * clipping is presentation only and must not become worker geometry. */
     SMALL_RECT *logical_window;
+    /* Canonical presentation canvas: worker viewport metadata must not
+     * implicitly resize ConPTY storage. Explicit BUFFER_SIZE still applies. */
+    BOOL projected_viewport;
     run16_console_video video;
     void *io_context;
     DWORD (*activate)(void *,BOOL,DWORD);

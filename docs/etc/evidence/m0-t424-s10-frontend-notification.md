@@ -7,6 +7,8 @@ channel work after checking for joins? S10 repairs project-added NTSRV
 notification maintenance, not original DOS/WOW execution or the public wire.
 T424 remains open. The experiment history below retains failed attempts;
 the final delivery section records S10 publication and bounded closure.
+The owner subsequently reopened S10 for the Terminal DIR regression below;
+the previous gates did not establish correct DIR prompt placement.
 
 ## Inputs and procedure
 
@@ -432,3 +434,73 @@ that every possible hang is repaired. S11 frontend naming is not admitted here.
 Desktop/RDP manual observations, existing presentation polling and the legacy
 incorrect-root setup fixtures remain explicitly unclaimed; their assertions
 were not weakened into successful results.
+
+## Reopened S10: Terminal DIR prompt overwrites directory cells
+
+The owner's retained O:/winnt scene was read without screen/input mutation.
+Snapshot `build/M0-T424/S10/r001/reported-live-21164.txt` reports an actual
+80x28 Console buffer with cursor (9,13); the DOS prompt overwrites QBASIC.HLP
+while later directory entries and the file total remain below it. This is
+buffer/cursor corruption, not merely a Terminal-painted cursor mismatch.
+
+The test-only production receiver records the causal sequence in
+`dir-geometry-z.txt`: native output has 80x30 storage; WINDOW_RECT (0,0,79,27)
+shrinks it to 80x28 on ConPTY. The next capture grows storage to 30, but its
+WINDOW_RECT (0,2,79,29) shrinks it again. Cell publication still includes row
+28. The real cursor commit then fails with ERROR_INVALID_PARAMETER (87).
+DOS resume inherits the old cursor, and the next stream prompt overwrites
+directory output. The independent inactive-buffer API probe does not resize
+the canonical buffer; shadow creation alone is not the cause.
+
+Repair boundary: project-added NTKVM receiver only. Native channels mark
+their canonical output as a projected viewport. Copied worker WINDOW_RECT
+updates logical metadata, not the host viewport/storage. Explicit BUFFER_SIZE
+remains authoritative and first fits the physical viewport when storage must
+shrink. DOS channels still apply geometry to their private logical surface.
+Original cell-grid resize, task execution and completion remain unchanged.
+No terminal-brand detection, fixed-row offset, retry, delay, forced repaint,
+guest/mirror/shared-library edit, protocol change or history promise.
+
+Confirmed targeted checks:
+
+- x86 /MT incremental NTKVM and test links pass, retaining existing warnings.
+- `console-channel-lifetime-test.exe --private-desktop-full channel-dir-fixed.txt`
+  exits 0: projected viewport preserves row-29 cells/cursor; explicit native
+  shrink to 25 remains valid; retained channel/teardown/resource cases execute.
+- `terminal-observer-strict.exe 80 30 dir-strict-fixed.raw --s34-full-dir`
+  with TEST_RUNTIME_ROOT=Z:/, DIRECT_CMD=1 and REPEAT_DIR=1 exits 0.
+  Assertions now require actual directory completion, a clean cursor/prompt
+  below the directory summary, and fail rather than pass on timeout.
+- Recorded candidate order in `dir-geometry-fixed.txt`: native storage remains
+  30; cursor (0,29) succeeds; DOS resume cursor is (0,27). Prompt is at row 27,
+  summary above it, and visible rows 28/29 blank. This is logical DOS 28-row
+  projection, not a requirement that Terminal itself shrink to 28 rows.
+
+Eight-file candidate published to O:/winnt with hash equality in
+`dir-repair-published-manifest.json`; only NTKVM differs from delivered S10.
+Recovery is `accepted-s10-dir-recovery`. Guest/config files were not replaced.
+Console17 passes (`t424-s10-console17-dir-r004-*`). Window17 r004 fails its
+native-zero case before scripted Window delivery: CAF helper reports failure,
+the target remains at the DOS prompt, and the observer terminates it with its
+test-only timeout code 0x53504354. This is not a native target exit code and is
+not counted as a pass or attributed to the repair without further evidence.
+Standalone Window r005 stops at the foreign-package guard because the owner's
+published O:/winnt manual session owns BaseSrv; no process is changed by that
+attempt. Broad retained regression and P closure remain pending. The owner
+desktop Terminal observation is not replaced by the isolated ConPTY probe.
+
+### Reopened packet final delivery
+
+Window17 `t424-s10-window17-dir-r006-*` passes all seventeen unchanged cases,
+including the earlier failed native-zero/CAF case. The r004 failure is retained,
+not relabelled as passed or proved to be a production regression. Retained
+`dir-r006` checks pass actual modern EDIT screen/Ctrl+Q/CMD echo/DOS MEM,
+same-Console DOS/native relaunch and outer cooked CMD exit 19, two independent
+sessions with surviving session exit 23, and all four worker/frontend loss
+cases with broker-ordered retirement, failed direct receipt and empty-service
+retirement. Together with Console17 r004 and the strict repeated-DIR/geometry
+fixture this closes the reopened bounded repair. No test assertion was weakened.
+The DIR-repair publication manifest remains the eight-file product identity;
+only the frontend changed from the preceding S10 delivery. The containing P
+supplies reviewed commit/push. Owner next approves S11 naming, then a stop;
+T424 remains open and S12 is not admitted.

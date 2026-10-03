@@ -136,7 +136,28 @@ DWORD run16_console_video_text(run16_console_video *video,uint32_t serial)
 DWORD run16_console_dispatch(run16_console_frontend *owner,
     const console_io_request *request,console_io_reply *reply)
 {
+    CONSOLE_SCREEN_BUFFER_INFO before={0},after={0};
+    BOOL have_before=GetConsoleScreenBufferInfo(owner->output,&before);
     DWORD result=production_console_dispatch(owner,request,reply);
+    BOOL have_after=GetConsoleScreenBufferInfo(owner->output,&after);
+    if(request->operation==CONSOLE_IO_WRITE ||
+       request->operation==CONSOLE_IO_CURSOR_POSITION ||
+       request->operation==CONSOLE_IO_BUFFER_SIZE ||
+       request->operation==CONSOLE_IO_WINDOW_RECT ||
+       request->operation==CONSOLE_IO_SCREEN_INFO) {
+        FILE *file=report();
+        if(file) {
+            fprintf(file,"GEOMETRY tick=%llu op=%u seq=%u handle=%p before=%d:%d,%d/%d,%d/%d,%d,%d,%d after=%d:%d,%d/%d,%d/%d,%d,%d,%d request=%d,%d,%d,%d status=%lu result=%u error=%u\n",
+                GetTickCount64(),request->operation,request->sequence,owner->output,
+                have_before,before.dwSize.X,before.dwSize.Y,before.dwCursorPosition.X,before.dwCursorPosition.Y,
+                before.srWindow.Left,before.srWindow.Top,before.srWindow.Right,before.srWindow.Bottom,
+                have_after,after.dwSize.X,after.dwSize.Y,after.dwCursorPosition.X,after.dwCursorPosition.Y,
+                after.srWindow.Left,after.srWindow.Top,after.srWindow.Right,after.srWindow.Bottom,
+                request->state.left,request->state.top,request->state.right,request->state.bottom,
+                result,reply->result,reply->error);
+            close_report(file);
+        }
+    }
     if (request && reply && (!reply->result || result) &&
         (request->operation==CONSOLE_IO_VIDEO_BEGIN ||
          request->operation==CONSOLE_IO_VIDEO_DATA ||
