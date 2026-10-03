@@ -1,13 +1,16 @@
 import "wtypes.idl";
 [
     uuid(7d3e78bd-0472-4736-8797-e64e966d692e),
-    version(32.0),
+    version(33.0),
     pointer_default(unique)
 ]
 interface vdm_service
 {
     typedef [context_handle] void *VDM_CONNECTION;
-    /* Copied native launch/control only; worker/frontend I/O stays direct. */
+    /* Copied native launch/control only; worker/frontend I/O stays direct.
+     * The launcher classifies before admission. A NULL frontend submits a GUI
+     * startup request: no character route, service-held actual process lifetime.
+     * A non-NULL authenticated frontend retains the existing CUI/resume route. */
     error_status_t SubmitNativeRequest(
         [in] handle_t binding, [in] VDM_CONNECTION connection,
         [in, system_handle(sh_process)] HANDLE process,

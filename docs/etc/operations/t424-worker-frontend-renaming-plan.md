@@ -19,9 +19,10 @@ and [final evidence](../evidence/m0-t423-s40-native-alternate-screen-geometry.md
 | S6 | After S5 cleanup delivery, native worker NTW32 -> NTVWM. Rename product-owned component/executable/symbols and all consumers, preserving existing native text/GUI behavior and Win32Record identity; no GUI routing implementation. Pass name-only equivalence, production regression and coherent ntvwm.exe + ntkvm.exe eight-file publication. |
 | S7 | After S6 naming delivery, convert interface into common and unify service control RPC plus direct worker I/O pipes. Consolidate suitable shared mechanisms; pass affected provenance/dependency and full production gates. Service source split is explicitly transferred to S8, not claimed completed. |
 | S8 | Owner-separated NTSRV provenance review and service-private source split. Reuse S7 inventory and implementation evidence, retain one state/lock authority and original mirror semantics; build, regress and publish. |
-| S9 | Native GUI routing/classification in NTVWM and service-held handles. Default launcher returns on startup success; preserve --wait/shared workers and full gates. Monitor/UNBOUND display belongs to the queue-head NTMON T candidate. |
-| S10 | Frontend NTKVM -> NTCON after S9 delivery; owner-local names, consumers, build/test/package gates and publication. |
-| S11 | Final referent/semantic audit, indexes, regression and clean delivery; T closure owner-controlled. |
+| S9 | Native GUI routing through NTVWM and service-held handles. Keep launcher classification before service admission, matching DOS/WOW order. Default launcher returns on startup success; preserve --wait/shared workers and full gates. Monitor/UNBOUND display belongs to the queue-head NTMON T candidate. |
+| S10 | Owner-added rapid relaunch/lost-wakeup repair after S9 delivery. Centralize NTSRV frontend pending-work notification under its existing lock; deterministic interleaving tests and rapid CMD/COMMAND reuse, completion/Console-return and isolation regressions before coherent publication. |
+| S11 | Frontend NTKVM -> NTCON after S10 repair delivery; owner-local names, consumers, build/test/package gates and publication. |
+| S12 | Final referent/semantic audit, indexes, regression and clean delivery; T closure owner-controlled. |
 
 Rename only product-owned identities, preserving original OpenNT/MVDM and
 generic imported KVM library source identities. No guest, extra process/helper,
@@ -31,6 +32,75 @@ exceptions to the initial name-only launch/completion/lifetime exclusion.
 Local spelling alone does not authorize an ABI bump; any actual copied-wire,
 RPC/endpoint/version compatibility effect must be proved and coherently managed.
 An externally fixed spelling requires owner review before production migration.
+
+Owner direction on 2026-10-02 inserts the lost-wakeup repair as S10 and shifts
+the former frontend naming/final audit S10/S11 to S11/S12. The table above is
+the current sequence; earlier numbering/replanning chronology below remains
+historical. CURRENT retains the sole active S9; this insertion neither admits
+S10 now nor claims S9 delivery or a repaired runtime.
+
+## S10 rapid relaunch and frontend notification checklist
+
+Owner reproducer: rapidly repeat run16 cmd -> exit -> run16 cmd -> exit in
+one outer CMD. The read-only source audit of the latest S9 worktree finds
+the previously identified reset unchanged in NTSRV's project-owned
+opennt/source/frontend_registry.c. AcquireFrontendRoot publishes an
+undecided frontend_join_caller and sets frontend_capability under service->lock;
+service_frontend_idle checks only frontend_request_root before resetting the
+same event. NTKVM checks join candidates before checking channel requests in
+session_service.c. A join inserted between those checks can lose its wakeup,
+leaving NTKVM asleep and the launcher's acquisition waiting until its existing
+ten-second deadline. This is a source-proven possible interleaving, not an
+observed reproduction or proof of every reported hang's cause.
+
+Audit method: inspect every SetEvent/ResetEvent and adjacent predicate/wait
+in NTSRV frontend/worker/native/lifecycle modules, NTKVM session/presentation/
+input queues, NTVWM admission/execution and common transport. The existing
+verify-frontend-relaunch.ps1 delays each line by 1600 ms and does not cover
+rapid consecutive interactive native launches. Record exact tested source and
+artifact identities in S10's implementation evidence rather than treating
+the earlier probe as acceptance of this race.
+
+- [ ] Reconfirm the failing interleaving against the delivered S9 baseline;
+  distinguish startup acquisition, direct completion and Console-return waits.
+  Keep the reported hang open until causal evidence classifies it.
+- [ ] Give the existing shared frontend notification one NTSRV-private
+  pending-work predicate/update mechanism under service->lock. Include
+  undecided joins and all actionable pending channel/route delivery work;
+  reset only when all work represented by this event is absent. Keep state
+  authoritative and the event merely its wakeup projection.
+- [ ] Apply that mechanism to join creation/decision/cancellation, channel
+  request/delivery, route cleanup and connection rundown. Remove displaced
+  partial checks and scattered maintenance, not just add a wrapper beside them.
+  Define cancellation, event-operation failure and resource ownership explicitly.
+- [ ] Prevent busy loops: a decided join awaiting lease availability is not
+  an undecided authentication job. Preserve its existing frontend_changed
+  condition-variable predicate/recheck and finite admission deadline.
+- [ ] Retain separate retire/restored lease acknowledgements, direct receipts,
+  private ownership waiters, input readiness and per-operation OVERLAPPED events.
+  Recheck adjacent reset/wait contracts; repair another site only if a causal
+  defect of the same class is proved, otherwise document why it stays independent.
+- [ ] Add a deterministic production-service fixture: insert a join after
+  NTKVM's empty join check but before its channel-empty check, then assert the
+  event remains signaled and the join is processed without an unrelated wakeup.
+  Cover simultaneous join/channel work, refusal/cancellation/disconnect,
+  pending native routes and the last-item-consumed reset without event spinning.
+- [ ] Exercise rapid same-Console interactive CMD exit/relaunch and COMMAND/
+  native alternation, resident reuse, concurrent launchers, independent Console
+  isolation, broker/worker loss and restoration-before-outer-CMD-return. Record
+  which phase any timeout blocks; do not use Sleep to make the race disappear.
+- [ ] Pass affected x86 /MT CCPU40 builds, existing RPC/reservation/receipt/
+  lifecycle gates, Console17/Window17 and retained WOW frontiers; publish the
+  coherent recoverable eight-file set to O:/winnt with hashes, reviewed P
+  commit/push and clean synchronized tree. T closure remains owner-controlled.
+
+Bounds: repair project-added NTSRV frontend notification semantics, not
+original OpenNT/MVDM execution. No mirror/guest/shared-lib modification,
+new process/component/helper/protocol, scheduler, Observed records, polling
+cleanup, arbitrary retry/delay or frontend rename. No planned wire change;
+if one becomes essential, re-review scope and synchronize protocol/RPC/MIDL.
+Queue order is unchanged. Before implementation, admit the bounded S10 packet
+in CURRENT only after S9 delivery; this checklist is planned work, not closure.
 
 Owner direction on 2026-10-02 adds S3 investigation before further renaming.
 The subsequent explicit owner approval admits the S3 lifecycle repair separately
@@ -249,28 +319,32 @@ test evidence. S4 retains its DOS/WOW service creation, broker-only native
 submission/preflight/final status/resume, obsolete path/fixture removal and
 regression/publication rows. No architecture or runtime closure is claimed.
 
-The new native GUI checklist is:
+The native GUI checklist is delivered by S9; exact results and limits are in
+the [S9 ledger](../evidence/m0-t424-s9-native-gui-routing.md). This does not
+claim the later NTMON view or the separately inserted S10 race repair.
 
-- [ ] Keep launch syntax and broad DOS/Win16/native family discovery; move
-  the authoritative native GUI/CUI subsystem decision from run16 to NTVWM.
-- [ ] Route native submission/startup acknowledgement only through NTSRV;
+- [x] Keep launch syntax and DOS/Win16/native discovery. Native GUI/CUI
+  classification remains in run16 before service admission, matching the
+  existing DOS/WOW classification -> BaseCheckVDM -> worker order. NTVWM
+  executes the admitted kind; do not introduce worker preflight/resubmission.
+- [x] Route native submission/startup acknowledgement only through NTSRV;
   remove run16's local GUI CreateProcess path. Classify before text-frontend
   binding so GUI-only launches do not acquire a character frontend.
-- [ ] NTVWM creates the actual target and registers a restricted real process
+- [x] NTVWM creates the actual target and registers a restricted real process
   handle/identity against the authenticated service request. NTSRV retains
   that GUI handle after startup/launcher return, independently of worker
   occupancy; release it on actual process exit through an event wait.
-- [ ] Default GUI run16 returns on successful launch acknowledgement; preserve
+- [x] Default GUI run16 returns on successful launch acknowledgement; preserve
   explicit --wait completion/exit-code semantics through the service. Failure
   returns a structured startup error and creates no surviving GUI row.
-- [ ] Release GUI worker occupancy without killing the GUI or a shared text
+- [x] Release GUI worker occupancy without killing the GUI or a shared text
   worker. Owner asks for original shared-WOW semantics: release this request,
   not the resident carrier. A worker still carrying text remains BUSY;
   otherwise return READY. Later broker retirement is independent.
-- [ ] Retain authoritative GUI registration/identity for the queue-head NTMON
+- [x] Retain authoritative GUI registration/identity for the queue-head NTMON
   T candidate. Monitor/UNBOUND rendering is excluded from S4-S8; the future
   view uses service data, not local enumeration or invented Win16 process handles.
-- [ ] Verify direct GUI, text -> GUI -> text, GUI -> fresh text frontend,
+- [x] Verify direct GUI, text -> GUI -> text, GUI -> fresh text frontend,
   process exit cleanup, authentication/isolation, launch failure, worker
   release while GUI survives and explicit --wait results. No descendant
   observation, Job tracker, helper, scheduler or new executable.
@@ -302,7 +376,7 @@ Verify actual wire/endpoint compatibility effects; a spelling change alone
 does not authorize an ABI change. Publish a coherent recovered/tested eight-file
 package and remove the old basename only after its recoverable backup.
 
-S10 frontend naming and S11 audit remain sequential and cannot claim S9 runtime
+S11 frontend naming and S12 audit follow the new S10 repair and cannot claim S9 runtime
 work. This insertion changes the plan only; S4 remains the sole active packet.
 
 The [S1 name audit](../evidence/m0-t424-s1-name-referent-audit.md) supplies the

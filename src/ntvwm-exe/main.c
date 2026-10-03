@@ -303,8 +303,12 @@ int wmain(int argc,WCHAR **argv)
         {
             typedef BOOL (WINAPI *compare_handles)(HANDLE,HANDLE);
             compare_handles compare=(compare_handles)GetProcAddress(GetModuleHandleW(L"kernelbase.dll"),"CompareObjectHandles");
-            DWORD binding=membership.capability && (!compare || !compare(membership.capability,command.frontend)) &&
-                !ntvwm_executions_idle(requests) ? ERROR_BUSY : membership_bind(&membership,command.frontend);
+            /* A GUI command has no frontend attachment. Do not replace an
+             * existing text membership when the same carrier starts a GUI. */
+            DWORD binding=command.frontend ?
+                (membership.capability && (!compare || !compare(membership.capability,command.frontend)) &&
+                !ntvwm_executions_idle(requests) ? ERROR_BUSY : membership_bind(&membership,command.frontend)) :
+                (command.bytes ? ERROR_SUCCESS : ERROR_INVALID_DATA);
             /* Even allocation/thread failure must report startup before
              * completing the record. No serving thread owns this command. */
             DWORD start_error=ntvwm_execution_start(requests,&command,binding);

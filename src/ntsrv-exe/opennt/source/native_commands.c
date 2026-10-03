@@ -14,6 +14,10 @@ static void service_delete_win32record(OPENNT_BASE_WIN32RECORD *record)
 {
     if (!record) return;
     RemoveEntryList(&record->link);
+    /* Callback only signals a service event; it never takes the service lock
+     * or retains this record, so draining under that lock is safe. */
+    if(record->gui_wait)UnregisterWaitEx(record->gui_wait,INVALID_HANDLE_VALUE);
+    if(record->gui_process)CloseHandle(record->gui_process);
     if(record->receipt)CloseHandle(record->receipt);
     HeapFree(GetProcessHeap(),0,record);
 }
@@ -72,6 +76,13 @@ static BOOL service_launcher_connected(OPENNT_BASE_SERVICE *service,DWORD genera
 void service_release_launcher_results(OPENNT_BASE_SERVICE *service,DWORD generation)
 {
     LIST_ENTRY *link;
+    LIST_ENTRY *gui_link=service->gui_records.Flink;
+    while(gui_link!=&service->gui_records) {
+        OPENNT_BASE_WIN32RECORD *record=CONTAINING_RECORD(gui_link,OPENNT_BASE_WIN32RECORD,link);
+        gui_link=gui_link->Flink;
+        if(record->completed && record->launcher_generation==generation)
+            service_delete_win32record(record);
+    }
     for(link=service->connections.Flink;link!=&service->connections;link=link->Flink) {
         OPENNT_BASE_CONNECTION *worker=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
         LIST_ENTRY *entry=worker->win32records.Flink;
@@ -82,6 +93,34 @@ void service_release_launcher_results(OPENNT_BASE_SERVICE *service,DWORD generat
                 service_delete_win32record(record);
         }
     }
+}
+
+static VOID CALLBACK service_gui_exit(PVOID context,BOOLEAN fired)
+{
+    OPENNT_BASE_SERVICE *service=context;
+    UNREFERENCED_PARAMETER(fired);
+    (void)SetEvent(service->frontend_lifetime_changed);
+}
+
+BOOL service_prune_gui_records(OPENNT_BASE_SERVICE *service)
+{
+    LIST_ENTRY *entry=service->gui_records.Flink;
+    BOOL changed=FALSE;
+    while(entry!=&service->gui_records) {
+        OPENNT_BASE_WIN32RECORD *record=CONTAINING_RECORD(entry,OPENNT_BASE_WIN32RECORD,link);
+        entry=entry->Flink;
+        if(!record->completed && WaitForSingleObject(record->gui_process,0)==WAIT_OBJECT_0) {
+            record->completion_error=GetExitCodeProcess(record->gui_process,&record->exit_code) ?
+                ERROR_SUCCESS : GetLastError();
+            record->completed=TRUE;
+            (void)SetEvent(record->receipt);
+            changed=TRUE;
+        }
+        if(record->completed && !service_launcher_connected(service,record->launcher_generation)) {
+            service_delete_win32record(record);changed=TRUE;
+        }
+    }
+    return changed;
 }
 
 static DWORD service_next_win32record(OPENNT_BASE_CONNECTION *connection,DWORD *request)
@@ -192,17 +231,25 @@ DWORD OpenNtBaseServiceBindNativeTarget(OPENNT_BASE_CONNECTION *connection,DWORD
                      * before it can execute; Job-based descendant observation
                      * is deliberately a later monitor-only S and must not
                      * decide whether this direct command may resume. */
-                    HANDLE owned_receipt=NULL;
+                    HANDLE owned_receipt=NULL,owned_target=NULL,owned_wait=NULL;
                     if(!DuplicateHandle(GetCurrentProcess(),receipt,GetCurrentProcess(),&owned_receipt,
                         EVENT_MODIFY_STATE,FALSE,0))error=GetLastError();
+                    else if(record->gui && !DuplicateHandle(GetCurrentProcess(),target,GetCurrentProcess(),&owned_target,
+                        SYNCHRONIZE|PROCESS_QUERY_LIMITED_INFORMATION,FALSE,0))error=GetLastError();
+                    else if(record->gui && !RegisterWaitForSingleObject(&owned_wait,owned_target,
+                        service_gui_exit,connection->service,INFINITE,WT_EXECUTEONLYONCE))error=GetLastError();
                     else {
                         record->receipt=owned_receipt;owned_receipt=NULL;
+                        record->gui_process=owned_target;owned_target=NULL;
+                        record->gui_wait=owned_wait;owned_wait=NULL;
                         record->process_id=target_pid;
                         service_query_native_image(target_pid,record->image);
                         service_signal_frontend_states(connection->service);
                         error=ERROR_SUCCESS;
                     }
+                    if(owned_wait)UnregisterWaitEx(owned_wait,INVALID_HANDLE_VALUE);
                     if(owned_receipt)CloseHandle(owned_receipt);
+                    if(owned_target)CloseHandle(owned_target);
                 }
                 break;
             }
@@ -224,6 +271,13 @@ DWORD OpenNtBaseServiceNativeExitCode(OPENNT_BASE_CONNECTION *launcher,DWORD pid
     EnterCriticalSection(&service->lock);
     if(!OpenNtBaseServicePeer(launcher,pid,generation) || launcher->native_worker ||
         launcher->process.fVDM){error=ERROR_ACCESS_DENIED;goto done;}
+    for(link=service->gui_records.Flink;link!=&service->gui_records;link=link->Flink) {
+        OPENNT_BASE_WIN32RECORD *record=CONTAINING_RECORD(link,OPENNT_BASE_WIN32RECORD,link);
+        if(record->request!=request || record->launcher_generation!=generation)continue;
+        if(!record->completed){error=ERROR_NOT_READY;goto done;}
+        *exit_code=record->exit_code;error=record->completion_error;
+        service_delete_win32record(record);goto done;
+    }
     for(link=service->connections.Flink;link!=&service->connections;link=link->Flink) {
         OPENNT_BASE_CONNECTION *worker=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
         LIST_ENTRY *entry;
@@ -273,13 +327,16 @@ DWORD service_queue_native_command(OPENNT_BASE_CONNECTION *connection,DWORD pid,
         record=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*record));
         if(!record) { error=ERROR_NOT_ENOUGH_MEMORY;goto done; }
         record->launcher_generation=generation;
+        record->gui=capability==NULL;
         lstrcpynW(record->image,image,OPENNT_BASE_WORKER_IMAGE_CHARS);
     }
-    error=OpenNtBaseServiceRetainFrontendRoot(connection,pid,generation,capability,
-        &root_process,&root_generation);
-    if (error) goto done;
-    error=OpenNtBaseServiceAcquireConsoleContext(connection,pid,generation,capability,&execution);
-    if (error) goto done;
+    if(capability) {
+        error=OpenNtBaseServiceRetainFrontendRoot(connection,pid,generation,capability,
+            &root_process,&root_generation);
+        if (error) goto done;
+        error=OpenNtBaseServiceAcquireConsoleContext(connection,pid,generation,capability,&execution);
+        if (error) goto done;
+    } else if(!record || !bytes) {error=ERROR_INVALID_PARAMETER;goto done;}
     {
         /* The existing admission selects the process. Neither an arbitrary
          * PID nor frontend membership can nominate an execution endpoint. */
@@ -293,13 +350,13 @@ DWORD service_queue_native_command(OPENNT_BASE_CONNECTION *connection,DWORD pid,
             }
         }
         if (!worker_generation) { error=ERROR_NOT_READY;goto done; }
-        if (!DuplicateHandle(GetCurrentProcess(),capability,GetCurrentProcess(),&frontend,
+        if (capability && !DuplicateHandle(GetCurrentProcess(),capability,GetCurrentProcess(),&frontend,
                 SYNCHRONIZE,FALSE,0)) { error=GetLastError();goto done; }
     }
     error=ERROR_ACCESS_DENIED;
     for (link=connection->service->connections.Flink;link!=&connection->service->connections;link=link->Flink) {
         OPENNT_BASE_CONNECTION *root=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
-        if (root->process.SequenceNumber!=root_generation) continue;
+        if (capability && root->process.SequenceNumber!=root_generation) continue;
         connection->native_command_payload=owned_payload;owned_payload=NULL;
         connection->native_command_bytes=bytes;connection->native_command_pending=TRUE;
         connection->frontend_execution=execution;execution=NULL;
@@ -330,6 +387,11 @@ static OPENNT_BASE_WIN32RECORD *service_native_result_record(OPENNT_BASE_CONNECT
 {
     LIST_ENTRY *link,*entry;
     if(owner)*owner=NULL;
+    for(entry=caller->service->gui_records.Flink;entry!=&caller->service->gui_records;entry=entry->Flink) {
+        OPENNT_BASE_WIN32RECORD *record=CONTAINING_RECORD(entry,OPENNT_BASE_WIN32RECORD,link);
+        if(record->request==request && record->launcher_generation==caller->process.SequenceNumber)
+            return record;
+    }
     for(link=caller->service->connections.Flink;link!=&caller->service->connections;link=link->Flink) {
         OPENNT_BASE_CONNECTION *worker=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
         if(!worker->native_worker && worker!=caller)continue;
@@ -356,7 +418,7 @@ DWORD OpenNtBaseServiceNativeStartupResult(OPENNT_BASE_CONNECTION *worker,DWORD 
     if(!OpenNtBaseServicePeer(worker,pid,generation) || !worker->native_worker)goto done;
     for(link=worker->service->connections.Flink;link!=&worker->service->connections;link=link->Flink) {
         OPENNT_BASE_CONNECTION *caller=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
-        OPENNT_BASE_WIN32RECORD *record;
+        OPENNT_BASE_WIN32RECORD *record=NULL;
         SERVICE_COMPARE_HANDLES compare;
         if(caller->process.SequenceNumber!=caller_generation)continue;
         if(!caller->native_start_event || caller->native_start_worker!=generation ||
@@ -375,11 +437,30 @@ DWORD OpenNtBaseServiceNativeStartupResult(OPENNT_BASE_CONNECTION *worker,DWORD 
                     SYNCHRONIZE|PROCESS_QUERY_LIMITED_INFORMATION,FALSE,0) ||
                 !DuplicateHandle(GetCurrentProcess(),receipt,GetCurrentProcess(),&owned_receipt,
                     SYNCHRONIZE,FALSE,0)){error=GetLastError();goto done;}
+            if(record->gui) {
+                /* The actual target was bound while suspended. Its exit wait
+                 * must already exist before the worker resumes it. */
+                if(!record->gui_process || !record->gui_wait){error=ERROR_INVALID_STATE;goto done;}
+            }
         }
         caller->native_start_status=status;
         caller->native_start_reported=TRUE;
         if(!SetEvent(caller->native_start_event)) {
-            error=GetLastError();caller->native_start_reported=FALSE;goto done;
+            error=GetLastError();caller->native_start_reported=FALSE;
+            if(record && record->gui_wait) {
+                UnregisterWaitEx(record->gui_wait,INVALID_HANDLE_VALUE);
+                record->gui_wait=NULL;
+            }
+            goto done;
+        }
+        if(record && record->gui) {
+            /* Commit request release only after startup notification succeeds.
+             * The caller re-enters under this same lock before consuming it.
+             * Transfer the existing record, not a second task/receipt. */
+            RemoveEntryList(&record->link);
+            InsertTailList(&worker->service->gui_records,&record->link);
+            --worker->native_inflight;
+            service_signal_frontend_states(worker->service);
         }
         caller->native_start_target=owned_target;owned_target=NULL;
         caller->native_start_receipt=owned_receipt;owned_receipt=NULL;
@@ -406,9 +487,11 @@ DWORD OpenNtBaseServiceSubmitNativeRequest(OPENNT_BASE_CONNECTION *caller,DWORD 
     if(!caller || !OpenNtBaseServicePeer(caller,pid,generation))return ERROR_ACCESS_DENIED;
     /* Authenticate the root before interpreting launch data or selecting a
      * worker. The copied request never supplies a worker pipe or its owner. */
-    error=OpenNtBaseServiceRetainFrontendRoot(caller,pid,generation,frontend,&root,&root_generation);
-    if(error)return error;
-    CloseHandle(root);
+    if(frontend) {
+        error=OpenNtBaseServiceRetainFrontendRoot(caller,pid,generation,frontend,&root,&root_generation);
+        if(error)return error;
+        CloseHandle(root);
+    } else if(!bytes)return ERROR_INVALID_PARAMETER;
     if(bytes) {
         run16_native_launch_packet packet;WCHAR *strings[4];
         error=run16_native_launch_unpack(payload,bytes,&packet,strings);
@@ -493,7 +576,7 @@ DWORD OpenNtBaseServiceFinishNativeRequest(OPENNT_BASE_CONNECTION *caller,DWORD 
         else if(record->completion_error)error=ERROR_SUCCESS;
         else {
             error=ERROR_SUCCESS;io_error=record->io_error;io_flags=record->io_flags;
-            idle_worker=owner->native_worker ? owner->process.SequenceNumber : 0;
+            idle_worker=owner && owner->native_worker ? owner->process.SequenceNumber : 0;
         }
     }
     LeaveCriticalSection(&caller->service->lock);
@@ -541,12 +624,12 @@ DWORD service_take_native_command(OPENNT_BASE_CONNECTION *root,DWORD pid,
             error=ERROR_INSUFFICIENT_BUFFER;goto done;
         }
         if(caller->pending_win32record && (root->native_inflight==MAXDWORD ||
-            (root->native_inflight && root->native_activity_root!=caller->frontend_channel_root))) {
+            (caller->channel_frontend && root->native_inflight && root->native_activity_root!=caller->frontend_channel_root))) {
             error=ERROR_BUSY;goto done;
         }
         /* The visible Console identity belongs to the authenticated
          * frontend root, not to this short-lived direct launcher. */
-        {
+        if(caller->channel_frontend) {
             OPENNT_BASE_CONNECTION *frontend=NULL;
             LIST_ENTRY *root_link;
             for(root_link=root->service->connections.Flink;
@@ -562,16 +645,16 @@ DWORD service_take_native_command(OPENNT_BASE_CONNECTION *root,DWORD pid,
             if(!frontend || frontend->console!=caller->console ||
                 !frontend->console_member_count) {error=ERROR_PIPE_NOT_CONNECTED;goto done;}
             error=service_copy_execution_console_members(root,frontend);
-        }
+        } else error=ERROR_SUCCESS;
         if(error)goto done;
         /* The pinned sender process permits only this direct channel's finite
          * stream/capability exchange, never an arbitrary broker duplication API. */
         if (!DuplicateHandle(GetCurrentProcess(),caller->process.ProcessHandle,GetCurrentProcess(),
                 caller_process,SYNCHRONIZE|PROCESS_QUERY_LIMITED_INFORMATION|PROCESS_DUP_HANDLE,FALSE,0) ||
-            !DuplicateHandle(GetCurrentProcess(),caller->frontend_execution,GetCurrentProcess(),
+            (caller->channel_frontend && (!DuplicateHandle(GetCurrentProcess(),caller->frontend_execution,GetCurrentProcess(),
                 execution,SYNCHRONIZE,FALSE,0) ||
             !DuplicateHandle(GetCurrentProcess(),caller->channel_frontend,GetCurrentProcess(),
-                frontend,SYNCHRONIZE,FALSE,0)) { error=GetLastError();goto done; }
+                frontend,SYNCHRONIZE,FALSE,0)))) { error=GetLastError();goto done; }
         if(caller->pending_win32record) {
             error=service_next_win32record(root,&caller->pending_win32record->request);
             if(error)goto done;
@@ -579,7 +662,7 @@ DWORD service_take_native_command(OPENNT_BASE_CONNECTION *root,DWORD pid,
             *request=caller->pending_win32record->request;
             caller->pending_win32record=NULL;
             ++root->native_inflight;
-            root->native_activity_root=caller->frontend_channel_root;
+            if(caller->channel_frontend)root->native_activity_root=caller->frontend_channel_root;
         }
         if(caller->native_start_event)caller->native_start_request=*request;
         if(caller->native_command_bytes)CopyMemory(payload,caller->native_command_payload,caller->native_command_bytes);

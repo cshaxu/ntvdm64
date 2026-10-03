@@ -41,7 +41,7 @@ void run16_frontend_scope_end(run16_frontend_scope *scope)
     if(scope->receipt)CloseHandle(scope->receipt);
     HeapFree(GetProcessHeap(),0,scope);
 }
-static DWORD scope_begin(run16_frontend_scope **output,BOOL lease,BOOL console_owned)
+static DWORD scope_begin(run16_frontend_scope **output,BOOL lease,BOOL console_owned,BOOL acquire_frontend)
 {
     run16_frontend_scope *scope;
     char text[32];
@@ -68,7 +68,7 @@ static DWORD scope_begin(run16_frontend_scope **output,BOOL lease,BOOL console_o
         if (error) goto fail;
         if (!DuplicateHandle(GetCurrentProcess(),inherited_frontend,GetCurrentProcess(),
             &scope->capability,SYNCHRONIZE,FALSE,0)) { error=GetLastError();goto fail; }
-    } else {
+    } else if(acquire_frontend) {
         frontend_connection connection={0};
         uint64_t console_window=(uint64_t)(UINT_PTR)GetConsoleWindow();
         error=OpenNtBaseClientStartFrontend(console_window,lease && !console_owned,
@@ -105,9 +105,11 @@ fail:
     return error;
 }
 DWORD run16_frontend_scope_begin(run16_frontend_scope **output)
-{ return scope_begin(output,FALSE,FALSE); }
+{ return scope_begin(output,FALSE,FALSE,TRUE); }
 DWORD run16_frontend_scope_begin_lease(run16_frontend_scope **output,BOOL console_owned)
-{ return scope_begin(output,TRUE,console_owned); }
+{ return scope_begin(output,TRUE,console_owned,TRUE); }
+DWORD run16_frontend_scope_begin_gui(run16_frontend_scope **output)
+{ return scope_begin(output,FALSE,FALSE,FALSE); }
 
 HANDLE run16_frontend_scope_capability(run16_frontend_scope *scope)
 {
@@ -126,22 +128,22 @@ DWORD run16_frontend_scope_console_mask(run16_frontend_scope *scope)
 
 static DWORD wait_worker_change(HANDLE changed,HANDLE worker,HANDLE root,ULONGLONG deadline)
 {
-    HANDLE waits[3];DWORD count=0,worker_index=MAXDWORD,root_index,wait,remaining;
+    HANDLE waits[3];DWORD count=0,worker_index=MAXDWORD,root_index=MAXDWORD,wait,remaining;
     ULONGLONG now=GetTickCount64();
     if(now>=deadline)return ERROR_TIMEOUT;
     remaining=(DWORD)(deadline-now);
     if(worker){worker_index=count;waits[count++]=worker;}
-    root_index=count;waits[count++]=root;
+    if(root){root_index=count;waits[count++]=root;}
     waits[count++]=changed;
     wait=WaitForMultipleObjects(count,waits,FALSE,remaining);
     if(wait==WAIT_TIMEOUT)return ERROR_TIMEOUT;
     if(wait==WAIT_FAILED)return GetLastError();
     if(worker && wait==WAIT_OBJECT_0+worker_index)return ERROR_PROCESS_ABORTED;
-    if(wait==WAIT_OBJECT_0+root_index)return ERROR_PIPE_NOT_CONNECTED;
+    if(root && wait==WAIT_OBJECT_0+root_index)return ERROR_PIPE_NOT_CONNECTED;
     return wait==WAIT_OBJECT_0+count-1 ? ERROR_SUCCESS : ERROR_INVALID_STATE;
 }
 
-DWORD run16_frontend_scope_launch_native(run16_frontend_scope *scope,const run16_native_start *start)
+static DWORD scope_launch_native(run16_frontend_scope *scope,const run16_native_start *start,BOOL text)
 {
     HANDLE worker=NULL,changed=NULL,target=NULL;DWORD error;
     ULONGLONG deadline=GetTickCount64()+10000;
@@ -164,9 +166,9 @@ DWORD run16_frontend_scope_launch_native(run16_frontend_scope *scope,const run16
     for(;;) {
         /* Both worker kinds acquire the same authenticated presentation route.
          * A reused route is not a new frontend or an input activation. */
-        error=OpenNtBaseClientRequestFrontend(scope->capability);
+        error=text ? OpenNtBaseClientRequestFrontend(scope->capability) : ERROR_SUCCESS;
         if(error==ERROR_ALREADY_EXISTS)error=ERROR_SUCCESS;
-        if(!error)error=run16_native_request_submit(scope->capability,start,&target,&scope->receipt,&scope->native_request);
+        if(!error)error=run16_native_request_submit(text ? scope->capability : NULL,start,&target,&scope->receipt,&scope->native_request);
         if(error!=ERROR_NOT_READY)break;
         /* No request was accepted. Wait only for initial registration; never
          * replay a submitted request or restart a failed worker. */
@@ -181,6 +183,10 @@ done:
     CloseHandle(changed);
     return error;
 }
+DWORD run16_frontend_scope_launch_native(run16_frontend_scope *scope,const run16_native_start *start)
+{ return scope_launch_native(scope,start,TRUE); }
+DWORD run16_frontend_scope_launch_gui(run16_frontend_scope *scope,const run16_native_start *start)
+{ return scope_launch_native(scope,start,FALSE); }
 DWORD run16_wait_direct_event(HANDLE receipt)
 {
     DWORD wait;

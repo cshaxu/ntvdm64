@@ -74,8 +74,8 @@ static void dispose_unstarted_command(ntvwm_next_command *command)
     if(command->frontend)CloseHandle(command->frontend);
     ZeroMemory(command,sizeof(*command));
 }
-static unsigned submit(ntvwm_executions *owner,const BYTE *payload,DWORD bytes,
-    DWORD access,DWORD preflight_error,DWORD request_id)
+static unsigned submit_kind(ntvwm_executions *owner,const BYTE *payload,DWORD bytes,
+    DWORD access,DWORD preflight_error,DWORD request_id,BOOL gui)
 {
     ntvwm_next_command command={0};DWORD error;unsigned id=++serial;
     CHECK(id<ARRAYSIZE(observations));if(id>=ARRAYSIZE(observations))return 0;
@@ -90,12 +90,14 @@ static unsigned submit(ntvwm_executions *owner,const BYTE *payload,DWORD bytes,
         CHECK(command.payload!=NULL);
         if(command.payload)CopyMemory(command.payload,payload,allocated);
     }
-    command.frontend=CreateEventW(NULL,TRUE,FALSE,NULL);
-    command.execution=CreateEventW(NULL,TRUE,FALSE,NULL);
-    CHECK(command.frontend && command.execution);
+    if(!gui) {
+        command.frontend=CreateEventW(NULL,TRUE,FALSE,NULL);
+        command.execution=CreateEventW(NULL,TRUE,FALSE,NULL);
+        CHECK(command.frontend && command.execution);
+    }
     CHECK(DuplicateHandle(GetCurrentProcess(),GetCurrentProcess(),GetCurrentProcess(),
         &command.sender,access,FALSE,0));
-    if(!observations[id].ready || !command.frontend || !command.execution || !command.sender ||
+    if(!observations[id].ready || (!gui && (!command.frontend || !command.execution)) || !command.sender ||
         (bytes && !command.payload)) {
         dispose_unstarted_command(&command);dispose_observation(id);return 0;
     }
@@ -105,6 +107,9 @@ static unsigned submit(ntvwm_executions *owner,const BYTE *payload,DWORD bytes,
         !command.frontend && !command.request && !command.caller_generation);
     return id;
 }
+static unsigned submit(ntvwm_executions *owner,const BYTE *payload,DWORD bytes,
+    DWORD access,DWORD preflight_error,DWORD request_id)
+{ return submit_kind(owner,payload,bytes,access,preflight_error,request_id,FALSE); }
 #define SENDER_ACCESS (SYNCHRONIZE|PROCESS_DUP_HANDLE|PROCESS_QUERY_LIMITED_INFORMATION)
 static DWORD make_target_packet(const WCHAR *argument,HANDLE input,BYTE **payload,DWORD *bytes)
 {
@@ -304,6 +309,76 @@ static void target_case(BOOL held,DWORD io_error,DWORD broker_error)
     }
     if(id)dispose_observation(id);if(payload)HeapFree(GetProcessHeap(),0,payload);
 }
+static DWORD gui_forbidden_io(void *context,HANDLE stop)
+{ (void)context;(void)stop;CHECK(FALSE);return ERROR_ACCESS_DENIED; }
+static void raw_failed_create_control(void)
+{
+    WCHAR image[MAX_PATH];STARTUPINFOW startup={sizeof(startup)};
+    PROCESS_INFORMATION process={0};DWORD before=0,after=0,error=0;
+    CHECK(GetModuleFileNameW(NULL,image,ARRAYSIZE(image)));
+    image[wcslen(image)-1]=L'!';
+    CHECK(GetProcessHandleCount(GetCurrentProcess(),&before));
+    CHECK(!CreateProcessW(image,NULL,NULL,NULL,FALSE,CREATE_SUSPENDED,NULL,NULL,&startup,&process));
+    error=GetLastError();CHECK(error==ERROR_FILE_NOT_FOUND);
+    CHECK(!process.hProcess && !process.hThread);
+    CHECK(GetProcessHandleCount(GetCurrentProcess(),&after));
+    fprintf(log,"RAW-CreateProcess-failure handles-before=%lu handles-after=%lu error=%lu\n",before,after,error);
+}
+static void gui_startup_failure_cleans_request(void)
+{
+    ntvwm_executions *owner=NULL;BYTE *payload=NULL;DWORD bytes;unsigned id=0;
+    DWORD handles_before=0,handles_after=0;
+    run16_native_launch_packet header;WCHAR *strings[4];
+    LONG before=completed_cleanup_count;
+    CHECK(GetProcessHandleCount(GetCurrentProcess(),&handles_before));
+    CHECK(!ntvwm_executions_open(&owner));if(!owner)return;
+    if(!make_target_packet(L"--completed-target",NULL,&payload,&bytes)) {
+        CHECK(!run16_native_launch_unpack(payload,bytes,&header,strings));
+        strings[0][wcslen(strings[0])-1]=L'!';
+        CHECK(GetFileAttributesW(strings[0])==INVALID_FILE_ATTRIBUTES);
+        id=submit_kind(owner,payload,bytes,SENDER_ACCESS,0,1,TRUE);
+        if(id) {
+            startup_observation *result=collect(id);
+            CHECK(result && result->status==ERROR_FILE_NOT_FOUND && !result->target && !result->receipt);
+            CHECK(!ntvwm_executions_wait_idle(owner));
+            CHECK(completed_cleanup_count==before+1);
+        }
+    }
+    ntvwm_executions_close(owner);
+    if(id)dispose_observation(id);if(payload)HeapFree(GetProcessHeap(),0,payload);
+    CHECK(GetProcessHandleCount(GetCurrentProcess(),&handles_after));
+    fprintf(log,"GUI-failed-start handles-before=%lu handles-after=%lu\n",handles_before,handles_after);
+}
+static void gui_startup_releases_execution(void)
+{
+    ntvwm_executions *owner=NULL;BYTE *payload=NULL;DWORD bytes;unsigned id=0;
+    DWORD denied=ERROR_ACCESS_DENIED;HANDLE cleanup=NULL;
+    LONG direct_before=completed_direct_count,cleanup_before=completed_cleanup_count;
+    ntvwm_execution_io io={&denied,gui_forbidden_io,target_end,NULL};
+    CHECK(!ntvwm_executions_open(&owner));if(!owner)return;
+    /* An accidental text bind would reject this startup. This fixture tests
+     * execution ownership, not subsystem discovery (the actual GUI integration
+     * probe separately exercises the GUI image through the real broker). */
+    ntvwm_executions_bind_io(owner,&io);
+    if(!make_target_packet(L"--held-target",NULL,&payload,&bytes)) {
+        id=submit_kind(owner,payload,bytes,SENDER_ACCESS,0,1,TRUE);
+        if(id) {
+            startup_observation *result=collect(id);
+            CHECK(result && !result->status && result->target && result->receipt);
+            CHECK(!ntvwm_executions_wait_idle(owner));
+            CHECK(result->target && WaitForSingleObject(result->target,0)==WAIT_TIMEOUT);
+            CHECK(completed_direct_count==direct_before && completed_cleanup_count==cleanup_before);
+        }
+    }
+    ntvwm_executions_close(owner);
+    if(id && observations[id].target) {
+        CHECK(WaitForSingleObject(observations[id].target,0)==WAIT_TIMEOUT);
+        cleanup=OpenProcess(PROCESS_TERMINATE|SYNCHRONIZE,FALSE,GetProcessId(observations[id].target));
+        CHECK(cleanup!=NULL);
+        if(cleanup){CHECK(TerminateProcess(cleanup,0));CHECK(WaitForSingleObject(cleanup,5000)==WAIT_OBJECT_0);CloseHandle(cleanup);}
+    }
+    if(id)dispose_observation(id);if(payload)HeapFree(GetProcessHeap(),0,payload);
+}
 int wmain(int argc,WCHAR **argv)
 {
     DWORD baseline,current;
@@ -323,15 +398,22 @@ int wmain(int argc,WCHAR **argv)
     invalid_arguments_do_not_allocate();launch_packet_boundaries();target_case(TRUE,0,0);
     {HANDLE input=NULL,output=NULL;CHECK(CreatePipe(&input,&output,NULL,0));
         if(input)CloseHandle(input);if(output)CloseHandle(output);}
+    /* Control the OS's first failed CreateProcess initialization separately.
+     * Its measured handle growth occurs without any project launch/execution
+     * code. The unchanged aggregate assertion below still covers all repeated
+     * production requests, including real GUI creation failures. */
+    raw_failed_create_control();
     CHECK(GetProcessHandleCount(GetCurrentProcess(),&baseline));
     malformed_commands();concurrent_io_cancellation();target_case(TRUE,0,0);
+    gui_startup_releases_execution();
+    {unsigned attempt;for(attempt=0;attempt<8;++attempt)gui_startup_failure_cleans_request();}
     no_launch_failure(FALSE);no_launch_failure(TRUE);broker_completion_failure_stops_reentry();
     target_case(FALSE,0,0);target_case(FALSE,ERROR_WRITE_FAULT,0);
     target_case(FALSE,ERROR_BROKEN_PIPE,0);target_case(FALSE,0,RPC_S_SERVER_UNAVAILABLE);
     resume_barrier(ERROR_SUCCESS,ERROR_SUCCESS);resume_barrier(ERROR_ACCESS_DENIED,ERROR_SUCCESS);
     resume_barrier(ERROR_SUCCESS,ERROR_PIPE_NOT_CONNECTED);
     CHECK(GetProcessHandleCount(GetCurrentProcess(),&current) && current==baseline);
-    fprintf(log,"NTVWM-REQUEST-LIFETIME checks=%ld failures=%ld completed=12 cancelled=16 target-survival=yes remaining-handles=%ld\n",
-        checks,failures,(long)(current-baseline));
+    fprintf(log,"NTVWM-REQUEST-LIFETIME checks=%ld failures=%ld completed=%ld cancelled=16 target-survival=yes remaining-handles=%ld\n",
+        checks,failures,completed_direct_count+completed_cleanup_count+completed_resume_count,(long)(current-baseline));
     fclose(log);return failures ? 1 : 0;
 }

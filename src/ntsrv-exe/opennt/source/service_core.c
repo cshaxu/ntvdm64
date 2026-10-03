@@ -24,6 +24,7 @@ OPENNT_BASE_SERVICE *OpenNtBaseServiceStart(void)
     InitializeListHead(&service->worker_watches);
     InitializeListHead(&service->frontend_routes);
     InitializeListHead(&service->console_contexts);
+    InitializeListHead(&service->gui_records);
     service->frontend_lifetime_changed=CreateEventW(NULL,FALSE,FALSE,NULL);
     if(!service->frontend_lifetime_changed) {
         DeleteCriticalSection(&service->lock);HeapFree(GetProcessHeap(),0,service);return NULL;
@@ -76,6 +77,7 @@ BOOL OpenNtBaseServiceStop(OPENNT_BASE_SERVICE *service)
     LIST_ENTRY *entry;
     /* Transport has stopped and joined all calls/rundowns before stop. */
     if (!service || !IsListEmpty(&service->connections) || !IsListEmpty(&service->worker_watches) ||
+        !IsListEmpty(&service->gui_records) ||
         !OpenNtBaseReservationsDestroy(service->reservations) ||
         !OpenNtBaseDestroyProcessRegistry(&service->registry)) return FALSE;
     /* A cancelled route may precede worker Connect, hence have no worker
@@ -192,6 +194,7 @@ DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *service,HANDLE process,
                         }
                     }
                 }
+                if(connection->native_worker)watch->unbound_native_deadline=GetTickCount64()+FRONTEND_STARTUP_DEADLINE_MS;
                 if (error || !RegisterWaitForSingleObject(&watch->wait,watch->process.ProcessHandle,
                     service_worker_terminated,watch,INFINITE,WT_EXECUTEONLYONCE)) {
                     if(!error)error=GetLastError();

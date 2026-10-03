@@ -1452,6 +1452,16 @@ if ($Architecture -eq 'x86') {
     }
     $nativeBinding = ' obj/run16/support.obj obj/run16/rpc_client.obj obj/run16/stub.obj opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib'
     $graph.Add('build ntvwm.exe: frontend_link worker-base.lib obj/ntvwm/next_command.obj obj/ntvwm/main.obj obj/ntvwm/presentation.obj obj/ntvwm/text_frame.obj obj/ntvwm/console_state.obj obj/ntvwm/execution.obj obj/run16/native_launch.obj' + $nativeBinding)
+    $graph.Add('build obj/run16/image_classification.obj: cc ' + (NinjaPath (Join-Path $run16Root 'image_classification.c')))
+    $graph.Add('  cflags = ' + $baseOwnerFlags)
+    $graph.Add('build obj/tests/run16_image_classification.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/run16_image_classification_test.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build run16-image-classification-test.exe: frontend_link obj/tests/run16_image_classification.obj obj/run16/image_classification.obj obj/run16/support.obj original-opennt-rtl-x86.lib')
+    $graph.Add('build obj/tests/native_gui_startup_probe.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/native_gui_startup_probe.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('rule native_gui_probe_link')
+    $graph.Add('  command = link.exe /nologo /subsystem:windows /entry:wWinMainCRTStartup /opt:ref /out:$out $in kernel32.lib user32.lib')
+    $graph.Add('build native-gui-startup-probe.exe: native_gui_probe_link obj/tests/native_gui_startup_probe.obj')
     $graph.Add('build obj/ntvwm/text_frame.obj: cc ' + (NinjaPath (Join-Path $root 'src/ntvwm-exe/text_frame.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build obj/tests/ntvwm_text_frame.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/ntvwm_text_frame_test.c')))
@@ -1532,7 +1542,7 @@ if ($Architecture -eq 'x86') {
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build console-text-producer-test.exe: console_test_link obj/tests/console_text_producer.obj obj/tests/console_text_provider.obj')
     # The frontend EXE is a runtime prerequisite, never a launcher link input.
-    $graph.Add('build run16.exe: run16_link obj/run16/entry.obj obj/run16/launch_options.obj obj/run16/frontend_scope.obj frontend-client.lib obj/run16/native_launch.obj obj/run16/support.obj obj/run16/rpc_client.obj obj/run16/stub.obj opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib || ntkvm.exe')
+    $graph.Add('build run16.exe: run16_link obj/run16/entry.obj obj/run16/image_classification.obj obj/run16/launch_options.obj obj/run16/frontend_scope.obj frontend-client.lib obj/run16/native_launch.obj obj/run16/support.obj obj/run16/rpc_client.obj obj/run16/stub.obj opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib || ntkvm.exe')
     $graph.Add('build obj/tests/console_video_observed.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/console_video_observed.c')))
     $graph.Add('  cflags = /nologo /c /MT /std:c11 /W4 /we4013 /showIncludes /I obj/basesrv /I "' + (NinjaPath (Join-Path $root 'src')) + '"')
     $graph.Add('build obj/tests/run16_package_observed.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/run16_package_observed.c')) + ' | obj/basesrv/service.h')
@@ -1888,7 +1898,7 @@ if ($objectOutputDirectories.Count -gt 0) {
         target = 'run16.exe'
         selected = ($Architecture -eq 'x86')
         disposition = 'client-only x86 launcher; native independent-frontend paths tested; migrated DOS/GUI grouping gates pending'
-        sources = @('src/run16-exe/main.c', 'src/run16-exe/launch_options.c', 'src/run16-exe/launch_options.h', 'src/run16-exe/frontend_scope.c', 'src/run16-exe/frontend_scope.h', 'src/opennt-abi/host-compat/opennt_support_rtl.c' | ForEach-Object {
+        sources = @('src/run16-exe/main.c', 'src/run16-exe/image_classification.c', 'src/run16-exe/image_classification.h', 'src/run16-exe/launch_options.c', 'src/run16-exe/launch_options.h', 'src/run16-exe/frontend_scope.c', 'src/run16-exe/frontend_scope.h', 'src/opennt-abi/host-compat/opennt_support_rtl.c' | ForEach-Object {
             [ordered]@{ path = $_; sha256 = Get-NodeSha256 (Join-Path $root $_) }
         })
         libraries = @('frontend-client.lib', 'opennt-base-client.lib', 'opennt-base-bindings.lib', 'broker-transport.lib', 'original-opennt-rtl-x86.lib')

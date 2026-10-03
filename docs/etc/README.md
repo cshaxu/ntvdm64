@@ -2,6 +2,7 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T424 S9 native GUI routing](evidence/m0-t424-s9-native-gui-routing.md) | M0 T424 S9 | Ownership audit, implementation increments and GUI routing acceptance checklist. | Retain through T424 acceptance. |
 | [T424 S8 NTSRV private separation](evidence/m0-t424-s8-ntsrv-service-separation.md) | M0 T424 S8 | Complete function provenance/disposition ledger, private state/lock ownership and production verification. | Retain through architecture migration acceptance. |
 | [T424 S7 common/service separation](evidence/m0-t424-s7-common-service-separation.md) | M0 T424 S7 | Provenance and resource-ownership inventory, shared/provider decisions and production verification checklist. | Retain through architecture migration acceptance. |
 | [T424 S6 native worker name](evidence/m0-t424-s6-native-worker-name.md) | M0 T424 S6 | Classified naming inventory, name-only equivalence and production delivery gates. | Retain through naming acceptance. |

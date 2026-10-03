@@ -10,6 +10,7 @@
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
 #include "frontend_scope.h"
 #include "launch_options.h"
+#include "image_classification.h"
 #include "native_launch.h"
 #include "common/protocol/console_io.h"
 #include <shellapi.h>
@@ -418,40 +419,7 @@ static BOOL WINAPI launcher_control(DWORD event)
     return event == CTRL_C_EVENT || event == CTRL_BREAK_EVENT;
 }
 
-/* Native resource materialization is shared with NTVWM, not its execution loop. */
-static DWORD launch_gui(PCWSTR application,PCWSTR command,BOOL wait)
-{
-    WCHAR directory[MAX_PATH];
-    LPWCH environment=NULL;
-    run16_native_start start={0};
-    PROCESS_INFORMATION child={0};
-    BYTE *packet=NULL;
-    DWORD bytes,error,result;
-    if(!GetCurrentDirectoryW(ARRAYSIZE(directory),directory))return GetLastError();
-    environment=GetEnvironmentStringsW();if(!environment)return GetLastError();
-    start.application=application;start.command=command;
-    start.directory=directory;start.environment=environment;
-    start.standard[0]=GetStdHandle(STD_INPUT_HANDLE);
-    start.standard[1]=GetStdHandle(STD_OUTPUT_HANDLE);
-    start.standard[2]=GetStdHandle(STD_ERROR_HANDLE);
-    /* Reuse restricted handle/environment materialization, but no frontend
-     * or execution capability: a GUI segment ends character-session routing. */
-    error=run16_native_launch_pack(&start,&packet,&bytes);
-    if(!error)error=run16_native_launch_start(packet,bytes,&child);
-    if(!error){
-        CloseHandle(child.hThread);
-        if(wait) {
-            if(WaitForSingleObject(child.hProcess,INFINITE)!=WAIT_OBJECT_0 ||
-                !GetExitCodeProcess(child.hProcess,&result))error=GetLastError();
-            else error=result;
-        }
-        CloseHandle(child.hProcess);
-    }
-    if(packet)HeapFree(GetProcessHeap(),0,packet);
-    FreeEnvironmentStringsW(environment);
-    return error;
-}
-static DWORD launch_native(run16_frontend_scope *scope,PCWSTR application,PCWSTR command)
+static DWORD launch_native(run16_frontend_scope *scope,PCWSTR application,PCWSTR command,BOOL text,BOOL wait)
 {
     run16_native_start start={0};
     WCHAR directory[32768];
@@ -469,8 +437,9 @@ static DWORD launch_native(run16_frontend_scope *scope,PCWSTR application,PCWSTR
     start.standard[2]=GetStdHandle(STD_ERROR_HANDLE);
     start.console_mask=run16_frontend_scope_console_mask(scope);
     for(i=0;i<3;++i)if(GetConsoleMode(start.standard[i],&mode))start.console_mask|=1u<<i;
-    error=run16_frontend_scope_launch_native(scope,&start);
-    if(!error) {
+    error=text ? run16_frontend_scope_launch_native(scope,&start) : run16_frontend_scope_launch_gui(scope,&start);
+    if(!error && !wait)result=ERROR_SUCCESS;
+    if(!error && wait) {
         DWORD target_completed=0;
         DWORD completion=run16_frontend_scope_wait_native(scope,&result,&target_completed);
         /* The direct native target can have completed even when its final
@@ -478,7 +447,7 @@ static DWORD launch_native(run16_frontend_scope *scope,PCWSTR application,PCWSTR
          * launcher must not hand an outer CMD its Console until NTKVM has
          * reselected the canonical buffer and restored input mode. A live target has not
          * completed the handoff and retains the existing failure path. */
-        if(target_completed) {
+        if(text && target_completed) {
             DWORD handoff=run16_frontend_scope_retire(scope);
             if(!handoff) {
                 handoff=run16_frontend_scope_restore_parent(scope);
@@ -592,7 +561,7 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
         result=connect_broker();
         if (!result) result=run16_frontend_scope_begin_lease(&frontend_scope,initial_console_only);
         if (result) goto done;
-        result=launch_native(frontend_scope,application,shell_command);
+        result=launch_native(frontend_scope,application,shell_command,TRUE,TRUE);
         goto done;
     }
     if (type == SCS_DOS_BINARY)
@@ -674,29 +643,22 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
     /* Original vdm.c obtains the subsystem from an image section. Reuse that
      * OS metadata contract for frontend selection; do not parse PE headers. */
     {
-        HANDLE file=CreateFileW(image_resolved ? application : image_argument,GENERIC_READ,FILE_SHARE_READ|FILE_SHARE_DELETE,
-            NULL,OPEN_EXISTING,0,NULL),section=NULL;
-        SECTION_IMAGE_INFORMATION information={0};
-        NTSTATUS status;
-        if (file==INVALID_HANDLE_VALUE) { result=GetLastError();goto done; }
-        status=NtCreateSection(&section,SECTION_QUERY,NULL,NULL,PAGE_READONLY,SEC_IMAGE,file);
-        CloseHandle(file);
-        if (NT_SUCCESS(status)) {
-            status=NtQuerySection(section,SectionImageInformation,&information,sizeof(information),NULL);
-            CloseHandle(section);
-        }
-        if (!NT_SUCCESS(status)) { result=RtlNtStatusToDosError(status);goto done; }
-        if (information.SubSystemType==IMAGE_SUBSYSTEM_WINDOWS_CUI) {
+        DWORD subsystem=0;
+        result=run16_classify_native_image(image_resolved ? application : image_argument,&subsystem);
+        if(result)goto done;
+        if (subsystem==IMAGE_SUBSYSTEM_WINDOWS_CUI) {
             result=connect_broker();
             if (!result) result=run16_frontend_scope_begin_lease(&frontend_scope,initial_console_only);
             if (result) goto done;
         }
     }
     if(frontend_scope) {
-        result=launch_native(frontend_scope,image_resolved ? application : image_argument,launch_command);
+        result=launch_native(frontend_scope,image_resolved ? application : image_argument,launch_command,TRUE,TRUE);
         goto done;
     }
-    result=launch_gui(image_resolved ? application : image_argument,launch_command,options.wait);
+    result=connect_broker();
+    if(!result)result=run16_frontend_scope_begin_gui(&frontend_scope);
+    if(!result)result=launch_native(frontend_scope,image_resolved ? application : image_argument,launch_command,FALSE,options.wait);
 done:
     run16_frontend_scope_end(frontend_scope);
     OpenNtBaseClientDisconnectCurrent();

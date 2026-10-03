@@ -50,6 +50,7 @@ struct OPENNT_BASE_SERVICE {
     LIST_ENTRY worker_watches;
     LIST_ENTRY frontend_routes;
     LIST_ENTRY console_contexts;
+    LIST_ENTRY gui_records; /* Same direct record, independent of worker occupancy. */
     HANDLE frontend_lifetime_changed;
     OPENNT_BASE_EMPTY_NOTIFY empty_notify;
     void *empty_notify_context;
@@ -152,6 +153,8 @@ typedef struct OPENNT_BASE_WIN32RECORD {
     DWORD process_id;
     DWORD launcher_generation,exit_code,completion_error;
     BOOL completed;
+    BOOL gui;
+    HANDLE gui_process,gui_wait; /* Restricted process reference and event-only watch. */
     HANDLE receipt; /* Signalled after NTVWM reports exit and I/O release. */
     DWORD io_error,io_flags; /* Final I/O precedes receipt under the service lock. */
     BOOL startup_delivered;
@@ -185,6 +188,7 @@ typedef struct OPENNT_BASE_WORKER_WATCH {
     BOOL termination_requested;
     HANDLE shutdown;
     BOOL frontend_associated;
+    ULONGLONG unbound_native_deadline;
 } OPENNT_BASE_WORKER_WATCH;
 typedef struct OPENNT_BASE_MANAGEMENT_LABEL {
     LIST_ENTRY link;
@@ -224,6 +228,7 @@ DWORD service_copy_execution_console_members(OPENNT_BASE_CONNECTION *destination
 void service_clear_pending_win32record(OPENNT_BASE_CONNECTION *connection);
 void service_clear_win32records(OPENNT_BASE_CONNECTION *connection);
 void service_release_launcher_results(OPENNT_BASE_SERVICE *service,DWORD generation);
+BOOL service_prune_gui_records(OPENNT_BASE_SERVICE *service); /* Service lock held. */
 void service_delete_frontend(OPENNT_FRONTEND_ROUTE *route);
 void service_clear_frontend_channel(OPENNT_BASE_CONNECTION *connection);
 void service_clear_frontend(OPENNT_BASE_CONNECTION *connection);

@@ -26,8 +26,8 @@ final-paint/restoration barriers; it owns no task registry/completion or orderly
 death policy. Shell-out CreateProcess/run16 execution remains local to the
 worker and is not a new task-control RPC edge. NTMON uses NTSRV only.
 
-Both worker kinds retain their original/native execution boundaries. NTVWM
-holds/waits on its real target, obtains its actual Windows exit code, completes
+Both worker kinds retain their original/native execution boundaries. For text
+targets NTVWM holds/waits on its real target, obtains its actual Windows exit code, completes
 I/O and reports the result to NTSRV; run16 receives the broker result, not a
 direct worker pipe. DOS retains original BaseSrv record/completion semantics.
 Win32 GUI and registered Win16 startup-only semantics are unchanged. No
@@ -69,7 +69,13 @@ Owner's subsequent closure revision separates these goals: S7 owns common and
 the two protocol families; the complete NTSRV block-provenance review and
 service-private source split belong to the next S8. Earlier combined wording
 below is retained context, not an S7 service-split completion claim. Native GUI,
-frontend naming and final audit follow as S9, S10 and S11.
+frontend naming and final audit originally followed as S9, S10 and S11.
+The owner's later insertion makes S10 a bounded NTSRV frontend lost-wakeup
+repair, S11 frontend naming and S12 final audit. Its
+[checklist](../etc/operations/t424-worker-frontend-renaming-plan.md#s10-rapid-relaunch-and-frontend-notification-checklist)
+keeps the shared notification a projection of every actionable pending join/
+channel request under the existing service lock. Separate completion/return
+acknowledgements retain their contracts; no new control edge or mirror change.
 
 Final owner transport clarification: common carries both protocol families
 and their suitable shared client/transport mechanisms. NTSRV control uses
@@ -112,21 +118,23 @@ does not prove S7 completion or authorize publication of a mixed package.
 This bounded owner approval supersedes the blanket common-root prohibition
 for the stated purpose, not other ownership or mirror restrictions.
 
-### Native GUI registration — T424 S8 target
+### Native GUI registration — T424 S9
 
 The subsequent owner direction removes local run16 GUI creation from the target
-topology. Owner places S6 NTVWM -> NTVWM naming before this S8 implementation;
+topology. Owner places S6 NTW32 -> NTVWM naming before this S9 implementation;
 the rename alone does not deliver GUI routing. Run16 retains broad
 DOS/Win16/native family discovery and unchanged arguments; every native target
-is submitted to NTSRV and delivered to NTVWM. NTVWM decides the native GUI/CUI
-subsystem before acquiring a text frontend,
+is submitted to NTSRV and delivered to NTVWM. As corrected by the owner during
+T424 S9, run16 decides the native GUI/CUI subsystem before service admission
+and acquiring a text frontend, matching the DOS/WOW startup classification
+order. NTVWM executes the admitted native kind,
 creates the actual target and reports authenticated startup/binding success.
 NTSRV holds the registered GUI process handle independently of worker occupancy
 and retains native GUI registration until actual process exit. The owner's
 final clarification assigns monitor/UNBOUND display to the queue-head NTMON T
-candidate, not S4-S8. Its future view consumes service projection only.
-GUI routing/registration is a planned S8 target, not current runtime evidence
-or active S4 scope.
+candidate, not this routing stage. Its future view consumes service projection
+only. S9 implementation and exact verification/publication state are recorded
+in CURRENT and its ledger; admission or a candidate build is not publication.
 
 Default GUI run16 returns on startup success, not window closure. Explicit
 --wait keeps its actual completion/exit-code behavior via NTSRV. Releasing the
@@ -141,7 +149,8 @@ process, helper, Job observation or scheduler is introduced.
 
 The owner's later clarification keeps S4 active until centralization delivery;
 the premature replanning conclusion/then-labelled S5 admission is superseded. S4 open rows
-remain S4 requirements; S5 cleanup, S6 naming and S8 native GUI work follow.
+remain S4 requirements; S5 cleanup, S6 naming, S8 service separation and S9
+native GUI work follow.
 Monitor/UNBOUND display remains outside both stages.
 
 ### Broker-owned retirement — T424 S3 owner approval

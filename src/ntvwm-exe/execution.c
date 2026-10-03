@@ -70,13 +70,18 @@ static DWORD launch_request(ntvwm_execution *request,BYTE *payload,DWORD bytes,
     /* These authorities come only from broker attachments, not wire numbers. */
     if(header.capabilities[0] || header.capabilities[1])return ERROR_INVALID_DATA;
     start.application=*strings[0] ? strings[0] : NULL;start.command=strings[1];
-    start.directory=strings[2];start.environment=strings[3];start.console_mask=header.console_mask;
+    start.directory=strings[2];start.environment=strings[3];
+    start.console_mask=request->root_capability ? header.console_mask : 0;
     start.capabilities[0]=request->root_capability;start.capabilities[1]=request->execution;
     for(i=0;i<3;++i) {
         HANDLE source;
         if(header.standard[i]>(uint64_t)(ULONG_PTR)-1) { error=ERROR_INVALID_HANDLE;goto done; }
         source=(HANDLE)(ULONG_PTR)header.standard[i];
-        if(header.console_mask&(1u<<i))continue;
+        if(header.console_mask&(1u<<i)) {
+            /* GUI inherits redirected files/pipes but no text Console or
+             * frontend capability from its launcher/worker. */
+            start.standard[i]=NULL;continue;
+        }
         if(!source || source==INVALID_HANDLE_VALUE) { start.standard[i]=source;continue; }
         for(j=0;j<i;++j)if(header.standard[j]==header.standard[i] && local[j])break;
         if(j<i)local[i]=local[j];
@@ -148,7 +153,7 @@ static DWORD WINAPI serve(void *context)
              * Its typed binding is authenticated before ResumeThread. */
             receipt=CreateEventW(NULL,TRUE,FALSE,NULL);
             if(!receipt)startup_status=GetLastError();
-            if(!startup_status && owner->io.begin) {
+            if(!startup_status && request->root_capability && owner->io.begin) {
                 startup_status=owner->io.begin(owner->io.context,owner->stop);
                 bound=!startup_status;
             }
@@ -161,6 +166,12 @@ reply_ready:
         startup_status,startup_status ? NULL : target,startup_status ? NULL : receipt);
     startup_reported=TRUE;
     if(error)ntvwm_executions_note_broker_failure(owner,error);
+    if(!error && !startup_status && !request->root_capability) {
+        /* NTSRV now owns the GUI process reference and real exit watch.
+         * Startup released this worker request; no local GUI wait or I/O. */
+        broker_completed=TRUE;
+        goto done;
+    }
     if(!error && !startup_status){
         HANDLE waits[2]={target,owner->stop};
         if(WaitForMultipleObjects(2,waits,FALSE,INFINITE)==WAIT_OBJECT_0) {
