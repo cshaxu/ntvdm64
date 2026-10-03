@@ -2,7 +2,8 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
-| [T425 S6 broker I/O ownership](evidence/m0-t425-s6-broker-io-ownership.md) | M0 T425 S6 | Candidate source/ownership disposition, real nested handoff and focused failure/lifecycle results; open package gates. | Retain through T425 acceptance. |
+| [T425 S7 idle cursor and GUI startup](evidence/m0-t425-s7-idle-cursor-gui-startup.md) | M0 T425 S7 | Idle publication reproduction, shared local startup gate, source audit and actual verification status. | Retain through T425 acceptance. |
+| [T425 S6 broker I/O ownership](evidence/m0-t425-s6-broker-io-ownership.md) | M0 T425 S6 | Delivered broker-only association and single I/O connection, retained gates and coherent publication/recovery. | Retain through T425 acceptance. |
 | [T425 S5 format-decoder names](evidence/m0-t425-s5-format-decoder-names.md) | M0 T425 S5 | Format-only dispatch audit, neutral decoder names, actual build/test and delivery status. | Retain through T425 acceptance. |
 | [T425 worker-neutral frontend plan](operations/t425-worker-neutral-frontend-plan.md) | M0 T425 | Admitted input/ownership/publication unification, provenance and production gates. | Retain through T425 acceptance. |
 | [T425 S1 worker-neutral input](evidence/m0-t425-s1-worker-neutral-input.md) | M0 T425 S1 | Common mouse/key contract, worker-local adaptation, actual tests and publication status. | Retain through T425 acceptance. |

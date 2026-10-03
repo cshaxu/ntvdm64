@@ -11,6 +11,8 @@
 #include "ntvdm-exe/wow/include/wow_user_session_binding.h"
 #include "ntvdm-exe/softpc/include/mvdm_shadow_registry.h"
 #include "ntvdm-exe/win32/console_client.h"
+#include <stdlib.h>
+#include <ctype.h>
 
 /* Original BaseClient capture storage is private to this worker process. */
 PVOID CsrPortHeap;
@@ -25,6 +27,11 @@ static BOOL worker_session_initialized;
 static wow_user_runtime worker_wow_runtime = WOW_USER_RUNTIME_INITIALIZER;
 static wow_user_session_binding worker_wow_binding;
 static BOOL worker_wow_attached;
+static DWORD begin_character_io(void *owner,HANDLE stop)
+{
+    (void)stop;
+    return ntvdm_console_client_begin(owner);
+}
 static BOOL worker_shadow_registry;
 
 static int mvdm_standalone_worker_cleanup(int result)
@@ -89,9 +96,22 @@ DWORD mvdm_standalone_worker_begin(void)
         error=ERROR_INVALID_STATE; goto fail;
     }
     worker_thread=TRUE;
-    error=ntvdm_console_client_begin(&worker_session);
-    /* The DOS frontend split does not replace WOW's native window route. */
-    if (error && error!=ERROR_NOT_SUPPORTED) goto fail;
+    {
+        int index;
+        BOOL character_io=TRUE;
+        /* Original BaseGetVdmConfigInfo supplies the mandatory -w switch.
+         * Match nt_reset's switch recognition without moving its classifier
+         * or changing VDMForWOW before original initialization. */
+        for(index=1;index<__argc;++index) {
+            const char *argument=__argv[index];
+            if((argument[0]=='-' || argument[0]=='/') &&
+                tolower((unsigned char)argument[1])=='w') {
+                character_io=FALSE;break;
+            }
+        }
+        error=worker_base_start_character_io(character_io,begin_character_io,&worker_session,NULL);
+        if(error)goto fail;
+    }
     if (!wow_user_session_attach(&worker_wow_binding, &worker_session,
             &worker_wow_runtime)) {
         error=ERROR_INVALID_STATE; goto fail;

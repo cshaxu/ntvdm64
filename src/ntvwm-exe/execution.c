@@ -5,6 +5,7 @@
 #include "console_state.h"
 #include "run16-exe/native_launch.h"
 #include "common/protocol/frontend_protocol.h"
+#include "worker-base/connection.h"
 struct ntvwm_executions {
     CRITICAL_SECTION lock;
     HANDLE stop,idle,broker_failed;
@@ -153,9 +154,10 @@ static DWORD WINAPI serve(void *context)
              * Its typed binding is authenticated before ResumeThread. */
             receipt=CreateEventW(NULL,TRUE,FALSE,NULL);
             if(!receipt)startup_status=GetLastError();
-            if(!startup_status && request->root_capability && owner->io.begin) {
-                startup_status=owner->io.begin(owner->io.context,owner->stop);
-                bound=!startup_status;
+            if(!startup_status) {
+                startup_status=worker_base_start_character_io(request->root_capability!=NULL,
+                    owner->io.begin,owner->io.context,owner->stop);
+                bound=request->root_capability!=NULL && !startup_status;
             }
             if(!startup_status)startup_status=launch_request(request,payload,request->bytes,receipt,&target);
             if(bound && owner->io.release_launch)owner->io.release_launch(owner->io.context);

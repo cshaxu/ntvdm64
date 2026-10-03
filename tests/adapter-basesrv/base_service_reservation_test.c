@@ -2135,7 +2135,7 @@ int main(int argc,char **argv)
         CHECK(OpenNtBaseServiceWorkerIoTransition(launcher,GetCurrentProcessId(),
             launcherGeneration,WORKER_IO_ACQUIRE)==ERROR_ACCESS_DENIED);
         CHECK(OpenNtBaseServiceWorkerIoTransition(wowWorker,wowChild.dwProcessId,
-            wowGeneration,WORKER_IO_ACQUIRE)==ERROR_NOT_SUPPORTED);
+            wowGeneration,WORKER_IO_ACQUIRE)==ERROR_ACCESS_DENIED);
         /* Even a valid C-segment capability cannot turn a registered WOW
          * worker or its submitted WOW request into a character I/O member.
          * Original Get/Exit below must still work after these rejections. */

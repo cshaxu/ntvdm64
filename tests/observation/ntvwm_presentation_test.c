@@ -400,6 +400,32 @@ static void run_case(unsigned mode)
                 CHECK(SetConsoleCursorInfo(buffer,&cursor));
                 CHECK(SetConsoleActiveScreenBuffer(buffer));
                 CHECK(ntvwm_presentation_capture(endpoint,style)==0);
+                {
+                    unsigned calls=state.calls;
+                    unsigned publications=state.publication_begins;
+                    /* A real unchanged Console capture must not emit another
+                     * publication and thereby repaint the visible Console. */
+                    CHECK(ntvwm_presentation_capture(endpoint,style)==0);
+                    CHECK(state.calls==calls);
+                    CHECK(state.publication_begins==publications);
+                    CHECK(SetConsoleCursorPosition(buffer,(COORD){4,2}));
+                    CHECK(!ntvwm_presentation_capture(endpoint,style));
+                    CHECK(state.publication_begins==publications+1);
+                    CHECK(((console_text_style *)state.video.pixels)->cursor_column==4);
+                    calls=state.calls;
+                    CHECK(!ntvwm_presentation_capture(endpoint,style));
+                    CHECK(state.calls==calls);
+                    CHECK(SetConsoleCursorPosition(buffer,position));
+                    CHECK(!ntvwm_presentation_capture(endpoint,style));
+                    CHECK(WriteConsoleOutputCharacterW(buffer,L"Q",1,origin,&written) && written==1);
+                    CHECK(!ntvwm_presentation_capture(endpoint,style));
+                    CHECK(state.video.pixels[sizeof(console_text_style)]=='Q');
+                    calls=state.calls;
+                    CHECK(!ntvwm_presentation_capture(endpoint,style));
+                    CHECK(state.calls==calls);
+                    CHECK(WriteConsoleOutputCharacterW(buffer,L"Z",1,origin,&written) && written==1);
+                    CHECK(!ntvwm_presentation_capture(endpoint,style));
+                }
                 CHECK(SetConsoleActiveScreenBuffer(original));
             }
             if(buffer!=INVALID_HANDLE_VALUE)CloseHandle(buffer);
@@ -432,7 +458,7 @@ done:
         if(mode==6)CHECK(state.screen.width<=80 && state.screen.height<=25 &&
             state.screen.right<state.screen.width && state.screen.bottom<state.screen.height);
         if(mode==6)CHECK(state.titles==1);
-        CHECK(state.video.published_serial==(mode==6 ? 2u : 1u) && state.video.description.kind==CONSOLE_VIDEO_TEXT_FRAME);
+        CHECK(state.video.published_serial==(mode==6 ? 6u : 1u) && state.video.description.kind==CONSOLE_VIDEO_TEXT_FRAME);
         CHECK(state.video.pixels && state.video.pixels[sizeof(console_text_style)]==(mode==6 ? 'Z' : 'A'));
         if(mode==6 && state.video.pixels) {
             const console_text_style *style=(const console_text_style *)state.video.pixels;

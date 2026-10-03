@@ -24,6 +24,7 @@ extent repair is admitted. T closure requires owner acceptance.
 | S4 | Whole-package source/contract/dependency audit, duplicate removal review and retained acceptance; stop for owner T verification. |
 | S5 | Owner follow-up: clean misleading DOS-specific names in the shared format decoder and actual callers/tests; preserve TEXT_FRAME/TEXT_CONFIGURATION/DIB processing and all runtime gates. Stop for owner T verification after delivery. |
 | S6 | Owner-approved broker-controlled handoff repair: NTSRV owns associations and connection/takeover/release authorization; NTCON has zero or one physical I/O pipe, no pending-owner list. Close and acknowledge the old pipe before granting the next. Preserve original DOS block/resume/reentry; use the same worker-facing contract for NTVWM. |
+| S7 | Owner follow-up: suppress unchanged native publication to preserve host cursor blink, and share the finite local character-start gate while WOW/native GUI skip it. Preserve original classifiers and execution; retained full package gates and publication apply. |
 
 ## S6 connection ownership and implementation boundary
 
@@ -117,6 +118,12 @@ identity; new outputs only under declared build/M0-T425/S<n>/r<nnn> run roots.
   single I/O connection and both-end closure barrier. Full retained gates,
   source/build identity, recoverable eight-file publication and postpublication
   rapid/cooked-CMD/GUI smoke pass; the containing reviewed P delivers S6.
+- [x] S7 owner follow-up: suppress unchanged native frame publication and skip
+  character startup locally for WOW/native GUI through a shared worker-base
+  gate. Classification/execution stay local; no mirror or renderer branch.
+  The [S7 ledger](../evidence/m0-t425-s7-idle-cursor-gui-startup.md) records
+  focused evidence, retained package gates, coherent publication and reviewed
+  P delivery, including the attributed original guest environment limitation.
 - [ ] Owner verification and acceptance before T closure.
 
 ## RDP boundary

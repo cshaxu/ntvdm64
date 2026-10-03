@@ -1,6 +1,7 @@
 #include "ntvwm-exe/execution.h"
 #include "common/protocol/frontend_protocol.h"
 #include "common/codec/native_launch.h"
+#include "worker-base/connection.h"
 #include <stdio.h>
 
 static FILE *log;
@@ -234,14 +235,21 @@ static void concurrent_io_cancellation(void)
     }
     if(payload)HeapFree(GetProcessHeap(),0,payload);if(state.all_entered)CloseHandle(state.all_entered);
 }
+static DWORD target_begin(void *context,HANDLE stop);
+static DWORD target_end(void *context);
 static void no_launch_failure(BOOL preflight)
 {
     ntvwm_executions *owner=NULL;HANDLE marker,input=NULL,output=NULL;
+    DWORD io_error=0;
+    ntvwm_execution_io io={&io_error,target_begin,target_end,NULL};
     WCHAR name[128],argument[180];BYTE *payload=NULL;DWORD bytes;unsigned id=0;
     swprintf_s(name,ARRAYSIZE(name),L"Local\\ntvwm-no-launch-%lu-%u",GetCurrentProcessId(),serial+1);
     swprintf_s(argument,ARRAYSIZE(argument),L"--probe-target %ls",name);
     marker=CreateEventW(NULL,TRUE,FALSE,name);CHECK(marker!=NULL);if(!marker)return;
     CHECK(!ntvwm_executions_open(&owner));if(!owner){CloseHandle(marker);return;}
+    /* Model an admitted text endpoint before testing stream-access denial.
+     * Missing I/O setup must not bypass this case's intended launch boundary. */
+    ntvwm_executions_bind_io(owner,&io);
     if(!preflight)CHECK(CreatePipe(&input,&output,NULL,0));
     if(!make_target_packet(argument,input,&payload,&bytes)) {
         id=submit(owner,payload,bytes,preflight ? SENDER_ACCESS : SYNCHRONIZE|PROCESS_QUERY_LIMITED_INFORMATION,
@@ -280,7 +288,7 @@ static void target_case(BOOL held,DWORD io_error,DWORD broker_error)
     CHECK(!ntvwm_executions_open(&owner));if(!owner)return;
     completion_error=broker_error;observed_broker_fault=0;
     ntvwm_executions_bind_fault(owner,record_broker_fault,NULL);
-    if(!held)ntvwm_executions_bind_io(owner,&io);
+    ntvwm_executions_bind_io(owner,&io);
     if(!make_target_packet(held ? L"--held-target" : L"--completed-target",NULL,&payload,&bytes)) {
         id=submit(owner,payload,bytes,SENDER_ACCESS,0,1);
         if(id) {
@@ -311,6 +319,16 @@ static void target_case(BOOL held,DWORD io_error,DWORD broker_error)
 }
 static DWORD gui_forbidden_io(void *context,HANDLE stop)
 { (void)context;(void)stop;CHECK(FALSE);return ERROR_ACCESS_DENIED; }
+static DWORD count_start(void *context,HANDLE stop)
+{ (void)stop;++*(unsigned *)context;return ERROR_BUSY; }
+static void character_start_gate(void)
+{
+    unsigned calls=0;
+    CHECK(!worker_base_start_character_io(FALSE,NULL,NULL,NULL));
+    CHECK(!worker_base_start_character_io(FALSE,count_start,&calls,NULL) && calls==0);
+    CHECK(worker_base_start_character_io(TRUE,NULL,NULL,NULL)==ERROR_INVALID_PARAMETER);
+    CHECK(worker_base_start_character_io(TRUE,count_start,&calls,NULL)==ERROR_BUSY && calls==1);
+}
 static void raw_failed_create_control(void)
 {
     WCHAR image[MAX_PATH];STARTUPINFOW startup={sizeof(startup)};
@@ -395,6 +413,7 @@ int wmain(int argc,WCHAR **argv)
         fclose(log);return failures ? 1 : 0;
     }
     if(argc!=2 || _wfopen_s(&log,argv[1],L"wx"))return 2;
+    character_start_gate();
     invalid_arguments_do_not_allocate();launch_packet_boundaries();target_case(TRUE,0,0);
     {HANDLE input=NULL,output=NULL;CHECK(CreatePipe(&input,&output,NULL,0));
         if(input)CloseHandle(input);if(output)CloseHandle(output);}

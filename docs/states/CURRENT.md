@@ -2,9 +2,15 @@
 
 ## Current Work
 
-**Active: M0 T425 S6, Ordinary Mode; delivered, awaiting owner verification.**
+**Active: M0 T425 S7, Ordinary Mode; reviewed P delivery complete.**
+Owner requests diagnosis/repair of idle native Console cursor blinking and
+skipping character-I/O startup for window-only workers. S6 66841b8b7 is
+committed, pushed and published; its gates and recovery remain the reference.
+The containing reviewed P delivers S7 after build, retained regression,
+publication and postpublication smoke. T425 stays open for owner acceptance;
+no further S is admitted. No original mirror or imported-library change.
 Broker-owned nested I/O handoff is implemented, tested and published. The
-containing reviewed S6 P delivers it; no further implementation S is admitted.
+reviewed S6 P delivered it; the owner's follow-up admits S7 below.
 T425 remains open. S3 P1 ec0cf2b02 is delivered, pushed and published. The owner requests
 continued execution of the full worker-neutral
 frontend objective and the ordered approved plan. Owner closes T424 and admits
@@ -89,6 +95,47 @@ The containing reviewed S5 P delivers this cleanup. Other-session Queue/proposal
 edits are preserved, outside this P. Stop before owner T closure.
 
 ## Active Packet
+
+| Field | Admitted record |
+| --- | --- |
+| Identifier Mode | M0 T425 S7, Ordinary Mode. |
+| Admission And Approval | Owner asks to detect/fix run16 cmd's nearly frozen visible Console cursor and split NTVDM/NTVWM character-I/O startup; shared matching mechanisms belong in worker-base. |
+| Objective | Idle native text presentation does not continually rewrite unchanged visible cells or reset cursor blink; window-only launches do not probe/acquire character I/O. |
+| Non-goals | No mirror/guest/imported-lib change, polling removal, new component/helper, scheduler or T closure. |
+| Reference Baseline | S6 66841b8b7; published APP0.0.425 RPC37/I/O25 coherent eight-file set; S6 ledger and r015 retained gates. |
+| Files And ABI Surface | NTCON projection, NTVWM capture/publication, NTVDM project bootstrap, worker-base only where the full mechanism contract is actually shared; production-linked tests/probes. No wire extension presumed necessary. |
+| Applicable Rules | Repository authority reading set and source policy; preserve unrelated Queue/proposal changes. |
+| Verification | Measure unchanged-frame host writes and cursor calls; idle/changed-cell/cursor/geometry/mouse/handoff/failure tests; WOW and native GUI no-I/O startup, both text routes; affected x86 build, retained full product gates, coherent recoverable publication. |
+| Expected Markers | No visible writes for unchanged idle presentation; changed output and cursor still publish; GUI startup succeeds without character channel acquisition; nested release/reacquire remains correct. |
+| Asset Needs | Existing source/media and validated build/M0-T424/S2/r001 cache; new run output only build/M0-T425/S7/r001 or declared successors. |
+| Reporting Requirements | Root-cause evidence versus hypothesis; exact source ownership/shared versus independent startup logic; tests, limits and release hashes. |
+| Stop Conditions | Changed original classification/execution, weakened publication/authentication/barriers, regressions, unauthorized external modifications. |
+| Exit Criteria | Demonstrated diagnosis and production repair, strict positive/negative tests, affected build/full regression, eight-file publication, reviewed commit/push. |
+| Original Owner Request | Detect/fix visible Console cursor nearly frozen with run16 cmd; skip Win16 text-I/O probing and audit NTVWM symmetry while retaining genuinely reusable initialization. |
+| Similar-Issue Sweep | Idle DOS/native publication, cursor-only updates, mouse overlays, Console/Window switch, shared and standalone GUI startup, reconnect and teardown. |
+
+S7 progress: original BaseGetVdmConfigInfo supplies mandatory -w for WOW;
+the project bootstrap now skips character startup locally. NTVWM and NTVDM
+use one bounded worker-base character-start gate, with classifiers kept local.
+NTSRV no longer returns NOT_SUPPORTED for WOW character acquisition; wrong
+requests are denied. The WOW service fixture passes. Idle presentation probe
+fails three assertions before repair; extended real Console capture/cursor/cell
+tests now pass 459/0. Native lifecycle passes 1077/0, zero remaining handles;
+incomplete text fixture initialization is corrected, with original assertions
+retained. Native/DOS products compile; WOW historical/S6 comparisons and
+Console17/Window17, RPC11, GUI5, service16 and lifecycle gates pass under
+build/M0-T425/S7/r002. The first real nested Window handoff timed out in an
+original illegal-op error dialog. Two ordinary candidate and S6 controls pass;
+S6 also fails with the combined driver's extra environment. Read-only r003
+guest state confirms the accepted stale INIT EnvSiz guest defect. Failed
+enlarged-environment checks remain failed; no guest/environment patch.
+Remaining package gates pass; O:/winnt now has the verified coherent S7 eight
+files with exact S6 recovery retained. Published rapid/native/DOS/GUI smoke
+and final eight-file hashes pass. The containing reviewed P delivers S7. The
+[S7 ledger](../etc/evidence/m0-t425-s7-idle-cursor-gui-startup.md) records proof
+and physical blink-observation limits.
+
+## Retained S6 Packet
 
 | Field | Admitted record |
 | --- | --- |

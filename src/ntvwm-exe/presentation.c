@@ -12,6 +12,10 @@ struct ntvwm_presentation {
     CRITICAL_SECTION lock;
     CHAR_INFO *published_cells;
     DWORD published_count,published_width;
+    BYTE *published_frame;
+    console_video_description published_description;
+    CONSOLE_SCREEN_BUFFER_INFOEX published_screen;
+    CONSOLE_CURSOR_INFO published_cursor;
     console_text_style handoff_font;
     BOOL has_handoff_font;
     char published_title[CONSOLE_IO_TITLE_BYTES];
@@ -41,6 +45,7 @@ void ntvwm_presentation_close(ntvwm_presentation *client)
 {
     if(!client)return;
     if(client->published_cells)HeapFree(GetProcessHeap(),0,client->published_cells);
+    if(client->published_frame)HeapFree(GetProcessHeap(),0,client->published_frame);
     ntcon_worker_client_dispose(&client->channel);DeleteCriticalSection(&client->lock);
     HeapFree(GetProcessHeap(),0,client);
 }
@@ -170,6 +175,20 @@ DWORD ntvwm_presentation_capture(ntvwm_presentation *client,const console_text_s
     }
     if(error==ERROR_NOT_READY || error==ERROR_BUSY)error=ERROR_SUCCESS;
     if(error)goto captured_done;
+    /* Polling the native Console need not repaint the host Console. Include
+     * the full Unicode grid and the composed frame: cursor, font, palette and
+     * mouse-only changes remain observable even with unchanged characters.
+     * Cache only acknowledged publications; a new endpoint has no cache. */
+    if(client->published_frame && client->published_count==total &&
+        client->published_width==(DWORD)capture.info.dwSize.X &&
+        client->published_screen.wAttributes==capture.info.wAttributes &&
+        client->published_cursor.dwSize==capture.cursor.dwSize &&
+        client->published_cursor.bVisible==capture.cursor.bVisible &&
+        !memcmp(&client->published_screen.srWindow,&capture.info.srWindow,sizeof(SMALL_RECT)) &&
+        !memcmp(&client->published_screen.dwCursorPosition,&capture.info.dwCursorPosition,sizeof(COORD)) &&
+        !memcmp(client->published_cells,cells,(SIZE_T)total*sizeof(*cells)) &&
+        !memcmp(&client->published_description,&description,sizeof(description)) &&
+        !memcmp(client->published_frame,payload,description.bytes))goto captured_done;
     ZeroMemory(&request,sizeof(request));request.operation=CONSOLE_IO_PUBLICATION_BEGIN;
     error=exchange(client,&request,&reply);
     if(error)goto captured_done;
@@ -243,9 +262,14 @@ DWORD ntvwm_presentation_capture(ntvwm_presentation *client,const console_text_s
     }
     if(client->published_cells)HeapFree(GetProcessHeap(),0,client->published_cells);
     client->published_cells=NULL;client->published_count=0;
+    if(client->published_frame)HeapFree(GetProcessHeap(),0,client->published_frame);
+    client->published_frame=NULL;
     if(!error) {
         client->published_cells=cells;cells=NULL;client->published_count=total;
         client->published_width=(DWORD)capture.info.dwSize.X;
+        client->published_frame=payload;payload=NULL;
+        client->published_description=description;client->published_screen=capture.info;
+        client->published_cursor=capture.cursor;
     }
 captured_done:
     if(publication_held) {

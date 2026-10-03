@@ -66,10 +66,9 @@ DWORD OpenNtBaseServiceWorkerIoTransition(OPENNT_BASE_CONNECTION *connection,DWO
     EnterCriticalSection(&connection->service->lock);
     if(!OpenNtBaseServicePeer(connection,pid,generation) ||
         (!connection->process.fVDM && !connection->native_worker))goto done;
-    /* Like TakeFrontend, an authenticated WOW worker probes this boundary
-     * during startup but keeps its original native-window route. Unsupported
-     * character I/O is not an authentication failure or a fatal WOW startup. */
-    if(connection->wow){error=ERROR_NOT_SUPPORTED;goto done;}
+    /* Window-only workers have no character route. Their normal startup
+     * skips this operation; an erroneous request is not an admission. */
+    if(connection->wow)goto done;
     for(;;) {
         ULONGLONG now;
         route=service_worker_io_route(connection,pid);
@@ -1330,7 +1329,7 @@ DWORD OpenNtBaseServiceTakeFrontend(OPENNT_BASE_CONNECTION *connection,DWORD pid
     if (!OpenNtBaseServicePeer(connection,pid,generation)) {
         error=ERROR_ACCESS_DENIED; goto done;
     }
-    if (connection->wow) { error=ERROR_NOT_SUPPORTED; goto done; }
+    if (connection->wow) { error=ERROR_ACCESS_DENIED; goto done; }
     if (!connection->process.fVDM && !connection->native_worker) {
         error=ERROR_ACCESS_DENIED; goto done;
     }

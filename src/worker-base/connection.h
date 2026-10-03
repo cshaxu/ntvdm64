@@ -4,6 +4,15 @@
 /* Worker-side broker lifetime binding. The caller owns CsrPortHeap and its
  * backend state; it must disconnect before destroying that storage. */
 DWORD worker_base_connect(void);
+/* Caller supplies its already classified execution route. Window-only work
+ * skips character startup locally; classification and execution stay local. */
+static __inline DWORD worker_base_start_character_io(BOOL required,
+    DWORD (*begin)(void *context,HANDLE stop),void *context,HANDLE stop)
+{
+    if(!required)return ERROR_SUCCESS;
+    if(!begin)return ERROR_INVALID_PARAMETER;
+    return begin(context,stop);
+}
 /* Caller owns a synchronize-only shutdown event; NTSRV alone signals it. */
 DWORD worker_base_shutdown_event(HANDLE *shutdown);
 /* Service instruction to publish/return input and release presentation.
