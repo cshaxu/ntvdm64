@@ -2,15 +2,16 @@
 
 ## Current Work
 
-**Active: M0 T426 S2** (Ordinary Mode).
+**Active: M0 T426 S3** (Ordinary Mode).
 
 Owner closes T425 and directs admission of the next queued T. T425 closure is
 delivered and pushed at 8cbc1c997; [closure](../history/m0-t425-worker-neutral-frontend-closure.md)
 and [S11 evidence](../etc/evidence/m0-t425-s11-typeahead-closure.md) retain the
 actual proof and limits. T426 consumes the former queue-head
 [Console-root worker-tree proposal](../proposals/proposal-ntmon-console-worker-tree-001.md).
-S1 is delivered at ff3221711. Owner says “好 开干”; admit S2 service-owned
-management projection, stable selection/action and focused verification.
+S1 is delivered at ff3221711 and S2 at a8f356a22, both pushed. Owner says
+“好 开干”; sequentially admit S3 NTMON tree layout, stable refresh/selection
+and original keyboard controls after the verified S2 provider delivery.
 Owner's final clarification removes UNBOUND entirely: NTCON and independent
 Win16 workers are top-level nodes; Win16 tasks remain beneath their actual
 WOW worker. Detached registered Win32 GUI targets are top-level nodes, not
@@ -21,20 +22,20 @@ text workers remain below NTCON; missing former roots retain their children.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T426 S2; Ordinary Mode. |
-| Admission And Approval | Owner approves the final no-UNBOUND hierarchy and says “好 开干”. S1 audit delivered at ff3221711; sequentially admit service projection/action implementation only. |
+| Identifier Mode | M0 T426 S3; Ordinary Mode. |
+| Admission And Approval | Owner approves the final no-UNBOUND hierarchy and says “好 开干”. S2 delivered/pushed at a8f356a22; sequentially admit its planned UI/selection stage. |
 | Candidate Proposal | [NTMON Console-root worker tree](../proposals/proposal-ntmon-console-worker-tree-001.md). |
-| Objective | Deliver one coherent NTSRV-owned management snapshot of real frontend/worker/WOW-task/GUI identities and associations, minimal missing-root retention and stable authenticated close selectors, retaining original execution/lifecycle owners. |
-| Non-goals | No descendant observation, Job/hooks, synthetic tasks, scheduler/helper, guest/library or original mirror changes; no complete tree UI claim before S3. No UNBOUND heading or worker retention solely for display. |
-| Reference Baseline | S1 ff3221711 contract; delivered T425 8cbc1c997 and unchanged S9/r022 eight-file package, APP0.0.425/RPC37/I/O25. |
-| Files And ABI Surface | NTSRV private management/association/native/control state; common/protocol DTO/IDL/version and common RPC client; corresponding NTMON compatibility consumer and service/RPC/client tests. Wire changes synchronize RPC38 and APP0.0.426; I/O25 unchanged. Evidence/CURRENT are owned. |
+| Objective | Finish readable aligned tree layout and stable selection/confirmation across reorder/removal/error, preserve exact title/footer and UP/DOWN/DEL/ESC, test selected production renderer/input paths. |
+| Non-goals | No service graph/lifecycle redesign, descendant observation, Job/hooks, synthetic tasks, scheduler/helper, guest/library or mirror changes. No UNBOUND heading, fabricated WOW PID/time or whole-worker DEL for a read-only WOW task. S4 final mixed-kind integration remains separate. |
+| Reference Baseline | S2 a8f356a22 and S1 ff3221711 contract; published S2/r004/runtime, recovery r009, smoke r011; APP0.0.426/RPC38/I/O25. |
+| Files And ABI Surface | NTMON-private render/selection/input code, its real Console layout/dispatch fixture and observation entrypoints; formal Ninja test selection as needed. No planned wire change; common/protocol unchanged. Evidence/CURRENT are owned. |
 | Applicable Rules | docs/README.md reading set, Execution/Architecture/Coding/Document rules, design authorities, CONTRIBUTING and source policy. Original DOS/WOW ownership and completion remain unchanged. |
-| Verification | S1 exact management-tree/missing-root/close fixtures, existing DOS/WOW/native/reentry and RPC/client negatives, x86 incremental affected build/MIDL, retained Console17/Window17/WOW frontiers and coherent eight-file publication. Governance/link/diff checks before P. All new outputs below build/M0-T426/S2. |
-| Expected Markers | Real roots and task owners, no UNBOUND, no PID-only close, coherent copied snapshot, stale selector rejected, missing root pruned only after final association, GUI close never kills carrier, original completion/return assertions retained. |
+| Verification | Exact renderer cells/columns, mixed categories/missing root/unknown fields, long-path overflow, reorder/removal and stale confirmation, production UP/DOWN/DEL/ESC dispatch, real Console/Window monitor and service/action assertions; affected x86 build, retained Console17/Window17/WOW and coherent eight-file publication. Governance/link/diff before P. New outputs below build/M0-T426/S3/r001 and later S3 evidence roots. |
+| Expected Markers | Aligned tree columns, stable key selection, deterministic nearby selection after removal, stale confirmation cleared, read-only DEL sends no RPC, exact original title/footer and three keys, preserved actual service close/result semantics. |
 | Asset Needs | Existing source/build cache and immutable guest set; no helper, new component, host mutation or desktop automation. |
-| Reporting Requirements | Actual changed ownership, executed commands/results, coherent published hashes and unverified boundaries; do not claim S3 tree UI or per-WOW-task close when no original supported mechanism exists. |
+| Reporting Requirements | Actual UI changes/dispatch assertions, tested/published hashes and unknown fields/read-only limits; distinguish S3 layout proof from pending S4 real mixed-kind integration and owner acceptance. |
 | Stop Conditions | Required original execution change, incompatible ownership, absent trustworthy identity/close contract or material scope expansion requires re-admission; do not invent process-tree control. |
-| Exit Criteria | Production provider/client/consumer linked; stated positive/negative/lifecycle gates pass, full retained regression and coherent publication no worse than baseline, reviewed evidence and source committed/pushed. |
+| Exit Criteria | Production NTMON consumes server tree with correct layout/keys; stated render/dispatch/refresh tests pass, full retained regression and coherent publication no worse than S2, reviewed evidence/source committed/pushed. |
 | Original Owner Request | Include reviewed planning changes in T425 commit, then admit the next T. Owner subsequently approves a hierarchy without UNBOUND and says “好 开干”: top-level frontend, independent WOW worker and detached GUI target; actual WOW task ownership preserved. |
 | Similar-Issue Sweep | Root rebuild/PID reuse, missing-root retention, independent Consoles, worker/GUI/WOW association, stale selection and authorization, orderly close failure, absence of UNBOUND, unchanged labels/title/three hotkeys and elapsed-time meaning. |
 
@@ -60,9 +61,11 @@ S1 delivered and pushed at ff3221711. The
 records actual service/record/client/UI ownership, stable identities, lock and
 close boundaries and final no-UNBOUND hierarchy. Governance, relative links
 and diff checks passed; audit-only, no product build/runtime change claimed.
-S2 implementation is complete to its bounded provider/client/compatibility
-consumer scope; delivery is the containing reviewed S2 P. S3 UI polish and
-S4 mixed-kind/final integration remain open, not implied by S2 closure.
+## S2 Closure Record
+
+S2 implementation is delivered and pushed at a8f356a22 to its bounded
+provider/client/compatibility-consumer scope. S3 UI/selection work is newly
+admitted; S4 mixed-kind/final integration remains open, not implied by S2.
 
 S2 production provider now copies the typed management tree under the existing
 service lock, retains authenticated association and WOW labels, and validates
@@ -118,5 +121,6 @@ documentation-only admission allocates T426 and removes its candidate from
 [Queue](QUEUE.md), retaining every remaining candidate's relative order.
 S1 audit-only delivery ff3221711 passed governance/link/diff checks without
 changing the published package. S2 is code-bearing and passes its full
-build/runtime/publication gates; containing reviewed commit/push is its P,
-not a final T or S3/S4 acceptance. Outstanding debt remains in [TODO](TODO.md).
+build/runtime/publication gates at a8f356a22, not final T acceptance. S3
+admission does not itself modify or certify a newer product. Outstanding debt
+remains in [TODO](TODO.md).
