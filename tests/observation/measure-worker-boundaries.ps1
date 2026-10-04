@@ -5,7 +5,8 @@ param(
     [Parameter(Mandatory)][string]$ReportRoot,
     [string]$Baseline='build/M0-T428/S6/r002/runtime',
     [ValidateRange(1,10)][int]$Iterations=3,
-    [switch]$Edit
+    [switch]$Edit,
+    [switch]$CompareControl
 )
 $ErrorActionPreference='Stop'
 . "$PSScriptRoot/isolated_package_cleanup.ps1"
@@ -23,6 +24,7 @@ Copy-Item (Join-Path $baselinePath 'system32') $runtime -Recurse
 Copy-Item (Join-Path $baselinePath 'system.ini') $runtime
 Copy-Item $worker (Join-Path $runtime 'system32/ntvdm.exe') -Force
 if($MeasuredFrontend){Copy-Item (Resolve-Path $MeasuredFrontend).Path (Join-Path $runtime 'system32/ntcon.exe') -Force}
+if($CompareControl -and !$Edit){throw 'Matched instrumentation comparison requires the EDIT workload'}
 $names=@('MVDM_OBSERVER_PRIVATE_DESKTOP','MVDM_OBSERVER_MOUSE_HOOK','MVDM_OBSERVER_MOUSE_BURST',
  'MVDM_OBSERVER_MOUSE_RETIRE','MVDM_TEST_WORKER_PERFORMANCE','MVDM_TEST_CONSOLE_WIRE_PATH',
  'MVDM_OBSERVER_EDIT_MOUSE_BURST','MVDM_OBSERVER_WINDOW_INPUT','MVDM_OBSERVER_MILESTONE_INPUT',
@@ -43,12 +45,23 @@ try {
         $env:MVDM_OBSERVER_MILESTONE_INPUT='1'
         $env:MVDM_OBSERVER_PERFORMANCE='1'
     }
-    for($iteration=0;$iteration -le $Iterations;++$iteration){
+    $last=if($CompareControl){$Iterations*3}else{$Iterations}
+    for($iteration=0;$iteration -le $last;++$iteration){
+        $original=$CompareControl -and ($iteration%3 -eq 1)
+        $enabled=($iteration -ne 0) -and (!$CompareControl -or ($iteration%3 -eq 0))
+        if($CompareControl){
+            # Replace only after the preceding identity-scoped cleanup. Each
+            # scope pins the actual binaries for this case, not a stale hash.
+            Copy-Item $(if($original){Join-Path $baselinePath 'system32/ntvdm.exe'}else{$worker}) (Join-Path $runtime 'system32/ntvdm.exe') -Force
+            if($MeasuredFrontend){
+                Copy-Item $(if($original){Join-Path $baselinePath 'system32/ntcon.exe'}else{(Resolve-Path $MeasuredFrontend).Path}) (Join-Path $runtime 'system32/ntcon.exe') -Force
+            }
+        }
         $scope=New-IsolatedPackageScope $runtime 'Z:\'
         $prefixName="mouse-$iteration"
         $report=Join-Path $root ($prefixName+$(if($Edit){'-edit.txt'}else{'.txt'}))
         $prefix=Join-Path $root "worker-$iteration"
-        if($iteration){$env:MVDM_TEST_WORKER_PERFORMANCE=$prefix}
+        if($enabled){$env:MVDM_TEST_WORKER_PERFORMANCE=$prefix}
         else{Remove-Item Env:MVDM_TEST_WORKER_PERFORMANCE -ErrorAction SilentlyContinue}
         $timer=[Diagnostics.Stopwatch]::StartNew()
         if($Edit){
@@ -72,7 +85,7 @@ try {
             throw 'EDIT readiness/continuous movement/menu/return milestone failed'
         }
         $metrics=@(Get-ChildItem -LiteralPath $root -Filter "worker-$iteration-*.txt")
-        if($iteration){
+        if($enabled){
             $workerReports=@($metrics | Where-Object {(Get-Content $_.FullName -Raw) -match 'phase=mouse-irq-consumption '})
             $expectedReports=if($MeasuredFrontend){2}else{1}
             if($metrics.Count -ne $expectedReports -or $workerReports.Count -ne 1){throw 'Missing/ambiguous measured report'}
@@ -108,7 +121,10 @@ try {
                 if($Edit -and $text -notmatch 'phase=text-assembly '){throw 'Actual EDIT text assembly not measured'}
             }
         }elseif($metrics.Count){throw 'Disabled instrumentation wrote a report'}
-        $results+=[ordered]@{Iteration=$iteration;Enabled=($iteration -ne 0);ElapsedMs=$timer.ElapsedMilliseconds;Report=$report;Metrics=@($metrics | ForEach-Object FullName)}
+        $results+=[ordered]@{Iteration=$iteration;Warmup=($iteration -eq 0);Original=$original;Enabled=$enabled;
+            Worker=(Get-FileHash (Join-Path $runtime 'system32/ntvdm.exe')).Hash;
+            Frontend=(Get-FileHash (Join-Path $runtime 'system32/ntcon.exe')).Hash;
+            ElapsedMs=$timer.ElapsedMilliseconds;Report=$report;Metrics=@($metrics | ForEach-Object FullName)}
         Stop-IsolatedPackageScope $scope;$scope=$null
         Write-Output "PASS real 200-input guest probe edit=$Edit iteration=$iteration elapsed-ms=$($timer.ElapsedMilliseconds)"
     }

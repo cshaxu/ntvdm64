@@ -2,103 +2,77 @@
 
 ## Current Work
 
-**Active: M0 T429 S1** (Ordinary Mode).
+**Active: M0 T429 S2** (Ordinary Mode).
 
-Owner directs “先收口t任务吧 准入下一个” on 2026-10-04. T428 is
-owner-closed at production P 68e860553 and status P b1b77e129; its
-[closure](../history/m0-t428-worker-interface-unification-closure.md)
-retains all S1-S6 evidence and disclosed limits. The actual queue head,
-NTVDM execution-performance recovery, is admitted as T429. Only S1 is active.
+Owner admitted the performance package after closing T428. S1's bounded
+measurement conclusion is recorded in the
+[baseline evidence](../etc/evidence/m0-t429-s1-performance-baseline.md).
+Only S2 is now active, following the approved sequential scope.
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T429 S1; Ordinary Mode. |
-| Admission And Approval | Owner accepts T428 closure and admits the next queue-head package on 2026-10-04. Admit bounded baseline/source/performance measurement first; no speculative repair. |
-| Candidate Proposal | [NTVDM execution-performance recovery](../proposals/proposal-ntvdm-execution-performance-recovery-001.md). |
-| Objective | Freeze source/build/runtime identities and establish reproducible EDIT startup/input/presentation timing and queue/batch evidence; identify actual hot-path costs before repair. |
-| Non-goals | No guest/firmware mutation, CCPU algorithm rewrite, CPU30, helper, new component/channel/scheduler/registry, lifecycle policy or wire redesign; no receiver/worker-base display dedup. No S2-S4 repair is claimed by admission. |
-| Reference Baseline | main/origin b1b77e129, production 68e860553. Verified/published eight-file set build/M0-T428/S6/r002/runtime/system32; S6/r007 Product manifest, S6/r011 recovery/publication and S6/r012 smoke. MSVC14.43/SDK22621/x86 /MT CCPU40; APP0.0.427/RPC38/I/O25. |
-| Files And ABI Surface | Read selected c_main.c and ntvdm-exe SoftPC/input/video adapters, NTCON queue/presentation and existing measurement fixtures. S1 may add bounded test/measurement support with disabled-by-default aggregate diagnostics outside the instruction loop. No cross-EXE wire change. |
-| Applicable Rules | Full AGENTS reading set, source policy, original mirror/guest ownership, project-private resource/locking boundaries, build-only outputs, serial global endpoint and Z:-only mapping. |
-| Verification | Check eight baseline hashes and build selection; pin guest/workload/input/geometry/context/warm-up/iteration identity. Measure startup and boundary latency distributions with counts/order assertions and an unaffected control. Validate measurement negatives and disabled-mode behavior. Any production-code P additionally requires affected x86 build, Console17/Window17/retained WOW/lifecycle, coherent recovery/publication and deployed smoke. |
-| Expected Markers | Evidence distinguishes raw input receipt, frontend delivery, worker read, mouse submission/IRQ consumption, text publication/transfer/present; reports medians/tails/queue counts without treating submitted input as consumed. Per-decode trace hypothesis is source-confirmed, not yet a measured causal conclusion. |
-| Asset Needs | Existing validated build/M0-T427/S2/r001 cache and sealed S6 runtime/guest inputs; all new disposable outputs under build/M0-T429/S1. SoftPC is comparison evidence only, never a build/runtime dependency. |
-| Reporting Requirements | Report precise inputs, instrumentation cost, source versus measured findings, uncertainty, failed attempts and smallest justified next repair. Physical/RDP tests unavailable or owner-waived remain non-pass observations. |
-| Stop Conditions | Need for guest/core semantics, new wire/lifecycle/helper or an unapproved comparison dependency pauses work for renewed admission. Nonreproducible or contrary evidence is recorded, not converted into a speed claim. |
-| Exit Criteria | Reproducible baseline has startup/latency distributions and queue/batch counts, control case and instrumentation overhead/disabled-path proof. Source/diff/governance review and reviewed P delivery apply. S2 requires sequential admission after S1; T acceptance remains owner-controlled. |
-| Original Owner Request | Close the current worker-interface-unification T and admit the next queued task; improve DOS performance through evidence-backed project hot-path/input/producer changes while preserving OpenNT semantics. |
-| Similar-Issue Sweep | Per-instruction observer calls versus coarse diagnostics, frontend/worker queue backlog versus original IRQ timing, surplus producer work versus explicit frame delivery, cold-start/geometry/RDP differences versus genuine implementation cost. |
+| Identifier Mode | M0 T429 S2; Ordinary Mode. |
+| Admission And Approval | Sequential admission after S1's baseline/control/measurement exit; owner directs continuous execution-performance optimization. |
+| Candidate Proposal | [Execution-performance recovery](../proposals/proposal-ntvdm-execution-performance-recovery-001.md). |
+| Objective | Remove project-added per-instruction DECODE diagnostics from the normal selected CCPU40 build; retain explicitly selected diagnostic capability and prove behavior and measured effect. |
+| Non-goals | No CCPU algorithm, guest/firmware, CPU30, lifecycle/wire, helper/channel/component/scheduler change; no NTCON/worker-base display dedup or speculative input/transport optimization. |
+| Reference Baseline | Production68e860553, T428 S6/r002/runtime/system32; main3b9d01a08 S1 measurement. MSVC14.43/SDK22621/x86 /MT CCPU40; APP0.0.427/RPC38/I/O25. Published eight files match accepted baseline. |
+| Files And ABI Surface | c_main.c project diagnostic selection and registered mirror README; reproducible object-selection/performance tests and evidence. No cross-EXE ABI change. |
+| Applicable Rules | Full AGENTS set, source policy, mirror provenance/minimal registered diff, original instruction semantics, build-only artifacts, preserved other-session edits and serial global endpoint/Z:-only tests. |
+| Verification | Incremental affected x86 closure with source/toolchain/input identity; normal and diagnostic object checks; identical-package benchmark/control comparison; affected CCPU/input/video tests; Console17/Window17/retained WOW/lifecycle, coherent recovery/publication and published smoke before production P. Governance, links and diff review. |
+| Expected Markers | Normal DECODE has no diagnostic call or replacement per-instruction branch; diagnostic build retains selected observer references; real guest/output/order/receipt and existing frontiers do not regress. Report measured improvement or contrary result. |
+| Asset Needs | Validated build/M0-T427/S2/r001 dependency cache; immutable T428 S6 runtime/media; new S2 outputs under build/M0-T429/S2. Read-only SoftPC/upstream comparison only. |
+| Reporting Requirements | Separate source/object, measured and physical observations; report hashes, commands, failed attempts, median/tails and retained limits, not inferred speed claims. |
+| Stop Conditions | Need for instruction/guest semantics, new wire/lifecycle/helper or comparison runtime dependency pauses repair for renewed approval. Unexplained regression prevents delivery. |
+| Exit Criteria | Selected normal object excludes per-decode diagnostics, separate diagnostic object retains them; measured effect and semantic/production gates reviewed, coherent eight files published, commit/push delivered. |
+| Original Owner Request | Improve execution performance while preserving original OpenNT/CCPU semantics and frontend/worker boundaries; first remove the confirmed added release hot-loop diagnostic work. |
+| Similar-Issue Sweep | All project-added WOW observers within DECODE, other diagnostic calls at coarse boundaries, false claims from startup/measurement overhead and unchanged native controls. |
 
-## Admission State
+## S1 Closure Record
 
-S1 initial measurement is recorded in
-[performance baseline](../etc/evidence/m0-t429-s1-performance-baseline.md):
-optional buffered test-observer timing, 42 real serial COMMAND/EDIT/native-control
-samples and two missing-marker negatives pass; the actual disabled diagnostic
-provider has a separately measured isolated cost. The ordinary fixture's
-observed Console is 120x30, not an assumed 80 columns. Production and published
-eight-file hashes remain unchanged; no speedup is claimed. Test-only measured
-worker links now exercise the actual 200-input guest path: three measured runs
-plus a disabled control pass, with 205 records accepted, pressure coalescing,
-queue high-water17 and no rejection/overflow. Queue consumption, read batches,
-video transaction and final handoff/close acknowledgment are measured; bounded
-sample-overflow and disabled/last-error unit checks pass. Actual EDIT now passes
-200 continuous movements, menu exit and MEM with separate producer/transfer/
-frontend timing in three measured runs plus disabled control. Queue conservation,
-frontend completion and instrumentation-cost units pass; timings locate a much
-larger synchronous transfer cost than text assembly, without yet isolating its
-cause. Physical RawInput, matched SoftPC runtime comparison and full-product
-perturbation bounds remain unproved. S1's final disposition remains open.
-
-The proposal supplies the bounded S1-S4 sequence: baseline measurement;
-release hot-loop diagnostic removal; only proven input/producer repair;
-integration and owner handoff. Only this S1 packet authorizes current work.
-Existing 30ms native presentation polling is not a new repair target.
+Measurement-only S1 concludes with [baseline and control evidence](../etc/evidence/m0-t429-s1-performance-baseline.md), including r020 matched variants.
+No production speedup is claimed; physical input and matched SoftPC runtime
+comparison remain explicitly unproved. Sequential S2 is admitted, not T closure.
 
 ## Current Technical Baseline
 
-O:/winnt/system32 contains run16.exe, ntsrv.exe, ntcon.exe, ntvdm.exe,
-ntvwm.exe, ntmon.exe, WOW32.DLL and VDMREDIR.DLL. All eight match the final
-T428 S6 tested package. Recovery is build/M0-T428/S6/r011/recovery.
-[S6 evidence](../etc/evidence/m0-t428-s6-ownership-naming.md) includes the
-whole-T requirement audit, 29 service cases, 37 shutdown assertions, 34
-sequential leases, Console17/Window17/WOW, six GUI cases, loss/isolation
-and published smoke/hash proof.
+T428 is owner-closed at production68e860553/statusb1b77e129; its
+[closure](../history/m0-t428-worker-interface-unification-closure.md)
+retains S1-S6 results. O:/winnt/system32 contains the coherent six EXEs and
+WOW32.DLL/VDMREDIR.DLL matching build/M0-T428/S6/r002/runtime/system32.
+Recovery is S6/r011/recovery. S1 test-only measured binaries were never published.
 
-NTSRV remains the sole relationship/lifecycle authority; original DOS/WOW
-execution, records, blocking/resume and cleanup stay in their mirrors.
-Default shared GUI carriers reside/reuse; no exclusive GUI option was added.
-run16 parent restoration no longer discovers the worker using Console members.
-NTCON owns presentation; common and worker-base retain their bounded mechanisms.
+S1 delivered measurements at c8754f75d,b7178e53d,3b9d01a08 and its final
+control review.42 baseline cases, missing-marker negatives, actual EDIT200
+and graphics200, producer/transfer/frontend timing, queue conservation and
+instrumentation units pass. r020 original/disabled/enabled comparisons pass;
+run-order variability does not establish zero measurement overhead. Actual
+transfer cost is larger than assembly, but its cause remains unisolated.
 
-Each EXE derives the product Windows root from its own system32 parent.
-Original media/configuration retain declared relative paths; SYSTEM.INI is
-at root and NTVDM.REG beside the worker. User applications use ordinary
-CWD/PATH or explicit paths. The owner-supplied Windows 3.1 applications remain
-at O:/winnt. Guest/configuration and running processes are unchanged by this
-closure/admission. Physical RDP/focus, broader WOW usability and host scrollback
-retain their disclosed limits; admission does not upgrade these to passes.
+NTSRV remains relationship/lifecycle authority; original DOS/WOW execution,
+records, scheduling, blocking/resume and cleanup remain in their mirrors.
+NTCON is presentation; NTVWM owns native targets and hidden Console.
+Root/system32 lookup and ordinary application search remain unchanged.
+Shared GUI carriers reside/reuse; no exclusive GUI option is introduced.
 
-Other-session planning is preserved. Queue's admitted performance candidate
-is removed while later relative order is retained; its existing proposal is
-now the T429 brief's source. Unrelated worker-proposal chronology remains separate.
+Physical RDP/RawInput/focus is waived or unobserved, not passed. Matched SoftPC
+runtime comparison remains unperformed; S4 must disclose it. WOW keeps retained
+frontier nonregression, not broader usability. Host scrollback is not promised.
+S3/S4 remain later scopes, not active work. Native30ms polling is unchanged.
+Other-session proposal chronology is preserved and excluded from this delivery.
 
 ## Recent M0 Closures
 
-| Task | Outcome and retained evidence |
+| Task | Outcome and evidence |
 | --- | --- |
-| T428 | Owner-directed closure, worker interface/association/lifecycle/naming unification. Production 68e860553; status b1b77e129. [Closure](../history/m0-t428-worker-interface-unification-closure.md). |
-| T427 | Owner-accepted root/search isolation and system32 host co-location; S5 62a71fd90. [Closure](../history/m0-t427-system-root-search-isolation-closure.md). |
-| T426 | Owner-accepted monitor tree, S4 700b3d862. [Closure](../history/m0-t426-console-root-monitor-tree-closure.md). |
-| T425 | Owner-directed closure after S11 typeahead proof. [Closure](../history/m0-t425-worker-neutral-frontend-closure.md). |
-| T424 | Owner-closed at audited ff50ff588, production S12 46abdb554. [Closure](../history/m0-t424-component-control-closure.md). |
-| T423 | Owner-accepted S40 f64559086. [Closure](../history/m0-t423-console-window-runtime-closure.md). |
+| T428 | Owner-closed worker interface unification, production68e860553/statusb1b77e129; [closure](../history/m0-t428-worker-interface-unification-closure.md). |
+| T427 | Owner-accepted system-root/search isolation; [closure](../history/m0-t427-system-root-search-isolation-closure.md). |
+| T426 | Owner-accepted monitor tree; [closure](../history/m0-t426-console-root-monitor-tree-closure.md). |
 
 ## Recent Governance
 
-Owner closes T428 and admits T429 on 2026-10-04. Closed chronology resides in
-history and indexed S evidence; CURRENT has only the T429 S1 packet. This
-documentation-only delivery runs governance, relative-link and diff checks;
-it neither rebuilds nor replaces the accepted runtime.
+S1 concludes as measurement-only; S2 begins with one bounded active packet.
+This admission/control delivery changes no production binary, guest or process
+policy. Governance, relative links and diff checks precede commit/push.

@@ -305,3 +305,35 @@ Some present maxima include initial Window setup. Three samples do not prove
 physical mouse smoothness or an end-to-end SLA. S1 remains open for final
 baseline/perturbation disposition; S2 is not admitted. All eight published hashes
 still match T428 S6 r002; no test broker or Z: remains after serial runs.
+
+## S1 final comparison and bounded conclusion — r020
+
+`measure-worker-boundaries.ps1 -Edit -CompareControl -Iterations 3` uses
+the same r016 measured worker/frontend and r012 observer as above. After one
+excluded warmup it serially alternates accepted original, disabled wrappers,
+enabled wrappers, three times. Each case pins actual binary hashes after the
+previous identity-scoped cleanup; no product package is modified.
+
+| Variant | Whole-case milliseconds, in run order | Median ms |
+| --- | --- | --- |
+| Accepted original | 11030,10425,9013 | 10425 |
+| Disabled wrappers | 11102,9347,9577 | 9577 |
+| Enabled wrappers | 11270,9018,8771 | 9018 |
+
+All ten cases (including warmup) pass actual EDIT readiness,200 continuous
+movements, menu exit, MEM output and direct exit1. Enabled runs retain two
+bounded reports and queue conservation/overflow/error/barrier assertions;
+original and disabled runs write no worker measurement report. This proves
+control behavior and provides actual perturbation comparison, not a claim that
+instrumentation accelerates the product or has zero cost. The downward run-order
+trend and three samples do not establish a tight statistical overhead bound;
+r018 separately measures approximately162ns per uncontended queue operation.
+
+S1's bounded baseline exit is satisfied: pinned ordinary build/runtime and
+workload, startup distributions, actual EDIT producer/transfer/presentation
+and queue/batch distributions, unaffected native control, disabled behavior,
+cost and overflow negatives. No production repair or speedup is claimed.
+Physical/RDP RawInput and matched SoftPC runtime comparison remain unproved;
+S4 must retain that distinction. Full-product timing includes fixed test work
+and is not an end-to-end mouse SLA. S2 may now test the source-proven release
+DECODE diagnostic cost; S3 may change transport/input only after causal evidence.
