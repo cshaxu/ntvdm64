@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T428 S4** (Ordinary Mode).
+**Active: M0 T428 S5** (Ordinary Mode).
 
 Owner admits the queue-head worker control/lifecycle/ownership unification
 package on 2026-10-04, asking first for current-state audit and architecture
@@ -16,22 +16,22 @@ records the subsequent bounded stages.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T428 S4; Ordinary Mode. |
-| Admission And Approval | Owner: “批准你的所有的回复…目标：精简，去重复，统一逻辑。NTVDM符合OpenNT的原始语义，NTVWM参照NTVDM的方法来做。开始。” Sequentially admit approved common management-shutdown stage after S3 ae28ef7ce, built/tested/published/pushed. |
+| Identifier Mode | M0 T428 S5; Ordinary Mode. |
+| Admission And Approval | Owner: “批准你的所有的回复…目标：精简，去重复，统一逻辑。NTVDM符合OpenNT的原始语义，NTVWM参照NTVDM的方法来做。开始。” Sequentially admit approved association/exclusive-session stage after S4 886f13758, built/tested/published/pushed. |
 | Candidate Proposal | [Worker control/lifecycle/ownership unification](../proposals/proposal-worker-control-lifecycle-naming-unification-001.md). |
-| Objective | Share project-owned worker shutdown reception/management contract through worker-base and NTSRV common paths; register native GUI-only close control independently of text binding. Preserve worker-local original cleanup and true Console-close acknowledgment. |
-| Non-goals | No original mirror/guest changes, second registry, scheduler/helper, ancestry/observed tracking, performance work, new cooperative-then-force timeout policy, exclusive-session or association migration. |
-| Reference Baseline | main ae28ef7ce; published S3 eight-file package equals build/M0-T428/S3/r003/runtime/system32, APP0.0.427/RPC38/I/O25. Preserve side-session planning edits. |
-| Files And ABI Surface | worker-base shutdown mechanism; NTVDM project adapters and NTVWM main/console cleanup; NTSRV management/worker registration; focused tests. Prefer existing shutdown/control contracts; record any necessary DTO/RPC change and synchronized versions before implementation. No original mirror change is admitted. |
+| Objective | Consolidate existing service-owned root-worker association/reuse, route cancellation, kind/occupancy and management projection. Align native exclusive text/GUI carrier retirement with the corresponding original DOS/separate WOW policy without altering GUI startup-only return. |
+| Non-goals | No original mirror/guest changes, second registry, scheduler/helper, ancestry/observed tracking, performance work, new cooperative-then-force timeout policy or component rename. |
+| Reference Baseline | main 886f13758; published S4 eight-file package equals build/M0-T428/S4/r003/runtime/system32, APP0.0.427/RPC38/I/O25. Preserve side-session planning edits; S2 independent GUI worker reuse remains explicitly unproved/failed. |
+| Files And ABI Surface | NTSRV existing connection/worker/root/management records, registration/selection/lifecycle/route consumers; NTVWM session adapters; common/worker-base only for identical project mechanisms; focused tests. Prefer existing contracts; record necessary DTO/RPC changes and synchronized versions before implementation. No original mirror change is admitted. |
 | Applicable Rules | Full AGENTS reading set, source provenance, original execution/cleanup ownership, shared-mechanism boundaries and documentation rules. |
-| Verification | Source close-order/provenance audit; paired DOS/WOW/native management, GUI-only before first text bind, duplicate/failed close, failure/disconnect, actual closed/process acknowledgment and handle ownership; affected x86 build, Console17/Window17/WOW, coherent publication before P; governance/links/diff review. |
-| Expected Markers | Both workers use shared project shutdown instruction; native management controls exist without frontend/text attachment; original worker-local cleanup and explicit close-result distinction remain, no synthetic successful close or task result. |
-| Asset Needs | Existing MSVC14.43/SDK22621 incremental cache and immutable media; new outputs under build/M0-T428/S4. |
-| Reporting Requirements | Report shared shutdown mechanism and remaining worker-local operations, actual close/fault proof and later stages; no whole-T closure claim. |
+| Verification | Source-owned original shared/exclusive policy and current authority inventory; same-root worker reuse, independent root isolation, old capability/root replacement, cancellation and occupancy/kind negatives; native exclusive/shared text/GUI, nested return/close/failure; affected x86 build, Console17/Window17/WOW, coherent publication before P; governance/links/diff review. |
+| Expected Markers | Existing NTSRV worker state is the relationship authority, no second registry; readers use common outer validation while source-owned DOS/WOW/native record operations remain explicit. Native residency follows corresponding admitted original policy. |
+| Asset Needs | Existing MSVC14.43/SDK22621 incremental cache and immutable media; new outputs under build/M0-T428/S5. |
+| Reporting Requirements | Report eliminated duplicate authority/mechanisms and necessary native/original differences; prove actual reuse/isolation/exclusive/shared behavior; no whole-T closure claim. |
 | Stop Conditions | New execution/lifetime policy or expanded original mirror changes require owner decision before implementation. Preserve unrelated modifications. |
-| Exit Criteria | Common management-shutdown production contract passes focused/runtime/publication/review/push gates; association/reuse, exclusive policy and naming work remain explicit. |
-| Original Owner Request | NTMON closes workers through a shared worker-base interface; NTVWM worker-local reception/cleanup follows corresponding original NTVDM semantics. Simplify and unify without extracting original mirror logic. |
-| Similar-Issue Sweep | GUI-only and text-bound close controls, service authority/pinning, repeated close, target versus carrier lifetime, root/service loss, final I/O and result ownership. |
+| Exit Criteria | Association/reuse and native exclusive/shared production paths pass focused/runtime/publication/review/push gates; format/ownership naming remains S6. |
+| Original Owner Request | NTSRV maintains logical frontend-worker relationships without another registry; NTVWM follows corresponding original DOS/Win16 residency, not an added ten-second GUI worker timer. Simplify and unify without extracting original mirror logic. |
+| Similar-Issue Sweep | Shared GUI/text carriers, exclusive self-retirement, common root association/selection/management parent, stale identity, concurrent reservation/cancellation, route release, direct completion and independent target lifetime. |
 
 The [S1 source audit](../etc/evidence/m0-t428-s1-worker-control-lifecycle-audit.md)
 corrects stale two-route-loop findings, confirms shared spawn/I/O/client
@@ -57,7 +57,9 @@ Its [source boundary and verification record](../etc/evidence/m0-t428-s4-common-
 records 37 shutdown assertions, 25 service cases, six actual GUI cases,
 Console17/Window17/WOW, frontend/worker loss, independent close isolation and
 published smoke/hash checks. Original DOS/WOW cleanup and wire versions remain
-unchanged. Reviewed commit/push is pending; side-session planning stays separate.
+unchanged. Reviewed P 886f13758 is pushed; side-session planning stays separate.
+S5 is admitted for the next approved bounded stage; implementation is not yet
+claimed.
 
 ## S4 Closure Record
 
@@ -68,8 +70,9 @@ builds, 37 shutdown assertions, 25 service cases, six GUI cases, paired
 frontend-loss/receipt checks, native close isolation and failure tests passed.
 Console17/Window17/retained WOW passed in r004. The eight-file tested package
 equals O:/winnt/system32; recoverable S3 backup is in build/M0-T428/S4/r008.
-Published Console/Window smoke and all eight hashes passed. Final review,
-commit and push remain to be recorded. T428 stays open; S5/S6 remain pending.
+Published Console/Window smoke and all eight hashes passed. Governance, links
+and diff/original-mirror checks passed. Reviewed P 886f13758 is pushed.
+T428 stays open; S5 is admitted and S6 remains pending.
 
 ## S3 Closure Record
 
@@ -103,10 +106,11 @@ S2 6a8934f6b. T428 remains open.
 
 ## Current Technical Baseline
 
-Current verified/published package is T428 S3 ae28ef7ce from
-build/M0-T428/S3/r003/runtime. It retains
+Current verified/published package is T428 S4 886f13758 from
+build/M0-T428/S4/r003/runtime. It retains
 the following accepted T427 layout/protocol baseline, S2 native GUI-carrier
-residency, and authenticated service-owned parent restoration.
+residency, authenticated service-owned parent restoration and common shutdown
+execution with pre-text native close-control registration.
 
 Production delivery 62a71fd90, followed by pushed registration cc245ca95,
 is the T427 S5 system32 host layout. MSVC14.43/SDK22621/Win32 x86 /MT
