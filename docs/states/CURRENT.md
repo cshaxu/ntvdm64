@@ -2,28 +2,43 @@
 
 ## Current Work
 
-**No active M/T/S packet.**
+**Active: M0 T426 S1** (Ordinary Mode).
 
-Owner directs T425 closure after completing the remaining typeahead proof.
-S11 meets that bar: final Console/Window nested DOS and DOS/native/DOS cases
-pass with unchanged continuous input, complete MEM execution/count/order
-witnesses, actual root completion and eight assertion negatives. No next
-numeric T or S is admitted. The [T425 closure](../history/m0-t425-worker-neutral-frontend-closure.md)
-and [S11 audit](../etc/evidence/m0-t425-s11-typeahead-closure.md) retain the
-owner request, exact commands, failed predecessors and final evidence.
+Owner closes T425 and directs admission of the next queued T. T425 closure is
+delivered and pushed at 8cbc1c997; [closure](../history/m0-t425-worker-neutral-frontend-closure.md)
+and [S11 evidence](../etc/evidence/m0-t425-s11-typeahead-closure.md) retain the
+actual proof and limits. T426 consumes the former queue-head
+[Console-root worker-tree proposal](../proposals/proposal-ntmon-console-worker-tree-001.md).
+Only S1 is admitted: inspect current service registration/projection/close
+boundaries and freeze the implementation contract before changing production.
 
-Owner withdraws the one-minute and 1000-motion requirements. Passed 200-motion
-checks remain. WINMINE reaches its interface; SOL/WRITE retain agreed execution
-frontiers. SoftPC still has the original VGA bit-5 defect, so no conditional
-patch is imported. That defect and the separate exploratory BAT/redirection
-timeout remain in [TODO](TODO.md); neither is falsely reported repaired.
+## Active Packet
 
-S10 at 15143473a proves original WINMINE single-instance behavior and independent
-launcher completion. S9 at 817fe636b closes the initial throughput work.
-Historical snapshot-merge failures are superseded by S11's selected same-input
-live proof, not retroactively passed. Host scrollback remains outside the
-product guarantee. Owner-approved other-session Queue/proposal planning is
-included in this delivery without changing product scope.
+| Field | Required record |
+| --- | --- |
+| Identifier Mode | M0 T426 S1; Ordinary Mode. |
+| Admission And Approval | Owner: “一起纳入提交。然后准入下一个T”. T425 is closed at 8cbc1c997; admit the former queue head, with one active bounded S. |
+| Candidate Proposal | [NTMON Console-root worker tree](../proposals/proposal-ntmon-console-worker-tree-001.md). |
+| Objective | Produce a source-backed Console-root/worker snapshot and management contract, source ownership/lock inventory, stable identity/tombstone rules and exact implementation/test handoff for the subsequent bounded stages. |
+| Non-goals | No production implementation in S1, descendant observation, Job/hooks, synthetic tasks, new scheduler/helper, guest/library changes or worker execution/lifecycle redesign. No claim that the tree UI already works. |
+| Reference Baseline | Delivered T425 8cbc1c997 and unchanged S9/r022 eight-file package; current NTCON frontend, NTVWM native worker, NTSRV authority and NTMON snapshot consumer. |
+| Files And ABI Surface | Audit src/ntsrv-exe, src/ntmon-exe and their current callers; protocol declarations belong to src/common/protocol, not retired src/interface. Document the smallest proposed DTO/RPC/version changes without implementing them. S1 owns CURRENT and indexed audit/design evidence only. |
+| Applicable Rules | docs/README.md reading set, Execution/Architecture/Coding/Document rules, design authorities, CONTRIBUTING and source policy. Original DOS/WOW ownership and completion remain unchanged. |
+| Verification | Read actual production callers/providers and management fixtures; review identity, locking, projection and close acknowledgement contracts. Documentation governance with links, actual diff review and git diff --check. No runtime/build capability claims from an audit-only P. |
+| Expected Markers | Each root/worker/state/close requirement maps to a source owner, proposed contract and exact positive/negative test; gaps and unsupported WOW/task identities are explicit. |
+| Asset Needs | Current repository source and retained T425 build/test evidence; no new guest media, process, helper or desktop interaction needed. |
+| Reporting Requirements | Report current versus proposed behavior, retained adapters, lock/resource owners, exact downstream tests, limits and bounded S2-S4 implementation sequence. |
+| Stop Conditions | Required original execution change, incompatible ownership, absent trustworthy identity/close contract or material scope expansion requires re-admission; do not invent process-tree control. |
+| Exit Criteria | Source-backed contract and test inventory complete, all proposal requirements dispositioned, governed evidence reviewed/committed/pushed; implementation remains unclaimed until its own stages pass. |
+| Original Owner Request | Include reviewed planning changes in T425 commit, then admit the next T. Its approved candidate is NTMON Console-root worker tree, followed by existing Queue order. |
+| Similar-Issue Sweep | Root rebuild/PID reuse, missing-root retention, independent Consoles, worker/GUI/WOW association, stale selection and authorization, orderly close failure, UNBOUND deletion, unchanged labels/title/three hotkeys and elapsed-time meaning. |
+
+T426 sequence follows the approved candidate: S1 contract audit; subsequent
+bounded admission for NTSRV projection/close and protocol negatives, NTMON
+tree/selection UI, then integration/publication and owner handoff. Preserve
+DOS=0 / Win16=1 / Win32=2, title NTVDM Task Monitor and the original three
+hotkeys. CONSOLE is a frontend row, not a fourth worker kind. NTMON never
+enumerates processes or reconstructs authoritative associations.
 
 ## Current Technical Baseline
 
@@ -58,10 +73,10 @@ scheduler is introduced.
 
 ## Recent Governance
 
-The containing reviewed S11 P delivers the test correction, evidence and T425
-closure. Documentation governance includes relative links; actual diff review,
-PowerShell syntax/negative checks and git diff --check apply before commit.
-Owner explicitly approves including the reviewed other-session Queue/proposal
-planning in this commit, then admitting the queue head in a separate delivery.
-This closure does not itself admit the next candidate. Candidate order remains
-solely in [Queue](QUEUE.md); unplanned boundaries remain solely in TODO.
+T425 closure commit 8cbc1c997 includes the owner-approved other-session Queue
+and two proposals without expanding T425 implementation. This separate
+documentation-only admission allocates T426 and removes its candidate from
+[Queue](QUEUE.md), retaining every remaining candidate's relative order.
+S1 is audit-only; no production build, runtime mutation or redeployment is
+required for admission. Documentation governance, link/diff review and clean
+synchronized Git delivery apply. Outstanding debt remains in [TODO](TODO.md).
