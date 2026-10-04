@@ -194,11 +194,15 @@ if(!$OrdinaryFrontend -and @($matrix | Where-Object {$_.RootFrontend -and $_.Nam
         throw 'Owner cases require the test-only frontend observer in the isolated test package'
     }
 }
-$environmentNames = @('MVDM_BASESRV_TRACE_PATH','MVDM_S34_TRACE_PATH','MVDM_TEST_FRAME_REPORT')
+$environmentNames = @('MVDM_BASESRV_TRACE_PATH','MVDM_S34_TRACE_PATH','MVDM_TEST_FRAME_REPORT','PATH')
 $previous = @{}
 foreach ($name in $environmentNames) { $previous[$name]=[Environment]::GetEnvironmentVariable($name) }
 $results = @()
 try {
+    # Original guest utilities live in system32. This explicit test PATH is
+    # ordinary user search input, not a product-owned package fallback.
+    [Environment]::SetEnvironmentVariable('PATH',
+        (Join-Path $PackageRoot 'system32')+';'+$previous['PATH'])
     foreach ($case in $matrix) {
         if (($case.Negative -or $case.Supplemental) -and !$Cases) { continue }
         if ($Cases -and $case.Name -notin $Cases) { continue }

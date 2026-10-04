@@ -386,7 +386,7 @@ BOOL LoadCPIFont(UINT CodePageID, WORD FontWidth, WORD FontHeight)
     /* max font height is 16 pixels and font width must be 8 pixels */
     if (FontHeight > 16 || FontWidth != 8)
 	return FALSE;
-    dw = GetNtvdmSystemDirectoryA((CHAR *)Buffer, sizeof(Buffer));
+    dw = NtvdmGetSystemDirectoryA((CHAR *)Buffer, sizeof(Buffer));
     if (dw == 0 || dw + CPI_FILENAME_LENGTH > sizeof(Buffer))
 	return FALSE;
     RtlMoveMemory(&Buffer[dw], CPI_FILENAME, CPI_FILENAME_LENGTH);

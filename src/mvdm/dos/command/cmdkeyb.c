@@ -164,7 +164,7 @@ VOID cmdGetKbdLayout( VOID )
         goto NoInstallkb16;
     }
 
-    iSaveSize = iSize = GetNtvdmSystemDirectoryA(szDir, MAX_PATH);
+    iSaveSize = iSize = NtvdmGetSystemDirectoryA(szDir, MAX_PATH);
 
     if (iSize > MAX_PATH) {
         goto NoInstallkb16;

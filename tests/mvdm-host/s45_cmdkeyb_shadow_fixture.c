@@ -23,7 +23,7 @@ UINT WINAPI MvdmGetConsoleCP(VOID)
     ++environment_queries;
     return GetConsoleCP();
 }
-unsigned int __cdecl GetNtvdmSystemDirectoryA(char *path,unsigned int capacity)
+unsigned int __cdecl NtvdmGetSystemDirectoryA(char *path,unsigned int capacity)
 {
     ++environment_queries;
     return GetSystemDirectoryA(path,capacity);

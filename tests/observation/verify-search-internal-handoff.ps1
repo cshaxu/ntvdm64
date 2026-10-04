@@ -41,10 +41,10 @@ function Observe([string]$Name,[string[]]$Tail){
     }finally{$process.Dispose();Stop-IsolatedPackageScope $scope}
 }
 try{
-    $screen=Observe 'internal-interpreter' @('Z:\COMMAND.COM','/c','cmd','/c','Z:\tests\STREAM.CMD')
+    $screen=Observe 'internal-interpreter' @('Z:\system32\COMMAND.COM','/c','cmd','/c','Z:\tests\STREAM.CMD')
     if(!$screen.Contains('S3_INTERNAL_STDOUT') -or !$screen.Contains('S3_INTERNAL_STDERR')){throw 'Missing native stream witnesses'}
     'PASS internal interpreter/native streams outside package CWD/PATH'
-    $screen=Observe 'dos-selected-native' @('Z:\COMMAND.COM','/c','SEARCH.EXE')
+    $screen=Observe 'dos-selected-native' @('Z:\system32\COMMAND.COM','/c','SEARCH.EXE')
     $image=[IO.File]::ReadAllText((Join-Path $RunRoot 'dos-selected-native.image.txt'),[Text.Encoding]::Unicode)
     if($image -ine 'Z:\tests\SEARCH.EXE'){throw "Wrong DOS-selected native image: $image"}
     'PASS DOS-to-native selected current-directory image with package absent from PATH'

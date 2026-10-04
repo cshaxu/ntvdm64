@@ -842,9 +842,9 @@ static BOOL write_console_input_text(HANDLE input, const char *text, DWORD line_
                  * Enter. A new empty current prompt cannot be an old one.
                  * The enclosing verifier still checks exact output/order/code. */
                 if (!echoed || !wait_input_milestone(output,
-                    !_stricmp(echo,"edit") ? NULL : "",
-                    !_stricmp(echo,"edit") ? "Untitled" : NULL, NULL,
-                    _stricmp(echo,"edit") != 0)) return FALSE;
+                    (!_stricmp(echo,"edit") || !_stricmp(echo,"edit.com")) ? NULL : "",
+                    (!_stricmp(echo,"edit") || !_stricmp(echo,"edit.com")) ? "Untitled" : NULL, NULL,
+                    _stricmp(echo,"edit") != 0 && _stricmp(echo,"edit.com") != 0)) return FALSE;
                 echoed = 0; echo[0] = 0;
             } else {
                 if (echoed >= KVM_TEXT_COLUMNS || (unsigned char)character < 32) return FALSE;
@@ -1459,7 +1459,7 @@ int main(int argc, char **argv)
                 if (strcmp(argv[argument_index], "--observe-console-edit-return") == 0) {
                     scripted_console_input = TRUE;
                     observe_edit_return = TRUE;
-                    scripted_console_input_text = "edit\r";
+                    scripted_console_input_text = "edit.com\r";
                     scripted_console_input_sequence = "edit-escape-alt-f-x-mem-exit";
                     scripted_console_line_delay_ms = 1500;
                     continue;

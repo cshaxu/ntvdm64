@@ -5,6 +5,32 @@
 
 #include "ntvdm-exe/session/session.h"
 #include "common/system_root.h"
+#include "common/guest_environment.h"
+#include <stdlib.h>
+
+/* WOW's kernel obtains SYSTEMROOT from the initial guest PDB, before the
+ * first submitted Win16 record. Keep the original saved/native environment
+ * untouched: only replace the finished guest MULTI_SZ before its copy. */
+int mvdm_softpc_project_wow_initial_environment(char **environment,unsigned long *bytes)
+{
+    char root[MAX_PATH],short_root[MAX_PATH],*projected=NULL,*copy;
+    DWORD error,length,projected_bytes=0;
+    if(!environment || !*environment || !bytes){SetLastError(ERROR_INVALID_PARAMETER);return 0;}
+    error=common_system_root_a(root,sizeof(root));
+    if(error){SetLastError(error);return 0;}
+    length=GetShortPathNameA(root,short_root,sizeof(short_root));
+    if(!length)return 0;
+    if(length>=sizeof(short_root)){SetLastError(ERROR_FILENAME_EXCED_RANGE);return 0;}
+    error=common_guest_environment_root(*environment,*bytes,short_root,&projected,&projected_bytes);
+    if(error){SetLastError(error);return 0;}
+    copy=malloc(projected_bytes);
+    if(!copy){HeapFree(GetProcessHeap(),0,projected);SetLastError(ERROR_NOT_ENOUGH_MEMORY);return 0;}
+    memcpy(copy,projected,projected_bytes);
+    HeapFree(GetProcessHeap(),0,projected);
+    free(*environment);
+    *environment=copy;*bytes=projected_bytes;
+    return 1;
+}
 
 void *mvdm_softpc_load_library(const char *name)
 {
@@ -109,8 +135,17 @@ int mvdm_softpc_system_find_file(const char *name, char *path_out,
     uint32_t path_out_bytes)
 {
     session *instance = session_thread_current();
-    return mvdm_softpc_media_find_file(instance != NULL ?
-        session_mvdm_system_root(instance) : NULL, name, path_out,
+    char directory[SESSION_FIRMWARE_ROOT_BYTES + 16u];
+    if (path_out != NULL && path_out_bytes != 0u) path_out[0] = '\0';
+    if (instance == NULL || name == NULL) return 0;
+    /* Original setup places SYSTEM.INI at Windows root, but NTIO and the
+     * default CONFIG.NT/AUTOEXEC.NT in GetSystemDirectory's system32.
+     * This binding never searches CWD/PATH or falls back to a flat copy. */
+    if (!_stricmp(name, "system.ini"))
+        return mvdm_softpc_media_find_file(session_mvdm_system_root(instance),
+            name, path_out, path_out_bytes);
+    if (!NtvdmGetSystemDirectoryA(directory, sizeof(directory))) return 0;
+    return mvdm_softpc_media_find_file(directory, name, path_out,
         path_out_bytes);
 }
 
@@ -219,12 +254,12 @@ static uint32_t mvdm_softpc_copy_ntvdm_directory(int system_directory,
     return (uint32_t)path_chars;
 }
 
-uint32_t GetNtvdmWindowsDirectoryA(char *path_out, uint32_t path_out_chars)
+uint32_t NtvdmGetWindowsDirectoryA(char *path_out, uint32_t path_out_chars)
 {
     return mvdm_softpc_copy_ntvdm_directory(0, path_out, path_out_chars);
 }
 
-uint32_t GetNtvdmSystemDirectoryA(char *path_out, uint32_t path_out_chars)
+uint32_t NtvdmGetSystemDirectoryA(char *path_out, uint32_t path_out_chars)
 {
     return mvdm_softpc_copy_ntvdm_directory(1, path_out, path_out_chars);
 }
@@ -247,14 +282,14 @@ static uint32_t mvdm_softpc_copy_ntvdm_directory_wide(int system_directory,
     return (uint32_t)(path_chars - 1);
 }
 
-uint32_t GetNtvdmWindowsDirectoryW(wchar_t *path_out,
+uint32_t NtvdmGetWindowsDirectoryW(wchar_t *path_out,
     uint32_t path_out_chars)
 {
     return mvdm_softpc_copy_ntvdm_directory_wide(0, path_out,
         path_out_chars);
 }
 
-uint32_t GetNtvdmSystemDirectoryW(wchar_t *path_out,
+uint32_t NtvdmGetSystemDirectoryW(wchar_t *path_out,
     uint32_t path_out_chars)
 {
     return mvdm_softpc_copy_ntvdm_directory_wide(1, path_out,

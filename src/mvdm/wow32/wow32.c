@@ -510,7 +510,7 @@ BOOL W32Init(VOID)
          * directory spelling from the current worker's selected MVDM media.
          * Modern GetSystemDirectory/GetWindowsDirectory identify the host OS,
          * not this standalone product package. */
-        if (!GetNtvdmSystemDirectoryA(szBuf, sizeof szBuf)) {
+        if (!NtvdmGetSystemDirectoryA(szBuf, sizeof szBuf)) {
             return FALSE;
         }
         GetShortPathName(szBuf, szBuf, sizeof szBuf);
@@ -518,7 +518,7 @@ BOOL W32Init(VOID)
         pszSystemDirectory = malloc_w_or_die(cb);
         RtlCopyMemory(pszSystemDirectory, szBuf, cb);
 
-        if (!GetNtvdmWindowsDirectoryA(szBuf, sizeof szBuf)) {
+        if (!NtvdmGetWindowsDirectoryA(szBuf, sizeof szBuf)) {
             return FALSE;
         }
         GetShortPathName(szBuf, szBuf, sizeof szBuf);

@@ -46,7 +46,8 @@ foreach($guest in $Guests){
         $start=[Diagnostics.ProcessStartInfo]::new($Observer)
         $observerArguments=@((Join-Path $PackageRoot 'run16.exe'),$PackageRoot,($stem+'.txt'))
         if($WaitTarget){$observerArguments+='--wait'}
-        $observerArguments+=@($guest,'--observation-timeout-ms','20000')
+        $observerArguments+=@((Join-Path (Join-Path $PackageRoot 'system32') $guest),
+            '--observation-timeout-ms','20000')
         foreach($argument in $observerArguments){
             $start.ArgumentList.Add($argument)
         }

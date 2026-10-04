@@ -14,7 +14,7 @@
 #include "native_launch.h"
 #include "common/protocol/console_io.h"
 #include "common/system_root.h"
-#include "guest_environment.h"
+#include "common/guest_environment.h"
 #include "application_search.h"
 #include <shellapi.h>
 #include <stdio.h>
@@ -241,7 +241,7 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command,run16_f
         length=GetShortPathNameA(root,short_root,sizeof(short_root));
         if(!length){result=GetLastError();goto done;}
         if(length>=sizeof(short_root)){result=ERROR_FILENAME_EXCED_RANGE;goto done;}
-        result=run16_guest_environment_root(environment.Buffer,environment.Length,
+        result=common_guest_environment_root(environment.Buffer,environment.Length,
             short_root,&guest,&bytes);
         if(result)goto done;
         RtlFreeAnsiString(&environment);

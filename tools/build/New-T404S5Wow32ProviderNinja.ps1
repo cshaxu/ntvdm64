@@ -254,10 +254,10 @@ foreach ($raw in @(
     'mvdm_softpc_profile_shadow_system_ini',
     'mvdm_softpc_system_copy_root',
     'mvdm_softpc_system_copy_system_directory',
-    'GetNtvdmWindowsDirectoryA',
-    'GetNtvdmSystemDirectoryA',
-    'GetNtvdmWindowsDirectoryW',
-    'GetNtvdmSystemDirectoryW',
+    'NtvdmGetWindowsDirectoryA',
+    'NtvdmGetSystemDirectoryA',
+    'NtvdmGetWindowsDirectoryW',
+    'NtvdmGetSystemDirectoryW',
     'mvdm_softpc_wow_page_domain_publish_system_color'
 )) {
     $parentImportAliasLines.Add('#pragma comment(linker, "/alternatename:_' + $raw + '=' + $raw + '")')

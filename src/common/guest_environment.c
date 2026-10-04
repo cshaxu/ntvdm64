@@ -1,7 +1,7 @@
 #include "guest_environment.h"
 #include <string.h>
 
-DWORD run16_guest_environment_root(PCSTR input,DWORD bytes,PCSTR root,
+DWORD common_guest_environment_root(PCSTR input,DWORD bytes,PCSTR root,
     PSTR *output,DWORD *output_bytes)
 {
     static const char prefix[]="SYSTEMROOT=";
@@ -23,6 +23,11 @@ DWORD run16_guest_environment_root(PCSTR input,DWORD bytes,PCSTR root,
     /* Only terminators may remain, not hidden trailing entries. */
     while(offset<bytes)if(input[offset++])return ERROR_INVALID_PARAMETER;
     root_bytes=strlen(root);
+    /* Original KRNL386 concatenates \SYSTEM directly to this base. A package
+     * at a drive root must yield Z:\SYSTEM, not Z:\\SYSTEM (DOS module lookup
+     * does not accept that doubled separator). WIN16DIR stays unchanged. */
+    while(root_bytes && (root[root_bytes-1u]=='\\' || root[root_bytes-1u]=='/'))--root_bytes;
+    if(!root_bytes)return ERROR_INVALID_PARAMETER;
     total=kept+sizeof(prefix)-1u+root_bytes+2u;
     if(total>=65535u)return ERROR_BUFFER_OVERFLOW;
     copy=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,total+1u);

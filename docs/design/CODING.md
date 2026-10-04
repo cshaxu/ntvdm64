@@ -9,8 +9,17 @@ worker-base or EXE-private implementations. A consumer with no product-file
 lookup does not acquire an artificial lookup merely to use the library.
 Product root is not a global environment override or RPC identity check.
 
-Run16 owns `guest_environment.[ch]`, the bounded ANSI Win16 record projection;
-it does not modify the Unicode host worker environment. NTVDM's firmware
+Guest directory facades use the explicit NtvdmGetWindowsDirectoryA/W and
+NtvdmGetSystemDirectoryA/W names. Host Windows directory APIs retain their
+native meanings; no global macro redirects them. Original default DOS media
+and configuration bind to root/system32, while SYSTEM.INI remains at root.
+
+Common owns `guest_environment.[ch]`, the bounded ANSI guest projection used
+by run16's Win16 task record and NTVDM's WOW kernel boot PDB. It does not
+modify the Unicode host worker environment or its saved native environment.
+The original GetWowKernelCmdLine owns transformation/copy/free ordering;
+its registered adapter projects only the completed CRT-owned guest block.
+NTVDM's firmware
 adapter owns the exact internal DLL-name binding behind the registered
 SafeLoadLibrary hook; arbitrary VDD loading and its original FPU save/restore
 remain unchanged. NTSRV retains startup/admission/rollback policy while using

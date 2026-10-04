@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T427 S3** (Ordinary Mode).
+**Active: M0 T427 S4** (Ordinary Mode).
 
 Owner accepts T426 and admits the queued system-root/application-search
 isolation package. [T426 closure](../history/m0-t426-console-root-monitor-tree-closure.md)
@@ -10,35 +10,47 @@ retains S1-S4 delivery, verification and limits. S1 source/contract audit and
 real selected-image reproduction are complete. S2 shared root/internal binding
 implementation passes its gates and is published at 7d1bd3452, pushed to main
 with a clean worktree. S3 now removes implicit package-first user discovery
-and makes the product-generated COMMAND interpreter path explicit. S3 build,
-focused search/CLI and actual DOS-native probes, full retained product gates,
-eight-file publication and published smoke pass; review/commit/push follow.
+and makes the product-generated COMMAND interpreter path explicit. S3 is
+delivered at e33e8090c, pushed to main; focused and full product gates,
+publication and smoke pass. S4 completes the admitted contract and remaining
+caller/API coverage; its reviewed P includes owner-admitted NTMON TASK
+presentation cleanup. T427 remains open for final owner acceptance.
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T427 S3; Ordinary Mode. |
+| Identifier Mode | M0 T427 S4; Ordinary Mode. |
 | Admission And Approval | Owner: “收口t 准入 系统根目录与应用搜索隔离”. Close accepted T426 and admit the former Queue head. |
 | Candidate Proposal | [System-root and application search isolation](../proposals/proposal-ntvdm-system-root-path-isolation-001.md). |
-| Objective | Bare user commands select CWD then each PATH directory with audited COM/EXE/BAT/PIF order per directory; explicit paths never discover another image. Internal generated COMMAND uses the declared product interpreter path. |
+| Objective | Complete the root/search caller and requirements sweep; verify direct/nested/relocated product paths, native host versus Win16 guest directories, and retained behavior. Report exact proven boundaries and reduce stale documentation before owner handoff. |
 | Non-goals | No guest/parser/EXEC patch, new component/helper, RPC validation, broad loader change, lifecycle/scheduler redesign or global host environment/Registry mutation. Preserve existing CLI argument syntax and native shell fallback contract. |
-| Reference Baseline | main 7d1bd3452; published T427 S2/r002/runtime in O:/winnt, full and published-smoke gates passed; APP0.0.427/RPC38/I/O25. |
-| Files And ABI Surface | run16 user-search implementation and tests; NTVDM command_process_compat internal interpreter path; formal graph/test entrypoints and S3 evidence below build/M0-T427/S3. No RPC or I/O wire changes or original mirror changes planned. |
+| Reference Baseline | main e33e8090c; published T427 S3/r001/runtime in O:/winnt, full and published-smoke gates passed; APP0.0.427/RPC38/I/O25. |
+| Files And ABI Surface | Whole-objective ledger, shared ANSI guest projection, WOW boot environment boundary, original guest deployment layout and integration tests; S4 evidence below build/M0-T427/S4. Real Win16 probe proves SYSTEMROOT still comes from the initial worker environment, not the submitted task record. A minimal registered GetWowKernelCmdLine guest-copy hook is required. Owner requires original OpenNT relative file locations: staging/default media bindings and their tests must follow TXTSETUP.SIF; no original loop/execution rewrite or RPC/I/O wire change. |
 | Applicable Rules | AGENTS reading set; execution, architecture, coding, document and source policies; preserve original search/EXEC and immutable guest media. |
-| Verification | Production resolver fixture plus actual selected-image and exit tests for CWD, ordered PATH, explicit/drive-relative names, suffixes, empty/unset PATH, spaces/Unicode, package absent/present; direct and supported nested COMMAND/native routes. Affected x86 build, retained Console17/Window17/WOW gates, coherent publication/recovery/hash smoke and governance/link/diff. |
+| Verification | Map every proposal requirement to exact source and assertion; inspect remaining derivations and native environment/guest API coverage. Reuse S2/S3 sealed evidence by proven unchanged inputs, add actual missing witnesses where needed. Any production change rebuilds affected x86 closure and repeats retained Console17/Window17/WOW, coherent publication/recovery/hash smoke; governance/link/diff and reviewed commit/push. |
 | Expected Markers | User search has no implicit package-first authority; internal root derives from actual own EXE; real host paths remain host-owned; guest projection is bounded. Evidence distinguishes current behavior from proposed repair. |
 | Asset Needs | Existing source, immutable runtime, x86 fixture tools; subst Z: only if needed with final removal. No source import or new product process. |
 | Reporting Requirements | Report exact callers, sources, reproduction results, proposed minimal shared owner, migration stages and unresolved edges; do not claim audit conclusions as implemented behavior. |
 | Stop Conditions | Missing source/provenance, required guest change or expanded loader/lifecycle policy requires renewed admission; preserve unrelated work and baseline. |
-| Exit Criteria | Actual selected paths/results prove no hidden package priority and internal interpreter remains independent of user PATH; explicit path failures do not select another same-named image. Original parser/CLI/execution and RPC unchanged; build, retained gates, coherent publication, review/commit/push pass. |
+| Exit Criteria | All root/search requirements have an explicit implementation/test disposition, verified runtime identity and original semantics preserved; no new RPC validation. Any unresolved limit is honestly distinguished from a pass and does not silently weaken the admitted scope. Build/test/publication obligations for changed inputs, review/commit/push complete; T remains open for owner validation. |
 | Original Owner Request | Close current T and admit system-root/application-search isolation. |
 | Similar-Issue Sweep | Direct, nested and internal COMMAND launches; all six EXEs; guest config/media/Win16 directories; host fonts/temp, relocation and inherited wrong root. Each process uses its own EXE root; RPC keeps existing acceptance policy. |
 
 The [implementation sequence](../etc/operations/t427-system-root-search-isolation-plan.md)
 keeps S1 audit, S2 shared root/resource binding, S3 user search isolation and
-S4 integration/closure separate. Only S3 is active. S2 is delivered at
-7d1bd3452 with its indexed evidence and unchanged RPC acceptance.
+S4 integration/closure separate. Only S4 is active. S2/S3 deliveries have
+indexed evidence and unchanged RPC acceptance.
+
+S4's [guest-root/layout integration record](../etc/evidence/m0-t427-s4-guest-root-layout.md)
+tracks the actual WOW boot PDB correction and original TXTSETUP.SIF locations.
+Canonical-layout focused DOS/native and Win16 probes pass. Final S4/r052
+passes Console17/Window17 and three retained WOW frontiers; r053 publishes
+the exact coherent eight-file package recoverably and r054 passes published
+Console/Window smoke and all hashes. O:/winnt equals S4/r050/runtime.
+Original media/configuration now use system32 destinations; root SYSTEM.INI,
+NTVDM.REG and user applications are preserved. Bare utility names require
+ordinary CWD/PATH; explicit system32 paths also work. No RPC policy change.
 
 S1 first-pass [audit and actual selected-image evidence](../etc/evidence/m0-t427-s1-root-search-audit.md)
 confirms package shadowing of CWD/PATH in four real native launch cases (r002),
@@ -64,13 +76,32 @@ records affected x86 build, focused negatives, full retained product gates and
 coherent publication with recovery. Published smoke and all eight hashes pass.
 No new RPC validation or wire change; user-search repair remains S3.
 
+## S3 Closure Record
+
+S3 is delivered at e33e8090c, pushed to main with clean worktree. Its
+[evidence](../etc/evidence/m0-t427-s3-application-search-isolation.md) records
+actual selected-file assertions, internal interpreter/handoff probes, full
+retained Product gate, recoverable eight-file O:/winnt publication and smoke.
+Governance, links and diff checks pass. No CLI/parser/guest/RPC change.
+
 ## Current Technical Baseline
+
+S4 delivery uses MSVC14.43 / SDK22621 / Win32 x86 /MT CCPU40, unchanged
+APP0.0.427/RPC38/I/O25. Its [evidence](../etc/evidence/m0-t427-s4-guest-root-layout.md)
+records actual guest/native directory separation, original deployment paths,
+minimal registered mirror seams, selected-image/internal handoffs and final
+Product/publication gates. Reviewed source and publication are complete in
+the containing P; only final owner T acceptance remains. Other sessions'
+unrelated queue/proposal changes are preserved outside this delivery.
+
+The following S3/S2 records are retained predecessor evidence, not the current
+published set.
 
 S3 [search delivery evidence](../etc/evidence/m0-t427-s3-application-search-isolation.md)
 records directory-first user discovery and explicit internal interpreter.
 Production resolver/CLI tests, 17 actual-image cases, two real internal/DOS
-handoffs and retained Console17/Window17/WOW gates pass. O:/winnt now equals
-S3/r001/runtime, checked against S3/r003 and again after all eight published
+handoffs and retained Console17/Window17/WOW gates pass. Its O:/winnt delivery
+equaled S3/r001/runtime, checked against S3/r003 and again after all eight published
 smoke cases. S3/r005 retains S2 recovery; S3/r006 retains smoke and hash proof.
 
 S2 [delivery evidence](../etc/evidence/m0-t427-s2-own-image-root-bindings.md)

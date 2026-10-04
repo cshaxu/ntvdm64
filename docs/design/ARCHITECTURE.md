@@ -18,9 +18,10 @@ locations. Missing local providers do not fall back to user search. This is
 not a new RPC authentication or package-identity policy; service acceptance
 and protocol versions remain unchanged.
 
-Real Windows directory calls retain host meaning. Run16 projects the product
-root into the bounded ANSI Win16 guest record only; the Unicode host worker
-environment and native process SYSTEMROOT remain real-host values. Original
+Real Windows directory calls retain host meaning. Common's bounded ANSI
+projection serves run16's Win16 task record and NTVDM's initial WOW guest
+PDB; the Unicode host worker environment, saved native environment and
+native process SYSTEMROOT remain real-host values. Original
 KRNL386 module-directory and WIN16DIR rules remain at their owners.
 The [S2 evidence](../etc/evidence/m0-t427-s2-own-image-root-bindings.md) records
 production bindings, focused tests and the exact runtime coverage limits.
@@ -33,6 +34,16 @@ uses an explicit root/system32/COMMAND.COM path, independently of user PATH.
 Classification, shell fallback, CLI and original EXEC semantics stay at their
 existing owners. The [S3 record](../etc/evidence/m0-t427-s3-application-search-isolation.md)
 contains production search, real image selection and internal handoff proof.
+
+Original deployment locations are independent of application search: guest
+DOS utilities, startup media and configuration live in root/system32 as
+assigned by OpenNT TXTSETUP.SIF; SYSTEM.INI remains at root. A build staging
+folder called runtime represents this root and is not an installed layer.
+After relocating utilities out of a flat package root, bare names require
+ordinary PATH membership or CWD at system32; an explicit
+`run16 system32\command.com` from package root also works. The product does
+not silently inject system32 into PATH. Guest-only NtvdmGet directory facades
+retain explicit names, leaving host Windows directory APIs unchanged.
 
 ### Service-owned management tree — T426
 

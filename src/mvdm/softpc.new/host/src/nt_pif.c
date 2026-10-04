@@ -141,7 +141,7 @@ BOOL GetPIFData(PIF_DATA * pd, char *PifName)
 
         // if no PifName, use %windir%\_default.pif
     if (!*PifName) {
-        dw = GetNtvdmWindowsDirectoryA(pathBuff,
+        dw = NtvdmGetWindowsDirectoryA(pathBuff,
             sizeof(pathBuff) - sizeof(achDef));
         if (!dw || dw > sizeof(pathBuff) - sizeof(achDef)) {
             return FALSE;            // give it up... use default settings

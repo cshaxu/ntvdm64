@@ -215,6 +215,8 @@ static void task_line(WCHAR *line,DWORD capacity,const MONITOR_STATE *state,
         same_key(&item->key,&state->selected_key) ? L'>' : L' ',node,
         item->key.category==MANAGEMENT_FRONTEND ? L"CONSOLE" : kind_name(item->kind),
         state_name(item->display_state),elapsed,stack,
+        item->key.category==MANAGEMENT_FRONTEND ||
+        (item->key.category==MANAGEMENT_WORKER && item->kind==1u) ? L"-" :
         item->image[0] ? item->image : L"Unknown");
 }
 static void confirmation_text(WCHAR *line,DWORD capacity,const MONITOR_STATE *state)

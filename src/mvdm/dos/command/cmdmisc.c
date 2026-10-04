@@ -25,6 +25,7 @@
 #include "nt_pif.h"
 #include "nt_uis.h"	  // For resource id
 #include "mvdm_guest_location.h"
+#include "mvdm_softpc_firmware.h"
 /* DIVERGENCE(MVDM-HOST-DIV-108): the original SCS command record stores a
  * host redirection-record pointer in a fixed DWORD.  Publish the same
  * source record through the session host-resource mapping instead; the
@@ -515,7 +516,11 @@ LPSTR    pszCmdLine;
     // uses lpszzVDMEnv32 and cchVDMEnv32 as the source.
     //
 
-    if (!cmdCreateVDMEnvironment(&cmdVDMEnvBlk)) {
+    /* DIVERGENCE(MVDM-HOST-DIV-324): kernel boot precedes task delivery.
+     * Project only the completed guest block, not lpszzVDMEnv32 or host env. */
+    if (!cmdCreateVDMEnvironment(&cmdVDMEnvBlk) ||
+        !mvdm_softpc_project_wow_initial_environment(
+            &cmdVDMEnvBlk.lpszzEnv, &cmdVDMEnvBlk.cchEnv)) {
         RcErrorDialogBox(EG_ENVIRONMENT_ERR, NULL, NULL);
         TerminateVDM();
     }

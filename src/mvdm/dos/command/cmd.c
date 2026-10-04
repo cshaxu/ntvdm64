@@ -28,7 +28,7 @@ PSZ	*argv;
 CHAR  RootDir [MAX_PATH];
 UINT  Len;
 
-    Len = GetNtvdmSystemDirectoryA(RootDir,MAX_PATH);
+    Len = NtvdmGetSystemDirectoryA(RootDir,MAX_PATH);
     if (Len <= MAX_PATH && Len > 0)
 	cmdHomeDirectory[0] = RootDir[0];
     return TRUE;

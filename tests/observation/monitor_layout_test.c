@@ -236,6 +236,11 @@ int wmain(void)
         mixed[3].key.category=MANAGEMENT_WOW_TASK;
         mixed[4].kind=2;mixed[4].key.category=MANAGEMENT_GUI_TARGET;
         mixed[5].depth=1;mixed[5].kind=2;
+        lstrcpyW(mixed[0].image,L"NTCON.EXE");
+        lstrcpyW(mixed[2].image,L"NTVDM.EXE");
+        lstrcpyW(mixed[1].image,L"COMMAND.COM");
+        lstrcpyW(mixed[4].image,L"NOTEPAD.EXE");
+        lstrcpyW(mixed[5].image,L"CMD.EXE");
         lstrcpyW(mixed[3].image,L"WINMINE.EXE");
         ZeroMemory(&state,sizeof(state));state.selected_key=mixed[3].key;
         render(output,&state,mixed,6);capture(output);
@@ -252,7 +257,12 @@ int wmain(void)
         cell(5,7,L'-',MONITOR_SELECTED_ATTRIBUTE);
         cell(32,7,L'-',MONITOR_SELECTED_ATTRIBUTE); /* Unknown WOW elapsed. */
         cell(43,7,L'-',MONITOR_SELECTED_ATTRIBUTE); /* No invented stack. */
+        cell(49,4,L'-',MONITOR_NORMAL_ATTRIBUTE); /* Frontend is not a task. */
+        cell(49,6,L'-',MONITOR_NORMAL_ATTRIBUTE); /* WOW worker is not a task. */
+        cell(49,5,L'C',MONITOR_NORMAL_ATTRIBUTE);
         cell(49,7,L'W',MONITOR_SELECTED_ATTRIBUTE);
+        cell(49,8,L'N',MONITOR_NORMAL_ATTRIBUTE);
+        cell(49,9,L'C',MONITOR_NORMAL_ATTRIBUTE);
     }
     {
         WCHAR line[512];FILETIME now;

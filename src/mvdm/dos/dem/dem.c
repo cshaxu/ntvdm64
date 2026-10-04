@@ -32,6 +32,7 @@ BOOL ToDebugOnF11 = FALSE;
 BOOL DemInit (int argc, char *argv[])
 {
     PSZ psz;
+    DWORD dw;
 
     // Modify default hard error handling
     // - turn off all file io related popups
@@ -40,13 +41,14 @@ BOOL DemInit (int argc, char *argv[])
     SetErrorMode (SEM_FAILCRITICALERRORS | SEM_NOOPENFILEERRORBOX);
 
     pszDefaultDOSDirectory =  (PCHAR) malloc(MAX_PATH+14);
-    /* DIVERGENCE(MVDM-HOST-DIV-154): the original NT4 system directory is
-     * not this product's immutable MVDM system root.  Preserve
+    /* DIVERGENCE(MVDM-HOST-DIV-154): bind the original NT4 system directory
+     * to this product's immutable root/system32. Preserve
      * the original caller-owned directory buffer and every later DEM path
      * operation; obtain only its initial directory through the established
      * session media binding. */
     if (!pszDefaultDOSDirectory ||
-        !mvdm_softpc_system_copy_root(pszDefaultDOSDirectory, MAX_PATH+14))
+        !(dw = NtvdmGetSystemDirectoryA(pszDefaultDOSDirectory, MAX_PATH)) ||
+        dw >= MAX_PATH )
       {
         return FALSE;
         }

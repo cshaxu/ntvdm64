@@ -7,6 +7,11 @@
 extern "C" {
 #endif
 
+/* Finished ANSI guest boot block only. Success replaces CRT-owned storage;
+ * failure preserves input. Never changes the worker's native environment. */
+int mvdm_softpc_project_wow_initial_environment(char **environment,
+    unsigned long *bytes); /* Original Win32 DWORD cchEnv carrier. */
+
 /* Same-shaped host resource lookup binding used by the original
  * host_find_file() caller.  It owns no firmware bytes and returns only a
  * caller-provided, synchronous path buffer. */
@@ -55,13 +60,13 @@ int __cdecl mvdm_softpc_system_copy_system_directory(char *path_out,
  * GetSystemDirectoryA/W: zero is failure, a too-small caller buffer receives
  * the required character count including NUL, otherwise the copied length
  * excludes NUL. */
-uint32_t __cdecl GetNtvdmWindowsDirectoryA(char *path_out,
+uint32_t __cdecl NtvdmGetWindowsDirectoryA(char *path_out,
     uint32_t path_out_chars);
-uint32_t __cdecl GetNtvdmSystemDirectoryA(char *path_out,
+uint32_t __cdecl NtvdmGetSystemDirectoryA(char *path_out,
     uint32_t path_out_chars);
-uint32_t __cdecl GetNtvdmWindowsDirectoryW(wchar_t *path_out,
+uint32_t __cdecl NtvdmGetWindowsDirectoryW(wchar_t *path_out,
     uint32_t path_out_chars);
-uint32_t __cdecl GetNtvdmSystemDirectoryW(wchar_t *path_out,
+uint32_t __cdecl NtvdmGetSystemDirectoryW(wchar_t *path_out,
     uint32_t path_out_chars);
 
 /* In-place, bounded OEM-to-ANSI boundary for original PIF configuration

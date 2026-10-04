@@ -34,7 +34,7 @@ Routine Description:
 
     /* DIVERGENCE MVDM-HOST-DIV-275: obtain complete Unicode data before
        OEM sizing; validate before narrowing the original string carrier. */
-    DWORD UnicodeCapacity = GetNtvdmSystemDirectoryW(NULL,0);
+    DWORD UnicodeCapacity = NtvdmGetSystemDirectoryW(NULL,0);
     if ( !UnicodeCapacity ) return 0;
     if ( UnicodeCapacity > 32767 ) { BaseSetLastNTError(STATUS_BUFFER_OVERFLOW); return 0; }
     Unicode.MaximumLength = (USHORT)(UnicodeCapacity*sizeof(WCHAR));
@@ -47,7 +47,7 @@ Routine Description:
         return 0;
         }
 
-    UnicodeCapacity = GetNtvdmSystemDirectoryW(Unicode.Buffer,UnicodeCapacity);
+    UnicodeCapacity = NtvdmGetSystemDirectoryW(Unicode.Buffer,UnicodeCapacity);
 
     if ( !UnicodeCapacity || UnicodeCapacity >= Unicode.MaximumLength/sizeof(WCHAR) ) {
         RtlFreeHeap(RtlProcessHeap(), 0,Unicode.Buffer);
@@ -95,7 +95,7 @@ Routine Description:
     NTSTATUS Status;
 
     /* DIVERGENCE MVDM-HOST-DIV-275: complete, bounded Unicode query. */
-    DWORD UnicodeCapacity = GetNtvdmWindowsDirectoryW(NULL,0);
+    DWORD UnicodeCapacity = NtvdmGetWindowsDirectoryW(NULL,0);
     if ( !UnicodeCapacity ) return 0;
     if ( UnicodeCapacity > 32767 ) { BaseSetLastNTError(STATUS_BUFFER_OVERFLOW); return 0; }
     Unicode.MaximumLength = (USHORT)(UnicodeCapacity*sizeof(WCHAR));
@@ -108,7 +108,7 @@ Routine Description:
         return 0;
         }
 
-    UnicodeCapacity = GetNtvdmWindowsDirectoryW(Unicode.Buffer,UnicodeCapacity);
+    UnicodeCapacity = NtvdmGetWindowsDirectoryW(Unicode.Buffer,UnicodeCapacity);
 
     if ( !UnicodeCapacity || UnicodeCapacity >= Unicode.MaximumLength/sizeof(WCHAR) ) {
         RtlFreeHeap(RtlProcessHeap(), 0,Unicode.Buffer);

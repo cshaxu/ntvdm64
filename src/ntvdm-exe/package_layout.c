@@ -100,9 +100,9 @@ int app_package_layout_validate_command_configuration_root(
     if (short_root_bytes == 0u || short_root_bytes >= sizeof(short_root))
         return 0;
     return app_package_layout_command_value_fits(short_root) &&
-        app_package_layout_command_file_fits(root, "config.nt") &&
-        app_package_layout_command_file_fits(root, "autoexec.nt") &&
-        app_package_layout_command_file_fits(root, "ntio.sys") &&
+        app_package_layout_command_file_fits(root, "system32\\config.nt") &&
+        app_package_layout_command_file_fits(root, "system32\\autoexec.nt") &&
+        app_package_layout_command_file_fits(root, "system32\\ntio.sys") &&
         app_package_layout_command_file_fits(root, "system.ini");
 }
 

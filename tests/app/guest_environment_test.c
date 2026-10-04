@@ -1,4 +1,4 @@
-#include "run16-exe/guest_environment.h"
+#include "common/guest_environment.h"
 #include <stdio.h>
 #include <string.h>
 
@@ -19,7 +19,7 @@ int main(void)
     host_bytes=GetEnvironmentVariableA("SYSTEMROOT",host_root,sizeof(host_root));
     CHECK(host_bytes && host_bytes<sizeof(host_root));
     memcpy(preserved,input,sizeof(input));
-    CHECK(run16_guest_environment_root(input,sizeof(input),"O:\\package",
+    CHECK(common_guest_environment_root(input,sizeof(input),"O:\\package",
         &projected,&bytes)==0);
     CHECK(bytes==sizeof(expected));
     CHECK(!memcmp(projected,expected,bytes));
@@ -27,18 +27,22 @@ int main(void)
     CHECK(GetEnvironmentVariableA("SYSTEMROOT",host_after,sizeof(host_after))==host_bytes);
     CHECK(!strcmp(host_root,host_after));
     HeapFree(GetProcessHeap(),0,projected);
-    CHECK(run16_guest_environment_root(missing,sizeof(missing),"O:\\package",
+    CHECK(common_guest_environment_root(missing,sizeof(missing),"Z:\\",
+        &projected,&bytes)==0);
+    CHECK(!strcmp(projected+sizeof(missing)-1u,"SYSTEMROOT=Z:"));
+    HeapFree(GetProcessHeap(),0,projected);
+    CHECK(common_guest_environment_root(missing,sizeof(missing),"O:\\package",
         &projected,&bytes)==0);
     CHECK(!memcmp(projected,missing,sizeof(missing)-1u));
     CHECK(!strcmp(projected+sizeof(missing)-1u,"SYSTEMROOT=O:\\package"));
     HeapFree(GetProcessHeap(),0,projected);
-    CHECK(run16_guest_environment_root(input,sizeof(input)-1u,"O:\\package",
+    CHECK(common_guest_environment_root(input,sizeof(input)-1u,"O:\\package",
         &projected,&bytes)==ERROR_INVALID_PARAMETER);
     CHECK(!projected && !bytes);
-    CHECK(run16_guest_environment_root(trailing,sizeof(trailing),"O:\\package",
+    CHECK(common_guest_environment_root(trailing,sizeof(trailing),"O:\\package",
         &projected,&bytes)==ERROR_INVALID_PARAMETER);
     CHECK(!projected && !bytes);
-    CHECK(run16_guest_environment_root(input,sizeof(input),"",
+    CHECK(common_guest_environment_root(input,sizeof(input),"",
         &projected,&bytes)==ERROR_INVALID_PARAMETER);
     puts("GUEST-ENVIRONMENT-ROOT-PASS");
     return 0;

@@ -4,9 +4,11 @@
 
 Owner-requested candidate dated 2026-09-27, promoted to the head of the
 [queue](../states/QUEUE.md) by owner direction on 2026-09-28. It precedes the
-CCPU40/V86 contract audit and the split WOW32 packages. This is planning only:
-no numeric T allocation,
-active-packet change, production repair or runtime acceptance is claimed.
+CCPU40/V86 contract audit and the split WOW32 packages. The owner subsequently
+admitted this package; [Status](../states/CURRENT.md) records its execution
+and [implementation sequence](../etc/operations/t427-system-root-search-isolation-plan.md)
+links the stages. The requirements below remain the acceptance contract,
+not a claim that all runtime gates have passed.
 
 Introduce one product-owned `NtvdmSystemRoot` directory contract shared by the
 product's native EXEs (`run16`, `ntsrv`, `ntvdm`, `ntcon`, `ntvwm`, `ntmon`). Each
@@ -80,7 +82,7 @@ adopting modern CMD's extension order by assumption.
   not the real Windows installation root for native applications. Audit each
   real-host caller individually; do not globally shadow SYSTEMROOT or replace
   native GetWindowsDirectory/GetSystemDirectory.
-- Audit existing GetNtvdmWindowsDirectory/GetNtvdmSystemDirectory, worker
+- Audit the guest NtvdmGetWindowsDirectory/NtvdmGetSystemDirectory facades, worker
   roots, environment construction, config expansion and nested launches.
   Preserve the original Win16 distinction: the loaded KRNL386 location gives
   its module-loading `system32`; `SYSTEMROOT` supplies the real-Windows base
