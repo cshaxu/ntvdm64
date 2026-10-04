@@ -25,14 +25,26 @@ function New-IsolatedPackageScope([string]$PackageRoot,[string]$LaunchRoot='') {
 function Stop-IsolatedPackageScope($Scope) {
     if(!$Scope -or !$Scope.Paths){throw 'Missing isolated test ownership scope'}
     $owned=@(Get-CimInstance Win32_Process | Where-Object {$_.ExecutablePath -in $Scope.Paths})
+    Stop-IdentityCheckedProcesses $owned $Scope.Paths
+    if(@(Get-CimInstance Win32_Process | Where-Object {$_.ExecutablePath -in $Scope.Paths}).Count){
+        throw 'Owned package resource remains after explicit cleanup'
+    }
+}
+# The caller supplies only rows already selected by its ownership boundary.
+# Pin every process before killing any; validate image AND creation identity.
+function Stop-IdentityCheckedProcesses($Rows,[string[]]$Paths) {
     $processes=@()
     try {
-        foreach($row in $owned){
+        foreach($row in $Rows){
+            if($row.ExecutablePath -notin $Paths){throw 'Unowned cleanup image'}
             try {$process=[Diagnostics.Process]::GetProcessById($row.ProcessId)}catch{continue}
             try {
                 $null=$process.Handle
                 if($process.HasExited){$process.Dispose();continue}
-                if($process.MainModule.FileName -notin $Scope.Paths){
+                if($process.MainModule.FileName -ne $row.ExecutablePath -or
+                    $process.MainModule.FileName -notin $Paths -or
+                    !$row.CreationDate -or
+                    [Math]::Abs(($process.StartTime.ToUniversalTime()-$row.CreationDate.ToUniversalTime()).Ticks) -gt 10){
                     throw 'Cleanup PID no longer identifies the owned package image'
                 }
             }catch{$process.Dispose();throw}
@@ -43,7 +55,4 @@ function Stop-IsolatedPackageScope($Scope) {
             if(!$process.WaitForExit(5000)){throw 'Owned test process did not stop'}
         }
     }finally{foreach($process in $processes){$process.Dispose()}}
-    if(@(Get-CimInstance Win32_Process | Where-Object {$_.ExecutablePath -in $Scope.Paths}).Count){
-        throw 'Owned package resource remains after explicit cleanup'
-    }
 }

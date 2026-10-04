@@ -180,12 +180,14 @@ identity; new outputs only under declared build/M0-T425/S<n>/r<nnn> run roots.
   native Unicode change detection and all handoff/failure assertions. The
   [S8 ledger](../evidence/m0-t425-s8-worker-frame-deduplication.md) records actual
   frames, source attribution, retained failures and final release gates.
-- [x] S9 test audit and throughput improvement: coverage-mapped pruning,
+- [ ] S9 continued test audit and throughput improvement: coverage-mapped pruning,
   isolated parallel scheduling, deterministic deadline tests and measured
   before/after time reduction without weakening runtime assertions.
   The [S9 ledger](../evidence/m0-t425-s9-test-throughput.md) records measured
   service20 reduction, retained failures, full product regression and coherent
-  eight-file publication. The containing reviewed P delivers S9.
+  eight-file publication. Initial P 51f09f7d1 is delivered. Owner continues S9
+  for observed input/results, EDIT state waits and cleanup/timing optimization;
+  normal 60-second Product remains a target, not a closure claim.
 - [ ] Owner verification and acceptance before T closure.
 
 ## RDP boundary

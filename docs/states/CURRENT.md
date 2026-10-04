@@ -4,29 +4,30 @@
 
 **Active: M0 T425 S9 (Ordinary Mode).**
 
-The containing reviewed M0 T425 S9 P delivers test-throughput optimization.
+The preceding reviewed M0 T425 S9 P delivers initial test-throughput optimization.
 S8 is owner-accepted at 90e57fe09. S9 build, retained regression, coherent
 publication and postpublication smoke pass. No next S is admitted; T425
-remains open for owner acceptance.
+remains open. Owner approves continuing S9 with observation-driven input,
+EDIT transitions, stage timing and identity-pinned cleanup; no S9 closure yet.
 
 ## Active Packet
 
 | Field | Contract |
 | --- | --- |
 | Identifier Mode | M0 T425 S9, Ordinary Mode. |
-| Admission And Approval | Owner: close S8, admit S9 to reduce excessive per-S test wait; approved T425 S9 plan applies. |
-| Objective | Audit test coverage and waits; simplify setup, reuse identity-validated builds, run isolated checks concurrently, replace repeated real retirement waits with deterministic policy tests. |
-| Non-goals | No lifecycle policy change, new component/helper, guest/library edits, display deduplication or weakened acceptance. |
-| Reference Baseline | S8 90e57fe09; published r046 eight-file package and retained S8 evidence. |
-| Files And ABI Surface | Test runners/fixtures, existing lifecycle policy test seam only if required, execution guidance and this packet/evidence; no wire ABI change intended. |
+| Admission And Approval | Owner continues S9: replace hard waits with observed operation milestones and reliable keyboard delivery; retain typeahead and all assertions. |
+| Objective | Reduce normal product-test overhead with fresh input/output observations, EDIT state waits, explicit phase timings and pinned cleanup. Measure against the same r022 product; 60 seconds is a target, not a promised result. |
+| Non-goals | No production/protocol change, helper, guest/library edits, weakened assertions, complete-matrix concurrency, lost cold/independent-session coverage or implicit shortening of WOW longevity observation. |
+| Reference Baseline | Initial S9 P 51f09f7d1; unchanged published r022 eight-file package; r029 Product 301534 ms and retained S8 evidence. |
+| Files And ABI Surface | Test observation/runners/build recipes and this packet/plan/evidence only; no production or wire ABI change. |
 | Applicable Rules | Current execution, architecture, coding, document and source-policy authorities. |
-| Verification | Inventory retained assertions; measure before/after elapsed time; deterministic expiry/cancellation/rearm tests; repeat isolated schedule; preserve product and failure gates. |
+| Verification | Same-product repeated Console17/Window17 plus retained WOW; fresh-echo and cleanup identity negatives; supplemental typeahead; stage timings, source/artifact seals and governance/diff review. |
 | Expected Markers | Explicit case assertions, nonzero failure propagation, timing/coverage records, owned-process cleanup and governance pass. |
 | Asset Needs | Existing x86 CCPU40 cache, S8 immutable guest/runtime inputs; no new imports. |
 | Reporting Requirements | Per-suite contracts/dependencies/waits, coverage mapping, measured savings, repeatability and remaining slow/unsupported boundaries. |
 | Stop Conditions | Shared endpoint collision, uncertain coverage equivalence, production deadline change or regression; preserve unrelated work. |
 | Exit Criteria | Measured wait reduction with retained assertions, no routine real ten-second policy waits, build/test/review evidence, required coherent publication if production changes, commit/push. |
-| Original Owner Request | Close S8 and admit S9 to optimize tests because each S takes too long. |
+| Original Owner Request | Continue S9, not close it: replace hard waits with observed milestones and reliable keyboard delivery without weakening retained assertions. |
 | Similar-Issue Sweep | Repeated package builds, fixed sleeps, idle-grace cleanup, competing BaseSrv users, obsolete/no-assertion scenarios and duplicated gates. |
 
 S9 [audit and timing evidence](../etc/evidence/m0-t425-s9-test-throughput.md):
@@ -40,6 +41,18 @@ Complete r029 Console17/Window17 and WOW pass in 301534 ms. r030 publishes
 the identical eight files; r031 published Console/Window smoke and hashes pass.
 Intermediate failed controls and withdrawn experiments remain non-pass in
 the ledger. The speedup percentage is not a whole-suite claim.
+
+Observation-driven continuation r035/r036 repeats all 34 product cases and
+three retained WOW longevity/frontier gates with the identical product. Total
+208148/204913 ms, about 31-32 percent below r029; not the 60-second goal.
+Bounded four-character input requires fresh full echo before Enter; EDIT uses
+actual dialog/menu/shell states. Typeahead keeps continuous delivery. Fresh
+echo and cleanup-identity negatives pass; detailed timings/limits are in the
+same ledger. The current 20-second-per-WOW longevity contract is not shortened.
+Supplemental Console DOS typeahead passes; native/Window typeahead's existing
+contiguous-snapshot assertion fails with both new and immutable old observers.
+Those checks remain non-pass in r037-r039; neither their assertions nor their
+continuous input policy is weakened. Test-contract investigation remains open.
 
 The [S8 ledger](../etc/evidence/m0-t425-s8-worker-frame-deduplication.md) retains
 the owner brief, original-source dispositions, failed predecessors, exact
@@ -59,7 +72,7 @@ scheduler, helper, component, channel or lifecycle policy is introduced.
 
 The S8 accepted cursor/register/route and input ordering capabilities retain
 unchanged producer/input C/header source identities. S9 does not reintroduce
-deduplication or change original mouse/VGA algorithms. Normal input pacing,
+deduplication or change original mouse/VGA algorithms. Diagnostic/typeahead pacing,
 native 30ms sampling, real startup timeout and physical RDP limits remain.
 Owner's transient CAF report was withdrawn as working; no speculative patch.
 
@@ -96,8 +109,9 @@ whole-tree byte-clean pass or a scope expansion.
 
 ## Recent Governance
 
-T425 remains owner-open, not a closed T. The containing reviewed P delivers
-S9 after accepted S8 90e57fe09, updates evidence/plan/execution guidance and
+T425 remains owner-open, not a closed T. Initial P 51f09f7d1 delivers
+initial S9 after accepted S8 90e57fe09, updates evidence/plan/execution guidance and
 preserves unrelated Queue/proposal changes. Documentation governance and
 actual diff/requirement review apply before commit/push. The S9 packet is
-delivered pending owner acceptance; no further implementation is admitted.
+delivered; this test-only continuation does not close S9 or admit another S.
+Test-only work uses build/M0-T425/S9/r033 and later fresh run directories.

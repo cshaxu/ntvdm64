@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "console_snapshot.h"
+#include "input_milestone.h"
 
 static char control_event_report[MAX_PATH];
 static ULONGLONG mouse_burst_started;
@@ -85,11 +86,9 @@ static BOOL WINAPI record_console_control(DWORD event)
     return FALSE; /* Preserve the default termination action. */
 }
 
-/* The scripted command sequence itself is paced at one original 8042 event
- * every 100 ms.  The original worker's delayed IRQ path is measured in
- * microseconds, so this remains deliberately slower than the source-owned
- * hardware queue while keeping a four-key command inside the fixed 5--10
- * second observation window. */
+/* Legacy diagnostic/typeahead pacing is retained. The ordinary matrix can
+ * explicitly opt into bounded input chunks acknowledged by actual echo and
+ * operation milestones; neither path manufactures a product input ACK. */
 #define OBSERVATION_TIMEOUT_MS 10000u
 #define OBSERVATION_TIMEOUT_MAX_MS 60000u
 #define OBSERVATION_INPUT_READY_TIMEOUT_MS 20000u
@@ -720,11 +719,55 @@ static BOOL write_window_key_records(const INPUT_RECORD *records,DWORD count)
     }
     return TRUE;
 }
+static HANDLE scripted_target_process;
+static BOOL milestone_input;
+static unsigned milestone_waits;
+static ULONGLONG milestone_wait_ms;
+
+static BOOL wait_input_milestone(HANDLE output, const char *echo,
+                                const char *contains, const char *absent,
+                                BOOL allow_exit)
+{
+    ULONGLONG started = GetTickCount64();
+    ULONGLONG deadline = started + OBSERVATION_INPUT_READY_TIMEOUT_MS;
+    BOOL completed = FALSE;
+    ++milestone_waits;
+    do {
+        observer_text_view view;
+        HWND window = NULL;
+        if (scripted_target_process &&
+            WaitForSingleObject(scripted_target_process, 0) == WAIT_OBJECT_0)
+            { completed = allow_exit; break; }
+        /* This wait already has its own deadline/death handle. Do not nest
+         * the five-second input-window lookup after the final Window closed. */
+        if (scripted_window_frontend) {
+            window = FindWindowW(L"LibKvmWindow",NULL);
+            if (window && !IsWindowVisible(window)) window = NULL;
+        }
+        if ((!scripted_window_frontend || window) && observer_text_read(output, window,
+                scripted_window_frontend, &view) &&
+            (!echo || observer_prompt_echo(&view, echo)) &&
+            (!contains || observer_view_contains(&view, contains)) &&
+            (!absent || !observer_view_contains(&view, absent))) { completed = TRUE; break; }
+        /* Observation cadence, not unconditional keyboard/command delay. */
+        if (scripted_target_process) {
+            DWORD result = WaitForSingleObject(scripted_target_process, 10);
+            if (result == WAIT_OBJECT_0) { completed = allow_exit; break; }
+            if (result != WAIT_TIMEOUT) break;
+        } else Sleep(10);
+    } while (GetTickCount64() < deadline);
+    milestone_wait_ms += GetTickCount64() - started;
+    return completed;
+}
+
 static BOOL write_console_input_text(HANDLE input, const char *text, DWORD line_delay_ms,
                                      HANDLE output, const char *report)
 {
     const char *cursor;
     unsigned line = 0;
+    char echo[KVM_TEXT_COLUMNS + 1] = {0};
+    unsigned echoed = 0;
+    BOOL observed = milestone_input && line_delay_ms != 0;
 
     if (input == NULL || input == INVALID_HANDLE_VALUE || text == NULL)
         return FALSE;
@@ -793,8 +836,31 @@ static BOOL write_console_input_text(HANDLE input, const char *text, DWORD line_
             } else if(!write_window_key_records(records,record_count))return FALSE;
         } else if (!WriteConsoleInputA(input, records, record_count, &written) ||
             written != record_count) return FALSE;
-        Sleep(OBSERVATION_KEY_EVENT_INTERVAL_MS);
-        if (character == '\r' && line_delay_ms) Sleep(line_delay_ms);
+        if (observed) {
+            if (character == '\r') {
+                /* Every nonempty line was armed by its own full echo before
+                 * Enter. A new empty current prompt cannot be an old one.
+                 * The enclosing verifier still checks exact output/order/code. */
+                if (!echoed || !wait_input_milestone(output,
+                    !_stricmp(echo,"edit") ? NULL : "",
+                    !_stricmp(echo,"edit") ? "Untitled" : NULL, NULL,
+                    _stricmp(echo,"edit") != 0)) return FALSE;
+                echoed = 0; echo[0] = 0;
+            } else {
+                if (echoed >= KVM_TEXT_COLUMNS || (unsigned char)character < 32) return FALSE;
+                echo[echoed++] = character; echo[echoed] = 0;
+                /* At most four characters outstanding; acknowledge their
+                 * actual full echo before another chunk or Enter. Missing
+                 * keys fail the test, never re-inject/retry to conceal loss. */
+                if ((echoed % 4 == 0 || cursor[1] == '\r' || cursor[1] == '\n' || !cursor[1]) &&
+                    !wait_input_milestone(output,echo,NULL,NULL,FALSE)) return FALSE;
+            }
+        } else {
+            /* Explicit zero-delay/typeahead and diagnostic sequences retain
+             * their original policy; do not serialize their consumption. */
+            if (!milestone_input || report) Sleep(OBSERVATION_KEY_EVENT_INTERVAL_MS);
+            if (character == '\r' && line_delay_ms) Sleep(line_delay_ms);
+        }
         if (character == '\r' && report) {
             char path[MAX_PATH];
             snprintf(path, sizeof(path), "%s.line-%02u", report, ++line);
@@ -1486,6 +1552,8 @@ int main(int argc, char **argv)
         return 67;
     }
     observation_started_at = GetTickCount();
+    scripted_target_process = child.hProcess;
+    milestone_input = GetEnvironmentVariableA("MVDM_OBSERVER_MILESTONE_INPUT",NULL,0) != 0;
     /* Publish identity before the optional input gate, so a lifecycle test
      * can select this exact child without assuming a relay process layout. */
     {
@@ -1616,7 +1684,10 @@ int main(int argc, char **argv)
             snprintf(edit_snapshot, sizeof(edit_snapshot), "%s.edit.txt", argv[3]);
             write_console_snapshot(output, edit_snapshot);
             scripted_console_input_delivered = write_console_input_text(input, "\x1b", 0, output, NULL);
-            Sleep(500);
+            if (milestone_input) {
+                scripted_console_input_delivered = scripted_console_input_delivered &&
+                    wait_input_milestone(output,NULL,"Untitled","Welcome to",FALSE);
+            } else Sleep(500);
             menu[0].EventType = KEY_EVENT;
             menu[0].Event.KeyEvent.bKeyDown = TRUE;
             menu[0].Event.KeyEvent.wRepeatCount = 1;
@@ -1645,18 +1716,25 @@ int main(int argc, char **argv)
                 alt[1]=alt[0];alt[1].Event.KeyEvent.bKeyDown=FALSE;
                 scripted_console_input_delivered=scripted_console_input_delivered &&
                     write_window_key_records(alt,ARRAYSIZE(alt));
-                Sleep(500);
+                if (!milestone_input) Sleep(500);
                 scripted_console_input_delivered=scripted_console_input_delivered &&
                     write_console_input_text(input,"f",0,output,NULL);
             } else for (key_index = 0; key_index < ARRAYSIZE(menu); ++key_index) {
                 scripted_console_input_delivered = scripted_console_input_delivered &&
                     WriteConsoleInputA(input, &menu[key_index], 1, &written) && written == 1;
-                Sleep(OBSERVATION_KEY_EVENT_INTERVAL_MS);
+                if (!milestone_input) Sleep(OBSERVATION_KEY_EVENT_INTERVAL_MS);
             }
-            Sleep(500);
+            if (milestone_input) {
+                /* File menu, not a completed WriteConsoleInput call. */
+                scripted_console_input_delivered = scripted_console_input_delivered &&
+                    wait_input_milestone(output,NULL,"Exit",NULL,FALSE);
+            } else Sleep(500);
             scripted_console_input_delivered = scripted_console_input_delivered &&
                 write_console_input_text(input, "x", 0, output, NULL);
-            Sleep(1500);
+            if (milestone_input) {
+                scripted_console_input_delivered = scripted_console_input_delivered &&
+                    wait_input_milestone(output,"",NULL,NULL,FALSE);
+            } else Sleep(1500);
             scripted_console_input_delivered = scripted_console_input_delivered &&
                 write_console_input_text(input,
                     GetEnvironmentVariableA("MVDM_OBSERVER_SHORT_HISTORY",NULL,0) ?
@@ -1760,6 +1838,8 @@ int main(int argc, char **argv)
         }
         report_direct_children(report, child.dwProcessId,wait_status==WAIT_TIMEOUT,NULL);
         fprintf(report, "timeout-ms=%lu\n", (unsigned long)observation_timeout_ms);
+        fprintf(report,"milestone-input=%u milestone-waits=%u milestone-wait-ms=%llu\n",
+            (unsigned)milestone_input,milestone_waits,milestone_wait_ms);
         fprintf(report, "scripted-console-input=%s\n",
                 scripted_console_input ?
                     (scripted_console_input_delivered ? "delivered" : "failed") :

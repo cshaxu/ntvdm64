@@ -10,9 +10,11 @@ param(
     [string]$TerminalObserver,
     [string]$Node='node',
     [string[]]$WowBaselineRoots,
+    [ValidateSet('Observed','Paced')][string]$InputPolicy='Observed',
     [switch]$FullDeadlines
 )
 $ErrorActionPreference='Stop'
+$total=[Diagnostics.Stopwatch]::StartNew()
 $repo=(Resolve-Path "$PSScriptRoot/../..").Path
 $runtime=(Resolve-Path $RuntimeRoot).Path
 $cache=(Resolve-Path $BuildCache).Path
@@ -42,18 +44,24 @@ if($Suite -ne 'Control' -and (!$GuestFixture -or !$WindowObserver -or !$WowBasel
 $null=New-Item -ItemType Directory -Path $log
 $manifest|ConvertTo-Json|Set-Content "$log/runtime-manifest.json"
 $timings=[Collections.Generic.List[object]]::new()
-$total=[Diagnostics.Stopwatch]::StartNew()
+$preparationMs=$total.ElapsedMilliseconds
 $variables=@('MVDM_OBSERVER_PRIVATE_DESKTOP','MVDM_OBSERVER_WINDOW_INPUT','MVDM_OBSERVER_SHORT_HISTORY','TEST_RUNTIME_ROOT',
     'MVDM_TEST_DIRECT_CMD','MVDM_TEST_S34_REPEAT_DIR','OPENNT_BROKER_PRODUCT_BUILD',
-    'OPENNT_VERSION_TEST_BUILD','OPENNT_VERSION_TEST_LOGS','OPENNT_VERSION_TEST_RUNTIME')
+    'OPENNT_VERSION_TEST_BUILD','OPENNT_VERSION_TEST_LOGS','OPENNT_VERSION_TEST_RUNTIME',
+    'MVDM_OBSERVER_MILESTONE_INPUT')
 $old=@{};foreach($name in $variables){$old[$name]=[Environment]::GetEnvironmentVariable($name)}
 function Invoke-Gate([string]$Name,[scriptblock]$Body) {
     $watch=[Diagnostics.Stopwatch]::StartNew();$passed=$false
     try { & $Body;$passed=$true } finally {
         $watch.Stop()
-        $timings.Add([pscustomobject]@{Gate=$Name;ElapsedMs=$watch.ElapsedMilliseconds;Passed=$passed})
-        Stop-IsolatedPackageScope $runtimeScope
-        Stop-IsolatedPackageScope $cacheScope
+        $bodyMs=$watch.ElapsedMilliseconds
+        $cleanup=[Diagnostics.Stopwatch]::StartNew()
+        $cleaned=$false
+        try {Stop-IsolatedPackageScope $runtimeScope;Stop-IsolatedPackageScope $cacheScope;$cleaned=$true}
+        finally {
+            $timings.Add([pscustomobject]@{Gate=$Name;ElapsedMs=$bodyMs;
+                CleanupMs=$cleanup.ElapsedMilliseconds;Passed=($passed -and $cleaned)})
+        }
     }
 }
 function Invoke-ShortRuntime([scriptblock]$Body) {
@@ -77,6 +85,9 @@ function Invoke-ShortRuntime([scriptblock]$Body) {
 }
 try {
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
+    # Only the ordinary shell matrix opts into echo/result milestones.
+    # Other probes may have non-echo input contracts; do not reinterpret them.
+    Remove-Item Env:MVDM_OBSERVER_MILESTONE_INPUT -ErrorAction SilentlyContinue
     Remove-Item Env:MVDM_OBSERVER_WINDOW_INPUT -ErrorAction SilentlyContinue
     if($Suite -ne 'Control'){
         Invoke-ShortRuntime {
@@ -111,7 +122,10 @@ try {
             foreach($mode in @('Console','Window')){
                 if($mode -eq 'Window'){$env:MVDM_OBSERVER_WINDOW_INPUT='1'}else{Remove-Item Env:MVDM_OBSERVER_WINDOW_INPUT -ErrorAction SilentlyContinue}
                 Invoke-Gate "$mode-17" {
-                    & "$repo/tools/audit/Verify-CommandExitStatus.ps1" -Observer $observerPath -PackageRoot Z:\ -ProcessPackageRoot $runtime -LogRoot $log -LogPrefix "$mode-17" -GuestFixturePath $GuestFixture -OrdinaryFrontend
+                    try {
+                        if($InputPolicy -eq 'Observed'){$env:MVDM_OBSERVER_MILESTONE_INPUT='1'}
+                        & "$repo/tools/audit/Verify-CommandExitStatus.ps1" -Observer $observerPath -PackageRoot Z:\ -ProcessPackageRoot $runtime -LogRoot $log -LogPrefix "$mode-17" -GuestFixturePath $GuestFixture -OrdinaryFrontend
+                    }finally{Remove-Item Env:MVDM_OBSERVER_MILESTONE_INPUT -ErrorAction SilentlyContinue}
                 }
             }
         }
@@ -168,7 +182,8 @@ try {
     try {Stop-IsolatedPackageScope $runtimeScope;Stop-IsolatedPackageScope $cacheScope} finally {
         foreach($name in $variables){[Environment]::SetEnvironmentVariable($name,$old[$name])}
         $total.Stop()
-        [pscustomobject]@{Suite=$Suite;ElapsedMs=$total.ElapsedMilliseconds;Gates=$timings.ToArray()}|
+        [pscustomobject]@{Suite=$Suite;ElapsedMs=$total.ElapsedMilliseconds;
+            InputPolicy=$InputPolicy;PreparationMs=$preparationMs;Gates=$timings.ToArray()}|
             ConvertTo-Json -Depth 4|Set-Content "$log/timings.json"
     }
 }

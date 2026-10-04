@@ -3,9 +3,12 @@
 ## Question and admission
 
 Owner accepts S8 90e57fe09 and admits S9 on 2026-10-03 to reduce per-stage
-verification time. The containing reviewed P delivers S9. S9 r022 is published
+verification time. Initial P 51f09f7d1 delivers initial S9 work. S9 r022 is published
 as a coherent eight-file package with S8 recovery retained. T425 stays open
 for owner acceptance. Other-session Queue/proposal changes are excluded.
+Owner subsequently continues S9, without closure, to replace hard test waits
+with fresh observed milestones and improve keyboard delivery. The continuation
+below supersedes the initial pending-acceptance disposition, not its evidence.
 
 ## Inventory and retained contracts
 
@@ -280,3 +283,131 @@ they were left intact rather than terminating a possible owner side-test.
 The containing sequential reviewed commit/push delivers S9. Other-session
 Queue/proposal changes are excluded. T425 remains owner-open; no next S is
 admitted and owner validation is next.
+
+## Owner-approved observation-driven continuation
+
+### Scope and source disposition
+
+This continuation changes only project-authored tests/runners/build recipes and
+their governance/evidence. No product, original mirror, guest, imported library,
+wire ABI, startup/retirement deadline or target scheduling behavior changes.
+The eight r022 product images equal r029 and the published r030 hashes above.
+No new product publication is necessary for this test-only P; O:/winnt remains
+the same accepted package. Queue/proposal edits from the other session remain
+excluded. S9 is still active; this is not its closure or a 60-second claim.
+
+The initial audit identified 53.6/53.8 seconds of explicit ordinary keyboard,
+line and EDIT sleeps per Console/Window matrix. Those are nominal inserted
+waits, not measured exclusive CPU/runtime costs or a guaranteed saving.
+Repeated CIM discovery/cleanup and cold-start overhead were initially unquantified.
+WOW's three serialized 20-second longevity observations are a separate retained
+contract, not interchangeable with first frontier appearance.
+
+### Changes and completion predicates
+
+- Invoke-ProductVerification opts only its ordinary 17-case shell matrices into
+  MVDM_OBSERVER_MILESTONE_INPUT. Other control/non-echo probes retain their
+  own contract. InputPolicy=Observed is default; Paced retains legacy input for
+  a same-product A/B diagnostic. Environment is restored on all exits.
+- Ordinary input has at most four outstanding characters. Before more input
+  or Enter, the actual current cursor row must contain the complete new command
+  prefix and a matching cursor, with no dirty tail. WriteConsoleInput record
+  count / Window message return is only delivery, never consumption. Missing
+  echo fails; keys are not reinjected or retried to success.
+- Each command is armed by its full pre-Enter echo. Completion requires a new
+  empty current prompt, EDIT's actual Untitled surface, or the real direct
+  launcher process completion. The existing verifier separately retains exact
+  output, counts, per-operation MEM snapshots, ordering and exit-code checks.
+  Historical prompts elsewhere cannot acknowledge this operation.
+- EDIT observes welcome-dialog dismissal, File menu Exit, and return to the
+  shell, replacing its unconditional 500/1500-ms sleeps. Its four post-EDIT
+  MEM operations in the short-history fixture are unchanged. Console Alt-F
+  and Window's actual bare-ALT then File input routes remain distinct.
+- Window observation copies the actual selected text-frame context prefix,
+  following window_text_geometry_probe's existing test-only mechanism and
+  compiling against the actual library declaration. It validates the expected
+  frontend PID, pins the process, checks two matching copies/dimensions/cells,
+  and rejects a torn or non-text snapshot. Cursor blink phase is not an input
+  milestone. It does not use the potentially stale visible Console mirror to
+  acknowledge Window keys/menu state. This is not a new production API/channel.
+- Explicit zero-line-delay/typeahead keeps its original continuous delivery
+  policy; it is not serialized on prompt consumption. Ordinary milestone
+  observation uses bounded 10-ms sampling plus direct process-handle waits,
+  not a claimed pure event notification that the public display lacks.
+- The old five-second Window lookup is not nested inside post-exit waits:
+  target death is checked before the nonblocking HWND lookup. Startup/window
+  delivery discovery deadlines otherwise remain unchanged.
+- Package cleanup makes one ownership/ancestry discovery, pins all selected
+  process handles, validates image and creation time, kills only those objects,
+  waits on their handles and checks residuals. It no longer re-enumerates CIM
+  per PID or polls process disappearance. WOW shares these identity checks.
+- Timings now include driver preparation, gate body, gate cleanup, per-case
+  body/cleanup and observed-input wait totals. Cleanup failure marks a gate
+  failed even if its assertions succeeded. No case, timeout, output assertion,
+  cold-start, independent-session or typeahead contract is removed.
+
+### Runs and retained intermediate evidence
+
+- r033: standalone observation Ninja graph; MSVC14.43/SDK22621 x86 /MT,
+  C11 /W4 /WX; actual header dependency invalidates the copied Window layout.
+  input-milestone-test passes partial/missing echo, stale prompt/current-row,
+  cursor/tail and wrong Window-PID negatives. verify-cleanup-identity passes
+  stale creation time and unowned path negatives without killing its process.
+- Initial restricted Ninja invocation did not reach compilation; only its
+  exact r033 processes were stopped. Escalated compile exposed the headers'
+  C11 requirement; the recipe was corrected, then compilation passed. These
+  predecessors are not passed builds.
+- r034: all eight selected Console/Window empty, nested-empty, mem-repeat and
+  EDIT cases pass. Initial post-exit Window lookup still inserted five seconds;
+  this measurement is retained, not represented as the final optimization.
+- r035: complete same-product Product pass, 17 Console + 17 Window plus all
+  three retained WOW longevity/frontier observations. Driver total 208148 ms,
+  including 1607-ms preparation; WOW 67031 ms, Console17 62911 ms, Window17
+  72569 ms. Gate cleanup separately totals 2540 ms. Per-case body/cleanup
+  details are in the matrix summary JSON, not conflated with group overhead.
+  Compared with r029's 301534 ms this is about 31.0 percent less. Old total
+  excluded preflight, so this is not a precisely equal stopwatch boundary.
+- r036 final repeat passes all 34 matrix cases and three unchanged WOW
+  observations: total 204913 ms; preparation 1254, WOW 66769, Console17 62134,
+  Window17 70549 ms; separate gate cleanup 2843 ms. This is about 32.0 percent
+  below r029, with the same preflight-stopwatch caveat. r035/r036 are two full
+  passes, not retries hiding a failed full invocation.
+- r037 supplemental Console nested-mem-typeahead passes all three distinct
+  MEM execution witnesses. Console dos-native-typeahead exits with expected
+  code/input-delivery but fails the existing contiguous-snapshot merge assertion.
+  Its milestone-waits=0 proves it did not opt into serial consumption waits.
+- r038 uses the immutable r026 old observer on that same dos-native-typeahead
+  and product: it fails the same contiguous-snapshot assertion. Window's
+  nested-mem-typeahead also fails that existing merge assertion. These are
+  retained failures, not product/queue passes or waived assertions. This
+  continuation does not alter Merge-ConsoleTextSnapshots or typeahead delivery.
+  Further test-contract investigation is required; S9 remains open.
+- r039 confirms the same Window nested-mem-typeahead assertion failure with
+  the immutable r026 old observer. The matched failures establish that the new
+  milestone policy did not introduce this assertion failure; they do not prove
+  every queue/handoff property or authorize weakening the test. Raw reports and
+  verdicts remain in r037-r039. Final input/identity negatives, script parsing,
+  documentation governance and diff checks pass; final test input/artifact
+  identities are retained under r033/final-inputs.json.
+
+Reproduce with Invoke-ProductVerification.ps1 -Suite Product, RuntimeRoot
+build/M0-T425/S9/r022/runtime, BuildCache build/M0-T424/S2/r001, Observer
+build/M0-T425/S9/r033/console-startup-observer.exe, WindowObserver the sibling
+worker-window-snapshot.exe, GuestFixture build/M0-T425/S9/r008/G7.COM,
+WowBaselineRoots build/M0-T425/S9/r029 and a fresh repository-build LogRoot.
+Use InputPolicy Observed or Paced with otherwise identical package, cases,
+deadlines and assertions. Compare preparation, case/gate bodies and cleanup
+separately; retain failed/timeout reports rather than retrying them into a pass.
+
+### Remaining boundary
+
+The current 20-second WOW longevity contract alone exceeds the 60-second whole
+Product goal when retained serially. A first-frontier quick check could be
+separate, but must never replace or be called equivalent to longevity. Further
+shared-environment work must preserve explicit cold launches, independent
+sessions, actual completion codes and restoration/fault assertions. No warm
+reuse or reduced matrix has been silently substituted in this continuation.
+Shell echo observation is intentionally opt-in: password/non-echo applications,
+wrapped command input and graphics surfaces are not falsely acknowledged.
+Physical keyboard focus/RDP behavior is not established by private-desktop
+message injection. The broader Control suite is not a new pass in this P.

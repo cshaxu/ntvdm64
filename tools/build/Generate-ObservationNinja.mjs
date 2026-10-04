@@ -12,7 +12,7 @@ const source = (path) => `${root}/${path}`;
 mkdirSync(build, { recursive: true });
 writeFileSync(resolve(build, 'build.ninja'), [
   'ninja_required_version = 1.10',
-  'cflags = /nologo /TC /c /MT /W4 /WX /D_CRT_SECURE_NO_WARNINGS /showIncludes',
+  'cflags = /nologo /TC /std:c11 /c /MT /W4 /WX /wd4201 /D_CRT_SECURE_NO_WARNINGS /showIncludes /I"' + source('src/ntcon-exe') + '"',
   'rule cc',
   '  command = cl.exe $cflags /Fo$out $in',
   '  deps = msvc',
@@ -22,6 +22,10 @@ writeFileSync(resolve(build, 'build.ninja'), [
   'build console-startup-observer.obj: cc ' +
     source('tests/observation/console_startup_observer.c'),
   'build console-startup-observer.exe: link console-startup-observer.obj',
+  'build input-milestone-test.obj: cc ' + source('tests/observation/input_milestone_test.c'),
+  'build input-milestone-test.exe: link input-milestone-test.obj',
+  'build worker-window-snapshot.obj: cc ' + source('tests/observation/worker_window_snapshot.c'),
+  'build worker-window-snapshot.exe: link worker-window-snapshot.obj',
   'default console-startup-observer.exe',
   ''
 ].join('\n'));

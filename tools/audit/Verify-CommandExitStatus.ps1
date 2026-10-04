@@ -18,6 +18,7 @@ if ($env:MVDM_OBSERVER_WINDOW_INPUT -and $env:MVDM_OBSERVER_PRIVATE_DESKTOP -ne 
     throw 'Window input tests require MVDM_OBSERVER_PRIVATE_DESKTOP=1; no product process was started.'
 }
 . (Join-Path $PSScriptRoot 'Merge-ConsoleTextSnapshots.ps1')
+. (Join-Path $PSScriptRoot '../../tests/observation/isolated_package_cleanup.ps1')
 $Observer = (Resolve-Path -LiteralPath $Observer).Path
 $PackageRoot = (Resolve-Path -LiteralPath $PackageRoot).Path
 $LogRoot = (Resolve-Path -LiteralPath $LogRoot).Path
@@ -224,6 +225,8 @@ try {
         $observedDescendants = [Collections.Generic.HashSet[int]]::new()
         $nativeWaiters=@{}
         $frontendWaiters=@{}
+        $caseWatch=[Diagnostics.Stopwatch]::StartNew()
+        $cleanupMs=0
         $observation = Start-Process -FilePath $Observer -ArgumentList $arguments -WorkingDirectory $PackageRoot -WindowStyle Hidden -PassThru
         try {
             if($case.Supplemental){
@@ -440,9 +443,11 @@ try {
                     throw 'Version-rejected worker did not release the prepared launch back to an empty broker'
                 }
             }
-            $results += [pscustomobject]@{ Case=$case.Name; Expected=$case.Code; Actual=$actual; Report=$report }
+            $results += [pscustomobject]@{ Case=$case.Name; Expected=$case.Code; Actual=$actual; Report=$report;
+                BodyMs=$caseWatch.ElapsedMilliseconds;CleanupMs=0 }
             Write-Output "PASS $($case.Name): $actual"
         } finally {
+            $cleanupWatch=[Diagnostics.Stopwatch]::StartNew()
             foreach($probe in $nativeWaiters.Values){$probe.Dispose()}
             foreach($probe in $frontendWaiters.Values){$probe.Dispose()}
             # A runner timeout can precede normal result parsing. Recover only
@@ -457,30 +462,16 @@ try {
             # Unrelated package processes are never killed by image name.
             if ($launcherId) {
                 $owned=@($launcherId) + $reportedChildren + @($observedDescendants)
+                $packageRows=@(Get-PackageProcesses)
                 for ($depth=0; $depth -lt 5; ++$depth) {
-                    $children=@(Get-PackageProcesses | Where-Object { $_.ParentProcessId -in $owned -and $_.ProcessId -notin $owned })
+                    $children=@($packageRows | Where-Object { $_.ParentProcessId -in $owned -and $_.ProcessId -notin $owned })
                     if (!$children.Count) { break }
                     $owned += @($children.ProcessId)
                 }
-                foreach ($id in ($owned | Sort-Object -Descending)) {
-                    $process=Get-PackageProcesses | Where-Object { $_.ProcessId -eq $id }
-                    if ($process -and $id -in $owned) {
-                        # COMMAND can hand its Console to a nested owner just
-                        # before this observer regains control.  Terminate the
-                        # exact recorded test tree, then tolerate a natural
-                        # exit race; never expand cleanup by image name.
-                        Stop-Process -Id $id -Force -ErrorAction SilentlyContinue
-                    }
-                }
-                $deadline = [Environment]::TickCount64 + 5000
-                do {
-                    $remaining = @(Get-PackageProcesses | Where-Object {
-                        $_.ProcessId -in $owned
-                    })
-                    if (!$remaining.Count) { break }
-                    Start-Sleep -Milliseconds 100
-                } while ([Environment]::TickCount64 -lt $deadline)
+                Stop-IdentityCheckedProcesses @($packageRows | Where-Object {$_.ProcessId -in $owned}) $productPaths
             }
+            $cleanupMs=$cleanupWatch.ElapsedMilliseconds
+            if($results.Count -and $results[-1].Case -eq $case.Name){$results[-1].CleanupMs=$cleanupMs}
         }
         if ((Get-PackageProcesses).Count) { throw 'Unowned package process remains; stopping matrix.' }
     }

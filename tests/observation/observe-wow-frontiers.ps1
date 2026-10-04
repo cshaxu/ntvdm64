@@ -14,6 +14,7 @@ param(
 # Read-only GUI observations on an unswitched desktop. This does not assert
 # gameplay, send input, change a profile or count a timeout as acceptance.
 $ErrorActionPreference='Stop'
+. "$PSScriptRoot/isolated_package_cleanup.ps1"
 if($Prefix -notmatch '^[a-z0-9-]+$'){throw 'Invalid prefix'}
 $Observer=(Resolve-Path $Observer).Path
 $WindowObserver=(Resolve-Path $WindowObserver).Path
@@ -94,11 +95,14 @@ foreach($guest in $Guests){
         Get-Content -LiteralPath ($stem+'.txt') | Select-String '^result=|^exit='
         if(Test-Path ($stem+'-windows.txt')){Get-Content -LiteralPath ($stem+'-windows.txt')}
     } finally {
-        foreach($item in @(PackageProcesses)){
-            $process=Get-Process -Id $item.ProcessId -ErrorAction SilentlyContinue
-            if($process){$process.Kill();if(!$process.WaitForExit(5000)){throw 'Package cleanup timeout'}}
+        Stop-IdentityCheckedProcesses @(PackageProcesses) $paths
+        if((PackageProcesses).Count){throw 'Owned WOW package process remains'}
+        if($launcher){
+            # Pin the actual observer before testing/ending it, not a reused PID.
+            $null=$launcher.Handle
+            if(!$launcher.HasExited){$launcher.Kill();if(!$launcher.WaitForExit(5000)){throw 'Observer cleanup timeout'}}
+            $launcher.Dispose()
         }
-        if($launcher -and !$launcher.HasExited){$launcher.Kill();$launcher.WaitForExit()}
     }
 }
 if((Get-FileHash (Join-Path $PackageRoot 'SYSTEM.INI')).Hash -ne $profile.Hash){throw 'Profile changed'}
