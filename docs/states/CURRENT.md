@@ -33,11 +33,14 @@ NTVDM execution-performance recovery, is admitted as T429. Only S1 is active.
 
 ## Admission State
 
-This is documentation-only admission. No T429 source modification, build,
-benchmark, performance improvement or publication is claimed yet. The
-current source still calls mvdm_softpc_report_nt_transition at DECODE in
-src/mvdm/softpc.new/base/ccpu386/c_main.c; its actual release cost and the
-input/video bottleneck hypotheses remain to be measured under S1.
+S1 initial measurement is recorded in
+[performance baseline](../etc/evidence/m0-t429-s1-performance-baseline.md):
+optional buffered test-observer timing, 42 real serial COMMAND/EDIT/native-control
+samples and two missing-marker negatives pass; the actual disabled diagnostic
+provider has a separately measured isolated cost. The ordinary fixture's
+observed Console is 120x30, not an assumed 80 columns. Production and published
+eight-file hashes remain unchanged; no speedup is claimed. Raw-input/queue/IRQ
+and producer/transfer/presentation attribution remain open. S1 is not closed.
 
 The proposal supplies the bounded S1-S4 sequence: baseline measurement;
 release hot-loop diagnostic removal; only proven input/producer repair;

@@ -19,6 +19,35 @@
 static char control_event_report[MAX_PATH];
 static ULONGLONG mouse_burst_started;
 static DWORD mouse_burst_elapsed;
+/* Optional test-only timeline. Buffer observations until target completion:
+ * no diagnostic file I/O on the measured input/presentation path. These are
+ * observer-visible milestones, not invented worker/guest acknowledgements. */
+static BOOL performance_timeline;
+static ULONGLONG performance_origin;
+static unsigned performance_count;
+static BOOL performance_overflow;
+static struct {
+    ULONGLONG elapsed_ms, wait_ms;
+    BOOL observed;
+    char phase[32], detail[81];
+} performance_samples[1024];
+static void record_performance(const char *phase, const char *detail,
+                               ULONGLONG wait_ms, BOOL observed)
+{
+    unsigned index;
+    if (!performance_timeline) return;
+    index = performance_count;
+    if (index == ARRAYSIZE(performance_samples)) {
+        performance_overflow = TRUE;
+        return;
+    }
+    ++performance_count;
+    performance_samples[index].elapsed_ms = GetTickCount64() - performance_origin;
+    performance_samples[index].wait_ms = wait_ms;
+    performance_samples[index].observed = observed;
+    snprintf(performance_samples[index].phase, sizeof(performance_samples[index].phase), "%s", phase);
+    snprintf(performance_samples[index].detail, sizeof(performance_samples[index].detail), "%s", detail ? detail : "");
+}
 static BOOL CALLBACK report_timeout_control(HWND window, LPARAM context)
 {
     FILE *report=(FILE *)context;
@@ -757,6 +786,8 @@ static BOOL wait_input_milestone(HANDLE output, const char *echo,
         } else Sleep(10);
     } while (GetTickCount64() < deadline);
     milestone_wait_ms += GetTickCount64() - started;
+    record_performance(contains ? "visible-text" : "prompt-echo",
+        contains ? contains : echo, GetTickCount64() - started, completed);
     return completed;
 }
 
@@ -1552,6 +1583,8 @@ int main(int argc, char **argv)
         return 67;
     }
     observation_started_at = GetTickCount();
+    performance_timeline = GetEnvironmentVariableA("MVDM_OBSERVER_PERFORMANCE",NULL,0) != 0;
+    performance_origin = GetTickCount64();
     scripted_target_process = child.hProcess;
     milestone_input = GetEnvironmentVariableA("MVDM_OBSERVER_MILESTONE_INPUT",NULL,0) != 0;
     /* Publish identity before the optional input gate, so a lifecycle test
@@ -1590,6 +1623,8 @@ int main(int argc, char **argv)
         /* Await visible COMMAND readiness, without an execution-core hook. */
         scripted_console_input_ready = wait_for_console_prompt(output,
             OBSERVATION_INPUT_READY_TIMEOUT_MS, scripted_console_input_marker);
+        record_performance("startup-ready", scripted_console_input_marker,
+            GetTickCount64() - performance_origin, scripted_console_input_ready);
         if (scripted_console_input_ready) {
             /* Snapshot the exact shared CONOUT$ buffer after original guest
              * stream output but before this observer queues any key. */
@@ -1653,9 +1688,14 @@ int main(int argc, char **argv)
             }
             scripted_console_input_delivered =
                 ((!GetEnvironmentVariableA("MVDM_OBSERVER_CAF_RETURN",NULL,0) &&
-                  !GetEnvironmentVariableA("MVDM_OBSERVER_WINDOW_INPUT",NULL,0)) || console_caf_return(input,argv[3])) &&
-                write_console_input_text(input,scripted_console_input_text,
+                  !GetEnvironmentVariableA("MVDM_OBSERVER_WINDOW_INPUT",NULL,0)) || console_caf_return(input,argv[3]));
+            record_performance("route-ready", scripted_window_frontend ? "Window" : "Console",
+                0, scripted_console_input_delivered);
+            if (scripted_console_input_delivered) {
+                if (observe_edit_return) record_performance("edit-submit", "edit.com", 0, TRUE);
+                scripted_console_input_delivered = write_console_input_text(input,scripted_console_input_text,
                     scripted_console_line_delay_ms,output,argv[3]);
+            }
             if(scripted_console_input_delivered && scripted_console_function_key) {
                 INPUT_RECORD keys[2]={0};DWORD written=0;
                 unsigned key=scripted_console_function_key;
@@ -1680,6 +1720,7 @@ int main(int argc, char **argv)
         char edit_snapshot[MAX_PATH];
         observed_console_mouse_mode = wait_for_console_mouse_mode(input,
             &observed_console_input_mode, OBSERVATION_INPUT_READY_TIMEOUT_MS);
+        record_performance("edit-mouse-mode", "Console mode only", 0, observed_console_mouse_mode);
         if (observed_console_mouse_mode) {
             snprintf(edit_snapshot, sizeof(edit_snapshot), "%s.edit.txt", argv[3]);
             write_console_snapshot(output, edit_snapshot);
@@ -1762,6 +1803,8 @@ int main(int argc, char **argv)
     observation_wait_ms = observation_elapsed_ms >= observation_timeout_ms ? 0u :
         observation_timeout_ms - observation_elapsed_ms;
     wait_status = WaitForSingleObject(child.hProcess, observation_wait_ms);
+    record_performance("direct-completion", "run16 receipt/exit", 0,
+        wait_status == WAIT_OBJECT_0);
     if(mouse_burst_started)mouse_burst_elapsed=(DWORD)(GetTickCount64()-mouse_burst_started);
     capture_process_image(child.dwProcessId, &image_identity);
     if (wait_status == WAIT_TIMEOUT) {
@@ -1840,6 +1883,16 @@ int main(int argc, char **argv)
         fprintf(report, "timeout-ms=%lu\n", (unsigned long)observation_timeout_ms);
         fprintf(report,"milestone-input=%u milestone-waits=%u milestone-wait-ms=%llu\n",
             (unsigned)milestone_input,milestone_waits,milestone_wait_ms);
+        if (performance_timeline) {
+            unsigned index;
+            fprintf(report,"performance-samples=%u overflow=%u\n",performance_count,(unsigned)performance_overflow);
+            for (index=0;index<performance_count;++index)
+                fprintf(report,"performance phase=%s elapsed-ms=%llu wait-ms=%llu observed=%u detail=%s\n",
+                    performance_samples[index].phase,performance_samples[index].elapsed_ms,
+                    performance_samples[index].wait_ms,(unsigned)performance_samples[index].observed,
+                    performance_samples[index].detail);
+            if (performance_overflow) report_failed=1;
+        }
         fprintf(report, "scripted-console-input=%s\n",
                 scripted_console_input ?
                     (scripted_console_input_delivered ? "delivered" : "failed") :

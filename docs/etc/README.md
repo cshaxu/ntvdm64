@@ -2,6 +2,7 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T429 S1 performance baseline](evidence/m0-t429-s1-performance-baseline.md) | M0 T429 S1 | Initial real EDIT/COMMAND/native-control timings, measurement negatives and isolated diagnostic cost; remaining queue/IRQ attribution is open. | Retain through T429 acceptance. |
 | [T428 S6 ownership naming](evidence/m0-t428-s6-ownership-naming.md) | M0 T428 S6 | Frontend-private API/build ownership and final sharing/caller audit, integrated verification and published delivery. | Retained accepted T428 evidence. |
 | [T428 S5 worker association](evidence/m0-t428-s5-worker-association.md) | M0 T428 S5 | Existing watch authority, shared GUI reuse, native close race and verified paired cancellation/publication. | Retain through T428 acceptance. |
 | [T428 S4 common worker shutdown](evidence/m0-t428-s4-common-worker-shutdown.md) | M0 T428 S4 | Shared local close mechanism, native pre-text control registration and real acknowledgment verification/publication. | Retain through T428 acceptance. |
