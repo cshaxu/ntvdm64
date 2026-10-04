@@ -358,6 +358,12 @@ DWORD service_queue_native_command(OPENNT_BASE_CONNECTION *connection,DWORD pid,
     for (link=connection->service->connections.Flink;link!=&connection->service->connections;link=link->Flink) {
         OPENNT_BASE_CONNECTION *root=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
         if (capability && root->process.SequenceNumber!=root_generation) continue;
+        if(capability) {
+            HANDLE origin=NULL;
+            error=service_acquire_console_context(root,connection->console,worker_generation,&origin);
+            if(error)goto done;
+            CloseHandle(execution);execution=origin;
+        }
         connection->native_command_payload=owned_payload;owned_payload=NULL;
         connection->native_command_bytes=bytes;connection->native_command_pending=TRUE;
         connection->frontend_execution=execution;execution=NULL;
@@ -474,6 +480,31 @@ done:
 }
 
 
+/* Caller holds the service lock. Completion is original DOS receipt state;
+ * origin is the existing inherited context, never physical PID membership. */
+DWORD service_prepare_parent_resume(OPENNT_BASE_CONNECTION *caller,
+    DWORD root_generation,BOOL *native_parent)
+{
+    LIST_ENTRY *link;
+    *native_parent=FALSE;
+    if(!caller->dos_completion_read || !caller->execution_worker_generation)
+        return ERROR_INVALID_STATE;
+    for(link=caller->service->connections.Flink;link!=&caller->service->connections;link=link->Flink) {
+        OPENNT_BASE_CONNECTION *parent=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
+        if(parent->process.SequenceNumber!=caller->execution_worker_generation)continue;
+        if(parent->worker_failed || WaitForSingleObject(parent->process.ProcessHandle,0)!=WAIT_TIMEOUT)
+            return ERROR_PROCESS_ABORTED;
+        if(parent->native_worker) {
+            if(parent->native_root!=root_generation || !parent->native_inflight)
+                return ERROR_INVALID_STATE;
+            caller->selected_native_generation=parent->process.SequenceNumber;
+            *native_parent=TRUE;return ERROR_SUCCESS;
+        }
+        return parent->process.fVDM && !parent->wow ? ERROR_SUCCESS : ERROR_ACCESS_DENIED;
+    }
+    return ERROR_PROCESS_ABORTED;
+}
+
 DWORD OpenNtBaseServiceSubmitNativeRequest(OPENNT_BASE_CONNECTION *caller,DWORD pid,
     DWORD generation,HANDLE frontend,DWORD bytes,BYTE *payload,
     HANDLE *target,HANDLE *receipt,DWORD *request)
@@ -493,6 +524,15 @@ DWORD OpenNtBaseServiceSubmitNativeRequest(OPENNT_BASE_CONNECTION *caller,DWORD 
         if(error)return error;
         CloseHandle(root);
     } else if(!bytes)return ERROR_INVALID_PARAMETER;
+    if(!bytes) {
+        BOOL native_parent=FALSE;
+        if(payload)return ERROR_INVALID_PARAMETER;
+        EnterCriticalSection(&caller->service->lock);
+        error=service_prepare_parent_resume(caller,root_generation,&native_parent);
+        if(!error && !native_parent)caller->dos_completion_read=FALSE;
+        LeaveCriticalSection(&caller->service->lock);
+        if(error || !native_parent)return error;
+    }
     if(bytes) {
         run16_native_launch_packet packet;WCHAR *strings[4];
         error=run16_native_launch_unpack(payload,bytes,&packet,strings);
@@ -544,6 +584,7 @@ DWORD OpenNtBaseServiceSubmitNativeRequest(OPENNT_BASE_CONNECTION *caller,DWORD 
     LeaveCriticalSection(&caller->service->lock);
 done:
     EnterCriticalSection(&caller->service->lock);
+    if(!error && !bytes)caller->dos_completion_read=FALSE;
     if(startup && caller->native_start_event==startup) {
         caller->native_start_event=NULL;caller->native_start_worker=0;
         caller->native_start_request=0;caller->native_start_reported=FALSE;

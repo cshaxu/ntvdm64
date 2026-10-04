@@ -984,16 +984,41 @@ done:
 }
 
 
+/* Caller holds the existing service lock and has authenticated/admitted root
+ * and origin. A copied inherited locator never supplies either identity. */
+DWORD service_acquire_console_context(OPENNT_BASE_CONNECTION *root,HANDLE console,
+    DWORD worker_generation,HANDLE *capability)
+{
+    OPENNT_BASE_CONSOLE_CONTEXT *context=NULL;
+    LIST_ENTRY *link;BOOL created=FALSE;DWORD error;
+    *capability=NULL;
+    for(link=root->service->console_contexts.Flink;link!=&root->service->console_contexts;link=link->Flink) {
+        OPENNT_BASE_CONSOLE_CONTEXT *candidate=CONTAINING_RECORD(link,OPENNT_BASE_CONSOLE_CONTEXT,link);
+        if(candidate->root==root && candidate->console==console &&
+            candidate->worker_generation==worker_generation){context=candidate;break;}
+    }
+    if(!context) {
+        context=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*context));
+        if(!context)return ERROR_NOT_ENOUGH_MEMORY;
+        context->capability=CreateEventW(NULL,TRUE,FALSE,NULL);
+        if(!context->capability){error=GetLastError();HeapFree(GetProcessHeap(),0,context);return error;}
+        context->root=root;context->console=console;context->worker_generation=worker_generation;
+        InsertTailList(&root->service->console_contexts,&context->link);created=TRUE;
+    }
+    if(DuplicateHandle(GetCurrentProcess(),context->capability,GetCurrentProcess(),
+        capability,SYNCHRONIZE,FALSE,0))return ERROR_SUCCESS;
+    error=GetLastError();if(created)service_delete_console_context(context);
+    return error;
+}
+
 DWORD OpenNtBaseServiceAcquireConsoleContext(OPENNT_BASE_CONNECTION *connection,
     DWORD pid,DWORD generation,HANDLE frontend,HANDLE *capability)
 {
     OPENNT_BASE_SERVICE *service;
     OPENNT_BASE_CONNECTION *root=NULL;
-    OPENNT_BASE_CONSOLE_CONTEXT *context=NULL;
     HANDLE root_process=NULL;
     DWORD root_generation=0,error;
     LIST_ENTRY *link;
-    BOOL created=FALSE;
     if (!capability) return ERROR_INVALID_PARAMETER;
     *capability=NULL;
     if (!connection) return ERROR_ACCESS_DENIED;
@@ -1018,24 +1043,9 @@ DWORD OpenNtBaseServiceAcquireConsoleContext(OPENNT_BASE_CONNECTION *connection,
     if (!root || root->frontend_closing || WaitForSingleObject(root_process,0)!=WAIT_TIMEOUT) {
         error=ERROR_PIPE_NOT_CONNECTED;goto done;
     }
-    for (link=service->console_contexts.Flink;link!=&service->console_contexts;link=link->Flink) {
-        OPENNT_BASE_CONSOLE_CONTEXT *candidate=CONTAINING_RECORD(link,OPENNT_BASE_CONSOLE_CONTEXT,link);
-        if (candidate->root==root && candidate->console==connection->console) { context=candidate;break; }
-    }
-    if (!context) {
-        context=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*context));
-        if (!context) { error=ERROR_NOT_ENOUGH_MEMORY;goto done; }
-        context->capability=CreateEventW(NULL,TRUE,FALSE,NULL);
-        if (!context->capability) { error=GetLastError();HeapFree(GetProcessHeap(),0,context);goto done; }
-        context->root=root;context->console=connection->console;
-        InsertTailList(&service->console_contexts,&context->link);
-        created=TRUE;
-    }
-    if (!DuplicateHandle(GetCurrentProcess(),context->capability,GetCurrentProcess(),
-        capability,SYNCHRONIZE,FALSE,0)) {
-        error=GetLastError();
-        if (created) service_delete_console_context(context);
-    }
+    error=service_acquire_console_context(root,connection->console,
+        connection->process.fVDM || connection->native_worker ? generation :
+        connection->execution_worker_generation,capability);
 done:
     LeaveCriticalSection(&service->lock);
     CloseHandle(root_process);
@@ -1066,6 +1076,7 @@ DWORD OpenNtBaseServiceBindConsoleContext(OPENNT_BASE_CONNECTION *connection,
         }
         if (connection->console && connection->console!=context->console) break;
         connection->console=context->console;
+        connection->execution_worker_generation=context->worker_generation;
         error=ERROR_SUCCESS;break;
     }
 done:

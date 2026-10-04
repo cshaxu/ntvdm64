@@ -4,6 +4,77 @@
 #include <service_internal.h>
 #include <stdio.h>
 
+int fixture_parent_resume_origin(void)
+{
+    OPENNT_BASE_SERVICE *service=OpenNtBaseServiceStart();
+    OPENNT_BASE_CONNECTION *root=NULL,*parent=NULL,*caller=NULL;
+    HANDLE self=NULL,native=NULL,dos=NULL,again=NULL;
+    HANDLE target=NULL,receipt=NULL;DWORD request=0;
+    PROCESS_INFORMATION children[2]={{0}};STARTUPINFOW startup={sizeof(startup)};
+    WCHAR image[MAX_PATH],command[MAX_PATH+32];DWORD i;
+    DWORD rg=0,pg=0,cg=0;BOOL required=FALSE;
+#define ORIGIN_CHECK(x) do {if(!(x)){fprintf(stderr,"FAIL origin %d\n",__LINE__);return 1;}}while(0)
+    self=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION|SYNCHRONIZE,FALSE,GetCurrentProcessId());
+    ORIGIN_CHECK(service && self);
+    ORIGIN_CHECK(!OpenNtBaseServiceConnect(service,self,&root,&rg));
+    ORIGIN_CHECK(GetModuleFileNameW(NULL,image,ARRAYSIZE(image)));
+    for(i=0;i<2;++i) {
+        ORIGIN_CHECK(swprintf_s(command,ARRAYSIZE(command),L"\"%ls\" --reservation-child",image)>0);
+        ORIGIN_CHECK(CreateProcessW(NULL,command,NULL,NULL,FALSE,CREATE_SUSPENDED|CREATE_NO_WINDOW,
+            NULL,NULL,&startup,&children[i]));
+    }
+    ORIGIN_CHECK(!OpenNtBaseServiceConnect(service,children[0].hProcess,&parent,&pg));
+    ORIGIN_CHECK(!OpenNtBaseServiceConnect(service,children[1].hProcess,&caller,&cg));
+    EnterCriticalSection(&service->lock);
+    root->frontend_capability=CreateEventW(NULL,TRUE,FALSE,NULL);
+    ORIGIN_CHECK(root->frontend_capability);
+    ORIGIN_CHECK(!service_acquire_console_context(root,NULL,pg,&native));
+    ORIGIN_CHECK(!service_acquire_console_context(root,NULL,rg,&dos));
+    ORIGIN_CHECK(!service_acquire_console_context(root,NULL,pg,&again));
+    LeaveCriticalSection(&service->lock);
+    ORIGIN_CHECK(!OpenNtBaseServiceBindConsoleContext(caller,children[1].dwProcessId,cg,native));
+    ORIGIN_CHECK(caller->execution_worker_generation==pg);
+    EnterCriticalSection(&service->lock);
+    parent->native_worker=TRUE;parent->native_root=rg;parent->native_inflight=1;
+    ORIGIN_CHECK(service_prepare_parent_resume(caller,rg,&required)==ERROR_INVALID_STATE);
+    caller->dos_completion_read=TRUE;
+    ORIGIN_CHECK(service_prepare_parent_resume(caller,rg+1,&required)==ERROR_INVALID_STATE);
+    ORIGIN_CHECK(!service_prepare_parent_resume(caller,rg,&required) && required);
+    ORIGIN_CHECK(caller->selected_native_generation==pg);
+    parent->worker_failed=TRUE;
+    ORIGIN_CHECK(service_prepare_parent_resume(caller,rg,&required)==ERROR_PROCESS_ABORTED);
+    parent->worker_failed=FALSE;parent->native_worker=FALSE;
+    caller->selected_native_generation=0;
+    LeaveCriticalSection(&service->lock);
+    /* Same root/Console but another origin must not reuse the native locator. */
+    ORIGIN_CHECK(!OpenNtBaseServiceBindConsoleContext(caller,children[1].dwProcessId,cg,dos));
+    ORIGIN_CHECK(caller->execution_worker_generation==rg);
+    EnterCriticalSection(&service->lock);
+    root->process.fVDM=TRUE;
+    ORIGIN_CHECK(!service_prepare_parent_resume(caller,rg,&required) && !required);
+    ORIGIN_CHECK(!OpenNtBaseServiceSubmitNativeRequest(caller,children[1].dwProcessId,cg,
+        root->frontend_capability,0,NULL,&target,&receipt,&request));
+    ORIGIN_CHECK(!target && !receipt && !request && !caller->dos_completion_read);
+    ORIGIN_CHECK(OpenNtBaseServiceSubmitNativeRequest(caller,children[1].dwProcessId,cg,
+        root->frontend_capability,0,NULL,&target,&receipt,&request)==ERROR_INVALID_STATE);
+    caller->dos_completion_read=TRUE;
+    root->process.fVDM=FALSE;
+    caller->execution_worker_generation=MAXDWORD;
+    ORIGIN_CHECK(service_prepare_parent_resume(caller,rg,&required)==ERROR_PROCESS_ABORTED);
+    LeaveCriticalSection(&service->lock);
+    ORIGIN_CHECK(OpenNtBaseServiceBindConsoleContext(caller,children[1].dwProcessId,cg+1,again)==ERROR_ACCESS_DENIED);
+    CloseHandle(native);CloseHandle(dos);CloseHandle(again);
+    ORIGIN_CHECK(!OpenNtBaseServiceDisconnect(caller));
+    ORIGIN_CHECK(!OpenNtBaseServiceDisconnect(parent));
+    ORIGIN_CHECK(!OpenNtBaseServiceDisconnect(root));
+    ORIGIN_CHECK(OpenNtBaseServiceIsEmpty(service) && OpenNtBaseServiceStop(service));
+    CloseHandle(self);
+    for(i=0;i<2;++i){ORIGIN_CHECK(TerminateProcess(children[i].hProcess,0));CloseHandle(children[i].hProcess);CloseHandle(children[i].hThread);}
+    puts("PASS parent origin: authenticated bind, no premature/foreign resume, native grant, DOS no-op, failed/stale origin");
+    return 0;
+#undef ORIGIN_CHECK
+}
+
 /* Projection/close fixture: seed the existing admitted GUI record boundary,
  * bind a real suspended target through the production provider, then model
  * its already-tested startup transfer. No substitute close implementation. */

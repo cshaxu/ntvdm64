@@ -17,6 +17,7 @@ DWORD fixture_queue_native_command(OPENNT_BASE_CONNECTION *,DWORD,DWORD,HANDLE,D
 DWORD fixture_take_native_command(OPENNT_BASE_CONNECTION *,DWORD,DWORD,DWORD,BYTE *,DWORD *,HANDLE *,HANDLE *,HANDLE *,DWORD *);
 DWORD fixture_frontend_notification_denied(OPENNT_BASE_CONNECTION *,DWORD,DWORD,DWORD,BOOL,BOOL *);
 int fixture_io_authority(void);
+int fixture_parent_resume_origin(void);
 int fixture_shared_worker_residency(void);
 int fixture_management_gui(void);
 DWORD service_next_frontend_deadline_at(OPENNT_BASE_SERVICE *,ULONGLONG,ULONGLONG *);
@@ -748,6 +749,7 @@ int main(int argc,char **argv)
         return 91;
     }
     if(argc==2 && !strcmp(argv[1],"--io-authority"))return fixture_io_authority();
+    if(argc==2 && !strcmp(argv[1],"--parent-resume-origin"))return fixture_parent_resume_origin();
     if(argc==2 && !strcmp(argv[1],"--management-gui"))return fixture_management_gui();
     if(argc==2 && !strcmp(argv[1],"--management-frontend-close"))return management_frontend_close();
     if(argc==2 && !strcmp(argv[1],"--shared-worker-residency"))return fixture_shared_worker_residency();
@@ -1194,7 +1196,9 @@ int main(int argc,char **argv)
             capability,NULL)==ERROR_INVALID_PARAMETER);
         CHECK(fixture_queue_native_command(launcher,GetCurrentProcessId(),launcherGeneration,
             capability,NATIVE_LAUNCH_MAX_BYTES+1,native_payload)==ERROR_INVALID_PARAMETER);
-        CHECK(!OpenNtBaseServiceAcquireConsoleContext(launcher,GetCurrentProcessId(),launcherGeneration,
+        /* Delivery carries the admitted worker origin, not a launcher-local
+         * root/Console locator. Both authentic references must alias. */
+        CHECK(!OpenNtBaseServiceAcquireConsoleContext(worker,laterChild.dwProcessId,workerGeneration,
             capability,&expected));
         CHECK(!queue_native_fixture(launcher,GetCurrentProcessId(),launcherGeneration,
             capability,payload));

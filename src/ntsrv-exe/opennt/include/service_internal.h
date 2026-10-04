@@ -92,6 +92,7 @@ struct OPENNT_BASE_CONNECTION {
     uint32_t parent_receipt,completed_receipt;
     DWORD completed_exit_code;
     BOOL dos_completion_read;
+    DWORD execution_worker_generation; /* Authenticated inherited execution origin. */
     BOOL worker_failed;
     /* Only the original nonzero-DosSesId branch completes on real worker exit.
      * The broker transports that existing result; it does not synthesize a DOS
@@ -208,6 +209,7 @@ typedef struct OPENNT_BASE_CONSOLE_CONTEXT {
     LIST_ENTRY link;
     OPENNT_BASE_CONNECTION *root; /* Removed under service lock before root free. */
     HANDLE capability,console;
+    DWORD worker_generation; /* Origin only; not a task or lifetime owner. */
 } OPENNT_BASE_CONSOLE_CONTEXT;
 typedef struct OPENNT_BASE_SERVICE_RESOURCES {
     OPENNT_BASE_CONNECTION *connection;
@@ -230,6 +232,10 @@ void service_signal_worker_states(OPENNT_BASE_SERVICE *service);
 /* Process-watch callback is cross-module even without a direct call. */
 VOID CALLBACK service_worker_terminated(PVOID context,BOOLEAN fired);
 void service_delete_console_context(OPENNT_BASE_CONSOLE_CONTEXT *context);
+DWORD service_acquire_console_context(OPENNT_BASE_CONNECTION *root,HANDLE console,
+    DWORD worker_generation,HANDLE *capability);
+DWORD service_prepare_parent_resume(OPENNT_BASE_CONNECTION *caller,
+    DWORD root_generation,BOOL *native_parent);
 BOOL service_root_console_matches(OPENNT_BASE_CONNECTION *root,HANDLE console);
 void service_release_console_identities(OPENNT_BASE_CONNECTION *connection);
 DWORD service_copy_execution_console_members(OPENNT_BASE_CONNECTION *destination,

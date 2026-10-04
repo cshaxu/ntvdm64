@@ -37,13 +37,31 @@ The [S1 source audit](../etc/evidence/m0-t428-s1-worker-control-lifecycle-audit.
 corrects stale two-route-loop findings, confirms shared spawn/I/O/client
 mechanisms and identifies remaining parent-restore, association, cancellation,
 occupancy/close and naming differences. Owner approved all corrected boundaries;
-the plan records the decisions. S1 is source-only concluded with P pending.
+the plan records the decisions. S1 source-only documentation was delivered with S2.
 S2 implementation and affected x86 build passed. The [S2 evidence](../etc/evidence/m0-t428-s2-shared-gui-worker-residency.md)
 records 22 service cases, Console17/Window17/WOW, five GUI routing/residency
 cases, coherent eight-file publication and published Console/Window smoke.
 Reviewed P 6a8934f6b is pushed. Independent GUI same-worker reuse remains unproved/failed
 in the extra r006 probe and is retained for association consolidation;
 S2 proves residency, not complete lifecycle unification.
+
+S3 candidate removes launcher member census/selection and carries origin in
+the existing service Console context. Affected x86 links and 23 service
+tests passed; [S3 evidence](../etc/evidence/m0-t428-s3-authenticated-parent-resume.md)
+records provenance and ordering. Console17/Window17/WOW and real nested
+Console/Window parent-return gates passed. The coherent eight-file S3 package
+is published to O:/winnt/system32 with recovery in build/M0-T428/S3/r008;
+published smoke and all eight hash checks passed. Reviewed P formation follows.
+
+## S3 Closure Record
+
+Affected x86 /MT CCPU40 links, 23 service cases, Console17/Window17/retained WOW
+frontiers, native-to-DOS-to-native Console/Window input and exit23 passed.
+Run16 member-census/worker-selection routing is removed; NTSRV uses existing
+authenticated origin and exact DOS completion with the existing I/O barrier.
+Original mirrors and wire versions are unchanged. Eight-file publication
+equals build/M0-T428/S3/r003/runtime/system32. Other-session proposal/queue
+edits remain outside this delivery. T428 remains open.
 
 ## S2 Closure Record
 
@@ -60,13 +78,15 @@ in this P. T428 remains open; S3 admission does not claim implementation yet.
 Owner accepted the [source audit](../etc/evidence/m0-t428-s1-worker-control-lifecycle-audit.md)
 and corrected architecture decisions on 2026-10-04. This is source-only
 closure, no runtime capability pass. Documentation P is deferred to the next
-reviewed delivery; no commit/push is claimed for it. T428 remains open.
+reviewed delivery in the original S1 record; it is now included in pushed
+S2 6a8934f6b. T428 remains open.
 
 ## Current Technical Baseline
 
-Current production delivery is T428 S2 6a8934f6b, verified/published from
-build/M0-T428/S2/r003/runtime. It retains the following accepted T427 layout
-and protocol baseline, with only the native GUI-carrier idle timer removed.
+Current verified/published package is T428 S3 from
+build/M0-T428/S3/r003/runtime, with reviewed P formation pending. It retains
+the following accepted T427 layout/protocol baseline, S2 native GUI-carrier
+residency, and authenticated service-owned parent restoration.
 
 Production delivery 62a71fd90, followed by pushed registration cc245ca95,
 is the T427 S5 system32 host layout. MSVC14.43/SDK22621/Win32 x86 /MT
