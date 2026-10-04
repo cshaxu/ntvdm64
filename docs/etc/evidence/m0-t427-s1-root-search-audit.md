@@ -2,8 +2,9 @@
 
 ## Status and inputs
 
-S1 is in progress. This first audit delivery contains source conclusions and
-an actual selected-image reproducer, not production repair or S1 closure.
+S1 source/contract audit is complete after the follow-up below. This delivery
+contains source conclusions and an actual selected-image reproducer, not a
+production repair or a claim that guest directory isolation already works.
 Baseline: 4f5aae2e3, accepted T426 S3/r001/runtime. No product file or O:/winnt
 is modified. The probe uses the unchanged eight-file package copied below build.
 
@@ -99,4 +100,71 @@ Smallest proposed shared owner is the existing common library, usable by all
 six native EXEs. Worker-base stays worker-only. One checked own-EXE root
 mechanism should replace local derivations; original DOS/WOW execution,
 scheduler, environment transform order and DLL loader policy stay at owners.
-S1 cannot close until the pending ledger/assertions are resolved.
+The following source/graph follow-up resolves the audit obligations; runtime
+assertions remain mandatory implementation gates for S2/S3, not audit passes.
+
+## Completed reachability and contract follow-up
+
+The formal T426 S2/r001/build.ninja (retained S3 production dependency cache)
+selects obj/system/cmosnt.obj and lists it in original-softpc-system.lib.
+The original base/system/sources selects the same translation unit. Its
+cmos_pickup at line 1080 explicitly uses static initialization/post instead
+of external files. The cmos.c read/write rows above describe an unselected
+alternative, not reached production. All selected host_read_resource callers
+reduce to ROM loading; no selected non-ROM host_write_resource caller remains.
+Keep the mirror bodies; remove the project's unused firmware-root dependency
+without requiring or manufacturing root/softpc. Embedded resources stay intact.
+
+The actual parent construction is run16 launch_vdm -> independent MULTI_SZ
+from begin_worker_win16_directory -> original BaseCreateVDMEnvironment ->
+ANSI CheckVDM record plus Unicode worker delivery. Original vdm.c normalizes
+SYSTEMROOT/WINDIR/PATH values but does not choose another directory authority.
+KRNL386 consumes the ANSI DOS environment through topPDB/PDB_environ, not the
+native worker process block. Therefore a WOW-only guest SYSTEMROOT projection
+can be applied to the ANSI record AFTER original conversion, leaving the
+Unicode native-worker environment and native SYSTEMROOT unchanged. DOS task
+environment need not acquire that WOW-only projection. Native child tests
+must verify this distinction and user-provided host SYSTEMROOT remains host.
+
+Additional selected caller dispositions:
+
+| Caller | Role and original/source basis | Implementation/failure test |
+| --- | --- | --- |
+| cmd.c cmdInit root; cmdkeyb.c KB16.COM | Guest system32, existing directory facade | Root-derived declared media; missing/oversize retains original failure/skip. |
+| nt_pif.c default _default.pif | Optional product default; explicit PIF remains user | Root default only when no supplied path; optional absence keeps original defaults. |
+| nt_fulsc.c old font/hardware path | Original historical full-screen system directory | Preserve compiled-out hardware boundary; no external VGA/font requirement invented. |
+| nt_bop.c SafeLoadLibrary WOW32/VDMREDIR | Known internal native DLLs, original floating-point save/restore | Narrow known-module binding to declared package paths; missing fails without CWD/PATH replacement. |
+| nt_bop.c arbitrary VDD; nt_msscs.c configured VDD | Explicit configured/native module contract | Preserve supplied name/path and existing optional error behavior, not general package-first module search. |
+| WOW32 wkfileio.c VDMREDIR; wow32.c initialization load | Internal product module | Use existing module boundary, not module directory as process root; test relocated redirector/WOW startup. |
+| WOW32 native printing/multimedia/generic thunk; VDMREDIR DLCAPI | Real-host native modules or explicit requested module | Keep Windows loader/API contract; do not reroute host DLLs through guest system32. |
+| XACTSRV apiwksta.c workstation lanroot | Selected original-opennt-xactsrv library, native RAP workstation response | Keep real GetSystemDirectoryW; source proof is not a new API runtime pass. |
+| NTCON/NTVWM/NTMON native resource accesses | Native EXE resources, shared control client, no independent media root discovery found | All gain common self-root availability and join checks without fictional media reads. |
+
+Original COMMAND suffix ranking is COM/EXE/BAT; PIF is not in that guest
+ranking. cmdpif.c handles an explicitly requested PIF and restricts its StartFile
+to COM/EXE/BAT. Preserve that original parser/configuration path. For run16's
+existing bare-name PIF compatibility, retain it after the three DOS executable
+suffixes within EACH directory rather than allowing it ahead of a BAT in CWD.
+Explicit suffixes remain exact; no application-name exemptions are allowed.
+Drive-qualified X:foo is an explicit drive-relative path, not ordinary PATH
+lookup. Empty/unset PATH adds nothing beyond CWD; empty entries repeat CWD.
+
+Temporary-file fallback in cmdredir.c is currently a guest-directory facade
+used in a host scratch role. Use a narrow host temp/directory binding for that
+fallback, preserving original retry/error order; do not make product root the
+scratch fallback. Existing system.ini shadow already uses GetTempPath and
+delete-on-close, and retains immutable source configuration.
+
+Cross-package isolation belongs at the existing authentication/join boundary:
+server authenticates the actual passed process then compares its actual EXE
+directory to its own; the BaseClient checks the authenticated broker process
+capability before publishing the connection. Compare directory object identity
+so a subst alias does not create a false mismatch. No new protocol, environment
+authority, reconnect, helper, scheduler or task registry is necessary.
+
+S2 implements shared checked own-image/root/resource mechanics and authenticated
+join validation; S3 implements directory-first user search and explicit internal
+COMMAND. Guest-only WOW projection, known product DLL binding and host-temp
+correction stay bounded S2 caller adaptations, with immutable guest hashes and
+retained WOW frontiers. Each changed mirror expression needs the existing
+provenance register and minimum same-shaped hook; no original execution moves.

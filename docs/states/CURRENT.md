@@ -2,45 +2,54 @@
 
 ## Current Work
 
-**Active: M0 T427 S1** (Ordinary Mode).
+**Active: M0 T427 S2** (Ordinary Mode).
 
 Owner accepts T426 and admits the queued system-root/application-search
 isolation package. [T426 closure](../history/m0-t426-console-root-monitor-tree-closure.md)
 retains S1-S4 delivery, verification and limits. The published product remains
-unchanged. T427 begins with a bounded source/contract audit, not a premature
-search or guest-environment rewrite.
+unchanged. S1 source/contract audit and real selected-image reproduction are complete.
+S2 now implements the audited common root and bounded internal/guest bindings.
 
 ## Active Packet
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T427 S1; Ordinary Mode. |
+| Identifier Mode | M0 T427 S2; Ordinary Mode. |
 | Admission And Approval | Owner: “收口t 准入 系统根目录与应用搜索隔离”. Close accepted T426 and admit the former Queue head. |
 | Candidate Proposal | [System-root and application search isolation](../proposals/proposal-ntvdm-system-root-path-isolation-001.md). |
-| Objective | Establish a source-backed three-role path/caller ledger, original DOS search and Win16 directory contracts, reachable media/config paths and package-shadowing reproducer before implementation. |
-| Non-goals | No production search/root change in S1, guest patch, new component/helper, DLL loader overhaul, scheduler, frontend/lifecycle redesign or global environment/Registry mutation. |
+| Objective | Implement common checked own-EXE root and same-package joins; replace internal root derivations, keep host directories distinct and bind audited guest/media boundaries. |
+| Non-goals | User application search remains S3; no guest patch, new component/helper, broad DLL-loader overhaul, scheduler, frontend/lifecycle redesign or global environment/Registry mutation. |
 | Reference Baseline | main 700b3d862; accepted T426 eight-file S3/r001/runtime in O:/winnt; APP0.0.426/RPC38/I/O25. |
-| Files And ABI Surface | Proposal and indexed S1 evidence; read run16, NTSRV, NTVDM, NTCON, NTVWM, NTMON, common and original MVDM/OpenNT path callers. Existing test fixtures or bounded audit probes under build/M0-T427/S1 only; no planned ABI change. |
+| Files And ABI Surface | common root implementation and formal graph; project EXE/root/authentication adapters, NTVDM media and bounded guest environment/module/temp bindings; registered minimal original caller hooks only if required. Focused tests/evidence below build/M0-T427/S2. No planned wire change. |
 | Applicable Rules | AGENTS reading set; execution, architecture, coding, document and source policies; preserve original search/EXEC and immutable guest media. |
-| Verification | Per-caller provenance/role/disposition and failure assertions; selected-image shadowing reproduction using controlled CWD/PATH fixtures; original extension-order, Win16 directories and non-ROM reachability review; documentation governance, relative links and diff checks. |
+| Verification | x86 affected closure and root identity/buffer/alias/missing/mismatch negatives; relocated/nested media, native/guest environment distinction; retained Console17/Window17 and WOW frontiers; coherent eight-file publication/recovery/hash smoke, governance/link/diff. |
 | Expected Markers | User search has no implicit package-first authority; internal root derives from actual own EXE; real host paths remain host-owned; guest projection is bounded. Evidence distinguishes current behavior from proposed repair. |
 | Asset Needs | Existing source, immutable runtime, x86 fixture tools; subst Z: only if needed with final removal. No source import or new product process. |
 | Reporting Requirements | Report exact callers, sources, reproduction results, proposed minimal shared owner, migration stages and unresolved edges; do not claim audit conclusions as implemented behavior. |
 | Stop Conditions | Missing source/provenance, required guest change or expanded loader/lifecycle policy requires renewed admission; preserve unrelated work and baseline. |
-| Exit Criteria | Complete bounded ledger and reliable shadowing evidence, reviewed S2 implementation boundary and tests; governance/link/diff pass and audit P committed/pushed. |
+| Exit Criteria | Audited production bindings and root/join tests pass without host-root leak; affected build and retained product gates pass; coherent package published and reviewed P committed/pushed. |
 | Original Owner Request | Close current T and admit system-root/application-search isolation. |
 | Similar-Issue Sweep | Direct, nested and internal COMMAND launches; all six EXEs; guest config/media/Win16 directories; host fonts/temp, relocation, inherited wrong root and split packages. |
 
 The [implementation sequence](../etc/operations/t427-system-root-search-isolation-plan.md)
 keeps S1 audit, S2 shared root/resource binding, S3 user search isolation and
-S4 integration/closure separate. Only S1 is active.
+S4 integration/closure separate. Only S2 is active.
 
 S1 first-pass [audit and actual selected-image evidence](../etc/evidence/m0-t427-s1-root-search-audit.md)
 confirms package shadowing of CWD/PATH in four real native launch cases (r002),
 and original directory-first COM/EXE/BAT search from COMMAND source. Shared
-root ownership is proposed in common, not worker-base. Win16 environment,
-selected resource/loader reachability, PIF ordering and package-join audit
-remain open; no production repair or S1 closure is claimed.
+root ownership is proposed in common, not worker-base. The follow-up resolves Win16 environment,
+selected resource/loader reachability, PIF ordering and package-join audit;
+S1 has no production repair claim.
+
+## S1 Closure Record
+
+S1 audit is complete in the [source and actual-image record](../etc/evidence/m0-t427-s1-root-search-audit.md).
+Real baseline search cases passed at bd5af1e6e; final source follow-up proves
+selected cmosnt uses no external file, distinguishes ANSI guest and Unicode
+host environment, and assigns each selected path/module/temp/join boundary.
+Runtime isolation remains S2/S3 implementation work, not claimed by this audit.
+Governance/link/diff gate this documentation-only closure and S2 admission.
 
 ## Current Technical Baseline
 
