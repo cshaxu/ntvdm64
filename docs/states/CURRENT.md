@@ -44,8 +44,13 @@ worker links now exercise the actual 200-input guest path: three measured runs
 plus a disabled control pass, with 205 records accepted, pressure coalescing,
 queue high-water17 and no rejection/overflow. Queue consumption, read batches,
 video transaction and final handoff/close acknowledgment are measured; bounded
-sample-overflow and disabled/last-error unit checks pass. Raw-input, producer/
-frontend phase attribution and perturbation proof remain open. S1 is not closed.
+sample-overflow and disabled/last-error unit checks pass. Actual EDIT now passes
+200 continuous movements, menu exit and MEM with separate producer/transfer/
+frontend timing in three measured runs plus disabled control. Queue conservation,
+frontend completion and instrumentation-cost units pass; timings locate a much
+larger synchronous transfer cost than text assembly, without yet isolating its
+cause. Physical RawInput, matched SoftPC runtime comparison and full-product
+perturbation bounds remain unproved. S1's final disposition remains open.
 
 The proposal supplies the bounded S1-S4 sequence: baseline measurement;
 release hot-loop diagnostic removal; only proven input/producer repair;

@@ -210,3 +210,98 @@ that EDIT has no latency issue. Approximately141ms consumer tail remains
 observed, without queue explosion. Still open: matched EDIT mouse measurement,
 raw-input/producer/frontend attribution, matched SoftPC comparison and meaningful
 instrumentation-overhead measurement. S1 remains active; S2 is not admitted.
+
+## Actual EDIT producer/frontend measurement — r010-r019
+
+This continuation adds only test-link wrappers around unchanged project-owned
+`console_text.c` and `frontend_session.c`. No production source, original CCPU,
+input/IRQ scheduling, guest media or wire contract changes. The worker producer
+is selected ahead of its original archive member; the frontend link replaces
+precisely its direct session object. r016/manifest.json pins measurement sources,
+both outputs, the graph and every original link input. VDM_TIB ownership passes.
+These binaries are test-only, not published to O:/winnt.
+
+Reproduction:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tests/observation/build-worker-performance.ps1 -BuildRoot <fresh-build-root>
+powershell -NoProfile -ExecutionPolicy Bypass -File tests/observation/measure-worker-boundaries.ps1 -MeasuredWorker build/M0-T429/S1/r016/ntvdm-performance-observer.exe -MeasuredFrontend build/M0-T429/S1/r016/ntcon-performance-observer.exe -Observer build/M0-T429/S1/r012/console-startup-observer.exe -ReportRoot <fresh-build-report-root> -Edit -Iterations 3
+```
+
+r012 observer uses the existing x86 `/std:c11 /MT /W4 /WX /wd4201` recipe,
+with explicit /Fo and /Fe paths. `-Edit` retains ordinary actual menu exit,
+MEM text and exit1 assertions. It injects200 alternating net-zero relative
+moves after EDIT's document-ready milestone; a Window-thread FIFO marker
+acknowledges sink acceptance, not guest consumption. No settle sleep or click
+changes the EDIT document. The graphics probe retains its movement/click/release
+sequence and guest assertions. Frontend identity is verified against the actual
+run16 EXE's sibling file, not guessed from the working/package-root argument.
+
+r017 passes disabled control plus three enabled EDIT runs, whole-case
+elapsed10499/8933/8352/8960ms. Startup, scripted input/menu and cleanup are
+included; their ordering is not evidence of instrumentation speedup/overhead.
+Buffers have no overflow, rejected input or unmatched consumption. Five barriers
+and five close acknowledgements per run succeed. Frontend decode/present timings
+cover real library calls, not physical display scan-out.
+
+| Run | Enqueued / merged / consumed | Queue peak | IRQ age median / max us | Assembly median / max us | Successful transfer median / max us | Decode median / max us | Present median / max us |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | 51 / 153 / 51 | 17 | 7040 / 68322 | 48 / 73 | 106473 / 128717 | 108 / 184 | 78 / 408581 |
+| 2 | 46 / 159 / 46 | 17 | 6678 / 8741 | 41 / 72 | 65674 / 86845 | 105 / 210 | 63 / 366787 |
+| 3 | 49 / 156 / 49 | 17 | 6234 / 97950 | 45 / 101 | 99221 / 132011 | 92 / 190 | 68 / 57357 |
+
+IRQ age is oldest retained enqueue to the actual CPU/IRQ owner's queue take,
+not guest callback completion. Counts include existing route edges, hence204/
+205 submissions versus200 injected moves. Every enqueued item is consumed;
+menu/MEM/exit evidence prevents sink ACK alone from masquerading as completion.
+Successful video transactions number18/17/20; text frames are20900bytes.
+Synchronous transfer includes serialization/import/peer work, not just copying.
+Worker read transaction medians63/61/56us, maxima723/439/883us. No unbounded
+mouse backlog is demonstrated by this workload.
+
+Runs1 and3 each record one video ERROR_NOT_READY (21). The actual producer
+explicitly accepts a queued paint crossing ownership handoff (`console_text.c`,
+the comment after its publication call). It remains a rejected publication,
+excluded from successful-transfer latency, not a delivered frame. All other
+errors fail, including input/barrier/close. Graphics retains its zero-error
+assertion. r019 rechecks graphics with the new observer: disabled and enabled
+200-move/click/release cases pass (11616/10189ms).
+
+### Instrumentation cost and failed attempts
+
+r018 links the actual queue with the measurement unit. Enabled/disabled200-input
+conservation and last-error checks pass. Overflow emits8192samples/overflow1;
+disabled creates no report. Cost cases each run32 conserving200-move bursts
+(6944 operations), including the wrapper's InitOnce/disabled branch and excluding
+flush/file I/O. Five enabled runs take1300700..1319700ns, median1310000;
+five disabled runs184300..185800ns, median185000. Difference is approximately
+162ns/operation in this uncontended unit. This is measurement cost, not the
+full multithreaded product's perturbation or original-release versus disabled
+wrapper cost. Disabled real cases prove behavior/count/receipt equivalence,
+not a statistically bounded wall-time overhead. Private sink injection bypasses
+physical/RDP RawInput, which remains unobserved.
+
+r011 fails before injection (burst0): argv2 is the root, not binary directory.
+Its timeout and cleanup access-denied diagnostic are retained, not passed.
+r012 corrects sibling identity. r013 product assertions pass, but its strict
+measurement checker rejects video21. The checker now classifies precisely the
+producer's accepted EDIT result, retaining all input/completion assertions.
+r014 lacks frontend C11/include settings; r015 lacks the renamed forward
+declaration. Both compile failures remain. r016 links successfully without
+force-multiple or substitute provider. Its existing export /OUT warning is the
+descriptive test EXE name mismatch already recorded in r007.
+
+Read-only SoftPC comparison checks its
+`src/app-softpc/softpc.new/base/ccpu386/c_main.c:901`: DECODE fetches opcode
+without this project's transition/WOW observers. SHA256:
+23BD97F2DEE8ED68171735AE2AAB04BB737C903AC5B65DB1654CDCE92E61368F.
+No source import, runtime/build/acceptance dependency is introduced. Matched
+SoftPC runtime comparison remains unperformed rather than passed.
+
+Assembly median41..48us is small beside successful-transfer median65..106ms.
+This identifies a boundary for investigation after release hot-loop repair,
+not a proven particular lock/import/transport culprit or permission to batch.
+Some present maxima include initial Window setup. Three samples do not prove
+physical mouse smoothness or an end-to-end SLA. S1 remains open for final
+baseline/perturbation disposition; S2 is not admitted. All eight published hashes
+still match T428 S6 r002; no test broker or Z: remains after serial runs.

@@ -1170,7 +1170,7 @@ done:
 
 /* Test-only KVM output injection. The pinned hook runs on frontend's Window
  * thread; protocol, IRQ and guest callback delivery remain production code. */
-static BOOL window_mouse_probe(const char *package,const char *report_path)
+static BOOL window_mouse_probe(const char *launcher,const char *report_path,BOOL edit_ready)
 {
     char desktop[96],dll[MAX_PATH],path[MAX_PATH],image[MAX_PATH],expected[MAX_PATH];
     DWORD needed,pid=0,thread=0,length=MAX_PATH,mode,burst=0,index;
@@ -1182,8 +1182,15 @@ static BOOL window_mouse_probe(const char *package,const char *report_path)
         desktop,sizeof(desktop),&needed) || strncmp(desktop,"NTVDMConsoleTest-",17))return FALSE;
     snprintf(path,sizeof(path),"%s.mouse-window.txt",report_path);
     report=fopen(path,"w");if(!report)return FALSE;
-    snprintf(expected,sizeof(expected),"%s%sntcon.exe",package,
-        package[strlen(package)-1]=='\\' ? "" : "\\");
+    /* The verifier passes a Windows root as argv[2], while a direct probe
+     * may pass system32. Pin the sibling frontend from the exact launcher,
+     * not a guess at the working/package-directory argument. */
+    if(strcpy_s(expected,sizeof(expected),launcher)!=0)goto done;
+    {
+        char *separator=strrchr(expected,'\\');
+        if(!separator)separator=strrchr(expected,'/');
+        if(!separator || strcpy_s(separator+1,sizeof(expected)-(size_t)(separator+1-expected),"ntcon.exe")!=0)goto done;
+    }
     deadline=GetTickCount64()+15000;
     do {
         window=FindWindowW(L"LibKvmWindow",NULL);
@@ -1211,8 +1218,9 @@ static BOOL window_mouse_probe(const char *package,const char *report_path)
     swprintf_s(acknowledgment_name,96,L"Local\\NTVDM-Mouse-Probe-%lu-%lu",pid,thread);
     acknowledgment=CreateEventW(NULL,TRUE,FALSE,acknowledgment_name);
     if(!acknowledgment || GetLastError()==ERROR_ALREADY_EXISTS)goto done;
-    /* Probe settles for 40 BIOS ticks before installing its callback. */
-    Sleep(3500);
+    /* The graphics guest settles for 40 BIOS ticks before its callback.
+     * EDIT is injected only after its actual document-ready milestone. */
+    if(!edit_ready)Sleep(3500);
     mode=GetEnvironmentVariableA("MVDM_OBSERVER_MOUSE_RETIRE",NULL,0) ? 0x80000000u : 0;
     if(GetEnvironmentVariableA("MVDM_OBSERVER_MOUSE_BURST",burst_text,sizeof(burst_text))) {
         burst=strtoul(burst_text,NULL,10);
@@ -1224,17 +1232,20 @@ static BOOL window_mouse_probe(const char *package,const char *report_path)
         for(index=0;index<burst;++index)
             if(!PostMessageW(window,WM_APP+0x5f0,0,MAKELPARAM((index&1) ? -1 : 1,0)))goto done;
     }
-    if(!PostMessageW(window,WM_APP+0x5f0,0,MAKELPARAM(16,8)))goto done;
-    Sleep(250);
-    if(!PostMessageW(window,WM_APP+0x5f0,1,0))goto done;
-    Sleep(250);
-    if(!PostMessageW(window,WM_APP+0x5f0,mode,0))goto done;
+    if(!edit_ready) {
+        if(!PostMessageW(window,WM_APP+0x5f0,0,MAKELPARAM(16,8)))goto done;
+        Sleep(250);
+        if(!PostMessageW(window,WM_APP+0x5f0,1,0))goto done;
+        Sleep(250);
+        if(!PostMessageW(window,WM_APP+0x5f0,mode,0))goto done;
+    }
     /* Posting is not consumption. Keep the hook installed until the Window
      * thread accepts every sample and processes this FIFO tail marker. */
-    if(!PostMessageW(window,WM_APP+0x5f1,burst+3,0))goto done;
+    if(!PostMessageW(window,WM_APP+0x5f1,burst+(edit_ready ? 0 : 3),0))goto done;
     ok=WaitForSingleObject(acknowledgment,20000)==WAIT_OBJECT_0;
 done:
     fprintf(report,"burst-records=%lu\n",burst);
+    fprintf(report,"workload=%s\n",edit_ready ? "EDIT-document-movement" : "graphics-guest");
     fprintf(report,"frontend=%lu thread=%lu posted=%s error=%lu\n",pid,thread,ok ? "pass" : "fail",GetLastError());
     fprintf(report,"input-sink-acknowledged=%s\n",ok ? "yes" : "no");
     if(acknowledgment)CloseHandle(acknowledgment);
@@ -1616,7 +1627,8 @@ int main(int argc, char **argv)
            !SendMessageTimeoutW(window,WM_KEYUP,'T',(LPARAM)0xc0140001,SMTO_ABORTIFHUNG,3000,&result))report_failed=1;
     }
     if(GetEnvironmentVariableA("MVDM_OBSERVER_MOUSE_HOOK",NULL,0) &&
-        !window_mouse_probe(argv[2],argv[3]))report_failed=1;
+        !GetEnvironmentVariableA("MVDM_OBSERVER_EDIT_MOUSE_BURST",NULL,0) &&
+        !window_mouse_probe(argv[1],argv[3],FALSE))report_failed=1;
     if(graphics_handshake)
         graphics_handshake_ok=graphics_window_return(input,output,argv[3]);
     if (scripted_console_input) {
@@ -1729,6 +1741,14 @@ int main(int argc, char **argv)
                 scripted_console_input_delivered = scripted_console_input_delivered &&
                     wait_input_milestone(output,NULL,"Untitled","Welcome to",FALSE);
             } else Sleep(500);
+            if(GetEnvironmentVariableA("MVDM_OBSERVER_EDIT_MOUSE_BURST",NULL,0)) {
+                /* No timer guesses at EDIT readiness; preserve the ordinary
+                 * menu/MEM/completion assertions after the continuous burst.
+                 * The hook ACK proves sink acceptance, not guest consumption. */
+                scripted_console_input_delivered=scripted_console_input_delivered &&
+                    milestone_input && scripted_window_frontend &&
+                    window_mouse_probe(argv[1],argv[3],TRUE);
+            }
             menu[0].EventType = KEY_EVENT;
             menu[0].Event.KeyEvent.bKeyDown = TRUE;
             menu[0].Event.KeyEvent.wRepeatCount = 1;
