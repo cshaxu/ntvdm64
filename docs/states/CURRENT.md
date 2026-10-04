@@ -2,33 +2,42 @@
 
 ## Current Work
 
-**Active: M0 T425 S9 (Ordinary Mode).**
+**Active: M0 T425 S10 (Ordinary Mode).**
 
 The preceding reviewed M0 T425 S9 P delivers initial test-throughput optimization.
 S8 is owner-accepted at 90e57fe09. S9 build, retained regression, coherent
-publication and postpublication smoke pass. No next S is admitted; T425
-remains open. Owner approves continuing S9 with observation-driven input,
-EDIT transitions, stage timing and identity-pinned cleanup; no S9 closure yet.
+publication and postpublication smoke pass. Owner now admits S10; T425
+remains open. Owner closes S9 at pushed 817fe636b, accepting measured throughput
+improvement and retained limitations. S10 investigates a second run16 WINMINE
+launch while the first guest and shared WOW worker remain alive.
 
 ## Active Packet
 
 | Field | Contract |
 | --- | --- |
-| Identifier Mode | M0 T425 S9, Ordinary Mode. |
-| Admission And Approval | Owner continues S9: replace hard waits with observed operation milestones and reliable keyboard delivery; retain typeahead and all assertions. |
-| Objective | Reduce normal product-test overhead with fresh input/output observations, EDIT state waits, explicit phase timings and pinned cleanup. Measure against the same r022 product; 60 seconds is a target, not a promised result. |
-| Non-goals | No production/protocol change, helper, guest/library edits, weakened assertions, complete-matrix concurrency, lost cold/independent-session coverage or implicit shortening of WOW longevity observation. |
-| Reference Baseline | Initial S9 P 51f09f7d1; unchanged published r022 eight-file package; r029 Product 301534 ms and retained S8 evidence. |
-| Files And ABI Surface | Test observation/runners/build recipes and this packet/plan/evidence only; no production or wire ABI change. |
+| Identifier Mode | M0 T425 S10, Ordinary Mode. |
+| Admission And Approval | Owner: close S9, then investigate why a second run16 winmine does not launch while the first remains open; same EXE should support concurrent tasks unless guest policy proves otherwise. |
+| Objective | Reproduce and localize second shared-WOW task submission, wakeup, load and startup acknowledgement; distinguish guest single-instance policy from host integration failure. |
+| Non-goals | Investigation only until cause and repair scope are established; no guest patch, new scheduler/helper, unrelated test optimization, desktop input or reduced assertions. |
+| Reference Baseline | Pushed S9 817fe636b; unchanged published r022 eight-file package; existing independent WINMINE/SOL/WRITE frontiers. |
+| Files And ABI Surface | CURRENT, T425 plan and indexed research/evidence; test-only WOW probes if required. No production or wire ABI change admitted yet. |
 | Applicable Rules | Current execution, architecture, coding, document and source-policy authorities. |
-| Verification | Same-product repeated Console17/Window17 plus retained WOW; fresh-echo and cleanup identity negatives; supplemental typeahead; stage timings, source/artifact seals and governance/diff review. |
-| Expected Markers | Explicit case assertions, nonzero failure propagation, timing/coverage records, owned-process cleanup and governance pass. |
-| Asset Needs | Existing x86 CCPU40 cache, S8 immutable guest/runtime inputs; no new imports. |
-| Reporting Requirements | Per-suite contracts/dependencies/waits, coverage mapping, measured savings, repeatability and remaining slow/unsupported boundaries. |
-| Stop Conditions | Shared endpoint collision, uncertain coverage equivalence, production deadline change or regression; preserve unrelated work. |
-| Exit Criteria | Measured wait reduction with retained assertions, no routine real ten-second policy waits, build/test/review evidence, required coherent publication if production changes, commit/push. |
-| Original Owner Request | Continue S9, not close it: replace hard waits with observed milestones and reliable keyboard delivery without weakening retained assertions. |
-| Similar-Issue Sweep | Repeated package builds, fixed sleeps, idle-grace cleanup, competing BaseSrv users, obsolete/no-assertion scenarios and duplicated gates. |
+| Verification | Read original CheckWOW/GetNextVDMCommand/InitTask and project adapters; serial same-worker repeated launch on an unswitched desktop, exact launcher result and window/task identity; compare different WOW image if needed. |
+| Expected Markers | First task remains live; second request delivery/startup/window or exact failure localized; worker identity unchanged; negative outcome retained. |
+| Asset Needs | Existing x86 CCPU40 package, immutable WINMINE/SOL/WRITE and observation tools; outputs only build/M0-T425/S10/r001 or later. |
+| Reporting Requirements | Source-backed cause, actual run evidence, confidence and bounded repair recommendation; no repeated-instance pass from registration alone. |
+| Stop Conditions | Required guest modification, wider WOW recovery or new production behavior needs owner re-admission; preserve unrelated changes. |
+| Exit Criteria | Reproducible diagnosis and reviewed report, governance/link/diff checks and sequential commit/push; runtime repair is not claimed. |
+| Original Owner Request | Close S9; investigate run16 winmine launching once but not again while first WINMINE and resident WOW worker remain alive. |
+| Similar-Issue Sweep | Same-image versus different-image shared WOW, task enqueue/wakeup, startup-only acknowledgement and original Win16 instance policy. |
+
+S10 [shared-WOW investigation](../etc/evidence/m0-t425-s10-shared-wow-winmine.md):
+original Win16 WINMINE explicitly reactivates hPrevInstance and returns without
+creating another window. Current unchanged package passes two default launches,
+second explicit completion and first-task independent waiting on an unswitched
+desktop. Both launchers return 0; first HWND/worker survive. No production
+repair is justified by absence of another window. Physical foreground activation
+and concurrent different-image WOW are not claimed. S10 awaits owner disposition.
 
 S9 [audit and timing evidence](../etc/evidence/m0-t425-s9-test-throughput.md):
 same service20 image measured 7435 ms serial versus 2160 ms four-way (70.9
@@ -113,5 +122,6 @@ T425 remains owner-open, not a closed T. Initial P 51f09f7d1 delivers
 initial S9 after accepted S8 90e57fe09, updates evidence/plan/execution guidance and
 preserves unrelated Queue/proposal changes. Documentation governance and
 actual diff/requirement review apply before commit/push. The S9 packet is
-delivered; this test-only continuation does not close S9 or admit another S.
-Test-only work uses build/M0-T425/S9/r033 and later fresh run directories.
+delivered and owner-accepted at 817fe636b. S9 closes with its measured gains,
+60-second shortfall and supplemental non-pass evidence retained. S10 is the
+sole active investigation, not an admission of broader WOW implementation.

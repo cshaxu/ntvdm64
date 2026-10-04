@@ -208,13 +208,14 @@ int wmain(int argc,WCHAR **argv)
     mine_windows found;
     HWND first_window=NULL;
     DWORD worker_pid=0,code=0,length=MAX_PATH;
-    BOOL wait_first,worker_fault,broker_fault;
+    BOOL wait_first,worker_fault,broker_fault,async_second;
     int result=1;
     if (argc<3 || argc>5) return 87;
     wait_first=argc>=4 && !wcscmp(argv[3],L"--wait-first");
     worker_fault=argc>=4 && !wcscmp(argv[3],L"--worker-fault");
     broker_fault=argc>=4 && !wcscmp(argv[3],L"--broker-fault");
-    if (argc>=4 && !wait_first && !worker_fault && !broker_fault && wcscmp(argv[3],L"--async")) return 87;
+    async_second=argc>=4 && !wcscmp(argv[3],L"--async-second");
+    if (argc>=4 && !wait_first && !worker_fault && !broker_fault && !async_second && wcscmp(argv[3],L"--async")) return 87;
     if (argc==5 && (worker_fault || broker_fault ||
         (wcscmp(argv[4],L"--cmd-c") && wcscmp(argv[4],L"--cmd-input") &&
          wcscmp(argv[4],L"--batch") && wcscmp(argv[4],L"--dos-c") &&
@@ -293,7 +294,8 @@ int wmain(int argc,WCHAR **argv)
         }
         puts("WOW-SHARED-STARTUP-FAULT-PASS"); result=0; goto done;
     }
-    REQUIRE(launch(argv[1],L"run16.exe",L"--wait WINMINE.EXE",desktop_name,&second));
+    REQUIRE(launch(argv[1],L"run16.exe",async_second ? L"WINMINE.EXE" :
+        L"--wait WINMINE.EXE",desktop_name,&second));
     /* Original windows/ep/winmine/winmine.c MMain WIN16 branch activates
      * hPrevInstance's existing window and returns FALSE (0). A second
      * window is not the source-defined success criterion. */
@@ -309,6 +311,7 @@ int wmain(int argc,WCHAR **argv)
     REQUIRE(WaitForSingleObject(worker,0)==WAIT_TIMEOUT);
     if (wait_first) REQUIRE(WaitForSingleObject(first.hProcess,0)==WAIT_TIMEOUT);
     puts("PASS original single-instance WINMINE returns 0; first task remains alive");
+    if (async_second) puts("PASS both ordinary startup-only WINMINE launches return 0");
     dispose(&second);
     ZeroMemory(&second,sizeof(second));
     REQUIRE(launch(argv[1],L"run16.exe",L"system32\\wowexec.exe",desktop_name,&second));

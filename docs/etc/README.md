@@ -2,7 +2,8 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
-| [T425 S9 test throughput](evidence/m0-t425-s9-test-throughput.md) | M0 T425 S9 | Coverage/wait inventory, measured concurrent fixtures, deterministic policy checks and unfinished gates. | Retain through T425 acceptance. |
+| [T425 S10 shared-WOW WINMINE](evidence/m0-t425-s10-shared-wow-winmine.md) | M0 T425 S10 | Original single-instance branch, repeated shared-worker launch and independent completion observations. | Retain through T425 acceptance. |
+| [T425 S9 test throughput](evidence/m0-t425-s9-test-throughput.md) | M0 T425 S9 | Owner-closed throughput improvement with measured gains and explicit remaining limits. | Retain through T425 acceptance. |
 | [T425 S8 producer triggers and software VGA](evidence/m0-t425-s8-worker-frame-deduplication.md) | M0 T425 S8 | Superseded dedup proposal, unfiltered transport, software fullscreen, natural mouse routes, retained failures and release status. | Retain through T425 acceptance. |
 | [T425 S7 idle cursor and GUI startup](evidence/m0-t425-s7-idle-cursor-gui-startup.md) | M0 T425 S7 | Idle publication reproduction, shared local startup gate, source audit and actual verification status. | Retain through T425 acceptance. |
 | [T425 S6 broker I/O ownership](evidence/m0-t425-s6-broker-io-ownership.md) | M0 T425 S6 | Delivered broker-only association and single I/O connection, retained gates and coherent publication/recovery. | Retain through T425 acceptance. |

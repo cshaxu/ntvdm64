@@ -411,3 +411,11 @@ Shell echo observation is intentionally opt-in: password/non-echo applications,
 wrapped command input and graphics surfaces are not falsely acknowledged.
 Physical keyboard focus/RDP behavior is not established by private-desktop
 message injection. The broader Control suite is not a new pass in this P.
+
+### Owner closure
+
+Owner closes S9 on 2026-10-03 after pushed 817fe636b. The measured 31-32 percent
+Product reduction, unchanged eight-file package, repeated full passes and
+explicit supplemental non-pass/60-second limitations are accepted as the
+bounded stage outcome. T425 remains open; repeated shared-WOW launch diagnosis
+is admitted separately as S10, not a reopened throughput implementation.

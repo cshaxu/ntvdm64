@@ -180,14 +180,18 @@ identity; new outputs only under declared build/M0-T425/S<n>/r<nnn> run roots.
   native Unicode change detection and all handoff/failure assertions. The
   [S8 ledger](../evidence/m0-t425-s8-worker-frame-deduplication.md) records actual
   frames, source attribution, retained failures and final release gates.
-- [ ] S9 continued test audit and throughput improvement: coverage-mapped pruning,
+- [x] S9 continued test audit and throughput improvement: coverage-mapped pruning,
   isolated parallel scheduling, deterministic deadline tests and measured
   before/after time reduction without weakening runtime assertions.
   The [S9 ledger](../evidence/m0-t425-s9-test-throughput.md) records measured
   service20 reduction, retained failures, full product regression and coherent
   eight-file publication. Initial P 51f09f7d1 is delivered. Owner continues S9
   for observed input/results, EDIT state waits and cleanup/timing optimization;
-  normal 60-second Product remains a target, not a closure claim.
+  owner closes S9 at 817fe636b with 31-32 percent measured reduction; the
+  60-second target and supplemental snapshot-merge failures remain limitations.
+- [ ] S10 owner-inserted investigation: second shared-WOW WINMINE launch while
+  first task remains live. Locate submission/wakeup/load/startup outcome before
+  proposing production repair; no guest patch or new scheduler.
 - [ ] Owner verification and acceptance before T closure.
 
 ## RDP boundary
