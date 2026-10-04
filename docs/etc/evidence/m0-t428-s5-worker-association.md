@@ -155,7 +155,7 @@ production change in this increment is phase-based route cancellation.
 No src/mvdm or src/opennt-host file changed. Documentation governance/links
 and whitespace are checked before forming the final reviewed P.
 
-S5 closes only after those final gates and push. S6 retains naming and final
+Final reviewed P db855a66c is pushed; S5 is closed. S6 retains naming and final
 duplicate/caller audit; this is not whole-T closure. Physical
 RDP/focus remains owner-waived; WOW retains its existing frontier contract
 rather than a new full-usability claim. Side-session proposal and queue edits

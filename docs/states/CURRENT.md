@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T428 S5** (Ordinary Mode).
+**Active: M0 T428 S6** (Ordinary Mode).
 
 Owner admits the queue-head worker control/lifecycle/ownership unification
 package on 2026-10-04, asking first for current-state audit and architecture
@@ -16,22 +16,22 @@ records the subsequent bounded stages.
 
 | Field | Required record |
 | --- | --- |
-| Identifier Mode | M0 T428 S5; Ordinary Mode. |
-| Admission And Approval | Owner: “批准你的所有的回复…目标：精简，去重复，统一逻辑。NTVDM符合OpenNT的原始语义，NTVWM参照NTVDM的方法来做。开始。” Sequentially admit approved association/exclusive-session stage after S4 886f13758, built/tested/published/pushed. |
+| Identifier Mode | M0 T428 S6; Ordinary Mode. |
+| Admission And Approval | Owner approved simplification/unification and sequential implementation. Admit the approved final naming/caller audit after S5 db855a66c, built/tested/published/pushed; no new GUI launch option. |
 | Candidate Proposal | [Worker control/lifecycle/ownership unification](../proposals/proposal-worker-control-lifecycle-naming-unification-001.md). |
-| Objective | Consolidate existing service-owned root-worker association/reuse, route cancellation, kind/occupancy and management projection. Native exclusive text follows CloseOnExit; default GUI carriers remain shared/resident like shared WOW, preserving GUI startup-only return. Owner confirms no new exclusive GUI launch option. |
+| Objective | Correct project-private ownership/format names and remove displaced aliases; finish the duplicate/caller audit across common, worker-base and the consumers. Preserve the delivered production semantics and present whole-T results for owner acceptance. |
 | Non-goals | No original mirror/guest changes, second registry, scheduler/helper, ancestry/observed tracking, performance work, new cooperative-then-force timeout policy or component rename. |
-| Reference Baseline | main 886f13758; published S4 eight-file package equals build/M0-T428/S4/r003/runtime/system32, APP0.0.427/RPC38/I/O25. Preserve side-session planning edits; S2 independent GUI worker reuse remains explicitly unproved/failed. |
-| Files And ABI Surface | NTSRV existing connection/worker/root/management records, registration/selection/lifecycle/route consumers; NTVWM session adapters; common/worker-base only for identical project mechanisms; focused tests. Prefer existing contracts; record necessary DTO/RPC changes and synchronized versions before implementation. No original mirror change is admitted. |
+| Reference Baseline | main/origin db855a66c; published eight-file package equals build/M0-T428/S5/r021/runtime/system32, with r015 recovery in S5/r029. APP0.0.427/RPC38/I/O25 unchanged. Preserve side-session planning edits. |
+| Files And ABI Surface | Project-private NTCON frontend/input/format names, run16 native text/GUI client names, NTSRV record readers and their callers; common/worker-base headers only where ownership is inaccurate; audited build manifests and tests. No original mirror, wire, CLI or kind-label change. |
 | Applicable Rules | Full AGENTS reading set, source provenance, original execution/cleanup ownership, shared-mechanism boundaries and documentation rules. |
-| Verification | Source-owned original shared/exclusive policy and current authority inventory; same-root worker reuse, independent root isolation, old capability/root replacement, cancellation and occupancy/kind negatives; native exclusive/shared text/GUI, nested return/close/failure; affected x86 build, Console17/Window17/WOW, coherent publication before P; governance/links/diff review. |
-| Expected Markers | Existing NTSRV worker state is the relationship authority, no second registry; readers use common outer validation while source-owned DOS/WOW/native record operations remain explicit. Native residency follows corresponding admitted original policy. |
-| Asset Needs | Existing MSVC14.43/SDK22621 incremental cache and immutable media; new outputs under build/M0-T428/S5. |
-| Reporting Requirements | Report eliminated duplicate authority/mechanisms and necessary native/original differences; prove actual reuse/isolation/exclusive/shared behavior; no whole-T closure claim. |
+| Verification | Inventory every rename and source/caller/build owner; no stale aliases or dependency inversion. Affected x86 build and focused format/input/service/GUI/lifetime tests; Console17/Window17/WOW, coherent recoverable eight-file publication and deployed smoke before production P; governance/links/diff/original-mirror checks. |
+| Expected Markers | Current private names express frontend ownership or actual message format, not obsolete run16/worker ownership. Original source identities stay untouched. NTSRV remains the only relationship authority; explicit original/native execution boundaries are retained. |
+| Asset Needs | Existing MSVC14.43/SDK22621 incremental cache and immutable media; new outputs under build/M0-T428/S6. |
+| Reporting Requirements | Report renamed/removed private paths, remaining justified source differences, exact verified gates and disclosed limitations; T remains open pending owner acceptance. |
 | Stop Conditions | New execution/lifetime policy or expanded original mirror changes require owner decision before implementation. Preserve unrelated modifications. |
-| Exit Criteria | Association/reuse and native exclusive/shared production paths pass focused/runtime/publication/review/push gates; format/ownership naming remains S6. |
+| Exit Criteria | Naming and duplicate/caller audit passes source/build/runtime/publication/review/push gates; present final T428 audit and wait for owner acceptance without closing T. |
 | Original Owner Request | NTSRV maintains logical frontend-worker relationships without another registry; NTVWM follows corresponding original DOS/Win16 residency, not an added ten-second GUI worker timer. Simplify and unify without extracting original mirror logic. |
-| Similar-Issue Sweep | Shared GUI/text carriers, exclusive self-retirement, common root association/selection/management parent, stale identity, concurrent reservation/cancellation, route release, direct completion and independent target lifetime. |
+| Similar-Issue Sweep | Frontend-private run16/native/dos spelling versus real Console/text/DIB format, consumer record-reader names, shared worker mechanisms versus original execution boundaries, removed aliases/callers and build selections. |
 
 The [S1 source audit](../etc/evidence/m0-t428-s1-worker-control-lifecycle-audit.md)
 corrects stale two-route-loop findings, confirms shared spawn/I/O/client
@@ -63,13 +63,13 @@ reuse; the [S5 evidence](../etc/evidence/m0-t428-s5-worker-association.md)
 records focused passes and retained failures. Final r015 package regression,
 lifetime, recoverable publication and deployed smoke/hash checks passed;
 the reviewed implementation increment is delivered through Git. S5 stays
-open until the final reviewed delivery is pushed. Paired route cancellation,
+is closed by pushed final P db855a66c. Paired route cancellation,
 actual prepared native root-loss/Connect and asynchronous cleanup now pass
 27 service cases. Final r021 package passes r022 Console17/Window17/WOW,
 r027 six GUI cases and r028 lifetime/close/isolation probes. r029 publishes
 that coherent package, preserving r015 recovery; r030 deployed Console/Window
 smoke and eight hashes pass. Owner confirms no exclusive GUI launch option.
-S6 is not yet admitted; T428 remains open.
+S6 is admitted for the approved final naming/caller audit; T428 remains open.
 
 ## S5 Closure Record
 
@@ -80,7 +80,7 @@ delivered or fully closed leases are removed. Source-owned command cancellation
 is unchanged. Affected x86 builds, 27 service cases, six actual GUI cases,
 Console17/Window17/WOW, paired loss/receipt1067, actual close/isolation and
 published smoke/hash gates pass. No original mirror or protocol change.
-The final reviewed P is being formed; closure is effective only on push.
+Final reviewed P db855a66c is pushed to main/origin.
 Unrelated planning edits remain separate. Format/ownership naming remains S6.
 
 ## S4 Closure Record
