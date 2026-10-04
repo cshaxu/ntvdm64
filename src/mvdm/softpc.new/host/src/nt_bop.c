@@ -70,6 +70,7 @@ DATA OBJECTS      : None
 #include "cntlbop.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_termination.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
+#include "ntvdm-exe/softpc/include/mvdm_softpc_firmware.h"
 #include "host_bop.h"
 #include "demexp.h"
 #include "xmsexp.h"
@@ -1007,7 +1008,9 @@ HINSTANCE SafeLoadLibrary(char *name)
         fsave  [ecx]
     }
 
-    hInst = LoadLibrary(name);
+    /* DIVERGENCE(MVDM-HOST-DIV-323): root only internal WOW32/VDMREDIR
+     * providers; preserve arbitrary VDD loading and this FPU save/restore. */
+    hInst = mvdm_softpc_load_library(name);
 
     // Restore the 487 state
     _asm {

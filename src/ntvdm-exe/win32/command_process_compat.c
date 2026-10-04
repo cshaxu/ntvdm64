@@ -2,6 +2,7 @@
 #include "vdmapi.h"
 #include "console_client.h"
 #include "common/protocol/console_io.h"
+#include "common/system_root.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -236,8 +237,7 @@ static BOOL opennt_command_launch_vdm_child(
 {
     char launcher[MAX_PATH];
     char child_command[MAX_PATH * 2u + MAXIMUM_VDM_COMMAND_LENGTH * 2u + 32u];
-    char *leaf;
-    DWORD launcher_bytes;
+    DWORD error;
     int formatted;
     char *tail_cursor;
 
@@ -245,14 +245,11 @@ static BOOL opennt_command_launch_vdm_child(
      * Use the sibling public launcher for both: it owns native target lifetime
      * and the original BaseClient admission of DOS/NE targets. Original
      * cmdCreateProcess still owns suspension, waiting and guest re-entry. */
-    launcher_bytes = GetModuleFileNameA(NULL, launcher, (DWORD)sizeof(launcher));
-    if (launcher_bytes == 0u || launcher_bytes >= sizeof(launcher) ||
-        (leaf = strrchr(launcher, '\\')) == NULL ||
-        (size_t)(leaf - launcher) + sizeof("run16.exe") >= sizeof(launcher)) {
-        SetLastError(ERROR_FILENAME_EXCED_RANGE);
+    error = common_product_path_a(L"run16.exe", launcher, sizeof(launcher));
+    if (error) {
+        SetLastError(error);
         return FALSE;
     }
-    memcpy(leaf + 1, "run16.exe", sizeof("run16.exe"));
     if (direct_command || opennt_command_simple_shell_tail(tail)) {
         formatted = snprintf(child_command, sizeof(child_command),
             "\"%s\" %s", launcher, tail);

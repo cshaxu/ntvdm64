@@ -1,7 +1,8 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory = $true)] [ValidateSet('x86', 'x64')] [string]$Architecture,
-    [string]$RepositoryRoot = ''
+    [string]$RepositoryRoot = '',
+    [string]$BuildRoot = ''
 )
 
 Set-StrictMode -Version Latest
@@ -20,6 +21,7 @@ if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
 }
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $build = Join-Path $root ("build/M0-T310/S8/p1-package-layout/{0}" -f $Architecture)
+if ($BuildRoot) { $build = [IO.Path]::GetFullPath($BuildRoot) }
 $vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 if (!(Test-Path -LiteralPath $vs -PathType Leaf)) { throw 'MSVC Build Tools are required.' }
 New-Item -ItemType Directory -Force $build, (Join-Path $build 'obj') | Out-Null
@@ -31,7 +33,7 @@ $environment = Join-Path $build 'msvc-mt.cmd'
 
 $sources = @('src/ntvdm-exe/session/guest_memory_lease.c',
     'src/ntvdm-exe/session/session.c', 'src/ntvdm-exe/package_layout.c',
-    'tests/app/package_layout_fixture.c')
+    'tests/app/package_layout_fixture.c', 'src/common/system_root.c')
 $graph = [Collections.Generic.List[string]]::new()
 $graph.Add('ninja_required_version = 1.10')
 $graph.Add('cflags = /nologo /TC /c /MT /W4 /showIncludes /I "' + (NinjaPath (Join-Path $root 'src')) + '"')

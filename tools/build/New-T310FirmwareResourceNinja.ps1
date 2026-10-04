@@ -2,7 +2,8 @@
 param(
     [Parameter(Mandatory = $true)] [ValidateSet('x86', 'x64')] [string]$Architecture,
     [string]$RepositoryRoot = '',
-    [Parameter(Mandatory = $true)] [string]$RuntimeRoot
+    [Parameter(Mandatory = $true)] [string]$RuntimeRoot,
+    [string]$BuildRoot = ''
 )
 
 Set-StrictMode -Version Latest
@@ -22,6 +23,7 @@ if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $runtime = (Resolve-Path -LiteralPath $RuntimeRoot).Path
 $build = Join-Path $root ("build/M0-T310/S8/p1-firmware-resource/{0}" -f $Architecture)
+if ($BuildRoot) { $build = [IO.Path]::GetFullPath($BuildRoot) }
 $vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 if (!(Test-Path -LiteralPath $vs -PathType Leaf)) { throw 'MSVC Build Tools are required.' }
 New-Item -ItemType Directory -Force $build, (Join-Path $build 'obj') | Out-Null
@@ -40,7 +42,9 @@ $sources = @(
     'src/ntvdm-exe/session/session.c',
     'src/ntvdm-exe/softpc/mvdm_softpc_firmware.c',
     'tests/session/softpc_firmware_resource_fixture.c',
-    'tests/session/softpc_media_resource_fixture.c'
+    'tests/session/softpc_media_resource_fixture.c',
+    'src/common/system_root.c',
+    'tests/session/softpc_product_loader_fixture.c'
 )
 $graph = [Collections.Generic.List[string]]::new()
 $graph.Add('ninja_required_version = 1.10')
@@ -57,17 +61,21 @@ $graph.Add('rule run')
 $graph.Add('  command = $in "' + (NinjaPath (Join-Path $root 'src/mvdm/softpc.new/roms')) + '"')
 $graph.Add('rule run_dos')
 $graph.Add('  command = $in "' + (NinjaPath $runtime) + '"')
+$graph.Add('rule run_loader')
+$graph.Add('  command = $in "' + (NinjaPath (Join-Path $build 'loader-shadow')) + '"')
 $objects = @()
 for ($index = 0; $index -lt $sources.Count; ++$index) {
     $object = 'obj/' + $index + '-' + ([IO.Path]::GetFileNameWithoutExtension($sources[$index])) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $root $sources[$index])))
     $objects += $object
 }
-$graph.Add('build softpc-firmware-resource-fixture.exe: link obj/0-guest_memory_lease.obj obj/1-session.obj obj/2-mvdm_softpc_firmware.obj obj/3-softpc_firmware_resource_fixture.obj')
-$graph.Add('build softpc-media-resource-fixture.exe: link obj/0-guest_memory_lease.obj obj/1-session.obj obj/2-mvdm_softpc_firmware.obj obj/4-softpc_media_resource_fixture.obj')
+$graph.Add('build softpc-firmware-resource-fixture.exe: link obj/0-guest_memory_lease.obj obj/1-session.obj obj/2-mvdm_softpc_firmware.obj obj/3-softpc_firmware_resource_fixture.obj obj/5-system_root.obj')
+$graph.Add('build softpc-media-resource-fixture.exe: link obj/0-guest_memory_lease.obj obj/1-session.obj obj/2-mvdm_softpc_firmware.obj obj/4-softpc_media_resource_fixture.obj obj/5-system_root.obj')
+$graph.Add('build softpc-product-loader-fixture.exe: link obj/0-guest_memory_lease.obj obj/1-session.obj obj/2-mvdm_softpc_firmware.obj obj/5-system_root.obj obj/6-softpc_product_loader_fixture.obj')
 $graph.Add('build verify: run softpc-firmware-resource-fixture.exe')
 $graph.Add('build verify-media: run_dos softpc-media-resource-fixture.exe')
-$graph.Add('build all-verify: phony verify verify-media')
+$graph.Add('build verify-loader: run_loader softpc-product-loader-fixture.exe')
+$graph.Add('build all-verify: phony verify verify-media verify-loader')
 $graph.Add('default all-verify')
 [IO.File]::WriteAllText((Join-Path $build 'build.ninja'), (($graph -join [Environment]::NewLine) + [Environment]::NewLine), [Text.UTF8Encoding]::new($false))
 Write-Host "Generated T310 S8 firmware-resource graph: $build"

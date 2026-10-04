@@ -1,5 +1,22 @@
 # Source Layout
 
+## Own-image root mechanics — T427 S2
+
+`common/system_root.[ch]` owns only checked actual-EXE directory derivation,
+bounded relative joins and loss-checked ANSI conversion. Its separately
+selected `common-root.lib` is usable by all native EXEs without depending on
+worker-base or EXE-private implementations. A consumer with no product-file
+lookup does not acquire an artificial lookup merely to use the library.
+Product root is not a global environment override or RPC identity check.
+
+Run16 owns `guest_environment.[ch]`, the bounded ANSI Win16 record projection;
+it does not modify the Unicode host worker environment. NTVDM's firmware
+adapter owns the exact internal DLL-name binding behind the registered
+SafeLoadLibrary hook; arbitrary VDD loading and its original FPU save/restore
+remain unchanged. NTSRV retains startup/admission/rollback policy while using
+common root mechanics for its selected sibling paths. See the
+[S2 record](../etc/evidence/m0-t427-s2-own-image-root-bindings.md).
+
 ## Delivered T424 common library and service separation
 
 S7 delivers common/two-protocol organization; S8 delivers the separately

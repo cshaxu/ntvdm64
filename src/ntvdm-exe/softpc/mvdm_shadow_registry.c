@@ -1,4 +1,5 @@
 #include "mvdm_shadow_registry.h"
+#include "common/system_root.h"
 #include <stdlib.h>
 #include <string.h>
 
@@ -61,14 +62,9 @@ static VOID shadow_trace_section(LPCSTR event, LPCSTR section)
 
 static BOOL shadow_path(char *path, DWORD capacity)
 {
-    char *slash;
-    DWORD length=GetModuleFileNameA(NULL,path,capacity);
-
-    if (length==0 || length>=capacity) return FALSE;
-    slash=strrchr(path,'\\');
-    if (slash==NULL || (DWORD)(slash-path)+9u>=capacity) return FALSE;
-    lstrcpyA(slash+1,"NTVDM.REG");
-    return TRUE;
+    DWORD error=common_product_path_a(L"NTVDM.REG",path,capacity);
+    if(error)SetLastError(error);
+    return error==ERROR_SUCCESS;
 }
 
 BOOL ntvdm_shadow_registry_initialize(VOID)

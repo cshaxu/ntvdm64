@@ -8,6 +8,24 @@ NTCON renderer or modifying guest/shared-library code.
 
 ## Product boundary
 
+### Own-image product root — T427 S2
+
+`common/system_root` supplies checked native EXE-directory and relative-path
+mechanics. Each caller uses its own loaded image; CWD, PATH, argv and inherited
+environment text are not root authorities. Internal executables, media and
+the exact WOW32/VDMREDIR provider names use their declared package-relative
+locations. Missing local providers do not fall back to user search. This is
+not a new RPC authentication or package-identity policy; service acceptance
+and protocol versions remain unchanged.
+
+Real Windows directory calls retain host meaning. Run16 projects the product
+root into the bounded ANSI Win16 guest record only; the Unicode host worker
+environment and native process SYSTEMROOT remain real-host values. Original
+KRNL386 module-directory and WIN16DIR rules remain at their owners. User
+application search is a separate S3 repair and is not yet changed by S2.
+The [S2 evidence](../etc/evidence/m0-t427-s2-own-image-root-bindings.md) records
+production bindings, focused tests and the exact runtime coverage limits.
+
 ### Service-owned management tree — T426
 
 NTSRV projects existing authenticated frontend associations, worker watches,

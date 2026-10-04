@@ -13,6 +13,8 @@
 #include "image_classification.h"
 #include "native_launch.h"
 #include "common/protocol/console_io.h"
+#include "common/system_root.h"
+#include "guest_environment.h"
 #include <shellapi.h>
 #include <stdio.h>
 #include <wchar.h>
@@ -36,7 +38,7 @@ typedef struct _WORKER_WIN16DIR_SCOPE {
 static BOOL begin_worker_win16_directory(WORKER_WIN16DIR_SCOPE *scope)
 {
     WCHAR root[MAX_PATH];
-    WCHAR *slash;
+    DWORD error;
     LPWCH current;
     LPWCH cursor;
     PWSTR destination;
@@ -49,13 +51,11 @@ static BOOL begin_worker_win16_directory(WORKER_WIN16DIR_SCOPE *scope)
         return FALSE;
     }
     ZeroMemory(scope, sizeof(*scope));
-    if (!GetModuleFileNameW(NULL, root, ARRAYSIZE(root))) return FALSE;
-    slash = wcsrchr(root, L'\\');
-    if (slash == NULL || slash == root) {
-        SetLastError(ERROR_BAD_PATHNAME);
+    error = common_system_root_w(root, ARRAYSIZE(root));
+    if (error) {
+        SetLastError(error);
         return FALSE;
     }
-    *slash = L'\0';
     root_chars = wcslen(root);
     current = GetEnvironmentStringsW();
     if (current == NULL) return FALSE;
@@ -104,21 +104,9 @@ static void end_worker_win16_directory(WORKER_WIN16DIR_SCOPE *scope)
 
 static BOOL sibling_path(PCWSTR name, PWSTR output, DWORD capacity)
 {
-    DWORD length;
-    PWSTR slash;
-    if (!name || !output || !capacity)
-        return FALSE;
-    length = GetModuleFileNameW(NULL, output, capacity);
-    if (!length || length >= capacity)
-        return FALSE;
-    slash = wcsrchr(output, L'\\');
-    if (!slash)
-        return FALSE;
-    ++slash;
-    if ((DWORD)(slash - output) + lstrlenW(name) + 1 > capacity)
-        return FALSE;
-    lstrcpyW(slash, name);
-    return TRUE;
+    DWORD error = common_product_path_w(name, output, capacity);
+    if (error) SetLastError(error);
+    return error == ERROR_SUCCESS;
 }
 
 static BOOL image_has_extension(PCWSTR image)
@@ -292,6 +280,23 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command,run16_f
         goto done;
     }
     end_worker_win16_directory(&win16_directory);
+    if ((binary & ~BINARY_SUBTYPE_MASK)==BINARY_TYPE_WIN16 ||
+        (binary & ~BINARY_SUBTYPE_MASK)==BINARY_TYPE_SEPWOW) {
+        CHAR root[MAX_PATH],short_root[MAX_PATH];
+        PSTR guest=NULL;DWORD bytes=0,length;
+        result=common_system_root_a(root,sizeof(root));
+        if(result)goto done;
+        length=GetShortPathNameA(root,short_root,sizeof(short_root));
+        if(!length){result=GetLastError();goto done;}
+        if(length>=sizeof(short_root)){result=ERROR_FILENAME_EXCED_RANGE;goto done;}
+        result=run16_guest_environment_root(environment.Buffer,environment.Length,
+            short_root,&guest,&bytes);
+        if(result)goto done;
+        RtlFreeAnsiString(&environment);
+        environment.Buffer=guest;
+        environment.Length=(USHORT)bytes;
+        environment.MaximumLength=(USHORT)(bytes+1u);
+    }
     GetStartupInfoW(&startup);
     /* The original BaseCheckVDM accepts either caller-supplied STARTF
      * standard handles or the process-parameter equivalents.  The public

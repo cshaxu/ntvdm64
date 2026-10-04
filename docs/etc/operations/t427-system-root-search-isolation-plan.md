@@ -12,7 +12,7 @@ owns requirements; [Status](../../states/CURRENT.md) owns the only active S.
    evidence. Decide the smallest shared owner and per-caller failure tests.
 2. S2: implement actual-own-EXE root derivation and internal component/media
    binding; use bounded guest projection only where source proves it. Verify
-   relocation, incorrect inherited roots and split-package rejection.
+   relocation, incorrect inherited roots and missing local internal files.
 3. S3: remove implicit package-first user command lookup; retain CWD/PATH order
    and explicit-path authority. Make product-generated COMMAND invocation
    explicit without changing guest EXEC/parser or native host environment.
@@ -29,7 +29,8 @@ Every process derives its root from its actual loaded EXE, not another EXE's
 path, argv, CWD, PATH or inherited authority. Native host Windows directories
 remain host-owned. Internal media roots never gain implicit user-search
 priority; the package participates only through CWD, explicit PATH placement
-or an explicit user path. Cross-process package identity must be checked.
+or an explicit user path. Owner correction excludes new RPC package-directory
+identity checks; existing authentication/version policy remains unchanged.
 
 No guest patch, new helper/component, global environment/Registry mutation,
 DLL-loader overhaul or lifecycle/scheduler change. Preserve other sessions'

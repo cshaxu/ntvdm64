@@ -155,14 +155,13 @@ fallback, preserving original retry/error order; do not make product root the
 scratch fallback. Existing system.ini shadow already uses GetTempPath and
 delete-on-close, and retains immutable source configuration.
 
-Cross-package isolation belongs at the existing authentication/join boundary:
-server authenticates the actual passed process then compares its actual EXE
-directory to its own; the BaseClient checks the authenticated broker process
-capability before publishing the connection. Compare directory object identity
-so a subst alias does not create a false mismatch. No new protocol, environment
-authority, reconnect, helper, scheduler or task registry is necessary.
+The initial audit proposed cross-package directory identity validation at the
+authentication/join boundary. The owner subsequently rejected that additional
+RPC validation and complexity. It is not an implementation requirement or a
+passing gate. Existing RPC authentication/version policy remains unchanged;
+local root derivation does not inspect peer images or directory identities.
 
-S2 implements shared checked own-image/root/resource mechanics and authenticated
+S2 implements shared checked own-image/root/resource mechanics without new RPC
 join validation; S3 implements directory-first user search and explicit internal
 COMMAND. Guest-only WOW projection, known product DLL binding and host-temp
 correction stay bounded S2 caller adaptations, with immutable guest hashes and

@@ -2,6 +2,7 @@
  * not an original OpenNT mirror. Physical separation only: existing function
  * bodies, state authority and lock/resource contracts are preserved. */
 #include <service_internal.h>
+#include "common/system_root.h"
 
 typedef struct service_vdm_admission {
     OPENNT_BASE_CONNECTION *connection;
@@ -512,13 +513,13 @@ DWORD OpenNtBaseServiceStartVdmWorker(OPENNT_BASE_CONNECTION *connection,DWORD p
     DWORD generation,DWORD characters,const WCHAR *environment,DWORD show,HANDLE frontend,
     HANDLE *worker,HANDLE *parent,DWORD *receipt)
 {
-    WCHAR image[MAX_PATH],*slash;CHAR ansi[MAX_PATH],kernel[MAX_PATH],*ansi_slash;
+    WCHAR image[MAX_PATH];CHAR ansi[MAX_PATH],kernel[MAX_PATH];
     OPENNT_BASE_VDM_CONFIG config;
     const OPENNT_BASE_VDM_CONFIG *previous;
     UNICODE_STRING command={0};ULONG size=0;
     STARTUPINFOW startup={sizeof(startup)};
     service_vdm_admission admission={0};uint64_t reservation=0;
-    DWORD error,length,flags;
+    DWORD error,flags;
     if(!worker || !parent || !receipt)return ERROR_INVALID_PARAMETER;
     *worker=*parent=NULL;*receipt=0;
     if(!connection || !OpenNtBaseServicePeer(connection,pid,generation))return ERROR_ACCESS_DENIED;
@@ -540,15 +541,11 @@ DWORD OpenNtBaseServiceStartVdmWorker(OPENNT_BASE_CONNECTION *connection,DWORD p
     if(error)return error;
     error=OpenNtBaseServiceCreateReservation(connection,pid,generation,connection->task,&reservation);
     if(error)goto done;
-    length=GetModuleFileNameW(NULL,image,ARRAYSIZE(image));
-    if(!length || length>=ARRAYSIZE(image) || !(slash=wcsrchr(image,L'\\')) ||
-        wcscpy_s(slash+1,ARRAYSIZE(image)-(size_t)(slash+1-image),L"ntvdm.exe"))
-        {error=ERROR_BAD_PATHNAME;goto done;}
-    if(!WideCharToMultiByte(CP_ACP,0,image,-1,ansi,sizeof(ansi),NULL,NULL))
-        {error=GetLastError();goto done;}
-    ansi_slash=strrchr(ansi,'\\');
-    if(!ansi_slash || sprintf_s(kernel,sizeof(kernel),"%.*s\\system32\\krnl386",
-        (int)(ansi_slash-ansi),ansi)<=0 || !OpenNtBaseInitializeVdmConfig(&config,ansi,kernel))
+    error=common_product_path_w(L"ntvdm.exe",image,ARRAYSIZE(image));
+    if(!error)error=common_product_path_a(L"ntvdm.exe",ansi,sizeof(ansi));
+    if(!error)error=common_product_path_a(L"system32\\krnl386",kernel,sizeof(kernel));
+    if(error)goto done;
+    if(!OpenNtBaseInitializeVdmConfig(&config,ansi,kernel))
         {error=ERROR_BAD_PATHNAME;goto done;}
     previous=OpenNtBaseBindVdmConfig(&config);
     if(!BaseGetVdmConfigInfo(image,admission.binary==BINARY_TYPE_DOS ? connection->task : 0,
@@ -588,9 +585,9 @@ done:
 DWORD OpenNtBaseServiceStartNativeWorker(OPENNT_BASE_CONNECTION *connection,DWORD pid,
     DWORD generation,HANDLE *worker)
 {
-    WCHAR image[MAX_PATH],command[MAX_PATH+3],*slash;
+    WCHAR image[MAX_PATH],command[MAX_PATH+3];
     STARTUPINFOW startup={sizeof(startup)};
-    uint64_t reservation=0;DWORD length,error;
+    uint64_t reservation=0;DWORD error;
     if(!worker)return ERROR_INVALID_PARAMETER;
     *worker=NULL;
     error=OpenNtBaseServiceSelectNativeWorker(connection,pid,generation,worker);
@@ -598,11 +595,9 @@ DWORD OpenNtBaseServiceStartNativeWorker(OPENNT_BASE_CONNECTION *connection,DWOR
     error=OpenNtBaseServiceCreateNativeReservation(connection,pid,generation,&reservation);
     if(error)return error;
     /* Same-package product worker only. No remote executable/flags command. */
-    length=GetModuleFileNameW(NULL,image,ARRAYSIZE(image));
-    if(!length || length>=ARRAYSIZE(image) || !(slash=wcsrchr(image,L'\\')))
-        {error=ERROR_BAD_PATHNAME;goto done;}
-    if(wcscpy_s(slash+1,ARRAYSIZE(image)-(size_t)(slash+1-image),L"ntvwm.exe") ||
-        swprintf_s(command,ARRAYSIZE(command),L"\"%ls\"",image)<0)
+    error=common_product_path_w(L"ntvwm.exe",image,ARRAYSIZE(image));
+    if(error)goto done;
+    if(swprintf_s(command,ARRAYSIZE(command),L"\"%ls\"",image)<0)
         {error=ERROR_FILENAME_EXCED_RANGE;goto done;}
     startup.dwFlags=STARTF_USESHOWWINDOW;startup.wShowWindow=SW_HIDE;
     error=broker_worker_start(connection,pid,generation,reservation,image,command,NULL,

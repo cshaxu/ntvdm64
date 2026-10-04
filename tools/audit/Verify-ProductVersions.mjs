@@ -50,7 +50,7 @@ try {
         fs.writeFileSync(path.join(build,`${name}.c`),body);
         compile(`cl.exe /nologo /c /MT /W4 /we4013 /I "${product}/obj/basesrv" /I "${root}/src" ${name}.c /Fo${name}.obj`);
         const stub=name==='legacy-interface'?'legacy-stub.obj':`"${product}/obj/basesrv/stub.obj"`;
-        compile(`link.exe /nologo /opt:ref /out:${name}.exe ${name}.obj ${stub} "${product}/obj/run16/support.obj" "${product}/opennt-base-server.lib" "${product}/opennt-base-bindings.lib" "${product}/broker-transport.lib" "${product}/original-opennt-rtl-x86.lib" "${product}/common-rpc.lib" "${product}/common-transport.lib" "${product}/common-codec.lib" "${product}/common-console.lib" rpcrt4.lib ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib`);
+        compile(`link.exe /nologo /opt:ref /out:${name}.exe ${name}.obj ${stub} "${product}/obj/run16/support.obj" "${product}/opennt-base-server.lib" "${product}/opennt-base-bindings.lib" "${product}/broker-transport.lib" "${product}/original-opennt-rtl-x86.lib" "${product}/common-root.lib" "${product}/common-rpc.lib" "${product}/common-transport.lib" "${product}/common-codec.lib" "${product}/common-console.lib" rpcrt4.lib ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib`);
     }
 } finally {fs.closeSync(compileLog);}
 for (const [name] of variants) {

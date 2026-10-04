@@ -24,6 +24,10 @@ long mvdm_softpc_firmware_read_embedded_rom(const char *name, void *bytes_out,
 int __cdecl mvdm_softpc_system_find_file(const char *name, char *path_out,
     uint32_t path_out_bytes);
 
+/* Root only the internal native providers. Arbitrary VDD names/paths retain
+ * the original host loader. The original caller preserves guest FPU state. */
+void * __cdecl mvdm_softpc_load_library(const char *name);
+
 /* Modern profile APIs redirect every file named SYSTEM.INI through the host
  * mapping layer, even for an absolute package pathname.  Copy the selected
  * immutable system profile to a worker-local temporary name and return that

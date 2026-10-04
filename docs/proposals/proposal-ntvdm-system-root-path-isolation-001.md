@@ -63,9 +63,10 @@ adopting modern CMD's extension order by assumption.
   checked full-path API, never argv[0], CWD, PATH or an inherited variable.
   Replace duplicate local derivations; do not hard-code O:/winnt. A variable,
   if exposed to a child or guest, is a projection/locator, never the authority
-  for that native process's own root or for broker authentication. Verify the
-  selected same-package identity at cross-process join; missing siblings and
-  mismatched roots fail rather than redirecting another process or session.
+  for that native process's own root or for broker authentication. Missing
+  required siblings fail locally instead of falling back to CWD/PATH. By owner
+  correction, do not add RPC package-directory identity validation; existing
+  RPC authentication and version acceptance remain unchanged.
 - Use the root with declared relative paths, not a blanket flat-directory
   search. Follow the original OpenNT caller's `root`, `root\system` and
   `root\system32` composition where applicable; `system32` is a relative
@@ -104,8 +105,8 @@ adopting modern CMD's extension order by assumption.
   longer discovers package applications when these conditions do not hold.
 - Direct, inner and nested run16 must agree on application lookup without
   replacing original COMMAND parsing, guest EXEC or task completion policy.
-  Handle an existing broker/worker from a different package explicitly; do not
-  silently mix roots or retarget a live session by changing an environment value.
+  Do not retarget a live session by changing an environment value. This package
+  does not add cross-process directory matching or change broker acceptance.
 - ROMS_REZ_ID firmware is embedded in the current EXE build. Do not require a
   deployed `root\softpc` directory merely because a legacy `firmware_root`
   field and `host_find_file` adapter remain. Audit reachability of non-ROM
@@ -162,7 +163,7 @@ root contract must be available consistently without inventing a resource.
 | S | Work | Exit condition |
 | --- | --- | --- |
 | S1 | Complete the three-role caller ledger, original DOS search/extension and Win16 directory-source audit, selected-host reachability, non-ROM SoftPC use and same-name shadowing reproducer. | Every selected caller has a user/host/product disposition, original-source basis, failure behavior and positive/negative assertion; no modern CMD/DOS equivalence is assumed. |
-| S2 | Add the single native EXE-wide self-root implementation; replace duplicate derivations and bind internal component/media/config paths with minimal source-shaped changes, including guest-only projection if source evidence requires it. | Every product EXE derives its own root; relocated and nested packages select correct internal files; missing dependencies and wrong-root joins fail explicitly; real host SystemRoot and guest immutability are preserved. |
+| S2 | Add the single native EXE-wide self-root implementation; replace duplicate derivations and bind internal component/media/config paths with minimal source-shaped changes, including guest-only projection if source evidence requires it. | Shared own-image root mechanics select correct internal files under relocation/nesting; missing dependencies fail locally; real host SystemRoot, guest immutability and existing RPC acceptance are preserved. |
 | S3 | Remove run16's package-first user discovery and fix internally generated COMMAND invocations; cover direct, interactive and nested application search. | No implicit package priority; explicit paths and CWD-then-PATH plus audited DOS extension order pass production-path tests. |
 | S4 | Similar-issue sweep, full regression, diff/code reduction accounting and coherent publication. | Formal x86 build and all applicable production-P gates pass; docs, tested package, commit/push and owner handoff are complete. |
 
@@ -172,9 +173,10 @@ Check in tests that assert the actual selected image path as well as output and
 exit result. Cover same-name applications in the package, current directory and
 multiple PATH directories; explicit suffixes, absent files, spaces/Unicode,
 empty/unset PATH, inherited incorrect NtvdmSystemRoot and package relocation.
-Include a split-EXE-directory/wrong-root-join negative case and prove that
-each product native EXE uses its own image location rather than inherited root
-text. Put controlled same-name applications in (1) the current directory,
+Prove that each product native EXE uses its own image location rather than
+inherited root text. Do not add a split-directory RPC rejection test: the owner
+explicitly excludes this additional validation and complexity. Put controlled
+same-name applications in (1) the current directory,
 (2) two ordered PATH directories, and (3) the package directory omitted from
 both; record the selected full path for each result. A case where CWD equals
 the package directory must pass through the ordinary CWD rule, not a special

@@ -515,8 +515,14 @@ runtime-discovery inputs.  The complete per-file provenance is in
 
 ### Existing MVDM host divergences
 
+T427 restores `cmdredir.c`'s original `GetWindowsDirectory` temporary-file
+fallback (OpenNT `base/mvdm/dos/command/cmdredir.c`): this is host scratch space,
+not guest media. The previous product-root replacement and its now-unused
+firmware include are removed; original retry/failure order is unchanged.
+
 | ID | Original purpose | Reason | Implementation | Files |
 | --- | --- | --- | --- | --- |
+| MVDM-HOST-DIV-323 | SafeLoadLibrary preserves original FPU save/load/restore around DLL loading. | Exact internal WOW32/VDMREDIR providers must come from the current product root, not CWD/PATH. | Delegate only the load expression to `mvdm_softpc_load_library` in the existing firmware adapter; common root joins internal names, arbitrary VDD names/explicit paths retain LoadLibraryA. No guest or general host DLL policy change. | `softpc.new/host/src/nt_bop.c` |
 | MVDM-HOST-DIV-222 | Adapt the original `53:01` register-frame handoff to CCPU segment-cache semantics. | The kernel-VDM x86 owner writes passive CONTEXT selectors before PE; CCPU immediately resolves each setter through its active descriptor cache. | Capture the source frame while real-mode SS is valid, clear NT as original `ntos/vdm/x86/vdmmisc.asm::VdmSwapContexts` does with `EFLAGS_USER_SANITIZE` (retain the CCPU IF/IOPL policy), enable PE/CPL-3, then load the same CS:EIP, SS:ESP and DS fields through CCPU. Restore the already selected worker WOW page/GDT view on this reentry path, matching native user-selector lifetime; kernel VDM state bits remain absent. | `dpmi32/modesw.c` |
 | MVDM-HOST-DIV-223 | Bind DOSX's source-delivered LDT to CCPU after `53:0F`. | Historical non-i386 only used the table for host address conversion, while CPU40 executes selectors directly. | Derive the guest-linear table base from the existing `Ldt`/`IntelBase` pair and install it in CCPU with an internal-valid LDTR selector. | `dpmi32/dpmi32.c` |
 | MVDM-HOST-DIV-224 | Route CPU40 DPMI extended-memory allocation through the original shared XMS suballocator. | CPU40 XMS reserves the complete extended linear range, leaving the generic VDM allocator correctly empty when DOSX requests memory. | Use the existing RISC shared-XMS allocation, free, reallocation and query operations consistently for CPU40 only. | `dpmi32/dpmimemr.c` |

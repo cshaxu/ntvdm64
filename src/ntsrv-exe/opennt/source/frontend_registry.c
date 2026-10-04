@@ -3,6 +3,7 @@
  * bodies, state authority and lock/resource contracts are preserved. */
 #include <service_internal.h>
 #include "common/protocol/frontend_protocol.h"
+#include "common/system_root.h"
 
 
 static void service_console_return_ack(OPENNT_BASE_CONNECTION *root);
@@ -573,14 +574,14 @@ done:
 DWORD OpenNtBaseServiceStartFrontend(OPENNT_BASE_CONNECTION *caller,DWORD pid,
     DWORD generation,uint64_t window,BOOL borrowed,HANDLE *root,HANDLE *capability,HANDLE *restored)
 {
-    WCHAR image[MAX_PATH],command[1024],*slash;
+    WCHAR image[MAX_PATH],command[1024];
     HANDLE creator=NULL;
     HANDLE notification=NULL,retire=NULL,ack=NULL,event=NULL,timer=NULL,verified=NULL;
     HANDLE inherited[4],unused_retire=NULL;
     SECURITY_ATTRIBUTES security={sizeof(security),NULL,TRUE};
     STARTUPINFOEXW startup={0};PROCESS_INFORMATION process={0};
     LARGE_INTEGER due;SIZE_T bytes=0;
-    DWORD error,create=0,length,root_generation=0;
+    DWORD error,create=0,root_generation=0;
     BOOL attributes=FALSE,accepted=FALSE;
     if(!caller || !window || borrowed>1 || !root || !capability || !restored)
         return ERROR_INVALID_PARAMETER;
@@ -605,11 +606,8 @@ DWORD OpenNtBaseServiceStartFrontend(OPENNT_BASE_CONNECTION *caller,DWORD pid,
     if(!DuplicateHandle(GetCurrentProcess(),verified,GetCurrentProcess(),&creator,
         PROCESS_QUERY_LIMITED_INFORMATION|SYNCHRONIZE,TRUE,0)){error=GetLastError();goto done;}
     CloseHandle(verified);verified=NULL;
-    length=GetModuleFileNameW(NULL,image,ARRAYSIZE(image));
-    if(!length || length>=ARRAYSIZE(image) || !(slash=wcsrchr(image,L'\\')))
-        {error=ERROR_BAD_PATHNAME;goto done;}
-    if(wcscpy_s(slash+1,ARRAYSIZE(image)-(size_t)(slash+1-image),L"ntcon.exe"))
-        {error=ERROR_FILENAME_EXCED_RANGE;goto done;}
+    error=common_product_path_w(L"ntcon.exe",image,ARRAYSIZE(image));
+    if(error)goto done;
     notification=CreateEventW(&security,TRUE,FALSE,NULL);
     retire=CreateEventW(&security,TRUE,FALSE,NULL);
     ack=CreateEventW(&security,TRUE,FALSE,NULL);
