@@ -20,7 +20,7 @@ $cases=@('io-authority','frontend-delegated','frontend-wait','frontend-wait-root
     'frontend-wait-request-loss','frontend-wait-worker-loss','frontend-rundown',
     'reenter-before-return','reenter-after-return','reenter-nested-return',
     'reenter-pending-command','reenter-before-increment','launcher-completed-rundown',
-    'completed-worker-loss','wow-start-late-query','default','frontend-authority','unbound-retirement',
+    'completed-worker-loss','wow-start-late-query','default','frontend-authority','shared-worker-residency',
     'native-command','native-worker','management-gui','management-frontend-close')
 if($FailureProbe){$cases=@('runner-failure')}
 $null=New-Item -ItemType Directory -Path $log

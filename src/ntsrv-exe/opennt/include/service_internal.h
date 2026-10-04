@@ -194,7 +194,6 @@ typedef struct OPENNT_BASE_WORKER_WATCH {
     HANDLE shutdown;
     BOOL frontend_associated;
     DWORD management_root_generation,management_root_pid;
-    ULONGLONG unbound_native_deadline;
 } OPENNT_BASE_WORKER_WATCH;
 typedef struct OPENNT_BASE_MANAGEMENT_LABEL {
     LIST_ENTRY link;

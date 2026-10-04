@@ -197,7 +197,6 @@ DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *service,HANDLE process,
                         }
                     }
                 }
-                if(connection->native_worker)watch->unbound_native_deadline=GetTickCount64()+FRONTEND_STARTUP_DEADLINE_MS;
                 if (error || !RegisterWaitForSingleObject(&watch->wait,watch->process.ProcessHandle,
                     service_worker_terminated,watch,INFINITE,WT_EXECUTEONLYONCE)) {
                     if(!error)error=GetLastError();

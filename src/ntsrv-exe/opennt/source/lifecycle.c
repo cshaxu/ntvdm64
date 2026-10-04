@@ -5,24 +5,6 @@
 
 static ULONGLONG service_root_retirement_deadline(OPENNT_BASE_CONNECTION *root,ULONGLONG now);
 
-static ULONGLONG service_unbound_native_deadline(OPENNT_BASE_WORKER_WATCH *watch,ULONGLONG now)
-{
-    LIST_ENTRY *link;
-    if(watch->kind!=OPENNT_BASE_WORKER_NATIVE || watch->frontend_associated ||
-        WaitForSingleObject(watch->shutdown,0)!=WAIT_TIMEOUT)return 0;
-    for(link=watch->service->connections.Flink;link!=&watch->service->connections;link=link->Flink) {
-        OPENNT_BASE_CONNECTION *worker=CONTAINING_RECORD(link,OPENNT_BASE_CONNECTION,service_link);
-        if(worker->process.SequenceNumber!=watch->process.SequenceNumber)continue;
-        if(worker->native_root || worker->native_inflight) {
-            watch->unbound_native_deadline=0;return 0;
-        }
-        break;
-    }
-    if(!watch->unbound_native_deadline)
-        watch->unbound_native_deadline=now+FRONTEND_STARTUP_DEADLINE_MS;
-    return watch->unbound_native_deadline;
-}
-
 void service_signal_frontend_states(OPENNT_BASE_SERVICE *service)
 {
     LIST_ENTRY *link;
@@ -306,11 +288,6 @@ DWORD service_next_frontend_deadline_at(OPENNT_BASE_SERVICE *service,ULONGLONG n
         ULONGLONG due=service_root_retirement_deadline(root,now);
         if(due && (!*deadline || due<*deadline))*deadline=due;
     }
-    for(link=service->worker_watches.Flink;link!=&service->worker_watches;link=link->Flink) {
-        OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(link,OPENNT_BASE_WORKER_WATCH,link);
-        ULONGLONG due=service_unbound_native_deadline(watch,now);
-        if(due && (!*deadline || due<*deadline))*deadline=due;
-    }
     LeaveCriticalSection(&service->lock);
     return ERROR_SUCCESS;
 }
@@ -336,17 +313,14 @@ DWORD service_retire_expired_frontends_at(OPENNT_BASE_SERVICE *service,ULONGLONG
         }
     }
     /* Only NTSRV translates lost frontend ownership into worker shutdown.
-     * A live worker which has never been associated is still in startup. */
+     * An admitted GUI-only carrier has no character frontend by design;
+     * like shared WOW, it remains resident rather than timing out as startup. */
     for(link=service->worker_watches.Flink;link!=&service->worker_watches;link=link->Flink) {
         OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(link,OPENNT_BASE_WORKER_WATCH,link);
         LIST_ENTRY *root_link;
         BOOL attached=FALSE;
         DWORD native_root=0;
         if(watch->wow)continue;
-        {
-            ULONGLONG due=service_unbound_native_deadline(watch,now);
-            if(due && due<=now) {(void)SetEvent(watch->shutdown);changed=TRUE;}
-        }
         if(watch->kind==OPENNT_BASE_WORKER_NATIVE)
             for(root_link=service->connections.Flink;root_link!=&service->connections;root_link=root_link->Flink) {
                 OPENNT_BASE_CONNECTION *worker=CONTAINING_RECORD(root_link,OPENNT_BASE_CONNECTION,service_link);

@@ -17,7 +17,7 @@ DWORD fixture_queue_native_command(OPENNT_BASE_CONNECTION *,DWORD,DWORD,HANDLE,D
 DWORD fixture_take_native_command(OPENNT_BASE_CONNECTION *,DWORD,DWORD,DWORD,BYTE *,DWORD *,HANDLE *,HANDLE *,HANDLE *,DWORD *);
 DWORD fixture_frontend_notification_denied(OPENNT_BASE_CONNECTION *,DWORD,DWORD,DWORD,BOOL,BOOL *);
 int fixture_io_authority(void);
-int fixture_unbound_retirement(void);
+int fixture_shared_worker_residency(void);
 int fixture_management_gui(void);
 DWORD service_next_frontend_deadline_at(OPENNT_BASE_SERVICE *,ULONGLONG,ULONGLONG *);
 DWORD service_retire_expired_frontends_at(OPENNT_BASE_SERVICE *,ULONGLONG);
@@ -750,7 +750,7 @@ int main(int argc,char **argv)
     if(argc==2 && !strcmp(argv[1],"--io-authority"))return fixture_io_authority();
     if(argc==2 && !strcmp(argv[1],"--management-gui"))return fixture_management_gui();
     if(argc==2 && !strcmp(argv[1],"--management-frontend-close"))return management_frontend_close();
-    if(argc==2 && !strcmp(argv[1],"--unbound-retirement"))return fixture_unbound_retirement();
+    if(argc==2 && !strcmp(argv[1],"--shared-worker-residency"))return fixture_shared_worker_residency();
     if(argc==3 && !strcmp(argv[1],"--reservation-wait-child"))
         return reservation_wait_child(argv[2]);
     if(argc==3 && !strcmp(argv[1],"--reservation-descendant"))

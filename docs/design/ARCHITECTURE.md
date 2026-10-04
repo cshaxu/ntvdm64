@@ -565,6 +565,14 @@ preserve existing caller-held lock/resource contracts and original lock order.
 
 ### Current lifecycle and direct-completion contract
 
+Owner-approved T428 clarification: admitted shared GUI-only NTVWM carriers
+follow shared WOW residency, not an additional ten-second unbound-worker
+idle timer. GUI target exit and carrier residency remain separate. Exclusive
+native text/GUI semantics must follow original exclusive DOS/separate WOW at
+the native worker boundary; original NTVDM policy is not relocated or changed.
+The frontend workerless grace, broker empty grace and finite startup admission
+remain distinct from admitted worker residency.
+
 NTSRV is the single authority for registered NTVDM and NTVWM workers, their
 frontend-root associations, direct-command admission and completion, and
 cooperative retirement. NTCON owns visible Console/Window presentation, not

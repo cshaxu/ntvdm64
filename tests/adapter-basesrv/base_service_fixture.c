@@ -75,7 +75,7 @@ cleanup:
 
 /* Trusted fixture inserts only the existing watch record; all deadline,
  * cancellation and shutdown decisions execute the production archive. */
-int fixture_unbound_retirement(void)
+int fixture_shared_worker_residency(void)
 {
     OPENNT_BASE_SERVICE *service=OpenNtBaseServiceStart();
     OPENNT_BASE_CONNECTION *worker=NULL;
@@ -96,29 +96,39 @@ int fixture_unbound_retirement(void)
     worker->native_worker=TRUE;
     InsertTailList(&service->worker_watches,&watch.link);
     LeaveCriticalSection(&service->lock);
-    RETIRE_CHECK(!service_next_frontend_deadline_at(service,100,&due) && due==10100);
+    RETIRE_CHECK(!service_next_frontend_deadline_at(service,100,&due) && !due);
     RETIRE_CHECK(!service_retire_expired_frontends_at(service,10099));
     RETIRE_CHECK(WaitForSingleObject(watch.shutdown,0)==WAIT_TIMEOUT);
     EnterCriticalSection(&service->lock);
     worker->native_inflight=1; /* Existing direct execution suppresses idle grace. */
     LeaveCriticalSection(&service->lock);
     RETIRE_CHECK(!service_next_frontend_deadline_at(service,10100,&due) && !due);
-    RETIRE_CHECK(!watch.unbound_native_deadline);
     RETIRE_CHECK(!service_retire_expired_frontends_at(service,20000));
     RETIRE_CHECK(WaitForSingleObject(watch.shutdown,0)==WAIT_TIMEOUT);
     EnterCriticalSection(&service->lock);worker->native_inflight=0;LeaveCriticalSection(&service->lock);
-    RETIRE_CHECK(!service_next_frontend_deadline_at(service,30000,&due) && due==40000);
+    RETIRE_CHECK(!service_next_frontend_deadline_at(service,30000,&due) && !due);
     RETIRE_CHECK(!service_retire_expired_frontends_at(service,39999));
     RETIRE_CHECK(WaitForSingleObject(watch.shutdown,0)==WAIT_TIMEOUT);
     RETIRE_CHECK(!service_retire_expired_frontends_at(service,40000));
-    RETIRE_CHECK(WaitForSingleObject(watch.shutdown,0)==WAIT_OBJECT_0);
-    RETIRE_CHECK(WaitForSingleObject(child.hProcess,0)==WAIT_TIMEOUT); /* Instruction, no tree kill. */
+    RETIRE_CHECK(WaitForSingleObject(watch.shutdown,0)==WAIT_TIMEOUT);
+    RETIRE_CHECK(!service_retire_expired_frontends_at(service,86400000));
+    RETIRE_CHECK(!service_next_frontend_deadline_at(service,86400000,&due) && !due);
+    RETIRE_CHECK(WaitForSingleObject(watch.shutdown,0)==WAIT_TIMEOUT);
+    /* Shared WOW also has no app-idle retirement. Its original task/kernel
+     * exit still owns a separate WOW lifetime, not this service timer. */
+    EnterCriticalSection(&service->lock);
+    watch.kind=OPENNT_BASE_WORKER_WOW;watch.wow=TRUE;worker->native_worker=FALSE;
+    LeaveCriticalSection(&service->lock);
+    RETIRE_CHECK(!service_retire_expired_frontends_at(service,172800000));
+    RETIRE_CHECK(!service_next_frontend_deadline_at(service,172800000,&due) && !due);
+    RETIRE_CHECK(WaitForSingleObject(watch.shutdown,0)==WAIT_TIMEOUT);
+    RETIRE_CHECK(WaitForSingleObject(child.hProcess,0)==WAIT_TIMEOUT);
     EnterCriticalSection(&service->lock);RemoveEntryList(&watch.link);LeaveCriticalSection(&service->lock);
     RETIRE_CHECK(!OpenNtBaseServiceDisconnect(worker));
     RETIRE_CHECK(OpenNtBaseServiceIsEmpty(service) && OpenNtBaseServiceStop(service));
     RETIRE_CHECK(TerminateProcess(child.hProcess,0));
     CloseHandle(child.hThread);CloseHandle(child.hProcess);CloseHandle(watch.shutdown);
-    puts("PASS unbound native: exact 10s, execution cancellation, rearm, shutdown event and no process kill");
+    puts("PASS shared GUI carrier: native/WOW residency, no idle deadline or shutdown, active-to-idle transition");
     return 0;
 #undef RETIRE_CHECK
 }

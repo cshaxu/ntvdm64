@@ -2,6 +2,9 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T428 S2 shared GUI residency](evidence/m0-t428-s2-shared-gui-worker-residency.md) | M0 T428 S2 | Removed added GUI-carrier idle timer; exact policy, full package, actual GUI and publication evidence with reuse limitation. | Retain through T428 acceptance. |
+| [T428 worker unification plan](operations/t428-worker-unification-plan.md) | M0 T428 | Owner-approved original-semantic alignment and bounded implementation sequence. | Retain through T428 acceptance. |
+| [T428 S1 worker control/lifecycle audit](evidence/m0-t428-s1-worker-control-lifecycle-audit.md) | M0 T428 S1 | Refreshed production-path inventory, shared mechanisms, semantic adapters and owner decisions; source review only. | Retain through T428 acceptance. |
 | [T427 S1 root/search audit](evidence/m0-t427-s1-root-search-audit.md) | M0 T427 S1 | Actual selected-image shadowing reproduction, original directory/extension order and pending three-role caller ledger. | Retain through T427 acceptance. |
 | [T427 S2 own-image root bindings](evidence/m0-t427-s2-own-image-root-bindings.md) | M0 T427 S2 | Shared root production bindings, bounded guest environment, original host-temp restoration, focused and full package gates. | Retain through T427 acceptance. |
 | [T427 S3 application-search isolation](evidence/m0-t427-s3-application-search-isolation.md) | M0 T427 S3 | Directory-first production search, actual selected-file/CLI and internal interpreter tests, retained gates and publication. | Retain through T427 acceptance. |
