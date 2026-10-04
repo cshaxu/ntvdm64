@@ -2,6 +2,7 @@
 
 | Record | Owner | Purpose | Retirement condition |
 | --- | --- | --- | --- |
+| [T426 S1 Console-root management contract](evidence/m0-t426-s1-console-root-management-contract.md) | M0 T426 S1 | Source-backed projection, identity, close and test contract; no UNBOUND, independent WOW/GUI roots and preserved task ownership. | Retain through T426 acceptance. |
 | [T425 S10 shared-WOW WINMINE](evidence/m0-t425-s10-shared-wow-winmine.md) | M0 T425 S10 | Original single-instance branch, repeated shared-worker launch and independent completion observations. | Retain through T425 acceptance. |
 | [T425 S9 test throughput](evidence/m0-t425-s9-test-throughput.md) | M0 T425 S9 | Owner-closed throughput improvement with measured gains and explicit remaining limits. | Retain through T425 acceptance. |
 | [T425 S8 producer triggers and software VGA](evidence/m0-t425-s8-worker-frame-deduplication.md) | M0 T425 S8 | Superseded dedup proposal, unfiltered transport, software fullscreen, natural mouse routes, retained failures and release status. | Retain through T425 acceptance. |

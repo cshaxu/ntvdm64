@@ -11,6 +11,11 @@ actual proof and limits. T426 consumes the former queue-head
 [Console-root worker-tree proposal](../proposals/proposal-ntmon-console-worker-tree-001.md).
 Only S1 is admitted: inspect current service registration/projection/close
 boundaries and freeze the implementation contract before changing production.
+Owner's final clarification removes UNBOUND entirely: NTCON and independent
+Win16 workers are top-level nodes; Win16 tasks remain beneath their actual
+WOW worker. Detached registered Win32 GUI targets are top-level nodes, not
+children of a carrier that has released their occupancy. Bound DOS/native
+text workers remain below NTCON; missing former roots retain their children.
 
 ## Active Packet
 
@@ -30,8 +35,8 @@ boundaries and freeze the implementation contract before changing production.
 | Reporting Requirements | Report current versus proposed behavior, retained adapters, lock/resource owners, exact downstream tests, limits and bounded S2-S4 implementation sequence. |
 | Stop Conditions | Required original execution change, incompatible ownership, absent trustworthy identity/close contract or material scope expansion requires re-admission; do not invent process-tree control. |
 | Exit Criteria | Source-backed contract and test inventory complete, all proposal requirements dispositioned, governed evidence reviewed/committed/pushed; implementation remains unclaimed until its own stages pass. |
-| Original Owner Request | Include reviewed planning changes in T425 commit, then admit the next T. Its approved candidate is NTMON Console-root worker tree, followed by existing Queue order. |
-| Similar-Issue Sweep | Root rebuild/PID reuse, missing-root retention, independent Consoles, worker/GUI/WOW association, stale selection and authorization, orderly close failure, UNBOUND deletion, unchanged labels/title/three hotkeys and elapsed-time meaning. |
+| Original Owner Request | Include reviewed planning changes in T425 commit, then admit the next T. Owner subsequently approves a hierarchy without UNBOUND and says “好 开干”: top-level frontend, independent WOW worker and detached GUI target; actual WOW task ownership preserved. |
+| Similar-Issue Sweep | Root rebuild/PID reuse, missing-root retention, independent Consoles, worker/GUI/WOW association, stale selection and authorization, orderly close failure, absence of UNBOUND, unchanged labels/title/three hotkeys and elapsed-time meaning. |
 
 T426 sequence follows the approved candidate: S1 contract audit; subsequent
 bounded admission for NTSRV projection/close and protocol negatives, NTMON
@@ -39,6 +44,14 @@ tree/selection UI, then integration/publication and owner handoff. Preserve
 DOS=0 / Win16=1 / Win32=2, title NTVDM Task Monitor and the original three
 hotkeys. CONSOLE is a frontend row, not a fourth worker kind. NTMON never
 enumerates processes or reconstructs authoritative associations.
+
+S1 source audit is complete in the
+[management contract](../etc/evidence/m0-t426-s1-console-root-management-contract.md).
+It supersedes the candidate's UNBOUND layout and retired src/interface wording
+with the owner's latest hierarchy and common/protocol ownership. Reviewed
+service, original WOW record, client, renderer and fixture boundaries; no
+production change or newly verified runtime capability. Governance and
+relative-link/diff checks gate this documentation-only S1 delivery.
 
 ## Current Technical Baseline
 
